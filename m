@@ -4,56 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD41CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 08:02:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4DECDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 08:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B572863F3;
-	Wed, 18 Oct 2023 10:02:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A95E6863F7;
+	Wed, 18 Oct 2023 10:04:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697616149;
-	bh=COeXQzItZwgYlmXJqazYcr6NKjgvZPG9brhX1o55GNY=;
+	s=phobos-20191101; t=1697616263;
+	bh=/SKB+z/LHkAYVfaq/P18256U4omJEAQlunKzltg+sM4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=BZV4yHFaXHUND6/7Bvjobu+3Fk4O7UBv+2XTtWWBc2M0ScZY9a1SeKdt5KZA0vqs9
-	 41zaxPhNyqfw+GD9KfXx/yvzRenwK/w/sveME+5Udqr+uTS0gdWqKhPZqZNZNBRZ4D
-	 qghThy4Pz5MHOquSZ7yupmilPWWUt+hAd8uWzuQrKq2y8Hlz921PdP7Hv4YklVfUH6
-	 fb3SDYBt/Cx1nt5qy3JdqrhAKUbFeorAuiySjq369v2c3z+7OjL/BAiXLGNso5FMpE
-	 QWYuH5Kqb0kb7m/mFm7dxd7h5RN097htkLio37nZqX+wqIpchlev7yXTJ8ayurwAMJ
-	 qORiDXm+/E9cA==
+	b=RHSLnWkOeA7Ge+VHK5+zwMQ76unWW+4hNXDXKTcRg90iflMzeXtIGVRtaJ/C6GZQB
+	 eVScYpm1xJOCjlFdUelIFzN7Q3c/jk9iB+7uf43fQLfvcHZLV3SCOVv1G1WrvXoCPI
+	 8LinSv7rQiAsAxsN4TLkNr746NaYJGY7hpp4IWt92gUhLux+6RwSkS1s4S1uM74JGo
+	 6ljKXS6azpTcMDoqU+yGQzgam1jD0NtdsbgVBuKMEgcX/M1/Ouz+DmnwxCgZ9/Xvlu
+	 H/3q77CP3D5JUFKTidekntQcweWXdIRz7iSjY7N5T4gV8zlrt57bKceyO+f5/kLYYC
+	 4JwQ5/a1VjEcA==
 Received: from [IPV6:2001:a61:6040:2801:a606:8537:48c7:bbf0] (unknown
  [IPv6:2001:a61:6040:2801:a606:8537:48c7:bbf0])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: sbabic@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2FC5C85DE0;
- Wed, 18 Oct 2023 10:02:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id BF94885DE0;
+ Wed, 18 Oct 2023 10:04:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697616148;
- bh=COeXQzItZwgYlmXJqazYcr6NKjgvZPG9brhX1o55GNY=;
+ s=phobos-20191101; t=1697616263;
+ bh=/SKB+z/LHkAYVfaq/P18256U4omJEAQlunKzltg+sM4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Y+nahNdzyRhZkoyZ3ErQTvOCcLEFMIzoS4TtNimuHp+KnJpIBgXHHfB1E9FyUl1KV
- Uh2LZItCuIy/jQ811r45bYEGH/b0rQ7I9se7XO0SXiiky+nCgIcG8bLqedD9TG64gh
- P+7pYPJPR35wiQMDa88HoOrv1yiGuZdbcOogDP7qXt3wCxha8/rWdcg5+o5i2zahVY
- KThbkqGQoo3klPUxWqd+rw64x4PxCm3CerKQ5NlDXd3ZhQCxUwRfRUAVpM5lOhwBal
- VhdGDUAGBMdyRt0kX91w0BNDoG/GUTKWYxEdZONHBrq9OGIjkkGaroMBeQn43Pgbxp
- ScKhKFCSz9jIw==
-Message-ID: <480a02b7-6a76-4727-8b27-0da9d12e6478@denx.de>
-Date: Wed, 18 Oct 2023 10:02:27 +0200
+ b=KKNLpZ2tZOXI2IPbpRDjFcry94ndY29PfhIuyRmZ0iW+5G8PdlQ9/iHmzFlORyJuc
+ Ig7eYK/H/Cw0lgE9kkxgQ+qra/eZUE2quupMsnqqWsJI+qaXtmnK6iKsCx0DNPZ4Fj
+ 5FEiXbIdQPs6M6qtWaKlxufPxc0WfBA4c4xKwJPy+ap7tHUueNTzYrIziSEdspbkEY
+ fBlle3Zx1OeGcnwTaMIU8y5zODgbhdW4+2+tgMnXfbE/Q90PSySNF3RlLvU/xdiE5I
+ mJF9u9Emdxm02ww/b2Er89zKZYa8HPtrtCulybXaMTKjwJdg2CRyTRBENg0qEfRHu+
+ 7OK5wpAG2w7kQ==
+Message-ID: <f1f1083c-02b0-48d9-8c0d-88e74fa0a364@denx.de>
+Date: Wed, 18 Oct 2023 10:04:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: mxs: Clear CPSR V bit to activate low vectors
+Subject: Re: [PATCH 1/3] arm: dts: imx8mm: Sync with Linux 6.3
 Content-Language: de-DE
-To: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
-References: <20230729133010.8660-1-marex@denx.de> <20230731100615.22850307@wsk>
+To: Tim Harvey <tharvey@gateworks.com>, Fabio Estevam <festevam@denx.de>
+Cc: Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
+ Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, Li Jun <jun.li@nxp.com>,
+ u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
+References: <20230427180845.127439-1-festevam@gmail.com>
+ <CAJ+vNU1m+jC3Yn6zUpxdW89G+Lmh1SnAKVPb17TePJL8eK6fZA@mail.gmail.com>
+ <CAHCN7xKdjjmtO_ipY5UGYqQ=bcP3wsYmPXNonJAJ2EPM5d7Rvg@mail.gmail.com>
+ <CAJ+vNU0QTAtVYzJG4q2=njc5dSzDHVj4Ce4VaPnFYAkyjz6yyA@mail.gmail.com>
+ <CAHCN7xLUFOVcQbDWO3OjrEyQzLhnWJUeFHGZ1ebSFPRU4ohPXQ@mail.gmail.com>
+ <CAJ+vNU3MqMDhGwAo1O_KKcdwQFPmpTrXV1X0e4O5teaVU4oMTA@mail.gmail.com>
+ <CAOMZO5B4oDDN8ZwAMM_DUY25_BebmkNZR2pohGSpmrOJcy2p1A@mail.gmail.com>
+ <CAHCN7xL0BFfZuY1pREWjbmqXkPUaC1UZBEZcMKaR7hQTU+rDqQ@mail.gmail.com>
+ <CAJ+vNU0JPBu2Q5Cdc5O+Oh+eCmqQ_qtoAZaz4DHVcqsBeg41Tg@mail.gmail.com>
+ <CAOMZO5DG3hwi9gTs7DYGfa8NexapU99v03pD9mGoYj5LkwqodQ@mail.gmail.com>
+ <CAJ+vNU1SKHPiPwF5P9+G=fMysoEHEnsJ=EBA8=MExOEOec=aYA@mail.gmail.com>
+ <CAJ+vNU1zE7rmKzQWwziPtwG5MKAnx0NE94CCLF8y-_iVYwub2g@mail.gmail.com>
+ <339b69d6-c586-d85d-64de-92cd1469d017@denx.de>
+ <CAJ+vNU3ZtGNOz4nUpiS2O1Q4c8=kZmMjK=TWvaCT-uKFkr1Uhg@mail.gmail.com>
+ <2c51d124-0824-429b-afdc-880d0699f4b0@denx.de>
 From: Stefano Babic <sbabic@denx.de>
-In-Reply-To: <20230731100615.22850307@wsk>
+In-Reply-To: <2c51d124-0824-429b-afdc-880d0699f4b0@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,89 +85,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek, Lukasz,
+Hi Fabio, Tim,
 
-On 31.07.23 10:06, Lukasz Majewski wrote:
-> On Sat, 29 Jul 2023 15:30:10 +0200
-> Marek Vasut <marex@denx.de> wrote:
+On 17.10.23 22:28, Stefano Babic wrote:
 > 
->> The MXS starts with CPSR V bit set, which makes the CPU jump to high
->> vectors in case of an exception. Those high vectors are located at
->> 0xffff0000, which is where the BootROM exception table is located as
->> well. U-Boot should handle exceptions on its own using its own
->> exception handling code, which is located at 0x0, i.e. at low
->> vectors. Clear the CPSR V bit, so that the CPU would jump to low
->> vectors on exception instead, and therefore run the U-Boot exception
->> handling code.
+> 
+> On 17.10.23 21:21, Tim Harvey wrote:
+>> On Thu, Jul 13, 2023 at 10:17 PM Stefano Babic <sbabic@denx.de> wrote:
+>>>
+>>> Hi Tim, Fabio,
+>>>
+>>> On 14.07.23 02:42, Tim Harvey wrote:
+>>>> On Wed, May 3, 2023 at 9:11 AM Tim Harvey <tharvey@gateworks.com> 
+>>>> wrote:
+>>>>>
+>>>>> On Fri, Apr 28, 2023 at 11:19 AM Fabio Estevam <festevam@gmail.com> 
+>>>>> wrote:
+>>>>>>
+>>>>>> Hi Tim,
+>>>>>>
+>>>>>> On Fri, Apr 28, 2023 at 2:59 PM Tim Harvey <tharvey@gateworks.com> 
+>>>>>> wrote:
+>>>>>>
+>>>>>>> I believe the fix we need is the following which moves phy setup
+>>>>>>> before the register access (where it should have been along with the
+>>>>>>> case for !defined(CONFIG_PHY):
+>>>>>> ...
+>>>>>>> If everyone agrees here I'll submit a formal patch which should get
+>>>>>>> applied through Marek via the usb tree before the dt sync.
+>>>>>>
+>>>>>> This works for me, thanks.
+>>>>>>
+>>>>>> When you submit it, feel free to add:
+>>>>>>
+>>>>>> Tested-by: Fabio Estevam <festevam@denx.de>
+>>>>>
+>>>>> Fabio,
+>>>>>
+>>>>> with commit bb6ea0fe9290 ("usb: ehci-mx6: move phy setup before
+>>>>> register access") now in imx/master:
+>>>>> Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mm-venice-gw73xx-0x
+>>>>>
+>>>>
+>>>> Stefano,
+>>>>
+>>>> It doesn't look like this got picked up in your latest tree for some 
+>>>> reason.
+>>>>
+>>>
+>>> Series disappeared from my list in patchworks, maybe because I
+>>> erroneously thought that a V2 will be sent. I will pick up the series,
+>>> thanks for advising.
+>>>
+>>> Best regards,
+>>> Stefano
+>>>
 >>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
->> Cc: Fabio Estevam <festevam@gmail.com>
->> Cc: Lukasz Majewski <lukma@denx.de>
->> Cc: Stefano Babic <sbabic@denx.de>
->> ---
->>   arch/arm/cpu/arm926ejs/mxs/mxs.c      | 3 +++
->>   arch/arm/cpu/arm926ejs/mxs/spl_boot.c | 4 ++++
->>   2 files changed, 7 insertions(+)
+>> Hi Stefano,
 >>
->> diff --git a/arch/arm/cpu/arm926ejs/mxs/mxs.c
->> b/arch/arm/cpu/arm926ejs/mxs/mxs.c index 4d21e3df76e..d64a8328b04
->> 100644 --- a/arch/arm/cpu/arm926ejs/mxs/mxs.c
->> +++ b/arch/arm/cpu/arm926ejs/mxs/mxs.c
->> @@ -85,6 +85,9 @@ void mx28_fixup_vt(uint32_t start_addr)
->>   		/* cppcheck-suppress nullPointer */
->>   		vt[i + 8] = start_addr + (4 * i);
->>   	}
->> +
->> +	/* Make sure ARM core points to low vectors */
->> +	set_cr(get_cr() & ~CR_V);
->>   }
->>   
->>   #ifdef	CONFIG_ARCH_MISC_INIT
->> diff --git a/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
->> b/arch/arm/cpu/arm926ejs/mxs/spl_boot.c index
->> 5598c552ab9..4a7dfc6a2ae 100644 ---
->> a/arch/arm/cpu/arm926ejs/mxs/spl_boot.c +++
->> b/arch/arm/cpu/arm926ejs/mxs/spl_boot.c @@ -17,6 +17,7 @@
->>   #include <asm/arch/sys_proto.h>
->>   #include <asm/gpio.h>
->>   #include <asm/sections.h>
->> +#include <asm/system.h>
->>   #include <linux/compiler.h>
->>   
->>   #include "mxs_init.h"
->> @@ -104,6 +105,9 @@ static void mxs_spl_fixup_vectors(void)
->>   
->>   	/* cppcheck-suppress nullPointer */
->>   	memcpy(0x0, &_start, 0x60);
->> +
->> +	/* Make sure ARM core points to low vectors */
->> +	set_cr(get_cr() & ~CR_V);
->>   }
->>   
->>   static void mxs_spl_console_init(void)
+>> This series [1] is still missing - can you pick it up?
+>>
+>> [PATCH 1/3] arm: dts: imx8mm: Sync with Linux 6.3
+>> [PATCH 2/3] arm: dts: imx8mn: Sync with Linux 6.3
+>> [PATCH 3/3] arm: dts: imx8mp: Sync with Linux 6.3
+>>
+>> Best Regards,
+>>
+>> Tim
+>> [1] 
+>> https://patchwork.ozlabs.org/project/uboot/list/?series=352685&state=*
 > 
-> Reviewed-by: Lukasz Majewski <lukma@denx.de>
+> 
+> It was set as "Superseeded", that is the reason why it disappeared by my 
+> list. Thanks for pointing out, I have added again to be merged.
 > 
 
-Thanks for raising my attention to this older patch, but it breaks 
-exaclty the xea board:
+Rather they were forgotten, and they need a rebase. Can you check ?
 
-+{standard input}: Assembler messages:
-+{standard input}:214: Error: selected processor does not support `mrc 
-p15,0,r3,c1,c0,0' in Thumb mode
-+{standard input}:249: Error: selected processor does not support `mcr 
-p15,0,r3,c1,c0,0' in Thumb mode
-+{standard input}:157: Error: selected processor does not support `mrc 
-p15,0,r3,c1,c0,0' in Thumb mode
-+{standard input}:188: Error: selected processor does not support `mcr 
-p15,0,r3,c1,c0,0' in Thumb mode
-
-Can you check it ?
-
-Regards,
+Best regards,
 Stefano
+
 
 -- 
 =====================================================================
