@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D358CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:02:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 103A4CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:02:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39E2C86FB7;
+	by phobos.denx.de (Postfix) with ESMTP id 98E4286FC1;
 	Wed, 18 Oct 2023 16:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="OeaszQ1y";
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="pQYOJTjU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6210186FCD; Wed, 18 Oct 2023 16:01:43 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id 33F6586FB9; Wed, 18 Oct 2023 16:01:44 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D306986FB9
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F36B86F94
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=conclusive.pl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=artur@conclusive.pl
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2c50fbc218bso66489991fa.3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:40 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c50d1b9f22so61178791fa.0
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=conclusive.pl; s=google; t=1697637700; x=1698242500; darn=lists.denx.de;
+ d=conclusive.pl; s=google; t=1697637701; x=1698242501; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e41jXYZ3aJBqR5kgmS3hwSDM9OaudguJizWu7EecAr4=;
- b=OeaszQ1yZwz+fwqYa2AMbMsvXA4pxe5lAK+WyInprqsbqkl7LcWdt2YkAApsmf1LZM
- Z2pgtRiZfhRBqegpCyQHKJOjIOWJ3v6A24SW2Ch+Z5kdoMicYvTAdJOHO2tQZN3XPC38
- PBpjC4lSIKVZdj1RM8Xek5hfU8oZhU4EQOVXIW4aZVQHKlZyLx6zMLHg8s/2w8+5kV6J
- m4ln2ypT1YMic/qLd9+/Ic8VG4rB77uFVfSuhjuJ78SHoDPfXitOKX9T+NXDcKYsFg1L
- ObwvWhNy18N/fGyeWjCgkKjUAKXg6FYMPpbGSpVvyJ30F977BNiVCneEU8A8UCdKsNpT
- 1gqw==
+ bh=uIbO9ZHPkk2RBTU4c0uzb4WkLUbmwQd/zOfWtAUv/zM=;
+ b=pQYOJTjU11PlWwQNMU3ulU298SoOE/KcCEqfxZHLWzySlh6xbs4Gx75Gg1HR58qM2y
+ tDgmoAGEXk2aNd4zgWdsqtzOd95UI39SJMjy5AWT2RcicdcxOGmW6MBG8JNmtjJI42nz
+ idyjte1Xul7diT5NladAYONHilfIrYj/UymwkGfCjBMKWflNVMZVatVO54wDtN50yaE2
+ Y7OERVb9R9X2y/9EyqdkPAsqy4ZhQC1Elt5hDpP6tWENN7qM+g/Zpz0LZnjqR3ZmOwWU
+ GM+EyIVIHOIVX9QRPX9Zon+KouDipSg1fOkPK6ERSX4sTNWD3Xdn3vThwkOUy8okuxjY
+ kw2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697637700; x=1698242500;
+ d=1e100.net; s=20230601; t=1697637701; x=1698242501;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e41jXYZ3aJBqR5kgmS3hwSDM9OaudguJizWu7EecAr4=;
- b=xJmgFwXiYsZ6jYE1GvKQqaX0lA2Et51SLlIey8Pl9I/fLj0bOJqrhI4Ndf6qMcmT1g
- mzqMh94Xb7PoOVJ0d1Yjlp07Y5pbiNnQqUM0dGRQAWFzgzXoDYkZlB65ksEK6CI70WPq
- wa/ZPxLPEI9TKOQaLBpxgIoOTEf3BM3qn1M+lw0SlHWu9yzw6OqtSgzpEqn973ZF2cyK
- IOF5mOkVlPeSTWqDwVWfRiF2xJgVdHIzxLsqqDuCIC2f+569A3TQFGQe2uOmlrdL2zWS
- 8xuoqZ8AtjO9oG2rzlwwPkCevJgXDT+5np/vJi+RD+k7eKe2LsOo3APs2rLuTzfEo7Uv
- OYEQ==
-X-Gm-Message-State: AOJu0YzGtobUbxVcKaW6uHV2ocbwxIP7mYzZJwXZMAbYa8zGBlmFuBHc
- ndMLgPigznDC/HhPPFPLWQh5xA==
-X-Google-Smtp-Source: AGHT+IGMI7OOp/KuRyLobAUT7oYVEyMjy/LYkIEKPTJDUWMoa7BWZIdLqvNwjKwm37J4SEL2vJEa1w==
-X-Received: by 2002:a05:651c:83:b0:2c5:623:aa01 with SMTP id
- 3-20020a05651c008300b002c50623aa01mr3753186ljq.49.1697637699709; 
- Wed, 18 Oct 2023 07:01:39 -0700 (PDT)
+ bh=uIbO9ZHPkk2RBTU4c0uzb4WkLUbmwQd/zOfWtAUv/zM=;
+ b=RzGBZL/Nek/6iqYE/6b+NKbM4qYakWvBzHL7i2wglO6COAI2b9RVvtHv4WyRUXapXP
+ VS0CvQGb3u5u26hRBDkLh3aMTPMJAO9kVjSqP0w56M8vDb7Yxz45U0dWoAJNeTibWld8
+ /skB1K5OpTjmx+HuTXyVfh4rKOrC4QsdyHV9DWL81j+GircD+e+UrAdrdOVxF91+EWJD
+ RGP3FGcennpPnghSNXCJ/4sdv3EUNvXelrkq9fUoVQhTkJOz1Z3efU3eMNlpktPxcMLH
+ iNXfzLGGT9RnhtNBPZ/VERj74mOE96yGBHqcTGqX3WIjZZLWGp16K7erE5GgEp4QAGZY
+ tRHA==
+X-Gm-Message-State: AOJu0Yy0DsVZNI3Qtns2k7fl+YgHljNwDucugvrGF7NlotI7FEPPm7Az
+ x4qvfnJEQhLGITd+pXsAm6XxUg==
+X-Google-Smtp-Source: AGHT+IE7J/Kidv0BPlvQSGnaVmVSQ3VuHRoPYsDkZFHPixn8vjdnHD4htmJQq7ylY8MWVhZaJ5eGxQ==
+X-Received: by 2002:a2e:a794:0:b0:2c5:1542:57e4 with SMTP id
+ c20-20020a2ea794000000b002c5154257e4mr5949486ljf.31.1697637701061; 
+ Wed, 18 Oct 2023 07:01:41 -0700 (PDT)
 Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
  [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
- f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.38
+ f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 07:01:39 -0700 (PDT)
+ Wed, 18 Oct 2023 07:01:40 -0700 (PDT)
 From: Artur Rojek <artur@conclusive.pl>
 To: Eugen Hristev <eugen.hristev@collabora.com>,
  Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>,
@@ -71,9 +71,9 @@ To: Eugen Hristev <eugen.hristev@collabora.com>,
 Cc: Wojciech Kloska <wojciech@conclusive.pl>,
  =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
  u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
-Subject: [PATCH v5 2/4] event: add new EVT_SETTINGS_R event
-Date: Wed, 18 Oct 2023 16:00:57 +0200
-Message-ID: <20231018140059.161169-3-artur@conclusive.pl>
+Subject: [PATCH v5 3/4] arm: dts: at91: sama5: Add flexcom4 node
+Date: Wed, 18 Oct 2023 16:00:58 +0200
+Message-ID: <20231018140059.161169-4-artur@conclusive.pl>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231018140059.161169-1-artur@conclusive.pl>
 References: <20231018140059.161169-1-artur@conclusive.pl>
@@ -95,70 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce EVT_SETTINGS_R, triggered post-relocation and before console
-init.
-
-This event gives an option to perform any platform-dependent setup,
-which needs to take place before show_board_info(). Usage examples
-include readout of EEPROM stored settings.
+Set up flexcom4 for Microchip SAMA5D27 SoC and prepare it for usage in
+I2C mode.
 
 Signed-off-by: Artur Rojek <artur@conclusive.pl>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-v5: no change
+v3-v5: no change
 
-v4: new patch
+v2: new patch
 
- common/board_r.c | 1 +
- common/event.c   | 1 +
- include/event.h  | 9 +++++++++
- 3 files changed, 11 insertions(+)
+ arch/arm/dts/sama5d2.dtsi | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/common/board_r.c b/common/board_r.c
-index 52786901be55..a7967849dc0c 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -693,6 +693,7 @@ static init_fnc_t init_sequence_r[] = {
- #if defined(CONFIG_ID_EEPROM)
- 	mac_read_from_eeprom,
- #endif
-+	INITCALL_EVENT(EVT_SETTINGS_R),
- 	INIT_FUNC_WATCHDOG_RESET
- #if defined(CONFIG_PCI_INIT_R) && !defined(CONFIG_SYS_EARLY_PCI_INIT)
- 	/*
-diff --git a/common/event.c b/common/event.c
-index 3080d9ed754d..dc61b9672f32 100644
---- a/common/event.c
-+++ b/common/event.c
-@@ -37,6 +37,7 @@ const char *const type_name[] = {
- 	/* init hooks */
- 	"misc_init_f",
- 	"fsp_init_r",
-+	"settings_r",
- 	"last_stage_init",
+diff --git a/arch/arm/dts/sama5d2.dtsi b/arch/arm/dts/sama5d2.dtsi
+index dd6468ed96aa..819564fdd5bb 100644
+--- a/arch/arm/dts/sama5d2.dtsi
++++ b/arch/arm/dts/sama5d2.dtsi
+@@ -781,6 +781,26 @@
+ 				status = "disabled";
+ 			};
  
- 	/* Fpga load hook */
-diff --git a/include/event.h b/include/event.h
-index c5646b713ad8..a8f046da3c32 100644
---- a/include/event.h
-+++ b/include/event.h
-@@ -104,6 +104,15 @@ enum event_t {
- 	 */
- 	EVT_FSP_INIT_F,
- 
-+	/**
-+	 * @EVT_SETTINGS_R:
-+	 * This event is triggered post-relocation and before console init.
-+	 * This gives an option to perform any platform-dependent setup, which
-+	 * needs to take place before show_board_info() (e.g. readout of EEPROM
-+	 * stored settings).
-+	 */
-+	EVT_SETTINGS_R,
++			flx4: flexcom@fc018000 {
++				compatible = "atmel,sama5d2-flexcom";
++				reg = <0xfc018000 0x200>;
++				clocks = <&flx4_clk>;
++				#address-cells = <1>;
++				#size-cells = <1>;
++				ranges = <0x0 0xfc018000 0x800>;
++				status = "disabled";
 +
- 	/**
- 	 * @EVT_LAST_STAGE_INIT:
- 	 * This event is triggered just before jumping to the main loop.
++				i2c6: i2c@600 {
++					compatible = "atmel,sama5d2-i2c";
++					reg = <0x600 0x200>;
++					#address-cells = <1>;
++					#size-cells = <0>;
++					clocks = <&flx4_clk>;
++					clock-names = "i2c6_clk";
++					status = "disabled";
++				};
++			};
++
+ 			aic: interrupt-controller@fc020000 {
+ 				#interrupt-cells = <3>;
+ 				compatible = "atmel,sama5d2-aic";
 -- 
 2.42.0
 
