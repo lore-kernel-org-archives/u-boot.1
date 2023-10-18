@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482C8CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:46:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40219CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F59A863F3;
+	by phobos.denx.de (Postfix) with ESMTP id E5A9D86F38;
 	Wed, 18 Oct 2023 09:46:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mRNlOxxl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zlJPYTnn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29A5686F37; Wed, 18 Oct 2023 09:46:33 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 8E1DE85DE0; Wed, 18 Oct 2023 09:46:33 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B062181F54
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:46:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B97E863F3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:46:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40651a72807so59723585e9.1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:46:30 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40572aeb6d0so61212475e9.1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:46:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697615190; x=1698219990; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697615191; x=1698219991; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UBoXn/+8/BGTauLZ3Q8ZA9tqIJnqJBSZNk80IvPu+Ls=;
- b=mRNlOxxltLTUSb7+JBixkQCYGTsXhoZmido4qycaL7IM1F8zVdmvDW/aia/jr9pcgE
- opDDD8dYTZQ84E05l5wnv+oP0NZCXpnL0XEJRoQLgwazq540lwzhd/QbXqL57qh7Yk2v
- 59OnyaXnQOhOkNAZP4qOrUOBRr1T/ISWptl/r4pbcJ+tBvO1HxVMO+J1yZ3ZPTZiuVvH
- 9P7uqgG+o0MgofFtxm7hZveQoZXjZwzfmUpX+Px5wzHVnMmX+CIZ2Td3iFyhOjIHs1gK
- hT3IX2toyd3y7SZuSI9EXOb1InJtsUEDkNCy+srzZ1p1YKViLI/ukHqojoKRQVyyRFOe
- tUxA==
+ bh=E2iaCkNz5PyTYLLeWze69XDFEBNEFZ6jMXPxx/Wiyh8=;
+ b=zlJPYTnnkhhTUPXC9cbfcYNy6xhGUXdN16gHLi69SWLRKL08c9XSpJCro2Kz26zuYd
+ NYOLdTxSzPHzhiU3Rn0zyOpj5HlelY6NGbEP3vxBlL2d7aFy05kjMdZF6tRMyXQ7Msad
+ xixW94sRKSGyGxZfezwDTYs2e3+uPeAlHyxkfaEUXQWFcka6RYNQkMaKh5ZexPcZbBwW
+ 7QkwKk2O7iWGzlE4zHE8/+3kECtzYpJI8YSnJw5kHq6ldX+WbQLmkbxlkS4Lqu9nm5TG
+ u7Ik1S3AduA5RPg8yyyR+GFENbzmej8qIxCcIKvD/KSgx5R6cZr3Q4Ba8nw1aIrs278B
+ Pn9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697615190; x=1698219990;
+ d=1e100.net; s=20230601; t=1697615191; x=1698219991;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UBoXn/+8/BGTauLZ3Q8ZA9tqIJnqJBSZNk80IvPu+Ls=;
- b=k+FV6bynWHvPWuq/z1zjqR7FENQQ3ajt1ueEIYl9U57pjlX5X6z7yYSgGPo7gpKD1h
- LOhP6Abjb7yMgTyAUhHfoIp+l282DRnUMGh3gOksDovef9xDuyHqn4B8r5QTj+h615x7
- 1RjQXF5Zd4FIrVgI7Xe6B4K/NiS7RS+Pae03F66ihn5nQsh9NfemWxHCY7WW7iLzYqPy
- 2yHpVxKl0svqkOte4c+vVfU6QaK7Ke6BPe1k2HIGhCupQkp86jRh1BbCjsExvRr9zL94
- Lf9fx8EOqXdutT3nQt4yniRKmoNX8iJAj8YmBUXDN0GWLjxM//q+3ALNWqBy6548SnLw
- zfIg==
-X-Gm-Message-State: AOJu0YzWbwLHu0xPIziFc4ecBv+PGFQurCRy0ZyERBi+LvF0Nup/ZIHE
- I4DHl0BswA0UaM5UXzCdpfzcsA==
-X-Google-Smtp-Source: AGHT+IHIuncde/euI1ScFE2pyQcKh3cbNgqemPV3y+QR/993jSZprTgr1BPIAYfS2RjRGvkrVpxFQw==
-X-Received: by 2002:a05:600c:a48:b0:3fe:2a98:a24c with SMTP id
- c8-20020a05600c0a4800b003fe2a98a24cmr3336165wmq.26.1697615190070; 
+ bh=E2iaCkNz5PyTYLLeWze69XDFEBNEFZ6jMXPxx/Wiyh8=;
+ b=Pj19pYTMfnFyKPmBRYXL1IrTt9K2CLF/XccCNMMkEWnhzQaT3svvHOQZzlaerLptb3
+ eZ4f/CL3D12fiPz85xIDnpKWi2DdI5Qkl2fndhoOPpuIfvF5/BK14GBCS+LvQpISOCbR
+ qFsbuwuUtxvszrnY/XVc671XZd1ZZ+O3Sjbawooiczm30F8dYoEE9aGi8zw9DrqIgVND
+ ScjvdoxAxmSa1jDnwuX8KazF6yH5FZ2G0sWWhQxElK8/vhtqt34MFdlwUSFR6W3gAROx
+ +g+JyX4ElLKRqzUS7srwn+LS9rfOk5VxTLNgTpu9i+muKKEn0QGHxiJNj17k3QbQbKsL
+ YoPQ==
+X-Gm-Message-State: AOJu0YxgAxG7h3EiKo0kQvGGfE6p0Us8l2fkKfSyhb5Xc/cFbmag8gzZ
+ Q4ZslyA82h4CN9T5SiG05zO96A==
+X-Google-Smtp-Source: AGHT+IFu/3ySnVnBP8TWrRm1sgT9tTbJk7Lga39yOQfAQGkW2Y5NsfKHxYWSXt94bW36iTbxv6PfxA==
+X-Received: by 2002:a05:600c:1383:b0:407:859c:a1b2 with SMTP id
+ u3-20020a05600c138300b00407859ca1b2mr3328613wmf.14.1697615190796; 
  Wed, 18 Oct 2023 00:46:30 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- e7-20020a05600c218700b00407efbc4361sm941509wme.9.2023.10.18.00.46.29
+ e7-20020a05600c218700b00407efbc4361sm941509wme.9.2023.10.18.00.46.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 00:46:29 -0700 (PDT)
+ Wed, 18 Oct 2023 00:46:30 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Guillaume La Roque <glaroque@baylibre.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- avromanov@salutedevices.com
-In-Reply-To: <20231017185725.809524-1-glaroque@baylibre.com>
-References: <20231017185725.809524-1-glaroque@baylibre.com>
-Subject: Re: [PATCH] phy: meson-g12a-usb2: fix ret check on
- power_domain_get
-Message-Id: <169761518944.2954297.16595176249313373535.b4-ty@linaro.org>
-Date: Wed, 18 Oct 2023 09:46:29 +0200
+To: Igor Prusov <ivprusov@salutedevices.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru, u-boot-amlogic@groups.io, 
+ u-boot@lists.denx.de
+In-Reply-To: <20231017213211.121550-1-ivprusov@salutedevices.com>
+References: <20231017213211.121550-1-ivprusov@salutedevices.com>
+Subject: Re: [PATCH v1 0/2] arm: dts: meson-a1 Sync DT with Linux
+Message-Id: <169761519014.2954297.493814791807948421.b4-ty@linaro.org>
+Date: Wed, 18 Oct 2023 09:46:30 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,22 +95,22 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, 17 Oct 2023 20:57:25 +0200, Guillaume La Roque wrote:
-> Patch which add A1 SoC support create a regression on khadas vim3/vim3l
-> boards when we try to use fastboot command:
-> 
->   => fastboot usb 0
->   failed to get power domain
->   failed to get power domain
->   No USB device found
->   USB init failed: -19
+On Wed, 18 Oct 2023 00:32:09 +0300, Igor Prusov wrote:
+> This series syncs Device Tree for Amlogic A1 with Linux. Currently
+> DTS in Linix has different compatible string for serial devices, which
+> is not recognized by serial_meson driver, so new compatible is added to
+> driver as well. Additional driver changes are not required because new
+> compatible only differentiates between ttyAML and ttyS names for serial
+> console devices.
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
 
-[1/1] phy: meson-g12a-usb2: fix ret check on power_domain_get
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/f699cb1dd5f4c55aa3f593c226ec797730d02f10
+[1/2] serial: amlogic: Add UART compatible for A1 board
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/43a0b2cb9be2320615aa1cfc5318857ebce3b488
+[2/2] arm: meson-a1: dts: Sync DT with Linux
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/14a21f1a80afc58d52dc72e35f27d3a47d36c082
 
 -- 
 Neil
