@@ -4,71 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4DECDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 08:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FDC4CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 08:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A95E6863F7;
-	Wed, 18 Oct 2023 10:04:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C0C5D86BB8;
+	Wed, 18 Oct 2023 10:15:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697616263;
-	bh=/SKB+z/LHkAYVfaq/P18256U4omJEAQlunKzltg+sM4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RHSLnWkOeA7Ge+VHK5+zwMQ76unWW+4hNXDXKTcRg90iflMzeXtIGVRtaJ/C6GZQB
-	 eVScYpm1xJOCjlFdUelIFzN7Q3c/jk9iB+7uf43fQLfvcHZLV3SCOVv1G1WrvXoCPI
-	 8LinSv7rQiAsAxsN4TLkNr746NaYJGY7hpp4IWt92gUhLux+6RwSkS1s4S1uM74JGo
-	 6ljKXS6azpTcMDoqU+yGQzgam1jD0NtdsbgVBuKMEgcX/M1/Ouz+DmnwxCgZ9/Xvlu
-	 H/3q77CP3D5JUFKTidekntQcweWXdIRz7iSjY7N5T4gV8zlrt57bKceyO+f5/kLYYC
-	 4JwQ5/a1VjEcA==
-Received: from [IPV6:2001:a61:6040:2801:a606:8537:48c7:bbf0] (unknown
- [IPv6:2001:a61:6040:2801:a606:8537:48c7:bbf0])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kA4T1vlS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B891986BD6; Wed, 18 Oct 2023 10:15:33 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: sbabic@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BF94885DE0;
- Wed, 18 Oct 2023 10:04:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697616263;
- bh=/SKB+z/LHkAYVfaq/P18256U4omJEAQlunKzltg+sM4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KKNLpZ2tZOXI2IPbpRDjFcry94ndY29PfhIuyRmZ0iW+5G8PdlQ9/iHmzFlORyJuc
- Ig7eYK/H/Cw0lgE9kkxgQ+qra/eZUE2quupMsnqqWsJI+qaXtmnK6iKsCx0DNPZ4Fj
- 5FEiXbIdQPs6M6qtWaKlxufPxc0WfBA4c4xKwJPy+ap7tHUueNTzYrIziSEdspbkEY
- fBlle3Zx1OeGcnwTaMIU8y5zODgbhdW4+2+tgMnXfbE/Q90PSySNF3RlLvU/xdiE5I
- mJF9u9Emdxm02ww/b2Er89zKZYa8HPtrtCulybXaMTKjwJdg2CRyTRBENg0qEfRHu+
- 7OK5wpAG2w7kQ==
-Message-ID: <f1f1083c-02b0-48d9-8c0d-88e74fa0a364@denx.de>
-Date: Wed, 18 Oct 2023 10:04:22 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 3ECD1865D0
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 10:15:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0661C3F721
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:15:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1697616930;
+ bh=L2xe6N1Z9felzZPVfC0OeRiojKpxJF17IZQt8eccXSM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=kA4T1vlSUyDk+TCLEyFgmbJjRsiS6nxj4pNX6eFeCKUyYmj0z0l2WN5/bSi3WHs3u
+ o5xpoS2jLybYAyT0rmpqQlv/0A0AQLnif1OPL3agv1PyjHULHCWxmjYbuKuuxuffDq
+ mYZYSJ3L/mSCkBL17m55tyWT+K+sMO2i3dsuyVnKI5YEjyTci2qsMdI7t8V7DMqv3b
+ /wPKKJPMaS49n6dnaZxXUIsss3SZWx9zEHRowpN20Zvdh+0AeWuBX7AHijfue7knbe
+ /OZvF0UjRDTOXqP7QxDILqxOn/Po0p1MieFaUCQTveNmv+gLNT62HUTxDdw3zJTOZd
+ C2rxO16Jibg6A==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4053a5c6a59so42337105e9.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 01:15:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697616928; x=1698221728;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=L2xe6N1Z9felzZPVfC0OeRiojKpxJF17IZQt8eccXSM=;
+ b=BpMjCKmLlNNj0dCX+jULEFUeES4PKUVfDc/Efy6XTWVd3+dhwbwG29PlVYMGBAa5Wg
+ Xr10BLJH+CCDPe61YT8qnjWqqoJ8b1WLT16eikUWuYbLevOSzFcsYNmFsOgME9KzbIXM
+ AiVBi5AWhoB2+5lPZiJaInqxfQJJSPE68XtjRYshGDNpGOeI4GpIrvzZ758HG1/g5dm/
+ OWbG4rF65MWbGOtwlTBuJnRc1mvUvjgEvk3xBTs3PegtU38jhs1IfBi9hKIQnr2c6Bti
+ p42g2qiv5zAM90gdriGAbf15EcWRAUUVcj21DTTeBhaO6B2L9P/T9+qdcq5QnwgOvyxj
+ gjxw==
+X-Gm-Message-State: AOJu0YzXf7l/FCn4lgn9WBb4k2RjFLzJAJSulj+iimyxiPoVvxyE1uIe
+ 0cn1ZWR0maIPRyjYs624/rPifAkzeojdUzg0vTdWLh6eY8Dd4bxdYgfMHknp7SvhGiXLfnqLabO
+ WoOD3s4hQAJKlrN60lfksHGDO3B1ILZY=
+X-Received: by 2002:a05:600c:3511:b0:404:72fe:ed5c with SMTP id
+ h17-20020a05600c351100b0040472feed5cmr3816606wmq.29.1697616927791; 
+ Wed, 18 Oct 2023 01:15:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFTvktXUAVUAR+EJ5iKeVhXbQN5Th5dpImYeqwD39pbXnkVn39lWjRAHbpgBwq9lNxCig7H0g==
+X-Received: by 2002:a05:600c:3511:b0:404:72fe:ed5c with SMTP id
+ h17-20020a05600c351100b0040472feed5cmr3816583wmq.29.1697616927367; 
+ Wed, 18 Oct 2023 01:15:27 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ b12-20020a05600c150c00b0040586360a36sm988277wmg.17.2023.10.18.01.15.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Oct 2023 01:15:26 -0700 (PDT)
+Message-ID: <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
+Date: Wed, 18 Oct 2023 10:15:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] arm: dts: imx8mm: Sync with Linux 6.3
-Content-Language: de-DE
-To: Tim Harvey <tharvey@gateworks.com>, Fabio Estevam <festevam@denx.de>
-Cc: Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
- Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, Li Jun <jun.li@nxp.com>,
- u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
-References: <20230427180845.127439-1-festevam@gmail.com>
- <CAJ+vNU1m+jC3Yn6zUpxdW89G+Lmh1SnAKVPb17TePJL8eK6fZA@mail.gmail.com>
- <CAHCN7xKdjjmtO_ipY5UGYqQ=bcP3wsYmPXNonJAJ2EPM5d7Rvg@mail.gmail.com>
- <CAJ+vNU0QTAtVYzJG4q2=njc5dSzDHVj4Ce4VaPnFYAkyjz6yyA@mail.gmail.com>
- <CAHCN7xLUFOVcQbDWO3OjrEyQzLhnWJUeFHGZ1ebSFPRU4ohPXQ@mail.gmail.com>
- <CAJ+vNU3MqMDhGwAo1O_KKcdwQFPmpTrXV1X0e4O5teaVU4oMTA@mail.gmail.com>
- <CAOMZO5B4oDDN8ZwAMM_DUY25_BebmkNZR2pohGSpmrOJcy2p1A@mail.gmail.com>
- <CAHCN7xL0BFfZuY1pREWjbmqXkPUaC1UZBEZcMKaR7hQTU+rDqQ@mail.gmail.com>
- <CAJ+vNU0JPBu2Q5Cdc5O+Oh+eCmqQ_qtoAZaz4DHVcqsBeg41Tg@mail.gmail.com>
- <CAOMZO5DG3hwi9gTs7DYGfa8NexapU99v03pD9mGoYj5LkwqodQ@mail.gmail.com>
- <CAJ+vNU1SKHPiPwF5P9+G=fMysoEHEnsJ=EBA8=MExOEOec=aYA@mail.gmail.com>
- <CAJ+vNU1zE7rmKzQWwziPtwG5MKAnx0NE94CCLF8y-_iVYwub2g@mail.gmail.com>
- <339b69d6-c586-d85d-64de-92cd1469d017@denx.de>
- <CAJ+vNU3ZtGNOz4nUpiS2O1Q4c8=kZmMjK=TWvaCT-uKFkr1Uhg@mail.gmail.com>
- <2c51d124-0824-429b-afdc-880d0699f4b0@denx.de>
-From: Stefano Babic <sbabic@denx.de>
-In-Reply-To: <2c51d124-0824-429b-afdc-880d0699f4b0@denx.de>
+Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@google.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,91 +104,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio, Tim,
-
-On 17.10.23 22:28, Stefano Babic wrote:
+On 10/18/23 05:33, Simon Glass wrote:
+> Hi Heinrich,
 > 
+> On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Forward and backward compatibility of Linux kernel device-trees is
+>> sometimes missing. One solution approach is to load a kernel specific
+>> device-tree. This can either be done via a U-Boot scripts (like the one
+>> generated by Debian package flash-kernel or by a boot loader like GRUB.
+>> The boot loader approach currently requires to know the device-tree name
+>> before first boot which makes it unusable for generic images.
+>>
+>> Expose the device-tree file name as EFI variable FdtFile.
+>> This will allow bootloaders to load a kernel specific device-tree.
+>>
+>> The variable will not be exposed on ACPI based systems or if the
+>> environment variable fdtfile is not defined.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          Use a unique GUID to enable future U-Boot independent
+>>          standardization.
+>>          Do not try to add the variable on ACPI based systems.
+>> ---
+>>   include/efi_loader.h       |  5 +++++
+>>   lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+>>   2 files changed, 35 insertions(+)
 > 
-> On 17.10.23 21:21, Tim Harvey wrote:
->> On Thu, Jul 13, 2023 at 10:17 PM Stefano Babic <sbabic@denx.de> wrote:
->>>
->>> Hi Tim, Fabio,
->>>
->>> On 14.07.23 02:42, Tim Harvey wrote:
->>>> On Wed, May 3, 2023 at 9:11 AM Tim Harvey <tharvey@gateworks.com> 
->>>> wrote:
->>>>>
->>>>> On Fri, Apr 28, 2023 at 11:19 AM Fabio Estevam <festevam@gmail.com> 
->>>>> wrote:
->>>>>>
->>>>>> Hi Tim,
->>>>>>
->>>>>> On Fri, Apr 28, 2023 at 2:59 PM Tim Harvey <tharvey@gateworks.com> 
->>>>>> wrote:
->>>>>>
->>>>>>> I believe the fix we need is the following which moves phy setup
->>>>>>> before the register access (where it should have been along with the
->>>>>>> case for !defined(CONFIG_PHY):
->>>>>> ...
->>>>>>> If everyone agrees here I'll submit a formal patch which should get
->>>>>>> applied through Marek via the usb tree before the dt sync.
->>>>>>
->>>>>> This works for me, thanks.
->>>>>>
->>>>>> When you submit it, feel free to add:
->>>>>>
->>>>>> Tested-by: Fabio Estevam <festevam@denx.de>
->>>>>
->>>>> Fabio,
->>>>>
->>>>> with commit bb6ea0fe9290 ("usb: ehci-mx6: move phy setup before
->>>>> register access") now in imx/master:
->>>>> Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mm-venice-gw73xx-0x
->>>>>
->>>>
->>>> Stefano,
->>>>
->>>> It doesn't look like this got picked up in your latest tree for some 
->>>> reason.
->>>>
->>>
->>> Series disappeared from my list in patchworks, maybe because I
->>> erroneously thought that a V2 will be sent. I will pick up the series,
->>> thanks for advising.
->>>
->>> Best regards,
->>> Stefano
->>>
->>
->> Hi Stefano,
->>
->> This series [1] is still missing - can you pick it up?
->>
->> [PATCH 1/3] arm: dts: imx8mm: Sync with Linux 6.3
->> [PATCH 2/3] arm: dts: imx8mn: Sync with Linux 6.3
->> [PATCH 3/3] arm: dts: imx8mp: Sync with Linux 6.3
->>
->> Best Regards,
->>
->> Tim
->> [1] 
->> https://patchwork.ozlabs.org/project/uboot/list/?series=352685&state=*
+> I was too slow to reply to v1.
 > 
-> 
-> It was set as "Superseeded", that is the reason why it disappeared by my 
-> list. Thanks for pointing out, I have added again to be merged.
-> 
+> Does grub load the DT? I was assuming that U-Boot would pass it on?
+> What is the interface between U-Boot and grub?
 
-Rather they were forgotten, and they need a rebase. Can you check ?
+The device-tree built into U-Boot is often out of date and not usable to 
+boot current Linux. A single device-tree can be loaded by U-Boot from 
+file and passed on as EFI configuration table. This device-tree may not 
+be compatible with all kernel versions exposed by GRUB.
 
-Best regards,
-Stefano
+GRUB provides a devicetree command. It is disabled if you use secure 
+boot. At least in Debian and Ubuntu GRUB invokes the 
+EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree 
+fix-ups after loading a device-tree.
 
+Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add 
+devicetree commands to the boot options in grub.cfg.
 
--- 
-=====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
-Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
-=====================================================================
+Best regards
 
+Heinrich
