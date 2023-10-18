@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE57CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:01:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C277CDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:01:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A980686FB3;
-	Wed, 18 Oct 2023 16:01:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7EEB786FB8;
+	Wed, 18 Oct 2023 16:01:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IFu3vqiu";
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="Jo5zyhcR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5712486FBA; Wed, 18 Oct 2023 16:01:16 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 8CE1D86FBA; Wed, 18 Oct 2023 16:01:41 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCADE86FB5
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E786886F94
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=conclusive.pl
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9b95622c620so1187640366b.0
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=artur@conclusive.pl
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2c509d5ab43so76768411fa.0
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697637672; x=1698242472; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=pC+wOosOvusXq5DFVoEwRSsUgWv6hTG0o4c91N1zhgs=;
- b=IFu3vqiuxVwlssjUT8rij2sVThEFGJKXBDc+m1IKJqrsgTpZ++g+GPIRv0REoL4qMz
- SfXl2vrDCxhLXh3YubzW2hgTiBQ+yo99BSxC0vSEDYvyBTCZCKiF6nQbzag2yEoUPwxQ
- Z5LbNBgbw563SjZxosB/2jW54voKdgvK7OXdX3YpflsUstRvmqWUZUOk1kzU30dWKjiw
- P7KXthejuXvB+pvT1GI45wQc4HwyH8U8h5aEly+oiHdtgh3RKMhm2jR25wEcF3c0P5yx
- nXboR89JzmqkbKoyTg1YuG/ls+PFZX2u5Pj9VJjTxYbbFoQ8McJSgMV0f51zxTx2+K3U
- 7fkA==
+ d=conclusive.pl; s=google; t=1697637698; x=1698242498; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pMjnT9FAv0SobZQArQB7Tio/DeuRbWjYE7GkzZ/1NLE=;
+ b=Jo5zyhcR2wUXEFfRrVKN9NmLNA8I6uVcr8st6cFmfVLAlIR3KGmFMZJ4ea1LSxRJlg
+ YK2OimgA3FDEHkR+d8r6KFtz4kJ8EKDg4EX8xElbW3g7vrmOPwDI222SZf6sSia74E7Q
+ +sGMzUaAjNImfd6OQqktmt5mzMO8RML2QjS+QAHyST75Tda0HoOpfNVure52Wv9pzeXC
+ 0+Q4GSr1jWQ6I6MPXHmrcjaE8gM33YL8l8kv62H2/IzDi5HP9lGpYr8oFgz0qesrReah
+ dWa806fU6oGs0yB5UhNKi1We3hWJSdDFLg6e2X+A1/+9NeviV2o1Eq0EHl6kwhqdSGYq
+ W8LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697637672; x=1698242472;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pC+wOosOvusXq5DFVoEwRSsUgWv6hTG0o4c91N1zhgs=;
- b=ZuKTNMBLn7Yz0FjeHGsPjGzJlwZwvG/etAWh/HBVvy6B9p/ptFaUbWqabRyssaTohI
- N6cku1bEwttt5ySAatb6SnwtR/oqDUqI6NW9Dgzd/LZh8TSAs0wgQSWHIksP7w/EYXru
- fF3LjHz7R/Sx/HFenSX+fyacYooTglZ/WUbKH9KAY6MtqKJuZp6/IeWg5tM2aDK8ZRYs
- vxQOP1fpeOaq/oJ1UEuD2k2zSp1dGjCPR6M0WqHzYRkLlpHx2ASRwfRE4zcTfjHkyMGz
- hPOo7gxxjY3Gk9rcPjZmF72Qfr/m47DDLglZbc34nZ+8Ie9n1ispkZpRTEclWhupx8cp
- j2Jw==
-X-Gm-Message-State: AOJu0YyjPdsrR9d+V8CW0uDcFlcm/49jf8vYAT4hXyg4OEB6AoLJk9zk
- sk0GyC92lfIaS8stvfvUkjQ=
-X-Google-Smtp-Source: AGHT+IF3BJOKUEBcNCgEFxx6MX+QhJnXA/HHpZUH8jJ8lcceE/JPigMqzAwXWgQf8RjlTyQ3SwEl5A==
-X-Received: by 2002:a17:907:3f04:b0:9bf:2d82:53b9 with SMTP id
- hq4-20020a1709073f0400b009bf2d8253b9mr4101356ejc.59.1697637672166; 
- Wed, 18 Oct 2023 07:01:12 -0700 (PDT)
-Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
- by smtp.gmail.com with ESMTPSA id
- hx10-20020a170906846a00b009a13fdc139fsm1739054ejc.183.2023.10.18.07.01.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Oct 2023 07:01:11 -0700 (PDT)
-Message-ID: <ee332375-8812-8e12-da1c-9973d10a41af@gmail.com>
-Date: Wed, 18 Oct 2023 16:01:10 +0200
+ d=1e100.net; s=20230601; t=1697637698; x=1698242498;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pMjnT9FAv0SobZQArQB7Tio/DeuRbWjYE7GkzZ/1NLE=;
+ b=kBa12jK9g9owggSOxmIoC/HXTD3Vvre0PC83nzpWUEaT80ieOwbFvoY8RiPTY1WRFV
+ svharThoYSEJ7cY3n1lEgdTXB7KGNx0O6d0TXmq7csVFMThBeZ8jlqXiYbl4RNlMxvyN
+ lluuE5UDYGmeX55zHw2r6UuveV6v7UT60ZMqmeDYKNeXdpnHA0+w9ltQKuB1FdXMPLfa
+ QOMlDWRIAKeecaR9bLiJz1MLfxVOLwV1LPSv3bjyGIYZ8mM6MAZYQ/sVfNVPnFZWBU5C
+ M4iYpAxTLkDAEqH2giLw747rynDu16sVqm9y11U502WAxJsdohxT8fTXC+29gFNylCpc
+ jpNg==
+X-Gm-Message-State: AOJu0YzqsNsgti/91oyqKeFw9myVeQkw7zvZ17w838yBsXNI+M0herqm
+ I2NgS8xKmqVKAWL4q2ptQ4SXHA==
+X-Google-Smtp-Source: AGHT+IF8x/GFeMGGq6gigqKacPF3evoLoCIZ1rD3C7+esQ2yYXJq3oEAYrk7ZP4pIjeX/wzMtvGq5Q==
+X-Received: by 2002:a2e:7a05:0:b0:2c0:e7c:bf74 with SMTP id
+ v5-20020a2e7a05000000b002c00e7cbf74mr4526746ljc.12.1697637697925; 
+ Wed, 18 Oct 2023 07:01:37 -0700 (PDT)
+Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
+ [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
+ f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Oct 2023 07:01:37 -0700 (PDT)
+From: Artur Rojek <artur@conclusive.pl>
+To: Eugen Hristev <eugen.hristev@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>,
+ Marcin Jabrzyk <marcin@conclusive.pl>
+Cc: Wojciech Kloska <wojciech@conclusive.pl>,
+ =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
+ u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
+Subject: [PATCH v5 0/4] Conclusive KSTR-SAMA5D27 support
+Date: Wed, 18 Oct 2023 16:00:55 +0200
+Message-ID: <20231018140059.161169-1-artur@conclusive.pl>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v5 4/8] rockchip: block: blk-uclass: add bounce buffer flag to
- blk_desc
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- marex@denx.de, u-boot@lists.denx.de
-References: <7fd0d9d1-2e93-a48b-edfd-6d4fec314a60@gmail.com>
-Content-Language: en-US
-In-Reply-To: <7fd0d9d1-2e93-a48b-edfd-6d4fec314a60@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,76 +92,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently bounce buffer support is enabled for all block devices
-when available. Add a flag to blk_desc to enable only on demand.
+Hi all,
 
-Signed-off-by: Johan Jonker <jbx6244@gmail.com>
----
+this is v5 of the Conclusive KSTR-SAMA5D27 support series.
 
-Changed V5:
-  New patch
----
- drivers/block/blk-uclass.c | 4 ++--
- drivers/scsi/scsi.c        | 4 ++++
- include/blk.h              | 1 +
- 3 files changed, 7 insertions(+), 2 deletions(-)
+Patches [1/4], [2/4] and [3/4] remain unchanged.
 
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index 30ad5bbb0024..77066da352a3 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -441,7 +441,7 @@ long blk_read(struct udevice *dev, lbaint_t start, lbaint_t blkcnt, void *buf)
- 			  start, blkcnt, desc->blksz, buf))
- 		return blkcnt;
+In patch [4/4], a new dtsi file has been added in order to keep U-Boot
+specific properties separate from the main dts. As such, MAINTAINERS has
+been modified to feature the new file.
 
--	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER)) {
-+	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
- 		struct blk_bounce_buffer bbstate = { .dev = dev };
- 		int ret;
+An alias to the i2c node holding the EEPROM has also been explicitly
+added, so that it always enumerates at bus 2.
 
-@@ -478,7 +478,7 @@ long blk_write(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
+Artur Rojek (4):
+  common: add prototype & rename populate_serial_number()
+  event: add new EVT_SETTINGS_R event
+  arm: dts: at91: sama5: Add flexcom4 node
+  board: Add support for Conclusive KSTR-SAMA5D27
 
- 	blkcache_invalidate(desc->uclass_id, desc->devnum);
+ arch/arm/dts/Makefile                         |   3 +
+ arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi   |  42 +++
+ arch/arm/dts/at91-kstr-sama5d27.dts           | 127 ++++++++++
+ arch/arm/dts/sama5d2.dtsi                     |  20 ++
+ arch/arm/mach-at91/Kconfig                    |  12 +
+ board/conclusive/kstr-sama5d27/Kconfig        |  15 ++
+ board/conclusive/kstr-sama5d27/MAINTAINERS    |   9 +
+ board/conclusive/kstr-sama5d27/Makefile       |   5 +
+ .../conclusive/kstr-sama5d27/kstr-sama5d27.c  | 239 ++++++++++++++++++
+ cmd/tlv_eeprom.c                              |  14 +-
+ common/board_r.c                              |   1 +
+ common/event.c                                |   1 +
+ configs/kstr_sama5d27_defconfig               |  73 ++++++
+ include/configs/kstr-sama5d27.h               |  15 ++
+ include/event.h                               |   9 +
+ include/init.h                                |  14 +
+ 16 files changed, 586 insertions(+), 13 deletions(-)
+ create mode 100644 arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
+ create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
+ create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
+ create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
+ create mode 100644 board/conclusive/kstr-sama5d27/Makefile
+ create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+ create mode 100644 configs/kstr_sama5d27_defconfig
+ create mode 100644 include/configs/kstr-sama5d27.h
 
--	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER)) {
-+	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
- 		struct blk_bounce_buffer bbstate = { .dev = dev };
- 		int ret;
-
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 7411660d465e..779a34bd2f1c 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -459,6 +459,9 @@ static void scsi_init_dev_desc_priv(struct blk_desc *dev_desc)
- 	dev_desc->product[0] = 0;
- 	dev_desc->revision[0] = 0;
- 	dev_desc->removable = false;
-+#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
-+	dev_desc->bb = true;
-+#endif	/* CONFIG_BOUNCE_BUFFER */
- }
-
- #if !defined(CONFIG_DM_SCSI)
-@@ -606,6 +609,7 @@ static int do_scsi_scan_one(struct udevice *dev, int id, int lun, bool verbose)
- 	bdesc->lun = lun;
- 	bdesc->removable = bd.removable;
- 	bdesc->type = bd.type;
-+	bdesc->bb = bd.bb;
- 	memcpy(&bdesc->vendor, &bd.vendor, sizeof(bd.vendor));
- 	memcpy(&bdesc->product, &bd.product, sizeof(bd.product));
- 	memcpy(&bdesc->revision, &bd.revision,	sizeof(bd.revision));
-diff --git a/include/blk.h b/include/blk.h
-index 76bd5baf9959..7c7cf7f2b102 100644
---- a/include/blk.h
-+++ b/include/blk.h
-@@ -68,6 +68,7 @@ struct blk_desc {
- 	/* device can use 48bit addr (ATA/ATAPI v7) */
- 	bool	lba48;
- 	unsigned char	atapi;		/* Use ATAPI protocol */
-+	unsigned char	bb;		/* Use bounce buffer */
- 	lbaint_t	lba;		/* number of blocks */
- 	unsigned long	blksz;		/* block size */
- 	int		log2blksz;	/* for convenience: log2(blksz) */
---
-2.39.2
+-- 
+2.42.0
 
