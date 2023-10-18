@@ -4,51 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CFC7CDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 22:08:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B27CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 22:31:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DD1C86D62;
-	Thu, 19 Oct 2023 00:08:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tom-fitzhenry.me.uk
+	by phobos.denx.de (Postfix) with ESMTP id 016A886FFA;
+	Thu, 19 Oct 2023 00:31:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tom-fitzhenry.me.uk header.i=@tom-fitzhenry.me.uk header.b="oSsl0byo";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iyfqWj+c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CA4086FBA; Wed, 18 Oct 2023 17:35:34 +0200 (CEST)
-Received: from mx1.mythic-beasts.com (mx1.mythic-beasts.com
- [IPv6:2a00:1098:0:86:1000:0:2:1])
+ id B2A2D86EE0; Thu, 19 Oct 2023 00:31:16 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D77A986F40
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:35:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=tom-fitzhenry.me.uk
+ by phobos.denx.de (Postfix) with ESMTPS id 979AC86E7E
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 00:31:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tom@tom-fitzhenry.me.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=tom-fitzhenry.me.uk; s=mythic-beasts-k1; h=Date:Subject:To:From;
- bh=X9GkPhk9C8Aa2N3G1NsM7VyQb5DMABredZRFYo3I2n4=; b=oSsl0byoKE0ECIisaXfcCP7cwW
- QmACKM78/r11Scak1xiWM6oVwLotiBKrSjCfc8JPdJAfWo5SAY16eivrUOEtarGE/yI7k/1PTtPCz
- 7r2UZ6RALvfmmmKmrUyNg38q/vJdM6D9++lMDeqF24y5Mi7mP4wSGJWMVbPgQxQ9N7tgxZ59/5ATK
- CfbK6oPXBps8JNlZWZnIFUGmE3rdG9qVMYN6d27Y8Y16ltvKMZ/CmI2GVl3L6/3BFn8XTm4y9CnuS
- YlASSNgCxGDMTIN7IacQCJFdfxq9yi+iwM7IZvaI3LIB8VIfayDXDCE2iYcLzYXNls1JB96y9PbAI
- ca96mVaA==;
-Received: by mailhub-cam-d.mythic-beasts.com with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <tom@tom-fitzhenry.me.uk>)
- id 1qt8Zz-00FMYB-FA; Wed, 18 Oct 2023 16:35:29 +0100
-From: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-To: u-boot@lists.denx.de
-Cc: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Subject: [PATCH v2 0/2] board: rockchip: add Pine64 QuartzPro64 RK3588 board
-Date: Thu, 19 Oct 2023 02:31:58 +1100
-Message-ID: <20231017155943.127659-2-tom@tom-fitzhenry.me.uk>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=bda0=GB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1697668263;
+ bh=60qF6fXCfhls2jHzAlDJ6Us0agVRW/crXtXHn4ZWooQ=;
+ b=iyfqWj+cGBJeJYcgk76YMB+m80Ph7M0KBK0UgiqxkCaSK5MKLEhhZFQrqemVmPQTBZPCKst9d
+ iW7Acj5HFzTNTeeVz6QrQtqTcf/AFQgwwCIaIWgJHcSE4GTYNrVwvDc1xWrU6tZbToYwkG0vvto
+ VS+WcBz7TK3zqwJbjpc/w/tfAJ2NgPIlPkOjxGgx+zdwMTWoF0NlvM7a36eyQZi2nLNhEv9clUI
+ E5BpWPck6eYzvKr0hDTSn2ly57svyrLpc3FL0acrxwfegJyEF7FNQIvB19wXJd8yWZHhOO9tH/V
+ kkXwlSgxM4vgRmYoYnXWGaGTfjl+vNBr4ZFFwMRS2zcw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/2] rockchip: Use dwc3-generic driver on RK3328 and RK3399
+Date: Wed, 18 Oct 2023 22:30:50 +0000
+Message-ID: <20231018223058.2081052-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-BlackCat-Spam-Score: 49
-X-Mailman-Approved-At: Thu, 19 Oct 2023 00:08:27 +0200
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 65305ca753b629052bafed6c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,37 +66,53 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-Message-ID: <20231018153158.EMp4mOhvQGAK_by7dbTXdLcCqE1eDTWcXGwhulhETIE@z>
 
-Changes since v1:
-* Sync recently added DT from linux-next
-* Sync led dt-bindings
+This series change to use the dwc3-generic driver on all RK3328 and
+RK3399 boards. Also switch to use DM_USB_GADGET and remove then obsolete
+board_usb_init() and dm_usb_gadget_handle_interrupts() functions.
 
-Tom Fitzhenry (2):
-  dt-bindings: leds: import common led bindings from linux v6.5
-  board: rockchip: add Pine64 QuartzPro64 RK3588 board
+First patch change all RK33xx boards to use dwc3-generic driver.
+Second patch remove obsolete rk3399 usb gadget functions.
 
- arch/arm/dts/Makefile                         |    1 +
- arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi   |   12 +
- arch/arm/dts/rk3588-quartzpro64.dts           | 1137 +++++++++++++++++
- arch/arm/mach-rockchip/rk3588/Kconfig         |    8 +
- board/pine64/quartzpro64-rk3588/Kconfig       |   15 +
- board/pine64/quartzpro64-rk3588/MAINTAINERS   |    8 +
- board/pine64/quartzpro64-rk3588/Makefile      |    3 +
- .../quartzpro64-rk3588/quartzpro64-rk3588.c   |   39 +
- configs/quartzpro64-rk3588_defconfig          |   72 ++
- doc/board/rockchip/rockchip.rst               |    1 +
- include/configs/quartzpro64-rk3588.h          |   14 +
- include/dt-bindings/leds/common.h             |    7 +-
- 12 files changed, 1316 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3588-quartzpro64.dts
- create mode 100644 board/pine64/quartzpro64-rk3588/Kconfig
- create mode 100644 board/pine64/quartzpro64-rk3588/MAINTAINERS
- create mode 100644 board/pine64/quartzpro64-rk3588/Makefile
- create mode 100644 board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
- create mode 100644 configs/quartzpro64-rk3588_defconfig
- create mode 100644 include/configs/quartzpro64-rk3588.h
+This has been tested and validated on rockpro64 and rock-pi-4 boards.
+
+Jonas Karlman (2):
+  configs: rockchip: Use dwc3-generic driver on RK3328 and RK3399
+  rockchip: board: Remove dwc3 usb init and gadget handler functions
+
+ arch/arm/mach-rockchip/board.c                | 24 -------------------
+ configs/chromebook_bob_defconfig              |  2 +-
+ configs/chromebook_kevin_defconfig            |  2 +-
+ configs/eaidk-610-rk3399_defconfig            |  4 +++-
+ configs/evb-rk3399_defconfig                  |  1 -
+ configs/firefly-rk3399_defconfig              |  1 -
+ configs/khadas-edge-captain-rk3399_defconfig  |  4 +++-
+ configs/khadas-edge-rk3399_defconfig          |  4 +++-
+ configs/khadas-edge-v-rk3399_defconfig        |  4 +++-
+ configs/leez-rk3399_defconfig                 |  4 +++-
+ configs/nanopc-t4-rk3399_defconfig            |  4 +++-
+ configs/nanopi-m4-2gb-rk3399_defconfig        |  4 +++-
+ configs/nanopi-m4-rk3399_defconfig            |  4 +++-
+ configs/nanopi-m4b-rk3399_defconfig           |  4 +++-
+ configs/nanopi-neo4-rk3399_defconfig          |  4 +++-
+ configs/nanopi-r4s-rk3399_defconfig           |  3 ++-
+ configs/orangepi-r1-plus-lts-rk3328_defconfig |  3 ++-
+ configs/orangepi-r1-plus-rk3328_defconfig     |  3 ++-
+ configs/orangepi-rk3399_defconfig             |  4 +++-
+ configs/pinebook-pro-rk3399_defconfig         |  1 -
+ configs/pinephone-pro-rk3399_defconfig        |  1 -
+ configs/puma-rk3399_defconfig                 |  1 -
+ configs/roc-pc-mezzanine-rk3399_defconfig     |  2 +-
+ configs/roc-pc-rk3399_defconfig               |  2 +-
+ configs/rock-4c-plus-rk3399_defconfig         |  2 +-
+ configs/rock-4se-rk3399_defconfig             |  2 +-
+ configs/rock-pi-4-rk3399_defconfig            |  2 +-
+ configs/rock-pi-4c-rk3399_defconfig           |  2 +-
+ configs/rock-pi-n10-rk3399pro_defconfig       |  2 +-
+ configs/rock960-rk3399_defconfig              |  3 ++-
+ configs/rockpro64-rk3399_defconfig            |  1 -
+ drivers/usb/host/Kconfig                      |  1 -
+ 32 files changed, 50 insertions(+), 55 deletions(-)
 
 -- 
 2.42.0
