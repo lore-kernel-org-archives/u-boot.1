@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A06CDB482
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 15:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB928CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 15:25:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77FE286F48;
-	Wed, 18 Oct 2023 17:24:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2FBCE86F40;
+	Wed, 18 Oct 2023 17:25:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J/6ZJ2it";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TL3QDbR0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E7B986FAA; Wed, 18 Oct 2023 17:23:58 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 1204386EA4; Wed, 18 Oct 2023 17:25:21 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBE4A803AC
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:23:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 159CE86F92
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:25:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9c5b313b3ffso362235766b.0
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:23:55 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-53da72739c3so11574340a12.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:25:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697642634; x=1698247434; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697642718; x=1698247518; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KBL8Tf/R1q2KueEwQ+BSHAF/2k1xY3NRIdHsPb0DJXU=;
- b=J/6ZJ2itgVGDoXWqBziGWAF08n92dAcjVA/6lfPNZmJNFOx/WlbWaUHcOe9iafDNzh
- wzC6NVzHgJpHrcAbfMHMR3Bl+ZylqyAL+upj9OQ3gWfeoT+h9TGLOxbo7feTU3mrX+aa
- +BR2dggcbe4x0FdBVcQe5EWHSFAQlzWW+kHVI=
+ bh=1wv9jyorNID3OLzi9wf+G577t6CQsgfjF7DaGtwXpwQ=;
+ b=TL3QDbR04D4+vqvkUvIDJXqvcSmHaDzqm8r3EagXCWkY5ttU5rc+DBvkXWD6YzhwA0
+ a9YB+17rXSrWTSnN1yS2ZWilA28VKbxYT8wcfa9WjLky6Afwb9+xcukZaS/e1GxWMPuk
+ sJ06bSs3rSk4O04ue0+n8Qw/u81/ZBzcCJrCQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697642634; x=1698247434;
+ d=1e100.net; s=20230601; t=1697642718; x=1698247518;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KBL8Tf/R1q2KueEwQ+BSHAF/2k1xY3NRIdHsPb0DJXU=;
- b=bTvoP0ixJeden+fcsdvkXpaj0lTisFFxqU3a6yuYFQlvtS8ioG4A8OjiOcJuyhLPDY
- FrFCsChX73MfIsPK5rH6uppMZsbjGx9asa9IsfyLcdWdE8ytqiNKExLaNaz8N1QvaP43
- oHrZ28cbwgHzQm2KInIIc3RMKtttT5SghBJxslmOASfPHNlYQFBygLot5l8EHzx51h3V
- RXgmvQuZXaSak6bcUu0QEyzf68PFfbXxABkeJQ9GAsZksae3WdZ6TcrQtqJtiJohvQuG
- FRtOcNT/JIGuN/8gkoMC+R2J0WUS4obAi77+COXZK+YKJwQNaGo7cD+6mbdorBIVE18c
- Hl2A==
-X-Gm-Message-State: AOJu0Yxt2tM9X1OAW3ihAYaUkibVPodPsJaisUXdNSynpDkG77gerjBS
- qeVx7clOFtxWbb5qEJfybF+6mbWxm5BySGvt25PqR2OU98OUx9Nk8FJ3sg==
-X-Google-Smtp-Source: AGHT+IHNXQjzUQVsLDoOPxFIUK+Fuqjv1B+KTgpAqvXU4LiZPi1cH4jS2k03v2yqXeHdem/D46zmA/kBZ8Jdmeib4bw=
-X-Received: by 2002:a17:907:3e12:b0:9be:ab38:a361 with SMTP id
- hp18-20020a1709073e1200b009beab38a361mr5417897ejc.8.1697642634254; Wed, 18
- Oct 2023 08:23:54 -0700 (PDT)
+ bh=1wv9jyorNID3OLzi9wf+G577t6CQsgfjF7DaGtwXpwQ=;
+ b=MK47DuqQbgdcQuqctG/Kc7f+TpJo1QgiBjDWu2oh0yt5cfPtnNXJSDAHhnBDLzxeTY
+ 6y8cUoJYSYa2QtsbK3bkFX44qDP3cidkAeEUBGV8kKR+ng5TZHLLCVIrR+VU6uvqlHlU
+ 3yA3dp64sXLkOQatmZNEwQ2KhQcKFBo3FISQ9b43dqt0dHSXrGLwk0tO84mopAzcsXdj
+ 7IHS6/1Lk4Oh5Gd49q3KLg7uYWm4yzZCid4GpDBjE3PIvwWpB49X995ZDbsbucrn/dRZ
+ yMGsgkVsjKVAl0M9VyW4vDqwVo/9k1cJ7+HYdCaoqYKlMT2x28TIUe/IuFt9ZIZnbYpc
+ oMRg==
+X-Gm-Message-State: AOJu0YxMLGISZvcEAKf0irraBaa3JLgs1QV/iQD/fnj6DNgD2S+EKIJb
+ kall0tLqCQDoO2VbkdwT2JDZRiwoWirlK4L00mABFGFv5yqyGEHb1Tc=
+X-Google-Smtp-Source: AGHT+IEqDLWQewACHgqKU49o6GuzDpXmKzWTymwqBskCFpllqs5To/o1yH0PI/KJfLeJMyIMpqsrNxqicYyQydQBxpo=
+X-Received: by 2002:a50:9312:0:b0:53e:3b8f:8a59 with SMTP id
+ m18-20020a509312000000b0053e3b8f8a59mr3311593eda.40.1697642718192; Wed, 18
+ Oct 2023 08:25:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-23-sjg@chromium.org>
- <20231018133709.GA3765642@bill-the-cat>
-In-Reply-To: <20231018133709.GA3765642@bill-the-cat>
+ <20231016222835.596572-3-sjg@chromium.org>
+ <20231018144232.GA3785604@bill-the-cat>
+In-Reply-To: <20231018144232.GA3785604@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 18 Oct 2023 09:23:42 -0600
-Message-ID: <CAPnjgZ2qG7XgcbYyrpZaTef21MJA-B7SMm9jGMzk8G7M=mVv1w@mail.gmail.com>
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Date: Wed, 18 Oct 2023 09:25:06 -0600
+Message-ID: <CAPnjgZ2zS-7FH+7L2Oc8iZk0B_PT7biG=0kO79DDh+gPGia6LQ@mail.gmail.com>
+Subject: Re: [PATCH v3 02/32] bootstd: Correct dependencies on CMDLINE
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -84,63 +84,57 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 18 Oct 2023 at 07:37, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 18 Oct 2023 at 08:42, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
->
-> > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
-> > available, add it as an explicit dependency.
+> On Mon, Oct 16, 2023 at 04:27:53PM -0600, Simon Glass wrote:
+> > With recent changes over the last few years in boot/Kconfig it is
+> > no-longer possible to disable CMDLINE. It results in various link
+> > errors because some options which require CMDLINE are enabled
+> > regardless of whether it is available.
+> >
+> > Add the necessary conditions to fix this.
+> >
+> > Note that it would be better to have all commands depend on CMDLINE,
+> > but that is extremely difficult at present, since some functions use
+> > CMD_xxx to enable feature xxx. For example networking and environment
+> > have a number of problems to tease apart.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> > (no changes since v2)
+> > Changes in v3:
+> > - Reword commit message slightly
 > >
-> > Changes in v2:
-> > - Add new patch to update EFI_LOADER to depend on DM_ETH
+> >  boot/Kconfig           | 19 ++++++++++++-------
+> >  lib/efi_loader/Kconfig |  1 +
+> >  2 files changed, 13 insertions(+), 7 deletions(-)
 > >
-> >  lib/efi_loader/Kconfig | 1 +
-> >  1 file changed, 1 insertion(+)
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index a01e6cb8aafe..f74ac7e9cc72 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -342,6 +342,7 @@ endif # FIT
 > >
-> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > index 13cad6342c36..fca4b3eef270 100644
-> > --- a/lib/efi_loader/Kconfig
-> > +++ b/lib/efi_loader/Kconfig
-> > @@ -11,6 +11,7 @@ config EFI_LOADER
-> >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> >       depends on BLK
-> > +     depends on DM_ETH
-> >       depends on !EFI_APP
-> >       default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
-> >       select CHARSET
+> >  config PXE_UTILS
+> >       bool
+> > +     depends on CMDLINE
+> >       select MENU
+> >       help
+> >         Utilities for parsing PXE file formats.
 >
-> I don't think this is needed.  After reconfiguring qemu_arm64 to be able
-> to disable networking entirely, we still are able to build with
-> EFI_LOADER enabled, and no warning / link errors.
+> So, this part here is because of CONFIG_SYS_PBSIZE, which I think we can
+> / should solve another way.
 
-Fair enough.
+Perhaps it would help if you just clarify your goal.
 
-As of this patch the following errors are generated with -a ~CMDLINE :
+My goal with this series is to allow CMDLINE to be disabled without
+build errors, so we can start the work booting via bootstd (with
+CMDLINE disabled).
 
-+lib/efi_loader/efi_device_path.c:985:(.text+0xca4): undefined
-reference to `eth_get_dev'
-+/bin/ld: lib/efi_loader/efi_device_path.c:987:(.text+0xca9):
-undefined reference to `eth_get_dev'
-+/bin/ld: lib/efi_loader/efi_device_path.c:993:(.text+0xcc9):
-undefined reference to `eth_get_dev'
-+/bin/ld: lib/efi_loader/efi_device_path.o: in function `efi_dp_from_name':
-+lib/efi_loader/efi_device_path.c:1095:(.text+0xe00): undefined
-reference to `efi_get_image_parameters'
-
-which is why I added this patch. A later patch disables networking
-entirely with ~CMDLINE so that is why this problem goes away.
-
-This series was basically built up by disabling CMDLINE and then
-fixing the errors one by one. I didn't go back and check whether (at
-the end) all the patches were needed.
-
-I could do that and send a v4, if your more general concerns can be sorted out.
+This isn't a straight-line activity. It involves changes that will
+become redundant later, simply because I haven't written the 100s of
+patches needed to figure it all out. Even if I did it would be
+unreviewable and require lots of rework based on feedback.
 
 Regards,
 Simon
