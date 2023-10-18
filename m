@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4606CCDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 11:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DAF4CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 11:31:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB26B86F80;
-	Wed, 18 Oct 2023 13:30:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B83586F60;
+	Wed, 18 Oct 2023 13:30:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEA8986BB8; Wed, 18 Oct 2023 08:28:03 +0200 (CEST)
+ id 7984286D82; Wed, 18 Oct 2023 08:28:07 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BBD3E86D82
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:28:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id DA94786BB8
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:28:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=qi.feng@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ACEEA1007;
- Tue, 17 Oct 2023 23:28:41 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 11A672F4;
+ Tue, 17 Oct 2023 23:28:45 -0700 (PDT)
 Received: from a015967.shanghai.arm.com (a015967.shanghai.arm.com
  [10.169.190.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id F2F623F64C;
- Tue, 17 Oct 2023 23:27:57 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 51E033F64C;
+ Tue, 17 Oct 2023 23:28:01 -0700 (PDT)
 From: Qi Feng <qi.feng@arm.com>
 To: u-boot@lists.denx.de
 Cc: liviu.dudau@foss.arm.com, fenghua@phytium.com.cn, linus.walleij@linaro.org,
  Peter.Hoyes@arm.com, wei.chen@arm.com, Robbie.Cao@arm.com, qi.feng@arm.com
-Subject: [PATCH 1/2] misc: vexpress_config: Use member .priv_auto to set the
- private data
-Date: Wed, 18 Oct 2023 14:27:44 +0800
-Message-Id: <20231018062745.3153436-2-qi.feng@arm.com>
+Subject: [PATCH 2/2] vexpress64: Add MMC card to the BOOT_TARGET_DEVICES of FVP
+Date: Wed, 18 Oct 2023 14:27:45 +0800
+Message-Id: <20231018062745.3153436-3-qi.feng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231018062745.3153436-1-qi.feng@arm.com>
 References: <20231018062745.3153436-1-qi.feng@arm.com>
@@ -58,52 +57,40 @@ X-Virus-Status: Clean
 
 From: Wei Chen <wei.chen@arm.com>
 
-In current vexpress_config_probe code, it sets the uclass private data
-directly. This will cause one compilation error:
-drivers/misc/vexpress_config.c:114:27: error: lvalue required as left operand of assignment
-  114 |  dev_get_uclass_priv(dev) = priv;
-      |                           ^
-
-In this patch we set the uclass private data through struct member
-.priv_auto, and this compilation error disappears.
+Add MMC disk to FVP's BOOT_TARGET_DEVICES. This allows the user to boot
+from MMC devices.
 
 Signed-off-by: Wei Chen <wei.chen@arm.com>
 Signed-off-by: Qi Feng <qi.feng@arm.com>
 ---
- drivers/misc/vexpress_config.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ include/configs/vexpress_aemv8.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/misc/vexpress_config.c b/drivers/misc/vexpress_config.c
-index 2baca48109f..99aad1412ae 100644
---- a/drivers/misc/vexpress_config.c
-+++ b/drivers/misc/vexpress_config.c
-@@ -92,7 +92,7 @@ static struct misc_ops vexpress_config_ops = {
- static int vexpress_config_probe(struct udevice *dev)
- {
- 	struct ofnode_phandle_args args;
--	struct vexpress_config_sysreg *priv;
-+	struct vexpress_config_sysreg *priv = dev_get_priv(dev);
- 	const char *prop;
- 	int err, prop_size;
+diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
+index 43f7e454d81..24d8ca08665 100644
+--- a/include/configs/vexpress_aemv8.h
++++ b/include/configs/vexpress_aemv8.h
+@@ -148,6 +148,12 @@
+ #define FUNC_VIRTIO(func)
+ #endif
  
-@@ -105,11 +105,9 @@ static int vexpress_config_probe(struct udevice *dev)
- 	if (!prop || (strncmp(prop, "arm,vexpress-sysreg", 19) != 0))
- 		return -ENOENT;
++#ifdef CONFIG_CMD_MMC
++#define FUNC_MMC(func)	func(MMC, mmc, 0)
++#else
++#define FUNC_MMC(func)
++#endif
++
+ /*
+  * Boot by loading an Android image, or kernel, initrd and FDT through
+  * semihosting into DRAM.
+@@ -204,6 +210,7 @@
+ 	func(SMH, smh, na)		\
+ 	func(MEM, mem, na)		\
+ 	FUNC_VIRTIO(func)		\
++	FUNC_MMC(func)			\
+ 	func(PXE, pxe, na)		\
+ 	func(DHCP, dhcp, na)
  
--	priv = calloc(1, sizeof(*priv));
- 	if (!priv)
- 		return -ENOMEM;
- 
--	dev_get_uclass_priv(dev) = priv;
- 	priv->addr = ofnode_get_addr(args.node);
- 
- 	return dev_read_u32(dev, "arm,vexpress,site", &priv->site);
-@@ -127,4 +125,5 @@ U_BOOT_DRIVER(vexpress_config_drv) = {
- 	.bind = dm_scan_fdt_dev,
- 	.probe = vexpress_config_probe,
- 	.ops = &vexpress_config_ops,
-+	.priv_auto = sizeof(struct vexpress_config_sysreg),
- };
 -- 
 2.25.1
 
