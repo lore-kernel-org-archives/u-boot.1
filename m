@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D77CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 16:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 548A2CDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 16:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BA1386FDF;
-	Wed, 18 Oct 2023 18:10:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C2F786F4F;
+	Wed, 18 Oct 2023 18:10:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c/LUwIuH";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HCrCsuAF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E18D86FCB; Wed, 18 Oct 2023 18:10:24 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 6213A86FDF; Wed, 18 Oct 2023 18:10:26 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACA9486FCB
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 18:10:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 559FC86FD8
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 18:10:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-53f3609550bso2499966a12.1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:10:18 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-53b32dca0bfso14698464a12.0
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:10:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697645417; x=1698250217; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697645424; x=1698250224; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OuQS3c/aQuW/GA+btmvipLNjtFzoCtgsog/M+Aeesd4=;
- b=c/LUwIuHXV7oW3c/h7Yg06hIgU1gqbDwoPnVkE5yOF0Iq4oRiOmseqqvx4KD6PWXcJ
- 9wAG28dLeJQrNCJ6eCr2iRfbS80d9n1Ym2VDHQ1Gc672muQ9jqfIC30h1O/BstEODtED
- e7FCn6LshlMgeubSBNexJ/96uTnzM3RnUI56Y=
+ bh=naym+WKaCGUs3y983SLTOMNF8R09HXOGGJTzcbc0lHY=;
+ b=HCrCsuAFDVYBt1ZIfmXJ9o9gQZG2yQWWJuvttGdul6yjWnvo57Dx1uJRGi3OA7OO7d
+ 24fKurtqA+hnZgV7r+7k5JWunu2wc3MNLczo+n2tDXMtdHnXOKjoLDKABWXpjhsUbyuo
+ G6i6LPVk9NK3ksO/bL/Anf5dS3OD3hBeTR6LQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697645417; x=1698250217;
+ d=1e100.net; s=20230601; t=1697645424; x=1698250224;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OuQS3c/aQuW/GA+btmvipLNjtFzoCtgsog/M+Aeesd4=;
- b=VvF0VTlequqztaOwq6ZurF/vldCOIGNsyzUFl43zyleOeWi2npJaKOPVZWk9TSsYRO
- W6a1v4HIiopWus+Oqw8Ix3w1qrLcu3rrrnPI8eeYhPIziIFb/uetm7+iwniMNXhctybA
- 5/SJ6bVFBYA0QGGi4Y3WAS+A4uL1lvsZezte0hAHeK1w0ilNwdPWfFdtgxNVKBz8ovTo
- RFIo/Wy4BqqaPT4+p5goIsEKghOmZguIwyrnJZkhzK1H5ePI/+PnHdVDjoFY9L9oyhBV
- 4sWKksfUrcUO/f6kYIihEUmOYaKWlSTS0lsu5LLoP7eqKhbB8subbo0IJSX1CXIAw8Nx
- nBQA==
-X-Gm-Message-State: AOJu0YwBQWkWPBiHfvl/Sa1YWBbZCVda2abMY0/1LeK51jc4oj6MUAgA
- TU2XZk7s8AD58nntv7Z0ClZA22nvHhYSPxbozCOQhg==
-X-Google-Smtp-Source: AGHT+IEa3y/fDNHn3OxXKBci06KI9kbHL1BPmUIZN9I2i3bExaIx9RR0Wi4eXLF30H6EO3yP1oHnHj1edk+scEpwpW0=
-X-Received: by 2002:a05:6402:4306:b0:53d:a1c0:410f with SMTP id
- m6-20020a056402430600b0053da1c0410fmr4472209edc.2.1697645416795; Wed, 18 Oct
- 2023 09:10:16 -0700 (PDT)
+ bh=naym+WKaCGUs3y983SLTOMNF8R09HXOGGJTzcbc0lHY=;
+ b=GL1k/xRGjn6pOnI+xV6Lwqgqv/7UvmNaWh4/ctTkh2N3Tb4gz4Sqg3HtRvHp3KO5hg
+ 9Kbg13dTjLTytHMbL8s1949lXWWWxjuupnJ5t86P8E8i4jMM9vx3k2WRhiRq0DezSZl8
+ IFJsOSqXUIfepEwGKvndvi9jc87mhFMyR89KdvHVAhp/a/o3QBzPq4Z+1NKHZXa29CRU
+ qx8TK4PjC1GvE1rBKhCus0Os645MIyAUUR1uXLAWRlnU2QvTpazdHppKxh5IT3IQMQjq
+ sDUQFAqmtmNTLMxnojSDlZs+np0bsvgup7QeErz3F+KDdTRumsvYtpnn6vK1UPpy6+5j
+ wayw==
+X-Gm-Message-State: AOJu0YzX1lFklWtBV6PG/6fRJEAqJCnrSXJ23QiFGJSG+hqs4SjDbIAd
+ mGBhopw4g1UfP7gNRPH7parw9hhvspEbkdYj1h2crw==
+X-Google-Smtp-Source: AGHT+IFTJZykgS2ZS3odoL0rQLilFMeZyGkYVAkZbs2W8bKCC1SEysysJbRqaE5/12yTfjqSAFwK5V+hfeo7JOT13sQ=
+X-Received: by 2002:a05:6402:1485:b0:53e:1207:5b69 with SMTP id
+ e5-20020a056402148500b0053e12075b69mr5091711edv.10.1697645423609; Wed, 18 Oct
+ 2023 09:10:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <7fd0d9d1-2e93-a48b-edfd-6d4fec314a60@gmail.com>
- <ee332375-8812-8e12-da1c-9973d10a41af@gmail.com>
-In-Reply-To: <ee332375-8812-8e12-da1c-9973d10a41af@gmail.com>
+References: <20231013094302.28944-1-pro@denx.de>
+ <20231013094302.28944-3-pro@denx.de>
+ <037dac45-eee4-c0f1-b72e-ee0a2bfe3807@denx.de>
+ <ZSk-2lBrLW5Bel_X@eryximachos.home>
+ <ZS6ET7ExtDSCfsNN@eryximachos.home>
+ <CAPnjgZ2OZka03fG5Bt49JxoLn-VHy5TB81r6_uXTy+K5SOGYOw@mail.gmail.com>
+ <1ba8ea25-bad0-b66f-b189-67754c488103@denx.de>
+ <ZS-6WM11jJnsaakJ@eryximachos.home>
+In-Reply-To: <ZS-6WM11jJnsaakJ@eryximachos.home>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 18 Oct 2023 09:10:06 -0700
-Message-ID: <CAPnjgZ1yHdm7MRn1h3PWzkqM+1UwuVC+DsA8Xwy8yMD8frq9CQ@mail.gmail.com>
-Subject: Re: [PATCH v5 4/8] rockchip: block: blk-uclass: add bounce buffer
- flag to blk_desc
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, Marek Vasut <marex@denx.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 18 Oct 2023 09:10:13 -0700
+Message-ID: <CAPnjgZ3bmVieVZpYGPbbGZFU-VF3FbGbAGGM8ekLKhOw=uYS1A@mail.gmail.com>
+Subject: Re: [PATCH 2/2] bootcount: Add driver model I2C driver
+To: Philip Oberfichtner <pro@denx.de>
+Cc: Heiko Schocher <hs@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -87,20 +89,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 18 Oct 2023 at 08:01, Johan Jonker <jbx6244@gmail.com> wrote:
->
-> Currently bounce buffer support is enabled for all block devices
-> when available. Add a flag to blk_desc to enable only on demand.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
->
-> Changed V5:
->   New patch
-> ---
->  drivers/block/blk-uclass.c | 4 ++--
->  drivers/scsi/scsi.c        | 4 ++++
->  include/blk.h              | 1 +
->  3 files changed, 7 insertions(+), 2 deletions(-)
+Hi Philip,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, 18 Oct 2023 at 05:00, Philip Oberfichtner <pro@denx.de> wrote:
+>
+> Hi Heiko,
+>
+> On Wed, Oct 18, 2023 at 06:31:57AM +0200, Heiko Schocher wrote:
+> > [...]
+> >
+> > May Philip can use uclass_get_device_by_phandle and try a list of
+> > possible UCLASS candidates, like UCLASS_RTC, UCLASS_I2C_EEPROM,
+> > UCLASS_POWER,... and if found, check if parent is UCLASS_I2C...
+> >
+> > may not so expensive ...
+>
+> Looks more cheap and elegant than the other variants indeed. But I'm not
+> sure if we can maintain generality using this approach.
+>
+> What if the specific I2C driver is not included in the build, because
+> the devices "actual" functionality is not required?
+
+Then the device will not be bound and the function will fail. There needs
+to be a node and a bound device.
+
+> Or what if a driver
+> for the specific device does not even exist in U-Boot?
+>
+> Wouldn't the device fail to probe then?
+
+The DT should specify the compatible string so the correct i2c driver is
+used. If there isn't one,I believe it uses I2C_GENERIC but you'll need to
+check it.
+
+>
+> Please correct me if I'm wrong, I'd give it a shot in that case.
+> Otherwise I'll try it with the aforementioned
+> device_find_global_by_ofnode() followed by device_bind_driver() using
+> UCLASS_I2C_GENERIC (I hope that works).
+
+That is the same approach, I think. But anyway I think Heiko knows more
+about this than me.
+
+Regards,
+Simon
