@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56B0BCDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 13:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFDC5CDB484
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 13:58:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D1DC86F79;
-	Wed, 18 Oct 2023 15:51:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 20F3186F9F;
+	Wed, 18 Oct 2023 15:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="cv6+CSej";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AQb4mAEJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DB5886F79; Wed, 18 Oct 2023 15:51:32 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0616286F9F; Wed, 18 Oct 2023 15:58:46 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1C1086F40
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 15:51:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20DA786F79
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 15:58:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1697637088; x=1698241888; i=xypron.glpk@gmx.de;
- bh=Bj44Z8bY7NzIyu7usyjS7Ma82cE/Yuset1zbLfMjgwk=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=cv6+CSejSIC3ZkFy6/nohO0SQHcEzRkJltBs0BqqRHQY9bQxKqACaPWij6StrHwCO0pO4EIcucL
- waTukSWErGWOl60JzEj3f3rinsUOKQWuxRaEeRrs3BRChH5NRdAXVvRcH1c4oaPULhNe3pNe+YtNa
- n8rR+tjuO6Na/UJKGnhCU3SGncIjdA0IetajFZaw6fV15/3eH9hYnFnfhxBF4cs7qv+lXcDSckq3v
- tydypkHUDa6BTdegQn3gDPXPaTf3rL2P+PyA6apifGqOjZA6XIOljYAh1MrTpBbnr9YdJF++/+jFp
- 2ET7SAbeMwxbmaztD2AQqGggdzAFHoY9/0iA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N7i8O-1rejQY3BSM-014mMd; Wed, 18
- Oct 2023 15:51:28 +0200
-Message-ID: <8ce172b2-8665-442c-8e41-6b36f1255e5b@gmx.de>
-Date: Wed, 18 Oct 2023 15:51:34 +0200
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9ae2cc4d17eso1111819266b.1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 06:58:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697637523; x=1698242323; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8EGyId9pkgeq6Os8uZDOlExLF2pqrQN5eJax9d5WZf4=;
+ b=AQb4mAEJJryFsnu25XEkad+wXlKTDCLynSisDq4jexBhUJ/RG8SUowKioAcwe+11Y6
+ EwaYvQq1wiABcaJOoZjZhIrI+x5swudFySTr6CrhSdTbEu+rg7PQZJh0JP12T13CSOFF
+ A+YCrLt2FTifLlYV7WoOA+BterIDeJ7C9Y2S/59zjgoDc1+15IFQEzR9r1f17GiulEcW
+ KmuvjwyCaRRmNzg2n89Hs295CdRaVtGbVx0waeq+0ZolY52Vfz8KdWxQhCQWhV0+/Zy0
+ G8X+eJqtt+dcCzei+oPYqO1hpHShvrI3RdEcle7za9DnqFnD76OMsIZILQWmtBN1tAf1
+ BdmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697637523; x=1698242323;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=8EGyId9pkgeq6Os8uZDOlExLF2pqrQN5eJax9d5WZf4=;
+ b=VKVGMPsmyBxJkW1DUJZlvxaT6VtgKqmmZ2mDRv2np7nlxSug/PqChRKz+YvRMENJMU
+ pg8M0VDR0Q9xZnvNuGZ6BkwwEHu1oQ72C/eoc7Zz0K4n/bg4aEYpPI+RPdvCLP8vI984
+ NeE/zCnatqUsnJ0eDRQzpGUSmoBu40Zd7TSL2XGaHpfQCBToA4T6kmQo9npzEgW4Xyd8
+ CDArbK9MMabjLQ6ddpsRemuMGGZgfi1qRQbUPyw92h3uWUvq+6MEjAP0Gnx37kC3raRk
+ rrPDtQUMELjQsGhvEKbZ3kubVo45nmYTcbs9FYkMyQcDz89l30yWB32Zm0DiU/b3uHOW
+ nimg==
+X-Gm-Message-State: AOJu0YwYhK/XwnAPqZRW7YBYjxRv/p2RstvM0Xy0IOxvsOK4Azxijs4l
+ QZoKA1OiSZ28PqpYNNB4gyQ=
+X-Google-Smtp-Source: AGHT+IHu+LvF/jJM8gWCAiHYbQUIBFYz1Va5tL3hc6DHI5JWUf0ESuLQeJx4hWNVEL4XlKeghAWRkQ==
+X-Received: by 2002:a17:907:36cd:b0:9a5:a0c6:9e8e with SMTP id
+ bj13-20020a17090736cd00b009a5a0c69e8emr4720320ejc.31.1697637523447; 
+ Wed, 18 Oct 2023 06:58:43 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ 2-20020a170906224200b009c6e58437dasm1759050ejr.37.2023.10.18.06.58.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Oct 2023 06:58:42 -0700 (PDT)
+Message-ID: <7fd0d9d1-2e93-a48b-edfd-6d4fec314a60@gmail.com>
+Date: Wed, 18 Oct 2023 15:58:41 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/32] sifive: Drop an unnecessary #ifdef
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v5 0/8] Add rkmtd command
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ marex@denx.de, u-boot@lists.denx.de
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-7-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231016222835.596572-7-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Rgvbvx5AH5fWmyNJa36WepeJPN7GhUUcGpX0jktTLBR2ubicEDV
- MBULz2y1Q4TG/QXYS4aP+++j2P5gghxVc7OSfW4g2NG2vAHX5ENrJ0UGaMmezwlOmn2KMhY
- ToF7y45zrDs9XHH1HuP3RWoTiDX3ODIUWpq5jVBo/ApiAq2gCy9DCvq77FuhLFR0chBmXEu
- ip6cWuTyNAwG8QJ0lXOLg==
-UI-OutboundReport: notjunk:1;M01:P0:VEji8gjpa60=;CpM71WOxgqBtNud9X5gUKeqLNCJ
- vBP+y3f+Q5i97VJ3b45t1it4INYPduus0V+eaXNMhkFNWjEl1DjKVPpcL6P6W1+z02KNhsoIx
- CWcl2LLwEhkstS6rf4KwzNdLHM8TwgsQnZ5rGP5kuI3+Zs8XfZBhrci3naGCV8nAeYAd2nVo1
- uArw9i1rS2gyiHx706gMPU3s5SOLnKysViJA8/bqtHRHuTjtgyeq3iiCo/2ZQAmfRU/pj+Ug8
- Cay3cC2tjOXZCzHCOFLRGXz80BCBcvryJCoIQBS/wvzNYbA0lfOlBC9kPymhT/mhJzyWVd5iN
- zkueTwCipCgn+dgzXwEaiTLCh76SVb6HoQX/L5D/iOCfzjs4tdqkj9AYBvDqXs0B+hkLJjI4L
- Zbuon6hbvtn+cl6JgiFQH6HKlb1rN78hjZsj02cGwqTAAbsS2i0EBqsY3mGOH9YAf64e6wbGD
- jjJO3jLUrKJ8Qlsu7+Rtgy6cK3WB2Qg+ZMiZVXESVxrkOdwkCxlY0r1Ni3SZaR2NwLErqR2JS
- bpK6sjbKXPTc/zZSk5IO//tFO4q5pmAwMv6Oo1ctA9nBKVZBIJxX/wdmpnxshS45NZxBHNmiN
- dIZGSR1YtJqYRrXU3AvuqvarXs1Hf8HSWhOtEySzTB6gFnrJMxNFjV4GBf0u9mo2A2K3stZnm
- ghSoQCmUdDjQCRLUKwikV7xpOfmo5VyXVQ9D5tKWbZfZS5Tagj5LFhhTeYpmvHuP2c4zyw7Ai
- oRwics6VTj4dJcaC5dmaQxIt96U2P48v/8O50P9kcCTtC3DFIFN2Qz2ZrigbfDwtgcmm72tEg
- NyzFLDdx59bjzROP0f4eWzDAdYL0NQc2CVT7RZ5IBGkgjsvz/NG2hGmQ1y3bmFkW8bdKeElBP
- y9kuBkwmWqv9cgGTUC26pAaXc8KJ1RtKHLLAmWU4EKIkWFKF2QVNDwCFJAX7GPeijKYYHSY+J
- 69jeKFfzKAoghwy69qtWLoz3nEM=
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,47 +94,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/17/23 00:27, Simon Glass wrote:
-> This code is normally compiled for sifive, but sandbox can also compile
-> it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
-> possible to disable UNIT_TEST for sandbox.
->
-> Drop the condition since it isn't needed.
+The command rkmtd creates a virtual block device to transfer
+Rockchip boot block data to and from NAND with block orientated
+tools like "ums" and "rockusb".
 
-This is not what the patch does. It introduces another condition.
+It uses the Rockchip MTD driver to scan for boot blocks and copies
+data from the first block in a GPT formatted virtual disk.
+Data must be written in U-boot "idbloader.img" format and start at
+partition "loader1" offset 64. The data header is parsed
+for length and offset. When the last sector is received
+it erases up to 5 erase blocks on NAND and writes boot blocks
+in a pattern depending on the NAND ID. Data is then verified.
+When a block turns out bad the block header is discarded.
 
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Suggested-by: Sean Anderson <seanga2@gmail.com>
-> ---
->
-> Changes in v3:
-> - Just drop the condition instead
->
->   include/k210/pll.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/include/k210/pll.h b/include/k210/pll.h
-> index fd16a89cb203..6dd60b2eb4fc 100644
-> --- a/include/k210/pll.h
-> +++ b/include/k210/pll.h
-> @@ -13,7 +13,7 @@ struct k210_pll_config {
->   	u8 od;
->   };
->
-> -#ifdef CONFIG_UNIT_TEST
-> +#ifdef CONFIG_SANDBOX
+Changed V5:
+  Add bounce buffer flag
+  Use devres_alloc in bind
+  Restyle
 
-We should be able to compile with and without unit tests on the MAIX
-boards. Why should CONFIG_SANDBOX have any relevance here?
+Changed V4:
+  Sort includes
+  Replace constant by define
+  Enable rkmtd command in sandbox defconfig
+  Fix minor things in test
 
-Why don't we make k210_pll_calc_config() non-static in all cases?
+Changed V3:
+  Add documetation
+  Add test
+  Split driver from command
+  Split header
+  Use devm_kzalloc
+  Remove out of memory debug
+  Restyle
 
-Best regards
+Changed V2:
+  Rename to rkmtd
 
-Heinrich
+Johan Jonker (8):
+  mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN option
+  rockchip: dm: prepare rkmtd UCLASS
+  rockchip: block: add rkmtd class and drivers
+  rockchip: block: blk-uclass: add bounce buffer flag to blk_desc
+  rockchip: cmd: add rkmtd command
+  rockchip: test: dm: add rkmtd test
+  rockchip: doc: add rkmtd.rst
+  rockchip: configs: sandbox: enable rkmtd command
 
->   TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
->   				     struct k210_pll_config *best);
->   #ifndef nop
+ cmd/Kconfig                         |    8 +
+ cmd/Makefile                        |    1 +
+ cmd/rkmtd.c                         |  204 +++++
+ configs/sandbox64_defconfig         |    1 +
+ configs/sandbox_defconfig           |    1 +
+ disk/part.c                         |    4 +
+ doc/board/rockchip/index.rst        |    1 +
+ doc/board/rockchip/rkmtd.rst        |  105 +++
+ drivers/block/Kconfig               |    7 +
+ drivers/block/Makefile              |    2 +
+ drivers/block/blk-uclass.c          |    5 +-
+ drivers/block/rkmtd.c               | 1152 +++++++++++++++++++++++++++
+ drivers/mtd/nand/raw/Kconfig        |    9 +
+ drivers/mtd/nand/raw/rockchip_nfc.c |    3 +
+ drivers/scsi/scsi.c                 |    4 +
+ include/blk.h                       |    1 +
+ include/dm/uclass-id.h              |    1 +
+ include/rkmtd.h                     |  191 +++++
+ test/dm/Makefile                    |    1 +
+ test/dm/rkmtd.c                     |  200 +++++
+ 20 files changed, 1899 insertions(+), 2 deletions(-)
+ create mode 100644 cmd/rkmtd.c
+ create mode 100644 doc/board/rockchip/rkmtd.rst
+ create mode 100644 drivers/block/rkmtd.c
+ create mode 100644 include/rkmtd.h
+ create mode 100644 test/dm/rkmtd.c
+
+--
+2.39.2
 
