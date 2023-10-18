@@ -4,108 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B8ACDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:43:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80AEFCDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:43:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A070480F06;
-	Wed, 18 Oct 2023 09:43:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 86CC586F2F;
+	Wed, 18 Oct 2023 09:43:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XVBumOhU";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="ECRoEABO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 614A980F06; Wed, 18 Oct 2023 09:43:34 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 967A38669A; Wed, 18 Oct 2023 09:43:37 +0200 (CEST)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on0723.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0c::723])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B285805F5
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:43:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50628863F7
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:43:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-323ef9a8b59so5999500f8f.3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:43:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697615011; x=1698219811; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=i0vCf29nLDwhqFZbNKESsa8maKdStWsuI7dK+fyv8HM=;
- b=XVBumOhUnCkXsAqtM4IeMRAAFVW1Wp190L8UzDUo8dItWj6AtnxbC3HlgcilXkeJBN
- 1Gmmt4fasffILCjJidEb7+5HKNYRG5XlM6YwU8U6UdXJbYtzj+mUjw/crz+58QvsSInn
- iN5kC6y82vzVxLo0NbnG8tkasV9T6dwrkCknm7HY07T4GSpxum51Vy9Eem/zJ+K6T/D9
- izvigzT5Y5nuNuWKDVKY3GhODJSqV5Hw2CWm1UE4eeAwSRyUhOFvZ/B/oCrWAvVYPj81
- j+X6AFSnnlaTUe7n0tr3Kg3wThAOISo1BSeK+z8Zj4bvap3VYff91pBzm4VRWsk/T5YY
- OL/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697615011; x=1698219811;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=i0vCf29nLDwhqFZbNKESsa8maKdStWsuI7dK+fyv8HM=;
- b=WtiV+swClNQYtieeiWjzyLyoG+t3RRXDl0Olo7mw25fuAjY6z3cvChHAHoTOeth1sM
- omrYB/fw0k5mPPzaPCcKgcSFJsxjik3eM2ML3muH6JcMlFYjIhVJSSbL4+GrEBNVU0ym
- VrkwDjgffhd23plSpOiItf+vFxzq7ORsukU3xDXl3S89hjVRxRRRV+F0QBOjQy9/8r+L
- HN1TG+UDIY8GZWIkv02WMssC9Cl9L9UZpxSkC4+PTLR/SF1XUZw740/BeUOSiTL7QDP5
- mvXrkw29K4JzfUUc4lDwuLxGUG7apRF+aPCyojM4GcKi3apZ5NhNQB1nctwyXtzbCN8D
- fY1g==
-X-Gm-Message-State: AOJu0YzWS3ymcNLY2TQzDD01KV6R9GrNWIefzkqw1/ONXXAofYAyvAZp
- 1x/r99aB5cDFaKuy6+6ASNHq1g==
-X-Google-Smtp-Source: AGHT+IGUGZp1xd2h62gSe7PHhS+N9Sy5XgZABjdi0pGyFp31gW/ywAhxeyKHoHICJL0fbHnebjtQXQ==
-X-Received: by 2002:adf:e691:0:b0:31a:d9bc:47a2 with SMTP id
- r17-20020adfe691000000b0031ad9bc47a2mr3825023wrm.53.1697615011648; 
- Wed, 18 Oct 2023 00:43:31 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:5d8f:701:423:3d05?
- ([2a01:e0a:982:cbb0:5d8f:701:423:3d05])
- by smtp.gmail.com with ESMTPSA id
- f4-20020a056000128400b0031c5e9c2ed7sm1457010wrx.92.2023.10.18.00.43.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Oct 2023 00:43:31 -0700 (PDT)
-Message-ID: <ca225ffe-c524-4312-8a65-30e0c36c4ae7@linaro.org>
-Date: Wed, 18 Oct 2023 09:43:30 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KCeYjVeQ8JgiUgeIxeIj85hU1kLPozoe4cAVFNleHJIqtouhl/C1t8/jDFbhPDs48yznU7/dLpmRPukQxlMIgHTiryGVrCMdRmKrGqGcjxv7fuCqtk++8jfbw3vmpPGzv+rPEy339Ycct7u80m8Mhp3K27NhuBgriikgJxEMwdAptgaw2LU2OcNgHS8iMHKcTm9TJXnTs5ZeNe74ota0dUq//FPAv5tDwBfXAMoYHfOoshqao1Yyt/KKnBuuP3aTKgDUvbJGgKWsCD0uaYaXS9ooHDXetTY2RZI4M3uUw8QAvxUmFyybUPrphXdPKfA4CglMDAqTGjWbi0A4nNRmjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IabgCfEO3BZgoc1+89uDDvvu4rCjJ6H0dvd7AmGlVAY=;
+ b=UH+JUXD2nJ0X6XZ0QeYjjywoMwVeNZXI1ZwWusJhj+RyLC64d2pcXLb3VWOBYmFw9W0yNCALln5vFuohhorl96Jpy4v2E98h6sJQT+NzNlZ4LoTWEww1MPmlXFcrPprKE9Fg+9LfTX703FQFt7aAAWKUYB/RBl0L6MaOeLhC7uyFCPDB7JZZ3Zl5BOW/zXk54l0c/r4Fdhae2yOJsXDaqGfwUcPoExOIebtz7rd5pBX3rK9ZiGP1wySRwUG3llo5PA2YIhe2YEbASqqsC75u1CYhDy8Ph8bNe1HjhDcylMGfVksXFTjvmC0uRtM7gzsn9XPFG10kJtlZpFc+e1pR7g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IabgCfEO3BZgoc1+89uDDvvu4rCjJ6H0dvd7AmGlVAY=;
+ b=ECRoEABOfmn3+lgYAF6wzm+4lES8L4aJRAA+nfybTXg+EKPC24ClROJzkNr46oHpM6uxZ2Rf5KsBPpZh0KEUjws9AP+Ibc7sM/DWsw3m4l66hM7duCCLOhZ3d63yR0SE87aGZkVhp3R/ZYgJGSuJijhiYDeXF5jipPCE3RnNu9o=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by DBAPR10MB4106.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:1ca::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.23; Wed, 18 Oct
+ 2023 07:43:33 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.022; Wed, 18 Oct 2023
+ 07:43:33 +0000
+Message-ID: <83bff57b-6d1e-4e31-9286-f32c60d6b052@prevas.dk>
+Date: Wed, 18 Oct 2023 09:43:31 +0200
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v1 1/2] serial: amlogic: Add UART compatible for A1 board
-Content-Language: en-US, fr
-To: Igor Prusov <ivprusov@salutedevices.com>
-Cc: prusovigor@gmail.com, kernel@sberdevices.ru, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de
-References: <20231017213211.121550-1-ivprusov@salutedevices.com>
- <20231017213211.121550-2-ivprusov@salutedevices.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231017213211.121550-2-ivprusov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: commit 83c63f0d118 (led: Move OF "label" property parsing to core)
+Content-Language: en-US, da
+To: Marek Vasut <marex@denx.de>, u-boot <u-boot@lists.denx.de>
+Cc: Philippe Reynes <philippe.reynes@softathome.com>
+References: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
+ <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AM0PR02CA0036.eurprd02.prod.outlook.com
+ (2603:10a6:208:3e::49) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DBAPR10MB4106:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7f92415-11d7-4c9f-07e7-08dbcfadee10
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 2JQ1QS5JM4iNtFeOs0kwu+kyA4r6k79R2tS/OqxMiD/ofSopG9zMDtr3oqccYBg2cG70JVLiYIwK6ObJtT/A5nbxEb1aIgCNOWScATYu2rD5f2IM5om01grYVTGPRq1WFJyGMCfH32mKuzkpE1bYL4iPWSh5d+nczPkR30vMD8tPkjRojHs3ay16VC2emWeOi0EDAp/VcWiYLVd8Pqufu0XU13NVJ/I9540WNRhd4is3ki3rsGXs1+PysA2BdAAaiJc5Hfne8U3uBVmKhqDWP6OVXl3rrMfZirDyMTjuWVqxyp4aa2bHVqSpbCeOjsg5bsgeBuupq0F1nyGNlJI6juJ87bX+QJL9+sPBcuX1I05Eb6+nm1GMWg+1KUFln1aiFZIonUlL0J01EBA7kTJFp1P/M8Onl7iLehmstSrS+4hXHmnKhuw7PB0uvN6r326FyqqH1uYGZkgTFGAjwoxRcUnJwHRZZTRJwwGdCA2Cit8MNONmDw2GKM/ZPoWjbqDiuS0uosC10aPlef4KPWQfBaSYATooQ0wCHhdiu83835gQK/qIEKnVehemvMNh/S7rf9lOWN3y8CiOEELlfAmydVSxtstDSYPy+JkxC5kntCFU9QyATSPNVvQYtEaONJYtetU/YG/yhD50FisKU/BjmQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(136003)(346002)(376002)(396003)(39840400004)(230922051799003)(1800799009)(451199024)(186009)(64100799003)(66946007)(316002)(66476007)(110136005)(66556008)(6486002)(478600001)(31696002)(2906002)(86362001)(5660300002)(36756003)(8936002)(8976002)(4326008)(8676002)(41300700001)(44832011)(26005)(2616005)(38100700002)(31686004)(6512007)(53546011)(6506007)(43740500002)(45980500001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TzVabmRNNDU3Z2d4U21qcFNPNXRZWTJlZXhTbEJ3a1FvMkFGdGRkOS9iODY3?=
+ =?utf-8?B?UDYzTVk3eDdQOXlzKzdiQ0NNbG4xR0xRazBRT3g0VnlYQnI0VFFHRVhLN2hH?=
+ =?utf-8?B?RGJBMmN6b1VrbndVWVlCRW1qM0RyelB4elAzY2UzQmtyYmw2bk9FaGQ2WXRo?=
+ =?utf-8?B?VjRkZWxnZE9mZGFxUy91S1hvdWV1Z21VREd3NnRDQjZKSHkvNXVnU1FUQ0g5?=
+ =?utf-8?B?cVJaY0duVWhWTm1tNVVzRzJsaUpTcldTUllaOGZpRit0WU5sdGNuN0xUUm9o?=
+ =?utf-8?B?MjFSemtHR084MmVjcS82QmNGSC9ON2pKMG1jRjBOeUgvM2xXUGZBL2dXNGlv?=
+ =?utf-8?B?UzhLL0kydWQ4NFlvQ2RUUTNhbC85SEUySDRRYjhGTlhKdjU5OGJreS82bXgy?=
+ =?utf-8?B?Qi9WMjEycmRLQXB3T0tkVWxwSlFqRldLQWNVRVNUMFJCUzBYMlB5YTFvaW43?=
+ =?utf-8?B?V3dMU1pKMEwwVWRvNk90QXVadmdNaXNuM0FieFR2SFdLdjhqYmhheE1DWDBH?=
+ =?utf-8?B?VHliN0hsa2R0T0FMdkxYSDdXSEFpck9DeDJ4ZG9GZEh0MGVoODE0WE5kZzJV?=
+ =?utf-8?B?QnUxVUNXdnovc3hhcjdKa3lzQXdpY1hvUzE4eFNaQjJiR3NIVXZRd0hVNGxF?=
+ =?utf-8?B?VGxiY1lxbUJsUTh1SGplWkNFa1RwNEZndWNWRXplZlJuL1Q0akp6aUo0Tjl6?=
+ =?utf-8?B?RTBvWmNRRzlxVWxVZHgxNlNyUE9ZUGtJdzM2MWdRK1dhU0crcStjQ0p6ekNw?=
+ =?utf-8?B?MXJwTFpmVHFFQS9JRnNWZHpXZlZleVZPZVZDL2ZsVjhkR0JFOU5NS0d3MWUy?=
+ =?utf-8?B?VkFjc3E2Z2RhRjkwUjRJTTFpRE9tbExMTENpL3JuLzk2WFg1NENpRjNhSmxu?=
+ =?utf-8?B?TWtSVGdCeUJQeUJiZHRTd3VUVGpmaU8wUEpaQ1Z6a3BDcFpEZGxIcFhOMzZJ?=
+ =?utf-8?B?dXVVcnI1WmtoVWZKYWQrSWd0N1VmU2FYVEl1K2FCbVdtT2VKYjl2NDUwSXJr?=
+ =?utf-8?B?NndwVFpudEF6ZERQMTVLcFFVYUpFZGlwUDRtZXBZRDdWUTM5UHJLSFk1aXdn?=
+ =?utf-8?B?MFJnZWhjOVFKY3dmOU94dE5RU25ueUdXRGcwamJsTVY5dnBxL0R1SVZEYSs0?=
+ =?utf-8?B?NE5hVFN3NFFsVE45cDFrVUNqYnlsZUxnM0NhdFA2bjZLbFNiRkZaQUdydTBu?=
+ =?utf-8?B?QUNHd2tZOWt5QVR4MUdPbGh2TWFwVGp4Ly9mM0dEeXhRa01Fem14MXZLOGt2?=
+ =?utf-8?B?dWozMkpKd2VONFVDNHZWRUhaMjIySVJaOXVPWXl5VGI5OURwU3FpZ1o1eGhr?=
+ =?utf-8?B?czhFakxBSmFvMGd0ZnpHK3RrbDEwZ0taWUVNWGRCY2pBNFFGTEg3OFBraHRZ?=
+ =?utf-8?B?YkNjdzdkN1V6VVU1TjlnZEIzRkVGM3FHdEtSRjhvWVRxaDd1YnQ3U25KSU5h?=
+ =?utf-8?B?TWZJY0ZLNE4rSlVmbzI2OHVuSFh5aEdGdXFMUUxSZGkxWDZuQU44VzBjaEk4?=
+ =?utf-8?B?UXMwdjk2bHJidW40VXlQMG9RbThDUzhGdC9lTlpBV1ZZYitIZnZlc3BUVWV0?=
+ =?utf-8?B?dm1NTVZsVVk3U25DOVkvR3Q0N0dscWJyYkQ0Snc0dVBHWXNYMkRFNE04MVla?=
+ =?utf-8?B?MjFIa21ST0U4TE5PZm1OQS9QSnY1d3hmd0dUV0luZ3FqNUxGMlJHc3lIRUxy?=
+ =?utf-8?B?dW1LakhISDJVUThBSnpLVndkOGhrRXBtMVNQb0l1UDk2d3hNdWpQWTVIUlpo?=
+ =?utf-8?B?bWVOeXlsOEl5NmNYaWJDblJ5UVI5Nm41SVVjb3ZrWWhsZDJVd1dvVGVtalV6?=
+ =?utf-8?B?a3Uvb1FVNTNVTUNYQ0dFU1hHbXpXbXlyU08wT3JNQlFXeTdIUytLam1CWThu?=
+ =?utf-8?B?UmRQUjFiYU5KYWx5UldvVHU3V0JudzlaTnhmWDhKeXljcXhwcytJRUM4STF0?=
+ =?utf-8?B?bnBoM1dHVlhQdHZ4SGxFMUZmOGxIV0tPMXdOenZIYmFLaUFqV2p4dlBPb3pB?=
+ =?utf-8?B?bit0VkNNQnFzTVNQVHNnQVBWa1hmbC9BbGRQcEVEQTRHTGFoTWZGdk9ma3hP?=
+ =?utf-8?B?d0Ixa1FFaDdhNWI2cGNGYW5aclVYZWUvZTU0RUJsZllMd1ladzlQY3pBQm80?=
+ =?utf-8?B?SjAxcDVnQzZ3UTdhU0FWZXJRaE5jWlM0WjBTRGVDdkhadzRxVVM2VWx3WFZr?=
+ =?utf-8?B?Snc9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7f92415-11d7-4c9f-07e7-08dbcfadee10
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2023 07:43:33.4299 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lkoU8DS1RwT4FdLqCQPcGBddCTwKydwTWtQRQ6qcl78s13s5rfDbuXDFfiFr0FLrZyAqh/DSbyDuTEGPEGum24klfau5HvVK1FjAq/6V5+Q=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR10MB4106
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,35 +139,63 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17/10/2023 23:32, Igor Prusov wrote:
-> Add additional compatible to allow using serial driver with A1 board.
-> After compatible change in DTS [1], serial_meson driver should still be
-> able to work with console device.
-> 
-> [1] https://lore.kernel.org/all/20230705181833.16137-8-ddrokosov@sberdevices.ru/
-> 
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
-> ---
->   drivers/serial/serial_meson.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
-> index 934de2ab23..be5f380f85 100644
-> --- a/drivers/serial/serial_meson.c
-> +++ b/drivers/serial/serial_meson.c
-> @@ -232,6 +232,7 @@ static const struct dm_serial_ops meson_serial_ops = {
->   static const struct udevice_id meson_serial_ids[] = {
->   	{ .compatible = "amlogic,meson-uart" },
->   	{ .compatible = "amlogic,meson-gx-uart" },
-> +	{ .compatible = "amlogic,meson-a1-uart" },
->   	{ }
->   };
->   
+On 17/10/2023 17.33, Marek Vasut wrote:
+> On 10/17/23 15:29, Rasmus Villemoes wrote:
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> static int led_gpio_bind(struct udevice *parent)
+>> {
+...
+>>         ret = device_bind_driver_to_node(parent, "gpio_led",
+>>                          ofnode_get_name(node),
+>>                          node, &dev);
+>>
+>> static int bcm6753_led_bind(struct udevice *parent)
+>> {
+>>
+...
+>>         ret = device_bind_driver_to_node(parent, "bcm6753-led",
+>>                          ofnode_get_name(node),
+>>                          node, &dev);
+>>
+>> and that string can, if I'm not mistaken, be gotten from
+>> parent->driver->name.
+> 
+> Which string ? The "bcm6753-led" is driver name , so that would have to
+> be parametrized.
+
+Exactly. The only difference between the two examples (apart from the
+scope of the variables) is the driver name, but I think a
+generic_led_bind() could just do this inside the loop:
+
+  device_bind_driver_to_node(parent, parent->driver->name,
+                          ofnode_get_name(node),
+                          node, &dev);
+
+and with that we could have most, if not all, existing .bind methods
+assigned directly to generic_led_bind(), we don't even need one-line
+wrapper functions in each driver passing that string explicitly.
+> Make sure you test the 'led' command. The LEDs might be bound, but not
+> probed (so label parsing in LED probe would be too late), and if I
+> recall it right, the label parsing has to be in post-bind for the labels
+> to correctly show in the 'led' command listing.
+
+It's the led command I'm testing with (with my "new" driver for the
+lp5562), and where I see the problems. Currently, the top node also gets
+listed in "led list" as led-controller@30 (it's an i2c device), but
+probe of that device fails because the logic in the .probe method thinks
+this is a subnode (the pattern is the same as in e.g. cortina_led_probe).
+
+Since I'm simply copying the pattern from existing drivers, I'm pretty
+sure those other drivers are also currently broken (see also the fixups
+I mentioned).
+
+> I am all for generic_led_bind() .
+
+I'll try to write some real patches.
+
+Rasmus
