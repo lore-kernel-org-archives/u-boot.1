@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460C1CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37793CDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:02:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D38F86FD1;
-	Wed, 18 Oct 2023 16:01:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
+	by phobos.denx.de (Postfix) with ESMTP id BD4EC86FA6;
+	Wed, 18 Oct 2023 16:02:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="P4rjEmat";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IBh4jP2h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29DED86FA6; Wed, 18 Oct 2023 16:01:46 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id A0C3C86F94; Wed, 18 Oct 2023 16:02:04 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED75586FC9
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=conclusive.pl
+ by phobos.denx.de (Postfix) with ESMTPS id 2A00F86FAE
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:02:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=artur@conclusive.pl
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2c50305c5c4so84642261fa.1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:42 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9bdf5829000so793844466b.0
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:02:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=conclusive.pl; s=google; t=1697637702; x=1698242502; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kcD1m14bcy/WilfK3uZf60eGMmnH1MFJ0znnViQB9uc=;
- b=P4rjEmatF+u8TA2i40nE7uIsQWalRigfbTk6evxag3r6AaNPZ+/ON4lW6hGeOGHKkG
- QomDR1l05jE+ZSYA6qBkZSwWaG5eJMxQpCodmKDBtraYs79RKg+iov3yiaic4HKoB/BO
- bTre60cdCQMKWsIGygPK4PI7brkXt4UY6tWutTUJNgXGEsZTu+LC4jvPzx1MCQSNb85+
- O5al4hUvHQtMkQ26S4KmEvFuGZm9TjNwM4BGWvkd4CxyOb1j2ilapG3mrJCUzgEu2dGY
- 1kaF/IsvRMoX2SFln08qqJiEzYW+jO0mGHOsFVLgG9cLIDuQqczsZhKB+GjGzrfDpcRj
- ygGw==
+ d=gmail.com; s=20230601; t=1697637721; x=1698242521; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=b3IJLujxp0SLHAD4nPHU3zw38oe62kuRWeVLfnXnN+w=;
+ b=IBh4jP2hUkaQAR+619an2S4zBdY9OFqNDG7mVyoPUnZMMtW6+yq5CZLs+larp+2ZO7
+ onZ1fPBeYAV741DmVbsb7Wz4IwkCMn/MguU7rKJ850KpyVE0a8HrGQpYYpQR5exYOTuR
+ +ZxtjiUCpXMUh6VlqFzdc7MLi6IM9waJbqE+k8SG6q5bOz1zOBAM7WofZ2jlNGXV9lTc
+ H2PzC+I/D3tcR9CL41shfbcs4uJmBVGARMBRZ4sOBUNM8658X0IwRm8U88hg+o2Fn6Jy
+ JP38HFtyvc06QraCVqM4Gtnn7C7t3u9xzZsuaN3sM8+FbXop/cxHyImxj0ptiqEoJe7f
+ Sozw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697637702; x=1698242502;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kcD1m14bcy/WilfK3uZf60eGMmnH1MFJ0znnViQB9uc=;
- b=j0nRS9wzwBVTH+Gf2Lk5mIux2RjKBARUnu52+2FTQhnGezjAEVH6rviiMfWw29MaaS
- oqoEtOiPvjlhutgxgquAX0yikuaH8d6SQlabaTnV84XznrQLBgfvuyFDHxED2atZhhOt
- 83eJaGPDxFlOF0NTP8yw1fbqvXZuldFtqQq85NYkZ0eMfzqERvrxdsJT3HtwvqiSnR5z
- SZ/D9PwOuXVi3f/7sRAfMPFm/aWOUJeSdepdhn33R9uDPi2lbRAPiIBVZ3htk3feQKBk
- KpDQ2Js6IhhtYvnJ4w/UVEK4it/Qif4AynC1/mb1FUd2m6eRIoY02SzGFQdVr9v7l6Gm
- Dnfw==
-X-Gm-Message-State: AOJu0YyzjVjDeMvEW8a4YO1adCKRFHHvFlMyydWgUQ3SDLFuMuRr8BJD
- m07CufXbEfpcO3joD/GS/vgCHw==
-X-Google-Smtp-Source: AGHT+IHMiEyRQGT7gO0ItPuRpwcbLtenpkECuuwPEGqZPLiUTIvnxT/vwTnh5MwJd70jChka39HrQg==
-X-Received: by 2002:a2e:9f44:0:b0:2c5:15dc:ba99 with SMTP id
- v4-20020a2e9f44000000b002c515dcba99mr4195165ljk.51.1697637702007; 
- Wed, 18 Oct 2023 07:01:42 -0700 (PDT)
-Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
- [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
- f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 07:01:41 -0700 (PDT)
-From: Artur Rojek <artur@conclusive.pl>
-To: Eugen Hristev <eugen.hristev@collabora.com>,
- Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>,
- Marcin Jabrzyk <marcin@conclusive.pl>
-Cc: Wojciech Kloska <wojciech@conclusive.pl>,
- =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
- u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
-Subject: [PATCH v5 4/4] board: Add support for Conclusive KSTR-SAMA5D27
-Date: Wed, 18 Oct 2023 16:00:59 +0200
-Message-ID: <20231018140059.161169-5-artur@conclusive.pl>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231018140059.161169-1-artur@conclusive.pl>
-References: <20231018140059.161169-1-artur@conclusive.pl>
+ d=1e100.net; s=20230601; t=1697637721; x=1698242521;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=b3IJLujxp0SLHAD4nPHU3zw38oe62kuRWeVLfnXnN+w=;
+ b=lN/2Pf2bI6pL05+8FY1/gXk7HJ+7QOWK6HKBguqLL3z3wiysheeR+DwKkbJh+i1HJJ
+ PMe8t14gfr7KvvIxDdf8ImGM0TKsu8A8Hy0QgF2XST4TbSRWCOmf0PghaZsB/Irs3SF9
+ iyPio1+VCl+u7G1vM6MIBMSWVzWCt/DuFO3QFzf7pRCzzE+Zk2snnVzp6SHPN4AHq2iN
+ Odk/SIRwMEnYzkN6zgWut5v2b2/GYTSSS5WEofMClU+87b9wuNKBdMuJLlapPF5Qauwp
+ 79rhOS4b6qBA9IgbALYz/N6io3IeaVIxieWiL8/RmOx+wjKsFLFGmCVQ9iv254NrJNka
+ kqFA==
+X-Gm-Message-State: AOJu0YxL19ZUWMnzfTxvI6UL2GVOSoNvdQsHHhqEKv81nqnHswtdzzAs
+ NNyqmsAelhxedtRkdlM0CurQHGN00Ug=
+X-Google-Smtp-Source: AGHT+IHDDCJ+r1c7VQlW6LCuOyZCXbWOM6IsgkWRcsNIFCJYNICO8irrSA/QnngTgY9D+hWeUr9+JQ==
+X-Received: by 2002:a17:907:985:b0:9bd:d961:ddea with SMTP id
+ bf5-20020a170907098500b009bdd961ddeamr3938681ejc.45.1697637720613; 
+ Wed, 18 Oct 2023 07:02:00 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ y26-20020a170906519a00b00993a37aebc5sm1718596ejk.50.2023.10.18.07.01.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Oct 2023 07:02:00 -0700 (PDT)
+Message-ID: <54e66a55-df5c-015f-2ecc-0abfb57e5bca@gmail.com>
+Date: Wed, 18 Oct 2023 16:01:59 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v5 6/8] rockchip: test: dm: add rkmtd test
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ marex@denx.de, u-boot@lists.denx.de
+References: <7fd0d9d1-2e93-a48b-edfd-6d4fec314a60@gmail.com>
+Content-Language: en-US
+In-Reply-To: <7fd0d9d1-2e93-a48b-edfd-6d4fec314a60@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,673 +96,250 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce support for Conclusive KSTR-SAMA5D27 Single Board Computer.
+Add Rockchip rkmtd test:
+Create/attach/detach RKMTD device.
+Send/read data with Rockchip boot block header.
+Test that reusing the same label should work.
+Basic test of 'rkmtd' commands.
 
-Co-developed-by: Jakub Klama <jakub@conclusive.pl>
-Signed-off-by: Jakub Klama <jakub@conclusive.pl>
-Co-developed-by: Marcin Jabrzyk <marcin@conclusive.pl>
-Signed-off-by: Marcin Jabrzyk <marcin@conclusive.pl>
-Signed-off-by: Artur Rojek <artur@conclusive.pl>
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-v5: - move U-Boot specific props to at91-kstr-sama5d27-u-boot.dtsi file
-    - include the above file in MAINTAINERS
-    - assign an alias to i2c6 
+Changed V4:
+  sort includes
+  rename define
+  use '\0'
+  use UT_TESTF_CONSOLE_REC flag
+  check RC4 result
 
-v4: - utilize EVT_SETTINGS_R in order to read MAC and serial number from
-      EEPROM
+Changed V3:
+  New patch
+---
+ test/dm/Makefile |   1 +
+ test/dm/rkmtd.c  | 200 +++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 201 insertions(+)
+ create mode 100644 test/dm/rkmtd.c
 
-v3: - use CONFIG_ID_EEPROM to read serial number 
-    - as side-effect of using CONFIG_ID_EEPROM, KSTR-SAMA5D27 now also
-      correctly uses EEPROM embedded MAC addresses (overlooked in v1-v2)
-    - use CONFIG_DISPLAY_BOARDINFO_LATE for printing the board model and
-      serial number, and provide the required checkboard() call 
-    - drop CONFIG_BOARD_LATE_INIT, as not needed anymore
-    - defconfig cleanup
-
-v2: - remove redundant license text from at91-kstr-sama5d27.dts
-    - when defining properties in .dts, reference nodes by labels
-    - drop nodes for usb0 and pmic, as these aren't used by drivers 
-    - switch i2c to flexcom driver and make the necessary dts changes
-    - sort includes in at91-kstr-sama5d27.dts alphabetically
-
- arch/arm/dts/Makefile                         |   3 +
- arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi   |  42 +++
- arch/arm/dts/at91-kstr-sama5d27.dts           | 127 ++++++++++
- arch/arm/mach-at91/Kconfig                    |  12 +
- board/conclusive/kstr-sama5d27/Kconfig        |  15 ++
- board/conclusive/kstr-sama5d27/MAINTAINERS    |   9 +
- board/conclusive/kstr-sama5d27/Makefile       |   5 +
- .../conclusive/kstr-sama5d27/kstr-sama5d27.c  | 239 ++++++++++++++++++
- configs/kstr_sama5d27_defconfig               |  73 ++++++
- include/configs/kstr-sama5d27.h               |  15 ++
- 10 files changed, 540 insertions(+)
- create mode 100644 arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
- create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
- create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
- create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
- create mode 100644 board/conclusive/kstr-sama5d27/Makefile
- create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
- create mode 100644 configs/kstr_sama5d27_defconfig
- create mode 100644 include/configs/kstr-sama5d27.h
-
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 4569483d5fdf..f6f0d84ff77b 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1232,6 +1232,9 @@ dtb-$(CONFIG_TARGET_SAMA5D27_SOM1_EK) += \
- dtb-$(CONFIG_TARGET_SAMA5D27_WLSOM1_EK) += \
- 	at91-sama5d27_wlsom1_ek.dtb
- 
-+dtb-$(CONFIG_TARGET_KSTR_SAMA5D27) += \
-+	at91-kstr-sama5d27.dtb
-+
- dtb-$(CONFIG_TARGET_SAMA5D2_ICP) += \
- 	at91-sama5d2_icp.dtb
- 
-diff --git a/arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi b/arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
+diff --git a/test/dm/Makefile b/test/dm/Makefile
+index 7ed00733c1a6..a5e0a2744375 100644
+--- a/test/dm/Makefile
++++ b/test/dm/Makefile
+@@ -100,6 +100,7 @@ obj-$(CONFIG_REMOTEPROC) += remoteproc.o
+ obj-$(CONFIG_DM_RESET) += reset.o
+ obj-$(CONFIG_SYSRESET) += sysreset.o
+ obj-$(CONFIG_DM_REGULATOR) += regulator.o
++obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
+ obj-$(CONFIG_DM_RNG) += rng.o
+ obj-$(CONFIG_DM_RTC) += rtc.o
+ obj-$(CONFIG_SCMI_FIRMWARE) += scmi.o
+diff --git a/test/dm/rkmtd.c b/test/dm/rkmtd.c
 new file mode 100644
-index 000000000000..cec35ab621f7
+index 000000000000..3c3e8efa92f2
 --- /dev/null
-+++ b/arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
-@@ -0,0 +1,42 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR X11
++++ b/test/dm/rkmtd.c
+@@ -0,0 +1,200 @@
++// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
 +/*
-+ * at91-kstr-sama5d27-u-boot.dtsi - Device Tree Include file w/ U-Boot specific
-+ * properties for Conclusive KSTR-SAMA5D27 board
++ * Test derived from:
++ * /test/dm/host.c
++ * Copyright 2022 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
 + *
-+ *  Copyright (C) 2023 Conclusive Engineering Sp. z o. o.
-+ *
-+ */
-+
-+/ {
-+	chosen {
-+		bootph-all;
-+	};
-+};
-+
-+&sdmmc0 {
-+	bootph-all;
-+};
-+
-+&uart1 {
-+	bootph-all;
-+};
-+
-+&pinctrl_uart1_default {
-+	bootph-all;
-+};
-+
-+&pinctrl_macb0_phy_irq {
-+	bootph-all;
-+};
-+
-+&pinctrl_macb0_rmii {
-+	bootph-all;
-+};
-+
-+&pinctrl_sdmmc0_cmd_dat_default {
-+	bootph-all;
-+};
-+
-+&pinctrl_sdmmc0_ck_cd_default {
-+	bootph-all;
-+};
-diff --git a/arch/arm/dts/at91-kstr-sama5d27.dts b/arch/arm/dts/at91-kstr-sama5d27.dts
-new file mode 100644
-index 000000000000..c226a214a551
---- /dev/null
-+++ b/arch/arm/dts/at91-kstr-sama5d27.dts
-@@ -0,0 +1,127 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR X11
-+/*
-+ * at91-kstr-sama5d27.dts - Device Tree file for Conclusive KSTR-SAMA5D27 board
-+ *
-+ *  Copyright (C) 2019-2023 Conclusive Engineering Sp. z o. o.
-+ *
-+ */
-+/dts-v1/;
-+
-+#include "sama5d2.dtsi"
-+#include "sama5d2-pinfunc.h"
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/mfd/atmel-flexcom.h>
-+
-+/ {
-+	model = "Conclusive KSTR-SAMA5D27";
-+	compatible = "conclusive,kstr-sama5d27", "atmel,sama5d2", "atmel,sama5";
-+
-+	chosen {
-+		stdout-path = &uart1;
-+	};
-+
-+	aliases {
-+		i2c2 = &i2c6;
-+	};
-+};
-+
-+&main_xtal {
-+	clock-frequency = <12000000>;
-+};
-+
-+&sdmmc0 {
-+	bus-width = <4>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_sdmmc0_cmd_dat_default &pinctrl_sdmmc0_ck_cd_default>;
-+	status = "okay";
-+};
-+
-+&uart1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_uart1_default>;
-+	status = "okay";
-+};
-+
-+&macb0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_macb0_rmii &pinctrl_macb0_phy_irq>;
-+	phy-mode = "rmii";
-+	status = "okay";
-+
-+	ethernet-phy@0 {
-+		reg = <0x0>;
-+		reset-gpios = <&pioA 44 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&flx4 {
-+	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-+	status = "okay";
-+};
-+
-+&i2c6 {
-+	clock-frequency = <100000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_flx4_i2c>;
-+	status = "okay";
-+
-+	eeprom: eeprom@50 {
-+		compatible = "microchip,24c32", "atmel,24c32";
-+		reg = <0x50>;
-+		read-only;
-+		pagesize = <32>;
-+		status = "okay";
-+	};
-+};
-+
-+&pioA {
-+	pinctrl {
-+		pinctrl_uart1_default: uart1_default {
-+			pinmux = <PIN_PD2__URXD1>,
-+				 <PIN_PD3__UTXD1>;
-+			bias-disable;
-+		};
-+
-+		pinctrl_macb0_phy_irq: macb0_phy_irq {
-+			pinmux = <PIN_PB13__GPIO>;
-+			bias-disable;
-+		};
-+
-+		pinctrl_macb0_rmii: macb0_rmii {
-+			pinmux = <PIN_PB14__GTXCK>,
-+				 <PIN_PB15__GTXEN>,
-+				 <PIN_PB16__GRXDV>,
-+				 <PIN_PB17__GRXER>,
-+				 <PIN_PB18__GRX0>,
-+				 <PIN_PB19__GRX1>,
-+				 <PIN_PB20__GTX0>,
-+				 <PIN_PB21__GTX1>,
-+				 <PIN_PB22__GMDC>,
-+				 <PIN_PB23__GMDIO>;
-+			bias-disable;
-+		};
-+
-+		pinctrl_sdmmc0_cmd_dat_default: sdmmc0_cmd_dat_default {
-+			pinmux = <PIN_PA1__SDMMC0_CMD>,
-+				 <PIN_PA2__SDMMC0_DAT0>,
-+				 <PIN_PA3__SDMMC0_DAT1>,
-+				 <PIN_PA4__SDMMC0_DAT2>,
-+				 <PIN_PA5__SDMMC0_DAT3>;
-+			bias-pull-up;
-+		};
-+
-+		pinctrl_sdmmc0_ck_cd_default: sdmmc0_ck_cd_default {
-+			pinmux = <PIN_PA0__SDMMC0_CK>,
-+				 <PIN_PA11__SDMMC0_VDDSEL>,
-+				 <PIN_PA13__SDMMC0_CD>;
-+			bias-disable;
-+		};
-+
-+		pinctrl_flx4_i2c: flx4_i2c {
-+			pinmux = <PIN_PC28__FLEXCOM4_IO0>,
-+				 <PIN_PC29__FLEXCOM4_IO1>;
-+			bias-disable;
-+		};
-+	};
-+};
-diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
-index 4c65fc0dbd25..37ef2d691d65 100644
---- a/arch/arm/mach-at91/Kconfig
-+++ b/arch/arm/mach-at91/Kconfig
-@@ -204,6 +204,17 @@ config TARGET_SAMA5D27_WLSOM1_EK
- 	  processor-based SAMA5D2 MPU with 2 Gbit LPDDR2-SDRAM
- 	  in a single package.
- 
-+config TARGET_KSTR_SAMA5D27
-+	bool "Conclusive KSTR-SAMA5D27 board"
-+	select BOARD_EARLY_INIT_F
-+	select SAMA5D2
-+	help
-+	  The KSTR-SAMA5D27 embeds SAMA5D27 SoC, together with
-+	  256 MiB SDRAM, 10/100 Mbit/s Ethernet, 96 Mbit/s Wi-Fi b/g/n,
-+	  Bluetooth 4.1 LE, USB OTG controller w/ type-C USB connector
-+	  and stackable GPIO headers in an all-in-one SBC form factor:
-+	  https://conclusive.pl/products/kstr-sama5d27-sbc/
-+
- config TARGET_SAMA5D2_ICP
- 	bool "SAMA5D2 Industrial Connectivity Platform (ICP)"
- 	select SAMA5D2
-@@ -364,6 +375,7 @@ source "board/atmel/sama5d4_xplained/Kconfig"
- source "board/atmel/sama5d4ek/Kconfig"
- source "board/bluewater/gurnard/Kconfig"
- source "board/calao/usb_a9263/Kconfig"
-+source "board/conclusive/kstr-sama5d27/Kconfig"
- source "board/egnite/ethernut5/Kconfig"
- source "board/esd/meesc/Kconfig"
- source "board/gardena/smart-gateway-at91sam/Kconfig"
-diff --git a/board/conclusive/kstr-sama5d27/Kconfig b/board/conclusive/kstr-sama5d27/Kconfig
-new file mode 100644
-index 000000000000..572551cfda98
---- /dev/null
-+++ b/board/conclusive/kstr-sama5d27/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_KSTR_SAMA5D27
-+
-+config SYS_BOARD
-+	default "kstr-sama5d27"
-+
-+config SYS_VENDOR
-+	default "conclusive"
-+
-+config SYS_SOC
-+	default "at91"
-+
-+config SYS_CONFIG_NAME
-+	default "kstr-sama5d27"
-+
-+endif
-diff --git a/board/conclusive/kstr-sama5d27/MAINTAINERS b/board/conclusive/kstr-sama5d27/MAINTAINERS
-new file mode 100644
-index 000000000000..b7882284880a
---- /dev/null
-+++ b/board/conclusive/kstr-sama5d27/MAINTAINERS
-@@ -0,0 +1,9 @@
-+CONCLUSIVE KSTR-SAMA5D27 BOARD
-+M:	Jakub Klama <jakub@conclusive.pl>
-+M:	Artur Rojek <artur@conclusive.pl>
-+S:	Maintained
-+F:	board/conclusive/kstr-sama5d27
-+F:	include/configs/kstr-sama5d27.h
-+F:	configs/kstr_sama5d27_defconfig
-+F:	arch/arm/dts/at91-kstr-sama5d27.dts
-+F:	arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
-diff --git a/board/conclusive/kstr-sama5d27/Makefile b/board/conclusive/kstr-sama5d27/Makefile
-new file mode 100644
-index 000000000000..edf7d1c93441
---- /dev/null
-+++ b/board/conclusive/kstr-sama5d27/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2019-2023 Conclusive Engineering Sp. z o. o.
-+
-+obj-y += kstr-sama5d27.o
-diff --git a/board/conclusive/kstr-sama5d27/kstr-sama5d27.c b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
-new file mode 100644
-index 000000000000..1b765b113743
---- /dev/null
-+++ b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
-@@ -0,0 +1,239 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * kstr-sama5d27.c - Board init file for Conclusive KSTR-SAMA5D27 board
-+ * Copyright (C) 2021-2023 Conclusive Engineering Sp. z o. o.
++ * Copyright (C) 2023 Johan Jonker <jbx6244@gmail.com>
 + */
 +
 +#include <common.h>
-+#include <debug_uart.h>
-+#include <init.h>
-+#include <env.h>
-+#include <fdt_support.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <asm/arch/at91_common.h>
-+#include <asm/arch/atmel_pio4.h>
-+#include <asm/arch/atmel_mpddrc.h>
-+#include <asm/arch/atmel_sdhci.h>
-+#include <asm/arch/clk.h>
-+#include <asm/arch/gpio.h>
-+#include <asm/arch/sama5d2.h>
-+#include <linux/delay.h>
++#include <blk.h>
++#include <dm.h>
++#include <fs.h>
++#include <rkmtd.h>
++#include <asm/test.h>
++#include <dm/device-internal.h>
++#include <dm/test.h>
++#include <test/test.h>
++#include <test/ut.h>
 +
-+#ifdef CONFIG_USB_GADGET_ATMEL_USBA
-+#include <asm/arch/atmel_usba_udc.h>
-+#endif
++#define RW_BUF_SIZE	12 * 512
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-+static void board_uart1_hw_init(void)
++/* Basic test of the RKMTD interface */
++static int dm_test_rkmtd(struct unit_test_state *uts)
 +{
-+	/* URXD1 */
-+	atmel_pio4_set_a_periph(AT91_PIO_PORTD, 2, ATMEL_PIO_PUEN_MASK);
-+	/* UTXD1 */
-+	atmel_pio4_set_a_periph(AT91_PIO_PORTD, 3, 0);
-+	at91_periph_clk_enable(ATMEL_ID_UART1);
-+}
++	struct udevice *dev, *part, *chk, *blk;
++	char write[RW_BUF_SIZE], read[RW_BUF_SIZE];
++	static const char label[] = "test";
++	struct rkmtd_dev *plat;
++	struct blk_desc *desc;
++	struct sector0 *sec0;
++	int i;
 +
-+void board_debug_uart_init(void)
-+{
-+	board_uart1_hw_init();
-+}
-+#endif
++	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_RKMTD, &dev));
++	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_PARTITION, &part));
 +
-+void board_lan8720a_init(void)
-+{
-+	/* LAN8720A_nRST */
-+	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 12, 0);
-+	/*
-+	 * Force 0 on RXER/PHYAD0. LAN8720A chipset will latch with address 0 on
-+	 * MDIO bus.
-+	 */
-+	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 17, 0);
-+	/* Minimal delay of reset signal is 25 ms */
-+	mdelay(30);
-+	/* LAN8720A_nRST */
-+	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 12, 1);
-+}
++	ut_assertok(rkmtd_create_device(label, &dev));
 +
-+void board_usba_init(void)
-+{
-+#ifdef CONFIG_USB_GADGET_ATMEL_USBA
-+	/* USB device peripheral initialization: sama5d2_devices.c */
-+	at91_udp_hw_init();
-+	/* USB device controller drivers/usb/gadget/atmel_usba_udc.c */
-+	usba_udc_probe(&pdata);
-+#endif
-+}
++	/* Check that the plat data has been allocated */
++	plat = dev_get_plat(dev);
++	ut_asserteq_str("test", plat->label);
++	ut_assert(label != plat->label);
 +
-+#ifdef CONFIG_BOARD_EARLY_INIT_F
-+int board_early_init_f(void)
-+{
-+#ifdef CONFIG_DEBUG_UART
-+	debug_uart_init();
-+#endif
++	/* Attach RKMTD driver */
++	ut_assertok(rkmtd_attach(dev));
++	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &chk));
++	ut_asserteq_ptr(chk, dev);
++
++	/* Get RKMTD block device */
++	ut_assertok(blk_get_from_parent(dev, &blk));
++	ut_assertok(device_probe(blk));
++
++	/* There should be a GPT partition table in this device */
++	ut_asserteq(0, uclass_first_device_err(UCLASS_PARTITION, &part));
++
++	/* Write a boot block and verify that we get the same data back */
++	desc = dev_get_uclass_plat(blk);
++	ut_asserteq(true, desc->removable);
++	ut_asserteq(LBA, desc->lba);
++
++	memset(write, '\0', BLK_SIZE);
++
++	for (i = BLK_SIZE; i < sizeof(write); i++)
++		write[i] = i;
++
++	sec0 = (struct sector0 *)write;
++	sec0->magic = 0x0FF0AA55;
++	sec0->rc4_flag = 0;
++	sec0->boot_code1_offset = 4;
++	sec0->boot_code2_offset = 4;
++	sec0->flash_data_size = 4;
++	sec0->flash_boot_size = 8;
++
++	rkmtd_rc4(write, 512);
++	ut_asserteq(RK_TAG, sec0->magic);
++
++	ut_asserteq(12, blk_dwrite(desc, 64, 12, write));
++	ut_asserteq(12, blk_dread(desc, 64, 12, read));
++	ut_asserteq_mem(write, read, RW_BUF_SIZE);
++
++	ut_assertok(rkmtd_detach(dev));
++
++	ut_asserteq(-ENODEV, blk_get_from_parent(dev, &blk));
++	ut_assertok(device_unbind(dev));
 +
 +	return 0;
 +}
-+#endif
++DM_TEST(dm_test_rkmtd, UT_TESTF_SCAN_FDT);
 +
-+int ft_board_setup(void *blob, struct bd_info *bd)
++/* Reusing the same label should work */
++static int dm_test_rkmtd_dup(struct unit_test_state *uts)
 +{
-+	char *wlanaddr = env_get("eth1addr");
++	static const char label[] = "test";
++	struct udevice *dev, *chk;
 +
-+	if (wlanaddr)
-+		do_fixup_by_compat(blob, "brcm,bcm4329-fmac", "local-mac-address",
-+				   wlanaddr, strlen(wlanaddr), 1);
-+	else
-+		printf("Not setting WIFI mac address. Check if EEPROM TLV is correctly set up.\n");
++	/* Create a RKMTD device with label "test" */
++	ut_asserteq(0, uclass_id_count(UCLASS_RKMTD));
++	ut_assertok(rkmtd_create_device(label, &dev));
++	ut_assertok(rkmtd_attach(dev));
++	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &chk));
++	ut_asserteq_ptr(chk, dev);
++	ut_asserteq(1, uclass_id_count(UCLASS_RKMTD));
++
++	/* Create another device with the same label (should remove old one) */
++	ut_assertok(rkmtd_create_device(label, &dev));
++	ut_assertok(rkmtd_attach(dev));
++	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &chk));
++	ut_asserteq_ptr(chk, dev);
++
++	/* Make sure there is still only one device */
++	ut_asserteq(1, uclass_id_count(UCLASS_RKMTD));
 +
 +	return 0;
 +}
++DM_TEST(dm_test_rkmtd_dup, UT_TESTF_SCAN_FDT);
 +
-+int board_init(void)
++/* Basic test of the 'rkmtd' command */
++static int dm_test_rkmtd_cmd(struct unit_test_state *uts)
 +{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
++	struct udevice *dev, *blk;
++	struct blk_desc *desc;
 +
-+	board_usba_init();
-+	board_lan8720a_init();
++	/* First check 'rkmtd info' with binding */
++	ut_assertok(run_command("rkmtd info", 0));
++	ut_assert_nextline("dev       blocks label          ");
++	ut_assert_console_end();
++
++	/* Bind device 1 */
++	ut_assertok(run_commandf("rkmtd bind test1"));
++	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &dev));
++	ut_assertok(blk_get_from_parent(dev, &blk));
++	desc = dev_get_uclass_plat(blk);
++
++	ut_assertok(run_command("rkmtd info", 0));
++	ut_assert_nextline("dev       blocks label          ");
++	ut_assert_nextline("  0          609 test1          ");
++	ut_assert_console_end();
++
++	/* Bind device 2 */
++	ut_assertok(run_commandf("rkmtd bind test2"));
++	ut_assertok(uclass_next_device_err(&dev));
++	ut_assertok(blk_get_from_parent(dev, &blk));
++	desc = dev_get_uclass_plat(blk);
++
++	ut_assertok(run_command("rkmtd info", 0));
++	ut_assert_nextline("dev       blocks label          ");
++	ut_assert_nextline("  0          609 test1          ");
++	ut_assert_nextline("  1          609 test2          ");
++	ut_assert_console_end();
++
++	ut_asserteq(1, run_command("rkmtd info test", 0));
++	ut_assert_nextline("No such device 'test'");
++	ut_assert_console_end();
++
++	ut_assertok(run_command("rkmtd info test2", 0));
++	ut_assert_nextline("dev       blocks label          ");
++	ut_assert_nextline("  1          609 test2          ");
++	ut_assert_console_end();
++
++	/* Check 'rkmtd dev' */
++	ut_asserteq(1, run_command("rkmtd dev", 0));
++	ut_assert_nextline("No current rkmtd device");
++	ut_assert_console_end();
++
++	ut_asserteq(1, run_command("rkmtd dev missing", 0));
++	ut_assert_nextline("No such device 'missing'");
++	ut_assert_console_end();
++
++	ut_assertok(run_command("rkmtd dev test2", 0));
++	ut_assert_console_end();
++
++	ut_assertok(run_command("rkmtd dev", 0));
++	ut_assert_nextline("Current rkmtd device: 1: test2");
++	ut_assert_console_end();
++
++	/* Try a numerical label */
++	ut_assertok(run_command("rkmtd dev 0", 0));
++	ut_assert_console_end();
++
++	ut_assertok(run_command("rkmtd dev", 0));
++	ut_assert_nextline("Current rkmtd device: 0: test1");
++	ut_assert_console_end();
++
++	/* Remove one of the bindings */
++	ut_assertok(run_commandf("rkmtd unbind test1"));
++
++	/* There should now be no current device */
++	ut_asserteq(1, run_command("rkmtd dev", 0));
++	ut_assert_nextline("No current rkmtd device");
++	ut_assert_console_end();
++
++	ut_assertok(run_command("rkmtd info", 0));
++	ut_assert_nextline("dev       blocks label          ");
++	ut_assert_nextline("  1          609 test2          ");
++	ut_assert_console_end();
 +
 +	return 0;
 +}
-+
-+static int settings_r(void)
-+{
-+	mac_read_from_eeprom();
-+	serial_read_from_eeprom(0);
-+
-+	return 0;
-+}
-+EVENT_SPY_SIMPLE(EVT_SETTINGS_R, settings_r);
-+
-+#if defined(CONFIG_DISPLAY_BOARDINFO_LATE)
-+int checkboard(void)
-+{
-+	const char *serial_number;
-+
-+	serial_number = env_get("serial#");
-+	if (!serial_number)
-+		printf("Warning: unknown serial number.\n");
-+	else
-+		printf("S/N:   %s\n", serial_number);
-+
-+	return 0;
-+}
-+#endif
-+
-+#ifdef CONFIG_MISC_INIT_R
-+int misc_init_r(void)
-+{
-+	return 0;
-+}
-+#endif
-+
-+int dram_init(void)
-+{
-+	gd->ram_size = get_ram_size((void *)CFG_SYS_SDRAM_BASE,
-+				    CFG_SYS_SDRAM_SIZE);
-+	return 0;
-+}
-+
-+/* SPL */
-+#ifdef CONFIG_SPL_BUILD
-+void spl_board_init(void)
-+{
-+}
-+
-+static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
-+{
-+	ddrc->md = (ATMEL_MPDDRC_MD_DBW_16_BITS | ATMEL_MPDDRC_MD_DDR2_SDRAM);
-+
-+	ddrc->cr = (ATMEL_MPDDRC_CR_NC_COL_10 |
-+		    ATMEL_MPDDRC_CR_NR_ROW_13 |
-+		    ATMEL_MPDDRC_CR_CAS_DDR_CAS3 |
-+		    ATMEL_MPDDRC_CR_DIC_DS |
-+		    ATMEL_MPDDRC_CR_ZQ_LONG |
-+		    ATMEL_MPDDRC_CR_NB_8BANKS |
-+		    ATMEL_MPDDRC_CR_DECOD_INTERLEAVED |
-+		    ATMEL_MPDDRC_CR_UNAL_SUPPORTED);
-+
-+	ddrc->rtr = 0x511;
-+
-+	ddrc->tpr0 = ((7 << ATMEL_MPDDRC_TPR0_TRAS_OFFSET) |
-+		      (3 << ATMEL_MPDDRC_TPR0_TRCD_OFFSET) |
-+		      (3 << ATMEL_MPDDRC_TPR0_TWR_OFFSET) |
-+		      (9 << ATMEL_MPDDRC_TPR0_TRC_OFFSET) |
-+		      (3 << ATMEL_MPDDRC_TPR0_TRP_OFFSET) |
-+		      (4 << ATMEL_MPDDRC_TPR0_TRRD_OFFSET) |
-+		      (4 << ATMEL_MPDDRC_TPR0_TWTR_OFFSET) |
-+		      (2 << ATMEL_MPDDRC_TPR0_TMRD_OFFSET));
-+
-+	ddrc->tpr1 = ((22 << ATMEL_MPDDRC_TPR1_TRFC_OFFSET) |
-+		      (23 << ATMEL_MPDDRC_TPR1_TXSNR_OFFSET) |
-+		      (200 << ATMEL_MPDDRC_TPR1_TXSRD_OFFSET) |
-+		      (3 << ATMEL_MPDDRC_TPR1_TXP_OFFSET));
-+
-+	ddrc->tpr2 = ((2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET) |
-+		      (8 << ATMEL_MPDDRC_TPR2_TXARDS_OFFSET) |
-+		      (4 << ATMEL_MPDDRC_TPR2_TRPA_OFFSET) |
-+		      (4 << ATMEL_MPDDRC_TPR2_TRTP_OFFSET) |
-+		      (8 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
-+}
-+
-+void mem_init(void)
-+{
-+	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
-+	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
-+	struct atmel_mpddrc_config ddrc_config;
-+	u32 reg;
-+
-+	ddrc_conf(&ddrc_config);
-+
-+	at91_periph_clk_enable(ATMEL_ID_MPDDRC);
-+	writel(AT91_PMC_DDR, &pmc->scer);
-+
-+	reg = readl(&mpddrc->io_calibr);
-+	reg &= ~ATMEL_MPDDRC_IO_CALIBR_RDIV;
-+	reg |= ATMEL_MPDDRC_IO_CALIBR_DDR3_RZQ_55;
-+	reg &= ~ATMEL_MPDDRC_IO_CALIBR_TZQIO;
-+	reg |= ATMEL_MPDDRC_IO_CALIBR_TZQIO_(101);
-+	writel(reg, &mpddrc->io_calibr);
-+
-+	writel(ATMEL_MPDDRC_RD_DATA_PATH_SHIFT_ONE_CYCLE,
-+	       &mpddrc->rd_data_path);
-+
-+	ddr3_init(ATMEL_BASE_MPDDRC, ATMEL_BASE_DDRCS, &ddrc_config);
-+
-+	writel(0x3, &mpddrc->cal_mr4);
-+	writel(64, &mpddrc->tim_cal);
-+}
-+
-+void at91_pmc_init(void)
-+{
-+	u32 tmp;
-+
-+	/*
-+	 * While coming from the ROM code, we run on PLLA @ 492 MHz / 164 MHz,
-+	 * so we need to slow down and configure MCKR accordingly.
-+	 * This is why we have a special flavor of the switching function.
-+	 */
-+	tmp = AT91_PMC_MCKR_PLLADIV_2 |
-+	      AT91_PMC_MCKR_MDIV_3 |
-+	      AT91_PMC_MCKR_CSS_MAIN;
-+	at91_mck_init_down(tmp);
-+
-+	tmp = AT91_PMC_PLLAR_29 |
-+	      AT91_PMC_PLLXR_PLLCOUNT(0x3f) |
-+	      AT91_PMC_PLLXR_MUL(40) |
-+	      AT91_PMC_PLLXR_DIV(1);
-+	at91_plla_init(tmp);
-+
-+	tmp = AT91_PMC_MCKR_H32MXDIV |
-+	      AT91_PMC_MCKR_PLLADIV_2 |
-+	      AT91_PMC_MCKR_MDIV_3 |
-+	      AT91_PMC_MCKR_CSS_PLLA;
-+	at91_mck_init(tmp);
-+}
-+#endif
-diff --git a/configs/kstr_sama5d27_defconfig b/configs/kstr_sama5d27_defconfig
-new file mode 100644
-index 000000000000..cc1419b05ba1
---- /dev/null
-+++ b/configs/kstr_sama5d27_defconfig
-@@ -0,0 +1,73 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_AT91=y
-+CONFIG_TEXT_BASE=0x26f00000
-+CONFIG_TARGET_KSTR_SAMA5D27=y
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20003ee0
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="at91-kstr-sama5d27"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_MONITOR_LEN=524288
-+CONFIG_SYS_LOAD_ADDR=0x24000000
-+CONFIG_FIT=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_SD_BOOT=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk root=/dev/mmcblk0p2 rw rootwait"
-+# CONFIG_USE_BOOTCOMMAND is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_MISC_INIT_R=y
-+CONFIG_CMD_TLV_EEPROM=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_ISO_PARTITION is not set
-+CONFIG_OF_CONTROL=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_CLK=y
-+CONFIG_CLK_AT91=y
-+CONFIG_AT91_UTMI=y
-+CONFIG_AT91_H32MX=y
-+CONFIG_AT91_GENERIC_CLK=y
-+CONFIG_ATMEL_PIO4=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_AT91=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_MICROCHIP_FLEXCOM=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ATMEL=y
-+CONFIG_PHY_MICREL=y
-+CONFIG_MACB=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_AT91PIO4=y
-+CONFIG_RESET_AT91=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_ATMEL_USART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_AT91=y
-+CONFIG_TEE=y
-+CONFIG_OPTEE=y
-+CONFIG_TIMER=y
-+CONFIG_ATMEL_PIT_TIMER=y
-+CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_VENDOR_NUM=0x16c0
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x03e9
-+CONFIG_USB_GADGET_ATMEL_USBA=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+# CONFIG_EFI_LOADER is not set
-diff --git a/include/configs/kstr-sama5d27.h b/include/configs/kstr-sama5d27.h
-new file mode 100644
-index 000000000000..772a073ba209
---- /dev/null
-+++ b/include/configs/kstr-sama5d27.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2021-2023 Conclusive Engineering Sp. z o. o.
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#include "at91-sama5_common.h"
-+
-+/* SDRAM */
-+#define CFG_SYS_SDRAM_BASE           0x20000000
-+#define CFG_SYS_SDRAM_SIZE           0x10000000
-+
-+#endif
--- 
-2.42.0
++DM_TEST(dm_test_rkmtd_cmd, UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
+--
+2.39.2
 
