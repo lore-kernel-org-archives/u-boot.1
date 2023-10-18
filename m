@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17030CDB482
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 11:00:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613FBCDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 11:26:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F02286F65;
-	Wed, 18 Oct 2023 13:00:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F0E786F66;
+	Wed, 18 Oct 2023 13:26:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697626803;
-	bh=3vOQLGRlyMCH1Xulds7G1sIPWSf38fMaeQsVq2wTDsU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1697628374;
+	bh=IoaSMtREwCJcvLV5OIqOLo957Fb5LFe0853rb1QHvIQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nvTGUmg5FdZlw+2v0HkZglYkbLnFl2/2KOAy155iQjL+LxNuUrgmuSEt4YtLVqj5a
-	 pl8eGpWfNLKHSuw4FAWyVXHKWT9PMh7T4aKEVDaCz4zwLVKPL2mhZazAlMIe/7Z5lj
-	 8kQHK5RH61qlJOKHCciogPdnfRlhXdtLkSsRVKr4CKcU1fiqjyKHwNuFYZSITP7ylh
-	 e90Bm9E58BiBmaEEL/2/3sfmNdVK7mzCrap8VBHQp2QxmLsNV83VV8E0UhJXbiWorm
-	 P0m53frCwsKHs4lFo85CbG0QGA180toaAzLdh8JRF5KXzIRbivRKhJ3zDWcOEBk6J+
-	 17LnureijYrEA==
-Received: from eryximachos.home (unknown
- [IPv6:2a01:cb18:989:a700:4b67:3ae7:15fa:40a0])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9EB4C86F61;
- Wed, 18 Oct 2023 13:00:01 +0200 (CEST)
+	b=JHjjj9yC1egHzd/TkcrcgK8UFqbEDqFbjkLwYKPlo9piXNOqlXred5i90oqO7g1d/
+	 79+VemnChLxwbqjnnxtg5whguY0ZRFuGKAZY5isk4YFupheXNfLjvaOS+0ejuNFZqp
+	 qq0PRLQgUd5M1718M3FbJqmLzMeZmDGv2V8yJ6QpGghkpfA2q8Hf2GCmIJM9lYYERv
+	 v+FkRWBZenWmaIzL4f0kjwAkosRzD4So4HWOeWGXyC+VrhC8vKH2kLhB1SvkYowPBT
+	 lhw6ULoHh/NIj02jnjkvLxVOaNRnATsc6BQPEN1idNCfuj4HQEclCmgKHD4zO4tS03
+	 3aKqsuMa7/odw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EA11A80F06;
+ Wed, 18 Oct 2023 13:26:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697626801;
- bh=3vOQLGRlyMCH1Xulds7G1sIPWSf38fMaeQsVq2wTDsU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ncd2J9cRHNLNweq3onHAgsNr4w290F+j2FRAA+RTp5NSvwM7Uo7LGPw0HReNIFEZk
- TQNRY3TbvuJ2XoSBZkMvOET1jdILbmxxBx6Za7E6R32jitNlaxGErqB4u2yBVo3khM
- qiOPF8ckCnb6Dy/UqMT24Ss5O6qfOv24KztI3yfDe3XKRvLnT7d3YjKEsmFcf9TGrp
- xGVJhlu2ztwbhngoP/CJ90AUcrcwO7qG5kil2M0VVwghk1UTIbl5vkW6yqp2vmkaQV
- 1era811KcCgUcVDLb1uLgqASPUO63etWWA/G0v+yTRNX9LePenmQfPJ9loe5l8xx3q
- p0ck0gi0a8Qxw==
-Date: Wed, 18 Oct 2023 12:58:32 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: Heiko Schocher <hs@denx.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
-	trini@konsulko.com
-Subject: Re: [PATCH 2/2] bootcount: Add driver model I2C driver
-Message-ID: <ZS-6WM11jJnsaakJ@eryximachos.home>
-References: <20231013094302.28944-1-pro@denx.de>
- <20231013094302.28944-3-pro@denx.de>
- <037dac45-eee4-c0f1-b72e-ee0a2bfe3807@denx.de>
- <ZSk-2lBrLW5Bel_X@eryximachos.home>
- <ZS6ET7ExtDSCfsNN@eryximachos.home>
- <CAPnjgZ2OZka03fG5Bt49JxoLn-VHy5TB81r6_uXTy+K5SOGYOw@mail.gmail.com>
- <1ba8ea25-bad0-b66f-b189-67754c488103@denx.de>
+ s=phobos-20191101; t=1697628373;
+ bh=IoaSMtREwCJcvLV5OIqOLo957Fb5LFe0853rb1QHvIQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=kQP5xiSwB25w9WRxQKjK1GaxQTB3qJES2qbuaYyPlYFBkcufvd453HwtNy6LgaEAd
+ y0pXA2No6qW0+QDZqnjftRmyArR+67RNoubH6JQDBcJiO7sxvjm7vYD805sJ8wW3TS
+ Ygq9BnaNoko7qnATFcorQ+O7K6Tby6DAsLYZEtMykMCkZrnjqhrKA7WcA5Qb8nZ7Ec
+ gBnYpBFtU+p2sdtqeLUQeLtcw47vzWKDkyzVgUFy5bV2Odx7WsH+q49I7L5lXWvsZF
+ N1rAUE9kjlE2Ax+RJuLPIW2D6LYYNrB0DHlH5bX6vpfR4tSRjgwgeLNfF9rfMLGjAp
+ q9N8F/E/AiDkg==
+Message-ID: <8f91b6af-98d1-4e15-adee-0b03464fc3c4@denx.de>
+Date: Wed, 18 Oct 2023 13:26:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1ba8ea25-bad0-b66f-b189-67754c488103@denx.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: commit 83c63f0d118 (led: Move OF "label" property parsing to core)
+Content-Language: en-US
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ u-boot <u-boot@lists.denx.de>
+Cc: Philippe Reynes <philippe.reynes@softathome.com>
+References: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
+ <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
+ <83bff57b-6d1e-4e31-9286-f32c60d6b052@prevas.dk>
+ <edd95b65-5944-4b52-9c32-4c51ca523841@prevas.dk>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <edd95b65-5944-4b52-9c32-4c51ca523841@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,46 +72,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko,
-
-On Wed, Oct 18, 2023 at 06:31:57AM +0200, Heiko Schocher wrote:
-> [...]
+On 10/18/23 11:00, Rasmus Villemoes wrote:
+> On 18/10/2023 09.43, Rasmus Villemoes wrote:
+>> On 17/10/2023 17.33, Marek Vasut wrote:
 > 
-> May Philip can use uclass_get_device_by_phandle and try a list of
-> possible UCLASS candidates, like UCLASS_RTC, UCLASS_I2C_EEPROM,
-> UCLASS_POWER,... and if found, check if parent is UCLASS_I2C...
+>>> Which string ? The "bcm6753-led" is driver name , so that would have to
+>>> be parametrized.
+>>
+>> Exactly. The only difference between the two examples (apart from the
+>> scope of the variables) is the driver name, but I think a
+>> generic_led_bind() could just do this inside the loop:
+>>
+>>    device_bind_driver_to_node(parent, parent->driver->name,
+>>                            ofnode_get_name(node),
+>>                            node, &dev);
+>>
 > 
-> may not so expensive ...
+> Ah, no, that won't work for the drivers that do distinguish between the
+> top-level and child nodes, e.g. the gpio one. Oh well, a one-line
+> wrapper in each driver is still better than what we have currently.
 
-Looks more cheap and elegant than the other variants indeed. But I'm not
-sure if we can maintain generality using this approach. 
-
-What if the specific I2C driver is not included in the build, because
-the devices "actual" functionality is not required? Or what if a driver
-for the specific device does not even exist in U-Boot?
-
-Wouldn't the device fail to probe then?
-
-Please correct me if I'm wrong, I'd give it a shot in that case.
-Otherwise I'll try it with the aforementioned
-device_find_global_by_ofnode() followed by device_bind_driver() using
-UCLASS_I2C_GENERIC (I hope that works).
-
-Best regards,
-Philip
-
-
-> 
-> bye,
-> Heiko
-> -- 
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
-
--- 
-=====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-22  Fax: +49-8142-66989-80   Email: pro@denx.de
-=====================================================================
+Right. I can actually test the gpio-leds one if you need that, since 
+that is what I use anyway.
