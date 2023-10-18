@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6332C41513
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 12:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AA5CDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 12:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D78B86F61;
-	Wed, 18 Oct 2023 14:55:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id CA64986F61;
+	Wed, 18 Oct 2023 14:56:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WcTiqpJ9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tQEENHxW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E72186F90; Wed, 18 Oct 2023 14:55:19 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2DBAD86F92; Wed, 18 Oct 2023 14:56:30 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B23BF86F61
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 14:55:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C6AE86940
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 14:56:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1697633715; x=1698238515; i=xypron.glpk@gmx.de;
- bh=cLB7GjQt/u7BIRPAJeTdd2RthjF5N3HIdpIkMLUSSgU=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=WcTiqpJ9vV8ZJ4COZbcwdXhahGsUtkxylUZhiT94Mrp0AcvF84I8jPxFzN/WBDdlDnyDqgAnAXd
- H5Ku7mGutFdkIMVS/fy1MFlbqmX390c1NGkeZtzBqFgo+watpv6HsPZOvsrotRUOb6Ok12snXkarN
- x2sagCHhKgVG+QtXBISKXQKZdPP390f6eg2SytpcTpEDsvD7xuVJVZ+W1cyYWNtyaFsnzgUBA2+Xd
- VWzB7cZa2R3+wd/J58L+xeV6PZZAwUeRGuu8JU4w8AV6zvPwGhLxnYAG5ZnCZBE57uKxPseTwBpW0
- h+cQiyKmLBBo0JXeaRztBZss61s6jZ3gadhA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M5fMe-1qujyC3IrK-007AUZ; Wed, 18
- Oct 2023 14:55:14 +0200
-Message-ID: <cac1ad58-5a7a-41fd-84db-f972609f95c6@gmx.de>
-Date: Wed, 18 Oct 2023 14:55:15 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
-Content-Language: en-US
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-d9ad90e1038so7334284276.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:56:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697633786; x=1698238586; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IJfGpAXvjNthyNVg94AQpA6nJU9l9qjqL3qE34IYAZY=;
+ b=tQEENHxWiQX0XxG9YjqMwAiu30TrALIsaLgxDQSxSL+REvwVM2phOteE9cT//KfoA4
+ c0LRZ5UNec53XhDF0Ke63yDswvigSfxmfFD4bUALC5CYwHRVazRt4KMXB+ib69I69hqf
+ yp0PndeqGNJsxeXTnJMLutsRoGx5TUjz1/SUc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697633786; x=1698238586;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IJfGpAXvjNthyNVg94AQpA6nJU9l9qjqL3qE34IYAZY=;
+ b=uKTbDiYBkALn+bsDXoI9Ld8nBhjRC51hZKI1RVsmZV54+c4OrClRMlrlQ0bLmSUNKY
+ 7x3RfLymIRxlJJec6C+/s49cKkxfVWtrtYMOsleqpcvPbtHCK5A4U/OuuPXSvjA2Os3m
+ 4SlLSAWj+4sGk7y0VWoWBlEDTF+YeKS05X0ivpvpeMoub/ma7r19c5apXFgAE/OW+1I3
+ ZkFfZ26AoE0eY8r+5fXSZRXqgHCuKm2339DVWmX0FVMT//sKgdxe81uDEeRBCscWo7B/
+ P2OvjrWMrItyN3cos3AEoZ8BlA38XI6+cZhqYN3ewtVH13W79s0/XZLIYjFdddv1LbRs
+ pl5g==
+X-Gm-Message-State: AOJu0YydKKdlhNtr71eSn6hPSi0bFPqXQ0lSQ4ARSGZH4vmA0pkRtlAJ
+ usw60Zfuac+vH0z2gcQiPygbfycVU+a7gxnz3Dy0Ig==
+X-Google-Smtp-Source: AGHT+IEkiwbPo/Lmzjaict1af3etgG9UKPmBK6Czp/z9MxNt4v4JZINzPfsntfyi+NZFJVSq+jhfpw==
+X-Received: by 2002:a25:dcc4:0:b0:d9a:c61e:4466 with SMTP id
+ y187-20020a25dcc4000000b00d9ac61e4466mr4636442ybe.61.1697633786392; 
+ Wed, 18 Oct 2023 05:56:26 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
+ [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
+ m8-20020a258c88000000b00d20d4ffbbdbsm1256051ybl.0.2023.10.18.05.56.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Oct 2023 05:56:25 -0700 (PDT)
+Date: Wed, 18 Oct 2023 08:56:24 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 04/32] cmd: Add a few more dependencies on CMDLINE
+Message-ID: <20231018125624.GR3119521@bill-the-cat>
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-23-sjg@chromium.org>
- <20231017140925.GB3119521@bill-the-cat>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231017140925.GB3119521@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:4FqyvDrjhGMM/sc/RzoXm8tbwnA9B5sSY7W+2GfJyz8LXF3kQbB
- HCF8eHulc4/pfX+ONKp6uw7EGg67b3PTbu8ckDb0/I5Yil1v+K6KzEp3LDS5BrRkiE4/Eb4
- HeQlUOvMv/YMqTW3UtNq92JI+Dq476dpJNG6z0VE3B2svDX+8EQOOuOos0eRrF0/yo0w3IP
- 0UneM4VC/EXfe3Gp3IDCg==
-UI-OutboundReport: notjunk:1;M01:P0:mw+XuAr6k6U=;wJwHtYzUbfnKJhDjTL/wBp77NEt
- FB0CvfUqbP0Eh6+Ercwirmn84IyhmviI6G3nql/EYb4cCkAMIZtT2r+CXhmrYaWXeNKGO8A8O
- mGLVsrAkQOekWuZcecFlkBDtAchWb3EiGiUsjvjYxTrx/X4r9DiWZfyGw7CAiJOsOIU2jzm/k
- hLrxmovStp869h40t1Y86KvYx1ily7csPJXW2NuRksuiwcqupvhgGuW9Rb3mrTKVktv/R2OUr
- Wscr5tGGY5Y/DkO4TgD8+JqD/zYWGKuKVr6zQl007EK3qzDJgKTjh1tLEPk1Oyu6NhJmvssWr
- cpq6eVNDCy7wWfrqmtNqkJpkWFZ7YoPzHpmYMKUicu+A3EdcVzOZ1OBnod32hCl7RWsBNJ1tL
- QomOt1fvR0zKbkZBWKTXcYdKi0yX0UmqXr6f2hhymFMEYhKRkBJfuC46ISdqQnwTokx/IaPBT
- iD2VstndefBDP78NrGb5Z7y/o2PxZWbfQHwaJUQy8kGN/MzdeieFjNQErWeklKp4v4PX+qr4U
- daF6V6RR+8ujbFOPHiMhiqCF2ccyfoaZR2//p6Yk9Au5+NSh2jSJoWvCdXfhfCwlmUobchGvF
- yyNh+fzKChMay8hap1WzKUyPmq38+hro+W7Y1ZI1HMDFiPYKsYT1YaZpNW9LMpSeCPZHJEbgQ
- s5YdweM1448BFtbXDNmNmhanaVqk7t7V2Z8rLVVL5FyiXojyt2MfYqtX0CNeIovncc3lTPRfs
- sTt5HOYXvL33R+td+t96aKNCQXr3qAtIhG4kt+bJ/Gx5aeIEm/r69UiqyZFbXl/uVzQdWipS5
- QEHL3Gi75LG8s8T4DVPxDsjEg5SYc4Fog8UkDlRMTozWqbc3bN8S2BjHMcx1zJQT+g4M9ynpX
- TklfpBNAwZKr/8cBEXBs5yR5K5W9b2wO4e1tqL47B4Ove7Oc7nMgWlIrOKJRSZg4RvT2Le7XC
- sDu7kLL8yxWN/b7kKzrP2y7hsxU=
+ <20231016222835.596572-5-sjg@chromium.org>
+ <20231017133231.GT3119521@bill-the-cat>
+ <CAPnjgZ3VWAfma9E19OSydhvKGXDk4mBA7KWL=uqVXZzD7Uxt+g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="a/m8ROzrHTV8XcoN"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3VWAfma9E19OSydhvKGXDk4mBA7KWL=uqVXZzD7Uxt+g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,51 +93,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/17/23 16:09, Tom Rini wrote:
-> On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
->
->> Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet i=
-s
->> available, add it as an explicit dependency.
->>
->> Signed-off-by: Simon Glass <sjg@chromium.org>
->> ---
->>
->> (no changes since v2)
->>
->> Changes in v2:
->> - Add new patch to update EFI_LOADER to depend on DM_ETH
->>
->>   lib/efi_loader/Kconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
->> index 13cad6342c36..fca4b3eef270 100644
->> --- a/lib/efi_loader/Kconfig
->> +++ b/lib/efi_loader/Kconfig
->> @@ -11,6 +11,7 @@ config EFI_LOADER
->>   	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
->>   	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
->>   	depends on BLK
->> +	depends on DM_ETH
->>   	depends on !EFI_APP
->>   	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
->>   	select CHARSET
->
-> Does this work for you Heinrich, or do you want to clarify the
-> dependencies (and re-organize the code as needed) around networking?
->
 
-We should be able to boot via EFI on devices without U-Boot network suppor=
-t.
+--a/m8ROzrHTV8XcoN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid invoking
-eth_get_dev() if there is no network. CONFIG_NETDEVICES=3Dy selects
-CONFIG_DM_ETH.
+On Tue, Oct 17, 2023 at 09:30:46PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 17 Oct 2023 at 07:32, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Oct 16, 2023 at 04:27:55PM -0600, Simon Glass wrote:
+> >
+> > > Add this to some more commands to avoid build errors with sandbox.
+> > >
+> > > Note that this is a temporary solution to expose more problems. A lat=
+er
+> > > patch puts these behind an 'if CMDLINE'
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > We're doing a bunch of churn here that I'd rather just get done at once,
+> > make the current #27 which guards all commands with if CMDLINE happen
+> > earlier in the series instead.
+>=20
+> Yes I did consider this when reviewing this patch for v3, but got
+> build-bisect failures. I cannot move #27 earlier, since all the builds
+> fail. Allowing #27 to pass is the point of this series, in fact.
 
-Why is this not sufficient?
-Is there a configuration that does not build?
+Yes, I suspect a number of the other patches need to be shuffled around
+as well.
 
-Best regards
+> If we can make progress on the thrust of this series then I will see
+> if I can somehow reorder some other patches to drop this patch, or
+> move it later, or cut it down, or something else...
+>=20
+> I also don't agree with 'bunch of'. This is 6 lines, which enables
+> another 20 patches which clean everything up. Are there other patches
+> with churn?
 
-Heinrich
+Other patches in the series also added if CMDLINE or similar sets of
+dependencies that then get pulled out in #27.
+
+--=20
+Tom
+
+--a/m8ROzrHTV8XcoN
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv1fEACgkQFHw5/5Y0
+tywF9Av/StKdxHBcxQRYG1DZY8uBEtI/mK/NiIhYSBsLcDSKZbx7LVc77ONbKF3E
+mnVgMAVrA3WLs18n8aXx6fatkscY+eT1W0zyBoBVKoK3qkU1AkWGDM3TPWKafHeX
+uNc+RGOIvvZB4dKx+9C64vXEFouJf0dwgeLMq+4RULP/eduiN6pX0zPPZ+MbSSgb
+kQD9e3pldfiRD1LVhWWLtrRky3lEyyq2JU4NEkxfJ4+uAbgXzswAiD3QpoKLdZzA
+tjgBOqq5wxyfCFuj1to83vl1ZNM/be1kF4lK65eyQhPxTKZuUFi1+uGXTJmsh/lq
+ymG+cWFCZkLq3wTrNLCP3Db+RpsJ6wzaSkMDLx102v0kJMtBImxwxqa4bCignycX
+G4ZS+nYmUW4H6cbLHx+/yEmnnqYVwG5CfK1F7ejMfdwn3ZjNQ2nuwL4e524LjPLW
+3oWR2ZKur64NlXMtueH7C9Ne/q+ZzCji8wxOGTYKaVZrMRJSBCcD6B5AYw0hyQTV
+PQBHrcP8
+=Kjnr
+-----END PGP SIGNATURE-----
+
+--a/m8ROzrHTV8XcoN--
