@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D823BCDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 13:25:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FBE7CDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 13:37:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10A3F86F34;
-	Wed, 18 Oct 2023 15:25:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71E0A86F7E;
+	Wed, 18 Oct 2023 15:37:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JSm5EObG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SMRntwXr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A16B86B05; Wed, 18 Oct 2023 15:25:42 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 2EC5D86F92; Wed, 18 Oct 2023 15:37:16 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49C0B86489
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 15:25:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B01B86F79
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 15:37:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d9a5adc8cefso7735609276.0
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 06:25:40 -0700 (PDT)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a7ac4c3666so83836107b3.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 06:37:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697635539; x=1698240339; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697636232; x=1698241032; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=g8kuoMZ461ZCDJz2VFe6t1f+5V1XG6YmhWb5ZxLyYZ8=;
- b=JSm5EObGO/Fu9Avyv/tFObnejxViJ3AwH1ivge3NJwpBeGY0D7o/qxh4H5YdQHnw4i
- cuqIgZ1gcs+dXhVMUt30LmDioKjHcFYPFQ/+Qz3kuKRwEvzgpmwUUEIAiNGmq2E9Tg/c
- 7YKVE2VyZQHmJPk5ANBkP6NuD2At5/isurPCk=
+ bh=C5QOdRsq7Tn95H435vlrTZtYYhsa6cI4Fda9Ki95xjE=;
+ b=SMRntwXrOADlygsw7rvdaM1mVqax5Sr3/utnjJquM7dyNo+V1w/uCG8Rzrzj1gPq94
+ KznAy0Rfq+bLuQCWQkD7WUEDTTrSCRjnXETGg508LBDJJRjdXuZi5KRD7OQ3X8rzXf3D
+ bQ7n8fciwaAFjLk7xc1JzKgphZMbS6Vv94h1E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697635539; x=1698240339;
+ d=1e100.net; s=20230601; t=1697636232; x=1698241032;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g8kuoMZ461ZCDJz2VFe6t1f+5V1XG6YmhWb5ZxLyYZ8=;
- b=N3AMrE5O8sYphJG+/6P9DGv/u4wG88DbyB4cCcKpUYPd4tONV00dk8uetTnVYDZP1h
- SdbLtJ1sfxLDly42LTdudq5LegmD8p20FbFuNZvS+X/S7DIDTJ/Acqp98pjEdvMiEoG/
- CY4hiHMqGltrv5VzHOMFk7aSubN3G0Suq4Vq7mukytwP3mGJG6f4674KuyJSezp2/Vgi
- lL6N1jQV/5csB7kFU11T+tfHRSn1CM2+DdBE3IFDwyiisRs9EsFamjeyPuE2tZ8A1WDj
- FG4GpBrssOT7oao/OiNUqBnKX8ZfOHs9t24eIiccDfni5UIUPsIXZNe3KefNwheIobcX
- QSQA==
-X-Gm-Message-State: AOJu0YxgzY/oqwAcx0uSGA40Y/6vnl8x0RQ5C0FtYAoe+f88bpIzv9+8
- WQkQnnv2OOXSpMh87IIIAryT6yYEOKfNpSrm2nC8uA==
-X-Google-Smtp-Source: AGHT+IHrdOQoFS+wdDixz6aCH6Hv5Pu6UG1EiIVCotea8QvRH8kHRxb125U2h90YmBzd6M0UofuUKA==
-X-Received: by 2002:a25:83d1:0:b0:d9a:b7cd:47f5 with SMTP id
- v17-20020a2583d1000000b00d9ab7cd47f5mr5347787ybm.56.1697635538957; 
- Wed, 18 Oct 2023 06:25:38 -0700 (PDT)
+ bh=C5QOdRsq7Tn95H435vlrTZtYYhsa6cI4Fda9Ki95xjE=;
+ b=G6IrYNyHOLpMUeVRwlnDID+ODdMtoIJdozW2AfDqtvSFbDQdHUe3V+jTvQFtLe6jbh
+ /bL2qSKCWm/zI/eNZORCd35IWGIYbcYPkk5/K7UctTOhoELO98RFkBs2gdOCTg/fx0u+
+ akq+mecgdpTTwO758xGszZO6cRfk7bephIWI/EBwED8LwKqb/1447TYDLx0+39Z8HeOh
+ U/1NDjPp6xULxDXa88lTN/l4cVTCW1FynxrWmgxHpLtw1zOTpz17L/RsXLqRjcQQSMQ/
+ kRUJeCo22KyNhWq51mJ4ux0IRwASTuRw0C64I1etj08qweHdalioS/wLsv8S5eJJMzRG
+ 3HGA==
+X-Gm-Message-State: AOJu0YxTsFGjnqygTw5EctVB7nAY10yTx13rK30ig5g5AMGPj+9Bjz10
+ Lbrl0pS34wI7hH1Bb/Bjn7PuWw==
+X-Google-Smtp-Source: AGHT+IEuF3gJSQ/O/KVHVEM0KIWa/+SXZra3iFNKZBr/ioxfkbdhWdJfTI7Xil8n/USRhdLTwDihlw==
+X-Received: by 2002:a0d:c047:0:b0:5a8:72ee:463d with SMTP id
+ b68-20020a0dc047000000b005a872ee463dmr4755728ywd.49.1697636231974; 
+ Wed, 18 Oct 2023 06:37:11 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- z4-20020a25ad84000000b00d815cb9accbsm1294229ybi.32.2023.10.18.06.25.38
+ m190-20020a0dcac7000000b0059c2e3b7d88sm1504273ywd.12.2023.10.18.06.37.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 06:25:38 -0700 (PDT)
-Date: Wed, 18 Oct 2023 09:25:36 -0400
+ Wed, 18 Oct 2023 06:37:11 -0700 (PDT)
+Date: Wed, 18 Oct 2023 09:37:09 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 02/32] bootstd: Correct dependencies on CMDLINE
-Message-ID: <20231018132536.GS3119521@bill-the-cat>
+Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Message-ID: <20231018133709.GA3765642@bill-the-cat>
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-3-sjg@chromium.org>
- <20231017133224.GS3119521@bill-the-cat>
- <CAPnjgZ1cEr_=EdnBatQ1_LMsC9KD0g5bCJt_qvBkQifV+tb0ag@mail.gmail.com>
+ <20231016222835.596572-23-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oLDMynLGVZrKBuzs"
+ protocol="application/pgp-signature"; boundary="I+bpPpmqxCXD4ULS"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1cEr_=EdnBatQ1_LMsC9KD0g5bCJt_qvBkQifV+tb0ag@mail.gmail.com>
+In-Reply-To: <20231016222835.596572-23-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,119 +92,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oLDMynLGVZrKBuzs
+--I+bpPpmqxCXD4ULS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 17, 2023 at 09:30:30PM -0600, Simon Glass wrote:
-> Hi Tom,
+On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
+
+> Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
+> available, add it as an explicit dependency.
 >=20
-> On Tue, 17 Oct 2023 at 07:32, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 16, 2023 at 04:27:53PM -0600, Simon Glass wrote:
-> >
-> > > With recent changes over the last few years in boot/Kconfig it is
-> > > no-longer possible to disable CMDLINE. It results in various link
-> > > errors because some options which require CMDLINE are enabled
-> > > regardless of whether it is available.
-> > >
-> > > Add the necessary conditions to fix this.
-> > >
-> > > Note that it would be better to have all commands depend on CMDLINE,
-> > > but that is extremely difficult at present, since some functions use
-> > > CMD_xxx to enable feature xxx. For example networking and environment
-> > > have a number of problems to tease apart.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > Since you later rework things to tease apart most, if not all of this,
-> > please split out the patches which tease things apart in to their own
-> > series so that the rest of this becomes reviewable and also reasonable
-> > looking.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >=20
-> At this point I fear I have lost track of things, since there is just
-> too much going on.
-
-Yes, there is too much going on, which is why I wanted you to split this
-up further.  I think we both agree that's a problem with this series.
-
-> Just in this version I have dealt with:
+> (no changes since v2)
 >=20
-> - some EFI stuff (which needs tweaking)
-> - teasing apart the CLI handling (which apparently doesn't go far enough?)
+> Changes in v2:
+> - Add new patch to update EFI_LOADER to depend on DM_ETH
+>=20
+>  lib/efi_loader/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index 13cad6342c36..fca4b3eef270 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -11,6 +11,7 @@ config EFI_LOADER
+>  	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+>  	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+>  	depends on BLK
+> +	depends on DM_ETH
+>  	depends on !EFI_APP
+>  	default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
+>  	select CHARSET
 
-I don't think it's fair to call out EFI here, it's fairly well behaved
-and no worse / oddly using CONFIG symbols than video or networking or
-just about everything else is.
-
-> Before this version I already looked at environment (which you say
-> doesn't go far enough, and fair enough, but please review the code as
-> sent, not what you wish it was).
-
-Well, that's just it.  I did, and I wasn't entirely sure how you were
-splitting things was right.  There was more stuff that either didn't
-belong or should also have been moved, it wasn't clear.  The split I'm
-suggesting there should make it clear.
-
-> Perhaps you could apply whatever seems reasonable and then I can take
-> another look? Or suggest some small changes that would allow progress
-> to be made.
-
-I guess I'll see what I can make some sense out of, yes.
-
-> But do note that supporting booting without CONFIG_CMDLINE is a large
-> effort, the subject of 5-10 series, perhaps more. It is not my
-> intention to undertake that in this series, or before this series
-> lands
-
-Well, one of my issues here, especially with the idea of cycling back
-and cleaning things up later is that I kind of assume you had intended
-to do that in some places already, having done the good and important
-task of breaking up the old common directory.
-
-> The problem, also, is that without this series, it isn't possible to
-> start that work. With this series, one can look at what code is
-> missing and find a way to call boot functions (for example) bypassing
-> the command line. Once you get it booting you are good. Without this
-> series, you don't even know where to look, since calls to the command
-> line happen silently.
-
-That's where I disagree.  Step one is working towards being able to
-build with CMDLINE disabled, and doing it in small reviewable chunks.
-This is one big series that gives you "can build with CMDLINE disabled",
-but while I'm usually not a fan of the Linux kernel's strict "break it
-down per subsystem", I'd be a lot happier here, and we'd have quicker
-progress too I bet, if instead of 1 30 part series we had 5 or 6 smaller
-series.
-
-> So I think this series is a big step forward and urge another look, pleas=
-e.
-
-That's what I did with v3 yesterday and why I had a bunch of other
-feedback.
-
-But, yes, I'll take some parts of v3 and see what I can come up with.
+I don't think this is needed.  After reconfiguring qemu_arm64 to be able
+to disable networking entirely, we still are able to build with
+EFI_LOADER enabled, and no warning / link errors.
 
 --=20
 Tom
 
---oLDMynLGVZrKBuzs
+--I+bpPpmqxCXD4ULS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv3McACgkQFHw5/5Y0
-tywOPwv+PNzfVRxW1TW24xoNh53bo/fFENDx7EihcUwgR4oGIRnoMvuGnmPeMOjI
-4kTKd34yNz1HUYcgKZawzrHr/scFMGhaODyBmda5VoKJ/4CIW5gb7UcT0DMX4omN
-ihWJ3KUCoNYBWXNkYkvgq/B82kfTw3C3YNvjXt8nuphpk9L04OeNY1w5dRXbO5tv
-VNbkiHIKW/UB8l/j7p5qPGHS9/uYy8Dg5xwlcAifOasvIvd/dPPi08WVQsr98QHD
-dUzoKIteZo6pNvuFsQNYgpZ9c9qlZ9xm4c7dNXa4PI+gqNKhPcYo9Lqcbg4FAmYf
-c2LtDkUDRql4RbMHntU3XH+pGhGIe0DRHEHK8V8TiKOGQpLDJVvTaz7/CNFBLHbK
-jYClPF5fHM1VFBSX8O1ArqNLDg/yArLifo8n4S5OxO66q7QK9rBA5jEnfpcQONv6
-jGoCnpJQlU1jxkpFHmB99+ESyd6dmOEpvz5letZO/RTnNcmKMV9iwigodSagU832
-hBlJ0CsQ
-=slhu
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv34IACgkQFHw5/5Y0
+tyy05wwAhoPnwUuR7C3DvKfFvuqRq9a9MEebV9wW+WOvzraRTlNgODNT+OGi12rJ
+T4JLxDNQOnLZQ23X1Xyh6J7Wf2HMz3GelILWTBwnH1Qb/WIdNpCZWlSTuIiQeiXn
+QObnTCr9jqS5NAyXvhDEP9hQ6M05hcK2CGrkg36KSfRKXvj0PgX9/NaQHSVYxloP
+MFOV6m0eGiHZLXCuiyKAVRYfssOumIM+F9ApqkqRnCWcZZKE2A77jIFUWKTAaKB2
+xUxIk+Trs22Hiz6Zzh+YXFnN5L11jC+bG8FkHEoWbTeBiCXOvkDDdjrQWYoFIH9G
+wourEraqxWLxk5+hNZ6Mf/538JlbX7hZL6TlaeUKdLpfPnwJUpryOF+s3KdIVJ3I
+bOhj4Z2M5U6hn9ddu3MHPHQbBAfhNAD8nEp5zuHZMIPvKtL0JgFwQ/8QZbF11zMM
+dd6gOfO/oBcU/PKesbz0HuuQhD48e8t2NPt0L0OTf80j9i0aETGxyh53UOQG3jo/
+h7WATGbv
+=Oi4Y
 -----END PGP SIGNATURE-----
 
---oLDMynLGVZrKBuzs--
+--I+bpPpmqxCXD4ULS--
