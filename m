@@ -4,49 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3674CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 18:52:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 691D0CDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 18:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 360A486FE3;
-	Wed, 18 Oct 2023 20:52:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CFB278702B;
+	Wed, 18 Oct 2023 20:52:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697655150;
-	bh=pfzr4Yy3OvtDSaoAH0Fi9v7i6G3FJ2pPUWePbJF2nL0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=PEsMibHhI0mZ20E2sizdDnLzE3GlXAlEzvkvleE7SLruKZrNjEhiLjeGkYOzqbz7o
-	 yR/5FkGDIPM7uUf3dJyb99FtbEm16zCu0UYmpSQWwcxLGtye/4n64wghp7plsXYuoj
-	 xfdZTbapa/V64Swa8JShRix0b0XrNGiyuqjDJyYIq8tBCtFcQ70iP5YRSwwGJj2exK
-	 u0FyoACW2TfmfOuJfrjhRyu8ZNPPYXFo2g2/0BzChmAY4w8JeHm2uJdyhLQ9T677kz
-	 OYEGiOogoM5VeGEH4q31/SQ7v4pkqkxyBPnRFOTfdCwfm9svP+lCmKUPb60d3i1W3r
-	 nGcY1am8ABI9w==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JelJL70T";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0E24E8702B; Wed, 18 Oct 2023 20:52:45 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 445F686F8F;
- Wed, 18 Oct 2023 20:52:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697655148;
- bh=pfzr4Yy3OvtDSaoAH0Fi9v7i6G3FJ2pPUWePbJF2nL0=;
- h=From:To:Cc:Subject:Date:From;
- b=D9q7iIFzwvsc+baVZbfU9e5gQFfazvkJE8hYc/b7OvrrzFgFY13ix/E4uhkE01e/c
- cVwDSGgINHkZGDS9yeUV9SXQrzek/kwJXRY8r0cBZ5jiaF3GOipMwtOeKB2nFkQNTa
- Q7sbrsVWblCKbN1biem+8/ad1gVHbqWE1kwy5Gfp4mRL/9LsTpBfZi61g54XPfPOEz
- n1ggq4m4SmrMcTvB4inZVCG8u9ZwxgMemJHhNSqSL9CISt813Kij7MjlH6q8herL8g
- ZSkbccEdiSKBGLJ0Q9u2KqBTTK8I1+ePCAyOHeej5h66UfbJsK75tJVQfFpWimRoak
- 2J/GzN9lT1Fhw==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Stefano Babic <sbabic@denx.de>
-Subject: [PATCH v2] arm: mxs: Clear CPSR V bit to activate low vectors
-Date: Wed, 18 Oct 2023 20:51:59 +0200
-Message-ID: <20231018185212.128405-1-marex@denx.de>
-X-Mailer: git-send-email 2.42.0
+ by phobos.denx.de (Postfix) with ESMTPS id C8DBA8702C
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 20:52:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1ca85ff26afso6313055ad.1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 11:52:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697655159; x=1698259959; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/lyuC2txCJpOkzt6XbMO1+iy6XmNoJ32RPGrD+vFl2s=;
+ b=JelJL70TFZuzfSplDtfBMPFwvZweeSZOBzU1mQpVQEdA2zgy5JtfVKZnedSEjFN980
+ 3qmJNCABzUdDZcrAc3EFZzrhoC29qFJ83FMPXL6S716G7tIS5820PL52XzhZHLK7/26L
+ WO+AUQ6nj2FoQrg2/YQPC93KiNfRpomgu4fhMOuVGDnFvMu/HVx34i7lW9NTg/kYI2/3
+ HIA1eJRZZ1orVbZxIMlUDJXWD4NFYEkcUE6i/SBKTtpVElmIbrXHEJ4pjkoftdJb3BcR
+ 5EXhHQ7r5vEjxke30x3KqgaEPA9MIK9NddeuT0Zx57tBN9PLyCZZMrqneYNhCo+AP744
+ FGNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697655159; x=1698259959;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/lyuC2txCJpOkzt6XbMO1+iy6XmNoJ32RPGrD+vFl2s=;
+ b=dEsMlvdk6u4vqAjeFHbrnt8sSlW81C1oygK4p//q0no0lJ10VcDj/qMIkyV+feIPPi
+ Hl+zyDeEYc9rbVekb80gmEZccGXTYVJuyUU9TdB7InjXfhX1W7XNdWOWR2zX+IHOu7Yv
+ xPwZcD1hyfOrWNdnCtZt6RT+xjK/qpUarWDPGUURb49ViTSK0/hd8it42hHRHGT11EeE
+ 4HZDXoT3r9GMCbPdf5z1ONMV6GST9eiv6e5kWf8pc+Ngomko28IFroHim9E3xWiS6Yhl
+ undInZz+vZLfjfeC/FAlgbuAMImEXSTXj31kJVbMg9Cw7kNcUu4zJDfux0Bg4VjA6I2Q
+ RFGQ==
+X-Gm-Message-State: AOJu0Yyj4hqL9AAtZFouGXE3py32N9pjRzVb84aOX/YvAPuM8In3mpfJ
+ hFhzPgOa61F1/Gx62BjBYwiOa/isyko=
+X-Google-Smtp-Source: AGHT+IHjfihtsb7KXPz6qWMq1sYX2JghdUPflpR6dp983DzoSKwF0gokIbA6rl/OtDC80OiVdGpu7A==
+X-Received: by 2002:a17:903:27cd:b0:1bf:349f:b85c with SMTP id
+ km13-20020a17090327cd00b001bf349fb85cmr223877plb.1.1697655158865; 
+ Wed, 18 Oct 2023 11:52:38 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f7a7:7252:9ef9:ef88])
+ by smtp.gmail.com with ESMTPSA id
+ jh1-20020a170903328100b001c72f4334afsm272711plb.20.2023.10.18.11.52.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Oct 2023 11:52:38 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: marex@denx.de,
+	u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v3] imx8mp-dhcom-pdk3-overlay-rev100: Pass
+ #address-cells/size-cells
+Date: Wed, 18 Oct 2023 15:52:25 -0300
+Message-Id: <20231018185225.1269962-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -65,85 +91,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The MXS starts with CPSR V bit set, which makes the CPU jump to high vectors
-in case of an exception. Those high vectors are located at 0xffff0000, which
-is where the BootROM exception table is located as well. U-Boot should handle
-exceptions on its own using its own exception handling code, which is located
-at 0x0, i.e. at low vectors. Clear the CPSR V bit, so that the CPU would jump
-to low vectors on exception instead, and therefore run the U-Boot exception
-handling code.
+From: Fabio Estevam <festevam@denx.de>
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>
----
-V2: Mark both get_cr()/set_cr() callsites as __attribute__((target("arm")))
-    and noinline to force generation of ARM version of those functions,
-    as this core cannot run mrc/mcr in Thumb mode. This is truly hideous
-    workaround right here.
----
- arch/arm/cpu/arm926ejs/mxs/mxs.c      | 4 ++++
- arch/arm/cpu/arm926ejs/mxs/spl_boot.c | 8 +++++++-
- 2 files changed, 11 insertions(+), 1 deletion(-)
+Pass #address-cells/size-cells in the mdio node to avoid the following
+DTC warning:
 
-diff --git a/arch/arm/cpu/arm926ejs/mxs/mxs.c b/arch/arm/cpu/arm926ejs/mxs/mxs.c
-index 6d6166cb839..4f3cb63c56d 100644
---- a/arch/arm/cpu/arm926ejs/mxs/mxs.c
-+++ b/arch/arm/cpu/arm926ejs/mxs/mxs.c
-@@ -71,6 +71,7 @@ void reset_cpu(void)
-  * actually 0x20, this the associated <destination address>. Loading the PC
-  * register with an address performs a jump to that address.
-  */
-+noinline __attribute__((target("arm")))
- void mx28_fixup_vt(uint32_t start_addr)
- {
- 	/* ldr pc, [pc, #0x18] */
-@@ -85,6 +86,9 @@ void mx28_fixup_vt(uint32_t start_addr)
- 		/* cppcheck-suppress nullPointer */
- 		vt[i + 8] = start_addr + (4 * i);
- 	}
+  DTCO    arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dtbo
+Warning (reg_format): /fragment@0/__overlay__:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #address-cells value
+Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #size-cells value
+
+Also change the Ethernet PHY address to 5, as per Marek's feedback.
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Changes since v2:
+- Change the Ethernet PHY address to 5. (Marek)
+
+ arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
+index f27e6429abe4..bad015536166 100644
+--- a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
++++ b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
+@@ -5,6 +5,13 @@
+ /dts-v1/;
+ /plugin/;
+ 
+-&ethphy0g {
+-	reg = <7>;
++&eqos {
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
 +
-+	/* Make sure ARM core points to low vectors */
-+	set_cr(get_cr() & ~CR_V);
- }
- 
- #ifdef	CONFIG_ARCH_MISC_INIT
-diff --git a/arch/arm/cpu/arm926ejs/mxs/spl_boot.c b/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
-index 5e7bdb78be1..249f8de8fbe 100644
---- a/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
-+++ b/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
-@@ -17,6 +17,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
- #include <asm/sections.h>
-+#include <asm/system.h>
- #include <linux/compiler.h>
- 
- #include "mxs_init.h"
-@@ -93,7 +94,9 @@ static uint8_t mxs_get_bootmode_index(void)
- 	return i;
- }
- 
--static void mxs_spl_fixup_vectors(void)
-+static noinline
-+__attribute__((target("arm")))
-+void mxs_spl_fixup_vectors(void)
- {
- 	/*
- 	 * Copy our vector table to 0x0, since due to HAB, we cannot
-@@ -104,6 +107,9 @@ static void mxs_spl_fixup_vectors(void)
- 
- 	/* cppcheck-suppress nullPointer */
- 	memcpy(0x0, _start, 0x60);
-+
-+	/* Make sure ARM core points to low vectors */
-+	set_cr(get_cr() & ~CR_V);
- }
- 
- static void mxs_spl_console_init(void)
++		ethernet-phy@7 {
++			reg = <7>;
++		};
++	};
+ };
 -- 
-2.42.0
+2.34.1
 
