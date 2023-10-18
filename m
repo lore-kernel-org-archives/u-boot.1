@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214E4CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:01:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D358CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:02:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D794B86FC5;
-	Wed, 18 Oct 2023 16:01:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39E2C86FB7;
+	Wed, 18 Oct 2023 16:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="ITb5qS/h";
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="OeaszQ1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A003986F94; Wed, 18 Oct 2023 16:01:41 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 6210186FCD; Wed, 18 Oct 2023 16:01:43 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC24C86FB7
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D306986FB9
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=conclusive.pl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=artur@conclusive.pl
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2b9d07a8d84so85134581fa.3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:39 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2c50fbc218bso66489991fa.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=conclusive.pl; s=google; t=1697637699; x=1698242499; darn=lists.denx.de;
+ d=conclusive.pl; s=google; t=1697637700; x=1698242500; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZywHXq0DKOY4kDhAaecXD0ZweSv5orAU+XUoe/Z7gt8=;
- b=ITb5qS/haaoAH14DxmVGbwSzS+1nojP59uLhUzka2tcwcHaPRwGVyITKphKbHVevIi
- 0gs6wai49WZQrODmRgiXToZIj3e61VUHXFoTPbecfi2JPYSclikZPpyKzVnW1oTYnQbZ
- rrWDjQ+rtLR6QrTCA13aunUqEPNoEhXXpF+ujDzWfHSoIhf8r54HXbAoDiI+0Zc97sGj
- ZcLYutBz4z9ytNEnTgjQ0cf2Imqh1zUBhdaaEa2z0gF0wOYOdT3XqoYmwkRtl9RP2e0X
- G8QEF+x7kn/JUO58on8LJXGs3ByaqBOn3W5vI4h/4WcZ+fFfhYH87Aa+E4s1xCE5Q08F
- zg7Q==
+ bh=e41jXYZ3aJBqR5kgmS3hwSDM9OaudguJizWu7EecAr4=;
+ b=OeaszQ1yZwz+fwqYa2AMbMsvXA4pxe5lAK+WyInprqsbqkl7LcWdt2YkAApsmf1LZM
+ Z2pgtRiZfhRBqegpCyQHKJOjIOWJ3v6A24SW2Ch+Z5kdoMicYvTAdJOHO2tQZN3XPC38
+ PBpjC4lSIKVZdj1RM8Xek5hfU8oZhU4EQOVXIW4aZVQHKlZyLx6zMLHg8s/2w8+5kV6J
+ m4ln2ypT1YMic/qLd9+/Ic8VG4rB77uFVfSuhjuJ78SHoDPfXitOKX9T+NXDcKYsFg1L
+ ObwvWhNy18N/fGyeWjCgkKjUAKXg6FYMPpbGSpVvyJ30F977BNiVCneEU8A8UCdKsNpT
+ 1gqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697637699; x=1698242499;
+ d=1e100.net; s=20230601; t=1697637700; x=1698242500;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZywHXq0DKOY4kDhAaecXD0ZweSv5orAU+XUoe/Z7gt8=;
- b=KYm3TovFrO53EjpoQb6PzBKqqKqck6UhYd+E1bUGB6bdVNFI8bItlBli33+/LT7e3s
- lurJ8NkCtf4Vvsor6dWOKqrTINmBA7PyKTo7OeRu7SEnAYxv1oSjihVBIMhAfGwqBVge
- u1p+3tAYCSC33nebtD06vTDk7C0wu0yHs2O5C/Lbr1ho53G5acdNGxPf4jTECFF7tSI4
- O6ks65SUeq1+QLKMhTLhI0LKIvtIZqsSLjz6f4rY+JelbZ0sqAGmHIlwRiX02jz5SJyN
- zS3hl7/9btdaEJ5Ta47EbijrCcI+ATrYNMvXxwrzPJxy36XxXUb1icrpCkCXoFVaRjo6
- DnEA==
-X-Gm-Message-State: AOJu0Yw7GOxdrb5+9j4iu8RnoWt1IUkuvhyC05aVJ27RVsiOWE3z91Cf
- Q5N3gdbufxFPpq3AOqRgGONgxKfRmqLVdx1h9duTGA==
-X-Google-Smtp-Source: AGHT+IE+gODW8d0XcXK9g2AXZAjV2XfKfWTuZKTqqczsBNUUrxbmjNHOnZ/JjKImC0vuDjmbn8IR8Q==
-X-Received: by 2002:a2e:95c4:0:b0:2bc:c28c:a2b8 with SMTP id
- y4-20020a2e95c4000000b002bcc28ca2b8mr3847780ljh.27.1697637698829; 
- Wed, 18 Oct 2023 07:01:38 -0700 (PDT)
+ bh=e41jXYZ3aJBqR5kgmS3hwSDM9OaudguJizWu7EecAr4=;
+ b=xJmgFwXiYsZ6jYE1GvKQqaX0lA2Et51SLlIey8Pl9I/fLj0bOJqrhI4Ndf6qMcmT1g
+ mzqMh94Xb7PoOVJ0d1Yjlp07Y5pbiNnQqUM0dGRQAWFzgzXoDYkZlB65ksEK6CI70WPq
+ wa/ZPxLPEI9TKOQaLBpxgIoOTEf3BM3qn1M+lw0SlHWu9yzw6OqtSgzpEqn973ZF2cyK
+ IOF5mOkVlPeSTWqDwVWfRiF2xJgVdHIzxLsqqDuCIC2f+569A3TQFGQe2uOmlrdL2zWS
+ 8xuoqZ8AtjO9oG2rzlwwPkCevJgXDT+5np/vJi+RD+k7eKe2LsOo3APs2rLuTzfEo7Uv
+ OYEQ==
+X-Gm-Message-State: AOJu0YzGtobUbxVcKaW6uHV2ocbwxIP7mYzZJwXZMAbYa8zGBlmFuBHc
+ ndMLgPigznDC/HhPPFPLWQh5xA==
+X-Google-Smtp-Source: AGHT+IGMI7OOp/KuRyLobAUT7oYVEyMjy/LYkIEKPTJDUWMoa7BWZIdLqvNwjKwm37J4SEL2vJEa1w==
+X-Received: by 2002:a05:651c:83:b0:2c5:623:aa01 with SMTP id
+ 3-20020a05651c008300b002c50623aa01mr3753186ljq.49.1697637699709; 
+ Wed, 18 Oct 2023 07:01:39 -0700 (PDT)
 Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
  [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
  f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 07:01:38 -0700 (PDT)
+ Wed, 18 Oct 2023 07:01:39 -0700 (PDT)
 From: Artur Rojek <artur@conclusive.pl>
 To: Eugen Hristev <eugen.hristev@collabora.com>,
  Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>,
@@ -71,9 +71,9 @@ To: Eugen Hristev <eugen.hristev@collabora.com>,
 Cc: Wojciech Kloska <wojciech@conclusive.pl>,
  =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
  u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
-Subject: [PATCH v5 1/4] common: add prototype & rename populate_serial_number()
-Date: Wed, 18 Oct 2023 16:00:56 +0200
-Message-ID: <20231018140059.161169-2-artur@conclusive.pl>
+Subject: [PATCH v5 2/4] event: add new EVT_SETTINGS_R event
+Date: Wed, 18 Oct 2023 16:00:57 +0200
+Message-ID: <20231018140059.161169-3-artur@conclusive.pl>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231018140059.161169-1-artur@conclusive.pl>
 References: <20231018140059.161169-1-artur@conclusive.pl>
@@ -95,11 +95,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename populate_serial_number() to a more descriptive
-serial_read_from_eeprom() and provide the missing function prototype.
+Introduce EVT_SETTINGS_R, triggered post-relocation and before console
+init.
 
-This is useful for boards that wish to read their serial number from
-EEPROM at init.
+This event gives an option to perform any platform-dependent setup,
+which needs to take place before show_board_info(). Usage examples
+include readout of EEPROM stored settings.
 
 Signed-off-by: Artur Rojek <artur@conclusive.pl>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -107,73 +108,57 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 
 v5: no change
 
-v4: - revert to the approach found in v2
-    - keep the new serial_read_from_eeprom() name
+v4: new patch
 
-v3: - restore original function name and make it static
-    - provide a generic function for reading EEPROM serial number and
-      wrap it around the existing tlv logic
-    - move the env var check out of populate_serial_number() and into
-      the new serial_read_from_eeprom() in order to stay consistent with
-      the documentation
+ common/board_r.c | 1 +
+ common/event.c   | 1 +
+ include/event.h  | 9 +++++++++
+ 3 files changed, 11 insertions(+)
 
-v2: - rename the function
-    - move function documentation from .c file to the prototype location
-
- cmd/tlv_eeprom.c | 14 +-------------
- include/init.h   | 14 ++++++++++++++
- 2 files changed, 15 insertions(+), 13 deletions(-)
-
-diff --git a/cmd/tlv_eeprom.c b/cmd/tlv_eeprom.c
-index 79796394c5c8..57cfd355df1b 100644
---- a/cmd/tlv_eeprom.c
-+++ b/cmd/tlv_eeprom.c
-@@ -1088,19 +1088,7 @@ int mac_read_from_eeprom(void)
- 	return 0;
- }
+diff --git a/common/board_r.c b/common/board_r.c
+index 52786901be55..a7967849dc0c 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -693,6 +693,7 @@ static init_fnc_t init_sequence_r[] = {
+ #if defined(CONFIG_ID_EEPROM)
+ 	mac_read_from_eeprom,
+ #endif
++	INITCALL_EVENT(EVT_SETTINGS_R),
+ 	INIT_FUNC_WATCHDOG_RESET
+ #if defined(CONFIG_PCI_INIT_R) && !defined(CONFIG_SYS_EARLY_PCI_INIT)
+ 	/*
+diff --git a/common/event.c b/common/event.c
+index 3080d9ed754d..dc61b9672f32 100644
+--- a/common/event.c
++++ b/common/event.c
+@@ -37,6 +37,7 @@ const char *const type_name[] = {
+ 	/* init hooks */
+ 	"misc_init_f",
+ 	"fsp_init_r",
++	"settings_r",
+ 	"last_stage_init",
  
--/**
-- *  populate_serial_number - read the serial number from EEPROM
-- *
-- *  This function reads the serial number from the EEPROM and sets the
-- *  appropriate environment variable.
-- *
-- *  The environment variable is only set if it has not been set
-- *  already.  This ensures that any user-saved variables are never
-- *  overwritten.
-- *
-- *  This function must be called after relocation.
-- */
--int populate_serial_number(int devnum)
-+int serial_read_from_eeprom(int devnum)
- {
- 	char serialstr[257];
- 	int eeprom_index;
-diff --git a/include/init.h b/include/init.h
-index 4e7fe26c2004..d57a24fd00dd 100644
---- a/include/init.h
-+++ b/include/init.h
-@@ -271,6 +271,20 @@ void board_init_r(struct global_data *id, ulong dest_addr)
+ 	/* Fpga load hook */
+diff --git a/include/event.h b/include/event.h
+index c5646b713ad8..a8f046da3c32 100644
+--- a/include/event.h
++++ b/include/event.h
+@@ -104,6 +104,15 @@ enum event_t {
+ 	 */
+ 	EVT_FSP_INIT_F,
  
- int cpu_init_r(void);
- int mac_read_from_eeprom(void);
++	/**
++	 * @EVT_SETTINGS_R:
++	 * This event is triggered post-relocation and before console init.
++	 * This gives an option to perform any platform-dependent setup, which
++	 * needs to take place before show_board_info() (e.g. readout of EEPROM
++	 * stored settings).
++	 */
++	EVT_SETTINGS_R,
 +
-+/**
-+ *  serial_read_from_eeprom - read the serial number from EEPROM
-+ *
-+ *  This function reads the serial number from the EEPROM and sets the
-+ *  appropriate environment variable.
-+ *
-+ *  The environment variable is only set if it has not been set
-+ *  already. This ensures that any user-saved variables are never
-+ *  overwritten.
-+ *
-+ *  This function must be called after relocation.
-+ */
-+int serial_read_from_eeprom(int devnum);
- int set_cpu_clk_info(void);
- int update_flash_size(int flash_size);
- int arch_early_init_r(void);
+ 	/**
+ 	 * @EVT_LAST_STAGE_INIT:
+ 	 * This event is triggered just before jumping to the main loop.
 -- 
 2.42.0
 
