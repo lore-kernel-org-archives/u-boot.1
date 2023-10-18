@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4B77CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 18:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0CC9CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 18:18:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84D4387018;
+	by phobos.denx.de (Postfix) with ESMTP id DC11D8702C;
 	Wed, 18 Oct 2023 20:18:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1697653090;
-	bh=LKpAIEZKkgQjAHm0sk4jDl95K168/MmS3lYBkhOTMFE=;
+	bh=0BLY7vNsb2AeiROaxjoNAhqQDkcyCcio4XtRPlq/dVA=;
 	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=c9N+tqzPH2AhQB4AD2uVhSW4vsuwHtvkpVGEPo/lqBLX8VB2CENQUrLHknDoPStgL
-	 TYVlthql11kHf9WqnD7bc0BBWAjQN0ftyd+VQzsIBGvhKCU7WHPDP9l4weS/jzlRj9
-	 gjqgjZSH6Dey08DmIEKF1w/aNVoZ+8TxpLZMTgS9EWOLO7+24Yw7QNZ601Z3Qs9LMk
-	 w+ELowN8sJrI3WFxxVVN7JJEfIkPUxrzWI8hKOB1Vlc308pqFVEsn14n/udx7D8zOv
-	 71pbcGXB5GGLs++cbhDz/YSWiC2ZGOZjl6s2/ZAOY/xBwWWOnsynycf6Ikzx9APoPh
-	 kUMMBHftglSXA==
+	b=Xi9ubkBgb0zI4n+gvQeSD3PVVg2t7VeLWIfBZ27R8ZXhxke6U9f0SaLrIP+ootjud
+	 8lNOASOfo/Y0aBxRC9blsQ6EOVnb8O6uqUKxiMinz5rg9ydDTeA5Rys6/S2MEnzDet
+	 x3rPOwmgCHT/pMxtrhHIq3kjULz+UscD3JXkKvrYUklbT8acmth/hhYVLHXydS7Ami
+	 d+TmGYE5Kee6YP1V9Lsncf0Hvz76taNBFlP7MjJU80rXcRUUr8wXeVtjiZoJRf1pvC
+	 FWPOh0h210L7jgWFpwNiLlNnKEpXOr4o26kgOc42RTr1RG9b4Qb34TpAZQKQs7GkXX
+	 PsGq5qHTHUp2Q==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EDC687028; Wed, 18 Oct 2023 20:18:01 +0200 (CEST)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+ id 9AE5E8702D; Wed, 18 Oct 2023 20:18:05 +0200 (CEST)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A936687024
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 20:17:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8216087024
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 20:18:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4S9fGb3bSgz1sBq3;
- Wed, 18 Oct 2023 20:17:59 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4S9fGg14H6z1r1s0;
+ Wed, 18 Oct 2023 20:18:03 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4S9fGb2F8rz1qqlS;
- Wed, 18 Oct 2023 20:17:59 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4S9fGg0FYBz1qqlS;
+ Wed, 18 Oct 2023 20:18:03 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id CAUwSbKaROAx; Wed, 18 Oct 2023 20:17:58 +0200 (CEST)
+ with ESMTP id RT-ekqWZauan; Wed, 18 Oct 2023 20:18:02 +0200 (CEST)
 Received: from papero (host-88-217-136-221.customer.m-online.net
  [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Wed, 18 Oct 2023 20:17:58 +0200 (CEST)
+ Wed, 18 Oct 2023 20:18:02 +0200 (CEST)
 From: sbabic@denx.de
 X-Patchwork-Submitter: =?utf-8?q?S=C3=A9bastien?= Szymanski
-X-Patchwork-Id: 1843177
+X-Patchwork-Id: 1843179
 X-Patchwork-Delegate: sbabic@denx.de
 To: =?utf-8?q?S=C3=A9bastien?= Szymanski <sebastien.szymanski@armadeus.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 1/2] arm: dts: imx93-11x11-evk: add bootph-some-ram property
+Subject: [PATCH 2/2] dm: adc: imx93-adc depends on ADC (fix boot)
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Message-Id: <20231018181801.9EDC687028@phobos.denx.de>
-Date: Wed, 18 Oct 2023 20:17:59 +0200 (CEST)
+Message-Id: <20231018181805.9AE5E8702D@phobos.denx.de>
+Date: Wed, 18 Oct 2023 20:18:03 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,27 +73,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> i.MX93 11x11 EVK fails to boot:
-> U-Boot SPL 2023.10-00558-g65b9b3462bec-dirty (Oct 03 2023 - 17:40:10 +0200)
-> SOC: 0xa0009300
-> LC: 0x40010
-> M33 prepare ok
-> Normal Boot
-> Trying to boot from BOOTROM
-> Boot Stage: Primary boot
-> image offset 0x8000, pagesize 0x200, ivt offset 0x0
-> Load image from 0x44400 by ROM_API
-> NOTICE:  BL31: v2.8(release):android-13.0.0_2.0.0-0-ge4b2dbfa52f5
-> NOTICE:  BL31: Built : 17:52:46, Sep 28 2023
-> That's because commit 9e644284ab81 ("dm: core: Report
-> bootph-pre-ram/sram node as pre-reloc after relocation"):
-> 	"[This] changes behavior of what nodes are bound in the U-Boot
-> 	proper pre-relocation phase. Change to bootph-all or add
-> 	bootph-some-ram prop to restore prior behavior."
-> Fix this by adding bootph-some-ram prop as suggested by the commit
-> above.
-> Fixes: 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node as pre-relo=
-c after relocation")
+> The i.MX93 11x11 EVK fails to boot with following error:
+>  Model: NXP i.MX93 11X11 EVK board
+>  DRAM:  2 GiB
+>  Error binding driver 'imx93-adc': -96
+>  Some drivers failed to bind
+>  Error binding driver 'simple_bus': -96
+>  Some drivers failed to bind
+>  Error binding driver 'simple_bus': -96
+>  Some drivers failed to bind
+>  initcall sequence 00000000fffb8f28 failed at call 000000008021e0d4 (err=3D=
+-96)
+>  ### ERROR ### Please RESET the board ###
+> That's because since commit e7ff54d96303 ("imx93_evk: defconfig: add adc
+> support") CONFIG_ADC_IMX93 is enabled but CONFIG_ADC is not.
+> Fix this by enabling CONFIG_ADC in imx93_11x11_evk_defconfig.
+> Make sure this situation won't happen again in future i.MX93 defconfig by
+> making CONFIG_ADC_IMX93 depend on CONFIG_ADC.
 > Signed-off-by: S=C3=A9bastien Szymanski <sebastien.szymanski@armadeus.com>
 > Reviewed-by: Fabio Estevam <festevam@gmail.com>
 Applied to u-boot-imx, master, thanks !
