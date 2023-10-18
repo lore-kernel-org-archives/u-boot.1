@@ -4,75 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 368A2CDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 02:09:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65FA6CDB474
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 02:35:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A54286EE0;
-	Wed, 18 Oct 2023 04:09:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8FA7486EDD;
+	Wed, 18 Oct 2023 04:35:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cpGFHDIQ";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DB4F86D9C; Wed, 18 Oct 2023 04:09:12 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697596525;
+	bh=Hx3Eywvn1F+d6WQaalFrrZ7/5zMtCScrWUtgbFG9BLE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=EeNztFSC8DEYDUsFhGKGinfkUNGdugfVlrdn0PBD93F8fXFidsoMdVbPqf5yeHg92
+	 wglU0nXDg7TFwvHKMSp001Kg6VPb5c0i9mXWci7A8zxI0d8LY7WZJ9o08Mtih2Hhwp
+	 0oShpImFfDnAk1fO9VCpjsRSRr8ZwloSy2Wx3nt9bLp0H6huCg3fytdtruICGCnbS/
+	 T7y0Hx6bhuxUqJvlwNKriBt8/1IGFoezi89ttjXowy6HbC/VNcwfdRSQ9AQqhcpUD2
+	 HMM5sRBehpE0A0KYMum8WC7VpTGy9Ud2E+YyRZt7+EQs5udm2mDE4etP3VvRWqlwzy
+	 pDCHFecmaFpZw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 555A886EE0
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 04:09:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1c9daca2b85so48001825ad.1
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 19:09:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697594948; x=1698199748; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=D6whRWpO8fWuwN/uGrX/sBhN4CoXdLKWceRDVcZrSQ8=;
- b=cpGFHDIQ59VwCOSFckAqebB7WmEmosKBQXiXnGR3rk+N4OZSXGyb/3mvM71f2cNxCh
- vzCNYsd5YoS1qhoeEMeBkfUHjkABevl8o6rP0w5w3pAcqgwTuIf3+phS5GH7xrE6yoMn
- YZd0+d3OlE5MBrPk+ueW4/h7XGY7ukZNvk4QBmUGcB/sGHF60bmuE2hMp7gz18BeGmMS
- SF9+7lumjk+ZsPXloB5xA+LesV3GmNTifQT0iksFj+dxATs112nMaO6cOm38Uow0xxkK
- cGoFS7O7PT+BPZfv4gz3wT1HxUbBsUDi9O4L+CZ5Gi+aEjOvtof+jn0m8ZMW48pkvR3s
- iMhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697594948; x=1698199748;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D6whRWpO8fWuwN/uGrX/sBhN4CoXdLKWceRDVcZrSQ8=;
- b=vxfrWZNsK1RUt9eecQ47vv0PO8Bs75KHf/g8ZdIj6LWkKvR/NkUapQjjL3iyHYQUKS
- fu3Pa94CQ990x5N70IuFoo66GNg06nT/qa63nJ2f7bFroz4mrWVkcTSoPAKEkeUhp0N5
- pDoLd4nU1SqShgrJsT4CphJZxwgsxpj3Xystv2z/KOFmg/HpWyVH4EVkUWB+JF7EPZ4l
- NR+7KzM06AFJ8OVwWIXah5BTeuh61ESVk/CFdPYqW98/B520n3mQt8tPi7WKotas8XOE
- +6NBbJAix8Olqyhhwj1xt3+1N39WhuYiFj5spSqGS+xQumK8iwZMjC50CBUiTi25OAtB
- fwrg==
-X-Gm-Message-State: AOJu0YwChAe+UwQHt+yVgrkdQY9HtT6/i2b+roGZTWTwjSqNh9sijHeh
- kg+sAyYphCGm0VWjYbGFzxA=
-X-Google-Smtp-Source: AGHT+IEP6bJDGSkafYT6OvE5cBLTA76sqHtTWcIlxeVSsjk6HSfgWujcQ38tnH/z/3czO/6bBY+pxw==
-X-Received: by 2002:a17:902:f542:b0:1bf:193a:70b6 with SMTP id
- h2-20020a170902f54200b001bf193a70b6mr6345468plf.5.1697594947754; 
- Tue, 17 Oct 2023 19:09:07 -0700 (PDT)
-Received: from cs20-buildserver.lan ([1.200.128.112])
- by smtp.gmail.com with ESMTPSA id
- b6-20020a170902d30600b001bb97e51ab4sm2263138plc.98.2023.10.17.19.09.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 19:09:07 -0700 (PDT)
-From: Jim Liu <jim.t90615@gmail.com>
-X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
-To: YSCHU@nuvoton.com, KWLIU@nuvoton.com, sr@denx.de, jim.t90615@gmail.com,
- JJLIU0@nuvoton.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v3] wdt: nuvoton: Fix reset/expire function error
-Date: Wed, 18 Oct 2023 10:09:00 +0800
-Message-Id: <20231018020900.189021-1-JJLIU0@nuvoton.com>
-X-Mailer: git-send-email 2.25.1
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5CF3886D48;
+ Wed, 18 Oct 2023 04:35:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697596523;
+ bh=Hx3Eywvn1F+d6WQaalFrrZ7/5zMtCScrWUtgbFG9BLE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=V/opjQEZGgX0k5QSMoHakcsShJrrV/6h6lgWV1ymeFIiYRMNqgQPgRo9BBJpGX6m+
+ RdFiOewRl7wQR5jMUPGwj6q4Q0c6Ko1qOMTTzaD5Wn6cm2s69Ay4dTS9o72g//3Mn5
+ L3WUnejGA3xcuc77I1wTrGoyPgZmkUh/29TV6J0fTEh/tkJ6jRRUz3Vx223cpQV+VK
+ OSUC9Wjn/n2jW4UXn4CZC6jUkcgyaLAKRGMzjC60ZxsxQva94f1gTzagglmErUSdad
+ uzjC31fMakPrAIHRKBYhiOxfNYfvHdxM70AQpP3udOzCG8+/b6T/fOsyOKBH1FzPoM
+ X7zxIieOMFMHg==
+Message-ID: <55da21fd-2a9b-4b48-a0bb-d8f07ad362ea@denx.de>
+Date: Wed, 18 Oct 2023 04:35:22 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] usb: xhci: Check return value of wait for TRB_TRANSFER
+ event
+Content-Language: en-US
+To: Minda Chen <minda.chen@starfivetech.com>, Bin Meng <bmeng.cn@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <20231017062016.51682-1-minda.chen@starfivetech.com>
+ <aa649c6d-5992-492a-bd39-d1f4389e773f@denx.de>
+ <2313a5f6-30a2-46ed-923f-a6f8699452c6@starfivetech.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <2313a5f6-30a2-46ed-923f-a6f8699452c6@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,50 +71,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix npcm845 watchdog halt for reset function and expire function.
-Reset function is restart wdt.
+On 10/18/23 03:22, Minda Chen wrote:
+> 
+> 
+> On 2023/10/17 19:20, Marek Vasut wrote:
+>> On 10/17/23 08:20, Minda Chen wrote:
+>>> xhci_wait_for_event() waiting TRB_TRANSFER event may return
+>>> NULL. Checking the return value to avoid crash.
+>>>
+>>> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+>>
+>> How did you trigger this error ? Is there a reproducer ? Details please ...
+> 
+> While Scanning a lenovo usb2.0 udisk， not 100 % reproduce
 
-Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+Can you include Linux
 
-Changes for v3:
-   - Modify start sentences
-   - Remove empty line
-Changes for v2:
-   - Add commit message
-   - Fix no empty line problem
-   - Remove dts
----
- drivers/watchdog/npcm_wdt.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+lsusb -vvv
 
-diff --git a/drivers/watchdog/npcm_wdt.c b/drivers/watchdog/npcm_wdt.c
-index e56aa0ebe1..57b61215a2 100644
---- a/drivers/watchdog/npcm_wdt.c
-+++ b/drivers/watchdog/npcm_wdt.c
-@@ -69,15 +69,21 @@ static int npcm_wdt_stop(struct udevice *dev)
- static int npcm_wdt_reset(struct udevice *dev)
- {
- 	struct npcm_wdt_priv *priv = dev_get_priv(dev);
-+	u32 val;
- 
--	writel(NPCM_WTR | NPCM_WTRE | NPCM_WTE, priv->regs);
-+	val = readl(priv->regs);
-+	writel(val | NPCM_WTR, priv->regs);
- 
- 	return 0;
- }
- 
- static int npcm_wdt_expire_now(struct udevice *dev, ulong flags)
- {
--	return npcm_wdt_reset(dev);
-+	struct npcm_wdt_priv *priv = dev_get_priv(dev);
-+
-+	writel(NPCM_WTR | NPCM_WTRE | NPCM_WTE, priv->regs);
-+
-+	return 0;
- }
- 
- static int npcm_wdt_of_to_plat(struct udevice *dev)
--- 
-2.25.1
+output for this device and include that information in the commit 
+message ? (or the U-Boot info below, that works too, just please add it 
+into the commit message, it is important for future reference).
 
+> This is log.
+> 
+> StarFive # usb reset
+> resetting USB...
+> Bus xhci_pci: Register 5000420 NbrPorts 5
+> Starting the controller
+> USB XHCI 1.00
+> scanning bus xhci_pci for devices... WARN halted endpoint, queueing URB anyway.
+> Unexpected XHCI event TRB, skipping... (f77141f0 00000000 13000000 02008401)
+> Unhandled exception: Load access fault
+> EPC: 00000000f7f563c6 RA: 00000000f7f563c6 TVAL: 000000000000000c
+> EPC: 000000004024a3c6 RA: 000000004024a3c6 reloc adjusted
+
+Where does the crash point to in code, can you disassemble the PC 
+pointer ? (or maybe you can use scripts/decodecode I think)
+
+> SP:  00000000f76f9a60 GP:  00000000f76fbdd0 TP:  0000000000000001
+> T0:  00000000f76fa168 T1:  00000000000000ff T2:  0000000000000016
+> S0:  00000000f7712fc0 S1:  00000000f76fb100 A0:  0000000000000000
+> A1:  0000000000000000 A2:  00000000f77145d0 A3:  00000000f7714590
+> A4:  0000000000000000 A5:  0000000000000020 A6:  000000000000000f
+> A7:  0000000000000100 S2:  0000000000000000 S3:  0000000000000000
+> S4:  00000000f7717050 S5:  00000000f7717050 S6:  0000000080000383
+> S7:  00000000f76f9dc0 S8:  00000000000000ff S9:  0000000000000001
+> S10: 00000000f76f9ba0 S11: 0000000000010c04 T3:  0000000000000010
+> T4:  0000000000000006 T5:  0000000000000080 T6:  00000000f76fa231
+
+[...]
+
+> 3: Mass Storage,  USB Revision 2.0
+>   - Generic Mass Storage 31097778XB15113405
+>   - Class: (from Interface) Mass Storage
+>   - PacketSize: 64  Configurations: 1
+>   - Vendor: 0x17ef  Product 0x38ac Version 1.0
+>     Configuration: 1
+>     - Interfaces: 1 Bus Powered 200mA
+>       Interface: 0
+>       - Alternate Setting 0, Endpoints: 2
+>       - Class Mass Storage, Transp. SCSI, Bulk only
+>       - Endpoint 1 Out Bulk MaxPacket 512
+>       - Endpoint 2 In Bulk MaxPacket 512
+> 
+> StarFive # usb storage
+>    Device 0: Vendor:          Rev: 8.07 Prod: Lenovo SX1 64G
+>              Type: Removable Hard Disk
+>              Capacity: 60000.0 MB = 58.5 GB (122880000 x 512)
+
+[...]
