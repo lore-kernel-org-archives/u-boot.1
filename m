@@ -4,130 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80AEFCDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:43:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 336B7CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:43:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86CC586F2F;
-	Wed, 18 Oct 2023 09:43:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id BDB548641F;
+	Wed, 18 Oct 2023 09:43:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="ECRoEABO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XulNkORL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 967A38669A; Wed, 18 Oct 2023 09:43:37 +0200 (CEST)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0723.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::723])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1A4DE805F5; Wed, 18 Oct 2023 09:43:50 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50628863F7
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:43:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA972863F7
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:43:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KCeYjVeQ8JgiUgeIxeIj85hU1kLPozoe4cAVFNleHJIqtouhl/C1t8/jDFbhPDs48yznU7/dLpmRPukQxlMIgHTiryGVrCMdRmKrGqGcjxv7fuCqtk++8jfbw3vmpPGzv+rPEy339Ycct7u80m8Mhp3K27NhuBgriikgJxEMwdAptgaw2LU2OcNgHS8iMHKcTm9TJXnTs5ZeNe74ota0dUq//FPAv5tDwBfXAMoYHfOoshqao1Yyt/KKnBuuP3aTKgDUvbJGgKWsCD0uaYaXS9ooHDXetTY2RZI4M3uUw8QAvxUmFyybUPrphXdPKfA4CglMDAqTGjWbi0A4nNRmjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IabgCfEO3BZgoc1+89uDDvvu4rCjJ6H0dvd7AmGlVAY=;
- b=UH+JUXD2nJ0X6XZ0QeYjjywoMwVeNZXI1ZwWusJhj+RyLC64d2pcXLb3VWOBYmFw9W0yNCALln5vFuohhorl96Jpy4v2E98h6sJQT+NzNlZ4LoTWEww1MPmlXFcrPprKE9Fg+9LfTX703FQFt7aAAWKUYB/RBl0L6MaOeLhC7uyFCPDB7JZZ3Zl5BOW/zXk54l0c/r4Fdhae2yOJsXDaqGfwUcPoExOIebtz7rd5pBX3rK9ZiGP1wySRwUG3llo5PA2YIhe2YEbASqqsC75u1CYhDy8Ph8bNe1HjhDcylMGfVksXFTjvmC0uRtM7gzsn9XPFG10kJtlZpFc+e1pR7g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IabgCfEO3BZgoc1+89uDDvvu4rCjJ6H0dvd7AmGlVAY=;
- b=ECRoEABOfmn3+lgYAF6wzm+4lES8L4aJRAA+nfybTXg+EKPC24ClROJzkNr46oHpM6uxZ2Rf5KsBPpZh0KEUjws9AP+Ibc7sM/DWsw3m4l66hM7duCCLOhZ3d63yR0SE87aGZkVhp3R/ZYgJGSuJijhiYDeXF5jipPCE3RnNu9o=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by DBAPR10MB4106.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:1ca::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.23; Wed, 18 Oct
- 2023 07:43:33 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.022; Wed, 18 Oct 2023
- 07:43:33 +0000
-Message-ID: <83bff57b-6d1e-4e31-9286-f32c60d6b052@prevas.dk>
-Date: Wed, 18 Oct 2023 09:43:31 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: commit 83c63f0d118 (led: Move OF "label" property parsing to core)
-Content-Language: en-US, da
-To: Marek Vasut <marex@denx.de>, u-boot <u-boot@lists.denx.de>
-Cc: Philippe Reynes <philippe.reynes@softathome.com>
-References: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
- <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM0PR02CA0036.eurprd02.prod.outlook.com
- (2603:10a6:208:3e::49) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-32d849cc152so5875747f8f.1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:43:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697615027; x=1698219827; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=7eXIxS6KrhrFL7VN31z7xlI6kDKbeps7I3pbGPHTitE=;
+ b=XulNkORLGjAv3Cae0nm5/IVl9p8HsPB0ON+/wVN5MQlhLXZSR1Eul9EG/XdA7rFLA5
+ /l4yZDre0jAp/h7axQzkaqnjpMHOZWCO+nLi1KmZOiqoCdddbJpc7u5c7y1RJqhyEd9P
+ Cp8GEsorfmFRF6H7wl3mN0ILUvMRfhMZCU7sMHtuw52fjCWBBueqK4of2VNNajYLOGLa
+ /vfuuOH1FRaS14qzqTcIyD17e45yP9NXvTW70baSBzcFF39SdnfoOQExJdtprLPECFbf
+ VzVrXXRE5zNw6u94QoV/BvlEhOVC33oMaG2nCGYi5OAcU03+zdeh6C0ZkzOQWjPLtKBI
+ cWBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697615027; x=1698219827;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=7eXIxS6KrhrFL7VN31z7xlI6kDKbeps7I3pbGPHTitE=;
+ b=HGsGI9soD3d7o4DJ/YPhk3N+V1a/NNZcdS2Yqf7U8r0NsA/3MfpoSwlQO28wB9F/7X
+ N7AJCv3Q/9hhHM5/LoJoy2zcnpF41Y1Sy957JXzU3J7SczkgEZBfwWEbWi/ibIR8tiTp
+ DkISpScDFHxp9dFkhevrdwnnSdVGrhWNwZydzarhNxuE9cMQVQg16m++9fdJDcYFDvbj
+ RUB0asvA+g2j5gS+Pw8b7x9MjF/N8lb/8IvlhU6TBXLkKLrq05+vxgc9OId6/v3IEoCL
+ ykYR46TmnImQ6FNPcvSRMviT3OV40nn7z/RqQgM484yFJK2RTJcxLqJPmjbfR20AVh4E
+ dH2g==
+X-Gm-Message-State: AOJu0Yxx+gjpvdOOpOXgtcIHAa+2aDP0IF7t31Zqd1b0xkx1254dEdmi
+ YIVhVB1aan/JIEPBXnGAyMMpSQ==
+X-Google-Smtp-Source: AGHT+IFiLuU8UIHK2cebySqmCRKQPMCPATx6w9h7Q8va4v31d4TWKXMDKrrVFMkSS0tbzR5IdHPJJw==
+X-Received: by 2002:adf:e28d:0:b0:320:8d6:74f5 with SMTP id
+ v13-20020adfe28d000000b0032008d674f5mr2982344wri.28.1697615027254; 
+ Wed, 18 Oct 2023 00:43:47 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:5d8f:701:423:3d05?
+ ([2a01:e0a:982:cbb0:5d8f:701:423:3d05])
+ by smtp.gmail.com with ESMTPSA id
+ f4-20020a056000128400b0031c5e9c2ed7sm1457010wrx.92.2023.10.18.00.43.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Oct 2023 00:43:46 -0700 (PDT)
+Message-ID: <0410f762-384f-48be-a562-4ab65381626e@linaro.org>
+Date: Wed, 18 Oct 2023 09:43:46 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DBAPR10MB4106:EE_
-X-MS-Office365-Filtering-Correlation-Id: e7f92415-11d7-4c9f-07e7-08dbcfadee10
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2JQ1QS5JM4iNtFeOs0kwu+kyA4r6k79R2tS/OqxMiD/ofSopG9zMDtr3oqccYBg2cG70JVLiYIwK6ObJtT/A5nbxEb1aIgCNOWScATYu2rD5f2IM5om01grYVTGPRq1WFJyGMCfH32mKuzkpE1bYL4iPWSh5d+nczPkR30vMD8tPkjRojHs3ay16VC2emWeOi0EDAp/VcWiYLVd8Pqufu0XU13NVJ/I9540WNRhd4is3ki3rsGXs1+PysA2BdAAaiJc5Hfne8U3uBVmKhqDWP6OVXl3rrMfZirDyMTjuWVqxyp4aa2bHVqSpbCeOjsg5bsgeBuupq0F1nyGNlJI6juJ87bX+QJL9+sPBcuX1I05Eb6+nm1GMWg+1KUFln1aiFZIonUlL0J01EBA7kTJFp1P/M8Onl7iLehmstSrS+4hXHmnKhuw7PB0uvN6r326FyqqH1uYGZkgTFGAjwoxRcUnJwHRZZTRJwwGdCA2Cit8MNONmDw2GKM/ZPoWjbqDiuS0uosC10aPlef4KPWQfBaSYATooQ0wCHhdiu83835gQK/qIEKnVehemvMNh/S7rf9lOWN3y8CiOEELlfAmydVSxtstDSYPy+JkxC5kntCFU9QyATSPNVvQYtEaONJYtetU/YG/yhD50FisKU/BjmQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(136003)(346002)(376002)(396003)(39840400004)(230922051799003)(1800799009)(451199024)(186009)(64100799003)(66946007)(316002)(66476007)(110136005)(66556008)(6486002)(478600001)(31696002)(2906002)(86362001)(5660300002)(36756003)(8936002)(8976002)(4326008)(8676002)(41300700001)(44832011)(26005)(2616005)(38100700002)(31686004)(6512007)(53546011)(6506007)(43740500002)(45980500001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TzVabmRNNDU3Z2d4U21qcFNPNXRZWTJlZXhTbEJ3a1FvMkFGdGRkOS9iODY3?=
- =?utf-8?B?UDYzTVk3eDdQOXlzKzdiQ0NNbG4xR0xRazBRT3g0VnlYQnI0VFFHRVhLN2hH?=
- =?utf-8?B?RGJBMmN6b1VrbndVWVlCRW1qM0RyelB4elAzY2UzQmtyYmw2bk9FaGQ2WXRo?=
- =?utf-8?B?VjRkZWxnZE9mZGFxUy91S1hvdWV1Z21VREd3NnRDQjZKSHkvNXVnU1FUQ0g5?=
- =?utf-8?B?cVJaY0duVWhWTm1tNVVzRzJsaUpTcldTUllaOGZpRit0WU5sdGNuN0xUUm9o?=
- =?utf-8?B?MjFSemtHR084MmVjcS82QmNGSC9ON2pKMG1jRjBOeUgvM2xXUGZBL2dXNGlv?=
- =?utf-8?B?UzhLL0kydWQ4NFlvQ2RUUTNhbC85SEUySDRRYjhGTlhKdjU5OGJreS82bXgy?=
- =?utf-8?B?Qi9WMjEycmRLQXB3T0tkVWxwSlFqRldLQWNVRVNUMFJCUzBYMlB5YTFvaW43?=
- =?utf-8?B?V3dMU1pKMEwwVWRvNk90QXVadmdNaXNuM0FieFR2SFdLdjhqYmhheE1DWDBH?=
- =?utf-8?B?VHliN0hsa2R0T0FMdkxYSDdXSEFpck9DeDJ4ZG9GZEh0MGVoODE0WE5kZzJV?=
- =?utf-8?B?QnUxVUNXdnovc3hhcjdKa3lzQXdpY1hvUzE4eFNaQjJiR3NIVXZRd0hVNGxF?=
- =?utf-8?B?VGxiY1lxbUJsUTh1SGplWkNFa1RwNEZndWNWRXplZlJuL1Q0akp6aUo0Tjl6?=
- =?utf-8?B?RTBvWmNRRzlxVWxVZHgxNlNyUE9ZUGtJdzM2MWdRK1dhU0crcStjQ0p6ekNw?=
- =?utf-8?B?MXJwTFpmVHFFQS9JRnNWZHpXZlZleVZPZVZDL2ZsVjhkR0JFOU5NS0d3MWUy?=
- =?utf-8?B?VkFjc3E2Z2RhRjkwUjRJTTFpRE9tbExMTENpL3JuLzk2WFg1NENpRjNhSmxu?=
- =?utf-8?B?TWtSVGdCeUJQeUJiZHRTd3VUVGpmaU8wUEpaQ1Z6a3BDcFpEZGxIcFhOMzZJ?=
- =?utf-8?B?dXVVcnI1WmtoVWZKYWQrSWd0N1VmU2FYVEl1K2FCbVdtT2VKYjl2NDUwSXJr?=
- =?utf-8?B?NndwVFpudEF6ZERQMTVLcFFVYUpFZGlwUDRtZXBZRDdWUTM5UHJLSFk1aXdn?=
- =?utf-8?B?MFJnZWhjOVFKY3dmOU94dE5RU25ueUdXRGcwamJsTVY5dnBxL0R1SVZEYSs0?=
- =?utf-8?B?NE5hVFN3NFFsVE45cDFrVUNqYnlsZUxnM0NhdFA2bjZLbFNiRkZaQUdydTBu?=
- =?utf-8?B?QUNHd2tZOWt5QVR4MUdPbGh2TWFwVGp4Ly9mM0dEeXhRa01Fem14MXZLOGt2?=
- =?utf-8?B?dWozMkpKd2VONFVDNHZWRUhaMjIySVJaOXVPWXl5VGI5OURwU3FpZ1o1eGhr?=
- =?utf-8?B?czhFakxBSmFvMGd0ZnpHK3RrbDEwZ0taWUVNWGRCY2pBNFFGTEg3OFBraHRZ?=
- =?utf-8?B?YkNjdzdkN1V6VVU1TjlnZEIzRkVGM3FHdEtSRjhvWVRxaDd1YnQ3U25KSU5h?=
- =?utf-8?B?TWZJY0ZLNE4rSlVmbzI2OHVuSFh5aEdGdXFMUUxSZGkxWDZuQU44VzBjaEk4?=
- =?utf-8?B?UXMwdjk2bHJidW40VXlQMG9RbThDUzhGdC9lTlpBV1ZZYitIZnZlc3BUVWV0?=
- =?utf-8?B?dm1NTVZsVVk3U25DOVkvR3Q0N0dscWJyYkQ0Snc0dVBHWXNYMkRFNE04MVla?=
- =?utf-8?B?MjFIa21ST0U4TE5PZm1OQS9QSnY1d3hmd0dUV0luZ3FqNUxGMlJHc3lIRUxy?=
- =?utf-8?B?dW1LakhISDJVUThBSnpLVndkOGhrRXBtMVNQb0l1UDk2d3hNdWpQWTVIUlpo?=
- =?utf-8?B?bWVOeXlsOEl5NmNYaWJDblJ5UVI5Nm41SVVjb3ZrWWhsZDJVd1dvVGVtalV6?=
- =?utf-8?B?a3Uvb1FVNTNVTUNYQ0dFU1hHbXpXbXlyU08wT3JNQlFXeTdIUytLam1CWThu?=
- =?utf-8?B?UmRQUjFiYU5KYWx5UldvVHU3V0JudzlaTnhmWDhKeXljcXhwcytJRUM4STF0?=
- =?utf-8?B?bnBoM1dHVlhQdHZ4SGxFMUZmOGxIV0tPMXdOenZIYmFLaUFqV2p4dlBPb3pB?=
- =?utf-8?B?bit0VkNNQnFzTVNQVHNnQVBWa1hmbC9BbGRQcEVEQTRHTGFoTWZGdk9ma3hP?=
- =?utf-8?B?d0Ixa1FFaDdhNWI2cGNGYW5aclVYZWUvZTU0RUJsZllMd1ladzlQY3pBQm80?=
- =?utf-8?B?SjAxcDVnQzZ3UTdhU0FWZXJRaE5jWlM0WjBTRGVDdkhadzRxVVM2VWx3WFZr?=
- =?utf-8?B?Snc9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: e7f92415-11d7-4c9f-07e7-08dbcfadee10
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Oct 2023 07:43:33.4299 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lkoU8DS1RwT4FdLqCQPcGBddCTwKydwTWtQRQ6qcl78s13s5rfDbuXDFfiFr0FLrZyAqh/DSbyDuTEGPEGum24klfau5HvVK1FjAq/6V5+Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR10MB4106
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v1 2/2] arm: meson-a1: dts: Sync DT with Linux
+Content-Language: en-US, fr
+To: Igor Prusov <ivprusov@salutedevices.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de
+References: <20231017213211.121550-1-ivprusov@salutedevices.com>
+ <20231017213211.121550-3-ivprusov@salutedevices.com>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231017213211.121550-3-ivprusov@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,63 +117,445 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17/10/2023 17.33, Marek Vasut wrote:
-> On 10/17/23 15:29, Rasmus Villemoes wrote:
-
->> static int led_gpio_bind(struct udevice *parent)
->> {
-...
->>         ret = device_bind_driver_to_node(parent, "gpio_led",
->>                          ofnode_get_name(node),
->>                          node, &dev);
->>
->> static int bcm6753_led_bind(struct udevice *parent)
->> {
->>
-...
->>         ret = device_bind_driver_to_node(parent, "bcm6753-led",
->>                          ofnode_get_name(node),
->>                          node, &dev);
->>
->> and that string can, if I'm not mistaken, be gotten from
->> parent->driver->name.
+On 17/10/2023 23:32, Igor Prusov wrote:
+> Import device tree changes from Linux v6.6-rc6 for Amlogic A1 board.
 > 
-> Which string ? The "bcm6753-led" is driver name , so that would have to
-> be parametrized.
+> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
+> ---
+>   arch/arm/dts/meson-a1.dtsi | 356 ++++++++++++++++++++++++++++++++++++-
+>   1 file changed, 351 insertions(+), 5 deletions(-)
+> 
+> diff --git a/arch/arm/dts/meson-a1.dtsi b/arch/arm/dts/meson-a1.dtsi
+> index e3a42c5b24..648e7f4942 100644
+> --- a/arch/arm/dts/meson-a1.dtsi
+> +++ b/arch/arm/dts/meson-a1.dtsi
+> @@ -3,9 +3,13 @@
+>    * Copyright (c) 2019 Amlogic, Inc. All rights reserved.
+>    */
+>   
+> -#include <dt-bindings/interrupt-controller/irq.h>
+> -#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include <dt-bindings/clock/amlogic,a1-pll-clkc.h>
+> +#include <dt-bindings/clock/amlogic,a1-peripherals-clkc.h>
+>   #include <dt-bindings/gpio/meson-a1-gpio.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+> +#include <dt-bindings/power/meson-a1-power.h>
+> +#include <dt-bindings/reset/amlogic,meson-a1-reset.h>
+>   
+>   / {
+>   	compatible = "amlogic,a1";
+> @@ -37,9 +41,19 @@
+>   		l2: l2-cache0 {
+>   			compatible = "cache";
+>   			cache-level = <2>;
+> +			cache-unified;
+>   		};
+>   	};
+>   
+> +	efuse: efuse {
+> +		compatible = "amlogic,meson-gxbb-efuse";
+> +		clocks = <&clkc_periphs CLKID_OTP>;
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		secure-monitor = <&sm>;
+> +		power-domains = <&pwrc PWRC_OTP_ID>;
+> +	};
+> +
+>   	psci {
+>   		compatible = "arm,psci-1.0";
+>   		method = "smc";
+> @@ -65,7 +79,6 @@
+>   		pwrc: power-controller {
+>   			compatible = "amlogic,meson-a1-pwrc";
+>   			#power-domain-cells = <1>;
+> -			status = "okay";
+>   		};
+>   	};
+>   
+> @@ -75,6 +88,16 @@
+>   		#size-cells = <2>;
+>   		ranges;
+>   
+> +		spifc: spi@fd000400 {
+> +			compatible = "amlogic,a1-spifc";
+> +			reg = <0x0 0xfd000400 0x0 0x290>;
+> +			clocks = <&clkc_periphs CLKID_SPIFC>;
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+> +			power-domains = <&pwrc PWRC_SPIFC_ID>;
+> +			status = "disabled";
+> +		};
+> +
+>   		apb: bus@fe000000 {
+>   			compatible = "simple-bus";
+>   			reg = <0x0 0xfe000000 0x0 0x1000000>;
+> @@ -103,10 +126,200 @@
+>   					gpio-ranges = <&periphs_pinctrl 0 0 62>;
+>   				};
+>   
+> +				i2c0_f11_pins: i2c0-f11 {
+> +					mux {
+> +						groups = "i2c0_sck_f11",
+> +							 "i2c0_sda_f12";
+> +						function = "i2c0";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c0_f9_pins: i2c0-f9 {
+> +					mux {
+> +						groups = "i2c0_sck_f9",
+> +							 "i2c0_sda_f10";
+> +						function = "i2c0";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c1_x_pins: i2c1-x {
+> +					mux {
+> +						groups = "i2c1_sck_x",
+> +							 "i2c1_sda_x";
+> +						function = "i2c1";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c1_a_pins: i2c1-a {
+> +					mux {
+> +						groups = "i2c1_sck_a",
+> +							 "i2c1_sda_a";
+> +						function = "i2c1";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c2_x0_pins: i2c2-x0 {
+> +					mux {
+> +						groups = "i2c2_sck_x0",
+> +							 "i2c2_sda_x1";
+> +						function = "i2c2";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c2_x15_pins: i2c2-x15 {
+> +					mux {
+> +						groups = "i2c2_sck_x15",
+> +							 "i2c2_sda_x16";
+> +						function = "i2c2";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c2_a4_pins: i2c2-a4 {
+> +					mux {
+> +						groups = "i2c2_sck_a4",
+> +							 "i2c2_sda_a5";
+> +						function = "i2c2";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c2_a8_pins: i2c2-a8 {
+> +					mux {
+> +						groups = "i2c2_sck_a8",
+> +							 "i2c2_sda_a9";
+> +						function = "i2c2";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c3_x_pins: i2c3-x {
+> +					mux {
+> +						groups = "i2c3_sck_x",
+> +							 "i2c3_sda_x";
+> +						function = "i2c3";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				i2c3_f_pins: i2c3-f {
+> +					mux {
+> +						groups = "i2c3_sck_f",
+> +							 "i2c3_sda_f";
+> +						function = "i2c3";
+> +						bias-pull-up;
+> +						drive-strength-microamp = <3000>;
+> +					};
+> +				};
+> +
+> +				uart_a_pins: uart-a {
+> +					mux {
+> +						groups = "uart_a_tx",
+> +							 "uart_a_rx";
+> +						function = "uart_a";
+> +					};
+> +				};
+> +
+> +				uart_a_cts_rts_pins: uart-a-cts-rts {
+> +					mux {
+> +						groups = "uart_a_cts",
+> +							 "uart_a_rts";
+> +						function = "uart_a";
+> +						bias-pull-down;
+> +					};
+> +				};
+> +
+> +				sdio_pins: sdio {
+> +					mux0 {
+> +						groups = "sdcard_d0_x",
+> +							 "sdcard_d1_x",
+> +							 "sdcard_d2_x",
+> +							 "sdcard_d3_x",
+> +							 "sdcard_cmd_x";
+> +						function = "sdcard";
+> +						bias-pull-up;
+> +					};
+> +
+> +					mux1 {
+> +						groups = "sdcard_clk_x";
+> +						function = "sdcard";
+> +						bias-disable;
+> +					};
+> +				};
+> +
+> +				sdio_clk_gate_pins: sdio-clk-gate {
+> +					mux {
+> +						groups = "sdcard_clk_x";
+> +						function = "sdcard";
+> +						bias-pull-down;
+> +					};
+> +				};
+> +
+> +				spifc_pins: spifc {
+> +					mux {
+> +						groups = "spif_mo",
+> +							 "spif_mi",
+> +							 "spif_clk",
+> +							 "spif_cs",
+> +							 "spif_hold_n",
+> +							 "spif_wp_n";
+> +						function = "spif";
+> +					};
+> +				};
+> +			};
+> +
+> +			gpio_intc: interrupt-controller@440 {
+> +				compatible = "amlogic,meson-a1-gpio-intc",
+> +					     "amlogic,meson-gpio-intc";
+> +				reg = <0x0 0x0440 0x0 0x14>;
+> +				interrupt-controller;
+> +				#interrupt-cells = <2>;
+> +				amlogic,channel-interrupts =
+> +					<49 50 51 52 53 54 55 56>;
+> +			};
+> +
+> +			clkc_periphs: clock-controller@800 {
+> +				compatible = "amlogic,a1-peripherals-clkc";
+> +				reg = <0 0x800 0 0x104>;
+> +				#clock-cells = <1>;
+> +				clocks = <&clkc_pll CLKID_FCLK_DIV2>,
+> +					 <&clkc_pll CLKID_FCLK_DIV3>,
+> +					 <&clkc_pll CLKID_FCLK_DIV5>,
+> +					 <&clkc_pll CLKID_FCLK_DIV7>,
+> +					 <&clkc_pll CLKID_HIFI_PLL>,
+> +					 <&xtal>;
+> +				clock-names = "fclk_div2", "fclk_div3",
+> +					      "fclk_div5", "fclk_div7",
+> +					      "hifi_pll", "xtal";
+> +			};
+> +
+> +			i2c0: i2c@1400 {
+> +				compatible = "amlogic,meson-axg-i2c";
+> +				status = "disabled";
+> +				reg = <0x0 0x1400 0x0 0x20>;
+> +				interrupts = <GIC_SPI 32 IRQ_TYPE_EDGE_RISING>;
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +				clocks = <&clkc_periphs CLKID_I2C_M_A>;
+> +				power-domains = <&pwrc PWRC_I2C_ID>;
+>   			};
+>   
+>   			uart_AO: serial@1c00 {
+> -				compatible = "amlogic,meson-gx-uart",
+> +				compatible = "amlogic,meson-a1-uart",
+>   					     "amlogic,meson-ao-uart";
+>   				reg = <0x0 0x1c00 0x0 0x18>;
+>   				interrupts = <GIC_SPI 25 IRQ_TYPE_EDGE_RISING>;
+> @@ -116,7 +329,7 @@
+>   			};
+>   
+>   			uart_AO_B: serial@2000 {
+> -				compatible = "amlogic,meson-gx-uart",
+> +				compatible = "amlogic,meson-a1-uart",
+>   					     "amlogic,meson-ao-uart";
+>   				reg = <0x0 0x2000 0x0 0x18>;
+>   				interrupts = <GIC_SPI 26 IRQ_TYPE_EDGE_RISING>;
+> @@ -125,9 +338,70 @@
+>   				status = "disabled";
+>   			};
+>   
+> +			saradc: adc@2c00 {
+> +				compatible = "amlogic,meson-g12a-saradc",
+> +					"amlogic,meson-saradc";
+> +				reg = <0x0 0x2c00 0x0 0x48>;
+> +				#io-channel-cells = <1>;
+> +				power-domains = <&pwrc PWRC_I2C_ID>;
+> +				interrupts = <GIC_SPI 35 IRQ_TYPE_EDGE_RISING>;
+> +				clocks = <&xtal>,
+> +					<&clkc_periphs CLKID_SARADC_EN>,
+> +					<&clkc_periphs CLKID_SARADC>,
+> +					<&clkc_periphs CLKID_SARADC_SEL>;
+> +				clock-names = "clkin", "core",
+> +					"adc_clk", "adc_sel";
+> +				status = "disabled";
+> +			};
+> +
+> +			i2c1: i2c@5c00 {
+> +				compatible = "amlogic,meson-axg-i2c";
+> +				status = "disabled";
+> +				reg = <0x0 0x5c00 0x0 0x20>;
+> +				interrupts = <GIC_SPI 68 IRQ_TYPE_EDGE_RISING>;
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +				clocks = <&clkc_periphs CLKID_I2C_M_B>;
+> +				power-domains = <&pwrc PWRC_I2C_ID>;
+> +			};
+> +
+> +			i2c2: i2c@6800 {
+> +				compatible = "amlogic,meson-axg-i2c";
+> +				status = "disabled";
+> +				reg = <0x0 0x6800 0x0 0x20>;
+> +				interrupts = <GIC_SPI 76 IRQ_TYPE_EDGE_RISING>;
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +				clocks = <&clkc_periphs CLKID_I2C_M_C>;
+> +				power-domains = <&pwrc PWRC_I2C_ID>;
+> +			};
+> +
+> +			i2c3: i2c@6c00 {
+> +				compatible = "amlogic,meson-axg-i2c";
+> +				status = "disabled";
+> +				reg = <0x0 0x6c00 0x0 0x20>;
+> +				interrupts = <GIC_SPI 78 IRQ_TYPE_EDGE_RISING>;
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +				clocks = <&clkc_periphs CLKID_I2C_M_D>;
+> +				power-domains = <&pwrc PWRC_I2C_ID>;
+> +			};
+> +
+> +			usb2_phy1: phy@4000 {
+> +				compatible = "amlogic,a1-usb2-phy";
+> +				clocks = <&clkc_periphs CLKID_USB_PHY_IN>;
+> +				clock-names = "xtal";
+> +				reg = <0x0 0x4000 0x0 0x60>;
+> +				resets = <&reset RESET_USBPHY>;
+> +				reset-names = "phy";
+> +				#phy-cells = <0>;
+> +				power-domains = <&pwrc PWRC_USB_ID>;
+> +			};
+> +
+>   			hwrng: rng@5118 {
+>   				compatible = "amlogic,meson-rng";
+>   				reg = <0x0 0x5118 0x0 0x4>;
+> +				power-domains = <&pwrc PWRC_OTP_ID>;
+>   			};
+>   
+>   			sec_AO: ao-secure@5a20 {
+> @@ -135,6 +409,78 @@
+>   				reg = <0x0 0x5a20 0x0 0x140>;
+>   				amlogic,has-chip-id;
+>   			};
+> +
+> +			clkc_pll: pll-clock-controller@7c80 {
+> +				compatible = "amlogic,a1-pll-clkc";
+> +				reg = <0 0x7c80 0 0x18c>;
+> +				#clock-cells = <1>;
+> +				clocks = <&clkc_periphs CLKID_FIXPLL_IN>,
+> +					 <&clkc_periphs CLKID_HIFIPLL_IN>;
+> +				clock-names = "fixpll_in", "hifipll_in";
+> +			};
+> +
+> +			sd_emmc: sd@10000 {
+> +				compatible = "amlogic,meson-axg-mmc";
+> +				reg = <0x0 0x10000 0x0 0x800>;
+> +				interrupts = <GIC_SPI 58 IRQ_TYPE_LEVEL_HIGH>;
+> +				clocks = <&clkc_periphs CLKID_SD_EMMC_A>,
+> +					 <&clkc_periphs CLKID_SD_EMMC>,
+> +					 <&clkc_pll CLKID_FCLK_DIV2>;
+> +				clock-names = "core",
+> +					      "clkin0",
+> +					      "clkin1";
+> +				assigned-clocks = <&clkc_periphs CLKID_SD_EMMC_SEL2>;
+> +				assigned-clock-parents = <&xtal>;
+> +				resets = <&reset RESET_SD_EMMC_A>;
+> +				power-domains = <&pwrc PWRC_SD_EMMC_ID>;
+> +				status = "disabled";
+> +			};
+> +		};
+> +
+> +		usb: usb@fe004400 {
+> +			status = "disabled";
+> +			compatible = "amlogic,meson-a1-usb-ctrl";
+> +			reg = <0x0 0xfe004400 0x0 0xa0>;
+> +			interrupts = <GIC_SPI 88 IRQ_TYPE_LEVEL_HIGH>;
+> +			#address-cells = <2>;
+> +			#size-cells = <2>;
+> +			ranges;
+> +
+> +			clocks = <&clkc_periphs CLKID_USB_CTRL>,
+> +				 <&clkc_periphs CLKID_USB_BUS>,
+> +				 <&clkc_periphs CLKID_USB_CTRL_IN>;
+> +			clock-names = "usb_ctrl", "usb_bus", "xtal_usb_ctrl";
+> +			resets = <&reset RESET_USBCTRL>;
+> +			reset-name = "usb_ctrl";
+> +
+> +			dr_mode = "otg";
+> +
+> +			phys = <&usb2_phy1>;
+> +			phy-names = "usb2-phy1";
+> +
+> +			dwc3: usb@ff400000 {
+> +				compatible = "snps,dwc3";
+> +				reg = <0x0 0xff400000 0x0 0x100000>;
+> +				interrupts = <GIC_SPI 90 IRQ_TYPE_LEVEL_HIGH>;
+> +				dr_mode = "host";
+> +				snps,dis_u2_susphy_quirk;
+> +				snps,quirk-frame-length-adjustment = <0x20>;
+> +				snps,parkmode-disable-ss-quirk;
+> +			};
+> +
+> +			dwc2: usb@ff500000 {
+> +				compatible = "amlogic,meson-a1-usb", "snps,dwc2";
+> +				reg = <0x0 0xff500000 0x0 0x40000>;
+> +				interrupts = <GIC_SPI 89 IRQ_TYPE_LEVEL_HIGH>;
+> +				phys = <&usb2_phy1>;
+> +				phy-names = "usb2-phy";
+> +				clocks = <&clkc_periphs CLKID_USB_PHY>;
+> +				clock-names = "otg";
+> +				dr_mode = "peripheral";
+> +				g-rx-fifo-size = <192>;
+> +				g-np-tx-fifo-size = <128>;
+> +				g-tx-fifo-size = <128 128 16 16 16>;
+> +			};
+>   		};
+>   
+>   		gic: interrupt-controller@ff901000 {
 
-Exactly. The only difference between the two examples (apart from the
-scope of the variables) is the driver name, but I think a
-generic_led_bind() could just do this inside the loop:
-
-  device_bind_driver_to_node(parent, parent->driver->name,
-                          ofnode_get_name(node),
-                          node, &dev);
-
-and with that we could have most, if not all, existing .bind methods
-assigned directly to generic_led_bind(), we don't even need one-line
-wrapper functions in each driver passing that string explicitly.
-> Make sure you test the 'led' command. The LEDs might be bound, but not
-> probed (so label parsing in LED probe would be too late), and if I
-> recall it right, the label parsing has to be in post-bind for the labels
-> to correctly show in the 'led' command listing.
-
-It's the led command I'm testing with (with my "new" driver for the
-lp5562), and where I see the problems. Currently, the top node also gets
-listed in "led list" as led-controller@30 (it's an i2c device), but
-probe of that device fails because the logic in the .probe method thinks
-this is a subnode (the pattern is the same as in e.g. cortina_led_probe).
-
-Since I'm simply copying the pattern from existing drivers, I'm pretty
-sure those other drivers are also currently broken (see also the fixups
-I mentioned).
-
-> I am all for generic_led_bind() .
-
-I'll try to write some real patches.
-
-Rasmus
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
