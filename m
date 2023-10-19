@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D632CCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 17:22:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D609CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 17:30:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99CF186FD8;
-	Thu, 19 Oct 2023 19:22:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 7758587447;
+	Thu, 19 Oct 2023 19:30:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HY+df1OW";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="v7TgmlCU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uDU6d10y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A238E86FFD; Thu, 19 Oct 2023 19:21:59 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 678448749F; Thu, 19 Oct 2023 19:30:40 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72E6786801
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 19:21:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2E47871BE
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 19:30:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SBDzT1VGBz9sn9;
- Thu, 19 Oct 2023 19:21:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697736117;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=yrMuaE4T2wT4rkozE2I/3V9zu7+zeplbYPhEPdVXEGI=;
- b=HY+df1OWSRizmJDXYdWRrxwGcx9PuO9wHHlyq4wdCaMrIv4rh70zTkwPu9RqolOLD9xbWn
- KmPObD489bNHXGuAQa4Ajn2u25xp7goAvKmA4ip4QfsIQNhq+e3Ow7IMRKBhSa4H3GGJUI
- rG8r5/wNlUP0gYAfEtqYfKuc55SB6DE/H0LLazvnGtTdGjOxIw3szv9DknJBsCjSEyNJyt
- S8ViuhnPZRgc94si08k2fFltIpLYebwptNXTJMZnhMq8dz4jmSpzSBj0Kk1fMdrCsdWPwH
- hZfvzwa7s8ausSZkGSPvRMyi9EYeJM9n2pCAlUooYEbLwRYKe6R4nHiAyl8TlA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697736115;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=yrMuaE4T2wT4rkozE2I/3V9zu7+zeplbYPhEPdVXEGI=;
- b=v7TgmlCUdg4hnVR212DwOd98r0HaEf4MLtD8CInfofyJe6WWUbflawHsapdeN4+PiU3hbm
- 5e91GN+mYYf5V/jbxeHWrEwbWfcfJoQMJQB8N0kvarUPxESRjFmvlHJmdflNWKnpa/9Acv
- 4XiQG7mOAnq+eYZ8M0OZZ1hXC6y3KXYc87l8j+RDfwxJQzZNj7tp34xd1XFz2qcGFO/hWd
- qMUmQHipKjmmV5BglJ+W0pY70jIJWhD4V0Dd//mnVJdWDOjelKzOKkItsMZEUyF3L1YIaR
- c7slGIVQMlvZdG2t2nJWv6PMFt+lK1uIEK6qUwD6Hq6JP1Y/OkXwhtWVkQPEvg==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PULL] u-boot-sh/master_uart_test
-Date: Thu, 19 Oct 2023 19:21:42 +0200
-Message-ID: <20231019172145.14222-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39JHUWMN113499;
+ Thu, 19 Oct 2023 12:30:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697736632;
+ bh=tHpKZThmbXHp4rM7w4JTsCIxg7DWT4Cx6peSWw7BTZQ=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=uDU6d10yhUssNLkF36BF0fh9y62ieNe2K7VybVoS6uGNEq08Srf47InfWEDD8mRJZ
+ 0FCx0YgM3hHIk5MhGdiqXREkz0rXvSqGBylGVsvl1/KZuoJb2OoJaxnk/E7FnESIoz
+ ylqKcPnP5us/ugS3Q0gepMpIrxcT4h4fxUMaIOAM=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39JHUWPA000774
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 19 Oct 2023 12:30:32 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
+ Oct 2023 12:30:32 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 19 Oct 2023 12:30:32 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39JHUWRH018277;
+ Thu, 19 Oct 2023 12:30:32 -0500
+Date: Thu, 19 Oct 2023 12:30:32 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Thomas Richard <thomas.richard@bootlin.com>, <praneeth@ti.com>, "Kumar,
+ Udit" <u-kumar1@ti.com>
+CC: <u-boot@lists.denx.de>, <thomas.petazzoni@bootlin.com>,
+ <gregory.clement@bootlin.com>, <u-kumar1@ti.com>, Gowtham Tammana
+ <g-tammana@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/9] DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic
+ node for esm
+Message-ID: <20231019173032.lta44hodykc3fwwo@enquirer>
+References: <20231016141135.325698-1-thomas.richard@bootlin.com>
+ <20231016141135.325698-2-thomas.richard@bootlin.com>
+ <20231016162915.53tpyquivwltekdr@anagram>
+ <311c04dc-8bd5-4300-b496-6dc41403481e@bootlin.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 4e7924b28e88b6d2480
-X-MBO-RS-META: t3b7ekozxrx67ns4psm86s4anoztitoc
-X-Rspamd-Queue-Id: 4SBDzT1VGBz9sn9
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <311c04dc-8bd5-4300-b496-6dc41403481e@bootlin.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,24 +85,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit e463222cce0df86f05a117f06e1737f539841fe6:
+On 14:42-20231019, Thomas Richard wrote:
+> On 10/16/23 18:29, Nishanth Menon wrote:
+> > On 16:11-20231016, Thomas Richard wrote:
+> >> From: Gowtham Tammana <g-tammana@ti.com>
+> >>
+> >> Add pmic tps659413 node needed for ESM error event handling.
+> >>
+> >> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+> >> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> >> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+> >> ---
+> >>
+> >>  arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 17 ++++++++++++++---
+> >>  1 file changed, 14 insertions(+), 3 deletions(-)
+> >>
+> >> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> >> index e62f9218e8..2bf0d5e3c0 100644
+> >> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> >> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> >> @@ -249,13 +249,24 @@
+> >>  
+> >>  &wkup_i2c0 {
+> >>  	bootph-pre-ram;
+> >> +	pinctrl-names = "default";
+> >> +	pinctrl-0 = <&wkup_i2c0_pins_default>;
+> >> +	clock-frequency = <400000>;
+> >> +
+> >> +	tps659413: tps659413@48 {
+> >> +		compatible = "ti,tps659413";
+> >> +		reg = <0x48>;
+> >> +		bootph-pre-ram;
+> >> +
+> >> +		regulators_a: regulators {
+> >> +			bootph-pre-ram;
+> >> +		};
+> >> +	};
+> >> +
+> >>  	lp876441: lp876441@4c {
+> >>  		compatible = "ti,lp876441";
+> >>  		reg = <0x4c>;
+> >>  		bootph-pre-ram;
+> >> -		pinctrl-names = "default";
+> >> -		pinctrl-0 = <&wkup_i2c0_pins_default>;
+> >> -		clock-frequency = <400000>;
+> >>  
+> >>  		regulators: regulators {
+> >>  			bootph-pre-ram;
+> >> -- 
+> >> 2.39.2
+> >>
+> > 
+> > Please send these changes upstream linux kernel.
+> 
+> Hi Nishanth,
+> 
+> I found this series
+> (https://lore.kernel.org/all/20230810-tps6594-v6-0-2b2e2399e2ef@ti.com/)
+> which includes a patch to create the two pmic nodes for j7200 target.
+> It matches exactly my needs.
+> 
+> I found it was merged in TI linux kernel
+> https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/arch/arm64/boot/dts/ti/k3-j7200-som-p0.dtsi?h=ti-linux-6.1.y&id=0b3a445305b24aafba567909dac75961a0e8908c)
 
-  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-riscv (2023-10-19 09:40:04 -0400)
+I will skip commenting on TI vendor kernel and bootloader stuff.
+> 
+> 
+> But referring to your answer
+> (https://lore.kernel.org/all/169164472311.19570.17843597381384613605.b4-ty@ti.com/)
+> this series will not be merged upstream as is.
+> 
+> Should I send a single patch to declare pmics only for J7200 ?
+> Could I just send a minimal definition of the pmics, or should I send a
+> full definition (including regulators) ?
+> 
 
-are available in the Git repository at:
+It will be good to discuss kernel patches in kernel.org mailing lists :)
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master_uart_test
+But yeah - that series was pretty much close to getting merged before
+I had to drop when testing I do failed. If we are doing it, we'd need
+to do as a full definition (including regulators).. Though, I am
+disappointed at TI dropping the ball on this (Udit/Praneeth: hint -
+this is blocking additional progress).
 
-for you to fetch changes up to 966caedfa89acaeceb6968f051b7ae26c4c6673f:
-
-  serial: sh: Add RZ/G2L SCIF support (2023-10-19 17:03:20 +0200)
-
-----------------------------------------------------------------
-Paul Barker (2):
-      serial: sh: Fix error handling
-      serial: sh: Add RZ/G2L SCIF support
-
- arch/arm/mach-rmobile/Kconfig |  1 +
- drivers/serial/serial_sh.c    | 31 +++++++++++++++++++++++++++++--
- drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
- 3 files changed, 48 insertions(+), 3 deletions(-)
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
