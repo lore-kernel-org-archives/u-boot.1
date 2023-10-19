@@ -4,52 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550E6CDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 03:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C0D2CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 03:22:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5354F87129;
-	Thu, 19 Oct 2023 05:21:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 452B887148;
+	Thu, 19 Oct 2023 05:22:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="BxeXO7wp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HDHivTBI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F067487132; Thu, 19 Oct 2023 05:21:48 +0200 (CEST)
-Received: from m15.mail.163.com (m15.mail.163.com [45.254.50.219])
- by phobos.denx.de (Postfix) with ESMTP id 19415870B0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 05:21:44 +0200 (CEST)
+ id 748908714D; Thu, 19 Oct 2023 05:22:06 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 418D787145
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 05:22:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bruce_suen@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=7ailR
- eIPVHKAOlt77gE1hzBL3Im/6lqXud3+V1N4cvQ=; b=BxeXO7wpEhueveFieZdcD
- rabRhdja/XN/r8XqQ9xihjOfOh9oaero5lZ4DCJ8brt36dEcGtve2l4XWfJssa7Z
- 6uPevgBtUFw01LkJtmf3yWJuRB8A9v7uZ43O0l/viptOoIQw77h2cEYde160o/jF
- 0evbBXhi2frlBgKv7WADrc=
-Received: from localhost.localdomain (unknown [119.123.78.113])
- by zwqz-smtp-mta-g0-2 (Coremail) with SMTP id _____wBn_y24oDBl5PaUAA--.34850S4;
- Thu, 19 Oct 2023 11:21:29 +0800 (CST)
-From: Bruce Suen <bruce_suen@163.com>
-To: u-boot@lists.denx.de
-Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- frieder.schrempf@kontron.de, bruce.sun@xtxtech.com,
- Bruce Suen <bruce_suen@163.com>
-Subject: [PATCH] mtd: spinand: Add support for XTX XT26xxxDxxxxx
-Date: Wed, 18 Oct 2023 23:21:25 -0400
-Message-Id: <20231019032125.6683-1-bruce_suen@163.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-53fbf2c42bfso5612955a12.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 20:22:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697685722; x=1698290522; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=h6M5J4dhM2bPsEhZM/QBoIUFqEO/zn3D+knTkj4Less=;
+ b=HDHivTBIM+4bXhOM5YEtdewjepnF04bHlNBVgbBiE4gvO2NMXEq7Cfv2NVTmIhq/x6
+ 6z02jzq5S5audfeoKWvh1HaZzz+6bn/EpHXcsyD/YVyee8/bipw0rB+nJIyX2KvBNWFT
+ pAoROxqzCqvBfBFAjLBrHU2V4QknmlHG3Ld6HuZUjBgUplpWr9ZdNSkuj74PCpurIPxR
+ 3tGSavbyGZwb99b05ofi7cuk19mBgVOTf2KPR9X8nC7W+0aDUCEAblOJdg5+eEMM79Us
+ t7X4BCQQEegltQoeW4O5KgBlnAS8w51gcUEgkJVHqj1VcNBrEElkECuAOfNCrQP0yoRc
+ zE3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697685722; x=1698290522;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=h6M5J4dhM2bPsEhZM/QBoIUFqEO/zn3D+knTkj4Less=;
+ b=PyF8XQu+hxAQg8rSNw1VuLnrPqNMzTP3ZKLLeR3JYe2h3G7vmEWqTpcRXEK/u32gLw
+ BF0P6zfQXOMQcQd+8ES/8HzL3bk+/arHNKhkecgXmJwTSmyhNfRjWcFX+mqOs4VNuCnz
+ LU7SmH062RNNJ+0kkkAQa6/w8hfGGb6nmgq1cnGEYKaJt05bWCDuXe3Jm3Lui341qgMk
+ YkIxrUS3UwjTLBTE4hTy9sAxxMcLClMw+RCBrWzpzKPbiXpIThCevHVvu2gmoSL8aycP
+ 60ncAitY+Lc8u7bELxuLrwP97bn65vlwSkdXnytUGDgF+iAcOWzULZGAamFWjSrSd6E1
+ +wFw==
+X-Gm-Message-State: AOJu0Yzp2m4bzaAOzZ61QHg6fyqumVMP1cjAC75Gb9YpAg9PwSiZoFia
+ FZtDolNWx2hmSrKJ5rj2ZGcI/QcKoVQJ+jMIhB2evg==
+X-Google-Smtp-Source: AGHT+IGqJaL+90/WVzeU2VAN3ZKQEuUkJmTVbMJFUL5A2ob6IhQz0BXZ+ezpbMW3zLiO1M+QS1v2eMc3y4EpVf56i4s=
+X-Received: by 2002:a05:6a20:8f1e:b0:169:cd02:65e9 with SMTP id
+ b30-20020a056a208f1e00b00169cd0265e9mr1104494pzk.33.1697685721922; Wed, 18
+ Oct 2023 20:22:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wBn_y24oDBl5PaUAA--.34850S4
-X-Coremail-Antispam: 1Uf129KBjvJXoW3JFyrGw1xJr4ftF1rZw48Crg_yoW3tw17pa
- s0qFyrGr48Ga17Was2qayDZr98Xw4xKrW7u3429a4jvFyrK34rZFW7Ary3CrnrG3yxJay3
- uw4jgr9rW3WYyaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pR7l19UUUUU=
-X-Originating-IP: [119.123.78.113]
-X-CM-SenderInfo: 5euxuvpbvxv0i6rwjhhfrp/xS2BKRgOKFgi7maMwQAAso
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-7-masahisa.kojima@linaro.org>
+ <13131882-9007-4322-ad4a-5c8b505a5328@gmx.de>
+In-Reply-To: <13131882-9007-4322-ad4a-5c8b505a5328@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Thu, 19 Oct 2023 12:21:50 +0900
+Message-ID: <CADQ0-X8iRRiBTNBkLT-SaMpmDmGbJOQ6=a14F3MBzqhg9xtjkA@mail.gmail.com>
+Subject: Re: [PATCH v7 6/9] efi_loader: add CDROM short-form device path
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,246 +89,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Support XTX Technology XT26G01DXXXXX, XT26G11DXXXXX, XT26Q01DXXXXX,
-XT26G02DXXXXX, XT26G12DXXXXX, XT26Q02DXXXXX, XT26G04DXXXXX, and
-XT26Q04DXXXXX SPI NAND.
+Hi Heinrich,
 
-These are 3V/1.8V 1G/2G/4Gbit serial SLC NAND flash device with on-die
-ECC(8bit strength per 512bytes).
+On Wed, 18 Oct 2023 at 19:25, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 10/16/23 08:45, Masahisa Kojima wrote:
+> > UEFI specification does not mandate to support the short-form
+> > of the CDROM media device path.
+> > Fedora installation ISO image is identified as CDROM media
+> > device path, supporting short-form CDROM media device path is
+> > required to automatically add the boot option having default
+> > file of Fedora installation image.
+>
+> How is the CDROM media path created?
 
-Datasheet Links:
-- http://www.xtxtech.com/download/?AId=458
-- http://www.xtxtech.com/download/?AId=495
+Fedora installation media only has a ISO 9660 filesystem without
+MBR/GPT partition table.
+U-Boot disk driver classifies it as PART_TYPE_ISO, then EFI-subsystem
+creates a CDROM media path for it.
 
-Signed-off-by: Bruce Suen <bruce_suen@163.com>
----
- drivers/mtd/nand/spi/Makefile |   1 +
- drivers/mtd/nand/spi/core.c   |   1 +
- drivers/mtd/nand/spi/xtx.c    | 180 ++++++++++++++++++++++++++++++++++
- include/linux/mtd/spinand.h   |   1 +
- 4 files changed, 183 insertions(+)
- create mode 100644 drivers/mtd/nand/spi/xtx.c
+> Why would the image not be found if the path is not shortened?
 
-diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
-index 3051de4f7e..e46cfed446 100644
---- a/drivers/mtd/nand/spi/Makefile
-+++ b/drivers/mtd/nand/spi/Makefile
-@@ -1,4 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0
- 
- spinand-objs := core.o gigadevice.o macronix.o micron.o paragon.o toshiba.o winbond.o
-+spinand-objs += xtx.o
- obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 597b088ca7..0b4c067425 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -828,6 +828,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
- 	&paragon_spinand_manufacturer,
- 	&toshiba_spinand_manufacturer,
- 	&winbond_spinand_manufacturer,
-+	&xtx_spinand_manufacturer,
- };
- 
- static int spinand_manufacturer_match(struct spinand_device *spinand,
-diff --git a/drivers/mtd/nand/spi/xtx.c b/drivers/mtd/nand/spi/xtx.c
-new file mode 100644
-index 0000000000..ced05b5895
---- /dev/null
-+++ b/drivers/mtd/nand/spi/xtx.c
-@@ -0,0 +1,180 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2018 Stefan Roese <sr@denx.de>
-+ *
-+ * Derived from drivers/mtd/nand/spi/micron.c
-+ *   Copyright (c) 2016-2017 Micron Technology, Inc.
-+ */
-+
-+#ifndef __UBOOT__
-+#include <linux/device.h>
-+#include <linux/kernel.h>
-+#endif
-+#include <linux/bitfield.h>
-+#include <linux/mtd/spinand.h>
-+
-+#define SPINAND_MFR_XTX	0x0B
-+
-+#define XT26XXXD_STATUS_ECC3_ECC2_MASK	    GENMASK(7, 6)
-+#define XT26XXXD_STATUS_ECC_NO_DETECTED     (0)
-+#define XT26XXXD_STATUS_ECC_1_7_CORRECTED   (1)
-+#define XT26XXXD_STATUS_ECC_8_CORRECTED     (3)
-+#define XT26XXXD_STATUS_ECC_UNCOR_ERROR     (2)
-+
-+static SPINAND_OP_VARIANTS(read_cache_variants,
-+		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
-+		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
-+
-+static SPINAND_OP_VARIANTS(write_cache_variants,
-+		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
-+		SPINAND_PROG_LOAD(true, 0, NULL, 0));
-+
-+static SPINAND_OP_VARIANTS(update_cache_variants,
-+		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
-+		SPINAND_PROG_LOAD(false, 0, NULL, 0));
-+
-+static int xt26xxxd_ooblayout_ecc(struct mtd_info *mtd, int section,
-+				  struct mtd_oob_region *region)
-+{
-+	if (section)
-+		return -ERANGE;
-+
-+	region->offset = mtd->oobsize / 2;
-+	region->length = mtd->oobsize / 2;
-+
-+	return 0;
-+}
-+
-+static int xt26xxxd_ooblayout_free(struct mtd_info *mtd, int section,
-+				   struct mtd_oob_region *region)
-+{
-+	if (section)
-+		return -ERANGE;
-+
-+	region->offset = 2;
-+	region->length = mtd->oobsize / 2 - 2;
-+
-+	return 0;
-+}
-+
-+static const struct mtd_ooblayout_ops xt26xxxd_ooblayout = {
-+	.ecc = xt26xxxd_ooblayout_ecc,
-+	.rfree = xt26xxxd_ooblayout_free,
-+};
-+
-+static int xt26xxxd_ecc_get_status(struct spinand_device *spinand,
-+				   u8 status)
-+{
-+	switch (FIELD_GET(STATUS_ECC_MASK, status)) {
-+	case XT26XXXD_STATUS_ECC_NO_DETECTED:
-+		return 0;
-+	case XT26XXXD_STATUS_ECC_UNCOR_ERROR:
-+		return -EBADMSG;
-+	case XT26XXXD_STATUS_ECC_1_7_CORRECTED:
-+		return 4 + FIELD_GET(XT26XXXD_STATUS_ECC3_ECC2_MASK, status);
-+	case XT26XXXD_STATUS_ECC_8_CORRECTED:
-+		return 8;
-+	default:
-+		break;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static const struct spinand_info xtx_spinand_table[] = {
-+	SPINAND_INFO("XT26G01D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x31),
-+		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26G11D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x34),
-+		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26Q01D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x51),
-+		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26G02D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x32),
-+		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26G12D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x35),
-+		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26Q02D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x52),
-+		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26G04D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x33),
-+		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+	SPINAND_INFO("XT26Q04D",
-+		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x53),
-+		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
-+		     NAND_ECCREQ(8, 512),
-+		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
-+					      &write_cache_variants,
-+					      &update_cache_variants),
-+		     0,
-+		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
-+				     xt26xxxd_ecc_get_status)),
-+};
-+
-+static const struct spinand_manufacturer_ops xtx_spinand_manuf_ops = {
-+};
-+
-+const struct spinand_manufacturer xtx_spinand_manufacturer = {
-+	.id = SPINAND_MFR_XTX,
-+	.name = "XTX",
-+	.chips = xtx_spinand_table,
-+	.nchips = ARRAY_SIZE(xtx_spinand_table),
-+	.ops = &xtx_spinand_manuf_ops,
-+};
-diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
-index e8d6feb970..bf7696a981 100644
---- a/include/linux/mtd/spinand.h
-+++ b/include/linux/mtd/spinand.h
-@@ -251,6 +251,7 @@ extern const struct spinand_manufacturer micron_spinand_manufacturer;
- extern const struct spinand_manufacturer paragon_spinand_manufacturer;
- extern const struct spinand_manufacturer toshiba_spinand_manufacturer;
- extern const struct spinand_manufacturer winbond_spinand_manufacturer;
-+extern const struct spinand_manufacturer xtx_spinand_manufacturer;
- 
- /**
-  * struct spinand_op_variants - SPI NAND operation variants
--- 
-2.34.1
+We discussed in the separate patch that we drop the patch#4(automatically
+create the boot option with default application file path appended),
+so this patch is also dropped.
 
+> What is Fedora specific here?
+
+Fedora installation media has ISO 9660 filesystem only.
+Other disto such as Debian has a MBR partition table, U-Boot creates
+HardDisk device path for these medias.
+
+> What does EDK II do?
+
+EDK II does the same for Fedora install image, CDROM media path is created.
+
+Thanks,
+Masahisa Kojima
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >   lib/efi_loader/efi_device_path.c | 3 ++-
+> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> > index ed7214f3a3..ac673ab117 100644
+> > --- a/lib/efi_loader/efi_device_path.c
+> > +++ b/lib/efi_loader/efi_device_path.c
+> > @@ -110,7 +110,8 @@ struct efi_device_path *efi_dp_shorten(struct efi_device_path *dp)
+> >       while (dp) {
+> >               if (EFI_DP_TYPE(dp, MESSAGING_DEVICE, MSG_USB_WWI) ||
+> >                   EFI_DP_TYPE(dp, MEDIA_DEVICE, HARD_DRIVE_PATH) ||
+> > -                 EFI_DP_TYPE(dp, MEDIA_DEVICE, FILE_PATH))
+> > +                 EFI_DP_TYPE(dp, MEDIA_DEVICE, FILE_PATH) ||
+> > +                 EFI_DP_TYPE(dp, MEDIA_DEVICE, CDROM_PATH))
+> >                       return dp;
+> >
+> >               dp = efi_dp_next(dp);
+>
