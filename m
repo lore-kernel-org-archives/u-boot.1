@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2EDCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 17:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D632CCDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 17:22:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7819D87450;
-	Thu, 19 Oct 2023 19:04:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 99CF186FD8;
+	Thu, 19 Oct 2023 19:22:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eKB+mR0R";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HY+df1OW";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="v7TgmlCU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3E3887476; Thu, 19 Oct 2023 19:04:56 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A238E86FFD; Thu, 19 Oct 2023 19:21:59 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE4B287445
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 19:04:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72E6786801
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 19:21:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6bcbfecf314so1177637b3a.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 10:04:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697735093; x=1698339893; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jhmh7TZge5elXp4V3HlMA/rv2Mnz2omQ3IRiYK7H+BI=;
- b=eKB+mR0RWZUc1hhO6rs+BWzv/uJWRATdW8j2O6p0KPJeBkm8mDCtGg2oHV2Fc5QM0Q
- 00A4P9gq/m6Jyf4il7DMiTlucognybPO+RDyzUeC0CBOUdYcapbWxlxQQo3/KWyFhZsb
- bgPl1YQ8up42fVK8qWfq2yNMxXnG/8Q5u4UJLMhA/GNT6T4byGE7p7bavnbxBxaYAW7V
- vScpRYqteA4+3Z6XGa8igZ7z6W+Z+Cv3G7x8aqnN9tV2TBhvBPPyVmvN7AkhT9tu+KM8
- W7Mgldz9C30NMah7eJlruI9qilanGST4KPD9DmxTuQ/b+QqXvVWqP7/FdJ7g/Nj1OhKz
- uq8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697735093; x=1698339893;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jhmh7TZge5elXp4V3HlMA/rv2Mnz2omQ3IRiYK7H+BI=;
- b=jGnoiEhQSDMIv6OSrtu44e0Z9Stao6ZzABN2C0u+Yq4U6fCVfvPLIpdxewI50HGi75
- BMVBscYHYWXyIRDYS+yJFEyyE+/lM+jo6WLVwVCfqGKZtDT5y+XaJrSqnQcjFMpoBstW
- XPST48wXsw01CthgOAeV1bVD3y6YBK1g0m0svYh2coQLiy9JtDPWN6dj41vm842NyfDh
- t3i99NytQxStkKgwIN+bBGtiwfFF6Ma5CIUBVsgR94zPsJu1rgAS6sVNeFT1h4MJhozg
- h8R1qRPM/H4Jh2DjvcJK1vcxSFlY8895xaxwTkZvBFEz0pD739Xsywm501maPmoje+MH
- Ecfg==
-X-Gm-Message-State: AOJu0Yzsv1h/rxZuSxPaxSWkotYO6cYDuqKaGVZGj0kZOR/tiqzISg8+
- IZHdrOVFgruId5yPWsvnSYw=
-X-Google-Smtp-Source: AGHT+IG4qaqQ82vrqUXeHFPFVlZwLdPe1qbUyWrqNfn2FtxNY+tldGDjvkxH2imMxgtEDnSQhdblAQ==
-X-Received: by 2002:a05:6a00:4a0d:b0:6be:4b10:b27d with SMTP id
- do13-20020a056a004a0d00b006be4b10b27dmr2617352pfb.0.1697735092778; 
- Thu, 19 Oct 2023 10:04:52 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
- by smtp.gmail.com with ESMTPSA id
- s23-20020aa78bd7000000b0068c006dd5c1sm25523pfd.115.2023.10.19.10.04.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 10:04:52 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] imx8mp_evk: Simplify FEC initialization
-Date: Thu, 19 Oct 2023 14:04:41 -0300
-Message-Id: <20231019170441.1610453-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SBDzT1VGBz9sn9;
+ Thu, 19 Oct 2023 19:21:57 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697736117;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=yrMuaE4T2wT4rkozE2I/3V9zu7+zeplbYPhEPdVXEGI=;
+ b=HY+df1OWSRizmJDXYdWRrxwGcx9PuO9wHHlyq4wdCaMrIv4rh70zTkwPu9RqolOLD9xbWn
+ KmPObD489bNHXGuAQa4Ajn2u25xp7goAvKmA4ip4QfsIQNhq+e3Ow7IMRKBhSa4H3GGJUI
+ rG8r5/wNlUP0gYAfEtqYfKuc55SB6DE/H0LLazvnGtTdGjOxIw3szv9DknJBsCjSEyNJyt
+ S8ViuhnPZRgc94si08k2fFltIpLYebwptNXTJMZnhMq8dz4jmSpzSBj0Kk1fMdrCsdWPwH
+ hZfvzwa7s8ausSZkGSPvRMyi9EYeJM9n2pCAlUooYEbLwRYKe6R4nHiAyl8TlA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697736115;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=yrMuaE4T2wT4rkozE2I/3V9zu7+zeplbYPhEPdVXEGI=;
+ b=v7TgmlCUdg4hnVR212DwOd98r0HaEf4MLtD8CInfofyJe6WWUbflawHsapdeN4+PiU3hbm
+ 5e91GN+mYYf5V/jbxeHWrEwbWfcfJoQMJQB8N0kvarUPxESRjFmvlHJmdflNWKnpa/9Acv
+ 4XiQG7mOAnq+eYZ8M0OZZ1hXC6y3KXYc87l8j+RDfwxJQzZNj7tp34xd1XFz2qcGFO/hWd
+ qMUmQHipKjmmV5BglJ+W0pY70jIJWhD4V0Dd//mnVJdWDOjelKzOKkItsMZEUyF3L1YIaR
+ c7slGIVQMlvZdG2t2nJWv6PMFt+lK1uIEK6qUwD6Hq6JP1Y/OkXwhtWVkQPEvg==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PULL] u-boot-sh/master_uart_test
+Date: Thu, 19 Oct 2023 19:21:42 +0200
+Message-ID: <20231019172145.14222-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 4e7924b28e88b6d2480
+X-MBO-RS-META: t3b7ekozxrx67ns4psm86s4anoztitoc
+X-Rspamd-Queue-Id: 4SBDzT1VGBz9sn9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,80 +84,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+The following changes since commit e463222cce0df86f05a117f06e1737f539841fe6:
 
-With DM enabled, there is no need for board code to initialize
-the FEC interface.
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-riscv (2023-10-19 09:40:04 -0400)
 
-The RTL8211FDI Ethernet PHYs have 25MHz oscillator, so there is no
-need to enable the RGMII TX clk output.
+are available in the Git repository at:
 
-Also, there is no need for describing the deprecated phy-reset properties
-in u-boot.dtsi.
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master_uart_test
 
-Remove all these uneeded pieces.
+for you to fetch changes up to 966caedfa89acaeceb6968f051b7ae26c4c6673f:
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- arch/arm/dts/imx8mp-evk-u-boot.dtsi     |  8 --------
- board/freescale/imx8mp_evk/imx8mp_evk.c | 26 +------------------------
- 2 files changed, 1 insertion(+), 33 deletions(-)
+  serial: sh: Add RZ/G2L SCIF support (2023-10-19 17:03:20 +0200)
 
-diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-index 43f13a9c22f7..db6bc6a11883 100644
---- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-@@ -150,11 +150,3 @@
- 	reset-delay-us = <15000>;
- 	reset-post-delay-us = <100000>;
- };
--
--&fec {
--	phy-reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
--	phy-reset-duration = <15>;
--	phy-reset-post-delay = <100>;
--};
--
--
-diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-index a24b8c1d8608..2c2b8383c8dc 100644
---- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-+++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-@@ -20,33 +20,9 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--static void setup_fec(void)
--{
--	struct iomuxc_gpr_base_regs *gpr =
--		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
--
--	/* Enable RGMII TX clk output */
--	setbits_le32(&gpr->gpr[1], BIT(22));
--}
--
--#if CONFIG_IS_ENABLED(NET)
--int board_phy_config(struct phy_device *phydev)
--{
--	if (phydev->drv->config)
--		phydev->drv->config(phydev);
--	return 0;
--}
--#endif
--
- int board_init(void)
- {
--	int ret = 0;
--
--	if (IS_ENABLED(CONFIG_FEC_MXC)) {
--		setup_fec();
--	}
--
--	return ret;
-+	return 0;
- }
- 
- int board_late_init(void)
--- 
-2.34.1
+----------------------------------------------------------------
+Paul Barker (2):
+      serial: sh: Fix error handling
+      serial: sh: Add RZ/G2L SCIF support
 
+ arch/arm/mach-rmobile/Kconfig |  1 +
+ drivers/serial/serial_sh.c    | 31 +++++++++++++++++++++++++++++--
+ drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+ 3 files changed, 48 insertions(+), 3 deletions(-)
