@@ -4,75 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04E7DCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 12:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DEA5CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 12:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 019DE87028;
-	Thu, 19 Oct 2023 14:37:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7B30787045;
+	Thu, 19 Oct 2023 14:42:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ehjF+5ZT";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="f2zJ72qP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C92818702D; Thu, 19 Oct 2023 14:37:01 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 28ED88704A; Thu, 19 Oct 2023 14:42:48 +0200 (CEST)
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EA4487028
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:36:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9DBD86F9A
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:42:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1c9d132d92cso19016435ad.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 05:36:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697719018; x=1698323818; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9O8um212shELbPBDFh8MqdzYBKWWoCjbp9aD82tXV6U=;
- b=ehjF+5ZTE11/2ZrRlD6hottAWEvtLVWWhxh6jmFSgpvZC9UtooJdrhuKUIP807aewX
- 98wgPvGRl9+O/dTOapoEu81EGefhbxx2KaNHcCSYubZOkohJlZn8+3NdmtzQDTLqpjxU
- SF00JlrcZwqzB2M1IYv2XqtCmyX0bMbJ3xamGxXaY8Avj3v1fpzBcAkDUNUdFW7AT/AW
- H3WyATvoTCKhOBBGrSQlA9PU/gHjLocSOnvERieNCz3wOiiMxpIbRgcYXogcBqZFFs/e
- dcPf8fTM9tIEfo7WPVDg7btvkaxmIZOHCPGVg3Mn4fL+HznhthQswAYTPFeBWJgibzwV
- EEeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697719018; x=1698323818;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9O8um212shELbPBDFh8MqdzYBKWWoCjbp9aD82tXV6U=;
- b=ddJ9+5iqYGvp/b6Gxv6G2JGfGdoPLbgpvv/xzJsWKNeuWS73p8tLWjDRxmMGAReQr3
- UZrPKTqoC56qU1SPL7FWdzqP3tV0d8rwSayL4Dn4YvG3FVT4HBNjwiLEAl4aR1tT/egC
- 8s+Z0Xw39NEy5g6YszvxBSpXizSvzZJrFgga+gIbxtEx7VRWmL+SR2m/VYR4Aylu3NXc
- uAO6/JAcRKOX6EJutKBm/SaVvyDBLvlMnzEvZdOiKlTJ5jTL0sjrCIfUnsv4NogPkX7G
- W8I6oNn8M3ZwefD+As9RzEkYYpRtTQx0aRra8fjbMOw2nuiE/b3yNLlOsbnAB65UKEPR
- 1w6Q==
-X-Gm-Message-State: AOJu0Yw3qfV9UW7C1TqFHUxrXqF8FZpSnkWnQurhSMEi2U3x8pi+nD+L
- E7S1LTYjvLyoDZK8FNm7QvM=
-X-Google-Smtp-Source: AGHT+IEP/1AjbNeNdYmAPyu+89DlI4z0cYn4gAe9UowbwdM6gKU/7hjn2jwR2JmMhXGSGksGPfOe+w==
-X-Received: by 2002:a17:903:244a:b0:1c6:9312:187 with SMTP id
- l10-20020a170903244a00b001c693120187mr2102619pls.3.1697719017586; 
- Thu, 19 Oct 2023 05:36:57 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
- by smtp.gmail.com with ESMTPSA id
- x4-20020a170902ec8400b001c74df14e6fsm1820978plg.284.2023.10.19.05.36.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 05:36:57 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, aford173@gmail.com, marex@denx.de,
- tharvey@gateworks.com, peng.fan@nxp.com, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] phy: phy-imx8mq-usb: Remove .exit operation
-Date: Thu, 19 Oct 2023 09:36:09 -0300
-Message-Id: <20231019123609.1489768-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=thomas.richard@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EF66AC000A;
+ Thu, 19 Oct 2023 12:42:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1697719365;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Fq4+PexogCzzsSdGjjnkBPK4F1Ta9W7eRuSmuNHSNY4=;
+ b=f2zJ72qPG8tjEUTmrm0j0Xh/jIeYEs61DgiLE5/LWKPO0QdfnNkyUhn5avehkk82DJoz3y
+ 82mEbyS8LsfuwV0Zo9idw7erAZtOD6u8bS4cYoLw+jovOlKj11tZ9YgmklxXu/o6omFRuW
+ aWLDvF75ElYQ4FvN+7xPQfYfldZ9s0yfKzW7rX/N16jKi8eE3cvH1rZTiyDx5crFYr2MT6
+ 4w1WPDKr64Kcc0uTGJXklUcfXLvoP8y7iO/gGNXYmrE0GTVrRMmGRbEREVi/R5jC2jqyzX
+ 81G4SxEwbezDCwEHqU0IHrTcMZiOBVIigYBPSqZpC2OxUM59epR25cVmgZqsGA==
+Message-ID: <311c04dc-8bd5-4300-b496-6dc41403481e@bootlin.com>
+Date: Thu, 19 Oct 2023 14:42:44 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/9] DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic
+ node for esm
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>
+Cc: u-boot@lists.denx.de, thomas.petazzoni@bootlin.com,
+ gregory.clement@bootlin.com, u-kumar1@ti.com,
+ Gowtham Tammana <g-tammana@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Simon Glass <sjg@chromium.org>
+References: <20231016141135.325698-1-thomas.richard@bootlin.com>
+ <20231016141135.325698-2-thomas.richard@bootlin.com>
+ <20231016162915.53tpyquivwltekdr@anagram>
+From: Thomas Richard <thomas.richard@bootlin.com>
+In-Reply-To: <20231016162915.53tpyquivwltekdr@anagram>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-GND-Sasl: thomas.richard@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,49 +76,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On 10/16/23 18:29, Nishanth Menon wrote:
+> On 16:11-20231016, Thomas Richard wrote:
+>> From: Gowtham Tammana <g-tammana@ti.com>
+>>
+>> Add pmic tps659413 node needed for ESM error event handling.
+>>
+>> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+>> ---
+>>
+>>  arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 17 ++++++++++++++---
+>>  1 file changed, 14 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>> index e62f9218e8..2bf0d5e3c0 100644
+>> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>> @@ -249,13 +249,24 @@
+>>  
+>>  &wkup_i2c0 {
+>>  	bootph-pre-ram;
+>> +	pinctrl-names = "default";
+>> +	pinctrl-0 = <&wkup_i2c0_pins_default>;
+>> +	clock-frequency = <400000>;
+>> +
+>> +	tps659413: tps659413@48 {
+>> +		compatible = "ti,tps659413";
+>> +		reg = <0x48>;
+>> +		bootph-pre-ram;
+>> +
+>> +		regulators_a: regulators {
+>> +			bootph-pre-ram;
+>> +		};
+>> +	};
+>> +
+>>  	lp876441: lp876441@4c {
+>>  		compatible = "ti,lp876441";
+>>  		reg = <0x4c>;
+>>  		bootph-pre-ram;
+>> -		pinctrl-names = "default";
+>> -		pinctrl-0 = <&wkup_i2c0_pins_default>;
+>> -		clock-frequency = <400000>;
+>>  
+>>  		regulators: regulators {
+>>  			bootph-pre-ram;
+>> -- 
+>> 2.39.2
+>>
+> 
+> Please send these changes upstream linux kernel.
 
-Currently, when running "ums 0 mmc 2" and breaking it via
-CTRL + C, the following message is seen:
+Hi Nishanth,
 
-u-boot=> ums 0 mmc 1
-UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1dacc00
-CTRL+C - Operation aborted
-clk usb_phy_root_clk already disabled
+I found this series
+(https://lore.kernel.org/all/20230810-tps6594-v6-0-2b2e2399e2ef@ti.com/)
+which includes a patch to create the two pmic nodes for j7200 target.
+It matches exactly my needs.
 
-The USB PHY clock is disabled twice: first it gets disabled
-inside imx8mq_usb_phy_power_off(), then it is disabled again
-inside imx8mq_usb_phy_exit().
+I found it was merged in TI linux kernel
+https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/arch/arm64/boot/dts/ti/k3-j7200-som-p0.dtsi?h=ti-linux-6.1.y&id=0b3a445305b24aafba567909dac75961a0e8908c)
 
-Let the USB PHY clock be disabled only once inside
-imx8mq_usb_phy_power_off() by removing the .exit operation.
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- drivers/phy/phy-imx8mq-usb.c | 6 ------
- 1 file changed, 6 deletions(-)
+But referring to your answer
+(https://lore.kernel.org/all/169164472311.19570.17843597381384613605.b4-ty@ti.com/)
+this series will not be merged upstream as is.
 
-diff --git a/drivers/phy/phy-imx8mq-usb.c b/drivers/phy/phy-imx8mq-usb.c
-index b660eadecf1c..e5e96e77a681 100644
---- a/drivers/phy/phy-imx8mq-usb.c
-+++ b/drivers/phy/phy-imx8mq-usb.c
-@@ -231,16 +231,10 @@ static int imx8mq_usb_phy_power_off(struct phy *usb_phy)
- 	return 0;
- }
- 
--static int imx8mq_usb_phy_exit(struct phy *usb_phy)
--{
--	return imx8mq_usb_phy_power_off(usb_phy);
--}
--
- struct phy_ops imx8mq_usb_phy_ops = {
- 	.init = imx8mpq_usb_phy_init,
- 	.power_on = imx8mq_usb_phy_power_on,
- 	.power_off = imx8mq_usb_phy_power_off,
--	.exit = imx8mq_usb_phy_exit,
- };
- 
- int imx8mq_usb_phy_probe(struct udevice *dev)
--- 
-2.34.1
+Should I send a single patch to declare pmics only for J7200 ?
+Could I just send a minimal definition of the pmics, or should I send a
+full definition (including regulators) ?
+
+Regards,
+
+Thomas
+
 
