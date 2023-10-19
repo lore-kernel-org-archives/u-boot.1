@@ -4,63 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B01CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55858CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:31:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98F3D870B1;
-	Thu, 19 Oct 2023 16:14:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id CB2158723E;
+	Thu, 19 Oct 2023 16:31:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="u26Ww8KR";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E327A86EDF; Thu, 19 Oct 2023 16:14:29 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8EEB8718C
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:14:27 +0200 (CEST)
+ id B69E687232; Thu, 19 Oct 2023 16:31:00 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 735BE870F3
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:30:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: ccfa8908-6e89-11ee-b94e-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id ccfa8908-6e89-11ee-b94e-005056992ed3;
- Thu, 19 Oct 2023 16:14:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=YGDtyWDBQu5GYl1Mr9JO4YMilR0VIjmIoLzL9zBpXFw=;
- b=u26Ww8KRm8oGmbzsvZuYdu1BUPyS72uvsjXq12Znxn3Kr45WzS+pOjgTZVpenhixnLfGThQ+UOA+P
- ADBWuvJO12bfzXBPOOKMPe/dP2wkPtw+AcXalJLaKlCZjyNtQ8gc0AxtiJwjp/BgRuC+XiEPzJI8IH
- mDZnqiS4apq/0GaMGEOerzWql1/nsnkrjcPLpwsX3rmGH9l7QpAYxiPh9gxcLAv2CuQYy2U9EmZE+p
- pJeV5BvC9mIZhbqP2vbGp2SEsDne2/XolTM6hQiyXI6u1aoRNZWXUzdQWCZ7nsG0hxWKccXu1nz7Ln
- GO+yfl0qSbAxvbQMVCi94tOtwtOnZkg==
-X-KPN-MID: 33|FGUgRR8pLfHVfGYm8ohvcqlrS/IQIxhnmmq8rjwxH1tf1MJKYErl2ef9H+XA7wh
- qUJIiEogI8EeK2VZRIlzsWTZsdZiBEfCniF9sGKZiFuA=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|G5FwKNrXYSv1i4AjKr3QTqwkwyXJR8d4BXwEdRVlC3T78EAdHYpErv5Ae7qq+14
- JDTGZrZyGo2gBsdLZcWmDzA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id cd8b9953-6e89-11ee-acaa-00505699d6e5;
- Thu, 19 Oct 2023 16:14:23 +0200 (CEST)
-Date: Thu, 19 Oct 2023 16:14:23 +0200
-Message-Id: <87pm1ar96o.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@google.com>
-Cc: heinrich.schuchardt@canonical.com, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de
-In-Reply-To: <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
- (message from Simon Glass on Thu, 19 Oct 2023 07:55:49 -0600)
-Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
-References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
- <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
- <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,237,1694703600"; d="scan'208";a="179875860"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 19 Oct 2023 23:30:54 +0900
+Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.46])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 826C04005B25;
+ Thu, 19 Oct 2023 23:30:52 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v4 0/2] Add support for the Renesas RZ/G2L SMARC EVK
+Date: Thu, 19 Oct 2023 15:30:42 +0100
+Message-Id: <20231019143044.1363-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,84 +54,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@google.com>
-> Date: Thu, 19 Oct 2023 07:55:49 -0600
-> 
-> Hi Heinrich,
-> 
-> On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > On 10/18/23 05:33, Simon Glass wrote:
-> > > Hi Heinrich,
-> > >
-> > > On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:
-> > >>
-> > >> Forward and backward compatibility of Linux kernel device-trees is
-> > >> sometimes missing. One solution approach is to load a kernel specific
-> > >> device-tree. This can either be done via a U-Boot scripts (like the one
-> > >> generated by Debian package flash-kernel or by a boot loader like GRUB.
-> > >> The boot loader approach currently requires to know the device-tree name
-> > >> before first boot which makes it unusable for generic images.
-> > >>
-> > >> Expose the device-tree file name as EFI variable FdtFile.
-> > >> This will allow bootloaders to load a kernel specific device-tree.
-> > >>
-> > >> The variable will not be exposed on ACPI based systems or if the
-> > >> environment variable fdtfile is not defined.
-> > >>
-> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > >> ---
-> > >> v2:
-> > >>          Use a unique GUID to enable future U-Boot independent
-> > >>          standardization.
-> > >>          Do not try to add the variable on ACPI based systems.
-> > >> ---
-> > >>   include/efi_loader.h       |  5 +++++
-> > >>   lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> > >>   2 files changed, 35 insertions(+)
-> > >
-> > > I was too slow to reply to v1.
-> > >
-> > > Does grub load the DT? I was assuming that U-Boot would pass it on?
-> > > What is the interface between U-Boot and grub?
-> >
-> > The device-tree built into U-Boot is often out of date and not usable to
-> > boot current Linux. A single device-tree can be loaded by U-Boot from
-> > file and passed on as EFI configuration table. This device-tree may not
-> > be compatible with all kernel versions exposed by GRUB.
-> >
-> > GRUB provides a devicetree command. It is disabled if you use secure
-> > boot. At least in Debian and Ubuntu GRUB invokes the
-> > EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
-> > fix-ups after loading a device-tree.
-> >
-> > Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
-> > devicetree commands to the boot options in grub.cfg.
-> 
-> Thanks. I wonder if you could document this somewhere? It seems like
-> there are a lot of options and it is quite complicated.
-> 
-> Back to the question, I suppose you are expecting grub to load the DT
-> using this filename? But why doesn't U-Boot load it instead? It seems
-> very convoluted.
+These patches finish off initial support for the RZ/G2L SMARC Evaluation board
+kit (EVK). All patches which have already been merged are dropped, this is just
+the re-worked SCIF patches.
 
-From an OpenBSD perspective:
+These patches have been tested on an RZ/G2L as well as on the qemu 'r2d' machine
+to confirm that the serial port issue observed by Marek in v3 is fixed.
 
-* It allows us to load directly from an OpenBSD filesystem.  (And yes
-  I really think you don't want to add support for all the different
-  flavours of the UFS/FFS filesystem to U-Boot).
+Paul Barker (2):
+  serial: sh: Fix error handling
+  serial: sh: Add RZ/G2L SCIF support
 
-* It means we don't have to worry about breaking other OS installs on
-  the same disk since we can avoid copying the device tree onto the
-  (shared) EFI System Partition.
+ arch/arm/mach-rmobile/Kconfig |  1 +
+ drivers/serial/serial_sh.c    | 31 +++++++++++++++++++++++++++++--
+ drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+ 3 files changed, 48 insertions(+), 3 deletions(-)
 
-* It means that we can provide a uniform user interface that is
-  independent on the UEFI implementation; the user doesn't need to
-  care whether they are dealing with U-Boot, EDK2 or some other
-  proprietary UEFI implementation.
 
-Cheers,
+base-commit: 9a0cf3993f71043ba08c315572c54622de42d447
+-- 
+2.39.2
 
-Mark
