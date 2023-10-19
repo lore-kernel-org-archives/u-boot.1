@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71A08CDB482
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47B09CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:05:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9B0687495;
-	Thu, 19 Oct 2023 17:01:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A1C58749B;
+	Thu, 19 Oct 2023 17:01:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YhOh/GZA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gHgD9wQV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C54DF8743C; Thu, 19 Oct 2023 17:01:36 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id E141B87468; Thu, 19 Oct 2023 17:01:37 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B15DD87454
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D623587259
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a7dafb659cso99013607b3.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:32 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5a81ab75f21so82750737b3.2
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727691; x=1698332491; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697727692; x=1698332492; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AirJw0cDDMZ+s+9xPvxHuqKBNLqNBaZF0XDHiCvDU1w=;
- b=YhOh/GZAXxVGJJ/JhOiT2Zlfq16Ow6uUCQ5rw+/Ij2As7wWQXCJT0VBwzUG8Fe36lY
- +6AQI1PNh9BYrL9ULfebGC+kq7E0FNVxieTYAfLTWSUIRIrVpznx4O4WCcFTrANsHNzH
- jMnMaHuCWtT31uhx2Fk1usoCm9QJdd+0EjKyU=
+ bh=7dee0lhKBvxSuK2Y6NxF2rMok8KADIY6PR9/OQAsJ18=;
+ b=gHgD9wQVKZaDwFA4HvqwZ634RYdZDz6GiyWRYJGNBwwl5r1KLScP3f+gncHTFxQoLc
+ go5BnkiUoEwk2AsEXCobZiw1WI6yLzvmarpESvSbf5Kgcg+F9GZguhR0sytTV5leGoDT
+ KjvQcbL7cikkbTE2W5UWwC3JmC5IytM/g0oiQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727691; x=1698332491;
+ d=1e100.net; s=20230601; t=1697727692; x=1698332492;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AirJw0cDDMZ+s+9xPvxHuqKBNLqNBaZF0XDHiCvDU1w=;
- b=rghZBtdz3Ia6J2UnOQ1jMeQxX7yIXasWnPn/HZnZ7xfZiQlM82jjmmadwgEGdDS4lL
- MDSSXbyhmy6wd8ThBE000+QbQsr7ulcwc+8oCMBlE8Hz5w6Z/71RCvyyhAd5HS4DSfXq
- GSlRcqjruH7rfkc7Ws+6IN9O6wDLWnMshpQ5JT8IvYFzENGj+Blirq5aMHjmtjp/WMUI
- l/nfWM/UlrjdLkfPOZDMEJXjUvI06gAxMtTqijQH2LY7/lrTuxLG3VExFK06Acd8b5zz
- bkzHu4PKp3C+gWNNCvHDBZCikgxgU336vJ7l1AzrufhAN7GHFbGa0h59nIclc7Zse3FM
- XqJw==
-X-Gm-Message-State: AOJu0Yw9Nl4eYNafJxYN5LqfUUHTRnAYd65P5d/d6RtwI3YiwULrq497
- 5lLABpWfnJbelAiCItOIOsBQlcoG2aKV4ZyK7qFj9Q==
-X-Google-Smtp-Source: AGHT+IEG8ikGtHzm9JH3aZTb+d0pMr14IDTfQqIS8YLl9S16zNvC7wIRNLTKNR7NAvEpGEDxYdKR2w==
-X-Received: by 2002:a05:690c:ece:b0:5a7:bfbf:691d with SMTP id
- cs14-20020a05690c0ece00b005a7bfbf691dmr3195190ywb.42.1697727691088; 
- Thu, 19 Oct 2023 08:01:31 -0700 (PDT)
+ bh=7dee0lhKBvxSuK2Y6NxF2rMok8KADIY6PR9/OQAsJ18=;
+ b=oKaczRNwATv1MxotyOPsFRbQF+jeZWXslt7eAnr3QubPk57xZzJI4lrrwrKarnwuhj
+ wo8rWbEIOWeJ5ux3u8N0GxAQS8XVVgr8psrfMV8psP5j8eti/wyrOCm6xNtWPgc2hTRH
+ Xqycqa5CtVLixmxuYxVzXBENV6grpyjuQTWuBYkeOn/+eboIX3PXofETp8CC+c8LDUD0
+ T6YK9+EjEd1w+GUQgHH4s+ztqQr69G0v2Iq92z7QCvuhnnQ6I0ThHy0RhqRUFI5Ljc/v
+ qvXIx28mm97R26YiImiEENZl7qxAC2Td2GRByB8d3cSka31CfyQy7naVokiLUsAg2qTZ
+ 07lA==
+X-Gm-Message-State: AOJu0YxmWEDgP9R0h3NSR/ox4EIM22GdM2SpjhZvY9CNpm7bLI9jhPE0
+ 6w6wVTvKB+9f+OcWDML8ZFfLeHbFY/2btFDrWmR5qw==
+X-Google-Smtp-Source: AGHT+IGmXm4vRdq4VgH6ruIFwqaL2o2ilSBTTVuSwGqS4/9RwX2uK3zZ99IdHXFvL+OT8X/q00oP5g==
+X-Received: by 2002:a0d:cc97:0:b0:5a7:c906:14f with SMTP id
+ o145-20020a0dcc97000000b005a7c906014fmr2489656ywd.11.1697727692489; 
+ Thu, 19 Oct 2023 08:01:32 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.30
+ c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:01:30 -0700 (PDT)
+ Thu, 19 Oct 2023 08:01:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [v4 21/24] sandbox: Disable CONFIG_DISTRO_DEFAULTS
-Date: Thu, 19 Oct 2023 11:01:02 -0400
-Message-Id: <20231019150105.714407-21-trini@konsulko.com>
+Subject: [v4 22/24] sandbox: Avoid requiring CMDLINE
+Date: Thu, 19 Oct 2023 11:01:03 -0400
+Message-Id: <20231019150105.714407-22-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019150105.714407-1-trini@konsulko.com>
 References: <20231019150105.714407-1-trini@konsulko.com>
@@ -91,125 +91,48 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-This is not used for sandbox, so drop it. Enable the things that it
-controls to avoid dstrastic changes in the config settings for
-sandbox builds.
-
-The end result is that these are enabled:
-
-   BOOTMETH_DISTRO
-   BOOTSTD_DEFAULTS
-
-and these are disabled:
-
-   USE_BOOTCOMMAND
-   BOOTCOMMAND (was "run distro_bootcmd")
-   DISTRO_DEFAULTS
-
-Note that the tools-only build has already disabled DISTRO_DEFAULTS
-and BOOTSTD_FULL
+Add some dependencies on features that we had been selecting so that we
+can still disable CMDLINE.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v4:
-- Only modify sandbox and restrict the changes to only DISTRO_DEFAULTS
+- Reword the commit slightly (Tom)
+- Rework overall to select if CMDLINE
+
+Changes in v3:
+- Reorder the Kconfig options a little
 ---
- arch/Kconfig                       | 3 +++
- configs/sandbox64_defconfig        | 1 -
- configs/sandbox_defconfig          | 1 -
- configs/sandbox_flattree_defconfig | 1 -
- configs/sandbox_noinst_defconfig   | 1 -
- configs/sandbox_spl_defconfig      | 1 -
- configs/sandbox_vpl_defconfig      | 1 -
- 7 files changed, 3 insertions(+), 6 deletions(-)
+ arch/Kconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/arch/Kconfig b/arch/Kconfig
-index 19f2891ba1c5..edfa3f7f83aa 100644
+index edfa3f7f83aa..78727050aecd 100644
 --- a/arch/Kconfig
 +++ b/arch/Kconfig
-@@ -208,6 +208,9 @@ config SANDBOX
- 	imply PHYSMEM
- 	imply GENERATE_ACPI_TABLE
- 	imply BINMAN
-+	imply BOOTSTD_DEFAULTS if BOOTSTD_FULL && CMDLINE
-+	imply BOOTMETH_DISTRO if BOOTSTD_FULL && CMDLINE
-+	imply CMD_SYSBOOT if BOOTSTD_FULL
- 
- config SH
- 	bool "SuperH architecture"
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 1a033b22018b..ff895b930170 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -14,7 +14,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 47417cb0391d..5230b81be2c4 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -14,7 +14,6 @@ CONFIG_FIT_RSASSA_PSS=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 29ae4532c508..8df2a82c521c 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -12,7 +12,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index db05e6308329..44e55f4452f3 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -25,7 +25,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 56072b15ad2d..015e0a59d085 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -20,7 +20,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index 5bd0281796d4..9935575352b2 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -27,7 +27,6 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_FIT_BEST_MATCH=y
- CONFIG_SPL_LOAD_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
+@@ -134,7 +134,7 @@ config SANDBOX
+ 	select ARCH_SUPPORTS_LTO
+ 	select BOARD_LATE_INIT
+ 	select BZIP2
+-	select CMD_POWEROFF
++	select CMD_POWEROFF if CMDLINE
+ 	select DM
+ 	select DM_EVENT
+ 	select DM_FUZZING_ENGINE
+@@ -152,10 +152,10 @@ config SANDBOX
+ 	select PCI_ENDPOINT
+ 	select SPI
+ 	select SUPPORT_OF_CONTROL
+-	select SYSRESET_CMD_POWEROFF
++	select SYSRESET_CMD_POWEROFF if CMD_POWEROFF
+ 	select SYS_CACHE_SHIFT_4
+ 	select IRQ
+-	select SUPPORT_EXTENSION_SCAN
++	select SUPPORT_EXTENSION_SCAN if CMDLINE
+ 	select SUPPORT_ACPI
+ 	imply BITREVERSE
+ 	select BLOBLIST
 -- 
 2.34.1
 
