@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DEF6CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:22:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95FE3CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:22:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79781874B1;
-	Thu, 19 Oct 2023 18:22:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D77F58745E;
+	Thu, 19 Oct 2023 18:22:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="jTPElE4M";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="bowG0y6K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CE04874B0; Thu, 19 Oct 2023 18:22:03 +0200 (CEST)
+ id F3516874B0; Thu, 19 Oct 2023 18:22:03 +0200 (CEST)
 Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
  [148.163.158.5])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9C8387256
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 18:22:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C17D8726A
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 18:22:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353724.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JGJUHe008882; Thu, 19 Oct 2023 16:21:58 GMT
+ 39JGJWri009097; Thu, 19 Oct 2023 16:21:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-transfer-encoding; s=pp1;
- bh=06xA2m/4Ogx+5fSGVlZgUtLeb5FwMKT+pGt+aod3Hjs=;
- b=jTPElE4M8PNiyCFqDGIFQ7Msc21uRhUBdLRNnLgtfDnHW7KsKglY+raJwZ55xKrPc9fV
- CsZK6lvGoJSXhN/NhgTq3vIIjb42q8J3J+4rOvSs1wTJOYI2Axj5DTaP+o7YPUSOI2gj
- QTGSFkP2ez7pYKOydrIEPEC5dsVF2/Oja0wtucUMyLqEPHjeSVwwKCzL2aFhPVnOCiXc
- ocyZMHRnt6Dr0D7KIv6nvQ5kRfkbpyeJdSYvaRPaC/z3Y8EIHaIL505fn3FiuRoDLPGc
- m5swyLr4M+GJGujCAnpOXa5PEJEx/SU1NkES6oiA0+DrT0Qh8tHEUF7l/WN8UXX+5z45 sQ== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding; s=pp1;
+ bh=08zYGNljYFBqtManTizdkenssjWEzan0faRe7YZ5loQ=;
+ b=bowG0y6KUIsvR/AUE02GC5aCLUwn1Q0fetxybrxgscBdYwu/UrNv83I6ExMmCEynlBD7
+ P0drbfW5Mnu9iFOeC/LrLFneFzZiyxWFuxdyi7ldtMX9/7EmN7aLoK2RYvv6LQIfANwa
+ Xm5jL2mIbRRk2pZseKWJ4194/lalILThRF8EKuYaWrpAH+IqMUBR/h0B7zKvw5l9ItY5
+ n2jn8sfuuxYZ73q7d/P/iX0GSIa2SKFIGN7gIHxsS7Qigyifnly4MZRWxEPo11rdmfkr
+ R9ViOnU73yQPA5L2Qd+ZNgVFn6ruetMoikUH4kUBiCiiYaqm/i4jv89KXX9l39IOoS9N BA== 
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vfg62s-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6k6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 19 Oct 2023 16:21:59 +0000
+Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGKOWg012827;
+ Thu, 19 Oct 2023 16:21:58 GMT
+Received: from ppma11.dal12v.mail.ibm.com
+ (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6jm-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:58 +0000
-Received: from m0353724.ppops.net (m0353724.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGKSPh014205;
- Thu, 19 Oct 2023 16:21:57 GMT
-Received: from ppma13.dal12v.mail.ibm.com
- (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vfg62h-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 19 Oct 2023 16:21:57 +0000
-Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
- by ppma13.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JEkOkn031184; Thu, 19 Oct 2023 16:21:57 GMT
-Received: from smtprelay02.dal12v.mail.ibm.com ([172.16.1.4])
- by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 3tr7hk1muy-1
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma11.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39JEuVXs019758; Thu, 19 Oct 2023 16:21:58 GMT
+Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
+ by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 3tr8121gud-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:57 +0000
 Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
  [10.241.53.103])
- by smtprelay02.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39JGLuHt49676770
+ by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 39JGLvVI20513482
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 19 Oct 2023 16:21:56 GMT
+ Thu, 19 Oct 2023 16:21:57 GMT
 Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 85D0458052;
+ by IMSVA (Postfix) with ESMTP id EB65C58062;
  Thu, 19 Oct 2023 16:21:56 +0000 (GMT)
 Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 6010E58056;
+ by IMSVA (Postfix) with ESMTP id C69F058056;
  Thu, 19 Oct 2023 16:21:56 +0000 (GMT)
 Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.89.2])
  by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
@@ -76,23 +77,25 @@ From: Eddie James <eajames@linux.ibm.com>
 To: u-boot@lists.denx.de
 Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
  eajames@linux.ibm.com
-Subject: [PATCH v13 0/8] tpm: Support boot measurements
-Date: Thu, 19 Oct 2023 11:21:48 -0500
-Message-Id: <20231019162156.80982-1-eajames@linux.ibm.com>
+Subject: [PATCH v13 2/8] tpm: sandbox: Update for needed TPM2 capabilities
+Date: Thu, 19 Oct 2023 11:21:50 -0500
+Message-Id: <20231019162156.80982-3-eajames@linux.ibm.com>
 X-Mailer: git-send-email 2.39.3
+In-Reply-To: <20231019162156.80982-1-eajames@linux.ibm.com>
+References: <20231019162156.80982-1-eajames@linux.ibm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: iNWvl7d-Iesr6ZQAdmmw7duLPCzcj6zz
-X-Proofpoint-ORIG-GUID: ADt4x2P17nyJFJY-rLEpCX_JlOB4EJcT
+X-Proofpoint-GUID: gCQyaRmgzqfdO6xRnIXX9nqZlOvUwXir
+X-Proofpoint-ORIG-GUID: ltdKSQCP9SzZpgw-IJ_D-Y0ogH28yZW0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-19_15,2023-10-19_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 priorityscore=1501
- suspectscore=0 spamscore=0 impostorscore=0 mlxlogscore=999
- lowpriorityscore=0 adultscore=0 bulkscore=0 phishscore=0 malwarescore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ lowpriorityscore=0
+ adultscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 phishscore=0
+ mlxscore=0 impostorscore=0 mlxlogscore=999 spamscore=0 clxscore=1015
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2309180000 definitions=main-2310190138
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,141 +113,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for measuring the boot images more generically
-than the existing EFI support. Several EFI functions have been moved to
-the TPM layer. The series includes optional measurement from the bootm 
-command.
-A new test case has been added for the bootm measurement to test the new
-path, and the sandbox TPM2 driver has been updated to support this use
-case.
+The driver needs to support getting the PCRs in the capabilities
+command. Fix various other things and support the max number
+of PCRs for TPM2.
+Remove the !SANDBOX dependency for EFI TCG2 as well.
 
-Changes since v12:
- - Rebase on master.
- - Add detail to documentation.
-
-Changes since v11:
- - Rebase on next. Sorry for the delay (been on leave).
-
-Changes since v10:
- - Fix commit message on efi_loader change
- - Drop python test change
- - Squash armv7 fix from Ilias
-
-Changes since v9:
- - Rebase and add Ilias' fixes (thanks!)
-
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 Changes since v8:
- - Fix a sandbox driver off-by-one error in checking the property type.
- - Fix log parsing again - any data corruption seen while replaying the
-   event log was failing the entire measurement.
- - Added an option to ignore the existing log and a configuration option
-   for systems to select that for the bootm measurement. This would only
-   be selected for systems that know that U-Boot is the first stage
-   bootloader. This is necessary because the reserved memory region may
-   persist through resets and so U-Boot attempts to append to the
-   previous boot's log.
-
-Changes since v7:
- - Change name of tcg2_init_log and add more documentation
- - Add a check, when parsing the event log header, to ensure that the
-   previous stage bootloader used all the active PCRs.
- - Change name of tcg2_log_find_end
- - Fix the greater than or equal to check to exit the log parsing
- - Make sure log_position is 0 if there is any error discovering the log
- - Return errors parsing the log if the data is corrupt so that we don't
-   end up with half a log
-
-Changes since v6:
- - Added comment for bootm_measure
- - Fixed line length in bootm_measure
- - Added Linaro copyright for all the EFI moved code
- - Changed tcg2_init_log (and by extension, tcg2_measurement_init) to
-   copy any discovered event log to the user's log if passed in.
+ - Use >= for checking the property against TPM2_PROPERTIES_OFFSET
 
 Changes since v5:
- - Re-ordered the patches to put the sandbox TPM driver patch second
- - Remove unused platform_get_eventlog in efi_tcg2.c
- - First look for tpm_event_log_* properties instead of linux,sml-*
- - Fix efi_tcg2.c compilation
- - Select SHA* configs
  - Remove the !SANDBOX dependency for EFI TCG2
- - Only compile in the measurement u-boot command when CONFIG_MEASURED_BOOT
-   is enabled
 
-Changes since v4:
- - Remove tcg2_measure_event function and check for NULL data in
-   tcg2_measure_data
- - Use tpm_auto_startup
- - Fix efi_tcg2.c compilation for removing tcg2_pcr_read function
- - Change PCR indexes for initrd and dtb
- - Drop u8 casting in measurement test
- - Use bullets in documentation
-
-Changes since v3:
- - Reordered headers
- - Refactored more of EFI code into common code
-    Removed digest_info structure and instead used the common alg_to_mask
-      and alg_to_len
-    Improved event log parsing in common code to get it equivalent to EFI
-      Common code now extends PCR if previous bootloader stage couldn't
-      No need to allocate memory in the common code, so EFI copies the
-      discovered buffer like it did before
-    Rename efi measure_event function
-
-Changes since v2:
- - Add documentation.
- - Changed reserved memory address to the top of the RAM for sandbox dts.
- - Add measure state to booti and bootz.
- - Skip measurement for EFI images that should be measured
-
-Changes since v1:
- - Refactor TPM layer functions to allow EFI system to use them, and
-   remove duplicate EFI functions.
- - Add test case
- - Drop #ifdefs for bootm
- - Add devicetree measurement config option
- - Update sandbox TPM driver
-
-Eddie James (6):
-  tpm: Fix spelling for tpmu_ha union
-  tpm: sandbox: Update for needed TPM2 capabilities
-  tpm: Support boot measurements
-  bootm: Support boot measurement
-  test: Add sandbox TPM boot measurement
-  doc: Add measured boot documentation
-
-Ilias Apalodimas (2):
-  efi_loader: fix EFI_ENTRY point on get_active_pcr_banks
-  test: use a non system PCR for testing PCR extend
-
- arch/sandbox/dts/sandbox.dtsi  |  13 +
- arch/sandbox/dts/test.dts      |  13 +
- boot/Kconfig                   |  32 ++
- boot/bootm.c                   |  74 +++
- cmd/booti.c                    |   1 +
- cmd/bootm.c                    |   2 +
- cmd/bootz.c                    |   1 +
- configs/sandbox_defconfig      |   1 +
- doc/usage/index.rst            |   1 +
- doc/usage/measured_boot.rst    |  23 +
- drivers/tpm/tpm2_tis_sandbox.c | 100 ++--
- include/bootm.h                |  11 +
- include/efi_tcg2.h             |  44 --
- include/image.h                |   1 +
- include/test/suites.h          |   1 +
- include/tpm-v2.h               | 263 ++++++++++-
- lib/Kconfig                    |   4 +
+ drivers/tpm/tpm2_tis_sandbox.c | 100 ++++++++++++++++++++++++---------
  lib/efi_loader/Kconfig         |   2 -
- lib/efi_loader/efi_tcg2.c      | 823 ++++-----------------------------
- lib/tpm-v2.c                   | 814 ++++++++++++++++++++++++++++++++
- test/boot/Makefile             |   1 +
- test/boot/measurement.c        |  66 +++
- test/cmd_ut.c                  |   4 +
- test/py/tests/test_tpm2.py     |  16 +-
- 24 files changed, 1482 insertions(+), 829 deletions(-)
- create mode 100644 doc/usage/measured_boot.rst
- create mode 100644 test/boot/measurement.c
+ 2 files changed, 72 insertions(+), 30 deletions(-)
 
+diff --git a/drivers/tpm/tpm2_tis_sandbox.c b/drivers/tpm/tpm2_tis_sandbox.c
+index e4004cfcca..d15a28d9fc 100644
+--- a/drivers/tpm/tpm2_tis_sandbox.c
++++ b/drivers/tpm/tpm2_tis_sandbox.c
+@@ -22,11 +22,6 @@ enum tpm2_hierarchy {
+ 	TPM2_HIERARCHY_NB,
+ };
+ 
+-/* Subset of supported capabilities */
+-enum tpm2_capability {
+-	TPM_CAP_TPM_PROPERTIES = 0x6,
+-};
+-
+ /* Subset of supported properties */
+ #define TPM2_PROPERTIES_OFFSET 0x0000020E
+ 
+@@ -38,7 +33,8 @@ enum tpm2_cap_tpm_property {
+ 	TPM2_PROPERTY_NB,
+ };
+ 
+-#define SANDBOX_TPM_PCR_NB 1
++#define SANDBOX_TPM_PCR_NB TPM2_MAX_PCRS
++#define SANDBOX_TPM_PCR_SELECT_MAX	((SANDBOX_TPM_PCR_NB + 7) / 8)
+ 
+ /*
+  * Information about our TPM emulation. This is preserved in the sandbox
+@@ -433,7 +429,7 @@ static int sandbox_tpm2_xfer(struct udevice *dev, const u8 *sendbuf,
+ 	int i, j;
+ 
+ 	/* TPM2_GetProperty */
+-	u32 capability, property, property_count;
++	u32 capability, property, property_count, val;
+ 
+ 	/* TPM2_PCR_Read/Extend variables */
+ 	int pcr_index = 0;
+@@ -542,19 +538,32 @@ static int sandbox_tpm2_xfer(struct udevice *dev, const u8 *sendbuf,
+ 	case TPM2_CC_GET_CAPABILITY:
+ 		capability = get_unaligned_be32(sent);
+ 		sent += sizeof(capability);
+-		if (capability != TPM_CAP_TPM_PROPERTIES) {
+-			printf("Sandbox TPM only support TPM_CAPABILITIES\n");
+-			return TPM2_RC_HANDLE;
+-		}
+-
+ 		property = get_unaligned_be32(sent);
+ 		sent += sizeof(property);
+-		property -= TPM2_PROPERTIES_OFFSET;
+-
+ 		property_count = get_unaligned_be32(sent);
+ 		sent += sizeof(property_count);
+-		if (!property_count ||
+-		    property + property_count > TPM2_PROPERTY_NB) {
++
++		switch (capability) {
++		case TPM2_CAP_PCRS:
++			break;
++		case TPM2_CAP_TPM_PROPERTIES:
++			if (!property_count) {
++				rc = TPM2_RC_HANDLE;
++				return sandbox_tpm2_fill_buf(recv, recv_len,
++							     tag, rc);
++			}
++
++			if (property >= TPM2_PROPERTIES_OFFSET &&
++			    ((property - TPM2_PROPERTIES_OFFSET) +
++			     property_count > TPM2_PROPERTY_NB)) {
++				rc = TPM2_RC_HANDLE;
++				return sandbox_tpm2_fill_buf(recv, recv_len,
++							     tag, rc);
++			}
++			break;
++		default:
++			printf("Sandbox TPM2 only supports TPM2_CAP_PCRS or "
++			       "TPM2_CAP_TPM_PROPERTIES\n");
+ 			rc = TPM2_RC_HANDLE;
+ 			return sandbox_tpm2_fill_buf(recv, recv_len, tag, rc);
+ 		}
+@@ -578,18 +587,53 @@ static int sandbox_tpm2_xfer(struct udevice *dev, const u8 *sendbuf,
+ 		put_unaligned_be32(capability, recv);
+ 		recv += sizeof(capability);
+ 
+-		/* Give the number of properties that follow */
+-		put_unaligned_be32(property_count, recv);
+-		recv += sizeof(property_count);
+-
+-		/* Fill with the properties */
+-		for (i = 0; i < property_count; i++) {
+-			put_unaligned_be32(TPM2_PROPERTIES_OFFSET + property +
+-					   i, recv);
+-			recv += sizeof(property);
+-			put_unaligned_be32(tpm->properties[property + i],
+-					   recv);
+-			recv += sizeof(property);
++		switch (capability) {
++		case TPM2_CAP_PCRS:
++			/* Give the number of algorithms supported - just SHA256 */
++			put_unaligned_be32(1, recv);
++			recv += sizeof(u32);
++
++			/* Give SHA256 algorithm */
++			put_unaligned_be16(TPM2_ALG_SHA256, recv);
++			recv += sizeof(u16);
++
++			/* Select the PCRs supported */
++			*recv = SANDBOX_TPM_PCR_SELECT_MAX;
++			recv++;
++
++			/* Activate all the PCR bits */
++			for (i = 0; i < SANDBOX_TPM_PCR_SELECT_MAX; ++i) {
++				*recv = 0xff;
++				recv++;
++			}
++			break;
++		case TPM2_CAP_TPM_PROPERTIES:
++			/* Give the number of properties that follow */
++			put_unaligned_be32(property_count, recv);
++			recv += sizeof(property_count);
++
++			/* Fill with the properties */
++			for (i = 0; i < property_count; i++) {
++				put_unaligned_be32(property + i, recv);
++				recv += sizeof(property);
++				if (property >= TPM2_PROPERTIES_OFFSET) {
++					val = tpm->properties[(property -
++						TPM2_PROPERTIES_OFFSET) + i];
++				} else {
++					switch (property) {
++					case TPM2_PT_PCR_COUNT:
++						val = SANDBOX_TPM_PCR_NB;
++						break;
++					default:
++						val = 0xffffffff;
++						break;
++					}
++				}
++
++				put_unaligned_be32(val, recv);
++				recv += sizeof(property);
++			}
++			break;
+ 		}
+ 
+ 		/* Add trailing \0 */
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index d20aaab6db..4ccd26f94a 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -379,8 +379,6 @@ config EFI_TCG2_PROTOCOL
+ 	bool "EFI_TCG2_PROTOCOL support"
+ 	default y
+ 	depends on TPM_V2
+-	# Sandbox TPM currently fails on GetCapabilities needed for TCG2
+-	depends on !SANDBOX
+ 	select SHA1
+ 	select SHA256
+ 	select SHA384
 -- 
 2.39.3
 
