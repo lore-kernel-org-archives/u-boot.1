@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33671CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 17:56:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD21CDB484
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 18:25:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F8CA874C5;
-	Thu, 19 Oct 2023 19:56:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE9688749F;
+	Thu, 19 Oct 2023 20:25:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BlRW426l";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PHgho3oD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEDAB874BF; Thu, 19 Oct 2023 19:56:31 +0200 (CEST)
+ id D5CD0874AB; Thu, 19 Oct 2023 20:25:53 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 375E4871BD
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 19:56:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E65318746F
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 20:25:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1697737761; x=1698342561; i=xypron.glpk@gmx.de;
- bh=JWoiX8pIQfv3eHCHDVN0/4xHkpc1f3p4mWaVb5+/TLU=;
+ t=1697739739; x=1698344539; i=xypron.glpk@gmx.de;
+ bh=GMUecOtrut1xJbIWcj4MhsbRk2eDU5GtA/yCEGgiB8Q=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=BlRW426l7w5Icqho6pk1DLDQcHf4IGPY5zateB2n69uP6fZFqd6Qn9vGtXlVneLP
- M7lxPXtoy/9rzaT2+EWIMd7jfwtr30cdiiug2pFEBqsjnRqAEK3jlASr+xIoGw3Z8
- qSweL7SB9dCuRiQ5A2sI6H/iwtVGdG6Z8uztPFD1DHkB7Va3hWZ4t1QqMUDsImHwE
- n+xRyX0JSSIgSA/eESrLP5rIbNvQ9DrP0ai0/4g0z299Vn0DqHkleQHJoFLdZoDN0
- 3n8i/EnNIyOkas+NTwLCTp1PLXdIkIH8JXnyJ1zmMp5vDjOWdFeTbVwPn0I2M1d7p
- M5DBJZ47m0dIkYXUlQ==
+ b=PHgho3oDIgNRIN74NLYAc8HSJ3txWAJBaFNTSCXQqkseT3Hzf6ddT+uWht9vRFEl
+ On5GlLnLB4+BOHlPZz+Sa7qed5xSzEtDL1R80T4W0NwBgYZTrMbMQ4ygASsa6rRw3
+ rrGdLAT0O45Ih6AskYPedN6DNVLRfZI1JkFnd/R0bU12L4cq53qymfbq7s3A82ALw
+ jBwZZ/sUzjkO6OePaB8GOqUlAvuf5ix3goKf7nyiF2176GLR/n4+qOHXIES7pLsav
+ /z1Xn6b3MjK38mWWmBE+Kes3C2qIyibTy8zVKsBi0kO7uGoagbN0rWM52G0XrZeix
+ uAOZNbyeorArsm0YEA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MHGCu-1qgJjF0nMO-00DIRx; Thu, 19
- Oct 2023 19:49:21 +0200
-Message-ID: <db4253c8-f5f6-49da-87fc-cd5fbbf0cfe0@gmx.de>
-Date: Thu, 19 Oct 2023 19:49:23 +0200
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNsw4-1r8ra72vhQ-00ODgi; Thu, 19
+ Oct 2023 20:22:19 +0200
+Message-ID: <ad33807d-815a-401d-a258-ae43d21c6aad@gmx.de>
+Date: Thu, 19 Oct 2023 20:22:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 7/8] efi_loader: fix EFI_ENTRY point on
- get_active_pcr_banks
-To: Eddie James <eajames@linux.ibm.com>
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, u-boot@lists.denx.de
-References: <20231019162156.80982-1-eajames@linux.ibm.com>
- <20231019162156.80982-8-eajames@linux.ibm.com>
+Subject: Re: [PATCH v13 6/8] doc: Add measured boot documentation
 Content-Language: en-US, de-DE
+To: Eddie James <eajames@linux.ibm.com>, ilias.apalodimas@linaro.org
+Cc: sjg@chromium.org, u-boot@lists.denx.de
+References: <20231019162156.80982-1-eajames@linux.ibm.com>
+ <20231019162156.80982-7-eajames@linux.ibm.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231019162156.80982-8-eajames@linux.ibm.com>
+In-Reply-To: <20231019162156.80982-7-eajames@linux.ibm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:SnPEwxUOMV/PaRPJewczXN9Bal5PmFxDErYHmJHH3CaC6mCjN23
- Llou12jNTM7mIVpiE7esZP33r3TbG9OsqZXFcE8PPk0aJ6T18ZAf4YF6Sk7CLqd75EpFQZR
- goelRniOQlobru4CDjnyhgSNggfKV1GzRUDGf5818y8VAH0wSHeAQfnyWWc1yg30Rf0C+Yd
- gf7Xq4iLsfcKnwb5osjEw==
-UI-OutboundReport: notjunk:1;M01:P0:fMqPVi8Rq/0=;EphteCmup5tOnB/KjO8eBFn2mBc
- SfxkSogUkBy2DiUPCA/pIbsDvlNhmfy3pPWZ1s5rz8+zKiO9NKpclqdSUeDmHQp17E2CsGKrb
- racDLxog4Iov+CrhUkmiXCXv4EHizYlETtuWbmRD22K2aoPwBFn/TfWeB0HP3QAZKs+CRK9Ef
- kQhtzVJBi9k4XN7nnD46Nk4gwoAvV6xJU893h4u1iPteXh/YCugvI1j482UJIJtq6somBBiy4
- /+iIpwlBnvJ8BjTE/enY9otvdrXFEyiBxuz/YsI4lPTSCU5+UO0hxL6wDnrWQt2X5MWa+HHrd
- G4FIDVcExjWmwNeeXGyF8YkVbnKioLHoZ+OQqXVBeuFNyNGEPboYSIg+Ptc8dE7LKkzPKPbj0
- eY+EzuulTh++L8r3goZTEBo5VoQjMsSdeUJJ3ZJvMBVHY2YwvXa4zqLvXMjvaPlKRl6MOuCGL
- HoviouSJLl0Iz3j78tyfoMeTOlDk+5gA00mWwAm8kbOoqN+g0pxjLJDjqc4zUBRGwThCC2vFU
- Kmf62pIt0sJbGi52XJ66WGaBqnHtjlPGBlVX4Jhn4tKRkjpQBSw0eKQLjYKbyYgJhBXzN2AH1
- o/9yQKmzlfW+gNdMFBh9LqOE84GLe6o5CWEgHZb/RVNFSUBAxZp6nhf1OKyY2JR8VjRaXQg28
- tSkunHukBVSynf6tdej05GHdydpyDHfgxvP8pi16nKN3n+y0GdDpdAbqCEFl7CvKSjTfl1lfo
- ZH2oEOihf1UxlrP8xejgd3zH88u46DUPl4OnvWGJvczu/j7fcDCS6U3jLIrpx3PtxPG/w1dE3
- z4XSvMgKRAssEyQY2TWUkIOa1kyOl3hotK1wXTlykLyn97UinGcGzM1tdoSGWrW02u07b4qwD
- ccbFtCvNxJGf0bATu0Cbg/FMSWehyrnNdhiS5zBzYH4PWeVa/LIEzwWwoZU+ok71Qdx0rUgsF
- 1sUUhwoULvmoYypd+Y50A0ncAWY=
+X-Provags-ID: V03:K1:v7jooymdAY3L+EIhiE+pkgboWa0MInU8sVlkatqzY6ySwW2uuT/
+ 8iVN8nV4OjLsCMP/BbBOiPhag39L0NLWrBQlphScB0bzglxogBU6ZsHc5r4DD5lsArbbITG
+ cN9vUCNrE8nbNKWotCiYSZXXQEvMEXTx5JC9AcdmAL0QcW3do5FqFXtidybtfNOOoDGfd0p
+ WQFg9ZfphdbcNftVscdlg==
+UI-OutboundReport: notjunk:1;M01:P0:3bR1ceXXexs=;9hlMG1hI/pxi1JggktaY1EGwrZB
+ wZUq5A33SFWAXMsDf92fXGGvM4Af58IladkWolI6PmuA+WGG5AeoS2k2caT7oEmPYG1HQunbk
+ QrRouoTizp7jB9iwdv1Q76ZU1cqgJl0AhLt9DqC5TD5lhgW2E6Wg1l4Y0rJW++pE541wCDHue
+ s2vQMrF8zQDPu3RzspSulO7DViPhct6PG8JZkO5bTstOkX3P/0S1qIz6hj+XlJfeEnbJqbIvV
+ 3DcuV0kGnPm+m4GmhPPotQNUzzOeMdxRo+tYNzKyYRsxZWZsEFgKmXLxYH7mRGx0o5laPl+35
+ pAjm5aOOp9nnwP6cStaVSinVbYg7HoLaLiBz2iJppYMG3s7Nhb8JQjOCarEagSfh9MlxCYT3a
+ rGclYBQwt+AD62VuIAmGaYs0rhCbzN104w7ITLV6wqia3PLJ5gKCv5Mzm3+vpudHEzUUPKPsK
+ NItu7M816BhKTU222YgHuIi2+4Hm/5PzrZGrk7z52XAIYbcmMP4tLqcl1O7596/mgCd9NVPCv
+ MryIXkVmqkUQH0L/mfz+ZPgQeHeaLCO759eNTqu3/W9QlQtTdZccv9gPfVG+cA9M6YA3w+Spo
+ LN691nQe81KkwtyosZizWOZDuwH23LnMO2Rj1bMgUGMGu+Og88gXDvWL8tXDPy+mUMlNbkx2s
+ wmh0PP/sfz0R/W8JO8k9PDH1RY2zpG3bG0mj83FZJQQJYNYzJXzco5tqV0ZklT/qe1Ouug3T4
+ oAIoYsf7L0HOoDS1XN1Qro1uxC7TIzEX5gfu1Y/gaPLeHLMvu4C7tufcWZ9QjK6e1A3Bsvo+P
+ oiGijwz5xW3IARohIpPF/GN7EhaboqVulRiFfO7mblw/FAz3+K8iZncouwmohBfHHofKl+Q4J
+ zvNdmJNUU2574H8Q+5XGytYZwPJGJqcwuzX8oJ78oYnXiARArMod1hDL9gDi85gynTGs75X0N
+ dX66IA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,42 +90,101 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/19/23 18:21, Eddie James wrote:
-> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Briefly describe the feature and specify the requirements.
 >
-> efi_tcg2_get_active_pcr_banks doesn't immediately call the
-> EFI_ENTRY() wrapper once it enters the function. Move the call a
-> few lines above to cover the error cases properly as well.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
+> Signed-off-by: Eddie James <eajames@linux.ibm.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->   lib/efi_loader/efi_tcg2.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+> Changes since v12:
+>   - Add a bit of detail about OS usage and what pieces are measured
 >
-> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> index 7ada536568..dae1b166c8 100644
-> --- a/lib/efi_loader/efi_tcg2.c
-> +++ b/lib/efi_loader/efi_tcg2.c
-> @@ -949,16 +949,16 @@ efi_tcg2_get_active_pcr_banks(struct efi_tcg2_prot=
-ocol *this,
->   	struct udevice *dev;
->   	efi_status_t ret;
+>   doc/usage/index.rst         |  1 +
+>   doc/usage/measured_boot.rst | 31 +++++++++++++++++++++++++++++++
+>   2 files changed, 32 insertions(+)
+>   create mode 100644 doc/usage/measured_boot.rst
 >
-> +	EFI_ENTRY("%p, %p", this, active_pcr_banks);
+> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+> index 98b4719c40..bf53bb6bda 100644
+> --- a/doc/usage/index.rst
+> +++ b/doc/usage/index.rst
+> @@ -14,6 +14,7 @@ Use U-Boot
+>      partitions
+>      cmdline
+>      semihosting
+> +   measured_boot
+>
+>   Shell commands
+>   --------------
+> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+> new file mode 100644
+> index 0000000000..0aad590859
+> --- /dev/null
+> +++ b/doc/usage/measured_boot.rst
+> @@ -0,0 +1,31 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
 > +
->   	if (!this || !active_pcr_banks) {
->   		ret =3D EFI_INVALID_PARAMETER;
->   		goto out;
->   	}
-> -
->   	ret =3D tcg2_platform_get_tpm2(&dev);
->   	if (ret !=3D EFI_SUCCESS)
->   		goto out;
->
-> -	EFI_ENTRY("%p, %p", this, active_pcr_banks);
->   	ret =3D tcg2_get_active_pcr_banks(dev, active_pcr_banks);
->
->   out:
+> +Measured Boot
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +U-Boot can perform a measured boot, the process of hashing various comp=
+onents
+> +of the boot process, extending the results in the TPM and logging the
+> +component's measurement in memory for the operating system to consume.
+> +
+> +By default, U-Boot will measure the operating system (linux) image, the
+
+The OS image would mean the root file system? I guess you mean the
+loaded EFI binary here. Measured boot is not Linux specific.
+
+We should consider different scenarios:
+
+* U-Boot loading kernel, initrd, device-tree
+* U-Boot loading GRUB (or another boot manager), device-tree,
+   GRUB loading initrd
+* U-Boot loading GRUB and passing a device-tree to GRUB,
+   GRUB loading initrd and a new device-tree
+
+With the documentation the user should be enabled to understand what
+U-Boot measures in each of these cases. Please, observe that upstream
+GRUB uses LoadImage() while distros (e.g. Debian and Ubuntu) tend to
+bypass LoadImage().
+
+Arent't there some other objects measured?
+
+- SMBIOS table
+- ACPI tables (still to be implemented)
+- EFI variables
+
+Best regards
+
+Heinrich
+
+> +initrd image, and the "bootargs" environment variable. By enabling
+> +CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree imag=
+e.
+> +
+> +The operating system typically would verify that the hashes found in th=
+e
+> +TPM PCRs match the contents of the event log. This can further be check=
+ed
+> +against the hash results of previous boots.
+> +
+> +Requirements
+> +---------------------
+> +
+> +* A hardware TPM 2.0 supported by the U-Boot drivers
+> +* CONFIG_TPM=3Dy
+> +* CONFIG_MEASURED_BOOT=3Dy
+> +* Device-tree configuration of the TPM device to specify the memory are=
+a
+> +  for event logging. The TPM device node must either contain a phandle =
+to
+> +  a reserved memory region or "linux,sml-base" and "linux,sml-size"
+> +  indicating the address and size of the memory region. An example can =
+be
+> +  found in arch/sandbox/dts/test.dts
+> +* The operating system must also be configured to use the memory region=
+s
+> +  specified in the U-Boot device-tree in order to make use of the event
+> +  log.
 
