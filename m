@@ -4,54 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BB33CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 18:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5003CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 19:22:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66F8E871BE;
-	Thu, 19 Oct 2023 20:55:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
+	by phobos.denx.de (Postfix) with ESMTP id 06D2B87476;
+	Thu, 19 Oct 2023 21:22:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="WqQTBQn2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CurInxw4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B53538745A; Thu, 19 Oct 2023 20:55:45 +0200 (CEST)
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 915F487455; Thu, 19 Oct 2023 21:22:17 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBC588719D
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 20:55:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E6EC87025
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 21:22:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hugovil.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
- ; s=x;
- h=Subject:Content-Transfer-Encoding:Mime-Version:Message-Id:Cc:To:From
- :Date:subject:date:message-id:reply-to;
- bh=B7tUy+zBQCK2Cftn1mIcPlvRq4TS3t8NpTjyvcTHcpU=; b=WqQTBQn26hOgSNZ4TiGCAEvlaJ
- muZUDbzvm5MTx/QPGK6qwmkbr97psWIh50pn7l97wR0Gzmbbs3V0jWGY+rxbO+GiQR1uzl+eNb1ML
- DriPCZBjblUn9FqhM5tHFybQmACPIWLLAsV5wfbgp3S2P/cQmjmtT93OHldzPHd1uMqY=;
-Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:45360
- helo=pettiford) by mail.hugovil.com with esmtpa (Exim 4.92)
- (envelope-from <hugo@hugovil.com>)
- id 1qtYBG-0007gw-Tg; Thu, 19 Oct 2023 14:55:40 -0400
-Date: Thu, 19 Oct 2023 14:55:37 -0400
-From: Hugo Villeneuve <hugo@hugovil.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, Fabio Estevam
- <festevam@denx.de>
-Message-Id: <20231019145537.3eefeec4236f2e4a3449c9ea@hugovil.com>
-In-Reply-To: <20231019170441.1610453-1-festevam@gmail.com>
-References: <20231019170441.1610453-1-festevam@gmail.com>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 70.80.174.168
-X-SA-Exim-Mail-From: hugo@hugovil.com
-Subject: Re: [PATCH] imx8mp_evk: Simplify FEC initialization
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-1e9c28f8193so16855fac.1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 12:22:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697743334; x=1698348134; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sq41vJSPcMPWNeJ2r+d9shaRDPUzIG+Q7TBrpjpxfG8=;
+ b=CurInxw4O0yk8zuly96aXrPtBCEZbf+BoFKFJoSKK+cUesE/s+zAT6+q1VF+RjX2Hm
+ oWrmZ00CmVMKo+U1H+kTVjYBrYnrHA/j/Kl008T+R9yLIjzf8NWRwSQYWLZYOvdPGlLj
+ DB5OwKjQViUJMlBR+l0JbBn0ku1fij1e5bClqFq3Nhzi3ti4I/rPzMxr3Ly9UHh7c9Il
+ /ac90HeUjTL37+jRNoO90k3PW9EHOnjTBwDhvmEfbcjc1/DAmccY4woMo+mNAoI7xBlv
+ uYjC06X3Ss+pQ6koAJ9ZgUqzSD2vgjikzyktOFbHWfSksDOVe8I3H4+O0yoR/Z6+6ga8
+ DWjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697743334; x=1698348134;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Sq41vJSPcMPWNeJ2r+d9shaRDPUzIG+Q7TBrpjpxfG8=;
+ b=tunwybAPN1j1lCfixMnNHhpT5aIC75BpONwkwgBxkLycmzIrGieDDGlYvdK4+zxV64
+ +QHAA0CL7nJ5PmB4tqgxF80W1yKSlcuFz2u0AParSVDM9z5oFDN8O1jqy30qVEEy3Gn3
+ DRLBaq2vjLYhIG16ypby3PM+5loORh5oDkHUKl4zG+xFhd9vHKQlmDMfvNDnp2VjERr4
+ gpbuOYOU/e6KZZG1yq6ykZUfyFsU+BxbdTf1B1D7b6yGJ0u/LutldoENZDZ9TZKvDi6J
+ 4nWnhopFO6CVaQv/QVJoucMaRa3kehlVq0Hn8eNGGulaa6nUI4ooLqHHZyM6R/3G8KqH
+ OB0Q==
+X-Gm-Message-State: AOJu0YxbrJ3eeDBxrvkxlqB5wXeSA4wVgHoP3rApAWwRAjSf5vrkBkon
+ jNWjrPJWVtFvo1zxkWwe1Lk=
+X-Google-Smtp-Source: AGHT+IFH2CvJghNmTIVhQ+Nzd2vUsM+WcCS6Ff6FCZWX4ewYT8DbA7tishlXDPVZudLfDj7GIJPMfg==
+X-Received: by 2002:a05:6871:53cf:b0:1ea:7463:1b8f with SMTP id
+ hz15-20020a05687153cf00b001ea74631b8fmr4204927oac.0.1697743333718; 
+ Thu, 19 Oct 2023 12:22:13 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
+ by smtp.gmail.com with ESMTPSA id
+ f15-20020a63f10f000000b005af7ee01ab4sm121880pgi.6.2023.10.19.12.22.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Oct 2023 12:22:12 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, hugo@hugovil.com,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2 1/2] imx8mp_evk: Simplify Ethernet initialization
+Date: Thu, 19 Oct 2023 16:21:54 -0300
+Message-Id: <20231019192155.1735199-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,90 +89,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Oct 2023 14:04:41 -0300
-Fabio Estevam <festevam@gmail.com> wrote:
+From: Fabio Estevam <festevam@denx.de>
 
-> From: Fabio Estevam <festevam@denx.de>
-> 
-> With DM enabled, there is no need for board code to initialize
-> the FEC interface.
-> 
-> The RTL8211FDI Ethernet PHYs have 25MHz oscillator, so there is no
-> need to enable the RGMII TX clk output.
-> 
-> Also, there is no need for describing the deprecated phy-reset properties
-> in u-boot.dtsi.
-> 
-> Remove all these uneeded pieces.
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
->  arch/arm/dts/imx8mp-evk-u-boot.dtsi     |  8 --------
->  board/freescale/imx8mp_evk/imx8mp_evk.c | 26 +------------------------
->  2 files changed, 1 insertion(+), 33 deletions(-)
-> 
-> diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-> index 43f13a9c22f7..db6bc6a11883 100644
-> --- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-> @@ -150,11 +150,3 @@
->  	reset-delay-us = <15000>;
->  	reset-post-delay-us = <100000>;
->  };
-> -
-> -&fec {
-> -	phy-reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
-> -	phy-reset-duration = <15>;
-> -	phy-reset-post-delay = <100>;
-> -};
-> -
-> -
-> diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> index a24b8c1d8608..2c2b8383c8dc 100644
-> --- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-> +++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> @@ -20,33 +20,9 @@
->  
->  DECLARE_GLOBAL_DATA_PTR;
+With DM enabled, there is no need for board code to initialize
+the Ethernet interfaces.
 
-Hi Fabio,
-there is probably some #includes that are no longer necessary after
-this change... maybe remove them as well, or in another cleanup patch?
+The RTL8211FDI Ethernet PHYs have 25MHz oscillator, so there is no
+need to enable the RGMII TX clk output.
 
-Hugo.
+Also, there is no need for describing the deprecated phy-reset FEC
+properties, nor passing reset properties to the EQOS interface in
+u-boot.dtsi.
 
+Remove all these unneeded pieces.
 
-> -static void setup_fec(void)
-> -{
-> -	struct iomuxc_gpr_base_regs *gpr =
-> -		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
-> -
-> -	/* Enable RGMII TX clk output */
-> -	setbits_le32(&gpr->gpr[1], BIT(22));
-> -}
-> -
-> -#if CONFIG_IS_ENABLED(NET)
-> -int board_phy_config(struct phy_device *phydev)
-> -{
-> -	if (phydev->drv->config)
-> -		phydev->drv->config(phydev);
-> -	return 0;
-> -}
-> -#endif
-> -
->  int board_init(void)
->  {
-> -	int ret = 0;
-> -
-> -	if (IS_ENABLED(CONFIG_FEC_MXC)) {
-> -		setup_fec();
-> -	}
-> -
-> -	return ret;
-> +	return 0;
->  }
->  
->  int board_late_init(void)
-> -- 
-> 2.34.1
-> 
+Tested both Ethernet interfaces after these changes.
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Changes since v1:
+- Removed Ethernet related headers. (Hugo)
+- Also removed custom eqos reset properties from u-boot.dtsi.
+
+ arch/arm/dts/imx8mp-evk-u-boot.dtsi     | 14 -------------
+ board/freescale/imx8mp_evk/imx8mp_evk.c | 28 +------------------------
+ 2 files changed, 1 insertion(+), 41 deletions(-)
+
+diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
+index 0bf489b46248..51c84383673c 100644
+--- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
+@@ -137,17 +137,3 @@
+ &wdog1 {
+ 	bootph-pre-ram;
+ };
+-
+-&ethphy0 {
+-	reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
+-	reset-delay-us = <15000>;
+-	reset-post-delay-us = <100000>;
+-};
+-
+-&fec {
+-	phy-reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
+-	phy-reset-duration = <15>;
+-	phy-reset-post-delay = <100>;
+-};
+-
+-
+diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
+index a24b8c1d8608..42291c958e39 100644
+--- a/board/freescale/imx8mp_evk/imx8mp_evk.c
++++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
+@@ -7,8 +7,6 @@
+ #include <env.h>
+ #include <errno.h>
+ #include <init.h>
+-#include <miiphy.h>
+-#include <netdev.h>
+ #include <linux/delay.h>
+ #include <asm/global_data.h>
+ #include <asm/mach-imx/iomux-v3.h>
+@@ -20,33 +18,9 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static void setup_fec(void)
+-{
+-	struct iomuxc_gpr_base_regs *gpr =
+-		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
+-
+-	/* Enable RGMII TX clk output */
+-	setbits_le32(&gpr->gpr[1], BIT(22));
+-}
+-
+-#if CONFIG_IS_ENABLED(NET)
+-int board_phy_config(struct phy_device *phydev)
+-{
+-	if (phydev->drv->config)
+-		phydev->drv->config(phydev);
+-	return 0;
+-}
+-#endif
+-
+ int board_init(void)
+ {
+-	int ret = 0;
+-
+-	if (IS_ENABLED(CONFIG_FEC_MXC)) {
+-		setup_fec();
+-	}
+-
+-	return ret;
++	return 0;
+ }
+ 
+ int board_late_init(void)
+-- 
+2.34.1
+
