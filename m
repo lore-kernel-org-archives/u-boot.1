@@ -4,80 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5ABECDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 23:57:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9364FCDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 00:19:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5396887047;
-	Thu, 19 Oct 2023 01:57:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 92BC287053;
+	Thu, 19 Oct 2023 02:19:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rRS5Hrbh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6AC887046; Thu, 19 Oct 2023 01:57:07 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 609D18704D
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 01:57:05 +0200 (CEST)
+ id 9AA0D87055; Thu, 19 Oct 2023 02:19:17 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 476A78704E
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 02:19:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d857c8a1d50so7626735276.3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:57:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697673424; x=1698278224; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YTWGU4VDxizOhDEp/ePRXOTZenBjUDJTMkwJGIWjXHU=;
- b=rRS5Hrbhen0iEpQl30eeUKSihT0SfiNyvpDxGeH2t+hlKSlcfEh8qKDgjA8qtWeZrL
- BjPp3lfVhxKqJd/nT4sEzuvXaekztaGIv82IZ7/Sr++yC4xG+CsRM0RUCPhrwTn8IPj5
- wJfLA8RpZ4NSNwXoiFABuQ6s4g3LFdvnBMTy4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697673424; x=1698278224;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YTWGU4VDxizOhDEp/ePRXOTZenBjUDJTMkwJGIWjXHU=;
- b=XV6y7fNty7E+5ib/Cb9HvsepiJXnl+Fu3gd9VKLnp4OuYiddzK1UaPDhM3siAnFjB1
- IhPN7/aMtcZbv8Gev6Dogo0x0zj291HFGVFIG0D9O8v1K6Ul7PP0vW7rWBJPOCZfi7fx
- QDFfieWpK3ZvjW9rwCUgkTv9XV2NtRRJ58epDQnVFWqVZqs5Gu9Kx8byByocODIYtwVm
- Pqf0C+ylnQXBDv4t4r2WEo6Pn0KME+NNPspbFuWqARrPSfV+Du9YjB2ZQvHTwIlHZM5N
- 1T+ZUuosIGyQTqkuSwWTZWQqSKADcW/FdFYF+0VWFfxa6+WDW/m5XEWmVC+0oH+ljupn
- hm0g==
-X-Gm-Message-State: AOJu0YxqMumjdtocz+RIBa/RLzpKz4VBlIJuOKdIRuwYF9h6E7SjjVvk
- HA1Qi2mzkLnEm4lwjMZFhZ7WHw==
-X-Google-Smtp-Source: AGHT+IGJaVzM3vkt++OgyL1TGWKabK5CZVF9Q/8t1c/SaaT1Bg4sY7F9E99KB4Do94u3YezOf44HCw==
-X-Received: by 2002:a5b:182:0:b0:d7b:985b:278f with SMTP id
- r2-20020a5b0182000000b00d7b985b278fmr932564ybl.16.1697673423953; 
- Wed, 18 Oct 2023 16:57:03 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- n19-20020a25d613000000b00d8144f0b287sm1666634ybg.63.2023.10.18.16.57.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 16:57:03 -0700 (PDT)
-Date: Wed, 18 Oct 2023 19:57:00 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 06/32] sifive: Drop an unnecessary #ifdef
-Message-ID: <20231018235700.GU3119521@bill-the-cat>
-References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-7-sjg@chromium.org>
- <8ce172b2-8665-442c-8e41-6b36f1255e5b@gmx.de>
- <fc59685f-4c31-1859-73db-04fac964df4f@gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1306E2F4;
+ Wed, 18 Oct 2023 17:19:51 -0700 (PDT)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EE2F03F5A1;
+ Wed, 18 Oct 2023 17:19:07 -0700 (PDT)
+Date: Thu, 19 Oct 2023 01:18:03 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Samuel Holland <samuel@sholland.org>, linux-sunxi@lists.linux.dev
+Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, Jernej
+ Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>, Maxim
+ Kiselev <bigunclemax@gmail.com>, Sam Edwards <cfsworks@gmail.com>, Okhunjon
+ Sobirjonov <okhunjon72@gmail.com>
+Subject: Re: [PATCH v2 04/22] pinctrl: sunxi: move pinctrl code
+Message-ID: <20231019011803.4d7c3b45@slackpad.lan>
+In-Reply-To: <20230928215455.28094-5-andre.przywara@arm.com>
+References: <20230928215455.28094-1-andre.przywara@arm.com>
+ <20230928215455.28094-5-andre.przywara@arm.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Q3eRwJ0blWqc9whB"
-Content-Disposition: inline
-In-Reply-To: <fc59685f-4c31-1859-73db-04fac964df4f@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,82 +59,302 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 28 Sep 2023 22:54:37 +0100
+Andre Przywara <andre.przywara@arm.com> wrote:
 
---Q3eRwJ0blWqc9whB
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Samuel,
 
-On Wed, Oct 18, 2023 at 01:23:13PM -0400, Sean Anderson wrote:
-> On 10/18/23 09:51, Heinrich Schuchardt wrote:
-> > On 10/17/23 00:27, Simon Glass wrote:
-> > > This code is normally compiled for sifive, but sandbox can also compi=
-le
-> > > it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
-> > > possible to disable UNIT_TEST for sandbox.
-> > >=20
-> > > Drop the condition since it isn't needed.
-> >=20
-> > This is not what the patch does. It introduces another condition.
-> >=20
-> > >=20
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > Suggested-by: Sean Anderson <seanga2@gmail.com>
-> > > ---
-> > >=20
-> > > Changes in v3:
-> > > - Just drop the condition instead
-> > >=20
-> > > =A0 include/k210/pll.h | 2 +-
-> > > =A0 1 file changed, 1 insertion(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/include/k210/pll.h b/include/k210/pll.h
-> > > index fd16a89cb203..6dd60b2eb4fc 100644
-> > > --- a/include/k210/pll.h
-> > > +++ b/include/k210/pll.h
-> > > @@ -13,7 +13,7 @@ struct k210_pll_config {
-> > > =A0=A0=A0=A0=A0 u8 od;
-> > > =A0 };
-> > >=20
-> > > -#ifdef CONFIG_UNIT_TEST
-> > > +#ifdef CONFIG_SANDBOX
-> >=20
-> > We should be able to compile with and without unit tests on the MAIX
-> > boards. Why should CONFIG_SANDBOX have any relevance here?
-> >=20
-> > Why don't we make k210_pll_calc_config() non-static in all cases?
->=20
-> U-Boot is smaller when it is static. But the forward declaration can be m=
-ade
-> unconditionally, as long as it is unused.
+> Move the existing sunxi-specific low level pinctrl routines from
+> arch/arm/mach-sunxi into the existing GPIO code under drivers/gpio, so
+> that the common code can be shared outside of arch/arm.
 
-I think part of the problem with this patch is confusing what it's
-doing. The issue here is that we can (and this is good!) and do compile
-drivers/clk/clk_k210.c for sandbox, so it gets coverity scans and so
-forth.  However, if we build sandbox with UNIT_TEST=3Dn then we get an
-undefined reference to 'nop'.  Because sandbox doesn't define nop().
-This header then provides nop for sandbox.  But, we can do something
-clearer, now that this is spelled out.
+I was wondering if you would find a moment to have a quick look at this
+and the next few patches (04/22 till 09/22)?
+I tried to address the ideas you brought up the other day on how to
+best restructure the GPIO driver, to accommodate both the new D1
+pinctrl device, as well as preparing to use the GPIO functionality from
+outside of arch/arm.
 
---=20
-Tom
+Any feedback would be appreciated. If I get it still this week, I am
+inclined to push the series into the currently open merge window still,
+since I believe the other T113 patches are good to go.
 
---Q3eRwJ0blWqc9whB
-Content-Type: application/pgp-signature; name="signature.asc"
+Many thanks,
+Andre
 
------BEGIN PGP SIGNATURE-----
+> 
+> This also takes the opportunity to move some definitions from our
+> header file into the driver C file, as they are private to the driver
+> and are not needed elsewhere.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  arch/arm/include/asm/arch-sunxi/gpio.h |  20 +----
+>  arch/arm/mach-sunxi/Makefile           |   1 -
+>  arch/arm/mach-sunxi/pinmux.c           |  78 -------------------
+>  drivers/gpio/sunxi_gpio.c              | 102 ++++++++++++++++++++++++-
+>  4 files changed, 105 insertions(+), 96 deletions(-)
+>  delete mode 100644 arch/arm/mach-sunxi/pinmux.c
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/gpio.h b/arch/arm/include/asm/arch-sunxi/gpio.h
+> index 6eaeece4e24..4bc9e8ffcc9 100644
+> --- a/arch/arm/include/asm/arch-sunxi/gpio.h
+> +++ b/arch/arm/include/asm/arch-sunxi/gpio.h
+> @@ -3,6 +3,9 @@
+>   * (C) Copyright 2007-2012
+>   * Allwinner Technology Co., Ltd. <www.allwinnertech.com>
+>   * Tom Cubie <tangliang@allwinnertech.com>
+> + *
+> + * Definitions that are shared between the Allwinner pinctrl and GPIO drivers,
+> + * also used by some non-DM SPL code directly.
+>   */
+>  
+>  #ifndef _SUNXI_GPIO_H
+> @@ -76,22 +79,6 @@ struct sunxi_gpio_reg {
+>  #define SUN50I_H6_GPIO_POW_MOD_SEL	0x340
+>  #define SUN50I_H6_GPIO_POW_MOD_VAL	0x348
+>  
+> -#define BANK_TO_GPIO(bank)	(((bank) < SUNXI_GPIO_L) ? \
+> -	&((struct sunxi_gpio_reg *)SUNXI_PIO_BASE)->gpio_bank[bank] : \
+> -	&((struct sunxi_gpio_reg *)SUNXI_R_PIO_BASE)->gpio_bank[(bank) - SUNXI_GPIO_L])
+> -
+> -#define GPIO_BANK(pin)		((pin) >> 5)
+> -#define GPIO_NUM(pin)		((pin) & 0x1f)
+> -
+> -#define GPIO_CFG_INDEX(pin)	(((pin) & 0x1f) >> 3)
+> -#define GPIO_CFG_OFFSET(pin)	((((pin) & 0x1f) & 0x7) << 2)
+> -
+> -#define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
+> -#define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+> -
+> -#define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
+> -#define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+> -
+>  /* GPIO bank sizes */
+>  #define SUNXI_GPIOS_PER_BANK	32
+>  
+> @@ -217,6 +204,7 @@ struct sunxi_gpio_plat {
+>  	char			bank_name[3];
+>  };
+>  
+> +/* prototypes for the non-DM GPIO/pinctrl functions, used in the SPL */
+>  void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val);
+>  void sunxi_gpio_set_cfgpin(u32 pin, u32 val);
+>  int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset);
+> diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
+> index 58f807cb82d..671211e9322 100644
+> --- a/arch/arm/mach-sunxi/Makefile
+> +++ b/arch/arm/mach-sunxi/Makefile
+> @@ -10,7 +10,6 @@ obj-y	+= board.o
+>  obj-y	+= clock.o
+>  obj-y	+= cpu_info.o
+>  obj-y	+= dram_helpers.o
+> -obj-y	+= pinmux.o
+>  obj-$(CONFIG_SUN6I_PRCM)	+= prcm.o
+>  obj-$(CONFIG_AXP_PMIC_BUS)	+= pmic_bus.o
+>  obj-$(CONFIG_MACH_SUNIV)	+= clock_sun6i.o
+> diff --git a/arch/arm/mach-sunxi/pinmux.c b/arch/arm/mach-sunxi/pinmux.c
+> deleted file mode 100644
+> index c95fcee9f6c..00000000000
+> --- a/arch/arm/mach-sunxi/pinmux.c
+> +++ /dev/null
+> @@ -1,78 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * (C) Copyright 2007-2011
+> - * Allwinner Technology Co., Ltd. <www.allwinnertech.com>
+> - * Tom Cubie <tangliang@allwinnertech.com>
+> - */
+> -
+> -#include <common.h>
+> -#include <asm/io.h>
+> -#include <asm/arch/gpio.h>
+> -
+> -void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val)
+> -{
+> -	u32 index = GPIO_CFG_INDEX(bank_offset);
+> -	u32 offset = GPIO_CFG_OFFSET(bank_offset);
+> -
+> -	clrsetbits_le32(&pio->cfg[index], 0xf << offset, val << offset);
+> -}
+> -
+> -void sunxi_gpio_set_cfgpin(u32 pin, u32 val)
+> -{
+> -	u32 bank = GPIO_BANK(pin);
+> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> -
+> -	sunxi_gpio_set_cfgbank(pio, pin, val);
+> -}
+> -
+> -int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
+> -{
+> -	u32 index = GPIO_CFG_INDEX(bank_offset);
+> -	u32 offset = GPIO_CFG_OFFSET(bank_offset);
+> -	u32 cfg;
+> -
+> -	cfg = readl(&pio->cfg[index]);
+> -	cfg >>= offset;
+> -
+> -	return cfg & 0xf;
+> -}
+> -
+> -int sunxi_gpio_get_cfgpin(u32 pin)
+> -{
+> -	u32 bank = GPIO_BANK(pin);
+> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> -
+> -	return sunxi_gpio_get_cfgbank(pio, pin);
+> -}
+> -
+> -void sunxi_gpio_set_drv(u32 pin, u32 val)
+> -{
+> -	u32 bank = GPIO_BANK(pin);
+> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> -
+> -	sunxi_gpio_set_drv_bank(pio, pin, val);
+> -}
+> -
+> -void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val)
+> -{
+> -	u32 index = GPIO_DRV_INDEX(bank_offset);
+> -	u32 offset = GPIO_DRV_OFFSET(bank_offset);
+> -
+> -	clrsetbits_le32(&pio->drv[index], 0x3 << offset, val << offset);
+> -}
+> -
+> -void sunxi_gpio_set_pull(u32 pin, u32 val)
+> -{
+> -	u32 bank = GPIO_BANK(pin);
+> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> -
+> -	sunxi_gpio_set_pull_bank(pio, pin, val);
+> -}
+> -
+> -void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
+> -{
+> -	u32 index = GPIO_PULL_INDEX(bank_offset);
+> -	u32 offset = GPIO_PULL_OFFSET(bank_offset);
+> -
+> -	clrsetbits_le32(&pio->pull[index], 0x3 << offset, val << offset);
+> -}
+> diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+> index f0b42e4fdb7..71c3168b755 100644
+> --- a/drivers/gpio/sunxi_gpio.c
+> +++ b/drivers/gpio/sunxi_gpio.c
+> @@ -18,6 +18,104 @@
+>  #include <asm/gpio.h>
+>  #include <dt-bindings/gpio/gpio.h>
+>  
+> +/*
+> + * =======================================================================
+> + * Low level GPIO/pin controller access functions, to be shared by non-DM
+> + * SPL code and the DM pinctrl/GPIO drivers.
+> + * The functions ending in "bank" take a base pointer to a GPIO bank, and
+> + * the pin offset is relative to that bank.
+> + * The functions without "bank" in their name take a linear GPIO number,
+> + * covering all ports, and starting at 0 for PortA.
+> + * =======================================================================
+> + */
+> +
+> +#define BANK_TO_GPIO(bank)	(((bank) < SUNXI_GPIO_L) ? \
+> +	&((struct sunxi_gpio_reg *)SUNXI_PIO_BASE)->gpio_bank[bank] : \
+> +	&((struct sunxi_gpio_reg *)SUNXI_R_PIO_BASE)->gpio_bank[(bank) - SUNXI_GPIO_L])
+> +
+> +#define GPIO_BANK(pin)		((pin) >> 5)
+> +#define GPIO_NUM(pin)		((pin) & 0x1f)
+> +
+> +#define GPIO_CFG_INDEX(pin)	(((pin) & 0x1f) >> 3)
+> +#define GPIO_CFG_OFFSET(pin)	((((pin) & 0x1f) & 0x7) << 2)
+> +
+> +#define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
+> +#define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+> +
+> +#define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
+> +#define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+> +
+> +void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val)
+> +{
+> +	u32 index = GPIO_CFG_INDEX(bank_offset);
+> +	u32 offset = GPIO_CFG_OFFSET(bank_offset);
+> +
+> +	clrsetbits_le32(&pio->cfg[index], 0xf << offset, val << offset);
+> +}
+> +
+> +void sunxi_gpio_set_cfgpin(u32 pin, u32 val)
+> +{
+> +	u32 bank = GPIO_BANK(pin);
+> +	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> +
+> +	sunxi_gpio_set_cfgbank(pio, pin, val);
+> +}
+> +
+> +int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
+> +{
+> +	u32 index = GPIO_CFG_INDEX(bank_offset);
+> +	u32 offset = GPIO_CFG_OFFSET(bank_offset);
+> +	u32 cfg;
+> +
+> +	cfg = readl(&pio->cfg[index]);
+> +	cfg >>= offset;
+> +
+> +	return cfg & 0xf;
+> +}
+> +
+> +int sunxi_gpio_get_cfgpin(u32 pin)
+> +{
+> +	u32 bank = GPIO_BANK(pin);
+> +	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> +
+> +	return sunxi_gpio_get_cfgbank(pio, pin);
+> +}
+> +
+> +void sunxi_gpio_set_drv(u32 pin, u32 val)
+> +{
+> +	u32 bank = GPIO_BANK(pin);
+> +	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> +
+> +	sunxi_gpio_set_drv_bank(pio, pin, val);
+> +}
+> +
+> +void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val)
+> +{
+> +	u32 index = GPIO_DRV_INDEX(bank_offset);
+> +	u32 offset = GPIO_DRV_OFFSET(bank_offset);
+> +
+> +	clrsetbits_le32(&pio->drv[index], 0x3 << offset, val << offset);
+> +}
+> +
+> +void sunxi_gpio_set_pull(u32 pin, u32 val)
+> +{
+> +	u32 bank = GPIO_BANK(pin);
+> +	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+> +
+> +	sunxi_gpio_set_pull_bank(pio, pin, val);
+> +}
+> +
+> +void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
+> +{
+> +	u32 index = GPIO_PULL_INDEX(bank_offset);
+> +	u32 offset = GPIO_PULL_OFFSET(bank_offset);
+> +
+> +	clrsetbits_le32(&pio->pull[index], 0x3 << offset, val << offset);
+> +}
+> +
+> +
+> +/* =========== Non-DM code, used by the SPL. ============ */
+> +
+>  #if !CONFIG_IS_ENABLED(DM_GPIO)
+>  static int sunxi_gpio_output(u32 pin, u32 val)
+>  {
+> @@ -106,7 +204,9 @@ int sunxi_name_to_gpio(const char *name)
+>  		return -1;
+>  	return group * 32 + pin;
+>  }
+> -#endif /* DM_GPIO */
+> +#endif /* !DM_GPIO */
+> +
+> +/* =========== DM code, used by U-Boot proper. ============ */
+>  
+>  #if CONFIG_IS_ENABLED(DM_GPIO)
+>  /* TODO(sjg@chromium.org): Remove this function and use device tree */
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUwcMkACgkQFHw5/5Y0
-tyzFpwwAtJ8PM6F3Hk6l2Uiqc/3GDyepaJZYDM+2vcd/D0qFplOLJ/wNsNHDPwiq
-q6eNcCZxgdwV5l9gD1m8+irGM8U6yHtDR/wOxJHxzqqw7Bv4TK/0tolFjcDvtrTS
-5nCMAoeu7jQwp2aMFPPa+mtacd1XiAxyqW6EQsAtDGES7wxAykqSnG5Iru000iy6
-gdXsehB3fehOjHAgdFr+Qm2aSSsDAZ66H9Wnqs/oOCYIzbFy8189FUW0PQ4/jUtJ
-ThMJs9453fWsS2AvHCyZn3FSsEvSDixu5ncqh3Bu6r+uodwf7jCVk3Oc46v8KnmA
-P9gvgf1P9oiUEcwvpDWN8aBevkVP/7bOQBwP6Zr0P4G6GtVgr6GlsXFChAt3ApgX
-m+6te0c7zGG2aKoytTj80YTOWacVCdmryI0Ccfid1Gy8UIdpYalUfqy0NYmRTkxh
-kiiDWeFu1mo5q+QuMieoAgk4kckg6ncRvc+UlbKNSGwqXQ/6/q2PnjFU7XGrWgTi
-15ytnUKy
-=Yayd
------END PGP SIGNATURE-----
-
---Q3eRwJ0blWqc9whB--
