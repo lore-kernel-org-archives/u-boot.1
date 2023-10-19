@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86970C001DF
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 23:51:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E365C001DF
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 23:53:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76238871C3;
-	Fri, 20 Oct 2023 01:51:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C823871DD;
+	Fri, 20 Oct 2023 01:53:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="gRcbxqeT";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="RUGW6Rhi";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="ZQdscyQr";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="AMgj10/8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B8F3871CD; Fri, 20 Oct 2023 01:51:40 +0200 (CEST)
+ id BB5D8871E4; Fri, 20 Oct 2023 01:53:37 +0200 (CEST)
 Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
  [66.111.4.29])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 102758718D
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 01:51:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D570871CD
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 01:53:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id DCC175C00DF;
- Thu, 19 Oct 2023 19:51:31 -0400 (EDT)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 5AEFE5C03A5;
+ Thu, 19 Oct 2023 19:53:34 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Thu, 19 Oct 2023 19:51:31 -0400
+ by compute2.internal (MEProxy); Thu, 19 Oct 2023 19:53:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
- 1697759491; x=1697845891; bh=8SrQq97Gxqc/1JRC/D4HQF/naWPPb745MAb
- MeSTnFT4=; b=gRcbxqeT4hM5o3Sw855RQ0jpcgMNdr5Vc+frCaLDk2kq7+YN9eM
- NJn/2qTYZOE48etDUZP+6gOepqTBeeNYTW5SsutYV7p4+bk9nxC4CE/tf5yYUiPu
- 3ZDLFxajwWa63L0xgkZIjR3OwG5QQnyC5OYWXf88MnNMIB1yryPKXVFiVku28dik
- MnO18B8K3UllmXFBkFMN9Lq7xgBhoeNBxFuGClU079jqlJbmgvHRWbWIkqcsp3hn
- biTIalfWWgCPAan4Aty99CxsP37UaMF3nfP6pMIjHMuEghYEwMUFbJOE39U+M4EO
- 09NIkYObGRhQTjYrloVVpv+9ETZf+oBitaQ==
+ 1697759614; x=1697846014; bh=whRLZN9NIWC9CWcUtLXyKGKnjrAT/fmOofU
+ LGGq8BbI=; b=ZQdscyQrOBfZSxBHFhko0FxbSEqLr/3B6RF+owf7/EkF+aZiUoY
+ ifD5iza6N13X+HG8cG9eSfl2gTEk5ZMh8GDUGKew7Yfcv3W3u9PoZMk4co25hcVk
+ eohIaqg7GKUKxvNBl/9Ae3jCZVW5L44vIVgmfaKKjRzdAf+KH9wgUC4WFdtGN98R
+ ou91R0Ki6j674LFRdLj0LXpv8hgDk7dcDGX/kh4tj06OcXw8QxncAA46jaOP5X9+
+ yf+Oh55ASZ4TXl8EHnWtV2oWQA9MP8F/hf7DxLI2yK8CTMEdjpAN7AOoUznfVR76
+ siG8pGB9JNk1dbb7q8mLSLQVLh8gjAhXEcg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:sender:subject:subject:to:to:x-me-proxy
  :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1697759491; x=1697845891; bh=8SrQq97Gxqc/1JRC/D4HQF/naWPPb745MAb
- MeSTnFT4=; b=RUGW6RhiQj+5d9+wgUybj9KQ+KlrYy0GB/fm81rbUezBJvOGFak
- DLBkaOOBj6Kq0khtdZLquk3Q0oE88i9QSrLcvvRF6W1L81sf3LlwIgmvksdATxPk
- sx/AbOZbg1iRTCMVgtV6D2r2GdUEF0IrN2owQQu19qI3nbIV6SweOOcpq44gaL+o
- B6hfOUdf7L+i2i+kx29vzTYDPiz7p8+/QlpeA3lDG10l9w7qTax2WNwGaMVp79Az
- Zd90OhZSoE2hSgJZCFGPEIqrFCcCRqgXkIvz/9OqCGRSZLXo4ySUFQGq3g2S62j+
- uZlP2f8NIwhLcjAwiRdDb9Vwwlz3yLncw9w==
-X-ME-Sender: <xms:A8ExZTj5qevioGULjEXsiawtOaGqGgOFA7gqooMUr2k6SFe9kg2d2w>
- <xme:A8ExZQCJ3aRUoy6D1-nkC2i6Sj6YR61AadT2rtc1UzyVCrxkAneSZ7KusmtsgZA-X
- yw6B0XW61OiFq_-vg>
-X-ME-Received: <xmr:A8ExZTGtyX7OYyuY5CD3F7go7Tgvs4j5-0pEavohNwMrt4FXrWHUgnSP32a_cNj7JuIetOIKBev8Z_KmY1j9jgyiH7fpJAmdBT4I4EQiniFPiVf28Ns1fuWvew>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeejgddviecutefuodetggdotefrodftvf
+ 1697759614; x=1697846014; bh=whRLZN9NIWC9CWcUtLXyKGKnjrAT/fmOofU
+ LGGq8BbI=; b=AMgj10/8GMLg0rNbH7OobrY4dv2kaF9q9WC0BMi7MWHDuAFw1TM
+ Y7/tD+JVTxs21nU5zZUOgDfWbE8x58pvG9VLYxMriV5Nwx7erLWAVN6YVG9Y8X0F
+ 0ROKGI85VoCX6oxv6peIStPzPaYktKCXsDwTrNJw9YlANY2pgGM3veIVxorVl8/Y
+ TAAP0vxyvxJnOlBOwgfiwsESmFiYQsyiH6pKAeuCi2auZTi4Q2Ng+fRrVeS955wp
+ iFCoOCrTZ8WDD+Adf2q2yepAXKfAN/V9Nto2S6y8ufuGAmUbDxy0NFLu1OwwcXG4
+ 4w/UndhBo5X3CEQsfzDT/sYZnl3/JikTbZQ==
+X-ME-Sender: <xms:fsExZeyDM_0swB56cE-7RfXRXAZgrpbdjJA-lZxjfdJkOIxTPAW_yA>
+ <xme:fsExZaRP-6QFQd1LeSmCIuyrd5KjhL_0Kz1mzAKGcR2okGEQAzrU4xugBOuwDJW1E
+ Ywz1I1xPBb7NkG-DQ>
+X-ME-Received: <xmr:fsExZQWZHqN5Pn3q0OtvAFMmsWPxJZP3p-P2imKVN5qawNZTQK8OtXHjw5xxIpEpIllzdWG8Bm7zXWzjxVCCiK9XCseFhow7UrVzZv78wzmRKUYVfMpl2RJw5g>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeejgddvjecutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
  fjughrpefkffggfgfuvfevfhfhjggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
@@ -68,31 +68,31 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeejgddviecutefuodetggdote
  ftrfgrthhtvghrnhepkeejleelfeeitdfhtdfgkeeghedufeduueegffdvhfdukeelleef
  tdetjeehuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
  homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:A8ExZQQwiJmD5IFgeEfobRrXZQvPnXG33Lvs-Deq1hUxyjowtn3AtQ>
- <xmx:A8ExZQzOE7KkEV4V8NuzCecDJBGg0dZUhKwE7_vdR7HWhBEBxS4OEg>
- <xmx:A8ExZW4fhHmwoQGgx3g75g6LDuCrhvyQXN4JZjsi2SVwWT3Dm-JdjQ>
- <xmx:A8ExZflDctalGBg5lE3_Jybl3-E2ZN0ke990IGEDuqC1S_wv2ztbzg>
+X-ME-Proxy: <xmx:fsExZUgRAZ0japhbmZlAE2d1q7XMhagwRnq3cNGcgBwV9vGoeZczSA>
+ <xmx:fsExZQDQnmli8AmTRLP_n31QhGphI13XqKN7h_USJyR4Y8sAtwpFpA>
+ <xmx:fsExZVIsZehZzgtVETcQU8wf1jHqk2lfN31-ihburqymlTq4YcnzuA>
+ <xmx:fsExZc3M6RVTVtweonvT3XYoNrDghHn9DdLVydxlk_byEQV_UvZV5Q>
 Feedback-ID: i0ad843c9:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 19 Oct 2023 19:51:30 -0400 (EDT)
-Message-ID: <9ee155e3-7bd0-ed70-b4b7-33f4760a507c@sholland.org>
-Date: Thu, 19 Oct 2023 18:51:30 -0500
+ 19 Oct 2023 19:53:33 -0400 (EDT)
+Message-ID: <50e85418-3503-d9c5-89bd-dc04992328f6@sholland.org>
+Date: Thu, 19 Oct 2023 18:53:33 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-Subject: Re: [PATCH v2 01/22] sunxi: remove CONFIG_SATAPWR
+Subject: Re: [PATCH v2 12/22] clk: sunxi: Add support for the D1 CCU
 Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
+To: Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de
 Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
  <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
  Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
  <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
- andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de
+ andre.przywara@foss.arm.com
 References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-2-andre.przywara@arm.com>
+ <20230928215455.28094-13-andre.przywara@arm.com>
 From: Samuel Holland <samuel@sholland.org>
-In-Reply-To: <20230928215455.28094-2-andre.przywara@arm.com>
+In-Reply-To: <20230928215455.28094-13-andre.przywara@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,70 +112,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/28/23 16:54, Andre Przywara wrote:
-> The CONFIG_SATAPWR Kconfig symbol was used to point to a GPIO that
-> enables the power for a SATA harddisk.
-> In the DT this is described with the target-supply property in the AHCI
-> DT node, pointing to a (GPIO controlled) regulator. Since we need SATA
-> only in U-Boot proper, and use a DM driver for AHCI there, we should use
-> the DT instead of hardcoding this.
+> From: Samuel Holland <samuel@sholland.org>
 > 
-> Add code to the sunxi AHCI driver to check the DT for that regulator and
-> enable it, at probe time. Then drop the current code from board.c, which
-> was doing that job before.
-> This allows us to remove the SATAPWR Kconfig definition and the
-> respective values from the defconfigs.
-> We also select the generic fixed regulator driver, which handles those
-> GPIO controlled regulators.
+> Since the D1 CCU binding is defined, we can add support for its
+> gates/resets, following the pattern of the existing drivers.
 > 
+> Signed-off-by: Samuel Holland <samuel@sholland.org>
+> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+> Acked-by: Sean Anderson <seanga2@gmail.com>
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Reviewed-by: Sam Edwards <CFSworks@gmail.com>
 > ---
->  arch/arm/Kconfig                             |  2 ++
->  arch/arm/mach-sunxi/Kconfig                  |  8 --------
->  board/sunxi/board.c                          | 16 +---------------
->  configs/A10-OLinuXino-Lime_defconfig         |  1 -
->  configs/A20-OLinuXino-Lime2-eMMC_defconfig   |  1 -
->  configs/A20-OLinuXino-Lime2_defconfig        |  1 -
->  configs/A20-OLinuXino-Lime_defconfig         |  1 -
->  configs/A20-OLinuXino_MICRO-eMMC_defconfig   |  1 -
->  configs/A20-OLinuXino_MICRO_defconfig        |  1 -
->  configs/A20-Olimex-SOM-EVB_defconfig         |  1 -
->  configs/A20-Olimex-SOM204-EVB-eMMC_defconfig |  1 -
->  configs/A20-Olimex-SOM204-EVB_defconfig      |  1 -
->  configs/Cubieboard2_defconfig                |  1 -
->  configs/Cubieboard_defconfig                 |  1 -
->  configs/Cubietruck_defconfig                 |  1 -
->  configs/Itead_Ibox_A20_defconfig             |  1 -
->  configs/Lamobo_R1_defconfig                  |  1 -
->  configs/Linksprite_pcDuino3_Nano_defconfig   |  1 -
->  configs/Linksprite_pcDuino3_defconfig        |  1 -
->  configs/Sinovoip_BPI_M3_defconfig            |  1 -
->  configs/orangepi_plus_defconfig              |  2 +-
->  drivers/ata/ahci_sunxi.c                     |  9 +++++++++
->  22 files changed, 13 insertions(+), 41 deletions(-)
+>  drivers/clk/sunxi/Kconfig                 |   6 +
+>  drivers/clk/sunxi/Makefile                |   1 +
+>  drivers/clk/sunxi/clk_d1.c                |  84 ++++++++++++
+>  drivers/clk/sunxi/clk_sunxi.c             |   5 +
+>  include/dt-bindings/clock/sun20i-d1-ccu.h | 158 ++++++++++++++++++++++
+>  include/dt-bindings/reset/sun20i-d1-ccu.h |  79 +++++++++++
+>  6 files changed, 333 insertions(+)
+>  create mode 100644 drivers/clk/sunxi/clk_d1.c
+>  create mode 100644 include/dt-bindings/clock/sun20i-d1-ccu.h
+>  create mode 100644 include/dt-bindings/reset/sun20i-d1-ccu.h
 > 
 > [...]
-> diff --git a/configs/orangepi_plus_defconfig b/configs/orangepi_plus_defconfig
-> index 76de72aa228..ed585881d49 100644
-> --- a/configs/orangepi_plus_defconfig
-> +++ b/configs/orangepi_plus_defconfig
-> @@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=672
->  CONFIG_MACPWR="PD6"
->  CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  CONFIG_USB1_VBUS_PIN="PG13"
-> -CONFIG_SATAPWR="PG11"
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_SPL_I2C=y
->  CONFIG_SPL_SYS_I2C_LEGACY=y
-> @@ -16,3 +15,4 @@ CONFIG_SUN8I_EMAC=y
->  CONFIG_SY8106A_POWER=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB3_VBUS_PIN="PG11"
+> diff --git a/drivers/clk/sunxi/clk_sunxi.c b/drivers/clk/sunxi/clk_sunxi.c
+> index ec02a2d0370..a0011a35d91 100644
+> --- a/drivers/clk/sunxi/clk_sunxi.c
+> +++ b/drivers/clk/sunxi/clk_sunxi.c
+> @@ -118,6 +118,7 @@ extern const struct ccu_desc a64_ccu_desc;
+>  extern const struct ccu_desc a80_ccu_desc;
+>  extern const struct ccu_desc a80_mmc_clk_desc;
+>  extern const struct ccu_desc a83t_ccu_desc;
+> +extern const struct ccu_desc d1_ccu_desc;
+>  extern const struct ccu_desc f1c100s_ccu_desc;
+>  extern const struct ccu_desc h3_ccu_desc;
+>  extern const struct ccu_desc h6_ccu_desc;
+> @@ -214,6 +215,10 @@ static const struct udevice_id sunxi_clk_ids[] = {
+>  #ifdef CONFIG_CLK_SUNIV_F1C100S
+>  	{ .compatible = "allwinner,suniv-f1c100s-ccu",
+>  	  .data = (ulong)&f1c100s_ccu_desc },
+> +#endif
+> +#ifdef CONFIG_CLK_SUN20I_D1
+> +	{ .compatible = "allwinner,sun20i-d1-ccu",
+> +	  .data = (ulong)&d1_ccu_desc },
 
-This change is unrelated to the purpose of this commit.
+Please keep these entries sorted numerically. Otherwise, your changes
+look good to me.
 
 Regards,
 Samuel
-
 
