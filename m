@@ -4,78 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83D8CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 19:22:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 946E0CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 19:42:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65909870A2;
-	Thu, 19 Oct 2023 21:22:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 98D7E87455;
+	Thu, 19 Oct 2023 21:42:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HdIsrwsa";
+	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="JKTbO2nZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B73B87495; Thu, 19 Oct 2023 21:22:20 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 244BA8745B; Thu, 19 Oct 2023 21:42:50 +0200 (CEST)
+Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33A9A87025
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 21:22:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D12088729D
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 21:42:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6bcdfcde944so19169b3a.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 12:22:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697743336; x=1698348136; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2+IpJ/LNp+qp8i/qpFojg31fRJoScY/WoQ+ANygopNo=;
- b=HdIsrwsakAkgqvBoP2xyNU5aAysqyvj/Uoza1z8iS1mMUruLF4bDhQQczMvdL05e71
- 8UcU3sguXMH5uSxPD3Zy5MDMolPcy4W/ktXCTYR56+2AUVFc+9ponnw35CP/VbezrCRs
- 5cAUC/EI69GP4V52uCYlfagNODVxy3JPAKgIG4eQ5OiBoDqXX0gULHw9xHORMjVjQozs
- KvvYWF9qr2/R7rbpW0/41gMbcOMdlW9uP7Cb0AKRajwHtj+d84pRkQ+0bxHAyrUrhBo7
- 6J5IujUasC2oZ1LVQc/h8R/K0tfBjY55ty1bifNEIgU/LPs1ZEgnbpW/mpfiqkPs1rvT
- /Dyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697743336; x=1698348136;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2+IpJ/LNp+qp8i/qpFojg31fRJoScY/WoQ+ANygopNo=;
- b=JqP/shdDOL/kQqIf8boxT4sk3eF7+kbhRxuXI9YTA2oPyMh8m3yex35HPaDuEvchfa
- ZDRhVE8O3VUKvCkzPWEmclfcGKLk4ErDhr/HQjAzhDV9GYvOSRGfhDSDwb/QzN13D4Ko
- q/SSkFHe51ijxefS5vQUElrqaFeHOBoKYmGMY7ADBFrhmZQSVBjE3HbQZzMTUwSIjxDv
- kU8JoA56Gx+YXjXk7xHFjE1flH3CTGMMK3QXTzYtxQC/d+/BuQJGtuW7SQgSlAdFh/ne
- 5y9l39cXxvnYZdr4FSN25i7iexGptjYUyTmWDivd3beSuHSPU5bWPFhIgRNkXnsikKO9
- UWFg==
-X-Gm-Message-State: AOJu0Yx9c+8SvarrhrWIhgB+KB9jjWRrb8PMSRo2cvmMSfaZERfXyKXg
- jBq5gnGMwSAq8Y6vdc4mLvis+4Kpmac=
-X-Google-Smtp-Source: AGHT+IHuAASWIDBMsNpIQSa1yIad8kXggKj9CuEymN7bCG3QkiYWAIF7xtz2aSqYy1yG2UCC8n0qrQ==
-X-Received: by 2002:a05:6a21:8cc5:b0:16c:b95c:6d38 with SMTP id
- ta5-20020a056a218cc500b0016cb95c6d38mr2690749pzb.2.1697743336279; 
- Thu, 19 Oct 2023 12:22:16 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
- by smtp.gmail.com with ESMTPSA id
- f15-20020a63f10f000000b005af7ee01ab4sm121880pgi.6.2023.10.19.12.22.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 12:22:15 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, hugo@hugovil.com,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 2/2] mx8mp_evk: Remove unneeded header files
-Date: Thu, 19 Oct 2023 16:21:55 -0300
-Message-Id: <20231019192155.1735199-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231019192155.1735199-1-festevam@gmail.com>
-References: <20231019192155.1735199-1-festevam@gmail.com>
+ dmarc=none (p=none dis=none) header.from=hugovil.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
+ ; s=x;
+ h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
+ :From:subject:date:message-id:reply-to;
+ bh=MSIrM1uyAV07j/Th1JwlLO92ljK5MiKTOLuOrZlbWNU=; b=JKTbO2nZfInItqCe9v1TkSgXcD
+ eq+zEBYaq2TVV2TD3Hw/mEWHRSWFcPv37BR+LZJVc50QGV5r8l1nR6T+C+zskLBYAOp2rJVBxIU9R
+ RyXDbiRoZxpewRfa2LKGMTW3xBc2cHaYahRlj96R/KvB2W/dNmh5VhL4OD4C3BZYTHK0=;
+Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:45704
+ helo=pettiford.lan) by mail.hugovil.com with esmtpa (Exim 4.92)
+ (envelope-from <hugo@hugovil.com>)
+ id 1qtYup-0008Gy-5y; Thu, 19 Oct 2023 15:42:43 -0400
+From: Hugo Villeneuve <hugo@hugovil.com>
+To: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Cc: hugo@hugovil.com,
+	u-boot@lists.denx.de
+Date: Thu, 19 Oct 2023 15:42:41 -0400
+Message-Id: <20231019194241.2207814-1-hugo@hugovil.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 70.80.174.168
+X-SA-Exim-Mail-From: hugo@hugovil.com
+Subject: [PATCH] imx8mn_var_som: Add myself to MAINTAINERS
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +66,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
-Cleanup the file by removing unneeded header files.
+I would like to help maintaining the imx8mn_var_som symphony board.
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
+Add myself to MAINTAINERS.
+
+Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 ---
-Changes since v1:
-- Newly introduced. (Hugo)
+ board/variscite/imx8mn_var_som/MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
- board/freescale/imx8mp_evk/imx8mp_evk.c | 10 ----------
- 1 file changed, 10 deletions(-)
+diff --git a/board/variscite/imx8mn_var_som/MAINTAINERS b/board/variscite/imx8mn_var_som/MAINTAINERS
+index 068f807ae69..367f72dfe4f 100644
+--- a/board/variscite/imx8mn_var_som/MAINTAINERS
++++ b/board/variscite/imx8mn_var_som/MAINTAINERS
+@@ -1,5 +1,6 @@
+ ARM i.MX8MN VARISCITE VAR-SOM-MX8MN MODULE
+ M:	Ariel D'Alessandro <ariel.dalessandro@collabora.com>
++M:	Hugo Villeneuve <hvilleneuve@dimonoff.com>
+ S:	Maintained
+ F:	arch/arm/dts/imx8mn-var-som*
+ F:	board/variscite/imx8mn_var_som/
 
-diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-index 42291c958e39..e62e27db48d9 100644
---- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-+++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-@@ -3,18 +3,8 @@
-  * Copyright 2019 NXP
-  */
- 
--#include <common.h>
- #include <env.h>
--#include <errno.h>
--#include <init.h>
--#include <linux/delay.h>
- #include <asm/global_data.h>
--#include <asm/mach-imx/iomux-v3.h>
--#include <asm-generic/gpio.h>
--#include <asm/arch/imx8mp_pins.h>
--#include <asm/arch/clock.h>
--#include <asm/arch/sys_proto.h>
--#include <asm/mach-imx/gpio.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
+base-commit: 4655b75335384e040358a2e3e478cc42f32a96c9
 -- 
-2.34.1
+2.39.2
 
