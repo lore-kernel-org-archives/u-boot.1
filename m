@@ -4,44 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3066CDB484
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:31:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F74CDB484
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BB5587250;
-	Thu, 19 Oct 2023 16:31:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 943D186F80;
+	Thu, 19 Oct 2023 16:33:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DE2C85423; Thu, 19 Oct 2023 16:31:07 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 1B6B6803AC
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:31:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,237,1694703600"; d="scan'208";a="179875874"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 19 Oct 2023 23:31:00 +0900
-Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.46])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 137194005B25;
- Thu, 19 Oct 2023 23:30:57 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Hai Pham <hai.pham.ud@renesas.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v4 2/2] serial: sh: Add RZ/G2L SCIF support
-Date: Thu, 19 Oct 2023 15:30:44 +0100
-Message-Id: <20231019143044.1363-3-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231019143044.1363-1-paul.barker.ct@bp.renesas.com>
-References: <20231019143044.1363-1-paul.barker.ct@bp.renesas.com>
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XcyscPGl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A4C3987243; Thu, 19 Oct 2023 16:33:12 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 76DF186F80
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:33:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-53e84912038so8477786a12.1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 07:33:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1697725988; x=1698330788; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fm/Sl3KNu9U6Sqm4fHO5Dz85uq0sxl5cHxxWPs4cLvM=;
+ b=XcyscPGltmVcWWvIwcjl/+m9RbMd6kUT+aMCua3lTETL2Iya2sI34s00nkyvx+5tOo
+ XlD02ia4nnJ8UwIt8eGzvykvpl3M8wpEf5yeXEO0YVr0RsaOnZw+lA7YVWBGV/Bx+1cp
+ I0gBQQ7nQFpcTB+WiU6wgb/vsUs1ZcaeBtQb4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697725988; x=1698330788;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fm/Sl3KNu9U6Sqm4fHO5Dz85uq0sxl5cHxxWPs4cLvM=;
+ b=AV35k16nT5+Bz40UFfEdE5DrgJ2Pe3KEeb8H8b+NghXMrHYa87JkiFph/qkrwiK6Qb
+ iyJ1HSgJNNEmzE6IJ/ztlWTSYDQzFw4feBkCFqpqPpoychLCn1tzpmrm1/H67v+/R864
+ Pjxs/Or0yVrc/+s7rbeyJRLqFUbFpFuPFF5Odd4aqAXsJexB3E5UOjL9mk5zP4akhfbt
+ rcGMLm2XdROgzPj7aB2TSw14vaKUQEhjZAUQ2hjF525LCMOu43kuB+paJhNzhxyT6QZB
+ nKRslxhkwQ7i/EUizANM1uMKaxMc2UllU6EKSLhNmYMLIeDvyYA/nW+MouMmCPJBDpYI
+ VLQw==
+X-Gm-Message-State: AOJu0YxzgWtqNJRNKld6AJjBtDIXS4myJcoe8ikbBTm9099jqNUCxr/+
+ 1ScLgZiSHA2xdbtA0g8nO++WWwXAQ7Jcjm8Zz5NLaQ==
+X-Google-Smtp-Source: AGHT+IG0C91LaTxwyosJsFGc1XqhS1+3/w2kVFY8l6x0FU5WHJ/b6lPp88qFCgwF+b36ji6Mka7AqzS9cH+3o+eXvqg=
+X-Received: by 2002:a50:cd9e:0:b0:53f:9ced:e5b4 with SMTP id
+ p30-20020a50cd9e000000b0053f9cede5b4mr1222330edi.13.1697725987851; Thu, 19
+ Oct 2023 07:33:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <VI1PR08MB2847E276099DF7263424F70083CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
+ <CALeDE9N6nhRBwtYqJ=7nqYuCsmbw03j3RBXRQ8jYsD=OMY=gBw@mail.gmail.com>
+ <VI1PR08MB28474179AFB989B308072B1E83CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
+ <CAPnjgZ3t9-trzoLGc7Jcj0=J0sQLQcHSGN3_Pf+3=iZ6=rPPqA@mail.gmail.com>
+ <VI1PR08MB2847B5EFD8F36E5A4D41FEBD83D2A@VI1PR08MB2847.eurprd08.prod.outlook.com>
+ <a151e6508695fcc2cee740f299e58e0fee6146b3.camel@suse.com>
+ <CAPnjgZ0KVwF-u5G2r-zt8+FmiHK_2ASEsoro3MtVsah58_WqMg@mail.gmail.com>
+ <d0cfe8627544d1699031315cc53b961c4cadc126.camel@suse.com>
+In-Reply-To: <d0cfe8627544d1699031315cc53b961c4cadc126.camel@suse.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 19 Oct 2023 08:32:56 -0600
+Message-ID: <CAPnjgZ3AsKe9V0gE8KBbjaFQv9+3xTrqfV9k=HiDOgmBenqGRQ@mail.gmail.com>
+Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
+To: Ivan Ivanov <ivan.ivanov@suse.com>
+Cc: Guillaume Gardet <Guillaume.Gardet@arm.com>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ "pbrobinson@gmail.com" <pbrobinson@gmail.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,140 +90,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the existing driver to support the SCIF serial ports on the
-Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure that if
-there is a reset signal defined in the device tree, it is de-asserted
-before we try to talk to the SCIF module.
+Hi Ivan,
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Tested-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-	# R-Car H3 Salvator-XS
+On Thu, 19 Oct 2023 at 08:29, Ivan Ivanov <ivan.ivanov@suse.com> wrote:
+>
+> On Thu, 2023-10-19 at 08:00 -0600, Simon Glass wrote:
+> > > >
+> > > > [2] https://patchwork.ozlabs.org/project/uboot/patch/20230923205017.1754340-1-sjg@chromium.org/
+> > > >
+> > > > > >
+> > > > > > [1] https://lists.denx.de/pipermail/u-boot/2023-October/533158.html
+> > > > > >
+> > > > > > > 'git bisect' points to:
+> > > > > > > **********
+> > > > > > > commit c771e5b8c2a186fb072b6c6f571d4a3cc86efba9
+> > > > > > > Author: Simon Glass <sjg@chromium.org>
+> > > > > > > Date:   Thu Jul 27 15:54:28 2023 -0600
+> > > > > > >
+> > > > > > >      arm: rpi: Switch to standard boot
+> > > > > > >
+> > > > > > >      Drop use of the distro scripts and use standard boot instead.
+> > > > > > >
+> > > > > > >      We don't need to specify the mmc devices individually, since they are
+> > > > > > >      used in order from 0 to 2, and standard boot uses that order anyway.
+> > > > > > >
+> > > > > > >      Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > **********
+> > > > > > >
+> > > > > > > The following patch fixes the boot from uSD on RPi4 (not tested on RPi3 nor RPi
+> > > > > > Zero 2 W):
+> > > > > > > **********
+> > > > > > > diff --git a/board/raspberrypi/rpi/rpi.env
+> > > > > > > b/board/raspberrypi/rpi/rpi.env index 30228285ed..02210b97b5 100644
+> > > > > > > --- a/board/raspberrypi/rpi/rpi.env
+> > > > > > > +++ b/board/raspberrypi/rpi/rpi.env
+> > > > > > > @@ -74,4 +74,4 @@ pxefile_addr_r=0x02500000
+> > > > > > >   fdt_addr_r=0x02600000
+> > > > > > >   ramdisk_addr_r=0x02700000
+> > > > > > >
+> > > > > > > -boot_targets=mmc usb pxe dhcp
+> > > > > > > +boot_targets=mmc0 mmc1 mmc2 usb pxe dhcp
+> > > > > > > **********
+> > > > > > >
+> > > > > > > So, the comment from Simon " We don't need to specify the mmc devices
+> > > > > > individually, since they are used in order from 0 to 2, and standard boot uses that
+> > > > > > order anyway" seems wrong for the RPi4 case.
+> > > > > > >
+> > >
+> > > I am afraid we still have a boot issue. This time device can not boot from USB.
+> > > Device boot order was changed to USB first then uSD. uSD card is removed.
+> > >
+> > > Please see [1] attachment #870321 for boot log details.
+> > >
+> > > I have not invested time to debug this, still.
+> >
+> > Thanks for the info. Is this using 'boot_targets=mmc usb pxe dhcp'?
+> >
+>
+> Yes. "boot_targets=mmc usb pxe dhcp". Full environment added to the bug.
+>
+> https://bugzilla.suse.com/show_bug.cgi?id=1216036
 
-v3->v4:
-  * Fix support for devices that don't define a SCI/SCIF module reset in
-    the device tree.
-v2->v3:
-  * Fixed sorting in the include list and sh_serial_id[].
-  * Added Marek's Tested-by & Reviewed-by.
-v1->v2:
-  * Moved handle_error() changes out to a separate patch earlier in the
-    series.
-  * Unconditionally de-assert the module reset during probe.
----
- arch/arm/mach-rmobile/Kconfig |  1 +
- drivers/serial/serial_sh.c    | 15 +++++++++++++++
- drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
- 3 files changed, 34 insertions(+), 1 deletion(-)
+OK thank you, I will take a look.
 
-diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
-index 714eb4405bcf..2bb96749fc0d 100644
---- a/arch/arm/mach-rmobile/Kconfig
-+++ b/arch/arm/mach-rmobile/Kconfig
-@@ -77,6 +77,7 @@ config RZG2L
- 	imply PINCTRL_RZG2L
- 	imply RENESAS_SDHI
- 	imply RZG2L_GPIO
-+	imply SCIF_CONSOLE
- 	imply SYS_MALLOC_F
- 	help
- 	  Enable support for the Renesas RZ/G2L family of SoCs. Currently
-diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
-index 9a698b19ccde..c034ab54e152 100644
---- a/drivers/serial/serial_sh.c
-+++ b/drivers/serial/serial_sh.c
-@@ -12,10 +12,12 @@
- #include <asm/processor.h>
- #include <clk.h>
- #include <dm.h>
-+#include <dm/device_compat.h>
- #include <dm/platform_data/serial_sh.h>
- #include <errno.h>
- #include <linux/compiler.h>
- #include <linux/delay.h>
-+#include <reset.h>
- #include <serial.h>
- #include "serial_sh.h"
- 
-@@ -199,12 +201,24 @@ static int sh_serial_probe(struct udevice *dev)
- {
- 	struct sh_serial_plat *plat = dev_get_plat(dev);
- 	struct uart_port *priv = dev_get_priv(dev);
-+	struct reset_ctl rst;
-+	int ret;
- 
- 	priv->membase	= (unsigned char *)plat->base;
- 	priv->mapbase	= plat->base;
- 	priv->type	= plat->type;
- 	priv->clk_mode	= plat->clk_mode;
- 
-+	/* De-assert the module reset if it is defined. */
-+	ret = reset_get_by_index(dev, 0, &rst);
-+	if (!ret) {
-+		ret = reset_deassert(&rst);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to de-assert reset line\n");
-+			return ret;
-+		}
-+	}
-+
- 	sh_serial_init_generic(priv);
- 
- 	return 0;
-@@ -221,6 +235,7 @@ static const struct dm_serial_ops sh_serial_ops = {
- static const struct udevice_id sh_serial_id[] ={
- 	{.compatible = "renesas,sci", .data = PORT_SCI},
- 	{.compatible = "renesas,scif", .data = PORT_SCIF},
-+	{.compatible = "renesas,scif-r9a07g044", .data = PORT_SCIFA},
- 	{.compatible = "renesas,scifa", .data = PORT_SCIFA},
- 	{.compatible = "renesas,hscif", .data = PORT_HSCIF},
- 	{}
-diff --git a/drivers/serial/serial_sh.h b/drivers/serial/serial_sh.h
-index 149ec1fe7397..58c2d22bc757 100644
---- a/drivers/serial/serial_sh.h
-+++ b/drivers/serial/serial_sh.h
-@@ -90,7 +90,7 @@ struct uart_port {
- # define SCSCR_INIT(port)	0x38 /* TIE=0,RIE=0,TE=1,RE=1,REIE=1 */
- # define SCIF_ORER 0x0001  /* overrun error bit */
- #elif defined(CONFIG_RCAR_GEN2) || defined(CONFIG_RCAR_64) || \
--      defined(CONFIG_R7S72100)
-+      defined(CONFIG_R7S72100) || defined(CONFIG_RZG2L)
- # if defined(CFG_SCIF_A)
- #  define SCIF_ORER	0x0200
- # else
-@@ -312,6 +312,9 @@ static inline void sci_##name##_out(struct uart_port *port,\
- 					sh4_scif_offset, sh4_scif_size)
- 		#define SCIF_FNS(name, sh4_scif_offset, sh4_scif_size) \
- 			CPU_SCIF_FNS(name, sh4_scif_offset, sh4_scif_size)
-+#elif defined(CONFIG_RZG2L)
-+#define SCIF_FNS(reg_name, reg_offset, reg_size) \
-+	CPU_SCIF_FNS(reg_name, reg_offset, reg_size)
- #else
- #define SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
- 				sh4_sci_offset, sh4_sci_size, \
-@@ -387,6 +390,20 @@ SCIF_FNS(SCLSR,  0,  0, 0x14, 16)
- #else
- SCIF_FNS(SCLSR,  0,  0, 0x24, 16)
- #endif
-+#elif defined(CONFIG_RZG2L)
-+SCIF_FNS(SCSMR,  0x00, 16)
-+SCIF_FNS(SCBRR,  0x02,  8)
-+SCIF_FNS(SCSCR,  0x04, 16)
-+SCIF_FNS(SCxTDR, 0x06,  8)
-+SCIF_FNS(SCxSR,  0x08, 16)
-+SCIF_FNS(SCxRDR, 0x0A,  8)
-+SCIF_FNS(SCFCR,  0x0C, 16)
-+SCIF_FNS(SCFDR,  0x0E, 16)
-+SCIF_FNS(SCSPTR, 0x10, 16)
-+SCIF_FNS(SCLSR,  0x12, 16)
-+SCIF_FNS(SCSEMR, 0x14,  8)
-+SCIF_FNS(SCxTCR, 0x16, 16)
-+SCIF_FNS(DL,     0x00,  0)
- #else
- /*      reg      SCI/SH3   SCI/SH4  SCIF/SH3   SCIF/SH4  SCI/H8*/
- /*      name     off  sz   off  sz   off  sz   off  sz   off  sz*/
--- 
-2.39.2
+I wonder if there is a way of testing pending patches, or do they need
+to be applied before they can be tested in your systems?
 
+Regards,
+Simon
