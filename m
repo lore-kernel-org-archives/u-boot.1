@@ -4,46 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF054CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:58:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FB7CDB483
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:58:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B9D487269;
+	by phobos.denx.de (Postfix) with ESMTP id B7BA787272;
 	Thu, 19 Oct 2023 16:58:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=hotsplots.de
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iFbeUIPU";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5B6786FEA; Thu, 19 Oct 2023 15:29:25 +0200 (CEST)
-Received: from mxb.hotsplots.de (mxb.hotsplots.de [185.46.137.13])
- (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 39052871F8; Thu, 19 Oct 2023 16:05:01 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7EED8708F
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 15:29:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2765186F6C
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=hotsplots.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=faecknitz@hotsplots.de
-From: =?UTF-8?Q?Martin_F=c3=a4cknitz?= <faecknitz@hotsplots.de>
-Subject: CONFIG_SPL_SKIP_RELOCATE in non-SPL build
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com
-Message-ID: <cf04d59d-f598-5dfa-64b8-3ba0135a66a9@hotsplots.de>
-Date: Thu, 19 Oct 2023 15:30:25 +0200
+ spf=pass smtp.mailfrom=deathcamel58@gmail.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d81d09d883dso8910032276.0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 07:04:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697724296; x=1698329096; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vgxDdd+/K/KvVrjjzHtSpqP1mmocc4RGes3eA469wsU=;
+ b=iFbeUIPUCVbo6G/y5q0bztUzTr2b1vHt8ZX/Ubw7LjtZY++Jdnw9zNOvauVgpNCtdo
+ +hKVy3qk5k7vMq28CGmsdOVMb2HlAckQOlTb/KyEuza4vRyHmQNKaxQtEJOpM9dUtvPd
+ AzHEDqx9+WomvOV2ZH9jEmmrL1v+m7WmWsXs5muxH6eKgcoh6Gp3bi/LVD/1TzCO7nCT
+ 0phF1DoKwhtBVqnlgJs4nh2nC8ecsJOMjkdKb6xOqD/ypplnRrVa92EjWId5e8MKIF/K
+ a7/BlziWmTU4RiJ0E6+zogk2xmN2UtZcjBW2L2KCOHN36UQn8A855UgQ3p8mnjOUPHXJ
+ 2Xpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697724296; x=1698329096;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vgxDdd+/K/KvVrjjzHtSpqP1mmocc4RGes3eA469wsU=;
+ b=ID34YECKXhbzZpIevVeCNdh/sEGfWca/V6/IgahAI4quHxDFEqgCf8vfW631a7BfuH
+ mmbUWI4FjNElao2pww7u6r11+Ro+vqcMgx2WiW0KHr8JCREPrfH11STzn3WqIgPHDNfe
+ wGAaeU1kHJxgkdAyjLpzFzXa7k65dKnaO17yf2eKMBnHgwzqLhFx3Vb5DembxDFOJlDI
+ +cS5IM/xFhXDk75DwFCqVQOAMwvpdsdH0jAwwMYwm2zPaPsCCXpZA4lXeULsofhFPc6P
+ YiyvV/CFDMOXpcF0y3unh7sESkwAq6MyvLjQ44K0v0HAIuZ6VZfc57i1q9fyAi6c+VJd
+ Xf4A==
+X-Gm-Message-State: AOJu0YzlCmHXhTMBPPXmO/VnBgP7r4N0tVYF4CNP+wd9YcqSGyvjiTG6
+ 3RJtuEN/58bByKFTw894ZLFmi/Tqj4g=
+X-Google-Smtp-Source: AGHT+IG9GJMteJPXzwTwF6jgB7rM3NPsQLDeSEAmXdUgJjCui5m8JGRNiURHySgnZyFLk+HSib0+UQ==
+X-Received: by 2002:a05:6902:541:b0:d9a:5908:a29 with SMTP id
+ z1-20020a056902054100b00d9a59080a29mr2273856ybs.64.1697724296366; 
+ Thu, 19 Oct 2023 07:04:56 -0700 (PDT)
+Received: from localhost.localdomain
+ (96-83-12-73-static.hfc.comcastbusiness.net. [96.83.12.73])
+ by smtp.gmail.com with ESMTPSA id
+ l23-20020a25b317000000b00d9b4ddf1c32sm2083706ybj.2.2023.10.19.07.04.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Oct 2023 07:04:55 -0700 (PDT)
+From: Dylan Corrales <deathcamel58@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+	Dylan Corrales <deathcamel58@gmail.com>
+Subject: [PATCH] doc: Replace dm_dump_all() with dm_dump_tree()
+Date: Thu, 19 Oct 2023 10:02:30 -0400
+Message-Id: <20231019140230.2132338-1-deathcamel58@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Server: mxb
-X-Rspamd-Queue-Id: 597028C02F4
-X-Spamd-Result: default: False [-4.67 / 500.00]; MIME_TRACE(0.00)[0:+];
- RCPT_COUNT_TWO(0.00)[2]; BAYES_HAM(-5.00)[99.98%];
- FROM_HAS_DN(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- RCVD_COUNT_ZERO(0.00)[0]; FROM_EQ_ENVFROM(0.00)[];
- TO_DN_NONE(0.00)[]; MIME_GOOD(-0.10)[text/plain];
- ASN(0.00)[asn:3320, ipnet:84.128.0.0/10, country:DE];
- MID_RHS_MATCH_FROM(0.00)[]; R_MIXED_CHARSET(0.43)[subject]
-Authentication-Results: ORIGINATING; auth=pass smtp.auth=faecknitz@hotsplots.de
- smtp.mailfrom=faecknitz@hotsplots.de
-X-Spamd-Bar: ----
 X-Mailman-Approved-At: Thu, 19 Oct 2023 16:58:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -61,69 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Replace dm_dump_all() with dm_dump_tree() in driver model documentation,
+to reflect changes introduced in commit 145287040480 ("dm: core: Rename
+dm_dump_all()").
 
-The patch
-  Convert CONFIG_SPL_INIT_MINIMAL et al to Kconfig
-  (b35316fb67cb7aeaf022032ce078135251372f39)
+Signed-off-by: Dylan Corrales <deathcamel58@gmail.com>
+---
 
-changes the behaviour for non-SPL builds when relocating code. The patch
-sets the CONFIG_SPL_SKIP_RELOCATE option in a few freescale boards, e.g.
-T1024RDB_SDCARD_defconfig.
+ doc/develop/driver-model/debugging.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Before, CONFIG_SPL_SKIP_RELOCATE was only defined when building the SPL image:
-
- #ifdef CONFIG_SPL_BUILD
--#define CONFIG_SPL_SKIP_RELOCATE
- #define CONFIG_SPL_COMMON_INIT_DDR
- #define CONFIG_SYS_CCSR_DO_NOT_RELOCATE
- #endif
-
-Now, the relocate_code function in arch/powerpc/cpu/mpc85xx/start.S does no
-relocation because CONFIG_SPL_SKIP_RELOCATE is always defined:
-
-relocate_code:
-  ...
-#ifndef CONFIG_SPL_SKIP_RELOCATE
-  ... relocate code from SYS_MONITOR_BASE to gd->relocaddr ..
-#endif
-
-When jump_to_copy is called (common/board_f.c), the
-
-  relocate_code(gd->start_addr_sp, gd->new_gd, gd->relocaddr)
-
-would not relocate u-boot (located at SYS_MONITOR_BASE) to gd->relocaddr.
-
-For example, SYS_MONITOR_BASE is 0x3000.0000 and gd->relocaddr is 0x7bf7.0000:
-
-Relocation Offset is: 4bf70000
-
-
-Relocating to 7bf70000, new gd at 7bb6de50, sp at 7bb6b540
-
-Any access to memory 7bf70000+ is invalid, because no relocation was done.
-
-When patching
-
-  -#ifndef CONFIG_SPL_SKIP_RELOCATE
-  +#if !defined(CONFIG_SPL_SKIP_RELOCATE) || !defined(CONFIG_SPL_BUILD)
-
-relocation is done in non-SPL builds and booting works.
-
-Testet on T1042E board using U-Boot 2023.10.02-01420.
-
-Best regards
-Martin
-
+diff --git a/doc/develop/driver-model/debugging.rst b/doc/develop/driver-model/debugging.rst
+index bbb2794340..e13abddae6 100644
+--- a/doc/develop/driver-model/debugging.rst
++++ b/doc/develop/driver-model/debugging.rst
+@@ -49,7 +49,7 @@ to see errors. Common ones are:
+      of_to_plat() method in the driver.
+ 
+ If there is no error, you should check if the device is actually bound. Call
+-dm_dump_all() just before you locate the device to make sure it exists.
++dm_dump_tree() just before you locate the device to make sure it exists.
+ 
+ If it does not exist, check your device tree compatible strings match up with
+ what the driver expects (in the struct udevice_id array).
 -- 
-Martin Fäcknitz
+2.34.1
 
-hotsplots GmbH
-Rotherstr. 22
-10245 Berlin
-Fon: +49 (0)30 29 77 348-0
-Fax: +49 (0)30 29 77 348-99
-E-Mail: faecknitz@hotsplots.de
-
-Amtsgericht Charlottenburg HRB 93460B
-Geschäftsführung: Sascha Schaub, Dr. Ulrich Meier, Dr. Jörg Ontrup
