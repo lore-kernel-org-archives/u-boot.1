@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FF4CDB482
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 13:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE3CCDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 13:56:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 416A08715A;
-	Thu, 19 Oct 2023 15:56:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id CEA2D871C7;
+	Thu, 19 Oct 2023 15:56:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dN56VZxe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JgyrBnG+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D39D8701D; Thu, 19 Oct 2023 15:56:06 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id D2F81871BE; Thu, 19 Oct 2023 15:56:16 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B8D68715A
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 15:56:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A051D87196
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 15:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-507b9408c61so4739704e87.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 06:56:02 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-53e2308198eso12717220a12.1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 06:56:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1697723761; x=1698328561; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697723774; x=1698328574; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fd2cIk7WmF3IXDuhSs4lhZmOs8tbzxjMTa9xtWAD7DM=;
- b=dN56VZxem2hIDoOD0y8jlaYDCQBGQe27mu3JhBvPBRqJBGqhDS9mXMYbGNjf4WlGwf
- XNfmOOqqEa/gKLQUvP9BnSUvhZwBVtpai6tDLJD+c7S2bFRr2b/Oo1QnooHELcv2g6Ew
- TXl05f0k8SQKkLN7QS+0QkcpQhnzJegkFsZuFLndQsntTL3LpK5A6HGXKfZnOlS1R6Rt
- /lxD2tVoHluIU4wjI0++M6u9/PZw0nF3Uo5W70e7TuyV1NkJqHamt6BbyxNZx531T+XD
- tOWvPSU/srq+Z/ruNC8ge0iXo8zSPzfQWd36WXgU/VlZEfi+0/+bujc7ip+Uc6lRYl5L
- TJxg==
+ bh=vMBhQ4j3myuy3XLolQokK2xYnZ5x60TcZr42IQXJxW8=;
+ b=JgyrBnG+SKKQiJCqk4HvjePq618e/oIZbu9pjQ6XrdqcTrUk8uOBwu0NtygATSm+Fc
+ +6oE409Bzj1I2nT7IVfmsE2qBIsPFPs0Hx0ZGkBrG6HmYnIXoz6Yj1vYkYT65h4ltV3b
+ pSpCVJ44/r1veyfDAuEUILAOxKbmQX1V7uIzM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697723761; x=1698328561;
+ d=1e100.net; s=20230601; t=1697723774; x=1698328574;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fd2cIk7WmF3IXDuhSs4lhZmOs8tbzxjMTa9xtWAD7DM=;
- b=TPPBKGkXPZJ41ELfzXWr7m5ea0UDndS5MMSS02evcQ2O/litQHqmJAqgDXqtST7jDd
- JU7DpE/vcQJYs5+Gn8kWaNlVG0tjxfOLXGB2MLLL1ZvSpvWc1i7sQcaloqdUvEqd3gnk
- 3nCV0uS7lqz3lRhBVstl/B/m1jRNpMBIomKFI4rWygWY/YC6tMk2TY1RodB4pVuZZWT9
- A3jp1hrCsUGh3qKp9Yl1xCGCuBW0NebgMD68QsiNe9IMG1SzHabZTq7+FLo/x5anzIZs
- XMygYUvM5J9Jne2BwG+qSbhVjJbu1Kv9bFN8/nYpkEo4E9vCR1dHPhweiXQV8n3qx6w2
- zMiw==
-X-Gm-Message-State: AOJu0YySfey1YbGW9TopjXb86f8Z3sLlhUuXEkEAJENAE+mudsqsZmmw
- lO1i1IkBATR2faJVIMIuBtOpXFYWdVuyIN0nzMi4TEneKFf0d6ePAHg=
-X-Google-Smtp-Source: AGHT+IGnofwfNiUXtYXYupr6NsrfApvSNePh2uNvsf9D4TwAHhdgWoXJHJxamQRRiLITFT4BbOy1FRkxOJC+uvF/Az8=
-X-Received: by 2002:ac2:47fc:0:b0:500:b7ed:105a with SMTP id
- b28-20020ac247fc000000b00500b7ed105amr1553321lfp.29.1697723761266; Thu, 19
- Oct 2023 06:56:01 -0700 (PDT)
+ bh=vMBhQ4j3myuy3XLolQokK2xYnZ5x60TcZr42IQXJxW8=;
+ b=MebkcMJarmX+ziSngOVGopmxa+X+yTCh4JFVW7MXeLUsN+mMcywAwvxSqMpz66rJMi
+ /ZJuymW4ZC+6pp8acxvtjeBfwqEyAWFgf4u/X+Y89U6H9cDJw5lBd9/QKSYI30DP9Qso
+ D5WAKmaPnzU3XUI/nZQIGH/rGSQUNbx89jWb//C49B/qNUmgWg+qqoLS+2sxn3kPnZd7
+ CZ6picOQyiM4ZFrZxsC2Z/wM5TV3lja8afQgzNAj3Jq8xbAAMFztEAuPgdwqHu7mQWtV
+ tCfRuStJk21xdkPiY88/3SbB43INWXL7vWQtHbvJNUIwxMrxd1qdFetwHg1oGctNh9RX
+ EqLQ==
+X-Gm-Message-State: AOJu0Yx5+Q0xLYyxH/YDZjGswFe3Je9tOcJo2xtPeuUSG1Rc+/qbhkR5
+ vkJxr35yM7y8G9UXea8YzcPpoGdXE/iX1KHYYAHlPw==
+X-Google-Smtp-Source: AGHT+IH9q/wBY0fkvt5MFcBVnOaZ+eUxMFnZItWSIMme/5IKN+anFQ+nG3g+aBUk8t8xWA4pGKeYNXX1IBKNgY5HPs8=
+X-Received: by 2002:a50:9f67:0:b0:514:9ab4:3524 with SMTP id
+ b94-20020a509f67000000b005149ab43524mr1792261edf.7.1697723774056; Thu, 19 Oct
+ 2023 06:56:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
- <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
-In-Reply-To: <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
-From: Simon Glass <sjg@google.com>
-Date: Thu, 19 Oct 2023 07:55:49 -0600
-Message-ID: <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231016160611.1353458-1-devarsht@ti.com>
+ <20231016160611.1353458-2-devarsht@ti.com>
+In-Reply-To: <20231016160611.1353458-2-devarsht@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 19 Oct 2023 07:56:02 -0600
+Message-ID: <CAPnjgZ1y1Strc7-qiDA6hG6sQaFKarYGaQZ1dGv_NSCyMbzK-Q@mail.gmail.com>
+Subject: Re: [RFC PATCH 1/5] arm: mach-k3: common: Reserve video memory from
+ end of the RAM
+To: Devarsh Thakkar <devarsht@ti.com>
+Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
+ bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
+ yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
+ a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,67 +85,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Devarsh,
 
-On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Mon, 16 Oct 2023 at 10:06, Devarsh Thakkar <devarsht@ti.com> wrote:
 >
-> On 10/18/23 05:33, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> Forward and backward compatibility of Linux kernel device-trees is
-> >> sometimes missing. One solution approach is to load a kernel specific
-> >> device-tree. This can either be done via a U-Boot scripts (like the one
-> >> generated by Debian package flash-kernel or by a boot loader like GRUB.
-> >> The boot loader approach currently requires to know the device-tree name
-> >> before first boot which makes it unusable for generic images.
-> >>
-> >> Expose the device-tree file name as EFI variable FdtFile.
-> >> This will allow bootloaders to load a kernel specific device-tree.
-> >>
-> >> The variable will not be exposed on ACPI based systems or if the
-> >> environment variable fdtfile is not defined.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >> v2:
-> >>          Use a unique GUID to enable future U-Boot independent
-> >>          standardization.
-> >>          Do not try to add the variable on ACPI based systems.
-> >> ---
-> >>   include/efi_loader.h       |  5 +++++
-> >>   lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> >>   2 files changed, 35 insertions(+)
-> >
-> > I was too slow to reply to v1.
-> >
-> > Does grub load the DT? I was assuming that U-Boot would pass it on?
-> > What is the interface between U-Boot and grub?
+> Move the function to setup video memory before page table
+> reservation so that framebuffer memory gets reserved from
+> the end of RAM.
 >
-> The device-tree built into U-Boot is often out of date and not usable to
-> boot current Linux. A single device-tree can be loaded by U-Boot from
-> file and passed on as EFI configuration table. This device-tree may not
-> be compatible with all kernel versions exposed by GRUB.
+> This is as per the new policy being discussed for passing
+> blobs where each of the reserved areas for bloblists
+> to be passed need to be reserved at the end of RAM.
 >
-> GRUB provides a devicetree command. It is disabled if you use secure
-> boot. At least in Debian and Ubuntu GRUB invokes the
-> EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
-> fix-ups after loading a device-tree.
+> This is to enable the next stage to directly skip
+> the pre-reserved area from previous stage without
+> having to making any gaps/holes to accomodate those
+> regions which was the case if previous stage
+> reserved region say somewhere in the middle and not at
+> the end of RAM.
 >
-> Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
-> devicetree commands to the boot options in grub.cfg.
+> Suggested-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+> ---
+>  arch/arm/mach-k3/common.c | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index cc755dd1bf..3978b9ccca 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -27,6 +27,7 @@
+>  #include <env.h>
+>  #include <elf.h>
+>  #include <soc.h>
+> +#include <video.h>
+>
+>  #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
+>  enum {
+> @@ -522,6 +523,24 @@ void remove_fwl_configs(struct fwl_data *fwl_data, size_t fwl_data_size)
+>         }
+>  }
+>
+> +static int video_setup(void)
 
-Thanks. I wonder if you could document this somewhere? It seems like
-there are a lot of options and it is quite complicated.
+Shouldn't this be in generic code?
 
-Back to the question, I suppose you are expecting grub to load the DT
-using this filename? But why doesn't U-Boot load it instead? It seems
-very convoluted.
-
-Also, can we test this interface?
+> +{
+> +       if (CONFIG_IS_ENABLED(VIDEO)) {
+> +               ulong addr;
+> +               int ret;
+> +
+> +               addr = gd->relocaddr;
+> +               ret = video_reserve(&addr);
+> +               if (ret)
+> +                       return ret;
+> +               debug("Reserving %luk for video at: %08lx\n",
+> +                     ((unsigned long)gd->relocaddr - addr) >> 10, addr);
+> +               gd->relocaddr = addr;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  void spl_enable_dcache(void)
+>  {
+>  #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+> @@ -537,6 +556,8 @@ void spl_enable_dcache(void)
+>         if (ram_top >= 0x100000000)
+>                 ram_top = (phys_addr_t) 0x100000000;
+>
+> +       gd->relocaddr = ram_top;
+> +       video_setup();
+>         gd->arch.tlb_addr = ram_top - gd->arch.tlb_size;
+>         gd->arch.tlb_addr &= ~(0x10000 - 1);
+>         debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
