@@ -4,55 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6FEAC004C0
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49F4C001DF
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40C5E86F9A;
-	Thu, 19 Oct 2023 23:56:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
+	by phobos.denx.de (Postfix) with ESMTP id BD29186F9A;
+	Thu, 19 Oct 2023 23:57:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="ZhuVD22i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fxQ9p3+9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46F4386FC8; Thu, 19 Oct 2023 23:56:38 +0200 (CEST)
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 09B4B86F9A; Thu, 19 Oct 2023 23:57:46 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33D8A86F9A
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:56:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7532B86F6F
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:57:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hugovil.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
- ; s=x;
- h=Subject:Content-Transfer-Encoding:Mime-Version:Message-Id:Cc:To:From
- :Date:subject:date:message-id:reply-to;
- bh=LlRFCzIvOw4OT+35wKm2HPRq+vrQeb+QNBKPopu5kiE=; b=ZhuVD22izOE5qxq3q5ULdFH79c
- b+1mhmaKLGEFVu6huM5AzPCHc7gFhWUaTIO0sM/7Zmb2TGnuBSZypJYxsT/iYKvbj9Q3GQRtcO1gJ
- NyyQa1vrU9JCZWzmBwJ0EtVOcr3NH3iApRw9Y3r1AsDM8Joir2nkbYEad3CXMeqX3Bjw=;
-Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:48042
- helo=pettiford) by mail.hugovil.com with esmtpa (Exim 4.92)
- (envelope-from <hugo@hugovil.com>)
- id 1qtb0J-0001LD-LG; Thu, 19 Oct 2023 17:56:32 -0400
-Date: Thu, 19 Oct 2023 17:56:31 -0400
-From: Hugo Villeneuve <hugo@hugovil.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, Fabio Estevam
- <festevam@denx.de>
-Message-Id: <20231019175631.7690b3cd59e7f71f7549b0d7@hugovil.com>
-In-Reply-To: <20231019215113.1833803-2-festevam@gmail.com>
-References: <20231019215113.1833803-1-festevam@gmail.com>
- <20231019215113.1833803-2-festevam@gmail.com>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 70.80.174.168
-X-SA-Exim-Mail-From: hugo@hugovil.com
-Subject: Re: [PATCH v3 2/2]  imx8mp_evk: Remove unneeded header files
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-1ea1742c1a5so49816fac.0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:57:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697752662; x=1698357462; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EH9g5EsHRE81YAZ1i3+GHuOjU6FdNrmr097nyvVJnL8=;
+ b=fxQ9p3+9MFdRaJ+rZMvizGAulCCL3roorLkyviVgLk3gEi+IgCRbJ9wS3tXgkPGisT
+ d850wNGzEzZYizCbgKga+TSZQOtE0pZOxUAHZtX1zEhjBmKxAfD2DPeKpKUvaBe7asRq
+ NDSss08m3PKqDzjOL158Og5GF10+ekyFOJ+C4tWnJEiMl0X1QTiD7IvLmJDB2t58ymvz
+ WhXSy5x1PEK2px7aWCAv/8/L+TKJ3Go+xRzxgBMBCKPTyxkwwv8HtaHuiRFnBRyV51U0
+ bL8eVeRrEUVswBOQ1W28qfYSb3G60gR2Uthx1euOYWzUsHUZNG8a/rUurT7af4mlRQpZ
+ R5Wg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697752662; x=1698357462;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EH9g5EsHRE81YAZ1i3+GHuOjU6FdNrmr097nyvVJnL8=;
+ b=lD2j/XagA7R5uVIpwHd51sobBlpRCMddNqvdk328+lB2cWBt0Ff/QEVOIH5rc8OPfY
+ cGpJihubBCswKffWjnPsOxtR9MD1wVU4I5Ep8P5qoWsABqAmtXl4D1ICwxp4t5tro7Zz
+ 0KySPukViKk/6k1k6w2OoSsuqZ4tfjcw6S0tYTz/KAJim4e9uNu1bQczOhAinV91ACgx
+ +0KwFPZty+cNM7siWjYu0vDyTgNVmBAsUJxP/WYXdxWawhhVN0EUSIaslg8PIPbEkvnm
+ jI8aszVlldGXSZGCHDp/ETVuC+fsZTmT3iuoTn4SeLSo2mFZ2m8i4xD8oNfkRrsrU/Wx
+ fWMQ==
+X-Gm-Message-State: AOJu0YxEtcozIl5JPTrFZAZpspygSmhVQdvjUJHDD3bZWoe3EW3In6/r
+ zTLKJ5Xtt/78BbrzFo66BWY=
+X-Google-Smtp-Source: AGHT+IGTltu1aSlygSW8KxnOPcHMyB7BeFpKQTMkCnCQUqSHs7B+k+p3FSGvi5aCPVdUPXBPCn8RqA==
+X-Received: by 2002:a05:6358:5922:b0:168:a35c:f07b with SMTP id
+ g34-20020a056358592200b00168a35cf07bmr11448rwf.0.1697752661828; 
+ Thu, 19 Oct 2023 14:57:41 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
+ by smtp.gmail.com with ESMTPSA id
+ x27-20020aa78f1b000000b006bdfb718e17sm250280pfr.124.2023.10.19.14.57.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Oct 2023 14:57:41 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: joe.hershberger@ni.com
+Cc: rfried.dev@gmail.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] net: eth-uclass: Improve error message when MAC is not found
+Date: Thu, 19 Oct 2023 18:57:20 -0300
+Message-Id: <20231019215720.1839630-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,51 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Oct 2023 18:51:13 -0300
-Fabio Estevam <festevam@gmail.com> wrote:
+From: Fabio Estevam <festevam@denx.de>
 
-> From: Fabio Estevam <festevam@denx.de>
-> 
-> Cleanup the file by removing unneeded header files.
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+While bringinp up a new board without the MAC fuses programmed,
+the following error message was observed:
 
-Reviewed-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Error: ethernet@30bf0000 address not set.
 
+Improve the error message to make it clearer the reason of
+the failure.
 
-> ---
-> Changes since v2:
-> - Also remove <asm/global_data.h> and DECLARE_GLOBAL_DATA_PTR. (Hugo)
-> 
->  board/freescale/imx8mp_evk/imx8mp_evk.c | 13 -------------
->  1 file changed, 13 deletions(-)
-> 
-> diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> index 42291c958e39..024b46ef8bc2 100644
-> --- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-> +++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> @@ -3,20 +3,7 @@
->   * Copyright 2019 NXP
->   */
->  
-> -#include <common.h>
->  #include <env.h>
-> -#include <errno.h>
-> -#include <init.h>
-> -#include <linux/delay.h>
-> -#include <asm/global_data.h>
-> -#include <asm/mach-imx/iomux-v3.h>
-> -#include <asm-generic/gpio.h>
-> -#include <asm/arch/imx8mp_pins.h>
-> -#include <asm/arch/clock.h>
-> -#include <asm/arch/sys_proto.h>
-> -#include <asm/mach-imx/gpio.h>
-> -
-> -DECLARE_GLOBAL_DATA_PTR;
->  
->  int board_init(void)
->  {
-> -- 
-> 2.34.1
-> 
-> 
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ net/eth-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+index 4311f3fe6e89..1f0985ec52ca 100644
+--- a/net/eth-uclass.c
++++ b/net/eth-uclass.c
+@@ -594,7 +594,7 @@ static int eth_post_probe(struct udevice *dev)
+ 		eth_env_set_enetaddr_by_index("eth", dev_seq(dev),
+ 					      pdata->enetaddr);
+ #else
+-		printf("\nError: %s address not set.\n",
++		printf("\nError: %s a valid MAC address was not found.\n",
+ 		       dev->name);
+ 		return -EINVAL;
+ #endif
+-- 
+2.34.1
+
