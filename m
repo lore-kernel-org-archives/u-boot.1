@@ -4,108 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB538CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 03:20:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BDBFCDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 04:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BF4F8725A;
-	Fri, 20 Oct 2023 05:19:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 401EB8722E;
+	Fri, 20 Oct 2023 06:13:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gallagher.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LCA1bWwm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gallagher.com header.i=@gallagher.com header.b="AL5kVBhK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9E7D87033; Fri, 20 Oct 2023 05:19:23 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2062b.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::62b])
+ id 1F0748719D; Thu, 19 Oct 2023 23:42:32 +0200 (CEST)
+Received: from AUS01-ME3-obe.outbound.protection.outlook.com
+ (mail-me3aus01on2072a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:7004::72a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56FC58723C
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 05:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 591068716C
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:42:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gallagher.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ spf=pass smtp.mailfrom=Afshin.Pir@gallagher.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PEynV68HRocl7pJpBy7W+9vVmPysDyh8K6K09z4BMjEjMIJ+OHQESv1WYBvUv1kcQuvHQu4tH2nTA7jDtTS/T9D3H9b1lxjavdz1HjDk1Bz4uDmwhqAECWg7f6O8usZdokPokn1wlC36AS1m0xR9lqtwXjIEchslGIpn24PvbfHJChyn1DXwjYsB8ghoS8UpNrvGzrxYEBKEPTb6u3EuYY3G2ZFFWDxjGKBygf/iIJy7On4CLLRJuwiNIVb1zJOnM8zbOhZczFSUna86a2QSCzbj30lgp5Xo4uaDmT1vNUyLQKCH2KdWmNz+RICAFXNDE+VOTpw6onsXOZPU0vZsTw==
+ b=Xyw8Jaq40V+17qFP4Naf0s4XS/k7tdQys1CD22zqfOo20APD3JffQWGKEU/1ApRuewIxJ/SwLhOdqeBfdRSxzR/UWkzAxUNOur4yTH8bL0Trj2klefCKDX/3jUkYIBvBipzpMjwKuqs+mS7Mx0Bt8Fj5dgbLsPFJmjQzi6OHRETPzmSPEY3j1UAuQqOihwElXxgSqQozDZ0TEu92ggDhOPFmdNvw604aX3xld+qWO69adtnPQTiWRKW6ITmlYQxc3pUNPqqeEq0YAxikfT2uvrcYJIN7JXGklqyo1uuzaVS9rJ2my/jT+26JlKv5SxZ9DOC7x0WzwJwSXAVoCVMgVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=trngMRAdd2OvxVA/3ZjtZK6+XKkwTECNcmA+FGRVZIw=;
- b=A/xXDw2T0/IASBx1m7H/3P4eNMcPxlzukssBfYEYjKlCsI3BNDZnoEiXMcAYzo0+49mOr14EONBis/QdDOnUKuF4IqK4GWTgzQIQYk5GEW+cl+xn1lBFOUsYQlOXQjo3kRr2zNabyw0yHlRwHt+WrZ9hHQSIuAzefv2EGXjbG/13KJpa+YfZ5z2gKylJO9TXU94N7H+OPldwCHuvmreiPJbvY14JjgV/I0heO900XmbW1JxKrLlS12oFjA8FSP+rSiyMEczL4x00XEPMQDKX585iHEW7ET6p8N4SAFPCiskHFrKwe+CBWQmvRJlyTwO65VKms8kBE+GpZHVBA0ib8g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=J5phHWs4+kqSd1P0yG2ICsMa4Jb9eB31I8E/F0B60fo=;
+ b=g1ctgasLZpbFg0jFhD0Gnfe2mB167GYuCokXJ6x/mf6OLR7rBWIY/jsNz71T3r5Pt1eNZjtK/kQm+UAfT4/WBoRAhX9Tf6FjIb8fduf6Y5xlTIdaNU5IHwGL3nCaLQDplCCRec/J4L+W32S6mmnJdpjiNjPkFJkYkj0r7BW0y0hHjn3mU8NEaoEUkOQl07lwqUllDebBdB/vE/ZsakAfeG5tXBmeBOnzOvtcSllV7KlKa1qcu/xPdqjYkG4vnUigLikBteWQ+SrkdbyNlBflWxWZBxhI3ubSu9k9b9zb8yS8kxiCs5Rc/VbwlJddt7JQeo666W/CQUNS5IKqOUMlbg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=gallagher.com; dmarc=pass action=none
+ header.from=gallagher.com; dkim=pass header.d=gallagher.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gallagher.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=trngMRAdd2OvxVA/3ZjtZK6+XKkwTECNcmA+FGRVZIw=;
- b=LCA1bWwmHsmk4A5ibeFLlXQfXybwEMZMv0Nw53fjXhijEfdB3QH0FCUlB/ZU8FldUfdpvJvCPDh7utm6vl+5ZBX0zKcV1GKbu0VHSZvJ6Vlp5UMCjfbtQtknIZIcF90YRsDOogtNmtXFuS0rD39ncyUV+nQYkNh6jJHzZ2A/sFQ=
-Received: from BL1PR13CA0259.namprd13.prod.outlook.com (2603:10b6:208:2ba::24)
- by CH2PR12MB4056.namprd12.prod.outlook.com (2603:10b6:610:a5::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37; Fri, 20 Oct
- 2023 03:19:16 +0000
-Received: from BL02EPF0001A0FD.namprd03.prod.outlook.com
- (2603:10b6:208:2ba:cafe::d9) by BL1PR13CA0259.outlook.office365.com
- (2603:10b6:208:2ba::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.8 via Frontend
- Transport; Fri, 20 Oct 2023 03:19:16 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0001A0FD.mail.protection.outlook.com (10.167.242.104) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Fri, 20 Oct 2023 03:19:15 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 19 Oct
- 2023 22:19:14 -0500
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Thu, 19 Oct 2023 22:19:12 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <git@xilinx.com>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Subject: [PATCH v3 6/6] spi: zynq_qspi: Add parallel memories support in QSPI
- driver
-Date: Fri, 20 Oct 2023 08:48:17 +0530
-Message-ID: <20231020031817.267959-7-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231020031817.267959-1-venkatesh.abbarapu@amd.com>
-References: <20231020031817.267959-1-venkatesh.abbarapu@amd.com>
+ bh=J5phHWs4+kqSd1P0yG2ICsMa4Jb9eB31I8E/F0B60fo=;
+ b=AL5kVBhKPOiOa/Vlg0fUmDXY8B09RZtnC7T3P4E5ucQJ5ddoB3ZLcXett/Dop4D0U7jO8B/0jhA7FOGJ99mbWAv4FaB0f93tUoYe0BM6FMHik9Zu0pWt/gvCG3/KBIXBXrmJHFSWVcIWWXXS2aKNINcxR1IrT5Cgh0U+hIA/aNBg7bJKKM4piS+F5TWG1tEues847FOuHeHxKZoiTYLad1gH4oRg8qsEHWUyg86qfT5rKtthJ8Vcfwf/AiTKQvx81Mcf8TL64VWZe8/SaMi2XLqJaflf/t/xSfUB8yrTdVcqlBXyNQvAt6EUG1uPAhhyqOoyhIUvikuSqklxer787A==
+Received: from SY2PR01MB2778.ausprd01.prod.outlook.com (2603:10c6:1:25::22) by
+ SYBPR01MB6652.ausprd01.prod.outlook.com (2603:10c6:10:12f::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6907.26; Thu, 19 Oct 2023 21:42:22 +0000
+Received: from SY2PR01MB2778.ausprd01.prod.outlook.com
+ ([fe80::f43:f53b:8160:60]) by SY2PR01MB2778.ausprd01.prod.outlook.com
+ ([fe80::f43:f53b:8160:60%4]) with mapi id 15.20.6886.034; Thu, 19 Oct 2023
+ 21:42:22 +0000
+From: Afshin Pir <Afshin.Pir@gallagher.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: How to use USB_HOST for at91 OHCI USB
+Thread-Topic: How to use USB_HOST for at91 OHCI USB
+Thread-Index: AdoC1J83nt4j1L7IRZ2a+q+oaDg3ug==
+Date: Thu, 19 Oct 2023 21:42:22 +0000
+Message-ID: <SY2PR01MB27787A7D5C4D8B39BB7E6E1D94D4A@SY2PR01MB2778.ausprd01.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=gallagher.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SY2PR01MB2778:EE_|SYBPR01MB6652:EE_
+x-ms-office365-filtering-correlation-id: 2ce9d16f-00a9-4d46-1fac-08dbd0ec46d1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: DhGLFXFqSd0Glf0oVOZ9tA59b6Rrd0jwP4J1GcFFdOKH4o9rOjrvSGpYFzyl3x0xb26i/PiULx1nDSm7ZQuhguamSJLogKQuIdAadrZRzQeEPOpIJjHGmgijfx+ShWprEY20p9XKjdSNZq/XuMROCAVWJOSLi0Sm1nUXYVvp4BXt6Qo11q/T3aK5JpvD1+VJq9pbz8QO5zPNGN5Re7u+MZtmgvStS9A9IEsgHZmB7ZOBRW936tNwkXzjbW70KvP5UdMiKCe3cgcyERidl4SHgWMGgp8wQjIlDQRS4AImxD6ZPshqJ133JinzGWWwVF2kOBh80o5YLRHvMDGWaJ0dshZPV98hQOzkLBpKXnLkNO0pi8OXCz/y9xpFoU/0UWFroeZ0HNF5/B7CbOfHqIpOonek44Ht9F7qQ1jdEfHm2I7aZ4OiZFwnEY2by30ThXeDkc9ugZJ4TYhV2u6GR8iLLD2ZbFTYUNW0aTHF2sMxXTY06lEZn074iwtv+0em1E/TY5229UCKgwcg/MHzbg8rvUBWEoPK44n/+4HazFeDrXjlRuyEDy6bnoMiNR324IvfviO644PRjCPY8JAFvK6uId9uypLNZYdFufZ1y/STq6rtRp3r9sHdVQm5Rc757/fk
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SY2PR01MB2778.ausprd01.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(136003)(366004)(39850400004)(346002)(396003)(230922051799003)(1800799009)(64100799003)(451199024)(186009)(38070700009)(478600001)(41300700001)(6506007)(9686003)(7696005)(86362001)(316002)(8676002)(8936002)(5660300002)(52536014)(66446008)(76116006)(66556008)(66946007)(66476007)(64756008)(6916009)(83380400001)(33656002)(122000001)(38100700002)(55016003)(26005)(2906002)(4744005)(71200400001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?vYYnxU8v5x/v+44VjQIi9wQvSwZbobBHAw4uLgSOaKIzHmq7m3LfWAjvJqpZ?=
+ =?us-ascii?Q?0JPGocZDphB8jh6A9I0+MS9ddXTrTvE807vVo2ggkThDWrU3EZI+Xn8BfdPZ?=
+ =?us-ascii?Q?38TV7MXNKYjkVB35ImLuHCJQY7OByqSRLyMuNmUbr6YJ3HvwUzkaFUQ1WZgn?=
+ =?us-ascii?Q?OVXj4EZwwuh6BTRPchrU4wurqhPtg8iN3ejmEsyLbXC41iAxpLIxKy9FoisW?=
+ =?us-ascii?Q?TNq9HLG8mr6kUqMBs0CCsb0KSHgTSc+Dh14Owk2vhuzbJX1YQ+T5DsqJzXmJ?=
+ =?us-ascii?Q?03XBLs+YvvUz4cMG2Y9LOmajqQmCxguEHOLvujHXdsn81BiVr8Lr/J0Up6ZT?=
+ =?us-ascii?Q?AbGy5ZwWyP+Hx7UzBgJFbqiQ5Y4D7CzqHj1vfNMHqbacqTXcHW5jC22BDFAX?=
+ =?us-ascii?Q?VOKPWHe6eTqo65Tz7yu1rSRl8AlNwOVKQPLyeuerqlFV6QF4kz9Pc76TSPsX?=
+ =?us-ascii?Q?0ASP4LMtv7d9Mennk67XVyXmr1LPb7HcuuFIFWAyMrsS5XU89mOSjpt37NK0?=
+ =?us-ascii?Q?c36Ldf2vY58wZJ8oLA0vMDxUK0AbObFklC5mTu7A9hoiAyManEChCSA3y/A2?=
+ =?us-ascii?Q?PeIHdqWQpmP3ZzUaLr8nt09CjYzGi6oBsNVO1s6UMQGSdIzQ8G+XgNKZSLEr?=
+ =?us-ascii?Q?XqU2XdzffJqaCn42BVeWslEj3U3ge5D7kqqX2FduBrQzaMJqYJMILMNM3b65?=
+ =?us-ascii?Q?qeocaTWMXhzper+5uDmCd1BjrrA58IPDab7VH7gkIbOp6QfMfgFupg+2eFF9?=
+ =?us-ascii?Q?PXMupMp0UbSj5NLeFczbx0ubhpwFiWNaMg8qOCWRtileaA7wGaobaIvodejX?=
+ =?us-ascii?Q?D+HDYSr7A4+hkjN81C8yfmq1v+iHwN727tgIorjG7ZoyzuQ1peFIfEJo8CXs?=
+ =?us-ascii?Q?a6RtniF1nxtWhYgT2fIZtoiWaPJaF+FmUi+8RLatK37NKleZm+o4/3x4PIsV?=
+ =?us-ascii?Q?QD+yEc+ky/HSpedvqWcRFbzEyOOlDMH7eJI37Av04Wz14NEpEmPbutbpkCRH?=
+ =?us-ascii?Q?F39NkIusmf1kwv6I6+I0v7Lsz7MpxAO/A/mFfnMC5dS59N0ws4yxWBIiXLjs?=
+ =?us-ascii?Q?EXDZ4HAX708APBmgKCS/63hKYtFwyYlNAQwOFRC0Sg7flXSrgMB/hvtx1Qqs?=
+ =?us-ascii?Q?4Aj9mW1nnPY6HV0b/2g3sK9G/G1KhqM2PILqfiVvxj2U51R6e26xXhp6/6LL?=
+ =?us-ascii?Q?23/X3BjuR7Wbt7W2YaLQ8ne6qoSzs7g8UNk2ooQbbMndR4hkzDoKs/0W/BUR?=
+ =?us-ascii?Q?d1Ws4CM6rsnYjaWIP9pNsYN3WyKG3mueENjoPhRZh+7CBBz/xZNQZlpiY0AF?=
+ =?us-ascii?Q?RJGRanqT9EwAx6wY7eTXyo5rvCugIp6eeJV8M/L+gZvkRoKiEJ1OwG5X3hZK?=
+ =?us-ascii?Q?9IvFSuQQEvGgA+43x81i8uzbNOGIVCurULV5wlF8PkGEQA2pitaENd8zjWdg?=
+ =?us-ascii?Q?uwIVNOR6rV1JKApgh6PgLmqrKsZvD7CBlBkxI5oK5zWoFTKDLdm3x8O84FBf?=
+ =?us-ascii?Q?JhwaqJg0iHoCSk+YMawakEOkeV+Os3/PlWQZWe6a5AxKFn82BgQhjDZN7hZb?=
+ =?us-ascii?Q?dsed86AGbHibPyPvx86qrGpemKivYTNgnw00ms6p?=
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FD:EE_|CH2PR12MB4056:EE_
-X-MS-Office365-Filtering-Correlation-Id: 176965ad-d5c1-4bb8-0963-08dbd11b5704
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: CTxWtHE1aty/jhtZ873PSFbS8iy+u+gxWxjrEnN6nb02VsPvNjasEX4P/FWkqLQCdHX6SoEtrM2b9bjaR3F1tOE948QFOPV5H71PTFvzUvBfQFW13sIAxhfCAeKlh26L4b7MWeCy4jZw4nzr4mkN+YPzx86soIeV523PbgGDcC3wqx2MCxtRcSw1axLGlTfkAkFmPAUusmEbHlJoW+lYcOYxoqbEn7f6UOzlhl+vD3OjpGvIxaFi8xBK9fTPtCItnocz02ccU/qyBlXc6Hp4Z1SGYxZXEapIhMzCHCMF1T8sUzIp4A2LJx5TVjPvnV4VJDuVi6A7B5/zNbjFZ57AtheuLz3v3ol6WIkGG7iNxf/4kUUK8P/kSm0jQdgnXiqJxuWBTKD73fWq+BX6nDA7LZUGcensn1WPqJVv5SopdJ/kH3l4TN3RvOEgm4r+le/zvpeKMtZv3rmDFbrO2HOlFyEomGTEYcp5gWuHDO1J6JkzYIP2wPBBHqE/D/fQNNlIzhrP5mVsYWnCYFyBuj1xMEEkLUE2hJl14VR4TfhQH61rQtY5g/97yD3LgVx75cWm+ipT6ENzsp14FIjQY08jjbWoQ5/l2omcjE1Av4cu68pw/R/W/wIfWvX+PryI3242UjuY1yPAQBhC6hnfs6xRNS1YXd7ejbwRGRFZiiwNUzVxBBTOrp1s7lattth1LxCfUeugA9L/WbqALEQS3aVoy6nFRKmzMU1IfNPdYkMr2ZvfCsuSl1yy++7djIlRAJGSH6ym+8MOd/TLjIudRoAnsQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(396003)(136003)(376002)(39860400002)(230922051799003)(1800799009)(64100799003)(451199024)(82310400011)(186009)(46966006)(40470700004)(36840700001)(2906002)(41300700001)(8676002)(2616005)(1076003)(40480700001)(82740400003)(70586007)(336012)(36860700001)(478600001)(316002)(86362001)(36756003)(356005)(81166007)(40460700003)(426003)(47076005)(5660300002)(4326008)(6916009)(8936002)(70206006)(83380400001)(54906003)(26005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2023 03:19:15.6792 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 176965ad-d5c1-4bb8-0963-08dbd11b5704
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FD.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4056
+X-OriginatorOrg: gallagher.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SY2PR01MB2778.ausprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ce9d16f-00a9-4d46-1fac-08dbd0ec46d1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2023 21:42:22.1535 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 2156b869-431f-4815-b2ce-b4893b5c9aaa
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: etToDmRji3oo7dwl2Bm54PVSViMbkK2XoMsicthLusa3Ueq5/aVQ4frPp20S4STPg8pN8dX+lqKwRNjrTSi+j4J0I6eHg7y0kj2ZujQC10I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SYBPR01MB6652
+X-Mailman-Approved-At: Fri, 20 Oct 2023 06:13:21 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,334 +134,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for parallel memories in zynq_qspi.c driver. In case of
-parallel memories STRIPE bit is set and sent to the qspi ip, which will
-send data bits to both the flashes in parallel. However for few commands
-we should not use stripe, instead send same data to both the flashes.
-Those commands are exclueded by using zynqmp_qspi_update_stripe().
+Hi all
 
-Also update copyright info for this file.
+I want to use usb command and usb mass storage with at91 ohci. These featur=
+es depend on USB_HOST, but I found that USB_ATMEL option does not select US=
+B_HOST and I don't know why. How can I do this?
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/spi/zynq_qspi.c | 140 ++++++++++++++++++++++++++++++++++++----
- include/spi.h           |   4 ++
- 2 files changed, 131 insertions(+), 13 deletions(-)
-
-diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
-index 069d2a77de..3471c301bf 100644
---- a/drivers/spi/zynq_qspi.c
-+++ b/drivers/spi/zynq_qspi.c
-@@ -1,7 +1,8 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * (C) Copyright 2013 Xilinx, Inc.
-+ * (C) Copyright 2013 - 2022, Xilinx, Inc.
-  * (C) Copyright 2015 Jagan Teki <jteki@openedev.com>
-+ * (C) Copyright 2023, Advanced Micro Devices, Inc.
-  *
-  * Xilinx Zynq Quad-SPI(QSPI) controller driver (master mode only)
-  */
-@@ -13,10 +14,12 @@
- #include <log.h>
- #include <malloc.h>
- #include <spi.h>
-+#include <spi_flash.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
- #include <spi-mem.h>
-+#include "../mtd/spi/sf_internal.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -42,6 +45,22 @@ DECLARE_GLOBAL_DATA_PTR;
- #define ZYNQ_QSPI_TXD_00_01_OFFSET	0x80	/* Transmit 1-byte inst */
- #define ZYNQ_QSPI_TXD_00_10_OFFSET	0x84	/* Transmit 2-byte inst */
- #define ZYNQ_QSPI_TXD_00_11_OFFSET	0x88	/* Transmit 3-byte inst */
-+#define ZYNQ_QSPI_FR_QOUT_CODE		0x6B    /* read instruction code */
-+#define ZYNQ_QSPI_FR_DUALIO_CODE	0xBB
-+
-+#define QSPI_SELECT_LOWER_CS		BIT(0)
-+#define QSPI_SELECT_UPPER_CS		BIT(1)
-+
-+/*
-+ * QSPI Linear Configuration Register
-+ *
-+ * It is named Linear Configuration but it controls other modes when not in
-+ * linear mode also.
-+ */
-+#define ZYNQ_QSPI_LCFG_TWO_MEM_MASK	0x40000000 /* QSPI Enable Bit Mask */
-+#define ZYNQ_QSPI_LCFG_SEP_BUS_MASK	0x20000000 /* QSPI Enable Bit Mask */
-+#define ZYNQ_QSPI_LCFG_U_PAGE		0x10000000 /* QSPI Upper memory set */
-+#define ZYNQ_QSPI_LCFG_DUMMY_SHIFT	8
- 
- #define ZYNQ_QSPI_TXFIFO_THRESHOLD	1	/* Tx FIFO threshold level*/
- #define ZYNQ_QSPI_RXFIFO_THRESHOLD	32	/* Rx FIFO threshold level */
-@@ -101,7 +120,12 @@ struct zynq_qspi_priv {
- 	int bytes_to_transfer;
- 	int bytes_to_receive;
- 	unsigned int is_inst;
-+	unsigned int is_parallel;
-+	unsigned int is_stacked;
-+	unsigned int is_dio;
-+	unsigned int u_page;
- 	unsigned cs_change:1;
-+	unsigned is_strip:1;
- };
- 
- static int zynq_qspi_of_to_plat(struct udevice *bus)
-@@ -112,7 +136,6 @@ static int zynq_qspi_of_to_plat(struct udevice *bus)
- 
- 	plat->regs = (struct zynq_qspi_regs *)fdtdec_get_addr(blob,
- 							      node, "reg");
--
- 	return 0;
- }
- 
-@@ -147,6 +170,9 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
- 	/* Disable Interrupts */
- 	writel(ZYNQ_QSPI_IXR_ALL_MASK, &regs->idr);
- 
-+	/* Disable linear mode as the boot loader may have used it */
-+	writel(0x0, &regs->lqspicfg);
-+
- 	/* Clear the TX and RX threshold reg */
- 	writel(ZYNQ_QSPI_TXFIFO_THRESHOLD, &regs->txftr);
- 	writel(ZYNQ_QSPI_RXFIFO_THRESHOLD, &regs->rxftr);
-@@ -164,12 +190,11 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
- 	confr |= ZYNQ_QSPI_CR_IFMODE_MASK | ZYNQ_QSPI_CR_MCS_MASK |
- 		ZYNQ_QSPI_CR_PCS_MASK | ZYNQ_QSPI_CR_FW_MASK |
- 		ZYNQ_QSPI_CR_MSTREN_MASK;
--	writel(confr, &regs->cr);
- 
--	/* Disable the LQSPI feature */
--	confr = readl(&regs->lqspicfg);
--	confr &= ~ZYNQ_QSPI_LQSPICFG_LQMODE_MASK;
--	writel(confr, &regs->lqspicfg);
-+	if (priv->is_stacked)
-+		confr |= 0x10;
-+
-+	writel(confr, &regs->cr);
- 
- 	/* Enable SPI */
- 	writel(ZYNQ_QSPI_ENR_SPI_EN_MASK, &regs->enr);
-@@ -180,6 +205,8 @@ static int zynq_qspi_child_pre_probe(struct udevice *bus)
- 	struct spi_slave *slave = dev_get_parent_priv(bus);
- 	struct zynq_qspi_priv *priv = dev_get_priv(bus->parent);
- 
-+	slave->multi_cs_cap = true;
-+	slave->dio = priv->is_dio;
- 	priv->max_hz = slave->max_hz;
- 
- 	return 0;
-@@ -363,8 +390,8 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
- 	unsigned len, offset;
- 	struct zynq_qspi_regs *regs = priv->regs;
- 	static const unsigned offsets[4] = {
--		ZYNQ_QSPI_TXD_00_00_OFFSET, ZYNQ_QSPI_TXD_00_01_OFFSET,
--		ZYNQ_QSPI_TXD_00_10_OFFSET, ZYNQ_QSPI_TXD_00_11_OFFSET };
-+		ZYNQ_QSPI_TXD_00_01_OFFSET, ZYNQ_QSPI_TXD_00_10_OFFSET,
-+		ZYNQ_QSPI_TXD_00_11_OFFSET, ZYNQ_QSPI_TXD_00_00_OFFSET };
- 
- 	while ((fifocount < size) &&
- 			(priv->bytes_to_transfer > 0)) {
-@@ -386,7 +413,11 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
- 				return;
- 			len = priv->bytes_to_transfer;
- 			zynq_qspi_write_data(priv, &data, len);
--			offset = (priv->rx_buf) ? offsets[0] : offsets[len];
-+			if ((priv->is_parallel || priv->is_stacked) &&
-+                            !priv->is_inst && (len % 2))
-+                                len++;
-+                        offset = (priv->rx_buf) ?
-+                                  offsets[3] : offsets[len - 1];
- 			writel(data, &regs->cr + (offset / 4));
- 		}
- 	}
-@@ -491,6 +522,7 @@ static int zynq_qspi_irq_poll(struct zynq_qspi_priv *priv)
-  */
- static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
- {
-+	static u8 current_u_page;
- 	u32 data = 0;
- 	struct zynq_qspi_regs *regs = priv->regs;
- 
-@@ -500,6 +532,47 @@ static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
- 	priv->bytes_to_transfer = priv->len;
- 	priv->bytes_to_receive = priv->len;
- 
-+	if (priv->is_parallel)
-+		writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+			ZYNQ_QSPI_LCFG_SEP_BUS_MASK |
-+			(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+			ZYNQ_QSPI_FR_QOUT_CODE), &regs->lqspicfg);
-+
-+	if (priv->is_inst && priv->is_stacked && current_u_page != priv->u_page) {
-+		if (priv->u_page) {
-+			if (priv->is_dio == SF_DUALIO_FLASH)
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					ZYNQ_QSPI_LCFG_U_PAGE |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_DUALIO_CODE),
-+					&regs->lqspicfg);
-+			else
-+				/* Configure two memories on shared bus
-+				 * by enabling upper mem
-+				 */
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					ZYNQ_QSPI_LCFG_U_PAGE |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_QOUT_CODE),
-+					&regs->lqspicfg);
-+		} else {
-+			if (priv->is_dio == SF_DUALIO_FLASH)
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_DUALIO_CODE),
-+					&regs->lqspicfg);
-+			else
-+				/* Configure two memories on shared bus
-+				 * by enabling lower mem
-+				 */
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_QOUT_CODE),
-+					&regs->lqspicfg);
-+		}
-+		current_u_page = priv->u_page;
-+	}
-+
- 	if (priv->len < 4)
- 		zynq_qspi_fill_tx_fifo(priv, priv->len);
- 	else
-@@ -599,7 +672,8 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	 * Assume that the beginning of a transfer with bits to
- 	 * transmit must contain a device command.
- 	 */
--	if (dout && flags & SPI_XFER_BEGIN)
-+	if ((dout && flags & SPI_XFER_BEGIN) ||
-+	    (flags & SPI_XFER_END && !priv->is_strip))
- 		priv->is_inst = 1;
- 	else
- 		priv->is_inst = 0;
-@@ -609,6 +683,11 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	else
- 		priv->cs_change = 0;
- 
-+	if (flags & SPI_XFER_U_PAGE)
-+		priv->u_page = 1;
-+	else
-+		priv->u_page = 0;
-+
- 	zynq_qspi_transfer(priv);
- 
- 	return 0;
-@@ -672,14 +751,35 @@ static int zynq_qspi_set_mode(struct udevice *bus, uint mode)
- 	return 0;
- }
- 
-+bool update_stripe(const struct spi_mem_op *op)
-+{
-+	if (op->cmd.opcode == SPINOR_OP_BE_4K ||
-+	    op->cmd.opcode == SPINOR_OP_CHIP_ERASE ||
-+	    op->cmd.opcode == SPINOR_OP_SE ||
-+	    op->cmd.opcode == SPINOR_OP_WREAR
-+	)
-+		return false;
-+
-+	return true;
-+}
-+
- static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			     const struct spi_mem_op *op)
- {
-+	struct udevice *bus = slave->dev->parent;
-+	struct zynq_qspi_priv *priv = dev_get_priv(bus);
- 	int op_len, pos = 0, ret, i;
-+	u32 dummy_bytes = 0;
- 	unsigned int flag = 0;
- 	const u8 *tx_buf = NULL;
- 	u8 *rx_buf = NULL;
- 
-+	if ((slave->flags & QSPI_SELECT_LOWER_CS) &&
-+	    (slave->flags & QSPI_SELECT_UPPER_CS))
-+		priv->is_parallel = true;
-+	if (slave->flags & SPI_XFER_STACKED)
-+		priv->is_stacked = true;
-+
- 	if (op->data.nbytes) {
- 		if (op->data.dir == SPI_MEM_DATA_IN)
- 			rx_buf = op->data.buf.in;
-@@ -688,6 +788,11 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	}
- 
- 	op_len = op->cmd.nbytes + op->addr.nbytes + op->dummy.nbytes;
-+	if (op->dummy.nbytes) {
-+		op_len = op->cmd.nbytes + op->addr.nbytes +
-+			 op->dummy.nbytes / op->dummy.buswidth;
-+		dummy_bytes = op->dummy.nbytes / op->dummy.buswidth;
-+	}
- 
- 	u8 op_buf[op_len];
- 
-@@ -701,8 +806,11 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 		pos += op->addr.nbytes;
- 	}
- 
--	if (op->dummy.nbytes)
--		memset(op_buf + pos, 0xff, op->dummy.nbytes);
-+	if (dummy_bytes)
-+		memset(op_buf + pos, 0xff, dummy_bytes);
-+
-+	if (slave->flags & SPI_XFER_U_PAGE)
-+		flag |= SPI_XFER_U_PAGE;
- 
- 	/* 1st transfer: opcode + address + dummy cycles */
- 	/* Make sure to set END bit if no tx or rx data messages follow */
-@@ -714,6 +822,9 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	if (ret)
- 		return ret;
- 
-+	slave->dummy_bytes = 0;
-+	priv->is_strip = update_stripe(op);
-+
- 	/* 2nd transfer: rx or tx data path */
- 	if (tx_buf || rx_buf) {
- 		ret = zynq_qspi_xfer(slave->dev, op->data.nbytes * 8, tx_buf,
-@@ -722,6 +833,9 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			return ret;
- 	}
- 
-+	priv->is_parallel = false;
-+	priv->is_stacked = false;
-+	slave->flags &= ~SPI_XFER_MASK;
- 	spi_release_bus(slave);
- 
- 	return 0;
-diff --git a/include/spi.h b/include/spi.h
-index c33acd9eac..0c5f4c1739 100644
---- a/include/spi.h
-+++ b/include/spi.h
-@@ -42,6 +42,8 @@
- #define SPI_3BYTE_MODE 0x0
- #define SPI_4BYTE_MODE 0x1
- 
-+#define SF_DUALIO_FLASH        0x1
-+
- /* SPI transfer flags */
- #define SPI_XFER_STRIPE	(1 << 6)
- #define SPI_XFER_MASK	(3 << 8)
-@@ -172,6 +174,8 @@ struct spi_slave {
- #define SPI_XFER_U_PAGE		BIT(4)
- #define SPI_XFER_STACKED	BIT(5)
- 
-+	u8 dio;
-+	u8 dummy_bytes;
- 	u32 bytemode;
- 
- 	/*
--- 
-2.25.1
-
+Best Regards
+________________________________
+This email is confidential and may contain information subject to legal pri=
+vilege. If you are not the intended recipient please advise us of our error=
+ by return e-mail then delete this email and any attached files. You may no=
+t copy, disclose or use the contents in any way. The views expressed in thi=
+s email may not be those of Gallagher Group Ltd or subsidiary companies the=
+reof.
+________________________________
