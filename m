@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D598CCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D4ECDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:06:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B45FA874A0;
-	Thu, 19 Oct 2023 17:01:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18830874A4;
+	Thu, 19 Oct 2023 17:01:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AbD8HHNi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QYay4v1o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16AAA87469; Thu, 19 Oct 2023 17:01:38 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id D6EB387477; Thu, 19 Oct 2023 17:01:38 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BAA887448
+ by phobos.denx.de (Postfix) with ESMTPS id A049387441
  for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5a7d9d357faso100896057b3.0
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso108458067b3.0
  for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727694; x=1698332494; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697727695; x=1698332495; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xILpf6KPxsL3IgN6tZhzvuTRItvF6seW2sbxi9L5UqE=;
- b=AbD8HHNi74m8klqUbZRs/2MJNzo9w/DKAs1+wY7APw0SWecCsxK5sMJANJwoEpWVXd
- u3+EUtLT5w8X7bbXKQ4EdXVMFVpodmeoi1OhUqsKQ/CN0+x1cjS6WuuvnzLXE96m/ISu
- PVfgR8PI9/Ido2CyGc/3hG4Py9pdKgSxUwfNs=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fE6C55oYab3ouRm0gE7cCPJyay94jmpJf5B5CLeG+7w=;
+ b=QYay4v1oW5Xn4N98wnxEy34olJSUjMgC3AHtnVcerY59iax/NCrHGCYc45rwvxirMw
+ 8gcaOLTQyhu68Pn3rl7IeG7WHFUOe9Vw2vaWY+zvpibx9f9KZG2VzyWfO+OBvcUo9JKI
+ wYvV84KCREqkQaHGCJXuL6Y2yChuNOqlR9WfA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727694; x=1698332494;
+ d=1e100.net; s=20230601; t=1697727695; x=1698332495;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xILpf6KPxsL3IgN6tZhzvuTRItvF6seW2sbxi9L5UqE=;
- b=wzuAEBICm9Faf2ERg+IGujW0poiOaEGcEWTWfJGrkaq4KcTJrDOouEVAR2LBdcqUVO
- VPqJurdBv8Bcchq1sxLrozYYlEJzGseAP/Faq9Hwgr4S2hgrvdsTraV8gESyo61YSg56
- LrTZNYmhpwQ28uaPJh6knawMz0EIqHUdfUQ+hBWUOauyEt2xqx/HDIizvnXzX9imn0fz
- ICCoebixQE9amopMeR8xV7q0ppTkhgYFaD75RUqzQHxrr57PU4mw6cuMR4p6joOiHmTK
- m9u5lsCGiOEAyghHqzQphv+oBVdDJiDdDgDoh0TrkCgN6ImigV9L2p4ipTB6/q7PtKL2
- zVxw==
-X-Gm-Message-State: AOJu0Yy43nAF3QAEfA/LDx6vDd3SOOJoJazZHRCX7nPANhMMkS4+ch2y
- zlpSt5Flxl8NVlDP5HkxQvCENkBz3D0c/8HiC4/uag==
-X-Google-Smtp-Source: AGHT+IHqj0lAVxmbHnGFyPuzYbtFI3z/pJhaUaSLf886N0vujvkxW2N/ABINrMYIeTFSvJZhbRTjSA==
-X-Received: by 2002:a81:4708:0:b0:571:11ea:b2dd with SMTP id
- u8-20020a814708000000b0057111eab2ddmr2766977ywa.32.1697727693756; 
- Thu, 19 Oct 2023 08:01:33 -0700 (PDT)
+ bh=fE6C55oYab3ouRm0gE7cCPJyay94jmpJf5B5CLeG+7w=;
+ b=wtIa5nQsiz0yDuH5OUFGmxT2T7qXY47Rp66ytwCMIpdZV5BaxxQDB0hsRLm/NXt2kP
+ ESzDbA39h8FAZTzXCq0qUUbKeP7whpzrsRNgbalWpuFKS2khhosVRmQG8YtlsD6vxjNV
+ CQLVSPavqr9FxY4nSSN5mrtLQ9LxJ8hkIrdpVse5dwuvieCW/uAkOw6tX2O6tbG7s9mE
+ YNa18dq6iI6RdH5VdGWc5/En7dh1W7zes3tNkoYHwyvOnMmy9F/UuZ3bx/c5ha68TSJf
+ skwiQJO8oZtdMIxA/UkWSB+sA7t8WIYPmvl7p37TjY55OaTupzozfff7jQa1B1tkmjT+
+ Fa6g==
+X-Gm-Message-State: AOJu0YzAEPk+wmzz/NOF0eRq84o+M7zNscF5vnPMylIbctmlNC82KI7Q
+ Mu9ST/tn9LpwzQ20Ylv5P4+nG9xQeQNtoguD/s72+g==
+X-Google-Smtp-Source: AGHT+IEB7rAf8f5x+ooWCy8hbQKTvMfTYQU74D9vcuL3WcDmBeC7wFx2WNM0PYN1Ph8V4HlKnNzdKg==
+X-Received: by 2002:a0d:d514:0:b0:5a7:bbd1:ec1d with SMTP id
+ x20-20020a0dd514000000b005a7bbd1ec1dmr2667423ywd.17.1697727694999; 
+ Thu, 19 Oct 2023 08:01:34 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.32
- for <u-boot@lists.denx.de>
+ c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:01:32 -0700 (PDT)
+ Thu, 19 Oct 2023 08:01:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v4 23/24] sandbox: Add <asm/barrier.h>
-Date: Thu, 19 Oct 2023 11:01:04 -0400
-Message-Id: <20231019150105.714407-23-trini@konsulko.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Subject: [v4 24/24] clk_k210.c: Clean up how we handle nop
+Date: Thu, 19 Oct 2023 11:01:05 -0400
+Message-Id: <20231019150105.714407-24-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019150105.714407-1-trini@konsulko.com>
 References: <20231019150105.714407-1-trini@konsulko.com>
@@ -88,24 +89,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a mostly empty asm/barrier.h file for sandbox where we define nop() to
-be an empty function.
+Now that sandbox has <asm/barrier.h> and defines nop() there we should
+include that in our driver for clarity and then remove our local nop()
+from <k210/pll.h>.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/sandbox/include/asm/barrier.h | 3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 arch/sandbox/include/asm/barrier.h
+I can see that our ARM <asm/barriers.h> should be <asm/barrier.h> and
+updated in a few other ways to match how the kernel is currently.  This
+is not a big deal yet as this driver is only for sandbox for risc-v
 
-diff --git a/arch/sandbox/include/asm/barrier.h b/arch/sandbox/include/asm/barrier.h
-new file mode 100644
-index 000000000000..0928a78cbf8b
---- /dev/null
-+++ b/arch/sandbox/include/asm/barrier.h
-@@ -0,0 +1,3 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+#define nop()
+Cc: Sean Anderson <seanga2@gmail.com>
+---
+ drivers/clk/clk_k210.c | 1 +
+ include/k210/pll.h     | 3 ---
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
+index c534cc07e092..b9469b93853b 100644
+--- a/drivers/clk/clk_k210.c
++++ b/drivers/clk/clk_k210.c
+@@ -16,6 +16,7 @@
+ #include <dt-bindings/mfd/k210-sysctl.h>
+ #include <k210/pll.h>
+ #include <linux/bitfield.h>
++#include <asm/barrier.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+diff --git a/include/k210/pll.h b/include/k210/pll.h
+index fd16a89cb203..175c47f6f233 100644
+--- a/include/k210/pll.h
++++ b/include/k210/pll.h
+@@ -16,9 +16,6 @@ struct k210_pll_config {
+ #ifdef CONFIG_UNIT_TEST
+ TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
+ 				     struct k210_pll_config *best);
+-#ifndef nop
+-#define nop()
+-#endif
+ 
+ #endif
+ #endif /* K210_PLL_H */
 -- 
 2.34.1
 
