@@ -4,83 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BE1DCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 07:22:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D69CCDB483
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 07:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAA5B8717B;
-	Thu, 19 Oct 2023 09:22:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C947287184;
+	Thu, 19 Oct 2023 09:28:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sO6CikZc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BzUIbxGm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E39787183; Thu, 19 Oct 2023 09:22:42 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1805687188; Thu, 19 Oct 2023 09:28:27 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E9F887178
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 09:22:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 823AD87178
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 09:28:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2c4fe37f166so96455341fa.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 00:22:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697700157; x=1698304957; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n4UXbkSoDUrt+8AfND/Ts0s9jr/O+Lf7ZjnHbJQUi9U=;
- b=sO6CikZcPtaEpgksB7umwCc4zpTuOBvvuOC3gmDEgZkdsVt/UiMUPYOHTlidIulOJp
- bI/9+Y7O/tnURziIdp4m5c8BjMoy5LMqCRhIkr9MVa+XkqHenyMYOeDuUWosXrq9IpkT
- GraKcbU9pRL1kuWZdmOGcHsDqjKUNpA8Vre4qt3vCJMflheYDiSaONWWipJvgXtzy/Kj
- ICozMMAGdZsHRORxAf3fUPWE3GZ11miTZS5HG/EdwABeoHPevD1r8ZC5OSz9BDj+V1pD
- jBR5h0g7Eh7cjsBmssWtUdk8X25Qywg7p3+YgONF6K1hs3FPAJ+nucYkb7IuHVn5uHlM
- RZRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697700157; x=1698304957;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=n4UXbkSoDUrt+8AfND/Ts0s9jr/O+Lf7ZjnHbJQUi9U=;
- b=Ihv/eOSjMeeb5y/X9fCZf9uoWFOgvMj0sTf4OuuBs50w5dBG/cOcNdBXtxPC+jMVpE
- y8uRI0eesww4FHrlIDvlhEhMCp3VV6rTn/u7LXSC7PCemTdaVwWFFVb9BKk40BXVGhAi
- SqzVMj5o6V6GhOsnTjXFXdQLBpS7wwffPEtB/hPeeTg6enp61gEQTDaSEZMjn3cRoGWe
- OpeBgECk6J0/ruOuUHePGqBfO/CPx03ATNfON8pAeBQB8LfRdRlvpP2Pmy7Us8rFqwnB
- OuOPHB84WNjyYuo8io/ycu3RXCSsUrKyisYup5NuTWbzhFF1Pst4e2AkKF6nyANYxxua
- wCig==
-X-Gm-Message-State: AOJu0YyL9YFNT2XupwK2CYqDsVOxmdk9QqWKB2wHpbhORFmNml5HfCJg
- mvjlnA2KB14QaJrRBeuRO06wnQqzuaK7JV7kASXAVg==
-X-Google-Smtp-Source: AGHT+IH12NAHQnog+IqMtL6nSfySRO4YIS9j1yPgMg8Wr8EtARaQ/YZXFZaaakhnK1Xe1BljCGvT7RDNzsgJBGxccEk=
-X-Received: by 2002:ac2:4c0e:0:b0:507:aa44:28fa with SMTP id
- t14-20020ac24c0e000000b00507aa4428famr813073lfq.26.1697700157585; Thu, 19 Oct
- 2023 00:22:37 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39J7SJO7088281;
+ Thu, 19 Oct 2023 02:28:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697700499;
+ bh=eur/mbNvncsWslTz8xy4CkBi+e43XnBrNJ164kNTWoQ=;
+ h=From:To:CC:Subject:Date;
+ b=BzUIbxGmUB6F7quNG46bmTmprqhZTohrpoHdT/7YFCRzedNl8TjG6A6x2cJtGMHIT
+ 8TxyMP2FEC6/vXkVOKhygZ4MX/JJYH4D6zNrMkYKzrJh6KHYaZVjNeuPovQrZRSsjy
+ GnvjwFlUTYgqaVuSga8spLQZyAXrPH5oHhDZSpGA=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39J7SJqw016831
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 19 Oct 2023 02:28:19 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
+ Oct 2023 02:28:19 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 19 Oct 2023 02:28:19 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39J7SFkv117646;
+ Thu, 19 Oct 2023 02:28:16 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <sjg@chromium.org>
+CC: <peng.fan@nxp.com>, <ye.li@nxp.com>, <robimarko@gmail.com>,
+ <u-boot@lists.denx.de>, <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH v3] driver: misc: k3_avs: Add support for thermal shutdown
+Date: Thu, 19 Oct 2023 12:57:53 +0530
+Message-ID: <20231019072752.1330935-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
- <20231016064526.2410856-5-masahisa.kojima@linaro.org>
- <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
- <CAC_iWj+koNjVBR7TCJH_u_PvY5xDHgtBGRTHBRRgAx_aDeC8-A@mail.gmail.com>
- <ae12d900-fe7f-4f7b-9eb1-018aa719174f@gmx.de>
- <CADQ0-X8XGiek9oBEFeDtXaR2vcBsQS-NhJK5mL9TRLK+9gTJ2A@mail.gmail.com>
- <050e8bea-771b-491d-8d66-14fadcff0487@gmx.de>
- <CADQ0-X9n24HVJ_AoMszTUQy1wk+q=TfZG915mzd3gd=GScxjMA@mail.gmail.com>
- <CAC_iWjJccjJPEWpiBKOA+ue21JAcosVHsgQH7QJvMzcRBASkAw@mail.gmail.com>
- <CADQ0-X8ndi2UmqWTkcfp=1UsPRnZKDi3RJfFVJb7A6FsMZ4=Vw@mail.gmail.com>
- <CAC_iWjL8n7Zkm3qa7MHzjS9gi1ap9EJdezFML4bSmzFDUpMW-A@mail.gmail.com>
- <CADQ0-X-H4YQiANnSveqdub_-N8cz23wBkzq32DOUOxb0XigJwg@mail.gmail.com>
-In-Reply-To: <CADQ0-X-H4YQiANnSveqdub_-N8cz23wBkzq32DOUOxb0XigJwg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 19 Oct 2023 10:22:01 +0300
-Message-ID: <CAC_iWjK59UppeLyp=F4agWVEaxQi-Kcz3GrTysOdUP3kd0z6RQ@mail.gmail.com>
-Subject: Re: [PATCH v7 4/9] efi_loader: create default file boot option
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,89 +78,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[...]
+To avoid thermal burn out, program thermal shutdown
+value in VTM (Voltage and Thermal Manager) IP.
 
-> > > > >
-> > > > > According to the EDK II implementation[1], the boot option is
-> > > > > enumerated with the following order.
-> > > > >   1. Removable BlockIo
-> > > > >   2. Fixed BlockIo
-> > > > >   3. Non-BlockIo SimpleFileSystem
-> > > > >   4. LoadFile
-> > > > > So boot option for the fixed device such as HDD is also automatically created.
-> > > > >
-> > > > > [1] https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/UefiBootManagerLib/BmBoot.c#L2150
-> > > > >
-> > > > > >
-> > > > > > >
-> > > > > > > When this boot option is selected, Fedora installer automatically starts.
-> > > > > > > So EDK II is searching the default file on the fly.
-> > > > > >
-> > > > > > What is shown if you attach a medium without Bootaa64.efi?
-> > > > >
-> > > > > The same boot option is created.
-> > > > > UEFI QEMU HARDDISK QM00001 : PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0)
-> > > >
-> > > > I went back to reading the spec and I think Heinrich is right.  We
-> > > > don't need that check at all. Going through [0] paragraph 4 says
-> > > > " This search occurs when the device path of the boot image listed in
-> > > > any boot option points directly to an EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
-> > > > device and does not specify the exact file to load"
-> > > >
-> > > > So we should *only* add an automatic variable without the default
-> > > > application.  Our code in try_load_entry() will search for that
-> > > >
-> > >
-> > > Thank you for checking the UEFI specification and sorry for
-> > > overlooking the above.
-> > > So we will go back to the previous on the fly default application search.
-> >
-> > Yes, I was about to suggest that.
-> > The problem as I understand it that the current patch not only
-> > disregards disks and partitions that dont have a default (i.e
-> > bootaa64.efi) file. It also *changes* the default boot option we add,
-> > and instead of the disk it adds a file.  That is the part that's
-> > against the spec.  On top of that it changes the behavior of efi
-> > bootmgr and we never call the expand_media_path.
->
-> What do you mean by "we never call the expand_media_path"?
-> Do you expect we search the partition whether it has a default file,
-> then load the default file with efi_load_image() only when the
-> partition has a default file?
+Part of Linux kernel driver (drivers/thermal/k3_j72xx_bandgap.c)
+is ported from kernel 6.6-rc1, which sets thermal shutdown values.
+ 
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Neha Francis <n-francis@ti.com>
+---
+Change log:
 
-I mean, that the current patch also changed the behavior of the added
-boot options.
-Instead of adding a device path and using expand_media_path() in the
-efibootmgr to load the image, we explicitly added the file path
-instead
+Changes in v3:
+- Ported only needed functionality from kernel driver to program tshut
+- Removed support for temp from u-boot shell
+- Appended Sign-off list
 
-Regards
-/Ilias
->
-> Thanks,
-> Masahisa Kojima
->
->
-> >
-> > So my suggestion would be
-> > - Drop #4
-> > - Adjust patch 5 and instead of loading the boot entry directly, scan
-> > for the special autogenerated boot option and look for that file there
-> >
-> > Heinrich would that work for you?
-> >
-> > Thanks
-> > /Ilias
-> > >
-> > > Thanks,
-> > > Masahisa Kojima
-> > >
-> > > > [0] https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html#load-option-processing
-> > > >
-> > > > Regards
-> > > > /Ilias
-> > > > >
-> > > > > Thanks,
-> > > > > Masahisa Kojima
-> > > > >
-> > > > > >
+v2:https://lore.kernel.org/all/20230908172914.436194-2-u-kumar1@ti.com/
+ 
+
+Changes in v2:
+- Trying to merge AVS and kernel driver into 1
+- Mark as RFC
+v1 : https://lore.kernel.org/all/20230901061500.2342452-1-u-kumar1@ti.com/
+
+ drivers/misc/k3_avs.c | 104 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 104 insertions(+)
+
+diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+index acfc731845..9a088244dd 100644
+--- a/drivers/misc/k3_avs.c
++++ b/drivers/misc/k3_avs.c
+@@ -15,6 +15,7 @@
+ #include <k3-avs.h>
+ #include <dm/device_compat.h>
+ #include <linux/bitops.h>
++#include <linux/delay.h>
+ #include <power/regulator.h>
+ 
+ #define AM6_VTM_DEVINFO(i)	(priv->base + 0x100 + 0x20 * (i))
+@@ -25,11 +26,28 @@
+ #define AM6_VTM_OPP_SHIFT(opp)	(8 * (opp))
+ #define AM6_VTM_OPP_MASK	0xff
+ 
++#define K3_VTM_DEVINFO_PWR0_OFFSET		0x4
++#define K3_VTM_DEVINFO_PWR0_TEMPSENS_CT_MASK	0xf0
++#define K3_VTM_TMPSENS0_CTRL_OFFSET		0x300
++#define K3_VTM_TMPSENS_STAT_OFFSET		0x8
++#define K3_VTM_ANYMAXT_OUTRG_ALERT_EN		0x1
++#define K3_VTM_LOW_TEMP_OFFSET			0x10
++#define K3_VTM_MISC_CTRL2_OFFSET		0x10
++#define K3_VTM_MISC_CTRL1_OFFSET		0xc
++#define K3_VTM_TMPSENS_CTRL1_SOC		BIT(5)
++#define K3_VTM_TMPSENS_CTRL_CLRZ		BIT(6)
++#define K3_VTM_TMPSENS_CTRL_MAXT_OUTRG_EN	BIT(11)
++#define K3_VTM_ADC_COUNT_FOR_123C		0x2f8
++#define K3_VTM_ADC_COUNT_FOR_105C		0x288
++#define K3_VTM_ADC_WA_VALUE			0x2c
++#define K3_VTM_FUSE_MASK			0xc0000000
++
+ #define VD_FLAG_INIT_DONE	BIT(0)
+ 
+ struct k3_avs_privdata {
+ 	void *base;
+ 	struct vd_config *vd_config;
++	struct udevice *dev;
+ };
+ 
+ struct opp {
+@@ -237,6 +255,88 @@ static int k3_avs_configure(struct udevice *dev, struct k3_avs_privdata *priv)
+ 	return 0;
+ }
+ 
++/* k3_avs_program_tshut : Program thermal shutdown value for SOC
++ * set the values corresponding to thresholds to ~123C and 105C
++ * This is optional feature, Few times OS driver takes care of
++ * tshut programing.
++ */
++
++static void k3_avs_program_tshut(struct k3_avs_privdata *priv)
++{
++	int cnt, id, val;
++	int workaround_needed = 0;
++	u32 ctrl_offset;
++	void __iomem *cfg2_base;
++	void __iomem *fuse_base;
++
++	cfg2_base = (void __iomem *)devfdt_get_addr_index(priv->dev, 1);
++	if (IS_ERR(cfg2_base)) {
++		dev_err(priv->dev, "cfg base is not defined\n");
++		return;
++	}
++
++	/*
++	 * Some of TI's J721E SoCs require a software trimming procedure
++	 * for the temperature monitors to function properly. To determine
++	 * if this particular SoC is NOT affected, both bits in the
++	 * WKUP_SPARE_FUSE0[31:30] will be set (0xC0000000) indicating
++	 * when software trimming should NOT be applied.
++	 *
++	 * https://www.ti.com/lit/er/sprz455c/sprz455c.pdf
++	 * This routine checks if workaround_needed to be applied or not
++	 * based upon workaround_needed, adjust fixed value of tshut high and low
++	 */
++
++	if (device_is_compatible(priv->dev, "ti,j721e-vtm")) {
++		fuse_base = (void __iomem *)devfdt_get_addr_index(priv->dev, 2);
++		if (IS_ERR(fuse_base)) {
++			dev_err(priv->dev, "fuse-base is not defined for J721E Soc\n");
++			return;
++		}
++
++		if (!((readl(fuse_base) & K3_VTM_FUSE_MASK) == K3_VTM_FUSE_MASK))
++			workaround_needed = 1;
++	}
++
++	dev_dbg(priv->dev, "Work around %sneeded\n", workaround_needed ? "" : "not ");
++
++	/* Get the sensor count in the VTM */
++	val = readl(priv->base + K3_VTM_DEVINFO_PWR0_OFFSET);
++	cnt = val & K3_VTM_DEVINFO_PWR0_TEMPSENS_CT_MASK;
++	cnt >>= __ffs(K3_VTM_DEVINFO_PWR0_TEMPSENS_CT_MASK);
++
++	/* Program the thermal sensors */
++	for (id = 0; id < cnt; id++) {
++		ctrl_offset = K3_VTM_TMPSENS0_CTRL_OFFSET + id * 0x20;
++
++		val = readl(cfg2_base + ctrl_offset);
++		val |= (K3_VTM_TMPSENS_CTRL_MAXT_OUTRG_EN |
++			K3_VTM_TMPSENS_CTRL1_SOC |
++			K3_VTM_TMPSENS_CTRL_CLRZ | BIT(4));
++		writel(val, cfg2_base + ctrl_offset);
++	}
++
++	/*
++	 * Program TSHUT thresholds
++	 * Step 1: set the thresholds to ~123C and 105C WKUP_VTM_MISC_CTRL2
++	 * Step 2: WKUP_VTM_TMPSENS_CTRL_j set the MAXT_OUTRG_EN  bit
++	 *         This is already taken care as per of init
++	 * Step 3: WKUP_VTM_MISC_CTRL set the ANYMAXT_OUTRG_ALERT_EN  bit
++	 */
++
++	/* Low thresholds for tshut*/
++	val = (K3_VTM_ADC_COUNT_FOR_105C - workaround_needed * K3_VTM_ADC_WA_VALUE)
++		<< K3_VTM_LOW_TEMP_OFFSET;
++	/* high thresholds */
++	val |= K3_VTM_ADC_COUNT_FOR_123C - workaround_needed * K3_VTM_ADC_WA_VALUE;
++
++	writel(val, cfg2_base + K3_VTM_MISC_CTRL2_OFFSET);
++	/* ramp-up delay from Linux code */
++	mdelay(100);
++	val = readl(cfg2_base + K3_VTM_MISC_CTRL1_OFFSET) | K3_VTM_ANYMAXT_OUTRG_ALERT_EN;
++	writel(val, cfg2_base + K3_VTM_MISC_CTRL1_OFFSET);
++}
++
+ /**
+  * k3_avs_probe: parses VD info from VTM, and re-configures the OPP data
+  *
+@@ -255,6 +355,7 @@ static int k3_avs_probe(struct udevice *dev)
+ 	int ret;
+ 
+ 	priv = dev_get_priv(dev);
++	priv->dev = dev;
+ 
+ 	k3_avs_priv = priv;
+ 
+@@ -294,6 +395,9 @@ static int k3_avs_probe(struct udevice *dev)
+ 		k3_avs_program_voltage(priv, vd, vd->opp);
+ 	}
+ 
++	if (!device_is_compatible(priv->dev, "ti,am654-avs"))
++		k3_avs_program_tshut(priv);
++
+ 	return 0;
+ }
+ 
+-- 
+2.34.1
+
