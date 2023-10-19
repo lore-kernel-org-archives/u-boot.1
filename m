@@ -4,71 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E80CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1E21CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:16:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84D2A87440;
-	Thu, 19 Oct 2023 17:04:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 669BE8727D;
+	Thu, 19 Oct 2023 17:16:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jSJ7vR6v";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sOcRpCW5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CD5F8727D; Thu, 19 Oct 2023 17:04:40 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7100E87281; Thu, 19 Oct 2023 17:16:40 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50A818724A
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:04:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69BA686F6C
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:16:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5a7afd45199so101646197b3.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:04:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727877; x=1698332677; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=nQ3QW/FYyqsoKwYJufJErcmKHYSiGgMXBf8RMC88zSA=;
- b=jSJ7vR6vHXyZels7d3rNXfH/Uwt6VVIYQ4URFoAmZ3No/c+UzPfqE7VnEr6xHMmEkS
- MGoXV3wCVT75ZYOSafnyNDDObIAzIv8hxgCeNzBi0zeesqayDkPefOHAzNH/8QngrxSD
- eR7peJnFCuVMq+hyy1wDH12buut1MmXTj3/rY=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id B99F0404AC
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 15:16:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1697728594;
+ bh=UQjDY2OL66BNE9EnMRx7z9kky2wr1dVAx9Ko8T94Ock=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=sOcRpCW5/lIjOmHg8rs+XAW+5QUYFtZNVN/NKpP4Xt4+jiIsYTRany0UQsg+TxWJu
+ ksJzbGJAJ0M1Wotvwtdmq666C99L0XtJX1EhfuejfpwWWk64Iw+oitWgnumf+sQL1I
+ Hy7V1zmuExD26H51H1dfojCDpLYFY6wGuzwMkNCa02drEvNejqWyDAP8kqGYAMMlbZ
+ Wryvui/UQyI/9a5DMAQ8n3X3wEyJAhPCafQNAEjAQ6gbwPP3N3aDC+3/T3d9sPDkYx
+ Q7PJ5xhBeGsQbSI+txL47fQOdIGLzMLOLm0Kza1WOabss0lcDokODNYkbYM9OPjSn8
+ /+fTreXWQpo0w==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-32da39f7f2bso3453813f8f.0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:16:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727877; x=1698332677;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nQ3QW/FYyqsoKwYJufJErcmKHYSiGgMXBf8RMC88zSA=;
- b=wuBMe52G377BEFEZPEjOGHnmXNxWFKwLukgkE7kBS6rJASk2QcJwTSh9sa2RWIGPRD
- qTeWR5XURzXPygI1QeJbnHw8Pq13OwQwl9m2IRWY0XjnygOS0HCRfxLJ9VKA8w8zLT+J
- JXop+FB/dlkUAIpe2MlwUuwo+IYrkV3nkE+MBa2kLK6wVPUaHdLBLbJ9nC0xOkfRzN5P
- rA7i+0DgcRm6GZgMnXcF4uUZ2WO3bgWHOPIoN4seOE+Z7OFK6H+gcSTSCZ7zkNBHgoGI
- VQ3yNp22D974o++x+otpRa48JYpoCyUAWICItRTNhdZqKswnCbgdC/MOZrFm9jNum+Vq
- YfYA==
-X-Gm-Message-State: AOJu0Yz/gtNCYjiYE//0BEJT0lcwvPnN2D7AKIx8Dlmeq9OKTMwB0ihd
- bmo+8Joeg7k7Fz8d94g7H9CauT1nWJh6x0MdukhdaA==
-X-Google-Smtp-Source: AGHT+IG1yLPH6r3yVJMfnxQdxIIyKLGuZK4QxrxEqEafO/WuT3+BtStR9ARW/1VPedhHqJV62ommIA==
-X-Received: by 2002:a81:a196:0:b0:577:a46:26e5 with SMTP id
- y144-20020a81a196000000b005770a4626e5mr2377316ywg.31.1697727876717; 
- Thu, 19 Oct 2023 08:04:36 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- m127-20020a0de385000000b0059b2be24f88sm2432508ywe.143.2023.10.19.08.04.35
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:04:36 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] common: Reword CONSOLE_RECORD_.*SIZE help texts
-Date: Thu, 19 Oct 2023 11:04:35 -0400
-Message-Id: <20231019150435.750483-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1697728590; x=1698333390;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UQjDY2OL66BNE9EnMRx7z9kky2wr1dVAx9Ko8T94Ock=;
+ b=UbOFwtEtfKkNlXaG+QmlF+f/pHlaLFEONkdXB4yW3sZtmUiWi4Td88onINLfB29fCE
+ cuUrg6buswvPrWLH/t9E2M5P4kRKpIinTTmo944PTAbHJkYtS8UMcrzrc3XvzVPhXqJm
+ eVpU524doP3NLGcoFN8tzYhEPTIQgFJ38LcKAvXBI7Zejop5WFaL5/7UDN71qbF8ksHw
+ +zphGbY1JEeTXK2CSpYmDZ1/GdxWEFMmNxDotj+AxyzdFF+/DQhM+DZW4AohgFJ1SXvW
+ FOydwWLHuyapfuFyd5+Y1zKaXybC8M6Xb8602PzkKkHQRGvkq3GV9CTrXoGQllS56wc6
+ Eoew==
+X-Gm-Message-State: AOJu0YwRiy2WsNRk3NE/0R8bF1/sckfxl5A3SEV/Qo0samJFHvv2VjrO
+ XOKiJ1xCSxc52vLG9JH7VHAA07pdOc/hfjMBlOYpRkNnSrTLuukgDwmT9Zj1bSouhmXtcbFEl5U
+ yM6lK/jB6yVM05phdfanIkz3z6uD20VA=
+X-Received: by 2002:a05:6000:1042:b0:321:4de3:fd5c with SMTP id
+ c2-20020a056000104200b003214de3fd5cmr1981269wrx.51.1697728590092; 
+ Thu, 19 Oct 2023 08:16:30 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFz3kCQLyCs6AwBe4FRq+IzdPDq1cShcfbrNfyjdpmMcFk1C5W/EVi4YDi6lsdRs2kt/i/EBA==
+X-Received: by 2002:a05:6000:1042:b0:321:4de3:fd5c with SMTP id
+ c2-20020a056000104200b003214de3fd5cmr1981250wrx.51.1697728589594; 
+ Thu, 19 Oct 2023 08:16:29 -0700 (PDT)
+Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ i7-20020adffdc7000000b00324853fc8adsm4652560wrs.104.2023.10.19.08.16.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 19 Oct 2023 08:16:29 -0700 (PDT)
+Message-ID: <4a17c974-fd56-4412-93e3-47bfe3268489@canonical.com>
+Date: Thu, 19 Oct 2023 17:16:28 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [v4 11/24] efi: Rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231019150105.714407-1-trini@konsulko.com>
+ <20231019150105.714407-11-trini@konsulko.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231019150105.714407-11-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,54 +105,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make it clear that in the options for setting the console record buffer
-sizes that we are talking about buffers for that feature specifically
-and not the general console buffers.
+On 19.10.23 17:00, Tom Rini wrote:
+> From: Simon Glass <sjg@chromium.org>
+> 
+> The command should not be used to enable library functionality. Add a
+> new BOOTEFI_BOOTMGR Kconfig for that. Adjust the conditions so that the
+> same code is built.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Changes in v4:
+> - Integrate AKASHI Takahiro's feedback from v3
+> - Reword the help text on CMD_BOOTEFI_BOOTMGR slightly
+> ---
+>   cmd/Kconfig             | 11 ++++++++++-
+>   lib/efi_loader/Kconfig  |  6 +++---
+>   lib/efi_loader/Makefile |  2 +-
+>   3 files changed, 14 insertions(+), 5 deletions(-)
+> 
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 16e5cb8f0633..872cb49150cc 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -379,6 +379,15 @@ config CMD_BOOTEFI
+>   	help
+>   	  Boot an EFI image from memory.
+>   
+> +config CMD_BOOTEFI_BOOTMGR
+> +	bool "UEFI Boot Manager command"
+> +	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
+> +	default y
+> +	help
+> +	  Select this option to enable the 'bootmgr' subcommand of 'bootefi'.
+> +	  This subcommand will allow you to select the UEFI binary to be booted
+> +	  via UEFI variables Boot####, BootOrder, and BootNext.
+> +
+>   config CMD_BOOTEFI_HELLO_COMPILE
+>   	bool "Compile a standard EFI hello world binary for testing"
+>   	depends on CMD_BOOTEFI && !CPU_V7M
+> @@ -2110,7 +2119,7 @@ config CMD_EFIDEBUG
+>   config CMD_EFICONFIG
+>   	bool "eficonfig - provide menu-driven uefi variables maintenance interface"
+>   	default y if !HAS_BOARD_SIZE_LIMIT
+> -	depends on CMD_BOOTEFI_BOOTMGR
+> +	depends on BOOTEFI_BOOTMGR
+>   	select MENU
+>   	help
+>   	  Enable the 'eficonfig' command which provides the menu-driven UEFI
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index d20aaab6dba4..13cad6342c36 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -32,14 +32,14 @@ config EFI_LOADER
+>   
+>   if EFI_LOADER
+>   
+> -config CMD_BOOTEFI_BOOTMGR
+> +config BOOTEFI_BOOTMGR
+>   	bool "UEFI Boot Manager"
+>   	default y
+>   	select BOOTMETH_GLOBAL if BOOTSTD
+>   	help
+>   	  Select this option if you want to select the UEFI binary to be booted
+> -	  via UEFI variables Boot####, BootOrder, and BootNext. This enables the
+> -	  'bootefi bootmgr' command.
+> +	  via UEFI variables Boot####, BootOrder, and BootNext. You should also
+> +	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is available.
+>   
+>   choice
+>   	prompt "Store for non-volatile UEFI variables"
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 8d31fc61c601..0a2cb6e3c476 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -42,7 +42,7 @@ targets += initrddump.o
+>   endif
+>   
+>   obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+> -obj-$(CONFIG_CMD_BOOTEFI_BOOTMGR) += efi_bootmgr.o
+> +obj-$(CONFIG_BOOTEFI_BOOTMGR) += efi_bootmgr.o
+>   obj-y += efi_boottime.o
+>   obj-y += efi_helper.o
+>   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += efi_capsule.o
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- common/Kconfig | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+This patch looks wrong.
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 93c96f23b013..2d6d412f5e33 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -28,26 +28,26 @@ config CONSOLE_RECORD_OUT_SIZE
- 	depends on CONSOLE_RECORD
- 	default 0x400 if CONSOLE_RECORD
- 	help
--	  Set the size of the console output buffer. When this fills up, no
--	  more data will be recorded until some is removed. The buffer is
--	  allocated immediately after the malloc() region is ready.
-+	  Set the size of the console recording output buffer. When this fills
-+	  up, no more data will be recorded until some is removed. The buffer
-+	  is allocated immediately after the malloc() region is ready.
- 
- config CONSOLE_RECORD_OUT_SIZE_F
- 	hex "Output buffer size before relocation"
- 	depends on CONSOLE_RECORD
- 	default 0x400 if CONSOLE_RECORD
- 	help
--	  Set the size of the console output buffer before relocation. When
--	  this fills up, no more data will be recorded until some is removed.
--	  The buffer is allocated immediately after the early malloc() region is
--	  ready.
-+	  Set the size of the console recording output buffer before
-+	  relocation. When this fills up, no more data will be recorded until
-+	  some is removed.  The buffer is allocated immediately after the early
-+	  malloc() region is ready.
- 
- config CONSOLE_RECORD_IN_SIZE
- 	hex "Input buffer size"
- 	depends on CONSOLE_RECORD
- 	default 0x100 if CONSOLE_RECORD
- 	help
--	  Set the size of the console input buffer. When this contains data,
-+	  Set the size of the console recording input buffer. When this contains data,
- 	  tstc() and getc() will use this in preference to real device input.
- 	  The buffer is allocated immediately after the malloc() region is
- 	  ready.
--- 
-2.34.1
+Symbol CONFIG_CMD_BOOTEFI_BOOTMGR is used in a lot of places where it is 
+not related to the 'bootefi bootmgr' subcommand.
 
+I see no benefit in two separate symbols. If you want to rename the 
+symbol, please, replace *all* occurrences:
+
+%s/CONFIG_CMD_BOOTEFI_BOOTMGR/CONFIG_BOOTEFI_BOOTMGR/
+
+Best regards
+
+Heinrich
