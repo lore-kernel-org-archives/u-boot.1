@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C565CCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ADC9CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C08874AA;
-	Thu, 19 Oct 2023 17:35:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1920874B0;
+	Thu, 19 Oct 2023 17:35:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1697729749;
-	bh=gTuCD7oriDbgIsoQXJRWqvmOtOWYvZ+75u6IZGsvw+4=;
+	bh=OKui9k6R/fdvOdwB8IE5aH+ifNJpS63yVc8U2mvfBnQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=YGNuQIu63z5MteOUgqEG3S1y6hF7agYJUKRI6lT88NYtYMr9CZcGUazP2iSJblNZu
-	 L5RLyroKF3CaqU1oB1wzqqsOWeDZIL86ui1xKd07K9bPcb6U2iHt+JWenoej4IfchU
-	 Dyv5NrgvztKelEkyav0RbfOoyNB1xleF5RJpjExU2lkO9gJcyjwWB70rXSu+MC+Y47
-	 LxG5pms99yP7LXyGijlbKneZiUbrjEzmWMIQNLgS5tn0JH3l91VWdVN8yRxzT693et
-	 nMnr0mgeOkuCa4kcKNb/gJqFm9dA9Owdl2vBwhntFldcLDKOEuMJcDaOBQFohcLKX3
-	 CZMMTj1oXcW3A==
+	b=OBXjbYkdy0pDceiBEFf4ku+INn+ahcgzc+kfgLCCSaOBBjxTF+nEX3X3bJ4mn2VFq
+	 HhJO8CZeecWacD0Y35Z9iKsLcR7hcI4Cu6Aw0kc4SeJX/IJB8xx+9nx2VzWMt41KdT
+	 7hCRVBE7HQP13Q2C+PPzgThTst/rHRDf9+tOAm923yrlLyRaPDQdghsxR/iAFqa1i1
+	 M2cqCoDVw9Xu4foYpKpQ0z8PuGzArCC5tixzhIjzanPkAtXkqojcVdNOB52f2Ck2gz
+	 sfqt/QAd8G5kL7bfHNgkSfXsd3fR8pksTg2sz5QeF/QOsF14oU9poygcMxS7FmIXy1
+	 oh3g3I/cCOhdw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6C88B8727D;
+ by phobos.denx.de (Postfix) with ESMTPSA id DAFA287454;
  Thu, 19 Oct 2023 17:35:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697729745;
- bh=gTuCD7oriDbgIsoQXJRWqvmOtOWYvZ+75u6IZGsvw+4=;
+ s=phobos-20191101; t=1697729746;
+ bh=OKui9k6R/fdvOdwB8IE5aH+ifNJpS63yVc8U2mvfBnQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qvoXTXnFDgQTT116Y/EbPqoc2FSlOxNY4yu9jXE4iRHbwH8YxazfkI+2HiCapv9/G
- K/5xpjmwr80bdJGETkiW7N4shUwNcvO6C+Bm7dXRIJ1eJOwFm0lWsr3yAUUdeJI54d
- 9OvtCblp128Mv1u/p04SVd62r+XToZbtq95aHH4O0yEzRV9oeDtAmSaKRiCmOYYP6M
- JPdwZaDSOLAcZhwKnS4nuPQfjMdMJLEu/NNIEsYFHVfsiQhpUYjhPArTQWdHq5xwEt
- sfc2AJmZ/FKnjXop5ABLn+T3DNobaoBDdx/YTpTZut93CQvahr+VMoBmW7cicRXzL9
- bQQbNZg71XxqA==
-Message-ID: <e19b3976-0cfa-41f4-bff6-cdd8190c4e7e@denx.de>
-Date: Thu, 19 Oct 2023 15:57:03 +0200
+ b=zxBY71zReKDoWEBvYYPXubFB2NizTIika3Wng7RQCZx2IDOdklrFXROn6naWT86fx
+ VK8ggJ9LZhpLM/BcwDOO1Ogdl9/q2vzyY20c/WFtMxo4o7i9aRO1kia4uyybM1KqLe
+ I/p5/WnkfC055eKMSA5158zQ54p9RqXzBJDNHH2LYiB1211WxKeAJQszMvCpkhNlO/
+ 3Uj1lkuhlgHYoO7NsKTIF5ZjiTT3JRR/96WbpsrUXRCpQDHOfBR4OzCozX9CleqXzH
+ RENa0xjTGWe2pvmmeVsFKdkO64zByJ1pl83BPTob1wVOZxz1cLQHAnmnxs9t83NtE1
+ Aj14HXEztO6Ow==
+Message-ID: <88c0c718-d62f-4854-89d3-c68029c44556@denx.de>
+Date: Thu, 19 Oct 2023 15:58:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/6] led: led_pwm: use led_bind_generic() helper
+Subject: Re: [PATCH 6/6] led: add TI LP5562 LED driver
 Content-Language: en-US
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
 Cc: Philippe Reynes <philippe.reynes@softathome.com>,
  Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
 References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-6-rasmus.villemoes@prevas.dk>
+ <20231019095837.2084458-7-rasmus.villemoes@prevas.dk>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231019095837.2084458-6-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231019095837.2084458-7-rasmus.villemoes@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,5 +71,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/19/23 11:58, Rasmus Villemoes wrote:
+> From: Doug Zobel <douglas.zobel@climate.com>
+> 
+> Driver for the TI LP5562 4 channel LED controller. Supports
+> independent on/off control of all 4 channels. Supports LED_BLINK on 3
+> independent channels: blue/green/red. The white channel can blink, but
+> shares the blue channel blink rate.
+> 
+> Heavily based on patch originally from Doug Zobel [1].
+> 
+> I have modified it so it matches the DT bindings in the linux tree,
+> and also follows the linux driver implementation more closely. This
+> should address Tom's concerns, and also matches my goal of making the
+> U-Boot driver work with our existing .dts which is known to work in
+> linux.
+> 
+> As our boards only have the R,G,B outputs connected, I have not
+> actually tested how the white channel behaves, but the R,G,B work
+> exactly as expected.
+> 
+> [1] https://lore.kernel.org/u-boot/1547150757-1561-1-git-send-email-douglas.zobel@climate.com/
+> 
+> Cc: Doug Zobel <douglas.zobel@climate.com>
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> ---
+>   doc/device-tree-bindings/leds/leds-lp5562.txt |  63 ++
+>   drivers/led/Kconfig                           |   8 +
+>   drivers/led/Makefile                          |   1 +
+>   drivers/led/led_lp5562.c                      | 578 ++++++++++++++++++
+>   4 files changed, 650 insertions(+)
+>   create mode 100644 doc/device-tree-bindings/leds/leds-lp5562.txt
+>   create mode 100644 drivers/led/led_lp5562.c
+> 
+> diff --git a/doc/device-tree-bindings/leds/leds-lp5562.txt b/doc/device-tree-bindings/leds/leds-lp5562.txt
+> new file mode 100644
+> index 0000000000..4e0c742959
+> --- /dev/null
+> +++ b/doc/device-tree-bindings/leds/leds-lp5562.txt
 
-Commit message is missing.
+Why not use Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml ?
+
+[...]
+
+> --- /dev/null
+> +++ b/drivers/led/led_lp5562.c
+> @@ -0,0 +1,578 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2018 Doug Zobel <douglas.zobel@climate.com>
+
+Why not port Linux drivers/leds/leds-lp5562.c ?
