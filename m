@@ -4,65 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97134CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 11:18:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9EBCCDB482
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 11:44:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E21D486FDA;
-	Thu, 19 Oct 2023 13:18:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3EC9786F6C;
+	Thu, 19 Oct 2023 13:44:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DD039su3";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 204B087229; Thu, 19 Oct 2023 12:36:03 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AA4CF86F6D; Thu, 19 Oct 2023 13:44:43 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CADC6871BD
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 12:35:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52B0586F67
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 13:44:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39JAZtnw006344;
- Thu, 19 Oct 2023 05:35:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697711755;
- bh=rgjNAVo5ll1LWtxmioSyo0rWEPRrS/ABED2cnBlf3lM=;
- h=From:To:CC:Subject:Date;
- b=DD039su3ln3ok8vLkX0D10FyQrqrDPMgxlXqcEph3HEP5cDI37mDXAPpihDdSxzuo
- 6N+aZDYdiF20NJpz2HlsPRatlzgec8RWChAylRyiDIEIDkzOqoSBTD/8+X4xJnKJL6
- z3GCSs38OzxXlJOf6GV0240qU5WuYcV3CuM+Os3Y=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39JAZtEd021699
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 19 Oct 2023 05:35:55 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 19
- Oct 2023 05:35:55 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 19 Oct 2023 05:35:55 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39JAZsff030944;
- Thu, 19 Oct 2023 05:35:54 -0500
-From: Prasanth Babu Mantena <p-mantena@ti.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <a-nandan@ti.com>, <n-francis@ti.com>
-Subject: [tiU23.04 PATCH] board: ti: common: board_detect: Fix EEPROM offset
- read for 1-byte
-Date: Thu, 19 Oct 2023 16:05:53 +0530
-Message-ID: <20231019103553.10285-1-p-mantena@ti.com>
-X-Mailer: git-send-email 2.39.0
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 39JBiOx7055393;
+ Thu, 19 Oct 2023 19:44:24 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Thu, 19 Oct 2023 19:44:21 +0800
+Date: Thu, 19 Oct 2023 19:41:24 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <ycliang@andestech.com>, <rick@andestech.com>, <u-boot@lists.denx.de>
+Subject: [PULL] u-boot-riscv/master
+Message-ID: <ZTEV5KksRDvCHqkT@swlinux02>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 19 Oct 2023 13:18:48 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 39JBiOx7055393
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,36 +59,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
-size followed by reading 1-byte size with an offset 1. This commit fixes
-the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
-board_detect: Fix EEPROM read quirk for 2-byte").
+Hi Tom,
 
-In the previous commit, the value with one offset is being read into
-offset_test, but the pointer used to match was still ep. After reading
-with an offset 1, the second byte of the header is compared with the 1-byte
-data read from EEPROM. This is taken care by comparing proper first byte
-value from the header.
+The following changes since commit 9a0cf3993f71043ba08c315572c54622de42d447:
 
-Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
----
- board/ti/common/board_detect.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  Merge branch '2023-10-17-spl-test-some-load-methods' (2023-10-18 08:28:00 -0400)
 
-diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
-index 9a53884c98..17fe8f8069 100644
---- a/board/ti/common/board_detect.c
-+++ b/board/ti/common/board_detect.c
-@@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
- 
- 	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
- 
--	if (*((u32 *)ep) != (header & 0xFF))
-+	if (offset_test != ((header >> 8) & 0xFF))
- 		one_byte_addressing = false;
- 
- 	/* Corrupted data??? */
--- 
-2.39.0
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+
+for you to fetch changes up to bc5a50452bd42029d6587e1596b44ff235655e90:
+
+  riscv: Add Zbb support for building U-Boot (2023-10-19 17:29:50 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18215
+----------------------------------------------------------------
+
++ riscv: Add Zbb support
++ riscv: Add preliminary RISC-V falcon mode support
++ riscv: Remove dram_init_banksize()
++ andes: rearrange PLICSW scheme
++ visionfive2: enable bootstage configs
+
+----------------------------------------------------------------
+Chanho Park (1):
+      configs: visionfive2: enable bootstage configs
+
+Heinrich Schuchardt (1):
+      riscv: remove dram_init_banksize()
+
+Mayuresh Chitale (1):
+      riscv: binman: Fix compilation error
+
+Randolph (8):
+      riscv: andes: Rearrange Andes PLICSW to single-bit-per-hart strategy
+      spl: riscv: opensbi: change the default os_type as varible
+      riscv: kconfig: introduce SPL_LOAD_FIT_OPENSBI_OS_BOOT symbol
+      riscv: dts: binman: add condition for opensbi os boot
+      Makefile: delete file *.itb when make clean
+      spl: riscv: add os type for next booting stage
+      andes: config: add riscv falcon mode for ae350 platform
+      riscv: spl: andes: Move the DTB in front of kernel
+
+Yu Chien Peter Lin (1):
+      riscv: Add Zbb support for building U-Boot
+
+ Makefile                                |   2 +-
+ arch/riscv/Kconfig                      |  99 +++++++++++++++++++++++++++++++
+ arch/riscv/Makefile                     |   5 +-
+ arch/riscv/cpu/generic/dram.c           |  16 -----
+ arch/riscv/dts/binman.dtsi              |  38 ++++++++++--
+ arch/riscv/include/asm/string.h         |  18 ++++++
+ arch/riscv/lib/Makefile                 |   3 +
+ arch/riscv/lib/andes_plicsw.c           |  24 ++++----
+ arch/riscv/lib/strcmp_zbb.S             |  81 +++++++++++++++++++++++++
+ arch/riscv/lib/strlen_zbb.S             | 101 ++++++++++++++++++++++++++++++++
+ arch/riscv/lib/strncmp_zbb.S            |  94 +++++++++++++++++++++++++++++
+ board/AndesTech/ae350/ae350.c           |  25 ++++++++
+ common/spl/spl_fit.c                    |   3 +-
+ common/spl/spl_opensbi.c                |  31 ++++++----
+ configs/ae350_rv32_falcon_defconfig     |  60 +++++++++++++++++++
+ configs/ae350_rv32_falcon_xip_defconfig |  61 +++++++++++++++++++
+ configs/ae350_rv64_falcon_defconfig     |  60 +++++++++++++++++++
+ configs/ae350_rv64_falcon_xip_defconfig |  61 +++++++++++++++++++
+ configs/starfive_visionfive2_defconfig  |   2 +
+ 19 files changed, 738 insertions(+), 46 deletions(-)
+ create mode 100644 arch/riscv/lib/strcmp_zbb.S
+ create mode 100644 arch/riscv/lib/strlen_zbb.S
+ create mode 100644 arch/riscv/lib/strncmp_zbb.S
+ create mode 100644 configs/ae350_rv32_falcon_defconfig
+ create mode 100644 configs/ae350_rv32_falcon_xip_defconfig
+ create mode 100644 configs/ae350_rv64_falcon_defconfig
+ create mode 100644 configs/ae350_rv64_falcon_xip_defconfig
+
+ Best regards,
+ Leo
