@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89302CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D00CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:33:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBAA7871F6;
-	Thu, 19 Oct 2023 17:28:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 395528745A;
+	Thu, 19 Oct 2023 17:33:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bN241BPg";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="M2pnjYrs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A987871C6; Thu, 19 Oct 2023 17:28:33 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6362F8727D; Thu, 19 Oct 2023 17:33:17 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69A7C871F6
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:28:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4B048746A
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:33:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5a7b3d33663so108189487b3.3
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:28:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697729304; x=1698334104; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8X1KZ1FK99qw3wJW7wD0NIiohd4nOct/8O4RKMZXQ/Q=;
- b=bN241BPgV7Vdwc1Jow1GRtpbcC4U9S1OLwoq4wneC6m0m73ufePULtqk3mK9GmxB36
- 5WpWBiedmY1OUFfcPmpP3+HNAJtPKOT+d/W54h1LGJHe1ZSZmG8XncdA2TMaS2y6BUQo
- BMwgSY2Nh1wJPczkE1x4jwXzP4YfZEK7b6vUg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697729304; x=1698334104;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8X1KZ1FK99qw3wJW7wD0NIiohd4nOct/8O4RKMZXQ/Q=;
- b=bHqij48kKIv9K6N7eswMN7OirMOWJ7VxPu6ufGtFZK3TmcR8T8t+AI9rS+6c6AduYs
- nIsreIJRK0LGRoopNze4EeUk1LWvzPkQkHUi4zx8nrhIeaMmMltOJePwjr+6jKkzDxBj
- jKUkMRWC8w3cU0mFqF/MWl0fCvJdNISVIskqLBPW+gTIVdeWXww6HVgYC89Baf5oY4+M
- wbWPKDzaHuA8OHxRk/ZkRbTVvJZIOrtsY980x6ycbjt/tjtKk9HNgOfILI08KfdGwy0I
- iBOsW/hr91dBDbiN9A/+hfSZEmpX9X5YtHr8keZi1m/AvzemhS3L1nWnNa34f/qdO9TD
- HDSg==
-X-Gm-Message-State: AOJu0Yw7GW0TZBtKTFbdov5x2X8OPmjWY2mAJbB3w1KGMKl7/oAY8MWs
- ZKXza513TmZar1WB0+7OjoRXtQ==
-X-Google-Smtp-Source: AGHT+IG15s+G7l25yEdBcvnmtIfqbXejNFZriRWyWT4HHw/RDqo+uosItPpCris0fjxo4GBHnkyqnA==
-X-Received: by 2002:a81:6f04:0:b0:594:e2e6:25e8 with SMTP id
- k4-20020a816f04000000b00594e2e625e8mr2453874ywc.48.1697729304061; 
- Thu, 19 Oct 2023 08:28:24 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- v194-20020a8148cb000000b0057a918d6644sm2488760ywa.128.2023.10.19.08.28.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:28:23 -0700 (PDT)
-Date: Thu, 19 Oct 2023 11:28:21 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [v4 11/24] efi: Rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
-Message-ID: <20231019152821.GD3119521@bill-the-cat>
-References: <20231019150105.714407-1-trini@konsulko.com>
- <20231019150105.714407-11-trini@konsulko.com>
- <4a17c974-fd56-4412-93e3-47bfe3268489@canonical.com>
- <20231019151933.GC3119521@bill-the-cat>
- <5f4d1fd6-3f6f-4c68-a65b-ac4ab43f0490@canonical.com>
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C4ECC120010;
+ Thu, 19 Oct 2023 18:33:13 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C4ECC120010
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1697729593;
+ bh=xhpcWMVoQIjUFERqRTxlan7nKOvuL8Bk+v1KRD0TAwg=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=M2pnjYrsAGETWQ9P7kjodwO2qvWidhDhiljrgah5xH6v26KaauQ3nyTt2JS/DrTQz
+ bitDrNU+JeyFvZKhTRxbJ7QJBwkABkOEvv4GOnViQhxorTpXqWlAwVYVUqegnbeYQY
+ 11yFBoHrAcIWDrt8sLWTx31SjbwDCzFioidQQYVQwEmKlSVoiYXYGZPRSEllgYh7LO
+ 4gUKRTonzqMMUB6T+kRh0EGQfkDrNSEjUM+P5BzfXuQYI9wKVk30WUOxHYp4QiZR0z
+ q7e60SBi7z8v8HWRLqGBCS2jc7aHjn05LJKyIsHcMjbFSt8MoUySRbEJr4XAzVk6D5
+ 7Cb7wxrd0VfhA==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu, 19 Oct 2023 18:33:12 +0300 (MSK)
+Received: from pc (100.64.160.123) by p-i-exch-sc-m01.sberdevices.ru
+ (172.16.192.107) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.37; Thu, 19 Oct
+ 2023 18:33:07 +0300
+Date: Thu, 19 Oct 2023 18:33:06 +0300
+From: Igor Prusov <ivprusov@salutedevices.com>
+To: Simon Glass <sjg@google.com>
+CC: Neil Armstrong <neil.armstrong@linaro.org>, Jagan Teki
+ <jagan@amarulasolutions.com>, <prusovigor@gmail.com>,
+ <kernel@sberdevices.ru>, Igor Prusov <IVPrusov@sberdevices.ru>, Martin
+ Kurbanov <mmkurbanov@sberdevices.ru>, <u-boot-amlogic@groups.io>,
+ <u-boot@lists.denx.de>
+Subject: Re: [RESEND PATCH v1 1/2] spi: add support for Amlogic A1 SPI Flash
+ Controller
+Message-ID: <20231019153306.oks4grlgcv45kiuo@pc>
+References: <20231017171733.3989-1-ivprusov@salutedevices.com>
+ <20231017171733.3989-2-ivprusov@salutedevices.com>
+ <CAPnjgZ06Le0qRukSRsCZ5CoKur6ciaCGGUnRpbfz7OQYzZaGBA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CKxE+g6drjFgPIdr"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <5f4d1fd6-3f6f-4c68-a65b-ac4ab43f0490@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAPnjgZ06Le0qRukSRsCZ5CoKur6ciaCGGUnRpbfz7OQYzZaGBA@mail.gmail.com>
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180741 [Oct 19 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 542 542
+ 3d23828e213bab96daa5e52f9cef518f74e40214, {Track_E25351},
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/19 09:42:00 #22231459
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,1307 +108,492 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Oct 17, 2023 at 09:33:02PM -0600, Simon Glass wrote:
+> Hi Igor,
+> 
+> On Tue, 17 Oct 2023 at 11:18, Igor Prusov <ivprusov@salutedevices.com> wrote:
+> >
+> > From: Igor Prusov <IVPrusov@sberdevices.ru>
+> >
+> > Add A1 SPIFC driver from Linux. Slightly modified to use u-boot driver
+> > framework and accommodate to lack of ioread32_rep/iowrite32_rep.
+> 
+> Well, you could bring them in!
+> 
+> >
+> > Based on Linux version 6.6-rc4
+> >
+> > Signed-off-by: Igor Prusov <IVPrusov@sberdevices.ru>
+> > Signed-off-by: Martin Kurbanov <mmkurbanov@sberdevices.ru>
+> > ---
+> >  drivers/spi/Kconfig          |   8 +
+> >  drivers/spi/Makefile         |   1 +
+> >  drivers/spi/meson_spifc_a1.c | 384 +++++++++++++++++++++++++++++++++++
+> >  3 files changed, 393 insertions(+)
+> >  create mode 100644 drivers/spi/meson_spifc_a1.c
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> nits below
+> 
+> >
+> > diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+> > index 854b8b88da..dedb366370 100644
+> > --- a/drivers/spi/Kconfig
+> > +++ b/drivers/spi/Kconfig
+> > @@ -251,6 +251,14 @@ config MICROCHIP_COREQSPI
+> >           Enable the QSPI driver for Microchip FPGA QSPI controllers.
+> >           This driver can be used on Polarfire SoC.
+> >
+> > +config MESON_SPIFC_A1
+> > +       bool "Amlogic Meson A1 SPI Flash Controller driver"
+> > +       depends on ARCH_MESON
+> > +       help
+> > +         Enable the Amlogic A1 SPI Flash Controller (SPIFC) driver.
+> > +         This driver can be used to access the SPI NOR/NAND flash chips on
+> > +         Amlogic A1 SoC.
+> 
+> What speeds does and modes it support? Can you add a little more detail?
+> 
+Sure, will add in v2.
+> > +
+> >  config MPC8XX_SPI
+> >         bool "MPC8XX SPI Driver"
+> >         depends on MPC8xx
+> > diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+> > index c27b3327c3..14bdb97f18 100644
+> > --- a/drivers/spi/Makefile
+> > +++ b/drivers/spi/Makefile
+> > @@ -41,6 +41,7 @@ obj-$(CONFIG_ICH_SPI) +=  ich.o
+> >  obj-$(CONFIG_IPROC_QSPI) += iproc_qspi.o
+> >  obj-$(CONFIG_KIRKWOOD_SPI) += kirkwood_spi.o
+> >  obj-$(CONFIG_MESON_SPIFC) += meson_spifc.o
+> > +obj-$(CONFIG_MESON_SPIFC_A1) += meson_spifc_a1.o
+> >  obj-$(CONFIG_MICROCHIP_COREQSPI) += microchip_coreqspi.o
+> >  obj-$(CONFIG_MPC8XX_SPI) += mpc8xx_spi.o
+> >  obj-$(CONFIG_MPC8XXX_SPI) += mpc8xxx_spi.o
+> > diff --git a/drivers/spi/meson_spifc_a1.c b/drivers/spi/meson_spifc_a1.c
+> > new file mode 100644
+> > index 0000000000..4b840c4634
+> > --- /dev/null
+> > +++ b/drivers/spi/meson_spifc_a1.c
+> > @@ -0,0 +1,384 @@
+> > +// SPDX-License-Identifier: GPL-2.0
+> > +/*
+> > + * Driver for Amlogic A1 SPI flash controller (SPIFC)
+> > + *
+> > + * Copyright (c) 2023, SberDevices. All Rights Reserved.
+> > + *
+> > + * Author: Martin Kurbanov <mmkurbanov@sberdevices.ru>
+> > + *
+> > + * Ported to u-boot:
+> > + * Author: Igor Prusov <ivprusov@sberdevices.ru>
+> > + */
+> > +
+> > +#include <common.h>
+> > +#include <clk.h>
+> > +#include <dm.h>
+> > +#include <spi.h>
+> > +#include <spi-mem.h>
+> > +#include <asm/io.h>
+> > +#include <linux/log2.h>
+> > +#include <linux/iopoll.h>
+> > +#include <linux/bitfield.h>
+> > +
+> > +#define SPIFC_A1_AHB_CTRL_REG          0x0
+> > +#define SPIFC_A1_AHB_BUS_EN            BIT(31)
+> > +
+> > +#define SPIFC_A1_USER_CTRL0_REG                0x200
+> > +#define SPIFC_A1_USER_REQUEST_ENABLE   BIT(31)
+> > +#define SPIFC_A1_USER_REQUEST_FINISH   BIT(30)
+> > +#define SPIFC_A1_USER_DATA_UPDATED     BIT(0)
+> > +
+> > +#define SPIFC_A1_USER_CTRL1_REG                0x204
+> > +#define SPIFC_A1_USER_CMD_ENABLE       BIT(30)
+> > +#define SPIFC_A1_USER_CMD_MODE         GENMASK(29, 28)
+> > +#define SPIFC_A1_USER_CMD_CODE         GENMASK(27, 20)
+> > +#define SPIFC_A1_USER_ADDR_ENABLE      BIT(19)
+> > +#define SPIFC_A1_USER_ADDR_MODE                GENMASK(18, 17)
+> > +#define SPIFC_A1_USER_ADDR_BYTES       GENMASK(16, 15)
+> > +#define SPIFC_A1_USER_DOUT_ENABLE      BIT(14)
+> > +#define SPIFC_A1_USER_DOUT_MODE                GENMASK(11, 10)
+> > +#define SPIFC_A1_USER_DOUT_BYTES       GENMASK(9, 0)
+> > +
+> > +#define SPIFC_A1_USER_CTRL2_REG                0x208
+> > +#define SPIFC_A1_USER_DUMMY_ENABLE     BIT(31)
+> > +#define SPIFC_A1_USER_DUMMY_MODE       GENMASK(30, 29)
+> > +#define SPIFC_A1_USER_DUMMY_CLK_SYCLES GENMASK(28, 23)
+> > +
+> > +#define SPIFC_A1_USER_CTRL3_REG                0x20c
+> > +#define SPIFC_A1_USER_DIN_ENABLE       BIT(31)
+> > +#define SPIFC_A1_USER_DIN_MODE         GENMASK(28, 27)
+> > +#define SPIFC_A1_USER_DIN_BYTES                GENMASK(25, 16)
+> > +
+> > +#define SPIFC_A1_USER_ADDR_REG         0x210
+> > +
+> > +#define SPIFC_A1_AHB_REQ_CTRL_REG      0x214
+> > +#define SPIFC_A1_AHB_REQ_ENABLE                BIT(31)
+> > +
+> > +#define SPIFC_A1_ACTIMING0_REG         (0x0088 << 2)
+> > +#define SPIFC_A1_TSLCH                 GENMASK(31, 30)
+> > +#define SPIFC_A1_TCLSH                 GENMASK(29, 28)
+> > +#define SPIFC_A1_TSHWL                 GENMASK(20, 16)
+> > +#define SPIFC_A1_TSHSL2                        GENMASK(15, 12)
+> > +#define SPIFC_A1_TSHSL1                        GENMASK(11, 8)
+> > +#define SPIFC_A1_TWHSL                 GENMASK(7, 0)
+> > +
+> > +#define SPIFC_A1_DBUF_CTRL_REG         0x240
+> > +#define SPIFC_A1_DBUF_DIR              BIT(31)
+> > +#define SPIFC_A1_DBUF_AUTO_UPDATE_ADDR BIT(30)
+> > +#define SPIFC_A1_DBUF_ADDR             GENMASK(7, 0)
+> > +
+> > +#define SPIFC_A1_DBUF_DATA_REG         0x244
+> > +
+> > +#define SPIFC_A1_USER_DBUF_ADDR_REG    0x248
+> > +
+> > +#define SPIFC_A1_BUFFER_SIZE           512U
+> > +
+> > +#define SPIFC_A1_MAX_HZ                        200000000
+> > +#define SPIFC_A1_MIN_HZ                        1000000
+> > +
+> > +#define SPIFC_A1_USER_CMD(op) ( \
+> > +       SPIFC_A1_USER_CMD_ENABLE | \
+> > +       FIELD_PREP(SPIFC_A1_USER_CMD_CODE, (op)->cmd.opcode) | \
+> > +       FIELD_PREP(SPIFC_A1_USER_CMD_MODE, ilog2((op)->cmd.buswidth)))
+> > +
+> > +#define SPIFC_A1_USER_ADDR(op) ( \
+> > +       SPIFC_A1_USER_ADDR_ENABLE | \
+> > +       FIELD_PREP(SPIFC_A1_USER_ADDR_MODE, ilog2((op)->addr.buswidth)) | \
+> > +       FIELD_PREP(SPIFC_A1_USER_ADDR_BYTES, (op)->addr.nbytes - 1))
+> > +
+> > +#define SPIFC_A1_USER_DUMMY(op) ( \
+> > +       SPIFC_A1_USER_DUMMY_ENABLE | \
+> > +       FIELD_PREP(SPIFC_A1_USER_DUMMY_MODE, ilog2((op)->dummy.buswidth)) | \
+> > +       FIELD_PREP(SPIFC_A1_USER_DUMMY_CLK_SYCLES, (op)->dummy.nbytes << 3))
+> > +
+> > +#define SPIFC_A1_TSLCH_VAL     FIELD_PREP(SPIFC_A1_TSLCH, 1)
+> > +#define SPIFC_A1_TCLSH_VAL     FIELD_PREP(SPIFC_A1_TCLSH, 1)
+> > +#define SPIFC_A1_TSHWL_VAL     FIELD_PREP(SPIFC_A1_TSHWL, 7)
+> > +#define SPIFC_A1_TSHSL2_VAL    FIELD_PREP(SPIFC_A1_TSHSL2, 7)
+> > +#define SPIFC_A1_TSHSL1_VAL    FIELD_PREP(SPIFC_A1_TSHSL1, 7)
+> > +#define SPIFC_A1_TWHSL_VAL     FIELD_PREP(SPIFC_A1_TWHSL, 2)
+> > +#define SPIFC_A1_ACTIMING0_VAL (SPIFC_A1_TSLCH_VAL | SPIFC_A1_TCLSH_VAL | \
+> > +                                SPIFC_A1_TSHWL_VAL | SPIFC_A1_TSHSL2_VAL | \
+> > +                                SPIFC_A1_TSHSL1_VAL | SPIFC_A1_TWHSL_VAL)
+> > +
+> > +struct amlogic_spifc_a1 {
+> > +       struct spi_controller *ctrl;
+> > +       struct clk clk;
+> > +       struct device *dev;
+> 
+> Can you drop that? Normally we pass 'dev' to a function if needed,
+> rather than passing 'priv' and looking up dev from there. In fact I am
+> not sure this is used?
 
---CKxE+g6drjFgPIdr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yep, it's not used anywhere. It is also only accessed in Linux driver's
+probe(), so it can be replaced with a stack variable there as well. Also
+I've noticed that ctrl field is not used here as well, so I'm going to
+drop it in v2 as well.
+> > +       void __iomem *base;
+> > +       u32 curr_speed_hz;
+> > +};
+> > +
+> > +static int amlogic_spifc_a1_request(struct amlogic_spifc_a1 *spifc, bool read)
+> > +{
+> > +       u32 mask = SPIFC_A1_USER_REQUEST_FINISH |
+> > +                  (read ? SPIFC_A1_USER_DATA_UPDATED : 0);
+> > +       u32 val;
+> > +
+> > +       writel(SPIFC_A1_USER_REQUEST_ENABLE,
+> > +              spifc->base + SPIFC_A1_USER_CTRL0_REG);
+> > +
+> > +       return readl_poll_timeout(spifc->base + SPIFC_A1_USER_CTRL0_REG,
+> > +                                 val, (val & mask) == mask,
+> > +                                 200 * 1000);
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_drain_buffer(struct amlogic_spifc_a1 *spifc,
+> > +                                         char *buf, u32 len)
+> > +{
+> > +       u32 data;
+> > +       const u32 count = len / sizeof(data);
+> > +       const u32 pad = len % sizeof(data);
+> > +
+> > +       writel(SPIFC_A1_DBUF_AUTO_UPDATE_ADDR,
+> > +              spifc->base + SPIFC_A1_DBUF_CTRL_REG);
+> > +       readsl(spifc->base + SPIFC_A1_DBUF_DATA_REG, buf, count);
+> > +
+> > +       if (pad) {
+> > +               data = readl(spifc->base + SPIFC_A1_DBUF_DATA_REG);
+> > +               memcpy(buf + len - pad, &data, pad);
+> > +       }
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_fill_buffer(struct amlogic_spifc_a1 *spifc,
+> > +                                        const char *buf, u32 len)
+> > +{
+> > +       u32 data;
+> > +       const u32 count = len / sizeof(data);
+> > +       const u32 pad = len % sizeof(data);
+> > +
+> > +       writel(SPIFC_A1_DBUF_DIR | SPIFC_A1_DBUF_AUTO_UPDATE_ADDR,
+> > +              spifc->base + SPIFC_A1_DBUF_CTRL_REG);
+> > +       writesl(spifc->base + SPIFC_A1_DBUF_DATA_REG, buf, count);
+> > +
+> > +       if (pad) {
+> > +               memcpy(&data, buf + len - pad, pad);
+> > +               writel(data, spifc->base + SPIFC_A1_DBUF_DATA_REG);
+> > +       }
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_user_init(struct amlogic_spifc_a1 *spifc)
+> > +{
+> > +       writel(0, spifc->base + SPIFC_A1_USER_CTRL0_REG);
+> > +       writel(0, spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> > +       writel(0, spifc->base + SPIFC_A1_USER_CTRL2_REG);
+> > +       writel(0, spifc->base + SPIFC_A1_USER_CTRL3_REG);
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_set_cmd(struct amlogic_spifc_a1 *spifc,
+> > +                                    u32 cmd_cfg)
+> > +{
+> > +       u32 val;
+> > +
+> > +       val = readl(spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> > +       val &= ~(SPIFC_A1_USER_CMD_MODE | SPIFC_A1_USER_CMD_CODE);
+> > +       val |= cmd_cfg;
+> > +       writel(val, spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> 
+> You probably want to keep the code the same as Linux, but I'll just
+> mention clrsetbits_le32() is case it is useful elsewhere.
+> 
+Thanks, will keep in mind!
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_set_addr(struct amlogic_spifc_a1 *spifc, u32 addr,
+> > +                                     u32 addr_cfg)
+> > +{
+> > +       u32 val;
+> > +
+> > +       writel(addr, spifc->base + SPIFC_A1_USER_ADDR_REG);
+> > +
+> > +       val = readl(spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> > +       val &= ~(SPIFC_A1_USER_ADDR_MODE | SPIFC_A1_USER_ADDR_BYTES);
+> > +       val |= addr_cfg;
+> > +       writel(val, spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_set_dummy(struct amlogic_spifc_a1 *spifc,
+> > +                                      u32 dummy_cfg)
+> > +{
+> > +       u32 val = readl(spifc->base + SPIFC_A1_USER_CTRL2_REG);
+> > +
+> > +       val &= ~(SPIFC_A1_USER_DUMMY_MODE | SPIFC_A1_USER_DUMMY_CLK_SYCLES);
+> > +       val |= dummy_cfg;
+> > +       writel(val, spifc->base + SPIFC_A1_USER_CTRL2_REG);
+> > +}
+> > +
+> > +static int amlogic_spifc_a1_read(struct amlogic_spifc_a1 *spifc, void *buf,
+> > +                                u32 size, u32 mode)
+> > +{
+> > +       u32 val = readl(spifc->base + SPIFC_A1_USER_CTRL3_REG);
+> > +       int ret;
+> > +
+> > +       val &= ~(SPIFC_A1_USER_DIN_MODE | SPIFC_A1_USER_DIN_BYTES);
+> > +       val |= SPIFC_A1_USER_DIN_ENABLE;
+> > +       val |= FIELD_PREP(SPIFC_A1_USER_DIN_MODE, mode);
+> > +       val |= FIELD_PREP(SPIFC_A1_USER_DIN_BYTES, size);
+> > +       writel(val, spifc->base + SPIFC_A1_USER_CTRL3_REG);
+> > +
+> > +       ret = amlogic_spifc_a1_request(spifc, true);
+> > +       if (!ret)
+> > +               amlogic_spifc_a1_drain_buffer(spifc, buf, size);
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +static int amlogic_spifc_a1_write(struct amlogic_spifc_a1 *spifc,
+> > +                                 const void *buf, u32 size, u32 mode)
+> > +{
+> > +       u32 val;
+> > +
+> > +       amlogic_spifc_a1_fill_buffer(spifc, buf, size);
+> > +
+> > +       val = readl(spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> > +       val &= ~(SPIFC_A1_USER_DOUT_MODE | SPIFC_A1_USER_DOUT_BYTES);
+> > +       val |= FIELD_PREP(SPIFC_A1_USER_DOUT_MODE, mode);
+> > +       val |= FIELD_PREP(SPIFC_A1_USER_DOUT_BYTES, size);
+> > +       val |= SPIFC_A1_USER_DOUT_ENABLE;
+> > +       writel(val, spifc->base + SPIFC_A1_USER_CTRL1_REG);
+> > +
+> > +       return amlogic_spifc_a1_request(spifc, false);
+> > +}
+> > +
+> > +static int amlogic_spifc_a1_set_freq(struct amlogic_spifc_a1 *spifc, u32 freq)
+> > +{
+> > +       int ret;
+> > +
+> > +       if (freq == spifc->curr_speed_hz)
+> > +               return 0;
+> > +
+> > +       ret = clk_set_rate(&spifc->clk, freq);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       spifc->curr_speed_hz = freq;
+> > +       return 0;
+> > +}
+> > +
+> > +static int amlogic_spifc_a1_exec_op(struct spi_slave *slave,
+> > +                                   const struct spi_mem_op *op)
+> > +{
+> > +       struct amlogic_spifc_a1 *spifc = dev_get_priv(slave->dev->parent);
+> > +       size_t data_size = op->data.nbytes;
+> > +       int ret;
+> > +
+> > +       ret = amlogic_spifc_a1_set_freq(spifc, slave->max_hz);
+> > +       if (ret)
+> > +               return ret;
+> > +
+> > +       amlogic_spifc_a1_user_init(spifc);
+> > +       amlogic_spifc_a1_set_cmd(spifc, SPIFC_A1_USER_CMD(op));
+> > +
+> > +       if (op->addr.nbytes)
+> > +               amlogic_spifc_a1_set_addr(spifc, op->addr.val,
+> > +                                         SPIFC_A1_USER_ADDR(op));
+> > +
+> > +       if (op->dummy.nbytes)
+> > +               amlogic_spifc_a1_set_dummy(spifc, SPIFC_A1_USER_DUMMY(op));
+> > +
+> > +       if (data_size) {
+> > +               u32 mode = ilog2(op->data.buswidth);
+> > +
+> > +               writel(0, spifc->base + SPIFC_A1_USER_DBUF_ADDR_REG);
+> > +
+> > +               if (op->data.dir == SPI_MEM_DATA_IN)
+> > +                       ret = amlogic_spifc_a1_read(spifc, op->data.buf.in,
+> > +                                                   data_size, mode);
+> > +               else
+> > +                       ret = amlogic_spifc_a1_write(spifc, op->data.buf.out,
+> > +                                                    data_size, mode);
+> > +       } else {
+> > +               ret = amlogic_spifc_a1_request(spifc, false);
+> > +       }
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +static int amlogic_spifc_a1_adjust_op_size(struct spi_slave *slave,
+> > +                                          struct spi_mem_op *op)
+> > +{
+> > +       op->data.nbytes = min(op->data.nbytes, SPIFC_A1_BUFFER_SIZE);
+> > +       return 0;
+> > +}
+> > +
+> > +static void amlogic_spifc_a1_hw_init(struct amlogic_spifc_a1 *spifc)
+> > +{
+> > +       u32 regv;
+> > +
+> > +       regv = readl(spifc->base + SPIFC_A1_AHB_REQ_CTRL_REG);
+> > +       regv &= ~(SPIFC_A1_AHB_REQ_ENABLE);
+> 
+> It is strange seeing these brackets here.
+> 
+Indeed, though it is copied from Linux, so not sure if I should remove
+them here.
+> > +       writel(regv, spifc->base + SPIFC_A1_AHB_REQ_CTRL_REG);
+> > +
+> > +       regv = readl(spifc->base + SPIFC_A1_AHB_CTRL_REG);
+> > +       regv &= ~(SPIFC_A1_AHB_BUS_EN);
+> > +       writel(regv, spifc->base + SPIFC_A1_AHB_CTRL_REG);
+> > +
+> > +       writel(SPIFC_A1_ACTIMING0_VAL, spifc->base + SPIFC_A1_ACTIMING0_REG);
+> > +
+> > +       writel(0, spifc->base + SPIFC_A1_USER_DBUF_ADDR_REG);
+> > +}
+> > +
+> > +static const struct spi_controller_mem_ops amlogic_spifc_a1_mem_ops = {
+> > +       .exec_op = amlogic_spifc_a1_exec_op,
+> > +       .adjust_op_size = amlogic_spifc_a1_adjust_op_size,
+> > +};
+> > +
+> > +static int amlogic_spifc_a1_probe(struct udevice *dev)
+> > +{
+> > +       struct amlogic_spifc_a1 *spifc = dev_get_priv(dev);
+> > +       int ret;
+> > +       struct udevice *bus = dev;
+> > +
+> > +       spifc->base = (void *)dev_read_addr(dev);
+> 
+> dev_read_addr_ptr()
+> 
+> Also please check for NULL and return -EINVAL in that case
+> 
+Will fix in v2, thanks!
+> > +
+> > +       ret = clk_get_by_index(bus, 0, &spifc->clk);
+> > +       if (ret) {
+> > +               pr_err("can't get clk spifc_gate!\n");
+> > +               return ret;
+> > +       }
+> > +
+> > +       ret = clk_enable(&spifc->clk);
+> > +       if (ret) {
+> > +               pr_err("enable clk fail\n");
+> > +               return ret;
+> > +       }
+> > +
+> > +       amlogic_spifc_a1_hw_init(spifc);
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int amlogic_spifc_a1_remove(struct udevice *dev)
+> > +{
+> > +       struct amlogic_spifc_a1 *spifc = dev_get_priv(dev);
+> > +
+> > +       clk_free(&spifc->clk);
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static const struct udevice_id meson_spifc_ids[] = {
+> > +       { .compatible = "amlogic,a1-spifc", },
+> > +       { }
+> > +};
+> > +
+> > +int amlogic_spifc_a1_set_speed(struct udevice *bus, uint hz)
+> > +{
+> > +       return 0;
+> > +}
+> > +
+> > +int amlogic_spifc_a1_set_mode(struct udevice *bus, uint mode)
+> > +{
+> > +       return 0;
+> > +}
+> > +
+> > +static const struct dm_spi_ops amlogic_spifc_a1_ops = {
+> > +       .mem_ops = &amlogic_spifc_a1_mem_ops,
+> > +       .set_speed = amlogic_spifc_a1_set_speed,
+> > +       .set_mode = amlogic_spifc_a1_set_mode,
+> > +};
+> > +
+> > +U_BOOT_DRIVER(meson_spifc_a1) = {
+> > +       .name           = "meson_spifc_a1",
+> > +       .id             = UCLASS_SPI,
+> > +       .of_match       = meson_spifc_ids,
+> > +       .ops            = &amlogic_spifc_a1_ops,
+> > +       .probe          = amlogic_spifc_a1_probe,
+> > +       .remove         = amlogic_spifc_a1_remove,
+> > +       .priv_auto      = sizeof(struct amlogic_spifc_a1),
+> > +};
+> > --
+> > 2.34.1
+> >
+> 
+> Regards,
+> Simon
 
-On Thu, Oct 19, 2023 at 05:24:33PM +0200, Heinrich Schuchardt wrote:
-> On 19.10.23 17:19, Tom Rini wrote:
-> > On Thu, Oct 19, 2023 at 05:16:28PM +0200, Heinrich Schuchardt wrote:
-> > > On 19.10.23 17:00, Tom Rini wrote:
-> > > > From: Simon Glass <sjg@chromium.org>
-> > > >=20
-> > > > The command should not be used to enable library functionality. Add=
- a
-> > > > new BOOTEFI_BOOTMGR Kconfig for that. Adjust the conditions so that=
- the
-> > > > same code is built.
-> > > >=20
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > > ---
-> > > > Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > Changes in v4:
-> > > > - Integrate AKASHI Takahiro's feedback from v3
-> > > > - Reword the help text on CMD_BOOTEFI_BOOTMGR slightly
-> > > > ---
-> > > >    cmd/Kconfig             | 11 ++++++++++-
-> > > >    lib/efi_loader/Kconfig  |  6 +++---
-> > > >    lib/efi_loader/Makefile |  2 +-
-> > > >    3 files changed, 14 insertions(+), 5 deletions(-)
-> > > >=20
-> > > > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > > > index 16e5cb8f0633..872cb49150cc 100644
-> > > > --- a/cmd/Kconfig
-> > > > +++ b/cmd/Kconfig
-> > > > @@ -379,6 +379,15 @@ config CMD_BOOTEFI
-> > > >    	help
-> > > >    	  Boot an EFI image from memory.
-> > > > +config CMD_BOOTEFI_BOOTMGR
-> > > > +	bool "UEFI Boot Manager command"
-> > > > +	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
-> > > > +	default y
-> > > > +	help
-> > > > +	  Select this option to enable the 'bootmgr' subcommand of 'boote=
-fi'.
-> > > > +	  This subcommand will allow you to select the UEFI binary to be =
-booted
-> > > > +	  via UEFI variables Boot####, BootOrder, and BootNext.
-> > > > +
-> > > >    config CMD_BOOTEFI_HELLO_COMPILE
-> > > >    	bool "Compile a standard EFI hello world binary for testing"
-> > > >    	depends on CMD_BOOTEFI && !CPU_V7M
-> > > > @@ -2110,7 +2119,7 @@ config CMD_EFIDEBUG
-> > > >    config CMD_EFICONFIG
-> > > >    	bool "eficonfig - provide menu-driven uefi variables maintenanc=
-e interface"
-> > > >    	default y if !HAS_BOARD_SIZE_LIMIT
-> > > > -	depends on CMD_BOOTEFI_BOOTMGR
-> > > > +	depends on BOOTEFI_BOOTMGR
-> > > >    	select MENU
-> > > >    	help
-> > > >    	  Enable the 'eficonfig' command which provides the menu-driven=
- UEFI
-> > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > index d20aaab6dba4..13cad6342c36 100644
-> > > > --- a/lib/efi_loader/Kconfig
-> > > > +++ b/lib/efi_loader/Kconfig
-> > > > @@ -32,14 +32,14 @@ config EFI_LOADER
-> > > >    if EFI_LOADER
-> > > > -config CMD_BOOTEFI_BOOTMGR
-> > > > +config BOOTEFI_BOOTMGR
-> > > >    	bool "UEFI Boot Manager"
-> > > >    	default y
-> > > >    	select BOOTMETH_GLOBAL if BOOTSTD
-> > > >    	help
-> > > >    	  Select this option if you want to select the UEFI binary to b=
-e booted
-> > > > -	  via UEFI variables Boot####, BootOrder, and BootNext. This enab=
-les the
-> > > > -	  'bootefi bootmgr' command.
-> > > > +	  via UEFI variables Boot####, BootOrder, and BootNext. You shoul=
-d also
-> > > > +	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is avai=
-lable.
-> > > >    choice
-> > > >    	prompt "Store for non-volatile UEFI variables"
-> > > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> > > > index 8d31fc61c601..0a2cb6e3c476 100644
-> > > > --- a/lib/efi_loader/Makefile
-> > > > +++ b/lib/efi_loader/Makefile
-> > > > @@ -42,7 +42,7 @@ targets +=3D initrddump.o
-> > > >    endif
-> > > >    obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
-> > > > -obj-$(CONFIG_CMD_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
-> > > > +obj-$(CONFIG_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
-> > > >    obj-y +=3D efi_boottime.o
-> > > >    obj-y +=3D efi_helper.o
-> > > >    obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) +=3D efi_capsule.o
-> > >=20
-> > > This patch looks wrong.
-> > >=20
-> > > Symbol CONFIG_CMD_BOOTEFI_BOOTMGR is used in a lot of places where it=
- is not
-> > > related to the 'bootefi bootmgr' subcommand.
-> > >=20
-> > > I see no benefit in two separate symbols. If you want to rename the s=
-ymbol,
-> > > please, replace *all* occurrences:
-> > >=20
-> > > %s/CONFIG_CMD_BOOTEFI_BOOTMGR/CONFIG_BOOTEFI_BOOTMGR/
-> >=20
-> > Yes, there's work on the EFI_LOADER side of things to support the use
-> > case of "boot to menu" (or, "boot to efi bootmgr") of which this is the
-> > starting point. The follow-up work that I'm hoping you or someone else
-> > with more EFI_LOADER experience will pick up is splitting cmd/bootefi.c
-> > such that we can call in to starting an EFI payload (or bootmgr) without
-> > the command line.
-> >=20
->=20
-> Even after factoring out the boot functionality I would not know why we
-> should have two separate symbols. I am fine with a rename which makes it
-> clear that this symbol is about a library functionality.
-
-Because there's the library functionality and there's the literal
-command code. If you're arguing that long term we should have the
-command side of all library functionality be automatic based on
-CMDLINE=3Dy/CMDLINE=3Dn, that's another discussion for later.  This just
-start the split.  I had made a very very rough pass at starting the
-split:
-
-diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-index 20e5c94a33a4..fe4f3b4fe4bc 100644
---- a/cmd/bootefi.c
-+++ b/cmd/bootefi.c
-@@ -27,379 +27,6 @@
- #include <asm-generic/sections.h>
- #include <linux/linkage.h>
-=20
--DECLARE_GLOBAL_DATA_PTR;
--
--static struct efi_device_path *bootefi_image_path;
--static struct efi_device_path *bootefi_device_path;
--static void *image_addr;
--static size_t image_size;
--
--/**
-- * efi_get_image_parameters() - return image parameters
-- *
-- * @img_addr:		address of loaded image in memory
-- * @img_size:		size of loaded image
-- */
--void efi_get_image_parameters(void **img_addr, size_t *img_size)
--{
--	*img_addr =3D image_addr;
--	*img_size =3D image_size;
--}
--
--/**
-- * efi_clear_bootdev() - clear boot device
-- */
--static void efi_clear_bootdev(void)
--{
--	efi_free_pool(bootefi_device_path);
--	efi_free_pool(bootefi_image_path);
--	bootefi_device_path =3D NULL;
--	bootefi_image_path =3D NULL;
--	image_addr =3D NULL;
--	image_size =3D 0;
--}
--
--/**
-- * efi_set_bootdev() - set boot device
-- *
-- * This function is called when a file is loaded, e.g. via the 'load' comm=
-and.
-- * We use the path to this file to inform the UEFI binary about the boot d=
-evice.
-- *
-- * @dev:		device, e.g. "MMC"
-- * @devnr:		number of the device, e.g. "1:2"
-- * @path:		path to file loaded
-- * @buffer:		buffer with file loaded
-- * @buffer_size:	size of file loaded
-- */
--void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
--		     void *buffer, size_t buffer_size)
--{
--	struct efi_device_path *device, *image;
--	efi_status_t ret;
--
--	log_debug("dev=3D%s, devnr=3D%s, path=3D%s, buffer=3D%p, size=3D%zx\n", d=
-ev,
--		  devnr, path, buffer, buffer_size);
--
--	/* Forget overwritten image */
--	if (buffer + buffer_size >=3D image_addr &&
--	    image_addr + image_size >=3D buffer)
--		efi_clear_bootdev();
--
--	/* Remember only PE-COFF and FIT images */
--	if (efi_check_pe(buffer, buffer_size, NULL) !=3D EFI_SUCCESS) {
--		if (IS_ENABLED(CONFIG_FIT) &&
--		    !fit_check_format(buffer, IMAGE_SIZE_INVAL)) {
--			/*
--			 * FIT images of type EFI_OS are started via command
--			 * bootm. We should not use their boot device with the
--			 * bootefi command.
--			 */
--			buffer =3D 0;
--			buffer_size =3D 0;
--		} else {
--			log_debug("- not remembering image\n");
--			return;
--		}
--	}
--
--	/* efi_set_bootdev() is typically called repeatedly, recover memory */
--	efi_clear_bootdev();
--
--	image_addr =3D buffer;
--	image_size =3D buffer_size;
--
--	ret =3D efi_dp_from_name(dev, devnr, path, &device, &image);
--	if (ret =3D=3D EFI_SUCCESS) {
--		bootefi_device_path =3D device;
--		if (image) {
--			/* FIXME: image should not contain device */
--			struct efi_device_path *image_tmp =3D image;
--
--			efi_dp_split_file_path(image, &device, &image);
--			efi_free_pool(image_tmp);
--		}
--		bootefi_image_path =3D image;
--		log_debug("- boot device %pD\n", device);
--		if (image)
--			log_debug("- image %pD\n", image);
--	} else {
--		log_debug("- efi_dp_from_name() failed, err=3D%lx\n", ret);
--		efi_clear_bootdev();
--	}
--}
--
--/**
-- * efi_env_set_load_options() - set load options from environment variable
-- *
-- * @handle:		the image handle
-- * @env_var:		name of the environment variable
-- * @load_options:	pointer to load options (output)
-- * Return:		status code
-- */
--static efi_status_t efi_env_set_load_options(efi_handle_t handle,
--					     const char *env_var,
--					     u16 **load_options)
--{
--	const char *env =3D env_get(env_var);
--	size_t size;
--	u16 *pos;
--	efi_status_t ret;
--
--	*load_options =3D NULL;
--	if (!env)
--		return EFI_SUCCESS;
--	size =3D sizeof(u16) * (utf8_utf16_strlen(env) + 1);
--	pos =3D calloc(size, 1);
--	if (!pos)
--		return EFI_OUT_OF_RESOURCES;
--	*load_options =3D pos;
--	utf8_utf16_strcpy(&pos, env);
--	ret =3D efi_set_load_options(handle, size, *load_options);
--	if (ret !=3D EFI_SUCCESS) {
--		free(*load_options);
--		*load_options =3D NULL;
--	}
--	return ret;
--}
--
--#if !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
--
--/**
-- * copy_fdt() - Copy the device tree to a new location available to EFI
-- *
-- * The FDT is copied to a suitable location within the EFI memory map.
-- * Additional 12 KiB are added to the space in case the device tree needs =
-to be
-- * expanded later with fdt_open_into().
-- *
-- * @fdtp:	On entry a pointer to the flattened device tree.
-- *		On exit a pointer to the copy of the flattened device tree.
-- *		FDT start
-- * Return:	status code
-- */
--static efi_status_t copy_fdt(void **fdtp)
--{
--	unsigned long fdt_ram_start =3D -1L, fdt_pages;
--	efi_status_t ret =3D 0;
--	void *fdt, *new_fdt;
--	u64 new_fdt_addr;
--	uint fdt_size;
--	int i;
--
--	for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
--		u64 ram_start =3D gd->bd->bi_dram[i].start;
--		u64 ram_size =3D gd->bd->bi_dram[i].size;
--
--		if (!ram_size)
--			continue;
--
--		if (ram_start < fdt_ram_start)
--			fdt_ram_start =3D ram_start;
--	}
--
--	/*
--	 * Give us at least 12 KiB of breathing room in case the device tree
--	 * needs to be expanded later.
--	 */
--	fdt =3D *fdtp;
--	fdt_pages =3D efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
--	fdt_size =3D fdt_pages << EFI_PAGE_SHIFT;
--
--	ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
--				 EFI_ACPI_RECLAIM_MEMORY, fdt_pages,
--				 &new_fdt_addr);
--	if (ret !=3D EFI_SUCCESS) {
--		log_err("ERROR: Failed to reserve space for FDT\n");
--		goto done;
--	}
--	new_fdt =3D (void *)(uintptr_t)new_fdt_addr;
--	memcpy(new_fdt, fdt, fdt_totalsize(fdt));
--	fdt_set_totalsize(new_fdt, fdt_size);
--
--	*fdtp =3D (void *)(uintptr_t)new_fdt_addr;
--done:
--	return ret;
--}
--
--/**
-- * get_config_table() - get configuration table
-- *
-- * @guid:	GUID of the configuration table
-- * Return:	pointer to configuration table or NULL
-- */
--static void *get_config_table(const efi_guid_t *guid)
--{
--	size_t i;
--
--	for (i =3D 0; i < systab.nr_tables; i++) {
--		if (!guidcmp(guid, &systab.tables[i].guid))
--			return systab.tables[i].table;
--	}
--	return NULL;
--}
--
--#endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
--
--/**
-- * efi_install_fdt() - install device tree
-- *
-- * If fdt is not EFI_FDT_USE_INTERNAL, the device tree located at that mem=
-ory
-- * address will will be installed as configuration table, otherwise the de=
-vice
-- * tree located at the address indicated by environment variable fdt_addr =
-or as
-- * fallback fdtcontroladdr will be used.
-- *
-- * On architectures using ACPI tables device trees shall not be installed =
-as
-- * configuration table.
-- *
-- * @fdt:	address of device tree or EFI_FDT_USE_INTERNAL to use the
-- *		the hardware device tree as indicated by environment variable
-- *		fdt_addr or as fallback the internal device tree as indicated by
-- *		the environment variable fdtcontroladdr
-- * Return:	status code
-- */
--efi_status_t efi_install_fdt(void *fdt)
--{
--	/*
--	 * The EBBR spec requires that we have either an FDT or an ACPI table
--	 * but not both.
--	 */
--#if CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
--	if (fdt) {
--		log_warning("WARNING: Can't have ACPI table and device tree - ignoring D=
-T.\n");
--		return EFI_SUCCESS;
--	}
--#else
--	struct bootm_headers img =3D { 0 };
--	efi_status_t ret;
--
--	if (fdt =3D=3D EFI_FDT_USE_INTERNAL) {
--		const char *fdt_opt;
--		uintptr_t fdt_addr;
--
--		/* Look for device tree that is already installed */
--		if (get_config_table(&efi_guid_fdt))
--			return EFI_SUCCESS;
--		/* Check if there is a hardware device tree */
--		fdt_opt =3D env_get("fdt_addr");
--		/* Use our own device tree as fallback */
--		if (!fdt_opt) {
--			fdt_opt =3D env_get("fdtcontroladdr");
--			if (!fdt_opt) {
--				log_err("ERROR: need device tree\n");
--				return EFI_NOT_FOUND;
--			}
--		}
--		fdt_addr =3D hextoul(fdt_opt, NULL);
--		if (!fdt_addr) {
--			log_err("ERROR: invalid $fdt_addr or $fdtcontroladdr\n");
--			return EFI_LOAD_ERROR;
--		}
--		fdt =3D map_sysmem(fdt_addr, 0);
--	}
--
--	/* Install device tree */
--	if (fdt_check_header(fdt)) {
--		log_err("ERROR: invalid device tree\n");
--		return EFI_LOAD_ERROR;
--	}
--
--	/* Prepare device tree for payload */
--	ret =3D copy_fdt(&fdt);
--	if (ret) {
--		log_err("ERROR: out of memory\n");
--		return EFI_OUT_OF_RESOURCES;
--	}
--
--	if (image_setup_libfdt(&img, fdt, 0, NULL)) {
--		log_err("ERROR: failed to process device tree\n");
--		return EFI_LOAD_ERROR;
--	}
--
--	/* Create memory reservations as indicated by the device tree */
--	efi_carve_out_dt_rsv(fdt);
--
--	efi_try_purge_kaslr_seed(fdt);
--
--	if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
--		ret =3D efi_tcg2_measure_dtb(fdt);
--		if (ret =3D=3D EFI_SECURITY_VIOLATION) {
--			log_err("ERROR: failed to measure DTB\n");
--			return ret;
--		}
--	}
--
--	/* Install device tree as UEFI table */
--	ret =3D efi_install_configuration_table(&efi_guid_fdt, fdt);
--	if (ret !=3D EFI_SUCCESS) {
--		log_err("ERROR: failed to install device tree\n");
--		return ret;
--	}
--#endif /* GENERATE_ACPI_TABLE */
--
--	return EFI_SUCCESS;
--}
--
--/**
-- * do_bootefi_exec() - execute EFI binary
-- *
-- * The image indicated by @handle is started. When it returns the allocated
-- * memory for the @load_options is freed.
-- *
-- * @handle:		handle of loaded image
-- * @load_options:	load options
-- * Return:		status code
-- *
-- * Load the EFI binary into a newly assigned memory unwinding the relocati=
-on
-- * information, install the loaded image protocol, and call the binary.
-- */
--static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_option=
-s)
--{
--	efi_status_t ret;
--	efi_uintn_t exit_data_size =3D 0;
--	u16 *exit_data =3D NULL;
--
--	/* On ARM switch from EL3 or secure mode to EL2 or non-secure mode */
--	switch_to_non_secure_mode();
--
--	/*
--	 * The UEFI standard requires that the watchdog timer is set to five
--	 * minutes when invoking an EFI boot option.
--	 *
--	 * Unified Extensible Firmware Interface (UEFI), version 2.7 Errata A
--	 * 7.5. Miscellaneous Boot Services - EFI_BOOT_SERVICES.SetWatchdogTimer
--	 */
--	ret =3D efi_set_watchdog(300);
--	if (ret !=3D EFI_SUCCESS) {
--		log_err("ERROR: Failed to set watchdog timer\n");
--		goto out;
--	}
--
--	/* Call our payload! */
--	ret =3D EFI_CALL(efi_start_image(handle, &exit_data_size, &exit_data));
--	if (ret !=3D EFI_SUCCESS) {
--		log_err("## Application failed, r =3D %lu\n",
--			ret & ~EFI_ERROR_MASK);
--		if (exit_data) {
--			log_err("## %ls\n", exit_data);
--			efi_free_pool(exit_data);
--		}
--	}
--
--	efi_restore_gd();
--
--out:
--	free(load_options);
--
--	if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
--		if (efi_initrd_deregister() !=3D EFI_SUCCESS)
--			log_err("Failed to remove loadfile2 for initrd\n");
--	}
--
--	/* Control is returned to U-Boot, disable EFI watchdog */
--	efi_set_watchdog(0);
--
--	return ret;
--}
--
- /**
-  * do_efibootmgr() - execute EFI boot manager
-  *
-@@ -461,6 +88,9 @@ static int do_bootefi_image(const char *image_opt, const=
- char *size_opt)
- 				return CMD_RET_USAGE;
- 			efi_clear_bootdev();
- 		} else {
-+			size_t image_size;
-+			void *image_addr;
-+			efi_get_image_parameters(&image_addr, &image_size);
- 			if (image_buf !=3D image_addr) {
- 				log_err("No UEFI binary known at %s\n",
- 					image_opt);
-@@ -477,135 +107,7 @@ static int do_bootefi_image(const char *image_opt, co=
-nst char *size_opt)
- 	return CMD_RET_SUCCESS;
- }
-=20
--/**
-- * efi_run_image() - run loaded UEFI image
-- *
-- * @source_buffer:	memory address of the UEFI image
-- * @source_size:	size of the UEFI image
-- * Return:		status code
-- */
--efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
--{
--	efi_handle_t mem_handle =3D NULL, handle;
--	struct efi_device_path *file_path =3D NULL;
--	struct efi_device_path *msg_path;
--	efi_status_t ret, ret2;
--	u16 *load_options;
--
--	if (!bootefi_device_path || !bootefi_image_path) {
--		log_debug("Not loaded from disk\n");
--		/*
--		 * Special case for efi payload not loaded from disk,
--		 * such as 'bootefi hello' or for example payload
--		 * loaded directly into memory via JTAG, etc:
--		 */
--		file_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
--					    (uintptr_t)source_buffer,
--					    source_size);
--		/*
--		 * Make sure that device for device_path exist
--		 * in load_image(). Otherwise, shell and grub will fail.
--		 */
--		ret =3D efi_install_multiple_protocol_interfaces(&mem_handle,
--							       &efi_guid_device_path,
--							       file_path, NULL);
--		if (ret !=3D EFI_SUCCESS)
--			goto out;
--		msg_path =3D file_path;
--	} else {
--		file_path =3D efi_dp_append(bootefi_device_path,
--					  bootefi_image_path);
--		msg_path =3D bootefi_image_path;
--		log_debug("Loaded from disk\n");
--	}
--
--	log_info("Booting %pD\n", msg_path);
--
--	ret =3D EFI_CALL(efi_load_image(false, efi_root, file_path, source_buffer,
--				      source_size, &handle));
--	if (ret !=3D EFI_SUCCESS) {
--		log_err("Loading image failed\n");
--		goto out;
--	}
--
--	/* Transfer environment variable as load options */
--	ret =3D efi_env_set_load_options(handle, "bootargs", &load_options);
--	if (ret !=3D EFI_SUCCESS)
--		goto out;
--
--	ret =3D do_bootefi_exec(handle, load_options);
--
--out:
--	ret2 =3D efi_uninstall_multiple_protocol_interfaces(mem_handle,
--							  &efi_guid_device_path,
--							  file_path, NULL);
--	efi_free_pool(file_path);
--	return (ret !=3D EFI_SUCCESS) ? ret : ret2;
--}
--
- #ifdef CONFIG_CMD_BOOTEFI_SELFTEST
--static efi_status_t bootefi_run_prepare(const char *load_options_path,
--		struct efi_device_path *device_path,
--		struct efi_device_path *image_path,
--		struct efi_loaded_image_obj **image_objp,
--		struct efi_loaded_image **loaded_image_infop)
--{
--	efi_status_t ret;
--	u16 *load_options;
--
--	ret =3D efi_setup_loaded_image(device_path, image_path, image_objp,
--				     loaded_image_infop);
--	if (ret !=3D EFI_SUCCESS)
--		return ret;
--
--	/* Transfer environment variable as load options */
--	return efi_env_set_load_options((efi_handle_t)*image_objp,
--					load_options_path,
--					&load_options);
--}
--
--/**
-- * bootefi_test_prepare() - prepare to run an EFI test
-- *
-- * Prepare to run a test as if it were provided by a loaded image.
-- *
-- * @image_objp:		pointer to be set to the loaded image handle
-- * @loaded_image_infop:	pointer to be set to the loaded image protocol
-- * @path:		dummy file path used to construct the device path
-- *			set in the loaded image protocol
-- * @load_options_path:	name of a U-Boot environment variable. Its value is
-- *			set as load options in the loaded image protocol.
-- * Return:		status code
-- */
--static efi_status_t bootefi_test_prepare
--		(struct efi_loaded_image_obj **image_objp,
--		 struct efi_loaded_image **loaded_image_infop, const char *path,
--		 const char *load_options_path)
--{
--	efi_status_t ret;
--
--	/* Construct a dummy device path */
--	bootefi_device_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, 0, 0);
--	if (!bootefi_device_path)
--		return EFI_OUT_OF_RESOURCES;
--
--	bootefi_image_path =3D efi_dp_from_file(NULL, path);
--	if (!bootefi_image_path) {
--		ret =3D EFI_OUT_OF_RESOURCES;
--		goto failure;
--	}
--
--	ret =3D bootefi_run_prepare(load_options_path, bootefi_device_path,
--				  bootefi_image_path, image_objp,
--				  loaded_image_infop);
--	if (ret =3D=3D EFI_SUCCESS)
--		return ret;
--
--failure:
--	efi_clear_bootdev();
--	return ret;
--}
--
- /**
-  * do_efi_selftest() - execute EFI selftest
-  *
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index e24410505f40..6663a972c124 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -91,6 +91,7 @@ efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len=
-);
-  * back to u-boot world
-  */
- void efi_restore_gd(void);
-+void efi_clear_bootdev(void);
- /* Call this to set the current device name */
- void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
- 		     void *buffer, size_t buffer_size);
-@@ -526,12 +527,15 @@ efi_status_t efi_bootmgr_get_unused_bootoption(u16 *b=
-uf,
- efi_status_t efi_bootmgr_update_media_device_boot_option(void);
- /* Delete selected boot option */
- efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
-+efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env=
-_var,
-+				      u16 **load_options);
- /* search the boot option index in BootOrder */
- bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32=
- *index);
- /* Set up console modes */
- void efi_setup_console_size(void);
- /* Install device tree */
- efi_status_t efi_install_fdt(void *fdt);
-+efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
- /* Run loaded UEFI image */
- efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size);
- /* Initialize variable services */
-@@ -885,6 +889,9 @@ efi_status_t __efi_runtime EFIAPI efi_set_time(struct e=
-fi_time *time);
-  */
- efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
- 				 struct efi_system_table *systab);
-+efi_status_t bootefi_test_prepare (struct efi_loaded_image_obj **image_obj=
-p,
-+		 struct efi_loaded_image **loaded_image_infop, const char *path,
-+		 const char *load_options_path);
- #endif
-=20
- efi_status_t EFIAPI efi_get_variable(u16 *variable_name,
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 8d31fc61c601..529a9756a98c 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -44,6 +44,7 @@ endif
- obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
- obj-$(CONFIG_CMD_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
- obj-y +=3D efi_boottime.o
-+obj-y +=3D bootefi.o
- obj-y +=3D efi_helper.o
- obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) +=3D efi_capsule.o
- obj-$(CONFIG_EFI_CAPSULE_FIRMWARE) +=3D efi_firmware.o
-diff --git a/lib/efi_loader/bootefi.c b/lib/efi_loader/bootefi.c
-new file mode 100644
-index 000000000000..7b02b6f46eb5
---- /dev/null
-+++ b/lib/efi_loader/bootefi.c
-@@ -0,0 +1,530 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *  EFI application loader
-+ *
-+ *  Copyright (c) 2016 Alexander Graf
-+ */
-+
-+#define LOG_CATEGORY LOGC_EFI
-+
-+#include <common.h>
-+#include <bootm.h>
-+#include <charset.h>
-+#include <command.h>
-+#include <dm.h>
-+#include <efi_loader.h>
-+#include <efi_selftest.h>
-+#include <env.h>
-+#include <errno.h>
-+#include <image.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <asm/global_data.h>
-+#include <linux/libfdt.h>
-+#include <linux/libfdt_env.h>
-+#include <mapmem.h>
-+#include <memalign.h>
-+#include <asm-generic/sections.h>
-+#include <linux/linkage.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static struct efi_device_path *bootefi_image_path;
-+static struct efi_device_path *bootefi_device_path;
-+static void *image_addr;
-+static size_t image_size;
-+
-+/**
-+ * efi_get_image_parameters() - return image parameters
-+ *
-+ * @img_addr:		address of loaded image in memory
-+ * @img_size:		size of loaded image
-+ */
-+void efi_get_image_parameters(void **img_addr, size_t *img_size)
-+{
-+	*img_addr =3D image_addr;
-+	*img_size =3D image_size;
-+}
-+
-+/**
-+ * efi_clear_bootdev() - clear boot device
-+ */
-+void efi_clear_bootdev(void)
-+{
-+	efi_free_pool(bootefi_device_path);
-+	efi_free_pool(bootefi_image_path);
-+	bootefi_device_path =3D NULL;
-+	bootefi_image_path =3D NULL;
-+	image_addr =3D NULL;
-+	image_size =3D 0;
-+}
-+
-+/**
-+ * efi_set_bootdev() - set boot device
-+ *
-+ * This function is called when a file is loaded, e.g. via the 'load' comm=
-and.
-+ * We use the path to this file to inform the UEFI binary about the boot d=
-evice.
-+ *
-+ * @dev:		device, e.g. "MMC"
-+ * @devnr:		number of the device, e.g. "1:2"
-+ * @path:		path to file loaded
-+ * @buffer:		buffer with file loaded
-+ * @buffer_size:	size of file loaded
-+ */
-+void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
-+		     void *buffer, size_t buffer_size)
-+{
-+	struct efi_device_path *device, *image;
-+	efi_status_t ret;
-+
-+	log_debug("dev=3D%s, devnr=3D%s, path=3D%s, buffer=3D%p, size=3D%zx\n", d=
-ev,
-+		  devnr, path, buffer, buffer_size);
-+
-+	/* Forget overwritten image */
-+	if (buffer + buffer_size >=3D image_addr &&
-+	    image_addr + image_size >=3D buffer)
-+		efi_clear_bootdev();
-+
-+	/* Remember only PE-COFF and FIT images */
-+	if (efi_check_pe(buffer, buffer_size, NULL) !=3D EFI_SUCCESS) {
-+		if (IS_ENABLED(CONFIG_FIT) &&
-+		    !fit_check_format(buffer, IMAGE_SIZE_INVAL)) {
-+			/*
-+			 * FIT images of type EFI_OS are started via command
-+			 * bootm. We should not use their boot device with the
-+			 * bootefi command.
-+			 */
-+			buffer =3D 0;
-+			buffer_size =3D 0;
-+		} else {
-+			log_debug("- not remembering image\n");
-+			return;
-+		}
-+	}
-+
-+	/* efi_set_bootdev() is typically called repeatedly, recover memory */
-+	efi_clear_bootdev();
-+
-+	image_addr =3D buffer;
-+	image_size =3D buffer_size;
-+
-+	ret =3D efi_dp_from_name(dev, devnr, path, &device, &image);
-+	if (ret =3D=3D EFI_SUCCESS) {
-+		bootefi_device_path =3D device;
-+		if (image) {
-+			/* FIXME: image should not contain device */
-+			struct efi_device_path *image_tmp =3D image;
-+
-+			efi_dp_split_file_path(image, &device, &image);
-+			efi_free_pool(image_tmp);
-+		}
-+		bootefi_image_path =3D image;
-+		log_debug("- boot device %pD\n", device);
-+		if (image)
-+			log_debug("- image %pD\n", image);
-+	} else {
-+		log_debug("- efi_dp_from_name() failed, err=3D%lx\n", ret);
-+		efi_clear_bootdev();
-+	}
-+}
-+
-+/**
-+ * efi_env_set_load_options() - set load options from environment variable
-+ *
-+ * @handle:		the image handle
-+ * @env_var:		name of the environment variable
-+ * @load_options:	pointer to load options (output)
-+ * Return:		status code
-+ */
-+efi_status_t efi_env_set_load_options(efi_handle_t handle,
-+					     const char *env_var,
-+					     u16 **load_options)
-+{
-+	const char *env =3D env_get(env_var);
-+	size_t size;
-+	u16 *pos;
-+	efi_status_t ret;
-+
-+	*load_options =3D NULL;
-+	if (!env)
-+		return EFI_SUCCESS;
-+	size =3D sizeof(u16) * (utf8_utf16_strlen(env) + 1);
-+	pos =3D calloc(size, 1);
-+	if (!pos)
-+		return EFI_OUT_OF_RESOURCES;
-+	*load_options =3D pos;
-+	utf8_utf16_strcpy(&pos, env);
-+	ret =3D efi_set_load_options(handle, size, *load_options);
-+	if (ret !=3D EFI_SUCCESS) {
-+		free(*load_options);
-+		*load_options =3D NULL;
-+	}
-+	return ret;
-+}
-+
-+#if !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
-+
-+/**
-+ * copy_fdt() - Copy the device tree to a new location available to EFI
-+ *
-+ * The FDT is copied to a suitable location within the EFI memory map.
-+ * Additional 12 KiB are added to the space in case the device tree needs =
-to be
-+ * expanded later with fdt_open_into().
-+ *
-+ * @fdtp:	On entry a pointer to the flattened device tree.
-+ *		On exit a pointer to the copy of the flattened device tree.
-+ *		FDT start
-+ * Return:	status code
-+ */
-+static efi_status_t copy_fdt(void **fdtp)
-+{
-+	unsigned long fdt_ram_start =3D -1L, fdt_pages;
-+	efi_status_t ret =3D 0;
-+	void *fdt, *new_fdt;
-+	u64 new_fdt_addr;
-+	uint fdt_size;
-+	int i;
-+
-+	for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		u64 ram_start =3D gd->bd->bi_dram[i].start;
-+		u64 ram_size =3D gd->bd->bi_dram[i].size;
-+
-+		if (!ram_size)
-+			continue;
-+
-+		if (ram_start < fdt_ram_start)
-+			fdt_ram_start =3D ram_start;
-+	}
-+
-+	/*
-+	 * Give us at least 12 KiB of breathing room in case the device tree
-+	 * needs to be expanded later.
-+	 */
-+	fdt =3D *fdtp;
-+	fdt_pages =3D efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
-+	fdt_size =3D fdt_pages << EFI_PAGE_SHIFT;
-+
-+	ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-+				 EFI_ACPI_RECLAIM_MEMORY, fdt_pages,
-+				 &new_fdt_addr);
-+	if (ret !=3D EFI_SUCCESS) {
-+		log_err("ERROR: Failed to reserve space for FDT\n");
-+		goto done;
-+	}
-+	new_fdt =3D (void *)(uintptr_t)new_fdt_addr;
-+	memcpy(new_fdt, fdt, fdt_totalsize(fdt));
-+	fdt_set_totalsize(new_fdt, fdt_size);
-+
-+	*fdtp =3D (void *)(uintptr_t)new_fdt_addr;
-+done:
-+	return ret;
-+}
-+
-+/**
-+ * get_config_table() - get configuration table
-+ *
-+ * @guid:	GUID of the configuration table
-+ * Return:	pointer to configuration table or NULL
-+ */
-+static void *get_config_table(const efi_guid_t *guid)
-+{
-+	size_t i;
-+
-+	for (i =3D 0; i < systab.nr_tables; i++) {
-+		if (!guidcmp(guid, &systab.tables[i].guid))
-+			return systab.tables[i].table;
-+	}
-+	return NULL;
-+}
-+
-+#endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
-+
-+/**
-+ * efi_install_fdt() - install device tree
-+ *
-+ * If fdt is not EFI_FDT_USE_INTERNAL, the device tree located at that mem=
-ory
-+ * address will will be installed as configuration table, otherwise the de=
-vice
-+ * tree located at the address indicated by environment variable fdt_addr =
-or as
-+ * fallback fdtcontroladdr will be used.
-+ *
-+ * On architectures using ACPI tables device trees shall not be installed =
-as
-+ * configuration table.
-+ *
-+ * @fdt:	address of device tree or EFI_FDT_USE_INTERNAL to use the
-+ *		the hardware device tree as indicated by environment variable
-+ *		fdt_addr or as fallback the internal device tree as indicated by
-+ *		the environment variable fdtcontroladdr
-+ * Return:	status code
-+ */
-+efi_status_t efi_install_fdt(void *fdt)
-+{
-+	/*
-+	 * The EBBR spec requires that we have either an FDT or an ACPI table
-+	 * but not both.
-+	 */
-+#if CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
-+	if (fdt) {
-+		log_warning("WARNING: Can't have ACPI table and device tree - ignoring D=
-T.\n");
-+		return EFI_SUCCESS;
-+	}
-+#else
-+	struct bootm_headers img =3D { 0 };
-+	efi_status_t ret;
-+
-+	if (fdt =3D=3D EFI_FDT_USE_INTERNAL) {
-+		const char *fdt_opt;
-+		uintptr_t fdt_addr;
-+
-+		/* Look for device tree that is already installed */
-+		if (get_config_table(&efi_guid_fdt))
-+			return EFI_SUCCESS;
-+		/* Check if there is a hardware device tree */
-+		fdt_opt =3D env_get("fdt_addr");
-+		/* Use our own device tree as fallback */
-+		if (!fdt_opt) {
-+			fdt_opt =3D env_get("fdtcontroladdr");
-+			if (!fdt_opt) {
-+				log_err("ERROR: need device tree\n");
-+				return EFI_NOT_FOUND;
-+			}
-+		}
-+		fdt_addr =3D hextoul(fdt_opt, NULL);
-+		if (!fdt_addr) {
-+			log_err("ERROR: invalid $fdt_addr or $fdtcontroladdr\n");
-+			return EFI_LOAD_ERROR;
-+		}
-+		fdt =3D map_sysmem(fdt_addr, 0);
-+	}
-+
-+	/* Install device tree */
-+	if (fdt_check_header(fdt)) {
-+		log_err("ERROR: invalid device tree\n");
-+		return EFI_LOAD_ERROR;
-+	}
-+
-+	/* Prepare device tree for payload */
-+	ret =3D copy_fdt(&fdt);
-+	if (ret) {
-+		log_err("ERROR: out of memory\n");
-+		return EFI_OUT_OF_RESOURCES;
-+	}
-+
-+	if (image_setup_libfdt(&img, fdt, 0, NULL)) {
-+		log_err("ERROR: failed to process device tree\n");
-+		return EFI_LOAD_ERROR;
-+	}
-+
-+	/* Create memory reservations as indicated by the device tree */
-+	efi_carve_out_dt_rsv(fdt);
-+
-+	efi_try_purge_kaslr_seed(fdt);
-+
-+	if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
-+		ret =3D efi_tcg2_measure_dtb(fdt);
-+		if (ret =3D=3D EFI_SECURITY_VIOLATION) {
-+			log_err("ERROR: failed to measure DTB\n");
-+			return ret;
-+		}
-+	}
-+
-+	/* Install device tree as UEFI table */
-+	ret =3D efi_install_configuration_table(&efi_guid_fdt, fdt);
-+	if (ret !=3D EFI_SUCCESS) {
-+		log_err("ERROR: failed to install device tree\n");
-+		return ret;
-+	}
-+#endif /* GENERATE_ACPI_TABLE */
-+
-+	return EFI_SUCCESS;
-+}
-+
-+#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
-+static efi_status_t bootefi_run_prepare(const char *load_options_path,
-+		struct efi_device_path *device_path,
-+		struct efi_device_path *image_path,
-+		struct efi_loaded_image_obj **image_objp,
-+		struct efi_loaded_image **loaded_image_infop)
-+{
-+	efi_status_t ret;
-+	u16 *load_options;
-+
-+	ret =3D efi_setup_loaded_image(device_path, image_path, image_objp,
-+				     loaded_image_infop);
-+	if (ret !=3D EFI_SUCCESS)
-+		return ret;
-+
-+	/* Transfer environment variable as load options */
-+	return efi_env_set_load_options((efi_handle_t)*image_objp,
-+					load_options_path,
-+					&load_options);
-+}
-+
-+/**
-+ * bootefi_test_prepare() - prepare to run an EFI test
-+ *
-+ * Prepare to run a test as if it were provided by a loaded image.
-+ *
-+ * @image_objp:		pointer to be set to the loaded image handle
-+ * @loaded_image_infop:	pointer to be set to the loaded image protocol
-+ * @path:		dummy file path used to construct the device path
-+ *			set in the loaded image protocol
-+ * @load_options_path:	name of a U-Boot environment variable. Its value is
-+ *			set as load options in the loaded image protocol.
-+ * Return:		status code
-+ */
-+efi_status_t bootefi_test_prepare (struct efi_loaded_image_obj **image_obj=
-p,
-+		 struct efi_loaded_image **loaded_image_infop, const char *path,
-+		 const char *load_options_path)
-+{
-+	efi_status_t ret;
-+
-+	/* Construct a dummy device path */
-+	bootefi_device_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, 0, 0);
-+	if (!bootefi_device_path)
-+		return EFI_OUT_OF_RESOURCES;
-+
-+	bootefi_image_path =3D efi_dp_from_file(NULL, path);
-+	if (!bootefi_image_path) {
-+		ret =3D EFI_OUT_OF_RESOURCES;
-+		goto failure;
-+	}
-+
-+	ret =3D bootefi_run_prepare(load_options_path, bootefi_device_path,
-+				  bootefi_image_path, image_objp,
-+				  loaded_image_infop);
-+	if (ret =3D=3D EFI_SUCCESS)
-+		return ret;
-+
-+failure:
-+	efi_clear_bootdev();
-+	return ret;
-+}
-+#endif
-+
-+/**
-+ * do_bootefi_exec() - execute EFI binary
-+ *
-+ * The image indicated by @handle is started. When it returns the allocated
-+ * memory for the @load_options is freed.
-+ *
-+ * @handle:		handle of loaded image
-+ * @load_options:	load options
-+ * Return:		status code
-+ *
-+ * Load the EFI binary into a newly assigned memory unwinding the relocati=
-on
-+ * information, install the loaded image protocol, and call the binary.
-+ */
-+efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
-+{
-+	efi_status_t ret;
-+	efi_uintn_t exit_data_size =3D 0;
-+	u16 *exit_data =3D NULL;
-+
-+	/* On ARM switch from EL3 or secure mode to EL2 or non-secure mode */
-+	switch_to_non_secure_mode();
-+
-+	/*
-+	 * The UEFI standard requires that the watchdog timer is set to five
-+	 * minutes when invoking an EFI boot option.
-+	 *
-+	 * Unified Extensible Firmware Interface (UEFI), version 2.7 Errata A
-+	 * 7.5. Miscellaneous Boot Services - EFI_BOOT_SERVICES.SetWatchdogTimer
-+	 */
-+	ret =3D efi_set_watchdog(300);
-+	if (ret !=3D EFI_SUCCESS) {
-+		log_err("ERROR: Failed to set watchdog timer\n");
-+		goto out;
-+	}
-+
-+	/* Call our payload! */
-+	ret =3D EFI_CALL(efi_start_image(handle, &exit_data_size, &exit_data));
-+	if (ret !=3D EFI_SUCCESS) {
-+		log_err("## Application failed, r =3D %lu\n",
-+			ret & ~EFI_ERROR_MASK);
-+		if (exit_data) {
-+			log_err("## %ls\n", exit_data);
-+			efi_free_pool(exit_data);
-+		}
-+	}
-+
-+	efi_restore_gd();
-+
-+out:
-+	free(load_options);
-+
-+	if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-+		if (efi_initrd_deregister() !=3D EFI_SUCCESS)
-+			log_err("Failed to remove loadfile2 for initrd\n");
-+	}
-+
-+	/* Control is returned to U-Boot, disable EFI watchdog */
-+	efi_set_watchdog(0);
-+
-+	return ret;
-+}
-+
-+/**
-+ * efi_run_image() - run loaded UEFI image
-+ *
-+ * @source_buffer:	memory address of the UEFI image
-+ * @source_size:	size of the UEFI image
-+ * Return:		status code
-+ */
-+efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
-+{
-+	efi_handle_t mem_handle =3D NULL, handle;
-+	struct efi_device_path *file_path =3D NULL;
-+	struct efi_device_path *msg_path;
-+	efi_status_t ret, ret2;
-+	u16 *load_options;
-+
-+	if (!bootefi_device_path || !bootefi_image_path) {
-+		log_debug("Not loaded from disk\n");
-+		/*
-+		 * Special case for efi payload not loaded from disk,
-+		 * such as 'bootefi hello' or for example payload
-+		 * loaded directly into memory via JTAG, etc:
-+		 */
-+		file_path =3D efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-+					    (uintptr_t)source_buffer,
-+					    source_size);
-+		/*
-+		 * Make sure that device for device_path exist
-+		 * in load_image(). Otherwise, shell and grub will fail.
-+		 */
-+		ret =3D efi_install_multiple_protocol_interfaces(&mem_handle,
-+							       &efi_guid_device_path,
-+							       file_path, NULL);
-+		if (ret !=3D EFI_SUCCESS)
-+			goto out;
-+		msg_path =3D file_path;
-+	} else {
-+		file_path =3D efi_dp_append(bootefi_device_path,
-+					  bootefi_image_path);
-+		msg_path =3D bootefi_image_path;
-+		log_debug("Loaded from disk\n");
-+	}
-+
-+	log_info("Booting %pD\n", msg_path);
-+
-+	ret =3D EFI_CALL(efi_load_image(false, efi_root, file_path, source_buffer,
-+				      source_size, &handle));
-+	if (ret !=3D EFI_SUCCESS) {
-+		log_err("Loading image failed\n");
-+		goto out;
-+	}
-+
-+	/* Transfer environment variable as load options */
-+	ret =3D efi_env_set_load_options(handle, "bootargs", &load_options);
-+	if (ret !=3D EFI_SUCCESS)
-+		goto out;
-+
-+	ret =3D do_bootefi_exec(handle, load_options);
-+
-+out:
-+	ret2 =3D efi_uninstall_multiple_protocol_interfaces(mem_handle,
-+							  &efi_guid_device_path,
-+							  file_path, NULL);
-+	efi_free_pool(file_path);
-+	return (ret !=3D EFI_SUCCESS) ? ret : ret2;
-+}
-
-But that left needing to implement an API to start bootefi / bootefi
-bootmgr itself as we still end up in C making a string and calling the
-command, and ideally we would not be doing that with CMDLINE disabled.
-
---=20
-Tom
-
---CKxE+g6drjFgPIdr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUxSxUACgkQFHw5/5Y0
-tyxsmQv+LT3/5qZAOgfs97LnE3XkexpvftYzsGGm+APY2H3GOvvx0ykZFqPJj5k9
-AztsNjNm0rDE1SMFU9GqbN72pqJVnCNRaEWPjxoWb5lPYVwvQI9Z6ajvi5lxindN
-Pj7SnxmD7Am8njsUvNbuDsvSQxtLD3BT80OeaQhz59z3rxcGuwKvZ0DwmL+/k1Oe
-alaR0ULlxSgPhjdxF8Xwtf1K9jfrg0FeNiq5Ihy7xwyAxzIl0U7SbZSbCxOQBanM
-DtAN7rxnnob2y7XeQPmwFyHLJI4L0RrMM2XQvbEAUyjZ3De6mSAhghZh7iUVYbHn
-nTgqmrjcaRTrondtPXOTdgI+rLDRslMSXINxyADIzuN61RaXYyUfvQyO0AeBmSvU
-hNrrpo7RIh+6g872E0arJolNhZc9kMl+MqRWr6QVBtC585Ej0VBfehjGE65R8lTy
-p47L+i33eObsmWNE/6ZzBY4NI28yVloEamjAcPp20OHiTeKz/Zna0YVzQL6C86tZ
-XySgj+eA
-=ow51
------END PGP SIGNATURE-----
-
---CKxE+g6drjFgPIdr--
+-- 
+Best Regards,
+Igor Prusov
