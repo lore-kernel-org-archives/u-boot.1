@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEBDBC46CA1
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 10:30:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39202CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 10:31:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27793871E4;
-	Thu, 19 Oct 2023 12:30:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD1FA86FFA;
+	Thu, 19 Oct 2023 12:31:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vv2NXFpr";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Gii3ttL5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5B7287213; Thu, 19 Oct 2023 12:30:42 +0200 (CEST)
+ id E2551871E4; Thu, 19 Oct 2023 12:31:18 +0200 (CEST)
 Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2061f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::61f])
+ (mail-dm6nam11on20630.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::630])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6775586F8B
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 12:30:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C05C286F8B
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 12:31:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CH0A4t4xEs69aDID0hJz8SIqefj/ZH2RylO8F9nPQyw+k4rOJKEIPPZnxm9heMxJzlqXhCAmxNq6CCCFHr/V/Qinm1xjT8dQz6mCddJTXFWCsQk2jcwRufrjjTkfOuSE8iewlsfHokL2aX/wP7ok78nJKhIcWFRa6DJ8t0nrBYHz2Bo6jUwSjkfM3rGRe/0/cXtSPcZo8FWDK6yVIwe/watUQLBpQc/l1/+Vo4RyuMN95qk6lw2RGPUmXJ9kOAq7Q+raN/wCeAAUok9nyD9uQEWs3jmw7eldH0hX8XCKWoUmy5ghkMvSmmt/9uU6URQ859jV1/ISY8Y+ci0IiJkstw==
+ b=SRrHmRhgLfGtfWzQfiHRDwj6KAl2B85cYP0nj9N4CjXgqV/MI2+hmW9q8ilRnbUE9aB/6eUvitBk1oACQ9v2w/OttLHnbYm714gfQy2Gz5DmMc+XMVHpFrUsmwJLmxLj/d7LWMHmIRm4deMsMYA7RBem/TOFoJMvPC3HdQmslmfZvo1zJhC6lyPJFQXAyMJ6PJ2VcCsaz7Tb/WvbYUPL0a8E1uHtFdKqqXKgQKvDRGlhlvO45DP9DhVBMZhN2eg8nFjW3uI3qRD8FDiv+uLyWMjVPmJEvmjtZ3EuEg3obV5EOUFauJSHo6+ZRYLqDNjHCoBsz6CV11CdHRXlDlqVtw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LXtcGhoCYwm26bNjS9izYpHK7cxGgFC6YeKKE950m/s=;
- b=CGGBCks6EtwDdVmF9qL/rbDuvDqrBV3YYCPy2C16Hh1w4W4V7fK5XqepI1dVT7iBdPpRUZYo1kKqFv/GYuDuH4xM19jCYZGBBlyUHqaeU32KgE+NneHiE82ZQ40W7eUz29vo7kwWqkACLhvPz4esvAnbpWhJQB9SUdrO6JHk/IrxSouGLPO/l29b/5UjQ4GKLx7a4v9HK+QbS9tkYSToRISl1eEVl3Q9Lmz6GlRd+Zo+mgGZ9QkbQgyHK72FwYXe5uYpthVqbvFhBJAKLvk+ra2hKgeF2DQVtKdGWDotwGZ4YAVyMrvvowFKxn9hdiiHLodvDiVGmQ6+yT9s3EYZGw==
+ bh=uTkWJCeJx0Z92DynbUSAh/Q0jxNQOlzNH1/mf+2y2nQ=;
+ b=hO1r9c9T6wm/oIVyGdxRyJJkhZL2PD4XY+IYoq3lly/GKS/qtV9Hees+4WzBj4TCcMn7NJsVIyOgcfQdRg82QLa1BKOMB3FLjiH3/qs6SUZ/obnwfOlsxxbj2GZS9lzL8FFoDB4S9Y3QQbtOFCfi1eMGuFnQSYYZPV8nB1Oyz4JH+mZ9vPGz/VoK+fTXgh+C8ivaxcuzwjhQ/bzzWfSoileJBQo5yDshi5C3MHZ58eyNnPE/ghl+6NGGxXGXQJv/t3HHx5qJlIl6zAFa0vN1jgonct2WPSGrQIl1o0TyfRD2vZ5OuRyd3aWXH9km9Ta2JwbPgYHKGsbClwKum6w7vQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LXtcGhoCYwm26bNjS9izYpHK7cxGgFC6YeKKE950m/s=;
- b=vv2NXFpr+dbClaDha2vECX1L1hzVTxPY9TCignJLnYswVEQCwyT7VD4EG8/yao/NEoFckJEE0saDpnsSCsYkOJ2whQ5UYFvmtLqcVRboOxao0uDRQCm7LxaJa6i3IeD2zhTikIVg2o18jOOGjLk91CXqnVJR+7z8snIAQ6/QZV0=
+ bh=uTkWJCeJx0Z92DynbUSAh/Q0jxNQOlzNH1/mf+2y2nQ=;
+ b=Gii3ttL52aOJFsf7EIglwrQvpNljOuWcNhQ2PO+gKKzzg9lcXcIpAoO1oEV+0fSfhVsafwEhGP0PVWfHOSrJavNrUmw+OSbrm1jg32N50+aqrjRcr+qEacqM7Cn1MhVWJ1wUJ794SRSOpe3NqWvECvhBYP1rpBrKNe6JUp+Y2fc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
  by LV3PR12MB9166.namprd12.prod.outlook.com (2603:10b6:408:19c::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.46; Thu, 19 Oct
- 2023 10:30:37 +0000
+ 2023 10:31:14 +0000
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::b220:eeee:98e7:a62e]) by BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::b220:eeee:98e7:a62e%4]) with mapi id 15.20.6907.022; Thu, 19 Oct 2023
- 10:30:37 +0000
-Message-ID: <0153dc95-0ff3-49c2-9c70-b997e9b10076@amd.com>
-Date: Thu, 19 Oct 2023 12:30:33 +0200
+ 10:31:14 +0000
+Message-ID: <0cc5eeea-5717-470e-854c-636b80378fff@amd.com>
+Date: Thu, 19 Oct 2023 12:31:10 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] zynqmp: migrate gqspi debug to logging
+Subject: Re: [PATCH v2 0/3] Add spi flash lock option
 Content-Language: en-US
-To: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, u-boot@lists.denx.de,
- git@xilinx.com
-References: <20231013123739.2757979-1-ibai.erkiaga-elorza@amd.com>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, git@xilinx.com
+References: <20231003031715.5343-1-venkatesh.abbarapu@amd.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -105,7 +105,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20231013123739.2757979-1-ibai.erkiaga-elorza@amd.com>
+In-Reply-To: <20231003031715.5343-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR03CA0066.eurprd03.prod.outlook.com
@@ -114,61 +114,61 @@ X-ClientProxiedBy: VI1PR03CA0066.eurprd03.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|LV3PR12MB9166:EE_
-X-MS-Office365-Filtering-Correlation-Id: 407b7cc5-5591-4110-0d9a-08dbd08e6f04
+X-MS-Office365-Filtering-Correlation-Id: 8835be88-f627-47db-89ec-08dbd08e8516
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: bumShsj0n4LuibvwXSFsVkhzjZTHdMWCNU3bQOb61Z9mqjBL/8zlOjkeM+WyzhJlXptzbQQ1A8QQ8GhVfnhkioWIeGGkE7L1h/Q6lst45kxflof8ZcCJ9sqC9xdxXnl6erJAk2XkRlD6ztmfoZyaWcjtf+aB6FB3Ecpc4OR24o4rnfWUo6amhXjtwAdGP15q6pCnYifDVjHKGeiw07oSAqJRB99ylazfFihEa7oVEC2gXJYYWHgnW7sTzWc15oO8wGpWjbqHBkIchJk8146GhAG5ihJ0TwED5zPyNg6V0gSmer0YoZXNroOlRt9fq3crvg35R6EJdK7GSEw670nn6jLm0hB5Z66s0IH80txMdKwR5ErFSz5RtZ1cgPFGcGwXI0emQ9VohSg9jXDAzRL9tLFkuUe//g8n0TBFW2+gAyb568ybPQJJuWYbfw4Mq7vEilfPqBqCruarm+O8Z0guh1jGT8KU0Q8P+OrrVdGzm8CzVsTzGUq6arzWsZ6NRVdy0+qVftzL2eb4uOeKCt0MB8RmY8RoBONqpTiiMdjV/HVhi1m8V/ntE+wXu4S4FRMFeVL+jdicF1Qh/sf7uO+QCy+gH/naKHrUVeJkUCaI8jECRAlge4/O1IzvgeC2CStj5cb2xj2I0iDRZz1fdN3j1Q==
+X-Microsoft-Antispam-Message-Info: f1whD20wtQtkhdBxZj8yMSbni7w0BYOxV3QPwRufhwauSF5m0LhEjUAQQP7gsspocyIcv4J9xgRAxYi63Sqm/evD1YKJNiSMNPVwUcEwTgO0ha1r6uJbJztXbFhh6PM41cRwrYnDnw0Lc/WOMVLRBv2d0ZNNEstY77zH2Qb6WIUYb11fgL6U+3Ly/9Y5wgTt0rxAMVne534vvaDTRRACHNlCMct78tyXE1/f+C1fA/s5clzB8RwX/8pyf6gIl4Cib2sIR8UYYpwFFRBiXE0p/T0b8VQMVJFp3mRBRQ6DIRZwWF4wqPVIw/jtAHtEbVX92S6t9Dk73q8lJscyYi4HCGQDl8JVlj19CCPPjedRfgOvoY4kG+9dvSx4XDQyyta6ULr7GQuBntqFBaaHepcHzrI5Q8ci1YofpUgdxU6TjKXJiWm24WtIKiYeR//X2gLw/KsxB4RR2PJDMAAvTu2gIVdeKb+2oHaVlBw6DtVzdKTEk/ahOjq5bX1jUHNoEV6RkI7Gm2orHgIVgoto4wsX+tndegCFCMnA03celtWmSubdfY6SPBdoyqhsgr3Uaa7no4kIOuM5G6hO1Dbw3UmmSGyRoZaThIZI5eOUKuug2AedkKERoWPZJf7viYjHYjDS9F8jkjEC09ueZBonnRtJnQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(39860400002)(366004)(346002)(136003)(396003)(230922051799003)(1800799009)(64100799003)(451199024)(186009)(36756003)(44832011)(5660300002)(66476007)(66556008)(41300700001)(316002)(8936002)(2906002)(8676002)(31696002)(86362001)(66946007)(31686004)(83380400001)(38100700002)(478600001)(6666004)(6512007)(53546011)(6506007)(2616005)(26005)(6486002)(43740500002)(45980500001);
+ SFS:(13230031)(376002)(39860400002)(366004)(346002)(136003)(396003)(230922051799003)(1800799009)(64100799003)(451199024)(186009)(4744005)(36756003)(4326008)(44832011)(5660300002)(66476007)(66556008)(41300700001)(316002)(8936002)(2906002)(8676002)(31696002)(86362001)(66946007)(31686004)(83380400001)(38100700002)(478600001)(6666004)(6512007)(53546011)(6506007)(2616005)(26005)(6486002)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MmhybVhoWnRCWDVRV04zSUduQzIrV0UxeU1wNjdsQ0tSZG9GZE5uYThETUw5?=
- =?utf-8?B?cWlXc3lLUjVVUUlwZC9yN05ZZE9oaUEvb2dnNnUwMkZDWjNjdFhqeFdKcUNQ?=
- =?utf-8?B?TFFIeHNaTTlZR1RxeWdpNkl3dk0rRHowcktpV0d4TkhDSUlzZ2EyeWUxNUd1?=
- =?utf-8?B?K3NLOXdqUjA0R3QwdEFtRm9KWWl2NWQrcGpaalpwRzRqY0RXWndqa0FVN3VW?=
- =?utf-8?B?VGxhV2FPdjZPeHVPTGU5T0dtRGlYQjErYUQ4TGM2QkdJUjFjU20yTlcrSmtv?=
- =?utf-8?B?anpyc0dWS0VBcGZqdHRTY1ByTlBrRnIzMlplRVpEN3JHVWxreGd1Nmk0ZTIy?=
- =?utf-8?B?OU1pa3UwR05VVXVyQ0M1aHdHMm95cVBKaEk0Um4zWHRjRlBQTFJBUWd3OHJ1?=
- =?utf-8?B?MEc1UWRIUnFzanV3RzVRY0pQbFM2MndCbWV6REtJaXRyWHpsc3lWVmJJcVZ6?=
- =?utf-8?B?ckMwUXdJaHBQaUtWc0huVlpUNFNBZW01NW5QZUhieEhnaDFUUFZxL3cxeUJD?=
- =?utf-8?B?cDNSRlRBSkk0OTZtWWpsdnVhaExHdkVwYVJjL21PMjRuNzJsRTh1MFFFbWd4?=
- =?utf-8?B?MnVjTFlRcnlWWENMY2NiemNGb3YzR241cGYydEVYdHRMMFpqeTR4VDZhdTl1?=
- =?utf-8?B?bU1OUW5OYXdUUXJWM09ocFNDNTdCWWhDZmcrZjROK2k2S3ZiWk10dHB3WXpF?=
- =?utf-8?B?VlcrVG9VL0VGZXgxTHR5cW1EeDcrY28xdTZ2cmQxd3o3WU1CdklmZnlUM0dx?=
- =?utf-8?B?M01lZFBmYVczZ3FKR1dNaFBrSUpzUWoranBLRkRyQXJkbjV6c2x4aUQ3dDF2?=
- =?utf-8?B?VkJHeTgwdmpDRDI1V1Jib1ZVN1pNUjFxQjdnc1NzOWxmSEFZaHNaeExHLzhO?=
- =?utf-8?B?WHM4OHp6cnZiTHpUMW5yTVkrUGNsUXE3M0ZhZW5xdjE0d3M5cXN3dXcySlEz?=
- =?utf-8?B?KzJSK2tsN2cvK3R5VGRnUU5TQ096SjRES21RQ0VBTjJ6TGtoZmJISnlPdW5Z?=
- =?utf-8?B?VkFqQlE2MGw3RDY4b1lXK0huV3Y3OUxOc2VOQVl4Z04yVFRMTzRvYjEzbWFP?=
- =?utf-8?B?aVUvWTJnenpiNWxzbEVpNWRrcFZORzJFUnhxMHllUzlNSk9PbmM5ellSYlN1?=
- =?utf-8?B?MXZmSEpaNFZEYm1pRnZxazk0b25SRnk4WVNBbHNTcXdURlFYTS9SbkkxcTRO?=
- =?utf-8?B?bmxtU2YrVzdNaWF3a0E2OVR3MzVPbWRQbDJLZGdhd01qTlB2bGFTTmE5dFBq?=
- =?utf-8?B?Yk1hN2c3TS9XVmEzZm5XTnF4S2xKSkVqNFAvRkNpQmRYdzd2WlFaa2JiM3lV?=
- =?utf-8?B?Q1NLZk1QYzlvSDFvTmxkVHlpVjZLLzBGY09KaWI2MnpGeFUrenBYbGJ2d2pq?=
- =?utf-8?B?cHZweFZmWXFSaGxiUE9Ud2lhN0QyVmhtSGlvRkxaM2Zla3ZLOXZWb2UwSXR4?=
- =?utf-8?B?b2ZlMkRHMzljLzErUFN3Vzgwcm1NTFdGL0trM2xVVk9DQndMR0dsY3hObThk?=
- =?utf-8?B?eVRJeWdMRXhiajBMUC9GQTBDTGtzaWRvVHFpeGViaGxPSjg1eGdGSC9tdml4?=
- =?utf-8?B?K3NjV1BlZXVmbWJUOEt2aVBPSUJHQUx1VWpZRmRtS2NuSGNyVGJDb3RtVXFV?=
- =?utf-8?B?WDV0SERKUXlOZVNLMEFseUdVMHd2am93UlFLaTlVak1PLzZ5cmZnN3RPWDdn?=
- =?utf-8?B?QnRxN3FJL211NjdwcFlSMFhRK3FNN1VWUWg5aThIN0NjTFN2cjBaUjRyamFO?=
- =?utf-8?B?SXFUTkJDWHJWTGhJOWpKYWRUSGhuTGE2L09NREdXSVZtVnZkMXYvY2pKQWty?=
- =?utf-8?B?RUNCNFJmK2dNQ3dRb2hSUytVemdpR1BJUjVLSEhMNmVkTWxuUkpWSm85bnMy?=
- =?utf-8?B?VThLWXlzNWppSkN2K1I5ajFXZy9jdkFuQVV5a2ptbnAyUW55V2w5aHNydFRz?=
- =?utf-8?B?S09pRG1QcmpxVXNwYTJ0N1B6VUxkVlQrVlFxR2dNQVhLamN6TENaTzY4OHds?=
- =?utf-8?B?MzdqZTdRQjlpZGEwcTV5Q3ZaYWtVNkhZbjJsL3QrWEowd1JoSndheWJaV2wz?=
- =?utf-8?B?Y2h3d0pXL2p3REg1Q2srRmtGYi9zNWlwNXh3K3FQMDNqM1B2UUJMZ0x3L2h6?=
- =?utf-8?Q?fwSfRr7bcwfzy20KFk1fw70Sb?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OUc3Rm8rVEsrVFpkbW1FWGhMMkR3bTM0TUludXhYaWlFMUlUaEh2a1VSSEhL?=
+ =?utf-8?B?Z3NqUVozS0J5ekZvZk9YYWN1R1l2MjloeTNBK3I0QzFscTZ4RVZYYmNld1I3?=
+ =?utf-8?B?d0IzbUtRSTJEaVpmUEZOeEpUQ1BGc1N6M0JLMGdSRkxYSkNCSk00b1NSbjdm?=
+ =?utf-8?B?b2hFOW9UMTczNE5FQVFMdWtaeUU4dEhZK1VXdEN4Q1FiTC9YSEJ5QTZrVng4?=
+ =?utf-8?B?dVdmd08zN1VCWDJjV1RSdkw0RS9DN3BodmVJMGFxTHk1L2NEeVpSbTFWM04z?=
+ =?utf-8?B?anNDak5uRFdraXhyQVJKWFd6SDlnRDhRVFdJUExsNHM0ZzIrWXdOekVGTlh4?=
+ =?utf-8?B?djVteXgvS21LY3duS25kclpEWnlVNW5zQ3VDMFJCZkc5MEwwUGY0NHRQVzNQ?=
+ =?utf-8?B?UlJ3YXQ2MzA1Rkp3SmFWTFVQNENZb3ZoQkFqdzZtZlkveVROZGNTNVFIMHd3?=
+ =?utf-8?B?R010aHNZRzhGY2UrRGVOQTJzNHcrU3AwSDhhdmVzTlpxb3FySGJNV29ZdWdp?=
+ =?utf-8?B?L3BQWDF3WkgreTlZSnZqdVhpSWtDT1JUdnJzTWVMeGQ1UThuUG12T1RzZ2dX?=
+ =?utf-8?B?bGJHRU10a3k3ZXB4aUQwbFphYnYrYVN0VHJiOXA3WDZ6M3Q3czIyUXdEcEhG?=
+ =?utf-8?B?T2wweDJOYkd6R2p3MnI5Z3pJdGNoQlI1ZllsNGdyU2tBOC9oMFI1RjhNMllU?=
+ =?utf-8?B?NGpMYWJ1YUhyL2tYdFBwdTlFL2thMzJQZ0dPOHZ3SHc2MjFTN0FmRk94SU5n?=
+ =?utf-8?B?c0RtWWx1SnhwVEJQa3JxRVA0eTNUSXFwWEwzS1hSY095TDEyR1lkdXRYVExL?=
+ =?utf-8?B?ZmlkWkt3cWVLSFBYK2c2YjVZeVhRYVF1RkM5cUI3ZklwZUtrVVVQOHM1dy9p?=
+ =?utf-8?B?aHNWZ2xwY05xMGdQbTEvSm1xTTdmdlVHejlvT1I1TEw0SndiNU5Nc0g1TWdK?=
+ =?utf-8?B?MGJGWHdua0lueUhEOE9Cb0pLUk1tSEZla3I4OWNkQlJ0RC9QbFRieGtiRFV4?=
+ =?utf-8?B?S3pvTzNWMW9aSEg4L1NxRTMycS9BbXBYcVpoSU56bUxYanJySG9qVnhVejFo?=
+ =?utf-8?B?eVZQalM3a0hqTk1qMEUyWDRDZ0xqQUxKRHNVZnB2NlM5SmpILzUzOTRlM0Jx?=
+ =?utf-8?B?UVNHblpEVThka0xKR1N2N1I0ZkNaVFdueDJBUERkRzdOQ29pYjFBL2J1WDA2?=
+ =?utf-8?B?YUlxZ2lKa1Y1WUVmMlpoU0lLL0ZjQlhXQ0h0cVZYVFc1S1FmSGJiNjR3Yzl5?=
+ =?utf-8?B?QmwvSlFHR2RMR3pxZ2hPUkNnOVVnQmFSTW9CbFdFMDEzZlJZbDJySjNRa2VB?=
+ =?utf-8?B?MzNqYjZEbGJOd1FmMWlPYTlmbmFLZDRTelpNVHlzSUVmYkdCSCtBK09aOTEy?=
+ =?utf-8?B?RFI2aU9mVnNLeTZ5R2VMMHlPY1QrT1dpcEZIUFM0RWp3SXA0RGlnbE53R2R1?=
+ =?utf-8?B?d09veUd2QnBob1I2cjNXYlg1d2lTK01hcDFQY1htS3ZxSnk5U1I5UVhqdDNq?=
+ =?utf-8?B?STlHTnMwWHZVUjZ5K2FldkFuOFFMc0RlZmIzdncxdHN5RGdzSytPbEVKVHgx?=
+ =?utf-8?B?YXdOOCtPSVA2UXh2dFYvTjdTVU9zNFVTb0NjQTRobjVvYXpGMm0wb1VlT001?=
+ =?utf-8?B?VTlJZjRNTzVjREEwZThDcjVRbHlrL0owMVRrSWVXTWxWYVNzMVVqWHJTaWVo?=
+ =?utf-8?B?MitzRVF5bFV5Yk9lOG1hVkR2SlM3SnB5ZDBhaS90ci92QmNzdVllL3l4dzFr?=
+ =?utf-8?B?U3FDQ1JlbHpaNE5HQUNtUTI5NFFrS3hyU05pVDBLZHNtMzdqNnVkclljR0dE?=
+ =?utf-8?B?REZrK3dXWDFYQnFYeFR5RmcwdTV3bDZJYnB3TjJPS1ltUjZFUUNkZWNkWFd4?=
+ =?utf-8?B?dmJ4cjZ0SmNzMldlQjlFZW92V1d0WldjenZMcFc1cTVCcXltMkhMVEZZWlZB?=
+ =?utf-8?B?aWJBM21HR29wVTI1K21UaHhpM2ZWUW1ycURpRXN2YmJJL0J6ZnFXcmh0QmNK?=
+ =?utf-8?B?a1VrNFFCLy8rM2p1VzNrMkZER2hudytNcVlVbnpITkpiT3VET2xCaE5wcmpO?=
+ =?utf-8?B?M205ZEdkUTk0dDBlQmxXbkFzSVFtNnF4c2tVZUlPLzlkYm9wRHkvSzZjTktY?=
+ =?utf-8?Q?KB3O5pohDrOvfkpEsE06NW+Oz?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 407b7cc5-5591-4110-0d9a-08dbd08e6f04
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8835be88-f627-47db-89ec-08dbd08e8516
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2023 10:30:37.0754 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2023 10:31:14.2494 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wEEhYBBzQBoHgeHimP6nFGJuF6cfU6Z2gabz0iZZP9JvaA8147jXGqZkY8ht5LYF
+X-MS-Exchange-CrossTenant-UserPrincipalName: /Pip95hGH+AaflZSqggLs7LHxqFw1GbB08asPrH9Fl+xPFUQF0tW9f9H1IZNiJzK
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9166
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -188,297 +188,29 @@ X-Virus-Status: Clean
 
 
 
-On 10/13/23 14:37, Ibai Erkiaga wrote:
-> The following patch migrates the usage of debug and printf functions
-> to the relevant logging function as per U-Boot DM guidelines.
+On 10/3/23 05:17, Venkatesh Yadav Abbarapu wrote:
+> Disabling the flash lock option for versal and versal-net mini ospi
+> and qspi defconfigs.
 > 
-> Additionally some of the debugging statements have been rearanged for
-> a more meaningfull debug experience.
+> Changes in v2:
+> - Updated the commit message.
+> - Added SPI_FLASH_LOCK in cmd/sf.c, so when disabling this option
+>    "sf protect" commands wont appear to users.
 > 
-> aarch64-linux-gnu-size reports 229 bytes less when debug is enabled at
-> file level, while is just 5bytes more when disabled.
+> Venkatesh Yadav Abbarapu (3):
+>    mtd: spi-nor: Add spi flash lock config option
+>    arm64: versal: Disable the lock option for mini ospi and qspi
+>    arm64: versal_net: Disable the lock option for mini ospi and qspi
 > 
-> Signed-off-by: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
-> ---
->   drivers/spi/zynqmp_gqspi.c | 82 +++++++++++++++-----------------------
->   1 file changed, 33 insertions(+), 49 deletions(-)
+>   cmd/sf.c                                      | 4 +++-
+>   configs/xilinx_versal_mini_ospi_defconfig     | 3 ++-
+>   configs/xilinx_versal_mini_qspi_defconfig     | 3 ++-
+>   configs/xilinx_versal_net_mini_ospi_defconfig | 3 ++-
+>   configs/xilinx_versal_net_mini_qspi_defconfig | 3 ++-
+>   drivers/mtd/spi/Kconfig                       | 7 +++++++
+>   drivers/mtd/spi/spi-nor-core.c                | 8 +++++++-
+>   7 files changed, 25 insertions(+), 6 deletions(-)
 > 
-> diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
-> index ec59ef5804..a323994fb2 100644
-> --- a/drivers/spi/zynqmp_gqspi.c
-> +++ b/drivers/spi/zynqmp_gqspi.c
-> @@ -5,6 +5,8 @@
->    * Xilinx ZynqMP Generic Quad-SPI(QSPI) controller driver(master mode only)
->    */
->   
-> +#define LOG_CATEGORY UCLASS_SPI
-> +
->   #include <common.h>
->   #include <cpu_func.h>
->   #include <log.h>
-> @@ -192,8 +194,6 @@ static int zynqmp_qspi_of_to_plat(struct udevice *bus)
->   {
->   	struct zynqmp_qspi_plat *plat = dev_get_plat(bus);
->   
-> -	debug("%s\n", __func__);
-> -
->   	plat->regs = (struct zynqmp_qspi_regs *)(dev_read_addr(bus) +
->   						 GQSPI_REG_OFFSET);
->   	plat->dma_regs = (struct zynqmp_qspi_dma_regs *)
-> @@ -250,7 +250,7 @@ static u32 zynqmp_qspi_genfifo_mode(u8 buswidth)
->   	case 4:
->   		return GQSPI_SPI_MODE_QSPI;
->   	default:
-> -		debug("Unsupported bus width %u\n", buswidth);
-> +		log_warning("Unsupported bus width %u\n", buswidth);
->   		return GQSPI_SPI_MODE_SPI;
->   	}
->   }
-> @@ -262,6 +262,8 @@ static void zynqmp_qspi_fill_gen_fifo(struct zynqmp_qspi_priv *priv,
->   	u32 config_reg, ier;
->   	int ret = 0;
->   
-> +	log_content("%s, GFIFO_CMD: 0x%X\n", __func__, gqspi_fifo_reg);
-> +
->   	writel(gqspi_fifo_reg, &regs->genfifo);
->   
->   	config_reg = readl(&regs->confr);
-> @@ -278,7 +280,7 @@ static void zynqmp_qspi_fill_gen_fifo(struct zynqmp_qspi_priv *priv,
->   	ret = wait_for_bit_le32(&regs->isr, GQSPI_IXR_GFEMTY_MASK, 1,
->   				GQSPI_TIMEOUT, 1);
->   	if (ret)
-> -		printf("%s Timeout\n", __func__);
-> +		log_warning("%s, Timeout\n", __func__);
->   
->   }
->   
-> @@ -286,6 +288,8 @@ static void zynqmp_qspi_chipselect(struct zynqmp_qspi_priv *priv, int is_on)
->   {
->   	u32 gqspi_fifo_reg = 0;
->   
-> +	log_debug("%s, assert: %d\r\n", __func__, is_on);
-> +
->   	if (is_on) {
->   		gqspi_fifo_reg = zynqmp_qspi_bus_select(priv);
->   		gqspi_fifo_reg |= GQSPI_SPI_MODE_SPI |
-> @@ -295,8 +299,6 @@ static void zynqmp_qspi_chipselect(struct zynqmp_qspi_priv *priv, int is_on)
->   		gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
->   	}
->   
-> -	debug("GFIFO_CMD_CS: 0x%x\n", gqspi_fifo_reg);
-> -
->   	zynqmp_qspi_fill_gen_fifo(priv, gqspi_fifo_reg);
->   }
->   
-> @@ -311,8 +313,8 @@ static void zynqmp_qspi_set_tapdelay(struct udevice *bus, u32 baudrateval)
->   	clk_rate = plat->frequency;
->   	reqhz = (clk_rate / (GQSPI_BAUD_DIV_SHIFT << baudrateval));
->   
-> -	debug("%s, req_hz:%d, clk_rate:%d, baudrateval:%d\n",
-> -	      __func__, reqhz, clk_rate, baudrateval);
-> +	log_debug("%s, clk_rate:%d, baudrateval:%d, bus_clk: %d\n",
-> +		  __func__, clk_rate, baudrateval, reqhz);
->   
->   	if (!(IS_ENABLED(CONFIG_ARCH_VERSAL) ||
->   	      IS_ENABLED(CONFIG_ARCH_VERSAL_NET))) {
-> @@ -362,7 +364,8 @@ static int zynqmp_qspi_set_speed(struct udevice *bus, uint speed)
->   	u32 confr;
->   	u8 baud_rate_val = 0;
->   
-> -	debug("%s\n", __func__);
-> +	log_debug("%s, Speed: %d, Max: %d\n", __func__, speed, plat->frequency);
-> +
->   	if (speed > plat->frequency)
->   		speed = plat->frequency;
->   
-> @@ -383,9 +386,8 @@ static int zynqmp_qspi_set_speed(struct udevice *bus, uint speed)
->   		confr &= ~GQSPI_BAUD_DIV_MASK;
->   		confr |= (baud_rate_val << 3);
->   		writel(confr, &regs->confr);
-> -		zynqmp_qspi_set_tapdelay(bus, baud_rate_val);
->   
-> -		debug("regs=%p, speed=%d\n", priv->regs, plat->speed_hz);
-> +		zynqmp_qspi_set_tapdelay(bus, baud_rate_val);
->   	}
->   
->   	return 0;
-> @@ -399,8 +401,6 @@ static int zynqmp_qspi_probe(struct udevice *bus)
->   	unsigned long clock;
->   	int ret;
->   
-> -	debug("%s: bus:%p, priv:%p\n", __func__, bus, priv);
-> -
->   	priv->regs = plat->regs;
->   	priv->dma_regs = plat->dma_regs;
->   	priv->io_mode = plat->io_mode;
-> @@ -416,7 +416,6 @@ static int zynqmp_qspi_probe(struct udevice *bus)
->   		dev_err(bus, "failed to get rate\n");
->   		return clock;
->   	}
-> -	debug("%s: CLK %ld\n", __func__, clock);
->   
->   	ret = clk_enable(&clk);
->   	if (ret) {
-> @@ -429,6 +428,8 @@ static int zynqmp_qspi_probe(struct udevice *bus)
->   	/* init the zynq spi hw */
->   	zynqmp_qspi_init_hw(priv);
->   
-> +	log_debug("%s, Rerence clock frequency: %ld\n", __func__, clock);
-> +
->   	return 0;
->   }
->   
-> @@ -438,7 +439,8 @@ static int zynqmp_qspi_set_mode(struct udevice *bus, uint mode)
->   	struct zynqmp_qspi_regs *regs = priv->regs;
->   	u32 confr;
->   
-> -	debug("%s\n", __func__);
-> +	log_debug("%s, 0x%X\n", __func__, mode);
-> +
->   	/* Set the SPI Clock phase and polarities */
->   	confr = readl(&regs->confr);
->   	confr &= ~(GQSPI_CONFIG_CPHA_MASK | GQSPI_CONFIG_CPOL_MASK);
-> @@ -461,16 +463,11 @@ static int zynqmp_qspi_fill_tx_fifo(struct zynqmp_qspi_priv *priv, u32 size)
->   	u32 *buf = (u32 *)priv->tx_buf;
->   	u32 len = size;
->   
-> -	debug("TxFIFO: 0x%x, size: 0x%x\n", readl(&regs->isr),
-> -	      size);
-> -
->   	while (size) {
->   		ret = wait_for_bit_le32(&regs->isr, GQSPI_IXR_TXNFULL_MASK, 1,
->   					GQSPI_TIMEOUT, 1);
-> -		if (ret) {
-> -			printf("%s: Timeout\n", __func__);
-> -			return ret;
-> -		}
-> +		if (ret)
-> +			return log_msg_ret("Timeout\n", ret);
->   
->   		if (size >= 4) {
->   			writel(*buf, &regs->txd0r);
-> @@ -501,10 +498,8 @@ static int zynqmp_qspi_fill_tx_fifo(struct zynqmp_qspi_priv *priv, u32 size)
->   
->   	ret = wait_for_bit_le32(&regs->isr, GQSPI_IXR_TXFIFOEMPTY_MASK, 1,
->   				GQSPI_TIMEOUT, 1);
-> -	if (ret) {
-> -		printf("%s: Timeout\n", __func__);
-> -		return ret;
-> -	}
-> +	if (ret)
-> +		return log_msg_ret("Timeout\n", ret);
->   
->   	priv->tx_buf += len;
->   	return 0;
-> @@ -516,6 +511,9 @@ static void zynqmp_qspi_genfifo_cmd(struct zynqmp_qspi_priv *priv)
->   	u32 gen_fifo_cmd;
->   	u8 i, dummy_cycles, addr;
->   
-> +	log_debug("%s, opcode: 0x%0X, addr.nbytes: %d, dummy.mbytes: %d\r\n",
-> +		  __func__, op->cmd.opcode, op->addr.nbytes, op->dummy.nbytes);
-> +
->   	/* Send opcode */
->   	gen_fifo_cmd = zynqmp_qspi_bus_select(priv);
->   	gen_fifo_cmd |= zynqmp_qspi_genfifo_mode(op->cmd.buswidth);
-> @@ -532,8 +530,6 @@ static void zynqmp_qspi_genfifo_cmd(struct zynqmp_qspi_priv *priv)
->   		gen_fifo_cmd |= GQSPI_GFIFO_TX;
->   		gen_fifo_cmd |= addr;
->   
-> -		debug("GFIFO_CMD_Cmd = 0x%x\n", gen_fifo_cmd);
-> -
->   		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
->   	}
->   
-> @@ -583,6 +579,8 @@ static int zynqmp_qspi_genfifo_fill_tx(struct zynqmp_qspi_priv *priv)
->   	u32 len;
->   	int ret = 0;
->   
-> +	log_debug("%s, length: %d\r\n", __func__, priv->len);
-> +
->   	gen_fifo_cmd = zynqmp_qspi_bus_select(priv);
->   	gen_fifo_cmd |= zynqmp_qspi_genfifo_mode(priv->op->data.buswidth);
->   	gen_fifo_cmd |= GQSPI_GFIFO_TX | GQSPI_GFIFO_DATA_XFR_MASK;
-> @@ -591,8 +589,6 @@ static int zynqmp_qspi_genfifo_fill_tx(struct zynqmp_qspi_priv *priv)
->   		len = zynqmp_qspi_calc_exp(priv, &gen_fifo_cmd);
->   		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
->   
-> -		debug("GFIFO_CMD_TX:0x%x\n", gen_fifo_cmd);
-> -
->   		if (gen_fifo_cmd & GQSPI_GFIFO_EXP_MASK)
->   			ret = zynqmp_qspi_fill_tx_fifo(priv, 1 << len);
->   		else
-> @@ -608,7 +604,6 @@ static int zynqmp_qspi_start_io(struct zynqmp_qspi_priv *priv,
->   				u32 gen_fifo_cmd, u32 *buf)
->   {
->   	u32 len;
-> -	u32 actuallen = priv->len;
->   	u32 config_reg, ier, isr;
->   	u32 timeout = GQSPI_TIMEOUT;
->   	struct zynqmp_qspi_regs *regs = priv->regs;
-> @@ -623,7 +618,7 @@ static int zynqmp_qspi_start_io(struct zynqmp_qspi_priv *priv,
->   		else
->   			priv->bytes_to_receive = len;
->   		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
-> -		debug("GFIFO_CMD_RX:0x%x\n", gen_fifo_cmd);
-> +
->   		/* Manual start */
->   		config_reg = readl(&regs->confr);
->   		config_reg |= GQSPI_STRT_GEN_FIFO;
-> @@ -652,13 +647,8 @@ static int zynqmp_qspi_start_io(struct zynqmp_qspi_priv *priv,
->   			}
->   		}
->   
-> -		debug("buf:0x%lx, rxbuf:0x%lx, *buf:0x%x len: 0x%x\n",
-> -		      (unsigned long)buf, (unsigned long)priv->rx_buf,
-> -		      *buf, actuallen);
-> -		if (!timeout) {
-> -			printf("IO timeout: %d\n", readl(&regs->isr));
-> -			return -1;
-> -		}
-> +		if (!timeout)
-> +			return log_msg_retz("Timeout\n", timeout);
->   	}
->   
->   	return 0;
-> @@ -695,26 +685,18 @@ static int zynqmp_qspi_start_dma(struct zynqmp_qspi_priv *priv,
->   		while (priv->len) {
->   			zynqmp_qspi_calc_exp(priv, &gen_fifo_cmd);
->   			zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
-> -
-> -			debug("GFIFO_CMD_RX:0x%x\n", gen_fifo_cmd);
->   		}
->   
->   		ret = wait_for_bit_le32(&dma_regs->dmaisr,
->   					GQSPI_DMA_DST_I_STS_DONE, 1,
->   					GQSPI_TIMEOUT, 1);
-> -		if (ret) {
-> -			printf("DMA Timeout:0x%x\n", readl(&dma_regs->dmaisr));
-> -			return -ETIMEDOUT;
-> -		}
-> +		if (ret)
-> +			return log_msg_ret("Timeout:\n", ret);
->   
->   		invalidate_dcache_range(addr, addr + size);
->   
->   		writel(GQSPI_DMA_DST_I_STS_DONE, &dma_regs->dmaisr);
->   
-> -		debug("buf:0x%lx, rxbuf:0x%lx, *buf:0x%x len: 0x%x\n",
-> -		      (unsigned long)buf, (unsigned long)priv->rx_buf, *buf,
-> -		      actuallen);
-> -
->   		if (buf != priv->rx_buf)
->   			memcpy(priv->rx_buf, buf, actuallen);
->   
-> @@ -731,6 +713,8 @@ static int zynqmp_qspi_genfifo_fill_rx(struct zynqmp_qspi_priv *priv)
->   	u32 *buf;
->   	u32 actuallen = priv->len;
->   
-> +	log_debug("%s, length: %d\r\n", __func__, priv->len);
-> +
->   	gen_fifo_cmd = zynqmp_qspi_bus_select(priv);
->   	gen_fifo_cmd |= zynqmp_qspi_genfifo_mode(priv->op->data.buswidth);
->   	gen_fifo_cmd |= GQSPI_GFIFO_RX | GQSPI_GFIFO_DATA_XFR_MASK;
-
 
 Applied.
 M
