@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F17CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:35:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB9CCDB482
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:36:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 936958747C;
+	by phobos.denx.de (Postfix) with ESMTP id E9D6787490;
 	Thu, 19 Oct 2023 17:35:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1697729747;
-	bh=iy1A7w3RaHI2M1dyANScMFkhG01ZpCDII2A/bzovIgU=;
+	bh=6hJsTkfRLNrf32RVxzvgTtUN9arxlLriQwYDXvGtlcg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Th58R8OkBg5WpRRo6qJ11LLOUtYSO5zFHY1/ckrwodrJC6YbPULETNUXZmoC4368m
-	 W3b4E6KiEhcDCqTKbEilSAADsLwjqxQB9kDDA4GVE14smqoEGRLyGVRfefzWmvp8i2
-	 Vn8luBe4+LWX/C5A+W5by+lJO2P2vsV9G/k/nYmo0Zqtjn8xHg/+lBNQrsauItSEFK
-	 a3foWoEyqb6MberC0EhfPkuCP1NuKOQvdowZPgPtkYq0cNm6vxfCRzwjYwKFfXxayx
-	 2wyS5YSXvt461SUbmXvvKmECWbzX+QdxmBmJgp6QwAS0ebibEKyHnC+l9vzgeUQMCX
-	 FYDjui1FMDCcw==
+	b=kQQtJ9q1iYPfojsMMQ22foRXsmF+tZmn3Z1NaQQY0zh+TiRDoT8hR937kq93CU4nB
+	 L+gDyl3aNjZiRH+CLoU58NChSkO6eRZJJDyiOz8L2RuKhP2pArP29D3WrIinO7Lfan
+	 2DagmCUHBU8eNUeK8E2zWubo3UZrakxVAjxBkDDf4NHp/72mtgkURBenWbB71TReGY
+	 e/bzm1a/QxDjWYS0MNS5O/C2c/sPv2bWUnuveJ/8WrRUCMC+fZZj6eq3ieqGxk15Wx
+	 GdBlMZTpo2YXEV4kMR9hFkR06SBqyEr9sPs2ZW9nfa5WKzokHrRbpuM0xmk5pt4ZYG
+	 76f7TvUDgZJpg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EE00E8746F;
- Thu, 19 Oct 2023 17:35:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7D0128747C;
+ Thu, 19 Oct 2023 17:35:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1697729744;
- bh=iy1A7w3RaHI2M1dyANScMFkhG01ZpCDII2A/bzovIgU=;
+ bh=6hJsTkfRLNrf32RVxzvgTtUN9arxlLriQwYDXvGtlcg=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=yvOp+KfraCRucjtRYM383oVVextub9E2eMz6jQyKEbDEas4NpwUG5SJk7rXMrqezp
- OJ0xH3QtpwssMT2t6HUcw6bLd75oMLvzgf1w+f4sfJaMGQoGu53oSsdW1u4pHKXQOR
- Far9E3d5IdHtRWNxt5zPlZSF3yg92dsrsos9GeZrHgcFZhlbjoWUZeqUckn2xfGtrl
- Ni7HJyTQkhlqUyfvRDokdjvJyrtjQ4voJ+bpK+4oamR3ElnW2skZltIZBuLG5nBxfJ
- X2F4mYAOYcriLYpcFc7wgETlxMEOteEBQ78evN5JgQ8BN+V5HNxRuA1OCevv542uP5
- 7na+Cw0Tz0STA==
-Message-ID: <d4389465-e5bd-492b-8f86-7b4a93ff6016@denx.de>
-Date: Thu, 19 Oct 2023 15:54:43 +0200
+ b=gSZvfKPBGkC+rcDIkjDNLrPl4NFTEjsDuG3eyW4o8+fiJbVgLMUs6oWr8Jk6fJlui
+ vTbbqdsjqPIQZG/3QsX9Bij0hdqOtjUy24oQBibxw9rNcRnQQCyKuaVo1b3Nb/MP1V
+ c6rvrBiJZFhdbOYtH9KRcBOfLRTYLc8OaoeZB3oTB8PVdtqqNcIX8Td0u0Z1Oy5SvL
+ rdfqGb5obTtSJ1b1soh2mtxQS1s85XtQ/+ixe9NnubKPXJx/t0mbyNfV+wOG8h+Svv
+ kAdoHxAHkIC6QJ267O7gWv7WNCOOme6vPvmsJKd0NmNt69j3GXj1kuSSwTJxT3ltup
+ BFAqeNRQjB8uw==
+Message-ID: <27774b01-7270-4033-a199-562cf1d2adea@denx.de>
+Date: Thu, 19 Oct 2023 15:56:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] led-uclass: honour ->label field populated by
- driver's own .bind
+Subject: Re: [PATCH 3/6] led: introduce led_bind_generic()
 Content-Language: en-US
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
 Cc: Philippe Reynes <philippe.reynes@softathome.com>,
  Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
 References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-3-rasmus.villemoes@prevas.dk>
+ <20231019095837.2084458-4-rasmus.villemoes@prevas.dk>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231019095837.2084458-3-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231019095837.2084458-4-rasmus.villemoes@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,32 +71,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/19/23 11:58, Rasmus Villemoes wrote:
-> If the driver's own .bind method has populated uc_plat->label, don't
-> override that. This is necessary for an upcoming driver for ti,lp5562,
-> where the DT binding unfortunately says to use "chan-name" and not
-> "label".
+> All existing drivers in drivers/led/ contain a .bind method that does
+> exactly the same thing, with just the actual driver name
+> differing. Create a helper so all those individual methods can be
+> changed to one-liners.
 > 
 > Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> ---
->   drivers/led/led-uclass.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-> index 5a5d07b9a7..0232fa84de 100644
-> --- a/drivers/led/led-uclass.c
-> +++ b/drivers/led/led-uclass.c
-> @@ -71,7 +71,9 @@ static int led_post_bind(struct udevice *dev)
->   	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
->   	const char *default_state;
->   
-> -	uc_plat->label = dev_read_string(dev, "label");
-> +	if (!uc_plat->label)
-> +		uc_plat->label = dev_read_string(dev, "label");
-> +
-
-One thing I have to wonder about is, why does this controller have label 
-property in the top-level node , what is that used for ?
-
-(see Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml)
 
 Reviewed-by: Marek Vasut <marex@denx.de>
