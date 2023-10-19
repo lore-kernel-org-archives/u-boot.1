@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DB9CCDB482
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:36:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0257DCDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:36:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9D6787490;
-	Thu, 19 Oct 2023 17:35:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CE128749C;
+	Thu, 19 Oct 2023 17:35:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697729747;
-	bh=6hJsTkfRLNrf32RVxzvgTtUN9arxlLriQwYDXvGtlcg=;
+	s=phobos-20191101; t=1697729748;
+	bh=gTuCD7oriDbgIsoQXJRWqvmOtOWYvZ+75u6IZGsvw+4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=kQQtJ9q1iYPfojsMMQ22foRXsmF+tZmn3Z1NaQQY0zh+TiRDoT8hR937kq93CU4nB
-	 L+gDyl3aNjZiRH+CLoU58NChSkO6eRZJJDyiOz8L2RuKhP2pArP29D3WrIinO7Lfan
-	 2DagmCUHBU8eNUeK8E2zWubo3UZrakxVAjxBkDDf4NHp/72mtgkURBenWbB71TReGY
-	 e/bzm1a/QxDjWYS0MNS5O/C2c/sPv2bWUnuveJ/8WrRUCMC+fZZj6eq3ieqGxk15Wx
-	 GdBlMZTpo2YXEV4kMR9hFkR06SBqyEr9sPs2ZW9nfa5WKzokHrRbpuM0xmk5pt4ZYG
-	 76f7TvUDgZJpg==
+	b=PqXwpr9Rg0ADoSO/TcTM4Ih4aQrdMTpXEFGJkxePbEcsdd7bmZiSyY0othW6TQ11w
+	 DIBSkjjNFnib4ybiMdqPKXN0Rjqug3WAPU+cvLLerdq1/HY00LVsgM5lkqUcmhSBju
+	 2/pfnu2gCvujL1GSE5XPyCfPG1wX5uP8SxTzy7O5vPNb6ZmX/axd8atISBh7x/esWW
+	 6RigaKR+aUd22/tlxt9u+C3C5EB1naKqD7F9LOLNO20Jh+fAEksi+gNrEfG9UcEJDc
+	 F0orBOxUXXvOzdCj8V7K/pBN4yPVd+74rL9myMecrZ5zhlD9NnzGvQlMm+pxqnAYDu
+	 aSc4Yq4jX7cFg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7D0128747C;
+ by phobos.denx.de (Postfix) with ESMTPSA id ED70C8745A;
  Thu, 19 Oct 2023 17:35:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697729744;
- bh=6hJsTkfRLNrf32RVxzvgTtUN9arxlLriQwYDXvGtlcg=;
+ s=phobos-20191101; t=1697729745;
+ bh=gTuCD7oriDbgIsoQXJRWqvmOtOWYvZ+75u6IZGsvw+4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=gSZvfKPBGkC+rcDIkjDNLrPl4NFTEjsDuG3eyW4o8+fiJbVgLMUs6oWr8Jk6fJlui
- vTbbqdsjqPIQZG/3QsX9Bij0hdqOtjUy24oQBibxw9rNcRnQQCyKuaVo1b3Nb/MP1V
- c6rvrBiJZFhdbOYtH9KRcBOfLRTYLc8OaoeZB3oTB8PVdtqqNcIX8Td0u0Z1Oy5SvL
- rdfqGb5obTtSJ1b1soh2mtxQS1s85XtQ/+ixe9NnubKPXJx/t0mbyNfV+wOG8h+Svv
- kAdoHxAHkIC6QJ267O7gWv7WNCOOme6vPvmsJKd0NmNt69j3GXj1kuSSwTJxT3ltup
- BFAqeNRQjB8uw==
-Message-ID: <27774b01-7270-4033-a199-562cf1d2adea@denx.de>
-Date: Thu, 19 Oct 2023 15:56:30 +0200
+ b=t56FNDR4V2Paf/sjhIp3g/M7RfXBINcUxw1txRz3cw/1UpFODCP1OwpXl+LY0wfBx
+ REAhcfFuBte77Cr6X2fYd6zozpy2zb9tkk/KPtVF8AKTq7Blh6Yufp8RIb9sh895zu
+ VkE2U8v++cFUqEV5bseuGNc4mc2ZzcLo5GPpNDtqDeR0zDMHzpSgxKXZbHwR/v1IrY
+ mymyBh15P/AnWlRqRLnjNgXMGmEsWtYySxeyHUtcj43aQEVyqHQgN8JiecetRpPTx/
+ u9uAJTqViLG5Q5xz1zE21claLaYknH4li2VTK3NOPyV8Ssj1tB5qlVMVrc7tjlYZNo
+ NWuiOFdKx9I+w==
+Message-ID: <268197af-2084-4165-af3f-a26c483c95c5@denx.de>
+Date: Thu, 19 Oct 2023 15:56:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] led: introduce led_bind_generic()
+Subject: Re: [PATCH 4/6] led: led_gpio: use led_bind_generic() helper
 Content-Language: en-US
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
 Cc: Philippe Reynes <philippe.reynes@softathome.com>,
  Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
 References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-4-rasmus.villemoes@prevas.dk>
+ <20231019095837.2084458-5-rasmus.villemoes@prevas.dk>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231019095837.2084458-4-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231019095837.2084458-5-rasmus.villemoes@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,11 +71,5 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/19/23 11:58, Rasmus Villemoes wrote:
-> All existing drivers in drivers/led/ contain a .bind method that does
-> exactly the same thing, with just the actual driver name
-> differing. Create a helper so all those individual methods can be
-> changed to one-liners.
-> 
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+Commit message is missing.
