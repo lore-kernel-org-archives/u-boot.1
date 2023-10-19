@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD292C004C0
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD2CC001DF
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:51:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF374871A0;
-	Thu, 19 Oct 2023 23:51:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F0CF870A1;
+	Thu, 19 Oct 2023 23:51:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="al7QCzjR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IF4GQhVV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F47087184; Thu, 19 Oct 2023 23:51:30 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 6C8A8871BD; Thu, 19 Oct 2023 23:51:32 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E993986F6F
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:51:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5381A870A1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:51:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-27d27026dc2so51374a91.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:51:27 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1c9ba72f6a1so270765ad.1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:51:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697752286; x=1698357086; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ilEeNlMI1BLEmBm6D1d+FvXJN6sZccNNbJzZ3aYcf2k=;
- b=al7QCzjRxKxvySCYyI9YYESfRoTxsXnBCL4pswf5eBXM3pEANYvfj5gOxDKfXXD8+d
- CmGbO2VfmWSdNIgo1EXaj4zmobpiO4zgNYHN74K0+Vs/1xrfn7LXtdEdT4CidleNNOwm
- Zz2pLA0HpBWONJHDjeWvVvv79VuwEOOs06T/yfT6sqtxxLJnBmwSN25jH63xKjllHj2z
- r118dh8+ODaax7oGUpQjNzOdghOX0xPfJs++eCuFsccOuE170CG4FPPBcrA/g7ebShzb
- mWEqKOAYfED4gA3Do2b2tGgdcra89fOBnq2qfvNdJscSdVZ1DPCwCuXk3LAPyjGLLq5k
- SgcQ==
+ d=gmail.com; s=20230601; t=1697752288; x=1698357088; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9NS0LNvYp0EjtgAo/n1l0a+AhHqoyEZka2YjsYANDek=;
+ b=IF4GQhVVzN03946+LJlwquiCqkm+fRMVOuYFUAxvXiV5ZUzKkWX7vDWsQPx05MwFoO
+ WQ8l8hSGZQx5qRQC3vxkOtxuk6U3R0MPcUg6JIWuoWvnItJXVbP4TVL6XIJd78argiQE
+ 9/B5y7PGnU0SDNeDlLUvhGHcRjd+RwMLH2vnLpGoDZEAjjYs9DDHFst+qiPU/MlykJET
+ lAkcp6+RESni6bUsaeazX/XHYou7jYfn6725egT5MGTm29F6ga5PfYlkG+SqT3oFpVHg
+ Ruh+Qkhpnn4dJQlO4WvY/hvIZ3XIv/rDjzyOuui/oj3Snh9sOJ8nWTGmamLe4jvM3s66
+ 6LiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697752286; x=1698357086;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ilEeNlMI1BLEmBm6D1d+FvXJN6sZccNNbJzZ3aYcf2k=;
- b=wMsjpojao39ESDNT6PyduD1Cgv0dezz6/1eVHcLj+97p+YC2vY0AQ9qSHyhw0FjbQo
- 7kM7bYXR/PIDaj9kmaPkywBs9EB4GIFtI17TZBoPb5c63Y8T7fd7vuu8ip+ZSnIVV4tA
- ZkoTHxCI4/JvVSRh1mwu6RAYI8O0+pE/JIgdPGN1oPOAtGc9Jn5zAbEnvEJ7lkAoy1eP
- fcbnp7FxP1QnNmc81C0z2FepAtfbGHYXmkEs1vFaEBPe/zzmKBFe5RKRCUsDn/Q173PQ
- 2OFhubEmpXNgoFwdjKnBmwOSz6dIE9UBy1tAwQfQTDlkndGQfpk8iLdpvC7/wHAkag4+
- YUyA==
-X-Gm-Message-State: AOJu0Yzdr/yjS/hg3f7MSqRpgPr716u9ea099VKX5FTe7+NIYxU5F3x2
- zvUV+0/LF3X8rrceeJbPm/8=
-X-Google-Smtp-Source: AGHT+IH5u4PNmH0KBk8lXhQK5h4UtkYsri4gvNbivfLIMyEjEPIHgZfZ29JnM+Z9+VLqzLVtz9ytcA==
-X-Received: by 2002:a05:6a20:2451:b0:171:737:df97 with SMTP id
- t17-20020a056a20245100b001710737df97mr59836pzc.2.1697752286196; 
- Thu, 19 Oct 2023 14:51:26 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697752288; x=1698357088;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9NS0LNvYp0EjtgAo/n1l0a+AhHqoyEZka2YjsYANDek=;
+ b=ImVlz+Xee9kWWq6IztcSysfCEFyZ166uvAVvJuVU/UuyOpyKpSoEIGpbYeKXS21g4L
+ SI+M++b8xrpmMpwf7fFn9RxtGkBlsFvw82UeZPFa3RYgn69MqtZluBaIYJH47MoH5bR9
+ KZ2xN3ZlStO00lmLi4bMrrQn8Yabk+IQR9yoK4HTCtep1pFpywyNPhw+UkQKi+A2KiIG
+ ql1j5cAyX8LoSdzrpg8fWxavwQ4aNwaqWSXIztHSBIybfRH/t9MgkA9OtqkJY6japRea
+ I1qb8zImJoHxhgGwsmx63XQq7CfzehlDNXVbIugHcy06wwRY5Qvd1/ODUfjTTG1abMqZ
+ c+Kg==
+X-Gm-Message-State: AOJu0Yyip/zdctnnbd4B1KdAGrUqPNPwUs+WjX1pbStB4oCuspmweC8e
+ HrA9aKF9jY+CSdmHcLZW0e0=
+X-Google-Smtp-Source: AGHT+IGpicOLi8AAPryJbSLmqrSqgQgYwB4Dd3bhZgWdG/qqmVS2IltUjbmEtA5m+HP09o6OBZkBcA==
+X-Received: by 2002:a17:903:2783:b0:1b8:9fc4:2733 with SMTP id
+ jw3-20020a170903278300b001b89fc42733mr129659plb.3.1697752288626; 
+ Thu, 19 Oct 2023 14:51:28 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
  by smtp.gmail.com with ESMTPSA id
- x4-20020a170902ec8400b001bc6e6069a6sm177371plg.122.2023.10.19.14.51.23
+ x4-20020a170902ec8400b001bc6e6069a6sm177371plg.122.2023.10.19.14.51.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 14:51:25 -0700 (PDT)
+ Thu, 19 Oct 2023 14:51:28 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de
 Cc: u-boot@lists.denx.de, peng.fan@nxp.com, hugo@hugovil.com,
- Fabio Estevam <festevam@denx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>
-Subject: [PATCH v3 1/2] imx8mp_evk: Simplify Ethernet initialization
-Date: Thu, 19 Oct 2023 18:51:12 -0300
-Message-Id: <20231019215113.1833803-1-festevam@gmail.com>
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v3 2/2]  imx8mp_evk: Remove unneeded header files
+Date: Thu, 19 Oct 2023 18:51:13 -0300
+Message-Id: <20231019215113.1833803-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231019215113.1833803-1-festevam@gmail.com>
+References: <20231019215113.1833803-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,100 +94,41 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-With DM enabled, there is no need for board code to initialize
-the Ethernet interfaces.
-
-The RTL8211FDI Ethernet PHYs have 25MHz oscillator, so there is no
-need to enable the RGMII TX clk output.
-
-Also, there is no need for describing the deprecated phy-reset FEC
-properties, nor passing reset properties to the EQOS interface in
-u-boot.dtsi.
-
-Remove all these unneeded pieces.
-
-Tested both Ethernet interfaces after these changes.
+Cleanup the file by removing unneeded header files.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
-Reviewed-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 ---
 Changes since v2:
-- Only collected Hugo's tag.
+- Also remove <asm/global_data.h> and DECLARE_GLOBAL_DATA_PTR. (Hugo)
 
- arch/arm/dts/imx8mp-evk-u-boot.dtsi     | 14 -------------
- board/freescale/imx8mp_evk/imx8mp_evk.c | 28 +------------------------
- 2 files changed, 1 insertion(+), 41 deletions(-)
+ board/freescale/imx8mp_evk/imx8mp_evk.c | 13 -------------
+ 1 file changed, 13 deletions(-)
 
-diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-index 0bf489b46248..51c84383673c 100644
---- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-@@ -137,17 +137,3 @@
- &wdog1 {
- 	bootph-pre-ram;
- };
--
--&ethphy0 {
--	reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
--	reset-delay-us = <15000>;
--	reset-post-delay-us = <100000>;
--};
--
--&fec {
--	phy-reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
--	phy-reset-duration = <15>;
--	phy-reset-post-delay = <100>;
--};
--
--
 diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-index a24b8c1d8608..42291c958e39 100644
+index 42291c958e39..024b46ef8bc2 100644
 --- a/board/freescale/imx8mp_evk/imx8mp_evk.c
 +++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-@@ -7,8 +7,6 @@
+@@ -3,20 +3,7 @@
+  * Copyright 2019 NXP
+  */
+ 
+-#include <common.h>
  #include <env.h>
- #include <errno.h>
- #include <init.h>
--#include <miiphy.h>
--#include <netdev.h>
- #include <linux/delay.h>
- #include <asm/global_data.h>
- #include <asm/mach-imx/iomux-v3.h>
-@@ -20,33 +18,9 @@
+-#include <errno.h>
+-#include <init.h>
+-#include <linux/delay.h>
+-#include <asm/global_data.h>
+-#include <asm/mach-imx/iomux-v3.h>
+-#include <asm-generic/gpio.h>
+-#include <asm/arch/imx8mp_pins.h>
+-#include <asm/arch/clock.h>
+-#include <asm/arch/sys_proto.h>
+-#include <asm/mach-imx/gpio.h>
+-
+-DECLARE_GLOBAL_DATA_PTR;
  
- DECLARE_GLOBAL_DATA_PTR;
- 
--static void setup_fec(void)
--{
--	struct iomuxc_gpr_base_regs *gpr =
--		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
--
--	/* Enable RGMII TX clk output */
--	setbits_le32(&gpr->gpr[1], BIT(22));
--}
--
--#if CONFIG_IS_ENABLED(NET)
--int board_phy_config(struct phy_device *phydev)
--{
--	if (phydev->drv->config)
--		phydev->drv->config(phydev);
--	return 0;
--}
--#endif
--
  int board_init(void)
  {
--	int ret = 0;
--
--	if (IS_ENABLED(CONFIG_FEC_MXC)) {
--		setup_fec();
--	}
--
--	return ret;
-+	return 0;
- }
- 
- int board_late_init(void)
 -- 
 2.34.1
 
