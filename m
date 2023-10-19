@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 782A9CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:23:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C42B9CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:23:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7290D874C9;
+	by phobos.denx.de (Postfix) with ESMTP id E71D1874D0;
 	Thu, 19 Oct 2023 18:22:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="M6L4J2UF";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="hdVmHqQC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE84D874B0; Thu, 19 Oct 2023 18:22:06 +0200 (CEST)
+ id 1BD0387258; Thu, 19 Oct 2023 18:22:08 +0200 (CEST)
 Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
  [148.163.158.5])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8BB3874AD
+ by phobos.denx.de (Postfix) with ESMTPS id CD0CA874AC
  for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 18:22:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0353724.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JGJVaa009088; Thu, 19 Oct 2023 16:22:00 GMT
+ 39JGJXCo009055; Thu, 19 Oct 2023 16:22:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=pp1;
- bh=9ofSYSCEOjtlae9Kix7hxiopmr3DTmymhm67aDPzdck=;
- b=M6L4J2UFhoO4pGan3zmQuRzEFx417DNT106xaeC76nCnjw7LVO4NOM9XaAFqawerY7y4
- QN80lWQ4uijMJNay0IeCmpTeEteLXwQKOGCw4r7SG/MsV1prR2liOp/cucE8HbE0zm9Z
- GQy5wgQ0aOS488JHUnwBIQgJNKHgS8NcCSfWd8/CgRIBqjUoETM2HOd1D/e/ZDkzJbZa
- AMu/DOif99AaG94rH59hbPC5m2evQsanjuNkLUEunF1768UDC7FVLWD972DmF6ZSefRk
- 2uGU9MADJwA8tWoZvXuqyTXjVpDPC8D6VhTo8v+LmndIVuNraRH8TWcx4nowp4O7ONdh GQ== 
+ bh=/8oIoGV38A1IPKX00PeULeXK8IUQOsGu1Mll12KiUSc=;
+ b=hdVmHqQCQPKkEAcmL/+o0whQ6hvMsPA3PgtHqjubuYPqSYgXCJCXhRSd+dnsoV6/EBVr
+ AIImajoxtzLKfkprtUuuToQf5zCOqOREzLvUFgqzs0jBzu1i6QRNZBcAZZVr/veXlcnM
+ JE5fkMHxezlXo2H5E202UaD6LLClQXxgBC/DUZ8Zks8qWHO0A7HvRD6Lw2Kj1ZaiYGAk
+ 1Eu+zDFYfyyIlAMh3HSAVFtOwKVEalRgfyVHQNvhCa5U+cqGYOnt46Tr5bm3wvjYAy9f
+ JkXNZ/kFXWKlDdtpH42wIxf4k8vybSP5LLKh5TlAExUxdtG/S47DMt4f1h5+SZC9GZJh pw== 
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6ky-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vfg649-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:22:00 +0000
-Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGKOWi012827;
+Received: from m0353724.ppops.net (m0353724.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGJdqe009396;
  Thu, 19 Oct 2023 16:21:59 GMT
-Received: from ppma22.wdc07v.mail.ibm.com
- (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6kd-1
+Received: from ppma11.dal12v.mail.ibm.com
+ (db.9e.1632.ip4.static.sl-reverse.com [50.22.158.219])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vfg639-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:59 +0000
-Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma22.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JGFu81012949; Thu, 19 Oct 2023 16:21:58 GMT
-Received: from smtprelay04.wdc07v.mail.ibm.com ([172.16.1.71])
- by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tr5pyt66c-1
+Received: from pps.filterd (ppma11.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma11.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39JFVHAE019700; Thu, 19 Oct 2023 16:21:58 GMT
+Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
+ by ppma11.dal12v.mail.ibm.com (PPS) with ESMTPS id 3tr8121gug-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:58 +0000
 Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
  [10.241.53.103])
- by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39JGLwen44171830
+ by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 39JGLvL32228924
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 19 Oct 2023 16:21:58 GMT
+ Thu, 19 Oct 2023 16:21:57 GMT
 Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 3688A5805A;
- Thu, 19 Oct 2023 16:21:58 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 61C1458052;
+ Thu, 19 Oct 2023 16:21:57 +0000 (GMT)
 Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 10BCB58063;
- Thu, 19 Oct 2023 16:21:58 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 3F44958064;
+ Thu, 19 Oct 2023 16:21:57 +0000 (GMT)
 Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.89.2])
  by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 19 Oct 2023 16:21:58 +0000 (GMT)
+ Thu, 19 Oct 2023 16:21:57 +0000 (GMT)
 From: Eddie James <eajames@linux.ibm.com>
 To: u-boot@lists.denx.de
 Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
  eajames@linux.ibm.com
-Subject: [PATCH v13 8/8] test: use a non system PCR for testing PCR extend
-Date: Thu, 19 Oct 2023 11:21:56 -0500
-Message-Id: <20231019162156.80982-9-eajames@linux.ibm.com>
+Subject: [PATCH v13 4/8] bootm: Support boot measurement
+Date: Thu, 19 Oct 2023 11:21:52 -0500
+Message-Id: <20231019162156.80982-5-eajames@linux.ibm.com>
 X-Mailer: git-send-email 2.39.3
 In-Reply-To: <20231019162156.80982-1-eajames@linux.ibm.com>
 References: <20231019162156.80982-1-eajames@linux.ibm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: qAcdWdW62leuRpJz2a1PPNbRvkB-eeuI
-X-Proofpoint-ORIG-GUID: v-QDrtw2lbjIR8JTWbfpEFmWFyIQ1TGD
+X-Proofpoint-GUID: HKORKcquLMnFviIYQh6EodeImV_98EHG
+X-Proofpoint-ORIG-GUID: Ju8T2JGMYWzzlgQFhKINQJVzE3uEHWIR
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-19_15,2023-10-19_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- adultscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 phishscore=0
- mlxscore=0 impostorscore=0 mlxlogscore=999 spamscore=0 clxscore=1015
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ mlxscore=0 priorityscore=1501
+ suspectscore=0 spamscore=0 impostorscore=0 mlxlogscore=999
+ lowpriorityscore=0 adultscore=0 bulkscore=0 phishscore=0 malwarescore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2309180000 definitions=main-2310190138
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -113,91 +113,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Add a configuration option to measure the boot through the bootm
+function. Add the measurement state to the booti and bootz paths
+as well.
 
-We currently use PCR 0 for testing the PCR read/extend functionality in
-our selftests.  How ever those PCRs are defined by the TCG spec for
-platform use.  For example if the tests run *after* the efi subsystem
-initialization, which extends PCRs 0 & 7 it will give a false positive.
-
-So let's switch over to a PCR which is more suitable and is defined for
-OS use.  It's worth noting that we are using PCR10 here, since PCR9 is
-used internally by U-Boot if we choose to measure the loaded DTB
-
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- test/py/tests/test_tpm2.py | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+Changes since v8:
+ - Added a configuration option to select to ignore any existing
+   event log. This would only be selected for systems that know
+   that U-Boot is the first stage bootloader. This is necessary
+   because the reserved memory region may persist through resets
+   and so U-Boot attempts to append to the previous boot's log.
 
-diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-index c2579fa02c..47392b87a9 100644
---- a/test/py/tests/test_tpm2.py
-+++ b/test/py/tests/test_tpm2.py
-@@ -239,7 +239,7 @@ def test_tpm2_dam_parameters(u_boot_console):
- def test_tpm2_pcr_read(u_boot_console):
-     """Execute a TPM2_PCR_Read command.
+Changes since v6:
+ - Added comment for bootm_measure
+ - Fixed line length in bootm_measure
+
+ boot/Kconfig    | 32 +++++++++++++++++++++
+ boot/bootm.c    | 74 +++++++++++++++++++++++++++++++++++++++++++++++++
+ cmd/booti.c     |  1 +
+ cmd/bootm.c     |  2 ++
+ cmd/bootz.c     |  1 +
+ include/bootm.h | 11 ++++++++
+ include/image.h |  1 +
+ 7 files changed, 122 insertions(+)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index a01e6cb8aa..abbc72f4cf 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -685,6 +685,38 @@ config LEGACY_IMAGE_FORMAT
+ 	  loaded. If a board needs the legacy image format support in this
+ 	  case, enable it here.
  
--    Perform a PCR read of the 0th PCR. Must be zero.
-+    Perform a PCR read of the 10th PCR. Must be zero.
-     """
-     if is_sandbox(u_boot_console):
-         tpm2_sandbox_init(u_boot_console)
-@@ -247,7 +247,7 @@ def test_tpm2_pcr_read(u_boot_console):
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
++config MEASURED_BOOT
++	bool "Measure boot images and configuration to TPM and event log"
++	depends on HASH && TPM_V2
++	help
++	  This option enables measurement of the boot process. Measurement
++	  involves creating cryptographic hashes of the binary images that
++	  are booting and storing them in the TPM. In addition, a log of
++	  these hashes is stored in memory for the OS to verify the booted
++	  images and configuration. Enable this if the OS has configured
++	  some memory area for the event log and you intend to use some
++	  attestation tools on your system.
++
++if MEASURED_BOOT
++	config MEASURE_DEVICETREE
++	bool "Measure the devicetree image"
++	default y if MEASURED_BOOT
++	help
++	  On some platforms, the devicetree is not static as it may contain
++	  random MAC addresses or other such data that changes each boot.
++	  Therefore, it should not be measured into the TPM. In that case,
++	  disable the measurement here.
++
++	config MEASURE_IGNORE_LOG
++	bool "Ignore the existing event log"
++	default n
++	help
++	  On platforms that use an event log memory region that persists
++	  through system resets and are the first stage bootloader, then
++	  this option should be enabled to ignore any existing data in the
++	  event log memory region.
++endif # MEASURED_BOOT
++
+ config SUPPORT_RAW_INITRD
+ 	bool "Enable raw initrd images"
+ 	help
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 8f96a80d42..cb61485c22 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -23,6 +23,7 @@
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/sizes.h>
++#include <tpm-v2.h>
+ #if defined(CONFIG_CMD_USB)
+ #include <usb.h>
+ #endif
+@@ -673,6 +674,75 @@ int bootm_process_cmdline_env(int flags)
+ 	return 0;
+ }
  
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % ram)
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % ram)
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
++int bootm_measure(struct bootm_headers *images)
++{
++	int ret = 0;
++
++	/* Skip measurement if EFI is going to do it */
++	if (images->os.os == IH_OS_EFI &&
++	    IS_ENABLED(CONFIG_EFI_TCG2_PROTOCOL) &&
++	    IS_ENABLED(CONFIG_BOOTM_EFI))
++		return ret;
++
++	if (IS_ENABLED(CONFIG_MEASURED_BOOT)) {
++		struct tcg2_event_log elog;
++		struct udevice *dev;
++		void *initrd_buf;
++		void *image_buf;
++		const char *s;
++		u32 rd_len;
++		bool ign;
++
++		elog.log_size = 0;
++		ign = IS_ENABLED(CONFIG_MEASURE_IGNORE_LOG);
++		ret = tcg2_measurement_init(&dev, &elog, ign);
++		if (ret)
++			return ret;
++
++		image_buf = map_sysmem(images->os.image_start,
++				       images->os.image_len);
++		ret = tcg2_measure_data(dev, &elog, 8, images->os.image_len,
++					image_buf, EV_COMPACT_HASH,
++					strlen("linux") + 1, (u8 *)"linux");
++		if (ret)
++			goto unmap_image;
++
++		rd_len = images->rd_end - images->rd_start;
++		initrd_buf = map_sysmem(images->rd_start, rd_len);
++		ret = tcg2_measure_data(dev, &elog, 9, rd_len, initrd_buf,
++					EV_COMPACT_HASH, strlen("initrd") + 1,
++					(u8 *)"initrd");
++		if (ret)
++			goto unmap_initrd;
++
++		if (IS_ENABLED(CONFIG_MEASURE_DEVICETREE)) {
++			ret = tcg2_measure_data(dev, &elog, 0, images->ft_len,
++						(u8 *)images->ft_addr,
++						EV_TABLE_OF_DEVICES,
++						strlen("dts") + 1,
++						(u8 *)"dts");
++			if (ret)
++				goto unmap_initrd;
++		}
++
++		s = env_get("bootargs");
++		if (!s)
++			s = "";
++		ret = tcg2_measure_data(dev, &elog, 1, strlen(s) + 1, (u8 *)s,
++					EV_PLATFORM_CONFIG_FLAGS,
++					strlen(s) + 1, (u8 *)s);
++
++unmap_initrd:
++		unmap_sysmem(initrd_buf);
++
++unmap_image:
++		unmap_sysmem(image_buf);
++		tcg2_measurement_term(dev, &elog, ret != 0);
++	}
++
++	return ret;
++}
++
+ /**
+  * Execute selected states of the bootm command.
+  *
+@@ -724,6 +794,10 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (!ret && (states & BOOTM_STATE_FINDOTHER))
+ 		ret = bootm_find_other(cmdtp, flag, argc, argv);
  
-@@ -257,7 +257,7 @@ def test_tpm2_pcr_read(u_boot_console):
-     updates = int(re.findall(r'\d+', str)[0])
++	if (IS_ENABLED(CONFIG_MEASURED_BOOT) && !ret &&
++	    (states & BOOTM_STATE_MEASURE))
++		bootm_measure(images);
++
+ 	/* Load the OS */
+ 	if (!ret && (states & BOOTM_STATE_LOADOS)) {
+ 		iflag = bootm_disable_interrupts();
+diff --git a/cmd/booti.c b/cmd/booti.c
+index 1d531bdd06..a6c7db272c 100644
+--- a/cmd/booti.c
++++ b/cmd/booti.c
+@@ -127,6 +127,7 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 			      BOOTM_STATE_RAMDISK |
+ #endif
++			      BOOTM_STATE_MEASURE |
+ 			      BOOTM_STATE_OS_PREP | BOOTM_STATE_OS_FAKE_GO |
+ 			      BOOTM_STATE_OS_GO,
+ 			      &images, 1);
+diff --git a/cmd/bootm.c b/cmd/bootm.c
+index 3e504ccfe8..6ded091dd5 100644
+--- a/cmd/bootm.c
++++ b/cmd/bootm.c
+@@ -147,6 +147,8 @@ int do_bootm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		BOOTM_STATE_OS_GO;
+ 	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
+ 		states |= BOOTM_STATE_RAMDISK;
++	if (IS_ENABLED(CONFIG_MEASURED_BOOT))
++		states |= BOOTM_STATE_MEASURE;
+ 	if (IS_ENABLED(CONFIG_PPC) || IS_ENABLED(CONFIG_MIPS))
+ 		states |= BOOTM_STATE_OS_CMDLINE;
+ 	ret = do_bootm_states(cmdtp, flag, argc, argv, states, &images, 1);
+diff --git a/cmd/bootz.c b/cmd/bootz.c
+index 742889f21d..dd6fe4904b 100644
+--- a/cmd/bootz.c
++++ b/cmd/bootz.c
+@@ -81,6 +81,7 @@ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ #ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 			      BOOTM_STATE_RAMDISK |
+ #endif
++			      BOOTM_STATE_MEASURE |
+ 			      BOOTM_STATE_OS_PREP | BOOTM_STATE_OS_FAKE_GO |
+ 			      BOOTM_STATE_OS_GO,
+ 			      &images, 1);
+diff --git a/include/bootm.h b/include/bootm.h
+index c3c7336207..10a1bd65a7 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -56,6 +56,17 @@ ulong bootm_disable_interrupts(void);
+ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+ 		      ulong size);
  
-     # Check the output value
--    assert 'PCR #0 content' in read_pcr
-+    assert 'PCR #10 content' in read_pcr
-     assert '00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00' in read_pcr
++/*
++ * Measure the boot images. Measurement is the process of hashing some binary
++ * data and storing it into secure memory, i.e. TPM PCRs. In addition, each
++ * measurement is logged into the platform event log such that the operating
++ * system can access it and perform attestation of the boot.
++ *
++ * @images:	The structure containing the various images to boot (linux,
++ *		initrd, dts, etc.)
++ */
++int bootm_measure(struct bootm_headers *images);
++
+ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		    char *const argv[], int states, struct bootm_headers *images,
+ 		    int boot_progress);
+diff --git a/include/image.h b/include/image.h
+index 5f85bf84a2..2e3cf839ee 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -409,6 +409,7 @@ struct bootm_headers {
+ #define BOOTM_STATE_OS_FAKE_GO	0x00000200	/* 'Almost' run the OS */
+ #define BOOTM_STATE_OS_GO	0x00000400
+ #define BOOTM_STATE_PRE_LOAD	0x00000800
++#define BOOTM_STATE_MEASURE	0x00001000
+ 	int		state;
  
- @pytest.mark.buildconfigspec('cmd_tpm_v2')
-@@ -275,19 +275,19 @@ def test_tpm2_pcr_extend(u_boot_console):
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % (ram + 0x20))
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
-     str = re.findall(r'\d+ known updates', read_pcr)[0]
-     updates = int(re.findall(r'\d+', str)[0])
- 
--    u_boot_console.run_command('tpm2 pcr_extend 0 0x%x' % ram)
-+    u_boot_console.run_command('tpm2 pcr_extend 10 0x%x' % ram)
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
- 
-     # Read the value back into a different place so we can still use 'ram' as
-     # our zero bytes
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % (ram + 0x20))
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
-     assert 'f5 a5 fd 42 d1 6a 20 30 27 98 ef 6e d3 09 97 9b' in read_pcr
-@@ -297,11 +297,11 @@ def test_tpm2_pcr_extend(u_boot_console):
-     new_updates = int(re.findall(r'\d+', str)[0])
-     assert (updates + 1) == new_updates
- 
--    u_boot_console.run_command('tpm2 pcr_extend 0 0x%x' % ram)
-+    u_boot_console.run_command('tpm2 pcr_extend 10 0x%x' % ram)
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
- 
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % (ram + 0x20))
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
-     assert '7a 05 01 f5 95 7b df 9c b3 a8 ff 49 66 f0 22 65' in read_pcr
+ #if defined(CONFIG_LMB) && !defined(USE_HOSTCC)
 -- 
 2.39.3
 
