@@ -4,68 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92D4ECDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 20:40:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F63CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 20:46:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E66F870A2;
-	Thu, 19 Oct 2023 22:40:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3F05F86E1C;
+	Thu, 19 Oct 2023 22:45:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GE8UfnPP";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="riGTvay5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50083871E8; Thu, 19 Oct 2023 22:40:16 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7839587025; Thu, 19 Oct 2023 22:45:58 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6698686F78
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 22:40:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31AEB86D1D
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 22:45:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=b70c=GC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1697747989;
- bh=/MRhB5Bn9oLQ7vrUJg3PfbT/SSk+9ljqioGIlvwuxho=;
- b=GE8UfnPPndKEbaG7Z//oqmIZ7KqRPQ7IKyBp2DFgdUDVq0OoG2e7pZPjo1MKqmcD38rXmA8Y0
- PGQxXGynm6YFFXdhRbFl0t7rbxwNzIHj+sdXrOB8nyWRZWA5pb6yUDKQOm8gxiTDHJuTC+kxg5G
- TJWmslMnZOssRMp7uJzLohJTNtXhm8NI1zLTscqifuGD5xSs7eHQKPzc3QdCyqZokJOVeeElUHo
- 6dzRx+1RnwmQlnVzif9FveXXJYy0gMvc6m7KcIKqYDNZmBY/hFD8zg1E59hvG9Y0rVjgzLB8eBh
- Ksb0whDvwTxsI+4sJCHh0Vm7KOlCTh0hzQc+Pl54fCmg==
-Message-ID: <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
-Date: Thu, 19 Oct 2023 22:39:43 +0200
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 369D4120010;
+ Thu, 19 Oct 2023 23:45:55 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 369D4120010
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1697748355;
+ bh=RAKKteZO90EjfHvaZR5wO63nnMnC+BwbsJYHHbcNS90=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=riGTvay5iq828Vp6nPZL0aVxzKcDIbaUYtgSsgt4ema8wd3ZBsPIGwBND103ME8QI
+ VuMahPK7VlVK0EsSwJMIYmeryhCOaTVW60uTTcHd6Es5grKyJ9+E1gYBRIK5ehYj1z
+ VcTZdvcKiQrPBDIASOSKKtwa9ri8r3iF5wh5VzNAbzcDoysnS7IXPGKpAcQpJBnIas
+ D/os5RFTczecNQW0bPJgS3FPx0+Gx5PND6lcLfli7FdHWlzVm/S55mTYn6WzHpDPnV
+ g6NPb4+HFOARvoZzJhceMGH6QKRRIjZmgg91iUOqZVvQ4m3/tsyINHbIRlPjeFz9vf
+ CzkLoIhIUG+gw==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu, 19 Oct 2023 23:45:55 +0300 (MSK)
+Received: from pc (100.64.160.123) by p-i-exch-sc-m01.sberdevices.ru
+ (172.16.192.107) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.37; Thu, 19 Oct
+ 2023 23:45:54 +0300
+Date: Thu, 19 Oct 2023 23:45:53 +0300
+From: Igor Prusov <ivprusov@salutedevices.com>
+To: Simon Glass <sjg@google.com>
+CC: Neil Armstrong <neil.armstrong@linaro.org>, Jagan Teki
+ <jagan@amarulasolutions.com>, <prusovigor@gmail.com>,
+ <kernel@sberdevices.ru>, Igor Prusov <IVPrusov@sberdevices.ru>, Martin
+ Kurbanov <mmkurbanov@sberdevices.ru>, <u-boot-amlogic@groups.io>,
+ <u-boot@lists.denx.de>
+Subject: Re: [RESEND PATCH v1 1/2] spi: add support for Amlogic A1 SPI Flash
+ Controller
+Message-ID: <20231019204553.sb2qij65h6qsszik@pc>
+References: <20231017171733.3989-1-ivprusov@salutedevices.com>
+ <20231017171733.3989-2-ivprusov@salutedevices.com>
+ <CAPnjgZ06Le0qRukSRsCZ5CoKur6ciaCGGUnRpbfz7OQYzZaGBA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 1/2] configs: rockchip: Use dwc3-generic driver on RK3328
- and RK3399
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
- Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
- Tianling Shen <cnsztl@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: u-boot@lists.denx.de
-References: <20231018223058.2081052-1-jonas@kwiboo.se>
- <20231018223058.2081052-2-jonas@kwiboo.se>
- <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65319414656a2ed50002a2b5
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ06Le0qRukSRsCZ5CoKur6ciaCGGUnRpbfz7OQYzZaGBA@mail.gmail.com>
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180745 [Oct 19 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 542 542
+ 3d23828e213bab96daa5e52f9cef518f74e40214, {Track_E25351},
+ {Tracking_from_domain_doesnt_match_to},
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; 100.64.160.123:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/19 19:07:00 #22234857
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,50 +108,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-10-19 01:44, Marek Vasut wrote:
-> On 10/19/23 00:30, Jonas Karlman wrote:
+On Tue, Oct 17, 2023 at 09:33:02PM -0600, Simon Glass wrote:
+> Hi Igor,
 > 
-> [..]
+> On Tue, 17 Oct 2023 at 11:18, Igor Prusov <ivprusov@salutedevices.com> wrote:
+> >
+> > From: Igor Prusov <IVPrusov@sberdevices.ru>
+> >
+> > Add A1 SPIFC driver from Linux. Slightly modified to use u-boot driver
+> > framework and accommodate to lack of ioread32_rep/iowrite32_rep.
 > 
->> +++ b/configs/rock960-rk3399_defconfig
->> @@ -50,6 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->>   CONFIG_SYS_MMC_ENV_DEV=1
->>   CONFIG_ROCKCHIP_GPIO=y
->>   CONFIG_SYS_I2C_ROCKCHIP=y
->> +CONFIG_MISC=y
->>   CONFIG_MMC_DW=y
->>   CONFIG_MMC_DW_ROCKCHIP=y
->>   CONFIG_MMC_SDHCI=y
->> @@ -70,12 +71,12 @@ CONFIG_SYS_NS16550_MEM32=y
->>   CONFIG_SYSRESET=y
->>   CONFIG_USB=y
->>   CONFIG_USB_XHCI_HCD=y
->> -CONFIG_USB_XHCI_DWC3=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->>   CONFIG_USB_OHCI_HCD=y
->>   CONFIG_USB_OHCI_GENERIC=y
->>   CONFIG_USB_DWC3=y
->> +CONFIG_USB_DWC3_GENERIC=y
+> Well, you could bring them in!
 > 
-> Why not add 'default y if ROCKCHIP' into the Kconfig instead ? This will 
-> have the same effect, without requiring such massive modification of 
-> config files.
+I was thinking about it, but I'd prefer to make a separate series with
+it, if you don't mind. Need some time to figure out best way to
+integrate them into u-boot and I'd like to take a look at other drivers
+that could use those while I'm at it.
 
-Not fully sure what you mean by this and how that would reduce number of
-affected defconfig-files. The USB_XHCI_DWC3 should still be removed from
-these defconfig-files or wrong driver could be used by these boards.
+[...]
 
-Touching the defconfig-files help notify board maintainers that changes
-are happening to their boards.
-
-There will also be a separate patch that remove the rockchip,rk3399-dwc3
-compatible from the dwc3-of-simple driver to finalize this transition to
-use dwc3-generic driver for affected rockchip boards.
-
-Regards,
-Jonas
-
-> 
-> (seems some of the CC domains are not even working, so CC list clipped)
-
+-- 
+Best Regards,
+Igor Prusov
