@@ -4,58 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1714DCDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 02:46:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 550E6CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 03:21:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4514A870A5;
-	Thu, 19 Oct 2023 04:46:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 5354F87129;
+	Thu, 19 Oct 2023 05:21:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C8833870A5; Thu, 19 Oct 2023 04:46:45 +0200 (CEST)
-Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
- by phobos.denx.de (Postfix) with ESMTP id 2C423870A4
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 04:46:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minda.chen@starfivetech.com
-Received: from EXMBX165.cuchost.com (unknown [175.102.18.54])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX165", Issuer "EXMBX165" (not verified))
- by ex01.ufhost.com (Postfix) with ESMTP id E0A4724E083;
- Thu, 19 Oct 2023 10:46:38 +0800 (CST)
-Received: from EXMBX171.cuchost.com (172.16.6.91) by EXMBX165.cuchost.com
- (172.16.6.75) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Thu, 19 Oct
- 2023 10:46:38 +0800
-Received: from [192.168.125.85] (183.27.99.123) by EXMBX171.cuchost.com
- (172.16.6.91) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Thu, 19 Oct
- 2023 10:46:38 +0800
-Message-ID: <1097ab74-8d8e-4f09-b932-14ab6b564cee@starfivetech.com>
-Date: Thu, 19 Oct 2023 10:46:37 +0800
+	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="BxeXO7wp";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id F067487132; Thu, 19 Oct 2023 05:21:48 +0200 (CEST)
+Received: from m15.mail.163.com (m15.mail.163.com [45.254.50.219])
+ by phobos.denx.de (Postfix) with ESMTP id 19415870B0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 05:21:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bruce_suen@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=7ailR
+ eIPVHKAOlt77gE1hzBL3Im/6lqXud3+V1N4cvQ=; b=BxeXO7wpEhueveFieZdcD
+ rabRhdja/XN/r8XqQ9xihjOfOh9oaero5lZ4DCJ8brt36dEcGtve2l4XWfJssa7Z
+ 6uPevgBtUFw01LkJtmf3yWJuRB8A9v7uZ43O0l/viptOoIQw77h2cEYde160o/jF
+ 0evbBXhi2frlBgKv7WADrc=
+Received: from localhost.localdomain (unknown [119.123.78.113])
+ by zwqz-smtp-mta-g0-2 (Coremail) with SMTP id _____wBn_y24oDBl5PaUAA--.34850S4;
+ Thu, 19 Oct 2023 11:21:29 +0800 (CST)
+From: Bruce Suen <bruce_suen@163.com>
+To: u-boot@lists.denx.de
+Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ frieder.schrempf@kontron.de, bruce.sun@xtxtech.com,
+ Bruce Suen <bruce_suen@163.com>
+Subject: [PATCH] mtd: spinand: Add support for XTX XT26xxxDxxxxx
+Date: Wed, 18 Oct 2023 23:21:25 -0400
+Message-Id: <20231019032125.6683-1-bruce_suen@163.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] usb: xhci: Check return value of wait for TRB_TRANSFER
- event
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>
-CC: <u-boot@lists.denx.de>
-References: <20231017062016.51682-1-minda.chen@starfivetech.com>
- <aa649c6d-5992-492a-bd39-d1f4389e773f@denx.de>
- <2313a5f6-30a2-46ed-923f-a6f8699452c6@starfivetech.com>
- <55da21fd-2a9b-4b48-a0bb-d8f07ad362ea@denx.de>
- <2a9821ea-68aa-4997-8779-b2e374627a0e@starfivetech.com>
- <775eb415-1dd3-4aed-b1c7-a6b118c3bad1@denx.de>
- <c354d3df-189e-4506-8ccb-f07cf3ec56ab@starfivetech.com>
- <fe08dab2-2c98-4ad9-9842-12051f89e8df@denx.de>
-From: Minda Chen <minda.chen@starfivetech.com>
-In-Reply-To: <fe08dab2-2c98-4ad9-9842-12051f89e8df@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Originating-IP: [183.27.99.123]
-X-ClientProxiedBy: EXCAS065.cuchost.com (172.16.6.25) To EXMBX171.cuchost.com
- (172.16.6.91)
-X-YovoleRuleAgent: yovoleflag
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wBn_y24oDBl5PaUAA--.34850S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW3JFyrGw1xJr4ftF1rZw48Crg_yoW3tw17pa
+ s0qFyrGr48Ga17Was2qayDZr98Xw4xKrW7u3429a4jvFyrK34rZFW7Ary3CrnrG3yxJay3
+ uw4jgr9rW3WYyaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pR7l19UUUUU=
+X-Originating-IP: [119.123.78.113]
+X-CM-SenderInfo: 5euxuvpbvxv0i6rwjhhfrp/xS2BKRgOKFgi7maMwQAAso
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,198 +66,246 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add Support XTX Technology XT26G01DXXXXX, XT26G11DXXXXX, XT26Q01DXXXXX,
+XT26G02DXXXXX, XT26G12DXXXXX, XT26Q02DXXXXX, XT26G04DXXXXX, and
+XT26Q04DXXXXX SPI NAND.
 
+These are 3V/1.8V 1G/2G/4Gbit serial SLC NAND flash device with on-die
+ECC(8bit strength per 512bytes).
 
-On 2023/10/18 18:55, Marek Vasut wrote:
-> On 10/18/23 12:16, Minda Chen wrote:
->>
->>
->> On 2023/10/18 18:11, Marek Vasut wrote:
->>> On 10/18/23 05:46, Minda Chen wrote:
->>>>
->>>>
->>>> On 2023/10/18 10:35, Marek Vasut wrote:
->>>>> On 10/18/23 03:22, Minda Chen wrote:
->>>>>>
->>>>>>
->>>>>> On 2023/10/17 19:20, Marek Vasut wrote:
->>>>>>> On 10/17/23 08:20, Minda Chen wrote:
->>>>>>>> xhci_wait_for_event() waiting TRB_TRANSFER event may return
->>>>>>>> NULL. Checking the return value to avoid crash.
->>>>>>>>
->>>>>>>> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
->>>>>>>
->>>>>>> How did you trigger this error ? Is there a reproducer ? Details =
-please ...
->>>>>>
->>>>>> While Scanning a lenovo usb2.0 udisk=EF=BC=8C not 100 % reproduce
->>>>>
->>>>> Can you include Linux
->>>>>
->>>>> lsusb -vvv
->>>>>
->>>>> output for this device and include that information in the commit m=
-essage ? (or the U-Boot info below, that works too, just please add it in=
-to the commit message, it is important for future reference).
->>>>>
->>>> OK=EF=BC=8C I will add lsusb -vvv Linux udisk message and crash dump=
- info to commit message
->>>
->>> Thank you
->>>
->>>>>> This is log.
->>>>>>
->>>>>> StarFive # usb reset
->>>>>> resetting USB...
->>>>>> Bus xhci_pci: Register 5000420 NbrPorts 5
->>>>>> Starting the controller
->>>>>> USB XHCI 1.00
->>>>>> scanning bus xhci_pci for devices... WARN halted endpoint, queuein=
-g URB anyway.
->>>>>> Unexpected XHCI event TRB, skipping... (f77141f0 00000000 13000000=
- 02008401)
->>>>>> Unhandled exception: Load access fault
->>>>>> EPC: 00000000f7f563c6 RA: 00000000f7f563c6 TVAL: 000000000000000c
->>>>>> EPC: 000000004024a3c6 RA: 000000004024a3c6 reloc adjusted
->>>>>
->>>>> Where does the crash point to in code, can you disassemble the PC p=
-ointer ? (or maybe you can use scripts/decodecode I think)
->>>>>
->>>> OK=EF=BC=8C I will add EPC pointer disassemble=C2=A0 to commit messa=
-ge
->>>
->>> This part probably doesn't need to be in the commit message. I'd like=
- to know where the crash occurred in the code.
->>
->>
->> 000000004024a376 <abort_td>:
->> {
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a376:=C2=A0=C2=A0 7179=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 addi=C2=A0=C2=A0=C2=A0 sp,sp,-48
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a378:=C2=A0=C2=A0 f406=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sd=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ra,40(sp)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a37a:=C2=A0=C2=A0 f022=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sd=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s0,32(sp)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a37c:=C2=A0=C2=A0 ec26=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sd=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s1,24(sp)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a37e:=C2=A0=C2=A0 e84a=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sd=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s2,16(sp)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a380:=C2=A0=C2=A0 e44e=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sd=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s3,8(sp)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a382:=C2=A0=C2=A0 e052=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sd=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s4,0(sp)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a384:=C2=A0=C2=A0 89ae=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s3,a1
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a386:=C2=A0=C2=A0 84aa=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s1,a0
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct xhci_ctrl *ctr=
-l =3D xhci_get_ctrl(udev);
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a388:=C2=A0=C2=A0 8c4fe0ef=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- jal=C2=A0=C2=A0=C2=A0=C2=A0 ra,4024844c <xhci_get_ctrl>
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct xhci_ring *rin=
-g =3D=C2=A0 ctrl->devs[udev->slot_id]->eps[ep_index].ring;
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a38c:=C2=A0=C2=A0 6785=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 lui=C2=A0=C2=A0=C2=A0=C2=A0 a5,0x1
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a38e:=C2=A0=C2=A0 94be=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=C2=A0 s1,s1,a5
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a390:=C2=A0=C2=A0 9444a603=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- lw=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a2,-1724(s1)
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a394:=C2=A0=C2=A0 00198713=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- addi=C2=A0=C2=A0=C2=A0 a4,s3,1
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a398:=C2=A0=C2=A0 0712=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 slli=C2=A0=C2=A0=C2=A0 a4,a4,0x4
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a39a:=C2=A0=C2=A0 02061793=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- slli=C2=A0=C2=A0=C2=A0 a5,a2,0x20
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a39e:=C2=A0=C2=A0 9381=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 srli=C2=A0=C2=A0=C2=A0 a5,a5,0x20
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3a0:=C2=A0=C2=A0 07c9=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 addi=C2=A0=C2=A0=C2=A0 a5,a5,18
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3a2:=C2=A0=C2=A0 078e=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 slli=C2=A0=C2=A0=C2=A0 a5,a5,0x3
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3a4:=C2=A0=C2=A0 97aa=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=C2=A0 a5,a5,a0
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3a6:=C2=A0=C2=A0 679c=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a5,8(a5)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xhci_queue_command(ct=
-rl, NULL, udev->slot_id, ep_index, TRB_STOP_RING);
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3a8:=C2=A0=C2=A0 2981=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 sext.w=C2=A0 s3,s3
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3aa:=C2=A0=C2=A0 86ce=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a3,s3
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct xhci_ring *rin=
-g =3D=C2=A0 ctrl->devs[udev->slot_id]->eps[ep_index].ring;
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3ac:=C2=A0=C2=A0 97ba=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 add=C2=A0=C2=A0=C2=A0=C2=A0 a5,a5,a4
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xhci_queue_command(ct=
-rl, NULL, udev->slot_id, ep_index, TRB_STOP_RING);
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3ae:=C2=A0=C2=A0 4581=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a1,0
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3b0:=C2=A0=C2=A0 473d=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a4,15
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct xhci_ring *rin=
-g =3D=C2=A0 ctrl->devs[udev->slot_id]->eps[ep_index].ring;
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3b2:=C2=A0=C2=A0 0087ba03=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- ld=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s4,8(a5) # 1008 <_start-0x401feff8>
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct xhci_ctrl *ctr=
-l =3D xhci_get_ctrl(udev);
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3b6:=C2=A0=C2=A0 842a=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 s0,a0
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 xhci_queue_command(ct=
-rl, NULL, udev->slot_id, ep_index, TRB_STOP_RING);
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3b8:=C2=A0=C2=A0 d75ff0ef=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- jal=C2=A0=C2=A0=C2=A0=C2=A0 ra,4024a12c <xhci_queue_command>
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 event =3D xhci_wait_f=
-or_event(ctrl, TRB_TRANSFER);
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3bc:=C2=A0=C2=A0 02000593=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- li=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a1,32
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3c0:=C2=A0=C2=A0 8522=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 mv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a0,s0
->> =C2=A0=C2=A0=C2=A0=C2=A0 4024a3c2:=C2=A0=C2=A0 ebdff0ef=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- jal=C2=A0=C2=A0=C2=A0=C2=A0 ra,4024a27e <xhci_wait_for_event>
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 field =3D le32_to_cpu=
-(event->trans_event.flags);
->> epc-> 4024a3c6:=C2=A0=C2=A0 455c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
- lw=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 a5,12(a0)
->=20
-> So the fault occurs when reading the controller register(s), do I under=
-stand it right ?
->=20
-I think it is right. Actually this error occur in error path, control tx =
-transfer TRB_TRANSFER error occur and jump to error path.
-sending TRB_TRANSFER again. =20
-> Could it be the problem is rather some clock, which are turned off afte=
-r a fault ?
-I think not. Just this udisk can reproduce this issue.
+Datasheet Links:
+- http://www.xtxtech.com/download/?AId=458
+- http://www.xtxtech.com/download/?AId=495
+
+Signed-off-by: Bruce Suen <bruce_suen@163.com>
+---
+ drivers/mtd/nand/spi/Makefile |   1 +
+ drivers/mtd/nand/spi/core.c   |   1 +
+ drivers/mtd/nand/spi/xtx.c    | 180 ++++++++++++++++++++++++++++++++++
+ include/linux/mtd/spinand.h   |   1 +
+ 4 files changed, 183 insertions(+)
+ create mode 100644 drivers/mtd/nand/spi/xtx.c
+
+diff --git a/drivers/mtd/nand/spi/Makefile b/drivers/mtd/nand/spi/Makefile
+index 3051de4f7e..e46cfed446 100644
+--- a/drivers/mtd/nand/spi/Makefile
++++ b/drivers/mtd/nand/spi/Makefile
+@@ -1,4 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+ spinand-objs := core.o gigadevice.o macronix.o micron.o paragon.o toshiba.o winbond.o
++spinand-objs += xtx.o
+ obj-$(CONFIG_MTD_SPI_NAND) += spinand.o
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 597b088ca7..0b4c067425 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -828,6 +828,7 @@ static const struct spinand_manufacturer *spinand_manufacturers[] = {
+ 	&paragon_spinand_manufacturer,
+ 	&toshiba_spinand_manufacturer,
+ 	&winbond_spinand_manufacturer,
++	&xtx_spinand_manufacturer,
+ };
+ 
+ static int spinand_manufacturer_match(struct spinand_device *spinand,
+diff --git a/drivers/mtd/nand/spi/xtx.c b/drivers/mtd/nand/spi/xtx.c
+new file mode 100644
+index 0000000000..ced05b5895
+--- /dev/null
++++ b/drivers/mtd/nand/spi/xtx.c
+@@ -0,0 +1,180 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2018 Stefan Roese <sr@denx.de>
++ *
++ * Derived from drivers/mtd/nand/spi/micron.c
++ *   Copyright (c) 2016-2017 Micron Technology, Inc.
++ */
++
++#ifndef __UBOOT__
++#include <linux/device.h>
++#include <linux/kernel.h>
++#endif
++#include <linux/bitfield.h>
++#include <linux/mtd/spinand.h>
++
++#define SPINAND_MFR_XTX	0x0B
++
++#define XT26XXXD_STATUS_ECC3_ECC2_MASK	    GENMASK(7, 6)
++#define XT26XXXD_STATUS_ECC_NO_DETECTED     (0)
++#define XT26XXXD_STATUS_ECC_1_7_CORRECTED   (1)
++#define XT26XXXD_STATUS_ECC_8_CORRECTED     (3)
++#define XT26XXXD_STATUS_ECC_UNCOR_ERROR     (2)
++
++static SPINAND_OP_VARIANTS(read_cache_variants,
++		SPINAND_PAGE_READ_FROM_CACHE_QUADIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X4_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_DUALIO_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_X2_OP(0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(true, 0, 1, NULL, 0),
++		SPINAND_PAGE_READ_FROM_CACHE_OP(false, 0, 1, NULL, 0));
++
++static SPINAND_OP_VARIANTS(write_cache_variants,
++		SPINAND_PROG_LOAD_X4(true, 0, NULL, 0),
++		SPINAND_PROG_LOAD(true, 0, NULL, 0));
++
++static SPINAND_OP_VARIANTS(update_cache_variants,
++		SPINAND_PROG_LOAD_X4(false, 0, NULL, 0),
++		SPINAND_PROG_LOAD(false, 0, NULL, 0));
++
++static int xt26xxxd_ooblayout_ecc(struct mtd_info *mtd, int section,
++				  struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = mtd->oobsize / 2;
++	region->length = mtd->oobsize / 2;
++
++	return 0;
++}
++
++static int xt26xxxd_ooblayout_free(struct mtd_info *mtd, int section,
++				   struct mtd_oob_region *region)
++{
++	if (section)
++		return -ERANGE;
++
++	region->offset = 2;
++	region->length = mtd->oobsize / 2 - 2;
++
++	return 0;
++}
++
++static const struct mtd_ooblayout_ops xt26xxxd_ooblayout = {
++	.ecc = xt26xxxd_ooblayout_ecc,
++	.rfree = xt26xxxd_ooblayout_free,
++};
++
++static int xt26xxxd_ecc_get_status(struct spinand_device *spinand,
++				   u8 status)
++{
++	switch (FIELD_GET(STATUS_ECC_MASK, status)) {
++	case XT26XXXD_STATUS_ECC_NO_DETECTED:
++		return 0;
++	case XT26XXXD_STATUS_ECC_UNCOR_ERROR:
++		return -EBADMSG;
++	case XT26XXXD_STATUS_ECC_1_7_CORRECTED:
++		return 4 + FIELD_GET(XT26XXXD_STATUS_ECC3_ECC2_MASK, status);
++	case XT26XXXD_STATUS_ECC_8_CORRECTED:
++		return 8;
++	default:
++		break;
++	}
++
++	return -EINVAL;
++}
++
++static const struct spinand_info xtx_spinand_table[] = {
++	SPINAND_INFO("XT26G01D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x31),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G11D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x34),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q01D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x51),
++		     NAND_MEMORG(1, 2048, 128, 64, 1024, 20, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G02D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x32),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G12D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x35),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q02D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x52),
++		     NAND_MEMORG(1, 2048, 128, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26G04D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x33),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++	SPINAND_INFO("XT26Q04D",
++		     SPINAND_ID(SPINAND_READID_METHOD_OPCODE_ADDR, 0x53),
++		     NAND_MEMORG(1, 4096, 256, 64, 2048, 40, 1, 1, 1),
++		     NAND_ECCREQ(8, 512),
++		     SPINAND_INFO_OP_VARIANTS(&read_cache_variants,
++					      &write_cache_variants,
++					      &update_cache_variants),
++		     0,
++		     SPINAND_ECCINFO(&xt26xxxd_ooblayout,
++				     xt26xxxd_ecc_get_status)),
++};
++
++static const struct spinand_manufacturer_ops xtx_spinand_manuf_ops = {
++};
++
++const struct spinand_manufacturer xtx_spinand_manufacturer = {
++	.id = SPINAND_MFR_XTX,
++	.name = "XTX",
++	.chips = xtx_spinand_table,
++	.nchips = ARRAY_SIZE(xtx_spinand_table),
++	.ops = &xtx_spinand_manuf_ops,
++};
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index e8d6feb970..bf7696a981 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -251,6 +251,7 @@ extern const struct spinand_manufacturer micron_spinand_manufacturer;
+ extern const struct spinand_manufacturer paragon_spinand_manufacturer;
+ extern const struct spinand_manufacturer toshiba_spinand_manufacturer;
+ extern const struct spinand_manufacturer winbond_spinand_manufacturer;
++extern const struct spinand_manufacturer xtx_spinand_manufacturer;
+ 
+ /**
+  * struct spinand_op_variants - SPI NAND operation variants
+-- 
+2.34.1
+
