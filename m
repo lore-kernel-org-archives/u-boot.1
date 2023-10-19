@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8535CCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:04:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15361CDB484
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC4828748B;
-	Thu, 19 Oct 2023 17:01:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50D398748F;
+	Thu, 19 Oct 2023 17:01:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jAmZBdLj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J9+5wNU4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA1EA8743E; Thu, 19 Oct 2023 17:01:32 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id A342587259; Thu, 19 Oct 2023 17:01:35 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B958745D
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DCAE87470
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a877e0f0d8so7552767b3.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:30 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5a7db1f864bso96482937b3.3
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727688; x=1698332488; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697727690; x=1698332490; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=WiEHq7p8aMvtiykxv8utIa5Q8Rliz9M4cSuuKPx2Mrs=;
- b=jAmZBdLjkyYQxzozGGRm/Ea0HEpWjmKWwfxqCPLhgguQSeN7NqMdLb2Akz1cwbITPH
- 0futNZ66TfXg47a82pSRY1xBzouMO9L8JcwNLxnr+j4gySuamQpL7RjwcqwjPZ6uFA/X
- lRILv/6YFCn7n0Yl3XKQ6aodWS4Q9TrS6cMDg=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OGwZJoiurMToJUJJt1ZwY8XyW3B/TxGPwTs7HXCJRPI=;
+ b=J9+5wNU4YvSnZ/d+1MkdbclqW7oUZ3c+r7NA1BzsaZ9++/UizOSe/BJUMpl9jF+AXF
+ ENck1V1DwdRpx9fStU1PZAoImM0eauldX3m+gtDipUEiEAgQyTTtoIfTWNU3DwaGyHKH
+ r3j2cBXj6CWVDBU27TnS05YrcrUdlMhueYZDg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727688; x=1698332488;
+ d=1e100.net; s=20230601; t=1697727690; x=1698332490;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WiEHq7p8aMvtiykxv8utIa5Q8Rliz9M4cSuuKPx2Mrs=;
- b=dcjIgu8vq8qix4BEe9bmF5MfH838N2OAUpvy/qJGOWWoIPezXs8/ZPMZp8SRHXDOCb
- so3itDMHiIYiuG3NRCrJixcc2YjlbGBzvCWi2uuhBD4mvsy7TiUyjp0hTbDmGeS9mz43
- FOBUyt/kfmNCG61FMkToeFjLOytXlTK2hlKASsPSWQomXi5YUFTF/Kbqat+C3m/Er9yf
- +IvI5LEUehe6s8jNNy2Yydf34XKcx4dTbGynbv5BmhyhVCQpcrhWLZLLLLkgp4YL/ZF3
- t+VFaKzp5E6Ralk9brytWwsBLkHex1/wOR7s9NtPWmG+MINUCjmx+M8zrtEzOzpvWivx
- +axg==
-X-Gm-Message-State: AOJu0YzinntvaKLJU3CbX7ShTWh2yZdDMTP/BkgatQxaFK82Nf/fqi9F
- QF87Ue3knkpyf18QKWZbVLfQqNd5xe5rgLlWCq6CuA==
-X-Google-Smtp-Source: AGHT+IHep1iJh66dfw9JgML2sy1SCauYDOvVyMt0Zh4fpWgEL4R77wvok/1rjjtZm6vOzAevBMjWGQ==
-X-Received: by 2002:a0d:cb87:0:b0:5a7:be23:296f with SMTP id
- n129-20020a0dcb87000000b005a7be23296fmr1615721ywd.10.1697727688421; 
- Thu, 19 Oct 2023 08:01:28 -0700 (PDT)
+ bh=OGwZJoiurMToJUJJt1ZwY8XyW3B/TxGPwTs7HXCJRPI=;
+ b=muSbdYQVXESiZRkjcrjezYVORsfneXWVEdYbfnqrdr6F6DsqMKf0bWPDvia9cIZ+so
+ 4clVOWihzCaTvzcHLFRK/pYGcDzT75MjXpenCcEtBX++Y1lo4QfBguqOR446WI3TyQTU
+ STnnzilPEa5XrlWTVh5n3Ctgytwy4tsaFlkS8AHQRloLhbWroisVcQi8qaNi1YagQ+8/
+ Yyhr7tgvE4uwDOaUJf+sbdMojt/mqOcxCojrXumHJovSYWdgbDhLGiiSMEbG3NgSKD82
+ CNUv/1Qv232JS1pcvV3sLGFxf6hx8Z2Qu62s+dzRE3givaBUp/xZxOxKt8IA2J7MUs6+
+ 484A==
+X-Gm-Message-State: AOJu0Yz6SePgzhgZIN9icKdqWNPA/53CrQWbdMdNUX1jigBSx+W+3Ble
+ AJwQ4VeajkNGqqu1bSyRupZy/4Mvb994teG+AnX42g==
+X-Google-Smtp-Source: AGHT+IFmkYQsQ6z3+jtwboCgPyWfddZDLjaX4XErMhsytYl0nv10XNA7BAhjDkAXgwzl6UghgbnGGw==
+X-Received: by 2002:a0d:eb03:0:b0:5a2:20ec:40be with SMTP id
+ u3-20020a0deb03000000b005a220ec40bemr2698838ywe.29.1697727689844; 
+ Thu, 19 Oct 2023 08:01:29 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.27
- for <u-boot@lists.denx.de>
+ c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:01:27 -0700 (PDT)
+ Thu, 19 Oct 2023 08:01:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v4 19/24] boot: Make preboot and bootcmd require CMDLINE
-Date: Thu, 19 Oct 2023 11:01:00 -0400
-Message-Id: <20231019150105.714407-19-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [v4 20/24] cmd: Make most commands depend on CMDLINE
+Date: Thu, 19 Oct 2023 11:01:01 -0400
+Message-Id: <20231019150105.714407-20-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019150105.714407-1-trini@konsulko.com>
 References: <20231019150105.714407-1-trini@konsulko.com>
@@ -88,35 +89,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order for a predefined "preboot" or "bootcmd" to be executed by the
-running system we must have a command line.  Add CMDLINE as a
-dependency.
+From: Simon Glass <sjg@chromium.org>
 
+If we disable CMDLINE then we should not ask about enabling the hush
+parser nor any of the commands that would be run on the command line as
+it is no longer available. Convert the CMDLINE option into a menuconfig
+and make every command referenced under cmd/Kconfig depend on it.
+
+This leaves as future work moving the commands that are not under the
+cmd/ hierarchy as future work.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Changes in v4:
+- Reword the commit message slightly.
+- Make this not depend on other patches
+---
+ Makefile    |  2 +-
+ cmd/Kconfig | 20 ++++++++------------
+ 2 files changed, 9 insertions(+), 13 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 40a04f43ee3d..fabf6fec2195 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1558,6 +1558,7 @@ config BOOTARGS_SUBST
- 
- config USE_BOOTCOMMAND
- 	bool "Enable a default value for bootcmd"
-+	depends on CMDLINE
+diff --git a/Makefile b/Makefile
+index e0040a40d330..969f3f74a74d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -851,7 +851,7 @@ HAVE_VENDOR_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(VENDOR)/common/Makef
+ libs-$(CONFIG_API) += api/
+ libs-$(HAVE_VENDOR_COMMON_LIB) += board/$(VENDOR)/common/
+ libs-y += boot/
+-libs-y += cmd/
++libs-$(CONFIG_CMDLINE) += cmd/
+ libs-y += common/
+ libs-$(CONFIG_OF_EMBED) += dts/
+ libs-y += env/
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 099ec444ae99..91297cb53f9a 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1,7 +1,5 @@
+-menu "Command line interface"
+-
+-config CMDLINE
+-	bool "Support U-Boot commands"
++menuconfig CMDLINE
++	bool "Command line interface"
+ 	default y
  	help
- 	  Provide a default value for the bootcmd entry in the environment.  If
- 	  autoboot is enabled this is what will be run automatically.  Enable
-@@ -1577,6 +1578,7 @@ config BOOTCOMMAND
+ 	  Enable U-Boot's command-line functions. This provides a means
+@@ -11,9 +9,10 @@ config CMDLINE
+ 	  Depending on the number of commands enabled, this can add
+ 	  substantially to the size of U-Boot.
  
- config USE_PREBOOT
- 	bool "Enable preboot"
-+	depends on CMDLINE
++if CMDLINE
++
+ config HUSH_PARSER
+ 	bool "Use hush shell"
+-	depends on CMDLINE
  	help
- 	  When this option is enabled, the existence of the environment
- 	  variable "preboot" will be checked immediately before starting the
+ 	  This option enables the "hush" shell (from Busybox) as command line
+ 	  interpreter, thus enabling powerful command line syntax like
+@@ -25,7 +24,6 @@ config HUSH_PARSER
+ 
+ config CMDLINE_EDITING
+ 	bool "Enable command line editing"
+-	depends on CMDLINE
+ 	default y
+ 	help
+ 	  Enable editing and History functions for interactive command line
+@@ -40,15 +38,13 @@ config CMDLINE_PS_SUPPORT
+ 
+ config AUTO_COMPLETE
+ 	bool "Enable auto complete using TAB"
+-	depends on CMDLINE
+ 	default y
+ 	help
+ 	  Enable auto completion of commands using TAB.
+ 
+ config SYS_LONGHELP
+ 	bool "Enable long help messages"
+-	depends on CMDLINE
+-	default y if CMDLINE
++	default y
+ 	help
+ 	  Defined when you want long help messages included
+ 	  Do not set this option when short of memory.
+@@ -77,8 +73,7 @@ config SYS_MAXARGS
+ 
+ config SYS_XTRACE
+ 	bool "Command execution tracer"
+-	depends on CMDLINE
+-	default y if CMDLINE
++	default y
+ 	help
+ 	  This option enables the possiblity to print all commands before
+ 	  executing them and after all variables are evaluated (similar
+@@ -2872,4 +2867,5 @@ config CMD_MESON
+ 	default y
+ 	help
+ 	  Enable useful commands for the Meson Soc family developed by Amlogic Inc.
+-endmenu
++
++endif
 -- 
 2.34.1
 
