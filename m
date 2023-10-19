@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27070CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:00:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5991FCDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 712198704A;
-	Thu, 19 Oct 2023 16:00:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8686E87199;
+	Thu, 19 Oct 2023 16:00:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y1gqekfn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PeYYMi1+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9C9687139; Thu, 19 Oct 2023 16:00:08 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 465AF86CAF; Thu, 19 Oct 2023 16:00:20 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA2708704A
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:00:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B46558701D
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:00:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-53db1fbee70so13438109a12.2
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 07:00:03 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-507c78d258fso2979512e87.2
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 07:00:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697724003; x=1698328803; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697724011; x=1698328811; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1/LyUDEr8usbYAgZpiEHH6paAijr6CTRXYaUqAGZkkM=;
- b=Y1gqekfny4qqxDX7ZNDpVRjs0lmvnAaJy5iDD4r///QsRcRholISKF46LqgXHYB8HC
- gxBpwo//NiKrTHERhFjEaeahrdfyFtQOab2o+wOq1OqB0eHuqQFIj/boksNyCVFdycn7
- 2uICZ9346kKTbfOCSGTcuFZUCXLlMOo5/cEZg=
+ bh=S/GCeFsCHNx94cVLWH0zxDsVh7se0CSMR8L93GvOfbU=;
+ b=PeYYMi1+Yp1ORNr6uRDZDJKLhr99VYuK8PQ8KvA7QmXCajCw20s3q83obcMtb9MoDf
+ V/sE1TWgu3zrmhL9Uqmwxd5l+e4nIpXtoVtoSx4SAichJLObB3ZLAPP3gHy9+WTZKleo
+ 0GMp4HIL+q5VHbsTj4F2XTNayZ+H5+xZ5EQZc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697724003; x=1698328803;
+ d=1e100.net; s=20230601; t=1697724011; x=1698328811;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1/LyUDEr8usbYAgZpiEHH6paAijr6CTRXYaUqAGZkkM=;
- b=f8z5bqFXlAroLBGsHfOqQrTVBqSULD45ADy5cLikLHP1Ohy/ViQgxbAXoUwIHgc1cC
- nZu3uMJ9pLclSJMhNMJdar0FMPZG1yRs0uFHGYcTptecJKr/Y/ZOJJkXe/3TE1wacSy2
- J3xiZeYHXCRfKelSI9BnmL8UeYOccbBFmz1cTnx/ZWQKKzlqa0jmje3m2aF/BjKkDLAP
- hOMV0UQMEyRTO1NVEgTlCJKByhDxjZ7CB0BoYf3FQ6+zIEnI3b7kQ6G+cIzAlXX2ZWyE
- O8me0xifW84PKgi/boD7UvetCkit6FbT0HyvgtwYe+NDourEEBvS1x4xvCpRmKclLYsU
- 3NCg==
-X-Gm-Message-State: AOJu0YwOCgmqIeubPsJyF5M3edz1V/TBtPNQSi66cjCVNrvq4pmYgRI9
- h7XzIsuklhzIYvX4dr7s0aol4c7tCAqHtHJXeW7zMQ==
-X-Google-Smtp-Source: AGHT+IFA3DXDTx9Z/gSIHOWRRnFj83JH0fezbcIo4ys1Yhq7ejjz9q9bL8pvdogYoXVCXhqiK9TRgwi1zC4wgR9amAA=
-X-Received: by 2002:a17:906:4b10:b0:9bf:4e0b:fb0a with SMTP id
- y16-20020a1709064b1000b009bf4e0bfb0amr1290172eju.57.1697724003021; Thu, 19
- Oct 2023 07:00:03 -0700 (PDT)
+ bh=S/GCeFsCHNx94cVLWH0zxDsVh7se0CSMR8L93GvOfbU=;
+ b=v9tL0j153lu0uor46STOj49GMMdEmgrfoHbgKTk+mUtjnJFy5A6kJW9ObrltAe/N3s
+ mecvMT3+mXzGePyIayMu2zTpU8RLnLs84s7Xvu1rLVviTFhrQEia5gvIVik2dbE+RV57
+ XK5Kp/CSdUImqwqIhjHzPGAljXQFcLMAfT74P6ztej4ucHyrhpotTV1ZmpP/+t8E5kL3
+ UW8jBonFczFzgjK5gMd0Sm44C4JpSTmNKL69r8g7P67LOA+Td0qkY6fHz5N0DV8Mt5qY
+ afMOqEe+tDwNtWzj0XNUDlLxS248DhCsQYX+3CgcSLr7IwpDJfVqqr2FOmDX5CC73A+z
+ 27Wg==
+X-Gm-Message-State: AOJu0YxJC7xDejmgQan4S6tFtMbyDtaRIMbGOcfWtNEfDGiWo9lJmIRc
+ vmplaK9i2rS/dxQaSHKrl7bxUj8QvoBJ0jNAXOW+1g==
+X-Google-Smtp-Source: AGHT+IEYhxF9DFgGxclTzLZWNuJy6Gg7nvPtjxE9CspGWkOU6s2TiduXfbNnFelEh5NLxmpOP/Fi7nrRihdXlotFAag=
+X-Received: by 2002:ac2:4824:0:b0:504:3a3d:5015 with SMTP id
+ 4-20020ac24824000000b005043a3d5015mr1411159lft.27.1697724011241; Thu, 19 Oct
+ 2023 07:00:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-5-sjg@chromium.org>
- <e1d4ae7e-2a48-432b-8895-0f469af39b4e@gmx.de>
-In-Reply-To: <e1d4ae7e-2a48-432b-8895-0f469af39b4e@gmx.de>
+ <20231016222835.596572-33-sjg@chromium.org>
+ <20231019023253.GA1856856@bill-the-cat>
+In-Reply-To: <20231019023253.GA1856856@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 19 Oct 2023 07:59:51 -0600
-Message-ID: <CAPnjgZ0Ya5qJiegbc9RZ42wykfyjKCp1av7gHEpg_dBUecaLug@mail.gmail.com>
-Subject: Re: [PATCH v3 04/32] cmd: Add a few more dependencies on CMDLINE
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 19 Oct 2023 08:00:00 -0600
+Message-ID: <CAPnjgZ1xFkn806tSJzM2_wKhKz_GbJvA9bCALiaRV+wGaXz6_g@mail.gmail.com>
+Subject: Re: [PATCH v3 32/32] sandbox: Add a test for disabling CONFIG_CMDLINE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,44 +82,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Wed, 18 Oct 2023 at 07:14, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Wed, 18 Oct 2023 at 20:32, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 10/17/23 00:27, Simon Glass wrote:
-> > Add this to some more commands to avoid build errors with sandbox.
-> >
-> > Note that this is a temporary solution to expose more problems. A later
-> > patch puts these behind an 'if CMDLINE'
+> On Mon, Oct 16, 2023 at 04:28:23PM -0600, Simon Glass wrote:
+>
+> > Now that everything is working, add a test to make sure that this
+> > builds correctly.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
 > > ---
 > >
 > > Changes in v3:
-> > - Add an explation as to why this patch is here
+> > - Rebase on Tom's LONGHELP series
+> > - Correct 'of' typo
 > >
-> >   cmd/Kconfig | 6 ++++++
-> >   1 file changed, 6 insertions(+)
-> >
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 5bc0a92d57ad..00a7f84bce99 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -231,6 +231,7 @@ menu "Boot commands"
-> >
-> >   config CMD_BOOTD
-> >       bool "bootd"
-> > +     depends on CMDLINE
+> >  test/py/tests/test_sandbox_opts.py | 20 ++++++++++++++++++++
+> >  1 file changed, 20 insertions(+)
+> >  create mode 100644 test/py/tests/test_sandbox_opts.py
 >
-> Why don't we simply use a single "if" for all commands?
-> Adding the same dependency to 200+ commands does not feel right.
->
-> If there is any CONFIG_CMD* that is needed without CMDLINE, then that
-> code should move to lib/ or drivers/.
+> This is not doing the equivalent of:
+> make sandbox_config
+> sed -i -e 's/CONFIG_CMDLINE=y/CONFIG_CMDLINE=n/' .config
+> make oldconfig
+> make all
 
-This is here to fix build failures at this point in the series.
-
-One of the later patches does what you suggest (27 I think).
+Buildman should do that automatically...is something failing?
 
 Regards,
 Simon
