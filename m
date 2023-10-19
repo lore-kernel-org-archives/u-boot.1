@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B30CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:03:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E403ACDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:03:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFF2987476;
-	Thu, 19 Oct 2023 17:01:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 424D78747C;
+	Thu, 19 Oct 2023 17:01:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qsj+RjkT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OhCQLVEA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EFDA87436; Thu, 19 Oct 2023 17:01:28 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 9142887436; Thu, 19 Oct 2023 17:01:28 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C24508743F
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9208C8725A
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5a7c95b8d14so103155887b3.3
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:22 -0700 (PDT)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a7af45084eso103418177b3.0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727681; x=1698332481; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697727678; x=1698332478; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qdtmRj74UXVK3HIryDZa/0xggu4HNjhJontGrzKLEEQ=;
- b=Qsj+RjkT4iS5EBjMuh1Wm+/3gfZRiWeBzAt1HoOnDuCzS9y59SaxpSJXB5NKVzHTUh
- iThToInH5fX21stgIDrTQhVHpyqJdltmWfW6lIZtvM5dWF6cmSXV8ZOBRVTv5RbX2UIA
- II2eYEjoBC0jW+5SNSpOZyzO0bjJM+6o97J4U=
+ bh=6RuBlM41tPdXb89yBAXTFbLd9eqhlSwYh2NtQbaxUX8=;
+ b=OhCQLVEAqtpDj7wZom8kUMlX/oV4e9GCh0co6gd51lCOWi1ZjyKrI9ozgVWKVZi4M1
+ U891rj8fRR1HKYwW23GiUiqb16cw4RQd+osdwdQKFqIRrYkf/mvb0GGg9t9h1MC0OvDf
+ jNlT8q+p+LEeu5+7r6W7gJgCcegcUXES0SBNk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727681; x=1698332481;
+ d=1e100.net; s=20230601; t=1697727678; x=1698332478;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qdtmRj74UXVK3HIryDZa/0xggu4HNjhJontGrzKLEEQ=;
- b=q8PtJDJ6qxwceYhCbYqMQX0ZnWnykXKSlM8qXkVdRe+lTzrx2WkBzAdBYLHRCGuItr
- gKl6CmYL8qH0zt56COtsKtbrFb/e1/Cn5p1Dv2G0lfaSd38b5XgH2aJyfupTKkz7BZAk
- QvH44+6juNloMRjvEJ//IDmoWcKOY9/Ub9J/hy5/bXKtkyY8rC+z4wAUe6JPsm8hEgF9
- RCN9cq9BUI2nANZ7jhWknjAuv1BdVAivI1JwVnalDehGNdvKlixVfrPNJhwoQ9N+9huP
- 3d4H1VCIIDvrY/4xj2NwgYJoPDI/gHxOzL9DfLnfJSntHuNrjsz7zqCM/YNrq/FFWUNy
- 76uw==
-X-Gm-Message-State: AOJu0Yw57C+WHRDhEhNVPVPyKduyj7L/w1G2XMZy86YwuKsZGmbZb2W8
- MmOvCFlLB/daEd0k5d1ayYiWQ4lRE7V5UwQdWH0zKg==
-X-Google-Smtp-Source: AGHT+IEqtn9sVpZdoshePKgZ5aC/P4RbTg7/JN0Uvj5WnvDw5iCUJNCQgAKDjzkTLDBipRuuaxqvUw==
-X-Received: by 2002:a81:7241:0:b0:599:b570:2db7 with SMTP id
- n62-20020a817241000000b00599b5702db7mr2741430ywc.30.1697727680966; 
- Thu, 19 Oct 2023 08:01:20 -0700 (PDT)
+ bh=6RuBlM41tPdXb89yBAXTFbLd9eqhlSwYh2NtQbaxUX8=;
+ b=mI6FrZ2U6RwYWUS6fqxfhSWBVCH3+xOG0Itwpa9mpDKsS6t+IY2TcQOC6G3Hg1oYJj
+ EwFiVjFGtxw0O9cbHDCWs/rrox2qGBBG7hPPM4o22Oun+NkM0lFdVdHdb03Ws24PA4U0
+ Zh4LDeBnVmpW0j67yUTnUD98wH17qDSPcoIlE2k35TK4GKZcLpLzdNhA0hngtdgFlDy4
+ fX1kRH941DgrqWPTJpyKLds+DqZzoh3iuxtqTVpUtE4IsOjOawOeSHcKdWmSrUYmvb69
+ UmEhFE6AHxI3hZtSxW+aVUOzx9mnV22SBhrFLMjR4N/iyd9V9vF7UtLE//9pLC5G70o1
+ s8zQ==
+X-Gm-Message-State: AOJu0Yxz8XLBOPVWL3w7mJ2rL2R30EJezN04OEu6W727N2yLMLvyDXFn
+ OPVDmqZzzhR56WZ+WBUJ+iLAilGPrZe7ZqiVTQmD/g==
+X-Google-Smtp-Source: AGHT+IFeBKJbIJMdjjQAev6Rd3u+JIhQbIWLD8Hc7oWPWsfU4nl1FQs5SSCAcWELal0+sI67J5Ca+g==
+X-Received: by 2002:a81:6cc9:0:b0:59f:7fb9:621a with SMTP id
+ h192-20020a816cc9000000b0059f7fb9621amr2529903ywc.22.1697727678107; 
+ Thu, 19 Oct 2023 08:01:18 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.19
+ c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:01:20 -0700 (PDT)
+ Thu, 19 Oct 2023 08:01:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [v4 13/24] autoboot: Correct dependencies on CMDLINE
-Date: Thu, 19 Oct 2023 11:00:54 -0400
-Message-Id: <20231019150105.714407-13-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [v4 11/24] efi: Rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
+Date: Thu, 19 Oct 2023 11:00:52 -0400
+Message-Id: <20231019150105.714407-11-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019150105.714407-1-trini@konsulko.com>
 References: <20231019150105.714407-1-trini@konsulko.com>
@@ -91,135 +94,88 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-Make AUTOBOOT depend on CMDLINE since it is mostly meaningless without it.
+The command should not be used to enable library functionality. Add a
+new BOOTEFI_BOOTMGR Kconfig for that. Adjust the conditions so that the
+same code is built.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 ---
- boot/Kconfig | 29 +++++++++++++++++++----------
- 1 file changed, 19 insertions(+), 10 deletions(-)
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Changes in v4:
+- Integrate AKASHI Takahiro's feedback from v3
+- Reword the help text on CMD_BOOTEFI_BOOTMGR slightly
+---
+ cmd/Kconfig             | 11 ++++++++++-
+ lib/efi_loader/Kconfig  |  6 +++---
+ lib/efi_loader/Makefile |  2 +-
+ 3 files changed, 14 insertions(+), 5 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index e0ded3249343..0dbd10a93469 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1162,14 +1162,16 @@ menu "Autoboot options"
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 16e5cb8f0633..872cb49150cc 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -379,6 +379,15 @@ config CMD_BOOTEFI
+ 	help
+ 	  Boot an EFI image from memory.
  
- config AUTOBOOT
- 	bool "Autoboot"
-+	depends on CMDLINE
++config CMD_BOOTEFI_BOOTMGR
++	bool "UEFI Boot Manager command"
++	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
++	default y
++	help
++	  Select this option to enable the 'bootmgr' subcommand of 'bootefi'.
++	  This subcommand will allow you to select the UEFI binary to be booted
++	  via UEFI variables Boot####, BootOrder, and BootNext.
++
+ config CMD_BOOTEFI_HELLO_COMPILE
+ 	bool "Compile a standard EFI hello world binary for testing"
+ 	depends on CMD_BOOTEFI && !CPU_V7M
+@@ -2110,7 +2119,7 @@ config CMD_EFIDEBUG
+ config CMD_EFICONFIG
+ 	bool "eficonfig - provide menu-driven uefi variables maintenance interface"
+ 	default y if !HAS_BOARD_SIZE_LIMIT
+-	depends on CMD_BOOTEFI_BOOTMGR
++	depends on BOOTEFI_BOOTMGR
+ 	select MENU
+ 	help
+ 	  Enable the 'eficonfig' command which provides the menu-driven UEFI
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index d20aaab6dba4..13cad6342c36 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -32,14 +32,14 @@ config EFI_LOADER
+ 
+ if EFI_LOADER
+ 
+-config CMD_BOOTEFI_BOOTMGR
++config BOOTEFI_BOOTMGR
+ 	bool "UEFI Boot Manager"
  	default y
+ 	select BOOTMETH_GLOBAL if BOOTSTD
  	help
- 	  This enables the autoboot.  See doc/README.autoboot for detail.
+ 	  Select this option if you want to select the UEFI binary to be booted
+-	  via UEFI variables Boot####, BootOrder, and BootNext. This enables the
+-	  'bootefi bootmgr' command.
++	  via UEFI variables Boot####, BootOrder, and BootNext. You should also
++	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is available.
  
-+if AUTOBOOT
-+
- config BOOTDELAY
- 	int "delay in seconds before automatically booting"
- 	default 2
--	depends on AUTOBOOT
- 	help
- 	  Delay before automatically running bootcmd;
- 	  set to 0 to autoboot with no delay, but you can stop it by key input.
-@@ -1191,9 +1193,11 @@ config AUTOBOOT_KEYED
- 	  U-Boot automatic booting process and bring the device
- 	  to the U-Boot prompt for user input.
+ choice
+ 	prompt "Store for non-volatile UEFI variables"
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 8d31fc61c601..0a2cb6e3c476 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -42,7 +42,7 @@ targets += initrddump.o
+ endif
  
-+if AUTOBOOT_KEYED
-+
- config AUTOBOOT_FLUSH_STDIN
- 	bool "Enable flushing stdin before starting to read the password"
--	depends on AUTOBOOT_KEYED && !SANDBOX
-+	depends on !SANDBOX
- 	help
- 	  When this option is enabled stdin buffer will be flushed before
- 	  starting to read the password.
-@@ -1202,7 +1206,6 @@ config AUTOBOOT_FLUSH_STDIN
- 
- config AUTOBOOT_PROMPT
- 	string "Autoboot stop prompt"
--	depends on AUTOBOOT_KEYED
- 	default "Autoboot in %d seconds\\n"
- 	help
- 	  This string is displayed before the boot delay selected by
-@@ -1218,7 +1221,6 @@ config AUTOBOOT_PROMPT
- 
- config AUTOBOOT_ENCRYPTION
- 	bool "Enable encryption in autoboot stopping"
--	depends on AUTOBOOT_KEYED
- 	help
- 	  This option allows a string to be entered into U-Boot to stop the
- 	  autoboot.
-@@ -1245,7 +1247,7 @@ config AUTOBOOT_SHA256_FALLBACK
- 
- config AUTOBOOT_DELAY_STR
- 	string "Delay autobooting via specific input key / string"
--	depends on AUTOBOOT_KEYED && !AUTOBOOT_ENCRYPTION
-+	depends on !AUTOBOOT_ENCRYPTION
- 	help
- 	  This option delays the automatic boot feature by issuing
- 	  a specific input key or string. If CONFIG_AUTOBOOT_DELAY_STR
-@@ -1257,7 +1259,7 @@ config AUTOBOOT_DELAY_STR
- 
- config AUTOBOOT_STOP_STR
- 	string "Stop autobooting via specific input key / string"
--	depends on AUTOBOOT_KEYED && !AUTOBOOT_ENCRYPTION
-+	depends on !AUTOBOOT_ENCRYPTION
- 	help
- 	  This option enables stopping (aborting) of the automatic
- 	  boot feature only by issuing a specific input key or
-@@ -1269,7 +1271,7 @@ config AUTOBOOT_STOP_STR
- 
- config AUTOBOOT_KEYED_CTRLC
- 	bool "Enable Ctrl-C autoboot interruption"
--	depends on AUTOBOOT_KEYED && !AUTOBOOT_ENCRYPTION
-+	depends on !AUTOBOOT_ENCRYPTION
- 	help
- 	  This option allows for the boot sequence to be interrupted
- 	  by ctrl-c, in addition to the "bootdelaykey" and "bootstopkey".
-@@ -1278,7 +1280,7 @@ config AUTOBOOT_KEYED_CTRLC
- 
- config AUTOBOOT_NEVER_TIMEOUT
- 	bool "Make the password entry never time-out"
--	depends on AUTOBOOT_KEYED && AUTOBOOT_ENCRYPTION && CRYPT_PW
-+	depends on AUTOBOOT_ENCRYPTION && CRYPT_PW
- 	help
- 	  This option removes the timeout from the password entry
- 	  when the user first presses the <Enter> key before entering
-@@ -1286,7 +1288,7 @@ config AUTOBOOT_NEVER_TIMEOUT
- 
- config AUTOBOOT_STOP_STR_ENABLE
- 	bool "Enable fixed string to stop autobooting"
--	depends on AUTOBOOT_KEYED && AUTOBOOT_ENCRYPTION
-+	depends on AUTOBOOT_ENCRYPTION
- 	help
- 	  This option enables the feature to add a fixed stop
- 	  string that is defined at compile time.
-@@ -1317,9 +1319,12 @@ config AUTOBOOT_STOP_STR_SHA256
- 	  includes a ":", the portion prior to the ":" will be treated
- 	  as a salt value.
- 
-+endif  # AUTOBOOT_KEYED
-+
-+if !AUTOBOOT_KEYED
-+
- config AUTOBOOT_USE_MENUKEY
- 	bool "Allow a specify key to run a menu from the environment"
--	depends on !AUTOBOOT_KEYED
- 	help
- 	  If a specific key is pressed to stop autoboot, then the commands in
- 	  the environment variable 'menucmd' are executed before boot starts.
-@@ -1334,6 +1339,10 @@ config AUTOBOOT_MENUKEY
- 	  For example, 33 means "!" in ASCII, so pressing ! at boot would take
- 	  this action.
- 
-+endif
-+
-+endif  # AUTOBOOT
-+
- config AUTOBOOT_MENU_SHOW
- 	bool "Show a menu on boot"
- 	depends on CMD_BOOTMENU
+ obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+-obj-$(CONFIG_CMD_BOOTEFI_BOOTMGR) += efi_bootmgr.o
++obj-$(CONFIG_BOOTEFI_BOOTMGR) += efi_bootmgr.o
+ obj-y += efi_boottime.o
+ obj-y += efi_helper.o
+ obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) += efi_capsule.o
 -- 
 2.34.1
 
