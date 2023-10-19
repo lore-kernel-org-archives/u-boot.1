@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFBC4CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93727CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:58:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78CAC87257;
-	Thu, 19 Oct 2023 16:57:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E27328723E;
+	Thu, 19 Oct 2023 16:58:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UzYrxqy9";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cCY5j44W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C956B86FFD; Thu, 19 Oct 2023 16:57:33 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 12E61870AF; Thu, 19 Oct 2023 15:16:23 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C17087257
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:57:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ABFD86FEA
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 15:16:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5a8628e54d4so7996927b3.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 07:57:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=gborowiak@gmail.com
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-d77ad095f13so8170502276.2
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 06:16:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727449; x=1698332249; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=X5ZiBOZWBAPNhzogYM8eBR+I7+6PEyUe2zfkusiCM60=;
- b=UzYrxqy9/aQTzJJXFGPnneXGSXG7H9/gwUovEIGQYnj4bb5Y70qDnPnsjKoNQIhlL1
- erEiRzHvgpTATPEcrBJB8m9o8mmKsmBNDfhijvgM0znhp4Pz0hwDcE1Plg87fRVJr3Hs
- Bkbr73so5kLNBxU7f74MSO+69ubkWuL1NTRVE=
+ d=gmail.com; s=20230601; t=1697721379; x=1698326179; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=jWLqcILW6yEYxjfA/mgWWA1LCDtV/ubO6Ynq9Ca3V70=;
+ b=cCY5j44WGe+hlSKVAkuI7aUMt/bhcRec3+ldVH13wxt8o+k155d2Dq8/wEhXXClN/e
+ LJkqtRb6g/dIukXVR2jzJ01VFC5/SeSMEayoN3Fwj9Erde2oNNx/AzuDrwVm0yytNS77
+ oadOuhwiMTK8FoUvs/MXOK0sEYbyi2h9UAp+NulPFmWDI4kMMkEvsck2xgHvyMxirfBo
+ i9JN9cadTrKn1irpgRC2sj51TSa8WB3Xg6wIJoxTksGrQspU2yJBuxTYFVMfwwZO0oAs
+ 5VKgaZakM5MyNGAEJEubYb+nYmhHw4wpizMgq7vV+bgUloK/MCYM7VbrlPSt4nVI6FT6
+ mozg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727449; x=1698332249;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=X5ZiBOZWBAPNhzogYM8eBR+I7+6PEyUe2zfkusiCM60=;
- b=Vc+NkmrkMICgsUZOwzs9l1iZhaDUSe+JC9Enx7AllzQX4YUdc8JMnmQK335acU/tn8
- DzR9Hxl3qb2t11+V68XnN9/0ThBwlMzo7NM+0ozjOJTKRu/E3GktreQowjdwUQbnFCFh
- TsAS4z2Lv1jS+wFRKGqycYprjhbKO4n1n2rDwl6MgEX+SuPC9ctCppfbBoxS/YczvKX2
- nt2Mvo2P5IV6B0z4dgnPVNkZ+wpObD/ytv2dLxczXxozmQoCexKj1y6PsLAzd6CpsG82
- m6P2d2f0xIqyFwEz/LQOThJQY2BZG5dynIih+YkVlb7jjgfFIQ7HO2Kj0Wl4GGtYKQgF
- FF7Q==
-X-Gm-Message-State: AOJu0YyE12vlx+GW+vuA8xePvlKzV8Xxb3C/31Jx//yH2ID2OB7vNrWp
- mpoK1DuLYvlRrsN//C5qXejn/MslrfN46wgppb9Cyw==
-X-Google-Smtp-Source: AGHT+IFXANUQg+ElLx2XrIBc6DLrIKPgONW7xztux9y8hotUdxdeeLOGhnwRGsXQGy/1C6MGSAzDnA==
-X-Received: by 2002:a81:8341:0:b0:5a7:d8c8:aa17 with SMTP id
- t62-20020a818341000000b005a7d8c8aa17mr1683800ywf.13.1697727448956; 
- Thu, 19 Oct 2023 07:57:28 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- o63-20020a0dfe42000000b0059a34cfa2a5sm2442167ywf.67.2023.10.19.07.57.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 07:57:28 -0700 (PDT)
-Date: Thu, 19 Oct 2023 10:57:26 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: rick@andestech.com, u-boot@lists.denx.de
-Subject: Re: [PULL] u-boot-riscv/master
-Message-ID: <20231019145726.GB3119521@bill-the-cat>
-References: <ZTEV5KksRDvCHqkT@swlinux02>
+ d=1e100.net; s=20230601; t=1697721379; x=1698326179;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=jWLqcILW6yEYxjfA/mgWWA1LCDtV/ubO6Ynq9Ca3V70=;
+ b=pHkk5i6tpE7T/rKaQ7TRrXzmlPjdP3mXyQRHK4SfIiuvg1k+qEN7F/a1k7bjwsJAbL
+ iKrtk59mEUhGIvh+eVpcP/8crUMJPoqTAOGReUdpbrGptFq7dSmzVei+GttSsUG7Yoc+
+ xucN47dIohlabHyXvbBaYvOPbCMSbsvXCvgUYQ1QTgDFdPBD+XuIgOg3TdPowEu1VQbq
+ 3GgN3knbbSWp68kkcQ49VS6j7n/6i3uchx5+UsRaJOqSVHJu5G9gZw5qEhiPjf1Fkk6h
+ GSP3yPnMXG4p0+cts5RfP09ZPJhNmCp1BhelyrSuhgywaWa5XmGRv4tdbQZkcJK86cFt
+ 46zA==
+X-Gm-Message-State: AOJu0YwnKi6MdKrucuuTfwgTFQiw0kyC2QsO7XfFOpXRBQq6hfbjrwyS
+ 4LslHorZciYS1yOoMZgSp5GJFSyZE+kuxUROTadjGTmmy2go0Q==
+X-Google-Smtp-Source: AGHT+IG2IrnlOwYsME/q9GyQlE/0NiMruo47DaUcsfPLCLiPkEhPPQQK91tq1S2mEW146JzcZQuOP6/xRJSMMBjISEE=
+X-Received: by 2002:a25:cd47:0:b0:d86:5a8d:6e34 with SMTP id
+ d68-20020a25cd47000000b00d865a8d6e34mr2192671ybf.29.1697721379069; Thu, 19
+ Oct 2023 06:16:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fk4/RFDdrwbFvvsM"
-Content-Disposition: inline
-In-Reply-To: <ZTEV5KksRDvCHqkT@swlinux02>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Grzegorz Borowiak <gborowiak@gmail.com>
+Date: Thu, 19 Oct 2023 15:16:08 +0200
+Message-ID: <CAMwbjeWur3uKY0fV89PqdrSB7t_e=3Osot6DAocrhA57PCf_UQ@mail.gmail.com>
+Subject: Branches in uboot-imx
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Thu, 19 Oct 2023 16:58:19 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +82,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello!
 
---fk4/RFDdrwbFvvsM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I just cloned the repository:
 
-On Thu, Oct 19, 2023 at 07:41:24PM +0800, Leo Liang wrote:
+https://github.com/nxp-imx/uboot-imx
 
-> Hi Tom,
->=20
-> The following changes since commit 9a0cf3993f71043ba08c315572c54622de42d4=
-47:
->=20
->   Merge branch '2023-10-17-spl-test-some-load-methods' (2023-10-18 08:28:=
-00 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
->=20
-> for you to fetch changes up to bc5a50452bd42029d6587e1596b44ff235655e90:
->=20
->   riscv: Add Zbb support for building U-Boot (2023-10-19 17:29:50 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/18215
+and I encountered a rather large amount of branches (listed below).
 
-Applied to u-boot/master, thanks!
+Are these branches somehow described, so I could read what they are about?
+Especially I'm interested in branches whose names begin with "imx" and
+"lf". What are differences between them, and how are they different from
+branches here:
 
---=20
-Tom
+https://github.com/u-boot/u-boot
 
---fk4/RFDdrwbFvvsM
-Content-Type: application/pgp-signature; name="signature.asc"
+?
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUxQ9YACgkQFHw5/5Y0
-tyz4swv/aRk8o+W6CVNgQdSCwIkShZuH68QSUx3015GfKB3+oOygSl2IlvOBI1tZ
-5c+h7HjKXF/3CDEFwawk4wA9s07f+WorN7IcDYfrQR7vNMHlqwrHBMBryeGk8vxE
-amMjQ4W0H3eDAYE+mrbgJe0oeaswg6PpqYlkj6vPlgPd8PTIj6rzYOIZLX7jGNKl
-Ca3gQBo6ZGVy0z1h8YtUF1aLiZrTGMVhY+5VqpPWaY3iE+TnKSDyCCmq+Jfc+3HM
-/K6g79+tmo7lGHyEm1QsrWJOLar7Lcd55o0A5IjWdT0yTf9+Tp8y98dA3wEh5A2O
-Np6qst1DYEqZRU8cWBoZlnrBaw91PfeXJ/aXDiUpowwyRNwBCDj7MxQXcUj0Y1u3
-oq+j8og7+ddGxBGBardDCD5czJz221qVb7SF0ZkADGbvItxdjoKqfIvZSGhuzegC
-sMe1/jotX1VFBg3FQF+HgCKcjSIEpQhnfNCQS+UzHag1CbnJt5NJOfJS9JbeQHWI
-LihVJoVk
-=4q3E
------END PGP SIGNATURE-----
-
---fk4/RFDdrwbFvvsM--
+imx_4.14.98_8qxpc0_er
+imx_5.4.0_8dxlphantom_er
+imx_v2017.03_4.9.11_1.0.0_ga
+imx_v2017.03_4.9.123_imx8mm_ga
+imx_v2017.03_4.9.51_imx8_beta1
+imx_v2017.03_4.9.51_imx8_beta2
+imx_v2017.03_4.9.51_imx8m_beta
+imx_v2017.03_4.9.51_imx8m_ga
+imx_v2017.03_4.9.88_2.0.0_ga
+imx_v2017.03_4.9.88_imx8mm_alpha
+imx_v2017.03_4.9.88_imx8qxp_beta2
+imx_v2018.03_4.14.62_1.0.0_beta
+imx_v2018.03_4.14.78_1.0.0_ga
+imx_v2018.03_4.14.98_2.0.0_ga
+imx_v2018.03_4.14.98_2.1.0
+imx_v2018.03_4.14.98_2.2.0
+imx_v2018.03_4.14.98_2.3.0
+imx_v2019.04_4.19.35_1.0.0
+imx_v2019.04_4.19.35_1.1.0
+imx_v2019.04_5.4.3_2.0.0
+imx_v2020.04_5.4.24_2.1.0
+imx_v2020.04_5.4.47_2.2.0
+imx_v2020.04_5.4.70_2.3.0
+lf-5.4.y_v2019.04
+lf_v2020.04
+lf_v2021.04
+lf_v2022.04
+lf_v2023.04
+master
+nxp/imx_3.14.38_6ul_engr
+nxp/imx_v2009.08
+nxp/imx_v2009.08_1.1.0
+nxp/imx_v2009.08_10.04.01
+nxp/imx_v2009.08_10.05.02
+nxp/imx_v2009.08_10.07.11
+nxp/imx_v2009.08_10.10.01
+nxp/imx_v2009.08_10.11.01
+nxp/imx_v2009.08_10.12.01
+nxp/imx_v2009.08_11.04.01
+nxp/imx_v2009.08_11.05.01
+nxp/imx_v2009.08_11.09.01
+nxp/imx_v2009.08_11.11.01
+nxp/imx_v2009.08_12.01.01
+nxp/imx_v2009.08_12.02.01
+nxp/imx_v2009.08_12.09.01
+nxp/imx_v2009.08_12.10.02
+nxp/imx_v2009.08_3.0.0
+nxp/imx_v2009.08_3.0.35_4.0.0
+nxp/imx_v2009.08_3.0.35_4.1.0
+nxp/imx_v2009.08_r13.4.y
+nxp/imx_v2013.04_3.10.17_1.0.0_beta
+nxp/imx_v2013.04_3.10.17_1.0.0_ga
+nxp/imx_v2013.04_3.10.31_1.1.0_alpha
+nxp/imx_v2013.04_3.10.9_1.0.0_alpha
+nxp/imx_v2013.04_3.5.7_1.0.0_alpha
+nxp/imx_v2014.04_3.10.31_1.1.0_beta
+nxp/imx_v2014.04_3.10.31_1.1.0_beta2
+nxp/imx_v2014.04_3.10.53_1.1.0_ga
+nxp/imx_v2014.04_3.14.28_1.0.0_ga
+nxp/imx_v2014.04_3.14.28_7d_alpha
+nxp/imx_v2014.04_3.14.38_6qp_beta
+nxp/imx_v2014.04_kk4.4.3_2.y
+nxp/imx_v2015.04
+nxp/imx_v2015.04_3.14.38_6qp_ga
+nxp/imx_v2015.04_3.14.38_6ul7d_beta
+nxp/imx_v2015.04_3.14.38_6ul_ga
+nxp/imx_v2015.04_3.14.52_1.1.0_ga
+nxp/imx_v2015.04_4.1.15_1.0.0_ga
+nxp/imx_v2015.04_brillo
+nxp/imx_v2016.03_4.1.15_2.0.0_ga
+nxp/imx_v2016.03_4.1.30_7ulp_alpha
+nxp/imx_v2016.03_4.1.33_7ulp_beta
+nxp/imx_v2017.03_4.9.11_1.0.0_ga
+nxp/maddev-imx-android-r10.3
+nxp/maddev-imx-android-r13.2
+nxp/master
+nxp/scm-imx_v2016.03_4.1.15_2.0.0_ga
+u-boot/master
+u-boot/next
+u-boot/origin
+u-boot/u-boot-2009.11.y
+u-boot/u-boot-2013.01.y
+u-boot/u-boot-2016.09.y
