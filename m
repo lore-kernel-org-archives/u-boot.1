@@ -4,54 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E48CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 20:37:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92D4ECDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 20:40:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61C5E86F78;
-	Thu, 19 Oct 2023 22:37:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E66F870A2;
+	Thu, 19 Oct 2023 22:40:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="RAQnhooB";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="GE8UfnPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 168C387471; Thu, 19 Oct 2023 22:37:37 +0200 (CEST)
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
+ id 50083871E8; Thu, 19 Oct 2023 22:40:16 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C46D886F6F
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 22:37:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6698686F78
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 22:40:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hugovil.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
- ; s=x;
- h=Subject:Content-Transfer-Encoding:Mime-Version:Message-Id:Cc:To:From
- :Date:subject:date:message-id:reply-to;
- bh=OO7DNlho2vs/inN7d28Y5X0mN5lQzKxkYQ7vqiLKt3w=; b=RAQnhooBRT7aDnnITK+9TJil0j
- WizpMBwK44ZUWyVoW6ot0fWxVdEbE/6wsTOfnBUECpU2rhHCsSHODqsOD1CB7FjHVwOquyawxkK+V
- t2vl0wBwKeVj5J7dOSW6sB4CWhMtW85PGe70uA8y84p4RDtdpxS4/H9IwjagfrWdb5yc=;
-Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:33900
- helo=pettiford) by mail.hugovil.com with esmtpa (Exim 4.92)
- (envelope-from <hugo@hugovil.com>)
- id 1qtZls-0000R2-HQ; Thu, 19 Oct 2023 16:37:33 -0400
-Date: Thu, 19 Oct 2023 16:37:32 -0400
-From: Hugo Villeneuve <hugo@hugovil.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, Fabio Estevam
- <festevam@denx.de>
-Message-Id: <20231019163732.01a0e9fcf23b07629a7c3b51@hugovil.com>
-In-Reply-To: <20231019192155.1735199-1-festevam@gmail.com>
-References: <20231019192155.1735199-1-festevam@gmail.com>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=b70c=GC=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1697747989;
+ bh=/MRhB5Bn9oLQ7vrUJg3PfbT/SSk+9ljqioGIlvwuxho=;
+ b=GE8UfnPPndKEbaG7Z//oqmIZ7KqRPQ7IKyBp2DFgdUDVq0OoG2e7pZPjo1MKqmcD38rXmA8Y0
+ PGQxXGynm6YFFXdhRbFl0t7rbxwNzIHj+sdXrOB8nyWRZWA5pb6yUDKQOm8gxiTDHJuTC+kxg5G
+ TJWmslMnZOssRMp7uJzLohJTNtXhm8NI1zLTscqifuGD5xSs7eHQKPzc3QdCyqZokJOVeeElUHo
+ 6dzRx+1RnwmQlnVzif9FveXXJYy0gMvc6m7KcIKqYDNZmBY/hFD8zg1E59hvG9Y0rVjgzLB8eBh
+ Ksb0whDvwTxsI+4sJCHh0Vm7KOlCTh0hzQc+Pl54fCmg==
+Message-ID: <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
+Date: Thu, 19 Oct 2023 22:39:43 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 1/2] configs: rockchip: Use dwc3-generic driver on RK3328
+ and RK3399
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
+ Tianling Shen <cnsztl@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: u-boot@lists.denx.de
+References: <20231018223058.2081052-1-jonas@kwiboo.se>
+ <20231018223058.2081052-2-jonas@kwiboo.se>
+ <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 70.80.174.168
-X-SA-Exim-Mail-From: hugo@hugovil.com
-Subject: Re: [PATCH v2 1/2] imx8mp_evk: Simplify Ethernet initialization
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 65319414656a2ed50002a2b5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,110 +82,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 19 Oct 2023 16:21:54 -0300
-Fabio Estevam <festevam@gmail.com> wrote:
+On 2023-10-19 01:44, Marek Vasut wrote:
+> On 10/19/23 00:30, Jonas Karlman wrote:
+> 
+> [..]
+> 
+>> +++ b/configs/rock960-rk3399_defconfig
+>> @@ -50,6 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>   CONFIG_SYS_MMC_ENV_DEV=1
+>>   CONFIG_ROCKCHIP_GPIO=y
+>>   CONFIG_SYS_I2C_ROCKCHIP=y
+>> +CONFIG_MISC=y
+>>   CONFIG_MMC_DW=y
+>>   CONFIG_MMC_DW_ROCKCHIP=y
+>>   CONFIG_MMC_SDHCI=y
+>> @@ -70,12 +71,12 @@ CONFIG_SYS_NS16550_MEM32=y
+>>   CONFIG_SYSRESET=y
+>>   CONFIG_USB=y
+>>   CONFIG_USB_XHCI_HCD=y
+>> -CONFIG_USB_XHCI_DWC3=y
+>>   CONFIG_USB_EHCI_HCD=y
+>>   CONFIG_USB_EHCI_GENERIC=y
+>>   CONFIG_USB_OHCI_HCD=y
+>>   CONFIG_USB_OHCI_GENERIC=y
+>>   CONFIG_USB_DWC3=y
+>> +CONFIG_USB_DWC3_GENERIC=y
+> 
+> Why not add 'default y if ROCKCHIP' into the Kconfig instead ? This will 
+> have the same effect, without requiring such massive modification of 
+> config files.
 
-> From: Fabio Estevam <festevam@denx.de>
-> 
-> With DM enabled, there is no need for board code to initialize
-> the Ethernet interfaces.
-> 
-> The RTL8211FDI Ethernet PHYs have 25MHz oscillator, so there is no
-> need to enable the RGMII TX clk output.
-> 
-> Also, there is no need for describing the deprecated phy-reset FEC
-> properties, nor passing reset properties to the EQOS interface in
-> u-boot.dtsi.
-> 
-> Remove all these unneeded pieces.
-> 
-> Tested both Ethernet interfaces after these changes.
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+Not fully sure what you mean by this and how that would reduce number of
+affected defconfig-files. The USB_XHCI_DWC3 should still be removed from
+these defconfig-files or wrong driver could be used by these boards.
 
-Reviewed-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Touching the defconfig-files help notify board maintainers that changes
+are happening to their boards.
 
+There will also be a separate patch that remove the rockchip,rk3399-dwc3
+compatible from the dwc3-of-simple driver to finalize this transition to
+use dwc3-generic driver for affected rockchip boards.
 
-> ---
-> Changes since v1:
-> - Removed Ethernet related headers. (Hugo)
-> - Also removed custom eqos reset properties from u-boot.dtsi.
+Regards,
+Jonas
+
 > 
->  arch/arm/dts/imx8mp-evk-u-boot.dtsi     | 14 -------------
->  board/freescale/imx8mp_evk/imx8mp_evk.c | 28 +------------------------
->  2 files changed, 1 insertion(+), 41 deletions(-)
-> 
-> diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-> index 0bf489b46248..51c84383673c 100644
-> --- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-> +++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-> @@ -137,17 +137,3 @@
->  &wdog1 {
->  	bootph-pre-ram;
->  };
-> -
-> -&ethphy0 {
-> -	reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
-> -	reset-delay-us = <15000>;
-> -	reset-post-delay-us = <100000>;
-> -};
-> -
-> -&fec {
-> -	phy-reset-gpios = <&gpio4 2 GPIO_ACTIVE_LOW>;
-> -	phy-reset-duration = <15>;
-> -	phy-reset-post-delay = <100>;
-> -};
-> -
-> -
-> diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> index a24b8c1d8608..42291c958e39 100644
-> --- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-> +++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-> @@ -7,8 +7,6 @@
->  #include <env.h>
->  #include <errno.h>
->  #include <init.h>
-> -#include <miiphy.h>
-> -#include <netdev.h>
->  #include <linux/delay.h>
->  #include <asm/global_data.h>
->  #include <asm/mach-imx/iomux-v3.h>
-> @@ -20,33 +18,9 @@
->  
->  DECLARE_GLOBAL_DATA_PTR;
->  
-> -static void setup_fec(void)
-> -{
-> -	struct iomuxc_gpr_base_regs *gpr =
-> -		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
-> -
-> -	/* Enable RGMII TX clk output */
-> -	setbits_le32(&gpr->gpr[1], BIT(22));
-> -}
-> -
-> -#if CONFIG_IS_ENABLED(NET)
-> -int board_phy_config(struct phy_device *phydev)
-> -{
-> -	if (phydev->drv->config)
-> -		phydev->drv->config(phydev);
-> -	return 0;
-> -}
-> -#endif
-> -
->  int board_init(void)
->  {
-> -	int ret = 0;
-> -
-> -	if (IS_ENABLED(CONFIG_FEC_MXC)) {
-> -		setup_fec();
-> -	}
-> -
-> -	return ret;
-> +	return 0;
->  }
->  
->  int board_late_init(void)
-> -- 
-> 2.34.1
-> 
-> 
+> (seems some of the CC domains are not even working, so CC list clipped)
+
