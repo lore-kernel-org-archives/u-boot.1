@@ -4,62 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DEA5CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 12:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79AE8C41513
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 12:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B30787045;
-	Thu, 19 Oct 2023 14:42:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id B586D87096;
+	Thu, 19 Oct 2023 14:49:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="f2zJ72qP";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 28ED88704A; Thu, 19 Oct 2023 14:42:48 +0200 (CEST)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::226])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697719764;
+	bh=0dkop2YMJ2AN0eorB05hz1Y4aAodTQet6Sv0tCIl87c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JwYzqcQeZAefPvbit10YMn6ekX/c2gY4Tyynh137C6P5N1YGOTN7hrVyAChdJ29/s
+	 RS+MtlqI/Fjc/A/Acghd7sbFqCvpP5mHDe6gE/m8rqB7DTZ5BIhKmD7jRDYgbZUIIS
+	 ahqJ8Siv0HKM0+PUlddRveeWchcgAvJt666Mi0oGuuhg8rjU8dE4niYdc8KRW8hg5W
+	 iPgrfgj2YqpKutb5y95cd478scbeH2X4wp3shVDhux5yuAAQ+jamCsoxjxMkvJ8RKe
+	 MBKq5O6U8H6qpScvqPIRzJPM7/ZmmAil5muirwS1gHoB2wBJM1zRIreuO3x8rkxkjD
+	 zA9dHdH/C7C5g==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9DBD86F9A
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:42:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id EF66AC000A;
- Thu, 19 Oct 2023 12:42:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697719365;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Fq4+PexogCzzsSdGjjnkBPK4F1Ta9W7eRuSmuNHSNY4=;
- b=f2zJ72qPG8tjEUTmrm0j0Xh/jIeYEs61DgiLE5/LWKPO0QdfnNkyUhn5avehkk82DJoz3y
- 82mEbyS8LsfuwV0Zo9idw7erAZtOD6u8bS4cYoLw+jovOlKj11tZ9YgmklxXu/o6omFRuW
- aWLDvF75ElYQ4FvN+7xPQfYfldZ9s0yfKzW7rX/N16jKi8eE3cvH1rZTiyDx5crFYr2MT6
- 4w1WPDKr64Kcc0uTGJXklUcfXLvoP8y7iO/gGNXYmrE0GTVrRMmGRbEREVi/R5jC2jqyzX
- 81G4SxEwbezDCwEHqU0IHrTcMZiOBVIigYBPSqZpC2OxUM59epR25cVmgZqsGA==
-Message-ID: <311c04dc-8bd5-4300-b496-6dc41403481e@bootlin.com>
-Date: Thu, 19 Oct 2023 14:42:44 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id C15F58707C;
+ Thu, 19 Oct 2023 14:49:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697719762;
+ bh=0dkop2YMJ2AN0eorB05hz1Y4aAodTQet6Sv0tCIl87c=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=O/0Qp1iXiQFwbb3xRl+3DPdOtnpCGURzM5zx/lSyMwsz4wEWUIT8n7umYC33V5Q69
+ BPMzRSnI8yUGI6wXtD7XoabMTX/c3h1ObAoNfflGwfYrIuo/TgOYjLyMpoJIX+lwj0
+ y5RC6YZqckBN/ZO2c2mXrBUGMNcF7rQuvDlNWbTYAWwzONOt9kiUO9J5rrPJYMhZRe
+ pJWQVcmW7RzfSoNQtka3aHSPEUbwlq/bqLF3x/2QxpmzqugR3GgKI56YDxhumzuGvS
+ yUR/Gs8n2Bj+jDGSsDu2UiXW75ADYEs2+3tpg+KnZo0n55zNkld3xkoAqivtL7CgWp
+ ZMQSwT+mBw92g==
+Message-ID: <529bab0f-a7ac-4f64-a1df-10f3699bd6dd@denx.de>
+Date: Thu, 19 Oct 2023 14:48:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/9] DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic
- node for esm
+Subject: Re: [PATCH v2 0/9] ufs: Add a PCI UFS controller support
+To: Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20231011131552.14665-1-bmeng@tinylab.org>
+ <CAEUhbmXzgjRkzKq=TSQJADkCm75H-HugMz=4+g0ccNL2WWNWRQ@mail.gmail.com>
 Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, thomas.petazzoni@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com,
- Gowtham Tammana <g-tammana@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Simon Glass <sjg@chromium.org>
-References: <20231016141135.325698-1-thomas.richard@bootlin.com>
- <20231016141135.325698-2-thomas.richard@bootlin.com>
- <20231016162915.53tpyquivwltekdr@anagram>
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20231016162915.53tpyquivwltekdr@anagram>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-GND-Sasl: thomas.richard@bootlin.com
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAEUhbmXzgjRkzKq=TSQJADkCm75H-HugMz=4+g0ccNL2WWNWRQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,79 +71,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/16/23 18:29, Nishanth Menon wrote:
-> On 16:11-20231016, Thomas Richard wrote:
->> From: Gowtham Tammana <g-tammana@ti.com>
->>
->> Add pmic tps659413 node needed for ESM error event handling.
->>
->> Signed-off-by: Gowtham Tammana <g-tammana@ti.com>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
->> ---
->>
->>  arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 17 ++++++++++++++---
->>  1 file changed, 14 insertions(+), 3 deletions(-)
->>
->> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
->> index e62f9218e8..2bf0d5e3c0 100644
->> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
->> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
->> @@ -249,13 +249,24 @@
->>  
->>  &wkup_i2c0 {
->>  	bootph-pre-ram;
->> +	pinctrl-names = "default";
->> +	pinctrl-0 = <&wkup_i2c0_pins_default>;
->> +	clock-frequency = <400000>;
->> +
->> +	tps659413: tps659413@48 {
->> +		compatible = "ti,tps659413";
->> +		reg = <0x48>;
->> +		bootph-pre-ram;
->> +
->> +		regulators_a: regulators {
->> +			bootph-pre-ram;
->> +		};
->> +	};
->> +
->>  	lp876441: lp876441@4c {
->>  		compatible = "ti,lp876441";
->>  		reg = <0x4c>;
->>  		bootph-pre-ram;
->> -		pinctrl-names = "default";
->> -		pinctrl-0 = <&wkup_i2c0_pins_default>;
->> -		clock-frequency = <400000>;
->>  
->>  		regulators: regulators {
->>  			bootph-pre-ram;
->> -- 
->> 2.39.2
->>
+On 10/19/23 07:08, Bin Meng wrote:
+> + Marek,
 > 
-> Please send these changes upstream linux kernel.
+> On Wed, Oct 11, 2023 at 9:16 PM Bin Meng <bmeng@tinylab.org> wrote:
+>>
+>> This adds a PCI UFS controller support and enables the support on
+>> QEMU RISC-V for testing.
+>>
+>> Requiring QEMU v8.2+.
+>>
+>> This series is avaiable at u-boot-x86/ufs for testing.
+>>
+>> Changes in v2:
+>> - fix a build warning
+>>
+>> Bin Meng (9):
+>>    ufs: Correct the UFS terminlogy
+>>    ufs: Add a line feed to the end of some dev_xxx() messages
+>>    cmd: kconfig: Make ufs prompt look similar to other commands
+>>    cmd: ufs: Correct the help text
+>>    pci_ids: Add Red Hat vendor and device IDs
+>>    ufs: Allow mmio registers on the PCI bus
+>>    ufs: Add a PCI based UFS controller driver
+>>    ufs: Handle UFS 3.1 controllers
+>>    qemu: riscv: Enable UFS support
+>>
+>>   board/emulation/qemu-riscv/Kconfig |  2 ++
+>>   cmd/Kconfig                        |  2 +-
+>>   cmd/ufs.c                          |  2 +-
+>>   doc/board/emulation/qemu-riscv.rst |  8 +++++-
+>>   drivers/ufs/Kconfig                | 11 ++++++++
+>>   drivers/ufs/Makefile               |  1 +
+>>   drivers/ufs/ufs-pci.c              | 45 ++++++++++++++++++++++++++++++
+>>   drivers/ufs/ufs-uclass.c           |  2 +-
+>>   drivers/ufs/ufs.c                  | 31 ++++++++++++--------
+>>   drivers/ufs/ufs.h                  |  1 +
+>>   include/pci_ids.h                  |  7 +++++
+>>   11 files changed, 97 insertions(+), 15 deletions(-)
+>>   create mode 100644 drivers/ufs/ufs-pci.c
 
-Hi Nishanth,
-
-I found this series
-(https://lore.kernel.org/all/20230810-tps6594-v6-0-2b2e2399e2ef@ti.com/)
-which includes a patch to create the two pmic nodes for j7200 target.
-It matches exactly my needs.
-
-I found it was merged in TI linux kernel
-https://git.ti.com/cgit/ti-linux-kernel/ti-linux-kernel/commit/arch/arm64/boot/dts/ti/k3-j7200-som-p0.dtsi?h=ti-linux-6.1.y&id=0b3a445305b24aafba567909dac75961a0e8908c)
-
-
-But referring to your answer
-(https://lore.kernel.org/all/169164472311.19570.17843597381384613605.b4-ty@ti.com/)
-this series will not be merged upstream as is.
-
-Should I send a single patch to declare pmics only for J7200 ?
-Could I just send a minimal definition of the pmics, or should I send a
-full definition (including regulators) ?
-
-Regards,
-
-Thomas
-
-
+Thanks, uh ... could you please just CC me on V3 (if there is one) ?
