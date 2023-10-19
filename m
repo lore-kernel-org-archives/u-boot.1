@@ -4,102 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A13DCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DEF6CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:22:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C113E8726A;
-	Thu, 19 Oct 2023 18:18:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79781874B1;
+	Thu, 19 Oct 2023 18:22:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="lpOhEz3q";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="jTPElE4M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B49FB8749B; Thu, 19 Oct 2023 18:18:29 +0200 (CEST)
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
+ id 0CE04874B0; Thu, 19 Oct 2023 18:22:03 +0200 (CEST)
+Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
+ [148.163.158.5])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4085C86F4B
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 18:18:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9C8387256
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 18:22:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353727.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0353724.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JGHGW7027763; Thu, 19 Oct 2023 16:18:23 GMT
+ 39JGJUHe008882; Thu, 19 Oct 2023 16:21:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=HTNy8wfAK0EJvKgzCh9YFhfcdvMUR412J+kQ8lmCyoU=;
- b=lpOhEz3qFWpNDcy5QMkm86Sat7yzVDt75GcqHWDlekYdTFl2Ai9o0jRylnmJhcrnm+ci
- JAZQjPb70sYgWVZXWCu1WS9lg8/rQauZGtwlbLVvmfFW42OoDN+gblp2uUUVVVPeBgTZ
- GWZ+tvavCrSPXC4wd5hWoatqRRgH8TIDSJCFrfItaGwhlLLJTChT3JAyXE/YTOZ+16yc
- qRCB6Hq2mIKr3TK+8EYZRL9voOdn+WxBM9JlGu5PVf3e9mrOVlsEardSoPhSvfl90cr3
- 24tsv3Mg8IM/OAYPvApbnPmsHUy8cSd7OATOo4qd9fmojZtcF2Z/qQtKDkDs/WEXIZ67 gw== 
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-transfer-encoding; s=pp1;
+ bh=06xA2m/4Ogx+5fSGVlZgUtLeb5FwMKT+pGt+aod3Hjs=;
+ b=jTPElE4M8PNiyCFqDGIFQ7Msc21uRhUBdLRNnLgtfDnHW7KsKglY+raJwZ55xKrPc9fV
+ CsZK6lvGoJSXhN/NhgTq3vIIjb42q8J3J+4rOvSs1wTJOYI2Axj5DTaP+o7YPUSOI2gj
+ QTGSFkP2ez7pYKOydrIEPEC5dsVF2/Oja0wtucUMyLqEPHjeSVwwKCzL2aFhPVnOCiXc
+ ocyZMHRnt6Dr0D7KIv6nvQ5kRfkbpyeJdSYvaRPaC/z3Y8EIHaIL505fn3FiuRoDLPGc
+ m5swyLr4M+GJGujCAnpOXa5PEJEx/SU1NkES6oiA0+DrT0Qh8tHEUF7l/WN8UXX+5z45 sQ== 
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7ud01e3-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vfg62s-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 19 Oct 2023 16:18:23 +0000
-Received: from m0353727.ppops.net (m0353727.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGHFLj027578;
- Thu, 19 Oct 2023 16:18:22 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7ud01d3-1
+ Thu, 19 Oct 2023 16:21:58 +0000
+Received: from m0353724.ppops.net (m0353724.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGKSPh014205;
+ Thu, 19 Oct 2023 16:21:57 GMT
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vfg62h-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 19 Oct 2023 16:18:22 +0000
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JEHnro020073; Thu, 19 Oct 2023 16:13:21 GMT
-Received: from smtprelay02.wdc07v.mail.ibm.com ([172.16.1.69])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tr6anhwr1-1
+ Thu, 19 Oct 2023 16:21:57 +0000
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39JEkOkn031184; Thu, 19 Oct 2023 16:21:57 GMT
+Received: from smtprelay02.dal12v.mail.ibm.com ([172.16.1.4])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 3tr7hk1muy-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 19 Oct 2023 16:13:21 +0000
-Received: from smtpav01.dal12v.mail.ibm.com (smtpav01.dal12v.mail.ibm.com
- [10.241.53.100])
- by smtprelay02.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39JGDKkg13107960
+ Thu, 19 Oct 2023 16:21:57 +0000
+Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
+ [10.241.53.103])
+ by smtprelay02.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 39JGLuHt49676770
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 19 Oct 2023 16:13:21 GMT
-Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id A80A458058;
- Thu, 19 Oct 2023 16:13:20 +0000 (GMT)
-Received: from smtpav01.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 8A3CB58057;
- Thu, 19 Oct 2023 16:13:20 +0000 (GMT)
-Received: from [9.61.89.2] (unknown [9.61.89.2])
- by smtpav01.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 19 Oct 2023 16:13:20 +0000 (GMT)
-Message-ID: <b0f594be-5969-9869-3698-29d330078370@linux.ibm.com>
-Date: Thu, 19 Oct 2023 11:13:20 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v12 6/8] doc: Add measured boot documentation
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de
-References: <20231012144551.679551-1-eajames@linux.ibm.com>
- <20231012144551.679551-7-eajames@linux.ibm.com>
- <CAPnjgZ3ZTwTa3ROfkRZgsVDUkD1MhHBwcoceSGCgKTxeT+Gm+w@mail.gmail.com>
+ Thu, 19 Oct 2023 16:21:56 GMT
+Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 85D0458052;
+ Thu, 19 Oct 2023 16:21:56 +0000 (GMT)
+Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 6010E58056;
+ Thu, 19 Oct 2023 16:21:56 +0000 (GMT)
+Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.89.2])
+ by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Thu, 19 Oct 2023 16:21:56 +0000 (GMT)
 From: Eddie James <eajames@linux.ibm.com>
-In-Reply-To: <CAPnjgZ3ZTwTa3ROfkRZgsVDUkD1MhHBwcoceSGCgKTxeT+Gm+w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: u-boot@lists.denx.de
+Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
+ eajames@linux.ibm.com
+Subject: [PATCH v13 0/8] tpm: Support boot measurements
+Date: Thu, 19 Oct 2023 11:21:48 -0500
+Message-Id: <20231019162156.80982-1-eajames@linux.ibm.com>
+X-Mailer: git-send-email 2.39.3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: QqNE5C6o3Yq8-czUV_utPngStBaU0vLw
-X-Proofpoint-ORIG-GUID: YMaU4Rr8Cef1zdbb6XpM93ccORVgoZsx
+X-Proofpoint-GUID: iNWvl7d-Iesr6ZQAdmmw7duLPCzcj6zz
+X-Proofpoint-ORIG-GUID: ADt4x2P17nyJFJY-rLEpCX_JlOB4EJcT
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-19_15,2023-10-19_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- malwarescore=0 adultscore=0 suspectscore=0 spamscore=0 clxscore=1015
- impostorscore=0 mlxscore=0 mlxlogscore=999 lowpriorityscore=0 phishscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ mlxscore=0 priorityscore=1501
+ suspectscore=0 spamscore=0 impostorscore=0 mlxlogscore=999
+ lowpriorityscore=0 adultscore=0 bulkscore=0 phishscore=0 malwarescore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2309180000 definitions=main-2310190138
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -117,72 +110,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds support for measuring the boot images more generically
+than the existing EFI support. Several EFI functions have been moved to
+the TPM layer. The series includes optional measurement from the bootm 
+command.
+A new test case has been added for the bootm measurement to test the new
+path, and the sandbox TPM2 driver has been updated to support this use
+case.
 
-On 10/12/23 10:29, Simon Glass wrote:
-> Hi Eddie,
->
-> On Thu, 12 Oct 2023 at 08:08, Eddie James <eajames@linux.ibm.com> wrote:
->> Briefly describe the feature and specify the requirements.
->>
->> Signed-off-by: Eddie James <eajames@linux.ibm.com>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
-> This could use a bit more detail. What pieces are measured? What DT
-> binding is used for the TPM? How is the info checked by the OS or
-> whatever?
+Changes since v12:
+ - Rebase on master.
+ - Add detail to documentation.
 
+Changes since v11:
+ - Rebase on next. Sorry for the delay (been on leave).
 
-Sure, I'll add a little bit more. The DT binding is described in the 
-requirements section.
+Changes since v10:
+ - Fix commit message on efi_loader change
+ - Drop python test change
+ - Squash armv7 fix from Ilias
 
+Changes since v9:
+ - Rebase and add Ilias' fixes (thanks!)
 
->
->
->> ---
->>   doc/usage/index.rst         |  1 +
->>   doc/usage/measured_boot.rst | 23 +++++++++++++++++++++++
->>   2 files changed, 24 insertions(+)
->>   create mode 100644 doc/usage/measured_boot.rst
->>
->> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
->> index fa702920fa..fb043a8923 100644
->> --- a/doc/usage/index.rst
->> +++ b/doc/usage/index.rst
->> @@ -14,6 +14,7 @@ Use U-Boot
->>      partitions
->>      cmdline
->>      semihosting
->> +   measured_boot
->>
->>   Shell commands
->>   --------------
->> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
->> new file mode 100644
->> index 0000000000..8357b1f480
->> --- /dev/null
->> +++ b/doc/usage/measured_boot.rst
->> @@ -0,0 +1,23 @@
->> +.. SPDX-License-Identifier: GPL-2.0+
->> +
->> +Measured Boot
->> +=====================
->> +
->> +U-Boot can perform a measured boot, the process of hashing various components
->> +of the boot process, extending the results in the TPM and logging the
->> +component's measurement in memory for the operating system to consume.
->> +
->> +Requirements
->> +---------------------
->> +
->> +* A hardware TPM 2.0 supported by the U-Boot drivers
->> +* CONFIG_TPM=y
->> +* CONFIG_MEASURED_BOOT=y
->> +* Device-tree configuration of the TPM device to specify the memory area
->> +  for event logging. The TPM device node must either contain a phandle to
->> +  a reserved memory region or "linux,sml-base" and "linux,sml-size"
->> +  indicating the address and size of the memory region. An example can be
->> +  found in arch/sandbox/dts/test.dts
->> +* The operating system must also be configured to use the memory regions
->> +  specified in the U-Boot device-tree in order to make use of the event
->> +  log.
-> Regards,
-> Simon
+Changes since v8:
+ - Fix a sandbox driver off-by-one error in checking the property type.
+ - Fix log parsing again - any data corruption seen while replaying the
+   event log was failing the entire measurement.
+ - Added an option to ignore the existing log and a configuration option
+   for systems to select that for the bootm measurement. This would only
+   be selected for systems that know that U-Boot is the first stage
+   bootloader. This is necessary because the reserved memory region may
+   persist through resets and so U-Boot attempts to append to the
+   previous boot's log.
+
+Changes since v7:
+ - Change name of tcg2_init_log and add more documentation
+ - Add a check, when parsing the event log header, to ensure that the
+   previous stage bootloader used all the active PCRs.
+ - Change name of tcg2_log_find_end
+ - Fix the greater than or equal to check to exit the log parsing
+ - Make sure log_position is 0 if there is any error discovering the log
+ - Return errors parsing the log if the data is corrupt so that we don't
+   end up with half a log
+
+Changes since v6:
+ - Added comment for bootm_measure
+ - Fixed line length in bootm_measure
+ - Added Linaro copyright for all the EFI moved code
+ - Changed tcg2_init_log (and by extension, tcg2_measurement_init) to
+   copy any discovered event log to the user's log if passed in.
+
+Changes since v5:
+ - Re-ordered the patches to put the sandbox TPM driver patch second
+ - Remove unused platform_get_eventlog in efi_tcg2.c
+ - First look for tpm_event_log_* properties instead of linux,sml-*
+ - Fix efi_tcg2.c compilation
+ - Select SHA* configs
+ - Remove the !SANDBOX dependency for EFI TCG2
+ - Only compile in the measurement u-boot command when CONFIG_MEASURED_BOOT
+   is enabled
+
+Changes since v4:
+ - Remove tcg2_measure_event function and check for NULL data in
+   tcg2_measure_data
+ - Use tpm_auto_startup
+ - Fix efi_tcg2.c compilation for removing tcg2_pcr_read function
+ - Change PCR indexes for initrd and dtb
+ - Drop u8 casting in measurement test
+ - Use bullets in documentation
+
+Changes since v3:
+ - Reordered headers
+ - Refactored more of EFI code into common code
+    Removed digest_info structure and instead used the common alg_to_mask
+      and alg_to_len
+    Improved event log parsing in common code to get it equivalent to EFI
+      Common code now extends PCR if previous bootloader stage couldn't
+      No need to allocate memory in the common code, so EFI copies the
+      discovered buffer like it did before
+    Rename efi measure_event function
+
+Changes since v2:
+ - Add documentation.
+ - Changed reserved memory address to the top of the RAM for sandbox dts.
+ - Add measure state to booti and bootz.
+ - Skip measurement for EFI images that should be measured
+
+Changes since v1:
+ - Refactor TPM layer functions to allow EFI system to use them, and
+   remove duplicate EFI functions.
+ - Add test case
+ - Drop #ifdefs for bootm
+ - Add devicetree measurement config option
+ - Update sandbox TPM driver
+
+Eddie James (6):
+  tpm: Fix spelling for tpmu_ha union
+  tpm: sandbox: Update for needed TPM2 capabilities
+  tpm: Support boot measurements
+  bootm: Support boot measurement
+  test: Add sandbox TPM boot measurement
+  doc: Add measured boot documentation
+
+Ilias Apalodimas (2):
+  efi_loader: fix EFI_ENTRY point on get_active_pcr_banks
+  test: use a non system PCR for testing PCR extend
+
+ arch/sandbox/dts/sandbox.dtsi  |  13 +
+ arch/sandbox/dts/test.dts      |  13 +
+ boot/Kconfig                   |  32 ++
+ boot/bootm.c                   |  74 +++
+ cmd/booti.c                    |   1 +
+ cmd/bootm.c                    |   2 +
+ cmd/bootz.c                    |   1 +
+ configs/sandbox_defconfig      |   1 +
+ doc/usage/index.rst            |   1 +
+ doc/usage/measured_boot.rst    |  23 +
+ drivers/tpm/tpm2_tis_sandbox.c | 100 ++--
+ include/bootm.h                |  11 +
+ include/efi_tcg2.h             |  44 --
+ include/image.h                |   1 +
+ include/test/suites.h          |   1 +
+ include/tpm-v2.h               | 263 ++++++++++-
+ lib/Kconfig                    |   4 +
+ lib/efi_loader/Kconfig         |   2 -
+ lib/efi_loader/efi_tcg2.c      | 823 ++++-----------------------------
+ lib/tpm-v2.c                   | 814 ++++++++++++++++++++++++++++++++
+ test/boot/Makefile             |   1 +
+ test/boot/measurement.c        |  66 +++
+ test/cmd_ut.c                  |   4 +
+ test/py/tests/test_tpm2.py     |  16 +-
+ 24 files changed, 1482 insertions(+), 829 deletions(-)
+ create mode 100644 doc/usage/measured_boot.rst
+ create mode 100644 test/boot/measurement.c
+
+-- 
+2.39.3
+
