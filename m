@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB52CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9038CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:02:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9042B87456;
-	Thu, 19 Oct 2023 17:01:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A635E87442;
+	Thu, 19 Oct 2023 17:01:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gxfX4eHr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iS59KS5g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE4B98743C; Thu, 19 Oct 2023 17:01:15 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 6AF5D87443; Thu, 19 Oct 2023 17:01:16 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F43787024
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC70B8729D
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-59e88a28b98so7909987b3.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:11 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a7afd45199so101596047b3.0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727670; x=1698332470; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697727671; x=1698332471; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Jz7w//TNvavXWX8aDCeodqapv8f4L9MNIU3pvpvBON4=;
- b=gxfX4eHrk8X59j0hnQmjqd4GQuB6xVtVg2wntnORhDJMhjexfn33yPSqiaA9h98bK6
- LGXH49pmdwkUCFFM/s0zus4rDHchOM71hE8Bo5ywxLVHGtDTlHKl2H/9ZBXquHjySsug
- +qklcAk0EgZ3zqjaQ5flDx6y7bPrclan4IZIw=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MYtssAZZUagomFHU96+ovxneEAGKgf1H87+g5TJk/cU=;
+ b=iS59KS5g1ZqziP6yysGXLLiFQxxBrojm4S80I1eEU4eVLjkGVZnSuSvN6bvfYQh4Y5
+ g45YqX7wQ0oEAY8bx/Nuy8YGla/EBrROviozymEwc+vegdATHg04U9/G8xc8qa60y9c4
+ /eRZvPqUUF2OVcihHN50Cz+HYM7M19WvbKjMc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727670; x=1698332470;
+ d=1e100.net; s=20230601; t=1697727671; x=1698332471;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Jz7w//TNvavXWX8aDCeodqapv8f4L9MNIU3pvpvBON4=;
- b=XiqlDH61UHVL+zHmjtMyPZBtryMgnyt/jQCV0AqcP/Vjz2k7MCNYqyabDISiA6YRgh
- VimEkRLR+bp9DF0tMiWRQvHyeNpJ1uTqd7Un0Wk+bfzRjsTer7I9TZjDVH6PE7xVYQ3K
- Fq7Znw6iAus2O9XlmzcrBJo2w453lkW6VEhZEi1LtucbXWFbV7KiHLBMQy9m79BwwjuG
- 7IYPyhibHChMUWccwqFWFJW1Ne92qgtJEw9GTxYS2THUQpwvnQQXE+pip+pt8W/OXNrQ
- 1oHCte6tK4aC3ABSzUFykluxaJeCmxeUjcuHO5gykLt5/rSb0P/9jPqibcnAAfunu8k4
- laHA==
-X-Gm-Message-State: AOJu0YwpR0S59AGJdiqTiNjX4uTMxNXg7LQ4zqa+nszbXPRL9kNHkL7c
- 3RpEtKolgH8kGDGhZhxTWMnF3OdmG92NeGUP5yBtyg==
-X-Google-Smtp-Source: AGHT+IE2d4AJ17rX1G7KUHb10SAp5EDpO+ZGpMzkWgxV5AJ0VRNPXW7GfgrOYTS/st6awi1BPl4fiA==
-X-Received: by 2002:a81:6c92:0:b0:5a7:b545:dcaa with SMTP id
- h140-20020a816c92000000b005a7b545dcaamr1565494ywc.23.1697727669848; 
- Thu, 19 Oct 2023 08:01:09 -0700 (PDT)
+ bh=MYtssAZZUagomFHU96+ovxneEAGKgf1H87+g5TJk/cU=;
+ b=At7nT07A36Gc2L09g5qbwHTTkAylq4H2lmlZ9R2QRWfiiOHiSTOowKo2uzQ2G5zZ4o
+ JAwOdCzk185J/w3sMbePMIg8OAlZPQI8BOAJX5RKBCZeoRGvRY6r4UBN3AF4OEyJGv2D
+ tH69B7FLV//yMe9O4VBRU5qoUHf96wIJxgQ7ivWa7XfjB+jfv4fMppqqw4HJe/bbKq16
+ +V4O1Xger82Pz5tZErID6ORg2pELTwBKQ8N05/eYWitwLC3BUv1k5vRKCkesn+/CT/cx
+ +BFZnqZAmThcDwBQ1glcUhP4GubAIT8ydIuA1H+aYa2Od4S2miHctpyoD7lCHY6Ai4TI
+ pQfg==
+X-Gm-Message-State: AOJu0YyRTxVK+bETQkX88ZZB/+LHLorRRnSMI1/PH6WcY8O8tyJdn8Fk
+ D1cPXXAGQ8W+rk8yBrR264LwSJZ3YnCbWjD83e7H1Q==
+X-Google-Smtp-Source: AGHT+IFhY+DUN+PISpHI6Ahm86JBUDJxy9qGbQrpiAZ+0YkmPnz+IqcIUnOcqsuf/7VbEQexEMaBeQ==
+X-Received: by 2002:a0d:cbd3:0:b0:5a7:b53f:c304 with SMTP id
+ n202-20020a0dcbd3000000b005a7b53fc304mr2967876ywd.37.1697727670943; 
+ Thu, 19 Oct 2023 08:01:10 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.08
- for <u-boot@lists.denx.de>
+ c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:01:08 -0700 (PDT)
+ Thu, 19 Oct 2023 08:01:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v4 04/24] version: Separate our version string from the version
- command
-Date: Thu, 19 Oct 2023 11:00:45 -0400
-Message-Id: <20231019150105.714407-4-trini@konsulko.com>
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [v4 05/24] qemu: Correct CMD_QFW dependencies in Kconfig
+Date: Thu, 19 Oct 2023 11:00:46 -0400
+Message-Id: <20231019150105.714407-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019150105.714407-1-trini@konsulko.com>
 References: <20231019150105.714407-1-trini@konsulko.com>
@@ -89,79 +89,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to be able to disable all commands we need to construct our
-version string in a common file, and have the version command reference
-that string, like the other users of it do.  Create common/version.c
-with just the strings.
+Rather than selecting CMD_QFW, we should make the option itself by
+enabled by default on these platforms.  Then in the board-specific
+Kconfig we should select the appropriate back-end as needed if the
+command is enabled.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/version.c    |  9 ---------
- common/Makefile  |  1 +
- common/version.c | 16 ++++++++++++++++
- 3 files changed, 17 insertions(+), 9 deletions(-)
- create mode 100644 common/version.c
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+---
+ board/emulation/qemu-arm/Kconfig | 3 +--
+ board/emulation/qemu-x86/Kconfig | 2 +-
+ cmd/Kconfig                      | 2 ++
+ 3 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/version.c b/cmd/version.c
-index 87e1fa4159c1..d99a44f19fb3 100644
---- a/cmd/version.c
-+++ b/cmd/version.c
-@@ -7,21 +7,12 @@
- #include <common.h>
- #include <command.h>
- #include <display_options.h>
--#include <timestamp.h>
--#include <version.h>
- #include <version_string.h>
- #include <linux/compiler.h>
- #ifdef CONFIG_SYS_COREBOOT
- #include <asm/cb_sysinfo.h>
- #endif
+diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
+index 09c95413a541..ac2d078f42a1 100644
+--- a/board/emulation/qemu-arm/Kconfig
++++ b/board/emulation/qemu-arm/Kconfig
+@@ -5,8 +5,7 @@ config TEXT_BASE
  
--#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
--	U_BOOT_TIME " " U_BOOT_TZ ")" CONFIG_IDENT_STRING
--
--const char version_string[] = U_BOOT_VERSION_STRING;
--const unsigned short version_num = U_BOOT_VERSION_NUM;
--const unsigned char version_num_patch = U_BOOT_VERSION_NUM_PATCH;
--
- static int do_version(struct cmd_tbl *cmdtp, int flag, int argc,
- 		      char *const argv[])
- {
-diff --git a/common/Makefile b/common/Makefile
-index cdeadf72026c..b711dc29b65e 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -10,6 +10,7 @@ obj-y += main.o
- obj-y += exports.o
- obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
- obj-$(CONFIG_AUTOBOOT) += autoboot.o
-+obj-y += version.o
- 
- # # boards
- obj-y += board_f.o
-diff --git a/common/version.c b/common/version.c
-new file mode 100644
-index 000000000000..6e27bb80e398
---- /dev/null
-+++ b/common/version.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2000-2009
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-+ */
-+
-+#include <timestamp.h>
-+#include <version.h>
-+#include <version_string.h>
-+
-+#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
-+	U_BOOT_TIME " " U_BOOT_TZ ")" CONFIG_IDENT_STRING
-+
-+const char version_string[] = U_BOOT_VERSION_STRING;
-+const unsigned short version_num = U_BOOT_VERSION_NUM;
-+const unsigned char version_num_patch = U_BOOT_VERSION_NUM_PATCH;
+ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+-	select CMD_QFW
+-	select QFW_MMIO
++	select QFW_MMIO if CMD_QFW
+ 	imply VIRTIO_MMIO
+ 	imply VIRTIO_PCI
+ 	imply VIRTIO_NET
+diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
+index 787751abba4f..01dc1d497aec 100644
+--- a/board/emulation/qemu-x86/Kconfig
++++ b/board/emulation/qemu-x86/Kconfig
+@@ -20,7 +20,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+ 	select X86_RESET_VECTOR
+ 	select QEMU
+-	select QFW_PIO
++	select QFW_PIO if CMD_QFW
+ 	select BOARD_ROMSIZE_KB_1024
+ 	imply VIRTIO_PCI
+ 	imply VIRTIO_NET
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 5bc0a92d57ad..5554bd14e2ef 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2239,6 +2239,8 @@ config CMD_SYSBOOT
+ config CMD_QFW
+ 	bool "qfw"
+ 	select QFW
++	default y if TARGET_QEMU_ARM_32BIT || TARGET_QEMU_ARM_64BIT || \
++		TARGET_QEMU_X86 || TARGET_QEMU_X86_64
+ 	help
+ 	  This provides access to the QEMU firmware interface.  The main
+ 	  feature is to allow easy loading of files passed to qemu-system
 -- 
 2.34.1
 
