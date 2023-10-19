@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3369CDB483
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:22:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F63BCDB482
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 16:22:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC8D8874B9;
-	Thu, 19 Oct 2023 18:22:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45B4B874BA;
+	Thu, 19 Oct 2023 18:22:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="dDphip4+";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="mxOfH6NQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB19A8745E; Thu, 19 Oct 2023 18:22:04 +0200 (CEST)
+ id 263CB87256; Thu, 19 Oct 2023 18:22:05 +0200 (CEST)
 Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
  [148.163.158.5])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C6B3874AA
+ by phobos.denx.de (Postfix) with ESMTPS id 53294874A4
  for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 18:22:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=linux.ibm.com
@@ -28,47 +28,47 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eajames@linux.ibm.com
 Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JGJVaZ009088; Thu, 19 Oct 2023 16:22:00 GMT
+ 39JGJVua009054; Thu, 19 Oct 2023 16:22:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=pp1;
- bh=9hT0jbAPiF0n7ZljUlwqFgAhHgdleI2rqCcY++Dk79c=;
- b=dDphip4+bxN8iOrsE05Ql5VrX+TP6GonztDosHcBHWnHl1S77Jjx1aKt0hFtxTJPl1QI
- u6ltPpn+OMM2csnelAm33F/R5ZKHlwU0fJECeUmw8lAxH7gvzgzZr8zG+qDJvJUR4xS4
- t+ulrfXUdit9NXkTF52gtm84DKhxqEpLdKmO+zrfgpgUskfYzcGCoWefCdHOxurfYN/9
- IoBqpLL7oKGsi34Ac4VX+sczG4ZHzoai9JNGMqG/SVu30i+roLqVEpraUJXDl8QIucCK
- gopG5J+uKxYpKmIDbFNd40ft8FkabLC/OOmzOisVnWx4cP47g37PlXX7ba81GbXJhIJy sQ== 
+ bh=ua1yW6j40rLh55Sk/D86WXaccrzEG/eqN2OvedgMLc4=;
+ b=mxOfH6NQWm5miQEZyxHeggxpaMCoGQYWznrUWSfGnTf6cjnhT8lT4rXGPyYBBbPmQg+e
+ vYdhlz+KO/ZCyjUC+Vahfaz4vCzddqJKbx+kmDdfRvrepjr817KY1ug5HnhII8t3yNZZ
+ H2LLERxY4rR5lHaREjUvXm7OiEhnX91UXXUm3vRvi7QNZnqf5Gyf7+ySN9/qgKx4Ylrj
+ zInfqGBTqvNEpbr2wOeQ5p+JOacVQEGVvxOiLgjwfkZNOAcBzjPhDw8lMwWG2vXGPKlA
+ FlWNLmMLz2ZmFleDY+Gwj0cEgnsldLmWkyJXIDQ0tdcba0YKnysWDN2pN7jsc0bfiP8L aA== 
 Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6ku-1
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6kn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:59 +0000
 Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGKJv1012279;
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39JGJUPV008997;
  Thu, 19 Oct 2023 16:21:59 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6kb-1
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tu7vgg6jx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:59 +0000
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39JEHnup020073; Thu, 19 Oct 2023 16:21:58 GMT
-Received: from smtprelay04.wdc07v.mail.ibm.com ([172.16.1.71])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tr6anhy3v-1
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39JGFu80012949; Thu, 19 Oct 2023 16:21:58 GMT
+Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tr5pyt66a-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 19 Oct 2023 16:21:58 +0000
 Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
  [10.241.53.103])
- by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39JGLwXl38076916
+ by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 39JGLvF617367658
  (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Thu, 19 Oct 2023 16:21:58 GMT
 Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 0889758052;
- Thu, 19 Oct 2023 16:21:58 +0000 (GMT)
+ by IMSVA (Postfix) with ESMTP id 9920258062;
+ Thu, 19 Oct 2023 16:21:57 +0000 (GMT)
 Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id CE1735805A;
+ by IMSVA (Postfix) with ESMTP id 73D665805A;
  Thu, 19 Oct 2023 16:21:57 +0000 (GMT)
 Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.89.2])
  by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
@@ -77,18 +77,17 @@ From: Eddie James <eajames@linux.ibm.com>
 To: u-boot@lists.denx.de
 Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
  eajames@linux.ibm.com
-Subject: [PATCH v13 7/8] efi_loader: fix EFI_ENTRY point on
- get_active_pcr_banks
-Date: Thu, 19 Oct 2023 11:21:55 -0500
-Message-Id: <20231019162156.80982-8-eajames@linux.ibm.com>
+Subject: [PATCH v13 5/8] test: Add sandbox TPM boot measurement
+Date: Thu, 19 Oct 2023 11:21:53 -0500
+Message-Id: <20231019162156.80982-6-eajames@linux.ibm.com>
 X-Mailer: git-send-email 2.39.3
 In-Reply-To: <20231019162156.80982-1-eajames@linux.ibm.com>
 References: <20231019162156.80982-1-eajames@linux.ibm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: m23c4b_RKLUrCRbfaWGXwOb3kS9zMhYe
-X-Proofpoint-ORIG-GUID: Xx7s-WzcAO0_NaXTh-o4Vd2eNHVONrgk
+X-Proofpoint-GUID: TS-JlKZ6QCi2IzJFpRSFQDvtJSKtmjEi
+X-Proofpoint-ORIG-GUID: Csap2Cuhla5cnrnqfdHN6-k2KWow1aKZ
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-19_15,2023-10-19_01,2023-05-22_02
@@ -114,40 +113,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Use the sandbox TPM driver to measure some boot images in a unit
+test case.
 
-efi_tcg2_get_active_pcr_banks doesn't immediately call the
-EFI_ENTRY() wrapper once it enters the function. Move the call a
-few lines above to cover the error cases properly as well.
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/efi_loader/efi_tcg2.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Changes since v5:
+ - Only compile in the measurement u-boot command when
+   CONFIG_MEASURED_BOOT is enabled.
 
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index 7ada536568..dae1b166c8 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -949,16 +949,16 @@ efi_tcg2_get_active_pcr_banks(struct efi_tcg2_protocol *this,
- 	struct udevice *dev;
- 	efi_status_t ret;
+ arch/sandbox/dts/sandbox.dtsi | 13 +++++++
+ arch/sandbox/dts/test.dts     | 13 +++++++
+ configs/sandbox_defconfig     |  1 +
+ include/test/suites.h         |  1 +
+ test/boot/Makefile            |  1 +
+ test/boot/measurement.c       | 66 +++++++++++++++++++++++++++++++++++
+ test/cmd_ut.c                 |  4 +++
+ 7 files changed, 99 insertions(+)
+ create mode 100644 test/boot/measurement.c
+
+diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
+index ff7e5584c5..241f397ba6 100644
+--- a/arch/sandbox/dts/sandbox.dtsi
++++ b/arch/sandbox/dts/sandbox.dtsi
+@@ -4,11 +4,23 @@
+  * and sandbox64 builds.
+  */
  
-+	EFI_ENTRY("%p, %p", this, active_pcr_banks);
++#include <config.h>
+ #include <dt-bindings/input/input.h>
+ 
+ #define USB_CLASS_HUB			9
+ 
+ / {
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
 +
- 	if (!this || !active_pcr_banks) {
- 		ret = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
--
- 	ret = tcg2_platform_get_tpm2(&dev);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
++		event_log: tcg_event_log {
++			no-map;
++			reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
++		};
++	};
++
+ 	binman {
+ 	};
  
--	EFI_ENTRY("%p, %p", this, active_pcr_banks);
- 	ret = tcg2_get_active_pcr_banks(dev, active_pcr_banks);
+@@ -342,6 +354,7 @@
  
- out:
+ 	tpm2 {
+ 		compatible = "sandbox,tpm2";
++		memory-region = <&event_log>;
+ 	};
+ 
+ 	triangle {
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index e430347356..67159b3d01 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -9,6 +9,7 @@
+ 
+ /dts-v1/;
+ 
++#include <config.h>
+ #include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/gpio/sandbox-gpio.h>
+ #include <dt-bindings/input/input.h>
+@@ -68,6 +69,17 @@
+ 		osd0 = "/osd";
+ 	};
+ 
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		event_log: tcg_event_log {
++			no-map;
++			reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
++		};
++	};
++
+ 	binman: binman {
+ 	};
+ 
+@@ -1423,6 +1435,7 @@
+ 
+ 	tpm2 {
+ 		compatible = "sandbox,tpm2";
++		memory-region = <&event_log>;
+ 	};
+ 
+ 	tpm {
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 47417cb039..757dcac4ca 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -349,3 +349,4 @@ CONFIG_TEST_FDTDEC=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
++CONFIG_MEASURED_BOOT=y
+diff --git a/include/test/suites.h b/include/test/suites.h
+index 1c7dc65966..48ed549c13 100644
+--- a/include/test/suites.h
++++ b/include/test/suites.h
+@@ -45,6 +45,7 @@ int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_lib(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_log(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
++int do_ut_measurement(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+ int do_ut_mem(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/test/boot/Makefile b/test/boot/Makefile
+index 52947580ae..068522cb9e 100644
+--- a/test/boot/Makefile
++++ b/test/boot/Makefile
+@@ -4,6 +4,7 @@
+ 
+ obj-$(CONFIG_BOOTSTD) += bootdev.o bootstd_common.o bootflow.o bootmeth.o
+ obj-$(CONFIG_FIT) += image.o
++obj-$(CONFIG_MEASURED_BOOT) += measurement.o
+ 
+ obj-$(CONFIG_EXPO) += expo.o
+ obj-$(CONFIG_CEDIT) += cedit.o
+diff --git a/test/boot/measurement.c b/test/boot/measurement.c
+new file mode 100644
+index 0000000000..9db2ed324c
+--- /dev/null
++++ b/test/boot/measurement.c
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Test for measured boot functions
++ *
++ * Copyright 2023 IBM Corp.
++ * Written by Eddie James <eajames@linux.ibm.com>
++ */
++
++#include <common.h>
++#include <bootm.h>
++#include <malloc.h>
++#include <test/suites.h>
++#include <test/test.h>
++#include <test/ut.h>
++#include <asm/io.h>
++
++#define MEASUREMENT_TEST(_name, _flags)	\
++	UNIT_TEST(_name, _flags, measurement_test)
++
++static int measure(struct unit_test_state *uts)
++{
++	struct bootm_headers images;
++	const size_t size = 1024;
++	u8 *kernel;
++	u8 *initrd;
++	size_t i;
++
++	kernel = malloc(size);
++	initrd = malloc(size);
++
++	images.os.image_start = map_to_sysmem(kernel);
++	images.os.image_len = size;
++
++	images.rd_start = map_to_sysmem(initrd);
++	images.rd_end = images.rd_start + size;
++
++	images.ft_addr = malloc(size);
++	images.ft_len = size;
++
++	env_set("bootargs", "measurement testing");
++
++	for (i = 0; i < size; ++i) {
++		kernel[i] = 0xf0 | (i & 0xf);
++		initrd[i] = (i & 0xf0) | 0xf;
++		images.ft_addr[i] = i & 0xff;
++	}
++
++	ut_assertok(bootm_measure(&images));
++
++	free(images.ft_addr);
++	free(initrd);
++	free(kernel);
++
++	return 0;
++}
++MEASUREMENT_TEST(measure, 0);
++
++int do_ut_measurement(struct cmd_tbl *cmdtp, int flag, int argc,
++		      char *const argv[])
++{
++	struct unit_test *tests = UNIT_TEST_SUITE_START(measurement_test);
++	const int n_ents = UNIT_TEST_SUITE_COUNT(measurement_test);
++
++	return cmd_ut_category("measurement", "measurement_test_", tests,
++			       n_ents, argc, argv);
++}
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 477d475952..32d270fc89 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -99,6 +99,10 @@ static struct cmd_tbl cmd_ut_sub[] = {
+ #if CONFIG_IS_ENABLED(UT_UNICODE) && !defined(API_BUILD)
+ 	U_BOOT_CMD_MKENT(unicode, CONFIG_SYS_MAXARGS, 1, do_ut_unicode, "", ""),
+ #endif
++#ifdef CONFIG_MEASURED_BOOT
++	U_BOOT_CMD_MKENT(measurement, CONFIG_SYS_MAXARGS, 1, do_ut_measurement,
++			 "", ""),
++#endif
+ #ifdef CONFIG_SANDBOX
+ 	U_BOOT_CMD_MKENT(compression, CONFIG_SYS_MAXARGS, 1, do_ut_compression,
+ 			 "", ""),
 -- 
 2.39.3
 
