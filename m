@@ -4,142 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06F02CDB483
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90C93CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 14:59:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EACF87284;
-	Thu, 19 Oct 2023 16:58:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A6398725A;
+	Thu, 19 Oct 2023 16:59:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="qukEAcrT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T3NRmHYG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67BBF87243; Thu, 19 Oct 2023 16:43:10 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::62d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 28E808725A; Thu, 19 Oct 2023 16:59:39 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6A8887208
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:43:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0693086FFD
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 16:59:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivan.ivanov@suse.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TabCvAHtVZUrH1GaP1JNlcAYtNzPkO5ZllAR5SvqJnG4LV1gPZGqpA+nxl7pSx3Ri19WuMar2o4uSq3ctSeCyckmjZmjSUtAD9YbE7WkxYrqjhqrOdluhzyTpdDJx3sx/Pku3wK8UjH47o2RdeRgB9jYaN1aBCXNfqgNJ6lrxXeLmz2ttM63s0c9GSY7eInGezoZxg2Bt5UqvS0+BxvfuvjS9MxjN6OPopO0UttOEoiM0HtvC58Wg+z3NQfWV/EEJWFjyZF9vrOBym0qDYq6LCmAA/0EzZ2hx7cMqori0z0AB0Aw6TOhnCsvL9xwflkTgDHiSgem61XSUJOVJpAoGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OlAN0b7+yt3Y1eR0aI1qyOiIpXG2MX+4HL+zcnVhhs4=;
- b=j1ZCMeIhDfhMRXci346Zx8Ica9GUqfzeK1dMxRRWrQCwbM+N8UgK5fmpaGPNY05ZqEutWmrMquluQMDBpuUiGcvzC4PB+EGdHCYR57dq76g2sEzmpwVEkS4ltwCcRJ7JCVUCEgQnnnzBLy0NF0TaqSfqjHMF6Q2vHa3F06UR8ztUaWZy08Ej8wBMS25+GaGitU878tY5zDl+gzXiezSIB7tw+c0RgMUKm2mr4qB27oZam1raMlqtzPSdGPRarz+7ouTpaYWEvVHJdU6iITJQyNWPSoe8m3quLagCOig2muy4ECTd3wqrZQ5gdl6ECrQMZ4C0DT33vDKy01DZS3yHgQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OlAN0b7+yt3Y1eR0aI1qyOiIpXG2MX+4HL+zcnVhhs4=;
- b=qukEAcrTShTL8azB63e53wuncNOp+Qn/LdGBoxvjTTbU6vejjAsKkUuGRyeRBjXKQv+1DnCbR/EY0uwNviYQAGLQYdRzeFJ7KsWoW1YP46jv73mH7y/kqge+JDlEZSjp5/RW88TpzjLFMIKx1dQ0E0E7NraGB7RyNQiRCRHtgRIOwt1y12OxxA+1KJPAWOXfQO6fVxvXex5PDdEQ7OPSZF1abXo/4DRABqmTggRoJufNmTA+49ooqHUV+2DHXS+frvZ/af9q/f4Q1L6+iSpK+p8hi/cFeYng4QBJzfr5xRvS3Zqjdxord6pWs3TNBsvB24gwoubM4faOgk3osCzlFg==
-Received: from AM7PR04MB6839.eurprd04.prod.outlook.com (2603:10a6:20b:103::9)
- by AS8PR04MB8706.eurprd04.prod.outlook.com (2603:10a6:20b:429::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.23; Thu, 19 Oct
- 2023 14:43:02 +0000
-Received: from AM7PR04MB6839.eurprd04.prod.outlook.com
- ([fe80::529d:3ac4:e17f:174b]) by AM7PR04MB6839.eurprd04.prod.outlook.com
- ([fe80::529d:3ac4:e17f:174b%7]) with mapi id 15.20.6886.034; Thu, 19 Oct 2023
- 14:43:02 +0000
-From: Ivan Ivanov <ivan.ivanov@suse.com>
-To: "sjg@chromium.org" <sjg@chromium.org>
-CC: Guillaume Gardet <Guillaume.Gardet@arm.com>, Matthias Brugger
- <mbrugger@suse.com>, "pbrobinson@gmail.com" <pbrobinson@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
-Thread-Topic: U-Boot 2023.10 does not boot from uSD on RPi4
-Thread-Index: Adn7Wr0e+LRv6MRIS4aqQVJurtxargACOEoAAAB9fxAACSUYgACMvy5QAStVywAACoWvgAABAOWAAAAj6gAAAFongA==
-Date: Thu, 19 Oct 2023 14:43:01 +0000
-Message-ID: <f111238e4b47f0ffd1ebb29881959b3f9a489d96.camel@suse.com>
-References: <VI1PR08MB2847E276099DF7263424F70083CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <CALeDE9N6nhRBwtYqJ=7nqYuCsmbw03j3RBXRQ8jYsD=OMY=gBw@mail.gmail.com>
- <VI1PR08MB28474179AFB989B308072B1E83CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <CAPnjgZ3t9-trzoLGc7Jcj0=J0sQLQcHSGN3_Pf+3=iZ6=rPPqA@mail.gmail.com>
- <VI1PR08MB2847B5EFD8F36E5A4D41FEBD83D2A@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <a151e6508695fcc2cee740f299e58e0fee6146b3.camel@suse.com>
- <CAPnjgZ0KVwF-u5G2r-zt8+FmiHK_2ASEsoro3MtVsah58_WqMg@mail.gmail.com>
- <d0cfe8627544d1699031315cc53b961c4cadc126.camel@suse.com>
- <CAPnjgZ3AsKe9V0gE8KBbjaFQv9+3xTrqfV9k=HiDOgmBenqGRQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3AsKe9V0gE8KBbjaFQv9+3xTrqfV9k=HiDOgmBenqGRQ@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM7PR04MB6839:EE_|AS8PR04MB8706:EE_
-x-ms-office365-filtering-correlation-id: f7f1a21a-7d7c-47be-d952-08dbd0b1b228
-x-ld-processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: t/wNy/IfnJGn/oNcH0BwtHlkOUG4YP2xfVrLBDc2m/eiNcFknM/zDfvecIzdy//yEVPqhrBbvNpG+T1P210CZ0I455DigLEOe0BFI3v7vgaOeLUxRtZwiB3lr68DjZLP7VQfcqx/YvyRfQXI68enJJ7QeNS2PPnnS9+nTQYu+ubYhCEfwkH8KBXxX7FJ4rMZ9roV2y+mG2gQjtj5idiZ/03fM6RoRm4WVDXptFgPv39rKZKalDzXLsC1DqoKN/4+bf/QVBLZooBPX+Fh+L3F1vBiLhFKTqtswkEZnz+MIT0pB3Br+P1YYelPOyxfiejCtfvHZ43og+EsO6fzzpkRQeUvTE00hBWu65hnFkmGfd2zWR/1SLDGH7gYAuUcy3Oz3WKj/wYKCHJglxvvOGZEqvGGNrZH7mh3z9pO3U5Gx0f/trL1DfaPQxgeR9QT9/zKQjBaM+lAgqBr7W/Z4BkyEJaQJTZb46yKrFok4/aRy4g3q6m1KYZ9lEUhM2wRKYVqkCyAHNbdvwPEpu/yM6M55EXEW6MEx8cUnMbDETrF9pAH0W4lspnbK3vRHCkFzVtHEbLs61o8BJl9ZPhdn2nzNfRAiSJgijmxhuDYuPfc9ppwkjELLWLbhHv4SRGmFz7GkBp1Q5meclNDweAmEf/8rw==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM7PR04MB6839.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(396003)(376002)(346002)(136003)(366004)(230922051799003)(451199024)(186009)(1800799009)(64100799003)(44832011)(36756003)(4001150100001)(2906002)(122000001)(5660300002)(8936002)(86362001)(4326008)(71200400001)(8676002)(38070700005)(83380400001)(38100700002)(2616005)(26005)(316002)(6506007)(91956017)(6486002)(478600001)(966005)(6916009)(6512007)(66946007)(41300700001)(66476007)(66556008)(54906003)(66446008)(64756008)(76116006);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZHpJUVNMUmU5dzcyZGNnN09uYVFWbElmUTVubjZnREh2WHpheWJUaEh2bFpK?=
- =?utf-8?B?dG5aMDN6TnJGak5BUGlIRWViMjBNYXkyUUxFSXhscllVS1pXTUNMSkRNL2dL?=
- =?utf-8?B?cVJEUnRGOEliZ1ZSNDlmTEVBb0I5TytlS1YrVFZyUWpYNjNZTWE3NTI2b1Uv?=
- =?utf-8?B?MkJzWGs0T2ROekc5V3VNNTMwd3YvUmZ2d0c4cXhIUzJraTJRUjlOYmgvZEJB?=
- =?utf-8?B?NWd2ajgrUU5yVlIwUW94REFTMjVIbjlIN3RoeHVkbFNuenZxWmVhU25JOGdE?=
- =?utf-8?B?a1JnQTlEdGw2bm4yMENFMHV4THpMZ1VheHhwTFZDaHR4UVFHdVdKanZocGRu?=
- =?utf-8?B?WlBTaTBueWlTeU51YWFGcE1nNStucCsxQnZKaHN6ZlhLbGhNNXMvV3k5bmVT?=
- =?utf-8?B?c0FCUVA5QXpVQlJhdDFsSUZ6OUhLRDhaVzlwTlFPSVc1bUVGR2ZuMmdyL2FW?=
- =?utf-8?B?ajR3OGE4cW96ZGxuSnZXaGRnaVZ0cWFYc3NlVjBtR0dlbVJzRWZ2dzlPN1pZ?=
- =?utf-8?B?aUk2MjNCYm1KbGdVWU4ycnZUZWordUlYVzVaeFdYT0tHMXFsZ2F3VzRFNDBN?=
- =?utf-8?B?WHpJTHFNazhEUzM5dzgrcThZRmx2M1RvSjJSdm5JUU5GMTV5Yko5UFdndzlu?=
- =?utf-8?B?U0pyekZCV0xCMHpJR002YVVtOUx1U0pheDFGRmFzcmxFaytGWDRqNUFPc3M2?=
- =?utf-8?B?MEdSYVdVSm1HQ2NXeTRjOCtpYVY0bWhZYmFaYWQyTExhREd4aXB0ZVZra1BN?=
- =?utf-8?B?d0VvblBVSmNRaTVhUW9FbjA2cXZlSHZwUlhzN2RDN2c3RWJFN0lDeUEyd1Yy?=
- =?utf-8?B?M3g0dFRWM2hNdEdXdFVFaGkvU0s0SXdjb0lweTNGaUF0ZTZxdWdxN21jdXdn?=
- =?utf-8?B?WXhqMDNwY3UxSDZ5dXFxRnB1YWhjUUM1YnBjVndIam56TDh6b3VBWVM1WllF?=
- =?utf-8?B?aUsrZHRYUlZJNzU5MXdYS2YzbnJTbGRNaEhVRURZeVJoZFBEVlNZL2JMclR6?=
- =?utf-8?B?ZnBHQktUZDUyaTAzcm9ka3BZYmlmVEozbUNIL3hZdlgvYVRGZmQ3cmhoMVY0?=
- =?utf-8?B?djlMbXovRjQ0UE81ZHBwdFdPMGJvWThZTHprS1lTRCtwVmF5dkZqY3ZNa0d6?=
- =?utf-8?B?Q2FhbWpybitVbzA3L3NLaU03TEM4cUFLSjJXZlNBdHlwbkMvOGI2QW5lVHVS?=
- =?utf-8?B?RVpva3VEdGxQRStsU0phTTJHMnN3ajVhbFN3SzkvT25WblhGV3JZV0NEM1dK?=
- =?utf-8?B?RmMwOVN0WkxPZzZhMTE1M3k4UTRvZWN3bGsycG5IQWRWRk9MZis3QytVWUR4?=
- =?utf-8?B?RGczQWdVOUtIbGpOSzhYMUZBdFVIRHd1RkhGVE1CZEZSV1Y3a1dFbGxTVGpl?=
- =?utf-8?B?WUNNNGtkdFIrYkROQzFRK1BPaFdGa1ZjWm5Ia1dzdXk4blAvMzFOcjhPL0Ri?=
- =?utf-8?B?Mk1wQVVialQxTUowR3lRRTVJVUJDNWF0emZIL2MydlRFR29HY25hNjFYTmtl?=
- =?utf-8?B?a1BvZkF1RUZrWXdOMHlyb3o0NGhJTzZJVTk0WW9xb0M1aVJUMmsvWnBVRFZ4?=
- =?utf-8?B?UFEyT0V3ZVdJeDNiTzg3TWE4cjRCamppWVh6SURQMllNMHVObkxCOG4yelhB?=
- =?utf-8?B?THM0VnlVd2NBOXVVL1licVpZNm1UdkRxZTN3aUxSL3BKQ3pFQm1xMGpyY2J4?=
- =?utf-8?B?aCtPUm54ZlM5aUc5QlNzMGVvak1Zc0RMbWRNa3c1ZnhDWGZ5Q2RyQW05NkJ1?=
- =?utf-8?B?ZGdYUWNMUkU3YjNTWjFUTnBKZjhDd0tSWDV6QXpUSTJPUFNaakFIby9oS0Rj?=
- =?utf-8?B?Z2kzSVk1bDRBRyswWjBOTW1wSUQ5djZFU2g4S0JlcXRha2U3aG40MmlNSGU5?=
- =?utf-8?B?NHlRUHVxUHVxNWJWM0N0NkdiSmJMdjI0UkhpM1ZLSDZJSVRCL29IclJHYUdW?=
- =?utf-8?B?dksrS09FU3d3aFV5S0RCTE1VcUo3Y3hFcXFEbEhFdVBUUllpeDRGZkF4VDU3?=
- =?utf-8?B?UDVuWVR1Nlk5YkVnaWRGdjdUd2JDd0hDK1dSaVRJV1liYlMzc2Vzc1JwUDB5?=
- =?utf-8?B?cElYVXFsbm1uTS9Sc0RHU1dsTE5KRUFlUDlDeFFUOVN6dzZLb1R6dEtNYWd2?=
- =?utf-8?Q?JhNbNgxp0meO1rCPXbe0Fvkbu?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D9A3DA74B07BEA4ABFB7E6508FE44DA7@eurprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-53b32dca0bfso1953895a12.0
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 07:59:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697727575; x=1698332375; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+E+lUjkCBbLvJA90DTrRSa2di0rAD0k1EOzzDu7Scvc=;
+ b=T3NRmHYG10sSg4sM18J6tkyIQq0PYd8hW5+QJz1UIg1A3oQzs+atQKLeKBrmGWQd5n
+ KeAA2jf94/i+xvtv/e+1GB+dhJxf+OwRck5gxL81ycESTPI+miTqfqRA8Y1Gg9WuRTg7
+ 0ZvADNmQgPz3gX0TBTbrrqLH+dAjXP4FCLszRkTFqU/zIj4A6cBfxaWt9Bf/UJjV+UYu
+ 49j6ufZTsA3gxfevMeMkmHnc8B2djc5+CcILFmTj/BQzecJ9r52Ucfp2DJNBNHzxuAhG
+ zHyyzcu8jgBEvwDBs64G8k9OCKvwC8HYieaIwLq5u66nGhJwayLo6sAhrCTCiOLILsLA
+ uNbw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697727575; x=1698332375;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+E+lUjkCBbLvJA90DTrRSa2di0rAD0k1EOzzDu7Scvc=;
+ b=tkNjgAGmc09opQ8qASwO2cjOj6hQRQmYcpVyqq5Gy+wc+/X9EdTfh5NGbif4iXGDM6
+ 0+XCEzv2zO7KP2qRFllNPEwV2exH7CU83ZO0C0MEz32+8CWWLPCRGhLuGTN5wqd+Zz+U
+ Js/z43TJA6EU0TG29R2e/nnipY4x3uuxNm/Ep1v75I03lh4eccC6qZHJfop48loHV9+4
+ pYWSggnNn3fdkNgc3PqVP1C3S7r2ZD6rp4v2brGcVESWr7OCyn8zD52pXVc53o2PaKJT
+ q3IVrHlOXYGEvqbCt7U3fS09zA2zVsX6tbEVnlA6QUeNx4xa9qsT6y58tCfe85K6fRAI
+ oxCw==
+X-Gm-Message-State: AOJu0Yy2sfEUXRDlNpyUEHv5DMQ3vh6m3YQn1E6NarqlNpRkI62r8HAt
+ NW2ux0rShcnYeF5eRhqSUktzqAeA18SGBuFgTiI=
+X-Google-Smtp-Source: AGHT+IET5yw0T3gkAV+iqz2NzZL1Pv81clB/Sy1kwTmZ5wu5ZEJPPXD0qmEFjCor4/Dt55lchY+Sn/EwyUq+XEs2Ejs=
+X-Received: by 2002:aa7:ca49:0:b0:533:5d3d:7efe with SMTP id
+ j9-20020aa7ca49000000b005335d3d7efemr1963240edt.6.1697727575253; Thu, 19 Oct
+ 2023 07:59:35 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM7PR04MB6839.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7f1a21a-7d7c-47be-d952-08dbd0b1b228
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2023 14:43:01.9801 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 7MU82N97ic67Ae/rMk2cL9uy0OLuOrvS3FqqmkEx2L+2JpR/giclUnI3iyDMK99TZzLfSGI4ev4AgseTuvMqMA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8706
-X-Mailman-Approved-At: Thu, 19 Oct 2023 16:58:19 +0200
+References: <CAMwbjeWur3uKY0fV89PqdrSB7t_e=3Osot6DAocrhA57PCf_UQ@mail.gmail.com>
+In-Reply-To: <CAMwbjeWur3uKY0fV89PqdrSB7t_e=3Osot6DAocrhA57PCf_UQ@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 19 Oct 2023 15:59:23 +0100
+Message-ID: <CALeDE9MjzL47L6qNquQByEzfDAavFpQERyy-B229fYqvnijFug@mail.gmail.com>
+Subject: Re: Branches in uboot-imx
+To: Grzegorz Borowiak <gborowiak@gmail.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,28 +86,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQpIaSwNCg0KT24gVGh1LCAyMDIzLTEwLTE5IGF0IDA4OjMyIC0wNjAwLCBTaW1vbiBHbGFzcyB3
-cm90ZToNCj4gPiA+ID4gDQo+ID4gPiA+IEkgYW0gYWZyYWlkIHdlIHN0aWxsIGhhdmUgYSBib290
-IGlzc3VlLiBUaGlzIHRpbWUgZGV2aWNlIGNhbiBub3QgYm9vdCBmcm9tIFVTQi4NCj4gPiA+ID4g
-RGV2aWNlIGJvb3Qgb3JkZXIgd2FzIGNoYW5nZWQgdG8gVVNCIGZpcnN0IHRoZW4gdVNELiB1U0Qg
-Y2FyZCBpcyByZW1vdmVkLg0KPiA+ID4gPiANCj4gPiA+ID4gUGxlYXNlIHNlZSBbMV0gYXR0YWNo
-bWVudCAjODcwMzIxIGZvciBib290IGxvZyBkZXRhaWxzLg0KPiA+ID4gPiANCj4gPiA+ID4gSSBo
-YXZlIG5vdCBpbnZlc3RlZCB0aW1lIHRvIGRlYnVnIHRoaXMsIHN0aWxsLg0KPiA+ID4gDQo+ID4g
-PiBUaGFua3MgZm9yIHRoZSBpbmZvLiBJcyB0aGlzIHVzaW5nICdib290X3RhcmdldHM9bW1jIHVz
-YiBweGUgZGhjcCc/DQo+ID4gPiANCj4gPiANCj4gPiBZZXMuICJib290X3RhcmdldHM9bW1jIHVz
-YiBweGUgZGhjcCIuIEZ1bGwgZW52aXJvbm1lbnQgYWRkZWQgdG8gdGhlIGJ1Zy4NCj4gPiANCj4g
-PiBodHRwczovL2J1Z3ppbGxhLnN1c2UuY29tL3Nob3dfYnVnLmNnaT9pZD0xMjE2MDM2DQo+IA0K
-PiBPSyB0aGFuayB5b3UsIEkgd2lsbCB0YWtlIGEgbG9vay4NCj4gDQo+IEkgd29uZGVyIGlmIHRo
-ZXJlIGlzIGEgd2F5IG9mIHRlc3RpbmcgcGVuZGluZyBwYXRjaGVzLCBvciBkbyB0aGV5IG5lZWQN
-Cj4gdG8gYmUgYXBwbGllZCBiZWZvcmUgdGhleSBjYW4gYmUgdGVzdGVkIGluIHlvdXIgc3lzdGVt
-cz8NCg0KSSBhbSBub3Qgc3VyZSB3aGF0IGRvIHlvdSBtZWFuIGhlcmUuIG9wZW5TVVNFIHVzZXMg
-dGhpcyBbMV0gcHJvamVjdA0Kb24gT3BlbiBCdWlsZCBTZXJ2aWNlIHRvIGJ1aWxkIGluc3RhbGxh
-YmxlIHBhY2thZ2VzLiBBcyB5b3UgY2FuIHNlZSANCnRoZXJlIGFyZSBmZXcgcGF0Y2hlcyBvbiB0
-b3Agb2YgdS1ib290LTIwMjMuMTAgcmVsZWFzZSBpbmNsdWRpbmcgWzJdLg0KDQpXaGF0IEkgY2Fu
-IGRvIGlzIHRvIGJ1aWxkIG5ldyBwYWNrYWdlIHdpdGggYW55IHByb3Bvc2VkIHBhdGNoIG9uwqAN
-CnRvcCBvZiBsYXN0IHJlbGVhc2UuIE9mIGNvdXJzZSBJIGNhbiBhbHNvIGJ1aWxkIHRoZSBVLUJv
-b3QgYW5kIGp1c3TCoA0KY29weSBiaW5hcnkgdG8gdGhlIGJvYXJkLiANCg0KSW4gb3RoZXIgd29y
-ZHMgSSBjb3VsZCB0ZXN0IGFueSBwcm9wb3NlZCBwYXRjaCA6LSkNCg0KUmVnYXJkcywNCkl2YW4N
-Cg0KWzFdIGh0dHBzOi8vYnVpbGQub3BlbnN1c2Uub3JnL3BhY2thZ2Uvc2hvdy9oYXJkd2FyZTpi
-b290L3UtYm9vdA0KWzJdIGJvb3RzdGQ6IFNjYW4gYWxsIGJvb3RkZXZzIGluIGEgYm9vdF90YXJn
-ZXRzIGVudHJ5DQo=
+On Thu, Oct 19, 2023 at 3:58=E2=80=AFPM Grzegorz Borowiak <gborowiak@gmail.=
+com> wrote:
+>
+> Hello!
+>
+> I just cloned the repository:
+>
+> https://github.com/nxp-imx/uboot-imx
+>
+> and I encountered a rather large amount of branches (listed below).
+>
+> Are these branches somehow described, so I could read what they are about=
+?
+> Especially I'm interested in branches whose names begin with "imx" and
+> "lf". What are differences between them, and how are they different from
+> branches here:
+
+You would have to ask NXP about that, that repo is not part of the
+upstream project.
+
+> https://github.com/u-boot/u-boot
+>
+> ?
+>
+> imx_4.14.98_8qxpc0_er
+> imx_5.4.0_8dxlphantom_er
+> imx_v2017.03_4.9.11_1.0.0_ga
+> imx_v2017.03_4.9.123_imx8mm_ga
+> imx_v2017.03_4.9.51_imx8_beta1
+> imx_v2017.03_4.9.51_imx8_beta2
+> imx_v2017.03_4.9.51_imx8m_beta
+> imx_v2017.03_4.9.51_imx8m_ga
+> imx_v2017.03_4.9.88_2.0.0_ga
+> imx_v2017.03_4.9.88_imx8mm_alpha
+> imx_v2017.03_4.9.88_imx8qxp_beta2
+> imx_v2018.03_4.14.62_1.0.0_beta
+> imx_v2018.03_4.14.78_1.0.0_ga
+> imx_v2018.03_4.14.98_2.0.0_ga
+> imx_v2018.03_4.14.98_2.1.0
+> imx_v2018.03_4.14.98_2.2.0
+> imx_v2018.03_4.14.98_2.3.0
+> imx_v2019.04_4.19.35_1.0.0
+> imx_v2019.04_4.19.35_1.1.0
+> imx_v2019.04_5.4.3_2.0.0
+> imx_v2020.04_5.4.24_2.1.0
+> imx_v2020.04_5.4.47_2.2.0
+> imx_v2020.04_5.4.70_2.3.0
+> lf-5.4.y_v2019.04
+> lf_v2020.04
+> lf_v2021.04
+> lf_v2022.04
+> lf_v2023.04
+> master
+> nxp/imx_3.14.38_6ul_engr
+> nxp/imx_v2009.08
+> nxp/imx_v2009.08_1.1.0
+> nxp/imx_v2009.08_10.04.01
+> nxp/imx_v2009.08_10.05.02
+> nxp/imx_v2009.08_10.07.11
+> nxp/imx_v2009.08_10.10.01
+> nxp/imx_v2009.08_10.11.01
+> nxp/imx_v2009.08_10.12.01
+> nxp/imx_v2009.08_11.04.01
+> nxp/imx_v2009.08_11.05.01
+> nxp/imx_v2009.08_11.09.01
+> nxp/imx_v2009.08_11.11.01
+> nxp/imx_v2009.08_12.01.01
+> nxp/imx_v2009.08_12.02.01
+> nxp/imx_v2009.08_12.09.01
+> nxp/imx_v2009.08_12.10.02
+> nxp/imx_v2009.08_3.0.0
+> nxp/imx_v2009.08_3.0.35_4.0.0
+> nxp/imx_v2009.08_3.0.35_4.1.0
+> nxp/imx_v2009.08_r13.4.y
+> nxp/imx_v2013.04_3.10.17_1.0.0_beta
+> nxp/imx_v2013.04_3.10.17_1.0.0_ga
+> nxp/imx_v2013.04_3.10.31_1.1.0_alpha
+> nxp/imx_v2013.04_3.10.9_1.0.0_alpha
+> nxp/imx_v2013.04_3.5.7_1.0.0_alpha
+> nxp/imx_v2014.04_3.10.31_1.1.0_beta
+> nxp/imx_v2014.04_3.10.31_1.1.0_beta2
+> nxp/imx_v2014.04_3.10.53_1.1.0_ga
+> nxp/imx_v2014.04_3.14.28_1.0.0_ga
+> nxp/imx_v2014.04_3.14.28_7d_alpha
+> nxp/imx_v2014.04_3.14.38_6qp_beta
+> nxp/imx_v2014.04_kk4.4.3_2.y
+> nxp/imx_v2015.04
+> nxp/imx_v2015.04_3.14.38_6qp_ga
+> nxp/imx_v2015.04_3.14.38_6ul7d_beta
+> nxp/imx_v2015.04_3.14.38_6ul_ga
+> nxp/imx_v2015.04_3.14.52_1.1.0_ga
+> nxp/imx_v2015.04_4.1.15_1.0.0_ga
+> nxp/imx_v2015.04_brillo
+> nxp/imx_v2016.03_4.1.15_2.0.0_ga
+> nxp/imx_v2016.03_4.1.30_7ulp_alpha
+> nxp/imx_v2016.03_4.1.33_7ulp_beta
+> nxp/imx_v2017.03_4.9.11_1.0.0_ga
+> nxp/maddev-imx-android-r10.3
+> nxp/maddev-imx-android-r13.2
+> nxp/master
+> nxp/scm-imx_v2016.03_4.1.15_2.0.0_ga
+> u-boot/master
+> u-boot/next
+> u-boot/origin
+> u-boot/u-boot-2009.11.y
+> u-boot/u-boot-2013.01.y
+> u-boot/u-boot-2016.09.y
