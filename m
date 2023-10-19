@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C15BCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3044FCDB465
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 15:04:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7902C87470;
+	by phobos.denx.de (Postfix) with ESMTP id DC9FB8747F;
 	Thu, 19 Oct 2023 17:01:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sVALpUyN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HzqNj5TA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE15C87469; Thu, 19 Oct 2023 17:01:31 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 79E2F8747F; Thu, 19 Oct 2023 17:01:32 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54A5C87441
+ by phobos.denx.de (Postfix) with ESMTPS id 551F287448
  for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 17:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5a7fb84f6ceso99638607b3.1
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-59e88a28b98so7912437b3.1
  for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 08:01:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697727683; x=1698332483; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697727686; x=1698332486; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=J8iRd02341ZQdgxQo3hwYJbTVXYRRNfrSN3IVwCidv0=;
- b=sVALpUyNC3WoyxiLgwVKb5IYWtqryXhaOzK0iw8oCvcYq83ugseQ0oz/6S2pBa+RR4
- eWcUmxCL3Z7JeKMJ5+G0WfA85eX8j/MliKxNbOQVrS3ooNFQ0VGcpBlkTpwzqGieFWQb
- a/56dhsxVrq4sJItLGvPB9QgK13auXjAxDPQU=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O/0n44yy2ftK4uX/Yr0zfrlRSSze7UY5xUsbdhotmXE=;
+ b=HzqNj5TAyG0TR0pO50h/45f6ae2ZmmZZftAHdr2ykcssqp8j0Dw3MnxOjK31oZqMJL
+ Kxgh4mf1qGy9XOLcOHcK1IgtD0V435mJyQEIYDwFdSK5YiKHzhEr6Zcr7y6lpwwUD6b9
+ ivpzVGTudWaK8ml4h9+Uy2u8dLqGrDqwkr2Zk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697727683; x=1698332483;
+ d=1e100.net; s=20230601; t=1697727686; x=1698332486;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J8iRd02341ZQdgxQo3hwYJbTVXYRRNfrSN3IVwCidv0=;
- b=bmKT86Ca7K9xrGG23gW5HgmukodkqKfLnk1fqeJWofzrky7IxjuLItOCu49Oc979RF
- AIymfq+jgqG+FKCFoR92Asmu+ojQ/Q6QOamboAA3LfUzl4bAiA+ukwsjJG5PiBm4jZla
- I995FP8nSXEyWBiN5Cv1wcbFi5bzhqsgEcZS6D64fFrBEEuQfHWoeHmLg1r/EXONpKJT
- ykwwyK5nxX+9pD+7hzyFbMKvOMgfAxdo2ESHakCuZkeA4bLZqNvJXkBjHqvx7KsfK+c5
- DY9Qa2HZMMskkvaaBOMyqYjBs+6/lLu/KxjVzByLo1aNo7vNInYnVVmNmah/7AQmXOUR
- vdjw==
-X-Gm-Message-State: AOJu0Yy9To1rrfccwOh+jC+0e1Uhiux3RaL/59J64KEahYxlqBHgLL3g
- QbJOxfBvmABvjuXCEBDFTr3p39sf8CnFU7+OcwigYg==
-X-Google-Smtp-Source: AGHT+IGmqdPw5fdn894qqyFw/2lN/pF9Lv2dN0HEVLKiPYWLaC7s5wBeAysJLm1kCnSBQL56VzLEVw==
-X-Received: by 2002:a81:a214:0:b0:5a8:7edd:b7b0 with SMTP id
- w20-20020a81a214000000b005a87eddb7b0mr2577311ywg.38.1697727683209; 
- Thu, 19 Oct 2023 08:01:23 -0700 (PDT)
+ bh=O/0n44yy2ftK4uX/Yr0zfrlRSSze7UY5xUsbdhotmXE=;
+ b=Rl4eSt9qRqIfOANaSJ6t/mZqCtpEC80CvYrec30TJGkBZW+K1LQfyJcXtC218KN5uH
+ CudVx5QHr6cxAh2m2RdFG0cRAeQbFqPQGbPXKO8L0RRQmylCOtADt5AUbNFZfyE7f4Sv
+ RVQXnaQ7OsnTih6d827+evTuhPl9e0FuH/Bzpd3IEobRuWiULc0ov5d4nbyjy2aBR/4b
+ C/jC0MLmT2oA8qDoIGM5WBH5xvlfK6GXaSpGibnrk078ducygXcJbrMH8VoLCb+PX9LR
+ e8dDF83XzPWgw4SFxC0j4oLKSuuYGn3+6BHw8iwa9gQ7RUGj8LRApLG+XN8mAB+9HwRm
+ 8Yjw==
+X-Gm-Message-State: AOJu0YyM3sC3v6e3EIZpLgFSKuwhhrgKy4iaSt+fwNDJuWHAZDcFvJOn
+ aEmEPRNgoruUWcUIdWh7IfFQ5SpnIcgaD29DUJC9FQ==
+X-Google-Smtp-Source: AGHT+IGBfdGNiY0x/Rqc0RMM/D/SBy8h0z8arwUY3ftWxCpYt6t9EJl55/iVfaoGxGfQ+OmsxcrBLg==
+X-Received: by 2002:a05:690c:16:b0:5a7:fcaf:c1c0 with SMTP id
+ bc22-20020a05690c001600b005a7fcafc1c0mr1467217ywb.8.1697727685911; 
+ Thu, 19 Oct 2023 08:01:25 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.22
- for <u-boot@lists.denx.de>
+ c11-20020a814e0b000000b005a7c35a1396sm2475077ywb.29.2023.10.19.08.01.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 08:01:22 -0700 (PDT)
+ Thu, 19 Oct 2023 08:01:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v4 15/24] boot: Rework BOOT_DEFAULTS to allow for CMDLINE to be
- disabled
-Date: Thu, 19 Oct 2023 11:00:56 -0400
-Message-Id: <20231019150105.714407-15-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [v4 17/24] bootmeth_cros: Require bootm.o and bootm_os.o
+Date: Thu, 19 Oct 2023 11:00:58 -0400
+Message-Id: <20231019150105.714407-17-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231019150105.714407-1-trini@konsulko.com>
 References: <20231019150105.714407-1-trini@konsulko.com>
@@ -89,67 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We split BOOT_DEFAULTS to have BOOT_DEFAULTS_FEATURES and
-BOOT_DEFAULTS_CMDS that in turn list general features or commands that
-we want enabled when BOOT_DEFAULTS is selected.  We only select
-BOOT_DEFAULTS_CMDS if CMDLINE is set.
+In order to use bootmeth_cros, at least on non-X86, we need to be able
+to start any type of kernel that the "bootm" code paths can handle.  Add
+these objects to the required list for this option.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Kconfig | 23 +++++++++++++++--------
- 1 file changed, 15 insertions(+), 8 deletions(-)
+Cc: Simon Glass <sjg@chromium.org>
+---
+ boot/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 2075ecd34b1f..88b9296ee1bf 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -346,8 +346,16 @@ config PXE_UTILS
- 	help
- 	  Utilities for parsing PXE file formats.
- 
--config BOOT_DEFAULTS
--	bool  # Common defaults for standard boot and distroboot
-+config BOOT_DEFAULTS_FEATURES
-+	bool
-+	select SUPPORT_RAW_INITRD
-+	select ENV_VARS_UBOOT_CONFIG
-+	imply USB_STORAGE
-+	imply EFI_PARTITION
-+	imply ISO_PARTITION
-+
-+config BOOT_DEFAULTS_CMDS
-+	bool
- 	imply USE_BOOTCOMMAND
- 	select CMD_ENV_EXISTS
- 	select CMD_EXT2
-@@ -358,14 +366,14 @@ config BOOT_DEFAULTS
- 	select CMD_DHCP if CMD_NET
- 	select CMD_PING if CMD_NET
- 	select CMD_PXE if CMD_NET
--	select SUPPORT_RAW_INITRD
--	select ENV_VARS_UBOOT_CONFIG
- 	select CMD_BOOTI if ARM64
- 	select CMD_BOOTZ if ARM && !ARM64
- 	imply CMD_MII if NET
--	imply USB_STORAGE
--	imply EFI_PARTITION
--	imply ISO_PARTITION
-+
-+config BOOT_DEFAULTS
-+	bool  # Common defaults for standard boot and distroboot
-+	select BOOT_DEFAULTS_FEATURES
-+	select BOOT_DEFAULTS_CMDS if CMDLINE
- 	help
- 	  These are not required but are commonly needed to support a good
- 	  selection of booting methods. Enable this to improve the capability
-@@ -431,7 +439,6 @@ config BOOTSTD_FULL
- config BOOTSTD_DEFAULTS
- 	bool "Select some common defaults for standard boot"
- 	depends on BOOTSTD
--	imply USE_BOOTCOMMAND
- 	select BOOT_DEFAULTS
- 	select BOOTMETH_DISTRO
- 	help
+diff --git a/boot/Makefile b/boot/Makefile
+index ad608598d298..3fd048bb41ab 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -28,7 +28,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootstd-uclass.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+-obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootmeth_cros.o
++obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
+ ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
 -- 
 2.34.1
 
