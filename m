@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49F4C001DF
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29E8C001DF
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 22:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD29186F9A;
-	Thu, 19 Oct 2023 23:57:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B461386F80;
+	Fri, 20 Oct 2023 00:50:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fxQ9p3+9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z46fvdJg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09B4B86F9A; Thu, 19 Oct 2023 23:57:46 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id 7911286DE0; Fri, 20 Oct 2023 00:50:01 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7532B86F6F
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:57:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA0CF86F80
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 00:49:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-1ea1742c1a5so49816fac.0
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:57:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-507adc3381cso221574e87.3
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 15:49:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697752662; x=1698357462; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EH9g5EsHRE81YAZ1i3+GHuOjU6FdNrmr097nyvVJnL8=;
- b=fxQ9p3+9MFdRaJ+rZMvizGAulCCL3roorLkyviVgLk3gEi+IgCRbJ9wS3tXgkPGisT
- d850wNGzEzZYizCbgKga+TSZQOtE0pZOxUAHZtX1zEhjBmKxAfD2DPeKpKUvaBe7asRq
- NDSss08m3PKqDzjOL158Og5GF10+ekyFOJ+C4tWnJEiMl0X1QTiD7IvLmJDB2t58ymvz
- WhXSy5x1PEK2px7aWCAv/8/L+TKJ3Go+xRzxgBMBCKPTyxkwwv8HtaHuiRFnBRyV51U0
- bL8eVeRrEUVswBOQ1W28qfYSb3G60gR2Uthx1euOYWzUsHUZNG8a/rUurT7af4mlRQpZ
- R5Wg==
+ d=linaro.org; s=google; t=1697755798; x=1698360598; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TPxgCFPXYXMl83f22iUEJ5g13zC6gjzY7MzFH5HrNns=;
+ b=Z46fvdJgBdehlJtjx0rKkN+fz3YozEU7WnfOV1IgMURwbJbWTIaoCPp17uk+MwOaUy
+ v3BkUhPmLFaQ2USHRJfV4WQ1Q43onR/9vRE41dRU5WvZtArCGUs514SnsXjWFUigItw9
+ C8rsSe6VJYHK+uKDfgXL2kq7JwVkZEexRftBdgFLvuyCV/rR3wu2J6eEQIMM4Cnen0Pp
+ fBp16zrLqgqxPArSVQ1dKGXZ2DkUQ/AbDrT/xTBguZxhO30fZue7DCwNOAZuCgIaU+sY
+ E8jNErb1aiRn9J0uo8bC3B+15Nt7s58M2GHKPOM49ESHp1zmNbOjRbN4/2Xqq1p/ZhiE
+ ubNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697752662; x=1698357462;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1697755798; x=1698360598;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EH9g5EsHRE81YAZ1i3+GHuOjU6FdNrmr097nyvVJnL8=;
- b=lD2j/XagA7R5uVIpwHd51sobBlpRCMddNqvdk328+lB2cWBt0Ff/QEVOIH5rc8OPfY
- cGpJihubBCswKffWjnPsOxtR9MD1wVU4I5Ep8P5qoWsABqAmtXl4D1ICwxp4t5tro7Zz
- 0KySPukViKk/6k1k6w2OoSsuqZ4tfjcw6S0tYTz/KAJim4e9uNu1bQczOhAinV91ACgx
- +0KwFPZty+cNM7siWjYu0vDyTgNVmBAsUJxP/WYXdxWawhhVN0EUSIaslg8PIPbEkvnm
- jI8aszVlldGXSZGCHDp/ETVuC+fsZTmT3iuoTn4SeLSo2mFZ2m8i4xD8oNfkRrsrU/Wx
- fWMQ==
-X-Gm-Message-State: AOJu0YxEtcozIl5JPTrFZAZpspygSmhVQdvjUJHDD3bZWoe3EW3In6/r
- zTLKJ5Xtt/78BbrzFo66BWY=
-X-Google-Smtp-Source: AGHT+IGTltu1aSlygSW8KxnOPcHMyB7BeFpKQTMkCnCQUqSHs7B+k+p3FSGvi5aCPVdUPXBPCn8RqA==
-X-Received: by 2002:a05:6358:5922:b0:168:a35c:f07b with SMTP id
- g34-20020a056358592200b00168a35cf07bmr11448rwf.0.1697752661828; 
- Thu, 19 Oct 2023 14:57:41 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
- by smtp.gmail.com with ESMTPSA id
- x27-20020aa78f1b000000b006bdfb718e17sm250280pfr.124.2023.10.19.14.57.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 14:57:41 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: joe.hershberger@ni.com
-Cc: rfried.dev@gmail.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] net: eth-uclass: Improve error message when MAC is not found
-Date: Thu, 19 Oct 2023 18:57:20 -0300
-Message-Id: <20231019215720.1839630-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ bh=TPxgCFPXYXMl83f22iUEJ5g13zC6gjzY7MzFH5HrNns=;
+ b=g+nLtrAfnSctZrkKEcSuil/L1JYI0etNZsfShUQn98gr/HQAyLrcypv1YXxIQwEDMx
+ HsPThuPJIZQL+uWLSw2sH3udnodgzYrU5W47IPtl5ypqm/jqVu+uyCFont4QiFHWYbW0
+ tJkjadVWfpwQBjj1OHda/xUGySELvWiIE/j/6RV+qTQXopYXAyXjWZwryVkhNUVd+GMj
+ 8mFV9JWAJhblU65a+0DBZ2G5NiKPvcCV5vDY+lyuKUH2mlZeXRKHJgIGKeCm4t/XaAjE
+ hi5zAnaiEigBkKleHfc+wcbDIdmd0YVH6gZfZbF2X9jC/sWbCm+RjAHPET6QeSzxk1S5
+ 3dRQ==
+X-Gm-Message-State: AOJu0YxXIADKvXxNs1L3FgQUjbdk7cW883gDHh3BmffKuRP9k+QCWebf
+ 6L8mnNBr3ZpvoRYBrwz692hQX7u+uk1deNGviDZFTQ==
+X-Google-Smtp-Source: AGHT+IFaTJiHUFx3z7FMPykHqAaIx2bhZB8AF+BCWi/9/ssBHC5hmQ4j77fLNeZmfS7P+q71LtaZpikJrHhfpSZrspI=
+X-Received: by 2002:ac2:4a66:0:b0:507:9f69:e8d9 with SMTP id
+ q6-20020ac24a66000000b005079f69e8d9mr62241lfp.49.1697755797823; Thu, 19 Oct
+ 2023 15:49:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231019162156.80982-1-eajames@linux.ibm.com>
+ <CAC_iWj+HkVL+D_xGat2py3mKnEcs3otV8PzYP2NAUyRbcOEeSw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+HkVL+D_xGat2py3mKnEcs3otV8PzYP2NAUyRbcOEeSw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 20 Oct 2023 01:49:21 +0300
+Message-ID: <CAC_iWj+V4dOtWN-mJVYOSi4xdoj2YrN+idc_1J9HtguNeugpYQ@mail.gmail.com>
+Subject: Re: [PATCH v13 0/8] tpm: Support boot measurements
+To: Eddie James <eajames@linux.ibm.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,34 +85,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+Hi Eddie,
 
-While bringinp up a new board without the MAC fuses programmed,
-the following error message was observed:
+Does the series compile for you against -master?
+For qemu_arm64_defonfig I am getting compilation errors both locally
+and on the CI
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/717362#L39
 
-Error: ethernet@30bf0000 address not set.
+Thanks
+/Ilias
 
-Improve the error message to make it clearer the reason of
-the failure.
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- net/eth-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-index 4311f3fe6e89..1f0985ec52ca 100644
---- a/net/eth-uclass.c
-+++ b/net/eth-uclass.c
-@@ -594,7 +594,7 @@ static int eth_post_probe(struct udevice *dev)
- 		eth_env_set_enetaddr_by_index("eth", dev_seq(dev),
- 					      pdata->enetaddr);
- #else
--		printf("\nError: %s address not set.\n",
-+		printf("\nError: %s a valid MAC address was not found.\n",
- 		       dev->name);
- 		return -EINVAL;
- #endif
--- 
-2.34.1
-
+On Thu, 19 Oct 2023 at 19:45, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Thanks Eddie
+>
+> I've queued this up on public CI.  I also have an internal one, this
+> one failed to add the TF-A eventlog, but everything else looks fine.
+> I'll have a look tomorrow, but since this used to work on earlier
+> versions I suspect it's going to be trivial to fix
+>
+> Cheers
+> /Ilias
+>
+> On Thu, 19 Oct 2023 at 19:21, Eddie James <eajames@linux.ibm.com> wrote:
+> >
+> > This series adds support for measuring the boot images more generically
+> > than the existing EFI support. Several EFI functions have been moved to
+> > the TPM layer. The series includes optional measurement from the bootm
+> > command.
+> > A new test case has been added for the bootm measurement to test the new
+> > path, and the sandbox TPM2 driver has been updated to support this use
+> > case.
+> >
+> > Changes since v12:
+> >  - Rebase on master.
+> >  - Add detail to documentation.
+> >
+> > Changes since v11:
+> >  - Rebase on next. Sorry for the delay (been on leave).
+> >
+> > Changes since v10:
+> >  - Fix commit message on efi_loader change
+> >  - Drop python test change
+> >  - Squash armv7 fix from Ilias
+> >
+> > Changes since v9:
+> >  - Rebase and add Ilias' fixes (thanks!)
+> >
+> > Changes since v8:
+> >  - Fix a sandbox driver off-by-one error in checking the property type.
+> >  - Fix log parsing again - any data corruption seen while replaying the
+> >    event log was failing the entire measurement.
+> >  - Added an option to ignore the existing log and a configuration option
+> >    for systems to select that for the bootm measurement. This would only
+> >    be selected for systems that know that U-Boot is the first stage
+> >    bootloader. This is necessary because the reserved memory region may
+> >    persist through resets and so U-Boot attempts to append to the
+> >    previous boot's log.
+> >
+> > Changes since v7:
+> >  - Change name of tcg2_init_log and add more documentation
+> >  - Add a check, when parsing the event log header, to ensure that the
+> >    previous stage bootloader used all the active PCRs.
+> >  - Change name of tcg2_log_find_end
+> >  - Fix the greater than or equal to check to exit the log parsing
+> >  - Make sure log_position is 0 if there is any error discovering the log
+> >  - Return errors parsing the log if the data is corrupt so that we don't
+> >    end up with half a log
+> >
+> > Changes since v6:
+> >  - Added comment for bootm_measure
+> >  - Fixed line length in bootm_measure
+> >  - Added Linaro copyright for all the EFI moved code
+> >  - Changed tcg2_init_log (and by extension, tcg2_measurement_init) to
+> >    copy any discovered event log to the user's log if passed in.
+> >
+> > Changes since v5:
+> >  - Re-ordered the patches to put the sandbox TPM driver patch second
+> >  - Remove unused platform_get_eventlog in efi_tcg2.c
+> >  - First look for tpm_event_log_* properties instead of linux,sml-*
+> >  - Fix efi_tcg2.c compilation
+> >  - Select SHA* configs
+> >  - Remove the !SANDBOX dependency for EFI TCG2
+> >  - Only compile in the measurement u-boot command when CONFIG_MEASURED_BOOT
+> >    is enabled
+> >
+> > Changes since v4:
+> >  - Remove tcg2_measure_event function and check for NULL data in
+> >    tcg2_measure_data
+> >  - Use tpm_auto_startup
+> >  - Fix efi_tcg2.c compilation for removing tcg2_pcr_read function
+> >  - Change PCR indexes for initrd and dtb
+> >  - Drop u8 casting in measurement test
+> >  - Use bullets in documentation
+> >
+> > Changes since v3:
+> >  - Reordered headers
+> >  - Refactored more of EFI code into common code
+> >     Removed digest_info structure and instead used the common alg_to_mask
+> >       and alg_to_len
+> >     Improved event log parsing in common code to get it equivalent to EFI
+> >       Common code now extends PCR if previous bootloader stage couldn't
+> >       No need to allocate memory in the common code, so EFI copies the
+> >       discovered buffer like it did before
+> >     Rename efi measure_event function
+> >
+> > Changes since v2:
+> >  - Add documentation.
+> >  - Changed reserved memory address to the top of the RAM for sandbox dts.
+> >  - Add measure state to booti and bootz.
+> >  - Skip measurement for EFI images that should be measured
+> >
+> > Changes since v1:
+> >  - Refactor TPM layer functions to allow EFI system to use them, and
+> >    remove duplicate EFI functions.
+> >  - Add test case
+> >  - Drop #ifdefs for bootm
+> >  - Add devicetree measurement config option
+> >  - Update sandbox TPM driver
+> >
+> > Eddie James (6):
+> >   tpm: Fix spelling for tpmu_ha union
+> >   tpm: sandbox: Update for needed TPM2 capabilities
+> >   tpm: Support boot measurements
+> >   bootm: Support boot measurement
+> >   test: Add sandbox TPM boot measurement
+> >   doc: Add measured boot documentation
+> >
+> > Ilias Apalodimas (2):
+> >   efi_loader: fix EFI_ENTRY point on get_active_pcr_banks
+> >   test: use a non system PCR for testing PCR extend
+> >
+> >  arch/sandbox/dts/sandbox.dtsi  |  13 +
+> >  arch/sandbox/dts/test.dts      |  13 +
+> >  boot/Kconfig                   |  32 ++
+> >  boot/bootm.c                   |  74 +++
+> >  cmd/booti.c                    |   1 +
+> >  cmd/bootm.c                    |   2 +
+> >  cmd/bootz.c                    |   1 +
+> >  configs/sandbox_defconfig      |   1 +
+> >  doc/usage/index.rst            |   1 +
+> >  doc/usage/measured_boot.rst    |  23 +
+> >  drivers/tpm/tpm2_tis_sandbox.c | 100 ++--
+> >  include/bootm.h                |  11 +
+> >  include/efi_tcg2.h             |  44 --
+> >  include/image.h                |   1 +
+> >  include/test/suites.h          |   1 +
+> >  include/tpm-v2.h               | 263 ++++++++++-
+> >  lib/Kconfig                    |   4 +
+> >  lib/efi_loader/Kconfig         |   2 -
+> >  lib/efi_loader/efi_tcg2.c      | 823 ++++-----------------------------
+> >  lib/tpm-v2.c                   | 814 ++++++++++++++++++++++++++++++++
+> >  test/boot/Makefile             |   1 +
+> >  test/boot/measurement.c        |  66 +++
+> >  test/cmd_ut.c                  |   4 +
+> >  test/py/tests/test_tpm2.py     |  16 +-
+> >  24 files changed, 1482 insertions(+), 829 deletions(-)
+> >  create mode 100644 doc/usage/measured_boot.rst
+> >  create mode 100644 test/boot/measurement.c
+> >
+> > --
+> > 2.39.3
+> >
