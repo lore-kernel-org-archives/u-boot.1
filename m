@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76C0FCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 08:23:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB41CDB483
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 08:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617F8871AD;
-	Thu, 19 Oct 2023 10:23:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C2FD871BA;
+	Thu, 19 Oct 2023 10:24:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="lthQLteL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rxqPu3gg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BAE0871AF; Thu, 19 Oct 2023 10:23:01 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 42C5F871C0; Thu, 19 Oct 2023 10:24:38 +0200 (CEST)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D345F871B6
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 10:22:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA3A871B7
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 10:24:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40651a726acso66977135e9.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 01:22:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-27d0acd0903so5036739a91.1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 01:24:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1697703778; x=1698308578;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=ke2RxvGEdAc20SS0+zDV9Qfm+QXDWyQhDSVEhwDEYwE=;
- b=lthQLteLxEl3+BAvDTT7wzEOX8KexOtqQVwz3pLlZOsksPKz0LFSf+2Nud+ygefYDj
- LjpGKFrrGbzDy8/tNylSReJ80GJnVk/WIigLfJwbabvoBi5sxAS3bKOndzlPWvh+wpAF
- URcCu87F+IIsTkuk+hiLVTmK7iNn81bXS22FESjFWcBszrGZ1AEdVA1OULMOxY/AQcy6
- aZ3Z+WDzM2cQvqgPet3/xm8AJk8MWMA5UW0wZzAdJg1hyTIGAJ2MTr94minc8TuliY9T
- YJ/vHAwlrwhTj9734KunQZKPMGCNqNE4eZ+7QN70LnfebJQvwEjDplUwWuchJ6BaJ9+k
- cydg==
+ d=linaro.org; s=google; t=1697703871; x=1698308671; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tvgqd3QABZCmQWO1qLlITLp4URQ1qtCvo7E7FbVqMEI=;
+ b=rxqPu3ggVbWNdbK8wGauqIAVIsZDq2XPEAemY/6dgOXVnXoMls5+Ki/WvPZEcBXZtT
+ Vz9gFV4RR+TFz29UiBMooZjkVSbmNJIpjqIuIbIiUV3UF3X4eiK6Xp4VL4bFXWSZqa7t
+ NQr90yr85zlfumDgUefIzjLIhVmcYS0jUcuU61Fevy/2wIj41gvVevg8IJlL4GmAZCha
+ qskDdErsDLTQmRqDNcGiHrz/NMynrXdsJX+kKtCDti6QO2zj0GnCoQFlV+QU9J/lpoPL
+ EMsH4EkYeORKXl6MxPM94hd0Apvd/ODjWIu40gxt6x+UG/kkgO3YkX3srhPTM7KAcXzO
+ Mh3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697703778; x=1698308578;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ke2RxvGEdAc20SS0+zDV9Qfm+QXDWyQhDSVEhwDEYwE=;
- b=BlkA8lFo+Nu5ha9OCA4pjBvTeD721QjD2Plzg41tiv1Lmu5KFFG7eLOjBKEM4Qto0i
- qco9jScph1d8RekinDpR5TW6HCyCfncU3v5qq1KVcKCwXywAGMKYbEAuO42x01b/yg2P
- Lpqjp4N53tUF16ahN7czmeD4hat3zjMp7rkx49Y9HeFahV+Idoe659c9UVR456GseNL7
- /Mbh6vn0/TBeAqbY8StxOi5TVGbr2awhlduYlLLOpAlgMmhoc+GNQ0lbQPutkJEN7Ry5
- TZzvedXz8/i6FKzJGDv9x38lInlEhdIBquRwir8agm2jkCSOYbTIMriKE42eFilhVfdg
- g0RQ==
-X-Gm-Message-State: AOJu0Ywe58NL40zb/GxQtXXaSSdDFT/dqDiwWvHypLn3+578cC4eKRFR
- b0o4TkTRzkdgwlQ18H8ZwiTVAS4zw2itMBTtjd8=
-X-Google-Smtp-Source: AGHT+IG2s9UY5sg1XjDRsmPRsDgmWxzZreZqRnGyu1LQ+EPBScvaoYHWfVXwpCvScTbds80/paxbrg==
-X-Received: by 2002:a05:600c:1ca6:b0:401:b6f6:d8fd with SMTP id
- k38-20020a05600c1ca600b00401b6f6d8fdmr1228137wms.6.1697703777338; 
- Thu, 19 Oct 2023 01:22:57 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- g38-20020a05600c4ca600b004078d71be9csm3705288wmp.13.2023.10.19.01.22.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 01:22:56 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] MAINTAINERS: Add Mattijs to USB/fastboot maintainers
-In-Reply-To: <20231019101812.2782fa2c@wsk>
-References: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
- <20231018125220.4b08c62c@wsk> <87h6mnnjpm.fsf@baylibre.com>
- <20231019101812.2782fa2c@wsk>
-Date: Thu, 19 Oct 2023 10:22:56 +0200
-Message-ID: <875y33nhr3.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1697703871; x=1698308671;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Tvgqd3QABZCmQWO1qLlITLp4URQ1qtCvo7E7FbVqMEI=;
+ b=KD0xpdd1j2GuZ8s1jXfwDhQY2MihYi6zTzkjrGefWVxh7wnS5x1efQBR4CO9IqaPun
+ oK3nBbCxUh0vz2qTPvIRyHJRc212X37wDUSjKOufQYwAUPIgCnJZ0uKhISG9+YGrPR2I
+ iUBfJk5tcsXAG1qyEJZb4BKY/Ra1S4hZVmbznoLcCNi9WYJnzweGnsgAN0P2x33qODMQ
+ rB9Tg38Bpa8hGMQ6ov+43uwW3bTvGp2Z/L94YTZTUhsQVDqkN21aHojby44HeMYhBVr3
+ MNKcfjI+Ze0PQLWrkI5w8fMaaOO41GhO9/ZWsqJ+Gm4gWEkrVJRQorzbe6d7oS2Wxs24
+ 9KFA==
+X-Gm-Message-State: AOJu0YzzTdabb2Je1+5n2MS/M5n7f3nI/9NgGYrYnz0tVpSO8C97qpCO
+ xevsFl5B+1y9ErM3PjwKn06pZ2TB8WvLZF5WwIqp9A==
+X-Google-Smtp-Source: AGHT+IFjn5i9n90k0qr+Shaka210G2i/4MG2IYgTLK8KHWvkRx4DMzuh4Vx+JHRRi4D8UEMKAU0Y8VHX0TPQNuKjgl4=
+X-Received: by 2002:a17:90a:678f:b0:27d:2ecd:6a23 with SMTP id
+ o15-20020a17090a678f00b0027d2ecd6a23mr1378709pjj.14.1697703870926; Thu, 19
+ Oct 2023 01:24:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-5-masahisa.kojima@linaro.org>
+ <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
+ <CAC_iWj+koNjVBR7TCJH_u_PvY5xDHgtBGRTHBRRgAx_aDeC8-A@mail.gmail.com>
+ <ae12d900-fe7f-4f7b-9eb1-018aa719174f@gmx.de>
+ <CADQ0-X8XGiek9oBEFeDtXaR2vcBsQS-NhJK5mL9TRLK+9gTJ2A@mail.gmail.com>
+ <050e8bea-771b-491d-8d66-14fadcff0487@gmx.de>
+ <CADQ0-X9n24HVJ_AoMszTUQy1wk+q=TfZG915mzd3gd=GScxjMA@mail.gmail.com>
+ <CAC_iWjJccjJPEWpiBKOA+ue21JAcosVHsgQH7QJvMzcRBASkAw@mail.gmail.com>
+ <CADQ0-X8ndi2UmqWTkcfp=1UsPRnZKDi3RJfFVJb7A6FsMZ4=Vw@mail.gmail.com>
+ <CAC_iWjL8n7Zkm3qa7MHzjS9gi1ap9EJdezFML4bSmzFDUpMW-A@mail.gmail.com>
+ <CADQ0-X-H4YQiANnSveqdub_-N8cz23wBkzq32DOUOxb0XigJwg@mail.gmail.com>
+ <CAC_iWjK59UppeLyp=F4agWVEaxQi-Kcz3GrTysOdUP3kd0z6RQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjK59UppeLyp=F4agWVEaxQi-Kcz3GrTysOdUP3kd0z6RQ@mail.gmail.com>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Thu, 19 Oct 2023 17:24:19 +0900
+Message-ID: <CADQ0-X8LjTJwdzKPUn7+OkfRvqkpVr5O6U_0TpUQ_zNS8HnRkw@mail.gmail.com>
+Subject: Re: [PATCH v7 4/9] efi_loader: create default file boot option
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,92 +98,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On jeu., oct. 19, 2023 at 10:18, Lukasz Majewski <lukma@denx.de> wrote:
+On Thu, 19 Oct 2023 at 16:22, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> [...]
+>
+> > > > > >
+> > > > > > According to the EDK II implementation[1], the boot option is
+> > > > > > enumerated with the following order.
+> > > > > >   1. Removable BlockIo
+> > > > > >   2. Fixed BlockIo
+> > > > > >   3. Non-BlockIo SimpleFileSystem
+> > > > > >   4. LoadFile
+> > > > > > So boot option for the fixed device such as HDD is also automatically created.
+> > > > > >
+> > > > > > [1] https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/UefiBootManagerLib/BmBoot.c#L2150
+> > > > > >
+> > > > > > >
+> > > > > > > >
+> > > > > > > > When this boot option is selected, Fedora installer automatically starts.
+> > > > > > > > So EDK II is searching the default file on the fly.
+> > > > > > >
+> > > > > > > What is shown if you attach a medium without Bootaa64.efi?
+> > > > > >
+> > > > > > The same boot option is created.
+> > > > > > UEFI QEMU HARDDISK QM00001 : PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0)
+> > > > >
+> > > > > I went back to reading the spec and I think Heinrich is right.  We
+> > > > > don't need that check at all. Going through [0] paragraph 4 says
+> > > > > " This search occurs when the device path of the boot image listed in
+> > > > > any boot option points directly to an EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
+> > > > > device and does not specify the exact file to load"
+> > > > >
+> > > > > So we should *only* add an automatic variable without the default
+> > > > > application.  Our code in try_load_entry() will search for that
+> > > > >
+> > > >
+> > > > Thank you for checking the UEFI specification and sorry for
+> > > > overlooking the above.
+> > > > So we will go back to the previous on the fly default application search.
+> > >
+> > > Yes, I was about to suggest that.
+> > > The problem as I understand it that the current patch not only
+> > > disregards disks and partitions that dont have a default (i.e
+> > > bootaa64.efi) file. It also *changes* the default boot option we add,
+> > > and instead of the disk it adds a file.  That is the part that's
+> > > against the spec.  On top of that it changes the behavior of efi
+> > > bootmgr and we never call the expand_media_path.
+> >
+> > What do you mean by "we never call the expand_media_path"?
+> > Do you expect we search the partition whether it has a default file,
+> > then load the default file with efi_load_image() only when the
+> > partition has a default file?
+>
+> I mean, that the current patch also changed the behavior of the added
+> boot options.
+> Instead of adding a device path and using expand_media_path() in the
+> efibootmgr to load the image, we explicitly added the file path
+> instead
 
-> On Thu, 19 Oct 2023 09:40:37 +0200
-> Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
->
->> Hi Lukasz, Marek,
->> 
->> On mer., oct. 18, 2023 at 12:52, Lukasz Majewski <lukma@denx.de>
->> wrote:
->> 
->> > Hi Mattijs,
->> >  
->> >> From discussions with Marek at Kernel Recipes, it seems that the
->> >> USB subsystem in U-boot need some help.
->> >> 
->> >> Since I've been asked and I'm willing to help, I've added myself to
->> >> the maintainers entry.
->> >> 
->> >> I have also added myself for fastboot since I'm interested in
->> >> keeping that functional as well.
->> >> 
->> >> Note that I have no previous (open-source) maintainer experience
->> >> so I will do my best to learn.
->> >>   
->> >
->> > Thanks for willing to help with maintaining the code. If you need
->> > any help - then just ask :-)
->> >
->> > Acked-by: Lukasz Majewski <lukma@denx.de>  
->> 
->> Thank you for acknowledging. I'm both very happy and a bit nervous to
->> start :)
->> 
->> Do we still use the following custodian tree:
->> https://source.denx.de/u-boot/custodians/u-boot-dfu ?
->> 
->
-> Yes.
->
->> If yes, I imagine I would need write access to it.
->> 
->
-> I think that Tom shall have credentials to add you.
+OK, I understand.
+You explained what the current patch changed the efibootmgr behavior.
 
-Great!
-
-My account is created and approved already:
-https://source.denx.de/mkorpershoek
+Thanks,
+Masahisa Kojima
 
 >
->> 
->> >  
->> >> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> >> ---
->> >> Mattijs Korpershoek (2):
->> >>       MAINTAINERS: usb gadget: add Mattijs
->> >>       MAINTAINERS: fastboot: add Mattijs
->> >> 
->> >>  MAINTAINERS | 4 +++-
->> >>  1 file changed, 3 insertions(+), 1 deletion(-)
->> >> ---
->> >> base-commit: 65b9b3462bec2966911658836983819ab4e4823e
->> >> change-id: 20231005-mattijs-usb-6b83dde256f0
->> >> 
->> >> Best regards,  
->> >
->> > Best regards,
->> >
->> > Lukasz Majewski
->> >
->> > --
->> >
->> > DENX Software Engineering GmbH,      Managing Director: Erika Unter
->> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell,
->> > Germany Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
->> > lukma@denx.de  
->
->
->
->
-> Best regards,
->
-> Lukasz Majewski
->
-> --
->
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+> Regards
+> /Ilias
+> >
+> > Thanks,
+> > Masahisa Kojima
+> >
+> >
+> > >
+> > > So my suggestion would be
+> > > - Drop #4
+> > > - Adjust patch 5 and instead of loading the boot entry directly, scan
+> > > for the special autogenerated boot option and look for that file there
+> > >
+> > > Heinrich would that work for you?
+> > >
+> > > Thanks
+> > > /Ilias
+> > > >
+> > > > Thanks,
+> > > > Masahisa Kojima
+> > > >
+> > > > > [0] https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html#load-option-processing
+> > > > >
+> > > > > Regards
+> > > > > /Ilias
+> > > > > >
+> > > > > > Thanks,
+> > > > > > Masahisa Kojima
+> > > > > >
+> > > > > > >
