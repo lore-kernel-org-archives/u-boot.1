@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD2CC001DF
-	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6FEAC004C0
+	for <u-boot@archiver.kernel.org>; Thu, 19 Oct 2023 21:56:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F0CF870A1;
-	Thu, 19 Oct 2023 23:51:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 40C5E86F9A;
+	Thu, 19 Oct 2023 23:56:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IF4GQhVV";
+	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="ZhuVD22i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C8A8871BD; Thu, 19 Oct 2023 23:51:32 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 46F4386FC8; Thu, 19 Oct 2023 23:56:38 +0200 (CEST)
+Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5381A870A1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:51:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 33D8A86F9A
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:56:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1c9ba72f6a1so270765ad.1
- for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 14:51:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697752288; x=1698357088; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9NS0LNvYp0EjtgAo/n1l0a+AhHqoyEZka2YjsYANDek=;
- b=IF4GQhVVzN03946+LJlwquiCqkm+fRMVOuYFUAxvXiV5ZUzKkWX7vDWsQPx05MwFoO
- WQ8l8hSGZQx5qRQC3vxkOtxuk6U3R0MPcUg6JIWuoWvnItJXVbP4TVL6XIJd78argiQE
- 9/B5y7PGnU0SDNeDlLUvhGHcRjd+RwMLH2vnLpGoDZEAjjYs9DDHFst+qiPU/MlykJET
- lAkcp6+RESni6bUsaeazX/XHYou7jYfn6725egT5MGTm29F6ga5PfYlkG+SqT3oFpVHg
- Ruh+Qkhpnn4dJQlO4WvY/hvIZ3XIv/rDjzyOuui/oj3Snh9sOJ8nWTGmamLe4jvM3s66
- 6LiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697752288; x=1698357088;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9NS0LNvYp0EjtgAo/n1l0a+AhHqoyEZka2YjsYANDek=;
- b=ImVlz+Xee9kWWq6IztcSysfCEFyZ166uvAVvJuVU/UuyOpyKpSoEIGpbYeKXS21g4L
- SI+M++b8xrpmMpwf7fFn9RxtGkBlsFvw82UeZPFa3RYgn69MqtZluBaIYJH47MoH5bR9
- KZ2xN3ZlStO00lmLi4bMrrQn8Yabk+IQR9yoK4HTCtep1pFpywyNPhw+UkQKi+A2KiIG
- ql1j5cAyX8LoSdzrpg8fWxavwQ4aNwaqWSXIztHSBIybfRH/t9MgkA9OtqkJY6japRea
- I1qb8zImJoHxhgGwsmx63XQq7CfzehlDNXVbIugHcy06wwRY5Qvd1/ODUfjTTG1abMqZ
- c+Kg==
-X-Gm-Message-State: AOJu0Yyip/zdctnnbd4B1KdAGrUqPNPwUs+WjX1pbStB4oCuspmweC8e
- HrA9aKF9jY+CSdmHcLZW0e0=
-X-Google-Smtp-Source: AGHT+IGpicOLi8AAPryJbSLmqrSqgQgYwB4Dd3bhZgWdG/qqmVS2IltUjbmEtA5m+HP09o6OBZkBcA==
-X-Received: by 2002:a17:903:2783:b0:1b8:9fc4:2733 with SMTP id
- jw3-20020a170903278300b001b89fc42733mr129659plb.3.1697752288626; 
- Thu, 19 Oct 2023 14:51:28 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:845f:888e:bc51:273a])
- by smtp.gmail.com with ESMTPSA id
- x4-20020a170902ec8400b001bc6e6069a6sm177371plg.122.2023.10.19.14.51.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Oct 2023 14:51:28 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, hugo@hugovil.com,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v3 2/2]  imx8mp_evk: Remove unneeded header files
-Date: Thu, 19 Oct 2023 18:51:13 -0300
-Message-Id: <20231019215113.1833803-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231019215113.1833803-1-festevam@gmail.com>
+ dmarc=none (p=none dis=none) header.from=hugovil.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
+ ; s=x;
+ h=Subject:Content-Transfer-Encoding:Mime-Version:Message-Id:Cc:To:From
+ :Date:subject:date:message-id:reply-to;
+ bh=LlRFCzIvOw4OT+35wKm2HPRq+vrQeb+QNBKPopu5kiE=; b=ZhuVD22izOE5qxq3q5ULdFH79c
+ b+1mhmaKLGEFVu6huM5AzPCHc7gFhWUaTIO0sM/7Zmb2TGnuBSZypJYxsT/iYKvbj9Q3GQRtcO1gJ
+ NyyQa1vrU9JCZWzmBwJ0EtVOcr3NH3iApRw9Y3r1AsDM8Joir2nkbYEad3CXMeqX3Bjw=;
+Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:48042
+ helo=pettiford) by mail.hugovil.com with esmtpa (Exim 4.92)
+ (envelope-from <hugo@hugovil.com>)
+ id 1qtb0J-0001LD-LG; Thu, 19 Oct 2023 17:56:32 -0400
+Date: Thu, 19 Oct 2023 17:56:31 -0400
+From: Hugo Villeneuve <hugo@hugovil.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, Fabio Estevam
+ <festevam@denx.de>
+Message-Id: <20231019175631.7690b3cd59e7f71f7549b0d7@hugovil.com>
+In-Reply-To: <20231019215113.1833803-2-festevam@gmail.com>
 References: <20231019215113.1833803-1-festevam@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ <20231019215113.1833803-2-festevam@gmail.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 70.80.174.168
+X-SA-Exim-Mail-From: hugo@hugovil.com
+Subject: Re: [PATCH v3 2/2]  imx8mp_evk: Remove unneeded header files
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,43 +69,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On Thu, 19 Oct 2023 18:51:13 -0300
+Fabio Estevam <festevam@gmail.com> wrote:
 
-Cleanup the file by removing unneeded header files.
+> From: Fabio Estevam <festevam@denx.de>
+> 
+> Cleanup the file by removing unneeded header files.
+> 
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
-Changes since v2:
-- Also remove <asm/global_data.h> and DECLARE_GLOBAL_DATA_PTR. (Hugo)
+Reviewed-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
- board/freescale/imx8mp_evk/imx8mp_evk.c | 13 -------------
- 1 file changed, 13 deletions(-)
 
-diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
-index 42291c958e39..024b46ef8bc2 100644
---- a/board/freescale/imx8mp_evk/imx8mp_evk.c
-+++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
-@@ -3,20 +3,7 @@
-  * Copyright 2019 NXP
-  */
- 
--#include <common.h>
- #include <env.h>
--#include <errno.h>
--#include <init.h>
--#include <linux/delay.h>
--#include <asm/global_data.h>
--#include <asm/mach-imx/iomux-v3.h>
--#include <asm-generic/gpio.h>
--#include <asm/arch/imx8mp_pins.h>
--#include <asm/arch/clock.h>
--#include <asm/arch/sys_proto.h>
--#include <asm/mach-imx/gpio.h>
--
--DECLARE_GLOBAL_DATA_PTR;
- 
- int board_init(void)
- {
--- 
-2.34.1
-
+> ---
+> Changes since v2:
+> - Also remove <asm/global_data.h> and DECLARE_GLOBAL_DATA_PTR. (Hugo)
+> 
+>  board/freescale/imx8mp_evk/imx8mp_evk.c | 13 -------------
+>  1 file changed, 13 deletions(-)
+> 
+> diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
+> index 42291c958e39..024b46ef8bc2 100644
+> --- a/board/freescale/imx8mp_evk/imx8mp_evk.c
+> +++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
+> @@ -3,20 +3,7 @@
+>   * Copyright 2019 NXP
+>   */
+>  
+> -#include <common.h>
+>  #include <env.h>
+> -#include <errno.h>
+> -#include <init.h>
+> -#include <linux/delay.h>
+> -#include <asm/global_data.h>
+> -#include <asm/mach-imx/iomux-v3.h>
+> -#include <asm-generic/gpio.h>
+> -#include <asm/arch/imx8mp_pins.h>
+> -#include <asm/arch/clock.h>
+> -#include <asm/arch/sys_proto.h>
+> -#include <asm/mach-imx/gpio.h>
+> -
+> -DECLARE_GLOBAL_DATA_PTR;
+>  
+>  int board_init(void)
+>  {
+> -- 
+> 2.34.1
+> 
+> 
