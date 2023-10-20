@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACDDC001DF
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 18:43:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD4CAC001DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 21:19:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A955874FB;
-	Fri, 20 Oct 2023 20:43:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 476B087516;
+	Fri, 20 Oct 2023 23:19:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W1VxGsW2";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="zM9fGLG8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B08BD874FC; Fri, 20 Oct 2023 20:43:01 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 87E8A87517; Fri, 20 Oct 2023 23:19:29 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71AE4874F8
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 20:42:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D45C087516
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 23:19:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-1ea48ef2cbfso893350fac.2
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 11:42:56 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d9a4c0d89f7so1285898276.1
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 14:19:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697827375; x=1698432175; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=not3VwtTGNgVrUR+v7u8KRKbikWl5f0cWiC/jB+WwGc=;
- b=W1VxGsW2+EnZnOimOU9f9QVUM2ZpNAVHvi7XE4eTDYXSOHqXUgOuDw5bZay/P4j1QW
- RG95p0N+dtW73DczUcKzzbXjeXhRe2iu1Q/tQIkJ3uQn8uYmQ3lPlmjvVart+meUFAvX
- jnmxE511JTOWIXTG19f2I+LNMbGumZisnKuvCEEZ9MuSeY05d6t2D0f4IiyVIHhUXtYn
- 91SSnb3TE1MGjkUb/pSHknYra8L22nYEL6yJJKdCeppq4nJS2XCh0Zxj7EOyiVtE7x/d
- M/dQ+oRuBxSKa8n+NsE64tvdYaQm4TR273V20C/JAe0oFpYHoAm1O8G+IW78EOKt9k6c
- no5A==
+ d=google.com; s=20230601; t=1697836765; x=1698441565; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Acho/F8ZOLJgR8Vg6oDvEJfv1NIsyf2STRkzsl6NsAI=;
+ b=zM9fGLG8Hqum8NAQ7PEI04jJIQXrfDxaKfw67hjSAnbWjpRYy3nsPaRF1a+pLPFAD7
+ 2qxlvdVqZiHuLq8CSAAYPU+fJgLTXmxhp2iqPm0IUNGhQDnVyC1mz8QEOa9qu5VbNRPU
+ 1yWrnPaTR9hE/CmG9WfIhqzWI+moxA9emNeODfwMKN9WwaL4bx7RF7LplZt2KTEK0Ij0
+ ZF3w0VFb5T9SaI6kkCNilxo5UZglGHpzcBpwzf0LT5z35UPh4B/PfP4rnNSodgJ+aJKe
+ WrNfDixsl/5FtXHxUl/3o8qBDi2vBFoMXcNc48CW2ZQiDTEvlE7WrPgGLAKK8a9c1VLd
+ BkNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697827375; x=1698432175;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1697836765; x=1698441565;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=not3VwtTGNgVrUR+v7u8KRKbikWl5f0cWiC/jB+WwGc=;
- b=IIM8DVClhEesEbtgOTpGo/M03SiC9aBCfR6ybpNJjAz9a1KeznY1JRxtD7wevT8lgt
- dFp/+V6cqjBmvYfEZTS/XoCUJ90jOW+1y/vOidm/RvvN5CYINMYvwOUDwE7UVdpnQ/p2
- XtjnUISjiOhT6qq4mrcBMELXP4GI7+rXOfQDuBZU3a6s7WnArK+DUZ08+Kx5PGD/VxKy
- Dw7IzMSKKe+EhI7bmzjZU1ArHTc0ruPfkYuNEAWQ0dalbJ0O4mqpGzmQ9dRDuE9A9Qk1
- vliNoM72BE710BUJGGRhKH5gdIsAoSk8/kBBZylYnCZX7fp6ZewbK7MBKhwNoIrBhzbF
- unjw==
-X-Gm-Message-State: AOJu0YyPnO7I8roaBSTtEKNRYG6ny1HITa/mPl/HsoxkSTr878LVEr5n
- 3ZDoCL7tVno40RKovTwW38c6Wg==
-X-Google-Smtp-Source: AGHT+IFc0uBNEpdb+olsUnH8kswtQByrqGfgg38dNqw372+/DhVSDbW/4fyAx4i7+ABl3e0DzJHcqQ==
-X-Received: by 2002:a05:6871:821:b0:1d6:4b84:c7ed with SMTP id
- q33-20020a056871082100b001d64b84c7edmr3180553oap.23.1697827374964; 
- Fri, 20 Oct 2023 11:42:54 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- m7-20020a056870194700b001cc9bc7b569sm460048oak.27.2023.10.20.11.42.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Oct 2023 11:42:54 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Dzmitry Sankouski <dsankouski@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] board: samsung: Remove incorrect SYS_CONFIG_NAME in axy17lte
- Kconfig
-Date: Fri, 20 Oct 2023 13:42:53 -0500
-Message-Id: <20231020184253.21915-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ bh=Acho/F8ZOLJgR8Vg6oDvEJfv1NIsyf2STRkzsl6NsAI=;
+ b=kDdpOvXkPoi/70G/nWubdJf6Do14Wwuk2fdlhWpzQZJB/vGoCTt3LWaDPlP1Gbn3Ot
+ ZguN4qyCtPdl4mb9mIBZv6wunl8M0kE9UUhQH8gtJVjyJ11cE1K8pEg8TypAjx6FX5BA
+ YrA4UmD1KNQtJNHoLfZnIN61wAtVzktYDwPq57szd3D+WMfjPvBcdravp8kVyFinNrQ1
+ SgYWjevv7EB+hcx704zuAY7j2biwGiHuBN7FwbThfFg6R4DV0LmDs1jY3nLkMlJx9Grg
+ NxufnXkOitcA/34plVgwlfc/cckIrhK3tIC9xSW5Dm9MQ00i6pNZPPbmJL/GZ+xNmC1e
+ 7aHA==
+X-Gm-Message-State: AOJu0YyJhPMY6hrBE5cGUviseFLb/h8rkGs54/m/U7+Jmlb9YpkowvIG
+ wBtwMx9jdYc4w/DUes3MpXsN3IVauSZxoR3jTjZQ/Q==
+X-Google-Smtp-Source: AGHT+IF7ncmQVYXQ3LMCAJBepfDhICTFoDzLM7D9YvKPZdF+T7h+tTAQL8op3BlyYVyhQNPZ3h0a3dziUeLfbK7N+ZQ=
+X-Received: by 2002:a25:7756:0:b0:c4b:ada8:8b86 with SMTP id
+ s83-20020a257756000000b00c4bada88b86mr3434466ybc.64.1697836765350; Fri, 20
+ Oct 2023 14:19:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
+ <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
+ <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
+ <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
+ <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+From: Simon Glass <sjg@google.com>
+Date: Fri, 20 Oct 2023 14:19:07 -0700
+Message-ID: <CAPnjgZ075xPLLgKTM9VnKpp20G-Jj5H=TDmkTtLq=CRvO2UK3g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Doug Anderson <dianders@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,69 +90,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The global SYS_CONFIG_NAME in axy17lte Kconfig overrides SYS_CONFIG_NAME
-for all boards specified after this line in
-arch/arm/mach-exynos/Kconfig:
+Trying again to add Doug as we chatted briefly about this yesterday.
 
-    source "board/samsung/axy17lte/Kconfig"
-
-Right now it's the last 'source' line there, so the issue is not
-reproducible. But once some board is moved or added after this line the
-next build error will happen:
-
-      GEN     include/autoconf.mk.dep
-    In file included from ./include/common.h:16:
-    include/config.h:3:10: fatal error: configs/exynos78x0-common.h.h:
-                           No such file or directory
-        3 | #include <configs/exynos78x0-common.h.h>
-          |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    compilation terminated.
-
-That's happening because axy17lte Kconfig defines SYS_CONFIG_NAME option
-in global namespace (not guarded with any "if TARGET_..."), so it
-basically rewrites the correct SYS_CONFIG_NAME defined in the
-hypothetical boards which might appear after axy17lte in mach-exynos
-Kconfig.
-
-Another side of the issue is that SYS_CONFIG_NAME is defined
-incorrectly in axy17lte Kconfig:
-
-    config SYS_CONFIG_NAME
-        default "exynos78x0-common.h"
-
-The .h extension should not have been specified there. It's leading to
-the build error, as the generated include file has double '.h' extension.
-
-Fix the issue by simply removing the SYS_CONFIG_NAME definition in
-axy17lte Kconfig, as all related defconfigs already declare internal
-values for SYS_CONFIG_NAME:
-
-  - a5y17lte_defconfig
-  - a7y17lte_defconfig
-  - a3y17lte_defconfig
-
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-Fixes: 3e2095e960b4 ("board: samsung: add support for Galaxy A series of 2017 (a5y17lte)")
----
- board/samsung/axy17lte/Kconfig | 8 --------
- 1 file changed, 8 deletions(-)
-
-diff --git a/board/samsung/axy17lte/Kconfig b/board/samsung/axy17lte/Kconfig
-index a018547ff5d4..209394a8a5a8 100644
---- a/board/samsung/axy17lte/Kconfig
-+++ b/board/samsung/axy17lte/Kconfig
-@@ -1,11 +1,3 @@
--config SYS_CONFIG_NAME
--	string "Board configuration name"
--	default "exynos78x0-common.h"
--	help
--	  This option contains information about board configuration name.
--	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
--	  will be used for board configuration.
--
- if TARGET_A5Y17LTE
- config SYS_BOARD
- 	default "axy17lte"
--- 
-2.39.2
-
+On Fri, Oct 20, 2023, 07:21 Simon Glass <sjg@google.com> wrote:
+>
+> +Doug Anderson
+>
+> Hi Heinrich,
+>
+> On Thu, 19 Oct 2023 at 09:09, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > On 19.10.23 15:55, Simon Glass wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > >>
+> > >> On 10/18/23 05:33, Simon Glass wrote:
+> > >>> Hi Heinrich,
+> > >>>
+> > >>> On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
+> > >>> <heinrich.schuchardt@canonical.com> wrote:
+> > >>>>
+> > >>>> Forward and backward compatibility of Linux kernel device-trees is
+> > >>>> sometimes missing. One solution approach is to load a kernel specific
+> > >>>> device-tree. This can either be done via a U-Boot scripts (like the one
+> > >>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> > >>>> The boot loader approach currently requires to know the device-tree name
+> > >>>> before first boot which makes it unusable for generic images.
+> > >>>>
+> > >>>> Expose the device-tree file name as EFI variable FdtFile.
+> > >>>> This will allow bootloaders to load a kernel specific device-tree.
+> > >>>>
+> > >>>> The variable will not be exposed on ACPI based systems or if the
+> > >>>> environment variable fdtfile is not defined.
+> > >>>>
+> > >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >>>> ---
+> > >>>> v2:
+> > >>>>           Use a unique GUID to enable future U-Boot independent
+> > >>>>           standardization.
+> > >>>>           Do not try to add the variable on ACPI based systems.
+> > >>>> ---
+> > >>>>    include/efi_loader.h       |  5 +++++
+> > >>>>    lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+> > >>>>    2 files changed, 35 insertions(+)
+> > >>>
+> > >>> I was too slow to reply to v1.
+> > >>>
+> > >>> Does grub load the DT? I was assuming that U-Boot would pass it on?
+> > >>> What is the interface between U-Boot and grub?
+> > >>
+> > >> The device-tree built into U-Boot is often out of date and not usable to
+> > >> boot current Linux. A single device-tree can be loaded by U-Boot from
+> > >> file and passed on as EFI configuration table. This device-tree may not
+> > >> be compatible with all kernel versions exposed by GRUB.
+> > >>
+> > >> GRUB provides a devicetree command. It is disabled if you use secure
+> > >> boot. At least in Debian and Ubuntu GRUB invokes the
+> > >> EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
+> > >> fix-ups after loading a device-tree.
+> > >>
+> > >> Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
+> > >> devicetree commands to the boot options in grub.cfg.
+> > >
+> > > Thanks. I wonder if you could document this somewhere? It seems like
+> > > there are a lot of options and it is quite complicated.
+> > >
+> > > Back to the question, I suppose you are expecting grub to load the DT
+> > > using this filename? But why doesn't U-Boot load it instead? It seems
+> > > very convoluted.
+> >
+> > A separate file of this name exists for every kernel version installed.
+> > The loaded dtb must match the kernel. U-Boot does not know what kernel
+> > version will be chosen in GRUB. And for a generic image GRUB does not
+> > what board it is on.
+> >
+> > >
+> > > Also, can we test this interface?
+> >
+> > Neither the sandbox nor QEMU have environment variable fdtfile. And we
+> > don't create the EFI variable with ACPI as used on the sandbox.
+>
+> I worry that this is creating another interface that some poor sod is
+> going to have to deal with in the future. Is this part of the EFI
+> standard?
+>
+> We should really be using the compatible string to choose the
+> devicetree. Why are we using filenames at all? What is the
+> relationship between the compatible string and the filename? Is there
+> a lookup table, or should we create one?
+>
+> The correct way of doing this is implemented in U-Boot with
+> CONFIG_FIT_BEST_MATCH. Can we mirror something like that in grub, etc?
+>
+> Regards,
+> Simon
