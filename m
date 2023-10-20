@@ -4,105 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73FF3CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 05:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FD8C001DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 06:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58A7B86F8E;
-	Fri, 20 Oct 2023 07:06:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 3C66887224;
+	Fri, 20 Oct 2023 08:03:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h4Q6K8nM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XSunUf1J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE18487185; Fri, 20 Oct 2023 07:06:46 +0200 (CEST)
-Received: from NAM02-DM3-obe.outbound.protection.outlook.com
- (mail-dm3nam02on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e83::623])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 07A2187224; Fri, 20 Oct 2023 08:02:59 +0200 (CEST)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0B5C86F8A
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 07:06:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B37F086F84
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 08:02:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Du+k3E7KYFOcNhrnTHUQIKueymSG+tt728LDKrJDOEtovDurI5wopImJmu4VWSkAZ4j3vp2M7x+eDozGb15VAPANBV8eoQaWGJAH6kF2CNZz1seEAIU0Mxaf/F9PxLMWhsiqMVZjV03ivHw9Apd1awyhm+wZzDhGXaUj9/CPMZERDxVcleahdEtp8PSlWxM83mft0Sn4HTFLFhAEGpGPUxboXaskbI73VgSsbEUezg5RMQK/FZPTT85esF+ZPBg/UsEmk7iQ4b1zk00IFQJWawuFYkYDZTU3D3uEYsOn+VNPD40qNSNjJ3E9jj3thfAgGfwyoKKXRPX/jc4SPrknEQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=M0i5wcwQYUR1h4eXLDX0kceM8mnCLcWhzCCwT1d1HZg=;
- b=Lu2jlyboFbSGYKgT7gKms/pQzWkmz3V8eDZiTj0dofMiJUplIZ5OmtVlR9RWAe+cmtISui3uJl4sBCA5bw0V98YSvvThLBHdA/Mvacve5Hyq2mlGza47fo6DP6fdDnqttTtqkQF3Cv9PjoU73eCbMTrYUyBMIuEg3yGpzpObsqfs8E9g1ccHRXl8qsuz/Ag2WecAHiXQ9GWdp/AgvOECPnS7UuPnROtISK17o+iWaN94N4aYABsifDNnehW6OgdXJYVxY6GX0CG+AT8+aZVbn63jyXlOBzAsg2/RVyLZVFXerjUUzxkzvOIe1UtZjNsONbct9PKlqORNpbpYefsH3g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M0i5wcwQYUR1h4eXLDX0kceM8mnCLcWhzCCwT1d1HZg=;
- b=h4Q6K8nMJibqvfX5FeR9D9ewYwvLQKJn66LK1gbG5xfw97LOqlPPwWcSkwYC20enoG+RXygkmV6VeecGAkt6ZZe+mocZ3D65yq2jCAWLsFlWloneDfzEx01yJX/WszqNkNBKoosjfvg1CrMjbfgIlf91MLL3BKoOmuVOz13XrV0=
-Received: from DM6PR18CA0016.namprd18.prod.outlook.com (2603:10b6:5:15b::29)
- by SJ2PR12MB9210.namprd12.prod.outlook.com (2603:10b6:a03:561::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.45; Fri, 20 Oct
- 2023 05:06:37 +0000
-Received: from DS1PEPF00017090.namprd03.prod.outlook.com
- (2603:10b6:5:15b:cafe::30) by DM6PR18CA0016.outlook.office365.com
- (2603:10b6:5:15b::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.24 via Frontend
- Transport; Fri, 20 Oct 2023 05:06:36 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF00017090.mail.protection.outlook.com (10.167.17.132) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6907.20 via Frontend Transport; Fri, 20 Oct 2023 05:06:35 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 20 Oct
- 2023 00:06:34 -0500
-Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Fri, 20 Oct 2023 00:06:29 -0500
-From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <michal.simek@amd.com>, 
- <git@xilinx.com>
-Subject: [PATCH] arm64: zynqmp: Disable Tri-state for MIO38 Pin
-Date: Fri, 20 Oct 2023 10:36:22 +0530
-Message-ID: <20231020050622.972750-1-tejas.arvind.bhumkar@amd.com>
-X-Mailer: git-send-email 2.27.0
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-5aed4f0e90bso312678a12.1
+ for <u-boot@lists.denx.de>; Thu, 19 Oct 2023 23:02:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697781774; x=1698386574; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9IJEUd6JCCMfUWV90U7MKK8JkhtDuH6XEykbeQt66QI=;
+ b=XSunUf1JMVeVn4BuGFMn4cvGR3H9qWLrBgZGOzOBojZaBElPQRB1SAs+K3kHCxcozu
+ EUseo7K6V9B1nPw8ZVTWM1251NRtrN8MlEUQhFyoj5ZjFZq0QZbQSTUxj0F03tDoTx0M
+ SlYRjZSQBY0chwlNVKoxJmqhFUQTCJmqAJHlv8rGmKCimUVr3QFiZcvyzsb5v9XNHcju
+ 4PHaT+TiyO7Shs+bFAANcHhSicpF0eh9rS+h3Pud0HWktCayNeD/nBuF92ucg8D4Gzaz
+ 6LWqXldhjOcff3z1bOGy0Sl0wl3o01cRXdd+8ISXcdWE6JvuRa0WkmDCHsRzAyDXp1xY
+ 0ybQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697781774; x=1698386574;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9IJEUd6JCCMfUWV90U7MKK8JkhtDuH6XEykbeQt66QI=;
+ b=ZJ0f8om1iKxkRyWy3jOAGddPHCJSHdKqWYqSUGw60m1xDR9XT1iG9quQD3NEM0injT
+ u9VOuJfasdxBOlTNFVTrzH0rr1eVvaj/aBN6Tbnp2UCNeBLybvoLg5kkanuaf+6Ltf+k
+ fxqIE8YoGF3fnynnueR+q/swlcfW+Fazjb5tbSY3p8ko2d4FzRD5maET6IImsOSjiV8t
+ zUnfL8t1PJ+GUL1w7Yz2C+7DTUqOozCWZOdSsqsyXV/2l/aLmF9s9vOylFGVZXUgttSF
+ 8SgJ7XaHE4Ch9JmMuojyw/EDV+kTLbTg6mjksfeOnvfkN78z5fvbhhBCEKFm58pxM6T3
+ 2XLQ==
+X-Gm-Message-State: AOJu0YwWWLKOXZaOr/+t4DPuOmNQ2zuuk0NUFE1xJumwLh7UEsQ4bi9d
+ PJcytFNSBO1GArS0zcawq0kNwb7aTEIFiXOx+DW7MQ==
+X-Google-Smtp-Source: AGHT+IHVBVYxxS4U88VUtsKTPXrm/az042pz+wU8KmGS4OcGCyvtmTTWZV5N+le0YV1H5zEDcLrgJqctxYyyYMcCIjk=
+X-Received: by 2002:a05:6a20:4a16:b0:17b:4f43:afd1 with SMTP id
+ fr22-20020a056a204a1600b0017b4f43afd1mr740666pzb.58.1697781773622; Thu, 19
+ Oct 2023 23:02:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="y"
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017090:EE_|SJ2PR12MB9210:EE_
-X-MS-Office365-Filtering-Correlation-Id: 699b1588-d828-4856-7699-08dbd12a5589
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: oPTe1/1ilvlpjtIQYPrtqztJm+xfK+CzOo5F24QNt2V4GWrEBWDRO0XnOjIuagzXQf7H6Lg02YblST72XYl04OfOSqUEJiOoKl9YmaUYUzF7bBBHZzsN6+xqvcgfTqY3jT5oBRy0pFLXtSjSAS78dbkmf2i5pS0foMYa85spFI6RYc3IcoinRmTYGGYW2WgpsFuZ/8HdHABV9gUL4gpGGjMkzqNArt5VMKGP8ynWhrldO8sYG75lGFc33JUkG4xQGW4kqt9iUP2tEmCEkuSHg0ecuCTxev3JAf6JG6/Fp+9KAPwmuUPQ3tBw7ZAw/wkLv7zEvPKAZDJLQLHFO/Kpj0ETMZsbez8xBqdun+n9d/4EHq+ovGJ+4nmrbkXbHWlTGlboVLKb6bRj/p1AHMC31ZAy3swo7FeiQHbL/Cv2csj1smRXYzA1duYax6aSoL1F+JqjzLHqECAt7SeXytDA8CvkppoeuJEgSCCpjrKTPe5IQciQGgsOOM+ORwDIJdZe7o1HDjto/UxY3kJzCcpJxoL3Of8fyNwtcwKQYsy65U9YmRnzTWKxtT7bZPYhzaMVBe9vyz3OiOwr8Ku61GXv2mkOiAGB8Kker7gDOcWRTcb+ffne/GSe7bTifNJsj+q1n46xLvAEMQeWMoIWMe6CiOUQWFeum5Pd7k9EgjBUbf2ds2G9N6htDI/r0WX8aCVAgzxcUYXu3JgvOrGSZQpMx3rn8xSDOOkNZPdxxNNZrWnXbzjoqqspqb1yMdeBXZDFAyLO9AIv683GVwkqIKq+sA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(396003)(346002)(39860400002)(376002)(230922051799003)(1800799009)(186009)(82310400011)(64100799003)(451199024)(46966006)(40470700004)(36840700001)(47076005)(83380400001)(36860700001)(336012)(40460700003)(426003)(26005)(107886003)(2906002)(40480700001)(1076003)(81166007)(8676002)(316002)(103116003)(82740400003)(6916009)(6666004)(86362001)(4326008)(70206006)(36756003)(70586007)(8936002)(54906003)(41300700001)(2616005)(5660300002)(478600001)(356005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2023 05:06:35.6179 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 699b1588-d828-4856-7699-08dbd12a5589
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017090.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB9210
+References: <20230908120002.29851-1-sughosh.ganu@linaro.org>
+ <20230908120002.29851-2-sughosh.ganu@linaro.org>
+In-Reply-To: <20230908120002.29851-2-sughosh.ganu@linaro.org>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Fri, 20 Oct 2023 15:02:42 +0900
+Message-ID: <CADQ0-X860J6o4+SgZOefMOzVGoQ+-YG8QN+ivBj8E7X2WViWiQ@mail.gmail.com>
+Subject: Re: [PATCH 1/8] tools: mkeficapsule: Add support for parsing capsule
+ params from config file
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Malte Schmidt <malte.schmidt-oss@weidmueller.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,112 +89,771 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-gpio38 is used in SOM's kv260 to reset the Ethernet PHY.
-At present, HW reset is not working properly as Tri-state 
-is enabled for MIO38, causing inappropriate PHY register reads.
+Hi Sughosh,
 
-Disabled Tri-state for MIO38 to make HW reset work.
+On Fri, 8 Sept 2023 at 21:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> Add support for specifying the parameters needed for capsule
+> generation through a config file, instead of passing them through
+> command-line. Parameters for more than a single capsule file can be
+> specified, resulting in generation of multiple capsules through a
+> single invocation of the command.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+>  tools/Kconfig              |  16 ++
+>  tools/Makefile             |   1 +
+>  tools/eficapsule.h         | 115 ++++++++++++
+>  tools/mkeficapsule.c       |  87 +++++----
+>  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
+>  5 files changed, 540 insertions(+), 31 deletions(-)
+>  create mode 100644 tools/mkeficapsule_parse.c
+>
+> diff --git a/tools/Kconfig b/tools/Kconfig
+> index 6e23f44d55..88ea3567d0 100644
+> --- a/tools/Kconfig
+> +++ b/tools/Kconfig
+> @@ -98,6 +98,22 @@ config TOOLS_MKEFICAPSULE
+>           optionally sign that file. If you want to enable UEFI capsule
+>           update feature on your target, you certainly need this.
+>
+> +config EFI_CAPSULE_CFG_FILE
+> +       string "Path to the EFI Capsule Config File"
+> +       default ""
+> +       help
+> +         Path to the EFI capsule config file which provides the
+> +         parameters needed to build capsule(s). Parameters can be
+> +         provided for multiple payloads resulting in corresponding
+> +         capsule images being generated.
+> +
+> +config EFI_USE_CAPSULE_CFG_FILE
+> +       bool "Use the config file for generating capsules"
+> +       help
+> +         Boolean option used to specify if the EFI capsules are to
+> +         be generated through parameters specified via the config
+> +         file or through command line.
+> +
+>  menuconfig FSPI_CONF_HEADER
+>         bool "FlexSPI Header Configuration"
+>         help
+> diff --git a/tools/Makefile b/tools/Makefile
+> index 3d0c4b0dd6..eb129e3bb2 100644
+> --- a/tools/Makefile
+> +++ b/tools/Makefile
+> @@ -250,6 +250,7 @@ HOSTLDLIBS_mkeficapsule += \
+>  HOSTLDLIBS_mkeficapsule += \
+>         $(shell pkg-config --libs uuid 2> /dev/null || echo "-luuid")
+>  hostprogs-$(CONFIG_TOOLS_MKEFICAPSULE) += mkeficapsule
+> +mkeficapsule-objs := mkeficapsule.o mkeficapsule_parse.o
+>
+>  mkfwumdata-objs := mkfwumdata.o generated/lib/crc32.o
+>  HOSTLDLIBS_mkfwumdata += -luuid
+> diff --git a/tools/eficapsule.h b/tools/eficapsule.h
+> index 2099a2e9b8..d455ac1d6f 100644
+> --- a/tools/eficapsule.h
+> +++ b/tools/eficapsule.h
+> @@ -52,6 +52,12 @@ typedef struct {
+>  /* flags */
+>  #define CAPSULE_FLAGS_PERSIST_ACROSS_RESET      0x00010000
+>
+> +enum capsule_type {
+> +       CAPSULE_NORMAL_BLOB = 0,
+> +       CAPSULE_ACCEPT,
+> +       CAPSULE_REVERT,
+> +};
+> +
+>  struct efi_capsule_header {
+>         efi_guid_t capsule_guid;
+>         uint32_t header_size;
+> @@ -113,6 +119,7 @@ struct efi_firmware_image_authentication {
+>         struct win_certificate_uefi_guid auth_info;
+>  } __packed;
+>
+> +
+>  /* fmp payload header */
+>  #define SIGNATURE_16(A, B)     ((A) | ((B) << 8))
+>  #define SIGNATURE_32(A, B, C, D)       \
+> @@ -143,4 +150,112 @@ struct fmp_payload_header_params {
+>         uint32_t fw_version;
+>  };
+>
+> +/**
+> + * struct efi_capsule_params - Capsule parameters
+> + * @image_guid: Guid value of the payload input image
+> + * @image_index: Image index value
+> + * @hardware_instance: Hardware instance to be used for the image
+> + * @fmp: FMP payload header used for storing firmware version
+> + * @monotonic_count: Monotonic count value to be used for signed capsule
+> + * @privkey_file: Path to private key used in capsule signing
+> + * @cert_file: Path to public key certificate used in capsule signing
+> + * @input_file: Path to payload input image
+> + * @capsule_file: Path to the output capsule file
+> + * @oemflags: Oemflags to be populated in the capsule header
+> + * @capsule: Capsule Type, normal or accept or revert
+> + */
+> +struct efi_capsule_params {
+> +       efi_guid_t *image_guid;
+> +       unsigned long image_index;
+> +       unsigned long hardware_instance;
+> +       struct fmp_payload_header_params fmp;
+> +       uint64_t monotonic_count;
+> +       char *privkey_file;
+> +       char *cert_file;
+> +       char *input_file;
+> +       char *capsule_file;
+> +       unsigned long oemflags;
+> +       enum capsule_type capsule;
+> +};
+> +
+> +/**
+> + * capsule_with_cfg_file() - Generate capsule from config file
+> + * @cfg_file: Path to the config file
+> + *
+> + * Parse the capsule parameters from the config file and use the
+> + * parameters for generating one or more capsules.
+> + *
+> + * Return: None
+> + *
+> + */
+> +void capsule_with_cfg_file(const char *cfg_file);
+> +
+> +/**
+> + * convert_uuid_to_guid() - convert UUID to GUID
+> + * @buf:       UUID binary
+> + *
+> + * UUID and GUID have the same data structure, but their binary
+> + * formats are different due to the endianness. See lib/uuid.c.
+> + * Since uuid_parse() can handle only UUID, this function must
+> + * be called to get correct data for GUID when parsing a string.
+> + *
+> + * The correct data will be returned in @buf.
+> + */
+> +void convert_uuid_to_guid(unsigned char *buf);
+> +
+> +/**
+> + * create_empty_capsule() - Generate an empty capsule
+> + * @path: Path to the empty capsule file to be generated
+> + * @guid: Guid value of the image for which empty capsule is generated
+> + * @fw_accept: Flag to specify whether to generate accept or revert capsule
+> + *
+> + * Generate an empty capsule, either an accept or a revert capsule to be
+> + * used to flag acceptance or rejection of an earlier executed firmware
+> + * update operation. Being used in the FWU Multi Bank firmware update
+> + * feature.
+> + *
+> + * Return: 0 if OK, -ve on error
+> + *
+> + */
+> +int create_empty_capsule(char *path, efi_guid_t *guid, bool fw_accept);
+> +
+> +/**
+> + * create_fwbin - create an uefi capsule file
+> + * @path:      Path to a created capsule file
+> + * @bin:       Path to a firmware binary to encapsulate
+> + * @guid:      GUID of related FMP driver
+> + * @index:     Index number in capsule
+> + * @instance:  Instance number in capsule
+> + * @fmp:       FMP header params
+> + * @mcount:    Monotonic count in authentication information
+> + * @private_file:      Path to a private key file
+> + * @cert_file: Path to a certificate file
+> + * @oemflags:  Capsule OEM Flags, bits 0-15
+> + *
+> + * This function actually does the job of creating an uefi capsule file.
+> + * All the arguments must be supplied.
+> + * If either @private_file ror @cert_file is NULL, the capsule file
+> + * won't be signed.
+> + *
+> + * Return:
+> + * * 0  - on success
+> + * * -1 - on failure
+> + */
+> +int create_fwbin(char *path, char *bin, efi_guid_t *guid,
+> +                unsigned long index, unsigned long instance,
+> +                struct fmp_payload_header_params *fmp_ph_params,
+> +                uint64_t mcount, char *privkey_file, char *cert_file,
+> +                uint16_t oemflags);
+> +
+> +/**
+> + * print_usage() - Print the command usage string
+> + *
+> + * Prints the standard command usage string. Called in the case
+> + * of incorrect parameters being passed to the tool.
+> + *
+> + * Return: None
+> + *
+> + */
+> +void print_usage(void);
+> +
+>  #endif /* _EFI_CAPSULE_H */
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index 52be1f122e..4058813c98 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -29,13 +29,7 @@ static const char *tool_name = "mkeficapsule";
+>  efi_guid_t efi_guid_fm_capsule = EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
+>  efi_guid_t efi_guid_cert_type_pkcs7 = EFI_CERT_TYPE_PKCS7_GUID;
+>
+> -static const char *opts_short = "g:i:I:v:p:c:m:o:dhAR";
+> -
+> -enum {
+> -       CAPSULE_NORMAL_BLOB = 0,
+> -       CAPSULE_ACCEPT,
+> -       CAPSULE_REVERT,
+> -} capsule_type;
+> +static const char *opts_short = "g:i:I:v:p:c:m:o:f:dhAR";
+>
+>  static struct option options[] = {
+>         {"guid", required_argument, NULL, 'g'},
+> @@ -49,11 +43,21 @@ static struct option options[] = {
+>         {"fw-accept", no_argument, NULL, 'A'},
+>         {"fw-revert", no_argument, NULL, 'R'},
+>         {"capoemflag", required_argument, NULL, 'o'},
+> +       {"cfg-file", required_argument, NULL, 'f'},
+>         {"help", no_argument, NULL, 'h'},
+>         {NULL, 0, NULL, 0},
+>  };
+>
+> -static void print_usage(void)
+> +/**
+> + * print_usage() - Print the command usage string
+> + *
+> + * Prints the standard command usage string. Called in the case
+> + * of incorrect parameters being passed to the tool.
+> + *
+> + * Return: None
+> + *
+> + */
+> +void print_usage(void)
+>  {
+>         fprintf(stderr, "Usage: %s [options] <image blob> <output file>\n"
+>                 "Options:\n"
+> @@ -69,6 +73,7 @@ static void print_usage(void)
+>                 "\t-A, --fw-accept  firmware accept capsule, requires GUID, no image blob\n"
+>                 "\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
+>                 "\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
+> +               "\t-f, --cfg-file <config file> config file with capsule parameters\n"
+>                 "\t-h, --help                  print a help message\n",
+>                 tool_name);
+>  }
+> @@ -388,6 +393,7 @@ static void free_sig_data(struct auth_context *ctx)
+>   * @guid:      GUID of related FMP driver
+>   * @index:     Index number in capsule
+>   * @instance:  Instance number in capsule
+> + * @fmp:       FMP header params
+>   * @mcount:    Monotonic count in authentication information
+>   * @private_file:      Path to a private key file
+>   * @cert_file: Path to a certificate file
+> @@ -402,11 +408,11 @@ static void free_sig_data(struct auth_context *ctx)
+>   * * 0  - on success
+>   * * -1 - on failure
+>   */
+> -static int create_fwbin(char *path, char *bin, efi_guid_t *guid,
+> -                       unsigned long index, unsigned long instance,
+> -                       struct fmp_payload_header_params *fmp_ph_params,
+> -                       uint64_t mcount, char *privkey_file, char *cert_file,
+> -                       uint16_t oemflags)
+> +int create_fwbin(char *path, char *bin, efi_guid_t *guid,
+> +                unsigned long index, unsigned long instance,
+> +                struct fmp_payload_header_params *fmp_ph_params,
+> +                uint64_t mcount, char *privkey_file, char *cert_file,
+> +                uint16_t oemflags)
+>  {
+>         struct efi_capsule_header header;
+>         struct efi_firmware_management_capsule_header capsule;
+> @@ -604,7 +610,21 @@ void convert_uuid_to_guid(unsigned char *buf)
+>         buf[7] = c;
+>  }
+>
+> -static int create_empty_capsule(char *path, efi_guid_t *guid, bool fw_accept)
+> +/**
+> + * create_empty_capsule() - Generate an empty capsule
+> + * @path: Path to the empty capsule file to be generated
+> + * @guid: Guid value of the image for which empty capsule is generated
+> + * @fw_accept: Flag to specify whether to generate accept or revert capsule
+> + *
+> + * Generate an empty capsule, either an accept or a revert capsule to be
+> + * used to flag acceptance or rejection of an earlier executed firmware
+> + * update operation. Being used in the FWU Multi Bank firmware update
+> + * feature.
+> + *
+> + * Return: 0 if OK, -ve on error
+> + *
+> + */
+> +int create_empty_capsule(char *path, efi_guid_t *guid, bool fw_accept)
+>  {
+>         struct efi_capsule_header header = { 0 };
+>         FILE *f = NULL;
+> @@ -667,6 +687,8 @@ int main(int argc, char **argv)
+>         uint64_t mcount;
+>         unsigned long oemflags;
+>         char *privkey_file, *cert_file;
+> +       char *cfg_file;
+> +       enum capsule_type capsule;
+>         int c, idx;
+>         struct fmp_payload_header_params fmp_ph_params = { 0 };
+>
+> @@ -676,8 +698,9 @@ int main(int argc, char **argv)
+>         mcount = 0;
+>         privkey_file = NULL;
+>         cert_file = NULL;
+> +       cfg_file = NULL;
+>         dump_sig = 0;
+> -       capsule_type = CAPSULE_NORMAL_BLOB;
+> +       capsule = CAPSULE_NORMAL_BLOB;
+>         oemflags = 0;
+>         for (;;) {
+>                 c = getopt_long(argc, argv, opts_short, options, &idx);
+> @@ -731,20 +754,20 @@ int main(int argc, char **argv)
+>                         dump_sig = 1;
+>                         break;
+>                 case 'A':
+> -                       if (capsule_type) {
+> +                       if (capsule) {
+>                                 fprintf(stderr,
+>                                         "Select either of Accept or Revert capsule generation\n");
+>                                 exit(1);
+>                         }
+> -                       capsule_type = CAPSULE_ACCEPT;
+> +                       capsule = CAPSULE_ACCEPT;
+>                         break;
+>                 case 'R':
+> -                       if (capsule_type) {
+> +                       if (capsule) {
+>                                 fprintf(stderr,
+>                                         "Select either of Accept or Revert capsule generation\n");
+>                                 exit(1);
+>                         }
+> -                       capsule_type = CAPSULE_REVERT;
+> +                       capsule = CAPSULE_REVERT;
+>                         break;
+>                 case 'o':
+>                         oemflags = strtoul(optarg, NULL, 0);
+> @@ -754,6 +777,10 @@ int main(int argc, char **argv)
+>                                 exit(1);
+>                         }
+>                         break;
+> +               case 'f':
+> +                       cfg_file = optarg;
+> +                       capsule_with_cfg_file(cfg_file);
+> +                       exit(EXIT_SUCCESS);
+>                 default:
+>                         print_usage();
+>                         exit(EXIT_SUCCESS);
+> @@ -761,21 +788,21 @@ int main(int argc, char **argv)
+>         }
+>
+>         /* check necessary parameters */
+> -       if ((capsule_type == CAPSULE_NORMAL_BLOB &&
+> -           ((argc != optind + 2) || !guid ||
+> -            ((privkey_file && !cert_file) ||
+> -             (!privkey_file && cert_file)))) ||
+> -           (capsule_type != CAPSULE_NORMAL_BLOB &&
+> -           ((argc != optind + 1) ||
+> -            ((capsule_type == CAPSULE_ACCEPT) && !guid) ||
+> -            ((capsule_type == CAPSULE_REVERT) && guid)))) {
+> +       if ((capsule == CAPSULE_NORMAL_BLOB &&
+> +            ((argc != optind + 2) || !guid ||
+> +             ((privkey_file && !cert_file) ||
+> +              (!privkey_file && cert_file)))) ||
+> +           (capsule != CAPSULE_NORMAL_BLOB &&
+> +            ((argc != optind + 1) ||
+> +             (capsule == CAPSULE_ACCEPT && !guid) ||
+> +             (capsule == CAPSULE_REVERT && guid)))) {
+>                 print_usage();
+>                 exit(EXIT_FAILURE);
+>         }
+>
+> -       if (capsule_type != CAPSULE_NORMAL_BLOB) {
+> +       if (capsule != CAPSULE_NORMAL_BLOB) {
+>                 if (create_empty_capsule(argv[argc - 1], guid,
+> -                                        capsule_type == CAPSULE_ACCEPT) < 0) {
+> +                                        capsule == CAPSULE_ACCEPT) < 0) {
+>                         fprintf(stderr, "Creating empty capsule failed\n");
+>                         exit(EXIT_FAILURE);
+>                 }
+> @@ -785,6 +812,4 @@ int main(int argc, char **argv)
+>                 fprintf(stderr, "Creating firmware capsule failed\n");
+>                 exit(EXIT_FAILURE);
+>         }
+> -
+> -       exit(EXIT_SUCCESS);
+>  }
+> diff --git a/tools/mkeficapsule_parse.c b/tools/mkeficapsule_parse.c
+> new file mode 100644
+> index 0000000000..0b010706d5
+> --- /dev/null
+> +++ b/tools/mkeficapsule_parse.c
+> @@ -0,0 +1,352 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright 2023 Linaro Limited
+> + */
+> +
+> +/*
+> + * The code in this file adds parsing ability to the mkeficapsule
+> + * tool. This allows specifying parameters needed to build the capsule
+> + * through the config file instead of specifying them on the command-line.
+> + * Parameters can be specified for more than one payload, generating the
+> + * corresponding capsule files.
+> + *
+> + * The parameters are specified in a "key:value" pair. All the parameters
+> + * that are currently supported by the mkeficapsule tool can be specified
+> + * in the config file.
+> + *
+> + * The example below shows four payloads. The first payload is an example
+> + * of generating a signed capsule. The second payload is an example of
+> + * generating an unsigned capsule. The third payload is an accept empty
+> + * capsule, while the fourth payload is the revert empty capsule, used
+> + * for the multi-bank firmware update feature.
+> + *
+> + * This functionality can be easily extended to generate a single capsule
+> + * comprising multiple payloads.
+> +
+> +       {
+> +           image-guid: 02f4d760-cfd5-43bd-8e2d-a42acb33c660
+> +           hardware-instance: 0
+> +           monotonic-count: 1
+> +           payload: u-boot.bin
+> +           fw-version: 2
+> +           image-index: 1
+> +           private-key: /path/to/priv/key
+> +           pub-key-cert: /path/to/pub/key
+> +           capsule: u-boot.capsule
+> +       }
+> +       {
+> +           image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
+> +           hardware-instance: 0
+> +           payload: u-boot.itb
+> +           image-index: 2
+> +           fw-version: 10
+> +           oemflags: 0x8000
+> +           capsule: fit.capsule
+> +       }
+> +       {
+> +           capsule-type: accept
+> +           image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
+> +           capsule: accept.capsule
+> +       }
+> +       {
+> +           capsule-type: revert
+> +           capsule: revert.capsule
+> +       }
+> +*/
 
-Tri-state disable :
-ZynqMP> md 0xFF180208 2
-ff180208: 00bfe7a3 00000540
+The documentation patch #4[1] has almost the same contents and examples,
+I think it is duplicated.
 
-Tri-state enable :
-ZynqMP> md 0xFF180208 2
-ff180208: 00bfe7e3 00000540
+[1] https://lore.kernel.org/u-boot/20230908120002.29851-5-sughosh.ganu@linaro.org/
 
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
----
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 25 +++++++++++++++++++++++++
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 25 +++++++++++++++++++++++++
- 2 files changed, 50 insertions(+)
+> +
+> +#include <ctype.h>
+> +#include <limits.h>
+> +#include <stdio.h>
+> +#include <stdlib.h>
+> +#include <string.h>
+> +
+> +#include <uuid/uuid.h>
+> +
+> +#include "eficapsule.h"
+> +
+> +#define PARAMS_START   "{"
+> +#define PARAMS_END     "}"
+> +
+> +#define PSTART         2
+> +#define PEND           3
+> +
+> +#define MALLOC_FAIL_STR                "Unable to allocate memory\n"
+> +
+> +#define ARRAY_SIZE(x)          (sizeof(x) / sizeof((x)[0]))
+> +
+> +const char *capsule_params[] = {
+> +       "image-guid", "image-index", "private-key",
+> +       "pub-key-cert", "payload", "capsule",
+> +       "hardware-instance", "monotonic-count",
+> +       "capsule-type", "oemflags", "fw-version" };
+> +
+> +static unsigned char params_start;
+> +static unsigned char params_end;
+> +
+> +static void print_and_exit(const char *str)
+> +{
+> +       fprintf(stderr, "%s", str);
+> +       exit(EXIT_FAILURE);
+> +}
+> +
+> +static int param_delim_checks(char *line, unsigned char *token)
+> +{
+> +       if (!strcmp(line, PARAMS_START)) {
+> +               if (params_start || !params_end) {
+> +                       fprintf(stderr, "Earlier params processing still in progress. ");
+> +                       fprintf(stderr, "Can't start processing a new params.\n");
+> +                       exit(EXIT_FAILURE);
+> +               } else {
+> +                       params_start = 1;
+> +                       params_end = 0;
+> +                       *token = PSTART;
+> +                       return 1;
+> +               }
+> +       } else if (!strcmp(line, PARAMS_END)) {
+> +               if (!params_start) {
+> +                       fprintf(stderr, "Cannot put end braces without start braces. ");
+> +                       fprintf(stderr, "Please check the documentation for reference config file syntax\n");
+> +                       exit(EXIT_FAILURE);
+> +               } else {
+> +                       params_start = 0;
+> +                       params_end = 1;
+> +                       *token = PEND;
+> +                       return 1;
+> +               }
+> +       } else if (!params_start) {
+> +               fprintf(stderr, "Params should be passed within braces. ");
+> +               fprintf(stderr, "Please check the documentation for reference config file syntax\n");
+> +               exit(EXIT_FAILURE);
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static void add_guid(efi_guid_t **guid_param, char *guid)
+> +{
+> +       unsigned char uuid_buf[16];
+> +
+> +       *guid_param = malloc(sizeof(efi_guid_t));
+> +       if (!*guid_param)
+> +               print_and_exit(MALLOC_FAIL_STR);
+> +
+> +       if (uuid_parse(guid, uuid_buf))
+> +               print_and_exit("Wrong guid format\n");
+> +
+> +       convert_uuid_to_guid(uuid_buf);
+> +       memcpy(*guid_param, uuid_buf, sizeof(efi_guid_t));
+> +}
+> +
+> +static void add_string(char **dst, char *val)
+> +{
+> +       *dst = strdup(val);
+> +       if (!*dst)
+> +               print_and_exit(MALLOC_FAIL_STR);
+> +}
+> +
+> +static void match_and_populate_param(char *key, char *val,
+> +                                    struct efi_capsule_params *param)
+> +{
+> +       int i;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(capsule_params); i++) {
+> +               if (!strcmp(key, capsule_params[i])) {
+> +                       switch (i) {
+> +                       case 0:
+> +                               add_guid(&param->image_guid, val);
+> +                               return;
+> +                       case 1:
+> +                               param->image_index = strtoul(val, NULL, 0);
+> +                               if (param->image_index == ULONG_MAX)
+> +                                       print_and_exit("Enter a valid value of index bewtween 1-255");
+> +                               return;
+> +                       case 2:
+> +                               add_string(&param->privkey_file, val);
+> +                               return;
+> +                       case 3:
+> +                               add_string(&param->cert_file, val);
+> +                               return;
+> +                       case 4:
+> +                               add_string(&param->input_file, val);
+> +                               return;
+> +                       case 5:
+> +                               add_string(&param->capsule_file, val);
+> +                               return;
+> +                       case 6:
+> +                               param->hardware_instance = strtoul(val, NULL, 0);
+> +                               if (param->hardware_instance == ULONG_MAX)
+> +                                       print_and_exit("Enter a valid hardware instance value");
+> +                               return;
+> +                       case 7:
+> +                               param->monotonic_count = strtoull(val, NULL, 0);
+> +                               if (param->monotonic_count == ULLONG_MAX)
+> +                                       print_and_exit("Enter a valid monotonic count value");
+> +                               return;
+> +                       case 8:
+> +                               if (!strcmp(val, "normal"))
+> +                                       param->capsule = CAPSULE_NORMAL_BLOB;
+> +                               else if (!strcmp(val, "accept"))
+> +                                       param->capsule = CAPSULE_ACCEPT;
+> +                               else if (!strcmp(val, "revert"))
+> +                                       param->capsule = CAPSULE_REVERT;
+> +                               else
+> +                                       print_and_exit("Invalid type of capsule");
+> +
+> +                               return;
+> +                       case 9:
+> +                               param->oemflags = strtoul(val, NULL, 0);
+> +                               if (param->oemflags > 0xffff)
+> +                                       print_and_exit("OemFlags must be between 0x0 and 0xffff\n");
+> +                               return;
+> +                       case 10:
+> +                               param->fmp.fw_version = strtoul(val, NULL, 0);
+> +                               param->fmp.have_header = true;
+> +                               return;
+> +                       }
+> +               }
+> +       }
+> +
+> +       fprintf(stderr, "Undefined param %s specified. ", key);
+> +       fprintf(stderr, "Please check the documentation for reference config file syntax\n");
+> +       exit(EXIT_FAILURE);
+> +}
+> +
+> +static int get_capsule_params(char *line, struct efi_capsule_params *params)
+> +{
+> +       char *key = NULL;
+> +       char *val = NULL;
+> +       unsigned char token;
+> +
+> +       if (param_delim_checks(line, &token))
+> +               return token;
+> +
+> +       key = strtok(line, ":");
+> +       if (key)
+> +               val = strtok(NULL, "\0");
+> +       else
+> +               print_and_exit("Expect the params in a key:value pair\n");
+> +
+> +       match_and_populate_param(key, val, params);
+> +
+> +       return 0;
+> +}
+> +
+> +static char *skip_whitespace(char *line)
+> +{
+> +       char *ptr, *newline;
+> +
+> +       ptr = malloc(strlen(line) + 1);
+> +       if (!ptr)
+> +               print_and_exit(MALLOC_FAIL_STR);
+> +
+> +       for (newline = ptr; *line; line++)
+> +               if (!isblank(*line))
+> +                       *ptr++ = *line;
+> +       *ptr = '\0';
+> +       return newline;
+> +}
+> +
+> +static int parse_capsule_payload_params(FILE *fp, struct efi_capsule_params *params)
+> +{
+> +       char *line = NULL;
+> +       char *newline;
+> +       size_t n = 0;
+> +       ssize_t len;
+> +
+> +       while ((len = getline(&line, &n, fp)) != -1) {
+> +               if (len == 1 && line[len - 1] == '\n')
+> +                       continue;
+> +
+> +               line[len - 1] = '\0';
+> +
+> +               newline = skip_whitespace(line);
+> +
+> +               if (newline[0] == '#')
+> +                       continue;
+> +
+> +               if (get_capsule_params(newline, params) == PEND)
+> +                       return 0;
+> +       }
+> +
+> +       if (errno == EINVAL || errno == ENOMEM) {
+> +               fprintf(stderr, "getline() returned an error %s reading the line\n",
+> +                       strerror(errno));
+> +               exit(EXIT_FAILURE);
+> +       } else if (params_start == 1 || params_end == 0) {
+> +               fprintf(stderr, "Params should be passed within braces. ");
+> +               fprintf(stderr, "Please check the documentation for reference config file syntax\n");
+> +               exit(EXIT_FAILURE);
+> +       } else {
+> +               return -1;
+> +       }
+> +}
+> +
+> +static void params_dependency_check(struct efi_capsule_params *params)
+> +{
+> +       /* check necessary parameters */
+> +       if ((params->capsule == CAPSULE_NORMAL_BLOB &&
+> +            ((!params->input_file || !params->capsule_file ||
+> +              !params->image_guid) ||
+> +             ((params->privkey_file && !params->cert_file) ||
+> +              (!params->privkey_file && params->cert_file)))) ||
+> +           (params->capsule != CAPSULE_NORMAL_BLOB &&
+> +            (!params->capsule_file ||
+> +             (params->capsule == CAPSULE_ACCEPT && !params->image_guid) ||
+> +             (params->capsule == CAPSULE_REVERT && params->image_guid)))) {
+> +               print_usage();
+> +               exit(EXIT_FAILURE);
 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-index 22e7d68d02..c4f1da9218 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-@@ -190,6 +190,25 @@
- &pinctrl0 {
- 	status = "okay";
- 
-+	pinctrl_gpio0_default: gpio0-default {
-+                conf {
-+                        groups = "gpio0_38_grp";
-+                        bias-pull-up;
-+                        power-source = <IO_STANDARD_LVCMOS18>;
-+                };
-+
-+                mux {
-+                        groups = "gpio0_38_grp";
-+                        function = "gpio0";
-+                };
-+
-+                conf-tx {
-+                        pins = "MIO38";
-+                        bias-disable;
-+                        output-enable;
-+                };
-+        };
-+
- 	pinctrl_uart1_default: uart1-default {
- 		conf {
- 			groups = "uart1_9_grp";
-@@ -345,6 +364,12 @@
- 	};
- };
- 
-+&gpio {
-+        status = "okay";
-+        pinctrl-names = "default";
-+        pinctrl-0 = <&pinctrl_gpio0_default>;
-+};
-+
- &uart1 {
- 	status = "okay";
- 	pinctrl-names = "default";
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-index eadc256306..6c5e0e5660 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-@@ -178,6 +178,25 @@
- &pinctrl0 {
- 	status = "okay";
- 
-+	pinctrl_gpio0_default: gpio0-default {
-+		conf {
-+			groups = "gpio0_38_grp";
-+			bias-pull-up;
-+			power-source = <IO_STANDARD_LVCMOS18>;
-+		};
-+
-+		mux {
-+			groups = "gpio0_38_grp";
-+			function = "gpio0";
-+		};
-+
-+		conf-tx {
-+			pins = "MIO38";
-+			bias-disable;
-+			output-enable;
-+		};
-+	};
-+
- 	pinctrl_uart1_default: uart1-default {
- 		conf {
- 			groups = "uart1_9_grp";
-@@ -333,6 +352,12 @@
- 	};
- };
- 
-+&gpio {
-+	status = "okay";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_gpio0_default>;
-+};
-+
- &uart1 {
- 	status = "okay";
- 	pinctrl-names = "default";
--- 
-2.27.0
+The original command line parameter tool does the same,
+print_usage() when some parameters are missing.
+But this case is slightly different, usage is correct
+but the contents of the config file is wrong.
+It would be helpful to print the error message at least to indicate
+there is something wrong in the config file.
 
+Thanks,
+Masahisa Kojima
+
+> +       }
+> +}
+> +
+> +static void generate_capsule(struct efi_capsule_params *params)
+> +{
+> +       if (params->capsule != CAPSULE_NORMAL_BLOB) {
+> +               if (create_empty_capsule(params->capsule_file,
+> +                                        params->image_guid,
+> +                                        params->capsule ==
+> +                                        CAPSULE_ACCEPT) < 0)
+> +                       print_and_exit("Creating empty capsule failed\n");
+> +       } else if (create_fwbin(params->capsule_file, params->input_file,
+> +                               params->image_guid, params->image_index,
+> +                               params->hardware_instance,
+> +                               &params->fmp,
+> +                               params->monotonic_count,
+> +                               params->privkey_file,
+> +                               params->cert_file,
+> +                               (uint16_t)params->oemflags) < 0) {
+> +               print_and_exit("Creating firmware capsule failed\n");
+> +       }
+> +}
+> +
+> +/**
+> + * capsule_with_cfg_file() - Generate capsule from config file
+> + * @cfg_file: Path to the config file
+> + *
+> + * Parse the capsule parameters from the config file and use the
+> + * parameters for generating one or more capsules.
+> + *
+> + * Return: None
+> + *
+> + */
+> +void capsule_with_cfg_file(const char *cfg_file)
+> +{
+> +       FILE *fp;
+> +       struct efi_capsule_params params = { 0 };
+> +
+> +       fp = fopen(cfg_file, "r");
+> +       if (!fp) {
+> +               fprintf(stderr, "Unable to open the capsule config file %s\n",
+> +                       cfg_file);
+> +               exit(EXIT_FAILURE);
+> +       }
+> +
+> +       params_start = 0;
+> +       params_end = 1;
+> +
+> +       while (parse_capsule_payload_params(fp, &params) != -1) {
+> +               params_dependency_check(&params);
+> +               generate_capsule(&params);
+> +
+> +               memset(&params, 0, sizeof(struct efi_capsule_params));
+> +       }
+> +}
+> --
+> 2.34.1
+>
