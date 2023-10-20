@@ -4,98 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27BABC001E0
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 00:01:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37BC7C001E0
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 00:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EDE886F7C;
-	Fri, 20 Oct 2023 02:01:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
+	by phobos.denx.de (Postfix) with ESMTP id 7A2C4871E8;
+	Fri, 20 Oct 2023 02:27:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="XHjJjyjE";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="lWhAWroI";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C339D86F7D; Fri, 20 Oct 2023 02:01:34 +0200 (CEST)
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93D2786A3C
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 02:01:32 +0200 (CEST)
+ id 0F237871CE; Fri, 20 Oct 2023 02:27:28 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id C99EC871E4
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 02:27:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sholland.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id BC6F75C02B2;
- Thu, 19 Oct 2023 20:01:31 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Thu, 19 Oct 2023 20:01:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
- 1697760091; x=1697846491; bh=TxE85Savx1MmjXfVS1gR929mUOPPIXfFFJI
- rBsNBusY=; b=XHjJjyjEvjZxS9wLTN+z8mscmdQ7Kpj8WgZyULE6O40AbnNyUtP
- 0d40aNP4ZApVkWrj2vFipZ6psCP+wGv66ndaue8vL3/Lx1/1zLsJDfIbX/Yz2j/K
- mFyHRqOi3xCgqw/d8u8O6+jxPvE+a0bkczFzhvmq/tS7jLCaAa0PC+AROiSyBFGn
- HMAEy280az2TeLLMu5Ng50qb6DGB2RzWpwNEEk1WTVB8RYAiRGSLnNH1QXCJ5P79
- 6YP+fJTzsHJUxpw5r2qwXqQZrv1sJEGfGUSwbyr2STKM+bG7xehQ6yFMm8Fxei2+
- VLHBLPz20altDYtWLEOUYMox3sjlEp8LtBA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1697760091; x=1697846491; bh=TxE85Savx1MmjXfVS1gR929mUOPPIXfFFJI
- rBsNBusY=; b=lWhAWroIR9c34TfQg8eddn01XYKqiI+8emO7CGVxhdgg/eSCoiW
- FO+gDJTu3hKAgxZJ1+1P8sSZIXIGGIgDfXcIHAyi+e85Fz4XZ78DMShPmm0Ei8b1
- 0zn+viht6XbbNA4SLsCL7fynw+w9fEvObOTP8c9hslhH1vhwJAkz3v4P7+PnkU44
- TZ6VU/WheptR+TQELSrPZXaAoB7j27Z4eufCB8fjaYjlyJMRHbbz32gLYgbJCw9l
- 3zrpnBLrIYfWNcJpMpbzh+dvlDPPWKJt+DmykBiSXe9BkiPWllrPC13Juxjs1ifQ
- z2iCRRf6fGtD18iHmSanMJVtTgKNVHjMw6w==
-X-ME-Sender: <xms:W8MxZaiVX8j5nDz9y3BP6G9XzoCUiceWFp2pf40Y5UgsWVxqEAqM8Q>
- <xme:W8MxZbDE_R8udYorTQ4nBMIJ1NPyiyCySryrPAZmdUt3ltMQNYlsTblFDGskW0ORO
- 8aNqHo4PWaKOc3v4A>
-X-ME-Received: <xmr:W8MxZSE3Y4eEknCnixa1uTH3xsY4z7oBo7jswSQCVT5AfuLEn6_YYuUDaJq4afUmfpU6DUEyN8hx_FqzmcPIOWbA5EDSzn1eOND3q0uJbyVDJNCSRHDaEgLA7w>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeejgddvlecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefkffggfgfuvfevfhfhjggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
- vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepkeejleelfeeitdfhtdfgkeeghedufeduueegffdvhfdukeelleef
- tdetjeehuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:W8MxZTSLFX7R0L0oozzB2CciM-zXIXlK8tUMXr9AR1XCH5_g8S9Zjw>
- <xmx:W8MxZXzBcLJ7EO--lDMLVgmgJXI0SHILzmwf2PHzj_ar_-GTBzSGKw>
- <xmx:W8MxZR5mDq80QJJ3kcCfywauJtoOnANZkIccniI7aNwKXC8hshkpLQ>
- <xmx:W8MxZekpQrn68rlqbUyL_BPQNH0-T5kgYQ1dhiW7NWZG3jeQTcOvNw>
-Feedback-ID: i0ad843c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 19 Oct 2023 20:01:30 -0400 (EDT)
-Message-ID: <b8ab813d-790c-f1e4-bf77-29c7a2030464@sholland.org>
-Date: Thu, 19 Oct 2023 19:01:30 -0500
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F1F6E2F4;
+ Thu, 19 Oct 2023 17:27:59 -0700 (PDT)
+Received: from localhost.localdomain (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 921AA3F64C;
+ Thu, 19 Oct 2023 17:27:17 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Ludwig Kormann <ludwig.kormann@ict42.de>
+Subject: [PATCH 0/3] sunxi: devicetree updates from Linux v6.6
+Date: Fri, 20 Oct 2023 01:26:05 +0100
+Message-Id: <20231020002608.18606-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.35.8
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v2 02/22] net: sunxi_emac: chase DT nodes to find PHY
- regulator
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
- <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
- Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
- <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
- andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de
-References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-3-andre.przywara@arm.com>
-From: Samuel Holland <samuel@sholland.org>
-In-Reply-To: <20230928215455.28094-3-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,110 +54,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+This updates the devicetree files to match the Linux kernel repository
+as of v6.6-rc6.
+Mostly cosmetic changes, but we gain some new board files and the T113s
+board .dtsi files, which are needed for the pending U-Boot patches.
 
-On 9/28/23 16:54, Andre Przywara wrote:
-> At the moment the sun4i EMAC driver relies on hardcoded CONFIG_MACPWR
-> Kconfig symbols to enable potential PHY regulators. As we want to get rid
-> of those, we need to find the regulator by chasing up the DT.
-> 
-> The sun4i-emac binding puts the PHY regulator into the MDIO node, which
-> is the parent of the PHY device. U-Boot does not have (and does not
-> need) an MDIO driver, so we need to chase down the regulator through the
-> EMAC node: we follow the "phy-handle" property to find the PHY node,
-> then go up to its parent, where we find the "phy-supply" link to the
-> regulator. Let U-Boot find the associated regulator device, and put that
-> into the private device struct, so we can find and enable the regulator
-> at probe time, later.
+Split per architecture, with the T113s being separate due to its RISC-V
+relationship.
 
-This does somewhat duplicate the logic from dm_eth_connect_phy_handle(),
-and putting the regulator in a UCLASS_MDIO device's probe function would
-work out cleanly (albeit with the usual DM overhead). But that can be a
-later refactoring.
+Andre Przywara (3):
+  sunxi: dts: arm64: update devicetree files from Linux-v6.6-rc6
+  sunxi: dts: arm: update devicetree files from Linux-v6.6-rc6
+  sunxi: dts: arm: add T113s/D1 DT files from Linux-v6.6-rc6
 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Reviewed-by: Sam Edwards <CFSworks@gmail.com>
-> ---
->  drivers/net/sunxi_emac.c | 39 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 39 insertions(+)
-> 
-> diff --git a/drivers/net/sunxi_emac.c b/drivers/net/sunxi_emac.c
-> index 4c90d4b4981..f1f0e5bbbb2 100644
-> --- a/drivers/net/sunxi_emac.c
-> +++ b/drivers/net/sunxi_emac.c
-> @@ -17,6 +17,7 @@
->  #include <net.h>
->  #include <asm/io.h>
->  #include <asm/arch/clock.h>
-> +#include <power/regulator.h>
->  
->  /* EMAC register  */
->  struct emac_regs {
-> @@ -165,6 +166,7 @@ struct emac_eth_dev {
->  	struct phy_device *phydev;
->  	int link_printed;
->  	uchar rx_buf[EMAC_RX_BUFSIZE];
-> +	struct udevice *phy_reg;
->  };
->  
->  struct emac_rxhdr {
-> @@ -572,6 +574,9 @@ static int sunxi_emac_eth_probe(struct udevice *dev)
->  	if (ret)
->  		return ret;
->  
-> +	if (priv->phy_reg)
-> +		regulator_set_enable(priv->phy_reg, true);
-> +
->  	return sunxi_emac_init_phy(priv, dev);
->  }
->  
-> @@ -585,9 +590,43 @@ static const struct eth_ops sunxi_emac_eth_ops = {
->  static int sunxi_emac_eth_of_to_plat(struct udevice *dev)
->  {
->  	struct eth_pdata *pdata = dev_get_plat(dev);
-> +	struct emac_eth_dev *priv = dev_get_priv(dev);
-> +	struct ofnode_phandle_args args;
-> +	ofnode mdio_node;
-> +	int ret;
->  
->  	pdata->iobase = dev_read_addr(dev);
->  
-> +	/* The PHY regulator is in the MDIO node, not the EMAC or PHY node. */
-> +	ret = dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0, &args);
+ arch/arm/dts/axp209.dtsi                      |   7 +
+ arch/arm/dts/sun50i-a64.dtsi                  |   3 +-
+ arch/arm/dts/sun50i-h6-pine-h64-model-b.dts   |   2 +-
+ arch/arm/dts/sun50i-h616-orangepi-zero.dtsi   | 134 +++
+ arch/arm/dts/sun50i-h616-orangepi-zero2.dts   | 121 +--
+ arch/arm/dts/sun50i-h616-x96-mate.dts         |   2 +-
+ arch/arm/dts/sun50i-h618-orangepi-zero3.dts   |  94 ++
+ arch/arm/dts/sun5i-r8-chip.dts                |   6 +
+ arch/arm/dts/sun5i.dtsi                       |  11 +-
+ arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts | 137 +++
+ arch/arm/dts/sun7i-a20-icnova-a20.dtsi        |  62 ++
+ arch/arm/dts/sun8i-a23-a33.dtsi               |   2 +-
+ arch/arm/dts/sun8i-a83t.dtsi                  |   2 +-
+ .../arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts |  35 +
+ arch/arm/dts/sun8i-t113s.dtsi                 |  59 ++
+ arch/arm/dts/sun8i-v3s.dtsi                   |   2 +-
+ arch/arm/dts/sunxi-d1s-t113-mangopi-mq-r.dtsi | 126 +++
+ arch/riscv/dts/sunxi-d1-t113.dtsi             |  15 +
+ arch/riscv/dts/sunxi-d1s-t113.dtsi            | 927 ++++++++++++++++++
+ include/dt-bindings/clock/sun20i-d1-ccu.h     | 158 +++
+ include/dt-bindings/clock/sun20i-d1-r-ccu.h   |  19 +
+ include/dt-bindings/clock/sun50i-h6-ccu.h     |   2 +-
+ include/dt-bindings/clock/sun50i-h616-ccu.h   |   2 +-
+ include/dt-bindings/clock/sun6i-rtc.h         |   2 +-
+ include/dt-bindings/reset/sun20i-d1-ccu.h     |  79 ++
+ include/dt-bindings/reset/sun20i-d1-r-ccu.h   |  16 +
+ include/dt-bindings/reset/sun50i-h6-ccu.h     |   2 +-
+ include/dt-bindings/reset/sun50i-h6-r-ccu.h   |   2 +-
+ include/dt-bindings/reset/sun50i-h616-ccu.h   |   2 +-
+ 29 files changed, 1899 insertions(+), 132 deletions(-)
+ create mode 100644 arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
+ create mode 100644 arch/arm/dts/sun50i-h618-orangepi-zero3.dts
+ create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
+ create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20.dtsi
+ create mode 100644 arch/arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts
+ create mode 100644 arch/arm/dts/sun8i-t113s.dtsi
+ create mode 100644 arch/arm/dts/sunxi-d1s-t113-mangopi-mq-r.dtsi
+ create mode 100644 arch/riscv/dts/sunxi-d1-t113.dtsi
+ create mode 100644 arch/riscv/dts/sunxi-d1s-t113.dtsi
+ create mode 100644 include/dt-bindings/clock/sun20i-d1-ccu.h
+ create mode 100644 include/dt-bindings/clock/sun20i-d1-r-ccu.h
+ create mode 100644 include/dt-bindings/reset/sun20i-d1-ccu.h
+ create mode 100644 include/dt-bindings/reset/sun20i-d1-r-ccu.h
 
-You can use dev_get_phy_node() here. Either way:
-
-Reviewed-by: Samuel Holland <samuel@sholland.org>
-
-> +	if (ret) {
-> +		dev_err(dev, "failed to get PHY node\n");
-> +		return ret;
-> +	}
-> +
-> +	/*
-> +	 * U-Boot does not have (and does not need) a device driver for the
-> +	 * MDIO device, so just "pass through" that DT node to get to the
-> +	 * regulator phandle.
-> +	 * The PHY regulator is optional, though: ignore if we cannot find
-> +	 * a phy-supply property.
-> +	 */
-> +	mdio_node = ofnode_get_parent(args.node);
-> +	ret= ofnode_parse_phandle_with_args(mdio_node, "phy-supply", NULL, 0, 0,
-> +					    &args);
-> +	if (ret && ret != -ENOENT) {
-> +		dev_err(dev, "failed to get PHY supply node\n");
-> +		return ret;
-> +	}
-> +	if (!ret) {
-> +		ret = uclass_get_device_by_ofnode(UCLASS_REGULATOR, args.node,
-> +						  &priv->phy_reg);
-> +		if (ret) {
-> +			dev_err(dev, "failed to get PHY regulator node\n");
-> +			return ret;
-> +		}
-> +	}
-> +
->  	return 0;
->  }
->  
+-- 
+2.35.8
 
