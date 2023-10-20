@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D906CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 09:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46E4CCDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 09:04:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D847087466;
-	Fri, 20 Oct 2023 11:04:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 557648746C;
+	Fri, 20 Oct 2023 11:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697792671;
-	bh=P2fpuOz5C1JxZ9aQLhWkwBDmVBcIXTonump7QaV+hoE=;
+	s=phobos-20191101; t=1697792675;
+	bh=Y5islzxAL95lIzBbkjhUnRYY5aF7T+yJ8rPULSWCboo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=gbxl8QqH4RZHOvXji6keKIEWHQlJ9iK2qd19K8FgczRtQleEmx6BI/PLNb1GnXdao
-	 uSVuC2MUHmPOE2Dg0onicLlenWBp1sJHqVrIIjLuySoekFgZa0nrM8jEnMtCAfDmsF
-	 fzW6nVQnaavh56z/XRgyV3RumGVBk2zyhA1hGzzhbRQweiKC763+CGfK42Io6MXFVN
-	 UHwPAuKRGQfR4fzAdVUCLdP9766GYg0fqZrKeKgZBpSLSP8rVDsT/sRI/Ey0GWurvY
-	 IMnR+ek/JgmVVM4edcCiq1eESYkJGsiTrFxiB+1K+Vqmvm8/DlwRgPvWfPrC1wtZ6f
-	 Mw5j0kF3qJOow==
+	b=SIP8i2OLDTTE20CY/JdHWUfLSKUfWZTClKpNAI7MOn86/EuinxMTUQuxpEyp2ZA67
+	 fB6qI6SrId9F2t5+QGokdG7Prx9itXIkPrtbNgeAAw5lezTNINK7bZEcnlAsQvJM+k
+	 yp9mFTkGp+lEpUAVxWTNeYQ5Qa4h4iEQSRcVASnBmEOycunPunWlrbApHxYdF79NR1
+	 8y9E5bLz4g2jvV/2mCTWAWcXizwXH7lqnCpVVJnZKvQUuPHLsGKNCrdt6NFq0gecPj
+	 NoA5uYIVwXvbqrQdJQufBCngTHYwUQlZ9QQbchFsvV7zR43z2JtAdYXg83zUV8/9yi
+	 GUV+x7c36XLTw==
 Received: from localhost (lfbn-poi-1-1121-43.w83-200.abo.wanadoo.fr
  [83.200.224.43])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3172187461;
- Fri, 20 Oct 2023 11:04:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E3C888746C;
+ Fri, 20 Oct 2023 11:04:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697792670;
- bh=P2fpuOz5C1JxZ9aQLhWkwBDmVBcIXTonump7QaV+hoE=;
+ s=phobos-20191101; t=1697792673;
+ bh=Y5islzxAL95lIzBbkjhUnRYY5aF7T+yJ8rPULSWCboo=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=c0k1R6QXeIxjJjoX80I3MIINmsqrPjnREiMYofhpvfD8MT3N7qeqKPdQdZGXxsF5W
- JLvQctoL+jq62/Z/dZmYcHuzaMGpmg68XTm0VgaugPLR++A4MYS9+1HKGxfvcfb/+z
- P61w/k59w1ZeENO2ZTERDjUCSKOUjsY1kcKvqJuO0PyJv+nSpS+8OPbJ+lQEouF9mW
- Ni/Zwq2IETNs3YUz86YEU+zzffaVSMyyDUoNk4JwhBYpafuQo9bompXaNI8EHatC8l
- xEJKIMqL9ckHQuLNIYiaI3SfJfE1Gi2cG/71Ms9fOwV80UkeObZJa04rAVPNpa1ka3
- 4rGuQGsRMr6Bg==
+ b=v/AMR40CKEejWSKbLfMYD+nk1EmuOaWUf4+sUcdVQY7AqucfnXFYCqI1StI2rlvd1
+ aOv7432vQoksI0Vx6Qgx+GoPKnrBA+QdPzFyi+wzUvyiMJJL6qWDTez3DJ8XeY46lT
+ yF6rPKiii/S/svYrV3zM4LbrF5dlQu9LnrFKiPZd5p8ffuojqXwFw4sBFVCrrWd8iq
+ n0PEK80HMtFqMcMNxl1qWoKZ966GPNS6ZrKjz5lugr0a/shVgys3XqhfPrlWEh5f5z
+ DYA73OgYLXgQlAfYBmqIiX3M1mf6zKuTp8msdFm2fzPY+r79BbyiXm26xyYXSZc6Xf
+ Fu8RICFcI8MPQ==
 From: Philip Richard Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
 Cc: hs@denx.de, sjg@chromium.org, trini@konsulko.com,
  Philip Richard Oberfichtner <pro@denx.de>
-Subject: [PATCH v2 1/3] bootcount: Remove legacy I2C driver
-Date: Fri, 20 Oct 2023 11:02:25 +0200
-Message-ID: <20231020090227.16634-2-pro@denx.de>
+Subject: [PATCH v2 2/3] i2c: Implement i2c_get_chip_by_phandle()
+Date: Fri, 20 Oct 2023 11:02:26 +0200
+Message-ID: <20231020090227.16634-3-pro@denx.de>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231020090227.16634-1-pro@denx.de>
 References: <20231020090227.16634-1-pro@denx.de>
@@ -67,145 +67,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The legacy I2C bootcounter will hereby be removed and eventually
-be replaced by a driver model implementation in the follow-up commit.
-
-The legacy driver has the following drawbacks:
-	- It's not adhering to the driver model
-	- Settings are grabbed from Kconfig rather than device tree
-	- i2c_{read,write} are being used instead of dm_i2c_{read,write}
+This new function enhances the i2c_get_chip*() toolbox by implementing a
+variant that does not require a chip_addr. Instead, the desired device
+is pointed to by a phandle.
 
 Signed-off-by: Philip Richard Oberfichtner <pro@denx.de>
 ---
 
-Changes in v2: none
+Changes in v2: new
 
- drivers/bootcount/Kconfig         | 24 +++--------------
- drivers/bootcount/Makefile        |  1 -
- drivers/bootcount/bootcount_i2c.c | 43 -------------------------------
- 3 files changed, 3 insertions(+), 65 deletions(-)
- delete mode 100644 drivers/bootcount/bootcount_i2c.c
+ drivers/i2c/i2c-uclass.c | 75 ++++++++++++++++++++++++++++++++++++++++
+ include/i2c.h            | 12 +++++++
+ 2 files changed, 87 insertions(+)
 
-diff --git a/drivers/bootcount/Kconfig b/drivers/bootcount/Kconfig
-index 570252d186..7a2548ace2 100644
---- a/drivers/bootcount/Kconfig
-+++ b/drivers/bootcount/Kconfig
-@@ -79,14 +79,6 @@ config BOOTCOUNT_RAM
- 	  Store the bootcount in DRAM protected against bit errors
- 	  due to short power loss or holding a system in RESET.
+diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+index 8867a560bd..5405067861 100644
+--- a/drivers/i2c/i2c-uclass.c
++++ b/drivers/i2c/i2c-uclass.c
+@@ -388,6 +388,81 @@ int i2c_get_chip_for_busnum(int busnum, int chip_addr, uint offset_len,
+ 	return 0;
+ }
  
--config BOOTCOUNT_I2C
--	bool "Boot counter on I2C device"
--	help
--	  Enable support for the bootcounter on an i2c (like RTC) device.
--	  CFG_SYS_I2C_RTC_ADDR = i2c chip address
--	  CONFIG_SYS_BOOTCOUNT_ADDR = i2c addr which is used for
--	                              the bootcounter.
--
- config BOOTCOUNT_AT91
- 	bool "Boot counter for Atmel AT91SAM9XE"
- 	depends on AT91SAM9XE
-@@ -175,14 +167,6 @@ config BOOTCOUNT_BOOTLIMIT
- 	  counter being cleared.
- 	  If set to 0, do not set a boot limit in the environment.
++/* Find and probe I2C bus based on a chip attached to it */
++static int i2c_get_parent_bus(ofnode chip, struct udevice **devp)
++{
++	ofnode node;
++	struct udevice *dev;
++	int ret;
++
++	node = ofnode_get_parent(chip);
++	if (!ofnode_valid(node))
++		return -ENODEV;
++
++	ret = uclass_get_device_by_ofnode(UCLASS_I2C, node, &dev);
++	if (ret) {
++		*devp = NULL;
++		return ret;
++	}
++
++	*devp = dev;
++	return 0;
++}
++
++int i2c_get_chip_by_phandle(const struct udevice *parent, const char *prop_name,
++			    struct udevice **devp)
++{
++	ofnode node;
++	uint phandle;
++	struct udevice *bus, *chip;
++	char *dev_name;
++	int ret;
++
++	debug("%s: Searching I2C chip for phandle \"%s\"\n",
++	      __func__, prop_name);
++
++	dev_name = strdup(prop_name);
++	if (!dev_name) {
++		ret = -ENOMEM;
++		goto err_exit;
++	}
++
++	ret = dev_read_u32(parent, "i2cbcdev", &phandle);
++	if (ret)
++		goto err_exit;
++
++	node = ofnode_get_by_phandle(phandle);
++	if (!ofnode_valid(node)) {
++		ret = -ENODEV;
++		goto err_exit;
++	}
++
++	ret = i2c_get_parent_bus(node, &bus);
++	if (ret)
++		goto err_exit;
++
++	ret = device_bind_driver_to_node(bus, "i2c_generic_chip_drv",
++					 dev_name, node, &chip);
++	if (ret)
++		goto err_exit;
++
++	ret = device_probe(chip);
++	if (ret) {
++		device_unbind(chip);
++		goto err_exit;
++	}
++
++	debug("%s succeeded\n", __func__);
++	*devp = chip;
++	return 0;
++
++err_exit:
++	free(dev_name);
++	debug("%s failed, ret = %d\n", __func__, ret);
++	*devp = NULL;
++	return ret;
++}
++
+ int dm_i2c_probe(struct udevice *bus, uint chip_addr, uint chip_flags,
+ 		 struct udevice **devp)
+ {
+diff --git a/include/i2c.h b/include/i2c.h
+index ef3820eaba..4e59009cd9 100644
+--- a/include/i2c.h
++++ b/include/i2c.h
+@@ -537,6 +537,18 @@ int i2c_get_chip(struct udevice *bus, uint chip_addr, uint offset_len,
+ int i2c_get_chip_for_busnum(int busnum, int chip_addr, uint offset_len,
+ 			    struct udevice **devp);
  
--config BOOTCOUNT_ALEN
--	int "I2C address length"
--	default 1
--	depends on BOOTCOUNT_I2C
--	help
--	  Length of the the I2C address at SYS_BOOTCOUNT_ADDR for storing
--	  the boot counter.
--
- config SYS_BOOTCOUNT_SINGLEWORD
- 	bool "Use single word to pack boot count and magic value"
- 	depends on BOOTCOUNT_GENERIC
-@@ -218,7 +202,7 @@ config SYS_BOOTCOUNT_ADDR
- 	default 0x44E3E000 if BOOTCOUNT_AM33XX || BOOTCOUNT_AM33XX_NVMEM
- 	default 0xE0115FF8 if ARCH_LS1043A || ARCH_LS1021A
- 	depends on BOOTCOUNT_AM33XX || BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
--		   BOOTCOUNT_I2C || BOOTCOUNT_AM33XX_NVMEM
-+		   BOOTCOUNT_AM33XX_NVMEM
- 	help
- 	  Set the address used for reading and writing the boot counter.
- 
-@@ -226,13 +210,11 @@ config SYS_BOOTCOUNT_MAGIC
- 	hex "Magic value for the boot counter"
- 	default 0xB001C041 if BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
- 			      BOOTCOUNT_AM33XX || BOOTCOUNT_ENV || \
--			      BOOTCOUNT_RAM || BOOTCOUNT_I2C || \
--			      BOOTCOUNT_AT91 || DM_BOOTCOUNT
-+			      BOOTCOUNT_RAM || BOOTCOUNT_AT91 || DM_BOOTCOUNT
- 	default 0xB0 if BOOTCOUNT_AM33XX_NVMEM
- 	depends on BOOTCOUNT_GENERIC || BOOTCOUNT_EXT || \
- 		   BOOTCOUNT_AM33XX || BOOTCOUNT_ENV || \
--		   BOOTCOUNT_RAM || BOOTCOUNT_I2C || \
--		   BOOTCOUNT_AT91 || DM_BOOTCOUNT || \
-+		   BOOTCOUNT_RAM || BOOTCOUNT_AT91 || DM_BOOTCOUNT || \
- 		   BOOTCOUNT_AM33XX_NVMEM
- 	help
- 	  Set the magic value used for the boot counter.
-diff --git a/drivers/bootcount/Makefile b/drivers/bootcount/Makefile
-index b65959a384..d6d2389c16 100644
---- a/drivers/bootcount/Makefile
-+++ b/drivers/bootcount/Makefile
-@@ -6,7 +6,6 @@ obj-$(CONFIG_BOOTCOUNT_AT91)	+= bootcount_at91.o
- obj-$(CONFIG_BOOTCOUNT_AM33XX)	+= bootcount_davinci.o
- obj-$(CONFIG_BOOTCOUNT_RAM)	+= bootcount_ram.o
- obj-$(CONFIG_BOOTCOUNT_ENV)	+= bootcount_env.o
--obj-$(CONFIG_BOOTCOUNT_I2C)	+= bootcount_i2c.o
- obj-$(CONFIG_BOOTCOUNT_EXT)	+= bootcount_ext.o
- obj-$(CONFIG_BOOTCOUNT_AM33XX_NVMEM)	+= bootcount_nvmem.o
- 
-diff --git a/drivers/bootcount/bootcount_i2c.c b/drivers/bootcount/bootcount_i2c.c
-deleted file mode 100644
-index b3ac67ea35..0000000000
---- a/drivers/bootcount/bootcount_i2c.c
-+++ /dev/null
-@@ -1,43 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2013
-- * Heiko Schocher, DENX Software Engineering, hs@denx.de.
-- */
--
--#include <bootcount.h>
--#include <linux/compiler.h>
--#include <i2c.h>
--
--#define BC_MAGIC	0xbc
--
--void bootcount_store(ulong a)
--{
--	unsigned char buf[3];
--	int ret;
--
--	buf[0] = BC_MAGIC;
--	buf[1] = (a & 0xff);
--	ret = i2c_write(CFG_SYS_I2C_RTC_ADDR, CONFIG_SYS_BOOTCOUNT_ADDR,
--		  CONFIG_BOOTCOUNT_ALEN, buf, 2);
--	if (ret != 0)
--		puts("Error writing bootcount\n");
--}
--
--ulong bootcount_load(void)
--{
--	unsigned char buf[3];
--	int ret;
--
--	ret = i2c_read(CFG_SYS_I2C_RTC_ADDR, CONFIG_SYS_BOOTCOUNT_ADDR,
--		       CONFIG_BOOTCOUNT_ALEN, buf, 2);
--	if (ret != 0) {
--		puts("Error loading bootcount\n");
--		return 0;
--	}
--	if (buf[0] == BC_MAGIC)
--		return buf[1];
--
--	bootcount_store(0);
--
--	return 0;
--}
++/**
++ * i2c_get_chip_by_phandle() - get a device to use to access a chip
++ *			       based on a phandle property pointing to it
++ *
++ * @parent: Parent device containing the phandle pointer
++ * @name:   Name of phandle property in the parent device node
++ * @devp:   Returns pointer to new device or NULL if not found
++ * Return:  0 on success, -ve on failure
++ */
++int i2c_get_chip_by_phandle(const struct udevice *parent, const char *prop_name,
++			    struct udevice **devp);
++
+ /**
+  * i2c_chip_of_to_plat() - Decode standard I2C platform data
+  *
 -- 
 2.42.0
 
