@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44D4C001E0
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 00:27:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C1EC001DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 00:27:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6C8487206;
-	Fri, 20 Oct 2023 02:27:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 80F17871DA;
+	Fri, 20 Oct 2023 02:27:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98991871E8; Fri, 20 Oct 2023 02:27:26 +0200 (CEST)
+ id 035778720C; Fri, 20 Oct 2023 02:27:30 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C9C68871CE
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 02:27:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 1548C870D2
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 02:27:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2633C1480;
- Thu, 19 Oct 2023 17:28:03 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9A68B143D;
+ Thu, 19 Oct 2023 17:28:01 -0700 (PDT)
 Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BCA303F64C;
- Thu, 19 Oct 2023 17:27:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1F6D03F64C;
+ Thu, 19 Oct 2023 17:27:19 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
 Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
  Samuel Holland <samuel@sholland.org>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Ludwig Kormann <ludwig.kormann@ict42.de>
-Subject: [PATCH 2/3] sunxi: dts: arm: update devicetree files from
+Subject: [PATCH 1/3] sunxi: dts: arm64: update devicetree files from
  Linux-v6.6-rc6
-Date: Fri, 20 Oct 2023 01:26:07 +0100
-Message-Id: <20231020002608.18606-3-andre.przywara@arm.com>
+Date: Fri, 20 Oct 2023 01:26:06 +0100
+Message-Id: <20231020002608.18606-2-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.35.8
 In-Reply-To: <20231020002608.18606-1-andre.przywara@arm.com>
 References: <20231020002608.18606-1-andre.przywara@arm.com>
@@ -58,323 +58,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Sync the devicetree files from the official Linux kernel tree, v6.6-rc6.
-This is covering Allwinner SoCs with 32-bit ARM cores, minus the T113s
-board and related .dtsi files, which come separately.
+This is covering Allwinner SoCs with 64-bit ARM cores.
 
-Only small changes: Bluetooth got enabled on the C.H.I.P., and a clock
-got renamed. More interesting is the addition of a board, for which
-U-Boot enablement patches are pending.
+Only small cosmetic changes (clock name fixed), but we add the DT for
+the new OrangePi Zero 3 board, for which U-Boot enablement patches are
+pending.
 
 As before, this omits the non-backwards compatible changes to the R_INTC
 controller, to remain compatible with older kernels.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- arch/arm/dts/axp209.dtsi                      |   7 +
- arch/arm/dts/sun5i-r8-chip.dts                |   6 +
- arch/arm/dts/sun5i.dtsi                       |  11 +-
- arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts | 137 ++++++++++++++++++
- arch/arm/dts/sun7i-a20-icnova-a20.dtsi        |  62 ++++++++
- arch/arm/dts/sun8i-a23-a33.dtsi               |   2 +-
- arch/arm/dts/sun8i-a83t.dtsi                  |   2 +-
- arch/arm/dts/sun8i-v3s.dtsi                   |   2 +-
- 8 files changed, 225 insertions(+), 4 deletions(-)
- create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
- create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20.dtsi
+ arch/arm/dts/sun50i-a64.dtsi                |   3 +-
+ arch/arm/dts/sun50i-h6-pine-h64-model-b.dts |   2 +-
+ arch/arm/dts/sun50i-h616-orangepi-zero.dtsi | 134 ++++++++++++++++++++
+ arch/arm/dts/sun50i-h616-orangepi-zero2.dts | 121 +-----------------
+ arch/arm/dts/sun50i-h616-x96-mate.dts       |   2 +-
+ arch/arm/dts/sun50i-h618-orangepi-zero3.dts |  94 ++++++++++++++
+ include/dt-bindings/clock/sun50i-h6-ccu.h   |   2 +-
+ include/dt-bindings/clock/sun50i-h616-ccu.h |   2 +-
+ include/dt-bindings/clock/sun6i-rtc.h       |   2 +-
+ include/dt-bindings/reset/sun50i-h6-ccu.h   |   2 +-
+ include/dt-bindings/reset/sun50i-h6-r-ccu.h |   2 +-
+ include/dt-bindings/reset/sun50i-h616-ccu.h |   2 +-
+ 12 files changed, 240 insertions(+), 128 deletions(-)
+ create mode 100644 arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
+ create mode 100644 arch/arm/dts/sun50i-h618-orangepi-zero3.dts
 
-diff --git a/arch/arm/dts/axp209.dtsi b/arch/arm/dts/axp209.dtsi
-index ca240cd6f6c..469d0f7d518 100644
---- a/arch/arm/dts/axp209.dtsi
-+++ b/arch/arm/dts/axp209.dtsi
-@@ -48,6 +48,13 @@
-  * http://dl.linux-sunxi.org/AXP/AXP209%20Datasheet%20v1.0_cn.pdf
-  */
+diff --git a/arch/arm/dts/sun50i-a64.dtsi b/arch/arm/dts/sun50i-a64.dtsi
+index 135762b34fd..2240eaec5dd 100644
+--- a/arch/arm/dts/sun50i-a64.dtsi
++++ b/arch/arm/dts/sun50i-a64.dtsi
+@@ -93,6 +93,7 @@
+ 		L2: l2-cache {
+ 			compatible = "cache";
+ 			cache-level = <2>;
++			cache-unified;
+ 		};
+ 	};
  
-+/ {
-+	pmic-temp {
-+		compatible = "iio-hwmon";
-+		io-channels = <&axp_adc 4>; /* Internal temperature */
-+	};
-+};
-+
- &axp209 {
- 	compatible = "x-powers,axp209";
- 	interrupt-controller;
-diff --git a/arch/arm/dts/sun5i-r8-chip.dts b/arch/arm/dts/sun5i-r8-chip.dts
-index fd37bd1f392..4192c23848c 100644
---- a/arch/arm/dts/sun5i-r8-chip.dts
-+++ b/arch/arm/dts/sun5i-r8-chip.dts
-@@ -255,6 +255,12 @@
- 	pinctrl-0 = <&uart3_pg_pins>,
- 		    <&uart3_cts_rts_pg_pins>;
- 	status = "okay";
-+
-+	bluetooth {
-+		compatible = "realtek,rtl8723bs-bt";
-+		device-wake-gpios = <&axp_gpio 3 GPIO_ACTIVE_HIGH>;
-+		host-wake-gpios = <&pio 1 3 GPIO_ACTIVE_HIGH>; /* PB3 */
-+	};
- };
- 
- &usb_otg {
-diff --git a/arch/arm/dts/sun5i.dtsi b/arch/arm/dts/sun5i.dtsi
-index 250d6b87ab4..d7c7b454a11 100644
---- a/arch/arm/dts/sun5i.dtsi
-+++ b/arch/arm/dts/sun5i.dtsi
-@@ -286,7 +286,7 @@
- 			clock-names = "ahb",
- 				      "tcon-ch0",
- 				      "tcon-ch1";
--			clock-output-names = "tcon-pixel-clock";
-+			clock-output-names = "tcon-data-clock";
- 			#clock-cells = <0>;
- 			status = "disabled";
- 
-@@ -517,6 +517,15 @@
- 				bias-pull-up;
- 			};
- 
-+			/omit-if-no-ref/
-+			mmc2_4bit_pe_pins: mmc2-4bit-pe-pins {
-+				pins = "PE4", "PE5", "PE6", "PE7",
-+				       "PE8", "PE9";
-+				function = "mmc2";
-+				drive-strength = <30>;
-+				bias-pull-up;
-+			};
-+
- 			mmc2_8bit_pins: mmc2-8bit-pins {
- 				pins = "PC6", "PC7", "PC8", "PC9",
- 				       "PC10", "PC11", "PC12", "PC13",
-diff --git a/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
-new file mode 100644
-index 00000000000..577ead1d02a
---- /dev/null
-+++ b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
-@@ -0,0 +1,137 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+// Copyright (C) 2023 In-Circuit GmbH
-+
-+/dts-v1/;
-+
-+#include "sun7i-a20-icnova-a20.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+
-+/ {
-+	model = "In-Circuit ICnova A20 ADB4006";
-+	compatible = "incircuit,icnova-a20-adb4006", "incircuit,icnova-a20",
-+		     "allwinner,sun7i-a20";
-+
-+	aliases {
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	hdmi-connector {
-+		compatible = "hdmi-connector";
-+		type = "a";
-+
-+		port {
-+			hdmi_con_in: endpoint {
-+				remote-endpoint = <&hdmi_out_con>;
-+			};
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led-0 {
-+			function = LED_FUNCTION_POWER;
-+			color = <LED_COLOR_ID_YELLOW>;
-+			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>; /* PH21 */
-+			default-state = "on";
-+		};
-+
-+		led-1 {
-+			function = LED_FUNCTION_HEARTBEAT;
-+			color = <LED_COLOR_ID_RED>;
-+			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>; /* PH20 */
-+			linux,default-trigger = "heartbeat";
-+		};
-+	};
-+};
-+
-+&ahci {
-+	target-supply = <&reg_ahci_5v>;
-+	status = "okay";
-+};
-+
-+&codec {
-+	status = "okay";
-+};
-+
-+&de {
-+	status = "okay";
-+};
-+
-+&ehci0 {
-+	status = "okay";
-+};
-+
-+&ehci1 {
-+	status = "okay";
-+};
-+
-+&hdmi {
-+	status = "okay";
-+};
-+
-+&hdmi_out {
-+	hdmi_out_con: endpoint {
-+		remote-endpoint = <&hdmi_con_in>;
-+	};
-+};
-+
-+&mmc0 {
-+	vmmc-supply = <&reg_vcc3v3>;
-+	bus-width = <4>;
-+	cd-gpios = <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
-+	status = "okay";
-+};
-+
-+&ohci0 {
-+	status = "okay";
-+};
-+
-+&ohci1 {
-+	status = "okay";
-+};
-+
-+&otg_sram {
-+	status = "okay";
-+};
-+
-+&reg_ahci_5v {
-+	status = "okay";
-+};
-+
-+&ac_power_supply {
-+	status = "okay";
-+};
-+
-+&reg_usb1_vbus {
-+	status = "okay";
-+};
-+
-+&reg_usb2_vbus {
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_pb_pins>;
-+	status = "okay";
-+};
-+
-+&usb_otg {
-+	dr_mode = "otg";
-+	status = "okay";
-+};
-+
-+&usbphy {
-+	usb0_id_det-gpios = <&pio 7 4 GPIO_ACTIVE_HIGH>; /* PH4 */
-+	usb0_vbus_det-gpios = <&pio 7 5 GPIO_ACTIVE_HIGH>; /* PH5 */
-+	usb1_vbus-supply = <&reg_usb1_vbus>;
-+	usb2_vbus-supply = <&reg_usb2_vbus>;
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/sun7i-a20-icnova-a20.dtsi b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
-new file mode 100644
-index 00000000000..46616c6bc89
---- /dev/null
-+++ b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+// Copyright (C) 2023 In-Circuit GmbH
-+
-+#include "sun7i-a20.dtsi"
-+#include "sunxi-common-regulators.dtsi"
-+
-+#include <dt-bindings/interrupt-controller/irq.h>
-+
-+&cpu0 {
-+	cpu-supply = <&reg_dcdc2>;
-+};
-+
-+&gmac {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&gmac_mii_pins>;
-+	phy-handle = <&phy1>;
-+	phy-mode = "mii";
-+	status = "okay";
-+};
-+
-+&i2c0 {
-+	status = "okay";
-+
-+	axp209: pmic@34 {
-+		reg = <0x34>;
-+		interrupt-parent = <&nmi_intc>;
-+		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+};
-+
-+&gmac_mdio {
-+	phy1: ethernet-phy@1 {
-+		reg = <1>;
-+	};
-+};
-+
-+#include "axp209.dtsi"
-+
-+&reg_dcdc2 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1000000>;
-+	regulator-max-microvolt = <1400000>;
-+	regulator-name = "vdd-cpu";
-+};
-+
-+&reg_dcdc3 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1000000>;
-+	regulator-max-microvolt = <1400000>;
-+	regulator-name = "vdd-int-dll";
-+};
-+
-+&reg_ldo1 {
-+	regulator-name = "vdd-rtc";
-+};
-+
-+&reg_ldo2 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <3000000>;
-+	regulator-max-microvolt = <3000000>;
-+	regulator-name = "avcc";
-+};
-diff --git a/arch/arm/dts/sun8i-a23-a33.dtsi b/arch/arm/dts/sun8i-a23-a33.dtsi
-index 84c6d9379a3..a0cac966af3 100644
---- a/arch/arm/dts/sun8i-a23-a33.dtsi
-+++ b/arch/arm/dts/sun8i-a23-a33.dtsi
-@@ -190,7 +190,7 @@
- 			clock-names = "ahb",
- 				      "tcon-ch0",
- 				      "lvds-alt";
--			clock-output-names = "tcon-pixel-clock";
-+			clock-output-names = "tcon-data-clock";
- 			#clock-cells = <0>;
- 			resets = <&ccu RST_BUS_LCD>,
- 				 <&ccu RST_BUS_LVDS>;
-diff --git a/arch/arm/dts/sun8i-a83t.dtsi b/arch/arm/dts/sun8i-a83t.dtsi
-index 9c07660080d..cc40622466a 100644
---- a/arch/arm/dts/sun8i-a83t.dtsi
-+++ b/arch/arm/dts/sun8i-a83t.dtsi
-@@ -456,7 +456,7 @@
+@@ -407,7 +408,7 @@
  			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>;
  			clocks = <&ccu CLK_BUS_TCON0>, <&ccu CLK_TCON0>;
  			clock-names = "ahb", "tcon-ch0";
@@ -383,19 +106,477 @@ index 9c07660080d..cc40622466a 100644
  			#clock-cells = <0>;
  			resets = <&ccu RST_BUS_TCON0>, <&ccu RST_BUS_LVDS>;
  			reset-names = "lcd", "lvds";
-diff --git a/arch/arm/dts/sun8i-v3s.dtsi b/arch/arm/dts/sun8i-v3s.dtsi
-index b001251644f..3b9a282c274 100644
---- a/arch/arm/dts/sun8i-v3s.dtsi
-+++ b/arch/arm/dts/sun8i-v3s.dtsi
-@@ -191,7 +191,7 @@
- 				 <&ccu CLK_TCON0>;
- 			clock-names = "ahb",
- 				      "tcon-ch0";
--			clock-output-names = "tcon-pixel-clock";
-+			clock-output-names = "tcon-data-clock";
- 			#clock-cells = <0>;
- 			resets = <&ccu RST_BUS_TCON0>;
- 			reset-names = "lcd";
+diff --git a/arch/arm/dts/sun50i-h6-pine-h64-model-b.dts b/arch/arm/dts/sun50i-h6-pine-h64-model-b.dts
+index 686f58e7700..b710f1a0f53 100644
+--- a/arch/arm/dts/sun50i-h6-pine-h64-model-b.dts
++++ b/arch/arm/dts/sun50i-h6-pine-h64-model-b.dts
+@@ -1,4 +1,4 @@
+-// SPDX-License-Identifier: (GPL-2.0+ or MIT)
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ /*
+  * Copyright (C) 2019 Corentin LABBE <clabbe@baylibre.com>
+  */
+diff --git a/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi b/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
+new file mode 100644
+index 00000000000..15290e6892f
+--- /dev/null
++++ b/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
+@@ -0,0 +1,134 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Arm Ltd.
++ *
++ * DT nodes common between Orange Pi Zero 2 and Orange Pi Zero 3.
++ * Excludes PMIC nodes and properties, since they are different between the two.
++ */
++
++#include "sun50i-h616.dtsi"
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++#include <dt-bindings/leds/common.h>
++
++/ {
++	aliases {
++		ethernet0 = &emac0;
++		serial0 = &uart0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-0 {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&pio 2 12 GPIO_ACTIVE_HIGH>; /* PC12 */
++			default-state = "on";
++		};
++
++		led-1 {
++			function = LED_FUNCTION_STATUS;
++			color = <LED_COLOR_ID_GREEN>;
++			gpios = <&pio 2 13 GPIO_ACTIVE_HIGH>; /* PC13 */
++		};
++	};
++
++	reg_vcc5v: vcc5v {
++		/* board wide 5V supply directly from the USB-C socket */
++		compatible = "regulator-fixed";
++		regulator-name = "vcc-5v";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		regulator-always-on;
++	};
++
++	reg_usb1_vbus: regulator-usb1-vbus {
++		compatible = "regulator-fixed";
++		regulator-name = "usb1-vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		vin-supply = <&reg_vcc5v>;
++		enable-active-high;
++		gpio = <&pio 2 16 GPIO_ACTIVE_HIGH>; /* PC16 */
++	};
++};
++
++&ehci1 {
++	status = "okay";
++};
++
++/* USB 2 & 3 are on headers only. */
++
++&emac0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&ext_rgmii_pins>;
++	phy-mode = "rgmii";
++	phy-handle = <&ext_rgmii_phy>;
++	allwinner,rx-delay-ps = <3100>;
++	allwinner,tx-delay-ps = <700>;
++	status = "okay";
++};
++
++&mdio0 {
++	ext_rgmii_phy: ethernet-phy@1 {
++		compatible = "ethernet-phy-ieee802.3-c22";
++		reg = <1>;
++	};
++};
++
++&mmc0 {
++	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>;	/* PF6 */
++	bus-width = <4>;
++	status = "okay";
++};
++
++&ohci1 {
++	status = "okay";
++};
++
++&spi0  {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&spi0_pins>, <&spi0_cs0_pin>;
++
++	flash@0 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <40000000>;
++	};
++};
++
++&uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_ph_pins>;
++	status = "okay";
++};
++
++&usbotg {
++	/*
++	 * PHY0 pins are connected to a USB-C socket, but a role switch
++	 * is not implemented: both CC pins are pulled to GND.
++	 * The VBUS pins power the device, so a fixed peripheral mode
++	 * is the best choice.
++	 * The board can be powered via GPIOs, in this case port0 *can*
++	 * act as a host (with a cable/adapter ignoring CC), as VBUS is
++	 * then provided by the GPIOs. Any user of this setup would
++	 * need to adjust the DT accordingly: dr_mode set to "host",
++	 * enabling OHCI0 and EHCI0.
++	 */
++	dr_mode = "peripheral";
++	status = "okay";
++};
++
++&usbphy {
++	usb1_vbus-supply = <&reg_usb1_vbus>;
++	status = "okay";
++};
+diff --git a/arch/arm/dts/sun50i-h616-orangepi-zero2.dts b/arch/arm/dts/sun50i-h616-orangepi-zero2.dts
+index cb8600d0ea1..d83852e72f0 100644
+--- a/arch/arm/dts/sun50i-h616-orangepi-zero2.dts
++++ b/arch/arm/dts/sun50i-h616-orangepi-zero2.dts
+@@ -1,99 +1,23 @@
+-// SPDX-License-Identifier: (GPL-2.0+ or MIT)
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ /*
+  * Copyright (C) 2020 Arm Ltd.
+  */
+ 
+ /dts-v1/;
+ 
+-#include "sun50i-h616.dtsi"
+-
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/interrupt-controller/arm-gic.h>
+-#include <dt-bindings/leds/common.h>
++#include "sun50i-h616-orangepi-zero.dtsi"
+ 
+ / {
+ 	model = "OrangePi Zero2";
+ 	compatible = "xunlong,orangepi-zero2", "allwinner,sun50i-h616";
+-
+-	aliases {
+-		ethernet0 = &emac0;
+-		serial0 = &uart0;
+-	};
+-
+-	chosen {
+-		stdout-path = "serial0:115200n8";
+-	};
+-
+-	leds {
+-		compatible = "gpio-leds";
+-
+-		led-0 {
+-			function = LED_FUNCTION_POWER;
+-			color = <LED_COLOR_ID_RED>;
+-			gpios = <&pio 2 12 GPIO_ACTIVE_HIGH>; /* PC12 */
+-			default-state = "on";
+-		};
+-
+-		led-1 {
+-			function = LED_FUNCTION_STATUS;
+-			color = <LED_COLOR_ID_GREEN>;
+-			gpios = <&pio 2 13 GPIO_ACTIVE_HIGH>; /* PC13 */
+-		};
+-	};
+-
+-	reg_vcc5v: vcc5v {
+-		/* board wide 5V supply directly from the USB-C socket */
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc-5v";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		regulator-always-on;
+-	};
+-
+-	reg_usb1_vbus: regulator-usb1-vbus {
+-		compatible = "regulator-fixed";
+-		regulator-name = "usb1-vbus";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		vin-supply = <&reg_vcc5v>;
+-		enable-active-high;
+-		gpio = <&pio 2 16 GPIO_ACTIVE_HIGH>; /* PC16 */
+-	};
+ };
+ 
+-&ehci1 {
+-	status = "okay";
+-};
+-
+-/* USB 2 & 3 are on headers only. */
+-
+ &emac0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&ext_rgmii_pins>;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ext_rgmii_phy>;
+ 	phy-supply = <&reg_dcdce>;
+-	allwinner,rx-delay-ps = <3100>;
+-	allwinner,tx-delay-ps = <700>;
+-	status = "okay";
+-};
+-
+-&mdio0 {
+-	ext_rgmii_phy: ethernet-phy@1 {
+-		compatible = "ethernet-phy-ieee802.3-c22";
+-		reg = <1>;
+-	};
+ };
+ 
+ &mmc0 {
+ 	vmmc-supply = <&reg_dcdce>;
+-	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>;	/* PF6 */
+-	bus-width = <4>;
+-	status = "okay";
+-};
+-
+-&ohci1 {
+-	status = "okay";
+ };
+ 
+ &r_rsb {
+@@ -211,44 +135,3 @@
+ 	vcc-ph-supply = <&reg_aldo1>;
+ 	vcc-pi-supply = <&reg_aldo1>;
+ };
+-
+-&spi0  {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&spi0_pins>, <&spi0_cs0_pin>;
+-
+-	flash@0 {
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "jedec,spi-nor";
+-		reg = <0>;
+-		spi-max-frequency = <40000000>;
+-	};
+-};
+-
+-&uart0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart0_ph_pins>;
+-	status = "okay";
+-};
+-
+-&usbotg {
+-	/*
+-	 * PHY0 pins are connected to a USB-C socket, but a role switch
+-	 * is not implemented: both CC pins are pulled to GND.
+-	 * The VBUS pins power the device, so a fixed peripheral mode
+-	 * is the best choice.
+-	 * The board can be powered via GPIOs, in this case port0 *can*
+-	 * act as a host (with a cable/adapter ignoring CC), as VBUS is
+-	 * then provided by the GPIOs. Any user of this setup would
+-	 * need to adjust the DT accordingly: dr_mode set to "host",
+-	 * enabling OHCI0 and EHCI0.
+-	 */
+-	dr_mode = "peripheral";
+-	status = "okay";
+-};
+-
+-&usbphy {
+-	usb1_vbus-supply = <&reg_usb1_vbus>;
+-	status = "okay";
+-};
+diff --git a/arch/arm/dts/sun50i-h616-x96-mate.dts b/arch/arm/dts/sun50i-h616-x96-mate.dts
+index 07424c28b69..959b6fd1848 100644
+--- a/arch/arm/dts/sun50i-h616-x96-mate.dts
++++ b/arch/arm/dts/sun50i-h616-x96-mate.dts
+@@ -1,4 +1,4 @@
+-// SPDX-License-Identifier: (GPL-2.0+ or MIT)
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+ /*
+  * Copyright (C) 2021 Arm Ltd.
+  */
+diff --git a/arch/arm/dts/sun50i-h618-orangepi-zero3.dts b/arch/arm/dts/sun50i-h618-orangepi-zero3.dts
+new file mode 100644
+index 00000000000..00fe28caac9
+--- /dev/null
++++ b/arch/arm/dts/sun50i-h618-orangepi-zero3.dts
+@@ -0,0 +1,94 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2023 Arm Ltd.
++ */
++
++/dts-v1/;
++
++#include "sun50i-h616-orangepi-zero.dtsi"
++
++/ {
++	model = "OrangePi Zero3";
++	compatible = "xunlong,orangepi-zero3", "allwinner,sun50i-h618";
++};
++
++&emac0 {
++	phy-supply = <&reg_dldo1>;
++};
++
++&ext_rgmii_phy {
++	motorcomm,clk-out-frequency-hz = <125000000>;
++};
++
++&mmc0 {
++	/*
++	 * The schematic shows the card detect pin wired up to PF6, via an
++	 * inverter, but it just doesn't work.
++	 */
++	broken-cd;
++	vmmc-supply = <&reg_dldo1>;
++};
++
++&r_i2c {
++	status = "okay";
++
++	axp313: pmic@36 {
++		compatible = "x-powers,axp313a";
++		reg = <0x36>;
++		#interrupt-cells = <1>;
++		interrupt-controller;
++		interrupt-parent = <&pio>;
++		interrupts = <2 9 IRQ_TYPE_LEVEL_LOW>;	/* PC9 */
++
++		vin1-supply = <&reg_vcc5v>;
++		vin2-supply = <&reg_vcc5v>;
++		vin3-supply = <&reg_vcc5v>;
++
++		regulators {
++			/* Supplies VCC-PLL, so needs to be always on. */
++			reg_aldo1: aldo1 {
++				regulator-always-on;
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++				regulator-name = "vcc1v8";
++			};
++
++			/* Supplies VCC-IO, so needs to be always on. */
++			reg_dldo1: dldo1 {
++				regulator-always-on;
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-name = "vcc3v3";
++			};
++
++			reg_dcdc1: dcdc1 {
++				regulator-always-on;
++				regulator-min-microvolt = <810000>;
++				regulator-max-microvolt = <990000>;
++				regulator-name = "vdd-gpu-sys";
++			};
++
++			reg_dcdc2: dcdc2 {
++				regulator-always-on;
++				regulator-min-microvolt = <810000>;
++				regulator-max-microvolt = <1100000>;
++				regulator-name = "vdd-cpu";
++			};
++
++			reg_dcdc3: dcdc3 {
++				regulator-always-on;
++				regulator-min-microvolt = <1100000>;
++				regulator-max-microvolt = <1100000>;
++				regulator-name = "vdd-dram";
++			};
++		};
++	};
++};
++
++&pio {
++	vcc-pc-supply = <&reg_dldo1>;
++	vcc-pf-supply = <&reg_dldo1>;
++	vcc-pg-supply = <&reg_aldo1>;
++	vcc-ph-supply = <&reg_dldo1>;
++	vcc-pi-supply = <&reg_dldo1>;
++};
+diff --git a/include/dt-bindings/clock/sun50i-h6-ccu.h b/include/dt-bindings/clock/sun50i-h6-ccu.h
+index a1545cd60e7..ef9123d8193 100644
+--- a/include/dt-bindings/clock/sun50i-h6-ccu.h
++++ b/include/dt-bindings/clock/sun50i-h6-ccu.h
+@@ -1,4 +1,4 @@
+-// SPDX-License-Identifier: (GPL-2.0+ or MIT)
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (C) 2017 Icenowy Zheng <icenowy@aosc.io>
+  */
+diff --git a/include/dt-bindings/clock/sun50i-h616-ccu.h b/include/dt-bindings/clock/sun50i-h616-ccu.h
+index 1191aca53ac..6f8f01e6762 100644
+--- a/include/dt-bindings/clock/sun50i-h616-ccu.h
++++ b/include/dt-bindings/clock/sun50i-h616-ccu.h
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ or MIT) */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (C) 2020 Arm Ltd.
+  */
+diff --git a/include/dt-bindings/clock/sun6i-rtc.h b/include/dt-bindings/clock/sun6i-rtc.h
+index c845493e4d3..3bd3aa3d57c 100644
+--- a/include/dt-bindings/clock/sun6i-rtc.h
++++ b/include/dt-bindings/clock/sun6i-rtc.h
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ or MIT) */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ 
+ #ifndef _DT_BINDINGS_CLK_SUN6I_RTC_H_
+ #define _DT_BINDINGS_CLK_SUN6I_RTC_H_
+diff --git a/include/dt-bindings/reset/sun50i-h6-ccu.h b/include/dt-bindings/reset/sun50i-h6-ccu.h
+index 81106f45509..d038ddfa481 100644
+--- a/include/dt-bindings/reset/sun50i-h6-ccu.h
++++ b/include/dt-bindings/reset/sun50i-h6-ccu.h
+@@ -1,4 +1,4 @@
+-// SPDX-License-Identifier: (GPL-2.0+ or MIT)
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (C) 2017 Icenowy Zheng <icenowy@aosc.io>
+  */
+diff --git a/include/dt-bindings/reset/sun50i-h6-r-ccu.h b/include/dt-bindings/reset/sun50i-h6-r-ccu.h
+index 7950e799c76..d541ade884f 100644
+--- a/include/dt-bindings/reset/sun50i-h6-r-ccu.h
++++ b/include/dt-bindings/reset/sun50i-h6-r-ccu.h
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ or MIT) */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.xyz>
+  */
+diff --git a/include/dt-bindings/reset/sun50i-h616-ccu.h b/include/dt-bindings/reset/sun50i-h616-ccu.h
+index cb6285a8d12..1bd8bb0a11b 100644
+--- a/include/dt-bindings/reset/sun50i-h616-ccu.h
++++ b/include/dt-bindings/reset/sun50i-h616-ccu.h
+@@ -1,4 +1,4 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ or MIT) */
++/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+ /*
+  * Copyright (C) 2020 Arm Ltd.
+  */
 -- 
 2.35.8
 
