@@ -4,67 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09ED9CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 18:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ACDDC001DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 18:43:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59316874DC;
-	Fri, 20 Oct 2023 20:05:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A955874FB;
+	Fri, 20 Oct 2023 20:43:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TQhgyFIq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W1VxGsW2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4405E874DD; Fri, 20 Oct 2023 20:05:53 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B08BD874FC; Fri, 20 Oct 2023 20:43:01 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2919874DB
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 20:05:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71AE4874F8
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 20:42:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39KI5jKd001714;
- Fri, 20 Oct 2023 13:05:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697825145;
- bh=rMW8XW6Z8xZ3NasZzSsfsU1Lt1giq0D1MuxknHxke5Q=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=TQhgyFIquRSMdfUQXLOwvbucbafX4wT6MTzWgiv3lXKU0JQFpsDtfLpNIjpYqldUz
- 9yQcQJ5YocnlKgohGDzjbam7P16fKuK2Ee3jxSf1avJIlUcY9vWzheknSdw2/ReiTv
- vRi6lS4zHruBrVkGEl1PnWK/9zRqHv0Y6wDvI1Yk=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39KI5jow125340
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 20 Oct 2023 13:05:45 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
- Oct 2023 13:05:45 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 20 Oct 2023 13:05:45 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39KI5jPk073462;
- Fri, 20 Oct 2023 13:05:45 -0500
-Date: Fri, 20 Oct 2023 13:05:45 -0500
-From: Nishanth Menon <nm@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: Prasanth Babu Mantena <p-mantena@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>,
- <vigneshr@ti.com>, <a-nandan@ti.com>, <n-francis@ti.com>
-Subject: Re: [RESEND PATCH] board: ti: common: board_detect: Fix EEPROM
- offset read for 1-byte
-Message-ID: <20231020180545.hkum2onmfgufubvy@parade>
-References: <20231020070128.28320-1-p-mantena@ti.com>
- <64f98f61-4b54-5bd4-f238-d101f0335b7d@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-1ea48ef2cbfso893350fac.2
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 11:42:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697827375; x=1698432175; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=not3VwtTGNgVrUR+v7u8KRKbikWl5f0cWiC/jB+WwGc=;
+ b=W1VxGsW2+EnZnOimOU9f9QVUM2ZpNAVHvi7XE4eTDYXSOHqXUgOuDw5bZay/P4j1QW
+ RG95p0N+dtW73DczUcKzzbXjeXhRe2iu1Q/tQIkJ3uQn8uYmQ3lPlmjvVart+meUFAvX
+ jnmxE511JTOWIXTG19f2I+LNMbGumZisnKuvCEEZ9MuSeY05d6t2D0f4IiyVIHhUXtYn
+ 91SSnb3TE1MGjkUb/pSHknYra8L22nYEL6yJJKdCeppq4nJS2XCh0Zxj7EOyiVtE7x/d
+ M/dQ+oRuBxSKa8n+NsE64tvdYaQm4TR273V20C/JAe0oFpYHoAm1O8G+IW78EOKt9k6c
+ no5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697827375; x=1698432175;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=not3VwtTGNgVrUR+v7u8KRKbikWl5f0cWiC/jB+WwGc=;
+ b=IIM8DVClhEesEbtgOTpGo/M03SiC9aBCfR6ybpNJjAz9a1KeznY1JRxtD7wevT8lgt
+ dFp/+V6cqjBmvYfEZTS/XoCUJ90jOW+1y/vOidm/RvvN5CYINMYvwOUDwE7UVdpnQ/p2
+ XtjnUISjiOhT6qq4mrcBMELXP4GI7+rXOfQDuBZU3a6s7WnArK+DUZ08+Kx5PGD/VxKy
+ Dw7IzMSKKe+EhI7bmzjZU1ArHTc0ruPfkYuNEAWQ0dalbJ0O4mqpGzmQ9dRDuE9A9Qk1
+ vliNoM72BE710BUJGGRhKH5gdIsAoSk8/kBBZylYnCZX7fp6ZewbK7MBKhwNoIrBhzbF
+ unjw==
+X-Gm-Message-State: AOJu0YyPnO7I8roaBSTtEKNRYG6ny1HITa/mPl/HsoxkSTr878LVEr5n
+ 3ZDoCL7tVno40RKovTwW38c6Wg==
+X-Google-Smtp-Source: AGHT+IFc0uBNEpdb+olsUnH8kswtQByrqGfgg38dNqw372+/DhVSDbW/4fyAx4i7+ABl3e0DzJHcqQ==
+X-Received: by 2002:a05:6871:821:b0:1d6:4b84:c7ed with SMTP id
+ q33-20020a056871082100b001d64b84c7edmr3180553oap.23.1697827374964; 
+ Fri, 20 Oct 2023 11:42:54 -0700 (PDT)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ m7-20020a056870194700b001cc9bc7b569sm460048oak.27.2023.10.20.11.42.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Oct 2023 11:42:54 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+	Dzmitry Sankouski <dsankouski@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] board: samsung: Remove incorrect SYS_CONFIG_NAME in axy17lte
+ Kconfig
+Date: Fri, 20 Oct 2023 13:42:53 -0500
+Message-Id: <20231020184253.21915-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <64f98f61-4b54-5bd4-f238-d101f0335b7d@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,74 +89,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20:52-20231020, Kumar, Udit wrote:
-> Thanks Prasanth
-> 
-> On 10/20/2023 12:31 PM, Prasanth Babu Mantena wrote:
-> > EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
-> > size followed by reading 1-byte size with an offset 1. This commit fixes
-> > the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
-> > board_detect: Fix EEPROM read quirk for 2-byte").
-> You can fixes below as well. I think you can avoid this in commit message
-> > 
-> > In the previous commit, the value with one offset is being read into
-> > offset_test, but the pointer used to match was still ep. After reading
-> > with an offset 1, the second byte of the header is compared with the 1-byte
-> > data read from EEPROM. This is taken care by comparing proper first byte
-> > value from the header.
-> Nice catch
+The global SYS_CONFIG_NAME in axy17lte Kconfig overrides SYS_CONFIG_NAME
+for all boards specified after this line in
+arch/arm/mach-exynos/Kconfig:
 
-Yes indeed.. here is a possible improvement of  commit message:
+    source "board/samsung/axy17lte/Kconfig"
 
-EEPROM detection logic in ti_i2c_eeprom_get() involves reading the
-total size and the 1-byte size with an offset 1.
+Right now it's the last 'source' line there, so the issue is not
+reproducible. But once some board is moved or added after this line the
+next build error will happen:
 
-The value with one offset is read into "offset_test," but the pointer
-used to match was still "ep". This results in comparing results
-against the previously read data while the intent is to ensure the
-detection of the bad 2-byte addressing eeproms that get stuck after
-responding initially to 1- byte accesses. This behavior was detected
-on BeagleBone-AI64.
+      GEN     include/autoconf.mk.dep
+    In file included from ./include/common.h:16:
+    include/config.h:3:10: fatal error: configs/exynos78x0-common.h.h:
+                           No such file or directory
+        3 | #include <configs/exynos78x0-common.h.h>
+          |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    compilation terminated.
 
-> > 
-> > Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> > Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
-> Please consider Fixes line, first than Signed-off-by
+That's happening because axy17lte Kconfig defines SYS_CONFIG_NAME option
+in global namespace (not guarded with any "if TARGET_..."), so it
+basically rewrites the correct SYS_CONFIG_NAME defined in the
+hypothetical boards which might appear after axy17lte in mach-exynos
+Kconfig.
 
-Yup, fixes and SoB (checkpatch typically warns)
-> 
-> 
-> Please copy Nishanth in patch as well .
-> 
-> > ---
-> > Resending due to incorrect patch tag last time.
-> > 
-> >   board/ti/common/board_detect.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
-> > index 9a53884c98..17fe8f8069 100644
-> > --- a/board/ti/common/board_detect.c
-> > +++ b/board/ti/common/board_detect.c
-> > @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
-> >   	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
-> > -	if (*((u32 *)ep) != (header & 0xFF))
-> > +	if (offset_test != ((header >> 8) & 0xFF))
-> >   		one_byte_addressing = false;
-> >   	/* Corrupted data??? */
+Another side of the issue is that SYS_CONFIG_NAME is defined
+incorrectly in axy17lte Kconfig:
 
+    config SYS_CONFIG_NAME
+        default "exynos78x0-common.h"
 
-You missed the else CONFIG_IS_ENABLED(DM_I2C)  case with the same
-bug?
+The .h extension should not have been specified there. It's leading to
+the build error, as the generated include file has double '.h' extension.
 
-Also please CC Matwey V. Kornilov <matwey.kornilov@gmail.com> ,  Jason
-Kridner <jkridner@beagleboard.org> and Robert Nelson <robertcnelson@gmail.com>
+Fix the issue by simply removing the SYS_CONFIG_NAME definition in
+axy17lte Kconfig, as all related defconfigs already declare internal
+values for SYS_CONFIG_NAME:
 
-So that we don't have regressions on their boards.
+  - a5y17lte_defconfig
+  - a7y17lte_defconfig
+  - a3y17lte_defconfig
 
-https://lore.kernel.org/all/CAJs94Ebdd4foOjhGFu9Bop0v=B1US9neDLxfhgcY23ukgLzFOQ@mail.gmail.com/
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+Fixes: 3e2095e960b4 ("board: samsung: add support for Galaxy A series of 2017 (a5y17lte)")
+---
+ board/samsung/axy17lte/Kconfig | 8 --------
+ 1 file changed, 8 deletions(-)
 
+diff --git a/board/samsung/axy17lte/Kconfig b/board/samsung/axy17lte/Kconfig
+index a018547ff5d4..209394a8a5a8 100644
+--- a/board/samsung/axy17lte/Kconfig
++++ b/board/samsung/axy17lte/Kconfig
+@@ -1,11 +1,3 @@
+-config SYS_CONFIG_NAME
+-	string "Board configuration name"
+-	default "exynos78x0-common.h"
+-	help
+-	  This option contains information about board configuration name.
+-	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+-	  will be used for board configuration.
+-
+ if TARGET_A5Y17LTE
+ config SYS_BOARD
+ 	default "axy17lte"
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.39.2
+
