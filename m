@@ -4,58 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A49BCDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 09:30:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27558CDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 10:21:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF96B87459;
-	Fri, 20 Oct 2023 11:30:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6BFF187479;
+	Fri, 20 Oct 2023 12:21:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697794243;
-	bh=Ufsjf2embr5DDNmEdbVdC3IjX2054maszAujS7ivENw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=E63dGANhl9a7W9Hr+Gw7Ug0Vf8ctnvSVHB1n4JFTZnmC2OffUp5YqQwg7MEOAbiKc
-	 KrlRETFqIsbSZHrN9F37XKwnAJtIxvtF/E4ZfSx7MgXPT1SXp+ldcy4cGOkisq+F6b
-	 Ys8529b2HKKvFut+OYwnGKglWioVSYeUmr9Z2xa7dWaKoPQgnAWZR9m8+Ou/F8lWO5
-	 J84JwkyA0Gpmbsc5mkZr5gJDZGP2JLnR+Mr+5tblaiVaF+VQROfNjrcrOcftatDGyB
-	 ruWPFLgBA5OlMH9QwodPa2pgrJqv+ddO2L3isT9ZZgkI1FwtmQ0j5Dk3Z9nkOEqXrG
-	 5fjPYqumYomTQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 02AEC8745B; Fri, 20 Oct 2023 11:30:43 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DADD87280
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 11:30:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="aT99BPqW";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5508087476; Fri, 20 Oct 2023 12:21:23 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4SBfT80hvkz9t4F;
- Fri, 20 Oct 2023 11:30:36 +0200 (CEST)
-Message-ID: <42f08b26-ad20-4edd-9e70-4e2d676c7f5a@denx.de>
-Date: Fri, 20 Oct 2023 11:30:31 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 40E0780F06
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 12:21:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=sartura.hr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robert.marko@sartura.hr
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9bf0ac97fdeso97964466b.2
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 03:21:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sartura.hr; s=sartura; t=1697797281; x=1698402081; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VJ/mQOEAMI18a06QHYq0i7pMNnph7rmZfPRHcbrS3Jc=;
+ b=aT99BPqW0x5IIu/1IGnylnutOnYTNWUg0zwU14IpZHbUdHG61lKvtoZR3qW2oZSBMX
+ wtiwnmbrhAVQa2T4qHl92bx9CoFYizuwkzTdp5mmERsgCDNy0GWJGy4RLu0p8u3CpfE0
+ jLocTLhIDfroQj1Gsr3nOSBCqvmTIQMOUKWerPIKhCrxgRLXk8OiSygG41oLac6/P2wY
+ RiS5tboacmxPaGnawbxAcT8M0ji/tklr0VOyAa+PFyTcgmtDVh4qv/Lu9GTLCS+MDZ7c
+ TG0f5Uf8zg5RhkVr20wKbt9uaJ4VSsjVVTGXIRkVFcGPi2ZEm6ZGhhf1Fbp4et5SzRBb
+ fS1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697797281; x=1698402081;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VJ/mQOEAMI18a06QHYq0i7pMNnph7rmZfPRHcbrS3Jc=;
+ b=FIMssQV4h471TpME/kEP3xfjGJVxG0zeqnMxiQ+OKIuITKNIef7GgG7hCPrgC9V4tb
+ KRWyNlIZD4QlaU6evxBUHvGUBLkvaGkserS6IEo50lgNkvYKgNv5KSNYiUNPIHZ9C/1m
+ zfYo04clc9HrPqEgtW9omblbQFFnZKRhoEIyLn+/9xfG6yd2YVpmwhlyUUkF9M8mBW5o
+ G0HmK3g+TYeQsyvI88CzD3Kj7Efndk3PUWMoZHXvh5D9pvT0jrpaebltRknG7xse+IN4
+ JN5mqNdikqVbboCSV5kSFC0d7xIzyQ2hc1YGJpkhCClvadqpUk+rVQUFpBXn3bHMhTus
+ 662Q==
+X-Gm-Message-State: AOJu0YxZ5duhh7LMraHgchSyvKgcf1LSwfY65JJbQ7iTM3vNRhU7Aswa
+ zhP7UxM8h2EnE9mkcgQpYUf4WA==
+X-Google-Smtp-Source: AGHT+IFzdsOma789YoYIqNlEWSHsVOo4MY3nL3Bm2raRGojctRYEa1C8zFwzyzMV64T9ySEvTNEBew==
+X-Received: by 2002:a17:907:9724:b0:9bd:f3b0:c087 with SMTP id
+ jg36-20020a170907972400b009bdf3b0c087mr1012118ejc.2.1697797280569; 
+ Fri, 20 Oct 2023 03:21:20 -0700 (PDT)
+Received: from fedora.. (dh207-96-32.xnet.hr. [88.207.96.32])
+ by smtp.googlemail.com with ESMTPSA id
+ e27-20020a170906749b00b009a198078c53sm1204693ejl.214.2023.10.20.03.21.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Oct 2023 03:21:19 -0700 (PDT)
+From: Robert Marko <robert.marko@sartura.hr>
+To: sr@denx.de,
+	u-boot@lists.denx.de
+Cc: Robert Marko <robert.marko@sartura.hr>
+Subject: [PATCH v2 1/3] arm: mvebu: Espressobin: move FDT fixup into a
+ separate function
+Date: Fri, 20 Oct 2023 12:20:53 +0200
+Message-ID: <20231020102117.1583572-1-robert.marko@sartura.hr>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/3] cmd: mvebu/bubt: move eMMC data-partition uboot from
- LBA-0 to 4096
-Content-Language: en-US
-To: Josua Mayer <josua@solid-run.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, kabel@kernel.org
-References: <20231008124621.18803-1-josua@solid-run.com>
- <20231008124621.18803-3-josua@solid-run.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231008124621.18803-3-josua@solid-run.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4SBfT80hvkz9t4F
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,55 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/8/23 14:46, Josua Mayer wrote:
-> A38x bootrom only searches 2 sectors when booting from eMMC,
-> irregardless of data or boot partition: 0 & 4096.
-> 
-> For eMMC boot partitions sector 0 is fine, but on data partition it
-> conflicts with MBR.
-> 
-> Change bubt command default to 4096 for eMMC data partition only, to
-> allow using an MBR partition table on the eMMC data partition while also
-> booting from it.
-> 
-> Signed-off-by: Josua Mayer <josua@solid-run.com>
-> ---
->   cmd/mvebu/bubt.c | 9 +++++++--
->   1 file changed, 7 insertions(+), 2 deletions(-)
-> 
-> diff --git a/cmd/mvebu/bubt.c b/cmd/mvebu/bubt.c
-> index ca24a5c1c4b..eb1fef9243d 100644
-> --- a/cmd/mvebu/bubt.c
-> +++ b/cmd/mvebu/bubt.c
-> @@ -240,9 +240,14 @@ static int mmc_burn_image(size_t image_size)
->   #endif
->   
->   	/* SD reserves LBA-0 for MBR and boots from LBA-1,
-> -	 * MMC/eMMC boots from LBA-0
-> +	 * MMC/eMMC boots from LBA-0 and LBA-4096
->   	 */
-> -	start_lba = IS_SD(mmc) ? 1 : 0;
-> +	if (IS_SD(mmc))
-> +		start_lba = 1;
-> +	else if (!part)
-> +		start_lba = 4096;
-> +	else
-> +		start_lba = 0;
->   #ifdef CONFIG_BLK
->   	blk_count = image_size / mmc->write_bl_len;
->   	if (image_size % mmc->write_bl_len)
+Currently, Esspresobin FDT is being fixed up directly in ft_board_setup()
+which makes it hard to add support for any other board to be fixed up.
 
-This patch leads to this error, e.g. for turris_mox_defconfig:
+So, lets just move the FDT fixup code to a separate function and call it
+if compatible matches, there should be no functional change.
 
-cmd/mvebu/bubt.c: In function 'mmc_burn_image':
-cmd/mvebu/bubt.c:247:19: error: 'part' undeclared (first use in this 
-function)
-   247 |         else if (!part)
-       |                   ^~~~
-cmd/mvebu/bubt.c:247:19: note: each undeclared identifier is reported 
-only once for each function it appears in
+Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+Reviewed-by: Stefan Roese <sr@denx.de>
+---
+ board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
 
-Could you please check and fix?
+diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
+index 04124d8014..1471caa9a6 100644
+--- a/board/Marvell/mvebu_armada-37xx/board.c
++++ b/board/Marvell/mvebu_armada-37xx/board.c
+@@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
+ #endif
+ 
+ #ifdef CONFIG_OF_BOARD_SETUP
+-int ft_board_setup(void *blob, struct bd_info *bd)
++static int espressobin_fdt_setup(void *blob)
+ {
+-#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+ 	int ret;
+ 	int spi_off;
+ 	int parts_off;
+ 	int part_off;
+ 
+ 	/* Fill SPI MTD partitions for Linux kernel on Espressobin */
+-	if (!of_machine_is_compatible("globalscale,espressobin"))
+-		return 0;
+-
+ 	spi_off = fdt_node_offset_by_compatible(blob, -1, "jedec,spi-nor");
+ 	if (spi_off < 0)
+ 		return 0;
+@@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 		return 0;
+ 	}
+ 
++	return 0;
++}
++
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
++	if (of_machine_is_compatible("globalscale,espressobin"))
++		return espressobin_fdt_setup(blob);
+ #endif
+ 	return 0;
+ }
+-- 
+2.41.0
 
-Thanks,
-Stefan
