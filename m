@@ -4,66 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F45ACDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 04:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F99CDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 04:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18A7087230;
-	Fri, 20 Oct 2023 06:23:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C94EE86F42;
+	Fri, 20 Oct 2023 06:26:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697775810;
-	bh=I8EVaiUKC1WqPLuZLtAq6G0SIyPvhplXttMF1szYzaE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=gVXJ0FETrcTmnX0I+syeWJov4Qr/V+zVVkdJSkPeGW4KXskMzWSEhVK40iFSl2WKg
-	 wzVPiise/yJBBFZUobG+xJ1ETxeJuS3MsGk/yQQ9iR2W9uEaNmOHf4QKVIqERouWtJ
-	 dBGX2bgEmJO4nivmVNaXNNTnk2A9PH1WrErcHyYeyN14AdeRacb90PsSR3hR2fhD3n
-	 gxGdt7NTv5lGPMqMRxkHQ4oqllw1lzaRH7FH+gECY1L45eDq0bGYml5sYwJrkDUPfU
-	 O05QxZKSm0/iR06Qkm9UCgWv+RvfOGCzaBkVd4s+MHrAR387R3sS59K4fcstALnhRL
-	 WvMxkxT4IPEiQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HyBWJsCm";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YXGma3Ll";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D7F9B86F52; Fri, 20 Oct 2023 06:26:23 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CE837871F6;
- Fri, 20 Oct 2023 06:23:27 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697775808;
- bh=I8EVaiUKC1WqPLuZLtAq6G0SIyPvhplXttMF1szYzaE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=l6+uH+tdAp7MH6hOJEFZQ5FTSfRhlbRoItos2DFBnEhPCLmTPRk39sjSlSWrokpaC
- i7/r3CWAhTkV+LUE3XZsG1OYTOs4dT6cAJJ+YKJrsAPP6ENa9IOnbglStD56kJ0wNT
- QytHVB5YiZDXDMssekKMapIhrFI5rmNhtwLnXeRiUl4Hfel60hFvCNUUQtmsxsAcgM
- mF4nABYvQIeA9/22yPwa6BefmhBcKjhByoJJIQ97LKazMp8LRZvI4CcpUYCCDAwgP8
- CeqDluzzuFN1xA++BTMU4wTCdIjgrphUZuiX0i4kxPa6d2zdqroryZz5kHpov+Kp2y
- 5fkTqGMBRIttg==
-Message-ID: <db121593-6678-4069-bf11-dc67308f66c6@denx.de>
-Date: Fri, 20 Oct 2023 06:23:27 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E900B86F0D
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 06:26:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4SBWk553hDz9sdW;
+ Fri, 20 Oct 2023 06:26:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697775981;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PyYgILf1CnLfrhxVu04YbZyMF+53tWAxjLircnrEofE=;
+ b=HyBWJsCm2rr3j3hR1L8FMuhcMzC93mSv3Q6b1jepa9dgpCEu55qOd4oSs1GYr22RkrePsu
+ vYBLdqkTsl+YYhSHkGEarAXTqTjM3KeUYv3h9wbunwcXBZUMFx8H+wpIpX1/G2B4BHRs52
+ QF/lxX03if3flPpwunLi69PEUU4AxwiDtiu1+dvkE6vplVM94W7jAHWL3BtJgdJ1P3XIrT
+ AQM5uzrKshZVeXXSC4alv8X+sFtM3E8/Ra02LoNeBqLQe62VpGFdT9nulsxUQzqU2J0//B
+ xAxlZNuvExXClWyC6jdkTugo4fT/O6wmxCd26MtUVARdeFR9Wwu7B9FMMsYoBQ==
+Message-ID: <12dcbb2d-9ef8-459e-a20b-cd70ba0ef653@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697775979;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PyYgILf1CnLfrhxVu04YbZyMF+53tWAxjLircnrEofE=;
+ b=YXGma3LlM2OS0sDJnbwsfxR23VE6OsFPCRyZVTfZpGxGYr2LafKvWga2oO4GeHyGLoa+4s
+ YOOXxBFsZCJWE8+4hwC89N9Xf80rD5H4XJL/mRwi1X5+y+mYpE1vknbBRUjMIYgZ37Svcm
+ ti53bhtdaNo+F9qEdTo78eAF7JRGbdjJU4j/2YY7zwfJOrUKarSe7aqpfC/A39ahw1JgW4
+ vm/bB/+9HNXrisoCK1cemIMZ2+fSCLSBNqINmQ9H+hL5NbfObR2/dAJ+LrArE3DorKiStd
+ D31ScXFoCOZFS0Pg4ZJhz+SUkvyNXagLwinGXzDfz7nvgNXoSZ5sUNJEqPjzqg==
+Date: Fri, 20 Oct 2023 06:26:16 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] configs: rockchip: Use dwc3-generic driver on RK3328
- and RK3399
+Subject: Re: [PATCH] mmc: renesas-sdhi: Fix error handling in rzg2l_sdhi_setup
 Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
- Xiaobo Tian <peterwillcn@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: u-boot@lists.denx.de
-References: <20231018223058.2081052-1-jonas@kwiboo.se>
- <20231018223058.2081052-2-jonas@kwiboo.se>
- <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
- <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+References: <20231019145038.14701-1-paul.barker.ct@bp.renesas.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231019145038.14701-1-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: fe28ea14bb14b042f8c
+X-MBO-RS-META: g4uonnaejhpfc9dyze1zq8beaqcw6ide
+X-Rspamd-Queue-Id: 4SBWk553hDz9sdW
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,55 +90,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/19/23 22:39, Jonas Karlman wrote:
-> On 2023-10-19 01:44, Marek Vasut wrote:
->> On 10/19/23 00:30, Jonas Karlman wrote:
->>
->> [..]
->>
->>> +++ b/configs/rock960-rk3399_defconfig
->>> @@ -50,6 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->>>    CONFIG_SYS_MMC_ENV_DEV=1
->>>    CONFIG_ROCKCHIP_GPIO=y
->>>    CONFIG_SYS_I2C_ROCKCHIP=y
->>> +CONFIG_MISC=y
->>>    CONFIG_MMC_DW=y
->>>    CONFIG_MMC_DW_ROCKCHIP=y
->>>    CONFIG_MMC_SDHCI=y
->>> @@ -70,12 +71,12 @@ CONFIG_SYS_NS16550_MEM32=y
->>>    CONFIG_SYSRESET=y
->>>    CONFIG_USB=y
->>>    CONFIG_USB_XHCI_HCD=y
->>> -CONFIG_USB_XHCI_DWC3=y
->>>    CONFIG_USB_EHCI_HCD=y
->>>    CONFIG_USB_EHCI_GENERIC=y
->>>    CONFIG_USB_OHCI_HCD=y
->>>    CONFIG_USB_OHCI_GENERIC=y
->>>    CONFIG_USB_DWC3=y
->>> +CONFIG_USB_DWC3_GENERIC=y
->>
->> Why not add 'default y if ROCKCHIP' into the Kconfig instead ? This will
->> have the same effect, without requiring such massive modification of
->> config files.
+On 10/19/23 16:50, Paul Barker wrote:
+> We should ensure that reset_free() is called in the error path.
 > 
-> Not fully sure what you mean by this and how that would reduce number of
-> affected defconfig-files. The USB_XHCI_DWC3 should still be removed from
-> these defconfig-files or wrong driver could be used by these boards.
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Fixes: 93c811b7331b ("mmc: renesas-sdhi: Initialize module on RZ/G2L")
+> ---
+>   drivers/mmc/renesas-sdhi.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
-> Touching the defconfig-files help notify board maintainers that changes
-> are happening to their boards.
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 1ea6e1066f2b..865efdd32184 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -998,7 +998,7 @@ static int rzg2l_sdhi_setup(struct udevice *dev)
+>   	ret = reset_get_by_index(dev, 0, &rst);
+>   	if (ret < 0) {
+>   		dev_err(dev, "failed to get reset line\n");
+> -		goto err_reset;
+> +		goto err_get_reset;
+>   	}
+>   
+>   	ret = reset_deassert(&rst);
+> @@ -1016,6 +1016,8 @@ static int rzg2l_sdhi_setup(struct udevice *dev)
+>   err_tmio_probe:
+>   	reset_assert(&rst);
+>   err_reset:
+> +	reset_free(&rst);
+> +err_get_reset:
+>   	clk_disable(&aclk);
+>   err_aclk:
+>   	clk_disable(&imclk2);
 > 
-> There will also be a separate patch that remove the rockchip,rk3399-dwc3
-> compatible from the dwc3-of-simple driver to finalize this transition to
-> use dwc3-generic driver for affected rockchip boards.
+> base-commit: 9a0cf3993f71043ba08c315572c54622de42d447
 
-It wasn't clear to me you're switching one driver to another, thanks for 
-clarification.
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-"
-Also enable DM_USB_GADGET for any board that enable
-USB_DWC3_GADGET.
-"
+btw is email playing tricks on me , or is Jaehoon and Peng not on CC ?
+$ ./scripts/get_maintainer.pl -f drivers/mmc/renesas-sdhi.c
 
-This you can do in Kconfig file, something like:
-select DM_USB_GADGET if USB_DWC3_GADGET && <rockchip>
+(I added them to this mail)
