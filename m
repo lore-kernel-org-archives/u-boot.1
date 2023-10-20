@@ -4,74 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C91E1CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 08:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAAB5CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 08:22:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BEF6870B0;
-	Fri, 20 Oct 2023 10:21:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F89D86FB0;
+	Fri, 20 Oct 2023 10:22:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PLHuRXGP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lNgDhSrb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 010EB86FB0; Fri, 20 Oct 2023 10:21:53 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 214FA86FB0; Fri, 20 Oct 2023 10:22:11 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FB6386FB0
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 10:21:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F09F8743C
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 10:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9bf0ac97fdeso82094666b.2
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 01:21:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507c1936fd5so1873361e87.1
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 01:22:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697790109; x=1698394909; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697790126; x=1698394926; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zFA09g7VCc6TBL0x5GblSQyMKDPCXSOAnafRplNIEc8=;
- b=PLHuRXGPfN33+4B+NrF/fO6ZXGDAXjOpDj60a0waR9hjPjYiI54P6kZ0sq4Nuni/do
- 94z1BMM2dtup1hmC7YFj/lDAeNC71pihPwP6Ms3Kx11bk3/EXMRy2J9s/UyCDFpTSG3M
- K18iDcU1heshXykdmJP7+7jBauM9udwkucpUMFeacQ8vM25M2sRA9WFQEkTm4EEDWUrq
- MjsYCV98Uibdor1SCaUXZYAVqn3xjkVLPLzZMTXPmS4n217zv5/B+DUZhnnpovxR5ziS
- /23a5Yty2q7yRKLSXUhYFuUByXwMl9EhP2Lh4ZIefcHBghEL3PDou5YGM6wk5AsuJOZw
- aVuQ==
+ bh=nyF7MZM9sMB1dmdbwfLg+hXUQn9NJPXX+8lqz5/Rb2o=;
+ b=lNgDhSrbvh6SW63YGyKujN2u0RFS6wo5y6vR1oNTjHpg8w10qgwURixWiuleUXo3Xw
+ bWV4YN8icjnK7V8NiiZFkf3xNsV4L3VDrDsxnYUrRX59z9cohV7U9o3yPpO2WOF9pm+U
+ An40GugZ6sobJM7VsqP0EuDAhvAAkcNbAVTBUKutZla3ns0ivDHpSbCzxEV1oldzeJAd
+ yaSB9dRQZ9JS/HCw/5mbkI6KxwZ2Kp9PzUJDonyiGZ1ud9cMvDNTZh+6m3ebKu1+W6FG
+ w3ELlPlptfLKrDllG5pJCRe2CNMgcTm97e5WWbFrKHslUrXiFS1IWACvEJE6yp2wM1IY
+ ezwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697790109; x=1698394909;
+ d=1e100.net; s=20230601; t=1697790126; x=1698394926;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zFA09g7VCc6TBL0x5GblSQyMKDPCXSOAnafRplNIEc8=;
- b=pbqJm7s6mB0ogh6YWfymrEdaNhY/TM66rEdWl7UsNvgY8CaPtuANYWVH8H9CMjtTKi
- Wcip8XNoKIYZluFwPPBqdjnAcXPWqha/s32KanrtkM4u/PjgTTpHdvC7PTYoJZN7JA8t
- Z0rG2zIlq0j2uiDE0qwiTi5NmGXbwCP4U5YpUbMcubqicH6cHGBEo2J9743qhs9PbkUT
- pRdwAGPc0xBvOGy+9eVYIaJ+1tNCdGJNjqZZE96IXRdTUWG6VdNYjLcUytdp4mcP2Om6
- SqR/Fpp00Oe0iwYjbUwhgJpM2hYYlRdGFFSiCWh1D63mbSOJuG5XRk9SAduShDW3PIVE
- sxxA==
-X-Gm-Message-State: AOJu0Yx2s+VFvjr3ukMF2PAuEE43SgscWVvoMLDLDmfRY/1NF9hOU+7S
- mXc49dUPy+5we7+VPBh/vBdwrEhMcie0nltt4UGQI9YM
-X-Google-Smtp-Source: AGHT+IHwfJZi3sb91D/iF2LthRaWIr5Qtsbb33jeA8tAopHv5piduuJGYEE8YbhBlJGPywPG2MkUO/qyw3gVN07XZZU=
-X-Received: by 2002:a17:907:2d27:b0:9a1:c991:a521 with SMTP id
- gs39-20020a1709072d2700b009a1c991a521mr681091ejc.4.1697790109411; Fri, 20 Oct
- 2023 01:21:49 -0700 (PDT)
+ bh=nyF7MZM9sMB1dmdbwfLg+hXUQn9NJPXX+8lqz5/Rb2o=;
+ b=L3lNMay6eZBK3cxkmFexyI6hKlfRwgdA9PDnZiEFnvUkDble4fqD7MVbi6YGhEESwe
+ 5c4r9z89ILfXKSVzF/9Ji/XJesIMW7E5vFnyXHYge/YUOSej2DiM2QdGSip5yRBL57yK
+ Di/y2iM5mpan3vhkmC+x2gYwlVHFh+dBKqdP9vUVoYxZYpQyT/EV/IqsqGfEXw7jKFD8
+ Ujyz2qCqvCcNfdK2eRyzmRaDwPCWbgfVJU09Kh9Q5KeDYjbaEezvK/ZqIUU+MdOFHd/J
+ Wj5f2khpJW/flgsXzK+bP54rv+AXuzWZkUKAgmG0NFawUZ0+gfNuFy6cqbSGfH9orE/x
+ d6CA==
+X-Gm-Message-State: AOJu0YyCNn9kxVp0fC1oJH6ZEnmpKPBfjFs6N6LP+0HlWvue33dMMHTk
+ oJWjc9d4AtoPQYLACLB7SOM+Vq92iqNEuMX9UneAg0TLlS9mPphdGIM=
+X-Google-Smtp-Source: AGHT+IFJKA5Siy2EwYieiCGEkZKeUaHEWbNU86bJEikLwNCETLstygposFfncwMgJFOAh38wSU2sY4DN8V4AS70LzfE=
+X-Received: by 2002:a05:6512:3083:b0:500:a1e4:fc45 with SMTP id
+ z3-20020a056512308300b00500a1e4fc45mr1607613lfd.21.1697790125761; Fri, 20 Oct
+ 2023 01:22:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231018205358.1557234-1-judge.packham@gmail.com>
- <637b7903-e40c-4760-8f37-5dbbea5184a3@denx.de>
-In-Reply-To: <637b7903-e40c-4760-8f37-5dbbea5184a3@denx.de>
-From: Chris Packham <judge.packham@gmail.com>
-Date: Fri, 20 Oct 2023 21:21:37 +1300
-Message-ID: <CAFOYHZB7jJWwD24oWzx6u55w2whHYjK56f=QyN0LWU4Z8dSP+Q@mail.gmail.com>
-Subject: Re: [PATCH] arm: mvebu: AC5/AC5X: use fixed page table size
-To: Stefan Roese <sr@denx.de>
-Cc: u-boot <u-boot@lists.denx.de>, Marc Zyngier <maz@kernel.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-31-sjg@chromium.org>
+ <ZPA8AtGOel8pko6y@hades>
+ <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
+ <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
+ <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
+ <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
+ <CAPnjgZ2QV3t9FnY_7VBJ4NAYW8zPL9p1bktfcEP86AnXrFoA1w@mail.gmail.com>
+ <CAC_iWjKd60b2pPdQf195ef+a8_3jEHtXh085Sd7uPAik1mCu+Q@mail.gmail.com>
+ <700c3677-6fc1-40b0-9ca2-9f9e2cc824b0@amd.com>
+ <CAC_iWjJUbads2Trqxm_chnhypyZ+tTT2mXUw56z0Py9bgyBhZg@mail.gmail.com>
+ <8528ca89-16a7-48ba-95d3-72e7f3b107eb@amd.com>
+ <CAC_iWj+-Om7Aqh7YQf1LhSZOSETeZgtBMRZKp4_AaixA5RfbHA@mail.gmail.com>
+ <CAPnjgZ1ydE7y4UZPmvyaDTBVZdeQr=ftCnR1QtXB9TtewFkbxw@mail.gmail.com>
+ <CAC_iWjLyupx5XUUm99qJg2Zt-G4KeZpTBoxWKOeXZ9nNw8roeg@mail.gmail.com>
+ <CAPnjgZ1GGz6v8FzKOfNqqkZsVpQOzoM=Zz9hKcxpKgOt7oNssA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1GGz6v8FzKOfNqqkZsVpQOzoM=Zz9hKcxpKgOt7oNssA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 20 Oct 2023 11:21:29 +0300
+Message-ID: <CAC_iWjJwLtF7L-NRo-nkO4qM8wotd0FyePYVS9mGewCjQkjbRQ@mail.gmail.com>
+Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: Michal Simek <michal.simek@amd.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nikhil M Jain <n-jain1@ti.com>, 
+ Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,78 +105,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Oct 2023, 7:18 pm Stefan Roese, <sr@denx.de> wrote:
+Hi Simon,
 
-> Hi Chris,
+On Wed, 18 Oct 2023 at 18:26, Simon Glass <sjg@chromium.org> wrote:
 >
-> On 10/18/23 22:53, Chris Packham wrote:
-> > Since commit 6cdf6b7a340d ("arm64: Use FEAT_HAFDBS to track dirty pages
-> > when available") the default get_page_table_size() sets some flags for
-> > more efficient handling of dirty page table entries. This causes
-> > problems on the AC5/AC5X SoC (specifically a lockup when calling
-> > __asm_switch_ttbr() via mmu_set_region_dcache_behaviour()).
+> Hi Ilias,
+>
+> On Mon, 25 Sept 2023 at 04:19, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > The reason for the lockup isn't at all clear but it can be avoided if w=
-e
-> > provide our own get_page_table_size() which stops gd->arch.has_hafdbs
-> > from being set to true effectively returning the AC5/AC5X to the older
-> > behaviour. This also opts for a simple fixed page table size rather tha=
-n
-> > trying to duplicate the more complicated logic to optimise the table
-> > size.
+> > Hi Simon,
 > >
-> > Signed-off-by: Chris Packham <judge.packham@gmail.com>
->
-> I'm not 100% happy with this approach / workaround - still it fixes an
-> issue on your board, so:
->
-> Reviewed-by: Stefan Roese <sr@denx.de>
->
-
-Yeah I'm not super happy about this either. But this is about the best I
-could come up with.
-
-
-> Perhaps you (or someone else) can look into this in more depth to get
-> to the root of this issue at a later time.
->
-
-I did spend a reasonable amount of time tracking down where things were
-going wrong, even if I couldn't figure out why. The commit message
-basically reflects what I found.
-
-
-> Thanks,
-> Stefan
->
-> > ---
+> > [...]
 > >
-> >   arch/arm/mach-mvebu/alleycat5/cpu.c | 5 +++++
-> >   1 file changed, 5 insertions(+)
+> > > > > >>>>>>>>>> +config OF_BLOBLIST
+> > > > > >>>>>>>>>> +     bool "DTB is provided by a bloblist"
+> > > > > >>>>>>>>>> +     help
+> > > > > >>>>>>>>>> +       Select this to read the devicetree from the bloblist. This allows
+> > > > > >>>>>>>>>> +       using a bloblist to transfer the devicetree between  U-Boot phases.
+> > > > > >>>>>>>>>> +       The devicetree is stored in the bloblist by an early phase so that
+> > > > > >>>>>>>>>> +       U-Boot can read it.
+> > > > > >>>>>>>>>> +
+> > > > > >>>>>>>>>
+> > > > > >>>>>>>>> I dont think this is a good idea.  We used to have 4-5 different options
+> > > > > >>>>>>>>> here, which we tried to clean up and ended up with two very discrete
+> > > > > >>>>>>>>> options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
+> > > > > >>>>>>>>> have a header of some sort?  The bloblist literally comes from a previous
+> > > > > >>>>>>>>> stage bootloader which is what OF_BOARD is here for. So why can't we just
+> > > > > >>>>>>>>> read the header and figure out if the magic of the bloblist matches?
+> > > > > >>>>>>>>
+> > > > > >>>>>>>> No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
+> > > > > >>>>>>>>
+> > > > > >>>>>>>> This patch is a standard mechanism to pass the DT from one firmware
+> > > > > >>>>>>>> phase to the next. We have spent quite a bit of time creating a spec
+> > > > > >>>>>>>> for it, and we should use it.
+> > > > > >>>>>>>
+> > > > > >>>>>>> Where exactly am I objecting using the spec?   Can you please re-read my email?
+> > > > > >>>>>>> I am actually pointing out we should use the spec *properly*.  So
+> > > > > >>>>>>> instead of having a Kconfig option for the DT, which is pretty
+> > > > > >>>>>>> pointless,  we should parse the bloblist.  If the header defined by
+> > > > > >>>>>>> the *spec* is found, we should just search for the DT in there.
+> > > > > >>>>>>> What you are doing here, is take the spec, pick a very specific item
+> > > > > >>>>>>> that the list contains, and create a Kconfig option out of it.  Which
+> > > > > >>>>>>> basically ignores the discoverable options of the bloblist.  For
+> > > > > >>>>>>> example, that bloblist can also contain an entry to a TPM eventlog.
+> > > > > >>>>>>> Should we start creating Kconfig options for all the firmware handoff
+> > > > > >>>>>>> entries that are defined on that spec?
+> > > > > >>>>>>
+> > > > > >>>>>> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
+> > > > > >>>>>
+> > > > > >>>>> That's fine by me.  You can even put that under IS_ENABLED for the
+> > > > > >>>>> bloblist inside the existing OF_BOARD check.  So I was thinking
+> > > > > >>>>> - If no bloblist is required in Kconfig options we do the hacks we used to
+> > > > > >>>>> - if bloblist is selected and the config option is OF_BOARD, throw an
+> > > > > >>>>> error and mention that the previous stage loader should hand over a DT
+> > > > > >>>>>
+> > > > > >>>>> Is that what you had in mind?
+> > > > > >>>>
+> > > > > >>>> Yes, that sounds good to me.
+> > > > > >>>>
+> > > > > >>>> But I still think we need an OF_BLOBLIST option to control whether the
+> > > > > >>>> devicetree comes from there.
+> > > > > >>>>    Otherwise we will end up with people
+> > > > > >>>> using OF_BOARD to work around it. We also have the SPL case which does
+> > > > > >>>> not pass the DT in a bloblist...in fact SPL typically doesn't even
+> > > > > >>>> have the full DT.
+> > > > > >>>
+> > > > > >>> Wouldn't IS_ENABLED(BLOBLIST) || IS_ENABLED(SPL_BLOBLIST) be enough?
+> > > > > >>> Inside the OF_BOARD portion of the function, search for a bloblist if
+> > > > > >>> the option is enabled.  If you can't find a bloblist and the DT within
+> > > > > >>> that bloblist, then error out
+> > > > > >>
+> > > > > >> Just my 2c here.
+> > > > > >> I think all options should be possible to disable. It means I can imagine to
+> > > > > >> disable u-boot not to take care about DT provided from previous stage. The same
+> > > > > >> is for TPM event log. IMHO every stage should have an option to simply ignore
+> > > > > >> data pass from previous stage. I don't really mind how it is done but there
+> > > > > >> should be an option to by purpose say to ignore the part of pass data.
+> > > > > >
+> > > > > > That would be done by disabling BLOBLIST.  I don't think having a Kconfig to say
+> > > > > > "I want a bloblist, but I only want the DT from there" is reasonable
+> > > > > > (or for any other item the bloblist can carry).   OF_BOARD means the
+> > > > > > DT will come from a previous stage loader. If bloblist is enabled then
+> > > > > > the DT must come from there.
+> > > > >
+> > > > > I don't agree on this. If bloblist is enabled and DT is passed SW should have a
+> > > > > freedom to ignore it.
+> > > > >
+> > > > > At start everything is likely in sync but later stages before U-Boot can stay at
+> > > > > certain version but there could be a need to update u-boot where DT from
+> > > > > previous stage could be broken.
+> > > >
+> > > > But you *can* ignore it and load a different one later.  The only
+> > > > restriction is that if you compile u-boot with the assumption an early
+> > > > stage bootloader provides a DT you *must* find it.  But we will still
+> > > > just keep 2 options in U-Boot of how you get a DT.
+> > > > A previous loader provided it or U-Boot provided it.  Whether that
+> > > > comes from a bloblist or a register is irrelevant no ?
+> > >
+> > > I'm not sure what is being requested here, so I'll leave this as is for v2.
 > >
-> > diff --git a/arch/arm/mach-mvebu/alleycat5/cpu.c
-> b/arch/arm/mach-mvebu/alleycat5/cpu.c
-> > index 8204d9627515..7ba57ae75e76 100644
-> > --- a/arch/arm/mach-mvebu/alleycat5/cpu.c
-> > +++ b/arch/arm/mach-mvebu/alleycat5/cpu.c
-> > @@ -63,6 +63,11 @@ static struct mm_region ac5_mem_map[] =3D {
+> > Please don't.   A few mails above there's a discussion of how I'd
+> > prefer things to look like, please have a look and let me know if
+> > something isn't clear.
+> > tl;dr
+> >  "That's fine by me.  You can even put that under IS_ENABLED for the
+> >  bloblist inside the existing OF_BOARD check.  So I was thinking
+> >  - If no bloblist is required in Kconfig options we do the hacks we used to
+> >  - if bloblist is selected and the config option is OF_BOARD, throw an
+> > error and mention that the previous stage loader should hand over a DT"
 > >
-> >   struct mm_region *mem_map =3D ac5_mem_map;
+> > >
+> > > The main struggle I have is how to tell whether you expect to
+> > > *receive* the DT in the bloblist, or expect it to be attached to the
+> > > image and be *sent* to the next phase.
 > >
-> > +u64 get_page_table_size(void)
-> > +{
-> > +     return 0x80000;
-> > +}
-> > +
-> >   void reset_cpu(void)
-> >   {
-> >   }
+> > bloblist
+> >
+> > >
+> > > SPL - attached to image, send in bloblist
+> > > U-Boot proper - not attached to image, receive it from bloblist
+> > >
+> > > This is exactly the problem that is solved by the 'standard passage'
+> > > stuff [1] but that depends on Firmware Handoff and [2] which are not
+> > > ready yet...
+> > >
+> > > So I think what I have is the best we can do for now.
+> >
+> > We can avoid the extra complication in Kconfigs.  The DT either comes
+> > from u-boot itself or from a previous stage loader. we don't need the
+> > extra "it comes from a bloblist".
+> > If they come from a previous stage loader and BLOBLIST *is* enabled,
+> > then just scan for the DT, if you don't find it error out.
 >
-> Viele Gr=C3=BC=C3=9Fe,
-> Stefan Roese
+> Are you planning to send a patch for this? Otherwise, what do you
+> think about going with this one and dealing with OF_BOARD board by
+> board?
+
+Yes, I can do that.  Since this patch is part of your series, I'll
+send it over to you and carry it there
+
+Thanks
+/Ilias
+> > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+> > > [2] https://patchwork.ozlabs.org/project/uboot/list/?series=365719
 >
-> --
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
 >
+> Regards,
+> Simon
