@@ -4,97 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69736C001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 08:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F005C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 12:41:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18027875B5;
-	Sat, 21 Oct 2023 10:57:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
+	by phobos.denx.de (Postfix) with ESMTP id 32BA687618;
+	Sat, 21 Oct 2023 14:41:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="pzZsyT9N";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Wf+fw4Jv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gdbpE/Z0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27617875E1; Sat, 21 Oct 2023 10:57:46 +0200 (CEST)
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E40F586496; Sat, 21 Oct 2023 00:15:26 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9370F875AF
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 10:57:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9800B86C33
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 00:15:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sholland.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
- by mailout.nyi.internal (Postfix) with ESMTP id AAAC45C014E;
- Sat, 21 Oct 2023 04:57:39 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute3.internal (MEProxy); Sat, 21 Oct 2023 04:57:39 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
- 1697878659; x=1697965059; bh=O0clqO+jRUCfE+5NNjBa0AFyXaQaXaOluba
- ippYHMuY=; b=pzZsyT9NWnrmdtoxwzTsLQL/dXyFTCTPx2fsdWcXX0+qRLTJwBF
- 2d1PnzIom5bvsSNUPvaBDHI7J3drIWozFvREBNcpm8UqhsE2c2LaWFls7rHA63xD
- WuawEvExYLqgkxZdSsiKSrfw0F0xoOWrriuJ2DG7y/E/0T76YOwzDATeG9PFOz5A
- 9KQn3IXj7X9JTdAU/Ii/+sjjMv48YruO0rDIcmV1YfNbyRnqbWiV3mEJbNFPWnAV
- kdT3e9C8PHuGX3A1OweMbWSFTQwCb2JIQZaUaj/5ZEdXfE43auxS23xEJMowzTbM
- SUTtvmvGKy4c982cV2QUgffD//auP4UyS1A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1697878659; x=1697965059; bh=O0clqO+jRUCfE+5NNjBa0AFyXaQaXaOluba
- ippYHMuY=; b=Wf+fw4JvypGLU/CYlVzH90uEJtaGp/yzMe0FXcDa1KYR0JdD43K
- LN+hN7fm5vaiHhHaxoCS9aNTMZm9CrvUiFKuOq8q0k3VY2bFC2Dg4vrRstTy+5H8
- RueQC0pep7E8Eh3aFN+GYv4YOuQsoCmtD85XiQtda4Kmpns26CzKeK+cPd4Cniog
- g9kJIK9h6IUKeyrurVxDUAGR+FrHSvsJm8drQ0ICk2eLcATeEHYWhVUsGuxVPMvt
- EsfSrtRC6N5Bpc4WQ6gPbN4MtRxym0AaEl5kncprd49qcwwGJ7lThCRIsXtd9pOq
- qGiEfQESAFOEfHuX8JzAa1gFj6b4vhi3JMQ==
-X-ME-Sender: <xms:gpIzZe0nwD2sSLDGiILk13xlyhgr2lA_CofhGMXGCXi5yDZqdj4rMA>
- <xme:gpIzZREKIovN-eYaNcoflIH0emrGT6kpwKsIfEtDKSo62SQsEti66qSnMLtw_f4D7
- Eqr1o7i8wvtCCexxg>
-X-ME-Received: <xmr:gpIzZW7nlc8zxgznvFCBCVoLEd90jrzgb5T7Tz8PB5bFQLvYG-fgiacDyy6aLK4UTzNd2DvgZsO-AhZGrSskAfDv0W6zVM4EEOyHTI47nYkkPDfMmb2RnFPc0A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrkedtgddtjecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefkffggfgfvvehfhffujggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
- vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepjefgfffhudejfedtuedugeeutdetgfeiteffffehjeeugfeuvdeh
- jeetfedtffdtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:gpIzZf3JCxPtA932zsoPEmc1jO2wUd_HulSgAR4_rscBqf_402YaBw>
- <xmx:gpIzZRET_oqmd7MjOyIuz-lQLFLVslu4mf0fbYaSioSL31IiRFER8Q>
- <xmx:gpIzZY8A4kUgfNnXctBwJk8Ts5J99pSaxTE-TfuU6VFyFPe6AlJeEw>
- <xmx:g5IzZXaHZTaslVI9z3vS5eA2lHQrJjH7kbYOYWhZbYKue33GaPrBFQ>
-Feedback-ID: i0ad843c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 21 Oct 2023 04:57:38 -0400 (EDT)
-Message-ID: <a9d220e6-0b09-5c59-54cf-9104727527a3@sholland.org>
-Date: Sat, 21 Oct 2023 03:57:37 -0500
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6b5af4662b7so1213029b3a.3
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 15:15:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697840121; x=1698444921; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=QpIp8P+ALKsK0zCFPGuXrgZth13LkXaSdVqiixIvkhU=;
+ b=gdbpE/Z0I//e+B11vD4yVcOQURWlfOMmVrGqiq/XHBMKigicxxokz3L8WPOAx+rL8i
+ rp3MzloaryJibrxqo35Um1X0xcXVmttwjmYUDKY5yI434MBbdA6t3EdTN5B9f1+bGQPQ
+ F4dtY20QavjGZinguk2+Vnj+x1z9pb/mI/qOCYwAEpkNd2mU8Ik2KmNUUOXj7L9R7rID
+ bxRPAQM2JBUC9t27rfwmB6eQfGaAMsEJthjo4WiQkGGcjpZCFrZ4yoiXkTthWn/FlGrM
+ hkojjSxfE7tYFG6Gm1opShA1AWoDFAdBWfDI4ZuOT30jaxeCBi2DZow7D3qnY2ajQzyd
+ xQuQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697840121; x=1698444921;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QpIp8P+ALKsK0zCFPGuXrgZth13LkXaSdVqiixIvkhU=;
+ b=kEeO0oQeBynUrKtFFqXsh6MJ8xSbasvR7MoXMxzHhnF/qHrfH55Ah0/1NGAwyAL/4I
+ H+jaeYo3Cs3YCv8qtE2GCiBjGI0qe2EH0EgjtD5Zox4WWKOqJTSOgU1Cb96r/7JoIbGv
+ BW5YuBlKCTHOavIh3OOS/P1UkYydAmNmIiY+L3wnUZ/Meje2yKy/DBDucCCq7MrUOZa5
+ dOm3gNbYm3MyeJY7kIqd7G/bQuEyYY94tlXORfydBu60jSLRIPLGBb4Se9/1KvW9638n
+ rdILCBFNlmXAx85IVIKvqZCTiZhRtrqccLA4wVP2tRRKbxwQYS4Zxj6639jyLsSEipn4
+ OCiw==
+X-Gm-Message-State: AOJu0YziXknnBpSX4cwMpJyi4iorLFpbDfDzQay93k/CT2j7dzK8yHle
+ Zaclq4MNoEsBtJBpQ34CnoN7XewJVdf1JRund1LEoQ==
+X-Google-Smtp-Source: AGHT+IHb9g3lCOJhv6XYyWLMfLsWFCuAMV7rL2qnCoS1QiEKa/l95YrHkP88y0QHFKYu77ail3bVTPEwZ1YbyDbzkkE=
+X-Received: by 2002:a05:6a20:4393:b0:17b:4b61:a907 with SMTP id
+ i19-20020a056a20439300b0017b4b61a907mr3691560pzl.50.1697840120765; Fri, 20
+ Oct 2023 15:15:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
- <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
- Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
- <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
- andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de
-References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-8-andre.przywara@arm.com>
-From: Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH v2 07/22] pinctrl: sunxi: remove GPIO_EXTRA_HEADER
-In-Reply-To: <20230928215455.28094-8-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 20 Oct 2023 18:15:09 -0400
+Message-ID: <CAEfUkUJ31KTLc6mvGj741ZthSQdyXyS0r6cv2XUDycTq24yjRQ@mail.gmail.com>
+Subject: Re: [PATCH v2 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerry Van Baren <vanbaren@cideas.com>, Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Qu Wenruo <wqu@suse.com>
+X-Mailman-Approved-At: Sat, 21 Oct 2023 14:41:14 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,40 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/28/23 16:54, Andre Przywara wrote:
-> U-Boot's generic GPIO_EXTRA_HEADER is a convenience symbol to allow code
-> to more easily include platform specific GPIO headers. This should not
-> be needed in a DM world anymore, since the generic GPIO framework
-> handles that nicely.
-> For Allwinner boards we still need to deal with non-DM GPIO in the SPL,
-> but this should become the exception, not the rule.
-> 
-> Make this more obvious by removing the definition of GPIO_EXTRA_HEADER,
-> and just force every legacy user of platform specific GPIO to include
-> the new sunxi_gpio.h header explicitly. Everyone doing so should feel
-> ashamed and should find a way to avoid it from now on.
-> 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Hi Simon,
+
+On Thu, 21 Sept 2023 at 04:58, Simon Glass <sjg@chromium.org> wrote:
+>
+> Standard passage provides for a bloblist to be passed from one firmware
+> phase to the next. That can be used to pass the devicetree along as well.
+> Add an option to support this.
+>
+> Tests for this will be added as part of the Universal Payload work.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->  arch/arm/Kconfig                                               | 1 -
->  arch/arm/mach-sunxi/board.c                                    | 1 +
->  arch/arm/mach-sunxi/dram_suniv.c                               | 2 +-
->  arch/arm/mach-sunxi/spl_spi_sunxi.c                            | 1 +
->  board/sunxi/board.c                                            | 1 +
->  board/sunxi/chip.c                                             | 2 +-
->  drivers/gpio/axp_gpio.c                                        | 1 +
->  drivers/gpio/sunxi_gpio.c                                      | 1 +
->  drivers/i2c/sun6i_p2wi.c                                       | 2 +-
->  drivers/i2c/sun8i_rsb.c                                        | 2 +-
->  drivers/mmc/sunxi_mmc.c                                        | 1 +
->  drivers/pinctrl/sunxi/pinctrl-sunxi.c                          | 1 +
->  drivers/video/hitachi_tx18d42vm_lcd.c                          | 1 +
->  drivers/video/ssd2828.c                                        | 1 -
->  drivers/video/sunxi/sunxi_display.c                            | 1 +
->  drivers/video/sunxi/sunxi_lcd.c                                | 1 +
->  arch/arm/include/asm/arch-sunxi/gpio.h => include/sunxi_gpio.h | 0
->  17 files changed, 14 insertions(+), 6 deletions(-)
->  rename arch/arm/include/asm/arch-sunxi/gpio.h => include/sunxi_gpio.h (100%)
+>
+> Changes in v2:
+> - No changes as it still seems unclear what should be done
+>
+[...]
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 080cc46a1266..e16d122f4fb1 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -103,6 +103,11 @@ enum bloblist_tag_t {
+>   BLOBLISTT_ACPI_TABLES = 0x104, /* ACPI tables for x86 */
+>   BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+>   BLOBLISTT_VBOOT_CTX = 0x106, /* Chromium OS verified boot context */
+> + /*
+> + * Devicetree for use by firmware. On some platforms this is passed to
+> + * the OS also
+> + */
+> + BLOBLISTT_CONTROL_FDT = 0x107,
+Shall we re-define all the `BLOBLISTT_` tags according to the firmware
+handoff
+spec v0.9?
+According to the latest discussion (in
+https://github.com/FirmwareHandoff/firmware_handoff/pull/19)
+It is preferred that generic ones to start from `0`, and Arm specific ones
+starts
+from `0x100`.
+In this case, the FDT should be re-defined as `1` and other existing non-arm
+ones (e.g. for x86 or Chromium OS) should have their placeholder before
+`0xff_f000`,
+while generic ones (e.g. for TPM) should be placed somewhere between `0`
+and `0x100`.
 
-Tested-by: Samuel Holland <samuel@sholland.org>
+[...]
 
+Regards,
+Raymond
