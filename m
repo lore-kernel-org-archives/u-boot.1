@@ -4,52 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93ED8CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 04:17:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F45ACDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 04:23:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE41C87230;
-	Fri, 20 Oct 2023 06:17:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18A7087230;
+	Fri, 20 Oct 2023 06:23:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697775431;
-	bh=pneRBGSYqWh/XeAEGikWXSlW/3dMH+U/p1OfLrw8mmA=;
+	s=phobos-20191101; t=1697775810;
+	bh=I8EVaiUKC1WqPLuZLtAq6G0SIyPvhplXttMF1szYzaE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CgWR6atpDgAWh+iznBbkQPzjvnIljTrB9Ri7MzbPp0H8zTXpA76ITrwi0hvN7BoWv
-	 Q0+2W2lsDMmeb9tb3GQdHJ6KRF8le7UlawO5r56FK8/IZU9KuPuELeF29qs54JtJ/4
-	 T+koUVICCxeS8yqwNyGBbcyOFTomBvkRQVEcCIZi8uUYVCu1aOOIjrajIE+OGyMTuy
-	 F0e/yHcenCY1TF8w2/bzPJlTPFSchh09iJsGzEurgEY8AOB1eaoiDC5Zl21xBluJ3C
-	 h8cwSVnBB539JxiA3SAI5QMvn6bRn5IApLLouYF4BYrH426EZJ3D5Z78KWE1duxLlb
-	 JpXV5bXtDYURQ==
+	b=gVXJ0FETrcTmnX0I+syeWJov4Qr/V+zVVkdJSkPeGW4KXskMzWSEhVK40iFSl2WKg
+	 wzVPiise/yJBBFZUobG+xJ1ETxeJuS3MsGk/yQQ9iR2W9uEaNmOHf4QKVIqERouWtJ
+	 dBGX2bgEmJO4nivmVNaXNNTnk2A9PH1WrErcHyYeyN14AdeRacb90PsSR3hR2fhD3n
+	 gxGdt7NTv5lGPMqMRxkHQ4oqllw1lzaRH7FH+gECY1L45eDq0bGYml5sYwJrkDUPfU
+	 O05QxZKSm0/iR06Qkm9UCgWv+RvfOGCzaBkVd4s+MHrAR387R3sS59K4fcstALnhRL
+	 WvMxkxT4IPEiQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 25D2487205;
- Fri, 20 Oct 2023 06:17:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id CE837871F6;
+ Fri, 20 Oct 2023 06:23:27 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697775431;
- bh=pneRBGSYqWh/XeAEGikWXSlW/3dMH+U/p1OfLrw8mmA=;
+ s=phobos-20191101; t=1697775808;
+ bh=I8EVaiUKC1WqPLuZLtAq6G0SIyPvhplXttMF1szYzaE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=wZ1+g8NPuJ9Et2P7/+7NQnoKMwKE8/S7zuE0HppnMdY0/RT5iihQtm+qfLBoHwkhr
- 4QUjwiN40oR/S+qk5V93YlBDOIWxqCB2jBtD3uzZBH6rtKnwZEbiOXaQK2vpmzTXN+
- qluxwOq2wyiu9mgqAijhtuTjxpbXeiepU2MZUAJCHsUx+bEuXj/N6JBfksTp3lj0J+
- hfzMhAA9ROMTpY3GwszbL9C0pjknRgKKn9OlHk5BqxbaFZkVFJS780lhvo3/RqvQCR
- db4S6agIoTofl5Kt+PBOijMlPIToaQmwqgkfqlYvrCn35p1GQXhPHHemM0sGgn4ceD
- gKjgpu4FnoMtg==
-Message-ID: <362db620-cec7-4655-83fb-ab788636e6b2@denx.de>
-Date: Fri, 20 Oct 2023 06:17:10 +0200
+ b=l6+uH+tdAp7MH6hOJEFZQ5FTSfRhlbRoItos2DFBnEhPCLmTPRk39sjSlSWrokpaC
+ i7/r3CWAhTkV+LUE3XZsG1OYTOs4dT6cAJJ+YKJrsAPP6ENa9IOnbglStD56kJ0wNT
+ QytHVB5YiZDXDMssekKMapIhrFI5rmNhtwLnXeRiUl4Hfel60hFvCNUUQtmsxsAcgM
+ mF4nABYvQIeA9/22yPwa6BefmhBcKjhByoJJIQ97LKazMp8LRZvI4CcpUYCCDAwgP8
+ CeqDluzzuFN1xA++BTMU4wTCdIjgrphUZuiX0i4kxPa6d2zdqroryZz5kHpov+Kp2y
+ 5fkTqGMBRIttg==
+Message-ID: <db121593-6678-4069-bf11-dc67308f66c6@denx.de>
+Date: Fri, 20 Oct 2023 06:23:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clock_imx8mm: Add a stub for imx8mp_fec_interface_init()
-To: Fabio Estevam <festevam@gmail.com>, sbabic@denx.de
-Cc: peng.fan@nxp.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-References: <20231020004735.1913081-1-festevam@gmail.com>
+Subject: Re: [PATCH 1/2] configs: rockchip: Use dwc3-generic driver on RK3328
+ and RK3399
 Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
+ Xiaobo Tian <peterwillcn@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: u-boot@lists.denx.de
+References: <20231018223058.2081052-1-jonas@kwiboo.se>
+ <20231018223058.2081052-2-jonas@kwiboo.se>
+ <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
+ <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231020004735.1913081-1-festevam@gmail.com>
+In-Reply-To: <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,20 +80,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/20/23 02:47, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@denx.de>
+On 10/19/23 22:39, Jonas Karlman wrote:
+> On 2023-10-19 01:44, Marek Vasut wrote:
+>> On 10/19/23 00:30, Jonas Karlman wrote:
+>>
+>> [..]
+>>
+>>> +++ b/configs/rock960-rk3399_defconfig
+>>> @@ -50,6 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>>    CONFIG_SYS_MMC_ENV_DEV=1
+>>>    CONFIG_ROCKCHIP_GPIO=y
+>>>    CONFIG_SYS_I2C_ROCKCHIP=y
+>>> +CONFIG_MISC=y
+>>>    CONFIG_MMC_DW=y
+>>>    CONFIG_MMC_DW_ROCKCHIP=y
+>>>    CONFIG_MMC_SDHCI=y
+>>> @@ -70,12 +71,12 @@ CONFIG_SYS_NS16550_MEM32=y
+>>>    CONFIG_SYSRESET=y
+>>>    CONFIG_USB=y
+>>>    CONFIG_USB_XHCI_HCD=y
+>>> -CONFIG_USB_XHCI_DWC3=y
+>>>    CONFIG_USB_EHCI_HCD=y
+>>>    CONFIG_USB_EHCI_GENERIC=y
+>>>    CONFIG_USB_OHCI_HCD=y
+>>>    CONFIG_USB_OHCI_GENERIC=y
+>>>    CONFIG_USB_DWC3=y
+>>> +CONFIG_USB_DWC3_GENERIC=y
+>>
+>> Why not add 'default y if ROCKCHIP' into the Kconfig instead ? This will
+>> have the same effect, without requiring such massive modification of
+>> config files.
 > 
-> When CONFIG_DWC_ETH_QOS_IMX=y and CONFIG_FEC_MXC is not selected, the
-> following warning is seen:
+> Not fully sure what you mean by this and how that would reduce number of
+> affected defconfig-files. The USB_XHCI_DWC3 should still be removed from
+> these defconfig-files or wrong driver could be used by these boards.
 > 
-> arch/arm/mach-imx/imx8m/clock_imx8mm.c: In function 'board_interface_eth_init':
-> arch/arm/mach-imx/imx8m/clock_imx8mm.c:914:24: warning: implicit declaration of function 'imx8mp_fec_interface_init; did you mean 'imx8mp_eqos_interface_init'? [-Wimplicit-function-declaration]
+> Touching the defconfig-files help notify board maintainers that changes
+> are happening to their boards.
 > 
-> Fix it by adding a stub for imx8mp_fec_interface_init() to handle this
-> case.
-> 
-> This follows the same approach done on imx8mp_eqos_interface_init().
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> There will also be a separate patch that remove the rockchip,rk3399-dwc3
+> compatible from the dwc3-of-simple driver to finalize this transition to
+> use dwc3-generic driver for affected rockchip boards.
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+It wasn't clear to me you're switching one driver to another, thanks for 
+clarification.
+
+"
+Also enable DM_USB_GADGET for any board that enable
+USB_DWC3_GADGET.
+"
+
+This you can do in Kconfig file, something like:
+select DM_USB_GADGET if USB_DWC3_GADGET && <rockchip>
