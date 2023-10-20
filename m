@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EE9CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 03:19:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB538CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 03:20:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D989C871DA;
-	Fri, 20 Oct 2023 05:19:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4BF4F8725A;
+	Fri, 20 Oct 2023 05:19:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZgM7QT8V";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LCA1bWwm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F17C87266; Fri, 20 Oct 2023 05:19:23 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::605])
+ id A9E7D87033; Fri, 20 Oct 2023 05:19:23 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::62b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E48E887033
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 05:19:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56FC58723C
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 05:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lSAFSUXr42iH8m1IdkLGYy2cnzbREYvUXtRixx4B/yXEjM3ANCzn55am3062u2qiikMWMahp8uSt6JcoegsR+mFB9lah2zuHCKN05wmjuYaiMZWIsG0R7547BNfSeTBcZb4wnhVdtQzL++N0ksJOuvLNMMfJREc1DY+NeXAGDNBOx4i48sYT6JpFM1RFmefveHC41wDGJmf8wuDpDpz7PnoFCqNTn/k9rNa7GBHRgjc48xd6dwayNs3LfsW4rnHT9pX1nlemZAkdd3Phwd5gZmBMiYSs1MdgzhkHI9JvlVlt56ryL4UOF7GDYF9+2E5M4uhZCpFBssUrnT/scHviHg==
+ b=PEynV68HRocl7pJpBy7W+9vVmPysDyh8K6K09z4BMjEjMIJ+OHQESv1WYBvUv1kcQuvHQu4tH2nTA7jDtTS/T9D3H9b1lxjavdz1HjDk1Bz4uDmwhqAECWg7f6O8usZdokPokn1wlC36AS1m0xR9lqtwXjIEchslGIpn24PvbfHJChyn1DXwjYsB8ghoS8UpNrvGzrxYEBKEPTb6u3EuYY3G2ZFFWDxjGKBygf/iIJy7On4CLLRJuwiNIVb1zJOnM8zbOhZczFSUna86a2QSCzbj30lgp5Xo4uaDmT1vNUyLQKCH2KdWmNz+RICAFXNDE+VOTpw6onsXOZPU0vZsTw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O/wcc3fhqJYZ7K486ZlQxmemRzxEN089YARwGrHyuB4=;
- b=XXlriM/cdutDFlZ+ZxTfGtXnqP1gekFdoV8NRyyzXqwRGM2BHQt0DGDE5VNDYADerimTFPZI4iCW5IHq5OrWdXxuPYzTP6TtlehFCqwe8EoNl7VA4wOWMCiyBdBVe2SukqhPvGAjvJGUy8VbTeksQ9L2RblfktOlDF3hbq2y+gS4R1If9QRi/GVjsSHK7tX1mhn9pA99Fun48kV9ei9nx2P1n3mODjZ5vcqmNDKGsWsyibtfBIcuwIcmNpCiwwY7USTKTJSWFaOH/MyT0hyVSYMu8P0BOA3naqRJS0bbGAn4Q3e0ptidKg9Ba84hH+AoVVXQuGgkSGLpR7u0yu5DWw==
+ bh=trngMRAdd2OvxVA/3ZjtZK6+XKkwTECNcmA+FGRVZIw=;
+ b=A/xXDw2T0/IASBx1m7H/3P4eNMcPxlzukssBfYEYjKlCsI3BNDZnoEiXMcAYzo0+49mOr14EONBis/QdDOnUKuF4IqK4GWTgzQIQYk5GEW+cl+xn1lBFOUsYQlOXQjo3kRr2zNabyw0yHlRwHt+WrZ9hHQSIuAzefv2EGXjbG/13KJpa+YfZ5z2gKylJO9TXU94N7H+OPldwCHuvmreiPJbvY14JjgV/I0heO900XmbW1JxKrLlS12oFjA8FSP+rSiyMEczL4x00XEPMQDKX585iHEW7ET6p8N4SAFPCiskHFrKwe+CBWQmvRJlyTwO65VKms8kBE+GpZHVBA0ib8g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O/wcc3fhqJYZ7K486ZlQxmemRzxEN089YARwGrHyuB4=;
- b=ZgM7QT8VzfzDU9BwrRCdC5XkTaXP/6Wy3fjXqaf8hQmFijrlO7WCzsBa0JYeYxcSabM3JI1Ux2NIwDcIH9hfPPZdaucEInhChB0M4tNkSTh7qLAQgmcW6wRuIcneZ/JeWhfmki/PmwwQoBqeKKvMBd9JWjLx/i/doGWWyQeH4mI=
-Received: from BL1P221CA0016.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:2c5::29)
- by CH2PR12MB4279.namprd12.prod.outlook.com (2603:10b6:610:af::24)
+ bh=trngMRAdd2OvxVA/3ZjtZK6+XKkwTECNcmA+FGRVZIw=;
+ b=LCA1bWwmHsmk4A5ibeFLlXQfXybwEMZMv0Nw53fjXhijEfdB3QH0FCUlB/ZU8FldUfdpvJvCPDh7utm6vl+5ZBX0zKcV1GKbu0VHSZvJ6Vlp5UMCjfbtQtknIZIcF90YRsDOogtNmtXFuS0rD39ncyUV+nQYkNh6jJHzZ2A/sFQ=
+Received: from BL1PR13CA0259.namprd13.prod.outlook.com (2603:10b6:208:2ba::24)
+ by CH2PR12MB4056.namprd12.prod.outlook.com (2603:10b6:610:a5::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38; Fri, 20 Oct
- 2023 03:19:13 +0000
-Received: from BL02EPF0001A0FC.namprd03.prod.outlook.com
- (2603:10b6:208:2c5:cafe::fa) by BL1P221CA0016.outlook.office365.com
- (2603:10b6:208:2c5::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.26 via Frontend
- Transport; Fri, 20 Oct 2023 03:19:13 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37; Fri, 20 Oct
+ 2023 03:19:16 +0000
+Received: from BL02EPF0001A0FD.namprd03.prod.outlook.com
+ (2603:10b6:208:2ba:cafe::d9) by BL1PR13CA0259.outlook.office365.com
+ (2603:10b6:208:2ba::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.8 via Frontend
+ Transport; Fri, 20 Oct 2023 03:19:16 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,25 +59,25 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0001A0FC.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ BL02EPF0001A0FD.mail.protection.outlook.com (10.167.242.104) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Fri, 20 Oct 2023 03:19:12 +0000
+ 15.20.6838.22 via Frontend Transport; Fri, 20 Oct 2023 03:19:15 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 19 Oct
- 2023 22:19:10 -0500
+ 2023 22:19:14 -0500
 Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Thu, 19 Oct 2023 22:18:52 -0500
+ Transport; Thu, 19 Oct 2023 22:19:12 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
  <git@xilinx.com>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Subject: [PATCH v3 4/6] spi: spi-uclass: Read chipselect and restrict
- capabilities
-Date: Fri, 20 Oct 2023 08:48:15 +0530
-Message-ID: <20231020031817.267959-5-venkatesh.abbarapu@amd.com>
+Subject: [PATCH v3 6/6] spi: zynq_qspi: Add parallel memories support in QSPI
+ driver
+Date: Fri, 20 Oct 2023 08:48:17 +0530
+Message-ID: <20231020031817.267959-7-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231020031817.267959-1-venkatesh.abbarapu@amd.com>
 References: <20231020031817.267959-1-venkatesh.abbarapu@amd.com>
@@ -86,26 +86,26 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FC:EE_|CH2PR12MB4279:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70115d56-ddb6-412d-218b-08dbd11b5568
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FD:EE_|CH2PR12MB4056:EE_
+X-MS-Office365-Filtering-Correlation-Id: 176965ad-d5c1-4bb8-0963-08dbd11b5704
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: odWRzc86abD6Xzu3co5KdW/kOZl4dqgIpyfTcOzn/sZOLjnAHR95nSzsU3AyDjKaHOjekz9KWsY+/T0Zs2sC2dDP0cSxaoOEpYaRFoW1jivVLmWbpD+m3zFHVLe5WjKtBJgBEmkXz3eLNVKdzlbOa4OKddoR/aTQHwoPGP06KaP3qnreoBQZuxxptFOoEQh7yG16nMYMNNGdBCFRCsX4zZChI0J19gM0ROWPBdKBN2uOYyNHgIKqIqLIh7TIsszL7q98h/d52UWVbDqi1gnsSt/TnIbXlvAmMomjcuLgTR7Vk8HQtf7hYBH5wQCZL7MLJ94sg83fS0GPTuPEN+Dz2txnvByUQ2vbC8oxkJ3OZyzqScGQ1N5YzYIJh3d8e0FNRz/Z2udFHQzSbUx5Fks3c3ZWiqM1wDpZYyg0fnqjX+UCnCpJ773bPlrBeMwgemlR1CWK3IrluqwJXryaL8IFo6a4EEexrQ2eOgCXjfqtKDQzlSq7kq6pwcO24SlvAVDlu/+4nfVPGdbW6r9rcinRp9Ag1Tqe+1fnCfC/RgSBLKrnlzW9dphPNYFFiX38HXUrPJQRjczo5TxyzFlKases5mrMTMnxcqs9TucbEuYy92AYEGLjF2DL94p3jbK0baQ4s18CiUPfLncyCgfRXSaWhC3n7dTeIjkAqppwTOUywmEZ44hhoha1Ril1WwqwSvhGc05vQAxxdwdN2Svt8pKfsfgTX7AuY0xpy4/6DYf/d2P1okdkA1H8CLnmlNDVcLrRiToGIoBfAaRZaUmQakhpxA==
+X-Microsoft-Antispam-Message-Info: CTxWtHE1aty/jhtZ873PSFbS8iy+u+gxWxjrEnN6nb02VsPvNjasEX4P/FWkqLQCdHX6SoEtrM2b9bjaR3F1tOE948QFOPV5H71PTFvzUvBfQFW13sIAxhfCAeKlh26L4b7MWeCy4jZw4nzr4mkN+YPzx86soIeV523PbgGDcC3wqx2MCxtRcSw1axLGlTfkAkFmPAUusmEbHlJoW+lYcOYxoqbEn7f6UOzlhl+vD3OjpGvIxaFi8xBK9fTPtCItnocz02ccU/qyBlXc6Hp4Z1SGYxZXEapIhMzCHCMF1T8sUzIp4A2LJx5TVjPvnV4VJDuVi6A7B5/zNbjFZ57AtheuLz3v3ol6WIkGG7iNxf/4kUUK8P/kSm0jQdgnXiqJxuWBTKD73fWq+BX6nDA7LZUGcensn1WPqJVv5SopdJ/kH3l4TN3RvOEgm4r+le/zvpeKMtZv3rmDFbrO2HOlFyEomGTEYcp5gWuHDO1J6JkzYIP2wPBBHqE/D/fQNNlIzhrP5mVsYWnCYFyBuj1xMEEkLUE2hJl14VR4TfhQH61rQtY5g/97yD3LgVx75cWm+ipT6ENzsp14FIjQY08jjbWoQ5/l2omcjE1Av4cu68pw/R/W/wIfWvX+PryI3242UjuY1yPAQBhC6hnfs6xRNS1YXd7ejbwRGRFZiiwNUzVxBBTOrp1s7lattth1LxCfUeugA9L/WbqALEQS3aVoy6nFRKmzMU1IfNPdYkMr2ZvfCsuSl1yy++7djIlRAJGSH6ym+8MOd/TLjIudRoAnsQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(396003)(346002)(376002)(136003)(230922051799003)(451199024)(82310400011)(64100799003)(1800799009)(186009)(46966006)(40470700004)(36840700001)(2906002)(356005)(36756003)(81166007)(86362001)(41300700001)(6916009)(40480700001)(478600001)(30864003)(6666004)(82740400003)(4326008)(5660300002)(26005)(40460700003)(8676002)(2616005)(336012)(8936002)(1076003)(316002)(70586007)(47076005)(36860700001)(83380400001)(54906003)(70206006)(426003)(36900700001)(579004);
+ SFS:(13230031)(4636009)(346002)(396003)(136003)(376002)(39860400002)(230922051799003)(1800799009)(64100799003)(451199024)(82310400011)(186009)(46966006)(40470700004)(36840700001)(2906002)(41300700001)(8676002)(2616005)(1076003)(40480700001)(82740400003)(70586007)(336012)(36860700001)(478600001)(316002)(86362001)(36756003)(356005)(81166007)(40460700003)(426003)(47076005)(5660300002)(4326008)(6916009)(8936002)(70206006)(83380400001)(54906003)(26005)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2023 03:19:12.9954 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70115d56-ddb6-412d-218b-08dbd11b5568
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2023 03:19:15.6792 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 176965ad-d5c1-4bb8-0963-08dbd11b5704
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FC.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FD.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4279
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4056
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,1330 +122,334 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Add support for parallel memories in zynq_qspi.c driver. In case of
+parallel memories STRIPE bit is set and sent to the qspi ip, which will
+send data bits to both the flashes in parallel. However for few commands
+we should not use stripe, instead send same data to both the flashes.
+Those commands are exclueded by using zynqmp_qspi_update_stripe().
 
-Read chipselect properties from DT which are populated using 'reg'
-property and save it in plat->cs[] array for later use.
-
-Also read multi chipselect capability which is used for
-parallel-memories and return errors if they are passed on using DT but
-driver is not capable of handling it.
+Also update copyright info for this file.
 
 Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- drivers/mtd/spi/sandbox.c    |  2 +-
- drivers/spi/altera_spi.c     |  4 ++--
- drivers/spi/atcspi200_spi.c  |  2 +-
- drivers/spi/ath79_spi.c      |  2 +-
- drivers/spi/atmel_spi.c      |  6 +++---
- drivers/spi/bcm63xx_hsspi.c  | 42 ++++++++++++++++++------------------
- drivers/spi/bcm63xx_spi.c    |  6 +++---
- drivers/spi/bcmbca_hsspi.c   | 34 ++++++++++++++---------------
- drivers/spi/cf_spi.c         |  6 +++---
- drivers/spi/davinci_spi.c    |  6 +++---
- drivers/spi/fsl_dspi.c       | 18 ++++++++--------
- drivers/spi/fsl_espi.c       |  4 ++--
- drivers/spi/fsl_qspi.c       |  4 ++--
- drivers/spi/gxp_spi.c        |  2 +-
- drivers/spi/mpc8xx_spi.c     |  4 ++--
- drivers/spi/mpc8xxx_spi.c    | 10 ++++-----
- drivers/spi/mscc_bb_spi.c    |  4 ++--
- drivers/spi/mxc_spi.c        |  6 +++---
- drivers/spi/npcm_fiu_spi.c   | 14 ++++++------
- drivers/spi/nxp_fspi.c       |  2 +-
- drivers/spi/octeon_spi.c     |  2 +-
- drivers/spi/omap3_spi.c      |  4 ++--
- drivers/spi/pic32_spi.c      |  2 +-
- drivers/spi/rk_spi.c         |  4 ++--
- drivers/spi/rockchip_sfc.c   |  2 +-
- drivers/spi/spi-aspeed-smc.c | 28 ++++++++++++------------
- drivers/spi/spi-mxic.c       |  6 +++---
- drivers/spi/spi-qup.c        |  4 ++--
- drivers/spi/spi-sifive.c     |  6 +++---
- drivers/spi/spi-sn-f-ospi.c  |  2 +-
- drivers/spi/spi-sunxi.c      |  6 +++---
- drivers/spi/spi-synquacer.c  |  4 ++--
- drivers/spi/spi-uclass.c     | 21 +++++++++++++-----
- drivers/spi/stm32_qspi.c     |  2 +-
- drivers/spi/stm32_spi.c      |  4 ++--
- drivers/spi/ti_qspi.c        | 14 ++++++------
- drivers/spi/xilinx_spi.c     |  4 ++--
- drivers/spi/zynq_qspi.c      |  6 +++---
- drivers/spi/zynq_spi.c       |  6 +++---
- include/spi.h                |  2 +-
- lib/acpi/acpi_device.c       |  2 +-
- 41 files changed, 160 insertions(+), 149 deletions(-)
+ drivers/spi/zynq_qspi.c | 140 ++++++++++++++++++++++++++++++++++++----
+ include/spi.h           |   4 ++
+ 2 files changed, 131 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/mtd/spi/sandbox.c b/drivers/mtd/spi/sandbox.c
-index 4fe547171a..72036d5a88 100644
---- a/drivers/mtd/spi/sandbox.c
-+++ b/drivers/mtd/spi/sandbox.c
-@@ -139,7 +139,7 @@ static int sandbox_sf_probe(struct udevice *dev)
- 		return ret;
- 	}
- 	slave_plat = dev_get_parent_plat(dev);
--	cs = slave_plat->cs;
-+	cs = slave_plat->cs[0];
- 	debug("found at cs %d\n", cs);
- 
- 	if (!pdata->filename) {
-diff --git a/drivers/spi/altera_spi.c b/drivers/spi/altera_spi.c
-index 989679e881..48782f81c1 100644
---- a/drivers/spi/altera_spi.c
-+++ b/drivers/spi/altera_spi.c
-@@ -96,7 +96,7 @@ static int altera_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	uint32_t reg, data, start;
- 
- 	debug("%s: bus:%i cs:%i bitlen:%i bytes:%i flags:%lx\n", __func__,
--	      dev_seq(bus), slave_plat->cs, bitlen, bytes, flags);
-+	      dev_seq(bus), slave_plat->cs[0], bitlen, bytes, flags);
- 
- 	if (bitlen == 0)
- 		goto done;
-@@ -111,7 +111,7 @@ static int altera_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		readl(&regs->rxdata);
- 
- 	if (flags & SPI_XFER_BEGIN)
--		spi_cs_activate(dev, slave_plat->cs);
-+		spi_cs_activate(dev, slave_plat->cs[0]);
- 
- 	while (bytes--) {
- 		if (txp)
-diff --git a/drivers/spi/atcspi200_spi.c b/drivers/spi/atcspi200_spi.c
-index de9c14837c..acee743653 100644
---- a/drivers/spi/atcspi200_spi.c
-+++ b/drivers/spi/atcspi200_spi.c
-@@ -321,7 +321,7 @@ static int atcspi200_spi_claim_bus(struct udevice *dev)
- 	struct udevice *bus = dev->parent;
- 	struct nds_spi_slave *ns = dev_get_priv(bus);
- 
--	if (slave_plat->cs >= ns->num_cs) {
-+	if (slave_plat->cs[0] >= ns->num_cs) {
- 		printf("Invalid SPI chipselect\n");
- 		return -EINVAL;
- 	}
-diff --git a/drivers/spi/ath79_spi.c b/drivers/spi/ath79_spi.c
-index 205567ef54..ad10cec2a6 100644
---- a/drivers/spi/ath79_spi.c
-+++ b/drivers/spi/ath79_spi.c
-@@ -74,7 +74,7 @@ static int ath79_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	if (restbits)
- 		bytes++;
- 
--	out = AR71XX_SPI_IOC_CS_ALL & ~(AR71XX_SPI_IOC_CS(slave->cs));
-+	out = AR71XX_SPI_IOC_CS_ALL & ~(AR71XX_SPI_IOC_CS(slave->cs[0]));
- 	while (bytes > 0) {
- 		bytes--;
- 		curbyte = 0;
-diff --git a/drivers/spi/atmel_spi.c b/drivers/spi/atmel_spi.c
-index aec6f4eca9..e2de39d1ef 100644
---- a/drivers/spi/atmel_spi.c
-+++ b/drivers/spi/atmel_spi.c
-@@ -126,7 +126,7 @@ static int atmel_spi_claim_bus(struct udevice *dev)
- 	struct atmel_spi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 	struct at91_spi *reg_base = bus_plat->regs;
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 	u32 freq = priv->freq;
- 	u32 scbr, csrx, mode;
- 
-@@ -175,7 +175,7 @@ static void atmel_spi_cs_activate(struct udevice *dev)
- 	struct udevice *bus = dev_get_parent(dev);
- 	struct atmel_spi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 
- 	if (!dm_gpio_is_valid(&priv->cs_gpios[cs]))
- 		return;
-@@ -190,7 +190,7 @@ static void atmel_spi_cs_deactivate(struct udevice *dev)
- 	struct udevice *bus = dev_get_parent(dev);
- 	struct atmel_spi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 
- 	if (!dm_gpio_is_valid(&priv->cs_gpios[cs]))
- 		return;
-diff --git a/drivers/spi/bcm63xx_hsspi.c b/drivers/spi/bcm63xx_hsspi.c
-index a24bb430cb..9614a7f536 100644
---- a/drivers/spi/bcm63xx_hsspi.c
-+++ b/drivers/spi/bcm63xx_hsspi.c
-@@ -175,7 +175,7 @@ static void bcm63xx_hsspi_activate_cs(struct bcm63xx_hsspi_priv *priv,
- 	set = DIV_ROUND_UP(2048, set);
- 	set &= SPI_PFL_CLK_FREQ_MASK;
- 	set |= SPI_PFL_CLK_RSTLOOP_MASK;
--	writel(set, priv->regs + SPI_PFL_CLK_REG(plat->cs));
-+	writel(set, priv->regs + SPI_PFL_CLK_REG(plat->cs[0]));
- 
- 	/* profile signal */
- 	set = 0;
-@@ -193,29 +193,29 @@ static void bcm63xx_hsspi_activate_cs(struct bcm63xx_hsspi_priv *priv,
- 	if (speed > SPI_MAX_SYNC_CLOCK)
- 		set |= SPI_PFL_SIG_ASYNCIN_MASK;
- 
--	clrsetbits_32(priv->regs + SPI_PFL_SIG_REG(plat->cs), clr, set);
-+	clrsetbits_32(priv->regs + SPI_PFL_SIG_REG(plat->cs[0]), clr, set);
- 
- 	/* global control */
- 	set = 0;
- 	clr = 0;
- 
- 	if (priv->xfer_mode == HSSPI_XFER_MODE_PREPEND) {
--		if (priv->cs_pols & BIT(plat->cs))
--			set |= BIT(plat->cs);
-+		if (priv->cs_pols & BIT(plat->cs[0]))
-+			set |= BIT(plat->cs[0]);
- 		else
--			clr |= BIT(plat->cs);
-+			clr |= BIT(plat->cs[0]);
- 	} else {
- 		/* invert cs polarity */
--		if (priv->cs_pols & BIT(plat->cs))
--			clr |= BIT(plat->cs);
-+		if (priv->cs_pols & BIT(plat->cs[0]))
-+			clr |= BIT(plat->cs[0]);
- 		else
--			set |= BIT(plat->cs);
-+			set |= BIT(plat->cs[0]);
- 
- 		/* invert dummy cs polarity */
--		if (priv->cs_pols & BIT(!plat->cs))
--			clr |= BIT(!plat->cs);
-+		if (priv->cs_pols & BIT(!plat->cs[0]))
-+			clr |= BIT(!plat->cs[0]);
- 		else
--			set |= BIT(!plat->cs);
-+			set |= BIT(!plat->cs[0]);
- 	}
- 
- 	clrsetbits_32(priv->regs + SPI_CTL_REG, clr, set);
-@@ -291,7 +291,7 @@ static int bcm63xx_hsspi_xfer_dummy_cs(struct udevice *dev, unsigned int data_by
- 
- 	if (plat->mode & SPI_3WIRE)
- 		val |= SPI_PFL_MODE_3WIRE_MASK;
--	writel(val, priv->regs + SPI_PFL_MODE_REG(plat->cs));
-+	writel(val, priv->regs + SPI_PFL_MODE_REG(plat->cs[0]));
- 
- 	/* transfer loop */
- 	while (data_bytes > 0) {
-@@ -311,9 +311,9 @@ static int bcm63xx_hsspi_xfer_dummy_cs(struct udevice *dev, unsigned int data_by
- 
- 		/* issue the transfer */
- 		val = SPI_CMD_OP_START;
--		val |= (plat->cs << SPI_CMD_PFL_SHIFT) &
-+		val |= (plat->cs[0] << SPI_CMD_PFL_SHIFT) &
- 		       SPI_CMD_PFL_MASK;
--		val |= (!plat->cs << SPI_CMD_SLAVE_SHIFT) &
-+		val |= (!plat->cs[0] << SPI_CMD_SLAVE_SHIFT) &
- 		       SPI_CMD_SLAVE_MASK;
- 		writel(val, priv->regs + SPI_CMD_REG);
- 
-@@ -451,7 +451,7 @@ static int bcm63xx_hsspi_xfer_prepend(struct udevice *dev, unsigned int data_byt
- 			}
- 		}
- 		val |= (priv->prepend_cnt << SPI_PFL_MODE_PREPCNT_SHIFT);
--		writel(val, priv->regs + SPI_PFL_MODE_REG(plat->cs));
-+		writel(val, priv->regs + SPI_PFL_MODE_REG(plat->cs[0]));
- 
- 		/* set fifo operation */
- 		val = opcode | (data_bytes & HSSPI_FIFO_OP_BYTES_MASK);
-@@ -460,9 +460,9 @@ static int bcm63xx_hsspi_xfer_prepend(struct udevice *dev, unsigned int data_byt
- 
- 		/* issue the transfer */
- 		val = SPI_CMD_OP_START;
--		val |= (plat->cs << SPI_CMD_PFL_SHIFT) &
-+		val |= (plat->cs[0] << SPI_CMD_PFL_SHIFT) &
- 		       SPI_CMD_PFL_MASK;
--		val |= (plat->cs << SPI_CMD_SLAVE_SHIFT) &
-+		val |= (plat->cs[0] << SPI_CMD_SLAVE_SHIFT) &
- 		       SPI_CMD_SLAVE_MASK;
- 		writel(val, priv->regs + SPI_CMD_REG);
- 
-@@ -538,16 +538,16 @@ static int bcm63xx_hsspi_child_pre_probe(struct udevice *dev)
- 	struct spi_slave *slave = dev_get_parent_priv(dev);
- 
- 	/* check cs */
--	if (plat->cs >= priv->num_cs) {
--		printf("no cs %u\n", plat->cs);
-+	if (plat->cs[0] >= priv->num_cs) {
-+		printf("no cs %u\n", plat->cs[0]);
- 		return -ENODEV;
- 	}
- 
- 	/* cs polarity */
- 	if (plat->mode & SPI_CS_HIGH)
--		priv->cs_pols |= BIT(plat->cs);
-+		priv->cs_pols |= BIT(plat->cs[0]);
- 	else
--		priv->cs_pols &= ~BIT(plat->cs);
-+		priv->cs_pols &= ~BIT(plat->cs[0]);
- 
- 	/*
- 	 * set the max read/write size to make sure each xfer are within the
-diff --git a/drivers/spi/bcm63xx_spi.c b/drivers/spi/bcm63xx_spi.c
-index 0600d56c69..82bccf09ee 100644
---- a/drivers/spi/bcm63xx_spi.c
-+++ b/drivers/spi/bcm63xx_spi.c
-@@ -276,7 +276,7 @@ static int bcm63xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 
- 		/* issue the transfer */
- 		cmd = SPI_CMD_OP_START;
--		cmd |= (plat->cs << SPI_CMD_SLAVE_SHIFT) & SPI_CMD_SLAVE_MASK;
-+		cmd |= (plat->cs[0] << SPI_CMD_SLAVE_SHIFT) & SPI_CMD_SLAVE_MASK;
- 		cmd |= (priv->tx_bytes << SPI_CMD_PREPEND_SHIFT);
- 		if (plat->mode & SPI_3WIRE)
- 			cmd |= SPI_CMD_3WIRE_MASK;
-@@ -354,8 +354,8 @@ static int bcm63xx_spi_child_pre_probe(struct udevice *dev)
- 	struct dm_spi_slave_plat *plat = dev_get_parent_plat(dev);
- 
- 	/* check cs */
--	if (plat->cs >= priv->num_cs) {
--		printf("no cs %u\n", plat->cs);
-+	if (plat->cs[0] >= priv->num_cs) {
-+		printf("no cs %u\n", plat->cs[0]);
- 		return -ENODEV;
- 	}
- 
-diff --git a/drivers/spi/bcmbca_hsspi.c b/drivers/spi/bcmbca_hsspi.c
-index fbe315a7d4..cc3a5185c9 100644
---- a/drivers/spi/bcmbca_hsspi.c
-+++ b/drivers/spi/bcmbca_hsspi.c
-@@ -156,7 +156,7 @@ static void bcmbca_hsspi_setup_clock(struct bcmbca_hsspi_priv *priv,
- 	set = DIV_ROUND_UP(2048, set);
- 	set &= SPI_PFL_CLK_FREQ_MASK;
- 	set |= SPI_PFL_CLK_RSTLOOP_MASK;
--	writel(set, priv->regs + SPI_PFL_CLK_REG(plat->cs));
-+	writel(set, priv->regs + SPI_PFL_CLK_REG(plat->cs[0]));
- 
- 	/* profile signal */
- 	set = 0;
-@@ -174,16 +174,16 @@ static void bcmbca_hsspi_setup_clock(struct bcmbca_hsspi_priv *priv,
- 	if (priv->speed > SPI_MAX_SYNC_CLOCK)
- 		set |= SPI_PFL_SIG_ASYNCIN_MASK;
- 
--	clrsetbits_32(priv->regs + SPI_PFL_SIG_REG(plat->cs), clr, set);
-+	clrsetbits_32(priv->regs + SPI_PFL_SIG_REG(plat->cs[0]), clr, set);
- 
- 	/* global control */
- 	set = 0;
- 	clr = 0;
- 
--	if (priv->cs_pols & BIT(plat->cs))
--		set |= BIT(plat->cs);
-+	if (priv->cs_pols & BIT(plat->cs[0]))
-+		set |= BIT(plat->cs[0]);
- 	else
--		clr |= BIT(plat->cs);
-+		clr |= BIT(plat->cs[0]);
- 
- 	clrsetbits_32(priv->regs + SPI_CTL_REG, clr, set);
- }
-@@ -195,7 +195,7 @@ static void bcmbca_hsspi_activate_cs(struct bcmbca_hsspi_priv *priv,
- 
- 	/* set the override bit */
- 	val = readl(priv->spim_ctrl);
--	val |= BIT(plat->cs + SPIM_CTRL_CS_OVERRIDE_SEL_SHIFT);
-+	val |= BIT(plat->cs[0] + SPIM_CTRL_CS_OVERRIDE_SEL_SHIFT);
- 	writel(val, priv->spim_ctrl);
- }
- 
-@@ -206,7 +206,7 @@ static void bcmbca_hsspi_deactivate_cs(struct bcmbca_hsspi_priv *priv,
- 
- 	/* clear the cs override bit */
- 	val = readl(priv->spim_ctrl);
--	val &= ~BIT(plat->cs + SPIM_CTRL_CS_OVERRIDE_SEL_SHIFT);
-+	val &= ~BIT(plat->cs[0] + SPIM_CTRL_CS_OVERRIDE_SEL_SHIFT);
- 	writel(val, priv->spim_ctrl);
- }
- 
-@@ -251,7 +251,7 @@ static int bcmbca_hsspi_xfer(struct udevice *dev, unsigned int bitlen,
- 
- 	if (plat->mode & SPI_3WIRE)
- 		val |= SPI_PFL_MODE_3WIRE_MASK;
--	writel(val, priv->regs + SPI_PFL_MODE_REG(plat->cs));
-+	writel(val, priv->regs + SPI_PFL_MODE_REG(plat->cs[0]));
- 
- 	/* transfer loop */
- 	while (data_bytes > 0) {
-@@ -277,9 +277,9 @@ static int bcmbca_hsspi_xfer(struct udevice *dev, unsigned int bitlen,
- 
- 		/* issue the transfer */
- 		val = SPI_CMD_OP_START;
--		val |= (plat->cs << SPI_CMD_PFL_SHIFT) &
-+		val |= (plat->cs[0] << SPI_CMD_PFL_SHIFT) &
- 			  SPI_CMD_PFL_MASK;
--		val |= (plat->cs << SPI_CMD_SLAVE_SHIFT) &
-+		val |= (plat->cs[0] << SPI_CMD_SLAVE_SHIFT) &
- 			  SPI_CMD_SLAVE_MASK;
- 		writel(val, priv->regs + SPI_CMD_REG);
- 
-@@ -327,22 +327,22 @@ static int bcmbca_hsspi_child_pre_probe(struct udevice *dev)
- 	u32 val;
- 
- 	/* check cs */
--	if (plat->cs >= priv->num_cs) {
--		dev_err(dev, "no cs %u\n", plat->cs);
-+	if (plat->cs[0] >= priv->num_cs) {
-+		dev_err(dev, "no cs %u\n", plat->cs[0]);
- 		return -EINVAL;
- 	}
- 
- 	/* cs polarity */
- 	if (plat->mode & SPI_CS_HIGH)
--		priv->cs_pols |= BIT(plat->cs);
-+		priv->cs_pols |= BIT(plat->cs[0]);
- 	else
--		priv->cs_pols &= ~BIT(plat->cs);
-+		priv->cs_pols &= ~BIT(plat->cs[0]);
- 
- 	/* set the polarity to spim cs register */
- 	val = readl(priv->spim_ctrl);
--	val &= ~BIT(plat->cs + SPIM_CTRL_CS_OVERRIDE_VAL_SHIFT);
--	if (priv->cs_pols & BIT(plat->cs))
--		val |= BIT(plat->cs + SPIM_CTRL_CS_OVERRIDE_VAL_SHIFT);
-+	val &= ~BIT(plat->cs[0] + SPIM_CTRL_CS_OVERRIDE_VAL_SHIFT);
-+	if (priv->cs_pols & BIT(plat->cs[0]))
-+		val |= BIT(plat->cs[0] + SPIM_CTRL_CS_OVERRIDE_VAL_SHIFT);
- 	writel(val, priv->spim_ctrl);
- 
- 	return 0;
-diff --git a/drivers/spi/cf_spi.c b/drivers/spi/cf_spi.c
-index 1a841b5dce..9df1d690c0 100644
---- a/drivers/spi/cf_spi.c
-+++ b/drivers/spi/cf_spi.c
-@@ -124,7 +124,7 @@ static int coldfire_spi_claim_bus(struct udevice *dev)
- 	/* Clear FIFO and resume transfer */
- 	clrbits_be32(&dspi->mcr, DSPI_MCR_CTXF | DSPI_MCR_CRXF);
- 
--	dspi_chip_select(slave_plat->cs);
-+	dspi_chip_select(slave_plat->cs[0]);
- 
- 	return 0;
- }
-@@ -140,7 +140,7 @@ static int coldfire_spi_release_bus(struct udevice *dev)
- 	/* Clear FIFO */
- 	clrbits_be32(&dspi->mcr, DSPI_MCR_CTXF | DSPI_MCR_CRXF);
- 
--	dspi_chip_unselect(slave_plat->cs);
-+	dspi_chip_unselect(slave_plat->cs[0]);
- 
- 	return 0;
- }
-@@ -169,7 +169,7 @@ static int coldfire_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	if ((flags & SPI_XFER_BEGIN) == SPI_XFER_BEGIN)
- 		ctrl |= DSPI_TFR_CONT;
- 
--	ctrl = setup_ctrl(ctrl, slave_plat->cs);
-+	ctrl = setup_ctrl(ctrl, slave_plat->cs[0]);
- 
- 	if (len > 1) {
- 		int tmp_len = len - 1;
-diff --git a/drivers/spi/davinci_spi.c b/drivers/spi/davinci_spi.c
-index 9ebc4ed48f..66f6e6effa 100644
---- a/drivers/spi/davinci_spi.c
-+++ b/drivers/spi/davinci_spi.c
-@@ -339,13 +339,13 @@ static int davinci_spi_claim_bus(struct udevice *dev)
- 	struct udevice *bus = dev->parent;
- 	struct davinci_spi_slave *ds = dev_get_priv(bus);
- 
--	if (slave_plat->cs >= ds->num_cs) {
-+	if (slave_plat->cs[0] >= ds->num_cs) {
- 		printf("Invalid SPI chipselect\n");
- 		return -EINVAL;
- 	}
- 	ds->half_duplex = slave_plat->mode & SPI_PREAMBLE;
- 
--	return __davinci_spi_claim_bus(ds, slave_plat->cs);
-+	return __davinci_spi_claim_bus(ds, slave_plat->cs[0]);
- }
- 
- static int davinci_spi_release_bus(struct udevice *dev)
-@@ -368,7 +368,7 @@ static int davinci_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		printf("Invalid SPI chipselect\n");
- 		return -EINVAL;
- 	}
--	ds->cur_cs = slave->cs;
-+	ds->cur_cs = slave->cs[0];
- 
- 	return __davinci_spi_xfer(ds, bitlen, dout, din, flags);
- }
-diff --git a/drivers/spi/fsl_dspi.c b/drivers/spi/fsl_dspi.c
-index f8ec268812..83d56ce9ba 100644
---- a/drivers/spi/fsl_dspi.c
-+++ b/drivers/spi/fsl_dspi.c
-@@ -456,9 +456,9 @@ static int fsl_dspi_child_pre_probe(struct udevice *dev)
- 	unsigned char pcssck = 0, cssck = 0;
- 	unsigned char pasc = 0, asc = 0;
- 
--	if (slave_plat->cs >= priv->num_chipselect) {
-+	if (slave_plat->cs[0] >= priv->num_chipselect) {
- 		debug("DSPI invalid chipselect number %d(max %d)!\n",
--		      slave_plat->cs, priv->num_chipselect - 1);
-+		      slave_plat->cs[0], priv->num_chipselect - 1);
- 		return -EINVAL;
- 	}
- 
-@@ -473,12 +473,12 @@ static int fsl_dspi_child_pre_probe(struct udevice *dev)
- 	/* Set After SCK delay scale values */
- 	ns_delay_scale(&pasc, &asc, sck_cs_delay, priv->bus_clk);
- 
--	priv->ctar_val[slave_plat->cs] = DSPI_CTAR_DEFAULT_VALUE |
-+	priv->ctar_val[slave_plat->cs[0]] = DSPI_CTAR_DEFAULT_VALUE |
- 					 DSPI_CTAR_PCSSCK(pcssck) |
- 					 DSPI_CTAR_PASC(pasc);
- 
- 	debug("DSPI pre_probe slave device on CS %u, max_hz %u, mode 0x%x.\n",
--	      slave_plat->cs, slave_plat->max_hz, slave_plat->mode);
-+	      slave_plat->cs[0], slave_plat->max_hz, slave_plat->mode);
- 
- 	return 0;
- }
-@@ -531,13 +531,13 @@ static int fsl_dspi_claim_bus(struct udevice *dev)
- 	priv = dev_get_priv(bus);
- 
- 	/* processor special preparation work */
--	cpu_dspi_claim_bus(dev_seq(bus), slave_plat->cs);
-+	cpu_dspi_claim_bus(dev_seq(bus), slave_plat->cs[0]);
- 
- 	/* configure transfer mode */
--	fsl_dspi_cfg_ctar_mode(priv, slave_plat->cs, priv->mode);
-+	fsl_dspi_cfg_ctar_mode(priv, slave_plat->cs[0], priv->mode);
- 
- 	/* configure active state of CSX */
--	fsl_dspi_cfg_cs_active_state(priv, slave_plat->cs,
-+	fsl_dspi_cfg_cs_active_state(priv, slave_plat->cs[0],
- 				     priv->mode);
- 
- 	fsl_dspi_clr_fifo(priv);
-@@ -563,7 +563,7 @@ static int fsl_dspi_release_bus(struct udevice *dev)
- 	dspi_halt(priv, 1);
- 
- 	/* processor special release work */
--	cpu_dspi_release_bus(dev_seq(bus), slave_plat->cs);
-+	cpu_dspi_release_bus(dev_seq(bus), slave_plat->cs[0]);
- 
- 	return 0;
- }
-@@ -619,7 +619,7 @@ static int fsl_dspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	bus = dev->parent;
- 	priv = dev_get_priv(bus);
- 
--	return dspi_xfer(priv, slave_plat->cs, bitlen, dout, din, flags);
-+	return dspi_xfer(priv, slave_plat->cs[0], bitlen, dout, din, flags);
- }
- 
- static int fsl_dspi_set_speed(struct udevice *bus, uint speed)
-diff --git a/drivers/spi/fsl_espi.c b/drivers/spi/fsl_espi.c
-index b1d964d79d..76f219be6c 100644
---- a/drivers/spi/fsl_espi.c
-+++ b/drivers/spi/fsl_espi.c
-@@ -513,8 +513,8 @@ static int fsl_espi_child_pre_probe(struct udevice *dev)
- 	struct udevice *bus = dev->parent;
- 	struct fsl_spi_slave *fsl = dev_get_priv(bus);
- 
--	debug("%s cs %u\n", __func__, slave_plat->cs);
--	fsl->cs = slave_plat->cs;
-+	debug("%s cs %u\n", __func__, slave_plat->cs[0]);
-+	fsl->cs = slave_plat->cs[0];
- 
- 	return 0;
- }
-diff --git a/drivers/spi/fsl_qspi.c b/drivers/spi/fsl_qspi.c
-index 3f97730bad..207caa21c3 100644
---- a/drivers/spi/fsl_qspi.c
-+++ b/drivers/spi/fsl_qspi.c
-@@ -511,10 +511,10 @@ static void fsl_qspi_select_mem(struct fsl_qspi *q, struct spi_slave *slave)
- 	struct dm_spi_slave_plat *plat =
- 		dev_get_parent_plat(slave->dev);
- 
--	if (q->selected == plat->cs)
-+	if (q->selected == plat->cs[0])
- 		return;
- 
--	q->selected = plat->cs;
-+	q->selected = plat->cs[0];
- 	fsl_qspi_invalidate(q);
- }
- 
-diff --git a/drivers/spi/gxp_spi.c b/drivers/spi/gxp_spi.c
-index 70d76ac66a..3ee369c5a0 100644
---- a/drivers/spi/gxp_spi.c
-+++ b/drivers/spi/gxp_spi.c
-@@ -87,7 +87,7 @@ static int gxp_spi_xfer(struct udevice *dev, unsigned int bitlen, const void *do
- 		value = readl(priv->base + OFFSET_SPIMCFG);
- 		value &= ~(1 << 24);
- 		/* set chipselect */
--		value |= (slave_plat->cs << 24);
-+		value |= (slave_plat->cs[0] << 24);
- 
- 		/* addr reg and addr size */
- 		if (len >= 4) {
-diff --git a/drivers/spi/mpc8xx_spi.c b/drivers/spi/mpc8xx_spi.c
-index 5c8d760935..58d8f46e7a 100644
---- a/drivers/spi/mpc8xx_spi.c
-+++ b/drivers/spi/mpc8xx_spi.c
-@@ -134,7 +134,7 @@ static void mpc8xx_spi_cs_activate(struct udevice *dev)
- 	struct mpc8xx_priv *priv = dev_get_priv(dev->parent);
- 	struct dm_spi_slave_plat *platdata = dev_get_parent_plat(dev);
- 
--	dm_gpio_set_value(&priv->gpios[platdata->cs], 1);
-+	dm_gpio_set_value(&priv->gpios[platdata->cs[0]], 1);
- }
- 
- static void mpc8xx_spi_cs_deactivate(struct udevice *dev)
-@@ -142,7 +142,7 @@ static void mpc8xx_spi_cs_deactivate(struct udevice *dev)
- 	struct mpc8xx_priv *priv = dev_get_priv(dev->parent);
- 	struct dm_spi_slave_plat *platdata = dev_get_parent_plat(dev);
- 
--	dm_gpio_set_value(&priv->gpios[platdata->cs], 0);
-+	dm_gpio_set_value(&priv->gpios[platdata->cs[0]], 0);
- }
- 
- static int mpc8xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
-diff --git a/drivers/spi/mpc8xxx_spi.c b/drivers/spi/mpc8xxx_spi.c
-index 7d15390c56..d219bcbc4e 100644
---- a/drivers/spi/mpc8xxx_spi.c
-+++ b/drivers/spi/mpc8xxx_spi.c
-@@ -114,7 +114,7 @@ static void mpc8xxx_spi_cs_activate(struct udevice *dev)
- 	struct mpc8xxx_priv *priv = dev_get_priv(dev->parent);
- 	struct dm_spi_slave_plat *plat = dev_get_parent_plat(dev);
- 
--	dm_gpio_set_value(&priv->gpios[plat->cs], 1);
-+	dm_gpio_set_value(&priv->gpios[plat->cs[0]], 1);
- }
- 
- static void mpc8xxx_spi_cs_deactivate(struct udevice *dev)
-@@ -122,7 +122,7 @@ static void mpc8xxx_spi_cs_deactivate(struct udevice *dev)
- 	struct mpc8xxx_priv *priv = dev_get_priv(dev->parent);
- 	struct dm_spi_slave_plat *plat = dev_get_parent_plat(dev);
- 
--	dm_gpio_set_value(&priv->gpios[plat->cs], 0);
-+	dm_gpio_set_value(&priv->gpios[plat->cs[0]], 0);
- }
- 
- static int mpc8xxx_spi_xfer(struct udevice *dev, uint bitlen,
-@@ -138,10 +138,10 @@ static int mpc8xxx_spi_xfer(struct udevice *dev, uint bitlen,
- 	ulong type = dev_get_driver_data(bus);
- 
- 	debug("%s: slave %s:%u dout %08X din %08X bitlen %u\n", __func__,
--	      bus->name, plat->cs, (uint)dout, (uint)din, bitlen);
--	if (plat->cs >= priv->cs_count) {
-+	      bus->name, plat->cs[0], (uint)dout, (uint)din, bitlen);
-+	if (plat->cs[0] >= priv->cs_count) {
- 		dev_err(dev, "chip select index %d too large (cs_count=%d)\n",
--			plat->cs, priv->cs_count);
-+			plat->cs[0], priv->cs_count);
- 		return -EINVAL;
- 	}
- 	if (bitlen % 8) {
-diff --git a/drivers/spi/mscc_bb_spi.c b/drivers/spi/mscc_bb_spi.c
-index 95bea0da1b..b0150a60eb 100644
---- a/drivers/spi/mscc_bb_spi.c
-+++ b/drivers/spi/mscc_bb_spi.c
-@@ -124,11 +124,11 @@ int mscc_bb_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	u8		*rxd = din;
- 
- 	debug("spi_xfer: slave %s:%s cs%d mode %d, dout %p din %p bitlen %u\n",
--	      dev->parent->name, dev->name, plat->cs,  plat->mode, dout,
-+	      dev->parent->name, dev->name, plat->cs[0],  plat->mode, dout,
- 	      din, bitlen);
- 
- 	if (flags & SPI_XFER_BEGIN)
--		mscc_bb_spi_cs_activate(priv, plat->mode, plat->cs);
-+		mscc_bb_spi_cs_activate(priv, plat->mode, plat->cs[0]);
- 
- 	count = bitlen / 8;
- 	for (i = 0; i < count; i++) {
-diff --git a/drivers/spi/mxc_spi.c b/drivers/spi/mxc_spi.c
-index 33360a1832..8baae075f8 100644
---- a/drivers/spi/mxc_spi.c
-+++ b/drivers/spi/mxc_spi.c
-@@ -135,7 +135,7 @@ static void mxc_spi_cs_activate(struct mxc_spi_slave *mxcs)
- 	struct udevice *dev = mxcs->dev;
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 
- 	if (!dm_gpio_is_valid(&mxcs->cs_gpios[cs]))
- 		return;
-@@ -153,7 +153,7 @@ static void mxc_spi_cs_deactivate(struct mxc_spi_slave *mxcs)
- 	struct udevice *dev = mxcs->dev;
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 
- 	if (!dm_gpio_is_valid(&mxcs->cs_gpios[cs]))
- 		return;
-@@ -633,7 +633,7 @@ static int mxc_spi_claim_bus(struct udevice *dev)
- 
- 	mxcs->dev = dev;
- 
--	return mxc_spi_claim_bus_internal(mxcs, slave_plat->cs);
-+	return mxc_spi_claim_bus_internal(mxcs, slave_plat->cs[0]);
- }
- 
- static int mxc_spi_release_bus(struct udevice *dev)
-diff --git a/drivers/spi/npcm_fiu_spi.c b/drivers/spi/npcm_fiu_spi.c
-index 73c506442a..7b8271c8bb 100644
---- a/drivers/spi/npcm_fiu_spi.c
-+++ b/drivers/spi/npcm_fiu_spi.c
-@@ -203,7 +203,7 @@ static int npcm_fiu_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	int len;
- 
- 	if (flags & SPI_XFER_BEGIN)
--		activate_cs(regs, slave_plat->cs);
-+		activate_cs(regs, slave_plat->cs[0]);
- 
- 	while (bytes) {
- 		len = (bytes > CHUNK_SIZE) ? CHUNK_SIZE : bytes;
-@@ -222,7 +222,7 @@ static int npcm_fiu_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	}
- 
- 	if (flags & SPI_XFER_END)
--		deactivate_cs(regs, slave_plat->cs);
-+		deactivate_cs(regs, slave_plat->cs[0]);
- 
- 	return ret;
- }
-@@ -325,9 +325,9 @@ static int npcm_fiu_exec_op(struct spi_slave *slave,
- 	bytes = op->data.nbytes;
- 	addr = (u32)op->addr.val;
- 	if (!bytes) {
--		activate_cs(regs, slave_plat->cs);
-+		activate_cs(regs, slave_plat->cs[0]);
- 		ret = npcm_fiu_uma_operation(priv, op, addr, NULL, NULL, 0, false);
--		deactivate_cs(regs, slave_plat->cs);
-+		deactivate_cs(regs, slave_plat->cs[0]);
- 		return ret;
- 	}
- 
-@@ -339,9 +339,9 @@ static int npcm_fiu_exec_op(struct spi_slave *slave,
- 	 * Use HW-control CS for read to avoid clock and timing issues.
- 	 */
- 	if (op->data.dir == SPI_MEM_DATA_OUT)
--		activate_cs(regs, slave_plat->cs);
-+		activate_cs(regs, slave_plat->cs[0]);
- 	else
--		writel(FIELD_PREP(UMA_CTS_DEV_NUM_MASK, slave_plat->cs) | UMA_CTS_SW_CS,
-+		writel(FIELD_PREP(UMA_CTS_DEV_NUM_MASK, slave_plat->cs[0]) | UMA_CTS_SW_CS,
- 		       &regs->uma_cts);
- 	while (bytes) {
- 		len = (bytes > CHUNK_SIZE) ? CHUNK_SIZE : bytes;
-@@ -361,7 +361,7 @@ static int npcm_fiu_exec_op(struct spi_slave *slave,
- 			rx += len;
- 	}
- 	if (op->data.dir == SPI_MEM_DATA_OUT)
--		deactivate_cs(regs, slave_plat->cs);
-+		deactivate_cs(regs, slave_plat->cs[0]);
- 
- 	return 0;
- }
-diff --git a/drivers/spi/nxp_fspi.c b/drivers/spi/nxp_fspi.c
-index 5db27f9ae2..b8f8040614 100644
---- a/drivers/spi/nxp_fspi.c
-+++ b/drivers/spi/nxp_fspi.c
-@@ -963,7 +963,7 @@ static int nxp_fspi_claim_bus(struct udevice *dev)
- 	bus = dev->parent;
- 	f = dev_get_priv(bus);
- 
--	nxp_fspi_select_mem(f, slave_plat->cs);
-+	nxp_fspi_select_mem(f, slave_plat->cs[0]);
- 
- 	return 0;
- }
-diff --git a/drivers/spi/octeon_spi.c b/drivers/spi/octeon_spi.c
-index 4bc38beaa6..0e6e0f7dbe 100644
---- a/drivers/spi/octeon_spi.c
-+++ b/drivers/spi/octeon_spi.c
-@@ -93,7 +93,7 @@ static u64 octeon_spi_set_mpicfg(struct udevice *dev)
- 	if (max_speed > OCTEON_SPI_MAX_CLOCK_HZ)
- 		max_speed = OCTEON_SPI_MAX_CLOCK_HZ;
- 
--	debug("\n slave params %d %d %d\n", slave->cs,
-+	debug("\n slave params %d %d %d\n", slave->cs[0],
- 	      slave->max_hz, slave->mode);
- 	cpha = !!(slave->mode & SPI_CPHA);
- 	cpol = !!(slave->mode & SPI_CPOL);
-diff --git a/drivers/spi/omap3_spi.c b/drivers/spi/omap3_spi.c
-index ff7b55f870..b29f21f74e 100644
---- a/drivers/spi/omap3_spi.c
-+++ b/drivers/spi/omap3_spi.c
-@@ -393,7 +393,7 @@ static int omap3_spi_claim_bus(struct udevice *dev)
- 	struct omap3_spi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 
--	priv->cs = slave_plat->cs;
-+	priv->cs = slave_plat->cs[0];
- 	if (!priv->freq)
- 		priv->freq = slave_plat->max_hz;
- 
-@@ -422,7 +422,7 @@ static int omap3_spi_set_wordlen(struct udevice *dev, unsigned int wordlen)
- 	struct omap3_spi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 
--	priv->cs = slave_plat->cs;
-+	priv->cs = slave_plat->cs[0];
- 	priv->wordlen = wordlen;
- 	_omap3_spi_set_wordlen(priv);
- 
-diff --git a/drivers/spi/pic32_spi.c b/drivers/spi/pic32_spi.c
-index 45f07f083d..aed18f46e3 100644
---- a/drivers/spi/pic32_spi.c
-+++ b/drivers/spi/pic32_spi.c
-@@ -248,7 +248,7 @@ static int pic32_spi_xfer(struct udevice *slave, unsigned int bitlen,
- 	slave_plat = dev_get_parent_plat(slave);
- 
- 	debug("spi_xfer: bus:%i cs:%i flags:%lx\n",
--	      dev_seq(bus), slave_plat->cs, flags);
-+	      dev_seq(bus), slave_plat->cs[0], flags);
- 	debug("msg tx %p, rx %p submitted of %d byte(s)\n",
- 	      tx_buf, rx_buf, len);
- 
-diff --git a/drivers/spi/rk_spi.c b/drivers/spi/rk_spi.c
-index 7de943356a..bedc63b66d 100644
---- a/drivers/spi/rk_spi.c
-+++ b/drivers/spi/rk_spi.c
-@@ -445,7 +445,7 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 
- 	/* Assert CS before transfer */
- 	if (flags & SPI_XFER_BEGIN)
--		spi_cs_activate(dev, slave_plat->cs);
-+		spi_cs_activate(dev, slave_plat->cs[0]);
- 
- 	/*
- 	 * To ensure fast loading of firmware images (e.g. full U-Boot
-@@ -498,7 +498,7 @@ static int rockchip_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 
- 	/* Deassert CS after transfer */
- 	if (flags & SPI_XFER_END)
--		spi_cs_deactivate(dev, slave_plat->cs);
-+		spi_cs_deactivate(dev, slave_plat->cs[0]);
- 
- 	rkspi_enable_chip(regs, false);
- 
-diff --git a/drivers/spi/rockchip_sfc.c b/drivers/spi/rockchip_sfc.c
-index 596c22aa01..71e9b707e8 100644
---- a/drivers/spi/rockchip_sfc.c
-+++ b/drivers/spi/rockchip_sfc.c
-@@ -409,7 +409,7 @@ static int rockchip_sfc_xfer_setup(struct rockchip_sfc *sfc,
- 
- 	/* set the Controller */
- 	ctrl |= SFC_CTRL_PHASE_SEL_NEGETIVE;
--	cmd |= plat->cs << SFC_CMD_CS_SHIFT;
-+	cmd |= plat->cs[0] << SFC_CMD_CS_SHIFT;
- 
- 	dev_dbg(sfc->dev, "sfc addr.nbytes=%x(x%d) dummy.nbytes=%x(x%d)\n",
- 		op->addr.nbytes, op->addr.buswidth,
-diff --git a/drivers/spi/spi-aspeed-smc.c b/drivers/spi/spi-aspeed-smc.c
-index 3962031021..56c8a67da8 100644
---- a/drivers/spi/spi-aspeed-smc.c
-+++ b/drivers/spi/spi-aspeed-smc.c
-@@ -193,7 +193,7 @@ static u32 ast2400_get_clk_setting(struct udevice *dev, uint max_hz)
- 
- 	if (found) {
- 		hclk_div = hclk_masks[i] << 8;
--		priv->flashes[slave_plat->cs].max_freq = hclk_clk / (i + 1);
-+		priv->flashes[slave_plat->cs[0]].max_freq = hclk_clk / (i + 1);
- 	}
- 
- 	dev_dbg(dev, "found: %s, hclk: %d, max_clk: %d\n", found ? "yes" : "no",
-@@ -201,7 +201,7 @@ static u32 ast2400_get_clk_setting(struct udevice *dev, uint max_hz)
- 
- 	if (found) {
- 		dev_dbg(dev, "h_div: %d (mask %x), speed: %d\n",
--			i + 1, hclk_masks[i], priv->flashes[slave_plat->cs].max_freq);
-+			i + 1, hclk_masks[i], priv->flashes[slave_plat->cs[0]].max_freq);
- 	}
- 
- 	return hclk_div;
-@@ -312,7 +312,7 @@ static u32 ast2500_get_clk_setting(struct udevice *dev, uint max_hz)
- 	for (i = 0; i < ARRAY_SIZE(hclk_masks); i++) {
- 		if (hclk_clk / (i + 1) <= max_hz) {
- 			found = true;
--			priv->flashes[slave_plat->cs].max_freq =
-+			priv->flashes[slave_plat->cs[0]].max_freq =
- 							hclk_clk / (i + 1);
- 			break;
- 		}
-@@ -326,7 +326,7 @@ static u32 ast2500_get_clk_setting(struct udevice *dev, uint max_hz)
- 	for (i = 0; i < ARRAY_SIZE(hclk_masks); i++) {
- 		if (hclk_clk / ((i + 1) * 4) <= max_hz) {
- 			found = true;
--			priv->flashes[slave_plat->cs].max_freq =
-+			priv->flashes[slave_plat->cs[0]].max_freq =
- 						hclk_clk / ((i + 1) * 4);
- 			break;
- 		}
-@@ -341,7 +341,7 @@ end:
- 
- 	if (found) {
- 		dev_dbg(dev, "h_div: %d (mask %x), speed: %d\n",
--			i + 1, hclk_masks[i], priv->flashes[slave_plat->cs].max_freq);
-+			i + 1, hclk_masks[i], priv->flashes[slave_plat->cs[0]].max_freq);
- 	}
- 
- 	return hclk_div;
-@@ -457,7 +457,7 @@ static u32 ast2600_get_clk_setting(struct udevice *dev, uint max_hz)
- 
- 		if (found) {
- 			hclk_div = ((j << 24) | hclk_masks[i] << 8);
--			priv->flashes[slave_plat->cs].max_freq =
-+			priv->flashes[slave_plat->cs[0]].max_freq =
- 						hclk_clk / (i + 1 + j * 16);
- 			break;
- 		}
-@@ -468,7 +468,7 @@ static u32 ast2600_get_clk_setting(struct udevice *dev, uint max_hz)
- 
- 	if (found) {
- 		dev_dbg(dev, "base_clk: %d, h_div: %d (mask %x), speed: %d\n",
--			j, i + 1, hclk_masks[i], priv->flashes[slave_plat->cs].max_freq);
-+			j, i + 1, hclk_masks[i], priv->flashes[slave_plat->cs[0]].max_freq);
- 	}
- 
- 	return hclk_div;
-@@ -589,7 +589,7 @@ static int aspeed_spi_exec_op_user_mode(struct spi_slave *slave,
- 	struct udevice *bus = dev->parent;
- 	struct aspeed_spi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(slave->dev);
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 	u32 ce_ctrl_reg = (u32)&priv->regs->ce_ctrl[cs];
- 	u32 ce_ctrl_val;
- 	struct aspeed_spi_flash *flash = &priv->flashes[cs];
-@@ -669,7 +669,7 @@ static int aspeed_spi_dirmap_create(struct spi_mem_dirmap_desc *desc)
- 	const struct aspeed_spi_info *info = priv->info;
- 	struct spi_mem_op op_tmpl = desc->info.op_tmpl;
- 	u32 i;
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 	u32 cmd_io_conf;
- 	u32 ce_ctrl_reg;
- 
-@@ -726,7 +726,7 @@ static ssize_t aspeed_spi_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	struct udevice *dev = desc->slave->dev;
- 	struct aspeed_spi_priv *priv = dev_get_priv(dev->parent);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 	int ret;
- 
- 	dev_dbg(dev, "read op:0x%x, addr:0x%llx, len:0x%x\n",
-@@ -751,7 +751,7 @@ static struct aspeed_spi_flash *aspeed_spi_get_flash(struct udevice *dev)
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 	struct aspeed_spi_plat *plat = dev_get_plat(bus);
- 	struct aspeed_spi_priv *priv = dev_get_priv(bus);
--	u32 cs = slave_plat->cs;
-+	u32 cs = slave_plat->cs[0];
- 
- 	if (cs >= plat->max_cs) {
- 		dev_err(dev, "invalid CS %u\n", cs);
-@@ -1070,10 +1070,10 @@ static int aspeed_spi_claim_bus(struct udevice *dev)
- 	struct udevice *bus = dev->parent;
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 	struct aspeed_spi_priv *priv = dev_get_priv(dev->parent);
--	struct aspeed_spi_flash *flash = &priv->flashes[slave_plat->cs];
-+	struct aspeed_spi_flash *flash = &priv->flashes[slave_plat->cs[0]];
- 	u32 clk_setting;
- 
--	dev_dbg(bus, "%s: claim bus CS%u\n", bus->name, slave_plat->cs);
-+	dev_dbg(bus, "%s: claim bus CS%u\n", bus->name, slave_plat->cs[0]);
- 
- 	if (flash->max_freq == 0) {
- 		clk_setting = priv->info->get_clk_setting(dev, slave_plat->max_hz);
-@@ -1091,7 +1091,7 @@ static int aspeed_spi_release_bus(struct udevice *dev)
- 	struct udevice *bus = dev->parent;
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 
--	dev_dbg(bus, "%s: release bus CS%u\n", bus->name, slave_plat->cs);
-+	dev_dbg(bus, "%s: release bus CS%u\n", bus->name, slave_plat->cs[0]);
- 
- 	if (!aspeed_spi_get_flash(dev))
- 		return -ENODEV;
-diff --git a/drivers/spi/spi-mxic.c b/drivers/spi/spi-mxic.c
-index f663b9dcbb..854f9dacfe 100644
---- a/drivers/spi/spi-mxic.c
-+++ b/drivers/spi/spi-mxic.c
-@@ -367,8 +367,8 @@ static int mxic_spi_mem_exec_op(struct spi_slave *slave,
- 		nio = 2;
- 
- 	writel(HC_CFG_NIO(nio) |
--	       HC_CFG_TYPE(slave_plat->cs, HC_CFG_TYPE_SPI_NOR) |
--	       HC_CFG_SLV_ACT(slave_plat->cs) | HC_CFG_IDLE_SIO_LVL(1) |
-+	       HC_CFG_TYPE(slave_plat->cs[0], HC_CFG_TYPE_SPI_NOR) |
-+	       HC_CFG_SLV_ACT(slave_plat->cs[0]) | HC_CFG_IDLE_SIO_LVL(1) |
- 	       HC_CFG_MAN_CS_EN,
- 	       priv->regs + HC_CFG);
- 	writel(HC_EN_BIT, priv->regs + HC_EN);
-@@ -397,7 +397,7 @@ static int mxic_spi_mem_exec_op(struct spi_slave *slave,
- 			ss_ctrl |= OP_READ;
- 	}
- 
--	writel(ss_ctrl, priv->regs + SS_CTRL(slave_plat->cs));
-+	writel(ss_ctrl, priv->regs + SS_CTRL(slave_plat->cs[0]));
- 
- 	writel(readl(priv->regs + HC_CFG) | HC_CFG_MAN_CS_ASSERT,
- 	       priv->regs + HC_CFG);
-diff --git a/drivers/spi/spi-qup.c b/drivers/spi/spi-qup.c
-index 572cef1694..da28a4e7f8 100644
---- a/drivers/spi/spi-qup.c
-+++ b/drivers/spi/spi-qup.c
-@@ -719,7 +719,7 @@ static int qup_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 		if (ret != 0)
- 			return ret;
- 
--		ret = qup_spi_set_cs(bus, slave_plat->cs, false);
-+		ret = qup_spi_set_cs(bus, slave_plat->cs[0], false);
- 		if (ret != 0)
- 			return ret;
- 	}
-@@ -737,7 +737,7 @@ static int qup_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	}
- 
- 	if (flags & SPI_XFER_END) {
--		ret = qup_spi_set_cs(bus, slave_plat->cs, true);
-+		ret = qup_spi_set_cs(bus, slave_plat->cs[0], true);
- 		if (ret != 0)
- 			return ret;
- 	}
-diff --git a/drivers/spi/spi-sifive.c b/drivers/spi/spi-sifive.c
-index ea372a05f8..43904d74a2 100644
---- a/drivers/spi/spi-sifive.c
-+++ b/drivers/spi/spi-sifive.c
-@@ -109,13 +109,13 @@ static void sifive_spi_prep_device(struct sifive_spi *spi,
- {
- 	/* Update the chip select polarity */
- 	if (slave_plat->mode & SPI_CS_HIGH)
--		spi->cs_inactive &= ~BIT(slave_plat->cs);
-+		spi->cs_inactive &= ~BIT(slave_plat->cs[0]);
- 	else
--		spi->cs_inactive |= BIT(slave_plat->cs);
-+		spi->cs_inactive |= BIT(slave_plat->cs[0]);
- 	writel(spi->cs_inactive, spi->regs + SIFIVE_SPI_REG_CSDEF);
- 
- 	/* Select the correct device */
--	writel(slave_plat->cs, spi->regs + SIFIVE_SPI_REG_CSID);
-+	writel(slave_plat->cs[0], spi->regs + SIFIVE_SPI_REG_CSID);
- }
- 
- static int sifive_spi_set_cs(struct sifive_spi *spi,
-diff --git a/drivers/spi/spi-sn-f-ospi.c b/drivers/spi/spi-sn-f-ospi.c
-index e3633a5260..36f180451e 100644
---- a/drivers/spi/spi-sn-f-ospi.c
-+++ b/drivers/spi/spi-sn-f-ospi.c
-@@ -498,7 +498,7 @@ static int f_ospi_exec_op(struct spi_slave *slave, const struct spi_mem_op *op)
- 	int err = 0;
- 
- 	slave_plat = dev_get_parent_plat(slave->dev);
--	ospi->chip_select = slave_plat->cs;
-+	ospi->chip_select = slave_plat->cs[0];
- 
- 	switch (op->data.dir) {
- 	case SPI_MEM_DATA_IN:
-diff --git a/drivers/spi/spi-sunxi.c b/drivers/spi/spi-sunxi.c
-index c56d82d998..4a1ed71766 100644
---- a/drivers/spi/spi-sunxi.c
-+++ b/drivers/spi/spi-sunxi.c
-@@ -338,7 +338,7 @@ static int sun4i_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	}
- 
- 	if (flags & SPI_XFER_BEGIN)
--		sun4i_spi_set_cs(bus, slave_plat->cs, true);
-+		sun4i_spi_set_cs(bus, slave_plat->cs[0], true);
- 
- 	/* Reset FIFOs */
- 	setbits_le32(SPI_REG(priv, SPI_FCR), SPI_BIT(priv, SPI_FCR_RF_RST) |
-@@ -369,7 +369,7 @@ static int sun4i_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 					false, SUN4I_SPI_TIMEOUT_MS, false);
- 		if (ret < 0) {
- 			printf("ERROR: sun4i_spi: Timeout transferring data\n");
--			sun4i_spi_set_cs(bus, slave_plat->cs, false);
-+			sun4i_spi_set_cs(bus, slave_plat->cs[0], false);
- 			return ret;
- 		}
- 
-@@ -380,7 +380,7 @@ static int sun4i_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	}
- 
- 	if (flags & SPI_XFER_END)
--		sun4i_spi_set_cs(bus, slave_plat->cs, false);
-+		sun4i_spi_set_cs(bus, slave_plat->cs[0], false);
- 
- 	return 0;
- }
-diff --git a/drivers/spi/spi-synquacer.c b/drivers/spi/spi-synquacer.c
-index 553f9687e3..5dea074fed 100644
---- a/drivers/spi/spi-synquacer.c
-+++ b/drivers/spi/spi-synquacer.c
-@@ -194,12 +194,12 @@ static void synquacer_spi_config(struct udevice *dev, void *rx, const void *tx)
- 	/* if nothing to do */
- 	if (slave_plat->mode == priv->mode &&
- 	    rwflag == priv->rwflag &&
--	    slave_plat->cs == priv->cs &&
-+	    slave_plat->cs[0] == priv->cs &&
- 	    slave_plat->max_hz == priv->speed)
- 		return;
- 
- 	priv->rwflag = rwflag;
--	priv->cs = slave_plat->cs;
-+	priv->cs = slave_plat->cs[0];
- 	priv->mode = slave_plat->mode;
- 	priv->speed = slave_plat->max_hz;
- 
-diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-index f4795e6867..aa3303d6aa 100644
---- a/drivers/spi/spi-uclass.c
-+++ b/drivers/spi/spi-uclass.c
-@@ -225,7 +225,7 @@ int spi_chip_select(struct udevice *dev)
- {
- 	struct dm_spi_slave_plat *plat = dev_get_parent_plat(dev);
- 
--	return plat ? plat->cs : -ENOENT;
-+	return plat ? plat->cs[0] : -ENOENT;
- }
- 
- int spi_find_chip_select(struct udevice *bus, int cs, struct udevice **devp)
-@@ -262,8 +262,8 @@ int spi_find_chip_select(struct udevice *bus, int cs, struct udevice **devp)
- 		struct dm_spi_slave_plat *plat;
- 
- 		plat = dev_get_parent_plat(dev);
--		dev_dbg(bus, "%s: plat=%p, cs=%d\n", __func__, plat, plat->cs);
--		if (plat->cs == cs) {
-+		dev_dbg(bus, "%s: plat=%p, cs=%d\n", __func__, plat, plat->cs[0]);
-+		if (plat->cs[0] == cs) {
- 			*devp = dev;
- 			return 0;
- 		}
-@@ -416,7 +416,7 @@ int _spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 			return ret;
- 		}
- 		plat = dev_get_parent_plat(dev);
--		plat->cs = cs;
-+		plat->cs[0] = cs;
- 		if (speed) {
- 			plat->max_hz = speed;
- 		} else {
-@@ -447,6 +447,11 @@ int _spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 	slave = dev_get_parent_priv(dev);
- 	bus_data = dev_get_uclass_priv(bus);
- 
-+	if ((dev_read_bool(dev, "parallel-memories")) && !slave->multi_cs_cap) {
-+		dev_err(dev, "controller doesn't support multi CS\n");
-+		return -EINVAL;
-+	}
-+
- 	/*
- 	 * In case the operation speed is not yet established by
- 	 * dm_spi_claim_bus() ensure the bus is configured properly.
-@@ -509,8 +514,14 @@ int spi_slave_of_to_plat(struct udevice *dev, struct dm_spi_slave_plat *plat)
- {
- 	int mode = 0;
- 	int value;
-+	int ret;
-+
-+	ret = dev_read_u32_array(dev, "reg", plat->cs, SPI_CS_CNT_MAX);
-+	if (ret && ret != -EOVERFLOW) {
-+		dev_err(dev, "has no valid 'reg' property (%d)\n", ret);
-+		return ret;
-+	}
- 
--	plat->cs = dev_read_u32_default(dev, "reg", -1);
- 	plat->max_hz = dev_read_u32_default(dev, "spi-max-frequency",
- 					    SPI_DEFAULT_SPEED_HZ);
- 	if (dev_read_bool(dev, "spi-cpol"))
-diff --git a/drivers/spi/stm32_qspi.c b/drivers/spi/stm32_qspi.c
-index 2ffa201a66..fa9b2ca4b6 100644
---- a/drivers/spi/stm32_qspi.c
-+++ b/drivers/spi/stm32_qspi.c
-@@ -395,7 +395,7 @@ static int stm32_qspi_claim_bus(struct udevice *dev)
- {
- 	struct stm32_qspi_priv *priv = dev_get_priv(dev->parent);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
--	int slave_cs = slave_plat->cs;
-+	int slave_cs = slave_plat->cs[0];
- 
- 	if (slave_cs >= STM32_QSPI_MAX_CHIP)
- 		return -ENODEV;
-diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
-index 82f6ed783f..192ba6cf2b 100644
---- a/drivers/spi/stm32_spi.c
-+++ b/drivers/spi/stm32_spi.c
-@@ -435,7 +435,7 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
- 
- 	slave_plat = dev_get_parent_plat(slave);
- 	if (flags & SPI_XFER_BEGIN)
--		stm32_spi_set_cs(bus, slave_plat->cs, false);
-+		stm32_spi_set_cs(bus, slave_plat->cs[0], false);
- 
- 	/* Be sure to have data in fifo before starting data transfer */
- 	if (priv->tx_buf)
-@@ -486,7 +486,7 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
- 	stm32_spi_stopxfer(bus);
- 
- 	if (flags & SPI_XFER_END)
--		stm32_spi_set_cs(bus, slave_plat->cs, true);
-+		stm32_spi_set_cs(bus, slave_plat->cs[0], true);
- 
- 	return xfer_status;
- }
-diff --git a/drivers/spi/ti_qspi.c b/drivers/spi/ti_qspi.c
-index 99acb10882..dfb74ce877 100644
---- a/drivers/spi/ti_qspi.c
-+++ b/drivers/spi/ti_qspi.c
-@@ -164,7 +164,7 @@ static int ti_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	uchar *rxp = din;
- 	uint status;
- 	int timeout;
--	unsigned int cs = slave->cs;
-+	unsigned int cs = slave->cs[0];
- 
- 	bus = dev->parent;
- 	priv = dev_get_priv(bus);
-@@ -345,7 +345,7 @@ static int ti_qspi_exec_mem_op(struct spi_slave *slave,
- 	if (from + op->data.nbytes > priv->mmap_size)
- 		return -ENOTSUPP;
- 
--	ti_qspi_setup_mmap_read(priv, slave_plat->cs, op->cmd.opcode,
-+	ti_qspi_setup_mmap_read(priv, slave_plat->cs[0], op->cmd.opcode,
- 				op->data.buswidth, op->addr.nbytes,
- 				op->dummy.nbytes);
- 
-@@ -364,7 +364,7 @@ static int ti_qspi_claim_bus(struct udevice *dev)
- 	bus = dev->parent;
- 	priv = dev_get_priv(bus);
- 
--	if (slave_plat->cs > priv->num_cs) {
-+	if (slave_plat->cs[0] > priv->num_cs) {
- 		debug("invalid qspi chip select\n");
- 		return -EINVAL;
- 	}
-@@ -372,13 +372,13 @@ static int ti_qspi_claim_bus(struct udevice *dev)
- 	writel(MM_SWITCH, &priv->base->memswitch);
- 	if (priv->ctrl_mod_mmap)
- 		ti_qspi_ctrl_mode_mmap(priv->ctrl_mod_mmap,
--				       slave_plat->cs, true);
-+				       slave_plat->cs[0], true);
- 
- 	writel(priv->dc, &priv->base->dc);
- 	writel(0, &priv->base->cmd);
- 	writel(0, &priv->base->data);
- 
--	priv->dc <<= slave_plat->cs * 8;
-+	priv->dc <<= slave_plat->cs[0] * 8;
- 	writel(priv->dc, &priv->base->dc);
- 
- 	return 0;
-@@ -396,12 +396,12 @@ static int ti_qspi_release_bus(struct udevice *dev)
- 	writel(~MM_SWITCH, &priv->base->memswitch);
- 	if (priv->ctrl_mod_mmap)
- 		ti_qspi_ctrl_mode_mmap(priv->ctrl_mod_mmap,
--				       slave_plat->cs, false);
-+				       slave_plat->cs[0], false);
- 
- 	writel(0, &priv->base->dc);
- 	writel(0, &priv->base->cmd);
- 	writel(0, &priv->base->data);
--	writel(0, TI_QSPI_SETUP_REG(priv, slave_plat->cs));
-+	writel(0, TI_QSPI_SETUP_REG(priv, slave_plat->cs[0]));
- 
- 	return 0;
- }
-diff --git a/drivers/spi/xilinx_spi.c b/drivers/spi/xilinx_spi.c
-index b58a3f632a..7c4a9b79bb 100644
---- a/drivers/spi/xilinx_spi.c
-+++ b/drivers/spi/xilinx_spi.c
-@@ -270,7 +270,7 @@ static void xilinx_spi_startup_block(struct spi_slave *spi)
- 	 * Perform a dummy read as a work around for
- 	 * the startup block issue.
- 	 */
--	spi_cs_activate(spi->dev, slave_plat->cs);
-+	spi_cs_activate(spi->dev, slave_plat->cs[0]);
- 	txp = 0x9f;
- 	start_transfer(spi, (void *)&txp, NULL, 1);
- 
-@@ -298,7 +298,7 @@ static int xilinx_spi_mem_exec_op(struct spi_slave *spi,
- 		startup++;
- 	}
- 
--	spi_cs_activate(spi->dev, slave_plat->cs);
-+	spi_cs_activate(spi->dev, slave_plat->cs[0]);
- 
- 	if (op->cmd.opcode) {
- 		ret = start_transfer(spi, (void *)&op->cmd.opcode, NULL, 1);
 diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
-index cb52c0f307..069d2a77de 100644
+index 069d2a77de..3471c301bf 100644
 --- a/drivers/spi/zynq_qspi.c
 +++ b/drivers/spi/zynq_qspi.c
-@@ -586,13 +586,13 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	struct zynq_qspi_priv *priv = dev_get_priv(bus);
- 	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
+@@ -1,7 +1,8 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * (C) Copyright 2013 Xilinx, Inc.
++ * (C) Copyright 2013 - 2022, Xilinx, Inc.
+  * (C) Copyright 2015 Jagan Teki <jteki@openedev.com>
++ * (C) Copyright 2023, Advanced Micro Devices, Inc.
+  *
+  * Xilinx Zynq Quad-SPI(QSPI) controller driver (master mode only)
+  */
+@@ -13,10 +14,12 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <spi.h>
++#include <spi_flash.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ #include <spi-mem.h>
++#include "../mtd/spi/sf_internal.h"
  
--	priv->cs = slave_plat->cs;
-+	priv->cs = slave_plat->cs[0];
- 	priv->tx_buf = dout;
- 	priv->rx_buf = din;
- 	priv->len = bitlen / 8;
+ DECLARE_GLOBAL_DATA_PTR;
  
--	debug("zynq_qspi_xfer: bus:%i cs:%i bitlen:%i len:%i flags:%lx\n",
--	      dev_seq(bus), slave_plat->cs, bitlen, priv->len, flags);
-+	debug("zynq_qspi_xfer: bus:%i cs[0]:%i bitlen:%i len:%i flags:%lx\n",
-+	      dev_seq(bus), slave_plat->cs[0], bitlen, priv->len, flags);
+@@ -42,6 +45,22 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define ZYNQ_QSPI_TXD_00_01_OFFSET	0x80	/* Transmit 1-byte inst */
+ #define ZYNQ_QSPI_TXD_00_10_OFFSET	0x84	/* Transmit 2-byte inst */
+ #define ZYNQ_QSPI_TXD_00_11_OFFSET	0x88	/* Transmit 3-byte inst */
++#define ZYNQ_QSPI_FR_QOUT_CODE		0x6B    /* read instruction code */
++#define ZYNQ_QSPI_FR_DUALIO_CODE	0xBB
++
++#define QSPI_SELECT_LOWER_CS		BIT(0)
++#define QSPI_SELECT_UPPER_CS		BIT(1)
++
++/*
++ * QSPI Linear Configuration Register
++ *
++ * It is named Linear Configuration but it controls other modes when not in
++ * linear mode also.
++ */
++#define ZYNQ_QSPI_LCFG_TWO_MEM_MASK	0x40000000 /* QSPI Enable Bit Mask */
++#define ZYNQ_QSPI_LCFG_SEP_BUS_MASK	0x20000000 /* QSPI Enable Bit Mask */
++#define ZYNQ_QSPI_LCFG_U_PAGE		0x10000000 /* QSPI Upper memory set */
++#define ZYNQ_QSPI_LCFG_DUMMY_SHIFT	8
  
- 	/*
- 	 * Festering sore.
-diff --git a/drivers/spi/zynq_spi.c b/drivers/spi/zynq_spi.c
-index b3e0858eb9..17bb1015fa 100644
---- a/drivers/spi/zynq_spi.c
-+++ b/drivers/spi/zynq_spi.c
-@@ -242,15 +242,15 @@ static int zynq_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	u8 *rx_buf = din, buf;
- 	u32 ts, status;
+ #define ZYNQ_QSPI_TXFIFO_THRESHOLD	1	/* Tx FIFO threshold level*/
+ #define ZYNQ_QSPI_RXFIFO_THRESHOLD	32	/* Rx FIFO threshold level */
+@@ -101,7 +120,12 @@ struct zynq_qspi_priv {
+ 	int bytes_to_transfer;
+ 	int bytes_to_receive;
+ 	unsigned int is_inst;
++	unsigned int is_parallel;
++	unsigned int is_stacked;
++	unsigned int is_dio;
++	unsigned int u_page;
+ 	unsigned cs_change:1;
++	unsigned is_strip:1;
+ };
  
--	debug("spi_xfer: bus:%i cs:%i bitlen:%i len:%i flags:%lx\n",
--	      dev_seq(bus), slave_plat->cs, bitlen, len, flags);
-+	debug("spi_xfer: bus:%i cs[0]:%i bitlen:%i len:%i flags:%lx\n",
-+	      dev_seq(bus), slave_plat->cs[0], bitlen, len, flags);
+ static int zynq_qspi_of_to_plat(struct udevice *bus)
+@@ -112,7 +136,6 @@ static int zynq_qspi_of_to_plat(struct udevice *bus)
  
- 	if (bitlen % 8) {
- 		debug("spi_xfer: Non byte aligned SPI transfer\n");
- 		return -1;
+ 	plat->regs = (struct zynq_qspi_regs *)fdtdec_get_addr(blob,
+ 							      node, "reg");
+-
+ 	return 0;
+ }
+ 
+@@ -147,6 +170,9 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
+ 	/* Disable Interrupts */
+ 	writel(ZYNQ_QSPI_IXR_ALL_MASK, &regs->idr);
+ 
++	/* Disable linear mode as the boot loader may have used it */
++	writel(0x0, &regs->lqspicfg);
++
+ 	/* Clear the TX and RX threshold reg */
+ 	writel(ZYNQ_QSPI_TXFIFO_THRESHOLD, &regs->txftr);
+ 	writel(ZYNQ_QSPI_RXFIFO_THRESHOLD, &regs->rxftr);
+@@ -164,12 +190,11 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
+ 	confr |= ZYNQ_QSPI_CR_IFMODE_MASK | ZYNQ_QSPI_CR_MCS_MASK |
+ 		ZYNQ_QSPI_CR_PCS_MASK | ZYNQ_QSPI_CR_FW_MASK |
+ 		ZYNQ_QSPI_CR_MSTREN_MASK;
+-	writel(confr, &regs->cr);
+ 
+-	/* Disable the LQSPI feature */
+-	confr = readl(&regs->lqspicfg);
+-	confr &= ~ZYNQ_QSPI_LQSPICFG_LQMODE_MASK;
+-	writel(confr, &regs->lqspicfg);
++	if (priv->is_stacked)
++		confr |= 0x10;
++
++	writel(confr, &regs->cr);
+ 
+ 	/* Enable SPI */
+ 	writel(ZYNQ_QSPI_ENR_SPI_EN_MASK, &regs->enr);
+@@ -180,6 +205,8 @@ static int zynq_qspi_child_pre_probe(struct udevice *bus)
+ 	struct spi_slave *slave = dev_get_parent_priv(bus);
+ 	struct zynq_qspi_priv *priv = dev_get_priv(bus->parent);
+ 
++	slave->multi_cs_cap = true;
++	slave->dio = priv->is_dio;
+ 	priv->max_hz = slave->max_hz;
+ 
+ 	return 0;
+@@ -363,8 +390,8 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
+ 	unsigned len, offset;
+ 	struct zynq_qspi_regs *regs = priv->regs;
+ 	static const unsigned offsets[4] = {
+-		ZYNQ_QSPI_TXD_00_00_OFFSET, ZYNQ_QSPI_TXD_00_01_OFFSET,
+-		ZYNQ_QSPI_TXD_00_10_OFFSET, ZYNQ_QSPI_TXD_00_11_OFFSET };
++		ZYNQ_QSPI_TXD_00_01_OFFSET, ZYNQ_QSPI_TXD_00_10_OFFSET,
++		ZYNQ_QSPI_TXD_00_11_OFFSET, ZYNQ_QSPI_TXD_00_00_OFFSET };
+ 
+ 	while ((fifocount < size) &&
+ 			(priv->bytes_to_transfer > 0)) {
+@@ -386,7 +413,11 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
+ 				return;
+ 			len = priv->bytes_to_transfer;
+ 			zynq_qspi_write_data(priv, &data, len);
+-			offset = (priv->rx_buf) ? offsets[0] : offsets[len];
++			if ((priv->is_parallel || priv->is_stacked) &&
++                            !priv->is_inst && (len % 2))
++                                len++;
++                        offset = (priv->rx_buf) ?
++                                  offsets[3] : offsets[len - 1];
+ 			writel(data, &regs->cr + (offset / 4));
+ 		}
+ 	}
+@@ -491,6 +522,7 @@ static int zynq_qspi_irq_poll(struct zynq_qspi_priv *priv)
+  */
+ static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
+ {
++	static u8 current_u_page;
+ 	u32 data = 0;
+ 	struct zynq_qspi_regs *regs = priv->regs;
+ 
+@@ -500,6 +532,47 @@ static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
+ 	priv->bytes_to_transfer = priv->len;
+ 	priv->bytes_to_receive = priv->len;
+ 
++	if (priv->is_parallel)
++		writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
++			ZYNQ_QSPI_LCFG_SEP_BUS_MASK |
++			(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
++			ZYNQ_QSPI_FR_QOUT_CODE), &regs->lqspicfg);
++
++	if (priv->is_inst && priv->is_stacked && current_u_page != priv->u_page) {
++		if (priv->u_page) {
++			if (priv->is_dio == SF_DUALIO_FLASH)
++				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
++					ZYNQ_QSPI_LCFG_U_PAGE |
++					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
++					ZYNQ_QSPI_FR_DUALIO_CODE),
++					&regs->lqspicfg);
++			else
++				/* Configure two memories on shared bus
++				 * by enabling upper mem
++				 */
++				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
++					ZYNQ_QSPI_LCFG_U_PAGE |
++					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
++					ZYNQ_QSPI_FR_QOUT_CODE),
++					&regs->lqspicfg);
++		} else {
++			if (priv->is_dio == SF_DUALIO_FLASH)
++				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
++					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
++					ZYNQ_QSPI_FR_DUALIO_CODE),
++					&regs->lqspicfg);
++			else
++				/* Configure two memories on shared bus
++				 * by enabling lower mem
++				 */
++				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
++					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
++					ZYNQ_QSPI_FR_QOUT_CODE),
++					&regs->lqspicfg);
++		}
++		current_u_page = priv->u_page;
++	}
++
+ 	if (priv->len < 4)
+ 		zynq_qspi_fill_tx_fifo(priv, priv->len);
+ 	else
+@@ -599,7 +672,8 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
+ 	 * Assume that the beginning of a transfer with bits to
+ 	 * transmit must contain a device command.
+ 	 */
+-	if (dout && flags & SPI_XFER_BEGIN)
++	if ((dout && flags & SPI_XFER_BEGIN) ||
++	    (flags & SPI_XFER_END && !priv->is_strip))
+ 		priv->is_inst = 1;
+ 	else
+ 		priv->is_inst = 0;
+@@ -609,6 +683,11 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
+ 	else
+ 		priv->cs_change = 0;
+ 
++	if (flags & SPI_XFER_U_PAGE)
++		priv->u_page = 1;
++	else
++		priv->u_page = 0;
++
+ 	zynq_qspi_transfer(priv);
+ 
+ 	return 0;
+@@ -672,14 +751,35 @@ static int zynq_qspi_set_mode(struct udevice *bus, uint mode)
+ 	return 0;
+ }
+ 
++bool update_stripe(const struct spi_mem_op *op)
++{
++	if (op->cmd.opcode == SPINOR_OP_BE_4K ||
++	    op->cmd.opcode == SPINOR_OP_CHIP_ERASE ||
++	    op->cmd.opcode == SPINOR_OP_SE ||
++	    op->cmd.opcode == SPINOR_OP_WREAR
++	)
++		return false;
++
++	return true;
++}
++
+ static int zynq_qspi_exec_op(struct spi_slave *slave,
+ 			     const struct spi_mem_op *op)
+ {
++	struct udevice *bus = slave->dev->parent;
++	struct zynq_qspi_priv *priv = dev_get_priv(bus);
+ 	int op_len, pos = 0, ret, i;
++	u32 dummy_bytes = 0;
+ 	unsigned int flag = 0;
+ 	const u8 *tx_buf = NULL;
+ 	u8 *rx_buf = NULL;
+ 
++	if ((slave->flags & QSPI_SELECT_LOWER_CS) &&
++	    (slave->flags & QSPI_SELECT_UPPER_CS))
++		priv->is_parallel = true;
++	if (slave->flags & SPI_XFER_STACKED)
++		priv->is_stacked = true;
++
+ 	if (op->data.nbytes) {
+ 		if (op->data.dir == SPI_MEM_DATA_IN)
+ 			rx_buf = op->data.buf.in;
+@@ -688,6 +788,11 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
  	}
  
--	priv->cs = slave_plat->cs;
-+	priv->cs = slave_plat->cs[0];
- 	if (flags & SPI_XFER_BEGIN)
- 		spi_cs_activate(dev);
+ 	op_len = op->cmd.nbytes + op->addr.nbytes + op->dummy.nbytes;
++	if (op->dummy.nbytes) {
++		op_len = op->cmd.nbytes + op->addr.nbytes +
++			 op->dummy.nbytes / op->dummy.buswidth;
++		dummy_bytes = op->dummy.nbytes / op->dummy.buswidth;
++	}
  
+ 	u8 op_buf[op_len];
+ 
+@@ -701,8 +806,11 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
+ 		pos += op->addr.nbytes;
+ 	}
+ 
+-	if (op->dummy.nbytes)
+-		memset(op_buf + pos, 0xff, op->dummy.nbytes);
++	if (dummy_bytes)
++		memset(op_buf + pos, 0xff, dummy_bytes);
++
++	if (slave->flags & SPI_XFER_U_PAGE)
++		flag |= SPI_XFER_U_PAGE;
+ 
+ 	/* 1st transfer: opcode + address + dummy cycles */
+ 	/* Make sure to set END bit if no tx or rx data messages follow */
+@@ -714,6 +822,9 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
+ 	if (ret)
+ 		return ret;
+ 
++	slave->dummy_bytes = 0;
++	priv->is_strip = update_stripe(op);
++
+ 	/* 2nd transfer: rx or tx data path */
+ 	if (tx_buf || rx_buf) {
+ 		ret = zynq_qspi_xfer(slave->dev, op->data.nbytes * 8, tx_buf,
+@@ -722,6 +833,9 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
+ 			return ret;
+ 	}
+ 
++	priv->is_parallel = false;
++	priv->is_stacked = false;
++	slave->flags &= ~SPI_XFER_MASK;
+ 	spi_release_bus(slave);
+ 
+ 	return 0;
 diff --git a/include/spi.h b/include/spi.h
-index 2a3ccaa754..f050227168 100644
+index c33acd9eac..0c5f4c1739 100644
 --- a/include/spi.h
 +++ b/include/spi.h
-@@ -82,7 +82,7 @@ struct dm_spi_bus {
-  * @mode:	SPI mode to use for this device (see SPI mode flags)
-  */
- struct dm_spi_slave_plat {
--	unsigned int cs;
-+	unsigned int cs[SPI_CS_CNT_MAX];
- 	uint max_hz;
- 	uint mode;
- };
-diff --git a/lib/acpi/acpi_device.c b/lib/acpi/acpi_device.c
-index 1b838fdbd6..b80a45aefc 100644
---- a/lib/acpi/acpi_device.c
-+++ b/lib/acpi/acpi_device.c
-@@ -729,7 +729,7 @@ static int acpi_device_set_spi(const struct udevice *dev, struct acpi_spi *spi,
+@@ -42,6 +42,8 @@
+ #define SPI_3BYTE_MODE 0x0
+ #define SPI_4BYTE_MODE 0x1
  
- 	plat = dev_get_parent_plat(slave->dev);
- 	memset(spi, '\0', sizeof(*spi));
--	spi->device_select = plat->cs;
-+	spi->device_select = plat->cs[0];
- 	spi->device_select_polarity = SPI_POLARITY_LOW;
- 	spi->wire_mode = SPI_4_WIRE_MODE;
- 	spi->speed = plat->max_hz;
++#define SF_DUALIO_FLASH        0x1
++
+ /* SPI transfer flags */
+ #define SPI_XFER_STRIPE	(1 << 6)
+ #define SPI_XFER_MASK	(3 << 8)
+@@ -172,6 +174,8 @@ struct spi_slave {
+ #define SPI_XFER_U_PAGE		BIT(4)
+ #define SPI_XFER_STACKED	BIT(5)
+ 
++	u8 dio;
++	u8 dummy_bytes;
+ 	u32 bytemode;
+ 
+ 	/*
 -- 
 2.25.1
 
