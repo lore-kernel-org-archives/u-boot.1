@@ -4,57 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 127F6C001DF
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 14:29:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58E62C001DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 14:45:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D110686FD5;
-	Fri, 20 Oct 2023 16:29:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A296C8744E;
+	Fri, 20 Oct 2023 16:45:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VmwNyMpi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qcs9RWur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2878E86FD5; Fri, 20 Oct 2023 16:29:25 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9DB9187478; Fri, 20 Oct 2023 16:45:51 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F61F86F64
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 16:29:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86E0A8729D
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 16:45:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 28AF2B832B1;
- Fri, 20 Oct 2023 14:29:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2161EC433C8;
- Fri, 20 Oct 2023 14:29:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1697812161;
- bh=d6WE3pLeCte571NG5CjO3RLS4PFvnCNPtFF5yFgMmHE=;
- h=From:To:Cc:Subject:Date:From;
- b=VmwNyMpi04Hu+MT0uowfSSUReEK/4MvZUIGYy1rmRoOnhjp6XxzJhzXZElRJpqHd2
- pYsCA2iSkZiqHFWi9H3Im2GznK2SY1rjweS1CU7pSm4SqqxisthzGZ8ZmE0WsPXgiy
- s3/7SN077VMtEIlWlkIGWeH1b9ktnEThhB5YN4tTiskIDlKTBAaidobjNFMVkDoPyX
- hnAgg8qO2538bZJ81xHaI46bIexsrCxhFnJh2280phFYTNlNoqMWzLYoFURFseLbex
- 76W2d+2Rpd1TNIozbe7e4gVsX1+Z2ZL2jSWnhWp3sjB/U2VgYNXRwQiEL6gC4VizUP
- HVoFygkL6yimA==
-From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5a7c93507d5so9465067b3.2
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 07:45:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697813148; x=1698417948; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jhWAkumB6HZmuGhVKFqjOkEDyypwBhEziPhrn0xxlDM=;
+ b=qcs9RWurzd+3XfgyMhle9Jy82lBdLsj/gqho+K929buBNIS4TjLoTJm7+jNhenIZRQ
+ UCtq9N7h9QkF0zPnc1DdXlC7ItpSpGuIF/TXAIXuu6wMdUF1JG4GAL3Ak580y6rUplKJ
+ n7a/pLdNpECkqMwNI8kG+Eq8d01pMy2ejYwaw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697813148; x=1698417948;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jhWAkumB6HZmuGhVKFqjOkEDyypwBhEziPhrn0xxlDM=;
+ b=UQLq9F21erUlEpcmdDdz6ycbjlVm+T6+pzANJYJ+UIk1WBPyWHz3vsZtM4ksbWI9aG
+ Inrs7zI9FDYDZWM+a7sqKa79WgiKWmDtWDLL63CnQqXY0V/8s/Yt9H96iQW5iJhl44+I
+ a9lhelvixBg/XD5m5+K0Z+ncsOoyV0ZlvtgsWMgHL2G1TByqn6OgciWF8/1JtdwCFVBC
+ AGJ5cm672OcIInWMSF66jeGdkh6ZlpTCof+c5XC56NFk6S1CcqYxfimhprHkbDqVnXhN
+ ZbAHFrnWwxmoCNiAuyGR4W3cNk159GlqyAjml/UDQc5g+dHJYAc7MyMUtz4OqK1wYS4r
+ +SKA==
+X-Gm-Message-State: AOJu0Yy0Uswvws7U3uneio9h9X8Ndo//fxWwJ69Kw/Ov0r2w/qY0rfBs
+ h7oTixioXchzs2T/+384+tb4bg==
+X-Google-Smtp-Source: AGHT+IGY2iaRXZTqbox+EInVzcZdV61lekghP4hqxZjavszsQWB9MrBhPbW8qEd4WWJSbwM6StE5Yg==
+X-Received: by 2002:a81:9294:0:b0:5a7:da0d:e4ee with SMTP id
+ j142-20020a819294000000b005a7da0de4eemr2467194ywg.16.1697813148148; 
+ Fri, 20 Oct 2023 07:45:48 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
+ [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
+ u142-20020a818494000000b0059bd8447721sm722553ywf.21.2023.10.20.07.45.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 Oct 2023 07:45:47 -0700 (PDT)
+Date: Fri, 20 Oct 2023 10:45:45 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Stefan Roese <sr@denx.de>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- =?UTF-8?q?Michal=20Hru=C5=A1eck=C3=BD?= <michal.hrusecky@nic.cz>,
- =?UTF-8?q?Marek=20Moj=C3=ADk?= <marek.mojik@nic.cz>,
- =?UTF-8?q?Maximili=C3=A1n=20Maliar?= <maximilian.maliar@nic.cz>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-marvell] arm: mvebu: turris_mox: Extend to support RIPE
- Atlas Probe
-Date: Fri, 20 Oct 2023 16:29:16 +0200
-Message-ID: <20231020142916.26193-1-kabel@kernel.org>
-X-Mailer: git-send-email 2.41.0
+ Chris Packham <judge.packham@gmail.com>, Marc Zyngier <maz@kernel.org>
+Subject: Re: Please pull u-boot-marvell/master
+Message-ID: <20231020144545.GJ3119521@bill-the-cat>
+References: <f84925f4-9c3f-4901-902c-49bb10a10765@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="sVhd3KnFSUXA/++y"
+Content-Disposition: inline
+In-Reply-To: <f84925f4-9c3f-4901-902c-49bb10a10765@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,377 +91,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend Turris Mox board code to support CZ.NIC's RIPE Atlas Probe.
 
-Signed-off-by: Marek Behún <kabel@kernel.org>
----
- arch/arm/dts/Makefile                   |  1 +
- arch/arm/dts/armada-3720-ripe-atlas.dts | 91 +++++++++++++++++++++++++
- arch/arm/mach-mvebu/Kconfig             |  6 +-
- board/CZ.NIC/turris_mox/mox_sp.c        | 12 +++-
- board/CZ.NIC/turris_mox/mox_sp.h        |  8 ++-
- board/CZ.NIC/turris_mox/turris_mox.c    | 72 +++++++++++++++++--
- configs/turris_mox_defconfig            |  3 +-
- 7 files changed, 180 insertions(+), 13 deletions(-)
- create mode 100644 arch/arm/dts/armada-3720-ripe-atlas.dts
+--sVhd3KnFSUXA/++y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 4569483d5f..e39a7647b4 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -319,6 +319,7 @@ else
- dtb-$(CONFIG_ARCH_MVEBU) +=			\
- 	armada-3720-db.dtb			\
- 	armada-3720-espressobin.dtb		\
-+	armada-3720-ripe-atlas.dtb		\
- 	armada-3720-turris-mox.dtb		\
- 	armada-3720-eDPU.dtb			\
- 	armada-3720-uDPU.dtb			\
-diff --git a/arch/arm/dts/armada-3720-ripe-atlas.dts b/arch/arm/dts/armada-3720-ripe-atlas.dts
-new file mode 100644
-index 0000000000..4457845266
---- /dev/null
-+++ b/arch/arm/dts/armada-3720-ripe-atlas.dts
-@@ -0,0 +1,91 @@
-+// SPDX-License-Identifier: GPL-2.0+ or X11
-+/*
-+ * Device Tree file for CZ.NIC' RIPE Atlas Probe
-+ * 2021 by Marek Behún <marek.behun@nic.cz>
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+#include "armada-372x.dtsi"
-+
-+/ {
-+	model = "CZ.NIC's RIPE Atlas Probe";
-+	compatible = "cznic,ripe-atlas", "marvell,armada3720",
-+		     "marvell,armada3710";
-+
-+	aliases {
-+		ethernet0 = &eth0;
-+		mmc0 = &sdhci0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	memory {
-+		device_type = "memory";
-+		reg = <0x00000000 0x00000000 0x00000000 0x20000000>;
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led {
-+			gpios = <&gpiosb 21 GPIO_ACTIVE_LOW>;
-+			color = <LED_COLOR_ID_RED>;
-+			function = LED_FUNCTION_ACTIVITY;
-+		};
-+	};
-+
-+	vsdc_reg: vsdc-reg {
-+		compatible = "regulator-gpio";
-+		regulator-name = "vsdc";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-boot-on;
-+
-+		gpios = <&gpiosb 23 GPIO_ACTIVE_HIGH>;
-+		gpios-states = <0>;
-+		states = <1800000 0x1
-+			  3300000 0x0>;
-+		enable-active-high;
-+	};
-+};
-+
-+&comphy {
-+	status = "disabled";
-+};
-+
-+&mdio {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&smi_pins>;
-+	status = "okay";
-+
-+	phy1: ethernet-phy@1 {
-+		reg = <1>;
-+	};
-+};
-+
-+&eth0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&rgmii_pins>;
-+	phy-mode = "rgmii";
-+	phy-handle = <&phy1>;
-+	status = "okay";
-+};
-+
-+&sdhci0 {
-+	bus-width = <8>;
-+	non-removable;
-+	vqmmc-supply = <&vsdc_reg>;
-+	marvell,pad-type = "sd";
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart1_pins>;
-+	status = "okay";
-+};
-diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-index 5c7f4bf964..c80d8587b1 100644
---- a/arch/arm/mach-mvebu/Kconfig
-+++ b/arch/arm/mach-mvebu/Kconfig
-@@ -144,8 +144,12 @@ config TARGET_TURRIS_OMNIA
- 	select ATSHA204A
- 
- config TARGET_TURRIS_MOX
--	bool "Support Turris Mox"
-+	bool "Support CZ.NIC's Turris Mox / RIPE Atlas Probe"
- 	select ARMADA_3700
-+	select BOARD_TYPES
-+	select ENV_IS_IN_MMC
-+	select ENV_IS_IN_SPI_FLASH
-+	select MULTI_DTB_FIT
- 
- config TARGET_MVEBU_ARMADA_8K
- 	bool "Support Armada 7k/8k platforms"
-diff --git a/board/CZ.NIC/turris_mox/mox_sp.c b/board/CZ.NIC/turris_mox/mox_sp.c
-index 87f67512fb..11d8756471 100644
---- a/board/CZ.NIC/turris_mox/mox_sp.c
-+++ b/board/CZ.NIC/turris_mox/mox_sp.c
-@@ -10,6 +10,8 @@
- #include <linux/delay.h>
- #include <mach/mbox.h>
- 
-+#include "mox_sp.h"
-+
- const char *mox_sp_get_ecdsa_public_key(void)
- {
- 	static char public_key[135];
-@@ -42,12 +44,13 @@ static inline void res_to_mac(u8 *mac, u32 t1, u32 t2)
- 	mac[5] = t2;
- }
- 
--int mbox_sp_get_board_info(u64 *sn, u8 *mac1, u8 *mac2, int *bv, int *ram)
-+int mbox_sp_get_board_info(u64 *sn, u8 *mac1, u8 *mac2, int *bv, int *ram,
-+			   enum cznic_a3720_board *board)
- {
--	u32 out[8];
-+	u32 out[9];
- 	int res;
- 
--	res = mbox_do_cmd(MBOX_CMD_BOARD_INFO, NULL, 0, out, 8);
-+	res = mbox_do_cmd(MBOX_CMD_BOARD_INFO, NULL, 0, out, 9);
- 	if (res < 0)
- 		return res;
- 
-@@ -69,5 +72,8 @@ int mbox_sp_get_board_info(u64 *sn, u8 *mac1, u8 *mac2, int *bv, int *ram)
- 	if (mac2)
- 		res_to_mac(mac2, out[6], out[7]);
- 
-+	if (board)
-+		*board = out[8] + 1;
-+
- 	return 0;
- }
-diff --git a/board/CZ.NIC/turris_mox/mox_sp.h b/board/CZ.NIC/turris_mox/mox_sp.h
-index 83b6037458..720880d5df 100644
---- a/board/CZ.NIC/turris_mox/mox_sp.h
-+++ b/board/CZ.NIC/turris_mox/mox_sp.h
-@@ -8,8 +8,14 @@
- 
- #include <common.h>
- 
-+enum cznic_a3720_board {
-+	BOARD_UNDEFINED		= 0x0,
-+	BOARD_TURRIS_MOX	= 0x1,
-+	BOARD_RIPE_ATLAS	= 0x3,
-+};
-+
- const char *mox_sp_get_ecdsa_public_key(void);
- int mbox_sp_get_board_info(u64 *sn, u8 *mac1, u8 *mac2, int *bv,
--			   int *ram);
-+			   int *ram, enum cznic_a3720_board *board);
- 
- #endif /* _BOARD_CZNIC_TURRIS_MOX_MOX_SP_H_ */
-diff --git a/board/CZ.NIC/turris_mox/turris_mox.c b/board/CZ.NIC/turris_mox/turris_mox.c
-index 370c2668b0..63b8699219 100644
---- a/board/CZ.NIC/turris_mox/turris_mox.c
-+++ b/board/CZ.NIC/turris_mox/turris_mox.c
-@@ -15,6 +15,7 @@
- #include <dm.h>
- #include <dm/of_extra.h>
- #include <env.h>
-+#include <env_internal.h>
- #include <event.h>
- #include <fdt_support.h>
- #include <init.h>
-@@ -45,6 +46,26 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+int board_fit_config_name_match(const char *name)
-+{
-+	if (!gd->board_type) {
-+		enum cznic_a3720_board board;
-+
-+		if (mbox_sp_get_board_info(NULL, NULL, NULL, NULL, NULL,
-+					   &board) < 0) {
-+			printf("Cannot determine board, defaulting to Turris MOX!\n");
-+			board = BOARD_TURRIS_MOX;
-+		}
-+
-+		gd->board_type = board;
-+	}
-+
-+	return !((gd->board_type == BOARD_TURRIS_MOX &&
-+		  !strcmp(name, "armada-3720-turris-mox")) ||
-+		 (gd->board_type == BOARD_RIPE_ATLAS &&
-+		  !strcmp(name, "armada-3720-ripe-atlas")));
-+}
-+
- #if defined(CONFIG_OF_BOARD_FIXUP)
- int board_fix_fdt(void *blob)
- {
-@@ -53,6 +74,9 @@ int board_fix_fdt(void *blob)
- 	int i, size, ret;
- 	bool eth1_sgmii;
- 
-+	if (gd->board_type != BOARD_TURRIS_MOX)
-+		return 0;
-+
- 	/*
- 	 * SPI driver is not loaded in driver model yet, but we have to find out
- 	 * if pcie should be enabled in U-Boot's device tree. Therefore we have
-@@ -388,16 +412,23 @@ static void load_spi_dtb(void)
- 
- int misc_init_r(void)
- {
-+	int i, ret, addrcnt;
- 	u8 mac[2][6];
--	int i, ret;
- 
--	ret = mbox_sp_get_board_info(NULL, mac[0], mac[1], NULL, NULL);
-+	ret = mbox_sp_get_board_info(NULL, mac[0], mac[1], NULL, NULL, NULL);
- 	if (ret < 0) {
- 		printf("Cannot read data from OTP!\n");
- 		return 0;
- 	}
- 
--	for (i = 0; i < 2; ++i) {
-+	if (gd->board_type == BOARD_TURRIS_MOX)
-+		addrcnt = 2;
-+	else if (gd->board_type == BOARD_RIPE_ATLAS)
-+		addrcnt = 1;
-+	else
-+		addrcnt = 0;
-+
-+	for (i = 0; i < addrcnt; ++i) {
- 		u8 oldmac[6];
- 
- 		if (is_valid_ethaddr(mac[i]) &&
-@@ -405,7 +436,13 @@ int misc_init_r(void)
- 			eth_env_set_enetaddr_by_index("eth", i, mac[i]);
- 	}
- 
--	load_spi_dtb();
-+	if (gd->board_type == BOARD_RIPE_ATLAS) {
-+		env_set("board", "ripe_atlas");
-+		env_set("board_name", "ripe_atlas");
-+		env_set("fdtfile", "marvell/armada-3720-ripe-atlas.dtb");
-+	} else {
-+		load_spi_dtb();
-+	}
- 
- 	return 0;
- }
-@@ -528,14 +565,15 @@ static void handle_reset_button(void)
- int show_board_info(void)
- {
- 	int i, ret, board_version, ram_size, is_sd;
--	const char *pub_key;
-+	const char *pub_key, *model;
- 	const u8 *topology;
- 	u64 serial_number;
- 
--	printf("Model: CZ.NIC Turris Mox Board\n");
-+	model = fdt_getprop(gd->fdt_blob, 0, "model", NULL);
-+	printf("Model: %s\n", model);
- 
- 	ret = mbox_sp_get_board_info(&serial_number, NULL, NULL, &board_version,
--				     &ram_size);
-+				     &ram_size, NULL);
- 	if (ret < 0) {
- 		printf("  Cannot read board info: %i\n", ret);
- 	} else {
-@@ -550,6 +588,9 @@ int show_board_info(void)
- 	else
- 		printf("  Cannot read ECDSA Public Key\n");
- 
-+	if (gd->board_type != BOARD_TURRIS_MOX)
-+		return 0;
-+
- 	ret = mox_get_topology(&topology, &module_count, &is_sd);
- 	if (ret)
- 		printf("Cannot read module topology!\n");
-@@ -668,10 +709,24 @@ err:
- 	return NULL;
- }
- 
-+enum env_location env_get_location(enum env_operation op, int prio)
-+{
-+	if (prio > 0)
-+		return ENVL_UNKNOWN;
-+
-+	if (gd->board_type == BOARD_RIPE_ATLAS)
-+		return ENVL_MMC;
-+
-+	return ENVL_SPI_FLASH;
-+}
-+
- static int last_stage_init(void)
- {
- 	struct gpio_desc reset_gpio = {};
- 
-+	if (gd->board_type != BOARD_TURRIS_MOX)
-+		return 0;
-+
- 	/* configure modules */
- 	if (get_reset_gpio(&reset_gpio) < 0)
- 		goto handle_reset_btn;
-@@ -801,6 +856,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	int res;
- 
-+	if (gd->board_type != BOARD_TURRIS_MOX)
-+		return 0;
-+
- 	/*
- 	 * If MOX B (PCI), MOX F (USB) or MOX G (Passthrough PCI) modules are
- 	 * connected, enable the PCIe node.
-diff --git a/configs/turris_mox_defconfig b/configs/turris_mox_defconfig
-index e0ca6337bd..c9815b612f 100644
---- a/configs/turris_mox_defconfig
-+++ b/configs/turris_mox_defconfig
-@@ -52,9 +52,10 @@ CONFIG_CMD_HASH=y
- CONFIG_CMD_BTRFS=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_MAC_PARTITION=y
-+CONFIG_OF_LIST="armada-3720-turris-mox armada-3720-ripe-atlas"
- CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SYS_MMC_ENV_PART=2
- CONFIG_ARP_TIMEOUT=200
- CONFIG_NET_RETRY_COUNT=50
- CONFIG_NETCONSOLE=y
--- 
-2.41.0
+On Fri, Oct 20, 2023 at 02:51:08PM +0200, Stefan Roese wrote:
 
+> Hi Tom,
+>=20
+> please pull this next small batch of Marvell related patches:
+>=20
+> ----------------------------------------------------------------
+> - kirkwood: Pogo v4: Enable LTO (Tony)
+> - mvebu: AC5/AC5X: use fixed page table size (Chris)
+> ----------------------------------------------------------------
+
+Given Marc's request, can you please either respin this with a revert of
+6cdf6b7a340d or I'll do that later, and drop the AC5 commit from here
+instead.  Thanks.
+
+--=20
+Tom
+
+--sVhd3KnFSUXA/++y
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUykpIACgkQFHw5/5Y0
+tyydxwwAoyhdrbehtnrAm8UjwrTlxJe0dFlFo0sJTiyvDwW83J7yiW+6vM0YrSj4
+EsVeCzmN+LWBKGVnzX1NZbQolB+OsWAHxGST0BKjsaYq8BzoI0eiRcglByFgznoB
+MxV2lO5843RkaCxHwpxq3458VVQrRBjZFZ6xhf9GTRWRBOYSqxX/v8tmzlYFF+ys
+h3LjDmEiHP39QPPcPZkjbjLFc5nYohFrdWwKh8BnPvmNkLq5AFjGHJIL+g9dzl0s
+NWl9fcixGwSDZNSgi1gJs5WGZ0jz/Bei+hmDqXk35GCRu/ugfej63QG5koUL/X55
+zpsqI5y09/PYAOT/Zqzof2TZFd83t+V0T8+ziFxB1WKAa5tUwiKBgcBioHW9rkwr
+8Kjru0LjFl/DMULKqzUEb0S0NVUzPj57uQ++twn0cLY8bMrdq4h5w8ilDL9cssNI
+pA2ZNw5g3dmfDmvyvXXRPvoqSo+tSih3ntwbRcAtXXM1vQPrVdmzIjWkl3QV/9z+
+FIzd9fEa
+=kz5n
+-----END PGP SIGNATURE-----
+
+--sVhd3KnFSUXA/++y--
