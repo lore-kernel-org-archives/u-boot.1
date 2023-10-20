@@ -4,32 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D13CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 12:50:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B8F1C001DF
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 12:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D31986FD5;
-	Fri, 20 Oct 2023 14:50:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F413986FD5;
+	Fri, 20 Oct 2023 14:51:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697806220;
-	bh=2MrokaNCUokWgSiKCj5QOFlrfzTD94GYQOVbC6ptqJE=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=wTXWfA8AvFj3RUFMRAkhp0NO//AcY5tACXH1acuCLBtDSrHafuAiNGn0fgqd0GrWG
-	 bb/qfRy2qbGKIiptT1502iZS+7yMm8+00mJNVZIBqj2q2hQDDZaC03TMTq50bnlTKw
-	 jtNfDOPJrYJk6NR/knhGpbRAYB7kniJ6yZXeKoudE0zzVuMx4PbtLC9C4f1dHZHZzy
-	 ImUkMbX/YZmcj9sicNDNjQdlniqfikBzkoMhWVhekK6BL3wuwy4hml5dtklCdGn4mu
-	 D7+yrcgNeNkDGMsejN08uSGHOxTbyWU7F/vr8U+2jMRmVrqMYPH+2X5NcaNLnjk3+R
-	 ENoDT+kdwNJkA==
+	s=phobos-20191101; t=1697806274;
+	bh=ZpgNhmmhB+VdP/jJ3muCcEBnx/yzb6pjLMEOOHMxelM=;
+	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=WfUBoPVeVGDRfLljX/WvP4CRh4wIK6aGNEq+IUc2HphJNKE6m5uPpS0h0VXsQas9w
+	 zPZ7p9+YZNruSVzuvnclLDHKYab9gp2LwLWIwtmCogO7kYKdWRu1gIRY204Pgz+SVA
+	 T3O6YzThlY5QtH2qnR+zYv7QkHKsJry4kCd4i47haThDZbEMR81t6WYH9gVl66HnB0
+	 EK2STodQF5QaBUWR2mw0KqPE3tqeCVF+dCN9LB6eB/pyoIuBh75QkOdxiwt6o2yAE5
+	 3+SbfWztgfpMjg1Uugz4ez4cKGiscg/5ju+wzcphQm8f01XkPmsqw4y3qTgqnjNxDb
+	 ORVz9D2xzmQ1A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0722B86F5F; Fri, 20 Oct 2023 14:50:20 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id C3B03874AF; Fri, 20 Oct 2023 14:51:12 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F63586FEA
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 14:50:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0D7786F83
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 14:51:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,22 +37,18 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SBkvX1Rz7z9t4s;
- Fri, 20 Oct 2023 14:50:16 +0200 (CEST)
-Message-ID: <40436568-f7d7-4020-a26b-a0bf2a10dff0@denx.de>
-Date: Fri, 20 Oct 2023 14:50:15 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4SBkwX3K1rz9t3p;
+ Fri, 20 Oct 2023 14:51:08 +0200 (CEST)
+Message-ID: <f84925f4-9c3f-4901-902c-49bb10a10765@denx.de>
+Date: Fri, 20 Oct 2023 14:51:08 +0200
 MIME-Version: 1.0
-Subject: Re: [RESEND PATCH] arm: kirkwood: Pogo v4: Enable LTO
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 From: Stefan Roese <sr@denx.de>
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20231016200142.21631-1-mibodhi@gmail.com>
- <08efdf86-8617-4873-b377-7895132de107@denx.de>
-In-Reply-To: <08efdf86-8617-4873-b377-7895132de107@denx.de>
+Subject: Please pull u-boot-marvell/master
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4SBkvX1Rz7z9t4s
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Queue-Id: 4SBkwX3K1rz9t3p
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,58 +65,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/20/23 08:14, Stefan Roese wrote:
-> On 10/16/23 22:01, Tony Dinh wrote:
->> Enable building Pogo V4 u-boot image with LTO, which results in about 30K
->> reduction in size.
->>
->> Rebased to latest master and resend.
-> 
-> Nitpicking:
-> 
-> In such cases, please generate a v2 and put this description in the
-> patch history below the "---" line. No need to do this now, I'll fix
-> it up.
-> 
->> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> 
-> Reviewed-by: Stefan Roese <sr@denx.de>
+Hi Tom,
 
-Applied to u-boot-marvell/master
+please pull this next small batch of Marvell related patches:
+
+----------------------------------------------------------------
+- kirkwood: Pogo v4: Enable LTO (Tony)
+- mvebu: AC5/AC5X: use fixed page table size (Chris)
+----------------------------------------------------------------
+
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=322&view=results
 
 Thanks,
 Stefan
 
+The following changes since commit e463222cce0df86f05a117f06e1737f539841fe6:
 
-> Thanks,
-> Stefan
-> 
->> ---
->>
->>   configs/pogo_v4_defconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
->> index cbbade3c0c..fd62146ed3 100644
->> --- a/configs/pogo_v4_defconfig
->> +++ b/configs/pogo_v4_defconfig
->> @@ -15,6 +15,7 @@ CONFIG_ENV_OFFSET=0xC0000
->>   CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
->>   CONFIG_IDENT_STRING="\nPogoplug V4"
->>   CONFIG_SYS_LOAD_ADDR=0x800000
->> +CONFIG_LTO=y
->>   CONFIG_PCI=y
->>   CONFIG_DISTRO_DEFAULTS=y
->>   CONFIG_BOOTSTAGE=y
-> 
-> Viele Grüße,
-> Stefan Roese
-> 
+   Merge branch 'master' of 
+https://source.denx.de/u-boot/custodians/u-boot-riscv (2023-10-19 
+09:40:04 -0400)
 
-Viele Grüße,
-Stefan Roese
+are available in the Git repository at:
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
+
+for you to fetch changes up to 37047b4c378d7707ffb86295c6d24ca5240a07dc:
+
+   arm: mvebu: AC5/AC5X: use fixed page table size (2023-10-20 11:57:26 
++0200)
+
+----------------------------------------------------------------
+Chris Packham (1):
+       arm: mvebu: AC5/AC5X: use fixed page table size
+
+Tony Dinh (1):
+       arm: kirkwood: Pogo v4: Enable LTO
+
+  arch/arm/mach-mvebu/alleycat5/cpu.c | 5 +++++
+  configs/pogo_v4_defconfig           | 1 +
+  2 files changed, 6 insertions(+)
