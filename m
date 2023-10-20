@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC82C0032E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 13:55:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A9ACDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 13:58:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 413ED8743C;
-	Fri, 20 Oct 2023 15:55:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8501874C3;
+	Fri, 20 Oct 2023 15:58:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OXvv01BD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D/Aj5M1W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B14B86F42; Fri, 20 Oct 2023 15:55:25 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id B27A986F5D; Fri, 20 Oct 2023 15:58:44 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F916874B7
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 15:55:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 623C5874B7
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 15:58:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5a7c08b7744so8844137b3.3
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 06:55:19 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a87ac9d245so9185387b3.3
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 06:58:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697810118; x=1698414918; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697810318; x=1698415118; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=X6Of/RtUzSXxybJLfO+776Vg/EKFqDZFbl90vk/vbL0=;
- b=OXvv01BDFRisCCt/10rgxTgsW0Z+fwMbtSw8yWRfRWw4MGcJ3eaXSVHCmRY9WlEgY3
- +Zw5tZ/Og0Znwci9kYFSxWwjgSC0R97K3BnZtLCpcCmqowFqHCeNw+K0l0BaICcgpzyw
- tm36cjHOiSMixK71PjoDMWkWWnx5eVSYYFmZo=
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1jHI3TOUBRrAF5NocE1DM9+/9Rg+0imvRIMe1w2Gysc=;
+ b=D/Aj5M1W/S6WYaUkmVulY4rLZU2vgtazmXyf2pyO9uDB7DQhoLIX0kOGgdOShZ+7TW
+ alNsJSjuwdJYKaTAJI1N770AsL5Q0w0MDTxpUKzXPX+pvPfGJPsW3ubTWaKbfcz/V+pn
+ tK6pQpqkM60VgNWXtUyuoYOkKUL1eYvooDWtM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697810118; x=1698414918;
+ d=1e100.net; s=20230601; t=1697810318; x=1698415118;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X6Of/RtUzSXxybJLfO+776Vg/EKFqDZFbl90vk/vbL0=;
- b=HPc2uOCtV7sOfBXIS3zTO/lk+7TRKop5aVfqzn8p6WzYQlta9OM3J5CxctsyNH8uE8
- Crj7cyHNdwNMh+rRvOVXTcJ3TYEH9044hN9mnU4CGO8h6MUjDqhAxj1J8ELOczl+gtKm
- POquUyoqlUZqCiBhk2LUQGpaSdyQQlqVMkHg/m2qgY3MFP6ejrdxh1Qn5pUPP5ZgN8xQ
- J20kgzrAFITeoA4OwwHbqE3jJ1PK9MmMIyIdQWaeM0ztF8ApAkkEDAity6fgkhye0zTh
- mSR2A5gupENpLaCLqkFJM3aWKPEUP8Ur10nSoLd4GzkLKzG2N76NA8gRwpQJRRGxDGgA
- 5wLQ==
-X-Gm-Message-State: AOJu0YyCCUZ9KbLztI7JxFGAZ1pVOKeXQ/FijohK6kz61xgmCUt6Z/Fx
- IY4j9l2Uj10JFntCcS6E4Syo5Q==
-X-Google-Smtp-Source: AGHT+IHJNUS7+Qb5lqcq/n/vVaF3yoMFqrbmOAaZSbjs+W5s2BBh0s5NKIOJAQxzjLTzQ1zDelZ7Hg==
-X-Received: by 2002:a81:4983:0:b0:5a7:b515:ae47 with SMTP id
- w125-20020a814983000000b005a7b515ae47mr2210394ywa.9.1697810117757; 
- Fri, 20 Oct 2023 06:55:17 -0700 (PDT)
+ bh=1jHI3TOUBRrAF5NocE1DM9+/9Rg+0imvRIMe1w2Gysc=;
+ b=bhKYPQDJg9idiO7D/5mpDDG+LHoX7Z4cplzVMbElkV1oAXon4Da30k9gOQGN5la0FO
+ hRFbSwZRQXpxjuX+M7YwINwclDgh3Ux5HZqFMKIQRx7wZHXyFQjZ6Q9tRS7pNJgstC5u
+ 6Ihp1xomJrjPcdrwyKrfxk1lh2Qy4akQdaabMiOSBa//OUdmAKwKdNY3yyoh7nvZKDxW
+ AiMbYx/uBXXXk8vZKYKSOBjrUGpFSa+vvCG50W47Mnerl3V+6iGJRe2BNXY60HxMhyTE
+ +ahx2jPsG46Xp3Q2XSwsRKOS4aLk9lDOV7X219ZfdEiK9Y/fMHU5U5Qq/Zh6ZtaI6KKk
+ 6IvQ==
+X-Gm-Message-State: AOJu0YzQ2ecPO/rZBkm/2lyWwcyhybC2V7/wYkbdKLBMzTdxRKC5iI3l
+ YAzWunCRliWdAIDj9Ugw5lP9bMku1pxecG8wvd6aFg==
+X-Google-Smtp-Source: AGHT+IHWyB8mUhgit9+JhTWmUYRFcFK3ZuE+PuYCmQKHQ7tBcwRyvRoG89oUF0KB+5TlcvFjVkvqYA==
+X-Received: by 2002:a0d:e6ce:0:b0:5a7:af89:c4a0 with SMTP id
+ p197-20020a0de6ce000000b005a7af89c4a0mr2180195ywe.23.1697810318073; 
+ Fri, 20 Oct 2023 06:58:38 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- w74-20020a81494d000000b005a206896d62sm681228ywa.111.2023.10.20.06.55.16
+ s204-20020a815ed5000000b005869ca8da8esm682334ywb.146.2023.10.20.06.58.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Oct 2023 06:55:17 -0700 (PDT)
-Date: Fri, 20 Oct 2023 09:55:15 -0400
+ Fri, 20 Oct 2023 06:58:37 -0700 (PDT)
+Date: Fri, 20 Oct 2023 09:58:35 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@google.com>, Peter Robinson <pbrobinson@gmail.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
-Message-ID: <20231020135515.GG3119521@bill-the-cat>
-References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
- <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
- <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
- <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
- <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+Subject: Re: [v4 11/24] efi: Rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
+Message-ID: <20231020135835.GH3119521@bill-the-cat>
+References: <20231019150105.714407-1-trini@konsulko.com>
+ <20231019150105.714407-11-trini@konsulko.com>
+ <4a17c974-fd56-4412-93e3-47bfe3268489@canonical.com>
+ <20231019151933.GC3119521@bill-the-cat> <ZTJwrFS10FAsUSN3@octopus>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZbZcGFvRCCGlM6S4"
+ protocol="application/pgp-signature"; boundary="v1DbmCWYvRNtt1NY"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+In-Reply-To: <ZTJwrFS10FAsUSN3@octopus>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,138 +96,154 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZbZcGFvRCCGlM6S4
+--v1DbmCWYvRNtt1NY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 20, 2023 at 06:21:33AM -0700, Simon Glass wrote:
-> +Doug Anderson
+On Fri, Oct 20, 2023 at 09:21:00PM +0900, AKASHI Takahiro wrote:
+> On Thu, Oct 19, 2023 at 11:19:33AM -0400, Tom Rini wrote:
+> > On Thu, Oct 19, 2023 at 05:16:28PM +0200, Heinrich Schuchardt wrote:
+> > > On 19.10.23 17:00, Tom Rini wrote:
+> > > > From: Simon Glass <sjg@chromium.org>
+> > > >=20
+> > > > The command should not be used to enable library functionality. Add=
+ a
+> > > > new BOOTEFI_BOOTMGR Kconfig for that. Adjust the conditions so that=
+ the
+> > > > same code is built.
+> > > >=20
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > > ---
+> > > > Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > Changes in v4:
+> > > > - Integrate AKASHI Takahiro's feedback from v3
+> > > > - Reword the help text on CMD_BOOTEFI_BOOTMGR slightly
+> > > > ---
+> > > >   cmd/Kconfig             | 11 ++++++++++-
+> > > >   lib/efi_loader/Kconfig  |  6 +++---
+> > > >   lib/efi_loader/Makefile |  2 +-
+> > > >   3 files changed, 14 insertions(+), 5 deletions(-)
+> > > >=20
+> > > > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > > > index 16e5cb8f0633..872cb49150cc 100644
+> > > > --- a/cmd/Kconfig
+> > > > +++ b/cmd/Kconfig
+> > > > @@ -379,6 +379,15 @@ config CMD_BOOTEFI
+> > > >   	help
+> > > >   	  Boot an EFI image from memory.
+> > > > +config CMD_BOOTEFI_BOOTMGR
+> > > > +	bool "UEFI Boot Manager command"
+> > > > +	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
+> > > > +	default y
+> > > > +	help
+> > > > +	  Select this option to enable the 'bootmgr' subcommand of 'boote=
+fi'.
+> > > > +	  This subcommand will allow you to select the UEFI binary to be =
+booted
+> > > > +	  via UEFI variables Boot####, BootOrder, and BootNext.
+> > > > +
+> > > >   config CMD_BOOTEFI_HELLO_COMPILE
+> > > >   	bool "Compile a standard EFI hello world binary for testing"
+> > > >   	depends on CMD_BOOTEFI && !CPU_V7M
+> > > > @@ -2110,7 +2119,7 @@ config CMD_EFIDEBUG
+> > > >   config CMD_EFICONFIG
+> > > >   	bool "eficonfig - provide menu-driven uefi variables maintenance=
+ interface"
+> > > >   	default y if !HAS_BOARD_SIZE_LIMIT
+> > > > -	depends on CMD_BOOTEFI_BOOTMGR
+> > > > +	depends on BOOTEFI_BOOTMGR
+> > > >   	select MENU
+> > > >   	help
+> > > >   	  Enable the 'eficonfig' command which provides the menu-driven =
+UEFI
+> > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > > index d20aaab6dba4..13cad6342c36 100644
+> > > > --- a/lib/efi_loader/Kconfig
+> > > > +++ b/lib/efi_loader/Kconfig
+> > > > @@ -32,14 +32,14 @@ config EFI_LOADER
+> > > >   if EFI_LOADER
+> > > > -config CMD_BOOTEFI_BOOTMGR
+> > > > +config BOOTEFI_BOOTMGR
+> > > >   	bool "UEFI Boot Manager"
+> > > >   	default y
+> > > >   	select BOOTMETH_GLOBAL if BOOTSTD
+> > > >   	help
+> > > >   	  Select this option if you want to select the UEFI binary to be=
+ booted
+> > > > -	  via UEFI variables Boot####, BootOrder, and BootNext. This enab=
+les the
+> > > > -	  'bootefi bootmgr' command.
+> > > > +	  via UEFI variables Boot####, BootOrder, and BootNext. You shoul=
+d also
+> > > > +	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is avai=
+lable.
+> > > >   choice
+> > > >   	prompt "Store for non-volatile UEFI variables"
+> > > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> > > > index 8d31fc61c601..0a2cb6e3c476 100644
+> > > > --- a/lib/efi_loader/Makefile
+> > > > +++ b/lib/efi_loader/Makefile
+> > > > @@ -42,7 +42,7 @@ targets +=3D initrddump.o
+> > > >   endif
+> > > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
+> > > > -obj-$(CONFIG_CMD_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
+> > > > +obj-$(CONFIG_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
+> > > >   obj-y +=3D efi_boottime.o
+> > > >   obj-y +=3D efi_helper.o
+> > > >   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) +=3D efi_capsule.o
+> > >=20
+> > > This patch looks wrong.
+> > >=20
+> > > Symbol CONFIG_CMD_BOOTEFI_BOOTMGR is used in a lot of places where it=
+ is not
+> > > related to the 'bootefi bootmgr' subcommand.
+> > >=20
+> > > I see no benefit in two separate symbols. If you want to rename the s=
+ymbol,
+> > > please, replace *all* occurrences:
+> > >=20
+> > > %s/CONFIG_CMD_BOOTEFI_BOOTMGR/CONFIG_BOOTEFI_BOOTMGR/
+> >=20
+> > Yes, there's work on the EFI_LOADER side of things to support the use
+> > case of "boot to menu" (or, "boot to efi bootmgr") of which this is the
+> > starting point. The follow-up work that I'm hoping you or someone else
+> > with more EFI_LOADER experience will pick up is splitting cmd/bootefi.c
+> > such that we can call in to starting an EFI payload (or bootmgr) without
+> > the command line.
 >=20
-> Hi Heinrich,
->=20
-> On Thu, 19 Oct 2023 at 09:09, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > On 19.10.23 15:55, Simon Glass wrote:
-> > > Hi Heinrich,
-> > >
-> > > On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:
-> > >>
-> > >> On 10/18/23 05:33, Simon Glass wrote:
-> > >>> Hi Heinrich,
-> > >>>
-> > >>> On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
-> > >>> <heinrich.schuchardt@canonical.com> wrote:
-> > >>>>
-> > >>>> Forward and backward compatibility of Linux kernel device-trees is
-> > >>>> sometimes missing. One solution approach is to load a kernel speci=
-fic
-> > >>>> device-tree. This can either be done via a U-Boot scripts (like th=
-e one
-> > >>>> generated by Debian package flash-kernel or by a boot loader like =
-GRUB.
-> > >>>> The boot loader approach currently requires to know the device-tre=
-e name
-> > >>>> before first boot which makes it unusable for generic images.
-> > >>>>
-> > >>>> Expose the device-tree file name as EFI variable FdtFile.
-> > >>>> This will allow bootloaders to load a kernel specific device-tree.
-> > >>>>
-> > >>>> The variable will not be exposed on ACPI based systems or if the
-> > >>>> environment variable fdtfile is not defined.
-> > >>>>
-> > >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.=
-com>
-> > >>>> ---
-> > >>>> v2:
-> > >>>>           Use a unique GUID to enable future U-Boot independent
-> > >>>>           standardization.
-> > >>>>           Do not try to add the variable on ACPI based systems.
-> > >>>> ---
-> > >>>>    include/efi_loader.h       |  5 +++++
-> > >>>>    lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> > >>>>    2 files changed, 35 insertions(+)
-> > >>>
-> > >>> I was too slow to reply to v1.
-> > >>>
-> > >>> Does grub load the DT? I was assuming that U-Boot would pass it on?
-> > >>> What is the interface between U-Boot and grub?
-> > >>
-> > >> The device-tree built into U-Boot is often out of date and not usabl=
-e to
-> > >> boot current Linux. A single device-tree can be loaded by U-Boot from
-> > >> file and passed on as EFI configuration table. This device-tree may =
-not
-> > >> be compatible with all kernel versions exposed by GRUB.
-> > >>
-> > >> GRUB provides a devicetree command. It is disabled if you use secure
-> > >> boot. At least in Debian and Ubuntu GRUB invokes the
-> > >> EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
-> > >> fix-ups after loading a device-tree.
-> > >>
-> > >> Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
-> > >> devicetree commands to the boot options in grub.cfg.
-> > >
-> > > Thanks. I wonder if you could document this somewhere? It seems like
-> > > there are a lot of options and it is quite complicated.
-> > >
-> > > Back to the question, I suppose you are expecting grub to load the DT
-> > > using this filename? But why doesn't U-Boot load it instead? It seems
-> > > very convoluted.
-> >
-> > A separate file of this name exists for every kernel version installed.
-> > The loaded dtb must match the kernel. U-Boot does not know what kernel
-> > version will be chosen in GRUB. And for a generic image GRUB does not
-> > what board it is on.
-> >
-> > >
-> > > Also, can we test this interface?
-> >
-> > Neither the sandbox nor QEMU have environment variable fdtfile. And we
-> > don't create the EFI variable with ACPI as used on the sandbox.
->=20
-> I worry that this is creating another interface that some poor sod is
-> going to have to deal with in the future. Is this part of the EFI
-> standard?
->=20
-> We should really be using the compatible string to choose the
-> devicetree. Why are we using filenames at all? What is the
-> relationship between the compatible string and the filename? Is there
-> a lookup table, or should we create one?
->=20
-> The correct way of doing this is implemented in U-Boot with
-> CONFIG_FIT_BEST_MATCH. Can we mirror something like that in grub, etc?
+> I will be able to take care unless Heinrich wants to do by himself.
+> # Test would be another issue now that "bootefi" may handle various
+>   boot scenarios.
 
-I'm adding Peter here as well because we spent a good chunk of time
-yesterday digging in to issues that turn out to be, in short the patch
-to make Fedora load the device tree that matches the kernel be loaded
-wasn't in the actively used path anymore.
-
-So we continue to be in the place where the hope is that in a few years,
-platforms will ship with a device tree that the OS can use, but that
-reality is generally not there yet.
+At the very high level, this is solved for "bootm" today, and I _think_
+booti/bootz also but I'm less sure of that.  The non-command side logic
+is in boot/bootm.c rather than cmd/bootm.c and so we exercise the core
+still via the normal tests. I don't know if the best answer is
+boot/bootefi.c or lib/efi_loader/something.c. Tests of new functionality
+will require some thought tho, yes.
 
 --=20
 Tom
 
---ZbZcGFvRCCGlM6S4
+--v1DbmCWYvRNtt1NY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUyhsAACgkQFHw5/5Y0
-tyxerQwAqJno8Wc2iAMxVslsqOZ43MdeGYWhXD/uTAKVyVgpSRjoMUqEmpMhAR4S
-AzFd3yh0GZH9mSjT3eQJUAbYFwrxMFM0FN2Bh53MeAUdUxKMRPa8PaPYfNJZ6oUX
-xHH5ir6Bnu+abRqvM7c+KHr2THq0OQpunPwVpaRpnXFJIB4H8gvShm5Mh2nQ5alp
-UlUp4tc5FKYEz9yKL3dO221nOpOn1QgxUiNs1UstiguL6C07V5Iq9Fovnj/evXVO
-UlMeOOAbUcszi74m4+0hlimhakwBgYgEnI35RzyCKooDf05VX/PeVq7vwmAERuNC
-RJwrRjiKL+ewH3X8cuoO2DgbJpMqT4IiDHsFFdPPuRNoTaCnC1gzGdqx+S3rzh5i
-x9CMlQjYGOpmdTMeDHASV2jEaMgo/vCOYKtIdVKwL1fz4YdmHxnvhZXjaK9k5EK9
-FNdCcOigPtrvF/a9AcfEoeFrHAaUgODVPe0Q4PCiY36ueEQUtXG2l4TozDEniMWf
-ZYCcOMNa
-=+Kxs
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUyh4sACgkQFHw5/5Y0
+tyw9+Qv/fvpGWzu6T6jOLLy4l1EB91Ue50ijG847wQVjPT9O1ZDAFzyG7vfxnd5j
+FsUvqvrayjwgnrVuztWzW4A2j98Cmmw9pIUx1BTiSSkAUMKBubIBv12qDg4czDit
+HRYRTyjoT0dqQQM30xq5P63dYDIqjoijICUzRkjcjz0rtdaLgpA4vSWlBjxt9m53
+yoNhjgQeMLaP2l9PTNCBPd6w8ETgr6TSRFY2BYdbe8XyKocsCAMHBti4vC+lSlqo
+TRZF+asX1/5eHlSb6tx2Ij4MY5TBOjSeW6WHxIg/h0ynGenv3r+uqTyMUPeYkOVR
+n85jJORpWSfkONUGt2u3gfi8ruWAWE6o7UScYd/2BMaf9q7vhAdrNmnzCYiY1Ljq
+2EJPKwATj8mJvc4lMO86TElPpRGTMbZgEnoms3iaHQaGWSsozdfK1Pmgx7MR2m5O
+h+mDgge+j+5Xc4lUyqVuBg/6YVcwG1sMCyUon8kpuRr20zlHvUHsWCqve7mf6FLK
+HLC4PmTk
+=+DLv
 -----END PGP SIGNATURE-----
 
---ZbZcGFvRCCGlM6S4--
+--v1DbmCWYvRNtt1NY--
