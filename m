@@ -4,91 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAAB5CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 08:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE79DCDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 08:57:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F89D86FB0;
-	Fri, 20 Oct 2023 10:22:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BB7338719D;
+	Fri, 20 Oct 2023 10:57:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lNgDhSrb";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="S4GQ+Gd6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 214FA86FB0; Fri, 20 Oct 2023 10:22:11 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C87038744E; Fri, 20 Oct 2023 10:57:35 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20703.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaf::703])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F09F8743C
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 10:22:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BC9986FDE
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 10:57:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-507c1936fd5so1873361e87.1
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 01:22:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697790126; x=1698394926; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nyF7MZM9sMB1dmdbwfLg+hXUQn9NJPXX+8lqz5/Rb2o=;
- b=lNgDhSrbvh6SW63YGyKujN2u0RFS6wo5y6vR1oNTjHpg8w10qgwURixWiuleUXo3Xw
- bWV4YN8icjnK7V8NiiZFkf3xNsV4L3VDrDsxnYUrRX59z9cohV7U9o3yPpO2WOF9pm+U
- An40GugZ6sobJM7VsqP0EuDAhvAAkcNbAVTBUKutZla3ns0ivDHpSbCzxEV1oldzeJAd
- yaSB9dRQZ9JS/HCw/5mbkI6KxwZ2Kp9PzUJDonyiGZ1ud9cMvDNTZh+6m3ebKu1+W6FG
- w3ELlPlptfLKrDllG5pJCRe2CNMgcTm97e5WWbFrKHslUrXiFS1IWACvEJE6yp2wM1IY
- ezwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697790126; x=1698394926;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nyF7MZM9sMB1dmdbwfLg+hXUQn9NJPXX+8lqz5/Rb2o=;
- b=L3lNMay6eZBK3cxkmFexyI6hKlfRwgdA9PDnZiEFnvUkDble4fqD7MVbi6YGhEESwe
- 5c4r9z89ILfXKSVzF/9Ji/XJesIMW7E5vFnyXHYge/YUOSej2DiM2QdGSip5yRBL57yK
- Di/y2iM5mpan3vhkmC+x2gYwlVHFh+dBKqdP9vUVoYxZYpQyT/EV/IqsqGfEXw7jKFD8
- Ujyz2qCqvCcNfdK2eRyzmRaDwPCWbgfVJU09Kh9Q5KeDYjbaEezvK/ZqIUU+MdOFHd/J
- Wj5f2khpJW/flgsXzK+bP54rv+AXuzWZkUKAgmG0NFawUZ0+gfNuFy6cqbSGfH9orE/x
- d6CA==
-X-Gm-Message-State: AOJu0YyCNn9kxVp0fC1oJH6ZEnmpKPBfjFs6N6LP+0HlWvue33dMMHTk
- oJWjc9d4AtoPQYLACLB7SOM+Vq92iqNEuMX9UneAg0TLlS9mPphdGIM=
-X-Google-Smtp-Source: AGHT+IFJKA5Siy2EwYieiCGEkZKeUaHEWbNU86bJEikLwNCETLstygposFfncwMgJFOAh38wSU2sY4DN8V4AS70LzfE=
-X-Received: by 2002:a05:6512:3083:b0:500:a1e4:fc45 with SMTP id
- z3-20020a056512308300b00500a1e4fc45mr1607613lfd.21.1697790125761; Fri, 20 Oct
- 2023 01:22:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EB07pr+7Lli53XUYyGuctWrPSA3zl4cxjFwttJpBF7/wOtPsU+427hy66glbQjFqrmHUhk4/8avtenDk+6C/0A5rtad+0vPXd9I+tQskO/YqlA6GH1G1zBPPRkzA/+zsOSWedXgPdsP0NGFQgSPIw2cF1yJHBFyEpKJvCWhbIgT694kEsQiVFJGQLxw0E/vK6hTIRtwb9CqZjHVEaLlll6hmg0bZenhP0eN5mpBdDGu2LJ/+k/pU/sqA8fasUZe6+A2fuKvIh5ZuDclnPQiGriBbdbmkLHLwUyA+fGiPSYEM50Mlld+y6h74MqlL/0IDiyVj9PErSo9LatKdbS1YYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Wk7CA31JOhHGntapbsqKQQ5zCUYwgCPmxKVBwEDHMDc=;
+ b=SnUDfX7DRA819MgCCoVxJdZjJWUrJu4xeYzcHm+7KTH+MGz9N3D9u9be3hqoWBhbOEpwIadOBRVdEDw/F1e8avLgRUIHIJalPzM+EgOrTzgQLqJNAt6cqaO6eWcow+NSba5ExRZ6NIUmFr4POlywpiqTEQZZPXdg78iFfhBAVGLc7BeGP4Yt5or13W21qxO7Gz91QcX2elXqtKwa9VyfCm31yqcZi/IKrf4k5dT3WU8/Wa3w5iWQxSv/a3M/56t8+vFoeq+7XKrH26jaLfKw/+1Dy7lciY3EMdNBz1J/IR1eR/x0Tu9zD4AO0SnuZXJh3l/bxEsDAlvOHxCl6sSNjg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Wk7CA31JOhHGntapbsqKQQ5zCUYwgCPmxKVBwEDHMDc=;
+ b=S4GQ+Gd6XicPq5JorZpdMZnTavaj30bXj/ZyZW4eFXk6ITkuoadq7ft4//rifZGIASh17OhyT3J8aMmvvT++2BXQfQXnD0YJRCu7m4tMQCWYxuEzBo8IkT8enZqhp+oE+CYeyp0D4+W+xPw5tRDkXLlQLCmB9miiJhFgv+IhJKw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by PA4PR10MB5754.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:267::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.24; Fri, 20 Oct
+ 2023 08:57:31 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.022; Fri, 20 Oct 2023
+ 08:57:31 +0000
+Message-ID: <947c0b11-97f5-4d8d-9202-c79131296cf3@prevas.dk>
+Date: Fri, 20 Oct 2023 10:57:27 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] make: check if DTC variable is an absolute path
+Content-Language: en-US, da
+To: Richard Marko <srk@48.io>, u-boot@lists.denx.de
+References: <20231017104453.2121276-1-srk@48.io>
+ <20231019130412.617507-1-srk@48.io>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231019130412.617507-1-srk@48.io>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AS4PR09CA0025.eurprd09.prod.outlook.com
+ (2603:10a6:20b:5d4::15) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-31-sjg@chromium.org>
- <ZPA8AtGOel8pko6y@hades>
- <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
- <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
- <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
- <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
- <CAPnjgZ2QV3t9FnY_7VBJ4NAYW8zPL9p1bktfcEP86AnXrFoA1w@mail.gmail.com>
- <CAC_iWjKd60b2pPdQf195ef+a8_3jEHtXh085Sd7uPAik1mCu+Q@mail.gmail.com>
- <700c3677-6fc1-40b0-9ca2-9f9e2cc824b0@amd.com>
- <CAC_iWjJUbads2Trqxm_chnhypyZ+tTT2mXUw56z0Py9bgyBhZg@mail.gmail.com>
- <8528ca89-16a7-48ba-95d3-72e7f3b107eb@amd.com>
- <CAC_iWj+-Om7Aqh7YQf1LhSZOSETeZgtBMRZKp4_AaixA5RfbHA@mail.gmail.com>
- <CAPnjgZ1ydE7y4UZPmvyaDTBVZdeQr=ftCnR1QtXB9TtewFkbxw@mail.gmail.com>
- <CAC_iWjLyupx5XUUm99qJg2Zt-G4KeZpTBoxWKOeXZ9nNw8roeg@mail.gmail.com>
- <CAPnjgZ1GGz6v8FzKOfNqqkZsVpQOzoM=Zz9hKcxpKgOt7oNssA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1GGz6v8FzKOfNqqkZsVpQOzoM=Zz9hKcxpKgOt7oNssA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 20 Oct 2023 11:21:29 +0300
-Message-ID: <CAC_iWjJwLtF7L-NRo-nkO4qM8wotd0FyePYVS9mGewCjQkjbRQ@mail.gmail.com>
-Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Nikhil M Jain <n-jain1@ti.com>, 
- Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|PA4PR10MB5754:EE_
+X-MS-Office365-Filtering-Correlation-Id: b83e6159-5d78-40da-fdc3-08dbd14a97f8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: xE7UQJfW9m3x2RW1/L+vQoWP3p0s4q60DcTDqX1Upe27hxnUHIvxVed4kJw5emsKSkuxGgHxqRne+Mw7gvLN2KC1aET1QAUpi+awKBs8x9vrxiyEyMV1NaMvGp7DrJCBnikTDDP75ISBTAGfgESeMoMtnEVQielh03xkY5qN8n7tnbJoA8BpCCwBL+iAZHRAVdB0EmBi0q+PMLjyKMfEWBxiGz5l/6VpPpguEJ6C0AXpOXpb4LUXK5fL1fWN1/dvrre8wtTDAiV4bpCCw9e8vHf5I0VxQJC5OSBe2bRifMz9iKmDkqzYq6vD4ehWIujArvWlNYcs/h3H5TRdYnwvTeBLrMXOja6TlzVa6joVcq8ee2kPK6KKGfhtvcYgctGTU6jdm8QIutakUy0n/9fTux/yUVPOz8SRnjdg3FRTXkW9+D7vHTRX9rLMDJNYhpntOLjMovOacZTGCu6r/l2Gl/CLJA/mwfqDGGeASwXaBPiN+OYmY+5XieSk1X6VARBpCgu1pEWh8MbeaksP53//kX5CFV6LNmJ3RBt9t/AnNZedeAebZGt/0PkHPvQYPYn5IRvUO76JgysFRHpjAwHaZAysfgu1dIfcuwSngvP9AdfN0yqnGNee06Jp4gMETrA38sjSR62F78CXiu7aae+B5w==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(376002)(136003)(396003)(346002)(39850400004)(230922051799003)(1800799009)(451199024)(186009)(64100799003)(31696002)(86362001)(36756003)(5660300002)(66476007)(316002)(66556008)(66946007)(8976002)(478600001)(8676002)(6666004)(8936002)(6486002)(44832011)(2906002)(38100700002)(2616005)(6512007)(41300700001)(83380400001)(6506007)(26005)(31686004)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SkNkamw2RXpmaGlUUVJ0RTN3MGE4UzdwWk81UTFrUkJMbTJtRzhwd0V6Umc0?=
+ =?utf-8?B?U0k0TUhDd0ZyRVE1M0Z5R054QWdEc08vL0FEdHA4c2g0V3JTbEpLZjJLaVBM?=
+ =?utf-8?B?K0RCSktCdWs5Qlhpa3p5VE40aXl0SHhQZWtlRjN3QWZSay8zMWdTUTVFUUsx?=
+ =?utf-8?B?U3NPK2NsMENFTSs3Z2xBTlBJNk9nenhnYnBtSTZaRHlpWGQ2RkFMZTJ1TlM2?=
+ =?utf-8?B?N3R6Z0V5UldkRisxQVFnMG9XQUZURzNGd2Y0Y3kxcUxieHFJUlNTOS9FRkkx?=
+ =?utf-8?B?TEIyQzZ5djQvT2dZbXJkT2dWSGdwaDQzSjI4aExzbHU4RXZnOGlMeUZmV3hT?=
+ =?utf-8?B?UGxvL29Lenk1NFJQTmpyNnRpNWVXNEsyWThMY0hxVUNjdE8xMWNNNElaM1JU?=
+ =?utf-8?B?bmhYRUhqT2xqVC9ta3c3czJ5SGI0NEUzZkdhWlg2S1lQbFpRSFVWOTVwaDc5?=
+ =?utf-8?B?bjlLZmttWmRyM3JyZkUwSVN5VkxjNHpXTnk3b00xdHB1Z1N2TEpJUDRDd0Vw?=
+ =?utf-8?B?Z0hnWnpERUMwTG9mdzNtL3doN3dMMlpZTVJwcVNkMnluUkZ2cEtLUXdzSmRh?=
+ =?utf-8?B?TVB0OHlUZUNnN1FZSUxSQjZvd1NtU21kVkM1TmJEWWU2Ly8yb0YrOHZCdGJT?=
+ =?utf-8?B?ZmZmd2tNUWN4bUdLbG9JZFVWb2FGbE1nQS9ZVHN1OGE4b3d5NHhhMzBMNGZQ?=
+ =?utf-8?B?ZUxobHRCMmZTTHM5emJraDZiSlROZmNRQzYxV1FqRTR5MEJGM2lMQ1lQbDFq?=
+ =?utf-8?B?WkNxb3Rybi82dUE1ZDNaWlg5bHFqOGFTdkE4a2RlZ2x3Y3hvYkw0M3VDN2hP?=
+ =?utf-8?B?MnJ3WCtZRUh0WlNWbEZGbXFLV1pCVEV0WjQ3MFVoQW1LZnMwaUc4YzBDTFlS?=
+ =?utf-8?B?eDV6S2l1UnBBVFRhcHAxZlNEOFR2cnVJK2FEY24zV1JoaC91MHNZRzF0bTBR?=
+ =?utf-8?B?NjZFRTZScEdoS0J3aXRhTUtjSzBsQTFUWWNKUmdta2NLWXBaU3hGamxWSHpN?=
+ =?utf-8?B?UndlbFY4K3Z4d2E0RzlPdTRQcVdxS1hRU2xiWGp5S1E4dUJ1TEtSS1pQRktL?=
+ =?utf-8?B?dkNkamU2a1JJbGlpSVBGUmJZaUw2eDQ1c3U5ek56L2ptRjV1NjZZUTNxWUdm?=
+ =?utf-8?B?KzhQTlpSWnVnenRmK2hqRVdhbExRSWtaTW9HY3Y5V3Q5eXF6OTBCOTVDb0Jz?=
+ =?utf-8?B?WGxMRFFPUklqWlM2UzJIMUoxQllaNWEyZUVHM2VldE9ZQVdvVVBlakMrUjlq?=
+ =?utf-8?B?anpQM1lUYVU3NUZIY0N3aTJxaVZ0WFlNTXBIaWZ1b1BoQmhpWEFOWlI1UUpO?=
+ =?utf-8?B?QXN3ZlErYlQ5MFlVWlVPcHFOcTBXTWw5dm15dDkvcE9NSFJHVysxM1FWYkdu?=
+ =?utf-8?B?cVJyVm1aL0xVcjNrdjBkYldSU1IremZmMkxuMHR5ajRFR29iNzJpL2VkUUVh?=
+ =?utf-8?B?ckVRbnY2VmlXU2NHVzVGOFVwdGFLc09PQXBleEx0cDJYcm5WdlUxbXF0Rkpx?=
+ =?utf-8?B?MzlFQ05uMitKM2owaGVPQVUrRHpnZ1g2YmNXcXd1b1UxU21YMXpqUytOeklH?=
+ =?utf-8?B?ME1sc0lkQXhJSVFpMWFGaytaeFBXUFU2UU94UXlwSXMzemttT3NGNE1TQS9Z?=
+ =?utf-8?B?OGxQbWQwTWJmSkovbHJyYnZDK0R5eXlPNHZXdzliZ2tXNkl4VkNZRnpuN3lt?=
+ =?utf-8?B?Wk02Qk8xbUhkVklRazV4L0dzR3ZGbDkwWENQd25lWVM2ZXJCd3ZJZUFRdWNN?=
+ =?utf-8?B?OE1TUldncWQwRTRlOFdJM096N1BKVjlDeXJzcFdxdGxQTnEyRHhJZ05Ja1Rp?=
+ =?utf-8?B?Q1psZFhIVW5WSzVyWFZuK3BobmVieWZNR1F2OFYyMXgvWm12VHF0a094Zm04?=
+ =?utf-8?B?UHhjSzZjL0ZTdEljeWEyTlRXUFRaTHIrYlRhT0RYeG5VWVd0TGxWRlpJVmY0?=
+ =?utf-8?B?UUU1VTk1T0hXdW5GaUJwOE5yc0YxRzB0OVE0ZDdyVG94czhZQnZ4T0FKVG9W?=
+ =?utf-8?B?TkE5SXVvMmsvRDZKeDlGM2dCZHA5MlZBWndBbDJLNDhjZzlLV25qN04xM2pW?=
+ =?utf-8?B?bUhaYTh2bHNETFFVTVI2dE5YMHhlR1JOQ3p1eCsxcTVtZzd2K2t1VDYxSGpZ?=
+ =?utf-8?B?RnJCcHBoU3JTQ2tWM09UYkd4b0JLME1aVUY5akcxOHJseWZsRmJGZWkxc3dF?=
+ =?utf-8?B?aFE9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: b83e6159-5d78-40da-fdc3-08dbd14a97f8
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2023 08:57:31.1883 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CXEri5/ogq8TXsbD5IclIDOPj/Zc7LS+cyRFn3Abkkc3eHuphAkCX2OFjncfhKvohWDqPe7rRD7NyggX/I5koMJETqMPGYJR5EOZIDochMs=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR10MB5754
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,151 +143,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 19/10/2023 15.04, Richard Marko wrote:
+> If we try to build using external dtc using
+> 
+>> make DTC=dtc
+> 
+> we get a confusing error like
+> 
+>> make[2]: *** No rule to make target 'arch/x86/dts/bayleybay.dtb',
+>> needed by 'dtbs'.  Stop.
+> 
+> Workaround is to use
+> 
+>> make DTC=$( which dtc )
+> 
+> which gives make a full path, so the dependency
+> is satisfied.
+> 
+> This was introduced by commit d50af66
+> kbuild: add dtc as dependency on .dtb file
+> 
+> This patch checks that DTC is an absolute path
+> and fails early if not.
+> 
+> We also replace `which` in `scripts/dtc-version.sh`
+> with POSIXy `command -v`.
 
-On Wed, 18 Oct 2023 at 18:26, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Mon, 25 Sept 2023 at 04:19, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > [...]
-> >
-> > > > > >>>>>>>>>> +config OF_BLOBLIST
-> > > > > >>>>>>>>>> +     bool "DTB is provided by a bloblist"
-> > > > > >>>>>>>>>> +     help
-> > > > > >>>>>>>>>> +       Select this to read the devicetree from the bloblist. This allows
-> > > > > >>>>>>>>>> +       using a bloblist to transfer the devicetree between  U-Boot phases.
-> > > > > >>>>>>>>>> +       The devicetree is stored in the bloblist by an early phase so that
-> > > > > >>>>>>>>>> +       U-Boot can read it.
-> > > > > >>>>>>>>>> +
-> > > > > >>>>>>>>>
-> > > > > >>>>>>>>> I dont think this is a good idea.  We used to have 4-5 different options
-> > > > > >>>>>>>>> here, which we tried to clean up and ended up with two very discrete
-> > > > > >>>>>>>>> options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
-> > > > > >>>>>>>>> have a header of some sort?  The bloblist literally comes from a previous
-> > > > > >>>>>>>>> stage bootloader which is what OF_BOARD is here for. So why can't we just
-> > > > > >>>>>>>>> read the header and figure out if the magic of the bloblist matches?
-> > > > > >>>>>>>>
-> > > > > >>>>>>>> No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
-> > > > > >>>>>>>>
-> > > > > >>>>>>>> This patch is a standard mechanism to pass the DT from one firmware
-> > > > > >>>>>>>> phase to the next. We have spent quite a bit of time creating a spec
-> > > > > >>>>>>>> for it, and we should use it.
-> > > > > >>>>>>>
-> > > > > >>>>>>> Where exactly am I objecting using the spec?   Can you please re-read my email?
-> > > > > >>>>>>> I am actually pointing out we should use the spec *properly*.  So
-> > > > > >>>>>>> instead of having a Kconfig option for the DT, which is pretty
-> > > > > >>>>>>> pointless,  we should parse the bloblist.  If the header defined by
-> > > > > >>>>>>> the *spec* is found, we should just search for the DT in there.
-> > > > > >>>>>>> What you are doing here, is take the spec, pick a very specific item
-> > > > > >>>>>>> that the list contains, and create a Kconfig option out of it.  Which
-> > > > > >>>>>>> basically ignores the discoverable options of the bloblist.  For
-> > > > > >>>>>>> example, that bloblist can also contain an entry to a TPM eventlog.
-> > > > > >>>>>>> Should we start creating Kconfig options for all the firmware handoff
-> > > > > >>>>>>> entries that are defined on that spec?
-> > > > > >>>>>>
-> > > > > >>>>>> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
-> > > > > >>>>>
-> > > > > >>>>> That's fine by me.  You can even put that under IS_ENABLED for the
-> > > > > >>>>> bloblist inside the existing OF_BOARD check.  So I was thinking
-> > > > > >>>>> - If no bloblist is required in Kconfig options we do the hacks we used to
-> > > > > >>>>> - if bloblist is selected and the config option is OF_BOARD, throw an
-> > > > > >>>>> error and mention that the previous stage loader should hand over a DT
-> > > > > >>>>>
-> > > > > >>>>> Is that what you had in mind?
-> > > > > >>>>
-> > > > > >>>> Yes, that sounds good to me.
-> > > > > >>>>
-> > > > > >>>> But I still think we need an OF_BLOBLIST option to control whether the
-> > > > > >>>> devicetree comes from there.
-> > > > > >>>>    Otherwise we will end up with people
-> > > > > >>>> using OF_BOARD to work around it. We also have the SPL case which does
-> > > > > >>>> not pass the DT in a bloblist...in fact SPL typically doesn't even
-> > > > > >>>> have the full DT.
-> > > > > >>>
-> > > > > >>> Wouldn't IS_ENABLED(BLOBLIST) || IS_ENABLED(SPL_BLOBLIST) be enough?
-> > > > > >>> Inside the OF_BOARD portion of the function, search for a bloblist if
-> > > > > >>> the option is enabled.  If you can't find a bloblist and the DT within
-> > > > > >>> that bloblist, then error out
-> > > > > >>
-> > > > > >> Just my 2c here.
-> > > > > >> I think all options should be possible to disable. It means I can imagine to
-> > > > > >> disable u-boot not to take care about DT provided from previous stage. The same
-> > > > > >> is for TPM event log. IMHO every stage should have an option to simply ignore
-> > > > > >> data pass from previous stage. I don't really mind how it is done but there
-> > > > > >> should be an option to by purpose say to ignore the part of pass data.
-> > > > > >
-> > > > > > That would be done by disabling BLOBLIST.  I don't think having a Kconfig to say
-> > > > > > "I want a bloblist, but I only want the DT from there" is reasonable
-> > > > > > (or for any other item the bloblist can carry).   OF_BOARD means the
-> > > > > > DT will come from a previous stage loader. If bloblist is enabled then
-> > > > > > the DT must come from there.
-> > > > >
-> > > > > I don't agree on this. If bloblist is enabled and DT is passed SW should have a
-> > > > > freedom to ignore it.
-> > > > >
-> > > > > At start everything is likely in sync but later stages before U-Boot can stay at
-> > > > > certain version but there could be a need to update u-boot where DT from
-> > > > > previous stage could be broken.
-> > > >
-> > > > But you *can* ignore it and load a different one later.  The only
-> > > > restriction is that if you compile u-boot with the assumption an early
-> > > > stage bootloader provides a DT you *must* find it.  But we will still
-> > > > just keep 2 options in U-Boot of how you get a DT.
-> > > > A previous loader provided it or U-Boot provided it.  Whether that
-> > > > comes from a bloblist or a register is irrelevant no ?
-> > >
-> > > I'm not sure what is being requested here, so I'll leave this as is for v2.
-> >
-> > Please don't.   A few mails above there's a discussion of how I'd
-> > prefer things to look like, please have a look and let me know if
-> > something isn't clear.
-> > tl;dr
-> >  "That's fine by me.  You can even put that under IS_ENABLED for the
-> >  bloblist inside the existing OF_BOARD check.  So I was thinking
-> >  - If no bloblist is required in Kconfig options we do the hacks we used to
-> >  - if bloblist is selected and the config option is OF_BOARD, throw an
-> > error and mention that the previous stage loader should hand over a DT"
-> >
-> > >
-> > > The main struggle I have is how to tell whether you expect to
-> > > *receive* the DT in the bloblist, or expect it to be attached to the
-> > > image and be *sent* to the next phase.
-> >
-> > bloblist
-> >
-> > >
-> > > SPL - attached to image, send in bloblist
-> > > U-Boot proper - not attached to image, receive it from bloblist
-> > >
-> > > This is exactly the problem that is solved by the 'standard passage'
-> > > stuff [1] but that depends on Firmware Handoff and [2] which are not
-> > > ready yet...
-> > >
-> > > So I think what I have is the best we can do for now.
-> >
-> > We can avoid the extra complication in Kconfigs.  The DT either comes
-> > from u-boot itself or from a previous stage loader. we don't need the
-> > extra "it comes from a bloblist".
-> > If they come from a previous stage loader and BLOBLIST *is* enabled,
-> > then just scan for the DT, if you don't find it error out.
->
-> Are you planning to send a patch for this? Otherwise, what do you
-> think about going with this one and dealing with OF_BOARD board by
-> board?
+I think this patch is very hard to read because of the initial check
+that moves all the other checks a level down and increases the indent.
 
-Yes, I can do that.  Since this patch is part of your series, I'll
-send it over to you and carry it there
+I was more thinking you could let make do the work instead of doing it
+in embedded shell script. Something like
 
-Thanks
-/Ilias
-> > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
-> > > [2] https://patchwork.ozlabs.org/project/uboot/list/?series=365719
->
->
-> Regards,
-> Simon
+diff --git a/Makefile b/Makefile
+index aeaa6987360..f313e9dba66 100644
+--- a/Makefile
++++ b/Makefile
+@@ -419,6 +419,11 @@ PYTHON3            ?= python3
+ DTC_INTREE     := $(objtree)/scripts/dtc/dtc
+ DTC            ?= $(DTC_INTREE)
+ DTC_MIN_VERSION        := 010406
++ifneq ($(DTC),$(DTC_INTREE))
++ifneq ($(patsubst /%,,$(DTC)),)
++$(error "$$(DTC) must be an absolute path")
++endif
++endif
+
+ CHECK          = sparse
+
+seems to work (though I have only tested it very lightly). One could
+also add
+
+ifeq ($(wildcard $(DTC)),)
+$(error "$$(DTC) = $(DTC) does not exist")
+endif
+
+inside the outer ifneq to make the failure very explicit.
+
+Rasmus
+
