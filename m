@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16DF4CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 06:14:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04406CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 06:18:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 189C587224;
-	Fri, 20 Oct 2023 08:14:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A4B786F89;
+	Fri, 20 Oct 2023 08:18:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697782456;
-	bh=UGQHg5Sx7Ysj4OXd2rZS6iEvHuzxA+dY6oYp8RWynDE=;
+	s=phobos-20191101; t=1697782703;
+	bh=v1qeW+RqvmlQUqMtTKNbGg3qnH7FkFOlLQ/5fqbGaz4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=K02eeLRGUFQP9eI3U183NAlZgqIUFkmYGOhAukvojHmxnUzvAxNMzUjonQQ/gQISJ
-	 b1A7Y3TIYhEcXfIPE9mH8c4CHR8W+ZNhIJbX0v5BANJtWxWbDb+2iHQmuDDh4rYXmS
-	 GmZwA5ZUI9MfwXMlhCKPSFlgqnCvwtul9fdo6Y6wpUyDGdre/TIjBaLY+YIbLBg6fu
-	 mHsaAFFzVLaacKN4VZlKW7gFaJeRsGCY3yFG1C8nTfYpOsqvc8nkBpCgirHKjxMPVp
-	 Kyxn6ZKFoQD47q9U7/IbGFwY8mPAbzh6RPGvQyBE2rU6geAIvGuPVdEVYkPJ3zVaRy
-	 kzd3Vsv3FL9eQ==
+	b=s/1LohXaTAEenc7cyagETI/wkczm4uAO4Iz6OTsSkCqh21lsuw0OCEfcZ+Sw5TTHG
+	 /JESY169s9TYMQghFRmIrMSmUirJLV5eYXyOuqLTGAOfaYh03n6UZ22C/pDls3TEOY
+	 UCIIkMWMbXhKgxBtI3y6ze43bmeOTWihMD56SOryyJn6MaKi0Cc4ka8urOgHxO2m2R
+	 DLbjXXBG//GC/nAdz1Ljpl5P5fvRfq6I3CsPPE74PwaAizNb9LSV2kdTy3OPvEnhw0
+	 xnKlCFDTQVqlJ03hZc9ZKUfptYAtb7cwZNpI6AeqbVUOBFpl9hBGIEc8o0MzsoEMnc
+	 Wb+NitxsDaY8g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D537087253; Fri, 20 Oct 2023 08:14:13 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 3CEC587207; Fri, 20 Oct 2023 08:18:22 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2D2087207
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 08:14:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7477486F03
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 08:18:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SBZ6V005xz9skv;
- Fri, 20 Oct 2023 08:14:10 +0200 (CEST)
-Message-ID: <08efdf86-8617-4873-b377-7895132de107@denx.de>
-Date: Fri, 20 Oct 2023 08:14:08 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SBZCG30stz9sRx;
+ Fri, 20 Oct 2023 08:18:18 +0200 (CEST)
+Message-ID: <637b7903-e40c-4760-8f37-5dbbea5184a3@denx.de>
+Date: Fri, 20 Oct 2023 08:18:17 +0200
 MIME-Version: 1.0
-Subject: Re: [RESEND PATCH] arm: kirkwood: Pogo v4: Enable LTO
+Subject: Re: [PATCH] arm: mvebu: AC5/AC5X: use fixed page table size
 Content-Language: en-US
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20231016200142.21631-1-mibodhi@gmail.com>
+To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
+Cc: Marc Zyngier <maz@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20231018205358.1557234-1-judge.packham@gmail.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231016200142.21631-1-mibodhi@gmail.com>
+In-Reply-To: <20231018205358.1557234-1-judge.packham@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,42 +68,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/16/23 22:01, Tony Dinh wrote:
-> Enable building Pogo V4 u-boot image with LTO, which results in about 30K
-> reduction in size.
+Hi Chris,
+
+On 10/18/23 22:53, Chris Packham wrote:
+> Since commit 6cdf6b7a340d ("arm64: Use FEAT_HAFDBS to track dirty pages
+> when available") the default get_page_table_size() sets some flags for
+> more efficient handling of dirty page table entries. This causes
+> problems on the AC5/AC5X SoC (specifically a lockup when calling
+> __asm_switch_ttbr() via mmu_set_region_dcache_behaviour()).
 > 
-> Rebased to latest master and resend.
+> The reason for the lockup isn't at all clear but it can be avoided if we
+> provide our own get_page_table_size() which stops gd->arch.has_hafdbs
+> from being set to true effectively returning the AC5/AC5X to the older
+> behaviour. This also opts for a simple fixed page table size rather than
+> trying to duplicate the more complicated logic to optimise the table
+> size.
+> 
+> Signed-off-by: Chris Packham <judge.packham@gmail.com>
 
-Nitpicking:
-
-In such cases, please generate a v2 and put this description in the
-patch history below the "---" line. No need to do this now, I'll fix
-it up.
-
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+I'm not 100% happy with this approach / workaround - still it fixes an
+issue on your board, so:
 
 Reviewed-by: Stefan Roese <sr@denx.de>
+
+Perhaps you (or someone else) can look into this in more depth to get
+to the root of this issue at a later time.
 
 Thanks,
 Stefan
 
 > ---
 > 
->   configs/pogo_v4_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   arch/arm/mach-mvebu/alleycat5/cpu.c | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
-> index cbbade3c0c..fd62146ed3 100644
-> --- a/configs/pogo_v4_defconfig
-> +++ b/configs/pogo_v4_defconfig
-> @@ -15,6 +15,7 @@ CONFIG_ENV_OFFSET=0xC0000
->   CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
->   CONFIG_IDENT_STRING="\nPogoplug V4"
->   CONFIG_SYS_LOAD_ADDR=0x800000
-> +CONFIG_LTO=y
->   CONFIG_PCI=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTSTAGE=y
+> diff --git a/arch/arm/mach-mvebu/alleycat5/cpu.c b/arch/arm/mach-mvebu/alleycat5/cpu.c
+> index 8204d9627515..7ba57ae75e76 100644
+> --- a/arch/arm/mach-mvebu/alleycat5/cpu.c
+> +++ b/arch/arm/mach-mvebu/alleycat5/cpu.c
+> @@ -63,6 +63,11 @@ static struct mm_region ac5_mem_map[] = {
+>   
+>   struct mm_region *mem_map = ac5_mem_map;
+>   
+> +u64 get_page_table_size(void)
+> +{
+> +	return 0x80000;
+> +}
+> +
+>   void reset_cpu(void)
+>   {
+>   }
 
 Viele Grüße,
 Stefan Roese
