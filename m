@@ -4,76 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C05CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 10:22:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6463FCDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 10:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE7368746E;
-	Fri, 20 Oct 2023 12:22:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 75FFD86F64;
+	Fri, 20 Oct 2023 12:43:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="UgFHbecR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pD73eSvc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CC7487479; Fri, 20 Oct 2023 12:22:07 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AD3D08724E; Fri, 20 Oct 2023 09:01:35 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C9E487467
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 12:22:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40E6D86F78
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 09:01:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-27d0a173e61so489581a91.0
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 03:22:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1697797321; x=1698402121; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oy2Rfnymf4eV6j6Vt+9UvpER42SXq8YyYK3XXPzIyC0=;
- b=UgFHbecRNj3AblR6DgZYqRw2i0GUeptGRuu90aE/c4mEB3EyZdrvY1exFM7JhcjBH1
- UKFpvpdCjTNIPS0LsNC4Gr9Y6+kZKY73RYkcDgnf0m5WJ2CfjcC3z981sGgMuGDqt7p8
- FJv2EdaC8tcNUsUBOEeVObMgr2K+KDInQwUsAcOZzH/4lfbh9lYNTIvA6TnFVp0L73U7
- 2E/xWVxsp+JmcYbZSM2bXGj1uodnH+drfPlvVODrouIFIuh47ZS2/kh0USesult2PD2I
- t3St9+dnfj7XJHARKavBNEh36FqQtfwb5RM3Et41Y/dm9chZBtsahh2Xj0ZfLAR5HXr+
- I68w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697797321; x=1698402121;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oy2Rfnymf4eV6j6Vt+9UvpER42SXq8YyYK3XXPzIyC0=;
- b=JtBFroj2Si+uaTRvAwq1WMFJN3mjvtKIlek7r3kqll47woQ0XHD3lu/w9yMhZtcld2
- tQYJaqlQUUzbepKKcxpu2pnY25WZyj9qLUaySlczP2G2ou4fWMZ8c+bzJaQC2wdaJqIJ
- lUIi1YfpUERn6yyK5Vrh95Fcz4H16m+dKXITI56shuXtSKhiPcKyqkxjmWClOdAdPeRr
- pDQjTmfdH8E77gJC4I+aGoXWMcEdAfLaZZLMvXyK0PvUjjOLHFIE+x+oLMMjZtJ0bsPz
- u7E6QRoMwNm5J2+xMohEPqH9vdnARkRQClwCM2viN48iDB6DnBME+J09GhEq3/sTobjC
- btoQ==
-X-Gm-Message-State: AOJu0YzWAQ57mSY0bHmhI0kDqXECmrZEl7IsaTS8VfTTHzaQ6dNQfM6o
- IgR35lUDtWzzfs/wsRtnGT4ydZq1Ecg5D9Oxdy/W3cIa8SN8gyJg
-X-Google-Smtp-Source: AGHT+IGQTghKuv8uQkizoVVBD9iku7VpSb6Oi6HO3DGdSxAMGzXv+j0L3RgBFZPFmcHZg0JgVwkUWoe+LTXjtu2XeG0=
-X-Received: by 2002:a17:90a:202:b0:273:ec96:b6f9 with SMTP id
- c2-20020a17090a020200b00273ec96b6f9mr1373070pjc.25.1697797321410; Fri, 20 Oct
- 2023 03:22:01 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39K71T69046163;
+ Fri, 20 Oct 2023 02:01:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697785289;
+ bh=+qic45AkTuZB8kxI+7liZkc/TMiD3ukbVfL1QnHh76g=;
+ h=From:To:CC:Subject:Date;
+ b=pD73eSvcWUTGaKNZ+gmaDzJQd5uBiWZaFMWvtu1622yHSZBf8uiYjsLPqQ1SEVpI+
+ B1j3+9wwBKacCV3DrWkLPECagaLeMIxz6ChjMBFOxdQiPLshxwGtvWHDd3OS2qdZty
+ ZX1f/i6jYrNKVROEcL+dQfPdhLpvLYh4WlyS0nNk=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39K71T48008795
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 20 Oct 2023 02:01:29 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 20
+ Oct 2023 02:01:29 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 20 Oct 2023 02:01:29 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39K71Sb3003807;
+ Fri, 20 Oct 2023 02:01:28 -0500
+From: Prasanth Babu Mantena <p-mantena@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <a-nandan@ti.com>, <n-francis@ti.com>
+Subject: [RESEND PATCH] board: ti: common: board_detect: Fix EEPROM offset
+ read for 1-byte
+Date: Fri, 20 Oct 2023 12:31:28 +0530
+Message-ID: <20231020070128.28320-1-p-mantena@ti.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-References: <20230914101642.1603383-1-robert.marko@sartura.hr>
- <20230914101642.1603383-2-robert.marko@sartura.hr>
- <9194bb32-1f06-6b6d-acd0-c5baefb4ae2a@denx.de>
- <dee2aa61-662f-4116-8981-1094337e0f9f@denx.de>
-In-Reply-To: <dee2aa61-662f-4116-8981-1094337e0f9f@denx.de>
-From: Robert Marko <robert.marko@sartura.hr>
-Date: Fri, 20 Oct 2023 12:21:50 +0200
-Message-ID: <CA+HBbNGGo8NN8AHZVbsLe5J-kGwLQfw_00xX8vVDHYQdtxH_iA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] arm: mvebu: Espressobin: move network setup into a
- separate function
-To: Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de, luka.perkov@sartura.hr
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Fri, 20 Oct 2023 12:43:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,100 +79,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 20, 2023 at 8:46=E2=80=AFAM Stefan Roese <sr@denx.de> wrote:
->
-> Hi Robert,
->
-> On 9/18/23 08:47, Stefan Roese wrote:
-> > On 9/14/23 12:16, Robert Marko wrote:
-> >> Currently, Esspresobin switch is being setup directly in
-> >> last_stage_init()
-> >> which makes it hard to add support for any other board to be setup.
-> >>
-> >> So, lets just move the switch setup code to a separate function and
-> >> call it
-> >> if compatible matches, there should be no functional change.
-> >>
-> >> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-> >
-> > Reviewed-by: Stefan Roese <sr@denx.de>
->
-> This patch and the next one do not apply on latest master. Could you
-> please re-spin the patch series?
+EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
+size followed by reading 1-byte size with an offset 1. This commit fixes
+the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
+board_detect: Fix EEPROM read quirk for 2-byte").
 
-Done.
+In the previous commit, the value with one offset is being read into
+offset_test, but the pointer used to match was still ep. After reading
+with an offset 1, the second byte of the header is compared with the 1-byte
+data read from EEPROM. This is taken care by comparing proper first byte
+value from the header.
 
-Regards,
-Robert
+Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
+---
+Resending due to incorrect patch tag last time.
 
->
-> Thanks,
-> Stefan
->
-> > Thanks,
-> > Stefan
-> >
-> >> ---
-> >>   board/Marvell/mvebu_armada-37xx/board.c | 16 +++++++++++-----
-> >>   1 file changed, 11 insertions(+), 5 deletions(-)
-> >>
-> >> diff --git a/board/Marvell/mvebu_armada-37xx/board.c
-> >> b/board/Marvell/mvebu_armada-37xx/board.c
-> >> index da325e8c75..6527155c6e 100644
-> >> --- a/board/Marvell/mvebu_armada-37xx/board.c
-> >> +++ b/board/Marvell/mvebu_armada-37xx/board.c
-> >> @@ -300,15 +300,11 @@ static int mii_multi_chip_mode_write(struct
-> >> udevice *bus, int dev_smi_addr,
-> >>       return 0;
-> >>   }
-> >> -/* Bring-up board-specific network stuff */
-> >> -int last_stage_init(void)
-> >> +static int espressobin_last_stage_init(void)
-> >>   {
-> >>       struct udevice *bus;
-> >>       ofnode node;
-> >> -    if (!of_machine_is_compatible("globalscale,espressobin"))
-> >> -        return 0;
-> >> -
-> >>       node =3D ofnode_by_compatible(ofnode_null(), "marvell,orion-mdio=
-");
-> >>       if (!ofnode_valid(node) ||
-> >>           uclass_get_device_by_ofnode(UCLASS_MDIO, node, &bus) ||
-> >> @@ -356,6 +352,16 @@ int last_stage_init(void)
-> >>       return 0;
-> >>   }
-> >> +
-> >> +/* Bring-up board-specific network stuff */
-> >> +int last_stage_init(void)
-> >> +{
-> >> +
-> >> +    if (of_machine_is_compatible("globalscale,espressobin"))
-> >> +        return espressobin_last_stage_init();
-> >> +
-> >> +    return 0;
-> >> +}
-> >>   #endif
-> >>   #ifdef CONFIG_OF_BOARD_SETUP
-> >
-> > Viele Gr=C3=BC=C3=9Fe,
-> > Stefan Roese
-> >
->
-> Viele Gr=C3=BC=C3=9Fe,
-> Stefan Roese
->
-> --
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+ board/ti/common/board_detect.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
+index 9a53884c98..17fe8f8069 100644
+--- a/board/ti/common/board_detect.c
++++ b/board/ti/common/board_detect.c
+@@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
+ 
+ 	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
+ 
+-	if (*((u32 *)ep) != (header & 0xFF))
++	if (offset_test != ((header >> 8) & 0xFF))
+ 		one_byte_addressing = false;
+ 
+ 	/* Corrupted data??? */
+-- 
+2.39.0
 
-
---=20
-Robert Marko
-Staff Embedded Linux Engineer
-Sartura Ltd.
-Lendavska ulica 16a
-10000 Zagreb, Croatia
-Email: robert.marko@sartura.hr
-Web: www.sartura.hr
