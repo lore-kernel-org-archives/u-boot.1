@@ -4,89 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02AD1CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 12:21:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80FB5CDB474
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 12:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DA5C871A2;
-	Fri, 20 Oct 2023 14:21:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4B2E68748D;
+	Fri, 20 Oct 2023 14:42:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LexajqVQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mDg7cDye";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 934B18723C; Fri, 20 Oct 2023 14:21:08 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 88F10874A4; Fri, 20 Oct 2023 14:42:09 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C8BD870E3
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 14:21:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 807C68715C
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 14:42:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7a683da7be3so6556539f.0
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 05:21:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-57b83ff7654so27147eaf.1
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 05:42:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697804465; x=1698409265; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oIANcDsOHPk+ALKluwqsu3y128dzeWCLsJ4xFLFJoyM=;
- b=LexajqVQUbh6nuWAXrg3G2ZPrxvL2zJhbhRXnW1gyXjaMGHA4oC4LTLvMJNKPQryNP
- D6uStUlI/aNsscDvKl0Xv/EQIUfC/BsCJsu8U0eEGi4xC4oFggikgRHUphHPji8VOSyu
- FSuBbV4GSKunGfW5QJ2Y247i8wtJ4Ver2ZVsanAXYf73UCa5hl3RKO+hmAPr/KSdK9DZ
- SXSsssfBmyFkcKzzapdX2SpTNJdnwy11w6gAgxfwPD+2wIPUmewAkzVa7RJFJ4PNi/yi
- Xwfl/YtpO6ABis6eZPZH65wgPe7Y5BEL+fkbh0kYIMMYoxoj3aGkRCHCR8pp2WfgiLBb
- 7Fzw==
+ d=gmail.com; s=20230601; t=1697805726; x=1698410526; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1EimPiFhctOCLnmNn2LVB6IFLwoeYK5ejbbPDMmIsOI=;
+ b=mDg7cDyegpgA5RKbSeY51/Dxr6c1XAIz9GnrCaDqUbcktR7rEI3oPXDEr0Wlexf+i4
+ OCClyY29VFGLkN23UVDBkOzhvB0ztOlwaSK0AngKXerXm42OCD0OGQufBHAjMx1K+Z8x
+ fyazFtuhM05K+TQ1lUNiRoH+DtVgfbtdZtFL4d5rNcG9QeDNPuSF6WLgDoegqZkGW00H
+ FA0banab+HJdhdB0ziK+hPTJgOWbDM87iktU89Jk/oazcR9QwL3tFR0jIUHWV3AVijl1
+ ZvGRZ8EXrUTSZD7PeKlGqYiuz9ENAGJ0t4Rs53USWuI8J/lwb+AfeQ702xkwSy7hwU4a
+ 9neA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697804465; x=1698409265;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oIANcDsOHPk+ALKluwqsu3y128dzeWCLsJ4xFLFJoyM=;
- b=w8obn1gG98Hz7wgJwcJJGiL9trAB70M/Vg3N92aXFv/2CwgmJL/1fbJ0u5YTOneoQf
- 0mSpq8Esr3I2tQqbh+WxDHatZhy78UIvE3KIN+gwQGlpooFiuAuVy+OdKdvhpdwy5Awd
- 3FzbGzyjN78lbVI9qpL5nl5f83ANyHC9fBrRV6LkcSOZGeioNZ+O4MK049rZOyrwpgFi
- MK1nl4vFd6yPiyKI6+AT7iFCS4a0lsW8i+Ii4rFXNGcw7PyUlNpGfvPjtYizbcg8wA3Q
- MjBriVB1E9Obj8MWwskERVluTUtWxr45bk5na7AMWN7Q/1HS291fRjxHDAYDFjKwtKYS
- q3mw==
-X-Gm-Message-State: AOJu0YwQkrVlhfr3+eCv7vn8GVuLv/gi5b5o1SE0v69adk6nsiY4V0bx
- V668jH2mmlKRIosYuVyeAHyYYQ==
-X-Google-Smtp-Source: AGHT+IEs+AP7JlD3MVcyAxuCEK5Hio/gChINCRnlPiTgKg2gMXfKjYis6TOmBu8NcrIzeFmYYTVI1w==
-X-Received: by 2002:a6b:3e0a:0:b0:792:6068:dcc8 with SMTP id
- l10-20020a6b3e0a000000b007926068dcc8mr1734650ioa.2.1697804464511; 
- Fri, 20 Oct 2023 05:21:04 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:8685:4bd3:8dc9:1f68])
+ d=1e100.net; s=20230601; t=1697805726; x=1698410526;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1EimPiFhctOCLnmNn2LVB6IFLwoeYK5ejbbPDMmIsOI=;
+ b=N2ylHcYdWB20GNAwZloZ7v+6l5QP2DGZ7BAAxkAXfKokCubLJS4qfPy0LOkUcwKaIB
+ p+tWCuTWR5yXbin50DOpdYbqsNLUeQsu5YHXki62g7hvNV1lVuO0+u716PrzBh67AJ4Z
+ zoz8LU5u2wnkndX4NjxirDwsOXy8b+M3FBKioo+4XJbkLi41zgCw1aXUx4CeJ5Qho0aZ
+ mJWRpD9m+SSKQcC994H1v4kV4j3d7rjFwQQiv9tQXWH4GizLg+e6gcwgItVGcYMvV+QF
+ 4jfqYHu185n71Cp5uf8Veh1/WhJCGTUc5jaQQ5BKrwAzynPeiONNm3qiWNe7kjv4nDw+
+ 8ffw==
+X-Gm-Message-State: AOJu0Yyc6DhC4wv6mfk3H81J5VnyNQpDcIkCgM/QvnABfj3kM/edwAkH
+ C+1yirzI3a+IFwrAgI48s90=
+X-Google-Smtp-Source: AGHT+IEw8QEqhjMEpT5KZ3c8xkJMlc+n/8+wKWGIlsDehgL0KkbnEv6QjKHRzZWDJJD2wor3FQVsPw==
+X-Received: by 2002:a05:6358:786:b0:168:a3a9:80cb with SMTP id
+ n6-20020a056358078600b00168a3a980cbmr1737370rwj.3.1697805725783; 
+ Fri, 20 Oct 2023 05:42:05 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:3e7c:d792:385f:d139])
  by smtp.gmail.com with ESMTPSA id
- e3-20020aa798c3000000b006bda45671b1sm1403517pfm.101.2023.10.20.05.21.02
+ m188-20020a6258c5000000b006bdd1ce6915sm1494635pfb.193.2023.10.20.05.42.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Oct 2023 05:21:04 -0700 (PDT)
-Date: Fri, 20 Oct 2023 21:21:00 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [v4 11/24] efi: Rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
-Message-ID: <ZTJwrFS10FAsUSN3@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-References: <20231019150105.714407-1-trini@konsulko.com>
- <20231019150105.714407-11-trini@konsulko.com>
- <4a17c974-fd56-4412-93e3-47bfe3268489@canonical.com>
- <20231019151933.GC3119521@bill-the-cat>
+ Fri, 20 Oct 2023 05:42:05 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: joe.hershberger@ni.com
+Cc: rfried.dev@gmail.com, LW@karo-electronics.de, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2] net: eth-uclass: Improve error message when MAC is not
+ found
+Date: Fri, 20 Oct 2023 09:41:51 -0300
+Message-Id: <20231020124151.1968187-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="6r7eDed36uWuWfT6"
-Content-Disposition: inline
-In-Reply-To: <20231019151933.GC3119521@bill-the-cat>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,148 +90,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Fabio Estevam <festevam@denx.de>
 
---6r7eDed36uWuWfT6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+While bringinp up a new board without the MAC fuses programmed,
+the following error message was observed:
 
-On Thu, Oct 19, 2023 at 11:19:33AM -0400, Tom Rini wrote:
-> On Thu, Oct 19, 2023 at 05:16:28PM +0200, Heinrich Schuchardt wrote:
-> > On 19.10.23 17:00, Tom Rini wrote:
-> > > From: Simon Glass <sjg@chromium.org>
-> > >=20
-> > > The command should not be used to enable library functionality. Add a
-> > > new BOOTEFI_BOOTMGR Kconfig for that. Adjust the conditions so that t=
-he
-> > > same code is built.
-> > >=20
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > ---
-> > > Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > Changes in v4:
-> > > - Integrate AKASHI Takahiro's feedback from v3
-> > > - Reword the help text on CMD_BOOTEFI_BOOTMGR slightly
-> > > ---
-> > >   cmd/Kconfig             | 11 ++++++++++-
-> > >   lib/efi_loader/Kconfig  |  6 +++---
-> > >   lib/efi_loader/Makefile |  2 +-
-> > >   3 files changed, 14 insertions(+), 5 deletions(-)
-> > >=20
-> > > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > > index 16e5cb8f0633..872cb49150cc 100644
-> > > --- a/cmd/Kconfig
-> > > +++ b/cmd/Kconfig
-> > > @@ -379,6 +379,15 @@ config CMD_BOOTEFI
-> > >   	help
-> > >   	  Boot an EFI image from memory.
-> > > +config CMD_BOOTEFI_BOOTMGR
-> > > +	bool "UEFI Boot Manager command"
-> > > +	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
-> > > +	default y
-> > > +	help
-> > > +	  Select this option to enable the 'bootmgr' subcommand of 'bootefi=
-'.
-> > > +	  This subcommand will allow you to select the UEFI binary to be bo=
-oted
-> > > +	  via UEFI variables Boot####, BootOrder, and BootNext.
-> > > +
-> > >   config CMD_BOOTEFI_HELLO_COMPILE
-> > >   	bool "Compile a standard EFI hello world binary for testing"
-> > >   	depends on CMD_BOOTEFI && !CPU_V7M
-> > > @@ -2110,7 +2119,7 @@ config CMD_EFIDEBUG
-> > >   config CMD_EFICONFIG
-> > >   	bool "eficonfig - provide menu-driven uefi variables maintenance i=
-nterface"
-> > >   	default y if !HAS_BOARD_SIZE_LIMIT
-> > > -	depends on CMD_BOOTEFI_BOOTMGR
-> > > +	depends on BOOTEFI_BOOTMGR
-> > >   	select MENU
-> > >   	help
-> > >   	  Enable the 'eficonfig' command which provides the menu-driven UE=
-FI
-> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > index d20aaab6dba4..13cad6342c36 100644
-> > > --- a/lib/efi_loader/Kconfig
-> > > +++ b/lib/efi_loader/Kconfig
-> > > @@ -32,14 +32,14 @@ config EFI_LOADER
-> > >   if EFI_LOADER
-> > > -config CMD_BOOTEFI_BOOTMGR
-> > > +config BOOTEFI_BOOTMGR
-> > >   	bool "UEFI Boot Manager"
-> > >   	default y
-> > >   	select BOOTMETH_GLOBAL if BOOTSTD
-> > >   	help
-> > >   	  Select this option if you want to select the UEFI binary to be b=
-ooted
-> > > -	  via UEFI variables Boot####, BootOrder, and BootNext. This enable=
-s the
-> > > -	  'bootefi bootmgr' command.
-> > > +	  via UEFI variables Boot####, BootOrder, and BootNext. You should =
-also
-> > > +	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is availa=
-ble.
-> > >   choice
-> > >   	prompt "Store for non-volatile UEFI variables"
-> > > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> > > index 8d31fc61c601..0a2cb6e3c476 100644
-> > > --- a/lib/efi_loader/Makefile
-> > > +++ b/lib/efi_loader/Makefile
-> > > @@ -42,7 +42,7 @@ targets +=3D initrddump.o
-> > >   endif
-> > >   obj-$(CONFIG_CMD_BOOTEFI_HELLO) +=3D helloworld_efi.o
-> > > -obj-$(CONFIG_CMD_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
-> > > +obj-$(CONFIG_BOOTEFI_BOOTMGR) +=3D efi_bootmgr.o
-> > >   obj-y +=3D efi_boottime.o
-> > >   obj-y +=3D efi_helper.o
-> > >   obj-$(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) +=3D efi_capsule.o
-> >=20
-> > This patch looks wrong.
-> >=20
-> > Symbol CONFIG_CMD_BOOTEFI_BOOTMGR is used in a lot of places where it i=
-s not
-> > related to the 'bootefi bootmgr' subcommand.
-> >=20
-> > I see no benefit in two separate symbols. If you want to rename the sym=
-bol,
-> > please, replace *all* occurrences:
-> >=20
-> > %s/CONFIG_CMD_BOOTEFI_BOOTMGR/CONFIG_BOOTEFI_BOOTMGR/
->=20
-> Yes, there's work on the EFI_LOADER side of things to support the use
-> case of "boot to menu" (or, "boot to efi bootmgr") of which this is the
-> starting point. The follow-up work that I'm hoping you or someone else
-> with more EFI_LOADER experience will pick up is splitting cmd/bootefi.c
-> such that we can call in to starting an EFI payload (or bootmgr) without
-> the command line.
+Error: ethernet@30bf0000 address not set.
 
-I will be able to take care unless Heinrich wants to do by himself.
-# Test would be another issue now that "bootefi" may handle various
-  boot scenarios.
+Improve the error message to make it clearer the reason of
+the failure.
 
--Takahiro Akashi
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Changes since v1:
+- Reword the error message. (Lothar)
 
->=20
-> --=20
-> Tom
+ net/eth-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+index 4311f3fe6e89..1f0985ec52ca 100644
+--- a/net/eth-uclass.c
++++ b/net/eth-uclass.c
+@@ -594,7 +594,7 @@ static int eth_post_probe(struct udevice *dev)
+ 		eth_env_set_enetaddr_by_index("eth", dev_seq(dev),
+ 					      pdata->enetaddr);
+ #else
+-		printf("\nError: %s address not set.\n",
++		printf("\nError: %s No valid MAC address found.\n",
+ 		       dev->name);
+ 		return -EINVAL;
+ #endif
+-- 
+2.34.1
 
-
---6r7eDed36uWuWfT6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEjc56F+RxEkavfJvIJ6vpGq1myG0FAmUycKgACgkQJ6vpGq1m
-yG2cewgAro3Ag6PyulhkppSEHhQRhM/nROUZLARE6IuX88w8Sfa3CZhVB8AFapir
-Ne8svxUdrvk8vTwBrvhYCchoBDqYvZ7oyv50MLdRGlOnJUiuSmoRXpFBKh8puw31
-ew5/C9+F73cqGYtPoR9Hyab2QV4msFg/yxripYlj8rEINWOEea4Ib9I8VTGYY/2j
-g6w0wvzm3GOx2Jel0BHAx68jritkVMjrxyxOvTMDDHsV8YRS1zJ5dkA+mc978vQA
-f/XP+6k2BIZSR55BKpIQxCsba+vjGzSnQWGdoikCRGQtJhTx9CMpAskVtPbYiH8w
-ie68FJLBxUViQSglwfrtpVRGnaQ0UA==
-=PuPn
------END PGP SIGNATURE-----
-
---6r7eDed36uWuWfT6--
