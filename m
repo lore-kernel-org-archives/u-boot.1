@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04406CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 06:18:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D116CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 20 Oct 2023 06:46:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A4B786F89;
-	Fri, 20 Oct 2023 08:18:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7CBEA87185;
+	Fri, 20 Oct 2023 08:46:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697782703;
-	bh=v1qeW+RqvmlQUqMtTKNbGg3qnH7FkFOlLQ/5fqbGaz4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1697784415;
+	bh=6wmcZL7dz4dfEnHi3ZLJvtE8B9l60SvagVXiQNeiID8=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=s/1LohXaTAEenc7cyagETI/wkczm4uAO4Iz6OTsSkCqh21lsuw0OCEfcZ+Sw5TTHG
-	 /JESY169s9TYMQghFRmIrMSmUirJLV5eYXyOuqLTGAOfaYh03n6UZ22C/pDls3TEOY
-	 UCIIkMWMbXhKgxBtI3y6ze43bmeOTWihMD56SOryyJn6MaKi0Cc4ka8urOgHxO2m2R
-	 DLbjXXBG//GC/nAdz1Ljpl5P5fvRfq6I3CsPPE74PwaAizNb9LSV2kdTy3OPvEnhw0
-	 xnKlCFDTQVqlJ03hZc9ZKUfptYAtb7cwZNpI6AeqbVUOBFpl9hBGIEc8o0MzsoEMnc
-	 Wb+NitxsDaY8g==
+	b=naRB4Sd8wV1eAmqlrG+UJrYovYY2IHsp2Lfb76hVRjkJQ+tUu7pQ/tKx1zlWnoVDr
+	 b0gKAVDbYGjXhkMcOqqfaSbmgNEffi5ikAIRy0V4AfcogevKYieyGbld9Myu0iI/Gs
+	 /xXTz7w4mthKFBu1YBnHst+OqxHgodqEf5M0zvt406886v//dFmZyRaY1/ilps1/PU
+	 2YMksEtYQooHBSCcjDqJqp7uTAG97TKBv0JS19+RPE5AKskpuo57cxwO4THOBfEjV3
+	 lTCxrQx8kPuZtgZ3Xn31B/pk+PkV0ETp8JorvtQJ6vQbzWup/QE9eWsl8uBpR71B+4
+	 XZDDwhzls7AOw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CEC587207; Fri, 20 Oct 2023 08:18:22 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 69978871C0; Fri, 20 Oct 2023 08:46:54 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7477486F03
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 08:18:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DD24870B4
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 08:46:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SBZCG30stz9sRx;
- Fri, 20 Oct 2023 08:18:18 +0200 (CEST)
-Message-ID: <637b7903-e40c-4760-8f37-5dbbea5184a3@denx.de>
-Date: Fri, 20 Oct 2023 08:18:17 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4SBZrB5X15z9sX0;
+ Fri, 20 Oct 2023 08:46:50 +0200 (CEST)
+Message-ID: <dee2aa61-662f-4116-8981-1094337e0f9f@denx.de>
+Date: Fri, 20 Oct 2023 08:46:49 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: AC5/AC5X: use fixed page table size
+Subject: Re: [PATCH 2/3] arm: mvebu: Espressobin: move network setup into a
+ separate function
 Content-Language: en-US
-To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
-Cc: Marc Zyngier <maz@kernel.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20231018205358.1557234-1-judge.packham@gmail.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231018205358.1557234-1-judge.packham@gmail.com>
+To: Robert Marko <robert.marko@sartura.hr>, u-boot@lists.denx.de
+Cc: luka.perkov@sartura.hr
+References: <20230914101642.1603383-1-robert.marko@sartura.hr>
+ <20230914101642.1603383-2-robert.marko@sartura.hr>
+ <9194bb32-1f06-6b6d-acd0-c5baefb4ae2a@denx.de>
+In-Reply-To: <9194bb32-1f06-6b6d-acd0-c5baefb4ae2a@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,56 +71,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chris,
+Hi Robert,
 
-On 10/18/23 22:53, Chris Packham wrote:
-> Since commit 6cdf6b7a340d ("arm64: Use FEAT_HAFDBS to track dirty pages
-> when available") the default get_page_table_size() sets some flags for
-> more efficient handling of dirty page table entries. This causes
-> problems on the AC5/AC5X SoC (specifically a lockup when calling
-> __asm_switch_ttbr() via mmu_set_region_dcache_behaviour()).
+On 9/18/23 08:47, Stefan Roese wrote:
+> On 9/14/23 12:16, Robert Marko wrote:
+>> Currently, Esspresobin switch is being setup directly in 
+>> last_stage_init()
+>> which makes it hard to add support for any other board to be setup.
+>>
+>> So, lets just move the switch setup code to a separate function and 
+>> call it
+>> if compatible matches, there should be no functional change.
+>>
+>> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 > 
-> The reason for the lockup isn't at all clear but it can be avoided if we
-> provide our own get_page_table_size() which stops gd->arch.has_hafdbs
-> from being set to true effectively returning the AC5/AC5X to the older
-> behaviour. This also opts for a simple fixed page table size rather than
-> trying to duplicate the more complicated logic to optimise the table
-> size.
-> 
-> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+> Reviewed-by: Stefan Roese <sr@denx.de>
 
-I'm not 100% happy with this approach / workaround - still it fixes an
-issue on your board, so:
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Perhaps you (or someone else) can look into this in more depth to get
-to the root of this issue at a later time.
+This patch and the next one do not apply on latest master. Could you
+please re-spin the patch series?
 
 Thanks,
 Stefan
 
-> ---
+> Thanks,
+> Stefan
 > 
->   arch/arm/mach-mvebu/alleycat5/cpu.c | 5 +++++
->   1 file changed, 5 insertions(+)
+>> ---
+>>   board/Marvell/mvebu_armada-37xx/board.c | 16 +++++++++++-----
+>>   1 file changed, 11 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/board/Marvell/mvebu_armada-37xx/board.c 
+>> b/board/Marvell/mvebu_armada-37xx/board.c
+>> index da325e8c75..6527155c6e 100644
+>> --- a/board/Marvell/mvebu_armada-37xx/board.c
+>> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+>> @@ -300,15 +300,11 @@ static int mii_multi_chip_mode_write(struct 
+>> udevice *bus, int dev_smi_addr,
+>>       return 0;
+>>   }
+>> -/* Bring-up board-specific network stuff */
+>> -int last_stage_init(void)
+>> +static int espressobin_last_stage_init(void)
+>>   {
+>>       struct udevice *bus;
+>>       ofnode node;
+>> -    if (!of_machine_is_compatible("globalscale,espressobin"))
+>> -        return 0;
+>> -
+>>       node = ofnode_by_compatible(ofnode_null(), "marvell,orion-mdio");
+>>       if (!ofnode_valid(node) ||
+>>           uclass_get_device_by_ofnode(UCLASS_MDIO, node, &bus) ||
+>> @@ -356,6 +352,16 @@ int last_stage_init(void)
+>>       return 0;
+>>   }
+>> +
+>> +/* Bring-up board-specific network stuff */
+>> +int last_stage_init(void)
+>> +{
+>> +
+>> +    if (of_machine_is_compatible("globalscale,espressobin"))
+>> +        return espressobin_last_stage_init();
+>> +
+>> +    return 0;
+>> +}
+>>   #endif
+>>   #ifdef CONFIG_OF_BOARD_SETUP
 > 
-> diff --git a/arch/arm/mach-mvebu/alleycat5/cpu.c b/arch/arm/mach-mvebu/alleycat5/cpu.c
-> index 8204d9627515..7ba57ae75e76 100644
-> --- a/arch/arm/mach-mvebu/alleycat5/cpu.c
-> +++ b/arch/arm/mach-mvebu/alleycat5/cpu.c
-> @@ -63,6 +63,11 @@ static struct mm_region ac5_mem_map[] = {
->   
->   struct mm_region *mem_map = ac5_mem_map;
->   
-> +u64 get_page_table_size(void)
-> +{
-> +	return 0x80000;
-> +}
-> +
->   void reset_cpu(void)
->   {
->   }
+> Viele Grüße,
+> Stefan Roese
+> 
 
 Viele Grüße,
 Stefan Roese
