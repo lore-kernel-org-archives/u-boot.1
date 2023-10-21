@@ -4,42 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F9DCDB474
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 01:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26E9ACDB474
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 02:39:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18F9E8756A;
-	Sat, 21 Oct 2023 03:11:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B0F987286;
+	Sat, 21 Oct 2023 04:39:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m7IF9SRP";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36C46874E1; Sat, 21 Oct 2023 03:11:44 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9B92F8755C
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 03:11:37 +0200 (CEST)
+ id A06D6874CA; Sat, 21 Oct 2023 04:39:17 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0225C86FBD
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 04:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E97B0143D;
- Fri, 20 Oct 2023 18:12:17 -0700 (PDT)
-Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 12CAC3F64C;
- Fri, 20 Oct 2023 18:11:35 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>
-Cc: Gunjan Gupta <viraniac@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: [PATCH 4/4] sunxi: DRAM: H6: use proper MMIO accessors in
- mctl_set_addrmap()
-Date: Sat, 21 Oct 2023 02:10:25 +0100
-Message-Id: <20231021011025.568-5-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.35.8
-In-Reply-To: <20231021011025.568-1-andre.przywara@arm.com>
-References: <20231021011025.568-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-41cda69486eso6750101cf.3
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 19:39:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697855951; x=1698460751; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BtgH5whcD6GNYL4ttFliBIMymm8atHNag9I3rHcoN40=;
+ b=m7IF9SRPuX6qAqbgWopLTbY0c9JRq3uuWIw9lYv81yRU3JSC+UPAzjO+us4JEBCGsU
+ j8+6jPB32ePAfxgmyaVRAeyPt1j9KbQiSbcKT/R1m84tQdRaxC2MYj4ijhH0RK7nIGL9
+ 3wai57tfU+hDQ36mg7PvHM6igqiU71r+kCrwW4mDwZ98N5SKp66D53/Es5FYNfUPHxH3
+ EW9uYHkvNyX1T4rUCHf3RN3CH88PAtLNn9290KoAH62xzKP2aCve0SKU4/VVzHFtt7o6
+ P4zllsvJM6X0QJAh0do8MSfh0xpjmaY1rVsVRF7/xpp/xb0JmNGjVGJi6ZWEPjwlutc1
+ WT5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697855951; x=1698460751;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BtgH5whcD6GNYL4ttFliBIMymm8atHNag9I3rHcoN40=;
+ b=aut5DQaA1QpBnSpkyX5KawbwkMoaBMMOoJk34T8qWRFxTHD1ekLcnHuRLEFWLW6IQ1
+ Dk8ZncWHzOtHCkI/KJd/3lNjD6I2XmKJJ0u9piNwplpceC64rgjMiPKjMxyCO577ibN0
+ SGCMKNyhWcS5h7N25Ddi8JF2M7sXRUNbLxwthR0hq+njsUoyhI9glrhHmSaImC5lTuk+
+ EYGX3QYJyifTtyTZYcKGqV15MVMxpIArDUeoDJV7DIpl3+4YiXSL31f0fRaXu7uPImsr
+ LfMAzS5PYWYUEUFlgDDi7JxAOtiV5Bpispz4JxMFTGEggJ/OIIShD+oWKE8IQPgHCT7y
+ Uekw==
+X-Gm-Message-State: AOJu0YzbfiWXUyorLYxo5ZORv8EhptNbXZudL2O4Qs287PTWRcKk397+
+ UUT81Op4a9noxzf2AuPVu2g=
+X-Google-Smtp-Source: AGHT+IEi7K6WLylkB0gJarUqDuDJmSxn4sPkKNeFDt17TsebcLJ4UpEDbSLWWxxiSQL0/vt7SFfgxQ==
+X-Received: by 2002:a05:622a:10:b0:41c:dbdb:7ff5 with SMTP id
+ x16-20020a05622a001000b0041cdbdb7ff5mr3008747qtw.33.1697855950619; 
+ Fri, 20 Oct 2023 19:39:10 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ bb5-20020a05622a1b0500b00403cce833eesm1063168qtb.27.2023.10.20.19.39.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Oct 2023 19:39:09 -0700 (PDT)
+Message-ID: <9443dc0e-f191-7266-64c8-6fb644b22d42@gmail.com>
+Date: Fri, 20 Oct 2023 22:39:09 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [v4 24/24] clk_k210.c: Clean up how we handle nop
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20231019150105.714407-1-trini@konsulko.com>
+ <20231019150105.714407-24-trini@konsulko.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20231019150105.714407-24-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,147 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For accessing MMIO registers, we must not rely on the compiler to
-realise every access to a struct which we made point to some MMIO base
-address. From a compiler's point of view, those writes could be
-considered pointless, since no code consumes them later on: the compiler
-would actually be free to optimise them away.
+On 10/19/23 11:01, Tom Rini wrote:
+> Now that sandbox has <asm/barrier.h> and defines nop() there we should
+> include that in our driver for clarity and then remove our local nop()
+> from <k210/pll.h>.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> I can see that our ARM <asm/barriers.h> should be <asm/barrier.h> and
+> updated in a few other ways to match how the kernel is currently.  This
+> is not a big deal yet as this driver is only for sandbox for risc-v
+> 
+> Cc: Sean Anderson <seanga2@gmail.com>
+> ---
+>   drivers/clk/clk_k210.c | 1 +
+>   include/k210/pll.h     | 3 ---
+>   2 files changed, 1 insertion(+), 3 deletions(-)
+> 
+> diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
+> index c534cc07e092..b9469b93853b 100644
+> --- a/drivers/clk/clk_k210.c
+> +++ b/drivers/clk/clk_k210.c
+> @@ -16,6 +16,7 @@
+>   #include <dt-bindings/mfd/k210-sysctl.h>
+>   #include <k210/pll.h>
+>   #include <linux/bitfield.h>
+> +#include <asm/barrier.h>
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+> diff --git a/include/k210/pll.h b/include/k210/pll.h
+> index fd16a89cb203..175c47f6f233 100644
+> --- a/include/k210/pll.h
+> +++ b/include/k210/pll.h
+> @@ -16,9 +16,6 @@ struct k210_pll_config {
+>   #ifdef CONFIG_UNIT_TEST
+>   TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
+>   				     struct k210_pll_config *best);
+> -#ifndef nop
+> -#define nop()
+> -#endif
+>   
+>   #endif
+>   #endif /* K210_PLL_H */
 
-So we need at least the "volatile" attribute in the pointer declaration,
-but a better fix is of course to use the proper MMIO accessors (writel),
-as we do everywhere else.
-Since MMIO writes are already ordered within themselves (courtesy of the
-"device nGnRnE" memory attribures), and we don't do any DMA operation
-which would requrire synchronising with normal memory accesses, we can
-use the cheaper writel_relaxed() accessor, which have the additional
-advantange of saving one instruction, for each call.
-
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- arch/arm/mach-sunxi/dram_sun50i_h6.c | 69 ++++++++++++++++------------
- 1 file changed, 39 insertions(+), 30 deletions(-)
-
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-index 8e959f4c600..89e855c1a7d 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-@@ -192,77 +192,86 @@ static void mctl_set_addrmap(const struct dram_config *config)
- 
- 	/* Ranks */
- 	if (ranks == 2)
--		mctl_ctl->addrmap[0] = rows + cols - 3;
-+		writel_relaxed(rows + cols - 3, &mctl_ctl->addrmap[0]);
- 	else
--		mctl_ctl->addrmap[0] = 0x1F;
-+		writel_relaxed(0x1f, &mctl_ctl->addrmap[0]);
- 
- 	/* Banks, hardcoded to 8 banks now */
--	mctl_ctl->addrmap[1] = (cols - 2) | (cols - 2) << 8 | (cols - 2) << 16;
-+	writel_relaxed((cols - 2) | (cols - 2) << 8 | (cols - 2) << 16,
-+		       &mctl_ctl->addrmap[1]);
- 
- 	/* Columns */
--	mctl_ctl->addrmap[2] = 0;
-+	writel_relaxed(0, &mctl_ctl->addrmap[2]);
- 	switch (cols) {
- 	case 7:
--		mctl_ctl->addrmap[3] = 0x1F1F1F00;
--		mctl_ctl->addrmap[4] = 0x1F1F;
-+		writel_relaxed(0x1f1f1f00, &mctl_ctl->addrmap[3]);
-+		writel_relaxed(0x1f1f, &mctl_ctl->addrmap[4]);
- 		break;
- 	case 8:
--		mctl_ctl->addrmap[3] = 0x1F1F0000;
--		mctl_ctl->addrmap[4] = 0x1F1F;
-+		writel_relaxed(0x1f1f0000, &mctl_ctl->addrmap[3]);
-+		writel_relaxed(0x1f1f, &mctl_ctl->addrmap[4]);
- 		break;
- 	case 9:
--		mctl_ctl->addrmap[3] = 0x1F000000;
--		mctl_ctl->addrmap[4] = 0x1F1F;
-+		writel_relaxed(0x1f000000, &mctl_ctl->addrmap[3]);
-+		writel_relaxed(0x1f1f, &mctl_ctl->addrmap[4]);
- 		break;
- 	case 10:
--		mctl_ctl->addrmap[3] = 0;
--		mctl_ctl->addrmap[4] = 0x1F1F;
-+		writel_relaxed(0, &mctl_ctl->addrmap[3]);
-+		writel_relaxed(0x1f1f, &mctl_ctl->addrmap[4]);
- 		break;
- 	case 11:
--		mctl_ctl->addrmap[3] = 0;
--		mctl_ctl->addrmap[4] = 0x1F00;
-+		writel_relaxed(0, &mctl_ctl->addrmap[3]);
-+		writel_relaxed(0x1f00, &mctl_ctl->addrmap[4]);
- 		break;
- 	case 12:
--		mctl_ctl->addrmap[3] = 0;
--		mctl_ctl->addrmap[4] = 0;
-+		writel_relaxed(0, &mctl_ctl->addrmap[3]);
-+		writel_relaxed(0, &mctl_ctl->addrmap[4]);
- 		break;
- 	default:
- 		panic("Unsupported DRAM configuration: column number invalid\n");
- 	}
- 
- 	/* Rows */
--	mctl_ctl->addrmap[5] = (cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24);
-+	writel_relaxed((cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24),
-+		       &mctl_ctl->addrmap[5]);
- 	switch (rows) {
- 	case 13:
--		mctl_ctl->addrmap[6] = (cols - 3) | 0x0F0F0F00;
--		mctl_ctl->addrmap[7] = 0x0F0F;
-+		writel_relaxed((cols - 3) | 0x0f0f0f00, &mctl_ctl->addrmap[6]);
-+		writel_relaxed(0x0f0f, &mctl_ctl->addrmap[7]);
- 		break;
- 	case 14:
--		mctl_ctl->addrmap[6] = (cols - 3) | ((cols - 3) << 8) | 0x0F0F0000;
--		mctl_ctl->addrmap[7] = 0x0F0F;
-+		writel_relaxed((cols - 3) | ((cols - 3) << 8) | 0x0f0f0000,
-+			       &mctl_ctl->addrmap[6]);
-+		writel_relaxed(0x0f0f, &mctl_ctl->addrmap[7]);
- 		break;
- 	case 15:
--		mctl_ctl->addrmap[6] = (cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | 0x0F000000;
--		mctl_ctl->addrmap[7] = 0x0F0F;
-+		writel_relaxed((cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | 0x0f000000,
-+				&mctl_ctl->addrmap[6]);
-+		writel_relaxed(0x0f0f, &mctl_ctl->addrmap[7]);
- 		break;
- 	case 16:
--		mctl_ctl->addrmap[6] = (cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24);
--		mctl_ctl->addrmap[7] = 0x0F0F;
-+		writel_relaxed((cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24),
-+			       &mctl_ctl->addrmap[6]);
-+		writel_relaxed(0x0f0f, &mctl_ctl->addrmap[7]);
- 		break;
- 	case 17:
--		mctl_ctl->addrmap[6] = (cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24);
--		mctl_ctl->addrmap[7] = (cols - 3) | 0x0F00;
-+		writel_relaxed((cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24),
-+			       &mctl_ctl->addrmap[6]);
-+		writel_relaxed((cols - 3) | 0x0f00, &mctl_ctl->addrmap[7]);
- 		break;
- 	case 18:
--		mctl_ctl->addrmap[6] = (cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24);
--		mctl_ctl->addrmap[7] = (cols - 3) | ((cols - 3) << 8);
-+		writel_relaxed((cols - 3) | ((cols - 3) << 8) | ((cols - 3) << 16) | ((cols - 3) << 24),
-+			       &mctl_ctl->addrmap[6]);
-+		writel_relaxed((cols - 3) | ((cols - 3) << 8),
-+			       &mctl_ctl->addrmap[7]);
- 		break;
- 	default:
- 		panic("Unsupported DRAM configuration: row number invalid\n");
- 	}
- 
- 	/* Bank groups, DDR4 only */
--	mctl_ctl->addrmap[8] = 0x3F3F;
-+	writel_relaxed(0x3f3f, &mctl_ctl->addrmap[8]);
-+	dsb();
- }
- 
- static void mctl_com_init(const struct dram_para *para,
--- 
-2.35.8
-
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
