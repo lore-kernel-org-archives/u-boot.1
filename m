@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381CCC001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 04:34:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56531C004C0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 04:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EE1887585;
-	Sat, 21 Oct 2023 06:34:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50CF0874C3;
+	Sat, 21 Oct 2023 06:35:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="YAXfwUxZ";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="nczTPYBe";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="C5RElYg4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="lA97rjj2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A18387480; Sat, 21 Oct 2023 06:34:46 +0200 (CEST)
+ id 8A35287567; Sat, 21 Oct 2023 06:35:50 +0200 (CEST)
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
  [66.111.4.26])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9D6C86F42
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 06:34:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9B90874C0
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 06:35:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.nyi.internal (Postfix) with ESMTP id 4DD2E5C010C;
- Sat, 21 Oct 2023 00:34:38 -0400 (EDT)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id 08CDB5C0195;
+ Sat, 21 Oct 2023 00:35:45 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute4.internal (MEProxy); Sat, 21 Oct 2023 00:34:38 -0400
+ by compute3.internal (MEProxy); Sat, 21 Oct 2023 00:35:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
  cc:cc:content-transfer-encoding:content-type:content-type:date
  :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
- 1697862878; x=1697949278; bh=76ObXIxf9p7pGRKRLLeIC7m0oYHSCFmbA83
- uHdn/shg=; b=YAXfwUxZVQJcu6mDSx7QhmDC0Fh51s+PJbcjNaITUUb6WfjGKL3
- AFe2H8IluDVFUmgqS4aX44VjKvYbRoqCGDIhyIS14G23GJZH5JA7HEfWdhP+wMKJ
- xE72YURBk4fNLKkDZETuUy+KBw6O6YgRND7j1cVjxS+BDJSA4wlgJzbG6lyuhFQf
- zRVtYyiZ4zTGz8kFjQYAHoR1Tjj8M9l1Ly1affYF2u3pVmvHLwXEy3sQVOJgUUrm
- fqG9k1QJ6M2WPwmW2M6QWmhVEbd3uu0o3niEsvdtyj91zXrXqHaGBFQ1k5YNwUws
- nGZyvLeWgiH3YClswre2T1VKuG95aK2qbOA==
+ 1697862945; x=1697949345; bh=ZORMa6kcHT25pnqSFbXpPvUnJnkrqh6KVvu
+ xatejkJk=; b=C5RElYg45JKvUCqDSWPgCZtuJ/RhflRYHx+mXl6dg+s88tk1SYa
+ 6rBp3ARSNas5W+6sIfQFLYuHK8d7Z7vOrSRAPtcQHUupW33zcLcRN54VTW0Tia2I
+ HG5X9d4hGDF8gCz3oB+Bdy9rK1dDThh2DiPS8G34DGxBcixj9JJegnwD6gEWLPVZ
+ sJDRXPbiFYGYs7A1W7UqPhAhytuDBt2e9Klc/0ybJMb/Nh+ojmbqpODII3wLg7d+
+ pciZiztHGCC4/Izupmz34TQT4qZk6S//mStVRk3pRtyDPvzGHvg39zXtufdcMe20
+ yhjQ2DtbaX4GotzXG70pdmPrWaZcz73gC6g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:content-type:date:date:feedback-id:feedback-id
  :from:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:reply-to:sender:subject:subject:to:to:x-me-proxy
  :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1697862878; x=1697949278; bh=76ObXIxf9p7pGRKRLLeIC7m0oYHSCFmbA83
- uHdn/shg=; b=nczTPYBeN6X87Vkl4smnTWxWIQozBkvMFuHd4GUF+VC+gLWNjA6
- E60qj5yTXJvXgwpeHowLHc2vBZ1neZyuX3nY4g8xpisaOkg3lciTyVQez8XImawZ
- /gOI1XhSiieb3eddgHMJfypaF7Wza9EqlFcvZef6+XKfWif+3Py1Y4g/JyYOhn0s
- fJQMFnlXyb69PY15p0/Sq1BcDkovQiVPkkQ8nz16df6N/ZuD1hPE8qplZkdip3sX
- HUhTGwayuY/TaZfuAG1dH0ITl8ig7T+eLfD9gpjhnHoxXhPhpKhfpriBrXwCK988
- 7k/SMrI+bljZFt7v/aN+m+6UKocwe7KQZXw==
-X-ME-Sender: <xms:3FQzZYyfVnWReRlPzs6IS0bOZI7SbKReapzy5cmDwQ0Y2rligoXgSQ>
- <xme:3FQzZcTSP45buf9BH50LMOsQ8D8rAl8M4ecclljYJoP-ADpXmekxPtMCsSvAxjBMD
- MkGeOUZ0SrNyrR8kQ>
-X-ME-Received: <xmr:3FQzZaUtmSTOPcRqI5c5JamYJRI4Me5kM4-ugyPH0tjUW4FEKmAUktPJy0DZhDJ7yT8kn4FyekoInyn9qka7Kt4gSSw9utFZQ3NFv6KGL4LnzYj0Fa8_-oC_wA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeelgdekvdcutefuodetggdotefrodftvf
+ 1697862945; x=1697949345; bh=ZORMa6kcHT25pnqSFbXpPvUnJnkrqh6KVvu
+ xatejkJk=; b=lA97rjj2+hMhhe0r68eJpuythIxiK2/J5d/8zTrkTQ01CLA++tq
+ 01jBfVXqNaX6S77mckPvVBKhSkPAkwkv0mB/1xJIezScf4atjZeawPD++6qCOp9Z
+ d26OwVoVvcqINzdO2x8TE0q+5c8v+YmlownCA3QNrXgtf0jYTFBd7S7X6e1gP5yJ
+ jYmyaNh6vUmybaLiTcnCJf3kJsnqcmlnaJhM1svpTxZt6DZhaFE5Y3uQ1VlQPFaT
+ 2TTklmi22a73C05PVUJVUR9ux1/If+g/S8s7Pnh8+Fefi35JyyRoaO4rkDE25a5k
+ thsngx+lwbivlRansgHSl8wJZ3Z1fl0iKpw==
+X-ME-Sender: <xms:IFUzZXHdoXLpUwqgxo53hma3IYH6C7k_lx7k0t2ldc-Dzvkx8fhSKw>
+ <xme:IFUzZUXrAKYU_4UFzD9rl00Wm458KmzF9BcsBlRofchL-9gUWcN69CcFeTijZtniX
+ wc6rZD0T0BuVxPfuQ>
+X-ME-Received: <xmr:IFUzZZKCwDJJHnHBE5oinVNqci6EXFTyZMkmphfM7M58F7QnR8TK3G5F3MmKmcIOKiNdIdExL8DA4vmsztbHOio_zLdsfiU-D_NnXfJ288jht64Ezm34CDArrw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeelgdekudcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefkffggfgfuvfevfhfhjggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
+ fjughrpefkffggfgfvvehfhffujggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
  vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepkeejleelfeeitdfhtdfgkeeghedufeduueegffdvhfdukeelleef
- tdetjeehuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ ftrfgrthhtvghrnhepjefgfffhudejfedtuedugeeutdetgfeiteffffehjeeugfeuvdeh
+ jeetfedtffdtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
  homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:3FQzZWgZOqNe0VfifhpusiZ9tQrsCXrgH2jtMkgP8qaVhJtaW6il9g>
- <xmx:3FQzZaAFtIqYZeFwrHIJthQIDy0ysXbJuFMnpBe019zgN9bwnSVj0Q>
- <xmx:3FQzZXLBGjzLT7f3uvBQlEgRDKtOReFDF7hgOJ-NypLHIhrEGOz8eA>
- <xmx:3lQzZW3JskPKypQR8cDTlds-BwNOgMIoMUS0Tm0z3J2DWTkuM4I7WQ>
+X-ME-Proxy: <xmx:IFUzZVEwwtAjCPrYLlOwFqRnd1_QqQ7vLY_IZcugDkUmTnJgtqhHCw>
+ <xmx:IFUzZdUcB18rZJpjjD06SQCapmLj0UXQTGHjgmmsVMc08nJrwBhn_g>
+ <xmx:IFUzZQNBMaWXbGxiJFJl1uErMEutTvLXLGjSITEdDhA3oCZxT7e5AA>
+ <xmx:IVUzZZozvYUjfMHQNNf2iPaz5i-sOyZzTZIe-cP6u9um4drtQ1M9XQ>
 Feedback-ID: i0ad843c9:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 21 Oct 2023 00:34:35 -0400 (EDT)
-Message-ID: <a9afd926-32f5-de64-6714-341ffea3bfb2@sholland.org>
-Date: Fri, 20 Oct 2023 23:34:34 -0500
+ 21 Oct 2023 00:35:44 -0400 (EDT)
+Message-ID: <03f8e143-ea51-c9f1-2151-622c4abe098d@sholland.org>
+Date: Fri, 20 Oct 2023 23:35:43 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
  Thunderbird/102.14.0
-Subject: Re: [PATCH v2 11/22] pinctrl: sunxi: add Allwinner D1 pinctrl
- description
-Content-Language: en-US
 To: Andre Przywara <andre.przywara@arm.com>
 Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
  <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
@@ -91,9 +88,11 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
  andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
  u-boot@lists.denx.de
 References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-12-andre.przywara@arm.com>
+ <20230928215455.28094-4-andre.przywara@arm.com>
+Content-Language: en-US
 From: Samuel Holland <samuel@sholland.org>
-In-Reply-To: <20230928215455.28094-12-andre.przywara@arm.com>
+Subject: Re: [PATCH v2 03/22] sunxi: remove CONFIG_MACPWR
+In-Reply-To: <20230928215455.28094-4-andre.przywara@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -115,96 +114,97 @@ X-Virus-Status: Clean
 Hi Andre,
 
 On 9/28/23 16:54, Andre Przywara wrote:
-> Apart from using the new pinctrl MMIO register layout, the Allwinner D1
-> and related SoCs still need to usual set of mux values hardcoded in
-> U-Boot's pinctrl driver.
-> Add the values we need so far to this list, so that DM based drivers
-> will just work without further ado.
+> The CONFIG_MACPWR Kconfig symbol is used to point to a GPIO that enables
+> the power for the Ethernet "MAC" (mostly PHY, really).
+> In the DT this is described with the phy-supply property in the MAC DT
+> node, pointing to a (GPIO controlled) regulator. Since we need Ethernet
+> only in U-Boot proper, and use a DM driver there, we should use the DT
+> instead of hardcoding this.
+> 
+> Add code to the sun8i_emac and sunxi_emac drivers to check the DT for
+> that regulator and enable it, at probe time. Then drop the current code
+> from board.c, which was doing that job before.
+> This allows us to remove the MACPWR Kconfig definition and the respective
+> values from the defconfigs.
 > 
 > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Reviewed-by: Sam Edwards <CFSworks@gmail.com>
 > ---
->  drivers/pinctrl/sunxi/Kconfig         |  4 ++++
->  drivers/pinctrl/sunxi/pinctrl-sunxi.c | 28 +++++++++++++++++++++++++++
->  2 files changed, 32 insertions(+)
+>  arch/arm/mach-sunxi/Kconfig           |  7 -------
+>  board/sunxi/board.c                   | 12 +-----------
+>  configs/Bananapi_M2_Ultra_defconfig   |  1 -
+>  configs/Bananapi_defconfig            |  1 -
+>  configs/Bananapro_defconfig           |  1 -
+>  configs/Lamobo_R1_defconfig           |  1 -
+>  configs/Mele_A1000_defconfig          |  1 -
+>  configs/Orangepi_defconfig            |  1 -
+>  configs/Orangepi_mini_defconfig       |  1 -
+>  configs/bananapi_m1_plus_defconfig    |  1 -
+>  configs/bananapi_m2_plus_h3_defconfig |  1 -
+>  configs/bananapi_m2_plus_h5_defconfig |  1 -
+>  configs/i12-tvbox_defconfig           |  1 -
+>  configs/jesurun_q5_defconfig          |  1 -
+>  configs/mixtile_loftq_defconfig       |  1 -
+>  configs/nanopi_m1_plus_defconfig      |  1 -
+>  configs/nanopi_neo_plus2_defconfig    |  1 -
+>  configs/nanopi_r1s_h5_defconfig       |  1 -
+>  configs/orangepi_pc2_defconfig        |  1 -
+>  configs/orangepi_plus2e_defconfig     |  1 -
+>  configs/orangepi_plus_defconfig       |  1 -
+>  configs/orangepi_win_defconfig        |  1 -
+>  configs/pine_h64_defconfig            |  1 -
+>  configs/zeropi_defconfig              |  1 -
+>  drivers/net/sun8i_emac.c              |  9 +++++++--
+>  25 files changed, 8 insertions(+), 42 deletions(-)
 > 
-> diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
-> index 77da90836b6..c8f937d91e9 100644
-> --- a/drivers/pinctrl/sunxi/Kconfig
-> +++ b/drivers/pinctrl/sunxi/Kconfig
-> @@ -124,4 +124,8 @@ config PINCTRL_SUN50I_H616_R
->  	default MACH_SUN50I_H616
->  	select PINCTRL_SUNXI
+> [...]
+> diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+> index 04c3274fbe1..7b60a60ad52 100644
+> --- a/drivers/net/sun8i_emac.c
+> +++ b/drivers/net/sun8i_emac.c
+> @@ -29,6 +29,7 @@
+>  #include <net.h>
+>  #include <reset.h>
+>  #include <wait_bit.h>
+> +#include <power/regulator.h>
 >  
-> +config PINCTRL_SUN20I_D1
-> +	bool "Support for the Allwinner D1/R528 PIO"
-> +	select PINCTRL_SUNXI
-> +
->  endif
-> diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> index fc80fe50b14..66876d9954a 100644
-> --- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> +++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> @@ -748,6 +748,28 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun50i_h616_r_pinctrl_desc
->  	.num_banks	= 1,
->  };
->  
-> +static const struct sunxi_pinctrl_function sun20i_d1_pinctrl_functions[] = {
+>  #define MDIO_CMD_MII_BUSY		BIT(0)
+>  #define MDIO_CMD_MII_WRITE		BIT(1)
+> @@ -167,9 +168,8 @@ struct emac_eth_dev {
+>  	struct clk ephy_clk;
+>  	struct reset_ctl tx_rst;
+>  	struct reset_ctl ephy_rst;
+> -#if CONFIG_IS_ENABLED(DM_GPIO)
+>  	struct gpio_desc reset_gpio;
+> -#endif
 
-Please keep these sections (and the OF match data) sorted numerically.
-
-> +	{ "emac",	8 },	/* PE0-PE15 */
-> +	{ "gpio_in",	0 },
-> +	{ "gpio_out",	1 },
-
-My local patch had a few more entries. Feel free to add them:
-
-+       { "i2c0",       4 },    /* PB10-PB11 */
-
-> +	{ "mmc0",	2 },	/* PF0-PF5 */
-
-+       { "mmc1",       2 },    /* PG0-PG5 */
-
-> +	{ "mmc2",	3 },	/* PC1-PC7 */
-
-Should be PC2-PC7. Everything else looks correct.
-
-> +	{ "spi0",	2 },	/* PC2-PC7 */
-> +#if IS_ENABLED(CONFIG_UART0_PORT_F)
-> +	{ "uart0",	3 },	/* PF2,PF4 */
-> +#else
-> +	{ "uart0",	6 },	/* PB0-PB1, PB8-PB9, PE2-PE3 */
-> +#endif
-
-+       { "uart1",      2 },    /* PG6-PG7 */
-+       { "uart2",      7 },    /* PB0-PB1 */
+This is sort of an unrelated cleanup, and there are several more
+instances of this in the same file. Maybe split this to a separate patch?
 
 Regards,
 Samuel
 
-> +	{ "uart3",	7 },	/* PB6-PB7 */
-> +};
-> +
-> +static const struct sunxi_pinctrl_desc __maybe_unused sun20i_d1_pinctrl_desc = {
-> +	.functions	= sun20i_d1_pinctrl_functions,
-> +	.num_functions	= ARRAY_SIZE(sun20i_d1_pinctrl_functions),
-> +	.first_bank	= SUNXI_GPIO_A,
-> +	.num_banks	= 7,
-> +};
-> +
->  static const struct udevice_id sunxi_pinctrl_ids[] = {
->  #ifdef CONFIG_PINCTRL_SUNIV_F1C100S
->  	{
-> @@ -904,6 +926,12 @@ static const struct udevice_id sunxi_pinctrl_ids[] = {
->  		.compatible = "allwinner,sun50i-h616-r-pinctrl",
->  		.data = (ulong)&sun50i_h616_r_pinctrl_desc,
->  	},
-> +#endif
-> +#ifdef CONFIG_PINCTRL_SUN20I_D1
-> +	{
-> +		.compatible = "allwinner,sun20i-d1-pinctrl",
-> +		.data = (ulong)&sun20i_d1_pinctrl_desc,
-> +	},
->  #endif
->  	{}
+> +	struct udevice *phy_reg;
 >  };
+>  
+>  
+> @@ -720,6 +720,9 @@ static int sun8i_emac_eth_probe(struct udevice *dev)
+>  
+>  	sun8i_emac_set_syscon(sun8i_pdata, priv);
+>  
+> +	if (priv->phy_reg)
+> +		regulator_set_enable(priv->phy_reg, true);
+> +
+>  	sun8i_mdio_init(dev->name, dev);
+>  	priv->bus = miiphy_get_dev_by_name(dev->name);
+>  
+> @@ -829,6 +832,8 @@ static int sun8i_emac_eth_of_to_plat(struct udevice *dev)
+>  
+>  	priv->sysctl_reg = (void *)syscon_base + priv->variant->syscon_offset;
+>  
+> +	device_get_supply_regulator(dev, "phy-supply", &priv->phy_reg);
+> +
+>  	pdata->phy_interface = -1;
+>  	priv->phyaddr = -1;
+>  	priv->use_internal_phy = false;
 
