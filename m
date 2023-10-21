@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30651C001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 21:20:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F51C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 22:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85CDE865ED;
-	Sat, 21 Oct 2023 23:20:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 85BD487666;
+	Sun, 22 Oct 2023 00:06:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0027786538; Sat, 21 Oct 2023 23:20:21 +0200 (CEST)
+ id E7A8C8766A; Sun, 22 Oct 2023 00:06:46 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9904A87668
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 23:20:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id A1BD587666
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 00:06:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 806FCC15;
- Sat, 21 Oct 2023 14:20:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DB7C9C15;
+ Sat, 21 Oct 2023 15:07:19 -0700 (PDT)
 Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 432243F762;
- Sat, 21 Oct 2023 14:20:15 -0700 (PDT)
-Date: Sat, 21 Oct 2023 22:19:11 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9A4943F762;
+ Sat, 21 Oct 2023 15:06:37 -0700 (PDT)
+Date: Sat, 21 Oct 2023 23:05:34 +0100
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
 Cc: Jagan Teki <jagan@amarulasolutions.com>, Jaehoon Chung
@@ -34,12 +34,12 @@ Cc: Jagan Teki <jagan@amarulasolutions.com>, Jaehoon Chung
  Takayoshi <uaa@mx5.nisiq.net>, Mikhail Kalashnikov <iuncuim@gmail.com>,
  Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
  linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
-Message-ID: <20231021221911.16a6a145@slackpad.lan>
-In-Reply-To: <1965267.usQuhbGJ8B@archlinux>
+Subject: Re: [PATCH 3/3] power: regulator: add AXP313 support
+Message-ID: <20231021230534.6ed056bc@slackpad.lan>
+In-Reply-To: <2168063.Mh6RI2rZIc@archlinux>
 References: <20231018155014.383566-1-andre.przywara@arm.com>
- <20231018155014.383566-2-andre.przywara@arm.com>
- <1965267.usQuhbGJ8B@archlinux>
+ <20231018155014.383566-4-andre.przywara@arm.com>
+ <2168063.Mh6RI2rZIc@archlinux>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -61,134 +61,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 21 Oct 2023 08:34:06 +0200
+On Sat, 21 Oct 2023 08:51:09 +0200
 Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
-> On Wednesday, October 18, 2023 5:50:12 PM CEST Andre Przywara wrote:
-> > So far we have a convoluted #ifdef mesh that guards the early AXP PMIC
-> > setup in board.c. That combination of &&, || and negations is very hard
-> > to read, maintain and especially to extend.
+> On Wednesday, October 18, 2023 5:50:14 PM CEST Andre Przywara wrote:
+> > The X-Powers AXP313a is a small PMIC with just three buck converters and
+> > three LDOs, one of which is actually fixed (so not modelled here).
 > >=20
-> > Fortunately we have those same conditions already modelled in the
-> > Kconfig file, so they are actually redundant. On top of that the real
-> > reason we have those preprocessor guards in the first place is about the
-> > symbols that are *conditionally* defined: without #ifdefs the build
-> > would break because of them being undefined for many boards.
-> >=20
-> > To simplify this, just change the guards to actually look at the symbols
-> > needed, so CONFIG_AXP_xxx_VOLT instead of CONFIG_AXPyyy_POWER.
-> > This drastically improves the readability of this code, and makes adding
-> > PMIC support a pure Kconfig matter.
+> > Add the compatible string and the respective regulator ranges to allow
+> > drivers to adjust voltages.
 > >=20
 > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > > ---
-> >  board/sunxi/board.c   | 32 ++++++++++++++------------------
-> >  drivers/power/Kconfig |  2 +-
-> >  2 files changed, 15 insertions(+), 19 deletions(-)
+> >  drivers/power/pmic/axp.c                |  1 +
+> >  drivers/power/regulator/axp_regulator.c | 17 +++++++++++++++++
+> >  include/axp_pmic.h                      |  1 +
+> >  3 files changed, 19 insertions(+)
 > >=20
-> > diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> > index ebaa9431984..65d79a02c25 100644
-> > --- a/board/sunxi/board.c
-> > +++ b/board/sunxi/board.c
-> > @@ -597,50 +597,46 @@ void sunxi_board_init(void)
-> >  		}
-> >  	}
+> > diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
+> > index 025dac24f28..0e1e45fba74 100644
+> > --- a/drivers/power/pmic/axp.c
+> > +++ b/drivers/power/pmic/axp.c
+> > @@ -87,6 +87,7 @@ static const struct udevice_id axp_pmic_ids[] =3D {
+> >  	{ .compatible =3D "x-powers,axp209", .data =3D AXP209_ID },
+> >  	{ .compatible =3D "x-powers,axp221", .data =3D AXP221_ID },
+> >  	{ .compatible =3D "x-powers,axp223", .data =3D AXP223_ID },
+> > +	{ .compatible =3D "x-powers,axp313a", .data =3D AXP313_ID },
+> >  	{ .compatible =3D "x-powers,axp803", .data =3D AXP803_ID },
+> >  	{ .compatible =3D "x-powers,axp806", .data =3D AXP806_ID },
+> >  	{ .compatible =3D "x-powers,axp809", .data =3D AXP809_ID },
+> > diff --git a/drivers/power/regulator/axp_regulator.c
+> > b/drivers/power/regulator/axp_regulator.c index 02f320eac1e..d27e09538e0
+> > 100644
+> > --- a/drivers/power/regulator/axp_regulator.c
+> > +++ b/drivers/power/regulator/axp_regulator.c
+> > @@ -173,6 +173,22 @@ static const struct axp_regulator_plat
+> > axp22x_regulators[] =3D { { }
+> >  };
 > >=20
-> > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
-> > -	defined CONFIG_AXP818_POWER
-> > +#ifdef CONFIG_AXP_DCDC1_VOLT
-> >  	power_failed |=3D axp_set_dcdc1(CONFIG_AXP_DCDC1_VOLT);
-> > +	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
-> >  #endif
-> > -#if !defined(CONFIG_AXP305_POWER)
-> > +#ifdef CONFIG_AXP_DCDC2_VOLT
-> >  	power_failed |=3D axp_set_dcdc2(CONFIG_AXP_DCDC2_VOLT);
-> >  	power_failed |=3D axp_set_dcdc3(CONFIG_AXP_DCDC3_VOLT);
-> >  #endif
-> > -#if !defined(CONFIG_AXP209_POWER) && !defined(CONFIG_AXP818_POWER)
-> > +#ifdef CONFIG_AXP_DCDC4_VOLT
-> >  	power_failed |=3D axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);
-> >  #endif
-> > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
-> > -	defined CONFIG_AXP818_POWER
-> > -	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
-> > -#endif
-> >=20
-> > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
-> > -	defined CONFIG_AXP818_POWER
-> > +#ifdef CONFIG_AXP_ALDO1_VOLT
-> >  	power_failed |=3D axp_set_aldo1(CONFIG_AXP_ALDO1_VOLT);
-> >  #endif
-> > -#if !defined(CONFIG_AXP305_POWER)
-> > +#ifdef CONFIG_AXP_ALDO2_VOLT
-> >  	power_failed |=3D axp_set_aldo2(CONFIG_AXP_ALDO2_VOLT);
-> >  #endif
-> > -#if !defined(CONFIG_AXP152_POWER) && !defined(CONFIG_AXP305_POWER)
-> > +#ifdef CONFIG_AXP_ALDO3_VOLT
-> >  	power_failed |=3D axp_set_aldo3(CONFIG_AXP_ALDO3_VOLT);
-> >  #endif
-> > -#ifdef CONFIG_AXP209_POWER
-> > +#ifdef CONFIG_AXP_ALDO4_VOLT
-> >  	power_failed |=3D axp_set_aldo4(CONFIG_AXP_ALDO4_VOLT);
-> >  #endif
-> >=20
-> > -#if defined(CONFIG_AXP221_POWER) || defined(CONFIG_AXP809_POWER) || \
-> > -	defined(CONFIG_AXP818_POWER)
-> > +#ifdef CONFIG_AXP_DLDO1_VOLT
-> >  	power_failed |=3D axp_set_dldo(1, CONFIG_AXP_DLDO1_VOLT);
-> >  	power_failed |=3D axp_set_dldo(2, CONFIG_AXP_DLDO2_VOLT);
-> > -#if !defined CONFIG_AXP809_POWER
-> > +#endif
-> > +#ifdef CONFIG_AXP_DLDO3_VOLT
-> >  	power_failed |=3D axp_set_dldo(3, CONFIG_AXP_DLDO3_VOLT);
-> >  	power_failed |=3D axp_set_dldo(4, CONFIG_AXP_DLDO4_VOLT);
-> >  #endif
-> > +#ifdef CONFIG_AXP_ELDO1_VOLT
-> >  	power_failed |=3D axp_set_eldo(1, CONFIG_AXP_ELDO1_VOLT);
-> >  	power_failed |=3D axp_set_eldo(2, CONFIG_AXP_ELDO2_VOLT);
-> >  	power_failed |=3D axp_set_eldo(3, CONFIG_AXP_ELDO3_VOLT);
-> >  #endif
-> >=20
-> > -#ifdef CONFIG_AXP818_POWER
-> > +#ifdef CONFIG_AXP_FLDO1_VOLT
-> >  	power_failed |=3D axp_set_fldo(1, CONFIG_AXP_FLDO1_VOLT);
-> >  	power_failed |=3D axp_set_fldo(2, CONFIG_AXP_FLDO2_VOLT);
-> >  	power_failed |=3D axp_set_fldo(3, CONFIG_AXP_FLDO3_VOLT);
-> > @@ -649,7 +645,7 @@ void sunxi_board_init(void)
-> >  #if defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER
-> >  	power_failed |=3D axp_set_sw(IS_ENABLED(CONFIG_AXP_SW_ON));
-> >  #endif
-> > -#endif
-> > +#endif	/* CONFIG_AXPxxx_POWER */
-> >  	printf("DRAM:");
-> >  	gd->ram_size =3D sunxi_dram_init();
-> >  	printf(" %d MiB\n", (int)(gd->ram_size >> 20));
-> > diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-> > index 7f3b990d231..83cb31c937a 100644
-> > --- a/drivers/power/Kconfig
-> > +++ b/drivers/power/Kconfig
-> > @@ -180,7 +180,7 @@ config AXP_DCDC3_VOLT
-> >=20
-> >  config AXP_DCDC4_VOLT
-> >  	int "axp pmic dcdc4 voltage"
-> > -	depends on AXP152_POWER || AXP221_POWER || AXP809_POWER ||  =20
-> AXP818_POWER ||
-> > AXP305_POWER +	depends on AXP152_POWER || AXP221_POWER || AXP809_POWER =
+> > +/*
+> > + * The "dcdc1" regulator has another range, beyond 1.54V up to 3.4V, in
+> > + * steps of 100mV. We cannot model this easily, but also don't need th=
+at,
+> > + * since it's typically only used for ~1.1V anyway, so just ignore it.=
  =20
-> ||
-> > AXP305_POWER default 1250 if AXP152_POWER
-> >  	default 1200 if MACH_SUN6I
-> >  	default 0 if MACH_SUN8I =20
 >=20
-> This patch is great, but this last change doesn't seem to be directly=20
-> connected?
+> It can be modelled with look up table, as it's already done for some othe=
+r=20
+> regulators?
 
-It is an existing bug: there is no axp_set_dcdc4() for the AXP818, but
-since the AXP818 is not included in the guards at the calling site
-in board.c above, we didn't notice.
-So without this change, all A83T boards (the only ones using AXP818)
-would fail compilation.
-I just forgot to mention it in the commit message, will add it.
+Theoretically yes, but it would require about 105 entries, that's quite
+a lot for something we don't need. As mentioned, it's
+typically VDD_GPU/VDD_SYS, at 0.9V at reset, and no device used in
+U-Boot directly references this regulator, so I think it wouldn't be
+used anyways. I doubt that even with a user we ever would go beyond
+1.54V. So for the sake of simplicity, I'd like to keep this cut to
+those two ranges.
+
+Thanks for having a look!
 
 Cheers,
 Andre
+
+>=20
+> Best regards,
+> Jernej
+>=20
+> > + * Also the DCDC3 regulator is described wrongly in the (available) ma=
+nual,
+> > + * experiments show that the split point is at 1200mV, as for DCDC1/2.=
+ +
+> > */
+> > +static const struct axp_regulator_plat axp313_regulators[] =3D {
+> > +	{ "dcdc1", 0x10, BIT(0), 0x13, 0x7f,  500, 1540,  10, 70 },
+> > +	{ "dcdc2", 0x10, BIT(1), 0x14, 0x7f,  500, 1540,  10, 70 },
+> > +	{ "dcdc3", 0x10, BIT(2), 0x15, 0x7f,  500, 1840,  10, 70 },
+> > +	{ "aldo1", 0x10, BIT(3), 0x16, 0x1f,  500, 3500, 100, NA },
+> > +	{ "dldo1", 0x10, BIT(4), 0x17, 0x1f,  500, 3500, 100, NA },
+> > +	{ }
+> > +};
+> > +
+> >  static const struct axp_regulator_plat axp803_regulators[] =3D {
+> >  	{ "dcdc1", 0x10, BIT(0), 0x20, 0x1f, 1600, 3400, 100, NA },
+> >  	{ "dcdc2", 0x10, BIT(1), 0x21, 0x7f,  500, 1300,  10, 70 },
+> > @@ -274,6 +290,7 @@ static const struct axp_regulator_plat *const
+> > axp_regulators[] =3D { [AXP209_ID]	=3D axp20x_regulators,
+> >  	[AXP221_ID]	=3D axp22x_regulators,
+> >  	[AXP223_ID]	=3D axp22x_regulators,
+> > +	[AXP313_ID]	=3D axp313_regulators,
+> >  	[AXP803_ID]	=3D axp803_regulators,
+> >  	[AXP806_ID]	=3D axp806_regulators,
+> >  	[AXP809_ID]	=3D axp809_regulators,
+> > diff --git a/include/axp_pmic.h b/include/axp_pmic.h
+> > index 4ac64865831..aabafc8501b 100644
+> > --- a/include/axp_pmic.h
+> > +++ b/include/axp_pmic.h
+> > @@ -32,6 +32,7 @@ enum {
+> >  	AXP209_ID,
+> >  	AXP221_ID,
+> >  	AXP223_ID,
+> > +	AXP313_ID,
+> >  	AXP803_ID,
+> >  	AXP806_ID,
+> >  	AXP809_ID, =20
+>=20
+>=20
+>=20
+>=20
+>=20
+
