@@ -4,96 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D1F7C0032E
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 08:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB29C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 08:43:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9562287590;
-	Sat, 21 Oct 2023 10:37:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
+	by phobos.denx.de (Postfix) with ESMTP id D44BF875DE;
+	Sat, 21 Oct 2023 10:43:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="WN2pVP3N";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="AjYdmHRE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ie0CfqVT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DF57875B5; Sat, 21 Oct 2023 10:37:24 +0200 (CEST)
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
- [66.111.4.29])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD9E3875DF; Sat, 21 Oct 2023 10:43:42 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38F8C87588
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 10:37:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA2F2875B5
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 10:43:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sholland.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailout.nyi.internal (Postfix) with ESMTP id 5DD9E5C00E6;
- Sat, 21 Oct 2023 04:37:13 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute7.internal (MEProxy); Sat, 21 Oct 2023 04:37:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
- 1697877433; x=1697963833; bh=FAGsFPew1fKjSZoKYRVYLYPlLFFcloLU1eb
- i48uwvP0=; b=WN2pVP3NChDo46VMKDvoN/8DWE1WNz6a/TCeBhHjTDlL82KDMst
- H4s9wohWrR3dy2zHT1BKo1YZnHBZ+hjHUaaXO0+JfRS2fWu78i6wN9SBI1uOXpK+
- 8hRaAqpG9vzbO3fmJlgX6OXjl7IEAgNPv0H1XGO7eHbQGUDXms1gafKYVWx3d64d
- +m0oOrvi2IcghAJQU+0xZCCBaDhoHtIFEIjnckDOYzsFCwsyPH+CqIzY+LUQUwyQ
- svvqsDE3ZXDMYjk5avClrR55aofXJ7iJrGGo9s52hM2AA0Fqq2BfDTxzt1kRHmEm
- TmwZf699k1gcjsmqyFrKNyLEagYstnumBeA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1697877433; x=1697963833; bh=FAGsFPew1fKjSZoKYRVYLYPlLFFcloLU1eb
- i48uwvP0=; b=AjYdmHREbTxEGyNL0Zb7xfWrcBhL0hefjocfHpGwY97mZSn3Q9q
- 90L33s4cZAwB33CrhJcqyEbMsPFrVE4PYCJlciRfVemuelH5gDL3PU7r0q9bCauv
- nrMQi3RoQPIxpPEHpQFjU5ruIJ9iFt4DD/8WW2YBWoMmML7jGFMhX7GII6R/wXlk
- OHcVw82vaajedpzL059H/Iu/AwLxJcxaWSH7waWflqrxhk0gqJxNzVueM8MmvrzV
- XQKTsf7Ojq7wPQ+e8MUQLermGMDXpMp7MIhy020Q36yJ/HXE+87AY1F4K0Nama2K
- m3gwPXeESNNCrHwSRuYuwXz4y4WZfLrNbCQ==
-X-ME-Sender: <xms:uI0zZdAq8zZkHb-Pj6rfSXdHPJ47ZMtCyO3q4veeloIEjsQeDTItnw>
- <xme:uI0zZbg2tv2dpoD6bKB-G5DdIcF3qj7o9xi_LaxiJFC66R_CXHVQeiKIOijNgSQjD
- jsd720wwE50IxGSuQ>
-X-ME-Received: <xmr:uI0zZYn0vrSZ4RzsfShuh32zJ7wqPX2Wq0wL_Ohrdz9oVgyDlLc1TJ28F-0Rce0AsPrKAQ08AlujDvFoQaVQFa_yqR-qB_7UKzghioOrxgQM0gWcxEJB46qMxQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrkedtgddtvdcutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefkffggfgfuvfevfhfhjggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
- vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepkeejleelfeeitdfhtdfgkeeghedufeduueegffdvhfdukeelleef
- tdetjeehuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:uI0zZXygMAZ5LsATj1ERUgZtrYaprgR7TqTU33wrnkVfkQgGwwpElQ>
- <xmx:uI0zZSSBdwm3HQdVOgdX5sz_OAdMUz9ixNdYrq4AX_lzT-TMfhMq4Q>
- <xmx:uI0zZabw_ithe-Q8443FPYZHJu3H2v-bxjl30fCT-qEQYHfo_SSkfw>
- <xmx:uY0zZVERKMjLrMTxghzC7xcoF02CxfDoJD4jn6HjMqgmsJE3XR6K-w>
-Feedback-ID: i0ad843c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 21 Oct 2023 04:37:11 -0400 (EDT)
-Message-ID: <a34659c9-c761-2dab-45c6-5499f518ae02@sholland.org>
-Date: Sat, 21 Oct 2023 03:37:11 -0500
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40859c46447so1668375e9.1
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 01:43:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697877818; x=1698482618; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OAGGLMwCmbGPNbRkvDipjHIApb+V+R1x5xXub+KvhU8=;
+ b=Ie0CfqVToCi4ucu1ACiQyKNmJ0CJGP3+XlgTVk51rZy0Z36MWxFgeNcSRGqVMvzAFY
+ DIFh/LCP6nkZJwaarPpEM0f1axlmx6AIYdpo49KPRGkRytPbN74l9QDwOXavYxJmldus
+ NF5VrNFZ6nVp86lijX1UemGnMRknYoz2hCVDnrDb01SUmrLciG7HlIlhE2GmNP8oOHQ6
+ 0ITMEOqRoPK1x7SR1HTbr8kh9opikdbwkHT+5QScuyr0bgzZE/I6sr/4bH5Q450ifpgr
+ kfrvvyAYsGkcsBNsVZg3PmKaoDKyDKZhtqKVBr1uAh9o3X5YKIme7ukahV4l8g0VO2RF
+ FybQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697877818; x=1698482618;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OAGGLMwCmbGPNbRkvDipjHIApb+V+R1x5xXub+KvhU8=;
+ b=dWnXPDIeStOtS3/S2vAVs7/FwcnzThmMhg7tlO1BpbduUtSao56lB9TAbKhnRREr6y
+ EnznihMnyoBrOO9Rd+4MhHPxEaQw59+l9bMo0cA4AqFaz40nckRg9zdjjHPADHZYVMrN
+ aXEeYSC15CU3J2JU+r8YGPFuUyNwFR++nx7hPkNFvsbkiSUuwrtVtSgg3NrntafI0UTG
+ Up1s1DFyDJGn+3XCTyW0LdQwAI3rCXW0YeIX53koZqQ5opeQoL/7+V3/5nuVU/+Mxng+
+ Phx2oAdL39rd0A/qG3TnLmsadpVVYw5L9KmYW8qBgKSchoSsC/V1J3FpIuI50lPNYaZe
+ Helw==
+X-Gm-Message-State: AOJu0Yw6UefOrF66Vig26q+mOZL0iECoDvJ40H0Rqn6iHbbSgTIfosHU
+ 2mHC3K1bu0V28e4LL0FhYKcJdg==
+X-Google-Smtp-Source: AGHT+IGncrc2U+AMycV28ntrluKKF3Xz6dFvmA+udFwnolyLpEdfGtSFd0ei7Cyloum+jXfqelHHfg==
+X-Received: by 2002:a05:600c:3583:b0:408:4095:6f0c with SMTP id
+ p3-20020a05600c358300b0040840956f0cmr3381399wmq.38.1697877818105; 
+ Sat, 21 Oct 2023 01:43:38 -0700 (PDT)
+Received: from [192.168.67.234] (92.40.196.242.threembb.co.uk. [92.40.196.242])
+ by smtp.gmail.com with ESMTPSA id
+ o27-20020a05600c511b00b004067e905f44sm4068409wms.9.2023.10.21.01.43.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 21 Oct 2023 01:43:37 -0700 (PDT)
+Message-ID: <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
+Date: Sat, 21 Oct 2023 09:43:32 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH v2 06/22] pinctrl: sunxi: remove struct sunxi_gpio
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
 Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
- <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
- Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
- <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
- andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de
-References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-7-andre.przywara@arm.com>
-From: Samuel Holland <samuel@sholland.org>
-In-Reply-To: <20230928215455.28094-7-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+References: <20231021004522.53311-1-sjg@chromium.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20231021004522.53311-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -111,351 +99,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Hi Simon,
 
-On 9/28/23 16:54, Andre Przywara wrote:
-> So far every Allwinner SoC used the same basic pincontroller/GPIO
-> register frame, and just differed by the number of implemented banks and
-> pins, plus some special functionality from time to time. However the D1
-> and successors use a slightly different pinctrl register layout.
-> Use that opportunity to drop "struct sunxi_gpio", that described that
-> MMIO frame in a C struct. That approach is somewhat frowned upon in the
-> Linux world and rarely used there, though still popular with U-Boot.
+On 21/10/2023 01:45, Simon Glass wrote:
+> U-Boot typically sets up its malloc() pool near the top of memory. On
+> ARM64 systems this can result in an SMBIOS table above 4GB which is
+> not supported by SMBIOSv2.
 > 
-> Switching from a C struct to a "base address plus offset" approach allows
-> to switch between the two models more dynamically, without reverting to
-> preprocessor macros and #ifdef's.
+> Work around this problem by providing a new option to choose an address
+> just below 4GB, if needed.
+I may well be missing something here, but I don't quite understand the 
+justification behind the original patch [1] which caused this regression.
+
+I'm currently preparing support for a few different Qualcomm boards 
+which have different memory layouts, so far it's been possible to avoid 
+having any fixed addresses, so the same u-boot image can be used on all 
+of them (with just a different DTB).
+
+As I mentioned before, efi_allocate_pages() seems to work fine from 
+install_smbios_table(), I haven't delved into the code too much but I 
+wonder if this could be an acceptable solution?
+
+Barring that, could we use an environment variable to pass this address 
+in? Although I think that might not be a very desirable solution.
+
+I appreciate you taking the time to prepare this patch and CC me. If 
+nobody else objects to this patch then I'd prefer to avoid blocking it. 
+In either case, I'd greatly appreciate any input on the above 
+suggestions so that I can implement a solution for my boards.
+
+Thanks and regards,
+
+[1]: 
+https://lore.kernel.org/u-boot/20230920030027.1385833-16-sjg@chromium.org/
 > 
-> Model the pinctrl MMIO register frame in the usual "base address +
-> offset" way, and replace a hard-to-parse CPP macro with a more readable
-> static function.
-> All the users get converted over. There are no functional changes at
-> this point, it just prepares the stages for the D1 and friends.
-> 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->  arch/arm/include/asm/arch-sunxi/gpio.h | 40 ++----------
->  drivers/gpio/sunxi_gpio.c              | 88 ++++++++++++++++----------
->  drivers/pinctrl/sunxi/pinctrl-sunxi.c  | 14 ++--
->  3 files changed, 66 insertions(+), 76 deletions(-)
 > 
-> diff --git a/arch/arm/include/asm/arch-sunxi/gpio.h b/arch/arm/include/asm/arch-sunxi/gpio.h
-> index 4bc9e8ffcc9..e0fb5b5da63 100644
-> --- a/arch/arm/include/asm/arch-sunxi/gpio.h
-> +++ b/arch/arm/include/asm/arch-sunxi/gpio.h
-> @@ -31,13 +31,6 @@
->  #define SUNXI_GPIO_H	7
->  #define SUNXI_GPIO_I	8
->  
-> -/*
-> - * This defines the number of GPIO banks for the _main_ GPIO controller.
-> - * You should fix up the padding in struct sunxi_gpio_reg below if you
-> - * change this.
-> - */
-> -#define SUNXI_GPIO_BANKS 9
-> -
->  /*
->   * sun6i/sun8i and later SoCs have an additional GPIO controller (R_PIO)
->   * at a different register offset.
-> @@ -55,32 +48,11 @@
->  #define SUNXI_GPIO_M	12
->  #define SUNXI_GPIO_N	13
->  
-> -struct sunxi_gpio {
-> -	u32 cfg[4];
-> -	u32 dat;
-> -	u32 drv[2];
-> -	u32 pull[2];
-> -};
-> -
-> -/* gpio interrupt control */
-> -struct sunxi_gpio_int {
-> -	u32 cfg[3];
-> -	u32 ctl;
-> -	u32 sta;
-> -	u32 deb;		/* interrupt debounce */
-> -};
-> -
-> -struct sunxi_gpio_reg {
-> -	struct sunxi_gpio gpio_bank[SUNXI_GPIO_BANKS];
-> -	u8 res[0xbc];
-> -	struct sunxi_gpio_int gpio_int;
-> -};
-> -
->  #define SUN50I_H6_GPIO_POW_MOD_SEL	0x340
->  #define SUN50I_H6_GPIO_POW_MOD_VAL	0x348
->  
-> -/* GPIO bank sizes */
->  #define SUNXI_GPIOS_PER_BANK	32
-> +#define SUNXI_PINCTRL_BANK_SIZE 0x24
->  
->  #define SUNXI_GPIO_NEXT(__gpio) \
->  	((__gpio##_START) + SUNXI_GPIOS_PER_BANK)
-> @@ -200,19 +172,19 @@ enum sunxi_gpio_number {
->  #define SUNXI_GPIO_AXP0_GPIO_COUNT	6
->  
->  struct sunxi_gpio_plat {
-> -	struct sunxi_gpio	*regs;
-> +	void			*regs;
->  	char			bank_name[3];
->  };
->  
->  /* prototypes for the non-DM GPIO/pinctrl functions, used in the SPL */
-> -void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val);
-> +void sunxi_gpio_set_cfgbank(void *bank_base, int pin_offset, u32 val);
->  void sunxi_gpio_set_cfgpin(u32 pin, u32 val);
-> -int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset);
-> +int sunxi_gpio_get_cfgbank(void *bank_base, int pin_offset);
->  int sunxi_gpio_get_cfgpin(u32 pin);
->  void sunxi_gpio_set_drv(u32 pin, u32 val);
-> -void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val);
-> +void sunxi_gpio_set_drv_bank(void *bank_base, u32 pin_offset, u32 val);
->  void sunxi_gpio_set_pull(u32 pin, u32 val);
-> -void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val);
-> +void sunxi_gpio_set_pull_bank(void *bank_base, int pin_offset, u32 val);
->  int sunxi_name_to_gpio(const char *name);
->  
->  #if !defined CONFIG_SPL_BUILD && defined CONFIG_AXP_GPIO
-> diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
-> index a4b336943b6..fe3f6ed0938 100644
-> --- a/drivers/gpio/sunxi_gpio.c
-> +++ b/drivers/gpio/sunxi_gpio.c
-> @@ -29,45 +29,61 @@
->   * =======================================================================
->   */
->  
-> -#define BANK_TO_GPIO(bank)	(((bank) < SUNXI_GPIO_L) ? \
-> -	&((struct sunxi_gpio_reg *)SUNXI_PIO_BASE)->gpio_bank[bank] : \
-> -	&((struct sunxi_gpio_reg *)SUNXI_R_PIO_BASE)->gpio_bank[(bank) - SUNXI_GPIO_L])
-> -
->  #define GPIO_BANK(pin)		((pin) >> 5)
->  #define GPIO_NUM(pin)		((pin) & 0x1f)
->  
-> +#define GPIO_CFG_REG_OFFSET	0x00
->  #define GPIO_CFG_INDEX(pin)	(((pin) & 0x1f) >> 3)
->  #define GPIO_CFG_OFFSET(pin)	((((pin) & 0x1f) & 0x7) << 2)
->  
-> +#define GPIO_DAT_REG_OFFSET	0x10
+>   lib/Kconfig                 | 17 +++++++++++++++++
+>   lib/efi_loader/efi_smbios.c | 12 ++++++++++++
+>   2 files changed, 29 insertions(+)
+> 
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index f6ca559897e7..a77f2f3e9089 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -994,6 +994,23 @@ config GENERATE_SMBIOS_TABLE
+>   	  See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
+>   	  the devicetree.
+>   
+> +config SMBIOS_TABLE_FIXED
+> +	bool "Place the SMBIOS table at a special address"
+> +	depends on GENERATE_SMBIOS_TABLE && ARM64 && SMBIOS && EFI_LOADER
+> +	default y
+> +	help
+> +	  Use this option to place the SMBIOS table at a fixed address.
 > +
-> +#define GPIO_DRV_REG_OFFSET	0x14
->  #define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
->  #define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
->  
-> +#define GPIO_PULL_REG_OFFSET	0x1c
->  #define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
->  #define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
-
-Now that we've ensured the *_bank functions only get called with pin
-numbers in the range 0-31, we don't need the masking anymore. But this
-can be a later cleanup.
-
-Reviewed-by: Samuel Holland <samuel@sholland.org>
-Tested-by: Samuel Holland <samuel@sholland.org>
-
->  
-> -void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val)
-> +static void* BANK_TO_GPIO(int bank)
-> +{
-> +	void *pio_base;
+> +	  U-Boot typically sets up its malloc() pool near the top of memory. On
+> +	  ARM64 systems this can result in an SMBIOS table above 4GB which is
+> +	  not supported by SMBIOSv2. This option works around this problem by
+> +	  chosing an address just below 4GB, if needed.
 > +
-> +	if (bank < SUNXI_GPIO_L) {
-> +		pio_base = (void *)(uintptr_t)SUNXI_PIO_BASE;
-> +	} else {
-> +		pio_base = (void *)(uintptr_t)SUNXI_R_PIO_BASE;
-> +		bank -= SUNXI_GPIO_L;
+> +config SMBIOS_TABLE_FIXED_ADDR
+> +	hex "Fixed address for use for SMBIOS table"
+> +	depends on SMBIOS_TABLE_FIXED
+> +	default 0xffff0000
+> +
+>   endmenu
+>   
+>   config LIB_RATIONAL
+> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> index 48446f654d9b..84ea027ea48c 100644
+> --- a/lib/efi_loader/efi_smbios.c
+> +++ b/lib/efi_loader/efi_smbios.c
+> @@ -61,6 +61,18 @@ static int install_smbios_table(void)
+>   		return log_msg_ret("mem", -ENOMEM);
+>   
+>   	addr = map_to_sysmem(buf);
+> +
+> +	/*
+> +	 * Deal with a fixed address if needed. For simplicity we assume that
+> +	 * the SMBIOS-table size is <64KB and that the malloc region does not
+> +	 * straddle the 4GB boundary.
+> +	 */
+> +	if (IS_ENABLED(CONFIG_SMBIOS_TABLE_FIXED) && addr >= SZ_4G - SZ_64K) {
+> +		addr = IF_ENABLED_INT(CONFIG_SMBIOS_TABLE_FIXED,
+> +				      CONFIG_SMBIOS_TABLE_FIXED_ADDR);
+> +		log_warning("Forcing SMBIOS table to address %lx\n", addr);
 > +	}
 > +
-> +	return pio_base + bank * SUNXI_PINCTRL_BANK_SIZE;
-> +}
-> +
-> +void sunxi_gpio_set_cfgbank(void *bank_base, int pin_offset, u32 val)
->  {
-> -	u32 index = GPIO_CFG_INDEX(bank_offset);
-> -	u32 offset = GPIO_CFG_OFFSET(bank_offset);
-> +	u32 index = GPIO_CFG_INDEX(pin_offset);
-> +	u32 offset = GPIO_CFG_OFFSET(pin_offset);
->  
-> -	clrsetbits_le32(&pio->cfg[index], 0xf << offset, val << offset);
-> +	clrsetbits_le32(bank_base + GPIO_CFG_REG_OFFSET + index * 4,
-> +			0xfU << offset, val << offset);
->  }
->  
->  void sunxi_gpio_set_cfgpin(u32 pin, u32 val)
->  {
->  	u32 bank = GPIO_BANK(pin);
-> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> +	void *pio = BANK_TO_GPIO(bank);
->  
-> -	sunxi_gpio_set_cfgbank(pio, pin, val);
-> +	sunxi_gpio_set_cfgbank(pio, GPIO_NUM(pin), val);
->  }
->  
-> -int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
-> +int sunxi_gpio_get_cfgbank(void *bank_base, int pin_offset)
->  {
-> -	u32 index = GPIO_CFG_INDEX(bank_offset);
-> -	u32 offset = GPIO_CFG_OFFSET(bank_offset);
-> +	u32 index = GPIO_CFG_INDEX(pin_offset);
-> +	u32 offset = GPIO_CFG_OFFSET(pin_offset);
->  	u32 cfg;
->  
-> -	cfg = readl(&pio->cfg[index]);
-> +	cfg = readl(bank_base + GPIO_CFG_REG_OFFSET + index * 4);
->  	cfg >>= offset;
->  
->  	return cfg & 0xf;
-> @@ -76,54 +92,56 @@ int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
->  int sunxi_gpio_get_cfgpin(u32 pin)
->  {
->  	u32 bank = GPIO_BANK(pin);
-> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> +	void *bank_base = BANK_TO_GPIO(bank);
->  
-> -	return sunxi_gpio_get_cfgbank(pio, pin);
-> +	return sunxi_gpio_get_cfgbank(bank_base, GPIO_NUM(pin));
->  }
->  
-> -static void sunxi_gpio_set_output_bank(struct sunxi_gpio *pio,
-> -				       int pin, bool set)
-> +static void sunxi_gpio_set_output_bank(void *bank_base, int pin, bool set)
->  {
->  	u32 mask = 1U << pin;
->  
-> -	clrsetbits_le32(&pio->dat, set ? 0 : mask, set ? mask : 0);
-> +	clrsetbits_le32(bank_base + GPIO_DAT_REG_OFFSET,
-> +			set ? 0 : mask, set ? mask : 0);
->  }
->  
-> -static int sunxi_gpio_get_output_bank(struct sunxi_gpio *pio, int pin)
-> +static int sunxi_gpio_get_output_bank(void *bank_base, int pin)
->  {
-> -	return !!(readl(&pio->dat) & (1U << pin));
-> +	return !!(readl(bank_base + GPIO_DAT_REG_OFFSET) & (1U << pin));
->  }
->  
->  void sunxi_gpio_set_drv(u32 pin, u32 val)
->  {
->  	u32 bank = GPIO_BANK(pin);
-> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> +	void *bank_base = BANK_TO_GPIO(bank);
->  
-> -	sunxi_gpio_set_drv_bank(pio, pin, val);
-> +	sunxi_gpio_set_drv_bank(bank_base, GPIO_NUM(pin), val);
->  }
->  
-> -void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val)
-> +void sunxi_gpio_set_drv_bank(void *bank_base, u32 pin_offset, u32 val)
->  {
-> -	u32 index = GPIO_DRV_INDEX(bank_offset);
-> -	u32 offset = GPIO_DRV_OFFSET(bank_offset);
-> +	u32 index = GPIO_DRV_INDEX(pin_offset);
-> +	u32 offset = GPIO_DRV_OFFSET(pin_offset);
->  
-> -	clrsetbits_le32(&pio->drv[index], 0x3 << offset, val << offset);
-> +	clrsetbits_le32(bank_base + GPIO_DRV_REG_OFFSET + index * 4,
-> +			0x3U << offset, val << offset);
->  }
->  
->  void sunxi_gpio_set_pull(u32 pin, u32 val)
->  {
->  	u32 bank = GPIO_BANK(pin);
-> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> +	void *bank_base = BANK_TO_GPIO(bank);
->  
-> -	sunxi_gpio_set_pull_bank(pio, pin, val);
-> +	sunxi_gpio_set_pull_bank(bank_base, GPIO_NUM(pin), val);
->  }
->  
-> -void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
-> +void sunxi_gpio_set_pull_bank(void *bank_base, int pin_offset, u32 val)
->  {
-> -	u32 index = GPIO_PULL_INDEX(bank_offset);
-> -	u32 offset = GPIO_PULL_OFFSET(bank_offset);
-> +	u32 index = GPIO_PULL_INDEX(pin_offset);
-> +	u32 offset = GPIO_PULL_OFFSET(pin_offset);
->  
-> -	clrsetbits_le32(&pio->pull[index], 0x3 << offset, val << offset);
-> +	clrsetbits_le32(bank_base + GPIO_PULL_REG_OFFSET + index * 4,
-> +			0x3U << offset, val << offset);
->  }
->  
->  
-> @@ -133,7 +151,7 @@ void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
->  static void sunxi_gpio_set_output(u32 pin, bool set)
->  {
->  	u32 bank = GPIO_BANK(pin);
-> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> +	void *pio = BANK_TO_GPIO(bank);
->  
->  	sunxi_gpio_set_output_bank(pio, GPIO_NUM(pin), set);
->  }
-> @@ -141,7 +159,7 @@ static void sunxi_gpio_set_output(u32 pin, bool set)
->  static int sunxi_gpio_get_output(u32 pin)
->  {
->  	u32 bank = GPIO_BANK(pin);
-> -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> +	void *pio = BANK_TO_GPIO(bank);
->  
->  	return sunxi_gpio_get_output_bank(pio, GPIO_NUM(pin));
->  }
-> diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> index e5102180902..946447e9136 100644
-> --- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> +++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> @@ -35,7 +35,7 @@ struct sunxi_pinctrl_desc {
->  };
->  
->  struct sunxi_pinctrl_plat {
-> -	struct sunxi_gpio __iomem *base;
-> +	void __iomem *base;
->  };
->  
->  static int sunxi_pinctrl_get_pins_count(struct udevice *dev)
-> @@ -86,8 +86,8 @@ static int sunxi_pinctrl_pinmux_set(struct udevice *dev, uint pin_selector,
->  	      sunxi_pinctrl_get_function_name(dev, func_selector),
->  	      desc->functions[func_selector].mux);
->  
-> -	sunxi_gpio_set_cfgbank(plat->base + bank, pin,
-> -			       desc->functions[func_selector].mux);
-> +	sunxi_gpio_set_cfgbank(plat->base + bank * SUNXI_PINCTRL_BANK_SIZE,
-> +			       pin, desc->functions[func_selector].mux);
->  
->  	return 0;
->  }
-> @@ -102,7 +102,7 @@ static const struct pinconf_param sunxi_pinctrl_pinconf_params[] = {
->  static int sunxi_pinctrl_pinconf_set_pull(struct sunxi_pinctrl_plat *plat,
->  					  uint bank, uint pin, uint bias)
->  {
-> -	struct sunxi_gpio *regs = &plat->base[bank];
-> +	void *regs = plat->base + bank * SUNXI_PINCTRL_BANK_SIZE;
->  
->  	sunxi_gpio_set_pull_bank(regs, pin, bias);
->  
-> @@ -112,7 +112,7 @@ static int sunxi_pinctrl_pinconf_set_pull(struct sunxi_pinctrl_plat *plat,
->  static int sunxi_pinctrl_pinconf_set_drive(struct sunxi_pinctrl_plat *plat,
->  					   uint bank, uint pin, uint drive)
->  {
-> -	struct sunxi_gpio *regs = &plat->base[bank];
-> +	void *regs = plat->base + bank * SUNXI_PINCTRL_BANK_SIZE;
->  
->  	if (drive < 10 || drive > 40)
->  		return -EINVAL;
-> @@ -148,7 +148,7 @@ static int sunxi_pinctrl_get_pin_muxing(struct udevice *dev, uint pin_selector,
->  	struct sunxi_pinctrl_plat *plat = dev_get_plat(dev);
->  	int bank = pin_selector / SUNXI_GPIOS_PER_BANK;
->  	int pin	 = pin_selector % SUNXI_GPIOS_PER_BANK;
-> -	int mux  = sunxi_gpio_get_cfgbank(plat->base + bank, pin);
-> +	int mux  = sunxi_gpio_get_cfgbank(plat->base + bank * SUNXI_PINCTRL_BANK_SIZE, pin);
->  
->  	switch (mux) {
->  	case SUNXI_GPIO_INPUT:
-> @@ -206,7 +206,7 @@ static int sunxi_pinctrl_bind(struct udevice *dev)
->  		if (!gpio_plat)
->  			return -ENOMEM;
->  
-> -		gpio_plat->regs = plat->base + i;
-> +		gpio_plat->regs = plat->base + i * SUNXI_PINCTRL_BANK_SIZE;
->  		gpio_plat->bank_name[0] = 'P';
->  		gpio_plat->bank_name[1] = 'A' + desc->first_bank + i;
->  		gpio_plat->bank_name[2] = '\0';
+>   	if (!write_smbios_table(addr)) {
+>   		log_err("Failed to write SMBIOS table\n");
+>   		return log_msg_ret("smbios", -EINVAL);
 
+-- 
+// Caleb (they/them)
