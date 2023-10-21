@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD0D8C004C0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 15:43:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24707C004C0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 15:43:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79B46875DD;
-	Sat, 21 Oct 2023 17:43:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 230F7875B3;
+	Sat, 21 Oct 2023 17:43:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CQBOeS2T";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ShFoSlcM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E70D875AF; Sat, 21 Oct 2023 17:43:20 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 74EA08761B; Sat, 21 Oct 2023 17:43:27 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9996787596
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 17:43:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E613875B2
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 17:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-53e08e439c7so2834161a12.0
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 08:43:15 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-5079fa1bbf8so2635996e87.0
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 08:43:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697902995; x=1698507795; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H7dYoqdjgFAw4EZarVbIqowGO/xd3/MzOR4tW+7uUn0=;
- b=CQBOeS2TkJvpK6fYEdUA8PyUZ4CRIUHkagdPGd7uzoqvOxlqqh7enV7izz90b4Xp6+
- q0VJTxZ7bg42XzBZm+bfynk2y1zADyB2DcoGEzFKer4F4+yFwpNMkkO5LLGp8hfystsN
- 06T83c2WHaz/lRwKkOaXZnRKkGAMoLk7hswGY=
+ d=chromium.org; s=google; t=1697903003; x=1698507803; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=XzBDCsGfO+oK1IaMdgve4Ph5pNLTlL5DROLGWnjL2As=;
+ b=ShFoSlcM5n1kHh5HrJrHFb4JMmw80XoPSSzfgdlwXvm4lKwastPOCyaPLID3IdS+2s
+ HlDXa319yRNaAp9xbfgq5hadIQfCAJXuH1ENVSaUTAaYH7cnwFyNozjPjUt0MWLgMWms
+ qbnOfyFcFXFpLeQjORFwAqfk1QxOMNQiCpFG4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697902995; x=1698507795;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H7dYoqdjgFAw4EZarVbIqowGO/xd3/MzOR4tW+7uUn0=;
- b=DMN7Jp6Lmq9jqLEtfz+DPFgvnvL9tGQ7faNCDpaLGRQFb8ciox2f+/UIGrvzhCqzCB
- mD2dPC2E0rZ/paLsmhP6gTFByYn6J1neqQe7s1tok2XrPFmheoKcOOUY1y8VCeVJ/toB
- Zx/RsGyioyB1dcYM3TY1yc2EwhPiY4vtc0WKuFqIiWoaiXF1R+Znvjwio9rS+ftTV5+h
- Y96zNgd9Q1MyrBKZpRV0DKqFiKNSis27hLBfmrQC8qagtF3+YTralDAf35+6u9GIuF2j
- 5/lwC5KosnX08762bbilk9ihG9Eu0AGAeXHMgu65nwPw6FI5kYzzSRbN+PkZiPsMhLYR
- QYCg==
-X-Gm-Message-State: AOJu0YyvuNI9+X9z7N7KRX0/hbME6sXgRNCTdHAW4F6WiqoPChKKWINX
- +UBSP0Yhvi15gLn1/yOsQDlyS3lO7DnX4T4qE466Eg==
-X-Google-Smtp-Source: AGHT+IHh90Xg3Iy12IKtWjV0/PrgczAUnDepC+pkyLj8sa+9+V2r6ESoyuy0/y+ByyGJLqPkNJOuUhNL32pH62sjYms=
-X-Received: by 2002:a50:955c:0:b0:53e:7cd3:9522 with SMTP id
- v28-20020a50955c000000b0053e7cd39522mr3522439eda.39.1697902994825; Sat, 21
- Oct 2023 08:43:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697903003; x=1698507803;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XzBDCsGfO+oK1IaMdgve4Ph5pNLTlL5DROLGWnjL2As=;
+ b=Ew8RHyjo8tqJ7ej9hCKZ/luZaO0ZdW93lN+W9EPISLmEyzp6rsLgUIyVrB/bcdyoqq
+ dinXZYC2QpgohgYmNIJEOmOYmyJj6Z2zhEpSmmgrfq162kog3CaurQofW2PVmat/ijtO
+ Sl45h+WtsP2t1QpMZBmPc9ZVxwglberIGWeASElT0kmYLH1xXEArNMKVU2QmcyFs8XSR
+ voojAE8srJe9LnzNEkG+nJ219EPXfTe/RRQEJos/+gE/h7JKGX15T2jUMns8KwBiOVh5
+ 1QisIboG0WsFJ1SFzeE48Hyi6wYV/5ZfFuT1btGyzhUrCAPc2uL56/mYMMrh15IC7bhl
+ KpCA==
+X-Gm-Message-State: AOJu0Yxg8ZJyxYk0wQpPo2lqu/A198GEIfr6M/Nnz/rfzxiBZLLAOk+Z
+ yPxFfKc4dUOtJzgDiRXyEr/rCzEXUe2Zk4yC1Xt21g==
+X-Google-Smtp-Source: AGHT+IHPevIkkeMGaOMPmNNkcdeGEakXX+UpgRl7tY/NEoDR3I5h/lyhxB2s79iqXdx2UYiI23iDu75gzgWTjl2WZmw=
+X-Received: by 2002:ac2:53a5:0:b0:507:a16d:cf55 with SMTP id
+ j5-20020ac253a5000000b00507a16dcf55mr2910266lfh.68.1697903002598; Sat, 21 Oct
+ 2023 08:43:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231019150105.714407-24-trini@konsulko.com>
- <20231020215302.3511807-1-trini@konsulko.com>
- <20231020215302.3511807-2-trini@konsulko.com>
-In-Reply-To: <20231020215302.3511807-2-trini@konsulko.com>
+References: <20231016222835.596572-1-sjg@chromium.org>
+ <20231016222835.596572-23-sjg@chromium.org>
+ <20231017140925.GB3119521@bill-the-cat>
+ <cac1ad58-5a7a-41fd-84db-f972609f95c6@gmx.de>
+ <CAPnjgZ2tJEBNWsx_tLDTWyQ+xNyLj6feDenqEcCe+t3JNEdv8g@mail.gmail.com>
+ <ZTHKKurIp67bx2MJ@octopus>
+In-Reply-To: <ZTHKKurIp67bx2MJ@octopus>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 21 Oct 2023 08:43:00 -0700
-Message-ID: <CAPnjgZ2jgfJ4GXR+2qt5Qi=MOc=kubLrMLgYBGuO_trinUHnag@mail.gmail.com>
-Subject: Re: [v4.1 2/2] CI, pytest: Add a test for sandbox without LTO
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 21 Oct 2023 08:43:08 -0700
+Message-ID: <CAPnjgZ1DrzW=2M4UG8aPYmN+MedJODuj5-zE0Y9nVfu-Scpsxw@mail.gmail.com>
+Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,101 +85,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 20 Oct 2023 at 14:53, Tom Rini <trini@konsulko.com> wrote:
->
-> The primary motivation for having a sandbox without LTO build in CI is
-> to ensure that we don't have that option break. We now have the ability
-> to run tests of specific options being enabled/disabled, so drop the
-> parts of CI that build and test that configuration specifically and add
-> a build test instead. We still test that "NO_LTO=1" rather than editing
-> the config file works via the ftrace tests.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> This creates a small bisectability gap in CI itself, but I think is more
-> reasonable than reworking the introduction of
-> test/py/tests/test_sandbox_opts.py
->
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  .azure-pipelines.yml               |  3 ---
->  .gitlab-ci.yml                     | 12 ------------
->  test/py/tests/test_sandbox_opts.py | 10 ++++++++++
->  3 files changed, 10 insertions(+), 15 deletions(-)
+Hi,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, 19 Oct 2023 at 17:30, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
+>
+> On Thu, Oct 19, 2023 at 08:01:11AM -0600, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Wed, 18 Oct 2023 at 06:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 10/17/23 16:09, Tom Rini wrote:
+> > > > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
+> > > >
+> > > >> Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
+> > > >> available, add it as an explicit dependency.
+> > > >>
+> > > >> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >> ---
+> > > >>
+> > > >> (no changes since v2)
+> > > >>
+> > > >> Changes in v2:
+> > > >> - Add new patch to update EFI_LOADER to depend on DM_ETH
+> > > >>
+> > > >>   lib/efi_loader/Kconfig | 1 +
+> > > >>   1 file changed, 1 insertion(+)
+> > > >>
+> > > >> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > >> index 13cad6342c36..fca4b3eef270 100644
+> > > >> --- a/lib/efi_loader/Kconfig
+> > > >> +++ b/lib/efi_loader/Kconfig
+> > > >> @@ -11,6 +11,7 @@ config EFI_LOADER
+> > > >>      # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+> > > >>      depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+> > > >>      depends on BLK
+> > > >> +    depends on DM_ETH
+> > > >>      depends on !EFI_APP
+> > > >>      default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
+> > > >>      select CHARSET
+> > > >
+> > > > Does this work for you Heinrich, or do you want to clarify the
+> > > > dependencies (and re-organize the code as needed) around networking?
+> > > >
+> > >
+> > > We should be able to boot via EFI on devices without U-Boot network support.
+> > >
+> > > We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid invoking
+> > > eth_get_dev() if there is no network. CONFIG_NETDEVICES=y selects
+> > > CONFIG_DM_ETH.
+> > >
+> > > Why is this not sufficient?
+> > > Is there a configuration that does not build?
+> >
+> > The point of this series is to disable CMDLINE and fix up what breaks.
+> >
+> > In this case we have some sort of breakage...perhaps Tom has already
+> > found it, but otherwise could you take a look?
+> >
+> > We should be able to disable NET and LTO in sandbox and still build.
+> > But this fails at present[1]. You can try it on -master
+>
+> Obviously, it would be necessary to enclose efi_dp_from_eth()
+> with "if defined(CONFIG_NETDEVICES)" (or DM_ETH).
+> Then, we could drop "depends on DM_ETH".
 
-Q below
+Strange that it only happens on the non-LTO board, though?
 
 >
-> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> index 6f91553e8613..65533b36dde4 100644
-> --- a/.azure-pipelines.yml
-> +++ b/.azure-pipelines.yml
-> @@ -287,9 +287,6 @@ stages:
->          sandbox64_clang:
->            TEST_PY_BD: "sandbox64"
->            OVERRIDE: "-O clang-16"
-> -        sandbox_nolto:
-> -          TEST_PY_BD: "sandbox"
-> -          BUILD_ENV: "NO_LTO=1"
->          sandbox_spl:
->            TEST_PY_BD: "sandbox_spl"
->            TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
-> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> index 6decdfdee334..97c964fb8079 100644
-> --- a/.gitlab-ci.yml
-> +++ b/.gitlab-ci.yml
-> @@ -258,12 +258,6 @@ sandbox with clang test.py:
->      OVERRIDE: "-O clang-16"
->    <<: *buildman_and_testpy_dfn
->
-> -sandbox without LTO test.py:
-> -  variables:
-> -    TEST_PY_BD: "sandbox"
-> -    BUILD_ENV: "NO_LTO=1"
-> -  <<: *buildman_and_testpy_dfn
-> -
->  sandbox64 test.py:
->    variables:
->      TEST_PY_BD: "sandbox64"
-> @@ -275,12 +269,6 @@ sandbox64 with clang test.py:
->      OVERRIDE: "-O clang-16"
->    <<: *buildman_and_testpy_dfn
->
-> -sandbox64 without LTO test.py:
-> -  variables:
-> -    TEST_PY_BD: "sandbox64"
-> -    BUILD_ENV: "NO_LTO=1"
-> -  <<: *buildman_and_testpy_dfn
-> -
->  sandbox_spl test.py:
->    variables:
->      TEST_PY_BD: "sandbox_spl"
-> diff --git a/test/py/tests/test_sandbox_opts.py b/test/py/tests/test_sandbox_opts.py
-> index 91790b3374b4..422b43cb3bc1 100644
-> --- a/test/py/tests/test_sandbox_opts.py
-> +++ b/test/py/tests/test_sandbox_opts.py
-> @@ -18,3 +18,13 @@ def test_sandbox_cmdline(u_boot_console):
->      out = util.run_and_log(
->          cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
->                 '-a', '~CMDLINE', '-o', TMPDIR])
-> +
-> +@pytest.mark.slow
-> +@pytest.mark.boardspec('sandbox')
-> +def test_sandbox_lto(u_boot_console):
-> +    """Test building sandbox without CONFIG_LTO"""
-> +    cons = u_boot_console
-> +
-> +    out = util.run_and_log(
-> +        cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
-> +               '-a', '~LTO', '-o', TMPDIR])
+> Another possible place for completeness is "case UCLASS_ETH" clause
+> in dp_size(), but it seems to be harmless.
 
-Don't you need sandbox64 here?
-
-> --
-> 2.34.1
->
+OK
 
 Regards,
 Simon
+
+
+>
+> -Takahiro Akashi
+>
+>
+> > Regards,
+> > Simon
+> >
+> > [1] sjg@sjg1:~/u$ crosfw sandbox -L
+> > cmd: make -j4 'CROSS_COMPILE=' --no-print-directory 'HOSTSTRIP=true'
+> > 'QEMU_ARCH=' 'KCONFIG_NOSILENTUPDATE=1' 'O=/tmp/b/sandbox' 'NO_LTO=1'
+> > -s 'BUILD_ROM=1' all
+> > /usr/bin/ld: lib/efi_loader/efi_device_path.o: in function `efi_dp_from_eth':
+> > /home/sjg/c/src/third_party/u-boot/files/lib/efi_loader/efi_device_path.c:985:(.text+0xca4):
+> > undefined reference to `eth_get_dev'
+> > /usr/bin/ld: /home/sjg/c/src/third_party/u-boot/files/lib/efi_loader/efi_device_path.c:987:(.text+0xca9):
+> > undefined reference to `eth_get_dev'
+> > /usr/bin/ld: /home/sjg/c/src/third_party/u-boot/files/lib/efi_loader/efi_device_path.c:993:(.text+0xcc9):
+> > undefined reference to `eth_get_dev'
+> > collect2: error: ld returned 1 exit status
+> > make[1]: *** [/home/sjg/c/src/third_party/u-boot/files/Makefile:1765:
+> > u-boot] Error 1
+> > make: *** [Makefile:177: sub-make] Error 2
+> >
+> > sjg@sjg1:~/u$ crosfw sandbox
+> > sjg@sjg1:~/u$ (passes)
+> >
+> > 'crosfw xx' is just 'buildman --bo xxx'
+> >
+> > diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+> > index a92bb896c63e..4e9996a92342 100644
+> > --- a/boot/pxe_utils.c
+> > +++ b/boot/pxe_utils.c
+> > @@ -48,7 +48,7 @@ int pxe_get_file_size(ulong *sizep)
+> >
+> >   return 0;
+> >  }
+> > -
+> > +#if 0
+> >  /**
+> >   * format_mac_pxe() - obtain a MAC address in the PXE format
+> >   *
+> > @@ -82,7 +82,7 @@ int format_mac_pxe(char *outbuf, size_t outbuf_len)
+> >
+> >   return 1;
+> >  }
+> > -
+> > +#endif
+> >  /**
+> >   * get_relfile() - read a file relative to the PXE file
+> >   *
+> > diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+> > index 47417cb0391d..57bb6202dbb5 100644
+> > --- a/configs/sandbox_defconfig
+> > +++ b/configs/sandbox_defconfig
+> > @@ -349,3 +349,4 @@ CONFIG_TEST_FDTDEC=y
+> >  CONFIG_UNIT_TEST=y
+> >  CONFIG_UT_TIME=y
+> >  CONFIG_UT_DM=y
+> > +# CONFIG_NET is not set
+> >
+> > Regards,
+> > Simon
