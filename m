@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460C2C0032E
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 12:41:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CE7C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 15:43:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05B0287623;
-	Sat, 21 Oct 2023 14:41:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id AB36E87595;
+	Sat, 21 Oct 2023 17:43:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="RXOsijs/";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="itPxL4C2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C90F187612; Sat, 21 Oct 2023 14:40:08 +0200 (CEST)
-Received: from smtp-out.freemail.hu (fmfe05.freemail.hu [46.107.16.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C39E8875A3; Sat, 21 Oct 2023 17:43:16 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C29987612
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 14:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7370887572
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 17:43:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from localhost.localdomain (catv-80-98-74-198.catv.fixed.vodafone.hu
- [80.98.74.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4SCLdG3x7fzt7;
- Sat, 21 Oct 2023 14:40:02 +0200 (CEST)
-From: egyszeregy@freemail.hu
-To: u-boot@lists.denx.de
-Cc: otavio@ossystems.com.br, festevam@gmail.com,
- =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH 1/1] [u-boot][master][PATCH v5] pico-imx7d: add baseboard SD
- card boot detect
-Date: Sat, 21 Oct 2023 14:39:47 +0200
-Message-ID: <20231021123947.434-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.42.0.windows.2
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-53b32dca0bfso3892534a12.0
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 08:43:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1697902992; x=1698507792; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WfY4kzNnhr7Dk8R3IvYOG+X4EaDezBkRAYRcZnsNtrM=;
+ b=itPxL4C2VhGhi5sfI1gCeWLfGDFP19P8UnSPCZ5BNDLZqd5CQrKGv53yLm+QxFooaN
+ iEeN7aIeSQzMrC8OpRCg1xdybW+bXTFH78kLFpau9mwYGx/3WO/vc2YrYp9huSD7yv/4
+ AWl/4m39io7EkiJmfrwtF5WiUlnqg1TMizlccLe9pTPoRpTPzS4fCuKX5VQdbPSkLoxe
+ i9rSIKHB8vU4Bv+AJ8px/KptmpVk2C1dWJla9+ZEwewTPRbniNMA5gRKLFkpbYLgpQ3f
+ bOBbGiqrdybVVW7Ncpv3ztytS6fa/oc6mYJ4+agRXN/jR9VMYXXgTutHVKtrGhBY9GFX
+ wKJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697902992; x=1698507792;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WfY4kzNnhr7Dk8R3IvYOG+X4EaDezBkRAYRcZnsNtrM=;
+ b=B350n8z6M2TCjJpCuOe8tQIItdQGbq16hHeCfV1cq+60+ikx3Q4+EHngK+V3IvNvVI
+ PqCaJ96tAT1wFIfhyPZCyF/2pwrjVoXifxu4KITz8+/5PxSlQhLjK3P1Q3/cy5LOhmYY
+ M+3XFYU65WntUFdi21ePHe/NxJdBdhEOn1/fRP81uR2wrl7NRHepMjUDBCSscBC5eRrx
+ xwAyFYP3zc5n5TxjkmYVpBzaUraUrP8a8EZhCGWFrdmlO+0MtlJcZ8xo446JjuXs6Ryh
+ AbXIp1PLmAiGdlFSi+Sxahs+0Mwe2UZVRWB1NXLjvHFg+LVNwx10yRTXjSd+IIRUHRLD
+ fzCg==
+X-Gm-Message-State: AOJu0Yw0OKP9WvmnNu7N3VbGL5vYlyV19kPYjqmemrjpk4NIkY2JoXAY
+ Y4XmzJtpoAw3JKUQ9/6j3eh8fl+ZXp8vR6e0TyyayA==
+X-Google-Smtp-Source: AGHT+IEL1zIXsLyiC9BBsjeawMp5V/m/jNbH4dAhO/YYuZ1FdqJTQHfFsK+TYFSK2WB25bhr2YPYzOceVXuv3jGUnmU=
+X-Received: by 2002:a05:6402:5245:b0:53e:e623:6a47 with SMTP id
+ t5-20020a056402524500b0053ee6236a47mr4693887edd.4.1697902991687; Sat, 21 Oct
+ 2023 08:43:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1697892003; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=8016; bh=x+2dJHYIdzUuxtdUzLSmzrzTXwKs5272GtoEehFTP3Q=;
- b=RXOsijs/vvC7xjDEiSy94gm20nFLfAEHkrPG5rpkoMR5viCQl3i+dHXuh2rcH5sC
- UFrPhA3J6Eqy+UBGi+PVxyqauRfYuVJcEdfoTkKOf1qjuT57lNFKMqEWA+GPi5yztCV
- SEWpiNtErEdWnPpMNLrzGas1TDnvKGhOVAOmy4guePWHSxaZewHI/WmOrxFqdo9UXnC
- tIwFcHJxtr++fsP2RLOEaF+vdqYb8Qq3ieiDNqqG7omexde/K1YvFjkXj579FXilkUa
- 8vgDAgw4sl2CPHJBNxJvR0vuKJBIsNCz0lVRPO+CWHGsFX6aAj5j9TAyapeDwf6EJof
- 4uQQ7vVlcg==
-X-Mailman-Approved-At: Sat, 21 Oct 2023 14:41:14 +0200
+References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
+ <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
+ <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
+ <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
+ <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+ <ea1ba7c2-7f9c-4702-a6da-efb728771e24@canonical.com>
+ <20231020162410.GK3119521@bill-the-cat>
+In-Reply-To: <20231020162410.GK3119521@bill-the-cat>
+From: Simon Glass <sjg@google.com>
+Date: Sat, 21 Oct 2023 08:42:52 -0700
+Message-ID: <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Doug Anderson <dianders@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,272 +92,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Szőke <egyszeregy@freemail.hu>
+Hi Tom,
 
-Technexion PICO-IMX7 SoM is supporting USDHC3 (eMMC or micro SD on SoM)
-and USDHC1 (SD on carrier board) to use on any carrier board like
-PICO-NYMPH. This pacth is intend to take over codes from Technexion
-to support mmc autodetect boot for pico-imx7d to able to boot from
-selected USDHC1 or USDHC3 boot devices.
+On Fri, 20 Oct 2023 at 09:24, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Oct 20, 2023 at 05:40:03PM +0200, Heinrich Schuchardt wrote:
+> > On 20.10.23 15:21, Simon Glass wrote:
+> > > +Doug Anderson
+> > >
+> > > Hi Heinrich,
+> > >
+> > > On Thu, 19 Oct 2023 at 09:09, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > > >
+> > > > On 19.10.23 15:55, Simon Glass wrote:
+> > > > > Hi Heinrich,
+> > > > >
+> > > > > On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
+> > > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > > >
+> > > > > > On 10/18/23 05:33, Simon Glass wrote:
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > > On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
+> > > > > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > > > > >
+> > > > > > > > Forward and backward compatibility of Linux kernel device-trees is
+> > > > > > > > sometimes missing. One solution approach is to load a kernel specific
+> > > > > > > > device-tree. This can either be done via a U-Boot scripts (like the one
+> > > > > > > > generated by Debian package flash-kernel or by a boot loader like GRUB.
+> > > > > > > > The boot loader approach currently requires to know the device-tree name
+> > > > > > > > before first boot which makes it unusable for generic images.
+> > > > > > > >
+> > > > > > > > Expose the device-tree file name as EFI variable FdtFile.
+> > > > > > > > This will allow bootloaders to load a kernel specific device-tree.
+> > > > > > > >
+> > > > > > > > The variable will not be exposed on ACPI based systems or if the
+> > > > > > > > environment variable fdtfile is not defined.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > > > > > > ---
+> > > > > > > > v2:
+> > > > > > > >            Use a unique GUID to enable future U-Boot independent
+> > > > > > > >            standardization.
+> > > > > > > >            Do not try to add the variable on ACPI based systems.
+> > > > > > > > ---
+> > > > > > > >     include/efi_loader.h       |  5 +++++
+> > > > > > > >     lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+> > > > > > > >     2 files changed, 35 insertions(+)
+> > > > > > >
+> > > > > > > I was too slow to reply to v1.
+> > > > > > >
+> > > > > > > Does grub load the DT? I was assuming that U-Boot would pass it on?
+> > > > > > > What is the interface between U-Boot and grub?
+> > > > > >
+> > > > > > The device-tree built into U-Boot is often out of date and not usable to
+> > > > > > boot current Linux. A single device-tree can be loaded by U-Boot from
+> > > > > > file and passed on as EFI configuration table. This device-tree may not
+> > > > > > be compatible with all kernel versions exposed by GRUB.
+> > > > > >
+> > > > > > GRUB provides a devicetree command. It is disabled if you use secure
+> > > > > > boot. At least in Debian and Ubuntu GRUB invokes the
+> > > > > > EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
+> > > > > > fix-ups after loading a device-tree.
+> > > > > >
+> > > > > > Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
+> > > > > > devicetree commands to the boot options in grub.cfg.
+> > > > >
+> > > > > Thanks. I wonder if you could document this somewhere? It seems like
+> > > > > there are a lot of options and it is quite complicated.
+> > > > >
+> > > > > Back to the question, I suppose you are expecting grub to load the DT
+> > > > > using this filename? But why doesn't U-Boot load it instead? It seems
+> > > > > very convoluted.
+> > > >
+> > > > A separate file of this name exists for every kernel version installed.
+> > > > The loaded dtb must match the kernel. U-Boot does not know what kernel
+> > > > version will be chosen in GRUB. And for a generic image GRUB does not
+> > > > what board it is on.
+> > > >
+> > > > >
+> > > > > Also, can we test this interface?
+> > > >
+> > > > Neither the sandbox nor QEMU have environment variable fdtfile. And we
+> > > > don't create the EFI variable with ACPI as used on the sandbox.
+> > >
+> > > I worry that this is creating another interface that some poor sod is
+> > > going to have to deal with in the future. Is this part of the EFI
+> > > standard?
+> >
+> > No, the UEFI standard does not care much about device-trees. It only defines
+> > the GUID for the configuration table.
+> >
+> > >
+> > > We should really be using the compatible string to choose the
+> > > devicetree. Why are we using filenames at all? What is the
+> > > relationship between the compatible string and the filename? Is there
+> > > a lookup table, or should we create one?
+> >
+> > There is no 1:1 relationship between compatible string and filename, e.g.
+> > the following arm64 device-trees use the same compatible string:
+> >
+> > amd/amd-overdrive-rev-b0.dts
+> > amd/amd-overdrive-rev-b1.dts
+> >
+> > amlogic/meson-axg-jethome-jethub-j110-rev-2.dts
+> > amlogic/meson-axg-jethome-jethub-j110-rev-3.dts
+> >
+> > xilinx/zynqmp-zc1751-xm015-dc1.dts
+> > xilinx/zynqmp-zc1751-xm015-dc1.dts
+> > xilinx/zynqmp-zc1751-xm015-dc1.dts
+> > xilinx/zynqmp-zc1751-xm015-dc1.dts
+> >
+> > >
+> > > The correct way of doing this is implemented in U-Boot with
+> > > CONFIG_FIT_BEST_MATCH.
+> >
+> > Why should we write complicated code to find a *possibly* matching file if
+> > we already know the filename that needs to be loaded?
+>
+> I think that is the unfortunate key here. We can make a guess, or best
+> match, but it might not be right. And we need a reliable way to find and
+> use the correct tree. And the U-Boot portion of that may be "set the EFI
+> var if it's not already set" rather than "and now load it".
 
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- board/technexion/pico-imx7d/pico-imx7d.c | 59 ++++++++++++++-
- board/technexion/pico-imx7d/spl.c        | 91 ++++++++++++++++++++++--
- include/configs/pico-imx7d.h             |  4 +-
- 3 files changed, 145 insertions(+), 9 deletions(-)
+That is not my understanding of how it works. The compatible string is
+how Linux knows what the hardware is...if it doesn't match, then
+things are going to go wrong. It is also how U-Boot works, e.g. with
+FIT. I don't believe this is a 'guess'. The compatible string is used
+programmatically and must be correct.
 
-diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/pico-imx7d/pico-imx7d.c
-index 6e98b85b28..01a9520d32 100644
---- a/board/technexion/pico-imx7d/pico-imx7d.c
-+++ b/board/technexion/pico-imx7d/pico-imx7d.c
-@@ -5,6 +5,7 @@
- 
- #include <init.h>
- #include <net.h>
-+#include <command.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/crm_regs.h>
- #include <asm/arch/imx-regs.h>
-@@ -13,6 +14,7 @@
- #include <asm/global_data.h>
- #include <asm/gpio.h>
- #include <asm/mach-imx/iomux-v3.h>
-+#include <asm/mach-imx/boot_mode.h>
- #include <asm/io.h>
- #include <common.h>
- #include <miiphy.h>
-@@ -106,7 +108,7 @@ int board_phy_config(struct phy_device *phydev)
- {
- 	unsigned short val;
- 
--	/* To enable AR8035 ouput a 125MHz clk from CLK_25M */
-+	/* To enable AR8035 output a 125MHz clk from CLK_25M */
- 	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
- 	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
- 	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
-@@ -129,6 +131,49 @@ int board_phy_config(struct phy_device *phydev)
- }
- #endif
- 
-+#if CONFIG_IS_ENABLED(FSL_ESDHC_IMX)
-+int check_mmc_autodetect(void)
-+{
-+	char *autodetect_str = env_get("mmcautodetect");
-+
-+	if ((autodetect_str) &&
-+	    (strcmp(autodetect_str, "yes") == 0)) {
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+void board_late_mmc_init(void)
-+{
-+	int dev_no = 0;
-+	char cmd[32];
-+
-+	if (!check_mmc_autodetect())
-+		return;
-+
-+	switch (get_boot_device()) {
-+	case SD3_BOOT:
-+	case MMC3_BOOT:
-+		env_set("bootdev", "MMC3");
-+		dev_no = 2;
-+		break;
-+	case SD1_BOOT:
-+		env_set("bootdev", "SD1");
-+		dev_no = 0;
-+		break;
-+	default:
-+		printf("Wrong boot device!");
-+	}
-+
-+	/* Set mmcdev env */
-+	env_set_ulong("mmcdev", dev_no);
-+
-+	sprintf(cmd, "mmc dev %d", dev_no);
-+	run_command(cmd, 0);
-+}
-+#endif
-+
- static void setup_iomux_uart(void)
- {
- 	imx_iomux_v3_setup_multiple_pads(uart5_pads, ARRAY_SIZE(uart5_pads));
-@@ -176,6 +221,12 @@ int board_late_init(void)
- 
- 	set_wdog_reset(wdog);
- 
-+#if CONFIG_IS_ENABLED(FSL_ESDHC_IMX)
-+#if defined(CONFIG_ENV_IS_IN_MMC) || defined(CONFIG_ENV_IS_NOWHERE)
-+	board_late_mmc_init();
-+#endif /* CONFIG_ENV_IS_IN_MMC or CONFIG_ENV_IS_NOWHERE */
-+#endif
-+
- 	/*
- 	 * Do not assert internal WDOG_RESET_B_DEB(controlled by bit 4),
- 	 * since we use PMIC_PWRON to reset the board.
-@@ -210,3 +261,9 @@ int board_ehci_hcd_init(int port)
- 	}
- 	return 0;
- }
-+
-+/* This should be defined for each board */
-+__weak int mmc_map_to_kernel_blk(int dev_no)
-+{
-+	return dev_no;
-+}
-diff --git a/board/technexion/pico-imx7d/spl.c b/board/technexion/pico-imx7d/spl.c
-index c6b21aaa42..0192eafbaa 100644
---- a/board/technexion/pico-imx7d/spl.c
-+++ b/board/technexion/pico-imx7d/spl.c
-@@ -15,6 +15,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/arch-mx7/mx7-ddr.h>
- #include <asm/mach-imx/iomux-v3.h>
-+#include <asm/mach-imx/boot_mode.h>
- #include <asm/gpio.h>
- #include <asm/sections.h>
- #include <fsl_esdhc_imx.h>
-@@ -159,7 +160,20 @@ void reset_cpu(void)
- #define USDHC_PAD_CTRL (PAD_CTL_DSE_3P3V_32OHM | PAD_CTL_SRE_SLOW | \
- 	PAD_CTL_HYS | PAD_CTL_PUE | PAD_CTL_PUS_PU47KOHM)
- 
--static iomux_v3_cfg_t const usdhc3_pads[] = {
-+#define USDHC1_CD_GPIO	IMX_GPIO_NR(5, 0)
-+/* EMMC/SD */
-+static const iomux_v3_cfg_t usdhc1_pads[] = {
-+	MX7D_PAD_SD1_CLK__SD1_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_CMD__SD1_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA0__SD1_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA1__SD1_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA2__SD1_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA3__SD1_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_CD_B__GPIO5_IO0  | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+};
-+
-+#define USDHC3_CD_GPIO IMX_GPIO_NR(1, 14)
-+static const iomux_v3_cfg_t usdhc3_emmc_pads[] = {
- 	MX7D_PAD_SD3_CLK__SD3_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
- 	MX7D_PAD_SD3_CMD__SD3_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
- 	MX7D_PAD_SD3_DATA0__SD3_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-@@ -173,20 +187,83 @@ static iomux_v3_cfg_t const usdhc3_pads[] = {
- 	MX7D_PAD_GPIO1_IO14__GPIO1_IO14 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
- };
- 
--static struct fsl_esdhc_cfg usdhc_cfg[1] = {
-+static struct fsl_esdhc_cfg usdhc_cfg[2] = {
- 	{USDHC3_BASE_ADDR},
-+	{USDHC1_BASE_ADDR},
- };
- 
- int board_mmc_getcd(struct mmc *mmc)
- {
--	/* Assume uSDHC3 emmc is always present */
--	return 1;
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	switch (cfg->esdhc_base) {
-+	case USDHC1_BASE_ADDR:
-+		ret = !gpio_get_value(USDHC1_CD_GPIO);
-+		break;
-+	case USDHC3_BASE_ADDR:
-+		ret = !gpio_get_value(USDHC3_CD_GPIO);
-+		break;
-+	}
-+
-+	return ret;
- }
- 
- int board_mmc_init(struct bd_info *bis)
- {
--	imx_iomux_v3_setup_multiple_pads(usdhc3_pads, ARRAY_SIZE(usdhc3_pads));
--	usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
--	return fsl_esdhc_initialize(bis, &usdhc_cfg[0]);
-+	int ret;
-+	u32 index;
-+
-+	/*
-+	 * Following map is done:
-+	 * (USDHC)	(Physical Port)
-+	 * usdhc3	SOM MicroSD/MMC
-+	 * usdhc1	Carrier board MicroSD
-+	 * Always set boot USDHC as mmc0
-+	 */
-+
-+	imx_iomux_v3_setup_multiple_pads(usdhc3_emmc_pads,
-+					 ARRAY_SIZE(usdhc3_emmc_pads));
-+	gpio_direction_input(USDHC3_CD_GPIO);
-+
-+	imx_iomux_v3_setup_multiple_pads(usdhc1_pads,
-+					 ARRAY_SIZE(usdhc1_pads));
-+	gpio_direction_input(USDHC1_CD_GPIO);
-+
-+	switch (get_boot_device()) {
-+	case SD1_BOOT:
-+		usdhc_cfg[0].esdhc_base = USDHC1_BASE_ADDR;
-+		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+		usdhc_cfg[0].max_bus_width = 4;
-+		usdhc_cfg[1].esdhc_base = USDHC3_BASE_ADDR;
-+		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
-+		usdhc_cfg[1].max_bus_width = 4;
-+		break;
-+	case MMC3_BOOT:
-+		usdhc_cfg[0].esdhc_base = USDHC3_BASE_ADDR;
-+		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
-+		usdhc_cfg[0].max_bus_width = 8;
-+		usdhc_cfg[1].esdhc_base = USDHC1_BASE_ADDR;
-+		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+		usdhc_cfg[1].max_bus_width = 4;
-+		break;
-+	case SD3_BOOT:
-+	default:
-+		usdhc_cfg[0].esdhc_base = USDHC3_BASE_ADDR;
-+		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
-+		usdhc_cfg[0].max_bus_width = 4;
-+		usdhc_cfg[1].esdhc_base = USDHC1_BASE_ADDR;
-+		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+		usdhc_cfg[1].max_bus_width = 4;
-+		break;
-+	}
-+
-+	for (index = 0; index < CFG_SYS_FSL_USDHC_NUM; ++index) {
-+		ret = fsl_esdhc_initialize(bis, &usdhc_cfg[index]);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
- }
- #endif
-diff --git a/include/configs/pico-imx7d.h b/include/configs/pico-imx7d.h
-index 096e5bbe66..f797bd51af 100644
---- a/include/configs/pico-imx7d.h
-+++ b/include/configs/pico-imx7d.h
-@@ -13,7 +13,7 @@
- #define CFG_MXC_UART_BASE		UART5_IPS_BASE_ADDR
- 
- /* MMC Config */
--#define CFG_SYS_FSL_ESDHC_ADDR	0
-+#define CFG_SYS_FSL_ESDHC_ADDR	USDHC3_BASE_ADDR
- 
- #define CFG_DFU_ENV_SETTINGS \
- 	"dfu_alt_info=" \
-@@ -79,9 +79,11 @@
- 		"name=rootfs,size=0,uuid=${uuid_gpt_rootfs}\0" \
- 	"fastboot_partition_alias_system=rootfs\0" \
- 	"setup_emmc=mmc dev 0; gpt write mmc 0 $partitions; reset;\0" \
-+	"mmcautodetect=yes\0" \
- 	PICO_BOOT_ENV
- 
- #define BOOT_TARGET_DEVICES(func) \
-+	func(MMC, mmc, 2) \
- 	func(MMC, mmc, 0) \
- 	func(USB, usb, 0) \
- 	func(PXE, pxe, na) \
--- 
-2.42.0.windows.2
+fdt_node_check_compatible() does most of the work...then you need to
+check which FDT has the most specific match (i.e. latest in the string
+list). That handles things like board revisions, variants, etc.
 
+My concern is about adding a feature when there is already a defined
+spec and mechanism for this to work. What happens when we load the
+file and the compatible is wrong?
+
+At best, I see the filename as a hint.
+
+[Perhaps this is the wrong time to ask, but why are kernels +DT not
+shipped in FIT on ARM?]
+
+>
+> > > Can we mirror something like that in grub, etc?
+>
+> I'm splitting this part out because no, having to have N projects write
+> the same bit of code, but with its own quirks and bugs doesn't sound
+> like the right direction. It's why today we have a few different sets of
+> logic to try and find / set the right device tree, so that whatever
+> follows after doesn't have to also do that, and get updated for every
+> new platform too.
+>
+> And of course yes, ideally, boards would be manufactured with an up to
+> date and correct device tree on them.
+
+OK, well I perhaps have the wrong end of the stick here.
+
+As I learn more about how distros boot I see a great need for
+information about what is actually being booted. For example, the
+current 'bootflow menu' mostly shows useless information when EFI is
+used to boot, since it doesn't know what the things are. We have to
+jump to grub (or whatever) to find out. Grub knows because the OS set
+up a grub menu.
+
+Really we need to see this standard boot thing to the end. Each OS
+should provide information from /etc/lsb_release as well as info from
+menu.grub (sorry can't remember the right name), so that we know what
+can be booted. Having to jump to an OS-specific bootloader to even be
+able to show a menu is a pretty poor show.
+
+Anyway I think I understand why this variable is needed. Please add
+some documentation on all this.
+
+My main concern is whether this sort of thing is going to make it even
+harder to boot in a simple, standard manner.
+
+Re Heinrich's comment:
+
+> There is no 1:1 relationship between compatible string and filename,
+> e.g. the following arm64 device-trees use the same compatible string:
+
+> > amd/amd-overdrive-rev-b0.dts
+> > amd/amd-overdrive-rev-b1.dts
+
+That just seems like a bug to me. The compatible should include the
+board rev as it does for xlnx,zynqmp-zcu102-rev1.1 etc.
+
+Regards,
+Simon
