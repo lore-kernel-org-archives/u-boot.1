@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB29C001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 08:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69736C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 08:57:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D44BF875DE;
-	Sat, 21 Oct 2023 10:43:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 18027875B5;
+	Sat, 21 Oct 2023 10:57:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ie0CfqVT";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="pzZsyT9N";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Wf+fw4Jv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD9E3875DF; Sat, 21 Oct 2023 10:43:42 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 27617875E1; Sat, 21 Oct 2023 10:57:46 +0200 (CEST)
+Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
+ [66.111.4.29])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA2F2875B5
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 10:43:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9370F875AF
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 10:57:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40859c46447so1668375e9.1
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 01:43:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697877818; x=1698482618; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OAGGLMwCmbGPNbRkvDipjHIApb+V+R1x5xXub+KvhU8=;
- b=Ie0CfqVToCi4ucu1ACiQyKNmJ0CJGP3+XlgTVk51rZy0Z36MWxFgeNcSRGqVMvzAFY
- DIFh/LCP6nkZJwaarPpEM0f1axlmx6AIYdpo49KPRGkRytPbN74l9QDwOXavYxJmldus
- NF5VrNFZ6nVp86lijX1UemGnMRknYoz2hCVDnrDb01SUmrLciG7HlIlhE2GmNP8oOHQ6
- 0ITMEOqRoPK1x7SR1HTbr8kh9opikdbwkHT+5QScuyr0bgzZE/I6sr/4bH5Q450ifpgr
- kfrvvyAYsGkcsBNsVZg3PmKaoDKyDKZhtqKVBr1uAh9o3X5YKIme7ukahV4l8g0VO2RF
- FybQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697877818; x=1698482618;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OAGGLMwCmbGPNbRkvDipjHIApb+V+R1x5xXub+KvhU8=;
- b=dWnXPDIeStOtS3/S2vAVs7/FwcnzThmMhg7tlO1BpbduUtSao56lB9TAbKhnRREr6y
- EnznihMnyoBrOO9Rd+4MhHPxEaQw59+l9bMo0cA4AqFaz40nckRg9zdjjHPADHZYVMrN
- aXEeYSC15CU3J2JU+r8YGPFuUyNwFR++nx7hPkNFvsbkiSUuwrtVtSgg3NrntafI0UTG
- Up1s1DFyDJGn+3XCTyW0LdQwAI3rCXW0YeIX53koZqQ5opeQoL/7+V3/5nuVU/+Mxng+
- Phx2oAdL39rd0A/qG3TnLmsadpVVYw5L9KmYW8qBgKSchoSsC/V1J3FpIuI50lPNYaZe
- Helw==
-X-Gm-Message-State: AOJu0Yw6UefOrF66Vig26q+mOZL0iECoDvJ40H0Rqn6iHbbSgTIfosHU
- 2mHC3K1bu0V28e4LL0FhYKcJdg==
-X-Google-Smtp-Source: AGHT+IGncrc2U+AMycV28ntrluKKF3Xz6dFvmA+udFwnolyLpEdfGtSFd0ei7Cyloum+jXfqelHHfg==
-X-Received: by 2002:a05:600c:3583:b0:408:4095:6f0c with SMTP id
- p3-20020a05600c358300b0040840956f0cmr3381399wmq.38.1697877818105; 
- Sat, 21 Oct 2023 01:43:38 -0700 (PDT)
-Received: from [192.168.67.234] (92.40.196.242.threembb.co.uk. [92.40.196.242])
- by smtp.gmail.com with ESMTPSA id
- o27-20020a05600c511b00b004067e905f44sm4068409wms.9.2023.10.21.01.43.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 21 Oct 2023 01:43:37 -0700 (PDT)
-Message-ID: <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
-Date: Sat, 21 Oct 2023 09:43:32 +0100
+ spf=pass smtp.mailfrom=samuel@sholland.org
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id AAAC45C014E;
+ Sat, 21 Oct 2023 04:57:39 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute3.internal (MEProxy); Sat, 21 Oct 2023 04:57:39 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
+ 1697878659; x=1697965059; bh=O0clqO+jRUCfE+5NNjBa0AFyXaQaXaOluba
+ ippYHMuY=; b=pzZsyT9NWnrmdtoxwzTsLQL/dXyFTCTPx2fsdWcXX0+qRLTJwBF
+ 2d1PnzIom5bvsSNUPvaBDHI7J3drIWozFvREBNcpm8UqhsE2c2LaWFls7rHA63xD
+ WuawEvExYLqgkxZdSsiKSrfw0F0xoOWrriuJ2DG7y/E/0T76YOwzDATeG9PFOz5A
+ 9KQn3IXj7X9JTdAU/Ii/+sjjMv48YruO0rDIcmV1YfNbyRnqbWiV3mEJbNFPWnAV
+ kdT3e9C8PHuGX3A1OweMbWSFTQwCb2JIQZaUaj/5ZEdXfE43auxS23xEJMowzTbM
+ SUTtvmvGKy4c982cV2QUgffD//auP4UyS1A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:sender:subject:subject:to:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1697878659; x=1697965059; bh=O0clqO+jRUCfE+5NNjBa0AFyXaQaXaOluba
+ ippYHMuY=; b=Wf+fw4JvypGLU/CYlVzH90uEJtaGp/yzMe0FXcDa1KYR0JdD43K
+ LN+hN7fm5vaiHhHaxoCS9aNTMZm9CrvUiFKuOq8q0k3VY2bFC2Dg4vrRstTy+5H8
+ RueQC0pep7E8Eh3aFN+GYv4YOuQsoCmtD85XiQtda4Kmpns26CzKeK+cPd4Cniog
+ g9kJIK9h6IUKeyrurVxDUAGR+FrHSvsJm8drQ0ICk2eLcATeEHYWhVUsGuxVPMvt
+ EsfSrtRC6N5Bpc4WQ6gPbN4MtRxym0AaEl5kncprd49qcwwGJ7lThCRIsXtd9pOq
+ qGiEfQESAFOEfHuX8JzAa1gFj6b4vhi3JMQ==
+X-ME-Sender: <xms:gpIzZe0nwD2sSLDGiILk13xlyhgr2lA_CofhGMXGCXi5yDZqdj4rMA>
+ <xme:gpIzZREKIovN-eYaNcoflIH0emrGT6kpwKsIfEtDKSo62SQsEti66qSnMLtw_f4D7
+ Eqr1o7i8wvtCCexxg>
+X-ME-Received: <xmr:gpIzZW7nlc8zxgznvFCBCVoLEd90jrzgb5T7Tz8PB5bFQLvYG-fgiacDyy6aLK4UTzNd2DvgZsO-AhZGrSskAfDv0W6zVM4EEOyHTI47nYkkPDfMmb2RnFPc0A>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrkedtgddtjecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefkffggfgfvvehfhffujggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
+ vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
+ ftrfgrthhtvghrnhepjefgfffhudejfedtuedugeeutdetgfeiteffffehjeeugfeuvdeh
+ jeetfedtffdtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
+X-ME-Proxy: <xmx:gpIzZf3JCxPtA932zsoPEmc1jO2wUd_HulSgAR4_rscBqf_402YaBw>
+ <xmx:gpIzZRET_oqmd7MjOyIuz-lQLFLVslu4mf0fbYaSioSL31IiRFER8Q>
+ <xmx:gpIzZY8A4kUgfNnXctBwJk8Ts5J99pSaxTE-TfuU6VFyFPe6AlJeEw>
+ <xmx:g5IzZXaHZTaslVI9z3vS5eA2lHQrJjH7kbYOYWhZbYKue33GaPrBFQ>
+Feedback-ID: i0ad843c9:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 21 Oct 2023 04:57:38 -0400 (EDT)
+Message-ID: <a9d220e6-0b09-5c59-54cf-9104727527a3@sholland.org>
+Date: Sat, 21 Oct 2023 03:57:37 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
+User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20231021004522.53311-1-sjg@chromium.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20231021004522.53311-1-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
+ <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
+ Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
+ <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
+ andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
+ u-boot@lists.denx.de
+References: <20230928215455.28094-1-andre.przywara@arm.com>
+ <20230928215455.28094-8-andre.przywara@arm.com>
+From: Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH v2 07/22] pinctrl: sunxi: remove GPIO_EXTRA_HEADER
+In-Reply-To: <20230928215455.28094-8-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,98 +111,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On 21/10/2023 01:45, Simon Glass wrote:
-> U-Boot typically sets up its malloc() pool near the top of memory. On
-> ARM64 systems this can result in an SMBIOS table above 4GB which is
-> not supported by SMBIOSv2.
+On 9/28/23 16:54, Andre Przywara wrote:
+> U-Boot's generic GPIO_EXTRA_HEADER is a convenience symbol to allow code
+> to more easily include platform specific GPIO headers. This should not
+> be needed in a DM world anymore, since the generic GPIO framework
+> handles that nicely.
+> For Allwinner boards we still need to deal with non-DM GPIO in the SPL,
+> but this should become the exception, not the rule.
 > 
-> Work around this problem by providing a new option to choose an address
-> just below 4GB, if needed.
-I may well be missing something here, but I don't quite understand the 
-justification behind the original patch [1] which caused this regression.
-
-I'm currently preparing support for a few different Qualcomm boards 
-which have different memory layouts, so far it's been possible to avoid 
-having any fixed addresses, so the same u-boot image can be used on all 
-of them (with just a different DTB).
-
-As I mentioned before, efi_allocate_pages() seems to work fine from 
-install_smbios_table(), I haven't delved into the code too much but I 
-wonder if this could be an acceptable solution?
-
-Barring that, could we use an environment variable to pass this address 
-in? Although I think that might not be a very desirable solution.
-
-I appreciate you taking the time to prepare this patch and CC me. If 
-nobody else objects to this patch then I'd prefer to avoid blocking it. 
-In either case, I'd greatly appreciate any input on the above 
-suggestions so that I can implement a solution for my boards.
-
-Thanks and regards,
-
-[1]: 
-https://lore.kernel.org/u-boot/20230920030027.1385833-16-sjg@chromium.org/
+> Make this more obvious by removing the definition of GPIO_EXTRA_HEADER,
+> and just force every legacy user of platform specific GPIO to include
+> the new sunxi_gpio.h header explicitly. Everyone doing so should feel
+> ashamed and should find a way to avoid it from now on.
 > 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 > ---
-> 
->   lib/Kconfig                 | 17 +++++++++++++++++
->   lib/efi_loader/efi_smbios.c | 12 ++++++++++++
->   2 files changed, 29 insertions(+)
-> 
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index f6ca559897e7..a77f2f3e9089 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -994,6 +994,23 @@ config GENERATE_SMBIOS_TABLE
->   	  See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
->   	  the devicetree.
->   
-> +config SMBIOS_TABLE_FIXED
-> +	bool "Place the SMBIOS table at a special address"
-> +	depends on GENERATE_SMBIOS_TABLE && ARM64 && SMBIOS && EFI_LOADER
-> +	default y
-> +	help
-> +	  Use this option to place the SMBIOS table at a fixed address.
-> +
-> +	  U-Boot typically sets up its malloc() pool near the top of memory. On
-> +	  ARM64 systems this can result in an SMBIOS table above 4GB which is
-> +	  not supported by SMBIOSv2. This option works around this problem by
-> +	  chosing an address just below 4GB, if needed.
-> +
-> +config SMBIOS_TABLE_FIXED_ADDR
-> +	hex "Fixed address for use for SMBIOS table"
-> +	depends on SMBIOS_TABLE_FIXED
-> +	default 0xffff0000
-> +
->   endmenu
->   
->   config LIB_RATIONAL
-> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-> index 48446f654d9b..84ea027ea48c 100644
-> --- a/lib/efi_loader/efi_smbios.c
-> +++ b/lib/efi_loader/efi_smbios.c
-> @@ -61,6 +61,18 @@ static int install_smbios_table(void)
->   		return log_msg_ret("mem", -ENOMEM);
->   
->   	addr = map_to_sysmem(buf);
-> +
-> +	/*
-> +	 * Deal with a fixed address if needed. For simplicity we assume that
-> +	 * the SMBIOS-table size is <64KB and that the malloc region does not
-> +	 * straddle the 4GB boundary.
-> +	 */
-> +	if (IS_ENABLED(CONFIG_SMBIOS_TABLE_FIXED) && addr >= SZ_4G - SZ_64K) {
-> +		addr = IF_ENABLED_INT(CONFIG_SMBIOS_TABLE_FIXED,
-> +				      CONFIG_SMBIOS_TABLE_FIXED_ADDR);
-> +		log_warning("Forcing SMBIOS table to address %lx\n", addr);
-> +	}
-> +
->   	if (!write_smbios_table(addr)) {
->   		log_err("Failed to write SMBIOS table\n");
->   		return log_msg_ret("smbios", -EINVAL);
+>  arch/arm/Kconfig                                               | 1 -
+>  arch/arm/mach-sunxi/board.c                                    | 1 +
+>  arch/arm/mach-sunxi/dram_suniv.c                               | 2 +-
+>  arch/arm/mach-sunxi/spl_spi_sunxi.c                            | 1 +
+>  board/sunxi/board.c                                            | 1 +
+>  board/sunxi/chip.c                                             | 2 +-
+>  drivers/gpio/axp_gpio.c                                        | 1 +
+>  drivers/gpio/sunxi_gpio.c                                      | 1 +
+>  drivers/i2c/sun6i_p2wi.c                                       | 2 +-
+>  drivers/i2c/sun8i_rsb.c                                        | 2 +-
+>  drivers/mmc/sunxi_mmc.c                                        | 1 +
+>  drivers/pinctrl/sunxi/pinctrl-sunxi.c                          | 1 +
+>  drivers/video/hitachi_tx18d42vm_lcd.c                          | 1 +
+>  drivers/video/ssd2828.c                                        | 1 -
+>  drivers/video/sunxi/sunxi_display.c                            | 1 +
+>  drivers/video/sunxi/sunxi_lcd.c                                | 1 +
+>  arch/arm/include/asm/arch-sunxi/gpio.h => include/sunxi_gpio.h | 0
+>  17 files changed, 14 insertions(+), 6 deletions(-)
+>  rename arch/arm/include/asm/arch-sunxi/gpio.h => include/sunxi_gpio.h (100%)
 
--- 
-// Caleb (they/them)
+Tested-by: Samuel Holland <samuel@sholland.org>
+
