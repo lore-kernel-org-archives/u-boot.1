@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74CE7C001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 15:43:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD0D8C004C0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 15:43:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB36E87595;
-	Sat, 21 Oct 2023 17:43:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 79B46875DD;
+	Sat, 21 Oct 2023 17:43:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="itPxL4C2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CQBOeS2T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C39E8875A3; Sat, 21 Oct 2023 17:43:16 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 1E70D875AF; Sat, 21 Oct 2023 17:43:20 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7370887572
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 17:43:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9996787596
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 17:43:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-53b32dca0bfso3892534a12.0
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 08:43:12 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-53e08e439c7so2834161a12.0
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 08:43:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1697902992; x=1698507792; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697902995; x=1698507795; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WfY4kzNnhr7Dk8R3IvYOG+X4EaDezBkRAYRcZnsNtrM=;
- b=itPxL4C2VhGhi5sfI1gCeWLfGDFP19P8UnSPCZ5BNDLZqd5CQrKGv53yLm+QxFooaN
- iEeN7aIeSQzMrC8OpRCg1xdybW+bXTFH78kLFpau9mwYGx/3WO/vc2YrYp9huSD7yv/4
- AWl/4m39io7EkiJmfrwtF5WiUlnqg1TMizlccLe9pTPoRpTPzS4fCuKX5VQdbPSkLoxe
- i9rSIKHB8vU4Bv+AJ8px/KptmpVk2C1dWJla9+ZEwewTPRbniNMA5gRKLFkpbYLgpQ3f
- bOBbGiqrdybVVW7Ncpv3ztytS6fa/oc6mYJ4+agRXN/jR9VMYXXgTutHVKtrGhBY9GFX
- wKJw==
+ bh=H7dYoqdjgFAw4EZarVbIqowGO/xd3/MzOR4tW+7uUn0=;
+ b=CQBOeS2TkJvpK6fYEdUA8PyUZ4CRIUHkagdPGd7uzoqvOxlqqh7enV7izz90b4Xp6+
+ q0VJTxZ7bg42XzBZm+bfynk2y1zADyB2DcoGEzFKer4F4+yFwpNMkkO5LLGp8hfystsN
+ 06T83c2WHaz/lRwKkOaXZnRKkGAMoLk7hswGY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697902992; x=1698507792;
+ d=1e100.net; s=20230601; t=1697902995; x=1698507795;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WfY4kzNnhr7Dk8R3IvYOG+X4EaDezBkRAYRcZnsNtrM=;
- b=B350n8z6M2TCjJpCuOe8tQIItdQGbq16hHeCfV1cq+60+ikx3Q4+EHngK+V3IvNvVI
- PqCaJ96tAT1wFIfhyPZCyF/2pwrjVoXifxu4KITz8+/5PxSlQhLjK3P1Q3/cy5LOhmYY
- M+3XFYU65WntUFdi21ePHe/NxJdBdhEOn1/fRP81uR2wrl7NRHepMjUDBCSscBC5eRrx
- xwAyFYP3zc5n5TxjkmYVpBzaUraUrP8a8EZhCGWFrdmlO+0MtlJcZ8xo446JjuXs6Ryh
- AbXIp1PLmAiGdlFSi+Sxahs+0Mwe2UZVRWB1NXLjvHFg+LVNwx10yRTXjSd+IIRUHRLD
- fzCg==
-X-Gm-Message-State: AOJu0Yw0OKP9WvmnNu7N3VbGL5vYlyV19kPYjqmemrjpk4NIkY2JoXAY
- Y4XmzJtpoAw3JKUQ9/6j3eh8fl+ZXp8vR6e0TyyayA==
-X-Google-Smtp-Source: AGHT+IEL1zIXsLyiC9BBsjeawMp5V/m/jNbH4dAhO/YYuZ1FdqJTQHfFsK+TYFSK2WB25bhr2YPYzOceVXuv3jGUnmU=
-X-Received: by 2002:a05:6402:5245:b0:53e:e623:6a47 with SMTP id
- t5-20020a056402524500b0053ee6236a47mr4693887edd.4.1697902991687; Sat, 21 Oct
- 2023 08:43:11 -0700 (PDT)
+ bh=H7dYoqdjgFAw4EZarVbIqowGO/xd3/MzOR4tW+7uUn0=;
+ b=DMN7Jp6Lmq9jqLEtfz+DPFgvnvL9tGQ7faNCDpaLGRQFb8ciox2f+/UIGrvzhCqzCB
+ mD2dPC2E0rZ/paLsmhP6gTFByYn6J1neqQe7s1tok2XrPFmheoKcOOUY1y8VCeVJ/toB
+ Zx/RsGyioyB1dcYM3TY1yc2EwhPiY4vtc0WKuFqIiWoaiXF1R+Znvjwio9rS+ftTV5+h
+ Y96zNgd9Q1MyrBKZpRV0DKqFiKNSis27hLBfmrQC8qagtF3+YTralDAf35+6u9GIuF2j
+ 5/lwC5KosnX08762bbilk9ihG9Eu0AGAeXHMgu65nwPw6FI5kYzzSRbN+PkZiPsMhLYR
+ QYCg==
+X-Gm-Message-State: AOJu0YyvuNI9+X9z7N7KRX0/hbME6sXgRNCTdHAW4F6WiqoPChKKWINX
+ +UBSP0Yhvi15gLn1/yOsQDlyS3lO7DnX4T4qE466Eg==
+X-Google-Smtp-Source: AGHT+IHh90Xg3Iy12IKtWjV0/PrgczAUnDepC+pkyLj8sa+9+V2r6ESoyuy0/y+ByyGJLqPkNJOuUhNL32pH62sjYms=
+X-Received: by 2002:a50:955c:0:b0:53e:7cd3:9522 with SMTP id
+ v28-20020a50955c000000b0053e7cd39522mr3522439eda.39.1697902994825; Sat, 21
+ Oct 2023 08:43:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
- <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
- <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
- <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
- <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
- <ea1ba7c2-7f9c-4702-a6da-efb728771e24@canonical.com>
- <20231020162410.GK3119521@bill-the-cat>
-In-Reply-To: <20231020162410.GK3119521@bill-the-cat>
-From: Simon Glass <sjg@google.com>
-Date: Sat, 21 Oct 2023 08:42:52 -0700
-Message-ID: <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+References: <20231019150105.714407-24-trini@konsulko.com>
+ <20231020215302.3511807-1-trini@konsulko.com>
+ <20231020215302.3511807-2-trini@konsulko.com>
+In-Reply-To: <20231020215302.3511807-2-trini@konsulko.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 21 Oct 2023 08:43:00 -0700
+Message-ID: <CAPnjgZ2jgfJ4GXR+2qt5Qi=MOc=kubLrMLgYBGuO_trinUHnag@mail.gmail.com>
+Subject: Re: [v4.1 2/2] CI, pytest: Add a test for sandbox without LTO
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Doug Anderson <dianders@google.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,193 +82,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Fri, 20 Oct 2023 at 09:24, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 20 Oct 2023 at 14:53, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Oct 20, 2023 at 05:40:03PM +0200, Heinrich Schuchardt wrote:
-> > On 20.10.23 15:21, Simon Glass wrote:
-> > > +Doug Anderson
-> > >
-> > > Hi Heinrich,
-> > >
-> > > On Thu, 19 Oct 2023 at 09:09, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:
-> > > >
-> > > > On 19.10.23 15:55, Simon Glass wrote:
-> > > > > Hi Heinrich,
-> > > > >
-> > > > > On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
-> > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > > >
-> > > > > > On 10/18/23 05:33, Simon Glass wrote:
-> > > > > > > Hi Heinrich,
-> > > > > > >
-> > > > > > > On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
-> > > > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > > > > >
-> > > > > > > > Forward and backward compatibility of Linux kernel device-trees is
-> > > > > > > > sometimes missing. One solution approach is to load a kernel specific
-> > > > > > > > device-tree. This can either be done via a U-Boot scripts (like the one
-> > > > > > > > generated by Debian package flash-kernel or by a boot loader like GRUB.
-> > > > > > > > The boot loader approach currently requires to know the device-tree name
-> > > > > > > > before first boot which makes it unusable for generic images.
-> > > > > > > >
-> > > > > > > > Expose the device-tree file name as EFI variable FdtFile.
-> > > > > > > > This will allow bootloaders to load a kernel specific device-tree.
-> > > > > > > >
-> > > > > > > > The variable will not be exposed on ACPI based systems or if the
-> > > > > > > > environment variable fdtfile is not defined.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > > > > > > ---
-> > > > > > > > v2:
-> > > > > > > >            Use a unique GUID to enable future U-Boot independent
-> > > > > > > >            standardization.
-> > > > > > > >            Do not try to add the variable on ACPI based systems.
-> > > > > > > > ---
-> > > > > > > >     include/efi_loader.h       |  5 +++++
-> > > > > > > >     lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> > > > > > > >     2 files changed, 35 insertions(+)
-> > > > > > >
-> > > > > > > I was too slow to reply to v1.
-> > > > > > >
-> > > > > > > Does grub load the DT? I was assuming that U-Boot would pass it on?
-> > > > > > > What is the interface between U-Boot and grub?
-> > > > > >
-> > > > > > The device-tree built into U-Boot is often out of date and not usable to
-> > > > > > boot current Linux. A single device-tree can be loaded by U-Boot from
-> > > > > > file and passed on as EFI configuration table. This device-tree may not
-> > > > > > be compatible with all kernel versions exposed by GRUB.
-> > > > > >
-> > > > > > GRUB provides a devicetree command. It is disabled if you use secure
-> > > > > > boot. At least in Debian and Ubuntu GRUB invokes the
-> > > > > > EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
-> > > > > > fix-ups after loading a device-tree.
-> > > > > >
-> > > > > > Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
-> > > > > > devicetree commands to the boot options in grub.cfg.
-> > > > >
-> > > > > Thanks. I wonder if you could document this somewhere? It seems like
-> > > > > there are a lot of options and it is quite complicated.
-> > > > >
-> > > > > Back to the question, I suppose you are expecting grub to load the DT
-> > > > > using this filename? But why doesn't U-Boot load it instead? It seems
-> > > > > very convoluted.
-> > > >
-> > > > A separate file of this name exists for every kernel version installed.
-> > > > The loaded dtb must match the kernel. U-Boot does not know what kernel
-> > > > version will be chosen in GRUB. And for a generic image GRUB does not
-> > > > what board it is on.
-> > > >
-> > > > >
-> > > > > Also, can we test this interface?
-> > > >
-> > > > Neither the sandbox nor QEMU have environment variable fdtfile. And we
-> > > > don't create the EFI variable with ACPI as used on the sandbox.
-> > >
-> > > I worry that this is creating another interface that some poor sod is
-> > > going to have to deal with in the future. Is this part of the EFI
-> > > standard?
-> >
-> > No, the UEFI standard does not care much about device-trees. It only defines
-> > the GUID for the configuration table.
-> >
-> > >
-> > > We should really be using the compatible string to choose the
-> > > devicetree. Why are we using filenames at all? What is the
-> > > relationship between the compatible string and the filename? Is there
-> > > a lookup table, or should we create one?
-> >
-> > There is no 1:1 relationship between compatible string and filename, e.g.
-> > the following arm64 device-trees use the same compatible string:
-> >
-> > amd/amd-overdrive-rev-b0.dts
-> > amd/amd-overdrive-rev-b1.dts
-> >
-> > amlogic/meson-axg-jethome-jethub-j110-rev-2.dts
-> > amlogic/meson-axg-jethome-jethub-j110-rev-3.dts
-> >
-> > xilinx/zynqmp-zc1751-xm015-dc1.dts
-> > xilinx/zynqmp-zc1751-xm015-dc1.dts
-> > xilinx/zynqmp-zc1751-xm015-dc1.dts
-> > xilinx/zynqmp-zc1751-xm015-dc1.dts
-> >
-> > >
-> > > The correct way of doing this is implemented in U-Boot with
-> > > CONFIG_FIT_BEST_MATCH.
-> >
-> > Why should we write complicated code to find a *possibly* matching file if
-> > we already know the filename that needs to be loaded?
+> The primary motivation for having a sandbox without LTO build in CI is
+> to ensure that we don't have that option break. We now have the ability
+> to run tests of specific options being enabled/disabled, so drop the
+> parts of CI that build and test that configuration specifically and add
+> a build test instead. We still test that "NO_LTO=1" rather than editing
+> the config file works via the ftrace tests.
 >
-> I think that is the unfortunate key here. We can make a guess, or best
-> match, but it might not be right. And we need a reliable way to find and
-> use the correct tree. And the U-Boot portion of that may be "set the EFI
-> var if it's not already set" rather than "and now load it".
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> This creates a small bisectability gap in CI itself, but I think is more
+> reasonable than reworking the introduction of
+> test/py/tests/test_sandbox_opts.py
+>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  .azure-pipelines.yml               |  3 ---
+>  .gitlab-ci.yml                     | 12 ------------
+>  test/py/tests/test_sandbox_opts.py | 10 ++++++++++
+>  3 files changed, 10 insertions(+), 15 deletions(-)
 
-That is not my understanding of how it works. The compatible string is
-how Linux knows what the hardware is...if it doesn't match, then
-things are going to go wrong. It is also how U-Boot works, e.g. with
-FIT. I don't believe this is a 'guess'. The compatible string is used
-programmatically and must be correct.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-fdt_node_check_compatible() does most of the work...then you need to
-check which FDT has the most specific match (i.e. latest in the string
-list). That handles things like board revisions, variants, etc.
-
-My concern is about adding a feature when there is already a defined
-spec and mechanism for this to work. What happens when we load the
-file and the compatible is wrong?
-
-At best, I see the filename as a hint.
-
-[Perhaps this is the wrong time to ask, but why are kernels +DT not
-shipped in FIT on ARM?]
+Q below
 
 >
-> > > Can we mirror something like that in grub, etc?
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 6f91553e8613..65533b36dde4 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -287,9 +287,6 @@ stages:
+>          sandbox64_clang:
+>            TEST_PY_BD: "sandbox64"
+>            OVERRIDE: "-O clang-16"
+> -        sandbox_nolto:
+> -          TEST_PY_BD: "sandbox"
+> -          BUILD_ENV: "NO_LTO=1"
+>          sandbox_spl:
+>            TEST_PY_BD: "sandbox_spl"
+>            TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 6decdfdee334..97c964fb8079 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -258,12 +258,6 @@ sandbox with clang test.py:
+>      OVERRIDE: "-O clang-16"
+>    <<: *buildman_and_testpy_dfn
 >
-> I'm splitting this part out because no, having to have N projects write
-> the same bit of code, but with its own quirks and bugs doesn't sound
-> like the right direction. It's why today we have a few different sets of
-> logic to try and find / set the right device tree, so that whatever
-> follows after doesn't have to also do that, and get updated for every
-> new platform too.
+> -sandbox without LTO test.py:
+> -  variables:
+> -    TEST_PY_BD: "sandbox"
+> -    BUILD_ENV: "NO_LTO=1"
+> -  <<: *buildman_and_testpy_dfn
+> -
+>  sandbox64 test.py:
+>    variables:
+>      TEST_PY_BD: "sandbox64"
+> @@ -275,12 +269,6 @@ sandbox64 with clang test.py:
+>      OVERRIDE: "-O clang-16"
+>    <<: *buildman_and_testpy_dfn
 >
-> And of course yes, ideally, boards would be manufactured with an up to
-> date and correct device tree on them.
+> -sandbox64 without LTO test.py:
+> -  variables:
+> -    TEST_PY_BD: "sandbox64"
+> -    BUILD_ENV: "NO_LTO=1"
+> -  <<: *buildman_and_testpy_dfn
+> -
+>  sandbox_spl test.py:
+>    variables:
+>      TEST_PY_BD: "sandbox_spl"
+> diff --git a/test/py/tests/test_sandbox_opts.py b/test/py/tests/test_sandbox_opts.py
+> index 91790b3374b4..422b43cb3bc1 100644
+> --- a/test/py/tests/test_sandbox_opts.py
+> +++ b/test/py/tests/test_sandbox_opts.py
+> @@ -18,3 +18,13 @@ def test_sandbox_cmdline(u_boot_console):
+>      out = util.run_and_log(
+>          cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
+>                 '-a', '~CMDLINE', '-o', TMPDIR])
+> +
+> +@pytest.mark.slow
+> +@pytest.mark.boardspec('sandbox')
+> +def test_sandbox_lto(u_boot_console):
+> +    """Test building sandbox without CONFIG_LTO"""
+> +    cons = u_boot_console
+> +
+> +    out = util.run_and_log(
+> +        cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
+> +               '-a', '~LTO', '-o', TMPDIR])
 
-OK, well I perhaps have the wrong end of the stick here.
+Don't you need sandbox64 here?
 
-As I learn more about how distros boot I see a great need for
-information about what is actually being booted. For example, the
-current 'bootflow menu' mostly shows useless information when EFI is
-used to boot, since it doesn't know what the things are. We have to
-jump to grub (or whatever) to find out. Grub knows because the OS set
-up a grub menu.
-
-Really we need to see this standard boot thing to the end. Each OS
-should provide information from /etc/lsb_release as well as info from
-menu.grub (sorry can't remember the right name), so that we know what
-can be booted. Having to jump to an OS-specific bootloader to even be
-able to show a menu is a pretty poor show.
-
-Anyway I think I understand why this variable is needed. Please add
-some documentation on all this.
-
-My main concern is whether this sort of thing is going to make it even
-harder to boot in a simple, standard manner.
-
-Re Heinrich's comment:
-
-> There is no 1:1 relationship between compatible string and filename,
-> e.g. the following arm64 device-trees use the same compatible string:
-
-> > amd/amd-overdrive-rev-b0.dts
-> > amd/amd-overdrive-rev-b1.dts
-
-That just seems like a bug to me. The compatible should include the
-board rev as it does for xlnx,zynqmp-zcu102-rev1.1 etc.
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
