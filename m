@@ -4,74 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358ACC001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 18:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30651C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 21:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6BF081F54;
-	Sat, 21 Oct 2023 20:50:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 85CDE865ED;
+	Sat, 21 Oct 2023 23:20:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xo7IRVUl";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B806386823; Sat, 21 Oct 2023 20:50:24 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CF8B8071F
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 20:50:20 +0200 (CEST)
+ id 0027786538; Sat, 21 Oct 2023 23:20:21 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 9904A87668
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 23:20:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a7b91faf40so19831567b3.1
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 11:50:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697914219; x=1698519019; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ODA7aittb2UC8fm22duq6ma0ZuVUFQ3b9J6DGrz7iS4=;
- b=Xo7IRVUlsX35TYbOe+AsXdweJOgvWrrEr/VzU8yQwoZJA4cbUHz2R+hloIa5Ilh3zq
- B2tV2Hb8+m1z7kNpafDJRlDfMTw8k+c+qaL6gOeg8gQef4b6f6Yv/DKRrEL5QEKY6xfN
- jJ4Y7KmxNeT1GOzsQH8TyhpKUAHXOzmuiZwlsxcc/OD4p3YOHZMYZK7zmF9GyjFhm7lw
- DtJflVfhh0g7CD0LQrfOQFZ07LiogsaMxvicZWek0KlS0SRFxXHuC7TBwuNrh+WRqT4f
- iBBVFqyZ2oEuv/m7PMhA2LCRwWDCqQNdx5/n91JGA4Lv7dKWc2avPIsIWtaB2fz5ItAk
- sDtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697914219; x=1698519019;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ODA7aittb2UC8fm22duq6ma0ZuVUFQ3b9J6DGrz7iS4=;
- b=O+QAoohlv0ERIAB4jlJ5zyYjCJmQxgOj82KaBGdt6uqI2kx2CrZPkEqDCQG1xejc5X
- 8kX0nB/L6rlva/c2A1vHBoiR7RL9Hathpxy5jPka/XuuI7ZZcNB8a77/AUNvEB9M8URI
- 4mo0o9fQx7fbkXp7N7vyhoSqqG36dXv78G7brqDGIFRyIAcvRxywH+fr+mAptbhDCBEM
- PpizcLbwr5nUfTve6Kbayz8Kkj0gid4BtEv2mwbxrqWK7ph+uXE1+4L75yGd2y/TzAGJ
- EDynhi9nQuz23A/P0qQLoD1ms7bg2Pi2H3XKWno1C0ou3/A+aZZy7n7p5ENpRhrtwpPO
- ckyQ==
-X-Gm-Message-State: AOJu0Yyev2lXb/x5+WdhnPYn8d2jl+33FRdubPHoZ3YV+iSHBdHuGOKn
- IkER5a4rIUOekBxArZfGYHzn4djBPUm1XNeXCkmptQ==
-X-Google-Smtp-Source: AGHT+IFZEy+nKg/NkAdDV+MZoYjN/KH1vHHFBjVdgnt3Au5deVlJedBjXPahOO2HpHQBtZxOGN8VKWgUJ0/BIcbJY+E=
-X-Received: by 2002:a81:84d1:0:b0:5a8:204c:5c9b with SMTP id
- u200-20020a8184d1000000b005a8204c5c9bmr5231262ywf.18.1697914219048; Sat, 21
- Oct 2023 11:50:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 806FCC15;
+ Sat, 21 Oct 2023 14:20:57 -0700 (PDT)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 432243F762;
+ Sat, 21 Oct 2023 14:20:15 -0700 (PDT)
+Date: Sat, 21 Oct 2023 22:19:11 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Samuel Holland <samuel@sholland.org>, SASANO
+ Takayoshi <uaa@mx5.nisiq.net>, Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
+Message-ID: <20231021221911.16a6a145@slackpad.lan>
+In-Reply-To: <1965267.usQuhbGJ8B@archlinux>
+References: <20231018155014.383566-1-andre.przywara@arm.com>
+ <20231018155014.383566-2-andre.przywara@arm.com>
+ <1965267.usQuhbGJ8B@archlinux>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20231018062745.3153436-1-qi.feng@arm.com>
- <20231018062745.3153436-3-qi.feng@arm.com>
-In-Reply-To: <20231018062745.3153436-3-qi.feng@arm.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Sat, 21 Oct 2023 20:50:07 +0200
-Message-ID: <CACRpkdYb0_cyLmXyZDKMr9pbyq7sWUyvZqgY8jhr3QcUv0bGFg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] vexpress64: Add MMC card to the BOOT_TARGET_DEVICES
- of FVP
-To: Qi Feng <qi.feng@arm.com>
-Cc: u-boot@lists.denx.de, liviu.dudau@foss.arm.com, fenghua@phytium.com.cn, 
- Peter.Hoyes@arm.com, wei.chen@arm.com, Robbie.Cao@arm.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,16 +61,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 18, 2023 at 8:28=E2=80=AFAM Qi Feng <qi.feng@arm.com> wrote:
+On Sat, 21 Oct 2023 08:34:06 +0200
+Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
-> From: Wei Chen <wei.chen@arm.com>>
-> Add MMC disk to FVP's BOOT_TARGET_DEVICES. This allows the user to boot
-> from MMC devices.
->
-> Signed-off-by: Wei Chen <wei.chen@arm.com>
-> Signed-off-by: Qi Feng <qi.feng@arm.com>
+> On Wednesday, October 18, 2023 5:50:12 PM CEST Andre Przywara wrote:
+> > So far we have a convoluted #ifdef mesh that guards the early AXP PMIC
+> > setup in board.c. That combination of &&, || and negations is very hard
+> > to read, maintain and especially to extend.
+> >=20
+> > Fortunately we have those same conditions already modelled in the
+> > Kconfig file, so they are actually redundant. On top of that the real
+> > reason we have those preprocessor guards in the first place is about the
+> > symbols that are *conditionally* defined: without #ifdefs the build
+> > would break because of them being undefined for many boards.
+> >=20
+> > To simplify this, just change the guards to actually look at the symbols
+> > needed, so CONFIG_AXP_xxx_VOLT instead of CONFIG_AXPyyy_POWER.
+> > This drastically improves the readability of this code, and makes adding
+> > PMIC support a pure Kconfig matter.
+> >=20
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > ---
+> >  board/sunxi/board.c   | 32 ++++++++++++++------------------
+> >  drivers/power/Kconfig |  2 +-
+> >  2 files changed, 15 insertions(+), 19 deletions(-)
+> >=20
+> > diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> > index ebaa9431984..65d79a02c25 100644
+> > --- a/board/sunxi/board.c
+> > +++ b/board/sunxi/board.c
+> > @@ -597,50 +597,46 @@ void sunxi_board_init(void)
+> >  		}
+> >  	}
+> >=20
+> > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
+> > -	defined CONFIG_AXP818_POWER
+> > +#ifdef CONFIG_AXP_DCDC1_VOLT
+> >  	power_failed |=3D axp_set_dcdc1(CONFIG_AXP_DCDC1_VOLT);
+> > +	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
+> >  #endif
+> > -#if !defined(CONFIG_AXP305_POWER)
+> > +#ifdef CONFIG_AXP_DCDC2_VOLT
+> >  	power_failed |=3D axp_set_dcdc2(CONFIG_AXP_DCDC2_VOLT);
+> >  	power_failed |=3D axp_set_dcdc3(CONFIG_AXP_DCDC3_VOLT);
+> >  #endif
+> > -#if !defined(CONFIG_AXP209_POWER) && !defined(CONFIG_AXP818_POWER)
+> > +#ifdef CONFIG_AXP_DCDC4_VOLT
+> >  	power_failed |=3D axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);
+> >  #endif
+> > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
+> > -	defined CONFIG_AXP818_POWER
+> > -	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
+> > -#endif
+> >=20
+> > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
+> > -	defined CONFIG_AXP818_POWER
+> > +#ifdef CONFIG_AXP_ALDO1_VOLT
+> >  	power_failed |=3D axp_set_aldo1(CONFIG_AXP_ALDO1_VOLT);
+> >  #endif
+> > -#if !defined(CONFIG_AXP305_POWER)
+> > +#ifdef CONFIG_AXP_ALDO2_VOLT
+> >  	power_failed |=3D axp_set_aldo2(CONFIG_AXP_ALDO2_VOLT);
+> >  #endif
+> > -#if !defined(CONFIG_AXP152_POWER) && !defined(CONFIG_AXP305_POWER)
+> > +#ifdef CONFIG_AXP_ALDO3_VOLT
+> >  	power_failed |=3D axp_set_aldo3(CONFIG_AXP_ALDO3_VOLT);
+> >  #endif
+> > -#ifdef CONFIG_AXP209_POWER
+> > +#ifdef CONFIG_AXP_ALDO4_VOLT
+> >  	power_failed |=3D axp_set_aldo4(CONFIG_AXP_ALDO4_VOLT);
+> >  #endif
+> >=20
+> > -#if defined(CONFIG_AXP221_POWER) || defined(CONFIG_AXP809_POWER) || \
+> > -	defined(CONFIG_AXP818_POWER)
+> > +#ifdef CONFIG_AXP_DLDO1_VOLT
+> >  	power_failed |=3D axp_set_dldo(1, CONFIG_AXP_DLDO1_VOLT);
+> >  	power_failed |=3D axp_set_dldo(2, CONFIG_AXP_DLDO2_VOLT);
+> > -#if !defined CONFIG_AXP809_POWER
+> > +#endif
+> > +#ifdef CONFIG_AXP_DLDO3_VOLT
+> >  	power_failed |=3D axp_set_dldo(3, CONFIG_AXP_DLDO3_VOLT);
+> >  	power_failed |=3D axp_set_dldo(4, CONFIG_AXP_DLDO4_VOLT);
+> >  #endif
+> > +#ifdef CONFIG_AXP_ELDO1_VOLT
+> >  	power_failed |=3D axp_set_eldo(1, CONFIG_AXP_ELDO1_VOLT);
+> >  	power_failed |=3D axp_set_eldo(2, CONFIG_AXP_ELDO2_VOLT);
+> >  	power_failed |=3D axp_set_eldo(3, CONFIG_AXP_ELDO3_VOLT);
+> >  #endif
+> >=20
+> > -#ifdef CONFIG_AXP818_POWER
+> > +#ifdef CONFIG_AXP_FLDO1_VOLT
+> >  	power_failed |=3D axp_set_fldo(1, CONFIG_AXP_FLDO1_VOLT);
+> >  	power_failed |=3D axp_set_fldo(2, CONFIG_AXP_FLDO2_VOLT);
+> >  	power_failed |=3D axp_set_fldo(3, CONFIG_AXP_FLDO3_VOLT);
+> > @@ -649,7 +645,7 @@ void sunxi_board_init(void)
+> >  #if defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER
+> >  	power_failed |=3D axp_set_sw(IS_ENABLED(CONFIG_AXP_SW_ON));
+> >  #endif
+> > -#endif
+> > +#endif	/* CONFIG_AXPxxx_POWER */
+> >  	printf("DRAM:");
+> >  	gd->ram_size =3D sunxi_dram_init();
+> >  	printf(" %d MiB\n", (int)(gd->ram_size >> 20));
+> > diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
+> > index 7f3b990d231..83cb31c937a 100644
+> > --- a/drivers/power/Kconfig
+> > +++ b/drivers/power/Kconfig
+> > @@ -180,7 +180,7 @@ config AXP_DCDC3_VOLT
+> >=20
+> >  config AXP_DCDC4_VOLT
+> >  	int "axp pmic dcdc4 voltage"
+> > -	depends on AXP152_POWER || AXP221_POWER || AXP809_POWER ||  =20
+> AXP818_POWER ||
+> > AXP305_POWER +	depends on AXP152_POWER || AXP221_POWER || AXP809_POWER =
+ =20
+> ||
+> > AXP305_POWER default 1250 if AXP152_POWER
+> >  	default 1200 if MACH_SUN6I
+> >  	default 0 if MACH_SUN8I =20
+>=20
+> This patch is great, but this last change doesn't seem to be directly=20
+> connected?
 
-Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+It is an existing bug: there is no axp_set_dcdc4() for the AXP818, but
+since the AXP818 is not included in the guards at the calling site
+in board.c above, we didn't notice.
+So without this change, all A83T boards (the only ones using AXP818)
+would fail compilation.
+I just forgot to mention it in the commit message, will add it.
 
-Yours,
-Linus Walleij
+Cheers,
+Andre
