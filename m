@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37509C001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 05:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93344C001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 05:52:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A14B8757C;
-	Sat, 21 Oct 2023 07:48:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E197687572;
+	Sat, 21 Oct 2023 07:52:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jjgoozux";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H6iBD609";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9634687581; Sat, 21 Oct 2023 07:48:31 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 971F38758B; Sat, 21 Oct 2023 07:52:17 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9770487572
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 07:48:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A740387477
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 07:52:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-408002b5b9fso12025015e9.3
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 22:48:29 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4084f682d31so11154455e9.2
+ for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 22:52:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697867309; x=1698472109; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697867533; x=1698472333; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PMEYudI/B1WqyeBUHWXJyj5hAIqgtBB4CYrmLqo+0Uk=;
- b=JjgoozuxDdVp1lyv8E8eKaWsAy1DSdpLjoW5RgQloMhXpuqFJmRGyyX+n5gLQVLopC
- aVEdp9kox7PBN9GItri+KQUf8VzUVZLVU/k6p/ab+DS01eaHr0w59hxsaPZwF3TJ7wM1
- /XETUF6WsrXxDszHe8gRIVn15iUJB8l1Sm/L4qQAvTgIcdC8ushnTTP9PSvCJz5rCNh5
- oDDD0/bnGy8rif9WJ5SHTA8yEG2QRepbecQM67tJuoQgetr0/IV7xINBsyPxybcHU6La
- qxjESukhXnMO/wmPR/sbjhPOkwr//F5BI7igjKfvamJAvympOoLR757H+CC7jOkngRUd
- LAdg==
+ bh=pVwceQB+qnZEN4kSYJbjQLVDt4vupsiAhwrV9/H49AA=;
+ b=H6iBD609PNN+NJ6ZiHkCOix/yxhtruNl/gD9XO5wwa2pxg4+Z5t2EL41SnLG6ETzi5
+ nC6JrDE8skJw4qz8elpKYJNz7eH3w3eKgyQeJe7BDltJK+C5TJYwt9Y5SXRc98AJMvXC
+ iqAR1Xk4nOem9RTRf2Ji2d34bkcWrg6vbbrMkTuPCykeurrd2OOUp1Flrb0SyT6Bff+f
+ Jx+yK7WqAvtFZtm3df+BwkEPtSGrGa1UUVXIKKvO9/wljJzwdrffUThCgKvKgxNlVaJi
+ lMitHTaEwAdw2fOmjgNYyrFigoRT5I4QR6mNqCC9/FDS0JQg7kmXVhP0jdpO5SRYfKL2
+ 8eug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697867309; x=1698472109;
+ d=1e100.net; s=20230601; t=1697867533; x=1698472333;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PMEYudI/B1WqyeBUHWXJyj5hAIqgtBB4CYrmLqo+0Uk=;
- b=sJrflI+wlfPIlfiC8fPLxP2gEdoSOWoyQoeYNmp9kFBjGOfhidMW2rI4sVfbEvT/WS
- DZbpkAswr2tDHRut2+AMI4gXJ772Nn4MI3fyXuSAkeZNAKA1MWd+5QRKP0UQxmupiOLw
- 2MAxoZ1+gTV3gxRwzFjI7Z8OU8ijwoAHfqX5eX963XRQiynEeIVtjibrurw+B2ZrhCxK
- tvz4IzUXHVKTgctUlj5bUNusjOxFXBRQpIKw1Mp2M6GIeZxl+/NZXCVuOaHRzFzqMgwa
- 9dGcJxVq6AJq8U+y73+M5KsVFaH7IMasnV0qA5QKXLugTO863l2XqSk2PsHL3F8Ila33
- 9Amw==
-X-Gm-Message-State: AOJu0YxnV4O8VgJRWXTYgLh+ZxFa7XAN4B3FO4gss12jniYrgmR2VRSV
- PZp+eDCMGkFugZ6yLY+o6hs=
-X-Google-Smtp-Source: AGHT+IFD5JQoTSmNQeG07tBJCsnod+mI4mjJUYEwMIKnrUvOk5Wm5GmAAJKn7Nv6K3g2CtI9kBhvow==
-X-Received: by 2002:a05:600c:4ecf:b0:405:e492:8aef with SMTP id
- g15-20020a05600c4ecf00b00405e4928aefmr2621296wmq.40.1697867308684; 
- Fri, 20 Oct 2023 22:48:28 -0700 (PDT)
+ bh=pVwceQB+qnZEN4kSYJbjQLVDt4vupsiAhwrV9/H49AA=;
+ b=t/QKQO2t0ZG16xioYQOgfKFrSzY6NMymZbE3rmgcA+8vH+KBZW2BjDG1dxy3JhXPa2
+ yxpCYxL3sVbj6IRUX+ZcW+kR6uFzjjVbzp8jxdRlguVNl26FfE/IourrACSJio0sq0JI
+ 7YIz5oVnkv5zQEiUbLL2lAJ6TX9a7ySjgBfghnshsrEgE9nH9cbDMftiZXgUStiNeHSi
+ Ca2T7/S4J0ZWF7o/3yonze3/59qw7bqMkzfXatQTPjI9q8amVvzb7aBMdyn8YEMyqjPv
+ BgpsvWpSI2fL0fWQBptJ33Jclp+CmiUOPYBKxuwYI0OdjviBsZt6ZqOkzbVxEDFzP8Yn
+ 1hcw==
+X-Gm-Message-State: AOJu0Yw8hr9TnIM1Gyx7plHgBMvajlzn786r+t64ZhbgiJx+t0hHjGms
+ tMS/UTrDXzqGn+/JZJa51Ao=
+X-Google-Smtp-Source: AGHT+IGgTVFlxhDBMTfUM/lzNVMF8Oo55P7F9tUTTDJmesMB+cbRTrluZQ9CG8P8IDu4PKh1QP6SzQ==
+X-Received: by 2002:a05:600c:3c8d:b0:405:37bb:d942 with SMTP id
+ bg13-20020a05600c3c8d00b0040537bbd942mr2865297wmb.4.1697867532873; 
+ Fri, 20 Oct 2023 22:52:12 -0700 (PDT)
 Received: from archlinux.localnet (82-149-12-148.dynamic.telemach.net.
  [82.149.12.148]) by smtp.gmail.com with ESMTPSA id
- c39-20020a05600c4a2700b0040588d85b3asm8223581wmp.15.2023.10.20.22.48.27
+ b14-20020a05600c4e0e00b0040607da271asm8519092wmq.31.2023.10.20.22.52.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Oct 2023 22:48:28 -0700 (PDT)
+ Fri, 20 Oct 2023 22:52:12 -0700 (PDT)
 From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>
 Cc: Gunjan Gupta <viraniac@gmail.com>, u-boot@lists.denx.de,
- Ondrej Jirman <megi@xff.cz>, Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [PATCH 1/1] sunxi: dram: Fix incorrect ram size detection for
- some H6 boards
-Date: Sat, 21 Oct 2023 07:48:27 +0200
-Message-ID: <4518016.LvFx2qVVIh@archlinux>
-In-Reply-To: <20231021003839.1fcf08c8@slackpad.lan>
-References: <20231001161336.31140-1-viraniac@gmail.com>
- <4834802.GXAFRqVoOG@jernej-laptop> <20231021003839.1fcf08c8@slackpad.lan>
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 2/4] sunxi: DRAM: H6: const-ify DRAM function parameters
+Date: Sat, 21 Oct 2023 07:52:11 +0200
+Message-ID: <4839641.GXAFRqVoOG@archlinux>
+In-Reply-To: <20231021011025.568-3-andre.przywara@arm.com>
+References: <20231021011025.568-1-andre.przywara@arm.com>
+ <20231021011025.568-3-andre.przywara@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,181 +94,208 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Saturday, October 21, 2023 1:38:39 AM CEST Andre Przywara wrote:
-> On Mon, 02 Oct 2023 20:59:34 +0200
-> Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
->=20
-> Hi Jernej,
->=20
-> > Dne ponedeljek, 02. oktober 2023 ob 14:42:40 CEST je Gunjan Gupta=20
-napisal(a):
-> > > > >  bool mctl_mem_matches(u32 offset)
-> > > > >  {
-> > > > >=20
-> > > > > +     dsb();
-> > > >=20
-> > > > This looks a bit odd, do you have an explanation for that? And are =
-you
-> > > > sure that is really needed?
-> > > > I understand why we need the DSB after the writel's below, but befo=
-re
-> > > > that?
-> > >=20
-> > > I started with Ondrej Jirman's patch from LibreELEC's tree that had a
-> > > dsb call added
-> > > after the first writel call. That reduced the frequency of the errors
-> > > but didn't removed
-> > > it completely. My reason for moving it before the writel was to make
-> > > sure any memory
-> > > access is completed before starting the actual logic for the test.
-> > > That reduced the
-> > > frequency even further, but didn't resolve the issue. I did try
-> > > removing it leaving only
-> > > udelay added to the code, but that brings back the issue.
-> > >=20
-> > > > The only thing I could think of is that we are missing a barrier in
-> > > > mctl_core_init() - which is the function called before
-> > > > mctl_mem_matches().
-> > > > Can you move that dsb(); into mctl_auto_detect_dram_size(), right
-> > > > after
-> > > > the mctl_core_init() call (where you add the udelay() below)? And I
-> > > > wonder
-> > > > if a dmb() would already be sufficient?
-> > >=20
-> > > Sure, I will try experimenting with it.
-> > >=20
-> > > > I noticed recently that the clr/setbit_le32() functions don't have a
-> > > > barrier at all, maybe that should be fixed instead?
-> > >=20
-> > > I haven't done much of the low level programming myself. Mostly have
-> > > done user space
-> > > programming along with fixing minor kernel module compilation issues
-> > > due to kernel api
-> > > changes. So I wasn't sure what all places to debug. But if you point
-> > > me to places with
-> > > things to try, I surely can give time playing around testing the
-> > > proposed fixes.> >=20
-> > > > > @@ -623,6 +623,8 @@ static void mctl_auto_detect_dram_size(struct
-> > > > > dram_para *para)> > > >=20
-> > > > >       para->cols =3D 11;
-> > > > >       mctl_core_init(para);
-> > > > >=20
-> > > > > +     udelay(50);
-> > > >=20
-> > > > The location of that udelay() looks a bit odd, any chance that belo=
-ngs
-> > > > at
-> > > > the end of mctl_channel_init() instead? And how did you come up with
-> > > > that
-> > > > and the value of 50? Just pure experimentation?
-> > >=20
-> > > Before adding the udelay, I added 7 print statements to print all the
-> > > members of the para
-> > > struct. That itself solved the issue along with the dsb added to the
-> > > top of the mctl_mem_matches
-> > > function. This is what gave me the clue that a delay is needed there.
-> > > The value of 50 is
-> > > indeed from pure experimentation
-> >=20
-> > Oh, I found one major difference between BSP and mainline driver. Please
-> > test patch attached below. I don't know if this path is always taken wh=
-en
-> > wrong configuration is tested or not.
-> >=20
-> > Best regards,
-> > Jernej
-> >=20
-> > --- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
-> > +++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
-> > @@ -420,6 +420,7 @@ static bool mctl_channel_init(struct dram_para *par=
-a)
-> >=20
-> >                         (struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BA=
-SE;
-> >        =20
-> >         struct sunxi_mctl_phy_reg * const mctl_phy =3D
-> >        =20
-> >                         (struct sunxi_mctl_phy_reg *)SUNXI_DRAM_PHY0_BA=
-SE;
-> >=20
-> > +       bool ret =3D true;
-> >=20
-> >         int i;
-> >         u32 val;
-> >=20
-> > @@ -537,7 +538,7 @@ static bool mctl_channel_init(struct dram_para *par=
-a)
-> >=20
-> >                         debug("DRAM PHY DX%dRSR0 =3D %x\n", i,
-> >                         readl(&mctl_phy->dx[i].rsr[0]));
-> >                =20
-> >                 debug("Error while initializing DRAM PHY!\n");
->=20
-> So those error messages (and the ones before them, not shown here) look
-> odd: if I follow the code correctly, this here is the only place which
-> makes mctl_core_init() return false. And we rely on it doing so up to
-> three times, to detect the proper rank and bus width, in
-> mctl_auto_detect_rank_width(). So we should not have dramatic error
-> messages (even for debug), as they would occur during normal, eventually
-> successful setup as well.
-> So shall we tone those messages down? I'd suggest to change the
-> "Oops!..." comment into something saying that we detected a wrong
-> rank/bus-width setup. Also removing the pointless PLL debug print
-> (since the failure is not DRAM clock related), and also the final error
-> message (the last line shown here). I will make patch for that.
+On Saturday, October 21, 2023 3:10:23 AM CEST Andre Przywara wrote:
+> There are quite some functions in the Allwinner H6 DRAM "driver", some
+> of them actually change the parameters in the structure passed to them,
+> but many are actually not.
+> 
+> To increase the optimisation potential for the code, mark those functions
+> that just read members of the passed dram_para struct as "const".
+> Use the opportunity to avoid the forward declarations by moving the
+> mctl_core_init() function.
+> 
+> This in itself does not decrease the code size, but lays the groundwork
+> for future changes doing so.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
-Those messages are remnants of old behaviour. In the past, code first
-enabled dual rank and 32-bit lanes. If that failed, it analyzed error
-messages and in second round only enabled supported features.
-However, that proved unreliable, so I changed code so it simply tries
-every combination and uses whatever works first.
-
-In any case, I concur that these messages might not make sense anymore.
-
->=20
-> But regardless I doubt that this patch is doing anything: when this
-> function returns false, we set new rank/width parameters, and call
-> mctl_core_init() again, which starts with mctl_sys_init() resetting all
-> DRAM controller registers, which I actually wonder is really necessary.
-> But surely any register setup after that point above is useless, with
-> the current code.
->=20
-> Does that make sense?
-
-My concern is that code after failure might put controller or DRAM in
-initial state which may gave more time for next round of attempts to
-init DRAM properly. It may also be the reason why initial approach didn't
-work reliably.
-
-I'm fine with current approach if Gunjan confirms that initialization
-works reliably.
+Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
 Best regards,
 Jernej
 
->=20
-> Cheers,
-> Andre
->=20
-> > -               return false;
-> > +               ret =3D false;
-> >=20
-> >         }
-> >        =20
-> >         if (sunxi_dram_is_lpddr(para->type))
-> >=20
-> > @@ -553,7 +554,7 @@ static bool mctl_channel_init(struct dram_para *par=
-a)
-> >=20
-> >         writel(0x7ff, &mctl_com->maer1);
-> >         writel(0xffff, &mctl_com->maer2);
-> >=20
-> > -       return true;
-> > +       return ret;
-> >=20
-> >  }
-> > =20
-> >  static void mctl_auto_detect_rank_width(struct dram_para *para)
+> ---
+>  .../include/asm/arch-sunxi/dram_sun50i_h6.h   |  6 +--
+>  arch/arm/mach-sunxi/dram_sun50i_h6.c          | 48 +++++++++----------
+>  .../mach-sunxi/dram_timings/h6_ddr3_1333.c    |  2 +-
+>  arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c  |  2 +-
+>  4 files changed, 27 insertions(+), 31 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
+> b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h index
+> be02655cdd5..a7c6435220f 100644
+> --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
+> +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h6.h
+> @@ -313,8 +313,8 @@ check_member(sunxi_mctl_phy_reg, dx[3].reserved_0xf0,
+> 0xaf0); */
+>  #define RD_LINES_PER_BYTE_LANE	(BITS_PER_BYTE + 6)
+>  struct dram_para {
+> -	u32 clk;
+> -	enum sunxi_dram_type type;
+> +	const u32 clk;
+> +	const enum sunxi_dram_type type;
+>  	u8 cols;
+>  	u8 rows;
+>  	u8 ranks;
+> @@ -331,6 +331,6 @@ static inline int ns_to_t(int nanoseconds)
+>  	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
+>  }
+> 
+> -void mctl_set_timing_params(struct dram_para *para);
+> +void mctl_set_timing_params(const struct dram_para *para);
+> 
+>  #endif /* _SUNXI_DRAM_SUN50I_H6_H */
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> b/arch/arm/mach-sunxi/dram_sun50i_h6.c index 43a2d19f084..1187f1960a0
+> 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_h6.c
+> @@ -36,25 +36,6 @@
+>   * similar PHY is ZynqMP.
+>   */
+> 
+> -static void mctl_sys_init(struct dram_para *para);
+> -static void mctl_com_init(struct dram_para *para);
+> -static bool mctl_channel_init(struct dram_para *para);
+> -
+> -static bool mctl_core_init(struct dram_para *para)
+> -{
+> -	mctl_sys_init(para);
+> -	mctl_com_init(para);
+> -	switch (para->type) {
+> -	case SUNXI_DRAM_TYPE_LPDDR3:
+> -	case SUNXI_DRAM_TYPE_DDR3:
+> -		mctl_set_timing_params(para);
+> -		break;
+> -	default:
+> -		panic("Unsupported DRAM type!");
+> -	};
+> -	return mctl_channel_init(para);
+> -}
+> -
+>  /* PHY initialisation */
+>  static void mctl_phy_pir_init(u32 val)
+>  {
+> @@ -152,7 +133,7 @@ static void mctl_set_master_priority(void)
+>  	MBUS_CONF(HDCP2,  true,    HIGH, 2,  100,   64,   32);
+>  }
+> 
+> -static void mctl_sys_init(struct dram_para *para)
+> +static void mctl_sys_init(u32 clk_rate)
+>  {
+>  	struct sunxi_ccm_reg * const ccm =
+>  			(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> @@ -173,7 +154,7 @@ static void mctl_sys_init(struct dram_para *para)
+> 
+>  	/* Set PLL5 rate to doubled DRAM clock rate */
+>  	writel(CCM_PLL5_CTRL_EN | CCM_PLL5_LOCK_EN |
+> -	       CCM_PLL5_CTRL_N(para->clk * 2 / 24), &ccm->pll5_cfg);
+> +	       CCM_PLL5_CTRL_N(clk_rate * 2 / 24), &ccm->pll5_cfg);
+>  	mctl_await_completion(&ccm->pll5_cfg, CCM_PLL5_LOCK, 
+CCM_PLL5_LOCK);
+> 
+>  	/* Configure DRAM mod clock */
+> @@ -198,7 +179,7 @@ static void mctl_sys_init(struct dram_para *para)
+>  	writel(0x8000, &mctl_ctl->unk_0x00c);
+>  }
+> 
+> -static void mctl_set_addrmap(struct dram_para *para)
+> +static void mctl_set_addrmap(const struct dram_para *para)
+>  {
+>  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+>  			(struct sunxi_mctl_ctl_reg 
+*)SUNXI_DRAM_CTL0_BASE;
+> @@ -284,7 +265,7 @@ static void mctl_set_addrmap(struct dram_para *para)
+>  	mctl_ctl->addrmap[8] = 0x3F3F;
+>  }
+> 
+> -static void mctl_com_init(struct dram_para *para)
+> +static void mctl_com_init(const struct dram_para *para)
+>  {
+>  	struct sunxi_mctl_com_reg * const mctl_com =
+>  			(struct sunxi_mctl_com_reg 
+*)SUNXI_DRAM_COM_BASE;
+> @@ -354,7 +335,7 @@ static void mctl_com_init(struct dram_para *para)
+>  	}
+>  }
+> 
+> -static void mctl_bit_delay_set(struct dram_para *para)
+> +static void mctl_bit_delay_set(const struct dram_para *para)
+>  {
+>  	struct sunxi_mctl_phy_reg * const mctl_phy =
+>  			(struct sunxi_mctl_phy_reg 
+*)SUNXI_DRAM_PHY0_BASE;
+> @@ -413,7 +394,7 @@ static void mctl_bit_delay_set(struct dram_para *para)
+>  	}
+>  }
+> 
+> -static bool mctl_channel_init(struct dram_para *para)
+> +static bool mctl_channel_init(const struct dram_para *para)
+>  {
+>  	struct sunxi_mctl_com_reg * const mctl_com =
+>  			(struct sunxi_mctl_com_reg 
+*)SUNXI_DRAM_COM_BASE;
+> @@ -563,6 +544,21 @@ static bool mctl_channel_init(struct dram_para *para)
+>  	return true;
+>  }
+> 
+> +static bool mctl_core_init(const struct dram_para *para)
+> +{
+> +	mctl_sys_init(para->clk);
+> +	mctl_com_init(para);
+> +	switch (para->type) {
+> +	case SUNXI_DRAM_TYPE_LPDDR3:
+> +	case SUNXI_DRAM_TYPE_DDR3:
+> +		mctl_set_timing_params(para);
+> +		break;
+> +	default:
+> +		panic("Unsupported DRAM type!");
+> +	};
+> +	return mctl_channel_init(para);
+> +}
+> +
+>  static void mctl_auto_detect_rank_width(struct dram_para *para)
+>  {
+>  	/* this is minimum size that it's supported */
+> @@ -637,7 +633,7 @@ static void mctl_auto_detect_dram_size(struct dram_para
+> *para) }
+>  }
+> 
+> -unsigned long mctl_calc_size(struct dram_para *para)
+> +unsigned long mctl_calc_size(const struct dram_para *para)
+>  {
+>  	u8 width = para->bus_full_width ? 4 : 2;
+> 
+> diff --git a/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c
+> b/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c index
+> 2136ca3a4cb..6dde6e78717 100644
+> --- a/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c
+> +++ b/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c
+> @@ -38,7 +38,7 @@ static u32 mr_ddr3[7] = {
+>  };
+> 
+>  /* TODO: flexible timing */
+> -void mctl_set_timing_params(struct dram_para *para)
+> +void mctl_set_timing_params(const struct dram_para *para)
+>  {
+>  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+>  			(struct sunxi_mctl_ctl_reg 
+*)SUNXI_DRAM_CTL0_BASE;
+> diff --git a/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c
+> b/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c index
+> 10008601134..2a95484322c 100644
+> --- a/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c
+> +++ b/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c
+> @@ -17,7 +17,7 @@ static u32 mr_lpddr3[12] = {
+>  };
+> 
+>  /* TODO: flexible timing */
+> -void mctl_set_timing_params(struct dram_para *para)
+> +void mctl_set_timing_params(const struct dram_para *para)
+>  {
+>  	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+>  			(struct sunxi_mctl_ctl_reg 
+*)SUNXI_DRAM_CTL0_BASE;
 
 
 
