@@ -4,79 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7FDCDB474
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 02:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381CCC001E0
+	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 04:34:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A1F786FBD;
-	Sat, 21 Oct 2023 04:39:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EE1887585;
+	Sat, 21 Oct 2023 06:34:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gWvDHcZS";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="YAXfwUxZ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="nczTPYBe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5CBD86FBD; Sat, 21 Oct 2023 04:39:36 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7A18387480; Sat, 21 Oct 2023 06:34:46 +0200 (CEST)
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
+ [66.111.4.26])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D6408756F
- for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 04:39:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9D6C86F42
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 06:34:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-66d4453ba38so8906436d6.0
- for <u-boot@lists.denx.de>; Fri, 20 Oct 2023 19:39:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697855968; x=1698460768; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ymDkXouBbs9EVhrZPCocBR1SMVpQGYvpQj1m6na3cQQ=;
- b=gWvDHcZSKsUeM1mqBI8IgPBqJnxD7QvqxKneoRw1XkBGb78FXWeQOvlDUb+YJRBe32
- JURJ/Ob+fgwwltikm6ZZLtyD9G3RpzMEsp4oq7FS5e9i0hWu/cpPBuOA9FglNIyv6OBy
- diDmrCJwLYYqWfH0sCt4ceF5Ri/PlPeRGlLm0tnPhmDSOD75gZm3S28GG06GEMedg1NO
- rPTZGGpKhLT88N7cpdZtc9V1UFfGCKzNRAGaFQXnC0gOrsgWePMsmmZSdi37FZDeQtQD
- TkU14yS3H8HsPmbFP6wPfmuLM6zN9gAXjBbtOTc3O6VCiF0MBRC0ZBvUeBHFEyiuVmkF
- pkXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697855968; x=1698460768;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ymDkXouBbs9EVhrZPCocBR1SMVpQGYvpQj1m6na3cQQ=;
- b=NPKy8aoocrrL56mA04sNnhex6se6GZSH+RirbLZkCsWDAXlOqen7B2HqVtUnAHb7FK
- 8l1GPpeyeDLJ2RDHoXFbjV5g/P1vHAkmDOGSOXcVwdgRNWEnSiaWi5hM3j2JNPeVvy1K
- kesILNcGkw/Jp/BlbCi/CW2rOn7zQK1yxznuc/mJMs7wDPuGpuWmJ+3gGOwhKkMifZ4W
- VtYx5SdpD06yhjFfkXZO94BHPwY+76dkwrgxur2xKkh/iY/KZorocQX52A5RpS4DVM4Y
- tlDruGHzG1+qg3VePbFE4oLBncJawEHV3hyLhZNumXF/I26M0T0QlHBIwCX9zLsXINM2
- y5lA==
-X-Gm-Message-State: AOJu0YyYbtR7tuyPuqnTpMsHfcq5ErnFReOFIAvixLN6xjlXze1Zvuez
- CLqTEtaT7j0XiLRX9D6uPZo=
-X-Google-Smtp-Source: AGHT+IHuhWWTKeVtmG6m8Lcz+6FVPwSMMaPv8GmWT0aIdfIuGC1Wgo8J00Dr58xyjuq5XKb1gZCODA==
-X-Received: by 2002:a05:6214:248f:b0:66d:33c1:3750 with SMTP id
- gi15-20020a056214248f00b0066d33c13750mr4175608qvb.49.1697855967737; 
- Fri, 20 Oct 2023 19:39:27 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- bk6-20020a05620a1a0600b00775afce4235sm1065039qkb.131.2023.10.20.19.39.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Oct 2023 19:39:27 -0700 (PDT)
-Message-ID: <0c21dedf-dc89-5b13-b091-3b0106374382@gmail.com>
-Date: Fri, 20 Oct 2023 22:39:26 -0400
+ spf=pass smtp.mailfrom=samuel@sholland.org
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id 4DD2E5C010C;
+ Sat, 21 Oct 2023 00:34:38 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute4.internal (MEProxy); Sat, 21 Oct 2023 00:34:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
+ 1697862878; x=1697949278; bh=76ObXIxf9p7pGRKRLLeIC7m0oYHSCFmbA83
+ uHdn/shg=; b=YAXfwUxZVQJcu6mDSx7QhmDC0Fh51s+PJbcjNaITUUb6WfjGKL3
+ AFe2H8IluDVFUmgqS4aX44VjKvYbRoqCGDIhyIS14G23GJZH5JA7HEfWdhP+wMKJ
+ xE72YURBk4fNLKkDZETuUy+KBw6O6YgRND7j1cVjxS+BDJSA4wlgJzbG6lyuhFQf
+ zRVtYyiZ4zTGz8kFjQYAHoR1Tjj8M9l1Ly1affYF2u3pVmvHLwXEy3sQVOJgUUrm
+ fqG9k1QJ6M2WPwmW2M6QWmhVEbd3uu0o3niEsvdtyj91zXrXqHaGBFQ1k5YNwUws
+ nGZyvLeWgiH3YClswre2T1VKuG95aK2qbOA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:sender:subject:subject:to:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1697862878; x=1697949278; bh=76ObXIxf9p7pGRKRLLeIC7m0oYHSCFmbA83
+ uHdn/shg=; b=nczTPYBeN6X87Vkl4smnTWxWIQozBkvMFuHd4GUF+VC+gLWNjA6
+ E60qj5yTXJvXgwpeHowLHc2vBZ1neZyuX3nY4g8xpisaOkg3lciTyVQez8XImawZ
+ /gOI1XhSiieb3eddgHMJfypaF7Wza9EqlFcvZef6+XKfWif+3Py1Y4g/JyYOhn0s
+ fJQMFnlXyb69PY15p0/Sq1BcDkovQiVPkkQ8nz16df6N/ZuD1hPE8qplZkdip3sX
+ HUhTGwayuY/TaZfuAG1dH0ITl8ig7T+eLfD9gpjhnHoxXhPhpKhfpriBrXwCK988
+ 7k/SMrI+bljZFt7v/aN+m+6UKocwe7KQZXw==
+X-ME-Sender: <xms:3FQzZYyfVnWReRlPzs6IS0bOZI7SbKReapzy5cmDwQ0Y2rligoXgSQ>
+ <xme:3FQzZcTSP45buf9BH50LMOsQ8D8rAl8M4ecclljYJoP-ADpXmekxPtMCsSvAxjBMD
+ MkGeOUZ0SrNyrR8kQ>
+X-ME-Received: <xmr:3FQzZaUtmSTOPcRqI5c5JamYJRI4Me5kM4-ugyPH0tjUW4FEKmAUktPJy0DZhDJ7yT8kn4FyekoInyn9qka7Kt4gSSw9utFZQ3NFv6KGL4LnzYj0Fa8_-oC_wA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrjeelgdekvdcutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefkffggfgfuvfevfhfhjggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
+ vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
+ ftrfgrthhtvghrnhepkeejleelfeeitdfhtdfgkeeghedufeduueegffdvhfdukeelleef
+ tdetjeehuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
+X-ME-Proxy: <xmx:3FQzZWgZOqNe0VfifhpusiZ9tQrsCXrgH2jtMkgP8qaVhJtaW6il9g>
+ <xmx:3FQzZaAFtIqYZeFwrHIJthQIDy0ysXbJuFMnpBe019zgN9bwnSVj0Q>
+ <xmx:3FQzZXLBGjzLT7f3uvBQlEgRDKtOReFDF7hgOJ-NypLHIhrEGOz8eA>
+ <xmx:3lQzZW3JskPKypQR8cDTlds-BwNOgMIoMUS0Tm0z3J2DWTkuM4I7WQ>
+Feedback-ID: i0ad843c9:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 21 Oct 2023 00:34:35 -0400 (EDT)
+Message-ID: <a9afd926-32f5-de64-6714-341ffea3bfb2@sholland.org>
+Date: Fri, 20 Oct 2023 23:34:34 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [v4 23/24] sandbox: Add <asm/barrier.h>
+User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH v2 11/22] pinctrl: sunxi: add Allwinner D1 pinctrl
+ description
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20231019150105.714407-1-trini@konsulko.com>
- <20231019150105.714407-23-trini@konsulko.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231019150105.714407-23-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
+ <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
+ Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
+ <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
+ andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
+ u-boot@lists.denx.de
+References: <20230928215455.28094-1-andre.przywara@arm.com>
+ <20230928215455.28094-12-andre.przywara@arm.com>
+From: Samuel Holland <samuel@sholland.org>
+In-Reply-To: <20230928215455.28094-12-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,24 +112,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/19/23 11:01, Tom Rini wrote:
-> Add a mostly empty asm/barrier.h file for sandbox where we define nop() to
-> be an empty function.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->   arch/sandbox/include/asm/barrier.h | 3 +++
->   1 file changed, 3 insertions(+)
->   create mode 100644 arch/sandbox/include/asm/barrier.h
-> 
-> diff --git a/arch/sandbox/include/asm/barrier.h b/arch/sandbox/include/asm/barrier.h
-> new file mode 100644
-> index 000000000000..0928a78cbf8b
-> --- /dev/null
-> +++ b/arch/sandbox/include/asm/barrier.h
-> @@ -0,0 +1,3 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#define nop()
+Hi Andre,
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+On 9/28/23 16:54, Andre Przywara wrote:
+> Apart from using the new pinctrl MMIO register layout, the Allwinner D1
+> and related SoCs still need to usual set of mux values hardcoded in
+> U-Boot's pinctrl driver.
+> Add the values we need so far to this list, so that DM based drivers
+> will just work without further ado.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  drivers/pinctrl/sunxi/Kconfig         |  4 ++++
+>  drivers/pinctrl/sunxi/pinctrl-sunxi.c | 28 +++++++++++++++++++++++++++
+>  2 files changed, 32 insertions(+)
+> 
+> diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
+> index 77da90836b6..c8f937d91e9 100644
+> --- a/drivers/pinctrl/sunxi/Kconfig
+> +++ b/drivers/pinctrl/sunxi/Kconfig
+> @@ -124,4 +124,8 @@ config PINCTRL_SUN50I_H616_R
+>  	default MACH_SUN50I_H616
+>  	select PINCTRL_SUNXI
+>  
+> +config PINCTRL_SUN20I_D1
+> +	bool "Support for the Allwinner D1/R528 PIO"
+> +	select PINCTRL_SUNXI
+> +
+>  endif
+> diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> index fc80fe50b14..66876d9954a 100644
+> --- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> +++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> @@ -748,6 +748,28 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun50i_h616_r_pinctrl_desc
+>  	.num_banks	= 1,
+>  };
+>  
+> +static const struct sunxi_pinctrl_function sun20i_d1_pinctrl_functions[] = {
+
+Please keep these sections (and the OF match data) sorted numerically.
+
+> +	{ "emac",	8 },	/* PE0-PE15 */
+> +	{ "gpio_in",	0 },
+> +	{ "gpio_out",	1 },
+
+My local patch had a few more entries. Feel free to add them:
+
++       { "i2c0",       4 },    /* PB10-PB11 */
+
+> +	{ "mmc0",	2 },	/* PF0-PF5 */
+
++       { "mmc1",       2 },    /* PG0-PG5 */
+
+> +	{ "mmc2",	3 },	/* PC1-PC7 */
+
+Should be PC2-PC7. Everything else looks correct.
+
+> +	{ "spi0",	2 },	/* PC2-PC7 */
+> +#if IS_ENABLED(CONFIG_UART0_PORT_F)
+> +	{ "uart0",	3 },	/* PF2,PF4 */
+> +#else
+> +	{ "uart0",	6 },	/* PB0-PB1, PB8-PB9, PE2-PE3 */
+> +#endif
+
++       { "uart1",      2 },    /* PG6-PG7 */
++       { "uart2",      7 },    /* PB0-PB1 */
+
+Regards,
+Samuel
+
+> +	{ "uart3",	7 },	/* PB6-PB7 */
+> +};
+> +
+> +static const struct sunxi_pinctrl_desc __maybe_unused sun20i_d1_pinctrl_desc = {
+> +	.functions	= sun20i_d1_pinctrl_functions,
+> +	.num_functions	= ARRAY_SIZE(sun20i_d1_pinctrl_functions),
+> +	.first_bank	= SUNXI_GPIO_A,
+> +	.num_banks	= 7,
+> +};
+> +
+>  static const struct udevice_id sunxi_pinctrl_ids[] = {
+>  #ifdef CONFIG_PINCTRL_SUNIV_F1C100S
+>  	{
+> @@ -904,6 +926,12 @@ static const struct udevice_id sunxi_pinctrl_ids[] = {
+>  		.compatible = "allwinner,sun50i-h616-r-pinctrl",
+>  		.data = (ulong)&sun50i_h616_r_pinctrl_desc,
+>  	},
+> +#endif
+> +#ifdef CONFIG_PINCTRL_SUN20I_D1
+> +	{
+> +		.compatible = "allwinner,sun20i-d1-pinctrl",
+> +		.data = (ulong)&sun20i_d1_pinctrl_desc,
+> +	},
+>  #endif
+>  	{}
+>  };
+
