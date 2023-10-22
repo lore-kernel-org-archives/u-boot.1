@@ -4,77 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9836C0032E
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 21:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACB01CDB474
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 22:41:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEB61877C3;
-	Sun, 22 Oct 2023 23:55:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7B76E877F5;
+	Mon, 23 Oct 2023 00:41:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C9fATU1C";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C0B5877D1; Sun, 22 Oct 2023 23:55:53 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22CF9875AF
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 23:55:50 +0200 (CEST)
+ id 7C993877ED; Mon, 23 Oct 2023 00:41:29 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 9C02B877E9
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:41:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-53dd752685fso3994747a12.3
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 14:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698011750; x=1698616550; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VFfoo0vQe+y8zTTlhJ0yu6vFZ2LUnDu6FGUJD2L08Vg=;
- b=C9fATU1Ca7zKSaRHm+VpAuaBKV1+yLGneUljxWgmbxVmgQF/HS53526fGgqr8xNrbp
- 0VW0dlHrS6aSA/ZpKvq66Bi0jWy6Bv0zqa5Ilt2vu+M3dsITiHLlxnB8HIgiXu7XR90j
- vijgnmxwV63vJNntINxCzPGwUOEuIH8kkvR9g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698011750; x=1698616550;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VFfoo0vQe+y8zTTlhJ0yu6vFZ2LUnDu6FGUJD2L08Vg=;
- b=r3O4oG1fD8gUq9UOm/UP5TEtemviZLCsczyOh5UcKdmXiGhOt6v0/73er60o5xikNz
- V05Pi/CfrJTuJSpWTi75SZbEs79QSiNhgZPq/JxPMz+f9wJIMERCgt414HYmrDGioy+G
- 2/4sJI4ETDyq19ufX1dQgyCh/q2cmKBs9aAJqJ6NHOMBXccihwP6x6Yxr/k9xr97hiYr
- C6IvdthSLnpSkxaypzdknlepo/QmZmAujnTP3bdHf0TGs5lL1GAJTRMt7pQBrTzgTvDY
- m/tkTX329IEav6y9afdepKedrt/TU2dirB543TzOdqLt0IZxtQXhikvl19yoytAewUng
- Xwtg==
-X-Gm-Message-State: AOJu0Yy6BLyxAsOXYXVne/9aDs2sDnu7LZh0RMzF+ORT7PbPbJ8douQ0
- XqdCf85cJXU0STOrYoaX8hOQgVsNx9cL03DfdRyf7Q==
-X-Google-Smtp-Source: AGHT+IG9D8w7fNiKtcnW619zzmiXa3TgJZoG2otuXqwz4xAAr2rKT0KCxpZJ0OyYME2n2DLSvjMvELQ6ydTqYpYLemc=
-X-Received: by 2002:a17:906:4784:b0:9be:315d:e607 with SMTP id
- cw4-20020a170906478400b009be315de607mr6292144ejc.28.1698011750280; Sun, 22
- Oct 2023 14:55:50 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D5EAD2F4;
+ Sun, 22 Oct 2023 15:42:06 -0700 (PDT)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6BA893F738;
+ Sun, 22 Oct 2023 15:41:24 -0700 (PDT)
+Date: Sun, 22 Oct 2023 23:40:18 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Samuel Holland <samuel@sholland.org>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
+ <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards
+ <cfsworks@gmail.com>, Okhunjon Sobirjonov <okhunjon72@gmail.com>,
+ linux-sunxi@lists.linux.dev, andre.przywara@foss.arm.com, Jagan Teki
+ <jagan@amarulasolutions.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 16/22] sunxi: add R528/T113-s3/D1(s) DRAM
+ initialisation code
+Message-ID: <20231022234018.63e249f2@slackpad.lan>
+In-Reply-To: <f1fb2b20-2c3a-55a3-a35b-e014a2eebe20@sholland.org>
+References: <20230928215455.28094-1-andre.przywara@arm.com>
+ <20230928215455.28094-17-andre.przywara@arm.com>
+ <f1fb2b20-2c3a-55a3-a35b-e014a2eebe20@sholland.org>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-23-sjg@chromium.org>
- <20231017140925.GB3119521@bill-the-cat>
- <cac1ad58-5a7a-41fd-84db-f972609f95c6@gmx.de>
- <CAPnjgZ2tJEBNWsx_tLDTWyQ+xNyLj6feDenqEcCe+t3JNEdv8g@mail.gmail.com>
- <ZTHKKurIp67bx2MJ@octopus>
- <CAPnjgZ1DrzW=2M4UG8aPYmN+MedJODuj5-zE0Y9nVfu-Scpsxw@mail.gmail.com>
- <20231021182612.GA53397@bill-the-cat>
- <49cc3e85-bcc1-4a31-a8e0-293e6ecd952b@gmx.de>
- <20231022142922.GA496310@bill-the-cat> <20231022145857.GB496310@bill-the-cat>
-In-Reply-To: <20231022145857.GB496310@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 22 Oct 2023 14:55:32 -0700
-Message-ID: <CAPnjgZ2fHLrUrqNMFhzK-EbO8bGcgg=1aC9jVPL3mHt_g2xjiA@mail.gmail.com>
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,132 +62,385 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Sat, 21 Oct 2023 22:52:06 -0500
+Samuel Holland <samuel@sholland.org> wrote:
 
-On Sun, 22 Oct 2023 at 07:59, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Oct 22, 2023 at 10:29:22AM -0400, Tom Rini wrote:
-> > On Sun, Oct 22, 2023 at 08:08:11AM +0200, Heinrich Schuchardt wrote:
-> > > On 10/21/23 20:26, Tom Rini wrote:
-> > > > On Sat, Oct 21, 2023 at 08:43:08AM -0700, Simon Glass wrote:
-> > > > > Hi,
-> > > > >
-> > > > > On Thu, 19 Oct 2023 at 17:30, AKASHI Takahiro
-> > > > > <takahiro.akashi@linaro.org> wrote:
-> > > > > >
-> > > > > > On Thu, Oct 19, 2023 at 08:01:11AM -0600, Simon Glass wrote:
-> > > > > > > Hi Heinrich,
-> > > > > > >
-> > > > > > > On Wed, 18 Oct 2023 at 06:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > > >
-> > > > > > > > On 10/17/23 16:09, Tom Rini wrote:
-> > > > > > > > > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
-> > > > > > > > > > available, add it as an explicit dependency.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > ---
-> > > > > > > > > >
-> > > > > > > > > > (no changes since v2)
-> > > > > > > > > >
-> > > > > > > > > > Changes in v2:
-> > > > > > > > > > - Add new patch to update EFI_LOADER to depend on DM_ETH
-> > > > > > > > > >
-> > > > > > > > > >    lib/efi_loader/Kconfig | 1 +
-> > > > > > > > > >    1 file changed, 1 insertion(+)
-> > > > > > > > > >
-> > > > > > > > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > > > > > > > index 13cad6342c36..fca4b3eef270 100644
-> > > > > > > > > > --- a/lib/efi_loader/Kconfig
-> > > > > > > > > > +++ b/lib/efi_loader/Kconfig
-> > > > > > > > > > @@ -11,6 +11,7 @@ config EFI_LOADER
-> > > > > > > > > >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> > > > > > > > > >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> > > > > > > > > >       depends on BLK
-> > > > > > > > > > +    depends on DM_ETH
-> > > > > > > > > >       depends on !EFI_APP
-> > > > > > > > > >       default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
-> > > > > > > > > >       select CHARSET
-> > > > > > > > >
-> > > > > > > > > Does this work for you Heinrich, or do you want to clarify the
-> > > > > > > > > dependencies (and re-organize the code as needed) around networking?
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > We should be able to boot via EFI on devices without U-Boot network support.
-> > > > > > > >
-> > > > > > > > We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid invoking
-> > > > > > > > eth_get_dev() if there is no network. CONFIG_NETDEVICES=y selects
-> > > > > > > > CONFIG_DM_ETH.
-> > > > > > > >
-> > > > > > > > Why is this not sufficient?
-> > > > > > > > Is there a configuration that does not build?
-> > > > > > >
-> > > > > > > The point of this series is to disable CMDLINE and fix up what breaks.
-> > > > > > >
-> > > > > > > In this case we have some sort of breakage...perhaps Tom has already
-> > > > > > > found it, but otherwise could you take a look?
-> > > > > > >
-> > > > > > > We should be able to disable NET and LTO in sandbox and still build.
-> > > > > > > But this fails at present[1]. You can try it on -master
-> > > > > >
-> > > > > > Obviously, it would be necessary to enclose efi_dp_from_eth()
-> > > > > > with "if defined(CONFIG_NETDEVICES)" (or DM_ETH).
-> > > > > > Then, we could drop "depends on DM_ETH".
-> > > > >
-> > > > > Strange that it only happens on the non-LTO board, though?
-> > > >
-> > > > There's two issues. The first of which is that I think you need to
-> > > > re-check your error exactly? With my series, and LTO also disabled the
-> > > > problem is a call to efi_get_image_parameters() as that's defined in
-> > > > cmd/bootefi.c, but also only used with cmdline invocations. So we can
-> > > > fix that CMDLINE=n && LTO=n case with a IS_ENABLED(CONFIG_CMDLINE)
-> > > > around that, and then discard efi_dp_from_name() entirely.
-> > > >
-> > > > The second issue is that with LTO we more completely find the cases
-> > > > where if x() calls y() and y() is undefined but nothing calls x() we can
-> > > > just discard x() and not care that y() is undefined.
-> > > >
-> > >
-> > > I will send a patch for function efi_dp_from_eth().
-> >
-> > There's no problem with efi_dp_from_eth as far as I can tell.
-> >
-> > > @Simon
-> > >
-> > > One thing that I don't understand is why we don't let the linker
-> > > eliminate the unused functions on the sandbox.
-> > >
-> > > On other architectures we put each function into a separate text section
-> > > and let the linker eliminate the unused text sections:
-> > >
-> > > arch/riscv/config.mk:29:
-> > > PLATFORM_RELFLAGS       += -fno-common -ffunction-sections -fdata-sections
-> > > LDFLAGS_u-boot          += --gc-sections -static -pie
-> > >
-> > > Shouldn't we keep the sandbox close to what other architectures do?
-> >
-> > Oh my, I didn't realize that sandbox was missing the garbage collection
-> > stuff.  Yes, that needs to be fixed first, then we can see what's next
-> > to change, as there are some issues (my series first fixed CMDLINE=n on
-> > qemu_arm64).
->
-> My super quick pass at enabling
-> function-sections/data-sections/gc-sections shows there's nothing
-> further needed for CMDLINE=n and LTO=n on sandbox, not even the part I
-> was looking at before.
+Hi Samuel,
 
-I am not sure about the original reason, but sandbox probably
-pre-dates wholesale enabling of gc-sections (I haven't looked). There
-is also the issue of whether the host toolchain supports it. Sandbox
-is supposed to run on a variety of OS types.
+> On 9/28/23 16:54, Andre Przywara wrote:
+> > The Allwinner R528/T113-s/D1/D1s SoCs all share the same die, so use the
+> > same DRAM initialisation code.
+> > Make use of prior art here and lift some code from awboot[1], which
+> > carried init code based on earlier decompilation efforts, but with a
+> > GPL2 license tag.
+> > This code has been heavily reworked and cleaned up, to match previous
+> > DRAM routines for other SoCs, and also to be closer to U-Boot's coding
+> > style and support routines.
+> > The actual DRAM chip timing parameters are included in the main file,
+> > since they cover all DRAM types, and are protected by a new Kconfig
+> > CONFIG_SUNXI_DRAM_TYPE symbol, which allows the compiler to pick only
+> > the relevant settings, at build time.
+> > 
+> > The relevant DRAM chips/board specific configuration parameters are
+> > delivered via Kconfig, so this code here should work for all supported
+> > SoCs and DRAM chips combinations.
+> > 
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > Tested-by: Sam Edwards <CFSworks@gmail.com>
+> > ---
+> >  drivers/Makefile                   |    1 +
+> >  drivers/ram/Makefile               |    3 +
+> >  drivers/ram/sunxi/Kconfig          |   59 ++
+> >  drivers/ram/sunxi/Makefile         |    4 +
+> >  drivers/ram/sunxi/dram_sun20i_d1.c | 1432 ++++++++++++++++++++++++++++
+> >  drivers/ram/sunxi/dram_sun20i_d1.h |   73 ++
+> >  6 files changed, 1572 insertions(+)
+> >  create mode 100644 drivers/ram/sunxi/Makefile
+> >  create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.c
+> >  create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.h
+> > 
+> > diff --git a/drivers/Makefile b/drivers/Makefile
+> > index efc2a4afb24..5a4bedf7305 100644
+> > --- a/drivers/Makefile
+> > +++ b/drivers/Makefile
+> > @@ -56,6 +56,7 @@ obj-$(CONFIG_$(SPL_)ALTERA_SDRAM) += ddr/altera/
+> >  obj-$(CONFIG_ARCH_IMX8M) += ddr/imx/imx8m/
+> >  obj-$(CONFIG_IMX8ULP_DRAM) += ddr/imx/imx8ulp/
+> >  obj-$(CONFIG_ARCH_IMX9) += ddr/imx/imx9/
+> > +obj-$(CONFIG_DRAM_SUN8I_R528) += ram/  
+> 
+> This would need to be duplicated for DRAM_SUN20I_D1.
+> 
+> >  obj-$(CONFIG_SPL_DM_RESET) += reset/
+> >  obj-$(CONFIG_SPL_MUSB_NEW) += usb/musb-new/
+> >  obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
+> > diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
+> > index 6eb1a241359..b4750ea11c4 100644
+> > --- a/drivers/ram/Makefile
+> > +++ b/drivers/ram/Makefile
+> > @@ -23,6 +23,9 @@ obj-$(CONFIG_RAM_SIFIVE) += sifive/
+> >  ifdef CONFIG_SPL_BUILD
+> >  obj-$(CONFIG_SPL_STARFIVE_DDR) += starfive/
+> >  endif
+> > +
+> > +obj-$(CONFIG_DRAM_SUN8I_R528) += sunxi/  
+> 
+> This would need to be duplicated for DRAM_SUN20I_D1.
 
-I am also not sure of the point ot it...since it is normally pretty
-easy to use Kconfig to control features.
+Right, so I joined both symbols into one now. I think I wanted to keep
+the DM_RAM and non-DM parts logically apart, but it works nevertheless.
 
-At least for me 'u-boot -D' doesn't work with Heinrich's patch. Do we
-really need to make this change? It will rapidly devolve to the point
-that coming back would be extremely painful.
+My gut feeling is this needs more adjustments anyway once we need the
+DM_RAM or want to extend it to more SoCs, so we can fix things when
+they need fixing, later.
 
-Regards,
-Simon
+> 
+> > +
+> >  obj-$(CONFIG_ARCH_OCTEON) += octeon/
+> >  
+> >  obj-$(CONFIG_ARCH_RMOBILE) += renesas/
+> > diff --git a/drivers/ram/sunxi/Kconfig b/drivers/ram/sunxi/Kconfig
+> > index 261d7f57409..35eeda58efa 100644
+> > --- a/drivers/ram/sunxi/Kconfig
+> > +++ b/drivers/ram/sunxi/Kconfig
+> > @@ -12,3 +12,62 @@ config DRAM_SUN8I_R528
+> >  	default y if MACH_SUN8I_R528
+> >  	help
+> >  	  Select this DRAM controller driver for the R528/T113s SoCs.
+> > +
+> > +if DRAM_SUN20I_D1 || DRAM_SUN8I_R528
+> > +
+> > +config DRAM_SUNXI_ODT_EN  
+> 
+> You have a mixture of "DRAM_SUNXI" and "SUNXI_DRAM" for the tunables
+> here. I would recommend being consistent.
+
+This was chosen to stay consistent with the existing DRAM drivers,
+which use DRAM_SUNxx_ for parameters, but SUNXI_DRAM_TYPE_ for the type
+selection. I was looking into moving the other Allwinner DRAM drivers
+into here as well (at least for every future SoC), and tested this with
+the H616: keeping the symbols compatible was a requirement.
+
+> 
+> > +	hex "DRAM ODT EN parameter"
+> > +	default 0x1
+> > +	help
+> > +	  ODT EN value from vendor DRAM settings.
+> > +
+> > +config DRAM_SUNXI_TPR0
+> > +	hex "DRAM TPR0 parameter"
+> > +	default 0x0
+> > +	help
+> > +	  TPR0 value from vendor DRAM settings.
+> > +
+> > +config DRAM_SUNXI_TPR11
+> > +	hex "DRAM TPR11 parameter"
+> > +	default 0x0
+> > +	help
+> > +	  TPR11 value from vendor DRAM settings.
+> > +
+> > +config DRAM_SUNXI_TPR12
+> > +	hex "DRAM TPR12 parameter"
+> > +	default 0x0
+> > +	help
+> > +	  TPR12 value from vendor DRAM settings.
+> > +
+> > +config DRAM_SUNXI_TPR13
+> > +	hex "DRAM TPR13 parameter"
+> > +	default 0x0  
+> 
+> I would suggest dropping the defaults for these tunables. It was
+> non-obvious that I was missing some configuration when I switched to
+> your driver. I think it's reasonable to require the defconfig/user to
+> provide these.
+
+Yeah, that's a good point. No actual value is 0, so this doesn't even
+simplify defconfigs.
+
+> > +	help
+> > +	  TPR13 value from vendor DRAM settings. It tells which features
+> > +	  should be configured.
+> > +
+> > +choice
+> > +	prompt "DRAM chip type"
+> > +	default SUNXI_DRAM_TYPE_DDR3 if DRAM_SUN8I_R528 || DRAM_SUN20I_D1
+> > +
+> > +config SUNXI_DRAM_TYPE_DDR2
+> > +        bool "DDR2 chips"
+> > +
+> > +config SUNXI_DRAM_TYPE_DDR3
+> > +        bool "DDR3 chips"
+> > +
+> > +config SUNXI_DRAM_TYPE_LPDDR2
+> > +        bool "LPDDR2 chips"
+> > +
+> > +config SUNXI_DRAM_TYPE_LPDDR3
+> > +        bool "LPDDR3 chips"
+> > +endchoice
+> > +
+> > +config SUNXI_DRAM_TYPE
+> > +	int
+> > +	default 2 if SUNXI_DRAM_TYPE_DDR2
+> > +	default 3 if SUNXI_DRAM_TYPE_DDR3
+> > +	default 6 if SUNXI_DRAM_TYPE_LPDDR2
+> > +	default 7 if SUNXI_DRAM_TYPE_LPDDR3
+> > +
+> > +endif
+> > diff --git a/drivers/ram/sunxi/Makefile b/drivers/ram/sunxi/Makefile
+> > new file mode 100644
+> > index 00000000000..d6fb2cf0b65
+> > --- /dev/null
+> > +++ b/drivers/ram/sunxi/Makefile
+> > @@ -0,0 +1,4 @@
+> > +# SPDX-License-Identifier: GPL-2.0+
+> > +
+> > +obj-$(CONFIG_DRAM_SUN20I_D1) += dram_sun20i_d1.o
+> > +obj-$(CONFIG_DRAM_SUN8I_R528) += dram_sun20i_d1.o
+> > diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
+> > new file mode 100644
+> > index 00000000000..c766fc24065
+> > --- /dev/null
+> > +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
+> > @@ -0,0 +1,1432 @@
+> > [...]
+> > +/*
+> > + * This routine sizes a DRAM device by cycling through address lines and
+> > + * figuring out if they are connected to a real address line, or if the
+> > + * address is a mirror.
+> > + * First the column and bank bit allocations are set to low values (2 and 9
+> > + * address lines). Then a maximum allocation (16 lines) is set for rows and
+> > + * this is tested.
+> > + * Next the BA2 line is checked. This seems to be placed above the column,
+> > + * BA0-1 and row addresses. Finally, the column address is allocated 13 lines
+> > + * and these are tested. The results are placed in dram_para1 and dram_para2.
+> > + */
+> > +static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
+> > +{
+> > +	unsigned int rval, i, j, rank, maxrank, offs;
+> > +	unsigned int shft;
+> > +	unsigned long ptr, mc_work_mode, chk;  
+> 
+> This breaks on 64-bit architectures, because readl(chk) can never equal
+> ~ptr. Please change ptr and chk to unsigned int.
+
+I think they were originally ints (at least I see it like this is an
+earlier version), but I changed it to make "ptr" a pointer compatible
+type.
+Definitely "chk" is only used as a pointer, so should be long (or
+uintptr_t).
+The actual problem is that "ptr" is used both as a pointer *and* a
+payload, which is odd. I will keep ptr long, but make sure to
+write only a true 32 bit payload into the address it points to.
+
+> 
+> > +
+> > +	if (mctl_core_init(para, config) == 0) {
+> > +		printf("DRAM initialisation error : 0\n");
+> > +		return 0;
+> > +	}
+> > +
+> > +	maxrank	= (config->dram_para2 & 0xf000) ? 2 : 1;
+> > +	mc_work_mode = 0x3102000;
+> > +	offs = 0;
+> > +
+> > +	/* write test pattern */
+> > +	for (i = 0, ptr = CFG_SYS_SDRAM_BASE; i < 64; i++, ptr += 4)
+> > +		writel((i & 0x1) ? ptr : ~ptr, ptr);
+> > +
+> > +	for (rank = 0; rank < maxrank;) {
+> > +		/* set row mode */
+> > +		clrsetbits_le32(mc_work_mode, 0xf0c, 0x6f0);
+> > +		udelay(1);
+> > +
+> > +		// Scan per address line, until address wraps (i.e. see shadow)
+> > +		for (i = 11; i < 17; i++) {
+> > +			chk = CFG_SYS_SDRAM_BASE + (1U << (i + 11));
+> > +			ptr = CFG_SYS_SDRAM_BASE;
+> > +			for (j = 0; j < 64; j++) {
+> > +				if (readl(chk) != ((j & 1) ? ptr : ~ptr))
+> > +					break;
+> > +				ptr += 4;
+> > +				chk += 4;
+> > +			}
+> > +			if (j == 64)
+> > +				break;
+> > +		}
+> > +		if (i > 16)
+> > +			i = 16;
+> > +		debug("rank %d row = %d\n", rank, i);
+> > +
+> > +		/* Store rows in para 1 */
+> > +		shft = offs + 4;
+> > +		rval = config->dram_para1;
+> > +		rval &= ~(0xff << shft);
+> > +		rval |= i << shft;
+> > +		config->dram_para1 = rval;
+> > +
+> > +		if (rank == 1)		/* Set bank mode for rank0 */
+> > +			clrsetbits_le32(0x3102000, 0xffc, 0x6a4);
+> > +
+> > +		/* Set bank mode for current rank */
+> > +		clrsetbits_le32(mc_work_mode, 0xffc, 0x6a4);
+> > +		udelay(1);
+> > +
+> > +		// Test if bit A23 is BA2 or mirror XXX A22?
+> > +		chk = CFG_SYS_SDRAM_BASE + (1U << 22);
+> > +		ptr = CFG_SYS_SDRAM_BASE;
+> > +		for (i = 0, j = 0; i < 64; i++) {
+> > +			if (readl(chk) != ((i & 1) ? ptr : ~ptr)) {
+> > +				j = 1;
+> > +				break;
+> > +			}
+> > +			ptr += 4;
+> > +			chk += 4;
+> > +		}
+> > +
+> > +		debug("rank %d bank = %d\n", rank, (j + 1) << 2); /* 4 or 8 */
+> > +
+> > +		/* Store banks in para 1 */
+> > +		shft = 12 + offs;
+> > +		rval = config->dram_para1;
+> > +		rval &= ~(0xf << shft);
+> > +		rval |= j << shft;
+> > +		config->dram_para1 = rval;
+> > +
+> > +		if (rank == 1)		/* Set page mode for rank0 */
+> > +			clrsetbits_le32(0x3102000, 0xffc, 0xaa0);
+> > +
+> > +		/* Set page mode for current rank */
+> > +		clrsetbits_le32(mc_work_mode, 0xffc, 0xaa0);
+> > +		udelay(1);
+> > +
+> > +		// Scan per address line, until address wraps (i.e. see shadow)
+> > +		for (i = 9; i < 14; i++) {
+> > +			chk = CFG_SYS_SDRAM_BASE + (1U << i);
+> > +			ptr = CFG_SYS_SDRAM_BASE;
+> > +			for (j = 0; j < 64; j++) {
+> > +				if (readl(chk) != ((j & 1) ? ptr : ~ptr))
+> > +					break;
+> > +				ptr += 4;
+> > +				chk += 4;
+> > +			}
+> > +			if (j == 64)
+> > +				break;
+> > +		}
+> > +		if (i > 13)
+> > +			i = 13;
+> > +
+> > +		unsigned int pgsize = (i == 9) ? 0 : (1 << (i - 10));
+> > +		debug("rank %d page size = %d KB\n", rank, pgsize);
+> > +
+> > +		/* Store page size */
+> > +		shft = offs;
+> > +		rval = config->dram_para1;
+> > +		rval &= ~(0xf << shft);
+> > +		rval |= pgsize << shft;
+> > +		config->dram_para1 = rval;
+> > +
+> > +		// Move to next rank
+> > +		rank++;
+> > +		if (rank != maxrank) {
+> > +			if (rank == 1) {
+> > +				/* MC_WORK_MODE */
+> > +				clrsetbits_le32(0x3202000, 0xffc, 0x6f0);
+> > +
+> > +				/* MC_WORK_MODE2 */
+> > +				clrsetbits_le32(0x3202004, 0xffc, 0x6f0);
+> > +			}
+> > +			/* store rank1 config in upper half of para1 */
+> > +			offs += 16;
+> > +			mc_work_mode += 4;	/* move to MC_WORK_MODE2 */
+> > +		}
+> > +	}
+> > +	if (maxrank == 2) {
+> > +		config->dram_para2 &= 0xfffff0ff;
+> > +		/* note: rval is equal to para->dram_para1 here */
+> > +		if ((rval & 0xffff) == (rval >> 16)) {
+> > +			debug("rank1 config same as rank0\n");
+> > +		} else {
+> > +			config->dram_para2 |= BIT(8);
+> > +			debug("rank1 config different from rank0\n");
+> > +		}
+> > +	}
+> > +
+> > +	return 1;
+> > +}
+> > [...]
+> > +static int sunxi_ram_probe(struct udevice *dev)
+> > +{
+> > +	struct sunxi_ram_priv *priv = dev_get_priv(dev);
+> > +	unsigned long dram_size;
+> > +
+> > +	debug("%s: %s: probing\n", __func__, dev->name);
+> > +
+> > +	dram_size = sunxi_dram_init();
+> > +	if (!dram_size) {
+> > +		printf("DRAM init failed: %d\n", ret);  
+> 
+> There is no ret variable anymore, so this fails to compile. With this
+> line and the variable size issue fixed, this driver works on my Nezha
+> board, so with those fixes:
+
+Ah, right, thanks for the heads up. I think I had some trick to compile
+test this code once, but didn't use it since last year.
+
+> Tested-by: Samuel Holland <samuel@sholland.org>
+
+Thanks!
+Andre
+
+P.S. This driver has a lot of rough edges anyway (the whole
+clock/"system" setup side, for a start), but we should get things
+moving now, before the RFC version celebrates its first birthday. So I
+will merge it, but am happy to take fixes: either cleanups, or fixes
+for the D1.
+
+> > +		return -ENODEV;
+> > +	}
+> > +
+> > +	priv->size = dram_size;
+> > +
+> > +	return 0;
+> > +}  
+> 
+
