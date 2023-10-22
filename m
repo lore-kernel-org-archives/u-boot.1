@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21FB5CDB474
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 06:20:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8E6CDB474
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 06:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 350E3876CB;
-	Sun, 22 Oct 2023 08:20:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7CBEE876D5;
+	Sun, 22 Oct 2023 08:29:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mxfKMt08";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="HM6tDpPX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55993876CC; Sun, 22 Oct 2023 08:20:15 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id 5707C876D7; Sun, 22 Oct 2023 08:29:29 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 576E0876CA
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 08:20:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2BB4876D2
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 08:29:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,25 +31,25 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id B58303F20A; 
- Sun, 22 Oct 2023 06:20:10 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 634853FB9B; 
+ Sun, 22 Oct 2023 06:29:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1697955610;
- bh=e4i4HRpNUX+vG3MHf1QQ7vLJ7y+BzKHilFiX5UAAcdg=;
+ s=20210705; t=1697956163;
+ bh=8lWF0Zdw2LorNUyfs34184Ey5/gyUNq/HichnAD/PVw=;
  h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=mxfKMt08CIg8xKOOuMup43NZk1G6J/wMKT+V0i/HWrv9VyeUt4lLE1l6+i5hI++HE
- CGOgtT7WfNioakv/cpc5Ydw/tUDPJFE3SxEUsqb3jN4j5g/r9/PVGorSBAgLW5sfG4
- tPP3F6BHT1pBAzD6Nd0r6RXsp9rDR/5LnSA6zD1Pa+QitqY7zN+P1jnhm14aVMj69A
- 8+H+mAPaE/wXvONsE0PCS4YSdfp9vhwbbKwF16HoiW6O16CZ7u4L6T6vogXYwnBmMD
- jq7xkuwlqA7AR67H9ypsdri7lLBhB7vkCNW1FpztcznEgrRxm3X4OimX3GMp6r5T5s
- lrXYThBJY2oAg==
+ b=HM6tDpPXOVE5rmYyweYIJw2Aki1j/RC9WcZnChvwm4TPJ1rHFq6JxIU571pJL9Eyw
+ QS3IGwa8uIPdi8YwPw4rKuLl3gJm2JY8OLKOzdVB/ELdqEvruhUnf0VhHc7qKR65wP
+ OkOBO63/2v0jKJiBPkiD4X0aYUZWXp7nxGgrwgkIeI9h++ToPkpQuxdTi7stpcwrmH
+ p3sgbsoiwvIiVi7EJGIv/TTohTia5u1zVyv1qsF3sby3JUx4y1US2274zfbup4f4Gl
+ QqVhU60vXgEkIKfuKYkJAXKvOr9aRI6O3jQ5PzndVO2U5BsIrg3yd0hhgta5zvZu/1
+ 0FbYwGdZPptdw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: fix efi_dp_from_eth
-Date: Sun, 22 Oct 2023 08:20:12 +0200
-Message-Id: <20231022062012.97271-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] sandbox: eliminate unused functions from binaries
+Date: Sun, 22 Oct 2023 08:29:29 +0200
+Message-Id: <20231022062929.106169-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,43 +69,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When compiling the sandbox with CONFIG_LTO=n, CONFIG_NET=n an error is
-reported:
+The sandbox should closely mimic other architectures.
 
-    /usr/bin/ld: lib/efi_loader/efi_device_path.o:
-    in function `efi_dp_from_eth':
-    lib/efi_loader/efi_device_path.c:985:(.text+0xcf4):
-    undefined reference to `eth_get_dev'
-
-Add a missing configuration check.
-
-As the function is exported __maybe_unused can be removed.
+Place each function or data in a separate section and let the linker
+eliminate unused ones. This will reduce the binary size.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_loader/efi_device_path.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ arch/sandbox/config.mk | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index ed7214f3a3..f3a0e855b3 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -977,11 +977,14 @@ struct efi_device_path *efi_dp_from_uart(void)
- 	return buf;
- }
+diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
+index 2d184c5f65..c02f0229c2 100644
+--- a/arch/sandbox/config.mk
++++ b/arch/sandbox/config.mk
+@@ -2,7 +2,7 @@
+ # Copyright (c) 2011 The Chromium OS Authors.
  
--struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
-+struct efi_device_path *efi_dp_from_eth(void)
- {
- 	void *buf, *start;
- 	unsigned dpsize = 0;
+ PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
+-PLATFORM_CPPFLAGS += -fPIC
++PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
+ PLATFORM_LIBS += -lrt
+ SDL_CONFIG ?= sdl2-config
  
-+	if (!IS_ENABLED(CONFIG_NETDEVICES))
-+		return NULL;
-+
- 	assert(eth_get_dev());
- 
- 	dpsize += dp_size(eth_get_dev());
+@@ -26,6 +26,7 @@ cmd_u-boot__ = $(CC) -o $@ -Wl,-T u-boot.lds $(u-boot-init) \
+ 	$(KBUILD_LDFLAGS:%=-Wl,%) \
+ 	$(SANITIZERS) \
+ 	$(LTO_FINAL_LDFLAGS) \
++	-Wl,--gc-section \
+ 	-Wl,--whole-archive \
+ 		$(u-boot-main) \
+ 		$(u-boot-keep-syms-lto) \
+@@ -37,6 +38,7 @@ cmd_u-boot-spl = (cd $(obj) && $(CC) -o $(SPL_BIN) -Wl,-T u-boot-spl.lds \
+ 	$(SANITIZERS) \
+ 	$(LTO_FINAL_LDFLAGS) \
+ 	$(patsubst $(obj)/%,%,$(u-boot-spl-init)) \
++	-Wl,--gc-section \
+ 	-Wl,--whole-archive \
+ 		$(patsubst $(obj)/%,%,$(u-boot-spl-main)) \
+ 		$(patsubst $(obj)/%,%,$(u-boot-spl-platdata)) \
 -- 
 2.40.1
 
