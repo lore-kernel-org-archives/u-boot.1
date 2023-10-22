@@ -4,91 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82D3CDB474
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 16:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B025CCDB474
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 16:44:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A711C87741;
-	Sun, 22 Oct 2023 18:34:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id BEA0887798;
+	Sun, 22 Oct 2023 18:44:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="P+DNb0Zw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iNuzIC3r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 086DE87751; Sun, 22 Oct 2023 18:34:10 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 92FDC8779D; Sun, 22 Oct 2023 18:44:49 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C71D187733
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 18:34:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB95C87560
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 18:44:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D10273F129
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 16:34:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1697992443;
- bh=USnvCTXvJR7I7aYXFjxnzxqlwV0MhzcNErEvmQjCIRE=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=P+DNb0ZwvrFrRrPdMibEcu5S1EimgEQi26L7XpbUGCxvHKxGn7rXava+0u5ESVllP
- Gr2WBUXJ5go2ko9B5wyfR70cYB1tJWYWevE76YhQKJ6aIVHcpHx6k/TFq6MG1hAE9k
- Ylwd6Orj+jy5+0QOt6NxenqWQlEZNepyTEvgHL5GezV90MmCY8Nbo5CH4viGnfpmkO
- Jaon42fc2G7XeQDpF8gVQn1rBiQK5k+bPJeZ3hSW3v8PhCY5kpZYfEk9pwsG4MrovK
- TvQIDGZZCEXsuKoY0ucrbHfvhSfue25vJIB1DGue8yDVNcx4/eLcWmgJq/Gm1Bcdbh
- FRuoANML/NeZg==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4083c9b426fso16015075e9.2
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 09:34:03 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697992443; x=1698597243;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=USnvCTXvJR7I7aYXFjxnzxqlwV0MhzcNErEvmQjCIRE=;
- b=JgBBzCNQAKVjsv7U/doUckMDjezpSig/+rm42qmOir9nlwiPV/2X0jj+ZqP6OeozZ6
- Aa3nlLMm+0a/cRfcwdKQhGNC1v+0KfsW7oRgZ0i/nbVk/tLkqAOBPmOgdTUUjaNV+MVd
- 09gDGm2Plybk4O4cBIO2k8If+AH5vOBw/mOljiWM+8Jp5D5I7ATAxRfdFCeF4O8j6TqH
- +G8YRq4mwZrNAkYOZ3qPKVfmg25t1Ebe96GGa12CWU3lbOr8irl1mpVExqvAD4tFrOpE
- 9NXRkvOFcwQyzkADQ4PwYnU5iJpHQYHMXaxQoY+tFgabqbS4aqoweLKFfsRKM8dgqRwc
- Sj8w==
-X-Gm-Message-State: AOJu0YyBtvhIjjb4RcE48AwF9gaX3FEiuVnX8f+k+F/Y3dtM0x0//1g5
- 4hNlNU5fHK5FhLzi3jRiwYwhvqs/2k6y0jpm4Etzw8Dq4e4k9FGy5iVm4DUYfzSpECtbQQVJY42
- Svi3d87qFnP776tnpy9i7WS/t15aaXO0=
-X-Received: by 2002:a05:600c:4445:b0:408:80bb:ae80 with SMTP id
- v5-20020a05600c444500b0040880bbae80mr2514002wmn.7.1697992443356; 
- Sun, 22 Oct 2023 09:34:03 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG9DkmuXDGx/RE2qRnMXbOVWQbSJS23O84Z1Jw49lTsFDL3fK25QFfqSpyDem3Hm4HDR5p4cQ==
-X-Received: by 2002:a05:600c:4445:b0:408:80bb:ae80 with SMTP id
- v5-20020a05600c444500b0040880bbae80mr2513989wmn.7.1697992442878; 
- Sun, 22 Oct 2023 09:34:02 -0700 (PDT)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- ay10-20020a05600c1e0a00b00405442edc69sm9500201wmb.14.2023.10.22.09.34.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 22 Oct 2023 09:34:02 -0700 (PDT)
-Message-ID: <4c4fee5a-82ab-46e2-a450-f874b2a9ad5c@canonical.com>
-Date: Sun, 22 Oct 2023 18:34:08 +0200
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697993085; x=1698597885; i=xypron.glpk@gmx.de;
+ bh=aYvcv1ghS0dA6emrPJSQQShTe71iSO9OCv9wTGxEBYY=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=iNuzIC3rFYARKkrYndM0Lr/j4ZrQ9+Vd6dkjqyayCL6UvQxthADG/q7XF5fybeig
+ Ezfu0eiLoAl4fHZwF106qOcS2FetIpDRCwKL27MuIR4pOUKW/uUKYCs3WZdgGTodI
+ 0ndTnp1bOIYXhiDRVday5nMAppkd+aBozxxUShduPL2e6sAfzrWzn/tQgr0HNGZ+P
+ J5JUc7evxgcAtmqjZ5PWRHP0qiZ6XxJYS4wOyw71szh7bZ8pfX43RCihqsvOGlzHD
+ llWFCBNSnezwyGR4z1Zf3XsWPJyllnW4sWrwAcfE/1Tgk6Ql5Okw6BRBIY7VED20J
+ nMCh7ZvPZZv74RF3AQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M89L1-1qqSpb3wY7-005KJP; Sun, 22
+ Oct 2023 18:44:45 +0200
+Message-ID: <0221ec2c-c691-4b7f-8ee3-89dc5fc8c14f@gmx.de>
+Date: Sun, 22 Oct 2023 18:44:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/1] efi_loader: expose the device-tree file name
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>
-References: <20231022084733.113326-1-heinrich.schuchardt@canonical.com>
- <20231022155543.GC496310@bill-the-cat>
+Subject: Re: [PATCH] iot2050: Allow for more than 1 USB storage device
 Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231022155543.GC496310@bill-the-cat>
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: "Su, Bao Cheng (RC-CN DF FA R&D)" <baocheng.su@siemens.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Le Jin <le.jin@siemens.com>
+References: <d1d6efbd-32f7-40e2-8c20-8eac06bd6075@siemens.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <d1d6efbd-32f7-40e2-8c20-8eac06bd6075@siemens.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:p1g/WDQzXiKoHLPgsvNxp+igbfHfChYHRJmrkXjS1pX1lcQOfPF
+ aPnLl7cl76qvF4ire4JEsxvEB55KSxT+LMO48oGrQyVMCuCpbO/YHfREQ+3wrj4AZeC87Iy
+ Rqkge9ua4U9BmpiDmb+3Ob6W5ElzeEE64NtiFJ45uokBVR+P04OE+tWObIHK0ePZhT2LWpu
+ 8Lyhj3m0hvaD8E0oLoVZw==
+UI-OutboundReport: notjunk:1;M01:P0:xlTQXs94X6A=;tiADJYdzRJ1OjQvJTqE8v8Q42JW
+ ERe4tvxsyVD3m6HbKiXP2fw5a/d42lKTmkEik1F23Qsg9mndXTDHoPWQz4k3Gu3s6g4uJk2yu
+ 8WKFuTDV1t6CdNMVzJaeTtSKC3KhDQvoqfsDhNlK2Pn7Ii8aCLcWO/rreX2tsekwFOvl+W2A4
+ vGeeWehyYrwXK05CNAGqhO4HWgAnptkEf8GYpOljKcPFkQrpA3iqmsiqFZlncM4/GxG1H/VNr
+ ZaIix7T7ZtVYL7QbKzfF1BT4mMkZDr97KIeOXJbX7bdNbagoF1sTrfxkYYC3xz0J9H5ZKN8c7
+ bby3m3H4pK0GHLKcl+8N+JhiWqN/7PSJxYJhYrSr/HgIIVbXmtrU1qYJPyRonvs0/sHYvdEPk
+ KQcg8gc98M7j2WQReO+brwRZfUf7obUApfdRrpbwCHLFK9fzh3to0PNyQiNgg9FJJqD9fVOO8
+ sjSG8daB5WyW3Ehb/z5YOraVIiGLUloOAuIPf6T2UcBKEww6P4hKrPddtw6L871LbVM/cEtAg
+ cG7piJMNawQVhv2ltiIVmrkE4TeW0P1i7IKIPjRNXjRDL+dptKU/fWc01fKsdOm+n/gUzqf3T
+ juJiNzqpaWWKRV5LRq8fI+86xIzp7RYSX5LYLEI0c0dV+LbzIFQZn62SWedFmcdiHp+GXenNj
+ PFwuPi5Y8wK/MgwrBiSmtl343mDsvhOe8ik+4uGvtKXiPUX+JNQ9BiCtek3ZCD4yezU9Kslq8
+ 90YZs0caVltWbI31pFVcWXAXgkFQCV0/quvH6Ug47rNOp8RWPczc8mXzMjYgXMB7/wWfYt3sr
+ fV6Fj35x5ZoW6aAdHnNfQ/dwhG7l60Xr9YoQuql2TISyQpdmg9bYxBEMwEbr++aGvzK7MVl9y
+ CiGL7Yd9A/LFBmTUMGqUXxUd7kTJ4PU3IzE6HT7t59NpYIS4yse9E+ONbcMiUF+TskjhNEsqu
+ vLDfJlDkbUr9EWh0Jgj65zQ8Neg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,70 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/22/23 17:55, Tom Rini wrote:
-> On Sun, Oct 22, 2023 at 10:47:33AM +0200, Heinrich Schuchardt wrote:
-> 
->> Forward and backward compatibility of Linux kernel device-trees is
->> sometimes missing. One solution approach is to load a kernel specific
->> device-tree. This can either be done via a U-Boot scripts (like the one
->> generated by Debian package flash-kernel or by a boot loader like GRUB.
->> The boot loader approach currently requires to know the device-tree name
->> before first boot which makes it unusable for generic images.
->>
->> Expose the device-tree file name as EFI variable FdtFile.
->> This will allow bootloaders to load a kernel specific device-tree.
->>
->> The variable will not be exposed on ACPI based systems or if the
->> environment variable fdtfile is not defined.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->> v3:
->> 	Add documentation
->> v2:
->> 	Use a unique GUID to enable future U-Boot independent
->> 	standardization.
->> 	Do not try to add the variable on ACPI based systems.
->> ---
->>   doc/develop/uefi/uefi.rst  | 17 +++++++++++++++++
->>   include/efi_loader.h       |  5 +++++
->>   lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
->>   3 files changed, 52 insertions(+)
->>
->> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
->> index fb16ac743a..a81d09ae81 100644
->> --- a/doc/develop/uefi/uefi.rst
->> +++ b/doc/develop/uefi/uefi.rst
->> @@ -916,6 +916,23 @@ So our final format of the FilePathList[] is::
->>   
->>       Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
->>   
->> +EFI variable FdtFile
->> +~~~~~~~~~~~~~~~~~~~~
->> +
->> +Ideally U-Boot would always expose a device-tree that can be used for booting
->> +any operating systems. Unfortunately operating systems like Linux sometimes
->> +break forward and backward compatibility. In this case there is a need to load
->> +an operating system version specific device-tree.
->> +
->> +U-Boot has an environment variable fdtfile identifying the device-tree file to
->> +load. The content of this variable is exposed as EFI variable Fdtfile, vendor
->> +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree path
->> +name as a NUL terminated ASCII string.
->> +
->> +On 32bit ARM this is currently only a file name, e.g. 'imx6dl-wandboard.dtb'.
->> +On other architectures the file name is preceded by the vendor directory, e.g.
->> +'rockchip/rk3326-odroid-go2.dtb'.
-> 
-> The Linux Kernel has split 32bit ARM up by directory now, too.
+On 10/22/23 17:18, Jan Kiszka wrote:
+> From: Jan Kiszka <jan.kiszka@siemens.com>
+>
+> This was lost via 53873974a4b0 while some users of the IOT2050 expect it
+> to work: Make sure that up to 3 USB storage devices are probed.
+>
 
-Since Linux v6.5. That is why I wrote "currently". Once we migrate the 
-values of $fdtfile in U-Boot we may want to change 
-distro_efi_try_bootflow_files() to search both with and without vendor 
-directory.
+Fixes: 53873974a4b0 ("include: armv7: Enable distroboot across all configs=
+")
 
-Are there already plans for that migration?
+> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+> ---
+>   include/configs/iot2050.h | 9 +++++++++
+>   1 file changed, 9 insertions(+)
+>
+> diff --git a/include/configs/iot2050.h b/include/configs/iot2050.h
+> index 4968722d18f..1d444d02c83 100644
+> --- a/include/configs/iot2050.h
+> +++ b/include/configs/iot2050.h
+> @@ -15,6 +15,15 @@
+>
+>   #include <configs/ti_armv7_common.h>
+>
+> +/* allow up to 3 USB storage devcies */
 
-Best regards
+%s/devcies/devices/
 
-Heinrich
+Otherwise looks good to me.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> +#ifdef CONFIG_CMD_USB
+> +#undef BOOT_TARGET_USB
+> +#define BOOT_TARGET_USB(func) \
+> +	func(USB, usb, 0) \
+> +	func(USB, usb, 1) \
+> +	func(USB, usb, 2)
+> +#endif
+> +
+>   /*
+>    * This defines all MMC devices, even if the basic variant has no mmc1=
+.
+>    * The non-supported device will be removed from the boot targets duri=
+ng
+
