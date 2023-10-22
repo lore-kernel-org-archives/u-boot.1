@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7889C001E0
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 00:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB85C001E0
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 00:51:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 383F087671;
-	Sun, 22 Oct 2023 02:49:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB5DA87024;
+	Sun, 22 Oct 2023 02:51:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07E3E87672; Sun, 22 Oct 2023 02:49:48 +0200 (CEST)
+ id F3C4087675; Sun, 22 Oct 2023 02:50:59 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id AF9DC87522
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 02:49:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3DDB385C98
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 02:50:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A735AC15;
- Sat, 21 Oct 2023 17:50:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 98CF2C15;
+ Sat, 21 Oct 2023 17:51:34 -0700 (PDT)
 Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9E1E33F64C;
- Sat, 21 Oct 2023 17:49:39 -0700 (PDT)
-Date: Sun, 22 Oct 2023 01:48:36 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7B9EE3F64C;
+ Sat, 21 Oct 2023 17:50:52 -0700 (PDT)
+Date: Sun, 22 Oct 2023 01:49:49 +0100
 From: Andre Przywara <andre.przywara@arm.com>
 To: Sam Edwards <cfsworks@gmail.com>
 Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
  Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH v4 3/4] sunxi: psci: stop modeling register layout with
- C structs
-Message-ID: <20231022014836.3bff1cc4@slackpad.lan>
-In-Reply-To: <20231012014756.2573473-4-CFSworks@gmail.com>
+ Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>,
+ Kevin Amadiva <kevin.amadiva@mec.at>
+Subject: Re: [PATCH v4 4/4] sunxi: psci: implement PSCI on R528
+Message-ID: <20231022014949.58fa1bc0@slackpad.lan>
+In-Reply-To: <20231012014756.2573473-5-CFSworks@gmail.com>
 References: <20231012014756.2573473-1-CFSworks@gmail.com>
- <20231012014756.2573473-4-CFSworks@gmail.com>
+ <20231012014756.2573473-5-CFSworks@gmail.com>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -59,20 +59,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Oct 2023 19:47:55 -0600
+On Wed, 11 Oct 2023 19:47:56 -0600
 Sam Edwards <cfsworks@gmail.com> wrote:
 
-> Since the sunxi support nowadays generally prefers #defined register
-> offsets instead of modeling register layouts using C structs, now is a
-> good time to do this for PSCI as well. This patch moves away from using
-> the structs `sunxi_cpucfg_reg` and `sunxi_prcm_reg` in psci.c.
-> 
-> The former struct and its associated header file existed only to support
-> PSCI code, so also delete them altogether.
+> This patch adds the necessary code to make nonsec booting and PSCI
+> secondary core management functional on the R528/T113.
 > 
 > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> Tested-by: Maksim Kiselev <bigunclemax@gmail.com>
+> Tested-by: Kevin Amadiva <kevin.amadiva@mec.at>
 
-Thanks for doing this!
+Thanks, that looks good now. It's debatable whether the Kconfig depends
+on should be NCAT2 instead, but we can fix this when the need arises.
 
 Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
@@ -80,201 +78,138 @@ Cheers,
 Andre
 
 > ---
->  arch/arm/cpu/armv7/sunxi/psci.c          | 57 ++++++++------------
->  arch/arm/include/asm/arch-sunxi/cpucfg.h | 67 ------------------------
->  2 files changed, 23 insertions(+), 101 deletions(-)
->  delete mode 100644 arch/arm/include/asm/arch-sunxi/cpucfg.h
+>  arch/arm/cpu/armv7/Kconfig      |  3 ++-
+>  arch/arm/cpu/armv7/sunxi/psci.c | 47 ++++++++++++++++++++++++++++++++-
+>  arch/arm/mach-sunxi/Kconfig     |  4 +++
+>  3 files changed, 52 insertions(+), 2 deletions(-)
 > 
+> diff --git a/arch/arm/cpu/armv7/Kconfig b/arch/arm/cpu/armv7/Kconfig
+> index f015d133cb..4eb34b7b44 100644
+> --- a/arch/arm/cpu/armv7/Kconfig
+> +++ b/arch/arm/cpu/armv7/Kconfig
+> @@ -61,8 +61,9 @@ config ARMV7_SECURE_MAX_SIZE
+>  config ARM_GIC_BASE_ADDRESS
+>  	hex
+>  	depends on ARMV7_NONSEC
+> -	depends on ARCH_EXYNOS5
+> +	depends on ARCH_EXYNOS5 || MACH_SUN8I_R528
+>  	default 0x10480000 if ARCH_EXYNOS5
+> +	default 0x03020000 if MACH_SUN8I_R528
+>  	help
+>  	  Override the GIC base address if the Arm Cortex defined
+>  	  CBAR/PERIPHBASE system register holds the wrong value.
 > diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
-> index 27ca9c39e1..207aa6bc4b 100644
+> index 207aa6bc4b..b03a865483 100644
 > --- a/arch/arm/cpu/armv7/sunxi/psci.c
 > +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> @@ -11,8 +11,6 @@
->  #include <asm/cache.h>
->  
->  #include <asm/arch/cpu.h>
-> -#include <asm/arch/cpucfg.h>
-> -#include <asm/arch/prcm.h>
->  #include <asm/armv7.h>
->  #include <asm/gic.h>
->  #include <asm/io.h>
-> @@ -27,6 +25,17 @@
->  #define	GICD_BASE	(SUNXI_GIC400_BASE + GIC_DIST_OFFSET)
->  #define	GICC_BASE	(SUNXI_GIC400_BASE + GIC_CPU_OFFSET_A15)
+> @@ -47,6 +47,19 @@
+>  #define SUN8I_R40_PWR_CLAMP(cpu)		(0x120 + (cpu) * 0x4)
+>  #define SUN8I_R40_SRAMC_SOFT_ENTRY_REG0		(0xbc)
 >  
 > +/*
-> + * Offsets into the CPUCFG block applicable to most SUNXIs.
+> + * R528 is also different, as it has both cores powered up (but held in reset
+> + * state) after the SoC is reset. Like the R40, it uses a "soft" entry point
+> + * address register, but unlike the R40, it uses a newer "CPUX" block to manage
+> + * CPU state, rather than the older CPUCFG system.
 > + */
-> +#define SUNXI_CPU_RST(cpu)			(0x40 + (cpu) * 0x40 + 0x0)
-> +#define SUNXI_CPU_STATUS(cpu)			(0x40 + (cpu) * 0x40 + 0x8)
-> +#define SUNXI_GEN_CTRL				(0x184)
-> +#define SUNXI_PRIV0				(0x1a4)
-> +#define SUN7I_CPU1_PWR_CLAMP			(0x1b0)
-> +#define SUN7I_CPU1_PWROFF			(0x1b4)
-> +#define SUNXI_DBG_CTRL1				(0x1e4)
+> +#define SUN8I_R528_SOFT_ENTRY			(0x1c8)
+> +#define SUN8I_R528_C0_RST_CTRL			(0x0000)
+> +#define SUN8I_R528_C0_CTRL_REG0			(0x0010)
+> +#define SUN8I_R528_C0_CPU_STATUS		(0x0080)
 > +
->  /*
->   * R40 is different from other single cluster SoCs.
->   *
-> @@ -99,10 +108,7 @@ static void __secure sunxi_cpu_set_entry(int __always_unused cpu, void *entry)
+> +#define SUN8I_R528_C0_STATUS_STANDBYWFI		(16)
+> +
+>  static void __secure cp15_write_cntp_tval(u32 tval)
+>  {
+>  	asm volatile ("mcr p15, 0, %0, c14, c2, 0" : : "r" (tval));
+> @@ -103,10 +116,12 @@ static void __secure clamp_set(u32 *clamp)
+>  
+>  static void __secure sunxi_cpu_set_entry(int __always_unused cpu, void *entry)
+>  {
+> -	/* secondary core entry address is programmed differently on R40 */
+>  	if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
 >  		writel((u32)entry,
 >  		       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
+> +	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+> +		writel((u32)entry,
+> +		       SUNXI_R_CPUCFG_BASE + SUN8I_R528_SOFT_ENTRY);
 >  	} else {
-> -		struct sunxi_cpucfg_reg *cpucfg =
-> -			(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> -
-> -		writel((u32)entry, &cpucfg->priv0);
-> +		writel((u32)entry, SUNXI_CPUCFG_BASE + SUNXI_PRIV0);
+>  		writel((u32)entry, SUNXI_CPUCFG_BASE + SUNXI_PRIV0);
 >  	}
->  }
->  
-> @@ -110,26 +116,21 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
->  {
->  	u32 *clamp = NULL;
->  	u32 *pwroff;
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
->  
->  	/* sun7i (A20) is different from other single cluster SoCs */
->  	if (IS_ENABLED(CONFIG_MACH_SUN7I)) {
-> -		clamp = &cpucfg->cpu1_pwr_clamp;
-> -		pwroff = &cpucfg->cpu1_pwroff;
-> +		clamp = (void *)SUNXI_CPUCFG_BASE + SUN7I_CPU1_PWR_CLAMP;
-> +		pwroff = (void *)SUNXI_CPUCFG_BASE + SUN7I_CPU1_PWROFF;
->  		cpu = 0;
+> @@ -125,6 +140,9 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
 >  	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
-> -		clamp = (void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu);
-> -		pwroff = (void *)cpucfg + SUN8I_R40_PWROFF;
-> +		clamp = (void *)SUNXI_CPUCFG_BASE + SUN8I_R40_PWR_CLAMP(cpu);
-> +		pwroff = (void *)SUNXI_CPUCFG_BASE + SUN8I_R40_PWROFF;
+>  		clamp = (void *)SUNXI_CPUCFG_BASE + SUN8I_R40_PWR_CLAMP(cpu);
+>  		pwroff = (void *)SUNXI_CPUCFG_BASE + SUN8I_R40_PWROFF;
+> +	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+> +		/* R528 leaves both cores powered up, manages them via reset */
+> +		return;
 >  	} else {
-> -		struct sunxi_prcm_reg *prcm =
-> -			(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
-> -
 >  		if (IS_ENABLED(CONFIG_MACH_SUN6I) ||
 >  		    IS_ENABLED(CONFIG_MACH_SUN8I_H3))
-> -			clamp = &prcm->cpu_pwr_clamp[cpu];
-> +			clamp = (void *)SUNXI_PRCM_BASE + 0x140 + cpu * 0x4;
->  
-> -		pwroff = &prcm->cpu_pwroff;
-> +		pwroff = (void *)SUNXI_PRCM_BASE + 0x100;
->  	}
->  
->  	if (on) {
-> @@ -151,37 +152,25 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
+> @@ -152,11 +170,27 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
 >  
 >  static void __secure sunxi_cpu_set_reset(int cpu, bool reset)
 >  {
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> -
-> -	writel(reset ? 0b00 : 0b11, &cpucfg->cpu[cpu].rst);
-> +	writel(reset ? 0b00 : 0b11, SUNXI_CPUCFG_BASE + SUNXI_CPU_RST(cpu));
+> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+> +		if (reset)
+> +			clrbits_le32(SUNXI_CPUCFG_BASE + SUN8I_R528_C0_RST_CTRL,
+> +				     BIT(cpu));
+> +		else
+> +			setbits_le32(SUNXI_CPUCFG_BASE + SUN8I_R528_C0_RST_CTRL,
+> +				     BIT(cpu));
+> +
+> +		return;
+> +	}
+> +
+>  	writel(reset ? 0b00 : 0b11, SUNXI_CPUCFG_BASE + SUNXI_CPU_RST(cpu));
 >  }
 >  
 >  static void __secure sunxi_cpu_set_locking(int cpu, bool lock)
 >  {
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> -
+> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+> +		/* Not required on R528 */
+> +		return;
+> +	}
+> +
 >  	if (lock)
-> -		clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +		clrbits_le32(SUNXI_CPUCFG_BASE + SUNXI_DBG_CTRL1, BIT(cpu));
+>  		clrbits_le32(SUNXI_CPUCFG_BASE + SUNXI_DBG_CTRL1, BIT(cpu));
 >  	else
-> -		setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
-> +		setbits_le32(SUNXI_CPUCFG_BASE + SUNXI_DBG_CTRL1, BIT(cpu));
->  }
+> @@ -165,11 +199,22 @@ static void __secure sunxi_cpu_set_locking(int cpu, bool lock)
 >  
 >  static bool __secure sunxi_cpu_poll_wfi(int cpu)
 >  {
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> -
-> -	return !!(readl(&cpucfg->cpu[cpu].status) & BIT(2));
-> +	return !!(readl(SUNXI_CPUCFG_BASE + SUNXI_CPU_STATUS(cpu)) & BIT(2));
+> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+> +		return !!(readl(SUNXI_CPUCFG_BASE + SUN8I_R528_C0_CPU_STATUS) &
+> +			  BIT(SUN8I_R528_C0_STATUS_STANDBYWFI + cpu));
+> +	}
+> +
+>  	return !!(readl(SUNXI_CPUCFG_BASE + SUNXI_CPU_STATUS(cpu)) & BIT(2));
 >  }
 >  
 >  static void __secure sunxi_cpu_invalidate_cache(int cpu)
 >  {
-> -	struct sunxi_cpucfg_reg *cpucfg =
-> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
-> -
-> -	clrbits_le32(&cpucfg->gen_ctrl, BIT(cpu));
-> +	clrbits_le32(SUNXI_CPUCFG_BASE + SUNXI_GEN_CTRL, BIT(cpu));
+> +	if (IS_ENABLED(CONFIG_MACH_SUN8I_R528)) {
+> +		clrbits_le32(SUNXI_CPUCFG_BASE + SUN8I_R528_C0_CTRL_REG0,
+> +			     BIT(cpu));
+> +		return;
+> +	}
+> +
+>  	clrbits_le32(SUNXI_CPUCFG_BASE + SUNXI_GEN_CTRL, BIT(cpu));
 >  }
 >  
->  static void __secure sunxi_cpu_power_off(u32 cpuid)
-> diff --git a/arch/arm/include/asm/arch-sunxi/cpucfg.h b/arch/arm/include/asm/arch-sunxi/cpucfg.h
-> deleted file mode 100644
-> index 4aaebe0a97..0000000000
-> --- a/arch/arm/include/asm/arch-sunxi/cpucfg.h
-> +++ /dev/null
-> @@ -1,67 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0+ */
-> -/*
-> - * Sunxi A31 CPUCFG register definition.
-> - *
-> - * (C) Copyright 2014 Hans de Goede <hdegoede@redhat.com
-> - */
-> -
-> -#ifndef _SUNXI_CPUCFG_H
-> -#define _SUNXI_CPUCFG_H
-> -
-> -#include <linux/compiler.h>
-> -#include <linux/types.h>
-> -
-> -#ifndef __ASSEMBLY__
-> -
-> -struct __packed sunxi_cpucfg_cpu {
-> -	u32 rst;		/* base + 0x0 */
-> -	u32 ctrl;		/* base + 0x4 */
-> -	u32 status;		/* base + 0x8 */
-> -	u8 res[0x34];		/* base + 0xc */
-> -};
-> -
-> -struct __packed sunxi_cpucfg_reg {
-> -	u8 res0[0x40];		/* 0x000 */
-> -	struct sunxi_cpucfg_cpu cpu[4];		/* 0x040 */
-> -	u8 res1[0x44];		/* 0x140 */
-> -	u32 gen_ctrl;		/* 0x184 */
-> -	u32 l2_status;		/* 0x188 */
-> -	u8 res2[0x4];		/* 0x18c */
-> -	u32 event_in;		/* 0x190 */
-> -	u8 res3[0xc];		/* 0x194 */
-> -	u32 super_standy_flag;	/* 0x1a0 */
-> -	u32 priv0;		/* 0x1a4 */
-> -	u32 priv1;		/* 0x1a8 */
-> -	u8 res4[0x4];		/* 0x1ac */
-> -	u32 cpu1_pwr_clamp;	/* 0x1b0 sun7i only */
-> -	u32 cpu1_pwroff;	/* 0x1b4 sun7i only */
-> -	u8 res5[0x2c];		/* 0x1b8 */
-> -	u32 dbg_ctrl1;		/* 0x1e4 */
-> -	u8 res6[0x18];		/* 0x1e8 */
-> -	u32 idle_cnt0_low;	/* 0x200 */
-> -	u32 idle_cnt0_high;	/* 0x204 */
-> -	u32 idle_cnt0_ctrl;	/* 0x208 */
-> -	u8 res8[0x4];		/* 0x20c */
-> -	u32 idle_cnt1_low;	/* 0x210 */
-> -	u32 idle_cnt1_high;	/* 0x214 */
-> -	u32 idle_cnt1_ctrl;	/* 0x218 */
-> -	u8 res9[0x4];		/* 0x21c */
-> -	u32 idle_cnt2_low;	/* 0x220 */
-> -	u32 idle_cnt2_high;	/* 0x224 */
-> -	u32 idle_cnt2_ctrl;	/* 0x228 */
-> -	u8 res10[0x4];		/* 0x22c */
-> -	u32 idle_cnt3_low;	/* 0x230 */
-> -	u32 idle_cnt3_high;	/* 0x234 */
-> -	u32 idle_cnt3_ctrl;	/* 0x238 */
-> -	u8 res11[0x4];		/* 0x23c */
-> -	u32 idle_cnt4_low;	/* 0x240 */
-> -	u32 idle_cnt4_high;	/* 0x244 */
-> -	u32 idle_cnt4_ctrl;	/* 0x248 */
-> -	u8 res12[0x34];		/* 0x24c */
-> -	u32 cnt64_ctrl;		/* 0x280 */
-> -	u32 cnt64_low;		/* 0x284 */
-> -	u32 cnt64_high;		/* 0x288 */
-> -};
-> -
-> -#endif /* __ASSEMBLY__ */
-> -#endif /* _SUNXI_CPUCFG_H */
+> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> index e891e291f1..23b5b27b97 100644
+> --- a/arch/arm/mach-sunxi/Kconfig
+> +++ b/arch/arm/mach-sunxi/Kconfig
+> @@ -355,6 +355,10 @@ config MACH_SUN8I_R40
+>  config MACH_SUN8I_R528
+>  	bool "sun8i (Allwinner R528)"
+>  	select CPU_V7A
+> +	select CPU_V7_HAS_NONSEC
+> +	select CPU_V7_HAS_VIRT
+> +	select ARCH_SUPPORT_PSCI
+> +	select SPL_ARMV7_SET_CORTEX_SMPEN
+>  	select SUNXI_GEN_NCAT2
+>  	select SUNXI_NEW_PINCTRL
+>  	select MMC_SUNXI_HAS_NEW_MODE
 
