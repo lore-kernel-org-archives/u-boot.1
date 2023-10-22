@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B57CCDB474
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 21:41:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9836C0032E
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 21:55:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E386D874DB;
-	Sun, 22 Oct 2023 23:41:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EEB61877C3;
+	Sun, 22 Oct 2023 23:55:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dQnztGVV";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EfJHkY6U";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C9fATU1C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 792F9875AF; Sun, 22 Oct 2023 23:41:23 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3C0B5877D1; Sun, 22 Oct 2023 23:55:53 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB8D784003
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 23:41:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22CF9875AF
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 23:55:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SDBbM3gsjz9sWZ;
- Sun, 22 Oct 2023 23:41:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1698010879;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=w2423DRu6iiYgsAI+vPIR3LUfaBWRNTpD4vjrLIs8rM=;
- b=dQnztGVVVCxd+UAnVm3zyvo8+pxw3SfaS8U9SQfk+S74ahXRlz/RJ2bwL+EDQqbUF5FsON
- XPuecV7ATKMogvGakO2ejF6X3+ZBQTRaFKimvDGTmWs9BKSy84fOAJ15QIqDocP+SxsXpu
- 7g7Fg4LszKmD9YyUQRGTX2jvGhzIOo1HQOkmFB8m+HjVcpUdLm9P3ljFKIqS3zF/5DwvMZ
- S+hKXkdkaCYUgplCr1w1RELzMvYbFkt+AlPffgVpZVSf/kQvKfrb4qlYD10k2KZfA3OJZ0
- kXBrrcn0S951Tkg4lRcBbAE9h8cQFwVBmcqA5c70u6kzT6vIyOkKT+GCMfSXIQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1698010877;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=w2423DRu6iiYgsAI+vPIR3LUfaBWRNTpD4vjrLIs8rM=;
- b=EfJHkY6Ub+q/sm0P2PcpZLZvZ9A/21LNVt91Mvmz2xbkXWR4diM7LEO+YCukjvW6DUuAOr
- D5SaILuKkGs2gOxxqTUdbiisCWo6uYWBeD4PjfScgH/1UYwBC2xe7dT3wePvGuvf2nj+ZN
- Q7OXEn/FZOsd1YLMivJ27l65sE6y5DJFGJa52Ozc3JwoB8JSSKBZTnW8apPasErA5N2qXz
- swpn7N6KJ9DE+4nOkbPVgycfBMCwz05yAf/b9CkgcB5oIjTYu40ZSHQoGK4VRfxzBWN5uS
- yRogZWKYCPGq8IHuEP6EwsvLLa1e1UrsbyM3+3jkkF5fdaNxXWOWPdLgnr/HVA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] mmc: tmio: Disable 1/1024 clock divider on Renesas R-Car
- platforms
-Date: Sun, 22 Oct 2023 23:40:43 +0200
-Message-ID: <20231022214057.102051-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-53dd752685fso3994747a12.3
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 14:55:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1698011750; x=1698616550; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VFfoo0vQe+y8zTTlhJ0yu6vFZ2LUnDu6FGUJD2L08Vg=;
+ b=C9fATU1Ca7zKSaRHm+VpAuaBKV1+yLGneUljxWgmbxVmgQF/HS53526fGgqr8xNrbp
+ 0VW0dlHrS6aSA/ZpKvq66Bi0jWy6Bv0zqa5Ilt2vu+M3dsITiHLlxnB8HIgiXu7XR90j
+ vijgnmxwV63vJNntINxCzPGwUOEuIH8kkvR9g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698011750; x=1698616550;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VFfoo0vQe+y8zTTlhJ0yu6vFZ2LUnDu6FGUJD2L08Vg=;
+ b=r3O4oG1fD8gUq9UOm/UP5TEtemviZLCsczyOh5UcKdmXiGhOt6v0/73er60o5xikNz
+ V05Pi/CfrJTuJSpWTi75SZbEs79QSiNhgZPq/JxPMz+f9wJIMERCgt414HYmrDGioy+G
+ 2/4sJI4ETDyq19ufX1dQgyCh/q2cmKBs9aAJqJ6NHOMBXccihwP6x6Yxr/k9xr97hiYr
+ C6IvdthSLnpSkxaypzdknlepo/QmZmAujnTP3bdHf0TGs5lL1GAJTRMt7pQBrTzgTvDY
+ m/tkTX329IEav6y9afdepKedrt/TU2dirB543TzOdqLt0IZxtQXhikvl19yoytAewUng
+ Xwtg==
+X-Gm-Message-State: AOJu0Yy6BLyxAsOXYXVne/9aDs2sDnu7LZh0RMzF+ORT7PbPbJ8douQ0
+ XqdCf85cJXU0STOrYoaX8hOQgVsNx9cL03DfdRyf7Q==
+X-Google-Smtp-Source: AGHT+IG9D8w7fNiKtcnW619zzmiXa3TgJZoG2otuXqwz4xAAr2rKT0KCxpZJ0OyYME2n2DLSvjMvELQ6ydTqYpYLemc=
+X-Received: by 2002:a17:906:4784:b0:9be:315d:e607 with SMTP id
+ cw4-20020a170906478400b009be315de607mr6292144ejc.28.1698011750280; Sun, 22
+ Oct 2023 14:55:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 569c687624d716c2882
-X-MBO-RS-META: oq6wmb4ccon3mse4rf5yoxaphiddnztq
+References: <20231016222835.596572-1-sjg@chromium.org>
+ <20231016222835.596572-23-sjg@chromium.org>
+ <20231017140925.GB3119521@bill-the-cat>
+ <cac1ad58-5a7a-41fd-84db-f972609f95c6@gmx.de>
+ <CAPnjgZ2tJEBNWsx_tLDTWyQ+xNyLj6feDenqEcCe+t3JNEdv8g@mail.gmail.com>
+ <ZTHKKurIp67bx2MJ@octopus>
+ <CAPnjgZ1DrzW=2M4UG8aPYmN+MedJODuj5-zE0Y9nVfu-Scpsxw@mail.gmail.com>
+ <20231021182612.GA53397@bill-the-cat>
+ <49cc3e85-bcc1-4a31-a8e0-293e6ecd952b@gmx.de>
+ <20231022142922.GA496310@bill-the-cat> <20231022145857.GB496310@bill-the-cat>
+In-Reply-To: <20231022145857.GB496310@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 22 Oct 2023 14:55:32 -0700
+Message-ID: <CAPnjgZ2fHLrUrqNMFhzK-EbO8bGcgg=1aC9jVPL3mHt_g2xjiA@mail.gmail.com>
+Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,52 +91,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The R-Car Gen3 SD_CLK_CTRL register does not use BIT(16) to implement
-divider 1/1024, instead BIT(16) is reserved bit and divider 1/1024 is
-not supported. The divider 1/1024 is specific to Socionext variant of
-the IP, as is indicated by Linux commit:
+Hi,
 
-0196c8db8363 ("mmc: tmio: move tmio_mmc_set_clock() to platform hook")
-"
-Socionext (and Panasonic) uses bit 10 (CLKSEL) for 1/1.  Also, newer
-versions of UniPhier SoC variants use bit 16 for 1/1024.
-"
+On Sun, 22 Oct 2023 at 07:59, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Oct 22, 2023 at 10:29:22AM -0400, Tom Rini wrote:
+> > On Sun, Oct 22, 2023 at 08:08:11AM +0200, Heinrich Schuchardt wrote:
+> > > On 10/21/23 20:26, Tom Rini wrote:
+> > > > On Sat, Oct 21, 2023 at 08:43:08AM -0700, Simon Glass wrote:
+> > > > > Hi,
+> > > > >
+> > > > > On Thu, 19 Oct 2023 at 17:30, AKASHI Takahiro
+> > > > > <takahiro.akashi@linaro.org> wrote:
+> > > > > >
+> > > > > > On Thu, Oct 19, 2023 at 08:01:11AM -0600, Simon Glass wrote:
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > > On Wed, 18 Oct 2023 at 06:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > >
+> > > > > > > > On 10/17/23 16:09, Tom Rini wrote:
+> > > > > > > > > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
+> > > > > > > > >
+> > > > > > > > > > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
+> > > > > > > > > > available, add it as an explicit dependency.
+> > > > > > > > > >
+> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > ---
+> > > > > > > > > >
+> > > > > > > > > > (no changes since v2)
+> > > > > > > > > >
+> > > > > > > > > > Changes in v2:
+> > > > > > > > > > - Add new patch to update EFI_LOADER to depend on DM_ETH
+> > > > > > > > > >
+> > > > > > > > > >    lib/efi_loader/Kconfig | 1 +
+> > > > > > > > > >    1 file changed, 1 insertion(+)
+> > > > > > > > > >
+> > > > > > > > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > > > > > > > > index 13cad6342c36..fca4b3eef270 100644
+> > > > > > > > > > --- a/lib/efi_loader/Kconfig
+> > > > > > > > > > +++ b/lib/efi_loader/Kconfig
+> > > > > > > > > > @@ -11,6 +11,7 @@ config EFI_LOADER
+> > > > > > > > > >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+> > > > > > > > > >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+> > > > > > > > > >       depends on BLK
+> > > > > > > > > > +    depends on DM_ETH
+> > > > > > > > > >       depends on !EFI_APP
+> > > > > > > > > >       default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
+> > > > > > > > > >       select CHARSET
+> > > > > > > > >
+> > > > > > > > > Does this work for you Heinrich, or do you want to clarify the
+> > > > > > > > > dependencies (and re-organize the code as needed) around networking?
+> > > > > > > > >
+> > > > > > > >
+> > > > > > > > We should be able to boot via EFI on devices without U-Boot network support.
+> > > > > > > >
+> > > > > > > > We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid invoking
+> > > > > > > > eth_get_dev() if there is no network. CONFIG_NETDEVICES=y selects
+> > > > > > > > CONFIG_DM_ETH.
+> > > > > > > >
+> > > > > > > > Why is this not sufficient?
+> > > > > > > > Is there a configuration that does not build?
+> > > > > > >
+> > > > > > > The point of this series is to disable CMDLINE and fix up what breaks.
+> > > > > > >
+> > > > > > > In this case we have some sort of breakage...perhaps Tom has already
+> > > > > > > found it, but otherwise could you take a look?
+> > > > > > >
+> > > > > > > We should be able to disable NET and LTO in sandbox and still build.
+> > > > > > > But this fails at present[1]. You can try it on -master
+> > > > > >
+> > > > > > Obviously, it would be necessary to enclose efi_dp_from_eth()
+> > > > > > with "if defined(CONFIG_NETDEVICES)" (or DM_ETH).
+> > > > > > Then, we could drop "depends on DM_ETH".
+> > > > >
+> > > > > Strange that it only happens on the non-LTO board, though?
+> > > >
+> > > > There's two issues. The first of which is that I think you need to
+> > > > re-check your error exactly? With my series, and LTO also disabled the
+> > > > problem is a call to efi_get_image_parameters() as that's defined in
+> > > > cmd/bootefi.c, but also only used with cmdline invocations. So we can
+> > > > fix that CMDLINE=n && LTO=n case with a IS_ENABLED(CONFIG_CMDLINE)
+> > > > around that, and then discard efi_dp_from_name() entirely.
+> > > >
+> > > > The second issue is that with LTO we more completely find the cases
+> > > > where if x() calls y() and y() is undefined but nothing calls x() we can
+> > > > just discard x() and not care that y() is undefined.
+> > > >
+> > >
+> > > I will send a patch for function efi_dp_from_eth().
+> >
+> > There's no problem with efi_dp_from_eth as far as I can tell.
+> >
+> > > @Simon
+> > >
+> > > One thing that I don't understand is why we don't let the linker
+> > > eliminate the unused functions on the sandbox.
+> > >
+> > > On other architectures we put each function into a separate text section
+> > > and let the linker eliminate the unused text sections:
+> > >
+> > > arch/riscv/config.mk:29:
+> > > PLATFORM_RELFLAGS       += -fno-common -ffunction-sections -fdata-sections
+> > > LDFLAGS_u-boot          += --gc-sections -static -pie
+> > >
+> > > Shouldn't we keep the sandbox close to what other architectures do?
+> >
+> > Oh my, I didn't realize that sandbox was missing the garbage collection
+> > stuff.  Yes, that needs to be fixed first, then we can see what's next
+> > to change, as there are some issues (my series first fixed CMDLINE=n on
+> > qemu_arm64).
+>
+> My super quick pass at enabling
+> function-sections/data-sections/gc-sections shows there's nothing
+> further needed for CMDLINE=n and LTO=n on sandbox, not even the part I
+> was looking at before.
 
-Do not set the TMIO_SD_CAP_DIV1024 on Renesas R-Car platforms even if
-the IP VERSION register does exist, and indicates IP version is newer
-or equal to version 1.0 . The IP version 1.0 or newer does not imply
-presence of the 1/1024 divider.
+I am not sure about the original reason, but sandbox probably
+pre-dates wholesale enabling of gc-sections (I haven't looked). There
+is also the issue of whether the host toolchain supports it. Sandbox
+is supposed to run on a variety of OS types.
 
-Since the TMIO driver is used exactly by two supported platforms, that
-is Renesas R-Car and Socionext UniPhier, it is OK to check whether the
-TMIO_SD_CAP_RCAR capability is not set to identify the UniPhier platform
-and add the capability only on that platform.
+I am also not sure of the point ot it...since it is normally pretty
+easy to use Kconfig to control features.
 
-Fixes: 58c35b17aa8f ("mmc: matsushita-common: Always check controller version")
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Peng Fan <peng.fan@nxp.com>
----
- drivers/mmc/tmio-common.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+At least for me 'u-boot -D' doesn't work with Heinrich's patch. Do we
+really need to make this change? It will rapidly devolve to the point
+that coming back would be extremely painful.
 
-diff --git a/drivers/mmc/tmio-common.c b/drivers/mmc/tmio-common.c
-index 83eaf361f0c..890c496b535 100644
---- a/drivers/mmc/tmio-common.c
-+++ b/drivers/mmc/tmio-common.c
-@@ -759,7 +759,8 @@ int tmio_sd_probe(struct udevice *dev, u32 quirks)
- 	dev_dbg(dev, "version %x\n", priv->version);
- 	if (priv->version >= 0x10) {
- 		priv->caps |= TMIO_SD_CAP_DMA_INTERNAL;
--		priv->caps |= TMIO_SD_CAP_DIV1024;
-+		if (!(priv->caps & TMIO_SD_CAP_RCAR))
-+			priv->caps |= TMIO_SD_CAP_DIV1024;
- 	}
- 
- 	if (fdt_get_property(gd->fdt_blob, dev_of_offset(dev), "non-removable",
--- 
-2.42.0
-
+Regards,
+Simon
