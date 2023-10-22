@@ -4,129 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 065FBCDB474
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 15:18:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C61DECDB474
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 15:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C19287769;
-	Sun, 22 Oct 2023 17:18:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EDE287787;
+	Sun, 22 Oct 2023 17:55:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="oev3EiIw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ass9CgaM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABEDC87768; Sun, 22 Oct 2023 17:18:37 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20602.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::602])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 09E0587717; Sun, 22 Oct 2023 17:55:50 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40A9087768
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 17:18:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 954BF87782
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 17:55:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=T1KIRDDHJtGf+Yb+uarH+kLEdQPfrQBA4eop0gyC/TW2nCT29tjlXYK2A45MUjG7GSZ3sdbWXhiVGweK8u0vOn1pPrUelkQdm/3mQB3WmwFEqIZDtX+3ADvNBhe2P9bzF9oveI8ZsImBYFXuCkTN7DugAI7+toDOOg3XtBxEvODf32wNL5euy6KPoSO6U5q74tp1jYvfINHQYpJm2/8a9ueUlE1iPuHujqGzn9IWmcoibXJ/2w1DwHhz3zBGyKnG4pIlnhLPm+Kcrc4Jobxq5c7791lOhLjYMcRSJuS660/x2HvY3/YEcMABvB9E5YMmD5dGiVXvLPmA6fDNwAAt5w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yzl5T0uTcoc5JNJLmm9RWzKzm+GVLkmaR90/qRDP/0s=;
- b=T7+ltlP61/EyHvI3L7otIgPTOuLFKrj8u2Pw2J0gn9U7RENgbKe51EOmHqbDLQThFpEzhPzlCaXGUvvL+u5gbWVUQPTWzT7rCQDV4WJPyqjB+djJSNflCaC6BdSI4INZGfikGAe8lBxY3olkCy4o3C2oK4TNG32cjbAHYf96nIz1PSaneYDgyVLJaOumUlf9bhPPjKoFmkrq//5ZwNs2bQjGGkteIjPJMr8NPLhKX7m+A3nlQcGJI0cWKkFbZ11Z8iAhFUZUS/XDFCXAOIatxYn/psNm2ok6fw7eNiKPKJkZiLGp9scc42l2Eq5uhBXG0XCfX+UCvQ2yRtJGda/RvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yzl5T0uTcoc5JNJLmm9RWzKzm+GVLkmaR90/qRDP/0s=;
- b=oev3EiIwEKRT+PY6NXdB63A8Be+dyd7RZORUAd2sR7zGnwyrGFP9d0VxxlIOSP9arkNaMxQuzNx7ofQeru82s8Y8V8/WOS39vCNwx4JguUE51U82eFwb78yf8hzTGm/XhUCVuc/cOBcemJr9Lm1mjknxgJaOV5zWdYoyisg87jKGwIjGago4cwlicS+0qxygdfcuXBXweQ3UUgr8Vh77cKZupVHzrjJLM0Ha+FiuJUuiOVElP73+CqvPcwxkSkMnUaMBmKptwORfy60hMR3z67gt3qc0MQp0Cz/A6+z+zSPBfg+zAbMijVzi3v/ydcahQubbvcINdIccS6eAZy3JJA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by AS2PR10MB6734.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55e::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.26; Sun, 22 Oct
- 2023 15:18:34 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::2a90:96cb:b3f:6e5]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::2a90:96cb:b3f:6e5%2]) with mapi id 15.20.6907.025; Sun, 22 Oct 2023
- 15:18:34 +0000
-Message-ID: <d1d6efbd-32f7-40e2-8c20-8eac06bd6075@siemens.com>
-Date: Sun, 22 Oct 2023 17:18:31 +0200
-User-Agent: Mozilla Thunderbird
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Subject: [PATCH] iot2050: Allow for more than 1 USB storage device
-Content-Language: en-US
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: "Su, Bao Cheng (RC-CN DF FA R&D)" <baocheng.su@siemens.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0410.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:d0::15) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-d9a6399cf78so2035987276.0
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 08:55:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697990146; x=1698594946; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SUDcxU2+9ZnHcBmj9JImOWgtfhK2/j8bVKAvlIIaX9E=;
+ b=ass9CgaMORzYpDMkOlapT8QAMYaq9m5bkHD8uFztzWvvhSn7JW2Zx8Ie0WaiYUyUJ9
+ /DTbjoQHd2yUbpKt0Z0tAH7Yki54fOWW/RhU18pbaF1LU58ZIWcgS3QKg+hQ4YWiJAmw
+ wG9H0rUG8LuisK1XNVqgzUYYqvzeqlTeKWT9c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697990146; x=1698594946;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SUDcxU2+9ZnHcBmj9JImOWgtfhK2/j8bVKAvlIIaX9E=;
+ b=Jt/Hs+PRfSH4KlDbxvQW+T+qDy90ropfwZ1CnUENiz2tv37GSmkpPkr20Z5eUeqlvk
+ G6z/QOsoB8vrbO0Ue6Fq48wFty3G7BWalY1b2EOylLSM3PhTfJmcm0ei/SYmGou85neu
+ YRYYYkVfKhDbcn+s+vBIjztibP+dOJLY6tUfx3XoD75NqKSVii5O+SbDOsU6I0Goqn9m
+ pytFZgv1koaVCRM6hkINSPWbWDLl+TkWGJbKo3Zmjbn4t7R8cyLPaRdVEW0Synq9JIpx
+ bt5XsV6x23EgqAXbtQ8/oyztidw0rVBI4BybI6VF2hzyDM7jL7SjMEXRSbBZoVkiKKop
+ Qz1w==
+X-Gm-Message-State: AOJu0Yy3WzRGL0gX0RJTBEBFxGjeL4Cal5++HqDmRdwPYNPkaCfpysU6
+ xlOCfPTpr9jWpJZeUblsxgPivMrPLkn7fUNRv0yFtg==
+X-Google-Smtp-Source: AGHT+IFVcxIhDBuxzZ+lFBjlbL/nmZezxY/R767cRUh+u3V0J08gHghmA84OULeqWOdZW4blGFLF2A==
+X-Received: by 2002:a25:d111:0:b0:d9a:be2c:ce3d with SMTP id
+ i17-20020a25d111000000b00d9abe2cce3dmr9755759ybg.8.1697990146228; 
+ Sun, 22 Oct 2023 08:55:46 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d02f-b9d9-0a79-793c.res6.spectrum.com.
+ [2603:6081:7b00:6400:d02f:b9d9:a79:793c])
+ by smtp.gmail.com with ESMTPSA id
+ v73-20020a25abcf000000b00d9b4ddf1c32sm2070127ybi.2.2023.10.22.08.55.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 22 Oct 2023 08:55:45 -0700 (PDT)
+Date: Sun, 22 Oct 2023 11:55:43 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v3 1/1] efi_loader: expose the device-tree file name
+Message-ID: <20231022155543.GC496310@bill-the-cat>
+References: <20231022084733.113326-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|AS2PR10MB6734:EE_
-X-MS-Office365-Filtering-Correlation-Id: e5c7d4e2-0a0f-430e-6ac1-08dbd31227e8
-X-LD-Processed: 38ae3bcd-9579-4fd4-adda-b42e1495d55a,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: I1R1N9C4Q1exSSY8Uj4kudIYS5lV3kf6vSXmqqRBjr632qoOxO2ayibXMO5r4pk8xqJZ8PHWIluUx45aP/hm6VEvmZ2aA8YojX4riJ1UMIrh+RHrHc+T7y5V/WlHi3SKzsxdYwaS+zcBbwi0neMWiHl2IzWUYfcyc0/btPNtAs97zjoJklrCTux34RRUkM7yIymTN4791JKUMk0F0ogHsOklaDWvojNY4SCfWhL5wvcDpKCfC69UEDrxZTtH5RNdb2Dfbh+i499ry15dnNoRZrI33eFTjSb5RDu6xEhkrfUdzft8Qac0Qb3gdq7hw0uzw40wfap3OJ6peesuANn/6ZV9/wOA5mtTBXdu97ZQ+rB5Uk0YKRlZTaWqpjWFKN5qpQ7aFjuBuccezKEckZVEkc3LsR0tCxUlMeLxIo934IZkRSygyDKwm0MRmcS4SVhDuLCWvANZjkYmOlfX3cfDGEU1IbpAe5lF3Jy2/7ZsVKRnx20t/tFTRNCDKMawK9N2X9RmC9zsNBTGqP0pWYmEYykuAiThsqOYZcEh/+1dVBQ9nhX/YhozjIAjwm7qtplgH/q4UhO/oF/AiQ7eKp0mmEq58DIHdutVC2GpdiVd+gUHQiy2naNpsn6VMWY5hOK/AUTmz9FVqdbTLZoSUkrKxw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(136003)(39860400002)(376002)(346002)(366004)(230922051799003)(451199024)(1800799009)(186009)(64100799003)(82960400001)(38100700002)(86362001)(31696002)(36756003)(54906003)(316002)(6916009)(66556008)(66476007)(66946007)(2616005)(6512007)(26005)(478600001)(6486002)(6506007)(6666004)(41300700001)(4744005)(2906002)(8936002)(4326008)(8676002)(31686004)(44832011)(5660300002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Smk0Ly9PNkIvRnRTMjdyQTVBU3lkM0F0eWxqZUJYS2RZVWdFYXpSa2dCNko1?=
- =?utf-8?B?OUN2UTdyaklQUHZBQmc1S004amhvZThRaHEybnRGZEFrdnJWZTZvR0JhVEdG?=
- =?utf-8?B?amdQU2FZaTdMYXliZjExbEEvSjJBOUMzRVJUbkRrL08vYUhmTHBPS1hLWThO?=
- =?utf-8?B?R2M4UjZmeFpzUnR5aHRJZ1Z5QWJGL2lnOTEzME5VZExsT1oyeTZYR25nRVlx?=
- =?utf-8?B?YW5hU1h3eVlqZC9kVXFZdXpnOTJMTkttcUMwT1BMK0xWM0ZYTFlVVWJKOGpM?=
- =?utf-8?B?SHErTkI4VlBNL0dWbWRWT29xeXBSRk5ZcVpVV0RiZUhxYVJjeU9ReE5nMVVB?=
- =?utf-8?B?aFRyWERhSG40clhZbzlvNWU5cFBCbm55Nnd4TUdFYVJDclh3TXhrQjdES1hL?=
- =?utf-8?B?RmRBeTJmVTRuNmppbXlEbmwvdDZPeVZtbllYdFBHdFgxckdwajNkcFZpUzVN?=
- =?utf-8?B?YTkydnZrNitGSnB2MDdzN3VheUIyRTVjYTJoKzFpd0tNaFZYSUN0Q1J5dmcy?=
- =?utf-8?B?dmhtQXJjeW8yNzYxYjhLbG4vQkZZcWhqZzhUcjlBcWpkSlFwYm0xT1VGeXEz?=
- =?utf-8?B?WUUyNWhOYkdLL2o3Ymx6MzEvbEVOTW9xcTVxWVFxWjdCYldmSXdPRWlndEZq?=
- =?utf-8?B?OGR1c3JsQkNNZkt3aDAvLytzRlh4b3Vqd3pnajhxc3MycG56alRRZ3B5NG8x?=
- =?utf-8?B?L0cxK2ZBUUVYR2gyc0tsVTI5bEVtWnZBdnZEdEtWR21SUHdTRXluaHFsNlV3?=
- =?utf-8?B?U2taT3RrMFNCOC9DTWVLWHNjMlpJMDFZT0VGRXRDcXRpOGNVaGJzM1VwY3Bs?=
- =?utf-8?B?RllWekVkWWxsaGw1b254aGdaMXpuVUVoVGluZEl5d1BOeXFOL3BuMzF2OFRE?=
- =?utf-8?B?REZuMFYzWVpKOUU4ZnE3Mk9udzg1SVV2eTRIaXNWZmZqeG9yN3gyRWNqYzlr?=
- =?utf-8?B?T3l2OXRuTCtzamNXd2VRYkNkZG1SU3NJU3VWU2Znd0toczN1elRLWnNjejBH?=
- =?utf-8?B?ZXB6aTIvNWJ0TE1WTE40VEVzOXo1OGQ2aEl4OXgzb2ttMSt0OWxCcHhjbzls?=
- =?utf-8?B?RkVsaDR6RytHa21SV1RtaTBWTVpqbXZjdmFjbTdzWUV4R2JYQ0YzL2lBOSt6?=
- =?utf-8?B?ZkNqN2hIUlpmb1BTN2o4MDNSK3lNcDZtZHVaRndYMjE4ZVlDNG5sSm1iZjQ0?=
- =?utf-8?B?S0dTMXpoa29MR3JjQzJSSk80cldYc3VtOXIrK0JWcjBNS0xzb2h2L0gwVWxS?=
- =?utf-8?B?eUtYUkM2YXI4aGZlQkdWVnBSK2tpZ0VRT1BBNTR2Y0lacHFsd2o0Y3pKeHF5?=
- =?utf-8?B?dXVSUDNlWlZELzF3UW5GQ0UrSmkwZG85dWpndVJsU08wM2xjbHI0cUppT2xL?=
- =?utf-8?B?QnZZZllUejRtdnBBYkJyV3ZqVThXNThGZ3dZbC9TL1FqeUpPRG1pY0QyNHpV?=
- =?utf-8?B?dWxPbm90WVI4SnZIN0FmT0U4VGdEakhMSC85dFRiWFJhU3RkRDg2QzRYMWdK?=
- =?utf-8?B?ZUZXVjJOU1ZSSUxTREczZS90RUEvUDhKOGVNVFJwZ3hLRDloaGRaOHRYTE44?=
- =?utf-8?B?OTh3Y004bDhta0pIYmZkeEl0eWhtaEpXSTNYZzRpZDlsdnpuM1p3L1cxZDJk?=
- =?utf-8?B?YlJqSmdnT0RuMUtha3VwNGRMT0xVYTJiTDRWTzNEV005S3lwc2VrOGlxSTZv?=
- =?utf-8?B?VVFFYm9mTDZxU2dpdmVoMWk3ajFUc3VmMWhNb0hmd1J6ZFFzaXN1TjJWeHRW?=
- =?utf-8?B?ZDlnendwUUpDQitjNE9kVjFHeGYydWRPTDJraGI0MWZmeWZld2ZsVUNXZFA5?=
- =?utf-8?B?RVZVQ3dyMDdEQXBxZzJJUDgyQzRCWVkzSFYrcmFXTGxvWk1pWVV4YUY5SGpP?=
- =?utf-8?B?ZGFIV082YzhocUpUYStkSG92SVc2KzZHbStFL1JTSWtjVW5LNlkySTlYY3h3?=
- =?utf-8?B?aXZVNkErbXF5dU9pNE41d3FTNUMzL0lNL1I1aGs2MUxEalFKSG16dTl6ODFQ?=
- =?utf-8?B?ditNNHhGTWlhSkNBVEt0dXRtZnZqSWhOYmJqWjBSa2tRbVdUQkJDaGdCbVEx?=
- =?utf-8?B?b2JIaVFrUWMxT09jWGh6VU5aQzY3NnNLeUJJS3c4Q0tCT280WXBBK0gwbCty?=
- =?utf-8?Q?9HtDio7N2GakOzJTqsV8lELRG?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e5c7d4e2-0a0f-430e-6ac1-08dbd31227e8
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2023 15:18:34.0296 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: naa8Xu3818/3K+LRRf7BubU/i+1x4tR2Tl2OdAwBdnHJjIiJCT0z626KrDMGYohTCb7hftbM4IkFQj78tDImrw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6734
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NG+WQDmRLihtPJxe"
+Content-Disposition: inline
+In-Reply-To: <20231022084733.113326-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,35 +92,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
 
-This was lost via 53873974a4b0 while some users of the IOT2050 expect it
-to work: Make sure that up to 3 USB storage devices are probed.
+--NG+WQDmRLihtPJxe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
- include/configs/iot2050.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+On Sun, Oct 22, 2023 at 10:47:33AM +0200, Heinrich Schuchardt wrote:
 
-diff --git a/include/configs/iot2050.h b/include/configs/iot2050.h
-index 4968722d18f..1d444d02c83 100644
---- a/include/configs/iot2050.h
-+++ b/include/configs/iot2050.h
-@@ -15,6 +15,15 @@
- 
- #include <configs/ti_armv7_common.h>
- 
-+/* allow up to 3 USB storage devcies */
-+#ifdef CONFIG_CMD_USB
-+#undef BOOT_TARGET_USB
-+#define BOOT_TARGET_USB(func) \
-+	func(USB, usb, 0) \
-+	func(USB, usb, 1) \
-+	func(USB, usb, 2)
-+#endif
-+
- /*
-  * This defines all MMC devices, even if the basic variant has no mmc1.
-  * The non-supported device will be removed from the boot targets during
--- 
-2.35.3
+> Forward and backward compatibility of Linux kernel device-trees is
+> sometimes missing. One solution approach is to load a kernel specific
+> device-tree. This can either be done via a U-Boot scripts (like the one
+> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> The boot loader approach currently requires to know the device-tree name
+> before first boot which makes it unusable for generic images.
+>=20
+> Expose the device-tree file name as EFI variable FdtFile.
+> This will allow bootloaders to load a kernel specific device-tree.
+>=20
+> The variable will not be exposed on ACPI based systems or if the
+> environment variable fdtfile is not defined.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v3:
+> 	Add documentation
+> v2:
+> 	Use a unique GUID to enable future U-Boot independent
+> 	standardization.
+> 	Do not try to add the variable on ACPI based systems.
+> ---
+>  doc/develop/uefi/uefi.rst  | 17 +++++++++++++++++
+>  include/efi_loader.h       |  5 +++++
+>  lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+>  3 files changed, 52 insertions(+)
+>=20
+> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> index fb16ac743a..a81d09ae81 100644
+> --- a/doc/develop/uefi/uefi.rst
+> +++ b/doc/develop/uefi/uefi.rst
+> @@ -916,6 +916,23 @@ So our final format of the FilePathList[] is::
+> =20
+>      Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x=
+01) - initrd_n ...] - end node (0xff)
+> =20
+> +EFI variable FdtFile
+> +~~~~~~~~~~~~~~~~~~~~
+> +
+> +Ideally U-Boot would always expose a device-tree that can be used for bo=
+oting
+> +any operating systems. Unfortunately operating systems like Linux someti=
+mes
+> +break forward and backward compatibility. In this case there is a need t=
+o load
+> +an operating system version specific device-tree.
+> +
+> +U-Boot has an environment variable fdtfile identifying the device-tree f=
+ile to
+> +load. The content of this variable is exposed as EFI variable Fdtfile, v=
+endor
+> +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree p=
+ath
+> +name as a NUL terminated ASCII string.
+> +
+> +On 32bit ARM this is currently only a file name, e.g. 'imx6dl-wandboard.=
+dtb'.
+> +On other architectures the file name is preceded by the vendor directory=
+, e.g.
+> +'rockchip/rk3326-odroid-go2.dtb'.
+
+The Linux Kernel has split 32bit ARM up by directory now, too.
+
+--=20
+Tom
+
+--NG+WQDmRLihtPJxe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU1RfgACgkQFHw5/5Y0
+tyw+lQwAm6+DdYCh+j0+N52XDhPxcf/+MFTolR7Z8vKjsawsb9CEqMC1/pGmGn2P
+uNSSEkhiW31nYDGBWVkDScX64SOMn9E4swMYVpzdJEDBcCAvIEcHzu62P+nBhOqT
+z8/6fG/Wh8fOUrC7Vl3tLe9DrAEJVQs07aK7MwazUKcPDrjuiwbeyNwUnl/tjqY+
+mRvJmrIxFs6RbBCcUq0/SWDaUR8+v7AmPEUWYVYmKven7L4mV2aC9h5N7HTh5Di4
+xPd9IoB+TDCIEV8n12CG78hNs2LbXtseIx1Y+FAf99tVjI6zhzaB2gRI4dOpnQV4
+eg8B4FzF+aZ0foZMJmll63yOO5hAVjupx4XSfK124EqU22V4qCYQq6JX6Kcubevq
+jXW+kEkBZyn0dUoge55/+uzL8dkVwBNllz3Ncv0gwL+wT/CmeOCkJWfAVxf+mtPz
+CqRJ3MB4WAfZnjxqmPmstcMRViBTdCAUOdccAsOqfeU2PrguzCsJ7QmDS/eIBLX/
+qnhpeOwo
+=tdE+
+-----END PGP SIGNATURE-----
+
+--NG+WQDmRLihtPJxe--
