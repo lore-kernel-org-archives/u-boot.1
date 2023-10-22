@@ -4,42 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F919C001E0
-	for <u-boot@archiver.kernel.org>; Sat, 21 Oct 2023 23:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7889C001E0
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 00:49:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C16E7875CA;
-	Sun, 22 Oct 2023 01:47:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 383F087671;
+	Sun, 22 Oct 2023 02:49:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F83187618; Sun, 22 Oct 2023 01:47:14 +0200 (CEST)
+ id 07E3E87672; Sun, 22 Oct 2023 02:49:48 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 46BD0875BC
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 01:47:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id AF9DC87522
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 02:49:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AC680C15;
- Sat, 21 Oct 2023 16:47:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A735AC15;
+ Sat, 21 Oct 2023 17:50:21 -0700 (PDT)
 Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D9C23F64C;
- Sat, 21 Oct 2023 16:47:07 -0700 (PDT)
-Date: Sun, 22 Oct 2023 00:46:03 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9E1E33F64C;
+ Sat, 21 Oct 2023 17:49:39 -0700 (PDT)
+Date: Sun, 22 Oct 2023 01:48:36 +0100
 From: Andre Przywara <andre.przywara@arm.com>
-To: Samuel Holland <samuel@sholland.org>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
- <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards
- <cfsworks@gmail.com>, Okhunjon Sobirjonov <okhunjon72@gmail.com>,
- linux-sunxi@lists.linux.dev, andre.przywara@foss.arm.com, Jagan Teki
- <jagan@amarulasolutions.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 05/22] pinctrl: sunxi: add GPIO in/out wrappers
-Message-ID: <20231022004603.35a5c10d@slackpad.lan>
-In-Reply-To: <62360412-0e23-b35d-b93a-7bebebe83adf@sholland.org>
-References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-6-andre.przywara@arm.com>
- <62360412-0e23-b35d-b93a-7bebebe83adf@sholland.org>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
+ Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
+Subject: Re: [PATCH v4 3/4] sunxi: psci: stop modeling register layout with
+ C structs
+Message-ID: <20231022014836.3bff1cc4@slackpad.lan>
+In-Reply-To: <20231012014756.2573473-4-CFSworks@gmail.com>
+References: <20231012014756.2573473-1-CFSworks@gmail.com>
+ <20231012014756.2573473-4-CFSworks@gmail.com>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
@@ -61,156 +59,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 21 Oct 2023 03:30:48 -0500
-Samuel Holland <samuel@sholland.org> wrote:
+On Wed, 11 Oct 2023 19:47:55 -0600
+Sam Edwards <cfsworks@gmail.com> wrote:
 
-> Hi Andre,
+> Since the sunxi support nowadays generally prefers #defined register
+> offsets instead of modeling register layouts using C structs, now is a
+> good time to do this for PSCI as well. This patch moves away from using
+> the structs `sunxi_cpucfg_reg` and `sunxi_prcm_reg` in psci.c.
 > 
-> On 9/28/23 16:54, Andre Przywara wrote:
-> > So far we were open-coding the pincontroller's GPIO output/input access
-> > in each function using that.
-> > 
-> > Provide functions that wrap that nicely, and follow the existing pattern
-> > (set/get_{bank,}), so users don't need to know about the internals, and
-> > we can abstract the new D1 pinctrl more easily.
-> > 
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> >  drivers/gpio/sunxi_gpio.c | 55 ++++++++++++++++++---------------------
-> >  1 file changed, 25 insertions(+), 30 deletions(-)
-> > 
-> > diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
-> > index 71c3168b755..a4b336943b6 100644
-> > --- a/drivers/gpio/sunxi_gpio.c
-> > +++ b/drivers/gpio/sunxi_gpio.c
-> > @@ -81,6 +81,19 @@ int sunxi_gpio_get_cfgpin(u32 pin)
-> >  	return sunxi_gpio_get_cfgbank(pio, pin);
-> >  }
-> >  
-> > +static void sunxi_gpio_set_output_bank(struct sunxi_gpio *pio,
-> > +				       int pin, bool set)
-> > +{
-> > +	u32 mask = 1U << pin;
-> > +
-> > +	clrsetbits_le32(&pio->dat, set ? 0 : mask, set ? mask : 0);
-> > +}
-> > +
-> > +static int sunxi_gpio_get_output_bank(struct sunxi_gpio *pio, int pin)  
+> The former struct and its associated header file existed only to support
+> PSCI code, so also delete them altogether.
 > 
-> "get_output" is a bit misleading when this pin is an input, so maybe
-> "set_value" and "get_value" would be more accurate.
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 
-Good point, changed that.
+Thanks for doing this!
 
-> 
-> > +{
-> > +	return !!(readl(&pio->dat) & (1U << pin));
-> > +}
-> > +
-> >  void sunxi_gpio_set_drv(u32 pin, u32 val)
-> >  {
-> >  	u32 bank = GPIO_BANK(pin);
-> > @@ -117,35 +130,20 @@ void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
-> >  /* =========== Non-DM code, used by the SPL. ============ */
-> >  
-> >  #if !CONFIG_IS_ENABLED(DM_GPIO)
-> > -static int sunxi_gpio_output(u32 pin, u32 val)
-> > +static void sunxi_gpio_set_output(u32 pin, bool set)
-> >  {
-> > -	u32 dat;
-> >  	u32 bank = GPIO_BANK(pin);
-> > -	u32 num = GPIO_NUM(pin);
-> >  	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> >  
-> > -	dat = readl(&pio->dat);
-> > -	if (val)
-> > -		dat |= 0x1 << num;
-> > -	else
-> > -		dat &= ~(0x1 << num);
-> > -
-> > -	writel(dat, &pio->dat);
-> > -
-> > -	return 0;
-> > +	sunxi_gpio_set_output_bank(pio, GPIO_NUM(pin), set);
-> >  }
-> >  
-> > -static int sunxi_gpio_input(u32 pin)
-> > +static int sunxi_gpio_get_output(u32 pin)
-> >  {
-> > -	u32 dat;
-> >  	u32 bank = GPIO_BANK(pin);
-> > -	u32 num = GPIO_NUM(pin);
-> >  	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-> >  
-> > -	dat = readl(&pio->dat);
-> > -	dat >>= num;
-> > -
-> > -	return dat & 0x1;
-> > +	return sunxi_gpio_get_output_bank(pio, GPIO_NUM(pin));
-> >  }
-> >  
-> >  int gpio_request(unsigned gpio, const char *label)
-> > @@ -168,18 +166,21 @@ int gpio_direction_input(unsigned gpio)
-> >  int gpio_direction_output(unsigned gpio, int value)
-> >  {
-> >  	sunxi_gpio_set_cfgpin(gpio, SUNXI_GPIO_OUTPUT);
-> > +	sunxi_gpio_set_output(gpio, value);
-> >  
-> > -	return sunxi_gpio_output(gpio, value);
-> > +	return 0;
-> >  }
-> >  
-> >  int gpio_get_value(unsigned gpio)
-> >  {
-> > -	return sunxi_gpio_input(gpio);
-> > +	return sunxi_gpio_get_output(gpio);
-> >  }
-> >  
-> >  int gpio_set_value(unsigned gpio, int value)
-> >  {
-> > -	return sunxi_gpio_output(gpio, value);
-> > +	sunxi_gpio_set_output(gpio, value);
-> > +
-> > +	return 0;
-> >  }
-> >  
-> >  int sunxi_name_to_gpio(const char *name)
-> > @@ -231,13 +232,8 @@ int sunxi_name_to_gpio(const char *name)
-> >  static int sunxi_gpio_get_value(struct udevice *dev, unsigned offset)
-> >  {
-> >  	struct sunxi_gpio_plat *plat = dev_get_plat(dev);
-> > -	u32 num = GPIO_NUM(offset);
-> > -	unsigned dat;
-> > -
-> > -	dat = readl(&plat->regs->dat);
-> > -	dat >>= num;
-> >  
-> > -	return dat & 0x1;
-> > +	return sunxi_gpio_get_output_bank(plat->regs, offset) & 0x1;  
-> 
-> You don't need the "& 0x1" anymore. Otherwise:
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
-Ah, correct, we have a !! in the callee now. Fixed.
-
-> Reviewed-by: Samuel Holland <samuel@sholland.org>
-
-Thanks!
+Cheers,
 Andre
 
+> ---
+>  arch/arm/cpu/armv7/sunxi/psci.c          | 57 ++++++++------------
+>  arch/arm/include/asm/arch-sunxi/cpucfg.h | 67 ------------------------
+>  2 files changed, 23 insertions(+), 101 deletions(-)
+>  delete mode 100644 arch/arm/include/asm/arch-sunxi/cpucfg.h
 > 
-> >  }
-> >  
-> >  static int sunxi_gpio_get_function(struct udevice *dev, unsigned offset)
-> > @@ -275,9 +271,8 @@ static int sunxi_gpio_set_flags(struct udevice *dev, unsigned int offset,
-> >  
-> >  	if (flags & GPIOD_IS_OUT) {
-> >  		u32 value = !!(flags & GPIOD_IS_OUT_ACTIVE);
-> > -		u32 num = GPIO_NUM(offset);
-> >  
-> > -		clrsetbits_le32(&plat->regs->dat, 1 << num, value << num);
-> > +		sunxi_gpio_set_output_bank(plat->regs, offset, value);
-> >  		sunxi_gpio_set_cfgbank(plat->regs, offset, SUNXI_GPIO_OUTPUT);
-> >  	} else if (flags & GPIOD_IS_IN) {
-> >  		u32 pull = 0;  
-> 
+> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
+> index 27ca9c39e1..207aa6bc4b 100644
+> --- a/arch/arm/cpu/armv7/sunxi/psci.c
+> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
+> @@ -11,8 +11,6 @@
+>  #include <asm/cache.h>
+>  
+>  #include <asm/arch/cpu.h>
+> -#include <asm/arch/cpucfg.h>
+> -#include <asm/arch/prcm.h>
+>  #include <asm/armv7.h>
+>  #include <asm/gic.h>
+>  #include <asm/io.h>
+> @@ -27,6 +25,17 @@
+>  #define	GICD_BASE	(SUNXI_GIC400_BASE + GIC_DIST_OFFSET)
+>  #define	GICC_BASE	(SUNXI_GIC400_BASE + GIC_CPU_OFFSET_A15)
+>  
+> +/*
+> + * Offsets into the CPUCFG block applicable to most SUNXIs.
+> + */
+> +#define SUNXI_CPU_RST(cpu)			(0x40 + (cpu) * 0x40 + 0x0)
+> +#define SUNXI_CPU_STATUS(cpu)			(0x40 + (cpu) * 0x40 + 0x8)
+> +#define SUNXI_GEN_CTRL				(0x184)
+> +#define SUNXI_PRIV0				(0x1a4)
+> +#define SUN7I_CPU1_PWR_CLAMP			(0x1b0)
+> +#define SUN7I_CPU1_PWROFF			(0x1b4)
+> +#define SUNXI_DBG_CTRL1				(0x1e4)
+> +
+>  /*
+>   * R40 is different from other single cluster SoCs.
+>   *
+> @@ -99,10 +108,7 @@ static void __secure sunxi_cpu_set_entry(int __always_unused cpu, void *entry)
+>  		writel((u32)entry,
+>  		       SUNXI_SRAMC_BASE + SUN8I_R40_SRAMC_SOFT_ENTRY_REG0);
+>  	} else {
+> -		struct sunxi_cpucfg_reg *cpucfg =
+> -			(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> -
+> -		writel((u32)entry, &cpucfg->priv0);
+> +		writel((u32)entry, SUNXI_CPUCFG_BASE + SUNXI_PRIV0);
+>  	}
+>  }
+>  
+> @@ -110,26 +116,21 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
+>  {
+>  	u32 *clamp = NULL;
+>  	u32 *pwroff;
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+>  
+>  	/* sun7i (A20) is different from other single cluster SoCs */
+>  	if (IS_ENABLED(CONFIG_MACH_SUN7I)) {
+> -		clamp = &cpucfg->cpu1_pwr_clamp;
+> -		pwroff = &cpucfg->cpu1_pwroff;
+> +		clamp = (void *)SUNXI_CPUCFG_BASE + SUN7I_CPU1_PWR_CLAMP;
+> +		pwroff = (void *)SUNXI_CPUCFG_BASE + SUN7I_CPU1_PWROFF;
+>  		cpu = 0;
+>  	} else if (IS_ENABLED(CONFIG_MACH_SUN8I_R40)) {
+> -		clamp = (void *)cpucfg + SUN8I_R40_PWR_CLAMP(cpu);
+> -		pwroff = (void *)cpucfg + SUN8I_R40_PWROFF;
+> +		clamp = (void *)SUNXI_CPUCFG_BASE + SUN8I_R40_PWR_CLAMP(cpu);
+> +		pwroff = (void *)SUNXI_CPUCFG_BASE + SUN8I_R40_PWROFF;
+>  	} else {
+> -		struct sunxi_prcm_reg *prcm =
+> -			(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> -
+>  		if (IS_ENABLED(CONFIG_MACH_SUN6I) ||
+>  		    IS_ENABLED(CONFIG_MACH_SUN8I_H3))
+> -			clamp = &prcm->cpu_pwr_clamp[cpu];
+> +			clamp = (void *)SUNXI_PRCM_BASE + 0x140 + cpu * 0x4;
+>  
+> -		pwroff = &prcm->cpu_pwroff;
+> +		pwroff = (void *)SUNXI_PRCM_BASE + 0x100;
+>  	}
+>  
+>  	if (on) {
+> @@ -151,37 +152,25 @@ static void __secure sunxi_cpu_set_power(int cpu, bool on)
+>  
+>  static void __secure sunxi_cpu_set_reset(int cpu, bool reset)
+>  {
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> -
+> -	writel(reset ? 0b00 : 0b11, &cpucfg->cpu[cpu].rst);
+> +	writel(reset ? 0b00 : 0b11, SUNXI_CPUCFG_BASE + SUNXI_CPU_RST(cpu));
+>  }
+>  
+>  static void __secure sunxi_cpu_set_locking(int cpu, bool lock)
+>  {
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> -
+>  	if (lock)
+> -		clrbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +		clrbits_le32(SUNXI_CPUCFG_BASE + SUNXI_DBG_CTRL1, BIT(cpu));
+>  	else
+> -		setbits_le32(&cpucfg->dbg_ctrl1, BIT(cpu));
+> +		setbits_le32(SUNXI_CPUCFG_BASE + SUNXI_DBG_CTRL1, BIT(cpu));
+>  }
+>  
+>  static bool __secure sunxi_cpu_poll_wfi(int cpu)
+>  {
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> -
+> -	return !!(readl(&cpucfg->cpu[cpu].status) & BIT(2));
+> +	return !!(readl(SUNXI_CPUCFG_BASE + SUNXI_CPU_STATUS(cpu)) & BIT(2));
+>  }
+>  
+>  static void __secure sunxi_cpu_invalidate_cache(int cpu)
+>  {
+> -	struct sunxi_cpucfg_reg *cpucfg =
+> -		(struct sunxi_cpucfg_reg *)SUNXI_CPUCFG_BASE;
+> -
+> -	clrbits_le32(&cpucfg->gen_ctrl, BIT(cpu));
+> +	clrbits_le32(SUNXI_CPUCFG_BASE + SUNXI_GEN_CTRL, BIT(cpu));
+>  }
+>  
+>  static void __secure sunxi_cpu_power_off(u32 cpuid)
+> diff --git a/arch/arm/include/asm/arch-sunxi/cpucfg.h b/arch/arm/include/asm/arch-sunxi/cpucfg.h
+> deleted file mode 100644
+> index 4aaebe0a97..0000000000
+> --- a/arch/arm/include/asm/arch-sunxi/cpucfg.h
+> +++ /dev/null
+> @@ -1,67 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> -/*
+> - * Sunxi A31 CPUCFG register definition.
+> - *
+> - * (C) Copyright 2014 Hans de Goede <hdegoede@redhat.com
+> - */
+> -
+> -#ifndef _SUNXI_CPUCFG_H
+> -#define _SUNXI_CPUCFG_H
+> -
+> -#include <linux/compiler.h>
+> -#include <linux/types.h>
+> -
+> -#ifndef __ASSEMBLY__
+> -
+> -struct __packed sunxi_cpucfg_cpu {
+> -	u32 rst;		/* base + 0x0 */
+> -	u32 ctrl;		/* base + 0x4 */
+> -	u32 status;		/* base + 0x8 */
+> -	u8 res[0x34];		/* base + 0xc */
+> -};
+> -
+> -struct __packed sunxi_cpucfg_reg {
+> -	u8 res0[0x40];		/* 0x000 */
+> -	struct sunxi_cpucfg_cpu cpu[4];		/* 0x040 */
+> -	u8 res1[0x44];		/* 0x140 */
+> -	u32 gen_ctrl;		/* 0x184 */
+> -	u32 l2_status;		/* 0x188 */
+> -	u8 res2[0x4];		/* 0x18c */
+> -	u32 event_in;		/* 0x190 */
+> -	u8 res3[0xc];		/* 0x194 */
+> -	u32 super_standy_flag;	/* 0x1a0 */
+> -	u32 priv0;		/* 0x1a4 */
+> -	u32 priv1;		/* 0x1a8 */
+> -	u8 res4[0x4];		/* 0x1ac */
+> -	u32 cpu1_pwr_clamp;	/* 0x1b0 sun7i only */
+> -	u32 cpu1_pwroff;	/* 0x1b4 sun7i only */
+> -	u8 res5[0x2c];		/* 0x1b8 */
+> -	u32 dbg_ctrl1;		/* 0x1e4 */
+> -	u8 res6[0x18];		/* 0x1e8 */
+> -	u32 idle_cnt0_low;	/* 0x200 */
+> -	u32 idle_cnt0_high;	/* 0x204 */
+> -	u32 idle_cnt0_ctrl;	/* 0x208 */
+> -	u8 res8[0x4];		/* 0x20c */
+> -	u32 idle_cnt1_low;	/* 0x210 */
+> -	u32 idle_cnt1_high;	/* 0x214 */
+> -	u32 idle_cnt1_ctrl;	/* 0x218 */
+> -	u8 res9[0x4];		/* 0x21c */
+> -	u32 idle_cnt2_low;	/* 0x220 */
+> -	u32 idle_cnt2_high;	/* 0x224 */
+> -	u32 idle_cnt2_ctrl;	/* 0x228 */
+> -	u8 res10[0x4];		/* 0x22c */
+> -	u32 idle_cnt3_low;	/* 0x230 */
+> -	u32 idle_cnt3_high;	/* 0x234 */
+> -	u32 idle_cnt3_ctrl;	/* 0x238 */
+> -	u8 res11[0x4];		/* 0x23c */
+> -	u32 idle_cnt4_low;	/* 0x240 */
+> -	u32 idle_cnt4_high;	/* 0x244 */
+> -	u32 idle_cnt4_ctrl;	/* 0x248 */
+> -	u8 res12[0x34];		/* 0x24c */
+> -	u32 cnt64_ctrl;		/* 0x280 */
+> -	u32 cnt64_low;		/* 0x284 */
+> -	u32 cnt64_high;		/* 0x288 */
+> -};
+> -
+> -#endif /* __ASSEMBLY__ */
+> -#endif /* _SUNXI_CPUCFG_H */
 
