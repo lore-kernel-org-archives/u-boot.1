@@ -4,42 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FAEC001E0
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 00:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD0FCDB474
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 03:32:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1F198767A;
-	Sun, 22 Oct 2023 02:54:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5962887695;
+	Sun, 22 Oct 2023 05:32:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="f7S7wwEV";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="eDeUUg5X";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B1EE8767A; Sun, 22 Oct 2023 02:54:36 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E7B0885C98
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 02:54:30 +0200 (CEST)
+ id BE0CF87696; Sun, 22 Oct 2023 05:31:59 +0200 (CEST)
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
+ [66.111.4.27])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AF87987691
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 05:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F239E2F4;
- Sat, 21 Oct 2023 17:55:10 -0700 (PDT)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E53463F64C;
- Sat, 21 Oct 2023 17:54:28 -0700 (PDT)
-Date: Sun, 22 Oct 2023 01:53:25 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Samuel
- Holland <samuel@sholland.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Icenowy Zheng <uwu@icenowy.me>, Maksim Kiselev <bigunclemax@gmail.com>
-Subject: Re: [PATCH v4 0/4] Allwinner R528/T113s PSCI
-Message-ID: <20231022015325.28db2090@slackpad.lan>
-In-Reply-To: <20231012014756.2573473-1-CFSworks@gmail.com>
-References: <20231012014756.2573473-1-CFSworks@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=samuel@sholland.org
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 81D055C02A6;
+ Sat, 21 Oct 2023 23:31:52 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute2.internal (MEProxy); Sat, 21 Oct 2023 23:31:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+ cc:cc:content-transfer-encoding:content-type:content-type:date
+ :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
+ 1697945512; x=1698031912; bh=RS8GcRzDoWTO4KA04fcPqVKAcIO4QyakoBW
+ OP1XiQO8=; b=f7S7wwEVAvhxGy0Qy3b1VvBWV6zSqoKzlSi++0ushStS0bm4ed2
+ BTyrWI1fR07UTZvSdN5eQHodnFx5z/l6qpx8kAPia8B0dy0uXSR4yrmf0q69YisP
+ jDe+RxXJRVtpsKkJKr+PR+hxV5fX5qgIabXNqtRYigmHXlHi2ZLA2clihfjtLsYs
+ HiRjtWfsDfbNRuELXRRo5noKuHhJx7vkVOAa6LAoMrE9QGoPFNZyPg11Hc/JeHRZ
+ 6xQtsa/HUHXFbmcRFpvXqX/kA9pEUcncZYJ5+gbkRGlcR6S/4Mfie7pvV79EH8KH
+ NL1i7Fx2Bks93r2HZlqqhqY6hDbYmJGmDog==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:sender:subject:subject:to:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1697945512; x=1698031912; bh=RS8GcRzDoWTO4KA04fcPqVKAcIO4QyakoBW
+ OP1XiQO8=; b=eDeUUg5XZq7r7aqHvMbN1v5+czMVWSJuMF0aM2SR5TiB7QEHXWV
+ xtiCFM2m3UvU4EGqFpectcFQOVRBp1zxgkj5Hq3EJbrvg5lzh+1EIXUuUb4PBI1c
+ hYwklug6dnwzCGMwwVNK5nN0QB7lg/dy2S+8TOyf9kJ5EJjDSoFVvT8TD/7bQSXW
+ 6yn+AOuMHa6dy+xlg2m2lEubDulh/y4llnID4v88G3uAKrn5olC0DJgkcHJMNEVM
+ 6LT9e/k/o2Nk+JezVkF56JO0KlDANLfmvJuKlkdN5RqhcB12KPKCZviIoGOs93Ju
+ 7HgQd7DXiTxRHPklYp1wzSVxvdRdgEREiyg==
+X-ME-Sender: <xms:p5c0ZTMCP6P7RSU16B2abpPDQ3i4Catr-XCoRzfZs6bRGE-Lm47MSw>
+ <xme:p5c0Zd_dx6aL7nOJdE0527mHA0oktSa3B3IFwHAcI_yS9_2MOyKYAeiPH66g37ZqU
+ QjIxYVLVHmGx41Tfw>
+X-ME-Received: <xmr:p5c0ZSQqZHfiN4yBB0OtIGfxcPMkI8gs4foujwizvNydpMl6zoBLKA52iLwgUtPm0TNJyt5-xQ20TrKHXR8iVOf0rkQn0CmLbhijt4wC5E0fUjl2ru-udHz46A>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrkedugdejvdcutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpefkffggfgfvvehfhffujggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
+ vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
+ ftrfgrthhtvghrnhepjefgfffhudejfedtuedugeeutdetgfeiteffffehjeeugfeuvdeh
+ jeetfedtffdtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
+ homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
+X-ME-Proxy: <xmx:p5c0ZXu1lSm2Axzvd2sci_L9fCZ9uTcZAbn-rHY2D52dmxOYQtwEug>
+ <xmx:p5c0ZbeLcmmzypKNY7ATZrS0jYT6eig6LoIR1-FP0Srn2OWwJfQO5w>
+ <xmx:p5c0ZT2D5s7xVIpR-0f25810w8DLBLkebGNCW39yhbsZxH_zu7zkBg>
+ <xmx:qJc0ZazjwejMNPDKzz_ODdNMD0imnThcbCNhnmZy89CgQ4G9qKZDyQ>
+Feedback-ID: i0ad843c9:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 21 Oct 2023 23:31:51 -0400 (EDT)
+Message-ID: <14f5b1f6-81c4-0bd3-e441-d1d47ee6c207@sholland.org>
+Date: Sat, 21 Oct 2023 22:31:49 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Content-Language: en-US
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
+ <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
+ Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
+ <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
+ andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
+ u-boot@lists.denx.de
+References: <20230928215455.28094-1-andre.przywara@arm.com>
+ <20230928215455.28094-10-andre.przywara@arm.com>
+From: Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH v2 09/22] pinctrl: sunxi: add new D1 pinctrl support
+In-Reply-To: <20230928215455.28094-10-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -57,83 +111,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Oct 2023 19:47:52 -0600
-Sam Edwards <cfsworks@gmail.com> wrote:
+Hi Andre,
 
-Hi Sam,
+On 9/28/23 16:54, Andre Przywara wrote:
+> For the first time since at least the Allwinner A10 SoCs, the D1 (and
+> related cores) use a new pincontroller MMIO register layout, so we
+> cannot use our hardcoded, fixed offsets anymore.
+> Ideally this would all be handled by devicetree and DM drivers, but for
+> the DT-less SPL we still need the legacy interfaces.
+> 
+> Add a new Kconfig symbol to differenciate between the two generations of
+> pincontrollers, and just use that to just switch some basic symbols.
+> The rest is already abstracted enough, so works out of the box.
+> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Reviewed-by: Sam Edwards <CFSworks@gmail.com>
+> Tested-by: Sam Edwards <CFSworks@gmail.com>
+> ---
+>  arch/arm/mach-sunxi/Kconfig |  6 ++++++
+>  drivers/gpio/sunxi_gpio.c   | 17 +++++++++++++++--
+>  include/sunxi_gpio.h        | 10 ++++++++--
+>  3 files changed, 29 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> index d3ed62add99..d73c5e67050 100644
+> --- a/arch/arm/mach-sunxi/Kconfig
+> +++ b/arch/arm/mach-sunxi/Kconfig
+> @@ -158,6 +158,12 @@ config SUNXI_RVBAR_ALTERNATIVE
+>  config SUNXI_A64_TIMER_ERRATUM
+>  	bool
+>  
+> +config SUNXI_NEW_PINCTRL
 
-> Hi list,
-> 
-> This is the third, and hopefully final, version of my patchset for PSCI support
-> on R528/T113-s3. This one, as always, depends on Andre Przywara's T113s support
-> series (v2), available on the list and also located on a Git branch at:
-> https://source.denx.de/u-boot/custodians/u-boot-sunxi.git t113s-v2
-> 
-> NOTE THAT THIS ALSO depends on the following commit on master:
-> 3d5e52bd97 ("ARM: psci: move GIC address override to Kconfig")
-> 
-> For testing: I can confirm that patch 2/4 results in no change to machine code
-> whatsoever on any supported target. Patch 1/4 results in a minor machine code
-> change on R40 only. Patch 3/4 will likely require testing on each of the 4
-> "special case" sunxi targets (sun6i, sun7i, R40, H3) to ensure that register
-> offsets are kept consistent. Patch 4/4 needs testing on R528 only.
+Please put this in drivers/gpio/Kconfig so it can be selected on RISC-V
+(ARCH_SUNXI=n). With that:
 
-For now I have included this series into the T113s support series and
-pushed this to sunxi/master, to trigger the CI.
+Tested-by: Samuel Holland <samuel@sholland.org>
 
-I will do some final testing here on the MangoPi and other boards (for
-regressions), but I am hopeful to send a pull request in the next day
-to two.
+Regards,
+Samuel
 
-Thanks again for your persistent work on this, much appreciated!
-
-Cheers,
-Andre
-
- > 
-> Warm regards,
-> Sam
-> 
-> Changes v3->v4:
-> - The GIC base address override is done through Kconfig, instead of in
->   sunxi-common.h
-> 
-> Changes v2->v3:
-> - Fix missing `cpu=0;` for the sun7i power management case.
-> - Make sunxi_cpu_power_off() a static function, per feedback on v2.
-> - Kevin Amadiva of MEC electronics got in touch with me off-list,
-> reported success bringing up CPU1 of a T113 with this patchset, and
-> kindly provided me with a Tested-by tag for patch 4/4.
-> - Remove a comment about R40/R528 being special, per feedback on v2.
-> - Simplify an if statement, per feedback on v2.
-> - Add missing 'select' directives to the R528 Kconfig, per feedback
-> on v2.
-> 
-> Changes v1->v2:
-> - Power clamp is now adjusted ONLY on sun{6,7}i, H3, R40. The
-> previous version was mistakenly doing this EXCEPT on those machines.
-> - Flattened sunxi_power_switch() into sunxi_cpu_set_power() for
-> simplicity's sake.
-> - Moved the "power clamp is not NULL" conditional into
-> sunxi_cpu_set_power().
-> - Removed unnecessary H6 special-case, since H6 is actually ARM64.
-> - Renamed SUNXI_CPUX_BASE to SUNXI_CPUCFG_BASE, to mirror expected
-> changes in Andre's v2 of the R528 series (we decided against using a
-> new name for this block).
-> - Removed sunxi_cpucfg_reg struct, and stopped using the PRCM struct
-> in psci.c.
-> 
-> Sam Edwards (4):
->   sunxi: psci: clean away preprocessor macros
->   sunxi: psci: refactor register access to separate functions
->   sunxi: psci: stop modeling register layout with C structs
->   sunxi: psci: implement PSCI on R528
-> 
->  arch/arm/cpu/armv7/Kconfig               |   3 +-
->  arch/arm/cpu/armv7/sunxi/psci.c          | 185
-> ++++++++++++++--------- arch/arm/include/asm/arch-sunxi/cpucfg.h |
-> 67 -------- arch/arm/mach-sunxi/Kconfig              |   4 +
->  4 files changed, 121 insertions(+), 138 deletions(-)
->  delete mode 100644 arch/arm/include/asm/arch-sunxi/cpucfg.h
-> 
+> +	bool
+> +	---help---
+> +	The Allwinner D1 and other new SoCs use a different register map
+> +	for the GPIO block, which we need to know about in the SPL.
+> +
+>  # Note only one of these may be selected at a time! But hidden choices are
+>  # not supported by Kconfig
+>  config SUNXI_GEN_SUN4I
+> diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+> index b52569104b7..c50996d0e12 100644
+> --- a/drivers/gpio/sunxi_gpio.c
+> +++ b/drivers/gpio/sunxi_gpio.c
+> @@ -40,10 +40,23 @@
+>  #define GPIO_DAT_REG_OFFSET	0x10
+>  
+>  #define GPIO_DRV_REG_OFFSET	0x14
+> -#define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
+> -#define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+> +
+> +/*		Newer SoCs use a slightly different register layout */
+> +#ifdef CONFIG_SUNXI_NEW_PINCTRL
+> +/* pin drive strength: 4 bits per pin */
+> +#define GPIO_DRV_INDEX(pin)	((pin) / 8)
+> +#define GPIO_DRV_OFFSET(pin)	(((pin) % 8) * 4)
+> +
+> +#define GPIO_PULL_REG_OFFSET	0x24
+> +
+> +#else /* older generation pin controllers */
+> +/* pin drive strength: 2 bits per pin */
+> +#define GPIO_DRV_INDEX(pin)	((pin) / 16)
+> +#define GPIO_DRV_OFFSET(pin)	(((pin) % 16) * 2)
+>  
+>  #define GPIO_PULL_REG_OFFSET	0x1c
+> +#endif
+> +
+>  #define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
+>  #define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+>  
+> diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
+> index c1fdf7ea1d7..30d8879dbd3 100644
+> --- a/include/sunxi_gpio.h
+> +++ b/include/sunxi_gpio.h
+> @@ -62,7 +62,6 @@
+>  #define SUN50I_H6_GPIO_POW_MOD_VAL	0x348
+>  
+>  #define SUNXI_GPIOS_PER_BANK	32
+> -#define SUNXI_PINCTRL_BANK_SIZE 0x24
+>  
+>  #define SUNXI_GPIO_NEXT(__gpio) \
+>  	((__gpio##_START) + SUNXI_GPIOS_PER_BANK)
+> @@ -102,7 +101,6 @@ enum sunxi_gpio_number {
+>  /* GPIO pin function config */
+>  #define SUNXI_GPIO_INPUT	0
+>  #define SUNXI_GPIO_OUTPUT	1
+> -#define SUNXI_GPIO_DISABLE	7
+>  
+>  #define SUN8I_H3_GPA_UART0	2
+>  #define SUN8I_H3_GPA_UART2	2
+> @@ -171,6 +169,14 @@ enum sunxi_gpio_number {
+>  
+>  #define SUN9I_GPN_R_RSB		3
+>  
+> +#ifdef CONFIG_SUNXI_NEW_PINCTRL
+> +	#define SUNXI_PINCTRL_BANK_SIZE	0x30
+> +	#define SUNXI_GPIO_DISABLE	0xf
+> +#else
+> +	#define SUNXI_PINCTRL_BANK_SIZE	0x24
+> +	#define SUNXI_GPIO_DISABLE	0x7
+> +#endif
+> +
+>  /* GPIO pin pull-up/down config */
+>  #define SUNXI_GPIO_PULL_DISABLE	0
+>  #define SUNXI_GPIO_PULL_UP	1
 
