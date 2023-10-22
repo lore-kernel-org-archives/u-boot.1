@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6D6CDB474
-	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 03:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7553DCDB474
+	for <u-boot@archiver.kernel.org>; Sun, 22 Oct 2023 04:54:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69D5D87698;
-	Sun, 22 Oct 2023 05:52:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
+	by phobos.denx.de (Postfix) with ESMTP id B0CAD876AF;
+	Sun, 22 Oct 2023 06:54:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="KOYYLbTo";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="IOzQfjRR";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nwCElg4X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27DC28769C; Sun, 22 Oct 2023 05:52:11 +0200 (CEST)
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com
- [66.111.4.27])
+ id E1866876B0; Sun, 22 Oct 2023 06:53:59 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D43F187695
- for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 05:52:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C50187691
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 06:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sholland.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 03B0A5C02AA;
- Sat, 21 Oct 2023 23:52:08 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Sat, 21 Oct 2023 23:52:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to; s=fm1; t=
- 1697946727; x=1698033127; bh=ZCiju5TRygrtLFdHob1RDkb4ZhEeg8Q+Hmv
- YGxsdDLY=; b=KOYYLbTofSa6bpQCjLgCXOLk+ApafFqW/R8it4QzWEJ0MocXHW6
- IiKO9dYh+6QSyS4+kV9cPm+m8W16VIEMkqwFhA8ISYJO25wBq/oZLB6pqlpcQDcR
- MIk68Bp9ypLZ1LG5u+ldP0B74ZsZ0lzrcEEbh6xsX9Knzf2CLRCIgt8CLVvk+INB
- oDuHdCjlzqIwA1kdVBMRQwv/n2F1o0ajIecYfbSOP3s3kNPQb8mKmJ0KLJgHkYlZ
- HmkgWjr2hO7iC0ukjDbURkTeFERYnDzOaSG9zjKsuIaKqK5cMZhd3QrZvsPJBt+S
- azemi8kiad5b7mze9el/epGAarCb6ZnV53g==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
- 1697946727; x=1698033127; bh=ZCiju5TRygrtLFdHob1RDkb4ZhEeg8Q+Hmv
- YGxsdDLY=; b=IOzQfjRRxvs2H2Xq9aH46fqZYwXsYbrmqSGPbu5nwgtGnLRgIAE
- FFacU2h5ZbZq8znZHdTlBq7emNhvaMtQZ6QrXbJttXMJLEjXRGbvqlggsvnQn2GK
- sV4zurutMjVoxPaO7Yuke9mysgR2UQ8lpVTGzLsBQFTzj35mydTUpp5ySFuiBwVi
- VjIGoz7uKzk7/PgwTpDe8wfNqAOhBSiLgTyIZBIeb+CbE6pTTkjxXwTXJYTi3WSj
- risPL+8gllP+7QZdzpgBY6jqzsMq4Sg0rYVxiRawJ+K0/prkC3aKGuP9LmKyWYAq
- 328ZyBwuQjp97s6pSWBuIeh0NE1SgqHRbBQ==
-X-ME-Sender: <xms:Z5w0ZS8dp5vqppFAovbEv_vxgUnJ70RNYLqVL_uAxj26oF37BwuhIA>
- <xme:Z5w0ZSvDqVvVr8Jkq9A8YLXcELhOMec3TsPyfoaPdC6XHKO-CFgQY_7WpNKLC-Hcp
- sE0XM6HXDWEOUzGHw>
-X-ME-Received: <xmr:Z5w0ZYATpbnf1pfgUKavyHmVh3n6i0UvfUu8ZrYi6tzQtQfW6e4wZHikiQkyC7fFZEH8Gc00EwA6gQd50IjYFeaxhhsH6RvOj8f9lxHdkhS3eZpeUOsx2ut_4Q>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrkedugdejiecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefkffggfgfvvehfhffujggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
- vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepjefgfffhudejfedtuedugeeutdetgfeiteffffehjeeugfeuvdeh
- jeetfedtffdtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:Z5w0Zae5sZnDOQEALOqqUbTjto7n1Hn-DjNgRyqiyMLPBsGcO0BGfA>
- <xmx:Z5w0ZXPar1Gd9kypCAlnc2dEkQ5l_3RY2SdV7apSuoksKzb_th7cdA>
- <xmx:Z5w0ZUnxDWOhXvWDPd4dH2Yx7KueRAp3-C8FysblJYNGLLBOXY4cLA>
- <xmx:Z5w0ZQjcv3pv6i1KqnGXvtlcEe_n7cqDVO3BvdO9dJ4DYMg08iCUOw>
-Feedback-ID: i0ad843c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 21 Oct 2023 23:52:07 -0400 (EDT)
-Message-ID: <f1fb2b20-2c3a-55a3-a35b-e014a2eebe20@sholland.org>
-Date: Sat, 21 Oct 2023 22:52:06 -0500
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 379DF3F69E
+ for <u-boot@lists.denx.de>; Sun, 22 Oct 2023 04:53:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1697950434;
+ bh=apZPmQ6aMM41O1U026Hvx8DKPyJlqN5syZWoaSEa900=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=nwCElg4XhXVJIOA333mTVxoXrwD9SKlFdjfzSCq93Sp0Me1XwaiFS/BczuN58oL2r
+ ncbSfroHqEevb1a5bk2FRfDlj1YJwGU499EM5OYjHsqbEQlSQPOb0yz3ILxDLETq/U
+ Zc9t3MrwhxdCsyJ9WD2eTfMINv16K2O4M9asqz3OtWiu5+0FWQteDBFdVPf9mz46OC
+ U9SAXsVyj0GxHjehnu4gSo9dRkvfQ5sOTbfCskbz0pU0e8/gADRVjCoN81gj2uWFiG
+ 3AP1z+q734zNbPw3iRHvMFgff9cuYtadRU8FLzyuYqNtvsEL2nBuDJBSIySR+A5cTB
+ 10JcTWPdjP3aw==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-32d9751ca2cso893840f8f.3
+ for <u-boot@lists.denx.de>; Sat, 21 Oct 2023 21:53:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697950433; x=1698555233;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=apZPmQ6aMM41O1U026Hvx8DKPyJlqN5syZWoaSEa900=;
+ b=ilPYAOwam4aA6N5KT1uyktJBiIsbLORpSHGk2VRiwIB7PxSS23BqXo+3CTxwqpKX7H
+ ZLgMlTcXm0+OgNMEg6+dSadehdnNomKdJBBg8XxyUEnJHE1kYaQz4KEWT+i2+1N8MiRg
+ N+RsPYvKbASYlXdSPP1oT3T2BB9DmEZKHpd6UfpIt7dl3ObDJwmNMnlMqhdtS8zCLyNg
+ ENwrdmKDzKtaY4zUaBHbO1cMizEf7cUI/RO5yinTOTVMWdbKO945Y9X2FzPsi/RLQZej
+ +FH6SzL8fhRNUe1dIqM0QEoaPWPMf1VVen2yzyvAnwkF7xucsot8AahegNVg141/+XEz
+ d9QQ==
+X-Gm-Message-State: AOJu0Yzs2lOAf5C8p+2HlZGJwKcBP7L5eCaAh6lavd/9N/+ubNsYwjAh
+ ijpcDgqa/xuiFAUWAcDtMCJBGRdrJNCv0gY/wxlv4Bzi61uOJVYcXOI7c8LhvOpGqgzbHhcc4Ih
+ 5pYG8JvZZT3kKvpyb5Wst9czcYeAL/q4=
+X-Received: by 2002:a5d:5b1c:0:b0:32d:a61a:85cc with SMTP id
+ bx28-20020a5d5b1c000000b0032da61a85ccmr7111825wrb.8.1697950433360; 
+ Sat, 21 Oct 2023 21:53:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHnB/+S+dnR3pQ7VNFn1eUmfjZybDziV5a5AtndRvXaKk0RfKeq3Q/am/2HsrzpluO9cCPnXQ==
+X-Received: by 2002:a5d:5b1c:0:b0:32d:a61a:85cc with SMTP id
+ bx28-20020a5d5b1c000000b0032da61a85ccmr7111808wrb.8.1697950432822; 
+ Sat, 21 Oct 2023 21:53:52 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ s3-20020adfea83000000b0031980783d78sm4888789wrm.54.2023.10.21.21.53.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 21 Oct 2023 21:53:52 -0700 (PDT)
+Message-ID: <7481371f-657d-46d6-b8e7-74da7a200ee9@canonical.com>
+Date: Sun, 22 Oct 2023 06:53:58 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng
- <uwu@icenowy.me>, Maxim Kiselev <bigunclemax@gmail.com>,
- Sam Edwards <cfsworks@gmail.com>, Okhunjon Sobirjonov
- <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
- andre.przywara@foss.arm.com, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de
-References: <20230928215455.28094-1-andre.przywara@arm.com>
- <20230928215455.28094-17-andre.przywara@arm.com>
-From: Samuel Holland <samuel@sholland.org>
-Subject: Re: [PATCH v2 16/22] sunxi: add R528/T113-s3/D1(s) DRAM
- initialisation code
-In-Reply-To: <20230928215455.28094-17-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+To: Simon Glass <sjg@google.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Doug Anderson <dianders@google.com>, Tom Rini <trini@konsulko.com>
+References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
+ <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
+ <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
+ <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
+ <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+ <ea1ba7c2-7f9c-4702-a6da-efb728771e24@canonical.com>
+ <20231020162410.GK3119521@bill-the-cat>
+ <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,341 +112,237 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
-
-On 9/28/23 16:54, Andre Przywara wrote:
-> The Allwinner R528/T113-s/D1/D1s SoCs all share the same die, so use the
-> same DRAM initialisation code.
-> Make use of prior art here and lift some code from awboot[1], which
-> carried init code based on earlier decompilation efforts, but with a
-> GPL2 license tag.
-> This code has been heavily reworked and cleaned up, to match previous
-> DRAM routines for other SoCs, and also to be closer to U-Boot's coding
-> style and support routines.
-> The actual DRAM chip timing parameters are included in the main file,
-> since they cover all DRAM types, and are protected by a new Kconfig
-> CONFIG_SUNXI_DRAM_TYPE symbol, which allows the compiler to pick only
-> the relevant settings, at build time.
+On 10/21/23 17:42, Simon Glass wrote:
+> Hi Tom,
 > 
-> The relevant DRAM chips/board specific configuration parameters are
-> delivered via Kconfig, so this code here should work for all supported
-> SoCs and DRAM chips combinations.
+> On Fri, 20 Oct 2023 at 09:24, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Fri, Oct 20, 2023 at 05:40:03PM +0200, Heinrich Schuchardt wrote:
+>>> On 20.10.23 15:21, Simon Glass wrote:
+>>>> +Doug Anderson
+>>>>
+>>>> Hi Heinrich,
+>>>>
+>>>> On Thu, 19 Oct 2023 at 09:09, Heinrich Schuchardt
+>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>
+>>>>> On 19.10.23 15:55, Simon Glass wrote:
+>>>>>> Hi Heinrich,
+>>>>>>
+>>>>>> On Wed, 18 Oct 2023 at 02:15, Heinrich Schuchardt
+>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>>>
+>>>>>>> On 10/18/23 05:33, Simon Glass wrote:
+>>>>>>>> Hi Heinrich,
+>>>>>>>>
+>>>>>>>> On Tue, 17 Oct 2023 at 07:50, Heinrich Schuchardt
+>>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
+>>>>>>>>>
+>>>>>>>>> Forward and backward compatibility of Linux kernel device-trees is
+>>>>>>>>> sometimes missing. One solution approach is to load a kernel specific
+>>>>>>>>> device-tree. This can either be done via a U-Boot scripts (like the one
+>>>>>>>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
+>>>>>>>>> The boot loader approach currently requires to know the device-tree name
+>>>>>>>>> before first boot which makes it unusable for generic images.
+>>>>>>>>>
+>>>>>>>>> Expose the device-tree file name as EFI variable FdtFile.
+>>>>>>>>> This will allow bootloaders to load a kernel specific device-tree.
+>>>>>>>>>
+>>>>>>>>> The variable will not be exposed on ACPI based systems or if the
+>>>>>>>>> environment variable fdtfile is not defined.
+>>>>>>>>>
+>>>>>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>>>>>> ---
+>>>>>>>>> v2:
+>>>>>>>>>             Use a unique GUID to enable future U-Boot independent
+>>>>>>>>>             standardization.
+>>>>>>>>>             Do not try to add the variable on ACPI based systems.
+>>>>>>>>> ---
+>>>>>>>>>      include/efi_loader.h       |  5 +++++
+>>>>>>>>>      lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+>>>>>>>>>      2 files changed, 35 insertions(+)
+>>>>>>>>
+>>>>>>>> I was too slow to reply to v1.
+>>>>>>>>
+>>>>>>>> Does grub load the DT? I was assuming that U-Boot would pass it on?
+>>>>>>>> What is the interface between U-Boot and grub?
+>>>>>>>
+>>>>>>> The device-tree built into U-Boot is often out of date and not usable to
+>>>>>>> boot current Linux. A single device-tree can be loaded by U-Boot from
+>>>>>>> file and passed on as EFI configuration table. This device-tree may not
+>>>>>>> be compatible with all kernel versions exposed by GRUB.
+>>>>>>>
+>>>>>>> GRUB provides a devicetree command. It is disabled if you use secure
+>>>>>>> boot. At least in Debian and Ubuntu GRUB invokes the
+>>>>>>> EFI_DT_FIXUP_PROTOCOL exposed by U-Boot to run U-Boot's device-tree
+>>>>>>> fix-ups after loading a device-tree.
+>>>>>>>
+>>>>>>> Vendor scripts for GRUB like Ubuntu's /etc/grub.d/10_linux add
+>>>>>>> devicetree commands to the boot options in grub.cfg.
+>>>>>>
+>>>>>> Thanks. I wonder if you could document this somewhere? It seems like
+>>>>>> there are a lot of options and it is quite complicated.
+>>>>>>
+>>>>>> Back to the question, I suppose you are expecting grub to load the DT
+>>>>>> using this filename? But why doesn't U-Boot load it instead? It seems
+>>>>>> very convoluted.
+>>>>>
+>>>>> A separate file of this name exists for every kernel version installed.
+>>>>> The loaded dtb must match the kernel. U-Boot does not know what kernel
+>>>>> version will be chosen in GRUB. And for a generic image GRUB does not
+>>>>> what board it is on.
+>>>>>
+>>>>>>
+>>>>>> Also, can we test this interface?
+>>>>>
+>>>>> Neither the sandbox nor QEMU have environment variable fdtfile. And we
+>>>>> don't create the EFI variable with ACPI as used on the sandbox.
+>>>>
+>>>> I worry that this is creating another interface that some poor sod is
+>>>> going to have to deal with in the future. Is this part of the EFI
+>>>> standard?
+>>>
+>>> No, the UEFI standard does not care much about device-trees. It only defines
+>>> the GUID for the configuration table.
+>>>
+>>>>
+>>>> We should really be using the compatible string to choose the
+>>>> devicetree. Why are we using filenames at all? What is the
+>>>> relationship between the compatible string and the filename? Is there
+>>>> a lookup table, or should we create one?
+>>>
+>>> There is no 1:1 relationship between compatible string and filename, e.g.
+>>> the following arm64 device-trees use the same compatible string:
+>>>
+>>> amd/amd-overdrive-rev-b0.dts
+>>> amd/amd-overdrive-rev-b1.dts
+>>>
+>>> amlogic/meson-axg-jethome-jethub-j110-rev-2.dts
+>>> amlogic/meson-axg-jethome-jethub-j110-rev-3.dts
+>>>
+>>> xilinx/zynqmp-zc1751-xm015-dc1.dts
+>>> xilinx/zynqmp-zc1751-xm015-dc1.dts
+>>> xilinx/zynqmp-zc1751-xm015-dc1.dts
+>>> xilinx/zynqmp-zc1751-xm015-dc1.dts
+>>>
+>>>>
+>>>> The correct way of doing this is implemented in U-Boot with
+>>>> CONFIG_FIT_BEST_MATCH.
+>>>
+>>> Why should we write complicated code to find a *possibly* matching file if
+>>> we already know the filename that needs to be loaded?
+>>
+>> I think that is the unfortunate key here. We can make a guess, or best
+>> match, but it might not be right. And we need a reliable way to find and
+>> use the correct tree. And the U-Boot portion of that may be "set the EFI
+>> var if it's not already set" rather than "and now load it".
 > 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Tested-by: Sam Edwards <CFSworks@gmail.com>
-> ---
->  drivers/Makefile                   |    1 +
->  drivers/ram/Makefile               |    3 +
->  drivers/ram/sunxi/Kconfig          |   59 ++
->  drivers/ram/sunxi/Makefile         |    4 +
->  drivers/ram/sunxi/dram_sun20i_d1.c | 1432 ++++++++++++++++++++++++++++
->  drivers/ram/sunxi/dram_sun20i_d1.h |   73 ++
->  6 files changed, 1572 insertions(+)
->  create mode 100644 drivers/ram/sunxi/Makefile
->  create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.c
->  create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.h
+> That is not my understanding of how it works. The compatible string is
+> how Linux knows what the hardware is...if it doesn't match, then
+> things are going to go wrong. It is also how U-Boot works, e.g. with
+> FIT. I don't believe this is a 'guess'. The compatible string is used
+> programmatically and must be correct.
+
+It is not how U-Boot works. In distroboot U-Boot uses environment 
+variable fdtfile to load the correct device-tree.
+
+Your suggestion would mean that distroboot or GRUB would have to sift 
+through literally hundreds of device-tree files which would considerably 
+increase the boot time. The process might end up with multiple dtb files 
+that match.
+
 > 
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index efc2a4afb24..5a4bedf7305 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -56,6 +56,7 @@ obj-$(CONFIG_$(SPL_)ALTERA_SDRAM) += ddr/altera/
->  obj-$(CONFIG_ARCH_IMX8M) += ddr/imx/imx8m/
->  obj-$(CONFIG_IMX8ULP_DRAM) += ddr/imx/imx8ulp/
->  obj-$(CONFIG_ARCH_IMX9) += ddr/imx/imx9/
-> +obj-$(CONFIG_DRAM_SUN8I_R528) += ram/
+> fdt_node_check_compatible() does most of the work...then you need to
+> check which FDT has the most specific match (i.e. latest in the string
+> list). That handles things like board revisions, variants, etc.
+> 
+> My concern is about adding a feature when there is already a defined
+> spec and mechanism for this to work. What happens when we load the
+> file and the compatible is wrong?
+> 
+> At best, I see the filename as a hint.
+> 
+> [Perhaps this is the wrong time to ask, but why are kernels +DT not
+> shipped in FIT on ARM?]
 
-This would need to be duplicated for DRAM_SUN20I_D1.
+FIT is U-Boot specific. For Linux distributions it is easier to use a 
+firmware agnostic method of booting.
 
->  obj-$(CONFIG_SPL_DM_RESET) += reset/
->  obj-$(CONFIG_SPL_MUSB_NEW) += usb/musb-new/
->  obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
-> diff --git a/drivers/ram/Makefile b/drivers/ram/Makefile
-> index 6eb1a241359..b4750ea11c4 100644
-> --- a/drivers/ram/Makefile
-> +++ b/drivers/ram/Makefile
-> @@ -23,6 +23,9 @@ obj-$(CONFIG_RAM_SIFIVE) += sifive/
->  ifdef CONFIG_SPL_BUILD
->  obj-$(CONFIG_SPL_STARFIVE_DDR) += starfive/
->  endif
-> +
-> +obj-$(CONFIG_DRAM_SUN8I_R528) += sunxi/
+>>
+>>>> Can we mirror something like that in grub, etc?
+>>
+>> I'm splitting this part out because no, having to have N projects write
+>> the same bit of code, but with its own quirks and bugs doesn't sound
+>> like the right direction. It's why today we have a few different sets of
+>> logic to try and find / set the right device tree, so that whatever
+>> follows after doesn't have to also do that, and get updated for every
+>> new platform too.
+>>
+>> And of course yes, ideally, boards would be manufactured with an up to
+>> date and correct device tree on them.
+> 
+> OK, well I perhaps have the wrong end of the stick here.
+> 
+> As I learn more about how distros boot I see a great need for
+> information about what is actually being booted. For example, the
+> current 'bootflow menu' mostly shows useless information when EFI is
+> used to boot, since it doesn't know what the things are. We have to
+> jump to grub (or whatever) to find out. Grub knows because the OS set
+> up a grub menu.
 
-This would need to be duplicated for DRAM_SUN20I_D1.
+The menu should show the EFI boot options. Then you can decide which of 
+the multiple operating systems on your device you want to boot.
 
-> +
->  obj-$(CONFIG_ARCH_OCTEON) += octeon/
->  
->  obj-$(CONFIG_ARCH_RMOBILE) += renesas/
-> diff --git a/drivers/ram/sunxi/Kconfig b/drivers/ram/sunxi/Kconfig
-> index 261d7f57409..35eeda58efa 100644
-> --- a/drivers/ram/sunxi/Kconfig
-> +++ b/drivers/ram/sunxi/Kconfig
-> @@ -12,3 +12,62 @@ config DRAM_SUN8I_R528
->  	default y if MACH_SUN8I_R528
->  	help
->  	  Select this DRAM controller driver for the R528/T113s SoCs.
-> +
-> +if DRAM_SUN20I_D1 || DRAM_SUN8I_R528
-> +
-> +config DRAM_SUNXI_ODT_EN
+The bottleneck is secure boot. As Red Hat did not want Microsoft to sign 
+every single kernel they came up with shim. Now we can only have one EFI 
+boot option per operating system. It is only after shim that you can 
+load one of multiple kernels.
 
-You have a mixture of "DRAM_SUNXI" and "SUNXI_DRAM" for the tunables
-here. I would recommend being consistent.
+> 
+> Really we need to see this standard boot thing to the end. Each OS
+> should provide information from /etc/lsb_release as well as info from
+> menu.grub (sorry can't remember the right name), so that we know what
 
-> +	hex "DRAM ODT EN parameter"
-> +	default 0x1
-> +	help
-> +	  ODT EN value from vendor DRAM settings.
-> +
-> +config DRAM_SUNXI_TPR0
-> +	hex "DRAM TPR0 parameter"
-> +	default 0x0
-> +	help
-> +	  TPR0 value from vendor DRAM settings.
-> +
-> +config DRAM_SUNXI_TPR11
-> +	hex "DRAM TPR11 parameter"
-> +	default 0x0
-> +	help
-> +	  TPR11 value from vendor DRAM settings.
-> +
-> +config DRAM_SUNXI_TPR12
-> +	hex "DRAM TPR12 parameter"
-> +	default 0x0
-> +	help
-> +	  TPR12 value from vendor DRAM settings.
-> +
-> +config DRAM_SUNXI_TPR13
-> +	hex "DRAM TPR13 parameter"
-> +	default 0x0
+/boot/grub/grub.cfg
 
-I would suggest dropping the defaults for these tunables. It was
-non-obvious that I was missing some configuration when I switched to
-your driver. I think it's reasonable to require the defconfig/user to
-provide these.
+> can be booted. Having to jump to an OS-specific bootloader to even be
+> able to show a menu is a pretty poor show.
 
-> +	help
-> +	  TPR13 value from vendor DRAM settings. It tells which features
-> +	  should be configured.
-> +
-> +choice
-> +	prompt "DRAM chip type"
-> +	default SUNXI_DRAM_TYPE_DDR3 if DRAM_SUN8I_R528 || DRAM_SUN20I_D1
-> +
-> +config SUNXI_DRAM_TYPE_DDR2
-> +        bool "DDR2 chips"
-> +
-> +config SUNXI_DRAM_TYPE_DDR3
-> +        bool "DDR3 chips"
-> +
-> +config SUNXI_DRAM_TYPE_LPDDR2
-> +        bool "LPDDR2 chips"
-> +
-> +config SUNXI_DRAM_TYPE_LPDDR3
-> +        bool "LPDDR3 chips"
-> +endchoice
-> +
-> +config SUNXI_DRAM_TYPE
-> +	int
-> +	default 2 if SUNXI_DRAM_TYPE_DDR2
-> +	default 3 if SUNXI_DRAM_TYPE_DDR3
-> +	default 6 if SUNXI_DRAM_TYPE_LPDDR2
-> +	default 7 if SUNXI_DRAM_TYPE_LPDDR3
-> +
-> +endif
-> diff --git a/drivers/ram/sunxi/Makefile b/drivers/ram/sunxi/Makefile
-> new file mode 100644
-> index 00000000000..d6fb2cf0b65
-> --- /dev/null
-> +++ b/drivers/ram/sunxi/Makefile
-> @@ -0,0 +1,4 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-$(CONFIG_DRAM_SUN20I_D1) += dram_sun20i_d1.o
-> +obj-$(CONFIG_DRAM_SUN8I_R528) += dram_sun20i_d1.o
-> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
-> new file mode 100644
-> index 00000000000..c766fc24065
-> --- /dev/null
-> +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-> @@ -0,0 +1,1432 @@
-> [...]
-> +/*
-> + * This routine sizes a DRAM device by cycling through address lines and
-> + * figuring out if they are connected to a real address line, or if the
-> + * address is a mirror.
-> + * First the column and bank bit allocations are set to low values (2 and 9
-> + * address lines). Then a maximum allocation (16 lines) is set for rows and
-> + * this is tested.
-> + * Next the BA2 line is checked. This seems to be placed above the column,
-> + * BA0-1 and row addresses. Finally, the column address is allocated 13 lines
-> + * and these are tested. The results are placed in dram_para1 and dram_para2.
-> + */
-> +static int auto_scan_dram_size(const dram_para_t *para, dram_config_t *config)
-> +{
-> +	unsigned int rval, i, j, rank, maxrank, offs;
-> +	unsigned int shft;
-> +	unsigned long ptr, mc_work_mode, chk;
+With secure-boot you still would need to load the OS specific shim. 
+Further you would need a means to communicate your decision to whatever 
+program loads the kernel.
 
-This breaks on 64-bit architectures, because readl(chk) can never equal
-~ptr. Please change ptr and chk to unsigned int.
+> 
+> Anyway I think I understand why this variable is needed. Please add
+> some documentation on all this.
 
-> +
-> +	if (mctl_core_init(para, config) == 0) {
-> +		printf("DRAM initialisation error : 0\n");
-> +		return 0;
-> +	}
-> +
-> +	maxrank	= (config->dram_para2 & 0xf000) ? 2 : 1;
-> +	mc_work_mode = 0x3102000;
-> +	offs = 0;
-> +
-> +	/* write test pattern */
-> +	for (i = 0, ptr = CFG_SYS_SDRAM_BASE; i < 64; i++, ptr += 4)
-> +		writel((i & 0x1) ? ptr : ~ptr, ptr);
-> +
-> +	for (rank = 0; rank < maxrank;) {
-> +		/* set row mode */
-> +		clrsetbits_le32(mc_work_mode, 0xf0c, 0x6f0);
-> +		udelay(1);
-> +
-> +		// Scan per address line, until address wraps (i.e. see shadow)
-> +		for (i = 11; i < 17; i++) {
-> +			chk = CFG_SYS_SDRAM_BASE + (1U << (i + 11));
-> +			ptr = CFG_SYS_SDRAM_BASE;
-> +			for (j = 0; j < 64; j++) {
-> +				if (readl(chk) != ((j & 1) ? ptr : ~ptr))
-> +					break;
-> +				ptr += 4;
-> +				chk += 4;
-> +			}
-> +			if (j == 64)
-> +				break;
-> +		}
-> +		if (i > 16)
-> +			i = 16;
-> +		debug("rank %d row = %d\n", rank, i);
-> +
-> +		/* Store rows in para 1 */
-> +		shft = offs + 4;
-> +		rval = config->dram_para1;
-> +		rval &= ~(0xff << shft);
-> +		rval |= i << shft;
-> +		config->dram_para1 = rval;
-> +
-> +		if (rank == 1)		/* Set bank mode for rank0 */
-> +			clrsetbits_le32(0x3102000, 0xffc, 0x6a4);
-> +
-> +		/* Set bank mode for current rank */
-> +		clrsetbits_le32(mc_work_mode, 0xffc, 0x6a4);
-> +		udelay(1);
-> +
-> +		// Test if bit A23 is BA2 or mirror XXX A22?
-> +		chk = CFG_SYS_SDRAM_BASE + (1U << 22);
-> +		ptr = CFG_SYS_SDRAM_BASE;
-> +		for (i = 0, j = 0; i < 64; i++) {
-> +			if (readl(chk) != ((i & 1) ? ptr : ~ptr)) {
-> +				j = 1;
-> +				break;
-> +			}
-> +			ptr += 4;
-> +			chk += 4;
-> +		}
-> +
-> +		debug("rank %d bank = %d\n", rank, (j + 1) << 2); /* 4 or 8 */
-> +
-> +		/* Store banks in para 1 */
-> +		shft = 12 + offs;
-> +		rval = config->dram_para1;
-> +		rval &= ~(0xf << shft);
-> +		rval |= j << shft;
-> +		config->dram_para1 = rval;
-> +
-> +		if (rank == 1)		/* Set page mode for rank0 */
-> +			clrsetbits_le32(0x3102000, 0xffc, 0xaa0);
-> +
-> +		/* Set page mode for current rank */
-> +		clrsetbits_le32(mc_work_mode, 0xffc, 0xaa0);
-> +		udelay(1);
-> +
-> +		// Scan per address line, until address wraps (i.e. see shadow)
-> +		for (i = 9; i < 14; i++) {
-> +			chk = CFG_SYS_SDRAM_BASE + (1U << i);
-> +			ptr = CFG_SYS_SDRAM_BASE;
-> +			for (j = 0; j < 64; j++) {
-> +				if (readl(chk) != ((j & 1) ? ptr : ~ptr))
-> +					break;
-> +				ptr += 4;
-> +				chk += 4;
-> +			}
-> +			if (j == 64)
-> +				break;
-> +		}
-> +		if (i > 13)
-> +			i = 13;
-> +
-> +		unsigned int pgsize = (i == 9) ? 0 : (1 << (i - 10));
-> +		debug("rank %d page size = %d KB\n", rank, pgsize);
-> +
-> +		/* Store page size */
-> +		shft = offs;
-> +		rval = config->dram_para1;
-> +		rval &= ~(0xf << shft);
-> +		rval |= pgsize << shft;
-> +		config->dram_para1 = rval;
-> +
-> +		// Move to next rank
-> +		rank++;
-> +		if (rank != maxrank) {
-> +			if (rank == 1) {
-> +				/* MC_WORK_MODE */
-> +				clrsetbits_le32(0x3202000, 0xffc, 0x6f0);
-> +
-> +				/* MC_WORK_MODE2 */
-> +				clrsetbits_le32(0x3202004, 0xffc, 0x6f0);
-> +			}
-> +			/* store rank1 config in upper half of para1 */
-> +			offs += 16;
-> +			mc_work_mode += 4;	/* move to MC_WORK_MODE2 */
-> +		}
-> +	}
-> +	if (maxrank == 2) {
-> +		config->dram_para2 &= 0xfffff0ff;
-> +		/* note: rval is equal to para->dram_para1 here */
-> +		if ((rval & 0xffff) == (rval >> 16)) {
-> +			debug("rank1 config same as rank0\n");
-> +		} else {
-> +			config->dram_para2 |= BIT(8);
-> +			debug("rank1 config different from rank0\n");
-> +		}
-> +	}
-> +
-> +	return 1;
-> +}
-> [...]
-> +static int sunxi_ram_probe(struct udevice *dev)
-> +{
-> +	struct sunxi_ram_priv *priv = dev_get_priv(dev);
-> +	unsigned long dram_size;
-> +
-> +	debug("%s: %s: probing\n", __func__, dev->name);
-> +
-> +	dram_size = sunxi_dram_init();
-> +	if (!dram_size) {
-> +		printf("DRAM init failed: %d\n", ret);
+Yes I should add a paragraph on the variable.
 
-There is no ret variable anymore, so this fails to compile. With this
-line and the variable size issue fixed, this driver works on my Nezha
-board, so with those fixes:
+> 
+> My main concern is whether this sort of thing is going to make it even
+> harder to boot in a simple, standard manner.
+> 
+> Re Heinrich's comment:
+> 
+>> There is no 1:1 relationship between compatible string and filename,
+>> e.g. the following arm64 device-trees use the same compatible string:
+> 
+>>> amd/amd-overdrive-rev-b0.dts
+>>> amd/amd-overdrive-rev-b1.dts
+> 
+> That just seems like a bug to me. The compatible should include the
+> board rev as it does for xlnx,zynqmp-zcu102-rev1.1 etc.
 
-Tested-by: Samuel Holland <samuel@sholland.org>
+Yes, here it is a bug.
 
-> +		return -ENODEV;
-> +	}
-> +
-> +	priv->size = dram_size;
-> +
-> +	return 0;
-> +}
+In theory you could have different device-trees for different device 
+configurations (e.g. USB OTG vs USB host). In this case having the same 
+compatible string would be correct.
 
+Best regards
+
+Heinrich
+
+> 
+> Regards,
+> Simon
