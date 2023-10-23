@@ -4,103 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87EAFC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 09:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2FD8CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 09:11:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7229D8780D;
-	Mon, 23 Oct 2023 11:02:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E3BD287883;
+	Mon, 23 Oct 2023 11:11:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K7+Z4mMQ";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="bndzWh3W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A3A08786A; Mon, 23 Oct 2023 11:02:34 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A8E438780D; Mon, 23 Oct 2023 11:11:46 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20714.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1b::714])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FB0687806
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 11:02:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7B32878B2
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 11:11:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40839807e82so17053135e9.0
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 02:02:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698051751; x=1698656551; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=B1gLox9RqyXPSzPj6p25lDQAF72qjp15QUnwuXfYshI=;
- b=K7+Z4mMQycScZ0ilKuEBpYSF57Ny+kOHXW6eG2y7T2BHyf9sDIi7JA0fz7pEKdwtHf
- L34aHLV6P9kkaPDaCW/ohg5cHHe8qxKR5KHe2GVJo2Hp0Ush+SKqOc5zjdxHIc83BryM
- I7XjPACpQTeO1SZD2AMcAYvWrNrTDAssCnMhV+tJTu/1PEfESLWwSIhZ1a6cOuomSwQN
- i8iho/uehKzcXotxScYfJYWKUTuv0LZlZd6KB8dRYkPO41n7BvBPtez3QsG/jV6zR87W
- nyNEO1VqIlTFvx2sS2+fhQzqQy6WbrGQPeGvqG1GdtjnXcArzn3IvWspbnRVR4PW4csD
- pkhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698051751; x=1698656551;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=B1gLox9RqyXPSzPj6p25lDQAF72qjp15QUnwuXfYshI=;
- b=Qirg8wOQgu2Tw0rLhwAOPEK4n6gV3ivMnd7r4K7uqOI4u1Q05WiUA7HWq7GgZY+CAS
- 5dWJRq/h1ZY2EFOlCxtHOTZAmmHS/25nBPxypIbWBzZ4RqsZEL4TslHcbZGXvoYXMPtY
- QDe2z2sm98xW0d4KDj8nn6CPwYJZHieyxmU8ETKnb6xKyJaJWNnONNvqOuuJbi38cDRn
- DZ32wFXevnWC5xAD7rDsAxtwGlNrwspfRU0prYS4DB079IHYAuQJxaCvS9B9pYAG1OtF
- 5viMtoe2DI5eD1UcGoXib3GXvOqbWgQb9SsQbPkblJTi3J9t7QPNVkTn0c0Hnfi8Z37g
- YRfQ==
-X-Gm-Message-State: AOJu0Yz0ght/U3fv2jLqwAGcGodDERzhOHv3V/cv1j1Bl2a6P66Ud7qt
- O1rYQ2Mb/C1wEMr6fkImGhzwBw==
-X-Google-Smtp-Source: AGHT+IGUwhggw3BSwF4EnKe4ojEgyJDpLymdWBwF7GZfh89uXxKyV1qs+6FBH8e89wYFUXLrgX8mFA==
-X-Received: by 2002:a05:600c:3c93:b0:407:4701:f9e with SMTP id
- bg19-20020a05600c3c9300b0040747010f9emr8275336wmb.17.1698051751597; 
- Mon, 23 Oct 2023 02:02:31 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:a36e:a5d9:26ae:74b1?
- ([2a01:e0a:982:cbb0:a36e:a5d9:26ae:74b1])
- by smtp.gmail.com with ESMTPSA id
- h14-20020a05600c314e00b003fbe4cecc3bsm13740220wmo.16.2023.10.23.02.02.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Oct 2023 02:02:31 -0700 (PDT)
-Message-ID: <42fa4e61-93ea-4b99-a5a3-1ffc3ab36cd9@linaro.org>
-Date: Mon, 23 Oct 2023 11:02:30 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bh4Oi/BYtoONCza5aQfzIKbDOSrL3+l3B0pYDq3UthpP91RMfXKbJuIuv/mc/gCqcL3efSkmSdsrPZ8y2QxfbfSfs7N93klDpJZK/0X4BLebKdQnMYoWRqy9KF2fOpS3XOINTNRqWHy8mkLI7BdZOodeID45sv7RvygAnBZVavktrqInxYTSfdf8+04VpnwGVsIqzYVhx0ixgfCMEzxLcT1v7lX/9FI3nmtQOr/HoR+RRJ1pS76NxXlBkhblhGOnfqiDrY6m/A/jspZJII2cY+3bZo7tLdDjhsapEKsG2tFgSm57HcdpYFDepnxMZAZgdeytxstNCSGt4ma1XhmVDQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=a5OX5xPqtMVgosnwvMaTFaH4A4hrw0uKKxeAogKccaU=;
+ b=k5Ufcv4lUv8KrtnrnDcZ1wCL2huUw2BECXvptJpVZlUrkLFRcHdskmnxQlvm+Jz6yTR5YtUpZ9PvRby8+YhRB78CEAFviwEWtdtJvU4gx7KPNY8fpaKBgaaZ6fCNLeZ2P096j2WmjkNV8GKHiIZFX54Zc66H1Xs81jBubTjc+vQRT779NzniycBMOegrtEb6blWCgZpCJV/9jfWSd1YWvfRLi3H68dPT4BOOBs5KvoeetDolqGeOOe5stZTyc2eQjr8CEF6PiyXE5//g4f2fdYyaeX3uvmHOXLQBcsQtiykSxbQLNn8NGe+IczuYoT9l+SrcokmaB3MTZPpiYOBfIA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=a5OX5xPqtMVgosnwvMaTFaH4A4hrw0uKKxeAogKccaU=;
+ b=bndzWh3WT/lZCYclbogF20H3B6+GyGpVQCqtISdABWM0bu2Vjxwm4tM1Iwu/Ll02P8SzzVBv7TCN76cRQTCkcklH8xCxpRVSaOXWUJw39nMllwRSZCpEJLfnAL+fI0OVeMcs7D7nCXhHObgCCbw1ZJje1+fiDqPaUpNtxRYvoAQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by VI1PR10MB3631.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:13b::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.26; Mon, 23 Oct
+ 2023 09:11:40 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.030; Mon, 23 Oct 2023
+ 09:11:40 +0000
+Message-ID: <f53f9d1b-ae49-4bca-af39-6af23429e5a0@prevas.dk>
+Date: Mon, 23 Oct 2023 11:11:37 +0200
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-20231023
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 6/6] led: add TI LP5562 LED driver
+Content-Language: en-US, da
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Philippe Reynes <philippe.reynes@softathome.com>,
+ Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
+References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
+ <20231019095837.2084458-7-rasmus.villemoes@prevas.dk>
+ <88c0c718-d62f-4854-89d3-c68029c44556@denx.de>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <88c0c718-d62f-4854-89d3-c68029c44556@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MM0P280CA0117.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:9::32) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|VI1PR10MB3631:EE_
+X-MS-Office365-Filtering-Correlation-Id: ca7c8e97-4f19-4003-ec1f-08dbd3a8115a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VIqoTWLaOvy5Zl5GBv4L8GCeqGP+RJaI7RLs9xY+zIQq17NNByOCfRo5cKtMVzBJ30YoFs840cboKxN+QoBXTpCfiD6WaKjKBRmU/FbSOsIDgd01VPgrJZaLtTpzXnf3XeTmSD8Em17RAQjtS4qj/XLZFKv8yCbEESNexExP4KXAKQP5hI1Z8GEr5rqAbzIMfJxnmfVn3N7qbJ7HtWHjCfZH/vYTHDioHKiqa0EoHahpYRllNFWyZVsXza8w2BgfmFL1tFFNmBQt+auogt0NvYVln5xn24CP00jMuEsfbcQ+zoUABNqfAVKxQHuiJ68uxnSECdygLq4Uqd9+jUTA1nQTYhgaHq1IIq0VlHuIJdrxzU5bXOL3Ky+WMgdPAIYzJ0uEh/Lr/QZ73o1N3nahPltbtagerP5m18jV2lhOgh5xE72W6DE40fFGvFhs/+WWQ6CjKU7H98RzCsnME4eLbAEH17QQmxxGMG9iUONAcHr33yrS6UWTR00s9E/gKWVauMqFj56vesQpDbwwMy6rhxPJwGdc88Kt4y6NrU/krkGA12+40IdP+gYMPS2TWdJMddSZTdZgCZ5u1uRlGIRWm1WHRTwpCbYQ3jztVti+Xah10m02H6eaUrvREqF8MsoO75BgA85jrvN1OLq2cGVdIQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(396003)(376002)(39840400004)(366004)(136003)(230922051799003)(1800799009)(186009)(451199024)(64100799003)(66946007)(66556008)(66476007)(316002)(54906003)(478600001)(966005)(6486002)(86362001)(31696002)(36756003)(5660300002)(8936002)(4326008)(2906002)(8676002)(44832011)(41300700001)(83380400001)(8976002)(38100700002)(53546011)(6512007)(6506007)(2616005)(6666004)(26005)(31686004)(43740500002)(45980500001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T1g3a0RYMDIva2VUa2hnS21TRkJWeDlEZzFEQ0hiTTlwU1hielFPb1E3dUJ5?=
+ =?utf-8?B?akJlREcwOFlOVThtTXlNY3hsTzlVcWVMYzhwaFFNME9oK2dobzNxdzhHYnNm?=
+ =?utf-8?B?c3RVak0yRTV2djZiMWF5emsvYWl5RXgrelR5eVQ0Sm5tZ1AxR1h3alM1MHJv?=
+ =?utf-8?B?TEM0aTZwQm9JdXpZeXJJUHY3NU52M0VNR1hQYUxwdTVSSTg2TVRWc25CYjBP?=
+ =?utf-8?B?SjJEcUxSb21GLzRKcE9RK3dnK3Y5SDZQQWlMSlI3ZkJhZzlzS2RxOW1QMytR?=
+ =?utf-8?B?bHFTOVJLaW55dFBpNVZmSUpQUWREbE5JQU53b0EvQjFmaS93Wkwvcjk5QkVn?=
+ =?utf-8?B?RlN3Q2Y0eldiSU1JRC9Vb1Q0NDY1S3poWGM0bi8wN0FUTENOZCt3ZmRhbzU3?=
+ =?utf-8?B?OWdtcWpYczBkZkswOUFlUTk1M2F6M1dmb1JnMlNwNnhwSEdDTUEvemhzSzJP?=
+ =?utf-8?B?WFdCdHVBUmVIN3J4Z1MwNkc4WEtjVkhkTng0K1BVNngranhVQVJoaWJFaDdF?=
+ =?utf-8?B?K0Exakpnemw0a0ZWb3NOcEZDaDlkSkgyN0djY016dGhFOU1HYWNpWkYrWFRN?=
+ =?utf-8?B?U3hTUVp2VzdYZVpNR1ZpNXBucU44T0VrR1E4bEVaWFBPWWY1eDFZaVVJcm15?=
+ =?utf-8?B?SjdQd3JLcEh3bjArL3Z2RkVZTUE3czB0cTZiNC9XQnBjYnN2UHpYcXVsa1Vo?=
+ =?utf-8?B?SWFZeStWclpOYWl0OWhia1laUko5M1hpZWt0bC9hY0pGNm9TTnNNK205clhT?=
+ =?utf-8?B?RVNOTTdaanRmL0VZVHFCU0tKemZ2UklYcThyNjBsN0JZWnQ1WTR4ZUkyWjhM?=
+ =?utf-8?B?WmphNHVPbGdGeHIwNTNYL1dJSnFDQ3UrTTMrUU9ZNXJ1OElheUxLanU3U0Iv?=
+ =?utf-8?B?U3RJMlFMekdQbkZOQUovb0d2Y3lTWXF1eFVhdDVuQVFjYXUxNU40dmVlUzRq?=
+ =?utf-8?B?dXZoLzRHTkhDSUpyTFowRUVuMUxmMzB2ODBFVStCMVVIYkJqelZLVjBPZFNx?=
+ =?utf-8?B?eDYrWUlCcFVzL0JPREkzanBDaWExZy8wQ3diRVQ2WFpRamYwV2Y3dURLcCtp?=
+ =?utf-8?B?dkhpN3o3Tkd1Z0VvM2RFN2sxL0cwd1hBK1BDZEErMUxCNHNDTFlHdTVWUldZ?=
+ =?utf-8?B?MXZIMnNYenRtY0JGdDVxdjhUNnYvWkhuM28rQzFtdDVBOUNlK3Y0d21SREtE?=
+ =?utf-8?B?OGtsVitHVFYyVS9SNXpqbzE4OXFIQTAxSHBoTi9YNGRrQ1QveGxTR2xQaVdY?=
+ =?utf-8?B?Q2VwRUhmZHhuVUN2U0ZkdWRtSXFNWlRqU3JTbGViMDVHS3JSeHhMbWFqR094?=
+ =?utf-8?B?L3JFeThhSnNnNFNrZXZ1bk1XMTRSTjUvK2xkK3EwcEFDZms0NGl4bDhrWlU4?=
+ =?utf-8?B?cmIxWDYrNlZkZzF6UFQycG5tb29iMFV2OUlwR3dQYnRLWHdTcnZwR3FOWnMx?=
+ =?utf-8?B?MzRjZG80NXF5Vkw3SnZJSEFTNkUvak9EY3BwUzhVY1FGdUFodHBqQjJvcytT?=
+ =?utf-8?B?SmVwWDQwUFB1NVVXaWNDMG1FaGFjcjQ4dnNJaHV4NDQ1TGkvcVFxSDRSOWw2?=
+ =?utf-8?B?STNNajlvc0lwcUNocVRYYitrVkFwZVlYTmgxbWJNcmZkYUJLY2FjMk5sV2Zx?=
+ =?utf-8?B?MFkrTHBucGRKdjVZcFNDQXk4ekRRV0RORG1HNXFZd2RBcTB2aVVVSGdnVUFJ?=
+ =?utf-8?B?ck54Y3M3dDRTSUNhL3IxZ3dhK281UnJQbTgwSUxkNXZabHRaS01vL2Yya1hT?=
+ =?utf-8?B?akJtNWU3Vm5KdVdGcGVaWjZvcGhFS3FjdzdKc2tyMkhUb2d3M0xlaFlHL2VZ?=
+ =?utf-8?B?Tm5UcUJIcGtBMnE4RTUvM09TalhnaDdPRVoxMzY1ZDJkYkpaV0cyVjRpT1ZM?=
+ =?utf-8?B?K0RwU0dDS2oxdk9YZTFTc2J2akxhTVMyZVRMai9CK09uYXpSN2xMdUk3UlVB?=
+ =?utf-8?B?eXZPbHFNa0hydGtFZjM4YUxCeUVERXNjaVJHTm5BVDI1ZWxBOGJoMkg5NEo5?=
+ =?utf-8?B?dzF1NTlaR0tjVlZpSkc1R1FnYVY2S2h5WFU5ZmFIZVNrQk55bjBqdG9VckZN?=
+ =?utf-8?B?ZERjeEQyVWJCanhMQktWSDBRQkplNURvdy82Yko3OGx4WmdraFN0NjZsYTYy?=
+ =?utf-8?B?SkpjRzVhRFkvdnVxczNYYkgvY0h4VmZJTmVMQVU5WTZFVExzTTNtMDUrekR3?=
+ =?utf-8?B?UFE9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca7c8e97-4f19-4003-ec1f-08dbd3a8115a
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2023 09:11:40.3343 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: zSY/bI7zmjwXGSm9U90e1Zw2t3qQ5K4eMUyutnOcWg2KCYjwZzbPFsbsfzqXV4fCYFSMG9nOOPWYRQ5fNodi0Cyje2WFF8ECZxt+drgtY0M=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3631
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,46 +141,74 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 19/10/2023 15.58, Marek Vasut wrote:
+> On 10/19/23 11:58, Rasmus Villemoes wrote:
+>> From: Doug Zobel <douglas.zobel@climate.com>
+>>
+>> Driver for the TI LP5562 4 channel LED controller. Supports
+>> independent on/off control of all 4 channels. Supports LED_BLINK on 3
+>> independent channels: blue/green/red. The white channel can blink, but
+>> shares the blue channel blink rate.
+>>
+>> Heavily based on patch originally from Doug Zobel [1].
+>>
+>> I have modified it so it matches the DT bindings in the linux tree,
+>> and also follows the linux driver implementation more closely. This
+>> should address Tom's concerns, and also matches my goal of making the
+>> U-Boot driver work with our existing .dts which is known to work in
+>> linux.
+>>
+>> As our boards only have the R,G,B outputs connected, I have not
+>> actually tested how the white channel behaves, but the R,G,B work
+>> exactly as expected.
+>>
+>> [1]
+>> https://lore.kernel.org/u-boot/1547150757-1561-1-git-send-email-douglas.zobel@climate.com/
+>>
+>> Cc: Doug Zobel <douglas.zobel@climate.com>
+>> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+>> ---
+>>   doc/device-tree-bindings/leds/leds-lp5562.txt |  63 ++
+>>   drivers/led/Kconfig                           |   8 +
+>>   drivers/led/Makefile                          |   1 +
+>>   drivers/led/led_lp5562.c                      | 578 ++++++++++++++++++
+>>   4 files changed, 650 insertions(+)
+>>   create mode 100644 doc/device-tree-bindings/leds/leds-lp5562.txt
+>>   create mode 100644 drivers/led/led_lp5562.c
+>>
+>> diff --git a/doc/device-tree-bindings/leds/leds-lp5562.txt
+>> b/doc/device-tree-bindings/leds/leds-lp5562.txt
+>> new file mode 100644
+>> index 0000000000..4e0c742959
+>> --- /dev/null
+>> +++ b/doc/device-tree-bindings/leds/leds-lp5562.txt
+> 
+> Why not use Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml ?
 
-An important fix for USB Gadget on G12/SM1 boards and a welcome DT sync for the Amlogic A1 DT.
+Because I'm not adding support for all the devices covered by that
+binding, nor for all the properties defined there (and some of those, I
+think, do not even make sense for the lp5562 but only apply to some of
+the other variants).
 
-The CI job is at https://source.denx.de/u-boot/custodians/u-boot-amlogic/pipelines/18256
+> [...]
+> 
+>> --- /dev/null
+>> +++ b/drivers/led/led_lp5562.c
+>> @@ -0,0 +1,578 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Copyright (C) 2018 Doug Zobel <douglas.zobel@climate.com>
+> 
+> Why not port Linux drivers/leds/leds-lp5562.c ?
 
-Thanks,
-Neil
+Because that would be way more work to make that fit into U-Boot's LED
+framework than to take Doug's initial patch and make it build against
+current U-Boot.
 
-The following changes since commit e65b5d35c9116485366bb08138043d51220551da:
+Rasmus
 
-   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sh (2023-10-17 09:15:56 -0400)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-20231023
-
-for you to fetch changes up to 14a21f1a80afc58d52dc72e35f27d3a47d36c082:
-
-   arm: meson-a1: dts: Sync DT with Linux (2023-10-18 09:46:01 +0200)
-
-----------------------------------------------------------------
-- sync A1 with Linux and add missing UART compatible
-- fix USB2 gadget init on G12/SM1 based Boards
-
-----------------------------------------------------------------
-Guillaume La Roque (1):
-       phy: meson-g12a-usb2: fix ret check on power_domain_get
-
-Igor Prusov (2):
-       serial: amlogic: Add UART compatible for A1 board
-       arm: meson-a1: dts: Sync DT with Linux
-
-  arch/arm/dts/meson-a1.dtsi    | 356 +++++++++++++++++++++++++++++++++++++++++-
-  drivers/phy/meson-g12a-usb2.c |   6 +-
-  drivers/serial/serial_meson.c |   1 +
-  3 files changed, 355 insertions(+), 8 deletions(-)
