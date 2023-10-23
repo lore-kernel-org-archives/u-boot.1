@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D326C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:05:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F869CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:05:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE841878A5;
-	Mon, 23 Oct 2023 09:05:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D9CE487880;
+	Mon, 23 Oct 2023 09:05:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="jNlMhIQg";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Xq+jMkKi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DBF9878A5; Mon, 23 Oct 2023 09:05:06 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 3DA7B878B0; Mon, 23 Oct 2023 09:05:18 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9726787880
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:05:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F51F878B5
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:05:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-53df747cfe5so4484921a12.2
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:05:02 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9c3aec5f326so847407066b.1
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:05:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1698044702; x=1698649502; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1698044713; x=1698649513; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fyquVEXZelcq9oq3+AJ8o3ehBhKROAryjl6CjXnIoxY=;
- b=jNlMhIQgI98HtpCunaRtH8RDqF0YTeeBN9HZ4SXofrC6jqmPjTHaEWqcxNj+BfouMK
- hFkPNIkUjpYgxDN0R4eU2dx1Um8NRHVk9S2u8H8AReSJNxSQQZhmm8XiVs8Z3py5Pd2/
- 8lDq1So8GcugdmPpfyUaxM46O2ffxYr8h8BXUmSzbhQ+j1hfFw3mGggPIHZF9XxtZX8L
- oiFA0mAQpSH9/tPvEqT5pfoLdtGg8Wi/+n1zSvr3QLgbuWGUdKzTgZxCbcn9a/tcWCJe
- omPShtA3JV+spCnHvu3ps+UqNetuQKExGVrlCMXMiKtqqtL7Tcih8+HWNNnsHzXbfI+p
- f6+A==
+ bh=/CSTHC9nloFVVE0SiYuvZ3M7EyisLXIfIxAjQaNmff4=;
+ b=Xq+jMkKiVv7e/TdlDrslddM9sIEu+O2eD4boZ0IPvdhShN5dpRJbitvaMHTTsF5z+i
+ 6JaWkWCMhd4L9mP5TWFD3lDbUy5ZTKwl7xpgzYhz9oTiPrqWGCtBIKZpSO8TiF++iNbl
+ hlN6V4GaanyqzOHniyDtUbmbg71RC9w+1N9UC7aJ+egO3VxAMzrFwNL/VMUpCTFAAbC0
+ EnqJC+7j1U7RpitclQO/2VLz6XcNI1r/s/Rn9VdLBkZydVT+skC7v+fDqZKk1q4qgV9q
+ ABYIPVhFuqnMyhgLeOqB2BBd0rMfXcxqjY1yTHWSnRahyMxsztTJWSRm/Z+ix845dzID
+ W9GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698044702; x=1698649502;
+ d=1e100.net; s=20230601; t=1698044713; x=1698649513;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fyquVEXZelcq9oq3+AJ8o3ehBhKROAryjl6CjXnIoxY=;
- b=SOXfnR6wLyg3oTvsPyMHT3UxiKUJWRwGoV79d1wRHqDss93lkCp2xI1rwxbvLSLHwX
- T5wl+XbRXcqYCaKajAin6NBXlsQfajD5xBECpFiViyU5HTVx7UHGWFAc6s1FSqvBCJGV
- CJQyAWmQZg056kwHZLQZSewBp/2ZH3uB/6A5J14WVXH8oQYzODvIL93uohs7lJMp6kD0
- a9jhzOAzrJ5u1SQ/RQOeP83qChBoJln5l7gfbNkxWwCOCWnu71iC8FIF5ANcD8MXKuyw
- dmIl0i+1/ENPjsF9iRfQeCvGR3WuOhVnzpkmRFeyoHIzHkdnAFrZV5TdUFINn5mQDlpP
- MZLw==
-X-Gm-Message-State: AOJu0Yx+KIPuFk2+bWAMf6u/XVrH5NczFPfxGiZ2MGQk/JMgCWTTU45E
- WikQXwxpPIcm8Zz+qXq7tU6KC9fybzwWvWrTFlpJlQ==
-X-Google-Smtp-Source: AGHT+IFp5E/J3TwIzJDz83G4WrGAqwfNZL1mgMYoYqmaqDPsxTl+llzDj9IhCTjXjc/rwjYgR1BZx1Mkdxy4I1R03IA=
-X-Received: by 2002:a17:907:2d27:b0:9bf:d70b:986a with SMTP id
- gs39-20020a1709072d2700b009bfd70b986amr6724233ejc.13.1698044701716; Mon, 23
- Oct 2023 00:05:01 -0700 (PDT)
+ bh=/CSTHC9nloFVVE0SiYuvZ3M7EyisLXIfIxAjQaNmff4=;
+ b=IXiPTl0bg3R74J8lGaZ/BW5n9ylO2pqTHryzFD1gsmV+pg1u/nKnbWa9exZMSM2+fm
+ 6b1C200zFUqS8rKLeZQTTzkOj7crzGWIx0NpVZ/tXakBH+QjJUDz+nDDPIZKmG2RhP0Q
+ JRbm9La9sE4hVWoKvM/mB9lDX1wn+AvISMJQ5DFrqnYL6pGlGrkYE9eaj4nW1lG8Y9Mm
+ Pdjdf/+gRbHwos+5S97HzqGA740laPTrvnuKwTGmF91cygJhx4t4vTFJIz4fw+YIjVFG
+ Mv9ZuvpLHCvLIJWzHNSunq0/7oNLpG+lGPMc186cdI1Zi4YmnyiXWp7Sr7v1M2jpsZFg
+ LQgg==
+X-Gm-Message-State: AOJu0YzQRoVIUZQW+7ZHLXCLNc03RuY64EtVeHq5eUmv7tXrGU8PWhrW
+ g9gJkr6FeSuMeR3BAKgTo42r3LGh1GFDy7TPK8rK1Q==
+X-Google-Smtp-Source: AGHT+IFFRYSCqyMUsndCddXRk+7n6QmVzJqWKhAC5fzPbS+4VR0ARDeD/4/2SIYTFsco0X+4MSglZ365ZEOJzmTNyyg=
+X-Received: by 2002:a17:906:6a13:b0:9ad:8a96:ad55 with SMTP id
+ qw19-20020a1709066a1300b009ad8a96ad55mr11140735ejc.14.1698044713499; Mon, 23
+ Oct 2023 00:05:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231022062012.97271-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231022062012.97271-1-heinrich.schuchardt@canonical.com>
+References: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@google.com>
-Date: Mon, 23 Oct 2023 00:04:50 -0700
-Message-ID: <CAPnjgZ3STrx4HnVptVWCmKuM9jZLWma-KmK4QcoDJ+9XKHeM5A@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: fix efi_dp_from_eth
+Date: Mon, 23 Oct 2023 00:05:01 -0700
+Message-ID: <CAPnjgZ3q1im+5GwvZ_U8KMERFczD4EbR9T9gG1aeKews3yyZRg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] general: fix GPL-2.0-or-later SPDX headers
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,24 +83,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 21 Oct 2023 at 23:20, Heinrich Schuchardt
+Hi Heinrich,
+
+On Sun, 22 Oct 2023 at 10:48, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> When compiling the sandbox with CONFIG_LTO=n, CONFIG_NET=n an error is
-> reported:
->
->     /usr/bin/ld: lib/efi_loader/efi_device_path.o:
->     in function `efi_dp_from_eth':
->     lib/efi_loader/efi_device_path.c:985:(.text+0xcf4):
->     undefined reference to `eth_get_dev'
->
-> Add a missing configuration check.
->
-> As the function is exported __maybe_unused can be removed.
+> SPDX headers should use GPL-2.0-or-later and not GPL-2.0+.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/efi_loader/efi_device_path.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  Makefile                                                   | 2 +-
+>  README                                                     | 2 +-
+>  api/Makefile                                               | 2 +-
+>  api/api.c                                                  | 2 +-
+>  api/api_display.c                                          | 2 +-
+>  api/api_net.c                                              | 2 +-
+>  api/api_platform-arm.c                                     | 2 +-
+>  api/api_platform-mips.c                                    | 2 +-
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+In License/README it shows the identifier as 'GPL-2.0+'.
+
+Regards,
+simon
