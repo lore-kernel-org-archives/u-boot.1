@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10713C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEEACCDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:26:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D736B87927;
-	Mon, 23 Oct 2023 15:25:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 52E558791C;
+	Mon, 23 Oct 2023 15:25:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78D19871C3; Mon, 23 Oct 2023 15:25:11 +0200 (CEST)
+ id 9BD6F8792D; Mon, 23 Oct 2023 15:25:14 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 00AD687915
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3753F871C3
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7E473C15;
- Mon, 23 Oct 2023 06:25:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9ECA42F4;
+ Mon, 23 Oct 2023 06:25:52 -0700 (PDT)
 Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 223E43F762;
- Mon, 23 Oct 2023 06:25:07 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 430143F762;
+ Mon, 23 Oct 2023 06:25:10 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
@@ -33,9 +33,9 @@ Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
  Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
  Okhunjon Sobirjonov <okhunjon72@gmail.com>
-Subject: [PATCH v3 04/24] pinctrl: sunxi: move pinctrl code
-Date: Mon, 23 Oct 2023 14:24:29 +0100
-Message-Id: <20231023132449.813863-5-andre.przywara@arm.com>
+Subject: [PATCH v3 06/24] pinctrl: sunxi: remove struct sunxi_gpio
+Date: Mon, 23 Oct 2023 14:24:31 +0100
+Message-Id: <20231023132449.813863-7-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231023132449.813863-1-andre.przywara@arm.com>
 References: <20231023132449.813863-1-andre.przywara@arm.com>
@@ -57,286 +57,344 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the existing sunxi-specific low level pinctrl routines from
-arch/arm/mach-sunxi into the existing GPIO code under drivers/gpio, so
-that the common code can be shared outside of arch/arm.
+So far every Allwinner SoC used the same basic pincontroller/GPIO
+register frame, and just differed by the number of implemented banks and
+pins, plus some special functionality from time to time. However the D1
+and successors use a slightly different pinctrl register layout.
+Use that opportunity to drop "struct sunxi_gpio", that described that
+MMIO frame in a C struct. That approach is somewhat frowned upon in the
+Linux world and rarely used there, though still popular with U-Boot.
 
-This also takes the opportunity to move some definitions from our
-header file into the driver C file, as they are private to the driver
-and are not needed elsewhere.
+Switching from a C struct to a "base address plus offset" approach allows
+to switch between the two models more dynamically, without reverting to
+preprocessor macros and #ifdef's.
+
+Model the pinctrl MMIO register frame in the usual "base address +
+offset" way, and replace a hard-to-parse CPP macro with a more readable
+static function.
+All the users get converted over. There are no functional changes at
+this point, it just prepares the stages for the D1 and friends.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 Reviewed-by: Samuel Holland <samuel@sholland.org>
 Tested-by: Samuel Holland <samuel@sholland.org>
 ---
- arch/arm/include/asm/arch-sunxi/gpio.h |  20 +----
- arch/arm/mach-sunxi/Makefile           |   1 -
- arch/arm/mach-sunxi/pinmux.c           |  78 -------------------
- drivers/gpio/sunxi_gpio.c              | 102 ++++++++++++++++++++++++-
- 4 files changed, 105 insertions(+), 96 deletions(-)
- delete mode 100644 arch/arm/mach-sunxi/pinmux.c
+ arch/arm/include/asm/arch-sunxi/gpio.h | 40 ++----------
+ drivers/gpio/sunxi_gpio.c              | 88 ++++++++++++++++----------
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c  | 14 ++--
+ 3 files changed, 66 insertions(+), 76 deletions(-)
 
 diff --git a/arch/arm/include/asm/arch-sunxi/gpio.h b/arch/arm/include/asm/arch-sunxi/gpio.h
-index 6eaeece4e24..4bc9e8ffcc9 100644
+index 4bc9e8ffcc9..e0fb5b5da63 100644
 --- a/arch/arm/include/asm/arch-sunxi/gpio.h
 +++ b/arch/arm/include/asm/arch-sunxi/gpio.h
-@@ -3,6 +3,9 @@
-  * (C) Copyright 2007-2012
-  * Allwinner Technology Co., Ltd. <www.allwinnertech.com>
-  * Tom Cubie <tangliang@allwinnertech.com>
-+ *
-+ * Definitions that are shared between the Allwinner pinctrl and GPIO drivers,
-+ * also used by some non-DM SPL code directly.
-  */
+@@ -31,13 +31,6 @@
+ #define SUNXI_GPIO_H	7
+ #define SUNXI_GPIO_I	8
  
- #ifndef _SUNXI_GPIO_H
-@@ -76,22 +79,6 @@ struct sunxi_gpio_reg {
+-/*
+- * This defines the number of GPIO banks for the _main_ GPIO controller.
+- * You should fix up the padding in struct sunxi_gpio_reg below if you
+- * change this.
+- */
+-#define SUNXI_GPIO_BANKS 9
+-
+ /*
+  * sun6i/sun8i and later SoCs have an additional GPIO controller (R_PIO)
+  * at a different register offset.
+@@ -55,32 +48,11 @@
+ #define SUNXI_GPIO_M	12
+ #define SUNXI_GPIO_N	13
+ 
+-struct sunxi_gpio {
+-	u32 cfg[4];
+-	u32 dat;
+-	u32 drv[2];
+-	u32 pull[2];
+-};
+-
+-/* gpio interrupt control */
+-struct sunxi_gpio_int {
+-	u32 cfg[3];
+-	u32 ctl;
+-	u32 sta;
+-	u32 deb;		/* interrupt debounce */
+-};
+-
+-struct sunxi_gpio_reg {
+-	struct sunxi_gpio gpio_bank[SUNXI_GPIO_BANKS];
+-	u8 res[0xbc];
+-	struct sunxi_gpio_int gpio_int;
+-};
+-
  #define SUN50I_H6_GPIO_POW_MOD_SEL	0x340
  #define SUN50I_H6_GPIO_POW_MOD_VAL	0x348
+ 
+-/* GPIO bank sizes */
+ #define SUNXI_GPIOS_PER_BANK	32
++#define SUNXI_PINCTRL_BANK_SIZE 0x24
+ 
+ #define SUNXI_GPIO_NEXT(__gpio) \
+ 	((__gpio##_START) + SUNXI_GPIOS_PER_BANK)
+@@ -200,19 +172,19 @@ enum sunxi_gpio_number {
+ #define SUNXI_GPIO_AXP0_GPIO_COUNT	6
+ 
+ struct sunxi_gpio_plat {
+-	struct sunxi_gpio	*regs;
++	void			*regs;
+ 	char			bank_name[3];
+ };
+ 
+ /* prototypes for the non-DM GPIO/pinctrl functions, used in the SPL */
+-void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val);
++void sunxi_gpio_set_cfgbank(void *bank_base, int pin_offset, u32 val);
+ void sunxi_gpio_set_cfgpin(u32 pin, u32 val);
+-int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset);
++int sunxi_gpio_get_cfgbank(void *bank_base, int pin_offset);
+ int sunxi_gpio_get_cfgpin(u32 pin);
+ void sunxi_gpio_set_drv(u32 pin, u32 val);
+-void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val);
++void sunxi_gpio_set_drv_bank(void *bank_base, u32 pin_offset, u32 val);
+ void sunxi_gpio_set_pull(u32 pin, u32 val);
+-void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val);
++void sunxi_gpio_set_pull_bank(void *bank_base, int pin_offset, u32 val);
+ int sunxi_name_to_gpio(const char *name);
+ 
+ #if !defined CONFIG_SPL_BUILD && defined CONFIG_AXP_GPIO
+diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+index 3ca833316b5..d7f6a266e53 100644
+--- a/drivers/gpio/sunxi_gpio.c
++++ b/drivers/gpio/sunxi_gpio.c
+@@ -29,45 +29,61 @@
+  * =======================================================================
+  */
  
 -#define BANK_TO_GPIO(bank)	(((bank) < SUNXI_GPIO_L) ? \
 -	&((struct sunxi_gpio_reg *)SUNXI_PIO_BASE)->gpio_bank[bank] : \
 -	&((struct sunxi_gpio_reg *)SUNXI_R_PIO_BASE)->gpio_bank[(bank) - SUNXI_GPIO_L])
 -
--#define GPIO_BANK(pin)		((pin) >> 5)
--#define GPIO_NUM(pin)		((pin) & 0x1f)
--
--#define GPIO_CFG_INDEX(pin)	(((pin) & 0x1f) >> 3)
--#define GPIO_CFG_OFFSET(pin)	((((pin) & 0x1f) & 0x7) << 2)
--
--#define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
--#define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
--
--#define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
--#define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
--
- /* GPIO bank sizes */
- #define SUNXI_GPIOS_PER_BANK	32
+ #define GPIO_BANK(pin)		((pin) >> 5)
+ #define GPIO_NUM(pin)		((pin) & 0x1f)
  
-@@ -217,6 +204,7 @@ struct sunxi_gpio_plat {
- 	char			bank_name[3];
- };
++#define GPIO_CFG_REG_OFFSET	0x00
+ #define GPIO_CFG_INDEX(pin)	(((pin) & 0x1f) >> 3)
+ #define GPIO_CFG_OFFSET(pin)	((((pin) & 0x1f) & 0x7) << 2)
  
-+/* prototypes for the non-DM GPIO/pinctrl functions, used in the SPL */
- void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val);
- void sunxi_gpio_set_cfgpin(u32 pin, u32 val);
- int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset);
-diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
-index 58f807cb82d..671211e9322 100644
---- a/arch/arm/mach-sunxi/Makefile
-+++ b/arch/arm/mach-sunxi/Makefile
-@@ -10,7 +10,6 @@ obj-y	+= board.o
- obj-y	+= clock.o
- obj-y	+= cpu_info.o
- obj-y	+= dram_helpers.o
--obj-y	+= pinmux.o
- obj-$(CONFIG_SUN6I_PRCM)	+= prcm.o
- obj-$(CONFIG_AXP_PMIC_BUS)	+= pmic_bus.o
- obj-$(CONFIG_MACH_SUNIV)	+= clock_sun6i.o
-diff --git a/arch/arm/mach-sunxi/pinmux.c b/arch/arm/mach-sunxi/pinmux.c
-deleted file mode 100644
-index c95fcee9f6c..00000000000
---- a/arch/arm/mach-sunxi/pinmux.c
-+++ /dev/null
-@@ -1,78 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2007-2011
-- * Allwinner Technology Co., Ltd. <www.allwinnertech.com>
-- * Tom Cubie <tangliang@allwinnertech.com>
-- */
--
--#include <common.h>
--#include <asm/io.h>
--#include <asm/arch/gpio.h>
--
++#define GPIO_DAT_REG_OFFSET	0x10
++
++#define GPIO_DRV_REG_OFFSET	0x14
+ #define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
+ #define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+ 
++#define GPIO_PULL_REG_OFFSET	0x1c
+ #define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
+ #define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
+ 
 -void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val)
--{
++static void* BANK_TO_GPIO(int bank)
++{
++	void *pio_base;
++
++	if (bank < SUNXI_GPIO_L) {
++		pio_base = (void *)(uintptr_t)SUNXI_PIO_BASE;
++	} else {
++		pio_base = (void *)(uintptr_t)SUNXI_R_PIO_BASE;
++		bank -= SUNXI_GPIO_L;
++	}
++
++	return pio_base + bank * SUNXI_PINCTRL_BANK_SIZE;
++}
++
++void sunxi_gpio_set_cfgbank(void *bank_base, int pin_offset, u32 val)
+ {
 -	u32 index = GPIO_CFG_INDEX(bank_offset);
 -	u32 offset = GPIO_CFG_OFFSET(bank_offset);
--
++	u32 index = GPIO_CFG_INDEX(pin_offset);
++	u32 offset = GPIO_CFG_OFFSET(pin_offset);
+ 
 -	clrsetbits_le32(&pio->cfg[index], 0xf << offset, val << offset);
--}
--
--void sunxi_gpio_set_cfgpin(u32 pin, u32 val)
--{
--	u32 bank = GPIO_BANK(pin);
++	clrsetbits_le32(bank_base + GPIO_CFG_REG_OFFSET + index * 4,
++			0xfU << offset, val << offset);
+ }
+ 
+ void sunxi_gpio_set_cfgpin(u32 pin, u32 val)
+ {
+ 	u32 bank = GPIO_BANK(pin);
 -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
--
++	void *pio = BANK_TO_GPIO(bank);
+ 
 -	sunxi_gpio_set_cfgbank(pio, pin, val);
--}
--
++	sunxi_gpio_set_cfgbank(pio, GPIO_NUM(pin), val);
+ }
+ 
 -int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
--{
++int sunxi_gpio_get_cfgbank(void *bank_base, int pin_offset)
+ {
 -	u32 index = GPIO_CFG_INDEX(bank_offset);
 -	u32 offset = GPIO_CFG_OFFSET(bank_offset);
--	u32 cfg;
--
++	u32 index = GPIO_CFG_INDEX(pin_offset);
++	u32 offset = GPIO_CFG_OFFSET(pin_offset);
+ 	u32 cfg;
+ 
 -	cfg = readl(&pio->cfg[index]);
--	cfg >>= offset;
--
--	return cfg & 0xf;
--}
--
--int sunxi_gpio_get_cfgpin(u32 pin)
--{
--	u32 bank = GPIO_BANK(pin);
++	cfg = readl(bank_base + GPIO_CFG_REG_OFFSET + index * 4);
+ 	cfg >>= offset;
+ 
+ 	return cfg & 0xf;
+@@ -76,54 +92,56 @@ int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
+ int sunxi_gpio_get_cfgpin(u32 pin)
+ {
+ 	u32 bank = GPIO_BANK(pin);
 -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
--
++	void *bank_base = BANK_TO_GPIO(bank);
+ 
 -	return sunxi_gpio_get_cfgbank(pio, pin);
--}
--
--void sunxi_gpio_set_drv(u32 pin, u32 val)
--{
--	u32 bank = GPIO_BANK(pin);
++	return sunxi_gpio_get_cfgbank(bank_base, GPIO_NUM(pin));
+ }
+ 
+-static void sunxi_gpio_set_value_bank(struct sunxi_gpio *pio,
+-				       int pin, bool set)
++static void sunxi_gpio_set_value_bank(void *bank_base, int pin, bool set)
+ {
+ 	u32 mask = 1U << pin;
+ 
+-	clrsetbits_le32(&pio->dat, set ? 0 : mask, set ? mask : 0);
++	clrsetbits_le32(bank_base + GPIO_DAT_REG_OFFSET,
++			set ? 0 : mask, set ? mask : 0);
+ }
+ 
+-static int sunxi_gpio_get_value_bank(struct sunxi_gpio *pio, int pin)
++static int sunxi_gpio_get_value_bank(void *bank_base, int pin)
+ {
+-	return !!(readl(&pio->dat) & (1U << pin));
++	return !!(readl(bank_base + GPIO_DAT_REG_OFFSET) & (1U << pin));
+ }
+ 
+ void sunxi_gpio_set_drv(u32 pin, u32 val)
+ {
+ 	u32 bank = GPIO_BANK(pin);
 -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
--
++	void *bank_base = BANK_TO_GPIO(bank);
+ 
 -	sunxi_gpio_set_drv_bank(pio, pin, val);
--}
--
++	sunxi_gpio_set_drv_bank(bank_base, GPIO_NUM(pin), val);
+ }
+ 
 -void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val)
--{
++void sunxi_gpio_set_drv_bank(void *bank_base, u32 pin_offset, u32 val)
+ {
 -	u32 index = GPIO_DRV_INDEX(bank_offset);
 -	u32 offset = GPIO_DRV_OFFSET(bank_offset);
--
++	u32 index = GPIO_DRV_INDEX(pin_offset);
++	u32 offset = GPIO_DRV_OFFSET(pin_offset);
+ 
 -	clrsetbits_le32(&pio->drv[index], 0x3 << offset, val << offset);
--}
--
--void sunxi_gpio_set_pull(u32 pin, u32 val)
--{
--	u32 bank = GPIO_BANK(pin);
++	clrsetbits_le32(bank_base + GPIO_DRV_REG_OFFSET + index * 4,
++			0x3U << offset, val << offset);
+ }
+ 
+ void sunxi_gpio_set_pull(u32 pin, u32 val)
+ {
+ 	u32 bank = GPIO_BANK(pin);
 -	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
--
++	void *bank_base = BANK_TO_GPIO(bank);
+ 
 -	sunxi_gpio_set_pull_bank(pio, pin, val);
--}
--
++	sunxi_gpio_set_pull_bank(bank_base, GPIO_NUM(pin), val);
+ }
+ 
 -void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
--{
++void sunxi_gpio_set_pull_bank(void *bank_base, int pin_offset, u32 val)
+ {
 -	u32 index = GPIO_PULL_INDEX(bank_offset);
 -	u32 offset = GPIO_PULL_OFFSET(bank_offset);
--
++	u32 index = GPIO_PULL_INDEX(pin_offset);
++	u32 offset = GPIO_PULL_OFFSET(pin_offset);
+ 
 -	clrsetbits_le32(&pio->pull[index], 0x3 << offset, val << offset);
--}
-diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
-index f0b42e4fdb7..71c3168b755 100644
---- a/drivers/gpio/sunxi_gpio.c
-+++ b/drivers/gpio/sunxi_gpio.c
-@@ -18,6 +18,104 @@
- #include <asm/gpio.h>
- #include <dt-bindings/gpio/gpio.h>
- 
-+/*
-+ * =======================================================================
-+ * Low level GPIO/pin controller access functions, to be shared by non-DM
-+ * SPL code and the DM pinctrl/GPIO drivers.
-+ * The functions ending in "bank" take a base pointer to a GPIO bank, and
-+ * the pin offset is relative to that bank.
-+ * The functions without "bank" in their name take a linear GPIO number,
-+ * covering all ports, and starting at 0 for PortA.
-+ * =======================================================================
-+ */
-+
-+#define BANK_TO_GPIO(bank)	(((bank) < SUNXI_GPIO_L) ? \
-+	&((struct sunxi_gpio_reg *)SUNXI_PIO_BASE)->gpio_bank[bank] : \
-+	&((struct sunxi_gpio_reg *)SUNXI_R_PIO_BASE)->gpio_bank[(bank) - SUNXI_GPIO_L])
-+
-+#define GPIO_BANK(pin)		((pin) >> 5)
-+#define GPIO_NUM(pin)		((pin) & 0x1f)
-+
-+#define GPIO_CFG_INDEX(pin)	(((pin) & 0x1f) >> 3)
-+#define GPIO_CFG_OFFSET(pin)	((((pin) & 0x1f) & 0x7) << 2)
-+
-+#define GPIO_DRV_INDEX(pin)	(((pin) & 0x1f) >> 4)
-+#define GPIO_DRV_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
-+
-+#define GPIO_PULL_INDEX(pin)	(((pin) & 0x1f) >> 4)
-+#define GPIO_PULL_OFFSET(pin)	((((pin) & 0x1f) & 0xf) << 1)
-+
-+void sunxi_gpio_set_cfgbank(struct sunxi_gpio *pio, int bank_offset, u32 val)
-+{
-+	u32 index = GPIO_CFG_INDEX(bank_offset);
-+	u32 offset = GPIO_CFG_OFFSET(bank_offset);
-+
-+	clrsetbits_le32(&pio->cfg[index], 0xf << offset, val << offset);
-+}
-+
-+void sunxi_gpio_set_cfgpin(u32 pin, u32 val)
-+{
-+	u32 bank = GPIO_BANK(pin);
-+	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-+
-+	sunxi_gpio_set_cfgbank(pio, pin, val);
-+}
-+
-+int sunxi_gpio_get_cfgbank(struct sunxi_gpio *pio, int bank_offset)
-+{
-+	u32 index = GPIO_CFG_INDEX(bank_offset);
-+	u32 offset = GPIO_CFG_OFFSET(bank_offset);
-+	u32 cfg;
-+
-+	cfg = readl(&pio->cfg[index]);
-+	cfg >>= offset;
-+
-+	return cfg & 0xf;
-+}
-+
-+int sunxi_gpio_get_cfgpin(u32 pin)
-+{
-+	u32 bank = GPIO_BANK(pin);
-+	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-+
-+	return sunxi_gpio_get_cfgbank(pio, pin);
-+}
-+
-+void sunxi_gpio_set_drv(u32 pin, u32 val)
-+{
-+	u32 bank = GPIO_BANK(pin);
-+	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-+
-+	sunxi_gpio_set_drv_bank(pio, pin, val);
-+}
-+
-+void sunxi_gpio_set_drv_bank(struct sunxi_gpio *pio, u32 bank_offset, u32 val)
-+{
-+	u32 index = GPIO_DRV_INDEX(bank_offset);
-+	u32 offset = GPIO_DRV_OFFSET(bank_offset);
-+
-+	clrsetbits_le32(&pio->drv[index], 0x3 << offset, val << offset);
-+}
-+
-+void sunxi_gpio_set_pull(u32 pin, u32 val)
-+{
-+	u32 bank = GPIO_BANK(pin);
-+	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
-+
-+	sunxi_gpio_set_pull_bank(pio, pin, val);
-+}
-+
-+void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
-+{
-+	u32 index = GPIO_PULL_INDEX(bank_offset);
-+	u32 offset = GPIO_PULL_OFFSET(bank_offset);
-+
-+	clrsetbits_le32(&pio->pull[index], 0x3 << offset, val << offset);
-+}
-+
-+
-+/* =========== Non-DM code, used by the SPL. ============ */
-+
- #if !CONFIG_IS_ENABLED(DM_GPIO)
- static int sunxi_gpio_output(u32 pin, u32 val)
- {
-@@ -106,7 +204,9 @@ int sunxi_name_to_gpio(const char *name)
- 		return -1;
- 	return group * 32 + pin;
++	clrsetbits_le32(bank_base + GPIO_PULL_REG_OFFSET + index * 4,
++			0x3U << offset, val << offset);
  }
--#endif /* DM_GPIO */
-+#endif /* !DM_GPIO */
-+
-+/* =========== DM code, used by U-Boot proper. ============ */
  
- #if CONFIG_IS_ENABLED(DM_GPIO)
- /* TODO(sjg@chromium.org): Remove this function and use device tree */
+ 
+@@ -133,7 +151,7 @@ void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
+ static void sunxi_gpio_set_value(u32 pin, bool set)
+ {
+ 	u32 bank = GPIO_BANK(pin);
+-	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
++	void *pio = BANK_TO_GPIO(bank);
+ 
+ 	sunxi_gpio_set_value_bank(pio, GPIO_NUM(pin), set);
+ }
+@@ -141,7 +159,7 @@ static void sunxi_gpio_set_value(u32 pin, bool set)
+ static int sunxi_gpio_get_value(u32 pin)
+ {
+ 	u32 bank = GPIO_BANK(pin);
+-	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
++	void *pio = BANK_TO_GPIO(bank);
+ 
+ 	return sunxi_gpio_get_value_bank(pio, GPIO_NUM(pin));
+ }
+diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+index e5102180902..946447e9136 100644
+--- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
++++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+@@ -35,7 +35,7 @@ struct sunxi_pinctrl_desc {
+ };
+ 
+ struct sunxi_pinctrl_plat {
+-	struct sunxi_gpio __iomem *base;
++	void __iomem *base;
+ };
+ 
+ static int sunxi_pinctrl_get_pins_count(struct udevice *dev)
+@@ -86,8 +86,8 @@ static int sunxi_pinctrl_pinmux_set(struct udevice *dev, uint pin_selector,
+ 	      sunxi_pinctrl_get_function_name(dev, func_selector),
+ 	      desc->functions[func_selector].mux);
+ 
+-	sunxi_gpio_set_cfgbank(plat->base + bank, pin,
+-			       desc->functions[func_selector].mux);
++	sunxi_gpio_set_cfgbank(plat->base + bank * SUNXI_PINCTRL_BANK_SIZE,
++			       pin, desc->functions[func_selector].mux);
+ 
+ 	return 0;
+ }
+@@ -102,7 +102,7 @@ static const struct pinconf_param sunxi_pinctrl_pinconf_params[] = {
+ static int sunxi_pinctrl_pinconf_set_pull(struct sunxi_pinctrl_plat *plat,
+ 					  uint bank, uint pin, uint bias)
+ {
+-	struct sunxi_gpio *regs = &plat->base[bank];
++	void *regs = plat->base + bank * SUNXI_PINCTRL_BANK_SIZE;
+ 
+ 	sunxi_gpio_set_pull_bank(regs, pin, bias);
+ 
+@@ -112,7 +112,7 @@ static int sunxi_pinctrl_pinconf_set_pull(struct sunxi_pinctrl_plat *plat,
+ static int sunxi_pinctrl_pinconf_set_drive(struct sunxi_pinctrl_plat *plat,
+ 					   uint bank, uint pin, uint drive)
+ {
+-	struct sunxi_gpio *regs = &plat->base[bank];
++	void *regs = plat->base + bank * SUNXI_PINCTRL_BANK_SIZE;
+ 
+ 	if (drive < 10 || drive > 40)
+ 		return -EINVAL;
+@@ -148,7 +148,7 @@ static int sunxi_pinctrl_get_pin_muxing(struct udevice *dev, uint pin_selector,
+ 	struct sunxi_pinctrl_plat *plat = dev_get_plat(dev);
+ 	int bank = pin_selector / SUNXI_GPIOS_PER_BANK;
+ 	int pin	 = pin_selector % SUNXI_GPIOS_PER_BANK;
+-	int mux  = sunxi_gpio_get_cfgbank(plat->base + bank, pin);
++	int mux  = sunxi_gpio_get_cfgbank(plat->base + bank * SUNXI_PINCTRL_BANK_SIZE, pin);
+ 
+ 	switch (mux) {
+ 	case SUNXI_GPIO_INPUT:
+@@ -206,7 +206,7 @@ static int sunxi_pinctrl_bind(struct udevice *dev)
+ 		if (!gpio_plat)
+ 			return -ENOMEM;
+ 
+-		gpio_plat->regs = plat->base + i;
++		gpio_plat->regs = plat->base + i * SUNXI_PINCTRL_BANK_SIZE;
+ 		gpio_plat->bank_name[0] = 'P';
+ 		gpio_plat->bank_name[1] = 'A' + desc->first_bank + i;
+ 		gpio_plat->bank_name[2] = '\0';
 -- 
 2.25.1
 
