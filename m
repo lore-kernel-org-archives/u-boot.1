@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9D4C25B45
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 19:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0731C25B45
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 20:30:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA1FC877C3;
-	Mon, 23 Oct 2023 21:37:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 34CE48793E;
+	Mon, 23 Oct 2023 22:30:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NORuXXOk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GinAL6r0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 273A287898; Mon, 23 Oct 2023 21:37:32 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id CAF9E86FB8; Mon, 23 Oct 2023 22:30:29 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94C0F87754
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 21:37:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5107877D0
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 22:30:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-507b9408c61so5083659e87.0
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 12:37:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a7b91faf40so37543627b3.1
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 13:30:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698089849; x=1698694649; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OwyWvqv4Ff+ZnjeLapSYA+BjrTrDXCUDqUFALXbApj0=;
- b=NORuXXOkHpVrdGye5foUrg5NpjxhZsNMc0pXwVqu5paB/wBvdmiM05iE7UCxRbVOId
- IbjGeMgD8IFW7rXE6/r2Moi/Msrhc+Am7uOCqmBIos93c12cB2T24LegIrGIvdBTKPEl
- 4C8M/WFx6YO9YXzpIHyhFLERF5TuNSIeHIJQCcxMIUrX5ZD0vEbv94+rb3AvgiwG9YQS
- +Fju1888U+E1nkE5i3Enf040L7RqPgwkULVMbX5mUhTHWYm3YHBcDdzcE0Oh/9XQ1Zkt
- /B2ky/ve7wcml1cL38smZZfg4y0ClYIxLhgLf9dJfpXXiZK/+MfzSvOmHdD8JiWymprv
- y7FA==
+ d=konsulko.com; s=google; t=1698093023; x=1698697823; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=G3w0iQg1yXJZcgbzBbsyUazAoAp0UoCxQ0e/3KMyfDA=;
+ b=GinAL6r0eE+G4n0BU6II6tciHH2F0WNfHyqdJH6Nmj8hg9of9Z0BneCXK45GIQO8s/
+ X/zOH/HnBv7vQ33Das5XiI0cfF5GkNtmiZ/2WE5idItYhBNB/LRRd7vnST1Vc7FOVgHc
+ icL2Noep2ZN6cla2TNfUKOnkwrPcA/tvg1hp4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698089849; x=1698694649;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OwyWvqv4Ff+ZnjeLapSYA+BjrTrDXCUDqUFALXbApj0=;
- b=vmpQxxJiOwgrD1pRWRTWUNY6UMF7xHwS9orFTVIGVPk823W86UJ+JPhrp3FPAlmZEL
- JdD2tumLUu2TICCkCGBRG/MpdAvIzwhnSuWMi+Or4uuGVQFQWIs8xqZ8s58eYwcsqm83
- H8atmdHateAQYQr4567E5u88qCcMwpeiiCu/9AoqqILbiJqvnxCO4YhthBFCOcr81zQ7
- AXi9E96rT2PcN9Fhg01T+eRF77otNOqWkREs/cQwhGI8kyA9FkgtypsemM6PuQlbGO6C
- u5A+mvPkdUvmiqqNAyo2e/ySROohPazrLqgQorToJx30noV/TNTzkchMoNESv8WyFSky
- weYw==
-X-Gm-Message-State: AOJu0Yw2xITyV7SHzirqJzy1I03zCuUhJpZPcmW2iayUpQYLpenygEcb
- 1uviILs/rx1syOR4Q59oR0em4XxJ1cTJK0RTo0M=
-X-Google-Smtp-Source: AGHT+IEKBKjf4Yky11Aed+L9FohMhL/jpSjKOYMnpL2Ei349VsMhBg+x3ykWR5G9te4bk9v3y9D0v82UA0V8cheSYR4=
-X-Received: by 2002:a19:2d02:0:b0:507:9ff3:d6ec with SMTP id
- k2-20020a192d02000000b005079ff3d6ecmr7746717lfj.50.1698089848577; Mon, 23 Oct
- 2023 12:37:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698093023; x=1698697823;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=G3w0iQg1yXJZcgbzBbsyUazAoAp0UoCxQ0e/3KMyfDA=;
+ b=nb0Abtw72q2JvYf5Nlb6c+HdVtQRvdYw6IhW1yvqnx8EtQ1xG1AQw90YXNj84Ox+dK
+ D1sIA9lG93yh9aWvsJw/URlgC14G3OAmvhtY0USAgn12AjtcnTemMOHLE+qSDnWNM4/y
+ PE7kb/IlCYRNVk+wHLZPyR/KrYFn3weV32O1o61VR4DFoIcmvR7TIdewJHdEyRi6pb8B
+ 3qWDjCJdcKJcPDiOYKw1kE7gnNloYeN/rwSyi5OUT6HycB4y7txGdWAk6DXMw5cgFK6C
+ jmdiO/jTgZcoQ3ro1+rOu8tgqiZquNkPNJaARe4nL7oYr8iZBHdi9cnAXqmzuVNxXH6o
+ i4HQ==
+X-Gm-Message-State: AOJu0Yyh630NodPr9MXdxj2Ve9CHGTy9lKXl52HUhcy0v5XmZN+5dH4D
+ wkA4yIhmI6Z90lvzhA38ljw1EmamfHNikgzjL2TDeQ==
+X-Google-Smtp-Source: AGHT+IHC4yY4ugrt+kehtNbuhfQD3i+KhxfBVwI/89Zo1jZufURf0g9T1pgjZGVYiMoanSwcCBYnlw==
+X-Received: by 2002:a05:690c:72d:b0:5ac:552c:3462 with SMTP id
+ bt13-20020a05690c072d00b005ac552c3462mr2554575ywb.41.1698093023481; 
+ Mon, 23 Oct 2023 13:30:23 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c6de-498a-c903-1c13.res6.spectrum.com.
+ [2603:6081:7b00:6400:c6de:498a:c903:1c13])
+ by smtp.gmail.com with ESMTPSA id
+ z63-20020a0dd742000000b0059be6a5fcffsm3469102ywd.44.2023.10.23.13.30.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Oct 2023 13:30:23 -0700 (PDT)
+Date: Mon, 23 Oct 2023 16:30:21 -0400
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.01-rc1 released
+Message-ID: <20231023203021.GX496310@bill-the-cat>
 MIME-Version: 1.0
-References: <20231011202643.9194-1-mibodhi@gmail.com>
- <169808766154.2558485.14888786871905858063.b4-ty@konsulko.com>
-In-Reply-To: <169808766154.2558485.14888786871905858063.b4-ty@konsulko.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 23 Oct 2023 12:37:02 -0700
-Message-ID: <CAJaLiFxmVwPf+dgLSav=fHR86Gerhz+n08pNv4dgAOwPqorgyQ@mail.gmail.com>
-Subject: Re: [PATCH v5] bootstd: sata: Add bootstd support for ahci sata
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WtuLEdB5bFYycMDA"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,24 +87,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 23, 2023 at 12:08=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Wed, 11 Oct 2023 13:26:42 -0700, Tony Dinh wrote:
->
-> > Add ahci sata bootdev and corresponding hunting function.
-> >
-> >
->
-> I know this is recent but given their importance, applied to u-boot/maste=
-r,
-> thanks!
->
-> --
-> Tom
->
 
-Thanks Tom!
+--WtuLEdB5bFYycMDA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-All the best,
-Tony
+Hey all,
+
+It's release day and here is -rc1. Looking at my own queue it feels
+almost small right now, but I both have things to pull in still and I
+hope for some pull requests from a few areas still as well.
+
+In terms of a changelog,=20
+git log --merges v2023.10..v2024.01-rc1
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
+
+I hope to remain on schedule and that means the rest of the rcs every
+other Monday, and with final release on January 8th, 2024.  Thanks all!
+
+--=20
+Tom
+
+--WtuLEdB5bFYycMDA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2190ACgkQFHw5/5Y0
+tyzGoQv7Bzm5heorolTMFnLUv1rXdmMYpfz/8hRpqliZWXXVPre+m8Prp9tUs/D5
+bNkPIfxgRdPz8ECWenR19XzugIs6T6pMo5WiE8XTbRRl4mzGWOWdPawOeXroP3tr
+1axvZNtF+xwhfQg6pfYlesQpsPoOGhBeXn8CEzM/YLnq/hWJOw/oDiNvIe+paUhp
+6Os19tooWsfv/EScnujTMSdGzV/mmJ6p/BFBjpkDyLhooDKU9BP+j1fil7jNwhg/
+MdZZC4oFkOY7kZhhRqY56QtyHjNKBYGFCEMJdkrB4rClmGwb8WsmMQw5Au22p9h4
+njwNT9H33KZHmovCeJJdTXMoxUdpz3S04v4zgZdIAdsMMkST/kusOrMSbT4LpOSG
+rPxkcg6NBltI6wOLEG5ilFodiMf5x7OG0G7X8l7l+UB++vc22hh/M8bBADMsyrk+
+S8s2WSWUl4uzqE0SvOniyi/NwnrzBGwL+4nxn9t6TVioZ67xyCEK4m+Gx/wRRw+J
+Ulryyjmu
+=pZSs
+-----END PGP SIGNATURE-----
+
+--WtuLEdB5bFYycMDA--
