@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B3FC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:04:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE3BC001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:16:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A965878FF;
-	Mon, 23 Oct 2023 15:04:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4ED5687901;
+	Mon, 23 Oct 2023 15:16:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BwylOtNu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ShCN0Rlu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D2E1878F8; Mon, 23 Oct 2023 15:04:34 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 9E5DF87902; Mon, 23 Oct 2023 15:16:29 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05925878FB
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:04:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E4EF878AC
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:16:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-408002b5b9fso27057935e9.3
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 06:04:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7789cb322deso233341785a.3
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 06:16:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698066271; x=1698671071; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OSbuhBbmdQ1Vjait/bSI+h4/cB77oNAhLwkMAk9g0mc=;
- b=BwylOtNu0ijXOOP/44BqIy5OtDSmISzc40FPODufIa4WJh91V7MCsZBQqQWLt8lh3M
- uio3fkuOaa9eHgEStAl0IePlOb/Ez/TKpa+PeVDMDQNOlDdx+mcmKqqsPQ6Pt2f3Idoz
- 0gyNICtAj0H5UwtmrXOlTAGkPQTCwKw4RXEEseaaaeJWnQUFhwblm1XX5ltA8ItdiEZ2
- 2mrOM31R8xcoLzKsm7Wugl47kSJBDoq4ZYh8BXS39aI2kjWHOODhRN/fDx4yiJvkR/68
- Cv4/0KR0nAylzGyFwBUfQWtSp3HhsXb60SwV4RZQeNGnEs3+wnJvh2a/un8JhWgRDEGR
- egNQ==
+ d=konsulko.com; s=google; t=1698066986; x=1698671786; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VmjJHnaubfVbKEJGl85a7Rotx9i09TdDkmbRSJa1d5o=;
+ b=ShCN0RlunsvVCdVNj1oe0xfIicA+MHRLLf4h6HP+/4T2YszMCTC5IuFbKX8kVihIzS
+ wFX1nlpyW6x2EfQSpJbJwQVaj9cRSxa9rhCFsuPyrU156kDyIUVE1gEdLgRBCLyFWBlL
+ mMMMusOHIjDAJW2LYsHLcOrJlCQ4DwDmSZ84c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698066271; x=1698671071;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OSbuhBbmdQ1Vjait/bSI+h4/cB77oNAhLwkMAk9g0mc=;
- b=X9FlWrCelBVIRRcSME856fIPVkitpB6ysso+MRoGMmGZFzfjwJld/owfp+uTQaGa1S
- gzhEq0pn5fqQDsi4/EIPM9zXouu/b09XjMmYtMLDbjsxp8w7lLL4LLrXQ54zGDtrJqNY
- n1FGDOoTyr0grWilKg/zBQQjo61ln57OHWzHyh1u94cmg+/FPwlt13FVjwYKJhGN1GpC
- SY2lIark+oSutcIiYxBM5ChU+BuoUuXUlk85GnD0yjk5aZ83S4FJOmJY4MZ9fY1cYikS
- LTV4nim4XYARjNyh8+R5Oqp5k8JJoDXH3pTwH2f9uOTo+NzRMpRwbkr/Cm06Qe3y29Y2
- NeWw==
-X-Gm-Message-State: AOJu0YyS8HTM2JFjq43EXFyyZpJQ0qcMpTNsoKqh/25rQz9dDPFl67UF
- wJACgkNgFcdxEnAgiVOAx777Ug==
-X-Google-Smtp-Source: AGHT+IHZjlAYEoPSUrCM75dWONYqgdOL1U7y6BexXtt9wZDD4ejOBdpDNlhAiPWK4px0fdT2qa0agQ==
-X-Received: by 2002:a05:600c:19c8:b0:408:cd96:7164 with SMTP id
- u8-20020a05600c19c800b00408cd967164mr3551372wmq.9.1698066270861; 
- Mon, 23 Oct 2023 06:04:30 -0700 (PDT)
-Received: from [192.168.1.15] (host-2-99-112-229.as13285.net. [2.99.112.229])
+ d=1e100.net; s=20230601; t=1698066986; x=1698671786;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VmjJHnaubfVbKEJGl85a7Rotx9i09TdDkmbRSJa1d5o=;
+ b=rdeYuGuT+A6OrXXTw9lF8qFtu/ZT47ThcsR40O1BtGWE818SrK1klxaJ466ex5UC/d
+ 7ZstSt/8Mbg2MAAnFeOzIxnSxC6hlBfTvLlaGcI4NsYDstnb8nTFbVjG/SFwQFxncUQO
+ BklsR84bG124y0Zd/QBq8z6+GGbVm7ISK9RSbVB6OJMOsTqdvxblBcOdDDRMirWT0VQV
+ nO7Wbv1j/staotCye6/74hxxOzt8t3eZBH03+gTnAPuOSgFXj45ctJ8I4OX17W0RZr9T
+ jHtNbWWhTA6WULdiIjREzfYOa+Qkqsviv/EgP7W3eyMdtfGMrjXZJ4UlQmJCWE4Hcq+X
+ fmNQ==
+X-Gm-Message-State: AOJu0YyZk+pJmHSEOw1605+aV3n2/9OSSjSZBywrMyrBzq2milbr587r
+ RkPRfyI5o4/3VbBzam2lenctjA==
+X-Google-Smtp-Source: AGHT+IGFD6Iu4ifZZsMG8lu9WsDNqRcBN1X7V6EdR0vQxSEvPcRdHab4dWPglM64oIPMGQX9EL8LcA==
+X-Received: by 2002:a05:620a:28d6:b0:779:d4ef:5f1f with SMTP id
+ l22-20020a05620a28d600b00779d4ef5f1fmr3578142qkp.29.1698066985642; 
+ Mon, 23 Oct 2023 06:16:25 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-3cd1-c3ac-4562-deca.res6.spectrum.com.
+ [2603:6081:7b00:6400:3cd1:c3ac:4562:deca])
  by smtp.gmail.com with ESMTPSA id
- j15-20020a05600c1c0f00b003fefb94ccc9sm9463792wms.11.2023.10.23.06.04.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Oct 2023 06:04:30 -0700 (PDT)
-Message-ID: <dcefcaf4-aa74-420f-b323-841bf7024ea8@linaro.org>
-Date: Mon, 23 Oct 2023 14:04:29 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
-Content-Language: en-US
+ pj16-20020a05620a1d9000b00774830b40d4sm2705709qkn.47.2023.10.23.06.16.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Oct 2023 06:16:25 -0700 (PDT)
+Date: Mon, 23 Oct 2023 09:16:23 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-References: <20231021004522.53311-1-sjg@chromium.org>
- <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
- <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Message-ID: <20231023131623.GG496310@bill-the-cat>
+References: <CAPnjgZ2tJEBNWsx_tLDTWyQ+xNyLj6feDenqEcCe+t3JNEdv8g@mail.gmail.com>
+ <ZTHKKurIp67bx2MJ@octopus>
+ <CAPnjgZ1DrzW=2M4UG8aPYmN+MedJODuj5-zE0Y9nVfu-Scpsxw@mail.gmail.com>
+ <20231021182612.GA53397@bill-the-cat>
+ <49cc3e85-bcc1-4a31-a8e0-293e6ecd952b@gmx.de>
+ <20231022142922.GA496310@bill-the-cat>
+ <20231022145857.GB496310@bill-the-cat>
+ <CAPnjgZ2fHLrUrqNMFhzK-EbO8bGcgg=1aC9jVPL3mHt_g2xjiA@mail.gmail.com>
+ <20231022234507.GE496310@bill-the-cat>
+ <CAPnjgZ14he2OtnvfEXsbN1FxGz34twDwAMROM=61kcOJpGvDXw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WKRXK5v7DS7zsp+O"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ14he2OtnvfEXsbN1FxGz34twDwAMROM=61kcOJpGvDXw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,185 +103,254 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--WKRXK5v7DS7zsp+O
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 23/10/2023 08:04, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Hi Simon,
->>
->> On 21/10/2023 01:45, Simon Glass wrote:
->>> U-Boot typically sets up its malloc() pool near the top of memory. On
->>> ARM64 systems this can result in an SMBIOS table above 4GB which is
->>> not supported by SMBIOSv2.
->>>
->>> Work around this problem by providing a new option to choose an address
->>> just below 4GB, if needed.
->> I may well be missing something here, but I don't quite understand the
->> justification behind the original patch [1] which caused this regression.
->>
->> I'm currently preparing support for a few different Qualcomm boards
->> which have different memory layouts, so far it's been possible to avoid
->> having any fixed addresses, so the same u-boot image can be used on all
->> of them (with just a different DTB).
-> 
-> What sort of memory layout do you have? I could enhance the patch to
-> find the top of a memory bank below 4GB, perhaps? E.g. see the
-> 'bdinfo' command.
+On Mon, Oct 23, 2023 at 12:05:28AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sun, 22 Oct 2023 at 16:45, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sun, Oct 22, 2023 at 02:55:32PM -0700, Simon Glass wrote:
+> > > Hi,
+> > >
+> > > On Sun, 22 Oct 2023 at 07:59, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Sun, Oct 22, 2023 at 10:29:22AM -0400, Tom Rini wrote:
+> > > > > On Sun, Oct 22, 2023 at 08:08:11AM +0200, Heinrich Schuchardt wro=
+te:
+> > > > > > On 10/21/23 20:26, Tom Rini wrote:
+> > > > > > > On Sat, Oct 21, 2023 at 08:43:08AM -0700, Simon Glass wrote:
+> > > > > > > > Hi,
+> > > > > > > >
+> > > > > > > > On Thu, 19 Oct 2023 at 17:30, AKASHI Takahiro
+> > > > > > > > <takahiro.akashi@linaro.org> wrote:
+> > > > > > > > >
+> > > > > > > > > On Thu, Oct 19, 2023 at 08:01:11AM -0600, Simon Glass wro=
+te:
+> > > > > > > > > > Hi Heinrich,
+> > > > > > > > > >
+> > > > > > > > > > On Wed, 18 Oct 2023 at 06:55, Heinrich Schuchardt <xypr=
+on.glpk@gmx.de> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On 10/17/23 16:09, Tom Rini wrote:
+> > > > > > > > > > > > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Gla=
+ss wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > > Since efi_device_path.c calls eth_get_dev() and a=
+ssumes that Ethernet is
+> > > > > > > > > > > > > available, add it as an explicit dependency.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > ---
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > (no changes since v2)
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > > > - Add new patch to update EFI_LOADER to depend on=
+ DM_ETH
+> > > > > > > > > > > > >
+> > > > > > > > > > > > >    lib/efi_loader/Kconfig | 1 +
+> > > > > > > > > > > > >    1 file changed, 1 insertion(+)
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loa=
+der/Kconfig
+> > > > > > > > > > > > > index 13cad6342c36..fca4b3eef270 100644
+> > > > > > > > > > > > > --- a/lib/efi_loader/Kconfig
+> > > > > > > > > > > > > +++ b/lib/efi_loader/Kconfig
+> > > > > > > > > > > > > @@ -11,6 +11,7 @@ config EFI_LOADER
+> > > > > > > > > > > > >       # We need EFI_STUB_32BIT to be set on x86_3=
+2 with EFI_STUB
+> > > > > > > > > > > > >       depends on !EFI_STUB || !X86 || X86_64 || E=
+FI_STUB_32BIT
+> > > > > > > > > > > > >       depends on BLK
+> > > > > > > > > > > > > +    depends on DM_ETH
+> > > > > > > > > > > > >       depends on !EFI_APP
+> > > > > > > > > > > > >       default y if !ARM || SYS_CPU =3D armv7 || S=
+YS_CPU =3D armv8
+> > > > > > > > > > > > >       select CHARSET
+> > > > > > > > > > > >
+> > > > > > > > > > > > Does this work for you Heinrich, or do you want to =
+clarify the
+> > > > > > > > > > > > dependencies (and re-organize the code as needed) a=
+round networking?
+> > > > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > We should be able to boot via EFI on devices without =
+U-Boot network support.
+> > > > > > > > > > >
+> > > > > > > > > > > We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid=
+ invoking
+> > > > > > > > > > > eth_get_dev() if there is no network. CONFIG_NETDEVIC=
+ES=3Dy selects
+> > > > > > > > > > > CONFIG_DM_ETH.
+> > > > > > > > > > >
+> > > > > > > > > > > Why is this not sufficient?
+> > > > > > > > > > > Is there a configuration that does not build?
+> > > > > > > > > >
+> > > > > > > > > > The point of this series is to disable CMDLINE and fix =
+up what breaks.
+> > > > > > > > > >
+> > > > > > > > > > In this case we have some sort of breakage...perhaps To=
+m has already
+> > > > > > > > > > found it, but otherwise could you take a look?
+> > > > > > > > > >
+> > > > > > > > > > We should be able to disable NET and LTO in sandbox and=
+ still build.
+> > > > > > > > > > But this fails at present[1]. You can try it on -master
+> > > > > > > > >
+> > > > > > > > > Obviously, it would be necessary to enclose efi_dp_from_e=
+th()
+> > > > > > > > > with "if defined(CONFIG_NETDEVICES)" (or DM_ETH).
+> > > > > > > > > Then, we could drop "depends on DM_ETH".
+> > > > > > > >
+> > > > > > > > Strange that it only happens on the non-LTO board, though?
+> > > > > > >
+> > > > > > > There's two issues. The first of which is that I think you ne=
+ed to
+> > > > > > > re-check your error exactly? With my series, and LTO also dis=
+abled the
+> > > > > > > problem is a call to efi_get_image_parameters() as that's def=
+ined in
+> > > > > > > cmd/bootefi.c, but also only used with cmdline invocations. S=
+o we can
+> > > > > > > fix that CMDLINE=3Dn && LTO=3Dn case with a IS_ENABLED(CONFIG=
+_CMDLINE)
+> > > > > > > around that, and then discard efi_dp_from_name() entirely.
+> > > > > > >
+> > > > > > > The second issue is that with LTO we more completely find the=
+ cases
+> > > > > > > where if x() calls y() and y() is undefined but nothing calls=
+ x() we can
+> > > > > > > just discard x() and not care that y() is undefined.
+> > > > > > >
+> > > > > >
+> > > > > > I will send a patch for function efi_dp_from_eth().
+> > > > >
+> > > > > There's no problem with efi_dp_from_eth as far as I can tell.
+> > > > >
+> > > > > > @Simon
+> > > > > >
+> > > > > > One thing that I don't understand is why we don't let the linker
+> > > > > > eliminate the unused functions on the sandbox.
+> > > > > >
+> > > > > > On other architectures we put each function into a separate tex=
+t section
+> > > > > > and let the linker eliminate the unused text sections:
+> > > > > >
+> > > > > > arch/riscv/config.mk:29:
+> > > > > > PLATFORM_RELFLAGS       +=3D -fno-common -ffunction-sections -f=
+data-sections
+> > > > > > LDFLAGS_u-boot          +=3D --gc-sections -static -pie
+> > > > > >
+> > > > > > Shouldn't we keep the sandbox close to what other architectures=
+ do?
+> > > > >
+> > > > > Oh my, I didn't realize that sandbox was missing the garbage coll=
+ection
+> > > > > stuff.  Yes, that needs to be fixed first, then we can see what's=
+ next
+> > > > > to change, as there are some issues (my series first fixed CMDLIN=
+E=3Dn on
+> > > > > qemu_arm64).
+> > > >
+> > > > My super quick pass at enabling
+> > > > function-sections/data-sections/gc-sections shows there's nothing
+> > > > further needed for CMDLINE=3Dn and LTO=3Dn on sandbox, not even the=
+ part I
+> > > > was looking at before.
+> > >
+> > > I am not sure about the original reason, but sandbox probably
+> > > pre-dates wholesale enabling of gc-sections (I haven't looked). There
+> > > is also the issue of whether the host toolchain supports it. Sandbox
+> > > is supposed to run on a variety of OS types.
+> >
+> > It doesn't predate gc-sections, we've just never moved it to the
+> > top-level Makefiles (and disabled on LTO) like we should have a long
+> > time ago.  It's supported by all the compilers we support, and it's a
+> > required feature (or, LTO) for U-Boot.
+>=20
+> Remember that the sandbox linker script is special in that it adds to
+> the existing default one provided by the toolchain
 
-I think that would probably be sensible (afaict this is more of less
-what the EFI function did).
+Yes, and we've also been using gc-sections since 2008, from a quick look
+at the logs.
 
-One of my boards has RAM starting at 0x40000000 and ending at
-0xC0000000, frustratingly not quite managing to use the entire 4G
-address space. There is also a hole in RAM, so u-boot relocates itself
-to the end of the first memory bank
+> > > I am also not sure of the point ot it...since it is normally pretty
+> > > easy to use Kconfig to control features.
+> >
+> > That's not the point of the feature.  The point is that we can discard
+> > unused code without having to rely on #ifdef and __maybe_unused.
+>=20
+> That doesn't match with my understanding. An unused static will still
+> produce a warning if it is unused.
 
-=> bdinfo
-boot_params = 0x0000000000000000
-DRAM bank   = 0x0000000000000000
--> start    = 0x0000000040000000
--> size     = 0x000000003eb00000
-DRAM bank   = 0x0000000000000001
--> start    = 0x0000000080000000
--> size     = 0x0000000040000000
-flashstart  = 0x0000000000000000
-flashsize   = 0x0000000000000000
-flashoffset = 0x0000000000000000
-baudrate    = 115200 bps
-relocaddr   = 0x000000007ea12000
-reloc off   = 0x000000007ea12000
-Build       = 64-bit
-fdt_blob    = 0x000000007e5ec5c0
-new_fdt     = 0x000000007e5ec5c0
-fdt_size    = 0x0000000000006780
-lmb_dump_all:
- memory.cnt = 0x2 / max = 0x40
- memory[0]	[0x40000000-0x7eafffff], 0x3eb00000 bytes flags: 0
- memory[1]	[0x80000000-0xbfffffff], 0x40000000 bytes flags: 0
- reserved.cnt = 0x8 / max = 0x40
- reserved[0]	[0x45700000-0x45cfffff], 0x00600000 bytes flags: 4
- reserved[1]	[0x45e00000-0x45f3ffff], 0x00140000 bytes flags: 4
- reserved[2]	[0x45fff000-0x461fffff], 0x00201000 bytes flags: 4
- reserved[3]	[0x4ab00000-0x53616fff], 0x08b17000 bytes flags: 4
- reserved[4]	[0x5c000000-0x5cffffff], 0x01000000 bytes flags: 4
- reserved[5]	[0x60000000-0x638fffff], 0x03900000 bytes flags: 4
- reserved[6]	[0x7d5e8000-0x7eafffff], 0x01518000 bytes flags: 0
- reserved[7]	[0x89b01000-0x89d00fff], 0x00200000 bytes flags: 4
-> 
->>
->> As I mentioned before, efi_allocate_pages() seems to work fine from
->> install_smbios_table(), I haven't delved into the code too much but I
->> wonder if this could be an acceptable solution?
-> 
-> Unfortunately that function is EFI-specific. The function can only be
-> called once EFI is inited. We only want to do that if booting with
-> EFI.
-> 
-> The tables are written at the start of U-Boot, partly because that is
-> how it is done on x86 and partly so the 'acpi' command actually works.
-> 
-> The EFI code ended up writing a separate set of tables, which is of
-> course not correct.
-> 
-> I did look at creating an API in U-Boot to alloc memory below 4GB but
-> then decided that for just this one use case it might not be worth it.
+Yes, you're misunderstanding how this feature works and why it's
+required.  With v4 of my series, on sandbox and CMDLINE=3Dn and LTO=3Dn:
+/usr/bin/ld: boot/scene_textline.o: in function `scene_textline_send_key':
+/home/trini/work/u-boot/u-boot/boot/scene_textline.c:157: undefined referen=
+ce to `cread_line_process_ch'
+/usr/bin/ld: boot/scene_textline.o: in function `scene_textline_open':
+/home/trini/work/u-boot/u-boot/boot/scene_textline.c:222: undefined referen=
+ce to `cli_cread_init'
+/usr/bin/ld: common/bootstage.o: in function `bootstage_fdt_add_report':
+/home/trini/work/u-boot/u-boot/common/bootstage.c:323: undefined reference =
+to `working_fdt'
+/usr/bin/ld: common/cli.o: in function `run_commandf':
+/home/trini/work/u-boot/u-boot/common/cli.c:154: undefined reference to `ru=
+n_command'
+/usr/bin/ld: drivers/fastboot/fb_common.o: in function `fastboot_boot':
+/home/trini/work/u-boot/u-boot/drivers/fastboot/fb_common.c:137: undefined =
+reference to `run_command'
+/usr/bin/ld: drivers/fastboot/fb_command.o: in function `fastboot_acmd_comp=
+lete':
+/home/trini/work/u-boot/u-boot/drivers/fastboot/fb_command.c:350: undefined=
+ reference to `run_command'
+/usr/bin/ld: lib/efi_loader/efi_device_path.o: in function `efi_dp_from_nam=
+e':
+/home/trini/work/u-boot/u-boot/lib/efi_loader/efi_device_path.c:1095: undef=
+ined reference to `efi_get_image_parameters'
+/usr/bin/ld: net/net.o: in function `net_auto_load':
+/home/trini/work/u-boot/u-boot/net/net.c:349: undefined reference to `tftp_=
+start'
+collect2: error: ld returned 1 exit status
 
-The LMB allocator can already do this with lmb_alloc_base(), would this
-be an ok solution?
+And with re-enabling gc-sections:
+/usr/bin/ld: drivers/fastboot/fb_common.o: in function `fastboot_boot':
+/home/trini/work/u-boot/u-boot/drivers/fastboot/fb_common.c:137: undefined =
+reference to `run_command'
+collect2: error: ld returned 1 exit status
 
-I have tested it and it seems to work as intended, allocating the first
-free 32-bit address, and avoiding reserved regions.
+Because all of those other link failures are in unreachable code and the
+rest of the code base is already setup to know that x() can call y() and
+y() can just be undefined at link time if x() is never called and ends
+up discarded.
 
-It seems like the LMB allocator doesn't have a global pool, so I'm not
-sure how it avoids conflicts, although maybe that just isn't really an
-issue in reality.
-> 
->>
->> Barring that, could we use an environment variable to pass this address
->> in? Although I think that might not be a very desirable solution.
->>
->> I appreciate you taking the time to prepare this patch and CC me. If
->> nobody else objects to this patch then I'd prefer to avoid blocking it.
->> In either case, I'd greatly appreciate any input on the above
->> suggestions so that I can implement a solution for my boards.
-> 
-> I would like it to be automatic. I assumed on ARM64 that there is
-> memory available at 3.99GB if U-Boot has relocated to above 4GB, but
-> as above I could make this more clever.
-> 
-> Regards,
-> Simon
-> 
-> 
->>
->> Thanks and regards,
->>
->> [1]:
->> https://lore.kernel.org/u-boot/20230920030027.1385833-16-sjg@chromium.org/
->>>
->>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>> ---
->>>
->>>   lib/Kconfig                 | 17 +++++++++++++++++
->>>   lib/efi_loader/efi_smbios.c | 12 ++++++++++++
->>>   2 files changed, 29 insertions(+)
->>>
->>> diff --git a/lib/Kconfig b/lib/Kconfig
->>> index f6ca559897e7..a77f2f3e9089 100644
->>> --- a/lib/Kconfig
->>> +++ b/lib/Kconfig
->>> @@ -994,6 +994,23 @@ config GENERATE_SMBIOS_TABLE
->>>         See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
->>>         the devicetree.
->>>
->>> +config SMBIOS_TABLE_FIXED
->>> +     bool "Place the SMBIOS table at a special address"
->>> +     depends on GENERATE_SMBIOS_TABLE && ARM64 && SMBIOS && EFI_LOADER
->>> +     default y
->>> +     help
->>> +       Use this option to place the SMBIOS table at a fixed address.
->>> +
->>> +       U-Boot typically sets up its malloc() pool near the top of memory. On
->>> +       ARM64 systems this can result in an SMBIOS table above 4GB which is
->>> +       not supported by SMBIOSv2. This option works around this problem by
->>> +       chosing an address just below 4GB, if needed.
->>> +
->>> +config SMBIOS_TABLE_FIXED_ADDR
->>> +     hex "Fixed address for use for SMBIOS table"
->>> +     depends on SMBIOS_TABLE_FIXED
->>> +     default 0xffff0000
->>> +
->>>   endmenu
->>>
->>>   config LIB_RATIONAL
->>> diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
->>> index 48446f654d9b..84ea027ea48c 100644
->>> --- a/lib/efi_loader/efi_smbios.c
->>> +++ b/lib/efi_loader/efi_smbios.c
->>> @@ -61,6 +61,18 @@ static int install_smbios_table(void)
->>>               return log_msg_ret("mem", -ENOMEM);
->>>
->>>       addr = map_to_sysmem(buf);
->>> +
->>> +     /*
->>> +      * Deal with a fixed address if needed. For simplicity we assume that
->>> +      * the SMBIOS-table size is <64KB and that the malloc region does not
->>> +      * straddle the 4GB boundary.
->>> +      */
->>> +     if (IS_ENABLED(CONFIG_SMBIOS_TABLE_FIXED) && addr >= SZ_4G - SZ_64K) {
->>> +             addr = IF_ENABLED_INT(CONFIG_SMBIOS_TABLE_FIXED,
->>> +                                   CONFIG_SMBIOS_TABLE_FIXED_ADDR);
->>> +             log_warning("Forcing SMBIOS table to address %lx\n", addr);
->>> +     }
->>> +
->>>       if (!write_smbios_table(addr)) {
->>>               log_err("Failed to write SMBIOS table\n");
->>>               return log_msg_ret("smbios", -EINVAL);
->>
->> --
->> // Caleb (they/them)
+I honestly didn't realize sandbox hadn't had this critical feature
+enabled and I hope we haven't been doing too many odd shuffles of the
+codebase because of it.
 
--- 
-// Caleb (they/them)
+--=20
+Tom
+
+--WKRXK5v7DS7zsp+O
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2ciQACgkQFHw5/5Y0
+tyw2tgv/WP4E98JGLy2Os2rFaGMA3mDbEUzferH403Vw+Y4cLbYF2E5o9oZvzSxs
+tuHsc5QPd6RX6t6QKn831grVfxL24MuAGzOt4jkAgAsh3u9i0TmZT4zAnOrDRsHM
+9LNAgxkB72svm288vIqS3um3PhtWq6sk2YSHUhWjPgLkSxynMn+IsstqqklxMkmK
+43NbIgFuVKW02CAKJzkjVyxbsPSGlxHx9lLk51PMiXkzDzkp7FXqHCvDLY0hHwx3
+VC+pHJ4hJAZ44MDmF5n8IKhQhMLRj1WrnDtqfdW4BbuBEOij8NyVSngikhT3ib9j
+RNiticeAv5fvc4GAv0taDbMLAqAJg8N+cvfTlv3QA0O7MlTEBzv2Bm97HDsCKGjq
+veMa0SUpQeR2ZDSUWN4RbM5e5ThIBkoE0YJMaguHCLipH8IGq2qTPevbAozfM0qX
+nuPZ5jas2FCGhFk+NjThP6sRdzi5rKBSQz8hSoBOQSirgU7kGoq+jgJndqEb01Xs
+/xPfUscS
+=wZBK
+-----END PGP SIGNATURE-----
+
+--WKRXK5v7DS7zsp+O--
