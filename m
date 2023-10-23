@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 177D1C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:06:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85DB0C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A807874BD;
-	Mon, 23 Oct 2023 09:05:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 052A587897;
+	Mon, 23 Oct 2023 09:06:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e/tM1zLs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bGb6p0nO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA087871A2; Mon, 23 Oct 2023 09:05:48 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7C242878A5; Mon, 23 Oct 2023 09:06:44 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEC37874BD
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:05:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2E99874BD
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:06:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9ada2e6e75fso440669366b.2
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:05:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698044746; x=1698649546; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HYa2P92nZQifV5u/+d10+fEuWv9TCopYB3HJ7P7QdaM=;
- b=e/tM1zLsq2VQ2kV8cWlYemgL7gHnNbUqEDmiKlqVR590Of9EwTR1hIkkkQphIwnPeS
- NWgRI0QW3laBCtWdaGjHMIjWxsmx7nIXL1ZoFvBDBXY0sTqL1e4Q/31qcRyGVFm/3fGT
- oMNdOOdpXFSkp8eloxhykvxR6TxaOEih8mt8k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698044746; x=1698649546;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HYa2P92nZQifV5u/+d10+fEuWv9TCopYB3HJ7P7QdaM=;
- b=A/EgNLCTpAmwMOLTRFs+QSQLF8C4Fa76A0S1E2cVZqDzu7AUIstGrQh5TNnG5sx+Vu
- eUwNzIZVIWB4B+RGHEiCl1ddKloYHjvz4u078iurL94TSQF3OIgv2zqoS2F1ayBinwES
- jwhpgy7fc+5P6xzWl2pVLezS3ygj22WGRHdzJE8MM9I5uQ0wWAVbfHC0NSlMGhezKan3
- UJh++MhOKshHEd1j66YCNTjYpZIQAzPUWZ0rwowgmcCl4SSDKkX7mV2IHLFVOUDZuakm
- 8puUS5awwaL7iHAufyhrtpelHlU4UDppl/t+3DHkqBzQ3nI6fT8QvRXB2hA/h3IkHPmo
- wHuw==
-X-Gm-Message-State: AOJu0YwYl6Qy14f+xBwUD3KWPwLIri2GDwlSefYv9xgiI5xfvnFRFRp8
- PEUV+nDZcugr++WqjPw9jr6nX0nq2OkEzow/HgkkJEi4B5TRG9lO6xzccGGB
-X-Google-Smtp-Source: AGHT+IGAb8MbmUFuvoThdFhORT6z3OLGefz8DsVimJeakWbwXc/Yq6MHcQZtQM7LnH0OUuH9DgI5mREEIOOXmGtJDGg=
-X-Received: by 2002:a17:907:d38a:b0:9ad:ef08:1f32 with SMTP id
- vh10-20020a170907d38a00b009adef081f32mr5291479ejc.37.1698044746237; Mon, 23
- Oct 2023 00:05:46 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39N76bbo047449;
+ Mon, 23 Oct 2023 02:06:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698044797;
+ bh=2eo/Ifd7kLcW2nnWbJC1w2hc1x0rjzoKD02IpAALbVU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=bGb6p0nOpoALuVnaqUfE0y/pHUhCKOeLUscCTOhsw0ra1pNLgqq0SKdVNTaf/jI5A
+ keNtuiKgNhGuvAmjsVA8x3xU/X8kfKy1Lyqpilmp4MuIcoa9hbgDE5BaTWGP1AvF7j
+ NIxKafzJPjTz8l4FEyYngb7pHbIDV7Ro77wM76Wg=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39N76blu007175
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 23 Oct 2023 02:06:37 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 23
+ Oct 2023 02:06:36 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 23 Oct 2023 02:06:36 -0500
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39N76YVx017935;
+ Mon, 23 Oct 2023 02:06:35 -0500
+Message-ID: <303b9e75-31c4-41a3-b96f-762c66cd839f@ti.com>
+Date: Mon, 23 Oct 2023 12:36:33 +0530
 MIME-Version: 1.0
-References: <20231019150105.714407-24-trini@konsulko.com>
- <20231020215302.3511807-1-trini@konsulko.com>
- <20231020215302.3511807-2-trini@konsulko.com>
- <CAPnjgZ2jgfJ4GXR+2qt5Qi=MOc=kubLrMLgYBGuO_trinUHnag@mail.gmail.com>
- <20231021183438.GB53397@bill-the-cat>
-In-Reply-To: <20231021183438.GB53397@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Oct 2023 00:05:34 -0700
-Message-ID: <CAPnjgZ2bKVTwEKcjeawootxXr-+iEmiowtctA52-=v07p+xBUQ@mail.gmail.com>
-Subject: Re: [v4.1 2/2] CI, pytest: Add a test for sandbox without LTO
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] binman: openssl: x509: ti_secure_rom: Add support
+ for bootcore_opts
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+CC: <trini@konsulko.com>, <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, 
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-nandan@ti.com>
+References: <20231006100737.343745-1-n-francis@ti.com>
+ <20231006100737.343745-2-n-francis@ti.com>
+ <CAPnjgZ2RAwdZxZMccwcLL5QLs-HyBcx6B=LLKfVSjSb0qpjGxg@mail.gmail.com>
+ <c052dc27-e919-4f62-a104-4412954e7032@ti.com>
+ <CAPnjgZ2RvujUiVrhpb-v7Z94JTyP=1e6ptc=mC7A6rVF9NZxdQ@mail.gmail.com>
+ <cf363bf1-68ed-4fa9-8ac5-24326f774cac@ti.com>
+ <CAPnjgZ0X_DMjaPkxKLHigugPVdj4hnLpsOUuNL9MudJRd4a3_g@mail.gmail.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <CAPnjgZ0X_DMjaPkxKLHigugPVdj4hnLpsOUuNL9MudJRd4a3_g@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,115 +87,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Simon
 
-On Sat, 21 Oct 2023 at 11:34, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Oct 21, 2023 at 08:43:00AM -0700, Simon Glass wrote:
-> > On Fri, 20 Oct 2023 at 14:53, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > The primary motivation for having a sandbox without LTO build in CI is
-> > > to ensure that we don't have that option break. We now have the ability
-> > > to run tests of specific options being enabled/disabled, so drop the
-> > > parts of CI that build and test that configuration specifically and add
-> > > a build test instead. We still test that "NO_LTO=1" rather than editing
-> > > the config file works via the ftrace tests.
-> > >
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > ---
-> > > This creates a small bisectability gap in CI itself, but I think is more
-> > > reasonable than reworking the introduction of
-> > > test/py/tests/test_sandbox_opts.py
-> > >
-> > > Cc: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >  .azure-pipelines.yml               |  3 ---
-> > >  .gitlab-ci.yml                     | 12 ------------
-> > >  test/py/tests/test_sandbox_opts.py | 10 ++++++++++
-> > >  3 files changed, 10 insertions(+), 15 deletions(-)
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > Q below
-> >
-> > >
-> > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > > index 6f91553e8613..65533b36dde4 100644
-> > > --- a/.azure-pipelines.yml
-> > > +++ b/.azure-pipelines.yml
-> > > @@ -287,9 +287,6 @@ stages:
-> > >          sandbox64_clang:
-> > >            TEST_PY_BD: "sandbox64"
-> > >            OVERRIDE: "-O clang-16"
-> > > -        sandbox_nolto:
-> > > -          TEST_PY_BD: "sandbox"
-> > > -          BUILD_ENV: "NO_LTO=1"
-> > >          sandbox_spl:
-> > >            TEST_PY_BD: "sandbox_spl"
-> > >            TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
-> > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > index 6decdfdee334..97c964fb8079 100644
-> > > --- a/.gitlab-ci.yml
-> > > +++ b/.gitlab-ci.yml
-> > > @@ -258,12 +258,6 @@ sandbox with clang test.py:
-> > >      OVERRIDE: "-O clang-16"
-> > >    <<: *buildman_and_testpy_dfn
-> > >
-> > > -sandbox without LTO test.py:
-> > > -  variables:
-> > > -    TEST_PY_BD: "sandbox"
-> > > -    BUILD_ENV: "NO_LTO=1"
-> > > -  <<: *buildman_and_testpy_dfn
-> > > -
-> > >  sandbox64 test.py:
-> > >    variables:
-> > >      TEST_PY_BD: "sandbox64"
-> > > @@ -275,12 +269,6 @@ sandbox64 with clang test.py:
-> > >      OVERRIDE: "-O clang-16"
-> > >    <<: *buildman_and_testpy_dfn
-> > >
-> > > -sandbox64 without LTO test.py:
-> > > -  variables:
-> > > -    TEST_PY_BD: "sandbox64"
-> > > -    BUILD_ENV: "NO_LTO=1"
-> > > -  <<: *buildman_and_testpy_dfn
-> > > -
-> > >  sandbox_spl test.py:
-> > >    variables:
-> > >      TEST_PY_BD: "sandbox_spl"
-> > > diff --git a/test/py/tests/test_sandbox_opts.py b/test/py/tests/test_sandbox_opts.py
-> > > index 91790b3374b4..422b43cb3bc1 100644
-> > > --- a/test/py/tests/test_sandbox_opts.py
-> > > +++ b/test/py/tests/test_sandbox_opts.py
-> > > @@ -18,3 +18,13 @@ def test_sandbox_cmdline(u_boot_console):
-> > >      out = util.run_and_log(
-> > >          cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
-> > >                 '-a', '~CMDLINE', '-o', TMPDIR])
-> > > +
-> > > +@pytest.mark.slow
-> > > +@pytest.mark.boardspec('sandbox')
-> > > +def test_sandbox_lto(u_boot_console):
-> > > +    """Test building sandbox without CONFIG_LTO"""
-> > > +    cons = u_boot_console
-> > > +
-> > > +    out = util.run_and_log(
-> > > +        cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
-> > > +               '-a', '~LTO', '-o', TMPDIR])
-> >
-> > Don't you need sandbox64 here?
->
-> No, I don't think it's providing further value to just build sandbox64
-> without LTO. I'm also not 100% sure this patch is really needed in that we're
-> trying to test for "did we disable LTO via make arguments" and in turn
-> only the ftrace test really catches that, as it will fail if we do have
-> LTO enabled, yes?
+On 19/10/23 19:25, Simon Glass wrote:
+> Hi Neha,
+> 
+> On Tue, 17 Oct 2023 at 23:20, Neha Malcom Francis <n-francis@ti.com> wrote:
+>>
+>> Hi Simon
+>>
+>> On 18/10/23 09:03, Simon Glass wrote:
+>>> Hi Neha,
+>>>
+>>> On Tue, 17 Oct 2023 at 03:58, Neha Malcom Francis <n-francis@ti.com> wrote:
+>>>>
+>>>> Hi Simon
+>>>>
+>>>> On 08/10/23 04:39, Simon Glass wrote:
+>>>>> Hi Neha,
+>>>>>
+>>>>> On Fri, 6 Oct 2023 at 04:07, Neha Malcom Francis <n-francis@ti.com> wrote:
+>>>>>>
+>>>>>> According to the TRMs of K3 platform of devices, the ROM boot image
+>>>>>> format specifies a "Core Options Field" that provides the capability to
+>>>>>> set the boot core in lockstep when set to 0 or to split mode when set
+>>>>>> to 2. Add support for providing the same from the binman DTS. Also
+>>>>>> modify existing test case for ensuring future coverage.
+>>>>>>
+>>>>>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>>>>>> ---
+>>>>>> Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
+>>>>>> Section 4.5.4.1 Boot Info
+>>>>>>
+>>>>>> Changes in v3:
+>>>>>>            - updated function comments
+>>>>>>            - removed inconsistency in setting bootcore_opts to 32
+>>>>>>
+>>>>>> Changes in v2:
+>>>>>>            - included TRM link in commit message
+>>>>>>
+>>>>>>     tools/binman/btool/openssl.py           |  6 ++++--
+>>>>>>     tools/binman/entries.rst                |  1 +
+>>>>>>     tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
+>>>>>>     tools/binman/etype/x509_cert.py         |  3 ++-
+>>>>>>     tools/binman/test/297_ti_secure_rom.dts |  1 +
+>>>>>>     5 files changed, 17 insertions(+), 5 deletions(-)
+>>>>>>
+>>>>
+>>>> [...]
+>>>>
+>>>>>> diff --git a/tools/binman/test/297_ti_secure_rom.dts b/tools/binman/test/297_ti_secure_rom.dts
+>>>>>> index d1313769f4..1a3eca9425 100644
+>>>>>> --- a/tools/binman/test/297_ti_secure_rom.dts
+>>>>>> +++ b/tools/binman/test/297_ti_secure_rom.dts
+>>>>>> @@ -9,6 +9,7 @@
+>>>>>>            binman {
+>>>>>>                    ti-secure-rom {
+>>>>>>                            content = <&unsecure_binary>;
+>>>>>> +                       core-opts = <2>;
+>>>>>
+>>>>> here ^
+>>>>>
+>>>>> Do you think there could be a binding file in dt-bindings/ for this value?
+>>>>>
+>>>>
+>>>> Sorry for getting back to this patch so late, but wanted to ask about this. I
+>>>> had seen a last version of getting the binman compatible in dt-bindings but I
+>>>> don't see it merged. Not sure where I would add this property in.
+>>>
+>>> Yes it is difficult to do anything genuinely new.
+>>>
+>>> I am anticipating something like compatible = "ti,secure-rom"
+>>>
+>>> so I suppose you could create a header file with suitable values for
+>>> this property.
+>>>
+>>> On the other hand, you could wait until there is progress with the bindings.
+>>>
+>>>
+>>
+>> I can try adding a header file for now, but follow up question; shouldn't it be
+>> added to arch/arm/dts rather than include/dt-bindings? There was traction by DT
+>> maintainers to move all such constants not directly used by the driver (in this
+>> case binman) to arch/arm/dts? [1] If you mean to use these constants in binman,
+>> will need to see how we can do that.
+> 
+> You can put the constant in the .dtsi and #include your binding file.
+> But if you hit problems, let's worry about it later.
+> 
 
-Really the test is to make sure that sandbox builds without LTO. With
-the build time being. For development, LTO serves no useful purpose
-and just triples the incremental build time.
+I'm a little confused on what has to be done regarding the binding ATM, so I'll 
+stick to waiting for some progress with the binman bindings and then tackle it.
 
-I suggest we keep sandbox64 just to prevent a regression on non-LTO,
-but I suspect it is unlikely to happen in practice.
+>>
+>>>>
+>>>>>>                    };
+>>>>>>                    unsecure_binary: blob-ext {
+>>>>>>                            filename = "ti_unsecure.bin";
+>>>>>> --
+>>>>>> 2.34.1
+>>>>>>
+>>> Regards,
+>>> Simon
+>>
+>> [1] https://lore.kernel.org/all/c4d53e9c-dac0-8ccc-dc86-faada324beba@linaro.org/
+> Regards,
+> Simon
 
-Regards,
-Simon
+-- 
+Thanking You
+Neha Malcom Francis
