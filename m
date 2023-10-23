@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C155C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:58:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC92CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 08:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 849D687884;
-	Mon, 23 Oct 2023 09:58:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4874487894;
+	Mon, 23 Oct 2023 10:01:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MWeSqotN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yUsOzIMM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3156F87895; Mon, 23 Oct 2023 09:58:16 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2BB1487890; Mon, 23 Oct 2023 10:01:16 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E655587816
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:58:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5019487894
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:01:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-53f9af41444so4700384a12.1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:58:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698047892; x=1698652692; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TLR1zoZDpmovpdSg6WGO/dBx9B1XggtrroWlsbTeyE4=;
- b=MWeSqotNztcOhHF83SmzKOsHkt5GopQ0DYTEPn+/S/mWI+JhFVKMJX5xRYV/Ik6WTu
- D9up+EycGJkp0EfBDPDO5BsVBqFX4wxQSneInhAVygFU8gBRKJnjhxAdp0nOSfvKXvh/
- HSugLTxit+8Te51qM0yfCWotYrPYDxYW6NswM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698047892; x=1698652692;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TLR1zoZDpmovpdSg6WGO/dBx9B1XggtrroWlsbTeyE4=;
- b=A+oUuv8jpMgiX9GWhkVeZqzrMQvoDdY3aZBbcmsYfQXg9oewqQppbG8NPwb7VDaRLP
- K7H1TMNr9EMmqFOsbDIJ1xOZKvW3m6BqUDNq/vwj+O+TkadTt8GGBXKhW6i928e8+9af
- htuaswmBrDfkOkpW85PM1tQK2skd/N24+70yAB9f4bdJb0bFPo7LoHWhVGC9DgRV6ZSc
- GPSaaRG2rPEXZwAf9xYMXcrO2vO2j1oxIeFW23KnC7GGMNYqIH6sPIT3IRE70RptNPxe
- 2014jV2XSYtlclo3fu/f4Q7Dy622/tNeQd/Tto4xoHd5odx8LbNfeifGysiwhTMbtmDa
- 4EEw==
-X-Gm-Message-State: AOJu0YyDktBtZIBeX1st+9CvxlwDJsB3dtN3w4GzTbKOWyOKyyz7kkCK
- N8qVOn4fN6DCT6B5QaSJkX4a6tcFh2BAHEwZlzRKzw==
-X-Google-Smtp-Source: AGHT+IFMJqdrlHxWLz9YacjzGiepH4tWwbfGdOGP5zAm0Tz3CpgvGHqWNtLBPkTUbXhk77k0QaipdwHr/u/YH1db+Zg=
-X-Received: by 2002:a17:907:1c85:b0:9b2:6d09:847c with SMTP id
- nb5-20020a1709071c8500b009b26d09847cmr5741272ejc.10.1698047892093; Mon, 23
- Oct 2023 00:58:12 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39N819mg061655;
+ Mon, 23 Oct 2023 03:01:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698048069;
+ bh=vZqb1lmH6NPcgqWC3QP5JnGqkyiK56kryOuqXqEhN8I=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=yUsOzIMMt3dqMjYcyZRT2SR+yegGpadn50ts2thU8J+2X3J58CidOx+hPVrOFx51w
+ xk70/P+GRDWVr/rbZgumD/8XiAytTpymcOMw3mkNxMnuni5RDmKqiwtJXt8GPTnR4k
+ zO9rePO3PuMiYJDp0aL02Ok6ou4UCr9EUsHeNq9k=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39N8196S047293
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 23 Oct 2023 03:01:09 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 23
+ Oct 2023 03:01:08 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 23 Oct 2023 03:01:09 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39N813XQ007311;
+ Mon, 23 Oct 2023 03:01:06 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <a-nandan@ti.com>
+Subject: [PATCH v4 1/2] binman: openssl: x509: ti_secure_rom: Add support for
+ bootcore_opts
+Date: Mon, 23 Oct 2023 13:31:02 +0530
+Message-ID: <20231023080103.3780998-2-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231023080103.3780998-1-n-francis@ti.com>
+References: <20231023080103.3780998-1-n-francis@ti.com>
 MIME-Version: 1.0
-References: <20231006100737.343745-1-n-francis@ti.com>
- <20231006100737.343745-2-n-francis@ti.com>
- <CAPnjgZ2RAwdZxZMccwcLL5QLs-HyBcx6B=LLKfVSjSb0qpjGxg@mail.gmail.com>
- <c052dc27-e919-4f62-a104-4412954e7032@ti.com>
- <CAPnjgZ2RvujUiVrhpb-v7Z94JTyP=1e6ptc=mC7A6rVF9NZxdQ@mail.gmail.com>
- <cf363bf1-68ed-4fa9-8ac5-24326f774cac@ti.com>
- <CAPnjgZ0X_DMjaPkxKLHigugPVdj4hnLpsOUuNL9MudJRd4a3_g@mail.gmail.com>
- <303b9e75-31c4-41a3-b96f-762c66cd839f@ti.com>
-In-Reply-To: <303b9e75-31c4-41a3-b96f-762c66cd839f@ti.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Oct 2023 00:57:54 -0700
-Message-ID: <CAPnjgZ0mKArhgCkS76mE7bwx5Ltx89D9+87_4Fva5AwpJixyaw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] binman: openssl: x509: ti_secure_rom: Add support
- for bootcore_opts
-To: Neha Malcom Francis <n-francis@ti.com>
-Cc: trini@konsulko.com, alpernebiyasak@gmail.com, u-boot@lists.denx.de, 
- vigneshr@ti.com, u-kumar1@ti.com, a-nandan@ti.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,120 +81,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+According to the TRMs of K3 platform of devices, the ROM boot image
+format specifies a "Core Options Field" that provides the capability to
+set the boot core in lockstep when set to 0 or to split mode when set
+to 2. Add support for providing the same from the binman DTS. Also
+modify existing test case for ensuring future coverage.
 
-On Mon, 23 Oct 2023 at 00:06, Neha Malcom Francis <n-francis@ti.com> wrote:
->
-> Hi Simon
->
-> On 19/10/23 19:25, Simon Glass wrote:
-> > Hi Neha,
-> >
-> > On Tue, 17 Oct 2023 at 23:20, Neha Malcom Francis <n-francis@ti.com> wrote:
-> >>
-> >> Hi Simon
-> >>
-> >> On 18/10/23 09:03, Simon Glass wrote:
-> >>> Hi Neha,
-> >>>
-> >>> On Tue, 17 Oct 2023 at 03:58, Neha Malcom Francis <n-francis@ti.com> wrote:
-> >>>>
-> >>>> Hi Simon
-> >>>>
-> >>>> On 08/10/23 04:39, Simon Glass wrote:
-> >>>>> Hi Neha,
-> >>>>>
-> >>>>> On Fri, 6 Oct 2023 at 04:07, Neha Malcom Francis <n-francis@ti.com> wrote:
-> >>>>>>
-> >>>>>> According to the TRMs of K3 platform of devices, the ROM boot image
-> >>>>>> format specifies a "Core Options Field" that provides the capability to
-> >>>>>> set the boot core in lockstep when set to 0 or to split mode when set
-> >>>>>> to 2. Add support for providing the same from the binman DTS. Also
-> >>>>>> modify existing test case for ensuring future coverage.
-> >>>>>>
-> >>>>>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> >>>>>> ---
-> >>>>>> Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
-> >>>>>> Section 4.5.4.1 Boot Info
-> >>>>>>
-> >>>>>> Changes in v3:
-> >>>>>>            - updated function comments
-> >>>>>>            - removed inconsistency in setting bootcore_opts to 32
-> >>>>>>
-> >>>>>> Changes in v2:
-> >>>>>>            - included TRM link in commit message
-> >>>>>>
-> >>>>>>     tools/binman/btool/openssl.py           |  6 ++++--
-> >>>>>>     tools/binman/entries.rst                |  1 +
-> >>>>>>     tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
-> >>>>>>     tools/binman/etype/x509_cert.py         |  3 ++-
-> >>>>>>     tools/binman/test/297_ti_secure_rom.dts |  1 +
-> >>>>>>     5 files changed, 17 insertions(+), 5 deletions(-)
-> >>>>>>
-> >>>>
-> >>>> [...]
-> >>>>
-> >>>>>> diff --git a/tools/binman/test/297_ti_secure_rom.dts b/tools/binman/test/297_ti_secure_rom.dts
-> >>>>>> index d1313769f4..1a3eca9425 100644
-> >>>>>> --- a/tools/binman/test/297_ti_secure_rom.dts
-> >>>>>> +++ b/tools/binman/test/297_ti_secure_rom.dts
-> >>>>>> @@ -9,6 +9,7 @@
-> >>>>>>            binman {
-> >>>>>>                    ti-secure-rom {
-> >>>>>>                            content = <&unsecure_binary>;
-> >>>>>> +                       core-opts = <2>;
-> >>>>>
-> >>>>> here ^
-> >>>>>
-> >>>>> Do you think there could be a binding file in dt-bindings/ for this value?
-> >>>>>
-> >>>>
-> >>>> Sorry for getting back to this patch so late, but wanted to ask about this. I
-> >>>> had seen a last version of getting the binman compatible in dt-bindings but I
-> >>>> don't see it merged. Not sure where I would add this property in.
-> >>>
-> >>> Yes it is difficult to do anything genuinely new.
-> >>>
-> >>> I am anticipating something like compatible = "ti,secure-rom"
-> >>>
-> >>> so I suppose you could create a header file with suitable values for
-> >>> this property.
-> >>>
-> >>> On the other hand, you could wait until there is progress with the bindings.
-> >>>
-> >>>
-> >>
-> >> I can try adding a header file for now, but follow up question; shouldn't it be
-> >> added to arch/arm/dts rather than include/dt-bindings? There was traction by DT
-> >> maintainers to move all such constants not directly used by the driver (in this
-> >> case binman) to arch/arm/dts? [1] If you mean to use these constants in binman,
-> >> will need to see how we can do that.
-> >
-> > You can put the constant in the .dtsi and #include your binding file.
-> > But if you hit problems, let's worry about it later.
-> >
->
-> I'm a little confused on what has to be done regarding the binding ATM, so I'll
-> stick to waiting for some progress with the binman bindings and then tackle it.
->
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
+Section 4.5.4.1 Boot Info
 
-Yes that sounds fine.
+Changes in v4:
+	- corrected function comments, 0 for lockstep, 2 for split mode
 
-> >>
-> >>>>
-> >>>>>>                    };
-> >>>>>>                    unsecure_binary: blob-ext {
-> >>>>>>                            filename = "ti_unsecure.bin";
-> >>>>>> --
-> >>>>>> 2.34.1
-> >>>>>>
-> >>> Regards,
-> >>> Simon
-> >>
-> >> [1] https://lore.kernel.org/all/c4d53e9c-dac0-8ccc-dc86-faada324beba@linaro.org/
-> > Regards,
-> > Simon
->
+Changes in v3:
+	- updated function comments
+	- removed inconsistency in setting bootcore_opts to 32
 
-Regards,
-Simon
+Changes in v2:
+	- included TRM link in commit message
+
+ tools/binman/btool/openssl.py           |  6 ++++--
+ tools/binman/entries.rst                |  1 +
+ tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
+ tools/binman/etype/x509_cert.py         |  3 ++-
+ tools/binman/test/297_ti_secure_rom.dts |  1 +
+ 5 files changed, 17 insertions(+), 5 deletions(-)
+
+diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
+index aad3b61ae2..7ee2683ab2 100644
+--- a/tools/binman/btool/openssl.py
++++ b/tools/binman/btool/openssl.py
+@@ -155,6 +155,7 @@ authInPlace = INTEGER:2
+             C, ST, L, O, OU, CN and emailAddress
+             cert_type (int): Certification type
+             bootcore (int): Booting core
++            bootcore_opts(int): Booting core option, lockstep (0) or split (2) mode
+             load_addr (int): Load address of image
+             sha (int): Hash function
+ 
+@@ -225,7 +226,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+                   imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
+                   hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
+                   hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
+-                  dm_data_ext_boot_block):
++                  dm_data_ext_boot_block, bootcore_opts):
+         """Create a certificate
+ 
+         Args:
+@@ -241,6 +242,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+             bootcore (int): Booting core
+             load_addr (int): Load address of image
+             sha (int): Hash function
++            bootcore_opts (int): Booting core option, lockstep (0) or split (2) mode
+ 
+         Returns:
+             str: Tool output
+@@ -285,7 +287,7 @@ sysfw_data=SEQUENCE:sysfw_data
+ [sbl]
+ compType = INTEGER:1
+ bootCore = INTEGER:16
+-compOpts = INTEGER:0
++compOpts = INTEGER:{bootcore_opts}
+ destAddr = FORMAT:HEX,OCT:{load_addr:08x}
+ compSize = INTEGER:{imagesize_sbl}
+ shaType  = OID:{sha_type}
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index e7b4e9380e..2402adb3d9 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -1944,6 +1944,7 @@ Properties / Entry arguments:
+     - core: core on which bootloader runs, valid cores are 'secure' and 'public'
+     - content: phandle of SPL in case of legacy bootflow or phandles of component binaries
+       in case of combined bootflow
++    - core-opts (optional): lockstep (0) or split (2) mode set to 0 by default
+ 
+ The following properties are only for generating a combined bootflow binary:
+     - sysfw-inner-cert: boolean if binary contains sysfw inner certificate
+diff --git a/tools/binman/etype/ti_secure_rom.py b/tools/binman/etype/ti_secure_rom.py
+index 9a7ac9e9e0..f6fc3f90f8 100644
+--- a/tools/binman/etype/ti_secure_rom.py
++++ b/tools/binman/etype/ti_secure_rom.py
+@@ -32,6 +32,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+         - core: core on which bootloader runs, valid cores are 'secure' and 'public'
+         - content: phandle of SPL in case of legacy bootflow or phandles of component binaries
+           in case of combined bootflow
++        - core-opts (optional): lockstep (0) or split (2) mode set to 0 by default
+ 
+     The following properties are only for generating a combined bootflow binary:
+         - sysfw-inner-cert: boolean if binary contains sysfw inner certificate
+@@ -69,6 +70,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+         self.sw_rev = fdt_util.GetInt(self._node, 'sw-rev', 1)
+         self.sha = fdt_util.GetInt(self._node, 'sha', 512)
+         self.core = fdt_util.GetString(self._node, 'core', 'secure')
++        self.bootcore_opts = fdt_util.GetInt(self._node, 'core-opts')
+         self.key_fname = self.GetEntryArgsOrProps([
+             EntryArg('keyfile', str)], required=True)[0]
+         if self.combined:
+@@ -97,17 +99,19 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+             bytes content of the entry, which is the certificate binary for the
+                 provided data
+         """
++        if self.bootcore_opts is None:
++            self.bootcore_opts = 0
++
+         if self.core == 'secure':
+             if self.countersign:
+                 self.cert_type = 3
+             else:
+                 self.cert_type = 2
+             self.bootcore = 0
+-            self.bootcore_opts = 32
+         else:
+             self.cert_type = 1
+             self.bootcore = 16
+-            self.bootcore_opts = 0
++
+         return super().GetCertificate(required=required, type='rom')
+ 
+     def CombinedGetCertificate(self, required):
+@@ -126,6 +130,9 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+         self.num_comps = 3
+         self.sha_type = SHA_OIDS[self.sha]
+ 
++        if self.bootcore_opts is None:
++            self.bootcore_opts = 0
++
+         # sbl
+         self.content = fdt_util.GetPhandleList(self._node, 'content-sbl')
+         input_data_sbl = self.GetContents(required)
+diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+index d028cfe38c..fc0bb12278 100644
+--- a/tools/binman/etype/x509_cert.py
++++ b/tools/binman/etype/x509_cert.py
+@@ -136,7 +136,8 @@ class Entry_x509_cert(Entry_collection):
+                 imagesize_sysfw_data=self.imagesize_sysfw_data,
+                 hashval_sysfw_data=self.hashval_sysfw_data,
+                 sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
+-                dm_data_ext_boot_block=self.dm_data_ext_boot_block
++                dm_data_ext_boot_block=self.dm_data_ext_boot_block,
++                bootcore_opts=self.bootcore_opts
+             )
+         if stdout is not None:
+             data = tools.read_file(output_fname)
+diff --git a/tools/binman/test/297_ti_secure_rom.dts b/tools/binman/test/297_ti_secure_rom.dts
+index d1313769f4..1a3eca9425 100644
+--- a/tools/binman/test/297_ti_secure_rom.dts
++++ b/tools/binman/test/297_ti_secure_rom.dts
+@@ -9,6 +9,7 @@
+ 	binman {
+ 		ti-secure-rom {
+ 			content = <&unsecure_binary>;
++			core-opts = <2>;
+ 		};
+ 		unsecure_binary: blob-ext {
+ 			filename = "ti_unsecure.bin";
+-- 
+2.34.1
+
