@@ -4,69 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5C25C25B45
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 17:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C35A3C25B46
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 17:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3F0F87934;
-	Mon, 23 Oct 2023 19:14:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 07B5A87139;
+	Mon, 23 Oct 2023 19:24:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BE9JnyXW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tLauRPvb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B1BC8794A; Mon, 23 Oct 2023 19:14:17 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id BC58886FE5; Mon, 23 Oct 2023 19:24:35 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED8D88793B
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 19:14:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 958FE86FD6
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 19:24:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-9ad8a822508so536305066b.0
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:14:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a7c95b8d14so33694957b3.3
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:24:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698081251; x=1698686051; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Zpkq5pcuGYbSHQN8+/a3OeTPDELsG/eKReI+fF5A1ds=;
- b=BE9JnyXWoOJXDMVOF+v8P0HAjtcjON0f8dhCYdQtI1xRLqTPoh58dkEGhvZh6Yj9d5
- SQ1hCYKXgQFa+hkTyqltGGkXegNa4lsOyY3zPOkqTdiVxSh5IumnVFg3hXgG5hCaQCqh
- ROxbBItVvT0Ooxdmy3teWcMIEqPjvIuouUKhM=
+ d=konsulko.com; s=google; t=1698081871; x=1698686671; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zLN90QRfychBQEVdiU0tI4D7BgRq755rO15nGlx7aTA=;
+ b=tLauRPvbwO8lOq9qm/qiy8tPFAlSa7ryXB+pNoZ2C6msmQ7fffnwCD4sKos0z9+TCa
+ JrQjynDmCsp4rVhOLr5X3oQfEVa21ezmuY0x3Dn51pG0pVQEDUNADpwU1a+GgdHjyrVp
+ E7FXdMiatQgVlKD34NM99GWR66C2CzSHMwc6c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698081251; x=1698686051;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Zpkq5pcuGYbSHQN8+/a3OeTPDELsG/eKReI+fF5A1ds=;
- b=adS9gTqyyscwwNgb+M9ivSMznaMCXwLaRrzA2NXzQtxjfb2wJiUhZmQFGpydyCT+UB
- fc30BJqCIOdoZq0iRspx7uy6bqVZQNHIr1QHBl+CYxh2EEZHRMy0okicUCv8dlNDvFYd
- UJleXCvwHueYHRaHDmfBUCdyA0kzlDKiij7hc5GiBSlBQFYjKCUd7v/nTwHDovSTfsYG
- xwCA0H2kQp0fvaBVsswkc0AsafLUbEUzUnS2qK71Twu/j9TCs2vpO1MzsAEJa3beKTIl
- qVr4aDqwbNZxZ0v5zPDF5wvDZ2UD/o4sAdHLVyTCu3Df+rIxJUawXW29dhz/qdSo4Ik2
- xmJg==
-X-Gm-Message-State: AOJu0Yx8ONykj25cleQg7FR34FAzdJV5iqahO9YEISDDyfC5GmwEcXHz
- 5HsV65AsakZKcRNyvuToGikfXJeKMiUAetruxbK6o5qhW5OOo8ynVu6NRoDu
-X-Google-Smtp-Source: AGHT+IGrC3fK+ulfDDDONM/YARJ8P+pXM5UZYhGDwPxleqbRROWEyksexEHSaXSo2gM+8C23JNAoTjuPpSw/0Za7MFc=
-X-Received: by 2002:a17:907:7b9f:b0:9bf:8073:a922 with SMTP id
- ne31-20020a1709077b9f00b009bf8073a922mr8870589ejc.19.1698081250672; Mon, 23
- Oct 2023 10:14:10 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698081871; x=1698686671;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zLN90QRfychBQEVdiU0tI4D7BgRq755rO15nGlx7aTA=;
+ b=DHIzyCSpQi3Dz2YitTJzXgSaZUeiWNsSF9txj5Px0cHlBYOJwgY9lg3F9z4O+MXiGx
+ 6a/udHHEsYip+JFNZ/qkQy8TMkY/UpI4PbQ8+l/HtIrjdRcZdYtwQVXIzT6KFqAWywH1
+ b25m0FemRjwqp4lSaZPqRlrRtXuo37yj6ABCQxiGOb8H8Du3dEIE57Iavk/asYByQL7D
+ 0uG+CmES2dgKLufHfk6oa69n4p1OP/4O2dveA7MDq3EpXmH+/3G5Bp58Ne1rKasPhVKK
+ VB8AgArAZ8lnYtDWk0QPnI6UgHFAsLrEPIxnahuIccWihyxnqAFFl5IrrTP6gkbYKUk/
+ 6r0Q==
+X-Gm-Message-State: AOJu0YyrZ7Th8CWgHS7tdqaoAGgSkLWajAE+teuFKr+0cD/dehUFuG91
+ LBiVYc/P2gNienk4YlIZ6E+kbA==
+X-Google-Smtp-Source: AGHT+IGLvhxLnfQ+i/QY8d4gXjomgygMSzULOGo/TDITBCu7zPWixyNdjnG3sbs49sUFVJ4CCDqDAg==
+X-Received: by 2002:a81:5441:0:b0:5a8:3f69:8832 with SMTP id
+ i62-20020a815441000000b005a83f698832mr8413114ywb.50.1698081871367; 
+ Mon, 23 Oct 2023 10:24:31 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-3cd1-c3ac-4562-deca.res6.spectrum.com.
+ [2603:6081:7b00:6400:3cd1:c3ac:4562:deca])
+ by smtp.gmail.com with ESMTPSA id
+ u7-20020a816007000000b0059b50f126fbsm3284532ywb.114.2023.10.23.10.24.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Oct 2023 10:24:30 -0700 (PDT)
+Date: Mon, 23 Oct 2023 13:24:28 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/1] sandbox: eliminate unused functions from binaries
+Message-ID: <20231023172428.GU496310@bill-the-cat>
+References: <20231022233727.84947-1-heinrich.schuchardt@canonical.com>
+ <20231023170258.GT496310@bill-the-cat>
+ <CAPnjgZ0Lbgmga7EhWPq3mThYih81Y18h0rHBL0Wdn=_nRU4NNQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20231023070216.394709-1-sjg@chromium.org>
- <kdfpezftry3d77g2f7aeasv2akd4p2oiedv7zs4xkx4d3s62a4@7qqz2avrn42p>
-In-Reply-To: <kdfpezftry3d77g2f7aeasv2akd4p2oiedv7zs4xkx4d3s62a4@7qqz2avrn42p>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Oct 2023 10:13:56 -0700
-Message-ID: <CAPnjgZ25GuACGCvfuYXf5RBt92C20biUuaWQ2VN+pNm8SNT10w@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bootstd: Test and boot_targets improvements
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Guillaume Gardet <Guillaume.Gardet@arm.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8bIGv5LW53k1hncK"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0Lbgmga7EhWPq3mThYih81Y18h0rHBL0Wdn=_nRU4NNQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,41 +94,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ivan,
 
-On Mon, 23 Oct 2023 at 02:44, Ivan T. Ivanov <iivanov@suse.de> wrote:
->
-> On 10-23 00:02, Simon Glass wrote:
-> >
-> > This series makes another attempt to support things like "mmc" in the
-> > boot_targets variable. The previous attempt introduced a bug which made
-> > iteration fail.
-> >
-> > New test coverage is provided for some previously untested behaviour, to
-> > prevent regressions.
-> >
-> >
->
-> Thank you! Booting RPi4 from USB and uSB looks fine now.
-> I have updated also our Bugzilla entry with the boot log.
->
-> Tested-by: Ivan T.Ivanov <iivanov@suse.de>
+--8bIGv5LW53k1hncK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thank you for checking it.
-
-Regards,
-Simon
-
-
->
-> Regards,
-> Ivan
->
-> [1] https://bugzilla.suse.com/show_bug.cgi?id=1216036
->
-> > Simon Glass (4):
-> >   Revert "bootstd: Scan all bootdevs in a boot_targets entry"
-> >   bootstd: Expand boot-ordering test to include USB
-> >   bootstd: Correct logic for single uclass
-> >   bootstd: Scan all bootdevs in a boot_targets entry (take 2)
+On Mon, Oct 23, 2023 at 10:13:55AM -0700, Simon Glass wrote:
+> Hi,
+>=20
+> On Mon, 23 Oct 2023 at 10:03, Tom Rini <trini@konsulko.com> wrote:
 > >
+> > On Mon, Oct 23, 2023 at 01:37:27AM +0200, Heinrich Schuchardt wrote:
+> > > The sandbox should closely mimic other architectures.
+> > >
+> > > Place each function or data in a separate section and let the linker
+> > > eliminate unused ones. This will reduce the binary size.
+> > >
+> > > In the linker script mark that u_boot_sandbox_getopt are to be kept.
+> > >
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > > v2:
+> > >       mark _u_boot_sandbox_getopt secitons a KEEP()
+> > > ---
+> > >  arch/sandbox/config.mk      | 4 +++-
+> > >  arch/sandbox/cpu/u-boot.lds | 6 +++---
+> > >  2 files changed, 6 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
+> > > index 2d184c5f65..c02f0229c2 100644
+> > > --- a/arch/sandbox/config.mk
+> > > +++ b/arch/sandbox/config.mk
+> > > @@ -2,7 +2,7 @@
+> > >  # Copyright (c) 2011 The Chromium OS Authors.
+> > >
+> > >  PLATFORM_CPPFLAGS +=3D -D__SANDBOX__ -U_FORTIFY_SOURCE
+> > > -PLATFORM_CPPFLAGS +=3D -fPIC
+> > > +PLATFORM_CPPFLAGS +=3D -fPIC -ffunction-sections -fdata-sections
+> > >  PLATFORM_LIBS +=3D -lrt
+> > >  SDL_CONFIG ?=3D sdl2-config
+> > >
+> > > @@ -26,6 +26,7 @@ cmd_u-boot__ =3D $(CC) -o $@ -Wl,-T u-boot.lds $(u-=
+boot-init) \
+> > >       $(KBUILD_LDFLAGS:%=3D-Wl,%) \
+> > >       $(SANITIZERS) \
+> > >       $(LTO_FINAL_LDFLAGS) \
+> > > +     -Wl,--gc-section \
+> > >       -Wl,--whole-archive \
+> > >               $(u-boot-main) \
+> > >               $(u-boot-keep-syms-lto) \
+> > > @@ -37,6 +38,7 @@ cmd_u-boot-spl =3D (cd $(obj) && $(CC) -o $(SPL_BIN=
+) -Wl,-T u-boot-spl.lds \
+> > >       $(SANITIZERS) \
+> > >       $(LTO_FINAL_LDFLAGS) \
+> > >       $(patsubst $(obj)/%,%,$(u-boot-spl-init)) \
+> > > +     -Wl,--gc-section \
+> > >       -Wl,--whole-archive \
+> > >               $(patsubst $(obj)/%,%,$(u-boot-spl-main)) \
+> > >               $(patsubst $(obj)/%,%,$(u-boot-spl-platdata)) \
+> >
+> > There's already a call to --gc-sections for u-boot-spl on sandbox (in
+> > the last line of the link command).  We should probably move the main
+> > u-boot call there too, for consistency.
+>=20
+> For the moment I really don't want this in sandbox. I think I explain
+> that there is very little benefit in terms of size and it takes us
+> away from how native apps are normally built. It also seems to mask
+> problems in your CMDLINE series
+
+This fixes problems with sandbox not acting like a proper U-Boot target.
+It is not at all about size reduction, it's about being able to use
+normal conventions in U-Boot.
+
+--=20
+Tom
+
+--8bIGv5LW53k1hncK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2rEkACgkQFHw5/5Y0
+tyx7nAv7Bmi4JIEhZOVqpAE5QtF/OnQGKAPZCI/E7Bs2kcwOxCiUoAUrUCV5+JTC
+dd+YesI/3REWMtPwtZIDOXSXnxSLQxeQ2MxPWbVEPt3qwWJe7W8gu2t+yFcOjVYB
+Gk3A9TEG9XJKL7armdduy+W0Tibby7IdCgQtddiQFuDne08KSS37LFgC7LnguKxP
+lJPcY0xn4BMJAUiPrJbJByvmbNXFLFRtS0T58ijAy9q7U2lRD2MSFRsoZu3EOS1G
+UnVE4T2n4Z9KzTCo4o7/M0o9AqPiLtVJONY4eQdpkSaMU70TOSaUTlqLTT4l6Qgb
+NeO2Dkdvw4rbCkVDgGjYat+Y8yzWZLN5BVibfbNkFWi7IodVKp3VZsTC4E8VdhNW
+xnRO2+1egeZtsuDePk+0xd+e8VgRLrGi/PqQ4FVMOiaxS4Hb/Q5VKTQxya4jnnKA
+Eszj6cOAmhHxHExOEIZFsLZw/Q6TS5EKoXDNtrxMNRJEaqyswJcH4mNugs1Swkbk
+3eSizx2f
+=SkTi
+-----END PGP SIGNATURE-----
+
+--8bIGv5LW53k1hncK--
