@@ -4,63 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB5DC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 08:01:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D348C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 08:01:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6AEC87899;
-	Mon, 23 Oct 2023 10:01:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29085878AC;
+	Mon, 23 Oct 2023 10:01:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Fyj8eLBe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jt4WUZpS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74662878A2; Mon, 23 Oct 2023 10:01:17 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 8004C87898; Mon, 23 Oct 2023 10:01:17 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE06E87898
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:01:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F3A68789F
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:01:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39N81B50001324;
- Mon, 23 Oct 2023 03:01:11 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39N816rK016296;
+ Mon, 23 Oct 2023 03:01:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698048072;
- bh=N/bUVtLYXwQbYVtXQXJs0wlsGltucITdBs8MwKgcb88=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Fyj8eLBekF/jUWikkXL0Dg4sOtF8Jry+ZNJ49Q22YvpNyjEwOm/VZYaTSvxYIUU42
- KDoZQkn4ZB/QzOvitUNkzCpv+bPMCfyWIupiTLiHNYhG9xm7MxlGC/QbtCHCGtkKF5
- Jy8/eenWikpsMsT8zUJbg+tGXGE0D6DP06JkPkm8=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39N81BoC071070
+ s=ti-com-17Q1; t=1698048066;
+ bh=a3fsbIthD6YzJZHsT77gu3xbZKRS1N2KNuGBgm/y11w=;
+ h=From:To:CC:Subject:Date;
+ b=jt4WUZpSHpdTiwheVOzg4k/g5jr+P59wILhkz9FAxD/qDPf5ioZtkRjxZe2pfqTvw
+ hyKfcKZc8y0pgpXFCvVVwdAPpPdCbJ6uL5oM67902ihAgK07iAYAP7nDfVJXzdrS0j
+ FJbOK+/oGhHpc4zFmFGB+KmaRkEKwtu4HlQhVMUM=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39N816xN040827
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 23 Oct 2023 03:01:11 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 23 Oct 2023 03:01:06 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 23
- Oct 2023 03:01:11 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 03:01:06 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 23 Oct 2023 03:01:11 -0500
+ Frontend Transport; Mon, 23 Oct 2023 03:01:06 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39N813XR007311;
- Mon, 23 Oct 2023 03:01:09 -0500
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39N813XP007311;
+ Mon, 23 Oct 2023 03:01:04 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <a-nandan@ti.com>
-Subject: [PATCH v4 2/2] DONOTMERGE: arm: dts: k3-j7200-binman: Enable split
- mode for MCU R5
-Date: Mon, 23 Oct 2023 13:31:03 +0530
-Message-ID: <20231023080103.3780998-3-n-francis@ti.com>
+Subject: [PATCH v4 0/2] Enable split mode in binman
+Date: Mon, 23 Oct 2023 13:31:01 +0530
+Message-ID: <20231023080103.3780998-1-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231023080103.3780998-1-n-francis@ti.com>
-References: <20231023080103.3780998-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,44 +78,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set boot core-opts to enable split mode for MCU R5 cluster by default.
-This patch serves to demonstrate how this can be done.
+This series extends the functionality of ti-secure-rom entry type in
+binman to support enabling of split mode vs. the default lockstep mode
+via changing the field in the x509 certificate. A DONOTMERGE patch is
+added to give an example of how this can be done via the binman.dtsi
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
-No change since v2
+Changes in v4:
+	- Simon:
+		- correct function comments for setting bit for split
+		  and lockstep mode
+Changes in v3:
+	- Simon:
+		- added entries.rst change
+		- updated function comments
+		- removed inconsistency in setting bootcore_opts to 32
 
- arch/arm/dts/k3-j7200-binman.dtsi | 3 +++
- 1 file changed, 3 insertions(+)
+Changes in v2:
+	- Udit:
+		- included TRM link in commit message
+		- added DONOTMERGE patch showing example
 
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index 14f7dea65e..025a0bd071 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -55,6 +55,7 @@
- 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
- 			combined;
- 			dm-data;
-+			core-opts = <2>;
- 			sysfw-inner-cert;
- 			keyfile = "custMpk.pem";
- 			sw-rev = <1>;
-@@ -100,6 +101,7 @@
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
- 			combined;
- 			dm-data;
-+			core-opts = <2>;
- 			sysfw-inner-cert;
- 			keyfile = "custMpk.pem";
- 			sw-rev = <1>;
-@@ -146,6 +148,7 @@
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
- 			combined;
- 			dm-data;
-+			core-opts = <2>;
- 			content-sbl = <&u_boot_spl_unsigned>;
- 			load = <0x41c00000>;
- 			content-sysfw = <&ti_fs_gp>;
+Neha Malcom Francis (2):
+  binman: openssl: x509: ti_secure_rom: Add support for bootcore_opts
+  DONOTMERGE: arm: dts: k3-j7200-binman: Enable split mode for MCU R5
+
+ arch/arm/dts/k3-j7200-binman.dtsi       |  3 +++
+ tools/binman/btool/openssl.py           |  6 ++++--
+ tools/binman/entries.rst                |  1 +
+ tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
+ tools/binman/etype/x509_cert.py         |  3 ++-
+ tools/binman/test/297_ti_secure_rom.dts |  1 +
+ 6 files changed, 20 insertions(+), 5 deletions(-)
+
 -- 
 2.34.1
 
