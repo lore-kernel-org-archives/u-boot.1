@@ -4,58 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84843CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 10:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB1AC001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 10:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12BF7878E6;
+	by phobos.denx.de (Postfix) with ESMTP id 807F6878E8;
 	Mon, 23 Oct 2023 12:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1698057893;
-	bh=L8RJRjga8ZHW1DzEa3FAua+3oVzrOMRAu34rRZiK5d8=;
+	bh=74T6hANoOmdjD1KeTyNUnmbn1IfzBEJlc69LfjM5PN8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NZtcLXcV9D1ADX73ghE4CKcCobjs+o2OCwSB5sg5+pvdne/ZwFbeRJUEala1pB1Oe
-	 aojdKzQd1eYz8dBucpYhavwFV+JC6+8bLjxxOucIg8BqMtTUG5dIBwgQa7Ob6SyTmI
-	 nnDDh0sJgkIi9TOAA86rY+fFzd497EGJAfnx6Xzionj1h5yTyDb9QNxfUgWpRuncx6
-	 gfVpKKhNc4ErOnpbEfeTCVDtaTb7IV/krTAIq1TMPo8jh0CyeluQ3mPtM3IyBGXLud
-	 cglMapgJef6nMKiWP1z46bYhDQ93ztDS5OpEqiZ8pPQ/ZM5HBdekyICiWFQfvOHCNN
-	 +PlmhKPQ5pbUQ==
+	b=LNRN/evxUndjyFVjybPhy84VmKHOw1SkRROb3SOlBGT3L4/qwPhcVr7cQKdOTm8nl
+	 fgT8fY0ZCV/svM2jOAqxM/rRKFhnl+KJq5Os+f2tYgS+Y/97y8hbyQfuZHr+ybPwR4
+	 BMboxDA821wV/qLP2nKPX5v/iVj0F9VDvO/Dqmtw9KaWtiWzyx7xAuXaKS+hYd82Jz
+	 tA3j0hxyAjoR0VoS52SdUhIrwfdm2hnb3WSr6RZMvTzFT0DIfA1BR6zBiCXbNrHg5P
+	 BjiPpnE6scab8TGTBUvZEG7+hg3RO2Nh+5GzTcFMsuLNVD1Pd7nBuIrrDhUFZYskLX
+	 x9j1yPuL6zpwA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6001E8787D;
+ by phobos.denx.de (Postfix) with ESMTPSA id DDCCA878DD;
  Mon, 23 Oct 2023 12:44:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1698057891;
- bh=L8RJRjga8ZHW1DzEa3FAua+3oVzrOMRAu34rRZiK5d8=;
+ s=phobos-20191101; t=1698057892;
+ bh=74T6hANoOmdjD1KeTyNUnmbn1IfzBEJlc69LfjM5PN8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FvBFP/3kfYo/gmTZbRkxCNT2S9l+HtpfBBCHu40S9pcbmcXTID3g9wKc1JHmKyq4U
- 0BEMb3PgFatU3VJd8miAqSMeSUTqNiwzpazim7bRUV82jSj4QPzMwOzNAGFUGDwfiq
- EfsAyipk39pJL398m2S1PlxZT5+pW6/A+4NhHkpAtXLKXP04P2kbCBFWiwmCEI4E8O
- GzItRgOcgtqfQ11S7/+RlI5LGc2z9ji2nBEGUu6l5HtmLtsMtDvqkaGRTMpEqiDBvv
- djWOOMbhsHVSW090zMKAuLhP7yetoVBB3xusKKLfeImoI0zuvZ0I1Qfbr/9D2+mi3G
- vVAIUcgYRUSXg==
-Message-ID: <ebe2784d-23c6-470d-a25f-8261fcf820ca@denx.de>
-Date: Mon, 23 Oct 2023 11:03:00 +0200
+ b=W9DMGDKjDmtF68NDNg93mtQNIvZI1w9EKHJkpILneS97oJ7fSx4/NNnHgtIZ6DO7K
+ 1j/Xh/9KHInJVbHEi4Qa3J09Sfspuj76TvPVN13hvhPv9EYskKMcSyKs5Vg6moRoqL
+ OV/Tj8x5SLrZhQGGDZnTxUPfXNiXIEZJchq958o3IGvf/7oL28xSeZTDDkoVeJj1iJ
+ LX2tTLC81PuQ9OB30HdGS00dJhdX6aQZOPdddfYxQDYlmi3eSANLZAr0IrbA5SPLmY
+ wyUlFvFYgPY17Ok0jgLmo21lpMOutyDaazBLpvAFpXKwgqXgJ8mzl9F3M65SSMPqK5
+ lwPs3vbuAYJpg==
+Message-ID: <eac43740-80aa-47c4-8237-1abd82615dcb@denx.de>
+Date: Mon, 23 Oct 2023 11:39:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] led-uclass: honour ->label field populated by
- driver's own .bind
+Subject: Re: [PATCH 6/6] led: add TI LP5562 LED driver
 Content-Language: en-US
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
 Cc: Philippe Reynes <philippe.reynes@softathome.com>,
- Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>,
- pavel Machek <pavel@denx.de>
+ Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
 References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-3-rasmus.villemoes@prevas.dk>
- <d4389465-e5bd-492b-8f86-7b4a93ff6016@denx.de>
- <7d38b732-e5f4-4e6a-9a5d-7837e285ba55@prevas.dk>
+ <20231019095837.2084458-7-rasmus.villemoes@prevas.dk>
+ <88c0c718-d62f-4854-89d3-c68029c44556@denx.de>
+ <f53f9d1b-ae49-4bca-af39-6af23429e5a0@prevas.dk>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <7d38b732-e5f4-4e6a-9a5d-7837e285ba55@prevas.dk>
+In-Reply-To: <f53f9d1b-ae49-4bca-af39-6af23429e5a0@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,62 +72,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/23 10:51, Rasmus Villemoes wrote:
-> On 19/10/2023 15.54, Marek Vasut wrote:
+On 10/23/23 11:11, Rasmus Villemoes wrote:
+> On 19/10/2023 15.58, Marek Vasut wrote:
 >> On 10/19/23 11:58, Rasmus Villemoes wrote:
->>> If the driver's own .bind method has populated uc_plat->label, don't
->>> override that. This is necessary for an upcoming driver for ti,lp5562,
->>> where the DT binding unfortunately says to use "chan-name" and not
->>> "label".
+>>> From: Doug Zobel <douglas.zobel@climate.com>
 >>>
+>>> Driver for the TI LP5562 4 channel LED controller. Supports
+>>> independent on/off control of all 4 channels. Supports LED_BLINK on 3
+>>> independent channels: blue/green/red. The white channel can blink, but
+>>> shares the blue channel blink rate.
+>>>
+>>> Heavily based on patch originally from Doug Zobel [1].
+>>>
+>>> I have modified it so it matches the DT bindings in the linux tree,
+>>> and also follows the linux driver implementation more closely. This
+>>> should address Tom's concerns, and also matches my goal of making the
+>>> U-Boot driver work with our existing .dts which is known to work in
+>>> linux.
+>>>
+>>> As our boards only have the R,G,B outputs connected, I have not
+>>> actually tested how the white channel behaves, but the R,G,B work
+>>> exactly as expected.
+>>>
+>>> [1]
+>>> https://lore.kernel.org/u-boot/1547150757-1561-1-git-send-email-douglas.zobel@climate.com/
+>>>
+>>> Cc: Doug Zobel <douglas.zobel@climate.com>
 >>> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 >>> ---
->>>    drivers/led/led-uclass.c | 4 +++-
->>>    1 file changed, 3 insertions(+), 1 deletion(-)
+>>>    doc/device-tree-bindings/leds/leds-lp5562.txt |  63 ++
+>>>    drivers/led/Kconfig                           |   8 +
+>>>    drivers/led/Makefile                          |   1 +
+>>>    drivers/led/led_lp5562.c                      | 578 ++++++++++++++++++
+>>>    4 files changed, 650 insertions(+)
+>>>    create mode 100644 doc/device-tree-bindings/leds/leds-lp5562.txt
+>>>    create mode 100644 drivers/led/led_lp5562.c
 >>>
->>> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
->>> index 5a5d07b9a7..0232fa84de 100644
->>> --- a/drivers/led/led-uclass.c
->>> +++ b/drivers/led/led-uclass.c
->>> @@ -71,7 +71,9 @@ static int led_post_bind(struct udevice *dev)
->>>        struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
->>>        const char *default_state;
->>>    -    uc_plat->label = dev_read_string(dev, "label");
->>> +    if (!uc_plat->label)
->>> +        uc_plat->label = dev_read_string(dev, "label");
->>> +
+>>> diff --git a/doc/device-tree-bindings/leds/leds-lp5562.txt
+>>> b/doc/device-tree-bindings/leds/leds-lp5562.txt
+>>> new file mode 100644
+>>> index 0000000000..4e0c742959
+>>> --- /dev/null
+>>> +++ b/doc/device-tree-bindings/leds/leds-lp5562.txt
 >>
->> One thing I have to wonder about is, why does this controller have label
->> property in the top-level node , what is that used for ?
->>
->> (see Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml)
->>
->> Reviewed-by: Marek Vasut <marex@denx.de>
+>> Why not use Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml ?
 > 
-> Reading the linux driver, it seems that the top-level label, if any, is
-> used as part of the naming for individual channels if they don't have
-> individual chan-name properties:
-> 
-> 
->          if (pdata->led_config[chan].name) {
->                  led->cdev.name = pdata->led_config[chan].name;
->          } else {
->                  snprintf(name, sizeof(name), "%s:channel%d",
->                          pdata->label ? : chip->cl->name, chan);
->                  led->cdev.name = name;
->          }
-> 
-> but I think the rationale in d1188adb2dabc is a bit weak, since the only
-> example also does have individual chan-name properties.
-> 
-> [Complete aside: At first I thought it was related to the multi-color
-> LED work that has been ongoing for many many years (I think there was an
-> LWN article at some point), where this could be exposed as a single
-> multi-color LED, as opposed to the "traditional" three/four individual
-> LEDs. In the former case, there would only be one sysfs entry, but with
-> attributes exposing the multicolor functionality. I must admit I don't
-> know the status of that work, when something reaches v31,
-> http://archive.lwn.net:8080/linux-kernel/20200722071055.GA8984@amd/t/ ,
-> it's hard to know if it ever lands, or if pieces of it has landed.]
+> Because I'm not adding support for all the devices covered by that
+> binding, nor for all the properties defined there (and some of those, I
+> think, do not even make sense for the lp5562 but only apply to some of
+> the other variants).
 
-+CC Pavel
+Using old bindings like that will only cause divergence, please dont do 
+that.
+
+>> [...]
+>>
+>>> --- /dev/null
+>>> +++ b/drivers/led/led_lp5562.c
+>>> @@ -0,0 +1,578 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * Copyright (C) 2018 Doug Zobel <douglas.zobel@climate.com>
+>>
+>> Why not port Linux drivers/leds/leds-lp5562.c ?
+> 
+> Because that would be way more work to make that fit into U-Boot's LED
+> framework than to take Doug's initial patch and make it build against
+> current U-Boot.
+
+Seems the drivers are just about the same complexity, so why not port 
+the new Linux one ?
