@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED69CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BBAC001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:28:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E9BE87942;
+	by phobos.denx.de (Postfix) with ESMTP id D4E6787946;
 	Mon, 23 Oct 2023 15:25:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AE5F8794D; Mon, 23 Oct 2023 15:25:33 +0200 (CEST)
+ id DA66487936; Mon, 23 Oct 2023 15:25:34 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 72DAD87942
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 933D287955
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0007DFEC;
- Mon, 23 Oct 2023 06:26:09 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 200112F4;
+ Mon, 23 Oct 2023 06:26:13 -0700 (PDT)
 Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9899D3F762;
- Mon, 23 Oct 2023 06:25:27 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B85B73F762;
+ Mon, 23 Oct 2023 06:25:30 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
@@ -33,9 +33,10 @@ Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
  Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
  Okhunjon Sobirjonov <okhunjon72@gmail.com>
-Subject: [PATCH v3 17/24] sunxi: add Allwinner R528/T113 SoC support
-Date: Mon, 23 Oct 2023 14:24:42 +0100
-Message-Id: <20231023132449.813863-18-andre.przywara@arm.com>
+Subject: [PATCH v3 19/24] sunxi: refactor serial base addresses to avoid
+ asm/arch/cpu.h
+Date: Mon, 23 Oct 2023 14:24:44 +0100
+Message-Id: <20231023132449.813863-20-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231023132449.813863-1-andre.przywara@arm.com>
 References: <20231023132449.813863-1-andre.przywara@arm.com>
@@ -57,224 +58,262 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the remaining code bits to teach U-Boot about Allwinner's
-newest SoC generation. This was introduced with the RISC-V based
-Allwinner D1 SoC, which actually shares a die with the ARM cores versions
-called R528 (BGA, without DRAM) and T113s (QFP, with embedded DRAM).
+At the moment we have each SoC's memory map defined in its own cpu.h,
+which is included in include/configs/sunxi_common.h. This will be a
+problem with the introduction of Allwinner RISC-V support.
 
-This adds the new Kconfig stanza, using the two newly introduced symbols
-for the new SoC generation and pincontroller. It also adds the new symbols
-to the relavent code places, to set all the hardcoded bits directly.
+Remove the inclusion of that header file from the common config header,
+instead move the required serial base addresses (for the SPL) into a
+separate header file. Then include the original cpu.h file only where
+we really need it, which is only under arch/arm now.
 
-We need one DT override:
-The ARM core version of the DT specifies the CPUX watchdog as
-"reserved", which means it won't be recognised by U-Boot. Override this
-in our generic sunxi-u-boot.dtsi, to let U-Boot pick up this watchdog,
-so that the generic reset driver will work.
+This disentangles the architecture specific header files from the
+generic code.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- arch/arm/dts/sunxi-u-boot.dtsi                    |  7 +++++++
- arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h |  9 +++++++--
- arch/arm/mach-sunxi/Kconfig                       | 11 +++++++++++
- arch/arm/mach-sunxi/board.c                       |  8 ++++++++
- arch/arm/mach-sunxi/clock_sun50i_h6.c             |  2 ++
- arch/arm/mach-sunxi/cpu_info.c                    |  2 ++
- common/spl/Kconfig                                |  1 +
- drivers/clk/sunxi/Kconfig                         |  1 +
- drivers/mmc/sunxi_mmc.c                           |  1 +
- drivers/pinctrl/sunxi/Kconfig                     |  1 +
- 10 files changed, 41 insertions(+), 2 deletions(-)
+ arch/arm/cpu/armv7/sunxi/sram.c               |  1 +
+ arch/arm/cpu/armv8/fel_utils.S                |  1 +
+ arch/arm/include/asm/arch-sunxi/boot0.h       |  2 ++
+ arch/arm/include/asm/arch-sunxi/clock.h       |  1 +
+ arch/arm/include/asm/arch-sunxi/cpu_sun4i.h   | 15 ---------
+ .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  5 ---
+ arch/arm/include/asm/arch-sunxi/cpu_sun9i.h   |  7 ----
+ .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  |  4 ---
+ arch/arm/include/asm/arch-sunxi/serial.h      | 32 +++++++++++++++++++
+ arch/arm/mach-sunxi/gtbus_sun9i.c             |  1 +
+ arch/arm/mach-sunxi/timer.c                   |  1 +
+ include/configs/sunxi-common.h                |  2 +-
+ 12 files changed, 40 insertions(+), 32 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-sunxi/serial.h
 
-diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
-index af419c7e590..a0c8abb7033 100644
---- a/arch/arm/dts/sunxi-u-boot.dtsi
-+++ b/arch/arm/dts/sunxi-u-boot.dtsi
-@@ -23,6 +23,13 @@
- 	};
- };
+diff --git a/arch/arm/cpu/armv7/sunxi/sram.c b/arch/arm/cpu/armv7/sunxi/sram.c
+index 28564c2846a..28ff6a1b7c2 100644
+--- a/arch/arm/cpu/armv7/sunxi/sram.c
++++ b/arch/arm/cpu/armv7/sunxi/sram.c
+@@ -12,6 +12,7 @@
+ #include <common.h>
+ #include <init.h>
+ #include <asm/io.h>
++#include <asm/arch/cpu.h>
  
-+/* Let U-Boot be the firmware layer that controls the watchdog. */
-+#ifdef CONFIG_MACH_SUN8I_R528
-+&wdt {
-+	status = "okay";
-+};
-+#endif
+ void sunxi_sram_init(void)
+ {
+diff --git a/arch/arm/cpu/armv8/fel_utils.S b/arch/arm/cpu/armv8/fel_utils.S
+index 2fe38a1a047..939869b9ffa 100644
+--- a/arch/arm/cpu/armv8/fel_utils.S
++++ b/arch/arm/cpu/armv8/fel_utils.S
+@@ -10,6 +10,7 @@
+ #include <config.h>
+ #include <asm/system.h>
+ #include <linux/linkage.h>
++#include <asm/arch/cpu.h>
+ 
+ /*
+  * We don't overwrite save_boot_params() here, to save the FEL state upon
+diff --git a/arch/arm/include/asm/arch-sunxi/boot0.h b/arch/arm/include/asm/arch-sunxi/boot0.h
+index 30f5680757a..cad25c50bc6 100644
+--- a/arch/arm/include/asm/arch-sunxi/boot0.h
++++ b/arch/arm/include/asm/arch-sunxi/boot0.h
+@@ -3,6 +3,8 @@
+  * Configuration settings for the Allwinner A64 (sun50i) CPU
+  */
+ 
++#include <asm/arch/cpu.h>
 +
- &binman {
- 	u-boot-sunxi-with-spl {
- 		filename = "u-boot-sunxi-with-spl.bin";
-diff --git a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-index 8471e11aa02..a84a57e5b41 100644
---- a/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h
-@@ -266,7 +266,7 @@ struct sunxi_ccm_reg {
- #define CCM_CPU_AXI_AXI_MASK		0x3
- #define CCM_CPU_AXI_DEFAULT_FACTORS	0x301
+ #if defined(CONFIG_RESERVE_ALLWINNER_BOOT0_HEADER) && !defined(CONFIG_SPL_BUILD)
+ /* reserve space for BOOT0 header information */
+ 	b	reset
+diff --git a/arch/arm/include/asm/arch-sunxi/clock.h b/arch/arm/include/asm/arch-sunxi/clock.h
+index 3d34261b0e5..fcc8966cb0b 100644
+--- a/arch/arm/include/asm/arch-sunxi/clock.h
++++ b/arch/arm/include/asm/arch-sunxi/clock.h
+@@ -9,6 +9,7 @@
+ #define _SUNXI_CLOCK_H
  
--#ifdef CONFIG_MACH_SUN50I_H6
-+#ifdef CONFIG_MACH_SUN50I_H6				/* H6 */
- #define CCM_PLL6_DEFAULT		0xa0006300
+ #include <linux/types.h>
++#include <asm/arch/cpu.h>
  
- /* psi_ahb1_ahb2 bit field */
-@@ -277,7 +277,7 @@ struct sunxi_ccm_reg {
- 
- /* apb1 bit field */
- #define CCM_APB1_DEFAULT		0x03000102
--#elif CONFIG_MACH_SUN50I_H616
-+#elif CONFIG_MACH_SUN50I_H616				/* H616 */
- #define CCM_PLL6_DEFAULT		0xa8003100
- 
- /* psi_ahb1_ahb2 bit field */
-@@ -288,6 +288,11 @@ struct sunxi_ccm_reg {
- 
- /* apb1 bit field */
- #define CCM_APB1_DEFAULT		0x03000102
-+#elif CONFIG_MACH_SUN8I_R528				/* R528 */
-+#define CCM_PLL6_DEFAULT		0xe8216300
-+#define CCM_PSI_AHB1_AHB2_DEFAULT	0x03000002
-+//#define CCM_AHB3_DEFAULT		0x03000002
-+#define CCM_APB1_DEFAULT		0x03000102
+ #define CLK_GATE_OPEN			0x1
+ #define CLK_GATE_CLOSE			0x0
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h b/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h
+index d6fe51f24bc..3daee2f574a 100644
+--- a/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h
+@@ -128,20 +128,6 @@ defined(CONFIG_MACH_SUN50I)
+ #define SUNXI_CPUCFG_BASE		0x01c25c00
  #endif
  
- /* apb2 bit field */
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index 6ba9ed2bb2a..d976203ee7b 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -346,6 +346,15 @@ config MACH_SUN8I_R40
- 	select SUNXI_DRAM_DW_32BIT
- 	imply SPL_SYS_I2C_LEGACY
+-#ifdef CONFIG_MACH_SUNIV
+-#define SUNXI_UART0_BASE		0x01c25000
+-#define SUNXI_UART1_BASE		0x01c25400
+-#define SUNXI_UART2_BASE		0x01c25800
+-#else
+-#define SUNXI_UART0_BASE		0x01c28000
+-#define SUNXI_UART1_BASE		0x01c28400
+-#define SUNXI_UART2_BASE		0x01c28800
+-#endif
+-#define SUNXI_UART3_BASE		0x01c28c00
+-#define SUNXI_UART4_BASE		0x01c29000
+-#define SUNXI_UART5_BASE		0x01c29400
+-#define SUNXI_UART6_BASE		0x01c29800
+-#define SUNXI_UART7_BASE		0x01c29c00
+ #define SUNXI_PS2_0_BASE		0x01c2a000
+ #define SUNXI_PS2_1_BASE		0x01c2a400
  
-+config MACH_SUN8I_R528
-+	bool "sun8i (Allwinner R528)"
-+	select CPU_V7A
-+	select SUNXI_GEN_NCAT2
-+	select SUNXI_NEW_PINCTRL
-+	select MMC_SUNXI_HAS_NEW_MODE
-+	select SUPPORT_SPL
-+	select DRAM_SUN20I_D1
+@@ -208,7 +194,6 @@ defined(CONFIG_MACH_SUN50I)
+ #endif
+ 
+ #define SUNXI_R_TWI_BASE		0x01f02400
+-#define SUNXI_R_UART_BASE		0x01f02800
+ #define SUN6I_P2WI_BASE			0x01f03400
+ #define SUNXI_RSB_BASE			0x01f03400
+ 
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+index 9b6bf843601..15ee092d358 100644
+--- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+@@ -42,10 +42,6 @@
+ #define SUNXI_DRAM_PHY0_BASE		0x04800000
+ #endif
+ 
+-#define SUNXI_UART0_BASE		0x05000000
+-#define SUNXI_UART1_BASE		0x05000400
+-#define SUNXI_UART2_BASE		0x05000800
+-#define SUNXI_UART3_BASE		0x05000C00
+ #define SUNXI_TWI0_BASE			0x05002000
+ #define SUNXI_TWI1_BASE			0x05002400
+ #define SUNXI_TWI2_BASE			0x05002800
+@@ -67,7 +63,6 @@
+ #define SUNXI_R_CPUCFG_BASE		0x07000400
+ #define SUNXI_PRCM_BASE			0x07010000
+ #define SUNXI_R_WDOG_BASE		0x07020400
+-#define SUNXI_R_UART_BASE		0x07080000
+ #define SUNXI_R_TWI_BASE		0x07081400
+ 
+ #ifndef __ASSEMBLY__
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun9i.h b/arch/arm/include/asm/arch-sunxi/cpu_sun9i.h
+index 20025be2319..2bf2675d5c1 100644
+--- a/arch/arm/include/asm/arch-sunxi/cpu_sun9i.h
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sun9i.h
+@@ -86,12 +86,6 @@
+ #define SUNXI_LRADC_BASE		(REGS_APB0_BASE + 0x1800)
+ 
+ /* APB1 Module */
+-#define SUNXI_UART0_BASE		(REGS_APB1_BASE + 0x0000)
+-#define SUNXI_UART1_BASE		(REGS_APB1_BASE + 0x0400)
+-#define SUNXI_UART2_BASE		(REGS_APB1_BASE + 0x0800)
+-#define SUNXI_UART3_BASE		(REGS_APB1_BASE + 0x0C00)
+-#define SUNXI_UART4_BASE		(REGS_APB1_BASE + 0x1000)
+-#define SUNXI_UART5_BASE		(REGS_APB1_BASE + 0x1400)
+ #define SUNXI_TWI0_BASE			(REGS_APB1_BASE + 0x2800)
+ #define SUNXI_TWI1_BASE			(REGS_APB1_BASE + 0x2C00)
+ #define SUNXI_TWI2_BASE			(REGS_APB1_BASE + 0x3000)
+@@ -100,7 +94,6 @@
+ 
+ /* RCPUS Module */
+ #define SUNXI_PRCM_BASE			(REGS_RCPUS_BASE + 0x1400)
+-#define SUNXI_R_UART_BASE		(REGS_RCPUS_BASE + 0x2800)
+ #define SUNXI_RSB_BASE			(REGS_RCPUS_BASE + 0x3400)
+ 
+ /* Misc. */
+diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+index ca92c39927d..908a582ae0f 100644
+--- a/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
++++ b/arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+@@ -10,10 +10,6 @@
+ #define SUNXI_CCM_BASE			0x02001000
+ #define SUNXI_TIMER_BASE		0x02050000
+ 
+-#define SUNXI_UART0_BASE		0x02500000
+-#define SUNXI_UART1_BASE		0x02500400
+-#define SUNXI_UART2_BASE		0x02500800
+-#define SUNXI_UART3_BASE		0x02500C00
+ #define SUNXI_TWI0_BASE			0x02502000
+ #define SUNXI_TWI1_BASE			0x02502400
+ #define SUNXI_TWI2_BASE			0x02502800
+diff --git a/arch/arm/include/asm/arch-sunxi/serial.h b/arch/arm/include/asm/arch-sunxi/serial.h
+new file mode 100644
+index 00000000000..9386287b65e
+--- /dev/null
++++ b/arch/arm/include/asm/arch-sunxi/serial.h
+@@ -0,0 +1,32 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ *  hardcoded UART base addresses for early SPL use
++ *
++ *  Copyright (c) 2022  Arm Ltd.
++ */
 +
- config MACH_SUN8I_V3S
- 	bool "sun8i (Allwinner V3/V3s/S3/S3L)"
- 	select CPU_V7A
-@@ -656,6 +665,7 @@ config SYS_CLK_FREQ
- 	default 1008000000 if MACH_SUN9I
- 	default 888000000 if MACH_SUN50I_H6
- 	default 1008000000 if MACH_SUN50I_H616
-+	default 1008000000 if MACH_SUN8I_R528
- 
- config SYS_CONFIG_NAME
- 	default "suniv" if MACH_SUNIV
-@@ -664,6 +674,7 @@ config SYS_CONFIG_NAME
- 	default "sun6i" if MACH_SUN6I
- 	default "sun7i" if MACH_SUN7I
- 	default "sun8i" if MACH_SUN8I
-+	default "sun8i" if MACH_SUN8I_R528
- 	default "sun9i" if MACH_SUN9I
- 	default "sun50i" if MACH_SUN50I
- 	default "sun50i" if MACH_SUN50I_H6
-diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-index d572314f0da..c2fadf75367 100644
---- a/arch/arm/mach-sunxi/board.c
-+++ b/arch/arm/mach-sunxi/board.c
-@@ -147,6 +147,10 @@ static int gpio_init(void)
- 	sunxi_gpio_set_cfgpin(SUNXI_GPH(12), SUN9I_GPH_UART0);
- 	sunxi_gpio_set_cfgpin(SUNXI_GPH(13), SUN9I_GPH_UART0);
- 	sunxi_gpio_set_pull(SUNXI_GPH(13), SUNXI_GPIO_PULL_UP);
-+#elif CONFIG_CONS_INDEX == 1 && defined(CONFIG_MACH_SUN8I_R528)
-+	sunxi_gpio_set_cfgpin(SUNXI_GPE(2), 6);
-+	sunxi_gpio_set_cfgpin(SUNXI_GPE(3), 6);
-+	sunxi_gpio_set_pull(SUNXI_GPE(3), SUNXI_GPIO_PULL_UP);
- #elif CONFIG_CONS_INDEX == 2 && defined(CONFIG_MACH_SUNIV)
- 	sunxi_gpio_set_cfgpin(SUNXI_GPA(2), SUNIV_GPE_UART0);
- 	sunxi_gpio_set_cfgpin(SUNXI_GPA(3), SUNIV_GPE_UART0);
-@@ -163,6 +167,10 @@ static int gpio_init(void)
- 	sunxi_gpio_set_cfgpin(SUNXI_GPB(0), SUN8I_GPB_UART2);
- 	sunxi_gpio_set_cfgpin(SUNXI_GPB(1), SUN8I_GPB_UART2);
- 	sunxi_gpio_set_pull(SUNXI_GPB(1), SUNXI_GPIO_PULL_UP);
-+#elif CONFIG_CONS_INDEX == 4 && defined(CONFIG_MACH_SUN8I_R528)
-+	sunxi_gpio_set_cfgpin(SUNXI_GPB(6), 7);
-+	sunxi_gpio_set_cfgpin(SUNXI_GPB(7), 7);
-+	sunxi_gpio_set_pull(SUNXI_GPB(7), SUNXI_GPIO_PULL_UP);
- #elif CONFIG_CONS_INDEX == 5 && defined(CONFIG_MACH_SUN8I)
- 	sunxi_gpio_set_cfgpin(SUNXI_GPL(2), SUN8I_GPL_R_UART);
- 	sunxi_gpio_set_cfgpin(SUNXI_GPL(3), SUN8I_GPL_R_UART);
-diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-index daae994787e..bea91c78bc5 100644
---- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-@@ -41,7 +41,9 @@ void clock_init_safe(void)
- 			CCM_CPU_AXI_DEFAULT_FACTORS);
- 
- 	writel(CCM_PSI_AHB1_AHB2_DEFAULT, &ccm->psi_ahb1_ahb2_cfg);
-+#ifdef CCM_AHB3_DEFAULT
- 	writel(CCM_AHB3_DEFAULT, &ccm->ahb3_cfg);
++#ifndef SUNXI_SERIAL_MEMMAP_H
++#define SUNXI_SERIAL_MEMMAP_H
++
++#if defined(CONFIG_MACH_SUN9I)
++#define SUNXI_UART0_BASE		0x07000000
++#define SUNXI_R_UART_BASE		0x08002800
++#elif defined(CONFIG_SUN50I_GEN_H6)
++#define SUNXI_UART0_BASE		0x05000000
++#define SUNXI_R_UART_BASE		0x07080000
++#elif defined(CONFIG_MACH_SUNIV)
++#define SUNXI_UART0_BASE		0x01c25000
++#define SUNXI_R_UART_BASE		0
++#elif defined(CONFIG_SUNXI_GEN_NCAT2)
++#define SUNXI_UART0_BASE		0x02500000
++#define SUNXI_R_UART_BASE		0		// 0x07080000 (?>
++#else
++#define SUNXI_UART0_BASE		0x01c28000
++#define SUNXI_R_UART_BASE		0x01f02800
 +#endif
- 	writel(CCM_APB1_DEFAULT, &ccm->apb1_cfg);
++
++#define SUNXI_UART1_BASE		(SUNXI_UART0_BASE + 0x400)
++#define SUNXI_UART2_BASE		(SUNXI_UART0_BASE + 0x800)
++#define SUNXI_UART3_BASE		(SUNXI_UART0_BASE + 0xc00)
++
++#endif /* SUNXI_SERIAL_MEMMAP_H */
+diff --git a/arch/arm/mach-sunxi/gtbus_sun9i.c b/arch/arm/mach-sunxi/gtbus_sun9i.c
+index cf011c4cfa7..5624621b500 100644
+--- a/arch/arm/mach-sunxi/gtbus_sun9i.c
++++ b/arch/arm/mach-sunxi/gtbus_sun9i.c
+@@ -8,6 +8,7 @@
  
- 	/*
-diff --git a/arch/arm/mach-sunxi/cpu_info.c b/arch/arm/mach-sunxi/cpu_info.c
-index 7eef178859b..7fecc3b88dd 100644
---- a/arch/arm/mach-sunxi/cpu_info.c
-+++ b/arch/arm/mach-sunxi/cpu_info.c
-@@ -93,6 +93,8 @@ int print_cpuinfo(void)
- 	printf("CPU:   Allwinner R40 (SUN8I %04x)\n", sunxi_get_sram_id());
- #elif defined CONFIG_MACH_SUN8I_V3S
- 	printf("CPU:   Allwinner V3s (SUN8I %04x)\n", sunxi_get_sram_id());
-+#elif defined CONFIG_MACH_SUN8I_R528
-+	puts("CPU:   Allwinner R528 (SUN8I)\n");
- #elif defined CONFIG_MACH_SUN9I
- 	puts("CPU:   Allwinner A80 (SUN9I)\n");
- #elif defined CONFIG_MACH_SUN50I
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index f7c8ba511b3..25cd18afda7 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -371,6 +371,7 @@ config SPL_STACK
- 	default 0x91ffb8 if ARCH_MX6 && !MX6_OCRAM_256KB
- 	default 0x118000 if MACH_SUN50I_H6
- 	default 0x58000 if MACH_SUN50I_H616
-+	default 0x40000 if MACH_SUN8I_R528
- 	default 0x54000 if MACH_SUN50I || MACH_SUN50I_H5
- 	default 0x18000 if MACH_SUN9I
- 	default 0x8000 if ARCH_SUNXI
-diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
-index f65e482ba4c..8bdc0944896 100644
---- a/drivers/clk/sunxi/Kconfig
-+++ b/drivers/clk/sunxi/Kconfig
-@@ -89,6 +89,7 @@ config CLK_SUN8I_H3
+ #include <common.h>
+ #include <asm/io.h>
++#include <asm/arch/cpu.h>
+ #include <asm/arch/gtbus_sun9i.h>
+ #include <asm/arch/sys_proto.h>
  
- config CLK_SUN20I_D1
- 	bool "Clock driver for Allwinner D1"
-+	default MACH_SUN8I_R528
- 	help
- 	  This enables common clock driver support for platforms based
- 	  on Allwinner D1 SoC.
-diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
-index 519ef602145..4d6351bf275 100644
---- a/drivers/mmc/sunxi_mmc.c
-+++ b/drivers/mmc/sunxi_mmc.c
-@@ -707,6 +707,7 @@ static const struct udevice_id sunxi_mmc_ids[] = {
- 	{ .compatible = "allwinner,sun50i-h6-emmc" },
- 	{ .compatible = "allwinner,sun50i-a100-mmc" },
- 	{ .compatible = "allwinner,sun50i-a100-emmc" },
-+	{ .compatible = "allwinner,sun20i-d1-mmc" },
- 	{ /* sentinel */ }
- };
+diff --git a/arch/arm/mach-sunxi/timer.c b/arch/arm/mach-sunxi/timer.c
+index fc9d419a25e..9a6f6c06d8c 100644
+--- a/arch/arm/mach-sunxi/timer.c
++++ b/arch/arm/mach-sunxi/timer.c
+@@ -10,6 +10,7 @@
+ #include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
++#include <asm/arch/cpu.h>
+ #include <asm/arch/timer.h>
+ #include <linux/delay.h>
  
-diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
-index c8f937d91e9..cbd61795986 100644
---- a/drivers/pinctrl/sunxi/Kconfig
-+++ b/drivers/pinctrl/sunxi/Kconfig
-@@ -126,6 +126,7 @@ config PINCTRL_SUN50I_H616_R
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index d2d70f0fc23..b8ca77d031d 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -12,7 +12,6 @@
+ #ifndef _SUNXI_COMMON_CONFIG_H
+ #define _SUNXI_COMMON_CONFIG_H
  
- config PINCTRL_SUN20I_D1
- 	bool "Support for the Allwinner D1/R528 PIO"
-+	default MACH_SUN8I_R528
- 	select PINCTRL_SUNXI
+-#include <asm/arch/cpu.h>
+ #include <linux/stringify.h>
  
- endif
+ /* Serial & console */
+@@ -24,6 +23,7 @@
+ #define CFG_SYS_NS16550_CLK		24000000
+ #endif
+ #if !CONFIG_IS_ENABLED(DM_SERIAL)
++#include <asm/arch/serial.h>
+ # define CFG_SYS_NS16550_COM1		SUNXI_UART0_BASE
+ # define CFG_SYS_NS16550_COM2		SUNXI_UART1_BASE
+ # define CFG_SYS_NS16550_COM3		SUNXI_UART2_BASE
 -- 
 2.25.1
 
