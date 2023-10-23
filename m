@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BCF7C25B46
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 19:09:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F8EC25B46
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 19:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D62487819;
-	Mon, 23 Oct 2023 21:09:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3FA6686FD1;
+	Mon, 23 Oct 2023 21:10:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinet.cat
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pkbFlwv/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BDF886F97; Mon, 23 Oct 2023 21:09:13 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5DF1886FDC; Mon, 23 Oct 2023 21:10:49 +0200 (CEST)
+Received: from mx1.tinet.cat (mx1.dipta.cat [195.76.233.59])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7045587741
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 21:09:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F56186F97
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 21:10:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=tinet.cat
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5a7c011e113so40096247b3.1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 12:09:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698088140; x=1698692940; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4+zG5YBB+4InhGw8JiDqotiv0X7/qTTv3J0VXMhOO3c=;
- b=pkbFlwv/YPHKUvxCPxXU3jr9v9LD2QTpO37sS/lvJZJhWX2VpjKLdAMrXVFg6OsHcq
- gjH/K2nyo01OrNmGWXPycVDjNX/NgOuYYbf5i1EKGaUqRbA5PwyUig9DCThlbkN7qg+E
- Y5AeoZuklGYX3eVPhq28bDZba1fSMmKZT1gLI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698088140; x=1698692940;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4+zG5YBB+4InhGw8JiDqotiv0X7/qTTv3J0VXMhOO3c=;
- b=lIcDBWP2N+BTFI47wAk6P7KtJMZOaROA5iPBr4iMXHtEt7oHRZ2HrAAvha4yL/keJ4
- Myq6OIn2zZ4li8ylbWjbMLvbA0wq2QzGH95aHcThPGGLbClDbBkyaOCIRbZAvyuvHbdn
- Jl3RHpgvTDTEdhwiQ4Ezf9V0OXd7dhLuBJ3IC1ilorWIl7nnI0XXimj9qXv4iy91bwqo
- mIjL3xTlMDPycQ2+8s+o6OoACAq3d+0WB2WipEosM6NQM1Pu73Ey6pJ/NQr1Mf9Fc+EC
- wyj3ColbeDVvnrZK4rA3aFxtT/SZfSldxxrA1WRpK3cnSTljKlgwwJ5PEz2j9AuLKMFY
- P5Hw==
-X-Gm-Message-State: AOJu0YyRe0JQh519UnVC6fB7I+7MdfFNT0+60pbIoO7xw+MX0hZAVqIU
- 9BblUw/tDqgwE6lbtDfYaTTBuLroz3N9Pqx3dygsaA==
-X-Google-Smtp-Source: AGHT+IES46zv4W/uJ9fY7TStjMjSsgFgIHfiiN/4HyZkye7O5/U06Hgtz9t7AnzpabcgbR5z4FaaZw==
-X-Received: by 2002:a81:4f08:0:b0:5a7:b8de:390d with SMTP id
- d8-20020a814f08000000b005a7b8de390dmr10936498ywb.13.1698088140007; 
- Mon, 23 Oct 2023 12:09:00 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-c6de-498a-c903-1c13.res6.spectrum.com.
- [2603:6081:7b00:6400:c6de:498a:c903:1c13])
- by smtp.gmail.com with ESMTPSA id
- l67-20020a0dfb46000000b00598d67585d7sm3353566ywf.117.2023.10.23.12.08.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 12:08:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tony Dinh <mibodhi@gmail.com>
-Cc: Stefan Roese <sr@denx.de>
-Subject: Re: [RESEND PATCH] bootstd: sata: bootdev scanning for ahci sata with
- no drive attached
-Date: Mon, 23 Oct 2023 15:08:56 -0400
-Message-Id: <169808766154.2558485.18193440583898444935.b4-ty@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231007033429.25109-1-mibodhi@gmail.com>
-References: <20231007033429.25109-1-mibodhi@gmail.com>
+ spf=pass smtp.mailfrom=xdrudis@tinet.cat
+X-ASG-Debug-ID: 1698088244-12aaf2620319d30001-4l7tJC
+Received: from smtp01.tinet.cat (smtp01.tinet.cat [195.77.216.131]) by
+ mx1.tinet.cat with ESMTP id Qv1n4VkAei5kLpCJ;
+ Mon, 23 Oct 2023 21:10:44 +0200 (CEST)
+X-Barracuda-Envelope-From: xdrudis@tinet.cat
+X-Barracuda-Effective-Source-IP: smtp01.tinet.cat[195.77.216.131]
+X-Barracuda-Apparent-Source-IP: 195.77.216.131
+Received: from xdrudis.tinet.cat (191.red-79-152-186.dynamicip.rima-tde.net
+ [79.152.186.191])
+ by smtp01.tinet.cat (Postfix) with ESMTPSA id 56FED605DE48;
+ Mon, 23 Oct 2023 21:10:44 +0200 (CEST)
+Date: Mon, 23 Oct 2023 21:10:33 +0200
+From: Xavier Drudis Ferran <xdrudis@tinet.cat>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] general: fix GPL-2.0-or-later SPDX headers
+Message-ID: <ZTbFKfUbEwLpPDnE@xdrudis.tinet.cat>
+X-ASG-Orig-Subj: Re: [PATCH 1/1] general: fix GPL-2.0-or-later SPDX headers
+References: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
+X-Barracuda-Connect: smtp01.tinet.cat[195.77.216.131]
+X-Barracuda-Start-Time: 1698088244
+X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 954
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Bayes: INNOCENT GLOBAL 0.5054 1.0000 0.7500
+X-Barracuda-Spam-Score: 0.75
+X-Barracuda-Spam-Status: No, SCORE=0.75 using global scores of TAG_LEVEL=1000.0
+ QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.115780
+ Rule breakdown below
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,20 +74,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 06 Oct 2023 20:34:28 -0700, Tony Dinh wrote:
+El Sun, Oct 22, 2023 at 07:47:07PM +0200, Heinrich Schuchardt deia:
+> diff --git a/drivers/sound/tegra_ahub.c b/drivers/sound/tegra_ahub.c
+> index 495a29c513..28f392504d 100644
+> --- a/drivers/sound/tegra_ahub.c
+> +++ b/drivers/sound/tegra_ahub.c
+> @@ -1,4 +1,4 @@
+> -// SPDX-License-Identifier: GPL-2.0+159
+> +// SPDX-License-Identifier: GPL-2.0-or-later159
+>  /*
+>   * Take from dc tegra_ahub.c
+>   *
 
-> It's normal to have no SATA drive attached to the controller, so return a
-> successful status when there is no block device found after probing.
-> 
-> Note: this patch depends on the previous patch
-> https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-mibodhi@gmail.com/
-> 
-> Resend the right patch.
-> 
-> [...]
+What does this 159 mean (or meant) ?
 
-Applied to u-boot/master, thanks!
+> diff --git a/lib/errno_str.c b/lib/errno_str.c
+> index 2e5f4a887d..9bae8ecb11 100644
+> --- a/lib/errno_str.c
+> +++ b/lib/errno_str.c
+> @@ -1,8 +1,7 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+>  /*
+>   * Copyright (C) 2014 Samsung Electronics
+>   * Przemyslaw Marczak <p.marczak@samsung.com>
+> - *
+> - * SDPX-License-Identifier:	GPL-2.0+
+>   */
+>  #include <common.h>
+>  #include <errno.h>
 
--- 
-Tom
+Should be replaced, not supressed.
+the tab might be replaced by one space too.
 
