@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D53CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 10:44:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84843CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 10:45:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1E46878E1;
-	Mon, 23 Oct 2023 12:44:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12BF7878E6;
+	Mon, 23 Oct 2023 12:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698057892;
-	bh=kovhvuGhYoin14ajBY8l5wzhS1r1MA3gwMHEICA0hOY=;
+	s=phobos-20191101; t=1698057893;
+	bh=L8RJRjga8ZHW1DzEa3FAua+3oVzrOMRAu34rRZiK5d8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=POdi1SZnWpItT12lWu9Vd6oRLTIhgqmEP1FjUiBQ2v7Utrga1GIyoksWI/cP1QCx6
-	 TI0BOWmZDw7TFk9vD5opJ3Gcl/g/IlG9CsTm8SrIaoPVe1EsiSy25Rzmt0101C6RJX
-	 BYhloLjA2BOYGFxnmc/AXzL/4O9PSVZ74boXKM1d5OTGhMdDCp9MBB9SwB6O51gpQC
-	 7byGZpMnhRfBR2+QwJ3b+MvF9Zk0U+tIHvWh2jpy2Ip/mpWW0fVBAbghNY3cChwKO/
-	 Q8lIs3r6um8uEp3PZzTEHuMXexfJqomyuC3TyZrUFjKKYaTD4Vv5xQS/zPz8LeyJsz
-	 q7aVY/bEX3/Nw==
+	b=NZtcLXcV9D1ADX73ghE4CKcCobjs+o2OCwSB5sg5+pvdne/ZwFbeRJUEala1pB1Oe
+	 aojdKzQd1eYz8dBucpYhavwFV+JC6+8bLjxxOucIg8BqMtTUG5dIBwgQa7Ob6SyTmI
+	 nnDDh0sJgkIi9TOAA86rY+fFzd497EGJAfnx6Xzionj1h5yTyDb9QNxfUgWpRuncx6
+	 gfVpKKhNc4ErOnpbEfeTCVDtaTb7IV/krTAIq1TMPo8jh0CyeluQ3mPtM3IyBGXLud
+	 cglMapgJef6nMKiWP1z46bYhDQ93ztDS5OpEqiZ8pPQ/ZM5HBdekyICiWFQfvOHCNN
+	 +PlmhKPQ5pbUQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DAEC787853;
- Mon, 23 Oct 2023 12:44:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6001E8787D;
+ Mon, 23 Oct 2023 12:44:51 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1698057891;
- bh=kovhvuGhYoin14ajBY8l5wzhS1r1MA3gwMHEICA0hOY=;
+ bh=L8RJRjga8ZHW1DzEa3FAua+3oVzrOMRAu34rRZiK5d8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ojm8pEx8/mn9WT8RaLvVSiYkqjR1Z3BEgdJ70ZhhyVaGv7wrMV8BrHoB53ZplfAiI
- GgnpRX/nSaA4EbSTGFghZwH7l67wnLrO2FhTzsWv3CLXdKep9QBcuNSrvfNT6LZFPc
- D4OJIhCqAxVSJu1crFmkDO5KgeN8Bw907gwIpzfETgG9IcpRidn/KL52hIhh4ITxz5
- JmvgJLAZ4euoIP3/1nFmPx0X08zB5RCuqFdmr5PEwqj5U2s/sIK9Js/r55OqImyXki
- oPsqWLQde6I8/EGsYxe21tekiy58BozRTMOUCS9zjjIDn6+2LYXOd8uoxuBXe0d4o+
- LGHAW9RrA8s+Q==
-Message-ID: <d1cc72e1-9fc8-45a5-b8be-040900edd6e9@denx.de>
-Date: Mon, 23 Oct 2023 11:01:50 +0200
+ b=FvBFP/3kfYo/gmTZbRkxCNT2S9l+HtpfBBCHu40S9pcbmcXTID3g9wKc1JHmKyq4U
+ 0BEMb3PgFatU3VJd8miAqSMeSUTqNiwzpazim7bRUV82jSj4QPzMwOzNAGFUGDwfiq
+ EfsAyipk39pJL398m2S1PlxZT5+pW6/A+4NhHkpAtXLKXP04P2kbCBFWiwmCEI4E8O
+ GzItRgOcgtqfQ11S7/+RlI5LGc2z9ji2nBEGUu6l5HtmLtsMtDvqkaGRTMpEqiDBvv
+ djWOOMbhsHVSW090zMKAuLhP7yetoVBB3xusKKLfeImoI0zuvZ0I1Qfbr/9D2+mi3G
+ vVAIUcgYRUSXg==
+Message-ID: <ebe2784d-23c6-470d-a25f-8261fcf820ca@denx.de>
+Date: Mon, 23 Oct 2023 11:03:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] led-uclass: do not create fallback label for
- top-level node
+Subject: Re: [PATCH 2/6] led-uclass: honour ->label field populated by
+ driver's own .bind
 Content-Language: en-US
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
 Cc: Philippe Reynes <philippe.reynes@softathome.com>,
- Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
+ Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>,
+ pavel Machek <pavel@denx.de>
 References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-2-rasmus.villemoes@prevas.dk>
- <6d33180d-f611-43f8-9b73-9ec44eafd277@denx.de>
- <ec461be8-afaf-4ecd-842c-faeea8a6935c@prevas.dk>
+ <20231019095837.2084458-3-rasmus.villemoes@prevas.dk>
+ <d4389465-e5bd-492b-8f86-7b4a93ff6016@denx.de>
+ <7d38b732-e5f4-4e6a-9a5d-7837e285ba55@prevas.dk>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <ec461be8-afaf-4ecd-842c-faeea8a6935c@prevas.dk>
+In-Reply-To: <7d38b732-e5f4-4e6a-9a5d-7837e285ba55@prevas.dk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,71 +74,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/23 10:28, Rasmus Villemoes wrote:
-> On 19/10/2023 15.51, Marek Vasut wrote:
+On 10/23/23 10:51, Rasmus Villemoes wrote:
+> On 19/10/2023 15.54, Marek Vasut wrote:
 >> On 10/19/23 11:58, Rasmus Villemoes wrote:
->>> Many existing drivers, and led-uclass itself, rely on uc_plat->label
->>> being NULL for the device representing the top node, as opposed to the
->>> child nodes representing individual LEDs. This means that the drivers
->>> whose .probe methods rely on this were broken by 83c63f0d1185 ("led:
->>> Move OF "label" property parsing to core"), and also that the top node
->>> wrongly shows up with 'led list'. Some drivers have since been fixed
->>> up individually, e.g.
+>>> If the driver's own .bind method has populated uc_plat->label, don't
+>>> override that. This is necessary for an upcoming driver for ti,lp5562,
+>>> where the DT binding unfortunately says to use "chan-name" and not
+>>> "label".
 >>>
->>> e3aa76644c2a "led: gpio: Check device compatible string to determine
->>> the top level node"
->>> 01074697801b "led: gpio: Use NOP uclass driver for top-level node"
->>> 910b01c27c04 "drivers: led: bcm6753: do not use null label to find the
->>> top"
+>>> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+>>> ---
+>>>    drivers/led/led-uclass.c | 4 +++-
+>>>    1 file changed, 3 insertions(+), 1 deletion(-)
 >>>
->>> Binding the same driver to the top node as to the individual child
->>> nodes is arguably wrong, and the approach of using a UCLASS_NOP driver
->>> for the top node is probably better.
+>>> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+>>> index 5a5d07b9a7..0232fa84de 100644
+>>> --- a/drivers/led/led-uclass.c
+>>> +++ b/drivers/led/led-uclass.c
+>>> @@ -71,7 +71,9 @@ static int led_post_bind(struct udevice *dev)
+>>>        struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+>>>        const char *default_state;
+>>>    -    uc_plat->label = dev_read_string(dev, "label");
+>>> +    if (!uc_plat->label)
+>>> +        uc_plat->label = dev_read_string(dev, "label");
+>>> +
 >>
->> Note that
->> 83c63f0d1185 ("led: Move OF "label" property parsing to core")
->> and
->> 01074697801b ("led: gpio: Use NOP uclass driver for top-level node")
->> were applied shortly after each other, so I don't see the point of the
->> aforementioned rant.
-> 
-> What rant? I'm merely trying to write down what I found out while trying
-> to figure out why 83c63f0d1185 broke stuff, while acknowledging that the
-> fixes that have been applied to some drivers are probably the approach
-> in general.
-> 
->> I sort-of understand what you are trying to do in this patch based on
->> $SUBJECT of this email, but not from this wall of text, so can you
->> abbreviate the commit message ?
-> 
-> Sure, I can try and make it shorter.
-> 
->>> -    if (!uc_plat->label)
->>> +    if (!uc_plat->label && !dev_read_string(dev, "compatible"))
->>>            uc_plat->label = ofnode_get_name(dev_ofnode(dev));
+>> One thing I have to wonder about is, why does this controller have label
+>> property in the top-level node , what is that used for ?
 >>
->> Is there an existing driver which has a top-level DT node with "label"
->> property ?
+>> (see Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml)
+>>
+>> Reviewed-by: Marek Vasut <marex@denx.de>
 > 
-> -ENOPARSE? A driver doesn't have a top-level DT node.
+> Reading the linux driver, it seems that the top-level label, if any, is
+> used as part of the naming for individual channels if they don't have
+> individual chan-name properties:
+> 
+> 
+>          if (pdata->led_config[chan].name) {
+>                  led->cdev.name = pdata->led_config[chan].name;
+>          } else {
+>                  snprintf(name, sizeof(name), "%s:channel%d",
+>                          pdata->label ? : chip->cl->name, chan);
+>                  led->cdev.name = name;
+>          }
+> 
+> but I think the rationale in d1188adb2dabc is a bit weak, since the only
+> example also does have individual chan-name properties.
+> 
+> [Complete aside: At first I thought it was related to the multi-color
+> LED work that has been ongoing for many many years (I think there was an
+> LWN article at some point), where this could be exposed as a single
+> multi-color LED, as opposed to the "traditional" three/four individual
+> LEDs. In the former case, there would only be one sysfs entry, but with
+> attributes exposing the multicolor functionality. I must admit I don't
+> know the status of that work, when something reaches v31,
+> http://archive.lwn.net:8080/linux-kernel/20200722071055.GA8984@amd/t/ ,
+> it's hard to know if it ever lands, or if pieces of it has landed.]
 
-I mean, is there a driver which does:
-
-/ {
-   led {
-     label = "example";
-   };
-};
-
-?
-
-I think that is what the conditional checks here, right ?
-
-> And regardless, this wouldn't change anything for a top-level DT node
-> with a "label" property, as we're still unconditionally first trying to
-> read a "label" property, this is merely avoiding adding a fallback value
-> for top-level DT nodes (using "having a "compatible" DT property as
-> proxy for that "is a top-level DT node"). So I really don't understand
-> what you are trying to ask.
-
-
++CC Pavel
