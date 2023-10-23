@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A384DC25B41
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:04:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20F0DCDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:04:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A36A87880;
-	Mon, 23 Oct 2023 09:04:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23AED878B4;
+	Mon, 23 Oct 2023 09:04:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g7MVFEGd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gzh4cUcO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EC9687897; Mon, 23 Oct 2023 09:04:03 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 7620587894; Mon, 23 Oct 2023 09:04:34 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1B5887880
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:04:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 374D4878AE
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:04:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3af604c3f8fso2266068b6e.1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:04:00 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-522bd411679so4301369a12.0
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:04:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698044639; x=1698649439; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZQHdVZoqu6vL//0Rc8e1SX1+2VK3djq3hW1NDOA/VUc=;
- b=g7MVFEGdmwlVgYbQvsUlLUH8u5YdqRAZZ7IGvJkKw+t9TgR7CBLAz6FTbcUqCf7ix3
- ka6wz36z3I7e9+8Vu/XxtfjMh+FsE2MmR1pR8WtODlM2rNTfjAL7SzMzFwNNdBolnbaF
- YEgrsCKckVERiDmY6ZcR1st7af2v4Zd3IMEjU=
+ d=chromium.org; s=google; t=1698044672; x=1698649472; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZeG6MnjWyJOCMygMO3TKQa0y/xIi9k3iIpSkwl8zZII=;
+ b=gzh4cUcOOOCvEzCkAdBFu2nPukHeFVOa8WEcRn6QMZVRrHPIEloQ0utSLGHv+MI38R
+ DpKz0avGemM9xoyO2B1lowzn9x27rgXcZnBPKIGkz+/Gw3YrqccU+0QWnemNpaIjR2Oy
+ d4wuMr+zG3loUWrRluMqKmolnDK2M7uvPlrS8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698044639; x=1698649439;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZQHdVZoqu6vL//0Rc8e1SX1+2VK3djq3hW1NDOA/VUc=;
- b=dmetYCxcqOdjG06nNcEgNsHTXN2i2yJe2yaTu9+igYWthZh3jBPskXE+lqfItnIeWl
- 7Ti/qjE0EfHZfEfg2qVDuxSbj3zUqB8FRtcGV9rNXUn6NCsu3+zbWL03hsVUpc3vryFx
- jWRyDrV2iQXJFbTcXuutCHCXNMwcCuHwGgN1nSfK/4Dxxw4T8y/c0y2O8gb1V3cURCB4
- iIUvgFjuI6Cr+EVLkWuTmm292mJryz7Wnj14Gvh1f3kgdWqfDOCJHBmSu2DImC0KGlsU
- 5OwVzpagMZfWwuofbsHzRRvhzjEWAFhbwaIB7TeQMQBQfO+eAJ4ItsCll1m4KCusAJtm
- fq2w==
-X-Gm-Message-State: AOJu0YyL+7DxZXljBQhaS2gWBuhvR5uESsc040WsnLpteLMvL8txONvN
- ASxmZ+0rltdSHxuUUw73ZNSNctboaLQkz2ygO4kSZg==
-X-Google-Smtp-Source: AGHT+IEn4DDw7VvfhcVhjZx6AfZZp+iDzM6s6RxSA4wM8oGRbEEwrJxjkMtDfxGtuPQjJkuiEWQW+w==
-X-Received: by 2002:a05:6808:4d4:b0:3a7:44da:d5e6 with SMTP id
- a20-20020a05680804d400b003a744dad5e6mr9586643oie.38.1698044639506; 
- Mon, 23 Oct 2023 00:03:59 -0700 (PDT)
-Received: from sjg1.roam.corp.google.com ([202.144.206.130])
- by smtp.gmail.com with ESMTPSA id
- u187-20020a6279c4000000b006bde8e1f0adsm5910841pfc.98.2023.10.23.00.03.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 00:03:59 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Guillaume Gardet <Guillaume.Gardet@arm.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Date Huang <tjjh89017@hotmail.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Ivan Ivanov <ivan.ivanov@suse.com>
-Subject: [PATCH 4/4] bootstd: Scan all bootdevs in a boot_targets entry (take
- 2)
-Date: Mon, 23 Oct 2023 00:02:13 -0700
-Message-ID: <20231023000211.4.Ie4e7ba290d4957a88bebf306ca39f46618d9c363@changeid>
-X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
-In-Reply-To: <20231023070216.394709-1-sjg@chromium.org>
-References: <20231023070216.394709-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1698044672; x=1698649472;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZeG6MnjWyJOCMygMO3TKQa0y/xIi9k3iIpSkwl8zZII=;
+ b=SYz7kl2IlBWbXmVJD7k9fUHqCwRGkQiHRv/D2LVePAeR4kAZTXtnu370xr+S2ziPc7
+ wvGqFCGorkz09MnnEZmYqdhWavyXuVHTIR7V0N2IOs1yqDFWR3HMoMvFo1WUsP1r/rV8
+ qOfyt7Rl04w5ELB6zX9EVp6KElKd4cBDVfNLoEE7V75kGbEqzMaU7aGnog/eHH+66gsj
+ KfOefgn192CAzLbeI9UKRVy+BBGLH1+Vuof2z7fU0yD74IRkVjG617I24eUKxoCGe039
+ GRJDj8sua9Ts67X6ROUoVpV26OUmNGpWHojMqGlYaowfUNotlqkSCgqhqJnzWnmecRWG
+ 3KFg==
+X-Gm-Message-State: AOJu0Yzp6Y7vo9AyJlC2m+0Z3dhZp0DQC7y+uOTSaUka9ajFItypudKU
+ 2F5p0wv+UQSifr2+QWj9UkNwUDPAVtkU8JLQ/FKIGA==
+X-Google-Smtp-Source: AGHT+IHfEIEhs4BhG0ulMTxbRKXEXbdWNnvn5/cmdp3Pf+/h2F54/ugsZH1E7m15Ce8qZuURZipbRK2dFbnIUso+osE=
+X-Received: by 2002:a17:906:4fc7:b0:9be:30c2:b8ff with SMTP id
+ i7-20020a1709064fc700b009be30c2b8ffmr6442484ejw.61.1698044671460; Mon, 23 Oct
+ 2023 00:04:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20231021004522.53311-1-sjg@chromium.org>
+ <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
+In-Reply-To: <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 23 Oct 2023 00:04:14 -0700
+Message-ID: <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
+Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,140 +88,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the boot_targets environment variable is used with the distro-boot
-scripts, each device is included individually. For example, if there
-are three mmc devices, then we will have something like:
+Hi Caleb,
 
-   boot_targets="mmc0 mmc1 mmc2"
+On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On 21/10/2023 01:45, Simon Glass wrote:
+> > U-Boot typically sets up its malloc() pool near the top of memory. On
+> > ARM64 systems this can result in an SMBIOS table above 4GB which is
+> > not supported by SMBIOSv2.
+> >
+> > Work around this problem by providing a new option to choose an address
+> > just below 4GB, if needed.
+> I may well be missing something here, but I don't quite understand the
+> justification behind the original patch [1] which caused this regression.
+>
+> I'm currently preparing support for a few different Qualcomm boards
+> which have different memory layouts, so far it's been possible to avoid
+> having any fixed addresses, so the same u-boot image can be used on all
+> of them (with just a different DTB).
 
-In contrast, standard boot supports specifying just the uclass, i.e.:
+What sort of memory layout do you have? I could enhance the patch to
+find the top of a memory bank below 4GB, perhaps? E.g. see the
+'bdinfo' command.
 
-   boot_targets="mmc"
+>
+> As I mentioned before, efi_allocate_pages() seems to work fine from
+> install_smbios_table(), I haven't delved into the code too much but I
+> wonder if this could be an acceptable solution?
 
-The intention is that this should scan all MMC devices, but in fact it
-currently only scans the first.
+Unfortunately that function is EFI-specific. The function can only be
+called once EFI is inited. We only want to do that if booting with
+EFI.
 
-Update the logic to handle this case, without required BOOTSTD_FULL to
-be enabled.
+The tables are written at the start of U-Boot, partly because that is
+how it is done on x86 and partly so the 'acpi' command actually works.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reported-by: Date Huang <tjjh89017@hotmail.com>
-Reported-by: Vincent Stehlé <vincent.stehle@arm.com>
-Reported-by: Ivan Ivanov <ivan.ivanov@suse.com>
----
+The EFI code ended up writing a separate set of tables, which is of
+course not correct.
 
- boot/bootdev-uclass.c |  3 ++-
- boot/bootflow.c       | 22 ++++++++++++++++++++--
- test/boot/bootdev.c   | 32 ++++++++++++++++++++++++++++++--
- 3 files changed, 52 insertions(+), 5 deletions(-)
+I did look at creating an API in U-Boot to alloc memory below 4GB but
+then decided that for just this one use case it might not be worth it.
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 974ddee5d2fa..44ae98a9269c 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -469,10 +469,11 @@ int bootdev_find_by_label(const char *label, struct udevice **devp,
- 			 * if no sequence number was provided, we must scan all
- 			 * bootdevs for this media uclass
- 			 */
--			if (IS_ENABLED(CONFIG_BOOTSTD_FULL) && seq == -1)
-+			if (seq == -1)
- 				method_flags |= BOOTFLOW_METHF_SINGLE_UCLASS;
- 			if (method_flagsp)
- 				*method_flagsp = method_flags;
-+			log_debug("method flags %x\n", method_flags);
- 			return 0;
- 		}
- 		log_debug("- no device in %s\n", media->name);
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 7f5b0e942078..be543c8588cc 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -280,8 +280,26 @@ static int iter_incr(struct bootflow_iter *iter)
- 		} else {
- 			log_debug("labels %p\n", iter->labels);
- 			if (iter->labels) {
--				ret = bootdev_next_label(iter, &dev,
--							 &method_flags);
-+				/*
-+				 * when the label is "mmc" we want to scan all
-+				 * mmc bootdevs, not just the first. See
-+				 * bootdev_find_by_label() where this flag is
-+				 * set up
-+				 */
-+				if (iter->method_flags &
-+				    BOOTFLOW_METHF_SINGLE_UCLASS) {
-+					scan_next_in_uclass(&dev);
-+					log_debug("looking for next device %s: %s\n",
-+						  iter->dev->name,
-+						  dev ? dev->name : "<none>");
-+				} else {
-+					dev = NULL;
-+				}
-+				if (!dev) {
-+					log_debug("looking at next label\n");
-+					ret = bootdev_next_label(iter, &dev,
-+								 &method_flags);
-+				}
- 			} else {
- 				ret = bootdev_next_prio(iter, &dev);
- 				method_flags = 0;
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index 637861748057..0702fccdae60 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -225,7 +225,7 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	ut_assertok(env_set("boot_targets", "mmc1 mmc2 usb"));
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
--	ut_asserteq(3, iter.num_devs);
-+	ut_asserteq(5, iter.num_devs);
- 	ut_asserteq_str("mmc1.bootdev", iter.dev_used[0]->name);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[1]->name);
- 	ut_asserteq_str("usb_mass_storage.lun0.bootdev",
-@@ -237,7 +237,20 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	ut_assertok(bootflow_scan_first(NULL, "mmc", &iter, 0, &bflow));
- 	ut_asserteq(2, iter.num_devs);
- 
--	/* Now scan pass mmc1 and make sure that only mmc0 shows up */
-+	/* Now scan past mmc1 and make sure that only mmc0 shows up */
-+	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
-+	ut_asserteq(3, iter.num_devs);
-+	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
-+	ut_asserteq_str("mmc1.bootdev", iter.dev_used[1]->name);
-+	ut_asserteq_str("mmc0.bootdev", iter.dev_used[2]->name);
-+	bootflow_iter_uninit(&iter);
-+
-+	/* Try a single uclass with boot_targets */
-+	ut_assertok(env_set("boot_targets", "mmc"));
-+	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
-+	ut_asserteq(2, iter.num_devs);
-+
-+	/* Now scan past mmc1 and make sure that only mmc0 shows up */
- 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
- 	ut_asserteq(3, iter.num_devs);
- 	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
-@@ -245,6 +258,21 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	ut_asserteq_str("mmc0.bootdev", iter.dev_used[2]->name);
- 	bootflow_iter_uninit(&iter);
- 
-+	/* Try a single uclass with boot_targets */
-+	ut_assertok(env_set("boot_targets", "mmc usb"));
-+	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
-+	ut_asserteq(2, iter.num_devs);
-+
-+	/* Now scan past mmc1 and make sure that the 3 USB devices show up */
-+	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
-+	ut_asserteq(6, iter.num_devs);
-+	ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
-+	ut_asserteq_str("mmc1.bootdev", iter.dev_used[1]->name);
-+	ut_asserteq_str("mmc0.bootdev", iter.dev_used[2]->name);
-+	ut_asserteq_str("usb_mass_storage.lun0.bootdev",
-+			iter.dev_used[3]->name);
-+	bootflow_iter_uninit(&iter);
-+
- 	return 0;
- }
- BOOTSTD_TEST(bootdev_test_order, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
--- 
-2.42.0.655.g421f12c284-goog
+>
+> Barring that, could we use an environment variable to pass this address
+> in? Although I think that might not be a very desirable solution.
+>
+> I appreciate you taking the time to prepare this patch and CC me. If
+> nobody else objects to this patch then I'd prefer to avoid blocking it.
+> In either case, I'd greatly appreciate any input on the above
+> suggestions so that I can implement a solution for my boards.
 
+I would like it to be automatic. I assumed on ARM64 that there is
+memory available at 3.99GB if U-Boot has relocated to above 4GB, but
+as above I could make this more clever.
+
+Regards,
+Simon
+
+
+>
+> Thanks and regards,
+>
+> [1]:
+> https://lore.kernel.org/u-boot/20230920030027.1385833-16-sjg@chromium.org/
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   lib/Kconfig                 | 17 +++++++++++++++++
+> >   lib/efi_loader/efi_smbios.c | 12 ++++++++++++
+> >   2 files changed, 29 insertions(+)
+> >
+> > diff --git a/lib/Kconfig b/lib/Kconfig
+> > index f6ca559897e7..a77f2f3e9089 100644
+> > --- a/lib/Kconfig
+> > +++ b/lib/Kconfig
+> > @@ -994,6 +994,23 @@ config GENERATE_SMBIOS_TABLE
+> >         See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
+> >         the devicetree.
+> >
+> > +config SMBIOS_TABLE_FIXED
+> > +     bool "Place the SMBIOS table at a special address"
+> > +     depends on GENERATE_SMBIOS_TABLE && ARM64 && SMBIOS && EFI_LOADER
+> > +     default y
+> > +     help
+> > +       Use this option to place the SMBIOS table at a fixed address.
+> > +
+> > +       U-Boot typically sets up its malloc() pool near the top of memory. On
+> > +       ARM64 systems this can result in an SMBIOS table above 4GB which is
+> > +       not supported by SMBIOSv2. This option works around this problem by
+> > +       chosing an address just below 4GB, if needed.
+> > +
+> > +config SMBIOS_TABLE_FIXED_ADDR
+> > +     hex "Fixed address for use for SMBIOS table"
+> > +     depends on SMBIOS_TABLE_FIXED
+> > +     default 0xffff0000
+> > +
+> >   endmenu
+> >
+> >   config LIB_RATIONAL
+> > diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+> > index 48446f654d9b..84ea027ea48c 100644
+> > --- a/lib/efi_loader/efi_smbios.c
+> > +++ b/lib/efi_loader/efi_smbios.c
+> > @@ -61,6 +61,18 @@ static int install_smbios_table(void)
+> >               return log_msg_ret("mem", -ENOMEM);
+> >
+> >       addr = map_to_sysmem(buf);
+> > +
+> > +     /*
+> > +      * Deal with a fixed address if needed. For simplicity we assume that
+> > +      * the SMBIOS-table size is <64KB and that the malloc region does not
+> > +      * straddle the 4GB boundary.
+> > +      */
+> > +     if (IS_ENABLED(CONFIG_SMBIOS_TABLE_FIXED) && addr >= SZ_4G - SZ_64K) {
+> > +             addr = IF_ENABLED_INT(CONFIG_SMBIOS_TABLE_FIXED,
+> > +                                   CONFIG_SMBIOS_TABLE_FIXED_ADDR);
+> > +             log_warning("Forcing SMBIOS table to address %lx\n", addr);
+> > +     }
+> > +
+> >       if (!write_smbios_table(addr)) {
+> >               log_err("Failed to write SMBIOS table\n");
+> >               return log_msg_ret("smbios", -EINVAL);
+>
+> --
+> // Caleb (they/them)
