@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE6BCDB474
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9AC4C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:43:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B37D8790E;
-	Mon, 23 Oct 2023 15:40:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B9EF87914;
+	Mon, 23 Oct 2023 15:43:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LykVkA9O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dOT5jJJY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6908987914; Mon, 23 Oct 2023 15:40:19 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 5E9178789C; Mon, 23 Oct 2023 15:43:16 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0264D87853
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:40:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03B2D87914
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a82f176860so32762367b3.1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 06:40:15 -0700 (PDT)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a7fb84f6ceso30991407b3.1
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 06:43:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698068414; x=1698673214; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698068593; x=1698673393; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JR4r5S8QNNaKf5pBlj9OglMgoFuLH8mTgeVd4QYVrR4=;
- b=LykVkA9OGzrsH5+NT9JNvFRlQFdIZ6JlruGsE+zvjB4doplPrT51oigTXMps1F7sHR
- DlxKmC3LikY7ermjtkLhBU4hmkWqO32Wr6CmlcfFFMqxVbIk6XAzABGIwvleNgoFrnYU
- pGgzwNEDqbXK+4C+mDew8zsO2rhljufpdrGHQ=
+ bh=P5gMxBjTZXML2HYwEKFneyhTbSHBmubPm6ZFn7H6Di0=;
+ b=dOT5jJJYUREFbFgM0RSEV6n0xWeTjm8AWyWzwxUA5/yt22XXD/ARlLtPTXUDKb+iLv
+ CsfhH24fdSSBlChXIiM1Uoz1cJVGKBM88mbNan1puaxVM3pgDYOkak+/mt72snqhp0fk
+ nkrvNOCOYS9f5rVppE7YFn/jQyN/YRqtIek3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698068414; x=1698673214;
+ d=1e100.net; s=20230601; t=1698068593; x=1698673393;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JR4r5S8QNNaKf5pBlj9OglMgoFuLH8mTgeVd4QYVrR4=;
- b=ZkyOUvM92DPwh/EvN2H9uGfs9yAZefUP2nEyRPrPTf+YUwoXONLAuo1aD400/CUcvp
- g+u1z+XYpqJ7XKLVkkJMrZ/Helfd6y6I3vsscREM4aRU6ND4QPqY6kaAmBSKF1BlGmN7
- wd36IJMdCwAZXTjvXAg3OU3dpNiQ0SURaoy/pTkZBOrzBACgykb+fzqcYTbehO4L7gwh
- TKelEj4cefkAnVEwEbwwI7z1Uiuy/IkvapnTBFS7Qprs/U06M9gX4E9/VQuXjke7x7ia
- vnQkVGPWSjksxvZdpqSqaGB2NfBgbMoFHIkvnLZ8272RMqAPvFpFcjq2Zooyq4ehKA/p
- E21g==
-X-Gm-Message-State: AOJu0YwQ+eHK4zqPDapk0FY6+VpZ5zJMUJOtUKKWoZJtlBQtRe375+um
- KELlG/DLAx9CiXmY8r5yekOFKQ==
-X-Google-Smtp-Source: AGHT+IG8e3Rf5HtuFowA8+mLA7Ts1sk1qh/+kgl0Tm0+8NCS9k9i11cpNaBdZFZNDNTTme6lC8634Q==
-X-Received: by 2002:a81:4814:0:b0:5a8:e303:1db2 with SMTP id
- v20-20020a814814000000b005a8e3031db2mr9736153ywa.23.1698068414658; 
- Mon, 23 Oct 2023 06:40:14 -0700 (PDT)
+ bh=P5gMxBjTZXML2HYwEKFneyhTbSHBmubPm6ZFn7H6Di0=;
+ b=vsCbK7F6qh1aUIdc7IlhLZ7qfX1xSa95tYZJOZf9Tuw5n3A09rJRRgpcCQwwin5heg
+ ebXAIDO8rBk5Oaon/H41ZxrAHjdoAdwVHlCucZf5Wt4ZZz0MGURVU7HsieDETZZRzfjY
+ 1X5KlrMI2g3OVbp1yra2wSfdQLAfito9sQU9Ux5r+aOJ3wTxPEcum06ZnMkZhM1U2yQN
+ Qre2apwyfdoIkYYTSXJW0YzMJD3hPO49CmclI62X/nHUng4AC2weukKVml5ZONFuGuv1
+ QIz8TrM1Gj5JuQrZksOVCQ0s8CGykvXXUMua6TtOQ+P3LFS/Hts7XbMQm/5c1XQnyBIj
+ qQfg==
+X-Gm-Message-State: AOJu0YysTWSuuXXaAWyvVffTOPVRex3/4wpYBnJSJYu16b8mtOuEa2X0
+ +4OLudiuWFP3TN868WJH+RHrgg==
+X-Google-Smtp-Source: AGHT+IEuY4rZtU/hHY1L2uSwe6STR4l1Ge/ZrUV+SY917+P6/6TJrn+EBgPL+ZsnmyevBoKsP5Y9jw==
+X-Received: by 2002:a0d:d752:0:b0:5a7:c01d:268 with SMTP id
+ z79-20020a0dd752000000b005a7c01d0268mr9462369ywd.18.1698068592736; 
+ Mon, 23 Oct 2023 06:43:12 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-3cd1-c3ac-4562-deca.res6.spectrum.com.
  [2603:6081:7b00:6400:3cd1:c3ac:4562:deca])
  by smtp.gmail.com with ESMTPSA id
- u131-20020a0deb89000000b005a7d46770f2sm3147028ywe.83.2023.10.23.06.40.14
+ u4-20020a0deb04000000b0059f5d686479sm3169767ywe.16.2023.10.23.06.43.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 06:40:14 -0700 (PDT)
-Date: Mon, 23 Oct 2023 09:40:12 -0400
+ Mon, 23 Oct 2023 06:43:12 -0700 (PDT)
+Date: Mon, 23 Oct 2023 09:43:10 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH] buildman: Include symbols in the read-only data section
-Message-ID: <20231023134012.GI496310@bill-the-cat>
-References: <20231023005242.1.I573d6fb6587a8fbba2ae3783a42c4587ed6572d4@changeid>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] general: fix GPL-2.0-or-later SPDX headers
+Message-ID: <20231023134310.GJ496310@bill-the-cat>
+References: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JwOi5EUUMCkkEnre"
+ protocol="application/pgp-signature"; boundary="To33NSnTqn/0uCbp"
 Content-Disposition: inline
-In-Reply-To: <20231023005242.1.I573d6fb6587a8fbba2ae3783a42c4587ed6572d4@changeid>
+In-Reply-To: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,50 +92,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---JwOi5EUUMCkkEnre
+--To33NSnTqn/0uCbp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 23, 2023 at 12:52:43AM -0700, Simon Glass wrote:
+On Sun, Oct 22, 2023 at 07:47:07PM +0200, Heinrich Schuchardt wrote:
 
-> When symbols switch between the inited data section and the read-only
-> data section their visbility changes, at present, with the -B option.
+> SPDX headers should use GPL-2.0-or-later and not GPL-2.0+.
 >=20
-> This is confusing, since adding 'const' to a variable declaration can
-> make it look like a significant improvement in bloat. But in fact
-> nothing has changed.
->=20
-> Add 'r' to the list of symbols types that are recorded, to correct this
-> problem. Add a constant to make it easier to find this code next time.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Thanks for fixing this.
-
-Reported-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Link: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/6
+So, first, iirc GPL-2.0+ is deprecated, but still valid, yes? We should
+use the current form of all tags moving forward as I do remember there's
+a reason for the switch to "-or-later" from "+". But second, the linux
+kernel is still full of "GPL-2.0+" including dts files that this patch
+changes, and so will get lost again on re-sync.
 
 --=20
 Tom
 
---JwOi5EUUMCkkEnre
+--To33NSnTqn/0uCbp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2d7wACgkQFHw5/5Y0
-tyyUfAv/Z/sj9LV5GPKJ4vO/9P0KATwdgfvIGX/e96LeC8WpV8qaxwyydW3emfkG
-4um8v4XOmU7LUbDzBfLvEOq4ZxTRmLqHz/8Fn/WvvpgVjZB2aNxh3kPzA08NL52P
-neG2E8mOZMY3HCOWHiJjtj4QzOIWFQ7R5BRIX+5gXPpR++GFPXPwXDCQO9MbVQ6V
-UlwCq6W80sm2mke76h++crNex+Po7Ksi8IWXSpWqq5bm5EHPR3G2lTZFtEX9ZRO8
-oI+19qIoBIXZGEcrCLadASxzAeYW6bq8x5lksmndvfAdW2kUrhSNmyNCC5XHWiuO
-4cRc9xlyYeppC/qbZnHmksDDORHAc1LiqfN3o5DMnbfXsRu4CLYW2OLxE1HVKq3L
-4a7MU+pMObT2dFTm3weVvNlwLXYdg6opYA+2SRJkqLwXkn9ddF7LL+O8I3Q/uhyg
-RhMNhdWZlNSKuN/2DYD398BiK4T1/HxphEsXtHUi3PT5wjigYLFDoEpnEXs1VSzS
-yp13wDbQ
-=vsTN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2eG4ACgkQFHw5/5Y0
+tywuWQv+K9hxVORv17svLir+HaPZNA6N37RqjWeQQYoRyBGpQ6WicMbC2MYUMxOZ
+yGc2qjQoBarFymlzYIYAkGwnVGuIslzwa2GggcmE1gjnW2vTg6HHyP9NGHuhkPCK
+YdyMRSCdorarlZnvGAvme81KxQe1GIpNpnz+3D8iOe8Y0FaczhtsVqaAPZiZcrH2
+mqdUXoiNkkDyIJv/tRUh8BQ15x0q4ncBkA+OnHNC516ZIL73I931WMknpj28Ua6m
+Q5ZZ/DUERtVmvSRSic5V/LzH3QdHO4fKcNdUqqllFfYx4EbD/tvxtMS4BRszKLwf
+XvfeJKoAqXDTBNhnoMd95Y5mk/F1aW8I5oLiZZtqVPtz4K0/LvUkekuggzQhFSgO
+UYJjYSxpoDCfpqlJ1xhBtZTnfCtiYcrEgPcOTJ0SIHhZTPTew0tyjBo11AzSxuCF
+axEIfj5SAq+kd073uavUpnXx2Aq9vTOi2y3D0c7/qtPzF07gI3e9PFIgIsa8Rtfw
+UpTj7cSD
+=y58g
 -----END PGP SIGNATURE-----
 
---JwOi5EUUMCkkEnre--
+--To33NSnTqn/0uCbp--
