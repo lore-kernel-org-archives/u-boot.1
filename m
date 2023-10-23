@@ -4,66 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39265CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 14:04:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F26A3CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 14:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4542887733;
-	Mon, 23 Oct 2023 16:04:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 149AE87552;
+	Mon, 23 Oct 2023 16:08:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KqM6SJ5r";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="NWxrfbl2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42D9D87733; Mon, 23 Oct 2023 16:04:03 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3650287733; Mon, 23 Oct 2023 16:08:09 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09FFC86F23
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 16:04:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BB8886FA8
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 16:08:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39NE3uGX086911;
- Mon, 23 Oct 2023 09:03:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698069836;
- bh=1KT+KP147522JgLdSJz+/wJROj++wGwTWvKi6K2RqSY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=KqM6SJ5r40veSw+YKXv0GvZcc+E4QawJsR3RFqL6Cvk3Op9pqehyrmsUM32BxHtYi
- pKkIo+lmjJLv3HMW+IZAiDdiSyNYqFhddiBM30MqSrrELEBU5nWj1UG0xDMhKMSlOj
- DsW/QIvQEbgOHa1NRi14/++RzKuuaroPheEKEaLA=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39NE3uYi029110
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 23 Oct 2023 09:03:56 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 23
- Oct 2023 09:03:56 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 23 Oct 2023 09:03:56 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39NE3tP8015860;
- Mon, 23 Oct 2023 09:03:55 -0500
-Date: Mon, 23 Oct 2023 09:03:55 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Vishal Mahaveer <vishalm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [RESEND PATCH 1/1] clk: ti: k3-pll: Add calibration support for
- non fractional mode
-Message-ID: <20231023140355.dpdame5x64v5wypb@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20231023133546.32283-1-vishalm@ti.com>
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [100.94.55.57] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 1C1B36606F51;
+ Mon, 23 Oct 2023 15:08:04 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1698070084;
+ bh=zRgFZ8qXUlTWVcGVIb29HwLwyEbCSt+ujHkdybinFW8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=NWxrfbl2yD3Yon1XVCB39oOl+wFU4KZywaraG+sVT//DwSgDmckplURD7I2Vh/KPR
+ aMImPDHYTuywvCrArKp6n4ZyI39qPNjGIlv8XsMB48OMsIqlHD3XVsFZXGS38X8qFX
+ XJauIWCExPuW575rfRlWIgBFD0OVLnx8NTiOOSJS1Wu2ZlWKpU0T4CtEH80r0rQ1cX
+ symI01Q+IMOBYm6Qe/rppEOQMfueGc6VJFcDsx2vJKU+PHacNoC+K0PozK0fNA8DmU
+ fGxUBi6jy15vSmz5VZxZt3jDOvOupwj8XcWiuMk/KlhFRGxfvchRLHJJMGAkftNfc4
+ iqeuRCweTNO9A==
+Message-ID: <e950f705-855d-4b51-a58e-c8aed4a152dc@collabora.com>
+Date: Mon, 23 Oct 2023 17:08:01 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20231023133546.32283-1-vishalm@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 0/4] Conclusive KSTR-SAMA5D27 support
+Content-Language: en-US
+To: Artur Rojek <artur@conclusive.pl>, Simon Glass <sjg@chromium.org>,
+ Jakub Klama <jakub@conclusive.pl>, Marcin Jabrzyk <marcin@conclusive.pl>
+Cc: Wojciech Kloska <wojciech@conclusive.pl>,
+ =?UTF-8?Q?Rados=C5=82aw_Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
+ u-boot@lists.denx.de
+References: <20231018140059.161169-1-artur@conclusive.pl>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <20231018140059.161169-1-artur@conclusive.pl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,25 +73,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vishal!
-
-+Tom
-
-On October 23, 2023 thus sayeth Vishal Mahaveer:
-> PLL calibration needs to be enabled when operating in non fractional
-> mode. Add the sequence to do a fast calibration when using PLL
-> in this mode.
+On 10/18/23 17:00, Artur Rojek wrote:
+> Hi all,
 > 
-> Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
-
-Reviewed-by: Bryan Brattlof <bb@ti.com>
-
-> ---
->  drivers/clk/ti/clk-k3-pll.c | 81 ++++++++++++++++++++++++++++++++++---
->  1 file changed, 75 insertions(+), 6 deletions(-)
+> this is v5 of the Conclusive KSTR-SAMA5D27 support series.
+> 
+> Patches [1/4], [2/4] and [3/4] remain unchanged.
+> 
+> In patch [4/4], a new dtsi file has been added in order to keep U-Boot
+> specific properties separate from the main dts. As such, MAINTAINERS has
+> been modified to feature the new file.
+> 
+> An alias to the i2c node holding the EEPROM has also been explicitly
+> added, so that it always enumerates at bus 2.
+> 
+> Artur Rojek (4):
+>    common: add prototype & rename populate_serial_number()
+>    event: add new EVT_SETTINGS_R event
+>    arm: dts: at91: sama5: Add flexcom4 node
+>    board: Add support for Conclusive KSTR-SAMA5D27
+> 
+>   arch/arm/dts/Makefile                         |   3 +
+>   arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi   |  42 +++
+>   arch/arm/dts/at91-kstr-sama5d27.dts           | 127 ++++++++++
+>   arch/arm/dts/sama5d2.dtsi                     |  20 ++
+>   arch/arm/mach-at91/Kconfig                    |  12 +
+>   board/conclusive/kstr-sama5d27/Kconfig        |  15 ++
+>   board/conclusive/kstr-sama5d27/MAINTAINERS    |   9 +
+>   board/conclusive/kstr-sama5d27/Makefile       |   5 +
+>   .../conclusive/kstr-sama5d27/kstr-sama5d27.c  | 239 ++++++++++++++++++
+>   cmd/tlv_eeprom.c                              |  14 +-
+>   common/board_r.c                              |   1 +
+>   common/event.c                                |   1 +
+>   configs/kstr_sama5d27_defconfig               |  73 ++++++
+>   include/configs/kstr-sama5d27.h               |  15 ++
+>   include/event.h                               |   9 +
+>   include/init.h                                |  14 +
+>   16 files changed, 586 insertions(+), 13 deletions(-)
+>   create mode 100644 arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
+>   create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
+>   create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
+>   create mode 100644 board/conclusive/kstr-sama5d27/Makefile
+>   create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+>   create mode 100644 configs/kstr_sama5d27_defconfig
+>   create mode 100644 include/configs/kstr-sama5d27.h
 > 
 
-Thanks for fixing this! I've tested the am62x and the j721e and this 
-appears to properly setup the PLLs without firmware's help after :)
 
-~Bryan
+Applied series to u-boot-at91 / master, thanks !
