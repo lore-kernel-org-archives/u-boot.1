@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ED2C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0276CC004C0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA8648793E;
-	Mon, 23 Oct 2023 15:25:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39F0E87933;
+	Mon, 23 Oct 2023 15:25:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 21AEB87937; Mon, 23 Oct 2023 15:25:22 +0200 (CEST)
+ id 848728793E; Mon, 23 Oct 2023 15:25:23 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id F294A87926
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 99BF987933
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 75C332F4;
- Mon, 23 Oct 2023 06:26:00 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 142E2FEC;
+ Mon, 23 Oct 2023 06:25:51 -0700 (PDT)
 Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 198D83F762;
- Mon, 23 Oct 2023 06:25:17 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AC8BB3F762;
+ Mon, 23 Oct 2023 06:25:08 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
@@ -33,9 +33,9 @@ Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
  Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
  Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
  Okhunjon Sobirjonov <okhunjon72@gmail.com>
-Subject: [PATCH v3 11/24] pinctrl: sunxi: add Allwinner D1 pinctrl description
-Date: Mon, 23 Oct 2023 14:24:36 +0100
-Message-Id: <20231023132449.813863-12-andre.przywara@arm.com>
+Subject: [PATCH v3 05/24] pinctrl: sunxi: add GPIO in/out wrappers
+Date: Mon, 23 Oct 2023 14:24:30 +0100
+Message-Id: <20231023132449.813863-6-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231023132449.813863-1-andre.przywara@arm.com>
 References: <20231023132449.813863-1-andre.przywara@arm.com>
@@ -57,81 +57,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Apart from using the new pinctrl MMIO register layout, the Allwinner D1
-and related SoCs still need to usual set of mux values hardcoded in
-U-Boot's pinctrl driver.
-Add the values we need so far to this list, so that DM based drivers
-will just work without further ado.
+So far we were open-coding the pincontroller's GPIO output/input access
+in each function using that.
+
+Provide functions that wrap that nicely, and follow the existing pattern
+(set/get_{bank,}), so users don't need to know about the internals, and
+we can abstract the new D1 pinctrl more easily.
 
 Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Reviewed-by: Samuel Holland <samuel@sholland.org>
 ---
- drivers/pinctrl/sunxi/Kconfig         |  4 ++++
- drivers/pinctrl/sunxi/pinctrl-sunxi.c | 32 +++++++++++++++++++++++++++
- 2 files changed, 36 insertions(+)
+ drivers/gpio/sunxi_gpio.c | 55 ++++++++++++++++++---------------------
+ 1 file changed, 25 insertions(+), 30 deletions(-)
 
-diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kconfig
-index 77da90836b6..c8f937d91e9 100644
---- a/drivers/pinctrl/sunxi/Kconfig
-+++ b/drivers/pinctrl/sunxi/Kconfig
-@@ -124,4 +124,8 @@ config PINCTRL_SUN50I_H616_R
- 	default MACH_SUN50I_H616
- 	select PINCTRL_SUNXI
+diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
+index 71c3168b755..3ca833316b5 100644
+--- a/drivers/gpio/sunxi_gpio.c
++++ b/drivers/gpio/sunxi_gpio.c
+@@ -81,6 +81,19 @@ int sunxi_gpio_get_cfgpin(u32 pin)
+ 	return sunxi_gpio_get_cfgbank(pio, pin);
+ }
  
-+config PINCTRL_SUN20I_D1
-+	bool "Support for the Allwinner D1/R528 PIO"
-+	select PINCTRL_SUNXI
++static void sunxi_gpio_set_value_bank(struct sunxi_gpio *pio,
++				       int pin, bool set)
++{
++	u32 mask = 1U << pin;
 +
- endif
-diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-index fc80fe50b14..bdf6360f176 100644
---- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-+++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-@@ -598,6 +598,32 @@ static const struct sunxi_pinctrl_desc __maybe_unused sun9i_a80_r_pinctrl_desc =
- 	.num_banks	= 3,
- };
++	clrsetbits_le32(&pio->dat, set ? 0 : mask, set ? mask : 0);
++}
++
++static int sunxi_gpio_get_value_bank(struct sunxi_gpio *pio, int pin)
++{
++	return !!(readl(&pio->dat) & (1U << pin));
++}
++
+ void sunxi_gpio_set_drv(u32 pin, u32 val)
+ {
+ 	u32 bank = GPIO_BANK(pin);
+@@ -117,35 +130,20 @@ void sunxi_gpio_set_pull_bank(struct sunxi_gpio *pio, int bank_offset, u32 val)
+ /* =========== Non-DM code, used by the SPL. ============ */
  
-+static const struct sunxi_pinctrl_function sun20i_d1_pinctrl_functions[] = {
-+	{ "emac",	8 },	/* PE0-PE15 */
-+	{ "gpio_in",	0 },
-+	{ "gpio_out",	1 },
-+	{ "i2c0",	4 },	/* PB10-PB11 */
-+	{ "mmc0",	2 },	/* PF0-PF5 */
-+	{ "mmc1",	2 },	/* PG0-PG5 */
-+	{ "mmc2",	3 },	/* PC2-PC7 */
-+	{ "spi0",	2 },	/* PC2-PC7 */
-+#if IS_ENABLED(CONFIG_UART0_PORT_F)
-+	{ "uart0",	3 },	/* PF2,PF4 */
-+#else
-+	{ "uart0",	6 },	/* PB0-PB1, PB8-PB9, PE2-PE3 */
-+#endif
-+	{ "uart1",	2 },	/* PG6-PG7 */
-+	{ "uart2",	7 },	/* PB0-PB1 */
-+	{ "uart3",	7 },	/* PB6-PB7 */
-+};
+ #if !CONFIG_IS_ENABLED(DM_GPIO)
+-static int sunxi_gpio_output(u32 pin, u32 val)
++static void sunxi_gpio_set_value(u32 pin, bool set)
+ {
+-	u32 dat;
+ 	u32 bank = GPIO_BANK(pin);
+-	u32 num = GPIO_NUM(pin);
+ 	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+ 
+-	dat = readl(&pio->dat);
+-	if (val)
+-		dat |= 0x1 << num;
+-	else
+-		dat &= ~(0x1 << num);
+-
+-	writel(dat, &pio->dat);
+-
+-	return 0;
++	sunxi_gpio_set_value_bank(pio, GPIO_NUM(pin), set);
+ }
+ 
+-static int sunxi_gpio_input(u32 pin)
++static int sunxi_gpio_get_value(u32 pin)
+ {
+-	u32 dat;
+ 	u32 bank = GPIO_BANK(pin);
+-	u32 num = GPIO_NUM(pin);
+ 	struct sunxi_gpio *pio = BANK_TO_GPIO(bank);
+ 
+-	dat = readl(&pio->dat);
+-	dat >>= num;
+-
+-	return dat & 0x1;
++	return sunxi_gpio_get_value_bank(pio, GPIO_NUM(pin));
+ }
+ 
+ int gpio_request(unsigned gpio, const char *label)
+@@ -168,18 +166,21 @@ int gpio_direction_input(unsigned gpio)
+ int gpio_direction_output(unsigned gpio, int value)
+ {
+ 	sunxi_gpio_set_cfgpin(gpio, SUNXI_GPIO_OUTPUT);
++	sunxi_gpio_set_value(gpio, value);
+ 
+-	return sunxi_gpio_output(gpio, value);
++	return 0;
+ }
+ 
+ int gpio_get_value(unsigned gpio)
+ {
+-	return sunxi_gpio_input(gpio);
++	return sunxi_gpio_get_value(gpio);
+ }
+ 
+ int gpio_set_value(unsigned gpio, int value)
+ {
+-	return sunxi_gpio_output(gpio, value);
++	sunxi_gpio_set_value(gpio, value);
 +
-+static const struct sunxi_pinctrl_desc __maybe_unused sun20i_d1_pinctrl_desc = {
-+	.functions	= sun20i_d1_pinctrl_functions,
-+	.num_functions	= ARRAY_SIZE(sun20i_d1_pinctrl_functions),
-+	.first_bank	= SUNXI_GPIO_A,
-+	.num_banks	= 7,
-+};
-+
- static const struct sunxi_pinctrl_function sun50i_a64_pinctrl_functions[] = {
- 	{ "emac",	4 },	/* PD8-PD23 */
- 	{ "gpio_in",	0 },
-@@ -863,6 +889,12 @@ static const struct udevice_id sunxi_pinctrl_ids[] = {
- 		.data = (ulong)&sun9i_a80_r_pinctrl_desc,
- 	},
- #endif
-+#ifdef CONFIG_PINCTRL_SUN20I_D1
-+	{
-+		.compatible = "allwinner,sun20i-d1-pinctrl",
-+		.data = (ulong)&sun20i_d1_pinctrl_desc,
-+	},
-+#endif
- #ifdef CONFIG_PINCTRL_SUN50I_A64
- 	{
- 		.compatible = "allwinner,sun50i-a64-pinctrl",
++	return 0;
+ }
+ 
+ int sunxi_name_to_gpio(const char *name)
+@@ -231,13 +232,8 @@ int sunxi_name_to_gpio(const char *name)
+ static int sunxi_gpio_get_value(struct udevice *dev, unsigned offset)
+ {
+ 	struct sunxi_gpio_plat *plat = dev_get_plat(dev);
+-	u32 num = GPIO_NUM(offset);
+-	unsigned dat;
+-
+-	dat = readl(&plat->regs->dat);
+-	dat >>= num;
+ 
+-	return dat & 0x1;
++	return sunxi_gpio_get_value_bank(plat->regs, offset);
+ }
+ 
+ static int sunxi_gpio_get_function(struct udevice *dev, unsigned offset)
+@@ -275,9 +271,8 @@ static int sunxi_gpio_set_flags(struct udevice *dev, unsigned int offset,
+ 
+ 	if (flags & GPIOD_IS_OUT) {
+ 		u32 value = !!(flags & GPIOD_IS_OUT_ACTIVE);
+-		u32 num = GPIO_NUM(offset);
+ 
+-		clrsetbits_le32(&plat->regs->dat, 1 << num, value << num);
++		sunxi_gpio_set_value_bank(plat->regs, offset, value);
+ 		sunxi_gpio_set_cfgbank(plat->regs, offset, SUNXI_GPIO_OUTPUT);
+ 	} else if (flags & GPIOD_IS_IN) {
+ 		u32 pull = 0;
 -- 
 2.25.1
 
