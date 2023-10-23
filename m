@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC0BC004C0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 16:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98963C004C0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 16:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 811C4878CE;
-	Mon, 23 Oct 2023 18:35:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CE66486FB7;
+	Mon, 23 Oct 2023 18:53:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s8UPmtx8";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XTdbeA0o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9307087825; Mon, 23 Oct 2023 18:35:01 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A6E7C87783; Mon, 23 Oct 2023 15:35:54 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DF82878D1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 18:34:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 975E787180
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a7ad24b3aaso36511097b3.2
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:34:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698078898; x=1698683698; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=B5GHew0yanr7ywi4FFJ7hA+Of4XGlrzyKhr89ebYX+M=;
- b=s8UPmtx8hBbNEdq2YqhyN2BOPncsg6mBMXW3H7Y3/Upk4PijO3XD9ttA7uaUBCC/pX
- FOrg/vTtWvx9rsYQOzj8i2pU7+weTL56yzTFAma/smx9lYubnKa3ErJhhraYvy7c2Voc
- UqTxV0QA69fPDeBgUf8zAl3bzVXa7glL9/Ag8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698078898; x=1698683698;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=B5GHew0yanr7ywi4FFJ7hA+Of4XGlrzyKhr89ebYX+M=;
- b=VBqJzQBRpjc7GUT1YsWkpYk1+wrMjDMntGZdP7ztw3Duw73YKf3zomZx+UN8VKGE3O
- Vzit7Arrq3yq8l84m/mY78W0GT7cqo+k2e0YkooIYrqliBzmnVEZl5dREih7Xc8SpYa1
- Uq1Ey2pXrIrc3TfhjLu41q6L0DpOw7HBHNn6r5QDRuDs7o2Y06SGdcoSgAohQ0GuklrT
- LwKewiyVBSe7Il5vDf7EOL1LaoHbJ8BFiaVXFX5F8X74IC5IZjMIS2SckI/Nw1W8km9R
- c28Z11+CajzYvAtaJBy02mMx1ENElq3aKCu3ZIlaN+1aDwtZ0Za3OHFP0R/O1YYDMISh
- TK4g==
-X-Gm-Message-State: AOJu0Yy/+dPn/vLf2LjgN6pX0fluWGIrPE0T3e1+uCFA/7aiIzWda+S1
- j4paHr93MuCNdezWCrbOJy/tJQ==
-X-Google-Smtp-Source: AGHT+IEejQ3fwvCzMtQJ3qxjgaesmARfWuUaAr47tcn3I4y0FcH7unkzBmarf/43ZraIVEcig7GJjg==
-X-Received: by 2002:a25:9189:0:b0:d9a:bfe4:d827 with SMTP id
- w9-20020a259189000000b00d9abfe4d827mr8951742ybl.19.1698078897966; 
- Mon, 23 Oct 2023 09:34:57 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-3cd1-c3ac-4562-deca.res6.spectrum.com.
- [2603:6081:7b00:6400:3cd1:c3ac:4562:deca])
- by smtp.gmail.com with ESMTPSA id
- w31-20020a25ac1f000000b00d9ab86bdaffsm2860091ybi.12.2023.10.23.09.34.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 09:34:57 -0700 (PDT)
-Date: Mon, 23 Oct 2023 12:34:55 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: Simon Glass <sjg@google.com>, heinrich.schuchardt@canonical.com,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de, dianders@google.com
-Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
-Message-ID: <20231023163455.GL496310@bill-the-cat>
-References: <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
- <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
- <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
- <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
- <ea1ba7c2-7f9c-4702-a6da-efb728771e24@canonical.com>
- <20231020162410.GK3119521@bill-the-cat>
- <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
- <7481371f-657d-46d6-b8e7-74da7a200ee9@canonical.com>
- <CAPnjgZ3_WSS+Z2xsRTvf-7ChPN42OVLgLf8ZvGv=2FVrNuHkhA@mail.gmail.com>
- <87h6mhqri9.fsf@bloch.sibelius.xs4all.nl>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vishalm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39NDZlhV037025;
+ Mon, 23 Oct 2023 08:35:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698068147;
+ bh=oiOVJ1hZ2CXNla1GHkFSbQ+H3phl5kmv/K4c/s8P2x8=;
+ h=From:To:CC:Subject:Date;
+ b=XTdbeA0oQJVBwQkK/cJTgTyO5TDSN/dJmXCdFkAanI0eJkHhiHZElud2bQ9VSy7hC
+ Kfa1WNSOYSeh1WetFMK2tZcpj2gt/r2/O8loeAeKPACkX6X1G4fS9DwNhHL3M2ufYQ
+ s99FBVaO5oeEkeeRItK+J9/aUQVNQZppRgygO56I=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39NDZlmx011546
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 23 Oct 2023 08:35:47 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 23
+ Oct 2023 08:35:46 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 23 Oct 2023 08:35:46 -0500
+Received: from uda0271468c (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39NDZkRs014032;
+ Mon, 23 Oct 2023 08:35:46 -0500
+Received: from vishallocal by uda0271468c with local (Exim 4.90_1)
+ (envelope-from <vishalm@ti.com>)
+ id 1quv5u-0008Or-Mj; Mon, 23 Oct 2023 08:35:46 -0500
+From: Vishal Mahaveer <vishalm@ti.com>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
+Subject: [RESEND PATCH 1/1] clk: ti: k3-pll: Add calibration support for non
+ fractional mode
+Date: Mon, 23 Oct 2023 08:35:46 -0500
+Message-ID: <20231023133546.32283-1-vishalm@ti.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Prwsa/wlK6M1epHx"
-Content-Disposition: inline
-In-Reply-To: <87h6mhqri9.fsf@bloch.sibelius.xs4all.nl>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Mon, 23 Oct 2023 18:53:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,73 +81,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+PLL calibration needs to be enabled when operating in non fractional
+mode. Add the sequence to do a fast calibration when using PLL
+in this mode.
 
---Prwsa/wlK6M1epHx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
+---
+ drivers/clk/ti/clk-k3-pll.c | 81 ++++++++++++++++++++++++++++++++++---
+ 1 file changed, 75 insertions(+), 6 deletions(-)
 
-On Mon, Oct 23, 2023 at 05:37:34PM +0200, Mark Kettenis wrote:
-> > From: Simon Glass <sjg@google.com>
-> > Date: Mon, 23 Oct 2023 00:08:40 -0700
-> >=20
-> > > > fdt_node_check_compatible() does most of the work...then you need to
-> > > > check which FDT has the most specific match (i.e. latest in the str=
-ing
-> > > > list). That handles things like board revisions, variants, etc.
-> > > >
-> > > > My concern is about adding a feature when there is already a defined
-> > > > spec and mechanism for this to work. What happens when we load the
-> > > > file and the compatible is wrong?
-> > > >
-> > > > At best, I see the filename as a hint.
-> > > >
-> > > > [Perhaps this is the wrong time to ask, but why are kernels +DT not
-> > > > shipped in FIT on ARM?]
-> > >
-> > > FIT is U-Boot specific. For Linux distributions it is easier to use a
-> > > firmware agnostic method of booting.
-> >=20
-> > I'd like to suggest that distros use both. Then U-Boot can work as it
-> > was designed and we can avoid these work-arounds.
-> >=20
-> > FIT is actually implemented in various other bootloaders. In fact
-> > perhaps grub is the only one that doesn't? I can't think of any
-> > others.
->=20
-> Simon, please stop pushing this.  OpenBSD's bootloader does not
-> support FIT and we have no interest in supporting it.  Our users
-> expect to be able to just copy a new kernel in place and use it and
-> our OS upgrade procedure depends on this as well.  And this is
-> incompatble with FIT.  I've explained this about a dozen times to you
-> now.
+diff --git a/drivers/clk/ti/clk-k3-pll.c b/drivers/clk/ti/clk-k3-pll.c
+index bf762c558ef..c1158c13290 100644
+--- a/drivers/clk/ti/clk-k3-pll.c
++++ b/drivers/clk/ti/clk-k3-pll.c
+@@ -25,6 +25,23 @@
+ #define PLL_16FFT_FREQ_CTRL0		0x30
+ #define PLL_16FFT_FREQ_CTRL1		0x34
+ #define PLL_16FFT_DIV_CTRL		0x38
++#define PLL_16FFT_CAL_CTRL		0x60
++#define PLL_16FFT_CAL_STAT		0x64
++
++/* CAL STAT register bits */
++#define PLL_16FFT_CAL_STAT_CAL_LOCK	BIT(31)
++
++/* CFG register bits */
++#define PLL_16FFT_CFG_PLL_TYPE_SHIFT	(0)
++#define PLL_16FFT_CFG_PLL_TYPE_MASK	(0x3 << 0)
++#define PLL_16FFT_CFG_PLL_TYPE_FRACF	1
++
++/* CAL CTRL register bits */
++#define PLL_16FFT_CAL_CTRL_CAL_EN               BIT(31)
++#define PLL_16FFT_CAL_CTRL_FAST_CAL             BIT(20)
++#define PLL_16FFT_CAL_CTRL_CAL_BYP              BIT(15)
++#define PLL_16FFT_CAL_CTRL_CAL_CNT_SHIFT        16
++#define PLL_16FFT_CAL_CTRL_CAL_CNT_MASK         (0x7 << 16)
+ 
+ /* CTRL register bits */
+ #define PLL_16FFT_CTRL_BYPASS_EN	BIT(31)
+@@ -40,9 +57,14 @@
+ /* DIV CTRL register bits */
+ #define PLL_16FFT_DIV_CTRL_REF_DIV_MASK		0x3f
+ 
+-#define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_BITS	24
++/* HSDIV register bits*/
+ #define PLL_16FFT_HSDIV_CTRL_CLKOUT_EN          BIT(15)
+ 
++/* FREQ_CTRL1 bits */
++#define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_BITS	24
++#define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_MASK	0xffffff
++#define PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_SHIFT	0
++
+ /* KICK register magic values */
+ #define PLL_KICK0_VALUE				0x68ef3490
+ #define PLL_KICK1_VALUE				0xd172bc5a
+@@ -63,18 +85,65 @@ static int ti_pll_wait_for_lock(struct clk *clk)
+ {
+ 	struct ti_pll_clk *pll = to_clk_pll(clk);
+ 	u32 stat;
++	u32 cfg;
++	u32 cal;
++	u32 freq_ctrl1;
+ 	int i;
++	u32 pllfm;
++	u32 pll_type;
++	int success;
+ 
+ 	for (i = 0; i < 100000; i++) {
+ 		stat = readl(pll->reg + PLL_16FFT_STAT);
+-		if (stat & PLL_16FFT_STAT_LOCK)
+-			return 0;
++		if (stat & PLL_16FFT_STAT_LOCK) {
++			success = 1;
++			break;
++		}
+ 	}
+ 
+-	printf("%s: pll (%s) failed to lock\n", __func__,
+-	       clk->dev->name);
++	/* Enable calibration if not in fractional mode of the FRACF PLL */
++	freq_ctrl1 = readl(pll->reg + PLL_16FFT_FREQ_CTRL1);
++	pllfm = freq_ctrl1 & PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_MASK;
++	pllfm >>= PLL_16FFT_FREQ_CTRL1_FB_DIV_FRAC_SHIFT;
++	cfg = readl(pll->reg + PLL_16FFT_CFG);
++	pll_type = (cfg & PLL_16FFT_CFG_PLL_TYPE_MASK) >> PLL_16FFT_CFG_PLL_TYPE_SHIFT;
++
++	if (success && pll_type == PLL_16FFT_CFG_PLL_TYPE_FRACF && pllfm == 0) {
++		cal = readl(pll->reg + PLL_16FFT_CAL_CTRL);
+ 
+-	return -EBUSY;
++		/* Enable calibration for FRACF */
++		cal |= PLL_16FFT_CAL_CTRL_CAL_EN;
++
++		/* Enable fast cal mode */
++		cal |= PLL_16FFT_CAL_CTRL_FAST_CAL;
++
++		/* Disable calibration bypass */
++		cal &= ~PLL_16FFT_CAL_CTRL_CAL_BYP;
++
++		/* Set CALCNT to 2 */
++		cal &= ~PLL_16FFT_CAL_CTRL_CAL_CNT_MASK;
++		cal |= 2 << PLL_16FFT_CAL_CTRL_CAL_CNT_SHIFT;
++
++		/* Note this register does not readback the written value. */
++		writel(cal, pll->reg + PLL_16FFT_CAL_CTRL);
++
++		success = 0;
++		for (i = 0; i < 100000; i++) {
++			stat = readl(pll->reg + PLL_16FFT_CAL_STAT);
++			if (stat & PLL_16FFT_CAL_STAT_CAL_LOCK) {
++				success = 1;
++				break;
++			}
++		}
++	}
++
++	if (success == 0) {
++		printf("%s: pll (%s) failed to lock\n", __func__,
++		       clk->dev->name);
++		return -EBUSY;
++	} else {
++		return 0;
++	}
+ }
+ 
+ static ulong ti_pll_clk_get_rate(struct clk *clk)
+-- 
+2.36.1
 
-In the context of this thread, genuinely, how will OpenBSD (and the rest
-of the BSD families) operate? I agree U-Boot doesn't want to have to
-know all of the UFSes, so that means the SCT will be populated either by
-the DT passed to U-Boot, or the DT we were built with. Is it that since
-the next stage is an EFI app, it will check that variable and use that
-hint?
-
---=20
-Tom
-
---Prwsa/wlK6M1epHx
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2oKwACgkQFHw5/5Y0
-tywQWwv9GAeGAU79cTKOFCPsvIQm2L4Gjy+GabgudbfOzK7wMI+RMYecIS/+g4+x
-l6Pry6UpdY5rzngkHTrxl1ZlL6wQnRN7zPQCqbZHNqHSuqqy2HZvDv8T+zI8WSfe
-OjeaK1aq1eyk0kd+Q3ZgM4UczNRTRaeWnkZQEQ6FBbuOSHjwoayq7jnDm7B85lbn
-uIqDWnnSIpyMwoO9/TAorWUokpw0JKRKtNkqcUFLWkGc+Zc2+piMuAk0hDxpjjYP
-XBt6vnlF0N4LZhucmVqHeXKzRO3R9+omEJwCBgeQRzIJW0RFpRTlrYmUXymhfs30
-hIQkVrdbpb24A8qARJhHCBOzm2z19CE+zGrl2FvqIpKQ19V8IUMyDMb0B59Q+Q6c
-+BXUGn67GYQGD0JI1hMxU9xOPKs/BvY2aVXQm77wX2Ym+Axj2uTQvgzypCVh2Etp
-0lkFwpoolCE/56hnXBk/w1cLsHIyY7psATiaZtdi/SVyPDPliwtWdK4jlLn6XVrp
-4XT6OIeR
-=5LlD
------END PGP SIGNATURE-----
-
---Prwsa/wlK6M1epHx--
