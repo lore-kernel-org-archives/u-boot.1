@@ -4,71 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4516C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15424C25B41
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:22:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 034938773C;
-	Mon, 23 Oct 2023 09:13:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AF24587874;
+	Mon, 23 Oct 2023 09:22:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z0qQHAgx";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="SQKe/mNC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50DF38769C; Mon, 23 Oct 2023 09:13:00 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 69DFF87873; Mon, 23 Oct 2023 09:22:05 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::629])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C59BC87895
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:12:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D4BE87876
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:22:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-507b18cf2e1so3983605e87.3
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:12:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698045177; x=1698649977; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1E/BofI/xjurw6qNJCB6F230Dl4vSa5B4t2d7GNEd5U=;
- b=Z0qQHAgxzpXgjP1GqfaQ739FvvWPRTzS1t0g8u1PWP+0nSwZbIGl7Gwq1Jb4bnhdLd
- Xgb+D2GT+yOMxE2BQNJyoJv+nU2nfKQfoWWH/V6iM/3Qg1YiPZV4rambb6l07fh/V8/c
- j+6SaaV445q3VdxQKP9AdLRFHVoA2n7H+djXygiXoUljSJmgzRWkqjbf6Om5Bp4BAzC4
- UQWP60U9yNgdN6ehGAURj6GQ0ddQwNuJIagWomqbaTEnGaqgRiBwdMYUVTjihZbCXdMq
- 1ihzluLYxsgWtPqHzwrhiA0Xa13in1/kKGPVDYaIbrqdYPNQGvX1KcVPt/oUZ1jYcogy
- /shA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698045177; x=1698649977;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1E/BofI/xjurw6qNJCB6F230Dl4vSa5B4t2d7GNEd5U=;
- b=m24yxVJ5hUQ+r2tQUtQaYQ3QBePwUHJAdeeX1wvTV/F0oLFpg6DH4uBARtHVfwpoio
- lLJRM1DKHTBbondawLDGyvD0FKNsovJeO0uSgIkyNFtnSixAvsef9GcfyVqh4EApAT+I
- nj+KxWmY2aCpB4fgFe9gTGaefaeagL4koJJOkjSKEzwf0hGl183UDknYIVVjxLqClm0s
- bRczIJJ58xVkL3wPLi4qBiDc69Nw6oXs4inVdP6PFxPq6rs7vrTid7rBiNfRSGE/ZqdA
- D2eQIskSskZMOG8bPIYr+rAiqOKGUmH/1dlyX9kbLIvWFcYxtCw+7h6aeVUG9wALcSi2
- +Wtw==
-X-Gm-Message-State: AOJu0YyYb3VNxvf0npidyT/5J2gHRQL6A3fFDwU88rF+U2tyn63dXxRP
- SJpDYz551YbyMKnOs9CRZo0nEHFWmORIzHi2CX7Tdw==
-X-Google-Smtp-Source: AGHT+IEHuTpapBqGtAtHfp9ggiC2RxnVjEh1vK8WjvF474h40g3ooTJ+sBVe1vh6zHpg8ON7pox8R096hVqfdihVWGU=
-X-Received: by 2002:ac2:53bb:0:b0:507:9855:bc68 with SMTP id
- j27-20020ac253bb000000b005079855bc68mr6237036lfh.37.1698045176982; Mon, 23
- Oct 2023 00:12:56 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ES2ZqZf2lBv8SGXuWY4jVTe4fr36RCqyHoiZ0qq5ybEOZ3nLrodWEkClv7Nck3qYix9rUeR0hK7naap3fkKs0wm2VS/RxrrwE3C3DdFz8Lwa4z6PA+tcIovJx63VNS6r7oCWh0CR5AEzhaxHfApNUeIvBYsRRamB0llZn4kEFOu6/HZ7qqf5rNIg+cmUJDXSUEtsupuciPRujT2U+3ZKs5DCvKDL3T2HS72JoqbF3RL5JedDmrreykurE1NCH8Rgv6AYZB1aSeG7VsrGAhH5ZYCuCB2X0DuKl2wT/iJOM0MlYPmSce2YaGWsQ/cMwrv7IPGD1WwhyTbbKTzBQKwhfw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3nZBHbf/NohkaQrJn+XfVVILyAlT12hABZ2kXcQkcPM=;
+ b=HkYQBLOU5kKpGn6Lfh+SSt4PsnCZ0TWc55qMyK219QslywwAVP29t1+JRbvji9sAsJ/00/IMsx8b31+w7PlaBKvG69p5hrVrYhFUY0KATbkbJewnTb8tP8JpkdZ/gtfuqA7TmqhW5CGA7NuZyWIQGqzg28IIeRjVexo6ZZhDu0gig3B2WoTowQVqEqQdhwTVnWj/TW7OR1bEX9Vv/Ds2QlV/NUIAenw1gPJLpXowtcrEHaqSzaj6srxXvrtRFJcOoxuKhz577A1UZiV/5wl4eR72K3cSwyTVnvtplDtQ9+tKUaeeN1kyYzwCxn/tzDbt22GJvflA3iG2B8BgTzSfVQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3nZBHbf/NohkaQrJn+XfVVILyAlT12hABZ2kXcQkcPM=;
+ b=SQKe/mNCQuLD2t/iL+zNzp0mF+ncn2cq2MlGfZi4PajygZMuERXWtlTB2nMPpIGTSgWsuKGPiQQ2nPcjPFSeGC9bmLElXPTc5nZ2SCnNORRTyXWxbcWspuGieeISrvHeS+SccX91XxHoXelsqXk4rYC44DTlUITuB3hvCUtLth8=
+Received: from MW4P220CA0029.NAMP220.PROD.OUTLOOK.COM (2603:10b6:303:115::34)
+ by MN0PR12MB6368.namprd12.prod.outlook.com (2603:10b6:208:3d2::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.21; Mon, 23 Oct
+ 2023 07:21:59 +0000
+Received: from CO1PEPF000042AB.namprd03.prod.outlook.com
+ (2603:10b6:303:115:cafe::66) by MW4P220CA0029.outlook.office365.com
+ (2603:10b6:303:115::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.26 via Frontend
+ Transport; Mon, 23 Oct 2023 07:21:58 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042AB.mail.protection.outlook.com (10.167.243.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6933.15 via Frontend Transport; Mon, 23 Oct 2023 07:21:58 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 23 Oct
+ 2023 02:21:56 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+Subject: [PATCH v2] arm: xilinx: Add missing dual parallel flash description
+Date: Mon, 23 Oct 2023 09:21:53 +0200
+Message-ID: <cddf2909d0445eba08b998d42ffc31c1fa3132b9.1698045694.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20231022062012.97271-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231022062012.97271-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 23 Oct 2023 10:12:20 +0300
-Message-ID: <CAC_iWjJ2FeFFX-ZhrnZocAucHpXRmmM0MoAvMB5qNN2KJdUziA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: fix efi_dp_from_eth
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3444; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=k9PDEpZTJpeFnt++NvU3eYKSOV8lkTurel9wofqnwE8=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlQzuX/r+dntJ2zfcsHVbdGZSZXN+Qfbzs6p/3G7vYl7V
+ lyb0JRnHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAia20Z5nCs2fBGNFP7S63W
+ 9y/3NUpVPHZE3mCYH9gS/1jp8Y4/i+4k2Rudf1CmaPKgHgA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AB:EE_|MN0PR12MB6368:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5a97053d-b3f3-4aa1-e98b-08dbd398be4a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: yVSasQUfLvoPUEm8tmXs2/TtNPqZsZcLEvh0WiIdyvUlzHvGlVo0o7EjBin2qjm5UUU8qXIB3jfQodnm2E19jaBhC1PXJvpbrB2587cw0NMUuEwtlVAEkPPWGhigTAbkf6pqOMFU5hvB1SftD+IZB6QDMm0csSOT7yOM0gKaBrpzpDIe+7ZI0luslS+DbYgb4pZ8GRNlTcF8ywnJGT1aof4DeSFD7atfVvF4yYE3jrkmkSgPy7FgerbxZZugD7AjkbIUXFcNZk6C8rdObOt3Sc0bD6Ids/IyQC9kec1qpkAZ9DlDg/RW1LchpOImS3aaAII+oOa7Dm/0IyJ0xCMw4JxkzxDYGCJNTSZYv+Y/JHvXRUwET2FmmhRvHcJ/puZFpwwruLw3P9ntJXBzCfFyoUR1DCk0JazVH1M1Tar/HLiFFGa4RqOFp3Fnmgzj+xoEtWa6CRez6l+GAPSiL7itOEQQzG51exjjMWrvveBfnHW+DhlJ78do0bK4CE4y0izKqR54zCdX/6oVGMs8XfKs8AjWiCgDkbT8iEyvlTM84kg8UpKXUZ8cLq4lqfDlimA9SpP+umMPWtSlBeaUrQad2vPqsq3QyF+8E++rqeD93VlbqeJOxyVDe3gEQxjbQ6Fs1r5cZw51XGrF+DOxgy7IUYoPtXU5qvHn+GAfk9PVzNnpSf7CjYv5uGzSfkx0a9RXr/lb8/hlIJ7kURFiKal/rr5uYq1/+LUKLU/wyEOZVDpmx+/SfUKz1jrsO9JZnOV+ErpuLjEQE1+CSha2PQ2+lg==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(39860400002)(396003)(136003)(376002)(230922051799003)(64100799003)(1800799009)(82310400011)(186009)(451199024)(36840700001)(40470700004)(46966006)(47076005)(70586007)(70206006)(316002)(40480700001)(41300700001)(86362001)(2906002)(5660300002)(40460700003)(44832011)(8676002)(110136005)(8936002)(36756003)(2616005)(81166007)(478600001)(6666004)(426003)(336012)(36860700001)(83380400001)(356005)(82740400003)(16526019)(26005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2023 07:21:58.2408 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a97053d-b3f3-4aa1-e98b-08dbd398be4a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6368
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,49 +123,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 22 Oct 2023 at 09:20, Heinrich Schuchardt <
-heinrich.schuchardt@canonical.com> wrote:
+Describe flash memories based on the latest DT binding.
 
-> When compiling the sandbox with CONFIG_LTO=n, CONFIG_NET=n an error is
-> reported:
->
->     /usr/bin/ld: lib/efi_loader/efi_device_path.o:
->     in function `efi_dp_from_eth':
->     lib/efi_loader/efi_device_path.c:985:(.text+0xcf4):
->     undefined reference to `eth_get_dev'
->
-> Add a missing configuration check.
->
-> As the function is exported __maybe_unused can be removed.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_device_path.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_device_path.c
-> b/lib/efi_loader/efi_device_path.c
-> index ed7214f3a3..f3a0e855b3 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -977,11 +977,14 @@ struct efi_device_path *efi_dp_from_uart(void)
->         return buf;
->  }
->
-> -struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
-> +struct efi_device_path *efi_dp_from_eth(void)
->  {
->         void *buf, *start;
->         unsigned dpsize = 0;
->
-> +       if (!IS_ENABLED(CONFIG_NETDEVICES))
-> +               return NULL;
-> +
->         assert(eth_get_dev());
->
->         dpsize += dp_size(eth_get_dev());
-> --
-> 2.40.1
->
->
- Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+Changes in v2:
+- Add missing description for zc706
+
+ arch/arm/dts/zynq-zc706.dts             | 5 +++--
+ arch/arm/dts/zynq-zc770-xm013.dts       | 5 +++--
+ arch/arm/dts/zynqmp-m-a2197-01-revA.dts | 4 +++-
+ arch/arm/dts/zynqmp-m-a2197-02-revA.dts | 4 +++-
+ arch/arm/dts/zynqmp-m-a2197-03-revA.dts | 4 +++-
+ 5 files changed, 15 insertions(+), 7 deletions(-)
+
+diff --git a/arch/arm/dts/zynq-zc706.dts b/arch/arm/dts/zynq-zc706.dts
+index 03eb016ed687..18963a395156 100644
+--- a/arch/arm/dts/zynq-zc706.dts
++++ b/arch/arm/dts/zynq-zc706.dts
+@@ -309,10 +309,11 @@
+ &qspi {
+ 	bootph-all;
+ 	status = "okay";
+-	num-cs = <1>;
++	num-cs = <2>;
+ 	flash@0 {
+ 		compatible = "n25q128a11", "jedec,spi-nor";
+-		reg = <0x0>;
++		reg = <0>, <1>;
++		parallel-memories = /bits/ 64 <0x1000000 0x1000000>; /* 16MB */
+ 		spi-tx-bus-width = <1>;
+ 		spi-rx-bus-width = <4>;
+ 		spi-max-frequency = <50000000>;
+diff --git a/arch/arm/dts/zynq-zc770-xm013.dts b/arch/arm/dts/zynq-zc770-xm013.dts
+index 21902fbb0cc1..582aa1f1b873 100644
+--- a/arch/arm/dts/zynq-zc770-xm013.dts
++++ b/arch/arm/dts/zynq-zc770-xm013.dts
+@@ -61,10 +61,11 @@
+ 
+ &qspi {
+ 	status = "okay";
+-	num-cs = <1>;
++	num-cs = <2>;
+ 	flash@0 {
+ 		compatible = "n25q128a11", "jedec,spi-nor";
+-		reg = <0x0>;
++		reg = <0>, <1>;
++		parallel-memories = /bits/ 64 <0x1000000 0x1000000>; /* 16MB */
+ 		spi-tx-bus-width = <1>;
+ 		spi-rx-bus-width = <4>;
+ 		spi-max-frequency = <50000000>;
+diff --git a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+index 25ef646c8466..83b8a98d80ca 100644
+--- a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
++++ b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+@@ -71,11 +71,13 @@
+ 
+ &qspi {
+ 	status = "okay";
++	num-cs = <2>;
+ 	flash@0 {
+ 		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
++		reg = <0>, <1>;
++		parallel-memories = /bits/ 64 <0x4000000 0x4000000>; /* 64MB */
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+-		reg = <0x0>;
+ 		spi-tx-bus-width = <4>;
+ 		spi-rx-bus-width = <4>;
+ 		spi-max-frequency = <108000000>;
+diff --git a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+index ece9e6914541..dd37b726d3dc 100644
+--- a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
++++ b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+@@ -67,11 +67,13 @@
+ 
+ &qspi {
+ 	status = "okay";
++	num-cs = <2>;
+ 	flash@0 {
+ 		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
++		reg = <0>, <1>;
++		parallel-memories = /bits/ 64 <0x4000000 0x4000000>; /* 64MB */
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+-		reg = <0x0>;
+ 		spi-tx-bus-width = <4>;
+ 		spi-rx-bus-width = <4>;
+ 		spi-max-frequency = <108000000>;
+diff --git a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+index 7372968e5734..811cebafe9e6 100644
+--- a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
++++ b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+@@ -67,11 +67,13 @@
+ 
+ &qspi {
+ 	status = "okay";
++	num-cs = <2>;
+ 	flash@0 {
+ 		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
++		reg = <0>, <1>;
++		parallel-memories = /bits/ 64 <0x4000000 0x4000000>; /* 64MB */
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+-		reg = <0x0>;
+ 		spi-tx-bus-width = <4>;
+ 		spi-rx-bus-width = <4>;
+ 		spi-max-frequency = <108000000>;
+-- 
+2.36.1
+
