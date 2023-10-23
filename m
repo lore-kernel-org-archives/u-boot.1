@@ -4,58 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F84C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 14:33:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 042E7C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 15:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21EB6878ED;
-	Mon, 23 Oct 2023 16:33:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tom-fitzhenry.me.uk
+	by phobos.denx.de (Postfix) with ESMTP id B6AE28791C;
+	Mon, 23 Oct 2023 17:23:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tom-fitzhenry.me.uk header.i=@tom-fitzhenry.me.uk header.b="MpkpcXcz";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="CtflHEaH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CD99878EE; Mon, 23 Oct 2023 16:33:52 +0200 (CEST)
-Received: from mx2.mythic-beasts.com (mx2.mythic-beasts.com
- [IPv6:2a00:1098:0:82:1000:0:2:1])
+ id 4CD0D8791C; Mon, 23 Oct 2023 17:23:44 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 331D8878DC
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 16:33:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=tom-fitzhenry.me.uk
+ by phobos.denx.de (Postfix) with ESMTPS id 24AFC8790B
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 17:23:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tom@tom-fitzhenry.me.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=tom-fitzhenry.me.uk; s=mythic-beasts-k1; h=Date:Subject:To:From;
- bh=v+REk8yow4Fe1sx+3WYQ60nOK+FMOB01RQCt3fhiQwE=; b=MpkpcXczWdTHSdo7fqPl6pX9x+
- 2YsrjrUHvuH8JDv8g9FCikcbLEwfYTw+bZorerhslubpqdtsdWS8jVI8JiR6x8/OkcA47QvjkLiZZ
- xbCL35nnb+HYLKoBLu7csSwfuiHnRvz3QLqn5tfUusMMaWwwujKezQtx6wRPoZfa7ZGN3x2AQbb4a
- AJi/2O0Z83s7QajjbdRmSaHeX6RKXDRY4C20mwwQtt7XgQY87beVPP6v7P3i1hqQ5tXHU8Abv7Cu5
- E5sPBfrZghu4XbSHKMQKx53dHl13vht1AVjbIhKCgxmKCRvx7ZYOOMSDUPJ+RSO3VgUqQVyseivb/
- 1AYC12eQ==;
-Received: by mailhub-hex-d.mythic-beasts.com with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <tom@tom-fitzhenry.me.uk>)
- id 1quvzz-00E7Re-PO; Mon, 23 Oct 2023 15:33:44 +0100
-References: <20231017155943.127659-1-tom@tom-fitzhenry.me.uk>
- <20231017155943.127659-3-tom@tom-fitzhenry.me.uk>
- <7eb8ef51-903d-4143-bd14-74745a276d9b@rock-chips.com>
-User-agent: mu4e 1.10.7; emacs 29.1
-From: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
- <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, Ondrej
- Jirman <megi@xff.cz>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] board: rockchip: add Pine64 QuartzPro64 RK3588
- board
-Date: Tue, 24 Oct 2023 01:31:31 +1100
-In-reply-to: <7eb8ef51-903d-4143-bd14-74745a276d9b@rock-chips.com>
-Message-ID: <871qdl76j0.fsf@tom-fitzhenry.me.uk>
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [100.94.55.57] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 6591B660708F;
+ Mon, 23 Oct 2023 16:23:41 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1698074621;
+ bh=qyjACINnqUbHMAMi8hqoTwr1azuHJ3O8dbHcNWdxblw=;
+ h=Date:From:Subject:To:Cc:From;
+ b=CtflHEaHC5tdnEEy3a2v8OcRKVlzY/Pm/FO4FrDDlTIGm/Ob/xgyPkV2o6/HxG37I
+ 9fyQ87FHHfVmraUGlD9giuT7KlvVJLT7Sc+OtN4UUV3cQYve4GiUmEMmyfjq/dR2i9
+ ymzngEMtvkcUB8gvicVniuBxwOltEXlqzwLtCnmTzWIdOZEaxn6ld1zafJDyQ2m4s1
+ gSwG7cdZAd2gM7sc1lAJ+bdcg5FDMOYm03i0MyqbzwjfzMmQzwrrWN5LVvZ7+tYc6k
+ FMt7Z/ZRJwyp/WNpqUX9fl1U6GFOT9zK/nMHC/SbDCJEwjaeYstoLQfI5ruLFzF0+R
+ 0Gemqc5ARJUNg==
+Message-ID: <93ffc8a3-5e32-4509-83e8-031c70b0ac30@collabora.com>
+Date: Mon, 23 Oct 2023 18:23:38 +0300
 MIME-Version: 1.0
-Content-Type: text/plain
-X-BlackCat-Spam-Score: 0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@collabora.com>
+Subject: [PULL] u-boot-at91-2024.01-b
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,23 +69,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Tom,
 
-Kever Yang <kever.yang@rock-chips.com> writes:
+Please pull tag u-boot-at91-2024.01-b , the second set of at91 features 
+for 2024.01 cycle.
 
-> On 2023/10/17 23:59, Tom Fitzhenry wrote:
->> This patch depends on "rockchip: rk3588: Sync device tree from linux
->> maintainer tree"[0], since the QuartzPro64 upstream DT depends on upstream
->> dtsi changes.
->
-> This patch has been update to V2, and your patch are not able to apply
-> any more.
->
-> Please help to rebase it.
+This feature set a new board named Conclusive KSTR sama5d27 with some 
+small prerequisites patches.
 
-Thank you for your review.
+Thanks,
+Eugen
 
-I have sent a v3 patch[0] which is rebased on top of master
-( 9a3a58396b78b1f9d0c14580dc03f81d29207dd2 ) and Jonas's v2 patch.
 
-0. https://lore.kernel.org/all/20231023142246.26830-1-tom@tom-fitzhenry.me.uk/
-1. https://lore.kernel.org/all/20231017170216.1627789-2-jonas@kwiboo.se/
+The following changes since commit 9a3a58396b78b1f9d0c14580dc03f81d29207dd2:
+
+   Merge https://source.denx.de/u-boot/custodians/u-boot-marvell 
+(2023-10-20 12:54:33 -0400)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-at91.git 
+tags/u-boot-at91-2024.01-b
+
+for you to fetch changes up to 27347893f02d4457b80357a38c194a726a43533a:
+
+   board: Add support for Conclusive KSTR-SAMA5D27 (2023-10-23 17:07:06 
++0300)
+
+----------------------------------------------------------------
+Second set of u-boot-at91 features for the 2024.01 cycle
+
+----------------------------------------------------------------
+Artur Rojek (4):
+       common: add prototype & rename populate_serial_number()
+       event: add new EVT_SETTINGS_R event
+       arm: dts: at91: sama5: Add flexcom4 node
+       board: Add support for Conclusive KSTR-SAMA5D27
+
+  arch/arm/dts/Makefile                          |   3 +
+  arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi    |  42 +++++
+  arch/arm/dts/at91-kstr-sama5d27.dts            | 127 +++++++++++++
+  arch/arm/dts/sama5d2.dtsi                      |  20 +++
+  arch/arm/mach-at91/Kconfig                     |  12 ++
+  board/conclusive/kstr-sama5d27/Kconfig         |  15 ++
+  board/conclusive/kstr-sama5d27/MAINTAINERS     |   9 +
+  board/conclusive/kstr-sama5d27/Makefile        |   5 +
+  board/conclusive/kstr-sama5d27/kstr-sama5d27.c | 239 
++++++++++++++++++++++++++
+  cmd/tlv_eeprom.c                               |  14 +-
+  common/board_r.c                               |   1 +
+  common/event.c                                 |   1 +
+  configs/kstr_sama5d27_defconfig                |  73 ++++++++
+  include/configs/kstr-sama5d27.h                |  15 ++
+  include/event.h                                |   9 +
+  include/init.h                                 |  14 ++
+  16 files changed, 586 insertions(+), 13 deletions(-)
+  create mode 100644 arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
+  create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
+  create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
+  create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
+  create mode 100644 board/conclusive/kstr-sama5d27/Makefile
+  create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+  create mode 100644 configs/kstr_sama5d27_defconfig
+  create mode 100644 include/configs/kstr-sama5d27.h
