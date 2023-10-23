@@ -4,88 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE3BC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:16:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B821C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 13:25:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ED5687901;
-	Mon, 23 Oct 2023 15:16:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C1F7B8790F;
+	Mon, 23 Oct 2023 15:25:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ShCN0Rlu";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E5DF87902; Mon, 23 Oct 2023 15:16:29 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E4EF878AC
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:16:27 +0200 (CEST)
+ id 6CAC387912; Mon, 23 Oct 2023 15:25:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id C5A678790D
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 15:25:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7789cb322deso233341785a.3
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 06:16:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698066986; x=1698671786; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VmjJHnaubfVbKEJGl85a7Rotx9i09TdDkmbRSJa1d5o=;
- b=ShCN0RlunsvVCdVNj1oe0xfIicA+MHRLLf4h6HP+/4T2YszMCTC5IuFbKX8kVihIzS
- wFX1nlpyW6x2EfQSpJbJwQVaj9cRSxa9rhCFsuPyrU156kDyIUVE1gEdLgRBCLyFWBlL
- mMMMusOHIjDAJW2LYsHLcOrJlCQ4DwDmSZ84c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698066986; x=1698671786;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VmjJHnaubfVbKEJGl85a7Rotx9i09TdDkmbRSJa1d5o=;
- b=rdeYuGuT+A6OrXXTw9lF8qFtu/ZT47ThcsR40O1BtGWE818SrK1klxaJ466ex5UC/d
- 7ZstSt/8Mbg2MAAnFeOzIxnSxC6hlBfTvLlaGcI4NsYDstnb8nTFbVjG/SFwQFxncUQO
- BklsR84bG124y0Zd/QBq8z6+GGbVm7ISK9RSbVB6OJMOsTqdvxblBcOdDDRMirWT0VQV
- nO7Wbv1j/staotCye6/74hxxOzt8t3eZBH03+gTnAPuOSgFXj45ctJ8I4OX17W0RZr9T
- jHtNbWWhTA6WULdiIjREzfYOa+Qkqsviv/EgP7W3eyMdtfGMrjXZJ4UlQmJCWE4Hcq+X
- fmNQ==
-X-Gm-Message-State: AOJu0YyZk+pJmHSEOw1605+aV3n2/9OSSjSZBywrMyrBzq2milbr587r
- RkPRfyI5o4/3VbBzam2lenctjA==
-X-Google-Smtp-Source: AGHT+IGFD6Iu4ifZZsMG8lu9WsDNqRcBN1X7V6EdR0vQxSEvPcRdHab4dWPglM64oIPMGQX9EL8LcA==
-X-Received: by 2002:a05:620a:28d6:b0:779:d4ef:5f1f with SMTP id
- l22-20020a05620a28d600b00779d4ef5f1fmr3578142qkp.29.1698066985642; 
- Mon, 23 Oct 2023 06:16:25 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-3cd1-c3ac-4562-deca.res6.spectrum.com.
- [2603:6081:7b00:6400:3cd1:c3ac:4562:deca])
- by smtp.gmail.com with ESMTPSA id
- pj16-20020a05620a1d9000b00774830b40d4sm2705709qkn.47.2023.10.23.06.16.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 06:16:25 -0700 (PDT)
-Date: Mon, 23 Oct 2023 09:16:23 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
-Message-ID: <20231023131623.GG496310@bill-the-cat>
-References: <CAPnjgZ2tJEBNWsx_tLDTWyQ+xNyLj6feDenqEcCe+t3JNEdv8g@mail.gmail.com>
- <ZTHKKurIp67bx2MJ@octopus>
- <CAPnjgZ1DrzW=2M4UG8aPYmN+MedJODuj5-zE0Y9nVfu-Scpsxw@mail.gmail.com>
- <20231021182612.GA53397@bill-the-cat>
- <49cc3e85-bcc1-4a31-a8e0-293e6ecd952b@gmx.de>
- <20231022142922.GA496310@bill-the-cat>
- <20231022145857.GB496310@bill-the-cat>
- <CAPnjgZ2fHLrUrqNMFhzK-EbO8bGcgg=1aC9jVPL3mHt_g2xjiA@mail.gmail.com>
- <20231022234507.GE496310@bill-the-cat>
- <CAPnjgZ14he2OtnvfEXsbN1FxGz34twDwAMROM=61kcOJpGvDXw@mail.gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 212D62F4;
+ Mon, 23 Oct 2023 06:25:43 -0700 (PDT)
+Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9DBD13F762;
+ Mon, 23 Oct 2023 06:25:00 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
+ Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
+ Okhunjon Sobirjonov <okhunjon72@gmail.com>
+Subject: [PATCH v3 00/24] sunxi: Allwinner T113s support
+Date: Mon, 23 Oct 2023 14:24:25 +0100
+Message-Id: <20231023132449.813863-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WKRXK5v7DS7zsp+O"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ14he2OtnvfEXsbN1FxGz34twDwAMROM=61kcOJpGvDXw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,255 +55,241 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---WKRXK5v7DS7zsp+O
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+this is just for the records (mailing list archives), I just sent a
+pull request with that series, to still make the 2024.01 merge window.
+Some smaller changes, addressing the review comments (many thanks to
+Samuel!) This now embeds Sam's PSCI support patches, and also relies
+on the devicetree sync from the Linux v6.6-rc6 kernel.
 
-On Mon, Oct 23, 2023 at 12:05:28AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sun, 22 Oct 2023 at 16:45, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Oct 22, 2023 at 02:55:32PM -0700, Simon Glass wrote:
-> > > Hi,
-> > >
-> > > On Sun, 22 Oct 2023 at 07:59, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sun, Oct 22, 2023 at 10:29:22AM -0400, Tom Rini wrote:
-> > > > > On Sun, Oct 22, 2023 at 08:08:11AM +0200, Heinrich Schuchardt wro=
-te:
-> > > > > > On 10/21/23 20:26, Tom Rini wrote:
-> > > > > > > On Sat, Oct 21, 2023 at 08:43:08AM -0700, Simon Glass wrote:
-> > > > > > > > Hi,
-> > > > > > > >
-> > > > > > > > On Thu, 19 Oct 2023 at 17:30, AKASHI Takahiro
-> > > > > > > > <takahiro.akashi@linaro.org> wrote:
-> > > > > > > > >
-> > > > > > > > > On Thu, Oct 19, 2023 at 08:01:11AM -0600, Simon Glass wro=
-te:
-> > > > > > > > > > Hi Heinrich,
-> > > > > > > > > >
-> > > > > > > > > > On Wed, 18 Oct 2023 at 06:55, Heinrich Schuchardt <xypr=
-on.glpk@gmx.de> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On 10/17/23 16:09, Tom Rini wrote:
-> > > > > > > > > > > > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Gla=
-ss wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > > Since efi_device_path.c calls eth_get_dev() and a=
-ssumes that Ethernet is
-> > > > > > > > > > > > > available, add it as an explicit dependency.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > > ---
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > (no changes since v2)
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Changes in v2:
-> > > > > > > > > > > > > - Add new patch to update EFI_LOADER to depend on=
- DM_ETH
-> > > > > > > > > > > > >
-> > > > > > > > > > > > >    lib/efi_loader/Kconfig | 1 +
-> > > > > > > > > > > > >    1 file changed, 1 insertion(+)
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loa=
-der/Kconfig
-> > > > > > > > > > > > > index 13cad6342c36..fca4b3eef270 100644
-> > > > > > > > > > > > > --- a/lib/efi_loader/Kconfig
-> > > > > > > > > > > > > +++ b/lib/efi_loader/Kconfig
-> > > > > > > > > > > > > @@ -11,6 +11,7 @@ config EFI_LOADER
-> > > > > > > > > > > > >       # We need EFI_STUB_32BIT to be set on x86_3=
-2 with EFI_STUB
-> > > > > > > > > > > > >       depends on !EFI_STUB || !X86 || X86_64 || E=
-FI_STUB_32BIT
-> > > > > > > > > > > > >       depends on BLK
-> > > > > > > > > > > > > +    depends on DM_ETH
-> > > > > > > > > > > > >       depends on !EFI_APP
-> > > > > > > > > > > > >       default y if !ARM || SYS_CPU =3D armv7 || S=
-YS_CPU =3D armv8
-> > > > > > > > > > > > >       select CHARSET
-> > > > > > > > > > > >
-> > > > > > > > > > > > Does this work for you Heinrich, or do you want to =
-clarify the
-> > > > > > > > > > > > dependencies (and re-organize the code as needed) a=
-round networking?
-> > > > > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > We should be able to boot via EFI on devices without =
-U-Boot network support.
-> > > > > > > > > > >
-> > > > > > > > > > > We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid=
- invoking
-> > > > > > > > > > > eth_get_dev() if there is no network. CONFIG_NETDEVIC=
-ES=3Dy selects
-> > > > > > > > > > > CONFIG_DM_ETH.
-> > > > > > > > > > >
-> > > > > > > > > > > Why is this not sufficient?
-> > > > > > > > > > > Is there a configuration that does not build?
-> > > > > > > > > >
-> > > > > > > > > > The point of this series is to disable CMDLINE and fix =
-up what breaks.
-> > > > > > > > > >
-> > > > > > > > > > In this case we have some sort of breakage...perhaps To=
-m has already
-> > > > > > > > > > found it, but otherwise could you take a look?
-> > > > > > > > > >
-> > > > > > > > > > We should be able to disable NET and LTO in sandbox and=
- still build.
-> > > > > > > > > > But this fails at present[1]. You can try it on -master
-> > > > > > > > >
-> > > > > > > > > Obviously, it would be necessary to enclose efi_dp_from_e=
-th()
-> > > > > > > > > with "if defined(CONFIG_NETDEVICES)" (or DM_ETH).
-> > > > > > > > > Then, we could drop "depends on DM_ETH".
-> > > > > > > >
-> > > > > > > > Strange that it only happens on the non-LTO board, though?
-> > > > > > >
-> > > > > > > There's two issues. The first of which is that I think you ne=
-ed to
-> > > > > > > re-check your error exactly? With my series, and LTO also dis=
-abled the
-> > > > > > > problem is a call to efi_get_image_parameters() as that's def=
-ined in
-> > > > > > > cmd/bootefi.c, but also only used with cmdline invocations. S=
-o we can
-> > > > > > > fix that CMDLINE=3Dn && LTO=3Dn case with a IS_ENABLED(CONFIG=
-_CMDLINE)
-> > > > > > > around that, and then discard efi_dp_from_name() entirely.
-> > > > > > >
-> > > > > > > The second issue is that with LTO we more completely find the=
- cases
-> > > > > > > where if x() calls y() and y() is undefined but nothing calls=
- x() we can
-> > > > > > > just discard x() and not care that y() is undefined.
-> > > > > > >
-> > > > > >
-> > > > > > I will send a patch for function efi_dp_from_eth().
-> > > > >
-> > > > > There's no problem with efi_dp_from_eth as far as I can tell.
-> > > > >
-> > > > > > @Simon
-> > > > > >
-> > > > > > One thing that I don't understand is why we don't let the linker
-> > > > > > eliminate the unused functions on the sandbox.
-> > > > > >
-> > > > > > On other architectures we put each function into a separate tex=
-t section
-> > > > > > and let the linker eliminate the unused text sections:
-> > > > > >
-> > > > > > arch/riscv/config.mk:29:
-> > > > > > PLATFORM_RELFLAGS       +=3D -fno-common -ffunction-sections -f=
-data-sections
-> > > > > > LDFLAGS_u-boot          +=3D --gc-sections -static -pie
-> > > > > >
-> > > > > > Shouldn't we keep the sandbox close to what other architectures=
- do?
-> > > > >
-> > > > > Oh my, I didn't realize that sandbox was missing the garbage coll=
-ection
-> > > > > stuff.  Yes, that needs to be fixed first, then we can see what's=
- next
-> > > > > to change, as there are some issues (my series first fixed CMDLIN=
-E=3Dn on
-> > > > > qemu_arm64).
-> > > >
-> > > > My super quick pass at enabling
-> > > > function-sections/data-sections/gc-sections shows there's nothing
-> > > > further needed for CMDLINE=3Dn and LTO=3Dn on sandbox, not even the=
- part I
-> > > > was looking at before.
-> > >
-> > > I am not sure about the original reason, but sandbox probably
-> > > pre-dates wholesale enabling of gc-sections (I haven't looked). There
-> > > is also the issue of whether the host toolchain supports it. Sandbox
-> > > is supposed to run on a variety of OS types.
-> >
-> > It doesn't predate gc-sections, we've just never moved it to the
-> > top-level Makefiles (and disabled on LTO) like we should have a long
-> > time ago.  It's supported by all the compilers we support, and it's a
-> > required feature (or, LTO) for U-Boot.
->=20
-> Remember that the sandbox linker script is special in that it adds to
-> the existing default one provided by the toolchain
+If you find issues with this series, then please reply to the respective
+patch, or send a patch on top. We still have till the end of the year to
+fix things in the repo.
+Changelog below.
 
-Yes, and we've also been using gc-sections since 2008, from a quick look
-at the logs.
+===================
+This series adds support for the new SoC series that covers the Allwinner
+D1 siblings R528 and T113s (a version with co-packaged DRAM). They all
+share the same die, although the D1 and D1s use RISC-V cores, which
+requires more plumbing, to use the sunxi code across two architectures.
+Getting the R528 support in should help a bit in sorting out what's new
+peripheral code and what is architecture dependent. IIUC, Samuel has that
+running, although with some hacks, the number of which this series tries
+to reduce.
 
-> > > I am also not sure of the point ot it...since it is normally pretty
-> > > easy to use Kconfig to control features.
-> >
-> > That's not the point of the feature.  The point is that we can discard
-> > unused code without having to rely on #ifdef and __maybe_unused.
->=20
-> That doesn't match with my understanding. An unused static will still
-> produce a warning if it is unused.
+The most interesting part of this is the pincontroller rework, this
+tackles two issues:
+- For the first time in the history of mainline Allwinner support the
+  pincontroller changed the register layout. The code here tries to
+  abstract the differences away, so both variants can share the code
+  peacefully.
+- For the above mentioned reason, the pincontroller code is quite old,
+  and is mostly spread out across arch/arm, in a pre-DM style, even
+  though we have real DM support in U-Boot proper. We need the non-DM
+  version for the (ARM-only?) legacy SPL, so can't get rid of that
+  completely. This series also tries to modernise that code, and moves
+  it into drivers/gpio, where it can be more easily shared with RISC-V.
 
-Yes, you're misunderstanding how this feature works and why it's
-required.  With v4 of my series, on sandbox and CMDLINE=3Dn and LTO=3Dn:
-/usr/bin/ld: boot/scene_textline.o: in function `scene_textline_send_key':
-/home/trini/work/u-boot/u-boot/boot/scene_textline.c:157: undefined referen=
-ce to `cread_line_process_ch'
-/usr/bin/ld: boot/scene_textline.o: in function `scene_textline_open':
-/home/trini/work/u-boot/u-boot/boot/scene_textline.c:222: undefined referen=
-ce to `cli_cread_init'
-/usr/bin/ld: common/bootstage.o: in function `bootstage_fdt_add_report':
-/home/trini/work/u-boot/u-boot/common/bootstage.c:323: undefined reference =
-to `working_fdt'
-/usr/bin/ld: common/cli.o: in function `run_commandf':
-/home/trini/work/u-boot/u-boot/common/cli.c:154: undefined reference to `ru=
-n_command'
-/usr/bin/ld: drivers/fastboot/fb_common.o: in function `fastboot_boot':
-/home/trini/work/u-boot/u-boot/drivers/fastboot/fb_common.c:137: undefined =
-reference to `run_command'
-/usr/bin/ld: drivers/fastboot/fb_command.o: in function `fastboot_acmd_comp=
-lete':
-/home/trini/work/u-boot/u-boot/drivers/fastboot/fb_command.c:350: undefined=
- reference to `run_command'
-/usr/bin/ld: lib/efi_loader/efi_device_path.o: in function `efi_dp_from_nam=
-e':
-/home/trini/work/u-boot/u-boot/lib/efi_loader/efi_device_path.c:1095: undef=
-ined reference to `efi_get_image_parameters'
-/usr/bin/ld: net/net.o: in function `net_auto_load':
-/home/trini/work/u-boot/u-boot/net/net.c:349: undefined reference to `tftp_=
-start'
-collect2: error: ld returned 1 exit status
+The main feature is then of course the T113s support, of which the new
+pinctroller is only one part. Apart from the new pincontroller and the
+usual new SoC bits (like clock and pinmux support), this includes the
+DRAM controller code.
+The PSCI support has been contributed by Sam (many thanks for that!).
+To follow the common pattern there is first some refactoring, then the
+R528/T113s bits plug on top.
+With the basics in, we add support for the MangoPi MQ-R board, which
+uses the T113s and seems to be a popular board. This should also serve
+as a blueprint for supporting similar boards.
 
-And with re-enabling gc-sections:
-/usr/bin/ld: drivers/fastboot/fb_common.o: in function `fastboot_boot':
-/home/trini/work/u-boot/u-boot/drivers/fastboot/fb_common.c:137: undefined =
-reference to `run_command'
-collect2: error: ld returned 1 exit status
+This series is based on top of current master, but it relies on the
+Allwinner DT update series (from Linux kernel v6.6-rc6).
 
-Because all of those other link failures are in unreachable code and the
-rest of the code base is already setup to know that x() can call y() and
-y() can just be undefined at link time if x() is never called and ends
-up discarded.
+A branch is available at:
+https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
 
-I honestly didn't realize sandbox hadn't had this critical feature
-enabled and I hope we haven't been doing too many odd shuffles of the
-codebase because of it.
+Cheers,
+Andre
 
---=20
-Tom
+Changelog v3 .. v2:
+- add review and test tags
+- mention OrangePi Plus USB3_VBUS_PIN speciality in commit message
+- use dev_get_phy_node() wrapper in sunxi_emac.c
+- change [gs]et_output_ to [gs]et_value_ in pinctrl code
+- move SUNXI_NEW_PINCTRL Kconfig definition to drivers/gpio
+- fix ordering of pinctrl structure definitions
+- add some new pinmux functions (i2c0, mmc1, uart1/2)
+- fix ordering of clock structure definitions
+- drop DRAM_SUN8I_R528 symbol in favour of just DRAM_SUN20I_D1
+- drop defaults from DRAM parameters (forces definition in defconfig)
+- fix test writes/reads into DRAM for 64-bit builds
+- fix DRAM driver build failure for DM_RAM
+- un-indent dram_para_t definition
+- drop devicetree patches and rely on generic DT update
+- include PSCI patches from Sam Edwards
+- make sure SUNXI_R_CPUCFG_BASE is always defined
 
---WKRXK5v7DS7zsp+O
-Content-Type: application/pgp-signature; name="signature.asc"
+Changelog v2 .. v1:
+- add review and test tags
+- reorder pinctrl rework patches: first move shared code, then add in/out,
+  then remove struct, then move headers
+- move all GPIO routines into drivers/gpio/sunxi_gpio.c
+- move private GPIO definitions from GPIO header file to sunxi_gpio.c
+- use GPIO_NUM() instead of "% 32" directly
+- define more MMIO addresses (PRCM, CPUCFG, R_PIO)
+- do not enable 8-bit eMMC mode (Okhunjon)
+- add eMMC pins to SPL pinmux setup (Okhunjon)
+- drop patch [PATCH 13/20] sunxi: clock: h6: prepare for PRCM less SoCs
+- update DT files from latest Linux kernel tree
+- fix pin numbers for the UART pinmux setup
+- let DRAM driver depend on ARCH_SUNXI
 
------BEGIN PGP SIGNATURE-----
+Andre Przywara (18):
+  sunxi: remove CONFIG_SATAPWR
+  net: sunxi_emac: chase DT nodes to find PHY regulator
+  sunxi: remove CONFIG_MACPWR
+  pinctrl: sunxi: move pinctrl code
+  pinctrl: sunxi: add GPIO in/out wrappers
+  pinctrl: sunxi: remove struct sunxi_gpio
+  pinctrl: sunxi: remove GPIO_EXTRA_HEADER
+  pinctrl: sunxi: move PIO_BASE into sunxi_gpio.h
+  pinctrl: sunxi: add new D1 pinctrl support
+  sunxi: introduce NCAT2 generation model
+  pinctrl: sunxi: add Allwinner D1 pinctrl description
+  sunxi: clock: D1/R528: Enable PLL LDO during PLL1 setup
+  sunxi: clock: support D1/R528 PLL6 clock
+  Kconfig: sunxi: prepare for using drivers/ram/sunxi
+  sunxi: add R528/T113-s3/D1(s) DRAM initialisation code
+  sunxi: add Allwinner R528/T113 SoC support
+  sunxi: refactor serial base addresses to avoid asm/arch/cpu.h
+  sunxi: add MangoPi MQ-R board support
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU2ciQACgkQFHw5/5Y0
-tyw2tgv/WP4E98JGLy2Os2rFaGMA3mDbEUzferH403Vw+Y4cLbYF2E5o9oZvzSxs
-tuHsc5QPd6RX6t6QKn831grVfxL24MuAGzOt4jkAgAsh3u9i0TmZT4zAnOrDRsHM
-9LNAgxkB72svm288vIqS3um3PhtWq6sk2YSHUhWjPgLkSxynMn+IsstqqklxMkmK
-43NbIgFuVKW02CAKJzkjVyxbsPSGlxHx9lLk51PMiXkzDzkp7FXqHCvDLY0hHwx3
-VC+pHJ4hJAZ44MDmF5n8IKhQhMLRj1WrnDtqfdW4BbuBEOij8NyVSngikhT3ib9j
-RNiticeAv5fvc4GAv0taDbMLAqAJg8N+cvfTlv3QA0O7MlTEBzv2Bm97HDsCKGjq
-veMa0SUpQeR2ZDSUWN4RbM5e5ThIBkoE0YJMaguHCLipH8IGq2qTPevbAozfM0qX
-nuPZ5jas2FCGhFk+NjThP6sRdzi5rKBSQz8hSoBOQSirgU7kGoq+jgJndqEb01Xs
-/xPfUscS
-=wZBK
------END PGP SIGNATURE-----
+Okhunjon Sobirjonov (1):
+  sunxi: R528: add SMHC2 pin pull ups support
 
---WKRXK5v7DS7zsp+O--
+Sam Edwards (4):
+  sunxi: psci: clean away preprocessor macros
+  sunxi: psci: refactor register access to separate functions
+  sunxi: psci: stop modeling register layout with C structs
+  sunxi: psci: implement PSCI on R528
+
+Samuel Holland (1):
+  clk: sunxi: Add support for the D1 CCU
+
+ arch/arm/Kconfig                              |    3 +-
+ arch/arm/cpu/armv7/Kconfig                    |    3 +-
+ arch/arm/cpu/armv7/sunxi/psci.c               |  190 ++-
+ arch/arm/cpu/armv7/sunxi/sram.c               |    1 +
+ arch/arm/cpu/armv8/fel_utils.S                |    1 +
+ arch/arm/dts/Makefile                         |    2 +
+ arch/arm/dts/sunxi-u-boot.dtsi                |    7 +
+ arch/arm/include/asm/arch-sunxi/boot0.h       |    2 +
+ arch/arm/include/asm/arch-sunxi/clock.h       |    3 +-
+ .../include/asm/arch-sunxi/clock_sun50i_h6.h  |   12 +-
+ arch/arm/include/asm/arch-sunxi/cpu.h         |    2 +
+ arch/arm/include/asm/arch-sunxi/cpu_sun4i.h   |   17 -
+ .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |    7 -
+ arch/arm/include/asm/arch-sunxi/cpu_sun9i.h   |    9 -
+ .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  |   39 +
+ arch/arm/include/asm/arch-sunxi/cpucfg.h      |   67 -
+ arch/arm/include/asm/arch-sunxi/mmc.h         |    2 +-
+ arch/arm/include/asm/arch-sunxi/prcm.h        |    2 +-
+ arch/arm/include/asm/arch-sunxi/serial.h      |   32 +
+ arch/arm/include/asm/arch-sunxi/timer.h       |    2 +-
+ arch/arm/mach-sunxi/Kconfig                   |   42 +-
+ arch/arm/mach-sunxi/Makefile                  |    2 +-
+ arch/arm/mach-sunxi/board.c                   |   31 +-
+ arch/arm/mach-sunxi/clock_sun50i_h6.c         |   45 +-
+ arch/arm/mach-sunxi/cpu_info.c                |    2 +
+ arch/arm/mach-sunxi/dram_suniv.c              |    2 +-
+ arch/arm/mach-sunxi/gtbus_sun9i.c             |    1 +
+ arch/arm/mach-sunxi/pinmux.c                  |   78 -
+ arch/arm/mach-sunxi/spl_spi_sunxi.c           |    1 +
+ arch/arm/mach-sunxi/timer.c                   |    1 +
+ board/sunxi/board.c                           |   34 +-
+ board/sunxi/chip.c                            |    2 +-
+ common/spl/Kconfig                            |    3 +-
+ configs/A10-OLinuXino-Lime_defconfig          |    1 -
+ configs/A20-OLinuXino-Lime2-eMMC_defconfig    |    1 -
+ configs/A20-OLinuXino-Lime2_defconfig         |    1 -
+ configs/A20-OLinuXino-Lime_defconfig          |    1 -
+ configs/A20-OLinuXino_MICRO-eMMC_defconfig    |    1 -
+ configs/A20-OLinuXino_MICRO_defconfig         |    1 -
+ configs/A20-Olimex-SOM-EVB_defconfig          |    1 -
+ configs/A20-Olimex-SOM204-EVB-eMMC_defconfig  |    1 -
+ configs/A20-Olimex-SOM204-EVB_defconfig       |    1 -
+ configs/Bananapi_M2_Ultra_defconfig           |    1 -
+ configs/Bananapi_defconfig                    |    1 -
+ configs/Bananapro_defconfig                   |    1 -
+ configs/Cubieboard2_defconfig                 |    1 -
+ configs/Cubieboard_defconfig                  |    1 -
+ configs/Cubietruck_defconfig                  |    1 -
+ configs/Itead_Ibox_A20_defconfig              |    1 -
+ configs/Lamobo_R1_defconfig                   |    2 -
+ configs/Linksprite_pcDuino3_Nano_defconfig    |    1 -
+ configs/Linksprite_pcDuino3_defconfig         |    1 -
+ configs/Mele_A1000_defconfig                  |    1 -
+ configs/Orangepi_defconfig                    |    1 -
+ configs/Orangepi_mini_defconfig               |    1 -
+ configs/Sinovoip_BPI_M3_defconfig             |    1 -
+ configs/bananapi_m1_plus_defconfig            |    1 -
+ configs/bananapi_m2_plus_h3_defconfig         |    1 -
+ configs/bananapi_m2_plus_h5_defconfig         |    1 -
+ configs/i12-tvbox_defconfig                   |    1 -
+ configs/jesurun_q5_defconfig                  |    1 -
+ configs/mangopi_mq_r_defconfig                |   15 +
+ configs/mixtile_loftq_defconfig               |    1 -
+ configs/nanopi_m1_plus_defconfig              |    1 -
+ configs/nanopi_neo_plus2_defconfig            |    1 -
+ configs/nanopi_r1s_h5_defconfig               |    1 -
+ configs/orangepi_pc2_defconfig                |    1 -
+ configs/orangepi_plus2e_defconfig             |    1 -
+ configs/orangepi_plus_defconfig               |    3 +-
+ configs/orangepi_win_defconfig                |    1 -
+ configs/pine_h64_defconfig                    |    1 -
+ configs/zeropi_defconfig                      |    1 -
+ drivers/Makefile                              |    1 +
+ drivers/ata/ahci_sunxi.c                      |    9 +
+ drivers/clk/sunxi/Kconfig                     |    7 +
+ drivers/clk/sunxi/Makefile                    |    1 +
+ drivers/clk/sunxi/clk_d1.c                    |   84 +
+ drivers/clk/sunxi/clk_sunxi.c                 |    5 +
+ drivers/gpio/Kconfig                          |    7 +
+ drivers/gpio/axp_gpio.c                       |    1 +
+ drivers/gpio/sunxi_gpio.c                     |  189 ++-
+ drivers/i2c/mvtwsi.c                          |    3 +-
+ drivers/i2c/sun6i_p2wi.c                      |    2 +-
+ drivers/i2c/sun8i_rsb.c                       |    2 +-
+ drivers/mmc/sunxi_mmc.c                       |    9 +-
+ drivers/net/sun8i_emac.c                      |    7 +
+ drivers/net/sunxi_emac.c                      |   38 +
+ drivers/pinctrl/sunxi/Kconfig                 |    5 +
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c         |   47 +-
+ drivers/ram/Kconfig                           |    3 +-
+ drivers/ram/Makefile                          |    3 +
+ drivers/ram/sunxi/Kconfig                     |   60 +
+ drivers/ram/sunxi/Makefile                    |    3 +
+ drivers/ram/sunxi/dram_sun20i_d1.c            | 1441 +++++++++++++++++
+ drivers/ram/sunxi/dram_sun20i_d1.h            |   73 +
+ drivers/video/hitachi_tx18d42vm_lcd.c         |    1 +
+ drivers/video/ssd2828.c                       |    1 -
+ drivers/video/sunxi/sunxi_display.c           |    1 +
+ drivers/video/sunxi/sunxi_lcd.c               |    1 +
+ include/configs/sunxi-common.h                |    2 +-
+ .../arch-sunxi/gpio.h => include/sunxi_gpio.h |   83 +-
+ 101 files changed, 2330 insertions(+), 462 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
+ delete mode 100644 arch/arm/include/asm/arch-sunxi/cpucfg.h
+ create mode 100644 arch/arm/include/asm/arch-sunxi/serial.h
+ delete mode 100644 arch/arm/mach-sunxi/pinmux.c
+ create mode 100644 configs/mangopi_mq_r_defconfig
+ create mode 100644 drivers/clk/sunxi/clk_d1.c
+ create mode 100644 drivers/ram/sunxi/Kconfig
+ create mode 100644 drivers/ram/sunxi/Makefile
+ create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.c
+ create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.h
+ rename arch/arm/include/asm/arch-sunxi/gpio.h => include/sunxi_gpio.h (75%)
+
+-- 
+2.25.1
+
