@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12156C004C0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 15:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E631C004C0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 15:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C944871A2;
-	Mon, 23 Oct 2023 17:37:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id DEFF38790C;
+	Mon, 23 Oct 2023 17:37:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="pp/Ud2OS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J6pZBBTa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ACEE877C2; Mon, 23 Oct 2023 17:37:39 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C583D8792C; Mon, 23 Oct 2023 17:37:52 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9CA387073
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 17:37:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD8EB87929
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 17:37:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 1546fb2f-71ba-11ee-b94e-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 1546fb2f-71ba-11ee-b94e-005056992ed3;
- Mon, 23 Oct 2023 17:37:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=RORPlbKodT0/9YpKReTen+UuQrCYGXD8m0fA7Cpg5po=;
- b=pp/Ud2OSqpJXvfsXCRIWXBZoMpUW8OGma5o0hG5vF0BrZqp9ggkha5CdnU1u1dkwTVPVVXFqbDbw3
- 4I32kStoQ3umytBcn1d2YSET2FxuC4IYjemPFoAhVsUEjbC+h7gGt9fwIU+HjrNvsYvPPq5rwruIQu
- J1sDevLQMZ5Dm2ZK4+SWwJz6+Ukb3wssnkkAvXdZ2nNEQjduDO+UiRUTelGcccbSB5P3lI2G9rXpoE
- 4XANn0v8TzBSn/q395oAPOxuJsK6RFotg1pO7BaBdkEo+ebzUn+HtIEvHK0qVo4mgKDRZR6YTrUkbr
- OSrP5kvIiOnBCL0isP1YnPPUoEafs5A==
-X-KPN-MID: 33|BmINb15qSA7phltsJTtEpecNFe7TZzciyijUZvSzw9sKfabW8waG6y5I84JuJpN
- Hqz1L+SOQIIp1Z06ygU76ZTAejBW1ZnwXMFdeEBK6PM4=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|BrAcXLAY/WN6ZwKfN3/uxCAGL1k3t1Y0iKT85u3d9RclKQR7xgsoxtioQUXvVmI
- RBv4eN0FjtlKTnVAewj5L9w==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 15f90fd2-71ba-11ee-9dc8-00505699772e;
- Mon, 23 Oct 2023 17:37:34 +0200 (CEST)
-Date: Mon, 23 Oct 2023 17:37:34 +0200
-Message-Id: <87h6mhqri9.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@google.com>
-Cc: heinrich.schuchardt@canonical.com, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de, dianders@google.com, trini@konsulko.com
-In-Reply-To: <CAPnjgZ3_WSS+Z2xsRTvf-7ChPN42OVLgLf8ZvGv=2FVrNuHkhA@mail.gmail.com>
- (message from Simon Glass on Mon, 23 Oct 2023 00:08:40 -0700)
-Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
-References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ3fdWAUbZb7kbWfEZvFvuh79LmWpmbOdRhEk=qw2PTbcg@mail.gmail.com>
- <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
- <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
- <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
- <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
- <ea1ba7c2-7f9c-4702-a6da-efb728771e24@canonical.com>
- <20231020162410.GK3119521@bill-the-cat>
- <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
- <7481371f-657d-46d6-b8e7-74da7a200ee9@canonical.com>
- <CAPnjgZ3_WSS+Z2xsRTvf-7ChPN42OVLgLf8ZvGv=2FVrNuHkhA@mail.gmail.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d9a58f5f33dso3189297276.1
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 08:37:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698075469; x=1698680269; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BltpwlQ6LQd8rolBS5fScNZbD8yPUJtgbXz5MQndyDw=;
+ b=J6pZBBTapt2kVJxGsiJDs7iVNJsVLEdL9JrWdgQB6VBwzKXO9kdh4GH6R2jO3lSbbR
+ VcODi86uFpz148eC8P9caRHq7UESC7WiIqrEAmjpc76AEsB+Zaq3up2X2HLa7102jlqA
+ taWDkW7qaGyl69DN0o6XLUNIOWrGfmAvykSFU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698075469; x=1698680269;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BltpwlQ6LQd8rolBS5fScNZbD8yPUJtgbXz5MQndyDw=;
+ b=Fix/u7GD1HNwuBBzdHH3/M00BqrtupJsXM3W4t+h+n/rx0EHKlxou9piRja+3fSbIX
+ 0GUo0gWy0uqNII99p7be2cjuV3QE1jkw59QnuBfhHkWu7Acc66RjL0H99dJr6zJyR9of
+ k0gslsIxGoCHjg9K/6MF+bRkIdWTjwZtOpHBi9KFidOT0nwc8FYhsOMxbINTkhbmViqR
+ wNlS2qIZP3FSg0gUb9Y8SUr/9Kq6E6ClMFV+VGkCWUA+Nqc3nSqfZIiEfwdapi764aIz
+ xgU8hI/0rGkrcmpqpXuUjfJi54+RPp0/ZTfaMtShJJDwCDpt4rFp892+6592VGXhCWrW
+ 1bng==
+X-Gm-Message-State: AOJu0Yygv9F4xjLupKaWEUwAhzHxLR2TQ9DUBp3p+xjbZo5yfwhbOI2F
+ FsftWZbvr+s6kAMvRrFvRdPi/lKcGXF2DqCByGLrGw==
+X-Google-Smtp-Source: AGHT+IGSe2k8xWkN42a5ZUsTkoalb0DUpuzEyN3Av4WOSXCH0tsYEXvj0WU4HCcW+GwzARqfDaDleA==
+X-Received: by 2002:a81:6c08:0:b0:5a7:b942:c3fe with SMTP id
+ h8-20020a816c08000000b005a7b942c3femr10161008ywc.16.1698075469195; 
+ Mon, 23 Oct 2023 08:37:49 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-3cd1-c3ac-4562-deca.res6.spectrum.com.
+ [2603:6081:7b00:6400:3cd1:c3ac:4562:deca])
+ by smtp.gmail.com with ESMTPSA id
+ x188-20020a0deec5000000b005a815346d95sm3209750ywe.71.2023.10.23.08.37.48
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Oct 2023 08:37:48 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] CI: Re-enable maintainer check
+Date: Mon, 23 Oct 2023 11:37:47 -0400
+Message-Id: <20231023153747.1967540-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,35 +86,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@google.com>
-> Date: Mon, 23 Oct 2023 00:08:40 -0700
-> 
-> > > fdt_node_check_compatible() does most of the work...then you need to
-> > > check which FDT has the most specific match (i.e. latest in the string
-> > > list). That handles things like board revisions, variants, etc.
-> > >
-> > > My concern is about adding a feature when there is already a defined
-> > > spec and mechanism for this to work. What happens when we load the
-> > > file and the compatible is wrong?
-> > >
-> > > At best, I see the filename as a hint.
-> > >
-> > > [Perhaps this is the wrong time to ask, but why are kernels +DT not
-> > > shipped in FIT on ARM?]
-> >
-> > FIT is U-Boot specific. For Linux distributions it is easier to use a
-> > firmware agnostic method of booting.
-> 
-> I'd like to suggest that distros use both. Then U-Boot can work as it
-> was designed and we can avoid these work-arounds.
-> 
-> FIT is actually implemented in various other bootloaders. In fact
-> perhaps grub is the only one that doesn't? I can't think of any
-> others.
+At this point we have all of the defconfigs maintained again, so
+re-enable the check to prevent further regressions.
 
-Simon, please stop pushing this.  OpenBSD's bootloader does not
-support FIT and we have no interest in supporting it.  Our users
-expect to be able to just copy a new kernel in place and use it and
-our OS upgrade procedure depends on this as well.  And this is
-incompatble with FIT.  I've explained this about a dozen times to you
-now.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ .azure-pipelines.yml | 2 +-
+ .gitlab-ci.yml       | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 6f91553e8613..eb9353fc3dcf 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -91,7 +91,7 @@ stages:
+       options: $(container_option)
+     steps:
+       - script: |
+-          ./tools/buildman/buildman --maintainer-check || exit 0
++          ./tools/buildman/buildman --maintainer-check
+ 
+   - job: tools_only
+     displayName: 'Ensure host tools and env tools build'
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 6decdfdee334..1e11b5a6fea8 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -177,7 +177,7 @@ docs:
+ Check for configs without MAINTAINERS entry:
+   extends: .testsuites
+   script:
+-    - ./tools/buildman/buildman --maintainer-check || exit 0
++    - ./tools/buildman/buildman --maintainer-check
+ 
+ # Ensure host tools build
+ Build tools-only and envtools:
+-- 
+2.34.1
+
