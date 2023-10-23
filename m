@@ -4,76 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B50AC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 177D1C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 07:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EACB3878A5;
-	Mon, 23 Oct 2023 09:05:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A807874BD;
+	Mon, 23 Oct 2023 09:05:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cb+4h6Bl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e/tM1zLs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 403B8874C0; Mon, 23 Oct 2023 09:05:44 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id AA087871A2; Mon, 23 Oct 2023 09:05:48 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77A0B87794
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:05:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BEC37874BD
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 09:05:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-99c1c66876aso430315766b.2
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:05:41 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-9ada2e6e75fso440669366b.2
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 00:05:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698044741; x=1698649541; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698044746; x=1698649546; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DHSAk6swL/KhTyxHXTJ95lEtzcVb3p0L1Pg/PcUxVK8=;
- b=Cb+4h6Blvj6AfEYZJc7HaD4ONVqesCeM4LdUP1l3iKFJ7X4ikFos2ZbpeM2msUI8nY
- p+msg0H4/RaKaHN35Gt6AkX4ToWv+FE3kF9dtUulKSKcXBO4FgTrxjdue8a6QeHJNItV
- drS0xFErzW1ndP+12tCTYw2Ysn+zf6nKl6Los=
+ bh=HYa2P92nZQifV5u/+d10+fEuWv9TCopYB3HJ7P7QdaM=;
+ b=e/tM1zLsq2VQ2kV8cWlYemgL7gHnNbUqEDmiKlqVR590Of9EwTR1hIkkkQphIwnPeS
+ NWgRI0QW3laBCtWdaGjHMIjWxsmx7nIXL1ZoFvBDBXY0sTqL1e4Q/31qcRyGVFm/3fGT
+ oMNdOOdpXFSkp8eloxhykvxR6TxaOEih8mt8k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698044741; x=1698649541;
+ d=1e100.net; s=20230601; t=1698044746; x=1698649546;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DHSAk6swL/KhTyxHXTJ95lEtzcVb3p0L1Pg/PcUxVK8=;
- b=A+NK7e+v5RFRjLkex4n0bNHf4qDlhDPxH4kBRl2Q/Dqy+vs2HPDmyN9xvmuePU4G4Y
- Cf0pSaH1Fm50P2W8Zng5JWXYyrNgAy2nYgAnc4n39Ey/d4E85ys4w4afwdiuchsOupBv
- GyBNq5OwPdt/jc2HXV/Bk0yo75pXs3wroUZ7pnBHE1xjUenm5LZYTIfMEz7gH6GuIACl
- DB6624+ZWF7gI/vXA6L1UTVTJ5lVqmqqPnXbTQs6pNbvtuLghjTxcEabmMo0PsL3Y4Ao
- Hdrv9U2YRN05Y9OGL5Ql3IECvvxukafPbo4dOfZy4Yyx4HBrnYVWdnZ3fRP2HFI9hyEW
- hiDQ==
-X-Gm-Message-State: AOJu0YwtMfyA6jPdVddGEk0wM8r3a7n4H6oZEEBYwPpSNhiCdG5De+xA
- X7xv5sdsP8rJpGPi+vJ9Is6E5Oy3ifuK1IXVRFFrjndaXoKlJq3P2/jyMU/f
-X-Google-Smtp-Source: AGHT+IF03ze1djgzj0b+CKadcd30lSgNfWXbXIpjzckI15c4vBlNoTEFEyFGNmrrGf3tTH/FFlT8oYC6/GPpSHzlZJs=
-X-Received: by 2002:a17:907:9623:b0:9ae:6da8:1819 with SMTP id
- gb35-20020a170907962300b009ae6da81819mr5840396ejc.48.1698044740739; Mon, 23
- Oct 2023 00:05:40 -0700 (PDT)
+ bh=HYa2P92nZQifV5u/+d10+fEuWv9TCopYB3HJ7P7QdaM=;
+ b=A/EgNLCTpAmwMOLTRFs+QSQLF8C4Fa76A0S1E2cVZqDzu7AUIstGrQh5TNnG5sx+Vu
+ eUwNzIZVIWB4B+RGHEiCl1ddKloYHjvz4u078iurL94TSQF3OIgv2zqoS2F1ayBinwES
+ jwhpgy7fc+5P6xzWl2pVLezS3ygj22WGRHdzJE8MM9I5uQ0wWAVbfHC0NSlMGhezKan3
+ UJh++MhOKshHEd1j66YCNTjYpZIQAzPUWZ0rwowgmcCl4SSDKkX7mV2IHLFVOUDZuakm
+ 8puUS5awwaL7iHAufyhrtpelHlU4UDppl/t+3DHkqBzQ3nI6fT8QvRXB2hA/h3IkHPmo
+ wHuw==
+X-Gm-Message-State: AOJu0YwYl6Qy14f+xBwUD3KWPwLIri2GDwlSefYv9xgiI5xfvnFRFRp8
+ PEUV+nDZcugr++WqjPw9jr6nX0nq2OkEzow/HgkkJEi4B5TRG9lO6xzccGGB
+X-Google-Smtp-Source: AGHT+IGAb8MbmUFuvoThdFhORT6z3OLGefz8DsVimJeakWbwXc/Yq6MHcQZtQM7LnH0OUuH9DgI5mREEIOOXmGtJDGg=
+X-Received: by 2002:a17:907:d38a:b0:9ad:ef08:1f32 with SMTP id
+ vh10-20020a170907d38a00b009adef081f32mr5291479ejc.37.1698044746237; Mon, 23
+ Oct 2023 00:05:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231017140925.GB3119521@bill-the-cat>
- <cac1ad58-5a7a-41fd-84db-f972609f95c6@gmx.de>
- <CAPnjgZ2tJEBNWsx_tLDTWyQ+xNyLj6feDenqEcCe+t3JNEdv8g@mail.gmail.com>
- <ZTHKKurIp67bx2MJ@octopus>
- <CAPnjgZ1DrzW=2M4UG8aPYmN+MedJODuj5-zE0Y9nVfu-Scpsxw@mail.gmail.com>
- <20231021182612.GA53397@bill-the-cat>
- <49cc3e85-bcc1-4a31-a8e0-293e6ecd952b@gmx.de>
- <20231022142922.GA496310@bill-the-cat> <20231022145857.GB496310@bill-the-cat>
- <CAPnjgZ2fHLrUrqNMFhzK-EbO8bGcgg=1aC9jVPL3mHt_g2xjiA@mail.gmail.com>
- <20231022234507.GE496310@bill-the-cat>
-In-Reply-To: <20231022234507.GE496310@bill-the-cat>
+References: <20231019150105.714407-24-trini@konsulko.com>
+ <20231020215302.3511807-1-trini@konsulko.com>
+ <20231020215302.3511807-2-trini@konsulko.com>
+ <CAPnjgZ2jgfJ4GXR+2qt5Qi=MOc=kubLrMLgYBGuO_trinUHnag@mail.gmail.com>
+ <20231021183438.GB53397@bill-the-cat>
+In-Reply-To: <20231021183438.GB53397@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 23 Oct 2023 00:05:28 -0700
-Message-ID: <CAPnjgZ14he2OtnvfEXsbN1FxGz34twDwAMROM=61kcOJpGvDXw@mail.gmail.com>
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Date: Mon, 23 Oct 2023 00:05:34 -0700
+Message-ID: <CAPnjgZ2bKVTwEKcjeawootxXr-+iEmiowtctA52-=v07p+xBUQ@mail.gmail.com>
+Subject: Re: [v4.1 2/2] CI, pytest: Add a test for sandbox without LTO
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,182 +86,113 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sun, 22 Oct 2023 at 16:45, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 21 Oct 2023 at 11:34, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Oct 22, 2023 at 02:55:32PM -0700, Simon Glass wrote:
-> > Hi,
-> >
-> > On Sun, 22 Oct 2023 at 07:59, Tom Rini <trini@konsulko.com> wrote:
+> On Sat, Oct 21, 2023 at 08:43:00AM -0700, Simon Glass wrote:
+> > On Fri, 20 Oct 2023 at 14:53, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sun, Oct 22, 2023 at 10:29:22AM -0400, Tom Rini wrote:
-> > > > On Sun, Oct 22, 2023 at 08:08:11AM +0200, Heinrich Schuchardt wrote:
-> > > > > On 10/21/23 20:26, Tom Rini wrote:
-> > > > > > On Sat, Oct 21, 2023 at 08:43:08AM -0700, Simon Glass wrote:
-> > > > > > > Hi,
-> > > > > > >
-> > > > > > > On Thu, 19 Oct 2023 at 17:30, AKASHI Takahiro
-> > > > > > > <takahiro.akashi@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > On Thu, Oct 19, 2023 at 08:01:11AM -0600, Simon Glass wrote:
-> > > > > > > > > Hi Heinrich,
-> > > > > > > > >
-> > > > > > > > > On Wed, 18 Oct 2023 at 06:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On 10/17/23 16:09, Tom Rini wrote:
-> > > > > > > > > > > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
-> > > > > > > > > > > > available, add it as an explicit dependency.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > ---
-> > > > > > > > > > > >
-> > > > > > > > > > > > (no changes since v2)
-> > > > > > > > > > > >
-> > > > > > > > > > > > Changes in v2:
-> > > > > > > > > > > > - Add new patch to update EFI_LOADER to depend on DM_ETH
-> > > > > > > > > > > >
-> > > > > > > > > > > >    lib/efi_loader/Kconfig | 1 +
-> > > > > > > > > > > >    1 file changed, 1 insertion(+)
-> > > > > > > > > > > >
-> > > > > > > > > > > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > > > > > > > > > > index 13cad6342c36..fca4b3eef270 100644
-> > > > > > > > > > > > --- a/lib/efi_loader/Kconfig
-> > > > > > > > > > > > +++ b/lib/efi_loader/Kconfig
-> > > > > > > > > > > > @@ -11,6 +11,7 @@ config EFI_LOADER
-> > > > > > > > > > > >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> > > > > > > > > > > >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> > > > > > > > > > > >       depends on BLK
-> > > > > > > > > > > > +    depends on DM_ETH
-> > > > > > > > > > > >       depends on !EFI_APP
-> > > > > > > > > > > >       default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
-> > > > > > > > > > > >       select CHARSET
-> > > > > > > > > > >
-> > > > > > > > > > > Does this work for you Heinrich, or do you want to clarify the
-> > > > > > > > > > > dependencies (and re-organize the code as needed) around networking?
-> > > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > We should be able to boot via EFI on devices without U-Boot network support.
-> > > > > > > > > >
-> > > > > > > > > > We already use IS_ENABLED(CONFIG_NETDEVICES) to avoid invoking
-> > > > > > > > > > eth_get_dev() if there is no network. CONFIG_NETDEVICES=y selects
-> > > > > > > > > > CONFIG_DM_ETH.
-> > > > > > > > > >
-> > > > > > > > > > Why is this not sufficient?
-> > > > > > > > > > Is there a configuration that does not build?
-> > > > > > > > >
-> > > > > > > > > The point of this series is to disable CMDLINE and fix up what breaks.
-> > > > > > > > >
-> > > > > > > > > In this case we have some sort of breakage...perhaps Tom has already
-> > > > > > > > > found it, but otherwise could you take a look?
-> > > > > > > > >
-> > > > > > > > > We should be able to disable NET and LTO in sandbox and still build.
-> > > > > > > > > But this fails at present[1]. You can try it on -master
-> > > > > > > >
-> > > > > > > > Obviously, it would be necessary to enclose efi_dp_from_eth()
-> > > > > > > > with "if defined(CONFIG_NETDEVICES)" (or DM_ETH).
-> > > > > > > > Then, we could drop "depends on DM_ETH".
-> > > > > > >
-> > > > > > > Strange that it only happens on the non-LTO board, though?
-> > > > > >
-> > > > > > There's two issues. The first of which is that I think you need to
-> > > > > > re-check your error exactly? With my series, and LTO also disabled the
-> > > > > > problem is a call to efi_get_image_parameters() as that's defined in
-> > > > > > cmd/bootefi.c, but also only used with cmdline invocations. So we can
-> > > > > > fix that CMDLINE=n && LTO=n case with a IS_ENABLED(CONFIG_CMDLINE)
-> > > > > > around that, and then discard efi_dp_from_name() entirely.
-> > > > > >
-> > > > > > The second issue is that with LTO we more completely find the cases
-> > > > > > where if x() calls y() and y() is undefined but nothing calls x() we can
-> > > > > > just discard x() and not care that y() is undefined.
-> > > > > >
-> > > > >
-> > > > > I will send a patch for function efi_dp_from_eth().
-> > > >
-> > > > There's no problem with efi_dp_from_eth as far as I can tell.
-> > > >
-> > > > > @Simon
-> > > > >
-> > > > > One thing that I don't understand is why we don't let the linker
-> > > > > eliminate the unused functions on the sandbox.
-> > > > >
-> > > > > On other architectures we put each function into a separate text section
-> > > > > and let the linker eliminate the unused text sections:
-> > > > >
-> > > > > arch/riscv/config.mk:29:
-> > > > > PLATFORM_RELFLAGS       += -fno-common -ffunction-sections -fdata-sections
-> > > > > LDFLAGS_u-boot          += --gc-sections -static -pie
-> > > > >
-> > > > > Shouldn't we keep the sandbox close to what other architectures do?
-> > > >
-> > > > Oh my, I didn't realize that sandbox was missing the garbage collection
-> > > > stuff.  Yes, that needs to be fixed first, then we can see what's next
-> > > > to change, as there are some issues (my series first fixed CMDLINE=n on
-> > > > qemu_arm64).
+> > > The primary motivation for having a sandbox without LTO build in CI is
+> > > to ensure that we don't have that option break. We now have the ability
+> > > to run tests of specific options being enabled/disabled, so drop the
+> > > parts of CI that build and test that configuration specifically and add
+> > > a build test instead. We still test that "NO_LTO=1" rather than editing
+> > > the config file works via the ftrace tests.
 > > >
-> > > My super quick pass at enabling
-> > > function-sections/data-sections/gc-sections shows there's nothing
-> > > further needed for CMDLINE=n and LTO=n on sandbox, not even the part I
-> > > was looking at before.
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > This creates a small bisectability gap in CI itself, but I think is more
+> > > reasonable than reworking the introduction of
+> > > test/py/tests/test_sandbox_opts.py
+> > >
+> > > Cc: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >  .azure-pipelines.yml               |  3 ---
+> > >  .gitlab-ci.yml                     | 12 ------------
+> > >  test/py/tests/test_sandbox_opts.py | 10 ++++++++++
+> > >  3 files changed, 10 insertions(+), 15 deletions(-)
 > >
-> > I am not sure about the original reason, but sandbox probably
-> > pre-dates wholesale enabling of gc-sections (I haven't looked). There
-> > is also the issue of whether the host toolchain supports it. Sandbox
-> > is supposed to run on a variety of OS types.
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > Q below
+> >
+> > >
+> > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> > > index 6f91553e8613..65533b36dde4 100644
+> > > --- a/.azure-pipelines.yml
+> > > +++ b/.azure-pipelines.yml
+> > > @@ -287,9 +287,6 @@ stages:
+> > >          sandbox64_clang:
+> > >            TEST_PY_BD: "sandbox64"
+> > >            OVERRIDE: "-O clang-16"
+> > > -        sandbox_nolto:
+> > > -          TEST_PY_BD: "sandbox"
+> > > -          BUILD_ENV: "NO_LTO=1"
+> > >          sandbox_spl:
+> > >            TEST_PY_BD: "sandbox_spl"
+> > >            TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
+> > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > index 6decdfdee334..97c964fb8079 100644
+> > > --- a/.gitlab-ci.yml
+> > > +++ b/.gitlab-ci.yml
+> > > @@ -258,12 +258,6 @@ sandbox with clang test.py:
+> > >      OVERRIDE: "-O clang-16"
+> > >    <<: *buildman_and_testpy_dfn
+> > >
+> > > -sandbox without LTO test.py:
+> > > -  variables:
+> > > -    TEST_PY_BD: "sandbox"
+> > > -    BUILD_ENV: "NO_LTO=1"
+> > > -  <<: *buildman_and_testpy_dfn
+> > > -
+> > >  sandbox64 test.py:
+> > >    variables:
+> > >      TEST_PY_BD: "sandbox64"
+> > > @@ -275,12 +269,6 @@ sandbox64 with clang test.py:
+> > >      OVERRIDE: "-O clang-16"
+> > >    <<: *buildman_and_testpy_dfn
+> > >
+> > > -sandbox64 without LTO test.py:
+> > > -  variables:
+> > > -    TEST_PY_BD: "sandbox64"
+> > > -    BUILD_ENV: "NO_LTO=1"
+> > > -  <<: *buildman_and_testpy_dfn
+> > > -
+> > >  sandbox_spl test.py:
+> > >    variables:
+> > >      TEST_PY_BD: "sandbox_spl"
+> > > diff --git a/test/py/tests/test_sandbox_opts.py b/test/py/tests/test_sandbox_opts.py
+> > > index 91790b3374b4..422b43cb3bc1 100644
+> > > --- a/test/py/tests/test_sandbox_opts.py
+> > > +++ b/test/py/tests/test_sandbox_opts.py
+> > > @@ -18,3 +18,13 @@ def test_sandbox_cmdline(u_boot_console):
+> > >      out = util.run_and_log(
+> > >          cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
+> > >                 '-a', '~CMDLINE', '-o', TMPDIR])
+> > > +
+> > > +@pytest.mark.slow
+> > > +@pytest.mark.boardspec('sandbox')
+> > > +def test_sandbox_lto(u_boot_console):
+> > > +    """Test building sandbox without CONFIG_LTO"""
+> > > +    cons = u_boot_console
+> > > +
+> > > +    out = util.run_and_log(
+> > > +        cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
+> > > +               '-a', '~LTO', '-o', TMPDIR])
+> >
+> > Don't you need sandbox64 here?
 >
-> It doesn't predate gc-sections, we've just never moved it to the
-> top-level Makefiles (and disabled on LTO) like we should have a long
-> time ago.  It's supported by all the compilers we support, and it's a
-> required feature (or, LTO) for U-Boot.
+> No, I don't think it's providing further value to just build sandbox64
+> without LTO. I'm also not 100% sure this patch is really needed in that we're
+> trying to test for "did we disable LTO via make arguments" and in turn
+> only the ftrace test really catches that, as it will fail if we do have
+> LTO enabled, yes?
 
-Remember that the sandbox linker script is special in that it adds to
-the existing default one provided by the toolchain
+Really the test is to make sure that sandbox builds without LTO. With
+the build time being. For development, LTO serves no useful purpose
+and just triples the incremental build time.
 
->
-> > I am also not sure of the point ot it...since it is normally pretty
-> > easy to use Kconfig to control features.
->
-> That's not the point of the feature.  The point is that we can discard
-> unused code without having to rely on #ifdef and __maybe_unused.
-
-That doesn't match with my understanding. An unused static will still
-produce a warning if it is unused.
-
-Re #ifdef, you will still see code discarded with sandbox if  'if
-IS_ENABLED()' is used. It's just that the link-time
-
-Sandbox doesn't really have a need to discard unused code. It doesn't
-make much difference to the binary size, from what I can see, partly
-because we enable as much as we can.
-
-No LTO:
-before: 3652159 220840 126576 3999575 3d0757 /tmp/b/sandbox/u-boot
-after: 3515872 204016 124528 3844416 3aa940 /tmp/b/sandbox/u-boot
-Saving 3.7%
-
-With LTO:
-before: 3391148 212224 124704 3728076 38e2cc /tmp/b/sandbox/u-boot
-after: 3356324 200664 124704 3681692 382d9c /tmp/b/sandbox/u-boot
-Saving 1%
-
-That reflects the fact that LTO is quite a bit more powerful than linker hacks.
-
-The other thing I have noticed over the years is that linker
-discarding can change behaviour when unrelated changes are made. For
-example, if I refactor a function the linker decides that a function
-it calls is now needed, whereas before it was not. That sort of thing
-is annoying with sandbox.
-
->
-> > At least for me 'u-boot -D' doesn't work with Heinrich's patch. Do we
-> > really need to make this change? It will rapidly devolve to the point
-> > that coming back would be extremely painful.
->
-> Do we absolutely need which, gc-sections or LTO? Yes, we do.  And I
-> don't see immediately how that changes --default_fdt ?
-
-I hope that with all the clang effort we might be closer to having
-sandbox behave well with this change. But I still don't see the point.
+I suggest we keep sandbox64 just to prevent a regression on non-LTO,
+but I suspect it is unlikely to happen in practice.
 
 Regards,
-SImon
+Simon
