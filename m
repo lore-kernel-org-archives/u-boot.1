@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32D06C001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 10:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FAA1C001E0
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 10:05:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64162878CF;
-	Mon, 23 Oct 2023 12:02:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 89C48878CE;
+	Mon, 23 Oct 2023 12:05:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="SKxQn9C7";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ZEzEAN+C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C8AB87243; Mon, 23 Oct 2023 12:02:47 +0200 (CEST)
-Received: from mail-m49234.qiye.163.com (mail-m49234.qiye.163.com
- [45.254.49.234])
+ id 52CC6878D4; Mon, 23 Oct 2023 12:05:30 +0200 (CEST)
+Received: from mail-m15567.qiye.163.com (mail-m15567.qiye.163.com
+ [101.71.155.67])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1693F878D1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 12:02:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE37B86CF9
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 12:05:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=SKxQn9C7maL9KtoJKbyaxborxOOqO5EG/ILdBbBBIHmazXuZZzuOaI5Z8CBAQPDyqcaDI0poHm4BHCqh4m+kkE/dxS7I5pj2uOlLWX8Kn/hwVfu7nvasx81Gr4KEOYDbxV7tCRn1fN6xMSHB8KXyQpjHL7p+tDbBRsjJ0RiM98k=;
+ b=ZEzEAN+CdJxl8CnCc1ywgkpHAw3INOdxiv0FjUa7G1rNeRs35NvZcnN+rIv+NCqTPyrmcCtYf9VnJvhW1bTFzLbGGTui30eNUBYYl35aMJJdXqUvQGCv6UkJpmNgznVhiZJXQMnX/epkkO4cMe/mORvid4XMzm0eG1MfV1JxM3Y=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=Y30l5eL8Ted6WM0CMUWv4ia70b1VJv0bXMlnXCbxcOo=;
+ bh=ovYvVVi6DysXAa4lTGOahWxSGPrxxixORVAoxEmAi54=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 80CD9400467;
- Mon, 23 Oct 2023 18:02:17 +0800 (CST)
-Message-ID: <85bef03f-4799-44d7-b85b-07ae94eb808a@rock-chips.com>
-Date: Mon, 23 Oct 2023 18:02:17 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 38CC84003BC;
+ Mon, 23 Oct 2023 18:04:59 +0800 (CST)
+Message-ID: <6533415e-41c9-4d83-9dbe-c16d582078a7@rock-chips.com>
+Date: Mon, 23 Oct 2023 18:04:59 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] rockchip: rk3588-rock-5b: Sync USB3 nodes from
- mainline linux patches
+Subject: Re: [PATCH 3/3] board: rockchip: Add support for RGB30 and RK2023 to
+ RGxx3
 Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Eugen Hristev <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de
-References: <20231017170216.1627789-1-jonas@kwiboo.se>
- <20231017170216.1627789-5-jonas@kwiboo.se>
+To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
+Cc: philipp.tomsich@vrull.eu, sjg@chromium.org,
+ Chris Morgan <macromorgan@hotmail.com>
+References: <20231017182414.321411-1-macroalpha82@gmail.com>
+ <20231017182414.321411-4-macroalpha82@gmail.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231017170216.1627789-5-jonas@kwiboo.se>
+In-Reply-To: <20231017182414.321411-4-macroalpha82@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUkdT1ZIQx0aHxlLGUseH0JVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkpOSVZKHk4dSxlLQkwaSEJVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8b5bfc37602eb3kusn80cd9400467
+X-HM-Tid: 0a8b5bfeae592eb3kusn38cc84003bc
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NhQ6LDo4TzwyPTgNIhhNQiEP
- NU4KCRBVSlVKTUJDS05OSEhDTUtPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKT0JKTDcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MTI6DTo6SzwyMTg2MgoQFTY1
+ AT5PFEhVSlVKTUJDS05OT0JCQ0lNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIS05NNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,456 +76,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2023/10/18 01:02, Jonas Karlman wrote:
-> The device tree for rk3588 and rock-5b contain usb3 nodes that have
-> deviated too much from current state of submitted mainline linux usb3
-> patches, see [1].
+On 2023/10/18 02:24, Chris Morgan wrote:
+> From: Chris Morgan <macromorgan@hotmail.com>
 >
-> Sync usb3 related nodes from latest patches and collaboras rk3588 tree
-> so that dwc3-generic driver can be updated to include support for the
-> rockchip,rk3588-dwc3 compatible in the future, use rockchip,rk3568-dwc3
-> compatible until final node is merged in linux maintainer tree.
+> Add support for the Powkiddy RK2023 and RGB30 to the Anbernic RGxx3.
+> While these devices are manufactured by Powkiddy instead of Anbernic,
+> the hardware is so similar they can all use the same bootloader.
 >
-> [1] https://lore.kernel.org/lkml/20231009172129.43568-1-sebastian.reichel@collabora.com/
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 
 > ---
-> v2:
-> - Use rockchip,rk3568-dwc3 compatible so that driver change can be
->    submitted in a separate series.
+>   board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 16 ++++++++++++++++
+>   1 file changed, 16 insertions(+)
 >
-> RK3588 USB 3.0 binding update [2] has not been merged for linux v6.7.
-> Our options is to update these nodes to latest submitted state, as done
-> in this patch, or to remove them until a sync of final nodes can be done.
->
-> [2] https://lore.kernel.org/all/20231009172129.43568-2-sebastian.reichel@collabora.com/
->
->   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 148 +++++++-----------------
->   arch/arm/dts/rk3588-u-boot.dtsi         |  39 +++----
->   arch/arm/dts/rk3588s-u-boot.dtsi        |  68 ++++++-----
->   configs/rock5b-rk3588_defconfig         |   1 -
->   4 files changed, 99 insertions(+), 157 deletions(-)
->
-> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> index 3f390ef26a3f..b595ddef7028 100644
-> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -19,38 +19,10 @@
->   		regulator-min-microvolt = <12000000>;
->   		regulator-max-microvolt = <12000000>;
->   	};
-> +};
->   
-> -	vcc5v0_usbdcin: vcc5v0-usbdcin {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "vcc5v0_usbdcin";
-> -		regulator-always-on;
-> -		regulator-boot-on;
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -		vin-supply = <&vcc12v_dcin>;
-> -	};
-> -
-> -	vcc5v0_usb: vcc5v0-usb {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "vcc5v0_usb";
-> -		regulator-always-on;
-> -		regulator-boot-on;
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -		vin-supply = <&vcc5v0_usbdcin>;
-> -	};
-> -
-> -	vbus5v0_typec: vbus5v0-typec {
-> -		compatible = "regulator-fixed";
-> -		regulator-name = "vbus5v0_typec";
-> -		regulator-min-microvolt = <5000000>;
-> -		regulator-max-microvolt = <5000000>;
-> -		enable-active-high;
-> -		gpio = <&gpio2 RK_PB6 GPIO_ACTIVE_HIGH>;
-> -		vin-supply = <&vcc5v0_usb>;
-> -		pinctrl-names = "default";
-> -		pinctrl-0 = <&typec5v_pwren>;
-> -	};
-> +&combphy2_psu {
-> +	status = "okay";
->   };
->   
->   &fspim2_pins {
-> @@ -58,13 +30,9 @@
->   };
->   
->   &pinctrl {
-> -	usb-typec {
-> +	usb {
->   		usbc0_int: usbc0-int {
-> -			rockchip,pins = <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>;
-> -		};
-> -
-> -		typec5v_pwren: typec5v-pwren {
-> -			rockchip,pins = <2 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-> +			rockchip,pins = <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
->   		};
->   	};
->   };
-> @@ -97,7 +65,6 @@
->   };
->   
->   &u2phy0_otg {
-> -	rockchip,typec-vbus-det;
->   	status = "okay";
->   };
->   
-> @@ -109,25 +76,17 @@
->   	status = "okay";
->   };
->   
-> -&usb2phy2_grf {
-> +&usbdp_phy1 {
->   	status = "okay";
->   };
->   
-> -&usb2phy3_grf {
-> +&usbdp_phy1_u3 {
->   	status = "okay";
->   };
->   
-> -&usb_host0_ehci {
-> -	companion = <&usb_host0_ohci>;
-> -};
-> -
-> -&usb_host1_ehci {
-> -	companion = <&usb_host1_ohci>;
-> -};
-> -
->   &usbdp_phy0 {
->   	orientation-switch;
-> -	svid = <0xff01>;
-> +	mode-switch;
->   	sbu1-dc-gpios = <&gpio4 RK_PA6 GPIO_ACTIVE_HIGH>;
->   	sbu2-dc-gpios = <&gpio4 RK_PA7 GPIO_ACTIVE_HIGH>;
->   	status = "okay";
-> @@ -135,14 +94,15 @@
->   	port {
->   		#address-cells = <1>;
->   		#size-cells = <0>;
-> -		usbdp_phy0_orientation_switch: endpoint@0 {
-> +
-> +		usbdp_phy0_typec_ss: endpoint@0 {
->   			reg = <0>;
-> -			remote-endpoint = <&usbc0_orien_sw>;
-> +			remote-endpoint = <&usbc0_ss>;
->   		};
->   
-> -		usbdp_phy0_dp_altmode_mux: endpoint@1 {
-> +		usbdp_phy0_typec_sbu: endpoint@1 {
->   			reg = <1>;
-> -			remote-endpoint = <&dp_altmode_mux>;
-> +			remote-endpoint = <&usbc0_sbu>;
->   		};
->   	};
->   };
-> @@ -151,84 +111,53 @@
->   	status = "okay";
->   };
->   
-> -&usbdp_phy1 {
-> -	rockchip,dp-lane-mux = <2 3>;
-> +&usb_host0_xhci {
-> +	usb-role-switch;
->   	status = "okay";
-> -};
->   
-> -&usbdp_phy1_u3 {
-> -	status = "okay";
-> -};
-> +	port {
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
->   
-> -&usbdrd3_0 {
-> -	status = "okay";
-> +		usb_host0_xhci_drd_sw: endpoint {
-> +			remote-endpoint = <&usbc0_hs>;
-> +		};
-> +	};
->   };
->   
-> -&usbdrd3_1 {
-> +&usb_host1_xhci {
->   	status = "okay";
->   };
->   
-> -&usbdrd_dwc3_0 {
-> -	usb-role-switch;
-> -
-> -	port {
-> -		#address-cells = <1>;
-> -		#size-cells = <0>;
-> -		dwc3_0_role_switch: endpoint@0 {
-> -			reg = <0>;
-> -			remote-endpoint = <&usbc0_role_sw>;
-> -		};
-> -	};
-> +&usb_host2_xhci {
-> +	status = "okay";
->   };
->   
->   &i2c4 {
-> +	pinctrl-names = "default";
->   	pinctrl-0 = <&i2c4m1_xfer>;
->   	status = "okay";
->   
-> -	usbc0: fusb302@22 {
-> +	usbc0: usb-typec@22 {
->   		compatible = "fcs,fusb302";
->   		reg = <0x22>;
->   		interrupt-parent = <&gpio3>;
->   		interrupts = <RK_PB4 IRQ_TYPE_LEVEL_LOW>;
->   		pinctrl-names = "default";
->   		pinctrl-0 = <&usbc0_int>;
-> -		vbus-supply = <&vbus5v0_typec>;
-> +		vbus-supply = <&vcc12v_dcin>;
->   		status = "okay";
->   
-> -		ports {
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> -
-> -			port@0 {
-> -				reg = <0>;
-> -				usbc0_role_sw: endpoint@0 {
-> -					remote-endpoint = <&dwc3_0_role_switch>;
-> -				};
-> -			};
-> -		};
-> -
->   		usb_con: connector {
->   			compatible = "usb-c-connector";
->   			label = "USB-C";
->   			data-role = "dual";
-> -			power-role = "dual";
-> +			power-role = "sink";
->   			try-power-role = "sink";
->   			op-sink-microwatt = <1000000>;
->   			sink-pdos =
-> -				<PDO_FIXED(5000, 1000, PDO_FIXED_USB_COMM)>;
-> -			source-pdos =
-> -				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
-> -
-> -			altmodes {
-> -				#address-cells = <1>;
-> -				#size-cells = <0>;
-> -
-> -				altmode@0 {
-> -					reg = <0>;
-> -					svid = <0xff01>;
-> -					vdo = <0xffffffff>;
-> -				};
-> -			};
-> +				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>,
-> +				<PDO_VAR(5000, 20000, 5000)>;
->   
->   			ports {
->   				#address-cells = <1>;
-> @@ -236,15 +165,22 @@
->   
->   				port@0 {
->   					reg = <0>;
-> -					usbc0_orien_sw: endpoint {
-> -						remote-endpoint = <&usbdp_phy0_orientation_switch>;
-> +					usbc0_hs: endpoint {
-> +						remote-endpoint = <&usb_host0_xhci_drd_sw>;
->   					};
->   				};
->   
->   				port@1 {
->   					reg = <1>;
-> -					dp_altmode_mux: endpoint {
-> -						remote-endpoint = <&usbdp_phy0_dp_altmode_mux>;
-> +					usbc0_ss: endpoint {
-> +						remote-endpoint = <&usbdp_phy0_typec_ss>;
-> +					};
-> +				};
-> +
-> +				port@2 {
-> +					reg = <2>;
-> +					usbc0_sbu: endpoint {
-> +						remote-endpoint = <&usbdp_phy0_typec_sbu>;
->   					};
->   				};
->   			};
-> diff --git a/arch/arm/dts/rk3588-u-boot.dtsi b/arch/arm/dts/rk3588-u-boot.dtsi
-> index 15de4706254e..31046fc7febb 100644
-> --- a/arch/arm/dts/rk3588-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-u-boot.dtsi
-> @@ -6,32 +6,24 @@
->   #include "rk3588s-u-boot.dtsi"
->   
->   / {
-> -	usbdrd3_1: usbdrd3_1 {
-> -		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3399-dwc3";
-> +	usb_host1_xhci: usb@fc400000 {
-> +		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3568-dwc3", "snps,dwc3";
-> +		reg = <0x0 0xfc400000 0x0 0x400000>;
-> +		interrupts = <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
->   		clocks = <&cru REF_CLK_USB3OTG1>, <&cru SUSPEND_CLK_USB3OTG1>,
->   			 <&cru ACLK_USB3OTG1>;
-> -		clock-names = "ref", "suspend", "bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> +		clock-names = "ref_clk", "suspend_clk", "bus_clk";
-> +		dr_mode = "host";
-> +		phys = <&u2phy1_otg>, <&usbdp_phy1_u3>;
-> +		phy-names = "usb2-phy", "usb3-phy";
-> +		phy_type = "utmi_wide";
-> +		power-domains = <&power RK3588_PD_USB>;
-> +		resets = <&cru SRST_A_USB3OTG1>;
-> +		snps,dis_enblslpm_quirk;
-> +		snps,dis-u2-freeclk-exists-quirk;
-> +		snps,dis-del-phy-power-chg-quirk;
-> +		snps,dis-tx-ipgap-linecheck-quirk;
->   		status = "disabled";
-> -
-> -		usbdrd_dwc3_1: usb@fc400000 {
-> -			compatible = "snps,dwc3";
-> -			reg = <0x0 0xfc400000 0x0 0x400000>;
-> -			interrupts = <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
-> -			power-domains = <&power RK3588_PD_USB>;
-> -			resets = <&cru SRST_A_USB3OTG1>;
-> -			reset-names = "usb3-otg";
-> -			dr_mode = "host";
-> -			phys = <&u2phy1_otg>, <&usbdp_phy1_u3>;
-> -			phy-names = "usb2-phy", "usb3-phy";
-> -			phy_type = "utmi_wide";
-> -			snps,dis_enblslpm_quirk;
-> -			snps,dis-u2-freeclk-exists-quirk;
-> -			snps,dis-del-phy-power-chg-quirk;
-> -			snps,dis-tx-ipgap-linecheck-quirk;
-> -		};
->   	};
->   
->   	usbdpphy1_grf: syscon@fd5cc000 {
-> @@ -56,7 +48,6 @@
->   			clock-names = "phyclk";
->   			clock-output-names = "usb480m_phy1";
->   			#clock-cells = <0>;
-> -			rockchip,usbctrl-grf = <&usb_grf>;
->   			status = "disabled";
->   
->   			u2phy1_otg: otg-port {
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index 878936fa07d6..c0fd16c4022b 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -21,35 +21,47 @@
->   		status = "okay";
->   	};
->   
-> -	usbdrd3_0: usbdrd3_0 {
-> -		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3399-dwc3";
-> +	usb_host0_xhci: usb@fc000000 {
-> +		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3568-dwc3", "snps,dwc3";
-> +		reg = <0x0 0xfc000000 0x0 0x400000>;
-> +		interrupts = <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
->   		clocks = <&cru REF_CLK_USB3OTG0>, <&cru SUSPEND_CLK_USB3OTG0>,
->   			 <&cru ACLK_USB3OTG0>;
-> -		clock-names = "ref", "suspend", "bus";
-> -		#address-cells = <2>;
-> -		#size-cells = <2>;
-> -		ranges;
-> +		clock-names = "ref_clk", "suspend_clk", "bus_clk";
-> +		dr_mode = "otg";
-> +		phys = <&u2phy0_otg>, <&usbdp_phy0_u3>;
-> +		phy-names = "usb2-phy", "usb3-phy";
-> +		phy_type = "utmi_wide";
-> +		power-domains = <&power RK3588_PD_USB>;
-> +		resets = <&cru SRST_A_USB3OTG0>;
-> +		snps,dis_enblslpm_quirk;
-> +		snps,dis-u1-entry-quirk;
-> +		snps,dis-u2-entry-quirk;
-> +		snps,dis-u2-freeclk-exists-quirk;
-> +		snps,dis-del-phy-power-chg-quirk;
-> +		snps,dis-tx-ipgap-linecheck-quirk;
->   		status = "disabled";
-> +	};
->   
-> -		usbdrd_dwc3_0: usb@fc000000 {
-> -			compatible = "snps,dwc3";
-> -			reg = <0x0 0xfc000000 0x0 0x400000>;
-> -			interrupts = <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
-> -			power-domains = <&power RK3588_PD_USB>;
-> -			resets = <&cru SRST_A_USB3OTG0>;
-> -			reset-names = "usb3-otg";
-> -			dr_mode = "otg";
-> -			phys = <&u2phy0_otg>, <&usbdp_phy0_u3>;
-> -			phy-names = "usb2-phy", "usb3-phy";
-> -			phy_type = "utmi_wide";
-> -			snps,dis_enblslpm_quirk;
-> -			snps,dis-u1-entry-quirk;
-> -			snps,dis-u2-entry-quirk;
-> -			snps,dis-u2-freeclk-exists-quirk;
-> -			snps,dis-del-phy-power-chg-quirk;
-> -			snps,dis-tx-ipgap-linecheck-quirk;
-> -			quirk-skip-phy-init;
-> -		};
-> +	usb_host2_xhci: usb@fcd00000 {
-> +		compatible = "rockchip,rk3588-dwc3", "rockchip,rk3568-dwc3", "snps,dwc3";
-> +		reg = <0x0 0xfcd00000 0x0 0x400000>;
-> +		interrupts = <GIC_SPI 222 IRQ_TYPE_LEVEL_HIGH 0>;
-> +		clocks = <&cru REF_CLK_USB3OTG2>, <&cru SUSPEND_CLK_USB3OTG2>,
-> +			 <&cru ACLK_USB3OTG2>, <&cru CLK_UTMI_OTG2>,
-> +			 <&cru CLK_PIPEPHY2_PIPE_U3_G>;
-> +		clock-names = "ref_clk", "suspend_clk", "bus_clk", "utmi", "pipe";
-> +		dr_mode = "host";
-> +		phys = <&combphy2_psu PHY_TYPE_USB3>;
-> +		phy-names = "usb3-phy";
-> +		phy_type = "utmi_wide";
-> +		resets = <&cru SRST_A_USB3OTG2>;
-> +		snps,dis_enblslpm_quirk;
-> +		snps,dis-u2-freeclk-exists-quirk;
-> +		snps,dis-del-phy-power-chg-quirk;
-> +		snps,dis-tx-ipgap-linecheck-quirk;
-> +		snps,dis_rxdet_inp3_quirk;
-> +		status = "disabled";
->   	};
->   
->   	pmu1_grf: syscon@fd58a000 {
-> @@ -58,6 +70,11 @@
->   		reg = <0x0 0xfd58a000 0x0 0x2000>;
->   	};
->   
-> +	usbdpphy0_grf: syscon@fd5c8000 {
-> +		compatible = "rockchip,rk3588-usbdpphy-grf", "syscon";
-> +		reg = <0x0 0xfd5c8000 0x0 0x4000>;
-> +	};
-> +
->   	usb2phy0_grf: syscon@fd5d0000 {
->   		compatible = "rockchip,rk3588-usb2phy-grf", "syscon",
->   			     "simple-mfd";
-> @@ -75,7 +92,6 @@
->   			clock-names = "phyclk";
->   			clock-output-names = "usb480m_phy0";
->   			#clock-cells = <0>;
-> -			rockchip,usbctrl-grf = <&usb_grf>;
->   			status = "disabled";
->   
->   			u2phy0_otg: otg-port {
-> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-> index ec22e70033a0..0595325e8107 100644
-> --- a/configs/rock5b-rk3588_defconfig
-> +++ b/configs/rock5b-rk3588_defconfig
-> @@ -101,7 +101,6 @@ CONFIG_SYSRESET=y
->   CONFIG_USB=y
->   CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
-> -# CONFIG_USB_XHCI_DWC3_OF_SIMPLE is not set
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_OHCI_HCD=y
+> diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> index a93b11cd47..dae9dc87c2 100644
+> --- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> +++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
+> @@ -60,6 +60,8 @@ enum rgxx3_device_id {
+>   	RG353P,
+>   	RG353V,
+>   	RG503,
+> +	RGB30,
+> +	RK2023,
+>   	/* Devices with duplicate ADC value */
+>   	RG353PS,
+>   	RG353VS,
+> @@ -95,6 +97,20 @@ static const struct rg3xx_model rg3xx_model_details[] = {
+>   		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
+>   		.detect_panel = 0,
+>   	},
+> +	[RGB30] = {
+> +		.adc_value = 383, /* Gathered from second hand information */
+> +		.board = "rk3566-powkiddy-rgb30",
+> +		.board_name = "RGB30",
+> +		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
+> +		.detect_panel = 0,
+> +	},
+> +	[RK2023] = {
+> +		.adc_value = 635, /* Observed average from device */
+> +		.board = "rk3566-powkiddy-rk2023",
+> +		.board_name = "RK2023",
+> +		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
+> +		.detect_panel = 0,
+> +	},
+>   	/* Devices with duplicate ADC value */
+>   	[RG353PS] = {
+>   		.adc_value = 860, /* Observed average from device */
