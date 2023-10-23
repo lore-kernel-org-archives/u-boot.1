@@ -4,73 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF2AC001E0
-	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 08:21:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5382CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 23 Oct 2023 08:21:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF06A87894;
-	Mon, 23 Oct 2023 10:21:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C225B878A4;
+	Mon, 23 Oct 2023 10:21:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b630A17E";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="N75iypx+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2D2D87890; Mon, 23 Oct 2023 10:21:24 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BD88C878AD; Mon, 23 Oct 2023 10:21:53 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B31D287894
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:21:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0D8987890
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 10:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-53ebf429b4fso4577975a12.1
- for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 01:21:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698049281; x=1698654081; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=7K43MftvtNXuVCGGeRqJqAitJr3GgibjiqGMHqCvIDA=;
- b=b630A17E903H6G8N1MNIxgMkHE6ETshDj2suUHMrhHkv5GJ5IZwVcAkuJEiom4Fqml
- ZzC3oenvgIJgpeUqaGLqCCV3PNEgs8VxksAvxaPp3b5zkLW6mVuvZw7wgQetj1XTCwsY
- S431gGAe91MRI6hS+ibjI1AgQjpE29Xb3EyCUKIvqeE/qNELmVdvVMLzamK9w4saSgL8
- wzNTHEDJIxKpIs6wbG8bnL5kxIgwx0W1mCs/liA657CozOa4Q6R4pKEJh9ydR+wcJbwH
- 7A34F34us4R5MIFw+zEGYKDNn+SU0I5tz7wAfrc0I9MDND9O61fGnO67ddVIq22rlcAT
- eVEw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6144F3F140
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 08:21:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1698049306;
+ bh=DhkWHcdLXK/Jn0kLhERoIGt/H51BtTsL5bzmb5w2HX4=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=N75iypx+PMoCANdf7KQ5nll3fvC99jipIYE5ROCmLqRMgCq9lwK+jUczvKwvUU8ZD
+ SfxAcZx+Hj0EVmaahca6AjxJWLIGvkqcdabDfxEpu/1KiuUAnTLM5RSs3flBj82+JZ
+ DebF4eWkhEBvZWISlxHYH4t2Q7FWDGblkpgPQfsvXuHkYyKMEEtHn03wFcOAC1mXJc
+ xzETyvg/sY/IY9SAuG+8yMg6mpgp/SIrQfCxYNoZgnG7cMAUP1CQo0jIacZw1JxUXI
+ GBH7L98C6WUNOxUXlxCYbmW/bLxMIjAAjiLzqquoH8V1G4Pv5yN448LPwze1fhC5+j
+ UjaRkKCjeO5rA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4084a9e637eso19417245e9.2
+ for <u-boot@lists.denx.de>; Mon, 23 Oct 2023 01:21:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698049281; x=1698654081;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7K43MftvtNXuVCGGeRqJqAitJr3GgibjiqGMHqCvIDA=;
- b=h4s78S0vwpFRmlc3QJhNOPLQmlNl7QUwh3P4AzYSCKnr3fnXoYAgskSa+gfB6c88sx
- RQGp4vvBAyyn9T+0kJZFAtm9jOTb1dAQ2RRB5jLBt/GUqids++ARX5/FpAKVGLdWv4Fx
- k7ONFrJHOjNlfnG9zhsKJFueJNQXzSTB0Vm8mUYa58OgYgL1Yze5kXSx3QUve8NWhWsJ
- iRhnVqV8VL9oIrWqvOlDr+vtnj13WaVeMGsiU8ZNAucMC28EP+yKgQbeUrPEsv0zZKYf
- Mv/D1FJfwyJuc1W93wrGwgH+GDLhsFwSjFpxHLCPUqVdLS4TAz8JHNm+p+iy0Vwozipx
- RW6w==
-X-Gm-Message-State: AOJu0YyaK7hQTh3iDEC3eUeJ4zyJwekJSV1rUS4mpU1hPWif00RjMQ8T
- Oierln6fa1MKPZQ8OPAHv4A=
-X-Google-Smtp-Source: AGHT+IFMAgtel7bpjhYraWT6SEYhezwc9cZe9Aqpu0u1G0dj91fxTPe3BVol7hON4XUEoKfatGTV7Q==
-X-Received: by 2002:a17:907:3fa2:b0:9ae:56da:6068 with SMTP id
- hr34-20020a1709073fa200b009ae56da6068mr6676234ejc.57.1698049280843; 
- Mon, 23 Oct 2023 01:21:20 -0700 (PDT)
-Received: from localhost.localdomain (80-108-76-242.cable.dynamic.surfer.at.
- [80.108.76.242]) by smtp.gmail.com with ESMTPSA id
- cw23-20020a170906c79700b0099cce6f7d50sm6249235ejb.64.2023.10.23.01.21.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Oct 2023 01:21:20 -0700 (PDT)
-From: Christian Gmeiner <christian.gmeiner@gmail.com>
-To: Christian Gmeiner <christian.gmeiner@gmail.com>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de (open list)
-Subject: [PATCH] led: Do not overwrite label
-Date: Mon, 23 Oct 2023 10:21:17 +0200
-Message-ID: <20231023082117.39290-1-christian.gmeiner@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ d=1e100.net; s=20230601; t=1698049306; x=1698654106;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DhkWHcdLXK/Jn0kLhERoIGt/H51BtTsL5bzmb5w2HX4=;
+ b=u5ZBVDl+77Zpk/CBLZKSTF3cC6HhKH63bRTJneo7t7EKELNChJQPDgGCg4sryDhrlf
+ 2IPvIUgNCAqEUtJrg+MijTdndO/FowvHyZyGTWG+X0Vz+xMcvRZW5VLYbEstU6E9Ej0v
+ BRh4cY9KYYIAqLk4KKopYuAOEZm3qPcMDIfErmRNDbfG0jkKZopMfy7LfRGCMmrntbRN
+ wUTGIroCCqEaRudBYv3xzpt0uFKKbbaHMKh/q2Wx67R+V8B2/F5TGJ9cu9LXVitpdxqx
+ ZZmVPCq1gODJhhZaIOcSAFHHkTFQKaOLtvpXRhFyIUaux3KeECHx8qw9feqmD2ymw830
+ ckyA==
+X-Gm-Message-State: AOJu0Yx+kLFbagz+zrgDgIVsjJozIZosevLbsxBFZfmkQa0Cc5I9nD4V
+ NLhpf3Xx0MXLuIpNjZVj+0v4/V5VD/j07xyti7L2oi2J3EGA7XidjfbgFRffn4DKPGgWy5GP6LB
+ zS5cAi51gl8M551QYuo6yUtEn1+cy86Y=
+X-Received: by 2002:a05:600c:3b99:b0:407:5ad0:ab5b with SMTP id
+ n25-20020a05600c3b9900b004075ad0ab5bmr6622212wms.8.1698049305986; 
+ Mon, 23 Oct 2023 01:21:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE8LuPGK4a4cpyQLo4RvW9nS/xe5AeWVSLC26jZRmwJleOTegqlXpoV/2x54X/yIyCcKvuBFA==
+X-Received: by 2002:a05:600c:3b99:b0:407:5ad0:ab5b with SMTP id
+ n25-20020a05600c3b9900b004075ad0ab5bmr6622199wms.8.1698049305538; 
+ Mon, 23 Oct 2023 01:21:45 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ q6-20020adfb186000000b0032326908972sm7304796wra.17.2023.10.23.01.21.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Oct 2023 01:21:45 -0700 (PDT)
+Message-ID: <62d107c2-7e24-4ae0-972d-9995b796c9f9@canonical.com>
+Date: Mon, 23 Oct 2023 10:21:52 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] general: fix GPL-2.0-or-later SPDX headers
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@google.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20231022174707.72695-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3q1im+5GwvZ_U8KMERFczD4EbR9T9gG1aeKews3yyZRg@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ3q1im+5GwvZ_U8KMERFczD4EbR9T9gG1aeKews3yyZRg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,37 +104,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-label might have been set by a non device-tree based U-Boot driver already.
+On 10/23/23 09:05, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Sun, 22 Oct 2023 at 10:48, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> SPDX headers should use GPL-2.0-or-later and not GPL-2.0+.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   Makefile                                                   | 2 +-
+>>   README                                                     | 2 +-
+>>   api/Makefile                                               | 2 +-
+>>   api/api.c                                                  | 2 +-
+>>   api/api_display.c                                          | 2 +-
+>>   api/api_net.c                                              | 2 +-
+>>   api/api_platform-arm.c                                     | 2 +-
+>>   api/api_platform-mips.c                                    | 2 +-
+> 
+> In License/README it shows the identifier as 'GPL-2.0+'.
 
-In my concrete case there is a PCI driver that uses device_bind_driver(..)
-for different class types. The UCLASS_LED specific driver sets label
-in its bind function.
+I know. That file needs to be reworked to remove the redundancy with 
+doc/develop/sending_patches.rst (which has some inaccuracies concerning 
+SPDX) and moved to HTML. We should handle it in a separate patch.
 
-Without this change the LEDs exposed by the PCI device are not available.
+We will need separate patches for LGPL-2.0+ and LGPL-2.1+, too.
 
-Fixes: 83c63f0d11 ("led: Move OF "label" property parsing to core")
-Signed-off-by: Christian Gmeiner <christian.gmeiner@gmail.com>
----
- drivers/led/led-uclass.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+But this should not stop us from merging the current patch.
 
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index 68ca3c2970..aebdfdeb95 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -71,9 +71,10 @@ static int led_post_bind(struct udevice *dev)
- 	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
- 	const char *default_state;
- 
--	uc_plat->label = dev_read_string(dev, "label");
- 	if (!uc_plat->label)
--		uc_plat->label = ofnode_get_name(dev_ofnode(dev));
-+		uc_plat->label = dev_read_string(dev, "label");
-+		if (!uc_plat->label)
-+			uc_plat->label = ofnode_get_name(dev_ofnode(dev));
- 
- 	uc_plat->default_state = LEDST_COUNT;
- 
--- 
-2.41.0
+Best regards
 
+Heinrich
