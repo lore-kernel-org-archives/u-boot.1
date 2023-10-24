@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65C4CC07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 703DBC07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6419D87973;
-	Tue, 24 Oct 2023 20:03:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CDC687997;
+	Tue, 24 Oct 2023 20:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nns9/VMh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N0ZV5bHk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 499068726A; Tue, 24 Oct 2023 20:03:45 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 79A8187973; Tue, 24 Oct 2023 20:03:45 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEE908799A
- for <U-Boot@lists.denx.de>; Tue, 24 Oct 2023 20:03:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95E9A87988
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:03:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-d9a58aa4983so4548917276.0
- for <U-Boot@lists.denx.de>; Tue, 24 Oct 2023 11:03:32 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a8ada42c2aso47828817b3.3
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:03:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698170611; x=1698775411; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698170615; x=1698775415; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S/m03lObdo/t9kFzV3qIMbQsI+bnKnrka/4fSaqHoGg=;
- b=Nns9/VMhjVEpl+9EZvWh7FjoQNYQwho9vcO3f3PSc3i4MIg8t8GIrHwhXg0MyDpfyF
- jrCQfSfQaIyTRxlO/hD84rtty2CC0IKwgqqXaGRN7UlqJaZXFzvPM+7oZ0DF+9u+guUK
- eanXHIP3oJTgklXyRmy1HXGgfTPbA29CGAQn8=
+ bh=j1sBJQ/CjdJxGGKEsZFKeJrY0Q8cGjF7pIiWO0yUkHs=;
+ b=N0ZV5bHkOXY2NiY1fZ/g/TweD1XlxFF48cjNIUsIM62cEztkQMv5iEdSOjfBDYKOUT
+ pk1e2gZu1e7gGkyUA2QlArGJFejpbn2SZx4dftuX3MlzfoOY67lyh7rHVAJEFLnGIg5Q
+ 3o4yZCG0AK4DSm3FXGOQcZh68ZoyQ+F54ESr4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698170611; x=1698775411;
+ d=1e100.net; s=20230601; t=1698170615; x=1698775415;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S/m03lObdo/t9kFzV3qIMbQsI+bnKnrka/4fSaqHoGg=;
- b=U7uA6J61HCUpGT5S249i8B9xCE3F2iWzMSX6uRZdxrT9yIUgmEwhxv/6KhSVY281m9
- M3I7hrwPSs/j2DWnCtgar1wUBDsPxFMpNG4w6sVN4H7sDzCqwgX6Ezmg1ex9tobou8Uk
- AG4KFyTEWA5OpcnGBOu0ltwLnl27Gk1afDk8zOAmY+xo/C0VFcDU1ZxtStUtGfcZmFtp
- 4nGQQ9pONcfWGRtHtudx6wlKA+JN1fVHZZzYjqPsBJSiu9igVAN637jIqzZB+l0KjD22
- FaFlMU3K38Nn/pJmZD6+7tuEUwv9Hc2fVVr9b2axAYzsskPpa3dsFoMPTVEs44XLwWK4
- YfnQ==
-X-Gm-Message-State: AOJu0YwW3XVz5anEytNgzULIQHbV289CHB2TQi9rwYy+ZXsGQWPp+j8S
- gyyWptUN80S+FfAw1Km9W8nQEddzo/GGabZ8t1+fSw==
-X-Google-Smtp-Source: AGHT+IHR8wFwiugI4X+Z6CV/bWZRJfPvGzt/xv4CVp3jaC083pFWfMnhOMyoRHPYNopnMAKiE3WCDg==
-X-Received: by 2002:a05:6902:1083:b0:d9a:57c9:f9bc with SMTP id
- v3-20020a056902108300b00d9a57c9f9bcmr16975779ybu.49.1698170611575; 
- Tue, 24 Oct 2023 11:03:31 -0700 (PDT)
+ bh=j1sBJQ/CjdJxGGKEsZFKeJrY0Q8cGjF7pIiWO0yUkHs=;
+ b=jNBz04v+tCIcFpYnLjfFyo4BTr1DwVbLqYd32bg3uxNp1MyDK7X/K2Y4Lh+nwbnoLf
+ KkCXde4Bm2WooNUMlAkMpbpi054JhONE9yFrOvFgIgKSrlJa9REU1AbaDCwM7SHcHdj7
+ S/bTfGWmwValdy1Czudv9pfRUx4aIV7raD0awnqRTVBZTPQ7L6Dji/GtOjx7x7GwjOAY
+ PerCg8OZ0/f8rjbnBlCwAuG4TMdLkOk4CnC9D+wtad4r46wllp9u86v9gOJWa4IN54IK
+ kojMRk2CC20rUETef1/GKXOQTcCksmmL+n+ip6XLEOiWZd+aTv1c2/69p6jT02nU6C0v
+ 5BBg==
+X-Gm-Message-State: AOJu0YyFe1dqu4cFPrR1Rj1i7z1ydKklosShEIXDPa8zQ7Y1XhFHjq0s
+ 4qcFhB9+bj0B3gUgllS/eHzBHLe3pVQth3/znayzjw==
+X-Google-Smtp-Source: AGHT+IG+r2yG3A1nQ/82FBcOdxNxbHCS8uY1+4XagoR0v9DtjJSxzAc3oUft+f7IQoEAPNOD3qcc5w==
+X-Received: by 2002:a25:d310:0:b0:d9a:cd62:410c with SMTP id
+ e16-20020a25d310000000b00d9acd62410cmr13800036ybf.4.1698170615405; 
+ Tue, 24 Oct 2023 11:03:35 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
  [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
  by smtp.gmail.com with ESMTPSA id
- p20-20020a257414000000b00d9cb16d7749sm3728601ybc.21.2023.10.24.11.03.30
+ 185-20020a2501c2000000b00d746487d6f7sm3749939ybb.35.2023.10.24.11.03.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 11:03:31 -0700 (PDT)
-Date: Tue, 24 Oct 2023 14:03:29 -0400
+ Tue, 24 Oct 2023 11:03:35 -0700 (PDT)
+Date: Tue, 24 Oct 2023 14:03:33 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Stefano Babic <sbabic@denx.de>
-Cc: "U-Boot@lists.denx.de" <U-Boot@lists.denx.de>
-Subject: Re: Pull request: please pull u-boot-imx-20231024
-Message-ID: <20231024180329.GZ496310@bill-the-cat>
-References: <3c1688e3-3500-440e-a398-704337b9dc47@denx.de>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: u-boot-rockchip-20231024
+Message-ID: <20231024180333.GA496310@bill-the-cat>
+References: <20231024091223.2193416-1-kever.yang@rock-chips.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7NtqfK7YgD9nULu5"
+ protocol="application/pgp-signature"; boundary="2y6bH/c/1sfWEHjR"
 Content-Disposition: inline
-In-Reply-To: <3c1688e3-3500-440e-a398-704337b9dc47@denx.de>
+In-Reply-To: <20231024091223.2193416-1-kever.yang@rock-chips.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,33 +92,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7NtqfK7YgD9nULu5
+--2y6bH/c/1sfWEHjR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 24, 2023 at 10:20:57AM +0200, Stefano Babic wrote:
+On Tue, Oct 24, 2023 at 05:12:23PM +0800, Kever Yang wrote:
 
 > Hi Tom,
 >=20
-> please pull from u-boot-imx, thanks !
+> Please pull the updates for rockchip platform:
+> - Add Board: rk3588 NanoPC-T6, Orange Pi 5, Orange Pi 5 Plus;
+> - clk driver fix for rk3568 and rk3588;
+> - rkmtd cmd support for rockchip nand device;
+> - dts update and sync from linux;
 >=20
-> The following changes since commit e65b5d35c9116485366bb08138043d51220551=
-da:
+> CI:
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/18275
 >=20
->   Merge branch 'master' of
-> https://source.denx.de/u-boot/custodians/u-boot-sh (2023-10-17 09:15:56
-> -0400)
+> Thanks,
+> - Kever
+>=20
+> The following changes since commit 9a3a58396b78b1f9d0c14580dc03f81d29207d=
+d2:
+>=20
+>   Merge https://source.denx.de/u-boot/custodians/u-boot-marvell (2023-10-=
+20 12:54:33 -0400)
 >=20
 > are available in the Git repository at:
 >=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git
-> tags/u-boot-imx-20231024
+>   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
+t-rockchip-20231024
 >=20
-> for you to fetch changes up to 2f96064d0cf78e21a668ad907d41d63e56f9f7bb:
+> for you to fetch changes up to d039b1b551e8dbb2c309d35bb19b7866caa4dcc1:
 >=20
->   arm64: dts: imx8mp: Describe M24C32-D write-lockable page in DH i.MX8MP
-> DHCOM DT (2023-10-18 21:29:59 +0200)
+>   rockchip: configs: sandbox: enable rkmtd command (2023-10-24 15:55:17 +=
+0800)
 >=20
 
 Applied to u-boot/master, thanks!
@@ -126,22 +135,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---7NtqfK7YgD9nULu5
+--2y6bH/c/1sfWEHjR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4Bu4ACgkQFHw5/5Y0
-tyxy5AwAl61pFmH8wFe0sbxrusYkDiJQhHzUKQVcBVC+lajCQUX8Fow0eW2ioz/l
-TxQ7ORUn/0x32MM+YxLw50smJuvp587+MVzhD3c1cQMNdZa4XQydvFfClxJ3VP5D
-O3qcwoEOM/SpJ5vfsAdI8foGOVM5k9KuofDKJKpaWCvHPkx3eOeSDFvsbHyRa+Zw
-xJ/N6WfSmIPax4ROtT/tx4X0s9oO7ALHhZbamSLLkLv0klnDoNcPsGEkr2BbZDxI
-brjNdDkmEIuGuPCxGBCOoxJLfRrLn3aSKf8CgfNN3Ir5t2fhA7R9Efxbpbgwd/X8
-ZZ6QbxovTSiTuBLPcsJFImGqOWIjEnA43UW1gCzLaUznOaz9Xyv1EnssTzYhtuv2
-dLPLhGTA5thTaVISZ6F9j6WnZe2mER4t3rp2S8dCTq0PF3wJfAOxFnaAVhfhGKiJ
-V85g7eaOBOePLxq2SKfZwRSmYaPsBLH6RwFhef7E7OZutmzPIw/KqcMo1KDCyCwL
-eIwMOfPD
-=qbhk
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4BvUACgkQFHw5/5Y0
+tywMcwv/Xf+U+b1TeNHZB94wmHfSQG/jL3AWWWrzGvylhHp4DqIYUyGd7vX0rQ4W
+rljSXceLVBUWym4DzO+FgZbZyai2mKLmSL0/SxVNOFgUP1d+1Ddpqc3VjR8OB1PO
+GVO3K3x5jgn4CYcswOGytzX00aMvrh+OTBKhc9KC0BXF1U1oEgDDp+s1LN/UajSS
+gPXNnu6ak7pgDzqvoJ8YCmU+iKWHLnwEU2DuaLp9MhVOh/xKM2Ex0kRtIeF/4uDB
+qDufBtutHgbfAgvMKMdxuRwS2gpx/raCeGGOib8Edf8IYF5Oh+qShTNi7Uza/y45
+zLzIkH+xR1GsHlxzXPMwF+HgZJ9h8AVLraVQbwFdW8ptfPv9fJZ8mtsamomiq+yM
++rF52KDMwr9Bn6fBPyJ72K4RWjcA8TVB19ZfyktqM5CGcvqfHVgtKGOygoAQ90UH
+qiZnSUrwHR7M6pAP8GLLaD6xegjT4uxPg3jtE56dDskXWcHIShF4qkBXVjJrlVAq
+W9iDxoif
+=NCXI
 -----END PGP SIGNATURE-----
 
---7NtqfK7YgD9nULu5--
+--2y6bH/c/1sfWEHjR--
