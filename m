@@ -4,77 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F748C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 06:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26B49C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 06:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE1ED8708A;
-	Tue, 24 Oct 2023 08:19:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 71F20870E6;
+	Tue, 24 Oct 2023 08:20:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Y6UQiP9M";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="twOiIP3v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526C2870DE; Tue, 24 Oct 2023 08:19:18 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id E47F7870E7; Tue, 24 Oct 2023 08:20:34 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DC2487086
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 08:19:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E05E987086
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 08:20:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1698128350; x=1698733150; i=xypron.glpk@gmx.de;
- bh=7ZNE6hdS72Jh493PgyJwtUo7AcWbkEsIzTcMTxWt4MI=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=Y6UQiP9MG4gOI1ldCRjr+8ww+GFF7ElCMucbD3MGy7iLDiUCmRSFdDhQO8JCFaHj
- jSaxBOlxyk5neVUIkPMWmR41iwESASY2pHQHdDXOgROqIUFj0EAoiq7r+NUcA1MYa
- 4WOksD4GWubx4B5dQmfBzEDjRbviJcasbH9uyB2qoXMA9IGKx7Ja8F4dTzxpWJ2Cd
- LEQ5dT2ZTKA4dWGT4P8BrDEExBa6VUoDWqI4PMk7pCPT/+YJSoPdgOBCIM1YQGVzY
- 4MVjdpCv6RtqcSvOIlrYVfm/Y+7Avc0M/Y5oWYtAI/0vjRUvrdmPBDjmwv1DhjfA4
- xlGJrLvw1CzpG49C6A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MvsIv-1rk7Ld1awp-00sye5; Tue, 24
- Oct 2023 08:19:10 +0200
-Message-ID: <fd350aa1-7c67-480f-9570-d10f5e4140aa@gmx.de>
-Date: Tue, 24 Oct 2023 08:19:19 +0200
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 96ABB3FB6C; 
+ Tue, 24 Oct 2023 06:20:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1698128431;
+ bh=azFP2P82ikdylf8y/ILy3TIiMdTnz1TB1rZKICGkLJI=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=twOiIP3vtZ6qKPU/tnalVuvxmjnNg7rr7Chpvx/OocY+gzXgvk4Si1tnYM42V5TUm
+ S0Jr4FmNNRaM9JOqXwKjkeA88mDfXP/r3wiAXBItBisXgAcQhfPjW/NNuwycLzmx5X
+ XZI/CtZW2htSiH5IC24rhm3vToubawm1ZTusvSpu1POD1Vi8pO6rJ6Q5lteQG5Py9I
+ l3E3Ax3dIJDkCyYCSmCa06XJDcSH9g4qyK24FLjITyVU6Hd+0mo0fVCn43kem4Mz2F
+ JI8cq/VDlrVOUwUo8X9cGGhpMZPv7esGRfOjgDO43ZqVH40njJrbJniM9kygD6PfxW
+ DJv/RutnKLL0Q==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 1/1] efi_loader: expose the device-tree file name
+Date: Tue, 24 Oct 2023 08:20:32 +0200
+Message-Id: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] net: bootp: add config option BOOTP_RANDOM_XID
-Content-Language: en-US, de-DE
-To: seanedmond@linux.microsoft.com
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
- Jim Liu <jim.t90615@gmail.com>
-References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-4-seanedmond@linux.microsoft.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231024002159.74477-4-seanedmond@linux.microsoft.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Fs3Ccz+aRwtvp6QKs8kCXlRnW8WvHXio4hZSxtrcSZWY3tEbwW0
- eS5zDxGqt+7uaPVm5Y/b8WbfiYy60R3Qd7mlp+jCRXIxJ0adsUbMPxKO9r6hgmoljVAho7s
- z1dRkYbcsfPVFwwf1LveVEm22PBaSs6tU72fe1fV5rk94hXRjQ7X2pvh07SZf1fwJPuVUTd
- 1aIGr7fUSy3R8iprUDuhg==
-UI-OutboundReport: notjunk:1;M01:P0:amxk7M2DXAE=;Xj3fORf94syxHMYH6qB6+wamp8h
- nOLesB3hAhok6Iqny3Hep40h83NfZTJH1f6yzFRHzTHjjktu8VtVrwgvXkV+FBwYB0SuskrK5
- R8grQ8/bGuXaj6fjXBB4CGCVjnG/D5X8PUxllz8ptw8n9j37NGp1/HaOiDL4oUcZT+BOHwnp+
- 9rzxwPgG//+ftsNZyQNLduOsBtoWGCkpKDdNSHiFjZIOCnQnJxSOpUgo46AnoJmV8l4IkXOx6
- DwkAdkXyhYyGUeFQcK2kaFMLza0rL0m2rJc/iMow49T0aPQ3L/AEw3JM3fd/R15fYiix5zYcg
- jXM54bR3q7aDwI+eKzymbhgUFOk8XmkW5fno90YU/cezt5bi6h7Uu5oh3K5WIhLuY78Do2jq5
- tccTH5cCi/QUv1m4Y6SfX18To3nxh/Y3dRTQ9OSpvVVGpYi8UWyDm0R/VOqktsz0GWX8FEahB
- ujK44vKm/P4oRG81Z1bGf5MROqjUEg5Q99UuwuumVWTBtqNoWIgLwV34KhEysSwMXVksR8JhF
- OI6YWO9sc58Y0zx3hIyfy1zKbqkfgUVLvuZkq0O4t12S+gzlryOkk2HolTND9u0eYySgIUu13
- 6qUOpaYKXN5kZxs8tMV1do+m6+gEXbFMmnTYpoftUdfo0XDRt6Z9ki3Ey90NtC7bkpzpbMjpa
- EkR7gMm7St8LCE9jxxaBmEwUVqgHb/ygahnRrdYJOHC1BUn9+N2xx2C7ZDO5YIUBl1XOxmcRN
- iE9ePgpP7xU+v62CVF3z7HNzphJaIzK1PovIyq6SHTjdaPELExOPrI+NyjtVGZ2BwTQIajIsg
- w085+G8zKFPDms5+Uhoc/W4eQ6pOoODYkVe/3m5vSoM1zuQ0wiveqJ00DmpfDEGKkDag/C9jL
- 4PGq69HJy/Z6vGWElR/XGgJqvNlDW8+HKaV/xcjxlhEjY/Z9GAfAw8Azr2itFRKq5MojGCn9H
- o5hL/MaKIuiGU4+Zn6/47b4uOOc=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,86 +69,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
-> From: Sean Edmond <seanedmond@microsoft.com>
->
-> The new config option BOOTP_RANDOM_XID will randomize the transaction ID
-> for each new BOOT/DHCPv4 exchange.
->
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> ---
->   cmd/Kconfig |  7 +++++++
->   net/bootp.c | 31 +++++++++++++++++--------------
->   2 files changed, 24 insertions(+), 14 deletions(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index adbb1a6187..910f465d14 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1838,6 +1838,13 @@ config BOOTP_VCI_STRING
->   	default "U-Boot.arm" if ARM
->   	default "U-Boot"
->
-> +config BOOTP_RANDOM_XID
-> +	bool "Send random transaction ID to BOOTP/DHCP server"
-> +	depends on CMD_BOOTP
+Forward and backward compatibility of Linux kernel device-trees is
+sometimes missing. One solution approach is to load a kernel specific
+device-tree. This can either be done via a U-Boot scripts (like the one
+generated by Debian package flash-kernel or by a boot loader like GRUB.
+The boot loader approach currently requires to know the device-tree name
+before first boot which makes it unusable for generic images.
 
-The rand() function requires CONFIG_LIB_RAND=3Dy or
-CONFIG_EXYNOS_ACE_SHA=3Dy or CONFIG_RNG_NPCM=3Dy.
+Expose the device-tree file name as EFI variable FdtFile.
+This will allow bootloaders to load a kernel specific device-tree.
 
-Best regards
+The variable will not be exposed on ACPI based systems or if the
+environment variable fdtfile is not defined.
 
-Heinrich
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v4:
+	Generalize the description of the content of $fdtfile.
+v3:
+	Add documentation
+v2:
+	Use a unique GUID to enable future U-Boot independent
+	standardization.
+	Do not try to add the variable on ACPI based systems.
+---
+ doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+ include/efi_loader.h       |  5 +++++
+ lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+ 3 files changed, 49 insertions(+)
 
-> +	help
-> +	  Selecting this will allow for a random transaction ID to get
-> +	  selected for each BOOTP/DHCPv4 exchange.
-> +
->   if CMD_DHCP6
->
->   config DHCP6_PXE_CLIENTARCH
-> diff --git a/net/bootp.c b/net/bootp.c
-> index bab17a9ceb..f1ca2efacf 100644
-> --- a/net/bootp.c
-> +++ b/net/bootp.c
-> @@ -822,22 +822,25 @@ void bootp_request(void)
->
->   	/* Only generate a new transaction ID for each new BOOTP request */
->   	if (bootp_try =3D=3D 1) {
-> -		/*
-> -		 *	Bootp ID is the lower 4 bytes of our ethernet address
-> -		 *	plus the current time in ms.
-> -		 */
-> -		bootp_id =3D ((u32)net_ethaddr[2] << 24)
-> -			| ((u32)net_ethaddr[3] << 16)
-> -			| ((u32)net_ethaddr[4] << 8)
-> -			| (u32)net_ethaddr[5];
-> -		bootp_id +=3D get_timer(0);
-> -		bootp_id =3D htonl(bootp_id);
-> -		bootp_add_id(bootp_id);
-> -		net_copy_u32(&bp->bp_id, &bootp_id);
-> -	} else {
-> -		net_copy_u32(&bp->bp_id, &bootp_id);
-> +		if (IS_ENABLED(CONFIG_BOOTP_RANDOM_XID)) {
-> +			srand(get_ticks() + rand());
-> +			bootp_id =3D rand();
-> +		} else {
-> +			/*
-> +			 *	Bootp ID is the lower 4 bytes of our ethernet address
-> +			 *	plus the current time in ms.
-> +			 */
-> +			bootp_id =3D ((u32)net_ethaddr[2] << 24)
-> +				| ((u32)net_ethaddr[3] << 16)
-> +				| ((u32)net_ethaddr[4] << 8)
-> +				| (u32)net_ethaddr[5];
-> +			bootp_id +=3D get_timer(0);
-> +			bootp_id =3D htonl(bootp_id);
-> +		}
->   	}
->
-> +	bootp_add_id(bootp_id);
-> +	net_copy_u32(&bp->bp_id, &bootp_id);
->   	/*
->   	 * Calculate proper packet lengths taking into account the
->   	 * variable size of the options field
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index fb16ac743a..702c490831 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
+ 
+     Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
+ 
++EFI variable FdtFile
++~~~~~~~~~~~~~~~~~~~~
++
++Ideally U-Boot would always expose a device-tree that can be used for booting
++any operating systems. Unfortunately operating systems like Linux sometimes
++break forward and backward compatibility. In this case there is a need to load
++an operating system version specific device-tree.
++
++U-Boot has an environment variable fdtfile identifying the device-tree file to
++load. The content of this variable is exposed as EFI variable Fdtfile, vendor
++GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree path
++name as a NUL terminated ASCII string. On many architectures the file name is
++preceded by a vendor directory ('vendor-directory/board-name.dtb').
++
+ Links
+ -----
+ 
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index e24410505f..146e7f1bce 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
+ 	EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+ 		 0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+ 
++/* Vendor GUID for the FdtFile variable */
++#define VENDOR_FDTFILE_GUID \
++	EFI_GUID(0xd45dde69, 0x3bd6, 0x40e0, \
++		 0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
++
+ /* Use internal device tree when starting UEFI application */
+ #define EFI_FDT_USE_INTERNAL NULL
+ 
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index e6de685e87..71bcde645b 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -17,6 +17,8 @@
+ 
+ efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+ 
++efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
++
+ /*
+  * Allow unaligned memory access.
+  *
+@@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
+ {
+ }
+ 
++/**
++ * efi_init_fdtfile() - set EFI variable FdtFile
++ *
++ * Return:	status code
++ */
++static efi_status_t efi_init_fdtfile(void)
++{
++	char *val;
++
++	val = env_get("fdtfile");
++	if (!val)
++		return EFI_SUCCESS;
++
++	return efi_set_variable_int(u"FdtFile",
++				    &vendor_fdtfile_guid,
++				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
++				    EFI_VARIABLE_RUNTIME_ACCESS |
++				    EFI_VARIABLE_READ_ONLY,
++				    strlen(val) + 1, val, false);
++}
++
+ /**
+  * efi_init_platform_lang() - define supported languages
+  *
+@@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
++	/* Define EFI variable FdtFile */
++	if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
++		ret = efi_init_fdtfile();
++		if (ret != EFI_SUCCESS)
++			goto out;
++	}
++
+ 	/* Indicate supported features */
+ 	ret = efi_init_os_indications();
+ 	if (ret != EFI_SUCCESS)
+-- 
+2.40.1
 
