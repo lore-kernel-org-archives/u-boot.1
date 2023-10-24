@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF36AC07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:04:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF03EC07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C04FC8799C;
-	Tue, 24 Oct 2023 20:03:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E457879BB;
+	Tue, 24 Oct 2023 20:04:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JU8d9F+L";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="AcNo6sEy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 492C28797E; Tue, 24 Oct 2023 20:03:57 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 96BC0879B7; Tue, 24 Oct 2023 20:04:23 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C1D887967
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:03:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B4F687967
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d9b2ca542e5so4470514276.3
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:03:50 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5a822f96aedso48456127b3.2
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698170629; x=1698775429; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2z1h3IIF0LE2ks2uI4gc7HvZqLOs2l66FD426Mrpi3E=;
- b=JU8d9F+LE21YIk7q0vkOxAGdUVEe5oABalZNgPfY3xkft7lIJgAQTnlLQQ2UXNfPRD
- hl78aTN9PY0ciRxC1rmSN9a35VHYJbvBjCKlrgFLrbxxZnSH2VJitW8F7AgVwdf8lW9v
- 06g6eHOmsldOs1vXi5qSZNQD+QJYXK9AfMUs4=
+ d=google.com; s=20230601; t=1698170659; x=1698775459; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y4ZJNRTmNTL1WOhEJspODJ7VVJdfIGOloeUFcj7gz5g=;
+ b=AcNo6sEykP6KX8xAEH78sroyk2QgWMn9gfeaMXE/Hy6STvkqJZk29I2HkXlmeyM+Vk
+ JidseBPLfT5ugmU8LiYZGfCOEnAsoUvnXfB/0qLbMmsBuMpjBY6mEHBMckWJFRIaYd0N
+ eOHhWV06SOP6wmRepUEQXKWd3BsQPNyIjFQ+tbo/GBBs4B2Crea2kAJCRK5BvdiS4/sg
+ 2pYLkbJH5pi0BE+SzDFR8LMCkzBjV6f2Ot2T4oKPMjwWxJ/AUrdX6FilS2qXRnDuZn6m
+ ERpyyvZMC/vsp/CsbiqUb8o7EjxGsBwrN+Ai+idGIxfSvWwPIbQh1uy+6ZTNZRVh+U05
+ Ggrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698170629; x=1698775429;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2z1h3IIF0LE2ks2uI4gc7HvZqLOs2l66FD426Mrpi3E=;
- b=KKcBE0dfx0NOUbigF8ERvJB47LsV0pk9g7afKVkq21X/jQVZ/jLocRp+buRSSM2JfT
- bJCBxxO52sspwogEOux14Otv1hRRU24B22gbDKc91fMjRFFYuKlm+anjy2AtiTeEqVfZ
- fA442NrRNxhvRSJSULetrE2GEkDcWAb0a15q/ngBQYfzF71LF3Dl83h1P7NzOXmP8RXA
- xz+VlKuBYBtL7ov8MyFxKtFU2RB396xGVaAchZDTxX7bCyTXWvDr1173w4sH0MCsEvrn
- Bu462iwumv+CDPKKyvHTdYTNH13ISSmOmqPW9hWYCTreV1a1C4uSbsd47xl/lGiMfcI+
- taSQ==
-X-Gm-Message-State: AOJu0YxujSt/3SCwLAUUAJhWEBUxxEo2ojHmVnK5TAset5GucLOgJ1F3
- 6UyBwbY3Guy4u8c1PR6T1d648A==
-X-Google-Smtp-Source: AGHT+IH4xuuie/BRQVHt0DZ+kj2DibTIC8k6X5fYFpJwEeqic6t/BfwyOe3dAWJLwq71D/iS8qlZXA==
-X-Received: by 2002:a25:97c3:0:b0:d9a:d184:8304 with SMTP id
- j3-20020a2597c3000000b00d9ad1848304mr12386151ybo.35.1698170628825; 
- Tue, 24 Oct 2023 11:03:48 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- n139-20020a254091000000b00d7ba4c5e31fsm3723713yba.39.2023.10.24.11.03.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 11:03:48 -0700 (PDT)
-Date: Tue, 24 Oct 2023 14:03:46 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
-Message-ID: <20231024180346.GD496310@bill-the-cat>
-References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+ d=1e100.net; s=20230601; t=1698170659; x=1698775459;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Y4ZJNRTmNTL1WOhEJspODJ7VVJdfIGOloeUFcj7gz5g=;
+ b=niFma25HbcBgxT1jgJqIxZwJZ18oaRFJ5oNt9Y9kQTTzn7WZ4OqtyStzsamVPLr5Zx
+ itpTDxIaZCpY2NO82Z4sRGDt43STIiPNLHzUOT1Fk3KpSAmRKSwakXSag3bCVxbS6xr9
+ cTYNPSFTLmK+C17Wxd0SAP7pGpGYOAIxFGOuwnTFmuBKXU13v3EVoGi+TeGOYO8ifShn
+ T0Wtf++q0eFKJY0ndp82h7NBSrhrWwApq+AnQTcFlZQZ2rwidQnfleJj0aIe/0a5rbK8
+ c1dDX0GXK7jVpx+6PjbeSrfBmt4bE8msRb8NoHH8sOWUsvSrAVjCgEzcTX1QX+JXTElV
+ 9iHg==
+X-Gm-Message-State: AOJu0YxzjTs5Os3Sn67T4Zfp4Opej3K+uxSgWhpOuDZEA/QPS8afh2FM
+ yn0ykz2qxYoSbvCBlg5ntuOeHouLkyy7+DaQQh/mzW+7RoN/YUNhYdOEcb5L
+X-Google-Smtp-Source: AGHT+IEJaLTG9z9ixafLXu2lrKgEahIYN1G2p1TP5EdEXfdz9WQ7H35gJT5EMrHozLEAlcQ2/jo0NZsJ7rKeRl5yZ24=
+X-Received: by 2002:a0d:e20a:0:b0:59b:fb69:1639 with SMTP id
+ l10-20020a0de20a000000b0059bfb691639mr13940356ywe.32.1698170658992; Tue, 24
+ Oct 2023 11:04:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R4iT9XuI9OuREfOd"
-Content-Disposition: inline
-In-Reply-To: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 24 Oct 2023 11:03:25 -0700
+Message-ID: <CAPnjgZ1A8vyEUx2wiXqOCb8Kf9zP96wqy4kXanfKRR-uN6yOmg@mail.gmail.com>
+Subject: Re: quick question about TPM
+To: niek.nooijens@omron.com
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +83,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Niek,
 
---R4iT9XuI9OuREfOd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 24 Oct 2023 at 04:51, niek.nooijens@omron.com
+<niek.nooijens@omron.com> wrote:
+>
+> Hi
+>
+> Just a quick question. I'm developing a platform using the socfpga_cyclone5_defconfig
+> everything is working, linux boots, but we decided to add a TPM to it's SPI bus.
+> For some reason the TPM support menu in the menuconfig is disabled and I can't seem to find out why, or which file disables it. can you point me in the right direction?
 
-On Tue, Oct 24, 2023 at 08:20:32AM +0200, Heinrich Schuchardt wrote:
+The only thing 'config TPM' depends on is DM (driver model). Is that
+somehow disabled? Once you enable that, it should appear.
 
-> Forward and backward compatibility of Linux kernel device-trees is
-> sometimes missing. One solution approach is to load a kernel specific
-> device-tree. This can either be done via a U-Boot scripts (like the one
-> generated by Debian package flash-kernel or by a boot loader like GRUB.
-> The boot loader approach currently requires to know the device-tree name
-> before first boot which makes it unusable for generic images.
->=20
-> Expose the device-tree file name as EFI variable FdtFile.
-> This will allow bootloaders to load a kernel specific device-tree.
->=20
-> The variable will not be exposed on ACPI based systems or if the
-> environment variable fdtfile is not defined.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---R4iT9XuI9OuREfOd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4BwIACgkQFHw5/5Y0
-tyyM3Qv/c/lVI5KJO9hOCarXfQUCdl6DUatoSnTvHtLdevq52/6pdRBZgzB4EhRa
-3avbp+CyP+4xhV2BQI1a70lrJCNKAK393K9EqjhnBlwhcoUAPlvzgyx7iHb6h/So
-eHUR/9Flr2sr6XZVXpxRL99blulG5mtpL2yq60aw17hOfPXxJNgJYU4xD9G4gc0z
-psPG4gz7Tx6tosXzjH7Bw77mJW9xqZfRiXwnjOpmFtR0a1KX7rWtGBFCjuo6Q5tj
-PPiak+HqYueQM86Zg5g/nBrLH9ol4exu2k4HYfoFWk3wmNHFMdJVQCwLWfj+R57v
-uAsix45jEr2bwl9K2Qw9863GxDGjFtqMWd+f1WEwkVaCxyN90vHrPT7DpmvM5+mz
-UJSSV70DZRq0+gdxXiDHXDLhd4scwk2Iey2IvYDeanWlZGzdkO6TOrXbSnmuFKLA
-TbMwVP6fEVeWZcJhW03GqZQJwv5TarMODf5LLgqBgMFRZ2Or5I5KQC9Cm6MkGJoh
-MQtSQXaN
-=9ypT
------END PGP SIGNATURE-----
-
---R4iT9XuI9OuREfOd--
+Regards,
+Simon
