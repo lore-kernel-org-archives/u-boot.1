@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C1EAC25B48
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 23:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70385C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 23:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DF3E87A21;
-	Wed, 25 Oct 2023 01:18:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 797AE87A35;
+	Wed, 25 Oct 2023 01:18:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O3VEjC3U";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kJkwihLz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DD3E879FA; Wed, 25 Oct 2023 01:16:53 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 573F1879ED; Wed, 25 Oct 2023 01:17:11 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18370879F2
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 01:16:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1478887A17
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 01:16:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5a877e0f0d8so2596977b3.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 16:16:43 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5a82f176860so50179457b3.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 16:16:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698189402; x=1698794202; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698189415; x=1698794215; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HEMhNt9W9XUyeX0p/C6q4bpfHnUS7L1yOibKYB91Cuo=;
- b=O3VEjC3URZpGOGu9D3o4XMZKx19AWf/nZNWfA94v02zyd1R/FlOVJ+w9Yf2FdK6Pcf
- 4YoBuluHIYh4fQAkalySN+sLM44dNqBPnmZchk1XcR6b2kKgcJ9Gxa+A12NcZuew1bQO
- fIO6oJbyvfBfYhDOZ3r+6rJ0PKvXncPST//lQ=
+ bh=itjj59SGq4Mqhew44TY/WvTGuHta/T1sLxQYhGCGlpE=;
+ b=kJkwihLzhPYQYLtz013AsIAeGYwnKXK4kfvbBWXbNDGNaDzwz5riSWgKsKiEhOxii7
+ 4VgabSj//9t3f/2yqUkOtBFT0aRg8dewam5oXBD94N+W7BlVtLUSmwZ55I4m3R20JTde
+ QawjlqvMV5L1eCpuRMvrXZrFlQwRZp+FefwP4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698189402; x=1698794202;
+ d=1e100.net; s=20230601; t=1698189415; x=1698794215;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HEMhNt9W9XUyeX0p/C6q4bpfHnUS7L1yOibKYB91Cuo=;
- b=swJjS0WZdYRASHcGRFsf1++nwZzGNkHEidFMaP/W3l48PhsPPh3fGfHOreNatU8QQJ
- 3AunOtTKnISJGQmRiEgkfj3n/wFe+FFVk9O405CskypL0JfHlv7k8U8e2b2UzwsL+jsX
- bJCv+DtMq6iPFwLKbPtLmRq3AWxtWQxOmAi2nN81VsRnz1I/RVrGmCiqPDFzye2w2bU5
- foKlEV/F4gsWnAFIlnUYBFCVj0dM7jjzs+77k5ngK9uI1mFVFlRfasGsvzf2pTzvgGtn
- YdmdDMwKLbt09b3k/LhSbaEwnqMDsQ84t3j2zDFHZmqmj8s4q6mHWPhp+GwZQ9UUPkqQ
- ofUw==
-X-Gm-Message-State: AOJu0YzyF/npLjDpfftcg5vBkSjJFymoMt/h3RbSDq8ZxFTFZAFmDRps
- eEqegxVpoeHx7Jly2QMQHMiNtA==
-X-Google-Smtp-Source: AGHT+IGZY3zDGorMJ5PoOq9A2QUzoqgFph8O88dtGlp1IscHrS4rz8/85P5Un4T0Zw+z7jBOA8yVMQ==
-X-Received: by 2002:a25:3108:0:b0:d9b:c9be:f3d9 with SMTP id
- x8-20020a253108000000b00d9bc9bef3d9mr17806423ybx.29.1698189401841; 
- Tue, 24 Oct 2023 16:16:41 -0700 (PDT)
+ bh=itjj59SGq4Mqhew44TY/WvTGuHta/T1sLxQYhGCGlpE=;
+ b=wk+bOXWO7VD2ty+6ercbMutrYRFD+ORnRrAajBiyDXV1epwXixBCT94/f9B6Pv28Qb
+ blSGRi0uYbuqBmK2UaCF3fwhtS1d18WByyNoTO07t4Z/7hLKDn0SjAJi8VGNSXM7tpgR
+ gOoVRbgyFE44YC3YKmXG2Nog2urdemUO/dPS0OpPNps2NsOOmF50CobGSnCgV4B9QTsU
+ Uq/35FkNhZMSra7O+s9r5gCRIClwG4mAO8qYKFaB1WSt5rbatpOQKL1147A7hB7W8aVJ
+ 0w9slMwtKvjiimcIFfQ3LrDhTJlasy2EzJ7akuE4spKpGjac7LKWtYJxlIoEhFIVFJ0u
+ pOdg==
+X-Gm-Message-State: AOJu0YxDGn77qwIFuklyunJ0zut4D7dSNWbzO+RRetgbopLnXoSHqiFP
+ tVa+zsH07y66Qpwn7hs9+1lUaA==
+X-Google-Smtp-Source: AGHT+IHdXG+8MwmEqrkSGMYqmBcfMI9p4s0Km38754E0KFgvtOZbLmNAAuusVguAeq0wP/wQVUey4w==
+X-Received: by 2002:a0d:ca04:0:b0:5a7:c8a9:79e8 with SMTP id
+ m4-20020a0dca04000000b005a7c8a979e8mr14739460ywd.4.1698189414860; 
+ Tue, 24 Oct 2023 16:16:54 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
  [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
  by smtp.gmail.com with ESMTPSA id
- y134-20020a25dc8c000000b00c64533e4e20sm3963097ybe.33.2023.10.24.16.16.40
+ b190-20020a0dd9c7000000b005a23ab90366sm4471227ywe.11.2023.10.24.16.16.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 16:16:41 -0700 (PDT)
-Date: Tue, 24 Oct 2023 19:16:39 -0400
+ Tue, 24 Oct 2023 16:16:54 -0700 (PDT)
+Date: Tue, 24 Oct 2023 19:16:52 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Jarrah Gosbell <kernel@undef.tools>,
- Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Pavel Machek <pavel@ucw.cz>,
- Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de,
- Detlev Casanova <detlev.casanova@collabora.com>,
- =?iso-8859-1?Q?Fr=E9d=E9ric?= Danis <frederic.danis@collabora.com>
-Subject: Re: [PATCH] pstore: Use root address-cells/size-cells as defaults
- for reserved-memory
-Message-ID: <20231024231639.GZ496310@bill-the-cat>
-References: <20230826121652.2487643-1-andrej.skvortzov@gmail.com>
+To: John Clark <inindev@gmail.com>
+Cc: Joao Marcos Costa <jmcosta944@gmail.com>,
+ Maxim Cournoyer <maxim.cournoyer@gmail.com>,
+ Rong Tao <rongtao@cestc.cn>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] .gitignore: ignore misc include, simple-bin, and
+ tools/generated build artifacts
+Message-ID: <20231024231652.GC496310@bill-the-cat>
+References: <20231013132630.43018-1-inindev@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SLp95A4fPdEJ+Bwb"
+ protocol="application/pgp-signature"; boundary="0zICM8LHHHQ0D9P4"
 Content-Disposition: inline
-In-Reply-To: <20230826121652.2487643-1-andrej.skvortzov@gmail.com>
+In-Reply-To: <20231013132630.43018-1-inindev@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,62 +96,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---SLp95A4fPdEJ+Bwb
+--0zICM8LHHHQ0D9P4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 26, 2023 at 03:16:52PM +0300, Andrey Skvortsov wrote:
+On Fri, Oct 13, 2023 at 01:26:16PM +0000, John Clark wrote:
 
-> u-boot adds reserve-memory node, if it's missing, with following
-> properties:
+> make rock5b-rk3588_defconfig
+> make
+> git status
 >=20
-> ```
->     reserved-memory {
->          #address-cells =3D <2>;
->          #size-cells =3D <2>;
->          ranges;
->     }
-> ```
+> before
+> ~~~~~~~
+> On branch master
+> Your branch is ahead of 'origin/master' by 1 commit.
+>   (use "git push" to publish your local commits)
 >=20
-> But with these default address-cells and size-cells values, pstore
-> isn't working on A64. Root node for A64 defines 'address-cells' and
-> 'size-cells' as 1.
+> Untracked files:
+>   (use "git add <file>..." to include in what will be committed)
+> 	include/autoconf.mk
+> 	include/autoconf.mk.dep
+> 	include/config.h
+> 	mkimage-in-simple-bin-spi.mkimage-rockchip-tpl
+> 	mkimage-in-simple-bin-spi.mkimage-u-boot-spl
+> 	mkimage-in-simple-bin.mkimage-rockchip-tpl
+> 	mkimage-in-simple-bin.mkimage-u-boot-spl
+> 	simple-bin-spi.map
+> 	simple-bin.fit.fit
+> 	simple-bin.fit.itb
+> 	simple-bin.map
+> 	tools/generated/
 >=20
-> dtc complains if reserved-memory has different address-cells and
-> size-cells.
+> after
+> ~~~~~~~
+> On branch master
+> Your branch is ahead of 'origin/master' by 1 commit.
+>   (use "git push" to publish your local commits)
 >=20
-> ```
->      Warning (ranges_format): /reserved-memory:ranges: empty "ranges"
->      property but its #address-cells (2) differs from / (1)
-> ```
+> nothing to commit, working tree clean
 >=20
-> This patch takes into account address-cells and size-cells of the root
-> node and uses them as values for new reserved-memory node.
->=20
-> Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+> Signed-off-by: John Clark <inindev@gmail.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---SLp95A4fPdEJ+Bwb
+--0zICM8LHHHQ0D9P4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4UFcACgkQFHw5/5Y0
-tyxGVAv+JyRvP2ixkka1OSSCtkNDtiKcd1FjYnBw9HU2fNySSVzYS3CWH4htcENi
-2hBJ/hPOkeu90WW5lXpDUInZT8jha5Tfs7dEasT7NfnS3iWFFYfEVeQA9TdgSVWc
-ujuehvyLf09C3ze3KKtVVQEV5ZhtSs13iBHa1cCmpCKleoefVSLj+ZifKUvVtf5J
-+OYGYAuk/vFgEm571IOivGOsY9hk23LKL9PSwy5aineQEBuGkAFMPjz8QAEHssJr
-+pC2glDGtlRLji5TaYUCuvpkO89TH/I9E7lfM6twPTy+nMBOVV6jbsHKVwyKMrZu
-crpMpEskm9pBfSmHTXntdpjAzgAq71MWcIoWsNsbdAyjzgvlk94fDiKmMEkhLaAV
-M+Kb6GXtH9fYDQ1Pt8SR3CC7h4QZq7D89ZwnRn2F/hrf6z0V01KJm3U+U2J+3QQz
-U+PMcUPHBz8Ug2YXFcHxVq4lzNnxxFcn+OWK1CWE4tMXbxclfzI0KSMhSv44MJS1
-Z3gPZc3a
-=Yd30
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4UGQACgkQFHw5/5Y0
+tyxFKwv/Sm8R8jK3FBbGEED6a9BtvxEN7F0p+vrtCIFwfR3qawh+pDXGl+2if6y1
+HjSNydIQEENYe8Yrboa3d5v0Q4tPKc23fWnEF2C0eLpb4dhrfL5lIJJLJQBfYzce
+cB2bzPIkTuboPlFR7UiEgSwCKXIEjamWUco4q+d64ktv7mEbgSjbso5Xuclox/vp
+ghp60fnuvgcbbPxkkYi9wejOGCcbQErL22aZZThyK2WtWkJEdcPSHo8duRUFmZH9
+1tO9m+IDDxnBnpwjUZdY2QBb1aDCnxAZRY1XqQI+18JZQX71jLkm3ig5s1MzhaO5
+j75Hi9xLwrxscS9SEY7hhP3LUUhCuRUdI9m9HF4IWEe49W1G2BIOe+uKkdWPxxD0
+/Wv0N2gpkeiPHhvC0PjUPIMXLRB5EcMHVhsPGPT1ig1Oc1ZbRxlutHkYo2RHemTt
+ywMzi7H7T1acu+Dnsp+DWwpJr/jOj3DXg4fd9W3ztdWmpbH56T+W/iod5pnHcETJ
+u0kiU7Y4
+=IZQD
 -----END PGP SIGNATURE-----
 
---SLp95A4fPdEJ+Bwb--
+--0zICM8LHHHQ0D9P4--
