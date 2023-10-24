@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1DC3C25B47
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 20:24:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45152C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 20:24:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9903879BE;
-	Tue, 24 Oct 2023 22:24:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37C7C87987;
+	Tue, 24 Oct 2023 22:24:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ggVztX66";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ut076fVE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC3F8716E; Tue, 24 Oct 2023 22:23:58 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 439D38797C; Tue, 24 Oct 2023 22:24:03 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8123A874A9
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 22:23:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62DC787987
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 22:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40842752c6eso38925705e9.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 13:23:56 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40806e4106dso840905e9.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 13:23:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698179036; x=1698783836; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TCx6NtzmhP/eTO4TNNF0Blgk0MWpoVcnedzdp1BHsAg=;
- b=ggVztX662UTYYwCUwS/HC4F2+8it3fdAZ+J0ESMbsOxBUF0t+AJ+Z9NCFmC8lyk1z3
- BN3+KY82Y1p7+1TKe6zO20zmZwgGR/5Swj61pQ6G7nmLOeNOWFBNDnVMpafDeHfAcxI+
- A/O295HTP4Zz6Okht/NsavTNuejywYWH1IPPXdbqKBfDspEZm4/F9Sb9svVElhTD6W0i
- J7wS6W7+NKKvjHp5CR+TOtwacZUBmv0XjKEps4H7TfejZAae3u1S/b+AYeeSJhd5zkl7
- Cm0X6XjM+27LeolQW5QY2P5hsY3qm0QqenUdy0iu3sDV/SVj6doSh3c0tF+FJqGSHOlY
- mLmA==
+ d=linaro.org; s=google; t=1698179037; x=1698783837; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=SuP/GkU6ITouZfvuKBeu3C011gdwDuEyoEDoMpv3ODY=;
+ b=Ut076fVEXTWGG4mIqEwiVgqKd4PVI4J8FfTYP2DBw0l3Ic5frJtMh+qmDJVyMQbdRW
+ jvU2UOOqBpbCxYaBq7c426V+uX2WBTk/OTjvotnPZbpMgglKDklO5zzDrheAi5q35OBd
+ mRBFdcxrsvICix6r/I9AjaM3YqURmUMXG3dFh9+6s8xTlzd9ZvVxlvjpEnIyFNsp4DP9
+ k8tA63eRST7rHhyuLS7BZ4/pkoSGPZTNGmDOQYokIuiDQuv3xZVv5ZFA6L6HXpik8PJ0
+ ZdOYsCvysHORtsQDmy0gnQwN5Uw397Lbp0n3r8TwHctVKC8Ff2N5O/sWCHsoUlZlvPc7
+ Dm5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698179036; x=1698783836;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TCx6NtzmhP/eTO4TNNF0Blgk0MWpoVcnedzdp1BHsAg=;
- b=YTi0aCuLuyINHbL5OIi4Ju6CtsNF6dozBIJEXFialLhzZfax7EsvK0/pKpV3otK5NR
- Id4HkZSsHl1x3lV2pJHiUieVujjMMHoaIVQOGKp3KU/Cj3mwiuxJw71Nrm723mThDvQ9
- myuMPgyBIoFwBp29jIRDyZ/jM3wbGbFPjBlvbxcQUe9m06UFZxI0a+N5TjaO2fJdSf+F
- oK63blHLrQx54NDTy7UdacrtdMwqbPZVNfVVxupORq3jJa5RQCvT2tOqTCMP7h2zk4DW
- UeaW4E4Ot2KXWTgz6R5L+efipF9goLifiiZ2BfT5VN2WStjmXMzlO9nJHphzDoXUAJXw
- Z/BA==
-X-Gm-Message-State: AOJu0YyChEH1Iwfd421D36lNibY0if5Lbws7ZlsZ2VwoIbqz7tyiW2Wz
- 6YhDxw9V2LB/o56QPILkeT4+Ug==
-X-Google-Smtp-Source: AGHT+IGLhBiJxjvnIU772+YPye5UIXq8YJ2IKp+LFNc8pPbTSTos/odplApf1wfNp6LTmmkvsR+dRQ==
-X-Received: by 2002:a5d:518f:0:b0:32d:ad4a:bced with SMTP id
- k15-20020a5d518f000000b0032dad4abcedmr9418576wrv.23.1698179035865; 
- Tue, 24 Oct 2023 13:23:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698179037; x=1698783837;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SuP/GkU6ITouZfvuKBeu3C011gdwDuEyoEDoMpv3ODY=;
+ b=e2TH17zjtxDVFz2MhM7mymo8r/W65n4M4xD5/GuLXDCYgCFBK/p8w8ypPNYX64gZzH
+ IAqgaVrzj3NRKI++RrDx8XtnYDzrDWXS5ve7PdKNeFZHKez45QKOXvVJaot74n460H6E
+ kPrurGlFcpIUw96F06rlKUzD+tjKJfG//o/6b6oLkgoSpTv61ZgKPrXT24QlFxu1M7e/
+ v20gkmJwpq7RrAzOLSKvdR9uNW/nk5vbKm2kjpbYeoFgs9QpaAYZiu5FJZW75r2THRcJ
+ S6bp5q6ec0EpcIiFf0tzyYNo0vYiQDl7cKGhIDSIjgXWBE5Tmxm5XZXTYoZxGT8MfN3/
+ 9zRw==
+X-Gm-Message-State: AOJu0YwWQNEZx0BRkhMNadjfOAcDcZdBFMkTVmoK2CibgLbxzHFIuAH4
+ WvYQQNgd4ihWd0yTP2wGcyL95A==
+X-Google-Smtp-Source: AGHT+IFSJkDrFeMTYD66tYr8NPC5V6rIl3VUurYKELgGCk5bupkhYyAsnHW9BTutEZYLk5ULoBRAsQ==
+X-Received: by 2002:a05:600c:3b28:b0:407:3e94:bcca with SMTP id
+ m40-20020a05600c3b2800b004073e94bccamr12707918wms.1.1698179036845; 
+ Tue, 24 Oct 2023 13:23:56 -0700 (PDT)
 Received: from lion.localdomain (host-2-99-112-229.as13285.net. [2.99.112.229])
  by smtp.gmail.com with ESMTPSA id
- l21-20020a056000023500b003198a9d758dsm10682342wrz.78.2023.10.24.13.23.54
+ l21-20020a056000023500b003198a9d758dsm10682342wrz.78.2023.10.24.13.23.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 13:23:55 -0700 (PDT)
+ Tue, 24 Oct 2023 13:23:56 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH 0/8] arm: mach-snapdragon: Qualcomm clock driver cleanup
-Date: Tue, 24 Oct 2023 21:23:51 +0100
-Message-Id: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
+Date: Tue, 24 Oct 2023 21:23:52 +0100
+Subject: [PATCH 1/8] clk/qcom: move from mach-snapdragon
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIANcnOGUC/x2NQQrCMBAAv1L27GISQ61+RTwkcdMu2kR3RYTSv
- 5t6HIZhFlASJoVzt4DQh5VraWB3HaQplJGQb43BGXewxnmMHl+pzpged8z2mAffu+FkemhFDEo
- YJZQ0bU0VHrns56Bvks0/hTJ//7fLdV1/EmzzW30AAAA=
+Message-Id: <20231024-b4-qcom-clk-v1-1-9d96359b9a82@linaro.org>
+References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
+In-Reply-To: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
@@ -81,16 +80,15 @@ To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Luka Kovacic <luka.kovacic@sartura.hr>, 
  Luka Perkov <luka.perkov@sartura.hr>
 Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>, 
- Konrad Dybcio <konrad.dybcio@linaro.org>
+ u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.13-dev-46309
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3560;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5898;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=f7R0n3TGEem50i/dIlpSVjvmIzmu2lc2qcjDhmhkecU=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlQL9ZvZHPN+TH0b9fG+7uJfV5Z/j5q95v3tcNerrD9XV
- BZ/tj6zs6OUhUGQg0FWTJFF/MQyy6a1l+01ti+4ADOHlQlkCAMXpwBMhP8Mwz+jwLSlh+Z57y7Y
- rZs1//+RzfEZaTc2OR+QEXzSddVERuoUw/9w3YcRB2YzpSaI/9u1fc3D9L+vXt6YIeXmEm+2c2o
- zm2gaAA==
+ bh=0KuOPXf0EAPmzagqSGBbBe71teyBXkli9r2q+QEfIYg=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlQL9VsH40TUmYrVjkfrPwg5Iixbf/X0torczQHG/9i6u
+ 5nfFx7rKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPxtmBkWO4uvsPuyS+PWYVd
+ D5ys3hq+5eJR71VbPJ03Y3av9KxvLAx/xSVMuU7sZhFlD1ba9epcZeWaE+t/uC2MyzN17DrUYXp
+ PAQA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -109,76 +107,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series begins making some headway towards cleaning up Qualcomm
-platform support in u-boot. The following is a rough overview of the
-changes:
+Clock drivers don't belong here, move them to the right place and
+declutter mach-snapdragon a bit.
 
-* Move the Qualcomm clock drivers out of mach-snapdragon and into clk/qcom
-* Introduce per-platform clock driver configs to decouple Qualcomm platform
-  support from mach-snapdragon targets.
-* Add the IPQ4019 clock driver, removing it from mach-ipq40xx and introducing
-  the reset map.
-* Merge the qcom reset driver is into clk/qcom and rework it to be
-  compatible with upstream devicetrees.
-* A callback model is added so that multiple clock drivers can be
-  compiled in at once.
-* SDM845 gains support for enabling/disabling all gate clocks (CBC's) by
-  way of a new "gate_clk" abstraction.
-* Preperatory cleanup work is done to simplify the bringup process for
-  new platforms.
-
-Further details are included in each commit.
-
-The primary goal of this series is to prepare for enabling several new
-Qualcomm platforms in u-boot as well as additional peripherals, while
-minimising the amount of copy/pasted board-specific code.
-
-This series conflicts with a previous series introducing support for the
-Qualcomm RB2 board [1], I plan to resend this initial support pending
-acceptance of this series and several other cleanups.
-
-[1]: https://lore.kernel.org/u-boot/20230324080418.3856409-1-bhupesh.sharma@linaro.org/
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (7):
-      clk/qcom: move from mach-snapdragon
-      clk/qcom: add per-platform configs
-      clk/qcom: move ipq4019 driver from mach-ipq40xx
-      clk/qcom: sdm845: add register map for simple gate clocks
-      clk/qcom: use function pointers for enable and set_rate
-      clk/qcom: add mnd_width to clk_rcg_set_rate_mnd()
-      clk/qcom: fix rcg divider value
+ arch/arm/mach-snapdragon/Makefile                                | 5 -----
+ drivers/clk/Makefile                                             | 1 +
+ drivers/clk/qcom/Makefile                                        | 9 +++++++++
+ {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-apq8016.c   | 2 +-
+ {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-apq8096.c   | 3 ++-
+ .../clock-snapdragon.c => drivers/clk/qcom/clock-qcom.c          | 2 +-
+ .../clock-snapdragon.h => drivers/clk/qcom/clock-qcom.h          | 0
+ {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-qcs404.c    | 2 +-
+ {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-sdm845.c    | 2 +-
+ 9 files changed, 16 insertions(+), 10 deletions(-)
 
-Konrad Dybcio (1):
-      clk/qcom: handle resets and clocks in one device
+diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+index cbaaf23f6b56..497ee35cf7d3 100644
+--- a/arch/arm/mach-snapdragon/Makefile
++++ b/arch/arm/mach-snapdragon/Makefile
+@@ -2,20 +2,15 @@
+ #
+ # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+ 
+-obj-$(CONFIG_SDM845) += clock-sdm845.o
+ obj-$(CONFIG_SDM845) += sysmap-sdm845.o
+ obj-$(CONFIG_SDM845) += init_sdm845.o
+-obj-$(CONFIG_TARGET_DRAGONBOARD820C) += clock-apq8096.o
+ obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
+-obj-$(CONFIG_TARGET_DRAGONBOARD410C) += clock-apq8016.o
+ obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
+ obj-y += misc.o
+-obj-y += clock-snapdragon.o
+ obj-y += dram.o
+ obj-y += pinctrl-snapdragon.o
+ obj-y += pinctrl-apq8016.o
+ obj-y += pinctrl-apq8096.o
+ obj-y += pinctrl-qcs404.o
+ obj-y += pinctrl-sdm845.o
+-obj-$(CONFIG_TARGET_QCS404EVB) += clock-qcs404.o
+ obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index 26bf429acbc0..dd90c7672e1b 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -40,6 +40,7 @@ obj-$(CONFIG_CLK_MPFS) += microchip/
+ obj-$(CONFIG_CLK_MVEBU) += mvebu/
+ obj-$(CONFIG_CLK_OCTEON) += clk_octeon.o
+ obj-$(CONFIG_CLK_OWL) += owl/
++obj-$(CONFIG_ARCH_SNAPDRAGON) += qcom/
+ obj-$(CONFIG_CLK_RENESAS) += renesas/
+ obj-$(CONFIG_$(SPL_TPL_)CLK_SCMI) += clk_scmi.o
+ obj-$(CONFIG_CLK_SIFIVE) += sifive/
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+new file mode 100644
+index 000000000000..5f0c7a79d2ab
+--- /dev/null
++++ b/drivers/clk/qcom/Makefile
+@@ -0,0 +1,9 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright 2023 Linaro
++
++obj-y += clock-qcom.o
++obj-$(CONFIG_SDM845) += clock-sdm845.o
++obj-$(CONFIG_TARGET_DRAGONBOARD410C) += clock-apq8016.o
++obj-$(CONFIG_TARGET_DRAGONBOARD820C) += clock-apq8096.o
++obj-$(CONFIG_TARGET_QCS404EVB) += clock-qcs404.o
+diff --git a/arch/arm/mach-snapdragon/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+similarity index 98%
+rename from arch/arm/mach-snapdragon/clock-apq8016.c
+rename to drivers/clk/qcom/clock-apq8016.c
+index 23a37a1714dc..90f2a93d9ed5 100644
+--- a/arch/arm/mach-snapdragon/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -13,7 +13,7 @@
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+-#include "clock-snapdragon.h"
++#include "clock-qcom.h"
+ 
+ /* GPLL0 clock control registers */
+ #define GPLL0_STATUS_ACTIVE BIT(17)
+diff --git a/arch/arm/mach-snapdragon/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+similarity index 98%
+rename from arch/arm/mach-snapdragon/clock-apq8096.c
+rename to drivers/clk/qcom/clock-apq8096.c
+index 66184596d562..d5388c69aefe 100644
+--- a/arch/arm/mach-snapdragon/clock-apq8096.c
++++ b/drivers/clk/qcom/clock-apq8096.c
+@@ -13,7 +13,8 @@
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+-#include "clock-snapdragon.h"
++
++#include "clock-qcom.h"
+ 
+ /* GPLL0 clock control registers */
+ #define GPLL0_STATUS_ACTIVE		BIT(30)
+diff --git a/arch/arm/mach-snapdragon/clock-snapdragon.c b/drivers/clk/qcom/clock-qcom.c
+similarity index 99%
+rename from arch/arm/mach-snapdragon/clock-snapdragon.c
+rename to drivers/clk/qcom/clock-qcom.c
+index 0ac45dce9a92..5667abeb89a4 100644
+--- a/arch/arm/mach-snapdragon/clock-snapdragon.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -13,7 +13,7 @@
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+-#include "clock-snapdragon.h"
++#include "clock-qcom.h"
+ 
+ /* CBCR register fields */
+ #define CBCR_BRANCH_ENABLE_BIT  BIT(0)
+diff --git a/arch/arm/mach-snapdragon/clock-snapdragon.h b/drivers/clk/qcom/clock-qcom.h
+similarity index 100%
+rename from arch/arm/mach-snapdragon/clock-snapdragon.h
+rename to drivers/clk/qcom/clock-qcom.h
+diff --git a/arch/arm/mach-snapdragon/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
+similarity index 99%
+rename from arch/arm/mach-snapdragon/clock-qcs404.c
+rename to drivers/clk/qcom/clock-qcs404.c
+index 3357b54c30c0..80218af73ef6 100644
+--- a/arch/arm/mach-snapdragon/clock-qcs404.c
++++ b/drivers/clk/qcom/clock-qcs404.c
+@@ -11,7 +11,7 @@
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+-#include "clock-snapdragon.h"
++#include "clock-qcom.h"
+ 
+ #include <dt-bindings/clock/qcom,gcc-qcs404.h>
+ 
+diff --git a/arch/arm/mach-snapdragon/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
+similarity index 98%
+rename from arch/arm/mach-snapdragon/clock-sdm845.c
+rename to drivers/clk/qcom/clock-sdm845.c
+index d6df0365afca..95a057b82986 100644
+--- a/arch/arm/mach-snapdragon/clock-sdm845.c
++++ b/drivers/clk/qcom/clock-sdm845.c
+@@ -15,7 +15,7 @@
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ #include <dt-bindings/clock/qcom,gcc-sdm845.h>
+-#include "clock-snapdragon.h"
++#include "clock-qcom.h"
+ 
+ #define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
+ 
 
- arch/arm/Kconfig                                   |   2 +
- arch/arm/dts/qcom-ipq4019.dtsi                     |  14 +-
- arch/arm/dts/qcs404-evb.dts                        |  19 +-
- arch/arm/mach-ipq40xx/Makefile                     |   1 -
- arch/arm/mach-ipq40xx/clock-ipq4019.c              |  88 ------
- arch/arm/mach-snapdragon/Kconfig                   |   4 +
- arch/arm/mach-snapdragon/Makefile                  |   5 -
- arch/arm/mach-snapdragon/clock-sdm845.c            |  98 -------
- arch/arm/mach-snapdragon/clock-snapdragon.c        | 181 ------------
- arch/arm/mach-snapdragon/clock-snapdragon.h        |  48 ----
- .../mach-snapdragon/include/mach/sysmap-sdm845.h   |   3 +
- drivers/clk/Kconfig                                |   1 +
- drivers/clk/Makefile                               |   1 +
- drivers/clk/qcom/Kconfig                           |  52 ++++
- drivers/clk/qcom/Makefile                          |  10 +
- .../clk/qcom}/clock-apq8016.c                      |  41 ++-
- .../clk/qcom}/clock-apq8096.c                      |  41 ++-
- .../reset-qcom.c => clk/qcom/clock-ipq4019.c}      | 165 ++++-------
- drivers/clk/qcom/clock-qcom.c                      | 303 +++++++++++++++++++++
- drivers/clk/qcom/clock-qcom.h                      |  96 +++++++
- .../clk/qcom}/clock-qcs404.c                       |  97 +++++--
- drivers/clk/qcom/clock-sdm845.c                    | 265 ++++++++++++++++++
- drivers/reset/Kconfig                              |   7 -
- drivers/reset/Makefile                             |   1 -
- 24 files changed, 938 insertions(+), 605 deletions(-)
----
-base-commit: 30d01b582f2274eb8c808026c5fb4c33e9f2210d
-
-// Caleb (they/them)
+-- 
+2.42.0
 
