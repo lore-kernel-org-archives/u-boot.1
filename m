@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7E3C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 07:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36509C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 07:43:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27698714D;
-	Tue, 24 Oct 2023 09:41:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D64E387162;
+	Tue, 24 Oct 2023 09:41:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="icvuIFY4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JrD0nAhc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2473987154; Tue, 24 Oct 2023 09:41:48 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id EBB728713C; Tue, 24 Oct 2023 09:41:48 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5AE48713F
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 09:41:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C146D870E0
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 09:41:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2c503dbe50dso64147541fa.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 00:41:43 -0700 (PDT)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-507c78d258fso5965030e87.2
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 00:41:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698133303; x=1698738103; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698133304; x=1698738104; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d9JBtaDL/zjtWGpbK/glHoL1uctLM0L4rNGaNIvOtJ0=;
- b=icvuIFY4iKlo9/0JOeYEicF3pLSGhvp5tC3jzbvc+smv41lBsWkS5hqcM3UVAQfvqW
- xNfl4ophzAsXDg8JsjMT8vb3kVVBqb7M2len3aLFdQwqN/K1zSC1lCq1JFo1dffmioBO
- EZHzQ0yAXGZbrpqZzt2EJI7uIzT8Yk0AXl3bJmSgN8SG6K1BwnYSXWBilXvRdprFYu+c
- 79Zp0ftYy/VHJyho8JjqZseOT6HIorh1dnmsuTbqRFNIs2yrVc0BiQ+WNToMv5MnISVP
- sCsJuujRtNUXnwCDkNGXiHfLCaWgAroE5tYBYsbfIHzPNN15Zue1hm251j05zAlTxvW+
- rGIw==
+ bh=ZFECjWNCTNIXdNVKOdlbK/s4Wr46IvqmBZkGkvXEyvc=;
+ b=JrD0nAhc3wsbX56ZHghBS2lcTDRhNitYrkZNlsoUwF1+y64Rhlah0fb0wq5xv6UMv/
+ Pv0ra+R8iTER5Ii7+imeXWKj1ZnD1XcqA6ih4ASObEswfIKTA/SKkXw+xdQXPYxV3QgB
+ YgmV4A8PfhbhF2H2xKNPqz1yRjlgN452wHvo5MckjePVeb8apcaarCROO9nguIgAGJQM
+ AiIafdexdEFgDawnm8h9vgwqCLzGKU2/vqV8p3JGGEyVIiqnpm8Rbr6i8URYX6EZ04T5
+ PSNfbbJ0wUiOEAxbZdvi2j9insISsW/bc6uC8wglTpXqBgVN4SR/0SJlh3V2iqQSI4vK
+ 3zSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698133303; x=1698738103;
+ d=1e100.net; s=20230601; t=1698133304; x=1698738104;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d9JBtaDL/zjtWGpbK/glHoL1uctLM0L4rNGaNIvOtJ0=;
- b=M9DpWylyI1Bb1xcmbdk5yKHd3obJYgebf1dqlwoc5I/NNO/yol/mpTi1mUi7dBPQoh
- ri6QjFBdBkrAIMkUJGj1uukRjWXdMOwaNYK3B7iv3EMYGs3bnsIDOdRIzVl7x+cAcAd3
- /9jZeN3kh1rncv5Joq1YFWE0PpXjOLfOZEC8XKH52xonmWWZFBNW0B9D/jlqnKcgiSFz
- 9htGhQNXkrk/XbnUcQTeFN60IvrS/Tf1njKe9H6QfuxFguhOcGRCJplkxI3yIXfAUfpw
- LrQQL3jjQH391pPowkhnORytG9Sp1cPu4LkeUZYXpjXIaRx47Bm0dQw631tqMgv5emLd
- lhoQ==
-X-Gm-Message-State: AOJu0Yxrx5XknhY92wo+TueLhzJo/qlRhUK6eFJ1F+rGEZ4TWwK7dM3S
- 2uLFvVLBDNTVGPJPtBnbeN8=
-X-Google-Smtp-Source: AGHT+IFlcw/yt8H92aKqrK+535A/WdUHvQSCEGAs5x2uwOkP0HXvdt8hoXwO/PPu+FIr2F8LS4SN8Q==
-X-Received: by 2002:a05:6512:3c9a:b0:507:a766:ad27 with SMTP id
- h26-20020a0565123c9a00b00507a766ad27mr10671435lfv.16.1698133302734; 
- Tue, 24 Oct 2023 00:41:42 -0700 (PDT)
+ bh=ZFECjWNCTNIXdNVKOdlbK/s4Wr46IvqmBZkGkvXEyvc=;
+ b=QgB+n58+nQEb1sU3EdIgyEy7H6vojNPPwETrUlA3E7m/VcsHNqcwHOxIuiAeTmlg5f
+ yrVa/LGRLxCstEhGLC8daoDh+ZwVN2opd3g0hxoBXFhyF4IsUjZpuVH1ri+jH8EsHW8r
+ Q9332NR9nXKP4FP+zrDFdJp4OKJ0Z16INKcsoE+C8zQl95jaYH5klw4HtxyOH8D3/ex6
+ b1Uvq73+bkWRzCTay8intyRS9Tq8G7G9n7sMgpMjO4KVN80umd4FxEbw20akPK0i/O0s
+ npqRKUM8HI8KHlvJJC6+8sPFAUfx8S7GPUp7LISRiFFHnuE/jyN4nbfHokJYwVFULlxt
+ HjXA==
+X-Gm-Message-State: AOJu0YxlQT9wZDb3br6LUQanGM7fb0MzwR2VJcWw0PqUHIzqoNHaAxyj
+ 2zGEwgKhyVtJeL4No1QZ5OK95M4MFoA=
+X-Google-Smtp-Source: AGHT+IHIzAoJldVMoGIvj6Zg2KVZx36qaifXDs84XKFX32s01JwI5K98jiNh9pnyXvnnusfYQHt4Mg==
+X-Received: by 2002:a19:5f5e:0:b0:500:7fc7:8521 with SMTP id
+ a30-20020a195f5e000000b005007fc78521mr7822422lfj.64.1698133304298; 
+ Tue, 24 Oct 2023 00:41:44 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- a10-20020ac25e6a000000b00507a089caf6sm2017580lfr.219.2023.10.24.00.41.41
+ a10-20020ac25e6a000000b00507a089caf6sm2017580lfr.219.2023.10.24.00.41.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 00:41:41 -0700 (PDT)
+ Tue, 24 Oct 2023 00:41:43 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v8 7/8] power: pmic: tps65910: add TPS65911 PMIC support
-Date: Tue, 24 Oct 2023 10:41:09 +0300
-Message-Id: <20231024074110.199623-8-clamor95@gmail.com>
+Subject: [PATCH v8 8/8] power: regulator: tps65911: add regulator support
+Date: Tue, 24 Oct 2023 10:41:10 +0300
+Message-Id: <20231024074110.199623-9-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231024074110.199623-1-clamor95@gmail.com>
 References: <20231024074110.199623-1-clamor95@gmail.com>
@@ -91,209 +91,455 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to bind the regulators/child nodes with the pmic.
-Also adds the pmic i2c based read/write functions to access pmic
-registers.
+The driver provides regulator set/get voltage enable/disable
+functions for TI TPS5911 PMIC.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- doc/device-tree-bindings/pmic/tps65911.txt | 78 ++++++++++++++++++++++
- drivers/power/pmic/pmic_tps65910_dm.c      | 15 ++++-
- include/power/tps65910_pmic.h              | 44 ++++++++++++
- 3 files changed, 134 insertions(+), 3 deletions(-)
- create mode 100644 doc/device-tree-bindings/pmic/tps65911.txt
+ drivers/power/regulator/Kconfig              |  11 +
+ drivers/power/regulator/Makefile             |   1 +
+ drivers/power/regulator/tps65911_regulator.c | 397 +++++++++++++++++++
+ 3 files changed, 409 insertions(+)
+ create mode 100644 drivers/power/regulator/tps65911_regulator.c
 
-diff --git a/doc/device-tree-bindings/pmic/tps65911.txt b/doc/device-tree-bindings/pmic/tps65911.txt
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 6454c54855..102ec7bc5f 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -346,6 +346,17 @@ config DM_REGULATOR_TPS65910
+ 	regulator types of the TPS65910 (BUCK, BOOST and LDO). It implements
+ 	the get/set api for value and enable.
+ 
++config DM_REGULATOR_TPS65911
++	bool "Enable driver for TPS65911 PMIC regulators"
++	depends on DM_PMIC_TPS65910
++	---help---
++	This config enables implementation of driver-model regulator
++	uclass features for the TPS65911 PMIC. The driver supports Step-Down
++	DC-DC Converters for Processor Cores (VDD1 and VDD2), Step-Down DC-DC
++	Converter for I/O Power (VIO), Controller for External FETs (VDDCtrl)
++	and LDO Voltage Regulators found in TPS65911 PMIC and implements
++	get/set api for value and enable.
++
+ config DM_REGULATOR_TPS62360
+ 	bool "Enable driver for TPS6236x Power Regulator"
+ 	depends on DM_REGULATOR
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index 3ef55dc534..f79932d833 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -32,6 +32,7 @@ obj-$(CONFIG_$(SPL_)DM_REGULATOR_LP873X) += lp873x_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_LP87565) += lp87565_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_STM32_VREFBUF) += stm32-vrefbuf.o
+ obj-$(CONFIG_DM_REGULATOR_TPS65910) += tps65910_regulator.o
++obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS65911) += tps65911_regulator.o
+ obj-$(CONFIG_DM_REGULATOR_TPS62360) += tps62360_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS80031) += tps80031_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_STPMIC1) += stpmic1.o
+diff --git a/drivers/power/regulator/tps65911_regulator.c b/drivers/power/regulator/tps65911_regulator.c
 new file mode 100644
-index 0000000000..29270efbfe
+index 0000000000..ba80ed7c54
 --- /dev/null
-+++ b/doc/device-tree-bindings/pmic/tps65911.txt
-@@ -0,0 +1,78 @@
-+Texas Instruments, TPS65911 PMIC
++++ b/drivers/power/regulator/tps65911_regulator.c
+@@ -0,0 +1,397 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
++ */
 +
-+This device uses two drivers:
-+- drivers/power/pmic/tps65910.c (for parent device)
-+- drivers/power/regulator/tps65911_regulator.c (for child regulators)
++#include <common.h>
++#include <dm.h>
++#include <log.h>
++#include <power/pmic.h>
++#include <power/regulator.h>
++#include <power/tps65910_pmic.h>
 +
-+This chapter describes the binding info for the PMIC driver and regulators.
++/* fist row is control registers, second is voltage registers */
++static const char tps65911_vdd_reg[][TPS65911_VDD_NUM] = {
++	{ TPS65911_REG_VDD1, TPS65911_REG_VDD2,
++	  TPS65911_REG_VDDCTRL, TPS65911_REG_VIO },
++	{ TPS65911_REG_VDD1_OP, TPS65911_REG_VDD2_OP,
++	  TPS65911_REG_VDDCTRL_OP, 0x00 },
++};
 +
-+Required properties for PMIC:
-+- compatible: "ti,tps65911"
-+- reg: 0x2d
++static const char tps65911_ldo_reg[TPS65911_LDO_NUM] = {
++	TPS65911_REG_LDO1, TPS65911_REG_LDO2, TPS65911_REG_LDO3,
++	TPS65911_REG_LDO4, TPS65911_REG_LDO5, TPS65911_REG_LDO6,
++	TPS65911_REG_LDO7, TPS65911_REG_LDO8
++};
 +
-+With those two properties, the pmic device can be used for read/write only.
-+To bind each regulator, the optional regulators subnode should exists.
++static int tps65911_regulator_enable(struct udevice *dev, int op, bool *enable)
++{
++	struct dm_regulator_uclass_plat *uc_pdata =
++					dev_get_uclass_plat(dev);
++	u32 adr = uc_pdata->ctrl_reg;
++	int val, ret;
 +
-+Optional subnode:
-+- name: regulators (subnode list of each device's regulator)
++	val = pmic_reg_read(dev->parent, adr);
++	if (val < 0)
++		return val;
 +
-+Regulators subnode contains set on supported regulators.
++	if (op == PMIC_OP_GET) {
++		if (val & TPS65910_SUPPLY_STATE_ON)
++			*enable = true;
++		else
++			*enable = false;
 +
-+Required properties:
-+- regulator-name: used for regulator uclass platform data '.name',
++		return 0;
++	} else if (op == PMIC_OP_SET) {
++		val &= ~TPS65910_SUPPLY_STATE_MASK;
 +
-+List of supported regulator nodes names for tps65911:
-+- vdd1, vdd2, vddctrl, vddio
-+- ldo1, ldo2, ldo3, ldo4, ldo5, ldo6, ldo7, ldo8
++		if (*enable)
++			val |= TPS65910_SUPPLY_STATE_ON;
 +
-+vddio in datasheet is referred as vio, but for reduction of code and
-+unification of smps regulators it is named vddio.
++		ret = pmic_reg_write(dev->parent, adr, val);
++		if (ret)
++			return ret;
++	}
 +
-+Optional:
-+- regulator-min-microvolt: minimum allowed Voltage to set
-+- regulator-max-microvolt: minimum allowed Voltage to set
-+- regulator-always-on: regulator should be never disabled
-+- regulator-boot-on: regulator should be enabled by the bootloader
++	return 0;
++}
 +
-+Example:
++static int tps65911_get_enable(struct udevice *dev)
++{
++	bool enable = false;
++	int ret;
 +
-+tps65911@2d {
-+	compatible = "ti,tps65911";
-+	reg = <0x2d>;
++	ret = tps65911_regulator_enable(dev, PMIC_OP_GET, &enable);
++	if (ret)
++		return ret;
 +
-+	regulators {
-+		vdd1 {
-+			regulator-name = "vdd_1v2_backlight";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-always-on;
-+			regulator-boot-on;
-+		};
++	return enable;
++}
 +
-+		...
++static int tps65911_set_enable(struct udevice *dev, bool enable)
++{
++	return tps65911_regulator_enable(dev, PMIC_OP_SET, &enable);
++}
 +
-+		vddio {
-+			regulator-name = "vdd_1v8_gen";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-always-on;
-+			regulator-boot-on;
-+		};
++/**
++ * tps65911_vdd_volt2hex() - convert voltage in uV into
++ *			     applicable to register hex value
++ *
++ * @uV:		voltage in uV
++ *
++ * Return: voltage in hex on success, -ve on failure
++ */
++static int tps65911_vdd_volt2hex(int uV)
++{
++	if (uV > TPS65911_VDD_VOLT_MAX)
++		return -EINVAL;
 +
-+		ldo1 {
-+			regulator-name = "vdd_emmc_core";
-+			regulator-min-microvolt = <3300000>;
-+			regulator-max-microvolt = <3300000>;
-+			regulator-always-on;
-+			regulator-boot-on;
-+		};
++	if (uV < TPS65911_VDD_VOLT_MIN)
++		uV = TPS65911_VDD_VOLT_MIN;
 +
-+		...
++	return (uV - TPS65911_VDD_VOLT_BASE) / 12500;
++}
 +
-+		ldo8 {
-+			regulator-name = "vdd_ddr_hs";
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1000000>;
-+		};
++/**
++ * tps65911_vdd_hex2volt() - convert register hex value into
++ *			     actual voltage in uV
++ *
++ * @hex:	hex value of register
++ *
++ * Return: voltage in uV on success, -ve on failure
++ */
++static int tps65911_vdd_hex2volt(int hex)
++{
++	if (hex > TPS65910_VDD_SEL_MAX)
++		return -EINVAL;
++
++	if (hex < TPS65910_VDD_SEL_MIN)
++		hex = TPS65910_VDD_SEL_MIN;
++
++	return TPS65911_VDD_VOLT_BASE + hex * 12500;
++}
++
++static int tps65911_vio_range[4] = {
++	1500000, 1800000, 2500000, 3300000
++};
++
++static int tps65911_vio_val(struct udevice *dev, int op, int *uV)
++{
++	struct dm_regulator_uclass_plat *uc_pdata =
++					dev_get_uclass_plat(dev);
++	u32 adr = uc_pdata->volt_reg;
++	int i, val;
++
++	val = pmic_reg_read(dev->parent, adr);
++	if (val < 0)
++		return val;
++
++	if (op == PMIC_OP_GET) {
++		*uV = 0;
++
++		val &= TPS65910_SEL_MASK;
++
++		*uV = tps65911_vio_range[val >> 2];
++
++		return 0;
++	}
++
++	val &= ~TPS65910_SEL_MASK;
++
++	for (i = 0; i < ARRAY_SIZE(tps65911_vio_range); i++)
++		if (*uV <= tps65911_vio_range[i])
++			break;
++
++	return pmic_reg_write(dev->parent, adr, val | i << 2);
++}
++
++static int tps65911_vdd_val(struct udevice *dev, int op, int *uV)
++{
++	struct dm_regulator_uclass_plat *uc_pdata =
++					dev_get_uclass_plat(dev);
++	u32 adr = uc_pdata->volt_reg;
++	int val, ret;
++
++	/* in case vdd is vio */
++	if (!adr)
++		return tps65911_vio_val(dev, op, uV);
++
++	val = pmic_reg_read(dev->parent, adr);
++	if (val < 0)
++		return val;
++
++	if (op == PMIC_OP_GET) {
++		*uV = 0;
++
++		ret = tps65911_vdd_hex2volt(val);
++		if (ret < 0)
++			return ret;
++
++		*uV = ret;
++		return 0;
++	}
++
++	val = tps65911_vdd_volt2hex(*uV);
++	if (val < 0)
++		return val;
++
++	return pmic_reg_write(dev->parent, adr, val);
++}
++
++static int tps65911_vdd_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_pdata =
++					dev_get_uclass_plat(dev);
++
++	uc_pdata->type = REGULATOR_TYPE_BUCK;
++
++	/* check for vddctrl and vddio cases */
++	if (!strcmp("vddctrl", dev->name)) {
++		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][2];
++		uc_pdata->volt_reg = tps65911_vdd_reg[1][2];
++		return 0;
++	}
++
++	if (!strcmp("vddio", dev->name)) {
++		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][3];
++		uc_pdata->volt_reg = tps65911_vdd_reg[1][3];
++		return 0;
++	}
++
++	if (dev->driver_data > 0) {
++		u8 idx = dev->driver_data - 1;
++
++		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][idx];
++		uc_pdata->volt_reg = tps65911_vdd_reg[1][idx];
++	}
++
++	return 0;
++}
++
++static int vdd_get_value(struct udevice *dev)
++{
++	int uV;
++	int ret;
++
++	ret = tps65911_vdd_val(dev, PMIC_OP_GET, &uV);
++	if (ret)
++		return ret;
++
++	return uV;
++}
++
++static int vdd_set_value(struct udevice *dev, int uV)
++{
++	return tps65911_vdd_val(dev, PMIC_OP_SET, &uV);
++}
++
++static const struct dm_regulator_ops tps65911_vdd_ops = {
++	.get_value  = vdd_get_value,
++	.set_value  = vdd_set_value,
++	.get_enable = tps65911_get_enable,
++	.set_enable = tps65911_set_enable,
++};
++
++U_BOOT_DRIVER(tps65911_vdd) = {
++	.name = TPS65911_VDD_DRIVER,
++	.id = UCLASS_REGULATOR,
++	.ops = &tps65911_vdd_ops,
++	.probe = tps65911_vdd_probe,
++};
++
++/**
++ * tps65911_ldo_volt2hex() - convert voltage in uV into
++ *			     applicable to register hex value
++ *
++ * @idx:	regulator index
++ * @uV:		voltage in uV
++ *
++ * Return: voltage in hex on success, -ve on failure
++ */
++static int tps65911_ldo_volt2hex(int idx, int uV)
++{
++	int step;
++
++	if (uV > TPS65911_LDO_VOLT_MAX)
++		return -EINVAL;
++
++	if (uV < TPS65911_LDO_VOLT_BASE)
++		uV = TPS65911_LDO_VOLT_BASE;
++
++	switch (idx) {
++	case 1:
++	case 2:
++	case 4:
++		step = TPS65911_LDO124_VOLT_STEP;
++		break;
++	case 3:
++	case 5:
++	case 6:
++	case 7:
++	case 8:
++		step = TPS65911_LDO358_VOLT_STEP;
++		break;
++	default:
++		return -EINVAL;
 +	};
++
++	return ((uV - TPS65911_LDO_VOLT_BASE) / step) << 2;
++}
++
++/**
++ * tps65911_ldo_hex2volt() - convert register hex value into
++ *			     actual voltage in uV
++ *
++ * @idx:	regulator index
++ * @hex:	hex value of register
++ *
++ * Return: voltage in uV on success, -ve on failure
++ */
++static int tps65911_ldo_hex2volt(int idx, int hex)
++{
++	int step;
++
++	switch (idx) {
++	case 1:
++	case 2:
++	case 4:
++		if (hex > TPS65911_LDO124_VOLT_MAX_HEX)
++			return -EINVAL;
++
++		step = TPS65911_LDO124_VOLT_STEP;
++		break;
++	case 3:
++	case 5:
++	case 6:
++	case 7:
++	case 8:
++		if (hex > TPS65911_LDO358_VOLT_MAX_HEX)
++			return -EINVAL;
++
++		if (hex < TPS65911_LDO358_VOLT_MIN_HEX)
++			hex = TPS65911_LDO358_VOLT_MIN_HEX;
++
++		step = TPS65911_LDO358_VOLT_STEP;
++		break;
++	default:
++		return -EINVAL;
++	};
++
++	return TPS65911_LDO_VOLT_BASE + hex * step;
++}
++
++static int tps65911_ldo_val(struct udevice *dev, int op, int *uV)
++{
++	struct dm_regulator_uclass_plat *uc_pdata =
++					dev_get_uclass_plat(dev);
++	u32 adr = uc_pdata->ctrl_reg;
++	int idx = dev->driver_data;
++	int val, hex, ret;
++
++	val = pmic_reg_read(dev->parent, adr);
++	if (val < 0)
++		return val;
++
++	if (op == PMIC_OP_GET) {
++		*uV = 0;
++		val &= TPS65911_LDO_SEL_MASK;
++
++		ret = tps65911_ldo_hex2volt(idx, val >> 2);
++		if (ret < 0)
++			return ret;
++
++		*uV = ret;
++		return 0;
++	}
++
++	hex = tps65911_ldo_volt2hex(idx, *uV);
++	if (hex < 0)
++		return hex;
++
++	val &= ~TPS65911_LDO_SEL_MASK;
++
++	return pmic_reg_write(dev->parent, adr, val | hex);
++}
++
++static int tps65911_ldo_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_pdata =
++					dev_get_uclass_plat(dev);
++	u8 idx = dev->driver_data - 1;
++
++	uc_pdata->type = REGULATOR_TYPE_LDO;
++	uc_pdata->ctrl_reg = tps65911_ldo_reg[idx];
++
++	return 0;
++}
++
++static int ldo_get_value(struct udevice *dev)
++{
++	int uV;
++	int ret;
++
++	ret = tps65911_ldo_val(dev, PMIC_OP_GET, &uV);
++	if (ret)
++		return ret;
++
++	return uV;
++}
++
++static int ldo_set_value(struct udevice *dev, int uV)
++{
++	return tps65911_ldo_val(dev, PMIC_OP_SET, &uV);
++}
++
++static const struct dm_regulator_ops tps65911_ldo_ops = {
++	.get_value  = ldo_get_value,
++	.set_value  = ldo_set_value,
++	.get_enable = tps65911_get_enable,
++	.set_enable = tps65911_set_enable,
 +};
-diff --git a/drivers/power/pmic/pmic_tps65910_dm.c b/drivers/power/pmic/pmic_tps65910_dm.c
-index 8ead1db802..0a4911cef6 100644
---- a/drivers/power/pmic/pmic_tps65910_dm.c
-+++ b/drivers/power/pmic/pmic_tps65910_dm.c
-@@ -12,13 +12,19 @@
- #include <power/regulator.h>
- #include <power/tps65910_pmic.h>
- 
--static const struct pmic_child_info pmic_children_info[] = {
-+static const struct pmic_child_info tps65910_children_info[] = {
- 	{ .prefix = "ldo_", .driver = TPS65910_LDO_DRIVER },
- 	{ .prefix = "buck_", .driver = TPS65910_BUCK_DRIVER },
- 	{ .prefix = "boost_", .driver = TPS65910_BOOST_DRIVER },
- 	{ },
- };
- 
-+static const struct pmic_child_info tps65911_children_info[] = {
-+	{ .prefix = "ldo", .driver = TPS65911_LDO_DRIVER },
-+	{ .prefix = "vdd", .driver = TPS65911_VDD_DRIVER },
-+	{ },
++
++U_BOOT_DRIVER(tps65911_ldo) = {
++	.name = TPS65911_LDO_DRIVER,
++	.id = UCLASS_REGULATOR,
++	.ops = &tps65911_ldo_ops,
++	.probe = tps65911_ldo_probe,
 +};
-+
- static int pmic_tps65910_reg_count(struct udevice *dev)
- {
- 	return TPS65910_NUM_REGS;
-@@ -50,6 +56,8 @@ static int pmic_tps65910_read(struct udevice *dev, uint reg, u8 *buffer,
- 
- static int pmic_tps65910_bind(struct udevice *dev)
- {
-+	const struct pmic_child_info *tps6591x_children_info =
-+			(struct pmic_child_info *)dev_get_driver_data(dev);
- 	ofnode regulators_node;
- 	int children;
- 
-@@ -59,7 +67,7 @@ static int pmic_tps65910_bind(struct udevice *dev)
- 		return -EINVAL;
- 	}
- 
--	children = pmic_bind_children(dev, regulators_node, pmic_children_info);
-+	children = pmic_bind_children(dev, regulators_node, tps6591x_children_info);
- 	if (!children)
- 		debug("%s has no children (regulators)\n", dev->name);
- 
-@@ -83,7 +91,8 @@ static struct dm_pmic_ops pmic_tps65910_ops = {
- };
- 
- static const struct udevice_id pmic_tps65910_match[] = {
--	{ .compatible = "ti,tps65910" },
-+	{ .compatible = "ti,tps65910", .data = (ulong)&tps65910_children_info },
-+	{ .compatible = "ti,tps65911", .data = (ulong)&tps65911_children_info },
- 	{ /* sentinel */ }
- };
- 
-diff --git a/include/power/tps65910_pmic.h b/include/power/tps65910_pmic.h
-index 66214786d3..7d6545abdf 100644
---- a/include/power/tps65910_pmic.h
-+++ b/include/power/tps65910_pmic.h
-@@ -126,4 +126,48 @@ struct tps65910_regulator_pdata {
- #define TPS65910_BOOST_DRIVER	"tps65910_boost"
- #define TPS65910_LDO_DRIVER	"tps65910_ldo"
- 
-+/* tps65911 i2c registers */
-+enum {
-+	TPS65911_REG_VIO			= 0x20,
-+	TPS65911_REG_VDD1,
-+	TPS65911_REG_VDD1_OP,
-+	TPS65911_REG_VDD1_SR,
-+	TPS65911_REG_VDD2,
-+	TPS65911_REG_VDD2_OP,
-+	TPS65911_REG_VDD2_SR,
-+	TPS65911_REG_VDDCTRL,
-+	TPS65911_REG_VDDCTRL_OP,
-+	TPS65911_REG_VDDCTRL_SR,
-+	TPS65911_REG_LDO1			= 0x30,
-+	TPS65911_REG_LDO2,
-+	TPS65911_REG_LDO5,
-+	TPS65911_REG_LDO8,
-+	TPS65911_REG_LDO7,
-+	TPS65911_REG_LDO6,
-+	TPS65911_REG_LDO4,
-+	TPS65911_REG_LDO3,
-+};
-+
-+#define TPS65911_VDD_NUM		4
-+#define TPS65911_LDO_NUM		8
-+
-+#define TPS65911_VDD_VOLT_MAX		1500000
-+#define TPS65911_VDD_VOLT_MIN		600000
-+#define TPS65911_VDD_VOLT_BASE		562500
-+
-+#define TPS65911_LDO_VOLT_MAX		3300000
-+#define TPS65911_LDO_VOLT_BASE		800000
-+
-+#define TPS65911_LDO_SEL_MASK		(0x3f << 2)
-+
-+#define TPS65911_LDO124_VOLT_MAX_HEX	0x32
-+#define TPS65911_LDO358_VOLT_MAX_HEX	0x19
-+#define TPS65911_LDO358_VOLT_MIN_HEX	0x02
-+
-+#define TPS65911_LDO124_VOLT_STEP	50000
-+#define TPS65911_LDO358_VOLT_STEP	100000
-+
-+#define TPS65911_VDD_DRIVER		"tps65911_vdd"
-+#define TPS65911_LDO_DRIVER		"tps65911_ldo"
-+
- #endif /* __TPS65910_PMIC_H_ */
 -- 
 2.39.2
 
