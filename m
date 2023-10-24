@@ -4,73 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC345C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 16:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0045EC00A8F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 16:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B681487967;
-	Tue, 24 Oct 2023 18:29:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CB0D286EEE;
+	Tue, 24 Oct 2023 18:42:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="kQtogbDI";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53EEA87967; Tue, 24 Oct 2023 18:29:25 +0200 (CEST)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com
- [209.85.161.51])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 258788748F
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 18:29:23 +0200 (CEST)
+ id 26DA586F09; Tue, 24 Oct 2023 18:42:09 +0200 (CEST)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id 8796886F0D
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 18:42:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robherring2@gmail.com
-Received: by mail-oo1-f51.google.com with SMTP id
- 006d021491bc7-5845a94dae1so1213610eaf.0
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 09:29:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698164962; x=1698769762;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lyvP8rg0cN3uMaVGkUZJYnGyShBPgeG7niyvmwU0I7E=;
- b=EaR66zUtEXSzjk18kdngYHzNwTbNBOxS/NjCj+0JK7e6jVe7rs+zNIiTr2aih1xyuH
- KiupO2b+ykPA+Nc/Q/F2LcfqWN3jPkbZaexlRHkcoqV8D5itR5cCpSYbND83j3FUyque
- 0HeAhzWO/vYeNINJTza/dZIZ07OYW5aOVEx9G5eCpd8ZS1homWvlQ081nhU+5exEdml7
- vzeggwTCt+vnLS4ez7+Qs2pDL+diW7j4tCkvRQ7T9Jyf06MTS7IuHkolrMRPCEpgCcZj
- /cytF9qn2k584KjkLXZtWOVlv1Bwc6ZV0OYe4KeAUSHpWjECuzQncGZEpJ7ST39XRR5i
- V3jQ==
-X-Gm-Message-State: AOJu0Yxc86CSRbGAUUNxvpFv0WARrDPtPe9koBuKhOApt91mA/xS+IrL
- Nwx9Atik1LtTDVPSrfCxtw==
-X-Google-Smtp-Source: AGHT+IHHMl2/oHWft2yTTAv4LNNI02Tu07uYTbFvwLbExU9mIcFCwW29I/FboUp1wYBFIRXZrsw17A==
-X-Received: by 2002:a4a:e751:0:b0:571:aceb:26d3 with SMTP id
- n17-20020a4ae751000000b00571aceb26d3mr7013547oov.4.1698164961620; 
- Tue, 24 Oct 2023 09:29:21 -0700 (PDT)
-Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net.
- [66.90.144.107]) by smtp.gmail.com with ESMTPSA id
- di11-20020a0568201e8b00b0057b43a25deasm1997587oob.3.2023.10.24.09.29.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 09:29:20 -0700 (PDT)
-Received: (nullmailer pid 4048334 invoked by uid 1000);
- Tue, 24 Oct 2023 16:29:19 -0000
-Date: Tue, 24 Oct 2023 11:29:19 -0500
-From: Rob Herring <robh@kernel.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, linux-mtd@lists.infradead.org,
- Miquel Raynal <miquel.raynal@bootlin.com>, Michael Walle <mwalle@kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
- Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 3/3] dt-bindings: mtd: binman-partitions: Add
- alignment properties
-Message-ID: <20231024162919.GC3707756-robh@kernel.org>
-References: <20231009220436.2164245-1-sjg@chromium.org>
- <20231009220436.2164245-3-sjg@chromium.org>
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from [10.7.98.47] (unknown [167.220.26.47])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 6260520B74C0;
+ Tue, 24 Oct 2023 09:42:05 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 6260520B74C0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1698165725;
+ bh=V7rPopswHCJDZQ62zTedtmb2/aidnojwF7ETrUNIRfk=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=kQtogbDIPOHX8vTfZEhcUzu2Y52nvP0/9rpd0ipXM95Q+VqR+okuhM2UCAV2HAVU0
+ Jl429u3lqjKa3f0Dj26SRDuVT8ERXtS4jsFngnc65knJEyLQRWcAbhMmi35ILmXNs3
+ zgy++noOY8MgkVEkkQBYjtkTAMEithy5k5Zx1pWA=
+Message-ID: <6ad8b33b-6b9b-400c-bb3d-89097ec6aa73@linux.microsoft.com>
+Date: Tue, 24 Oct 2023 09:42:04 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] net: bootp: BOOTP/DHCPv4 retransmission
+ improvements
+Content-Language: en-GB
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
+ <20231024002159.74477-3-seanedmond@linux.microsoft.com>
+ <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
+From: Sean Edmond <seanedmond@linux.microsoft.com>
+In-Reply-To: <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231009220436.2164245-3-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,108 +67,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 09, 2023 at 04:04:15PM -0600, Simon Glass wrote:
-> Add three properties for controlling alignment of partitions, aka
-> 'entries' in binman.
-> 
-> For now there is no explicit mention of hierarchy, so a 'section' is
-> just the 'binman' node.
-> 
-> These new properties are inputs to the packaging process, but are also
-> needed if the firmware is repacked, to ensure that alignment
-> constraints are not violated. Therefore they are provided as part of
-> the schema.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v2)
-> 
-> Changes in v2:
-> - Fix 'a' typo in commit message
-> 
->  .../mtd/partitions/binman-partition.yaml      | 39 +++++++++++++++++++
->  1 file changed, 39 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-> index 35a320359ec1..8e8a3b6d4d14 100644
-> --- a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-> @@ -28,6 +28,42 @@ properties:
->            - const: u-boot       # u-boot.bin from U-Boot project
->            - const: atf-bl31     # bl31.bin or bl31.elf from TF-A project
->  
-> +  align:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      This sets the alignment of the entry. The entry offset is adjusted
-> +      so that the entry starts on an aligned boundary within the containing
-> +      section or image. For example ‘align = <16>’ means that the entry will
-> +      start on a 16-byte boundary. This may mean that padding is added before
 
-Only your example defines that alignment is in bytes.
+On 2023-10-23 11:06 p.m., Heinrich Schuchardt wrote:
+> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
+>> From: Sean Edmond <seanedmond@microsoft.com>
+>>
+>> This patch introduces 3 improvements to align with RFC 951:
+>> - retransmission backoff interval maximum is configurable
+>> - initial retranmission backoff interval is configurable
+>> - transaction ID is kept the same for each BOOTP/DHCPv4 request
+>>
+>> In applications where thousands of nodes are serviced by a single DHCP
+>> server, maximizing the retransmission backoff interval at 2 seconds (the
+>> current u-boot default) exerts high pressure on the DHCP server and
+>> network layer.
+>>
+>> RFC 951 “7.2. Client Retransmission Strategy” states that the
+>> retransmission backoff interval should maximize at 60 seconds. This
+>
+> %s/maximize at/be limited to/
+>
+>> patch allows the interval to be configurable using the environment
+>> variable "bootpretransmitperiodmax"
+>
+> If there is an RFC defining the value, why do we need an environment
+> variable?
+>
+The intention with this patch is to provide the option to satisfy RFC, 
+while giving the option to preserve the existing behavior.  The 
+retransmission timing parameters in u-boot have been the same for the 
+last ~10 years, so I'm guessing some have gotten used to this behavior 
+(even though it's not correct).
 
-> +      the entry. The padding is part of the containing section but is not
-> +      included in the entry, meaning that an empty space may be created before
-> +      the entry starts. Alignment should be a power of 2. If ‘align’ is not
-> +      provided, no alignment is performed.
+>>
+>> The initial retranmission backoff period defaults to 250ms, which is
+>> also too small for these scenarios with many clients.  This patch makes
+>> the initial retransmission interval to be configurable using the
+>> environment variable "bootpretransmitperiodinit".
+>>
+>> Also, on a retransmission it is not expected for the transaction ID to
+>> change (only the 'secs' field should be updated). Let's save the
+>> transaction ID and use the same transaction ID for each BOOTP/DHCPv4
+>> exchange.
+>>
+>> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+>> ---
+>>   net/bootp.c | 56 ++++++++++++++++++++++++++++++++++++++---------------
+>>   1 file changed, 40 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/net/bootp.c b/net/bootp.c
+>> index 6800290963..bab17a9ceb 100644
+>> --- a/net/bootp.c
+>> +++ b/net/bootp.c
+>> @@ -42,6 +42,17 @@
+>>    */
+>>   #define TIMEOUT_MS    ((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
+>>
+>> +/*
+>> + * According to rfc951 : 7.2. Client Retransmission Strategy
+>> + * "After the 'average' backoff reaches about 60 seconds, it should be
+>> + * increased no further, but still randomized."
+>> + *
+>> + * U-Boot has saturated this backoff at 2 seconds for a long time.
+>> + * To modify, set the environment variable "bootpretransmitperiodmax"
+>> + */
+>> +#define RETRANSMIT_PERIOD_MAX_MS    2000
+>
+> This does not match RFC 951. Please, why shouldn't we use the standard
+> value by default?
 
-Would be nice to have some constraints. Unfortunately, no way to say 
-'power of 2' in json-schema (we could add something possibly), so the 
-only way is:
+You're right, better to use the standard value by default.
 
-enum: [ 2, 4, 8, 16, 32, 64, ... ]
+>
+>> +#define RETRANSMIT_PERIOD_INIT_MS    250
+>
+> This constant should be described too.
 
-Kind of verbose if we add all 31 possibilities...
+Will add a description.
 
-Could also do this:
-
-minium: 2
-maximum: 0x80000000
-multipleOf: 2
-
-> +
-> +  align-size:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      This sets the alignment of the entry size. For example, to ensure
-> +      that the size of an entry is a multiple of 64 bytes, set this to 64.
-> +      While this does not affect the contents of the entry within binman
-> +      itself (the padding is performed only when its parent section is
-> +      assembled), the end result is that the entry ends with the padding
-> +      bytes, so may grow. If ‘align-size’ is not provided, no alignment is
-> +      performed.
-> +
-> +  align-end:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      This sets the alignment of the end of an entry with respect to the
-> +      containing section. Some entries require that they end on an alignment
-> +      boundary, regardless of where they start. This does not move the start
-> +      of the entry, so the contents of the entry will still start at the
-> +      beginning. But there may be padding at the end. While this does not
-> +      affect the contents of the entry within binman itself (the padding is
-> +      performed only when its parent section is assembled), the end result is
-> +      that the entry ends with the padding bytes, so may grow. If ‘align-end’
-> +      is not provided, no alignment is performed.
-> +
->  additionalProperties: false
->  
->  examples:
-> @@ -40,10 +76,13 @@ examples:
->          partition@100000 {
->              compatible = "u-boot";
->              reg = <0x100000 0xf00000>;
-> +            align-size = <0x1000>;
-> +            align-end = <0x10000>;
->          };
->  
->          partition@200000 {
->              compatible = "atf-bl31";
->              reg = <0x200000 0x100000>;
-> +            align = <0x4000>;
->          };
->      };
-> -- 
-> 2.42.0.609.gbb76f46606-goog
-> 
+>
+>> +
+>>   #ifndef CFG_DHCP_MIN_EXT_LEN        /* minimal length of extension 
+>> list */
+>>   #define CFG_DHCP_MIN_EXT_LEN 64
+>>   #endif
+>> @@ -53,6 +64,7 @@
+>>   u32        bootp_ids[CFG_BOOTP_ID_CACHE_SIZE];
+>>   unsigned int    bootp_num_ids;
+>>   int        bootp_try;
+>> +u32        bootp_id;
+>>   ulong        bootp_start;
+>>   ulong        bootp_timeout;
+>>   char net_nis_domain[32] = {0,}; /* Our NIS domain */
+>> @@ -60,6 +72,7 @@ char net_hostname[32] = {0,}; /* Our hostname */
+>>   char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] = {0,}; /* Our 
+>> bootpath */
+>>
+>>   static ulong time_taken_max;
+>> +static u32   retransmit_period_max_ms;
+>>
+>>   #if defined(CONFIG_CMD_DHCP)
+>>   static dhcp_state_t dhcp_state = INIT;
+>> @@ -414,8 +427,8 @@ static void bootp_timeout_handler(void)
+>>           }
+>>       } else {
+>>           bootp_timeout *= 2;
+>> -        if (bootp_timeout > 2000)
+>> -            bootp_timeout = 2000;
+>> +        if (bootp_timeout > retransmit_period_max_ms)
+>> +            bootp_timeout = retransmit_period_max_ms;
+>
+> RFC 951 requires that the backoff time is randomized.
+I'll can look into adding randomization to this as well.
+>
+> Best regards
+>
+> Heinrich
+>
+>> net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
+>>           bootp_request();
+>>       }
+>> @@ -711,10 +724,14 @@ static int bootp_extended(u8 *e)
+>>
+>>   void bootp_reset(void)
+>>   {
+>> +    char *ep;  /* Environment pointer */
+>> +
+>>       bootp_num_ids = 0;
+>>       bootp_try = 0;
+>>       bootp_start = get_timer(0);
+>> -    bootp_timeout = 250;
+>> +
+>> +    bootp_timeout = env_get_ulong("bootpretransmitperiodinit", 10, 
+>> RETRANSMIT_PERIOD_INIT_MS);
+>> +
+>>   }
+>>
+>>   void bootp_request(void)
+>> @@ -726,7 +743,6 @@ void bootp_request(void)
+>>   #ifdef CONFIG_BOOTP_RANDOM_DELAY
+>>       ulong rand_ms;
+>>   #endif
+>> -    u32 bootp_id;
+>>       struct in_addr zero_ip;
+>>       struct in_addr bcast_ip;
+>>       char *ep;  /* Environment pointer */
+>> @@ -742,6 +758,9 @@ void bootp_request(void)
+>>       else
+>>           time_taken_max = TIMEOUT_MS;
+>>
+>> +    retransmit_period_max_ms = 
+>> env_get_ulong("bootpretransmitperiodmax", 10,
+>> +                         RETRANSMIT_PERIOD_MAX_MS);
+>> +
+>>   #ifdef CONFIG_BOOTP_RANDOM_DELAY        /* Random BOOTP delay */
+>>       if (bootp_try == 0)
+>>           srand_mac();
+>> @@ -801,18 +820,23 @@ void bootp_request(void)
+>>       extlen = bootp_extended((u8 *)bp->bp_vend);
+>>   #endif
+>>
+>> -    /*
+>> -     *    Bootp ID is the lower 4 bytes of our ethernet address
+>> -     *    plus the current time in ms.
+>> -     */
+>> -    bootp_id = ((u32)net_ethaddr[2] << 24)
+>> -        | ((u32)net_ethaddr[3] << 16)
+>> -        | ((u32)net_ethaddr[4] << 8)
+>> -        | (u32)net_ethaddr[5];
+>> -    bootp_id += get_timer(0);
+>> -    bootp_id = htonl(bootp_id);
+>> -    bootp_add_id(bootp_id);
+>> -    net_copy_u32(&bp->bp_id, &bootp_id);
+>> +    /* Only generate a new transaction ID for each new BOOTP request */
+>> +    if (bootp_try == 1) {
+>> +        /*
+>> +         *    Bootp ID is the lower 4 bytes of our ethernet address
+>> +         *    plus the current time in ms.
+>> +         */
+>> +        bootp_id = ((u32)net_ethaddr[2] << 24)
+>> +            | ((u32)net_ethaddr[3] << 16)
+>> +            | ((u32)net_ethaddr[4] << 8)
+>> +            | (u32)net_ethaddr[5];
+>> +        bootp_id += get_timer(0);
+>> +        bootp_id = htonl(bootp_id);
+>> +        bootp_add_id(bootp_id);
+>> +        net_copy_u32(&bp->bp_id, &bootp_id);
+>> +    } else {
+>> +        net_copy_u32(&bp->bp_id, &bootp_id);
+>> +    }
+>>
+>>       /*
+>>        * Calculate proper packet lengths taking into account the
