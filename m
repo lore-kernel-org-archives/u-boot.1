@@ -4,90 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6D6C07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 11:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C06C00A8F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 11:51:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7034287186;
-	Tue, 24 Oct 2023 13:32:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5D9C787032;
+	Tue, 24 Oct 2023 13:51:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=omron.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HipT6H6y";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=omron.com header.i=@omron.com header.b="JoyzSQC3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E182487186; Tue, 24 Oct 2023 13:32:47 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EA7E787064; Tue, 24 Oct 2023 06:31:05 +0200 (CEST)
+Received: from JPN01-TYC-obe.outbound.protection.outlook.com
+ (mail-tycjpn01on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2019::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB278870C4
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 13:32:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC60286D94
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 06:31:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=omron.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-507b9408c61so5974965e87.0
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 04:32:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698147163; x=1698751963; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zEV7+twKbIVSOsIo/ryAyQkr1WrQabwaUWb8DUXULpE=;
- b=HipT6H6yUwI3JPmg7F0obOKm2w9MgYqA1Efq+WwGcKXHNorkS5yOP7wix7muCtICJc
- o6f8drqzDZQjy5HZDuvcOcBCj9H16GUMi2yxXQHKFebEdD3OSh1QBizm0iG/DfBwODLo
- oO9SImZfADMYEOS+F5tzZbJ4yzLFMLoXoPBkHE1kIbZrIsfMQyz7S2+u9S2P+qU4PFmZ
- cfzmZio/zGxzW9gyn1PBch0+miwqWId3NucCyPhd8iOgNvBQAyoPWSIm6XAt2gZBvpcx
- lHdJNHSHqj8SZgomf4OtvZ0SBXQISWoup+nFvlwvljw5J/5to8v8vaKVbPqK9anKQo3B
- StTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698147163; x=1698751963;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zEV7+twKbIVSOsIo/ryAyQkr1WrQabwaUWb8DUXULpE=;
- b=p/2pDbUYQuwjSe2xUyU06YfWoFayORD/rUqepuWCy9zdYIsxH8xG2doouW1Mt/kbEd
- u/eMdsZ4rMFvPITrBItNPVso2IveSsAb9OX6iHVUanuTmzt1qUbebrNu8yrt3OQiLtuX
- WLQrFf2mFH3RzqEQSA3rIQuAleRZ4PeSiM902UztjZ+ucfieyUiAJRLWFxEwPn8vmFMe
- kJwXzh5AwCNJQxPxlo+LfugNAq3NAgGEFD6Se2dPCg/ByNlEh+WqhXqWVqCdS+iaY6YC
- 9bl8DDLNAzxgz9k3I7EmMNtwYxq50SBm+sTjtp3L+oDzeNdKxAUMTusDMWL+oQ0UoK3E
- T6xA==
-X-Gm-Message-State: AOJu0YzqNwdPIQ9XfYOGVk9ofKnaRv09vRCkjsj7T4adcGaQnQYJ6Zi2
- bODdbWXXtRl4QdJaWJYDSkgj7g==
-X-Google-Smtp-Source: AGHT+IHTz+ngprMFYjiDOG3j8q2MVY1WkZURlJJ08cT3Ye3ml0qcqJSkAC1Aizg42miRyAwSashF0A==
-X-Received: by 2002:ac2:5594:0:b0:505:6eef:cf2d with SMTP id
- v20-20020ac25594000000b005056eefcf2dmr7937978lfg.17.1698147162857; 
- Tue, 24 Oct 2023 04:32:42 -0700 (PDT)
-Received: from lion.localdomain (host-2-99-112-229.as13285.net. [2.99.112.229])
- by smtp.gmail.com with ESMTPSA id
- o6-20020a5d62c6000000b0032196c508e3sm9680584wrv.53.2023.10.24.04.32.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 04:32:42 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 24 Oct 2023 12:32:35 +0100
-Subject: [PATCH] arm: init: add an option to use FDT from previous bootloader
+ spf=pass smtp.mailfrom=niek.nooijens@omron.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=frW/PCvFi2mDRcMahl/xSI3HvGKc5oYdDmRMStr+51mLdhvgeBZgVAcIiNyrU5Tr3UOUqhP5lX3VRgzE0EmYON7SbdgFlpxtDxrDktT8jd2PvdnwLWLoCV/zMFBK4w5u13E8vxW8cIju1qJoaOe84OxZIdzpCpUlMfro8pkWsJeHwecDxfwv5KHXFGnKQ5e9eh/84nFLV6t/9MfNZKnpEBVaSppQ6fKsU8ueXX/koeciyGxlteXrOslMniwRVlTtVsYmvWdy0+TCmfjqtdbOEx/3T4znbqOPV3CTvHCzDn0yzeBJXIUPZnOu4bcsPlLPunY/FH/VWPrZVALO1Ucz9A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6xeNEdai2t38wR7Xs7Jy3JQgQWIrwJHE/oMuqWvjeI8=;
+ b=RfBwmPiXipyTfqCmjuxB41AvDxCc38w/VRbZc9+2nu7J0A/9O7MWxbciojsrz/Hq4XyQQtiDSq5uxxoMdGOpq4pLgpE4KZKqtaZO5TyRANEpO8yHY9MrxC7RI47xgZPEtnVCs0NE3ZUGHAMP4OgyxPUKK9U2lOmccnIKfuR98OqO3X0XUg8IXx9CsZHdyOyscLcWju/SJB74Upg6EtSmLuZbgdY+Tr+KdvlW6vid4Dujn0qm1S1UjaJMyAosEMLD6DWkvNde42dlxTRd7uDHmG7gi4C95sOCvwFIp9MMHiqhqgew2VyuAiRLMK+R2k3ZOrrIomw0moLMBBqzGjEycQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=omron.com; dmarc=pass action=none header.from=omron.com;
+ dkim=pass header.d=omron.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=omron.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6xeNEdai2t38wR7Xs7Jy3JQgQWIrwJHE/oMuqWvjeI8=;
+ b=JoyzSQC3UoacZmU/KjFHbWYbeyt1fyj6OsNljCXCkmjBom29ZgM/Bs/upUL0oRcIwQK+I1+t72MiEQ+7JKYDSjH/W5okv5J+vw7h6UgDXNrqYTyguZG6wALROeVQh2mlkX7Rf07YtlsDV5TgrO+AeDEhZgwmr/7TCKknGfBPiY8=
+Received: from OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:17a::14)
+ by TYWP286MB2353.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:17c::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.33; Tue, 24 Oct
+ 2023 04:30:58 +0000
+Received: from OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c1fb:c9f3:b13e:1790]) by OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c1fb:c9f3:b13e:1790%7]) with mapi id 15.20.6907.032; Tue, 24 Oct 2023
+ 04:30:58 +0000
+From: "niek.nooijens@omron.com" <niek.nooijens@omron.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: quick question about TPM
+Thread-Topic: quick question about TPM
+Thread-Index: AQHaBjKW0la4Dg61rkK1nPrJuPcPfw==
+Date: Tue, 24 Oct 2023 04:30:58 +0000
+Message-ID: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=omron.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS3P286MB1495:EE_|TYWP286MB2353:EE_
+x-ms-office365-filtering-correlation-id: b4cc45ff-fe6a-4e3c-0cc4-08dbd44a0513
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: +oifkXrvzoYEnEe8N7CLEU0vkoxQ9puWe+vZzVn/EItxvnTEy8KuUDPxpSELphQBoXAMUlVmShyWbQHZ68WuUG2yN5NuDyIbNtH79o1KLgIXf13V+ri+cjT8Lu7Aa+ZfSpjNu/uhe+3DeK9DW+eUsLkviLavBUpiBvN6/qlRCvDR2wW06aqIfm7QNCfPSBV83GsXzGOnQWkRiLn7QJo5wE6sdzSUAiuDYV5xYqaLjTz4eEA2tHAeFvTyNTKBPTLcErk6X0GybOSq3wAJsPuGSVpGhfn4a1CyMc4fcf4DIy5rBT4gg4NpjcRyF+cKnd8Czs5D7cRjDdwCx+K2IaifCp/1MU+oQAkvSyZvepywJdBTFnH5gIIzYYv5wVVoyPiSg5W3HZZEJUBpasRp2WbNy2Q83wLVH8aUi3vzJzYSdNeXyY4lHahgQBUjXQU8MscxlHUlyqNF+Oe60SU9cggMWjx3zCpFjkUOEHYsch3y+lU1fdb46RcKUlB1yDQgHaA7dWC0MfUmCgMXo8uLZ7Ytcdo4h6KXCJslKofjqMd/D+nvT7dlILt4aA6ipJryteRv+En/bki40jvWGExguAHM3GIpNJdqX2n1NTkZ+aMSTPPJo9EMuKr+I7YBdZ+/n2Ke
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(396003)(39860400002)(136003)(376002)(346002)(230922051799003)(451199024)(1800799009)(64100799003)(186009)(55016003)(4744005)(2906002)(41300700001)(38100700002)(66946007)(122000001)(3480700007)(66446008)(64756008)(76116006)(6916009)(66476007)(316002)(66556008)(6506007)(71200400001)(478600001)(7696005)(9686003)(83380400001)(86362001)(5660300002)(52536014)(33656002)(8936002)(8676002)(26005)(38070700009)(19627405001);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-2022-jp?B?VCt2QkJDNjdqTWlOV1M5TzRCYjBqSkJtSFJtK3dHc01SYmpyUWJmamUz?=
+ =?iso-2022-jp?B?Z1U2bVo3SmlCdzRwUWR5Ylp0a2ZDWlpuMXJTTkRDL1lVU3k2Y1V6MlhL?=
+ =?iso-2022-jp?B?YUVYQmF1dzd5RTcwVVdFMUtFdDVxSTFQemNhYVV2WmxwY1c1ZzQrb3V4?=
+ =?iso-2022-jp?B?RjF5QkFGUnd3dFFrbEJFaWZydE5iUUkrN3UyWjhYMXVMcDI2NEdNcmc5?=
+ =?iso-2022-jp?B?dTN1MXBqVStWL0o1OGtreWcrV0R1N0lCczBOaW5NOTdTcnc3QTcySWds?=
+ =?iso-2022-jp?B?N2hWR1Axb24yUTRUaFk4Q3lscVRaWWVRS3JHcXd2cncwT2wrTWxoWTV0?=
+ =?iso-2022-jp?B?b2tsWEEvK1dQdXhuUnZvMWwxOFZlTjRCaUg2QWlSNGxzeVpqZjZnMkdY?=
+ =?iso-2022-jp?B?TkNuWVNxdmpzZGYrZFM3Vmw4NitUdytZUkpCTDRrYTFQSVN1bitmay9D?=
+ =?iso-2022-jp?B?UVNpbE9lVjlOWjVkalIzcFdHcG1PVXJTbGxKRzQrN2w1UlFIUWJOaG9i?=
+ =?iso-2022-jp?B?Zi9JU01YbUNRNkJkcFpjZ1VmT1Z0UnJtZk1BenFwVk4vZTNqV3lmbGx3?=
+ =?iso-2022-jp?B?azZRblhGTjg2Z0hSaGwwa2RXKzdWWmM2KzRtQ01GajQrcGhNSkkxQ3JN?=
+ =?iso-2022-jp?B?bkdDWWxHanFnNjdNT0pjOWsvZmJRZ0dZckViSHppelpsL3R0cHJRNmhs?=
+ =?iso-2022-jp?B?SThwYXRwUVd5QzE0VWRRN0dia2hWMlVEKy9IZS9kWHBHY3BTMm8ya1dJ?=
+ =?iso-2022-jp?B?Z0pkZVRaRmc3WFgyRTB6QnhSSzdkbTdpNUZRbEhHL1FSallQYlFWWFhF?=
+ =?iso-2022-jp?B?NGwwN0FJcFpNMzY3STMyQ2lKenZDNVpqeWdLaHc2R1pPNUlpNWpvanhE?=
+ =?iso-2022-jp?B?WllLODNRQ01KRmFiTWJCM2h4blRLOHBQUDFEeVhNNWdwNUtoMEJ5anFi?=
+ =?iso-2022-jp?B?VC9uU3IzcnNudE9aQXpjQjlKTHJGQzF0K05tWVBoaUhKVmw4ZDh1bXR5?=
+ =?iso-2022-jp?B?YlJ3a0RhcjVmQzlvMWYzbzI5amFhUU9rc0k0L1RYT1d0L0JoUU9pZ1lk?=
+ =?iso-2022-jp?B?VStxM0hHQVJJT1UwcWQzMFJCcTNpTmhGN2hyV3dLUFlQUUlYMnRZN2tz?=
+ =?iso-2022-jp?B?d1oxN3MwUThaWUF0bkRJV3p3NHI4c09oaVRWWnFwN0cxU243ZEI3MWVr?=
+ =?iso-2022-jp?B?cCtRRWpQVlNjR2paa3J1ZGI2dG1vbGpweG1VZ3VEYm9qYngwSU5mUEp1?=
+ =?iso-2022-jp?B?NXdKQjgxODJJblhhM1p5M1hiVjFIZ01UcXFodWJVWS9SR0pqelFTbnZK?=
+ =?iso-2022-jp?B?bTFqNUJaaDVqMkpUUWd5enA1cWpnVlRBUjBlV1ZSY0hzTFU2Z1cyS2FX?=
+ =?iso-2022-jp?B?Ti92a0FOZDE3K3VOUllCd1VodTI4by9KdVIvM0JseEQ5WHhzWGozb2Jm?=
+ =?iso-2022-jp?B?dnVaYlZhM2h4SUJSL0NwangyZWVRT1pTVjJtdU1UWnBaajBDTjNTa2JL?=
+ =?iso-2022-jp?B?V1pFcVlJWTYvOTVYOFlaQ1dGbWhYVkdkVTJlMEo5bEVMYTh5d2w3Uktx?=
+ =?iso-2022-jp?B?aGV1K293QXhjS1FpTzFTUGFMRGJQMytybGpiOWJLWEpoai9yNW9Gd2JB?=
+ =?iso-2022-jp?B?WEMzaElWTGNCQXR3ZTU5dkZ3dGppNXpCOVJyZDdjM3g4QXZRQXhGd1BJ?=
+ =?iso-2022-jp?B?aCs4WUM3WHZSNEpzdUYxSjhna0NJRllpV1R1b0Z3clZzQ1A5THRKU21s?=
+ =?iso-2022-jp?B?QkxuTG5Wb1N1NGI0TVNxU0RxWHZjR2dnTGtkVEV1b0IyN1dNMFB4ZDlE?=
+ =?iso-2022-jp?B?RGNPNUJjazJaazV6Q25zQkxCSldOclFCWUUzdERFTHF2ejFGN0l2SHR2?=
+ =?iso-2022-jp?B?S1VzTzk0d1lsUWUxY2tkVUpKUGRiK3JZanBVUUVlUks1NytZN0gxYm9z?=
+ =?iso-2022-jp?B?eit6V1h0Zlo2Vms2K1ZCTk9iZ0p5SHBkUS90MnZGbnhRZmhVTmxsUkxY?=
+ =?iso-2022-jp?B?cE9rMCtKdGNiK3BEdUs0dFpkd3ZENFgzN0NSWlNUU3MranFvWXl4MHBS?=
+ =?iso-2022-jp?B?WWlGa2QyUjVMUGJUVnR2WDRzc01JSkI1NlZEZmNZekRPR1VsYUJ2TDNj?=
+ =?iso-2022-jp?B?K3l5NE1lNUNuYzdybzkvMXVGWEhwSDBaNEdjZFRJaEpONzA2eDZGcUNt?=
+ =?iso-2022-jp?B?YjNzSUxselJDbXBYaTVsNFRaeWFlVkNaKytCSjhqZnVxSlRuU1JpbEhM?=
+ =?iso-2022-jp?B?YkY5TjExM0VtWU5BYjVkajZEODVCZ3VQZ0N2S2Z1SkoySVBxOUJEWk1B?=
+ =?iso-2022-jp?B?MTFLbA==?=
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20231024-b4-prevbl-fdt-v1-1-541f71dba802@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAFKrN2UC/x2N0QqDMAxFf0XyvLC2Fjb2K2MPrUk1sNWRiAzEf
- 1/18XDu4W5grMIGj24D5VVM5trAXzoYplRHRqHGEFzovQsRc8RvG+Y3FlrQu1huTHfiSNCanIw
- xa6rDdFSzyij1+km2sB6+pUV+59/zte9/ONRa4H8AAAA=
-To: Simon Glass <sjg@chromium.org>, Dzmitry Sankouski <dsankouski@gmail.com>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.13-dev-46309
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3605;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=EwjlZLeF7yY/S8iRxCk/sXW9JVKKEm9ldb/zFjoaLAs=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlTz1VF1rmsbNB+EvZDT3vNeyXGzbruNcIfb4v6vzXIsk
- x2sTD07SlkYBDkYZMUUWcRPLLNsWnvZXmP7ggswc1iZQIYwcHEKwESOODEyLNKcdV2whMdAePYM
- DXbtaROWOe+IZsxSsdTfLbhwZ5LHJIb/cYzaNUViHzxe+3lWfDPfc7RllWmitc0P8WvsE5MXnrX
- 4DgA=
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+X-OriginatorOrg: omron.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4cc45ff-fe6a-4e3c-0cc4-08dbd44a0513
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Oct 2023 04:30:58.0791 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 0ecff5a9-4bef-4a7b-96ec-a96579b4ac37
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 3bCTxsMXnUgYpvrrusJndYmxg5zfIGY3Xubt+/gWgzz+i7Egf4KNsUHTmsD/VIgcdEeD9rdPyMARR0/ky+3siQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWP286MB2353
+X-Mailman-Approved-At: Tue, 24 Oct 2023 13:51:05 +0200
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,114 +146,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new config option to allow u-boot to reuse the FDT provided by the
-previous stage bootloader when available.
+Hi
 
-On some boards the previous stage bootloader can populate
-platform-specific parts of the devicetree such as the memory node, this
-allows us to avoid hardcoding it in u-boot and instead determine it
-dynamically at runtime.
+Just a quick question. I'm developing a platform using the socfpga_cyclone5=
+_defconfig
+everything is working, linux boots, but we decided to add a TPM to it's SPI=
+ bus.
+For some reason the TPM support menu in the menuconfig is disabled and I ca=
+n't seem to find out why, or which file disables it. can you point me in th=
+e right direction?
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-This patch will improve generic support for Qualcomm boards by enabling
-us to configure the memory map at runtime rather than having hardcoded
-maps on a per-device basis. I've gone for this approach initially to try
-and avoid introducing board specific code where possible, but I'm happy
-to rework this into mach-snapdragon if that's preferred.
----
-base-commit: e65b5d35c9116485366bb08138043d51220551da
+Thanks!
 
-// Caleb (they/them)
----
- arch/arm/lib/save_prev_bl_data.c |  7 +++++++
- boot/Kconfig                     | 10 ++++++++++
- include/init.h                   |  9 +++++++++
- lib/fdtdec.c                     |  7 ++++++-
- 4 files changed, 32 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/lib/save_prev_bl_data.c b/arch/arm/lib/save_prev_bl_data.c
-index f7b23faf0d66..b0608502535e 100644
---- a/arch/arm/lib/save_prev_bl_data.c
-+++ b/arch/arm/lib/save_prev_bl_data.c
-@@ -45,6 +45,13 @@ bool is_addr_accessible(phys_addr_t addr)
- 	return false;
- }
- 
-+phys_addr_t get_prev_bl_fdt_addr(void)
-+{
-+	if (!is_addr_accessible((phys_addr_t)reg0))
-+		return 0;
-+	return reg0;
-+}
-+
- int save_prev_bl_data(void)
- {
- 	struct fdt_header *fdt_blob;
-diff --git a/boot/Kconfig b/boot/Kconfig
-index a01e6cb8aafe..c127ba254589 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1599,6 +1599,16 @@ config SAVE_PREV_BL_INITRAMFS_START_ADDR
- 	  If no initramfs was provided by previous bootloader, no env variables
- 	  will be created.
- 
-+config USE_PREV_BL_FDT
-+	depends on SAVE_PREV_BL_FDT_ADDR && !OF_BOARD
-+	bool "Use the FDT provided by the previous stage bootloader"
-+	help
-+	  When u-boot is chain-loaded from a previous bootloader, enable this option
-+	  to use the FDT provided by the previous bootloader instead of any built-in
-+	  to u-boot.
-+
-+	  If no FDT was available, u-boot will fall back to its internal FDT.
-+
- menu "Configuration editor"
- 
- config CEDIT
-diff --git a/include/init.h b/include/init.h
-index 4e7fe26c2004..58604cd98758 100644
---- a/include/init.h
-+++ b/include/init.h
-@@ -168,6 +168,15 @@ defined(CONFIG_SAVE_PREV_BL_FDT_ADDR)
-  * Return: 0 if ok; -ENODATA on error
-  */
- int save_prev_bl_data(void);
-+
-+/**
-+ * get_prev_bl_fdt_addr - When u-boot is chainloaded, get the address
-+ * of the FDT passed by the previous bootloader.
-+ *
-+ * Return: the address of the FDT passed by the previous bootloader
-+ * or 0 if not found.
-+ */
-+phys_addr_t get_prev_bl_fdt_addr(void);
- #endif
- 
- /**
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 7a6916764835..85425f2dc1ee 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1222,7 +1222,7 @@ static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
-  */
- static void *fdt_find_separate(void)
- {
--	void *fdt_blob = NULL;
-+	void *fdt_blob = NULL, *prevbl_fdt_blob;
- 
- 	if (IS_ENABLED(CONFIG_SANDBOX))
- 		return NULL;
-@@ -1234,6 +1234,11 @@ static void *fdt_find_separate(void)
- 	else
- 		fdt_blob = (ulong *)__bss_end;
- #else
-+#if defined(CONFIG_USE_PREV_BL_FDT)
-+	prevbl_fdt_blob = (void *)get_prev_bl_fdt_addr();
-+	if (prevbl_fdt_blob)
-+		return prevbl_fdt_blob;
-+#endif
- 	/* FDT is at end of image */
- 	fdt_blob = (ulong *)_end;
- 
+Niek Nooijens.
 
