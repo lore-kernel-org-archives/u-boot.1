@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C0F2C25B47
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B69C25B6C
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:52:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5DD4879B8;
-	Wed, 25 Oct 2023 00:34:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A8B30879E1;
+	Wed, 25 Oct 2023 00:52:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AxjMUaKS";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="r3UI8JEE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C68E8724A; Wed, 25 Oct 2023 00:34:11 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7489B879E1; Wed, 25 Oct 2023 00:52:00 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08225871BB
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:34:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3389D86FB1
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:51:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5a90d6ab962so38860547b3.2
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 15:34:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698186848; x=1698791648; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rVofJTcoov5BCeids9h9QQsjCPcNna+tCivjPSSPTHU=;
- b=AxjMUaKSf4xRt8+bku42DUymbV/YlitpetrqZFVzV0/xxXGyIhaUJ0rXRx+w6c/Kwi
- uG6XmEubmZbjrPzgEN9nTg54W6wnP7hwyNa/x8m3rKCTMiqYMtQJgQ//B2jZ4T65Tpjd
- ycPKOdBJJdR2L6c13q3B1/TaLjXQYggYOT60k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698186848; x=1698791648;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rVofJTcoov5BCeids9h9QQsjCPcNna+tCivjPSSPTHU=;
- b=By0VYf1qIpguavrzmFcrBK42iegSxgimIaIW25AtBhHGnBmizEeOF/Pfu3BZnmDuJX
- 97oYtZR5ECknFnPIX79IcKTbuhb6vU38pT8nR6xcus6erzC4qaUcRc6HrbRl3UvJWTMx
- 4FQxrCYO/D3/91pRRoWjBja5W75V0Bd8+UBTx0zp5W4R7wMM17pIA6SxwWE/KesXHswE
- byCTepndWo+ps8mWQN3OY9Ji+uUpomAk4dd5aTMpiAxygaF/TcDdti8tCm5m1IgSajaz
- 5XIt9oQwwVgqBhczAVL+d43jm573X/63ExQTtjjxT/+NsWclGH9XX6WuRaveV1XWUQb9
- 6z1A==
-X-Gm-Message-State: AOJu0Yyl9jK4QkJ4QApbWAVTzAeKi3NXvXSShcH2xUx6CuXxm4xTbNAb
- cj4eTy9uZgkInc7CrG7zm2IahQ==
-X-Google-Smtp-Source: AGHT+IEv3EvsyeFuRzmxtuzOEjj2oZH5Nn6qmaQPXuWFzlFK8u4SOuMrpQjBpY8PQS939o//AI8Apw==
-X-Received: by 2002:a0d:e8cc:0:b0:5a7:ba09:52c7 with SMTP id
- r195-20020a0de8cc000000b005a7ba0952c7mr16246756ywe.11.1698186847765; 
- Tue, 24 Oct 2023 15:34:07 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- v19-20020a81a553000000b00576c727498dsm4453044ywg.92.2023.10.24.15.34.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 15:34:07 -0700 (PDT)
-Date: Tue, 24 Oct 2023 18:34:05 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
-Cc: caleb.connolly@linaro.org, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, bmeng.cn@gmail.com,
- brandon.maier@collins.com, kconsul@ventanamicro.com,
- oleksandr.suvorov@foundries.io, patrick.delaunay@foss.st.com,
- sughosh.ganu@linaro.org
-Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
-Message-ID: <20231024223405.GM496310@bill-the-cat>
-References: <20231021004522.53311-1-sjg@chromium.org>
- <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
- <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
- <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 43A5B12003A;
+ Wed, 25 Oct 2023 01:51:55 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 43A5B12003A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+ s=mail; t=1698187915;
+ bh=bmR1XHM8cuES4u3h0+dQ3zmtoQWrRPJ3hHvNvbVVwcU=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=r3UI8JEE9fDt+846QwyXxY+wz7TwTePfMmRtMTdnIl9nigUhr3IyiHtX687yJhrnX
+ Tt6txpflY9aSVxnv/zGdAa6jt07VK/mIxqrJh01/od0pS5P6gwxljOO4TWoC+mIZpg
+ 4jtdcTuuBPHiXOmq/xS2Pjg9OuB9JB+n7Bs92VwxC8iUUMan9Zf21ac9gb5M5Xg4H3
+ kC0+RQxis0Xagsyd/I8Pb1KLSpi1DGdNHBXcaFXgRjlOpkKVq6PAwl5ASx8K1hG1yB
+ LCBIz/CBQMmVPIyMYBa1t7Ca9vgbzg7gdq0WU77ce5Thx7E80bPXfNkjS2pjzsIDWI
+ rKLEYMy4A7HXQ==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Wed, 25 Oct 2023 01:51:54 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Wed, 25 Oct 2023 01:51:54 +0300
+From: Igor Prusov <ivprusov@sberdevices.ru>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Jagan Teki
+ <jagan@amarulasolutions.com>
+CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
+ <ivprusov@sberdevices.ru>, <u-boot-amlogic@groups.io>,
+ <u-boot@lists.denx.de>, <sjg@chromium.org>
+Subject: [PATCH v2 0/2] ARM: amlogic: Add A1 SPIFC support
+Date: Wed, 25 Oct 2023 01:51:38 +0300
+Message-ID: <20231024225140.366571-1-ivprusov@sberdevices.ru>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZhcYXyBty9HAtzVk"
-Content-Disposition: inline
-In-Reply-To: <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180852 [Oct 25 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 543 543
+ 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
+ {Tracking_from_domain_doesnt_match_to},
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; sberdevices.ru:5.0.1,7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
+ 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
+ {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/24 20:53:00 #22289793
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,59 +105,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+A1 family boards have new version of SPIFC controller, that is
+incompatible with meson_spifc driver. This series ports A1 SPIFC driver
+from Linux and enables it for ad401 board.
 
---ZhcYXyBty9HAtzVk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in V2:
+ - more details in Kconfig help message
+ - removed unused field of struct amlogic_spifc_a1
+ - add missed check for NULL during probe
 
-On Mon, Oct 23, 2023 at 05:31:19PM +0200, Mark Kettenis wrote:
-> > From: Simon Glass <sjg@chromium.org>
-> > Date: Mon, 23 Oct 2023 00:04:14 -0700
-> >=20
-> > Hi Caleb,
-> >=20
-> > On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@linaro.org=
-> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On 21/10/2023 01:45, Simon Glass wrote:
-> > > > U-Boot typically sets up its malloc() pool near the top of memory. =
-On
-> > > > ARM64 systems this can result in an SMBIOS table above 4GB which is
-> > > > not supported by SMBIOSv2.
-[snip]
-> There is absolutely no guarantee that arm64 machines have memory below
-> 4GB.  Examples of SoCs that have no memory below 4GB are AMD's Opteron
-> A1100 SoC and all the recent Apple SoCs.
+Igor Prusov (2):
+  spi: add support for Amlogic A1 SPI Flash Controller
+  ARM: amlogic: ad401: enable SPIFC
 
-So one thing to resolve here is where does that requirement about the
-SMBIOS table needing to be below 4GB come from (standards wise), and in
-turn is that obeyed by consumers like say Linux or OpenBSD? Answering my
-own question, maybe in part, https://www.dmtf.org/standards/smbios reads
-to me like there's a v3 and maybe we should be doing what we need to
-support / identify as that, if it doesn't have that restriction?
+ configs/ad401_defconfig      |   1 +
+ drivers/spi/Kconfig          |   9 +
+ drivers/spi/Makefile         |   1 +
+ drivers/spi/meson_spifc_a1.c | 384 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 395 insertions(+)
+ create mode 100644 drivers/spi/meson_spifc_a1.c
 
---=20
-Tom
+-- 
+2.34.1
 
---ZhcYXyBty9HAtzVk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4Rl0ACgkQFHw5/5Y0
-tyxrVQwArLvN+wQs05vP2iaw0rPac9dLUldBlxYMrsZ1HViYrfuzdVfThl3BGm3c
-uK5U9brfX/RiU2+QTPP0dJOEgq7no5dTLS7+J6Iufo2oFls9cL9TzruqSCWTwrke
-3cjVay8ZlDeZ04olRrbSxfUn/gjhlyXLUgSIAPWrRJotjsGe+e3CZ+ZVkNfIV1xr
-reuMk6XEenegm2HVO2S2HN/F1okVMdzfv63wFzox6MKPtxcHqgiaCKun1wCpbpwA
-0IF0uIV3qQ1sGQdxh1wmQO8LV8tnf8xOc/LZYnWHtFst5nIyVTz91yKVZtnX8/86
-oiK3Qi7uOpbIn99BMAUxFBGE35eGlLxfd7zDgBGQ6+DX7+OKz6CbU6oiE5eOJqln
-n40r12l9SSaiAhb1ev91TDP3znDQAxZz/wNczoDekIFGZfJ7qMcErPsD5xMuFy85
-37J50Ws/V7iIZXhIJjVMwXqKJPV989T5wl8BWmgeoLvE8YEPer59mxBgBxOHCiuo
-Q73veDr/
-=w/7S
------END PGP SIGNATURE-----
-
---ZhcYXyBty9HAtzVk--
