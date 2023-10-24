@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C461EC07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 20:24:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21386C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 20:25:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F423D879A9;
-	Tue, 24 Oct 2023 22:24:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 72835879D4;
+	Tue, 24 Oct 2023 22:24:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z6GiFljo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QIK6gYRV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8240C87973; Tue, 24 Oct 2023 22:24:09 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 874C38716E; Tue, 24 Oct 2023 22:24:12 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59CE08798C
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 22:24:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81F39878A3
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 22:24:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4079ed65582so38439895e9.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 13:24:04 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-32dbbf3c782so80431f8f.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 13:24:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698179044; x=1698783844; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698179047; x=1698783847; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pO//yXCY6NLloEJik+qFyzQjnLPFARA2mTCdLdnOm7A=;
- b=Z6GiFljo+zq3vJ7kOt7DoJcoOfY/xhVu8YqcuW0sf2IIIzw/3Crs1Uo7/9wuzHib/C
- wJepIzSK0VeyufzTsogDBx8Oml7DWa4axfUe9RIYT713KJiPpuUYIz2Q3ECuy7oZ/r8h
- 3cJl5aiPKG+HpMFnrLC3BBuuAMmgNiNRTZDUv8lAYy5rkx6bebhi8ugCfw/dYKx3BtFa
- bpCCCBqACIlpE3rWMRMwFSIe7WeyS78kAgVrUYNmbvnwC1sPAdx3dhCsSJMCzgxNF8Y/
- tfyitcfkIt5Ug1Xk8JZk3Hq1o7ZZh5bH2pNIAQWNOpv/qRwdxeDw1tDkc8Fi/xRGgvi3
- djmQ==
+ :reply-to; bh=8dKWEVYUMajghYsygszrtlLsGARd/wSj0xzya2LHQuE=;
+ b=QIK6gYRVvSZ04EULO/02CkrG5Aj+0blVae5kuoWljFFhP1TfEBpGg/T2bbj0gpES43
+ 71JiI7j5gckR9pckD0ttC1KKyrF2LAG+bSVHqJLFRITawYnaHY9Fi5Bd0D/w6Z0t0f9U
+ qN1VhMMZT5fSGub15GPRcbwEo1n93foy2Ji4Lya1tf0+MH6JEiFRgevfRaRoVS0+HU6n
+ IF2TWRWlNTcA7rpmcq7/XjHuT7UhgFocHzR9B5ltD2gQw+wNYm44HmUdjbz+84Y99rc0
+ ZHRBUet1Ji0/2n7tX4yRTqztp1+GJ2j0ThYZ0kwnaXZ18nGDfZFfc2vqnvh3Ich9nDKd
+ 3mhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698179044; x=1698783844;
+ d=1e100.net; s=20230601; t=1698179047; x=1698783847;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pO//yXCY6NLloEJik+qFyzQjnLPFARA2mTCdLdnOm7A=;
- b=ZuvvAgwVj9Xf3GySF340p2Jm0jDJYeXeqAMVO6nqY0esZMksN0APxXHwt6LP68hFJo
- bTLzLGyx8fV2Xj9S0Oy7d8OzhKC+VfTw1k9/mmaSEQx36IQgHASQs+z8qQ47KkW/iEvO
- W+V98b69/9aXZbXiGpZLrXRTv44y78tQwl29F4qVnaKR1HdxeJPzcyiTFYtXh1jU16h1
- B9NOyLabZVQlFFci8V2viuPUQWxsZJSzew3bZOH38wUWs6BOPnzLabWmDcTzYOs7vmXK
- GoVEEu878py8HfQ+QiTQNjb8kcpt0wmjPA/ouXPKtdoUIWClDqsW4aESEmozMoejcmDg
- ZFyQ==
-X-Gm-Message-State: AOJu0YzDyBqJ88FCp5glrUugN215ubiA/b4GQDCVMg/TqcSiuAaRSyms
- s22wnZnIZIc1/Ee6vJI2SBn3qw==
-X-Google-Smtp-Source: AGHT+IHi31A5zxYy3vUgFlTnEThnZekm+eX1nRd2rpu6IgOjSdKvhYmi0iGhZGWFeZDKSrrD9XBTYQ==
-X-Received: by 2002:adf:e6cb:0:b0:32d:d848:8efd with SMTP id
- y11-20020adfe6cb000000b0032dd8488efdmr9455424wrm.57.1698179043740; 
- Tue, 24 Oct 2023 13:24:03 -0700 (PDT)
+ bh=8dKWEVYUMajghYsygszrtlLsGARd/wSj0xzya2LHQuE=;
+ b=WN7r+vAGhdmduYfZ/xILAHb8LG8L8n60H+wRDm2a9NsPUz3PrPvvB2lH42VC74AGNI
+ RlRDGDGnRjVqc9o0Gqbh3RhkFn/jeHL7XlZ+3dz8uiDgJ/VNpgv+iZITbUCVP0903IsX
+ dSf5UkYG1tospjTxDeY/jMbMxEGpoWCSO3/tbLwINfCsXlkK1hBfbH+b+imPxcc1WyZG
+ 3HL5gS0mbeS2DBL+BLLTrCxm5c5AibTHuiVGmYwiZmrdmYnDsxeWexC3As1r8HLyrh1z
+ 9hyAa5Rbk/s7q5l7y2UilzhuC8K55bH8e8PNv053SzZmpsr0nm8h/nNa02SwLCbTfFZS
+ G/WA==
+X-Gm-Message-State: AOJu0YzXLlAsKLDF+Pzwr4w4TJccZOT3RsuNrMGwzNhadAzsZSNyKnZc
+ 88X2v7BDSU47E4swpJrT/OWUrQ==
+X-Google-Smtp-Source: AGHT+IHGt8COeNVPAPYtodPtKfLSIioklnzVoAmUNrSxAk2GaeWsW9WqfiJatJ06tRpFYAfCpa5weg==
+X-Received: by 2002:adf:ff85:0:b0:32d:87c9:1430 with SMTP id
+ j5-20020adfff85000000b0032d87c91430mr12325420wrr.31.1698179046994; 
+ Tue, 24 Oct 2023 13:24:06 -0700 (PDT)
 Received: from lion.localdomain (host-2-99-112-229.as13285.net. [2.99.112.229])
  by smtp.gmail.com with ESMTPSA id
- l21-20020a056000023500b003198a9d758dsm10682342wrz.78.2023.10.24.13.24.01
+ l21-20020a056000023500b003198a9d758dsm10682342wrz.78.2023.10.24.13.24.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 13:24:03 -0700 (PDT)
+ Tue, 24 Oct 2023 13:24:06 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 24 Oct 2023 21:23:56 +0100
-Subject: [PATCH 5/8] clk/qcom: sdm845: add register map for simple gate clocks
+Date: Tue, 24 Oct 2023 21:23:58 +0100
+Subject: [PATCH 7/8] clk/qcom: add mnd_width to clk_rcg_set_rate_mnd()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231024-b4-qcom-clk-v1-5-9d96359b9a82@linaro.org>
+Message-Id: <20231024-b4-qcom-clk-v1-7-9d96359b9a82@linaro.org>
 References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
 In-Reply-To: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -82,13 +82,13 @@ To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
 Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
  u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.13-dev-46309
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11979;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7826;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=1+5PQfPqzQ+T0jZjI1xwMwWAmFAVz14tCIwJO8F/xNk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlQL9VveemER0VJ78xnXmyQf+aHqI7Nm4+tvPuvOVZW/S
- 51yxfFjRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIhscM/xT+fa76fqR8YZwN
- Z1jPlcxCmy/Tt/Tama0rPfnBLSqKN5bhr+SjB63PP7ow2D18YWZ+kD2U8eKOk6VBjxLSX0wruOY
- cdBsA
+ bh=uNCn1bNbsqTqPfS8eAHpli3siS/rP/haoM/M7GZxVoo=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlQL9VtW+tlPDz5bPqXs2rKpa2av1OtptWub+fvMfOXjV
+ pOvmd+91VHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAmoriE4b9bpX1Hve21lCqe
+ rbPv/rJYtHX6lpTuAwpBhdanDZVUtjxnZOjPndi3e8vMB84v2SsVBbZtF82cLvQo03mnn8vL5Rs
+ /ehwFAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -107,275 +107,199 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Many gate clocks can be enabled with a single register write, add support
-for defining these simple gate clocks and add the ones found on SDM845.
-
-While we're here, inline clk_init_uart() into msm_set_rate().
+This property is needed on some platforms to ensure that only the
+relevant bits are set in the M/N/D registers.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- .../mach-snapdragon/include/mach/sysmap-sdm845.h   |   3 +
- drivers/clk/qcom/clock-qcom.h                      |  22 +++
- drivers/clk/qcom/clock-sdm845.c                    | 163 +++++++++++++++++++--
- 3 files changed, 176 insertions(+), 12 deletions(-)
+ drivers/clk/qcom/clock-apq8016.c |  4 ++--
+ drivers/clk/qcom/clock-apq8096.c |  4 ++--
+ drivers/clk/qcom/clock-qcom.c    | 11 +++++++----
+ drivers/clk/qcom/clock-qcom.h    |  2 +-
+ drivers/clk/qcom/clock-qcs404.c  | 20 ++++++++++----------
+ drivers/clk/qcom/clock-sdm845.c  |  3 +--
+ 6 files changed, 23 insertions(+), 21 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h b/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h
-index 7165985bcd1e..a0010d71594e 100644
---- a/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h
-+++ b/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h
-@@ -39,4 +39,7 @@
- #define SE9_UART_APPS_N		(0x18154)
- #define SE9_UART_APPS_D		(0x18158)
+diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+index f74f7a0f5ad9..5eba18739cfb 100644
+--- a/drivers/clk/qcom/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -61,7 +61,7 @@ static int clk_init_sdc(struct qcom_cc_priv *priv, int slot, uint rate)
+ 	clk_enable_cbc(priv->base + SDCC_AHB_CBCR(slot));
+ 	/* 800Mhz/div, gpll0 */
+ 	clk_rcg_set_rate_mnd(priv->base, &sdc_regs[slot], div, 0, 0,
+-			     CFG_CLK_SRC_GPLL0);
++			     CFG_CLK_SRC_GPLL0, 8);
+ 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
+ 	clk_enable_cbc(priv->base + SDCC_APPS_CBCR(slot));
  
-+#define USB30_SEC_GDSCR		(0x10004)
-+#define USB30_PRIM_GDSCR	(0xf004)
+@@ -84,7 +84,7 @@ static int clk_init_uart(struct qcom_cc_priv *priv)
+ 
+ 	/* 7372800 uart block clock @ GPLL0 */
+ 	clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 1, 144, 15625,
+-			     CFG_CLK_SRC_GPLL0);
++			     CFG_CLK_SRC_GPLL0, 8);
+ 
+ 	/* Vote for gpll0 clock */
+ 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
+diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+index 1efb6e2313a5..48cac08eed67 100644
+--- a/drivers/clk/qcom/clock-apq8096.c
++++ b/drivers/clk/qcom/clock-apq8096.c
+@@ -48,7 +48,7 @@ static int clk_init_sdc(struct qcom_cc_priv *priv, uint rate)
+ 
+ 	clk_enable_cbc(priv->base + SDCC2_AHB_CBCR);
+ 	clk_rcg_set_rate_mnd(priv->base, &sdc_regs, div, 0, 0,
+-			     CFG_CLK_SRC_GPLL0);
++			     CFG_CLK_SRC_GPLL0, 8);
+ 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
+ 	clk_enable_cbc(priv->base + SDCC2_APPS_CBCR);
+ 
+@@ -70,7 +70,7 @@ static int clk_init_uart(struct qcom_cc_priv *priv)
+ 
+ 	/* 7372800 uart block clock @ GPLL0 */
+ 	clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 1, 192, 15625,
+-			     CFG_CLK_SRC_GPLL0);
++			     CFG_CLK_SRC_GPLL0, 8);
+ 
+ 	/* Vote for gpll0 clock */
+ 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
+diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+index a9602d0c9ca6..7a6157bf123f 100644
+--- a/drivers/clk/qcom/clock-qcom.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -83,7 +83,7 @@ void clk_bcr_update(phys_addr_t apps_cmd_rcgr)
+ 
+ /* root set rate for clocks with half integer and MND divider */
+ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+-			  int div, int m, int n, int source)
++			  int div, int m, int n, int source, u8 mnd_width)
+ {
+ 	u32 cfg;
+ 	/* M value for MND divider. */
+@@ -92,11 +92,14 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+ 	u32 n_val = ~((n) - (m)) * !!(n);
+ 	/* NOT 2D value for MND divider. */
+ 	u32 d_val = ~(n);
++	u32 mask = BIT(mnd_width) - 1;
 +
- #endif
++	debug("m %#x n %#x d %#x div %#x mask %#x\n", m_val, n_val, d_val, div, mask);
+ 
+ 	/* Program MND values */
+-	writel(m_val, base + regs->M);
+-	writel(n_val, base + regs->N);
+-	writel(d_val, base + regs->D);
++	setbits_le32(base + regs->M, m_val & mask);
++	setbits_le32(base + regs->N, n_val & mask);
++	setbits_le32(base + regs->D, d_val & mask);
+ 
+ 	/* setup src select and divider */
+ 	cfg  = readl(base + regs->cfg_rcgr);
 diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-index a77a94b6ea06..7b3bcf41f421 100644
+index 4c5959b60038..6fa88fb40af8 100644
 --- a/drivers/clk/qcom/clock-qcom.h
 +++ b/drivers/clk/qcom/clock-qcom.h
-@@ -30,6 +30,18 @@ struct bcr_regs {
- 	uintptr_t D;
- };
- 
-+struct gate_clk {
-+	uintptr_t reg;
-+	u32 en_val;
-+	const char *name;
-+};
-+
-+#ifdef DEBUG
-+#define GATE_CLK(clk, reg, val) [clk] = { reg, val, #clk }
-+#else
-+#define GATE_CLK(clk, reg, val) [clk] = { reg, val, NULL }
-+#endif
-+
- struct qcom_reset_map {
- 	unsigned int reg;
- 	u8 bit;
-@@ -38,6 +50,8 @@ struct qcom_reset_map {
- struct qcom_cc_data {
- 	const struct qcom_reset_map	*resets;
- 	unsigned long			num_resets;
-+	const struct gate_clk		*clks;
-+	unsigned long			num_clks;
- };
- 
- struct qcom_cc_priv {
-@@ -55,4 +69,12 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+@@ -70,7 +70,7 @@ void clk_bcr_update(phys_addr_t apps_cmd_rgcr);
+ void clk_enable_cbc(phys_addr_t cbcr);
+ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk);
+ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+-			  int div, int m, int n, int source);
++			  int div, int m, int n, int source, u8 mnd_width);
  void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
  		      int source);
  
-+static inline void qcom_gate_clk_en(const struct qcom_cc_priv *priv, unsigned long id)
-+{
-+	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0)
-+		return;
-+
-+	setbits_le32(priv->base + priv->data->clks[id].reg, priv->data->clks[id].en_val);
-+}
-+
- #endif
-diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-index eab88a40c09d..ccad73b6ff15 100644
---- a/drivers/clk/qcom/clock-sdm845.c
-+++ b/drivers/clk/qcom/clock-sdm845.c
-@@ -11,6 +11,7 @@
- #include <common.h>
- #include <clk-uclass.h>
- #include <dm.h>
-+#include <linux/delay.h>
- #include <errno.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-@@ -71,30 +72,166 @@ const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
- 	return f - 1;
- }
- 
--static int clk_init_uart(struct qcom_cc_priv *priv, uint rate)
--{
--	const struct freq_tbl *freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
--
--	clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
--						freq->pre_div, freq->m, freq->n, freq->src);
--
--	return 0;
--}
--
- ulong msm_set_rate(struct clk *clk, ulong rate)
- {
- 	struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
-+	const struct freq_tbl *freq;
- 
- 	switch (clk->id) {
--	case GCC_QUPV3_WRAP1_S1_CLK: /*UART2*/
--		return clk_init_uart(priv, rate);
-+	case GCC_QUPV3_WRAP1_S1_CLK: /* UART9 */
-+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
-+				     freq->pre_div, freq->m, freq->n, freq->src);
-+
-+		return freq->freq;
- 	default:
- 		return 0;
- 	}
- }
- 
-+static const struct gate_clk sdm845_clks[] = {
-+	GATE_CLK(GCC_AGGRE_NOC_PCIE_TBU_CLK,		0x90014, 0x00000001),
-+	GATE_CLK(GCC_AGGRE_UFS_CARD_AXI_CLK,		0x82028, 0x00000001),
-+	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x82024, 0x00000001),
-+	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,		0x8201c, 0x00000001),
-+	GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK,		0x82020, 0x00000001),
-+	GATE_CLK(GCC_BOOT_ROM_AHB_CLK,			0x52004, 0x00000400),
-+	GATE_CLK(GCC_CAMERA_AHB_CLK,			0x0b008, 0x00000001),
-+	GATE_CLK(GCC_CAMERA_AXI_CLK,			0x0b020, 0x00000001),
-+	GATE_CLK(GCC_CAMERA_XO_CLK,			0x0b02c, 0x00000001),
-+	GATE_CLK(GCC_CE1_AHB_CLK,			0x52004, 0x00000008),
-+	GATE_CLK(GCC_CE1_AXI_CLK,			0x52004, 0x00000010),
-+	GATE_CLK(GCC_CE1_CLK,				0x52004, 0x00000020),
-+	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x0502c, 0x00000001),
-+	GATE_CLK(GCC_CFG_NOC_USB3_SEC_AXI_CLK,		0x05030, 0x00000001),
-+	GATE_CLK(GCC_CPUSS_AHB_CLK,			0x52004, 0x00200000),
-+	GATE_CLK(GCC_CPUSS_RBCPR_CLK,			0x48008, 0x00000001),
-+	GATE_CLK(GCC_DDRSS_GPU_AXI_CLK,			0x44038, 0x00000001),
-+	GATE_CLK(GCC_DISP_AHB_CLK,			0x0b00c, 0x00000001),
-+	GATE_CLK(GCC_DISP_AXI_CLK,			0x0b024, 0x00000001),
-+	GATE_CLK(GCC_DISP_GPLL0_CLK_SRC,		0x52004, 0x00040000),
-+	GATE_CLK(GCC_DISP_GPLL0_DIV_CLK_SRC,		0x52004, 0x00080000),
-+	GATE_CLK(GCC_DISP_XO_CLK,			0x0b030, 0x00000001),
-+	GATE_CLK(GCC_GP1_CLK,				0x64000, 0x00000001),
-+	GATE_CLK(GCC_GP2_CLK,				0x65000, 0x00000001),
-+	GATE_CLK(GCC_GP3_CLK,				0x66000, 0x00000001),
-+	GATE_CLK(GCC_GPU_CFG_AHB_CLK,			0x71004, 0x00000001),
-+	GATE_CLK(GCC_GPU_GPLL0_CLK_SRC,			0x52004, 0x00008000),
-+	GATE_CLK(GCC_GPU_GPLL0_DIV_CLK_SRC,		0x52004, 0x00010000),
-+	GATE_CLK(GCC_GPU_MEMNOC_GFX_CLK,		0x7100c, 0x00000001),
-+	GATE_CLK(GCC_GPU_SNOC_DVM_GFX_CLK,		0x71018, 0x00000001),
-+	GATE_CLK(GCC_MSS_AXIS2_CLK,			0x8a008, 0x00000001),
-+	GATE_CLK(GCC_MSS_CFG_AHB_CLK,			0x8a000, 0x00000001),
-+	GATE_CLK(GCC_MSS_GPLL0_DIV_CLK_SRC,		0x52004, 0x00020000),
-+	GATE_CLK(GCC_MSS_MFAB_AXIS_CLK,			0x8a004, 0x00000001),
-+	GATE_CLK(GCC_MSS_Q6_MEMNOC_AXI_CLK,		0x8a154, 0x00000001),
-+	GATE_CLK(GCC_MSS_SNOC_AXI_CLK,			0x8a150, 0x00000001),
-+	GATE_CLK(GCC_PCIE_0_AUX_CLK,			0x5200c, 0x00000008),
-+	GATE_CLK(GCC_PCIE_0_CFG_AHB_CLK,		0x5200c, 0x00000004),
-+	GATE_CLK(GCC_PCIE_0_CLKREF_CLK,			0x8c00c, 0x00000001),
-+	GATE_CLK(GCC_PCIE_0_MSTR_AXI_CLK,		0x5200c, 0x00000002),
-+	GATE_CLK(GCC_PCIE_0_PIPE_CLK,			0x5200c, 0x00000010),
-+	GATE_CLK(GCC_PCIE_0_SLV_AXI_CLK,		0x5200c, 0x00000001),
-+	GATE_CLK(GCC_PCIE_0_SLV_Q2A_AXI_CLK,		0x5200c, 0x00000020),
-+	GATE_CLK(GCC_PCIE_1_AUX_CLK,			0x52004, 0x20000000),
-+	GATE_CLK(GCC_PCIE_1_CFG_AHB_CLK,		0x52004, 0x10000000),
-+	GATE_CLK(GCC_PCIE_1_CLKREF_CLK,			0x8c02c, 0x00000001),
-+	GATE_CLK(GCC_PCIE_1_MSTR_AXI_CLK,		0x52004, 0x08000000),
-+	GATE_CLK(GCC_PCIE_1_PIPE_CLK,			0x52004, 0x40000000),
-+	GATE_CLK(GCC_PCIE_1_SLV_AXI_CLK,		0x52004, 0x04000000),
-+	GATE_CLK(GCC_PCIE_1_SLV_Q2A_AXI_CLK,		0x52004, 0x02000000),
-+	GATE_CLK(GCC_PCIE_PHY_AUX_CLK,			0x6f004, 0x00000001),
-+	GATE_CLK(GCC_PCIE_PHY_REFGEN_CLK,		0x6f02c, 0x00000001),
-+	GATE_CLK(GCC_PDM2_CLK,				0x3300c, 0x00000001),
-+	GATE_CLK(GCC_PDM_AHB_CLK,			0x33004, 0x00000001),
-+	GATE_CLK(GCC_PDM_XO4_CLK,			0x33008, 0x00000001),
-+	GATE_CLK(GCC_PRNG_AHB_CLK,			0x52004, 0x00002000),
-+	GATE_CLK(GCC_QMIP_CAMERA_AHB_CLK,		0x0b014, 0x00000001),
-+	GATE_CLK(GCC_QMIP_DISP_AHB_CLK,			0x0b018, 0x00000001),
-+	GATE_CLK(GCC_QMIP_VIDEO_AHB_CLK,		0x0b010, 0x00000001),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,		0x5200c, 0x00000400),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,		0x5200c, 0x00000800),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,		0x5200c, 0x00001000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,		0x5200c, 0x00002000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK,		0x5200c, 0x00004000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,		0x5200c, 0x00008000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S6_CLK,		0x5200c, 0x00010000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S7_CLK,		0x5200c, 0x00020000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,		0x5200c, 0x00400000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,		0x5200c, 0x00800000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,		0x5200c, 0x02000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,		0x5200c, 0x04000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,		0x5200c, 0x08000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S6_CLK,		0x5200c, 0x10000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S7_CLK,		0x5200c, 0x20000000),
-+	GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,		0x5200c, 0x00000040),
-+	GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,		0x5200c, 0x00000080),
-+	GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,		0x5200c, 0x00100000),
-+	GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,		0x5200c, 0x00200000),
-+	GATE_CLK(GCC_SDCC2_AHB_CLK,			0x14008, 0x00000001),
-+	GATE_CLK(GCC_SDCC2_APPS_CLK,			0x14004, 0x00000001),
-+	GATE_CLK(GCC_SDCC4_AHB_CLK,			0x16008, 0x00000001),
-+	GATE_CLK(GCC_SDCC4_APPS_CLK,			0x16004, 0x00000001),
-+	GATE_CLK(GCC_SYS_NOC_CPUSS_AHB_CLK,		0x52004, 0x00000001),
-+	GATE_CLK(GCC_TSIF_AHB_CLK,			0x36004, 0x00000001),
-+	GATE_CLK(GCC_TSIF_INACTIVITY_TIMERS_CLK,	0x3600c, 0x00000001),
-+	GATE_CLK(GCC_TSIF_REF_CLK,			0x36008, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_AHB_CLK,			0x75010, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_AXI_CLK,			0x7500c, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_CLKREF_CLK,		0x8c004, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_ICE_CORE_CLK,		0x75058, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_PHY_AUX_CLK,		0x7508c, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_0_CLK,		0x75018, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_1_CLK,		0x750a8, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_TX_SYMBOL_0_CLK,		0x75014, 0x00000001),
-+	GATE_CLK(GCC_UFS_CARD_UNIPRO_CORE_CLK,		0x75054, 0x00000001),
-+	GATE_CLK(GCC_UFS_MEM_CLKREF_CLK,		0x8c000, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77010, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x7700c, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,		0x77058, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,		0x7708c, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,		0x77018, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,		0x770a8, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,		0x77014, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,		0x77054, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,		0x0f00c, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x0f014, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x0f010, 0x00000001),
-+	GATE_CLK(GCC_USB30_SEC_MASTER_CLK,		0x1000c, 0x00000001),
-+	GATE_CLK(GCC_USB30_SEC_MOCK_UTMI_CLK,		0x10014, 0x00000001),
-+	GATE_CLK(GCC_USB30_SEC_SLEEP_CLK,		0x10010, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_CLKREF_CLK,		0x8c008, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,		0x0f04c, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,		0x0f050, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,		0x0f054, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_CLKREF_CLK,		0x8c028, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_PHY_AUX_CLK,		0x1004c, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_PHY_PIPE_CLK,		0x10054, 0x00000001),
-+	GATE_CLK(GCC_USB3_SEC_PHY_COM_AUX_CLK,		0x10050, 0x00000001),
-+	GATE_CLK(GCC_USB_PHY_CFG_AHB2PHY_CLK,		0x6a004, 0x00000001),
-+	GATE_CLK(GCC_VIDEO_AHB_CLK,			0x0b004, 0x00000001),
-+	GATE_CLK(GCC_VIDEO_AXI_CLK,			0x0b01c, 0x00000001),
-+	GATE_CLK(GCC_VIDEO_XO_CLK,			0x0b028, 0x00000001),
-+	GATE_CLK(GCC_GPU_IREF_CLK,			0x8c010, 0x00000001),
-+	GATE_CLK(GCC_APC_VS_CLK,			0x7a050, 0x00000001),
-+	GATE_CLK(GCC_GPU_VS_CLK,			0x7a04c, 0x00000001),
-+	GATE_CLK(GCC_MSS_VS_CLK,			0x7a048, 0x00000001),
-+	GATE_CLK(GCC_VDDA_VS_CLK,			0x7a00c, 0x00000001),
-+	GATE_CLK(GCC_VDDCX_VS_CLK,			0x7a004, 0x00000001),
-+	GATE_CLK(GCC_VDDMX_VS_CLK,			0x7a008, 0x00000001),
-+	GATE_CLK(GCC_VS_CTRL_AHB_CLK,			0x7a014, 0x00000001),
-+	GATE_CLK(GCC_VS_CTRL_CLK,			0x7a010, 0x00000001),
-+	GATE_CLK(GCC_CPUSS_DVM_BUS_CLK,			0x48190, 0x00000001),
-+};
-+
- int msm_enable(struct clk *clk)
- {
-+	struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
-+
-+	debug("%s: clk %s\n", __func__, sdm845_clks[clk->id].name);
-+
-+	qcom_gate_clk_en(priv, clk->id);
-+
- 	return 0;
- }
- 
-@@ -130,6 +267,8 @@ static const struct qcom_reset_map sdm845_gcc_resets[] = {
- static const struct qcom_cc_data qcs404_gcc_data = {
- 	.resets = sdm845_gcc_resets,
- 	.num_resets = ARRAY_SIZE(sdm845_gcc_resets),
-+	.clks = sdm845_clks,
-+	.num_clks = ARRAY_SIZE(sdm845_clks),
+diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
+index ce83ec741278..d10992ee58bf 100644
+--- a/drivers/clk/qcom/clock-qcs404.c
++++ b/drivers/clk/qcom/clock-qcs404.c
+@@ -113,7 +113,7 @@ static const struct bcr_regs blsp1_qup4_i2c_apps_regs = {
+ 	/* mnd_width = 0 */
  };
  
- static const struct udevice_id gcc_sdm845_of_match[] = {
+-ulong msm_set_rate(struct clk *clk, ulong rate)
++static ulong qcs404_set_rate(struct clk *clk, ulong rate)
+ {
+ 	struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
+ 
+@@ -121,7 +121,7 @@ ulong msm_set_rate(struct clk *clk, ulong rate)
+ 	case GCC_BLSP1_UART2_APPS_CLK:
+ 		/* UART: 115200 */
+ 		clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 0, 12, 125,
+-				     CFG_CLK_SRC_CXO);
++				     CFG_CLK_SRC_CXO, 8);
+ 		clk_enable_cbc(priv->base + BLSP1_UART2_APPS_CBCR);
+ 		break;
+ 	case GCC_BLSP1_AHB_CLK:
+@@ -130,7 +130,7 @@ ulong msm_set_rate(struct clk *clk, ulong rate)
+ 	case GCC_SDCC1_APPS_CLK:
+ 		/* SDCC1: 200MHz */
+ 		clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 4, 0, 0,
+-				     CFG_CLK_SRC_GPLL0);
++				     CFG_CLK_SRC_GPLL0, 8);
+ 		clk_enable_gpll0(priv->base, &gpll0_vote_clk);
+ 		clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
+ 		break;
+@@ -140,16 +140,16 @@ ulong msm_set_rate(struct clk *clk, ulong rate)
+ 	case GCC_ETH_RGMII_CLK:
+ 		if (rate == 250000000)
+ 			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 0, 0,
+-					     CFG_CLK_SRC_GPLL1);
++					     CFG_CLK_SRC_GPLL1, 8);
+ 		else if (rate == 125000000)
+ 			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 4, 0, 0,
+-					     CFG_CLK_SRC_GPLL1);
++					     CFG_CLK_SRC_GPLL1, 8);
+ 		else if (rate == 50000000)
+ 			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 10, 0, 0,
+-					     CFG_CLK_SRC_GPLL1);
++					     CFG_CLK_SRC_GPLL1, 8);
+ 		else if (rate == 5000000)
+ 			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 1, 50,
+-					     CFG_CLK_SRC_GPLL1);
++					     CFG_CLK_SRC_GPLL1, 8);
+ 		break;
+ 	default:
+ 		return 0;
+@@ -166,7 +166,7 @@ static int qcs404_enable(struct clk *clk)
+ 	case GCC_USB30_MASTER_CLK:
+ 		clk_enable_cbc(priv->base + USB30_MASTER_CBCR);
+ 		clk_rcg_set_rate_mnd(priv->base, &usb30_master_regs, 4, 0, 0,
+-				     CFG_CLK_SRC_GPLL0);
++				     CFG_CLK_SRC_GPLL0, 8);
+ 		break;
+ 	case GCC_SYS_NOC_USB3_CLK:
+ 		clk_enable_cbc(priv->base + SYS_NOC_USB3_CBCR);
+@@ -188,14 +188,14 @@ static int qcs404_enable(struct clk *clk)
+ 		clk_enable_cbc(priv->base + ETH_PTP_CBCR);
+ 		clk_enable_gpll0(priv->base, &gpll1_vote_clk);
+ 		clk_rcg_set_rate_mnd(priv->base, &emac_ptp_regs, 2, 0, 0,
+-				     CFG_CLK_SRC_GPLL1);
++				     CFG_CLK_SRC_GPLL1, 8);
+ 		break;
+ 	case GCC_ETH_RGMII_CLK:
+ 		/* SPEED_1000: freq -> 250MHz */
+ 		clk_enable_cbc(priv->base + ETH_RGMII_CBCR);
+ 		clk_enable_gpll0(priv->base, &gpll1_vote_clk);
+ 		clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 0, 0,
+-				     CFG_CLK_SRC_GPLL1);
++				     CFG_CLK_SRC_GPLL1, 8);
+ 		break;
+ 	case GCC_ETH_SLAVE_AHB_CLK:
+ 		clk_enable_cbc(priv->base + ETH_SLAVE_AHB_CBCR);
+diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
+index 7b614f9661f0..9345d5293f1e 100644
+--- a/drivers/clk/qcom/clock-sdm845.c
++++ b/drivers/clk/qcom/clock-sdm845.c
+@@ -82,8 +82,7 @@ static ulong sdm845_set_rate(struct clk *clk, ulong rate)
+ 	case GCC_QUPV3_WRAP1_S1_CLK: /* UART9 */
+ 		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
+ 		clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
+-				     freq->pre_div, freq->m, freq->n, freq->src);
+-
++				     freq->pre_div, freq->m, freq->n, freq->src, 16);
+ 		return freq->freq;
+ 	default:
+ 		return 0;
 
 -- 
 2.42.0
