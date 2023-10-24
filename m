@@ -4,86 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED97C07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9AA5C25B47
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:15:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AE8186FF2;
-	Wed, 25 Oct 2023 00:02:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D9C31869B6;
+	Wed, 25 Oct 2023 00:15:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kTQBedqf";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nvhkgPHi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C29F86FE7; Wed, 25 Oct 2023 00:02:01 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9B0818689A; Wed, 25 Oct 2023 00:15:48 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E26F879B9
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63674868D1
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:15:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a7d532da4bso50026517b3.2
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 15:01:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698184918; x=1698789718; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yYYuxztvZxTj1pcfRrtLpyAUzMShX8wEOQS+8r3PLmU=;
- b=kTQBedqf84ugyS3+rVMp6tGSiXou/z1diYCKjLkPxofYuAiXss0cdpizHRqiaPH25R
- gsKol/cRFnh95Kbrr9t11ZYSV+mJYtZGy6QzrBPJ/hghIUtCL9kbtD68cZtV2BuUx2P+
- JfovULNlOe3sA/vM+4/TZhU8Lv/bv/Kduwwr0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698184918; x=1698789718;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yYYuxztvZxTj1pcfRrtLpyAUzMShX8wEOQS+8r3PLmU=;
- b=eFHDjKVHPtwtCD083dnkxQfJo/5ogfUdELyslUMPaAYyOV2PLT5FyV+1Du2dkmZQaY
- k57OMAL29w/RufgGiSSkpsqVW6xnxX6429teMGMnPWBHM408+PcAQro0ukE2w4Nzj1lH
- fkcsxpV2IWF2vAOe0MKhmhUgLWuSZofI5CMMr140IsQXhcGV6oVSnzfSBx/TLeTBwKZL
- TmhaW0pLcu5TDrwUPRFiXAZNrc2I71K5kkJwviUtLkWbbWc83qcrxW7YZ3Sy9L/bJvBA
- Er7rmYu/ufZuV4eTAERfINWRlV68iw4uRKWK4FfTY2XbIXfsXOCznW8ndVqQy2n7fv6O
- vpyA==
-X-Gm-Message-State: AOJu0YwraazFDtNX2QhlNkndAxTDKbybRnMkIPTbajqlfmsrKipUgyP6
- lFCYwqda0sNamvB2C+UvNZVIoOCEp93SrCKrDg2lwA==
-X-Google-Smtp-Source: AGHT+IEUnfSxI/XfstYmqHOfspwiV8NF/V/FwemuHPdrxjtfWX44AAtsvo2ARaHWiqIM7tycUASTaA==
-X-Received: by 2002:a0d:e84c:0:b0:5a8:277f:b378 with SMTP id
- r73-20020a0de84c000000b005a8277fb378mr12977688ywe.1.1698184917810; 
- Tue, 24 Oct 2023 15:01:57 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- a66-20020a0df145000000b0058427045833sm4440433ywf.133.2023.10.24.15.01.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 15:01:57 -0700 (PDT)
-Date: Tue, 24 Oct 2023 18:01:55 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [v4.1 2/2] CI, pytest: Add a test for sandbox without LTO
-Message-ID: <20231024220155.GK496310@bill-the-cat>
-References: <20231020215302.3511807-2-trini@konsulko.com>
- <CAPnjgZ2jgfJ4GXR+2qt5Qi=MOc=kubLrMLgYBGuO_trinUHnag@mail.gmail.com>
- <20231021183438.GB53397@bill-the-cat>
- <CAPnjgZ2bKVTwEKcjeawootxXr-+iEmiowtctA52-=v07p+xBUQ@mail.gmail.com>
- <20231023133728.GH496310@bill-the-cat>
- <CAPnjgZ06w+uaSZr6PWo6NFoWfxiNuu-bar4e3zn+bVL-4wPvUQ@mail.gmail.com>
- <20231023172757.GV496310@bill-the-cat>
- <CAPnjgZ3G8T3ZjRNMdu=Jr_1OgijgQXNARQwAMQUFNy7ng4_zqw@mail.gmail.com>
- <20231024180738.GF496310@bill-the-cat>
- <CAPnjgZ1FruS29HdQZutZptRRdTggUWoCf972h2w2mhma47awww@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.lan (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5FB853F722; 
+ Tue, 24 Oct 2023 22:15:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1698185742;
+ bh=rGjIFaIPXWxYq2E1gdQc5eToAsombONbjHq+EuNy6vY=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=nvhkgPHi+ln0F8RSriz8/+XptnvHl8CnQdtha8eVPEPW7CDb3XNv98rFhrIaud8AZ
+ 15o2R0b4CLDMffFr5DX5Z0SjghvwVn0h/wAldPwEQu88ciNIWvH1YL37h50Z9Uf6nB
+ cllhnPiwAiJMUls2kqNSCUzyG+wujceYrLWUc8eH0uCvQA3pUv2x3uiRqko0o8moVB
+ q8bnfiNhu5uO/qo5MUK2XcyigGLGe0muenq7OuREWKvVLvFoKl/jotDB+t7+V+q5KF
+ sq07Zosh3C+mL2IAaTQeSvt9NjzXS4p7nuiDluxQcMxvYGN0P/W14zUPtQ6QJHWusW
+ pxT+lt44aC8uw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] CI: use OpenSBI 1.3.1 for testing
+Date: Wed, 25 Oct 2023 00:15:43 +0200
+Message-Id: <20231024221543.11422-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JpWrFL1QVsU+59//"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1FruS29HdQZutZptRRdTggUWoCf972h2w2mhma47awww@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,90 +70,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Use the most recent upstream release of OpenSBI for CI testing.
 
---JpWrFL1QVsU+59//
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ .azure-pipelines.yml | 8 ++++----
+ .gitlab-ci.yml       | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-On Tue, Oct 24, 2023 at 02:39:49PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 24 Oct 2023 at 11:07, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Oct 24, 2023 at 11:02:06AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 23 Oct 2023 at 10:28, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Oct 23, 2023 at 10:13:52AM -0700, Simon Glass wrote:
-> > > >
-> > > > [snip]
-> > > > > BTW buildman supports -L which disabled LTO using the NO_LTO=3D1 =
-option
-> > > >
-> > > > I worry about putting sandbox-specific flags in buildman.  Outside =
-of
-> > > > sandbox, targets that enable LTO require LTO, just like any other C=
-ONFIG
-> > > > option.
-> > >
-> > > Some problems with LTO and why I don't normally develop with it enabl=
-ed:
-> > >
-> > > - build time
-> > > - code moves around all over the place so it is hard to compare size =
-growth
-> > >
-> > > At least for my IDE flow, I use -L in most cases. Yes there are some
-> > > boards which won't fit without LTO, but I don't see them much.
-> > >
-> > > So this is mostly a dev convenience / productivity tool.
-> >
-> > Yes, it does take longer to link.  And yes, a more complex optimization
-> > does make some size tracking harder to understand (since growth or
-> > shrinkage allows for different optimizations to be made around it). But
-> > everything in configs/ that enables LTO needs LTO.
->=20
-> I thought we were planning to enable it for all of ARM, though?
-> Clearly most of those boards don't *need* it.
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 6f91553e86..d3ecb7c802 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -203,12 +203,12 @@ stages:
+           grub-mkimage --prefix=\"\" -o ~/grub_x86.efi -O i386-efi normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd
+           grub-mkimage --prefix=\"\" -o ~/grub_x64.efi -O x86_64-efi normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd
+           if [[ "\${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+-              wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.2/opensbi-1.2-rv-bin.tar.xz | tar -C /tmp -xJ;
+-              export OPENSBI=/tmp/opensbi-1.2-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
++              wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
++              export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
+           fi
+           if [[ "\${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+-              wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.2/opensbi-1.2-rv-bin.tar.xz | tar -C /tmp -xJ;
+-              export OPENSBI=/tmp/opensbi-1.2-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
++              wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
++              export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+           fi
+           # the below corresponds to .gitlab-ci.yml "script"
+           cd \${WORK_DIR}
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 6decdfdee3..27065a7ce7 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -32,12 +32,12 @@ stages:
+     - grub-mkimage --prefix="" -o ~/grub_x86.efi -O i386-efi normal  echo lsefimmap lsefi lsefisystab efinet tftp minicmd
+     - grub-mkimage --prefix="" -o ~/grub_x64.efi -O x86_64-efi normal  echo lsefimmap lsefi lsefisystab efinet tftp minicmd
+     - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+-        wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.2/opensbi-1.2-rv-bin.tar.xz | tar -C /tmp -xJ;
+-        export OPENSBI=/tmp/opensbi-1.2-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
++        wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
++        export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/ilp32/generic/firmware/fw_dynamic.bin;
+       fi
+     - if [[ "${TEST_PY_BD}" == "qemu-riscv64_spl" ]] || [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+-        wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.2/opensbi-1.2-rv-bin.tar.xz | tar -C /tmp -xJ;
+-        export OPENSBI=/tmp/opensbi-1.2-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
++        wget -O - https://github.com/riscv-software-src/opensbi/releases/download/v1.3.1/opensbi-1.3.1-rv-bin.tar.xz | tar -C /tmp -xJ;
++        export OPENSBI=/tmp/opensbi-1.3.1-rv-bin/share/opensbi/lp64/generic/firmware/fw_dynamic.bin;
+       fi
+ 
+   after_script:
+-- 
+2.40.1
 
-Yes, closer to when it was introduced the ideal was to make it default,
-because there are so many "on the edge" platforms, with respect to size
-limits.  And, we could possibly make it default now and see what that
-does to CI build times too.  But no, today, platforms opt-in for it
-because they need it, and the most common need is because of size rather
-than speed (or, speed gained through size reduction).
-
-And also yes, that it does make size comparison trickier is another
-reason I've not aggressively pushed for it globally.
-
-But yes, I still don't think disabling LTO is a general feature, and only
-sandbox has it architecture-wide enabled by default (for testing) and
-that -L/--no-lto is not a good generic feature for buildman.
-
-But I too don't wish to argue points around LTO nor gc-sections either
-anymore.
-
---=20
-Tom
-
---JpWrFL1QVsU+59//
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4PtAACgkQFHw5/5Y0
-tywuvwv4tn4cLHhIA2WaOpvll0Fvs6QrY/QZye8kwZMvXQMcjmNqH16LLCCwc+TR
-8qkNDajKnTsg1ker7/e5cKtuWTXDrmyBjWJ5CFRAApuxjzRWslm2/1CVPi+Dwnm4
-X1kN5obg2GeId62xVRgfGQWb2C5AAXkJYMNRPhRXHuhkW0di3EtO7+9GzDG/FKqm
-7RQNrw5uTCCbZ5RlICMDnB19BMT/eohqUz1JE1l6PQInusZP+rFulwb2sQsktF5i
-bwVlkS270eRAEibQqos4GW+3gP+GwSDcJBnGN3BYorJ6L0Mfes55z6RZAF1f9fER
-/t22hDr3W2vLtrwxNE5qtPcZ1njZYC/nQ6SqsK7u+9M2UMRXY4oU9akl2DGKA0LI
-8fzedL1H/nSGAVo/NAFidsmWiN0x96tmjmIjYGJPkCgQLcYqkbzJSur8xV4k4Uwe
-tz5wSiehvchlTX5/4yh0PhRIU48SAj9lDpCJ0WlbxT5OFC0tSbNwJlYdc0YOcY6B
-xx38HRs=
-=bFfP
------END PGP SIGNATURE-----
-
---JpWrFL1QVsU+59//--
