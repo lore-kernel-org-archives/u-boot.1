@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E030C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 19:35:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C90C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 19:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC12C87987;
-	Tue, 24 Oct 2023 21:34:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 26D3787056;
+	Tue, 24 Oct 2023 21:52:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WeYAoUNY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oJ1KslY7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D96F879C6; Tue, 24 Oct 2023 21:34:58 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id A542E8747C; Tue, 24 Oct 2023 21:52:27 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D032C87134
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 21:34:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87E3A86FF3
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 21:52:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-9b6559cbd74so745305166b.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 12:34:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40853c639abso35272265e9.0
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 12:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698176095; x=1698780895; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rFzL+om+1Q2L+cFAORFScz2+YBKctMVbmZz0G7gVboQ=;
- b=WeYAoUNYK/lhuEqkF894B27IhG4u35gz+szmOOObypGOOhld44vjeZWPVqKk0Gd1MT
- 4XI2qq0TFXUPISfnT9VULbfVcEt0tOTJ1/y3Or9wnOZ7mGwa71djw78j1FB++0nNtutZ
- mnH/CYTfN8WMUL7hFt/WC6wlc1VdzpyIMpzME=
+ d=linaro.org; s=google; t=1698177144; x=1698781944; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=J7zT/CCW0q+VHD6rtydD3BpKF7+0oYtAwGjInLPDJGc=;
+ b=oJ1KslY71VjNIqxNuxkUxwNaE9/XFQk9Uf25IesnEe0/ltSJzOpKwXvCn+XRjii78l
+ MUsDH+NXRrz8AK/MGspG2ZOOlyHJpvIN6KN1BNDAv8DJMjTaR9dXdlC4GdewXDvsUC24
+ aT1eppYP9Vlz7KmmcgvKSVoW37WvfvXFsIB70anMfGSj+2IBhW1YAQejmnhaJ9EXYa8m
+ yNy9b5S1iniwSw8x+b6MTUWagjzKd7VH+iVVBiseVlXgH0vqABaOfUSRmWKbTJaNxCiA
+ 90MYuJ+MvBYFkWYAVTz5yCi1s3yENVU8gWCyax2QKDjCUfZQT8nMGkj59R6aeqnwtR1b
+ pipw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698176095; x=1698780895;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rFzL+om+1Q2L+cFAORFScz2+YBKctMVbmZz0G7gVboQ=;
- b=A78CoxqiSAZ2dwzkY+AHYdLiqdo4XQG4iFCuiN0RicUlYvpdiJ9Nm8dhGxcNzQt2ir
- CIxG8vD5c+yaUb517/2gQZx/JRVSXjOC+NU7KAHAdcFyCrRL9wkVoSLgt+tQfzkQvisG
- 0A7oZKHRPHdW/DwNuzF8fuYMaXJ/fj/BJIW9N2hOjKFmRanh5ToAxQHPYaAYfHNF2eK6
- /0Yi/AGd0ahVfyoLA5WXqnF5u/RKY+PSoydsNXaIUJxQjMGdGoYPXWvTAupUuoYElD9L
- mBEU6qhUMmBbi+YkVdhcDd76WnbvQjndHQt1/I8b6DcBuhOWaxaD0Pt1WrU1lH1m15pA
- oozg==
-X-Gm-Message-State: AOJu0YylRfhtC2CN0RKBDUwXxs5OD/w9QA4Dk0JhDoK8DZvDPramRW4t
- tKYoZ+4d2i0bF6Sku7DCargP1VPIv92VWW2OqYWuMw==
-X-Google-Smtp-Source: AGHT+IHSEvZYUEj3fhBBP+f8c5RK87CVMgsJdjMOnnm7ZvIsikyocq2t4M4VpdoM+BOnURAuCiODhWX0jkStVD9unrQ=
-X-Received: by 2002:a17:907:3688:b0:9c2:a072:78bf with SMTP id
- bi8-20020a170907368800b009c2a07278bfmr10295869ejc.26.1698176095119; Tue, 24
- Oct 2023 12:34:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698177144; x=1698781944;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=J7zT/CCW0q+VHD6rtydD3BpKF7+0oYtAwGjInLPDJGc=;
+ b=djeQ6jFqcNgj046wg0NYYzL1cVIxa4jVW137D2L9Rec21qSNytCo/A9cAsOau+9Ahs
+ XLAJFNv81NzP6/BozSHrb55JEaXIDIL5RhtzwUXyHRd37YL9QtpkablPDHYnrBJA11WV
+ 1qWqU7VjS+1QblrqLmZ49Jzj3XNuXTfbY7oPK2RMvSJvfFZfjQ/ylAIZyZ5+/CaurMGl
+ xHE1aEpeqL6mQ/rnm8kP/yEcyJ4iOm59Mj9ICefe8YIW30zRDjyCuuPCrA0TIk7nQQEc
+ c42ZvGwn4lGyy0U+GO6jGZ0Xb97eEcNUTRuRa6wEQ8J9WqfulzhUYFqbFnxatYwKc9HR
+ RTkg==
+X-Gm-Message-State: AOJu0YyMhPdQIKiqIeXIj4K3vmg4aknsO7wUsImjbFl4hctuQzLOrZVa
+ mbFcCrScIzzmf/4reTkPy2IkMg==
+X-Google-Smtp-Source: AGHT+IHVCFnkFV/zbkVnqoC33k0AMANbir4zi2FpXXRokFJ3ySjWPCBX0a4S/xRENN9tn5I/06mX7w==
+X-Received: by 2002:a05:600c:a47:b0:408:39d3:a26b with SMTP id
+ c7-20020a05600c0a4700b0040839d3a26bmr9647384wmq.40.1698177143866; 
+ Tue, 24 Oct 2023 12:52:23 -0700 (PDT)
+Received: from [192.168.1.15] (host-2-99-112-229.as13285.net. [2.99.112.229])
+ by smtp.gmail.com with ESMTPSA id
+ q12-20020a05600c2e4c00b0040648217f4fsm17410855wmf.39.2023.10.24.12.52.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 24 Oct 2023 12:52:23 -0700 (PDT)
+Message-ID: <a4979be1-2267-4cfa-b412-f66e7455258b@linaro.org>
+Date: Tue, 24 Oct 2023 20:52:22 +0100
 MIME-Version: 1.0
-References: <20231024-b4-prevbl-fdt-v1-1-541f71dba802@linaro.org>
- <CAPnjgZ3mcyST+6dLk1r=cXwQDFT1CNAfOXXfbMaSFGt+HqCiCg@mail.gmail.com>
- <df7c8647-abfe-43a8-869d-6a570a109f9c@linaro.org>
-In-Reply-To: <df7c8647-abfe-43a8-869d-6a570a109f9c@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 24 Oct 2023 12:34:39 -0700
-Message-ID: <CAPnjgZ3HM-f_Af0uKEz+4vDT0f4-6AWhOOEaDNqYWko70f6rvA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] arm: init: add an option to use FDT from previous
  bootloader
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>, 
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Dzmitry Sankouski <dsankouski@gmail.com>, 
  Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ Ramon Fried <rfried.dev@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, u-boot@lists.denx.de
+References: <20231024-b4-prevbl-fdt-v1-1-541f71dba802@linaro.org>
+ <20231024192530.GH496310@bill-the-cat>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20231024192530.GH496310@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,64 +98,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
 
-On Tue, 24 Oct 2023 at 11:10, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
->
->
-> On 24/10/2023 19:03, Simon Glass wrote:
-> > Hi Caleb,
-> >
-> > On Tue, 24 Oct 2023 at 04:32, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >>
-> >> Add a new config option to allow u-boot to reuse the FDT provided by the
-> >
-> > U-Boot (please fix throughout)
->
-> Will do!
-> >
-> >> previous stage bootloader when available.
-> >>
-> >> On some boards the previous stage bootloader can populate
-> >> platform-specific parts of the devicetree such as the memory node, this
-> >> allows us to avoid hardcoding it in u-boot and instead determine it
-> >> dynamically at runtime.
-> >>
-> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> >> ---
-> >> This patch will improve generic support for Qualcomm boards by enabling
-> >> us to configure the memory map at runtime rather than having hardcoded
-> >> maps on a per-device basis. I've gone for this approach initially to try
-> >> and avoid introducing board specific code where possible, but I'm happy
-> >> to rework this into mach-snapdragon if that's preferred.
-> >
-> > Do you think it could use bloblist instead? I did send a patch to use
-> > the FDT in the bloblist:
->
-> If it would require changes to the previous stage bootloader then
-> unfortunately not. We're mostly stuck with the behaviour that we've got
-> for now...
 
-Yes it would. What is the previous-stage bootloader?
+On 24/10/2023 20:25, Tom Rini wrote:
+> On Tue, Oct 24, 2023 at 12:32:35PM +0100, Caleb Connolly wrote:
+> 
+>> Add a new config option to allow u-boot to reuse the FDT provided by the
+>> previous stage bootloader when available.
+>>
+>> On some boards the previous stage bootloader can populate
+>> platform-specific parts of the devicetree such as the memory node, this
+>> allows us to avoid hardcoding it in u-boot and instead determine it
+>> dynamically at runtime.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>> This patch will improve generic support for Qualcomm boards by enabling
+>> us to configure the memory map at runtime rather than having hardcoded
+>> maps on a per-device basis. I've gone for this approach initially to try
+>> and avoid introducing board specific code where possible, but I'm happy
+>> to rework this into mach-snapdragon if that's preferred.
+>> ---
+>> base-commit: e65b5d35c9116485366bb08138043d51220551da
+>>
+>> // Caleb (they/them)
+>> ---
+>>  arch/arm/lib/save_prev_bl_data.c |  7 +++++++
+>>  boot/Kconfig                     | 10 ++++++++++
+>>  include/init.h                   |  9 +++++++++
+>>  lib/fdtdec.c                     |  7 ++++++-
+> 
+> So what is different with this instead of using save_boot_params ? I'm
+> not saying this isn't needed, but I don't immediately see why
+> save_boot_params + (OF_HAS_PRIOR_STAGE=y&&OF_BOARD=y) isn't the solution
+> to the problem.
 
->
-> This mechanism of retrieving the DTB is also used on the apple M1 I
-> think, and any other board where we're booting U-Boot as a drop-in for
-> the kernel on arm64.
+OF_BOARD would work here by implementing board_fdt_blob_setup() for
+mach-snapdragon, my hope was to avoid doing this in a board-specific
+way, but if that's preferred then I can totally do that instead.
 
-I believe M1 is an open source project so perhaps they could adopt
-firmware handoff when it is finalised.
+I left a comment below the patch about this, although it probably wasn't
+super clear.
 
-Anyway, can this use OF_BOARD instead, perhaps? It already permits
-board-specific actions and is used by some rpi boards.
+Thanks,
+> 
 
-> >
-> > https://patchwork.ozlabs.org/project/uboot/patch/20230926141514.2101787-40-sjg@chromium.org/
-> >
-> > Regards,
-> > Simon
-> >
-
-Regards,
-Simon
+-- 
+// Caleb (they/them)
