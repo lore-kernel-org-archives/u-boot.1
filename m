@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E89C07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 766C9C25B6B
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:03:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D984F87998;
-	Tue, 24 Oct 2023 20:03:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2E45A8798C;
+	Tue, 24 Oct 2023 20:03:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iM7/LBBg";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="vcjsK8z6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6983087994; Tue, 24 Oct 2023 20:03:21 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 852928726A; Tue, 24 Oct 2023 20:03:28 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D86F8726A
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:03:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D93F787996
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9c41e95efcbso688417366b.3
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:03:18 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-9c3aec5f326so4542266b.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:03:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698170598; x=1698775398; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1698170604; x=1698775404; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vGitHvvaCO8Yma/W7toEaIZo3FcyMAyJsDsEBxJOyAM=;
- b=iM7/LBBgmuDo25hwTPDDEpOMGTE5Pms8Gx8FCR9/327PL3nSA8czfYtU7U4RaTPTuB
- lp9NhkVBWB2YqH2z0iU6PpAjqFWmavnW4EcziWl+dKbm1UPSe6y873Fv5OnQzomp+b7S
- 2UogFXCvgtVN2TheleTuxL5D5GNqV9lBrgbeM=
+ bh=np5vEsl2fNmI8JFiwvIEMjKKdwQnnyHSwhZ1kmeXVXM=;
+ b=vcjsK8z637C4FcyoKCmeYHl2ZxXDrAYPnl3c939ujQpolUboWFiiJm7I2rtKfLIFhe
+ zb+1l2dW+gSv9KBC/GkObmBW8TtQg1qfg9xQiWvt7VFa9hCkue2MRdds9hPOkZpe+a5I
+ csPSEF4/B6ipJxbjzA+LzC9DhyAsaxvmIIw3vEpCGh1MTxhmV1mhOeXA6aEGgdVNmzzR
+ KR3nMklzAXN+zf5NLfz/M9OvEWkOVwPHNF20nPG/q15w1xZsOLJ3ydVvEMqYmXjxyQ1S
+ /3/e9mfh2/DpO6PG8nW7I1cKqKsFtQDLy/kFuddhNku+QOheiuM8nz19mVyIX/7H9aO0
+ x79w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698170598; x=1698775398;
+ d=1e100.net; s=20230601; t=1698170604; x=1698775404;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vGitHvvaCO8Yma/W7toEaIZo3FcyMAyJsDsEBxJOyAM=;
- b=ni21ngNBaOltUyunSxuifo3op0HNzoRN/xXIMqKiLScIhP3tRvktmV6ztFT0OG38nh
- +IPifNzPgBOLCLzUcmoQSADqQWitA4o3tJvPPl92Y1hfS2ieOT7z6o9uGzTrDk6ES5Op
- UzNRwRzRlNuFIHFT/HZ/pllDqFoHlGVcv93IQl98085lmASydWXEEF29oS750UdwC1JF
- +IW/jeWsZs3SoITeBjWy6kdY6MLYTuCgl+yAMuMvajGcGJ71n3JI4wOsAp+5vTjbDD4R
- OzYwPuaemaR2hk13qa84qgo/2IPmXGG6kKzEJlAw0gqMgyniCt46V2iSUWCfz/xxcSso
- TntQ==
-X-Gm-Message-State: AOJu0Ywx6mvEQH9Ok5X0RPurNX+1/RbPuJtZFLya11w/aElTkquvlvj8
- p8TAGQ3enoPcRH7dEUpGOwRfv/uTuxAHte6nTuv/Ow==
-X-Google-Smtp-Source: AGHT+IHBPQKAAstBtqwCNvtmUffamjPL4lAjMM/F7ghKW8PyyTIffuOe/lEGegcJCbRwJctb+DeiRKppW5rG3V8aUq8=
-X-Received: by 2002:a17:907:3d92:b0:9b2:b71f:83be with SMTP id
- he18-20020a1709073d9200b009b2b71f83bemr8144061ejc.1.1698170597552; Tue, 24
- Oct 2023 11:03:17 -0700 (PDT)
+ bh=np5vEsl2fNmI8JFiwvIEMjKKdwQnnyHSwhZ1kmeXVXM=;
+ b=HZ76lPXf/HIIJUF3LEb3NhlDi6ra68z+UJydvo8/m1SDfSxvm01ikxc+UOzBHpfKfY
+ T7bHHamy2FNi+lcQay6aK2tHzjzJYJItOBO/x8ziHwfg7kKBSzqS8/+yuFkLQkDFi76c
+ L6FbGEtVWGxp7EIBzVPhOgUADY8UMXA94WJpeXHB2cAO9uFmDtqy+D6Llzj3O3NqpYN9
+ rHGg5BP0owfrthLJ67t4C6jCqmCdEANvAM51efemNksDO8LjF5vgRNvoWk/edEdoKbhW
+ 30fRh6HSycXkdiqeZxSFQnpk8vp/OCsMz6kuodas+44Jqp6fXWBvafvjNRPXPDqTWlVN
+ K3PQ==
+X-Gm-Message-State: AOJu0Yz1xjwycL0qH5Kcbq5SH4y2eaDlJr74wlOPeM/uwY2lnW2PeRuw
+ U5akIiUZfT9LB8vBz9mtZ8e1/Jc3vi00+Yxp43HIEdcQAFFZBHSPQaL/RL3d
+X-Google-Smtp-Source: AGHT+IGCzm1Rot70aDGv1qzJvI9Dwt+C8XNxo67Hv5tF8K3Za+VbUsbwPYd+c+QLVu6YFJtR72g+j2DnmJ4WP/5XdoM=
+X-Received: by 2002:a17:907:c205:b0:9ae:50ec:bd81 with SMTP id
+ ti5-20020a170907c20500b009ae50ecbd81mr12836079ejc.21.1698170604173; Tue, 24
+ Oct 2023 11:03:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024063047.20874-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231024063047.20874-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 24 Oct 2023 11:03:05 -0700
-Message-ID: <CAPnjgZ2SG1xmBjhaL+NzPmE64jqJNeiJucZ9360CzAoxVHtaDQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] sandbox: eliminate unused functions from binaries
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20231024120307.17896-1-tom@tom-fitzhenry.me.uk>
+In-Reply-To: <20231024120307.17896-1-tom@tom-fitzhenry.me.uk>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 24 Oct 2023 11:03:12 -0700
+Message-ID: <CAPnjgZ0Toi5RPBc4YP7YwNArr9cVgswgQj2yx1NPs_TAFAJ_yg@mail.gmail.com>
+Subject: Re: [PATCH] doc: usage: fix ordering of shell commands
+To: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,72 +83,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Mon, 23 Oct 2023 at 23:31, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 24 Oct 2023 at 05:03, Tom Fitzhenry <tom@tom-fitzhenry.me.uk> wrote:
 >
-> The sandbox should closely mimic other architectures.
->
-> Place each function or data in a separate section and let the linker
-> eliminate unused ones. This will reduce the binary size.
->
-> In the linker script mark that u_boot_sandbox_getopt are to be kept.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> I initially didn't find the bootz docs when I went looking for them. :)
 > ---
-> v3:
->         avoid duplicate -Wl,--gc-sections
->         only use KEEP for unreferenced symbols
-> v2:
->         mark _u_boot_sandbox_getopt sections as KEEP()
-> ---
->  arch/sandbox/config.mk      | 4 ++--
->  arch/sandbox/cpu/u-boot.lds | 2 +-
->  2 files changed, 3 insertions(+), 3 deletions(-)
-
-I would still rather not do this, I am OK with trying it so long as we
-can revert it if it causes problems.
-
->
-> diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
-> index 2d184c5f65..1d50991f8d 100644
-> --- a/arch/sandbox/config.mk
-> +++ b/arch/sandbox/config.mk
-> @@ -2,7 +2,7 @@
->  # Copyright (c) 2011 The Chromium OS Authors.
->
->  PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
-> -PLATFORM_CPPFLAGS += -fPIC
-> +PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
->  PLATFORM_LIBS += -lrt
->  SDL_CONFIG ?= sdl2-config
->
-> @@ -30,7 +30,7 @@ cmd_u-boot__ = $(CC) -o $@ -Wl,-T u-boot.lds $(u-boot-init) \
->                 $(u-boot-main) \
->                 $(u-boot-keep-syms-lto) \
->         -Wl,--no-whole-archive \
-> -       $(PLATFORM_LIBS) -Wl,-Map -Wl,u-boot.map
-> +       $(PLATFORM_LIBS) -Wl,-Map -Wl,u-boot.map -Wl,--gc-sections
->
->  cmd_u-boot-spl = (cd $(obj) && $(CC) -o $(SPL_BIN) -Wl,-T u-boot-spl.lds \
->         $(KBUILD_LDFLAGS:%=-Wl,%) \
-> diff --git a/arch/sandbox/cpu/u-boot.lds b/arch/sandbox/cpu/u-boot.lds
-> index ba8dee50c7..52f13af374 100644
-> --- a/arch/sandbox/cpu/u-boot.lds
-> +++ b/arch/sandbox/cpu/u-boot.lds
-> @@ -15,7 +15,7 @@ SECTIONS
->
->         _u_boot_sandbox_getopt : {
->                 *(_u_boot_sandbox_getopt_start)
-> -               *(_u_boot_sandbox_getopt)
-> +               KEEP(*(_u_boot_sandbox_getopt))
->                 *(_u_boot_sandbox_getopt_end)
->         }
->
-> --
-> 2.40.1
+>  doc/usage/index.rst | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
