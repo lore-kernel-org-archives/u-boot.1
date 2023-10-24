@@ -4,43 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F027C07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C0F2C25B47
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:34:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1BD08720A;
-	Wed, 25 Oct 2023 00:27:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A5DD4879B8;
+	Wed, 25 Oct 2023 00:34:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AxjMUaKS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 674EB8722B; Wed, 25 Oct 2023 00:27:19 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1CF32871BB
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:27:15 +0200 (CEST)
+ id 8C68E8724A; Wed, 25 Oct 2023 00:34:11 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 08225871BB
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:34:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D644BC15;
- Tue, 24 Oct 2023 15:27:55 -0700 (PDT)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BAF813F762;
- Tue, 24 Oct 2023 15:27:13 -0700 (PDT)
-Date: Tue, 24 Oct 2023 23:26:08 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Ludwig Kormann <ludwig.kormann@ict42.de>, linux-sunxi
- <linux-sunxi@lists.linux.dev>
-Cc: hdegoede@redhat.com, jagan@amarulasolutions.com, u-boot@lists.denx.de
-Subject: Re: [PATCH RESEND v3 1/1] arm: dts: icnova-a20-adb4006: Add board
- support
-Message-ID: <20231024232608.6e9b2516@slackpad.lan>
-In-Reply-To: <20231009113916.2668425-1-ludwig.kormann@ict42.de>
-References: <20231009113916.2668425-1-ludwig.kormann@ict42.de>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5a90d6ab962so38860547b3.2
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 15:34:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698186848; x=1698791648; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rVofJTcoov5BCeids9h9QQsjCPcNna+tCivjPSSPTHU=;
+ b=AxjMUaKSf4xRt8+bku42DUymbV/YlitpetrqZFVzV0/xxXGyIhaUJ0rXRx+w6c/Kwi
+ uG6XmEubmZbjrPzgEN9nTg54W6wnP7hwyNa/x8m3rKCTMiqYMtQJgQ//B2jZ4T65Tpjd
+ ycPKOdBJJdR2L6c13q3B1/TaLjXQYggYOT60k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698186848; x=1698791648;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rVofJTcoov5BCeids9h9QQsjCPcNna+tCivjPSSPTHU=;
+ b=By0VYf1qIpguavrzmFcrBK42iegSxgimIaIW25AtBhHGnBmizEeOF/Pfu3BZnmDuJX
+ 97oYtZR5ECknFnPIX79IcKTbuhb6vU38pT8nR6xcus6erzC4qaUcRc6HrbRl3UvJWTMx
+ 4FQxrCYO/D3/91pRRoWjBja5W75V0Bd8+UBTx0zp5W4R7wMM17pIA6SxwWE/KesXHswE
+ byCTepndWo+ps8mWQN3OY9Ji+uUpomAk4dd5aTMpiAxygaF/TcDdti8tCm5m1IgSajaz
+ 5XIt9oQwwVgqBhczAVL+d43jm573X/63ExQTtjjxT/+NsWclGH9XX6WuRaveV1XWUQb9
+ 6z1A==
+X-Gm-Message-State: AOJu0Yyl9jK4QkJ4QApbWAVTzAeKi3NXvXSShcH2xUx6CuXxm4xTbNAb
+ cj4eTy9uZgkInc7CrG7zm2IahQ==
+X-Google-Smtp-Source: AGHT+IEv3EvsyeFuRzmxtuzOEjj2oZH5Nn6qmaQPXuWFzlFK8u4SOuMrpQjBpY8PQS939o//AI8Apw==
+X-Received: by 2002:a0d:e8cc:0:b0:5a7:ba09:52c7 with SMTP id
+ r195-20020a0de8cc000000b005a7ba0952c7mr16246756ywe.11.1698186847765; 
+ Tue, 24 Oct 2023 15:34:07 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
+ [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
+ by smtp.gmail.com with ESMTPSA id
+ v19-20020a81a553000000b00576c727498dsm4453044ywg.92.2023.10.24.15.34.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Oct 2023 15:34:07 -0700 (PDT)
+Date: Tue, 24 Oct 2023 18:34:05 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>, Simon Glass <sjg@chromium.org>
+Cc: caleb.connolly@linaro.org, u-boot@lists.denx.de,
+ ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, bmeng.cn@gmail.com,
+ brandon.maier@collins.com, kconsul@ventanamicro.com,
+ oleksandr.suvorov@foundries.io, patrick.delaunay@foss.st.com,
+ sughosh.ganu@linaro.org
+Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
+Message-ID: <20231024223405.GM496310@bill-the-cat>
+References: <20231021004522.53311-1-sjg@chromium.org>
+ <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
+ <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
+ <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZhcYXyBty9HAtzVk"
+Content-Disposition: inline
+In-Reply-To: <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,338 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon,  9 Oct 2023 13:39:16 +0200
-Ludwig Kormann <ludwig.kormann@ict42.de> wrote:
 
-Hi Ludwig,
+--ZhcYXyBty9HAtzVk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Add board support for ICnova A20 SomPi compute module on
-> ICnova ADB4006 development board.
->=20
-> Specification:
-> SoM
-> - Processor: Allwinner A20 Cortex-A7 Dual Core at 1GHz
-> - 512MB DDR3 RAM
-> - Fast Ethernet (Phy: Realtek RTL8201CP)
-> ADB4006
-> - I2C
-> - 2x USB 2.0
-> - 1x Fast Ethernet port
-> - 1x SATA
-> - 2x buttons (PWRON, Boot)
-> - 2x LEDS
-> - serial console
-> - HDMI
-> - =C2=B5SD-Card slot
-> - Audio Line-In / Line-Out
-> - GPIO pinheaders
->=20
-> https://wiki.in-circuit.de/index.php5?title=3DICnova_ADB4006
-> https://wiki.in-circuit.de/index.php5?title=3DICnova_A20_SODIMM
->=20
-> devicetree upstreamed with linux 6.5
+On Mon, Oct 23, 2023 at 05:31:19PM +0200, Mark Kettenis wrote:
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Mon, 23 Oct 2023 00:04:14 -0700
+> >=20
+> > Hi Caleb,
+> >=20
+> > On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@linaro.org=
+> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On 21/10/2023 01:45, Simon Glass wrote:
+> > > > U-Boot typically sets up its malloc() pool near the top of memory. =
+On
+> > > > ARM64 systems this can result in an SMBIOS table above 4GB which is
+> > > > not supported by SMBIOSv2.
+[snip]
+> There is absolutely no guarantee that arm64 machines have memory below
+> 4GB.  Examples of SoCs that have no memory below 4GB are AMD's Opteron
+> A1100 SoC and all the recent Apple SoCs.
 
-As you have probably seen, the DT files have been synced into U-Boot's
-master branch yesterday.
-So if you rebase this on top of master, so just send the defconfig
-(with CONFIG_SYS_64BIT_LBA added) and the Makefile change in a new
-patch, I am happy to take it still this cycle.
+So one thing to resolve here is where does that requirement about the
+SMBIOS table needing to be below 4GB come from (standards wise), and in
+turn is that obeyed by consumers like say Linux or OpenBSD? Answering my
+own question, maybe in part, https://www.dmtf.org/standards/smbios reads
+to me like there's a v3 and maybe we should be doing what we need to
+support / identify as that, if it doesn't have that restriction?
 
-Cheers,
-Andre
+--=20
+Tom
 
-> Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
-> ---
-> changes in v3:
-> - rebase on v2023.10
->=20
-> changes in v2:
-> - rebase on v2023.07-rc2
-> - remove pin defines from defconfig
-> - get dts reviewed on the linux mailing list and
->   scheduled for kernel 6.5 [1]
->=20
-> [1]
-> https://git.kernel.org/pub/scm/linux/kernel/git/sunxi/linux.git
-> commit de2bdfb7f79d5c655eb056d459e02be2c7f13c8b
->=20
-> ---
->  arch/arm/dts/Makefile                         |   1 +
->  arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts | 137 ++++++++++++++++++
->  arch/arm/dts/sun7i-a20-icnova-a20.dtsi        |  62 ++++++++
->  board/sunxi/MAINTAINERS                       |   5 +
->  configs/icnova-a20-adb4006_defconfig          |  20 +++
->  5 files changed, 225 insertions(+)
->  create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
->  create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20.dtsi
->  create mode 100644 configs/icnova-a20-adb4006_defconfig
->=20
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 85fd5b1157..16d5930b78 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -667,6 +667,7 @@ dtb-$(CONFIG_MACH_SUN7I) +=3D \
->  	sun7i-a20-haoyu-marsboard.dtb \
->  	sun7i-a20-hummingbird.dtb \
->  	sun7i-a20-i12-tvbox.dtb \
-> +	sun7i-a20-icnova-a20-adb4006.dtb \
->  	sun7i-a20-icnova-swac.dtb \
->  	sun7i-a20-itead-ibox.dtb \
->  	sun7i-a20-lamobo-r1.dtb \
-> diff --git a/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts b/arch/arm/dts=
-/sun7i-a20-icnova-a20-adb4006.dts
-> new file mode 100644
-> index 0000000000..577ead1d02
-> --- /dev/null
-> +++ b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
-> @@ -0,0 +1,137 @@
-> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> +// Copyright (C) 2023 In-Circuit GmbH
-> +
-> +/dts-v1/;
-> +
-> +#include "sun7i-a20-icnova-a20.dtsi"
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/leds/common.h>
-> +
-> +/ {
-> +	model =3D "In-Circuit ICnova A20 ADB4006";
-> +	compatible =3D "incircuit,icnova-a20-adb4006", "incircuit,icnova-a20",
-> +		     "allwinner,sun7i-a20";
-> +
-> +	aliases {
-> +		serial0 =3D &uart0;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path =3D "serial0:115200n8";
-> +	};
-> +
-> +	hdmi-connector {
-> +		compatible =3D "hdmi-connector";
-> +		type =3D "a";
-> +
-> +		port {
-> +			hdmi_con_in: endpoint {
-> +				remote-endpoint =3D <&hdmi_out_con>;
-> +			};
-> +		};
-> +	};
-> +
-> +	leds {
-> +		compatible =3D "gpio-leds";
-> +
-> +		led-0 {
-> +			function =3D LED_FUNCTION_POWER;
-> +			color =3D <LED_COLOR_ID_YELLOW>;
-> +			gpios =3D <&pio 7 21 GPIO_ACTIVE_HIGH>; /* PH21 */
-> +			default-state =3D "on";
-> +		};
-> +
-> +		led-1 {
-> +			function =3D LED_FUNCTION_HEARTBEAT;
-> +			color =3D <LED_COLOR_ID_RED>;
-> +			gpios =3D <&pio 7 20 GPIO_ACTIVE_HIGH>; /* PH20 */
-> +			linux,default-trigger =3D "heartbeat";
-> +		};
-> +	};
-> +};
-> +
-> +&ahci {
-> +	target-supply =3D <&reg_ahci_5v>;
-> +	status =3D "okay";
-> +};
-> +
-> +&codec {
-> +	status =3D "okay";
-> +};
-> +
-> +&de {
-> +	status =3D "okay";
-> +};
-> +
-> +&ehci0 {
-> +	status =3D "okay";
-> +};
-> +
-> +&ehci1 {
-> +	status =3D "okay";
-> +};
-> +
-> +&hdmi {
-> +	status =3D "okay";
-> +};
-> +
-> +&hdmi_out {
-> +	hdmi_out_con: endpoint {
-> +		remote-endpoint =3D <&hdmi_con_in>;
-> +	};
-> +};
-> +
-> +&mmc0 {
-> +	vmmc-supply =3D <&reg_vcc3v3>;
-> +	bus-width =3D <4>;
-> +	cd-gpios =3D <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
-> +	status =3D "okay";
-> +};
-> +
-> +&ohci0 {
-> +	status =3D "okay";
-> +};
-> +
-> +&ohci1 {
-> +	status =3D "okay";
-> +};
-> +
-> +&otg_sram {
-> +	status =3D "okay";
-> +};
-> +
-> +&reg_ahci_5v {
-> +	status =3D "okay";
-> +};
-> +
-> +&ac_power_supply {
-> +	status =3D "okay";
-> +};
-> +
-> +&reg_usb1_vbus {
-> +	status =3D "okay";
-> +};
-> +
-> +&reg_usb2_vbus {
-> +	status =3D "okay";
-> +};
-> +
-> +&uart0 {
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&uart0_pb_pins>;
-> +	status =3D "okay";
-> +};
-> +
-> +&usb_otg {
-> +	dr_mode =3D "otg";
-> +	status =3D "okay";
-> +};
-> +
-> +&usbphy {
-> +	usb0_id_det-gpios =3D <&pio 7 4 GPIO_ACTIVE_HIGH>; /* PH4 */
-> +	usb0_vbus_det-gpios =3D <&pio 7 5 GPIO_ACTIVE_HIGH>; /* PH5 */
-> +	usb1_vbus-supply =3D <&reg_usb1_vbus>;
-> +	usb2_vbus-supply =3D <&reg_usb2_vbus>;
-> +	status =3D "okay";
-> +};
-> diff --git a/arch/arm/dts/sun7i-a20-icnova-a20.dtsi b/arch/arm/dts/sun7i-=
-a20-icnova-a20.dtsi
-> new file mode 100644
-> index 0000000000..46616c6bc8
-> --- /dev/null
-> +++ b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
-> @@ -0,0 +1,62 @@
-> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> +// Copyright (C) 2023 In-Circuit GmbH
-> +
-> +#include "sun7i-a20.dtsi"
-> +#include "sunxi-common-regulators.dtsi"
-> +
-> +#include <dt-bindings/interrupt-controller/irq.h>
-> +
-> +&cpu0 {
-> +	cpu-supply =3D <&reg_dcdc2>;
-> +};
-> +
-> +&gmac {
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&gmac_mii_pins>;
-> +	phy-handle =3D <&phy1>;
-> +	phy-mode =3D "mii";
-> +	status =3D "okay";
-> +};
-> +
-> +&i2c0 {
-> +	status =3D "okay";
-> +
-> +	axp209: pmic@34 {
-> +		reg =3D <0x34>;
-> +		interrupt-parent =3D <&nmi_intc>;
-> +		interrupts =3D <0 IRQ_TYPE_LEVEL_LOW>;
-> +	};
-> +};
-> +
-> +&gmac_mdio {
-> +	phy1: ethernet-phy@1 {
-> +		reg =3D <1>;
-> +	};
-> +};
-> +
-> +#include "axp209.dtsi"
-> +
-> +&reg_dcdc2 {
-> +	regulator-always-on;
-> +	regulator-min-microvolt =3D <1000000>;
-> +	regulator-max-microvolt =3D <1400000>;
-> +	regulator-name =3D "vdd-cpu";
-> +};
-> +
-> +&reg_dcdc3 {
-> +	regulator-always-on;
-> +	regulator-min-microvolt =3D <1000000>;
-> +	regulator-max-microvolt =3D <1400000>;
-> +	regulator-name =3D "vdd-int-dll";
-> +};
-> +
-> +&reg_ldo1 {
-> +	regulator-name =3D "vdd-rtc";
-> +};
-> +
-> +&reg_ldo2 {
-> +	regulator-always-on;
-> +	regulator-min-microvolt =3D <3000000>;
-> +	regulator-max-microvolt =3D <3000000>;
-> +	regulator-name =3D "avcc";
-> +};
-> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-> index 98bbd2dd25..67cdd01371 100644
-> --- a/board/sunxi/MAINTAINERS
-> +++ b/board/sunxi/MAINTAINERS
-> @@ -236,6 +236,11 @@ M:	Stefan Roese <sr@denx.de>
->  S:	Maintained
->  F:	configs/icnova-a20-swac_defconfig
-> =20
-> +ICnova-A20-ADB4006 BOARD
-> +M:	Ludwig Kormann <ludwig.kormann@ict42.de>
-> +S:	Maintained
-> +F:	configs/icnova-a20-adb4006_defconfig
-> +
->  ITEAD IBOX BOARD
->  M:	Marcus Cooper <codekipper@gmail.com>
->  S:	Maintained
-> diff --git a/configs/icnova-a20-adb4006_defconfig b/configs/icnova-a20-ad=
-b4006_defconfig
-> new file mode 100644
-> index 0000000000..f70ffe45ab
-> --- /dev/null
-> +++ b/configs/icnova-a20-adb4006_defconfig
-> @@ -0,0 +1,20 @@
-> +CONFIG_ARM=3Dy
-> +CONFIG_ARCH_SUNXI=3Dy
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"sun7i-a20-icnova-a20-adb4006"
-> +CONFIG_SPL=3Dy
-> +CONFIG_MACH_SUN7I=3Dy
-> +CONFIG_DRAM_CLK=3D384
-> +CONFIG_AHCI=3Dy
-> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> +CONFIG_SPL_I2C=3Dy
-> +CONFIG_SCSI_AHCI=3Dy
-> +CONFIG_SYS_I2C_MVTWSI=3Dy
-> +CONFIG_SYS_I2C_SLAVE=3D0x7f
-> +CONFIG_SYS_I2C_SPEED=3D400000
-> +CONFIG_ETH_DESIGNWARE=3Dy
-> +CONFIG_MII=3Dy
-> +CONFIG_SUN7I_GMAC=3Dy
-> +CONFIG_AXP_ALDO4_VOLT=3D2800
-> +CONFIG_SCSI=3Dy
-> +CONFIG_USB_EHCI_HCD=3Dy
-> +CONFIG_USB_OHCI_HCD=3Dy
+--ZhcYXyBty9HAtzVk
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4Rl0ACgkQFHw5/5Y0
+tyxrVQwArLvN+wQs05vP2iaw0rPac9dLUldBlxYMrsZ1HViYrfuzdVfThl3BGm3c
+uK5U9brfX/RiU2+QTPP0dJOEgq7no5dTLS7+J6Iufo2oFls9cL9TzruqSCWTwrke
+3cjVay8ZlDeZ04olRrbSxfUn/gjhlyXLUgSIAPWrRJotjsGe+e3CZ+ZVkNfIV1xr
+reuMk6XEenegm2HVO2S2HN/F1okVMdzfv63wFzox6MKPtxcHqgiaCKun1wCpbpwA
+0IF0uIV3qQ1sGQdxh1wmQO8LV8tnf8xOc/LZYnWHtFst5nIyVTz91yKVZtnX8/86
+oiK3Qi7uOpbIn99BMAUxFBGE35eGlLxfd7zDgBGQ6+DX7+OKz6CbU6oiE5eOJqln
+n40r12l9SSaiAhb1ev91TDP3znDQAxZz/wNczoDekIFGZfJ7qMcErPsD5xMuFy85
+37J50Ws/V7iIZXhIJjVMwXqKJPV989T5wl8BWmgeoLvE8YEPer59mxBgBxOHCiuo
+Q73veDr/
+=w/7S
+-----END PGP SIGNATURE-----
+
+--ZhcYXyBty9HAtzVk--
