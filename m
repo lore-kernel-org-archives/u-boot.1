@@ -4,100 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80103C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 15:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57989C00A8F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 15:57:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA30B8701D;
-	Tue, 24 Oct 2023 17:48:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
+	by phobos.denx.de (Postfix) with ESMTP id BFB49871ED;
+	Tue, 24 Oct 2023 17:57:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="bKyEVlbs";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06BEF8796D; Tue, 24 Oct 2023 17:48:34 +0200 (CEST)
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B1320875B1; Tue, 24 Oct 2023 17:57:33 +0200 (CEST)
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
+ [209.85.210.47])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD4AC864E8
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 17:48:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 360D186FFE
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 17:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
+ dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39OFkb7V014774; Tue, 24 Oct 2023 15:48:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=pp1;
- bh=9bMf6Ws4vtt2RTh6Bno2x2VAuZUeaw9xJhWUq0oIKNU=;
- b=bKyEVlbsFZK5FAjZdNpyQZCXRYXwJVivC6T5QH9p0U1QiBHDTLsTuaXKj5nXOa3sAyB2
- le/PvZC659IMlh1RSAFzHYV4aH9WWp6e0iogJuhRKcoVKOd8eNczT+Nd95bknNm5CHIy
- 4A69CFdOl5u68ugbUYfjAakGkwAfE0uL6ZEjHTsrPGb5e0FfPphnN5l+lpUi7XDsNoC1
- 3oXrcxnVKqEnaHMtOHmSyE+XIOru5RvDzNvGuTp2A2uewKo572lIoosRYdR66ptpkY5n
- 0SDiuPL4LHm3PuVRVktSwn4aaEjPBnNGqYY0qWgVrat4jh2ojS+PONPCd0hAz4K6RpAI 7w== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3txgqrgae1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Oct 2023 15:48:27 +0000
-Received: from m0360083.ppops.net (m0360083.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39OFkmXG016077;
- Tue, 24 Oct 2023 15:48:26 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3txgqrgaca-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Oct 2023 15:48:26 +0000
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39OE80JC026865; Tue, 24 Oct 2023 15:43:59 GMT
-Received: from smtprelay07.dal12v.mail.ibm.com ([172.16.1.9])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tvsynrd75-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Oct 2023 15:43:59 +0000
-Received: from smtpav06.dal12v.mail.ibm.com (smtpav06.dal12v.mail.ibm.com
- [10.241.53.105])
- by smtprelay07.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39OFhveW51970804
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 24 Oct 2023 15:43:57 GMT
-Received: from smtpav06.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id F285A58043;
- Tue, 24 Oct 2023 15:43:56 +0000 (GMT)
-Received: from smtpav06.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id C2D1F58055;
- Tue, 24 Oct 2023 15:43:56 +0000 (GMT)
-Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.72.218])
- by smtpav06.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 24 Oct 2023 15:43:56 +0000 (GMT)
-From: Eddie James <eajames@linux.ibm.com>
-To: u-boot@lists.denx.de
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
- eajames@linux.ibm.com
-Subject: [PATCH v14 7/8] efi_loader: fix EFI_ENTRY point on
- get_active_pcr_banks
-Date: Tue, 24 Oct 2023 10:43:53 -0500
-Message-Id: <20231024154354.197524-8-eajames@linux.ibm.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20231024154354.197524-1-eajames@linux.ibm.com>
-References: <20231024154354.197524-1-eajames@linux.ibm.com>
+ spf=pass smtp.mailfrom=robherring2@gmail.com
+Received: by mail-ot1-f47.google.com with SMTP id
+ 46e09a7af769-6ce2de8da87so3039711a34.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 08:57:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698163050; x=1698767850;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NHcRvpJFapb0Q3P+9BlCR7HD1XqDuZe4P3/x1wWBCyM=;
+ b=rAEtcQocNPmipUBtlhtZA5NZ9fmJBDRKoUhbfzPSLTpJ4BqgDMVQYTEvtoLM2+6LtF
+ gWygqpiD4lIDQMa/IAIDUiyTVRkhRXYSK52Bg4Af6YL+YmjGkoEuRmcthlEdWU+fI7cJ
+ XUsHmy/ugv3d+GJ7Y9W4leXwnxROEv3k7957gNxZ22EpP745W3FYc6b7bwc/nSSkemBc
+ 1KMq7xi3ih9AppOAsbUAGgjvwYqQ7druuxtVWb82lwx09ix7E8AIXTQE5J2vaH2NU4eP
+ H60YCdc5uEriXNPOEaJVHJIVHfhe/DEj76XhN8nPZgvmcdNC8j1qCUoO43C8rQerL3bk
+ Whnw==
+X-Gm-Message-State: AOJu0Yxy2VXSPf9GSCvMUYo3skRSB6gQXcE1Dh7x0+/8cdvb0jE+KiIL
+ lWh6OmlX7e6/Jy6eDZueXw==
+X-Google-Smtp-Source: AGHT+IGHYmHNXEiTTfwOzmFz01R3ZgSU10kI3zUH744k0D8HWbiWLtUy7kIW318y+4z87Hn4RJxUqA==
+X-Received: by 2002:a9d:618d:0:b0:6b9:26ce:5e5c with SMTP id
+ g13-20020a9d618d000000b006b926ce5e5cmr13881917otk.31.1698163049764; 
+ Tue, 24 Oct 2023 08:57:29 -0700 (PDT)
+Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net.
+ [66.90.144.107]) by smtp.gmail.com with ESMTPSA id
+ f3-20020a4ae603000000b0057b74352e3asm1986286oot.25.2023.10.24.08.57.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Oct 2023 08:57:29 -0700 (PDT)
+Received: (nullmailer pid 3929057 invoked by uid 1000);
+ Tue, 24 Oct 2023 15:57:28 -0000
+Date: Tue, 24 Oct 2023 10:57:28 -0500
+From: Rob Herring <robh@kernel.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, linux-mtd@lists.infradead.org,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Michael Walle <mwalle@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Conor Dooley <conor+dt@kernel.org>, Dhruva Gole <d-gole@ti.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 1/3] dt-bindings: mtd: partitions: Add binman compatible
+Message-ID: <20231024155728.GA3707756-robh@kernel.org>
+References: <20231009220436.2164245-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: 0MJnI5mQpU-5R3xmMQOOCtViP7hzhM9b
-X-Proofpoint-ORIG-GUID: WdCQWutgl2bbeR2WoVtKDNRtXA5lPF3R
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-24_16,2023-10-24_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0
- mlxlogscore=999 impostorscore=0 mlxscore=0 phishscore=0 malwarescore=0
- suspectscore=0 spamscore=0 priorityscore=1501 clxscore=1015 adultscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2310170001 definitions=main-2310240136
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231009220436.2164245-1-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,40 +85,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Mon, Oct 09, 2023 at 04:04:13PM -0600, Simon Glass wrote:
+> Add a compatible string for binman, so we can extend fixed-partitions
+> in various ways.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v4:
+> - Change subject line
+> 
+> Changes in v3:
+> - Drop fixed-partition additional compatible string
+> - Drop fixed-partitions from the example
+> - Mention use of compatible instead of label
+> 
+> Changes in v2:
+> - Drop mention of 'enhanced features' in fixed-partitions.yaml
+> - Mention Binman input and output properties
+> - Use plain partition@xxx for the node name
+> 
+>  .../bindings/mtd/partitions/binman.yaml       | 63 +++++++++++++++++++
+>  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+>  MAINTAINERS                                   |  5 ++
+>  3 files changed, 69 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> new file mode 100644
+> index 000000000000..7d6c8bd738f5
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> @@ -0,0 +1,63 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +# Copyright 2023 Google LLC
+> +
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Binman firmware layout
+> +
+> +maintainers:
+> +  - Simon Glass <sjg@chromium.org>
+> +
+> +select: false
+> +
+> +description: |
+> +  The binman node provides a layout for firmware, used when packaging firmware
+> +  from multiple projects. It is based on fixed-partitions, with some
+> +  extensions, but uses 'compatible' to indicate the contents of the node, to
+> +  avoid perturbing or confusing existing installations which use 'label' for a
+> +  particular purpose.
+> +
+> +  Binman supports properties used as inputs to the firmware-packaging process,
+> +  such as those which control alignment of partitions. This binding addresses
+> +  these 'input' properties. For example, it is common for the 'reg' property
+> +  (an 'output' property) to be set by Binman, based on the alignment requested
+> +  in the input.
+> +
+> +  Once processing is complete, input properties have mostly served their
+> +  purpose, at least until the firmware is repacked later, e.g. due to a
+> +  firmware update. The 'fixed-partitions' binding should provide enough
+> +  information to read the firmware at runtime, including decompression if
+> +  needed.
+> +
+> +  Documentation for Binman is available at:
+> +
+> +  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
+> +
+> +  with the current image-description format at:
+> +
+> +  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
+> +
+> +allOf:
+> +  - $ref: /schemas/mtd/partitions/fixed-partitions.yaml#
+> +
+> +properties:
+> +  compatible:
+> +    const: binman
 
-efi_tcg2_get_active_pcr_banks doesn't immediately call the
-EFI_ENTRY() wrapper once it enters the function. Move the call a
-few lines above to cover the error cases properly as well.
+This couldn't possibly pass validation. Including fixed-partitions.yaml 
+says the compatible must be one thing and this says something else.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/efi_tcg2.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-index b87c7900a8..2eaa12b83b 100644
---- a/lib/efi_loader/efi_tcg2.c
-+++ b/lib/efi_loader/efi_tcg2.c
-@@ -717,16 +717,16 @@ efi_tcg2_get_active_pcr_banks(struct efi_tcg2_protocol *this,
- 	struct udevice *dev;
- 	efi_status_t ret;
- 
-+	EFI_ENTRY("%p, %p", this, active_pcr_banks);
-+
- 	if (!this || !active_pcr_banks) {
- 		ret = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
--
- 	ret = tcg2_platform_get_tpm2(&dev);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
- 
--	EFI_ENTRY("%p, %p", this, active_pcr_banks);
- 	ret = tcg2_get_active_pcr_banks(dev, active_pcr_banks);
- 
- out:
--- 
-2.39.3
-
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    partitions {
+> +        compatible = "binman";
+> +        #address-cells = <1>;
+> +        #size-cells = <1>;
+> +
+> +        partition@100000 {
+> +            label = "u-boot";
+> +            reg = <0x100000 0xf00000>;
+> +        };
+> +    };
+> diff --git a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+> index 1dda2c80747b..849fd15d085c 100644
+> --- a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+> +++ b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+> @@ -15,6 +15,7 @@ maintainers:
+>  
+>  oneOf:
+>    - $ref: arm,arm-firmware-suite.yaml
+> +  - $ref: binman.yaml
+>    - $ref: brcm,bcm4908-partitions.yaml
+>    - $ref: brcm,bcm947xx-cfe-partitions.yaml
+>    - $ref: fixed-partitions.yaml
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c934244acc31..ebc8158fe67d 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -3536,6 +3536,11 @@ F:	Documentation/filesystems/bfs.rst
+>  F:	fs/bfs/
+>  F:	include/uapi/linux/bfs_fs.h
+>  
+> +BINMAN
+> +M:	Simon Glass <sjg@chromium.org>
+> +S:	Supported
+> +F:	Documentation/devicetree/bindings/mtd/partitions/binman*
+> +
+>  BITMAP API
+>  M:	Yury Norov <yury.norov@gmail.com>
+>  R:	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> -- 
+> 2.42.0.609.gbb76f46606-goog
+> 
