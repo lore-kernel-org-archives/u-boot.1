@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE94C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 08:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2907C25B47
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 08:38:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5C3187034;
-	Tue, 24 Oct 2023 10:28:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id E83ED8717B;
+	Tue, 24 Oct 2023 10:38:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="tjUP3d62";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EH92Vw77";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4493B87120; Tue, 24 Oct 2023 10:28:00 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id DBA478716D; Tue, 24 Oct 2023 10:38:32 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A3CC87026
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 10:27:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96C8787188
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 10:38:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a87ac9d245so43222517b3.3
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 01:27:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-507ad511315so6221898e87.0
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 01:38:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1698136076; x=1698740876;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=er0D90AWkmRHfElnAVoAQIuqbJ/SHNfl/9Gb33bQTpc=;
- b=tjUP3d625XJ3tSca7NWlHH+2ptZa+j0RP2o/xTeeUSmmo4prfj9hSFfaG71sJKyKSP
- rS6XFtFUpq+amLtZ9zTTmt4/7o6gaCR5qJwlWaUggSZKJSfi9MD1GYPsPMUsADr/x+zZ
- n31Hx9DdDgF44favhaqj8at8krtMZ5QAfuhtoCvnbQ6CQgDIYlqdFPLr8YMEeRMswACz
- 1gIQ8DnadNnOPZmIO62FHBsGk/DNnjKksKF7V0UyVMN/OsbPUUF9cmh50ZJjsgg+fHRA
- X0qNNaWqOH8l6SQn24TJsT8AkwVG54iBO3KcwWUOyxhq0LiiOL1Vuxnc/y03bium+rrq
- Uh/w==
+ d=gmail.com; s=20230601; t=1698136707; x=1698741507; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RPgpIpeSBmuPUbjR+RurV8RufmJIZnBw9Atoit9w0SI=;
+ b=EH92Vw77CNXvRwrYL7xNW8+7oTikxokb85WysH366EekJYdfBbhSQudimNla5+ioRk
+ 0zvlUgEAzrR/aSfOYDti9F9zpUgilB6nZL82nhzx0BSSCerUdy4umPxaixl3vDjHWj9l
+ R0GoPq5lZdyTbBGIEREsuud2hmAeTsNVqETSfYjwt9lg7mH1J78IFDNhb614iPUiaIwa
+ BK333oG2VqoM9WtM86w7XPRFx0hLJ3Pbu7D81ydiBq8O7At0R1GaKZrzV5dlVQM6bfOk
+ arshxY1jgHV0e4zer20Qf0qQEzGQfULHart7dp9hwvl+QBL0BTzibiRkQnabQGiVtWEC
+ /9GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698136076; x=1698740876;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=er0D90AWkmRHfElnAVoAQIuqbJ/SHNfl/9Gb33bQTpc=;
- b=iqnhPyqJsuYlDNIYDl16y84HDQK7ZEVi6LAYjeY8GAD1HxKDPFO/tsg5VwePoplCR3
- s01S5wC6As7WE3N8q99Xo6GEc5OjUncf3PXc+sIBRPcdW0Pcg1DTRozcJ1oJA+P8hrtx
- ouR7O01VTQuKJPfIGoJeTaaCfBOgPm4awkKuSS9cMuckbzCOZx52SAS2mnJRRHe/xhSe
- ej/1wNEBvLIvg7NDcMkghqxtZgwKIFNGoH3Dp3nICw7wold56q3ABBT2D4DUZUiBP4zN
- xGwEUCWhEpHLzbSaaeE6+LAX0albLGyd1yFCJG+litA6LOyF28AeJeSOxA3ooi+45DrP
- eIUg==
-X-Gm-Message-State: AOJu0YyEDyrMqD6swcxslG1nypa20pqDBRv/iI+OPS+SMt77T3xH6QKa
- LBJ11+WtRqoEMuUBDV0bCenvgjtQ/ovqNVg9fI7FYw==
-X-Google-Smtp-Source: AGHT+IGbnrt+i+OLldyEL8iOjpLZdROepiWHXWgLmMADHirgUz5FWOxPkr1J93k/GiO+wc/B/34wrUrVBD22W9fJw0k=
-X-Received: by 2002:a81:5216:0:b0:58e:a9d3:bf98 with SMTP id
- g22-20020a815216000000b0058ea9d3bf98mr12378040ywb.27.1698136075965; Tue, 24
- Oct 2023 01:27:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698136707; x=1698741507;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RPgpIpeSBmuPUbjR+RurV8RufmJIZnBw9Atoit9w0SI=;
+ b=fvQ/ehdnlcX7WV5TykQiH/xVWCRjV5ViySYUJDILYhg2Ep38BpkRpn3BTNCdXbhhKm
+ nMGm1d5vI3bkvn/V72qxf22yEfEy3Dy79H4bhQ1LVJCfJK78+RBweK4nB6MuJV0uIVFy
+ GeWu/e/E00Dkb5lWf3uTMQ/79LSp4njR0ZamzalHRrhVC5bhh/9rGd5SrVkYpLTkSAX/
+ 4MIqYRPVBSL3BTfSBSCUrX4MmuWBLwuLtBytsXzr0eFT70KqAqr+6JaGJE5vtx7rpejj
+ Kc13xQ8e84OOpMGAMQipztcYYuoHbT8HuXThjUKPNACNSOW04akhL68ueloAQRcz1QND
+ F+tg==
+X-Gm-Message-State: AOJu0Yxdo8WhnJfx5Ug7QmoGO6S9G6AzttJdnrVjKUMHPoAEbvetSnti
+ fWwH8NKqAwItqdi5Af/J5Ts=
+X-Google-Smtp-Source: AGHT+IEGQaXoNzrtONrYG3/BXAbEb2oIIwyx1KpILnONifE73LGBo1ZbKwTK+8LJsbtZ4cLuTWub2w==
+X-Received: by 2002:a19:650f:0:b0:4f9:586b:dba1 with SMTP id
+ z15-20020a19650f000000b004f9586bdba1mr7281034lfb.4.1698136706682; 
+ Tue, 24 Oct 2023 01:38:26 -0700 (PDT)
+Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
+ z10-20020a19650a000000b004faa2de9877sm2063304lfb.286.2023.10.24.01.38.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Oct 2023 01:38:26 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/3] Implement GPIO cells for PALMAS and MAX77663 PMICs
+Date: Tue, 24 Oct 2023 11:37:58 +0300
+Message-Id: <20231024083801.202365-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
- <20230926065750.734440-15-takahiro.akashi@linaro.org>
-In-Reply-To: <20230926065750.734440-15-takahiro.akashi@linaro.org>
-From: Michal Simek <monstr@monstr.eu>
-Date: Tue, 24 Oct 2023 10:27:44 +0200
-Message-ID: <CAHTX3d+hU2e-Un244wVzmeanwXkG+cy7+LdLZxYVojM3kX__5Q@mail.gmail.com>
-Subject: Re: [PATCH v5 14/16] cmd: add scmi command for SCMI firmware
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: trini@konsulko.com, sjg@chromium.org, etienne.carriere@st.com, 
- u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@foss.st.com>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,54 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Takahiro,
+This patchset adds support for gpio-uclass to work with pmic gpio childrens
+properly and implements MAX77663 and PALMAS GPIO cells/children as a 
+reference and to be further used in devices I am currently maintaining.
 
-=C3=BAt 26. 9. 2023 v 9:00 odes=C3=ADlatel AKASHI Takahiro
-<takahiro.akashi@linaro.org> napsal:
->
-> This command, "scmi", may provide a command line interface to various SCM=
-I
-> protocols. It supports at least initially SCMI base protocol and is
-> intended mainly for debug purpose.
->
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
-> ---
-> v3
-> * describe that arguments are in hex at a help message
-> * modify the code for dynamically allocated agent names
-> v2
-> * remove sub command category, 'scmi base', for simplicity
-> ---
->  cmd/Kconfig  |   9 ++
->  cmd/Makefile |   1 +
->  cmd/scmi.c   | 337 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 347 insertions(+)
->  create mode 100644 cmd/scmi.c
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 43ca10f69ccf..f46152ace7d8 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2533,6 +2533,15 @@ config CMD_CROS_EC
->           a number of sub-commands for performing EC tasks such as
->           updating its flash, accessing a small saved context area
->           and talking to the I2C bus behind the EC (if there is one).
-> +
-> +config CMD_SCMI
-> +       bool "Enable scmi command"
-> +       depends on SCMI_FIRMWARE
-> +       default n
+All drivers are tested on actual hardware and confirmed to work as
+expected. MAX77663 GPIO cell is tested on wexler qc750 tegra 3 device
+and PALMAS GPIO cell is tested on tegra note 7 tegra 4 device.
 
-This line above is wrong and this was removed from v6 with
-"drop scmi command which was intended to be used for debugging".
-It is fine that it shouldn't be used on production system but it
-doesn't mean that
-it should be actually removed.
-It is useful for bring ups. Can we get this patch merged? It was
-already reviewed
-anyway.
+These patches require "Add support for PMICs used on Tegra 3 devices"
+patches to be merged first for proper work.
 
-Thanks,
-Michal
+Svyatoslav Ryhel (3):
+  drivers: gpio-uclass: support PMIC GPIO children
+  drivers: gpio: implement MAX77663 GPIO cell
+  drivers: gpio: implement PALMAS GPIO cell
+
+ drivers/gpio/Kconfig                |  16 +++
+ drivers/gpio/Makefile               |   2 +
+ drivers/gpio/gpio-uclass.c          |  19 ++-
+ drivers/gpio/max77663_gpio.c        | 179 ++++++++++++++++++++++++++++
+ drivers/gpio/palmas_gpio.c          | 133 +++++++++++++++++++++
+ drivers/power/pmic/max77663.c       |   9 ++
+ drivers/power/pmic/palmas.c         |  10 +-
+ include/dt-bindings/pmic/max77663.h |  18 +++
+ include/power/max77663.h            |   1 +
+ include/power/palmas.h              |  12 ++
+ 10 files changed, 395 insertions(+), 4 deletions(-)
+ create mode 100644 drivers/gpio/max77663_gpio.c
+ create mode 100644 drivers/gpio/palmas_gpio.c
+ create mode 100644 include/dt-bindings/pmic/max77663.h
+
+-- 
+2.39.2
+
