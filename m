@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B72C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035BDC07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F08D587998;
-	Tue, 24 Oct 2023 20:04:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 5AF97879B0;
+	Tue, 24 Oct 2023 20:04:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="fLm6oMnt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S6IuZDvA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99EFC87967; Tue, 24 Oct 2023 20:04:23 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 87C74879B8; Tue, 24 Oct 2023 20:04:27 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48A6A8799B
+ by phobos.denx.de (Postfix) with ESMTPS id 8580E8798C
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5a90d6ab962so36544527b3.2
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a7fb84f6ceso46327207b3.1
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1698170659; x=1698775459; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698170659; x=1698775459; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gsBuwVocoOl2mRapch5QnQ+wlUNgWqtFQchYMQPg1mk=;
- b=fLm6oMntJYenU5oGGtw0QDdZWxo7mP0GEiiqFZUUFFLKYFkVRo6h/lWL2igt+kupwn
- pMK6C6xxWT3jxdIeBHNAhzJWLg+t+20qkxDqqpS3JCzATjpz8tRh1oj2qruGTS9BWA5j
- WJWftL5+a0hCkTMN5SO/t8hKC0lKKyrx1p+lL2MZXL2+yXgEwXVyYC+Cpjxbf5y6JH/8
- FWLzXnzEd8ob4fcw7GtU3pBZlKCC300+BYTijIo0hFMGBaAroSet+yva5Jc8z7dwPigr
- r5DfVV1cKT6wW6ME0adFa5/ku4hr4gzOZT9Pl9xhysLVYvh/8dFoOx/+fEyuNugrhkfZ
- ybvA==
+ bh=MQohYwNVHV1ESqEqN3kIHeQaANym8zINnLZ0JKVLeCg=;
+ b=S6IuZDvAm/ggNmNBPtNGQFHpktNUzpA3yTC232faZ40B8iDGX+yBJoHYRQC00Zd9OE
+ 9/P0vmKIBL2MkMPikEvwPHayp4UfwDT8ObqkLcyXjUfS/cpjbfV7HAGnxZMH/LiNWXPA
+ j2LpQUW1lBYTFTo+6BAqPVSb8+treiFitPG0A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1698170659; x=1698775459;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gsBuwVocoOl2mRapch5QnQ+wlUNgWqtFQchYMQPg1mk=;
- b=OYU8MCkeFJHma0S3KhfxGOaUFCsIE7PsbEHSXxMWc3PJWQvmGPwOj3aiL8OF3NRGp6
- sVqSDN+YiuCLZOn5cnM/jCuNhqhkUdBhmxjKyL8szPdC+qdnR3+EZZ+2UFrlzuNVipSO
- ic+xar3BQqdFSRPziIY85k6w3nlASe4cnF61WjcJR162Zhr8r7rzBovSYYbjBA0uWfs1
- octPLbMBpzYVNEzr+b4Y94JeClnfvV4JfOfuI5EqYi28qAdIjDkZP4QfJAW2t8rev154
- t0v4a5Sxqp+cf6Idx1nhle7+uKBGhrsD98NXZFkGhHtWSRNAEVZFmE/V0x/AHyavu2Mu
- pMBA==
-X-Gm-Message-State: AOJu0Yx6eRQDj2O3d9nj89eEm6AiFl+aH2wDx6W4sK92U18uIvJudf07
- 6iSEHAybbENvYrp/lk0nn+q4OV9XTPuMdRtsDb4lGg4M9617kM5Gr20ISD9e
-X-Google-Smtp-Source: AGHT+IF8NB/oI0QOZn447ufAbZcXxAW7Wc7aypkhEU1z6Wlfszjz5LdIhjMdx29Iul5vZRgWv//YKKPOLP3Mlb5tWG8=
-X-Received: by 2002:a0d:d6d7:0:b0:5a7:bb95:681c with SMTP id
- y206-20020a0dd6d7000000b005a7bb95681cmr16494206ywd.36.1698170658996; Tue, 24
+ bh=MQohYwNVHV1ESqEqN3kIHeQaANym8zINnLZ0JKVLeCg=;
+ b=bEdcEbvQ8H8WfTGuaZpRUiaetk4WW069SWlYNLl/Ib1tlVALn6kZwjIV8RusaqeZRh
+ OqsukkVmRhwCXmnvkOAaZQbGPR7Fjjw/5tSzLXYm3qdYZn27W9JaBNOC8EhDPClrdy8r
+ TmFGhvgD9OHr+0l9Oxgo1FzO5QJNSQUuJMocyiRoNy++cRpQk6wElICpWrQwZPo+StZy
+ mUcBDzWf0C/FMCjuNH3RqcwKNRolNNB6PmidSlCrMZL4bCXQwGJNm5UsW9FoIyYxPMUX
+ W8dnpRxqrEUgHZ+rD5FLZgOxteykld5BNjskXssc72qVXrQZbQv32sjVFzHKePB0fSlx
+ qSNA==
+X-Gm-Message-State: AOJu0YzFk3Ias1jkNpVgDbMu1maFAETQQG/UhtdyMXqeksMEiaM4UEcV
+ muzPZRzcC5AcTH8jCzPCApE1inECHO09BFzZUrCt/w==
+X-Google-Smtp-Source: AGHT+IEekTL7dud9stbtsNZQZ5mHvLiiTwdb/IFFfeqoi25ZpCRmfPjC9HFGgUcyZVvaJqYou720eOPCwOrq+IrwA9g=
+X-Received: by 2002:a0d:d5c4:0:b0:59e:7f14:4b48 with SMTP id
+ x187-20020a0dd5c4000000b0059e7f144b48mr12561227ywd.41.1698170658997; Tue, 24
  Oct 2023 11:04:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024115915.16565-1-tom@tom-fitzhenry.me.uk>
-In-Reply-To: <20231024115915.16565-1-tom@tom-fitzhenry.me.uk>
-From: Simon Glass <sjg@google.com>
-Date: Tue, 24 Oct 2023 11:03:16 -0700
-Message-ID: <CAPnjgZ3iV7H3Nkw8gfTAFcM7QGixBzZxg0=nNORZVL7U34d1gg@mail.gmail.com>
-Subject: Re: [PATCH] doc: gpt: fix example of echoing variable
-To: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Cc: u-boot@lists.denx.de
+References: <20231024071916.39523-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231024071916.39523-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 24 Oct 2023 11:03:34 -0700
+Message-ID: <CAPnjgZ1vRBwW2zuSo63PFEUzRCJtU+cgeiWv1v_+-t1iWmNdOQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] mkimage: do not write incorrect error message
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ralph Siemsen <ralph.siemsen@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,31 +82,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Oct 2023 at 05:00, Tom Fitzhenry <tom@tom-fitzhenry.me.uk> wrote:
+On Tue, 24 Oct 2023 at 00:19, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
+> When running 'mkimage -l' is called for a valid StarFive file an error
+> message "Error: invalid marker bytes" is written by the Renesas SPKG
+> driver.
+>
+> mkimage -l may be invoked without specifying an image type. In this case
+> mkimage iterates over all image type drivers to find the one that matches.
+> None of the non-matching drivers should write an error message.
+>
+> Fix the Renesas SPKG driver.
+>
+> Fixes: afdfcb11f97c ("tools: spkgimage: add Renesas SPKG format")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  doc/usage/cmd/gpt.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  tools/renesas_spkgimage.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-It could use 'print' instead, I suppose.
-
-
-> diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
-> index f6115ecb0ee..ea43218fa21 100644
-> --- a/doc/usage/cmd/gpt.rst
-> +++ b/doc/usage/cmd/gpt.rst
-> @@ -192,7 +192,7 @@ Get the information about the partition named 'rootfs'::
->  Get the list of partition names on the disk::
->
->      => gpt enumerate
-> -    => echo gpt_partition_list
-> +    => echo ${gpt_partition_list}
->      boot rootfs system-data [ext] user modules ramdisk
->
->
-> --
-> 2.42.0
->
