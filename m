@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34955C25B47
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 21:41:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED97C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:02:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B589879C6;
-	Tue, 24 Oct 2023 23:41:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7AE8186FF2;
+	Wed, 25 Oct 2023 00:02:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZgU1hy3e";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kTQBedqf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F28AF879C5; Tue, 24 Oct 2023 23:41:26 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 6C29F86FE7; Wed, 25 Oct 2023 00:02:01 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DCF386F69
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:41:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E26F879B9
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-68fb85afef4so4253078b3a.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 14:41:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5a7d532da4bso50026517b3.2
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 15:01:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698183683; x=1698788483; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aochEXBDpOVdwQRDyloN4dJAYsQ0xcQP5GM4jBPJ4+0=;
- b=ZgU1hy3eUIQkmRpnPAlA4Lekw80t2L2h+NtaIwzNKAIzCWxSXG7imrmx/pSOwXWPVm
- Nb8wCnswvY9cwEu9rTT9kYDO24Jtr4SkRF/eTagL5KED06zHjjtcDnUnvUKAtU4G7vdC
- AHb3kaq2ghZHupJwMyk7O9AIovpfznmfwcQ/A=
+ d=konsulko.com; s=google; t=1698184918; x=1698789718; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yYYuxztvZxTj1pcfRrtLpyAUzMShX8wEOQS+8r3PLmU=;
+ b=kTQBedqf84ugyS3+rVMp6tGSiXou/z1diYCKjLkPxofYuAiXss0cdpizHRqiaPH25R
+ gsKol/cRFnh95Kbrr9t11ZYSV+mJYtZGy6QzrBPJ/hghIUtCL9kbtD68cZtV2BuUx2P+
+ JfovULNlOe3sA/vM+4/TZhU8Lv/bv/Kduwwr0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698183683; x=1698788483;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aochEXBDpOVdwQRDyloN4dJAYsQ0xcQP5GM4jBPJ4+0=;
- b=Mfwwd65MJdkG2/KXwsNUXTRTMx9UUvoEf3bfcCCt3pMbnJUmtq0JGK3PmVsiqRprlL
- ey4t+6YqNv44iwwAYUG6L05ILbSCbY6ExxT2UhbxnQXsc/kY4xjxmuvlrgPfZblw2Z5r
- xDeKMNrFDMdrHSphELQgNmput4PENccYThhH+sggTWjkf/9wbkQj2ktI1/pEJfbXpfO6
- +BnM/QgvE6KtntFj6JjXR6PnmLUi57GPxdoHBx3unapXNTxBOIeP66/cggTgZ1ZwJX7X
- 2h6WgMza923ix9RYxRIuCZriTb2nzpoNMiIzMURGW55/A5J1sL8B0KZbK8Laphz9v+3x
- 1k3A==
-X-Gm-Message-State: AOJu0YxmK1ecMUxWE08pZns50fM5VXFCvkfei0WiUdG+tlA0FAHRILty
- Jppw56VxfO0TN63D2vefbAo5Fg==
-X-Google-Smtp-Source: AGHT+IHg7NIAL+/vq1uVaLXguXuYCzXyJKM8i2wy6dmakFvVWfsSo7C499cy58klAxaY3feF/mh9VA==
-X-Received: by 2002:a05:6a21:164a:b0:151:7d4c:899c with SMTP id
- no10-20020a056a21164a00b001517d4c899cmr3632385pzb.25.1698183682801; 
- Tue, 24 Oct 2023 14:41:22 -0700 (PDT)
-Received: from sjg1.roam.corp.google.com ([202.144.206.130])
+ d=1e100.net; s=20230601; t=1698184918; x=1698789718;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yYYuxztvZxTj1pcfRrtLpyAUzMShX8wEOQS+8r3PLmU=;
+ b=eFHDjKVHPtwtCD083dnkxQfJo/5ogfUdELyslUMPaAYyOV2PLT5FyV+1Du2dkmZQaY
+ k57OMAL29w/RufgGiSSkpsqVW6xnxX6429teMGMnPWBHM408+PcAQro0ukE2w4Nzj1lH
+ fkcsxpV2IWF2vAOe0MKhmhUgLWuSZofI5CMMr140IsQXhcGV6oVSnzfSBx/TLeTBwKZL
+ TmhaW0pLcu5TDrwUPRFiXAZNrc2I71K5kkJwviUtLkWbbWc83qcrxW7YZ3Sy9L/bJvBA
+ Er7rmYu/ufZuV4eTAERfINWRlV68iw4uRKWK4FfTY2XbIXfsXOCznW8ndVqQy2n7fv6O
+ vpyA==
+X-Gm-Message-State: AOJu0YwraazFDtNX2QhlNkndAxTDKbybRnMkIPTbajqlfmsrKipUgyP6
+ lFCYwqda0sNamvB2C+UvNZVIoOCEp93SrCKrDg2lwA==
+X-Google-Smtp-Source: AGHT+IEUnfSxI/XfstYmqHOfspwiV8NF/V/FwemuHPdrxjtfWX44AAtsvo2ARaHWiqIM7tycUASTaA==
+X-Received: by 2002:a0d:e84c:0:b0:5a8:277f:b378 with SMTP id
+ r73-20020a0de84c000000b005a8277fb378mr12977688ywe.1.1698184917810; 
+ Tue, 24 Oct 2023 15:01:57 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
+ [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
  by smtp.gmail.com with ESMTPSA id
- 18-20020a170902c21200b001c5f7e06256sm7861055pll.152.2023.10.24.14.41.17
+ a66-20020a0df145000000b0058427045833sm4440433ywf.133.2023.10.24.15.01.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 14:41:22 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: devicetree@vger.kernel.org
-Cc: linux-mtd@lists.infradead.org, U-Boot Mailing List <u-boot@lists.denx.de>,
- Michael Walle <mwalle@kernel.org>, Tom Rini <trini@konsulko.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Rob Herring <robh@kernel.org>,
- Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
-Subject: [PATCH v5 3/3] dt-bindings: mtd: binman-partitions: Add alignment
- properties
-Date: Wed, 25 Oct 2023 10:39:18 +1300
-Message-ID: <20231024213940.3590507-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.758.gaed0368e0e-goog
-In-Reply-To: <20231024213940.3590507-1-sjg@chromium.org>
-References: <20231024213940.3590507-1-sjg@chromium.org>
+ Tue, 24 Oct 2023 15:01:57 -0700 (PDT)
+Date: Tue, 24 Oct 2023 18:01:55 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [v4.1 2/2] CI, pytest: Add a test for sandbox without LTO
+Message-ID: <20231024220155.GK496310@bill-the-cat>
+References: <20231020215302.3511807-2-trini@konsulko.com>
+ <CAPnjgZ2jgfJ4GXR+2qt5Qi=MOc=kubLrMLgYBGuO_trinUHnag@mail.gmail.com>
+ <20231021183438.GB53397@bill-the-cat>
+ <CAPnjgZ2bKVTwEKcjeawootxXr-+iEmiowtctA52-=v07p+xBUQ@mail.gmail.com>
+ <20231023133728.GH496310@bill-the-cat>
+ <CAPnjgZ06w+uaSZr6PWo6NFoWfxiNuu-bar4e3zn+bVL-4wPvUQ@mail.gmail.com>
+ <20231023172757.GV496310@bill-the-cat>
+ <CAPnjgZ3G8T3ZjRNMdu=Jr_1OgijgQXNARQwAMQUFNy7ng4_zqw@mail.gmail.com>
+ <20231024180738.GF496310@bill-the-cat>
+ <CAPnjgZ1FruS29HdQZutZptRRdTggUWoCf972h2w2mhma47awww@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JpWrFL1QVsU+59//"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1FruS29HdQZutZptRRdTggUWoCf972h2w2mhma47awww@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,107 +100,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add three properties for controlling alignment of partitions, aka
-'entries' in binman.
 
-For now there is no explicit mention of hierarchy, so a 'section' is
-just the 'binman' node.
+--JpWrFL1QVsU+59//
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-These new properties are inputs to the packaging process, but are also
-needed if the firmware is repacked, to ensure that alignment
-constraints are not violated. Therefore they are provided as part of
-the schema.
+On Tue, Oct 24, 2023 at 02:39:49PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 24 Oct 2023 at 11:07, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Oct 24, 2023 at 11:02:06AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 23 Oct 2023 at 10:28, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Oct 23, 2023 at 10:13:52AM -0700, Simon Glass wrote:
+> > > >
+> > > > [snip]
+> > > > > BTW buildman supports -L which disabled LTO using the NO_LTO=3D1 =
+option
+> > > >
+> > > > I worry about putting sandbox-specific flags in buildman.  Outside =
+of
+> > > > sandbox, targets that enable LTO require LTO, just like any other C=
+ONFIG
+> > > > option.
+> > >
+> > > Some problems with LTO and why I don't normally develop with it enabl=
+ed:
+> > >
+> > > - build time
+> > > - code moves around all over the place so it is hard to compare size =
+growth
+> > >
+> > > At least for my IDE flow, I use -L in most cases. Yes there are some
+> > > boards which won't fit without LTO, but I don't see them much.
+> > >
+> > > So this is mostly a dev convenience / productivity tool.
+> >
+> > Yes, it does take longer to link.  And yes, a more complex optimization
+> > does make some size tracking harder to understand (since growth or
+> > shrinkage allows for different optimizations to be made around it). But
+> > everything in configs/ that enables LTO needs LTO.
+>=20
+> I thought we were planning to enable it for all of ARM, though?
+> Clearly most of those boards don't *need* it.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Yes, closer to when it was introduced the ideal was to make it default,
+because there are so many "on the edge" platforms, with respect to size
+limits.  And, we could possibly make it default now and see what that
+does to CI build times too.  But no, today, platforms opt-in for it
+because they need it, and the most common need is because of size rather
+than speed (or, speed gained through size reduction).
 
-Changes in v5:
-- Add value ranges
-- Consistently mention alignment must be power-of-2
-- Mention that alignment refers to bytes
+And also yes, that it does make size comparison trickier is another
+reason I've not aggressively pushed for it globally.
 
-Changes in v2:
-- Fix 'a' typo in commit message
+But yes, I still don't think disabling LTO is a general feature, and only
+sandbox has it architecture-wide enabled by default (for testing) and
+that -L/--no-lto is not a good generic feature for buildman.
 
- .../mtd/partitions/binman-partition.yaml      | 54 +++++++++++++++++++
- 1 file changed, 54 insertions(+)
+But I too don't wish to argue points around LTO nor gc-sections either
+anymore.
 
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-index 37a413464b0ce5..cb1edd83ed29a9 100644
---- a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-@@ -29,6 +29,57 @@ properties:
-         - u-boot       # u-boot.bin from U-Boot project
-         - tfa-bl31     # bl31.bin or bl31.elf from TF-A project
- 
-+  align:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 1
-+    maximum: 0x80000000
-+    multipleOf: 2
-+    description:
-+      This sets the alignment of the entry in bytes.
-+
-+      The entry offset is adjusted so that the entry starts on an aligned
-+      boundary within the containing section or image. For example ‘align =
-+      <16>’ means that the entry will start on a 16-byte boundary. This may
-+      mean that padding is added before the entry. The padding is part of
-+      the containing section but is not included in the entry, meaning that
-+      an empty space may be created before the entry starts. Alignment
-+      must be a power of 2. If ‘align’ is not provided, no alignment is
-+      performed.
-+
-+  align-size:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 1
-+    maximum: 0x80000000
-+    multipleOf: 2
-+    description:
-+      This sets the alignment of the entry size in bytes. It must be a power
-+      of 2.
-+
-+      For example, to ensure that the size of an entry is a multiple of 64
-+      bytes, set this to 64. While this does not affect the contents of the
-+      entry within binman itself (the padding is performed only when its
-+      parent section is assembled), the end result is that the entry ends
-+      with the padding bytes, so may grow. If ‘align-size’ is not provided,
-+      no alignment is performed.
-+
-+  align-end:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 1
-+    maximum: 0x80000000
-+    multipleOf: 2
-+    description:
-+      This sets the alignment (in bytes) of the end of an entry with respect
-+      to the containing section. It must be a power of 2.
-+
-+      Some entries require that they end on an alignment boundary,
-+      regardless of where they start. This does not move the start of the
-+      entry, so the contents of the entry will still start at the beginning.
-+      But there may be padding at the end. While this does not affect the
-+      contents of the entry within binman itself (the padding is performed
-+      only when its parent section is assembled), the end result is that the
-+      entry ends with the padding bytes, so may grow. If ‘align-end’ is not
-+      provided, no alignment is performed.
-+
- additionalProperties: false
- 
- examples:
-@@ -41,10 +92,13 @@ examples:
-         partition@100000 {
-             compatible = "u-boot";
-             reg = <0x100000 0xf00000>;
-+            align-size = <0x1000>;
-+            align-end = <0x10000>;
-         };
- 
-         partition@200000 {
-             compatible = "tfa-bl31";
-             reg = <0x200000 0x100000>;
-+            align = <0x4000>;
-         };
-     };
--- 
-2.42.0.758.gaed0368e0e-goog
+--=20
+Tom
 
+--JpWrFL1QVsU+59//
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4PtAACgkQFHw5/5Y0
+tywuvwv4tn4cLHhIA2WaOpvll0Fvs6QrY/QZye8kwZMvXQMcjmNqH16LLCCwc+TR
+8qkNDajKnTsg1ker7/e5cKtuWTXDrmyBjWJ5CFRAApuxjzRWslm2/1CVPi+Dwnm4
+X1kN5obg2GeId62xVRgfGQWb2C5AAXkJYMNRPhRXHuhkW0di3EtO7+9GzDG/FKqm
+7RQNrw5uTCCbZ5RlICMDnB19BMT/eohqUz1JE1l6PQInusZP+rFulwb2sQsktF5i
+bwVlkS270eRAEibQqos4GW+3gP+GwSDcJBnGN3BYorJ6L0Mfes55z6RZAF1f9fER
+/t22hDr3W2vLtrwxNE5qtPcZ1njZYC/nQ6SqsK7u+9M2UMRXY4oU9akl2DGKA0LI
+8fzedL1H/nSGAVo/NAFidsmWiN0x96tmjmIjYGJPkCgQLcYqkbzJSur8xV4k4Uwe
+tz5wSiehvchlTX5/4yh0PhRIU48SAj9lDpCJ0WlbxT5OFC0tSbNwJlYdc0YOcY6B
+xx38HRs=
+=bFfP
+-----END PGP SIGNATURE-----
+
+--JpWrFL1QVsU+59//--
