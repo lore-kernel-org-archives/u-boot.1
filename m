@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB19C07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 22:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AEE6C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 23:15:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BCEF879E4;
-	Wed, 25 Oct 2023 00:52:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
+	by phobos.denx.de (Postfix) with ESMTP id 8876186FE3;
+	Wed, 25 Oct 2023 01:15:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="dUq/BLtk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AweMt1u1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7781C879E4; Wed, 25 Oct 2023 00:52:03 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9DACB86FE7; Wed, 25 Oct 2023 01:15:49 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FFDC879B1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:51:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=sberdevices.ru
+ by phobos.denx.de (Postfix) with ESMTPS id 6AC9A86FB9
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 01:15:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 1D4BB120046;
- Wed, 25 Oct 2023 01:51:57 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 1D4BB120046
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1698187917;
- bh=C2JkD4QwB8F5PNLeDFErGB+TVHOv8kolEqxnXgkhrlU=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=dUq/BLtkgDKfebpwReBsQjeyutanBY43Bk9Gv2HU2e553WkccgA08sTxGr9a78hgw
- 9CKFu+YsXDbpRXjm9lHDVe922OwfTnzWZOcrQKKwszA0RVnUfbP6Qr5XOea1WV8iaQ
- i0xuRO/L+/4OZQ+fYqAWdFGgg6/kqC17hATVCFRyS+rjIOd5BvdDsNarmkGNGRZpJJ
- H2ubXRnL9iCykP5J/YLO+sBY0fpexMMf7V0r/TeHLgbhK5Sl9HCjz5zTUv3obhE6qU
- nVxoYvdfD+TlzXsYdxa3664SKzbvWw2LpqVxq7z7lEXUnK9OzPZmBuiXAVc1ssGU0a
- NzE0bAjivygQw==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 25 Oct 2023 01:51:56 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Wed, 25 Oct 2023 01:51:56 +0300
-From: Igor Prusov <ivprusov@sberdevices.ru>
-To: Neil Armstrong <neil.armstrong@linaro.org>, Jagan Teki
- <jagan@amarulasolutions.com>
-CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
- <ivprusov@sberdevices.ru>, <u-boot-amlogic@groups.io>,
- <u-boot@lists.denx.de>, <sjg@chromium.org>
-Subject: [PATCH v2 2/2] ARM: amlogic: ad401: enable SPIFC
-Date: Wed, 25 Oct 2023 01:51:40 +0300
-Message-ID: <20231024225140.366571-3-ivprusov@sberdevices.ru>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231024225140.366571-1-ivprusov@sberdevices.ru>
-References: <20231024225140.366571-1-ivprusov@sberdevices.ru>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d84c24a810dso4498542276.2
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 16:15:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698189346; x=1698794146; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iROtPZVduVRdQZbcGbKqg+LDSVm/M+MBEdb7xFYHkCM=;
+ b=AweMt1u1oqSgFdflUN2lwf7YFDHWE0ZG2yEP3+7SACl9NOAgk6WmaMblN2tH1SVXz3
+ HCnRL4RdlWgUm6UD6zHIOPk9o9rQ9aaBUn8H5Y8UpQwM7E3wFboRt5XkGycSeibgeGDS
+ 73Yfv/RPRPzEb3GdZiZajP7sKVIW738PnlAJQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698189346; x=1698794146;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iROtPZVduVRdQZbcGbKqg+LDSVm/M+MBEdb7xFYHkCM=;
+ b=bn11efW8oEPoPUzuLKyNVWoC7VzKauJ2knsHCUWoUNCHfVl3vKiW/UAFFTNTn3in2T
+ tYZMzkZVlehEXa6f3HT3ChckJqmWpZlmGqudCluuFhsflz97jotMl1Onj2+P9JtdC0rm
+ ALeWraPMozrK+rfqyKTfXxnMR1riliIeq3MmJ7pK/fsqHa5taha2zF1eqJqfaX0l6Drg
+ Gm1cnnNDRZNnSU4I0dyAgfSBUz0sJ3errj/RkIo9j/YSqCjFebsHmT8PNzQO7KoRnhxg
+ rCldsZP8z71xQ/da0RHgK2VlTuynePkhsZfTGyc1iljb69liJWXfuLUGVYiQdgXuNkoY
+ BcIQ==
+X-Gm-Message-State: AOJu0Yxt+N88dwi/in23y6/7XDi+q3zbQoFeXsawkYdyqB6d6NuPXqrv
+ Y5g8HLvKDj+1Q3UC7GybOvCP/ax6O4iqBNnOYZkQmg==
+X-Google-Smtp-Source: AGHT+IHXH0vOLxmElrr7JMNcuJDjxDK9yGGhml3ryuxQcB64aYa+/VNtvxkd0Fr5CCG6tLkkrnsQWQ==
+X-Received: by 2002:a25:2fd3:0:b0:d91:6d2e:6f17 with SMTP id
+ v202-20020a252fd3000000b00d916d2e6f17mr13445715ybv.54.1698189346040; 
+ Tue, 24 Oct 2023 16:15:46 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
+ [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
+ by smtp.gmail.com with ESMTPSA id
+ p63-20020a252942000000b00d9abff76f5csm3966716ybp.9.2023.10.24.16.15.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Oct 2023 16:15:45 -0700 (PDT)
+Date: Tue, 24 Oct 2023 19:15:43 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Michel Alex <Alex.Michel@wiedemann-group.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] misc: i2c_eeprom: consider pagesize when writing to eeprom
+Message-ID: <20231024231543.GN496310@bill-the-cat>
+References: <AS1P250MB0608EFCD6443148D5D9837C6A9F8A@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 180852 [Oct 25 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
- {Tracking_from_domain_doesnt_match_to},
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- 127.0.0.199:7.1.2;
- 100.64.160.123:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
- {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/10/24 20:53:00 #22289793
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3k5qlMB3spuc8Slw"
+Content-Disposition: inline
+In-Reply-To: <AS1P250MB0608EFCD6443148D5D9837C6A9F8A@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,26 +91,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Amlogic A1 SPI FLash Controller support.
 
-Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/ad401_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+--3k5qlMB3spuc8Slw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
-index b9aca3ab0d..b44b9c63e8 100644
---- a/configs/ad401_defconfig
-+++ b/configs/ad401_defconfig
-@@ -51,6 +51,7 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_MESON_SERIAL=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
-+CONFIG_MESON_SPIFC_A1=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_USB_GADGET=y
--- 
-2.34.1
+On Thu, Sep 21, 2023 at 12:29:45PM +0000, Michel Alex wrote:
 
+> Calculate the maximum length of the buffer when writing
+> accross the page boundary. If the buffer length exceeds
+> the page boundary, split it. Use this length instead of
+> comparing the length with the pagesize, because the write
+> start address can be somewhere in the middle of a page.
+>=20
+> Signed-off-by: Alex Michel <alex.michel@wiedemann-group.com>
+> ---
+>  drivers/misc/i2c_eeprom.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
+
+Please fix the checkpatch.pl errors with this patch, thanks.
+
+--=20
+Tom
+
+--3k5qlMB3spuc8Slw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4UBwACgkQFHw5/5Y0
+tyzYewv/Wo3QbYe74CTqSPD25QZ3RpEoZAPq0OEA3H/db8zFplsAKi/UPJMXLRUZ
+lpDHIEyaGbyvVp8Tw1vDlvp2u4EwktRgFKbO1zl2trMZtNwTsd1QKCAVFJ89gMXF
+P5xUoqdGP2GdmGXHr2aD36Pa84Ar2Z7d3Vj+Yafvy3nWcwEKKtW8f6hr5iCAAOdL
+Cfs6FFqZPNStlJ4NqpGWi1hGL3qmPE+XWWviwCBlTqw4DFrcMTE1jLYN8ItzkiBM
+/MvX1q+3QV0pcgMYpdA3DHttekEnBdEGzc7kuyWAyrRqcZ+hYiPmO7EUzsC0NgP5
+221jfCOpFX2nAu9h0oA2ukxzUk10CFLhyc3FAR8WoATy6p2pmJwhkU8248XZD9lC
+BML9NiSo5VsZYVCvmCFHmsI+/PD4ynQvmXED3dhPEuvajfPt/a4ugdRT42SBnnfF
+xmzr7b7/KVnmuE4a6lfCxQknyEEfDnLEzEaOPgYlnxm+MsiA8RRT7qqAEr1ZnvoC
+uHub44BS
+=aLOb
+-----END PGP SIGNATURE-----
+
+--3k5qlMB3spuc8Slw--
