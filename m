@@ -4,81 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42EF6C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 19:25:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25BFAC07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 19:28:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F38B87987;
-	Tue, 24 Oct 2023 21:25:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1964C87987;
+	Tue, 24 Oct 2023 21:28:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kcko4qHh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DDgLTCrx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F314487990; Tue, 24 Oct 2023 21:25:35 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 34DBB86FC2; Tue, 24 Oct 2023 21:28:41 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB885874BA
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 21:25:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A31E986C39
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 21:28:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5a84204e7aeso47261017b3.0
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 12:25:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-507973f3b65so7683784e87.3
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 12:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698175532; x=1698780332; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xeV1P/JBaF/T3NhGbifJwcjggzcP2zrVzpM4AGoXTlU=;
- b=kcko4qHhInTVwC9QFwPUacqsZ0epzvFyEThRv5h2pC5pxkiKZxLCVkU2IgUkSLQghW
- rj4Hw15jJ8nPTslVVueVCfIfKMZFA6kB/L1mrxEn6RDJ9p6gy9WY6TgsvySz+aMouUIp
- 3XuxwV270s53TsMukFvBK8wqJdas5G5VRsDHY=
+ d=linaro.org; s=google; t=1698175717; x=1698780517; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BiejmovDDkKVnImVHGRSEYf4nnfrGv33hjM6FMnAUPM=;
+ b=DDgLTCrxWCb8/eYM66SrYzf+6V6RFtTv89sPNbbcB7FW8UgUHt8PgMSH1PkDgZSheR
+ 911KkgOfIfTxkANDiQoQ8XfVI6BZLE2DKNwwOYg7sLV9qViHiPrbVNRWMQfeYHK4D9Ru
+ m6CQeXhUpLakGRId1MDy/WJlpBp5PKYQGsGX4a7c3NaF2PadoOJ9VaBxqFGVXOdhNOAd
+ vL77dflEdrYna8RNDP/eg4vwTdUvzFqFQUqwPAmplxUWyxLaAR72a+xTGxLWI29ezheq
+ jNaT4lgtKiZG880VAQsYhFOIEV73v3s9sydVP088q0WPZT0MdRO+MOpDfLn4mPBTaeX6
+ 2rsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698175532; x=1698780332;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xeV1P/JBaF/T3NhGbifJwcjggzcP2zrVzpM4AGoXTlU=;
- b=SVmDMDJ8FuUFssXMEH5VIaNPpmb9DyiddPypSmtZfcdlfud1wZlWyO1Ty6GZYoWQsR
- nyP6pNmpf/nEGYK8aSVkCuT+Eq7cOn9qMH2BB+D+M2LYtXaYYP/6u/UbIorWfRxi+bEp
- oBwSEhy/U6CGyfumdwrImj2aSFvZuulMtso5RoIVVFJiHwMiW3uFwh4uVCJic2PnrOZv
- Lw/6KZwmwgT9bfVUtRca8Z5/iV1cNXhcBp05vf1fj4v7MEOuWhvI9pfp6B4PqvD/qXaw
- AaT8f/nJoCms+WtuM8Mv/vzYQyCEKi6cz52srs4IWQ/ed/MVVDBT1H7rBEZuLClAhnqV
- kvSw==
-X-Gm-Message-State: AOJu0YzBL7Ir5SBtdT7b7NaUUe7w6nz6HcTkL/ywUf2iNlNS67TpeVNc
- aSpnHhSfc8YPwCooL6zl4mq8isvCnPvrWH/pUt99Vg==
-X-Google-Smtp-Source: AGHT+IHnk19pLsy6DkUCc5fVGAxtCRJw0wnL6gAl/ut00b1Co7hUxR1aJWn7VhlnY4T9QHWPkgC9lA==
-X-Received: by 2002:a05:690c:ed6:b0:5a7:b10c:4772 with SMTP id
- cs22-20020a05690c0ed600b005a7b10c4772mr18162053ywb.19.1698175532542; 
- Tue, 24 Oct 2023 12:25:32 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- u4-20020a0deb04000000b0059f5d686479sm4342025ywe.16.2023.10.24.12.25.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 12:25:31 -0700 (PDT)
-Date: Tue, 24 Oct 2023 15:25:30 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH] arm: init: add an option to use FDT from previous
- bootloader
-Message-ID: <20231024192530.GH496310@bill-the-cat>
-References: <20231024-b4-prevbl-fdt-v1-1-541f71dba802@linaro.org>
+ d=1e100.net; s=20230601; t=1698175717; x=1698780517;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BiejmovDDkKVnImVHGRSEYf4nnfrGv33hjM6FMnAUPM=;
+ b=C1qlCnLt9vgPt7HpDGyt7POfKfd2TEIrhqGycxxWH7qH2sdRK08AKVixIO824n6b3t
+ FxTbsVz6hyIEpWqtro+t8aIrfkyVD6U6fwPMLDwg9XvMHKw3Jim62LwaV8u2NvV79uw/
+ dTv0bwZNZpfCrr9wIXyC5Jhy/2z6ECgVsaOU79lz9/3Ic9VfMKcayJWxdWdntQLEWpzL
+ 5rUkT87ulhkM+74H1Al3JacE3O88dc+hqnape3uhgAxj8+rePhR9I8zBcCojRV1oFtxQ
+ QGVo8reUO/Q/hUW1jbbiEPrk0mLsJHQoB9oCk0+rIAyyHS4qATcZn7ad23Cad91osTP+
+ WZyQ==
+X-Gm-Message-State: AOJu0Yy61dcH0MmvGrr03TvmmYZwhYUe3mhr0yj9WYGANGwJLTnIfoAQ
+ jIUqSlvb6DIfFs0lwQr6zVxtXQSvYRgcdEd/p4hIZ2dkbbbE0d9LcMU=
+X-Google-Smtp-Source: AGHT+IFiE98v46k8y2Lfvin7pz5BmSel1xjV6BE5F9n72hdcAWNwpXl/vP2aNwdoohajTf2V+FufvvsUVp/GsTvff3k=
+X-Received: by 2002:ac2:47e1:0:b0:507:b853:c96 with SMTP id
+ b1-20020ac247e1000000b00507b8530c96mr8368368lfp.48.1698175716643; Tue, 24 Oct
+ 2023 12:28:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uDQfj4vEt6qKFW24"
-Content-Disposition: inline
-In-Reply-To: <20231024-b4-prevbl-fdt-v1-1-541f71dba802@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 24 Oct 2023 22:28:00 +0300
+Message-ID: <CAC_iWj+TUO7Tu2qCxn-o4t055+ArJV8J4CYc1K7X_TbHOAtP7g@mail.gmail.com>
+Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,63 +84,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---uDQfj4vEt6qKFW24
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 24, 2023 at 12:32:35PM +0100, Caleb Connolly wrote:
-
-> Add a new config option to allow u-boot to reuse the FDT provided by the
-> previous stage bootloader when available.
->=20
-> On some boards the previous stage bootloader can populate
-> platform-specific parts of the devicetree such as the memory node, this
-> allows us to avoid hardcoding it in u-boot and instead determine it
-> dynamically at runtime.
->=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+On Tue, 24 Oct 2023 at 09:20, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Forward and backward compatibility of Linux kernel device-trees is
+> sometimes missing. One solution approach is to load a kernel specific
+> device-tree. This can either be done via a U-Boot scripts (like the one
+> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> The boot loader approach currently requires to know the device-tree name
+> before first boot which makes it unusable for generic images.
+>
+> Expose the device-tree file name as EFI variable FdtFile.
+> This will allow bootloaders to load a kernel specific device-tree.
+>
+> The variable will not be exposed on ACPI based systems or if the
+> environment variable fdtfile is not defined.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> This patch will improve generic support for Qualcomm boards by enabling
-> us to configure the memory map at runtime rather than having hardcoded
-> maps on a per-device basis. I've gone for this approach initially to try
-> and avoid introducing board specific code where possible, but I'm happy
-> to rework this into mach-snapdragon if that's preferred.
+> v4:
+>         Generalize the description of the content of $fdtfile.
+> v3:
+>         Add documentation
+> v2:
+>         Use a unique GUID to enable future U-Boot independent
+>         standardization.
+>         Do not try to add the variable on ACPI based systems.
 > ---
-> base-commit: e65b5d35c9116485366bb08138043d51220551da
->=20
-> // Caleb (they/them)
-> ---
->  arch/arm/lib/save_prev_bl_data.c |  7 +++++++
->  boot/Kconfig                     | 10 ++++++++++
->  include/init.h                   |  9 +++++++++
->  lib/fdtdec.c                     |  7 ++++++-
-
-So what is different with this instead of using save_boot_params ? I'm
-not saying this isn't needed, but I don't immediately see why
-save_boot_params + (OF_HAS_PRIOR_STAGE=3Dy&&OF_BOARD=3Dy) isn't the solution
-to the problem.
-
---=20
-Tom
-
---uDQfj4vEt6qKFW24
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4GioACgkQFHw5/5Y0
-tyxa3wv+OPSU9AY3sA2EPdfgPM/K95MdMSkBBLlmGGmBxKd6CvX2r/5BfWk1jeeh
-YP1voVPw9GBUecioZBx4Rmo0J7gFLiArfIxyOt4xKVITeBdI8Nj8We5SQvecDmW/
-q1JH/ohJ2J0CL+0wMqZro098PhjYJOhg5ewCJ/ydQbKmeK+36VCNe9nyKA9F/HoM
-h0LFQjjP5IYe1uSBRrZwOv1GHtHJwIAJm2o4yAPQ6fiWv8KOHPI/6wRX/PiC0rGs
-V2IfcFK2e8NB3zdt1IVKApkiKqAuThYzVcOaDOcyNrCiQ8GwAkgc92qylmGmhbIu
-K5ZrSvf/EA+GL+rJLo98LJzBZr1KG9BlwrYUZ7bfKhvrBEOGvs8YkbuNQdCXi+vN
-Gv/wvJzhHyO1d8/D4wWNY7swAvjz43VN0dtQ+t8xGMJddFV+zpa/sD6g0VMHQk0I
-675jbycUh2mVpmvigpow/pBwx+pU4gdM06dPrpq7gcErir1paH9sfOeMtOZJ+QAa
-0XX5iswW
-=HiWx
------END PGP SIGNATURE-----
-
---uDQfj4vEt6qKFW24--
+>  doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+>  include/efi_loader.h       |  5 +++++
+>  lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+>  3 files changed, 49 insertions(+)
+>
+> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> index fb16ac743a..702c490831 100644
+> --- a/doc/develop/uefi/uefi.rst
+> +++ b/doc/develop/uefi/uefi.rst
+> @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
+>
+>      Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
+>
+> +EFI variable FdtFile
+> +~~~~~~~~~~~~~~~~~~~~
+> +
+> +Ideally U-Boot would always expose a device-tree that can be used for booting
+> +any operating systems. Unfortunately operating systems like Linux sometimes
+> +break forward and backward compatibility. In this case there is a need to load
+> +an operating system version specific device-tree.
+> +
+> +U-Boot has an environment variable fdtfile identifying the device-tree file to
+> +load. The content of this variable is exposed as EFI variable Fdtfile, vendor
+> +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree path
+> +name as a NUL terminated ASCII string. On many architectures the file name is
+> +preceded by a vendor directory ('vendor-directory/board-name.dtb').
+> +
+>  Links
+>  -----
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index e24410505f..146e7f1bce 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
+>         EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+>                  0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+>
+> +/* Vendor GUID for the FdtFile variable */
+> +#define VENDOR_FDTFILE_GUID \
+> +       EFI_GUID(0xd45dde69, 0x3bd6, 0x40e0, \
+> +                0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
+> +
+>  /* Use internal device tree when starting UEFI application */
+>  #define EFI_FDT_USE_INTERNAL NULL
+>
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index e6de685e87..71bcde645b 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -17,6 +17,8 @@
+>
+>  efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+>
+> +efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
+> +
+>  /*
+>   * Allow unaligned memory access.
+>   *
+> @@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
+>  {
+>  }
+>
+> +/**
+> + * efi_init_fdtfile() - set EFI variable FdtFile
+> + *
+> + * Return:     status code
+> + */
+> +static efi_status_t efi_init_fdtfile(void)
+> +{
+> +       char *val;
+> +
+> +       val = env_get("fdtfile");
+> +       if (!val)
+> +               return EFI_SUCCESS;
+> +
+> +       return efi_set_variable_int(u"FdtFile",
+> +                                   &vendor_fdtfile_guid,
+> +                                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +                                   EFI_VARIABLE_RUNTIME_ACCESS |
+> +                                   EFI_VARIABLE_READ_ONLY,
+> +                                   strlen(val) + 1, val, false);
+> +}
+> +
+>  /**
+>   * efi_init_platform_lang() - define supported languages
+>   *
+> @@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
+>         if (ret != EFI_SUCCESS)
+>                 goto out;
+>
+> +       /* Define EFI variable FdtFile */
+> +       if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
+> +               ret = efi_init_fdtfile();
+> +               if (ret != EFI_SUCCESS)
+> +                       goto out;
+> +       }
+> +
+>         /* Indicate supported features */
+>         ret = efi_init_os_indications();
+>         if (ret != EFI_SUCCESS)
+> --
+> 2.40.1
+>
