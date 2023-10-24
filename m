@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A24EC00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A4BC00A8F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A66BF879C3;
-	Tue, 24 Oct 2023 20:04:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BCB8879AD;
+	Tue, 24 Oct 2023 20:04:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Ey3+xigL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oexusJoF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04152879B2; Tue, 24 Oct 2023 20:04:28 +0200 (CEST)
+ id 3D5628798C; Tue, 24 Oct 2023 20:04:29 +0200 (CEST)
 Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
  [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48B74879AC
+ by phobos.denx.de (Postfix) with ESMTPS id 48A3C87998
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a7af20c488so48598947b3.1
+ 00721157ae682-5a7b91faf40so47647537b3.1
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1698170659; x=1698775459; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698170659; x=1698775459; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Jphv2Hs5mT33hMLLYL04TgnukSKQEqaaw0xze9hUHek=;
- b=Ey3+xigLNIHEQTgoTWi1ZaXp6NnqoJZ7dVS9Rq3erTglDiHWdJaQHULc+NNFJ8/YXW
- cAB9G/mAViJIMKFK0NyPUEPdv1VgP7oVw9mquE0hmZIPXUnmp8bIEMafPaA/N37GSKD8
- vL1viFA5Da4pcobD6U5ohWfuMKmWzpzbbQGBIt4CKQNLA8OqKcr4DQdN/hQwqokjOdOe
- Aawlje2ZeFRFkWZ+LzpBzSi5CSrqUzff5KxXkRaNbcX/ND6pAHlOy9NbY/udNQnft+K3
- IG2IKsCKAhhA/DeDGigB8P+FX8jjf+wpzTMqkdCuSThgjvmo8T9eIj13eC1pBIml53nW
- Boxw==
+ bh=aY9CmNuxRWKUevpetKk6QTGxEsr5py/im7okXcRCRCw=;
+ b=oexusJoFEXb6cuBdI8AnEJs4QsaoWPaJTLWLzzXtsYyx/hW8NfFHW8E/TVoTUWM3h8
+ lpluHUqQn/oX8b+IRNZ1RNb1FuqIdWXvaJjSqzfR8317bjQEsZTfDAsRW+ND5Ibp26I3
+ 0/udhUhW4Ze/Mejwz5KgpHd8a2EQdMsgPfCyQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1698170659; x=1698775459;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Jphv2Hs5mT33hMLLYL04TgnukSKQEqaaw0xze9hUHek=;
- b=RqoQPsZpg9jmmXxQYjWuMAXPA5wmDLudI+yynk6OyU0Liv80chxIkgxvRXUZ33YGVn
- caxP2t5vtmLDELR2bseuo1zMPFFJTcFCaW1A00Y0lmI4mkqkjtEsn4pUjMfsqVQl12xo
- CaPogkzF8dc7ibpRZs/kU29nR0Trc4Yzn9ZFqqpFTDtM53qCDU59uPwN+b4BWQ5Dec3w
- z2TsRQR6qh+CGYM7ULz9gaxij5ioBqxhWzbGy5Z9hfsmRJ2lpr7Laro5Rbh/ypCGAkka
- n2Gy6eaBNIVqscOig9rjo3cWnK11rur8mK1nPIIFmzgB1i+zlGV/x0MpRYVtYP7WOv46
- 9rjw==
-X-Gm-Message-State: AOJu0YwVmkMGtaVnZOzsTbSFp0l1nrxlVCV7kal/krZ5L535iSgBkekQ
- jesfHceLmKm23tYR6AWge5t1N7g7qLXc17YXffJmleiYehtaHq7z87UrciFi
-X-Google-Smtp-Source: AGHT+IFgFesg1M0u0ID8EUygVtmrn1Hd//PFz+e3pyGcmX6med61rYihowGN2QuUStGg54tt7qmjtbBXgc7tQ2656J4=
-X-Received: by 2002:a81:480c:0:b0:5a9:117d:ddbc with SMTP id
- v12-20020a81480c000000b005a9117dddbcmr10326389ywa.15.1698170659011; Tue, 24
- Oct 2023 11:04:19 -0700 (PDT)
+ bh=aY9CmNuxRWKUevpetKk6QTGxEsr5py/im7okXcRCRCw=;
+ b=ZBA1PusjMwQSHrss6gk5SNKJL7eZQ9oxUc9i/+6Pu3ulG+I3fUFQ8cO2BladS86QNk
+ /zntDoorrWbpLDYJxhfMzRxB0V0BRDgy2WSxOhz0RhZL5Zvxg8QMPRiKgM8XuhWj9K4S
+ FhKG0sNdoao76zbCEL521wLGXpcwNvTytCOZeB1lmUBhymVLQowt70QfDZ7o8p+uz82s
+ 0Q1pi7BydEvdrQNZtZ48TP4IumXnJ4hWaRyFu07lK8MiTzL9/grQIt6etjfofIlgdoR6
+ r55vp56/u8FOpe7+71b+0Vf4MmBsilMRM2dEsaoLYgfSB+ZcxS2irR5dr275hIHDUy9l
+ Ku5Q==
+X-Gm-Message-State: AOJu0YyD45xWDa7E711BqH74fcTTjs3lDgRNyIZSOaDbj9ZZhgb5sd5I
+ ZFk+cIHY+uY+PO2sVpLMJOfzc3+6rrbelRfcCTdNBFhBFsiPZs8jIVf7FAFX
+X-Google-Smtp-Source: AGHT+IFKlh4vCHAclqpOX5erOEWiEvXTyNOz5NHSKmXy14bxL0P9xKDnmwnpJTdAhrjd8h41mj5p9tdTn27onqSMaYE=
+X-Received: by 2002:a81:4983:0:b0:5a7:b515:ae47 with SMTP id
+ w125-20020a814983000000b005a7b515ae47mr14316764ywa.9.1698170658990; Tue, 24
+ Oct 2023 11:04:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024072638.39798-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231024072638.39798-1-heinrich.schuchardt@canonical.com>
-From: Simon Glass <sjg@google.com>
-Date: Tue, 24 Oct 2023 11:03:19 -0700
-Message-ID: <CAPnjgZ0ZV_C73q1v6D9jEUCF-3aJMRRzvDhpOAoP-PuH7_X0Mg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] tools: mkimage: fix sfspl_image_extract_subimage()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Yanhong Wang <yanhong.wang@starfivetech.com>, u-boot@lists.denx.de
+References: <20231023080103.3780998-1-n-francis@ti.com>
+ <20231023080103.3780998-3-n-francis@ti.com>
+In-Reply-To: <20231023080103.3780998-3-n-francis@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 24 Oct 2023 11:03:28 -0700
+Message-ID: <CAPnjgZ0c-xo+fXwNXNiTwC8Vrw2RsMqsdbG1OcspLKfOh0HSVQ@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] DONOTMERGE: arm: dts: k3-j7200-binman: Enable
+ split mode for MCU R5
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: trini@konsulko.com, alpernebiyasak@gmail.com, u-boot@lists.denx.de, 
+ vigneshr@ti.com, u-kumar1@ti.com, a-nandan@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,17 +83,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Oct 2023 at 00:26, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Mon, 23 Oct 2023 at 01:01, Neha Malcom Francis <n-francis@ti.com> wrote:
 >
-> Do not leak file descriptor if writing fails.
-> Correct the error text if opening a file fails.
+> Set boot core-opts to enable split mode for MCU R5 cluster by default.
+> This patch serves to demonstrate how this can be done.
 >
-> Addresses-Coverity-ID: 467054 Resource leaks
-> Fixes: 64fd30d367a1 ("tools: mkimage: Add StarFive SPL image support")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  tools/sfspl.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+> No change since v2
+>
+>  arch/arm/dts/k3-j7200-binman.dtsi | 3 +++
+>  1 file changed, 3 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
