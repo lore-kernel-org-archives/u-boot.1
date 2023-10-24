@@ -4,135 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB701C00A8F
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 10:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D844C07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 11:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 474208714D;
-	Tue, 24 Oct 2023 12:03:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F0F087103;
+	Tue, 24 Oct 2023 13:17:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="irEdnzpG";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Y3EX87h+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 762AB87142; Tue, 24 Oct 2023 12:03:26 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.109.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3C36C87124; Tue, 24 Oct 2023 13:17:56 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20721.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe16::721])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 115468716D
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 12:03:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0781587103
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 13:17:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1698141800;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wTQuIXA7qBWiyTKTkuw4zygyVS8fhcfYO5ERIQaBpJE=;
- b=irEdnzpGZcgiSTE406CsSNK+Ve8c0ft+k7hpM8LWycWcqTPbniOzUv/K4zctBNiCaVaz4t
- Mf+4ynRY1osbeq8IfCSNNM+iupiHdhtPsCUC4bwhk7pBqRFzY/Ln7oCve7bwqir9+fS2AD
- KVYofNkUQDXXfMMpkunf806fuakp6bY=
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com
- (mail-gv0che01lp2040.outbound.protection.outlook.com [104.47.22.40]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-53-bBUorZU9Ov-LqPTDO2l2bA-1; Tue, 24 Oct 2023 12:03:17 +0200
-X-MC-Unique: bBUorZU9Ov-LqPTDO2l2bA-1
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR0P278MB0870.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4d::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6907.33; Tue, 24 Oct 2023 10:03:16 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b%2]) with mapi id 15.20.6907.032; Tue, 24 Oct 2023
- 10:03:15 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "festevam@denx.de" <festevam@denx.de>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Bmjh8TELrLcQeuWyQvj3ojgId325C6Rw3ZI3FfzjQtazROt3/DvfGJUhSyRjhCh5E5SEirtsawWFX5Ov8wL/UhblEb0oHkpwFgj0pQFhOdHhjKk1wlVjhDsaLpQkXChn2JTh+pJ0u/FE4dTVtO1OOsrgwlrJ6HILPPDfvDvxPh6vSSVdbPhgNPGL+BhcMnGXjmYNvDEjR/Rs5s21ApIqKltUVbpHvrgHnyjavp4mu6srR6k9tVEsgzPsnqvsxyeBz4jZIKkk7QeZfIE4EgBCotUifBjtWYtS70jWpD57ElxsROKMq139CpJmeGtfUgyMnEUuUaGku5Cn+mq7lXnW/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZJj5alE/NPxGpESaFNZg7WLm5tIis92H5DqQYqNBfsQ=;
+ b=Hz4jgZExi8RVvbZkBW/J3uqlmsrzAiSxHcyfnRa3tBFC3QU3d0xp3b5aqmj8YolIroB3RyKV97XesrhksK5ZmEKSW8loTG7h44kWcJ8LC+ZGk2UG0dU3yX5fhzpTlwFEdkGGnqgQkw0XcQq3O1VF5s801BBLdjfQtBXn+dPtxyRhEqoS/YnPym7LEgFKSh0fW+pTkSiLYqlNfsf17Bdl+u6ogz6XVyqvP9cUBGNp8WRVK54iwMDDmvf1llrqj/WAUWioskT7fcmi7nCoKU+YhgtDTOn5bBKTdXsrJBbIjYr48CfIFLTtiI6FnLTxhvHdJj5e7/WwXcSIufBs3oD1nw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZJj5alE/NPxGpESaFNZg7WLm5tIis92H5DqQYqNBfsQ=;
+ b=Y3EX87h+VZlGR85x54EEN3vKfbAzpSHNxsq3ryjug7W1o7bDI1Nyjoq/3ZED4Kxw0pwXWMfs7enkLUCFBZWv6WwD/CpJnGGjhYZ8jOBuEacnoN126DlPp056C4tYYlFVjEcNTGViR99HovLUmJXPSSUFX8FvF4x6hjoM5tXo3RI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by GV1PR10MB6122.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:9a::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.33; Tue, 24 Oct
+ 2023 11:17:52 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.030; Tue, 24 Oct 2023
+ 11:17:52 +0000
+Message-ID: <e4821c38-ead6-4a51-a442-2c782e638024@prevas.dk>
+Date: Tue, 24 Oct 2023 13:17:49 +0200
+User-Agent: Mozilla Thunderbird
 Subject: Re: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Topic: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Index: AQHaBk0pzkBxey4AX0CR0vSGBaUJ0LBYqXaAgAAMigA=
-Date: Tue, 24 Oct 2023 10:03:15 +0000
-Message-ID: <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
+Content-Language: en-US, da
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "festevam@denx.de" <festevam@denx.de>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>
 References: <6de4ef437445c78317e7d8f4f07e47502caed029.camel@toradex.com>
  <cb3e2ea6-b417-4736-9639-b51a04815f7a@prevas.dk>
-In-Reply-To: <cb3e2ea6-b417-4736-9639-b51a04815f7a@prevas.dk>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB0870:EE_
-x-ms-office365-filtering-correlation-id: 54feb412-18f5-4af1-8dc5-08dbd47870f9
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: TKqvHqVHaxM1CP73eAu+Y/MO0iz8VcMSBT4ZFIsNJMPii+ufkgcN8HCh7uFYlIIx2uQ9RIA52ohnwpXdA2JoPFuEJFDGHiKIGQuW9i2v0KNzkrm1dLUoiW/KTO6TOqE4ojY7UEARuFDQ3DTiJ6BNLyHif1gCcH16EfivxZ2tjh6tNe9LAJagmk6dR8xsiTEvP774JXGY6q0HKSZ5EP/abJLb2DQC8J7Jsu5DuCiIji5u/rEKut/dGWcCjcvoBGworbTmCiQY2OJ8Qtq5d5mahYmZGTP54FqN5AV1qwLXSs+QVcYO+GmKuIMWyNzZ6H8vb8IPk2scXNKZwA8FEFQSTRqLMmtSoov3+T/yfD5lqbXRisaMSkglJnOrfF5AFnb//PcU0gR1SKLJVOdKDRIhhD3REFu1he/tAjg23WaGVanHtIUy3LzIJktGgxctvFFvWfkJIya+FO8NKmMwv2rtAWma7ZLAt/JX7Cq93cGsrxvtICJ9XC+gTBgVA2XiYeDqwnidnhNk2DO9gR1IHADbWk9pQlerYqdyDukVYVGxRAGpzXy5uTPgkG6+4KEX5lwdwoSVDx5PThW81zawZE2BJUrfj0MeE++5yvLJl1yOs3IQ0HLT+bwLWNKLDKdgrTbq
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(366004)(396003)(376002)(136003)(39840400004)(230922051799003)(186009)(1800799009)(451199024)(64100799003)(2906002)(44832011)(38100700002)(41300700001)(66476007)(66556008)(66446008)(122000001)(64756008)(54906003)(316002)(76116006)(71200400001)(2616005)(66946007)(110136005)(478600001)(6506007)(6512007)(6486002)(83380400001)(91956017)(86362001)(5660300002)(36756003)(4326008)(8936002)(8676002)(38070700009)(26005)(4001150100001);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZXdjOVo4RVIwTzdwRlZqNXZ2TXRxcWtBUHA4Z0RIQkpjRVRCcGRnVEU3OFk0?=
- =?utf-8?B?ZEg3WVhMLzBpTnhtWUh2RFhwNEc1RWdtZVBuSHZqeE04ZjlxMjVQYkp0TGpE?=
- =?utf-8?B?ZzA5djJlQlJiazNCZlh3WFg4UVVHclI1ZWVCWEU1VVd0L3lXc2h5ak9IbS9n?=
- =?utf-8?B?YWZqaXlOSk82SUpPS1VWK3VHbTlKV0wyeEZiRm95ZWIzWVlZUGZ4UEQxTUhU?=
- =?utf-8?B?MVg3QWJ0TWliSWZGcWVydkJEd0FkaDBRM2dOdy8rQ25KRTFreE80WU0zcE1H?=
- =?utf-8?B?aTVmcUt6WFBrbzZQWGp2N2oyK2dXTzVKZUticC9XOGVmNnhpL0RwNVRXSmFq?=
- =?utf-8?B?WDkwelFnTnM5QkRWSWJLS2VNWG1NQkhnbDFGYkt4QStOU0UraWVvdHBGSm5p?=
- =?utf-8?B?Z0hYc2VlNGJpS3pEUHFjRXFvKzhhUEtOeFlicURrd3MzRUZTRnpzbXRJV04y?=
- =?utf-8?B?OFRPVjRONC9vYkRrdVJnNUZNUHNsVTdsb2lxcUE0TERYdVlObms1bWZDeXJW?=
- =?utf-8?B?RHl2WG5qdXgvbHRhaTYxejBRemlwV091bmhTZCtTa0txOFZmS1l2UGhRK1k4?=
- =?utf-8?B?aVZwWkRsOEZReEpCb1JnOGpURVBTQXcwbHBTb3FtTUlraUoyczBUcXJzSFVy?=
- =?utf-8?B?bTNsd3lCdUdOQkJYWGRiWm91Ry9IU0RHNFNuRlM1eWlzb2VLL3VzZGZMWWQw?=
- =?utf-8?B?YllEcnphRVVSc1RtbFFiYXREMWZjS05UVFR4ekFmRjZ2d1c0dkoyM2UxZmtZ?=
- =?utf-8?B?aGp0aWNLNmcwOEdjT21LTjdINGtGNTZvbythT0FoTWdIQUo3Y3NuZlpzS21r?=
- =?utf-8?B?S1VYU3ZFb0dzNmFlQ0NMUTdvRTBCRTV1TS9aWUd6OUluV2swc3d6QW84ek5M?=
- =?utf-8?B?Vm9RQ01oMU9KczMrQWZGY0dWM3F6NjUxcmxpdHBRaHhka0lYYTdQcXN6dVRN?=
- =?utf-8?B?V0tHZG1xQTBkSUZqWEpZSjdVOUttNXREWUxHRzFsVVc5Nkx3Z2RWVFFxZDdt?=
- =?utf-8?B?eWJiZy9JMEJDaDZZSXBweDhJMnVpSmNKWFhyaUx5a0JkQXRSaUpOU1l5KzEz?=
- =?utf-8?B?NTRYeHRQRjNKWDRNd1BSL3g5ekUxVzg1L2wrY2tTNnA4Y0F2dmUxeVRHcko4?=
- =?utf-8?B?TnBUUU5IVk02VFJQQml1VTFuMDVNSkxuSUsrU05vZjhUOGJHZWJrb0lBRmRX?=
- =?utf-8?B?OGFiSnlQR0k1MDRMT0NMRW1GZlZLbmJCcG44M003Z3ZsM0dxN090amtBalZx?=
- =?utf-8?B?VFVUbld3T0FXNEt2RHdNekh3VXNyck9mSU9GMlQvZUYvT0VCLzNOUUhFcndF?=
- =?utf-8?B?T2FxZkdRM0o1c1U5bHlqRFlqNzJqajFVa1c3cDdUa1JGaHZsQmp3enlLT3lo?=
- =?utf-8?B?Zy9JZjg2SlEybTBtc1IvT0VobzdhZXB6cmJZdWpmYitTTWtqcy9LQTYyZnJv?=
- =?utf-8?B?Tk9rZnU5dHFzTUpURW4wWFNMQlJvSGNMSUJFeWZFaXRJWHUwSUNxcXB5L2oy?=
- =?utf-8?B?RFVUQ2pVOUVtY1M0Q20wcDJBNjI3OUdjRk5ORTh5R2Jnd3NrckdTSTdkMlFX?=
- =?utf-8?B?TStSNWRURHY2WFJ3MnJyS0tETE9KL29DSjRwL21SNnVabVZHRXF2TTVaUWk4?=
- =?utf-8?B?TTdHOHFZWDFEQ240ZFB3Ykg3V05Fa3ZycGVhSzRFdUVVa3JSU3NHTWtCNWs4?=
- =?utf-8?B?Z3hJa3JLMThjbXhMSkZEaFBtVzVuMzVBdzUyeWFIcjhSODlkaWVyN2xvZGRw?=
- =?utf-8?B?S0dzQjFZdmROUXVhM0FLK0RKbjROUFBCdjRoTGhoZ1RScXA5YzFNdVJuWUFU?=
- =?utf-8?B?NTlJWG5nb1E4MHZsaEZuVVhYUWl2TERMQ3Q2eTVEVkgydlM4ak9DSE5veGxL?=
- =?utf-8?B?Qm5aYXJvSHdkTThWMllndjI4RWlaRmt3STJvdFRNOVFma3BEYmJlaGgvL0hK?=
- =?utf-8?B?MVBTVjJtRHpUSkQvNXNBS1M1TklDVlVKNWU0R3MxNHBNM2RFbTE4cTRhMDMx?=
- =?utf-8?B?cE42SDh4MFJSK1RlSi9pYjFxOGRYdmVTVGxVdEdTR3EwN21uL2JVVnh2S3Bs?=
- =?utf-8?B?dFpPTU9FQnU2blFQN2JxRmFXc0tXaERpU3VHSlluLzRaWWx4U2ZISjZJK2RN?=
- =?utf-8?B?WHc4QWFMMTBGODlDYzc0VFhFUHlSREx2R0hjSjA3TWJjaWJVdHkrTWQ3T0xl?=
- =?utf-8?B?MXc9PQ==?=
-MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 54feb412-18f5-4af1-8dc5-08dbd47870f9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Oct 2023 10:03:15.9092 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: c4Zs8ZA8VeBm8+ej82gkRnxdsqMWQcJ2rHQwSgG/Lvtublqm9thOKZuGEGc8gU/NGBc2swSyvXG9VRDz3TY28LiBHZsFbDFuV7VIdN6gZbU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0870
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Language: en-US
+ <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
 Content-Type: text/plain; charset=UTF-8
-Content-ID: <444BD8D8B958A24D81780C45194A1A9C@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AM0PR02CA0085.eurprd02.prod.outlook.com
+ (2603:10a6:208:154::26) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|GV1PR10MB6122:EE_
+X-MS-Office365-Filtering-Correlation-Id: f21d9f0c-77cc-419a-2eeb-08dbd482dcf3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VcOHU6DJYo+2Trwy+lR5QdFHYxhJ2AOfo5erRQLTJb5DpngVZRWghT8wqA3ouXjY82JW3lJd8wocMwuaEir/q8sPjE3ymEsXz58x/VE1G8nAttqrOxmfNLmo7JWyDbroFHZ3LWvIqjNQBkG0LDb/t2frutEyiRMYBf6Z+jgO+2iGWXK2XKZh23IXuIZx/vAvWknK46iE+rDUFizLcP415cnOfZeqTkFueRz9m6awvrTfRKDpJpxnFon2ugjntC3kdLiPaWMaP5U80L5P4nOrmx92UPyCun+1aMLxctm1V4ByNNDMyQ6Bh1kyc6xOijyogKj1zFZEPV2Q1syiY6LUivTctX4cpsd9cY8ZgY3flXCUPaVIIrUJI6ROtHnE44X5p1q5W1hLNldlnBjAGj42n9xYPkIN9MsvEbwKaJZzgm7k0nv4XhWxrs28rzXTn5F/fhXd39GMzFGAEsdnxi9M8LEQqIAyOF+CmnhtuiIKd8tVkkjQzKPOQJOVQeuJGUu7kIr1i5BvsZMp+qgr6M01Xg6ulIjxkTyGDDOXLIXrZAnuqESNkqkYpQ34t8YlCPnlBlaC0Svb4F+1nRYv5s7hAM+QtYDHi5VNIDMNtjhVfAiEJGRN1D/srRLUHAoGXtxmm6OeGQIUuJwwSa4fTEZI6g==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(396003)(136003)(346002)(39850400004)(376002)(230922051799003)(1800799009)(451199024)(186009)(64100799003)(2906002)(41300700001)(38100700002)(316002)(66476007)(54906003)(66946007)(66556008)(6666004)(6506007)(2616005)(110136005)(478600001)(6512007)(6486002)(83380400001)(31696002)(44832011)(86362001)(36756003)(5660300002)(8976002)(4326008)(8936002)(8676002)(26005)(31686004)(4001150100001)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bXZTMTA1SjU1OGtjYUoxRElSOVlrZU5IbmJJZ2JabGJEMWI4Nmp4bk1yaGd3?=
+ =?utf-8?B?Z0xqRmF5dzlBc0ZBZXVXS2p5TzFBQ3lJRW50NkFtK3ZRVWdhcERuU2NrSXJV?=
+ =?utf-8?B?RFRkTjh5QjFpeGg3VFZ6YmVHQkFSak5iVUFhVWNjaklsQ251Y3RXSU5JU0Fn?=
+ =?utf-8?B?YXBrK083RVFkRlk1ZnY5QlR6SHViclA5cXVhY1pIL2dsaEgyYStJWEFWM01O?=
+ =?utf-8?B?NEdnRVlIY2VKaVh1YmlVVG9lcmFYbHdSNTZRdzk1ZzFQV1AxMGZVbXcrMmRS?=
+ =?utf-8?B?QllBdHBhYkw4VHZjekxqYVVhQWpVOS9qL3NNMkVtMTZNVTdFb3BaYW00Q3R0?=
+ =?utf-8?B?ckp3OXVWTXZQQml5WjJNQlF0cGxvdk5QYXdxZXl5dGdJMlNEREdrVFZrYnJ3?=
+ =?utf-8?B?Y1JVSUJvOUxSUGJLRTk4ai9kV015ZmlLMzRlNm55TFJOZ3BpY3FlQStieVRD?=
+ =?utf-8?B?SE1kajlLSWF3SU9Vb1FuaXhMZ0gwU2NUUGJhdXF1YlJxN2dwdXFQdTI3YWVw?=
+ =?utf-8?B?RGVzazU2ZmN6UU9JN2d6TTFIaVFQOVhLazhlczNMS0Y2dnFRZmpuQ3Z5c1hp?=
+ =?utf-8?B?RzFkbWU3NGwzY2FRWCtkL0JPWlVIdy9WaENiUU5VZnRQS0lEKy9ldWd6MXZR?=
+ =?utf-8?B?dHJmamVKdmlYL2pXRlg1WTlTSFN1b2ZOOUxMZ0MxNEMwY1hOeGRBRDhNTnRM?=
+ =?utf-8?B?U0Fyeit4dnBMV056ZnVQSTN0NlFFa2dwOTlIQStWS3F0cFg1TVVQQXdWTjNk?=
+ =?utf-8?B?M0tiS1h6RVVNbmZ2OENBeno4WFE4MWhXNGV1aUlxbXp5a1Y1TXY1dFVlWlhF?=
+ =?utf-8?B?Q0pPdWtJR3JGOW1YRjgwOEJMZVo5UDQwMEhEKzNTVVBSeWpBV3NxNDhmZzVY?=
+ =?utf-8?B?dkV2MVJUeTZlS3gyOUd5ZHcwR3pUL0UxYWJ6Y3hySVp4SGlzQTFteU1ySzRW?=
+ =?utf-8?B?MVJ1MFpHRXlWd0lhMjNOWkVydmdVcDNNVmR4dU9JODFHVlk1b0pQMGRBNXFC?=
+ =?utf-8?B?aVhwUEEwdkZ1Y1ZWRFZEOHdsdXZDWjVxRk4rYW5uN0ZNYldCOUtqWWdvMzho?=
+ =?utf-8?B?QzJUYkkxVmNoUjlNS2Q5QklOWFRWWk5MZG5iaTZHZktUdE8zZDNzTXQ1NFVi?=
+ =?utf-8?B?SW03a1ZIYktsRnY5QnV0UVdVL0diZGdpSjZBeTdaUGY2N0FIc0tVaGx2MUJk?=
+ =?utf-8?B?QjlxTmZEZWFTVG4wOGViS1ExNGVXbWcrd2Z5NTRRNGdGSE5BSGhPdkVYWXZr?=
+ =?utf-8?B?WDloWGJCYUU0M0gwdlROS2l2d2lQZm9qVmRYUXhUTG1pbUhqZFRwclo5cjRN?=
+ =?utf-8?B?QlNMVXQ0dWd4NkVKbVY4S3V4d3B4bzJ5eS92dGkxZ1ZDQkVSTksvdmkvRGUv?=
+ =?utf-8?B?R2JIY1BjVXVvTEE1TDkvYUNFWmx1TTEvaTdsWC9VSU1kVGRnZGJGN1pISjFJ?=
+ =?utf-8?B?cVhETEQ3SktKNDlmVnZUVkdHc2VqZFdmM29nZUZvWUMzNDdKOVhWNmtvMVN5?=
+ =?utf-8?B?WTg2d2xCZ3NXVzRxYkgzWFVzNHlpUDVqT2JLU1RaY3ZqSGpwWDBQT0xxaE1P?=
+ =?utf-8?B?T0RXQU14THZubEZCM2dzT0x3REU0RDgrU0JSbmM5ci9VcW93dktTY0tsQlky?=
+ =?utf-8?B?R3JKUUtxSWE1dWpUTFdYM0taU1pSUS9PYTJJcmM0NVpXUUxwS29jWUZJVDVp?=
+ =?utf-8?B?ckxEbWhPbkQxa0NudFg0R09JYnNRaGZiNkpTNy84VExwakVJNmd3ZmhJTjFp?=
+ =?utf-8?B?V0ZGNUIzWmtKSFVBOUwrVVBKUHVQMmY0S2hWdm5PQzRhcG9sYXJNMXJlL1Rs?=
+ =?utf-8?B?elhZUm0weFpKdjVVVDY4TzBnSHYwd21QVDBFQms5dldtTG1xQ1p3czF6UFVv?=
+ =?utf-8?B?cUwwaXVqa1N3Q2YwWHg1czhPQ2F0amx3cTBRUVJDWk1sRkZUTVhaUldUNzFY?=
+ =?utf-8?B?bWVCbzQ2THZUYWpDYU52WFkxRU53cjJSc3FTcDhwY1RMU1gxb2pncysxa1hS?=
+ =?utf-8?B?aFdVS2F6cjFjc3FFN2cwcTJBTHdRVkNua2dNNHdKSFRXTUptWk13Y0VOWklI?=
+ =?utf-8?B?cVF4SEZqU2oxdzc0S3dJNkVqSVJOeSt4WE5TS1BZaEUxYkwza1Q0VkpOYlNs?=
+ =?utf-8?B?SkhNdkxEQUhwY1FIUWRrZVhYUTNVSDcyWXcyVmE0bXQzOTlLK3hlWFhyazJ0?=
+ =?utf-8?B?THc9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: f21d9f0c-77cc-419a-2eeb-08dbd482dcf3
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2023 11:17:52.1774 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /ckdO/El3vAahXzcSh8qvT2xAMZSTP4PbfmreZtm3Bt8krzHQZp/FyA4vN6X+Ur06sllix+EZiDZZWLf2+BFpjDQ0JYQsWTXMml6H1dJlNo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6122
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,37 +147,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgUmFzbXVzDQoNClRoYW5rcyBmb3IgeW91ciBoZWxwLg0KDQpPbiBUdWUsIDIwMjMtMTAtMjQg
-YXQgMTE6MTggKzAyMDAsIFJhc211cyBWaWxsZW1vZXMgd3JvdGU6DQoNCg0KW3NuaXBdDQoNCj4g
-SG0uIENhbiB5b3Ugc2hvdyB0aGUgcmVzdWx0IG9mICdmZHRkdW1wIHUtYm9vdC5pdGIgfCBoZWFk
-Jw0KDQrirKJbemltQHRvb2xib3ggdS1ib290LmdpdF0kIGZkdGR1bXAgdS1ib290Lml0YiB8IGhl
-YWQNCg0KKioqKiBmZHRkdW1wIGlzIGEgbG93LWxldmVsIGRlYnVnZ2luZyB0b29sLCBub3QgbWVh
-bnQgZm9yIGdlbmVyYWwgdXNlLg0KKioqKiBJZiB5b3Ugd2FudCB0byBkZWNvbXBpbGUgYSBkdGIs
-IHlvdSBwcm9iYWJseSB3YW50DQoqKioqICAgICBkdGMgLUkgZHRiIC1PIGR0cyA8ZmlsZW5hbWU+
-DQoNCi9kdHMtdjEvOw0KLy8gbWFnaWM6CQkweGQwMGRmZWVkDQovLyB0b3RhbHNpemU6CQkweDQx
-NCAoMTA0NCkNCi8vIG9mZl9kdF9zdHJ1Y3Q6CTB4MzgNCi8vIG9mZl9kdF9zdHJpbmdzOgkweDM3
-MA0KLy8gb2ZmX21lbV9yc3ZtYXA6CTB4MjgNCi8vIHZlcnNpb246CQkxNw0KLy8gbGFzdF9jb21w
-X3ZlcnNpb246CTINCi8vIGJvb3RfY3B1aWRfcGh5czoJMHgwDQovLyBzaXplX2R0X3N0cmluZ3M6
-CTB4YTENCg0KPiAgYXMgd2VsbCBhcw0KPiBqdXN0IHRoZSBhY3R1YWwgZmlsZSBzaXplcyBvZiB1
-LWJvb3QuaXRiIGFuZCBmbGFzaC5iaW4uDQoNCuKsolt6aW1AdG9vbGJveCB1LWJvb3QuZ2l0XSQg
-bHMgLWwgdS1ib290Lml0YiB1LWJvb3QuYmluDQotcnctci0tci0tLiAxIHppbSB6aW0gODgyOTg0
-IE9jdCAyNCAxMTo0MiB1LWJvb3QuYmluDQotcnctci0tci0tLiAxIHppbSB6aW0gOTM0NTA0IE9j
-dCAyNCAxMTo0MiB1LWJvb3QuaXRiDQoNCj4gQWxzbywgaW4gc3BsX3JvbWFwaV9yZWFkX3N0cmVh
-bSgpLCBjYW4geW91IGFkZCBhIHByaW50IG91dCB3aGF0DQo+IHNzLT5wYWdlc2l6ZSBpcywgYW5k
-IGFsc28gYW4gdW5jb25kaXRpb25hbCBwcmludGYoKSBhZnRlciB0aGUNCj4gcm9tX2FwaV9kb3du
-bG9hZF9pbWFnZSgpIC0gd2UgYXBwYXJlbnRseSBkb24ndCBoaXQgdGhlICJGYWlsdXJlIGRvd25s
-b2FkDQo+ICVkIiwgYnV0IEknZCBzdGlsbCBsaWtlIHRvIHNlZSBpZiB3ZSBldmVuIHJldHVybiBm
-cm9tIHRoYXQNCj4gcm9tX2FwaV9kb3dubG9hZF9pbWFnZSgpIGNhbGwuDQoNClUtQm9vdCBTUEwg
-MjAyNC4wMS1yYzEtZGlydHkgKE9jdCAyNCAyMDIzIC0gMTE6NTY6NDEgKzAyMDApDQpUcmFpbmlu
-ZyBGQUlMRUQNCkREUiBjb25maWd1cmVkIGFzIHNpbmdsZSByYW5rDQpTRUMwOiAgUk5HIGluc3Rh
-bnRpYXRlZA0KTm9ybWFsIEJvb3QNCldEVDogICBTdGFydGVkIHdhdGNoZG9nQDMwMjgwMDAwIHdp
-dGggc2VydmljaW5nIGV2ZXJ5IDEwMDBtcyAoNjBzIHRpbWVvdXQpDQpUcnlpbmcgdG8gYm9vdCBm
-cm9tIEJPT1RST00NCkJvb3QgU3RhZ2U6IFByaW1hcnkgYm9vdA0KRmluZCBpbWcgaW5mbyAweDQ4
-MDJiMDAwLCBzaXplIDEwNDQNCk5lZWQgY29udGludWUgZG93bmxvYWQgMTAyNA0Kc3BsX3JvbWFw
-aV9yZWFkX3N0cmVhbSBzcy0+cGFnZXNpemUgMHgyMDANCnNwbF9yb21hcGlfcmVhZF9zdHJlYW0g
-c3MtPnBhZ2VzaXplIDB4MjAwDQpkb3dubG9hZGluZyBhbm90aGVyIDB4YzkwMDAgYnl0ZXMNCnJv
-bV9hcGlfZG93bmxvYWRfaW1hZ2UoKT0yNDANCnNwbF9yb21hcGlfcmVhZF9zdHJlYW0gc3MtPnBh
-Z2VzaXplIDB4MjAwDQpkb3dubG9hZGluZyBhbm90aGVyIDB4MWFlMDAgYnl0ZXMNCnJvbV9hcGlf
-ZG93bmxvYWRfaW1hZ2UoKT0yNDANCnNwbF9yb21hcGlfcmVhZF9zdHJlYW3vv70NCg0KPiBSYXNt
-dXMNCg0KQ2hlZXJzDQoNCk1hcmNlbA0K
+On 24/10/2023 12.03, Marcel Ziswiler wrote:
+> Hi Rasmus
+> 
+> Thanks for your help.
+> 
+> On Tue, 2023-10-24 at 11:18 +0200, Rasmus Villemoes wrote:
+> 
+> 
+> [snip]
+> 
+>> Hm. Can you show the result of 'fdtdump u-boot.itb | head'
+> 
+> ⬢[zim@toolbox u-boot.git]$ fdtdump u-boot.itb | head
+> 
+> **** fdtdump is a low-level debugging tool, not meant for general use.
+> **** If you want to decompile a dtb, you probably want
+> ****     dtc -I dtb -O dts <filename>
+> 
+> /dts-v1/;
+> // magic:		0xd00dfeed
+> // totalsize:		0x414 (1044)
+> // off_dt_struct:	0x38
+> // off_dt_strings:	0x370
+> // off_mem_rsvmap:	0x28
+> // version:		17
+> // last_comp_version:	2
+> // boot_cpuid_phys:	0x0
+> // size_dt_strings:	0xa1
+> 
+>>  as well as
+>> just the actual file sizes of u-boot.itb and flash.bin.
+> 
+> ⬢[zim@toolbox u-boot.git]$ ls -l u-boot.itb u-boot.bin
+> -rw-r--r--. 1 zim zim 882984 Oct 24 11:42 u-boot.bin
+> -rw-r--r--. 1 zim zim 934504 Oct 24 11:42 u-boot.itb
+> 
+>> Also, in spl_romapi_read_stream(), can you add a print out what
+>> ss->pagesize is, and also an unconditional printf() after the
+>> rom_api_download_image() - we apparently don't hit the "Failure download
+>> %d", but I'd still like to see if we even return from that
+>> rom_api_download_image() call.
+> 
+> U-Boot SPL 2024.01-rc1-dirty (Oct 24 2023 - 11:56:41 +0200)
+> Training FAILED
+> DDR configured as single rank
+> SEC0:  RNG instantiated
+> Normal Boot
+> WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
+> Trying to boot from BOOTROM
+> Boot Stage: Primary boot
+> Find img info 0x4802b000, size 1044
+> Need continue download 1024
+> spl_romapi_read_stream ss->pagesize 0x200
+> spl_romapi_read_stream ss->pagesize 0x200
+> downloading another 0xc9000 bytes
+> rom_api_download_image()=240
+> spl_romapi_read_stream ss->pagesize 0x200
+> downloading another 0x1ae00 bytes
+> rom_api_download_image()=240
+> spl_romapi_read_stream�
+
+
+So this is interesting. I tried disabling CONFIG_IMX_HAB (because that
+case doesn't create an .itb with external data) and boot on a board
+which is not locked down, and I get
+
+Trying to boot from BOOTROM
+Boot Stage: USB boot
+Find img info 0x000000004802df00, size 1504
+already have 256 bytes
+Need continue download 2048
+spl_romapi_read_stream(): ss->pagesize = 0x1
+spl_romapi_read_stream(): ss->pagesize = 0x1
+downloading another 0x9d768 bytes
+spl_romapi_read_stream(): rom_api_download_image -> 240
+spl_romapi_read_stream(): ss->pagesize = 0x1
+downloading another 0x1ff18 bytes
+spl_romapi_read_stream(): rom_api_download_image -> 240
+spl_romapi_read_stream(): ss->pagesize = 0x1
+spl_romapi_read_stream(): ss->pagesize = 0x1
+downloading another 0x1622 bytes
+spl_romapi_read_stream(): rom_api_download_image -> 240
+NOTICE:  BL31: v2.6(release):lf-5.15.71-2.2.0-0-g3c1583ba0-dirty
+NOTICE:  BL31: Built : 11:00:38, Nov 21 2022
+
+and this works just fine. But in my case ss->pagesize is 1, whereas you
+have 512.
+
+Just exactly how are you booting? It says "Boot Stage: Primary boot"
+whereas I'm doing serial download with uuu (i.e. "Boot Stage: USB boot").
+
+It seems weird that you even end up in the is_boot_from_stream_device()
+if you're booting from eMMC (which would explain the 512 byte page size).
+
+Also, the prints above reveal that the download of the 0x1ae00 succeeds,
+but then we enter the function once more, and for some reason your
+printf() gets cut short; in my boot, that's for fetching another 0x1622
+bytes. My guess is that the board hangs because it tries to download
+more data than the stream can supply, due to the rounding-up to
+ss->pagesize. Can you try with this
+
+diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi
+b/arch/arm/dts/imx8mp-u-boot.dtsi
+index e54df1766fa..4b5e9ff466f 100644
+--- a/arch/arm/dts/imx8mp-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+@@ -100,6 +100,7 @@
+
+        itb {
+                filename = "u-boot.itb";
++               align-size = <512>;
+
+                fit {
+                        description = "Configuration to load ATF before
+U-Boot";
+
+so that u-boot.itb is extended so it's a multiple of 512 bytes?
+
+Rasmus
 
