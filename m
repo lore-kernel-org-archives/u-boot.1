@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF03EC07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B72C00A8F
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E457879BB;
-	Tue, 24 Oct 2023 20:04:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F08D587998;
+	Tue, 24 Oct 2023 20:04:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="AcNo6sEy";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="fLm6oMnt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96BC0879B7; Tue, 24 Oct 2023 20:04:23 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 99EFC87967; Tue, 24 Oct 2023 20:04:23 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B4F687967
+ by phobos.denx.de (Postfix) with ESMTPS id 48A6A8799B
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a822f96aedso48456127b3.2
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a90d6ab962so36544527b3.2
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=google.com; s=20230601; t=1698170659; x=1698775459; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y4ZJNRTmNTL1WOhEJspODJ7VVJdfIGOloeUFcj7gz5g=;
- b=AcNo6sEykP6KX8xAEH78sroyk2QgWMn9gfeaMXE/Hy6STvkqJZk29I2HkXlmeyM+Vk
- JidseBPLfT5ugmU8LiYZGfCOEnAsoUvnXfB/0qLbMmsBuMpjBY6mEHBMckWJFRIaYd0N
- eOHhWV06SOP6wmRepUEQXKWd3BsQPNyIjFQ+tbo/GBBs4B2Crea2kAJCRK5BvdiS4/sg
- 2pYLkbJH5pi0BE+SzDFR8LMCkzBjV6f2Ot2T4oKPMjwWxJ/AUrdX6FilS2qXRnDuZn6m
- ERpyyvZMC/vsp/CsbiqUb8o7EjxGsBwrN+Ai+idGIxfSvWwPIbQh1uy+6ZTNZRVh+U05
- Ggrw==
+ bh=gsBuwVocoOl2mRapch5QnQ+wlUNgWqtFQchYMQPg1mk=;
+ b=fLm6oMntJYenU5oGGtw0QDdZWxo7mP0GEiiqFZUUFFLKYFkVRo6h/lWL2igt+kupwn
+ pMK6C6xxWT3jxdIeBHNAhzJWLg+t+20qkxDqqpS3JCzATjpz8tRh1oj2qruGTS9BWA5j
+ WJWftL5+a0hCkTMN5SO/t8hKC0lKKyrx1p+lL2MZXL2+yXgEwXVyYC+Cpjxbf5y6JH/8
+ FWLzXnzEd8ob4fcw7GtU3pBZlKCC300+BYTijIo0hFMGBaAroSet+yva5Jc8z7dwPigr
+ r5DfVV1cKT6wW6ME0adFa5/ku4hr4gzOZT9Pl9xhysLVYvh/8dFoOx/+fEyuNugrhkfZ
+ ybvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1698170659; x=1698775459;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y4ZJNRTmNTL1WOhEJspODJ7VVJdfIGOloeUFcj7gz5g=;
- b=niFma25HbcBgxT1jgJqIxZwJZ18oaRFJ5oNt9Y9kQTTzn7WZ4OqtyStzsamVPLr5Zx
- itpTDxIaZCpY2NO82Z4sRGDt43STIiPNLHzUOT1Fk3KpSAmRKSwakXSag3bCVxbS6xr9
- cTYNPSFTLmK+C17Wxd0SAP7pGpGYOAIxFGOuwnTFmuBKXU13v3EVoGi+TeGOYO8ifShn
- T0Wtf++q0eFKJY0ndp82h7NBSrhrWwApq+AnQTcFlZQZ2rwidQnfleJj0aIe/0a5rbK8
- c1dDX0GXK7jVpx+6PjbeSrfBmt4bE8msRb8NoHH8sOWUsvSrAVjCgEzcTX1QX+JXTElV
- 9iHg==
-X-Gm-Message-State: AOJu0YxzjTs5Os3Sn67T4Zfp4Opej3K+uxSgWhpOuDZEA/QPS8afh2FM
- yn0ykz2qxYoSbvCBlg5ntuOeHouLkyy7+DaQQh/mzW+7RoN/YUNhYdOEcb5L
-X-Google-Smtp-Source: AGHT+IEJaLTG9z9ixafLXu2lrKgEahIYN1G2p1TP5EdEXfdz9WQ7H35gJT5EMrHozLEAlcQ2/jo0NZsJ7rKeRl5yZ24=
-X-Received: by 2002:a0d:e20a:0:b0:59b:fb69:1639 with SMTP id
- l10-20020a0de20a000000b0059bfb691639mr13940356ywe.32.1698170658992; Tue, 24
+ bh=gsBuwVocoOl2mRapch5QnQ+wlUNgWqtFQchYMQPg1mk=;
+ b=OYU8MCkeFJHma0S3KhfxGOaUFCsIE7PsbEHSXxMWc3PJWQvmGPwOj3aiL8OF3NRGp6
+ sVqSDN+YiuCLZOn5cnM/jCuNhqhkUdBhmxjKyL8szPdC+qdnR3+EZZ+2UFrlzuNVipSO
+ ic+xar3BQqdFSRPziIY85k6w3nlASe4cnF61WjcJR162Zhr8r7rzBovSYYbjBA0uWfs1
+ octPLbMBpzYVNEzr+b4Y94JeClnfvV4JfOfuI5EqYi28qAdIjDkZP4QfJAW2t8rev154
+ t0v4a5Sxqp+cf6Idx1nhle7+uKBGhrsD98NXZFkGhHtWSRNAEVZFmE/V0x/AHyavu2Mu
+ pMBA==
+X-Gm-Message-State: AOJu0Yx6eRQDj2O3d9nj89eEm6AiFl+aH2wDx6W4sK92U18uIvJudf07
+ 6iSEHAybbENvYrp/lk0nn+q4OV9XTPuMdRtsDb4lGg4M9617kM5Gr20ISD9e
+X-Google-Smtp-Source: AGHT+IF8NB/oI0QOZn447ufAbZcXxAW7Wc7aypkhEU1z6Wlfszjz5LdIhjMdx29Iul5vZRgWv//YKKPOLP3Mlb5tWG8=
+X-Received: by 2002:a0d:d6d7:0:b0:5a7:bb95:681c with SMTP id
+ y206-20020a0dd6d7000000b005a7bb95681cmr16494206ywd.36.1698170658996; Tue, 24
  Oct 2023 11:04:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
-In-Reply-To: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+References: <20231024115915.16565-1-tom@tom-fitzhenry.me.uk>
+In-Reply-To: <20231024115915.16565-1-tom@tom-fitzhenry.me.uk>
 From: Simon Glass <sjg@google.com>
-Date: Tue, 24 Oct 2023 11:03:25 -0700
-Message-ID: <CAPnjgZ1A8vyEUx2wiXqOCb8Kf9zP96wqy4kXanfKRR-uN6yOmg@mail.gmail.com>
-Subject: Re: quick question about TPM
-To: niek.nooijens@omron.com
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Date: Tue, 24 Oct 2023 11:03:16 -0700
+Message-ID: <CAPnjgZ3iV7H3Nkw8gfTAFcM7QGixBzZxg0=nNORZVL7U34d1gg@mail.gmail.com>
+Subject: Re: [PATCH] doc: gpt: fix example of echoing variable
+To: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,19 +83,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Niek,
-
-On Tue, 24 Oct 2023 at 04:51, niek.nooijens@omron.com
-<niek.nooijens@omron.com> wrote:
+On Tue, 24 Oct 2023 at 05:00, Tom Fitzhenry <tom@tom-fitzhenry.me.uk> wrote:
 >
-> Hi
+> ---
+>  doc/usage/cmd/gpt.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Just a quick question. I'm developing a platform using the socfpga_cyclone5_defconfig
-> everything is working, linux boots, but we decided to add a TPM to it's SPI bus.
-> For some reason the TPM support menu in the menuconfig is disabled and I can't seem to find out why, or which file disables it. can you point me in the right direction?
 
-The only thing 'config TPM' depends on is DM (driver model). Is that
-somehow disabled? Once you enable that, it should appear.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
+It could use 'print' instead, I suppose.
+
+
+> diff --git a/doc/usage/cmd/gpt.rst b/doc/usage/cmd/gpt.rst
+> index f6115ecb0ee..ea43218fa21 100644
+> --- a/doc/usage/cmd/gpt.rst
+> +++ b/doc/usage/cmd/gpt.rst
+> @@ -192,7 +192,7 @@ Get the information about the partition named 'rootfs'::
+>  Get the list of partition names on the disk::
+>
+>      => gpt enumerate
+> -    => echo gpt_partition_list
+> +    => echo ${gpt_partition_list}
+>      boot rootfs system-data [ext] user modules ramdisk
+>
+>
+> --
+> 2.42.0
+>
