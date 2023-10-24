@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035BDC07545
-	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF8EC07545
+	for <u-boot@archiver.kernel.org>; Tue, 24 Oct 2023 18:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AF97879B0;
+	by phobos.denx.de (Postfix) with ESMTP id C53C0879B4;
 	Tue, 24 Oct 2023 20:04:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S6IuZDvA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9oOInpQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87C74879B8; Tue, 24 Oct 2023 20:04:27 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id E63CE879A9; Tue, 24 Oct 2023 20:04:27 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8580E8798C
+ by phobos.denx.de (Postfix) with ESMTPS id 48BD5879AD
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a7fb84f6ceso46327207b3.1
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5ac376d311aso22783607b3.1
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 11:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1698170659; x=1698775459; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MQohYwNVHV1ESqEqN3kIHeQaANym8zINnLZ0JKVLeCg=;
- b=S6IuZDvAm/ggNmNBPtNGQFHpktNUzpA3yTC232faZ40B8iDGX+yBJoHYRQC00Zd9OE
- 9/P0vmKIBL2MkMPikEvwPHayp4UfwDT8ObqkLcyXjUfS/cpjbfV7HAGnxZMH/LiNWXPA
- j2LpQUW1lBYTFTo+6BAqPVSb8+treiFitPG0A=
+ bh=fcB3QuQl0TbkTY3efo4pbFPWmuE7L/ltddyabV1TfdY=;
+ b=L9oOInpQ4TQ+GX6RRrx5DL52xO6NJj79PXi5ojsXkVvLA8C8R56SDzYn+Qai2/DX+d
+ 9Hcpl7NQbn16a6diJ7VjUkU706YBLlkhN4gMYVsJhuzS39+Qpp3LyNF41q+6eo9FTsa1
+ qNZ4QkXru3R7jFn0gekSQXMabaqan1neAqRo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1698170659; x=1698775459;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MQohYwNVHV1ESqEqN3kIHeQaANym8zINnLZ0JKVLeCg=;
- b=bEdcEbvQ8H8WfTGuaZpRUiaetk4WW069SWlYNLl/Ib1tlVALn6kZwjIV8RusaqeZRh
- OqsukkVmRhwCXmnvkOAaZQbGPR7Fjjw/5tSzLXYm3qdYZn27W9JaBNOC8EhDPClrdy8r
- TmFGhvgD9OHr+0l9Oxgo1FzO5QJNSQUuJMocyiRoNy++cRpQk6wElICpWrQwZPo+StZy
- mUcBDzWf0C/FMCjuNH3RqcwKNRolNNB6PmidSlCrMZL4bCXQwGJNm5UsW9FoIyYxPMUX
- W8dnpRxqrEUgHZ+rD5FLZgOxteykld5BNjskXssc72qVXrQZbQv32sjVFzHKePB0fSlx
- qSNA==
-X-Gm-Message-State: AOJu0YzFk3Ias1jkNpVgDbMu1maFAETQQG/UhtdyMXqeksMEiaM4UEcV
- muzPZRzcC5AcTH8jCzPCApE1inECHO09BFzZUrCt/w==
-X-Google-Smtp-Source: AGHT+IEekTL7dud9stbtsNZQZ5mHvLiiTwdb/IFFfeqoi25ZpCRmfPjC9HFGgUcyZVvaJqYou720eOPCwOrq+IrwA9g=
-X-Received: by 2002:a0d:d5c4:0:b0:59e:7f14:4b48 with SMTP id
- x187-20020a0dd5c4000000b0059e7f144b48mr12561227ywd.41.1698170658997; Tue, 24
- Oct 2023 11:04:18 -0700 (PDT)
+ bh=fcB3QuQl0TbkTY3efo4pbFPWmuE7L/ltddyabV1TfdY=;
+ b=sCbuiuphD8Fp3KaLKbmeNfu6qAVXJihCm3MdP6E7YuJo0VpBDZGfExLI1+LFwtaiO2
+ a5i0OeEAyD7EO2mNJKN3Ugg8xMgdcfuteG4KeYPAWOqkKSCpntjgGH2/bdHIghcJ8TGQ
+ 9PPsMO0ncycW8iF6LkG/sq0uxsK7oZFP3mZq2JHgQubQEbSbuhD28SnKx/Bn3GQ3Hbjs
+ mKMV2V0rZ2HX1n+L7OzE1qzu7+DwZwl2jKf6lB00r+usWkWy6s71EoEcgW8XrthyKD+J
+ 7wq7rX4vYnO0RmS/ADcI5gE5IjskzPOpZQqIibduuOp47WBuNhyJ5QOxJdBVKnXRz15r
+ v7nw==
+X-Gm-Message-State: AOJu0YxlTofqf30I8LpC3jD7IdpOH4zogQAkwWeZJBmNKuoRQx/2FSGu
+ e+2tk+VjC0XDUpOIE0jB9ByPw99732/dRV/p3tEmDg==
+X-Google-Smtp-Source: AGHT+IFIL/Y04483DgTNa1tUwMIUxXBMY/0pjyjLGepVaE2uxnVsHxEWg+23dXsQV8AMB6DUEx8FT3zU6NKGFmeqgqE=
+X-Received: by 2002:a0d:cc41:0:b0:5a7:c777:2be1 with SMTP id
+ o62-20020a0dcc41000000b005a7c7772be1mr13406384ywd.11.1698170659044; Tue, 24
+ Oct 2023 11:04:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024071916.39523-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231024071916.39523-1-heinrich.schuchardt@canonical.com>
+References: <20231023080103.3780998-1-n-francis@ti.com>
+ <20231023080103.3780998-2-n-francis@ti.com>
+In-Reply-To: <20231023080103.3780998-2-n-francis@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 24 Oct 2023 11:03:34 -0700
-Message-ID: <CAPnjgZ1vRBwW2zuSo63PFEUzRCJtU+cgeiWv1v_+-t1iWmNdOQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] mkimage: do not write incorrect error message
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Ralph Siemsen <ralph.siemsen@linaro.org>, u-boot@lists.denx.de
+Date: Tue, 24 Oct 2023 11:03:31 -0700
+Message-ID: <CAPnjgZ1nA0bOBW4Kk+eFSJS7d=WF3DQBgVWauXTKvjdS_P6Qcg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] binman: openssl: x509: ti_secure_rom: Add support
+ for bootcore_opts
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: trini@konsulko.com, alpernebiyasak@gmail.com, u-boot@lists.denx.de, 
+ vigneshr@ti.com, u-kumar1@ti.com, a-nandan@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,24 +83,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 24 Oct 2023 at 00:19, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Mon, 23 Oct 2023 at 01:01, Neha Malcom Francis <n-francis@ti.com> wrote:
 >
-> When running 'mkimage -l' is called for a valid StarFive file an error
-> message "Error: invalid marker bytes" is written by the Renesas SPKG
-> driver.
+> According to the TRMs of K3 platform of devices, the ROM boot image
+> format specifies a "Core Options Field" that provides the capability to
+> set the boot core in lockstep when set to 0 or to split mode when set
+> to 2. Add support for providing the same from the binman DTS. Also
+> modify existing test case for ensuring future coverage.
 >
-> mkimage -l may be invoked without specifying an image type. In this case
-> mkimage iterates over all image type drivers to find the one that matches.
-> None of the non-matching drivers should write an error message.
->
-> Fix the Renesas SPKG driver.
->
-> Fixes: afdfcb11f97c ("tools: spkgimage: add Renesas SPKG format")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  tools/renesas_spkgimage.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
+> Section 4.5.4.1 Boot Info
 >
+> Changes in v4:
+>         - corrected function comments, 0 for lockstep, 2 for split mode
+>
+> Changes in v3:
+>         - updated function comments
+>         - removed inconsistency in setting bootcore_opts to 32
+>
+> Changes in v2:
+>         - included TRM link in commit message
+>
+>  tools/binman/btool/openssl.py           |  6 ++++--
+>  tools/binman/entries.rst                |  1 +
+>  tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
+>  tools/binman/etype/x509_cert.py         |  3 ++-
+>  tools/binman/test/297_ti_secure_rom.dts |  1 +
+>  5 files changed, 17 insertions(+), 5 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
