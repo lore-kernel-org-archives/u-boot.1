@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB17C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 20:58:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EECE6C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 21:05:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3EDE87A5B;
-	Wed, 25 Oct 2023 22:58:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 56AE8874FC;
+	Wed, 25 Oct 2023 23:05:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V5Tm/IZA";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="U5mJ7g96";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4E79874FF; Wed, 25 Oct 2023 22:58:51 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 762E4874D7; Wed, 25 Oct 2023 23:05:24 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 549E0874F6
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 22:58:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48FA0874D7
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 23:05:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2c50cd16f3bso2131081fa.2
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 13:58:49 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-53e751aeb3cso232545a12.2
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 14:05:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698267528; x=1698872328; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1698267921; x=1698872721; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5E+y3Sa5hhlUIO0lLz8Lj8Z/SZXQuFdPCCdWtajuYnA=;
- b=V5Tm/IZAiC4ikWXO5PzY1YCNmv2sSAuZcIi/CM2HdKwK2UJGY2GXIfuXflRZ3281D3
- 5Ktk97wBan7aujPLmsQMeZmWs+NNaa1GG4gP76mgOkTHbdEK7wW9ZaXVlSjeMDXYpoqd
- KQaFh7wI1+Iqm8Wrtxfcs+G1/cpO9edpRoloE=
+ bh=ulOmT9dlBnIgHg5zilaRyzBIwXeH7NHnajzCuWOZx5Q=;
+ b=U5mJ7g96maXv1IuMXNleQrUvlKaM2ztQqcoooqmRODr+MDlSbySpmIXicpilMa+TA+
+ BnTeQGGVjQfL9VS8H56BCkYdlhxDxTRpj/ftz7SJYBY5Vilwj1RB844jpBaOopb5px4k
+ SQsD3pLo45sRcoPBZJ/+tvUeLpI/sgGe3uFIUe/09phKHOizlGQp35mE54Ogdsnb/MEP
+ 3HzwwoevHVdoPbrKMbkzYLUJ4KbDfWgpestGhCeah3BvRpEezD8seLBntPhdKRFpIrMs
+ gvrOWuMIeToQZ4xYP4weSTPPvoe3SbFXPd/iYBegpmHF546jmAznTlnMA3mDntzEFF0G
+ 4Ryg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698267528; x=1698872328;
+ d=1e100.net; s=20230601; t=1698267921; x=1698872721;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5E+y3Sa5hhlUIO0lLz8Lj8Z/SZXQuFdPCCdWtajuYnA=;
- b=nn3v5BTSVRXfNDFZZmdCdbIyS3TAStExSitNm5tuz8d1UyVIU8rjh7likExojgl7h/
- OW32C/INgu5bcPsazdu2jLB/qd5UOWFljEiK/cNrmeLTXUUF4Ttwx7Ev9hS4iz6j/vc3
- GJ5dHi9qSJJe7Ql86ZkxbxaVLEoLMHqx0ZJfs+/+DudBBN3KnaF8qz6Pi9BwYAGinqDF
- plhcf7xn9JjPA154lzAle2XRdioYAO5ECMJpQt5ku54KkzWZW2YcBSZYA4DJ2sLLsbH7
- uXCLQlTXdmjUw1A0NoMrwzElIqUX3hbceaRpusaihz4RFrCuk6y/iaF+odXGFRrX3BCT
- wd/A==
-X-Gm-Message-State: AOJu0YxcIFsp3QyuTEU0Ay5WrwUAV0UJDLdAqdFxgFua3XmC9ruqIqp5
- HPu7zM5Lpe6piEMW5Q3k9WTBq0AHJAfR1OZRKCzsbQ==
-X-Google-Smtp-Source: AGHT+IFIpzj33tVTxfmSbifouoWpSglC2W9rs1RwuI9tQBH2J4n3lYoTMUopFM/zLfxYuDpMHPxKVmRlPbKDytQm8m4=
-X-Received: by 2002:a2e:3018:0:b0:2c5:1623:66b8 with SMTP id
- w24-20020a2e3018000000b002c5162366b8mr11230277ljw.12.1698267528156; Wed, 25
- Oct 2023 13:58:48 -0700 (PDT)
+ bh=ulOmT9dlBnIgHg5zilaRyzBIwXeH7NHnajzCuWOZx5Q=;
+ b=RUIFTPl5m0K+iqQ+Wy4fmG0vFHz2CV0Z8cdL0FB/x5UbHciNxVbQMqPI+Dg/pqwlKe
+ ZqObrh1bmQAKrB3g1g6BjU/wVVX1RqQ2NG/JoHTYgiW/Ml2imViposqxZz+mAr8exija
+ ZCtHkJesBHA415wAd2kEdST31JybOWQCJ0iD7H5+ldJv/NsiB2F/ESFtRVZgW5CHpRUe
+ APa+P0JAykujsYvnvKPfBD7dY+Tm6vi7D9qubPAM2f8w+O36aUjfQOFoaiMGWiq4TPHO
+ EUL9gIWtgwPrfXxXHtxCZkImb6pl0YwWrrgpJ0fSI/6d1FWuUq7aSvLrq8P5PcS0gFIc
+ IBLw==
+X-Gm-Message-State: AOJu0Yy2MfDaQDtV/kCq1X+dOlZkn6+8ac1B9b9o/us7BfT2k+qyn6fi
+ qlI2zONS6oPi4qLk/vU3x6fuV5DYVZaf+4kya49Mug==
+X-Google-Smtp-Source: AGHT+IGIVzOrVZdSFJlyL63AJmZf3PiFfblxeQeWMh3QSeaXjmYgiKyWFMissSvZ0r6rXsHv1hDx1WbGG4i8KmDH+6I=
+X-Received: by 2002:a50:f681:0:b0:53e:fd81:67ab with SMTP id
+ d1-20020a50f681000000b0053efd8167abmr10418784edn.6.1698267921453; Wed, 25 Oct
+ 2023 14:05:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231009220436.2164245-1-sjg@chromium.org>
- <20231009220436.2164245-2-sjg@chromium.org>
- <20231024161644.GB3707756-robh@kernel.org>
- <CAPnjgZ0G3W0a1T5TMuS_8L+4OwqFU3xXBKPnTs+MDDFBWYP_VA@mail.gmail.com>
- <20231025101126.2234a74c@xps-13>
-In-Reply-To: <20231025101126.2234a74c@xps-13>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 25 Oct 2023 20:58:36 +0000
-Message-ID: <CAPnjgZ0GH-06xA3ij2ZBV_zDwPKa3m=wpHrsj8oKNS=8S0FvHA@mail.gmail.com>
-Subject: Re: [PATCH v4 2/3] dt-bindings: mtd: binman-partition: Add binman
- compatibles
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
- linux-mtd@lists.infradead.org, Michael Walle <mwalle@kernel.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Richard Weinberger <richard@nod.at>, 
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
+ <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
+ <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
+ <87a5s6qwfe.fsf@bloch.sibelius.xs4all.nl>
+ <10833e97-46ab-4a14-8e4a-c6e3dd5eb376@canonical.com>
+In-Reply-To: <10833e97-46ab-4a14-8e4a-c6e3dd5eb376@canonical.com>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 25 Oct 2023 21:05:03 +0000
+Message-ID: <CAPnjgZ0u7fPkjKAca8KOdE8Zib9QGh57ieZDgh-j80MQGntLWw@mail.gmail.com>
+Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, ilias.apalodimas@linaro.org, 
+ u-boot@lists.denx.de, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,206 +89,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
+Hi Heinrich,
 
-On Wed, 25 Oct 2023 at 08:11, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
+On Wed, 25 Oct 2023 at 20:51, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hi Simon,
->
-> sjg@chromium.org wrote on Tue, 24 Oct 2023 14:40:54 -0700:
->
-> > Hi Rob,
+> On 10/25/23 22:28, Mark Kettenis wrote:
+> >> Date: Wed, 25 Oct 2023 21:57:44 +0200
+> >> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>
+> >> On 10/25/23 20:23, Simon Glass wrote:
+> >>> Hi Heinrich,
+> >>>
+> >>> On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
+> >>>>
+> >>>> Hi Heinrich,
+> >>>>
+> >>>> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
+> >>>> <heinrich.schuchardt@canonical.com> wrote:
+> >>>>>
+> >>>>> Forward and backward compatibility of Linux kernel device-trees is
+> >>>>> sometimes missing. One solution approach is to load a kernel specific
+> >>>>> device-tree. This can either be done via a U-Boot scripts (like the one
+> >>>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> >>>>> The boot loader approach currently requires to know the device-tree name
+> >>>>> before first boot which makes it unusable for generic images.
+> >>>>>
+> >>>>> Expose the device-tree file name as EFI variable FdtFile.
+> >>>>> This will allow bootloaders to load a kernel specific device-tree.
+> >>>>
+> >>>> kernel-specific
+> >>>>
+> >>>>>
+> >>>>> The variable will not be exposed on ACPI based systems or if the
+> >>>>> environment variable fdtfile is not defined.
+> >>>>>
+> >>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >>>>> ---
+> >>>>> v4:
+> >>>>>           Generalize the description of the content of $fdtfile.
+> >>>>> v3:
+> >>>>>           Add documentation
+> >>>>> v2:
+> >>>>>           Use a unique GUID to enable future U-Boot independent
+> >>>>>           standardization.
+> >>>>>           Do not try to add the variable on ACPI based systems.
+> >>>>> ---
+> >>>>>    doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+> >>>>>    include/efi_loader.h       |  5 +++++
+> >>>>>    lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+> >>>>>    3 files changed, 49 insertions(+)
+> >>>>>
+> >>>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> >>>>> index fb16ac743a..702c490831 100644
+> >>>>> --- a/doc/develop/uefi/uefi.rst
+> >>>>> +++ b/doc/develop/uefi/uefi.rst
+> >>>>> @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
+> >>>>>
+> >>>>>        Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
+> >>>>>
+> >>>>> +EFI variable FdtFile
+> >>>>> +~~~~~~~~~~~~~~~~~~~~
+> >>>>> +
+> >>>>> +Ideally U-Boot would always expose a device-tree that can be used for booting
+> >>>>> +any operating systems. Unfortunately operating systems like Linux sometimes
+> >>>>> +break forward and backward compatibility. In this case there is a need to load
+> >>>>> +an operating system version specific device-tree.
+> >>>>
+> >>>> This seems to be a strong statement. Given the effort that goes into
+> >>>> the DT, changes are supposed to be backwards-compatible. Is this
+> >>>> generally true, or is it just that we want an up-to-date DT for the
+> >>>> kernel to enable new features?
+> >>>
+> >>> Did you see this comment?
+> >>
+> >> It would have been nice to put the person which made that comment on copy.
+> >>
+> >> The truth lies in the world "supposed":
+> >>
+> >> The idea of a device-tree that never needs to change is quite old and
+> >> never became true on ARM devices.
+> >>
+> >> We all know Linux tends to break both forward and backward compatibility
+> >> of device-trees. Here is a nice example:
+> >>
+> >> d0c6707ca423 ("arm64: dts: allwinner: H5: NanoPi Neo Plus2: phy-mode
+> >> rgmii-id")
+> >>
+> >> Driver changes broke forward and backwards compatibility of a lot of
+> >> Allwinner boards.
 > >
-> > On Tue, 24 Oct 2023 at 09:16, Rob Herring <robh@kernel.org> wrote:
-> > >
-> > > On Mon, Oct 09, 2023 at 04:04:14PM -0600, Simon Glass wrote:
-> > > > Add two compatible for binman entries, as a starting point for the
-> > > > schema.
-> > > >
-> > > > Note that, after discussion on v2, we decided to keep the existing
-> > > > meaning of label so as not to require changes to existing userspace
-> > > > software when moving to use binman nodes to specify the firmware
-> > > > layout.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > Changes in v4:
-> > > > - Correct selection of multiple compatible strings
-> > > >
-> > > > Changes in v3:
-> > > > - Drop fixed-partitions from the example
-> > > > - Use compatible instead of label
-> > > >
-> > > > Changes in v2:
-> > > > - Use plain partition@xxx for the node name
-> > > >
-> > > >  .../mtd/partitions/binman-partition.yaml      | 49 +++++++++++++++++++
-> > > >  1 file changed, 49 insertions(+)
-> > > >  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-> > > >
-> > > > diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-> > > > new file mode 100644
-> > > > index 000000000000..35a320359ec1
-> > > > --- /dev/null
-> > > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-> > > > @@ -0,0 +1,49 @@
-> > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> > > > +# Copyright 2023 Google LLC
-> > > > +
-> > > > +%YAML 1.2
-> > > > +---
-> > > > +$id: http://devicetree.org/schemas/mtd/partitions/binman-partition.yaml#
-> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > +
-> > > > +title: Binman partition
-> > > > +
-> > > > +maintainers:
-> > > > +  - Simon Glass <sjg@chromium.org>
-> > > > +
-> > > > +select: false
-> > >
-> > > So this schema is never used. 'select: false' is only useful if
-> > > something else if referencing the schema.
-> >
-> > OK. Is there a user guide to this somewhere? I really don't understand
-> > it very well.
+> > Well, that happened in 2020.  Things have gotten better over time.
 >
-> The example-schema.yaml at the root of the dt-bindings directory is
-> well commented.
+> The 2020 event struck me because a Linux kernel would not even be
+> compatible with the device-tree of the same kernel release.
+>
+> This year I once again had issues with booting an Allwinner board with a
+> device-tree from a different Debian kernel version. Both backward and
+> forward compatibility were broken. But at least I could boot with a
+> matching device-tree.
 
-OK I had forgotten about that, thank you.
+Oh dear.
 
 >
-> > > > +description: |
-> > > > +  This corresponds to a binman 'entry'. It is a single partition which holds
-> > > > +  data of a defined type.
-> > > > +
-> > > > +allOf:
-> > > > +  - $ref: /schemas/mtd/partitions/partition.yaml#
-> > > > +
-> > > > +properties:
-> > > > +  compatible:
-> > > > +    oneOf:
-> > > > +      - const: binman,entry     # generic binman entry
-> > >
-> > > 'binman' is not a vendor. You could add it if you think that's useful.
-> > > Probably not with only 1 case...
 > >
-> > I think it is best to use this for generic things implemented by
-> > binman, rather than some other project. For example, binman supports a
-> > 'fill' region. It also supports sections which are groups of
-> > sub-entries. So we will likely start with half a dozen of these and it
-> > will likely grow: binman,fill, binman,section, binman,files
+> >> Distros will continue to load the device-tree that matches the kernel to
+> >> get the best possible board support and need to do this efficiently.
 > >
-> > If we don't use 'binman', what do you suggest?
+> > Right.  Even if there is full backward/forward compatibility, you
+> > probably want the latest device-tree to make sure you get the most
+> > complete hardware support.
 > >
-> > >
-> > > > +      - items:
-> > > > +          - const: u-boot       # u-boot.bin from U-Boot project
-> > > > +          - const: atf-bl31     # bl31.bin or bl31.elf from TF-A project
-> > >
-> > > Probably should use the new 'tfa' rather than old 'atf'. Is this the
-> > > only binary for TFA? The naming seems inconsistent in that every image
-> > > goes in (or can go in) a bl?? section. Why does TFA have it but u-boot
-> > > doesn't? Perhaps BL?? is orthogonal to defining what is in each
-> > > partition. Perhaps someone more familar with all this than I am can
-> > > comment.
-> >
-> > From what I can tell TF-A can produce all sorts of binaries, of which
-> > bl31 is one. U-Boot can also produce lots of binaries, but its naming
-> > is different (u-boot, u-boot-spl, etc.). Bear in mind that U-Boot is
-> > used on ARM, where this terminology is defined, and on x86 (for
-> > example), where it is not.
-> >
-> > >
-> > > Once you actually test this, you'll find you are specifying:
-> > >
-> > > compatible = "u-boot", "atf-bl31";
-> >
-> > I don't understand that, sorry. I'll send a v5 and see if the problem goes away.
+> > But this shouldn't be used as an argument to not care about
+> > backward/forward compatibility.
 >
-> For me this means the partition contains U-Boot and TF-A, which is
-> probably not what you want. I believe Rob is saying that how you define
-> the compatible property above does not match the examples below. Did
-> you run make dt_binding_check?
+> Nobody in this thread suggested to not care about forward and backward
+> compatibility.
 
-Yes, but I have not been able to install the correct version with 'pip
-install'. So the check about not being an object did not appear for
-me.
+The key thing we need to agree on is that the compatible string is the
+source of truth for booting. You check the model compatible and search
+for a matching DT with the best match, taking into account board
+revisions, etc. It is defined to be correct. If for some reason this
+process is wrong, then the board *should not boot*.
 
-I have now figured out how to run the latest version locally with the
-Linux validation, so will fix these problems in v6.
+So anything which suggests that the above is not correct, or doesn't
+always work, or doesn't work well with EFI...is really going in the
+wrong direction.
 
->
-> Also, do you really need to say which software project provides a
-> component? Would using "bl31", "bl33", etc be enough? Or maybe you
-> could have eg. "bl31-tf-a" and "bl31-u-boot-spl" (in this order) for
-> clarity? This way one knows which stage a partition contains and also
-> the software project which provided it.
+Of course there will be workarounds, like this one, but the 'correct'
+way of doing it must still work. Nor is it 'slow' to do this, as I
+have demonstrated.
 
-The software project tells binman the filename to pick up and any
-processing it might need to use. It is quite an important element of
-this schema. Bear in mind that Binman assembles the image...so it must
-read in the various files that are needed.
-
-The bl31 terminology is used by ARM but not x86. So using bl31 in the
-context of U-Boot would be quite confusing on non-ARM SoCs.
-
-For the stage (or what I call Phase), I have not considered that yet.
-The purpose of adding 'bl31' is because TF-A (like U-Boot) produces a
-few binaries so we need to specify which one is wanted, which in turn
-leads to the filename. We do have the concept of a boot phase in DT
-(bootph-pre-ram for example), so I hope to integrate that at some
-point, for runtime use. But for the purposes of assembling the image,
-it doesn't matter when the phase runs...all that matters is being able
-to read in the files which need to be assembled into the image.
-
->
-> To be honest I still don't fully get where you want to go and I believe
-> a more complete schema would probably help, with different examples, to
-> catch what you need and why.
-
-The full schema is described at [1] and [2]. Note that this may need
-to change as I slowly upstream it. The top of [1] describes the
-motivation for binman and there is a more detailed talk at [3].
-
-So far I am just trying to describe two things:
-
-- U-Boot (u-boot.bin)
-- TF-A BL31 (bl31.elf)
-
-I am doing things in baby steps because even that is quite a
-challenge. But I think the linked docs should help explain where it is
-heading.
-
->
-> > > > +additionalProperties: false
-> > > > +
-> > > > +examples:
-> > > > +  - |
-> > > > +    partitions {
-> > > > +        compatible = "binman";
-> > > > +        #address-cells = <1>;
-> > > > +        #size-cells = <1>;
-> > > > +
-> > > > +        partition@100000 {
-> > > > +            compatible = "u-boot";
-> > > > +            reg = <0x100000 0xf00000>;
-> > > > +        };
-> > > > +
-> > > > +        partition@200000 {
-> > > > +            compatible = "atf-bl31";
-> > > > +            reg = <0x200000 0x100000>;
-> > > > +        };
-> > > > +    };
-> > > > --
-> > > > 2.42.0.609.gbb76f46606-goog
-> > > >
+Perhaps we should add a compatible check into U-Boot, to make sure we
+are not choosing the wrong DT? At least for me, trying to get the
+filename right is a bit of a pain, with so many characters looking the
+same.
 
 Regards,
-SImon
-
-[1] https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
-[2] https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#entry-documentation
-[3] https://elinux.org/Boot_Loaders#U-Boot
+Simon
