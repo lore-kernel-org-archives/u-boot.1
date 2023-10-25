@@ -4,139 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38114C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 16:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B087C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 16:24:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5133C87AD6;
-	Wed, 25 Oct 2023 18:01:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 94DB287B0F;
+	Wed, 25 Oct 2023 18:24:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="UUripsE5";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="hcC/ZfOi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B1DE87B04; Wed, 25 Oct 2023 18:01:39 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EE71387B05; Wed, 25 Oct 2023 18:24:02 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ADC187B07
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 18:01:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id B586187B05
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 18:23:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1698249696;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RksRL/x3bvH2GLwdRRgRdxdW+e6/om4Erp08vgnFX1M=;
- b=UUripsE5tl15ZZ0J9OeeAW8l8jKzZGfBt/T+7zaCu4EwIDThHUCmVte6G+FsO7nw8sjRI+
- uBMtSFf1H+uooGN+YHOvacBtRmpFhhp7whLI6iEx6s/6/8dDxoIPkdjYATWiZ6fqsMazFW
- lbWpsS70f+feXfMRWPV/f+WEEU2AxPw=
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com
- (mail-gv0che01lp2041.outbound.protection.outlook.com [104.47.22.41]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-62-pLuD-lDWPjOCZ9yaq-2w6A-1; Wed, 25 Oct 2023 18:01:33 +0200
-X-MC-Unique: pLuD-lDWPjOCZ9yaq-2w6A-1
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- GV0P278MB1160.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:4c::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6907.26; Wed, 25 Oct 2023 16:01:32 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b%2]) with mapi id 15.20.6907.032; Wed, 25 Oct 2023
- 16:01:32 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "festevam@denx.de" <festevam@denx.de>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>
-Subject: Re: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Topic: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Index: AQHaBk0pzkBxey4AX0CR0vSGBaUJ0LBYqXaAgAAMigCAABTWgIAAIPoAgAAVaICAAas2AA==
-Date: Wed, 25 Oct 2023 16:01:31 +0000
-Message-ID: <2442c84e27ac3271ae17d1e7b272d624cdbf22cf.camel@toradex.com>
-References: <6de4ef437445c78317e7d8f4f07e47502caed029.camel@toradex.com>
- <cb3e2ea6-b417-4736-9639-b51a04815f7a@prevas.dk>
- <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
- <e4821c38-ead6-4a51-a442-2c782e638024@prevas.dk>
- <2832e90451ce39c3c7cef34ec5d5c20f02d3a652.camel@toradex.com>
- <4faf5846-9aa8-4396-84fa-8d36c9b4fef9@prevas.dk>
-In-Reply-To: <4faf5846-9aa8-4396-84fa-8d36c9b4fef9@prevas.dk>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|GV0P278MB1160:EE_
-x-ms-office365-filtering-correlation-id: 93574564-72de-48fd-9b7f-08dbd573a81b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: hKWRB6Xh/fB8KjlIusRDQwIMyu7baZ3bCEu7b7E42i7HpbXZAglVWas8oap6Bv6xJt7C4jvj1XihXN+cHDDCrxtHyLSPuOluyg6FiySLFc4r72W83MrLeL7UKEC7mW5HbNEk8Ggl7XW6dAkPbGQys0wMhxU8/joiZArtLtsadOhzENEx9NEtKc8oc5y/OYmnIZ6jGluych8wCRsX2WldS3PSma5tRPiUFJaPUOrTkCUbvyhVGEEhSqFej1Za4DK4lCN9udsyKxd3/yeLuoTZCqOmiYALvGr7ruGevHDo9q6HsNEbcl/JYltB5Q9d04xMDeXNjwJQeSkM/TQgAVv92EP4iggs3wRSToCGG8gAiIXZ6GSlN2F/DuA9ueVWmZt4u+TYMUIezx2WoPVdnenpi9XrrB1qFMccYWsptU81HSdKxzT476zpltpUVrCnp+IuBTgQLpy62ARvk3NYuuLwR3LkcrMFjjHqfeX4ztE0cyGLIidPgvvjHa0ZhxbcySrss1hzhuDhlyxK42zSdPBDF8VHwHrRrjw+SntukTxuNH/2PDATHK6cT1gFihah4QA88CiQamCotdPeCd802hXyNn8pna8CnzQY6dSa2loxZkxdOc6N09TW63QkNUh/5khE
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(39850400004)(136003)(346002)(366004)(376002)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(5660300002)(26005)(38100700002)(83380400001)(6512007)(2616005)(4001150100001)(122000001)(36756003)(86362001)(38070700009)(2906002)(71200400001)(41300700001)(76116006)(64756008)(6506007)(110136005)(54906003)(316002)(66556008)(66446008)(66476007)(6486002)(8936002)(478600001)(91956017)(66946007)(44832011)(4326008)(8676002);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?SFhobnlqNXJOZENDaE1mbk5PVlRIdGdnNTViV3pFOVp6MjMvOGZTVkR0cFV1?=
- =?utf-8?B?NzY2RXkycFZUZE9lS3RDckxibkQ5RUVySzNMVHVoNVZNSGpwM1Vqc2c2MjEv?=
- =?utf-8?B?a2tiemZwUEc3Q3JQMWRZM09Ebi8wQkhoOEJESXROV2tTY203ODV2WkdHcGcy?=
- =?utf-8?B?YnBxSDFHRmxoU0ZjcTBJMzA2dUxQOVFxdjl5MktjODVzR3FMbGtRdnJHbGx0?=
- =?utf-8?B?UUszemh3MjgvaVJKa2NvVm1XdnB3eW15eFphWUtBTlNFUUxGRUtRbnA1UzA1?=
- =?utf-8?B?c2dxQlhiTGNqNUlEWG9CQXNXUnVhTjRpSHc3QmVDRTVENmJOTkg0eUpUZERs?=
- =?utf-8?B?aVBmTk55ajV0YUJEMm5mT3pQVUVmNkJVTktmUzBmRm93UkJPM3BqRkkvZlNC?=
- =?utf-8?B?cE1vMDBHaWg2eVJOWTNKS09oYWZjd1pGSDdqVmZIdytEcXZEdHhIQTZJMU1E?=
- =?utf-8?B?cjhqTlVHdmhJUEoyR1l2Z0YzMUxsYzF6Q1ZqSDNobnA0c2krajlNQm83OFEy?=
- =?utf-8?B?SkQ5U1dqU0JmK0RZeG1rcjhSUE5WK3RJcEpCdzZqdGJiWEJlU1FmSzEzc3R0?=
- =?utf-8?B?UDdrc1NRT2pUVmY3Q0pRUG9BTkhCSFcxZEQ0eDFLTW4zSVRpZFllYS85SFRx?=
- =?utf-8?B?WC83bjVNaWNTMnBkTmpISEhUOGVxc2ZoTDBERXR4UEFHdkVseE14bXlhQ2Y5?=
- =?utf-8?B?R01QWTNmZm1vUWFQY1NUS3RjZmRCekRmd0NpVnJYYmxqY1p4QllYU3NPdlBC?=
- =?utf-8?B?bnJvdG5IbFk1S1RpdE9ONDJJS3dlRE5NdWNvVlpySENlaFUwSHFjQWN5WUlu?=
- =?utf-8?B?aklJM3hudVNocFJVckZnTy84OWYwZG44YUg3QXZZZjhSaS8rSHR2dUdyZTZV?=
- =?utf-8?B?M0hNMXJ6cWZXUU1naEJvcFFpbm0zL0VCYXoydlRwRWZOTDdsQXVhazQ2L0hZ?=
- =?utf-8?B?NG5zckxqb2NhMUhmYmVGdnBEellqUDltN0tyaVRqRWppZlB1QzNoTGFLZGlh?=
- =?utf-8?B?aSt5ek1Vbk9tNC82R3h2ZU9GRjgxaytXUnJ5UnhjZzNQUldDV0xadm9Mandp?=
- =?utf-8?B?K1dJUklsMCtDWWY1Q2dMZ3dIeTNlVkJSQTRVK2xjTWxhNlJZN1dYWFUvbEtD?=
- =?utf-8?B?N2pKQmRBQ1lUVk0vTFk4emFMUkRFMEtpNFlnVFRQTjlnSmNOV3g0bWhOVWp3?=
- =?utf-8?B?clhDcW9XME5kNGgvQXpNcHRLQWxFSGJXcU9uRHo4VU5aWnZDTmJIMjI1YWFz?=
- =?utf-8?B?R0txUERiMlcwenNSMzlkeUFWMUNJRnc4SUJmVVgzTUtnbEg5MDlQYkFlQ1hF?=
- =?utf-8?B?Y1dtai82c2I4NU9ZanNjZjNsVS9OSGZqWHp0dXlrTjBwU0EvTm5MeXlNNVkw?=
- =?utf-8?B?ZEk3Y0N0ZmNSRmNXTFZuQldsN0lEd2M0VHNoK0tNT3lYemNQcWFWS3FFR2NP?=
- =?utf-8?B?bU9raUlKRXZ3ZWxGVTlHb21JL01ZZ3I3T3luMDE2aWM2QVA3MDdITDZRd1Vh?=
- =?utf-8?B?dDAxWkJhVytsMXpFQXovOU45enUxdG1QT3M2ZVJMYUZMYW9IdkZRMFJLdTdS?=
- =?utf-8?B?cXVXTjlmSW51TnZiaTZFTHRGbzZJdmR6bldWVzhGNWRCS09vbngrcXJLUEFF?=
- =?utf-8?B?UXR2dHhzekRwdzR0OVhRMlYxd01EbXliblRLdzdyd2VpODNQaFJQbE1UeWl0?=
- =?utf-8?B?aWIyNWVrd0E5b1Z4VWZwbnhubUk0ZHVvTGs1RU1WV0huOWhSRHY4WDUwSENj?=
- =?utf-8?B?T29RUzJ2WXIzdXRseG1MUUFtNGhwSHp1Y1ZRQyszN0dmWTAvRy9PbU9ZcDF3?=
- =?utf-8?B?Um5xWldHNUt4dm10Q2V1L0RGZ0ZRU1ArWGhUN2ZweGgvWXczSDR2OE5GQ0xn?=
- =?utf-8?B?V21lREZBVFVVa1VDa3crcjZTQmVjUmc0MDBQbnc2MmRRN0dKL05hdjYyRmZ0?=
- =?utf-8?B?dUp2aFZvTlZ1a2ZtQVd0ZXNETVNyeTU3UTR3N2p5bFU2WTRXS0FMMW53cExW?=
- =?utf-8?B?aTdFdTZPVzBKZ2taaEl5a21zVlRTaDY2Zm1hQUNFTVdoVVpGdlZYZkJ6M01J?=
- =?utf-8?B?OGNBaDJQYmMrZWIwWGd3V29YQTZOZzY4RGU4Y3F4Sm1nQXhML3BrRm15emJr?=
- =?utf-8?B?MmFPeXN4MTk1TFhxeVdJNHYxOFcyT3hVaEc3NkRudWo0bHBlbWJISjlMQ3RL?=
- =?utf-8?B?R1E9PQ==?=
+ dmarc=none (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-9be3b66f254so839956766b.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 09:23:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1698251039; x=1698855839;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lFxA140wpFYS3WZqlX2Do4Vi1jfAeJQtZZswt0E57m8=;
+ b=hcC/ZfOiZlRvwvzOPhzvVGFzFJ6rlHZNgMqZNuG6nduuPEn53aQ1s13WRhFkDB9MuU
+ lJFYeg9hkCCUgV8X2Fwfmyozef80V33t1BwMqmfQTtNx/CPnow56fVvAknvgcbBWTfcN
+ wszTcHEfzwedRtfhyDFxzWGmBA3zMC5923+/d4yDsmZXrkqJ36R8WWLlyryYc4+2LjF9
+ SNx1OwZLHAUWWp44n3cD7NZZivNeqCMnn5hGeZUGRcRQzEAkVzyKOGDquGaMcn7vqpFX
+ QEWx67GlP7WH9Kjri+tfI0Nmxg0U6mItPw87NoQDI/dJ86/tKzO0V/hqOMO1CXj84kx6
+ IcTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698251039; x=1698855839;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lFxA140wpFYS3WZqlX2Do4Vi1jfAeJQtZZswt0E57m8=;
+ b=JAgqlBEyNxGQMgEU6dXyXDfzopllINhZ9DD14Iz7OnHbUkzYd2SxDgm5XSkBbLSqr9
+ wfDHff6v+/iHJyljXGVcV9jlptoFftvrkSypItkp73lyBjI17TlTo7/uQohOYN0gdata
+ FlmBnGbmwcSsRBpRS+Oh+5GP/knMRC8qHM5/Roj/hGc74N87TIHfdC8jCDE2hWFosemU
+ pg0xM6gXElQxaUxOzW7eEisGhhCVVHx428+gJwmm6SPuLgiekoBu0keCGOODudRwdo2m
+ cQKa5/h4M9m9NgufRK/q0Ul2GZ1Jc9/SNJhjbdqk7PTl/DJ44lSrlwORrA+IPsqLN0bM
+ RxMg==
+X-Gm-Message-State: AOJu0YzzWfWpOveyVxkd9T1+b39J6G8x2N32imeljUoiZ9lCwh8pex3a
+ AxWvsfnf6mk+aRjb1ZSxKRGU8l35RiDaYPin/Agl8g==
+X-Google-Smtp-Source: AGHT+IFsORPYXlQtsmUQthPlIdyIxJvWWxbF8sG7e49EgVtMS4aAhZqegXfT/pMQHq3Hw11gqxn65dFtZOIPliGumgQ=
+X-Received: by 2002:a17:907:72c9:b0:9ba:33ef:fe4c with SMTP id
+ du9-20020a17090772c900b009ba33effe4cmr12844955ejc.64.1698251039038; Wed, 25
+ Oct 2023 09:23:59 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93574564-72de-48fd-9b7f-08dbd573a81b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Oct 2023 16:01:32.0832 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: aMbgDv9EV+T240vJ7zQE6vO0pymk8WOshZDafUjZyBsMDjsdKxvLxvL/GsnxHmyWpIjlz9xhoUfmqQa/K6zhgsnUsfE+ZKLrr8b0fqVb5oI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB1160
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <EC43961750ADEE44BC55FB242A5301CA@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+References: <20231019120623.1476421-1-festevam@gmail.com>
+In-Reply-To: <20231019120623.1476421-1-festevam@gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Wed, 25 Oct 2023 09:23:45 -0700
+Message-ID: <CAJ+vNU0G0=hAqgREJbvvfdqQ79vEc5wY+rd64Je1yrkyzOwpUw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] arm: dts: imx8mm: Sync with linux-next 20231019
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, aford173@gmail.com, 
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,80 +88,425 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgUmFzbXVzDQoNCk9uIFR1ZSwgMjAyMy0xMC0yNCBhdCAxNjozMiArMDIwMCwgUmFzbXVzIFZp
-bGxlbW9lcyB3cm90ZToNCj4gT24gMjQvMTAvMjAyMyAxNS4xNSwgTWFyY2VsIFppc3dpbGVyIHdy
-b3RlOg0KPiANCj4gSGkgTWFyY2VsDQo+IA0KPiB0bDtkcjogY2FuIHlvdSB0cnkNCj4gDQo+IEBA
-IC0zMzAsNyArMzM1LDcgQEAgc3RhdGljIGludCBzcGxfcm9tYXBpX2xvYWRfaW1hZ2Vfc3RyZWFt
-KHN0cnVjdA0KPiBzcGxfaW1hZ2VfaW5mbyAqc3BsX2ltYWdlLA0KPiANCj4gwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIHNzLmJhc2UgPSBwaGRyOw0KPiDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgc3MuZW5kID0gcDsNCj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-c3MucGFnZXNpemUgPSBwYWdlc2l6ZTsNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-c3MucGFnZXNpemUgPSAxMDI0Ow0KPiANCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IG1lbXNldCgmbG9hZCwgMCwgc2l6ZW9mKGxvYWQpKTsNCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIGxvYWQuYmxfbGVuID0gMTsNCj4gDQo+IGFuZCBhbHNvIHB1dCAxMDI0IGluIHRo
-ZSBiaW5tYW4gbm9kZSBzbyB1LWJvb3QuaXRiIGlzIGFsc28gMTAyNC1ieXRlDQo+IGFsaWduZWQ/
-DQoNClRoYXQgZGlkIG5vdCBoZWxwLg0KDQoNCj4gVGhpcyB3aWxsIGxpa2VseSBicmVhayB1c2Ig
-Ym9vdCAod2hlcmUgcGFnZXNpemU9PTEpLCBzbyBpZiB5b3Ugd2FudCB0aGUNCj4gYmluYXJ5IHRv
-IHdvcmsgd2l0aCB1c2IgeW91IGNhbiBtYWtlIHRoZSBSSFMgaW5zdGVhZCAiKHBhZ2VzaXplID4g
-MSA/DQo+IDEwMjQgOiAxKSIgb3Igc29tZXRoaW5nIGxpa2UgdGhhdC4NCj4gDQo+IEkgZG9uJ3Qg
-dGhpbmsgaXQgd2lsbCB3b3JrLCBidXQgT1RPSCBteSBhbmFseXNpcyBiZWxvdyBkb2Vzbid0IGZp
-bmQgYW55DQo+IG90aGVyIChmdW5kYW1lbnRhbCkgZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSBvbGQg
-YW5kIG5ldyBjb2RlLg0KPiANCj4gPiANCj4gPiBPbiBUdWUsIDIwMjMtMTAtMjQgYXQgMTM6MTcg
-KzAyMDAsIFJhc211cyBWaWxsZW1vZXMgd3JvdGU6DQo+ID4gDQo+ID4gPiANCj4gPiA+IGFuZCB0
-aGlzIHdvcmtzIGp1c3QgZmluZS4gQnV0IGluIG15IGNhc2Ugc3MtPnBhZ2VzaXplIGlzIDEsIHdo
-ZXJlYXMgeW91DQo+ID4gPiBoYXZlIDUxMi4NCj4gPiA+IA0KPiA+ID4gSnVzdCBleGFjdGx5IGhv
-dyBhcmUgeW91IGJvb3Rpbmc/IEl0IHNheXMgIkJvb3QgU3RhZ2U6IFByaW1hcnkgYm9vdCINCj4g
-PiA+IHdoZXJlYXMgSSdtIGRvaW5nIHNlcmlhbCBkb3dubG9hZCB3aXRoIHV1dSAoaS5lLiAiQm9v
-dCBTdGFnZTogVVNCIGJvb3QiKS4NCj4gPiANCj4gPiBZZXMsIHJlZ3VsYXIgZU1NQyBib290Lg0K
-PiANCj4gW3NuaXBdDQo+IA0KPiA+IA0KPiA+IEF0IGxlYXN0IEkgYW0gbm90IGF3YXJlIHRoYXQg
-d2Ugd291bGQgYmUgZG9pbmcgYW55dGhpbmcgc3BlY2lhbCBmb3IgZU1NQyBib290Lg0KPiANCj4g
-V2VsbCwgSS93ZSB1c3VhbGx5IGRvIGJvb3QgZnJvbSBlTU1DIChleGNlcHQgZHVyaW5nIGJvb3Rz
-dHJhcCB3aGVyZSB3ZQ0KPiB1c2UgdXV1KSwgbW9yZSBwcmVjaXNlbHkgZnJvbSB0aGUgZU1NQyBi
-b290IHBhcnRpdGlvbnMsIGJ1dCB0aGF0IGRvZXNuJ3QNCj4gZW5kIHVwIHVzaW5nIHRoZSBzcGxf
-cm9tYXBpX2xvYWRfaW1hZ2Vfc3RyZWFtKCkgYnV0IGluc3RlYWQgdGhlIGV4cGVjdGVkDQo+IHNw
-bF9yb21hcGlfbG9hZF9pbWFnZV9zZWVrYWJsZSgpLg0KPiANCj4gUGVyaGFwcyBzb21lIE5YUCBm
-b2xrcyBjYW4gZXhwbGFpbiB0aGUgbG9naWMgYmVoaW5kDQo+IA0KPiBzdGF0aWMgaW50IGlzX2Jv
-b3RfZnJvbV9zdHJlYW1fZGV2aWNlKHUzMiBib290KQ0KPiB7DQo+IAl1MzIgaW50ZXJmYWNlOw0K
-PiANCj4gCWludGVyZmFjZSA9IGJvb3QgPj4gMTY7DQo+IAlpZiAoaW50ZXJmYWNlID49IEJUX0RF
-Vl9UWVBFX1VTQikNCj4gCQlyZXR1cm4gMTsNCj4gDQo+IAlpZiAoaW50ZXJmYWNlID09IEJUX0RF
-Vl9UWVBFX01NQyAmJiAoYm9vdCAmIDEpKQ0KPiAJCXJldHVybiAxOw0KPiANCj4gCXJldHVybiAw
-Ow0KPiB9DQo+IA0KPiBBcHBhcmVudGx5IHRoYXQgImJvb3QgJiAxIiBpcyBhbiBpbmRpY2F0aW9u
-IHRoYXQgImVNTUMgZmFzdCBib290IG1vZGUiDQo+IGlzIGVuYWJsZWQgKG5vdCB0byBiZSBjb25m
-dXNlZCB3aXRoIGZhc3Rib290IHdoaWNoIGlzIGEgVVNCIHByb3RvY29sDQo+IHRoYXQgb25seSBi
-ZWNvbWVzIHJlbGV2YW50IG9uY2UgVS1Cb290IHByb3BlciBpcyB1cCBhbmQgcnVubmluZykuDQoN
-Clllcywgd2UgdXNlIGVNTUMgZmFzdCBib290IG1vZGUuDQoNCj4gQXMgSSd2ZSBjb21wbGFpbmVk
-IGFib3V0IHByZXZpb3VzbHksIHRoZSBST00gQVBJIGlzIGFsbW9zdCBlbnRpcmVseQ0KPiB1bmRv
-Y3VtZW50ZWQuIFRoZXJlJ3Mgc29tZXRoaW5nIGluIGlteDkzcm0ucGRmICh3aGljaCBpcyB3aGVy
-ZSBJIGhhdmUNCj4gdGhhdCBlTU1DIGZhc3QgYm9vdCBpbmZvIGZyb20pLCBidXQgSSBoYXZlIG5v
-IGlkZWEgaWYgdGhhdCBhcHBsaWVzIHRvDQo+IGlteDgvaW14OG1wIGFzIHdlbGwuDQo+IA0KPiBB
-cmUgdGhlcmUgYW55IGFsaWdubWVudCByZXF1aXJlbWVudHMgb24gdGhlIGRlc3RpbmF0aW9uIGFu
-ZC9vciB0aGUgc2l6ZQ0KPiBwYXJhbWV0ZXI/IElzIHRoZXJlIHNvbWUgdGltaW5nIHJlcXVpcmVt
-ZW50cyBzbyB0aGF0IGlmIHdlIHJlYWQgdG9vIGxhdGUNCj4gdGhlIGRhdGEgaXMgbG9zdD8gU28g
-Y291bGQgZS5nLiBhIGJ1bmNoIG9mIHByaW50ZiBkZWJ1Z2dpbmcgYnJlYWsgYm9vdD8NCj4gDQo+
-IEJlY2F1c2UgSSByZWFsbHkgY2FuJ3Qgc2VlIHRoZSBmdW5kYW1lbnRhbCBkaWZmZXJlbmNlIGJl
-dHdlZW4gbm93IGFuZA0KPiB0aGVuLiBCb3RoIGJlZm9yZSBhbmQgYWZ0ZXIgdGhlIGNvbW1pdCBp
-biBxdWVzdGlvbiwgdGhlIGNvZGUgZG9lczoNCj4gDQo+IC0gcmVhZCAxMDI0IGJ5dGVzIGF0IGEg
-dGltZSwgc2VhcmNoIGVhY2ggY2h1bmsgZm9yIEZEVCBtYWdpYw0KPiANCj4gVGhpcyB0aGVuIGdp
-dmVzIHRoZSAiRmluZCBpbWcgaW5mbyAweDQ4MDJiMDAwIg0KPiANCj4gLSBtYWtlIHN1cmUgdGhl
-IGxlZnRvdmVyIHdpdGhpbiB0aGF0IDEwMjQgY2h1bmsgaXMgYSBmdWxsIEZEVCBoZWFkZXINCj4g
-KHVzdWFsbHkgb2ssIHNvIG5vIG91dHB1dCkNCj4gDQo+IC0gcmVhZCB0aGUgRkRUIHNpemUgZnJv
-bSB0aGF0IGhlYWRlciwgcm91bmQgdXAgdG8gYSBtdWx0aXBsZSBvZiAxMDI0LA0KPiBmZXRjaCB0
-aGF0IC0gdGhhdCdzIHRoZSAiTmVlZCBjb250aW51ZSBkb3dubG9hZCAxMDI0Ii4NCj4gDQo+IEFu
-ZCB0aGVuIHRoZSBmbG93IGRldmlhdGVzLg0KPiANCj4gVGhlIG9sZCBjb2RlIHdvdWxkIGRvIHRo
-ZSBmYWtlIHNwbF9maXRfbG9hZCB0byBmaWd1cmUgb3V0IHRoZSBtYXhpbXVtDQo+IG9mZnNldCAo
-dGh1cyB0aGUgcmVhbCB0b3RhbCAuaXRiIHNpemUpLCB0aGVuIHRha2UgdGhhdCByZW1haW5pbmcg
-c2l6ZSwNCj4gcm91bmQgdXAgdG8gLT5wYWdlc2l6ZSAoNTEyKSwgYW5kIGZldGNoIHRoYXQgd2l0
-aCBvbmUgZmluYWwNCj4gcm9tX2FwaV9kb3dubG9hZF9pbWFnZShwLCAwLCBpbWFnZXNpemUpOy4N
-Cj4gDQo+IE15IGNvZGUgaW5zdGVhZCBkb2VzIGEgbnVtYmVyIG9mIHJvbV9hcGlfZG93bmxvYWRf
-aW1hZ2UoKSBjYWxscywgd2hlcmUNCj4gZWFjaCBzaXplIGFyZ3VtZW50IGlzIHJvdW5kZWQgdXAg
-dG8gdGhlIC0+cGFnZXNpemUgZnJvbSB0aGUgYm9vdF9pbmZvDQo+IHF1ZXJ5IChpLmUuIDUxMiku
-IFNvIGl0J3MgcG9zc2libGUgdGhhdCBmb3Igb25lIG9mIHRob3NlIGNhbGxzLCB0aGUNCj4gZGVz
-dGluYXRpb24gaXMgb25seSA1MTItYnl0ZSBhbGlnbmVkIChiZWNhdXNlIGEgcHJldmlvdXMgY2Fs
-bCBmZXRjaGVkIGFuDQo+IG9kZCBudW1iZXIgb2YgNTEyIGJ5dGUgYmxvY2tzKSwgYW5kIHRoYXQg
-ZG9lc24ndCBoYXBwZW4gaW4gdGhlIHByZXZpb3VzDQo+IGNhc2Ugd2hlcmUgYWxsIGJ1dCB0aGUg
-bGFzdCByb21fYXBpX2Rvd25sb2FkX2ltYWdlKCkgaGF2ZSBmZXRjaGVkIDEwMjQNCj4gYnl0ZSBh
-bGlnbmVkIGNodW5rcy4NCj4gDQo+IFdoYXQgYW0gSSBtaXNzaW5nPw0KDQpHb29kIHF1ZXN0aW9u
-LiBTb21lIG1vcmUgZGVidWdnaW5nIHJldmVhbGVkIHRoYXQgd2UgYXJlIG1pc3NpbmcgNDY0IGJ5
-dGVzIGF0IHRoZSBiZWdpbm5pbmcgb2YgdGhlIGJ1ZmZlci4gV2h5DQp3b3VsZCB0aGF0IGJlPw0K
-DQo+IFJhc211cw0KDQpDaGVlcnMNCg0KTWFyY2VsDQo=
+On Thu, Oct 19, 2023 at 5:06=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> From: Fabio Estevam <festevam@denx.de>
+>
+> Sync imx8mm.dtsi with linux-next 20231019.
+>
+> The motivation for doing this sync was a bug when doing "ums 0 mmc 1"
+> on imx8mm-evk. It worked well for the first time, but after doing
+> a CTRL+C and launching the ums again, the command did not work.
+>
+> Adam Ford suggested to sync imx8mm.dtsi with the Linux dts, as there was
+> a recent USB power domain reorganization there.
+>
+> After syncing the imx8mm.dtsi with Linux, the ums command works without
+> problem after a CTRL+C.
+>
+> Suggested-by: Adam Ford <aford173@gmail.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+> Changes since v1:
+> - Rebased against latest U-Boot and synced with linux-next 20231019.
+>
+>  arch/arm/dts/imx8mm.dtsi | 153 +++++++++++++++++++++++++++++++++------
+>  1 file changed, 129 insertions(+), 24 deletions(-)
+>
+> diff --git a/arch/arm/dts/imx8mm.dtsi b/arch/arm/dts/imx8mm.dtsi
+> index afb90f59c83c..738024baaa57 100644
+> --- a/arch/arm/dts/imx8mm.dtsi
+> +++ b/arch/arm/dts/imx8mm.dtsi
+> @@ -139,6 +139,7 @@
+>                 A53_L2: l2-cache0 {
+>                         compatible =3D "cache";
+>                         cache-level =3D <2>;
+> +                       cache-unified;
+>                         cache-size =3D <0x80000>;
+>                         cache-line-size =3D <64>;
+>                         cache-sets =3D <512>;
+> @@ -276,6 +277,7 @@
+>                 assigned-clocks =3D <&clk IMX8MM_CLK_USB_PHY_REF>;
+>                 assigned-clock-parents =3D <&clk IMX8MM_SYS_PLL1_100M>;
+>                 clock-names =3D "main_clk";
+> +               power-domains =3D <&pgc_otg1>;
+>         };
+>
+>         usbphynop2: usbphynop2 {
+> @@ -285,6 +287,7 @@
+>                 assigned-clocks =3D <&clk IMX8MM_CLK_USB_PHY_REF>;
+>                 assigned-clock-parents =3D <&clk IMX8MM_SYS_PLL1_100M>;
+>                 clock-names =3D "main_clk";
+> +               power-domains =3D <&pgc_otg2>;
+>         };
+>
+>         soc: soc@0 {
+> @@ -396,6 +399,7 @@
+>                                                       "pll8k", "pll11k", =
+"clkext3";
+>                                         dmas =3D <&sdma2 24 25 0x80000000=
+>;
+>                                         dma-names =3D "rx";
+> +                                       #sound-dai-cells =3D <0>;
+>                                         status =3D "disabled";
+>                                 };
+>
+> @@ -493,6 +497,8 @@
+>                                 compatible =3D "fsl,imx8mm-tmu";
+>                                 reg =3D <0x30260000 0x10000>;
+>                                 clocks =3D <&clk IMX8MM_CLK_TMU_ROOT>;
+> +                               nvmem-cells =3D <&tmu_calib>;
+> +                               nvmem-cell-names =3D "calib";
+>                                 #thermal-sensor-cells =3D <0>;
+>                         };
+>
+> @@ -547,8 +553,8 @@
+>                                 reg =3D <0x30330000 0x10000>;
+>                         };
+>
+> -                       gpr: iomuxc-gpr@30340000 {
+> -                               compatible =3D "fsl,imx8mm-iomuxc-gpr", "=
+fsl,imx6q-iomuxc-gpr", "syscon";
+> +                       gpr: syscon@30340000 {
+> +                               compatible =3D "fsl,imx8mm-iomuxc-gpr", "=
+syscon";
+>                                 reg =3D <0x30340000 0x10000>;
+>                         };
+>
+> @@ -560,22 +566,40 @@
+>                                 #address-cells =3D <1>;
+>                                 #size-cells =3D <1>;
+>
+> -                               imx8mm_uid: unique-id@410 {
+> +                               /*
+> +                                * The register address below maps to the=
+ MX8M
+> +                                * Fusemap Description Table entries this=
+ way.
+> +                                * Assuming
+> +                                *   reg =3D <ADDR SIZE>;
+> +                                * then
+> +                                *   Fuse Address =3D (ADDR * 4) + 0x400
+> +                                * Note that if SIZE is greater than 4, t=
+hen
+> +                                * each subsequent fuse is located at off=
+set
+> +                                * +0x10 in Fusemap Description Table (e.=
+g.
+> +                                * reg =3D <0x4 0x8> describes fuses 0x41=
+0 and
+> +                                * 0x420).
+> +                                */
+> +                               imx8mm_uid: unique-id@4 { /* 0x410-0x420 =
+*/
+>                                         reg =3D <0x4 0x8>;
+>                                 };
+>
+> -                               cpu_speed_grade: speed-grade@10 {
+> +                               cpu_speed_grade: speed-grade@10 { /* 0x44=
+0 */
+>                                         reg =3D <0x10 4>;
+>                                 };
+>
+> -                               fec_mac_address: mac-address@90 {
+> +                               tmu_calib: calib@3c { /* 0x4f0 */
+> +                                       reg =3D <0x3c 4>;
+> +                               };
+> +
+> +                               fec_mac_address: mac-address@90 { /* 0x64=
+0 */
+>                                         reg =3D <0x90 6>;
+>                                 };
+>                         };
+>
+> -                       anatop: anatop@30360000 {
+> -                               compatible =3D "fsl,imx8mm-anatop", "sysc=
+on";
+> +                       anatop: clock-controller@30360000 {
+> +                               compatible =3D "fsl,imx8mm-anatop";
+>                                 reg =3D <0x30360000 0x10000>;
+> +                               #clock-cells =3D <1>;
+>                         };
+>
+>                         snvs: snvs@30370000 {
+> @@ -674,13 +698,11 @@
+>                                         pgc_otg1: power-domain@2 {
+>                                                 #power-domain-cells =3D <=
+0>;
+>                                                 reg =3D <IMX8MM_POWER_DOM=
+AIN_OTG1>;
+> -                                               power-domains =3D <&pgc_h=
+siomix>;
+>                                         };
+>
+>                                         pgc_otg2: power-domain@3 {
+>                                                 #power-domain-cells =3D <=
+0>;
+>                                                 reg =3D <IMX8MM_POWER_DOM=
+AIN_OTG2>;
+> -                                               power-domains =3D <&pgc_h=
+siomix>;
+>                                         };
+>
+>                                         pgc_gpumix: power-domain@4 {
+> @@ -1098,6 +1120,61 @@
+>                         #size-cells =3D <1>;
+>                         ranges =3D <0x32c00000 0x32c00000 0x400000>;
+>
+> +                       lcdif: lcdif@32e00000 {
+> +                               compatible =3D "fsl,imx8mm-lcdif", "fsl,i=
+mx6sx-lcdif";
+> +                               reg =3D <0x32e00000 0x10000>;
+> +                               clocks =3D <&clk IMX8MM_CLK_LCDIF_PIXEL>,
+> +                                        <&clk IMX8MM_CLK_DISP_APB_ROOT>,
+> +                                        <&clk IMX8MM_CLK_DISP_AXI_ROOT>;
+> +                               clock-names =3D "pix", "axi", "disp_axi";
+> +                               assigned-clocks =3D <&clk IMX8MM_CLK_LCDI=
+F_PIXEL>,
+> +                                                 <&clk IMX8MM_CLK_DISP_A=
+XI>,
+> +                                                 <&clk IMX8MM_CLK_DISP_A=
+PB>;
+> +                               assigned-clock-parents =3D <&clk IMX8MM_V=
+IDEO_PLL1_OUT>,
+> +                                                        <&clk IMX8MM_SYS=
+_PLL2_1000M>,
+> +                                                        <&clk IMX8MM_SYS=
+_PLL1_800M>;
+> +                               assigned-clock-rates =3D <594000000>, <50=
+0000000>, <200000000>;
+> +                               interrupts =3D <GIC_SPI 5 IRQ_TYPE_LEVEL_=
+HIGH>;
+> +                               power-domains =3D <&disp_blk_ctrl IMX8MM_=
+DISPBLK_PD_LCDIF>;
+> +                               status =3D "disabled";
+> +
+> +                               port {
+> +                                       lcdif_to_dsim: endpoint {
+> +                                               remote-endpoint =3D <&dsi=
+m_from_lcdif>;
+> +                                       };
+> +                               };
+> +                       };
+> +
+> +                       mipi_dsi: dsi@32e10000 {
+> +                               compatible =3D "fsl,imx8mm-mipi-dsim";
+> +                               reg =3D <0x32e10000 0x400>;
+> +                               clocks =3D <&clk IMX8MM_CLK_DSI_CORE>,
+> +                                        <&clk IMX8MM_CLK_DSI_PHY_REF>;
+> +                               clock-names =3D "bus_clk", "sclk_mipi";
+> +                               assigned-clocks =3D <&clk IMX8MM_CLK_DSI_=
+CORE>,
+> +                                                 <&clk IMX8MM_CLK_DSI_PH=
+Y_REF>;
+> +                               assigned-clock-parents =3D <&clk IMX8MM_S=
+YS_PLL1_266M>,
+> +                                                        <&clk IMX8MM_CLK=
+_24M>;
+> +                               assigned-clock-rates =3D <266000000>, <24=
+000000>;
+> +                               samsung,pll-clock-frequency =3D <24000000=
+>;
+> +                               interrupts =3D <GIC_SPI 18 IRQ_TYPE_LEVEL=
+_HIGH>;
+> +                               power-domains =3D <&disp_blk_ctrl IMX8MM_=
+DISPBLK_PD_MIPI_DSI>;
+> +                               status =3D "disabled";
+> +
+> +                               ports {
+> +                                       #address-cells =3D <1>;
+> +                                       #size-cells =3D <0>;
+> +
+> +                                       port@0 {
+> +                                               reg =3D <0>;
+> +
+> +                                               dsim_from_lcdif: endpoint=
+ {
+> +                                                       remote-endpoint =
+=3D <&lcdif_to_dsim>;
+> +                                               };
+> +                                       };
+> +                               };
+> +                       };
+> +
+>                         csi: csi@32e20000 {
+>                                 compatible =3D "fsl,imx8mm-csi", "fsl,imx=
+7-csi";
+>                                 reg =3D <0x32e20000 0x1000>;
+> @@ -1145,10 +1222,9 @@
+>                                 compatible =3D "fsl,imx8mm-mipi-csi2";
+>                                 reg =3D <0x32e30000 0x1000>;
+>                                 interrupts =3D <GIC_SPI 17 IRQ_TYPE_LEVEL=
+_HIGH>;
+> -                               assigned-clocks =3D <&clk IMX8MM_CLK_CSI1=
+_CORE>,
+> -                                                 <&clk IMX8MM_CLK_CSI1_P=
+HY_REF>;
+> -                               assigned-clock-parents =3D <&clk IMX8MM_S=
+YS_PLL2_1000M>,
+> -                                                         <&clk IMX8MM_SY=
+S_PLL2_1000M>;
+> +                               assigned-clocks =3D <&clk IMX8MM_CLK_CSI1=
+_CORE>;
+> +                               assigned-clock-parents =3D <&clk IMX8MM_S=
+YS_PLL2_1000M>;
+> +
+>                                 clock-frequency =3D <333000000>;
+>                                 clocks =3D <&clk IMX8MM_CLK_DISP_APB_ROOT=
+>,
+>                                          <&clk IMX8MM_CLK_CSI1_ROOT>,
+> @@ -1177,7 +1253,7 @@
+>                         };
+>
+>                         usbotg1: usb@32e40000 {
+> -                               compatible =3D "fsl,imx8mm-usb", "fsl,imx=
+7d-usb";
+> +                               compatible =3D "fsl,imx8mm-usb", "fsl,imx=
+7d-usb", "fsl,imx27-usb";
+>                                 reg =3D <0x32e40000 0x200>;
+>                                 interrupts =3D <GIC_SPI 40 IRQ_TYPE_LEVEL=
+_HIGH>;
+>                                 clocks =3D <&clk IMX8MM_CLK_USB1_CTRL_ROO=
+T>;
+> @@ -1186,18 +1262,19 @@
+>                                 assigned-clock-parents =3D <&clk IMX8MM_S=
+YS_PLL2_500M>;
+>                                 phys =3D <&usbphynop1>;
+>                                 fsl,usbmisc =3D <&usbmisc1 0>;
+> -                               power-domains =3D <&pgc_otg1>;
+> +                               power-domains =3D <&pgc_hsiomix>;
+>                                 status =3D "disabled";
+>                         };
+>
+>                         usbmisc1: usbmisc@32e40200 {
+> -                               compatible =3D "fsl,imx8mm-usbmisc", "fsl=
+,imx7d-usbmisc";
+> +                               compatible =3D "fsl,imx8mm-usbmisc", "fsl=
+,imx7d-usbmisc",
+> +                                            "fsl,imx6q-usbmisc";
+>                                 #index-cells =3D <1>;
+>                                 reg =3D <0x32e40200 0x200>;
+>                         };
+>
+>                         usbotg2: usb@32e50000 {
+> -                               compatible =3D "fsl,imx8mm-usb", "fsl,imx=
+7d-usb";
+> +                               compatible =3D "fsl,imx8mm-usb", "fsl,imx=
+7d-usb", "fsl,imx27-usb";
+>                                 reg =3D <0x32e50000 0x200>;
+>                                 interrupts =3D <GIC_SPI 41 IRQ_TYPE_LEVEL=
+_HIGH>;
+>                                 clocks =3D <&clk IMX8MM_CLK_USB1_CTRL_ROO=
+T>;
+> @@ -1206,12 +1283,13 @@
+>                                 assigned-clock-parents =3D <&clk IMX8MM_S=
+YS_PLL2_500M>;
+>                                 phys =3D <&usbphynop2>;
+>                                 fsl,usbmisc =3D <&usbmisc2 0>;
+> -                               power-domains =3D <&pgc_otg2>;
+> +                               power-domains =3D <&pgc_hsiomix>;
+>                                 status =3D "disabled";
+>                         };
+>
+>                         usbmisc2: usbmisc@32e50200 {
+> -                               compatible =3D "fsl,imx8mm-usbmisc", "fsl=
+,imx7d-usbmisc";
+> +                               compatible =3D "fsl,imx8mm-usbmisc", "fsl=
+,imx7d-usbmisc",
+> +                                            "fsl,imx6q-usbmisc";
+>                                 #index-cells =3D <1>;
+>                                 reg =3D <0x32e50200 0x200>;
+>                         };
+> @@ -1238,16 +1316,15 @@
+>                                      <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>,
+>                                      <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>,
+>                                      <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>;
+> -                       interrupt-names =3D "gpmi0", "gpmi1", "gpmi2", "g=
+pmi3";
+>                         #dma-cells =3D <1>;
+>                         dma-channels =3D <4>;
+>                         clocks =3D <&clk IMX8MM_CLK_NAND_USDHC_BUS_RAWNAN=
+D_CLK>;
+>                 };
+>
+> -               gpmi: nand-controller@33002000{
+> +               gpmi: nand-controller@33002000 {
+>                         compatible =3D "fsl,imx8mm-gpmi-nand", "fsl,imx7d=
+-gpmi-nand";
+>                         #address-cells =3D <1>;
+> -                       #size-cells =3D <1>;
+> +                       #size-cells =3D <0>;
+>                         reg =3D <0x33002000 0x2000>, <0x33004000 0x4000>;
+>                         reg-names =3D "gpmi-nand", "bch";
+>                         interrupts =3D <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
+> @@ -1268,8 +1345,8 @@
+>                         #size-cells =3D <2>;
+>                         device_type =3D "pci";
+>                         bus-range =3D <0x00 0xff>;
+> -                       ranges =3D  <0x81000000 0 0x00000000 0x1ff80000 0=
+ 0x00010000 /* downstream I/O 64KB */
+> -                                  0x82000000 0 0x18000000 0x18000000 0 0=
+x07f00000>; /* non-prefetchable memory */
+> +                       ranges =3D <0x81000000 0 0x00000000 0x1ff80000 0 =
+0x00010000>, /* downstream I/O 64KB */
+> +                                <0x82000000 0 0x18000000 0x18000000 0 0x=
+07f00000>; /* non-prefetchable memory */
+>                         num-lanes =3D <1>;
+>                         num-viewport =3D <4>;
+>                         interrupts =3D <GIC_SPI 122 IRQ_TYPE_LEVEL_HIGH>;
+> @@ -1282,12 +1359,40 @@
+>                                         <0 0 0 4 &gic GIC_SPI 122 IRQ_TYP=
+E_LEVEL_HIGH>;
+>                         fsl,max-link-speed =3D <2>;
+>                         linux,pci-domain =3D <0>;
+> +                       clocks =3D <&clk IMX8MM_CLK_PCIE1_ROOT>,
+> +                                <&clk IMX8MM_CLK_PCIE1_PHY>,
+> +                                <&clk IMX8MM_CLK_PCIE1_AUX>;
+> +                       clock-names =3D "pcie", "pcie_bus", "pcie_aux";
+> +                       power-domains =3D <&pgc_pcie>;
+> +                       resets =3D <&src IMX8MQ_RESET_PCIE_CTRL_APPS_EN>,
+> +                                <&src IMX8MQ_RESET_PCIE_CTRL_APPS_TURNOF=
+F>;
+> +                       reset-names =3D "apps", "turnoff";
+> +                       phys =3D <&pcie_phy>;
+> +                       phy-names =3D "pcie-phy";
+> +                       status =3D "disabled";
+> +               };
+> +
+> +               pcie0_ep: pcie-ep@33800000 {
+> +                       compatible =3D "fsl,imx8mm-pcie-ep";
+> +                       reg =3D <0x33800000 0x400000>,
+> +                             <0x18000000 0x8000000>;
+> +                       reg-names =3D "dbi", "addr_space";
+> +                       num-lanes =3D <1>;
+> +                       interrupts =3D <GIC_SPI 127 IRQ_TYPE_LEVEL_HIGH>;
+> +                       interrupt-names =3D "dma";
+> +                       fsl,max-link-speed =3D <2>;
+> +                       clocks =3D <&clk IMX8MM_CLK_PCIE1_ROOT>,
+> +                                <&clk IMX8MM_CLK_PCIE1_PHY>,
+> +                                <&clk IMX8MM_CLK_PCIE1_AUX>;
+> +                       clock-names =3D "pcie", "pcie_bus", "pcie_aux";
+>                         power-domains =3D <&pgc_pcie>;
+>                         resets =3D <&src IMX8MQ_RESET_PCIE_CTRL_APPS_EN>,
+>                                  <&src IMX8MQ_RESET_PCIE_CTRL_APPS_TURNOF=
+F>;
+>                         reset-names =3D "apps", "turnoff";
+>                         phys =3D <&pcie_phy>;
+>                         phy-names =3D "pcie-phy";
+> +                       num-ib-windows =3D <4>;
+> +                       num-ob-windows =3D <4>;
+>                         status =3D "disabled";
+>                 };
+>
+> --
+> 2.34.1
+>
 
+For the series:
+
+Acked-by: Tim Harvey <tharvey@gateworks.com>
+
+Best Regards,
+
+Tim
