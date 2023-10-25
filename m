@@ -4,81 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A70A8C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 18:57:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62ADAC07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 19:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FBB087959;
-	Wed, 25 Oct 2023 20:57:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 109C087468;
+	Wed, 25 Oct 2023 21:57:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fUFsq6S/";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="PvXQ5TOH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 523EE8798A; Wed, 25 Oct 2023 20:57:26 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D599D874CE; Wed, 25 Oct 2023 21:57:42 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFC5287937
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:57:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 887FC8712B
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 21:57:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-779f2718accso8912685a.1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:57:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698260242; x=1698865042; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OoQBYhvRL+LDq+gxMm3wjYq1JK6napfqANj76ld0bVM=;
- b=fUFsq6S/HKXoO+PoGcn87D9hicg0Cl8xi6+zrTduiqyiHG2jVSUpHfrZKETN8tdcZl
- Xm/G6sxV72etKP6B3HZ129wH7hpe/pFzfyU2sVY9QUcM0JxtRp3ot1B644jQkDvB/dja
- WNRUN1CHrLWr3mi9/F6R0PHmRPgrGYddL+41E=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E5D843FADB
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 19:57:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1698263856;
+ bh=NfCtIutdOGs7F9GY+4skSc3uQGVyDeIze6TbIDC/leo=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=PvXQ5TOHCY3Wr+yax2+3NS9xDxqLIgFASS2Pw9YCwLEcI3woO0cazdQ9OnOIj/QAH
+ CGUfK4fHkabZcF1lAkJQrKU31au6wHJajnVqUPeXxELisOKj0Qdrjd4pVJCbKCsmg+
+ PYqBDPsX9iYRfbekQUtuCToYKj8o7RszEDfhCpL8Vv9/Yx9KGWBrurpnmSNjc8Ax5v
+ /NIjlSEsYro1iiFjP0xdfB1nr4XRVcPXJ+wjqsHzTrRcqpsb8yg4AHcCPMDqTf+Qi2
+ 6K7BDfojD+UL8NVEn1mjPSZdQfWzBuLReAbWBvu3EZ6iVkFVOQzR9VVZWEy/WBlCCl
+ 8HQImlRKjxIcg==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-40853e14f16so919785e9.1
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 12:57:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698260242; x=1698865042;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OoQBYhvRL+LDq+gxMm3wjYq1JK6napfqANj76ld0bVM=;
- b=O0VF+DGYLbl4pX3WGTsMzqWBXN2dbbfcMpBya9v7x55GS8ZH6m+/wz5Zp/OuOI14Xk
- SFoT0xh5pFqLD1jHnPSJNVB+cVUZ71a1fetnaKR9+xzpysARpgSFixLAQ8GyVWPZgSQC
- u+R5JoIoz9t+L64fonlBUaUVSQR/SYi+XOIaL0zYNcSdrQgMW7A+1UuBMejV7dmFQ7fZ
- wEjiNcb/Y9j0Qb2fKYa5TZoEfSj9aHeYa17zb0FmPCRSvKn1m4SMkUOfr6APuRiwUI9R
- 0N/zhHcUeVciJboaaOVW/Lz/dvzWdV3cHrh/g2inI9xWSNluFw/0k63Q09UP6z/sti4x
- h1QQ==
-X-Gm-Message-State: AOJu0YxqHyJZ+cb7KdaFjEgNUQH2VOMROJxXK39fvDGe27pHdpBIl4mF
- vOPcO59uuXWSJ9y/l1+T4KMeCQ==
-X-Google-Smtp-Source: AGHT+IG+aIYNFVWRWKI3rDs62hmiQHAMhdqiCT1h8gVZEUTTsoaJ9FoWoIobdhDWi14pKUfi1BKv8w==
-X-Received: by 2002:a05:620a:8190:b0:775:a3fc:a9d1 with SMTP id
- ot16-20020a05620a819000b00775a3fca9d1mr13201626qkn.23.1698260242315; 
- Wed, 25 Oct 2023 11:57:22 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-7a1b-75c0-d849-e3ce.res6.spectrum.com.
- [2603:6081:7b00:6400:7a1b:75c0:d849:e3ce])
- by smtp.gmail.com with ESMTPSA id
- b7-20020a05620a0cc700b00767dc4c539bsm4422101qkj.44.2023.10.25.11.57.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 11:57:21 -0700 (PDT)
-Date: Wed, 25 Oct 2023 14:57:19 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dylan Corrales <deathcamel58@gmail.com>,
- Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-Subject: Re: Pull request efi-2024-01-rc2
-Message-ID: <20231025185719.GV496310@bill-the-cat>
-References: <d61eb00b-baa8-4804-801a-045eb56ed617@gmx.de>
+ d=1e100.net; s=20230601; t=1698263855; x=1698868655;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NfCtIutdOGs7F9GY+4skSc3uQGVyDeIze6TbIDC/leo=;
+ b=a4HEfF9YKCSwv8yybWwWtA+IX/R6HwsrMkp8fU5p8oPzvFokrqEwGabdcA/p8hSvaw
+ GhgNueJmctFJL2JZ0QVlSLiuOOjF6zVVJ74mTQ5QhNzz3gUvCzkOCIY4gP084PnH68zI
+ X1BgVEAOiNUlIlFFn3VIezXhSoaSrsxfb0cWMLDOlK8NCgFG7jM3MQ8LSmHYPkoV4t8I
+ Rvqmy9BnWaSk3Dzvk8LOkTf3uuYrdR5phvIBf02GSUxDFEqJCbBaDZQ+jmOTC2QQBj0v
+ Ojxs14T73rmmO92dWhLsnOPNloL4kYkT7k3JG9WewT1E7nKha/XqjJGfzbrU0/h2Q+Uw
+ RUXQ==
+X-Gm-Message-State: AOJu0Yw2iqScEhAzWyPMISSYsy9ovNv5ajhCOLztUPXx5Nvo2ZTUO8KA
+ 7B1L2K3alZBYuOo5yT9wImRKVYWj4ZZuY0wimx+z1cvm1QybV0u9hsvgukPVOjytQZ8NAPtVctu
+ OOR94tycouzPJOUsVgN3CYfI9DfqfITS1O7ZVvxU=
+X-Received: by 2002:a5d:5042:0:b0:32d:c69b:99b8 with SMTP id
+ h2-20020a5d5042000000b0032dc69b99b8mr11970763wrt.35.1698263855345; 
+ Wed, 25 Oct 2023 12:57:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG7UAHsVgiG5nTjLEP0pmGOfH4L1cpYsKg0d4psPzB9AKmbHEbssGYrIcyJfDRMsn9y5wOMAA==
+X-Received: by 2002:a5d:5042:0:b0:32d:c69b:99b8 with SMTP id
+ h2-20020a5d5042000000b0032dc69b99b8mr11970745wrt.35.1698263854909; 
+ Wed, 25 Oct 2023 12:57:34 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ w10-20020adfec4a000000b0032d2f09d991sm12651058wrn.33.2023.10.25.12.57.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Oct 2023 12:57:34 -0700 (PDT)
+Message-ID: <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
+Date: Wed, 25 Oct 2023 21:57:44 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LlZI8tT/UX4Pdu79"
-Content-Disposition: inline
-In-Reply-To: <d61eb00b-baa8-4804-801a-045eb56ed617@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@google.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
+ <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,66 +106,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/25/23 20:23, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
+>>
+>> Hi Heinrich,
+>>
+>> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
+>> <heinrich.schuchardt@canonical.com> wrote:
+>>>
+>>> Forward and backward compatibility of Linux kernel device-trees is
+>>> sometimes missing. One solution approach is to load a kernel specific
+>>> device-tree. This can either be done via a U-Boot scripts (like the one
+>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
+>>> The boot loader approach currently requires to know the device-tree name
+>>> before first boot which makes it unusable for generic images.
+>>>
+>>> Expose the device-tree file name as EFI variable FdtFile.
+>>> This will allow bootloaders to load a kernel specific device-tree.
+>>
+>> kernel-specific
+>>
+>>>
+>>> The variable will not be exposed on ACPI based systems or if the
+>>> environment variable fdtfile is not defined.
+>>>
+>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>> ---
+>>> v4:
+>>>          Generalize the description of the content of $fdtfile.
+>>> v3:
+>>>          Add documentation
+>>> v2:
+>>>          Use a unique GUID to enable future U-Boot independent
+>>>          standardization.
+>>>          Do not try to add the variable on ACPI based systems.
+>>> ---
+>>>   doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+>>>   include/efi_loader.h       |  5 +++++
+>>>   lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+>>>   3 files changed, 49 insertions(+)
+>>>
+>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+>>> index fb16ac743a..702c490831 100644
+>>> --- a/doc/develop/uefi/uefi.rst
+>>> +++ b/doc/develop/uefi/uefi.rst
+>>> @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
+>>>
+>>>       Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
+>>>
+>>> +EFI variable FdtFile
+>>> +~~~~~~~~~~~~~~~~~~~~
+>>> +
+>>> +Ideally U-Boot would always expose a device-tree that can be used for booting
+>>> +any operating systems. Unfortunately operating systems like Linux sometimes
+>>> +break forward and backward compatibility. In this case there is a need to load
+>>> +an operating system version specific device-tree.
+>>
+>> This seems to be a strong statement. Given the effort that goes into
+>> the DT, changes are supposed to be backwards-compatible. Is this
+>> generally true, or is it just that we want an up-to-date DT for the
+>> kernel to enable new features?
+> 
+> Did you see this comment?
 
---LlZI8tT/UX4Pdu79
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It would have been nice to put the person which made that comment on copy.
 
-On Wed, Oct 25, 2023 at 04:20:06AM +0200, Heinrich Schuchardt wrote:
+The truth lies in the world "supposed":
 
-> Dear Tom,
->=20
-> The following changes since commit 5cab3515f8c9796015739c1750b8933291c816=
-be:
->=20
->   Merge tag 'u-boot-rockchip-20231024' of
-> https://source.denx.de/u-boot/custodians/u-boot-rockchip (2023-10-24
-> 09:39:52 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-01-rc2
->=20
-> for you to fetch changes up to 916dad34af0e53181dfe21f5764d3a787cb24bdc:
->=20
->   efi_loader: fix EFI_ENTRY point on get_active_pcr_banks (2023-10-24
-> 23:56:43 +0200)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18293
->=20
+The idea of a device-tree that never needs to change is quite old and 
+never became true on ARM devices.
 
-So, there's not been enough time for "efi_loader: expose the device-tree
-file name" as there's still comments on how to word things there (and
-I'm fine taking this eventually for the release, we don't need it
-today). And since we're here anyways, "efi_loader: fix efi_dp_from_eth"
-isn't needed as with "sandbox: eliminate unused functions from binaries"
-we can build sandbox with EFI_LOADER=3Dy NET=3Dn LTO=3Dn (and CMDLINE=3Dn w=
-ith
-the rest of my v4 + an unrelated to this fix for fastboot) and since I'm
-asking for changes anyhow, lets just drop this. Thanks.
+We all know Linux tends to break both forward and backward compatibility 
+of device-trees. Here is a nice example:
 
---=20
-Tom
+d0c6707ca423 ("arm64: dts: allwinner: H5: NanoPi Neo Plus2: phy-mode 
+rgmii-id")
 
---LlZI8tT/UX4Pdu79
-Content-Type: application/pgp-signature; name="signature.asc"
+Driver changes broke forward and backwards compatibility of a lot of 
+Allwinner boards.
 
------BEGIN PGP SIGNATURE-----
+Distros will continue to load the device-tree that matches the kernel to 
+get the best possible board support and need to do this efficiently.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU5ZQwACgkQFHw5/5Y0
-tyysagwAoyPNUvihdCee2j4+JwUrRdLBnRTt0h+I7WLw4LgpwsR6tBLRfszx6Sza
-w9zPSaeygi4YSR8Esuf0MepucWh3nOVOydtGrdkMDf0nFDor1JllGRiaqAKA28j/
-Br8hFMeku6AicNhVm3WFfJ7apS82fc56GfPmfH7tG7JubPrzCMwGRjT1dj2YWSxC
-Rvww8M2QDVK6+AgnvrL/Z9Lae2vr95w9vnXMCloBhh5oqcS9x9N2dHcwgFlXo+eu
-rtlcL6rTKOUSBAcuiD2ALWpuEFJ9pYR7m/Tpkx5IHw1D8DFRrdGwgtC5EGiRBM1k
-Kw5y5kVqxPnnJXt9PCaq1N+cWZKygMXjriCpb7zeuip5A4UxXKmUAZn7othXALb/
-q6eCcJwPFsVyKlVnuG6PAmKjwXfDzhgKCqCPcScCQAKIRODOji8om5nwdn/1pQu2
-N30/L3CVskHw4qheQsIT0jrvosd+8elsfBiMEZ5cwN1sq4bNznRYywiSe1LHFSGA
-Fnnt3srM
-=yAwC
------END PGP SIGNATURE-----
+Best regards
 
---LlZI8tT/UX4Pdu79--
+Heinrich
+
+> 
+> Regards,
+> Simon
+> 
+>>
+>>> +
+>>> +U-Boot has an environment variable fdtfile identifying the device-tree file to
+>>> +load. The content of this variable is exposed as EFI variable Fdtfile, vendor
+>>> +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree path
+>>> +name as a NUL terminated ASCII string. On many architectures the file name is
+>>
+>> NUL-terminated
+>>
+>>> +preceded by a vendor directory ('vendor-directory/board-name.dtb').
+>>> +
+>>>   Links
+>>>   -----
+>>>
+>>> diff --git a/include/efi_loader.h b/include/efi_loader.h
+>>> index e24410505f..146e7f1bce 100644
+>>> --- a/include/efi_loader.h
+>>> +++ b/include/efi_loader.h
+>>> @@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
+>>>          EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+>>>                   0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+>>>
+>>> +/* Vendor GUID for the FdtFile variable */
+>>> +#define VENDOR_FDTFILE_GUID \
+>>> +       EFI_GUID(0xd45dde69, 0x3bd6, 0x40e0, \
+>>> +                0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
+>>> +
+>>>   /* Use internal device tree when starting UEFI application */
+>>>   #define EFI_FDT_USE_INTERNAL NULL
+>>>
+>>> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+>>> index e6de685e87..71bcde645b 100644
+>>> --- a/lib/efi_loader/efi_setup.c
+>>> +++ b/lib/efi_loader/efi_setup.c
+>>> @@ -17,6 +17,8 @@
+>>>
+>>>   efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+>>>
+>>> +efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
+>>> +
+>>>   /*
+>>>    * Allow unaligned memory access.
+>>>    *
+>>> @@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
+>>>   {
+>>>   }
+>>>
+>>> +/**
+>>> + * efi_init_fdtfile() - set EFI variable FdtFile
+>>> + *
+>>> + * Return:     status code
+>>> + */
+>>> +static efi_status_t efi_init_fdtfile(void)
+>>> +{
+>>> +       char *val;
+>>> +
+>>> +       val = env_get("fdtfile");
+>>> +       if (!val)
+>>> +               return EFI_SUCCESS;
+>>> +
+>>> +       return efi_set_variable_int(u"FdtFile",
+>>> +                                   &vendor_fdtfile_guid,
+>>> +                                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+>>> +                                   EFI_VARIABLE_RUNTIME_ACCESS |
+>>> +                                   EFI_VARIABLE_READ_ONLY,
+>>> +                                   strlen(val) + 1, val, false);
+>>> +}
+>>> +
+>>>   /**
+>>>    * efi_init_platform_lang() - define supported languages
+>>>    *
+>>> @@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
+>>>          if (ret != EFI_SUCCESS)
+>>>                  goto out;
+>>>
+>>> +       /* Define EFI variable FdtFile */
+>>> +       if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
+>>> +               ret = efi_init_fdtfile();
+>>> +               if (ret != EFI_SUCCESS)
+>>> +                       goto out;
+>>> +       }
+>>> +
+>>>          /* Indicate supported features */
+>>>          ret = efi_init_os_indications();
+>>>          if (ret != EFI_SUCCESS)
+>>> --
+>>> 2.40.1
+>>>
+>>
+>> Assuming my concerns above are figured out:
+>>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>
+>> Regards,
+>> SImon
+
