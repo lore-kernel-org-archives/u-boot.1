@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A17C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:05:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9E6DC0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:05:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38C2087AE8;
-	Thu, 26 Oct 2023 01:05:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A423C87AB4;
+	Thu, 26 Oct 2023 01:05:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P1J5WRie";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UsatW0pO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B46A587AE8; Thu, 26 Oct 2023 01:05:11 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id BAD12874F7; Thu, 26 Oct 2023 01:05:12 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B38EC87A5F
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:05:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37A6387AC6
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:05:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7788db95652so21904485a.2
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:05:05 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-778999c5ecfso22308885a.2
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:05:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698275103; x=1698879903; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698275104; x=1698879904; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EyySBYg80J1jtPmLKIgVLYG5Fk11OL28zBrXIMQjjyE=;
- b=P1J5WRie78OTOO0aE0Gj8bxMjzI81KPDwJq/iHD6nLuNAq/f+5Ca6CTN7rq/9HISGO
- qf1maLoXchR+SRqyZYJK+8XFK3yKHux1Iy5s/h2mSkOq/wlrlv8xAQ7tmH3C2fYru4Xo
- MRDfyZZdQs9Gpejso/+poleh4hOTwtR1zf6+MsbQAx7ba7X07P+tz5kOwIS2QgWxH3cb
- 1wFwv4A40/rBJm1+h4BH6Eoi2RjJd0pQxJI3Q+gLTuDF1JTXBAlFx1NruPJPPYH5X5At
- def/oKFFY2wi2IdwtRGOgjwZrgHlDI9qRtgLF9tN5SRgB15BwzMgdHcQ2UMN7KobWfOn
- Oj7w==
+ bh=6wQ2Pnq1Vm4nfpe2SvuiHVpdZ2ZxELXUlwBH8y1qmak=;
+ b=UsatW0pOxRKAQnwmt5ZHlZ8wE3l8mV/W8nV1nv+roVqfxtU6mElZY2D1vRtLt5ZNXQ
+ Enkk5SLrZZWlvvPu4kLVTyt1DcgNyaHlNiGXvjgkHKNDlKuihMLu0o6PLVJWbemiokt5
+ Vp3DnI9Hd1c0tYyQ3NfMBWO5aFKO/YgzqU9cGF9MGG0gR1xwOYmRfUHYT5UyVTbEXaus
+ iakl6B886yTGKrm8n/eTXSfO7ym3P+kdl38Y9z5c10q11PhIqhwK11QHYvWDhHIY0FBV
+ hpvkEJ+5OYgdNhTLCvJ5AuD2eVWO4muR7yMHPD+4n8O7OBC+f2n9/AwxlSnT5WtbhaWa
+ ufnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698275103; x=1698879903;
+ d=1e100.net; s=20230601; t=1698275104; x=1698879904;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EyySBYg80J1jtPmLKIgVLYG5Fk11OL28zBrXIMQjjyE=;
- b=LULj4SHK5DTjxZpfjM4fvSTDsPNYQRSyo3xVwawxu0ETRr7jLt5Z0jOCJggWo9CCZK
- kDVKe5+nJf+62/+LQsxtOsuJ7YNAw6nqZLrC6IfKQjYVQ4s4DLXzOKBsSj5996xK2/+r
- 9bOpHC944NDfYBTETardpPjXn4CacFLNfuyqcutw5Stwyc6YejPRGnOFCj5V4GluNVGI
- w9O1oQZPwf8DMHX2oOEqoBGKFIIG3CEWA6ZgEbgXsNJZInzX3df0tFr8bzLIYNaaJvJy
- K7YI6GEzMYrWd6V6eIbsiEsBYlUbevZNOY0rqGD6zs/eNop7r5oqR6u1aFzjmumEjnnw
- eMMQ==
-X-Gm-Message-State: AOJu0Yy/qLtPWuzKfnQabn6PHLzJ/j1/0Wa4EO9wYJ/ysNRF+Mwd7cz+
- KABx2NYlBhAwxjQ3XlWEbQXJjcLoMeQ=
-X-Google-Smtp-Source: AGHT+IFyIf8IzAFhyHxRlzmAIN+Pa74Wufr3F2qMIZR17mc3b5nRZZe8X9w79GxxAf95/msFDQwFKg==
-X-Received: by 2002:a05:620a:40c2:b0:779:f0a1:3128 with SMTP id
- g2-20020a05620a40c200b00779f0a13128mr6633655qko.63.1698275103117; 
- Wed, 25 Oct 2023 16:05:03 -0700 (PDT)
+ bh=6wQ2Pnq1Vm4nfpe2SvuiHVpdZ2ZxELXUlwBH8y1qmak=;
+ b=Lr83TQgrQp85UYQ8XPXGnWmCbZ/3EaBV+hv7/dj14o0/xwWSVEilUE51lWePqokLrJ
+ ukqMMzR6EDSr5ODyiUE5XD55P6MjFM8JtSXgIB5FcqHVozuZLyOc/65LMGof0hNgPvvf
+ Ti1437O8+gxrvuD2YiNd5UZR1M7cxLGISfhTk6c7u4UhZN87IdunSkZBP4/cRuQaV+d7
+ 45w/6pdixveUn0w3v/zLeYAem73Iq8JPCisYkPJqN7/shLFTPdpneuBBR5/uZ0Zli62y
+ d+DEVtdzwSVxiIFTiXD5nSahQHHHDxLjTPQ4InWyGqIcVn/b6BZV6PmfUXh9MJMaMJfX
+ jiBQ==
+X-Gm-Message-State: AOJu0YyMuJUzXdnWdaiYu6QrvDIP7/blwaLkVcFAMtwnzUBQxbwLcrJj
+ pAuDvlRmKCUhbeQJONwa9Lvy26q1rkg=
+X-Google-Smtp-Source: AGHT+IEuYBZlTatkttK+lf0Xiq3JZl0lS9w+Dtp5BPhbumaJ7yfxkMr9PTgAK2ZAlaph2zby/8zZLg==
+X-Received: by 2002:a05:620a:4089:b0:76c:992e:1b2f with SMTP id
+ f9-20020a05620a408900b0076c992e1b2fmr18074688qko.13.1698275104217; 
+ Wed, 25 Oct 2023 16:05:04 -0700 (PDT)
 Received: from aford-System-Version.lan
  ([2601:447:d002:5be:449a:a220:d0aa:3d6a])
  by smtp.gmail.com with ESMTPSA id
- a24-20020a05620a103800b00767da10efb6sm4559567qkk.97.2023.10.25.16.05.02
+ a24-20020a05620a103800b00767da10efb6sm4559567qkk.97.2023.10.25.16.05.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 16:05:02 -0700 (PDT)
+ Wed, 25 Oct 2023 16:05:03 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: sbabic@denx.de, aford@beaconembedded.com, Adam Ford <aford173@gmail.com>
-Subject: [PATCH 2/5] configs: imx8mm_beacon: Enable fastboot downloading
-Date: Wed, 25 Oct 2023 18:04:53 -0500
-Message-Id: <20231025230456.7924-2-aford173@gmail.com>
+Subject: [PATCH 3/5] configs: imx8mm_beacon: Disable the WDT autostart
+Date: Wed, 25 Oct 2023 18:04:54 -0500
+Message-Id: <20231025230456.7924-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025230456.7924-1-aford173@gmail.com>
 References: <20231025230456.7924-1-aford173@gmail.com>
@@ -92,35 +92,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fastboot is necessary to use UUU enhanced functions, so enable it.
+Auto-starting the WDT can cause false reboots when the user
+is not intentionally trying to use the WDT, so leave it off until
+it is requested.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- configs/imx8mm_beacon_defconfig | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ configs/imx8mm_beacon_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
-index 031470c169..886d912650 100644
+index 886d912650..b33e113580 100644
 --- a/configs/imx8mm_beacon_defconfig
 +++ b/configs/imx8mm_beacon_defconfig
-@@ -86,6 +86,11 @@ CONFIG_SPL_CLK_COMPOSITE_CCF=y
- CONFIG_CLK_COMPOSITE_CCF=y
- CONFIG_SPL_CLK_IMX8MM=y
- CONFIG_CLK_IMX8MM=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x42800000
-+CONFIG_FASTBOOT_BUF_SIZE=0x20000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=2
- CONFIG_MXC_GPIO=y
- CONFIG_DM_PCA953X=y
- CONFIG_DM_I2C=y
-@@ -142,6 +147,5 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
- CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+@@ -148,4 +148,5 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
  CONFIG_CI_UDC=y
  CONFIG_SDP_LOADADDR=0x40400000
--CONFIG_USB_GADGET_DOWNLOAD=y
  CONFIG_SPL_USB_SDP_SUPPORT=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
  CONFIG_IMX_WATCHDOG=y
 -- 
 2.40.1
