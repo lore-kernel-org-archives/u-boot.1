@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526B9C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:05:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A17C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:05:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1C4887ABA;
-	Thu, 26 Oct 2023 01:05:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 38C2087AE8;
+	Thu, 26 Oct 2023 01:05:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jIk0VJjq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P1J5WRie";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5561C87AE7; Thu, 26 Oct 2023 01:05:08 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id B46A587AE8; Thu, 26 Oct 2023 01:05:11 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CC3B87ABA
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:05:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B38EC87A5F
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:05:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7789aed0e46so21868885a.0
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:05:03 -0700 (PDT)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7788db95652so21904485a.2
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:05:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698275102; x=1698879902; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ImYBP4/Ayel812g8M37RPAtrPL1Zd/m74kcJ1dewS+M=;
- b=jIk0VJjqZDxriqKS185yIdJ3V1jwti+iyHXSTAK0ZNZYz7nrDPc1QJJinGTDsolpG7
- NXU2HY1rrgVfPgeNC8JpQD/3U4ErOqJ/FAwwb+dvFDkUrWE8jukqfpwZPBf9eEd9pzZ8
- 6APoY7EcTUDwerWNGb9U1U7Jee1F7hVwbodWi8AwIIXKOQp9DyFDg8yLyNKEYkrqHZUm
- Oa5KIwi38cKIHHxSugJLfKuyOB9JvgY/Ufo89UloGKrxPHgCH+j6IxG25Wo+d4+A7rae
- F51atYaTtShuBn+I4jIRcxfsb2lnTb6RjXeJg4atxyHhtn8iEXZRkFYv4f4XzqpxG2pv
- ++yw==
+ d=gmail.com; s=20230601; t=1698275103; x=1698879903; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EyySBYg80J1jtPmLKIgVLYG5Fk11OL28zBrXIMQjjyE=;
+ b=P1J5WRie78OTOO0aE0Gj8bxMjzI81KPDwJq/iHD6nLuNAq/f+5Ca6CTN7rq/9HISGO
+ qf1maLoXchR+SRqyZYJK+8XFK3yKHux1Iy5s/h2mSkOq/wlrlv8xAQ7tmH3C2fYru4Xo
+ MRDfyZZdQs9Gpejso/+poleh4hOTwtR1zf6+MsbQAx7ba7X07P+tz5kOwIS2QgWxH3cb
+ 1wFwv4A40/rBJm1+h4BH6Eoi2RjJd0pQxJI3Q+gLTuDF1JTXBAlFx1NruPJPPYH5X5At
+ def/oKFFY2wi2IdwtRGOgjwZrgHlDI9qRtgLF9tN5SRgB15BwzMgdHcQ2UMN7KobWfOn
+ Oj7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698275102; x=1698879902;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ImYBP4/Ayel812g8M37RPAtrPL1Zd/m74kcJ1dewS+M=;
- b=JVH519PemiEKISUsYwqGCGIK7VKcEk6ynmpraZfxd8zsOn0aRRn06qvFOItcgZQx+a
- K/oOQDrmuei7O1JCaTLX4PQC9KEv+oFSJwOyFW2t8W6kv8kHeKJumudBBS+mBtOnuf1f
- 0FHA0dWE7pDGLh5Iv1ez0tHDKvBN5lk22XE2R1hfGsRWj9MzugAdweUfiYDy4pmLQCIZ
- mVHkGZU/Y+xx0FXcqJQ9Uw5GanlJU/jubeMv9QG7fUf4muIW3yGuv4FqRX+3KvLNarDF
- GdPdATjUabyCD6szHkLgO03ulY1MJVQMrJiNbhEWkbC1Jkektqb4j+/cWf0OfAJafFUW
- LTkQ==
-X-Gm-Message-State: AOJu0Yz9gNs38UEhi7fltf4f0ZIqvTUkMb2HTOKwbrwjddzYzwK1aRdk
- J5fIjXGxZ2/Bt2rel8njCZHXgG/DcdA=
-X-Google-Smtp-Source: AGHT+IEnmKgqEHMVUb2RbfI7Hqd9RZC2KtlAVA30uZ9VnWAWMpwVzSafSICySATfTPqFNCXvntXJpg==
-X-Received: by 2002:a05:620a:4155:b0:76e:f3a3:4ac6 with SMTP id
- k21-20020a05620a415500b0076ef3a34ac6mr19339141qko.35.1698275101981; 
- Wed, 25 Oct 2023 16:05:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698275103; x=1698879903;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EyySBYg80J1jtPmLKIgVLYG5Fk11OL28zBrXIMQjjyE=;
+ b=LULj4SHK5DTjxZpfjM4fvSTDsPNYQRSyo3xVwawxu0ETRr7jLt5Z0jOCJggWo9CCZK
+ kDVKe5+nJf+62/+LQsxtOsuJ7YNAw6nqZLrC6IfKQjYVQ4s4DLXzOKBsSj5996xK2/+r
+ 9bOpHC944NDfYBTETardpPjXn4CacFLNfuyqcutw5Stwyc6YejPRGnOFCj5V4GluNVGI
+ w9O1oQZPwf8DMHX2oOEqoBGKFIIG3CEWA6ZgEbgXsNJZInzX3df0tFr8bzLIYNaaJvJy
+ K7YI6GEzMYrWd6V6eIbsiEsBYlUbevZNOY0rqGD6zs/eNop7r5oqR6u1aFzjmumEjnnw
+ eMMQ==
+X-Gm-Message-State: AOJu0Yy/qLtPWuzKfnQabn6PHLzJ/j1/0Wa4EO9wYJ/ysNRF+Mwd7cz+
+ KABx2NYlBhAwxjQ3XlWEbQXJjcLoMeQ=
+X-Google-Smtp-Source: AGHT+IFyIf8IzAFhyHxRlzmAIN+Pa74Wufr3F2qMIZR17mc3b5nRZZe8X9w79GxxAf95/msFDQwFKg==
+X-Received: by 2002:a05:620a:40c2:b0:779:f0a1:3128 with SMTP id
+ g2-20020a05620a40c200b00779f0a13128mr6633655qko.63.1698275103117; 
+ Wed, 25 Oct 2023 16:05:03 -0700 (PDT)
 Received: from aford-System-Version.lan
  ([2601:447:d002:5be:449a:a220:d0aa:3d6a])
  by smtp.gmail.com with ESMTPSA id
- a24-20020a05620a103800b00767da10efb6sm4559567qkk.97.2023.10.25.16.05.01
+ a24-20020a05620a103800b00767da10efb6sm4559567qkk.97.2023.10.25.16.05.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 16:05:01 -0700 (PDT)
+ Wed, 25 Oct 2023 16:05:02 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: sbabic@denx.de, aford@beaconembedded.com, Adam Ford <aford173@gmail.com>
-Subject: [PATCH 1/5] configs: imx8mp_beacon: Do not set SYS_CONSOLE_IS_IN_ENV
-Date: Wed, 25 Oct 2023 18:04:52 -0500
-Message-Id: <20231025230456.7924-1-aford173@gmail.com>
+Subject: [PATCH 2/5] configs: imx8mm_beacon: Enable fastboot downloading
+Date: Wed, 25 Oct 2023 18:04:53 -0500
+Message-Id: <20231025230456.7924-2-aford173@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231025230456.7924-1-aford173@gmail.com>
+References: <20231025230456.7924-1-aford173@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,26 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The hardware only supports a specific console port, so  remove the
-option to change the console location in the environment.
+Fastboot is necessary to use UUU enhanced functions, so enable it.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- configs/imx8mp_beacon_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/imx8mm_beacon_defconfig | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
-index b686af8d18..c758ff371d 100644
---- a/configs/imx8mp_beacon_defconfig
-+++ b/configs/imx8mp_beacon_defconfig
-@@ -42,6 +42,7 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_SYSTEM_SETUP=y
- CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else booti ${loadaddr} - ${fdt_addr}; fi"
- CONFIG_DEFAULT_FDT_FILE="imx8mp-beacon-kit.dtb"
-+# CONFIG_SYS_CONSOLE_IS_IN_ENV is not set
- # CONFIG_SYS_DEVICE_NULLDEV is not set
- CONFIG_SPL_MAX_SIZE=0x26000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
+index 031470c169..886d912650 100644
+--- a/configs/imx8mm_beacon_defconfig
++++ b/configs/imx8mm_beacon_defconfig
+@@ -86,6 +86,11 @@ CONFIG_SPL_CLK_COMPOSITE_CCF=y
+ CONFIG_CLK_COMPOSITE_CCF=y
+ CONFIG_SPL_CLK_IMX8MM=y
+ CONFIG_CLK_IMX8MM=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x42800000
++CONFIG_FASTBOOT_BUF_SIZE=0x20000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=2
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+@@ -142,6 +147,5 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_SDP_LOADADDR=0x40400000
+-CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_SPL_USB_SDP_SUPPORT=y
+ CONFIG_IMX_WATCHDOG=y
 -- 
 2.40.1
 
