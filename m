@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF83C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:10:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18310C25B6B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:30:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE7D287A1D;
-	Wed, 25 Oct 2023 08:10:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E6EC87A26;
+	Wed, 25 Oct 2023 08:30:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D4j6SS/l";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t9TByjLe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E884D87A22; Wed, 25 Oct 2023 08:10:26 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id C510387A2A; Wed, 25 Oct 2023 08:30:05 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECE6887258
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:10:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D3532879E0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:30:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-32d8c2c6dfdso3356669f8f.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:10:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6be0277c05bso4278747b3a.0
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:30:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698214224; x=1698819024; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gHm9JKG1jCvI/3gOMKyLzBKVKLNP430LtTSWUIIaM0U=;
- b=D4j6SS/lfDzP/KA1JjJ0o+1FAHc/uz2hN32o8lLk4ZCEj4jHiUH9aPk2xeRzKb5lTu
- JIkyOhteQRqyigRrDGOSM3WhiIgah8ZBC68zvqgldzcS0fCCbQyKEUuQZL3e8c4zMt89
- zzfkPDE9k/Beb8Ux9WHvxRo0cUgmcQD62x98OVcKmtlInbu7Je/f7kdcqt+5zl4MGPVt
- 4K5KhymXNjCWVn+aFm1oASOpk0y+vyyDc2UsldGrE60ugdGhMbrliIo5pf28BQPeQXDQ
- 7OgmrASowJSqJPN+2h8BkY906ZTqz0Y9MAmDZaDu9qTr8gI5Smjj5s4yqV7Q4MwXyaGe
- /z1Q==
+ d=linaro.org; s=google; t=1698215401; x=1698820201; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rYUotnGdmCNtzm1+hJAOLPJwshlD+GNXRkbF3vPiWns=;
+ b=t9TByjLeowMBXo1T3Nf0BP3ZniwuCuHU+bfqR4xQe5mC6ouryRJXl+YjgMhgcZa7YO
+ So+KG0XPEA1k3DN9gxnkj7470wXk0G40BNwYTARfnqBDPTE4FFL+oBYW6I0PqcNvyzMk
+ zMFxb/Il+HnaU3eLeQZnjNhwgzFiJGPiBpS6k2l4tqi9zHqc4Xi4DcGYdzF3pMEXp/L1
+ 7w+HCLdUk1PIgF94lWGqcKr+40ARrj+c3K8KjbP3O3g8jDmaJjLa2Veg+2ahfgVfCVV+
+ qwdiPA6r0P1hX1g0dSnAiZTj/hJuwLYJGO/uMVdSFXY+4x/DjdZd9YEd+342DqOrd+ON
+ SrZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698214224; x=1698819024;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gHm9JKG1jCvI/3gOMKyLzBKVKLNP430LtTSWUIIaM0U=;
- b=AsBnJX9Tfa3s48BKdehNzbCfpUTek0IY2JVlAhBoqDnU7A7TF+38BlBgh7kN75JERY
- sij/g7KKPFP3BW5lgVovcHct+4Zncuc9bM3eWUApRsSUia52vQkW9Tl85OvK/xe2iqjB
- PRLzehuox8YpIAp2BeXdb2/sNJnK5q5IJbDsVHdFH3gf9EXGg4vs6DgxyLmXC8fAMUo3
- 9KaoD8h7+GnVR2gv/z+rfRLBkh7RUc6G+uYdTCiDd6asw8RBVbDMfTtZu32MfyzC8ZJL
- qVaKovVxriRkouq+Sj+Y75CZWQMRL93SvA4skGHXOQOMju0bNkGojUui1ep7y+Of6cHX
- rW4w==
-X-Gm-Message-State: AOJu0YxFkc9IMDYRbCnljbAvIPvd4AyljCW6dexP4c3uNFsz8+S51eMz
- wCJRaVe573PA+8Zc6D1W232bgWOkONCJGgthKf8=
-X-Google-Smtp-Source: AGHT+IE1TWQduM2TuGOtUFu8YUgOevrh3x+mpg+drCS/bO/OBn/2iqU1/B+Cb711MpG+5epgF6DUCv20/6iw3GN84hU=
-X-Received: by 2002:a5d:62cd:0:b0:32d:9df1:6f6d with SMTP id
- o13-20020a5d62cd000000b0032d9df16f6dmr9528848wrv.17.1698214223967; Tue, 24
- Oct 2023 23:10:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698215401; x=1698820201;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rYUotnGdmCNtzm1+hJAOLPJwshlD+GNXRkbF3vPiWns=;
+ b=wPQP4AdpnQBj44+uR7zFUMjNkpUDeGCaQmnGE2YjuQ4PYcX5J/euM+wL9bbLLRO2wO
+ 6AI2H7Q6EKUcT1b9e3nZUYMbqjkByGeaLqhfJmVShtsDYix3ZqI/ymVBJhQikJ5lJNEF
+ daS7wc5QcFqutYxy9U7YdGLvyT4/l2menZFfQifG47DvS7r3CnKMiARrN8ztVV4rJ4IG
+ JvlaMwvGOcJmrJJoYkd55CNnCwcE6E0mhRWtCyersVYGuW2mjJ5la85TP6j3x/Uqm7wE
+ eOdJo1N0B79By20U6a1IAOq7MFKiR+IhbCcFZQVNtaAqu30NiUa5FNojFRiaYH9331/4
+ 8X7w==
+X-Gm-Message-State: AOJu0YxgsH6UDDQaGAAe6blkZ8PMKqxq2IWFpYBPmdXf/2n05SphXaCe
+ ags9QWwRBhPUWHvsZtxEIB3PYWnV7CAgtOQTdQQ=
+X-Google-Smtp-Source: AGHT+IGCrU0WJXIlwTvkAr4GRnSAxLbTQ0+KBxXPJHesivTZsnPrDjpLgmiGz+VxjAefiD+68QIepQ==
+X-Received: by 2002:a05:6a00:1302:b0:693:3f7a:eec2 with SMTP id
+ j2-20020a056a00130200b006933f7aeec2mr13141516pfu.29.1698215400813; 
+ Tue, 24 Oct 2023 23:30:00 -0700 (PDT)
+Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
+ u133-20020a62798b000000b006862b2a6b0dsm9314707pfc.15.2023.10.24.23.29.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Oct 2023 23:30:00 -0700 (PDT)
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Subject: [PATCH v8 0/7] Add EFI HTTP boot support
+Date: Wed, 25 Oct 2023 15:28:38 +0900
+Message-Id: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231024074110.199623-1-clamor95@gmail.com>
- <20231024074110.199623-4-clamor95@gmail.com>
- <20231024191757.GG496310@bill-the-cat>
-In-Reply-To: <20231024191757.GG496310@bill-the-cat>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 25 Oct 2023 09:10:12 +0300
-Message-ID: <CAPVz0n3b4eH0q3sPGD7UkjVo56r__6AzoJsuwKy+XVPPCQX+xA@mail.gmail.com>
-Subject: Re: [PATCH v8 3/8] power: pmic: add the base MAX77663 PMIC support
-To: Tom Rini <trini@konsulko.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,48 +93,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 24 =D0=B6=D0=BE=D0=B2=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 22:1=
-8 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Tue, Oct 24, 2023 at 10:41:05AM +0300, Svyatoslav Ryhel wrote:
->
-> > Add support to bind the regulators/child nodes with the pmic.
-> > Also adds the pmic i2c based read/write functions to access pmic
-> > registers.
-> >
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> [snip]
-> > diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max7766=
-3.c
-> > new file mode 100644
-> > index 0000000000..4070235d3c
-> > --- /dev/null
-> > +++ b/drivers/power/pmic/max77663.c
-> > @@ -0,0 +1,86 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-> > + */
-> > +
-> > +#include <common.h>
->
-> Should have noted sooner, sorry. Please don't use <common.h> in new
-> code, and audit the include list you have as well (this one looks
-> reasonable I suspect, all the same, so general advice).
+This series adds the EFI HTTP boot support.
+User can add the URI device path with "efidebug boot add" command.
+efibootmgr handles the URI device path, download the
+specified file using wget, mount the downloaded image with
+blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI)
+by selecting automatically created boot option when the new disk is
+detected.
 
-Each and every driver in pmic dir has common.h so it was an obvious
-move to include it as well. I haven't seen that this header is deprecated,
-if so, sure, I will not include it further.
+This version still does not include the test.
 
-About auditing inclusions, I never include unnecessary headers and almost
-all the time run tests to determine the least amount of inclusions possible=
- for
-correct build and work.
+To enable EFI HTTP boot, we need to enable the following Kconfig options.
+ CONFIG_CMD_DNS
+ CONFIG_CMD_WGET
+ CONFIG_BLKMAP
+ CONFIG_EFI_HTTP_BOOT
 
-Best regards,
-Svyatoslav R.
+On the Socionext Developerbox, enter the following commands then
+debian installer is downloaded into "loadaddr" and installer
+automatically starts.
+ => dhcp
+ => setenv serverip 192.168.1.1
+ => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+ => efidebug boot order 3
+ => bootefi bootmgr
 
->
-> --
-> Tom
+Note that this debian installer can not proceed the installation
+bacause RAM disk of installer image is not recogniged by the kernel.
+I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
+will be one of the solution to recognize RAM disk from kernel.
+(In EDK2, the equivalent solution is called ACPI NFIT.)
+
+On QEMU, I can not make DNS work from the QEMU guest.
+The following commands work on qemu_arm64(manually set the http server ip in URI).
+  => dhcp
+  => setenv gatewayip 10.0.2.2
+  => setenv httpserverip 134.160.38.1
+  => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+  => efidebug boot order 3
+  => bootefi bootmgr
+
+[TODO]
+- add test
+- stricter wget uri check
+- omit the dns process if the given uri has ip address
+   -> this will be supported when the lwip migration completes
+- uri device path support in eficonfig
+
+[change log]
+v7 -> v8
+- search the default file on the fly, instead of creating
+  the boot option with default file
+- delete blkmap and reserved memory in case of error or
+  when the EFI application returns
+- update the subject "Boot var automatic management for removable medias"
+  since this automatic boot option management is also applied
+  for non-removable medias
+- update error handling in efidebug command
+- call efi_add_memory_map() instead of exposing efi_reserve_memory()
+
+v6 -> v7
+- rename the funtion name from load_default_file_boot_option()
+  to load_mounted_image()
+- move some fix from patch #5 "efi_loader: support boot from URI device path" to
+  patch #4 "efi_loader: create default file boot option".
+- fix missing free() of default_file_path
+
+v5 -> v6
+- add patch #4 "Boot var automatic management for removable medias"
+- boot from automatically created boot option
+  rather than searching default file on the fly
+- introduce new CONFIG_EFI_HTTP_BOOT Kconfig option
+- comment in one place
+- use log_err() rather than printf()
+- use env_get_hex("filesize", 0) instead of return value of net_loop()
+- use more suitable error code
+- blkmap can be build for SPL/TPL
+- add CDROM short-form device path support
+
+v4 -> v5
+- add missing else statement
+- add NULL check of efi_dp_find_obj() call
+- update document to remove "limitation"
+
+v3 -> v4
+- patch#8 is added to simplify the bootmgr default boot process
+- add function comments
+
+v2 -> v3
+- Patch#6 is added, reserve the whole ramdisk memory region
+- remove .efi file extension check for PE-COFF image
+- use "if IS_ENABLED(..)" as much as possible
+- 1024 should be sizeof(net_boot_file_name)
+- call net_set_state(NETLOOP_FAIL) when wget encounters error
+- describe DNS ip address host name limitation in document
+
+v1 -> v2
+- carve out the network handling(wget and dns code) under net/wget.c
+- carve out ramdisk creation code under drivers/block/blkmap_helper.c
+- wget supports the valid range check to store the received blocks using lmb
+- support when the downloaded image have no partiton table but a file system
+- not start the .efi file in try_load_entry()
+- call efi_check_pe() for .efi file to check the file is PE-COFF image
+- add documentation for EFI HTTP Boot
+
+Masahisa Kojima (6):
+  net: wget: prevent overwriting reserved memory
+  net: wget: add wget with dns utility function
+  blk: blkmap: add ramdisk creation utility function
+  efi_loader: support boot from URI device path
+  cmd: efidebug: add uri device path
+  doc: uefi: add HTTP Boot support
+
+Raymond Mao (1):
+  efi_loader: Boot var automatic management
+
+ cmd/bootefi.c                                 |   5 +
+ cmd/efidebug.c                                |  51 ++++
+ doc/develop/uefi/uefi.rst                     |  30 +++
+ drivers/block/Makefile                        |   3 +-
+ drivers/block/blkmap.c                        |  15 --
+ drivers/block/blkmap_helper.c                 |  53 ++++
+ include/blkmap.h                              |  29 +++
+ include/efi_loader.h                          |   1 +
+ include/net.h                                 |  17 ++
+ lib/efi_loader/Kconfig                        |   9 +
+ lib/efi_loader/efi_bootmgr.c                  | 229 ++++++++++++++++++
+ lib/efi_loader/efi_disk.c                     |  18 ++
+ lib/efi_loader/efi_setup.c                    |   7 +
+ net/wget.c                                    | 205 +++++++++++++++-
+ test/py/tests/test_efi_secboot/test_signed.py |  42 ++--
+ .../test_efi_secboot/test_signed_intca.py     |  14 +-
+ .../tests/test_efi_secboot/test_unsigned.py   |  14 +-
+ .../test_fs/test_squashfs/test_sqfs_ls.py     |   6 +
+ 18 files changed, 690 insertions(+), 58 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
+
+-- 
+2.34.1
+
