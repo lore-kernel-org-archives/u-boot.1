@@ -4,74 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C04C25B6D
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 02:20:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32492C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 02:34:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CC77879A6;
-	Wed, 25 Oct 2023 04:20:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4AEAD879A6;
+	Wed, 25 Oct 2023 04:34:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VjKjztwY";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="o9xH5ard";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47541879A6; Wed, 25 Oct 2023 04:20:10 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4228D8799C
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 04:20:07 +0200 (CEST)
+ id D308E8710A; Wed, 25 Oct 2023 02:00:46 +0200 (CEST)
+Received: from m1345.mail.163.com (m1345.mail.163.com [220.181.13.45])
+ by phobos.denx.de (Postfix) with ESMTP id 12FE5879AB
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 02:00:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1698200404; x=1698805204; i=xypron.glpk@gmx.de;
- bh=GMli6kE5vOH3uHDpR+mCs+Qboo4dEtwv21/S3twJ/70=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=VjKjztwY4G78BUnxntTh/yQ+3K20UcUf+W5KTgWCnLh3qoniPptpLesJpe1jMLUF
- qqvNMax+Nl88KwO6LjRJNrw/tvWk4DSQCicta1cPHP1kBPwLLVN83XAgyZHiTVaP8
- 1wI3kSUvgIkCyIa8HX8F/SbB+mJpc3vyIYuYvHZH2LIMjjVSZQJJ+CPgXeOpM11R1
- RHn50BT9jvUAMr5yi7eTIR1dEWB3jIXu4xdupElyoHQ96pm2Uo/vWgaxN+yErBCq9
- fcBC5BUyZgY4egswQWnqzZd7nQAOV4EvkTLVGdfyfzpSZxxLwtiLDZDpZAfUoSOgz
- KCLJSOsDJmxlRCkWLw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N0oFz-1rjIlF0xOP-00wni5; Wed, 25
- Oct 2023 04:20:04 +0200
-Message-ID: <d61eb00b-baa8-4804-801a-045eb56ed617@gmx.de>
-Date: Wed, 25 Oct 2023 04:20:06 +0200
+ dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=simitel@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=tnyfEyHS3vwU09rTCRyVTA7P9ZMX2F4wwbn0GL6Ev2s=; b=o
+ 9xH5ardvva8O4vHSqn8W1DSx9znMtgEnQnPRBTRFqlDwpUzuj2WjRPaylJhdZVtG
+ EeaOKH/G8xHmUgQFL+yAHBMrroZU14NNAwRIHo6BPTPQicrJrs/QhV/GR9sPLJw0
+ Actpn1x209XHCmbsIVTAgK357j5Qf/9tKiHL+An/bY=
+Received: from simitel$163.com ( [103.150.184.106] ) by ajax-webmail-wmsvr45
+ (Coremail) ; Wed, 25 Oct 2023 08:00:37 +0800 (CST)
+X-Originating-IP: [103.150.184.106]
+Date: Wed, 25 Oct 2023 08:00:37 +0800 (CST)
+From: target <simitel@163.com>
+To: u-boot@lists.denx.de
+Subject: Failedto read big file with "Invald FAT entry' from USB disk (FAT16)
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
+ Copyright (c) 2002-2023 www.mailtech.cn 163com
+X-NTES-SC: AL_QuySCv2SvUgo4SKcZekXnkwQj+c9W8WxuPsm2oRUO500hyn38CAEUkJyI0D4/d2rDQKqjSWbSyFs8eB3f5Fcfq2D7IfYZ6uXaJZ79xaF7BaO
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Dylan Corrales <deathcamel58@gmail.com>, =?UTF-8?Q?Milan_P=2E_Stani=C4=87?=
- <mps@arvanta.net>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2024-01-rc2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:My9isvuzDvhpH2LW2b04baaTEj8ALtcj+v17R4T2bWjvNBq52xS
- GR9fgKplwoymGZc5S/qUqcbnhcAcaNt5ykG1z8O4DFFu800ieYB7SYyxhegccMRL7u6i0L5
- b3u+XEJXn6HgE9yJRs0eyHiAIn7g9JnPDom/KkntsNViCex70kyn1n8ZuA6eWQ0/GwTXev5
- WN9d50WRuEHO1E2VJW8VA==
-UI-OutboundReport: notjunk:1;M01:P0:aLxzzf/DIHk=;o174eeojj4nG0CsQTRdcqbql7sN
- LGvEwg9Es5Mgd3vztNzDlqcfxeJn1zYinIxpsZC2oLpCdpcq1KwxFz7nnn0DSKRYngwCij07/
- 3Cgsp9iueyPehYNq6eyjA2Z10HH2r2tG0yxEdGwEVf873O4iYZZrhpgEgw+SOK7ijXRAdWQrb
- onrP1m+ZsJvJfnnELw/TUo8VkjEX9nw+/LWdIgqww9EHagTBDvxT4gfe6b+R3FagqdqFBSybZ
- 8jKwkBsUpXvL46OX3qqP8myjMI9fd8wsZoxp2dOs4M7ExD+LtcVXRUpiQ6iBa9u+bUK0bo/tN
- 6KAPRMQrS3YhZ/EGqgzRzzsikkwgeOb/cfNmKMgeMQthN52MN3zmFN/JXOGunMUJXY0CVQOUP
- juL9bQoEEF0+m736XAOiJctkzuoST1e1ivHz6VTjpODHnDfq43OQ6mKLt15tEJ0ix/IUV8xn+
- GnJdTZcSvNtM7ersq5yNGz+qmX3E8/Ea8+RmIPo7RNPj2DNYqtLNKfi2OULHpF9oy9jtNL/vP
- yywAdoKCNoBWsewxy8YKu6HVPBA7XwcZ5hkg77mWQCuHjoSqINdDfL0nEvHLBgr7UxyflKsM5
- 7D4X0hUb6uB8XrGBTW6wHNsL+cQEOruyrY+H9s22oAlXuBA1is30EjRdplbiqDCMnlDP4DHBc
- ZfiO5cGZZZL9MJi88PnKt34LV4kUHvvMny/Bh7s4Kckw9NNyme6juYEA5Kts5RSWMbVFSO3eE
- qa4/giqrw3outxP1NLtvulXQF4rRZrFWoaINclSdT0SqEl6D2nYfiEt3wIPrnOnPmt/nns/qG
- vD6YwmGoR7k07DlfK4EqW62raD1L6ZNVCknweDUN7S8X2gSXUSlK0UrjEmeFeeHUy7doZi/Uz
- kyVJgd2Fj1Wr2igqdZtZbpx7jdYOPhZBuEpN5EVdnVbpxh/sr3elYUvZec2uDhPpvp994sVry
- ECZuWA==
+Message-ID: <279f2b49.1e2.18b6422157c.Coremail.simitel@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: LcGowAD33ymmWjhl6AYYAA--.7242W
+X-CM-SenderInfo: pvlpx3lho6il2tof0z/xtbBogUTW1aEJ+VoUQAEsC
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+X-Mailman-Approved-At: Wed, 25 Oct 2023 04:34:13 +0200
+Content-Type: text/plain; charset=GBK
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,76 +65,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
-
-The following changes since commit 5cab3515f8c9796015739c1750b8933291c816b=
-e:
-
-   Merge tag 'u-boot-rockchip-20231024' of
-https://source.denx.de/u-boot/custodians/u-boot-rockchip (2023-10-24
-09:39:52 -0400)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2024-01-rc2
-
-for you to fetch changes up to 916dad34af0e53181dfe21f5764d3a787cb24bdc:
-
-   efi_loader: fix EFI_ENTRY point on get_active_pcr_banks (2023-10-24
-23:56:43 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18293
-
-=2D---------------------------------------------------------------
-Pull request efi-2024-01-rc2
-
-Documentation:
-
-* Bump urllib3 version
-* Replace references to dm_dump_all() with dm_dump_tree()
-* Update description of build dependencies for Alpine Linux
-* Fix typo in gpt example
-* Fix ordering of shell commands
-
-UEFI:
-
-* Fix build failure without network
-* Expose the device-tree file name as UEFI variable
-* Move misplace EFI_ENTRY macro.
-
-=2D---------------------------------------------------------------
-Dylan Corrales (1):
-       doc: Replace dm_dump_all() with dm_dump_tree()
-
-Heinrich Schuchardt (2):
-       efi_loader: fix efi_dp_from_eth
-       efi_loader: expose the device-tree file name
-
-Ilias Apalodimas (1):
-       efi_loader: fix EFI_ENTRY point on get_active_pcr_banks
-
-Milan P. Stani=C4=87 (1):
-       doc: build: update description of build dependencies for Alpine Lin=
-ux
-
-Tom Fitzhenry (2):
-       doc: gpt: fix example of echoing variable
-       doc: usage: fix ordering of shell commands
-
-Tom Rini (1):
-       sphinx: Bump urllib3 version
-
-  doc/build/gcc.rst                      | 10 ++++++++--
-  doc/develop/driver-model/debugging.rst |  2 +-
-  doc/develop/uefi/uefi.rst              | 14 ++++++++++++++
-  doc/sphinx/requirements.txt            |  2 +-
-  doc/usage/cmd/gpt.rst                  |  5 +++--
-  doc/usage/index.rst                    |  8 ++++----
-  include/efi_loader.h                   |  5 +++++
-  lib/efi_loader/efi_device_path.c       |  5 ++++-
-  lib/efi_loader/efi_setup.c             | 30 ++++++++++++++++++++++++++++=
-++
-  lib/efi_loader/efi_tcg2.c              |  3 ++-
-  10 files changed, 72 insertions(+), 12 deletions(-)
+SSBhbSB1c2luZyB1LWJvb3QgMjAxNy4wMyBpbiBteSBzeXN0ZW0gYW5kIGVuYWJsZWQgdGhlIGRl
+YnVnIGluIGZzL2ZhdC9mYXQuYwpJIGhhZCBhIFVTQiBkaXNrIGZvcm1hdHRlZCBpbiBGQVQxNiBp
+biBMaW51eCwgSSBwdXQgYSBiaWdmaWxlLmJpbiBpbnRvIC8gaW4gdGhlIFVTQiBkaXNrIGFuZCBw
+bHVnZ2VkIHRoZSBkaXNrIGludG8gYnkgYm9hcmQuClRoZW4gSSB3YW50IHRvIHJlYWQvbG9hZCB0
+aGUgYmlnZmlsZS5iaW4gaW50byBSQU0gd2l0aCB1LWJvb3QncyBmYXRsb2FkIGNvbW1hbmQsIEkg
+ZGlkIGZvbGxvd2luZ3MuCgoKIyB1c2IgcmVzZXQKIyBmYXRscyB1c2IgMCwgaXQgc2hvd2QsClZG
+QVQgU3VwcG9ydCBlbmFibGVkCkZBVDE2LCBmYXRfc2VjdDogMTI4LCBmYXRsZW5ndGg6IDEyOApS
+b290ZGlyIGJlZ2lucyBhdCBjbHVzdGVyOiAwLCBzZWN0b3I6IDM4NCwgb2Zmc2V0OiAzMDAwMApE
+YXRhIGJlZ2lucyBhdDogMjU2ClNlY3RvciBzaXplOiA1MTIsIGNsdXN0ZXIgc2l6ZTogMTI4CkZB
+VCByZWFkKHNlY3Q9Mzg0LCBjbnQ6MiksIGNsdXN0X3NpemU9MTI4LCBESVJFTlRTUEVSQkxPQ0s9
+MTYKIDM2NDM4MDE2ICAgYmlnZmlsZS5iaW4KICAgICAxMDEyICAgczAxc3lzbG9nZAogICAgIDEw
+MDQgICBzMDJrbG9nZAogICAgIDE4NzYgICBzMDJzeXNjdGwKICAgICAxNjg0ICAgczIwdXJhbmRv
+bQogICAgICAyMTQgICBzMjFtb3VudApFTkQgTE9PUDogYnVmZmVyX2Jsa19jbnQ9MCAgIGNsdXN0
+X3NpemU9MTI4CkZBVCByZWFkKHNlY3Q9Mzg1LCBjbnQ6MiksIGNsdXN0X3NpemU9MTI4LCBESVJF
+TlRTUEVSQkxPQ0s9MTYKICAgICAxNjM1ICAgczMwZGJ1cwogICAgICA0MzggICBzNDBuZXR3b3Jr
+ClJvb3REZW50bmFtZSA9PSBOVUxMIC0gMTMKCgo4IGZpbGUocyksIDAgZGlyKHMpCiMgZmF0bG9h
+ZCB1c2IgMCAweDEwMDAwMCBiaWdmaWxlLmJpbgpyZWFkaW5nIGJpZ2lsZS5iaW4KVkZBVCBTdXBw
+b3J0IGVuYWJsZWQKRkFUMTYsIGZhdF9zZWN0OiAxMjgsIGZhdGxlbmd0aDogMTI4ClJvb3RkaXIg
+YmVnaW5zIGF0IGNsdXN0ZXI6IDAsIHNlY3RvcjogMzg0LCBvZmZzZXQ6IDMwMDAwCkRhdGEgYmVn
+aW5zIGF0OiAyNTYKU2VjdG9yIHNpemU6IDUxMiwgY2x1c3RlciBzaXplOiAxMjgKRkFUIHJlYWQo
+c2VjdD0zODQsIGNudDoyKSwgY2x1c3Rfc2l6ZT0xMjgsIERJUkVOVFNQRVJCTE9DSz0xNgpSb290
+dmZhdG5hbWU6IHxiaWdmaWxlLmJpbnwKUm9vdE5hbWU6IGJpZ2ZpbGUuYmluLCBzdGFydDogMHgz
+LCBzaXplOiAgMHgyMmMwMDAwCkZpbGVzaXplOiAzNjQzODAxNiBieXRlcwozNjQzODAxNiBieXRl
+cwpGQVQxNjogZW50cnk6IDB4MDAwMyA9IDMsIG9mZnNldDogMHgwMDAzID0gMwpGQVQxNjogcmV0
+OiAwMDAwMDAwNCwgb2Zmc2V0OiAwMDAzCkZBVDE2OiBlbnRyeTogMHgwMDA0ID0gNCwgb2Zmc2V0
+OiAweDAwMDQgPSA0CkZBVDE2OiByZXQ6IDAwMDAwMDA1LCBvZmZzZXQ6IDAwMDQKRkFUMTY6IGVu
+dHJ5OiAweDAwMDUgPSA1LCBvZmZzZXQ6IDB4MDAwNSA9IDUKRkFUMTY6IHJldDogMDAwMDAwMDYs
+IG9mZnNldDogMDAwNQpGQVQxNjogZW50cnk6IDB4MDAwNiA9IDYsIG9mZnNldDogMHgwMDA2ID0g
+NgpGQVQxNjogcmV0OiAwMDAwMDAwNywgb2Zmc2V0OiAwMDA2CkZBVDE2OiBlbnRyeTogMHgwMDA3
+ID0gNywgb2Zmc2V0OiAweDAwMDcgPSA3CkZBVDE2OiByZXQ6IDAwMDAwMDA4LCBvZmZzZXQ6IDAw
+MDcKRkFUMTY6IGVudHJ5OiAweDAwMDggPSA4LCBvZmZzZXQ6IDB4MDAwOCA9IDgKRkFUMTY6IHJl
+dDogMDAwMDAwMDksIG9mZnNldDogMDAwOApGQVQxNjogZW50cnk6IDB4MDAwOSA9IDksIG9mZnNl
+dDogMHgwMDA5ID0gOQpGQVQxNjogcmV0OiAwMDAwMDAwYSwgb2Zmc2V0OiAwMDA5Ci4uLi4uCi4u
+Li4uCkZBVDE2OiBlbnRyeTogMHgwMjBlID0gNTI2LCBvZmZzZXQ6IDB4MDIwZSA9IDUyNgpGQVQx
+NjogcmV0OiAwMDAwMDIwZiwgb2Zmc2V0OiAwMjBlCkZBVDE2OiBlbnRyeTogMHgwMjBmID0gNTI3
+LCBvZmZzZXQ6IDB4MDIwZiA9IDUyNwpGQVQxNjogcmV0OiAwMDAwMDIxMCwgb2Zmc2V0OiAwMjBm
+CkZBVDE2OiBlbnRyeTogMHgwMjEwID0gNTI4LCBvZmZzZXQ6IDB4MDIxMCA9IDUyOApGQVQxNjog
+cmV0OiAwMDAwZmZmZiwgb2Zmc2V0OiAwMjEwCmdjIC0gY2x1c3RudW06IDMsIHN0YXJ0c2VjdDog
+NjQwCkZBVDE2OiBlbnRyeTogMHgwMjEwID0gNTI4LCBvZmZzZXQ6IDB4MDIxMCA9IDUyOApGQVQx
+NjogcmV0OiAwMDAwZmZmZiwgb2Zmc2V0OiAwMjEwCmN1cmNsdXN0OiAweGZmZmYKSW52YWxpZCBG
+QVQgZW50cnkKU2l6ZTogMzY0MzgwMTYsIGdvdDogMzQ0NzE5MzYKCgpJIGhhdmUgdHJpZWQgbWFu
+eSB0aW1lcywgZXZlbiB3aXRoICJmYXRsb2FkIHVzYiAwIDB4MTAwMDAwIGJpZ2ZpbGUuYmluIDIw
+MDAwMDAiLCBpdCBzdGlsbCBmYWlsZWQgd2l0aCBhYm92ZSBlcnJvci4KSSBjYW4gbm90IHRlc3Qg
+bmV3ZXIgdmVyc2lvbiBvZiB1LWJvb3QsIHNpbmNlIHRoZXJlIGFyZSBsb3RzIG9mIG9sZCBkcml2
+ZXJzIEkgYW0gdXNpbmcuCgoKCgoK
