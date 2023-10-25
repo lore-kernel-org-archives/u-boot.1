@@ -4,65 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B63C25B47
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 08:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB63C25B6B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 08:23:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4D4E87442;
-	Wed, 25 Oct 2023 10:11:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C99BE86FB9;
+	Wed, 25 Oct 2023 10:23:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=solid-run.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WpaHPssd";
+	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="FfbzT/1i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25DB88743F; Wed, 25 Oct 2023 10:11:33 +0200 (CEST)
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [217.70.183.196])
+ id D01EC87A70; Wed, 25 Oct 2023 10:23:13 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on2060a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe16::60a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26FCA871E7
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 10:11:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 107B187A4F
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 10:23:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=solid-run.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id B0E7FE000C;
- Wed, 25 Oct 2023 08:11:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1698221488;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kMsuCLZa5HO4/dTq8bW3lK1ng6FHaXYOgfnq2P4eOQg=;
- b=WpaHPssdmaUYYCP6ILGX0jXGmmE/YE/hq7pPHyHUfKycPqwyvpeThDlzSTmxf5Ou/U8LPK
- 6xbQM3cFgvQAUxwbh2R7OUMPXF0KMmrFbJgjg/8LuhWiKG5TTjx4S8caNs0H2LU64Easwg
- fJ2/fvW0VucZ+04ktbrfh7kF0CrEni45GoGImZyTX/RsZrcAshVZntfXs08QoYAil3WXyv
- uSjUYnShdesomb97EqP4C2SacSYMGjg2BpmOPGqwlcIgY8pZUaOJ71hemiQihaRoWPscmr
- SK1xm9WNW35kipLA05wVJSf+d6y3gMGJudeEhF6oLcu9FPgRwn0NXJuDG9o9VQ==
-Date: Wed, 25 Oct 2023 10:11:26 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org,
- linux-mtd@lists.infradead.org, Michael Walle <mwalle@kernel.org>, U-Boot
- Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Conor
- Dooley <conor+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Richard Weinberger <richard@nod.at>,
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 2/3] dt-bindings: mtd: binman-partition: Add binman
- compatibles
-Message-ID: <20231025101126.2234a74c@xps-13>
-In-Reply-To: <CAPnjgZ0G3W0a1T5TMuS_8L+4OwqFU3xXBKPnTs+MDDFBWYP_VA@mail.gmail.com>
-References: <20231009220436.2164245-1-sjg@chromium.org>
- <20231009220436.2164245-2-sjg@chromium.org>
- <20231024161644.GB3707756-robh@kernel.org>
- <CAPnjgZ0G3W0a1T5TMuS_8L+4OwqFU3xXBKPnTs+MDDFBWYP_VA@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=josua@solid-run.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=D2zPeqR29JJ+nCMTRPR1UtHGDcZMtulsYHzKhcad1mYQk7j1/1E6L8eHNfci5i/L97rHCiNtuFNaYsAX/E6sglfpALvCEAFYeCD272gqyj9rU5Y1VewvSsXZzcMokx3U/tBT5L22vqDOIkv90RfYOPtAemvzwSVL96Bjg5pRYZrGFEksVjH4aUCaLfYVqZwWV2ZhrbdUpwVaxN9HjG/0sHYBLDhs86vZQ0ntRsIy/qYmtFJmw9vkudRgPqbuKyZ3B00YYEzFaqDjJfzaDjxmd2f8KHpEiigAZ5GIYitLgfeqvOlwr33eH63XTFQdArhLedkO9zL3DgeVQSZM1UBgDw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8sehzHoBc++jXcS7SrpolttXGljp27iPLIAh69vir9k=;
+ b=BT6bjTtsfnxv+9mjTNGze9wh4bA/qYkzsVnr9eYamj5AHyAtOjxEKB3yebtPfr94x4HCekUNPVDfvZP6+dIvxpXL5P+wuPy5xwNMdafOGVGN+ODMg1MUApG4oR2CaqwBwpfLuj2MB24Dz5dNwRNmuNa++k1+QcGijgjhDRYEM/deGi9JQAdRaArCesaJ6YVn1KjqoiphV71vxT2vRtvEAWb+nItI8nDaReTshmwrzvsQuoLV/NFPK9ZFJ+uv0zwo2hzRA0CtXL8sobty3utiOOab3fL2t2y5XzE4KamQFjgrmWqVBxTvNFB2q/Dq1jM7sbmSn6+Zdf0fR47DzQxZ9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=solid-run.com; dmarc=pass action=none
+ header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8sehzHoBc++jXcS7SrpolttXGljp27iPLIAh69vir9k=;
+ b=FfbzT/1ivYZgLDXcDtnd1ivIEwtmEPdACYKxU+aCje8ppNWH4C5xOy8XgucX5VkQhAZnf90Sthsl64737f35JESDS6WJpQAwbTjCEZ2PC8NA7trGOdx/hmi72o0MM0iklVShhWA1tlP4Wx19yAl2FcQHl3/N6BZ6CuaOas24cpI=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=solid-run.com;
+Received: from AS8PR04MB8963.eurprd04.prod.outlook.com (2603:10a6:20b:42e::18)
+ by DB9PR04MB8410.eurprd04.prod.outlook.com (2603:10a6:10:24b::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.11; Wed, 25 Oct
+ 2023 08:23:08 +0000
+Received: from AS8PR04MB8963.eurprd04.prod.outlook.com
+ ([fe80::8b13:3926:f19a:b07b]) by AS8PR04MB8963.eurprd04.prod.outlook.com
+ ([fe80::8b13:3926:f19a:b07b%6]) with mapi id 15.20.6933.014; Wed, 25 Oct 2023
+ 08:23:08 +0000
+From: Josua Mayer <josua@solid-run.com>
+To: u-boot@lists.denx.de
+Cc: sr@denx.de, sjg@chromium.org, kabel@kernel.org,
+ Josua Mayer <josua@solid-run.com>
+Subject: [PATCH v2 0/2] mvebu: clearfog: add support for emmc boot
+Date: Wed, 25 Oct 2023 10:22:52 +0200
+Message-Id: <20231025082254.31630-1-josua@solid-run.com>
+X-Mailer: git-send-email 2.35.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0239.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e9::16) To AS8PR04MB8963.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42e::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8963:EE_|DB9PR04MB8410:EE_
+X-MS-Office365-Filtering-Correlation-Id: aeb03ef7-5003-4859-859b-08dbd5339e18
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: OzE7FanYpVgtnapFlbW8U2yDrlLabagMJPqXQBEWzgkhZ/Rf8sa2CbRODkokmoXg3RNbY4m0HtqEGaFQJw+/S2+h5x+tYXuXnF2VoaxfTixwuWJAyr31EGXQuVwAMEDvzQFUs5Htulzjj9EnDlCJnJdIpwHfVTwU7ZX5uumwsvvAMAJgyBhs4ZTZDfS5daOTWXwowwgWq9Io9aODSURLc+RQsppatLtK7lwaKFPDftbp6uzXaY+cReCPHcO2s9enpw6FI3QzjviBdUJ4bRH/e1ygAwEOsuWD2lWpVOgEiybzvNg7DyVAvmg67oA8DxJ+wmiJ2yBG/hhou5ebAW3J83epK34d07HxCEN31aP1M9tMC8fXTX+N9k/OpJqZY7uab9JxW1Sh+NdmwZsjaNiah1hmep3oFsJNlz02fp4ar/mlq3n/JFU68xa+GhKi60n5NOm861n6UUOTF+aQvrWSFbG8M0dwcmOdTKCwGiUxUJmk9iVOzajz+gpaOpEcrEzkESmlPhqe+hKcU7Mf6w1yOsXmV40Vegan7epIxFoIDAsZtbAdhxvJT7JVcYUJhDmQqXPvgmzXb/IkO+5GVL3ter6RPUhfaPOeDR7kw7Kidc5OxvBm371Zc/RHJOogoVJS
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8963.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(136003)(396003)(346002)(376002)(39840400004)(230922051799003)(186009)(64100799003)(451199024)(1800799009)(36756003)(38350700005)(6512007)(316002)(66946007)(66476007)(66556008)(38100700002)(6916009)(86362001)(52116002)(83380400001)(2616005)(107886003)(26005)(6506007)(6666004)(4744005)(1076003)(41300700001)(6486002)(2906002)(8936002)(5660300002)(478600001)(8676002)(4326008);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1RfijftKMAkTuq4EHLzR7/HYIqymfIuUp7zlGAW30QQOOZsWNGwc7OedMu+R?=
+ =?us-ascii?Q?V1+uvOvNL6fO0UQwzz+QY5LJN/zwAlWYCcPcbjtK4TuFDKfuzXjDMOe4eWzt?=
+ =?us-ascii?Q?O1fjoB9prXliU7wPusPd13ZWjRX0dLgGeP3oZ/VyW142nY+6kXBZ2w11FPfo?=
+ =?us-ascii?Q?BUvCx6uMkdbBCt04YmaDSKIchJfMR8IfsyewTQetJYXOx0DfGxivPU1g8pQE?=
+ =?us-ascii?Q?dhGybr54wK9s+0JNLyevsuX6fe6gKMiEbnvvxRv7Y2zc0UeF9fho8HAqG38j?=
+ =?us-ascii?Q?chIn7E9VILmiqUFPM/COmNJ9rQM7uwGfLV4y/bhwjwurAWIc5g9HQw44Wtji?=
+ =?us-ascii?Q?M3in3/5Yy515ZM9UCUDhKSrNZ91UzuxVFa3eQfNEXM3+sPdBzUOQ5RZ3eusq?=
+ =?us-ascii?Q?pduYR/dXPNZgzLojSKD6/PYUfi2Gm0XDmA13hf5bvzHgiMI4G8L7Y8YtT326?=
+ =?us-ascii?Q?0WlBeEXUXhfNKmgQpayS6QRP4AGtz6FvPO+0POWtUBaFiqbrVgwE9jNkreRO?=
+ =?us-ascii?Q?9RYvfgRastGfLDVFB3NZraFL5HtamilxuYnwSJnJ8Dm2ppWDxhbr7n/lsmwF?=
+ =?us-ascii?Q?yOHQkm1JMvSEWzI904tp7RdL7jfhOUa+0J9kR683oKKyTyBLK0f6GRbiawWF?=
+ =?us-ascii?Q?HkPfZ0aMy96XeHDrVPnAKY3JT4f6i+zB5pNNiKxnmjdmllRP0LIiEuAYqwh9?=
+ =?us-ascii?Q?CmLWWc8JITsy9nN2oM07dnlgEkMT7kZFdiRHKyJHoUHCmifS7DuydWLqTZHD?=
+ =?us-ascii?Q?2U2aGHCsnCASbB7Cgr/ovU/sob6gCpYNODKVoHqaWTWo+YN8fYWZrw3j86uS?=
+ =?us-ascii?Q?/7Ml9Kn1zT9SWb2fnS4veIZrqotRzdZJR4Zbs4J6yIlVKXzqMJgQBYD+IjCE?=
+ =?us-ascii?Q?BMwJlSlSCySBmMT0lAgTGlKRZptEAFqW+H5PUFR+q1reXZOxgFcZ0QvQjoI+?=
+ =?us-ascii?Q?ecfVja6PJGE3fykOxLrkxPsipoESHuImsPZv6rG8BEwgpqw3BUanL0sJ5b55?=
+ =?us-ascii?Q?t6usO/pNcG3f688kBnu6ahzGn4bJChj9dZbxATkJ69i+wrKwQnoNjEZEVpWf?=
+ =?us-ascii?Q?v/li1XOO9hY0R4QA/kcF5nXAI3+/PqH6AeNxnyytqQ2oQFwfSBdzUAXBHxQq?=
+ =?us-ascii?Q?0hwAYBhxjhPoMcADjJAW3EGsT/v8fJN1GcBks5r0NN1xbC7/xGQPix5jYAhC?=
+ =?us-ascii?Q?eTMg7aY7nv7OUggMsmztrNkdzWinR349HGFvIZr5qCWR5TO/TawWXRh6atMJ?=
+ =?us-ascii?Q?f//y9K6Tlv9HoL7oFYpgH8LTynCXaX7Ax4B4oIsMy9YL8nFkOM26mm1IKVyr?=
+ =?us-ascii?Q?OAfsKHxKk2Xfqv00XrX5S3WeAyhhSj6RJxJk7+kJbv6laFwNfYWxgyDtWhPp?=
+ =?us-ascii?Q?3HUQg6jYdnkzZ0IIJcxImALp/jr4R/0bX5B8mQ/kem1iAJM3o4MOTrbuiTZa?=
+ =?us-ascii?Q?4yALrJV1/1oYxBYGcKY3AfBoYPxwD1KJgwLST2RXRKUbmbdPFxjDCqRBFdZ2?=
+ =?us-ascii?Q?25arFAy7s3pItem5n+TFDsn4NYR+UyEFJGzxpQBLK5UpQS0NUtcZ0ywQqBqG?=
+ =?us-ascii?Q?VigWRpJRWtmwPuBe0lwaQt8FcX8deqv7ngkRL3ay?=
+X-OriginatorOrg: solid-run.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: aeb03ef7-5003-4859-859b-08dbd5339e18
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8963.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2023 08:23:08.3945 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jUIJX0B6o9teJ8MzQZyjeYIO7XEp+K4b0Ybw/lb9q1itKpLh7lFBoLAkaPAvO4UTRDNY9eo/NHNow0G/DOVEMw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8410
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,168 +132,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Armada 388 booting from eMMC is different to SD-Card in two major ways:
 
-sjg@chromium.org wrote on Tue, 24 Oct 2023 14:40:54 -0700:
+- Environment location
+- Sectors scanned by Boot-ROM
 
-> Hi Rob,
->=20
-> On Tue, 24 Oct 2023 at 09:16, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Mon, Oct 09, 2023 at 04:04:14PM -0600, Simon Glass wrote: =20
-> > > Add two compatible for binman entries, as a starting point for the
-> > > schema.
-> > >
-> > > Note that, after discussion on v2, we decided to keep the existing
-> > > meaning of label so as not to require changes to existing userspace
-> > > software when moving to use binman nodes to specify the firmware
-> > > layout.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v4:
-> > > - Correct selection of multiple compatible strings
-> > >
-> > > Changes in v3:
-> > > - Drop fixed-partitions from the example
-> > > - Use compatible instead of label
-> > >
-> > > Changes in v2:
-> > > - Use plain partition@xxx for the node name
-> > >
-> > >  .../mtd/partitions/binman-partition.yaml      | 49 +++++++++++++++++=
-++
-> > >  1 file changed, 49 insertions(+)
-> > >  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/=
-binman-partition.yaml
-> > >
-> > > diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-=
-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-pa=
-rtition.yaml
-> > > new file mode 100644
-> > > index 000000000000..35a320359ec1
-> > > --- /dev/null
-> > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partiti=
-on.yaml
-> > > @@ -0,0 +1,49 @@
-> > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> > > +# Copyright 2023 Google LLC
-> > > +
-> > > +%YAML 1.2
-> > > +---
-> > > +$id: http://devicetree.org/schemas/mtd/partitions/binman-partition.y=
-aml#
-> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: Binman partition
-> > > +
-> > > +maintainers:
-> > > +  - Simon Glass <sjg@chromium.org>
-> > > +
-> > > +select: false =20
-> >
-> > So this schema is never used. 'select: false' is only useful if
-> > something else if referencing the schema. =20
->=20
-> OK. Is there a user guide to this somewhere? I really don't understand
-> it very well.
+This patchset first makes it possible to select offset 4096 for
+eMMC partition. Here U-Boot can be placed to avoid conflict
+conflict with MBR.
 
-The example-schema.yaml at the root of the dt-bindings directory is
-well commented.
+Secondly the bubt command is updated to use LBA-4096 for eMMC data
+partition only, keeping previous values for SD and boot0/1 unchanged
 
-> > > +description: |
-> > > +  This corresponds to a binman 'entry'. It is a single partition whi=
-ch holds
-> > > +  data of a defined type.
-> > > +
-> > > +allOf:
-> > > +  - $ref: /schemas/mtd/partitions/partition.yaml#
-> > > +
-> > > +properties:
-> > > +  compatible:
-> > > +    oneOf:
-> > > +      - const: binman,entry     # generic binman entry =20
-> >
-> > 'binman' is not a vendor. You could add it if you think that's useful.
-> > Probably not with only 1 case... =20
->=20
-> I think it is best to use this for generic things implemented by
-> binman, rather than some other project. For example, binman supports a
-> 'fill' region. It also supports sections which are groups of
-> sub-entries. So we will likely start with half a dozen of these and it
-> will likely grow: binman,fill, binman,section, binman,files
->=20
-> If we don't use 'binman', what do you suggest?
->=20
-> > =20
-> > > +      - items:
-> > > +          - const: u-boot       # u-boot.bin from U-Boot project
-> > > +          - const: atf-bl31     # bl31.bin or bl31.elf from TF-A pro=
-ject =20
-> >
-> > Probably should use the new 'tfa' rather than old 'atf'. Is this the
-> > only binary for TFA? The naming seems inconsistent in that every image
-> > goes in (or can go in) a bl?? section. Why does TFA have it but u-boot
-> > doesn't? Perhaps BL?? is orthogonal to defining what is in each
-> > partition. Perhaps someone more familar with all this than I am can
-> > comment. =20
->=20
-> From what I can tell TF-A can produce all sorts of binaries, of which
-> bl31 is one. U-Boot can also produce lots of binaries, but its naming
-> is different (u-boot, u-boot-spl, etc.). Bear in mind that U-Boot is
-> used on ARM, where this terminology is defined, and on x86 (for
-> example), where it is not.
->=20
-> >
-> > Once you actually test this, you'll find you are specifying:
-> >
-> > compatible =3D "u-boot", "atf-bl31"; =20
->=20
-> I don't understand that, sorry. I'll send a v5 and see if the problem goe=
-s away.
+Changes since v1:
 
-For me this means the partition contains U-Boot and TF-A, which is
-probably not what you want. I believe Rob is saying that how you define
-the compatible property above does not match the examples below. Did
-you run make dt_binding_check?
+- New defconfigs for environment location are skipped in this version,
+  pending further research if it can be auto-detected.
 
-Also, do you really need to say which software project provides a
-component? Would using "bl31", "bl33", etc be enough? Or maybe you
-could have eg. "bl31-tf-a" and "bl31-u-boot-spl" (in this order) for
-clarity? This way one knows which stage a partition contains and also
-the software project which provided it.
+- invert logic of if statement allowing it to compile both with,
+  and without CONFIG_SUPPORT_EMMC_BOOT defined.
+  Reported by Stefan Roese with turris_mox_defconfig, thanks!
 
-To be honest I still don't fully get where you want to go and I believe
-a more complete schema would probably help, with different examples, to
-catch what you need and why.
+Josua Mayer (2):
+  arm: mvebu: allow additional 4096 offset for bootable mmc image
+  cmd: mvebu/bubt: move eMMC data-partition uboot from LBA-0 to 4096
 
-> > > +additionalProperties: false
-> > > +
-> > > +examples:
-> > > +  - |
-> > > +    partitions {
-> > > +        compatible =3D "binman";
-> > > +        #address-cells =3D <1>;
-> > > +        #size-cells =3D <1>;
-> > > +
-> > > +        partition@100000 {
-> > > +            compatible =3D "u-boot";
-> > > +            reg =3D <0x100000 0xf00000>;
-> > > +        };
-> > > +
-> > > +        partition@200000 {
-> > > +            compatible =3D "atf-bl31";
-> > > +            reg =3D <0x200000 0x100000>;
-> > > +        };
-> > > +    };
-> > > --
-> > > 2.42.0.609.gbb76f46606-goog
-> > > =20
->=20
-> Regards,
-> Simon
+ arch/arm/mach-mvebu/spl.c |  5 +++--
+ cmd/mvebu/bubt.c          | 11 +++++++++--
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
+-- 
+2.35.3
 
-Thanks,
-Miqu=C3=A8l
