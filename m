@@ -4,137 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E91C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 18:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A70A8C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 18:57:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24941874A3;
-	Wed, 25 Oct 2023 20:35:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 6FBB087959;
+	Wed, 25 Oct 2023 20:57:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="AhhR1r0d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fUFsq6S/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C66DC87A33; Wed, 25 Oct 2023 20:35:26 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20713.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::713])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 523EE8798A; Wed, 25 Oct 2023 20:57:26 +0200 (CEST)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39CC8874A3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:35:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFC5287937
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:57:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RNlKgJrzJ6+ADF/RHBVrLfMBzk9MoK0h4Z7Q+HT+VxWa86drVmGntAD6UDOI+hrWXmDoi6Unc/eo2czrT1SnemMtJWRpdASe+SLTO5hh56fdT0EH/vMFssTD+WEBizhiP4xcvb8MOoSqE0o+QGUgCCXUak6gaewJ5XmMeXoKl5ceUPVUybAFeaqMaobR0XSghF6eAoz0FwG1qAKqDbcsPG6BhW+GsHEhqd4+R/6MLm16dVO27pY/+/xTUaTs/KNHvj80jjrIvt+2RW/pvZdy15lvteO+A1RM3AtuEwaiSK5zVwlN0r143xzLWq+AWjRLwcOaMgk2wrPMK5RFXrJbLA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AjR8cZGHKq7hHiA6eH7WuFTkYNmTzqbRHt5hfUc3E8A=;
- b=n+DeQwLXAr6KfAzyWjFi3xKHhS5R/OAgzkUE35jFIT7SyWaeAvb4/7pVEjkiIWTePzhi7aNLo36amJG0/raKRqSpNvPfC3o7acmjw3JT1SZ79MmzcxjUm6rK1ZNlncC65ajdgXebNjlOUEJaDe9xxM3RlJ/khL9GtMUxvZOP58+LbEGW/qzHAuuhLU/oCjQjlOBtG10U9VBfSQXjVL7YiNoH0gt4QMNs2uu2B9ME3DAuSo2cbpHQCUcrdmU6HJwDcMMJ7TSCG3yTNo8NDHEp4b9s2j+2nY/Gj6tcjmtOMXpDSe/RjlA5QZaetDGN8SoEOlLPYxLabJGUc/KWZXHleA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AjR8cZGHKq7hHiA6eH7WuFTkYNmTzqbRHt5hfUc3E8A=;
- b=AhhR1r0du82t7IRjh/Eb+xMPmlPJmshuwQD5ur+QsQQ1kBgIzylXfDCKFTeVgLp+Tjllfe56KTHJzobJrcexMQcfBwUtzk3yFZRaSp+2eH3nTBk1CD/Vde2atC+ErJbTcjUrkMCFg6sdnhczIFuG81EJXTSQTEM73bq4Asr9XwI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by PAXPR10MB5759.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:249::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.29; Wed, 25 Oct
- 2023 18:35:21 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.030; Wed, 25 Oct 2023
- 18:35:20 +0000
-Message-ID: <3c3ebabe-fd7b-45a4-aefd-13d74b146f30@prevas.dk>
-Date: Wed, 25 Oct 2023 20:35:18 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] imx: spl_imx_romapi: boot loops
-Content-Language: en-US, da
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: "festevam@denx.de" <festevam@denx.de>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>
-References: <6de4ef437445c78317e7d8f4f07e47502caed029.camel@toradex.com>
- <cb3e2ea6-b417-4736-9639-b51a04815f7a@prevas.dk>
- <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
- <e4821c38-ead6-4a51-a442-2c782e638024@prevas.dk>
- <2832e90451ce39c3c7cef34ec5d5c20f02d3a652.camel@toradex.com>
- <4faf5846-9aa8-4396-84fa-8d36c9b4fef9@prevas.dk>
- <2442c84e27ac3271ae17d1e7b272d624cdbf22cf.camel@toradex.com>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <2442c84e27ac3271ae17d1e7b272d624cdbf22cf.camel@toradex.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MM0P280CA0115.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::28) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-779f2718accso8912685a.1
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:57:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698260242; x=1698865042; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OoQBYhvRL+LDq+gxMm3wjYq1JK6napfqANj76ld0bVM=;
+ b=fUFsq6S/HKXoO+PoGcn87D9hicg0Cl8xi6+zrTduiqyiHG2jVSUpHfrZKETN8tdcZl
+ Xm/G6sxV72etKP6B3HZ129wH7hpe/pFzfyU2sVY9QUcM0JxtRp3ot1B644jQkDvB/dja
+ WNRUN1CHrLWr3mi9/F6R0PHmRPgrGYddL+41E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698260242; x=1698865042;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OoQBYhvRL+LDq+gxMm3wjYq1JK6napfqANj76ld0bVM=;
+ b=O0VF+DGYLbl4pX3WGTsMzqWBXN2dbbfcMpBya9v7x55GS8ZH6m+/wz5Zp/OuOI14Xk
+ SFoT0xh5pFqLD1jHnPSJNVB+cVUZ71a1fetnaKR9+xzpysARpgSFixLAQ8GyVWPZgSQC
+ u+R5JoIoz9t+L64fonlBUaUVSQR/SYi+XOIaL0zYNcSdrQgMW7A+1UuBMejV7dmFQ7fZ
+ wEjiNcb/Y9j0Qb2fKYa5TZoEfSj9aHeYa17zb0FmPCRSvKn1m4SMkUOfr6APuRiwUI9R
+ 0N/zhHcUeVciJboaaOVW/Lz/dvzWdV3cHrh/g2inI9xWSNluFw/0k63Q09UP6z/sti4x
+ h1QQ==
+X-Gm-Message-State: AOJu0YxqHyJZ+cb7KdaFjEgNUQH2VOMROJxXK39fvDGe27pHdpBIl4mF
+ vOPcO59uuXWSJ9y/l1+T4KMeCQ==
+X-Google-Smtp-Source: AGHT+IG+aIYNFVWRWKI3rDs62hmiQHAMhdqiCT1h8gVZEUTTsoaJ9FoWoIobdhDWi14pKUfi1BKv8w==
+X-Received: by 2002:a05:620a:8190:b0:775:a3fc:a9d1 with SMTP id
+ ot16-20020a05620a819000b00775a3fca9d1mr13201626qkn.23.1698260242315; 
+ Wed, 25 Oct 2023 11:57:22 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-7a1b-75c0-d849-e3ce.res6.spectrum.com.
+ [2603:6081:7b00:6400:7a1b:75c0:d849:e3ce])
+ by smtp.gmail.com with ESMTPSA id
+ b7-20020a05620a0cc700b00767dc4c539bsm4422101qkj.44.2023.10.25.11.57.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Oct 2023 11:57:21 -0700 (PDT)
+Date: Wed, 25 Oct 2023 14:57:19 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dylan Corrales <deathcamel58@gmail.com>,
+ Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Subject: Re: Pull request efi-2024-01-rc2
+Message-ID: <20231025185719.GV496310@bill-the-cat>
+References: <d61eb00b-baa8-4804-801a-045eb56ed617@gmx.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|PAXPR10MB5759:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1ce32038-25fa-4efb-90bf-08dbd5892499
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: dnHOVfz0zAKyFf1UKbVfExb/tCoVF9+7UiY3mxUHnYUqU0fh2HScG0EJAyCbb0aj2KXgHlJS6Azr76dh9iNmQtjt+9p7GPb8A5+NbiKK3JjKoHMirqMYMxzZD9FKhcaOiM4jnzDLzTeGXn+tar99yD4Oj/erPJVtCgoeXDrG9tfUO67THBphqDHwYmIP00GLjI2e31j+Vwytvif00ToTniF/biQgKsDOhcoSHRHCljq9eNfKXuEsR+Bj2/oJesRU6ZxsVd7Kg3/jbtiaQgeMbvD67N3A5hcEBwO/s2ooHDikoUgnKYBcwxf1alw6+OaxaOv6aXoS+LxZ/INLmpF9aaDpU2V/dnlNpCZXAUfgJkWSCEEihk3nBs/scFHMeo1QbVufhVKiaKhWAHkglc4M6o7xbOYi1729LZeF9Z1uGxUgOAEkEQ9wVlx287mp8vsA+dOO0hIINTwEtgDVPwSGeEt24gt0UOrO5NIJu2gqRPTwJzlvBqhYWuBBVpfU632vUpgWvBZqSqkNVbjTebvZ6Bl4PyS2XAA0cvSrcGlZFPKYaJJRN0TGjn1C3i9CERlI72ssyW3FZjvbCFUMOx/ckX/e4SG5gF1/+YMoHjcOBoevWUhxgBD52fhWjo7z0i+f13XcDxbjUJKWWca5SLTnrg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(136003)(366004)(396003)(376002)(39850400004)(230922051799003)(1800799009)(451199024)(64100799003)(186009)(4744005)(2906002)(38100700002)(36756003)(66476007)(54906003)(110136005)(2616005)(66556008)(6506007)(478600001)(66946007)(6486002)(6512007)(83380400001)(4326008)(86362001)(44832011)(41300700001)(5660300002)(31696002)(8976002)(8676002)(316002)(8936002)(26005)(31686004)(4001150100001)(43740500002)(45980500001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aThob2JHWVdRcTdoM3Bzb0ZCaUFCbkJwNXQ2SzNsbWs3NE0vYms2Uk0rNGhy?=
- =?utf-8?B?Z1dtRWc0bXlNV3FrYUl1NG9tUVdGTnBJbFlma09hdUlwQjZ5a3lmLzBlaDBt?=
- =?utf-8?B?Mm5oanozQ1VlV0gxeWFtTUVGS2Y0NkowcW9WTEdKN2tIYnA3M3ZNUDBBQ2J5?=
- =?utf-8?B?ZXRRNzg0K2JKYVFMbDFaWk5Gb3pTbldaNmhvTng1YmZGMUNjV1EzenI2YlRY?=
- =?utf-8?B?SUQxWHEwbmxHOWc3NVUva0RRb293MlVLWnpHQ3l4Rmk1cnY0aWRvblFPamdt?=
- =?utf-8?B?Q3dHRzFpc0lHUlg1NVFXb1ExVGprcGIxU1EwNUNObTBPNUltTHpsRWhtVkhC?=
- =?utf-8?B?TmozRzBKOXY1aWp2TDZqa1FseG12WmY3d1FVdkNZenBidlYya2J2RnVNVVNu?=
- =?utf-8?B?Y2RNYTJVR0xPZmJpdnlnNGJwZHpVOWQ3V1BlSkpYRkJJRnNoSE9Hb2hiU0ha?=
- =?utf-8?B?Qk5NREhhcGJLTnpIZnkvOWRRNDJZM0M1MTVEdGRnTERpY2ZyVFlKeHlFZnZV?=
- =?utf-8?B?VklVQ0ZMbW9aWXowby82aVpXV0FpNm9lWmlBSGxmaE4xYS8zcDVITEJpOHFJ?=
- =?utf-8?B?YmpiMDRWaWlndEdlenB4SnZCanpMdVpVVlRSemFaV2hOWlRQQkpUMmQ5TzhU?=
- =?utf-8?B?cGZPdnp5bW9HaE9wbTBIbzliSUdPcWdhbndYVWIxVmNva0xkb1l1UkwvYkQ0?=
- =?utf-8?B?VHVEUWZhZXRXaEVQUEYxZGtJRXdraVk1ZmZRcmt4WDVLc0lHZTJXcHkxSHJ5?=
- =?utf-8?B?U1NVWVNUaDlHcXNpUDJDbUxtNmdLRTZibzBxZG9JZ0haRHhZRmNRcHpaa0VZ?=
- =?utf-8?B?TlRNZDFHWk1SMjc4UWZyOUs1NUI3S1ZxOVM0QVZqN2xzdjFaMEM1eFphQUJE?=
- =?utf-8?B?eGJIb3Z3ZjgrMmhHQW1ieVp4K1ZJdFMzRnFMK0ZuSGNiREllUVlSdERWYm1W?=
- =?utf-8?B?VVZlZ21SM3FSMFRTU0g0OFZxYjUydDV5KzdHeWxoa0dZYmRkMGhqNER1SWZK?=
- =?utf-8?B?WHEyZ0o3amVEQ1NlL0p0WGdNdVR5RVMyZE83Y3h3RHZUYzNUV3dqOWhUL3ps?=
- =?utf-8?B?N2NzalN4YU1xeG54U0EyTHd6bFJuV1hIejljM1J0WjFJaXN3d2VXL1Q0U2Uv?=
- =?utf-8?B?bTkrVlRFSUltN0UzRzNDczg1SVlvZmtBR0c5UVk4SjJHekFvNkd5MExyMHI0?=
- =?utf-8?B?RFdBNERaYlduNHUvNXdDYW5OTnJsWEJLK2hpcVdPcVhxdDlmYXlLNUFnTElN?=
- =?utf-8?B?WFVxVXNKVUhZUytDRW1wcGIzajE0QVVoRmNIckR0RXNBRnJPYWV3NXRKVVZ1?=
- =?utf-8?B?VW0yTmZkSVRqQU5qWmdDekI4S0JnRkl1T0pVUEVoSHVpekhvVStTaUdHZFUy?=
- =?utf-8?B?SCtOT2E3QWtCYnR3SERQY0pKVWR4OWJIVVVuemFRcWd1WkhtTk1MNDBRWGtD?=
- =?utf-8?B?cVJsNUZYR3ZGczZscjQ3RW9VSkNDbG90Sml4YkpETDBmdWhGZHlmSEIrRXo1?=
- =?utf-8?B?Y1BpalYxYS8wcVl2QkxKTGxPNW1FakczSFFVeXRQN0ZHVnhiamVCMnQ1eGNM?=
- =?utf-8?B?eXdWZzBpSE54VWRMdFJOR0NCUVZSRzExeUEwT0NhbVpNSWlLb24zZzRnUEtP?=
- =?utf-8?B?ZUQyRFkrSUE3dXlYa1RHOUswb0Q0MzdsZFN4VWJVV3FRMFROMEdEWncyMyti?=
- =?utf-8?B?Q2puKzBuUndjMDhhK2hFZzJSYzFGUzRDMk0zSDYxeHVjYkZremVaVUdVMU1E?=
- =?utf-8?B?anJSUkN2RG1ydUlqVnc4VzRVQ0lyN1lqdWJJVjZwcGk3TGowUWVlSWRDSkFq?=
- =?utf-8?B?TWwvSlJLTkVxTmRqa2lLQXZmRGRkWlJmQ094Um5PTmNXampmU2pUZFVmcUxQ?=
- =?utf-8?B?ZnhhQ1FsRHFRRDFDQStkZnR0UjF6UjZrUS9QdUpSeURVcUFYQVYxeGFZaFZ3?=
- =?utf-8?B?eUFvVDlHK1VTN1hDTzE3bjA5QlFkcjVPdzJPV2JVNjRTUVcrbmJYRCsrTk14?=
- =?utf-8?B?MEdWK2NUWTR6V2ZKd1V1SWVobkNNeFcxbStOZE9YMmNEbUhVS3JsSDgrMmxQ?=
- =?utf-8?B?VGROYzBBV3YxRGFPWHB6V2RnSTRrV1V4akFSRXBUbmIwWUlnbUlPOTY4ampi?=
- =?utf-8?B?Q0FVZ1hJak52b0tjSjRlaTZ0ejJSSm1OR2t3YUlCUlgreklsWGo4VnZWRUw4?=
- =?utf-8?B?R2c9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ce32038-25fa-4efb-90bf-08dbd5892499
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2023 18:35:20.6674 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vfFr6pS2HgPo0vU2n/xft3o3elOKZj8LdHxWnf7VQdZpvNL/k9ywZa4Tv4dqUYqWQ39VV2QmV9gXQuMXTX/ygTCxWlMMfyDcjk6GRC9J38Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5759
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="LlZI8tT/UX4Pdu79"
+Content-Disposition: inline
+In-Reply-To: <d61eb00b-baa8-4804-801a-045eb56ed617@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,39 +95,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25/10/2023 18.01, Marcel Ziswiler wrote:
-> Hi Rasmus
-> 
-> On Tue, 2023-10-24 at 16:32 +0200, Rasmus Villemoes wrote:
 
->> What am I missing?
-> 
-> Good question. Some more debugging revealed that we are missing 464 bytes at the beginning of the buffer. Why
-> would that be?
+--LlZI8tT/UX4Pdu79
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[slaps forehead]
+On Wed, Oct 25, 2023 at 04:20:06AM +0200, Heinrich Schuchardt wrote:
 
-		bytes = end - ss->end;
-		bytes += ss->pagesize - 1;
-		bytes /= ss->pagesize;
-		bytes *= ss->pagesize;
+> Dear Tom,
+>=20
+> The following changes since commit 5cab3515f8c9796015739c1750b8933291c816=
+be:
+>=20
+>   Merge tag 'u-boot-rockchip-20231024' of
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip (2023-10-24
+> 09:39:52 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-01-rc2
+>=20
+> for you to fetch changes up to 916dad34af0e53181dfe21f5764d3a787cb24bdc:
+>=20
+>   efi_loader: fix EFI_ENTRY point on get_active_pcr_banks (2023-10-24
+> 23:56:43 +0200)
+>=20
+> Gitlab CI showed no issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18293
+>=20
 
-		ret = rom_api_download_image(ss->end, 0, bytes);
-...
-		ss->end = end;
+So, there's not been enough time for "efi_loader: expose the device-tree
+file name" as there's still comments on how to word things there (and
+I'm fine taking this eventually for the release, we don't need it
+today). And since we're here anyways, "efi_loader: fix efi_dp_from_eth"
+isn't needed as with "sandbox: eliminate unused functions from binaries"
+we can build sandbox with EFI_LOADER=3Dy NET=3Dn LTO=3Dn (and CMDLINE=3Dn w=
+ith
+the rest of my v4 + an unrelated to this fix for fastboot) and since I'm
+asking for changes anyhow, lets just drop this. Thanks.
 
-So I figure out how many bytes must at least be fetched to honor the
-current read, round that up to the ss->pagesize [which is a no-op in the
-usb download case because that has ->pagesize==1, so I even considered
-leaving that rounding-up out], fetch that many bytes, but then record
-the original upper bound as the new end of the valid data. That can
-certainly account for losing something 0 < foo < pagesize number of bytes.
+--=20
+Tom
 
-So let's try if changing that last line to
+--LlZI8tT/UX4Pdu79
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  ss->end += bytes;
+-----BEGIN PGP SIGNATURE-----
 
-works better.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU5ZQwACgkQFHw5/5Y0
+tyysagwAoyPNUvihdCee2j4+JwUrRdLBnRTt0h+I7WLw4LgpwsR6tBLRfszx6Sza
+w9zPSaeygi4YSR8Esuf0MepucWh3nOVOydtGrdkMDf0nFDor1JllGRiaqAKA28j/
+Br8hFMeku6AicNhVm3WFfJ7apS82fc56GfPmfH7tG7JubPrzCMwGRjT1dj2YWSxC
+Rvww8M2QDVK6+AgnvrL/Z9Lae2vr95w9vnXMCloBhh5oqcS9x9N2dHcwgFlXo+eu
+rtlcL6rTKOUSBAcuiD2ALWpuEFJ9pYR7m/Tpkx5IHw1D8DFRrdGwgtC5EGiRBM1k
+Kw5y5kVqxPnnJXt9PCaq1N+cWZKygMXjriCpb7zeuip5A4UxXKmUAZn7othXALb/
+q6eCcJwPFsVyKlVnuG6PAmKjwXfDzhgKCqCPcScCQAKIRODOji8om5nwdn/1pQu2
+N30/L3CVskHw4qheQsIT0jrvosd+8elsfBiMEZ5cwN1sq4bNznRYywiSe1LHFSGA
+Fnnt3srM
+=yAwC
+-----END PGP SIGNATURE-----
 
-Rasmus
-
+--LlZI8tT/UX4Pdu79--
