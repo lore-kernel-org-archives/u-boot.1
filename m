@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F33C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:31:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4009C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:31:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 680BF87A50;
-	Wed, 25 Oct 2023 08:30:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 00C1387A5B;
+	Wed, 25 Oct 2023 08:30:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RQbyKWz+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OzKYiQLL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6644879D8; Wed, 25 Oct 2023 08:30:28 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 3717686308; Wed, 25 Oct 2023 08:30:29 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3695287A57
+ by phobos.denx.de (Postfix) with ESMTPS id EAE5487A5B
  for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:30:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1c434c33ec0so36145725ad.3
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1c9c5a1b87bso35451065ad.3
  for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:30:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698215416; x=1698820216; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698215421; x=1698820221; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
- b=RQbyKWz++ESx+OI4DhD3FJEbw8MIFU+ts+VxHZ9MZygilyId+tQcQEqLMXWinvJuox
- xpL25GwTq5aUnjvYn1FO0Wrax+i1drqqOWZLjinOJXbLqWzMtFL5t6kuiiPXrW29TLMM
- BMPcBHE0K7qsa59kRSxDzry5EZuPxabQMVXsrN/rFY/V+fpPZnrWR6uaKP7E00YsJPYk
- Zmway+hGMKzYQT1qJhnVJGFM0T32cN9ak8oCsi8WNQR5eQ/yQ6GVzET0ZzHALsy5veU2
- 3lj6xX6DgnK6pQ64GofWjM64Lj4mle2KYNeCZOr5EabWDkhkZMbsAseddu0uqqXNsDF6
- M7Iw==
+ bh=o64OkjB0jwzD+AXro90PDVuRRGIba/iuGMNcmQLgUEs=;
+ b=OzKYiQLL6J3owT8uf204gIQsxVaAnCxAitrJ4zDxSWJlhY9Vx3HD3DMJ9FiOu6rmtU
+ YtMHFIRnJATlz4R+f6Cbzpv8siWlw/RKbhj69+lnpeoLd0sY0G+rwJpc6ICMRbNX30IB
+ 0lXJdNeksyB65eCeo40NN4/MQVn2L4cuqVTJZK2wlsH9BZ/UJAsWAdzMtg/lxT1ECpnt
+ 30SmbsNKJ5wi/XqMGCnbsw+ueoB1Tz9nfxbGi8zFSI+zldA9tpCK4SA9aSA1YY6oJWtR
+ Uvf3CeMYD8RFRRe7N57mFX9DRpHuUiQIqPqV0YZzqv0hlib6DjWxAG3W7+JomQHt5cLN
+ 6urg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698215416; x=1698820216;
+ d=1e100.net; s=20230601; t=1698215421; x=1698820221;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
- b=J+BzURqnPqLIjS34tMicOWJg7giku/cVqdlCU04wu4pjI1NqUnKOC0SJnc8HfqAqOU
- dbAHCoh1R7CnlE7PXriEHpG3rmVcNO6so0dJF9AJuUkA3D9XnKbSC4yzNDCLOVfDzsna
- SbyRhyiTB+mc+yheqh0XK4KSD+ugFgtjNsGjhljmo3Kmuqh2/fD2+WDCdCzai+4KsZ7X
- MXaQ9U76ujuXVRcAxdw6JtRc8Ao4DttGw6vz8ufJZWNoapBGvdGoLWLLc1GIv8OFLkUL
- 4hYSaMA885Bdojop6QpoxJkUYKAtxg9YyLjwFs1EHIfk1mqeJupx/wFbnyRZpx6eQd8K
- LZVw==
-X-Gm-Message-State: AOJu0YyCWvcnc5CIH4Q7oIjdTtv1+HVs8YbJO5H1N6YytRS35qVZWANL
- 5c4GllICEXLeL7jkaompT5Foym8K0/IxqxSu+j8=
-X-Google-Smtp-Source: AGHT+IGesoA7y7Gsr3BxBQUkeJjC+ZGq6PFdiy2xN+y+NgrTPayb5AQe9qY1AX7dHuvwv+80KSLeiQ==
-X-Received: by 2002:a17:902:f944:b0:1bd:c7e2:462 with SMTP id
- kx4-20020a170902f94400b001bdc7e20462mr10399601plb.11.1698215416186; 
- Tue, 24 Oct 2023 23:30:16 -0700 (PDT)
+ bh=o64OkjB0jwzD+AXro90PDVuRRGIba/iuGMNcmQLgUEs=;
+ b=WAFsDMgteM6xVJMUMORbDD6mR2GSaHZ1pOrOCN47xjeJL/i7W/aprbGCk3Jm65wKxt
+ FFKfpcKOlP9WC1jo5bAkxozaAnA+0qAjkHGU3FmyO+5xbp8p/VOthtBpDU3QlSD+PF3L
+ tTy5DxG8635VpHpt/jaZFf2+0SJbz9HYJ59q0RUixCO+2OGE6/RwXixrkyPYUu3hMfk4
+ WS3qxg0ycTlVOm/hzdJv7R4w7RoFY6Sln17h/brqWoQuvVvXI9nea3wLHSHi0jZVOAsv
+ NcHIeGkWl4YCzzfleWijaDkajRrBYl94tc1SRCXOTRkbXq0CF8rDG587Iay2Qzy56AX3
+ /THQ==
+X-Gm-Message-State: AOJu0Yx9xJp+t8+qi8cGEyK70D7QqBAkUIJ7JZZyza7i/qIAab3GJVj7
+ wokvY81B7mbjjVebi6Q8D6xX+T1AW0lAeUp7T+I=
+X-Google-Smtp-Source: AGHT+IFnlOetdlApOSjRX4tWLF1yahL5Fsjj3jdCSjOdw3QwjkQGYjyP5j/AZJsjM6dqP/viNRZVpw==
+X-Received: by 2002:a17:902:e5cb:b0:1c3:aa8d:4daa with SMTP id
+ u11-20020a170902e5cb00b001c3aa8d4daamr14069501plf.44.1698215420963; 
+ Tue, 24 Oct 2023 23:30:20 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- jh1-20020a170903328100b001c5fc291ef9sm8408967plb.209.2023.10.24.23.30.15
+ t12-20020a170902a5cc00b001c74876f032sm8359895plq.162.2023.10.24.23.30.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 23:30:15 -0700 (PDT)
+ Tue, 24 Oct 2023 23:30:20 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
+ Michal Simek <michal.simek@amd.com>, Raymond Mao <raymond.mao@linaro.org>,
  Masahisa Kojima <masahisa.kojima@linaro.org>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH v8 3/7] blk: blkmap: add ramdisk creation utility function
-Date: Wed, 25 Oct 2023 15:28:41 +0900
-Message-Id: <20231025062845.3100964-4-masahisa.kojima@linaro.org>
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH v8 4/7] efi_loader: Boot var automatic management
+Date: Wed, 25 Oct 2023 15:28:42 +0900
+Message-Id: <20231025062845.3100964-5-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
 References: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,166 +99,429 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-User needs to call several functions to create the ramdisk
-with blkmap.
-This adds the utility function to create blkmap device and
-mount the ramdisk.
+From: Raymond Mao <raymond.mao@linaro.org>
 
+Changes for complying to EFI spec §3.5.1.1
+'Removable Media Boot Behavior'.
+Boot variables can be automatically generated during a removable
+media is probed. At the same time, unused boot variables will be
+detected and removed.
+
+Please note that currently the function 'efi_disk_remove' has no
+ability to distinguish below two scenarios
+a) Unplugging of a removable media under U-Boot
+b) U-Boot exiting and booting an OS
+Thus currently the boot variables management is not added into
+'efi_disk_remove' to avoid boot options being added/erased
+repeatedly under scenario b) during power cycles
+See TODO comments under function 'efi_disk_remove' for more details
+
+The original efi_secboot tests expect that BootOrder EFI variable
+is not defined. With this commit, the BootOrder EFI variable is
+automatically added when the disk is detected. The original
+efi_secboot tests end up with unexpected failure.
+The efi_secboot tests need to be modified to explicitly set
+the BootOrder EFI variable.
+
+squashfs ls test is also affected by this modification, need to
+clear the previous state before squashfs ls test starts.
+
+Co-developed-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Joao Marcos Costa <jmcosta944@gmail.com>
 ---
- drivers/block/Makefile        |  3 +-
- drivers/block/blkmap.c        | 15 ----------
- drivers/block/blkmap_helper.c | 53 +++++++++++++++++++++++++++++++++++
- include/blkmap.h              | 29 +++++++++++++++++++
- 4 files changed, 84 insertions(+), 16 deletions(-)
- create mode 100644 drivers/block/blkmap_helper.c
+ lib/efi_loader/efi_disk.c                     | 18 ++++++++
+ lib/efi_loader/efi_setup.c                    |  7 ++++
+ test/py/tests/test_efi_secboot/test_signed.py | 42 +++++++++----------
+ .../test_efi_secboot/test_signed_intca.py     | 14 +++----
+ .../tests/test_efi_secboot/test_unsigned.py   | 14 +++----
+ .../test_fs/test_squashfs/test_sqfs_ls.py     |  6 +++
+ 6 files changed, 66 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/block/Makefile b/drivers/block/Makefile
-index a161d145fd..ec0575d135 100644
---- a/drivers/block/Makefile
-+++ b/drivers/block/Makefile
-@@ -14,7 +14,8 @@ obj-$(CONFIG_IDE) += ide.o
- endif
- obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
- obj-$(CONFIG_$(SPL_TPL_)BLOCK_CACHE) += blkcache.o
--obj-$(CONFIG_BLKMAP) += blkmap.o
-+obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap.o
-+obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap_helper.o
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index f0d76113b0..b808a7fe62 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -690,6 +690,13 @@ int efi_disk_probe(void *ctx, struct event *event)
+ 			return -1;
+ 	}
  
- obj-$(CONFIG_EFI_MEDIA) += efi-media-uclass.o
- obj-$(CONFIG_EFI_MEDIA_SANDBOX) += sb_efi_media.o
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index 149a4cac3e..21201409ed 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -66,21 +66,6 @@ struct blkmap_slice {
- 	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
- };
- 
--/**
-- * struct blkmap - Block map
-- *
-- * Data associated with a blkmap.
-- *
-- * @label: Human readable name of this blkmap
-- * @blk: Underlying block device
-- * @slices: List of slices associated with this blkmap
-- */
--struct blkmap {
--	char *label;
--	struct udevice *blk;
--	struct list_head slices;
--};
--
- static bool blkmap_slice_contains(struct blkmap_slice *bms, lbaint_t blknr)
- {
- 	return (blknr >= bms->blknr) && (blknr < (bms->blknr + bms->blkcnt));
-diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
-new file mode 100644
-index 0000000000..0f80035f57
---- /dev/null
-+++ b/drivers/block/blkmap_helper.c
-@@ -0,0 +1,53 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * blkmap helper function
-+ *
-+ * Copyright (c) 2023, Linaro Limited
-+ */
-+
-+#include <blk.h>
-+#include <blkmap.h>
-+#include <dm/device.h>
-+#include <dm/device-internal.h>
-+
-+int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
-+			  struct udevice **devp)
-+{
-+	int ret;
-+	lbaint_t blknum;
-+	struct blkmap *bm;
-+	struct blk_desc *desc;
-+	struct udevice *bm_dev;
-+
-+	ret = blkmap_create(label, &bm_dev);
-+	if (ret) {
-+		log_err("failed to create blkmap\n");
-+		return ret;
++	/* only do the boot option management when UEFI sub-system is initialized */
++	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) && efi_obj_list_initialized == EFI_SUCCESS) {
++		ret = efi_bootmgr_update_media_device_boot_option();
++		if (ret != EFI_SUCCESS)
++			return -1;
 +	}
 +
-+	bm = dev_get_plat(bm_dev);
-+	desc = dev_get_uclass_plat(bm->blk);
-+	blknum = image_size >> desc->log2blksz;
-+	ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr);
-+	if (ret) {
-+		log_err("Unable to map %#llx at block %d : %d\n",
-+			(unsigned long long)image_addr, 0, ret);
-+		goto err;
-+	}
-+	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
-+		 (unsigned long long)image_addr);
-+
-+	ret = device_probe(bm->blk);
-+	if (ret)
-+		goto err;
-+
-+	if (devp)
-+		*devp = bm_dev;
-+
-+	return 0;
-+
-+err:
-+	blkmap_destroy(bm_dev);
-+
-+	return ret;
-+}
-diff --git a/include/blkmap.h b/include/blkmap.h
-index af54583c7d..0d87e6db6b 100644
---- a/include/blkmap.h
-+++ b/include/blkmap.h
-@@ -7,6 +7,23 @@
- #ifndef _BLKMAP_H
- #define _BLKMAP_H
+ 	return 0;
+ }
  
-+#include <dm/lists.h>
+@@ -742,6 +749,17 @@ int efi_disk_remove(void *ctx, struct event *event)
+ 	dev_tag_del(dev, DM_TAG_EFI);
+ 
+ 	return 0;
 +
-+/**
-+ * struct blkmap - Block map
-+ *
-+ * Data associated with a blkmap.
-+ *
-+ * @label: Human readable name of this blkmap
-+ * @blk: Underlying block device
-+ * @slices: List of slices associated with this blkmap
-+ */
-+struct blkmap {
-+	char *label;
-+	struct udevice *blk;
-+	struct list_head slices;
-+};
++	/*
++	 * TODO A flag to distinguish below 2 different scenarios of this
++	 * function call is needed:
++	 * a) Unplugging of a removable media under U-Boot
++	 * b) U-Boot exiting and booting an OS
++	 * In case of scenario a), efi_bootmgr_update_media_device_boot_option()
++	 * needs to be invoked here to update the boot options and remove the
++	 * unnecessary ones.
++	 */
 +
+ }
+ 
  /**
-  * blkmap_map_linear() - Map region of other block device
-  *
-@@ -74,4 +91,16 @@ int blkmap_create(const char *label, struct udevice **devp);
-  */
- int blkmap_destroy(struct udevice *dev);
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index ad719afd63..c02569cb6d 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -245,6 +245,13 @@ efi_status_t efi_init_obj_list(void)
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
  
-+/**
-+ * blkmap_create_ramdisk() - Create new ramdisk with blkmap
-+ *
-+ * @label: Label of the new blkmap
-+ * @image_addr: Target memory start address of this mapping
-+ * @image_size: Target memory size of this mapping
-+ * @devp: Updated with the address of the created blkmap device
-+ * Returns: 0 on success, negative error code on failure
-+ */
-+int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
-+			  struct udevice **devp);
++	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
++		/* update boot option after variable service initialized */
++		ret = efi_bootmgr_update_media_device_boot_option();
++		if (ret != EFI_SUCCESS)
++			goto out;
++	}
 +
- #endif	/* _BLKMAP_H */
+ 	/* Define supported languages */
+ 	ret = efi_init_platform_lang();
+ 	if (ret != EFI_SUCCESS)
+diff --git a/test/py/tests/test_efi_secboot/test_signed.py b/test/py/tests/test_efi_secboot/test_signed.py
+index ca52e853d8..2f862a259a 100644
+--- a/test/py/tests/test_efi_secboot/test_signed.py
++++ b/test/py/tests/test_efi_secboot/test_signed.py
+@@ -29,7 +29,7 @@ class TestEfiSignedImage(object):
+             output = u_boot_console.run_command_list([
+                 'host bind 0 %s' % disk_img,
+                 'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld.efi.signed -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -37,7 +37,7 @@ class TestEfiSignedImage(object):
+             # Test Case 1b, run unsigned image if no PK
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 2 HELLO2 host 0:1 /helloworld.efi -s ""',
+-                'efidebug boot next 2',
++                'efidebug boot order 2',
+                 'bootefi bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -59,13 +59,13 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld.efi.signed -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert('\'HELLO1\' failed' in ''.join(output))
+             assert('efi_start_image() returned: 26' in ''.join(output))
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 2 HELLO2 host 0:1 /helloworld.efi -s ""',
+-                'efidebug boot next 2',
++                'efidebug boot order 2',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO2\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -77,12 +77,12 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize db'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 2',
++                'efidebug boot order 2',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO2\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -105,7 +105,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -117,7 +117,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize db'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -143,7 +143,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -170,7 +170,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed_2sigs -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -181,7 +181,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -193,7 +193,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -205,7 +205,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize dbx'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -230,7 +230,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed_2sigs -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -254,7 +254,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -265,7 +265,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -279,7 +279,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -307,7 +307,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed_2sigs -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -330,7 +330,7 @@ class TestEfiSignedImage(object):
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi.signed_2sigs -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -349,7 +349,7 @@ class TestEfiSignedImage(object):
+             output = u_boot_console.run_command_list([
+                 'host bind 0 %s' % disk_img,
+                 'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld_forged.efi.signed -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert('hELLO, world!' in ''.join(output))
+ 
+@@ -364,7 +364,7 @@ class TestEfiSignedImage(object):
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK'])
+             assert 'Failed to set EFI variable' not in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert(not 'hELLO, world!' in ''.join(output))
+             assert('\'HELLO1\' failed' in ''.join(output))
+diff --git a/test/py/tests/test_efi_secboot/test_signed_intca.py b/test/py/tests/test_efi_secboot/test_signed_intca.py
+index d8d599d22f..8d9a5f3e7f 100644
+--- a/test/py/tests/test_efi_secboot/test_signed_intca.py
++++ b/test/py/tests/test_efi_secboot/test_signed_intca.py
+@@ -40,7 +40,7 @@ class TestEfiSignedImageIntca(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO_a host 0:1 /helloworld.efi.signed_a -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO_a\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -49,7 +49,7 @@ class TestEfiSignedImageIntca(object):
+             # Test Case 1b, signed and authenticated by root CA
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 2 HELLO_ab host 0:1 /helloworld.efi.signed_ab -s ""',
+-                'efidebug boot next 2',
++                'efidebug boot order 2',
+                 'bootefi bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -71,7 +71,7 @@ class TestEfiSignedImageIntca(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO_abc host 0:1 /helloworld.efi.signed_abc -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO_abc\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -81,7 +81,7 @@ class TestEfiSignedImageIntca(object):
+             output = u_boot_console.run_command_list([
+                 'fatload host 0:1 4000000 db_b.auth',
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO_abc\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+@@ -91,7 +91,7 @@ class TestEfiSignedImageIntca(object):
+             output = u_boot_console.run_command_list([
+                 'fatload host 0:1 4000000 db_c.auth',
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -117,7 +117,7 @@ class TestEfiSignedImageIntca(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO_abc host 0:1 /helloworld.efi.signed_abc -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+             # Or,
+@@ -129,7 +129,7 @@ class TestEfiSignedImageIntca(object):
+             output = u_boot_console.run_command_list([
+                 'fatload host 0:1 4000000 dbx_c.auth',
+                 'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert '\'HELLO_abc\' failed' in ''.join(output)
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+diff --git a/test/py/tests/test_efi_secboot/test_unsigned.py b/test/py/tests/test_efi_secboot/test_unsigned.py
+index df63f0df08..7c078f220d 100644
+--- a/test/py/tests/test_efi_secboot/test_unsigned.py
++++ b/test/py/tests/test_efi_secboot/test_unsigned.py
+@@ -36,11 +36,11 @@ class TestEfiUnsignedImage(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+             assert 'Hello, world!' not in ''.join(output)
+@@ -65,7 +65,7 @@ class TestEfiUnsignedImage(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert 'Hello, world!' in ''.join(output)
+ 
+@@ -89,11 +89,11 @@ class TestEfiUnsignedImage(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+             assert 'Hello, world!' not in ''.join(output)
+@@ -107,11 +107,11 @@ class TestEfiUnsignedImage(object):
+ 
+             output = u_boot_console.run_command_list([
+                 'efidebug boot add -b 1 HELLO host 0:1 /helloworld.efi -s ""',
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'bootefi bootmgr'])
+             assert '\'HELLO\' failed' in ''.join(output)
+             output = u_boot_console.run_command_list([
+-                'efidebug boot next 1',
++                'efidebug boot order 1',
+                 'efidebug test bootmgr'])
+             assert 'efi_start_image() returned: 26' in ''.join(output)
+             assert 'Hello, world!' not in ''.join(output)
+diff --git a/test/py/tests/test_fs/test_squashfs/test_sqfs_ls.py b/test/py/tests/test_fs/test_squashfs/test_sqfs_ls.py
+index 527a556ed8..3b8118104f 100644
+--- a/test/py/tests/test_fs/test_squashfs/test_sqfs_ls.py
++++ b/test/py/tests/test_fs/test_squashfs/test_sqfs_ls.py
+@@ -118,6 +118,12 @@ def test_sqfs_ls(u_boot_console):
+     """
+     build_dir = u_boot_console.config.build_dir
+ 
++    # If the EFI subsystem is enabled, default file(e.g. EFI/BOOT/BOOTAA64.EFI)
++    # is scanned when the new disk is detected. This ends up with the unexpected
++    # output at the first 'sqfsls' command.
++    # Clear the previous state.
++    u_boot_console.restart_uboot()
++
+     # setup test environment
+     check_mksquashfs_version()
+     generate_sqfs_src_dir(build_dir)
 -- 
 2.34.1
 
