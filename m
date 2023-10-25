@@ -4,42 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26010C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 15:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55C09C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 15:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC8C187A5A;
-	Wed, 25 Oct 2023 17:12:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id AD125871FB;
+	Wed, 25 Oct 2023 17:15:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D5PCb9yz";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 226D086F8A; Wed, 25 Oct 2023 17:12:52 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4284D871FB
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 17:12:48 +0200 (CEST)
+ id 70D64874CC; Wed, 25 Oct 2023 17:15:36 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 86BA486F8A
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 17:15:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ED24E2F4;
- Wed, 25 Oct 2023 08:13:28 -0700 (PDT)
-Received: from e130802.arm.com (e130802.arm.com [10.1.28.34])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 53EC63F64C;
- Wed, 25 Oct 2023 08:12:46 -0700 (PDT)
-Date: Wed, 25 Oct 2023 16:12:37 +0100
-From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: nd@arm.com, trini@konsulko.com, u-boot@lists.denx.de,
- xueliang.zhong@arm.com
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-41cc0e9d92aso37731811cf.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:15:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698246929; x=1698851729; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=M5l5/7G46B06DiuGXhcKVRsDFmxd2h+lks0VIv1nbqU=;
+ b=D5PCb9yzaJviebHZgmJ6omBZ7cKDdlvDiR4zh2qdF+9fYTaysD38uFy5GtCMuD3G2B
+ W5Ue7mmNHKbEj8O1VZp3ergiXWzte2yLrITNH+3c31NRg5matoq2Ci1RgHGuReqPoo1+
+ fK4hmPiATis65RZFxivh1s5a4THc/pfjy+ip8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698246929; x=1698851729;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=M5l5/7G46B06DiuGXhcKVRsDFmxd2h+lks0VIv1nbqU=;
+ b=BZwExqq/+vzq2yBbwMjmgBssL2PE9ArWlZPmevX0/pupuPfarpUI/kbjBk93l3mZM4
+ CTFWJuJXMU/CMKrZXdkOS1JKWU8xZ1FeWjJi4Te1Hg9WhsZrjkNlmOUR+ZzFwrXjmz2S
+ iIOLUCs1bb6KFUJwoEpn1ggL7UnumtzmmwBITh+lsMH6lGnu5J9ZxpN+3MXTmGnfGtzt
+ yt/4/QCI9eWxnz8OmBPNqdDs03cHfgqrXxiPtxMEVc2Gp4RedzQ/y1r0Y4raUDRW9m9F
+ +rbm7xjK9lScke61sqGC1AUTGqA2n0HDWi1KFRgY1jmT2YxxD3Ma8XicijA+xu2k8DRM
+ bEng==
+X-Gm-Message-State: AOJu0YwC9p/eo1DQwWX/67b1f8UCyfBze9HFe0RE74zZ6JnA5jBrDs/t
+ eoCge1eAhmn/0AujQFztB2w+ag==
+X-Google-Smtp-Source: AGHT+IF5NlbEVoTCAVqKt2CbRdX3FyRLJVOKbV/WdCK26pFzsDEyA3DvN7DP9+UOVrFDMx+Ej4XfIw==
+X-Received: by 2002:a05:6214:404:b0:626:f3d:9e46 with SMTP id
+ z4-20020a056214040400b006260f3d9e46mr17817351qvx.18.1698246929389; 
+ Wed, 25 Oct 2023 08:15:29 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
+ [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
+ by smtp.gmail.com with ESMTPSA id
+ r13-20020a0cf60d000000b0065b12c7a48dsm4450077qvm.133.2023.10.25.08.15.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Oct 2023 08:15:28 -0700 (PDT)
+Date: Wed, 25 Oct 2023 11:15:26 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: nd@arm.com, u-boot@lists.denx.de, xueliang.zhong@arm.com
 Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20231025151237.GA265088@e130802.arm.com>
+Message-ID: <20231025151526.GT496310@bill-the-cat>
 References: <20230821210927.GL3953269@bill-the-cat>
  <20231020115747.GA141285@e130802.arm.com>
  <20231025145736.GS496310@bill-the-cat>
+ <20231025151237.GA265088@e130802.arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="PhvIQuuJSqpDNJXy"
 Content-Disposition: inline
-In-Reply-To: <20231025145736.GS496310@bill-the-cat>
+In-Reply-To: <20231025151237.GA265088@e130802.arm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,121 +94,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-> > > ________________________________________________________________________________________________________
-> > > *** CID 464361:  Control flow issues  (DEADCODE)
-> > > /drivers/firmware/arm-ffa/arm-ffa-uclass.c: 148 in ffa_print_error_log()
-> > > 142
-> > > 143             if (ffa_id < FFA_FIRST_ID || ffa_id > FFA_LAST_ID)
-> > > 144                     return -EINVAL;
-> > > 145
-> > > 146             abi_idx = FFA_ID_TO_ERRMAP_ID(ffa_id);
-> > > 147             if (abi_idx < 0 || abi_idx >= FFA_ERRMAP_COUNT)
-> > > >>>     CID 464361:  Control flow issues  (DEADCODE)
-> > > >>>     Execution cannot reach this statement: "return -22;".
-> > > 148                     return -EINVAL;
-> > 
-> > This is a false positive.
-> > 
-> > abi_idx value could end up  matching this condition "(abi_idx < 0 || abi_idx >= FFA_ERRMAP_COUNT)".
-> > 
-> > This happens when ffa_id value is above the allowed bounds. Example: when ffa_id is 0x50 or 0x80
-> > 
-> > 	ffa_print_error_log(0x50, ...); /* exceeding lower bound */
-> > 	ffa_print_error_log(0x80, ...);  /* exceeding upper bound */
-> > 
-> > In these cases "return -EINVAL;" is executed.
-> 
-> So those invalid values aren't caught by the previous check that ffa_id
-> falls within FFA_FIRST_ID to FFA_LAST_ID ?
+--PhvIQuuJSqpDNJXy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I had a closer look at that and I agree that the deadcode defect is legitimate.
-I already provided a fix [1].
+On Wed, Oct 25, 2023 at 04:12:37PM +0100, Abdellatif El Khlifi wrote:
+> Hi Tom,
+>=20
+> > > > ___________________________________________________________________=
+_____________________________________
+> > > > *** CID 464361:  Control flow issues  (DEADCODE)
+> > > > /drivers/firmware/arm-ffa/arm-ffa-uclass.c: 148 in ffa_print_error_=
+log()
+> > > > 142
+> > > > 143             if (ffa_id < FFA_FIRST_ID || ffa_id > FFA_LAST_ID)
+> > > > 144                     return -EINVAL;
+> > > > 145
+> > > > 146             abi_idx =3D FFA_ID_TO_ERRMAP_ID(ffa_id);
+> > > > 147             if (abi_idx < 0 || abi_idx >=3D FFA_ERRMAP_COUNT)
+> > > > >>>     CID 464361:  Control flow issues  (DEADCODE)
+> > > > >>>     Execution cannot reach this statement: "return -22;".
+> > > > 148                     return -EINVAL;
+> > >=20
+> > > This is a false positive.
+> > >=20
+> > > abi_idx value could end up  matching this condition "(abi_idx < 0 || =
+abi_idx >=3D FFA_ERRMAP_COUNT)".
+> > >=20
+> > > This happens when ffa_id value is above the allowed bounds. Example: =
+when ffa_id is 0x50 or 0x80
+> > >=20
+> > > 	ffa_print_error_log(0x50, ...); /* exceeding lower bound */
+> > > 	ffa_print_error_log(0x80, ...);  /* exceeding upper bound */
+> > >=20
+> > > In these cases "return -EINVAL;" is executed.
+> >=20
+> > So those invalid values aren't caught by the previous check that ffa_id
+> > falls within FFA_FIRST_ID to FFA_LAST_ID ?
+>=20
+> I had a closer look at that and I agree that the deadcode defect is legit=
+imate.
+> I already provided a fix [1].
+>=20
+> [1]: https://lore.kernel.org/all/20231020131533.239591-1-abdellatif.elkhl=
+ifi@arm.com/
 
-[1]: https://lore.kernel.org/all/20231020131533.239591-1-abdellatif.elkhlifi@arm.com/
+Ah thanks. I had seen that posted but not put that together with this
+email and assumed it was addressing something you hadn't talked about
+here because you agreed with it being an issue.  I will pick up the
+above patch soon then.
 
-> 
-> > > ... 
-> > > ________________________________________________________________________________________________________
-> > > *** CID 464360:  Control flow issues  (NO_EFFECT)
-> > > /drivers/firmware/arm-ffa/arm-ffa-uclass.c: 207 in ffa_get_version_hdlr()
-> > > 201             major = GET_FFA_MAJOR_VERSION(res.a0);
-> > > 202             minor = GET_FFA_MINOR_VERSION(res.a0);
-> > > 203
-> > > 204             log_debug("FF-A driver %d.%d\nFF-A framework %d.%d\n",
-> > > 205                      FFA_MAJOR_VERSION, FFA_MINOR_VERSION, major, minor);
-> > > 206
-> > > >>>     CID 464360:  Control flow issues  (NO_EFFECT)
-> > > >>>     This greater-than-or-equal-to-zero comparison of an unsigned value is always true. "minor >= 0".
-> > > 207             if (major == FFA_MAJOR_VERSION && minor >= FFA_MINOR_VERSION) {
-> > 
-> > Providing the facts that:
-> > 
-> > #define FFA_MINOR_VERSION		(0)
-> > u16 minor;
-> > 
-> > Yes, currently this condition is always true:  minor >= FFA_MINOR_VERSION
-> > 
-> > However, we might upgrade FFA_MINOR_VERSION in the future. If we remove the "minor >= FFA_MINOR_VERSION" ,
-> > non compatible versions could pass which we don't want.
-> > 
-> > To keep this code scalable, I think it's better to keep this condition.
-> 
-> OK, thanks this makes sense as an intentional change for future sanity
-> checking.
-> 
-> > > ________________________________________________________________________________________________________
-> > > *** CID 464359:    (PASS_BY_VALUE)
-> > > /drivers/firmware/arm-ffa/arm-ffa-uclass.c: 168 in invoke_ffa_fn()
-> > > 162      * @args: FF-A ABI arguments to be copied to Xn registers
-> > > 163      * @res: FF-A ABI return data to be copied from Xn registers
-> > > 164      *
-> > > 165      * Calls low level SMC implementation.
-> > > 166      * This function should be implemented by the user driver.
-> > > 167      */
-> > > >>>     CID 464359:    (PASS_BY_VALUE)
-> > > >>>     Passing parameter args of type "ffa_value_t" (size 144 bytes) by value, which exceeds the low threshold of 128 bytes.
-> > > 168     void __weak invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
-> > 
-> > We are using invoke_ffa_fn with the same arguments as in linux. The aim is to use the same interfaces as in the Linux FF-A
-> > driver to make porting code easier.
-> > 
-> > In Linux, args is passed by value [1].
-> > ffa_value_t is a structure with 18 "unsigned long" fields. So, the size is fixed.
-> > 
-> > [1]: invoke_ffa_fn arguments in the Linux FF-A driver
-> > 
-> > https://elixir.bootlin.com/linux/v6.6-rc6/source/drivers/firmware/arm_ffa/driver.c#L115
-> > https://elixir.bootlin.com/linux/v6.6-rc6/source/drivers/firmware/arm_ffa/driver.c#L54
-> > https://elixir.bootlin.com/linux/v6.6-rc6/source/drivers/firmware/arm_ffa/common.h#L15
-> > 
-> > [2]: include/linux/arm-smccc.h
-> 
-> So this is intentional, OK.
-> 
-> > 
-> > > 169     {
-> > > 170     }
-> > > 171
-> > > 172     /**
-> > > 173      * ffa_get_version_hdlr() - FFA_VERSION handler function
-> > > /drivers/firmware/arm-ffa/ffa-emul-uclass.c: 673 in invoke_ffa_fn()
-> > > 667      * invoke_ffa_fn() - SMC wrapper
-> > > 668      * @args: FF-A ABI arguments to be copied to Xn registers
-> > > 669      * @res: FF-A ABI return data to be copied from Xn registers
-> > > 670      *
-> > > 671      * Calls the emulated SMC call.
-> > > 672      */
-> > > >>>     CID 464359:    (PASS_BY_VALUE)
-> > > >>>     Passing parameter args of type "ffa_value_t" (size 144 bytes) by value, which exceeds the low threshold of 128 bytes.
-> > > 673     void invoke_ffa_fn(ffa_value_t args, ffa_value_t *res)
-> > 
-> > Same feedback as above.
-> 
-> Thanks.  I'll update the last 3 CIDs shortly.
+--=20
+Tom
 
-Thanks Tom :)
+--PhvIQuuJSqpDNJXy
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Cheers,
-Abdellatif
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU5MQsACgkQFHw5/5Y0
+tywTRwv7BfcrSYoY82ivg++CDKK3g7Lw7of9JbwtiWjT3GlHPVLgAV3EfomBE9li
+k711MfCavDRmpmrRp24dzZYgWlhjUnkJ/9joWp47fy4y90F/Mje2TFT5zJnGcfmE
+UU3xL6oySWNmb/pAx3rC7FIOBDRW5969lTsHNfJGrohcHj7T9RAe6C7apiRjiIiz
+vtkpo2bNsYLclCIKQUnpQnfKSGVRwMmrQLTpTIaFYqocrpUnQob/v6yPY53uxlY9
+0ZM8Lhs7X4Ye0sdMcLLUEyh96GT/4OMraSzvzclTcJv3Xr7n7lDbYP8cJ518rr+o
+QyL3AIGFoNekNbm5IdnhslN84S9voRAyR/5+1DUjFWjKbJo+PFHeKGns5zijSG9v
+Vtw4jeT8bvf1/kZ9+dVzGguBZWVyZs5HDU0gy00MmPPeiQn4IPYZo7Kr/2It9J/y
+HqWigK1uNtTak3u6PbE44HgYSgaVYkqiEFa1fsd42s957Lquw+PeoNLpvw/xG9GG
+20mBZLgf
+=c2Lf
+-----END PGP SIGNATURE-----
+
+--PhvIQuuJSqpDNJXy--
