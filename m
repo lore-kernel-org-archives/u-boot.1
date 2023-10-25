@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA767C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:55:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D06DAC25B47
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CCEB86F6D;
-	Wed, 25 Oct 2023 15:55:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D7889871CE;
+	Wed, 25 Oct 2023 15:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F8/VEyBZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qwnmX/lQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDF7286FA5; Wed, 25 Oct 2023 15:55:49 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 86E4787166; Wed, 25 Oct 2023 15:58:45 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5F3A86F44
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:55:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4294287AD4
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:58:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-77891f362cfso73719385a.1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 06:55:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698242146; x=1698846946; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3ajxJafjGPZVAWFcO33N+dDhLV8yQLzPedkFUPAOehU=;
- b=F8/VEyBZXyNWvA27r5HUUY86EH5Q9HGX7FrL1DVg8gkmL6GD1ja/ghK06eR4jKHNeY
- hmdYl4MdzKa6pcujPUtjPmbsCpSHN1KH9afxYks+7TAVUq7KgVoyOBsGduV1jp8S3rLE
- /EYodjbEsUFk3GUvrJq6VBhWV6QtSp/Lt3FgQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698242146; x=1698846946;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3ajxJafjGPZVAWFcO33N+dDhLV8yQLzPedkFUPAOehU=;
- b=lJR3NrWp4U+OmNJUG5LvFQYMAKPpZgnUDUmdtizhn2mZeQeXeyM8wyljLNo051HTR2
- 2zGx2FpbNBRwT/XkJw9jRyIYB5CNu/48+6sGpfhF3wJSxc5T3ZaTPXpFhDu8+qbj6MNb
- 5K4v/3QRRNSGDWTg/vhlIXE0ML4y2lfrA954wNNfuc61V+Y+320WEfxDxXGZsuh7vY/D
- dSq++BO2T3Llhcc+N+qE2DGOPcjRhvbkxC7CKMoOaLrCgAuNtRCSbXhNjftCLofS8BDH
- ack71HqcrO0PvJzOi3McfljsH276htG9Q9EbgWIt/q7ik9ibDe/4XYhFIsuKIBf49GV7
- pDRA==
-X-Gm-Message-State: AOJu0YwOapUYtYPoeyqBx4rlgiQ8x1Hxtj1oOQQwEO/d+QDxsx1FoYbm
- zlQP25iIdr7+PprtHHzdEmOjTdb2dEllDzAL9T8+AQ==
-X-Google-Smtp-Source: AGHT+IE5zLuVrz92L9K0MfpBPnAwAQcAET5zUMnYFpixwcvqO5bVaJNuYOsYKRI4JTnkjFIDRVWZLg==
-X-Received: by 2002:a05:620a:2982:b0:777:7214:44d with SMTP id
- r2-20020a05620a298200b007777214044dmr20615631qkp.23.1698242146494; 
- Wed, 25 Oct 2023 06:55:46 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- qs21-20020a05620a395500b007671cfe8a18sm4227570qkn.13.2023.10.25.06.55.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 06:55:46 -0700 (PDT)
-Date: Wed, 25 Oct 2023 09:55:44 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Michel Alex <Alex.Michel@wiedemann-group.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2] misc: i2c_eeprom: consider pagesize when writing to
- eeprom
-Message-ID: <20231025135544.GN496310@bill-the-cat>
-References: <AS1P250MB0608EFCD6443148D5D9837C6A9F8A@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
- <20231024231543.GN496310@bill-the-cat>
- <AS1P250MB06088A3DFC19C7673DB0F551A9DEA@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1698242320; x=1698847120; i=xypron.glpk@gmx.de;
+ bh=piPAMeQtNv7GDxZbnipoly9Zo4XZkJmHox2iTJViD1g=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=qwnmX/lQc8E00sDpw4rfUQz9Bn2Mtb0EVWIadTDa86Hc6G918UjinWFnq/JGbhN2
+ OZEjIYLLN4z8PplCq0wZsB9ZqPAvn3HColZhRQMfMWj6X6RvG0ePkjfXjQbUsXWjT
+ xvNEdR6U8T40GxSXxRDn2nvguRi6emVmEJ4kwM7RX2rSMC/oVL8rkmpIdnlK0viV3
+ 7NDTlc7jWmqx6UW9zRb1rmXknBGVy9oyloJ5JwSMTJ+iPcZTl8NvrB9tm9JPGOJDH
+ XXzQsPyJ5HwS2aqtefgvfeHYOe0awDsA1gM72h9ZUkmS01cL8Px2nSwhkDgAFBQly
+ 41nKmm36Jx6+oobwpg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mj8qj-1rROBu46ZZ-00fA3Z; Wed, 25
+ Oct 2023 15:58:40 +0200
+Message-ID: <efeab54a-7a97-4e90-9b2b-8865a3b11e7f@gmx.de>
+Date: Wed, 25 Oct 2023 15:58:38 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a6pnq1kn2p2SVGwr"
-Content-Disposition: inline
-In-Reply-To: <AS1P250MB06088A3DFC19C7673DB0F551A9DEA@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v14 4/8] bootm: Support boot measurement
+Content-Language: en-US
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Eddie James <eajames@linux.ibm.com>, sjg@chromium.org, u-boot@lists.denx.de
+References: <20231024154354.197524-1-eajames@linux.ibm.com>
+ <20231024154354.197524-5-eajames@linux.ibm.com>
+ <0459b591-1f22-427d-9b7f-5422dbe789b8@gmx.de>
+ <CAC_iWjKMB4rO7tVh9sy7bd=gFEHeZKcwbM7cGkjSb+JkkLi_8Q@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjKMB4rO7tVh9sy7bd=gFEHeZKcwbM7cGkjSb+JkkLi_8Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LfTsIX+mXM9OstbtH4HsczAB/oei2Lexydds4Dk8NIN2ddyrCZP
+ PqnPI4yZj0v65Zkq7M2ZvFp4TfgGwIUR74iZUgpN6IFVbgmGjtbgFqKMQYWDowl3JSCfiF8
+ FfIYTg7XOD4gFPCQvPaHCt+m/0xsjgFdmD011cNzrpRv5yIJAi7t2rc6YMJgutwwpo6J8ZB
+ 711Xj88QB6laskhkOTt2A==
+UI-OutboundReport: notjunk:1;M01:P0:EvE5JScvEuA=;Il6+3p0eVxTdA6XHyH996Sg+tBk
+ 8GRnOFEBZf+eyNtQeW4Mnha8gRnZOVDc3Um5bW35ow0jYP0YsQi+PG7DdBV2d44DEfmyr11ep
+ 4sNgXEzn6baIkb9FP5oOZubceCH7EHMT7REtqCaeZCKat2S1JgzEODyZTgSJUOOL1IbGkVmEg
+ y42C0AgrRcJJluzxCyviZuYVKV2//rIoxXs6cb5z76aZEQj+JS9EY/kBGQUcHpZWyt5ekkXIa
+ tne65I63eLsiVQ1JvNCGkmk8IsGFziPSSjN3V0naQmagcqrl0+HQMTP5jvfmj21+PKSFKlL+P
+ w/seKVSLiRsPvPbTpPAimTK6/fqfIE9/lDYWXRp5mb8hc9WEBOXaMXWA7mRuQIkZGVCige92j
+ kM8PYIsvS6YMqOGTo26/2a02LgVzeIihlhTqy2iYW0l9/UVXYCXSHslIH66sPuLRfNYwxV1kw
+ ya3zQIeBKsoJK3pGY/rmM7/gdvRnlVIGcW6zqW+KwqT/a/lWdLvW5EOpjGyIk4o7REePYxNTd
+ GIwLFSx6+2zqOHN9VmYOR46OanUXUM5C0EYUc1wHXr8eH3RyZNTP0RfU8FSA7ij/G0/OQd/K/
+ gmTLBJzib1YaEPf844A+DXUQDLJqXAewKI2VyOsralYNrP2AQXuyTfHTrDanDCSVTRmGJ+mky
+ AsEqMLqblfSVViTr0ipTuEhLDbaopwujFNhvNM1x+BY3gShDboHvd5ARDqXAxIObPxMZsl73t
+ 1dlDH/hXTGV6zTu/ByoC1W3JIOGcge4KyZCAW7uE8pl5/mlbluIl1o4GZHwMhhvGGTbxLMNs1
+ /u1wwVLIj0WXe/Uf7VDONCsz+l8pla1xHBt1/CJqPC+F9uBsiUQyx4wulnB5sEtZ21Xn6iVs9
+ 5nT5k2FMCyITw6ICzt0fQpsT0NpqAUWaF2eUDFjZDJiga0mz3k8zpT9JMb00/sIzGJl9VwOPM
+ zIl4RgVVJS0Wn5EnVIY6coYM4Zg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,63 +91,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 25.10.23 15:21, Ilias Apalodimas wrote:
+> On Wed, 25 Oct 2023 at 16:08, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+>>
+>> On 24.10.23 17:43, Eddie James wrote:
+>>> Add a configuration option to measure the boot through the bootm
+>>> function. Add the measurement state to the booti and bootz paths
+>>> as well.
+>>>
+>>> Signed-off-by: Eddie James <eajames@linux.ibm.com>
+>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>> Changes since v8:
+>>>    - Added a configuration option to select to ignore any existing
+>>>      event log. This would only be selected for systems that know
+>>>      that U-Boot is the first stage bootloader. This is necessary
+>>>      because the reserved memory region may persist through resets
+>>>      and so U-Boot attempts to append to the previous boot's log.
+>>>
+>>> Changes since v6:
+>>>    - Added comment for bootm_measure
+>>>    - Fixed line length in bootm_measure
+>>>
+>>>    boot/Kconfig    | 32 +++++++++++++++++++++
+>>>    boot/bootm.c    | 74 ++++++++++++++++++++++++++++++++++++++++++++++=
++++
+>>>    cmd/booti.c     |  1 +
+>>>    cmd/bootm.c     |  2 ++
+>>>    cmd/bootz.c     |  1 +
+>>>    include/bootm.h | 11 ++++++++
+>>>    include/image.h |  1 +
+>>>    7 files changed, 122 insertions(+)
+>>>
+>>> diff --git a/boot/Kconfig b/boot/Kconfig
+>>> index a01e6cb8aa..abbc72f4cf 100644
+>>> --- a/boot/Kconfig
+>>> +++ b/boot/Kconfig
+>>> @@ -685,6 +685,38 @@ config LEGACY_IMAGE_FORMAT
+>>>          loaded. If a board needs the legacy image format support in t=
+his
+>>>          case, enable it here.
+>>>
+>>> +config MEASURED_BOOT
+>>> +     bool "Measure boot images and configuration to TPM and event log=
+"
+>>> +     depends on HASH && TPM_V2
+>>> +     help
+>>> +       This option enables measurement of the boot process. Measureme=
+nt
+>>> +       involves creating cryptographic hashes of the binary images th=
+at
+>>> +       are booting and storing them in the TPM. In addition, a log of
+>>> +       these hashes is stored in memory for the OS to verify the boot=
+ed
+>>> +       images and configuration. Enable this if the OS has configured
+>>> +       some memory area for the event log and you intend to use some
+>>> +       attestation tools on your system.
+>>> +
+>>> +if MEASURED_BOOT
+>>> +     config MEASURE_DEVICETREE
+>>> +     bool "Measure the devicetree image"
+>>> +     default y if MEASURED_BOOT
+>>> +     help
+>>> +       On some platforms, the devicetree is not static as it may cont=
+ain
+>>> +       random MAC addresses or other such data that changes each boot=
+.
+>>> +       Therefore, it should not be measured into the TPM. In that cas=
+e,
+>>> +       disable the measurement here.
+>>
+>> I guess the device-tree should be measured before fix-ups.
+>>
+>> A main source of randomness is the KASLR seed.
+>>
+>> @Ilias: How are we handling this in the EFI case?
+>
+> We unconditionally strip the KASLR node if EFI_RNG is installed.
+> efi_try_purge_kaslr_seed() has a useful comment on how the kernel's
+> EFI-stub behaves.
+> In any case, we measure selected parts of the DTB, not all of it,
+> efi_tcg2_measure_dtb() has the details and we keep the DTB measurement
+> under a Kconfig node.
 
---a6pnq1kn2p2SVGwr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+efi_tcg2_measure_dtb() measures all nodes but not the blank areas of the
+device-tree.
 
-On Wed, Oct 25, 2023 at 07:59:05AM +0000, Michel Alex wrote:
+That seems not to be enough to remove randomness:
 
-> Calculate the maximum length of the buffer when writing
-> across the page boundary. If the buffer length (len)
-> exceeds the page boundary (pagesize), split it. Use this
-> length instead of comparing the length with the pagesize,
-> because if the write start address (offset) is not at the
-> beginning of a page and the page_offset + len is greater
-> than the page boundary (pagesize), the write operation
-> would overflow the current page and the behaviour can be
-> undefined (e.g. at24).
->=20
-> Signed-off-by: Alex Michel <alex.michel@wiedemann-group.com>
-[snip]
-> +static int i2c_eeprom_len(unsigned int offset, unsigned int len, unsigne=
-d int pagesize)
-[snip]
->  static int i2c_eeprom_std_write(struct udevice *dev, int offset,
->                                 const uint8_t *buf, int size)
->  {
-> @@ -67,7 +78,7 @@ static int i2c_eeprom_std_write(struct udevice *dev, in=
-t offset,
->         int ret;
->=20
->         while (size > 0) {
-> -               int write_size =3D min_t(int, size, priv->pagesize);
-> +               int write_size =3D i2c_eeprom_len(offset, size, priv->pag=
-esize);
-[snip]
+* On RISC-V the boot hartid is random (needed in DT for kernel < 5.18).
+* MAC addresses are random on many boards.
 
-We don't need to promote the types to unsigned here do we?
+For the boot hartid maybe we should simply not provide it in the
+device-tree if measured boot is enabled. We have an EFI protocol that is
+used in newer kernels for this purpose.
 
---=20
-Tom
+Do we really need distinct Kconfig settings
+CONFIG_EFI_TCG2_PROTOCOL_MEASURE_DTB and MEASURE_DEVICETREE? Isn't one
+enough to rule both cases?
 
---a6pnq1kn2p2SVGwr
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU5HloACgkQFHw5/5Y0
-tyyBUQv8CWJTL04jiYa49jF9t/6I9FvNt+i0U/JPz8tZX4mJ4RuxyS3OpC3bPuRi
-zhXQD637tC6CeGNx+kn1ZJmXvAwfqNuvFKbHRk6Jzn/WNRQO2J4J6ginEpDD8g8f
-PDqINftAeowVkhT0SXkk2EV+LKSbm4HuGIFsJ13h24Dk4j5HIPkt2Wf5nluqQUAT
-pFRCWj6cFXMls5P41F3dzId4eZ2uUw1A178Ga3fGR6a3X5yKJvsN2kDIiieGz61y
-Bu9I6MmaXVr3HQyEvy+6/HMnhwR+KYomfT85XkVhkz90nqisjQToJxucsZ1Gvd6+
-vClFsjzDb//I9dtCpK59tprKHk051HXPONcMtehFZ2sq5sEb6nEUENR3sU7VOc3s
-pEds/gvbXvhMaODUTTzgqVTz2+gwecISdiBa2GK2yqokjQFU4JeHftHSimHtGH/f
-gAi7NRIb+bLtIBoFd+o3dm7J4v11DA2wzz7ELoQb/gP2u8vWcFGEda4sGpOXsDIp
-RuW00nUB
-=uzjP
------END PGP SIGNATURE-----
-
---a6pnq1kn2p2SVGwr--
+Heinrich
