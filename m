@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 170EEC0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D6C8C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:44:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4824087ABA;
-	Wed, 25 Oct 2023 15:37:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E26887A9C;
+	Wed, 25 Oct 2023 15:44:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l6sqNM0j";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zjHkUkp8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 803D586FF3; Wed, 25 Oct 2023 15:37:21 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 0B6BC87AC1; Wed, 25 Oct 2023 15:44:12 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C24786FF3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:37:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1BCB87A9C
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:44:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7789cb322deso388060185a.3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 06:37:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-32daeed7771so3756544f8f.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 06:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698241036; x=1698845836; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8XshiUzEwMx+O3Bfl7P3lfnedq2V/ZgyFTGodZh3MBg=;
- b=l6sqNM0jU0Igl/rEjKEGMh7Zu5De+5jTAeD4yroOG0N5MVlnkYKw6Iq1OAjbcZViHr
- 7uuMUnrhOUTFz5uRXVzBXHURLUw3QiZ+so9SEHNbHLUg7/+27MkqgzokzOSRA7lVLhqD
- seKcumZ+Yfy9lUrVzYF2c4Kf0LwE2PFKc8hxU=
+ d=linaro.org; s=google; t=1698241447; x=1698846247; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pgMEiQ9qrI5jzcjUzxc8cGJlWvarPMd4Fd2pY1VVN9g=;
+ b=zjHkUkp8MUuDRMZC+4wJS2nDhfkuD1us7Ke2jLugE4XBCYFTWQNJkFEmQY+lBa5BZT
+ WQLP/Lb/mHwbt2CEjZm6Pl45iAHqos8V9Hf0w+kNmlpCOJ0v9CxM44kBoyEJH+JN8g4U
+ c0nJjvoKM47YNOAbL5sCyLNvh1JqCCsmixiiw+mGI2so4TOuKSy8RpFbmr9VlSE5q/xn
+ vZoPNazhwRElYdl9/I82Ux8Bs86zsPMkhbZegrV8p0l6FwZEi8M+YoE3QfX8U3LP3tJA
+ CZj0225GURXen22GSmglCqxi1cssxGmy7Th8tNVr7ZKq+faY+bcGPqC/jXwLm2WLEUaE
+ RLEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698241036; x=1698845836;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8XshiUzEwMx+O3Bfl7P3lfnedq2V/ZgyFTGodZh3MBg=;
- b=fDCV4oY66i4+W51d+MkAojeMxpJEaDLB7/RmbZubSjwmKtt+/tddRPoBQCBIEQJTjz
- YhbFja9GZcJOXU4QwxcTetEwlWaP6GveWxPPchSjSpR3wCkEuPP7lig3oqmzhRl7NHbC
- 6Zu0UD2QtLLlG2Qd0CfQzLEJv+eCcuX4OZ3H7dkQ0OSmMf79GCPPp/3UMulv1aN/FwoQ
- 0F0j3JOEI1dfkD4X7FgTPTrO4h+wf6DZXHcsmaVWAwODxzg3DAIlDdas7xHBHhYhsnrf
- W5r3/tShLZuKgGwBUbSLyvLI39zNdHlndumRN6cThDsU6DTwMWfbVc45Nmr3Fn0PL/Ue
- Ev2Q==
-X-Gm-Message-State: AOJu0YxMkjADfnILsTNqB9Pzn2ht+HU/TQSODBmMK8mX4Kpkf1vyRlvc
- UKuoKI/rKP3AoGppRuC3Q0Tv0w==
-X-Google-Smtp-Source: AGHT+IFha2+4GxfgZ8wSNnUW93+GcG5xc2REuL7BAjqa5PtL0NhXtwc4rcwQJg2ZSEumo4mcb28t+Q==
-X-Received: by 2002:a05:620a:a52:b0:76c:e2db:42b0 with SMTP id
- j18-20020a05620a0a5200b0076ce2db42b0mr15371564qka.64.1698241036068; 
- Wed, 25 Oct 2023 06:37:16 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
+ d=1e100.net; s=20230601; t=1698241447; x=1698846247;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pgMEiQ9qrI5jzcjUzxc8cGJlWvarPMd4Fd2pY1VVN9g=;
+ b=FIBpRdZn03mL80pagdINhPUmyO/xZSUhazH2Ln0GHXg3RlNnV5/76YftntnN7bDlYC
+ oXMNcnPZ3uDoH2i1hNjKxE5Dz3uXNVxCh66RL2gS4E40yzmCasQJIfLxvYz33D4wC3+N
+ THJFweZQ03FB2G5iDnMSe+DjQzJhhrP3R13vD+3dbdgPx60lhmBod0tQX+I3iLZtjFem
+ Te4AbKOv6Iz49N8vCHZbmQMIeCK1r/MFORsSuVuN97gTDhHT93CXCk65ioKP6kNu4q3K
+ g0b9DE+3AAmMw5jEDW7AjKwVmYR2S90huqoqgvn8yMW+tg3gID0TacVIe9CXc1n/G6Y1
+ OFtg==
+X-Gm-Message-State: AOJu0YxHRAHx9jO8q/edHKlIVoGZ+rmHLzjC2WS2EeSY1LMK3kt5BMCz
+ ZrLN2hmypOrepq6bF/nTUiNhMA==
+X-Google-Smtp-Source: AGHT+IHRA4zK6DtaskyeHCB+gxQ2U0GU9hNgFtnz3LWHLw4xlUFIb0f3lnJ6742sQswMwfHWSGkEPw==
+X-Received: by 2002:adf:f78b:0:b0:32d:a6f5:a511 with SMTP id
+ q11-20020adff78b000000b0032da6f5a511mr9700710wrp.13.1698241447239; 
+ Wed, 25 Oct 2023 06:44:07 -0700 (PDT)
+Received: from [192.168.1.15] (host-2-99-112-229.as13285.net. [2.99.112.229])
  by smtp.gmail.com with ESMTPSA id
- o8-20020a05620a130800b0076dacd14484sm4213976qkj.83.2023.10.25.06.37.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 06:37:15 -0700 (PDT)
-Date: Wed, 25 Oct 2023 09:37:12 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v8 3/8] power: pmic: add the base MAX77663 PMIC support
-Message-ID: <20231025133712.GL496310@bill-the-cat>
-References: <20231024074110.199623-1-clamor95@gmail.com>
- <20231024074110.199623-4-clamor95@gmail.com>
- <20231024191757.GG496310@bill-the-cat>
- <CAPVz0n3b4eH0q3sPGD7UkjVo56r__6AzoJsuwKy+XVPPCQX+xA@mail.gmail.com>
+ n11-20020adffe0b000000b0032dbf26e7aesm12050844wrr.65.2023.10.25.06.44.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Oct 2023 06:44:06 -0700 (PDT)
+Message-ID: <184a6ae1-b911-4197-b311-645f4f795bae@linaro.org>
+Date: Wed, 25 Oct 2023 14:44:05 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rJASpS9kbvgA1GC0"
-Content-Disposition: inline
-In-Reply-To: <CAPVz0n3b4eH0q3sPGD7UkjVo56r__6AzoJsuwKy+XVPPCQX+xA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 8/8] clk/qcom: fix rcg divider value
+Content-Language: en-US
+To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Luka Kovacic <luka.kovacic@sartura.hr>, Luka Perkov <luka.perkov@sartura.hr>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
+References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
+ <20231024-b4-qcom-clk-v1-8-9d96359b9a82@linaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20231024-b4-qcom-clk-v1-8-9d96359b9a82@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,73 +100,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---rJASpS9kbvgA1GC0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 25, 2023 at 09:10:12AM +0300, Svyatoslav Ryhel wrote:
-> =D0=B2=D1=82, 24 =D0=B6=D0=BE=D0=B2=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 22=
-:18 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > On Tue, Oct 24, 2023 at 10:41:05AM +0300, Svyatoslav Ryhel wrote:
-> >
-> > > Add support to bind the regulators/child nodes with the pmic.
-> > > Also adds the pmic i2c based read/write functions to access pmic
-> > > registers.
-> > >
-> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > [snip]
-> > > diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max77=
-663.c
-> > > new file mode 100644
-> > > index 0000000000..4070235d3c
-> > > --- /dev/null
-> > > +++ b/drivers/power/pmic/max77663.c
-> > > @@ -0,0 +1,86 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +/*
-> > > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-> > > + */
-> > > +
-> > > +#include <common.h>
-> >
-> > Should have noted sooner, sorry. Please don't use <common.h> in new
-> > code, and audit the include list you have as well (this one looks
-> > reasonable I suspect, all the same, so general advice).
->=20
-> Each and every driver in pmic dir has common.h so it was an obvious
-> move to include it as well. I haven't seen that this header is deprecated,
-> if so, sure, I will not include it further.
->=20
-> About auditing inclusions, I never include unnecessary headers and almost
-> all the time run tests to determine the least amount of inclusions possib=
-le for
-> correct build and work.
+On 24/10/2023 21:23, Caleb Connolly wrote:
+> The RCG divider field takes a value of (2*h - 1) where h is the divisor.
+> This allows fractional dividers to be supported by calculating them at
+> compile time using a macro.
+> 
+> However, the clk_rcg_set_rate_mnd() function was also performing the
+> calculation. Clean this all up and consistently use the F() macro to
+> calculate these at compile time and properly support fractional divisors.
+> 
+> Additionally, improve clk_bcr_update() to timeout with a warning rather
+> than hanging the board, and make the freq_tbl struct and helpers common
+> so that they can be reused by future platforms.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 
-Yes, it's more recently formally deprecated, and just removing it fro
-existing drivers is on the TODO list.
+[...]
+>  
+>  #define CFG_MODE_DUAL_EDGE (0x2 << 12) /* Counter mode */
+>  
+> -#define CFG_MASK 0x3FFF
+> +// Disable the HW_CLK_CONTROL bit
+> +#define CFG_MASK (0x3FFF | (1 << 20))
 
---=20
-Tom
+There seems to be a bug in this patch that causes the actual clock rate
+to be wrong in some cases, most obvious with db845c UART. I had
+initially thought it to be a board issue but upon further investigation
+I think I'm wrong.
 
---rJASpS9kbvgA1GC0
-Content-Type: application/pgp-signature; name="signature.asc"
+The UART clock frequency table in clock-sdm845.c is taken from Linux,
+the 115200 baud rate corresponds to the lowest frequency (7372800Hz).
+However, with the implementation changes here, the RCG configuration
+actually results in a measured clock rate of 9085208Hz.
 
------BEGIN PGP SIGNATURE-----
+If the entry is changed as follows
+-	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625)
++	F(7372800, CFG_CLK_SRC_GPLL0, 0.5, 192, 15625)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU5GggACgkQFHw5/5Y0
-tyxY8gwAlKelYwTxIkJUMpXgkGyB3eHGUbH+Nu1lnPgBCGw3NsqUpTGHnF/NZ5yB
-rv8HqBf8xVuMGZAobZ1NsmJYYzeIql7FjnicbobzM3jwbOWHxQ4b9nkqLf3veLvl
-42pgcb0PT4nKui7XbUm2wmFSva/vhqwDYlylWuTUPjkzCl3XxJtrl7gV4vD9+eyB
-NacEA0DyyK2pmoLblpGstni1EzimHi7srAdqgI7GeGrIhq+AWvc/5YsE0yg+GhxU
-5pyWS5OYG5Z2AWYSYbZ5SNMIWXWGMUHd4cyGfr75q5Q3dVG+ahDilg7cvP2Dx+0j
-BR87GUe1qsuXZFA9hydf4eOFnz5SkyqFREUuTuOBzBJUCsRUfiyoOyG7Iw0rJ23P
-MTyn9d/xxjK5ySjOMgLnxVl2V9B5G9baEOu+muduoppUuJoo2aAfJ37lYbfjXoBL
-GoVMxfPY7JZr5UtVn2v/2JsXwbnvvr+qo1VRjcHDclFNMh7hl0IIZHJ62Jp+jfwo
-QfbygQYN
-=Iv+Y
------END PGP SIGNATURE-----
+Then the resultant clock rate is 7372604Hz (within the tolerance)...
 
---rJASpS9kbvgA1GC0--
+I will resolve this for v2.
+>  
+>  #define CFG_DIVIDER_MASK 0x1F
+>  
+> -/* root set rate for clocks with half integer and MND divider */
+> +/*
+> + * root set rate for clocks with half integer and MND divider
+> + * div should be pre-calculated ((div * 2) - 1)
+> + */
+>  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+>  			  int div, int m, int n, int source, u8 mnd_width)
+>  {
+> @@ -99,17 +125,15 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+>  	/* Program MND values */
+>  	setbits_le32(base + regs->M, m_val & mask);
+>  	setbits_le32(base + regs->N, n_val & mask);
+> -	setbits_le32(base + regs->D, d_val & mask);
+> +	setbits_le32(base + regs->D, (d_val & mask) == mask ? 0 : (d_val & mask));
+>  
+>  	/* setup src select and divider */
+>  	cfg  = readl(base + regs->cfg_rcgr);
+>  	cfg &= ~CFG_MASK;
+>  	cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
+>  
+> -	/* Set the divider; HW permits fraction dividers (+0.5), but
+> -	   for simplicity, we will support integers only */
+>  	if (div)
+> -		cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
+> +		cfg |= div & CFG_DIVIDER_MASK;
+>  
+>  	if (n_val)
+>  		cfg |= CFG_MODE_DUAL_EDGE;
+
+-- 
+// Caleb (they/them)
