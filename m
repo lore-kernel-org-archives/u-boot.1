@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2879C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 17:10:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32910C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 18:23:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F9F786FCB;
-	Wed, 25 Oct 2023 19:10:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B0AE87A02;
+	Wed, 25 Oct 2023 20:23:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PueXLCoi";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="YFbtGGJM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6940986FCB; Wed, 25 Oct 2023 19:10:07 +0200 (CEST)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 0FCA687240; Wed, 25 Oct 2023 20:23:49 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82CD786FA6
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 19:10:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB807879E0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:23:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-58686e94ad7so829941eaf.3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 10:10:02 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-9be7e3fa1daso11701266b.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:23:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698253799; x=1698858599; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7OLOb01mK8Mh3bgWpj68UuNpFzOxVAygGiCc2M9VkbU=;
- b=PueXLCoiCRkDIVs1q/fAQEvCW+r8csduJncyMbX12CbvHCyOFhkwgt3zIud5dbCu0G
- MEkK6KvEbCgYtV/zTbpYCPFUR6QYpDFDddtKj3V96I0+mFFJZv6iGNT8021LasLTdoZ6
- BHAlEGs7chYKS7iF7K1KR1UeW6SOX20AsFkZ8=
+ d=google.com; s=20230601; t=1698258223; x=1698863023; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6aeQilhAX5unkLqiN4I2bOnUN4QqeK696Zsr8e3lgyo=;
+ b=YFbtGGJMkciLYOooz5O2Ja7edDxqrW4kN9NjHGIYeCUBRHO5IyQ8EzhGYaQCq60Hpz
+ /+4DBCAxOzFjN3NGE2DowAqlvC7CmYFDkeob2VkhaaYWmYr5jq8/lRvOjzYebcVw5r+W
+ RCpioHGChHTNMubVTKLy96XXGqXTpAxH1JxCA/gW5N/rNrFwUFlMTGsPGgeXrz8CoZiD
+ v38pKz68hYwgIKFTAaMaPCdI+Tz2QEdcJyOEStzYQoU5Gqsi7w01v8abzZuRDDCESXyY
+ 5uwCw2lVJrPtcfv0fd6qNvbC2j+STEPMgxRop2CA+M+Fs2wbmuXe5APAw1Uaiud9fTxD
+ UAmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698253799; x=1698858599;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7OLOb01mK8Mh3bgWpj68UuNpFzOxVAygGiCc2M9VkbU=;
- b=FtahWAAuIu6Oo56BiRRt2uQUalGKk7jVy+ooV/PVCRgT2QmnKG39GRcc1shvU94/+2
- r2fHuR6XXH/IKaAI/LoEibuWHt1avI5Wrn3eU4VenjYBT91btqfPl15k4OQzwTdnM11r
- PhK35xqTsfaezf/Nea7ftNVl6cm5JDDFVCkxbrwR0FcZRGKCaq1VYPoUeIV65mi3weRK
- IRa+Le9b6KSrLBQO6CmcjqHt3FWHxQ5a/L7jOO06zOdJLBXkaLXHFHc5vXGYG5YWGvtR
- c83W+WTPcefAVgL9JH1v8ysirmLSvcxIxxJU4JeSzos6UTHvQy705sxDHHINjj+D7Ije
- xb5A==
-X-Gm-Message-State: AOJu0Yzn7cuo0gYCxbMdwNFmj3K0tiCTUCkWaL15XcYJum1HlnHQu/E+
- hKkHquQ7zMOoWYZ+yFO04wkGFQ==
-X-Google-Smtp-Source: AGHT+IHM4+MtMeROVLJPhEqXclOTqslsV+mcPdf+SFFNaRsbbudFTXH3zKlboWBC0zKZoZ4a8OpfLQ==
-X-Received: by 2002:a05:6359:6e8b:b0:168:e887:2646 with SMTP id
- ti11-20020a0563596e8b00b00168e8872646mr6413717rwb.29.1698253799441; 
- Wed, 25 Oct 2023 10:09:59 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- dn26-20020a05622a471a00b0040331a24f16sm4395176qtb.3.2023.10.25.10.09.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 10:09:58 -0700 (PDT)
-Date: Wed, 25 Oct 2023 13:09:56 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: sjg@chromium.org, caleb.connolly@linaro.org, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org, bmeng.cn@gmail.com,
- brandon.maier@collins.com, kconsul@ventanamicro.com,
- oleksandr.suvorov@foundries.io, patrick.delaunay@foss.st.com,
- sughosh.ganu@linaro.org, Mark Kettenis <mark.kettenis@xs4all.nl>
-Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
-Message-ID: <20231025170956.GU496310@bill-the-cat>
-References: <20231021004522.53311-1-sjg@chromium.org>
- <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
- <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
- <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
- <20231024223405.GM496310@bill-the-cat>
- <87bkcmrdjn.fsf@bloch.sibelius.xs4all.nl>
- <20231025142842.GQ496310@bill-the-cat>
- <ab2be1cb-f185-4f4e-83dc-d318fd2ab30e@gmx.de>
+ d=1e100.net; s=20230601; t=1698258223; x=1698863023;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6aeQilhAX5unkLqiN4I2bOnUN4QqeK696Zsr8e3lgyo=;
+ b=Wp47v7hqelBJeg8wod0Lxx3qmazy/DlNYdOtp/FirqBBAWYH5RzWnyFtuLlWVsA55L
+ x8ZGxIEbKzN0jEz98DM0FvXG3wrnSfGXaRcLdjADkccZM5j1sJc2OeMuw3mL+pAO5c+c
+ aGMQ2CiivJbWf8eO7QStKgCQiOrozDylOWDOcx7WW0L13HOrTih0a/gEig9aI4+JJWn1
+ qpqy1l77XZQRR/2FaUVIUzPyixyoHjLiA3OY+BkxBtP5hypw8sNSHjV6Xzgeg9061RFc
+ LeHDXcmKSicDwLZmMPtdbexOrfzvTh4pfE9L6I2ZPsltbpnm0uN6NifgmYU8oNWijJIx
+ qwbw==
+X-Gm-Message-State: AOJu0YyYUYRJMtRUIs6Ii9i/45fZ0YFtMzz6qTuNHbMDOYEwUePLrF02
+ GGwCy+YdSPWPMb5GkiYjoSDRJ/dNI/6wnoYHUoGcBA==
+X-Google-Smtp-Source: AGHT+IE87krh5c5qH02CW2TYJ7aTP0P7jtKSj8eHVDANMSq2fmIol04/tFXii6ryrlmiF9iTsM4hsH6bkFLqg/h8L+o=
+X-Received: by 2002:a17:907:9623:b0:9ae:6da8:1819 with SMTP id
+ gb35-20020a170907962300b009ae6da81819mr11652571ejc.48.1698258223112; Wed, 25
+ Oct 2023 11:23:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vyoUZ3aVYRdsybJs"
-Content-Disposition: inline
-In-Reply-To: <ab2be1cb-f185-4f4e-83dc-d318fd2ab30e@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 25 Oct 2023 18:23:24 +0000
+Message-ID: <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,106 +85,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---vyoUZ3aVYRdsybJs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
+>
+> Hi Heinrich,
+>
+> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > Forward and backward compatibility of Linux kernel device-trees is
+> > sometimes missing. One solution approach is to load a kernel specific
+> > device-tree. This can either be done via a U-Boot scripts (like the one
+> > generated by Debian package flash-kernel or by a boot loader like GRUB.
+> > The boot loader approach currently requires to know the device-tree name
+> > before first boot which makes it unusable for generic images.
+> >
+> > Expose the device-tree file name as EFI variable FdtFile.
+> > This will allow bootloaders to load a kernel specific device-tree.
+>
+> kernel-specific
+>
+> >
+> > The variable will not be exposed on ACPI based systems or if the
+> > environment variable fdtfile is not defined.
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> > v4:
+> >         Generalize the description of the content of $fdtfile.
+> > v3:
+> >         Add documentation
+> > v2:
+> >         Use a unique GUID to enable future U-Boot independent
+> >         standardization.
+> >         Do not try to add the variable on ACPI based systems.
+> > ---
+> >  doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
+> >  include/efi_loader.h       |  5 +++++
+> >  lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+> >  3 files changed, 49 insertions(+)
+> >
+> > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> > index fb16ac743a..702c490831 100644
+> > --- a/doc/develop/uefi/uefi.rst
+> > +++ b/doc/develop/uefi/uefi.rst
+> > @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
+> >
+> >      Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
+> >
+> > +EFI variable FdtFile
+> > +~~~~~~~~~~~~~~~~~~~~
+> > +
+> > +Ideally U-Boot would always expose a device-tree that can be used for booting
+> > +any operating systems. Unfortunately operating systems like Linux sometimes
+> > +break forward and backward compatibility. In this case there is a need to load
+> > +an operating system version specific device-tree.
+>
+> This seems to be a strong statement. Given the effort that goes into
+> the DT, changes are supposed to be backwards-compatible. Is this
+> generally true, or is it just that we want an up-to-date DT for the
+> kernel to enable new features?
 
-On Wed, Oct 25, 2023 at 05:28:10PM +0200, Heinrich Schuchardt wrote:
-> On 25.10.23 16:28, Tom Rini wrote:
-> > On Wed, Oct 25, 2023 at 04:18:20PM +0200, Mark Kettenis wrote:
-> > > > Date: Tue, 24 Oct 2023 18:34:05 -0400
-> > > > From: Tom Rini <trini@konsulko.com>
-> > > >=20
-> > > > On Mon, Oct 23, 2023 at 05:31:19PM +0200, Mark Kettenis wrote:
-> > > > > > From: Simon Glass <sjg@chromium.org>
-> > > > > > Date: Mon, 23 Oct 2023 00:04:14 -0700
-> > > > > >=20
-> > > > > > Hi Caleb,
-> > > > > >=20
-> > > > > > On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@li=
-naro.org> wrote:
-> > > > > > >=20
-> > > > > > > Hi Simon,
-> > > > > > >=20
-> > > > > > > On 21/10/2023 01:45, Simon Glass wrote:
-> > > > > > > > U-Boot typically sets up its malloc() pool near the top of =
-memory. On
-> > > > > > > > ARM64 systems this can result in an SMBIOS table above 4GB =
-which is
-> > > > > > > > not supported by SMBIOSv2.
-> > > > [snip]
-> > > > > There is absolutely no guarantee that arm64 machines have memory =
-below
-> > > > > 4GB.  Examples of SoCs that have no memory below 4GB are AMD's Op=
-teron
-> > > > > A1100 SoC and all the recent Apple SoCs.
-> > > >=20
-> > > > So one thing to resolve here is where does that requirement about t=
-he
-> > > > SMBIOS table needing to be below 4GB come from (standards wise), an=
-d in
-> > > > turn is that obeyed by consumers like say Linux or OpenBSD? Answeri=
-ng my
-> > > > own question, maybe in part, https://www.dmtf.org/standards/smbios =
-reads
-> > > > to me like there's a v3 and maybe we should be doing what we need to
-> > > > support / identify as that, if it doesn't have that restriction?
-> > >=20
-> > > Right.  U-Boot implements SMBIOS 2.x which is pretty much obsolete and
-> > > uses 32-bit addresses.  SMBIOS 3.x allows for 64-bit addresses.  So to
-> > > fix this U-Boot needs support for SMBIOS 3.x.
-> >=20
-> > OK, thanks.  And for clarity / repeating my confusion, at least right
-> > now we also set the major/minor in the struct to 3.0.
-> >=20
-> > > Personally I don't see why we'd need SMBIOS support on non-x86
-> > > platforms, which is why implementing this isn't a high priority for
-> > > me.  I simply disabled SMBIOS support for M1 for now.
-> >=20
-> > This I think in turn (based on Heinrich's emails in v2 of this patch)
-> > EFI_LOADER wants to pass SMBIOS (probably 3) information along so that
-> > human user facing tools can see the kind of info that table provides.
-> >=20
->=20
-> If you have to manage a fleet of devices, be it Apple laptops, small
-> servers or IoT devices, you want to be able to retrieve information
-> about these devices like installed firmware, serial numbers, etc. This
-> information should be presented by our SMBIOS implementation.
->=20
-> Other EFI architectures (ARM and RISC-V) target the same markets as x86.
-> The customers expect that they can use the same tools irrespective of
-> architecture.
+Did you see this comment?
 
-Ah, we do have serial# being passed along that way (as well as other
-methods which is why I didn't think about them for SMBIOS). But this
-also doesn't answer my bigger concern which is that we're setting our
-version major to 3, our minor to 0 and then filling in a struct that's
-not the "smbios3" one that Simon's patch from another thread added. Is
-what we're filling out today semantically valid? I'm hoping someone who
-has already read over the spec / is familiar and I don't need to go do
-that right now.
+Regards,
+Simon
 
---=20
-Tom
-
---vyoUZ3aVYRdsybJs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU5S9kACgkQFHw5/5Y0
-tyx3jAwAhwALWjVir06rSiaPeDdTlJ/4gbhdR6RdhJg95rmcsclSFrnisvssdl77
-3KUm51U2CFt06znjdPYhATlhoPjBhzz2Ho+TcznB2zkewOwqWLjQz51HCTwrwsc8
-pfIXTk54+L9JshfbXTccd8BKQTpcf+nZ/2ug1frMsFq7l1Z/cHUNeBPPca+UUGOO
-ILKFwbJB6zUhrzqCh2g5nv4AqCFFiuPB/qc8eniIVknKNJeBuNjNzkJ30nhbt6el
-KoL2NjmblX/qsbVVQffkfb+nYrqFHWZOaG5N4tT0nj2izxq7HCmRv5stlP1RlW94
-w0xt2OqvoEcyy1/weX+g0U62aBnIDYJTWKw81mfdzuAc3zldmQbEDPHu1ABocqgc
-NXBaBy8R5HeCD2+m2BNen1OEsElBUAZ7csXmv5vEiwCYXYHKkdtc39OJeeayIT1U
-i1eNzNsinC3VbiwCX5y6VRM27ZwwDuhXEUBbK+LEoEbtu82LoIX64TS1aMBZxith
-IMdxHxax
-=JCQT
------END PGP SIGNATURE-----
-
---vyoUZ3aVYRdsybJs--
+>
+> > +
+> > +U-Boot has an environment variable fdtfile identifying the device-tree file to
+> > +load. The content of this variable is exposed as EFI variable Fdtfile, vendor
+> > +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree path
+> > +name as a NUL terminated ASCII string. On many architectures the file name is
+>
+> NUL-terminated
+>
+> > +preceded by a vendor directory ('vendor-directory/board-name.dtb').
+> > +
+> >  Links
+> >  -----
+> >
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index e24410505f..146e7f1bce 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
+> >         EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+> >                  0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+> >
+> > +/* Vendor GUID for the FdtFile variable */
+> > +#define VENDOR_FDTFILE_GUID \
+> > +       EFI_GUID(0xd45dde69, 0x3bd6, 0x40e0, \
+> > +                0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
+> > +
+> >  /* Use internal device tree when starting UEFI application */
+> >  #define EFI_FDT_USE_INTERNAL NULL
+> >
+> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> > index e6de685e87..71bcde645b 100644
+> > --- a/lib/efi_loader/efi_setup.c
+> > +++ b/lib/efi_loader/efi_setup.c
+> > @@ -17,6 +17,8 @@
+> >
+> >  efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+> >
+> > +efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
+> > +
+> >  /*
+> >   * Allow unaligned memory access.
+> >   *
+> > @@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
+> >  {
+> >  }
+> >
+> > +/**
+> > + * efi_init_fdtfile() - set EFI variable FdtFile
+> > + *
+> > + * Return:     status code
+> > + */
+> > +static efi_status_t efi_init_fdtfile(void)
+> > +{
+> > +       char *val;
+> > +
+> > +       val = env_get("fdtfile");
+> > +       if (!val)
+> > +               return EFI_SUCCESS;
+> > +
+> > +       return efi_set_variable_int(u"FdtFile",
+> > +                                   &vendor_fdtfile_guid,
+> > +                                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> > +                                   EFI_VARIABLE_RUNTIME_ACCESS |
+> > +                                   EFI_VARIABLE_READ_ONLY,
+> > +                                   strlen(val) + 1, val, false);
+> > +}
+> > +
+> >  /**
+> >   * efi_init_platform_lang() - define supported languages
+> >   *
+> > @@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
+> >         if (ret != EFI_SUCCESS)
+> >                 goto out;
+> >
+> > +       /* Define EFI variable FdtFile */
+> > +       if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
+> > +               ret = efi_init_fdtfile();
+> > +               if (ret != EFI_SUCCESS)
+> > +                       goto out;
+> > +       }
+> > +
+> >         /* Indicate supported features */
+> >         ret = efi_init_os_indications();
+> >         if (ret != EFI_SUCCESS)
+> > --
+> > 2.40.1
+> >
+>
+> Assuming my concerns above are figured out:
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> Regards,
+> SImon
