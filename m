@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CC0C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F33C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC41A87A59;
-	Wed, 25 Oct 2023 08:30:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 680BF87A50;
+	Wed, 25 Oct 2023 08:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k1RTOuO9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RQbyKWz+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67785879E0; Wed, 25 Oct 2023 08:30:16 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id A6644879D8; Wed, 25 Oct 2023 08:30:28 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69CEB87A2A
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:30:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3695287A57
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:30:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1ca72f8ff3aso37805995ad.0
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:30:12 -0700 (PDT)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1c434c33ec0so36145725ad.3
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:30:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698215411; x=1698820211; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698215416; x=1698820216; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LpkU9wk3gj829EVx8p2lHMNKkbubof1kR3KeYVvX1vo=;
- b=k1RTOuO9E9PZBvSk4c/KkXi2bA0hrMvYj1nyNxVxhbqZyWT3Rgj0VEzx3dhlNrY3e+
- +RQCi5sH2puymCcD4T2Qw+mclZO/76IgrS1eZwTk1NBOOjxXIOxF43Ec24yR7bUj+Erj
- d4KpH6x7eMA7xR2Yd9enfNlMPGFlgupHIglDk5K29RQF5vVBTeiOipnfIMpECnn8oRr0
- 6kFyK/Udz4g74U2Vz1UOSOkwVfhCOHqiNmbox8cOe0ucKhRWqvAFjFLyWS1Cv7r0eoPr
- WzsFQjde8j/zRsVl5Y7XBnK8ai1b131ONU+ojFXnQOINOy7kwjHyXqipBT2Ceh1gvPsw
- FHeQ==
+ bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
+ b=RQbyKWz++ESx+OI4DhD3FJEbw8MIFU+ts+VxHZ9MZygilyId+tQcQEqLMXWinvJuox
+ xpL25GwTq5aUnjvYn1FO0Wrax+i1drqqOWZLjinOJXbLqWzMtFL5t6kuiiPXrW29TLMM
+ BMPcBHE0K7qsa59kRSxDzry5EZuPxabQMVXsrN/rFY/V+fpPZnrWR6uaKP7E00YsJPYk
+ Zmway+hGMKzYQT1qJhnVJGFM0T32cN9ak8oCsi8WNQR5eQ/yQ6GVzET0ZzHALsy5veU2
+ 3lj6xX6DgnK6pQ64GofWjM64Lj4mle2KYNeCZOr5EabWDkhkZMbsAseddu0uqqXNsDF6
+ M7Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698215411; x=1698820211;
+ d=1e100.net; s=20230601; t=1698215416; x=1698820216;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LpkU9wk3gj829EVx8p2lHMNKkbubof1kR3KeYVvX1vo=;
- b=d6zdm1XI/oSCTlBr4wttho/oTf762tXNbZltRihOjUrbjBJKiHKyGfbbvQXMNtopzv
- lpDNTWKyc36xJh+mAptaCklIrNP4ALpuh8RiHHNlTyR9cPdOm2nAX/S8g+BhfWYgDZBq
- UfZ/5wTEjOTDBE8RUYK1sSVysUYkpTi6it725GLQuT7vYMG4zj5ziF/2rbtScLXbFEzI
- UAuG7a6OBOi17Cv5Z4lLFAvxMZSDR4Y1WoqZT4shM9vqHAeS+viFkFg8V4+byaMsLgVi
- LdJJUiKZdaEmVsbXz+o65HDhV5oEoiu534ehudk1RnY9IRI3PvXsuUhiqOvge7SJuqm+
- QDnQ==
-X-Gm-Message-State: AOJu0Yy4dzW6RhRfqcxe996wZ7ClAHDRQN1iq5E71OGtSxOTLtfwkdaW
- LvPwVG7TNQEgW5d3wvufQgOwUyag0HXYfsftl3A=
-X-Google-Smtp-Source: AGHT+IHnagBtMMBWXWpqf/Zs50QGkfUms0gkBqj/e/97+Ywf7y2isG+cdKxrBWItTJxBtQ36+NI6eA==
-X-Received: by 2002:a17:903:4052:b0:1ca:cc28:b4f with SMTP id
- n18-20020a170903405200b001cacc280b4fmr8677027pla.54.1698215410852; 
- Tue, 24 Oct 2023 23:30:10 -0700 (PDT)
+ bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
+ b=J+BzURqnPqLIjS34tMicOWJg7giku/cVqdlCU04wu4pjI1NqUnKOC0SJnc8HfqAqOU
+ dbAHCoh1R7CnlE7PXriEHpG3rmVcNO6so0dJF9AJuUkA3D9XnKbSC4yzNDCLOVfDzsna
+ SbyRhyiTB+mc+yheqh0XK4KSD+ugFgtjNsGjhljmo3Kmuqh2/fD2+WDCdCzai+4KsZ7X
+ MXaQ9U76ujuXVRcAxdw6JtRc8Ao4DttGw6vz8ufJZWNoapBGvdGoLWLLc1GIv8OFLkUL
+ 4hYSaMA885Bdojop6QpoxJkUYKAtxg9YyLjwFs1EHIfk1mqeJupx/wFbnyRZpx6eQd8K
+ LZVw==
+X-Gm-Message-State: AOJu0YyCWvcnc5CIH4Q7oIjdTtv1+HVs8YbJO5H1N6YytRS35qVZWANL
+ 5c4GllICEXLeL7jkaompT5Foym8K0/IxqxSu+j8=
+X-Google-Smtp-Source: AGHT+IGesoA7y7Gsr3BxBQUkeJjC+ZGq6PFdiy2xN+y+NgrTPayb5AQe9qY1AX7dHuvwv+80KSLeiQ==
+X-Received: by 2002:a17:902:f944:b0:1bd:c7e2:462 with SMTP id
+ kx4-20020a170902f94400b001bdc7e20462mr10399601plb.11.1698215416186; 
+ Tue, 24 Oct 2023 23:30:16 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- b15-20020a170902650f00b001c6187f2875sm8663888plk.225.2023.10.24.23.30.09
+ jh1-20020a170903328100b001c5fc291ef9sm8408967plb.209.2023.10.24.23.30.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 23:30:10 -0700 (PDT)
+ Tue, 24 Oct 2023 23:30:15 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -71,11 +71,11 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <masahisa.kojima@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: [PATCH v8 2/7] net: wget: add wget with dns utility function
-Date: Wed, 25 Oct 2023 15:28:40 +0900
-Message-Id: <20231025062845.3100964-3-masahisa.kojima@linaro.org>
+ Tobias Waldekranz <tobias@waldekranz.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH v8 3/7] blk: blkmap: add ramdisk creation utility function
+Date: Wed, 25 Oct 2023 15:28:41 +0900
+Message-Id: <20231025062845.3100964-4-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
 References: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
@@ -97,109 +97,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current wget takes the target uri in this format:
- "<http server ip>:<file path>"  e.g.) 192.168.1.1:/bar
-The http server ip address must be resolved before
-calling wget.
-
-This commit adds the utility function runs wget with dhs.
-User can call wget with the uri like "http://foo/bar".
+User needs to call several functions to create the ramdisk
+with blkmap.
+This adds the utility function to create blkmap device and
+mount the ramdisk.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 ---
- include/net.h |  9 +++++++++
- net/wget.c    | 54 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 63 insertions(+)
+ drivers/block/Makefile        |  3 +-
+ drivers/block/blkmap.c        | 15 ----------
+ drivers/block/blkmap_helper.c | 53 +++++++++++++++++++++++++++++++++++
+ include/blkmap.h              | 29 +++++++++++++++++++
+ 4 files changed, 84 insertions(+), 16 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
 
-diff --git a/include/net.h b/include/net.h
-index e254df7d7f..57889d8b7a 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -926,4 +926,13 @@ void eth_set_enable_bootdevs(bool enable);
- static inline void eth_set_enable_bootdevs(bool enable) {}
- #endif
+diff --git a/drivers/block/Makefile b/drivers/block/Makefile
+index a161d145fd..ec0575d135 100644
+--- a/drivers/block/Makefile
++++ b/drivers/block/Makefile
+@@ -14,7 +14,8 @@ obj-$(CONFIG_IDE) += ide.o
+ endif
+ obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
+ obj-$(CONFIG_$(SPL_TPL_)BLOCK_CACHE) += blkcache.o
+-obj-$(CONFIG_BLKMAP) += blkmap.o
++obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap.o
++obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap_helper.o
  
-+/**
-+ * wget_with_dns() - runs dns host IP address resulution before wget
+ obj-$(CONFIG_EFI_MEDIA) += efi-media-uclass.o
+ obj-$(CONFIG_EFI_MEDIA_SANDBOX) += sb_efi_media.o
+diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+index 149a4cac3e..21201409ed 100644
+--- a/drivers/block/blkmap.c
++++ b/drivers/block/blkmap.c
+@@ -66,21 +66,6 @@ struct blkmap_slice {
+ 	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
+ };
+ 
+-/**
+- * struct blkmap - Block map
+- *
+- * Data associated with a blkmap.
+- *
+- * @label: Human readable name of this blkmap
+- * @blk: Underlying block device
+- * @slices: List of slices associated with this blkmap
+- */
+-struct blkmap {
+-	char *label;
+-	struct udevice *blk;
+-	struct list_head slices;
+-};
+-
+ static bool blkmap_slice_contains(struct blkmap_slice *bms, lbaint_t blknr)
+ {
+ 	return (blknr >= bms->blknr) && (blknr < (bms->blknr + bms->blkcnt));
+diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
+new file mode 100644
+index 0000000000..0f80035f57
+--- /dev/null
++++ b/drivers/block/blkmap_helper.c
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * blkmap helper function
 + *
-+ * @dst_addr:	destination address to download the file
-+ * @uri:	uri string of target file of wget
-+ * Return:	downloaded file size, negative if failed
++ * Copyright (c) 2023, Linaro Limited
 + */
-+int wget_with_dns(ulong dst_addr, char *uri);
 +
- #endif /* __NET_H__ */
-diff --git a/net/wget.c b/net/wget.c
-index 6f97eb1d12..2087146b37 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -15,6 +15,7 @@
- #include <net.h>
- #include <net/tcp.h>
- #include <net/wget.h>
-+#include <stdlib.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -512,3 +513,56 @@ void wget_start(void)
- 
- 	wget_send(TCP_SYN, 0, 0, 0);
- }
++#include <blk.h>
++#include <blkmap.h>
++#include <dm/device.h>
++#include <dm/device-internal.h>
 +
-+#if (IS_ENABLED(CONFIG_CMD_DNS))
-+int wget_with_dns(ulong dst_addr, char *uri)
++int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
++			  struct udevice **devp)
 +{
 +	int ret;
-+	char *s, *host_name, *file_name, *str_copy;
++	lbaint_t blknum;
++	struct blkmap *bm;
++	struct blk_desc *desc;
++	struct udevice *bm_dev;
 +
-+	/*
-+	 * Download file using wget.
-+	 *
-+	 * U-Boot wget takes the target uri in this format.
-+	 *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
-+	 * Need to resolve the http server ip address before starting wget.
-+	 */
-+	str_copy = strdup(uri);
-+	if (!str_copy)
-+		return -ENOMEM;
-+
-+	s = str_copy + strlen("http://");
-+	host_name = strsep(&s, "/");
-+	if (!s) {
-+		log_err("Error: invalied uri, no file path\n");
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+	file_name = s;
-+
-+	/* TODO: If the given uri has ip address for the http server, skip dns */
-+	net_dns_resolve = host_name;
-+	net_dns_env_var = "httpserverip";
-+	if (net_loop(DNS) < 0) {
-+		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
-+		ret = -EINVAL;
-+		goto out;
-+	}
-+	s = env_get("httpserverip");
-+	if (!s) {
-+		ret = -EINVAL;
-+		goto out;
++	ret = blkmap_create(label, &bm_dev);
++	if (ret) {
++		log_err("failed to create blkmap\n");
++		return ret;
 +	}
 +
-+	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
-+	strlcat(net_boot_file_name, ":/", sizeof(net_boot_file_name)); /* append '/' which is removed by strsep() */
-+	strlcat(net_boot_file_name, file_name, sizeof(net_boot_file_name));
-+	image_load_addr = dst_addr;
-+	ret = net_loop(WGET);
++	bm = dev_get_plat(bm_dev);
++	desc = dev_get_uclass_plat(bm->blk);
++	blknum = image_size >> desc->log2blksz;
++	ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr);
++	if (ret) {
++		log_err("Unable to map %#llx at block %d : %d\n",
++			(unsigned long long)image_addr, 0, ret);
++		goto err;
++	}
++	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
++		 (unsigned long long)image_addr);
 +
-+out:
-+	free(str_copy);
++	ret = device_probe(bm->blk);
++	if (ret)
++		goto err;
++
++	if (devp)
++		*devp = bm_dev;
++
++	return 0;
++
++err:
++	blkmap_destroy(bm_dev);
 +
 +	return ret;
 +}
-+#endif
+diff --git a/include/blkmap.h b/include/blkmap.h
+index af54583c7d..0d87e6db6b 100644
+--- a/include/blkmap.h
++++ b/include/blkmap.h
+@@ -7,6 +7,23 @@
+ #ifndef _BLKMAP_H
+ #define _BLKMAP_H
+ 
++#include <dm/lists.h>
++
++/**
++ * struct blkmap - Block map
++ *
++ * Data associated with a blkmap.
++ *
++ * @label: Human readable name of this blkmap
++ * @blk: Underlying block device
++ * @slices: List of slices associated with this blkmap
++ */
++struct blkmap {
++	char *label;
++	struct udevice *blk;
++	struct list_head slices;
++};
++
+ /**
+  * blkmap_map_linear() - Map region of other block device
+  *
+@@ -74,4 +91,16 @@ int blkmap_create(const char *label, struct udevice **devp);
+  */
+ int blkmap_destroy(struct udevice *dev);
+ 
++/**
++ * blkmap_create_ramdisk() - Create new ramdisk with blkmap
++ *
++ * @label: Label of the new blkmap
++ * @image_addr: Target memory start address of this mapping
++ * @image_size: Target memory size of this mapping
++ * @devp: Updated with the address of the created blkmap device
++ * Returns: 0 on success, negative error code on failure
++ */
++int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
++			  struct udevice **devp);
++
+ #endif	/* _BLKMAP_H */
 -- 
 2.34.1
 
