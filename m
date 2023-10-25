@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94307C07545
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 00:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE30C25B48
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 00:45:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ED9E879E8;
-	Wed, 25 Oct 2023 02:44:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D368D879E6;
+	Wed, 25 Oct 2023 02:45:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rdDMrcmS";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KPTOl852";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BB1D879E6; Wed, 25 Oct 2023 02:44:22 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F055E879E8; Wed, 25 Oct 2023 02:45:31 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE86186EC9
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 02:44:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86A5286EC9
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 02:45:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-778940531dbso316000085a.0
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 17:44:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698194658; x=1698799458; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SdkCsYCrTPHQItZeSwlHI7X316E0AOhyZ7tjiwSIzEA=;
- b=rdDMrcmSQS/dNYQlmiMzxw22TCF3EZY55Qs6ovItZo/OAw1IBGXK1baYDIO7VjbZDr
- FsUj2ZNKrh/AZ7Y9xxJYFpiSfVs6LW1h10O/d9S7AdUtucHxKKNcrPFClt5xdD+3eY9E
- rloblTcA3jQaZPE35jeVx6JexDJSbXLd62A/Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698194658; x=1698799458;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SdkCsYCrTPHQItZeSwlHI7X316E0AOhyZ7tjiwSIzEA=;
- b=sBQbYgaq61oXw10CEpc6Hb9dcLSjmYlM6QEUDE1+aO+OghDfVDl7msFvUShnkA9dCW
- apEb3CLYkFtZIjDxz4fJZpL3TOham6KJc0viDAN2/fA+7r645RWB6i+GP32bRRgw5gMr
- U9OdARfWo0Q11jH9VKLqZteW/xyCa6bGtDIfoD0ObVVfFqLoA/Yqu3rQMmS6raT+BXd5
- wYy9MHwC7f2bC6ztTWNhhEOkGHlDXA6LbTeLVRMROzONU/liKXUqP/hp67Iw+loHSqdu
- 8SQu2xybWZ7TMKRya7c4g32Ocxlcz8hYU8KOE5EZT9uY8QU646NHLVxixjRZy0QTpudV
- TGTA==
-X-Gm-Message-State: AOJu0YzbHkDaA2z5tdARDcIanlEFwNaSAWahXCo7aQBtZn/DRqf2tKVF
- Di2n7iHdi/z7qTppvAaLqTGa8w==
-X-Google-Smtp-Source: AGHT+IF1WJiWpn83y7xeRgAs8DoJsLFRsypsf1URAgHkRi6AjYP42xysAq/WSEo7Qgm+dPUyVftrXw==
-X-Received: by 2002:a05:622a:3d2:b0:41c:b458:e90 with SMTP id
- k18-20020a05622a03d200b0041cb4580e90mr17524442qtx.7.1698194658610; 
- Tue, 24 Oct 2023 17:44:18 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-89e7-8c52-372d-17ee.res6.spectrum.com.
- [2603:6081:7b00:6400:89e7:8c52:372d:17ee])
- by smtp.gmail.com with ESMTPSA id
- l3-20020ac87243000000b0041b7f89ad19sm3896613qtp.53.2023.10.24.17.44.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 17:44:17 -0700 (PDT)
-Date: Tue, 24 Oct 2023 20:44:15 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
-	Simon Glass <sjg@chromium.org>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, caleb.connolly@linaro.org,
- u-boot@lists.denx.de, ilias.apalodimas@linaro.org,
- bmeng.cn@gmail.com, brandon.maier@collins.com,
- kconsul@ventanamicro.com, oleksandr.suvorov@foundries.io,
- patrick.delaunay@foss.st.com, sughosh.ganu@linaro.org
-Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
-Message-ID: <20231025004415.GJ496310@bill-the-cat>
-References: <20231021004522.53311-1-sjg@chromium.org>
- <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
- <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
- <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
- <20231024223405.GM496310@bill-the-cat>
- <CAPnjgZ1h2GUWKupVJcNEQmQd1JJf1h9X+xkc3P=+qxmfCwAcOA@mail.gmail.com>
- <5F047C34-685E-41E9-A726-6003B8FCFB56@gmx.de>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1698194714; x=1698799514; i=xypron.glpk@gmx.de;
+ bh=JwQfau0RTh5ArrCkHUNVSPzdqN28hPi39GZr9fQ0gQI=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=KPTOl852xa/622a3b7bTbqjrDsfIptagN4kFELS0BpJo7cjwP5cTHfLDkrKguHMa
+ bJvuePgJFqfecklyYMzA90thplaWZ+y9As7Ks+a9bnrNjNCGeSw0ZHVXzHUu9POPM
+ PF/vpgc6coPyUmlI+bwyhsO5B6F7O1uPMIJMcYU4E8NJjNp5b5tAk4PipECbgDvXo
+ 0Qp/ALYZpub6+EUD+wiIC772LoIRIcLJEsAGgwipgrlKcfvNeZYgb8fMajXYppexK
+ GX4QPt0MMlpkuuUSfpuAUvAyxN5VgFWAnHO7Dm3s7b5n9rqrfUY9WWuELTBktW64u
+ fCuqClgPaZ8qYPY2Bg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MwQTF-1rngdT24BR-00sLgu; Wed, 25
+ Oct 2023 02:45:14 +0200
+Date: Wed, 25 Oct 2023 02:45:11 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Mark Kettenis <kettenis@openbsd.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Brandon Maier <brandon.maier@collins.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2=5D_smbios=3A_arm64=3A_Allow?=
+ =?US-ASCII?Q?_table_to_be_written_at_a_fixed_addr?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231025123117.v2.1.I054cad60e00f8cfde39256c7c7d9c960987fb9be@changeid>
+References: <20231025123117.v2.1.I054cad60e00f8cfde39256c7c7d9c960987fb9be@changeid>
+Message-ID: <734658D7-8081-44DC-8168-6EBDBA8D951D@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GA6wsdtGRRFUYetw"
-Content-Disposition: inline
-In-Reply-To: <5F047C34-685E-41E9-A726-6003B8FCFB56@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Rd6TozeOTGuiiP6Y4fCneQqNc1/jKOG5jayC+Y6BHmLyQAwcTqb
+ 3V8X3doVBfmmx6JykJ7D2ZK/xm/rM7gRGd6XYoDCNtUj+WWCIr8bmWCkUaaDGbz8yqCBwsG
+ Bu8V0zL6F7XGV7QdHkvYcM+F8EZE0T3Lchw12Au0srV+nzWCf0ndtSoZ0PZFzf2FoWz+uQM
+ AD77UkdmfmQazJv4v3w+w==
+UI-OutboundReport: notjunk:1;M01:P0:iCXGzpOKmuo=;3tnKHoXeYMzDDWD8e+o0rsEp28e
+ iNatAnm72PPCyEteEfjCWgD7O3qtYDXdUOwIhlmKMh9eSiqNJrmEfT/u4NST2tJ8DVJQUo8VW
+ fkBsAoN92eb8XqjjC4/gQrM8Rss42zj51eIKYWK3XTnpESeyNg8otakvuMl5EdZlckpzmgzK7
+ LJFxDli8n1gHLI3TXLE2f9fnzWykArvqP+OeAcRdzg2HpiS2oFkomQTFvyTYj7vsq3zJ3SbJ/
+ g21dS0/I5w66s8RbVrtxJLdKswRLPbBsjug7tKP6ww8UEM9qnF5siE97/2st6UQFDYg9u9svx
+ Q0Ekgq30z0kwcBQ9nPXCS0Q9O7PA43QDj6AG/dEfB3NWDsC8oVd1CiZur3kXv/XRXyipgrOKD
+ CXPOJAqR2sXNYx+6Frcn6r4Gk1ZxTGk7/uEgqL9anX2IuCgU9glSxRls4dmjSDeONlF7eAQeM
+ M6Ex4BFdaAgi1L5WqKVxuHmxn0Xk+EBJvbbJSOItk+q2QXXJ5ympBnR67igZYxZmEw/2+5oO5
+ EygcXx0+tFgMK3Wf2Z0XmygjryE3BxB05TCJ7n6uH0+6q/KC0cIZ47uMyqf+mRmTsIRnA8skb
+ 4N7sMDuiuNL5LpiWudwkdKWUAPsT1axgEcsei3RQvOxX2cHtvyOoAY03M1e38DJ7Am0Eiuxr0
+ p78QDfHg7SOzl+MXMkj3DhE8F8SZuaewmnwhn7e7h5JAanaYewxzkLGdz3cpfK7BR5UU03mO2
+ 0LAt1WqTW2wo0amdozUoh4VkGKqMgdx30YSBU/upTpkYagdcD5hjbJy3R5lR67B6SHOndI28q
+ VOI6sk6fp1Htk+AoYHanp4Xp/rei9eJSSml96vUpMeltqlHQS2tsNePnG113ayF/2VmAaGs8v
+ YoIdZLL5gXweQ+uY2yWJGWX7TVs0aPACCzrClqN61g5ZN8Y6w2c3mqgzWELK7yKAc9yLaH6Xm
+ UkXUVw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,95 +97,143 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GA6wsdtGRRFUYetw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 25, 2023 at 02:19:59AM +0200, Heinrich Schuchardt wrote:
+Am 25=2E Oktober 2023 01:31:19 MESZ schrieb Simon Glass <sjg@chromium=2Eor=
+g>:
+>U-Boot typically sets up its malloc() pool near the top of memory=2E On
+>ARM64 systems this can result in an SMBIOS table above 4GB which is
+>not supported by SMBIOSv2=2E
+>
+>Work around this problem by providing a new option to choose an address
+>below 4GB (but as high as possible), if needed=2E
+
+You must not overwrite memory controlled by the EFI subsystem without call=
+ing its allocator=2E  We should provide SMBIOS 3=2E SMBIOS 2 is only a fall=
+back for outdated tools=2E
+
+Best regards
+
+Heinrich
+
+>
+>Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>---
+>
+>Changes in v2:
+>- Update to search for a suitable area automatically, if enabled
+>
+> lib/Kconfig                 | 12 +++++++
+> lib/efi_loader/efi_smbios=2Ec | 63 ++++++++++++++++++++++++++++++++++++-
+> 2 files changed, 74 insertions(+), 1 deletion(-)
+>
+>diff --git a/lib/Kconfig b/lib/Kconfig
+>index f6ca559897e7=2E=2Ea1eec98b392f 100644
+>--- a/lib/Kconfig
+>+++ b/lib/Kconfig
+>@@ -994,6 +994,18 @@ config GENERATE_SMBIOS_TABLE
+> 	  See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
+> 	  the devicetree=2E
 >=20
+>+config SMBIOS_TABLE_FIXED
+>+	bool "Place the SMBIOS table at a special address"
+>+	depends on GENERATE_SMBIOS_TABLE && ARM64 && SMBIOS && EFI_LOADER
+>+	default y
+>+	help
+>+	  Use this option to place the SMBIOS table at a special address=2E
+>+
+>+	  U-Boot typically sets up its malloc() pool near the top of memory=2E =
+On
+>+	  ARM64 systems this can result in an SMBIOS table above 4GB which is
+>+	  not supported by SMBIOSv2=2E This option works around this problem by
+>+	  chosing an address just below 4GB, if needed=2E
+>+
+> endmenu
 >=20
-> Am 25. Oktober 2023 01:28:10 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Tom,
-> >
-> >On Tue, 24 Oct 2023 at 15:34, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Mon, Oct 23, 2023 at 05:31:19PM +0200, Mark Kettenis wrote:
-> >> > > From: Simon Glass <sjg@chromium.org>
-> >> > > Date: Mon, 23 Oct 2023 00:04:14 -0700
-> >> > >
-> >> > > Hi Caleb,
-> >> > >
-> >> > > On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@linar=
-o.org> wrote:
-> >> > > >
-> >> > > > Hi Simon,
-> >> > > >
-> >> > > > On 21/10/2023 01:45, Simon Glass wrote:
-> >> > > > > U-Boot typically sets up its malloc() pool near the top of mem=
-ory. On
-> >> > > > > ARM64 systems this can result in an SMBIOS table above 4GB whi=
-ch is
-> >> > > > > not supported by SMBIOSv2.
-> >> [snip]
-> >> > There is absolutely no guarantee that arm64 machines have memory bel=
-ow
-> >> > 4GB.  Examples of SoCs that have no memory below 4GB are AMD's Opter=
-on
-> >> > A1100 SoC and all the recent Apple SoCs.
-> >>
-> >> So one thing to resolve here is where does that requirement about the
-> >> SMBIOS table needing to be below 4GB come from (standards wise), and in
-> >> turn is that obeyed by consumers like say Linux or OpenBSD? Answering =
-my
-> >> own question, maybe in part, https://www.dmtf.org/standards/smbios rea=
-ds
-> >> to me like there's a v3 and maybe we should be doing what we need to
-> >> support / identify as that, if it doesn't have that restriction?
-> >
-> >Yes that was my previous patch. However 1) we apparently don't want to
-> >use SMBIOS3 and 2) my patch had some sort of bug so that it wasn't
-> >read correctly.
-> >
-> >So my next version is going to be along the lines of what was discussed =
-here.
-> >
-> >Of course, we cannot solve Mark's problem with SMBIOS2, but I suppose
-> >that is obvious. Anyway, those platforms probably don't need SMBIOS.
+> config LIB_RATIONAL
+>diff --git a/lib/efi_loader/efi_smbios=2Ec b/lib/efi_loader/efi_smbios=2E=
+c
+>index 48446f654d9b=2E=2Ebdbce4c4d785 100644
+>--- a/lib/efi_loader/efi_smbios=2Ec
+>+++ b/lib/efi_loader/efi_smbios=2Ec
+>@@ -47,6 +47,60 @@ efi_status_t efi_smbios_register(void)
+> 					       map_sysmem(addr, 0));
+> }
 >=20
-> You are heading in the wrong direction. We need SMBIOS 3. SMBIOS 2 is
-> only a fallback for outdated tools.
+>+/**
+>+ * find_addr_below() - Find a usable region below the given max_addr
+>+ *
+>+ * Check if *addrp is suitable to define a memory region which finishes =
+below
+>+ * @max_addr + @req_size=2E If so, do nothing and return 0
+>+ *
+>+ * As a backup, if CONFIG_SMBIOS_TABLE_FIXED is enabled, search for a
+>+ * 4KB-aligned DRAM region which is large enough=2E Make sure it is belo=
+w U-Boot's
+>+ * stack space, assumed to be 64KB=2E
+>+ *
+>+ * @max_addr: Maximum address that can be used (region must finish befor=
+e here)
+>+ * @req:size: Required size of region
+>+ * @addrp: On entry: Current proposed address; on exit, holds the new ad=
+dress,
+>+ *	on success
+>+ * Return 0 if OK (existing region was OK, or a new one was found), -ENO=
+SPC if
+>+ * nothing suitable was found
+>+ */
+>+static int find_addr_below(ulong max_addr, ulong req_size, ulong *addrp)
+>+{
+>+	struct bd_info *bd =3D gd->bd;
+>+	ulong max_base;
+>+	int i;
+>+
+>+	max_base =3D max_addr - req_size;
+>+	if (*addrp <=3D max_base)
+>+		return 0;
+>+
+>+	if (!IS_ENABLED(CONFIG_SMBIOS_TABLE_FIXED))
+>+		return -ENOSPC;
+>+
+>+	/* Make sure that the base is at least 64KB below the stack */
+>+	max_base =3D min(max_base,
+>+		       ALIGN(gd->start_addr_sp - SZ_64K - req_size, SZ_4K));
+>+
+>+	for (i =3D CONFIG_NR_DRAM_BANKS - 1; i >=3D 0; i--) {
+>+		ulong start =3D bd->bi_dram[i]=2Estart;
+>+		ulong size =3D bd->bi_dram[i]=2Esize;
+>+		ulong addr;
+>+
+>+		/* chose an address at most req_size bytes before the end */
+>+		addr =3D min(max_base, start - req_size + size);
+>+
+>+		/* check this is in the range */
+>+		if (addr >=3D start && addr + req_size < start + size) {
+>+			*addrp =3D addr;
+>+			log_warning("Forcing SMBIOS table to address %lx\n",
+>+				    addr);
+>+			return 0;
+>+		}
+>+	}
+>+
+>+	return -ENOSPC;
+>+}
+>+
+> static int install_smbios_table(void)
+> {
+> 	ulong addr;
+>@@ -61,7 +115,14 @@ static int install_smbios_table(void)
+> 		return log_msg_ret("mem", -ENOMEM);
 >=20
-> Upcoming mainline RISC-V platforms will also have memory starting above 4=
-GiB.
-
-I want to echo this because yes, SMBIOS if I'm recalling things right is
-one of those tools used to provide user friendly information about the
-system, so "everyone" wants it, or at least platforms like ones Mark is
-concerned about that have more human users than embedded system users,
-would like to show the information.  Maybe part of the answer moving
-forward is to allow being specific about SMBIOS2 or SMBIOS3 (or none) so
-that the issue you had to fix can also be addressed minimally?
-
---=20
-Tom
-
---GA6wsdtGRRFUYetw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU4ZNwACgkQFHw5/5Y0
-tyzLRAv/SwHVAy7KoSnB1YW/qHoVbIjwl1qTe8YnXxfHxT3PlGuTSVSi8JGGoZpJ
-Ly4WZQ2m3G2+lbBMhJDvNj1tKrET+CzugSNm9HEjttLdCpet2zbzZF79U+wZrQ/3
-vfbrL5JCWbZ6h/qYrIGksvna2GJ/ood+I2WfOKFF8ekNk39RhRfSn9a90jUK56Hu
-i03X1fEffnhu07rsEs13aSdQ4C16NF8dtCkwN7uBrKj25UcyYiRIbwRKhWb4PBVH
-Kk5NpsL34KexdYUStONxQdW/YRDK8ssIu1yeYxjKBdnV9PYqAiNueMB/HexrNbLn
-occc2x4M0R6FFpQZkclTgnfyaEBFgDbfREGBFEzgUGDuJOFoHMUoswopBuMxqqbc
-vAg2zlKwE+VURhgWUyhnifGKYGXgds/FEvfzh/wEcoJTT40DId00TAepK381cTmq
-Jx1RaA36YS8p/5AOsK+coU0ybg9xu42JBG1VhvUOLVf1F5F+nSfrqX0N90/IcefV
-7c4u9evB
-=wCUT
------END PGP SIGNATURE-----
-
---GA6wsdtGRRFUYetw--
+> 	addr =3D map_to_sysmem(buf);
+>-	if (!write_smbios_table(addr)) {
+>+
+>+	/*
+>+	 * Deal with a fixed address if needed=2E For simplicity we assume that
+>+	 * the SMBIOS-table size is <64KB=2E If a suitable address cannot be
+>+	 * found, then write_smbios_table() returns an error=2E
+>+	 */
+>+	if (find_addr_below(SZ_4G, SZ_64K, &addr) ||
+>+	    !write_smbios_table(addr)) {
+> 		log_err("Failed to write SMBIOS table\n");
+> 		return log_msg_ret("smbios", -EINVAL);
+> 	}
