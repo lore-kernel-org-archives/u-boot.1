@@ -4,84 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9801C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 09:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95AFDC0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 09:51:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3C8787188;
-	Wed, 25 Oct 2023 11:07:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A222F879C7;
+	Wed, 25 Oct 2023 11:51:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qfwiGyKE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B84D7871FB; Wed, 25 Oct 2023 11:07:37 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 05B22879D1; Wed, 25 Oct 2023 11:51:44 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::224])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 754DA8716C
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:07:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2410587230
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:51:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1c9d132d92cso10742285ad.0
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 02:07:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698224854; x=1698829654; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cilmICyeis7c/+vMMkiZRhmG9dsZY5GehpO5J2e4qME=;
- b=qfwiGyKEn3ysl5OZ1nmmUNvx2GeA5LyO211FlllheoU5Q81hXtq4nP9EluPW9HYLPr
- zjdrEwJQtiTSif5bXy9EPAHg8Y+Bd6pHVscRMRlZKXqhbJn3RhQ5JNJyiuP2TOJmSnCD
- 06xboA1MWRUkd3uATxq48imQIZUXnsUUPtRSdgjYr/qJPDcDlurhXyohkEADZ1pSlPoM
- parjJSb/ec8fWTvX28ytyGXZaTvr9l/pUx2XudDjHVsh6RyivNVyFuT7hvdZ6PWtx16b
- Wl/pjGtA+0ChWXRchhQ4TPOHb/FAkC0WNDbMD1ceJQYzjvj8gDG2wpHD76OY7xB8rzaL
- ybhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698224854; x=1698829654;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cilmICyeis7c/+vMMkiZRhmG9dsZY5GehpO5J2e4qME=;
- b=SOAw6go8s5N06C2a5/yFDXS0pwFzGIDoBeHAeRIfKDt7jBYHq0+NpFcYd3ZBzyo4zC
- Metk10tstiqOqftbx+9647HPvSwDrK8hZSNlCn85b8Bgv2Y3qcre6Cg4Nk1StG0l9hgF
- 0ByspLei+9OXALPlPNWn4y820rpXanFaRsACo4Mr8XOZZsML2ThHVET45zZ71524ZKAr
- Y/UsIYmdcQhP0hDnGTzUg4PPCCRY1nws5hcH+2jAoVJghiDNcFfHGOVuCKAogSY10iV1
- ECQAhDENHoOsg8DOV+Usf8sdlVCIU7t8TijxbL/ICWKSX/vIYv6zXfmL8cpWqqGT+UoC
- wLUA==
-X-Gm-Message-State: AOJu0YyzRfq2UVYJTcyUx8inrW/88iOCoV7QAuODvUmSPQYdYf+J/2VX
- PYIrh/sY/7ohNhdTIYutQu4ksg==
-X-Google-Smtp-Source: AGHT+IECxuYtWcZC6u/UepguQPKhkF+dMc4zI05iAA2w3u8dkyXyoqiDcphnl+DAp4kuZ6PWNn8m1A==
-X-Received: by 2002:a17:902:dac6:b0:1c1:fbec:bc3f with SMTP id
- q6-20020a170902dac600b001c1fbecbc3fmr14082583plx.5.1698224853658; 
- Wed, 25 Oct 2023 02:07:33 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:65fc:df7c:6edb:619f])
- by smtp.gmail.com with ESMTPSA id
- b3-20020a170902d50300b001b8622c1ad2sm8691539plg.130.2023.10.25.02.07.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 02:07:33 -0700 (PDT)
-Date: Wed, 25 Oct 2023 18:07:29 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Michal Simek <michal.simek@amd.com>
-Cc: trini@konsulko.com, sjg@chromium.org, etienne.carriere@st.com,
- u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: Re: [PATCH 3/5] cmd: add scmi command for SCMI firmware
-Message-ID: <ZTja0eN4nKSfk+7Z@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Michal Simek <michal.simek@amd.com>, trini@konsulko.com,
- sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de,
- Etienne Carriere <etienne.carriere@foss.st.com>
-References: <20231025051427.509602-1-takahiro.akashi@linaro.org>
- <20231025051427.509602-4-takahiro.akashi@linaro.org>
- <cc22d995-1234-477c-bd0f-6ca1946103ff@amd.com>
+ spf=none smtp.mailfrom=foss+uboot@0leil.net
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EA77BE000B;
+ Wed, 25 Oct 2023 09:51:37 +0000 (UTC)
+From: Quentin Schulz <foss+uboot@0leil.net>
+To: Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, heiko@sntech.de
+Subject: [PATCH 0/2] rockchip: ringneck-px30: always reset STM32 companion
+ controller on boot
+Date: Wed, 25 Oct 2023 11:51:13 +0200
+Message-ID: <20231025-ringneck-stm32-reset-v1-0-052562bec53f@theobroma-systems.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cc22d995-1234-477c-bd0f-6ca1946103ff@amd.com>
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
+X-GND-Sasl: foss@0leil.net
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,76 +57,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+It's happened that glitches on the STM32_RST and STM32_BOOT lines have
+put the STM32 companion microcontroller into DFU mode making it not boot
+its FW, rendering it useless for the user.
 
-On Wed, Oct 25, 2023 at 09:29:04AM +0200, Michal Simek wrote:
-> 
-> 
-> On 10/25/23 07:14, AKASHI Takahiro wrote:
-> > This command, "scmi", may provide a command line interface to various SCMI
-> > protocols. It supports at least initially SCMI base protocol and is
-> > intended mainly for debug purpose.
-> > 
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
-> > ---
-> > v3
-> > * describe that arguments are in hex at a help message
-> > * modify the code for dynamically allocated agent names
-> > v2
-> > * remove sub command category, 'scmi base', for simplicity
-> > ---
-> >   cmd/Kconfig  |   9 ++
-> >   cmd/Makefile |   1 +
-> >   cmd/scmi.c   | 335 +++++++++++++++++++++++++++++++++++++++++++++++++++
-> >   3 files changed, 345 insertions(+)
-> >   create mode 100644 cmd/scmi.c
-> > 
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 205df2f1fb65..c940051eba91 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -2550,6 +2550,15 @@ config CMD_CROS_EC
-> >   	  a number of sub-commands for performing EC tasks such as
-> >   	  updating its flash, accessing a small saved context area
-> >   	  and talking to the I2C bus behind the EC (if there is one).
-> > +
-> > +config CMD_SCMI
-> > +	bool "Enable scmi command"
-> > +	depends on SCMI_FIRMWARE
-> > +	default n
-> 
-> As I said in previous email. default n should be removed.
-> It is default option.
+Considering that the STM32 companion microcontroller is always reset on
+a reboot or power cycle, resetting it once again in U-Boot SPL isn't
+going to hurt it any more.
 
-I see.
-I hope that Tom will take care of that when merging if there is no
-other comment.
+For ATtiny companion microcontroller, the situation is a bit different
+because a reboot or power cycle doesn't reset it. Additionally, since it
+can only be reset with a UPDI reset on the STM32_RST line, and that is
+virtually impossible to mistakenly trigger, the ATtiny is unlikely to be
+in unwanted reset or enter reset because U-Boot toggles STM32_RST line.
 
--Takahiro Akashi
+This series adds this (sometimes) required reset of the MCU in U-Boot
+SPL on Ringneck PX30 to recover from this unwanted DFU state.
 
-> You can take a look at least on this commit.
-> 
-> commit b4c2c151b14b59a2403675526adf666710cade67
-> Author:     Michal Simek <michal.simek@amd.com>
-> AuthorDate: Fri Aug 27 08:48:10 2021 +0200
-> Commit:     Tom Rini <trini@konsulko.com>
-> CommitDate: Tue Aug 31 17:47:49 2021 -0400
-> 
->     Kconfig: Remove all default n/no options
-> 
->     default n/no doesn't need to be specified. It is default option anyway.
-> 
->     Signed-off-by: Michal Simek <michal.simek@xilinx.com>
->     [trini: Rework FSP_USE_UPD portion]
->     Signed-off-by: Tom Rini <trini@konsulko.com>
-> 
-> I have also sent one more resync patch and CC you there too.
-> 
-> Thanks,
-> Michal
-> 
-> 
-> 
-> 
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+Quentin Schulz (2):
+      rockchip: ringneck-px30: always reset STM32 companion controller on boot
+      rockchip: ringneck-px30: enable SPL_BOARD_INIT
+
+ .../ringneck_px30/ringneck-px30.c                  | 52 ++++++++++++++++++++++
+ configs/ringneck-px30_defconfig                    |  1 +
+ 2 files changed, 53 insertions(+)
+---
+base-commit: 351da15f71e3d70dbc63e90781b403415452d864
+change-id: 20231024-ringneck-stm32-reset-b5b7e7355ae4
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@theobroma-systems.com>
+
