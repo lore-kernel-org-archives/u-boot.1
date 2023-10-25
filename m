@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90402C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D556C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:22:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D4F9874A2;
-	Wed, 25 Oct 2023 15:06:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9E4B87259;
+	Wed, 25 Oct 2023 15:22:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mul4vx8A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X58o5hh9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D129486D94; Wed, 25 Oct 2023 15:06:28 +0200 (CEST)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
+ id C5B7A879F5; Wed, 25 Oct 2023 15:22:29 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4AF1874A2
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:06:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C371F8700F
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:22:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-457c2b6713fso564891137.1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 06:06:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2c501bd6ff1so79515651fa.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 06:22:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698239184; x=1698843984; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698240147; x=1698844947; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J+JR7r8j4eLjI7vZshQQb6Hevon//ADsLH0/ilz/ZB4=;
- b=mul4vx8Ae++08z9HNrfx+aU0C3I8rCdtzlwac+J3vjQfm65RMYAEaHpPNeg4gsoIwM
- v5euQxodkRJbaxRp1NMXICs6eJYoiw5Y6+mys56agYBQ41Nt2/ImFrLxDPTGEa44MC/Q
- IkhPWN0YPwNxrAyITfAihOx0TxKooIeSjWkfz6Z8EYvzzRnNdFQ3MsrYXEv1+Gd7JLYo
- UnhtMOGguGCAcsLU5KVCbp9gHDNuqCPFlGsLDaACVdmjxQ6WT4+aT98am3DbjwuRuw+H
- S+FljPiSsrMdGhjKuGVXTqaaOI85DFHLXlGYu1XGH8kPh9PVQ/7Xvnro37j0RoICr5T5
- 2BdA==
+ bh=+zRgA21ZdBAyjX/3uOjbeIJBZfGOWMcK/4UERYtvyRw=;
+ b=X58o5hh9CDbjZ0QorIbepUHa0AKGL+WlZzfK+0WJJ2IlLathqKSp56dVJLzfok1Wlq
+ BiYmfBhzkcQVMFyC3YVVpFT7YzUVXWMXhJ08Ks2NLyeNf/ZpEUwOWfguUScu/bhtll7m
+ G1K6QxgMl1zQo/e54z9hKpIo/EdHWqAUstqTNydTpDoKuHYye6Fxo7akZonTVGMtG1B8
+ fD9KocRYhogUNG8V3pzlen1r3XpXtt3einLwdrCzvr6/SX7L8KB+agRY+OZkxgzPrPBh
+ V42lgP/2RnJLSJr67zGNJ2CdQRqHmWIe+4xsXYIdQr7d/NIsEVnBIjPBelBSLRIG+0eG
+ EdPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698239184; x=1698843984;
+ d=1e100.net; s=20230601; t=1698240147; x=1698844947;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J+JR7r8j4eLjI7vZshQQb6Hevon//ADsLH0/ilz/ZB4=;
- b=nfOOSHaoOO8PXw5zI4fjTxPkRUvoPo1hml6IawVvnFwrFG47/sWVGAYkvtc5aScFRf
- 8V7jZeSlufvG5M5gQLHY8VrqjoBJ0EPyQirn4XQur2PXUGC8mh+FFEyKfDCrtVA51Do4
- 77p+rVJHVASfYiQ6vkP7AE7xsKgTGPctlmV9w7lnWZF8yn5DiUQYcy7IVgr5GGhLmxpR
- /pt5tHsjngbNFkE/O6R8EdvZruf32u4tcv99ZgD/j0YYYu+HS5IJUCDYac27q5fipuQN
- VxZoLGSBKQMqDO6YLhr0Zskam0w6cj2mwtXXn1uPtZKMpM1JLShHhnd+hrw1u4a53iF0
- 5OuA==
-X-Gm-Message-State: AOJu0YwbnwVU1uLH1kd9+DvxNymzfnybzuTlMRrI9PgXtwpJPRpeqjAL
- 4pwKwNch8X12RzUNa1VtMYMIHDpaG5Xnoyi9MZRgSw==
-X-Google-Smtp-Source: AGHT+IFvCWTeGen+hQbnvjgKtIK1z/tF3bO0mbEfsbT1z0yKcl1Vw7CAiPQRryJ5dYY24D7uQfVh/SW6BPjvKjy7z34=
-X-Received: by 2002:a67:f3cc:0:b0:44d:38d6:5cb8 with SMTP id
- j12-20020a67f3cc000000b0044d38d65cb8mr8526540vsn.10.1698239184352; Wed, 25
- Oct 2023 06:06:24 -0700 (PDT)
+ bh=+zRgA21ZdBAyjX/3uOjbeIJBZfGOWMcK/4UERYtvyRw=;
+ b=HR1Axkg9K4F/gTprTZpYxtRZCoWlYq6jxvELWvfMw7NHRgpj7QNvW+UUZDn46e/EVd
+ DACDI3J3calfrPtmLNyadZf+BmvG2ucF1CyhvyFlC8YJwV1IaCpLEnGvz+jSZeAnC5xh
+ DjCJQpTQlend7bmFZOZETrGe4YX+vix/xAHU1B8smeXoOkM/6U8mrMY9Qn3lRQOLXrtA
+ IKplufriw7HrKC2c+PUMMqHUAzcIH7g+qXar7rYayZxgcP5tngFSfiIGi0McbjxrK1pd
+ lpGUWxVn8R21zaUten64xDriEPgacWAzVgYEyddK5kMaCR2WNP3uRbNF7H8DKCgtAW4X
+ Gr0A==
+X-Gm-Message-State: AOJu0YwYOrBwQNAvbUxRktHfYmTD5xj4sOrOVoh5EsFGWfil2sK0ndDq
+ ChItIC7kszv3wPJ8BQmPOAD1xkwaPeHVFhyjz9jCMw==
+X-Google-Smtp-Source: AGHT+IEtqJZKmSEyZnBMRzzFlRY9tvXkNKmNs4CQcHI78LFO4XuwUQiGGAW6ik03e/7LGOBWaG+Lh10csji+h9FF0WU=
+X-Received: by 2002:a05:651c:c8a:b0:2bf:fa62:5d0e with SMTP id
+ bz10-20020a05651c0c8a00b002bffa625d0emr12263942ljb.2.1698240147006; Wed, 25
+ Oct 2023 06:22:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
- <CAFA6WYObsw7M+j6miQWYLVxd97v-d-RGwtBK+Ygk9v0W41ygNw@mail.gmail.com>
- <c0a4af38-f7ca-4900-99c0-9eb0fb9f2f11@linaro.org>
-In-Reply-To: <c0a4af38-f7ca-4900-99c0-9eb0fb9f2f11@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 25 Oct 2023 18:36:13 +0530
-Message-ID: <CAFA6WYOm=2rdKk3QZxUh4Hu0h=gUhxzEg+atD5kuiEeUSABqtA@mail.gmail.com>
-Subject: Re: [PATCH 0/8] arm: mach-snapdragon: Qualcomm clock driver cleanup
-To: Caleb Connolly <caleb.connolly@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- u-boot@lists.denx.de, Konrad Dybcio <konrad.dybcio@linaro.org>, 
- Dzmitry Sankouski <dsankouski@gmail.com>
+References: <20231024154354.197524-1-eajames@linux.ibm.com>
+ <20231024154354.197524-5-eajames@linux.ibm.com>
+ <0459b591-1f22-427d-9b7f-5422dbe789b8@gmx.de>
+In-Reply-To: <0459b591-1f22-427d-9b7f-5422dbe789b8@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 25 Oct 2023 16:21:51 +0300
+Message-ID: <CAC_iWjKMB4rO7tVh9sy7bd=gFEHeZKcwbM7cGkjSb+JkkLi_8Q@mail.gmail.com>
+Subject: Re: [PATCH v14 4/8] bootm: Support boot measurement
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Eddie James <eajames@linux.ibm.com>, sjg@chromium.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,131 +86,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Oct 2023 at 18:17, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Wed, 25 Oct 2023 at 16:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Hi Sumit,
->
-> On 25/10/2023 13:10, Sumit Garg wrote:
-> > Hi Caleb,
+> On 24.10.23 17:43, Eddie James wrote:
+> > Add a configuration option to measure the boot through the bootm
+> > function. Add the measurement state to the booti and bootz paths
+> > as well.
 > >
-> > On Wed, 25 Oct 2023 at 01:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >>
-> >> This series begins making some headway towards cleaning up Qualcomm
-> >> platform support in u-boot. The following is a rough overview of the
-> >> changes:
-> >>
-> >> * Move the Qualcomm clock drivers out of mach-snapdragon and into clk/qcom
-> >> * Introduce per-platform clock driver configs to decouple Qualcomm platform
-> >>   support from mach-snapdragon targets.
-> >> * Add the IPQ4019 clock driver, removing it from mach-ipq40xx and introducing
-> >>   the reset map.
-> >> * Merge the qcom reset driver is into clk/qcom and rework it to be
-> >>   compatible with upstream devicetrees.
-> >> * A callback model is added so that multiple clock drivers can be
-> >>   compiled in at once.
-> >> * SDM845 gains support for enabling/disabling all gate clocks (CBC's) by
-> >>   way of a new "gate_clk" abstraction.
-> >> * Preperatory cleanup work is done to simplify the bringup process for
-> >>   new platforms.
+> > Signed-off-by: Eddie James <eajames@linux.ibm.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> > Changes since v8:
+> >   - Added a configuration option to select to ignore any existing
+> >     event log. This would only be selected for systems that know
+> >     that U-Boot is the first stage bootloader. This is necessary
+> >     because the reserved memory region may persist through resets
+> >     and so U-Boot attempts to append to the previous boot's log.
 > >
-> > Thanks for your cleanup work. You should have at least CCed the board
-> > maintainers (board/qualcomm/*/MAINTAINERS). Were you able to test this
-> > series on all the existing Qcom platforms supported?
->
-> Ah! I thought I had done but it seems not :/. Added them in now.
->
-> I have only been able to test this series on db845c. I don't have access
-> to qcs404, and no easy access to db820c or db410c (I'm unsure to what
-> extent those two boards work at all with current upstream u-boot).
-
-I can help to test on qcs404 and db410c (I have tested it recently so
-it should work).
-
-Jorge,
-
-Do you still maintain db820c and can help with testing?
-
->
-> I should have included this in the cover letter.
+> > Changes since v6:
+> >   - Added comment for bootm_measure
+> >   - Fixed line length in bootm_measure
 > >
-> >>
-> >> Further details are included in each commit.
+> >   boot/Kconfig    | 32 +++++++++++++++++++++
+> >   boot/bootm.c    | 74 +++++++++++++++++++++++++++++++++++++++++++++++++
+> >   cmd/booti.c     |  1 +
+> >   cmd/bootm.c     |  2 ++
+> >   cmd/bootz.c     |  1 +
+> >   include/bootm.h | 11 ++++++++
+> >   include/image.h |  1 +
+> >   7 files changed, 122 insertions(+)
 > >
-> > I will give this series a review.
->
-> Thank you!
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index a01e6cb8aa..abbc72f4cf 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -685,6 +685,38 @@ config LEGACY_IMAGE_FORMAT
+> >         loaded. If a board needs the legacy image format support in this
+> >         case, enable it here.
 > >
-> >>
-> >> The primary goal of this series is to prepare for enabling several new
-> >> Qualcomm platforms in u-boot as well as additional peripherals, while
-> >> minimising the amount of copy/pasted board-specific code.
-> >>
-> >
-> > I suppose this series would move us closer to directly importing DTs
-> > from Linux. Do you plan to close the remaining gap (serial DT nodes
-> > are on top of my head) before adding further platform support?
+> > +config MEASURED_BOOT
+> > +     bool "Measure boot images and configuration to TPM and event log"
+> > +     depends on HASH && TPM_V2
+> > +     help
+> > +       This option enables measurement of the boot process. Measurement
+> > +       involves creating cryptographic hashes of the binary images that
+> > +       are booting and storing them in the TPM. In addition, a log of
+> > +       these hashes is stored in memory for the OS to verify the booted
+> > +       images and configuration. Enable this if the OS has configured
+> > +       some memory area for the event log and you intend to use some
+> > +       attestation tools on your system.
+> > +
+> > +if MEASURED_BOOT
+> > +     config MEASURE_DEVICETREE
+> > +     bool "Measure the devicetree image"
+> > +     default y if MEASURED_BOOT
+> > +     help
+> > +       On some platforms, the devicetree is not static as it may contain
+> > +       random MAC addresses or other such data that changes each boot.
+> > +       Therefore, it should not be measured into the TPM. In that case,
+> > +       disable the measurement here.
 >
-> Yes, I currently have patches to move pinctrl out of mach-snapdragon and
-> fix support for upstream DT there, as well as fixes for a number of
-> other drivers. The plan is then to import sdm845 devicetree from Linux
-> and adjust db845c and starqltechn to use it. The three new platforms
-> (QCM2290, SM6115 and SM8250) will all use upstream devicetree.
+> I guess the device-tree should be measured before fix-ups.
 >
+> A main source of randomness is the KASLR seed.
+>
+> @Ilias: How are we handling this in the EFI case?
 
-Good to see that coming.
+We unconditionally strip the KASLR node if EFI_RNG is installed.
+efi_try_purge_kaslr_seed() has a useful comment on how the kernel's
+EFI-stub behaves.
+In any case, we measure selected parts of the DTB, not all of it,
+efi_tcg2_measure_dtb() has the details and we keep the DTB measurement
+under a Kconfig node.
 
--Sumit
-
-> >
-> >> This series conflicts with a previous series introducing support for the
-> >> Qualcomm RB2 board [1], I plan to resend this initial support pending
-> >> acceptance of this series and several other cleanups.
-> >>
-> >> [1]: https://lore.kernel.org/u-boot/20230324080418.3856409-1-bhupesh.sharma@linaro.org/
-> >>
-> >> ---
-> >> Caleb Connolly (7):
-> >>       clk/qcom: move from mach-snapdragon
-> >>       clk/qcom: add per-platform configs
-> >>       clk/qcom: move ipq4019 driver from mach-ipq40xx
-> >>       clk/qcom: sdm845: add register map for simple gate clocks
-> >>       clk/qcom: use function pointers for enable and set_rate
-> >>       clk/qcom: add mnd_width to clk_rcg_set_rate_mnd()
-> >>       clk/qcom: fix rcg divider value
-> >>
-> >> Konrad Dybcio (1):
-> >>       clk/qcom: handle resets and clocks in one device
-> >>
-> >>  arch/arm/Kconfig                                   |   2 +
-> >>  arch/arm/dts/qcom-ipq4019.dtsi                     |  14 +-
-> >>  arch/arm/dts/qcs404-evb.dts                        |  19 +-
-> >>  arch/arm/mach-ipq40xx/Makefile                     |   1 -
-> >>  arch/arm/mach-ipq40xx/clock-ipq4019.c              |  88 ------
-> >>  arch/arm/mach-snapdragon/Kconfig                   |   4 +
-> >>  arch/arm/mach-snapdragon/Makefile                  |   5 -
-> >>  arch/arm/mach-snapdragon/clock-sdm845.c            |  98 -------
-> >>  arch/arm/mach-snapdragon/clock-snapdragon.c        | 181 ------------
-> >>  arch/arm/mach-snapdragon/clock-snapdragon.h        |  48 ----
-> >>  .../mach-snapdragon/include/mach/sysmap-sdm845.h   |   3 +
-> >>  drivers/clk/Kconfig                                |   1 +
-> >>  drivers/clk/Makefile                               |   1 +
-> >>  drivers/clk/qcom/Kconfig                           |  52 ++++
-> >>  drivers/clk/qcom/Makefile                          |  10 +
-> >>  .../clk/qcom}/clock-apq8016.c                      |  41 ++-
-> >>  .../clk/qcom}/clock-apq8096.c                      |  41 ++-
-> >>  .../reset-qcom.c => clk/qcom/clock-ipq4019.c}      | 165 ++++-------
-> >>  drivers/clk/qcom/clock-qcom.c                      | 303 +++++++++++++++++++++
-> >>  drivers/clk/qcom/clock-qcom.h                      |  96 +++++++
-> >>  .../clk/qcom}/clock-qcs404.c                       |  97 +++++--
-> >>  drivers/clk/qcom/clock-sdm845.c                    | 265 ++++++++++++++++++
-> >>  drivers/reset/Kconfig                              |   7 -
-> >>  drivers/reset/Makefile                             |   1 -
-> >>  24 files changed, 938 insertions(+), 605 deletions(-)
-> >> ---
-> >> base-commit: 30d01b582f2274eb8c808026c5fb4c33e9f2210d
-> >>
-> >> // Caleb (they/them)
-> >>
+Regards
+/Ilias
 >
-> --
-> // Caleb (they/them)
+> Best regards
+>
+> Heinrich
