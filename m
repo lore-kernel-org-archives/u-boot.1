@@ -4,140 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D780C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 12:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80DBEC0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 12:47:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80FDB879AF;
-	Wed, 25 Oct 2023 14:46:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id E744187A94;
+	Wed, 25 Oct 2023 14:47:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="pL0SALnE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o375Yh9T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CD6187A94; Wed, 25 Oct 2023 14:46:46 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 67D6287A9B; Wed, 25 Oct 2023 14:47:47 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6729879AB
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 14:46:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id C9FD3879AB
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 14:47:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1698238002;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=4ZdMqrCVazrV5seD3W9d4U6Ot1QyvJ4HzuXRm8DB0Y4=;
- b=pL0SALnERqhHnLbD05OpTYFBCF/yOXvDYNuD07pdutod1LyOCYoq+WM827xqSHyjBohCJ1
- g/Cjls3PCfg9lemXeSQzilYP/xNqPThKsQLvaHJCoQbVCWXHMXKT3NT+G8lBP6mnJ3gvmV
- mVQ/ls0QL0XVc+kF7jnnxAkKJSREfFo=
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com
- (mail-gv0che01lp2041.outbound.protection.outlook.com [104.47.22.41]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-36-IwRLviZmMf65ochBPK-fZA-1; Wed, 25 Oct 2023 14:46:40 +0200
-X-MC-Unique: IwRLviZmMf65ochBPK-fZA-1
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- GV0P278MB1176.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:4f::10) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6933.19; Wed, 25 Oct 2023 12:46:37 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b%2]) with mapi id 15.20.6907.032; Wed, 25 Oct 2023
- 12:46:37 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "festevam@gmail.com" <festevam@gmail.com>
-CC: "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "festevam@denx.de"
- <festevam@denx.de>, "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "sbabic@denx.de"
- <sbabic@denx.de>
-Subject: Re: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Topic: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Index: AQHaBk0pzkBxey4AX0CR0vSGBaUJ0LBYqXaAgAAMigCAABTWgIAAIPoAgAGCzgCAAAdcAA==
-Date: Wed, 25 Oct 2023 12:46:37 +0000
-Message-ID: <1abd23c1e97c95475ca2dc887535e5c50bd6975e.camel@toradex.com>
-References: <6de4ef437445c78317e7d8f4f07e47502caed029.camel@toradex.com>
- <cb3e2ea6-b417-4736-9639-b51a04815f7a@prevas.dk>
- <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
- <e4821c38-ead6-4a51-a442-2c782e638024@prevas.dk>
- <2832e90451ce39c3c7cef34ec5d5c20f02d3a652.camel@toradex.com>
- <CAOMZO5DsFcV1yLjeHyi=56Lph3G8JErMPejVo+FTADMufhBccQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5DsFcV1yLjeHyi=56Lph3G8JErMPejVo+FTADMufhBccQ@mail.gmail.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|GV0P278MB1176:EE_
-x-ms-office365-filtering-correlation-id: 9106a43f-e345-47f7-da6a-08dbd5586d62
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: akoAVYPS3rpSRednzcW5yFBWgtV2a0LVC1RwGSPTHjWCOxDMJ1NJyQRAQ9D2BUhDKOpiPny61mflTAqtTX1RH1kGT250UdTM1pLLoDyxQ7EEhIMBg4C5v39gRbq0CgUdFHeP3H605jTIY+WxOZWxT3ukWHndNTE4ijJVSL4oQHGq43kA8sUUIBXOCNYqQ27dmmqPfaW7ZxllzuOL3qvkV4AucNpnPrxv3Xy1ASp+9wH3e64KH9sNuTDD50g9SGUDXVgFht59b5xjnUbjGGDtONRCCKJBb7zQOoV3RYIbs1pi4E66Fa1pEvr7Km/s/yjnE3QdJOpSyPJNe7JTyVpAd70xoVKH59VaNL8950UvocbdYQGMrOC4SafmxToiNeAObcfRSa78+DY7pkKxlnahLeLmjMQ48HgPXKbldazaJCET6NjLS5Xx2ScOZSvO/L0wBYzNy+i0FXg8dJUE3Kcoq0HBKgQW8g5zGXYhEjtyPDxtRw8YPueko03t0zobaI/v2YxmSiah5KB00k/BxmI99ePuVX47FYBtpO4tGuICRgtglp4KjwTp34lL5NDnWuQEFuXt8dJwTzDQr3e2c5pYEpUt694dhbkh1rxZ4WAGQm36l4s3FYKT4gMrMPIVaGix
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(39850400004)(346002)(136003)(396003)(366004)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(44832011)(41300700001)(53546011)(6506007)(71200400001)(478600001)(122000001)(2616005)(6512007)(76116006)(66556008)(66476007)(66446008)(66946007)(91956017)(64756008)(36756003)(54906003)(316002)(6916009)(6486002)(86362001)(26005)(83380400001)(38100700002)(8676002)(8936002)(38070700009)(4326008)(5660300002)(2906002)(4001150100001);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZnBCQWVxSkxmWktSOHpqVUdIUERmOFh6bjRpOHA3NURzaEJuM0JiY2dqQUw0?=
- =?utf-8?B?VE5LU2R0MExnQlFVWjdNUGkrWG84YmZRSWszcThqdElBRWxWN25oa0NqaTJL?=
- =?utf-8?B?ejZ5aDVpd0crN25JaXBqa1F3a2c3RUNUaTJiZFNFMTBKT2F2dldiUzdLTnZE?=
- =?utf-8?B?Y0kzUEFPYUwzS0tzekRLclZ5dU5mUURneUhaRWJGN2RUejhsblRwV21kUENL?=
- =?utf-8?B?U3ZqSzVxVTB3WjhkWGpzb1htNHFHVVhPVHBENncwRHhoT2FSNk9mV3VuRDNC?=
- =?utf-8?B?alpObW1BcHNHd1d4UEhhNXA0cGtCZHl1aTdTQkVkMmtRZStJSXcvbWtZZ01t?=
- =?utf-8?B?ZWJKN1ByTXRndVBiS0p3cE1wbHhPNUZBZ2ZJa2M0bm5FSDBmU1hNT1gxMW9t?=
- =?utf-8?B?Qm95TGY3NS9ZeWJQZzAxcTVwQzdmZVRsOUhJRXJxUjVuTUlhWVMvbzJpUmcw?=
- =?utf-8?B?MG5hRWpaZllmRHFHOHJ3THNzSHRwZzRJUmRVaW5MN0VhRExpd1o0ZVk3QmJG?=
- =?utf-8?B?bjBkMEZETlJhcHdhL1NLMnJvMUd5TUZETHhqSXRDWG5oSEUyakF3VFpEd2Ro?=
- =?utf-8?B?bWw2VGhROHZwa3FJMnFHcGFHNHFnWVZuaEM4ZGg3eVdLWm9kZGZSS1dlTC9N?=
- =?utf-8?B?SEJVUStEWE9TK3FsTDVnK2daOXVSaktia1BrUzNQRWFoNXA3eUxPK3BRN0tx?=
- =?utf-8?B?YncwbkZEZWVnekIrUkU2TSsxb2ZrWDUyN0xQMSs0MHArNWEyY1JnbVJoR2R3?=
- =?utf-8?B?d1JJVTZ5T0p4VjVjSFVCQXROT3hFQVZXTTdIbnVIaWcweGc2dDdxUG5GRTln?=
- =?utf-8?B?QXgycFlqME1JdXRQcFFMVStFL0U1VVJIbXBaNVJxVUFHOUpLdnBoSnhPa04r?=
- =?utf-8?B?aks3ZUVUSEpIZGgzNjM1ZVJsKzlXbHBVc09Ed0hWdFZITkN6MkZTck9FR00z?=
- =?utf-8?B?MEc2c1N4Zkt1QklpSlVFcXRoeDVvRGRLcWVVK3hDZzVRSU5sdDhSUmlRc2dX?=
- =?utf-8?B?WlRXZ0V0YW1uT2pkNTE3WEdHOUN0WHBvVHFNTXJuMC9zWlZ5Z0RUcldIajhm?=
- =?utf-8?B?bWx5M1dqYVFuTTBVVzRCQVlSWGcrOTdoTTYyM1gyVkgyV1ZGSHNWUHdleVJH?=
- =?utf-8?B?NEhkODdxUXR3cVhjR3FMRElwOEViUDhHS3VsU1RBWi9WaS82emEzaVArSzk3?=
- =?utf-8?B?WWpVajRmVlJZMTBVWG5GTFppZlpDWVdvVTRSa09IR0dMV1VpaTE4bWdEZnoy?=
- =?utf-8?B?c21TOWN2bDdqaVRBMXV6UUU3ZzJxVUpkeDFnN2NrSU5yMTFmVHBaeThyOFk4?=
- =?utf-8?B?NjlMQ2dmUHJUOEVVOVhTQ3Z4WkUvMWlsZ2hGN1JkdVBDSC9WSG9GSjg5UjRJ?=
- =?utf-8?B?eWRLVmkxU0dRNFNiMVZnUExLL1EzK2kzU2ZtblE1dXpVMlR3T3J1cUdWUUdp?=
- =?utf-8?B?ZC9TQ3J4V0FudHBnT1B6emM1YkJCMjhrYTBMeVVuSGtLQ2c1b2REREVkaFlr?=
- =?utf-8?B?Q0lUZGo2MjhKNEtZU0Erc1E3b05DdFJWSVlMMWExRmZobTlIWFdxd0h4cTJv?=
- =?utf-8?B?b1Fub2ltMW9rbWZpbzNmVUNWNzBoRnU0SEF4dUM1Smo3WUc1aElNUkRsb1Jn?=
- =?utf-8?B?NWtZVEUzbG9BWFRxQTRTMWZOdGxISmlyZXVWQUk1cjkyemxQYTY5RU9tenZk?=
- =?utf-8?B?QVVtQjFkODVDeDlZcmtzbXJxTEJpSmExOVE1dStodVorMUdRUDRMYUFYYmJM?=
- =?utf-8?B?aDdONzQ0TmRRdDJPdThqSDdsUjU3UzJaaU5icVRMUC9JV01qRXlwc2NqUFpO?=
- =?utf-8?B?T3l1eVBIM2J2VGVPS0txOUJySjhjNi9ObDZhSlFrT1BaNkpjaDd1RTF5WWNC?=
- =?utf-8?B?ZjFLWmpLVnZCVC81QmRUYWNrYzd0NVgwZEppZEh1c2JsTjZmRStYL2VDU1F0?=
- =?utf-8?B?RVYwdHRtY0IzRStBUkZoZmZYN2dYTUR1THBiam5UaXFjaER1NlJla01hVHF4?=
- =?utf-8?B?b2txNytPUDVtMlBpVEN1eEphcE9iV3NXRy8xcVJETEpOSzR3NUV1UmRJVmJP?=
- =?utf-8?B?cGd0SlRsME9uZmJoQ2x0YjlRUWFaMjNpR0hpWmtxWkloUklLUnVGYm05TGFl?=
- =?utf-8?B?b2pCNjgrZnRKaE9OTmRWU25rdnFXeERMUFFlTitRdUVFM1RXYldPdVlYeFZq?=
- =?utf-8?B?b2c9PQ==?=
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5079f9675c6so8828886e87.2
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 05:47:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698238063; x=1698842863; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7RxZiF2e0YHRiLVxZJ9d5TyND+K3E3HDt1kT0vXu66w=;
+ b=o375Yh9TQQtRmP+Q3/9iASMlxQ9Eyojk8Le16Y43OI1JYInSZYyM3r0NjmsrVWv7pk
+ LO75qQtCEK+eEVnIPX3xCz7ijADkfuQ/QzP0Mlnak9yMD/4QZ1igrnhk7OQyhgFbihDM
+ /FHEZLDk4nb4g+zRfTNvCkYFL1G0gvzpgXpWxOjFpL7sjQU91YnkUJkjXSaBYwX7tlIA
+ ouqI0TZO4+AVxAdd7OJPiUWb1X3w6Y3cdoow2665B8RJYBIUtuAqGUDiuqf/LRyRvDQx
+ uaFtntj2q4melDORMxiUJ5myKXJtUzzzj2CWuial3Lfl2r5ExiJGtBRa8Br5TXyJ17IG
+ OI6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698238063; x=1698842863;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7RxZiF2e0YHRiLVxZJ9d5TyND+K3E3HDt1kT0vXu66w=;
+ b=EIeUQP7V8INlooFsYOC7mxQdIf6LmKWphcRFsLvugINe4hF1jTHUwSnTPi0rT6/uqf
+ qogA1WWOKLJDhfih3pn09k1jI/MxQ08oeAg75arRFjQxq3mveLca5nUqyEYrOh2NM/t9
+ xRUxvhKjGQGnViOGa4mwIwJP/vRduu9yd81eZB97sEy8HB6gONaiUEKzM4wJUHlhXUfU
+ cARDaXYYOMRDbOXt79ajPaRArDoKa+HAjinuKSfyejpPMJM5cVt04IFU7Mu/CVrXFEu6
+ FksnfNVzEpqi9b0279RD8bH+4flLfJTpJJmb52jA0g/bi2hoaqU3QNhc9Vw7BF9nlWrY
+ G5/A==
+X-Gm-Message-State: AOJu0Yw+UYS97KZoDVQnTgEn8Cu7J7SwbwDtIffM8hwFxXJ6opm2lYoZ
+ xYpDDZlSfFRHjo8qMgnybtz6Ew==
+X-Google-Smtp-Source: AGHT+IFDwbjMRWBd85h1LzgjZPvoOM8JEW/e2rx6T/Wxrruc9H7mH1eny8dv8mEFRCiiY4xdGJ6N5g==
+X-Received: by 2002:a05:6512:3a8e:b0:507:a1e5:74fe with SMTP id
+ q14-20020a0565123a8e00b00507a1e574femr13139817lfu.54.1698238063056; 
+ Wed, 25 Oct 2023 05:47:43 -0700 (PDT)
+Received: from [192.168.1.15] (host-2-99-112-229.as13285.net. [2.99.112.229])
+ by smtp.gmail.com with ESMTPSA id
+ ay20-20020a05600c1e1400b00407460234f9sm14613093wmb.21.2023.10.25.05.47.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Oct 2023 05:47:42 -0700 (PDT)
+Message-ID: <c0a4af38-f7ca-4900-99c0-9eb0fb9f2f11@linaro.org>
+Date: Wed, 25 Oct 2023 13:47:41 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9106a43f-e345-47f7-da6a-08dbd5586d62
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Oct 2023 12:46:37.1835 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 5blkbY/IG2P/lA3cxJprgqC6D2g6uUKOXo6wmHZZTvQlyx/+dYgodUbUTt6nbkkOoZ42n/OGLqJfLrBGXT8Y331P63hkfpXDpTIoXYdIVe8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB1176
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/8] arm: mach-snapdragon: Qualcomm clock driver cleanup
 Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Luka Kovacic <luka.kovacic@sartura.hr>, Luka Perkov
+ <luka.perkov@sartura.hr>, Vladimir Zapolskiy
+ <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de,
+ Konrad Dybcio <konrad.dybcio@linaro.org>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
+ <CAFA6WYObsw7M+j6miQWYLVxd97v-d-RGwtBK+Ygk9v0W41ygNw@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYObsw7M+j6miQWYLVxd97v-d-RGwtBK+Ygk9v0W41ygNw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-ID: <2101271E63500348BFCE38688669FAFE@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,37 +104,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgRmFiaW8NCg0KVGhhbmtzIQ0KDQpPbiBXZWQsIDIwMjMtMTAtMjUgYXQgMDk6MjAgLTAzMDAs
-IEZhYmlvIEVzdGV2YW0gd3JvdGU6DQo+IEhpIE1hcmNlbCwNCj4gDQo+IE9uIFR1ZSwgT2N0IDI0
-LCAyMDIzIGF0IDEwOjE24oCvQU0gTWFyY2VsIFppc3dpbGVyDQo+IDxtYXJjZWwuemlzd2lsZXJA
-dG9yYWRleC5jb20+IHdyb3RlOg0KPiANCj4gPiBZZXMsIHJlZ3VsYXIgZU1NQyBib290LiBTZXJp
-YWwgZG93bmxvYWQgYWxzbyB3b3JrcyBmb3IgbWUgKG5vdGUgdGhpcyByZXF1aXJlcyBhIHBhdGNo
-IHN0aWxsIG5vdCBtZXJnZWQNCj4gPiB1cHN0cmVhbQ0KPiANCj4gSSB0cmllZCB0aGUgdG9wIG9m
-IHRyZWUgVS1Cb290IG9uIHRoZSBpbXg4bXAtZXZrIGFuZCBJIHdhcyBub3QgYWJsZSB0bw0KPiBy
-ZXByb2R1Y2UgdGhlIGVycm9yIGhlcmUuDQo+IA0KPiBCZWxvdyBpcyB0aGUgYm9vdCBsb2cgZnJv
-bSB0aGUgU0QgY2FyZDoNCg0KWWVzLCBpdCBvbmx5IHNlZW1zIHRvIGJlIGFuIGlzc3VlIGZvciB0
-aGUgZU1NQyBGYXN0Ym9vdCBjYXNlIGFzIHRoYXQgb25lIGhhcyBzb21lIHNwZWNpYWwgaGFuZGxp
-bmcgKHdoYXRldmVyDQp0aGF0IGlzKS4NCg0KPiBVLUJvb3QgU1BMIDIwMjQuMDEtcmMxLTAwMDU0
-LWdmYjQyOGI2MTgxOTQgKE9jdCAyNSAyMDIzIC0gMDk6MTc6MTIgLTAzMDApDQo+IFNFQzA6wqAg
-Uk5HIGluc3RhbnRpYXRlZA0KPiBOb3JtYWwgQm9vdA0KPiBXRFQ6wqDCoCBTdGFydGVkIHdhdGNo
-ZG9nQDMwMjgwMDAwIHdpdGggc2VydmljaW5nIGV2ZXJ5IDEwMDBtcyAoNjBzIHRpbWVvdXQpDQo+
-IFRyeWluZyB0byBib290IGZyb20gQk9PVFJPTQ0KPiBCb290IFN0YWdlOiBQcmltYXJ5IGJvb3QN
-Cj4gaW1hZ2Ugb2Zmc2V0IDB4ODAwMCwgcGFnZXNpemUgMHgyMDAsIGl2dCBvZmZzZXQgMHgwDQo+
-IE5PVElDRTrCoCBCTDMxOiB2Mi42KHJlbGVhc2UpOmxmLTYuMS4xLTEuMC4wLTAtZzYxNmE0NTg4
-ZjMzMw0KPiBOT1RJQ0U6wqAgQkwzMTogQnVpbHQgOiAxMDozODowNCwgT2N0IDEyIDIwMjMNCj4g
-DQo+IA0KPiBVLUJvb3QgMjAyNC4wMS1yYzEtMDAwNTQtZ2ZiNDI4YjYxODE5NCAoT2N0IDI1IDIw
-MjMgLSAwOToxNzoxMiAtMDMwMCkNCj4gDQo+IENQVTrCoMKgIEZyZWVzY2FsZSBpLk1YOE1QWzhd
-IHJldjEuMCBhdCAxMjAwIE1Ieg0KPiBSZXNldCBjYXVzZTogUE9SDQo+IE1vZGVsOiBOWFAgaS5N
-WDhNUGx1cyBFVksgYm9hcmQNCj4gRFJBTTrCoCA2IEdpQg0KPiBDb3JlOsKgIDEwMyBkZXZpY2Vz
-LCAyNiB1Y2xhc3NlcywgZGV2aWNldHJlZTogc2VwYXJhdGUNCj4gV0RUOsKgwqAgU3RhcnRlZCB3
-YXRjaGRvZ0AzMDI4MDAwMCB3aXRoIHNlcnZpY2luZyBldmVyeSAxMDAwbXMgKDYwcyB0aW1lb3V0
-KQ0KPiBNTUM6wqDCoCBGU0xfU0RIQzogMSwgRlNMX1NESEM6IDINCj4gTG9hZGluZyBFbnZpcm9u
-bWVudCBmcm9tIE1NQy4uLiBPSw0KPiBJbjrCoMKgwqAgc2VyaWFsQDMwODkwMDAwDQo+IE91dDrC
-oMKgIHNlcmlhbEAzMDg5MDAwMA0KPiBFcnI6wqDCoCBzZXJpYWxAMzA4OTAwMDANCj4gU0VDMDrC
-oCBSTkcgaW5zdGFudGlhdGVkDQo+IE5ldDoNCj4gRXJyb3I6IGV0aGVybmV0QDMwYmYwMDAwIGFk
-ZHJlc3Mgbm90IHNldC4NCj4gDQo+IEVycm9yOiBldGhlcm5ldEAzMGJlMDAwMCBhZGRyZXNzIG5v
-dCBzZXQuDQo+IENvdWxkIG5vdCBnZXQgUEhZIGZvciBGRUMwOiBhZGRyIDENCj4gDQo+IEVycm9y
-OiBldGhlcm5ldEAzMGJmMDAwMCBhZGRyZXNzIG5vdCBzZXQuDQo+IA0KPiBFcnJvcjogZXRoZXJu
-ZXRAMzBiZjAwMDAgYWRkcmVzcyBub3Qgc2V0Lg0KPiBObyBldGhlcm5ldCBmb3VuZC4NCj4gDQo+
-IEhpdCBhbnkga2V5IHRvIHN0b3AgYXV0b2Jvb3Q6wqAgMA0KPiB1LWJvb3Q9Pg0K
+Hi Sumit,
 
+On 25/10/2023 13:10, Sumit Garg wrote:
+> Hi Caleb,
+> 
+> On Wed, 25 Oct 2023 at 01:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> This series begins making some headway towards cleaning up Qualcomm
+>> platform support in u-boot. The following is a rough overview of the
+>> changes:
+>>
+>> * Move the Qualcomm clock drivers out of mach-snapdragon and into clk/qcom
+>> * Introduce per-platform clock driver configs to decouple Qualcomm platform
+>>   support from mach-snapdragon targets.
+>> * Add the IPQ4019 clock driver, removing it from mach-ipq40xx and introducing
+>>   the reset map.
+>> * Merge the qcom reset driver is into clk/qcom and rework it to be
+>>   compatible with upstream devicetrees.
+>> * A callback model is added so that multiple clock drivers can be
+>>   compiled in at once.
+>> * SDM845 gains support for enabling/disabling all gate clocks (CBC's) by
+>>   way of a new "gate_clk" abstraction.
+>> * Preperatory cleanup work is done to simplify the bringup process for
+>>   new platforms.
+> 
+> Thanks for your cleanup work. You should have at least CCed the board
+> maintainers (board/qualcomm/*/MAINTAINERS). Were you able to test this
+> series on all the existing Qcom platforms supported?
+
+Ah! I thought I had done but it seems not :/. Added them in now.
+
+I have only been able to test this series on db845c. I don't have access
+to qcs404, and no easy access to db820c or db410c (I'm unsure to what
+extent those two boards work at all with current upstream u-boot).
+
+I should have included this in the cover letter.
+> 
+>>
+>> Further details are included in each commit.
+> 
+> I will give this series a review.
+
+Thank you!
+> 
+>>
+>> The primary goal of this series is to prepare for enabling several new
+>> Qualcomm platforms in u-boot as well as additional peripherals, while
+>> minimising the amount of copy/pasted board-specific code.
+>>
+> 
+> I suppose this series would move us closer to directly importing DTs
+> from Linux. Do you plan to close the remaining gap (serial DT nodes
+> are on top of my head) before adding further platform support?
+
+Yes, I currently have patches to move pinctrl out of mach-snapdragon and
+fix support for upstream DT there, as well as fixes for a number of
+other drivers. The plan is then to import sdm845 devicetree from Linux
+and adjust db845c and starqltechn to use it. The three new platforms
+(QCM2290, SM6115 and SM8250) will all use upstream devicetree.
+
+> 
+> -Sumit
+> 
+>> This series conflicts with a previous series introducing support for the
+>> Qualcomm RB2 board [1], I plan to resend this initial support pending
+>> acceptance of this series and several other cleanups.
+>>
+>> [1]: https://lore.kernel.org/u-boot/20230324080418.3856409-1-bhupesh.sharma@linaro.org/
+>>
+>> ---
+>> Caleb Connolly (7):
+>>       clk/qcom: move from mach-snapdragon
+>>       clk/qcom: add per-platform configs
+>>       clk/qcom: move ipq4019 driver from mach-ipq40xx
+>>       clk/qcom: sdm845: add register map for simple gate clocks
+>>       clk/qcom: use function pointers for enable and set_rate
+>>       clk/qcom: add mnd_width to clk_rcg_set_rate_mnd()
+>>       clk/qcom: fix rcg divider value
+>>
+>> Konrad Dybcio (1):
+>>       clk/qcom: handle resets and clocks in one device
+>>
+>>  arch/arm/Kconfig                                   |   2 +
+>>  arch/arm/dts/qcom-ipq4019.dtsi                     |  14 +-
+>>  arch/arm/dts/qcs404-evb.dts                        |  19 +-
+>>  arch/arm/mach-ipq40xx/Makefile                     |   1 -
+>>  arch/arm/mach-ipq40xx/clock-ipq4019.c              |  88 ------
+>>  arch/arm/mach-snapdragon/Kconfig                   |   4 +
+>>  arch/arm/mach-snapdragon/Makefile                  |   5 -
+>>  arch/arm/mach-snapdragon/clock-sdm845.c            |  98 -------
+>>  arch/arm/mach-snapdragon/clock-snapdragon.c        | 181 ------------
+>>  arch/arm/mach-snapdragon/clock-snapdragon.h        |  48 ----
+>>  .../mach-snapdragon/include/mach/sysmap-sdm845.h   |   3 +
+>>  drivers/clk/Kconfig                                |   1 +
+>>  drivers/clk/Makefile                               |   1 +
+>>  drivers/clk/qcom/Kconfig                           |  52 ++++
+>>  drivers/clk/qcom/Makefile                          |  10 +
+>>  .../clk/qcom}/clock-apq8016.c                      |  41 ++-
+>>  .../clk/qcom}/clock-apq8096.c                      |  41 ++-
+>>  .../reset-qcom.c => clk/qcom/clock-ipq4019.c}      | 165 ++++-------
+>>  drivers/clk/qcom/clock-qcom.c                      | 303 +++++++++++++++++++++
+>>  drivers/clk/qcom/clock-qcom.h                      |  96 +++++++
+>>  .../clk/qcom}/clock-qcs404.c                       |  97 +++++--
+>>  drivers/clk/qcom/clock-sdm845.c                    | 265 ++++++++++++++++++
+>>  drivers/reset/Kconfig                              |   7 -
+>>  drivers/reset/Makefile                             |   1 -
+>>  24 files changed, 938 insertions(+), 605 deletions(-)
+>> ---
+>> base-commit: 30d01b582f2274eb8c808026c5fb4c33e9f2210d
+>>
+>> // Caleb (they/them)
+>>
+
+-- 
+// Caleb (they/them)
