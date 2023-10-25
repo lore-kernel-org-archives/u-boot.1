@@ -4,70 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2874BC07545
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 03:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C320C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 05:14:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BA3786D0E;
-	Wed, 25 Oct 2023 05:01:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 2FEA5879D3;
+	Wed, 25 Oct 2023 07:14:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="xB6oMUhX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FrPC6zaJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7781186E75; Wed, 25 Oct 2023 05:01:03 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 2DFAE879D5; Wed, 25 Oct 2023 07:14:54 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0CD386BD4
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 05:00:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05CF6879D3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 07:14:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-540c54944c4so842281a12.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 20:00:59 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1c9ba72f6a1so10082005ad.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 22:14:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1698202859; x=1698807659; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0cs7qZuvAA0zk1Xa58tN+KEmlNz3dGnQTdFf7gPDD2A=;
- b=xB6oMUhXgBwYqLujQBAjnSeqi2+s10Zo49aLuZ348H1aeXW5sAe1NlfS5RHQa/ufZ1
- uvBcANDgz1GO4DYkZF5to1WyXOuNzGmDrCxL493Jhcxb+fZ6q5Tx0lVJR3eD2UnxZ4Dr
- RrpjugVl2DNPTfsTg7m/aUsst45Ch2VkXR9EdEKJdCsPJ7M0m9HyMg+l2GLJzcxg2oWI
- vupUvcoslI3l7+vOE7Qcexnyar0gRvXnEGYqnV5XlpxgyApKQs0WgzGDT7XIAvB4fJwl
- FzCxMO9U2SDxe+kKUndSZv2/aGKkCEbAMr9Za8qg+laZweD2OCKCpRJipw5KRry1bAa9
- i4Dw==
+ d=linaro.org; s=google; t=1698210890; x=1698815690; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kmEOcf58OK3s5Wr8hMn40X4qsvgpKjrft/7rxTAcwP0=;
+ b=FrPC6zaJmz04IfPmRLduGFD5K/JIO4Xx8Yycqa62g+ZnDbU7X1CwnZZDZNQzLD3SiO
+ oF+3mkwjbDJzFbD4SGEpcWPoadYqYG9K4A7NmF3k1eQudnxpi1j2wVnSEDD1kZvWMUlh
+ nkLDeO70n3dx2ICELZrWgr2p9h5rY3x5Pa9m3eGxdt1OHU8U9qWd1JPPA09JQQI+50Z3
+ IgzCo7Hj/qbnB0zbKUzNresUC66UqoZCBbkzS2BO6q2CmQKG077D5ZaXvfNLJpFLgDeu
+ 0AZBFtv6RvU0YszgqzYyyiFiuxuEHBg126jSu8DfF/NeQj0o4lGOtbWDdH2JM7QWeKBD
+ 4bOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698202859; x=1698807659;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1698210890; x=1698815690;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0cs7qZuvAA0zk1Xa58tN+KEmlNz3dGnQTdFf7gPDD2A=;
- b=eYqlx8rfKxPre+E4MNu7kRqNtv2hWe6PDlLo6Nmkveu8Hj1jlbT5Xw+zKL/naxLUMb
- XbtJf7eh8CkBb59GbMwKEXg5nE+eyXV0aN9Uq3CGExvfYxQQQzL78A5aAZUUIzHYXkbT
- dAhofAVGM5Wi6qOJ1tJ9v+1+ppAeVUui3hUhaujfMY0ir2XgEEFS+3IhSc3zEUWOZGeY
- 917NjH865SnuEdTo/lFsPg7iFNGP2j/Is3IVgbvCoo7y4KSQ9Om91cgJ4R9UvPxWki0l
- MgjwyI8P0turik3DU/8ljK6R5ieyI/qc7E2k/7ZEKtdpEjnPrZU6ErQDtsX0BHywCaMu
- Uxsw==
-X-Gm-Message-State: AOJu0YxzqYYtdpecVItjvWDqtpsgYD3KIezYT4MNPJPkRaYHL0LfIH6Q
- RMt91xTPEtpE4lUSEuKD1+JNtfQB4AvvXKSyJDog3Q==
-X-Google-Smtp-Source: AGHT+IEu1AMiAWAL0dz8Qj52phoNZJtEeeTytFPH4P6S01CQ7pxVqB0Waa9Lb8YVh7Y9UVy6lP+cVd5R0AjwFPAO8Fw=
-X-Received: by 2002:aa7:c54d:0:b0:52c:f73:3567 with SMTP id
- s13-20020aa7c54d000000b0052c0f733567mr14158859edr.13.1698202859247; Tue, 24
- Oct 2023 20:00:59 -0700 (PDT)
+ bh=kmEOcf58OK3s5Wr8hMn40X4qsvgpKjrft/7rxTAcwP0=;
+ b=EAs2sQ1q+hqmblErZrPE614AaDhY5uKhtkqXDiTslQnj4BcC2+C27S4PMwIU9pm0XK
+ 4raJROjCYmkGfnzmlLOyb7aSSD1HBWizr9tQTPsLvf6DgNxHYFj/ohcuU3xewJhsy0CW
+ 4Ma7enT7R95mRDMUosCii1IiBzjXI3Ie0qFeDa+mA38cCm/FFz6yE0L6UeLICEBPxQXs
+ PWXGalHLlV11WDC1hQuNxM0m+Qyj/O0L/K2mRHm42KIIcmdmDcQwKPrQvRuNrDy6yd2U
+ tuGBJqRf/hw5GI9BBnepI3JoXCpVjdO6Zy5AZCpVu6FtzcQL4/I7UaXFX+gSLPj4O6y3
+ w4Mw==
+X-Gm-Message-State: AOJu0Yw/NN1PzRBFvj/fX2++KXMULeyRMEZ4KVkc/7EBQU4TkNFT4Zk/
+ lnK8KS/Cbgjcc1dTbAluCRca5w==
+X-Google-Smtp-Source: AGHT+IEXKoTP7fw+vv9KyTfinqcFrs5ZCXiJseYW59OWSlJt8HkPnGmPzOaBIq6XS2TgM1P3voN+bQ==
+X-Received: by 2002:a17:90b:1812:b0:27d:2762:2728 with SMTP id
+ lw18-20020a17090b181200b0027d27622728mr16489446pjb.0.1698210890185; 
+ Tue, 24 Oct 2023 22:14:50 -0700 (PDT)
+Received: from octopus.. ([2400:4050:c3e1:100:65fc:df7c:6edb:619f])
+ by smtp.gmail.com with ESMTPSA id
+ fz3-20020a17090b024300b002609cadc56esm7715815pjb.11.2023.10.24.22.14.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 24 Oct 2023 22:14:49 -0700 (PDT)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH 0/5] cmd: add scmi command
+Date: Wed, 25 Oct 2023 14:14:22 +0900
+Message-Id: <20231025051427.509602-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <279f2b49.1e2.18b6422157c.Coremail.simitel@163.com>
-In-Reply-To: <279f2b49.1e2.18b6422157c.Coremail.simitel@163.com>
-From: Simon Glass <sjg@google.com>
-Date: Tue, 24 Oct 2023 20:00:47 -0700
-Message-ID: <CAPnjgZ1cRPTCc6SX5-htrH=RCVD52CxjGKP_=c_9dZBNnd3MtQ@mail.gmail.com>
-Subject: Re: Failedto read big file with "Invald FAT entry' from USB disk
- (FAT16)
-To: simitel@163.com, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,83 +90,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Heinrich Schuchardt
+"Scmi" command will be re-introduced per Michal's request.
+The functionality is the same as I put it in my patch set of adding
+SCMI base protocol support, but made some tweak to make UT, "ut dm
+scmi_cmd," more flexible and tolerable when enabling/disabling a specific
+SCMI protocol for test purpose.
 
-On Tue, 24 Oct 2023 at 19:34, target <simitel@163.com> wrote:
->
-> I am using u-boot 2017.03 in my system and enabled the debug in fs/fat/fat.c
-> I had a USB disk formatted in FAT16 in Linux, I put a bigfile.bin into / in the USB disk and plugged the disk into by board.
-> Then I want to read/load the bigfile.bin into RAM with u-boot's fatload command, I did followings.
->
->
-> # usb reset
-> # fatls usb 0, it showd,
-> VFAT Support enabled
-> FAT16, fat_sect: 128, fatlength: 128
-> Rootdir begins at cluster: 0, sector: 384, offset: 30000
-> Data begins at: 256
-> Sector size: 512, cluster size: 128
-> FAT read(sect=384, cnt:2), clust_size=128, DIRENTSPERBLOCK=16
->  36438016   bigfile.bin
->      1012   s01syslogd
->      1004   s02klogd
->      1876   s02sysctl
->      1684   s20urandom
->       214   s21mount
-> END LOOP: buffer_blk_cnt=0   clust_size=128
-> FAT read(sect=385, cnt:2), clust_size=128, DIRENTSPERBLOCK=16
->      1635   s30dbus
->       438   s40network
-> RootDentname == NULL - 13
->
->
-> 8 file(s), 0 dir(s)
-> # fatload usb 0 0x100000 bigfile.bin
-> reading bigile.bin
-> VFAT Support enabled
-> FAT16, fat_sect: 128, fatlength: 128
-> Rootdir begins at cluster: 0, sector: 384, offset: 30000
-> Data begins at: 256
-> Sector size: 512, cluster size: 128
-> FAT read(sect=384, cnt:2), clust_size=128, DIRENTSPERBLOCK=16
-> Rootvfatname: |bigfile.bin|
-> RootName: bigfile.bin, start: 0x3, size:  0x22c0000
-> Filesize: 36438016 bytes
-> 36438016 bytes
-> FAT16: entry: 0x0003 = 3, offset: 0x0003 = 3
-> FAT16: ret: 00000004, offset: 0003
-> FAT16: entry: 0x0004 = 4, offset: 0x0004 = 4
-> FAT16: ret: 00000005, offset: 0004
-> FAT16: entry: 0x0005 = 5, offset: 0x0005 = 5
-> FAT16: ret: 00000006, offset: 0005
-> FAT16: entry: 0x0006 = 6, offset: 0x0006 = 6
-> FAT16: ret: 00000007, offset: 0006
-> FAT16: entry: 0x0007 = 7, offset: 0x0007 = 7
-> FAT16: ret: 00000008, offset: 0007
-> FAT16: entry: 0x0008 = 8, offset: 0x0008 = 8
-> FAT16: ret: 00000009, offset: 0008
-> FAT16: entry: 0x0009 = 9, offset: 0x0009 = 9
-> FAT16: ret: 0000000a, offset: 0009
-> .....
-> .....
-> FAT16: entry: 0x020e = 526, offset: 0x020e = 526
-> FAT16: ret: 0000020f, offset: 020e
-> FAT16: entry: 0x020f = 527, offset: 0x020f = 527
-> FAT16: ret: 00000210, offset: 020f
-> FAT16: entry: 0x0210 = 528, offset: 0x0210 = 528
-> FAT16: ret: 0000ffff, offset: 0210
-> gc - clustnum: 3, startsect: 640
-> FAT16: entry: 0x0210 = 528, offset: 0x0210 = 528
-> FAT16: ret: 0000ffff, offset: 0210
-> curclust: 0xffff
-> Invalid FAT entry
-> Size: 36438016, got: 34471936
->
->
-> I have tried many times, even with "fatload usb 0 0x100000 bigfile.bin 2000000", it still failed with above error.
-> I can not test newer version of u-boot, since there are lots of old drivers I am using.
->
->
->
->
->
+Each commit may have some change history inherited from the preceding
+patch series.
+
+Test
+====
+The patch series was tested on the following platforms:
+* sandbox
+
+
+Prerequisite:
+=============
+* This patch series is based on the latest master.
+
+AKASHI Takahiro (5):
+  test: dm: skip scmi tests against disabled protocols
+  firmware: scmi: support protocols on sandbox only if enabled
+  cmd: add scmi command for SCMI firmware
+  doc: cmd: add documentation for scmi
+  test: dm: add scmi command test
+
+ cmd/Kconfig                                  |   9 +
+ cmd/Makefile                                 |   1 +
+ cmd/scmi.c                                   | 335 +++++++++++++++++++
+ configs/sandbox_defconfig                    |   1 +
+ doc/usage/cmd/scmi.rst                       | 126 +++++++
+ doc/usage/index.rst                          |   1 +
+ drivers/firmware/scmi/sandbox-scmi_agent.c   |  27 +-
+ drivers/firmware/scmi/sandbox-scmi_devices.c |  78 +++--
+ test/dm/scmi.c                               |  93 +++++
+ 9 files changed, 638 insertions(+), 33 deletions(-)
+ create mode 100644 cmd/scmi.c
+ create mode 100644 doc/usage/cmd/scmi.rst
+
+-- 
+2.34.1
+
