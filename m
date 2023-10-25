@@ -4,85 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D6C8C07545
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409A4C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 13:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E26887A9C;
-	Wed, 25 Oct 2023 15:44:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 82F8587AC6;
+	Wed, 25 Oct 2023 15:54:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zjHkUkp8";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="jFJ+rNXl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B6BC87AC1; Wed, 25 Oct 2023 15:44:12 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BD8E087AC7; Wed, 25 Oct 2023 15:54:00 +0200 (CEST)
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1BCB87A9C
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:44:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5FBA87AC5
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-32daeed7771so3756544f8f.3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 06:44:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698241447; x=1698846247; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pgMEiQ9qrI5jzcjUzxc8cGJlWvarPMd4Fd2pY1VVN9g=;
- b=zjHkUkp8MUuDRMZC+4wJS2nDhfkuD1us7Ke2jLugE4XBCYFTWQNJkFEmQY+lBa5BZT
- WQLP/Lb/mHwbt2CEjZm6Pl45iAHqos8V9Hf0w+kNmlpCOJ0v9CxM44kBoyEJH+JN8g4U
- c0nJjvoKM47YNOAbL5sCyLNvh1JqCCsmixiiw+mGI2so4TOuKSy8RpFbmr9VlSE5q/xn
- vZoPNazhwRElYdl9/I82Ux8Bs86zsPMkhbZegrV8p0l6FwZEi8M+YoE3QfX8U3LP3tJA
- CZj0225GURXen22GSmglCqxi1cssxGmy7Th8tNVr7ZKq+faY+bcGPqC/jXwLm2WLEUaE
- RLEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698241447; x=1698846247;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pgMEiQ9qrI5jzcjUzxc8cGJlWvarPMd4Fd2pY1VVN9g=;
- b=FIBpRdZn03mL80pagdINhPUmyO/xZSUhazH2Ln0GHXg3RlNnV5/76YftntnN7bDlYC
- oXMNcnPZ3uDoH2i1hNjKxE5Dz3uXNVxCh66RL2gS4E40yzmCasQJIfLxvYz33D4wC3+N
- THJFweZQ03FB2G5iDnMSe+DjQzJhhrP3R13vD+3dbdgPx60lhmBod0tQX+I3iLZtjFem
- Te4AbKOv6Iz49N8vCHZbmQMIeCK1r/MFORsSuVuN97gTDhHT93CXCk65ioKP6kNu4q3K
- g0b9DE+3AAmMw5jEDW7AjKwVmYR2S90huqoqgvn8yMW+tg3gID0TacVIe9CXc1n/G6Y1
- OFtg==
-X-Gm-Message-State: AOJu0YxHRAHx9jO8q/edHKlIVoGZ+rmHLzjC2WS2EeSY1LMK3kt5BMCz
- ZrLN2hmypOrepq6bF/nTUiNhMA==
-X-Google-Smtp-Source: AGHT+IHRA4zK6DtaskyeHCB+gxQ2U0GU9hNgFtnz3LWHLw4xlUFIb0f3lnJ6742sQswMwfHWSGkEPw==
-X-Received: by 2002:adf:f78b:0:b0:32d:a6f5:a511 with SMTP id
- q11-20020adff78b000000b0032da6f5a511mr9700710wrp.13.1698241447239; 
- Wed, 25 Oct 2023 06:44:07 -0700 (PDT)
-Received: from [192.168.1.15] (host-2-99-112-229.as13285.net. [2.99.112.229])
- by smtp.gmail.com with ESMTPSA id
- n11-20020adffe0b000000b0032dbf26e7aesm12050844wrr.65.2023.10.25.06.44.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Oct 2023 06:44:06 -0700 (PDT)
-Message-ID: <184a6ae1-b911-4197-b311-645f4f795bae@linaro.org>
-Date: Wed, 25 Oct 2023 14:44:05 +0100
+ spf=pass smtp.mailfrom=eajames@linux.ibm.com
+Received: from pps.filterd (m0353726.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39PDkuaP016799; Wed, 25 Oct 2023 13:53:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=hjjvvkt3NR+Wc/uEEFtfpLOerphy8o6C0eEYfFwsggQ=;
+ b=jFJ+rNXlx7sYJrVcLNoZqUYjam2YKvDnCjMw5CK+zreRVtGLgMhpKVg44Z9xn456glH+
+ cx1/ui/GO9baB9bNSK0gSsjWsPv0ZGvn8gawvvP+20cI2SdQH4zpaLfFWmUCaXXi88f0
+ AXwK+gU/gl8+9SONjWhcbT74yewV6Nb5QriuJmbYuuKn7C61lGfDq8885IOelC1auCz/
+ hT3PO3QgbGHowSjhV2j+bvV1dm8FsGfOOFPtwVR/zoVvneWTRS/dk2H6OCLlxR/uhUu0
+ eg+CPCzIgG8M80b1Dj5C1cs2+I/B2bkGmlvNb5UG1G1tHz6/0Gv9mgCh6rvkkTY4LOwV wQ== 
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3ty47287yg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Oct 2023 13:53:52 +0000
+Received: from m0353726.ppops.net (m0353726.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39PDl2eN017209;
+ Wed, 25 Oct 2023 13:53:52 GMT
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3ty47287xs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Oct 2023 13:53:51 +0000
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39PD1L5W010231; Wed, 25 Oct 2023 13:53:50 GMT
+Received: from smtprelay05.wdc07v.mail.ibm.com ([172.16.1.72])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tvsbyq5x0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Oct 2023 13:53:50 +0000
+Received: from smtpav03.dal12v.mail.ibm.com (smtpav03.dal12v.mail.ibm.com
+ [10.241.53.102])
+ by smtprelay05.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 39PDroYu25756300
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 25 Oct 2023 13:53:50 GMT
+Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id E961E58063;
+ Wed, 25 Oct 2023 13:53:49 +0000 (GMT)
+Received: from smtpav03.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id C92F858061;
+ Wed, 25 Oct 2023 13:53:49 +0000 (GMT)
+Received: from [9.61.58.37] (unknown [9.61.58.37])
+ by smtpav03.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Wed, 25 Oct 2023 13:53:49 +0000 (GMT)
+Message-ID: <bb72d456-bcb7-10d5-5ba2-1d5e1acc26f3@linux.ibm.com>
+Date: Wed, 25 Oct 2023 08:53:49 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/8] clk/qcom: fix rcg divider value
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v14 4/8] bootm: Support boot measurement
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de
+References: <20231024154354.197524-1-eajames@linux.ibm.com>
+ <20231024154354.197524-5-eajames@linux.ibm.com>
+ <CAC_iWj+3ww08s=FnSFeAQW_tOFw3GL9pc_=MuvhrmDxDxGZe1Q@mail.gmail.com>
 Content-Language: en-US
-To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, Luka Perkov <luka.perkov@sartura.hr>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
-References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
- <20231024-b4-qcom-clk-v1-8-9d96359b9a82@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20231024-b4-qcom-clk-v1-8-9d96359b9a82@linaro.org>
-Content-Type: text/plain; charset=UTF-8
+From: Eddie James <eajames@linux.ibm.com>
+In-Reply-To: <CAC_iWj+3ww08s=FnSFeAQW_tOFw3GL9pc_=MuvhrmDxDxGZe1Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: IN1ySRuYgtNpwAAXlQZgvUlWbV2lx3Ty
+X-Proofpoint-ORIG-GUID: epRFSQM4XJH-yHZ1OpuAp-pHHHeAvbHu
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-25_02,2023-10-25_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 mlxscore=0
+ malwarescore=0 suspectscore=0 spamscore=0 lowpriorityscore=0 adultscore=0
+ impostorscore=0 bulkscore=0 phishscore=0 clxscore=1015 mlxlogscore=958
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2310170001
+ definitions=main-2310250120
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,78 +118,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+On 10/25/23 07:41, Ilias Apalodimas wrote:
+> On Tue, 24 Oct 2023 at 18:44, Eddie James <eajames@linux.ibm.com> wrote:
+>> Add a configuration option to measure the boot through the bootm
+>> function. Add the measurement state to the booti and bootz paths
+>> as well.
+>>
+>> Signed-off-by: Eddie James <eajames@linux.ibm.com>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>> Changes since v8:
+>>   - Added a configuration option to select to ignore any existing
+>>     event log. This would only be selected for systems that know
+>>     that U-Boot is the first stage bootloader. This is necessary
+>>     because the reserved memory region may persist through resets
+>>     and so U-Boot attempts to append to the previous boot's log.
+>>
+>> Changes since v6:
+>>   - Added comment for bootm_measure
+>>   - Fixed line length in bootm_measure
+>>
+>>   boot/Kconfig    | 32 +++++++++++++++++++++
+>>   boot/bootm.c    | 74 +++++++++++++++++++++++++++++++++++++++++++++++++
+>>   cmd/booti.c     |  1 +
+>>   cmd/bootm.c     |  2 ++
+>>   cmd/bootz.c     |  1 +
+>>   include/bootm.h | 11 ++++++++
+>>   include/image.h |  1 +
+>>   7 files changed, 122 insertions(+)
+>>
+>> diff --git a/boot/Kconfig b/boot/Kconfig
+>> index a01e6cb8aa..abbc72f4cf 100644
+>> --- a/boot/Kconfig
+>> +++ b/boot/Kconfig
+>> @@ -685,6 +685,38 @@ config LEGACY_IMAGE_FORMAT
+>>            loaded. If a board needs the legacy image format support in this
+>>            case, enable it here.
+>>
+>> +config MEASURED_BOOT
+>> +       bool "Measure boot images and configuration to TPM and event log"
+>> +       depends on HASH && TPM_V2
+> I know Simon reviewed this already, but don't we need to add !EFI here?
+> UEFI already supports measurements via the TCG protocol implementation.
+> But since EFI is 'default y' nowadays anyone minds if I change the
+> help & bool messages during merge?
+> Something along the lines of
+> bool "Measure boot images and configuration to TPM and event log when
+> booting without EFI"
 
-On 24/10/2023 21:23, Caleb Connolly wrote:
-> The RCG divider field takes a value of (2*h - 1) where h is the divisor.
-> This allows fractional dividers to be supported by calculating them at
-> compile time using a macro.
-> 
-> However, the clk_rcg_set_rate_mnd() function was also performing the
-> calculation. Clean this all up and consistently use the F() macro to
-> calculate these at compile time and properly support fractional divisors.
-> 
-> Additionally, improve clk_bcr_update() to timeout with a warning rather
-> than hanging the board, and make the freq_tbl struct and helpers common
-> so that they can be reused by future platforms.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 
-[...]
->  
->  #define CFG_MODE_DUAL_EDGE (0x2 << 12) /* Counter mode */
->  
-> -#define CFG_MASK 0x3FFF
-> +// Disable the HW_CLK_CONTROL bit
-> +#define CFG_MASK (0x3FFF | (1 << 20))
+Oh right, yes, go ahead, that sounds good, thanks.
 
-There seems to be a bug in this patch that causes the actual clock rate
-to be wrong in some cases, most obvious with db845c UART. I had
-initially thought it to be a board issue but upon further investigation
-I think I'm wrong.
+Eddie
 
-The UART clock frequency table in clock-sdm845.c is taken from Linux,
-the 115200 baud rate corresponds to the lowest frequency (7372800Hz).
-However, with the implementation changes here, the RCG configuration
-actually results in a measured clock rate of 9085208Hz.
 
-If the entry is changed as follows
--	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625)
-+	F(7372800, CFG_CLK_SRC_GPLL0, 0.5, 192, 15625)
-
-Then the resultant clock rate is 7372604Hz (within the tolerance)...
-
-I will resolve this for v2.
->  
->  #define CFG_DIVIDER_MASK 0x1F
->  
-> -/* root set rate for clocks with half integer and MND divider */
-> +/*
-> + * root set rate for clocks with half integer and MND divider
-> + * div should be pre-calculated ((div * 2) - 1)
-> + */
->  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->  			  int div, int m, int n, int source, u8 mnd_width)
->  {
-> @@ -99,17 +125,15 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->  	/* Program MND values */
->  	setbits_le32(base + regs->M, m_val & mask);
->  	setbits_le32(base + regs->N, n_val & mask);
-> -	setbits_le32(base + regs->D, d_val & mask);
-> +	setbits_le32(base + regs->D, (d_val & mask) == mask ? 0 : (d_val & mask));
->  
->  	/* setup src select and divider */
->  	cfg  = readl(base + regs->cfg_rcgr);
->  	cfg &= ~CFG_MASK;
->  	cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
->  
-> -	/* Set the divider; HW permits fraction dividers (+0.5), but
-> -	   for simplicity, we will support integers only */
->  	if (div)
-> -		cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
-> +		cfg |= div & CFG_DIVIDER_MASK;
->  
->  	if (n_val)
->  		cfg |= CFG_MODE_DUAL_EDGE;
-
--- 
-// Caleb (they/them)
+>
+> [...]
+>
+> Thanks
+> /Ilias
