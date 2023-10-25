@@ -4,89 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64FECC07545
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 01:15:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C04C25B6D
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 02:20:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A5D587999;
-	Wed, 25 Oct 2023 03:15:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6CC77879A6;
+	Wed, 25 Oct 2023 04:20:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PW3gWVIO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VjKjztwY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BD2887A00; Wed, 25 Oct 2023 03:14:59 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 47541879A6; Wed, 25 Oct 2023 04:20:10 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49C9187199
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 03:14:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4228D8799C
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 04:20:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1cacbd54b05so3526115ad.0
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 18:14:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698196491; x=1698801291; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ym8ZaSJVpYIBicYfbaeSIi8s6Bxjb/XB3WUOYdGUw8k=;
- b=PW3gWVIO1OSGUp1Nds+v0sRwIAG5vQ9M9DHEGSXawL31Ra41DY3lw3ZGmb0mTP5nfa
- G6Rh2My8Z2NrUqS7LW/NjzHh3dg1NX0F2mFeeYPGenC5WovayyFlHDm+2vYY+bfBpvgh
- 1edCGbhLbPDpdoc8XmZ3wZHzOXQnQyeTaFmenJ+HhfrBg/tX82o8RNmYFYD2nReRJ9mW
- xLvVT+5GFgeO8EQzU5A2OuwwJj4hMCoZVK863DBdTzG7cfYoDMtuPawmOXICO/Ia6iN+
- S5xiVUHWT9HUWPoO2m4mpl0Kg5LfRTAhnDKDU/c713uRDCSXi+iSH2xDdhSQsF/Kv9qs
- VOOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698196491; x=1698801291;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ym8ZaSJVpYIBicYfbaeSIi8s6Bxjb/XB3WUOYdGUw8k=;
- b=wohE+hV1a4Vf2d2YNC+JhnpAZbbaDG5eyf1L+KHEmJ/J5NlrZpYSl8XYcKrLGwT/07
- we6W91aYIrmmnS7zXzsCE8vGzswgNKIIuTvwHH3D1D3zW2ztdmzuLLIFeUMLPu9CMH3j
- fIYzNqhjvHpncBXKEZTEaXd7y4VZlAbaWcYLSCR7ukPiWsaYHA/W2+2dSaFRcTw2mGx2
- 3rRn9roDpMKLu01SBcmBkcb2eOZ0cgt2bdL8KtdO0kBl8707xOrLw0mZxUd3sNvTuAZ0
- wZ3qM4/wCDPM3rS4zDHy1RzgLPvU488AKc2FUfEfSm4sPV7+DyCeT8M1y0s0ooWAk+RK
- 5FZQ==
-X-Gm-Message-State: AOJu0Yzohkd7eQk4ZZ1oagXfThPTZuv2T7s7pSRirZN17HWoFhJUVQA8
- 18gi+wYTQ+s31NmPrd7aoMxlTw==
-X-Google-Smtp-Source: AGHT+IG5OmgX/s1sYKSj1umavJbRBNvgY7zsTxs+4NPl1H9vRc8PXixA3ZHbBDIS39HNvFGEcKw7SQ==
-X-Received: by 2002:a17:903:74d:b0:1c7:1eed:10f2 with SMTP id
- kl13-20020a170903074d00b001c71eed10f2mr12922727plb.2.1698196491037; 
- Tue, 24 Oct 2023 18:14:51 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:65fc:df7c:6edb:619f])
- by smtp.gmail.com with ESMTPSA id
- ix4-20020a170902f80400b001c74718f2f3sm8048870plb.119.2023.10.24.18.14.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 18:14:50 -0700 (PDT)
-Date: Wed, 25 Oct 2023 10:14:46 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <monstr@monstr.eu>, sjg@chromium.org,
- etienne.carriere@st.com, u-boot@lists.denx.de,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v5 14/16] cmd: add scmi command for SCMI firmware
-Message-ID: <ZThsBtgwAyBjlR7A@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Tom Rini <trini@konsulko.com>, Michal Simek <monstr@monstr.eu>,
- sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Michal Simek <michal.simek@amd.com>
-References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
- <20230926065750.734440-15-takahiro.akashi@linaro.org>
- <CAHTX3d+hU2e-Un244wVzmeanwXkG+cy7+LdLZxYVojM3kX__5Q@mail.gmail.com>
- <20231024222407.GL496310@bill-the-cat>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1698200404; x=1698805204; i=xypron.glpk@gmx.de;
+ bh=GMli6kE5vOH3uHDpR+mCs+Qboo4dEtwv21/S3twJ/70=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=VjKjztwY4G78BUnxntTh/yQ+3K20UcUf+W5KTgWCnLh3qoniPptpLesJpe1jMLUF
+ qqvNMax+Nl88KwO6LjRJNrw/tvWk4DSQCicta1cPHP1kBPwLLVN83XAgyZHiTVaP8
+ 1wI3kSUvgIkCyIa8HX8F/SbB+mJpc3vyIYuYvHZH2LIMjjVSZQJJ+CPgXeOpM11R1
+ RHn50BT9jvUAMr5yi7eTIR1dEWB3jIXu4xdupElyoHQ96pm2Uo/vWgaxN+yErBCq9
+ fcBC5BUyZgY4egswQWnqzZd7nQAOV4EvkTLVGdfyfzpSZxxLwtiLDZDpZAfUoSOgz
+ KCLJSOsDJmxlRCkWLw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N0oFz-1rjIlF0xOP-00wni5; Wed, 25
+ Oct 2023 04:20:04 +0200
+Message-ID: <d61eb00b-baa8-4804-801a-045eb56ed617@gmx.de>
+Date: Wed, 25 Oct 2023 04:20:06 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="AoleUUdS4XJs8skp"
-Content-Disposition: inline
-In-Reply-To: <20231024222407.GL496310@bill-the-cat>
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dylan Corrales <deathcamel58@gmail.com>, =?UTF-8?Q?Milan_P=2E_Stani=C4=87?=
+ <mps@arvanta.net>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2024-01-rc2
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:My9isvuzDvhpH2LW2b04baaTEj8ALtcj+v17R4T2bWjvNBq52xS
+ GR9fgKplwoymGZc5S/qUqcbnhcAcaNt5ykG1z8O4DFFu800ieYB7SYyxhegccMRL7u6i0L5
+ b3u+XEJXn6HgE9yJRs0eyHiAIn7g9JnPDom/KkntsNViCex70kyn1n8ZuA6eWQ0/GwTXev5
+ WN9d50WRuEHO1E2VJW8VA==
+UI-OutboundReport: notjunk:1;M01:P0:aLxzzf/DIHk=;o174eeojj4nG0CsQTRdcqbql7sN
+ LGvEwg9Es5Mgd3vztNzDlqcfxeJn1zYinIxpsZC2oLpCdpcq1KwxFz7nnn0DSKRYngwCij07/
+ 3Cgsp9iueyPehYNq6eyjA2Z10HH2r2tG0yxEdGwEVf873O4iYZZrhpgEgw+SOK7ijXRAdWQrb
+ onrP1m+ZsJvJfnnELw/TUo8VkjEX9nw+/LWdIgqww9EHagTBDvxT4gfe6b+R3FagqdqFBSybZ
+ 8jKwkBsUpXvL46OX3qqP8myjMI9fd8wsZoxp2dOs4M7ExD+LtcVXRUpiQ6iBa9u+bUK0bo/tN
+ 6KAPRMQrS3YhZ/EGqgzRzzsikkwgeOb/cfNmKMgeMQthN52MN3zmFN/JXOGunMUJXY0CVQOUP
+ juL9bQoEEF0+m736XAOiJctkzuoST1e1ivHz6VTjpODHnDfq43OQ6mKLt15tEJ0ix/IUV8xn+
+ GnJdTZcSvNtM7ersq5yNGz+qmX3E8/Ea8+RmIPo7RNPj2DNYqtLNKfi2OULHpF9oy9jtNL/vP
+ yywAdoKCNoBWsewxy8YKu6HVPBA7XwcZ5hkg77mWQCuHjoSqINdDfL0nEvHLBgr7UxyflKsM5
+ 7D4X0hUb6uB8XrGBTW6wHNsL+cQEOruyrY+H9s22oAlXuBA1is30EjRdplbiqDCMnlDP4DHBc
+ ZfiO5cGZZZL9MJi88PnKt34LV4kUHvvMny/Bh7s4Kckw9NNyme6juYEA5Kts5RSWMbVFSO3eE
+ qa4/giqrw3outxP1NLtvulXQF4rRZrFWoaINclSdT0SqEl6D2nYfiEt3wIPrnOnPmt/nns/qG
+ vD6YwmGoR7k07DlfK4EqW62raD1L6ZNVCknweDUN7S8X2gSXUSlK0UrjEmeFeeHUy7doZi/Uz
+ kyVJgd2Fj1Wr2igqdZtZbpx7jdYOPhZBuEpN5EVdnVbpxh/sr3elYUvZec2uDhPpvp994sVry
+ ECZuWA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,101 +88,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear Tom,
 
---AoleUUdS4XJs8skp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 5cab3515f8c9796015739c1750b8933291c816b=
+e:
 
-Hi Tom, Michal,
+   Merge tag 'u-boot-rockchip-20231024' of
+https://source.denx.de/u-boot/custodians/u-boot-rockchip (2023-10-24
+09:39:52 -0400)
 
-On Tue, Oct 24, 2023 at 06:24:07PM -0400, Tom Rini wrote:
-> On Tue, Oct 24, 2023 at 10:27:44AM +0200, Michal Simek wrote:
-> > Hi Takahiro,
-> >=20
-> > ?t 26. 9. 2023 v 9:00 odes?latel AKASHI Takahiro
-> > <takahiro.akashi@linaro.org> napsal:
-> > >
-> > > This command, "scmi", may provide a command line interface to various=
- SCMI
-> > > protocols. It supports at least initially SCMI base protocol and is
-> > > intended mainly for debug purpose.
-> > >
-> > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
-> > > ---
-> > > v3
-> > > * describe that arguments are in hex at a help message
-> > > * modify the code for dynamically allocated agent names
-> > > v2
-> > > * remove sub command category, 'scmi base', for simplicity
-> > > ---
-> > >  cmd/Kconfig  |   9 ++
-> > >  cmd/Makefile |   1 +
-> > >  cmd/scmi.c   | 337 +++++++++++++++++++++++++++++++++++++++++++++++++=
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2024-01-rc2
+
+for you to fetch changes up to 916dad34af0e53181dfe21f5764d3a787cb24bdc:
+
+   efi_loader: fix EFI_ENTRY point on get_active_pcr_banks (2023-10-24
+23:56:43 +0200)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18293
+
+=2D---------------------------------------------------------------
+Pull request efi-2024-01-rc2
+
+Documentation:
+
+* Bump urllib3 version
+* Replace references to dm_dump_all() with dm_dump_tree()
+* Update description of build dependencies for Alpine Linux
+* Fix typo in gpt example
+* Fix ordering of shell commands
+
+UEFI:
+
+* Fix build failure without network
+* Expose the device-tree file name as UEFI variable
+* Move misplace EFI_ENTRY macro.
+
+=2D---------------------------------------------------------------
+Dylan Corrales (1):
+       doc: Replace dm_dump_all() with dm_dump_tree()
+
+Heinrich Schuchardt (2):
+       efi_loader: fix efi_dp_from_eth
+       efi_loader: expose the device-tree file name
+
+Ilias Apalodimas (1):
+       efi_loader: fix EFI_ENTRY point on get_active_pcr_banks
+
+Milan P. Stani=C4=87 (1):
+       doc: build: update description of build dependencies for Alpine Lin=
+ux
+
+Tom Fitzhenry (2):
+       doc: gpt: fix example of echoing variable
+       doc: usage: fix ordering of shell commands
+
+Tom Rini (1):
+       sphinx: Bump urllib3 version
+
+  doc/build/gcc.rst                      | 10 ++++++++--
+  doc/develop/driver-model/debugging.rst |  2 +-
+  doc/develop/uefi/uefi.rst              | 14 ++++++++++++++
+  doc/sphinx/requirements.txt            |  2 +-
+  doc/usage/cmd/gpt.rst                  |  5 +++--
+  doc/usage/index.rst                    |  8 ++++----
+  include/efi_loader.h                   |  5 +++++
+  lib/efi_loader/efi_device_path.c       |  5 ++++-
+  lib/efi_loader/efi_setup.c             | 30 ++++++++++++++++++++++++++++=
 ++
-> > >  3 files changed, 347 insertions(+)
-> > >  create mode 100644 cmd/scmi.c
-> > >
-> > > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > > index 43ca10f69ccf..f46152ace7d8 100644
-> > > --- a/cmd/Kconfig
-> > > +++ b/cmd/Kconfig
-> > > @@ -2533,6 +2533,15 @@ config CMD_CROS_EC
-> > >           a number of sub-commands for performing EC tasks such as
-> > >           updating its flash, accessing a small saved context area
-> > >           and talking to the I2C bus behind the EC (if there is one).
-> > > +
-> > > +config CMD_SCMI
-> > > +       bool "Enable scmi command"
-> > > +       depends on SCMI_FIRMWARE
-> > > +       default n
-> >=20
-> > This line above is wrong and this was removed from v6 with
-
-@Michal, do you mean the default should be 'y'?
-
-> > "drop scmi command which was intended to be used for debugging".
-> > It is fine that it shouldn't be used on production system but it
-> > doesn't mean that
-> > it should be actually removed.
-> > It is useful for bring ups. Can we get this patch merged? It was
-> > already reviewed
-> > anyway.
->=20
-> There was then also some conflict with the follow-up series here. I
-> would be fine with the command being introduced again after I merge that
-> second series, which I am testing now.
-
-I don't mind neither.
-My concern, however, was a test, "ut dm scmi_cmd".
-The output from "scmi info" command varies depending on what SCMI protocols
-are provided by SCMI firmware (sandbox fake server in this case).
-
-I will try to keep it updated.
-
--Takahiro Akashi
-
->=20
-> --=20
-> Tom
-
-
-
---AoleUUdS4XJs8skp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEjc56F+RxEkavfJvIJ6vpGq1myG0FAmU4bAIACgkQJ6vpGq1m
-yG1Eawf/c9jEpr1wKzSPB/HLe5PGDrUmDkHFTVy1wtZEQb+FCx1n6QtAz/O8abUa
-pHH7d5LS4MAep5o35LqPUCUuUyXz1rIrXK4rxyhaQAfnwqZ+KpdXbOttGZi+3kq0
-AvagmSGsKqelFiVtCUM0y0YsxFbLHoMb7vdYe2e43LODSQw7JOSJ+yuefUMVnUGk
-35I7fb/S0RRElW9dTKA/mdi+waoXXdvFa7izhCLeOU8FLOOGC0ih3hSiWquJlfjL
-rHqXlJyBICOw0AgPStP5haee9+nm0KvVZgppiycGVmkg5p5mKSV+r7N1C4YNU+Dq
-DmLqGctbl+vrgAnvACAjAjcJOsY6ZA==
-=FsSz
------END PGP SIGNATURE-----
-
---AoleUUdS4XJs8skp--
+  lib/efi_loader/efi_tcg2.c              |  3 ++-
+  10 files changed, 72 insertions(+), 12 deletions(-)
