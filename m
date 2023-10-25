@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 667D0C25B6B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6515BC25B6B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CB1586FA6;
-	Thu, 26 Oct 2023 01:13:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA02F87AF3;
+	Thu, 26 Oct 2023 01:13:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JV6rjWvA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SvJY6iwo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5393687055; Thu, 26 Oct 2023 01:13:23 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 4539B86F9F; Thu, 26 Oct 2023 01:13:24 +0200 (CEST)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF955874D9
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22BDA87009
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:13:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-41cd7a3e8f8so2345851cf.0
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:13:20 -0700 (PDT)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-41ccd38eaa5so2299571cf.0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:13:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698275599; x=1698880399; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698275600; x=1698880400; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bXPo4dYWVfMyNW7ut3HlPXgLCDEhwipvrf6VcFYp9wo=;
- b=JV6rjWvA8o2JaIxYQ6I4HDSIh3dbvkeX9LRs4r/5dUccnYLM4yFbNasCSXTOyA6yQH
- fnLbitLKfMV9Esh+XxazUGo5w0UPXl2RpmLlURRTfdHY/59vRD+7L5RKq5CWKFCZW9Yt
- T31db9KkeEu4D6Hq8yB+n7jYDX0Saz6VFU2yrRM0yfkECQhXP3O6BzXrv72aQcFeuvE3
- 2tf2kwvH2fGt2yUShgJsKdML3ty7MplYTHnyQTDvEAxEG2Hpx4GGig9C74M9ixSYnRrO
- nsfyTj7tjGUdRMC3HKrbKnYWz5VDMwQLh8q5q6uYQZ09AonzgWScqAAbGMFAodUHPRsc
- 7eiQ==
+ bh=k2m8Cr6FkHI6eD8h4B0KTjKXuvjBkKx0CRSyeNOEicc=;
+ b=SvJY6iwoJ8ygQHbTNMqR6JIycgw/K/OKtdDis+eMrs4awX3pEXedioudZx63h9m/aU
+ jBJWEKngdAemcm50QrvRWnzE5NluYJGkz0N9nARqCVuR4WO0IGuT3++PVkC9WhyDp4rC
+ mzvYNS3Wm7k+WIzNPYtJiarHwk5H2I1QAUjOgkKqk20KVwrSFh1S+hkdeZPTxwnZD+mZ
+ AbxBq+0fkpFnX56TiKUnhOGpwAp4X/ayLipIBT2C1uaFhxgNOqSNAb4qw8Z0vNNzKpB7
+ M3zJwtR/AlzUbQzY8NpeEqEMltDGRSuOn5IKjpr69L3ypjGWzcrBtt8p3UtxHwzUSdv+
+ inOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698275599; x=1698880399;
+ d=1e100.net; s=20230601; t=1698275600; x=1698880400;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bXPo4dYWVfMyNW7ut3HlPXgLCDEhwipvrf6VcFYp9wo=;
- b=ZrzQg2EtOWsoU5utTQ2k1l5w8i/y/34VPopnFzhlKgsnNK/bGvSw4bN/rF7V5r+tHF
- qa+kbbGu3LbOmgmfAU87Pwcp30mALLrt8PSLelNsCpxcK27r034bF9XvJt+CbC0Tawfr
- YkaBH4DzOYze7vv3I6BuVqo0Y+FV3lOJHrGCSF+LXN2cM04Wm9OmAl79hQw/dsSgoA0h
- yTdPQ/H9EKAgqGPQKbjPixA/opGrnORIlcqMgrDvJSRTdTnImar2HB9h+JLQ3u81x24w
- SMq+O742mogk09xGe/e3hquQdJs6QYcC2IJWTDRKpbtmvsAxot7eE/Ix3Bz0I/xvXDDJ
- ucGg==
-X-Gm-Message-State: AOJu0Yw6itTsP/Ir7i0Q93E7e4w0BFFfudVc9SSIMquQqtjHfiXKQ+JT
- pHoZu697oA+ra3+LaVHnuJwU/1xWp40=
-X-Google-Smtp-Source: AGHT+IGUkKA/5+Nj9M87SzCzeoSnsfWDG3SSHE5dslIfcVzpmfjPDoOMmbtlHUYUlgPb1SpjILzZAQ==
-X-Received: by 2002:ac8:5741:0:b0:418:125b:2cfb with SMTP id
- 1-20020ac85741000000b00418125b2cfbmr23490949qtx.3.1698275599188; 
- Wed, 25 Oct 2023 16:13:19 -0700 (PDT)
+ bh=k2m8Cr6FkHI6eD8h4B0KTjKXuvjBkKx0CRSyeNOEicc=;
+ b=xDqHTepoNddPMwoxJgi9W3ouFFUWUCSddHCzV697uuYTL0tf7PR4T6ow+ebJ2atGfZ
+ RrPmSNkBhSCGzm81UuQpcJD//gU8701ztvDcy+mA503KfCn2I4l0ksP8JyvUcPsw707O
+ QMm7j1t5On9xjoHrdZQm+exPxAReIV2FjufV80LCMYBcxPHX0OVz0w10BrmB3gqUVNIe
+ JjB/VaeZomAuEryeQDnZeYsWdfJSFLwexEfsPkj9NoMwfAPhHqU013RVfKVf+rDLEWH6
+ ecG670K2VXu9j1ChAl6z4hulDTtHaelELaWPL+bpTXU12WISS4KNtXA8Cb6U4XBH4siA
+ ylMg==
+X-Gm-Message-State: AOJu0YyijvCsD1pDjfgLgw5/2mNx3dt07pvVtXOkrSiXszUvtwWxdyjN
+ PW+QR8cGbrfJ7MjrNp8Zg3s3VNcBx4w=
+X-Google-Smtp-Source: AGHT+IHN+AIMRpCcVCVVBxFpm1TCjLwOd1wAwjqYyVp8PG8QA6RQWMvyF+8AYXOXrPKBzQkrgrWVVQ==
+X-Received: by 2002:a05:622a:1a89:b0:40f:dfbc:2405 with SMTP id
+ s9-20020a05622a1a8900b0040fdfbc2405mr1291104qtc.27.1698275600519; 
+ Wed, 25 Oct 2023 16:13:20 -0700 (PDT)
 Received: from aford-System-Version.lan
  ([2601:447:d002:5be:449a:a220:d0aa:3d6a])
  by smtp.gmail.com with ESMTPSA id
- x10-20020ac8730a000000b004180fdcb482sm4576814qto.81.2023.10.25.16.13.18
+ x10-20020ac8730a000000b004180fdcb482sm4576814qto.81.2023.10.25.16.13.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 16:13:18 -0700 (PDT)
+ Wed, 25 Oct 2023 16:13:19 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: marex@denx.de,
 	aford@beaconembedded.com,
 	Adam Ford <aford173@gmail.com>
-Subject: [PATCH 2/3] configs: rzg2_beacon: Realign ENV location and offset
-Date: Wed, 25 Oct 2023 18:13:10 -0500
-Message-Id: <20231025231311.8701-2-aford173@gmail.com>
+Subject: [PATCH 3/3] arm: rmobile: rzg2_beacon: Auto select Linux device tree
+ by SoC
+Date: Wed, 25 Oct 2023 18:13:11 -0500
+Message-Id: <20231025231311.8701-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231025231311.8701-1-aford173@gmail.com>
 References: <20231025231311.8701-1-aford173@gmail.com>
@@ -94,26 +95,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ENV size and offset were changed to different
-values in Beacon's downstream release.  Change them to the
-same values as the downstream for consistent behavior.
+There is a function inside the board file to autodetect which device
+tree is needed by U-Boot to properly load its own device tree, but
+it currently defaults to always loading RZ/G2M for Linux.  This is
+not correct for other SoC variants.  Add board_late_init function
+to query the SoC name and use that to determine which device tree
+is loaded for booting Linux.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 
+diff --git a/board/beacon/beacon-rzg2m/beacon-rzg2m.c b/board/beacon/beacon-rzg2m/beacon-rzg2m.c
+index 99fe1edfb3..6d37ff6ac9 100644
+--- a/board/beacon/beacon-rzg2m/beacon-rzg2m.c
++++ b/board/beacon/beacon-rzg2m/beacon-rzg2m.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
++#include <env.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -17,6 +18,38 @@ int board_init(void)
+ 	return 0;
+ }
+ 
++#if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
++static u8 get_SoC_letter(void)
++{
++	const u8 *name = rzg_get_cpu_name();
++
++	if (*name)
++		return name[6];
++
++	return 0;
++}
++
++int board_late_init(void)
++{
++	/* If already defined, exit */
++	if (!env_get("fdt_file")) {
++		switch (get_SoC_letter()) {
++		case 'A':
++			env_set("fdt_file", "r8a774a1-beacon-rzg2m-kit.dtb");
++			break;
++		case 'B':
++			env_set("fdt_file", "r8a774b1-beacon-rzg2n-kit.dtb");
++			break;
++		case 'E':
++			env_set("fdt_file", "r8a774e1-beacon-rzg2h-kit.dtb");
++			break;
++		}
++	}
++
++	return 0;
++}
++#endif /* CONFIG_BOARD_LATE_INIT */
++
+ #if IS_ENABLED(CONFIG_MULTI_DTB_FIT)
+ int board_fit_config_name_match(const char *name)
+ {
 diff --git a/configs/rzg2_beacon_defconfig b/configs/rzg2_beacon_defconfig
-index 7b14d225b5..534f641e84 100644
+index 534f641e84..6894448b22 100644
 --- a/configs/rzg2_beacon_defconfig
 +++ b/configs/rzg2_beacon_defconfig
-@@ -3,7 +3,8 @@ CONFIG_ARCH_RMOBILE=y
- CONFIG_TEXT_BASE=0x50000000
- CONFIG_SYS_MALLOC_LEN=0x4000000
- CONFIG_SYS_MALLOC_F_LEN=0x2000
--CONFIG_ENV_OFFSET=0x0
-+CONFIG_ENV_SIZE=0x2000
-+CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="r8a774a1-beacon-rzg2m-kit"
- CONFIG_RCAR_GEN3=y
+@@ -21,6 +21,7 @@ CONFIG_USE_BOOTCOMMAND=y
+ CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else booti ${loadaddr} - ${fdt_addr}; fi"
+ CONFIG_DEFAULT_FDT_FILE="r8a774a1-beacon-rzg2m-kit.dtb"
+ # CONFIG_BOARD_EARLY_INIT_F is not set
++CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SYS_MALLOC_BOOTPARAMS=y
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_MAXARGS=64
+diff --git a/include/configs/beacon-rzg2m.h b/include/configs/beacon-rzg2m.h
+index 65c01835cc..493b98fbdf 100644
+--- a/include/configs/beacon-rzg2m.h
++++ b/include/configs/beacon-rzg2m.h
+@@ -18,7 +18,6 @@
+ 	"fdt_addr=0x48000000\0" \
+ 	"loadaddr=0x48080000\0" \
+ 	"boot_fdt=try\0" \
+-	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"initrd_addr=0x43800000\0"		\
+ 	"mmcdev=1\0" \
+ 	"mmcpart=1\0" \
 -- 
 2.40.1
 
