@@ -4,95 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA3CEC0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 21:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1DB2C25B6B
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 22:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDDB28750A;
-	Wed, 25 Oct 2023 23:22:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A518587506;
+	Thu, 26 Oct 2023 00:38:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QIKOvCzg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UjeQLTEY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6F6E87510; Wed, 25 Oct 2023 23:22:51 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 95D8B8799B; Thu, 26 Oct 2023 00:38:55 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BC03874D7
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 23:22:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E19F87506
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 00:38:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id F38C841353
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 21:22:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1698268966;
- bh=qQEs7QsG8+E8v5vUUgo5ngV+VPe2c64JEuDyaGkZ57k=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=QIKOvCzgSkIVi2LkulhS35FMqQOgdUGtyEt1FpOhcZP9aPGUEHRUJavQ+8cAR7o5W
- p+TuSXwCv/qBKyEawG7H3xRylXm732wKk+p6XIH4jAncqV4rmdP0INayOVzEL4cQG5
- 1dWB2JTDs675XBiyTGY4vYNL5lqfaIuN+xldZD5pigJjkL12iGtNF1KOx0VB8RcfY5
- U9KL6vOYusehl0RTBGPuKFDxAl+0bk1tKbvtsCrYd9YFsVV3/tvTAue8SSR6dSg8aL
- rEo5e/7yLIwFZpNIsP7JLQfqEZ5sGtiSl3lRvA7Ikfk/djY208olWHBOwVZNrXDr03
- fRl871np0dQTw==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-40768556444so1078875e9.3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 14:22:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5a86b6391e9so1955517b3.0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 15:38:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698273531; x=1698878331; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rNZSzQEjdvepkthap+fxYqcIRcnU8uZrsBsI3+/eLIY=;
+ b=UjeQLTEYm0TuKpiZ6NY/D3TDv52wuOZa6a6FapNtkzuJfyaPr05jaDg8UGyybUmZ3Y
+ oIRRkyQu0RXF2LHLIVTBnNFR3De3YbMEJOav+b0O0S5MZGeooYvg+lO2wJPpSnTHzoqi
+ gOuS45aEWUXFi53InEBcA7l5iFl36HAdAvWSwHsLfD1ho+abc4bjSIvPCByoePByiJUO
+ IgHz2mtWh71GYP0NxyI4Zr7PyIb58kWLosNGG6Up98O2rs4aDIKkjpnlYBhGRFMkMzG3
+ lF3ZBGBFP3pjWN9XzAGotJJiFCCFVcMYGTyg2JmV6/GAk3UUpyhgj0tD214LqkHKnccS
+ asdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698268966; x=1698873766;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qQEs7QsG8+E8v5vUUgo5ngV+VPe2c64JEuDyaGkZ57k=;
- b=BuueFLezYqLgg82zst8BLDG+O4Byv2wUeTxQgWxMOrJDyygAIwy25pUoRnQqR9QC7I
- cUzC88ggd+SlMOBfbtyHftMCTROjfSK6eiL9DIcb+ArbpmY9mTqG1twDf464jgW3xNLN
- laZz5Pyh6v7Aep3oh5etqs2j9ndLGMMzDJXFWiAbi2MQdxOjZdiBfXhkwvr22WSaCiCL
- xzni4J/14Ie9aUiem9RMmJxhWg8TpV4RC1AJAG4IM+23XQRNkTcqqHwihyUsWdRXkNxd
- Z5HmpjN58srzJYSGuEtg6OypKtiCsNv3PyAedtIrkzYvEiUGKW8krYOxaGxhCsCaEo9I
- AYqg==
-X-Gm-Message-State: AOJu0YyAJ4NjBOeiBhhFWc2WE8TIZd/rDOzyOvHzzrhuYk4LC5z2wrlj
- NbRr9zlj7r/R48qLslSQ01kJ5PlJZ0s3jEvRnGkVRJWKhbciifgBIdEItcrpdod1eZhhy7QRPII
- g5B3hzEERR+T85FCcrxexLdQmSttBErM=
-X-Received: by 2002:a05:600c:470f:b0:408:3fae:d809 with SMTP id
- v15-20020a05600c470f00b004083faed809mr12426343wmo.17.1698268966561; 
- Wed, 25 Oct 2023 14:22:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEtDnzpqH/IcDLtVmVRPi2rc6LiPg/H5Vo7XkhWmXiVGqmmdQnNx0+4Hf6WGWXiJyW+KJkSvg==
-X-Received: by 2002:a05:600c:470f:b0:408:3fae:d809 with SMTP id
- v15-20020a05600c470f00b004083faed809mr12426325wmo.17.1698268966049; 
- Wed, 25 Oct 2023 14:22:46 -0700 (PDT)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- v16-20020a05600c471000b0040644e699a0sm713506wmo.45.2023.10.25.14.22.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Oct 2023 14:22:45 -0700 (PDT)
-Message-ID: <f5e39630-0065-42e3-95a9-91e608e2c919@canonical.com>
-Date: Wed, 25 Oct 2023 23:22:55 +0200
+ d=1e100.net; s=20230601; t=1698273531; x=1698878331;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rNZSzQEjdvepkthap+fxYqcIRcnU8uZrsBsI3+/eLIY=;
+ b=KfR3x8iAZKcSh0S+1/MbkxU6mRtif0RzGArD0iacQaDPRaX1H9ZXwb/5Ks59IbO+MI
+ K8MzGpqMSYWXS78J8LPl8EmuRJWNsKGqbwpMztvqkqR0mJ+dmGGUOUH7ERnUnASiUf2R
+ z2c2Ilf0qGjtiXIKXe6Df3lwsXyfzk06fgj5w7dPRyjkJTlO6n9HLz9mRXY67uiMd8aa
+ 98sOY4idWIo46e3rJjLD5gVmrzTKWwwxBXVgKLL8iPGPfPdoAE8nKXpME0XLMq2cE+08
+ QzabepO6gYpQVL7NVYavFafiCmT+hMdXQ0dWSoQZgDTcDYPym+WYpa46BbYuOvYJqw9y
+ 3wnw==
+X-Gm-Message-State: AOJu0Yxst3jO2y7PDFMd0lsXShNUyEhG2TGjLjiu3UdqpiI9RmZ/pK6q
+ bbDhkNRbDPQlhXneJ3UksPgTfg7NC+E=
+X-Google-Smtp-Source: AGHT+IHZIt72nyrho5qo7pKBe7jKFgAlhWrWVhB9u7uifCEDAkMiOv9esGdp1yqncjzN5FMujzTbbw==
+X-Received: by 2002:a81:4e16:0:b0:5a7:bf2b:dc27 with SMTP id
+ c22-20020a814e16000000b005a7bf2bdc27mr17115136ywb.14.1698273531528; 
+ Wed, 25 Oct 2023 15:38:51 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ p142-20020a0de694000000b005a7fa3ccb32sm5409323ywe.35.2023.10.25.15.38.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Oct 2023 15:38:50 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+	Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Luka Perkov <luka.perkov@sartura.hr>
+Subject: [PATCH] arm: kirkwood: Enable bootstd for Zyxel NSA310S board
+Date: Wed, 25 Oct 2023 15:38:37 -0700
+Message-Id: <20231025223838.31639-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: sjg@google.com, ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
- Mark Kettenis <mark.kettenis@xs4all.nl>
-References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
- <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
- <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
- <87a5s6qwfe.fsf@bloch.sibelius.xs4all.nl>
- <20231025211354.GZ496310@bill-the-cat>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231025211354.GZ496310@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,119 +91,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/25/23 23:13, Tom Rini wrote:
-> On Wed, Oct 25, 2023 at 10:28:05PM +0200, Mark Kettenis wrote:
->>> Date: Wed, 25 Oct 2023 21:57:44 +0200
->>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>
->>> On 10/25/23 20:23, Simon Glass wrote:
->>>> Hi Heinrich,
->>>>
->>>> On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
->>>>>
->>>>> Hi Heinrich,
->>>>>
->>>>> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
->>>>> <heinrich.schuchardt@canonical.com> wrote:
->>>>>>
->>>>>> Forward and backward compatibility of Linux kernel device-trees is
->>>>>> sometimes missing. One solution approach is to load a kernel specific
->>>>>> device-tree. This can either be done via a U-Boot scripts (like the one
->>>>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
->>>>>> The boot loader approach currently requires to know the device-tree name
->>>>>> before first boot which makes it unusable for generic images.
->>>>>>
->>>>>> Expose the device-tree file name as EFI variable FdtFile.
->>>>>> This will allow bootloaders to load a kernel specific device-tree.
->>>>>
->>>>> kernel-specific
->>>>>
->>>>>>
->>>>>> The variable will not be exposed on ACPI based systems or if the
->>>>>> environment variable fdtfile is not defined.
->>>>>>
->>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>>>> ---
->>>>>> v4:
->>>>>>           Generalize the description of the content of $fdtfile.
->>>>>> v3:
->>>>>>           Add documentation
->>>>>> v2:
->>>>>>           Use a unique GUID to enable future U-Boot independent
->>>>>>           standardization.
->>>>>>           Do not try to add the variable on ACPI based systems.
->>>>>> ---
->>>>>>    doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
->>>>>>    include/efi_loader.h       |  5 +++++
->>>>>>    lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
->>>>>>    3 files changed, 49 insertions(+)
->>>>>>
->>>>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
->>>>>> index fb16ac743a..702c490831 100644
->>>>>> --- a/doc/develop/uefi/uefi.rst
->>>>>> +++ b/doc/develop/uefi/uefi.rst
->>>>>> @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
->>>>>>
->>>>>>        Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
->>>>>>
->>>>>> +EFI variable FdtFile
->>>>>> +~~~~~~~~~~~~~~~~~~~~
->>>>>> +
->>>>>> +Ideally U-Boot would always expose a device-tree that can be used for booting
->>>>>> +any operating systems. Unfortunately operating systems like Linux sometimes
->>>>>> +break forward and backward compatibility. In this case there is a need to load
->>>>>> +an operating system version specific device-tree.
->>>>>
->>>>> This seems to be a strong statement. Given the effort that goes into
->>>>> the DT, changes are supposed to be backwards-compatible. Is this
->>>>> generally true, or is it just that we want an up-to-date DT for the
->>>>> kernel to enable new features?
->>>>
->>>> Did you see this comment?
->>>
->>> It would have been nice to put the person which made that comment on copy.
->>>
->>> The truth lies in the world "supposed":
->>>
->>> The idea of a device-tree that never needs to change is quite old and
->>> never became true on ARM devices.
->>>
->>> We all know Linux tends to break both forward and backward compatibility
->>> of device-trees. Here is a nice example:
->>>
->>> d0c6707ca423 ("arm64: dts: allwinner: H5: NanoPi Neo Plus2: phy-mode
->>> rgmii-id")
->>>
->>> Driver changes broke forward and backwards compatibility of a lot of
->>> Allwinner boards.
->>
->> Well, that happened in 2020.  Things have gotten better over time.
-> 
-> Well, yes and no.  Given the brief summary here, I bet this was just
-> like when phy-mode and am335x platforms had DT compatibility broken and
-> the answer was that it was OK because the DT was incorrectly describing
-> hardware. So this is the reminder that there are cases of breaking DT
-> compatibility that are allowed. Even if the DT has been out (and wrong)
-> for several years.
-> 
-> That's not the main point of this thread and I don't want to derail
-> things further along this point, I just want to note that the details
-> here reminded me of when things are allowed to be incompatible with
-> previous trees.
-> 
+Enable bootstd for Zyxel NSA310S board, and remove distroboot.
 
-You are conflating things:
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-The EFI variable is a hint to the GRUB OS to find the correct 
-device-tree file without scanning hundreds of device-tree. You can not 
-build a compatibility check for it into U-Boot.
+ configs/nsa310s_defconfig |  3 ++-
+ include/configs/nsa310s.h | 17 ++---------------
+ 2 files changed, 4 insertions(+), 16 deletions(-)
 
-In distro-boot we are using the same value from environment variable 
-$fdtfile. Here you could check the compatible string but this might 
-break booting .
-
-Best regards
-
-Heinrich
-
+diff --git a/configs/nsa310s_defconfig b/configs/nsa310s_defconfig
+index ff4895622c..038ef42e9d 100644
+--- a/configs/nsa310s_defconfig
++++ b/configs/nsa310s_defconfig
+@@ -19,7 +19,8 @@ CONFIG_DEBUG_UART_CLOCK=166666667
+ CONFIG_IDENT_STRING="\nZyXEL NSA310S/320S 1/2-Bay Power Media Server"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_DEBUG_UART=y
+-CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_USE_PREBOOT=y
+ # CONFIG_DISPLAY_BOARDINFO is not set
+diff --git a/include/configs/nsa310s.h b/include/configs/nsa310s.h
+index fa029a176b..8c4d03553d 100644
+--- a/include/configs/nsa310s.h
++++ b/include/configs/nsa310s.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Copyright (C) 2015, 2021-2022 Tony Dinh <mibodhi@gmail.com>
++ * Copyright (C) 2015, 2021-2023 Tony Dinh <mibodhi@gmail.com>
+  * Copyright (C) 2015
+  * Gerald Kerma <dreagle@doukki.net>
+  * Luka Perkov <luka.perkov@sartura.hr>
+@@ -15,14 +15,6 @@
+  */
+ #include "mv-common.h"
+ 
+-/* Include the common distro boot environment */
+-#ifndef CONFIG_SPL_BUILD
+-
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(USB, usb, 0) \
+-	func(SATA, sata, 0) \
+-	func(DHCP, dhcp, na)
+-
+ #define KERNEL_ADDR_R	__stringify(0x800000)
+ #define FDT_ADDR_R	__stringify(0x2c00000)
+ #define RAMDISK_ADDR_R	__stringify(0x01100000)
+@@ -34,16 +26,11 @@
+ 	"ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
+ 	"scriptaddr=" SCRIPT_ADDR_R "\0"
+ 
+-#include <config_distro_bootcmd.h>
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"console=console=ttyS0,115200\0" \
+ 	"kernel=/boot/zImage\0" \
+ 	"fdt=/boot/nsa310s.dtb\0" \
+ 	"bootargs_root=ubi.mtd=3 root=ubi0:rootfs rootfstype=ubifs rw\0" \
+-	LOAD_ADDRESS_ENV_SETTINGS \
+-	BOOTENV
+-
+-#endif /* CONFIG_SPL_BUILD */
++	LOAD_ADDRESS_ENV_SETTINGS
+ 
+ #endif /* _CONFIG_NSA310S_H */
+-- 
+2.39.2
 
