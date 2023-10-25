@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32910C07545
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 18:23:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF74C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 18:24:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B0AE87A02;
-	Wed, 25 Oct 2023 20:23:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82BA3874CE;
+	Wed, 25 Oct 2023 20:23:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="YFbtGGJM";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="nRNDub4c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FCA687240; Wed, 25 Oct 2023 20:23:49 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id C145D87240; Wed, 25 Oct 2023 20:23:49 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB807879E0
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:23:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66E6B87A09
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9be7e3fa1daso11701266b.3
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:23:43 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507973f3b65so9400008e87.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:23:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=google.com; s=20230601; t=1698258223; x=1698863023; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6aeQilhAX5unkLqiN4I2bOnUN4QqeK696Zsr8e3lgyo=;
- b=YFbtGGJMkciLYOooz5O2Ja7edDxqrW4kN9NjHGIYeCUBRHO5IyQ8EzhGYaQCq60Hpz
- /+4DBCAxOzFjN3NGE2DowAqlvC7CmYFDkeob2VkhaaYWmYr5jq8/lRvOjzYebcVw5r+W
- RCpioHGChHTNMubVTKLy96XXGqXTpAxH1JxCA/gW5N/rNrFwUFlMTGsPGgeXrz8CoZiD
- v38pKz68hYwgIKFTAaMaPCdI+Tz2QEdcJyOEStzYQoU5Gqsi7w01v8abzZuRDDCESXyY
- 5uwCw2lVJrPtcfv0fd6qNvbC2j+STEPMgxRop2CA+M+Fs2wbmuXe5APAw1Uaiud9fTxD
- UAmA==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rJZ36VBPGZA4WSrqJOIQCIu5LRsDYss9g53/3NmuOgs=;
+ b=nRNDub4cDDMGxwyCtZDrUh+fLHmIELXPM2yM8VQvXskzGxN8iK5kh89kPdvN7+HebP
+ PbDv+SIPyfy/jyeW7zJ15KnxGsd4uPxvS0t0IIshjdWYfMol0hBXV974xu2ivSAViuPb
+ mqPqPDKZX1JQv83OS4n1ryFI36F0co0BmmwdVUJIqx5xwPBxhOOowOD66He+iRng8ufX
+ kMM14w3kB35+BQ8VXw2mJRuKJ8rE5KNVPokfcPQr2LvJgpeI9zX5vcRu/NhVfZGAgqHg
+ xhL7RJFyOC/pzxwUHDXRzwOfzdSJT7DJH4Mhpz9O37A797YJFFAb+GBiIv6CiBlrGexn
+ MQPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1698258223; x=1698863023;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6aeQilhAX5unkLqiN4I2bOnUN4QqeK696Zsr8e3lgyo=;
- b=Wp47v7hqelBJeg8wod0Lxx3qmazy/DlNYdOtp/FirqBBAWYH5RzWnyFtuLlWVsA55L
- x8ZGxIEbKzN0jEz98DM0FvXG3wrnSfGXaRcLdjADkccZM5j1sJc2OeMuw3mL+pAO5c+c
- aGMQ2CiivJbWf8eO7QStKgCQiOrozDylOWDOcx7WW0L13HOrTih0a/gEig9aI4+JJWn1
- qpqy1l77XZQRR/2FaUVIUzPyixyoHjLiA3OY+BkxBtP5hypw8sNSHjV6Xzgeg9061RFc
- LeHDXcmKSicDwLZmMPtdbexOrfzvTh4pfE9L6I2ZPsltbpnm0uN6NifgmYU8oNWijJIx
- qwbw==
-X-Gm-Message-State: AOJu0YyYUYRJMtRUIs6Ii9i/45fZ0YFtMzz6qTuNHbMDOYEwUePLrF02
- GGwCy+YdSPWPMb5GkiYjoSDRJ/dNI/6wnoYHUoGcBA==
-X-Google-Smtp-Source: AGHT+IE87krh5c5qH02CW2TYJ7aTP0P7jtKSj8eHVDANMSq2fmIol04/tFXii6ryrlmiF9iTsM4hsH6bkFLqg/h8L+o=
-X-Received: by 2002:a17:907:9623:b0:9ae:6da8:1819 with SMTP id
- gb35-20020a170907962300b009ae6da81819mr11652571ejc.48.1698258223112; Wed, 25
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rJZ36VBPGZA4WSrqJOIQCIu5LRsDYss9g53/3NmuOgs=;
+ b=NQ0HtdB7++n6hiQ5kjJ0ZW585a0NcLjh49lX16fr4jRtpO/fIphrjBmtvBTlMTIGmb
+ 55lAuAZWCVSZBDiwk5MIMt9BowZ83Z28tVFHjCE975sXLQWN3srEKLNLgkNPjF3We4Qy
+ 07b/ZjJaEeujcJA87IJrLPp2Wkyj1D7wh1yP+UGz3BqhAstQ2NLbg1RvLmPSZRPZL4wg
+ dqDeSkSgZxKhcTLuNfn/EAKz+yPFv5mvYRBoNtls8xBOOvEH+GjPgcte1qNOzj56SMOi
+ BKiJiOHH6eE9p+D8qnsDgmhgTovXutJjCwIzGZ2JHUlPNM7xg1NGzy46aGR1kLEICcF0
+ PEhg==
+X-Gm-Message-State: AOJu0YxhleByr7Sis4uxVPJX8CzmO2ewpKP67pb2KiawS9FSLQeM7Xkx
+ q3GGhAoXTCl6bO5BNjD7/i5LdwUexWDaPQsJjpRI7Q==
+X-Google-Smtp-Source: AGHT+IEXqEkxRxdipT0YemNeewtQhj5vxM+3SkRKqE80Yj7sTQvv4XKnZPdevNSKJ5p1LVcRMkvGt9ZvP7/qJEVSHGU=
+X-Received: by 2002:ac2:4341:0:b0:500:9f7b:e6a4 with SMTP id
+ o1-20020ac24341000000b005009f7be6a4mr10914789lfl.32.1698258223126; Wed, 25
  Oct 2023 11:23:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
+References: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+ <CAPnjgZ1A8vyEUx2wiXqOCb8Kf9zP96wqy4kXanfKRR-uN6yOmg@mail.gmail.com>
+ <OS3P286MB1495889DF57AD742064FDB56F6DEA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <OS3P286MB1495889DF57AD742064FDB56F6DEA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
 From: Simon Glass <sjg@google.com>
-Date: Wed, 25 Oct 2023 18:23:24 +0000
-Message-ID: <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>
+Date: Wed, 25 Oct 2023 18:23:30 +0000
+Message-ID: <CAPnjgZ0Bb7zzVabU05hfg12tcrQbzT1iWQVdrui2GmsEZekZDA@mail.gmail.com>
+Subject: Re: quick question about TPM
+To: "niek.nooijens@omron.com" <niek.nooijens@omron.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,165 +87,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Niek,
 
-On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
+On Tue, 24 Oct 2023 at 19:26, niek.nooijens@omron.com
+<niek.nooijens@omron.com> wrote:
 >
-> Hi Heinrich,
+> Hi Simon
 >
-> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > Forward and backward compatibility of Linux kernel device-trees is
-> > sometimes missing. One solution approach is to load a kernel specific
-> > device-tree. This can either be done via a U-Boot scripts (like the one
-> > generated by Debian package flash-kernel or by a boot loader like GRUB.
-> > The boot loader approach currently requires to know the device-tree name
-> > before first boot which makes it unusable for generic images.
-> >
-> > Expose the device-tree file name as EFI variable FdtFile.
-> > This will allow bootloaders to load a kernel specific device-tree.
+> Driver model is enabled, so it's pretty weird it doesn't show up.
+> CONFIG_DM=3Dy
+> CONFIG_SPL_DM=3Dy
+> CONFIG_DM_WARN=3Dy
 >
-> kernel-specific
->
-> >
-> > The variable will not be exposed on ACPI based systems or if the
-> > environment variable fdtfile is not defined.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> > v4:
-> >         Generalize the description of the content of $fdtfile.
-> > v3:
-> >         Add documentation
-> > v2:
-> >         Use a unique GUID to enable future U-Boot independent
-> >         standardization.
-> >         Do not try to add the variable on ACPI based systems.
-> > ---
-> >  doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
-> >  include/efi_loader.h       |  5 +++++
-> >  lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> >  3 files changed, 49 insertions(+)
-> >
-> > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> > index fb16ac743a..702c490831 100644
-> > --- a/doc/develop/uefi/uefi.rst
-> > +++ b/doc/develop/uefi/uefi.rst
-> > @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
-> >
-> >      Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
-> >
-> > +EFI variable FdtFile
-> > +~~~~~~~~~~~~~~~~~~~~
-> > +
-> > +Ideally U-Boot would always expose a device-tree that can be used for booting
-> > +any operating systems. Unfortunately operating systems like Linux sometimes
-> > +break forward and backward compatibility. In this case there is a need to load
-> > +an operating system version specific device-tree.
->
-> This seems to be a strong statement. Given the effort that goes into
-> the DT, changes are supposed to be backwards-compatible. Is this
-> generally true, or is it just that we want an up-to-date DT for the
-> kernel to enable new features?
+> The TPM menu is there, yet somehow empty.
+> This is just after "make socfpga_cyclone5_defconfig" and "make menuconfig=
+"
 
-Did you see this comment?
+Do you enable CONFIG_TPM here?:
+
+Library routines -> Security support -> Trusted Platform Module (TPM) Suppo=
+rt
+
+then the drivers appear for me (under device drivers)
+
+> if I use "make snow_defconfig" the menu is usable like normal, so somethi=
+ng is disabling it, yet when grep-ping for TPM in socfpga there are no resu=
+lts.
+> Adding it to .config manually also doesn't seem to work. so I'm a bit con=
+fused about what's going on. Anyhow thanks for the help!
+
+You can edit the defconfig to add CONFIG_TPM and whatever driver you need.
 
 Regards,
 Simon
 
+
 >
-> > +
-> > +U-Boot has an environment variable fdtfile identifying the device-tree file to
-> > +load. The content of this variable is exposed as EFI variable Fdtfile, vendor
-> > +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-tree path
-> > +name as a NUL terminated ASCII string. On many architectures the file name is
+> Niek
+> ________________________________
+> =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
+> =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8825=E6=97=A5=
+ 03:03
+> =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooijens=
+@omron.com>
+> CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
+> =E4=BB=B6=E5=90=8D: Re: quick question about TPM
 >
-> NUL-terminated
+> Hi Niek,
 >
-> > +preceded by a vendor directory ('vendor-directory/board-name.dtb').
-> > +
-> >  Links
-> >  -----
+> On Tue, 24 Oct 2023 at 04:51, niek.nooijens@omron.com
+> <niek.nooijens@omron.com> wrote:
 > >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index e24410505f..146e7f1bce 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
-> >         EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
-> >                  0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+> > Hi
 > >
-> > +/* Vendor GUID for the FdtFile variable */
-> > +#define VENDOR_FDTFILE_GUID \
-> > +       EFI_GUID(0xd45dde69, 0x3bd6, 0x40e0, \
-> > +                0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
-> > +
-> >  /* Use internal device tree when starting UEFI application */
-> >  #define EFI_FDT_USE_INTERNAL NULL
-> >
-> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> > index e6de685e87..71bcde645b 100644
-> > --- a/lib/efi_loader/efi_setup.c
-> > +++ b/lib/efi_loader/efi_setup.c
-> > @@ -17,6 +17,8 @@
-> >
-> >  efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
-> >
-> > +efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
-> > +
-> >  /*
-> >   * Allow unaligned memory access.
-> >   *
-> > @@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
-> >  {
-> >  }
-> >
-> > +/**
-> > + * efi_init_fdtfile() - set EFI variable FdtFile
-> > + *
-> > + * Return:     status code
-> > + */
-> > +static efi_status_t efi_init_fdtfile(void)
-> > +{
-> > +       char *val;
-> > +
-> > +       val = env_get("fdtfile");
-> > +       if (!val)
-> > +               return EFI_SUCCESS;
-> > +
-> > +       return efi_set_variable_int(u"FdtFile",
-> > +                                   &vendor_fdtfile_guid,
-> > +                                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> > +                                   EFI_VARIABLE_RUNTIME_ACCESS |
-> > +                                   EFI_VARIABLE_READ_ONLY,
-> > +                                   strlen(val) + 1, val, false);
-> > +}
-> > +
-> >  /**
-> >   * efi_init_platform_lang() - define supported languages
-> >   *
-> > @@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
-> >         if (ret != EFI_SUCCESS)
-> >                 goto out;
-> >
-> > +       /* Define EFI variable FdtFile */
-> > +       if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
-> > +               ret = efi_init_fdtfile();
-> > +               if (ret != EFI_SUCCESS)
-> > +                       goto out;
-> > +       }
-> > +
-> >         /* Indicate supported features */
-> >         ret = efi_init_os_indications();
-> >         if (ret != EFI_SUCCESS)
-> > --
-> > 2.40.1
-> >
+> > Just a quick question. I'm developing a platform using the socfpga_cycl=
+one5_defconfig
+> > everything is working, linux boots, but we decided to add a TPM to it's=
+ SPI bus.
+> > For some reason the TPM support menu in the menuconfig is disabled and =
+I can't seem to find out why, or which file disables it. can you point me i=
+n the right direction?
 >
-> Assuming my concerns above are figured out:
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> The only thing 'config TPM' depends on is DM (driver model). Is that
+> somehow disabled? Once you enable that, it should appear.
 >
 > Regards,
-> SImon
+> Simon
