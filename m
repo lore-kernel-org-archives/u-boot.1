@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A889BC0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 09:51:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D09AC0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 09:52:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72218879E7;
+	by phobos.denx.de (Postfix) with ESMTP id DF7D987A09;
 	Wed, 25 Oct 2023 11:51:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25B92879D8; Wed, 25 Oct 2023 11:51:45 +0200 (CEST)
+ id 337E087230; Wed, 25 Oct 2023 11:51:46 +0200 (CEST)
 Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::224])
+ [217.70.183.196])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29C0C879A6
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:51:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BE9E87230
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:51:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=foss+uboot@0leil.net
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 07BFAE0002;
- Wed, 25 Oct 2023 09:51:41 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 19CC1E0004;
+ Wed, 25 Oct 2023 09:51:42 +0000 (UTC)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Klaus Goger <klaus.goger@theobroma-systems.com>,
  Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>
 Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, heiko@sntech.de
-Subject: [PATCH 1/2] rockchip: ringneck-px30: always reset STM32 companion
- controller on boot
-Date: Wed, 25 Oct 2023 11:51:14 +0200
-Message-ID: <20231025-ringneck-stm32-reset-v1-1-052562bec53f@theobroma-systems.com>
+Subject: [PATCH 2/2] rockchip: ringneck-px30: enable SPL_BOARD_INIT
+Date: Wed, 25 Oct 2023 11:51:15 +0200
+Message-ID: <20231025-ringneck-stm32-reset-v1-2-052562bec53f@theobroma-systems.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231025-ringneck-stm32-reset-v1-0-052562bec53f@theobroma-systems.com>
 References: <20231025-ringneck-stm32-reset-v1-0-052562bec53f@theobroma-systems.com>
@@ -61,99 +60,28 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-It's happened that glitches on the STM32_RST and STM32_BOOT lines have
-put the STM32 companion microcontroller into DFU mode making it not boot
-its FW, rendering it useless for the user.
-
-Considering that the STM32 companion microcontroller is always reset on
-a reboot or power cycle, resetting it once again in U-Boot SPL isn't
-going to hurt it any more.
-
-For ATtiny companion microcontroller, the situation is a bit different
-because a reboot or power cycle doesn't reset it. Additionally, since it
-can only be reset with a UPDI reset on the STM32_RST line, and that is
-virtually impossible to mistakenly trigger, the ATtiny is unlikely to be
-in unwanted reset or enter reset because U-Boot toggles STM32_RST line.
+Now that Ringneck requires some board-specific code (namely resetting
+the MCU companion controller) to be run during SPL stage, let's enable
+SPL_BOARD_INIT.
 
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- .../ringneck_px30/ringneck-px30.c                  | 52 ++++++++++++++++++++++
- 1 file changed, 52 insertions(+)
+ configs/ringneck-px30_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-index bb1bb4acf5c..804a991e281 100644
---- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-+++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-@@ -16,12 +16,14 @@
- #include <usb.h>
- #include <dm/pinctrl.h>
- #include <dm/uclass-internal.h>
-+#include <asm/gpio.h>
- #include <asm/io.h>
- #include <asm/setup.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
- #include <asm/arch-rockchip/periph.h>
- #include <asm/arch-rockchip/misc.h>
-+#include <linux/delay.h>
- #include <power/regulator.h>
- #include <u-boot/sha256.h>
- 
-@@ -169,3 +171,53 @@ int misc_init_r(void)
- 
- 	return 0;
- }
-+
-+#define STM32_RST	100 // GPIO3_A4
-+#define STM32_BOOT	101 // GPIO3_A5
-+
-+void spl_board_init(void)
-+{
-+	/*
-+	 * Glitches on STM32_BOOT and STM32_RST lines during poweroff or power
-+	 * on may put the STM32 companion microcontroller into DFU mode, let's
-+	 * always reset it into normal mode instead.
-+	 * Toggling the STM32_RST line is safe to do with the ATtiny companion
-+	 * microcontroller variant because it will not trigger an MCU reset
-+	 * since only a UPDI reset command will. Since a UPDI reset is difficult
-+	 * to mistakenly trigger, glitches to the lines are theoretically also
-+	 * incapable of triggering an actual ATtiny reset.
-+	 */
-+	int ret = gpio_request(STM32_RST, "STM32_RST");
-+
-+	if (ret) {
-+		debug("Failed to request STM32_RST\n");
-+		return;
-+	}
-+
-+	ret = gpio_request(STM32_BOOT, "STM32_BOOT");
-+	if (ret) {
-+		debug("Failed to request STM32_BOOT\n");
-+		return;
-+	}
-+
-+	// Rely on HW pull-down for inactive level
-+	ret = gpio_direction_input(STM32_BOOT);
-+	if (ret) {
-+		debug("Failed to configure STM32_BOOT\n");
-+		return;
-+	}
-+
-+	ret = gpio_direction_output(STM32_RST, 0);
-+	if (ret) {
-+		debug("Failed to configure STM32_RST\n");
-+		return;
-+	}
-+
-+	mdelay(1);
-+
-+	ret = gpio_direction_output(STM32_RST, 1);
-+	if (ret) {
-+		debug("Failed to configure STM32_RST\n");
-+		return;
-+	}
-+}
+diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
+index b4666d0e90f..420c9cd1e89 100644
+--- a/configs/ringneck-px30_defconfig
++++ b/configs/ringneck-px30_defconfig
+@@ -38,6 +38,7 @@ CONFIG_SPL_PAD_TO=0x0
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x4000000
+ CONFIG_SPL_BSS_MAX_SIZE=0x4000
++CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
 
 -- 
 2.41.0
