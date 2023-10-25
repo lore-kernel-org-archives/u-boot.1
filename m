@@ -4,43 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12ED4C25B47
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 10:41:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97A29C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 10:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0C7786F70;
-	Wed, 25 Oct 2023 12:41:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
+	by phobos.denx.de (Postfix) with ESMTP id 469B887A92;
+	Wed, 25 Oct 2023 12:45:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2778A8722C; Wed, 25 Oct 2023 12:41:44 +0200 (CEST)
-Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EE3C86E8A
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 12:41:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=sntech.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
-Received: from i53875a19.versanet.de ([83.135.90.25] helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <heiko@sntech.de>)
- id 1qvbKT-0005AE-UL; Wed, 25 Oct 2023 12:41:37 +0200
-From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
-To: Klaus Goger <klaus.goger@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz <foss+uboot@0leil.net>
-Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: Re: [PATCH 2/2] rockchip: ringneck-px30: enable SPL_BOARD_INIT
-Date: Wed, 25 Oct 2023 12:41:37 +0200
-Message-ID: <20462913.Yz81rIOvuz@diego>
-In-Reply-To: <20231025-ringneck-stm32-reset-v1-2-052562bec53f@theobroma-systems.com>
-References: <20231025-ringneck-stm32-reset-v1-0-052562bec53f@theobroma-systems.com>
- <20231025-ringneck-stm32-reset-v1-2-052562bec53f@theobroma-systems.com>
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CWMAtVP2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DB2DB87A8F; Wed, 25 Oct 2023 12:45:10 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E9CA88745D
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 12:45:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-yadav@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39PAj3im006114;
+ Wed, 25 Oct 2023 05:45:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698230703;
+ bh=gpER5ymKN07Ea8HRPLJYf68k72pWglzzWoGEydsikwY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=CWMAtVP2xZPD464YPFNr52YaPxbgKf80bBGx+14CCQ7rcpbQ1bjKjaX7kGt3o2WSt
+ lfrgVumKExXl6mrVAdC0EV/fsKxTDaQBG/W/GW1nMUZaeH9GOe7JTt3F+Rk568nGTo
+ jN8ZtkSRdWVfcelJV23VE/ui1scbzNGji2amRlvs=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39PAj3SV055168
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 25 Oct 2023 05:45:03 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 25
+ Oct 2023 05:45:03 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 25 Oct 2023 05:45:03 -0500
+Received: from [10.24.69.29] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39PAj1PE103226;
+ Wed, 25 Oct 2023 05:45:02 -0500
+Message-ID: <94ae9feb-0cc1-13f9-fbd9-d921717b45f7@ti.com>
+Date: Wed, 25 Oct 2023 16:15:01 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH 2/4] arm: dts: Add support for AM62x LP SK
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>
+References: <20230927082105.3729470-1-n-yadav@ti.com>
+ <20230927082105.3729470-3-n-yadav@ti.com>
+ <20230927115231.i3kg3wvpvqmmexnd@dazzling>
+From: Nitin Yadav <n-yadav@ti.com>
+In-Reply-To: <20230927115231.i3kg3wvpvqmmexnd@dazzling>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,37 +82,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am Mittwoch, 25. Oktober 2023, 11:51:15 CEST schrieb Quentin Schulz:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Hi Nishanth,
+
+On 27/09/23 17:22, Nishanth Menon wrote:
+> On 13:51-20230927, Nitin Yadav wrote:
+>> The AM62x LP SK board is similar to the AM62x SK board,
+>> but has some significant changes that requires different
+>> device tree.
+>>
+>> The differences are mainly:
+>> - AM62x SoC in the AMC package that meets AECQ100 automotive standard.
+>> - LPDDR4 versus DDR4 on the AM62x SK.
+>> - TPS65219 PMIC instead of discrete regulators.
+>> - IO expander pin names are wired differently.
+>> - Second ethernet port is currently disabled as the boards do not have
+>>   the part physically installed.
+>> - OSPI NAND vs OSPI NOR.
+>> - No WLAN chip instead a SDIO M.2 connector.
+>>
+>> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
+>> ---
+>>  arch/arm/dts/Makefile                         |    2 +
+>>  arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi        |    9 +
+>>  arch/arm/dts/k3-am62-lp-sk.dts                |  231 ++
 > 
-> Now that Ringneck requires some board-specific code (namely resetting
-> the MCU companion controller) to be run during SPL stage, let's enable
-> SPL_BOARD_INIT.
+>>  arch/arm/dts/k3-am62-r5-lp-sk.dts             |   21 +
+>>  arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi | 2190 +++++++++++++++++
+>>  5 files changed, 2453 insertions(+)
+>>  create mode 100644 arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+>>  create mode 100644 arch/arm/dts/k3-am62-lp-sk.dts
+>>  create mode 100644 arch/arm/dts/k3-am62-r5-lp-sk.dts
+>>  create mode 100644 arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+>>
+>> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+>> index bde2176ec7..72ea57885f 100644
+>> --- a/arch/arm/dts/Makefile
+>> +++ b/arch/arm/dts/Makefile
+>> @@ -1337,6 +1337,8 @@ dtb-$(CONFIG_SOC_K3_AM642) += k3-am642-evm.dtb \
+>>  
+>>  dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
+>>  			      k3-am625-r5-sk.dtb \
+>> +			      k3-am62-lp-sk.dtb \
+>> +			      k3-am62-r5-lp-sk.dtb \
+>>  			      k3-am625-beagleplay.dtb \
+>>  			      k3-am625-r5-beagleplay.dtb \
+>>  			      k3-am625-verdin-wifi-dev.dtb \
+>> diff --git a/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+>> new file mode 100644
+>> index 0000000000..7da94fe4b6
+>> --- /dev/null
+>> +++ b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+>> @@ -0,0 +1,9 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * AM62x LP SK dts file for SPLs
+>> + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
+>> + */
+>> +
+>> +#include "k3-am62x-sk-common-u-boot.dtsi"
+>> +
+>> +#include "k3-am62-lp-sk-binman.dtsi"
 > 
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> Are you sure you don't need the dt phase properties for regulators for
+> mmc to work?
+you have added bootph-* flags to those nodes too .?
 
-Reviewed-by: Heiko Stuebner <heiko@sntech.de>
-
-> ---
->  configs/ringneck-px30_defconfig | 1 +
->  1 file changed, 1 insertion(+)
 > 
-> diff --git a/configs/ringneck-px30_defconfig b/configs/ringneck-px30_defconfig
-> index b4666d0e90f..420c9cd1e89 100644
-> --- a/configs/ringneck-px30_defconfig
-> +++ b/configs/ringneck-px30_defconfig
-> @@ -38,6 +38,7 @@ CONFIG_SPL_PAD_TO=0x0
->  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->  CONFIG_SPL_BSS_START_ADDR=0x4000000
->  CONFIG_SPL_BSS_MAX_SIZE=0x4000
-> +CONFIG_SPL_BOARD_INIT=y
->  CONFIG_SPL_BOOTROM_SUPPORT=y
->  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+>> diff --git a/arch/arm/dts/k3-am62-lp-sk.dts b/arch/arm/dts/k3-am62-lp-sk.dts
 > 
+> Is this coming in from v6.6-rc1 if so document that in commit message.
+> 
+> [...]
+> 
+>> diff --git a/arch/arm/dts/k3-am62-r5-lp-sk.dts b/arch/arm/dts/k3-am62-r5-lp-sk.dts
+>> new file mode 100644
+>> index 0000000000..ed2c028bad
+>> --- /dev/null
+>> +++ b/arch/arm/dts/k3-am62-r5-lp-sk.dts
+>> @@ -0,0 +1,21 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * AM62x LP SK dts file for R5 SPL
+>> + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
+>> + */
+>> +
+>> +#include "k3-am62-lp-sk.dts"
+>> +#include "k3-am62x-ddr-lp4-50-800-800.dtsi"
+>> +#include "k3-am62-ddr.dtsi"
+>> +
+>> +#include "k3-am62-lp-sk-u-boot.dtsi"
+>> +#include "k3-am62x-r5-sk-common.dtsi"
+>> +
+>> +/ {
+>> +	memory@80000000 {
+>> +		device_type = "memory";
+>> +		/* 2G RAM */
+>> +		reg = <0x00000000 0x80000000 0x00000000 0x80000000>;
+>> +		bootph-pre-ram;
+>> +	};
+>> +};
+> 
+> NAK. should come from board.dts.
+> 
+>> diff --git a/arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi b/arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+>> new file mode 100644
+>> index 0000000000..74693d12e1
+>> --- /dev/null
+>> +++ b/arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+>> @@ -0,0 +1,2190 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * This file was generated with the
+>> + * AM62x SysConfig DDR Subsystem Register Configuration Tool v0.08.61
+>> + * Tue Mar 22 2022 17:03:08 GMT-0500 (Central Daylight Time)
+> 
+> Are you sure this does'nt need a sync up to latest?
+> 
+>> + * DDR Type: LPDDR4
+> 
+> Would be good to document the exact DDR part.
+> 
+>> + * F0 = 50MHz    F1 = 800MHz    F2 = 800MHz
+>> + * Density (per channel): 16Gb
+>> + * Number of Ranks: 1
+>> + */
+>> +
+> 
+> 	[...]
 > 
 
-
-
-
+-- 
+Regards,
+Nitin
