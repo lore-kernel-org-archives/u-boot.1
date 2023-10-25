@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7474BC25B47
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:52:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43002C25B47
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 07:25:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64E7E87A61;
-	Wed, 25 Oct 2023 08:52:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0AFE5870B4;
+	Wed, 25 Oct 2023 09:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cye8bE+G";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lxUJ1BjT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 959BC871BB; Wed, 25 Oct 2023 08:52:31 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 0F9A18716C; Wed, 25 Oct 2023 09:25:36 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1091387A77
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:52:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FC1E86FE2
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 09:25:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6b1ef786b7fso5086209b3a.3
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:52:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-533d31a8523so7943238a12.1
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 00:25:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698216745; x=1698821545; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=X8mB3PGPNWPRXoUA0Ul8BgjnO/0mo6winCiNfeY5vL4=;
- b=cye8bE+GogwvLSriqyLSylEY+LYvrOgDQ7GWYXLmFRtNurI85R06ZAkombRn1MMZUB
- lpYMPRN3Wocei8fR4CFwUzWsVpi4tgtxGFhoCNP6wHBh6bOH/f6bwirYs0t0FURbIkqI
- 7A+BOu23INuAJSDeDtmJgnxMmXNWSWr30l9tNBjb2vAExpbplkPTW4i+f7DhfDFDxU6H
- 1b47LP4VHEvlkuZcbxtNLAij5zdavkXHIjgF7wys+fiY/BndeHPpzkuLwjJ4fIAaCYFJ
- qP2dGlNT0y06bAk9ixDvcfClMZMGX6gXKsovgeRnL3fS4Ip6Fg57S4sThX+kYbX/6iMx
- 7hwg==
+ d=linaro.org; s=google; t=1698218733; x=1698823533; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fbU+2yr6L/fmyx0oqKAB4VS1Is66G/S7LiZOcoQnnPI=;
+ b=lxUJ1BjTBZijBBZo1PcjzDHj4G9nqbb0OKh6k1SFX5N3UyUlL/hpyDZEy8SmSc/AyO
+ 8TuGX4xf71c60TAfwAH5/1UKM4briEx/PNrdU4It8xV+4HjqLrllIm40qWWIx8cYKjCy
+ r6QbyQU2Q5PPHaskdajl2wO+ipNxiBPBmXjnTgtpu+GNfhHWvuVaHkdXng66FuuUhjeO
+ /8CsNJ4sia6PmjmclQch/fbJgHYRN+Jv7S8MKh2rtpkdyILEBipX8iX68hrFieK0eGyG
+ 3ngNLpKiq0Pglh3VfPgYaby8/7DD+uAGe0dVtyOG02N/xLQHWD86f8IoY6Dp3E9yqiUD
+ K+OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698216745; x=1698821545;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=X8mB3PGPNWPRXoUA0Ul8BgjnO/0mo6winCiNfeY5vL4=;
- b=BUYyos/8hcVLjF8pK1eucs2P/MigD483yqwff5jCWaxFL0K0A35AAkbV4KbWHuN6EN
- 41WhYXFLUzLL+Qz9C+7hMrRRkNBLMGmhPjPjbhJPnW41ZCEMwZnUgNXQL62QVJl/0iwf
- lSEveexPkNUwEa6hRNPkFLOEBCuNXonShLGhlghGEU8pvkROEwzTyRWrByy9zeg2Tud0
- F23wj7B9i9AbxTI1/xrHUKPH64S5rYCfohQX5ff8MxQ5ynJpy3IaU0WY0HqftWuESgyM
- NQCTNoyms8YAGs8uCx8O5sYqQaRxTD8q3W0OWHgct+t2KfgQhvSbykEr2hxrabeHl/cg
- ZbaQ==
-X-Gm-Message-State: AOJu0Ywrm1tUeZreTxMhrllq0SnJYrzUPq94I/iw1x+B7k5N5nraaTE+
- pKVtIWRK2Ky9pZWOw9QEHGhYIcqGq3fxhwWy2vc=
-X-Google-Smtp-Source: AGHT+IFzZQUmKERxbWDtLsZ1vuFlzNJVZUj7ChfYfIxSEHvXTHrzNeDBi8cInYA8ata3KwO6XwXPeA==
-X-Received: by 2002:a05:6a21:3d8a:b0:138:2fb8:6a14 with SMTP id
- bj10-20020a056a213d8a00b001382fb86a14mr4504867pzc.3.1698216745613; 
- Tue, 24 Oct 2023 23:52:25 -0700 (PDT)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- q12-20020aa7842c000000b006930db1e6cfsm8686560pfn.62.2023.10.24.23.52.24
+ d=1e100.net; s=20230601; t=1698218733; x=1698823533;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fbU+2yr6L/fmyx0oqKAB4VS1Is66G/S7LiZOcoQnnPI=;
+ b=qV46DIa5BNmhhsnuhB/CcmXHhfzn/yYlqgHxwX97uHZxde//iFVd94QXKNUz51wBT7
+ Y4jd72Rf9jiw/xVt3IlS+Jrt6aRZKElsHycpU348cxZx+yn9hDcycZgc4SnbZ7L5CMBp
+ qkfBntoTmbdyAWJt5TrAR6eIsJCniw9yxW+KSalMwqLLQUWuMoGg8LKU1e0TkTeCoxs4
+ JjpKDkBvdugIlqFwILzbYDu8DEVzXo3t6A6wi9xwaNNYUR573s7hNm71CF+8wzfYklZ3
+ eZnA5H1fsNAerzojAjQ0qOBKZi2dHA5MVG0O3y0vtBkw/mMSMF6XSRa5FNMamS5h6UaC
+ amWA==
+X-Gm-Message-State: AOJu0YzplrznXgRBLTQBIapkSv9ONSXN+TZpwYHPVdPr3Y28N25tpTT8
+ n62IVCWS3vvFAeO/oq18TMUR8vpmnBFJJasroHChAA==
+X-Google-Smtp-Source: AGHT+IE0hdAUmlEJIBNJgQKaE0dUoc/Md7ecObuu2JOO0SjMhuoUtz7KokZGkPfMd0MErOHuQ3/Ukg==
+X-Received: by 2002:a50:d596:0:b0:53f:b9d2:d019 with SMTP id
+ v22-20020a50d596000000b0053fb9d2d019mr10674471edi.11.1698218733162; 
+ Wed, 25 Oct 2023 00:25:33 -0700 (PDT)
+Received: from hades.. (ppp046103219117.access.hol.gr. [46.103.219.117])
+ by smtp.gmail.com with ESMTPSA id
+ cn10-20020a0564020caa00b0053e8f1f79afsm9030363edb.30.2023.10.25.00.25.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 23:52:24 -0700 (PDT)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
+ Wed, 25 Oct 2023 00:25:32 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: u-boot@lists.denx.de
-Cc: jaswinder.singh@linaro.org, ryosuke.saito@linaro.org,
- sugimoto.yoshio@socionext.com, ilias.apalodimas@linaro.org,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 3/3] board: developerbox: update flash rawwrite binary size
-Date: Wed, 25 Oct 2023 15:51:03 +0900
-Message-Id: <20231025065103.3101666-4-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
-References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
+Cc: sjg@chromium.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH] test/py: always use autostart on tpm2 selftests
+Date: Wed, 25 Oct 2023 10:25:25 +0300
+Message-Id: <20231025072525.3960316-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,33 +89,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current documentation limits the firmware size to 1.5MB.
-When the fTPM and StandaloneMM-based RPMB secure storage is
-enabled, firmware size is bigger than that size.
-Let's specify the A/B update bank size(4MB) for flash
-rawwrite parameter.
+commit 789ed2784256 ("test/py: replace 'tpm2 init, startup, selftest' sequences")
+changed some of the tpm2 init sequences to 'tpm2 autostart' instead of
+calling 'tpm init', 'tpm startup TPM2_SU_CLEAR', 'tpm2 self_test full'.
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
+The autostart command calls the afforementioned sequence and on top of
+that deals with the 'tpm2 init' return codes if the tpm is already
+started. Since we initialize the tpm from various subsystems now,
+replace the last remaining instances of 'tpm2 init' with 'tpm2
+autostart'.  Since the latter calls 'tpm2 init' anyway we will still be
+implicitly testing the validity of that command
+
+It's worth noting that since 'tpm2 autostart' performs the startup and
+self tests sequences of the tpm we could drop
+'test_tpm2_sandbox_self_test_full' and 'test_tpm2_startup, but let's
+keep the since they test tpm commands and options
+
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- doc/board/socionext/developerbox.rst | 4 ++--
+ test/py/tests/test_tpm2.py | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/doc/board/socionext/developerbox.rst b/doc/board/socionext/developerbox.rst
-index 596cf9f908..46712c379b 100644
---- a/doc/board/socionext/developerbox.rst
-+++ b/doc/board/socionext/developerbox.rst
-@@ -212,8 +212,8 @@ can be installed via NOR flash writer.
- Once the flasher tool is running we are ready to flash the images.::
- Write the FIP image to the Bank-0 & 1 at 6MB and 10MB offset.::
+diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+index 47392b87a98f..1d654cd4a23b 100644
+--- a/test/py/tests/test_tpm2.py
++++ b/test/py/tests/test_tpm2.py
+@@ -61,7 +61,7 @@ def test_tpm2_init(u_boot_console):
+     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+     if skip_test:
+         pytest.skip('skip TPM device test')
+-    u_boot_console.run_command('tpm2 init')
++    u_boot_console.run_command('tpm2 autostart')
+     output = u_boot_console.run_command('echo $?')
+     assert output.endswith('0')
  
--  flash rawwrite 600000 180000
--  flash rawwrite a00000 180000
-+  flash rawwrite 600000 400000
-+  flash rawwrite a00000 400000
-   >> Send SPI_NOR_NEWFIP.fd via XMODEM (Control-A S in minicom) <<
+@@ -100,7 +100,7 @@ def test_tpm2_sandbox_self_test_full(u_boot_console):
+     """
+     if is_sandbox(u_boot_console):
+         u_boot_console.restart_uboot()
+-        u_boot_console.run_command('tpm2 init')
++        u_boot_console.run_command('tpm2 autostart')
+         output = u_boot_console.run_command('echo $?')
+         assert output.endswith('0')
  
-   flash rawwrite 500000 1000
 -- 
-2.34.1
+2.37.2
 
