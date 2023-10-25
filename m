@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E51EC07545
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 05:16:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF83C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FF9887A4A;
-	Wed, 25 Oct 2023 07:15:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE7D287A1D;
+	Wed, 25 Oct 2023 08:10:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V+qLWoRu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D4j6SS/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89B3C87A3C; Wed, 25 Oct 2023 07:15:09 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id E884D87A22; Wed, 25 Oct 2023 08:10:26 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28D2C87A36
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 07:15:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECE6887258
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:10:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6bcbfecf314so1138833b3a.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 22:15:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-32d8c2c6dfdso3356669f8f.1
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:10:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698210905; x=1698815705; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1698214224; x=1698819024; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hD60SfHV9nxHXcrI7Ny6Jjph+UCCDkTfF34GTIduQEo=;
- b=V+qLWoRuB5nW6i8P0WbE3obToz0k8MwSbsbJSqzkTbQ0wLToYd44b5he/Q1gWpyV98
- VZ3oaldh1aBc7MhoJGQs8Ir5mN62BbIiTwHatdFWWH8nd94urSegQmbmQSGhvRd7JR7Z
- qJvWnItOpV3v5ArrgN5CrqJ83qtdrm3p3rpOi21PEjXsmvt9sFe2vJY05Y9U8geq/R4W
- FoRSW+kIzIkHYyFzrm/EgAHFKQ0YdOXWtFVOPXzEKd1GapGwhm6goWholMce2Bo/hujT
- 5+mGh5a6k8+SLPS4ghTheYVsIzq/8ki/7gWasb9wo9umYHiuGvElWDCrKYfVS0koOZmT
- 7j0Q==
+ bh=gHm9JKG1jCvI/3gOMKyLzBKVKLNP430LtTSWUIIaM0U=;
+ b=D4j6SS/lfDzP/KA1JjJ0o+1FAHc/uz2hN32o8lLk4ZCEj4jHiUH9aPk2xeRzKb5lTu
+ JIkyOhteQRqyigRrDGOSM3WhiIgah8ZBC68zvqgldzcS0fCCbQyKEUuQZL3e8c4zMt89
+ zzfkPDE9k/Beb8Ux9WHvxRo0cUgmcQD62x98OVcKmtlInbu7Je/f7kdcqt+5zl4MGPVt
+ 4K5KhymXNjCWVn+aFm1oASOpk0y+vyyDc2UsldGrE60ugdGhMbrliIo5pf28BQPeQXDQ
+ 7OgmrASowJSqJPN+2h8BkY906ZTqz0Y9MAmDZaDu9qTr8gI5Smjj5s4yqV7Q4MwXyaGe
+ /z1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698210905; x=1698815705;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1698214224; x=1698819024;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hD60SfHV9nxHXcrI7Ny6Jjph+UCCDkTfF34GTIduQEo=;
- b=fRs2N4/2PYaQX/vJCWrv5uAT80guyWc2PvpfpBHcoFAvlSd/UOWirxJwLT9etem3HN
- UAl/7PNOTlMtg0RiLq5xsjjf97+HVHcRbYV0vRnSHyYY76JSj87TcSeX2MoAE2Z1/q6K
- DkmV/ajXEkUwTxgMQLefjfuSjz5sI0UIYT0T1oeN9VU4rQEokEDcHFDKSRMINPx9V27y
- UMxsto5znnz+5UG2qeFrKAAP3zqmtqT6L4Czs6rabIisP2IczLfpUdtgS6j340RVHX08
- a5yRZ1VYuw+f1Nzi2MefkbvVrR4qEVhrNXUk+aiuv+wFGu5BqF0JBJln/OowmpEiX3wn
- jCTQ==
-X-Gm-Message-State: AOJu0Yzp0sZs4MKO/wc5hAwxgjJS+3MSYSG8GEFb0rVHCuwpuSGspJGr
- adF5m2qv30gbQXcWKOTfB4CYVA==
-X-Google-Smtp-Source: AGHT+IG4ldCsWs1V+kSVYp3S6svu9doZEg9EUTnaAyZmmwzZgLj8j9FuOuBgkQ4zFVRYHi8Y1miErg==
-X-Received: by 2002:a17:90b:4b8f:b0:27c:f653:37b2 with SMTP id
- lr15-20020a17090b4b8f00b0027cf65337b2mr16464858pjb.1.1698210905512; 
- Tue, 24 Oct 2023 22:15:05 -0700 (PDT)
-Received: from octopus.. ([2400:4050:c3e1:100:65fc:df7c:6edb:619f])
- by smtp.gmail.com with ESMTPSA id
- fz3-20020a17090b024300b002609cadc56esm7715815pjb.11.2023.10.24.22.15.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 22:15:05 -0700 (PDT)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com,
-	sjg@chromium.org
-Cc: etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH 5/5] test: dm: add scmi command test
-Date: Wed, 25 Oct 2023 14:14:27 +0900
-Message-Id: <20231025051427.509602-6-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231025051427.509602-1-takahiro.akashi@linaro.org>
-References: <20231025051427.509602-1-takahiro.akashi@linaro.org>
+ bh=gHm9JKG1jCvI/3gOMKyLzBKVKLNP430LtTSWUIIaM0U=;
+ b=AsBnJX9Tfa3s48BKdehNzbCfpUTek0IY2JVlAhBoqDnU7A7TF+38BlBgh7kN75JERY
+ sij/g7KKPFP3BW5lgVovcHct+4Zncuc9bM3eWUApRsSUia52vQkW9Tl85OvK/xe2iqjB
+ PRLzehuox8YpIAp2BeXdb2/sNJnK5q5IJbDsVHdFH3gf9EXGg4vs6DgxyLmXC8fAMUo3
+ 9KaoD8h7+GnVR2gv/z+rfRLBkh7RUc6G+uYdTCiDd6asw8RBVbDMfTtZu32MfyzC8ZJL
+ qVaKovVxriRkouq+Sj+Y75CZWQMRL93SvA4skGHXOQOMju0bNkGojUui1ep7y+Of6cHX
+ rW4w==
+X-Gm-Message-State: AOJu0YxFkc9IMDYRbCnljbAvIPvd4AyljCW6dexP4c3uNFsz8+S51eMz
+ wCJRaVe573PA+8Zc6D1W232bgWOkONCJGgthKf8=
+X-Google-Smtp-Source: AGHT+IE1TWQduM2TuGOtUFu8YUgOevrh3x+mpg+drCS/bO/OBn/2iqU1/B+Cb711MpG+5epgF6DUCv20/6iw3GN84hU=
+X-Received: by 2002:a5d:62cd:0:b0:32d:9df1:6f6d with SMTP id
+ o13-20020a5d62cd000000b0032d9df16f6dmr9528848wrv.17.1698214223967; Tue, 24
+ Oct 2023 23:10:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231024074110.199623-1-clamor95@gmail.com>
+ <20231024074110.199623-4-clamor95@gmail.com>
+ <20231024191757.GG496310@bill-the-cat>
+In-Reply-To: <20231024191757.GG496310@bill-the-cat>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Wed, 25 Oct 2023 09:10:12 +0300
+Message-ID: <CAPVz0n3b4eH0q3sPGD7UkjVo56r__6AzoJsuwKy+XVPPCQX+xA@mail.gmail.com>
+Subject: Re: [PATCH v8 3/8] power: pmic: add the base MAX77663 PMIC support
+To: Tom Rini <trini@konsulko.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,140 +89,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this test, "scmi" command is tested against different sub-commands.
-Please note that scmi command is for debug purpose and is not intended
-in production system.
+=D0=B2=D1=82, 24 =D0=B6=D0=BE=D0=B2=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 22:1=
+8 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On Tue, Oct 24, 2023 at 10:41:05AM +0300, Svyatoslav Ryhel wrote:
+>
+> > Add support to bind the regulators/child nodes with the pmic.
+> > Also adds the pmic i2c based read/write functions to access pmic
+> > registers.
+> >
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> [snip]
+> > diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max7766=
+3.c
+> > new file mode 100644
+> > index 0000000000..4070235d3c
+> > --- /dev/null
+> > +++ b/drivers/power/pmic/max77663.c
+> > @@ -0,0 +1,86 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
+> > + */
+> > +
+> > +#include <common.h>
+>
+> Should have noted sooner, sorry. Please don't use <common.h> in new
+> code, and audit the include list you have as well (this one looks
+> reasonable I suspect, all the same, so general advice).
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
----
-v7
-* make test assertions more flexible depending on the number of provided
-  protocols
-v4
-* move 'base'-related changes to the prior commit
-* add CONFIG_CMD_SCMI to sandbox_defconfig
-v3
-* change char to u8 in vendor/agent names
-v2
-* use helper functions, removing direct uses of ops
----
- configs/sandbox_defconfig |  1 +
- test/dm/scmi.c            | 81 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+)
+Each and every driver in pmic dir has common.h so it was an obvious
+move to include it as well. I haven't seen that this header is deprecated,
+if so, sure, I will not include it further.
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index e3a2f9eb1708..34e3cc281d7f 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -120,6 +120,7 @@ CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_AES=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_TPM_TEST=y
-+CONFIG_CMD_SCMI=y
- CONFIG_CMD_BTRFS=y
- CONFIG_CMD_CBFS=y
- CONFIG_CMD_CRAMFS=y
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index 2f63f2da16fb..2bcf7ac6fcc3 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -19,6 +19,7 @@
- #include <scmi_agent.h>
- #include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
-+#include <vsprintf.h>
- #include <asm/scmi_test.h>
- #include <dm/device-internal.h>
- #include <dm/test.h>
-@@ -206,6 +207,86 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
- 
- DM_TEST(dm_test_scmi_base, UT_TESTF_SCAN_FDT);
- 
-+static int dm_test_scmi_cmd(struct unit_test_state *uts)
-+{
-+	struct udevice *agent_dev;
-+	int num_proto = 0;
-+	char cmd_out[30];
-+
-+	if (!IS_ENABLED(CONFIG_CMD_SCMI))
-+		return 0;
-+
-+	/* preparation */
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-+					      &agent_dev));
-+	ut_assertnonnull(agent_dev);
-+
-+	/*
-+	 * Estimate the number of provided protocols.
-+	 * This estimation is correct as far as a corresponding
-+	 * protocol support is added to sandbox fake serer.
-+	 */
-+	if (IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN))
-+		num_proto++;
-+	if (IS_ENABLED(CONFIG_CLK_SCMI))
-+		num_proto++;
-+	if (IS_ENABLED(CONFIG_RESET_SCMI))
-+		num_proto++;
-+	if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI))
-+		num_proto++;
-+
-+	/* scmi info */
-+	ut_assertok(run_command("scmi info", 0));
-+
-+	ut_assert_nextline("SCMI device: scmi");
-+	snprintf(cmd_out, 30, "  protocol version: 0x%x",
-+		 SCMI_BASE_PROTOCOL_VERSION);
-+	ut_assert_nextline(cmd_out);
-+	ut_assert_nextline("  # of agents: 2");
-+	ut_assert_nextline("      0: platform");
-+	ut_assert_nextline("    > 1: OSPM");
-+	snprintf(cmd_out, 30, "  # of protocols: %d", num_proto);
-+	ut_assert_nextline(cmd_out);
-+	if (IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN))
-+		ut_assert_nextline("      Power domain management");
-+	if (IS_ENABLED(CONFIG_CLK_SCMI))
-+		ut_assert_nextline("      Clock management");
-+	if (IS_ENABLED(CONFIG_RESET_SCMI))
-+		ut_assert_nextline("      Reset domain management");
-+	if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI))
-+		ut_assert_nextline("      Voltage domain management");
-+	ut_assert_nextline("  vendor: U-Boot");
-+	ut_assert_nextline("  sub vendor: Sandbox");
-+	ut_assert_nextline("  impl version: 0x1");
-+
-+	ut_assert_console_end();
-+
-+	/* scmi perm_dev */
-+	ut_assertok(run_command("scmi perm_dev 1 0 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assert(run_command("scmi perm_dev 1 0 0", 0));
-+	ut_assert_nextline("Denying access to device:0 failed (-13)");
-+	ut_assert_console_end();
-+
-+	/* scmi perm_proto */
-+	ut_assertok(run_command("scmi perm_proto 1 0 14 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assert(run_command("scmi perm_proto 1 0 14 0", 0));
-+	ut_assert_nextline("Denying access to protocol:0x14 on device:0 failed (-13)");
-+	ut_assert_console_end();
-+
-+	/* scmi reset */
-+	ut_assert(run_command("scmi reset 1 1", 0));
-+	ut_assert_nextline("Reset failed (-13)");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_scmi_cmd, UT_TESTF_SCAN_FDT);
-+
- static int dm_test_scmi_power_domains(struct unit_test_state *uts)
- {
- 	struct sandbox_scmi_agent *agent;
--- 
-2.34.1
+About auditing inclusions, I never include unnecessary headers and almost
+all the time run tests to determine the least amount of inclusions possible=
+ for
+correct build and work.
 
+Best regards,
+Svyatoslav R.
+
+>
+> --
+> Tom
