@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95AD2C25B47
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C265C25B47
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 06:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D03B1871E8;
-	Wed, 25 Oct 2023 08:52:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9B0687A73;
+	Wed, 25 Oct 2023 08:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EwPs6Q/d";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hAP7QXHO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 301CC871BB; Wed, 25 Oct 2023 08:52:21 +0200 (CEST)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 2E8B187A61; Wed, 25 Oct 2023 08:52:26 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04A19871BB
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:52:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E35187A72
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 08:52:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-5859d13f73dso3437432a12.1
- for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:52:18 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-1c0fcbf7ae4so3840413fac.0
+ for <u-boot@lists.denx.de>; Tue, 24 Oct 2023 23:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698216737; x=1698821537; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698216741; x=1698821541; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IsPlZ/wDaNWJ0P29qnPTIvw1Av9TUM2cc5+ph3hvcqw=;
- b=EwPs6Q/d3d+yXPWvMp1QQWz5Xe60Qr8vgyLhQ8bzBOsaAfXjsQbrm9B15UuDlJQOXK
- wQu2KhH9JsImaoCyvTPwrWMod91Gcalqs7vsF+477UBFvzGR1Jrm2X+jh0jg32iqhdLr
- P0CulXu7sATsys91gRaJkJlTu9CC1YdGwjR/qFCveiionW82s99FIeAGtNWDwk9shFMl
- msRGiwTlSPXPt70xJq60yTu02sru9lk0lJE7mODWVzKVas/aQ5n2GwO8QjQi2zUbO1NT
- Ru/IzGmgxp4znswuc2OQ23l5f/QuqywpnG7QFtGagSXUU9uwyfuqoFMkMXlm5r3HNHH4
- Q0eQ==
+ bh=an9QRMoz3OuWqsNnFJdi718RRybO9m7G7/ZdMHC9HOM=;
+ b=hAP7QXHOe5IT9IFMZ9oi8I4Du/epVdZKt4/LekwGugybnZQ6yaROphNJwjDAbqT8r7
+ /8tugxKTxlnowotgX55wVRwujeUK/sqzJZdfpkz+KdI0TvQLh9DQktHuwHZQpX5YWDMh
+ seU25ZG+VrfozO/6F11Rok/dWycwkapt6iINp7ZDtOvK9QI78S8iI7Q2K2Okjf7dkGa6
+ i9VnNz/s11U4PlbG1Udo486ezdTBSP3B8SlOODyxH9rf5sWDXxSCU6cbIUI8rFx/HtbP
+ 2FTLD+Jj+14FV2P+xHz1nMBkk8Qbp12toXmMsCRuQgMiOQvUPdhfPH/sO92xLYaSa3yU
+ DdxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698216737; x=1698821537;
+ d=1e100.net; s=20230601; t=1698216741; x=1698821541;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IsPlZ/wDaNWJ0P29qnPTIvw1Av9TUM2cc5+ph3hvcqw=;
- b=GDK5pcLj1x6TEFvg1krnUGr2hSK6kaO5d3IU6XI3+Pn0eNtOF83UNsa5aWha0Cq9po
- LnaF4ypp0qZT0wFPDJMsp6p9W6AZgw2YP8qPG60FKSAicItzGq7Fm2o+v8iGiYJRcSGh
- s1gXT8nHItGYAyUdWX0ajnDQ+kmlMdLRUj6YYZnQPZ+nm6v+rId/hbaEBFDEbkKRzk+T
- bzhqla8X4JY1sfaRZFEWD6NLd20g16QX9qBBuQNfj7gOwGsANLtHrIVCbI0nEV35xrez
- AaCEhRP2L0bWykU31Qg5/q8Xxc8PTSMV8XxVP98AbZ1sGKG6I3mRGNjBPKVMhZ9V6HY2
- N1gA==
-X-Gm-Message-State: AOJu0YzXtHdwDtduE+AtmKFQUiQ4dOuV4+WA4wRYfWz6DQgR3RpFpz0j
- iE3f+UxD9xxf21CHuhxZDFtcgk/GzLaW3EkrlYo=
-X-Google-Smtp-Source: AGHT+IEF4SpDAKtiv1k7UVZI8hAErI7vTYopQqPBl7r5pHNI4KA3ndMHROyaJc9EFN4LA7ILJCA/KA==
-X-Received: by 2002:a05:6a20:9187:b0:15e:a8:6bb4 with SMTP id
- v7-20020a056a20918700b0015e00a86bb4mr5048724pzd.8.1698216737029; 
- Tue, 24 Oct 2023 23:52:17 -0700 (PDT)
+ bh=an9QRMoz3OuWqsNnFJdi718RRybO9m7G7/ZdMHC9HOM=;
+ b=cBiQLjbQW4YetbsLlbVdyiuXxeZCXCbqHYgvHdx9+vJqwEK3AxgKlwHD5xQXytNEfQ
+ zuqKjY7Rj5Ptl0joX8INvBBl7ry5+23UrqpdnR9+KPfyR3wQx+qPpYpBomBMgMLvSFS8
+ uo/FcpTkbkijjlAeBw7WVGKCB2lbVIs27nOA1TH6PaDipKtxDlLo9QAyOd4XgC5WD3yN
+ dNR62193eVTkEkalAiM/9E03D0NDiLh+YhEuweO0r7pb6+NYgryZ4GCVMrsC9+EdafiI
+ v0oGkiwOOTgoMynyfNuX2t8FIWPFKau0KrtGzAIoca3DOfozjVGzg86sQPsDh/OyJDsF
+ W3hw==
+X-Gm-Message-State: AOJu0Yy+IgOLIBG0j5s38GqxISZs3fEL06tNarbd0g3KPkYJRG8EKXc6
+ X6KqVer7GnXEVgd6GabqgvvwNZhrNqDpF553Hl8=
+X-Google-Smtp-Source: AGHT+IHWxL3lk0adizYSF8plKBQFAroL+gd5nZ4uJdUNWoxj3ACMckW+SVw0qZ2SiQ3WdNmxkHzBnA==
+X-Received: by 2002:a05:6870:13c5:b0:1dc:d8c6:39f with SMTP id
+ 5-20020a05687013c500b001dcd8c6039fmr14848424oat.14.1698216741403; 
+ Tue, 24 Oct 2023 23:52:21 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- f8-20020a170902ce8800b001c9c5a1b477sm8468806plg.169.2023.10.24.23.52.16
+ l63-20020a638842000000b005a9b20408a7sm8256922pgd.23.2023.10.24.23.52.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Oct 2023 23:52:16 -0700 (PDT)
+ Tue, 24 Oct 2023 23:52:20 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: jaswinder.singh@linaro.org, ryosuke.saito@linaro.org,
  sugimoto.yoshio@socionext.com, ilias.apalodimas@linaro.org,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 1/3] board: developerbox: remove obsolete NOR flash layout
- definition
-Date: Wed, 25 Oct 2023 15:51:01 +0900
-Message-Id: <20231025065103.3101666-2-masahisa.kojima@linaro.org>
+Subject: [PATCH 2/3] board: developerbox: update old NOR flash layout build
+ instruction
+Date: Wed, 25 Oct 2023 15:51:02 +0900
+Message-Id: <20231025065103.3101666-3-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
 References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
@@ -93,63 +93,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are two kinds of NOR flash layout for the Developerbox.
-Capsule update for the old layout is no longer available since
-it has small capacity for secure world images and can not
-house the TA such as fTPM.
-This commit removes the definition related to the obsolete
-NOR flash layout for the UEFI capsule update.
+v2023.07 is the last version supporting old NOR flash layout
+by default. The later versions of U-Boot, Developerbox is
+configured to enable A/B update and new NOR Flash layout
+by default.
+This commit updates the documentation to pin the U-Boot
+version for the old NOR flash layout. It is still useful
+for the user wants to replace the factory default EDK II
+firmware to U-Boot.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
 ---
- include/configs/synquacer.h | 19 -------------------
- 1 file changed, 19 deletions(-)
+ doc/board/socionext/developerbox.rst | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/configs/synquacer.h b/include/configs/synquacer.h
-index cd7359c2f8..e36e63e81e 100644
---- a/include/configs/synquacer.h
-+++ b/include/configs/synquacer.h
-@@ -40,20 +40,6 @@
+diff --git a/doc/board/socionext/developerbox.rst b/doc/board/socionext/developerbox.rst
+index aa7080e26c..596cf9f908 100644
+--- a/doc/board/socionext/developerbox.rst
++++ b/doc/board/socionext/developerbox.rst
+@@ -42,9 +42,10 @@ Compile from source
+ You can build U-Boot without any additinal source code.::
  
- /* Since U-Boot 64bit PCIe support is limited, disable 64bit MMIO support */
+   cd u-boot
++  git checkout v2023.07
+   export ARCH=arm64
+   export CROSS_COMPILE=aarch64-linux-gnu-
+-  make SynQuacer_defconfig
++  make synquacer_developerbox_defconfig
+   make -j `noproc`
  
--#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
--#define DEFAULT_DFU_ALT_INFO
--#else
--#define DEFAULT_DFU_ALT_INFO "dfu_alt_info="				\
--			"mtd nor1=u-boot.bin raw 200000 100000;"	\
--			"fip.bin raw 180000 78000;"			\
--			"optee.bin raw 500000 100000\0"
--#endif
--
--/* GUIDs for capsule updatable firmware images */
--#define DEVELOPERBOX_UBOOT_IMAGE_GUID \
--	EFI_GUID(0x53a92e83, 0x4ef4, 0x473a, 0x8b, 0x0d, \
--		 0xb5, 0xd8, 0xc7, 0xb2, 0xd6, 0x00)
--
- #ifdef CONFIG_FWU_MULTI_BANK_UPDATE
- #define DEVELOPERBOX_FIP_IMAGE_GUID \
- 	EFI_GUID(0x7d6dc310, 0x52ca, 0x43b8, 0xb7, 0xb9, \
-@@ -64,10 +50,6 @@
- 		 0x33, 0xe0, 0xb9, 0x16, 0xf3, 0x98)
- #endif
- 
--#define DEVELOPERBOX_OPTEE_IMAGE_GUID \
--	EFI_GUID(0xc1b629f1, 0xce0e, 0x4894, 0x82, 0xbf, \
--		 0xf0, 0xa3, 0x83, 0x87, 0xe6, 0x30)
--
- /* Distro boot settings */
- #ifdef CONFIG_CMD_USB
- #define BOOT_TARGET_DEVICE_USB(func)	func(USB, usb, 0)
-@@ -107,7 +89,6 @@
- 	"ramdisk_addr_r=0xa0000000\0"		\
- 	"scriptaddr=0x88000000\0"		\
- 	"pxefile_addr_r=0x88100000\0"		\
--	DEFAULT_DFU_ALT_INFO			\
- 	BOOTENV
- 
- #endif /* __CONFIG_H */
+ Then, expand the binary to 1MB for preparing flash.::
 -- 
 2.34.1
 
