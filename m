@@ -4,128 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 856F2C25B6B
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 08:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9801C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 09:07:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1E8B86F95;
-	Wed, 25 Oct 2023 10:31:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id F3C8787188;
+	Wed, 25 Oct 2023 11:07:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="LNlL9/k9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qfwiGyKE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1560586F95; Wed, 25 Oct 2023 10:31:52 +0200 (CEST)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on0708.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0e::708])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B84D7871FB; Wed, 25 Oct 2023 11:07:37 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D575E841C5
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 10:31:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 754DA8716C
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 11:07:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Wx3DalM6nnd5w7V3BKaz5tewC1catlGmcrCVTtWD4h0jxHSmT/sQgLCGAIEGHRAbWjY4CWTq3aKifkHqgA2zowNB3vPk1TNr2ni4DD2KWTAtmbrKpTxXxEGw1Pr8kRTpVKaODU2ilHCmPphq5eXD1PhoeyHSTs4HV6oeWb1TBXYjmxMb8qCRTld7mPW9U053hOqoMKEf5PGlqnR6M2rQKQjd4KduEH/X6YOliobduhSFkChyU5+WWbM7wZ8HrNEnl7BVSaTKrumCOIGq8IjDjwqT7Pdn89kFOGHhM6e37LXN97EWmfw6FK2P1AiAsdrGKod61284OzPqWTsC3RKuxg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HGrHntXP/5yg/g08WW5g0FBQJCi371F6o7Cok1V4VEw=;
- b=ZIgJQ/N73h0SAA52f3FXFvp8vNVvMLofXcBECLxHSH/F2yL4Rzx0j+vQW5lDQDpQR+8fh321JcAOKM/S5Bh99JXswUxU1n0S9CsAIzxbq1xz2mxLatEq4X7VtFo9bDngJnyPxpkvMVR2NdDO0HQq8/7FxGtVai3UQtIXpNbJEbuaxythlGh8YExq+svtacX5M6LWNHuRGHtNxVcj0tGtxIBF1dyC7hD54Viq1XG5AWbd0IUrKT3Scyaa0mMhRnArkaYNc/qCKiQcrZzFWTVD2eqNKVwITldid23z5fLRRigKojMdbq+X4vvJMb0UWb4pr+Jjk+05A2DDXjsgY4+5dg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HGrHntXP/5yg/g08WW5g0FBQJCi371F6o7Cok1V4VEw=;
- b=LNlL9/k9ZYbihqKSI970ZqcHVeiPLJ9ZlXVQK/bZ9wTXp9oJgKVn5R+HlwYQ6POu3umqV15coAGaYnBoEk5b5ytgwS7/8Cu6p8mwDDZIF3D1WqsoZsSFvzdXm8GelGAQ6LyuVAXG4smwGWClTbXb8XO386iiWzytYzXYo6ZX4Wc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by VI1PR10MB7830.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:1cf::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.36; Wed, 25 Oct
- 2023 08:31:46 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6907.030; Wed, 25 Oct 2023
- 08:31:46 +0000
-Message-ID: <7bf19381-d820-47d1-b65e-ba918b9c2239@prevas.dk>
-Date: Wed, 25 Oct 2023 10:31:43 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] cli: Consume invalid escape sequences early
-Content-Language: en-US, da
-To: Yurii Monakov <monakov.y@gmail.com>, u-boot@lists.denx.de
-References: <775fa336fa5bfb2b9e1e892ee631bd743ea12364.camel@gmail.com>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <775fa336fa5bfb2b9e1e892ee631bd743ea12364.camel@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MM0P280CA0083.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::24) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1c9d132d92cso10742285ad.0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 02:07:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698224854; x=1698829654; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cilmICyeis7c/+vMMkiZRhmG9dsZY5GehpO5J2e4qME=;
+ b=qfwiGyKEn3ysl5OZ1nmmUNvx2GeA5LyO211FlllheoU5Q81hXtq4nP9EluPW9HYLPr
+ zjdrEwJQtiTSif5bXy9EPAHg8Y+Bd6pHVscRMRlZKXqhbJn3RhQ5JNJyiuP2TOJmSnCD
+ 06xboA1MWRUkd3uATxq48imQIZUXnsUUPtRSdgjYr/qJPDcDlurhXyohkEADZ1pSlPoM
+ parjJSb/ec8fWTvX28ytyGXZaTvr9l/pUx2XudDjHVsh6RyivNVyFuT7hvdZ6PWtx16b
+ Wl/pjGtA+0ChWXRchhQ4TPOHb/FAkC0WNDbMD1ceJQYzjvj8gDG2wpHD76OY7xB8rzaL
+ ybhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698224854; x=1698829654;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cilmICyeis7c/+vMMkiZRhmG9dsZY5GehpO5J2e4qME=;
+ b=SOAw6go8s5N06C2a5/yFDXS0pwFzGIDoBeHAeRIfKDt7jBYHq0+NpFcYd3ZBzyo4zC
+ Metk10tstiqOqftbx+9647HPvSwDrK8hZSNlCn85b8Bgv2Y3qcre6Cg4Nk1StG0l9hgF
+ 0ByspLei+9OXALPlPNWn4y820rpXanFaRsACo4Mr8XOZZsML2ThHVET45zZ71524ZKAr
+ Y/UsIYmdcQhP0hDnGTzUg4PPCCRY1nws5hcH+2jAoVJghiDNcFfHGOVuCKAogSY10iV1
+ ECQAhDENHoOsg8DOV+Usf8sdlVCIU7t8TijxbL/ICWKSX/vIYv6zXfmL8cpWqqGT+UoC
+ wLUA==
+X-Gm-Message-State: AOJu0YyzRfq2UVYJTcyUx8inrW/88iOCoV7QAuODvUmSPQYdYf+J/2VX
+ PYIrh/sY/7ohNhdTIYutQu4ksg==
+X-Google-Smtp-Source: AGHT+IECxuYtWcZC6u/UepguQPKhkF+dMc4zI05iAA2w3u8dkyXyoqiDcphnl+DAp4kuZ6PWNn8m1A==
+X-Received: by 2002:a17:902:dac6:b0:1c1:fbec:bc3f with SMTP id
+ q6-20020a170902dac600b001c1fbecbc3fmr14082583plx.5.1698224853658; 
+ Wed, 25 Oct 2023 02:07:33 -0700 (PDT)
+Received: from octopus ([2400:4050:c3e1:100:65fc:df7c:6edb:619f])
+ by smtp.gmail.com with ESMTPSA id
+ b3-20020a170902d50300b001b8622c1ad2sm8691539plg.130.2023.10.25.02.07.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Oct 2023 02:07:33 -0700 (PDT)
+Date: Wed, 25 Oct 2023 18:07:29 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Michal Simek <michal.simek@amd.com>
+Cc: trini@konsulko.com, sjg@chromium.org, etienne.carriere@st.com,
+ u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@foss.st.com>
+Subject: Re: [PATCH 3/5] cmd: add scmi command for SCMI firmware
+Message-ID: <ZTja0eN4nKSfk+7Z@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, trini@konsulko.com,
+ sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de,
+ Etienne Carriere <etienne.carriere@foss.st.com>
+References: <20231025051427.509602-1-takahiro.akashi@linaro.org>
+ <20231025051427.509602-4-takahiro.akashi@linaro.org>
+ <cc22d995-1234-477c-bd0f-6ca1946103ff@amd.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|VI1PR10MB7830:EE_
-X-MS-Office365-Filtering-Correlation-Id: 497fbf2c-e206-40a6-bf57-08dbd534d350
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: jzqIh9+f4vFPxNBf/adykDOdFiUb+NfZhOOv2RGBXhbHAfYAftBkwnw3uvxzKcZR5kD6Nfa5N+8IYxt81Gx0br3GTo+U4yrOk8RlHisIDGG3MCp13PxSokISUbc7AaO2IQLk0veMEDvczK++cP+X+sGZpsYCHlhw2xdTmrrfxBCoKydo4ysxEl+64F9K3KGeYp2jD42uQ3M154uy/avQmabuTozyJS/lBkE1tIeLHk4oJ2IaDBuBveqPIhqsPYqk3pmx5wyuyW6d8iXAvtpkLZDeRnab1DjKioCCltD/pg/u6/VINFb0iAvvG5tQNSREMc0hGGpq5wbqFZ0jPsGDicGISN9QwPqTdl6CCJL+cvHlKmjxwHhITxYkrx21BHyNtosUEjWOtjs7BN+Vgso2A7eWbdj2YCDN4xdhNKOk/aPKciWEgsX1HwR6J1GC5RIRZGKNo/HSzEbVMHOP3m05BtlGYIsy8Fy4Sdrt0gGG1Fr++XPySU/dDrGcTzxjYlL8KGeIaHlb0Q8VNydHZMES5JGfWoQHOFJAIHdC8YnrdoyCLpdCby1B3B/Qm4G2rs2iHgTOaqRvgIerSLwo4nyoOe2CNEeE1b3EcIWApT6i1Gv/TQvurXGNeKy7IEDsJFyGKlw71fp/Zv012ch33JlBgQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(39840400004)(396003)(346002)(376002)(136003)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(31696002)(86362001)(31686004)(38100700002)(478600001)(316002)(2616005)(6486002)(36756003)(66556008)(5660300002)(8936002)(6512007)(6666004)(66476007)(6506007)(66946007)(41300700001)(26005)(8976002)(2906002)(44832011)(8676002)(43740500002)(45980500001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UTlOREtObGQzdTk1dW83TFZyTC9kN2JKUXhIKzcybDJCT2crYmVDTmRxcVY3?=
- =?utf-8?B?bGpxckxXSFl1WUpFeUx3cFJhaGsrZjFYTkhrWDJOZFFXVjZDREEyaG9XSm01?=
- =?utf-8?B?Z1RtOFlDN2ZiS2RtOXhycWc3cFRwNEZvQkl3M0poR1JYd2lpcFRicitVME5I?=
- =?utf-8?B?OEpiRFpEVFRtY2VVd2FNa0ZvVFJGcW8zSFh4dXNCN1pJeHYrQ3c1VXgzWllm?=
- =?utf-8?B?RTExZWtPUDNNY0NFeW5sOW9STVR6ak5zeWdSdjYwZHdkRXVBOUZrYUNwN1JK?=
- =?utf-8?B?dFFLcnd2cllBNmVFZWNUem02U1Y4aGxrMTRtNDRDeDdHd1JuSVFsbEdOcFFj?=
- =?utf-8?B?elBxYTcxVks1TFhiNTB5YTFaQnU0ZHJKK0kyNmlDZkRJVlF2S3J3VjRBSG4r?=
- =?utf-8?B?YURXRGZzTDR0WmxtQThiNmtiOHo1aFVxenBhUzlhdTBkc1ZSUGwwRlBkRlFo?=
- =?utf-8?B?Mk4yTHQ5VXE2SHlqUEN1YUNEanU1UW5hbCtNTUoxb3k4U3ZFL0h2Y0FwMVFx?=
- =?utf-8?B?K1VYckg2SlR0dXozMDYvVTJWTkx5NjQxa3p4Z1pPMGFrcG9ranhsU0huWVdw?=
- =?utf-8?B?K2g2VzU4NFV0TG1ocGxLbmwwaG5CKy9xT3pSMS9EQlhET0VOa1VkcW9KakFG?=
- =?utf-8?B?dWN3dmZqb1gwWVB4SzM4bkE0Q1ZsQnZYZkFLWnl6UEVQd3l3MlNNOHRwUWNw?=
- =?utf-8?B?Z2pCMk9DWkc0VkFySzQ0WDA1RDZIWVpqZkVFdWljdndJaUI1eUpEZEswTkI5?=
- =?utf-8?B?QnBCQ1hwemVGL2NiVDJXM0UrM0xzTDM4V1FLTEl4cjhDOGhjMWdqRmhicjA1?=
- =?utf-8?B?bzM0dU1qbVNHZDZzSEVTbGswT1g5TkpKMy9PTStSMDZEaFJITGllWDJmZHYx?=
- =?utf-8?B?cTFMZEw0WGxWM1NQeGlCWUg1ZFk2MEJweGJ0T1l6Zy9MUllBaVRsdGNwdi91?=
- =?utf-8?B?YVg4Zk9IQ2szK0ZFUUlXQ3lBUEluNTJhcmEzUE9jYVpuM2dsNzZIdE03VU9P?=
- =?utf-8?B?TmJXb2lReGJpNnc5V1BDYTlOUlhtbktkSGhXc0hYdUdQUVEzVTcxT3RFN0xK?=
- =?utf-8?B?RytnMUp4RVlzQ0dJaDY4Y05YRjlUcTVPaENQOUNPUGU0ajFYbGNaOGlvcXJW?=
- =?utf-8?B?L2JpKzlYQTlHb0pMc3hUeUhQM1FvakJUc3g2L25BRTZ0emhVRU9ob2V3OGZi?=
- =?utf-8?B?VlZkQlZ4UXBKN05TU1puSDVEejExanJ2M3RjOWFJUG1uSHhaNmNOWHk1a1FC?=
- =?utf-8?B?TW9RZ0g2NDJvaEVDNCtBdFZQMTRJdGdEUTRZYTloNVJsaUJzSmlCT0E4c3lV?=
- =?utf-8?B?cWtMMm1tMVlpRGwyRmpCL0l6aWRuSjlTRk1RR1VWV2RnZm55eVcwNWxBUDJm?=
- =?utf-8?B?d2g0UXBxWGNMbTVFdjJCa2ROODI0blJwNUNxZG1NaWFaSzh1cVp1aUN1TEJQ?=
- =?utf-8?B?SFpyQ0ZQcDBkRmJ3N1BwcEg1U0tycjVKVEJ4YkZtUFBjM2FEamxTdThsZFQ0?=
- =?utf-8?B?S1RXblQ5cDhkMjZRenNEcGJ0bHlFUjJLelMvV0VPYXEwV3JGdFB2UkF2bytw?=
- =?utf-8?B?QzhBSVV5WUdnLzlaSFZpK2ZzbkQ4dlJwdCtjU3MvVUxrYTdyV2Voc1V5YlJU?=
- =?utf-8?B?TXFCdmhKQ1lnZkhQVnhrMndJdmtFK1E1RGU0K3hRWWh1SmNGbGxJRzAxeHVt?=
- =?utf-8?B?ci84ZzRzelRjR0creEZhaUdGK1dpN21Ia05LZVNzaEhCaGhsK0FOeU9STE9C?=
- =?utf-8?B?eHFkZWxrZFlXSDhoMWRBOUJLcXM5Nm5FcU1CTXpKdHFCRHhxYSt1dGJlaVVj?=
- =?utf-8?B?Z29VMmFYN2w0b016eFI1V1hVQm5NNHg5ZGdVYUVpdUJVbmQ2dDFEdElrcUh1?=
- =?utf-8?B?VWJWZGNtaDJBSmN3aXp3ZlJNUmpSbGV6Z3JwM2syMHNuNmxFVnhTTmpUREtw?=
- =?utf-8?B?eU5sMTA3MFVxV0t0cEtOeVhmSXpMNUV5Y0tRVmRQUmwrYUd6TGZ4Sm05VTh1?=
- =?utf-8?B?bThNS3lDL1RTNW9zZDB1VnZnRlJYRElhVDhoUUpoZEpjeDNIbStyRkJseWVC?=
- =?utf-8?B?cVVjRWRRclUwenUwTUk1eSsrMTdzREFVR1I1dUFxV1U3aTNSaW5WUmk3OXUr?=
- =?utf-8?B?RFU5WG9xQW5iaGZVMDdXUk9BR2FlSVVPcS9ZaC9DQ050c290YzdYckh4RVhp?=
- =?utf-8?B?dWc9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 497fbf2c-e206-40a6-bf57-08dbd534d350
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2023 08:31:46.4558 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eR+qEwkgBA6P+ypUET2J7lUONeYB44l22odJrH8e84ertasEdCajQ0zNNlx7IbjWLQcECD01Y/C5E8Hb7eX+3SbVZgnRCFCf8ts1dbMjBhI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB7830
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cc22d995-1234-477c-bd0f-6ca1946103ff@amd.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,37 +98,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/10/2023 10.16, Yurii Monakov wrote:
-> Unexpected 'Esc' key presses are accumulated internally, even if it is
-> already clear that the current escape sequence is invalid. This results
-> in weird behaviour. For example, the next character after 'Esc' key
-> simply disappears from input and 'Unknown command' is printed
-> after 'Enter'.
+Hi Michal,
+
+On Wed, Oct 25, 2023 at 09:29:04AM +0200, Michal Simek wrote:
 > 
-> This commit fixes some issues with extra 'Esc' keys entered by user:
 > 
-> 1. Sequence <Esc><Esc><Enter> right after autoboot stop gives:
-> =>
-> nknown command 'ry 'help'
-> =>
-> 2. Sequence <Esc><p><r><i><Enter> gives:
-> => ri
-> Unknown command 'ri' - try 'help'
-> =>
-> 3. Extra 'Esc' key presses break backspace functionality.
+> On 10/25/23 07:14, AKASHI Takahiro wrote:
+> > This command, "scmi", may provide a command line interface to various SCMI
+> > protocols. It supports at least initially SCMI base protocol and is
+> > intended mainly for debug purpose.
+> > 
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
+> > ---
+> > v3
+> > * describe that arguments are in hex at a help message
+> > * modify the code for dynamically allocated agent names
+> > v2
+> > * remove sub command category, 'scmi base', for simplicity
+> > ---
+> >   cmd/Kconfig  |   9 ++
+> >   cmd/Makefile |   1 +
+> >   cmd/scmi.c   | 335 +++++++++++++++++++++++++++++++++++++++++++++++++++
+> >   3 files changed, 345 insertions(+)
+> >   create mode 100644 cmd/scmi.c
+> > 
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 205df2f1fb65..c940051eba91 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -2550,6 +2550,15 @@ config CMD_CROS_EC
+> >   	  a number of sub-commands for performing EC tasks such as
+> >   	  updating its flash, accessing a small saved context area
+> >   	  and talking to the I2C bus behind the EC (if there is one).
+> > +
+> > +config CMD_SCMI
+> > +	bool "Enable scmi command"
+> > +	depends on SCMI_FIRMWARE
+> > +	default n
+> 
+> As I said in previous email. default n should be removed.
+> It is default option.
 
-Thank you! This has been bugging me for years, since we have
+I see.
+I hope that Tom will take care of that when merging if there is no
+other comment.
 
-CONFIG_AUTOBOOT_DELAY_STR=" "
-CONFIG_AUTOBOOT_STOP_STR="\x1b"
+-Takahiro Akashi
 
-and pressing <esc> to stop autoboot did have that side-effect of
-swallowing the first following char. But I never found the time to dig
-into why or if it was even fixable.
-
-Tom has already applied this, but nevertheless
-
-Tested-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-
-Rasmus
-
+> You can take a look at least on this commit.
+> 
+> commit b4c2c151b14b59a2403675526adf666710cade67
+> Author:     Michal Simek <michal.simek@amd.com>
+> AuthorDate: Fri Aug 27 08:48:10 2021 +0200
+> Commit:     Tom Rini <trini@konsulko.com>
+> CommitDate: Tue Aug 31 17:47:49 2021 -0400
+> 
+>     Kconfig: Remove all default n/no options
+> 
+>     default n/no doesn't need to be specified. It is default option anyway.
+> 
+>     Signed-off-by: Michal Simek <michal.simek@xilinx.com>
+>     [trini: Rework FSP_USE_UPD portion]
+>     Signed-off-by: Tom Rini <trini@konsulko.com>
+> 
+> I have also sent one more resync patch and CC you there too.
+> 
+> Thanks,
+> Michal
+> 
+> 
+> 
+> 
