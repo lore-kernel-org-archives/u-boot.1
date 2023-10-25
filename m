@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2D1C0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 12:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC3A7C07545
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 12:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6124C86EF1;
-	Wed, 25 Oct 2023 14:10:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 150C28744B;
+	Wed, 25 Oct 2023 14:11:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Hey08UCw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D95786B75; Wed, 25 Oct 2023 14:10:38 +0200 (CEST)
-Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
- [IPv6:2607:f8b0:4864:20::e2f])
+ id BDD458744B; Wed, 25 Oct 2023 14:11:54 +0200 (CEST)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com
+ [209.85.160.46])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0300586EF1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 14:10:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4646F8717E
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 14:11:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2f.google.com with SMTP id
- ada2fe7eead31-457c19ebb3aso2039405137.1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 05:10:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698235833; x=1698840633; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/XjQwMSrpveSNtOfgwJcjVLRj1OJBrqOs6s7vuBGiYI=;
- b=Hey08UCwa/fH8/Vt/bN4dvsFrc+mXsD9Qb7y4xtGC+0oHO7cOb3s27wys5kvhl8LV2
- CqlncSoWcJKiOSKpm14J+5RrLmgtzAKR9DwWKV17bcfLMnx/Bx/tvXY5IPu1HywKOIDC
- E1bBYcpFi0t//2EJz7it4uQOrHSiHG86G6ISm6m9rmoJzgye2FW2BBYCt7fCVTxXXSZc
- 4PVv/ftZFiw/xQmSmFpQ2dPe0E4hy45xvwHxpd4TLgkPEJFihSayFA+P166nOanm9ngE
- NTkkjwu3Un1ZiK3QFW4xkJ5T0E38JLyilHokPynHeCBEi8LpHevI6fHBDNmHTq3WPkPt
- nmGA==
+ spf=pass smtp.mailfrom=robherring2@gmail.com
+Received: by mail-oa1-f46.google.com with SMTP id
+ 586e51a60fabf-1d544a4a2f2so3632475fac.3
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 05:11:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698235833; x=1698840633;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/XjQwMSrpveSNtOfgwJcjVLRj1OJBrqOs6s7vuBGiYI=;
- b=m80UOnsixYIjLPInWoUbVHYtRKmwHF/vMSxuI7/eRW662PQLMO94jQXL/Dp1MpSeZB
- EIaw/V6Z/Xh4lkkBPqxSCmZCrXQncfasIEWVYwUmVyY13FCaO1x0gBWGb30i5JLzeu9P
- P1jyumjUx8ej00yTUA6vhG/59Zy52cH7wWOFqmf56w4SCXqTKcHfK6ZZUWPpD6QcLT89
- rvWwCldgNNtYcGQ4L1WLWbrCFb7FFSbnIVhEG2bXq9yX6NkPtNDJW15vOr1nAFePR7Qs
- +nT07kRiieL9gYrcr0hykdwSwWvyy0z9e8WMtNuWcZyQWwJrYehy08kEkaBRwWVODbXQ
- mJOA==
-X-Gm-Message-State: AOJu0YxnvgpjCIVyqyp8ra23ehlf17t1irJu3Etn/NXCu4RjaARu+yB8
- fvgsxXj8a1VjV7JnomVPOYxulqkkhPjsfE+LlFZ3rg==
-X-Google-Smtp-Source: AGHT+IFLWkNK1O+btOFA61S8rcs7TgCyLYCH3DYRo7AjPUqWCdGt2R2UMBnLxm8GG3piVVW2CBo+h7yfUoz22TRt7qY=
-X-Received: by 2002:a05:6102:5d:b0:45a:98d9:38ea with SMTP id
- k29-20020a056102005d00b0045a98d938eamr5266001vsp.16.1698235833243; Wed, 25
- Oct 2023 05:10:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698235909; x=1698840709;
+ h=date:subject:message-id:references:in-reply-to:cc:to:from
+ :mime-version:content-transfer-encoding:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=HCPxgs4NDh+ho3+ibefi5n2+RrXmyVlZVu+Q51te2v4=;
+ b=vJk48NjYA46cw3+XNgh5Afo16uGnpThcG3NRFY/fjZ1dhSB01vjbL/HH7UqjlSjryx
+ HPICsA2IjHVYGed2JEJfEEnq9IVIbz2fZMVOqGsc9zOLlmccp50j3RVOcJvqsiW/oFWb
+ L3uPhMnale3CZ3eDMM8+m6XgCNvOKcCW1PS0M1ko/7MnBTKYupoBx31Q6UPrZIp7tRHV
+ ZlhbNWcL843dQNjncE3upePr5+VxxNVLfBInq/oJ+v1/yEnX4mq8WVm2VT/1ijcN8TCc
+ TwBcbr4qr1T43VgCOY1wEG8Go6junp0YXibYAfUNNKQKoWWI+h157i7kl5tV6QWwEtBO
+ p+2Q==
+X-Gm-Message-State: AOJu0YzIYuujJ3l3zmOxzuIINsZq0HurZtC++Ve3payZsqU5imDfcm5d
+ uNLTYubzrM5WIAPN5SVmRQ==
+X-Google-Smtp-Source: AGHT+IHK4CWlhFUcrr2tQOB6IBVUM5SaULgdBfzfqNt/82aSi0iQDTiGIhgrsbRNKvEcKAMBHVkAfA==
+X-Received: by 2002:a05:6871:78a:b0:1e9:d25d:3cb0 with SMTP id
+ o10-20020a056871078a00b001e9d25d3cb0mr18681753oap.21.1698235908781; 
+ Wed, 25 Oct 2023 05:11:48 -0700 (PDT)
+Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net.
+ [66.90.144.107]) by smtp.gmail.com with ESMTPSA id
+ nd25-20020a056871441900b001dcfaba6d22sm2620513oab.46.2023.10.25.05.11.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Oct 2023 05:11:48 -0700 (PDT)
+Received: (nullmailer pid 3367369 invoked by uid 1000);
+ Wed, 25 Oct 2023 12:11:47 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
-In-Reply-To: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 25 Oct 2023 17:40:22 +0530
-Message-ID: <CAFA6WYObsw7M+j6miQWYLVxd97v-d-RGwtBK+Ygk9v0W41ygNw@mail.gmail.com>
-Subject: Re: [PATCH 0/8] arm: mach-snapdragon: Qualcomm clock driver cleanup
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- u-boot@lists.denx.de, Konrad Dybcio <konrad.dybcio@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+From: Rob Herring <robh@kernel.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>, Conor Dooley <conor+dt@kernel.org>,
+ Rob Herring <robh+dt@kernel.org>, devicetree@vger.kernel.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>, linux-kernel@vger.kernel.org,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Michael Walle <mwalle@kernel.org>, linux-mtd@lists.infradead.org,
+ Tom Rini <trini@konsulko.com>, Richard Weinberger <richard@nod.at>
+In-Reply-To: <20231024213940.3590507-2-sjg@chromium.org>
+References: <20231024213940.3590507-1-sjg@chromium.org>
+ <20231024213940.3590507-2-sjg@chromium.org>
+Message-Id: <169818808080.999988.12536383382799868342.robh@kernel.org>
+Subject: Re: [PATCH v5 2/3] dt-bindings: mtd: binman-partition: Add binman
+ compatibles
+Date: Wed, 25 Oct 2023 07:11:47 -0500
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,95 +86,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
 
-On Wed, 25 Oct 2023 at 01:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> This series begins making some headway towards cleaning up Qualcomm
-> platform support in u-boot. The following is a rough overview of the
-> changes:
->
-> * Move the Qualcomm clock drivers out of mach-snapdragon and into clk/qcom
-> * Introduce per-platform clock driver configs to decouple Qualcomm platform
->   support from mach-snapdragon targets.
-> * Add the IPQ4019 clock driver, removing it from mach-ipq40xx and introducing
->   the reset map.
-> * Merge the qcom reset driver is into clk/qcom and rework it to be
->   compatible with upstream devicetrees.
-> * A callback model is added so that multiple clock drivers can be
->   compiled in at once.
-> * SDM845 gains support for enabling/disabling all gate clocks (CBC's) by
->   way of a new "gate_clk" abstraction.
-> * Preperatory cleanup work is done to simplify the bringup process for
->   new platforms.
-
-Thanks for your cleanup work. You should have at least CCed the board
-maintainers (board/qualcomm/*/MAINTAINERS). Were you able to test this
-series on all the existing Qcom platforms supported?
-
->
-> Further details are included in each commit.
-
-I will give this series a review.
-
->
-> The primary goal of this series is to prepare for enabling several new
-> Qualcomm platforms in u-boot as well as additional peripherals, while
-> minimising the amount of copy/pasted board-specific code.
->
-
-I suppose this series would move us closer to directly importing DTs
-from Linux. Do you plan to close the remaining gap (serial DT nodes
-are on top of my head) before adding further platform support?
-
--Sumit
-
-> This series conflicts with a previous series introducing support for the
-> Qualcomm RB2 board [1], I plan to resend this initial support pending
-> acceptance of this series and several other cleanups.
->
-> [1]: https://lore.kernel.org/u-boot/20230324080418.3856409-1-bhupesh.sharma@linaro.org/
->
+On Wed, 25 Oct 2023 10:39:17 +1300, Simon Glass wrote:
+> Add two compatible for binman entries, as a starting point for the
+> schema.
+> 
+> Note that, after discussion on v2, we decided to keep the existing
+> meaning of label so as not to require changes to existing userspace
+> software when moving to use binman nodes to specify the firmware
+> layout.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
-> Caleb Connolly (7):
->       clk/qcom: move from mach-snapdragon
->       clk/qcom: add per-platform configs
->       clk/qcom: move ipq4019 driver from mach-ipq40xx
->       clk/qcom: sdm845: add register map for simple gate clocks
->       clk/qcom: use function pointers for enable and set_rate
->       clk/qcom: add mnd_width to clk_rcg_set_rate_mnd()
->       clk/qcom: fix rcg divider value
->
-> Konrad Dybcio (1):
->       clk/qcom: handle resets and clocks in one device
->
->  arch/arm/Kconfig                                   |   2 +
->  arch/arm/dts/qcom-ipq4019.dtsi                     |  14 +-
->  arch/arm/dts/qcs404-evb.dts                        |  19 +-
->  arch/arm/mach-ipq40xx/Makefile                     |   1 -
->  arch/arm/mach-ipq40xx/clock-ipq4019.c              |  88 ------
->  arch/arm/mach-snapdragon/Kconfig                   |   4 +
->  arch/arm/mach-snapdragon/Makefile                  |   5 -
->  arch/arm/mach-snapdragon/clock-sdm845.c            |  98 -------
->  arch/arm/mach-snapdragon/clock-snapdragon.c        | 181 ------------
->  arch/arm/mach-snapdragon/clock-snapdragon.h        |  48 ----
->  .../mach-snapdragon/include/mach/sysmap-sdm845.h   |   3 +
->  drivers/clk/Kconfig                                |   1 +
->  drivers/clk/Makefile                               |   1 +
->  drivers/clk/qcom/Kconfig                           |  52 ++++
->  drivers/clk/qcom/Makefile                          |  10 +
->  .../clk/qcom}/clock-apq8016.c                      |  41 ++-
->  .../clk/qcom}/clock-apq8096.c                      |  41 ++-
->  .../reset-qcom.c => clk/qcom/clock-ipq4019.c}      | 165 ++++-------
->  drivers/clk/qcom/clock-qcom.c                      | 303 +++++++++++++++++++++
->  drivers/clk/qcom/clock-qcom.h                      |  96 +++++++
->  .../clk/qcom}/clock-qcs404.c                       |  97 +++++--
->  drivers/clk/qcom/clock-sdm845.c                    | 265 ++++++++++++++++++
->  drivers/reset/Kconfig                              |   7 -
->  drivers/reset/Makefile                             |   1 -
->  24 files changed, 938 insertions(+), 605 deletions(-)
-> ---
-> base-commit: 30d01b582f2274eb8c808026c5fb4c33e9f2210d
->
-> // Caleb (they/them)
->
+> 
+> Changes in v5:
+> - Add mention of why 'binman' is the vendor
+> - Drop  'select: false'
+> - Tidy up the compatible setings
+> - Use 'tfa-bl31' instead of 'atf-bl31'
+> 
+> Changes in v4:
+> - Correct selection of multiple compatible strings
+> 
+> Changes in v3:
+> - Drop fixed-partitions from the example
+> - Use compatible instead of label
+> 
+> Changes in v2:
+> - Use plain partition@xxx for the node name
+> 
+>  .../mtd/partitions/binman-partition.yaml      | 50 +++++++++++++++++++
+>  1 file changed, 50 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
+> 
+
+My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
+on your patch (DT_CHECKER_FLAGS is new in v5.13):
+
+yamllint warnings/errors:
+
+dtschema/dtc warnings/errors:
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml: properties:compatible: [{'enum': ['binman,entry', 'u-boot', 'tfa-bl31']}] is not of type 'object', 'boolean'
+	from schema $id: http://json-schema.org/draft-07/schema#
+/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml: properties:compatible: [{'enum': ['binman,entry', 'u-boot', 'tfa-bl31']}] is not of type 'object', 'boolean'
+	from schema $id: http://devicetree.org/meta-schemas/keywords.yaml#
+Documentation/devicetree/bindings/mtd/partitions/binman-partition.example.dtb: /example-0/partitions/partition@100000: failed to match any schema with compatible: ['u-boot']
+Documentation/devicetree/bindings/mtd/partitions/binman-partition.example.dtb: /example-0/partitions/partition@200000: failed to match any schema with compatible: ['tfa-bl31']
+
+doc reference errors (make refcheckdocs):
+
+See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20231024213940.3590507-2-sjg@chromium.org
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
