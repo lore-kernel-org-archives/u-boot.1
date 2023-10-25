@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2467CC0032E
-	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 526B9C0032E
+	for <u-boot@archiver.kernel.org>; Wed, 25 Oct 2023 23:05:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EBA4874D6;
-	Thu, 26 Oct 2023 01:02:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C1C4887ABA;
+	Thu, 26 Oct 2023 01:05:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="F3v5btkr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jIk0VJjq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87D8F874D8; Thu, 26 Oct 2023 01:02:46 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5561C87AE7; Thu, 26 Oct 2023 01:05:08 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38EBC86F9F
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CC3B87ABA
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:05:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1698274951; x=1698879751; i=xypron.glpk@gmx.de;
- bh=i4Pxy1xbCwWhJvU6XpaQaPRIzsKIPHlMr8sSE8Slluc=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=F3v5btkrtLCEHJNGIRd+6r4PWbyN11yIocahv85SyTKttM3tvJvAr2QCIXLf6+8c
- PPI5tBVV7Oeuh7jL6ftgmTA1noE/KRUAACggLV6yDfsqzuD8Fgiq1vordqQpaZOgw
- 0+fCJIhxOVv4wuVeTOIpp1/wvSMmrFXWk3KYZv3ANJuP50EvVxewJNdk4BTOS6NCo
- nWPdPGw2roaYSQjhWNacqlIEf3HI+VaS4D+OrqGYcKcIPB03mEU7tEJyvSW/Oa9aX
- iSvGd6yAaW7XeSrmCmEPL59SNwnkmgeCxtPotxjOuXclroo/chCYSKAxf3M06TYpy
- NoFlEr/cyUNp/NTPqA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M26r3-1qtIzO05zl-002YGr; Thu, 26
- Oct 2023 01:02:31 +0200
-Message-ID: <cce41111-3870-420f-9ca2-0a1ba51b3eb7@gmx.de>
-Date: Thu, 26 Oct 2023 01:02:40 +0200
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7789aed0e46so21868885a.0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 16:05:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698275102; x=1698879902; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ImYBP4/Ayel812g8M37RPAtrPL1Zd/m74kcJ1dewS+M=;
+ b=jIk0VJjqZDxriqKS185yIdJ3V1jwti+iyHXSTAK0ZNZYz7nrDPc1QJJinGTDsolpG7
+ NXU2HY1rrgVfPgeNC8JpQD/3U4ErOqJ/FAwwb+dvFDkUrWE8jukqfpwZPBf9eEd9pzZ8
+ 6APoY7EcTUDwerWNGb9U1U7Jee1F7hVwbodWi8AwIIXKOQp9DyFDg8yLyNKEYkrqHZUm
+ Oa5KIwi38cKIHHxSugJLfKuyOB9JvgY/Ufo89UloGKrxPHgCH+j6IxG25Wo+d4+A7rae
+ F51atYaTtShuBn+I4jIRcxfsb2lnTb6RjXeJg4atxyHhtn8iEXZRkFYv4f4XzqpxG2pv
+ ++yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698275102; x=1698879902;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ImYBP4/Ayel812g8M37RPAtrPL1Zd/m74kcJ1dewS+M=;
+ b=JVH519PemiEKISUsYwqGCGIK7VKcEk6ynmpraZfxd8zsOn0aRRn06qvFOItcgZQx+a
+ K/oOQDrmuei7O1JCaTLX4PQC9KEv+oFSJwOyFW2t8W6kv8kHeKJumudBBS+mBtOnuf1f
+ 0FHA0dWE7pDGLh5Iv1ez0tHDKvBN5lk22XE2R1hfGsRWj9MzugAdweUfiYDy4pmLQCIZ
+ mVHkGZU/Y+xx0FXcqJQ9Uw5GanlJU/jubeMv9QG7fUf4muIW3yGuv4FqRX+3KvLNarDF
+ GdPdATjUabyCD6szHkLgO03ulY1MJVQMrJiNbhEWkbC1Jkektqb4j+/cWf0OfAJafFUW
+ LTkQ==
+X-Gm-Message-State: AOJu0Yz9gNs38UEhi7fltf4f0ZIqvTUkMb2HTOKwbrwjddzYzwK1aRdk
+ J5fIjXGxZ2/Bt2rel8njCZHXgG/DcdA=
+X-Google-Smtp-Source: AGHT+IEnmKgqEHMVUb2RbfI7Hqd9RZC2KtlAVA30uZ9VnWAWMpwVzSafSICySATfTPqFNCXvntXJpg==
+X-Received: by 2002:a05:620a:4155:b0:76e:f3a3:4ac6 with SMTP id
+ k21-20020a05620a415500b0076ef3a34ac6mr19339141qko.35.1698275101981; 
+ Wed, 25 Oct 2023 16:05:01 -0700 (PDT)
+Received: from aford-System-Version.lan
+ ([2601:447:d002:5be:449a:a220:d0aa:3d6a])
+ by smtp.gmail.com with ESMTPSA id
+ a24-20020a05620a103800b00767da10efb6sm4559567qkk.97.2023.10.25.16.05.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 25 Oct 2023 16:05:01 -0700 (PDT)
+From: Adam Ford <aford173@gmail.com>
+To: u-boot@lists.denx.de
+Cc: sbabic@denx.de, aford@beaconembedded.com, Adam Ford <aford173@gmail.com>
+Subject: [PATCH 1/5] configs: imx8mp_beacon: Do not set SYS_CONSOLE_IS_IN_ENV
+Date: Wed, 25 Oct 2023 18:04:52 -0500
+Message-Id: <20231025230456.7924-1-aford173@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] smbios: arm64: Allow table to be written at a fixed addr
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: sjg@chromium.org, caleb.connolly@linaro.org, u-boot@lists.denx.de,
- ilias.apalodimas@linaro.org, bmeng.cn@gmail.com, brandon.maier@collins.com,
- kconsul@ventanamicro.com, oleksandr.suvorov@foundries.io,
- patrick.delaunay@foss.st.com, sughosh.ganu@linaro.org,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20231021004522.53311-1-sjg@chromium.org>
- <c4212389-6d0e-405d-bbc7-10c8278ba1de@linaro.org>
- <CAPnjgZ1Q4y1SvwMa3gRX6Xa=5gP7gTSiQfe83jQ=KQC2K=EG7g@mail.gmail.com>
- <87il6xqrso.fsf@bloch.sibelius.xs4all.nl>
- <20231024223405.GM496310@bill-the-cat>
- <87bkcmrdjn.fsf@bloch.sibelius.xs4all.nl>
- <20231025142842.GQ496310@bill-the-cat>
- <ab2be1cb-f185-4f4e-83dc-d318fd2ab30e@gmx.de>
- <20231025170956.GU496310@bill-the-cat>
- <e05c870f-5522-4194-92d5-82e5c9808169@gmx.de>
- <20231025210913.GY496310@bill-the-cat>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231025210913.GY496310@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:i/dyTrb74S0fSkgSIcuW30Q15oD3Ll6FMqwmoqnmjIO0mHJW+QC
- W8qZTnWavcVZEef5E3rb2khCJ5jZPQSzVSMEspREwqiSIPUevccpnMhn1JV/YcaNqHjzTP8
- rYpQKi2x9mGl105AU9R4u8rWcUmhlQG8ShMriq846qjQ7Ee75p7FsbDL8vA3ovGcX/ph7k0
- GfceqeU24jjC62NR7GYmA==
-UI-OutboundReport: notjunk:1;M01:P0:WDV/93j5tUY=;RVbvuir0sDXyf2yVC4nOnrJj4Si
- d9ppA5ulN0AI3EQ2Ah6v2TDTdy858mDBU5445A4NsyZpgsiClpfrSflwUnypcsDcSRbUdJClk
- dGH4Fn1doCz8G6tP0R1SE3F4KydOfYLPnl9KGJP/wuRCBu6d5H1xN9Fp09zH5bc+TAt3S3HZ1
- zHRTxjRXKz7lVsq5a+cgJF3viHIfB1zydstOmTrJxuxKV+msvdgA7U6bPfSaMSsf0AK1f6lRO
- KOIRDAWhfGPyY9i5ECRLoExNyQbFBc7Rq6BM3ZiVixQKFpSsAzq+dcpY7yl14QDiT4FXxWCMx
- xRTm0Nrw9ychSo+WMIkWtp615G/0yyCtlh/eDwH1t0uiTT2P/QWm82h/JV7rOjG1H0GfaMAO7
- vMkDTG4crxVoQCAEI4fox+qmyMylJ3DS7JTNIHaiSOij3U0ZanppO6FAayLyYmw0WjDeJ6pfC
- JioVZG2qn0fv300Pnd/x7Ibx40nlsSY4XpHfQn4FSzPORW3CxMru1VwifBM3Eqyr/XQD9PYwa
- 392O+HmP7t/kal292Qwo/RrEuQrlZgfYr9q/qTuJ+hgdtK3NIXD/kz+gmgnp7nFuD7ra3Tw9W
- oMVJFhuIq572phO98Hb79BuON85H95rq9XcvdYv9YELn11jfZ68dgeMZjG5UBcA3Od1hmI1GT
- HXv1mRzZpi9r0+3YSaqH+9ihqr6TBQv/tFx28LrOWkcyTx5NYedfJzSpe59Y4J313vPyNXOjq
- PZgeSEwJi7kIR2EY/2t1PoUkKLm/X1+LbzeBIXwadAfH7+BtyayzaETD/GeNr+b/zhezoJYQc
- 7h2F4bEeOaUgesJzucqCx5wz8yD6D0IJiv6jn2s3TaTrUSYsP3/9T6LtxuFL33Hg/FgMA6WPe
- KeFV2l1ZdHAW8uV0OK0h3VSJuIyA/L+abmXq1DwpPzs5588WcXe3hvmVG/em0D4SsuOgqdbjC
- sBPwSyLuVJ7+B2OjCKjPHIZ7AX8=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,123 +89,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/25/23 23:09, Tom Rini wrote:
-> On Wed, Oct 25, 2023 at 10:52:48PM +0200, Heinrich Schuchardt wrote:
->> On 10/25/23 19:09, Tom Rini wrote:
->>> On Wed, Oct 25, 2023 at 05:28:10PM +0200, Heinrich Schuchardt wrote:
->>>> On 25.10.23 16:28, Tom Rini wrote:
->>>>> On Wed, Oct 25, 2023 at 04:18:20PM +0200, Mark Kettenis wrote:
->>>>>>> Date: Tue, 24 Oct 2023 18:34:05 -0400
->>>>>>> From: Tom Rini <trini@konsulko.com>
->>>>>>>
->>>>>>> On Mon, Oct 23, 2023 at 05:31:19PM +0200, Mark Kettenis wrote:
->>>>>>>>> From: Simon Glass <sjg@chromium.org>
->>>>>>>>> Date: Mon, 23 Oct 2023 00:04:14 -0700
->>>>>>>>>
->>>>>>>>> Hi Caleb,
->>>>>>>>>
->>>>>>>>> On Sat, 21 Oct 2023 at 01:43, Caleb Connolly <caleb.connolly@lin=
-aro.org> wrote:
->>>>>>>>>>
->>>>>>>>>> Hi Simon,
->>>>>>>>>>
->>>>>>>>>> On 21/10/2023 01:45, Simon Glass wrote:
->>>>>>>>>>> U-Boot typically sets up its malloc() pool near the top of mem=
-ory. On
->>>>>>>>>>> ARM64 systems this can result in an SMBIOS table above 4GB whi=
-ch is
->>>>>>>>>>> not supported by SMBIOSv2.
->>>>>>> [snip]
->>>>>>>> There is absolutely no guarantee that arm64 machines have memory =
-below
->>>>>>>> 4GB.  Examples of SoCs that have no memory below 4GB are AMD's Op=
-teron
->>>>>>>> A1100 SoC and all the recent Apple SoCs.
->>>>>>>
->>>>>>> So one thing to resolve here is where does that requirement about =
-the
->>>>>>> SMBIOS table needing to be below 4GB come from (standards wise), a=
-nd in
->>>>>>> turn is that obeyed by consumers like say Linux or OpenBSD? Answer=
-ing my
->>>>>>> own question, maybe in part, https://www.dmtf.org/standards/smbios=
- reads
->>>>>>> to me like there's a v3 and maybe we should be doing what we need =
-to
->>>>>>> support / identify as that, if it doesn't have that restriction?
->>>>>>
->>>>>> Right.  U-Boot implements SMBIOS 2.x which is pretty much obsolete =
-and
->>>>>> uses 32-bit addresses.  SMBIOS 3.x allows for 64-bit addresses.  So=
- to
->>>>>> fix this U-Boot needs support for SMBIOS 3.x.
->>>>>
->>>>> OK, thanks.  And for clarity / repeating my confusion, at least righ=
-t
->>>>> now we also set the major/minor in the struct to 3.0.
->>>>>
->>>>>> Personally I don't see why we'd need SMBIOS support on non-x86
->>>>>> platforms, which is why implementing this isn't a high priority for
->>>>>> me.  I simply disabled SMBIOS support for M1 for now.
->>>>>
->>>>> This I think in turn (based on Heinrich's emails in v2 of this patch=
-)
->>>>> EFI_LOADER wants to pass SMBIOS (probably 3) information along so th=
-at
->>>>> human user facing tools can see the kind of info that table provides=
-.
->>>>>
->>>>
->>>> If you have to manage a fleet of devices, be it Apple laptops, small
->>>> servers or IoT devices, you want to be able to retrieve information
->>>> about these devices like installed firmware, serial numbers, etc. Thi=
-s
->>>> information should be presented by our SMBIOS implementation.
->>>>
->>>> Other EFI architectures (ARM and RISC-V) target the same markets as x=
-86.
->>>> The customers expect that they can use the same tools irrespective of
->>>> architecture.
->>>
->>> Ah, we do have serial# being passed along that way (as well as other
->>> methods which is why I didn't think about them for SMBIOS). But this
->>> also doesn't answer my bigger concern which is that we're setting our
->>> version major to 3, our minor to 0 and then filling in a struct that's
->>> not the "smbios3" one that Simon's patch from another thread added. Is
->>> what we're filling out today semantically valid? I'm hoping someone wh=
-o
->>> has already read over the spec / is familiar and I don't need to go do
->>> that right now.
->>>
->>
->> First of all there is a field "Anchor String". For a 32bit structure it
->> contains the value '_SM_', for a 64bit structure it contains the value
->> '_SM3_'. The different EFI GUIDs relate to these two different
->> structures. In our mails we simply referred to them as SMBIOS2 and
->> SMBIOS3 structures.
->>
->> Next there are the fields 'SMBIOS Major Version' and 'SMBIOS Minor
->> Version'. These should refer to the standard version 3.7 if U-Boot
->> adheres to the current version.
->>
->> As RISC-V was only fully added in SMBIOS version 3.4 we should not use
->> any older version of the specification.
->>
->> See
->> https://www.dmtf.org/content/dmtf-releases-smbios-37
->
-> That's helpful.  Can we use an SMBIOS2 structure with 'SMBIOS Major
-> Version' =3D 3 and be valid?
->
+The hardware only supports a specific console port, so  remove the
+option to change the console location in the environment.
 
-The SMBIOS specification 3.7 says:
+Signed-off-by: Adam Ford <aford173@gmail.com>
+---
+ configs/imx8mp_beacon_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-"If an implementation provides both a 32-bit and a 64-bit entry point,
-they must both report the same SMBIOS major.minor specification version"
+diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
+index b686af8d18..c758ff371d 100644
+--- a/configs/imx8mp_beacon_defconfig
++++ b/configs/imx8mp_beacon_defconfig
+@@ -42,6 +42,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else booti ${loadaddr} - ${fdt_addr}; fi"
+ CONFIG_DEFAULT_FDT_FILE="imx8mp-beacon-kit.dtb"
++# CONFIG_SYS_CONSOLE_IS_IN_ENV is not set
+ # CONFIG_SYS_DEVICE_NULLDEV is not set
+ CONFIG_SPL_MAX_SIZE=0x26000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+-- 
+2.40.1
 
-This implies that SMBIOS Major Version =3D 3 is valid both in the 32- and
-in the 64-bit structure.
-
-Best regards
-
-Heinrich
