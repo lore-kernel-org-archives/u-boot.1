@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F332C25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:58:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D911C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:59:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7662D87649;
-	Thu, 26 Oct 2023 20:58:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 926CC87B8C;
+	Thu, 26 Oct 2023 20:59:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R9EJbPer";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JbBpyxnL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4EBF87B51; Thu, 26 Oct 2023 20:58:41 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id DFFF586FC8; Thu, 26 Oct 2023 20:59:14 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD4B986FC8
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:58:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F41787B94
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:59:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-507be298d2aso1864415e87.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:58:39 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-507be298d2aso1865295e87.1
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:59:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698346719; x=1698951519; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698346749; x=1698951549; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F5UQZBMZ3na+0lv17IT5bO3/rHRiLneXWEIHq1ys77U=;
- b=R9EJbPerSMZTvJaBZnf42l4V10nzQjbDfcszozlg5vVb3io8KAHvehevwhFnA5RX4Y
- cpa197ssVEZPf/0gnP5NO1MN5MZMl+UL5FU98BrCXnp83Ks6Aj3qcQnnM/i1Sncj1FFp
- K1aS4Ra54+3hQJVylmll73rK8Z174m+cIOPUIUvrHFzPxTcmyh109pdOi1PPnzE8hCII
- WwxTF9dO+2W2URYpuE3GNhY4Py8Ze6aST3ZQ1VZQBvG8u1Vh+LCzoUREimTH8i/A8ASu
- tY+8YsuIqreW5yyELsCXthe1IqDgqj1G1YKDpst/QzoUT0D9+Hhd0uDqmOgpEUf/BVka
- KVOg==
+ bh=pqzEfTSIkpQ3tOnbCFvG69Is9dr2HIpkp2nQoqeKzEw=;
+ b=JbBpyxnLowE03yiJdI9eXZhzWWCc7d8TeTsHVX5z1SpurhSz/jHuygB6ehzxeh9Qwx
+ B8c4oHL+hbnS0LNHk1mxc00x0/GAAivXQ8dnv4x0H29EQvosiNMJbLiRZQKzLLwMCW6w
+ +kU6IUKOiiKixtPrUcyga/QLS4ocNM58ZX+jmXpY8t8WxHm8cL7JvV3jAihhmqgURizg
+ 9W8IKC+SIbvXoUmXOeHkkes/QwxTQbEf6qOrQ0eiDZxzpbZmzWYJ1uNF0ujuR7lt/EnP
+ lubcMMcLWToruHr+P2MF3knLFhEzIahj8gN7+QJckuQJHzvalRpcVi/ldpl0Zudt0VHr
+ VG8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698346719; x=1698951519;
+ d=1e100.net; s=20230601; t=1698346749; x=1698951549;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=F5UQZBMZ3na+0lv17IT5bO3/rHRiLneXWEIHq1ys77U=;
- b=eBfJtDXVn39RhQpEzk7vm2/lHHc2LTpY3ZPaRTuK80XG83PYQxojpfLC/Vc7DIX8Cg
- HbATCukfqlj4+i+jUzCpCC3xPUGB15x9x1zFL5IYQiksuxHr5BqfNhqN3AlR+kLXGL+Z
- QuP1oKryOt/cUZdCtZDpUk1H68Zh9OBBSsn1n7TbSKZNRD51m6VZyyHhtyiStKrCL/5r
- u4S6U8HVAn1XaWJmUcYPZ/VTo+XCCuZgkeFIb6RYP9NShxvrgY09moLT6QSrakpb9knl
- qeVAeYothRwsOtVMLY1iLN3l8uMmCni7hJv2X+94uxq4Ll1855hnbEShM5pFuSQu27Og
- Smag==
-X-Gm-Message-State: AOJu0YzforrLqErKH0q/Z1wrwDpFFd5E/C1K0U9pmmgCeL6bjc2HQkip
- rKB2M0XX4asWNLvyApNq1kQHS38mLbrtM6odYSnd3KHsMaydjs4r
-X-Google-Smtp-Source: AGHT+IF2FW5OSEMrxwUfXUKJRdKAjDcPNHKU0ctJI/3laneIeMZlVWsWHQK9H5dTmGF7zFCfV7r9Naw452msvo3jeZE=
-X-Received: by 2002:a19:771a:0:b0:507:9784:644c with SMTP id
- s26-20020a19771a000000b005079784644cmr232562lfc.26.1698346718959; Thu, 26 Oct
- 2023 11:58:38 -0700 (PDT)
+ bh=pqzEfTSIkpQ3tOnbCFvG69Is9dr2HIpkp2nQoqeKzEw=;
+ b=fUkC7lIe/DsT9OdbQlPC+AYAoZnQ8VHUawbD+KZNDkMc37K6aRpXQ1vSOYJpmlNFAm
+ QioMLlJvCwtluZ7LyB6e9WGCwx1/2GE7Ej0CKDZOwZ/wTNFBeSB05QL5PGohLExdn+3u
+ zAUpEGVuSlxgFyKrIseMVxj7fdE7daV9PJe2gGsktfSw3YR7JtPi8K4v2U88OozsmfNf
+ c0OG0i6T3xEPynCDvbudtDOFnIwXiWewQ2+tw+1P74B8eRnNchF2hMwtJi5Lri+74yXY
+ rF4o1w67WSwPPlz51Sh6R5OtASQN4gUZ5S+XP535yjMwKGorAIvIdwPm6rHXnMutxio6
+ IVow==
+X-Gm-Message-State: AOJu0YyyN2Oe04OID5Bl9JzHZDrxmOYhirmRe2mpWEgyY7/8rQWYwSJv
+ ER9H28EzJx334aWfD5PW+t76n6G35u92/EDpFYOmRw==
+X-Google-Smtp-Source: AGHT+IFCbqU6FQp8DtivMcFS8ZC2F52LV7T2n4qiAQwdaWUdN29sXQp5wDrwtaHK076vpauA1vP1PnJ9Y/mn7IWxUi8=
+X-Received: by 2002:ac2:511a:0:b0:507:984e:9f17 with SMTP id
+ q26-20020ac2511a000000b00507984e9f17mr170247lfb.34.1698346749590; Thu, 26 Oct
+ 2023 11:59:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
- <20231025065103.3101666-2-masahisa.kojima@linaro.org>
-In-Reply-To: <20231025065103.3101666-2-masahisa.kojima@linaro.org>
+ <20231025065103.3101666-3-masahisa.kojima@linaro.org>
+In-Reply-To: <20231025065103.3101666-3-masahisa.kojima@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 26 Oct 2023 21:58:03 +0300
-Message-ID: <CAC_iWjJ2nNjLeJe201Nx1Uay2xqMgesZdzzsUOO8bpUe3_VXvw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] board: developerbox: remove obsolete NOR flash layout
- definition
+Date: Thu, 26 Oct 2023 21:58:33 +0300
+Message-ID: <CAC_iWj+tQ_-ht1N6H2WbuZuo9M4KaODfKE=08oVuFe1mi96dFA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] board: developerbox: update old NOR flash layout
+ build instruction
 To: Masahisa Kojima <masahisa.kojima@linaro.org>
 Cc: u-boot@lists.denx.de, jaswinder.singh@linaro.org, ryosuke.saito@linaro.org,
  sugimoto.yoshio@socionext.com
@@ -90,69 +90,39 @@ X-Virus-Status: Clean
 On Wed, 25 Oct 2023 at 09:52, Masahisa Kojima
 <masahisa.kojima@linaro.org> wrote:
 >
-> There are two kinds of NOR flash layout for the Developerbox.
-> Capsule update for the old layout is no longer available since
-> it has small capacity for secure world images and can not
-> house the TA such as fTPM.
-> This commit removes the definition related to the obsolete
-> NOR flash layout for the UEFI capsule update.
+> v2023.07 is the last version supporting old NOR flash layout
+> by default. The later versions of U-Boot, Developerbox is
+> configured to enable A/B update and new NOR Flash layout
+> by default.
+> This commit updates the documentation to pin the U-Boot
+> version for the old NOR flash layout. It is still useful
+> for the user wants to replace the factory default EDK II
+> firmware to U-Boot.
 >
 > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 > Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
 > ---
->  include/configs/synquacer.h | 19 -------------------
->  1 file changed, 19 deletions(-)
+>  doc/board/socionext/developerbox.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/configs/synquacer.h b/include/configs/synquacer.h
-> index cd7359c2f8..e36e63e81e 100644
-> --- a/include/configs/synquacer.h
-> +++ b/include/configs/synquacer.h
-> @@ -40,20 +40,6 @@
+> diff --git a/doc/board/socionext/developerbox.rst b/doc/board/socionext/developerbox.rst
+> index aa7080e26c..596cf9f908 100644
+> --- a/doc/board/socionext/developerbox.rst
+> +++ b/doc/board/socionext/developerbox.rst
+> @@ -42,9 +42,10 @@ Compile from source
+>  You can build U-Boot without any additinal source code.::
 >
->  /* Since U-Boot 64bit PCIe support is limited, disable 64bit MMIO support */
+>    cd u-boot
+> +  git checkout v2023.07
+>    export ARCH=arm64
+>    export CROSS_COMPILE=aarch64-linux-gnu-
+> -  make SynQuacer_defconfig
+> +  make synquacer_developerbox_defconfig
+>    make -j `noproc`
 >
-> -#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-> -#define DEFAULT_DFU_ALT_INFO
-> -#else
-> -#define DEFAULT_DFU_ALT_INFO "dfu_alt_info="                           \
-> -                       "mtd nor1=u-boot.bin raw 200000 100000;"        \
-> -                       "fip.bin raw 180000 78000;"                     \
-> -                       "optee.bin raw 500000 100000\0"
-> -#endif
-
-We don't need any of these because we use the .dfu_alt_string to
-generate those right?
-
-> -
-> -/* GUIDs for capsule updatable firmware images */
-> -#define DEVELOPERBOX_UBOOT_IMAGE_GUID \
-> -       EFI_GUID(0x53a92e83, 0x4ef4, 0x473a, 0x8b, 0x0d, \
-> -                0xb5, 0xd8, 0xc7, 0xb2, 0xd6, 0x00)
-> -
->  #ifdef CONFIG_FWU_MULTI_BANK_UPDATE
->  #define DEVELOPERBOX_FIP_IMAGE_GUID \
->         EFI_GUID(0x7d6dc310, 0x52ca, 0x43b8, 0xb7, 0xb9, \
-> @@ -64,10 +50,6 @@
->                  0x33, 0xe0, 0xb9, 0x16, 0xf3, 0x98)
->  #endif
->
-> -#define DEVELOPERBOX_OPTEE_IMAGE_GUID \
-> -       EFI_GUID(0xc1b629f1, 0xce0e, 0x4894, 0x82, 0xbf, \
-> -                0xf0, 0xa3, 0x83, 0x87, 0xe6, 0x30)
-> -
->  /* Distro boot settings */
->  #ifdef CONFIG_CMD_USB
->  #define BOOT_TARGET_DEVICE_USB(func)   func(USB, usb, 0)
-> @@ -107,7 +89,6 @@
->         "ramdisk_addr_r=0xa0000000\0"           \
->         "scriptaddr=0x88000000\0"               \
->         "pxefile_addr_r=0x88100000\0"           \
-> -       DEFAULT_DFU_ALT_INFO                    \
->         BOOTENV
->
->  #endif /* __CONFIG_H */
+>  Then, expand the binary to 1MB for preparing flash.::
 > --
 > 2.34.1
 >
-Thanks
-/Ilias
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
