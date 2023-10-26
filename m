@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69368C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 04:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12893C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 05:31:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA39A87AD1;
-	Thu, 26 Oct 2023 06:23:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id 1F00487ADA;
+	Thu, 26 Oct 2023 07:31:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="lLZl6m/H";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KpIgqTUJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCD8187559; Thu, 26 Oct 2023 05:23:03 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id E00F987AE3; Thu, 26 Oct 2023 07:31:18 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9378B86F91
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 05:23:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 028C38755E
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:31:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yongxuan.wang@sifive.com
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6b2018a11efso425328b3a.0
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 20:23:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6bb744262caso113093b3a.0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 22:31:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1698290579; x=1698895379; darn=lists.denx.de;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vg9FApGKDm1saRj+vLvro2F2eNAzps9ffPwjIpeHg6w=;
- b=lLZl6m/H3pYoTrwqxmUqeSvFdaw09MECF1g1R8Ofok9JNe9+BRfJIcbh16aUmH/6bu
- +rv6kyIfntcTzYQjH74bAvvCKz83r3T8nEy0EC3RIx3vrsNIWubff7bvKzjyMY0MRZB3
- xnpuYEAT1u5jWS8vbulzgnGOx4NqRnFKXIg7uG+Pnsl/8buRePTWJ8KOdMqzARWq6ACM
- Po087jefjsjyeOZdKrUm+O6v9/1aZhJNrZof2pmKYXgRlR6AfMLevMWO/Ljd3b1JQqNR
- VtDPBJNw6oniUA9PORPDLvleU9rfE5WsQPD2t5EEEpggyTseAwkIySIbC5ab66LdkgKL
- 7VxA==
+ d=linaro.org; s=google; t=1698298272; x=1698903072; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3kwsvL4rKbgWqOLjp2zBIkwHCyoilydeGcjvJoEOjhw=;
+ b=KpIgqTUJNyA3ifO0R1nyDQaSE3yNAKUkZ8iLQc5RbZCNa+993pfdVAa+QxOZ1hIbJZ
+ yE7t5v8XI7gaDhb5aPWb2ASWedFfwk7lytYFLcOpiGNEuPwF7sqdfzo6IeEH3k6LIzRr
+ jO0RO6XTo5PKDlyqgJQp5Z6b33LOQNbWr3x+fOkU02X9XT/eiJ/kx6Jf6jPYg4q5fBLz
+ mN7R85QTduVafQH/C/sc64wwxxoFDmtQmcf++P0HS8w30dZEGOw+9NPfIFktwWkGp9ih
+ 47ptLU0BpvHuUotCM6yihfXAbTwjtctf8KsJpYqPKgGSpCJUSMmNNCAWv1T8HcmtJcR4
+ VF5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698290579; x=1698895379;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vg9FApGKDm1saRj+vLvro2F2eNAzps9ffPwjIpeHg6w=;
- b=hjfBrm+ZLUKesEgKPrjkHwoJflWynbNzl70cajo1gcVmQkTy8DuxrrHw64j6C8UOqc
- nNDDQMl15d5MucwG3MkI9S3nPbewJ6/YDAwAjg2LC+uGMIRITBbl+SgccTNz9aJIe1mV
- 0tMZmLrlqqV/qM0U9AQ0OITTOO9xBtTM2TvvKKbBDvngdPi3xdNn2KH5O70ZIJfBGvsH
- KOFpsaOHy1mFH2SRPTS2oLw1vw3xNGQOFCS5REtkr5EcgBOy3EAmA1iqlHF2b2A9A+3r
- i8f1NvPn7TAx62IgSx8HnsAhSyEEGSGkCX/be8CfyLFnRm0SwAhuiQSXhfpUHPtDOJl4
- /QcA==
-X-Gm-Message-State: AOJu0Yzsz5iASY0nQdgIeoQFW857tBS0mrt7z8WpCjjc3j2JdTLYxyTn
- ib3LujdvzOKb2pvg4ordD5/FaRC5CXSFlP4iNY4uq1ErycP8HNhf7HO2/HuuzTZx8RbvmG2TPHV
- K3XpWy7QwzXDl+Iu879mAB6rmX1KbcLQmBD1R7zCeaQs+A7Ua3HzHrJcdR1sAqK9buuKqTLH7TP
- EJxg0=
-X-Google-Smtp-Source: AGHT+IGX8wTOVlcOiqQNGkROscSPGHHmf0CC6NTW5LV1rK//2+kMLMmKwDEtgHF7Y8B2BBUgYmGPYw==
-X-Received: by 2002:a05:6a21:66c6:b0:174:2a38:9d9c with SMTP id
- ze6-20020a056a2166c600b001742a389d9cmr8161194pzb.57.1698290579246; 
- Wed, 25 Oct 2023 20:22:59 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ d=1e100.net; s=20230601; t=1698298272; x=1698903072;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3kwsvL4rKbgWqOLjp2zBIkwHCyoilydeGcjvJoEOjhw=;
+ b=Aoo23j0E1tOxtp4S/Z+aP3w5IrWRS0pBO3ZS6l5JwAd17uR+4NAIivkcHDGq/mIzVU
+ CXnJoHMfiFMgpsTgf3FWGGxkwybU1MXY6vG8bTsV52kvmdxJDcnYaLovabW1uvWc+DAx
+ 7dcdcskqGqm20EiQ9Z4n40kEkxBvCAPyUzVvg4Y2rD56Hw/IJtqirkPKz0b+YOPqoN+v
+ O9Muu5cgYSOkPjQGrHS58jU0ukEgjEc5UrgvVd/w97He6v6rtBpvgpfCerv2f7gHcz23
+ 0FyDAjYwWgVnvbTalIjFdUEBgUJKMrhM2Ff2GgKNiHxk0+6fDr1AaZIoY2W7KjWmmo6c
+ Lv2A==
+X-Gm-Message-State: AOJu0YzAg8Q6/2IagN1a+l/vCGJgToQZ0YZY/OFEV4WPHAHyvcWAZT+Z
+ TV1AWLA+1buiBljxYLAJMNYrfg==
+X-Google-Smtp-Source: AGHT+IEPOXyHN0GV9V5XHktC5r5qSrZjgFGkEvwOBlIqsIkSqLBAp1hjfrbLlkeg/nu7vRJ7y4hDMw==
+X-Received: by 2002:a62:b518:0:b0:690:c79c:1912 with SMTP id
+ y24-20020a62b518000000b00690c79c1912mr17004732pfe.0.1698298272072; 
+ Wed, 25 Oct 2023 22:31:12 -0700 (PDT)
+Received: from octopus.. ([2400:4050:c3e1:100:bca9:3af7:89e9:80b7])
  by smtp.gmail.com with ESMTPSA id
- 15-20020a17090a000f00b0027ced921e80sm665782pja.38.2023.10.25.20.22.57
+ fa13-20020a056a002d0d00b006c06804cd39sm440715pfb.153.2023.10.25.22.31.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 20:22:58 -0700 (PDT)
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-To: u-boot@lists.denx.de
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com,
- Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
-Subject: [PATCH 1/1] board: sifive: unmatched: move kernel load address to
- 0x80200000
-Date: Thu, 26 Oct 2023 03:22:52 +0000
-Message-Id: <20231026032254.23043-1-yongxuan.wang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-X-Mailman-Approved-At: Thu, 26 Oct 2023 06:23:24 +0200
+ Wed, 25 Oct 2023 22:31:11 -0700 (PDT)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org
+Cc: jbx6244@gmail.com, u-boot@lists.denx.de,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [RFC 00/13] cmd: bootefi: refactor the code for bootmgr
+Date: Thu, 26 Oct 2023 14:30:39 +0900
+Message-Id: <20231026053052.622453-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,28 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-boot initially loads the kernel image to the kernel_addr_r, and
-subsequently relocates it to memory address 0x80200000. Setting
-kernel_addr_r to 0x80200000 can eliminate one copy operation.
+This patch set is motivated by the discussion[1] regarding
+CONFIG_BOOTEFI_BOOTMGR option.
 
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
----
- include/configs/sifive-unmatched.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+At the end, bootefi.c will be decomposed into two parts, one for
+providing the command itself and one for implementing helper functions.
+EFI_LOADER will now be available without CONFIG_CMDLINE or specifically
+CONFIG_CMD_BOOTEFI if invoked via bootmeth/bootstd.
 
-diff --git a/include/configs/sifive-unmatched.h b/include/configs/sifive-unmatched.h
-index 74150b7d4b..de8bfc1123 100644
---- a/include/configs/sifive-unmatched.h
-+++ b/include/configs/sifive-unmatched.h
-@@ -36,7 +36,7 @@
- 	"name=system,size=-,bootable,type=${type_guid_gpt_system};"
- 
- #define CFG_EXTRA_ENV_SETTINGS \
--	"kernel_addr_r=0x84000000\0" \
-+	"kernel_addr_r=0x80200000\0" \
- 	"kernel_comp_addr_r=0x88000000\0" \
- 	"kernel_comp_size=0x4000000\0" \
- 	"fdt_addr_r=0x8c000000\0" \
+Then, EFI_LOADER library side will be further split into two options
+for fine-grain control:
+CONFIG_EFI_BINARY_EXEC: execute UEFI binaries which are to be explicitly
+    loaded by U-Boot's load commands/functions or other methods
+    (like a jtag debugger?)
+    It supports bootmeth_efi as well as "bootefi <addr>|hello"(/"bootm"?).
+
+CONFIG_EFI_BOOTMGR: provide EFI boot manger functionality
+    It supports bootmeth_efi_mgr as well as "bootefi bootmgr".
+
+As such, We will no longer need CONFIG_BINARY_EXEC if we want to only
+make use of the boot manger for booting a next stage OS.
+
+Prerequisite
+============
+This patch set is based on top of Simon/Tom's [2].
+
+Patches
+=======
+Patch#1-#11: I hope that those commits show step-by-step refactoring
+    without introducing degradation.
+Patch#12-#13: Those are not directly related to the patch's aim, but
+    they are necessary to compile U-Boot on sandbox (sandbox_defconfig)
+    without CONFIG_CMDLINE.
+
+[1] https://lists.denx.de/pipermail/u-boot/2023-October/534598.html
+[2] origin/TEST/v4.1-tidy-up-use-of-CONFIG_CMDLINE
+
+AKASHI Takahiro (13):
+  cmd: bootefi: unfold do_bootefi_image()
+  cmd: bootefi: re-organize do_bootefi_image()
+  cmd: bootefi: carve out EFI boot manager interface
+  cmd: bootefi: carve out binary execution interface
+  cmd: bootefi: move library interfaces under lib/efi_loader
+  cmd: efidebug: ease efi configuration dependency
+  bootmeth: use efi_loader interfaces instead of bootefi command
+  efi_loader: split unrelated code from efi_bootmgr.c
+  efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+  net: tftp: remove explicit efi configuration dependency
+  fs: remove explicit efi configuration dependency
+  lib: uuid: move CONFIG_RANDOM_UUID
+  block: rkmtd: select CONFIG_RANDOM_UUID explicitly
+
+ boot/Kconfig                     |   4 +-
+ boot/Makefile                    |   2 +-
+ boot/bootm_os.c                  |  31 +-
+ boot/bootmeth_efi.c              |   8 +-
+ boot/bootmeth_efi_mgr.c          |   3 +-
+ cmd/Kconfig                      |  28 +-
+ cmd/bootefi.c                    | 658 +++++--------------------------
+ cmd/efidebug.c                   |   4 +-
+ drivers/block/Kconfig            |   1 +
+ fs/fs.c                          |   7 +-
+ include/efi_loader.h             |  34 +-
+ lib/Kconfig                      |   7 +
+ lib/efi_loader/Kconfig           |  11 +-
+ lib/efi_loader/Makefile          |   2 +-
+ lib/efi_loader/efi_bootmgr.c     |  37 ++
+ lib/efi_loader/efi_device_path.c |   3 +-
+ lib/efi_loader/efi_helper.c      | 486 ++++++++++++++++++++++-
+ net/tftp.c                       |  10 +-
+ test/boot/bootflow.c             |   2 +-
+ 19 files changed, 697 insertions(+), 641 deletions(-)
+
 -- 
-2.17.1
+2.34.1
 
