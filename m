@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF755C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 05:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3D9C25B67
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 05:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38C0287B29;
-	Thu, 26 Oct 2023 07:31:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB3E787B25;
+	Thu, 26 Oct 2023 07:31:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YlkaZ5PL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jbdCRyJI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59C6687AFF; Thu, 26 Oct 2023 07:31:40 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 4FEBE87B28; Thu, 26 Oct 2023 07:31:44 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECFFD87B09
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1050287B17
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:31:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6bcbfecf314so118416b3a.1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 22:31:32 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6bbfb8f7ac4so121642b3a.0
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 22:31:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698298291; x=1698903091; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698298298; x=1698903098; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i0QWNGDWZWqFlbHbgmjf3Qu/D22Ot8nFYw5l5+ss66E=;
- b=YlkaZ5PLi7NOC+m34BCvp1ebs5cJQV0dMI8pKl0M72Wyne/J6No59N/jzs50iT/jCX
- DojGEI7O3eqd9BxroCH5PEIwO9sA852dVNGXw3pnU5vDo+J6uonv+yfPcq6pwUqDeERR
- qGQYNxMJlRmoJ76St5/n7X79gS074lCWM4mHDDiRyWDQISXUVnBvPbtLgfiBYg4B0KrP
- ebBaFl5dPRufGHH4vROjYvXMnlcHoUVDE7AtvQGSpHpWb4rGGDKm2Fg3b+f6reNuMsCu
- i1jLhFCaZ3hUxWcak6OPLp2Fa7+Pt/OMYEtJ77LdrcB8XXC07lMDqRgAVjx+IioyRkmd
- 7uFg==
+ bh=Mp+jJdsybsFZl/y8I7LNTzhx+AD5dMlIqa+WWExkuyo=;
+ b=jbdCRyJIPwCpwpi+4JBszCN8XOZA+lmquN3uDYbG6qbLlx0EbJ+wGj1DL0FUOj2ao6
+ 17jHA1rTOdmp0KEFVYDvYR/uxHWuhD+3Px6zC8sC6V5XQFSFseD2+9YLv9y8rFcLP1wK
+ 1i1mV0SfofF6lxDy2BozByexJI+UIpZCKvSSRhGHy/tm7HuUSSTSbks4tokLIjgSzSQd
+ O/6X6pPEBy4+qhmCDHy5GgvwY/nSnO5l0OJSMs6VpF9+mDwfzVK5zMPWnNrJukBNTzu/
+ C/hWa/oOiSt/E1zjNTL34gvMsUx4Z3wEbnEWgzr6+cZldr5iRhw15/HcBbiVW57NsInp
+ STmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698298291; x=1698903091;
+ d=1e100.net; s=20230601; t=1698298298; x=1698903098;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i0QWNGDWZWqFlbHbgmjf3Qu/D22Ot8nFYw5l5+ss66E=;
- b=DU/V2uv70pyD9gVZUjGev8IT3mEhxC3sKCv0nXaobhZ/4b+jssLE0i7/HEKHoaeISY
- pYieIcNouQjqdn2nCfY1dI25JEYTJ4QL6Vw9O/Ep433tr8AvxpQcAWT3s9CXCwqzR4Zf
- msXFDsUGPSvL/fz17gM/eOY53le3T7Zr89rebBCzxUdSQw2g6XZ8S3hjDSqZADM+QGOg
- qNYCOnHlMTdHBj+RJ0urVr6/RKsuNd77T4Ttfzi/xtUW4PkV6XuNnWdv0Febec0H0hlw
- +cpD/DTtlN4JbLto0ZtFBC8PQhmN0LW5s3Pre0ApvuIUOseGXDi9LDnwKeNQWx5XVQlf
- FKOA==
-X-Gm-Message-State: AOJu0YxRX6NmWe7+S6bI/axhAKkIchsTemRw6G4H8gQyoCHdS+cucHF2
- lblV4DMw71dC16GPkQEq+DJevHydotA8u8BCyK12Mw==
-X-Google-Smtp-Source: AGHT+IGPKjwbSd3sn2Deoi9sixXxBeiNoLHQONOUhLo+0Yq9PQubm7WC8iTWWeNfgWbBJVuaQn1rCA==
-X-Received: by 2002:a05:6a00:80ee:b0:68a:6cbe:35a7 with SMTP id
- ei46-20020a056a0080ee00b0068a6cbe35a7mr16957006pfb.2.1698298290977; 
- Wed, 25 Oct 2023 22:31:30 -0700 (PDT)
+ bh=Mp+jJdsybsFZl/y8I7LNTzhx+AD5dMlIqa+WWExkuyo=;
+ b=vLnpb5dfIlCGTlVNbhbDpA9TenXpS1SaFOJkP8bOCtIlrLYp1BELZs5zLOD2DWyp5Y
+ oajj2g1nYq6IZm+81fkrlyAa5FqNBS1mG9RxKJA7ra9qdZRpgnMFxI0EAdYLdflVqs+S
+ tBhwP72oVg3vSL/8TLAxAj8gRuzUoVMisuXOjvY382dczJGO5b8LB/b0IB0yAWS+pmfS
+ cxPDv+Fcumz9OaLN7J0AAjRY3WLMX3Hm54v1iLHhjcWCkJu6pseWnNECSYEA48KvouPz
+ g+oMBXSAJWBOWYiC9CRg8Ry8l67pxMI98745V8p6HHwNSVo88L919LZFnZll/Z8iCmXQ
+ 3paA==
+X-Gm-Message-State: AOJu0YzhtjTg3cqO3bqZyrR0iSJ7NogzABdQEtOb49mElcUiHqmauKGZ
+ u2otFZSR4WgI2tdD/2+2R3zUgSBb/yIwQfvw8RxP+g==
+X-Google-Smtp-Source: AGHT+IEhQLI12bBl9TB0bffwdMPmxxQ+5C4f1VzulRH0vTQVQ2il5v24JGxUNDH04ismVenbCR32Kw==
+X-Received: by 2002:a05:6a21:3286:b0:163:ab09:196d with SMTP id
+ yt6-20020a056a21328600b00163ab09196dmr20200338pzb.1.1698298297975; 
+ Wed, 25 Oct 2023 22:31:37 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:bca9:3af7:89e9:80b7])
  by smtp.gmail.com with ESMTPSA id
- fa13-20020a056a002d0d00b006c06804cd39sm440715pfb.153.2023.10.25.22.31.28
+ fa13-20020a056a002d0d00b006c06804cd39sm440715pfb.153.2023.10.25.22.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 22:31:30 -0700 (PDT)
+ Wed, 25 Oct 2023 22:31:37 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
  ilias.apalodimas@linaro.org
 Cc: jbx6244@gmail.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [RFC 05/13] cmd: bootefi: move library interfaces under lib/efi_loader
-Date: Thu, 26 Oct 2023 14:30:44 +0900
-Message-Id: <20231026053052.622453-6-takahiro.akashi@linaro.org>
+Subject: [RFC 08/13] efi_loader: split unrelated code from efi_bootmgr.c
+Date: Thu, 26 Oct 2023 14:30:47 +0900
+Message-Id: <20231026053052.622453-9-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026053052.622453-1-takahiro.akashi@linaro.org>
 References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
@@ -93,51 +93,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the prior commits, interfaces for executing EFI binary or boot manager
-were carved out. Move them under efi_loader directory so that they can
-be called from other places without depending on bootefi command.
+Some code moved from cmd/bootefi.c is actually necessary only for "bootefi
+<addr>" command (starting an image manually loaded by a user using U-Boot
+load commands or other methods (like JTAG debugger).
+
+The code will never been opted out as unused code by a compiler which
+doesn't know how EFI boot manager is implemented. So introduce a new
+configuration, CONFIG_EFI_BINARY_EXEC, to enforce theem opted out
+explicitly.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 ---
- cmd/bootefi.c                | 546 ++---------------------------------
- include/efi_loader.h         |  10 +
- lib/efi_loader/efi_bootmgr.c | 517 +++++++++++++++++++++++++++++++++
- 3 files changed, 551 insertions(+), 522 deletions(-)
+ boot/Kconfig                     |   4 +-
+ cmd/Kconfig                      |   6 +-
+ include/efi_loader.h             |  28 +-
+ lib/efi_loader/Kconfig           |   9 +
+ lib/efi_loader/efi_bootmgr.c     | 480 ------------------------------
+ lib/efi_loader/efi_device_path.c |   3 +-
+ lib/efi_loader/efi_helper.c      | 486 ++++++++++++++++++++++++++++++-
+ 7 files changed, 516 insertions(+), 500 deletions(-)
 
-diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-index 8b0bd07f1ff8..9cf9027bf409 100644
---- a/cmd/bootefi.c
-+++ b/cmd/bootefi.c
-@@ -7,531 +7,22 @@
+diff --git a/boot/Kconfig b/boot/Kconfig
+index a441fac8ade1..d371d0a25962 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -511,7 +511,7 @@ config BOOTMETH_EXTLINUX_PXE
+ 
+ config BOOTMETH_EFILOADER
+ 	bool "Bootdev support for EFI boot"
+-	depends on BOOTEFI_BOOTMGR
++	depends on EFI_BINARY_EXEC
+ 	default y
+ 	help
+ 	  Enables support for EFI boot using bootdevs. This makes the
+@@ -546,7 +546,7 @@ config BOOTMETH_DISTRO
+ 	select BOOTMETH_SCRIPT if CMDLINE # E.g. Armbian uses scripts
+ 	select BOOTMETH_EXTLINUX  # E.g. Debian uses these
+ 	select BOOTMETH_EXTLINUX_PXE if CMD_PXE && CMD_NET && DM_ETH
+-	select BOOTMETH_EFILOADER if BOOTEFI_BOOTMGR # E.g. Ubuntu uses this
++	select BOOTMETH_EFILOADER if EFI_BINARY_EXEC # E.g. Ubuntu uses this
+ 
+ config SPL_BOOTMETH_VBE
+ 	bool "Bootdev support for Verified Boot for Embedded (SPL)"
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 81e959c96207..bf16fad04d37 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -274,7 +274,7 @@ config CMD_BOOTMETH
+ 
+ config BOOTM_EFI
+ 	bool "Support booting UEFI FIT images"
+-	depends on BOOTEFI_BOOTMGR && CMD_BOOTM && FIT
++	depends on EFI_BINARY_EXEC && CMD_BOOTM && FIT
+ 	default y
+ 	help
+ 	  Support booting UEFI FIT images via the bootm command.
+@@ -366,7 +366,7 @@ config CMD_BOOTEFI
+ if CMD_BOOTEFI
+ config CMD_BOOTEFI_BINARY
+ 	bool "Allow booting an EFI binary directly"
+-	depends on BOOTEFI_BOOTMGR
++	depends on EFI_BINARY_EXEC
+ 	default y
+ 	help
+ 	  Select this option to enable direct execution of binary at 'bootefi'.
+@@ -397,7 +397,7 @@ config CMD_BOOTEFI_HELLO_COMPILE
+ 
+ config CMD_BOOTEFI_HELLO
+ 	bool "Allow booting a standard EFI hello world for testing"
+-	depends on CMD_BOOTEFI_HELLO_COMPILE
++	depends on CMD_BOOTEFI_BINARY && CMD_BOOTEFI_HELLO_COMPILE
+ 	default y if CMD_BOOTEFI_SELFTEST
+ 	help
+ 	  This adds a standard EFI hello world application to U-Boot so that
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 031a8f76846a..e9bc2f540cc8 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -91,11 +91,7 @@ efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len);
+  * back to u-boot world
+  */
+ void efi_restore_gd(void);
+-/* Call this to unset the current device name */
+-void efi_clear_bootdev(void);
+-/* Call this to set the current device name */
+-void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
+-		     void *buffer, size_t buffer_size);
++
+ /* Called by networking code to memorize the dhcp ack package */
+ void efi_net_set_dhcp_ack(void *pkt, int len);
+ /* Print information about all loaded images */
+@@ -117,10 +113,6 @@ static inline efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
+ 
+ /* No loader configured, stub out EFI_ENTRY */
+ static inline void efi_restore_gd(void) { }
+-static inline void efi_clear_bootdev(void) { }
+-static inline void efi_set_bootdev(const char *dev, const char *devnr,
+-				   const char *path, void *buffer,
+-				   size_t buffer_size) { }
+ static inline void efi_net_set_dhcp_ack(void *pkt, int len) { }
+ static inline void efi_print_image_infos(void *pc) { }
+ static inline efi_status_t efi_launch_capsules(void)
+@@ -130,6 +122,20 @@ static inline efi_status_t efi_launch_capsules(void)
+ 
+ #endif /* CONFIG_IS_ENABLED(EFI_LOADER) */
+ 
++#if CONFIG_IS_ENABLED(EFI_BINARY_EXEC)
++/* Call this to unset the current device name */
++void efi_clear_bootdev(void);
++/* Call this to set the current device name */
++void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
++		     void *buffer, size_t buffer_size);
++#else
++static inline void efi_clear_bootdev(void) { }
++
++static inline void efi_set_bootdev(const char *dev, const char *devnr,
++				   const char *path, void *buffer,
++				   size_t buffer_size) { }
++#endif
++
+ /* Maximum number of configuration tables */
+ #define EFI_MAX_CONFIGURATION_TABLES 16
+ 
+@@ -540,8 +546,8 @@ efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
+ 				      u16 **load_options);
+ /* Install device tree */
+ efi_status_t efi_install_fdt(void *fdt);
+-/* Run loaded UEFI image */
+-efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size);
++/* Execute loaded UEFI image */
++efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options);
+ /* Run loaded UEFI image with given fdt */
+ efi_status_t efi_binary_run(void *image, size_t size, void *fdt);
+ /* Initialize variable services */
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 13cad6342c36..987a990509f3 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -32,6 +32,15 @@ config EFI_LOADER
+ 
+ if EFI_LOADER
+ 
++config EFI_BINARY_EXEC
++	bool "Execute UEFI binary"
++	default y
++	help
++	  Select this option if you want to execute the UEFI binary after
++	  loading it with U-Boot load commands or other methods.
++	  You may enable CMD_BOOTEFI_BINARY so that you can use bootefi
++	  command to do that.
++
+ config BOOTEFI_BOOTMGR
+ 	bool "UEFI Boot Manager"
+ 	default y
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index cc8d88b4b025..06799277f5b5 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -3,8 +3,6 @@
+  *  EFI boot manager
+  *
+  *  Copyright (c) 2017 Rob Clark
+- *  For the code moved from cmd/bootefi.c
+- *  Copyright (c) 2016 Alexander Graf
+  */
  
  #define LOG_CATEGORY LOGC_EFI
+@@ -18,17 +16,6 @@
+ #include <efi_variable.h>
+ #include <asm/unaligned.h>
  
--#include <common.h>
+-/* TODO: temporarily added here; clean up later */
 -#include <bootm.h>
--#include <charset.h>
- #include <command.h>
--#include <dm.h>
-+#include <efi.h>
- #include <efi_loader.h>
 -#include <efi_selftest.h>
 -#include <env.h>
--#include <errno.h>
--#include <image.h>
-+#include <exports.h>
- #include <log.h>
- #include <malloc.h>
+-#include <mapmem.h>
 -#include <asm/global_data.h>
 -#include <linux/libfdt.h>
 -#include <linux/libfdt_env.h>
- #include <mapmem.h>
--#include <memalign.h>
-+#include <vsprintf.h>
- #include <asm-generic/sections.h>
--#include <linux/linkage.h>
-+#include <asm/global_data.h>
-+#include <linux/string.h>
+-
+-DECLARE_GLOBAL_DATA_PTR;
+-
+ static const struct efi_boot_services *bs;
+ static const struct efi_runtime_services *rs;
  
- DECLARE_GLOBAL_DATA_PTR;
+@@ -743,377 +730,6 @@ out:
+ 	return ret;
+ }
  
 -static struct efi_device_path *bootefi_image_path;
 -static struct efi_device_path *bootefi_device_path;
@@ -159,7 +301,7 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 -/**
 - * efi_clear_bootdev() - clear boot device
 - */
--static void efi_clear_bootdev(void)
+-void efi_clear_bootdev(void)
 -{
 -	efi_free_pool(bootefi_device_path);
 -	efi_free_pool(bootefi_image_path);
@@ -246,9 +388,9 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 - * @load_options:	pointer to load options (output)
 - * Return:		status code
 - */
--static efi_status_t efi_env_set_load_options(efi_handle_t handle,
--					     const char *env_var,
--					     u16 **load_options)
+-efi_status_t efi_env_set_load_options(efi_handle_t handle,
+-				      const char *env_var,
+-				      u16 **load_options)
 -{
 -	const char *env = env_get(env_var);
 -	size_t size;
@@ -353,14 +495,14 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 - * efi_install_fdt() - install device tree
 - *
 - * If fdt is not EFI_FDT_USE_INTERNAL, the device tree located at that memory
-- * address will will be installed as configuration table, otherwise the device
+- * address will be installed as configuration table, otherwise the device
 - * tree located at the address indicated by environment variable fdt_addr or as
 - * fallback fdtcontroladdr will be used.
 - *
 - * On architectures using ACPI tables device trees shall not be installed as
 - * configuration table.
 - *
-- * @fdt:	address of device tree or EFI_FDT_USE_INTERNAL to use the
+- * @fdt:	address of device tree or EFI_FDT_USE_INTERNAL to use
 - *		the hardware device tree as indicated by environment variable
 - *		fdt_addr or as fallback the internal device tree as indicated by
 - *		the environment variable fdtcontroladdr
@@ -510,42 +652,13 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 -	return ret;
 -}
 -
--/**
-- * efi_bootmgr_run() - execute EFI boot manager
-- * fdt:	Flat device tree
-- *
-- * Invoke EFI boot manager and execute a binary depending on
-- * boot options. If @fdt is not NULL, it will be passed to
-- * the executed binary.
-- *
-- * Return:	status code
-- */
--static efi_status_t efi_bootmgr_run(void *fdt)
--{
--	efi_handle_t handle;
--	void *load_options;
--	efi_status_t ret;
--
--	/* Initialize EFI drivers */
--	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
--		return CMD_RET_FAILURE;
--	}
--
--	ret = efi_install_fdt(fdt);
--	if (ret != EFI_SUCCESS)
--		return ret;
--
--	ret = efi_bootmgr_load(&handle, &load_options);
--	if (ret != EFI_SUCCESS) {
--		log_notice("EFI boot manager: Cannot load any image\n");
--		return ret;
--	}
--
--	return do_bootefi_exec(handle, load_options);
--}
+ /**
+  * efi_bootmgr_run() - execute EFI boot manager
+  * fdt:	Flat device tree
+@@ -1150,99 +766,3 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 
+ 	return do_bootefi_exec(handle, load_options);
+ }
 -
 -/**
 - * efi_run_image() - run loaded UEFI image
@@ -624,7 +737,7 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 - *
 - * Return:	status code
 - */
--static efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
+-efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
 -{
 -	efi_status_t ret;
 -
@@ -633,7 +746,7 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 -	if (ret != EFI_SUCCESS) {
 -		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
 -			ret & ~EFI_ERROR_MASK);
--		return ret;
+-		return -1;
 -	}
 -
 -	ret = efi_install_fdt(fdt);
@@ -642,291 +755,60 @@ index 8b0bd07f1ff8..9cf9027bf409 100644
 -
 -	return efi_run_image(image, size);
 -}
-+static struct efi_device_path *test_image_path;
-+static struct efi_device_path *test_device_path;
+diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+index ed7214f3a347..786d8a70e2ad 100644
+--- a/lib/efi_loader/efi_device_path.c
++++ b/lib/efi_loader/efi_device_path.c
+@@ -1090,7 +1090,8 @@ efi_status_t efi_dp_from_name(const char *dev, const char *devnr,
+ 	if (path && !file)
+ 		return EFI_INVALID_PARAMETER;
  
- static efi_status_t bootefi_run_prepare(const char *load_options_path,
- 		struct efi_device_path *device_path,
-@@ -574,23 +65,26 @@ static efi_status_t bootefi_test_prepare
- 	efi_status_t ret;
+-	if (!strcmp(dev, "Mem") || !strcmp(dev, "hostfs"))  {
++	if (IS_ENABLED(CONFIG_EFI_BINARY_EXEC) &&
++	    (!strcmp(dev, "Mem") || !strcmp(dev, "hostfs")))  {
+ 		/* loadm command and semihosting */
+ 		efi_get_image_parameters(&image_addr, &image_size);
  
- 	/* Construct a dummy device path */
--	bootefi_device_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, 0, 0);
--	if (!bootefi_device_path)
-+	test_device_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE, 0, 0);
-+	if (!test_device_path)
- 		return EFI_OUT_OF_RESOURCES;
- 
--	bootefi_image_path = efi_dp_from_file(NULL, path);
--	if (!bootefi_image_path) {
-+	test_image_path = efi_dp_from_file(NULL, path);
-+	if (!test_image_path) {
- 		ret = EFI_OUT_OF_RESOURCES;
- 		goto failure;
- 	}
- 
--	ret = bootefi_run_prepare(load_options_path, bootefi_device_path,
--				  bootefi_image_path, image_objp,
-+	ret = bootefi_run_prepare(load_options_path, test_device_path,
-+				  test_image_path, image_objp,
- 				  loaded_image_infop);
- 	if (ret == EFI_SUCCESS)
- 		return ret;
- 
- failure:
-+	efi_free_pool(test_device_path);
-+	efi_free_pool(test_image_path);
-+	/* TODO: not sure calling clear function is necessary */
- 	efi_clear_bootdev();
- 	return ret;
- }
-@@ -615,6 +109,8 @@ static int do_efi_selftest(void)
- 	ret = EFI_CALL(efi_selftest(&image_obj->header, &systab));
- 	efi_restore_gd();
- 	free(loaded_image_info->load_options);
-+	efi_free_pool(test_device_path);
-+	efi_free_pool(test_image_path);
- 	if (ret != EFI_SUCCESS)
- 		efi_delete_handle(&image_obj->header);
- 	else
-@@ -639,6 +135,8 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 	char *p;
- 	void *fdt, *image_buf;
- 	unsigned long addr, size;
-+	void *image_addr;
-+	size_t image_size;
- 
- 	if (argc < 2)
- 		return CMD_RET_USAGE;
-@@ -690,6 +188,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 	    !strcmp(argv[1], "hello")) {
- 		image_buf = __efi_helloworld_begin;
- 		size = __efi_helloworld_end - __efi_helloworld_begin;
-+		/* TODO: not sure calling clear function is necessary */
- 		efi_clear_bootdev();
- 	} else {
- 		addr = strtoul(argv[1], NULL, 16);
-@@ -705,6 +204,9 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 				return CMD_RET_USAGE;
- 			efi_clear_bootdev();
- 		} else {
-+			/* Image should be already loaded */
-+			efi_get_image_parameters(&image_addr, &image_size);
-+
- 			if (image_buf != image_addr) {
- 				log_err("No UEFI binary known at %s\n",
- 					argv[1]);
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 48d4999e56a9..031a8f76846a 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -91,6 +91,8 @@ efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len);
-  * back to u-boot world
-  */
- void efi_restore_gd(void);
-+/* Call this to unset the current device name */
-+void efi_clear_bootdev(void);
- /* Call this to set the current device name */
- void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
- 		     void *buffer, size_t buffer_size);
-@@ -115,6 +117,7 @@ static inline efi_status_t efi_add_runtime_mmio(void *mmio_ptr, u64 len)
- 
- /* No loader configured, stub out EFI_ENTRY */
- static inline void efi_restore_gd(void) { }
-+static inline void efi_clear_bootdev(void) { }
- static inline void efi_set_bootdev(const char *dev, const char *devnr,
- 				   const char *path, void *buffer,
- 				   size_t buffer_size) { }
-@@ -526,14 +529,21 @@ efi_status_t efi_bootmgr_get_unused_bootoption(u16 *buf,
- efi_status_t efi_bootmgr_update_media_device_boot_option(void);
- /* Delete selected boot option */
- efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
-+/* Invoke EFI boot manager */
-+efi_status_t efi_bootmgr_run(void *fdt);
- /* search the boot option index in BootOrder */
- bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32 *index);
- /* Set up console modes */
- void efi_setup_console_size(void);
-+/* Set up load options from environment variable */
-+efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
-+				      u16 **load_options);
- /* Install device tree */
- efi_status_t efi_install_fdt(void *fdt);
- /* Run loaded UEFI image */
- efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size);
-+/* Run loaded UEFI image with given fdt */
-+efi_status_t efi_binary_run(void *image, size_t size, void *fdt);
- /* Initialize variable services */
- efi_status_t efi_init_variables(void);
- /* Notify ExitBootServices() is called */
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a40762c74c83..cc8d88b4b025 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -3,6 +3,8 @@
-  *  EFI boot manager
-  *
-  *  Copyright (c) 2017 Rob Clark
-+ *  For the code moved from cmd/bootefi.c
-+ *  Copyright (c) 2016 Alexander Graf
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index cdfd16ea7742..dd8c38f0cb5c 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -1,17 +1,28 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+  * Copyright (c) 2020, Linaro Limited
++ * For the code moved from cmd/bootefi.c
++ * Copyright (c) 2016 Alexander Graf
   */
  
  #define LOG_CATEGORY LOGC_EFI
-@@ -16,6 +18,17 @@
- #include <efi_variable.h>
- #include <asm/unaligned.h>
- 
-+/* TODO: temporarily added here; clean up later */
 +#include <bootm.h>
-+#include <efi_selftest.h>
+ #include <common.h>
+-#include <env.h>
+-#include <malloc.h>
+ #include <dm.h>
+-#include <fs.h>
+ #include <efi_load_initrd.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
 +#include <env.h>
++#include <fs.h>
++#include <log.h>
++#include <malloc.h>
 +#include <mapmem.h>
++#include <vsprintf.h>
 +#include <asm/global_data.h>
 +#include <linux/libfdt.h>
 +#include <linux/libfdt_env.h>
 +
 +DECLARE_GLOBAL_DATA_PTR;
-+
- static const struct efi_boot_services *bs;
- static const struct efi_runtime_services *rs;
  
-@@ -729,3 +742,507 @@ out:
- 		return EFI_SUCCESS;
- 	return ret;
+ #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI_LOAD_FILE2_INITRD)
+ /* GUID used by Linux to identify the LoadFile2 protocol with the initrd */
+@@ -282,3 +293,472 @@ bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32 *inde
+ 
+ 	return false;
  }
-+
-+static struct efi_device_path *bootefi_image_path;
-+static struct efi_device_path *bootefi_device_path;
-+static void *image_addr;
-+static size_t image_size;
-+
-+/**
-+ * efi_get_image_parameters() - return image parameters
-+ *
-+ * @img_addr:		address of loaded image in memory
-+ * @img_size:		size of loaded image
-+ */
-+void efi_get_image_parameters(void **img_addr, size_t *img_size)
-+{
-+	*img_addr = image_addr;
-+	*img_size = image_size;
-+}
-+
-+/**
-+ * efi_clear_bootdev() - clear boot device
-+ */
-+void efi_clear_bootdev(void)
-+{
-+	efi_free_pool(bootefi_device_path);
-+	efi_free_pool(bootefi_image_path);
-+	bootefi_device_path = NULL;
-+	bootefi_image_path = NULL;
-+	image_addr = NULL;
-+	image_size = 0;
-+}
-+
-+/**
-+ * efi_set_bootdev() - set boot device
-+ *
-+ * This function is called when a file is loaded, e.g. via the 'load' command.
-+ * We use the path to this file to inform the UEFI binary about the boot device.
-+ *
-+ * @dev:		device, e.g. "MMC"
-+ * @devnr:		number of the device, e.g. "1:2"
-+ * @path:		path to file loaded
-+ * @buffer:		buffer with file loaded
-+ * @buffer_size:	size of file loaded
-+ */
-+void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
-+		     void *buffer, size_t buffer_size)
-+{
-+	struct efi_device_path *device, *image;
-+	efi_status_t ret;
-+
-+	log_debug("dev=%s, devnr=%s, path=%s, buffer=%p, size=%zx\n", dev,
-+		  devnr, path, buffer, buffer_size);
-+
-+	/* Forget overwritten image */
-+	if (buffer + buffer_size >= image_addr &&
-+	    image_addr + image_size >= buffer)
-+		efi_clear_bootdev();
-+
-+	/* Remember only PE-COFF and FIT images */
-+	if (efi_check_pe(buffer, buffer_size, NULL) != EFI_SUCCESS) {
-+		if (IS_ENABLED(CONFIG_FIT) &&
-+		    !fit_check_format(buffer, IMAGE_SIZE_INVAL)) {
-+			/*
-+			 * FIT images of type EFI_OS are started via command
-+			 * bootm. We should not use their boot device with the
-+			 * bootefi command.
-+			 */
-+			buffer = 0;
-+			buffer_size = 0;
-+		} else {
-+			log_debug("- not remembering image\n");
-+			return;
-+		}
-+	}
-+
-+	/* efi_set_bootdev() is typically called repeatedly, recover memory */
-+	efi_clear_bootdev();
-+
-+	image_addr = buffer;
-+	image_size = buffer_size;
-+
-+	ret = efi_dp_from_name(dev, devnr, path, &device, &image);
-+	if (ret == EFI_SUCCESS) {
-+		bootefi_device_path = device;
-+		if (image) {
-+			/* FIXME: image should not contain device */
-+			struct efi_device_path *image_tmp = image;
-+
-+			efi_dp_split_file_path(image, &device, &image);
-+			efi_free_pool(image_tmp);
-+		}
-+		bootefi_image_path = image;
-+		log_debug("- boot device %pD\n", device);
-+		if (image)
-+			log_debug("- image %pD\n", image);
-+	} else {
-+		log_debug("- efi_dp_from_name() failed, err=%lx\n", ret);
-+		efi_clear_bootdev();
-+	}
-+}
-+
-+/**
-+ * efi_env_set_load_options() - set load options from environment variable
-+ *
-+ * @handle:		the image handle
-+ * @env_var:		name of the environment variable
-+ * @load_options:	pointer to load options (output)
-+ * Return:		status code
-+ */
-+efi_status_t efi_env_set_load_options(efi_handle_t handle,
-+				      const char *env_var,
-+				      u16 **load_options)
-+{
-+	const char *env = env_get(env_var);
-+	size_t size;
-+	u16 *pos;
-+	efi_status_t ret;
-+
-+	*load_options = NULL;
-+	if (!env)
-+		return EFI_SUCCESS;
-+	size = sizeof(u16) * (utf8_utf16_strlen(env) + 1);
-+	pos = calloc(size, 1);
-+	if (!pos)
-+		return EFI_OUT_OF_RESOURCES;
-+	*load_options = pos;
-+	utf8_utf16_strcpy(&pos, env);
-+	ret = efi_set_load_options(handle, size, *load_options);
-+	if (ret != EFI_SUCCESS) {
-+		free(*load_options);
-+		*load_options = NULL;
-+	}
-+	return ret;
-+}
 +
 +#if !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
 +
@@ -1117,7 +999,7 @@ index a40762c74c83..cc8d88b4b025 100644
 + * Load the EFI binary into a newly assigned memory unwinding the relocation
 + * information, install the loaded image protocol, and call the binary.
 + */
-+static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
++efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
 +{
 +	efi_status_t ret;
 +	efi_uintn_t exit_data_size = 0;
@@ -1166,41 +1048,138 @@ index a40762c74c83..cc8d88b4b025 100644
 +	return ret;
 +}
 +
++#if CONFIG_IS_ENABLED(EFI_BINARY_EXEC)
++static struct efi_device_path *bootefi_image_path;
++static struct efi_device_path *bootefi_device_path;
++static void *image_addr;
++static size_t image_size;
++
 +/**
-+ * efi_bootmgr_run() - execute EFI boot manager
-+ * fdt:	Flat device tree
++ * efi_get_image_parameters() - return image parameters
 + *
-+ * Invoke EFI boot manager and execute a binary depending on
-+ * boot options. If @fdt is not NULL, it will be passed to
-+ * the executed binary.
-+ *
-+ * Return:	status code
++ * @img_addr:		address of loaded image in memory
++ * @img_size:		size of loaded image
 + */
-+efi_status_t efi_bootmgr_run(void *fdt)
++void efi_get_image_parameters(void **img_addr, size_t *img_size)
 +{
-+	efi_handle_t handle;
-+	void *load_options;
++	*img_addr = image_addr;
++	*img_size = image_size;
++}
++
++/**
++ * efi_clear_bootdev() - clear boot device
++ */
++void efi_clear_bootdev(void)
++{
++	efi_free_pool(bootefi_device_path);
++	efi_free_pool(bootefi_image_path);
++	bootefi_device_path = NULL;
++	bootefi_image_path = NULL;
++	image_addr = NULL;
++	image_size = 0;
++}
++
++/**
++ * efi_set_bootdev() - set boot device
++ *
++ * This function is called when a file is loaded, e.g. via the 'load' command.
++ * We use the path to this file to inform the UEFI binary about the boot device.
++ *
++ * @dev:		device, e.g. "MMC"
++ * @devnr:		number of the device, e.g. "1:2"
++ * @path:		path to file loaded
++ * @buffer:		buffer with file loaded
++ * @buffer_size:	size of file loaded
++ */
++void efi_set_bootdev(const char *dev, const char *devnr, const char *path,
++		     void *buffer, size_t buffer_size)
++{
++	struct efi_device_path *device, *image;
 +	efi_status_t ret;
 +
-+	/* Initialize EFI drivers */
-+	ret = efi_init_obj_list();
-+	if (ret != EFI_SUCCESS) {
-+		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-+			ret & ~EFI_ERROR_MASK);
-+		return CMD_RET_FAILURE;
++	log_debug("dev=%s, devnr=%s, path=%s, buffer=%p, size=%zx\n", dev,
++		  devnr, path, buffer, buffer_size);
++
++	/* Forget overwritten image */
++	if (buffer + buffer_size >= image_addr &&
++	    image_addr + image_size >= buffer)
++		efi_clear_bootdev();
++
++	/* Remember only PE-COFF and FIT images */
++	if (efi_check_pe(buffer, buffer_size, NULL) != EFI_SUCCESS) {
++		if (IS_ENABLED(CONFIG_FIT) &&
++		    !fit_check_format(buffer, IMAGE_SIZE_INVAL)) {
++			/*
++			 * FIT images of type EFI_OS are started via command
++			 * bootm. We should not use their boot device with the
++			 * bootefi command.
++			 */
++			buffer = 0;
++			buffer_size = 0;
++		} else {
++			log_debug("- not remembering image\n");
++			return;
++		}
 +	}
 +
-+	ret = efi_install_fdt(fdt);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
++	/* efi_set_bootdev() is typically called repeatedly, recover memory */
++	efi_clear_bootdev();
 +
-+	ret = efi_bootmgr_load(&handle, &load_options);
-+	if (ret != EFI_SUCCESS) {
-+		log_notice("EFI boot manager: Cannot load any image\n");
-+		return ret;
++	image_addr = buffer;
++	image_size = buffer_size;
++
++	ret = efi_dp_from_name(dev, devnr, path, &device, &image);
++	if (ret == EFI_SUCCESS) {
++		bootefi_device_path = device;
++		if (image) {
++			/* FIXME: image should not contain device */
++			struct efi_device_path *image_tmp = image;
++
++			efi_dp_split_file_path(image, &device, &image);
++			efi_free_pool(image_tmp);
++		}
++		bootefi_image_path = image;
++		log_debug("- boot device %pD\n", device);
++		if (image)
++			log_debug("- image %pD\n", image);
++	} else {
++		log_debug("- efi_dp_from_name() failed, err=%lx\n", ret);
++		efi_clear_bootdev();
 +	}
++}
 +
-+	return do_bootefi_exec(handle, load_options);
++/**
++ * efi_env_set_load_options() - set load options from environment variable
++ *
++ * @handle:		the image handle
++ * @env_var:		name of the environment variable
++ * @load_options:	pointer to load options (output)
++ * Return:		status code
++ */
++efi_status_t efi_env_set_load_options(efi_handle_t handle,
++				      const char *env_var,
++				      u16 **load_options)
++{
++	const char *env = env_get(env_var);
++	size_t size;
++	u16 *pos;
++	efi_status_t ret;
++
++	*load_options = NULL;
++	if (!env)
++		return EFI_SUCCESS;
++	size = sizeof(u16) * (utf8_utf16_strlen(env) + 1);
++	pos = calloc(size, 1);
++	if (!pos)
++		return EFI_OUT_OF_RESOURCES;
++	*load_options = pos;
++	utf8_utf16_strcpy(&pos, env);
++	ret = efi_set_load_options(handle, size, *load_options);
++	if (ret != EFI_SUCCESS) {
++		free(*load_options);
++		*load_options = NULL;
++	}
++	return ret;
 +}
 +
 +/**
@@ -1210,7 +1189,7 @@ index a40762c74c83..cc8d88b4b025 100644
 + * @source_size:	size of the UEFI image
 + * Return:		status code
 + */
-+efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
++static efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
 +{
 +	efi_handle_t mem_handle = NULL, handle;
 +	struct efi_device_path *file_path = NULL;
@@ -1289,7 +1268,7 @@ index a40762c74c83..cc8d88b4b025 100644
 +	if (ret != EFI_SUCCESS) {
 +		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
 +			ret & ~EFI_ERROR_MASK);
-+		return -1;
++		return ret;
 +	}
 +
 +	ret = efi_install_fdt(fdt);
@@ -1298,6 +1277,7 @@ index a40762c74c83..cc8d88b4b025 100644
 +
 +	return efi_run_image(image, size);
 +}
++#endif /* CONFIG_EFI_BINARY_EXEC */
 -- 
 2.34.1
 
