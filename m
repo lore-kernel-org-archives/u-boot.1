@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA553C25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 10:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8440C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 10:15:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 970F0875E1;
-	Thu, 26 Oct 2023 12:05:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F383875B0;
+	Thu, 26 Oct 2023 12:15:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cgMqD0jK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wYEdkSDB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E00C87599; Thu, 26 Oct 2023 12:05:08 +0200 (CEST)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
+ id 33635875B0; Thu, 26 Oct 2023 12:15:35 +0200 (CEST)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7779A8759C
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 12:05:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31FA48759C
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 12:15:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-7b610279c8aso334601241.3
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 03:05:01 -0700 (PDT)
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7b6043d0bbeso276860241.1
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 03:15:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698314700; x=1698919500; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698315331; x=1698920131; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0Mz0VXcyhm2+XKX6uL45lIvMAUWbALtj8vDVdr3EBAk=;
- b=cgMqD0jKkrVaj3mpEZ/A3ZO5fgjg25lTvva6aP7ulW7A7wFlays1kFirEu4LOiQnGq
- z7oCzHa+z2Qqwv1YS+QUWF5KN/dVAZNOj61RrbHTgz546lEPy9xerYpodapnJ+7A+IgI
- vLImA1N9qakbU6lV9RE78bNvw5jEgCHT5+vX178Bpt8bNrVjCJ1nyyAQwJWw52cMgL1e
- fmKx+d73lzYSaQi/8h46bpoCeE5isbK0yVA8VoFuAvI5m6r2RR54gGXgEuQbmH1qGKCn
- M62ky/QhVjW7UHWEJzucrAg6EkO6IqqDX7vjbDn4xZhwGW67Mr6GQZMFIKwwM0khlFLX
- 9QfQ==
+ bh=seAjm/+TMciGLp9qLdRjmGEjXPqCM/i84dRVQlVE994=;
+ b=wYEdkSDBMTImEuDXikT05cl0SeFaR1ZEFxiGA/3vIR+rgOW6r0Jno9PtPmLy+GeBsC
+ EUKAyoLGQ6M3wpKIHAls8KVtRVlXqM2EOODBLo52/oretyyScIumzGxbmbJkTEEKooQo
+ jcCMdzfeSypGfsxxm1OhLjL9ngbEzx3rwVNZZcGw3i4OLzlBcJq8K3Ayrjyxz/4bWHVY
+ gEAsg48KHKPtHl7jrZqlwX4+GAGR2sdgltgud9aO5Su/nItayEf7wZQ1t7rX+4PTNexs
+ 7thVQfCpX84OgNEYuW4fnUao9915lHw5wXK6bWViLa+HLL0xjZfmJU29mpZQLc177s9y
+ k2sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698314700; x=1698919500;
+ d=1e100.net; s=20230601; t=1698315331; x=1698920131;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0Mz0VXcyhm2+XKX6uL45lIvMAUWbALtj8vDVdr3EBAk=;
- b=gSqj9oVKA3BSym3YUvfHbPjBqMrtoXdeJyjf8pihkatL0xv3K8x3NXL2fHemeoDkzA
- MOEJD0psZ5WLf7Mvw995Dms0+PXqUsCWJMlX0vfCzYDvsbpYs7Gr3RZcwXRK4csIAjSn
- TEZhAP22rEooLBdm0m/y2psEVk6pw015qFthodan4fP9kdZBYadWbfwQ3n5ukJJnLg7H
- VtLAxk8KVTlKT2e2Ewbcr53eWtCEVR5iRiRoe6PxGvZkIWc/IS/bUpUSAg0WhIYjS2TN
- 0sbb2EWx1pK7rsP0XdRyWPPUFzZ4qfDb4l8vrYWkHUWXyP2Jwjdv10Wmmj5/HHXaoN2c
- /icw==
-X-Gm-Message-State: AOJu0YwMUb+r7PvzvbUNEPX41XCr0SFzGrtR/8TDdsnMnvQZQAb5TzK6
- e1/82iZqMTGqTMxRpPcJO6Umn4zcR2kcr0ny9vzaEQ==
-X-Google-Smtp-Source: AGHT+IH+SNXhUDAIWvT4PdjdFmXyPFswg199MbaSMwomiEiTSsBqKpobePjzcWsAq4yrYGoOk3W0xij0NfP2uy65vV0=
-X-Received: by 2002:a67:cc15:0:b0:452:78e2:4a07 with SMTP id
- q21-20020a67cc15000000b0045278e24a07mr14871895vsl.8.1698314700436; Thu, 26
- Oct 2023 03:05:00 -0700 (PDT)
+ bh=seAjm/+TMciGLp9qLdRjmGEjXPqCM/i84dRVQlVE994=;
+ b=J5ic+/tJia4Q4jLojF3lRFpEYwFhMLeRf/tQiI0C3boxXbnQI4ezkKaO0+oLOllLxw
+ /lEbQG5ZDuPYo7qL0BgVqTQPokyM/2qmEmd2GIWEXmk+/e2Zr+Q4oTHY9b5RW6XPNZKy
+ zd5mx4VYL4LKfLyyztxFiyjYzc4s/xl41OixXsno7Ap2Oc7fGXFXaEaCufCvQWOyEjs0
+ lyqSgeqPZWC7900eyORuNtr+BmKWTFLMr8MTCqj9HP9N7BcxHlEIyxJBeINdcsmjYsgY
+ HW6pAVhbR/57ekRmfhWziaV5cgOCWtS1zP6kERZuL8TUGl86u59jIM8NJKmiNe3vwG9y
+ qguw==
+X-Gm-Message-State: AOJu0Yydy8L0pZdHJaIdaoUjPvU2xIBTD5a4pIKh5IEbbdevIPOsurg9
+ fvsN+9kd1wWey4BZG6nj1eq5C5kqT8JhEfTV0+ArAg==
+X-Google-Smtp-Source: AGHT+IETt4fMUJQHgf2m7wBCMUwzDZ0OhZfJT5OWzIlx8TeCb2VyHsTvgw6yDArPK2yDgSyhrO3omYB5dbyq/rLk2VE=
+X-Received: by 2002:a05:6102:101d:b0:457:c52e:deda with SMTP id
+ q29-20020a056102101d00b00457c52ededamr14060608vsp.34.1698315330900; Thu, 26
+ Oct 2023 03:15:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
  <20231024-b4-qcom-clk-v1-1-9d96359b9a82@linaro.org>
 In-Reply-To: <20231024-b4-qcom-clk-v1-1-9d96359b9a82@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 26 Oct 2023 15:34:48 +0530
-Message-ID: <CAFA6WYNz6SrOQiuWuXoyDbAaO2qo_NROK352nigJxOmNfrZ4XA@mail.gmail.com>
+Date: Thu, 26 Oct 2023 15:45:19 +0530
+Message-ID: <CAFA6WYPxtCdzFoumiEWkWUSEa15Mkth7Ntw+yYKaCdDFf2w0ng@mail.gmail.com>
 Subject: Re: [PATCH 1/8] clk/qcom: move from mach-snapdragon
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -144,11 +144,6 @@ On Wed, 25 Oct 2023 at 01:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >  obj-$(CONFIG_CLK_OCTEON) += clk_octeon.o
 >  obj-$(CONFIG_CLK_OWL) += owl/
 > +obj-$(CONFIG_ARCH_SNAPDRAGON) += qcom/
-
-CONFIG_CLK_QCOM is better suited here. You should introduce that here instead.
-
--Sumit
-
 >  obj-$(CONFIG_CLK_RENESAS) += renesas/
 >  obj-$(CONFIG_$(SPL_TPL_)CLK_SCMI) += clk_scmi.o
 >  obj-$(CONFIG_CLK_SIFIVE) += sifive/
@@ -167,6 +162,17 @@ CONFIG_CLK_QCOM is better suited here. You should introduce that here instead.
 > +obj-$(CONFIG_TARGET_DRAGONBOARD410C) += clock-apq8016.o
 > +obj-$(CONFIG_TARGET_DRAGONBOARD820C) += clock-apq8096.o
 > +obj-$(CONFIG_TARGET_QCS404EVB) += clock-qcs404.o
+
+Similarly, I think here we should introduce here SoC specific config
+options like:
+
+CONFIG_CLK_SDM845
+CONFIG_CLK_APQ8016
+CONFIG_CLK_APQ8096
+CONFIG_CLK_QCS404
+
+-Sumit
+
 > diff --git a/arch/arm/mach-snapdragon/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
 > similarity index 98%
 > rename from arch/arm/mach-snapdragon/clock-apq8016.c
