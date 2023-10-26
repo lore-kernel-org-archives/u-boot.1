@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F26C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F165C25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:34:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE7AF87B7E;
-	Thu, 26 Oct 2023 20:32:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F4F887BA2;
+	Thu, 26 Oct 2023 20:32:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hROe+Zmk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q5EQpWNa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8930E87AE9; Thu, 26 Oct 2023 20:31:56 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 6BCD887641; Thu, 26 Oct 2023 20:31:59 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 135338763F
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88E2B87AFF
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-77897c4ac1fso91542285a.3
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:54 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-1e5bc692721so731654fac.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698345112; x=1698949912; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698345114; x=1698949914; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cGOdhNVkcYPMtZzqjWnlWgn6vUL8XkbpxI8jruxoWQM=;
- b=hROe+Zmkzw8kA/s7q6VTtyXKv/wKL22CYK+NQAuJ10PAmWDyzbTxrzOyyeKJNjOCVR
- RJ6ux1CHreG6LZeP4I3JkLdqlltf/l88ExQ9S2H3PPSTROawlF1ReloiZsBe9RY6eoBK
- GTGTK8eoIrFlvqS3hRtOueXMxidNCTGkCpJic=
+ :reply-to; bh=lk6UZTtc4HiJZhtxsxnmrrTruw3uvviFnh5aTuQsOHs=;
+ b=Q5EQpWNa5rMW+6aMJOGHm58rbySJG5afAALkbvkkASbKIHM5ArQoUvQroEESL/X3Fi
+ GoxvUWJjrFqN7vS899tZ7ky/synLb0qurTam1ovUdY0mllNmmsPB7AG6ChrOCr2bqfXQ
+ OmB4aEM0DGsHqqrVFNUeR/DTKu15ElM30wB64=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698345112; x=1698949912;
+ d=1e100.net; s=20230601; t=1698345114; x=1698949914;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cGOdhNVkcYPMtZzqjWnlWgn6vUL8XkbpxI8jruxoWQM=;
- b=h/1cyxqDlGVCmlbtDFCY8BQo9xn7LNXoi5Qw0J3WKXQ+NJbHrwn3RGQuhF/N+kdzUx
- 1NhsqnL/wZyzPBYQ65EG5CooHiU0dNYCFcpRTet05WWKilZXcETCD3B0IXJxXXAbeT6a
- 1syjc2BL5/G9Q+IF0MwByRJJ+G2idJp5Aset5i/JQOrx8Pl4uQTWBq57fROKGVc+kGGk
- o2iN3Wh90VTQy4KN6jDMs8c9cVOf0ZkzQ/777709BeQCqf0w8ZjtJbb1viTPrQZ8RC10
- pWeM6dYj0xDNWU5ZRm/epEPPikptuLWNFfZhbHpjXrIoiHQVehUy7e89tnrjH5ybAKA3
- 3BlQ==
-X-Gm-Message-State: AOJu0YxHK0Dp3Bk7+CUBPQGJV2g2x13dLtFfyueIUbBSjk8pls8gCZcW
- A3nojt0Do8ENLATf4LaBFgE6USrWDLzYkMBVsMUYxw==
-X-Google-Smtp-Source: AGHT+IGAKp8G3Xe03f96kTcbAMiGi2eA7OGR1n877W4WddajErYLv5Kh797oQY260WtNPpItHiUVGw==
-X-Received: by 2002:a05:620a:6016:b0:778:8dc1:bb7b with SMTP id
- dw22-20020a05620a601600b007788dc1bb7bmr141522qkb.27.1698345112617; 
- Thu, 26 Oct 2023 11:31:52 -0700 (PDT)
+ bh=lk6UZTtc4HiJZhtxsxnmrrTruw3uvviFnh5aTuQsOHs=;
+ b=TNUQl0V0YY14F+fTCkze7oJ+kU/PpTFDysKgpyrVDBD7aLTPX5mKhAGCZwBzamm/2W
+ cyyL9hWlg67WS1+ZODGlKN0CM37YwdFyuST6tmc1EMVjndzGZVdJ0IdwOYjRbk0b0Z0q
+ 0YMJKrj0e6+bi4VlRiSx49whWKCFNx992pS6EmyiARIaJR0p/3K0dmJ70o1ZWzxa34hO
+ 6SGKWCDR55THUPTvAmmSLqBevvKNY4l2qP/NN30OzawAyGPd3Jhlr9I4sWMc+FRZmjgc
+ M9KSUAByoOFpfaM4FTPUDFN9mEIVzxsKA5EU1fjo1TdVUnXf2vvdMwGi6dNVjj4566c4
+ Eo9Q==
+X-Gm-Message-State: AOJu0YwDUE5QfRaQ+UbD+QKUjmO48D0+1vXrpPI43VccusndESNdehTN
+ 8MT85jhfRoHE+JhUZLT94+ffm43l58ZIhqlpi8pHCg==
+X-Google-Smtp-Source: AGHT+IHZ0h8FkpuVd/dTuDo0Zk5JCuWXAelzHEL3SgYaBfMlrBkrPWYX1nCnUZHJrIqMyBgtX8hoog==
+X-Received: by 2002:a05:6870:1344:b0:1e9:94c1:917a with SMTP id
+ 4-20020a056870134400b001e994c1917amr351510oac.54.1698345113978; 
+ Thu, 26 Oct 2023 11:31:53 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
  [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
  by smtp.gmail.com with ESMTPSA id
- az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.52
+ az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.53
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 11:31:52 -0700 (PDT)
+ Thu, 26 Oct 2023 11:31:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v5 15/30] boot: Make DISTRO_DEFAULTS select CMDLINE
-Date: Thu, 26 Oct 2023 14:31:23 -0400
-Message-Id: <20231026183138.636948-15-trini@konsulko.com>
+Subject: [v5 17/30] boot: Move SYS_BOOTM_LEN to be by LEGACY_IMAGE_FORMAT
+Date: Thu, 26 Oct 2023 14:31:25 -0400
+Message-Id: <20231026183138.636948-17-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026183138.636948-1-trini@konsulko.com>
 References: <20231026183138.636948-1-trini@konsulko.com>
@@ -89,27 +89,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The implementation of DISTRO_DEFAULTS is done in environment scripts and
-requires the command line in order to work. Because of this, select
-CMDLINE here.
+This particular option is required for booting all image types,
+regardless of if we are starting an OS via command line or something
+else.  Move the question for SYS_BOOTM_LEN to be by the question for
+LEGACY_IMAGE_FORMAT, as that's where our generic OS questions start.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ boot/Kconfig | 11 +++++++++++
+ cmd/Kconfig  | 11 -----------
+ 2 files changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 0dbd10a93469..2075ecd34b1f 100644
+index 88b9296ee1bf..7c92e0974c5f 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -777,6 +777,7 @@ endmenu		# Boot images
+@@ -692,6 +692,17 @@ config LEGACY_IMAGE_FORMAT
+ 	  loaded. If a board needs the legacy image format support in this
+ 	  case, enable it here.
  
- config DISTRO_DEFAULTS
- 	bool "(deprecated) Script-based booting of Linux distributions"
-+	select CMDLINE
- 	select BOOT_DEFAULTS
- 	select AUTO_COMPLETE
- 	select CMDLINE_EDITING
++config SYS_BOOTM_LEN
++	hex "Maximum size of a decompresed OS image"
++	depends on CMD_BOOTM || CMD_BOOTI || CMD_BOOTZ || \
++		LEGACY_IMAGE_FORMAT || SPL_LEGACY_IMAGE_FORMAT
++	default 0x4000000 if PPC || ARM64
++	default 0x1000000 if X86 || ARCH_MX6 || ARCH_MX7
++	default 0x800000
++	help
++	  This is the maximum size of the buffer that is used to decompress the OS
++	  image in to if attempting to boot a compressed image.
++
+ config SUPPORT_RAW_INITRD
+ 	bool "Enable raw initrd images"
+ 	help
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index bfe363710c79..febfa2cdaa5f 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -361,17 +361,6 @@ config BOOTM_VXWORKS
+ 	help
+ 	  Support booting VxWorks images via the bootm command.
+ 
+-config SYS_BOOTM_LEN
+-	hex "Maximum size of a decompresed OS image"
+-	depends on CMD_BOOTM || CMD_BOOTI || CMD_BOOTZ || \
+-		   LEGACY_IMAGE_FORMAT || SPL_LEGACY_IMAGE_FORMAT
+-	default 0x4000000 if PPC || ARM64
+-	default 0x1000000 if X86 || ARCH_MX6 || ARCH_MX7
+-	default 0x800000
+-	help
+-	  This is the maximum size of the buffer that is used to decompress the OS
+-	  image in to, if passing a compressed image to bootm/booti/bootz.
+-
+ config CMD_BOOTEFI
+ 	bool "bootefi"
+ 	depends on EFI_LOADER
 -- 
 2.34.1
 
