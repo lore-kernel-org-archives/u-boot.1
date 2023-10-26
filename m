@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E71AC25B67
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 16:07:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50247C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 17:44:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E776875C8;
-	Thu, 26 Oct 2023 18:07:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 78FFA87240;
+	Thu, 26 Oct 2023 19:44:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GoDdICVz";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="qVUOO2D7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8142875CC; Thu, 26 Oct 2023 18:07:07 +0200 (CEST)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id B0A3C87468; Thu, 26 Oct 2023 19:44:20 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43956875BD
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 18:07:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7670A86FC8
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 19:44:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-41cc7379b23so7494211cf.3
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:07:03 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-53e2dc8fa02so2002367a12.2
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 10:44:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698336421; x=1698941221; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gBpUlpv+ddEgG5mprJaMQY21+wtMfPWtHNUt+um0g/M=;
- b=GoDdICVzrb0wVfU42kV7uGw+bYAi3/k8/t55iZUcE+tcS52QOnB9oF0EjL4PqFURyj
- cj0I02VMoSRkXBNA6Dv2ri/YcpJ2aAClqdbSfRCd2h1qwQ5ZZcjv+1nIUF52KLWlsIb+
- RpHkn1rrXp+7TfHJs+KfFVZAfKD21iVwqY4BQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698336421; x=1698941221;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=google.com; s=20230601; t=1698342255; x=1698947055; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gBpUlpv+ddEgG5mprJaMQY21+wtMfPWtHNUt+um0g/M=;
- b=UeUToQmnJLRSOzgVxD/c8XZN3DwPbfSdr/zul2LkCdSuUj/372UzaZUGCdeIDra38e
- vhHck0j0oJSrvA/67SoHs7Wn/VG1oiXyRgLwQqti8waMDpuFXLO8P/HDoK+mqXoexM2Z
- rWd3B6ewbB4/ZM0dspiPv6LCzjKEo0i7dDfLnMN1GH00jilHSeDaf20QoOy9crA3GlAh
- uM7R4dsCSxWnV0edlL20zyFuH+AMYUD2y16CPKsvpWlXqYxcHdVj5YquG9EAiTd/PW6q
- Uomk1giZ5C+tVSgrA3+b1PXIG17Iya0gfi27UJiUbohHSeQRorKIc1q5D/dKmQ3ixD9D
- KcIA==
-X-Gm-Message-State: AOJu0YyPZenmIccZ8rrlPupSYgP2tIzRGc7dcH/TsjM6NUd2+YZrl3Wo
- E7sgFA8ViCz7TAw1S529ZIFEYw==
-X-Google-Smtp-Source: AGHT+IGyR7ft/tIQ0knw00FpliHQS6BRUUnriHv9BhBFDkfebkXyDItLsW481BV7iqRbGbfBiUNM1g==
-X-Received: by 2002:a05:622a:15d3:b0:41c:d8b6:27ef with SMTP id
- d19-20020a05622a15d300b0041cd8b627efmr22409894qty.65.1698336421223; 
- Thu, 26 Oct 2023 09:07:01 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-7a1b-75c0-d849-e3ce.res6.spectrum.com.
- [2603:6081:7b00:6400:7a1b:75c0:d849:e3ce])
- by smtp.gmail.com with ESMTPSA id
- 9-20020ac85949000000b0041cf5ec8b75sm3903836qtz.96.2023.10.26.09.07.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 09:07:00 -0700 (PDT)
-Date: Thu, 26 Oct 2023 12:06:58 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v8 3/8] power: pmic: add the base MAX77663 PMIC support
-Message-ID: <20231026160658.GJ496310@bill-the-cat>
-References: <20231024074110.199623-1-clamor95@gmail.com>
- <20231024074110.199623-4-clamor95@gmail.com>
- <20231024191757.GG496310@bill-the-cat>
- <CAPVz0n3b4eH0q3sPGD7UkjVo56r__6AzoJsuwKy+XVPPCQX+xA@mail.gmail.com>
- <20231025133712.GL496310@bill-the-cat>
- <B68639B5-C9EB-4300-B745-0265604BAFE6@gmail.com>
+ bh=T7mKrOzIgWIVt4QZUEBgjjJ3ICHm687OaRaA7skUtrM=;
+ b=qVUOO2D7Y/QJELTEKMkN/A0VyYiq5uF4whobpnl4lefQU/Mdp6adbr6uaGCBx7Pvvi
+ de5HvOovFyXMReCSH8hYAVn0qQCU2KXs2r8iHjhcGHX4rHRJdzCMLY5P7yk08h6cSh+y
+ h0smaS26u9hVHVjAohz1aMe1KX3sxOPnWGFXzWVbiLZUhdZ+6/Jio7hLUhunGbsAYW/C
+ tMTxU/ddJYLnsPCpuanLJ7gHIPqjZhba5VMr+1i1dj2Thc9nOhlbmIemIdUlD03rbZnp
+ v6aTfQBwxLO+TEUqqy/hNdpE6qDhxjbKogfeft8iWhsQOTp5/vYEsnIM32XQW/rOSfJG
+ hXgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698342255; x=1698947055;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=T7mKrOzIgWIVt4QZUEBgjjJ3ICHm687OaRaA7skUtrM=;
+ b=qwTpx92gibybromEdS0EEReUHJ00QCOqzzmqGtFfapYl/+HutbDXXdtNepi6EZdLNb
+ qoVC6py/sSZ6L50QHi1EpnxgO2t6pMA8F15fjESjyMKLIHWyQ3Eo3Fzr/7eww0zzhf5R
+ 68Y7rNCvCHA0qkMhjMyZ5PAoUPUS85fyJRp7rIv6T1FuEumHuu4hWFDHRHUTZSj4kJGJ
+ 49Pjcpa33JJFpTssylxPHMMIQ+c6/yiYO8oCqMe+CqL8pi1fCqucZjde7WLlysU4UV/r
+ WleZSy3N90U5pK4kP1xYN3alY/fjKjcSakCd58j3HZ2//ayKuwbdsO1Mf7A2XY+C00K3
+ m8AA==
+X-Gm-Message-State: AOJu0YwQxnYT00ZO603qc4zOydr0Zl0mAZNFYlHZ2Q7JvrdWwRjJnWaQ
+ AWru0QhmVEZ6mamoOK2ikEFAXuPPLE7ojULTIQMQ6g==
+X-Google-Smtp-Source: AGHT+IGT0Eq5mvn/HeB7mxd7Q+oKO5UjK7FamuaK57o2YoDILbr7emHKiysl7ijQj6THNmyGrTuZYK3M6ZHZhIBPkSA=
+X-Received: by 2002:a50:d556:0:b0:53e:5f9:328b with SMTP id
+ f22-20020a50d556000000b0053e05f9328bmr401710edj.2.1698342254700; Thu, 26 Oct
+ 2023 10:44:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="J3DneV1H/NxDB5aU"
-Content-Disposition: inline
-In-Reply-To: <B68639B5-C9EB-4300-B745-0265604BAFE6@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+ <CAPnjgZ1A8vyEUx2wiXqOCb8Kf9zP96wqy4kXanfKRR-uN6yOmg@mail.gmail.com>
+ <OS3P286MB1495889DF57AD742064FDB56F6DEA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+ <CAPnjgZ0Bb7zzVabU05hfg12tcrQbzT1iWQVdrui2GmsEZekZDA@mail.gmail.com>
+ <TYYP286MB15006711E2339FD6BB432045F6DDA@TYYP286MB1500.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <TYYP286MB15006711E2339FD6BB432045F6DDA@TYYP286MB1500.JPNP286.PROD.OUTLOOK.COM>
+From: Simon Glass <sjg@google.com>
+Date: Thu, 26 Oct 2023 17:44:03 +0000
+Message-ID: <CAPnjgZ0nrq5y-1eAfcaTCmPJ+xq49xS9DGUSjd5fn8rSFekO2g@mail.gmail.com>
+Subject: Re: quick question about TPM
+To: "niek.nooijens@omron.com" <niek.nooijens@omron.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,87 +90,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
++Ilias Apalodimas as well
 
---J3DneV1H/NxDB5aU
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 26 Oct 2023 at 02:22, niek.nooijens@omron.com
+<niek.nooijens@omron.com> wrote:
+>
+> Hi Simon
+>
+> Yes that fixes it! Thanks!
+> Maybe an Idea to add a dedicated TPM page to the docs with information li=
+ke this?
+> (https://u-boot.readthedocs.io/en/latest/index.html) Cause I wouldn't hav=
+e thought I needed an option tugged away under Library routines.
 
-On Thu, Oct 26, 2023 at 05:49:01PM +0300, Svyatoslav Ryhel wrote:
->=20
->=20
-> 25 =D0=B6=D0=BE=D0=B2=D1=82=D0=BD=D1=8F 2023 =D1=80. 16:37:12 GMT+03:00, =
-Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
-=D0=BB=D0=B0):
-> >On Wed, Oct 25, 2023 at 09:10:12AM +0300, Svyatoslav Ryhel wrote:
-> >> =D0=B2=D1=82, 24 =D0=B6=D0=BE=D0=B2=D1=82. 2023=E2=80=AF=D1=80. =D0=BE=
- 22:18 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >> >
-> >> > On Tue, Oct 24, 2023 at 10:41:05AM +0300, Svyatoslav Ryhel wrote:
-> >> >
-> >> > > Add support to bind the regulators/child nodes with the pmic.
-> >> > > Also adds the pmic i2c based read/write functions to access pmic
-> >> > > registers.
-> >> > >
-> >> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> >> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >> > [snip]
-> >> > > diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/ma=
-x77663.c
-> >> > > new file mode 100644
-> >> > > index 0000000000..4070235d3c
-> >> > > --- /dev/null
-> >> > > +++ b/drivers/power/pmic/max77663.c
-> >> > > @@ -0,0 +1,86 @@
-> >> > > +// SPDX-License-Identifier: GPL-2.0+
-> >> > > +/*
-> >> > > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-> >> > > + */
-> >> > > +
-> >> > > +#include <common.h>
-> >> >
-> >> > Should have noted sooner, sorry. Please don't use <common.h> in new
-> >> > code, and audit the include list you have as well (this one looks
-> >> > reasonable I suspect, all the same, so general advice).
-> >>=20
-> >> Each and every driver in pmic dir has common.h so it was an obvious
-> >> move to include it as well. I haven't seen that this header is depreca=
-ted,
-> >> if so, sure, I will not include it further.
-> >>=20
-> >> About auditing inclusions, I never include unnecessary headers and alm=
-ost
-> >> all the time run tests to determine the least amount of inclusions pos=
-sible for
-> >> correct build and work.
+Thank you for the feedback. I added Ilias to take a look.
+
+
+- Simon
+
+>
+> Anyhow Thanks!
+> Niek
+>
+>
+>
+> ________________________________
+> =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
+> =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8826=E6=97=A5=
+ 03:23
+> =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooijens=
+@omron.com>
+> CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
+> =E4=BB=B6=E5=90=8D: Re: quick question about TPM
+>
+> Hi Niek,
+>
+> On Tue, 24 Oct 2023 at 19:26, niek.nooijens@omron.com
+> <niek.nooijens@omron.com> wrote:
 > >
-> >Yes, it's more recently formally deprecated, and just removing it fro
-> >existing drivers is on the TODO list.
+> > Hi Simon
 > >
->=20
-> Should I reload patchset with requested changes?
-
-Yes please.
-
---=20
-Tom
-
---J3DneV1H/NxDB5aU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU6jpwACgkQFHw5/5Y0
-tyz1DAwAoPdiyIRfcyRO4DONeYkkkcpCz4rtQoL27eXZ8ZadpRiEk7Atxz04oXP2
-f4D4WSS+ZMzlmR/0mNEEYkM2DMfvsyY9+VDCTAO3SraSPp0sfIEY+rlM/Dl2uzfn
-/dhSBVm7PD8yLP83qJfhSLN1HoFjfY5pknIv70f88PclRCXlibFmgWqIFlGHrkiT
-YzJZNpN+HTBihuXb9IzAJZknaRdU2B5EoZZxcQq9rw4cs8uLg82BnnxicQBBWz0S
-m7g/V9nUl1Qe/0umyDp3oBRPQU2EYXOnccB2frZFdK3N/5zhKSuih57xMZSNYujz
-HpISA9SmezYXGyfrJ2V0eStXKWqcYuIOYmQ3TAXd7Gq5xheSHF+tWR5ujUGG+Ipj
-boFNTld56VGSLxSNKr1Wj47/W4KUAi3ySEjf65hQk74FXcHesoKZXSDFVyNZ/tbF
-+RuwyA1n9ET0piKddPk+W/xi+7CrC6W1SwfkAaexGzHddFd6NseuSLqgwQusCz8N
-uuqBk4r3
-=LPlj
------END PGP SIGNATURE-----
-
---J3DneV1H/NxDB5aU--
+> > Driver model is enabled, so it's pretty weird it doesn't show up.
+> > CONFIG_DM=3Dy
+> > CONFIG_SPL_DM=3Dy
+> > CONFIG_DM_WARN=3Dy
+> >
+> > The TPM menu is there, yet somehow empty.
+> > This is just after "make socfpga_cyclone5_defconfig" and "make menuconf=
+ig"
+>
+> Do you enable CONFIG_TPM here?:
+>
+> Library routines -> Security support -> Trusted Platform Module (TPM) Sup=
+port
+>
+> then the drivers appear for me (under device drivers)
+>
+> > if I use "make snow_defconfig" the menu is usable like normal, so somet=
+hing is disabling it, yet when grep-ping for TPM in socfpga there are no re=
+sults.
+> > Adding it to .config manually also doesn't seem to work. so I'm a bit c=
+onfused about what's going on. Anyhow thanks for the help!
+>
+> You can edit the defconfig to add CONFIG_TPM and whatever driver you need=
+.
+>
+> Regards,
+> Simon
+>
+>
+> >
+> > Niek
+> > ________________________________
+> > =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
+> > =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8825=E6=97=
+=A5 03:03
+> > =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooije=
+ns@omron.com>
+> > CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
+> > =E4=BB=B6=E5=90=8D: Re: quick question about TPM
+> >
+> > Hi Niek,
+> >
+> > On Tue, 24 Oct 2023 at 04:51, niek.nooijens@omron.com
+> > <niek.nooijens@omron.com> wrote:
+> > >
+> > > Hi
+> > >
+> > > Just a quick question. I'm developing a platform using the socfpga_cy=
+clone5_defconfig
+> > > everything is working, linux boots, but we decided to add a TPM to it=
+'s SPI bus.
+> > > For some reason the TPM support menu in the menuconfig is disabled an=
+d I can't seem to find out why, or which file disables it. can you point me=
+ in the right direction?
+> >
+> > The only thing 'config TPM' depends on is DM (driver model). Is that
+> > somehow disabled? Once you enable that, it should appear.
+> >
+> > Regards,
+> > Simon
