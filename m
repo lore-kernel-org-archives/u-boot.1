@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 505FAC25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:37:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C901DC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:56:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47EF887BE6;
-	Thu, 26 Oct 2023 20:32:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2157287649;
+	Thu, 26 Oct 2023 20:56:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IXHu2IBr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="skqdXJHW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7FD787641; Thu, 26 Oct 2023 20:32:08 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 991848712F; Thu, 26 Oct 2023 20:56:21 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A85787B60
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:32:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D2A286F45
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:56:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-6ce2c5b2154so765985a34.3
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:32:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2c523ac38fbso19156631fa.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:56:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698345125; x=1698949925; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1698346578; x=1698951378; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NYS+kbUkDRH9Gtx75/ceADeXRIqUT+dwEW0hZKMBFPM=;
- b=IXHu2IBrBFKxUc9w4aeAyuHpFASr6dVbexqyRVogDORoJx6+fNHtBGEVTpjGI73HLj
- IVMob+IAfQ2jaQGCewqjhbfDk78nmGtxYRgtvWr8oA4pYY8roHDhiRpninRcsmbfkpSF
- 2jjcUWFHwGAMS63ZrIsjQkS14+qNFsoQsuYRQ=
+ bh=F3S6eVwS7JMnozSWrD2Ad8DK4nAb2JRVNg6Z2zj1vwQ=;
+ b=skqdXJHWKEtUCjuomtOGjId+YAPxV4u1HrLliheud7ALn7gtBfDacdLmJbiOrm6Jq6
+ VeQxzhywxma2fhwH0XRhjr8g2ybBmhgslzwEa9psdgq2n7NpjuKrT69qX8HQWvNi8EEf
+ AbZbGIqAXFVt3HpRa0zQkawWnyEDBvGABfK87VrBa22aPvIUWEapgOSmT+5zRmnq47Aq
+ 25v5bTTVoHvnJgjmfhMWI/AU2LlXKzUfZQnYol6fjzwRgqJcDDkFxMSiJ6ls1jPTkii8
+ /q1afJDqeL9Hq/sDoGGIABULOTsP0DNLe6bxdKGxE3Nxp5st3Vyd8fbs6ifTJVpv8BXT
+ huhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698345125; x=1698949925;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1698346578; x=1698951378;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NYS+kbUkDRH9Gtx75/ceADeXRIqUT+dwEW0hZKMBFPM=;
- b=aJ2q2tSRYPYT964UZLgzgZP6pdGDWtdfeQ2c9vNeEHmQmkM7DuW1U67watlWLadusP
- QPBjGUgbKR5BQ8bfscmHYcU1NnLu2Ib36uwXwtRvd7uCSgGHSntRXytTu7ff64Mdcg8i
- dLOcwSpXskg2jDQw7vwHUeDSypFpOdHorAVkHjn4kKWFNwd29efpteTLfCzIRtfcuW6/
- 9kUD4tspoVGdW769OsmYWIcGE3tgRFMPdJlbAVHa1cnHceb3Q2BWoAu3++aE6/IzAm6/
- mij7F26uEAX71HYsjVdRjEoruI01Dq8p1Y37zcPjzUVjP2VextQzI7x7WNZHiBp3glKj
- dnaw==
-X-Gm-Message-State: AOJu0Yz/38hHy4htz0z9sWwZ9rHK0bRfR6vmcBtpiwdJNYbNj5ZZK7ZO
- 87FGSVHYar2Zw2ytgx10kvWpo1vod7TWaZ9PIfCnkQ==
-X-Google-Smtp-Source: AGHT+IEFkQ7ri8+Cy0QqbxoVLAlE8kWK3rZZVJNkeFr9hMOTFkzlata2ZihpnZuH5tQxPMCDLrm+eg==
-X-Received: by 2002:a9d:7c8b:0:b0:6be:fdab:dc65 with SMTP id
- q11-20020a9d7c8b000000b006befdabdc65mr302771otn.19.1698345124845; 
- Thu, 26 Oct 2023 11:32:04 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
- [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
- by smtp.gmail.com with ESMTPSA id
- az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.32.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 11:32:04 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [v5 30/30] CI, pytest: Add a test for sandbox without LTO
-Date: Thu, 26 Oct 2023 14:31:38 -0400
-Message-Id: <20231026183138.636948-30-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231026183138.636948-1-trini@konsulko.com>
-References: <20231026183138.636948-1-trini@konsulko.com>
+ bh=F3S6eVwS7JMnozSWrD2Ad8DK4nAb2JRVNg6Z2zj1vwQ=;
+ b=gq8FVnBzUzwuzd7bt/BmUCEqFiTauI+GlGvI6KrAgDjkArhR2+e2HqfP4U+ycUwLyv
+ BZg8T//YPmjkARIDzz/qbJKMhwN+nUaeHUJWHpWkddBdVk/ALH/ulqOQxpRiu51v9HUx
+ CPC8V3YBeEUh2VRRyPqoLxDvlnwgvZLt3t4QqTbuBnxFvrHfyGTJcjuiA96cBXV+f23z
+ 4Mx6QtDBssOtJoCJsEvVAlXGmFZKxRJWm2fV18py7jUjJHZyE53GUSJgWnTOQ5ec8YsD
+ I5C6NHYkdv37UpQruyrucMeeoGREfKVOxZQGZue3Fl8kRLtIj2PojbqOtnUAMjW4UoSX
+ UM1w==
+X-Gm-Message-State: AOJu0YyGucVk/giEYXmSk9ce22eShM6W0LRPl+GxE8DI5Re8CxvKjOYV
+ WXlzi2VNG/Cf0iFKmBUefsiWQVW1FhynGJX/FJkU0A==
+X-Google-Smtp-Source: AGHT+IEnbLkWNxEEGvPzh6/NiudL/Sj0SYedEpRn7QUF46GF+CPSjl5TcKAIvMtCVv7O2KmZ56kVdJy4QEIaMasNhSc=
+X-Received: by 2002:a05:6512:3da3:b0:507:a671:3231 with SMTP id
+ k35-20020a0565123da300b00507a6713231mr227353lfv.52.1698346578270; Thu, 26 Oct
+ 2023 11:56:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+ <CAPnjgZ1A8vyEUx2wiXqOCb8Kf9zP96wqy4kXanfKRR-uN6yOmg@mail.gmail.com>
+ <OS3P286MB1495889DF57AD742064FDB56F6DEA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
+ <CAPnjgZ0Bb7zzVabU05hfg12tcrQbzT1iWQVdrui2GmsEZekZDA@mail.gmail.com>
+ <TYYP286MB15006711E2339FD6BB432045F6DDA@TYYP286MB1500.JPNP286.PROD.OUTLOOK.COM>
+ <CAPnjgZ0nrq5y-1eAfcaTCmPJ+xq49xS9DGUSjd5fn8rSFekO2g@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0nrq5y-1eAfcaTCmPJ+xq49xS9DGUSjd5fn8rSFekO2g@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 26 Oct 2023 21:55:42 +0300
+Message-ID: <CAC_iWjJTcgzmGQVBLM1H9fG_Y=tSE6nTg_=H8G3GGuSyq1j+EA@mail.gmail.com>
+Subject: Re: quick question about TPM
+To: Simon Glass <sjg@google.com>
+Cc: "niek.nooijens@omron.com" <niek.nooijens@omron.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,86 +92,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The primary motivation for having a sandbox without LTO build in CI is
-to ensure that we don't have that option break. We now have the ability
-to run tests of specific options being enabled/disabled, so drop the
-parts of CI that build and test that configuration specifically and add
-a build test instead. We still test that "NO_LTO=1" rather than editing
-the config file works via the ftrace tests.
+Hi all
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-Changes in v5:
-- Drop now incorrect worry about bisectability
----
- .azure-pipelines.yml               |  3 ---
- .gitlab-ci.yml                     | 12 ------------
- test/py/tests/test_sandbox_opts.py | 10 ++++++++++
- 3 files changed, 10 insertions(+), 15 deletions(-)
+On Thu, 26 Oct 2023 at 20:44, Simon Glass <sjg@google.com> wrote:
+>
+> +Ilias Apalodimas as well
+>
+> On Thu, 26 Oct 2023 at 02:22, niek.nooijens@omron.com
+> <niek.nooijens@omron.com> wrote:
+> >
+> > Hi Simon
+> >
+> > Yes that fixes it! Thanks!
+> > Maybe an Idea to add a dedicated TPM page to the docs with information =
+like this?
+> > (https://u-boot.readthedocs.io/en/latest/index.html) Cause I wouldn't h=
+ave thought I needed an option tugged away under Library routines.
+>
+> Thank you for the feedback. I added Ilias to take a look.
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index eb9353fc3dcf..ec498a832d73 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -287,9 +287,6 @@ stages:
-         sandbox64_clang:
-           TEST_PY_BD: "sandbox64"
-           OVERRIDE: "-O clang-16"
--        sandbox_nolto:
--          TEST_PY_BD: "sandbox"
--          BUILD_ENV: "NO_LTO=1"
-         sandbox_spl:
-           TEST_PY_BD: "sandbox_spl"
-           TEST_PY_TEST_SPEC: "test_ofplatdata or test_handoff or test_spl"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 1e11b5a6fea8..f328f3331f6d 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -258,12 +258,6 @@ sandbox with clang test.py:
-     OVERRIDE: "-O clang-16"
-   <<: *buildman_and_testpy_dfn
- 
--sandbox without LTO test.py:
--  variables:
--    TEST_PY_BD: "sandbox"
--    BUILD_ENV: "NO_LTO=1"
--  <<: *buildman_and_testpy_dfn
--
- sandbox64 test.py:
-   variables:
-     TEST_PY_BD: "sandbox64"
-@@ -275,12 +269,6 @@ sandbox64 with clang test.py:
-     OVERRIDE: "-O clang-16"
-   <<: *buildman_and_testpy_dfn
- 
--sandbox64 without LTO test.py:
--  variables:
--    TEST_PY_BD: "sandbox64"
--    BUILD_ENV: "NO_LTO=1"
--  <<: *buildman_and_testpy_dfn
--
- sandbox_spl test.py:
-   variables:
-     TEST_PY_BD: "sandbox_spl"
-diff --git a/test/py/tests/test_sandbox_opts.py b/test/py/tests/test_sandbox_opts.py
-index 91790b3374b4..422b43cb3bc1 100644
---- a/test/py/tests/test_sandbox_opts.py
-+++ b/test/py/tests/test_sandbox_opts.py
-@@ -18,3 +18,13 @@ def test_sandbox_cmdline(u_boot_console):
-     out = util.run_and_log(
-         cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
-                '-a', '~CMDLINE', '-o', TMPDIR])
-+
-+@pytest.mark.slow
-+@pytest.mark.boardspec('sandbox')
-+def test_sandbox_lto(u_boot_console):
-+    """Test building sandbox without CONFIG_LTO"""
-+    cons = u_boot_console
-+
-+    out = util.run_and_log(
-+        cons, ['./tools/buildman/buildman', '-m', '--board', 'sandbox',
-+               '-a', '~LTO', '-o', TMPDIR])
--- 
-2.34.1
+Thanks Simon.
+Yea, adding a bit of documentation seems reasonable. I'll see what I can do=
+.
 
+Thanks
+/Ilias
+>
+>
+> - Simon
+>
+> >
+> > Anyhow Thanks!
+> > Niek
+> >
+> >
+> >
+> > ________________________________
+> > =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
+> > =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8826=E6=97=
+=A5 03:23
+> > =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooije=
+ns@omron.com>
+> > CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
+> > =E4=BB=B6=E5=90=8D: Re: quick question about TPM
+> >
+> > Hi Niek,
+> >
+> > On Tue, 24 Oct 2023 at 19:26, niek.nooijens@omron.com
+> > <niek.nooijens@omron.com> wrote:
+> > >
+> > > Hi Simon
+> > >
+> > > Driver model is enabled, so it's pretty weird it doesn't show up.
+> > > CONFIG_DM=3Dy
+> > > CONFIG_SPL_DM=3Dy
+> > > CONFIG_DM_WARN=3Dy
+> > >
+> > > The TPM menu is there, yet somehow empty.
+> > > This is just after "make socfpga_cyclone5_defconfig" and "make menuco=
+nfig"
+> >
+> > Do you enable CONFIG_TPM here?:
+> >
+> > Library routines -> Security support -> Trusted Platform Module (TPM) S=
+upport
+> >
+> > then the drivers appear for me (under device drivers)
+> >
+> > > if I use "make snow_defconfig" the menu is usable like normal, so som=
+ething is disabling it, yet when grep-ping for TPM in socfpga there are no =
+results.
+> > > Adding it to .config manually also doesn't seem to work. so I'm a bit=
+ confused about what's going on. Anyhow thanks for the help!
+> >
+> > You can edit the defconfig to add CONFIG_TPM and whatever driver you ne=
+ed.
+> >
+> > Regards,
+> > Simon
+> >
+> >
+> > >
+> > > Niek
+> > > ________________________________
+> > > =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
+> > > =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8825=E6=
+=97=A5 03:03
+> > > =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooi=
+jens@omron.com>
+> > > CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
+> > > =E4=BB=B6=E5=90=8D: Re: quick question about TPM
+> > >
+> > > Hi Niek,
+> > >
+> > > On Tue, 24 Oct 2023 at 04:51, niek.nooijens@omron.com
+> > > <niek.nooijens@omron.com> wrote:
+> > > >
+> > > > Hi
+> > > >
+> > > > Just a quick question. I'm developing a platform using the socfpga_=
+cyclone5_defconfig
+> > > > everything is working, linux boots, but we decided to add a TPM to =
+it's SPI bus.
+> > > > For some reason the TPM support menu in the menuconfig is disabled =
+and I can't seem to find out why, or which file disables it. can you point =
+me in the right direction?
+> > >
+> > > The only thing 'config TPM' depends on is DM (driver model). Is that
+> > > somehow disabled? Once you enable that, it should appear.
+> > >
+> > > Regards,
+> > > Simon
