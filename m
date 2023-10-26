@@ -4,76 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E8CCC25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 19:49:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B464CC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 19:54:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F4B87BB5;
-	Thu, 26 Oct 2023 21:49:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D977F87562;
+	Thu, 26 Oct 2023 21:54:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4WT/Wq+";
+	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="sm3YmaHI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6499C87B90; Thu, 26 Oct 2023 21:49:54 +0200 (CEST)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 56F308754B; Thu, 26 Oct 2023 21:54:56 +0200 (CEST)
+Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B1E787B7C
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 21:49:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEF5487B7E
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 21:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7b6f67c708eso596000241.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 12:49:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698349791; x=1698954591; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1vSXeNqwDR/bXUYX6Qk5it4MetKCTYpZx/EBqvOm/nQ=;
- b=b4WT/Wq+1gzpXPif6S2XP2Y8O8s9jHtvHgtChXG6Qf4OxsqtjkwFxbo26KRTYHD8aj
- tVVPPghT93LpOQowEppX37RTqYGO+b+WnPDZq/zjK9KPzASu4orVgzo0N29NaNU0zXxu
- AwUJ3IZXcBGohbr/BypcD0WzQ63IgLSlMRhw6vp3NfGrKPfhyyWt1zqOWeKm+vYMX/xR
- jkkvYiWldzxl25NrgP+6dRQBsjIrBb+OwjWVpzCXxwAXUmkkCyhwogW3YWzqf7oZJ8nx
- gC1OGtUrDoID5BETYD7Tqn8WjFkAGaicrbbEX7+8yoLZI3hfngxYFy44Ozw+7eyDvxrv
- Hq5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698349791; x=1698954591;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1vSXeNqwDR/bXUYX6Qk5it4MetKCTYpZx/EBqvOm/nQ=;
- b=EYbtM2V6sRGfl9BtockT2Ixmlamq+Cp0euMwrlyGWhlRIp1cMWxRULxXmnRY1Kmty/
- JN/As9mbDfC9a0+T6ugBtTl70++1l0KICDhQ/YcxYldv5MrcXU4bzLtHjYQcQtZKwrv5
- gLAajLDdpkBqjcvRYvyPudSma62DqUlwd9KDPw1NfqFlCnIEXJrz2Ui6TfqkWzxUT/Z4
- 8zPzmoF9JQDUTEV/njTwDNCQrIkdB4oUk+HnOvnVJLH12ReCds6PZ8sn6mWz+wpCZ9FS
- USikw6ak5X38oaI+RaCzgOR9nOnd6cu1u0IriQkVWtxZ5pYfiehnQP14m+7JmmfHYSNa
- 8IIw==
-X-Gm-Message-State: AOJu0YxBIxg3yF7mkooqFcDEdZHJSVTS8D/MSkpRkw9ogljaWB/atAv9
- gU+XRqFIT+JDjvldpr/w6Srvzlr8r+tzn2Sr3GA=
-X-Google-Smtp-Source: AGHT+IFL0KXb4Vj6nWi8xwAQLd0pRVU/cRGrYnZOaNiks5ywMXc/P/Uz6kYPuHjldc+KihzErysyGXLt3B21r6Rlldo=
-X-Received: by 2002:a05:6102:e0c:b0:457:bf3a:e7dd with SMTP id
- o12-20020a0561020e0c00b00457bf3ae7ddmr767917vst.23.1698349790813; Thu, 26 Oct
- 2023 12:49:50 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=hugovil.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
+ ; s=x;
+ h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
+ :From:subject:date:message-id:reply-to;
+ bh=WpAniTrMSGwdrP5g1KSAXWXR/zN0g1/KcDGOHjXvy/M=; b=sm3YmaHI0bGDJgEDqqE9eCrx5x
+ Vb4rq5yR0UNjS3/BgrHZpdO/oYfumutxUxdYTLXqLKccHjErArF6T1C8czFsNt2bKZyjPgNrn7fp+
+ iD4wlJqPuigT5/DRssa9vOhvXrTTIve+dWIYupzdms605mXPqxl0ktTWe3LUZFpUjOt4=;
+Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:35344
+ helo=pettiford.lan) by mail.hugovil.com with esmtpa (Exim 4.92)
+ (envelope-from <hugo@hugovil.com>)
+ id 1qw6RP-0004bR-7r; Thu, 26 Oct 2023 15:54:51 -0400
+From: Hugo Villeneuve <hugo@hugovil.com>
+To: 
+Cc: hugo@hugovil.com, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ u-boot@lists.denx.de
+Date: Thu, 26 Oct 2023 15:54:49 -0400
+Message-Id: <20231026195449.3922196-1-hugo@hugovil.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20231026122413.4116-1-p-mantena@ti.com>
-In-Reply-To: <20231026122413.4116-1-p-mantena@ti.com>
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Thu, 26 Oct 2023 22:49:39 +0300
-Message-ID: <CAJs94Ebs7wzAAPa-tOz8nDNCB4=3P3WQk0hJs-1KEsPbCBJiMQ@mail.gmail.com>
-Subject: Re: [PATCH v2] board: ti: common: board_detect: Fix EEPROM offset
- read for 1-byte
-To: Prasanth Babu Mantena <p-mantena@ti.com>
-Cc: trini@konsulko.com, sjg@chromium.org, alpernebiyasak@gmail.com, 
- jkridner@beagleboard.org, robertcnelson@gmail.com, u-boot@lists.denx.de, 
- nm@ti.com, vigneshr@ti.com, u-kumar1@ti.com, a-nandan@ti.com, 
- n-francis@ti.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 70.80.174.168
+X-SA-Exim-Mail-From: hugo@hugovil.com
+Subject: [PATCH] boot: Fix syntax in fdt_overlay_apply_verbose() error message
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,73 +65,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 26 =D0=BE=D0=BA=D1=82. 2023=E2=80=AF=D0=B3. =D0=B2 15:24, Pra=
-santh Babu Mantena <p-mantena@ti.com>:
->
-> EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
-> size followed by reading 1-byte size with an offset 1. This commit fixes
-> the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
-> board_detect: Fix EEPROM read quirk for 2-byte").
->
-> In the previous commit, the value with one offset is being read into
-> offset_test, but the pointer used to match was still ep. ep is the
-> pointer where previously read data is stored, resulting in an invalid
-> comparision of the values. The intent is to identify bad 2-byte
-> addressing eerpoms, which respond to the initial 1-byte addressing
-> request and gets stuck on the succesive reads. After successive read
-> with an offset 1, the 1-byte data is compared with the second byte of
-> the header to ensure it as a valid 1byte addressing eeprom.
-> This is taken care by comparing proper first byte value from, header
-> with an offset 1 byte, to offset_test having the 1-byte data read from ee=
-prom.
->
-> Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read qui=
-rk for 2-byte)
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
-Tested-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
+Remove superfluous "did".
 
-At least I see no regressions here.
+Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+---
+ boot/fdt_support.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> ---
-> v2 <--> v1:
-> Fix inplace for the else condition of CONFIG_IS_ENABLED(DM_I2C).
-> Improved commit message.
->
->  board/ti/common/board_detect.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detec=
-t.c
-> index 9a53884c98..869f7a47f8 100644
-> --- a/board/ti/common/board_detect.c
-> +++ b/board/ti/common/board_detect.c
-> @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_a=
-ddr, int dev_addr,
->
->         rc =3D dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
->
-> -       if (*((u32 *)ep) !=3D (header & 0xFF))
-> +       if (offset_test !=3D ((header >> 8) & 0xFF))
->                 one_byte_addressing =3D false;
->
->         /* Corrupted data??? */
-> @@ -180,7 +180,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_a=
-ddr, int dev_addr,
->
->         rc =3D i2c_read(dev_addr, 0x1, byte, &offset_test, sizeof(offset_=
-test));
->
-> -       if (*((u32 *)ep) !=3D (header & 0xFF))
-> +       if (offset_test !=3D ((header >> 8) & 0xFF))
->                 one_byte_addressing =3D false;
->
->         /* Corrupted data??? */
-> --
-> 2.39.0
->
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 5e49078f8c3..b15d07765fe 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -2095,7 +2095,7 @@ int fdt_overlay_apply_verbose(void *fdt, void *fdto)
+ 		printf("failed on fdt_overlay_apply(): %s\n",
+ 				fdt_strerror(err));
+ 		if (!has_symbols) {
+-			printf("base fdt does did not have a /__symbols__ node\n");
++			printf("base fdt does not have a /__symbols__ node\n");
+ 			printf("make sure you've compiled with -@\n");
+ 		}
+ 	}
 
+base-commit: fb428b61819444b9337075f49c72f326f5d12085
+-- 
+2.39.2
 
---=20
-With best regards,
-Matwey V. Kornilov
