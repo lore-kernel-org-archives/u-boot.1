@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 879F2C25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 21:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9905C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 21:02:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A746587642;
-	Thu, 26 Oct 2023 23:02:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D67C87650;
+	Thu, 26 Oct 2023 23:02:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZFat7GLC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h/PpGGdN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27A5687654; Thu, 26 Oct 2023 23:02:10 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CAF3D87AFF; Thu, 26 Oct 2023 23:02:48 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3201087641
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 23:02:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31D6F87641
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 23:02:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1cacbd54b05so2461875ad.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:02:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698354124; x=1698958924; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9ikk9jsd2XcsknmM+TKJCi1Yg0Skv9YS08RCRP3cV0o=;
- b=ZFat7GLCsHVQSgmwi0Fa54RMgz7EUdVPrxjLTG6eTgbEIci9ne8XsK/TruSSw/JWM8
- JHyZz8mZDts8kHd8X99F/qXdk94Ya9pS70byswHhoFfWbL7omoYT/UT/hBUnI1r7BYO7
- kBInTK3lK66fC1OIPYtCML4NOGfXMnOPfIKrYTBe2ANg8bH9HUCv7Rmban4PZO2REAdK
- +1IQvZQ88NxWYLB5dFGfPlpT990/tj2ClUZAUZJm/RMzCPHIIa67hccxVMg2ylPbd/M8
- x3y0y4eSL/MYzUw5xzMD9N2WZWM4BGP3B7TJ1d8/aBNdqLlrMX3oJU0R5EmYH1gqv80s
- hSxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698354124; x=1698958924;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9ikk9jsd2XcsknmM+TKJCi1Yg0Skv9YS08RCRP3cV0o=;
- b=pcYCBggjH7plyCD701b71VEDC82Q3dn0KJhqtbc2038VtRKL2pRzObLzaO/kvkDmiM
- HWbrXmADCMZSDwYENzX1Dk2CqjUXzO9WhqR1vMEoCdNvkmGSulCr6umUvo/WTLzM/91G
- IKbtHI690xRti7v5QVfDia7ztJHTjWd+qTwzqgjWJt0Z52sSLEYtWDCucv5cKoc51e4s
- nxK8qFLIwt0Iea/Qh+PwZxq1qskBFhHMDC0k36lV0AbSbiBYs5PlgNQNSSUuZ4/TFlnp
- p6fqmGnboAm4yuhxBFvWhsB/sf1ypA+haNwJLIeSvNxpKh9BR5OrEnSq2991ArEuf50s
- bhCA==
-X-Gm-Message-State: AOJu0YyohbyYJYVF+DDUIYKBW2Vcv/hEi3XpWnKsqNydd+Sb8HIxYeGa
- npQHu89uQtYfLDMeBKXKqEE6jd5IAXE=
-X-Google-Smtp-Source: AGHT+IHN0jNH4wMP4AWtdayCokq3kFaBqxo9BD3r1sTmeRwE25TPv1tPNfKSPBmZZ5tT/fXGL98cBg==
-X-Received: by 2002:a17:902:e906:b0:1c0:bf60:ba82 with SMTP id
- k6-20020a170902e90600b001c0bf60ba82mr690617pld.5.1698354124156; 
- Thu, 26 Oct 2023 14:02:04 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:eeea:a81:8d4:d6a5])
- by smtp.gmail.com with ESMTPSA id
- p18-20020a170902a41200b001c5fd2a28d3sm120980plq.28.2023.10.26.14.02.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 14:02:03 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] pico-pi-imx7d: Convert to watchdog driver model
-Date: Thu, 26 Oct 2023 18:01:53 -0300
-Message-Id: <20231026210153.26886-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39QL2er0100793;
+ Thu, 26 Oct 2023 16:02:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698354160;
+ bh=7zMQl8waYojeUu7FzB91z95cei6lA5OsrEW5B6zeM2k=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=h/PpGGdNXfHGTlWUt7HPoBbpovBO1KS4zlJPq7fCYVdhZDUBFSFoJEXEISCMCpJb5
+ 5vpZMgCNJtSdLCvIJD7zt5EhkZJ+YI/P5OPzbYaflJxw4qoIIywcJ7K5gu5v5Oep2L
+ yc/ftAmliB8ImgJ1HQbE3gmS7/X/HomlJTEDsWNI=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39QL2e6g108040
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 26 Oct 2023 16:02:40 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 26
+ Oct 2023 16:02:40 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 26 Oct 2023 16:02:40 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39QL2eAW062444;
+ Thu, 26 Oct 2023 16:02:40 -0500
+Date: Thu, 26 Oct 2023 16:02:40 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Prasanth Babu Mantena <p-mantena@ti.com>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
+ <matwey.kornilov@gmail.com>, <jkridner@beagleboard.org>,
+ <robertcnelson@gmail.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>, <a-nandan@ti.com>, <n-francis@ti.com>
+Subject: Re: [PATCH v2] board: ti: common: board_detect: Fix EEPROM offset
+ read for 1-byte
+Message-ID: <20231026210240.esopotwu4wy3mnyo@sediment>
+References: <20231026122413.4116-1-p-mantena@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231026122413.4116-1-p-mantena@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,66 +81,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On 17:54-20231026, Prasanth Babu Mantena wrote:
+> EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
+> size followed by reading 1-byte size with an offset 1. This commit fixes
+> the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
+> board_detect: Fix EEPROM read quirk for 2-byte").
+> 
+> In the previous commit, the value with one offset is being read into
+> offset_test, but the pointer used to match was still ep. ep is the
+> pointer where previously read data is stored, resulting in an invalid
+> comparision of the values. The intent is to identify bad 2-byte
+> addressing eerpoms, which respond to the initial 1-byte addressing
+> request and gets stuck on the succesive reads. After successive read
+> with an offset 1, the 1-byte data is compared with the second byte of
+> the header to ensure it as a valid 1byte addressing eeprom.
+> This is taken care by comparing proper first byte value from, header
+> with an offset 1 byte, to offset_test having the 1-byte data read from eeprom.
 
-Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
-the 'reset' command in U-Boot to not cause a board reset.
-    
-Fix it by switching to the watchdog driver model via sysreset, which
-is the preferred method for implementing the watchdog reset
+Rephrase (I at times go to grammarly.com to make sure I use the right
+verbage): So, keep it simple (we can read code - no need to give us the
+detail readup). Stuff like "in the previous commit" leaves us wondering
+which commit.
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- arch/arm/dts/imx7d-pico-pi-u-boot.dtsi | 10 ++++++++++
- configs/pico-pi-imx7d_defconfig        |  3 +++
- 2 files changed, 13 insertions(+)
+EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
+size followed by reading 1-byte size with an offset 1.
+The commit 9f393a2d7af8 ("board: ti: common: board_detect: Fix EEPROM
+read quirk for 2-byte") that attempts to fix this uses the wrong pointer to
+to compare.
 
-diff --git a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-index 843b4583e53a..c6856823c64d 100644
---- a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-+++ b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-@@ -6,6 +6,12 @@
-         usb0 = &usbotg1;
-         display0 = &lcdif;
-     };
-+
-+	wdt-reboot {
-+		compatible = "wdt-reboot";
-+		wdt = <&wdog1>;
-+		bootph-pre-ram;
-+	};
- };
- 
- &usbotg1 {
-@@ -45,6 +51,10 @@
- 	};
- };
- 
-+&wdog1 {
-+	bootph-pre-ram;
-+};
-+
- &iomuxc {
- 	pinctrl_backlight: backlight {
- 		fsl,pins = <
-diff --git a/configs/pico-pi-imx7d_defconfig b/configs/pico-pi-imx7d_defconfig
-index 48364c7548ee..5b615daf4a87 100644
---- a/configs/pico-pi-imx7d_defconfig
-+++ b/configs/pico-pi-imx7d_defconfig
-@@ -76,6 +76,8 @@ CONFIG_DM_PMIC=y
- CONFIG_DM_PMIC_PFUZE100=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_IMX_THERMAL=y
- CONFIG_USB=y
- CONFIG_SPL_USB_HOST=y
-@@ -95,3 +97,4 @@ CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
-+CONFIG_IMX_WATCHDOG=y
+> 
+> Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
+> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+> ---
+> v2 <--> v1:
+> Fix inplace for the else condition of CONFIG_IS_ENABLED(DM_I2C).
+> Improved commit message.
+> 
+>  board/ti/common/board_detect.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
+> index 9a53884c98..869f7a47f8 100644
+> --- a/board/ti/common/board_detect.c
+> +++ b/board/ti/common/board_detect.c
+> @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
+>  
+>  	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
+>  
+> -	if (*((u32 *)ep) != (header & 0xFF))
+> +	if (offset_test != ((header >> 8) & 0xFF))
+>  		one_byte_addressing = false;
+>  
+>  	/* Corrupted data??? */
+> @@ -180,7 +180,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
+>  
+>  	rc = i2c_read(dev_addr, 0x1, byte, &offset_test, sizeof(offset_test));
+>  
+> -	if (*((u32 *)ep) != (header & 0xFF))
+> +	if (offset_test != ((header >> 8) & 0xFF))
+>  		one_byte_addressing = false;
+>  
+>  	/* Corrupted data??? */
+> -- 
+> 2.39.0
+> 
+
 -- 
-2.34.1
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
