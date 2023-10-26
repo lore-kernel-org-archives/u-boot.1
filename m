@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA86DC25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 21:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 879F2C25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 21:02:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7F758744B;
-	Thu, 26 Oct 2023 23:00:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A746587642;
+	Thu, 26 Oct 2023 23:02:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fm20Xijw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZFat7GLC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2781C87B80; Thu, 26 Oct 2023 23:00:20 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 27A5687654; Thu, 26 Oct 2023 23:02:10 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACE7887644
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 23:00:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3201087641
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 23:02:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3b2ec9a79bdso871434b6e.3
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:00:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1cacbd54b05so2461875ad.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:02:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698354016; x=1698958816; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698354124; x=1698958924; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DTO2Nms3PyPIUnoGqtsEjizj28yYh3SY3etDDJmlpEU=;
- b=fm20XijwMX6PYx96CJjL2FdXHL679xUPvTvD5cfHa1GsN+LYYsrFXDYGXreT6+3Am9
- t9l1Sdxtz/2JuH+dy6cEDHP6RuOdGlMm69vYiHTEBgPGaSVEMcb+E1T5vvj/EPsTjylr
- 9MBXaqQhV3hOJRvp4VflG45RPCDF7KZhWEdfCEIcWuO701bg80VoiGfKS9/pq66sBhyR
- IdHo4IhptF5RDjL0/TbzVM0jtamxFlhzXfFwW3jnsfQB11AOSxZ9dI5E2aC1bOJrsGTd
- 7zeysP3OAmV9mElZiiQjXrfns0T9yQjxCvN1nI0tQPcIvrzSbiOQLDvOYoX+0FtI30rl
- nbiQ==
+ bh=9ikk9jsd2XcsknmM+TKJCi1Yg0Skv9YS08RCRP3cV0o=;
+ b=ZFat7GLCsHVQSgmwi0Fa54RMgz7EUdVPrxjLTG6eTgbEIci9ne8XsK/TruSSw/JWM8
+ JHyZz8mZDts8kHd8X99F/qXdk94Ya9pS70byswHhoFfWbL7omoYT/UT/hBUnI1r7BYO7
+ kBInTK3lK66fC1OIPYtCML4NOGfXMnOPfIKrYTBe2ANg8bH9HUCv7Rmban4PZO2REAdK
+ +1IQvZQ88NxWYLB5dFGfPlpT990/tj2ClUZAUZJm/RMzCPHIIa67hccxVMg2ylPbd/M8
+ x3y0y4eSL/MYzUw5xzMD9N2WZWM4BGP3B7TJ1d8/aBNdqLlrMX3oJU0R5EmYH1gqv80s
+ hSxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698354016; x=1698958816;
+ d=1e100.net; s=20230601; t=1698354124; x=1698958924;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DTO2Nms3PyPIUnoGqtsEjizj28yYh3SY3etDDJmlpEU=;
- b=QxwriKUNnnv3EOuVd8ROUJOB86QE5/HBL2/WWKgj6AjCMqsLSg2YQ4FJ33B+63MG6F
- g6ROG5nLfZkNQnyXHioTG3MXxloMqT0vZGLQ6ysRrKUSJ75nefpSvjKkZyZf5edpE9ar
- fh1beGRXMsMsvInS1aFdv9R/Zivsxp7qArYABNq8NPmpOFbKASQYHQ7oZYIFtzZXPoLj
- ClXlyn1Ks2C7cQVskpWVlTBUuospLuEdGcAdhI+8GII61BjDC/yviWAPys1CG3VQgCXy
- 8jFo8kNR5w4HJy6G5ihDwI0XFHDktbvAUHmUyjIj3Yhgud9eFtyKu3Q8WH9JozR9wppG
- dUaQ==
-X-Gm-Message-State: AOJu0YzXDoOobjp7iVEXXuLkJNnKgigJK6p+wElJ1Nfr+5UW4uyxapdm
- kY/tt9b4HDzgAmb5VjOCZ4PF3g==
-X-Google-Smtp-Source: AGHT+IFA2LLFCkKuTA4CxQx9qtLzWS4hIJHV0R/ZuxsNpsqZKLW4gPa5ruckvGzPnmSQsoBc0PEd5g==
-X-Received: by 2002:a05:6808:10d6:b0:3a9:c25d:176a with SMTP id
- s22-20020a05680810d600b003a9c25d176amr739776ois.36.1698354016087; 
- Thu, 26 Oct 2023 14:00:16 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- u23-20020a544397000000b003a7a34a4ed8sm28975oiv.33.2023.10.26.14.00.15
+ bh=9ikk9jsd2XcsknmM+TKJCi1Yg0Skv9YS08RCRP3cV0o=;
+ b=pcYCBggjH7plyCD701b71VEDC82Q3dn0KJhqtbc2038VtRKL2pRzObLzaO/kvkDmiM
+ HWbrXmADCMZSDwYENzX1Dk2CqjUXzO9WhqR1vMEoCdNvkmGSulCr6umUvo/WTLzM/91G
+ IKbtHI690xRti7v5QVfDia7ztJHTjWd+qTwzqgjWJt0Z52sSLEYtWDCucv5cKoc51e4s
+ nxK8qFLIwt0Iea/Qh+PwZxq1qskBFhHMDC0k36lV0AbSbiBYs5PlgNQNSSUuZ4/TFlnp
+ p6fqmGnboAm4yuhxBFvWhsB/sf1ypA+haNwJLIeSvNxpKh9BR5OrEnSq2991ArEuf50s
+ bhCA==
+X-Gm-Message-State: AOJu0YyohbyYJYVF+DDUIYKBW2Vcv/hEi3XpWnKsqNydd+Sb8HIxYeGa
+ npQHu89uQtYfLDMeBKXKqEE6jd5IAXE=
+X-Google-Smtp-Source: AGHT+IHN0jNH4wMP4AWtdayCokq3kFaBqxo9BD3r1sTmeRwE25TPv1tPNfKSPBmZZ5tT/fXGL98cBg==
+X-Received: by 2002:a17:902:e906:b0:1c0:bf60:ba82 with SMTP id
+ k6-20020a170902e90600b001c0bf60ba82mr690617pld.5.1698354124156; 
+ Thu, 26 Oct 2023 14:02:04 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:eeea:a81:8d4:d6a5])
+ by smtp.gmail.com with ESMTPSA id
+ p18-20020a170902a41200b001c5fd2a28d3sm120980plq.28.2023.10.26.14.02.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 14:00:15 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: John Clark <inindev@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] tools: gitignore: Fix tools/generated path
-Date: Thu, 26 Oct 2023 16:00:15 -0500
-Message-Id: <20231026210015.17802-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ Thu, 26 Oct 2023 14:02:03 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] pico-pi-imx7d: Convert to watchdog driver model
+Date: Thu, 26 Oct 2023 18:01:53 -0300
+Message-Id: <20231026210153.26886-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,54 +89,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-'git status' shows 'tools/generated/' after running the build, which is
-wrong. The corresponding .gitignore rule was already added in commit
-c623642d29be ("Adjust gitignore for tools/generated/"), but because of
-superfluous 'tools/' part it wasn't in effect. Remove incorrect 'tools/'
-part to fix it.
+From: Fabio Estevam <festevam@denx.de>
 
-While at it, remove tools/ path incorrectly added to the top-level
-.gitignore in commit 801c482207c7 (".gitignore: ignore misc include,
-simple-bin, and tools/generated build artifacts"), as it's required in
-the comment on the top of .gitignore:
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset
 
-    # NOTE! Don't add files that are generated in specific
-    # subdirectories here. Add them in the ".gitignore" file
-    # in that subdirectory instead.
-
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-Fixes: c623642d29be ("Adjust gitignore for tools/generated/")
-Fixes: 801c482207c7 (".gitignore: ignore misc include, simple-bin, and tools/generated build artifacts")
+Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
- .gitignore       | 1 -
- tools/.gitignore | 2 +-
- 2 files changed, 1 insertion(+), 2 deletions(-)
+ arch/arm/dts/imx7d-pico-pi-u-boot.dtsi | 10 ++++++++++
+ configs/pico-pi-imx7d_defconfig        |  3 +++
+ 2 files changed, 13 insertions(+)
 
-diff --git a/.gitignore b/.gitignore
-index a1a79e92feef..330148119264 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -61,7 +61,6 @@ fit-dtb.blob*
- # Generated files
- #
- /spl/
--/tools/generated/
- /tpl/
- /defconfig
+diff --git a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
+index 843b4583e53a..c6856823c64d 100644
+--- a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
++++ b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
+@@ -6,6 +6,12 @@
+         usb0 = &usbotg1;
+         display0 = &lcdif;
+     };
++
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
+ };
  
-diff --git a/tools/.gitignore b/tools/.gitignore
-index 941d38de212d..0108c567309b 100644
---- a/tools/.gitignore
-+++ b/tools/.gitignore
-@@ -34,7 +34,7 @@
- /relocate-rela
- /spl_size_limit
- /sunxi-spl-image-builder
--/tools/generated/**/*.c
-+/generated/**/*.c
- /update_octeon_header
- /version.h
- /xway-swap-bytes
+ &usbotg1 {
+@@ -45,6 +51,10 @@
+ 	};
+ };
+ 
++&wdog1 {
++	bootph-pre-ram;
++};
++
+ &iomuxc {
+ 	pinctrl_backlight: backlight {
+ 		fsl,pins = <
+diff --git a/configs/pico-pi-imx7d_defconfig b/configs/pico-pi-imx7d_defconfig
+index 48364c7548ee..5b615daf4a87 100644
+--- a/configs/pico-pi-imx7d_defconfig
++++ b/configs/pico-pi-imx7d_defconfig
+@@ -76,6 +76,8 @@ CONFIG_DM_PMIC=y
+ CONFIG_DM_PMIC_PFUZE100=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_IMX_THERMAL=y
+ CONFIG_USB=y
+ CONFIG_SPL_USB_HOST=y
+@@ -95,3 +97,4 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_IMX_WATCHDOG=y
 -- 
-2.39.2
+2.34.1
 
