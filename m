@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01302C25B67
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 14:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 394EAC25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 14:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB03487604;
-	Thu, 26 Oct 2023 16:25:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABF1586BDF;
+	Thu, 26 Oct 2023 16:26:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dz/4nYWQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U/eCYi3U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94CB387604; Thu, 26 Oct 2023 16:25:37 +0200 (CEST)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id 0EDA4875E0; Thu, 26 Oct 2023 16:26:25 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B15DC875DE
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 16:25:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A95DD86484
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 16:26:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6bbfb8f7ac4so222030b3a.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:25:33 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6bd20c30831so211377b3a.1
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:26:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698330331; x=1698935131; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698330378; x=1698935178; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Dmqh7kG42TnKIUm0yWGuTF1LJRnkWCLP9Z7tXCyc/1c=;
- b=Dz/4nYWQ0Rm6A/Ukoypj0IH/HTfLt/ud8bKlwQhhRJFI0HH4SCY/WYqUgtHRLwBt4+
- mUOFvIc8i9UrJOfJg5se0+RPI2MYTKdMOGxKnIbCSFX3fSG9uHLZS9CbdHDOx5ID4zIy
- NlsweF8kDHIKN2fOcI/0Pijfsd4Rx7BGCc0fj/JcWKkVS4siZ4o0ZzNexGJq45RInKsC
- mWb1jvkOW90ro76JfSUOTkhODjMUofddczHvfzXauLweXN5ZFXSvm5Onnq4C7gXkFCaV
- U+ssKuAcA93MA5njNpSc0Ki2Y5KYSmvnpUE6Q067DpP1OMKeQOhC4Y18uEIAEOuFi4uC
- DvVg==
+ bh=/4AarLQyIU2DVRIqTvoJi6oztjOEE59AvuW8aFMgxdw=;
+ b=U/eCYi3UcStEPTLj8Tg+5WPHe4/Aku3uO0E8IbIIQazQdDUy1CjgE7lX6c6/Kf8u/U
+ c44ok/c4YLK3Sros1q2q69Hzse6/pE/kjWZkSLSQr5lbZxrTF47f4NensygOx7JvVqSa
+ 81EUNIvzK1J7gIwPacqMBzJtBH5FlTWQ2LiarfvPShj81akC4glRbvIzQhiNw6DGLyxR
+ 1dyv/SFXyAAqtZA21k/T8jtXteIQBvLttcBtCVSWGlSFR/WM7ob/1+5L0XDZGL42Aclw
+ kRMbqWU3tU4J14tNAQPVOQ+VnqdIiFyjF+Hhde7KSNDsu4iBKQy3mKKDUt987TvRomNx
+ MOQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698330331; x=1698935131;
+ d=1e100.net; s=20230601; t=1698330378; x=1698935178;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Dmqh7kG42TnKIUm0yWGuTF1LJRnkWCLP9Z7tXCyc/1c=;
- b=ZQFDAVmvGtmmBPWrHQfTK2lb8SK9faQ3vdaZcLOotFDhzWIFaLy472ogmBsVDCd+cc
- 8N70dMviBLIGVXYgZMOOcsHUXZEppzdEb+fLiQFR92WkTCFZ0yxWXWlyTL5jFu7PW2Xx
- 9xYbQ7JtK19/kkybNPXxkWwPpWCGDHDTvu91iqQQ6Su/YTNru8VE7csd1LMdfITTNgeS
- MuAz/TJrRXk6fc4ZMyMmhCHf6aiJwxPctAY+OokQEGje70fHGSeYtlpvW29wVLbYufnd
- wS/u4QCYs89oM/8go7lABTsw8RJu+W3bCG57PgCIXthH2WwdisfWCLUuDLdkSVR7DVqg
- 9Efw==
-X-Gm-Message-State: AOJu0YxRSum6bOwhsHc3yBMpdrDndgm7q9KRB1LdB/FLz53MXwW+ZEM4
- K0ipAJUjhXsY3V4hc5yOf3wW4nci1MefBrX4NZekDl71BEo=
-X-Google-Smtp-Source: AGHT+IFVuaWsSmaLLdmjl/RTzOmJczu1xJjD2HQc19FdRFXc5P/nO8+Arvoun2qV50izO0nXwCMh70ovVzvZa1KhnL8=
-X-Received: by 2002:a05:6a00:2c8e:b0:6bc:67ca:671d with SMTP id
- ef14-20020a056a002c8e00b006bc67ca671dmr18209324pfb.1.1698330331053; Thu, 26
- Oct 2023 07:25:31 -0700 (PDT)
+ bh=/4AarLQyIU2DVRIqTvoJi6oztjOEE59AvuW8aFMgxdw=;
+ b=ucMyr4tmXM6WTgCqSfP9Zt4Mie2RRUIVtWZDvXkIrKHjx1RyQ/zif530JBevOE5Fe6
+ 7tuwPhgaljpCo7scvsS7C92gmNNSmGkHKd5FtvejGB1aAJaaqa3iEOKqYAnBaXVE7o5z
+ vzoXnml+wDpqQlHSmdh6hB3y02Bcn++CxmghuJ+3Wxmndwg3paiw//Bc2kuIUkav2YVJ
+ P9KJU5fdz0kK3t3po8YWapZ8W6C9/vGPM54N5A2zIZDPV13CRTm5FTtrB9a/HWQydYpx
+ O02IRS1mrzBJm2pWfuhPlywT5I03C49jKvIKL8Gzupubp23zB0PbOlBS2T+bfggVC2IF
+ /FNQ==
+X-Gm-Message-State: AOJu0YwEou7GafrQlzDM3BkUP709xStGPmy7ERzjUigpB4yI7vCR19J5
+ CC4XHfhB9w2olchxotxYO5OxuG3MfJvqky6K+hI=
+X-Google-Smtp-Source: AGHT+IEQhpMbM2/YN94gEhKUDDkJzvMG854w1ivW4u3/zm8oc2Hfpko4731Z3/UMwihNhQuqX39UKCQgQ4QMXIeMN0Q=
+X-Received: by 2002:a05:6a00:1a8f:b0:6be:cb8c:92c7 with SMTP id
+ e15-20020a056a001a8f00b006becb8c92c7mr19775483pfv.3.1698330377692; Thu, 26
+ Oct 2023 07:26:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231023152629.2727547-1-hugo@hugovil.com>
-In-Reply-To: <20231023152629.2727547-1-hugo@hugovil.com>
+References: <20231017205816.318531-1-hugo@hugovil.com>
+In-Reply-To: <20231017205816.318531-1-hugo@hugovil.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 26 Oct 2023 11:25:19 -0300
-Message-ID: <CAOMZO5DyK+PDgk=2cOsQogVb+vCP=WhyR3MK8isYtm_KoAbESQ@mail.gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: Remove non-working address from MAINTAINERS
+Date: Thu, 26 Oct 2023 11:26:06 -0300
+Message-ID: <CAOMZO5CpK8JnZZaeASMh17qgMSPzUct9m6vCCK=cgCQpd+Pxbw@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: imx8mn-var-som: Fix broken EEPROM read
 To: Hugo Villeneuve <hugo@hugovil.com>
-Cc: Michael Trimarchi <michael@amarulasolutions.com>, 
+Cc: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Jonas Karlman <jonas@kwiboo.se>, 
  Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -87,15 +90,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 23, 2023 at 1:45=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
+On Tue, Oct 17, 2023 at 5:58=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
 wrote:
 >
 > From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-
-The Subject does indicate which board it refers to.
-
-It would be better to have it like:
-
-imx8mn_smm_s2: Remove non-working address from MAINTAINERS
+>
+> On branch WIP/17Oct2023, the EEPROM can no longer be read:
+>
+>     U-Boot 2023.10-latest (Oct 17 2023 - 15:53:43 -0400)
+>     CPU:   Freescale i.MX8MNano Quad rev1.0 at 1200 MHz
+>     Reset cause: POR
+>     Model: Variscite VAR-SOM-MX8MN Symphony evaluation board
+>     var_read_som_eeprom: uclass_get_device_by_of_offset() failed: -19
+>     initcall failed at call 000000004022207c (err=3D-19)
+>
+> Convert EEPROM-related properties to bootph-all so that the EEPROM can
+> also be read outside of SPL.
+>
+> Fixes: 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node as pre-re=
+loc after relocation")
+> Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
