@@ -4,74 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E31DC25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 14:27:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B2CC25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 14:38:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A241E87B6B;
-	Thu, 26 Oct 2023 16:27:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F703875FF;
+	Thu, 26 Oct 2023 16:38:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EWnr4/d3";
+	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="uYj1l48J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52EA187B2D; Thu, 26 Oct 2023 16:27:56 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C159F87B5B; Thu, 26 Oct 2023 16:38:16 +0200 (CEST)
+Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B8E586484
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 16:27:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E1E47875EE
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 16:38:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-6bf20d466cdso162971b3a.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:27:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698330472; x=1698935272; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bI4xo1NGHWultiKXSMMmYiLoRGDmPK/DKVDLbX2C4QY=;
- b=EWnr4/d3XOHHoZLLdLudXokj8kqvGpAmIe4ER4p6jJn9RC/4JGDxkd1FQCFQlMidiV
- wTdDN8eAXswTSoxU+0FVqAgY+7Ilug3L7muBMQgZaQa9xdVdCUY/px3plebkAx9pe+dc
- YZLcLQ46SCV+IrSF4rd0aEsw5jwJDTx4e9qg+ZO2KdYhvgxsXPzQttHAeQcnX0BqecX1
- bmy+LvQbTyIs+t5a4gQuvo2Ju6cQk5Sptr6/sJemnr/VUtRmo1qQhVJMbNfG96x7lx9j
- b8PIm3LlEH5NO9cEKjW4EAb2BEr7ETZFhJUEvtJcQHy1m41Qy6/tMxhVw/58wUXO15mS
- F6RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698330472; x=1698935272;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bI4xo1NGHWultiKXSMMmYiLoRGDmPK/DKVDLbX2C4QY=;
- b=oOU2ZlcL9MICEoE5fMyy69VXizHGC+7P0jYP4M4atK55dp9Z+IzsQ8qoilylKDgsej
- Cw0cHkm3Sp/PGF/NsY2dDzrAc5jg0salNHEQhx+h8XBb1z6Nqca5bxxwdOh26p/l5bZx
- OAWzXk9Tbtr2qAZtzqCV7PwrkANGPD7UoFBiq43ib2lcKJlHFRONR7W27msKZK01BHtx
- llC2nrRnDDTgfdiEJG2+VOwPU+BEeJjdgigw3ixnTnkP/Ekuldl0Bn2mup9RtB6qGzEh
- dBI+3zqAaNcBm806oSEObT6MsUlnRelb9JdEZm4Crodk5o5aSuUbYnGhVGT08OlZ7pMj
- stwA==
-X-Gm-Message-State: AOJu0YwasHQHf4ld8iNa2oqQpVxSTvLnH7QQKYWcKuOEYI4wlfsMS/vd
- Fz16KRTDsGFbxoLETXYmNyWQQVUqDA7ZiDB3DYY=
-X-Google-Smtp-Source: AGHT+IFQKP6qWnpnuQQe1sq+XuHstnuAmq2xb0w0zbLsXN1uuAP4hWIxFV9Sn4pKE250i1B1enrjldkZxtAHOEtAI3Q=
-X-Received: by 2002:a05:6a20:9392:b0:163:d382:ba99 with SMTP id
- x18-20020a056a20939200b00163d382ba99mr21617657pzh.5.1698330471835; Thu, 26
- Oct 2023 07:27:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231017094501.7713-1-sebastien.szymanski@armadeus.com>
-In-Reply-To: <20231017094501.7713-1-sebastien.szymanski@armadeus.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 26 Oct 2023 11:27:40 -0300
-Message-ID: <CAOMZO5CLhN9h+r2YDD8k_Czjoqf=OyRLxzed3kb_nQmg+Qjgsg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] net: dwc_eth_qos: add i.MX93 support
-To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Cc: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=none (p=none dis=none) header.from=hugovil.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
+ ; s=x;
+ h=Subject:Content-Transfer-Encoding:Mime-Version:Message-Id:Cc:To:From
+ :Date:subject:date:message-id:reply-to;
+ bh=RAbJoZzI7RAYfFx23Hfq/7OawJNP7JXFchpuvUY/z5Y=; b=uYj1l48J+uVxgXu+tLSHdpjp+L
+ e1nSzQLkty+cCsEs0oBx20xQY88RVqzLXLjdktqwMILAo0FWKOPlN3jmGS8rxMQekhz2j3on4t4Go
+ 2pv0r+8t9qsnvTxaf8XxOXNYjR1vmyxj8z8IvnY6f/xtweOt/47wkVeMhmvXHXFDGpGE=;
+Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:41652
+ helo=pettiford) by mail.hugovil.com with esmtpa (Exim 4.92)
+ (envelope-from <hugo@hugovil.com>)
+ id 1qw1Ur-00087F-Ie; Thu, 26 Oct 2023 10:38:06 -0400
+Date: Thu, 26 Oct 2023 10:38:05 -0400
+From: Hugo Villeneuve <hugo@hugovil.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>, Hugo Villeneuve
+ <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
+Message-Id: <20231026103805.81d1236a9ce15eeb9cbd43d4@hugovil.com>
+In-Reply-To: <CAOMZO5DyK+PDgk=2cOsQogVb+vCP=WhyR3MK8isYtm_KoAbESQ@mail.gmail.com>
+References: <20231023152629.2727547-1-hugo@hugovil.com>
+ <CAOMZO5DyK+PDgk=2cOsQogVb+vCP=WhyR3MK8isYtm_KoAbESQ@mail.gmail.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 70.80.174.168
+X-SA-Exim-Mail-From: hugo@hugovil.com
+Subject: Re: [PATCH] MAINTAINERS: Remove non-working address from MAINTAINERS
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,14 +69,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 17, 2023 at 6:45=E2=80=AFAM S=C3=A9bastien Szymanski
-<sebastien.szymanski@armadeus.com> wrote:
->
-> Add support for DWC EQoS MAC on i.MX93.
->
-> Signed-off-by: S=C3=A9bastien Szymanski <sebastien.szymanski@armadeus.com=
->
+On Thu, 26 Oct 2023 11:25:19 -0300
+Fabio Estevam <festevam@gmail.com> wrote:
 
-For the series:
+> On Mon, Oct 23, 2023 at 1:45 PM Hugo Villeneuve <hugo@hugovil.com> wrote:
+> >
+> > From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+> 
+> The Subject does indicate which board it refers to.
+> 
+> It would be better to have it like:
+> 
+> imx8mn_smm_s2: Remove non-working address from MAINTAINERS
+> 
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> 
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Hi Fabio,
+since the change concerns two different boards, that is why I didn't
+indicate it. If required, I could send it as two separate patches.
+
+Hugo.
