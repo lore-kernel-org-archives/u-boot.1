@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A19DC25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 07:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5360BC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 08:07:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6923787B2C;
-	Thu, 26 Oct 2023 09:59:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2FA9687B2F;
+	Thu, 26 Oct 2023 10:07:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bu2T98Sa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MU7CsiN4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BE1E87B2E; Thu, 26 Oct 2023 09:59:01 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ECE2887B2A; Thu, 26 Oct 2023 10:07:21 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 923CC87B2A
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:58:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9017C87B03
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 10:07:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1698307134; x=1698911934; i=xypron.glpk@gmx.de;
- bh=F5eUsAVjmcoxWDzxFQl+xJTCfHo01axAlQh5rwzM1Hg=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=bu2T98SavUtERKJZBRVBMW9sZclPFRXqByfQi90cRFepHBQmdsETJKIYc4wmdLif
- ciN1qCs2Ki6A8kuPnNLkvZdTQSK4ZJZC1sZdtNNBMW8lOKp17WDFSw10xbLJy6naS
- 3SWslWokaNOKQivrOnTEBVY2BkhKRESbcZeotMBw25y859Lo5uf49sD0twSXsHOAF
- eYMN87x/SA/0pkguOR4ZgwdDHeApD60tIbbqpxvpWfNV+zNm6241+CPG5FaxXcy/2
- RUwxDZUn4ZDo9KOIM5AoQhDI9pMxZjUbHEcfO2/WxgqOU6UHyIZVoyMHEAG1KoMwR
- JeI9tKfFRu0aJkEYPg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MtwUw-1rloUk0trQ-00uIBH; Thu, 26
- Oct 2023 09:58:54 +0200
-Date: Thu, 26 Oct 2023 09:58:53 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>, trini@konsulko.com,
- sjg@chromium.org, ilias.apalodimas@linaro.org
-CC: jbx6244@gmail.com, u-boot@lists.denx.de
-Subject: Re: [RFC 11/13] fs: remove explicit efi configuration dependency
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231026053052.622453-12-takahiro.akashi@linaro.org>
-References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
- <20231026053052.622453-12-takahiro.akashi@linaro.org>
-Message-ID: <1276E605-F0B0-47A3-A80C-F17C6F8A7F3F@gmx.de>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-507a55302e0so664800e87.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 01:07:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698307639; x=1698912439; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lhOlHuzQgmtnC7EGO5yRu9vwoBL+5uNHE0AvEMnwPJ8=;
+ b=MU7CsiN4SeEwMkPDDmrhWOZEcJCFWiRNAboeCS0aq1zzmz24+IBK02+KvrG92ZIKVk
+ RHzl4cXZcg7YiNCE5VKan+ZqArp9BnkkkuH0Dzh5pmXzCOsX+DX+BxttoVFDw5xAxvdc
+ hDLdeM6HQXONHe3EwM6SxLA3vgTcrpt3CogYqM0JM7+FOQUGDCiS5c2hFZyL9JAeHXcT
+ MksnGBdBfoO9VVwCO1UM/ek9ZKWDvj/Ju/Gk+SC7XJZGIMZKrUwo94xT2bBGq6AwdoJg
+ 4A5e6TCEwsFs7D56D2uBb9z2bjj1p9Ojp0dRHbGMlks6BLOkrmtGEptaNU3ymnedhZlY
+ nojw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698307639; x=1698912439;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lhOlHuzQgmtnC7EGO5yRu9vwoBL+5uNHE0AvEMnwPJ8=;
+ b=XMWyI2VnrQSpD9DyscaErw75vfRprJAf0ZKG7x6/VUw70FG9CSt6Zf7sb6aAddewqe
+ cuxDzlJW+i5qhKk4UYH+V7AbVvzyoCSCSjPfP6xSAfJgLkGJhuKiAwXWaEA805fnFraC
+ VUNoBKgNpRnUhCiW0yoKGrP/rGH33MAlU/eRlmM2jAzH/WGXpU26CuHV8PoQcxUTHszf
+ hGeBnJRTsFcb7FGCeWueVqkDMCfoLvkfj+qeYSKdo4BuLwxj665DrjPaahLI3LFNq50H
+ WVqBjjeC6ZYssEL+nAc6fJXrnd8m83HMCTwfAGDQNoJ7PAHHMT+Jzn5euVnF78bIAo4r
+ SwHw==
+X-Gm-Message-State: AOJu0YzT6ttAu5WULDMTmaBnE4B0zmDizCldH1b72VtJIGY9VFN9pKku
+ 8OubU19C3IAP4nCKArkyd54svT78MwG3t5JG4EooeNNCTlQRbQedE8U=
+X-Google-Smtp-Source: AGHT+IEB40ZB9iU8x0Hm0EqNdzZPiQf7wVrpU2zOq6hGP1MtcWo7o72dx+GVHHtF0YTFurjo+38l1Esymv31Q8aIxxM=
+X-Received: by 2002:ac2:5456:0:b0:507:b074:ecd4 with SMTP id
+ d22-20020ac25456000000b00507b074ecd4mr11990719lfn.7.1698307638695; Thu, 26
+ Oct 2023 01:07:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:OHNIY/OxanHScT8rAej2uWmOv9CAVpsJ8emiTCI6hMpBc8gZMRO
- lZvXutgU0iDNtadk87WmIKaRkaKxfBjemzBcYUc9Y3GS5TGmzFeuLADyTqweM+NAx7wpg7C
- 4JlbHQUJDWe16lpnX7dTNE0I76+mTm6sN2CHkA1EhCwDz9cp4C4BdqfDiDRk+hLsaranBj+
- Ld2gmzs2gPyKRkcGPHQow==
-UI-OutboundReport: notjunk:1;M01:P0:E4iyQjNFVYA=;NeKl2OsCmAuJj4/8yRuW4zoqaFC
- N+iRCdmF6AWpc6tL7Dx9VvupCaJEcT0pIPrhckwwRbQi1Mxvs045oOWSWOMjhtfEZO2B88VKc
- E0HCkjfyyJ4qx4DOe5Q12XtY9jOBQzg6fQe9gNtb7kFdT6azgBsVWKPjjZ68wOSjPVc+Ldvg+
- n9D2fBENXvfWwnxb2Ig+TCJkMzmVxpWEz93cLKiX4OuYuLDHe9KTmJLfybK686VFifkB4iGBn
- XdGTP7GL25nrF7BqVSpAsnuQyDBJWlAYGCKEDzaNMGP5ysqSWqhKGKkHEC4+8MlYzLNGPbWzs
- PwdZBA+AGxfwQPBUKViofChQpy1ivNlF/W/vf7aS876IdxsPUejTkxNz630NCEZu3/YfGE6+y
- gWYuN6rLZY24Q0Yp5mwCXB3QT24E68vmkgwENl1ypY3qb2YCye3JdYV8ZzTdqi/csbrFFrbq5
- hgmb+82hC3aJWzQHx1VMglScs1zojsUvXuItHkKySRmoVr+oVD1RbpNFG/J1qB+8vB0EYDGvJ
- JJ+Y0u/qEz5WrIFSo3yCXIsmd+o0NmqyWbnwMXovihuMFAfQPGVWrkyYW7ep/Hp7Ys7uMDa1a
- SnpKHsGkh82NZDHKIDHx5BZ0u79IWj/J/fWgoAH6rpnSJJ3cOmqSm0ORGZx3KGfnj9K93K3Pk
- LV7J5dhtWAoQiMMBo9SH6n3vWRmKfGy5qz8d7G1CO4Ssoj8HSuNzB3nNlkBKBoBoTePGq4xea
- BYXQsHlfe4PwWAg2gJuCKNC4kFnKrr9g3FmfPkKWT3bRya90bSSZV5RXhfp+yseHISxwf3FK6
- +rQSVjrZRM2I/fIj5cm5SrQqX7sye1cYEAzHDge6OvS9awXpOEY7RRfouj5ewYdebaKx1nGju
- LdzA8u48OyQ1XbadKimKIWWo18pGzIOnmdScnQ7Lo+wkW6S5bGiFPDZJxulwTGm2Y4TNyU06m
- xPS/6E/qzBB8B3sIMSVvZqrbhZw=
+References: <20231025072525.3960316-1-ilias.apalodimas@linaro.org>
+ <CAPnjgZ0swsWDbxCNMURdkRoby1tDLK5LT4aRGNBCNnOKCNyJ1Q@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0swsWDbxCNMURdkRoby1tDLK5LT4aRGNBCNnOKCNyJ1Q@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 26 Oct 2023 11:06:42 +0300
+Message-ID: <CAC_iWjJL_taKWWEi4kancnQ6Dsg1V5+4hMSvTifcdr_aCH-Ykg@mail.gmail.com>
+Subject: Re: [PATCH] test/py: always use autostart on tpm2 selftests
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,45 +85,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
+[...]
 
-Am 26=2E Oktober 2023 07:30:50 MESZ schrieb AKASHI Takahiro <takahiro=2Eak=
-ashi@linaro=2Eorg>:
->Now it is clear that the feature actually depends on efi interfaces,
->not "bootefi" command=2E efi_set_bootdev() will automatically be nullifie=
-d
->if necessary efi component is disabled=2E
+> > ---
+> >  test/py/tests/test_tpm2.py | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+> > index 47392b87a98f..1d654cd4a23b 100644
+> > --- a/test/py/tests/test_tpm2.py
+> > +++ b/test/py/tests/test_tpm2.py
+> > @@ -61,7 +61,7 @@ def test_tpm2_init(u_boot_console):
+> >      skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+> >      if skip_test:
+> >          pytest.skip('skip TPM device test')
+> > -    u_boot_console.run_command('tpm2 init')
+> > +    u_boot_console.run_command('tpm2 autostart')
+> >      output = u_boot_console.run_command('echo $?')
+> >      assert output.endswith('0')
+> >
+> > @@ -100,7 +100,7 @@ def test_tpm2_sandbox_self_test_full(u_boot_console):
+> >      """
+> >      if is_sandbox(u_boot_console):
+> >          u_boot_console.restart_uboot()
 >
->Signed-off-by: AKASHI Takahiro <takahiro=2Eakashi@linaro=2Eorg>
->---
-> fs/fs=2Ec | 7 +++----
-> 1 file changed, 3 insertions(+), 4 deletions(-)
+> We should not need this. Can you please take a look at what reset is
+> needed in the TPM code to get the TPM back into its original state? We
+> have dm_test_pre_run() which could call a tpm_reset_for_test()
+> function, or similar.
+
+We do need this once I land Eddie's patches [0].  The problem is not
+related to reset sequences or what's needed on the TPM. Before this
+patchset, the sandbox TPM lacked a bunch of capabilities and we
+couldn't test UEFI measured boot.
+
+Eddie added those missing capabilities and since the EFI subsystem
+comes up, it also initializes the TPM.  As a result 'tpm2 init' will
+see the device in open state and return -EBUSY, but that's *not* an
+actual error.
+
+So instead of playing around with ordering of tests and failing if
+someone initialized the TPM early or whatever we should just use
+tpm_auto_start which
+- Does the right thing and gracefully handles that -EBUSY
+- Still allows you to run the remaining sequence of a TPM
+initialization -- tpm2 startup TPM2_SU_CLEAR && tpm2 self_test full
+
+[0] https://lore.kernel.org/u-boot/20231024154354.197524-3-eajames@linux.ibm.com/
+
+For reference here's the sandbox output, compiled with
+sandbox64_defconfig with Eddie's patches applied
+
+U-Boot 2024.01-rc1-00043-g3ecf75343640-dirty (Oct 26 2023 - 10:57:54 +0300)
+
+Reset Status: WARM Reset Status: COLD
+Model: sandbox
+DRAM:  256 MiB
+using memory 0x1b513000-0x1f515000 for malloc()
+[nvmxip-qspi1@08000000]: the block device blk#2 ready for use
+[nvmxip-qspi2@08200000]: the block device blk#2 ready for use
+Core:  260 devices, 92 uclasses, devicetree: board
+WDT:   Not starting wdt-gpio-toggle
+WDT:   Not starting wdt-gpio-level
+WDT:   Not starting wdt@0
+MMC:   Can't map file 'mmc1.img': Invalid argument
+mmc1: Unable to map file 'mmc1.img'
+Can't map file 'mmc1.img': Invalid argument
+mmc1: Unable to map file 'mmc1.img'
+mmc1 - probe failed: -1
+mmc2: 2 (SD)Can't map file 'mmc1.img': Invalid argument
+mmc1: Unable to map file 'mmc1.img'
+, mmc0: 0 (SD)
+Loading Environment from nowhere... OK
+In:    serial,cros-ec-keyb,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: sandbox
+Net:   eth0: eth@10002000, eth5: eth@10003000, eth3: sbe5, eth6:
+eth@10004000, eth8: phy-test-eth, eth4: dsa-test-eth, eth2: lan0,
+eth7: lan1
+Can't map file 'mmc1.img': Invalid argument
+mmc1: Unable to map file 'mmc1.img'
+No EFI system partition    <-------- UEFI subsystem init
+No EFI system partition
+Failed to persist EFI variables
+EFI using ACPI tables at b746000
+Hit any key to stop autoboot:  0
+
+Thanks
+/Ilias
 >
->diff --git a/fs/fs=2Ec b/fs/fs=2Ec
->index 4cb4310c9cc2=2E=2E70cdb594c4c8 100644
->--- a/fs/fs=2Ec
->+++ b/fs/fs=2Ec
->@@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int arg=
-c, char *const argv[],
-> 		return 1;
-> 	}
->=20
->-	if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
->-		efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
->-				(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
->-				len_read);
->+	efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
-
-This function should not exist for CONFIG_EFI_LOADER=3Dn=2E There are othe=
-r places where the function is invoked=2E Please, review all of them=2E
-
-Best regards
-
-Heinrich
-
-
->+			(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
->+			len_read);
->=20
-> 	printf("%llu bytes read in %lu ms", len_read, time);
-> 	if (time > 0) {
+> > -        u_boot_console.run_command('tpm2 init')
+> > +        u_boot_console.run_command('tpm2 autostart')
+> >          output = u_boot_console.run_command('echo $?')
+> >          assert output.endswith('0')
+> >
+> > --
+> > 2.37.2
+> >
+>
+> Regards,
+> Simon
