@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF5DC25B72
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 10:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB32C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 10:44:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 066ED870DF;
-	Thu, 26 Oct 2023 12:19:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BF45A8750E;
+	Thu, 26 Oct 2023 12:44:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jH1bv+p/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="FKnSImon";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B5C786FFD; Thu, 26 Oct 2023 12:19:37 +0200 (CEST)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6A9687545; Thu, 26 Oct 2023 12:43:59 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69273870DF
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 12:19:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5500874D8
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 12:43:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4a13374a1e8so347261e0c.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 03:19:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698315574; x=1698920374; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R3C/yorme+LaYCvDcLcwjreoqOEdXINaDRBtYygSRpI=;
- b=jH1bv+p/FUpIUKdrWrZ94HS8Ze0+ZvoEUNDUBi/btpGi/FAXlvG2v1XU3Pym+Hrf7k
- phB9L0JjsmQ8zSPINhKGbbZwZlM6TK5i3JDG9uhBclpXn4Yf0RRXjEps/E0+dOBuUFGu
- uugrY0sVv7Jd0d4j2G459zvKoVgarmBs0wm+Fo3K1u3SFHgoBUfDQYzgTuwnflEOMMSf
- xxyxFi8SFbCPXPfGsuTssbu/xKj/lLoHRGAS4F4FqABN67JyQ87RV9K9jgStwCSwCN5u
- Xa5//BgYdXHFxJVN78x/DdxN1z2TBrstK+A4NWsVUi8+J4pVFvHHruPKBBAbZavMgAyX
- iBVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698315574; x=1698920374;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=R3C/yorme+LaYCvDcLcwjreoqOEdXINaDRBtYygSRpI=;
- b=t9x6r7Zo1luOsRSbB7ys2aE8O4hP+ELT/udDXzaIFKo0af6fKg4hUbe3s0kkUp2dWk
- n6FkEJt7oOjv5ZgPa02MeGfeiqitvtNWSM7CAikGZtNueq+hU+dltGVgTKuIOLGfi6cd
- Hitbo8g13gmq1IitQEmKslHioyClPZN59oX0z7cSZ3N2CAq511gZf6BT3bRHPDo2fOa5
- ul8qEGa+MiNKZIjB82S/Re/oO5rR1DE1I7d37yfohJT3asPIMMUiiPLVO3uB1ERwHlGN
- d12FutCI5R2T5x+9/EF4KENinmV3wPaUDv/jPwzYk0saLm4KlPmvM5mGUBSOFzpgJVHo
- Vklw==
-X-Gm-Message-State: AOJu0YxX6nutyY9GO+IzE804+FvqRZ2UeE9JfiXhdYdr0M7jyXHBKd8A
- 80oveTKCXO0dVoJAtSPalXA9NMY6Cqg6GzuWflRPlw==
-X-Google-Smtp-Source: AGHT+IF63U9RTWfYNRp0nyBcGY3h4Xt+vXIxc7rAT1Gzw7+GirGVMFDsmLbgpTnvSXEWq6htQ5MZTa66zZOfvdURFnc=
-X-Received: by 2002:a67:a64b:0:b0:457:d207:4328 with SMTP id
- r11-20020a67a64b000000b00457d2074328mr17471459vsh.23.1698315573998; Thu, 26
- Oct 2023 03:19:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1698317034; x=1698921834; i=xypron.glpk@gmx.de;
+ bh=1g0UZBR4Z1qZX98p/UcZmDNEtL1yf1yJjfeQ8KudtGk=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=FKnSImonGjm1D+HmDgUXdx0UY5axVBw5LMcV9ZNYZU45ft5/5EH0Ta6DJ2Xv17vv
+ yPzrxc5aKD+dNm/idkDvRarDeB/8UmWb2RWD6Wd8BZc+fiBGoc5uT0jlEpFhY17mU
+ bP+KPX28zsNKgCX85jY4Fqj2dtmqw7WrdRcwoCRecOkjFYYZauszaLZAUyniPfQr5
+ 8ez45xvPibXlQmK2SR1BW/yWPu7suDW6ccPfqhTOMPOYr1byoiGIbib/kIpx+bMOm
+ Whxj92PqtiBW/dlO7PA4OhAEHP9S5enjIr8iiP8l9HL56L31NdhE9HF2xTBiTbMFB
+ TkqqAMsEfbhQrDlIsQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N5mKJ-1rXDJR1QAl-017FK2; Thu, 26
+ Oct 2023 12:43:54 +0200
+Message-ID: <f9ce4a74-6bb7-4b72-97a4-0a605c4389cf@gmx.de>
+Date: Thu, 26 Oct 2023 12:44:00 +0200
 MIME-Version: 1.0
-References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
- <20231024-b4-qcom-clk-v1-1-9d96359b9a82@linaro.org>
- <CAFA6WYPxtCdzFoumiEWkWUSEa15Mkth7Ntw+yYKaCdDFf2w0ng@mail.gmail.com>
-In-Reply-To: <CAFA6WYPxtCdzFoumiEWkWUSEa15Mkth7Ntw+yYKaCdDFf2w0ng@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 26 Oct 2023 15:49:23 +0530
-Message-ID: <CAFA6WYO9w4R4OSovAvvuRQWhL6iPWVyH12qjAQT=FNBpbhPY0g@mail.gmail.com>
-Subject: Re: [PATCH 1/8] clk/qcom: move from mach-snapdragon
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 02/13] cmd: bootefi: re-organize do_bootefi_image()
+Content-Language: en-US, de-DE
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: jbx6244@gmail.com, u-boot@lists.denx.de, trini@konsulko.com,
+ sjg@chromium.org, ilias.apalodimas@linaro.org
+References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
+ <20231026053052.622453-3-takahiro.akashi@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231026053052.622453-3-takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:q2+G5EaL8xsYBlGUsW1cg6y0YmUgEne6RN83ReO/p1pO+21U0Qc
+ 6CWXakmyiyeBj61bSpoVXj25OUk0iWdJRryDGq+ScqB++AqlDIv4MIV49Bq6QyHIJsgAbmt
+ aThpL7YTxFP5AUFQP3C81tsExnecEHUXidLFAThmzzFoNhZ/aPso+YrFt4RR5OPlOiq4h+S
+ ZK/AxhI/fICy7jjQCGPuA==
+UI-OutboundReport: notjunk:1;M01:P0:tqkzXVZHb3M=;63UGsZRy9MfqV7wIPto1goeuGfW
+ 3zKBWe37gl1MEp4bzLgMm6s8Wclv1l5YO5+fp9wV8f6RdgkU1fNhV9owkiAagvlEnF+FNq1Vz
+ WxkK7hai8l00M9uYbW6S3leZH0xXU3OWWdrAqlcbMibpiTLkHRDpRw4ki8VMHiiGosJ+6VTBP
+ h+VAGrl6TDzwvKiGSkhff2NojNzASPzLNDm5tZzGq46FMM9Aoi9hThV2BaYftsrew4Wjkaeaw
+ 82WiV4YzJKePhsyIETY/+j4Hbrrg1C87cjjYPo/lEQj3W9XS9IYEja/mRQCJv+krF9cLp/saJ
+ f7CXbqzE1RysJlrz92Sq42WTvg1uUpkx4nd3AUDxzQ0hh2sWbwiCLXIElDbFpstAevj8PzVMC
+ Hc02oiCFzueJ9OHV8MNCQkmF9mmfv/nsyPtC7xJcgkGeVm3F91dTyEsRnFLKtXxcOEbDSUjW3
+ o+6QulmJlyVeKZq/AfAB9ATOky/0fZPy/K7FvZR4pQD/EKi4SNdNOtfqGopdmHeOlQBcvHj7Q
+ l+da1Xx/lU1D583UHa3uZ87Jk44ZOUWv3meccN/BZA8H4P+Fz2z25xWTDWYqsHsoI+LkscVC6
+ agiaEnSOYgMwQwvBS0PF7p6BWx+jeWNVg6b1JaIuYVlMmSM1h5WKvd9GAVkLNXQfj8fnqvf44
+ QltgGv2l/UFrE8/i0nUQvt9QWIBwhaLYn9B9jLyU0KIhV0KoY6X0Aojx8j82RBQ3BgeIGnZKn
+ U+cPQZOo6iSI+QqVEGFCY4rxKus9qYo3mcLkac9szWsyaaUUmicb7Km3B6rzDvd9dnCiKd6jJ
+ zAMje+NKxHPpocOwXVxNx1YXFcyTO6AERx9X+RCtgxjRgf/R7olDxN9kWyfaSQyuw+yAsZ4Sq
+ Eoegtq2mzbjSObPAbBmFbbPglEBZN5qrhCPHqtF6+YI9HLTgDEvf3+RNrCfy9ngMPNW/3lkvg
+ iiPQa5+iXrkta3eu86J8sRBkSmE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,181 +90,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 26 Oct 2023 at 15:45, Sumit Garg <sumit.garg@linaro.org> wrote:
+On 10/26/23 07:30, AKASHI Takahiro wrote:
+> Decompose and re-organize do_bootefi_image() into three parts for
+> the succeeding refactor work.
 >
-> On Wed, 25 Oct 2023 at 01:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> >
-> > Clock drivers don't belong here, move them to the right place and
-> > declutter mach-snapdragon a bit.
-> >
-> > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> > ---
-> >  arch/arm/mach-snapdragon/Makefile                                | 5 -----
-> >  drivers/clk/Makefile                                             | 1 +
-> >  drivers/clk/qcom/Makefile                                        | 9 +++++++++
-> >  {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-apq8016.c   | 2 +-
-> >  {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-apq8096.c   | 3 ++-
-> >  .../clock-snapdragon.c => drivers/clk/qcom/clock-qcom.c          | 2 +-
-> >  .../clock-snapdragon.h => drivers/clk/qcom/clock-qcom.h          | 0
-> >  {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-qcs404.c    | 2 +-
-> >  {arch/arm/mach-snapdragon => drivers/clk/qcom}/clock-sdm845.c    | 2 +-
-> >  9 files changed, 16 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-> > index cbaaf23f6b56..497ee35cf7d3 100644
-> > --- a/arch/arm/mach-snapdragon/Makefile
-> > +++ b/arch/arm/mach-snapdragon/Makefile
-> > @@ -2,20 +2,15 @@
-> >  #
-> >  # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> >
-> > -obj-$(CONFIG_SDM845) += clock-sdm845.o
-> >  obj-$(CONFIG_SDM845) += sysmap-sdm845.o
-> >  obj-$(CONFIG_SDM845) += init_sdm845.o
-> > -obj-$(CONFIG_TARGET_DRAGONBOARD820C) += clock-apq8096.o
-> >  obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
-> > -obj-$(CONFIG_TARGET_DRAGONBOARD410C) += clock-apq8016.o
-> >  obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
-> >  obj-y += misc.o
-> > -obj-y += clock-snapdragon.o
-> >  obj-y += dram.o
-> >  obj-y += pinctrl-snapdragon.o
-> >  obj-y += pinctrl-apq8016.o
-> >  obj-y += pinctrl-apq8096.o
-> >  obj-y += pinctrl-qcs404.o
-> >  obj-y += pinctrl-sdm845.o
-> > -obj-$(CONFIG_TARGET_QCS404EVB) += clock-qcs404.o
-> >  obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
-> > diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
-> > index 26bf429acbc0..dd90c7672e1b 100644
-> > --- a/drivers/clk/Makefile
-> > +++ b/drivers/clk/Makefile
-> > @@ -40,6 +40,7 @@ obj-$(CONFIG_CLK_MPFS) += microchip/
-> >  obj-$(CONFIG_CLK_MVEBU) += mvebu/
-> >  obj-$(CONFIG_CLK_OCTEON) += clk_octeon.o
-> >  obj-$(CONFIG_CLK_OWL) += owl/
-> > +obj-$(CONFIG_ARCH_SNAPDRAGON) += qcom/
-> >  obj-$(CONFIG_CLK_RENESAS) += renesas/
-> >  obj-$(CONFIG_$(SPL_TPL_)CLK_SCMI) += clk_scmi.o
-> >  obj-$(CONFIG_CLK_SIFIVE) += sifive/
-> > diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> > new file mode 100644
-> > index 000000000000..5f0c7a79d2ab
-> > --- /dev/null
-> > +++ b/drivers/clk/qcom/Makefile
-> > @@ -0,0 +1,9 @@
-> > +# SPDX-License-Identifier: GPL-2.0+
-> > +#
-> > +# (C) Copyright 2023 Linaro
-> > +
-> > +obj-y += clock-qcom.o
-> > +obj-$(CONFIG_SDM845) += clock-sdm845.o
-> > +obj-$(CONFIG_TARGET_DRAGONBOARD410C) += clock-apq8016.o
-> > +obj-$(CONFIG_TARGET_DRAGONBOARD820C) += clock-apq8096.o
-> > +obj-$(CONFIG_TARGET_QCS404EVB) += clock-qcs404.o
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>   cmd/Kconfig          | 15 ++++++--
+>   cmd/bootefi.c        | 82 ++++++++++++++++++++++++++++++--------------
+>   include/efi_loader.h |  2 --
+>   3 files changed, 69 insertions(+), 30 deletions(-)
 >
-> Similarly, I think here we should introduce here SoC specific config
-> options like:
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 0eb739203ade..825a41d68aad 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -363,9 +363,19 @@ config CMD_BOOTEFI
+>   	help
+>   	  Boot an EFI image from memory.
 >
-> CONFIG_CLK_SDM845
-> CONFIG_CLK_APQ8016
-> CONFIG_CLK_APQ8096
-> CONFIG_CLK_QCS404
->
+> +if CMD_BOOTEFI
+> +config CMD_BOOTEFI_BINARY
+> +	bool "Allow booting an EFI binary directly"
+> +	depends on BOOTEFI_BOOTMGR
+> +	default y
+> +	help
+> +	  Select this option to enable direct execution of binary at 'bootefi'=
+.
+> +	  This subcommand will allow you to load the UEFI binary using
+> +	  other U-Boot commands or external methods and then run isince 2021. =
+t.
+> +
+>   config CMD_BOOTEFI_BOOTMGR
 
-Please ignore these comments as I see the second patch doing that
-exactly. Although, I would have preferred to merge the two patches but
-I am fine either way.
+This symbol is in lib/efi_loader/Kconfig:
+lib/efi_loader/Kconfig:35:config CMD_BOOTEFI_BOOTMGR
 
--Sumit
+Please, rebase your series on origin/master.
 
+Best regards
+
+Heinrich
+
+>   	bool "UEFI Boot Manager command"
+> -	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
+> +	depends on BOOTEFI_BOOTMGR
+>   	default y
+>   	help
+>   	  Select this option to enable the 'bootmgr' subcommand of 'bootefi'.
+> @@ -374,7 +384,7 @@ config CMD_BOOTEFI_BOOTMGR
 >
-> > diff --git a/arch/arm/mach-snapdragon/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> > similarity index 98%
-> > rename from arch/arm/mach-snapdragon/clock-apq8016.c
-> > rename to drivers/clk/qcom/clock-apq8016.c
-> > index 23a37a1714dc..90f2a93d9ed5 100644
-> > --- a/arch/arm/mach-snapdragon/clock-apq8016.c
-> > +++ b/drivers/clk/qcom/clock-apq8016.c
-> > @@ -13,7 +13,7 @@
-> >  #include <errno.h>
-> >  #include <asm/io.h>
-> >  #include <linux/bitops.h>
-> > -#include "clock-snapdragon.h"
-> > +#include "clock-qcom.h"
-> >
-> >  /* GPLL0 clock control registers */
-> >  #define GPLL0_STATUS_ACTIVE BIT(17)
-> > diff --git a/arch/arm/mach-snapdragon/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-> > similarity index 98%
-> > rename from arch/arm/mach-snapdragon/clock-apq8096.c
-> > rename to drivers/clk/qcom/clock-apq8096.c
-> > index 66184596d562..d5388c69aefe 100644
-> > --- a/arch/arm/mach-snapdragon/clock-apq8096.c
-> > +++ b/drivers/clk/qcom/clock-apq8096.c
-> > @@ -13,7 +13,8 @@
-> >  #include <errno.h>
-> >  #include <asm/io.h>
-> >  #include <linux/bitops.h>
-> > -#include "clock-snapdragon.h"
-> > +
-> > +#include "clock-qcom.h"
-> >
-> >  /* GPLL0 clock control registers */
-> >  #define GPLL0_STATUS_ACTIVE            BIT(30)
-> > diff --git a/arch/arm/mach-snapdragon/clock-snapdragon.c b/drivers/clk/qcom/clock-qcom.c
-> > similarity index 99%
-> > rename from arch/arm/mach-snapdragon/clock-snapdragon.c
-> > rename to drivers/clk/qcom/clock-qcom.c
-> > index 0ac45dce9a92..5667abeb89a4 100644
-> > --- a/arch/arm/mach-snapdragon/clock-snapdragon.c
-> > +++ b/drivers/clk/qcom/clock-qcom.c
-> > @@ -13,7 +13,7 @@
-> >  #include <errno.h>
-> >  #include <asm/io.h>
-> >  #include <linux/bitops.h>
-> > -#include "clock-snapdragon.h"
-> > +#include "clock-qcom.h"
-> >
-> >  /* CBCR register fields */
-> >  #define CBCR_BRANCH_ENABLE_BIT  BIT(0)
-> > diff --git a/arch/arm/mach-snapdragon/clock-snapdragon.h b/drivers/clk/qcom/clock-qcom.h
-> > similarity index 100%
-> > rename from arch/arm/mach-snapdragon/clock-snapdragon.h
-> > rename to drivers/clk/qcom/clock-qcom.h
-> > diff --git a/arch/arm/mach-snapdragon/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-> > similarity index 99%
-> > rename from arch/arm/mach-snapdragon/clock-qcs404.c
-> > rename to drivers/clk/qcom/clock-qcs404.c
-> > index 3357b54c30c0..80218af73ef6 100644
-> > --- a/arch/arm/mach-snapdragon/clock-qcs404.c
-> > +++ b/drivers/clk/qcom/clock-qcs404.c
-> > @@ -11,7 +11,7 @@
-> >  #include <errno.h>
-> >  #include <asm/io.h>
-> >  #include <linux/bitops.h>
-> > -#include "clock-snapdragon.h"
-> > +#include "clock-qcom.h"
-> >
-> >  #include <dt-bindings/clock/qcom,gcc-qcs404.h>
-> >
-> > diff --git a/arch/arm/mach-snapdragon/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-> > similarity index 98%
-> > rename from arch/arm/mach-snapdragon/clock-sdm845.c
-> > rename to drivers/clk/qcom/clock-sdm845.c
-> > index d6df0365afca..95a057b82986 100644
-> > --- a/arch/arm/mach-snapdragon/clock-sdm845.c
-> > +++ b/drivers/clk/qcom/clock-sdm845.c
-> > @@ -15,7 +15,7 @@
-> >  #include <asm/io.h>
-> >  #include <linux/bitops.h>
-> >  #include <dt-bindings/clock/qcom,gcc-sdm845.h>
-> > -#include "clock-snapdragon.h"
-> > +#include "clock-qcom.h"
-> >
-> >  #define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
-> >
-> >
-> > --
-> > 2.42.0
-> >
+>   config CMD_BOOTEFI_HELLO_COMPILE
+>   	bool "Compile a standard EFI hello world binary for testing"
+> -	depends on CMD_BOOTEFI && !CPU_V7M
+> +	depends on !CPU_V7M
+>   	default y
+>   	help
+>   	  This compiles a standard EFI hello world application with U-Boot so
+> @@ -396,6 +406,7 @@ config CMD_BOOTEFI_HELLO
+>   	  up EFI support on a new architecture.
+>
+>   source lib/efi_selftest/Kconfig
+> +endif
+>
+>   config CMD_BOOTMENU
+>   	bool "bootmenu"
+> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> index 1b28bf5a318d..ae00bba3b4f0 100644
+> --- a/cmd/bootefi.c
+> +++ b/cmd/bootefi.c
+> @@ -491,7 +491,6 @@ out:
+>   	return (ret !=3D EFI_SUCCESS) ? ret : ret2;
+>   }
+>
+> -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
+>   static efi_status_t bootefi_run_prepare(const char *load_options_path,
+>   		struct efi_device_path *device_path,
+>   		struct efi_device_path *image_path,
+> @@ -581,7 +580,6 @@ static int do_efi_selftest(void)
+>
+>   	return ret !=3D EFI_SUCCESS;
+>   }
+> -#endif /* CONFIG_CMD_BOOTEFI_SELFTEST */
+>
+>   /**
+>    * do_bootefi() - execute `bootefi` command
+> @@ -603,14 +601,6 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int fl=
+ag, int argc,
+>   	if (argc < 2)
+>   		return CMD_RET_USAGE;
+>
+> -	/* Initialize EFI drivers */
+> -	ret =3D efi_init_obj_list();
+> -	if (ret !=3D EFI_SUCCESS) {
+> -		log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> -			ret & ~EFI_ERROR_MASK);
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+>   	if (argc > 2) {
+>   		uintptr_t fdt_addr;
+>
+> @@ -619,29 +609,54 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int f=
+lag, int argc,
+>   	} else {
+>   		fdt =3D EFI_FDT_USE_INTERNAL;
+>   	}
+> -	ret =3D efi_install_fdt(fdt);
+> -	if (ret =3D=3D EFI_INVALID_PARAMETER)
+> -		return CMD_RET_USAGE;
+> -	else if (ret !=3D EFI_SUCCESS)
+> -		return CMD_RET_FAILURE;
+>
+> -	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
+> -		if (!strcmp(argv[1], "bootmgr"))
+> -			return do_efibootmgr();
+> +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
+> +	    !strcmp(argv[1], "bootmgr")) {
+> +		/* Initialize EFI drivers */
+> +		ret =3D efi_init_obj_list();
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +				ret & ~EFI_ERROR_MASK);
+> +			return CMD_RET_FAILURE;
+> +		}
+> +
+> +		ret =3D efi_install_fdt(fdt);
+> +		if (ret =3D=3D EFI_INVALID_PARAMETER)
+> +			return CMD_RET_USAGE;
+> +		else if (ret !=3D EFI_SUCCESS)
+> +			return CMD_RET_FAILURE;
+> +
+> +		return do_efibootmgr();
+>   	}
+> -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
+> -	if (!strcmp(argv[1], "selftest"))
+> +
+> +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_SELFTEST) &&
+> +	    !strcmp(argv[1], "selftest")) {
+> +		/* Initialize EFI drivers */
+> +		ret =3D efi_init_obj_list();
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +				ret & ~EFI_ERROR_MASK);
+> +			return CMD_RET_FAILURE;
+> +		}
+> +
+> +		ret =3D efi_install_fdt(fdt);
+> +		if (ret =3D=3D EFI_INVALID_PARAMETER)
+> +			return CMD_RET_USAGE;
+> +		else if (ret !=3D EFI_SUCCESS)
+> +			return CMD_RET_FAILURE;
+> +
+>   		return do_efi_selftest();
+> -#endif
+> +	}
+>
+> -#ifdef CONFIG_CMD_BOOTEFI_HELLO
+> -	if (!strcmp(argv[1], "hello")) {
+> +	if (!IS_ENABLED(CONFIG_CMD_BOOTEFI_BINARY))
+> +		return CMD_RET_SUCCESS;
+> +
+> +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_HELLO) &&
+> +	    !strcmp(argv[1], "hello")) {
+>   		image_buf =3D __efi_helloworld_begin;
+>   		size =3D __efi_helloworld_end - __efi_helloworld_begin;
+>   		efi_clear_bootdev();
+> -	} else
+> -#endif
+> -	{
+> +	} else {
+>   		addr =3D strtoul(argv[1], NULL, 16);
+>   		/* Check that a numeric value was passed */
+>   		if (!addr)
+> @@ -663,6 +678,21 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int fl=
+ag, int argc,
+>   			size =3D image_size;
+>   		}
+>   	}
+> +
+> +	/* Initialize EFI drivers */
+> +	ret =3D efi_init_obj_list();
+> +	if (ret !=3D EFI_SUCCESS) {
+> +		log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +			ret & ~EFI_ERROR_MASK);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	ret =3D efi_install_fdt(fdt);
+> +	if (ret =3D=3D EFI_INVALID_PARAMETER)
+> +		return CMD_RET_USAGE;
+> +	else if (ret !=3D EFI_SUCCESS)
+> +		return CMD_RET_FAILURE;
+> +
+>   	ret =3D efi_run_image(image_buf, size);
+>
+>   	if (ret !=3D EFI_SUCCESS)
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index e24410505f40..48d4999e56a9 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -878,14 +878,12 @@ efi_status_t __efi_runtime EFIAPI efi_get_time(
+>
+>   efi_status_t __efi_runtime EFIAPI efi_set_time(struct efi_time *time);
+>
+> -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
+>   /*
+>    * Entry point for the tests of the EFI API.
+>    * It is called by 'bootefi selftest'
+>    */
+>   efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
+>   				 struct efi_system_table *systab);
+> -#endif
+>
+>   efi_status_t EFIAPI efi_get_variable(u16 *variable_name,
+>   				     const efi_guid_t *vendor, u32 *attributes,
+
