@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D911C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:59:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A3D6C25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 926CC87B8C;
-	Thu, 26 Oct 2023 20:59:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1858D87649;
+	Thu, 26 Oct 2023 20:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JbBpyxnL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m3ZglO54";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFFF586FC8; Thu, 26 Oct 2023 20:59:14 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 8560687B8B; Thu, 26 Oct 2023 20:59:24 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F41787B94
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:59:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E6AE86FC8
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-507be298d2aso1865295e87.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:59:10 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-50816562320so1701641e87.3
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698346749; x=1698951549; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698346761; x=1698951561; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pqzEfTSIkpQ3tOnbCFvG69Is9dr2HIpkp2nQoqeKzEw=;
- b=JbBpyxnLowE03yiJdI9eXZhzWWCc7d8TeTsHVX5z1SpurhSz/jHuygB6ehzxeh9Qwx
- B8c4oHL+hbnS0LNHk1mxc00x0/GAAivXQ8dnv4x0H29EQvosiNMJbLiRZQKzLLwMCW6w
- +kU6IUKOiiKixtPrUcyga/QLS4ocNM58ZX+jmXpY8t8WxHm8cL7JvV3jAihhmqgURizg
- 9W8IKC+SIbvXoUmXOeHkkes/QwxTQbEf6qOrQ0eiDZxzpbZmzWYJ1uNF0ujuR7lt/EnP
- lubcMMcLWToruHr+P2MF3knLFhEzIahj8gN7+QJckuQJHzvalRpcVi/ldpl0Zudt0VHr
- VG8g==
+ bh=dsu75dIWnIum6mYIKrW8Vk/qOUQUXZoisVxlZoJ75y8=;
+ b=m3ZglO54DAOUskU15IcJJnhenBy4wYlBm7/3DKmFpwey6+y3JwBADbrDmwNh0XAFs/
+ b5HLlfsK4ld39ravwVND1bd0NrBQmfCbZzwEeuZ4ANJ/N/pN5LdOIN3Ky4utVS1uNk5d
+ XIUWWXg1FvD4su1cche8WpRWqC+tFyfO4gOkngOCLYiM1or1vbqJuROkNov6e3XgsEux
+ TuFahb0UFDsU2NOQGJp/8ThqlzdBlDltJfPNH+ECUVTEVPS7c/9EPwMoxIz1y9PCpUCc
+ AVJZfAp5JZ32tQBfI5Id2JTHbtjXlWlZH1CBQCHlLwQota3su4JCeYdx66zxpTmZ+TOG
+ OMtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698346749; x=1698951549;
+ d=1e100.net; s=20230601; t=1698346761; x=1698951561;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pqzEfTSIkpQ3tOnbCFvG69Is9dr2HIpkp2nQoqeKzEw=;
- b=fUkC7lIe/DsT9OdbQlPC+AYAoZnQ8VHUawbD+KZNDkMc37K6aRpXQ1vSOYJpmlNFAm
- QioMLlJvCwtluZ7LyB6e9WGCwx1/2GE7Ej0CKDZOwZ/wTNFBeSB05QL5PGohLExdn+3u
- zAUpEGVuSlxgFyKrIseMVxj7fdE7daV9PJe2gGsktfSw3YR7JtPi8K4v2U88OozsmfNf
- c0OG0i6T3xEPynCDvbudtDOFnIwXiWewQ2+tw+1P74B8eRnNchF2hMwtJi5Lri+74yXY
- rF4o1w67WSwPPlz51Sh6R5OtASQN4gUZ5S+XP535yjMwKGorAIvIdwPm6rHXnMutxio6
- IVow==
-X-Gm-Message-State: AOJu0YyyN2Oe04OID5Bl9JzHZDrxmOYhirmRe2mpWEgyY7/8rQWYwSJv
- ER9H28EzJx334aWfD5PW+t76n6G35u92/EDpFYOmRw==
-X-Google-Smtp-Source: AGHT+IFCbqU6FQp8DtivMcFS8ZC2F52LV7T2n4qiAQwdaWUdN29sXQp5wDrwtaHK076vpauA1vP1PnJ9Y/mn7IWxUi8=
-X-Received: by 2002:ac2:511a:0:b0:507:984e:9f17 with SMTP id
- q26-20020ac2511a000000b00507984e9f17mr170247lfb.34.1698346749590; Thu, 26 Oct
- 2023 11:59:09 -0700 (PDT)
+ bh=dsu75dIWnIum6mYIKrW8Vk/qOUQUXZoisVxlZoJ75y8=;
+ b=m4SyQQbNuk+px2L3wtKQwemi71LnUn3r3/Thn/ilWv+4RXFCksglA+CZuKRFWE0qDs
+ fkMDNdEDvYB3kICueTg7EJM4JnrTRookXtG9u82skPeEyhKpXFZAfH5zavIDBhdCzBSv
+ o/Rgp90UwMvGEYkCSjbbHALUZR+3YYnB0DJmu95bkSWOIr9Amkyfnief9B1dG++1aaX4
+ 9OiRhIvfZCmhb+8UCTdQr5jIXyxH/HMPwJ40eEX2+irtq5bJXBDrnxGL4xLFPPeUFbOZ
+ teCZ58HIti6Q2qqX/KzXVYb4aiyvJflSiIZT50mCOxjQx4kufVhIABLNEzn3hgdtM7xe
+ iaTQ==
+X-Gm-Message-State: AOJu0YwZ2JHnorKrw76nsE4VEMN91/+dJ/Aqub3JXv/3WeJGisu/II9p
+ 0T+07UFZV8zGC8KEpIZ3DkPHPPImTLURRrxKkfR4WA==
+X-Google-Smtp-Source: AGHT+IGFuiFA2Czvp2KHmdu+Q+KjObeY9U8/v6DzBoGqFIToXpZBVEeG1pKaqREgb/Z7ihz8+Kh5thLoRX4gVFGnZhY=
+X-Received: by 2002:ac2:4a67:0:b0:507:a58f:622d with SMTP id
+ q7-20020ac24a67000000b00507a58f622dmr163796lfp.50.1698346761748; Thu, 26 Oct
+ 2023 11:59:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
- <20231025065103.3101666-3-masahisa.kojima@linaro.org>
-In-Reply-To: <20231025065103.3101666-3-masahisa.kojima@linaro.org>
+ <20231025065103.3101666-4-masahisa.kojima@linaro.org>
+In-Reply-To: <20231025065103.3101666-4-masahisa.kojima@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 26 Oct 2023 21:58:33 +0300
-Message-ID: <CAC_iWj+tQ_-ht1N6H2WbuZuo9M4KaODfKE=08oVuFe1mi96dFA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] board: developerbox: update old NOR flash layout
- build instruction
+Date: Thu, 26 Oct 2023 21:58:45 +0300
+Message-ID: <CAC_iWjK38SYray3tS52zXc=SLdsrhh2O0f5JhLsbsE+cGcRq+g@mail.gmail.com>
+Subject: Re: [PATCH 3/3] board: developerbox: update flash rawwrite binary size
 To: Masahisa Kojima <masahisa.kojima@linaro.org>
 Cc: u-boot@lists.denx.de, jaswinder.singh@linaro.org, ryosuke.saito@linaro.org,
  sugimoto.yoshio@socionext.com
@@ -90,37 +89,33 @@ X-Virus-Status: Clean
 On Wed, 25 Oct 2023 at 09:52, Masahisa Kojima
 <masahisa.kojima@linaro.org> wrote:
 >
-> v2023.07 is the last version supporting old NOR flash layout
-> by default. The later versions of U-Boot, Developerbox is
-> configured to enable A/B update and new NOR Flash layout
-> by default.
-> This commit updates the documentation to pin the U-Boot
-> version for the old NOR flash layout. It is still useful
-> for the user wants to replace the factory default EDK II
-> firmware to U-Boot.
+> Current documentation limits the firmware size to 1.5MB.
+> When the fTPM and StandaloneMM-based RPMB secure storage is
+> enabled, firmware size is bigger than that size.
+> Let's specify the A/B update bank size(4MB) for flash
+> rawwrite parameter.
 >
 > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 > Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
 > ---
->  doc/board/socionext/developerbox.rst | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  doc/board/socionext/developerbox.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
 > diff --git a/doc/board/socionext/developerbox.rst b/doc/board/socionext/developerbox.rst
-> index aa7080e26c..596cf9f908 100644
+> index 596cf9f908..46712c379b 100644
 > --- a/doc/board/socionext/developerbox.rst
 > +++ b/doc/board/socionext/developerbox.rst
-> @@ -42,9 +42,10 @@ Compile from source
->  You can build U-Boot without any additinal source code.::
+> @@ -212,8 +212,8 @@ can be installed via NOR flash writer.
+>  Once the flasher tool is running we are ready to flash the images.::
+>  Write the FIP image to the Bank-0 & 1 at 6MB and 10MB offset.::
 >
->    cd u-boot
-> +  git checkout v2023.07
->    export ARCH=arm64
->    export CROSS_COMPILE=aarch64-linux-gnu-
-> -  make SynQuacer_defconfig
-> +  make synquacer_developerbox_defconfig
->    make -j `noproc`
+> -  flash rawwrite 600000 180000
+> -  flash rawwrite a00000 180000
+> +  flash rawwrite 600000 400000
+> +  flash rawwrite a00000 400000
+>    >> Send SPI_NOR_NEWFIP.fd via XMODEM (Control-A S in minicom) <<
 >
->  Then, expand the binary to 1MB for preparing flash.::
+>    flash rawwrite 500000 1000
 > --
 > 2.34.1
 >
