@@ -4,141 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FF1C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 07:36:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A19DC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 07:59:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E703487457;
-	Thu, 26 Oct 2023 09:36:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 6923787B2C;
+	Thu, 26 Oct 2023 09:59:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="U+6imOXg";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bu2T98Sa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ADAB87224; Thu, 26 Oct 2023 09:36:00 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ id 1BE1E87B2E; Thu, 26 Oct 2023 09:59:01 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52DED874F8
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:35:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id 923CC87B2A
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:58:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1698305756;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2g+T37JKXqVTnXP83EWI6l9adRjJoq1E8dAheTOxDoQ=;
- b=U+6imOXgQm3qmbsBsihJoaHYBqhhodEhvd/990Ak7ZxSnt6GEVCr44kluLzAn8QwV73+4G
- PL7QFrRlH95eoY+CI4Zd5yHWkOYuli1hao0BskCiyqV7BODx8qTKJI+C8IFoKfgtmR8bGP
- i+nRzr43uOrchVulSWOH+QBA1jreT0s=
-Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
- (mail-zr0che01lp2104.outbound.protection.outlook.com [104.47.22.104]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-26-FJ8Dm7NZO56n-beSEYfXyA-1; Thu, 26 Oct 2023 09:35:54 +0200
-X-MC-Unique: FJ8Dm7NZO56n-beSEYfXyA-1
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR0P278MB1074.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:57::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6933.22; Thu, 26 Oct 2023 07:35:52 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::a3b:50bf:57a:b96b%2]) with mapi id 15.20.6907.032; Thu, 26 Oct 2023
- 07:35:52 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "festevam@denx.de" <festevam@denx.de>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>
-Subject: Re: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Topic: [REGRESSION] imx: spl_imx_romapi: boot loops
-Thread-Index: AQHaBk0pzkBxey4AX0CR0vSGBaUJ0LBYqXaAgAAMigCAABTWgIAAIPoAgAAVaICAAas2AIAAKvkAgADaFYA=
-Date: Thu, 26 Oct 2023 07:35:52 +0000
-Message-ID: <132abd8fa3d6fdb8580d10f6a581fd451752ccf1.camel@toradex.com>
-References: <6de4ef437445c78317e7d8f4f07e47502caed029.camel@toradex.com>
- <cb3e2ea6-b417-4736-9639-b51a04815f7a@prevas.dk>
- <1f86cfc30009f2a04c131ddc06a1d8300dcb1453.camel@toradex.com>
- <e4821c38-ead6-4a51-a442-2c782e638024@prevas.dk>
- <2832e90451ce39c3c7cef34ec5d5c20f02d3a652.camel@toradex.com>
- <4faf5846-9aa8-4396-84fa-8d36c9b4fef9@prevas.dk>
- <2442c84e27ac3271ae17d1e7b272d624cdbf22cf.camel@toradex.com>
- <3c3ebabe-fd7b-45a4-aefd-13d74b146f30@prevas.dk>
-In-Reply-To: <3c3ebabe-fd7b-45a4-aefd-13d74b146f30@prevas.dk>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB1074:EE_
-x-ms-office365-filtering-correlation-id: b89a35f6-76d8-48c0-6157-08dbd5f62ea6
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: 78X0KR66W6j2SPIOzHXw/mnAxUfx1pw0zMdRdFaBU5HKkmVx7sUFbjlr61XZJqHtAL/gFGa4CUI234b2gVK3OR3xvlfhY7CNvt7VqsM2K83EA/vD/WNUbtijmswkvZiYFzGKbudJ0MZD2rN8k4Mwd4S3z/x3y/y2JgHgip75cpSGxBrsLj1sT14044eqscnW05rjftZ8q7t4r4h9boGjfOIPS4pujBygkv0PfDeXcCSGtQZWUCEJUfLjw7862sA55NTSjUw1LRZKrquBGZAlgPWDnec9DSNjJflY/qKhp4pM+WRgFeh6d+Zmw71X+5Bjtznm4dRVLDydCTJGascejbb2/omeDfTZRm9ekynXJvRHXe54UyThKH7rQVgH1XlBfRuWOOPYxqUnATXPmfIs25JdXKnSqN6Vr9T7S5iHpcEqzBj0BmlwtaTyIuND+/k1FIVtPsy9h2ljszCHApfPnnmeVEi1AKWD2xtdvLAqRzuryeCXgW3tFFMT04dOSO87367MRDkTQk/lm03g3d2wV3Az6yvUOOWocgjCJoouGBW4BBQ3H6aiaYXyIhh95ouNYvSOz7MXnHiM/4HA666QlJZL0Ujfv3iZjKQFEWknCio=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(39840400004)(136003)(376002)(346002)(396003)(366004)(230922051799003)(64100799003)(186009)(1800799009)(451199024)(2616005)(6512007)(44832011)(41300700001)(122000001)(5660300002)(26005)(966005)(6486002)(8676002)(4326008)(8936002)(478600001)(54906003)(64756008)(66446008)(66476007)(66556008)(66946007)(76116006)(316002)(36756003)(91956017)(110136005)(38070700009)(6506007)(71200400001)(86362001)(38100700002)(2906002)(4001150100001)(83380400001);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bG55SmM3UytaMTR6eWhhTXg1YW9WNURvVjZQeTdydFpZNDZ2ZG9YOGNLNUpB?=
- =?utf-8?B?TkpmZGZMeUs4MDNGUVorR0NqK0ozNXVPNnpISUtWYWE5Yk9NcUV2UXZsM3hj?=
- =?utf-8?B?NzNUcVUxRW1CaDZZeWE0TUh6TUI1KzlEMjhkVFdudHpyVVRNMUlUSWlQRGov?=
- =?utf-8?B?bjBaRnh4RlJQZW9SQzUvUzAzaFlPSU5FcEQ4REZ0aEx1OHZuOGkzcXhBTDJT?=
- =?utf-8?B?cUtDVnB1M2RaVXU0Y2YwMXlJRjRqWVRoQzNtQ05sWXFNbjJtRzJOdU5UZHhF?=
- =?utf-8?B?YUVHMk9yTCthV215K3Y5QjRHMlhvTTJxNlpFaHRQY1FIa09EY3RLbDh0eU9C?=
- =?utf-8?B?OGhObVM0dU8wWjZrMlg1UnJoU2Nsc0taQVU0OUw2ZHRzcmRxQTBrT3NmQk1E?=
- =?utf-8?B?NGdoTzZSZlBRbEEyQzZ2TjVKN2dEZ2RZTE9Pa1Z6R1pKdm9yUjE2SjJpOGEv?=
- =?utf-8?B?RjYwYktabHpHWjlpejV6ck9iQ2oxUkd2Qm9pcHEwNExoUDB6MlM0Q2kzSlcy?=
- =?utf-8?B?eGo4UnpBWVNHZ3U5UmZtY1VVeEVOUGpwdTk0K28yM1pRMVNvUE8yUWpEY1Vy?=
- =?utf-8?B?andWb2R0TW1tOCtKWko2UExiZXpjOVJuKzlOSUloU240ZHllb0E3ZTYyT2d5?=
- =?utf-8?B?RkFqckxoek41RGdheFFvZGcvbzd0aG1wQS9mNFRrMXprZW5XWUZwRlBROTBL?=
- =?utf-8?B?K1FJeE43WktPelpXUElPV1lPWU53WWpaRUVlaTNHbUNLVG1nMnV5eXZ3cXNt?=
- =?utf-8?B?M0p0alJIenlPQTdUcTFrOUMrZHBNYnJadWdHNkNoQWhWVFBKRTN5bTNRNEMy?=
- =?utf-8?B?R0E3ZlZUZWRsdkUwNVlaRFBINWVKNkJmTEZxUVRQR1UwVDVEbm5EbzlCTDJK?=
- =?utf-8?B?aWMyV1dLZlQwN3ZBWkpkOGJHUXFSTVQ3OXZYdUZMbnhQTHpraFl2UEJmRGhv?=
- =?utf-8?B?NHJhWW13UWRtWW14a2NQUk55OEM3bVptU1hodmpSM2diTDlEb2RZQldHTjdR?=
- =?utf-8?B?R2dYZEk3TEY4UmZadUdaTkFaMHgrbEQ5UzhkZVB6dGlGYUd0OFJtVFhsakdr?=
- =?utf-8?B?SFlVUnNSc3poam8zRFc3bWFVNFJwa3J2NVU1UlZKdUppa2FjTnJBelZvWE9S?=
- =?utf-8?B?Ti9Nb21ReEtNMGpqdmlWVUYyYXoxQW1yN1lkM0ZuMjZPanR5Smp5WTh5MVhw?=
- =?utf-8?B?R1dBTkFnRFFzNVBZL2tLdXVEN2d0WGR3b0lmcWw0U2ZMMkp0Vkg5RVVIOGg0?=
- =?utf-8?B?TUFwdE9tVzdxUlQ4K1puYnFmUldTWC85TmU3MFZ3L0dzamxMUXNKSHMwYTBp?=
- =?utf-8?B?bzRabWRaSG9kQkpLSG9RQmIranRpT21jcHZFTE1oV3FVMy9qVDdrM3Bkdndn?=
- =?utf-8?B?V1pSSTlocVl0VXR5Wmd2SWFUYzFRWlIrL3hNWnZQNENMbnNTMi9zQWdMWFc5?=
- =?utf-8?B?YXBKcVNsK0dDU2hqWm01OEIxM3p1NnNmSDg0alBpOFA5a1dTRmo0VHhIYkdr?=
- =?utf-8?B?N0VvVmlKK1JkaCs1ampjckU5NEtYd0lsRm5TNHBYU3BPazdnU2dDbzR3K05L?=
- =?utf-8?B?VHpvb1NXZDFxTzJJbkxYVlhRL0JZS0ZaQW5lNE04ZitiY1VTN3BlZEg0WlV3?=
- =?utf-8?B?RmxlSUhhRWt1OUNPcUg3SmxvcHB2NmhwNWgvQ2pIcDFJYTU3Y2R2TFZ4Vk9l?=
- =?utf-8?B?VzIwOHhYbHhkMDVCbGt3cStoVkk3YkhTaWV2aWwyYmQvNkJJUTk0cnZjdFFq?=
- =?utf-8?B?S2pyQ0ZURkpTWkFQb0ZGME10L2ZWVWdxRnVRb29WY0xkelV3eElIdHpPZzlS?=
- =?utf-8?B?TUVNMnphbVRoV0dVTkpWQTR6ZHM0ayt4cDhSNStzdFdUR3dtUWV6S0VRYmtX?=
- =?utf-8?B?SHJQeElWelJQQ1JhSHFFYnRMZ244c2Nwb0pqVHk0KzIxYVpWckYyVUJMYWdC?=
- =?utf-8?B?RFlCY0QyN252TVNzT2EyQVg4cmFwWWxZL1FmZkxCWUZ4UVY4UWhTNS9xVjhy?=
- =?utf-8?B?ZEhBT1ZDRWQzMGlnZUMvOFpjSnpjTldycWc1T1NzeFlGOFRaWmR6Q0huZUEr?=
- =?utf-8?B?dDNxVmFVYU9PZDB4UGNlRS9lM2sxTGsyb0NLclo2NzB4WW1FQW55bTVlWUhE?=
- =?utf-8?B?SlJKa2lQcU5zMGRQcEFxOE13TnFaNjhIMy9NVkZTVlFsakV4Z1dHNldDU0I4?=
- =?utf-8?B?d3c9PQ==?=
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1698307134; x=1698911934; i=xypron.glpk@gmx.de;
+ bh=F5eUsAVjmcoxWDzxFQl+xJTCfHo01axAlQh5rwzM1Hg=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=bu2T98SavUtERKJZBRVBMW9sZclPFRXqByfQi90cRFepHBQmdsETJKIYc4wmdLif
+ ciN1qCs2Ki6A8kuPnNLkvZdTQSK4ZJZC1sZdtNNBMW8lOKp17WDFSw10xbLJy6naS
+ 3SWslWokaNOKQivrOnTEBVY2BkhKRESbcZeotMBw25y859Lo5uf49sD0twSXsHOAF
+ eYMN87x/SA/0pkguOR4ZgwdDHeApD60tIbbqpxvpWfNV+zNm6241+CPG5FaxXcy/2
+ RUwxDZUn4ZDo9KOIM5AoQhDI9pMxZjUbHEcfO2/WxgqOU6UHyIZVoyMHEAG1KoMwR
+ JeI9tKfFRu0aJkEYPg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MtwUw-1rloUk0trQ-00uIBH; Thu, 26
+ Oct 2023 09:58:54 +0200
+Date: Thu, 26 Oct 2023 09:58:53 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>, trini@konsulko.com,
+ sjg@chromium.org, ilias.apalodimas@linaro.org
+CC: jbx6244@gmail.com, u-boot@lists.denx.de
+Subject: Re: [RFC 11/13] fs: remove explicit efi configuration dependency
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231026053052.622453-12-takahiro.akashi@linaro.org>
+References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
+ <20231026053052.622453-12-takahiro.akashi@linaro.org>
+Message-ID: <1276E605-F0B0-47A3-A80C-F17C6F8A7F3F@gmx.de>
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: b89a35f6-76d8-48c0-6157-08dbd5f62ea6
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Oct 2023 07:35:52.4382 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: u5SiENUYimZAR/2ExpjjedSVawNu/BtRsCvwJU+2jKbuwghV6bjuYYP2TkmUe8jZ/X2tlevdSVkYjWt2xelD1HNKhpQTTuJ9aMYPe8JPR4w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB1074
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <60A265CEC620B944A8F7952B4937CE80@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OHNIY/OxanHScT8rAej2uWmOv9CAVpsJ8emiTCI6hMpBc8gZMRO
+ lZvXutgU0iDNtadk87WmIKaRkaKxfBjemzBcYUc9Y3GS5TGmzFeuLADyTqweM+NAx7wpg7C
+ 4JlbHQUJDWe16lpnX7dTNE0I76+mTm6sN2CHkA1EhCwDz9cp4C4BdqfDiDRk+hLsaranBj+
+ Ld2gmzs2gPyKRkcGPHQow==
+UI-OutboundReport: notjunk:1;M01:P0:E4iyQjNFVYA=;NeKl2OsCmAuJj4/8yRuW4zoqaFC
+ N+iRCdmF6AWpc6tL7Dx9VvupCaJEcT0pIPrhckwwRbQi1Mxvs045oOWSWOMjhtfEZO2B88VKc
+ E0HCkjfyyJ4qx4DOe5Q12XtY9jOBQzg6fQe9gNtb7kFdT6azgBsVWKPjjZ68wOSjPVc+Ldvg+
+ n9D2fBENXvfWwnxb2Ig+TCJkMzmVxpWEz93cLKiX4OuYuLDHe9KTmJLfybK686VFifkB4iGBn
+ XdGTP7GL25nrF7BqVSpAsnuQyDBJWlAYGCKEDzaNMGP5ysqSWqhKGKkHEC4+8MlYzLNGPbWzs
+ PwdZBA+AGxfwQPBUKViofChQpy1ivNlF/W/vf7aS876IdxsPUejTkxNz630NCEZu3/YfGE6+y
+ gWYuN6rLZY24Q0Yp5mwCXB3QT24E68vmkgwENl1ypY3qb2YCye3JdYV8ZzTdqi/csbrFFrbq5
+ hgmb+82hC3aJWzQHx1VMglScs1zojsUvXuItHkKySRmoVr+oVD1RbpNFG/J1qB+8vB0EYDGvJ
+ JJ+Y0u/qEz5WrIFSo3yCXIsmd+o0NmqyWbnwMXovihuMFAfQPGVWrkyYW7ep/Hp7Ys7uMDa1a
+ SnpKHsGkh82NZDHKIDHx5BZ0u79IWj/J/fWgoAH6rpnSJJ3cOmqSm0ORGZx3KGfnj9K93K3Pk
+ LV7J5dhtWAoQiMMBo9SH6n3vWRmKfGy5qz8d7G1CO4Ssoj8HSuNzB3nNlkBKBoBoTePGq4xea
+ BYXQsHlfe4PwWAg2gJuCKNC4kFnKrr9g3FmfPkKWT3bRya90bSSZV5RXhfp+yseHISxwf3FK6
+ +rQSVjrZRM2I/fIj5cm5SrQqX7sye1cYEAzHDge6OvS9awXpOEY7RRfouj5ewYdebaKx1nGju
+ LdzA8u48OyQ1XbadKimKIWWo18pGzIOnmdScnQ7Lo+wkW6S5bGiFPDZJxulwTGm2Y4TNyU06m
+ xPS/6E/qzBB8B3sIMSVvZqrbhZw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,28 +90,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgUmFzbXVzDQoNCk9uIFdlZCwgMjAyMy0xMC0yNSBhdCAyMDozNSArMDIwMCwgUmFzbXVzIFZp
-bGxlbW9lcyB3cm90ZToNCj4gT24gMjUvMTAvMjAyMyAxOC4wMSwgTWFyY2VsIFppc3dpbGVyIHdy
-b3RlOg0KPiA+IEhpIFJhc211cw0KPiA+IA0KPiA+IE9uIFR1ZSwgMjAyMy0xMC0yNCBhdCAxNjoz
-MiArMDIwMCwgUmFzbXVzIFZpbGxlbW9lcyB3cm90ZToNCj4gDQo+ID4gPiBXaGF0IGFtIEkgbWlz
-c2luZz8NCj4gPiANCj4gPiBHb29kIHF1ZXN0aW9uLiBTb21lIG1vcmUgZGVidWdnaW5nIHJldmVh
-bGVkIHRoYXQgd2UgYXJlIG1pc3NpbmcgNDY0IGJ5dGVzIGF0IHRoZSBiZWdpbm5pbmcgb2YgdGhl
-IGJ1ZmZlci4NCj4gPiBXaHkNCj4gPiB3b3VsZCB0aGF0IGJlPw0KPiANCj4gW3NsYXBzIGZvcmVo
-ZWFkXQ0KPiANCj4gCQlieXRlcyA9IGVuZCAtIHNzLT5lbmQ7DQo+IAkJYnl0ZXMgKz0gc3MtPnBh
-Z2VzaXplIC0gMTsNCj4gCQlieXRlcyAvPSBzcy0+cGFnZXNpemU7DQo+IAkJYnl0ZXMgKj0gc3Mt
-PnBhZ2VzaXplOw0KPiANCj4gCQlyZXQgPSByb21fYXBpX2Rvd25sb2FkX2ltYWdlKHNzLT5lbmQs
-IDAsIGJ5dGVzKTsNCj4gLi4uDQo+IAkJc3MtPmVuZCA9IGVuZDsNCj4gDQo+IFNvIEkgZmlndXJl
-IG91dCBob3cgbWFueSBieXRlcyBtdXN0IGF0IGxlYXN0IGJlIGZldGNoZWQgdG8gaG9ub3IgdGhl
-DQo+IGN1cnJlbnQgcmVhZCwgcm91bmQgdGhhdCB1cCB0byB0aGUgc3MtPnBhZ2VzaXplIFt3aGlj
-aCBpcyBhIG5vLW9wIGluIHRoZQ0KPiB1c2IgZG93bmxvYWQgY2FzZSBiZWNhdXNlIHRoYXQgaGFz
-IC0+cGFnZXNpemU9PTEsIHNvIEkgZXZlbiBjb25zaWRlcmVkDQo+IGxlYXZpbmcgdGhhdCByb3Vu
-ZGluZy11cCBvdXRdLCBmZXRjaCB0aGF0IG1hbnkgYnl0ZXMsIGJ1dCB0aGVuIHJlY29yZA0KPiB0
-aGUgb3JpZ2luYWwgdXBwZXIgYm91bmQgYXMgdGhlIG5ldyBlbmQgb2YgdGhlIHZhbGlkIGRhdGEu
-IFRoYXQgY2FuDQo+IGNlcnRhaW5seSBhY2NvdW50IGZvciBsb3Npbmcgc29tZXRoaW5nIDAgPCBm
-b28gPCBwYWdlc2l6ZSBudW1iZXIgb2YgYnl0ZXMuDQo+IA0KPiBTbyBsZXQncyB0cnkgaWYgY2hh
-bmdpbmcgdGhhdCBsYXN0IGxpbmUgdG8NCj4gDQo+IMKgIHNzLT5lbmQgKz0gYnl0ZXM7DQo+IA0K
-PiB3b3JrcyBiZXR0ZXIuDQoNClllcywgdGhhdCBjdXRzIGl0LiBQbGVhc2UgZmluZCB0aGUgZml4
-IGhlcmUgWzFdLg0KDQo+IFJhc211cw0KDQpUaGFua3MgYWdhaW4gZm9yIGFsbCB5b3VyIGhlbHAh
-DQoNClsxXSBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwvMjAyMzEwMjYwNzMyMjAuMjQ0Mzg3
-LTEtbWFyY2VsQHppc3dpbGVyLmNvbQ0KDQpDaGVlcnMNCg0KTWFyY2VsDQo=
 
+
+Am 26=2E Oktober 2023 07:30:50 MESZ schrieb AKASHI Takahiro <takahiro=2Eak=
+ashi@linaro=2Eorg>:
+>Now it is clear that the feature actually depends on efi interfaces,
+>not "bootefi" command=2E efi_set_bootdev() will automatically be nullifie=
+d
+>if necessary efi component is disabled=2E
+>
+>Signed-off-by: AKASHI Takahiro <takahiro=2Eakashi@linaro=2Eorg>
+>---
+> fs/fs=2Ec | 7 +++----
+> 1 file changed, 3 insertions(+), 4 deletions(-)
+>
+>diff --git a/fs/fs=2Ec b/fs/fs=2Ec
+>index 4cb4310c9cc2=2E=2E70cdb594c4c8 100644
+>--- a/fs/fs=2Ec
+>+++ b/fs/fs=2Ec
+>@@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int arg=
+c, char *const argv[],
+> 		return 1;
+> 	}
+>=20
+>-	if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
+>-		efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
+>-				(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
+>-				len_read);
+>+	efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
+
+This function should not exist for CONFIG_EFI_LOADER=3Dn=2E There are othe=
+r places where the function is invoked=2E Please, review all of them=2E
+
+Best regards
+
+Heinrich
+
+
+>+			(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
+>+			len_read);
+>=20
+> 	printf("%llu bytes read in %lu ms", len_read, time);
+> 	if (time > 0) {
