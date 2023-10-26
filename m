@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FD17C25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:35:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D127C25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:35:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4161987BBB;
-	Thu, 26 Oct 2023 20:32:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2DF4787BBD;
+	Thu, 26 Oct 2023 20:32:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EU8+PV0l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t0CrXQ+7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF18C87B77; Thu, 26 Oct 2023 20:32:02 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id B00DD87B51; Thu, 26 Oct 2023 20:32:03 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D84C87B79
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:32:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39FE58763F
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:32:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-41cd6e1d4fbso9044221cf.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:32:00 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7789cb322deso92889485a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698345119; x=1698949919; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698345120; x=1698949920; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mt3ZpnjRNZW37GgkDuYfBmQyv5NUf+wmGjucbYRybnQ=;
- b=EU8+PV0l61A5Ql9wIwu7UYRRHj+V7ixpHsg4QK0HaDEOH+G7997a7P3OHhqWZsXn4x
- gHqHJeLZAQt3dI/Aox3sZB9IRIhDIK377ugcVXZbRaG5NfmXxRWhZZ9NthcaSVI7zNjd
- VPEBtVwT/JvtxRmzyzlfMSDP1xfOUdqdnfrs8=
+ bh=ekCPf4teoD7xOYoQkvGBz4z3Ij4Yl1X7VWc1UYtOiwQ=;
+ b=t0CrXQ+71SGVvs6cKZ+FLs4EtUeIxtHMP6ynsyVEBsBRlh5/r/XHSd9YydvJCv4ud8
+ M1YQF5T6ZYc4AGnUUl9md0O+MpYwQ/XSOk71SdvNq0cRsPZt8dUaMA3mn4l1eK98sNQE
+ XbuQRKzmGm3fE05ISisFSEQxZeAgOKwm/Qe/Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698345119; x=1698949919;
+ d=1e100.net; s=20230601; t=1698345120; x=1698949920;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Mt3ZpnjRNZW37GgkDuYfBmQyv5NUf+wmGjucbYRybnQ=;
- b=vgxzXkpAvjz4dpUakc4+XtFWR5geKeAijNSKnh+3instwtrmTNnerVZL3mfZeg5aQw
- N04DpkB9xGVr2QSnH1iBpihq3lIW0n2VOkKmbXodb/zo3vXuwIvyYOGadcNJ7Vl0OK2j
- 4tTZU5VWktaGS7u6IGjjqaMyR0Uq1OeC0LWagHhwHXOLOfYEVW4l6GKirf0tVDgWae02
- ejjujYMKWj8p+ahoLefYAtHBxJrlifnq3wmZwzitEHvXOzchjdLzmGGJz1L0pj8V9L+E
- rtWFOstgeeY/PQLoLXXcar5wDiLf+ET1BF8b06RFzMepuPBVpljuW+6dqKh0U6FFf4Vx
- pxHg==
-X-Gm-Message-State: AOJu0YzrMdoNTuaVrLbGIFpjySd2/BxW/0yXJ+woO8B3duuwAq+n+gOj
- wVUbpscHwTIg8C84VrhUWx/3vKdUvwvqY/nbIuOkcg==
-X-Google-Smtp-Source: AGHT+IG6De1qaFJEU74ZmgGUIPPX97CZNHG8JW43YMrCjp+Sn/lygNTAdRD6MjXltJbr15CJcJUegw==
-X-Received: by 2002:ad4:5c46:0:b0:66d:28fa:f4 with SMTP id
- a6-20020ad45c46000000b0066d28fa00f4mr601371qva.2.1698345118908; 
- Thu, 26 Oct 2023 11:31:58 -0700 (PDT)
+ bh=ekCPf4teoD7xOYoQkvGBz4z3Ij4Yl1X7VWc1UYtOiwQ=;
+ b=Jh19I/aMUdbh/3Ul8E2gg6Bvm6IpHOsPhBut5E2B5H/7vcpV++NuFh6SvWT6/N6k71
+ zsf5GQpEo2uqdGvwZDgCq6lZt1+M6Rih2ZaIoOVK6hMobGnopClqCY6obKWI8KRGQ2rY
+ FC1bSKOz7ofuwhdf1wL+23Wbq4Cplv8aJAlQSo5PqCzT9epZWpwVDx9KJfodmko7mqrA
+ KadPxbL2q5EWCf6CCWbXjkq2hHgUSw46/eDr1Zmfnceb8YP+aKoNnBPEFTEB7MwwMv2g
+ TI3jTHx8c3jqPG8c3WKrKMguov1WRslykdxIsuQxSkfX7Ie3RzpkCCGahwGnC7YZcV+Y
+ 5riA==
+X-Gm-Message-State: AOJu0YxJuDftKlPGANxvd+lEEZIUgnZGSlA6JP9i5omlxAQupVD9VQXY
+ ZDBtXOSIpwnMIIWXQzcm7wSjw0lT1HHgh+vCcMk3sA==
+X-Google-Smtp-Source: AGHT+IGaYO8gE+B9J7L/F69UacOI/9c1fGpWx18dFE/JzYc0v7cs6hbkBB3TdrMmiDpP0GSTX0aJTw==
+X-Received: by 2002:a0c:f3cd:0:b0:66d:46ac:2fbe with SMTP id
+ f13-20020a0cf3cd000000b0066d46ac2fbemr442636qvm.16.1698345119874; 
+ Thu, 26 Oct 2023 11:31:59 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
  [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
  by smtp.gmail.com with ESMTPSA id
- az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.58
+ az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 11:31:58 -0700 (PDT)
+ Thu, 26 Oct 2023 11:31:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [v5 23/30] lib: uuid: move CONFIG_RANDOM_UUID
-Date: Thu, 26 Oct 2023 14:31:31 -0400
-Message-Id: <20231026183138.636948-23-trini@konsulko.com>
+Subject: [v5 24/30] block: rkmtd: select CONFIG_RANDOM_UUID explicitly
+Date: Thu, 26 Oct 2023 14:31:32 -0400
+Message-Id: <20231026183138.636948-24-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026183138.636948-1-trini@konsulko.com>
 References: <20231026183138.636948-1-trini@konsulko.com>
@@ -92,57 +92,29 @@ X-Virus-Status: Clean
 
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 
-This option is independent from any commands and should be managed
-under lib. For instance, drivers/block/rkmtd.c is a user.
-
-It would be better to remove this configuration.
+This option is necessary to compile any way.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 Changes in v5:
-- Take AKASHI Takahiro's RFC and add my RB tag
+- Take AKASHI Takahiro's RFC and switch to select per my feedback on the
+  ML
 ---
- cmd/Kconfig | 7 -------
- lib/Kconfig | 7 +++++++
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ drivers/block/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 0eb739203ade..dcf1e54c5ddc 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1132,13 +1132,6 @@ config CMD_GPT
- 	  Enable the 'gpt' command to ready and write GPT style partition
- 	  tables.
+diff --git a/drivers/block/Kconfig b/drivers/block/Kconfig
+index 048a6caef00f..b897cf1a3d1b 100644
+--- a/drivers/block/Kconfig
++++ b/drivers/block/Kconfig
+@@ -265,6 +265,7 @@ config SYS_64BIT_LBA
  
--config RANDOM_UUID
--	bool "GPT Random UUID generation"
--	select LIB_UUID
--	help
--	  Enable the generation of partitions with random UUIDs if none
--	  are provided.
--
- config CMD_GPT_RENAME
- 	bool "GPT partition renaming commands"
- 	depends on CMD_GPT
-diff --git a/lib/Kconfig b/lib/Kconfig
-index f6ca559897e7..b6d580c30615 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -74,6 +74,13 @@ config HAVE_PRIVATE_LIBGCC
- config LIB_UUID
- 	bool
- 
-+config RANDOM_UUID
-+	bool "GPT Random UUID generation"
-+	select LIB_UUID
-+	help
-+	  Enable the generation of partitions with random UUIDs if none
-+	  are provided.
-+
- config SPL_LIB_UUID
- 	depends on SPL
- 	bool
+ config RKMTD
+ 	bool "Rockchip rkmtd virtual block device"
++	select RANDOM_UUID
+ 	help
+ 	  Enable "rkmtd" class and driver to create a virtual block device
+ 	  to transfer Rockchip boot block data to and from NAND with block
 -- 
 2.34.1
 
