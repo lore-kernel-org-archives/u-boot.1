@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4741BC25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 15:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E71AC25B67
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 16:07:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A599387AEB;
-	Thu, 26 Oct 2023 17:43:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 7E776875C8;
+	Thu, 26 Oct 2023 18:07:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X3+GSZc0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GoDdICVz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1016B87A49; Thu, 26 Oct 2023 17:43:36 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B8142875CC; Thu, 26 Oct 2023 18:07:07 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB2BE87B6D
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 17:43:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43956875BD
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 18:07:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 48847B82E2A
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 15:43:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5592BC433C7
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 15:43:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1698335011;
- bh=Hk06Aj6JBMC63stJsQlTtqBSdqRYckrvnAYkZsykl4w=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=X3+GSZc0HpN3GbG6Ea+/KrNVD4GaJkgte9zT0kRu7gA0kwYzU6P2IVAesE3j+sOYX
- LE1nf2HEhAraajS0jkJMbRTF5UQ0RI8qrYw0qMXQcX8wgPQXjZxQAlTkp08CpnF4Ws
- 62yx/B9JuSzGxB/JznjhpihqfS7UkFT4mHTm7faliA0eZRvGOsfnM6WISIurTM6fmV
- wW2C9jkTlUaXAms918j4NzG+zw2fnUFGqLU1J4/ZV57raHNsMoJe7EHk+XzvzBR25h
- XjtpH0xZR9/pMsG8O2oDX6E9IDllYoRk0nNbyBGC0ArNrxPcO65cpo8mtE1SyVi/hm
- 0lrqTAm97RAVw==
-Received: by mail-lf1-f46.google.com with SMTP id
- 2adb3069b0e04-507bd644a96so1536620e87.3
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 08:43:31 -0700 (PDT)
-X-Gm-Message-State: AOJu0Yy4UvrTE2KCsw7fml16vupgA29LBvyHFf04T5hwml2riBkn+BxD
- APG+1KTUG1s47g4zLTa1K9yo0XhZu8iJwgU7KQ==
-X-Google-Smtp-Source: AGHT+IHJNnx30p4ExgIV+paJsfbErgPi/9y5boGscu2uDDYVnvlAgNbwuy2E+CvtAfuhJdQ/7TX9o5K7/4keLNjqZ0w=
-X-Received: by 2002:ac2:4315:0:b0:507:b90a:7a5d with SMTP id
- l21-20020ac24315000000b00507b90a7a5dmr13773064lfh.10.1698335009558; Thu, 26
- Oct 2023 08:43:29 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-41cc7379b23so7494211cf.3
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:07:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698336421; x=1698941221; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=gBpUlpv+ddEgG5mprJaMQY21+wtMfPWtHNUt+um0g/M=;
+ b=GoDdICVzrb0wVfU42kV7uGw+bYAi3/k8/t55iZUcE+tcS52QOnB9oF0EjL4PqFURyj
+ cj0I02VMoSRkXBNA6Dv2ri/YcpJ2aAClqdbSfRCd2h1qwQ5ZZcjv+1nIUF52KLWlsIb+
+ RpHkn1rrXp+7TfHJs+KfFVZAfKD21iVwqY4BQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698336421; x=1698941221;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gBpUlpv+ddEgG5mprJaMQY21+wtMfPWtHNUt+um0g/M=;
+ b=UeUToQmnJLRSOzgVxD/c8XZN3DwPbfSdr/zul2LkCdSuUj/372UzaZUGCdeIDra38e
+ vhHck0j0oJSrvA/67SoHs7Wn/VG1oiXyRgLwQqti8waMDpuFXLO8P/HDoK+mqXoexM2Z
+ rWd3B6ewbB4/ZM0dspiPv6LCzjKEo0i7dDfLnMN1GH00jilHSeDaf20QoOy9crA3GlAh
+ uM7R4dsCSxWnV0edlL20zyFuH+AMYUD2y16CPKsvpWlXqYxcHdVj5YquG9EAiTd/PW6q
+ Uomk1giZ5C+tVSgrA3+b1PXIG17Iya0gfi27UJiUbohHSeQRorKIc1q5D/dKmQ3ixD9D
+ KcIA==
+X-Gm-Message-State: AOJu0YyPZenmIccZ8rrlPupSYgP2tIzRGc7dcH/TsjM6NUd2+YZrl3Wo
+ E7sgFA8ViCz7TAw1S529ZIFEYw==
+X-Google-Smtp-Source: AGHT+IGyR7ft/tIQ0knw00FpliHQS6BRUUnriHv9BhBFDkfebkXyDItLsW481BV7iqRbGbfBiUNM1g==
+X-Received: by 2002:a05:622a:15d3:b0:41c:d8b6:27ef with SMTP id
+ d19-20020a05622a15d300b0041cd8b627efmr22409894qty.65.1698336421223; 
+ Thu, 26 Oct 2023 09:07:01 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-7a1b-75c0-d849-e3ce.res6.spectrum.com.
+ [2603:6081:7b00:6400:7a1b:75c0:d849:e3ce])
+ by smtp.gmail.com with ESMTPSA id
+ 9-20020ac85949000000b0041cf5ec8b75sm3903836qtz.96.2023.10.26.09.07.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Oct 2023 09:07:00 -0700 (PDT)
+Date: Thu, 26 Oct 2023 12:06:58 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v8 3/8] power: pmic: add the base MAX77663 PMIC support
+Message-ID: <20231026160658.GJ496310@bill-the-cat>
+References: <20231024074110.199623-1-clamor95@gmail.com>
+ <20231024074110.199623-4-clamor95@gmail.com>
+ <20231024191757.GG496310@bill-the-cat>
+ <CAPVz0n3b4eH0q3sPGD7UkjVo56r__6AzoJsuwKy+XVPPCQX+xA@mail.gmail.com>
+ <20231025133712.GL496310@bill-the-cat>
+ <B68639B5-C9EB-4300-B745-0265604BAFE6@gmail.com>
 MIME-Version: 1.0
-References: <20231022084733.113326-1-heinrich.schuchardt@canonical.com>
- <20231022155543.GC496310@bill-the-cat>
- <4c4fee5a-82ab-46e2-a450-f874b2a9ad5c@canonical.com>
- <20231022170812.GD496310@bill-the-cat>
- <36e1a60c-3aa9-4f06-9920-c7b0a1d12c19@canonical.com>
-In-Reply-To: <36e1a60c-3aa9-4f06-9920-c7b0a1d12c19@canonical.com>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 26 Oct 2023 10:43:17 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqKAjvArFM-EuBKGTgZrATH6kBBnn_Ly+-pVRmEo8MtnQA@mail.gmail.com>
-Message-ID: <CAL_JsqKAjvArFM-EuBKGTgZrATH6kBBnn_Ly+-pVRmEo8MtnQA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] efi_loader: expose the device-tree file name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="J3DneV1H/NxDB5aU"
+Content-Disposition: inline
+In-Reply-To: <B68639B5-C9EB-4300-B745-0265604BAFE6@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,100 +97,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Oct 22, 2023 at 4:32=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 10/22/23 19:08, Tom Rini wrote:
-> > On Sun, Oct 22, 2023 at 06:34:08PM +0200, Heinrich Schuchardt wrote:
-> >> On 10/22/23 17:55, Tom Rini wrote:
-> >>> On Sun, Oct 22, 2023 at 10:47:33AM +0200, Heinrich Schuchardt wrote:
-> >>>
-> >>>> Forward and backward compatibility of Linux kernel device-trees is
-> >>>> sometimes missing. One solution approach is to load a kernel specifi=
-c
-> >>>> device-tree. This can either be done via a U-Boot scripts (like the =
-one
-> >>>> generated by Debian package flash-kernel or by a boot loader like GR=
-UB.
-> >>>> The boot loader approach currently requires to know the device-tree =
-name
-> >>>> before first boot which makes it unusable for generic images.
-> >>>>
-> >>>> Expose the device-tree file name as EFI variable FdtFile.
-> >>>> This will allow bootloaders to load a kernel specific device-tree.
-> >>>>
-> >>>> The variable will not be exposed on ACPI based systems or if the
-> >>>> environment variable fdtfile is not defined.
-> >>>>
-> >>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.co=
-m>
-> >>>> ---
-> >>>> v3:
-> >>>>    Add documentation
-> >>>> v2:
-> >>>>    Use a unique GUID to enable future U-Boot independent
-> >>>>    standardization.
-> >>>>    Do not try to add the variable on ACPI based systems.
-> >>>> ---
-> >>>>    doc/develop/uefi/uefi.rst  | 17 +++++++++++++++++
-> >>>>    include/efi_loader.h       |  5 +++++
-> >>>>    lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> >>>>    3 files changed, 52 insertions(+)
-> >>>>
-> >>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> >>>> index fb16ac743a..a81d09ae81 100644
-> >>>> --- a/doc/develop/uefi/uefi.rst
-> >>>> +++ b/doc/develop/uefi/uefi.rst
-> >>>> @@ -916,6 +916,23 @@ So our final format of the FilePathList[] is::
-> >>>>        Loaded image - end node (0xff) - VenMedia - initrd_1 - [end n=
-ode (0x01) - initrd_n ...] - end node (0xff)
-> >>>> +EFI variable FdtFile
-> >>>> +~~~~~~~~~~~~~~~~~~~~
-> >>>> +
-> >>>> +Ideally U-Boot would always expose a device-tree that can be used f=
-or booting
-> >>>> +any operating systems. Unfortunately operating systems like Linux s=
-ometimes
-> >>>> +break forward and backward compatibility. In this case there is a n=
-eed to load
-> >>>> +an operating system version specific device-tree.
-> >>>> +
-> >>>> +U-Boot has an environment variable fdtfile identifying the device-t=
-ree file to
-> >>>> +load. The content of this variable is exposed as EFI variable Fdtfi=
-le, vendor
-> >>>> +GUID d45dde69-3bd6-40e0-90d5-6b606aa57730. It contains the device-t=
-ree path
-> >>>> +name as a NUL terminated ASCII string.
-> >>>> +
-> >>>> +On 32bit ARM this is currently only a file name, e.g. 'imx6dl-wandb=
-oard.dtb'.
-> >>>> +On other architectures the file name is preceded by the vendor dire=
-ctory, e.g.
-> >>>> +'rockchip/rk3326-odroid-go2.dtb'.
-> >>>
-> >>> The Linux Kernel has split 32bit ARM up by directory now, too.
-> >>
-> >> Since Linux v6.5. That is why I wrote "currently". Once we migrate the
-> >> values of $fdtfile in U-Boot we may want to change
-> >> distro_efi_try_bootflow_files() to search both with and without vendor
-> >> directory.
-> >>
-> >> Are there already plans for that migration?
+
+--J3DneV1H/NxDB5aU
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 26, 2023 at 05:49:01PM +0300, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 25 =D0=B6=D0=BE=D0=B2=D1=82=D0=BD=D1=8F 2023 =D1=80. 16:37:12 GMT+03:00, =
+Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
+=D0=BB=D0=B0):
+> >On Wed, Oct 25, 2023 at 09:10:12AM +0300, Svyatoslav Ryhel wrote:
+> >> =D0=B2=D1=82, 24 =D0=B6=D0=BE=D0=B2=D1=82. 2023=E2=80=AF=D1=80. =D0=BE=
+ 22:18 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> >> >
+> >> > On Tue, Oct 24, 2023 at 10:41:05AM +0300, Svyatoslav Ryhel wrote:
+> >> >
+> >> > > Add support to bind the regulators/child nodes with the pmic.
+> >> > > Also adds the pmic i2c based read/write functions to access pmic
+> >> > > registers.
+> >> > >
+> >> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> >> > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >> > [snip]
+> >> > > diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/ma=
+x77663.c
+> >> > > new file mode 100644
+> >> > > index 0000000000..4070235d3c
+> >> > > --- /dev/null
+> >> > > +++ b/drivers/power/pmic/max77663.c
+> >> > > @@ -0,0 +1,86 @@
+> >> > > +// SPDX-License-Identifier: GPL-2.0+
+> >> > > +/*
+> >> > > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
+> >> > > + */
+> >> > > +
+> >> > > +#include <common.h>
+> >> >
+> >> > Should have noted sooner, sorry. Please don't use <common.h> in new
+> >> > code, and audit the include list you have as well (this one looks
+> >> > reasonable I suspect, all the same, so general advice).
+> >>=20
+> >> Each and every driver in pmic dir has common.h so it was an obvious
+> >> move to include it as well. I haven't seen that this header is depreca=
+ted,
+> >> if so, sure, I will not include it further.
+> >>=20
+> >> About auditing inclusions, I never include unnecessary headers and alm=
+ost
+> >> all the time run tests to determine the least amount of inclusions pos=
+sible for
+> >> correct build and work.
 > >
-> > Right, v6.5 is out and has this change and v6.6 will be out soon enough=
-,
-> > so the documentation we're adding here and now should be worded such
-> > that doesn't get stuck on these specifics.
->
-> Should I add a sentence:
->
-> Linux v6.5 has added vendor directories on 32bit ARM and U-Boot is
-> expected to follow suit.
+> >Yes, it's more recently formally deprecated, and just removing it fro
+> >existing drivers is on the TODO list.
+> >
+>=20
+> Should I reload patchset with requested changes?
 
-Note that while this is correct, the install (make dtbs_install) still
-uses a flat directory. That was to not break existing users. It is
-currently not a visible config option. Perhaps it should be if there's
-a desire to move to having sub-directories for the install?
+Yes please.
 
-Rob
+--=20
+Tom
+
+--J3DneV1H/NxDB5aU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU6jpwACgkQFHw5/5Y0
+tyz1DAwAoPdiyIRfcyRO4DONeYkkkcpCz4rtQoL27eXZ8ZadpRiEk7Atxz04oXP2
+f4D4WSS+ZMzlmR/0mNEEYkM2DMfvsyY9+VDCTAO3SraSPp0sfIEY+rlM/Dl2uzfn
+/dhSBVm7PD8yLP83qJfhSLN1HoFjfY5pknIv70f88PclRCXlibFmgWqIFlGHrkiT
+YzJZNpN+HTBihuXb9IzAJZknaRdU2B5EoZZxcQq9rw4cs8uLg82BnnxicQBBWz0S
+m7g/V9nUl1Qe/0umyDp3oBRPQU2EYXOnccB2frZFdK3N/5zhKSuih57xMZSNYujz
+HpISA9SmezYXGyfrJ2V0eStXKWqcYuIOYmQ3TAXd7Gq5xheSHF+tWR5ujUGG+Ipj
+boFNTld56VGSLxSNKr1Wj47/W4KUAi3ySEjf65hQk74FXcHesoKZXSDFVyNZ/tbF
++RuwyA1n9ET0piKddPk+W/xi+7CrC6W1SwfkAaexGzHddFd6NseuSLqgwQusCz8N
+uuqBk4r3
+=LPlj
+-----END PGP SIGNATURE-----
+
+--J3DneV1H/NxDB5aU--
