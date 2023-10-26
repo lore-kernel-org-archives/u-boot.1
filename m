@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50247C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 17:44:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44249C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78FFA87240;
-	Thu, 26 Oct 2023 19:44:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 1896087639;
+	Thu, 26 Oct 2023 20:31:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="qVUOO2D7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L4ZCyA26";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0A3C87468; Thu, 26 Oct 2023 19:44:20 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id F309887638; Thu, 26 Oct 2023 20:31:43 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7670A86FC8
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 19:44:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD016875B8
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-53e2dc8fa02so2002367a12.2
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 10:44:15 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-66d24ccc6f2so19650186d6.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1698342255; x=1698947055; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T7mKrOzIgWIVt4QZUEBgjjJ3ICHm687OaRaA7skUtrM=;
- b=qVUOO2D7Y/QJELTEKMkN/A0VyYiq5uF4whobpnl4lefQU/Mdp6adbr6uaGCBx7Pvvi
- de5HvOovFyXMReCSH8hYAVn0qQCU2KXs2r8iHjhcGHX4rHRJdzCMLY5P7yk08h6cSh+y
- h0smaS26u9hVHVjAohz1aMe1KX3sxOPnWGFXzWVbiLZUhdZ+6/Jio7hLUhunGbsAYW/C
- tMTxU/ddJYLnsPCpuanLJ7gHIPqjZhba5VMr+1i1dj2Thc9nOhlbmIemIdUlD03rbZnp
- v6aTfQBwxLO+TEUqqy/hNdpE6qDhxjbKogfeft8iWhsQOTp5/vYEsnIM32XQW/rOSfJG
- hXgQ==
+ d=konsulko.com; s=google; t=1698345100; x=1698949900; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vZxpAqJkH6XG2FNv/HXBn2EsaJozOnbZh07nvxPye9A=;
+ b=L4ZCyA26x6uvfdQVacPSX1Vf9yqQ9FmNh4WJofWyJgACGJUtRPcDnPMg/lh62sNyn4
+ 52BXcokYPaz7xrNMMGncw4qfT8vK9tCycdEIJhyIVqBCdX1b9JVLlZF+6GdyFfle9Lhs
+ /kF4g5o6B+XyeHu4m+YnfALaZzoe9AcPdQeBg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698342255; x=1698947055;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T7mKrOzIgWIVt4QZUEBgjjJ3ICHm687OaRaA7skUtrM=;
- b=qwTpx92gibybromEdS0EEReUHJ00QCOqzzmqGtFfapYl/+HutbDXXdtNepi6EZdLNb
- qoVC6py/sSZ6L50QHi1EpnxgO2t6pMA8F15fjESjyMKLIHWyQ3Eo3Fzr/7eww0zzhf5R
- 68Y7rNCvCHA0qkMhjMyZ5PAoUPUS85fyJRp7rIv6T1FuEumHuu4hWFDHRHUTZSj4kJGJ
- 49Pjcpa33JJFpTssylxPHMMIQ+c6/yiYO8oCqMe+CqL8pi1fCqucZjde7WLlysU4UV/r
- WleZSy3N90U5pK4kP1xYN3alY/fjKjcSakCd58j3HZ2//ayKuwbdsO1Mf7A2XY+C00K3
- m8AA==
-X-Gm-Message-State: AOJu0YwQxnYT00ZO603qc4zOydr0Zl0mAZNFYlHZ2Q7JvrdWwRjJnWaQ
- AWru0QhmVEZ6mamoOK2ikEFAXuPPLE7ojULTIQMQ6g==
-X-Google-Smtp-Source: AGHT+IGT0Eq5mvn/HeB7mxd7Q+oKO5UjK7FamuaK57o2YoDILbr7emHKiysl7ijQj6THNmyGrTuZYK3M6ZHZhIBPkSA=
-X-Received: by 2002:a50:d556:0:b0:53e:5f9:328b with SMTP id
- f22-20020a50d556000000b0053e05f9328bmr401710edj.2.1698342254700; Thu, 26 Oct
- 2023 10:44:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698345100; x=1698949900;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vZxpAqJkH6XG2FNv/HXBn2EsaJozOnbZh07nvxPye9A=;
+ b=ERWm7P+2TLM9pF4JNWDfzFiXvFZI1/1uAEokzqPKG3i5y44d9zlcnAPACLhJaSJMBa
+ AVKNqiPmUavfj2SqKkYlvMgU/C+R4I62dpjwoB06b/yor2lKrP5dt4STsYNoO9oi8mTV
+ +qdIPhc5Z/D4dtY73VWUOI4LwZaTytNZeLy2XXiKmvhhACs1RqPCdgcihlPWGeHSuRst
+ LS8zN5fRZGnkTsFb2oloKOMjCCZgd4FNkz3HMhQg9c86HB2emEzh+lxWj3EG9eQb7Es4
+ 4ffclPczt8yT4EwKuP4pT9r1CG4nXo2tV+WCtJDRIxyiVSu9TGcNNhYfEE6O3LQN+030
+ rOyA==
+X-Gm-Message-State: AOJu0YzNfVJgDkx40jp/5SiqR75B5HF+QAHl+FGKrqIoJr/RuICdzKEQ
+ nzSjgVOCynMRISdQ7Dpjr22Bs7FKjxncNjXCBN5UpA==
+X-Google-Smtp-Source: AGHT+IFxKP0A8xcRRbpI3iZLnfXyitgZKb7IZiL2Vhh7ONTJyecqeMMsPzL8m0pdnvYH22YqjVEk/w==
+X-Received: by 2002:ad4:58cf:0:b0:66d:1302:e278 with SMTP id
+ dh15-20020ad458cf000000b0066d1302e278mr3609608qvb.19.1698345100213; 
+ Thu, 26 Oct 2023 11:31:40 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
+ [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
+ by smtp.gmail.com with ESMTPSA id
+ az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Oct 2023 11:31:39 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [v5 01/30] sandbox: eliminate unused functions from binaries
+Date: Thu, 26 Oct 2023 14:31:09 -0400
+Message-Id: <20231026183138.636948-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <OS3P286MB14955A84C3B71A32C4BBA352F6DFA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
- <CAPnjgZ1A8vyEUx2wiXqOCb8Kf9zP96wqy4kXanfKRR-uN6yOmg@mail.gmail.com>
- <OS3P286MB1495889DF57AD742064FDB56F6DEA@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
- <CAPnjgZ0Bb7zzVabU05hfg12tcrQbzT1iWQVdrui2GmsEZekZDA@mail.gmail.com>
- <TYYP286MB15006711E2339FD6BB432045F6DDA@TYYP286MB1500.JPNP286.PROD.OUTLOOK.COM>
-In-Reply-To: <TYYP286MB15006711E2339FD6BB432045F6DDA@TYYP286MB1500.JPNP286.PROD.OUTLOOK.COM>
-From: Simon Glass <sjg@google.com>
-Date: Thu, 26 Oct 2023 17:44:03 +0000
-Message-ID: <CAPnjgZ0nrq5y-1eAfcaTCmPJ+xq49xS9DGUSjd5fn8rSFekO2g@mail.gmail.com>
-Subject: Re: quick question about TPM
-To: "niek.nooijens@omron.com" <niek.nooijens@omron.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,103 +87,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Ilias Apalodimas as well
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-On Thu, 26 Oct 2023 at 02:22, niek.nooijens@omron.com
-<niek.nooijens@omron.com> wrote:
->
-> Hi Simon
->
-> Yes that fixes it! Thanks!
-> Maybe an Idea to add a dedicated TPM page to the docs with information li=
-ke this?
-> (https://u-boot.readthedocs.io/en/latest/index.html) Cause I wouldn't hav=
-e thought I needed an option tugged away under Library routines.
+The sandbox should closely mimic other architectures.
 
-Thank you for the feedback. I added Ilias to take a look.
+Place each function or data in a separate section and let the linker
+eliminate unused ones. This will reduce the binary size.
 
+In the linker script mark that u_boot_sandbox_getopt are to be kept.
 
-- Simon
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v5:
+- This is Heinrich's v3 just brought to this series to enable the
+  overall series goal to work
+---
+ arch/sandbox/config.mk      | 4 ++--
+ arch/sandbox/cpu/u-boot.lds | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
->
-> Anyhow Thanks!
-> Niek
->
->
->
-> ________________________________
-> =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
-> =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8826=E6=97=A5=
- 03:23
-> =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooijens=
-@omron.com>
-> CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
-> =E4=BB=B6=E5=90=8D: Re: quick question about TPM
->
-> Hi Niek,
->
-> On Tue, 24 Oct 2023 at 19:26, niek.nooijens@omron.com
-> <niek.nooijens@omron.com> wrote:
-> >
-> > Hi Simon
-> >
-> > Driver model is enabled, so it's pretty weird it doesn't show up.
-> > CONFIG_DM=3Dy
-> > CONFIG_SPL_DM=3Dy
-> > CONFIG_DM_WARN=3Dy
-> >
-> > The TPM menu is there, yet somehow empty.
-> > This is just after "make socfpga_cyclone5_defconfig" and "make menuconf=
-ig"
->
-> Do you enable CONFIG_TPM here?:
->
-> Library routines -> Security support -> Trusted Platform Module (TPM) Sup=
-port
->
-> then the drivers appear for me (under device drivers)
->
-> > if I use "make snow_defconfig" the menu is usable like normal, so somet=
-hing is disabling it, yet when grep-ping for TPM in socfpga there are no re=
-sults.
-> > Adding it to .config manually also doesn't seem to work. so I'm a bit c=
-onfused about what's going on. Anyhow thanks for the help!
->
-> You can edit the defconfig to add CONFIG_TPM and whatever driver you need=
-.
->
-> Regards,
-> Simon
->
->
-> >
-> > Niek
-> > ________________________________
-> > =E5=B7=AE=E5=87=BA=E4=BA=BA: Simon Glass <sjg@google.com>
-> > =E9=80=81=E4=BF=A1=E6=97=A5=E6=99=82: 2023=E5=B9=B410=E6=9C=8825=E6=97=
-=A5 03:03
-> > =E5=AE=9B=E5=85=88: Niek Nooijens / OC-IAB PBD-C DEVEL 1-1 <niek.nooije=
-ns@omron.com>
-> > CC: u-boot@lists.denx.de <u-boot@lists.denx.de>
-> > =E4=BB=B6=E5=90=8D: Re: quick question about TPM
-> >
-> > Hi Niek,
-> >
-> > On Tue, 24 Oct 2023 at 04:51, niek.nooijens@omron.com
-> > <niek.nooijens@omron.com> wrote:
-> > >
-> > > Hi
-> > >
-> > > Just a quick question. I'm developing a platform using the socfpga_cy=
-clone5_defconfig
-> > > everything is working, linux boots, but we decided to add a TPM to it=
-'s SPI bus.
-> > > For some reason the TPM support menu in the menuconfig is disabled an=
-d I can't seem to find out why, or which file disables it. can you point me=
- in the right direction?
-> >
-> > The only thing 'config TPM' depends on is DM (driver model). Is that
-> > somehow disabled? Once you enable that, it should appear.
-> >
-> > Regards,
-> > Simon
+diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
+index 2d184c5f652a..1d50991f8d24 100644
+--- a/arch/sandbox/config.mk
++++ b/arch/sandbox/config.mk
+@@ -2,7 +2,7 @@
+ # Copyright (c) 2011 The Chromium OS Authors.
+ 
+ PLATFORM_CPPFLAGS += -D__SANDBOX__ -U_FORTIFY_SOURCE
+-PLATFORM_CPPFLAGS += -fPIC
++PLATFORM_CPPFLAGS += -fPIC -ffunction-sections -fdata-sections
+ PLATFORM_LIBS += -lrt
+ SDL_CONFIG ?= sdl2-config
+ 
+@@ -30,7 +30,7 @@ cmd_u-boot__ = $(CC) -o $@ -Wl,-T u-boot.lds $(u-boot-init) \
+ 		$(u-boot-main) \
+ 		$(u-boot-keep-syms-lto) \
+ 	-Wl,--no-whole-archive \
+-	$(PLATFORM_LIBS) -Wl,-Map -Wl,u-boot.map
++	$(PLATFORM_LIBS) -Wl,-Map -Wl,u-boot.map -Wl,--gc-sections
+ 
+ cmd_u-boot-spl = (cd $(obj) && $(CC) -o $(SPL_BIN) -Wl,-T u-boot-spl.lds \
+ 	$(KBUILD_LDFLAGS:%=-Wl,%) \
+diff --git a/arch/sandbox/cpu/u-boot.lds b/arch/sandbox/cpu/u-boot.lds
+index ba8dee50c7bd..52f13af3742f 100644
+--- a/arch/sandbox/cpu/u-boot.lds
++++ b/arch/sandbox/cpu/u-boot.lds
+@@ -15,7 +15,7 @@ SECTIONS
+ 
+ 	_u_boot_sandbox_getopt : {
+ 		*(_u_boot_sandbox_getopt_start)
+-		*(_u_boot_sandbox_getopt)
++		KEEP(*(_u_boot_sandbox_getopt))
+ 		*(_u_boot_sandbox_getopt_end)
+ 	}
+ 
+-- 
+2.34.1
+
