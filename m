@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64DC1C25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB83CC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:33:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C43A787B6C;
-	Thu, 26 Oct 2023 20:32:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C11187B93;
+	Thu, 26 Oct 2023 20:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R8/cAOYy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uafmRPlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FB0487B51; Thu, 26 Oct 2023 20:31:54 +0200 (CEST)
+ id 81EAA87641; Thu, 26 Oct 2023 20:31:54 +0200 (CEST)
 Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
  [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAB9A87B5E
+ by phobos.denx.de (Postfix) with ESMTPS id 2B6BB87B23
  for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-773ac11de71so90340085a.2
+ af79cd13be357-7781bc3783fso94358485a.1
  for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698345109; x=1698949909; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698345108; x=1698949908; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6t/9xFA2pg3tAQN0ki3KsAg11bZGx0qBfZdby1hHC9M=;
- b=R8/cAOYyfY/3gcHIWq3ozphe+qlJSWsLdroTZzKuMa68RwbkF2sAG/nplerZg57BWD
- 1+KuEr/Al6RCMCCRbaUiIJs/t7ywCt0CAZZOylRyks679InhizixbC4uNdIybpcGvWvF
- jUhOGneuNDLNJ2xwWtY8q54YZGJcCZkE3WNxE=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r7mjKd/GZNzWfl0/YqzAOe4T/BKCMoN25+tfgjsqTp8=;
+ b=uafmRPlHZMYBI9aYS5/BDw1SmvtDMZYnJsQ8gA/j/z68ZCNuFR2D5IFEwLAnTxYFOK
+ guNkgvbLZo1AHqURKVvVYMm3RJa3OW8ObtuH7UWRk+4PQvN4fkBHcd6A8qlAKKYreJV2
+ dbSF3FenCgOl4Dxs8cqQTtsvMzL4UH47Ar+Q0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698345109; x=1698949909;
+ d=1e100.net; s=20230601; t=1698345108; x=1698949908;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6t/9xFA2pg3tAQN0ki3KsAg11bZGx0qBfZdby1hHC9M=;
- b=f8hT8tFlgiorE4qxg8Ki7/53UP2iffpxXPPRoyf+wfYH2/oDS8Wq6e/Jr/whMErRk2
- L/c2bpZyLCrdLC3V/sFmTXZkeM3f6Nrff0nDAigs55FdqaaddL9B4VrV4UqpwNiz2use
- z0YMvU44xdybqDS15aIfsr6TY92u8zvQV1IkTV/uRrBowv4s08/eVaOaDwSZ/QdRxULE
- 5EmHZYTP79/WTtO1f4DmFr7Crkcc14siAKGO3qFNl5xtpGBP/eYeQzY5oqLDekqvt6YW
- Tpae+3i0ev0i85zvk3ucelZVUtaLEuNubqJ2n/C9egm8hCqaIkKUg/Xz/TmRTUUB2j5E
- nJWQ==
-X-Gm-Message-State: AOJu0YxTfle+R5PlbBK/dj3pfZXL+xZoSa+i7HC7Kl50e5687mInZ9t8
- SMqF/hRzMLJtSD3cjxVNHw+T3w3XdzZ/f55ColSgtQ==
-X-Google-Smtp-Source: AGHT+IHq5CiadLWei/rGpDKuyWNcBCYzXa+2M18VLgZh35lavkj0k0+DhYt9j4stkQlSEvr4k3pULw==
-X-Received: by 2002:a05:620a:472c:b0:76c:da86:3169 with SMTP id
- bs44-20020a05620a472c00b0076cda863169mr126452qkb.40.1698345109405; 
- Thu, 26 Oct 2023 11:31:49 -0700 (PDT)
+ bh=r7mjKd/GZNzWfl0/YqzAOe4T/BKCMoN25+tfgjsqTp8=;
+ b=EDo0apqjFUUZfnr8Dziqx15TBR5J4izTimcmPCLauf3GTEbKJEHH7gDtoOH98N6ehB
+ 4IwyiQ4KIGfQWizgqTqzmMtlMO7+I5Y2zVJTmyHqflCK16GPMpOAXvU3xrustAc36Kcy
+ iMAzWyHq7JjSUUdu1nZxfAZC6i8iBYHKOhh+6pa1/Ngx1Lz+u802EuXYQAcRDWD5Jo/5
+ TMLgrsJUG4fE4stHOWgkiQgD+y1MeDjeL10cI0KnlxFHwHxYQa8p/zqIIuqqUkTFLQmJ
+ 9SDXJJ5Ns+Ywq7uHKZXKMqRGzotwP+/FZV2UfrlQAYlf1b3+XFIhwfYGGS+mD17wS6r8
+ YFXA==
+X-Gm-Message-State: AOJu0YxtpqGo2f2x/eXcJe0pNqTzw3uHoysG5rS1MG5a4pXu4E+mk1og
+ XcHAb0W12uCZ2PF8sPh9c7RBCkvYC2sxW4oGnzdH3A==
+X-Google-Smtp-Source: AGHT+IEYvHkw1eukm7kBZG6I1WF/hOiPo2IpPQ7TaK7VnDZAyDHLI18Fp1MY1FyQyZXfaHuVDIdDtQ==
+X-Received: by 2002:a05:6214:519d:b0:64f:6199:a8e with SMTP id
+ kl29-20020a056214519d00b0064f61990a8emr634927qvb.23.1698345108640; 
+ Thu, 26 Oct 2023 11:31:48 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
  [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
  by smtp.gmail.com with ESMTPSA id
  az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.48
- for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 11:31:49 -0700 (PDT)
+ Thu, 26 Oct 2023 11:31:48 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v5 11/30] cli_simple: Rework this support slightly
-Date: Thu, 26 Oct 2023 14:31:19 -0400
-Message-Id: <20231026183138.636948-11-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [v5 10/30] video: Don't require the font command
+Date: Thu, 26 Oct 2023 14:31:18 -0400
+Message-Id: <20231026183138.636948-10-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026183138.636948-1-trini@konsulko.com>
 References: <20231026183138.636948-1-trini@konsulko.com>
@@ -89,138 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The interactive portion of our non-HUSH 'simple' parser is guarded by
-CONFIG_CMDLINE already.  Much of the code behind this simple parser is
-also used as "input" parser, such as from menu interfaces and so forth
-and not strictly command line input.  To support this, always build the
-assorted cli object files, but guard the interactive portions of
-cli_simple.c with a CMDLINE check.
+From: Simon Glass <sjg@chromium.org>
 
+While it is nice to have the font command, using 'select' makes it
+impossible to build the console code without it. Stop using 'select' and
+make it default if CONSOLE_TRUETYPE is enabled when asking the command.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- common/Makefile     |  2 +-
- common/cli_simple.c | 77 +++++++++++++++++++++++----------------------
- 2 files changed, 40 insertions(+), 39 deletions(-)
+Changes in v4:
+- Rework to have the command itself be default y if CONSOLE_TRUETYPE
+  instead of selecting it. (Tom)
+---
+ cmd/Kconfig           | 2 +-
+ drivers/video/Kconfig | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/common/Makefile b/common/Makefile
-index b711dc29b65e..1495436d5d45 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -8,6 +8,7 @@ ifndef CONFIG_SPL_BUILD
- obj-y += init/
- obj-y += main.o
- obj-y += exports.o
-+obj-y += cli_getch.o cli_simple.o cli_readline.o
- obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
- obj-$(CONFIG_AUTOBOOT) += autoboot.o
- obj-y += version.o
-@@ -38,7 +39,6 @@ obj-$(CONFIG_SPLASH_SOURCE) += splash_source.o
- obj-$(CONFIG_MENU) += menu.o
- obj-$(CONFIG_UPDATE_COMMON) += update.o
- obj-$(CONFIG_USB_KEYBOARD) += usb_kbd.o
--obj-$(CONFIG_CMDLINE) += cli_getch.o cli_readline.o cli_simple.o
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index cbba39099659..f8b34ca504b2 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2348,7 +2348,7 @@ config CMD_VIDCONSOLE
+ config CMD_SELECT_FONT
+ 	bool "select font size"
+ 	depends on VIDEO
+-	default n
++	default y if CONSOLE_TRUETYPE
+ 	help
+ 	  Enabling this will provide 'font' command.
+ 	  Allows font selection at runtime.
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index ab927641bb7a..6f319ba0d544 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -180,7 +180,6 @@ config CONSOLE_ROTATION
  
- endif # !CONFIG_SPL_BUILD
- 
-diff --git a/common/cli_simple.c b/common/cli_simple.c
-index e80ba488a5eb..f89ba92d1b05 100644
---- a/common/cli_simple.c
-+++ b/common/cli_simple.c
-@@ -22,44 +22,6 @@
- #define debug_parser(fmt, args...)		\
- 	debug_cond(DEBUG_PARSER, fmt, ##args)
- 
--
--int cli_simple_parse_line(char *line, char *argv[])
--{
--	int nargs = 0;
--
--	debug_parser("%s: \"%s\"\n", __func__, line);
--	while (nargs < CONFIG_SYS_MAXARGS) {
--		/* skip any white space */
--		while (isblank(*line))
--			++line;
--
--		if (*line == '\0') {	/* end of line, no more args	*/
--			argv[nargs] = NULL;
--			debug_parser("%s: nargs=%d\n", __func__, nargs);
--			return nargs;
--		}
--
--		argv[nargs++] = line;	/* begin of argument string	*/
--
--		/* find end of string */
--		while (*line && !isblank(*line))
--			++line;
--
--		if (*line == '\0') {	/* end of line, no more args	*/
--			argv[nargs] = NULL;
--			debug_parser("parse_line: nargs=%d\n", nargs);
--			return nargs;
--		}
--
--		*line++ = '\0';		/* terminate current arg	 */
--	}
--
--	printf("** Too many args (max. %d) **\n", CONFIG_SYS_MAXARGS);
--
--	debug_parser("%s: nargs=%d\n", __func__, nargs);
--	return nargs;
--}
--
- int cli_simple_process_macros(const char *input, char *output, int max_size)
- {
- 	char c, prev;
-@@ -172,6 +134,44 @@ int cli_simple_process_macros(const char *input, char *output, int max_size)
- 	return ret;
- }
- 
-+#ifdef CONFIG_CMDLINE
-+int cli_simple_parse_line(char *line, char *argv[])
-+{
-+	int nargs = 0;
-+
-+	debug_parser("%s: \"%s\"\n", __func__, line);
-+	while (nargs < CONFIG_SYS_MAXARGS) {
-+		/* skip any white space */
-+		while (isblank(*line))
-+			++line;
-+
-+		if (*line == '\0') {	/* end of line, no more args	*/
-+			argv[nargs] = NULL;
-+			debug_parser("%s: nargs=%d\n", __func__, nargs);
-+			return nargs;
-+		}
-+
-+		argv[nargs++] = line;	/* begin of argument string	*/
-+
-+		/* find end of string */
-+		while (*line && !isblank(*line))
-+			++line;
-+
-+		if (*line == '\0') {	/* end of line, no more args	*/
-+			argv[nargs] = NULL;
-+			debug_parser("parse_line: nargs=%d\n", nargs);
-+			return nargs;
-+		}
-+
-+		*line++ = '\0';		/* terminate current arg	 */
-+	}
-+
-+	printf("** Too many args (max. %d) **\n", CONFIG_SYS_MAXARGS);
-+
-+	debug_parser("%s: nargs=%d\n", __func__, nargs);
-+	return nargs;
-+}
-+
-  /*
-  * WARNING:
-  *
-@@ -346,3 +346,4 @@ int cli_simple_run_command_list(char *cmd, int flag)
- 
- 	return rcode;
- }
-+#endif
+ config CONSOLE_TRUETYPE
+ 	bool "Support a console that uses TrueType fonts"
+-	select CMD_SELECT_FONT
+ 	help
+ 	  TrueTrype fonts can provide outline-drawing capability rather than
+ 	  needing to provide a bitmap for each font and size that is needed.
 -- 
 2.34.1
 
