@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A17FFC0032E
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 03:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A6A9C0032E
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 03:41:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D22087AD1;
-	Thu, 26 Oct 2023 05:39:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8303E87AD7;
+	Thu, 26 Oct 2023 05:41:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698291586;
-	bh=l/n99f60wMkT+DVlc5t6jPzMujX/5fOF7plqRYRWqVU=;
+	s=phobos-20191101; t=1698291703;
+	bh=cl5WquQxz5vhQaTwL+AOuTsXq/iCmxPvMT50qS3asJg=;
 	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=fVwBS008ezWNyfBV31ENjc3trJMsg+zaFCpxMo0nPkGd5AhR4SeSBVwudQ8QbsNOY
-	 +/zuKOPXpuwTf257urSKIur5l53GpO1f1IT/CqHJAS31FocIiFDTEy3nwKHqDRmd8s
-	 7BiuGRkB3m1gYF3jzflxpl2/j+smQ4wOZvlEyZ+hAXLlQdOuGWKSjp/HzrgUjNn+Py
-	 NPfj+13CoxVNtBpyf6atnT7vMEuKqPhfDZbyQVF+At24XTv0ZH99tnc5j7ejh7v+dk
-	 4eemh7rx8ZvSk7fnHtjjPdVIlgNpO03iMYlNqIHvU88VnJm4IjtHicQ8rt6a9Ri9LF
-	 XXqPyd/uvUh5Q==
+	b=xHbB34f0M/7TbipLuzjkDYcxfB7rkylZWCZxz27Rn1QWm0TlRJb+iUSqoVmA7Ew5x
+	 a8L/ev4PXzY6ArYLUhB/x/FSC4UQaYuykadCEvHeJwAPJZzuJO6IXlqQTKPbtguzDr
+	 s/n38Yi2remP+LgKDe1tIxwEeinYNRpKkT8BUDit7QT63RrWKqw8/dOX7uKFadFlPB
+	 jH/cYeY9hHmn9cBr95Uj7Ab+TN9XY7LkoIda3HpdmZf/MwJJKq7cVVQCh11hleg9m+
+	 drU011847gYkirrzrhuOUEsvfiuJb8Rs9BIm5H1aKX8woC1MCnF/qAs7nzF6NmEFvX
+	 /F5nFOVQrfxcQ==
 Received: from [192.168.1.107] (fibhost-66-250-177.fibernet.hu [85.66.250.177])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E71F88751E;
- Thu, 26 Oct 2023 05:39:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 61C1087ACD;
+ Thu, 26 Oct 2023 05:41:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1698291585;
- bh=l/n99f60wMkT+DVlc5t6jPzMujX/5fOF7plqRYRWqVU=;
+ s=phobos-20191101; t=1698291702;
+ bh=cl5WquQxz5vhQaTwL+AOuTsXq/iCmxPvMT50qS3asJg=;
  h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=XjG+lpv/jJmEZe1YqxvRaeQgBTmOvcG3z+/bB/bohBfut7EK5K+XUcFRt7mV/UjxA
- YEzEOUbpQZyvsVnioLO6rpLIfX024FzrbUZPgRtatG/YN2ijxI1eagYW8/nRHNEG7F
- W5tWXROFffc3qAmeOSWXs03V6daI0KwPXxHvt5HXjlpRtASt4Q6XTi4qYMLkBj7iEZ
- Uwg0pAxIuidvmrHVYfCHFkInWk2dPuwicWcKQJHPha6ByeoXlxHH63GJyMaXW18RyY
- cJF3G2TaTWG4ARx4mAphKA3yLQmEpoA6EWPB0bOB6EzcAgI9xbr6rdO9kmnsXrlQJk
- q6fyiFCbyKzdw==
-Subject: Re: [PATCH v2] i2c: nuvoton: remove standard mode only
-To: Jim Liu <jim.t90615@gmail.com>, JJLIU0@nuvoton.com, YSCHU@nuvoton.com,
- KWLIU@nuvoton.com
-Cc: u-boot@lists.denx.de
-References: <20231004013558.2828546-1-JJLIU0@nuvoton.com>
+ b=a6xZTLbrwButQjOUnHTAh0e80Iz0yV4U0wOFHnvFlr82fCQRsh/iN7be9EkTSml92
+ QLxfAH7e67LkXyLr/g3bjp7eiGeVpcl1wQXnVH+fMi4h0c8flI8Nkv5RUlIZlHDU18
+ A1BqBKGTm5IewXH8dPa82yTWHqbIm2xVeMw1I2QFVHCqtgyeGGTck0A0PmbiOOgYim
+ 9H7khX1oAPk/b4FTOrdzfcl8x0F0kDeZztB/7ynUA01iLBMq4QWUD60iOwK1Glx1Di
+ uotiMwkGsJ+r6ds8DIL9+MTPEp8v+gZDkhaMf6F2tiG5KPRTeTslrJhTwblZ9b0PQ/
+ xeOFXxrumOMGw==
+Subject: Re: [PATCH v2 1/3] bootcount: Remove legacy I2C driver
+To: Philip Richard Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com
+References: <20231020090227.16634-1-pro@denx.de>
+ <20231020090227.16634-2-pro@denx.de>
 From: Heiko Schocher <hs@denx.de>
-Message-ID: <8192f1e8-169a-e2be-8eb4-54cfb037b9f3@denx.de>
-Date: Thu, 26 Oct 2023 05:39:28 +0200
+Message-ID: <e09f8c31-3474-b88d-fbc9-c21210f11933@denx.de>
+Date: Thu, 26 Oct 2023 05:41:31 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20231004013558.2828546-1-JJLIU0@nuvoton.com>
+In-Reply-To: <20231020090227.16634-2-pro@denx.de>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -70,19 +70,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jim,
+Hello Philip.
 
-On 04.10.23 03:35, Jim Liu wrote:
-> first version is only support standard mode.
-> remove this judgment to support standard/fast/fast plus  mode.
+On 20.10.23 11:02, Philip Richard Oberfichtner wrote:
+> The legacy I2C bootcounter will hereby be removed and eventually
+> be replaced by a driver model implementation in the follow-up commit.
 > 
-> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> The legacy driver has the following drawbacks:
+> 	- It's not adhering to the driver model
+> 	- Settings are grabbed from Kconfig rather than device tree
+> 	- i2c_{read,write} are being used instead of dm_i2c_{read,write}
 > 
-> Changes for v2:
->    - add commit message
+> Signed-off-by: Philip Richard Oberfichtner <pro@denx.de>
 > ---
->  drivers/i2c/npcm_i2c.c | 5 -----
->  1 file changed, 5 deletions(-)
+> 
+> Changes in v2: none
+> 
+>  drivers/bootcount/Kconfig         | 24 +++--------------
+>  drivers/bootcount/Makefile        |  1 -
+>  drivers/bootcount/bootcount_i2c.c | 43 -------------------------------
+>  3 files changed, 3 insertions(+), 65 deletions(-)
+>  delete mode 100644 drivers/bootcount/bootcount_i2c.c
 
 Reviewed-by: Heiko Schocher <hs@denx.de>
 
