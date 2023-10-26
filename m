@@ -4,67 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9905C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 21:02:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B472EC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 23:17:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D67C87650;
-	Thu, 26 Oct 2023 23:02:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C6AC87BB8;
+	Fri, 27 Oct 2023 01:17:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h/PpGGdN";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="N/koKxmt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAF3D87AFF; Thu, 26 Oct 2023 23:02:48 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 29B808744F; Fri, 27 Oct 2023 01:16:59 +0200 (CEST)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31D6F87641
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 23:02:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39QL2er0100793;
- Thu, 26 Oct 2023 16:02:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698354160;
- bh=7zMQl8waYojeUu7FzB91z95cei6lA5OsrEW5B6zeM2k=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=h/PpGGdNXfHGTlWUt7HPoBbpovBO1KS4zlJPq7fCYVdhZDUBFSFoJEXEISCMCpJb5
- 5vpZMgCNJtSdLCvIJD7zt5EhkZJ+YI/P5OPzbYaflJxw4qoIIywcJ7K5gu5v5Oep2L
- yc/ftAmliB8ImgJ1HQbE3gmS7/X/HomlJTEDsWNI=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39QL2e6g108040
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 26 Oct 2023 16:02:40 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 26
- Oct 2023 16:02:40 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 26 Oct 2023 16:02:40 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39QL2eAW062444;
- Thu, 26 Oct 2023 16:02:40 -0500
-Date: Thu, 26 Oct 2023 16:02:40 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Prasanth Babu Mantena <p-mantena@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <matwey.kornilov@gmail.com>, <jkridner@beagleboard.org>,
- <robertcnelson@gmail.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <a-nandan@ti.com>, <n-francis@ti.com>
-Subject: Re: [PATCH v2] board: ti: common: board_detect: Fix EEPROM offset
- read for 1-byte
-Message-ID: <20231026210240.esopotwu4wy3mnyo@sediment>
-References: <20231026122413.4116-1-p-mantena@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 76898875E7
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 01:16:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=marcan.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: sendonly@marcansoft.com)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id E7657421F5;
+ Thu, 26 Oct 2023 23:16:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
+ t=1698362214; bh=OBRBVmNOT4/VqCOILeRuAL3+gYDvJKIt3Emd4T+Gxcg=;
+ h=From:Subject:Date:To:Cc;
+ b=N/koKxmtuPZKQIBcySNbPjFDEDTDvFlzLJwRJ3JPmff0+8hD6PX07jdDEK/1xjTga
+ 21jpTw78lDwxG2thGYP7vn23QQDkaM/xsjvlD8P9/6xlNH/5nJ8Oi1ula5EOYO9zOk
+ zGRdGQyA9ZQ701LkXV9vdWUchnbGeWKA2cYJdBTKp/bJwQPSYUsBbG1sygONVoaLDa
+ rPGYiWQzdPQTigMHkoMwRLRWYtaDqc36BYeTjQOllFzkwKOVksfdbopezXonS9ldFB
+ N0yXVovJbhsp77odYFiFUlGgP36/wEWmuy0Sd+w1+lGhoJii3lRQoVL0Qay5GYjamb
+ pEXxLb8PP4ZMg==
+From: Hector Martin <marcan@marcan.st>
+Subject: [PATCH 0/8] USB fixes: xHCI error handling
+Date: Fri, 27 Oct 2023 08:16:43 +0900
+Message-Id: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231026122413.4116-1-p-mantena@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFvzOmUC/x3LMQqAMAxA0auUzAaadlC8ijjYGjVLlQZFKL27x
+ fHx+QWUs7DCaApkfkTlTA3UGYjHknZGWZvBWefJuh5vDbjJy4qEgw9b7C15Sw7acWX+UxumudY
+ PdfDP910AAAA=
+To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>
+Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de, 
+ asahi@lists.linux.dev, Hector Martin <marcan@marcan.st>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1362; i=marcan@marcan.st;
+ h=from:subject:message-id; bh=OBRBVmNOT4/VqCOILeRuAL3+gYDvJKIt3Emd4T+Gxcg=;
+ b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlSrz/HXbx6KPvKuwu9yZO6mH18zY2s1teSmTg1VKZzes
+ r7gzLzXHaUsDGIcDLJiiiyNJ3pPdXtOP6eumjIdZg4rE8gQBi5OAZiIymZGhmOraie2aWb2RCx4
+ K7BFV119vo3v0+g2xvicI+snKu+T7GH4p7OlrbMgnGuFS+zvuNltO17ueveT22bxqoQJZw/wFjV
+ qMAIA
+X-Developer-Key: i=marcan@marcan.st; a=openpgp;
+ fpr=FC18F00317968B7BE86201CBE22A629A4C515DD5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,72 +78,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17:54-20231026, Prasanth Babu Mantena wrote:
-> EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
-> size followed by reading 1-byte size with an offset 1. This commit fixes
-> the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
-> board_detect: Fix EEPROM read quirk for 2-byte").
-> 
-> In the previous commit, the value with one offset is being read into
-> offset_test, but the pointer used to match was still ep. ep is the
-> pointer where previously read data is stored, resulting in an invalid
-> comparision of the values. The intent is to identify bad 2-byte
-> addressing eerpoms, which respond to the initial 1-byte addressing
-> request and gets stuck on the succesive reads. After successive read
-> with an offset 1, the 1-byte data is compared with the second byte of
-> the header to ensure it as a valid 1byte addressing eeprom.
-> This is taken care by comparing proper first byte value from, header
-> with an offset 1 byte, to offset_test having the 1-byte data read from eeprom.
+This series is the first of a few bundles of USB fixes we have been
+carrying downstream on the Asahi U-Boot branch for a few months.
 
-Rephrase (I at times go to grammarly.com to make sure I use the right
-verbage): So, keep it simple (we can read code - no need to give us the
-detail readup). Stuff like "in the previous commit" leaves us wondering
-which commit.
+Most importantly, this related set of patches makes xHCI error/stall
+recovery more robust (or work at all in some cases). There are also a
+couple patches fixing other xHCI bugs and adding better debug logs.
 
-EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
-size followed by reading 1-byte size with an offset 1.
-The commit 9f393a2d7af8 ("board: ti: common: board_detect: Fix EEPROM
-read quirk for 2-byte") that attempts to fix this uses the wrong pointer to
-to compare.
+I believe this should fix this Fedora bug too:
 
-> 
-> Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> ---
-> v2 <--> v1:
-> Fix inplace for the else condition of CONFIG_IS_ENABLED(DM_I2C).
-> Improved commit message.
-> 
->  board/ti/common/board_detect.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
-> index 9a53884c98..869f7a47f8 100644
-> --- a/board/ti/common/board_detect.c
-> +++ b/board/ti/common/board_detect.c
-> @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
->  
->  	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
->  
-> -	if (*((u32 *)ep) != (header & 0xFF))
-> +	if (offset_test != ((header >> 8) & 0xFF))
->  		one_byte_addressing = false;
->  
->  	/* Corrupted data??? */
-> @@ -180,7 +180,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
->  
->  	rc = i2c_read(dev_addr, 0x1, byte, &offset_test, sizeof(offset_test));
->  
-> -	if (*((u32 *)ep) != (header & 0xFF))
-> +	if (offset_test != ((header >> 8) & 0xFF))
->  		one_byte_addressing = false;
->  
->  	/* Corrupted data??? */
-> -- 
-> 2.39.0
-> 
+https://bugzilla.redhat.com/show_bug.cgi?id=2244305
 
+Signed-off-by: Hector Martin <marcan@marcan.st>
+---
+Hector Martin (8):
+      usb: xhci: Guard all calls to xhci_wait_for_event
+      usb: xhci: Better error handling in abort_td()
+      usb: xhci: Allow context state errors when halting an endpoint
+      usb: xhci: Recover from halted non-control endpoints
+      usb: xhci: Fail on attempt to queue TRBs to a halted endpoint
+      usb: xhci: Do not panic on event timeouts
+      usb: xhci: Fix DMA address calculation in queue_trb
+      usb: xhci: Add more debugging
+
+ drivers/usb/host/xhci-ring.c | 100 +++++++++++++++++++++++++++++++++++--------
+ drivers/usb/host/xhci.c      |   9 ++++
+ include/usb/xhci.h           |   2 +
+ 3 files changed, 92 insertions(+), 19 deletions(-)
+---
+base-commit: fb428b61819444b9337075f49c72f326f5d12085
+change-id: 20231027-usb-fixes-1-83bfc7013012
+
+Best regards,
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Hector Martin <marcan@marcan.st>
+
