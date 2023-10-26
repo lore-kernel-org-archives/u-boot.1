@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88708C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 13:23:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD128C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 13:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A7E687607;
-	Thu, 26 Oct 2023 15:23:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 20F0187617;
+	Thu, 26 Oct 2023 15:25:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hqQOglOD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="d+q+v+UR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B96E875ED; Thu, 26 Oct 2023 15:23:33 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 06DC787615; Thu, 26 Oct 2023 15:25:43 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E11168760D
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 15:23:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9502B87602
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 15:25:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-27d27026dc2so214425a91.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 06:23:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698326605; x=1698931405; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Pq8Bol37tRSU/3t43WO3dJIyLBHSlKPAK6gViR32Pac=;
- b=hqQOglOD3lLrj0Lfx4uVNN1Psg1BYGgTUXy2UParT2R4LkTYa/50IavTppqpGH3voi
- 6YDYEL3H8WDUUeEvxzZUkiTwv+4IZ4aL6f1+s9ScXdS8h5Wm0SAWIUYy9mmZMBLNmb8A
- TFM6L55kQtK+Hs+ga6zhfQBQyg1wectWzskYbtF0gM9qjyGwQLCzSWPBYhrbKyhP+lu9
- HMnItaPVCuLt1L4NxWnRMY37G3ULsP8LAFhXmMe+EDrKdaxVnANtsYTVXDlWoK6BuCbQ
- ZWk3RcbQzcr/ipIkvLVKKjQbRNh86i7vbfzgQBGVv3JA3KJP1Z2Li/P9H/zVugX58jLX
- fkFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698326605; x=1698931405;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Pq8Bol37tRSU/3t43WO3dJIyLBHSlKPAK6gViR32Pac=;
- b=B9IiFP1tC3ZZEtRFxTnlSNT4d8bXMb5MZJNG6L9aP70f5pr87PMWMQ5Je2IQm86kUz
- z8J/b/zMG7PsmTomTzh+T3Z5PTr12WXegScL7ejduBfl0QfjE6MM0Pu2id+gIaUIBWN2
- RytplcZJGrA0OAJt7z5xJkYe8QdlNCZHJC3GVvhraZVNk4gxuixGKW10UF9dU7Bh6d5D
- PQHvzc+dGU+EMoN/z7Wh0Cem808S82+Qlunn9reV7gkaZT9LtUpUL+qVH/98lI4/r4l2
- nOGSf+omB3BDt1PgEnFYhbXHrgb+HzxGlZvdk6kcrmkyhOIjOWJcdRLVAxy4YosrIuDh
- PuOA==
-X-Gm-Message-State: AOJu0YzdNzzZBGUNLJTXKWzePegH2IOG1JQz2ZBAvPTRtRF3/kOk9Eyu
- AMxYnFUGEhAOQl3fJMcni2OoAwbTvbqPtKFzWU4=
-X-Google-Smtp-Source: AGHT+IGxJ2IGfmMmJl5BcS3gprq0BfilxVk/qaBFUBvg7XUjtZoa/LFsA0lrx/VsjKwqYubzTYfQxv1eDPhMt1QaClk=
-X-Received: by 2002:a17:90b:3e8e:b0:27d:32d8:5f23 with SMTP id
- rj14-20020a17090b3e8e00b0027d32d85f23mr20029165pjb.2.1698326604915; Thu, 26
- Oct 2023 06:23:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 3DB82CE3F7C
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 13:25:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D56FBC433CB
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 13:25:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1698326736;
+ bh=+MGS8U/sxZlsxu4uEJYmz/grwvCB1tyBhQ2V6if8vDU=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=d+q+v+URG2CAoqmpWSGxTp4m/ieTAsMH5DFWBk88VtiSzOB0cGuwKqLC3kE4CgCKy
+ TFTBGiJ4tTwKLz2HXyIrY0IOLDhqy3hZ+eT9I6M+7TBKB27Mo99VYBwk3JG07RJdpB
+ Qw0P/l5dnu+bFiqARsgdbv4bWjqQn5EvpQv0xkVQL0nmOlU1otXGhh3OvDDWX4xDer
+ ehkBO9Kr6uE8wsL9oWsX4R8Wt6K+bbXz40QVgRuXOhZmhKezkwduYn62R+gqwImHNp
+ t64i0y25Vg5JANYJEv5Rd+tYHQH6QHKKYyvdqxN2vlE3st3V8vjiOhHVwpr105iMni
+ mmmYRlatzvs/w==
+Received: by mail-ot1-f41.google.com with SMTP id
+ 46e09a7af769-6cd0963c61cso548153a34.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 06:25:36 -0700 (PDT)
+X-Gm-Message-State: AOJu0YzYyyxZPIu6T4tFGeogaw91nR8RIELXsceFQVt+mwezZmm2t6Rc
+ 0p9V8wX8uWRYdSDrhP/hVDpLKvi/YcFobTmRjE4=
+X-Google-Smtp-Source: AGHT+IGdtQL/B8ljcZzRnKA+sQcP1SIV6LlHI28WnG2FGPinA1/vPJbXdnJFSpA8NDpJ7neQfY2r6PAloUbbG0gqrYs=
+X-Received: by 2002:a05:6871:4f13:b0:1e9:8782:f948 with SMTP id
+ zu19-20020a0568714f1300b001e98782f948mr14353560oab.58.1698326736164; Thu, 26
+ Oct 2023 06:25:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231021123947.434-1-egyszeregy@freemail.hu>
-In-Reply-To: <20231021123947.434-1-egyszeregy@freemail.hu>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 26 Oct 2023 10:23:13 -0300
-Message-ID: <CAOMZO5CftTZHkb022oGXzrrGX1cEne=PStTBw=FcTKnPv6DyeA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] [u-boot][master][PATCH v5] pico-imx7d: add baseboard
- SD card boot detect
-To: egyszeregy@freemail.hu
-Cc: u-boot@lists.denx.de, otavio@ossystems.com.br
+References: <20231026072628.4115527-1-sjg@chromium.org>
+ <20231026072628.4115527-4-sjg@chromium.org>
+In-Reply-To: <20231026072628.4115527-4-sjg@chromium.org>
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Thu, 26 Oct 2023 22:24:59 +0900
+X-Gmail-Original-Message-ID: <CAK7LNASATGRaS-6QxzqTEq7qNVkZPXOBE8pfRBg=2bQGyy3=yw@mail.gmail.com>
+Message-ID: <CAK7LNASATGRaS-6QxzqTEq7qNVkZPXOBE8pfRBg=2bQGyy3=yw@mail.gmail.com>
+Subject: Re: [PATCH 3/3] arm64: boot: Support Flat Image Tree
+To: Simon Glass <sjg@chromium.org>
+Cc: linux-arm-kernel@lists.infradead.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>, 
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, 
+ Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
+ Will Deacon <will@kernel.org>, 
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,147 +85,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Oct 21, 2023 at 9:40=E2=80=AFAM <egyszeregy@freemail.hu> wrote:
+On Thu, Oct 26, 2023 at 4:28=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+> Add a script which produces a Flat Image Tree (FIT), a single file
+> containing the built kernel and associated devicetree files.
+> Compression defaults to gzip which gives a good balance of size and
+> performance.
 >
-> Technexion PICO-IMX7 SoM is supporting USDHC3 (eMMC or micro SD on SoM)
-> and USDHC1 (SD on carrier board) to use on any carrier board like
-> PICO-NYMPH. This pacth is intend to take over codes from Technexion
-> to support mmc autodetect boot for pico-imx7d to able to boot from
-> selected USDHC1 or USDHC3 boot devices.
+> The files compress from about 85MB to 24MB using this approach.
 >
-> Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+> The FIT can be used by bootloaders which support it, such as U-Boot
+> and Linuxboot. It permits automatic selection of the correct
+> devicetree, matching the compatible string of the running board with
+> the closest compatible string in the FIT. There is no need for
+> filenames or other workarounds.
+>
+> Add a 'make image.fit' build target for arm64, as well.
+>
+> The FIT can be examined using 'dumpimage -l'.
+>
+> This features requires pylibfdt (use 'pip install libfdt'). It also
+> requires compression utilities for the algorithm being used. Supported
+> compression options are the same as the Image.xxx files. For now there
+> is no way to change the compression other than by editing the rule for
+> $(obj)/image.fit
+>
+> While FIT supports a ramdisk / initrd, no attempt is made to support
+> this here, since it must be built separately from the Linux build.
+
+
+Is this useful?
+For arm64, initrd is likely used.
+
+FIT should be created in unbrellea projects
+such as OpenEmbedded,  Buildroot, etc.
+
+
+
+
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
-
-Please always provide a changelog.
-
->  board/technexion/pico-imx7d/pico-imx7d.c | 59 ++++++++++++++-
->  board/technexion/pico-imx7d/spl.c        | 91 ++++++++++++++++++++++--
->  include/configs/pico-imx7d.h             |  4 +-
->  3 files changed, 145 insertions(+), 9 deletions(-)
 >
-> diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/=
-pico-imx7d/pico-imx7d.c
-> index 6e98b85b28..01a9520d32 100644
-> --- a/board/technexion/pico-imx7d/pico-imx7d.c
-> +++ b/board/technexion/pico-imx7d/pico-imx7d.c
-> @@ -5,6 +5,7 @@
+>  MAINTAINERS              |   7 +
+>  arch/arm64/Makefile      |   3 +-
+>  arch/arm64/boot/Makefile |   8 +-
+>  scripts/Makefile.lib     |  16 ++-
+>  scripts/make_fit.py      | 285 +++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 315 insertions(+), 4 deletions(-)
+>  create mode 100755 scripts/make_fit.py
 >
->  #include <init.h>
->  #include <net.h>
-> +#include <command.h>
->  #include <asm/arch/clock.h>
->  #include <asm/arch/crm_regs.h>
->  #include <asm/arch/imx-regs.h>
-> @@ -13,6 +14,7 @@
->  #include <asm/global_data.h>
->  #include <asm/gpio.h>
->  #include <asm/mach-imx/iomux-v3.h>
-> +#include <asm/mach-imx/boot_mode.h>
->  #include <asm/io.h>
->  #include <common.h>
->  #include <miiphy.h>
-> @@ -106,7 +108,7 @@ int board_phy_config(struct phy_device *phydev)
->  {
->         unsigned short val;
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2d13bbd69adb..d6955ebc3c24 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1575,6 +1575,13 @@ F:       Documentation/process/maintainer-soc*.rst
+>  F:     arch/arm/boot/dts/Makefile
+>  F:     arch/arm64/boot/dts/Makefile
 >
-> -       /* To enable AR8035 ouput a 125MHz clk from CLK_25M */
-> +       /* To enable AR8035 output a 125MHz clk from CLK_25M */
-
-This is an unrelated change.
-
->         phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
->         phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
->         phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
-> @@ -129,6 +131,49 @@ int board_phy_config(struct phy_device *phydev)
->  }
->  #endif
->
-> +#if CONFIG_IS_ENABLED(FSL_ESDHC_IMX)
-> +int check_mmc_autodetect(void)
-> +{
-> +       char *autodetect_str =3D env_get("mmcautodetect");
+> +ARM64 FIT SUPPORT
+> +M:     Simon Glass <sjg@chromium.org>
+> +L:     linux-arm-kernel@lists.infradead.org (moderated for non-subscribe=
+rs)
+> +S:     Maintained
+> +F:     arch/arm64/boot/Makefile
+> +F:     scripts/make_fit.py
 > +
-> +       if ((autodetect_str) &&
-> +           (strcmp(autodetect_str, "yes") =3D=3D 0)) {
-> +               return 1;
-> +       }
-
-No need for { to enclose a single line statement. Please remove it.
-
-
-> +
-> +       return 0;
-> +}
-> +
-> +void board_late_mmc_init(void)
-> +{
-> +       int dev_no =3D 0;
-> +       char cmd[32];
-> +
-> +       if (!check_mmc_autodetect())
-> +               return;
-> +
-> +       switch (get_boot_device()) {
-> +       case SD3_BOOT:
-> +       case MMC3_BOOT:
-> +               env_set("bootdev", "MMC3");
-> +               dev_no =3D 2;
-> +               break;
-> +       case SD1_BOOT:
-> +               env_set("bootdev", "SD1");
-> +               dev_no =3D 0;
-> +               break;
-
-These dev_no assignments are not correct.
-
-imx7d-pico-pi-u-boot.dtsi defines aliases for the eMMC:
-
-    aliases {
-        mmc0 =3D &usdhc3;
-
-So to avoid errors, I had to apply the following change on top o your patch=
-:
-
---- a/board/technexion/pico-imx7d/pico-imx7d.c
-+++ b/board/technexion/pico-imx7d/pico-imx7d.c
-@@ -156,11 +156,11 @@ void board_late_mmc_init(void)
-        case SD3_BOOT:
-        case MMC3_BOOT:
-                env_set("bootdev", "MMC3");
--               dev_no =3D 2;
-+               dev_no =3D 0;
-                break;
-        case SD1_BOOT:
-                env_set("bootdev", "SD1");
--               dev_no =3D 0;
-+               dev_no =3D 1;
-                break;
-        default:
-                printf("Wrong boot device!");
-
-> @@ -13,7 +13,7 @@
->  #define CFG_MXC_UART_BASE              UART5_IPS_BASE_ADDR
+>  ARM ARCHITECTED TIMER DRIVER
+>  M:     Mark Rutland <mark.rutland@arm.com>
+>  M:     Marc Zyngier <maz@kernel.org>
+> diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+> index 7b77b63e978f..d8290dcab6b6 100644
+> --- a/arch/arm64/Makefile
+> +++ b/arch/arm64/Makefile
+> @@ -150,7 +150,7 @@ libs-$(CONFIG_EFI_STUB) +=3D $(objtree)/drivers/firmw=
+are/efi/libstub/lib.a
+>  # Default target when executing plain make
+>  boot           :=3D arch/arm64/boot
 >
->  /* MMC Config */
-> -#define CFG_SYS_FSL_ESDHC_ADDR 0
-> +#define CFG_SYS_FSL_ESDHC_ADDR USDHC3_BASE_ADDR
-
-Is this change needed?
-
->  #define CFG_DFU_ENV_SETTINGS \
->         "dfu_alt_info=3D" \
-> @@ -79,9 +79,11 @@
->                 "name=3Drootfs,size=3D0,uuid=3D${uuid_gpt_rootfs}\0" \
->         "fastboot_partition_alias_system=3Drootfs\0" \
->         "setup_emmc=3Dmmc dev 0; gpt write mmc 0 $partitions; reset;\0" \
-> +       "mmcautodetect=3Dyes\0" \
->         PICO_BOOT_ENV
+> -BOOT_TARGETS   :=3D Image.gz vmlinuz.efi
+> +BOOT_TARGETS   :=3D Image.gz vmlinuz.efi image.fit
 >
->  #define BOOT_TARGET_DEVICES(func) \
-> +       func(MMC, mmc, 2) \
+>  PHONY +=3D $(BOOT_TARGETS)
+>
+> @@ -215,6 +215,7 @@ virtconfig:
+>  define archhelp
+>    echo  '* Image.gz      - Compressed kernel image (arch/$(ARCH)/boot/Im=
+age.gz)'
+>    echo  '  Image         - Uncompressed kernel image (arch/$(ARCH)/boot/=
+Image)'
+> +$(if $(CONFIG_EFI_ZBOOT),,echo  '  image.fit     - Flat Image Tree (arch=
+/$(ARCH)/boot/image.fit)')
+>    echo  '  install       - Install uncompressed kernel'
+>    echo  '  zinstall      - Install compressed kernel'
+>    echo  '                  Install using (your) ~/bin/installkernel or'
+> diff --git a/arch/arm64/boot/Makefile b/arch/arm64/boot/Makefile
+> index 1761f5972443..a6e5b20b22bd 100644
+> --- a/arch/arm64/boot/Makefile
+> +++ b/arch/arm64/boot/Makefile
+> @@ -16,7 +16,8 @@
+>
+>  OBJCOPYFLAGS_Image :=3D-O binary -R .note -R .note.gnu.build-id -R .comm=
+ent -S
+>
+> -targets :=3D Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo Ima=
+ge.zst
+> +targets :=3D Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo \
+> +       Image.zst image.fit
+>
+>  $(obj)/Image: vmlinux FORCE
+>         $(call if_changed,objcopy)
+> @@ -39,6 +40,11 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
+>  $(obj)/Image.zst: $(obj)/Image FORCE
+>         $(call if_changed,zstd)
+>
+> +ifndef CONFIG_EFI_ZBOOT
+> +$(obj)/image.fit: $(obj)/Image $(obj)/dts FORCE
 
-This should be func(MMC, mmc, 1)
 
-Please define aliases if needed.
+
+This is wrong.
+
+$(obj)/dts is a directory.
+
+There is no point for comparing timestamps
+between $(obj)/image.fit and $(obj)/dts.
+
+Updates of *.dtb do not result in the
+update of the $(obj)/dts timestamp.
+
+
+if_changed never works correctly.
+
+
+
+
+
+
+
+
+> +       $(call if_changed,fit,gzip)
+> +endif
+> +
+>  EFI_ZBOOT_PAYLOAD      :=3D Image
+>  EFI_ZBOOT_BFD_TARGET   :=3D elf64-littleaarch64
+>  EFI_ZBOOT_MACH_TYPE    :=3D ARM64
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index 68d0134bdbf9..4e4364ad641a 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -487,14 +487,26 @@ UIMAGE_OPTS-y ?=3D
+>  UIMAGE_TYPE ?=3D kernel
+>  UIMAGE_LOADADDR ?=3D arch_must_set_this
+>  UIMAGE_ENTRYADDR ?=3D $(UIMAGE_LOADADDR)
+> -UIMAGE_NAME ?=3D 'Linux-$(KERNELRELEASE)'
+> +UIMAGE_NAME ?=3D "Linux-$(KERNELRELEASE)"
+
+
+Unneeded noise change.
+
+
+
+
+
+
+
+--
+Best Regards
+
+Masahiro Yamada
