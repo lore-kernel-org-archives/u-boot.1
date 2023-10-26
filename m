@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01592C25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CD1C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:32:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFF9487640;
-	Thu, 26 Oct 2023 20:31:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B227687B59;
+	Thu, 26 Oct 2023 20:31:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jn1G/N0N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KCNLuSwK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A2588762E; Thu, 26 Oct 2023 20:31:48 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 713BF87640; Thu, 26 Oct 2023 20:31:49 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A7B6875B8
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A739287640
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-586beb5e6a7so87443eaf.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:44 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-778940531dbso92859985a.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698345103; x=1698949903; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698345104; x=1698949904; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MjA5r6OateBSE2unsZ/rZ6JI0fN4mt9QeKnejMnUv7U=;
- b=jn1G/N0N3P33asTVpNyJzmmFXwHykUcyCN7I/td7xE3jjzVVDyDWpRs4nEWWtUQPXd
- Y+WW9vo2cguxOrxY2uETqjlq7uOmQ5KzCXa/fDGkktNKrTj96L1PFSEEfotj62SIZxLr
- nPDepwEfx8sIoPv6+h9Ms/L5+96dIpOYKs1Ec=
+ :reply-to; bh=Jz7w//TNvavXWX8aDCeodqapv8f4L9MNIU3pvpvBON4=;
+ b=KCNLuSwKfVdmRGiWl5vf6cy02ChpoicSO1qge8eFukhk4Gn24qPZgZT4g7A0pAym0n
+ rJxCuLVtOqpGDFspQhBPI5jenvgK0NBHrA4Pe4ne3cVSoeSwbCuLPxurmxI66gBH363m
+ JcxYm9A9m15mYWuM6mFXNj+O3o2afGMKqTRm8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698345103; x=1698949903;
+ d=1e100.net; s=20230601; t=1698345104; x=1698949904;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MjA5r6OateBSE2unsZ/rZ6JI0fN4mt9QeKnejMnUv7U=;
- b=ljerJeU0Pi7tQHMmTcZHzyK+jfy1mYPiWhfnvYRm9GoRer/28RgebojdWtmkVYN2sU
- POPz4rxIC4ST7l6R7h59FZhqHs+GWfk5tUiYWAWUXOsMCEgv714Ht43Myxu2v9nCw57z
- zlJwld2r4JIi+YM7mP89ABL15jqRzs7wFruWDOBTxl1xHS/gLIgoVHRZ1/cEOBp2QHX9
- RpZul8ThNrV+HnnXozNvtU+6ttSpTPxDYlvPy7Rnk2QdU4iQMgh8iK0B6IomFBzmDEuP
- vTgMAx99+218wC5QwNWL+SXb4C3hUHja34orccIM1JYsmXkUGOqzvFNR60vC7ny6QrqG
- 2NwA==
-X-Gm-Message-State: AOJu0Yzqjy9PD1JapzC7Cqfaue8iW0Mf1NKR9xms6+nEKWD1DrTJCoEN
- KbHVKxKJww+6qQhFB7mhg2twEvspC4ugmyjqpykb/A==
-X-Google-Smtp-Source: AGHT+IFqzH1ODQ/1C4EJvg9bJjo/NpHd2JhxaamkiDUYhlags0C7z4IPfmJcl/N6RrbYMULEzQgCoA==
-X-Received: by 2002:a05:6358:51d8:b0:168:e156:c9b9 with SMTP id
- 24-20020a05635851d800b00168e156c9b9mr403681rwl.15.1698345102845; 
- Thu, 26 Oct 2023 11:31:42 -0700 (PDT)
+ bh=Jz7w//TNvavXWX8aDCeodqapv8f4L9MNIU3pvpvBON4=;
+ b=Qc7PiYK9j/hbsY0VssfmU6nFHfNPbKJdTEH/5v392b2+g3QmKwcM5GlBhAcayhDslS
+ qeogvaAXErPvPeii3AwHyL/2hB/W+Q593Kpozuk7EV/WG1CSfDkvizXo+8KGpKMXWMHw
+ deYFZPn4DcuTWthXa+SjzZXj6ymAQhwFnz/iyRB61Ro5QH5eW3Zcz65F469wuBbLaDxL
+ wwfVx6esDB9H2SvgCLAp0mHdHVlaKUgmgEm4OWMH3t1ca5Gmd4esZ+oBNlN1oJIY3ib2
+ FjCKu69dOlhARLHVs7Gl3RF7IV370btGfkKOh8RaMzq365nNp2/kKtoKQVmlJ5Fxi6dT
+ 0TbA==
+X-Gm-Message-State: AOJu0YxuAztFllJNG7QiNRZcpT7TPmQrXg/183b5CHNODzjKgrjugxAG
+ IFTEOX+ZY+Un5vAB6WlxlA1hG711Il9iy47S2KCm7g==
+X-Google-Smtp-Source: AGHT+IG/7SYjeW33R1IHEuARRP4JwFhzO7/HXcSmXA9Ly8q+ioDYGkxesJ878Cz8uvZQGa7JQtnAVw==
+X-Received: by 2002:a05:620a:2681:b0:778:b72d:651e with SMTP id
+ c1-20020a05620a268100b00778b72d651emr140791qkp.28.1698345103794; 
+ Thu, 26 Oct 2023 11:31:43 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
  [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
  by smtp.gmail.com with ESMTPSA id
- az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.42
+ az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.43
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 11:31:42 -0700 (PDT)
+ Thu, 26 Oct 2023 11:31:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v5 04/30] dfu: Make DFU_TFTP depend on NETDEVICES
-Date: Thu, 26 Oct 2023 14:31:12 -0400
-Message-Id: <20231026183138.636948-4-trini@konsulko.com>
+Subject: [v5 05/30] version: Separate our version string from the version
+ command
+Date: Thu, 26 Oct 2023 14:31:13 -0400
+Message-Id: <20231026183138.636948-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026183138.636948-1-trini@konsulko.com>
 References: <20231026183138.636948-1-trini@konsulko.com>
@@ -89,26 +90,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to do a DFU update over TFTP we need to have some network
-device available, so make this depend on NETDEVICES
+In order to be able to disable all commands we need to construct our
+version string in a common file, and have the version command reference
+that string, like the other users of it do.  Create common/version.c
+with just the strings.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/dfu/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ cmd/version.c    |  9 ---------
+ common/Makefile  |  1 +
+ common/version.c | 16 ++++++++++++++++
+ 3 files changed, 17 insertions(+), 9 deletions(-)
+ create mode 100644 common/version.c
 
-diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-index 4e80e85d10d7..8771678ca5a0 100644
---- a/drivers/dfu/Kconfig
-+++ b/drivers/dfu/Kconfig
-@@ -19,6 +19,7 @@ config DFU_WRITE_ALT
+diff --git a/cmd/version.c b/cmd/version.c
+index 87e1fa4159c1..d99a44f19fb3 100644
+--- a/cmd/version.c
++++ b/cmd/version.c
+@@ -7,21 +7,12 @@
+ #include <common.h>
+ #include <command.h>
+ #include <display_options.h>
+-#include <timestamp.h>
+-#include <version.h>
+ #include <version_string.h>
+ #include <linux/compiler.h>
+ #ifdef CONFIG_SYS_COREBOOT
+ #include <asm/cb_sysinfo.h>
+ #endif
  
- config DFU_TFTP
- 	bool "DFU via TFTP"
-+	depends on NETDEVICES
- 	select UPDATE_COMMON
- 	select DFU_OVER_TFTP
- 	help
+-#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
+-	U_BOOT_TIME " " U_BOOT_TZ ")" CONFIG_IDENT_STRING
+-
+-const char version_string[] = U_BOOT_VERSION_STRING;
+-const unsigned short version_num = U_BOOT_VERSION_NUM;
+-const unsigned char version_num_patch = U_BOOT_VERSION_NUM_PATCH;
+-
+ static int do_version(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char *const argv[])
+ {
+diff --git a/common/Makefile b/common/Makefile
+index cdeadf72026c..b711dc29b65e 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -10,6 +10,7 @@ obj-y += main.o
+ obj-y += exports.o
+ obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
+ obj-$(CONFIG_AUTOBOOT) += autoboot.o
++obj-y += version.o
+ 
+ # # boards
+ obj-y += board_f.o
+diff --git a/common/version.c b/common/version.c
+new file mode 100644
+index 000000000000..6e27bb80e398
+--- /dev/null
++++ b/common/version.c
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2000-2009
++ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++ */
++
++#include <timestamp.h>
++#include <version.h>
++#include <version_string.h>
++
++#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
++	U_BOOT_TIME " " U_BOOT_TZ ")" CONFIG_IDENT_STRING
++
++const char version_string[] = U_BOOT_VERSION_STRING;
++const unsigned short version_num = U_BOOT_VERSION_NUM;
++const unsigned char version_num_patch = U_BOOT_VERSION_NUM_PATCH;
 -- 
 2.34.1
 
