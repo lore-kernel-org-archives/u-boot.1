@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4259C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 12:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D024C25B67
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 12:47:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56168875A1;
-	Thu, 26 Oct 2023 14:16:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A32EE878FC;
+	Thu, 26 Oct 2023 14:47:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UrmnhO7B";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n7VKIKhu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADCDF87581; Thu, 26 Oct 2023 14:16:46 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id C512C875F9; Thu, 26 Oct 2023 14:47:44 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 856E38760A
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:16:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9578A874FA
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:47:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6bcef66f9caso138604b3a.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 05:16:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-778a108ae49so158083185a.0
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 05:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698322603; x=1698927403; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AZklbldjQj8IaYm6tMad6eExXVPEh6Gns8iU3CbI+Gk=;
- b=UrmnhO7B7D9TDrtIE/GSgcdfl9zR7jJODISLOozO5Eld2TVq3RUafqwtHD5F2QWmUD
- 5EypKOnjbXQwhqoKe7AB6xgHRZlQ+XywW2EKgeSXswMoDWlYeOPG902fjygwqWkcJeA4
- smFQVWM0F9ny08Btr17w3dM/8gY6EwK2txT0MNXbjkXeoDmWRkEnWH6r11l3fA4N6CaI
- 1JI9HYfyNQhCJNqPBahVRm/cP8m+6OMW6c3AtEC8EGbMgn5ME7TvcTl1XCwxxpQlGG8T
- r5PvXqbq5AUrjIhSrjLNNhifwBPnoC7RGzyvh5EMhEpdBJpCR28svIPRC6a0DQrXcWTL
- dF6Q==
+ d=konsulko.com; s=google; t=1698324460; x=1698929260; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=l7Y1dDjDFOEZGBGuKuHTsyOD+5g7GbIyMHBi8AWkbbI=;
+ b=n7VKIKhujwm+Dvw1ZeAu8Ga5hw9p85rVBJzg6kdU92Ix748LYPVg7fccwGM/qVsntX
+ HJXtTbNjmpZZ89DVvgNyKLOTOQhWJn1t3lMHrFC9hrLzeVsAOYjA5dbl3vAppmeU78Wh
+ j+/2qv6F9OX/2doZGZEtv5CFnF6XEK4S6uD6U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698322603; x=1698927403;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AZklbldjQj8IaYm6tMad6eExXVPEh6Gns8iU3CbI+Gk=;
- b=NdAKs4Kn8rtzJ2GcoNdXV2A2Y4qLDJblFJjfpdAzxDu1K2ZizchafumOcpvWPXBYx/
- qxlmZ0mtsJFC709nrSP5cbv6q6voOLUkhsWkxg9td29cLq4AyK3eaVUgW26dfrK+ZNnc
- 6xuOgqjA44YDCBvxF3qWXNSS0QJOB1OttxAsI3qGV9SC0y4ZGINFjmNvOHA4KJ5TTRVn
- IZpvZqn+GK8r8MZvpPV7BrofZHSoQqiX2FH7/ntqh+uqD9D2fBnDmaYdJjC1ZsWXd3nn
- cvclGRp6oyoW6saNxr0y5h3I19Jlfyfk8Mp2xpt59660FUNsUrZkeLlYRbgwrWhXQKxW
- JWQg==
-X-Gm-Message-State: AOJu0YxAzTiwALEaUCnABuyyKkvrARbqVx5Vw3rdYe+4kXSCMcox+KnU
- dSexXIfbsVB3Ah2fFf/YNqC1MLv82Mc=
-X-Google-Smtp-Source: AGHT+IH8kz/FCjSD8vs4tPpHH8wUhfuZOI9STWa2MD6vaV5z3kciiRcckfUb+9TdX1Psj/XhekoHzA==
-X-Received: by 2002:a05:6a20:8f05:b0:163:57ba:2ad4 with SMTP id
- b5-20020a056a208f0500b0016357ba2ad4mr21988217pzk.2.1698322602757; 
- Thu, 26 Oct 2023 05:16:42 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:4887:380:b001:41f4])
+ d=1e100.net; s=20230601; t=1698324460; x=1698929260;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l7Y1dDjDFOEZGBGuKuHTsyOD+5g7GbIyMHBi8AWkbbI=;
+ b=PklWHVKJSOQy8LAEedmw1bvlAshQV/e5ZZPYX8huOj22AQuKU5s8bk5MTpUJp/6BFM
+ QMwMODJhArxvGyAxMz6Lzx30iePElAjM/E8ALW8Uu3tQtUaRrFFGywKSoYjE+eU4Ex4O
+ pZHfFiRahnq4v0MPqty5fWOve+GS/BjMk0sxbF/Z7B3DIbpuViiHi7v2s6jIf34vCnWI
+ k43tQCWS/+d+P27nQArfhsd64i63u2qGp2nelAGQ+l5nHEJVN2QGihDk22gv2dYGOzpK
+ M0E2flYJXRhKXpp/1QAHBr9Oy0qI8eXDB+/eXf60wXnLJA4V+ujjqOYS3+3JjfAeTLKo
+ zi9A==
+X-Gm-Message-State: AOJu0YyVOmSEozEkiw6FjrDAcB86qCPX9TR+7bjgu6BmTf2qINf0agfJ
+ N37QDPNexQJQwQgrUGNZAtbBnA==
+X-Google-Smtp-Source: AGHT+IEXoVHCbKvGva1h1pgvUVRF3M5SUT4tyxn+udzGZJ5C/1IY565fnbID63tShIZi5cyaSYDytQ==
+X-Received: by 2002:ad4:5589:0:b0:66d:6a92:16c2 with SMTP id
+ f9-20020ad45589000000b0066d6a9216c2mr3073843qvx.8.1698324460060; 
+ Thu, 26 Oct 2023 05:47:40 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-7a1b-75c0-d849-e3ce.res6.spectrum.com.
+ [2603:6081:7b00:6400:7a1b:75c0:d849:e3ce])
  by smtp.gmail.com with ESMTPSA id
- i3-20020aa787c3000000b006be047268d5sm11410739pfo.174.2023.10.26.05.16.40
+ qp8-20020a05620a388800b0077423f849c3sm4984200qkn.24.2023.10.26.05.47.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 05:16:42 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: peng.fan@nxp.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] imx8mp_evk: Select CONFIG_NET_RANDOM_ETHADDR
-Date: Thu, 26 Oct 2023 09:16:36 -0300
-Message-Id: <20231026121636.3227582-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Thu, 26 Oct 2023 05:47:39 -0700 (PDT)
+Date: Thu, 26 Oct 2023 08:47:37 -0400
+From: Tom Rini <trini@konsulko.com>
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: sjg@chromium.org, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ jbx6244@gmail.com, u-boot@lists.denx.de
+Subject: Re: [RFC 12/13] lib: uuid: move CONFIG_RANDOM_UUID
+Message-ID: <20231026124737.GC496310@bill-the-cat>
+References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
+ <20231026053052.622453-13-takahiro.akashi@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oXUj3gS8ffBi/hH+"
+Content-Disposition: inline
+In-Reply-To: <20231026053052.622453-13-takahiro.akashi@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,33 +93,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
 
-On an early revision of the imx8mp-evk that I have access to,
-the MAC addresses fuses are not programmed, causing failure to bring
-the Ethernet interfaces.
+--oXUj3gS8ffBi/hH+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix this problema by selecting CONFIG_NET_RANDOM_ETHADDR so that
-random MAC addresses are assigned and the Ethernet ports become
-functional out of the box.
+On Thu, Oct 26, 2023 at 02:30:51PM +0900, AKASHI Takahiro wrote:
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- configs/imx8mp_evk_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+> This option is independent from any commands and should be managed
+> under lib. For instance, drivers/block/rkmtd.c is a user.
+>=20
+> It would be better to remove this configuration.
+>=20
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 
-diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index d538b85c1f8c..08998a63e756 100644
---- a/configs/imx8mp_evk_defconfig
-+++ b/configs/imx8mp_evk_defconfig
-@@ -74,6 +74,7 @@ CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
- CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="eth1"
-+CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_SPL_DM=y
- CONFIG_CLK_COMPOSITE_CCF=y
- CONFIG_CLK_IMX8MP=y
--- 
-2.34.1
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--oXUj3gS8ffBi/hH+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU6X+YACgkQFHw5/5Y0
+tyxjOgv8CdFmeLJrMCPoGwYn9Iaobh76pziFOtR2hWwbAskzaElYsGT7+pMtefNU
+gJHh4qSFsc8RelmtxZyFsww+VUrKnDV/CoBHziXu0Zm7NQ++Iuby9fzULGu689OP
+mtSCuVNJ9myzgvgjMp+BKV/OpOQApmH4eRJU4RbZt8e+IrV1k1MimdiPOM0V2bKG
+ILfZIHrfB7jw3b5VVwlT42yaDgHgKZqFx3S5LUZX9omE93a4aXUDqmOGUne8biyb
+O0jE9NDEPwVmvYehOueX3AZFpmOSfSStwV8YSAw2K2BlcdH/Zxx0N4QE3bPBR4jo
+l5QuYxv2SFHlJjw7ZZBUKRtbiIE7vVxCkukaRZ17+GQ4bCMpBIiCWTMRsjJE5J3A
+uMpcxa0h7Y6nAg3enxDEyXBg1rhDhR3lDqoTEhDUELNZdlWHiqrspnLV+HVcjjWH
+uYF1Gqlxa7UcaHbwA5P3gJP0PWz6c+XjUofMUdJU2Vr7NRPlbB69Ovj1JcAVkgCx
+SOlTrBdj
+=UBFe
+-----END PGP SIGNATURE-----
+
+--oXUj3gS8ffBi/hH+--
