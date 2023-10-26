@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CD1C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5B4C25B48
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 18:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B227687B59;
-	Thu, 26 Oct 2023 20:31:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6552D87B76;
+	Thu, 26 Oct 2023 20:31:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KCNLuSwK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SHgaYDCj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 713BF87640; Thu, 26 Oct 2023 20:31:49 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 8815C87646; Thu, 26 Oct 2023 20:31:49 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A739287640
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 585C98764B
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 20:31:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-778940531dbso92859985a.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:45 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-777719639adso90961085a.3
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 11:31:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698345104; x=1698949904; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698345106; x=1698949906; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Jz7w//TNvavXWX8aDCeodqapv8f4L9MNIU3pvpvBON4=;
- b=KCNLuSwKfVdmRGiWl5vf6cy02ChpoicSO1qge8eFukhk4Gn24qPZgZT4g7A0pAym0n
- rJxCuLVtOqpGDFspQhBPI5jenvgK0NBHrA4Pe4ne3cVSoeSwbCuLPxurmxI66gBH363m
- JcxYm9A9m15mYWuM6mFXNj+O3o2afGMKqTRm8=
+ :reply-to; bh=FU8vPKrZbSZKNvkxDosRzQQTNaXpRIdmK6BYvx7+xC8=;
+ b=SHgaYDCjSZ5M5TuBYDr2u9MVm4Y8+DiMpBMammVc94Ahvkt2pmQuIxMtElfilpsECl
+ oW6kdQ6/l+y6KaVaq4eOMbxh3sk7Xg8CGYhL/5omC/gaoGEirgZUia1IVAlCYlr9X3X2
+ EacMZzlmyX7TMqyWwMni10pDvSvhRu6qI9Mao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698345104; x=1698949904;
+ d=1e100.net; s=20230601; t=1698345106; x=1698949906;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Jz7w//TNvavXWX8aDCeodqapv8f4L9MNIU3pvpvBON4=;
- b=Qc7PiYK9j/hbsY0VssfmU6nFHfNPbKJdTEH/5v392b2+g3QmKwcM5GlBhAcayhDslS
- qeogvaAXErPvPeii3AwHyL/2hB/W+Q593Kpozuk7EV/WG1CSfDkvizXo+8KGpKMXWMHw
- deYFZPn4DcuTWthXa+SjzZXj6ymAQhwFnz/iyRB61Ro5QH5eW3Zcz65F469wuBbLaDxL
- wwfVx6esDB9H2SvgCLAp0mHdHVlaKUgmgEm4OWMH3t1ca5Gmd4esZ+oBNlN1oJIY3ib2
- FjCKu69dOlhARLHVs7Gl3RF7IV370btGfkKOh8RaMzq365nNp2/kKtoKQVmlJ5Fxi6dT
- 0TbA==
-X-Gm-Message-State: AOJu0YxuAztFllJNG7QiNRZcpT7TPmQrXg/183b5CHNODzjKgrjugxAG
- IFTEOX+ZY+Un5vAB6WlxlA1hG711Il9iy47S2KCm7g==
-X-Google-Smtp-Source: AGHT+IG/7SYjeW33R1IHEuARRP4JwFhzO7/HXcSmXA9Ly8q+ioDYGkxesJ878Cz8uvZQGa7JQtnAVw==
-X-Received: by 2002:a05:620a:2681:b0:778:b72d:651e with SMTP id
- c1-20020a05620a268100b00778b72d651emr140791qkp.28.1698345103794; 
- Thu, 26 Oct 2023 11:31:43 -0700 (PDT)
+ bh=FU8vPKrZbSZKNvkxDosRzQQTNaXpRIdmK6BYvx7+xC8=;
+ b=vKZNt7pxIa6vnqIIIFVPbx74c64MHvsUGkWCcbCusA+a1ec+qpROvWmdIrUvEUZsDg
+ cJ+DaLUJ8mTtSnhFHIpBzsmZyvLql4e0U7obYV32DWIpBMKw+l1nVVC1iFk3zWqkNJB0
+ H3R7mtF5hBsS4SUWLO54hTDFxQNKF50Yw8y8gJOjerFq8ZU5twdTGF7292KWXDezD8GI
+ CVAG83Q5xLf23bxQskqwoKTK/5Von0RNQvaC/3oNG8iEIIeDe3mxgGgfa2rNswVURH57
+ 4vglT21Aa+zKGyZIixPLe9RaJU+/ZR6BLxuwYLmSPOCaOFIOp1TlLnK+zIv/7L9TnAcg
+ 3OiA==
+X-Gm-Message-State: AOJu0YxhtxvyzcTZ1UiSJKgn3rZpE0h51ALS1ooMeDOoS7RgCP3AyzQN
+ XOWu3w0U1NfFH1jbx6Jeof+ux3nIdBxZdY0xnDDEag==
+X-Google-Smtp-Source: AGHT+IFzgSbjSOV4154sP5PGWKHgE5S4N4XhG4PDYrbXZ8hI47xPplHdrEOv1gLtRkxFkFpoGS0aqQ==
+X-Received: by 2002:a05:620a:8d02:b0:774:a9b:d62e with SMTP id
+ rb2-20020a05620a8d0200b007740a9bd62emr124594qkn.46.1698345105771; 
+ Thu, 26 Oct 2023 11:31:45 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-6a0e-a72f-3fdd-31b7.res6.spectrum.com.
  [2603:6081:7b00:6400:6a0e:a72f:3fdd:31b7])
  by smtp.gmail.com with ESMTPSA id
- az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.43
+ az39-20020a05620a172700b00777611164c5sm5175623qkb.106.2023.10.26.11.31.44
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Oct 2023 11:31:43 -0700 (PDT)
+ Thu, 26 Oct 2023 11:31:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [v5 05/30] version: Separate our version string from the version
- command
-Date: Thu, 26 Oct 2023 14:31:13 -0400
-Message-Id: <20231026183138.636948-5-trini@konsulko.com>
+Subject: [v5 07/30] Kconfig: Move CONFIG_SYS_[CP]BSIZE to common/Kconfig
+Date: Thu, 26 Oct 2023 14:31:15 -0400
+Message-Id: <20231026183138.636948-7-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026183138.636948-1-trini@konsulko.com>
 References: <20231026183138.636948-1-trini@konsulko.com>
@@ -90,79 +89,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to be able to disable all commands we need to construct our
-version string in a common file, and have the version command reference
-that string, like the other users of it do.  Create common/version.c
-with just the strings.
+Move CONFIG_SYS_CBSIZE (console buffer size) and CONFIG_SYS_PBSIZE
+(console print buffer size) out of cmd/Kconfig and in to common/Kconfig.
+Create help entries for both which explain their usage and why they are
+both not entirely command centric.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/version.c    |  9 ---------
- common/Makefile  |  1 +
- common/version.c | 16 ++++++++++++++++
- 3 files changed, 17 insertions(+), 9 deletions(-)
- create mode 100644 common/version.c
+ cmd/Kconfig    | 14 --------------
+ common/Kconfig | 23 +++++++++++++++++++++++
+ 2 files changed, 23 insertions(+), 14 deletions(-)
 
-diff --git a/cmd/version.c b/cmd/version.c
-index 87e1fa4159c1..d99a44f19fb3 100644
---- a/cmd/version.c
-+++ b/cmd/version.c
-@@ -7,21 +7,12 @@
- #include <common.h>
- #include <command.h>
- #include <display_options.h>
--#include <timestamp.h>
--#include <version.h>
- #include <version_string.h>
- #include <linux/compiler.h>
- #ifdef CONFIG_SYS_COREBOOT
- #include <asm/cb_sysinfo.h>
- #endif
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index cd2793b6876b..cbba39099659 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -75,20 +75,6 @@ config SYS_MAXARGS
+ 	int "Maximum number arguments accepted by commands"
+ 	default 16
  
--#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
--	U_BOOT_TIME " " U_BOOT_TZ ")" CONFIG_IDENT_STRING
+-config SYS_CBSIZE
+-	int "Console input buffer size"
+-	default 2048 if ARCH_TEGRA || ARCH_VERSAL || ARCH_ZYNQ || ARCH_ZYNQMP || \
+-		RCAR_GEN3 || TARGET_SOCFPGA_SOC64
+-	default 512 if ARCH_MX5 || ARCH_MX6 || ARCH_MX7 || FSL_LSCH2 || \
+-		FSL_LSCH3 || X86
+-	default 256 if M68K || PPC
+-	default 1024
 -
--const char version_string[] = U_BOOT_VERSION_STRING;
--const unsigned short version_num = U_BOOT_VERSION_NUM;
--const unsigned char version_num_patch = U_BOOT_VERSION_NUM_PATCH;
+-config SYS_PBSIZE
+-	int "Buffer size for console output"
+-	default 1024 if ARCH_SUNXI
+-	default 1044
 -
- static int do_version(struct cmd_tbl *cmdtp, int flag, int argc,
- 		      char *const argv[])
- {
-diff --git a/common/Makefile b/common/Makefile
-index cdeadf72026c..b711dc29b65e 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -10,6 +10,7 @@ obj-y += main.o
- obj-y += exports.o
- obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
- obj-$(CONFIG_AUTOBOOT) += autoboot.o
-+obj-y += version.o
+ config SYS_XTRACE
+ 	bool "Command execution tracer"
+ 	depends on CMDLINE
+diff --git a/common/Kconfig b/common/Kconfig
+index 43701fe9e897..4f7292f155db 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -52,6 +52,29 @@ config CONSOLE_RECORD_IN_SIZE
+ 	  The buffer is allocated immediately after the malloc() region is
+ 	  ready.
  
- # # boards
- obj-y += board_f.o
-diff --git a/common/version.c b/common/version.c
-new file mode 100644
-index 000000000000..6e27bb80e398
---- /dev/null
-+++ b/common/version.c
-@@ -0,0 +1,16 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2000-2009
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-+ */
++config SYS_CBSIZE
++	int "Console input buffer size"
++	default 2048 if ARCH_TEGRA || ARCH_VERSAL || ARCH_ZYNQ || ARCH_ZYNQMP || \
++		RCAR_GEN3 || TARGET_SOCFPGA_SOC64
++	default 512 if ARCH_MX5 || ARCH_MX6 || ARCH_MX7 || FSL_LSCH2 || \
++		FSL_LSCH3 || X86
++	default 256 if M68K || PPC
++	default 1024
++	help
++	  Set the size of the console input buffer. This is used both in the
++	  case of reading input literally from the user in some manner as well
++	  as when we need to construct or modify that type of input, for
++	  example when constructing "bootargs" for the OS.
 +
-+#include <timestamp.h>
-+#include <version.h>
-+#include <version_string.h>
++config SYS_PBSIZE
++	int "Console output buffer size"
++	default 1024 if ARCH_SUNXI
++	default 1044
++	help
++	  Set the size of the console output buffer. This is used when we need
++	  to work with some form of a buffer while providing output in some
++	  form to the user.
 +
-+#define U_BOOT_VERSION_STRING U_BOOT_VERSION " (" U_BOOT_DATE " - " \
-+	U_BOOT_TIME " " U_BOOT_TZ ")" CONFIG_IDENT_STRING
-+
-+const char version_string[] = U_BOOT_VERSION_STRING;
-+const unsigned short version_num = U_BOOT_VERSION_NUM;
-+const unsigned char version_num_patch = U_BOOT_VERSION_NUM_PATCH;
+ config DISABLE_CONSOLE
+ 	bool "Add functionality to disable console completely"
+ 	help
 -- 
 2.34.1
 
