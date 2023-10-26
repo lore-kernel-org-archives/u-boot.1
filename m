@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE77C25B67
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 05:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A2FFC25B67
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 05:32:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 666A387B0F;
-	Thu, 26 Oct 2023 07:31:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 519FA87B1F;
+	Thu, 26 Oct 2023 07:31:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wNIcGpBs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pZnjFIUN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C787487AED; Thu, 26 Oct 2023 07:31:37 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id D527087AF6; Thu, 26 Oct 2023 07:31:39 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22B0187AEC
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:31:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E29A87B11
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 07:31:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6bd20c30831so109100b3a.1
- for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 22:31:30 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-51f64817809so54562a12.1
+ for <u-boot@lists.denx.de>; Wed, 25 Oct 2023 22:31:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698298288; x=1698903088; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698298293; x=1698903093; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6+J5usD39CP5UGT3vRbfD1+bZNGQekjxYCJ+xApneyg=;
- b=wNIcGpBstEY5vpiZnUkqkLEA5AnnhenzbUpVczEZxnsnpQjb+A3J83Blwnml+Cvrnr
- s6b8dNDyUBwboN8Kg9inN6NXzGu4yf0hNmFd+FYvmdeAPDMxmbETQhePYS4LlDPOU2EZ
- 180vjhKiWr2Co6jL2L6+pf8da6wH5Cs3NWvhOynR1c7oM7ECeNeB9XEseo7a6TWEox1d
- 9QubJhDT1NqhzZm6mloo6vmFBUTWRmInYE0Db+3ImUv5P/o686nH4m1FhLW1qGo9Cs7d
- UOFHMFAueFYCFPTyLpAlROMBZDjfS78Q+hFGWHq710kSBGo2A+g2wB2jfIRY78UtB3oA
- i6Gw==
+ bh=pfq1FrnLfG/WgO7sHG0nzAgt3mqwveg6HoTHbERWVSc=;
+ b=pZnjFIUNcAImjxxvqKj+uMpo2bADd0aEjHJ+BXqIBXrRAkQD5Zq+Y/SBw+migZ/9dw
+ 78ymg7rNpqfuZN44U3g2MRugptlFwB/rILhFkzgwzmG2ItxlaF3b1O6O43VkOXAH4XHB
+ 2KCVNxgSUOKIFeVXwCnosC0eFzuPuwPwmINzpk9+kkXvuYzJQfrrw7FfDZWNVqnf/GWb
+ Re3Kl1//vmN2t+3MCuFn33E44g5yZST4awy+viLW/8LE9OaoAHqnVX0bLt7seWv0BU+b
+ 0vmhNNAR6VxAKPmXd/nneCpJIgkEonuN6REb3Hwem/uk4jUjscONr0MHfDE3EEBgpsbC
+ VgAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698298288; x=1698903088;
+ d=1e100.net; s=20230601; t=1698298293; x=1698903093;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6+J5usD39CP5UGT3vRbfD1+bZNGQekjxYCJ+xApneyg=;
- b=tHo/y0h/mw2VHdcXewBnHknHXhHFNiUXCHn9vKCg1L0OJQcNztT9SRnj+VKuhrPB8S
- Tgyhqm3pwx5XEUEI/svBR7ceqlbxQmPLjZuGs83G8h/65XfPNzx5pJz9MU57lLCgthUC
- aOxa3plsNYox/IDnHoZIBO5yLGsGzfsJXm+flHvgOmaJnTjRNU8pmE7YnTQLCGgNJtSU
- 3HlezSaPuYnIfhgnQXPvRTkrpi0ip1SFyrJmnxpsqwXaiiupJTqRBYW6QBL8KdmjTGQ7
- TVvsDkgYH1iObcN037neyA6Ej2hbhOZNe3OH6q4nS060O4cTbinTS0DGLQMgelkeDU7d
- GqmA==
-X-Gm-Message-State: AOJu0YxcpWg7b8ZwuW1Z3Ax+9rtZQVRAkblO373XFr9h1gYxFpmwuPgH
- B/EiEcS7QVd0ygzFKLEtAuuDuXn334vTDh40hmxI8A==
-X-Google-Smtp-Source: AGHT+IHAiVtqkAHJ0Xxx5xl0tqc9V0dM9/O3MLmzo47o5JfZt5LerGOCadJlB5hB3gcVDIDS9aJPow==
-X-Received: by 2002:a05:6a20:2451:b0:171:737:df97 with SMTP id
- t17-20020a056a20245100b001710737df97mr20631240pzc.2.1698298288338; 
- Wed, 25 Oct 2023 22:31:28 -0700 (PDT)
+ bh=pfq1FrnLfG/WgO7sHG0nzAgt3mqwveg6HoTHbERWVSc=;
+ b=FZHeMxh5D+tlVmb/VGOFEcz7nKjTi6MiCJrGOGT0kqRju7FjhE/WRz/VABDwbzMwvl
+ Fdb5u4UYWjvOsmDO+08wrxCThYeQ6eqrfQo5oQkNfRCITf1N+qvVCvECqj4E3Us/9Zzs
+ uBERC1GgJ1bVWaY4HLNu0gGLMhL48um1QT4cA/kMTts8d1lk70SiLmngMIg3fo06C8lc
+ HciSRuYBcAh3tQeicyfeuX81T8qXS3AWDC+jS7VTLooQFYDe+47YGx3kU58jdF8LqdSn
+ AROoEjJsfBabGJGPPKfYdfZQeHQOGqDTtfV9EWQNnkQjbii8vF98BZG5a7+bs2HO6fJT
+ PWpQ==
+X-Gm-Message-State: AOJu0YxlfdQC2svMjdMejW2+Nnjo+QGh9jC4t5PSATZ9Sxf+br0jDmRS
+ aT39jtnIv6qTzhMqkcmqMtoZQQ==
+X-Google-Smtp-Source: AGHT+IGA0CqGpBWZpbiI7XyTn4GeUSqTfVxN+/MahTG9+MIj0vWKVYChuYTzAsoOLq+AiUI25jZZAA==
+X-Received: by 2002:a62:e816:0:b0:6bf:1621:ccad with SMTP id
+ c22-20020a62e816000000b006bf1621ccadmr17729606pfi.0.1698298293464; 
+ Wed, 25 Oct 2023 22:31:33 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:bca9:3af7:89e9:80b7])
  by smtp.gmail.com with ESMTPSA id
- fa13-20020a056a002d0d00b006c06804cd39sm440715pfb.153.2023.10.25.22.31.26
+ fa13-20020a056a002d0d00b006c06804cd39sm440715pfb.153.2023.10.25.22.31.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Oct 2023 22:31:27 -0700 (PDT)
+ Wed, 25 Oct 2023 22:31:33 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
  ilias.apalodimas@linaro.org
 Cc: jbx6244@gmail.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [RFC 04/13] cmd: bootefi: carve out binary execution interface
-Date: Thu, 26 Oct 2023 14:30:43 +0900
-Message-Id: <20231026053052.622453-5-takahiro.akashi@linaro.org>
+Subject: [RFC 06/13] cmd: efidebug: ease efi configuration dependency
+Date: Thu, 26 Oct 2023 14:30:45 +0900
+Message-Id: <20231026053052.622453-7-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231026053052.622453-1-takahiro.akashi@linaro.org>
 References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
@@ -93,80 +93,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Carve binary execution code out of do_bootefi_image().
+Now it is clear that the command actually depends on interfaces,
+not "bootefi bootmgr" command.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 ---
- cmd/bootefi.c | 46 ++++++++++++++++++++++++++++++++--------------
- 1 file changed, 32 insertions(+), 14 deletions(-)
+ cmd/efidebug.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-index 899ed90f6817..8b0bd07f1ff8 100644
---- a/cmd/bootefi.c
-+++ b/cmd/bootefi.c
-@@ -503,6 +503,36 @@ out:
- 	return (ret != EFI_SUCCESS) ? ret : ret2;
+diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+index 201531ac19fc..c2b2b074e094 100644
+--- a/cmd/efidebug.c
++++ b/cmd/efidebug.c
+@@ -1335,7 +1335,7 @@ static __maybe_unused int do_efi_test_bootmgr(struct cmd_tbl *cmdtp, int flag,
  }
  
-+/**
-+ * efi_binary_run() - run loaded UEFI image
-+ *
-+ * @image:	memory address of the UEFI image
-+ * @size:	size of the UEFI image
-+ *
-+ * Execute an EFI binary image loaded at @image.
-+ * @size may be zero if the binary is loaded with U-Boot load command.
-+ *
-+ * Return:	status code
-+ */
-+static efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-+{
-+	efi_status_t ret;
-+
-+	/* Initialize EFI drivers */
-+	ret = efi_init_obj_list();
-+	if (ret != EFI_SUCCESS) {
-+		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-+			ret & ~EFI_ERROR_MASK);
-+		return ret;
-+	}
-+
-+	ret = efi_install_fdt(fdt);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	return efi_run_image(image, size);
-+}
-+
- static efi_status_t bootefi_run_prepare(const char *load_options_path,
- 		struct efi_device_path *device_path,
- 		struct efi_device_path *image_path,
-@@ -684,23 +714,11 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 		}
- 	}
- 
--	/* Initialize EFI drivers */
--	ret = efi_init_obj_list();
--	if (ret != EFI_SUCCESS) {
--		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
--			ret & ~EFI_ERROR_MASK);
--		return CMD_RET_FAILURE;
--	}
-+	ret = efi_binary_run(image_buf, size, fdt);
- 
--	ret = efi_install_fdt(fdt);
- 	if (ret == EFI_INVALID_PARAMETER)
- 		return CMD_RET_USAGE;
--	else if (ret != EFI_SUCCESS)
--		return CMD_RET_FAILURE;
--
--	ret = efi_run_image(image_buf, size);
--
--	if (ret != EFI_SUCCESS)
-+	else if (ret)
- 		return CMD_RET_FAILURE;
- 
- 	return CMD_RET_SUCCESS;
+ static struct cmd_tbl cmd_efidebug_test_sub[] = {
+-#ifdef CONFIG_CMD_BOOTEFI_BOOTMGR
++#ifdef CONFIG_BOOTEFI_BOOTMGR
+ 	U_BOOT_CMD_MKENT(bootmgr, CONFIG_SYS_MAXARGS, 1, do_efi_test_bootmgr,
+ 			 "", ""),
+ #endif
+@@ -1526,7 +1526,7 @@ U_BOOT_LONGHELP(efidebug,
+ 	"  - show UEFI memory map\n"
+ 	"efidebug tables\n"
+ 	"  - show UEFI configuration tables\n"
+-#ifdef CONFIG_CMD_BOOTEFI_BOOTMGR
++#ifdef CONFIG_BOOTEFI_BOOTMGR
+ 	"efidebug test bootmgr\n"
+ 	"  - run simple bootmgr for test\n"
+ #endif
 -- 
 2.34.1
 
