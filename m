@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5278DC25B6B
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 07:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D2BC25B6B
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 07:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF1DE87B22;
-	Thu, 26 Oct 2023 09:32:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6942A87B25;
+	Thu, 26 Oct 2023 09:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB9DA87AF7; Thu, 26 Oct 2023 09:32:40 +0200 (CEST)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.197])
+ id EAA2B87AF7; Thu, 26 Oct 2023 09:32:40 +0200 (CEST)
+Received: from mout.perfora.net (mout.perfora.net [74.208.4.196])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D9D087AF7
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:32:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84A9C87B09
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 09:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=ziswiler.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marcel@ziswiler.com
 Received: from toolbox.int.toradex.com ([213.66.31.70]) by mrelay.perfora.net
  (mreueus002 [74.208.5.2]) with ESMTPSA (Nemesis) id
- 0MFNDu-1qjpVo0ykW-00EImG; Thu, 26 Oct 2023 09:32:28 +0200
+ 0Lu6z2-1rehLz3AaU-011TBq; Thu, 26 Oct 2023 09:32:26 +0200
 From: Marcel Ziswiler <marcel@ziswiler.com>
 To: u-boot@lists.denx.de
 Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
@@ -32,33 +32,30 @@ Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Stefano Babic <sbabic@denx.de>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v1 1/2] imx: spl_imx_romapi: fix comment about stream(usb)
- download failure
-Date: Thu, 26 Oct 2023 09:32:19 +0200
-Message-Id: <20231026073220.244387-2-marcel@ziswiler.com>
+Subject: [PATCH v1 0/2] imx: spl_imx_romapi: fixes
+Date: Thu, 26 Oct 2023 09:32:18 +0200
+Message-Id: <20231026073220.244387-1-marcel@ziswiler.com>
 X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20231026073220.244387-1-marcel@ziswiler.com>
-References: <20231026073220.244387-1-marcel@ziswiler.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:wWYmREQw2E0rt+yeYVP2RVj+2KuE4wyI5pIlKj2b19+O9n6LiB3
- Cs1g9YsbBXvWJ5Tcbkyvm5aNC7eHvhK8vj/wqYN0OgBpwoiz+iG3ycvXbVdxm+MP/TXBSIw
- LbThvaA/1M5OJdnaMuZIRHeERLVVA0K2rZL7/bGuSZ9nLRkY9UGg2pl1v5E4IyWCZqYR7k5
- 5KxioSYS4UIZk35WVDNPA==
-UI-OutboundReport: notjunk:1;M01:P0:sUFyeljQUhQ=;e7UHsu4FArHdqBTDgZ3oy7xrZ+k
- yPzGIcjBzjOPmCePVgW5/DOSmf9qL5T5B/ZJdm4dUs4BDiNsUsEo2l6jFpRS10HJgETVwpvcG
- oM57Y0GPYQQl9xF+GbBlYcB10qx3Zb1IGAtnSzp0UMAZVkNoUcQ8w1WcvIeJOWYD5Pi7zIO/C
- wkkwYzALliwtS6I9judGOwLfL0gUbquSaj5O3K8TpWRnqFCVk8gN8o8TmPLmkBwWhuN7oWqut
- 3Ik/FlwlkZ9PyslmFXOy/2C3a8HxOEiVfBd169t/LmgMJv/Wnl6ikL63OdaaHuHaXTghn2QuH
- YNnMgk4Ou+3Dx9GOiGyEhRcr7p+weq+NU9LDvdsJ9DPAzhDTMLcz6PRTD1sqbcLTT6VARXWr9
- ISFsia0jpMNLV9OHONA5CY/ROOc2gvX+4oHDHbKN1E5/Ny419L5Hz/8cwCeTdId/zHRsuWNGv
- dA5rlS05dE0RDCjHkqDnIW1jMOzZzdQFFp4Qz4jGrG6yCH8y92K9Jh/que8rdrgsKlCwN5VYm
- 5ACD0/JjitucuNeVveaP1N8zGqxkLl+xqUKqHE5EYe18BfIb0lewb5Zoptor6sYOEt1Lo9423
- J6JbCUu1inVass1uNuZY2JKMA3AuW0x6uD4VO9EmrK3FGFIras+eJ1JaffYldWu+FrGtzwtn8
- 1U9lyIDaSpi8bG7qKTYtGUx8ro2qQKxqmL8ctD3iJsigfiPlBRhKCVsth414vEDtf6A/7dmPB
- tONieDTEICPbkxr0k2lilyjxFeToAGz5Ng+e+JA98yvcMAJZxj18EYKY8pT8z6VgGrywjyZFt
- R7IasG887k1EHYaYjBQi8NKiJtW4TpAxhPAqhIjkNMn0iXaKZBQ3H3cow1Np5WEv3HFeAYt7J
- ETEP3r0wCYCmd0Q==
+X-Provags-ID: V03:K1:V9r3own5/nvchmtgxWapbvi3I+++uvivG4OZgw8V5zG6K2W+9Ao
+ 00ORJ0SDCU6qiN1SoplW1wVPv14mq0Po7ByNXH5hEgngtw2dre0hbXkH4ASkRnDz/3j47nJ
+ hQkpcnSqwWfoLz2V2+rt5t0FnkM7H40WOj5nan8I1db2YH7DsVw6jPF3IoRfzjFJGJBgMfw
+ YY73ot6H8vd87Mi/PAdrg==
+UI-OutboundReport: notjunk:1;M01:P0:BakJ8nQpvWU=;cmpxzDttG6tHdMp4nJg7dEREKC+
+ kMx+Xb4WJ0DeBzBFwKayFYr4/eKmzrvaD4TKpWvEzd+yf1XdBEp5/zxwH2DEo/bx4N9JtTM8L
+ QnlBJiPMXw74cRLaaTb3wDHsE94mMuOj6Z0pRxdSiHztLETsW8cspVADrLHgQgjjEf/NRPO7I
+ NB9uiE0PikTnu8gU2vyipF79Nk7akSS+lCdrshfN6wIzuuBl078T/vJ5HYN1rOyTVTCg9kki6
+ tqIPgFEzZHI5InH1eRZKlKBk0WB5PWkIjk7MwFAi6qzTgvPoA6/cyym0qwU9KLR6HAyYEDHcZ
+ Kz/VpHNoglO0fVicJwipzIapqFZP/40L6//riI39OwLm8PzTwTeKO5FCLNGjmR0vFdyF8D1ZM
+ JtOmcYRQPyijsGBDXno/7qg9g4M8p+lI8e+gdkewZajBQaLMltQvBlM/Oy5LJpE/BUOGjIOjR
+ aMqkwsZMerWfGhaj1rUyTGSqyX1FeHmXEGq5ebbPCGoT37T/RPCp12m+VM/WOXugOaVKflqFn
+ G7/b/C6RqKTCkGfpbsgu7/jI3Z5uBdQL6u85/9YHbWLoGOqm45xBEyCfyXYl9RjLEPYwvUlTH
+ SHuW6JyALVm4oJdftRWcxSgRQHaInk5KN+gsI/DuLN923T7Gl+ICGDIsG8wKbqeEmoh7+CHqI
+ 9SEG2iA/vWET3cmP7+SzSsmPveq0yeRrEEBXOaNAY4sJoBvyvtGouMFrbsL8xqguFufGa1xvk
+ 9ngo4OmXfce5YTpnfYKtoy5akiWod5CNGJOPugxZwK6WgIO339CVFbU9GXOnnlP7DyYRlHDiR
+ 3l+qZmq26RcCn7NEGbzP79Z85yN3f9yco4yuoFftVO6HMa9RfWHjHVqBNLPelS6LYJ/dJJ01i
+ 5OcwSFQFTC/+zBQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,37 +74,25 @@ X-Virus-Status: Clean
 
 From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-Fix comment about Stream(USB) download failure.
 
-Fixes: 1cbebc786276 ("imx: add rom api support")
-Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
----
+The first patch is a trivial spelling fix in comments. The second fixes
+a recent regression that only manifests in the eMMC fast boot mode case
+which does actually also use streaming rather than seekable.
 
- arch/arm/mach-imx/spl_imx_romapi.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Thanks go to Rasmus who helped me debug this and suggested the fix.
 
-diff --git a/arch/arm/mach-imx/spl_imx_romapi.c b/arch/arm/mach-imx/spl_imx_romapi.c
-index 93d48e56aca..cb220869b50 100644
---- a/arch/arm/mach-imx/spl_imx_romapi.c
-+++ b/arch/arm/mach-imx/spl_imx_romapi.c
-@@ -285,7 +285,7 @@ static int spl_romapi_load_image_stream(struct spl_image_info *spl_image,
- 		ret = rom_api_download_image(p, 0, pg);
- 
- 		if (ret != ROM_API_OKAY) {
--			puts("Steam(USB) download failure\n");
-+			puts("Stream(USB) download failure\n");
- 			return -1;
- 		}
- 
-@@ -305,7 +305,7 @@ static int spl_romapi_load_image_stream(struct spl_image_info *spl_image,
- 		ret = rom_api_download_image(p, 0, pg);
- 
- 		if (ret != ROM_API_OKAY) {
--			puts("Steam(USB) download failure\n");
-+			puts("Stream(USB) download failure\n");
- 			return -1;
- 		}
- 
+@Stefano: This one is also still missing [1]. Thanks!
+
+[1] https://lore.kernel.org/all/20230828213803.454303-1-marcel@ziswiler.com
+
+
+Marcel Ziswiler (2):
+  imx: spl_imx_romapi: fix comment about stream(usb) download failure
+  imx: spl_imx_romapi: fix emmc fast boot mode case
+
+ arch/arm/mach-imx/spl_imx_romapi.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
 -- 
 2.36.1
 
