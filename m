@@ -4,68 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ED40C25B48
-	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 12:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEED7C25B67
+	for <u-boot@archiver.kernel.org>; Thu, 26 Oct 2023 12:57:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2AE387B59;
-	Thu, 26 Oct 2023 14:56:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9097287614;
+	Thu, 26 Oct 2023 14:56:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inside-m2m.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dFDVTPjB";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inside-m2m.de header.i=@inside-m2m.de header.b="KnxBgyqP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 237A087B4E; Thu, 26 Oct 2023 14:27:20 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A4441875F9; Thu, 26 Oct 2023 14:42:09 +0200 (CEST)
+Received: from mail.inside-m2m.de (mail.inside-m2m.de [188.68.57.244])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC67F87A49
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:27:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39QCRDPt066674;
- Thu, 26 Oct 2023 07:27:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698323233;
- bh=x8A03Dtvugr9iqZPqtK/fset6T/wy+eWQJcZB6FSO9s=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=dFDVTPjBFnT7eD1i+vHS6Gv0GBLZSgro/kMTAlz/Wt/qJBXCxaIZ/3GZsri2Gh76P
- g+AJ1zM/2cWl+lRIKJdn5yE1HtH6TMiX8of6DuRf2R8StplEOaq9YKBCUt9EuTkAFC
- 7kjYTphHnBXm36RFEPCp4sTrsKJtSBg/5ZN3Dgig=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39QCRD8v062531
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 26 Oct 2023 07:27:13 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 26
- Oct 2023 07:27:13 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 26 Oct 2023 07:27:13 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39QCRCir111295;
- Thu, 26 Oct 2023 07:27:13 -0500
-Date: Thu, 26 Oct 2023 17:57:12 +0530
-From: Prasanth Mantena <p-mantena@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <a-nandan@ti.com>,
- <n-francis@ti.com>, Nishanth Menon <nm@ti.com>
-Subject: Re: [RESEND PATCH] board: ti: common: board_detect: Fix EEPROM
- offset read for 1-byte
-Message-ID: <20231026122711.rnskdy33k6ts4yq5@uda0496754>
-References: <20231020070128.28320-1-p-mantena@ti.com>
- <64f98f61-4b54-5bd4-f238-d101f0335b7d@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 295FC87025
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:42:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=inside-m2m.de
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=konstantin.kletschke@inside-m2m.de
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=inside-m2m.de;
+ s=default; t=1698324095;
+ bh=8mGNTaQbiTZnW1gd+v3wr+XWpvcR5C7F1PsXcje02w8=;
+ h=Date:From:To:Subject:From;
+ b=KnxBgyqPLhEnjXEnHoEO4wKgGFSjmemAdoj1U2dmQcz2unPYQlVuwdm62Qj/nekqr
+ i5IV9XDW6+ZCw5etS/d4LyI99IpgRYhwVRV+8u/VBwH77XwgfOGahBXkZV7dQruvH7
+ cth2uO1cRFrcMgNv93XCGbY/oF91LThS4Thv4aeeka32CHZHuMmzfIng7tMyivRRoS
+ dPM1a8Ifv6Nj+GWnZh6mfRDLUivm5fUJ7V5yeaCSQbT4OEN6CpUe+VazdFIynOs569
+ ae2rpvhVQkge1BrrocdDtAgT/aWF13FdfN42/m0b2qbkRTGwn3bKOztefKIxi2A41B
+ acZf5Pyb/Y5AQ==
+Received: from hephaistos.inside-m2m.de
+ (business-90-187-159-109.pool2.vodafone-ip.de [90.187.159.109])
+ (Authenticated sender: konstantin.kletschke@inside-m2m.de)
+ by mail.inside-m2m.de (Postfix) with ESMTPSA id CA52C400D4
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 14:41:33 +0200 (CEST)
+Date: Thu, 26 Oct 2023 14:41:32 +0200
+From: Konstantin Kletschke <konstantin.kletschke@inside-m2m.de>
+To: u-boot@lists.denx.de
+Subject: Starting kernel invokes "Synchronous Abort" - rk3328
+Message-ID: <ZTpefOD0SYF_lkO_@hephaistos.inside-m2m.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <64f98f61-4b54-5bd4-f238-d101f0335b7d@ti.com>
-User-Agent: NeoMutt/20171215
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-Mailman-Approved-At: Thu, 26 Oct 2023 14:56:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,49 +65,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20:52-20231020, Kumar, Udit wrote:
-> Thanks Prasanth
-> 
-> On 10/20/2023 12:31 PM, Prasanth Babu Mantena wrote:
-> > EEPROM detection logic in ti_i2c_eeprom_get() involves reading the total
-> > size followed by reading 1-byte size with an offset 1. This commit fixes
-> > the header matching issue in commit 9f393a2d7af8 ("board: ti: common:
-> > board_detect: Fix EEPROM read quirk for 2-byte").
-> You can fixes below as well. I think you can avoid this in commit message
-> > 
-> > In the previous commit, the value with one offset is being read into
-> > offset_test, but the pointer used to match was still ep. After reading
-> > with an offset 1, the second byte of the header is compared with the 1-byte
-> > data read from EEPROM. This is taken care by comparing proper first byte
-> > value from the header.
-> Nice catch
-> > 
-> > Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> > Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
-> Please consider Fixes line, first than Signed-off-by
-> 
-> 
-> Please copy Nishanth in patch as well .
-> 
-Thanks for the review comments Udit.
-Will send a v2 addressing them.
+Dear u-boot community,
+I have a rockchip rk3328 Board here I am trying to boot linux kernel
+upon. It is a Dusun DSGW-210 which seems to resemble the setup
 
-Regards,
-Prasanth
+board=evb_rk3328
+board_name=evb_rk3328
 
-> > ---
-> > Resending due to incorrect patch tag last time.
-> > 
-> >   board/ti/common/board_detect.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
-> > index 9a53884c98..17fe8f8069 100644
-> > --- a/board/ti/common/board_detect.c
-> > +++ b/board/ti/common/board_detect.c
-> > @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
-> >   	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
-> > -	if (*((u32 *)ep) != (header & 0xFF))
-> > +	if (offset_test != ((header >> 8) & 0xFF))
-> >   		one_byte_addressing = false;
-> >   	/* Corrupted data??? */
+Dusun offers a SDK which they claim to be working in their system, the
+rootfs can be a debian or a buildroot one. I can not compile it (Host
+needs to be darn old, I got stuck realizing python2 with ftdi libs is
+required). Reagardeless I want to port their stuff to yocto linux anyway
+and since the u-boot an kernel config resemble vanilla evb_rk3328 setup and
+config I thought it should not be too hard. But it is. For me.
+
+I used the JeffyCN yocto meta layer, compiled it and flashed the images.
+And voila, u-boot seems to work fine!
+When U-boot starts the kernel I get
+
+"Synchronous Abort" handler, esr 0x02000000
+
+The output looks this way:
+
+=> boot
+Could not find misc partition
+ANDROID: reboot reason: "(none)"
+Not AVB images, AVB skip
+Booting IMAGE kernel at 0x00280000 with fdt at 0x08300000...
+
+
+Fdt Ramdisk skip relocation
+No misc partition
+## Booting Android Image at 0x0027f800 ...
+Kernel: 0x00280000 - 0x00af2957 (8651 KiB)
+## Flattened Device Tree blob at 0x08300000
+  Booting using the fdt blob at 0x08300000
+  XIP Kernel Image from 0x00280000 to 0x00280000 ... OK
+  kernel loaded at 0x00280000, end = 0x00af2957
+  Using Device Tree in place at 0000000008300000, end 00000000083156fd
+WARNING: could not set reg FDT_ERR_BADOFFSET.
+## reserved-memory:
+ drm-logo@00000000: addr=7df00000 size=b8000
+Adding bank: 0x00200000 - 0x08400000 (size: 0x08200000)
+Adding bank: 0x0a200000 - 0x80000000 (size: 0x75e00000)
+== DO RELOCATE == Kernel from 0x00280000 to 0x00200000
+Total: 126428.23/126891.316 ms
+
+
+Starting kernel ...
+
+"Synchronous Abort" handler, esr 0x02000000
+
+
+The decoded stackdump looks like this:
+
+./scripts/stacktrace.sh stackdump
+
+SYMBOL File: ./u-boot.sym
+
+Call trace:
+PC:	[< ffffffff8278f004 >]
+LR:	[< 00201d90 >]  do_bootm_linux+0x5c/0x74      /home/konsti/Dusun/yocto-JeffyCN/build/tmp/work/dsgw_210-poky-linux/u-boot-rockchip/1_2017.09-r0/git/arch/arm/lib/bootm.c:498
+
+Stack:
+      [< ffffffff8278f004 >]         [< 0021757c >]  boot_selected_os+0x48/0x80
+      [< 00216fbc >]  do_bootm_states+0x8d0/0x950
+      [< 00226c44 >]  android_bootloader_boot_kernel+0x15c/0x250
+      [< 00227918 >]  android_bootloader_boot_flow+0x2a0/0x2a4
+      [< 00207970 >]  do_boot_android+0xd0/0xf8
+      [< 0022c104 >]  cmd_process+0xdc/0x10c
+      [< 00215284 >]  run_list_real+0x6e4/0x728
+      [< 00215438 >]  parse_stream_outer+0x170/0x66c
+      [< 00214b88 >]  parse_string_outer+0xcc/0xe4
+      [< 0021513c >]  run_list_real+0x59c/0x728
+      [< 00215438 >]  parse_stream_outer+0x170/0x66c
+      [< 00214b4c >]  parse_string_outer+0x90/0xe4
+      [< 0022b628 >]  run_command_list+0x50/0x90
+      [< 00215ad8 >]  autoboot_command+0x40/0x114
+      [< 00213984 >]  main_loop+0x58/0x68
+      [< 00216150 >]  run_main_loop+0xc/0x10
+      [< 0027c46c >]  initcall_run_list+0x58/0x94
+      [< 00216364 >]  board_init_r+0x20/0x24
+      [< 00201940 >]  relocation_return+0x4/0x0
+
+PC Surrounding Instructions:
+./make.sh: line 418: -D: command not found
+
+
+
+I kindly ask, what could be the culprit?
+What should I do next to further debug the issue?
+
+What I especiall wonder is what does "WARNING: could not set reg
+FDT_ERR_BADOFFSET." mean, is this harmful or leading to the root cause?
+
+I have full boot logs for the working Dusun u-boot and my u-boot
+available, is it from interest or helpful to post them here completely
+to compare?
+
+Also I found one - may be significant - difference:
+
+My u-boot says:
+
+Model: Rockchip RK3328 EVB
+MPIDR: 0x80000000
+PreSerial: 2, raw, 0xff130000
+DRAM:  2 GiB
+Sysmem: init
+Relocation Offset: 7da71000
+Relocation fdt: 7bc664a8 - 7bc67ce2
+CR: M/C/I
+Using default environment
+
+The Dusun u-boot says:
+
+Model: Rockchip RK3328 EVB
+MPIDR: 0x80000000
+PreSerial: 2, raw, 0xff130000
+DRAM:  2 GiB
+Sysmem: init
+Relocation Offset: 7da71000
+Relocation fdt: 7bc664a8 - 7bc67ce2
+CR: M/C/I
+Using default environment
+
+Is the difference in "Relocation Offset" my problem?
+
+Other Addresses appearing look similair in my u-boot like the Dusun
+u-boot (kernel load addr, RAM banks added, device tree addresses...).
+
+Kind Regards
+Konstantin Kletschke
+
+
+
+-- 
+INSIDE M2M GmbH
+Konstantin Kletschke
+Berenbosteler Strasse 76 B
+30823 Garbsen
+
+Telefon: +49 (0) 5137 90950136
+Mobil: +49 (0) 151 15256238
+Fax: +49 (0) 5137 9095010
+
+konstantin.kletschke@inside-m2m.de
+http://www.inside-m2m.de 
+
+Gesch"aftsf"uhrung: Michael Emmert, Derek Uhlig
+HRB: 111204, AG Hannover
+
