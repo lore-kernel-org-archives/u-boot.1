@@ -4,73 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231DFC25B47
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 05:04:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDE8C25B48
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 06:04:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DE1587B65;
-	Fri, 27 Oct 2023 07:04:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 36787876AC;
+	Fri, 27 Oct 2023 08:04:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J3sA19gD";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="sjZe2n55";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35099876A4; Fri, 27 Oct 2023 07:04:39 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F039A8769B; Fri, 27 Oct 2023 08:04:05 +0200 (CEST)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A04F876AA
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 07:04:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-53de8fc1ad8so2552054a12.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 22:04:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698383077; x=1698987877; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i1AeMzUP3ziw5AUvBhqs4NasmSfE3HO5S6IG7gj0noA=;
- b=J3sA19gDMW2P6eCBgofEQy7sl8at8RUjemOmDUkWuYRd0o80QGE2A4p4mD0+E1INxZ
- p+vZvMZdFC5KT5fO0c/NJEfB8Htiyk7ZVSfDnBDOhFhMYrtFMzkN2o2b6e4nw5iVxPpi
- OVPTVmegw9n2Qt96ukyjJrMPa+pLtH9mR6a4mbt2niNjAiQkb8a96wV6Uz2Tgjl84M11
- 8YvdXip7zvvlZuWQvd+DGsj/9FLq9J9/McWTuO+za31XhnBJ/4+tbxHRYzoYkx2xr2QC
- rRTe+LffobhBXDO08M3mgUDpOzR/9Ju9/6RFDNilWGSNwaezI/L/C2Mua+9B8LzFCmFQ
- 2tcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698383077; x=1698987877;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=i1AeMzUP3ziw5AUvBhqs4NasmSfE3HO5S6IG7gj0noA=;
- b=QS3BBdZejbqebpqABmeUZ7se9b+U5ZoSCEZpaGYnbhEL52cVFKjD9qPLMSXmnW6jpK
- QEO82XPFwl+/u5VALDs4iZYLjiyFqnkw1kWEJMIGUkBtZzcWK9W55EyTIuU8SON6yzDS
- 8jb4fvrF522mKZhv33Vqr3KPpt01ZYHr8uY5xBt43lpKwQSQahry5Qaq1U0q2wq9e4GQ
- BaZ11yZP7HkaFg0uJxfs7Yywpsfhhi8ZVyaDOfSw41Nv997UHIqiRiWpu++b4qkamdjJ
- Ub7bozxi7jm0EZYZLEiF3lg67aYKBNFATAbmofyOe3Xo/9fcrUzz/+2o+nYZaSPvSVMD
- eaUQ==
-X-Gm-Message-State: AOJu0YzCjMalc4pyGBEcd5Pec5KCmXxCeMiTHEdNj447wF9+ogjd8ASR
- S77a5VN7LfG4V1+yKxjl1DkDwZFX7D4VV4xKM+4=
-X-Google-Smtp-Source: AGHT+IGLVrtjgHqHQC+AHlsA0hj1yHjNKMm5qE3f010pK+0x37tCbNU087rLqDQELWh5ACsWKBEk9jEqTMDeaqV9BmU=
-X-Received: by 2002:aa7:c982:0:b0:53d:a727:3846 with SMTP id
- c2-20020aa7c982000000b0053da7273846mr1380210edt.20.1698383076658; Thu, 26 Oct
- 2023 22:04:36 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FF22876AC
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 08:04:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=marcan.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: marcan@marcan.st)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id 6D71941F75;
+ Fri, 27 Oct 2023 06:03:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
+ t=1698386640; bh=NReBcm6zFw5a/BwbITc6ayGnF/poLpxDkfVYk6QtzU8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=sjZe2n55GJnkY0DBufr3jqBtv1WnRjTYqfTOrcuOzOPcLpUqUrJY+O/6DL1SF9SSf
+ MjVKguYZrVuSnXv9zNojC3aKa7GNp+D7KQ798WyxyjBuv409jZQAqjrFPrl7Or7KwT
+ kHsc9WU1JjafkqNOtRsOudBMh5UMxONyQg4YYI6FDoc8KLnJnf5mnpH92Df5X0MI9C
+ olTGhVWemCOWC/mcuwMbqlnRmk+Et7gOfCwwQpQ9v/BU1uSMIY84fe6NKVpmafOVb9
+ kAXSejJgGTgmuWKskaIRdu9TbiUTKTD41d2EPt9/TI4Ol6gxOPWyKydDe/9J8JwlTQ
+ O1pKqmF0L0JcA==
+Message-ID: <314492c3-4cd3-2711-1693-6d58501a9bd9@marcan.st>
+Date: Fri, 27 Oct 2023 15:03:55 +0900
 MIME-Version: 1.0
-References: <20231027004430.442136-1-judge.packham@gmail.com>
- <20231027005422.GQ496310@bill-the-cat>
-In-Reply-To: <20231027005422.GQ496310@bill-the-cat>
-From: Chris Packham <judge.packham@gmail.com>
-Date: Fri, 27 Oct 2023 18:04:25 +1300
-Message-ID: <CAFOYHZC3Qz59H6DNr1nidf9zuc-7VdOJu4GySkUhDLaDqpLCVA@mail.gmail.com>
-Subject: Re: [PATCH] arm: mvebu: AC5: Use finer grained memory map
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] fixup! usb: xhci: Guard all calls to xhci_wait_for_event
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>
+Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de,
+ asahi@lists.linux.de, Minda Chen <minda.chen@starfivetech.com>
+References: <20231027-usb-fixes-1-v1-1-1c879bbcd928@marcan.st>
+ <20231026232642.16668-1-marcan@marcan.st>
+ <f2cd8dab-a494-4e9a-b450-0311444f436b@denx.de>
+From: Hector Martin <marcan@marcan.st>
+In-Reply-To: <f2cd8dab-a494-4e9a-b450-0311444f436b@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,28 +73,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 27/10/2023 09.36, Marek Vasut wrote:
+> On 10/27/23 01:26, Hector Martin wrote:
+>> Gah, I should've paid more attention to that rebase. Here's a dumb
+>> fixup for this patch. I'll squash it into a v2 if needed alongside
+>> any other changes, or if it looks good feel free to apply/squash
+>> it in directly.
+>>
+>> ---
+>>   drivers/usb/host/xhci-ring.c | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+>> index e2bd2e999a8e..7f2507be0cf0 100644
+>> --- a/drivers/usb/host/xhci-ring.c
+>> +++ b/drivers/usb/host/xhci-ring.c
+>> @@ -532,6 +532,7 @@ static void reset_ep(struct usb_device *udev, int ep_index)
+>>   	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
+>>   	if (!event)
+>>   		return;
+>> +	field = le32_to_cpu(event->trans_event.flags);
+>>   	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
+>>   	xhci_acknowledge_event(ctrl);
+> 
+> Please squash, and add
+> 
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> 
+> Also, +CC Minda,
+> 
+> there has been a similar fix to this one but with much more information 
+> about the failure, see:
+> 
+> [PATCH v1] usb: xhci: Check return value of wait for TRB_TRANSFER event
+> 
+> I think it would be useful to somehow include that information, so it 
+> wouldn't be lost.
 
-On Fri, 27 Oct 2023, 1:54 pm Tom Rini, <trini@konsulko.com> wrote:
+The root cause for *that* failure is what I fix in patch #5. From that
+thread:
 
-> On Fri, Oct 27, 2023 at 01:44:11PM +1300, Chris Packham wrote:
->
-> > The ATF implementation for AC5/AC5X ends up with bl31 living in some
-> > internal SRAM. This is in the middle of the large MMIO region that we
-> > were using. Adjust this to be finer grained blocks based on the address
-> > map from the AC5X Family Control and Management Subsystem Functional
-> > Datasheet.
-> >
-> > Signed-off-by: Chris Packham <judge.packham@gmail.com>
->
-> Does this mean we don't need to revert that other patch, or is this
-> unrelated? Thanks.
->
+> scanning bus xhci_pci for devices... WARN halted endpoint, queueing
+URB anyway.
 
-Unrelated. Just something I found along the way.
+Without #5 and without #1, that situation then leads to fireworks.
 
-I had hope it would fix the hang but with or without this change the HAFDBS
-support causes issues for me.
+A bunch of things are broken, which is why this is a series and not a
+single patch. I have more fixes to timeout handling, mass storage, etc.
+coming up after this. I fixed most of this in one long day of trying
+random USB devices, so it's not so much subtle super specific problems I
+could document the crashes for as just wide-ranging problems in the
+u-boot USB stack. None of this is particularly hard to repro if you just
+try a bunch of normal consumer USB devices, including things like USB
+HDDs which take time to spin-up leading to timeouts etc. The crash dumps
+aren't particularly useful, it's the subtleties of the xHCI interactions
+that are, but for that you need to add and enable a lot more debugging
+(patch #8).
 
+I think the main reason all this stuff is broken and we're finding out
+now is that u-boot has traditionally been used in embedded devices with
+fairly narrow use cases for USB, and now we're running it on
+workstation-grade laptops and desktops and people are plugging in all
+kinds of normal USB devices and expecting their bootloader not to freak
+out with them (even though most of the time it doesn't need to talk to
+them). It's really easy to run into this stuff when that's your use case.
 
->
+- Hector
+
