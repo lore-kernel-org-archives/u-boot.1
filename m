@@ -4,75 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A78C25B6B
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 02:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1929AC25B48
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 03:05:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8794F87BE3;
-	Fri, 27 Oct 2023 04:13:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D64E48762A;
+	Fri, 27 Oct 2023 05:05:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="R3HjtN2P";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CwEiNSkF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 546AA87BE6; Fri, 27 Oct 2023 04:13:07 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 74EF98767C; Fri, 27 Oct 2023 05:05:04 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eab::623])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4167C875EA
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 04:13:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F6148762A
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 05:05:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-27e0c1222d1so1291950a91.0
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 19:13:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698372783; x=1698977583; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Fy7XD9G8ktzl46q2JOhT7omaHLBCxT6cNNokO43bVKg=;
- b=R3HjtN2PUNCG2zNvNkmbjqqHsOEkBtSVvCE2mXrwrnRre/MDjB+Ta/rgGZ0d3OnLrE
- QUELTOpWGKDVVSu3WoDX7H3F3JwGeZ3QBqvlYYQ82cqr2QYQ3W++lzLeckSfz3CUmNi/
- qXtj8k80yXlXeKZUnzQIetVLxzQUbiMzr4H8hS9RdDP+P+Slm8czlCGsUCDZuZGEvD8a
- NaeQn2wjClCdkd3zQlTyIfpvXUlbsYDRCjim6hPU4UfsqaJoj44fgoC6Z2O9H5cdTiol
- 5uzZbgJYB57EgvzEBNqH9HUnqW40PzvSpBJdZZokPEJP/cvr9eH21Ggb/DlNJySbJoCE
- x5Nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698372783; x=1698977583;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Fy7XD9G8ktzl46q2JOhT7omaHLBCxT6cNNokO43bVKg=;
- b=iNj/fFp/CchF61jvpinT9BEi1YcH0q7pH6ep0UDpjHz9gNgPQGd8NHkt+/hu/qMD2p
- X6Lpjmbf/V5FaJVttfu53auOA5uZUQJM3icDWyQK0xT6KGojBll9nrJwr/rAvvRXRXY8
- CVZvWAx/ISSlq3Njn+j1YDJamfPKNDtwwGae/oddL9AUuh6gNX8UPItZk4RSuRA0GpPh
- OFBN1rQfIVA49ZpZb0S3Z06NwhPQn2PDtDx/dSpgaWNdM2RlBxqecZod3jGiZx/Yw5iv
- Ofq8u6Gv+fCTlJaG6Mw7z62AFiZfDpk2YWd23qgF7Ou0kn+ANbWjvLlwtzBwA4bzbvCG
- skSQ==
-X-Gm-Message-State: AOJu0YwAfTXWLG+LKv34tLijMOIsAidM2dYme0wunL7veBBdKBm0X1q8
- nwL8kcJnpmlS4UxkjzEpgF+oebXahOvubx5IkF+AUWs9
-X-Google-Smtp-Source: AGHT+IGrHEIpO3gcK7G0GfBdjZH0U2BI8Awuj3Gzyf/+AEOhGWhzNHRuKCVmvF0168c5cmgdMpBfu5Jd6OXMEb3zw+k=
-X-Received: by 2002:a17:90a:bf07:b0:27d:1df4:26f3 with SMTP id
- c7-20020a17090abf0700b0027d1df426f3mr1234542pjs.15.1698372783358; Thu, 26 Oct
- 2023 19:13:03 -0700 (PDT)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LBDSNI/6oqZ6fG2WWALJFxTLU7+OHOPUZaYpOtFH3OKw5wQthuK47wvlX1mH2Nk7Mqx/EvcCF38kY1dX6ijRE9nCG+FCEO3nytqUPtH0Ymsax5hJejn2nSWl+ygRvUyedqye0BXYLvXTw/aQZV6cGMwXkMHdNNcmuxfir73IqSW5yLX4iUFlkDflqXHIVEwQ6W98Ewmvp64bHFr9n4gyOfk7YJNelToUg5+Iv2jdsFeo6BpoAaFrYUhQtaa7Z1VMHmtBqty7coWAgxV2QESaqlQH4XtkvidTL06RQI9/HZ/ADJiJi8UTk3vH1/pCjLiXq7r82lIfBeZSK1bKtCPbjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=anQ8CVZhJtXMm5vbSHCZnYYIe80oLEgcFCTTcLuS1uI=;
+ b=IAsCZ/EkXP0e018Zicj4fooPaNMacbOMaMri8Sphr4Fr6Lcwy96dwPjqkDKEZ2pgXDJ3rl/h+vbn/HavvfMlyVi3Q2Q9HC4Rd6LrhQjl9WWyy4/gBAdsyGjymw8tp2B6e5L+bQSe8nAZPZDq6W+5/Tm2S8ZCjd7aeJFXJ8Eb4sFy0p1XivpTubW5yBuuVWGaNEdgXGlu3CYp/4Csrnb5C17In6OT7tADyOEW6dzCqTtsgoCTgYk41sLACDcptVX/KT9yS/RvSEoAQjUttZQQLh0ye1Ce7i77YyYubkaTaErHXgXL8SpFSgwlrwshqBWdyWKuJ2u9E/MoYHPcLbkQJQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=anQ8CVZhJtXMm5vbSHCZnYYIe80oLEgcFCTTcLuS1uI=;
+ b=CwEiNSkFWBnX9Iq08NPqzKvHBX2lZFcmmWBQ+Z9EiMnednTPAqq1N+f42vi6VRkJFxC/mWfqp1XDjK7MIBVekVQNLrb2633YdDRPFxprpkw4IMpudUux6/c3hlXEsPjK4uiQIb7a/B1ot4gJMTEXJd3WcOxKeKftOWqjUgCM4bI=
+Received: from SA9P221CA0012.NAMP221.PROD.OUTLOOK.COM (2603:10b6:806:25::17)
+ by SA0PR12MB4462.namprd12.prod.outlook.com (2603:10b6:806:95::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.22; Fri, 27 Oct
+ 2023 03:04:56 +0000
+Received: from SA2PEPF00001509.namprd04.prod.outlook.com
+ (2603:10b6:806:25:cafe::9) by SA9P221CA0012.outlook.office365.com
+ (2603:10b6:806:25::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.34 via Frontend
+ Transport; Fri, 27 Oct 2023 03:04:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6933.15 via Frontend Transport; Fri, 27 Oct 2023 03:04:55 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Thu, 26 Oct
+ 2023 22:04:54 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32 via Frontend
+ Transport; Thu, 26 Oct 2023 22:04:53 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH] arm64: versal-net: enable CONFIG_MMC_SDHCI_ADMA
+Date: Fri, 27 Oct 2023 08:34:46 +0530
+Message-ID: <20231027030446.4009-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20231025231311.8701-1-aford173@gmail.com>
- <20231025231311.8701-3-aford173@gmail.com>
- <917ce30e-d737-4881-92ec-4da29e1cb8ad@denx.de>
-In-Reply-To: <917ce30e-d737-4881-92ec-4da29e1cb8ad@denx.de>
-From: Adam Ford <aford173@gmail.com>
-Date: Thu, 26 Oct 2023 21:12:52 -0500
-Message-ID: <CAHCN7xL9S8QxUL96L2+j5GOV_9Ka1D7=J-ROVbjF2HYuHYXmxg@mail.gmail.com>
-Subject: Re: [PATCH 3/3] arm: rmobile: rzg2_beacon: Auto select Linux device
- tree by SoC
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|SA0PR12MB4462:EE_
+X-MS-Office365-Filtering-Correlation-Id: c61c9c52-fa03-41bc-33e5-08dbd6997f19
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ZebdAMRiOoVFF9KWtbn4mh8rBe8+9vfXygDMLL7mG+08OmORU6QHAYnNC7B/eG9PzsgDPMI2XQS2NkxIt9uFaS0m3dGwHK5AmBtmiTimPgB/fZErpC5uHAbkNPaihzbqGQ3+RiIGzscNAP8D1g71Fe+jWWDa3DUSrjC1cwxoEwWUODPvH7P9Hp0rItqFEYrRlUawti9H7c7bm0/4dY76RClqE/ucOL1HEB1LRRcRPPjVKGpS4RcPXYEmta4F/0XptF7Oab4Jf5dZagKX4NZSmoKgE64aKgM9AbjsRACWmGq1MDXA+4eD+eQn4LMyzpfdSnlq5HC+wfUDKUROTOiljoQbJKQ3FYRH/74yowzuRaoRn1Fe2pbfiaHNslLkGOGtW5PDHjtzIYvw2eIBFr4OPd+BF1YlL/dQLkhgc1zk4d9NTCrcKLr0idgvoooU3ikzedYBfzWOBZGcF+ToO43XTX1SjBSjWeFXLVF/MDMDl4PlhX7oMw3UNaLqbTixjwLOfrp/3w8IeKVySzgLsZvV69XwM4ly8IA2v92ylDlv2Rn3X8lqQi0zXdOjJ8rcGQ8ikxb9H1qLki+6xp4GHsAHdBdi8tUngBjD0LDSQZfBaVY6n27dagsSRHs+nXoa16ndB4Y3r3tYEyS4oKrwfAbSZrNUrdy5hAUITVkuMu7LWSkGCtux/o0PHGc9lIIzq9NZQUhM+kHCZsLQ+YuuH2g7fO8RFtq2UfUlPK56LhnTXcZxAsYGmVc40xkg4r/6rfA6Jd/sLvF1Xk+DtsaPsHoAXw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(346002)(396003)(39860400002)(376002)(230922051799003)(82310400011)(64100799003)(451199024)(186009)(1800799009)(36840700001)(46966006)(40470700004)(36756003)(40480700001)(41300700001)(5660300002)(8676002)(8936002)(40460700003)(2906002)(86362001)(4744005)(4326008)(6666004)(26005)(478600001)(426003)(356005)(316002)(107886003)(81166007)(336012)(82740400003)(1076003)(54906003)(2616005)(6916009)(36860700001)(47076005)(70206006)(70586007)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2023 03:04:55.2505 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c61c9c52-fa03-41bc-33e5-08dbd6997f19
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4462
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,18 +117,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 26, 2023 at 8:44=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> On 10/26/23 01:13, Adam Ford wrote:
-> > There is a function inside the board file to autodetect which device
-> > tree is needed by U-Boot to properly load its own device tree, but
-> > it currently defaults to always loading RZ/G2M for Linux.  This is
-> > not correct for other SoC variants.  Add board_late_init function
-> > to query the SoC name and use that to determine which device tree
-> > is loaded for booting Linux.
->
-> Can't this be scripted in environment instead ?
+The Standard Host Controller Interface (SDHCI) specification version
+3.00 adds support for Advanced DMA (ADMA) for both 64 and 32 bit
+widths of DMA. This significantly improves read and write throughput.
 
-Do you have a recommendation for how to read the SoC type from a script?
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ configs/xilinx_versal_net_virt_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-adam
+diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+index ccc9431ca8..0553ac6b17 100644
+--- a/configs/xilinx_versal_net_virt_defconfig
++++ b/configs/xilinx_versal_net_virt_defconfig
+@@ -85,6 +85,7 @@ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_MMC_UHS_SUPPORT=y
+ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_ZYNQ=y
+ CONFIG_ZYNQ_SDHCI_MIN_FREQ=100000
+ CONFIG_MTD=y
+-- 
+2.17.1
+
