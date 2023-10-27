@@ -4,54 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D580C25B47
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 06:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 576B1C25B6E
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 06:49:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F9E087646;
-	Fri, 27 Oct 2023 08:49:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C0B1487631;
+	Fri, 27 Oct 2023 08:49:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698389353;
-	bh=u30p7cfwWzr0EpEqanJOW7J8ni/UTM1zg7Ut7JE+5Oc=;
+	s=phobos-20191101; t=1698389381;
+	bh=HwZKa736O/Ysi+brIN3NIlIIfYV6hBUEws/leTU2aXc=;
 	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=bJZnJcwT/Fo70aT95AMHIMLvYs2A1tJreNFuwfFbejnCqd0FGrU5j5/hTz9nyfxLE
-	 gtLsUsDDb60aCqxmUoYfAW4b/cjpBTeS7NZt0SE50XLfphtfpaXNVw1rQTvcOBbYOT
-	 iNzVsLkGqXajeJkrKH9GbjnDMXQJ9oegxZWxGY21/kmK2QLyIusslRwT7JR47imj09
-	 hJFLdHsAs5U/PZcfYLL824VYPe78ujcigk1dU0V+qK78+uIoYeN9aqDlF8IpjAdBFG
-	 LIftHq08sHOVB0Mjn3s072gLDEaJb/aqkjFTAeQEv4+AZK7I3Gs2g//mj1dx4dR59V
-	 CN2AdHFHV3bWw==
+	b=x37GW0M2f2x4AIZi9gBjAVHhP1B0pPhrBGvUQppu/X8Qlt3wt06U1dZ4VZM9cxtfa
+	 k0NQp7peU06E5JKxaw5IQb39wk4LY9xQY9Lk2baNSK7Uxn1VaYnOrQUxSWGL2pGtR8
+	 9gAJ7NtP6Net4TPIoQexD3Vtb07YL4ObCZA1F0Dq5eJmoepxXCEXgpB2l4bo8svTa0
+	 hX1mB+I3QfNqCS3atzvGok2gK/IH/SyPEMkOmDYLUl34Dd0cAm+1rwKargXhKq0OU8
+	 s6G2ph9MOYh8nVUBojenTcNlwZXhXsRoNRnkZ8wSsYbANuUL5/jIRm/ru+g9Vzvayu
+	 XgnY+eIs7uLhw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44506876B7; Fri, 27 Oct 2023 08:49:11 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 5587C876C5; Fri, 27 Oct 2023 08:49:41 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6ADD86D05
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 08:49:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83F1387673
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 08:49:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SGtYY6Sylz9sS6;
- Fri, 27 Oct 2023 08:49:05 +0200 (CEST)
-Message-ID: <9556319f-39a7-474e-8f9b-02bac32af37a@denx.de>
-Date: Fri, 27 Oct 2023 08:49:05 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4SGtZ958tpz9sRp;
+ Fri, 27 Oct 2023 08:49:37 +0200 (CEST)
+Message-ID: <a7fd6eed-2e17-4e03-b5b8-c0ac19be715a@denx.de>
+Date: Fri, 27 Oct 2023 08:49:37 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: kirkwood: Enable bootstd for Pogo V4 board
+Subject: Re: [PATCH v2 1/2] arm: mvebu: allow additional 4096 offset for
+ bootable mmc image
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20231024231709.21861-1-mibodhi@gmail.com>
- <f497642b-ae68-4dbc-b817-14b18a614272@denx.de>
-In-Reply-To: <f497642b-ae68-4dbc-b817-14b18a614272@denx.de>
+To: Josua Mayer <josua@solid-run.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, kabel@kernel.org
+References: <20231025082254.31630-1-josua@solid-run.com>
+ <20231025082254.31630-2-josua@solid-run.com>
+ <4ec814af-f3be-4539-9942-ead6a060ae56@denx.de>
+In-Reply-To: <4ec814af-f3be-4539-9942-ead6a060ae56@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4SGtZ958tpz9sRp
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,11 +73,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/26/23 09:08, Stefan Roese wrote:
-> On 10/25/23 01:17, Tony Dinh wrote:
->> Enable bootstd for Pogo V4 board, and remove distroboot.
+On 10/26/23 09:10, Stefan Roese wrote:
+> On 10/25/23 10:22, Josua Mayer wrote:
+>> Disarm the error message forcing u-boot/spl image to be located at
+>> sector 0 on eMMC data-partition and microSD.
+>> Offset 0 makes sense on eMMC boot partitions only, data partition must
+>> use 4096 to avoid conflicting with MBR.
 >>
->> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+>> Valid offsets when booting from microSD, reported by boot-rom v1.73:
+>>
+>> BootROM: Bad header at offset 00000200
+>> BootROM: Bad header at offset 00004400
+>> BootROM: Bad header at offset 00200000
+>> BootROM: Bad header at offset 00400000
+>> BootROM: Bad header at offset 00600000
+>> BootROM: Bad header at offset 00800000
+>> BootROM: Bad header at offset 00A00000
+>> BootROM: Bad header at offset 00C00000
+>> BootROM: Bad header at offset 00E00000
+>> BootROM: Bad header at offset 01000000
+>> BootROM: Bad header at offset 01200000
+>> BootROM: Bad header at offset 01400000
+>> BootROM: Bad header at offset 01600000
+>> BootROM: Bad header at offset 01800000
+>> BootROM: Bad header at offset 01A00000
+>> BootROM: Bad header at offset 01C00000
+>> BootROM: Bad header at offset 01E00000
+>> BootROM: Bad header at offset 02000000
+>> BootROM: Bad header at offset 02200000
+>> BootROM: Bad header at offset 02400000
+>> BootROM: Bad header at offset 02600000
+>> BootROM: Bad header at offset 02800000
+>> BootROM: Bad header at offset 02A00000
+>> BootROM: Bad header at offset 02C00000
+>> BootROM: Bad header at offset 02E00000
+>>
+>> Valid offsets when booting from eMMC:
+>>
+>> BootROM: Bad header at offset 00000000
+>> BootROM: Bad header at offset 00200000
+>> Switching BootPartitions.
+>> BootROM: Bad header at offset 00000000
+>> BootROM: Bad header at offset 00200000
+>>
+>> Fixes: 2226ca17348 ("arm: mvebu: Load U-Boot proper binary in SPL code 
+>> based on kwbimage header")
+>>
+>> Signed-off-by: Josua Mayer <josua@solid-run.com>
 > 
 > Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -81,88 +128,32 @@ Applied to u-boot-marvell/master
 Thanks,
 Stefan
 
+> 
 > Thanks,
 > Stefan
 > 
+> 
 >> ---
+>>   arch/arm/mach-mvebu/spl.c | 5 +++--
+>>   1 file changed, 3 insertions(+), 2 deletions(-)
 >>
->>   configs/pogo_v4_defconfig |  3 ++-
->>   include/configs/pogo_v4.h | 35 ++---------------------------------
->>   2 files changed, 4 insertions(+), 34 deletions(-)
->>
->> diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
->> index 2747c3c72d..ff6411d894 100644
->> --- a/configs/pogo_v4_defconfig
->> +++ b/configs/pogo_v4_defconfig
->> @@ -17,7 +17,8 @@ CONFIG_IDENT_STRING="\nPogoplug V4"
->>   CONFIG_SYS_LOAD_ADDR=0x800000
->>   CONFIG_PCI=y
->>   CONFIG_LTO=y
->> -CONFIG_DISTRO_DEFAULTS=y
->> +CONFIG_BOOTSTD_FULL=y
->> +CONFIG_BOOTSTD_DEFAULTS=y
->>   CONFIG_BOOTSTAGE=y
->>   CONFIG_SHOW_BOOT_PROGRESS=y
->>   CONFIG_BOOTDELAY=10
->> diff --git a/include/configs/pogo_v4.h b/include/configs/pogo_v4.h
->> index 3371579023..d5003538da 100644
->> --- a/include/configs/pogo_v4.h
->> +++ b/include/configs/pogo_v4.h
->> @@ -1,6 +1,6 @@
->>   /* SPDX-License-Identifier: GPL-2.0+ */
->>   /*
->> - * Copyright (C) 2014-2022 Tony Dinh <mibodhi@gmail.com>
->> + * Copyright (C) 2014-2023 Tony Dinh <mibodhi@gmail.com>
->>    *
->>    * Based on
->>    * Copyright (C) 2012
->> @@ -21,33 +21,6 @@
->>    */
->>   #include "mv-common.h"
->> -/* Include the common distro boot environment */
->> -#ifndef CONFIG_SPL_BUILD
->> -
->> -#ifdef CONFIG_MMC
->> -#define BOOT_TARGET_DEVICES_MMC(func) func(MMC, mmc, 0)
->> -#else
->> -#define BOOT_TARGET_DEVICES_MMC(func)
->> -#endif
->> -
->> -#ifdef CONFIG_SATA
->> -#define BOOT_TARGET_DEVICES_SATA(func) func(SATA, sata, 0)
->> -#else
->> -#define BOOT_TARGET_DEVICES_SATA(func)
->> -#endif
->> -
->> -#ifdef CONFIG_USB_STORAGE
->> -#define BOOT_TARGET_DEVICES_USB(func) func(USB, usb, 0)
->> -#else
->> -#define BOOT_TARGET_DEVICES_USB(func)
->> -#endif
->> -
->> -#define BOOT_TARGET_DEVICES(func) \
->> -    BOOT_TARGET_DEVICES_MMC(func) \
->> -    BOOT_TARGET_DEVICES_USB(func) \
->> -    BOOT_TARGET_DEVICES_SATA(func) \
->> -    func(DHCP, dhcp, na)
->> -
->>   #define KERNEL_ADDR_R    __stringify(0x800000)
->>   #define FDT_ADDR_R    __stringify(0x2c00000)
->>   #define RAMDISK_ADDR_R    __stringify(0x01100000)
->> @@ -59,14 +32,10 @@
->>       "ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
->>       "scriptaddr=" SCRIPT_ADDR_R "\0"
->> -#include <config_distro_bootcmd.h>
->> -
->>   #define CFG_EXTRA_ENV_SETTINGS \
->>       LOAD_ADDRESS_ENV_SETTINGS \
->>       "fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
->>       "mtdparts=" CONFIG_MTDPARTS_DEFAULT "\0" \
->> -    "console=ttyS0,115200\0" \
->> -    BOOTENV
->> -#endif /* CONFIG_SPL_BUILD */
->> +    "console=ttyS0,115200\0"
->>   #endif /* _CONFIG_POGO_V4_H */
+>> diff --git a/arch/arm/mach-mvebu/spl.c b/arch/arm/mach-mvebu/spl.c
+>> index eaaa68a8564..79f8877745b 100644
+>> --- a/arch/arm/mach-mvebu/spl.c
+>> +++ b/arch/arm/mach-mvebu/spl.c
+>> @@ -71,8 +71,9 @@
+>>   #error CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR must be set to 0
+>>   #endif
+>>   #if !defined(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET) || \
+>> -    CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET != 0
+>> -#error CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET must be set 
+>> to 0
+>> +    (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET != 0 && \
+>> +     CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET != 4096)
+>> +#error CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET must be set 
+>> to either 0 or 4096
+>>   #endif
+>>   #endif
 > 
 > Viele Grüße,
 > Stefan Roese
