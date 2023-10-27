@@ -4,77 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78CC6C25B67
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 08:28:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB2C8C25B67
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 08:38:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FD5C87C32;
-	Fri, 27 Oct 2023 10:26:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E886687C22;
+	Fri, 27 Oct 2023 10:38:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jd6N+esb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tkjbQpGB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F0CF87C0F; Fri, 27 Oct 2023 10:26:38 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id DEBE787C38; Fri, 27 Oct 2023 10:38:45 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E225487C1E
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 10:26:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CF2A87C0F
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 10:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5079f3f3d7aso2781352e87.1
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 01:26:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4083f613275so13550995e9.2
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 01:38:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698395195; x=1698999995; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MuP+NeT5fBOq9gbdSnsoSDDPVXC4jMlUOUFPzZOsIx8=;
- b=Jd6N+esbJufzhzCODjRSj2ywFkL7mdrZCrAxcf1F35+XJ9Qth8AuoL0vhDZRo+RZ8P
- IKf5CSg/R4L78AqWgUPkVheXfUL5CPJ+ZCKLn86omqYFaTpist3Tr/vS/e8yKtpGIOUI
- v+j9/icUv95d70qkFJADKdvvtqJVFHAZO6081GHopE5WPXcX0O6Xnl4xN2kJaa2qkwtl
- +BdHFCCQSpOYfeL0EgCLlGr6pOR1ALQtwmFhcB2CM4X+DE2hjuhbTwTQBjzBeTW+afh0
- sVA8hxDis81Zy/IePdSrXG4QdhADfEmWyxhFUELi/qiASmqYwS3da2MRD0EmDn6It5oZ
- hrzQ==
+ d=linaro.org; s=google; t=1698395923; x=1699000723; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=IfGOZLfZwEtsIgcao11L0wN/Yh9wDY5bsZIxCjKawl4=;
+ b=tkjbQpGBX3uzVQJ0Mce6btsXJObdbia1uhmPx2xSLk/O8Z9aJjAKluGrsG3u0oGdiM
+ i/zXnpagRaw8Jnuqc2GK0AWMHKg9ty9sZXABEQLnQ7WkWJq9i4Donj7UjYHDkGwoaOum
+ WttNGtuyQD3dsR2+v9sPUTzvPeCnnWTXlSvZp6RiT8rM2qZa1UdZW/XxEmqtrR3asCFS
+ oH+MyQkovpmAZt4YIOlKmeG/CT9kWfy/kzbJaMya+UsDL8PI0ESaXYVbeLSJpo+2KON+
+ FF1L74OXwGw3rl+WAy5nYrsouKBJFt7FJD7vL212Hk7WREO/80QZ7caDuPVYw3yBRdMH
+ VDXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698395195; x=1698999995;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MuP+NeT5fBOq9gbdSnsoSDDPVXC4jMlUOUFPzZOsIx8=;
- b=KIuSJzzE/FvVO3PsdDiknXPcea76lzw/3FLlwaqSgqpyPocQmhbeBikg+KYAoOzuLJ
- 935cU1GPjkfFPTOYbPiFG+1nBge4fIP3KSUdNySpvEzJQjyqX4vzSdci5qG2SxAT8Uzf
- 3FyM3i3cq6yHh8QCgYpiMdrbv8DZcFMfLc0HiusMNs4DojNlTlRVHDl7MpWl51/iPHhH
- bNppYh+ruxK/Z1x6Y6WT/7KVSzyEBJmHJLKYrptv3evQ6bll6B908E+uMrwOxPzsZsv+
- Vhc5/tYiwqm+ccDjLVarLz4JLfXgN6TpMpTwRpZlXXDE0WzN3rEwLj05FyEJi0D4Vc6i
- 8+Hg==
-X-Gm-Message-State: AOJu0YyJraOZLexbUguCCdT6qHp4tAGi/yVqyDl3vtvD5FooxxyWmVSf
- Pgn5LL/pNoQg8RXGtfv2rS4=
-X-Google-Smtp-Source: AGHT+IGOlifAZz4NJuB4mwfq1X6UoTQQEUiju/4FQRVntgws52/WxF1tImP9gNmpfiBNJZ95xYwaqg==
-X-Received: by 2002:a05:6512:3101:b0:502:a46e:257a with SMTP id
- n1-20020a056512310100b00502a46e257amr1017476lfb.56.1698395195021; 
- Fri, 27 Oct 2023 01:26:35 -0700 (PDT)
-Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- u15-20020ac248af000000b004fdd6b72bfdsm183445lfg.117.2023.10.27.01.26.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Oct 2023 01:26:34 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v9 8/8] power: regulator: tps65911: add regulator support
-Date: Fri, 27 Oct 2023 11:26:15 +0300
-Message-Id: <20231027082615.306943-9-clamor95@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231027082615.306943-1-clamor95@gmail.com>
-References: <20231027082615.306943-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1698395923; x=1699000723;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=IfGOZLfZwEtsIgcao11L0wN/Yh9wDY5bsZIxCjKawl4=;
+ b=FcuvqSBjmQGT0x/VeZD1jdBCbmRDj0pd9vUbhcd1zuN03vTzb57NJ9cmsZVkWfdbyn
+ plTyxSfA5nVnV7pQgKQxmGmrgeLQH4EYU6zMa0JZZizZPxWhJSzYUZJ1LiIv0veiui0r
+ b0M7EkxyxNdg4No6R6evu2/Yyw1MasBCpgeb7kmm0yqwnJ2HXpkPgWrrNwP1qLDOTvxA
+ YQlsWma5x5Fzg8bwvaR4vu8MazriVJFnUqsz2ZXQO9pOvzLZJnzy9fuZ3vccM+6pAZ9k
+ USRbYBkep8giVQOrorzxCld6xdhx8VrTAREI923qnBBujln5TOd+ztG0RUynx2GMrIlB
+ 3n1w==
+X-Gm-Message-State: AOJu0Ywfgz0E5C2bnyxoAhjfHHkBxHL0jcLZDSq7+F5WZc8e4fyloum3
+ Fn5XgwjXEhiVsGjeXxfAvnSA4w==
+X-Google-Smtp-Source: AGHT+IHp/83pUXHvxbt3bYziiHzIW4QQfhtSg1KIYBscK1TrTlpjH7Ea2+Fnd/vBGw9W8e5OdxwlYQ==
+X-Received: by 2002:a05:600c:444f:b0:406:535a:cfb4 with SMTP id
+ v15-20020a05600c444f00b00406535acfb4mr1813221wmn.1.1698395922930; 
+ Fri, 27 Oct 2023 01:38:42 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:ba29:8286:ad2b:d178?
+ ([2a01:e0a:982:cbb0:ba29:8286:ad2b:d178])
+ by smtp.gmail.com with ESMTPSA id
+ p8-20020a05600c358800b0040472ad9a3dsm1071567wmq.14.2023.10.27.01.38.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Oct 2023 01:38:42 -0700 (PDT)
+Message-ID: <4839b54f-1e61-4c46-b1ed-40a2ea0f9c08@linaro.org>
+Date: Fri, 27 Oct 2023 10:38:41 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-amlogic-20231027
+To: trini@konsulko.com
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,458 +112,102 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The driver provides regulator set/get voltage enable/disable
-functions for TI TPS5911 PMIC.
+Hi Tom,
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- drivers/power/regulator/Kconfig              |  11 +
- drivers/power/regulator/Makefile             |   1 +
- drivers/power/regulator/tps65911_regulator.c | 395 +++++++++++++++++++
- 3 files changed, 407 insertions(+)
- create mode 100644 drivers/power/regulator/tps65911_regulator.c
+A late PR to:
+- fix environment saving for new Android boot features on vim3*_android
+- Add SPIFC support for Amlogic A1
+- Add DFU RAM boot step when booting over USB, fixing full USB boot for G12/SM1 boards
 
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index 6454c54855..102ec7bc5f 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -346,6 +346,17 @@ config DM_REGULATOR_TPS65910
- 	regulator types of the TPS65910 (BUCK, BOOST and LDO). It implements
- 	the get/set api for value and enable.
- 
-+config DM_REGULATOR_TPS65911
-+	bool "Enable driver for TPS65911 PMIC regulators"
-+	depends on DM_PMIC_TPS65910
-+	---help---
-+	This config enables implementation of driver-model regulator
-+	uclass features for the TPS65911 PMIC. The driver supports Step-Down
-+	DC-DC Converters for Processor Cores (VDD1 and VDD2), Step-Down DC-DC
-+	Converter for I/O Power (VIO), Controller for External FETs (VDDCtrl)
-+	and LDO Voltage Regulators found in TPS65911 PMIC and implements
-+	get/set api for value and enable.
-+
- config DM_REGULATOR_TPS62360
- 	bool "Enable driver for TPS6236x Power Regulator"
- 	depends on DM_REGULATOR
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index 3ef55dc534..f79932d833 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -32,6 +32,7 @@ obj-$(CONFIG_$(SPL_)DM_REGULATOR_LP873X) += lp873x_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_LP87565) += lp87565_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_STM32_VREFBUF) += stm32-vrefbuf.o
- obj-$(CONFIG_DM_REGULATOR_TPS65910) += tps65910_regulator.o
-+obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS65911) += tps65911_regulator.o
- obj-$(CONFIG_DM_REGULATOR_TPS62360) += tps62360_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_TPS80031) += tps80031_regulator.o
- obj-$(CONFIG_$(SPL_)DM_REGULATOR_STPMIC1) += stpmic1.o
-diff --git a/drivers/power/regulator/tps65911_regulator.c b/drivers/power/regulator/tps65911_regulator.c
-new file mode 100644
-index 0000000000..2b5acdfcbb
---- /dev/null
-+++ b/drivers/power/regulator/tps65911_regulator.c
-@@ -0,0 +1,395 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#include <dm.h>
-+#include <power/pmic.h>
-+#include <power/regulator.h>
-+#include <power/tps65910_pmic.h>
-+
-+/* fist row is control registers, second is voltage registers */
-+static const char tps65911_vdd_reg[][TPS65911_VDD_NUM] = {
-+	{ TPS65911_REG_VDD1, TPS65911_REG_VDD2,
-+	  TPS65911_REG_VDDCTRL, TPS65911_REG_VIO },
-+	{ TPS65911_REG_VDD1_OP, TPS65911_REG_VDD2_OP,
-+	  TPS65911_REG_VDDCTRL_OP, 0x00 },
-+};
-+
-+static const char tps65911_ldo_reg[TPS65911_LDO_NUM] = {
-+	TPS65911_REG_LDO1, TPS65911_REG_LDO2, TPS65911_REG_LDO3,
-+	TPS65911_REG_LDO4, TPS65911_REG_LDO5, TPS65911_REG_LDO6,
-+	TPS65911_REG_LDO7, TPS65911_REG_LDO8
-+};
-+
-+static int tps65911_regulator_enable(struct udevice *dev, int op, bool *enable)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->ctrl_reg;
-+	int val, ret;
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		if (val & TPS65910_SUPPLY_STATE_ON)
-+			*enable = true;
-+		else
-+			*enable = false;
-+
-+		return 0;
-+	} else if (op == PMIC_OP_SET) {
-+		val &= ~TPS65910_SUPPLY_STATE_MASK;
-+
-+		if (*enable)
-+			val |= TPS65910_SUPPLY_STATE_ON;
-+
-+		ret = pmic_reg_write(dev->parent, adr, val);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int tps65911_get_enable(struct udevice *dev)
-+{
-+	bool enable = false;
-+	int ret;
-+
-+	ret = tps65911_regulator_enable(dev, PMIC_OP_GET, &enable);
-+	if (ret)
-+		return ret;
-+
-+	return enable;
-+}
-+
-+static int tps65911_set_enable(struct udevice *dev, bool enable)
-+{
-+	return tps65911_regulator_enable(dev, PMIC_OP_SET, &enable);
-+}
-+
-+/**
-+ * tps65911_vdd_volt2hex() - convert voltage in uV into
-+ *			     applicable to register hex value
-+ *
-+ * @uV:		voltage in uV
-+ *
-+ * Return: voltage in hex on success, -ve on failure
-+ */
-+static int tps65911_vdd_volt2hex(int uV)
-+{
-+	if (uV > TPS65911_VDD_VOLT_MAX)
-+		return -EINVAL;
-+
-+	if (uV < TPS65911_VDD_VOLT_MIN)
-+		uV = TPS65911_VDD_VOLT_MIN;
-+
-+	return (uV - TPS65911_VDD_VOLT_BASE) / 12500;
-+}
-+
-+/**
-+ * tps65911_vdd_hex2volt() - convert register hex value into
-+ *			     actual voltage in uV
-+ *
-+ * @hex:	hex value of register
-+ *
-+ * Return: voltage in uV on success, -ve on failure
-+ */
-+static int tps65911_vdd_hex2volt(int hex)
-+{
-+	if (hex > TPS65910_VDD_SEL_MAX)
-+		return -EINVAL;
-+
-+	if (hex < TPS65910_VDD_SEL_MIN)
-+		hex = TPS65910_VDD_SEL_MIN;
-+
-+	return TPS65911_VDD_VOLT_BASE + hex * 12500;
-+}
-+
-+static int tps65911_vio_range[4] = {
-+	1500000, 1800000, 2500000, 3300000
-+};
-+
-+static int tps65911_vio_val(struct udevice *dev, int op, int *uV)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->volt_reg;
-+	int i, val;
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		*uV = 0;
-+
-+		val &= TPS65910_SEL_MASK;
-+
-+		*uV = tps65911_vio_range[val >> 2];
-+
-+		return 0;
-+	}
-+
-+	val &= ~TPS65910_SEL_MASK;
-+
-+	for (i = 0; i < ARRAY_SIZE(tps65911_vio_range); i++)
-+		if (*uV <= tps65911_vio_range[i])
-+			break;
-+
-+	return pmic_reg_write(dev->parent, adr, val | i << 2);
-+}
-+
-+static int tps65911_vdd_val(struct udevice *dev, int op, int *uV)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->volt_reg;
-+	int val, ret;
-+
-+	/* in case vdd is vio */
-+	if (!adr)
-+		return tps65911_vio_val(dev, op, uV);
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		*uV = 0;
-+
-+		ret = tps65911_vdd_hex2volt(val);
-+		if (ret < 0)
-+			return ret;
-+
-+		*uV = ret;
-+		return 0;
-+	}
-+
-+	val = tps65911_vdd_volt2hex(*uV);
-+	if (val < 0)
-+		return val;
-+
-+	return pmic_reg_write(dev->parent, adr, val);
-+}
-+
-+static int tps65911_vdd_probe(struct udevice *dev)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+
-+	uc_pdata->type = REGULATOR_TYPE_BUCK;
-+
-+	/* check for vddctrl and vddio cases */
-+	if (!strcmp("vddctrl", dev->name)) {
-+		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][2];
-+		uc_pdata->volt_reg = tps65911_vdd_reg[1][2];
-+		return 0;
-+	}
-+
-+	if (!strcmp("vddio", dev->name)) {
-+		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][3];
-+		uc_pdata->volt_reg = tps65911_vdd_reg[1][3];
-+		return 0;
-+	}
-+
-+	if (dev->driver_data > 0) {
-+		u8 idx = dev->driver_data - 1;
-+
-+		uc_pdata->ctrl_reg = tps65911_vdd_reg[0][idx];
-+		uc_pdata->volt_reg = tps65911_vdd_reg[1][idx];
-+	}
-+
-+	return 0;
-+}
-+
-+static int vdd_get_value(struct udevice *dev)
-+{
-+	int uV;
-+	int ret;
-+
-+	ret = tps65911_vdd_val(dev, PMIC_OP_GET, &uV);
-+	if (ret)
-+		return ret;
-+
-+	return uV;
-+}
-+
-+static int vdd_set_value(struct udevice *dev, int uV)
-+{
-+	return tps65911_vdd_val(dev, PMIC_OP_SET, &uV);
-+}
-+
-+static const struct dm_regulator_ops tps65911_vdd_ops = {
-+	.get_value  = vdd_get_value,
-+	.set_value  = vdd_set_value,
-+	.get_enable = tps65911_get_enable,
-+	.set_enable = tps65911_set_enable,
-+};
-+
-+U_BOOT_DRIVER(tps65911_vdd) = {
-+	.name = TPS65911_VDD_DRIVER,
-+	.id = UCLASS_REGULATOR,
-+	.ops = &tps65911_vdd_ops,
-+	.probe = tps65911_vdd_probe,
-+};
-+
-+/**
-+ * tps65911_ldo_volt2hex() - convert voltage in uV into
-+ *			     applicable to register hex value
-+ *
-+ * @idx:	regulator index
-+ * @uV:		voltage in uV
-+ *
-+ * Return: voltage in hex on success, -ve on failure
-+ */
-+static int tps65911_ldo_volt2hex(int idx, int uV)
-+{
-+	int step;
-+
-+	if (uV > TPS65911_LDO_VOLT_MAX)
-+		return -EINVAL;
-+
-+	if (uV < TPS65911_LDO_VOLT_BASE)
-+		uV = TPS65911_LDO_VOLT_BASE;
-+
-+	switch (idx) {
-+	case 1:
-+	case 2:
-+	case 4:
-+		step = TPS65911_LDO124_VOLT_STEP;
-+		break;
-+	case 3:
-+	case 5:
-+	case 6:
-+	case 7:
-+	case 8:
-+		step = TPS65911_LDO358_VOLT_STEP;
-+		break;
-+	default:
-+		return -EINVAL;
-+	};
-+
-+	return ((uV - TPS65911_LDO_VOLT_BASE) / step) << 2;
-+}
-+
-+/**
-+ * tps65911_ldo_hex2volt() - convert register hex value into
-+ *			     actual voltage in uV
-+ *
-+ * @idx:	regulator index
-+ * @hex:	hex value of register
-+ *
-+ * Return: voltage in uV on success, -ve on failure
-+ */
-+static int tps65911_ldo_hex2volt(int idx, int hex)
-+{
-+	int step;
-+
-+	switch (idx) {
-+	case 1:
-+	case 2:
-+	case 4:
-+		if (hex > TPS65911_LDO124_VOLT_MAX_HEX)
-+			return -EINVAL;
-+
-+		step = TPS65911_LDO124_VOLT_STEP;
-+		break;
-+	case 3:
-+	case 5:
-+	case 6:
-+	case 7:
-+	case 8:
-+		if (hex > TPS65911_LDO358_VOLT_MAX_HEX)
-+			return -EINVAL;
-+
-+		if (hex < TPS65911_LDO358_VOLT_MIN_HEX)
-+			hex = TPS65911_LDO358_VOLT_MIN_HEX;
-+
-+		step = TPS65911_LDO358_VOLT_STEP;
-+		break;
-+	default:
-+		return -EINVAL;
-+	};
-+
-+	return TPS65911_LDO_VOLT_BASE + hex * step;
-+}
-+
-+static int tps65911_ldo_val(struct udevice *dev, int op, int *uV)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u32 adr = uc_pdata->ctrl_reg;
-+	int idx = dev->driver_data;
-+	int val, hex, ret;
-+
-+	val = pmic_reg_read(dev->parent, adr);
-+	if (val < 0)
-+		return val;
-+
-+	if (op == PMIC_OP_GET) {
-+		*uV = 0;
-+		val &= TPS65911_LDO_SEL_MASK;
-+
-+		ret = tps65911_ldo_hex2volt(idx, val >> 2);
-+		if (ret < 0)
-+			return ret;
-+
-+		*uV = ret;
-+		return 0;
-+	}
-+
-+	hex = tps65911_ldo_volt2hex(idx, *uV);
-+	if (hex < 0)
-+		return hex;
-+
-+	val &= ~TPS65911_LDO_SEL_MASK;
-+
-+	return pmic_reg_write(dev->parent, adr, val | hex);
-+}
-+
-+static int tps65911_ldo_probe(struct udevice *dev)
-+{
-+	struct dm_regulator_uclass_plat *uc_pdata =
-+					dev_get_uclass_plat(dev);
-+	u8 idx = dev->driver_data - 1;
-+
-+	uc_pdata->type = REGULATOR_TYPE_LDO;
-+	uc_pdata->ctrl_reg = tps65911_ldo_reg[idx];
-+
-+	return 0;
-+}
-+
-+static int ldo_get_value(struct udevice *dev)
-+{
-+	int uV;
-+	int ret;
-+
-+	ret = tps65911_ldo_val(dev, PMIC_OP_GET, &uV);
-+	if (ret)
-+		return ret;
-+
-+	return uV;
-+}
-+
-+static int ldo_set_value(struct udevice *dev, int uV)
-+{
-+	return tps65911_ldo_val(dev, PMIC_OP_SET, &uV);
-+}
-+
-+static const struct dm_regulator_ops tps65911_ldo_ops = {
-+	.get_value  = ldo_get_value,
-+	.set_value  = ldo_set_value,
-+	.get_enable = tps65911_get_enable,
-+	.set_enable = tps65911_set_enable,
-+};
-+
-+U_BOOT_DRIVER(tps65911_ldo) = {
-+	.name = TPS65911_LDO_DRIVER,
-+	.id = UCLASS_REGULATOR,
-+	.ops = &tps65911_ldo_ops,
-+	.probe = tps65911_ldo_probe,
-+};
--- 
-2.39.2
+The CI job is at https://source.denx.de/u-boot/custodians/u-boot-amlogic/pipelines/18322
 
+Thanks,
+Neil
+
+The following changes since commit fb428b61819444b9337075f49c72f326f5d12085:
+
+   Merge branch '2023-10-24-assorted-general-fixes-and-updates' (2023-10-24 19:12:21 -0400)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-20231027
+
+for you to fetch changes up to 892e04bc965400772e1b84e6450a7919deca0e0b:
+
+   ARM: amlogic: ad401: enable SPIFC (2023-10-26 17:56:58 +0200)
+
+----------------------------------------------------------------
+- Fix environment saving for new Android boot features on vim3*_android
+- Add SPIFC support for Amlogic A1
+- Add DFU RAM boot step when booting over USB
+
+----------------------------------------------------------------
+Igor Prusov (2):
+       spi: add support for Amlogic A1 SPI Flash Controller
+       ARM: amlogic: ad401: enable SPIFC
+
+Mattijs Korpershoek (1):
+       configs: khadas-vim3*_android: fix environment saving
+
+Neil Armstrong (4):
+       ARM: meson: enable FIT with LEGACY_IMAGE_FORMAT on all configs
+       configs: meson64: declare addr out of EXTRA_ENV_SETTINGS
+       configs: meson64: add alternate USB DFU boot target
+       ARM: meson: enable USB DFU + RAM on Amlogic boards with USB Gadget
+
+  configs/ad401_defconfig                   |   1 +
+  configs/bananapi-cm4-cm4io_defconfig      |   6 +
+  configs/bananapi-m2-pro_defconfig         |   6 +
+  configs/bananapi-m2s_defconfig            |   6 +
+  configs/bananapi-m5_defconfig             |   6 +
+  configs/beelink-gsking-x_defconfig        |   6 +
+  configs/beelink-gt1-ultimate_defconfig    |   6 +
+  configs/beelink-gtking_defconfig          |   6 +
+  configs/beelink-gtkingpro_defconfig       |   6 +
+  configs/jethub_j100_defconfig             |   6 +
+  configs/jethub_j80_defconfig              |   6 +
+  configs/khadas-vim2_defconfig             |   6 +
+  configs/khadas-vim3_android_ab_defconfig  |   8 +
+  configs/khadas-vim3_android_defconfig     |   8 +
+  configs/khadas-vim3_defconfig             |   6 +
+  configs/khadas-vim3l_android_ab_defconfig |   8 +
+  configs/khadas-vim3l_android_defconfig    |   8 +
+  configs/khadas-vim3l_defconfig            |   6 +
+  configs/khadas-vim_defconfig              |   6 +
+  configs/libretech-ac_defconfig            |   6 +
+  configs/libretech-cc_defconfig            |   6 +
+  configs/libretech-cc_v2_defconfig         |   6 +
+  configs/libretech-s905d-pc_defconfig      |   6 +
+  configs/libretech-s912-pc_defconfig       |   6 +
+  configs/nanopi-k2_defconfig               |   4 +
+  configs/odroid-c2_defconfig               |   4 +
+  configs/odroid-c4_defconfig               |   6 +
+  configs/odroid-go-ultra_defconfig         |   6 +
+  configs/odroid-hc4_defconfig              |   6 +
+  configs/odroid-n2_defconfig               |   6 +
+  configs/odroid-n2l_defconfig              |   6 +
+  configs/p200_defconfig                    |   4 +
+  configs/p201_defconfig                    |   4 +
+  configs/p212_defconfig                    |   4 +
+  configs/radxa-zero2_defconfig             |   6 +
+  configs/radxa-zero_defconfig              |   6 +
+  configs/s400_defconfig                    |   6 +
+  configs/sei510_defconfig                  |   6 +
+  configs/sei610_defconfig                  |   6 +
+  configs/u200_defconfig                    |   6 +
+  configs/videostrong-kii-pro_defconfig     |   4 +
+  configs/wetek-core2_defconfig             |   6 +
+  configs/wetek-hub_defconfig               |   4 +
+  configs/wetek-play2_defconfig             |   4 +
+  drivers/spi/Kconfig                       |   9 +
+  drivers/spi/Makefile                      |   1 +
+  drivers/spi/meson_spifc_a1.c              | 384 ++++++++++++++++++++++++++++++
+  include/configs/meson64.h                 |  49 +++-
+  48 files changed, 687 insertions(+), 7 deletions(-)
+  create mode 100644 drivers/spi/meson_spifc_a1.c
