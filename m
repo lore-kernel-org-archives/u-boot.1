@@ -4,103 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1929AC25B48
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 03:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FEB9C25B47
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 04:46:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D64E48762A;
-	Fri, 27 Oct 2023 05:05:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B7F38768C;
+	Fri, 27 Oct 2023 06:46:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CwEiNSkF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CUMhfOSC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74EF98767C; Fri, 27 Oct 2023 05:05:04 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::623])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4DA868768F; Fri, 27 Oct 2023 06:46:32 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F6148762A
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 05:05:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5651B87689
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 06:46:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LBDSNI/6oqZ6fG2WWALJFxTLU7+OHOPUZaYpOtFH3OKw5wQthuK47wvlX1mH2Nk7Mqx/EvcCF38kY1dX6ijRE9nCG+FCEO3nytqUPtH0Ymsax5hJejn2nSWl+ygRvUyedqye0BXYLvXTw/aQZV6cGMwXkMHdNNcmuxfir73IqSW5yLX4iUFlkDflqXHIVEwQ6W98Ewmvp64bHFr9n4gyOfk7YJNelToUg5+Iv2jdsFeo6BpoAaFrYUhQtaa7Z1VMHmtBqty7coWAgxV2QESaqlQH4XtkvidTL06RQI9/HZ/ADJiJi8UTk3vH1/pCjLiXq7r82lIfBeZSK1bKtCPbjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=anQ8CVZhJtXMm5vbSHCZnYYIe80oLEgcFCTTcLuS1uI=;
- b=IAsCZ/EkXP0e018Zicj4fooPaNMacbOMaMri8Sphr4Fr6Lcwy96dwPjqkDKEZ2pgXDJ3rl/h+vbn/HavvfMlyVi3Q2Q9HC4Rd6LrhQjl9WWyy4/gBAdsyGjymw8tp2B6e5L+bQSe8nAZPZDq6W+5/Tm2S8ZCjd7aeJFXJ8Eb4sFy0p1XivpTubW5yBuuVWGaNEdgXGlu3CYp/4Csrnb5C17In6OT7tADyOEW6dzCqTtsgoCTgYk41sLACDcptVX/KT9yS/RvSEoAQjUttZQQLh0ye1Ce7i77YyYubkaTaErHXgXL8SpFSgwlrwshqBWdyWKuJ2u9E/MoYHPcLbkQJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=anQ8CVZhJtXMm5vbSHCZnYYIe80oLEgcFCTTcLuS1uI=;
- b=CwEiNSkFWBnX9Iq08NPqzKvHBX2lZFcmmWBQ+Z9EiMnednTPAqq1N+f42vi6VRkJFxC/mWfqp1XDjK7MIBVekVQNLrb2633YdDRPFxprpkw4IMpudUux6/c3hlXEsPjK4uiQIb7a/B1ot4gJMTEXJd3WcOxKeKftOWqjUgCM4bI=
-Received: from SA9P221CA0012.NAMP221.PROD.OUTLOOK.COM (2603:10b6:806:25::17)
- by SA0PR12MB4462.namprd12.prod.outlook.com (2603:10b6:806:95::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.22; Fri, 27 Oct
- 2023 03:04:56 +0000
-Received: from SA2PEPF00001509.namprd04.prod.outlook.com
- (2603:10b6:806:25:cafe::9) by SA9P221CA0012.outlook.office365.com
- (2603:10b6:806:25::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.34 via Frontend
- Transport; Fri, 27 Oct 2023 03:04:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SA2PEPF00001509.mail.protection.outlook.com (10.167.242.41) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6933.15 via Frontend Transport; Fri, 27 Oct 2023 03:04:55 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Thu, 26 Oct
- 2023 22:04:54 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32 via Frontend
- Transport; Thu, 26 Oct 2023 22:04:53 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH] arm64: versal-net: enable CONFIG_MMC_SDHCI_ADMA
-Date: Fri, 27 Oct 2023 08:34:46 +0530
-Message-ID: <20231027030446.4009-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50802148be9so2027941e87.2
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 21:46:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698381989; x=1698986789; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RbeCPqOG/R8X44n8SNG+nxMuSRYR4t/KSGbs6VGOx8U=;
+ b=CUMhfOSCXmh2O9CJyJlBz9YIPurGtkH7BC+RXtZjgqBgzptd4HIpTXP51dNcxko3yE
+ RZLB3K1nAfeYER+ZFYBYpYJVvnbb9yPjpgzvYmV/tcwtInESn3egAmE8yzylVpvgcnGv
+ 5rTYIqQnIBD+aMJ8+fWPqmTADDAhe8obsb3avyltTwkpLJn00+VmJj3HhrCzWm+ji83o
+ cwM57IShnH7n8fRmWsIOe4F2mCBuuffkZ+rfmqduogbC552z53+BV2e3pxrPR53sUh6K
+ eMZB299a+Qb7KX5qe/6DBj+yNZ3yHVcXAKARaOPRflfqR5v3eVnsPCiZwWYHCm9efo3J
+ h1Ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698381989; x=1698986789;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RbeCPqOG/R8X44n8SNG+nxMuSRYR4t/KSGbs6VGOx8U=;
+ b=TOq92IYgiHgqGA/oKaTdhjaSRcaSDoLVsnczJIgHXOm1B39cY47TaK+mar4xWa0C15
+ HL3qvwl90FkouVvL2VDK4nj7e0ixABuFGtYXDihEX5dBrXagkClD0l8TLAO5TC4Mp9JQ
+ zs9k0JzF/w90w0DaspBmLxMfrTlCR+PET3r35L90ncj3Vy/udopfeWjquX61rNgmPnU4
+ FpjfH2tkX5grlxOYm7kxvBND0+F7Po75r1kZpzoRBRaZWKEH+jIWRDrjwo6/n2IcYA9t
+ 4HAVqzNNyKUyOU91hYZlkkp2vz8LNQGejkBBzgbeBF0qOlpsSNiutJk+7p9O4LidGuOo
+ 1/Jw==
+X-Gm-Message-State: AOJu0Yw7l4UWzlFhs3Yc8ySattnIX5VfLz+tiWbjOgRMiovU+PbxF5v/
+ BKd5GHUpwfRsLEkc/ZZKJYnvnY4z2T8P/f+laVewUg==
+X-Google-Smtp-Source: AGHT+IG12uRzKRDhXF0VUHqKu9vrP46WJR0mB9BU8BGsBOSfjP0hg9F7apivPa0Eq0RmnnyhHFYnmGQffmtxzoxuGfg=
+X-Received: by 2002:a19:8c0f:0:b0:503:1783:d5a9 with SMTP id
+ o15-20020a198c0f000000b005031783d5a9mr792168lfd.3.1698381989512; Thu, 26 Oct
+ 2023 21:46:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA2PEPF00001509:EE_|SA0PR12MB4462:EE_
-X-MS-Office365-Filtering-Correlation-Id: c61c9c52-fa03-41bc-33e5-08dbd6997f19
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ZebdAMRiOoVFF9KWtbn4mh8rBe8+9vfXygDMLL7mG+08OmORU6QHAYnNC7B/eG9PzsgDPMI2XQS2NkxIt9uFaS0m3dGwHK5AmBtmiTimPgB/fZErpC5uHAbkNPaihzbqGQ3+RiIGzscNAP8D1g71Fe+jWWDa3DUSrjC1cwxoEwWUODPvH7P9Hp0rItqFEYrRlUawti9H7c7bm0/4dY76RClqE/ucOL1HEB1LRRcRPPjVKGpS4RcPXYEmta4F/0XptF7Oab4Jf5dZagKX4NZSmoKgE64aKgM9AbjsRACWmGq1MDXA+4eD+eQn4LMyzpfdSnlq5HC+wfUDKUROTOiljoQbJKQ3FYRH/74yowzuRaoRn1Fe2pbfiaHNslLkGOGtW5PDHjtzIYvw2eIBFr4OPd+BF1YlL/dQLkhgc1zk4d9NTCrcKLr0idgvoooU3ikzedYBfzWOBZGcF+ToO43XTX1SjBSjWeFXLVF/MDMDl4PlhX7oMw3UNaLqbTixjwLOfrp/3w8IeKVySzgLsZvV69XwM4ly8IA2v92ylDlv2Rn3X8lqQi0zXdOjJ8rcGQ8ikxb9H1qLki+6xp4GHsAHdBdi8tUngBjD0LDSQZfBaVY6n27dagsSRHs+nXoa16ndB4Y3r3tYEyS4oKrwfAbSZrNUrdy5hAUITVkuMu7LWSkGCtux/o0PHGc9lIIzq9NZQUhM+kHCZsLQ+YuuH2g7fO8RFtq2UfUlPK56LhnTXcZxAsYGmVc40xkg4r/6rfA6Jd/sLvF1Xk+DtsaPsHoAXw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(346002)(396003)(39860400002)(376002)(230922051799003)(82310400011)(64100799003)(451199024)(186009)(1800799009)(36840700001)(46966006)(40470700004)(36756003)(40480700001)(41300700001)(5660300002)(8676002)(8936002)(40460700003)(2906002)(86362001)(4744005)(4326008)(6666004)(26005)(478600001)(426003)(356005)(316002)(107886003)(81166007)(336012)(82740400003)(1076003)(54906003)(2616005)(6916009)(36860700001)(47076005)(70206006)(70586007)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2023 03:04:55.2505 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c61c9c52-fa03-41bc-33e5-08dbd6997f19
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF00001509.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4462
+References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
+ <20231025065103.3101666-2-masahisa.kojima@linaro.org>
+ <CAC_iWjJ2nNjLeJe201Nx1Uay2xqMgesZdzzsUOO8bpUe3_VXvw@mail.gmail.com>
+ <CADQ0-X94TOt4xTaGPz7Bir2RWzMr8e_SB-cSAX0=PHvCp8Zceg@mail.gmail.com>
+In-Reply-To: <CADQ0-X94TOt4xTaGPz7Bir2RWzMr8e_SB-cSAX0=PHvCp8Zceg@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 27 Oct 2023 07:45:53 +0300
+Message-ID: <CAC_iWj+52HRgqHy7i6j8dRhssaJNdW25+Uk5_xGzjK0jgJdMOg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] board: developerbox: remove obsolete NOR flash layout
+ definition
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, jaswinder.singh@linaro.org, ryosuke.saito@linaro.org,
+ sugimoto.yoshio@socionext.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,27 +89,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Standard Host Controller Interface (SDHCI) specification version
-3.00 adds support for Advanced DMA (ADMA) for both 64 and 32 bit
-widths of DMA. This significantly improves read and write throughput.
+On Fri, 27 Oct 2023 at 03:21, Masahisa Kojima
+<masahisa.kojima@linaro.org> wrote:
+>
+> Hi Ilias,
+>
+> On Fri, 27 Oct 2023 at 03:58, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > On Wed, 25 Oct 2023 at 09:52, Masahisa Kojima
+> > <masahisa.kojima@linaro.org> wrote:
+> > >
+> > > There are two kinds of NOR flash layout for the Developerbox.
+> > > Capsule update for the old layout is no longer available since
+> > > it has small capacity for secure world images and can not
+> > > house the TA such as fTPM.
+> > > This commit removes the definition related to the obsolete
+> > > NOR flash layout for the UEFI capsule update.
+> > >
+> > > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > > Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
+> > > ---
+> > >  include/configs/synquacer.h | 19 -------------------
+> > >  1 file changed, 19 deletions(-)
+> > >
+> > > diff --git a/include/configs/synquacer.h b/include/configs/synquacer.h
+> > > index cd7359c2f8..e36e63e81e 100644
+> > > --- a/include/configs/synquacer.h
+> > > +++ b/include/configs/synquacer.h
+> > > @@ -40,20 +40,6 @@
+> > >
+> > >  /* Since U-Boot 64bit PCIe support is limited, disable 64bit MMIO support */
+> > >
+> > > -#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
+> > > -#define DEFAULT_DFU_ALT_INFO
+> > > -#else
+> > > -#define DEFAULT_DFU_ALT_INFO "dfu_alt_info="                           \
+> > > -                       "mtd nor1=u-boot.bin raw 200000 100000;"        \
+> > > -                       "fip.bin raw 180000 78000;"                     \
+> > > -                       "optee.bin raw 500000 100000\0"
+> > > -#endif
+> >
+> > We don't need any of these because we use the .dfu_alt_string to
+> > generate those right?
+>
+> You are correct. We can generate dfu_alt_info from .dfu_string.
+>
+> Thanks,
+> Masahisa Kojima
+>
+> >
+> > > -
+> > > -/* GUIDs for capsule updatable firmware images */
+> > > -#define DEVELOPERBOX_UBOOT_IMAGE_GUID \
+> > > -       EFI_GUID(0x53a92e83, 0x4ef4, 0x473a, 0x8b, 0x0d, \
+> > > -                0xb5, 0xd8, 0xc7, 0xb2, 0xd6, 0x00)
+> > > -
+> > >  #ifdef CONFIG_FWU_MULTI_BANK_UPDATE
+> > >  #define DEVELOPERBOX_FIP_IMAGE_GUID \
+> > >         EFI_GUID(0x7d6dc310, 0x52ca, 0x43b8, 0xb7, 0xb9, \
+> > > @@ -64,10 +50,6 @@
+> > >                  0x33, 0xe0, 0xb9, 0x16, 0xf3, 0x98)
+> > >  #endif
+> > >
+> > > -#define DEVELOPERBOX_OPTEE_IMAGE_GUID \
+> > > -       EFI_GUID(0xc1b629f1, 0xce0e, 0x4894, 0x82, 0xbf, \
+> > > -                0xf0, 0xa3, 0x83, 0x87, 0xe6, 0x30)
+> > > -
+> > >  /* Distro boot settings */
+> > >  #ifdef CONFIG_CMD_USB
+> > >  #define BOOT_TARGET_DEVICE_USB(func)   func(USB, usb, 0)
+> > > @@ -107,7 +89,6 @@
+> > >         "ramdisk_addr_r=0xa0000000\0"           \
+> > >         "scriptaddr=0x88000000\0"               \
+> > >         "pxefile_addr_r=0x88100000\0"           \
+> > > -       DEFAULT_DFU_ALT_INFO                    \
+> > >         BOOTENV
+> > >
+> > >  #endif /* __CONFIG_H */
+> > > --
+> > > 2.34.1
+> > >
+> > Thanks
+> > /Ilias
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- configs/xilinx_versal_net_virt_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index ccc9431ca8..0553ac6b17 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -85,6 +85,7 @@ CONFIG_MMC_IO_VOLTAGE=y
- CONFIG_MMC_UHS_SUPPORT=y
- CONFIG_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_ZYNQ=y
- CONFIG_ZYNQ_SDHCI_MIN_FREQ=100000
- CONFIG_MTD=y
--- 
-2.17.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
