@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D0E0C25B47
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 10:33:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D63FC25B47
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 10:41:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA24487656;
-	Fri, 27 Oct 2023 12:33:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 690BA876FA;
+	Fri, 27 Oct 2023 12:41:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ILhYi38m";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vuts1EFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B84487662; Fri, 27 Oct 2023 12:33:14 +0200 (CEST)
-Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
- [IPv6:2607:f8b0:4864:20::e31])
+ id CC53B876FA; Fri, 27 Oct 2023 12:41:44 +0200 (CEST)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F0278766D
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 12:33:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E60908762A
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 12:41:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe31.google.com with SMTP id
- ada2fe7eead31-457bfdc1cdaso872781137.2
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 03:33:11 -0700 (PDT)
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-457c2b6713fso1966049137.1
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 03:41:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698402790; x=1699007590; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698403300; x=1699008100; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Xr9swp1OM7Y9LPtQrY+CBlBG83TrbH76Tq6dZU9LZhU=;
- b=ILhYi38mF0Da7DFw1qF+OHzvp8gD7Hu1Z2pT6ISY2FnTdp3TEz2j9c5cqmZdsO/S3D
- toLwMHS33ePewBWL0I4UxzMgYCYVQBPHUgnbjuTChy7cNjiXF9f2pJfFnDTD/fJ/E+5y
- sRDgyAdulCzVPQkNdpR0x5fxXkmONZhPYsWDcDMKym2MZTubFK7MpmbMcL72oUzoTHbI
- BgJJVIouDTWIg7aIpLsps73xxC9ovuWq26C7YP9vBM7soH2B4wok+kViZa9gKn98oZ0x
- qAvOma6oo3DKRtEIq0T0TCGlS3DXOvOJZzXez8ozkYs2AZqBAzkE1mkCinXJkSTxbOij
- W3YQ==
+ bh=53l2sQvKKLs7uG6qFHwdNkfnY3mPnQtWse1gKKgvymk=;
+ b=Vuts1EFVKypKRa8LdEmOpGAJgrNIdhIr5NOVyd5HbdUfZvhvpdMa3xHRP+hNacrLTo
+ B9QFFZGUhx+Akj7AeOmc3DL/nG9JeEAUNrl5lBkciaU3+1z94FW+2JWy7aQxpAZVIxCN
+ NFSnk25lQEWm9Ny1DogqJ+JG49rLVHbe5w51l9JuPS8WroyRlz6FNd3xjqg9RU3ih7GI
+ X1KtXNaJtcXl9bvqBVMoa/dtDOWn3Tu87iqWhZPQJQ+iJ9jzvifZLKisNExEDGjEUkiT
+ plsihwC1hO1Pza0KXxfiAOfJOJYVYc/m4r8CKs2XdqdYTpHrN9fFZkbaBuDYmaO6vOlA
+ 0xIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698402790; x=1699007590;
+ d=1e100.net; s=20230601; t=1698403300; x=1699008100;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Xr9swp1OM7Y9LPtQrY+CBlBG83TrbH76Tq6dZU9LZhU=;
- b=CXraoPbE/3EdLKbhvdYu2ebYuPHc0f+STlB0vfnUPmVk2/rtf7J5lmaVMpEBXJt1fl
- Bcx1Nsu7hO66mSA05sflh1JWyquirCQYGkZ4VEAm1PlBWdFl4q2tPjxJ4hfCGwxPrspx
- zbYK3Z5UfpV5zY2RxJ5/G4f0rGOJ3bKwBzbu4Qipg2WffyJDxSlY9d/utICBr6IEAeUU
- FPv3NvALNZcyeqfIJmr6sDNEjlr4PncFYsp6Ke1kamxBPBGJoDpxLMTbVs8RHtaS1Gtv
- 0LNnfccfm4+iIs5CgLZqMU/oGMq01CkB1yswMyQYeQ4V/5ZwDlE7YUhr5QgC0S7OS/qG
- pJPg==
-X-Gm-Message-State: AOJu0YziLhGSaw+fr5QJLdg4Th6RQpV2GHh2stsfffQHe8Bu/2uDwB9V
- 1ebJfA1a3kYba4QT1KYrbfd7LJ3c1kN8M6bTnxPjQA==
-X-Google-Smtp-Source: AGHT+IH5A6erpWP5QXTNY4otUueuJOBARhTA+CFagaa/8UW4vlMGk9AHpUYm8J/OxfaeceZGGeELtd0QkMq5coihFZY=
-X-Received: by 2002:a67:e15d:0:b0:450:f5cb:c3ce with SMTP id
- o29-20020a67e15d000000b00450f5cbc3cemr2271307vsl.17.1698402789600; Fri, 27
- Oct 2023 03:33:09 -0700 (PDT)
+ bh=53l2sQvKKLs7uG6qFHwdNkfnY3mPnQtWse1gKKgvymk=;
+ b=Bx66rZ0Al1foGlb3gYg6Eqcoc2JAx8aVsOi6vpjzaCw0senzaf6AAVospz2MT/JHWi
+ vUnmfFps0lRCUwSs5g6JsVuNz/F6ektQ21y6xgY5xs087x+ift3oidAMCEUyIKs1XNXO
+ WM/1SaGA/By5FVuZ1oG3AZeTRa8j7L7D9wvb0Zu2BBJwzgbzkiCbLDg8MgNckzhTnpys
+ MpsbrIJNMmziNrt5mNpaYC93EbTkXesJPaL3Xo7Aa9V4TKeb3BdqkYI7lzghLQxrjNew
+ 6C4nKzHEBhZVasPv2x0N0fZ6HYuZxjHoGvk2mTGkQBREVPjbURgHTI+qKXdHfWxiHopi
+ d1cA==
+X-Gm-Message-State: AOJu0YzOWAJDl7oOPE9xsIshuh8aKZpRiWLSyS3cURmt3kK1bDBSGOvd
+ 4vr7At6IE0r1cSFWcN+CPEEGvj+sYHLIEFO49udyww==
+X-Google-Smtp-Source: AGHT+IFs03ptmcp53q4EvFkUZ5Hpwm8CCc67N+IkGTbcOsdRTeaerBoahZwM0gX4GpAGLC1xNXmzaUsQTaS5ri9iVtQ=
+X-Received: by 2002:a05:6102:5344:b0:452:6478:3e24 with SMTP id
+ bq4-20020a056102534400b0045264783e24mr3458915vsb.12.1698403300442; Fri, 27
+ Oct 2023 03:41:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
- <20231024-b4-qcom-clk-v1-4-9d96359b9a82@linaro.org>
-In-Reply-To: <20231024-b4-qcom-clk-v1-4-9d96359b9a82@linaro.org>
+ <20231024-b4-qcom-clk-v1-5-9d96359b9a82@linaro.org>
+In-Reply-To: <20231024-b4-qcom-clk-v1-5-9d96359b9a82@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 27 Oct 2023 16:02:58 +0530
-Message-ID: <CAFA6WYNN6OCEbZW0=-FyRS7aj4csPKDs-WpHbdgYZ0Mrm+Zzog@mail.gmail.com>
-Subject: Re: [PATCH 4/8] clk/qcom: handle resets and clocks in one device
+Date: Fri, 27 Oct 2023 16:11:29 +0530
+Message-ID: <CAFA6WYNWREZDSnbJDAWVws2CwrzWeMUszR6JRT4pZ4Q2kzUZuQ@mail.gmail.com>
+Subject: Re: [PATCH 5/8] clk/qcom: sdm845: add register map for simple gate
+ clocks
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>, 
@@ -74,8 +75,7 @@ Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Luka Kovacic <luka.kovacic@sartura.hr>, 
  Luka Perkov <luka.perkov@sartura.hr>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- u-boot@lists.denx.de, Konrad Dybcio <konrad.dybcio@linaro.org>
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,1003 +95,281 @@ X-Virus-Status: Clean
 
 On Wed, 25 Oct 2023 at 01:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> From: Konrad Dybcio <konrad.dybcio@linaro.org>
+> Many gate clocks can be enabled with a single register write, add support
+> for defining these simple gate clocks and add the ones found on SDM845.
 >
-> Qualcomm's clock controller blocks are actually do much more than it
-
-s/do/doing/
-
-> says on the tin.. They provide clocks, resets and power domains.
-> Currently, U-Boot required one to spawn 2 separate devices for
-
-s/required/requires/
-
-> controlling clocks and resets, both spanning the same register space.
-> Refactor the code to make it work with just a single DT node, making
-> it compatible with upstream Linux bindings and dropping the dedicated
-> reset driver in favour of including it in the clock driver.
+> While we're here, inline clk_init_uart() into msm_set_rate().
 >
-> While at it, take the liberty of slowly renaming 'msm' and 'snapdragon'
-> to 'qcom' and drop unused compatibles.
->
-> Heavily inspired by Renesas code for a similar hw block.
->
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@linaro.org>
-> [caleb: moved drivers to clk/qcom, added reset driver and adjusted bind
-> logic]
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/Kconfig                 |   1 +
->  arch/arm/dts/qcom-ipq4019.dtsi   |  14 +--
->  arch/arm/dts/qcs404-evb.dts      |  19 ++--
->  drivers/clk/qcom/clock-apq8016.c |  23 ++++-
->  drivers/clk/qcom/clock-apq8096.c |  22 ++++-
->  drivers/clk/qcom/clock-ipq4019.c |  95 +++++++++++++++++++
->  drivers/clk/qcom/clock-qcom.c    | 122 ++++++++++++++++++++----
->  drivers/clk/qcom/clock-qcom.h    |  22 +++--
->  drivers/clk/qcom/clock-qcs404.c  |  54 ++++++++++-
->  drivers/clk/qcom/clock-sdm845.c  |  55 ++++++++++-
->  drivers/reset/Kconfig            |   7 --
->  drivers/reset/Makefile           |   1 -
->  drivers/reset/reset-qcom.c       | 195 ---------------------------------------
->  13 files changed, 370 insertions(+), 260 deletions(-)
+>  .../mach-snapdragon/include/mach/sysmap-sdm845.h   |   3 +
+>  drivers/clk/qcom/clock-qcom.h                      |  22 +++
+>  drivers/clk/qcom/clock-sdm845.c                    | 163 +++++++++++++++++++--
+>  3 files changed, 176 insertions(+), 12 deletions(-)
 >
-
-Overall the code looks more scalable after this patch but I have some
-comments below.
-
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 5aaf7e5e32af..faccfaf720a8 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1067,6 +1067,7 @@ config ARCH_SNAPDRAGON
->         select DM
->         select DM_GPIO
->         select DM_SERIAL
-> +       select DM_RESET
->         select GPIO_EXTRA_HEADER
->         select MSM_SMEM
->         select OF_CONTROL
-> diff --git a/arch/arm/dts/qcom-ipq4019.dtsi b/arch/arm/dts/qcom-ipq4019.dtsi
-> index 0850ae56e9a8..f9489e42ea2c 100644
-> --- a/arch/arm/dts/qcom-ipq4019.dtsi
-> +++ b/arch/arm/dts/qcom-ipq4019.dtsi
-> @@ -66,14 +66,6 @@
->                         status = "disabled";
->                 };
+> diff --git a/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h b/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h
+> index 7165985bcd1e..a0010d71594e 100644
+> --- a/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h
+> +++ b/arch/arm/mach-snapdragon/include/mach/sysmap-sdm845.h
+> @@ -39,4 +39,7 @@
+>  #define SE9_UART_APPS_N                (0x18154)
+>  #define SE9_UART_APPS_D                (0x18158)
 >
-> -               reset: gcc-reset@1800000 {
-> -                       compatible = "qcom,gcc-reset-ipq4019";
-> -                       reg = <0x1800000 0x60000>;
-> -                       #clock-cells = <1>;
-> -                       #reset-cells = <1>;
-> -                       bootph-all;
-> -               };
-> -
->                 soc_gpios: pinctrl@1000000 {
->                         compatible = "qcom,ipq4019-pinctrl";
->                         reg = <0x1000000 0x300000>;
-> @@ -136,7 +128,7 @@
->                         #phy-cells = <0>;
->                         reg = <0x9a000 0x800>;
->                         reg-names = "phy_base";
-> -                       resets = <&reset USB3_UNIPHY_PHY_ARES>;
-> +                       resets = <&gcc USB3_UNIPHY_PHY_ARES>;
->                         reset-names = "por_rst";
->                         status = "disabled";
->                 };
-> @@ -146,7 +138,7 @@
->                         #phy-cells = <0>;
->                         reg = <0xa6000 0x40>;
->                         reg-names = "phy_base";
-> -                       resets = <&reset USB3_HSPHY_POR_ARES>, <&reset USB3_HSPHY_S_ARES>;
-> +                       resets = <&gcc USB3_HSPHY_POR_ARES>, <&gcc USB3_HSPHY_S_ARES>;
->                         reset-names = "por_rst", "srif_rst";
->                         status = "disabled";
->                 };
-> @@ -179,7 +171,7 @@
->                         #phy-cells = <0>;
->                         reg = <0xa8000 0x40>;
->                         reg-names = "phy_base";
-> -                       resets = <&reset USB2_HSPHY_POR_ARES>, <&reset USB2_HSPHY_S_ARES>;
-> +                       resets = <&gcc USB2_HSPHY_POR_ARES>, <&gcc USB2_HSPHY_S_ARES>;
->                         reset-names = "por_rst", "srif_rst";
->                         status = "disabled";
->                 };
-> diff --git a/arch/arm/dts/qcs404-evb.dts b/arch/arm/dts/qcs404-evb.dts
-> index 8d7893c11695..84224a8a3d39 100644
-> --- a/arch/arm/dts/qcs404-evb.dts
-> +++ b/arch/arm/dts/qcs404-evb.dts
-> @@ -208,11 +208,6 @@
->                         #address-cells = <0x1>;
->                         #size-cells = <0x0>;
->                         #clock-cells = <1>;
-> -               };
-> -
-> -               reset: gcc-reset@1800000 {
-> -                       compatible = "qcom,gcc-reset-qcs404";
-> -                       reg = <0x1800000 0x80000>;
->                         #reset-cells = <1>;
->                 };
->
-> @@ -245,8 +240,8 @@
->                         clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
->                                  <&gcc GCC_USB3_PHY_PIPE_CLK>;
->                         clock-names = "ahb", "pipe";
-> -                       resets = <&reset GCC_USB3_PHY_BCR>,
-> -                                <&reset GCC_USB3PHY_PHY_BCR>;
-> +                       resets = <&gcc GCC_USB3_PHY_BCR>,
-> +                                <&gcc GCC_USB3PHY_PHY_BCR>;
->                         reset-names = "com", "phy";
->                 };
->
-> @@ -257,8 +252,8 @@
->                         clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
->                                  <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
->                         clock-names = "ahb", "sleep";
-> -                       resets = <&reset GCC_USB_HS_PHY_CFG_AHB_BCR>,
-> -                                <&reset GCC_USB2A_PHY_BCR>;
-> +                       resets = <&gcc GCC_USB_HS_PHY_CFG_AHB_BCR>,
-> +                                <&gcc GCC_USB2A_PHY_BCR>;
->                         reset-names = "phy", "por";
->                 };
->
-> @@ -269,8 +264,8 @@
->                         clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
->                                  <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
->                         clock-names = "ahb", "sleep";
-> -                       resets = <&reset GCC_QUSB2_PHY_BCR>,
-> -                                <&reset GCC_USB2_HS_PHY_ONLY_BCR>;
-> +                       resets = <&gcc GCC_QUSB2_PHY_BCR>,
-> +                                <&gcc GCC_USB2_HS_PHY_ONLY_BCR>;
->                         reset-names = "phy", "por";
->                 };
->
-> @@ -335,7 +330,7 @@
->                                  <&gcc GCC_ETH_PTP_CLK>,
->                                  <&gcc GCC_ETH_RGMII_CLK>;
->
-> -                       resets = <&reset GCC_EMAC_BCR>;
-> +                       resets = <&gcc GCC_EMAC_BCR>;
->                         reset-names = "emac";
->
->                         snps,tso;
-> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> index 90f2a93d9ed5..e3b9b8c1b91b 100644
-> --- a/drivers/clk/qcom/clock-apq8016.c
-> +++ b/drivers/clk/qcom/clock-apq8016.c
-> @@ -13,6 +13,7 @@
->  #include <errno.h>
->  #include <asm/io.h>
->  #include <linux/bitops.h>
+> +#define USB30_SEC_GDSCR                (0x10004)
+> +#define USB30_PRIM_GDSCR       (0xf004)
 > +
->  #include "clock-qcom.h"
->
->  /* GPLL0 clock control registers */
-> @@ -49,7 +50,7 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
->  };
->
->  /* SDHCI */
-> -static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
-> +static int clk_init_sdc(struct qcom_cc_priv *priv, int slot, uint rate)
->  {
->         int div = 8; /* 100MHz default */
->
-> @@ -75,7 +76,7 @@ static const struct bcr_regs uart2_regs = {
->  };
->
->  /* UART: 115200 */
-> -static int clk_init_uart(struct msm_clk_priv *priv)
-> +static int clk_init_uart(struct qcom_cc_priv *priv)
->  {
->         /* Enable AHB clock */
->         clk_enable_vote_clk(priv->base, &gcc_blsp1_ahb_clk);
-> @@ -95,7 +96,7 @@ static int clk_init_uart(struct msm_clk_priv *priv)
->
->  ulong msm_set_rate(struct clk *clk, ulong rate)
->  {
-> -       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +       struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
->
->         switch (clk->id) {
->         case 0: /* SDC1 */
-> @@ -116,3 +117,19 @@ int msm_enable(struct clk *clk)
->  {
->         return 0;
->  }
-> +
-> +static const struct udevice_id gcc_apq8016_of_match[] = {
-> +       {
-> +               .compatible = "qcom,gcc-apq8016",
-> +               /* TODO: add reset map */
-> +       },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_apq8016) = {
-> +       .name           = "gcc_apq8016",
-> +       .id             = UCLASS_NOP,
-> +       .of_match       = gcc_apq8016_of_match,
-> +       .bind           = qcom_cc_bind,
-> +       .flags          = DM_FLAG_PRE_RELOC,
-> +};
-> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-> index d5388c69aefe..dc64d11ca979 100644
-> --- a/drivers/clk/qcom/clock-apq8096.c
-> +++ b/drivers/clk/qcom/clock-apq8096.c
-> @@ -41,7 +41,7 @@ static struct vote_clk gcc_blsp2_ahb_clk = {
->         .vote_bit = BIT(15),
->  };
->
-> -static int clk_init_sdc(struct msm_clk_priv *priv, uint rate)
-> +static int clk_init_sdc(struct qcom_cc_priv *priv, uint rate)
->  {
->         int div = 3;
->
-> @@ -62,7 +62,7 @@ static const struct bcr_regs uart2_regs = {
->         .D = BLSP2_UART2_APPS_D,
->  };
->
-> -static int clk_init_uart(struct msm_clk_priv *priv)
-> +static int clk_init_uart(struct qcom_cc_priv *priv)
->  {
->         /* Enable AHB clock */
->         clk_enable_vote_clk(priv->base, &gcc_blsp2_ahb_clk);
-> @@ -82,7 +82,7 @@ static int clk_init_uart(struct msm_clk_priv *priv)
->
->  ulong msm_set_rate(struct clk *clk, ulong rate)
->  {
-> -       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +       struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
->
->         switch (clk->id) {
->         case 0: /* SDC1 */
-> @@ -99,3 +99,19 @@ int msm_enable(struct clk *clk)
->  {
->         return 0;
->  }
-> +
-> +static const struct udevice_id gcc_apq8096_of_match[] = {
-> +       {
-> +               .compatible = "qcom,gcc-apq8096",
-> +               /* TODO: add reset map */
-> +       },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_apq8096) = {
-> +       .name           = "gcc_apq8096",
-> +       .id             = UCLASS_NOP,
-> +       .of_match       = gcc_apq8096_of_match,
-> +       .bind           = qcom_cc_bind,
-> +       .flags          = DM_FLAG_PRE_RELOC,
-> +};
-> diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
-> index 04c99964df15..6636af98132d 100644
-> --- a/drivers/clk/qcom/clock-ipq4019.c
-> +++ b/drivers/clk/qcom/clock-ipq4019.c
-> @@ -13,6 +13,7 @@
->  #include <dm.h>
->  #include <errno.h>
->  #include <dt-bindings/clock/qcom,ipq4019-gcc.h>
-> +#include <dt-bindings/reset/qcom,ipq4019-reset.h>
-
-With this unification, we should directly import qcom,gcc-ipq4019.h
-from Linux tree and use that instead of u-boot specific headers.
-
->
->  #include "clock-qcom.h"
->
-> @@ -49,3 +50,97 @@ int msm_enable(struct clk *clk)
->         }
->  }
->
-> +static const struct qcom_reset_map gcc_ipq4019_resets[] = {
-> +       [WIFI0_CPU_INIT_RESET] = { 0x1f008, 5 },
-> +       [WIFI0_RADIO_SRIF_RESET] = { 0x1f008, 4 },
-> +       [WIFI0_RADIO_WARM_RESET] = { 0x1f008, 3 },
-> +       [WIFI0_RADIO_COLD_RESET] = { 0x1f008, 2 },
-> +       [WIFI0_CORE_WARM_RESET] = { 0x1f008, 1 },
-> +       [WIFI0_CORE_COLD_RESET] = { 0x1f008, 0 },
-> +       [WIFI1_CPU_INIT_RESET] = { 0x20008, 5 },
-> +       [WIFI1_RADIO_SRIF_RESET] = { 0x20008, 4 },
-> +       [WIFI1_RADIO_WARM_RESET] = { 0x20008, 3 },
-> +       [WIFI1_RADIO_COLD_RESET] = { 0x20008, 2 },
-> +       [WIFI1_CORE_WARM_RESET] = { 0x20008, 1 },
-> +       [WIFI1_CORE_COLD_RESET] = { 0x20008, 0 },
-> +       [USB3_UNIPHY_PHY_ARES] = { 0x1e038, 5 },
-> +       [USB3_HSPHY_POR_ARES] = { 0x1e038, 4 },
-> +       [USB3_HSPHY_S_ARES] = { 0x1e038, 2 },
-> +       [USB2_HSPHY_POR_ARES] = { 0x1e01c, 4 },
-> +       [USB2_HSPHY_S_ARES] = { 0x1e01c, 2 },
-> +       [PCIE_PHY_AHB_ARES] = { 0x1d010, 11 },
-> +       [PCIE_AHB_ARES] = { 0x1d010, 10 },
-> +       [PCIE_PWR_ARES] = { 0x1d010, 9 },
-> +       [PCIE_PIPE_STICKY_ARES] = { 0x1d010, 8 },
-> +       [PCIE_AXI_M_STICKY_ARES] = { 0x1d010, 7 },
-> +       [PCIE_PHY_ARES] = { 0x1d010, 6 },
-> +       [PCIE_PARF_XPU_ARES] = { 0x1d010, 5 },
-> +       [PCIE_AXI_S_XPU_ARES] = { 0x1d010, 4 },
-> +       [PCIE_AXI_M_VMIDMT_ARES] = { 0x1d010, 3 },
-> +       [PCIE_PIPE_ARES] = { 0x1d010, 2 },
-> +       [PCIE_AXI_S_ARES] = { 0x1d010, 1 },
-> +       [PCIE_AXI_M_ARES] = { 0x1d010, 0 },
-> +       [ESS_RESET] = { 0x12008, 0},
-> +       [GCC_BLSP1_BCR] = {0x01000, 0},
-> +       [GCC_BLSP1_QUP1_BCR] = {0x02000, 0},
-> +       [GCC_BLSP1_UART1_BCR] = {0x02038, 0},
-> +       [GCC_BLSP1_QUP2_BCR] = {0x03008, 0},
-> +       [GCC_BLSP1_UART2_BCR] = {0x03028, 0},
-> +       [GCC_BIMC_BCR] = {0x04000, 0},
-> +       [GCC_TLMM_BCR] = {0x05000, 0},
-> +       [GCC_IMEM_BCR] = {0x0E000, 0},
-> +       [GCC_ESS_BCR] = {0x12008, 0},
-> +       [GCC_PRNG_BCR] = {0x13000, 0},
-> +       [GCC_BOOT_ROM_BCR] = {0x13008, 0},
-> +       [GCC_CRYPTO_BCR] = {0x16000, 0},
-> +       [GCC_SDCC1_BCR] = {0x18000, 0},
-> +       [GCC_SEC_CTRL_BCR] = {0x1A000, 0},
-> +       [GCC_AUDIO_BCR] = {0x1B008, 0},
-> +       [GCC_QPIC_BCR] = {0x1C000, 0},
-> +       [GCC_PCIE_BCR] = {0x1D000, 0},
-> +       [GCC_USB2_BCR] = {0x1E008, 0},
-> +       [GCC_USB2_PHY_BCR] = {0x1E018, 0},
-> +       [GCC_USB3_BCR] = {0x1E024, 0},
-> +       [GCC_USB3_PHY_BCR] = {0x1E034, 0},
-> +       [GCC_SYSTEM_NOC_BCR] = {0x21000, 0},
-> +       [GCC_PCNOC_BCR] = {0x2102C, 0},
-> +       [GCC_DCD_BCR] = {0x21038, 0},
-> +       [GCC_SNOC_BUS_TIMEOUT0_BCR] = {0x21064, 0},
-> +       [GCC_SNOC_BUS_TIMEOUT1_BCR] = {0x2106C, 0},
-> +       [GCC_SNOC_BUS_TIMEOUT2_BCR] = {0x21074, 0},
-> +       [GCC_SNOC_BUS_TIMEOUT3_BCR] = {0x2107C, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT0_BCR] = {0x21084, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT1_BCR] = {0x2108C, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT2_BCR] = {0x21094, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT3_BCR] = {0x2109C, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT4_BCR] = {0x210A4, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT5_BCR] = {0x210AC, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT6_BCR] = {0x210B4, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT7_BCR] = {0x210BC, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT8_BCR] = {0x210C4, 0},
-> +       [GCC_PCNOC_BUS_TIMEOUT9_BCR] = {0x210CC, 0},
-> +       [GCC_TCSR_BCR] = {0x22000, 0},
-> +       [GCC_MPM_BCR] = {0x24000, 0},
-> +       [GCC_SPDM_BCR] = {0x25000, 0},
-> +};
-> +
-> +static struct qcom_cc_data ipq4019_data = {
-> +       .resets = gcc_ipq4019_resets,
-> +       .num_resets = ARRAY_SIZE(gcc_ipq4019_resets),
-> +};
-> +
-> +static const struct udevice_id gcc_ipq4019_of_match[] = {
-> +       {
-> +               .compatible = "qcom,gcc-ipq4019",
-> +               .data = (ulong)&ipq4019_data,
-> +       },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_ipq4019) = {
-> +       .name           = "gcc_ipq4019",
-> +       .id             = UCLASS_NOP,
-> +       .of_match       = gcc_ipq4019_of_match,
-> +       .bind           = qcom_cc_bind,
-> +       .flags          = DM_FLAG_PRE_RELOC,
-> +};
-> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-> index 5667abeb89a4..b0416a05789d 100644
-> --- a/drivers/clk/qcom/clock-qcom.c
-> +++ b/drivers/clk/qcom/clock-qcom.c
-> @@ -1,8 +1,13 @@
-> -// SPDX-License-Identifier: BSD-3-Clause
-> +// SPDX-License-Identifier: BSD-3-Clause AND GPL-2.0
->  /*
-> - * Clock drivers for Qualcomm APQ8016, APQ8096
-> + * Clock and reset drivers for Qualcomm platforms Global Clock
-> + * Controller (GCC).
->   *
->   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> + * (C) Copyright 2020 Sartura Ltd. (reset driver)
-> + *     Author: Robert Marko <robert.marko@sartura.hr>
-> + * (C) Copyright 2022 Linaro Ltd. (reset driver)
-> + *     Author: Sumit Garg <sumit.garg@linaro.org>
->   *
->   * Based on Little Kernel driver, simplified
->   */
-> @@ -10,9 +15,13 @@
->  #include <common.h>
->  #include <clk-uclass.h>
->  #include <dm.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
->  #include <errno.h>
->  #include <asm/io.h>
->  #include <linux/bitops.h>
-> +#include <reset-uclass.h>
-> +
->  #include "clock-qcom.h"
->
->  /* CBCR register fields */
-> @@ -137,12 +146,15 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->
->  static int msm_clk_probe(struct udevice *dev)
-
-Renaming msm_* to qcom_* here too? I would prefer the rename to be a
-separate patch as it would make the review process easier.
-
--Sumit
-
->  {
-> -       struct msm_clk_priv *priv = dev_get_priv(dev);
-> +       struct qcom_cc_data *data = (struct qcom_cc_data *)dev_get_driver_data(dev);
-> +       struct qcom_cc_priv *priv = dev_get_priv(dev);
->
->         priv->base = dev_read_addr(dev);
->         if (priv->base == FDT_ADDR_T_NONE)
->                 return -EINVAL;
->
-> +       priv->data = data;
-> +
->         return 0;
->  }
->
-> @@ -161,21 +173,97 @@ static struct clk_ops msm_clk_ops = {
->         .enable = msm_clk_enable,
->  };
->
-> -static const struct udevice_id msm_clk_ids[] = {
-> -       { .compatible = "qcom,gcc-msm8916" },
-> -       { .compatible = "qcom,gcc-apq8016" },
-> -       { .compatible = "qcom,gcc-msm8996" },
-> -       { .compatible = "qcom,gcc-apq8096" },
-> -       { .compatible = "qcom,gcc-sdm845" },
-> -       { .compatible = "qcom,gcc-qcs404" },
-> -       { }
-> -};
-> -
-> -U_BOOT_DRIVER(clk_msm) = {
-> -       .name           = "clk_msm",
-> +U_BOOT_DRIVER(qcom_clk) = {
-> +       .name           = "qcom_clk",
->         .id             = UCLASS_CLK,
-> -       .of_match       = msm_clk_ids,
->         .ops            = &msm_clk_ops,
-> -       .priv_auto      = sizeof(struct msm_clk_priv),
-> +       .priv_auto      = sizeof(struct qcom_cc_priv),
->         .probe          = msm_clk_probe,
->  };
-> +
-> +int qcom_cc_bind(struct udevice *parent)
-> +{
-> +       struct qcom_cc_data *data = (struct qcom_cc_data *)dev_get_driver_data(parent);
-> +       struct udevice *clkdev, *rstdev;
-> +       struct driver *drv;
-> +       int ret;
-> +
-> +       /* Get a handle to the common clk handler */
-> +       drv = lists_driver_lookup_name("qcom_clk");
-> +       if (!drv)
-> +               return -ENOENT;
-> +
-> +       /* Register the clock controller */
-> +       ret = device_bind_with_driver_data(parent, drv, "qcom_clk", (ulong)data,
-> +                                          dev_ofnode(parent), &clkdev);
-> +       if (ret)
-> +               return ret;
-> +
-> +       /* Bail out early if resets are not specified for this platform */
-> +       if (!data->resets)
-> +               return ret;
-> +
-> +       /* Get a handle to the common reset handler */
-> +       drv = lists_driver_lookup_name("qcom_reset");
-> +       if (!drv)
-> +               return -ENOENT;
-> +
-> +       /* Register the reset controller */
-> +       ret = device_bind_with_driver_data(parent, drv, "qcom_reset", (ulong)data,
-> +                                          dev_ofnode(parent), &rstdev);
-> +       if (ret)
-> +               device_unbind(clkdev);
-> +
-> +       return ret;
-> +}
-> +
-> +static int qcom_reset_set(struct reset_ctl *rst, bool assert)
-> +{
-> +       struct qcom_cc_data *data = (struct qcom_cc_data *)dev_get_driver_data(rst->dev);
-> +       void __iomem *base = dev_get_priv(rst->dev);
-> +       const struct qcom_reset_map *map;
-> +       u32 value;
-> +
-> +       map = &data->resets[rst->id];
-> +
-> +       value = readl(base + map->reg);
-> +
-> +       if (assert)
-> +               value |= BIT(map->bit);
-> +       else
-> +               value &= ~BIT(map->bit);
-> +
-> +       writel(value, base + map->reg);
-> +
-> +       return 0;
-> +}
-> +
-> +static int qcom_reset_assert(struct reset_ctl *rst)
-> +{
-> +       return qcom_reset_set(rst, true);
-> +}
-> +
-> +static int qcom_reset_deassert(struct reset_ctl *rst)
-> +{
-> +       return qcom_reset_set(rst, false);
-> +}
-> +
-> +static const struct reset_ops qcom_reset_ops = {
-> +       .rst_assert = qcom_reset_assert,
-> +       .rst_deassert = qcom_reset_deassert,
-> +};
-> +
-> +static int qcom_reset_probe(struct udevice *dev)
-> +{
-> +       /* Set our priv pointer to the base address */
-> +       dev_set_priv(dev, (void *)dev_read_addr(dev));
-> +
-> +       return 0;
-> +}
-> +
-> +U_BOOT_DRIVER(qcom_reset) = {
-> +       .name = "qcom_reset",
-> +       .id = UCLASS_RESET,
-> +       .ops = &qcom_reset_ops,
-> +       .probe = qcom_reset_probe,
-> +};
+>  #endif
 > diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-> index c90bbefa5881..a77a94b6ea06 100644
+> index a77a94b6ea06..7b3bcf41f421 100644
 > --- a/drivers/clk/qcom/clock-qcom.h
 > +++ b/drivers/clk/qcom/clock-qcom.h
-> @@ -1,11 +1,9 @@
->  /* SPDX-License-Identifier: GPL-2.0+ */
->  /*
-> - * Qualcomm APQ8016, APQ8096, SDM845
-> - *
->   * (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@linaro.org>
->   */
-> -#ifndef _CLOCK_SNAPDRAGON_H
-> -#define _CLOCK_SNAPDRAGON_H
-> +#ifndef _CLOCK_QCOM_H
-> +#define _CLOCK_QCOM_H
->
->  #define CFG_CLK_SRC_CXO   (0 << 8)
->  #define CFG_CLK_SRC_GPLL0 (1 << 8)
-> @@ -32,10 +30,22 @@ struct bcr_regs {
+> @@ -30,6 +30,18 @@ struct bcr_regs {
 >         uintptr_t D;
 >  };
 >
-> -struct msm_clk_priv {
-> -       phys_addr_t base;
-> +struct qcom_reset_map {
-> +       unsigned int reg;
-> +       u8 bit;
+> +struct gate_clk {
+> +       uintptr_t reg;
+> +       u32 en_val;
+> +       const char *name;
+> +};
+> +
+> +#ifdef DEBUG
+> +#define GATE_CLK(clk, reg, val) [clk] = { reg, val, #clk }
+> +#else
+> +#define GATE_CLK(clk, reg, val) [clk] = { reg, val, NULL }
+> +#endif
+> +
+>  struct qcom_reset_map {
+>         unsigned int reg;
+>         u8 bit;
+> @@ -38,6 +50,8 @@ struct qcom_reset_map {
+>  struct qcom_cc_data {
+>         const struct qcom_reset_map     *resets;
+>         unsigned long                   num_resets;
+> +       const struct gate_clk           *clks;
+> +       unsigned long                   num_clks;
 >  };
 >
-> +struct qcom_cc_data {
-> +       const struct qcom_reset_map     *resets;
-> +       unsigned long                   num_resets;
-> +};
+>  struct qcom_cc_priv {
+> @@ -55,4 +69,12 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+>  void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
+>                       int source);
+>
+> +static inline void qcom_gate_clk_en(const struct qcom_cc_priv *priv, unsigned long id)
+> +{
+> +       if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0)
+> +               return;
 > +
-> +struct qcom_cc_priv {
-> +       phys_addr_t             base;
-> +       struct qcom_cc_data     *data;
-> +};
+> +       setbits_le32(priv->base + priv->data->clks[id].reg, priv->data->clks[id].en_val);
+> +}
 > +
-> +int qcom_cc_bind(struct udevice *parent);
->  void clk_enable_gpll0(phys_addr_t base, const struct pll_vote_clk *gpll0);
->  void clk_bcr_update(phys_addr_t apps_cmd_rgcr);
->  void clk_enable_cbc(phys_addr_t cbcr);
-> diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-> index 80218af73ef6..e622309b6747 100644
-> --- a/drivers/clk/qcom/clock-qcs404.c
-> +++ b/drivers/clk/qcom/clock-qcs404.c
-> @@ -11,9 +11,10 @@
+>  #endif
+> diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
+> index eab88a40c09d..ccad73b6ff15 100644
+> --- a/drivers/clk/qcom/clock-sdm845.c
+> +++ b/drivers/clk/qcom/clock-sdm845.c
+> @@ -11,6 +11,7 @@
+>  #include <common.h>
+>  #include <clk-uclass.h>
+>  #include <dm.h>
+> +#include <linux/delay.h>
 >  #include <errno.h>
 >  #include <asm/io.h>
 >  #include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,gcc-qcs404.h>
-> +
->  #include "clock-qcom.h"
->
-> -#include <dt-bindings/clock/qcom,gcc-qcs404.h>
->
->  /* GPLL0 clock control registers */
->  #define GPLL0_STATUS_ACTIVE BIT(31)
-> @@ -113,7 +114,7 @@ static const struct bcr_regs blsp1_qup4_i2c_apps_regs = {
->
->  ulong msm_set_rate(struct clk *clk, ulong rate)
->  {
-> -       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +       struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
->
->         switch (clk->id) {
->         case GCC_BLSP1_UART2_APPS_CLK:
-> @@ -158,7 +159,7 @@ ulong msm_set_rate(struct clk *clk, ulong rate)
->
->  int msm_enable(struct clk *clk)
->  {
-> -       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +       struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
->
->         switch (clk->id) {
->         case GCC_USB30_MASTER_CLK:
-> @@ -235,3 +236,50 @@ int msm_enable(struct clk *clk)
->
->         return 0;
->  }
-> +
-> +static const struct qcom_reset_map qcs404_gcc_resets[] = {
-> +       [GCC_GENI_IR_BCR] = { 0x0F000 },
-> +       [GCC_CDSP_RESTART] = { 0x18000 },
-> +       [GCC_USB_HS_BCR] = { 0x41000 },
-> +       [GCC_USB2_HS_PHY_ONLY_BCR] = { 0x41034 },
-> +       [GCC_QUSB2_PHY_BCR] = { 0x4103c },
-> +       [GCC_USB_HS_PHY_CFG_AHB_BCR] = { 0x0000c, 1 },
-> +       [GCC_USB2A_PHY_BCR] = { 0x0000c, 0 },
-> +       [GCC_USB3_PHY_BCR] = { 0x39004 },
-> +       [GCC_USB_30_BCR] = { 0x39000 },
-> +       [GCC_USB3PHY_PHY_BCR] = { 0x39008 },
-> +       [GCC_PCIE_0_BCR] = { 0x3e000 },
-> +       [GCC_PCIE_0_PHY_BCR] = { 0x3e004 },
-> +       [GCC_PCIE_0_LINK_DOWN_BCR] = { 0x3e038 },
-> +       [GCC_PCIEPHY_0_PHY_BCR] = { 0x3e03c },
-> +       [GCC_PCIE_0_AXI_MASTER_STICKY_ARES] = { 0x3e040, 6},
-> +       [GCC_PCIE_0_AHB_ARES] = { 0x3e040, 5 },
-> +       [GCC_PCIE_0_AXI_SLAVE_ARES] = { 0x3e040, 4 },
-> +       [GCC_PCIE_0_AXI_MASTER_ARES] = { 0x3e040, 3 },
-> +       [GCC_PCIE_0_CORE_STICKY_ARES] = { 0x3e040, 2 },
-> +       [GCC_PCIE_0_SLEEP_ARES] = { 0x3e040, 1 },
-> +       [GCC_PCIE_0_PIPE_ARES] = { 0x3e040, 0 },
-> +       [GCC_EMAC_BCR] = { 0x4e000 },
-> +       [GCC_WDSP_RESTART] = {0x19000},
-> +};
-> +
-> +static const struct qcom_cc_data qcs404_gcc_data = {
-> +       .resets = qcs404_gcc_resets,
-> +       .num_resets = ARRAY_SIZE(qcs404_gcc_resets),
-> +};
-> +
-> +static const struct udevice_id gcc_qcs404_of_match[] = {
-> +       {
-> +               .compatible = "qcom,gcc-qcs404",
-> +               .data = (ulong)&qcs404_gcc_data
-> +       },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_qcs404) = {
-> +       .name           = "gcc_qcs404",
-> +       .id             = UCLASS_NOP,
-> +       .of_match       = gcc_qcs404_of_match,
-> +       .bind           = qcom_cc_bind,
-> +       .flags          = DM_FLAG_PRE_RELOC,
-> +};
-> diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-> index 95a057b82986..eab88a40c09d 100644
-> --- a/drivers/clk/qcom/clock-sdm845.c
-> +++ b/drivers/clk/qcom/clock-sdm845.c
-> @@ -15,6 +15,7 @@
->  #include <asm/io.h>
->  #include <linux/bitops.h>
->  #include <dt-bindings/clock/qcom,gcc-sdm845.h>
-> +
->  #include "clock-qcom.h"
->
->  #define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
-> @@ -70,7 +71,7 @@ const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
+> @@ -71,30 +72,166 @@ const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
 >         return f - 1;
 >  }
 >
-> -static int clk_init_uart(struct msm_clk_priv *priv, uint rate)
-> +static int clk_init_uart(struct qcom_cc_priv *priv, uint rate)
->  {
->         const struct freq_tbl *freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
->
-> @@ -82,7 +83,7 @@ static int clk_init_uart(struct msm_clk_priv *priv, uint rate)
->
+> -static int clk_init_uart(struct qcom_cc_priv *priv, uint rate)
+> -{
+> -       const struct freq_tbl *freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
+> -
+> -       clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
+> -                                               freq->pre_div, freq->m, freq->n, freq->src);
+> -
+> -       return 0;
+> -}
+> -
 >  ulong msm_set_rate(struct clk *clk, ulong rate)
 >  {
-> -       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +       struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
+>         struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
+> +       const struct freq_tbl *freq;
 >
 >         switch (clk->id) {
->         case GCC_QUPV3_WRAP1_S1_CLK: /*UART2*/
-> @@ -96,3 +97,53 @@ int msm_enable(struct clk *clk)
+> -       case GCC_QUPV3_WRAP1_S1_CLK: /*UART2*/
+> -               return clk_init_uart(priv, rate);
+> +       case GCC_QUPV3_WRAP1_S1_CLK: /* UART9 */
+> +               freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
+> +               clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
+> +                                    freq->pre_div, freq->m, freq->n, freq->src);
+> +
+> +               return freq->freq;
+>         default:
+>                 return 0;
+>         }
+>  }
+>
+> +static const struct gate_clk sdm845_clks[] = {
+> +       GATE_CLK(GCC_AGGRE_NOC_PCIE_TBU_CLK,            0x90014, 0x00000001),
+> +       GATE_CLK(GCC_AGGRE_UFS_CARD_AXI_CLK,            0x82028, 0x00000001),
+> +       GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,             0x82024, 0x00000001),
+> +       GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,           0x8201c, 0x00000001),
+> +       GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK,            0x82020, 0x00000001),
+> +       GATE_CLK(GCC_BOOT_ROM_AHB_CLK,                  0x52004, 0x00000400),
+> +       GATE_CLK(GCC_CAMERA_AHB_CLK,                    0x0b008, 0x00000001),
+> +       GATE_CLK(GCC_CAMERA_AXI_CLK,                    0x0b020, 0x00000001),
+> +       GATE_CLK(GCC_CAMERA_XO_CLK,                     0x0b02c, 0x00000001),
+> +       GATE_CLK(GCC_CE1_AHB_CLK,                       0x52004, 0x00000008),
+> +       GATE_CLK(GCC_CE1_AXI_CLK,                       0x52004, 0x00000010),
+> +       GATE_CLK(GCC_CE1_CLK,                           0x52004, 0x00000020),
+> +       GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,         0x0502c, 0x00000001),
+> +       GATE_CLK(GCC_CFG_NOC_USB3_SEC_AXI_CLK,          0x05030, 0x00000001),
+> +       GATE_CLK(GCC_CPUSS_AHB_CLK,                     0x52004, 0x00200000),
+> +       GATE_CLK(GCC_CPUSS_RBCPR_CLK,                   0x48008, 0x00000001),
+> +       GATE_CLK(GCC_DDRSS_GPU_AXI_CLK,                 0x44038, 0x00000001),
+> +       GATE_CLK(GCC_DISP_AHB_CLK,                      0x0b00c, 0x00000001),
+> +       GATE_CLK(GCC_DISP_AXI_CLK,                      0x0b024, 0x00000001),
+> +       GATE_CLK(GCC_DISP_GPLL0_CLK_SRC,                0x52004, 0x00040000),
+> +       GATE_CLK(GCC_DISP_GPLL0_DIV_CLK_SRC,            0x52004, 0x00080000),
+> +       GATE_CLK(GCC_DISP_XO_CLK,                       0x0b030, 0x00000001),
+> +       GATE_CLK(GCC_GP1_CLK,                           0x64000, 0x00000001),
+> +       GATE_CLK(GCC_GP2_CLK,                           0x65000, 0x00000001),
+> +       GATE_CLK(GCC_GP3_CLK,                           0x66000, 0x00000001),
+> +       GATE_CLK(GCC_GPU_CFG_AHB_CLK,                   0x71004, 0x00000001),
+> +       GATE_CLK(GCC_GPU_GPLL0_CLK_SRC,                 0x52004, 0x00008000),
+> +       GATE_CLK(GCC_GPU_GPLL0_DIV_CLK_SRC,             0x52004, 0x00010000),
+> +       GATE_CLK(GCC_GPU_MEMNOC_GFX_CLK,                0x7100c, 0x00000001),
+> +       GATE_CLK(GCC_GPU_SNOC_DVM_GFX_CLK,              0x71018, 0x00000001),
+> +       GATE_CLK(GCC_MSS_AXIS2_CLK,                     0x8a008, 0x00000001),
+> +       GATE_CLK(GCC_MSS_CFG_AHB_CLK,                   0x8a000, 0x00000001),
+> +       GATE_CLK(GCC_MSS_GPLL0_DIV_CLK_SRC,             0x52004, 0x00020000),
+> +       GATE_CLK(GCC_MSS_MFAB_AXIS_CLK,                 0x8a004, 0x00000001),
+> +       GATE_CLK(GCC_MSS_Q6_MEMNOC_AXI_CLK,             0x8a154, 0x00000001),
+> +       GATE_CLK(GCC_MSS_SNOC_AXI_CLK,                  0x8a150, 0x00000001),
+> +       GATE_CLK(GCC_PCIE_0_AUX_CLK,                    0x5200c, 0x00000008),
+> +       GATE_CLK(GCC_PCIE_0_CFG_AHB_CLK,                0x5200c, 0x00000004),
+> +       GATE_CLK(GCC_PCIE_0_CLKREF_CLK,                 0x8c00c, 0x00000001),
+> +       GATE_CLK(GCC_PCIE_0_MSTR_AXI_CLK,               0x5200c, 0x00000002),
+> +       GATE_CLK(GCC_PCIE_0_PIPE_CLK,                   0x5200c, 0x00000010),
+> +       GATE_CLK(GCC_PCIE_0_SLV_AXI_CLK,                0x5200c, 0x00000001),
+> +       GATE_CLK(GCC_PCIE_0_SLV_Q2A_AXI_CLK,            0x5200c, 0x00000020),
+> +       GATE_CLK(GCC_PCIE_1_AUX_CLK,                    0x52004, 0x20000000),
+> +       GATE_CLK(GCC_PCIE_1_CFG_AHB_CLK,                0x52004, 0x10000000),
+> +       GATE_CLK(GCC_PCIE_1_CLKREF_CLK,                 0x8c02c, 0x00000001),
+> +       GATE_CLK(GCC_PCIE_1_MSTR_AXI_CLK,               0x52004, 0x08000000),
+> +       GATE_CLK(GCC_PCIE_1_PIPE_CLK,                   0x52004, 0x40000000),
+> +       GATE_CLK(GCC_PCIE_1_SLV_AXI_CLK,                0x52004, 0x04000000),
+> +       GATE_CLK(GCC_PCIE_1_SLV_Q2A_AXI_CLK,            0x52004, 0x02000000),
+> +       GATE_CLK(GCC_PCIE_PHY_AUX_CLK,                  0x6f004, 0x00000001),
+> +       GATE_CLK(GCC_PCIE_PHY_REFGEN_CLK,               0x6f02c, 0x00000001),
+> +       GATE_CLK(GCC_PDM2_CLK,                          0x3300c, 0x00000001),
+> +       GATE_CLK(GCC_PDM_AHB_CLK,                       0x33004, 0x00000001),
+> +       GATE_CLK(GCC_PDM_XO4_CLK,                       0x33008, 0x00000001),
+> +       GATE_CLK(GCC_PRNG_AHB_CLK,                      0x52004, 0x00002000),
+> +       GATE_CLK(GCC_QMIP_CAMERA_AHB_CLK,               0x0b014, 0x00000001),
+> +       GATE_CLK(GCC_QMIP_DISP_AHB_CLK,                 0x0b018, 0x00000001),
+> +       GATE_CLK(GCC_QMIP_VIDEO_AHB_CLK,                0x0b010, 0x00000001),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,                0x5200c, 0x00000400),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,                0x5200c, 0x00000800),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,                0x5200c, 0x00001000),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,                0x5200c, 0x00002000),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK,                0x5200c, 0x00004000),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,                0x5200c, 0x00008000),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S6_CLK,                0x5200c, 0x00010000),
+> +       GATE_CLK(GCC_QUPV3_WRAP0_S7_CLK,                0x5200c, 0x00020000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,                0x5200c, 0x00400000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,                0x5200c, 0x00800000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,                0x5200c, 0x02000000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,                0x5200c, 0x04000000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,                0x5200c, 0x08000000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S6_CLK,                0x5200c, 0x10000000),
+> +       GATE_CLK(GCC_QUPV3_WRAP1_S7_CLK,                0x5200c, 0x20000000),
+> +       GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,            0x5200c, 0x00000040),
+> +       GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,            0x5200c, 0x00000080),
+> +       GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,            0x5200c, 0x00100000),
+> +       GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,            0x5200c, 0x00200000),
+> +       GATE_CLK(GCC_SDCC2_AHB_CLK,                     0x14008, 0x00000001),
+> +       GATE_CLK(GCC_SDCC2_APPS_CLK,                    0x14004, 0x00000001),
+> +       GATE_CLK(GCC_SDCC4_AHB_CLK,                     0x16008, 0x00000001),
+> +       GATE_CLK(GCC_SDCC4_APPS_CLK,                    0x16004, 0x00000001),
+> +       GATE_CLK(GCC_SYS_NOC_CPUSS_AHB_CLK,             0x52004, 0x00000001),
+> +       GATE_CLK(GCC_TSIF_AHB_CLK,                      0x36004, 0x00000001),
+> +       GATE_CLK(GCC_TSIF_INACTIVITY_TIMERS_CLK,        0x3600c, 0x00000001),
+> +       GATE_CLK(GCC_TSIF_REF_CLK,                      0x36008, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_AHB_CLK,                  0x75010, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_AXI_CLK,                  0x7500c, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_CLKREF_CLK,               0x8c004, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_ICE_CORE_CLK,             0x75058, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_PHY_AUX_CLK,              0x7508c, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_0_CLK,          0x75018, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_1_CLK,          0x750a8, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_TX_SYMBOL_0_CLK,          0x75014, 0x00000001),
+> +       GATE_CLK(GCC_UFS_CARD_UNIPRO_CORE_CLK,          0x75054, 0x00000001),
+> +       GATE_CLK(GCC_UFS_MEM_CLKREF_CLK,                0x8c000, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_AHB_CLK,                   0x77010, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_AXI_CLK,                   0x7700c, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,              0x77058, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,               0x7708c, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,           0x77018, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,           0x770a8, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,           0x77014, 0x00000001),
+> +       GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,           0x77054, 0x00000001),
+> +       GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,             0x0f00c, 0x00000001),
+> +       GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,          0x0f014, 0x00000001),
+> +       GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,              0x0f010, 0x00000001),
+> +       GATE_CLK(GCC_USB30_SEC_MASTER_CLK,              0x1000c, 0x00000001),
+> +       GATE_CLK(GCC_USB30_SEC_MOCK_UTMI_CLK,           0x10014, 0x00000001),
+> +       GATE_CLK(GCC_USB30_SEC_SLEEP_CLK,               0x10010, 0x00000001),
+> +       GATE_CLK(GCC_USB3_PRIM_CLKREF_CLK,              0x8c008, 0x00000001),
+> +       GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,             0x0f04c, 0x00000001),
+> +       GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,         0x0f050, 0x00000001),
+> +       GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,            0x0f054, 0x00000001),
+> +       GATE_CLK(GCC_USB3_SEC_CLKREF_CLK,               0x8c028, 0x00000001),
+> +       GATE_CLK(GCC_USB3_SEC_PHY_AUX_CLK,              0x1004c, 0x00000001),
+> +       GATE_CLK(GCC_USB3_SEC_PHY_PIPE_CLK,             0x10054, 0x00000001),
+> +       GATE_CLK(GCC_USB3_SEC_PHY_COM_AUX_CLK,          0x10050, 0x00000001),
+> +       GATE_CLK(GCC_USB_PHY_CFG_AHB2PHY_CLK,           0x6a004, 0x00000001),
+> +       GATE_CLK(GCC_VIDEO_AHB_CLK,                     0x0b004, 0x00000001),
+> +       GATE_CLK(GCC_VIDEO_AXI_CLK,                     0x0b01c, 0x00000001),
+> +       GATE_CLK(GCC_VIDEO_XO_CLK,                      0x0b028, 0x00000001),
+> +       GATE_CLK(GCC_GPU_IREF_CLK,                      0x8c010, 0x00000001),
+> +       GATE_CLK(GCC_APC_VS_CLK,                        0x7a050, 0x00000001),
+> +       GATE_CLK(GCC_GPU_VS_CLK,                        0x7a04c, 0x00000001),
+> +       GATE_CLK(GCC_MSS_VS_CLK,                        0x7a048, 0x00000001),
+> +       GATE_CLK(GCC_VDDA_VS_CLK,                       0x7a00c, 0x00000001),
+> +       GATE_CLK(GCC_VDDCX_VS_CLK,                      0x7a004, 0x00000001),
+> +       GATE_CLK(GCC_VDDMX_VS_CLK,                      0x7a008, 0x00000001),
+> +       GATE_CLK(GCC_VS_CTRL_AHB_CLK,                   0x7a014, 0x00000001),
+> +       GATE_CLK(GCC_VS_CTRL_CLK,                       0x7a010, 0x00000001),
+> +       GATE_CLK(GCC_CPUSS_DVM_BUS_CLK,                 0x48190, 0x00000001),
+> +};
+
+Do we really need all these gate clocks in u-boot? IMO, we should add
+the ones that would be actually used.
+
+-Sumit
+
+> +
+>  int msm_enable(struct clk *clk)
 >  {
+> +       struct qcom_cc_priv *priv = dev_get_priv(clk->dev);
+> +
+> +       debug("%s: clk %s\n", __func__, sdm845_clks[clk->id].name);
+> +
+> +       qcom_gate_clk_en(priv, clk->id);
+> +
 >         return 0;
 >  }
-> +
-> +static const struct qcom_reset_map sdm845_gcc_resets[] = {
-> +       [GCC_MMSS_BCR] = { 0xb000 },
-> +       [GCC_PCIE_0_BCR] = { 0x6b000 },
-> +       [GCC_PCIE_1_BCR] = { 0x8d000 },
-> +       [GCC_PCIE_PHY_BCR] = { 0x6f000 },
-> +       [GCC_PDM_BCR] = { 0x33000 },
-> +       [GCC_PRNG_BCR] = { 0x34000 },
-> +       [GCC_QUPV3_WRAPPER_0_BCR] = { 0x17000 },
-> +       [GCC_QUPV3_WRAPPER_1_BCR] = { 0x18000 },
-> +       [GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
-> +       [GCC_QUSB2PHY_SEC_BCR] = { 0x12004 },
-> +       [GCC_SDCC2_BCR] = { 0x14000 },
-> +       [GCC_SDCC4_BCR] = { 0x16000 },
-> +       [GCC_TSIF_BCR] = { 0x36000 },
-> +       [GCC_UFS_CARD_BCR] = { 0x75000 },
-> +       [GCC_UFS_PHY_BCR] = { 0x77000 },
-> +       [GCC_USB30_PRIM_BCR] = { 0xf000 },
-> +       [GCC_USB30_SEC_BCR] = { 0x10000 },
-> +       [GCC_USB3_PHY_PRIM_BCR] = { 0x50000 },
-> +       [GCC_USB3PHY_PHY_PRIM_BCR] = { 0x50004 },
-> +       [GCC_USB3_DP_PHY_PRIM_BCR] = { 0x50008 },
-> +       [GCC_USB3_PHY_SEC_BCR] = { 0x5000c },
-> +       [GCC_USB3PHY_PHY_SEC_BCR] = { 0x50010 },
-> +       [GCC_USB3_DP_PHY_SEC_BCR] = { 0x50014 },
-> +       [GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
-> +       [GCC_PCIE_0_PHY_BCR] = { 0x6c01c },
-> +       [GCC_PCIE_1_PHY_BCR] = { 0x8e01c },
-> +};
-> +
-> +static const struct qcom_cc_data qcs404_gcc_data = {
-> +       .resets = sdm845_gcc_resets,
-> +       .num_resets = ARRAY_SIZE(sdm845_gcc_resets),
-> +};
-> +
-> +static const struct udevice_id gcc_sdm845_of_match[] = {
-> +       {
-> +               .compatible = "qcom,gcc-sdm845",
-> +               .data = (ulong)&qcs404_gcc_data,
-> +       },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_sdm845) = {
-> +       .name           = "gcc_sdm845",
-> +       .id             = UCLASS_NOP,
-> +       .of_match       = gcc_sdm845_of_match,
-> +       .bind           = qcom_cc_bind,
-> +       .flags          = DM_FLAG_PRE_RELOC,
-> +};
-> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
-> index 73bbd3069258..88e04d93f2a0 100644
-> --- a/drivers/reset/Kconfig
-> +++ b/drivers/reset/Kconfig
-> @@ -156,13 +156,6 @@ config RESET_IMX7
->         help
->           Support for reset controller on i.MX7/8 SoCs.
 >
-> -config RESET_QCOM
-> -       bool "Reset driver for Qualcomm SoCs"
-> -       depends on DM_RESET && (ARCH_SNAPDRAGON || ARCH_IPQ40XX)
-> -       default y
-> -       help
-> -         Support for reset controller on Qualcomm SoCs.
-> -
->  config RESET_SIFIVE
->         bool "Reset Driver for SiFive SoC's"
->         depends on DM_RESET && CLK_SIFIVE_PRCI && (TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED)
-> diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
-> index e2239a250a3a..7b0066f80188 100644
-> --- a/drivers/reset/Makefile
-> +++ b/drivers/reset/Makefile
-> @@ -24,7 +24,6 @@ obj-$(CONFIG_RESET_MTMIPS) += reset-mtmips.o
->  obj-$(CONFIG_RESET_SUNXI) += reset-sunxi.o
->  obj-$(CONFIG_RESET_HISILICON) += reset-hisilicon.o
->  obj-$(CONFIG_RESET_IMX7) += reset-imx7.o
-> -obj-$(CONFIG_RESET_QCOM) += reset-qcom.o
->  obj-$(CONFIG_RESET_SIFIVE) += reset-sifive.o
->  obj-$(CONFIG_RESET_SYSCON) += reset-syscon.o
->  obj-$(CONFIG_RESET_RASPBERRYPI) += reset-raspberrypi.o
-> diff --git a/drivers/reset/reset-qcom.c b/drivers/reset/reset-qcom.c
-> deleted file mode 100644
-> index 94315e76d545..000000000000
-> --- a/drivers/reset/reset-qcom.c
-> +++ /dev/null
-> @@ -1,195 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0
-> -/*
-> - * Copyright (c) 2020 Sartura Ltd.
-> - * Copyright (c) 2022 Linaro Ltd.
-> - *
-> - * Author: Robert Marko <robert.marko@sartura.hr>
-> - *         Sumit Garg <sumit.garg@linaro.org>
-> - *
-> - * Based on Linux driver
-> - */
-> -
-> -#include <asm/io.h>
-> -#include <common.h>
-> -#include <dm.h>
-> -#include <reset-uclass.h>
-> -#include <linux/bitops.h>
-> -#include <malloc.h>
-> -
-> -struct qcom_reset_priv {
-> -       phys_addr_t base;
-> -};
-> -
-> -struct qcom_reset_map {
-> -       unsigned int reg;
-> -       u8 bit;
-> -};
-> -
-> -#ifdef CONFIG_ARCH_IPQ40XX
-> -#include <dt-bindings/reset/qcom,ipq4019-reset.h>
-> -static const struct qcom_reset_map gcc_qcom_resets[] = {
-> -       [WIFI0_CPU_INIT_RESET] = { 0x1f008, 5 },
-> -       [WIFI0_RADIO_SRIF_RESET] = { 0x1f008, 4 },
-> -       [WIFI0_RADIO_WARM_RESET] = { 0x1f008, 3 },
-> -       [WIFI0_RADIO_COLD_RESET] = { 0x1f008, 2 },
-> -       [WIFI0_CORE_WARM_RESET] = { 0x1f008, 1 },
-> -       [WIFI0_CORE_COLD_RESET] = { 0x1f008, 0 },
-> -       [WIFI1_CPU_INIT_RESET] = { 0x20008, 5 },
-> -       [WIFI1_RADIO_SRIF_RESET] = { 0x20008, 4 },
-> -       [WIFI1_RADIO_WARM_RESET] = { 0x20008, 3 },
-> -       [WIFI1_RADIO_COLD_RESET] = { 0x20008, 2 },
-> -       [WIFI1_CORE_WARM_RESET] = { 0x20008, 1 },
-> -       [WIFI1_CORE_COLD_RESET] = { 0x20008, 0 },
-> -       [USB3_UNIPHY_PHY_ARES] = { 0x1e038, 5 },
-> -       [USB3_HSPHY_POR_ARES] = { 0x1e038, 4 },
-> -       [USB3_HSPHY_S_ARES] = { 0x1e038, 2 },
-> -       [USB2_HSPHY_POR_ARES] = { 0x1e01c, 4 },
-> -       [USB2_HSPHY_S_ARES] = { 0x1e01c, 2 },
-> -       [PCIE_PHY_AHB_ARES] = { 0x1d010, 11 },
-> -       [PCIE_AHB_ARES] = { 0x1d010, 10 },
-> -       [PCIE_PWR_ARES] = { 0x1d010, 9 },
-> -       [PCIE_PIPE_STICKY_ARES] = { 0x1d010, 8 },
-> -       [PCIE_AXI_M_STICKY_ARES] = { 0x1d010, 7 },
-> -       [PCIE_PHY_ARES] = { 0x1d010, 6 },
-> -       [PCIE_PARF_XPU_ARES] = { 0x1d010, 5 },
-> -       [PCIE_AXI_S_XPU_ARES] = { 0x1d010, 4 },
-> -       [PCIE_AXI_M_VMIDMT_ARES] = { 0x1d010, 3 },
-> -       [PCIE_PIPE_ARES] = { 0x1d010, 2 },
-> -       [PCIE_AXI_S_ARES] = { 0x1d010, 1 },
-> -       [PCIE_AXI_M_ARES] = { 0x1d010, 0 },
-> -       [ESS_RESET] = { 0x12008, 0},
-> -       [GCC_BLSP1_BCR] = {0x01000, 0},
-> -       [GCC_BLSP1_QUP1_BCR] = {0x02000, 0},
-> -       [GCC_BLSP1_UART1_BCR] = {0x02038, 0},
-> -       [GCC_BLSP1_QUP2_BCR] = {0x03008, 0},
-> -       [GCC_BLSP1_UART2_BCR] = {0x03028, 0},
-> -       [GCC_BIMC_BCR] = {0x04000, 0},
-> -       [GCC_TLMM_BCR] = {0x05000, 0},
-> -       [GCC_IMEM_BCR] = {0x0E000, 0},
-> -       [GCC_ESS_BCR] = {0x12008, 0},
-> -       [GCC_PRNG_BCR] = {0x13000, 0},
-> -       [GCC_BOOT_ROM_BCR] = {0x13008, 0},
-> -       [GCC_CRYPTO_BCR] = {0x16000, 0},
-> -       [GCC_SDCC1_BCR] = {0x18000, 0},
-> -       [GCC_SEC_CTRL_BCR] = {0x1A000, 0},
-> -       [GCC_AUDIO_BCR] = {0x1B008, 0},
-> -       [GCC_QPIC_BCR] = {0x1C000, 0},
-> -       [GCC_PCIE_BCR] = {0x1D000, 0},
-> -       [GCC_USB2_BCR] = {0x1E008, 0},
-> -       [GCC_USB2_PHY_BCR] = {0x1E018, 0},
-> -       [GCC_USB3_BCR] = {0x1E024, 0},
-> -       [GCC_USB3_PHY_BCR] = {0x1E034, 0},
-> -       [GCC_SYSTEM_NOC_BCR] = {0x21000, 0},
-> -       [GCC_PCNOC_BCR] = {0x2102C, 0},
-> -       [GCC_DCD_BCR] = {0x21038, 0},
-> -       [GCC_SNOC_BUS_TIMEOUT0_BCR] = {0x21064, 0},
-> -       [GCC_SNOC_BUS_TIMEOUT1_BCR] = {0x2106C, 0},
-> -       [GCC_SNOC_BUS_TIMEOUT2_BCR] = {0x21074, 0},
-> -       [GCC_SNOC_BUS_TIMEOUT3_BCR] = {0x2107C, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT0_BCR] = {0x21084, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT1_BCR] = {0x2108C, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT2_BCR] = {0x21094, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT3_BCR] = {0x2109C, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT4_BCR] = {0x210A4, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT5_BCR] = {0x210AC, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT6_BCR] = {0x210B4, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT7_BCR] = {0x210BC, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT8_BCR] = {0x210C4, 0},
-> -       [GCC_PCNOC_BUS_TIMEOUT9_BCR] = {0x210CC, 0},
-> -       [GCC_TCSR_BCR] = {0x22000, 0},
-> -       [GCC_MPM_BCR] = {0x24000, 0},
-> -       [GCC_SPDM_BCR] = {0x25000, 0},
-> -};
-> -#endif
-> -
-> -#ifdef CONFIG_TARGET_QCS404EVB
-> -#include <dt-bindings/clock/qcom,gcc-qcs404.h>
-> -static const struct qcom_reset_map gcc_qcom_resets[] = {
-> -       [GCC_GENI_IR_BCR] = { 0x0F000 },
-> -       [GCC_CDSP_RESTART] = { 0x18000 },
-> -       [GCC_USB_HS_BCR] = { 0x41000 },
-> -       [GCC_USB2_HS_PHY_ONLY_BCR] = { 0x41034 },
-> -       [GCC_QUSB2_PHY_BCR] = { 0x4103c },
-> -       [GCC_USB_HS_PHY_CFG_AHB_BCR] = { 0x0000c, 1 },
-> -       [GCC_USB2A_PHY_BCR] = { 0x0000c, 0 },
-> -       [GCC_USB3_PHY_BCR] = { 0x39004 },
-> -       [GCC_USB_30_BCR] = { 0x39000 },
-> -       [GCC_USB3PHY_PHY_BCR] = { 0x39008 },
-> -       [GCC_PCIE_0_BCR] = { 0x3e000 },
-> -       [GCC_PCIE_0_PHY_BCR] = { 0x3e004 },
-> -       [GCC_PCIE_0_LINK_DOWN_BCR] = { 0x3e038 },
-> -       [GCC_PCIEPHY_0_PHY_BCR] = { 0x3e03c },
-> -       [GCC_PCIE_0_AXI_MASTER_STICKY_ARES] = { 0x3e040, 6},
-> -       [GCC_PCIE_0_AHB_ARES] = { 0x3e040, 5 },
-> -       [GCC_PCIE_0_AXI_SLAVE_ARES] = { 0x3e040, 4 },
-> -       [GCC_PCIE_0_AXI_MASTER_ARES] = { 0x3e040, 3 },
-> -       [GCC_PCIE_0_CORE_STICKY_ARES] = { 0x3e040, 2 },
-> -       [GCC_PCIE_0_SLEEP_ARES] = { 0x3e040, 1 },
-> -       [GCC_PCIE_0_PIPE_ARES] = { 0x3e040, 0 },
-> -       [GCC_EMAC_BCR] = { 0x4e000 },
-> -       [GCC_WDSP_RESTART] = {0x19000},
-> -};
-> -#endif
-> -
-> -static int qcom_reset_assert(struct reset_ctl *rst)
-> -{
-> -       struct qcom_reset_priv *priv = dev_get_priv(rst->dev);
-> -       const struct qcom_reset_map *reset_map = gcc_qcom_resets;
-> -       const struct qcom_reset_map *map;
-> -       u32 value;
-> -
-> -       map = &reset_map[rst->id];
-> -
-> -       value = readl(priv->base + map->reg);
-> -       value |= BIT(map->bit);
-> -       writel(value, priv->base + map->reg);
-> -
-> -       return 0;
-> -}
-> -
-> -static int qcom_reset_deassert(struct reset_ctl *rst)
-> -{
-> -       struct qcom_reset_priv *priv = dev_get_priv(rst->dev);
-> -       const struct qcom_reset_map *reset_map = gcc_qcom_resets;
-> -       const struct qcom_reset_map *map;
-> -       u32 value;
-> -
-> -       map = &reset_map[rst->id];
-> -
-> -       value = readl(priv->base + map->reg);
-> -       value &= ~BIT(map->bit);
-> -       writel(value, priv->base + map->reg);
-> -
-> -       return 0;
-> -}
-> -
-> -static const struct reset_ops qcom_reset_ops = {
-> -       .rst_assert = qcom_reset_assert,
-> -       .rst_deassert = qcom_reset_deassert,
-> -};
-> -
-> -static const struct udevice_id qcom_reset_ids[] = {
-> -       { .compatible = "qcom,gcc-reset-ipq4019" },
-> -       { .compatible = "qcom,gcc-reset-qcs404" },
-> -       { }
-> -};
-> -
-> -static int qcom_reset_probe(struct udevice *dev)
-> -{
-> -       struct qcom_reset_priv *priv = dev_get_priv(dev);
-> -
-> -       priv->base = dev_read_addr(dev);
-> -       if (priv->base == FDT_ADDR_T_NONE)
-> -               return -EINVAL;
-> -
-> -       return 0;
-> -}
-> -
-> -U_BOOT_DRIVER(qcom_reset) = {
-> -       .name = "qcom_reset",
-> -       .id = UCLASS_RESET,
-> -       .of_match = qcom_reset_ids,
-> -       .ops = &qcom_reset_ops,
-> -       .probe = qcom_reset_probe,
-> -       .priv_auto = sizeof(struct qcom_reset_priv),
-> -};
+> @@ -130,6 +267,8 @@ static const struct qcom_reset_map sdm845_gcc_resets[] = {
+>  static const struct qcom_cc_data qcs404_gcc_data = {
+>         .resets = sdm845_gcc_resets,
+>         .num_resets = ARRAY_SIZE(sdm845_gcc_resets),
+> +       .clks = sdm845_clks,
+> +       .num_clks = ARRAY_SIZE(sdm845_clks),
+>  };
+>
+>  static const struct udevice_id gcc_sdm845_of_match[] = {
 >
 > --
 > 2.42.0
