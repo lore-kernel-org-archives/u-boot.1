@@ -4,48 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E65C25B47
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 06:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E924CC25B47
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 07:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22A7087569;
-	Fri, 27 Oct 2023 08:51:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id DA64787BF7;
+	Fri, 27 Oct 2023 09:44:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698389493;
-	bh=IJksIeGNzz1stAK4G9akfbBwWlokfRbMjItKJFtGmRc=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=NjBF2uZr3WVFem7FR63uAEo2k7DKsDrqCDu7bBdfXZ8ZjosXj+sUbqalsALBVLZC0
-	 ApAmzIPR0fx/yXhgWt6NJU6zuxH8hqRXZnPp3D7wRo//1OV58H9B+KSyrXjyiu4GgA
-	 UTZlC+KS+gfbwwcGMtc4nUQTOg3sq67vFL9o6ktTG38pCJ0YinSFYKjK+bkRvGHOHm
-	 vclXv4C1YIJcpfQvUL+dG6NyNWHFt7bykRepFpRYIJTWTU3G2W1o1mEVQkuV2GVcqC
-	 jlHuf1UP+AGjq7cdL9BDo+jO/E5+0xlLRwreOBxEXEsOmJYj8JTaYziyXKVmWP8lg2
-	 h7I4ef2o1stiQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 72A9C875DB; Fri, 27 Oct 2023 08:51:31 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A10B87468
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 08:51:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LAuU9NJf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E847087BF5; Fri, 27 Oct 2023 09:44:50 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SGtcH0KJcz9sQc;
- Fri, 27 Oct 2023 08:51:27 +0200 (CEST)
-Message-ID: <2b17b19e-b6e4-4a38-b569-36a72b05ad59@denx.de>
-Date: Fri, 27 Oct 2023 08:51:26 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A64AC87BEE
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 09:44:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-5b837db1b26so1397621a12.3
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 00:44:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698392686; x=1698997486; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HHpu+Rm8ojqopyFmvZoFwWv23QDMSH1Pwduu0kJ4/lE=;
+ b=LAuU9NJfakCRl72n4yOjhY8zVJ6TjNmsI4ZnbYT5JUaAQOrYC+Jsy7+KuoApAOMRZQ
+ XzklDtFhEJ1Lp1mSZs+wPohBBd+GvkOhseBPo78xzo+4O/g2ItcLWs98DCDmBbvxHzVJ
+ yyP4saS1c5ky6c524zqG1BMRL5r9/ZIcvJFKNGI9ql/wXxbIKjyfnwAfgxeOnKe52xrQ
+ Bs+n/CbN6P9k9vQS/UOp+8CiEbpEYktjdesOepWlJKdUTQkeobKCbG2dTFXX/23HYFHM
+ 92VGKZ+FFWpxrmOeNMVHp9RCmmjjQoz29QkRrMSrgqIVVr+0iQDZZ/4z6JGmrNUzYkap
+ EFJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698392686; x=1698997486;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HHpu+Rm8ojqopyFmvZoFwWv23QDMSH1Pwduu0kJ4/lE=;
+ b=Suc3N98uxL/+mG312ydfyPlHjycfT+WWqKBS/LplAueDusQiofi58ff3DNfkUvf1hY
+ /MrBXogmQJmS3iXeehr+E3g3XqynHRw6nB5UoiKosrNk8Da9l/bAz3vKpeTPREj1UvMM
+ tf9/Z/M1+YZIIyXoiygW8mwr3GD8K6azXAvSOFT3LtypgzH0NZI2UzV/iejxGXSrgnQ1
+ FHRL5+jz21zKYqSaJQLPFLb8F7IGmbD8/unCWU41dXguqJVx2cf4ZANG40VXslI2xfMQ
+ juIDB6sUCjEar0skal85yRhM/eX6QWEMZAUZD8GPiy9irc2TSEJMNz3vDcwy+CKOdLK/
+ sEAA==
+X-Gm-Message-State: AOJu0Yx12jSWjSC067DjpY78/x/uMprTmKECZBY8u1ckBWJtFOKusFSD
+ KoZ4o2C44qwIXjT+pU+7XTj34xP+q9WI2fa+nSA=
+X-Google-Smtp-Source: AGHT+IFFk75FZpDvaMig8z2RUtijmOvfG/dLJ/f0fC9dYnd3hbNy9FD4F6bmWuhiyrl9PWEumC5GVQ==
+X-Received: by 2002:a17:90a:709:b0:27d:4d6d:8379 with SMTP id
+ l9-20020a17090a070900b0027d4d6d8379mr1457646pjl.48.1698392686591; 
+ Fri, 27 Oct 2023 00:44:46 -0700 (PDT)
+Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
+ gt1-20020a17090af2c100b0026b3f76a063sm654937pjb.44.2023.10.27.00.44.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 27 Oct 2023 00:44:45 -0700 (PDT)
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH] scripts/Makefile.lib: print error when no public key is
+ specified
+Date: Fri, 27 Oct 2023 16:43:26 +0900
+Message-Id: <20231027074326.3357618-1-masahisa.kojima@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -63,63 +93,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The current build system embeds the EFI Signature List(ESL)
+into the dtb to be used in the EFI capsule authentication.
+This ESL file is specified through the CONFIG_EFI_CAPSULE_ESL_FILE
+Kconfig option. If CONFIG_EFI_CAPSULE_ESL_FILE is not specified,
+U-boot build ends up with failure but the cause of failure is not
+easily understandable. Current error message is as follows.
 
-please pull this next batch of Marvell related patches:
+FATAL ERROR: Error reading file into data: Is a directoryCheck /home/ubuntu/src/ledge/u-boot/arch/arm/dts/.synquacer-sc2a11-developerbox.dtb.pre.tmp for errors
+make[2]: *** [scripts/Makefile.lib:355: arch/arm/dts/synquacer-sc2a11-developerbox.dtb] Error 1
+make[1]: *** [dts/Makefile:44: arch-dtbs] Error 2
+make: *** [Makefile:1165: dts/dt.dtb] Error 2
+make: *** Waiting for unfinished jobs....
 
-----------------------------------------------------------------
-- kirkwood: Enable bootstd on some boards (Tony)
-- mvebu: turris_mox: Extend to support RIPE Atlas Probe (Marek)
-- mvebu/bubt: Support eMMC data partition booting (Josua)
-----------------------------------------------------------------
+This commit shows the error message that CONFIG_EFI_CAPSULE_ESL_FILE
+must be specified when the EFI capsule authentication is enabled, then
+terminate the build with error.
 
-Here the Azure build, without any issues:
+Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+---
+ scripts/Makefile.lib | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=324&view=results
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 8dc6ec82cd..16bbc277a9 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -339,7 +339,12 @@ cmd_capsule_esl_gen = \
+ 	$(shell sed "s:ESL_BIN_FILE:$(capsule_esl_path):" $(capsule_esl_input_file) > $@)
+ 
+ $(obj)/.capsule_esl.dtsi: FORCE
++ifeq ($(CONFIG_EFI_CAPSULE_ESL_FILE),"")
++	$(error "CONFIG_EFI_CAPSULE_ESL_FILE is empty, EFI capsule authentication \
++	public key must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled")
++else
+ 	$(call cmd_capsule_esl_gen)
++endif
+ 
+ capsule_esl_input_file=$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
+ capsule_esl_dtsi = .capsule_esl.dtsi
+-- 
+2.34.1
 
-Thanks,
-Stefan
-
-
-The following changes since commit fb428b61819444b9337075f49c72f326f5d12085:
-
-   Merge branch '2023-10-24-assorted-general-fixes-and-updates' 
-(2023-10-24 19:12:21 -0400)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
-
-for you to fetch changes up to b6014f209f15bd49dd4ceb987d3a52e99b0305d4:
-
-   arm: kirkwood: Enable bootstd for Zyxel NSA310S board (2023-10-26 
-14:49:36 +0200)
-
-----------------------------------------------------------------
-Josua Mayer (2):
-       arm: mvebu: allow additional 4096 offset for bootable mmc image
-       cmd: mvebu/bubt: move eMMC data-partition uboot from LBA-0 to 4096
-
-Marek Behún (1):
-       arm: mvebu: turris_mox: Extend to support RIPE Atlas Probe
-
-Tony Dinh (2):
-       arm: kirkwood: Enable bootstd for Pogo V4 board
-       arm: kirkwood: Enable bootstd for Zyxel NSA310S board
-
-  arch/arm/dts/Makefile                   |  1 +
-  arch/arm/dts/armada-3720-ripe-atlas.dts | 91 
-+++++++++++++++++++++++++++++++++
-  arch/arm/mach-mvebu/Kconfig             |  6 ++-
-  arch/arm/mach-mvebu/spl.c               |  5 +-
-  board/CZ.NIC/turris_mox/mox_sp.c        | 12 +++--
-  board/CZ.NIC/turris_mox/mox_sp.h        |  8 ++-
-  board/CZ.NIC/turris_mox/turris_mox.c    | 72 +++++++++++++++++++++++---
-  cmd/mvebu/bubt.c                        | 11 +++-
-  configs/nsa310s_defconfig               |  3 +-
-  configs/pogo_v4_defconfig               |  3 +-
-  configs/turris_mox_defconfig            |  3 +-
-  include/configs/nsa310s.h               | 17 +-----
-  include/configs/pogo_v4.h               | 35 +------------
-  13 files changed, 200 insertions(+), 67 deletions(-)
-  create mode 100644 arch/arm/dts/armada-3720-ripe-atlas.dts
