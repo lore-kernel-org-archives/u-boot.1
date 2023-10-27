@@ -4,59 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CDE8C25B48
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 06:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71B2C25B48
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 06:22:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36787876AC;
-	Fri, 27 Oct 2023 08:04:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
+	by phobos.denx.de (Postfix) with ESMTP id 4D76D87687;
+	Fri, 27 Oct 2023 08:22:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="sjZe2n55";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jzpSgT0r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F039A8769B; Fri, 27 Oct 2023 08:04:05 +0200 (CEST)
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 83165876BC; Fri, 27 Oct 2023 08:22:56 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FF22876AC
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 08:04:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=marcan.st
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: marcan@marcan.st)
- by mail.marcansoft.com (Postfix) with ESMTPSA id 6D71941F75;
- Fri, 27 Oct 2023 06:03:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
- t=1698386640; bh=NReBcm6zFw5a/BwbITc6ayGnF/poLpxDkfVYk6QtzU8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=sjZe2n55GJnkY0DBufr3jqBtv1WnRjTYqfTOrcuOzOPcLpUqUrJY+O/6DL1SF9SSf
- MjVKguYZrVuSnXv9zNojC3aKa7GNp+D7KQ798WyxyjBuv409jZQAqjrFPrl7Or7KwT
- kHsc9WU1JjafkqNOtRsOudBMh5UMxONyQg4YYI6FDoc8KLnJnf5mnpH92Df5X0MI9C
- olTGhVWemCOWC/mcuwMbqlnRmk+Et7gOfCwwQpQ9v/BU1uSMIY84fe6NKVpmafOVb9
- kAXSejJgGTgmuWKskaIRdu9TbiUTKTD41d2EPt9/TI4Ol6gxOPWyKydDe/9J8JwlTQ
- O1pKqmF0L0JcA==
-Message-ID: <314492c3-4cd3-2711-1693-6d58501a9bd9@marcan.st>
-Date: Fri, 27 Oct 2023 15:03:55 +0900
+ by phobos.denx.de (Postfix) with ESMTPS id 5284187663
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 08:22:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5082a932bdeso284129e87.3
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 23:22:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698387773; x=1698992573; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jbB3YncWHuEKyC4R+4aYZr2eSRAu5LaAwfuArSRUZLo=;
+ b=jzpSgT0rsN+vFR5PWkNMb6cIQKN/fJwY7CIPJAK5iS+K/AJ2PXe3oz8sYOQiw6vagP
+ slczJznwhhll2ObKYK+qtSNzaLSnAOZ9TqzaH3F6FK+r6NQLtTehGPiBS9VL3Y+AwGtf
+ 76cXc2niEuKep882blPzX7G0idYeAWybhyDlsSc0RU2aNcV8i6aTxbFujUUPHp0Lb4Pr
+ FmIeoLlSNrq2RCxNotsJW4yeIYWDhX3NS3fh0n+ZUtGBPH0ItDZ3tA/vQU+zkSJY2KqV
+ DIMd5+1KzS7KHb/H6pZplvQt/6aeP3a+OcO2kAGj4VPj6UG4LmTnOaf55DvmK99iSix8
+ 0vgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698387773; x=1698992573;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jbB3YncWHuEKyC4R+4aYZr2eSRAu5LaAwfuArSRUZLo=;
+ b=iOeRhe7iklit/l5MGok9KWW4yNGMCzOtfDdRRrMbKT8d0GZVdGxCb7q8GjhYHSANrG
+ G7wOZpgCjBRTPOCyUcogHtpZ1hLqAkAiwdBOJEbW3MIflPtTYQRhWqvgQBoY+nbt0DX+
+ eHC1QoUJyz8Njp2E7kHtLLmLfSkIUEmpVDF8ziyE8t5V8ERcio9ccHGTTyShiOly35TF
+ I3FOT7P1EUOBpzHL74zl8hLfVsWG3n/S7FzZvB6yJZb/dhdzHOm49riP7YeEdqkvNxs6
+ MndoaR+wopEmtz95CU9ojqUQmyt+FDt4FBFEa++ndKThCyevtI2u0VZAXChz4JmyVSCs
+ eOkA==
+X-Gm-Message-State: AOJu0YzJiovHntlsL/HxWGkXZ+ShG306jH45b5JaY7xsGrUAk/S0hp0b
+ fNr1Iyt5SyLfha4AM9Hz6lg5S+PrXTgpTg2oypFZllF546Gp2gzIazw=
+X-Google-Smtp-Source: AGHT+IHSWt3RaPYx2WDJoPyOg1MQtG7nEQLSsJIx3auVDgQHFFQiBcZR3X9VTJtbAJL3lbRwp6J7OzFK2gIuKTwIPg4=
+X-Received: by 2002:a05:6512:114b:b0:507:9ae6:6913 with SMTP id
+ m11-20020a056512114b00b005079ae66913mr1386577lfg.28.1698387773377; Thu, 26
+ Oct 2023 23:22:53 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH] fixup! usb: xhci: Guard all calls to xhci_wait_for_event
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>
-Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de,
- asahi@lists.linux.de, Minda Chen <minda.chen@starfivetech.com>
-References: <20231027-usb-fixes-1-v1-1-1c879bbcd928@marcan.st>
- <20231026232642.16668-1-marcan@marcan.st>
- <f2cd8dab-a494-4e9a-b450-0311444f436b@denx.de>
-From: Hector Martin <marcan@marcan.st>
-In-Reply-To: <f2cd8dab-a494-4e9a-b450-0311444f436b@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20231019162156.80982-1-eajames@linux.ibm.com>
+ <20231019162156.80982-7-eajames@linux.ibm.com>
+ <ad33807d-815a-401d-a258-ae43d21c6aad@gmx.de>
+In-Reply-To: <ad33807d-815a-401d-a258-ae43d21c6aad@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 27 Oct 2023 09:22:17 +0300
+Message-ID: <CAC_iWj+=UoJMCG3CV+duRKEb4PJNMufntR6QJ5-WbAy+oEv-yw@mail.gmail.com>
+Subject: Re: [PATCH v13 6/8] doc: Add measured boot documentation
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Eddie James <eajames@linux.ibm.com>, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,70 +86,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/10/2023 09.36, Marek Vasut wrote:
-> On 10/27/23 01:26, Hector Martin wrote:
->> Gah, I should've paid more attention to that rebase. Here's a dumb
->> fixup for this patch. I'll squash it into a v2 if needed alongside
->> any other changes, or if it looks good feel free to apply/squash
->> it in directly.
->>
->> ---
->>   drivers/usb/host/xhci-ring.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
->> index e2bd2e999a8e..7f2507be0cf0 100644
->> --- a/drivers/usb/host/xhci-ring.c
->> +++ b/drivers/usb/host/xhci-ring.c
->> @@ -532,6 +532,7 @@ static void reset_ep(struct usb_device *udev, int ep_index)
->>   	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
->>   	if (!event)
->>   		return;
->> +	field = le32_to_cpu(event->trans_event.flags);
->>   	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
->>   	xhci_acknowledge_event(ctrl);
-> 
-> Please squash, and add
-> 
-> Reviewed-by: Marek Vasut <marex@denx.de>
-> 
-> Also, +CC Minda,
-> 
-> there has been a similar fix to this one but with much more information 
-> about the failure, see:
-> 
-> [PATCH v1] usb: xhci: Check return value of wait for TRB_TRANSFER event
-> 
-> I think it would be useful to somehow include that information, so it 
-> wouldn't be lost.
+Hi Heinrich
 
-The root cause for *that* failure is what I fix in patch #5. From that
-thread:
+On Thu, 19 Oct 2023 at 21:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 10/19/23 18:21, Eddie James wrote:
+> > Briefly describe the feature and specify the requirements.
+> >
+> > Signed-off-by: Eddie James <eajames@linux.ibm.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> > Changes since v12:
+> >   - Add a bit of detail about OS usage and what pieces are measured
+> >
+> >   doc/usage/index.rst         |  1 +
+> >   doc/usage/measured_boot.rst | 31 +++++++++++++++++++++++++++++++
+> >   2 files changed, 32 insertions(+)
+> >   create mode 100644 doc/usage/measured_boot.rst
+> >
+> > diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+> > index 98b4719c40..bf53bb6bda 100644
+> > --- a/doc/usage/index.rst
+> > +++ b/doc/usage/index.rst
+> > @@ -14,6 +14,7 @@ Use U-Boot
+> >      partitions
+> >      cmdline
+> >      semihosting
+> > +   measured_boot
+> >
+> >   Shell commands
+> >   --------------
+> > diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
+> > new file mode 100644
+> > index 0000000000..0aad590859
+> > --- /dev/null
+> > +++ b/doc/usage/measured_boot.rst
+> > @@ -0,0 +1,31 @@
+> > +.. SPDX-License-Identifier: GPL-2.0+
+> > +
+> > +Measured Boot
+> > +=====================
+> > +
+> > +U-Boot can perform a measured boot, the process of hashing various components
+> > +of the boot process, extending the results in the TPM and logging the
+> > +component's measurement in memory for the operating system to consume.
+> > +
+> > +By default, U-Boot will measure the operating system (linux) image, the
+>
+> The OS image would mean the root file system? I guess you mean the
+> loaded EFI binary here. Measured boot is not Linux specific.
+>
+> We should consider different scenarios:
+>
+> * U-Boot loading kernel, initrd, device-tree
+> * U-Boot loading GRUB (or another boot manager), device-tree,
+>    GRUB loading initrd
+> * U-Boot loading GRUB and passing a device-tree to GRUB,
+>    GRUB loading initrd and a new device-tree
+>
+> With the documentation the user should be enabled to understand what
+> U-Boot measures in each of these cases. Please, observe that upstream
+> GRUB uses LoadImage() while distros (e.g. Debian and Ubuntu) tend to
+> bypass LoadImage().
+>
+> Arent't there some other objects measured?
+>
+> - SMBIOS table
+> - ACPI tables (still to be implemented)
+> - EFI variables
 
-> scanning bus xhci_pci for devices... WARN halted endpoint, queueing
-URB anyway.
+Eddie's part is trying to describe how 'bootm' would measure binaries.
+I'll update it with the EFI part once we merge this.
 
-Without #5 and without #1, that situation then leads to fireworks.
+Regards
+/Ilias
 
-A bunch of things are broken, which is why this is a series and not a
-single patch. I have more fixes to timeout handling, mass storage, etc.
-coming up after this. I fixed most of this in one long day of trying
-random USB devices, so it's not so much subtle super specific problems I
-could document the crashes for as just wide-ranging problems in the
-u-boot USB stack. None of this is particularly hard to repro if you just
-try a bunch of normal consumer USB devices, including things like USB
-HDDs which take time to spin-up leading to timeouts etc. The crash dumps
-aren't particularly useful, it's the subtleties of the xHCI interactions
-that are, but for that you need to add and enable a lot more debugging
-(patch #8).
-
-I think the main reason all this stuff is broken and we're finding out
-now is that u-boot has traditionally been used in embedded devices with
-fairly narrow use cases for USB, and now we're running it on
-workstation-grade laptops and desktops and people are plugging in all
-kinds of normal USB devices and expecting their bootloader not to freak
-out with them (even though most of the time it doesn't need to talk to
-them). It's really easy to run into this stuff when that's your use case.
-
-- Hector
-
+>
+> Best regards
+>
+> Heinrich
+>
+> > +initrd image, and the "bootargs" environment variable. By enabling
+> > +CONFIG_MEASURE_DEVICETREE, U-Boot will also measure the devicetree image.
+> > +
+> > +The operating system typically would verify that the hashes found in the
+> > +TPM PCRs match the contents of the event log. This can further be checked
+> > +against the hash results of previous boots.
+> > +
+> > +Requirements
+> > +---------------------
+> > +
+> > +* A hardware TPM 2.0 supported by the U-Boot drivers
+> > +* CONFIG_TPM=y
+> > +* CONFIG_MEASURED_BOOT=y
+> > +* Device-tree configuration of the TPM device to specify the memory area
+> > +  for event logging. The TPM device node must either contain a phandle to
+> > +  a reserved memory region or "linux,sml-base" and "linux,sml-size"
+> > +  indicating the address and size of the memory region. An example can be
+> > +  found in arch/sandbox/dts/test.dts
+> > +* The operating system must also be configured to use the memory regions
+> > +  specified in the U-Boot device-tree in order to make use of the event
+> > +  log.
+>
