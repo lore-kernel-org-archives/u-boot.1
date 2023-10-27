@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45180C25B47
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 12:18:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 139ECC25B47
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 12:23:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ADEA87687;
-	Fri, 27 Oct 2023 14:18:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1693887707;
+	Fri, 27 Oct 2023 14:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fQdqPUDy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y0CpazC/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73B9087687; Fri, 27 Oct 2023 14:18:29 +0200 (CEST)
-Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
- [IPv6:2607:f8b0:4864:20::92d])
+ id AF8F18770F; Fri, 27 Oct 2023 14:23:46 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35E0387562
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 14:18:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C0DC8757B
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 14:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-7b6043d0b82so851994241.1
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 05:18:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-507b9408c61so2831161e87.0
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 05:23:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698409105; x=1699013905; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698409424; x=1699014224; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Hk6sunEMDExsTnWshll1HbwdCLp2WiWUE1gPNi8rUfk=;
- b=fQdqPUDySzr9cEEcXr7cOR6ceodsX/XkdPtMRAw5+fQ/WCUc3dIOJ3vVkdlB+QxTHK
- Z9/QphAkBqiEqLuk0m/pz2j09HKXiz1+S1HnjNJiKloyyirqarRmWw3MPcMU4/eRlVY/
- lqo4YMcpDajAyDHJZEok2AMB/XeaQcbE5RMCPFIYIuTixQB1/EjZ05HcJ7mk9+8Nma6f
- OM+bIgnAdfkwR4bMwAKDv1exqVlBNS0N5i6kkN7jDaoYO+c6kmRqxoJvQSM1GI/RVi2J
- qHicHUDqe74aerCIueLuV7D54C2U+pYggX8Rp/x6V+rrpmYgVlguyLN9V3JwSacgt/RZ
- By5w==
+ bh=ti31zauheh7l86H3U7JFSfgHygK/k3tv/6j7wzOhYdQ=;
+ b=y0CpazC/iZWp20wpl9weWWTv7envp5RyDspRdrPm8316pnQsL9zd9cGSVPxTG+J8Bd
+ riVb+z7le4Da6gCJ+KHxhzQUkZZqYPMciQNRLqaBRNtS2X6MRFtluxmMi28sPzktfzLf
+ K/okTAy+x2AvmbqiPsKGSPDn3ZTBf1JjScYz6VKmeUeoX81X4Wnycz5faVjXQOD1uJCe
+ pNGE/vr9WtUO5Tiw1ZF1sajLNFk6TQnP4IgdxRlakeIGMxkndQlLTFyn1nBnlMiCJ6bP
+ W/7/lFNd0kG0Kk7FEB5+9htJjW+cRk0x3fa1FqDFWO0T2RIb7kB0w+am/xmHKXmn3S3o
+ HgPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698409105; x=1699013905;
+ d=1e100.net; s=20230601; t=1698409424; x=1699014224;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Hk6sunEMDExsTnWshll1HbwdCLp2WiWUE1gPNi8rUfk=;
- b=EmSvNWjQR40XrjeHUISWVedxGnnR+9NvIHRBY8+P59t3y3MpgdPbeDXunPUL0malxD
- BmLXanNRHvuM4MgyYOczs9Ohyk2CM+fIkuvABgf3St3DtK695fPtw8daA4/M1AuuVsSt
- 6/mWyIWjTogBDtogUehiI+4FSLfuc18LsAHJj4C+HojduJVQDyestJLowdHPa8Qlbz9i
- s54EFwlugR+OPzDqTUHIn6SoeIbmfTSjrxN2T1odT1HElh1KaxnBvUHzjHExs5zX9emw
- rVFzQhRMWkiRZFStKapdcCtAf+0opLEH+XkR3DE51LDWotCwUUwrwcneY2Ptq7M94Fp8
- tWwA==
-X-Gm-Message-State: AOJu0YzpTEcWcI+Q3Oo5+qZ0yKI1aTSsbE1hUtLuapRQNYzaqntEsT6e
- GisYhmO7dWbWtqmF0R6jqP9qHDYpuxe6WztqvlGa4Q==
-X-Google-Smtp-Source: AGHT+IHUWi2RJeTsh5v1pYOIHZElXhTkn76yPG4v3/pKjEqt1z5JSMeRVgEjbV6EujycSGx2zl2K1IlwLigTrQ1/bH0=
-X-Received: by 2002:a67:c195:0:b0:458:3bd3:9ad7 with SMTP id
- h21-20020a67c195000000b004583bd39ad7mr2841374vsj.18.1698409104693; Fri, 27
- Oct 2023 05:18:24 -0700 (PDT)
+ bh=ti31zauheh7l86H3U7JFSfgHygK/k3tv/6j7wzOhYdQ=;
+ b=XRNic6oykCPt9qe8KPBFcN6tyQ1qjp1mt9Hn920FeEw+b7zqmNmWdYes8VVZq9gXBt
+ 5FtQF5+zFiVxvyAJbuKHf2LKn04GDyknr2zPCgERN46MFziMZQSx6Q8oqly/JPkDo4wp
+ Vfhil6CkIEn1yRONapduhauWRRLv930RI3FCnNnUT7GzSP0PHh/LGXpiQlwDqged9vek
+ exY/NVy7/sn9y0Qh1HMjC5fE6Ms8zW4ObiyRoNKOR4CxT0kvx48YjEISyV7Lve6BnsJW
+ euW7LjXpRbEQdWsN9pm5EMrYMwl0aP63vhhrdeiGHPqIXF2z9u462ykE7GV6Sbi+e6gM
+ 5x+Q==
+X-Gm-Message-State: AOJu0Yw+Ny26YWOOVeSe+yauEFf20YvL9QfET/LZsBFivPP+OdO0rgz5
+ GFV/nA7JJ7Kke7P3FSF+TpTYib6KBgbth1UjQQavEw==
+X-Google-Smtp-Source: AGHT+IGXJu9Gib8qSLpFhwuwq+ZdZa2emQhq+GjFqIcoAUVJJtEosxOY5oWIxoJeFz8LAbwM8CsGrfxP65EWAWY69HQ=
+X-Received: by 2002:a05:6512:405:b0:503:1722:bf3a with SMTP id
+ u5-20020a056512040500b005031722bf3amr1732362lfk.1.1698409423754; Fri, 27 Oct
+ 2023 05:23:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org>
- <20231024-b4-qcom-clk-v1-8-9d96359b9a82@linaro.org>
- <184a6ae1-b911-4197-b311-645f4f795bae@linaro.org>
-In-Reply-To: <184a6ae1-b911-4197-b311-645f4f795bae@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 27 Oct 2023 17:48:13 +0530
-Message-ID: <CAFA6WYMGAi8pnp9A7c8BY9AtF4UN5p4=VVPVZOZo6BmxVm92HA@mail.gmail.com>
-Subject: Re: [PATCH 8/8] clk/qcom: fix rcg divider value
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Luka Kovacic <luka.kovacic@sartura.hr>, 
- Luka Perkov <luka.perkov@sartura.hr>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
+References: <20231026053052.622453-1-takahiro.akashi@linaro.org>
+ <20231026053052.622453-2-takahiro.akashi@linaro.org>
+ <b6110e38-5a44-4fcf-8ae1-ad77f1b66390@gmx.de>
+ <ZTsDiJUA9esxg9nb@octopus> <20231027010001.GR496310@bill-the-cat>
+In-Reply-To: <20231027010001.GR496310@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 27 Oct 2023 15:23:07 +0300
+Message-ID: <CAC_iWjJ5KA9H8=FcOLuScG7_wQ24G=qs61PAitqVCRvmcwNfFg@mail.gmail.com>
+Subject: Re: [RFC 01/13] cmd: bootefi: unfold do_bootefi_image()
+To: Tom Rini <trini@konsulko.com>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, jbx6244@gmail.com, 
+ u-boot@lists.denx.de, sjg@chromium.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,88 +89,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 25 Oct 2023 at 19:14, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
->
->
-> On 24/10/2023 21:23, Caleb Connolly wrote:
-> > The RCG divider field takes a value of (2*h - 1) where h is the divisor.
-> > This allows fractional dividers to be supported by calculating them at
-> > compile time using a macro.
-> >
-> > However, the clk_rcg_set_rate_mnd() function was also performing the
-> > calculation. Clean this all up and consistently use the F() macro to
-> > calculate these at compile time and properly support fractional divisors.
-> >
-> > Additionally, improve clk_bcr_update() to timeout with a warning rather
-> > than hanging the board, and make the freq_tbl struct and helpers common
-> > so that they can be reused by future platforms.
-> >
-> > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->
-> [...]
-> >
-> >  #define CFG_MODE_DUAL_EDGE (0x2 << 12) /* Counter mode */
-> >
-> > -#define CFG_MASK 0x3FFF
-> > +// Disable the HW_CLK_CONTROL bit
-> > +#define CFG_MASK (0x3FFF | (1 << 20))
->
-> There seems to be a bug in this patch that causes the actual clock rate
-> to be wrong in some cases, most obvious with db845c UART. I had
-> initially thought it to be a board issue but upon further investigation
-> I think I'm wrong.
->
-> The UART clock frequency table in clock-sdm845.c is taken from Linux,
-> the 115200 baud rate corresponds to the lowest frequency (7372800Hz).
-> However, with the implementation changes here, the RCG configuration
-> actually results in a measured clock rate of 9085208Hz.
->
-> If the entry is changed as follows
-> -       F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625)
-> +       F(7372800, CFG_CLK_SRC_GPLL0, 0.5, 192, 15625)
->
+Akashi-san
 
-I would suggest we keep the frequency table aligned to the Linux tree.
-We should try to fix the mismatch in the computation to support
-fractional divisors.
-
--Sumit
-
-> Then the resultant clock rate is 7372604Hz (within the tolerance)...
+On Fri, 27 Oct 2023 at 04:00, Tom Rini <trini@konsulko.com> wrote:
 >
-> I will resolve this for v2.
+> On Fri, Oct 27, 2023 at 09:25:44AM +0900, AKASHI Takahiro wrote:
+> > On Thu, Oct 26, 2023 at 01:01:52PM +0200, Heinrich Schuchardt wrote:
+> > > On 10/26/23 07:30, AKASHI Takahiro wrote:
+> > > > Unfold do_bootefi_image() into do_bootefi() for the sake of the succeeding
+> > > > refactor work.
+> > > >
+
+I don't disagree with the patchset, but what the patch does is pretty
+obvious.  It would help a lot to briefly describe how the unfolding
+process helps the refactoring.
+
+Thanks
+/Ilias
+> > > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > > ---
+> > > >   cmd/bootefi.c | 101 ++++++++++++++++++--------------------------------
+> > > >   1 file changed, 37 insertions(+), 64 deletions(-)
+> > > >
+> > > > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> > > > index 20e5c94a33a4..1b28bf5a318d 100644
+> > > > --- a/cmd/bootefi.c
+> > > > +++ b/cmd/bootefi.c
+> > > > @@ -425,58 +425,6 @@ static int do_efibootmgr(void)
+> > > >           return CMD_RET_SUCCESS;
+> > > >   }
+> > > >
+> > > > -/**
+> > > > - * do_bootefi_image() - execute EFI binary
+> > > > - *
+> > > > - * Set up memory image for the binary to be loaded, prepare device path, and
+> > > > - * then call do_bootefi_exec() to execute it.
+> > > > - *
+> > > > - * @image_opt:   string with image start address
+> > > > - * @size_opt:    string with image size or NULL
+> > > > - * Return:       status code
+> > > > - */
+> > > > -static int do_bootefi_image(const char *image_opt, const char *size_opt)
+> > > > -{
+> > > > - void *image_buf;
+> > > > - unsigned long addr, size;
+> > > > - efi_status_t ret;
+> > > > -
+> > > > -#ifdef CONFIG_CMD_BOOTEFI_HELLO
+> > > > - if (!strcmp(image_opt, "hello")) {
+> > > > -         image_buf = __efi_helloworld_begin;
+> > > > -         size = __efi_helloworld_end - __efi_helloworld_begin;
+> > > > -         efi_clear_bootdev();
+> > > > - } else
+> > > > -#endif
+> > > > - {
+> > > > -         addr = strtoul(image_opt, NULL, 16);
+> > > > -         /* Check that a numeric value was passed */
+> > > > -         if (!addr)
+> > > > -                 return CMD_RET_USAGE;
+> > > > -         image_buf = map_sysmem(addr, 0);
+> > > > -
+> > > > -         if (size_opt) {
+> > > > -                 size = strtoul(size_opt, NULL, 16);
+> > > > -                 if (!size)
+> > > > -                         return CMD_RET_USAGE;
+> > > > -                 efi_clear_bootdev();
+> > > > -         } else {
+> > > > -                 if (image_buf != image_addr) {
+> > > > -                         log_err("No UEFI binary known at %s\n",
+> > > > -                                 image_opt);
+> > > > -                         return CMD_RET_FAILURE;
+> > > > -                 }
+> > > > -                 size = image_size;
+> > > > -         }
+> > > > - }
+> > > > - ret = efi_run_image(image_buf, size);
+> > > > -
+> > > > - if (ret != EFI_SUCCESS)
+> > > > -         return CMD_RET_FAILURE;
+> > > > -
+> > > > - return CMD_RET_SUCCESS;
+> > > > -}
+> > > > -
+> > > >   /**
+> > > >    * efi_run_image() - run loaded UEFI image
+> > > >    *
+> > > > @@ -648,8 +596,9 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+> > > >                         char *const argv[])
+> > > >   {
+> > > >           efi_status_t ret;
+> > > > - char *img_addr, *img_size, *str_copy, *pos;
+> > > > - void *fdt;
+> > > > + char *p;
+> > > > + void *fdt, *image_buf;
+> > > > + unsigned long addr, size;
+> > > >
+> > > >           if (argc < 2)
+> > > >                   return CMD_RET_USAGE;
+> > > > @@ -684,18 +633,42 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
+> > > >           if (!strcmp(argv[1], "selftest"))
+> > > >                   return do_efi_selftest();
+> > > >   #endif
+> > > > - str_copy = strdup(argv[1]);
+> > > > - if (!str_copy) {
+> > > > -         log_err("Out of memory\n");
+> > > > -         return CMD_RET_FAILURE;
+> > > > +
+> > > > +#ifdef CONFIG_CMD_BOOTEFI_HELLO
+> > >
+> > > I would prefer a normal if and let the linker sort it out.
 > >
-> >  #define CFG_DIVIDER_MASK 0x1F
-> >
-> > -/* root set rate for clocks with half integer and MND divider */
-> > +/*
-> > + * root set rate for clocks with half integer and MND divider
-> > + * div should be pre-calculated ((div * 2) - 1)
-> > + */
-> >  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
-> >                         int div, int m, int n, int source, u8 mnd_width)
-> >  {
-> > @@ -99,17 +125,15 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
-> >       /* Program MND values */
-> >       setbits_le32(base + regs->M, m_val & mask);
-> >       setbits_le32(base + regs->N, n_val & mask);
-> > -     setbits_le32(base + regs->D, d_val & mask);
-> > +     setbits_le32(base + regs->D, (d_val & mask) == mask ? 0 : (d_val & mask));
-> >
-> >       /* setup src select and divider */
-> >       cfg  = readl(base + regs->cfg_rcgr);
-> >       cfg &= ~CFG_MASK;
-> >       cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
-> >
-> > -     /* Set the divider; HW permits fraction dividers (+0.5), but
-> > -        for simplicity, we will support integers only */
-> >       if (div)
-> > -             cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
-> > +             cfg |= div & CFG_DIVIDER_MASK;
-> >
-> >       if (n_val)
-> >               cfg |= CFG_MODE_DUAL_EDGE;
+> > Here I focused on simply unfolding("moving") the function, keeping the code
+> > as same as possible. Any how the code is in a tentative form
+> > at this point and will be reshaped in later patches, using IS_ENABLED().
+> > Please look at the final code after applying the whole series.
+>
+> I also agree with this approach.
 >
 > --
-> // Caleb (they/them)
+> Tom
