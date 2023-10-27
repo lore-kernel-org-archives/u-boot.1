@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B10BFC25B48
-	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 00:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6201CC25B48
+	for <u-boot@archiver.kernel.org>; Fri, 27 Oct 2023 00:24:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4712D871A5;
-	Fri, 27 Oct 2023 02:21:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7228A87BB6;
+	Fri, 27 Oct 2023 02:24:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qJvN60Kr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nKVht+kP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E0E487634; Fri, 27 Oct 2023 02:21:34 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 0C48987BC3; Fri, 27 Oct 2023 02:24:38 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7317D8071F
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 02:21:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 167B68071F
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 02:24:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-27d3ede72f6so1267881a91.1
- for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 17:21:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-584a761b301so1266599a12.3
+ for <u-boot@lists.denx.de>; Thu, 26 Oct 2023 17:24:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698366089; x=1698970889; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UdVIdSrs28T71Wm//kzSnw4twN9ZL5+ggwqRBNL1Bns=;
- b=qJvN60KrGZAmKtlFH/fmz7ZUSiDo73cAT2AQZF5PmuZSCpRSTWuqfVbdwHOOtj/L9R
- vTFA10h5j7HUYYmHkV0cXnQ5AG8ilkh6K0TPhOUJMmg4vwaj1h0bshSVIzhawh4VmE8H
- geeGVv9zzlufSsA9mlzLIvPoIy46bigsC1Plw2GcdaPh5aJM53NwTt0bUSFKDu+YU4nP
- 2rKkLIahQtan04PGI2Jqa+NzqFvU+7ykH/KfwMbrHqqQLmADRQQ2UlW8g8hfYJIRG3al
- wvwipUKs0eAbfwbeqJiP9WjjIPmO0OTgaTFs/FP8C2wiiedqcCTNTnrMNTr5B59sK3Dc
- 1Jow==
+ d=gmail.com; s=20230601; t=1698366273; x=1698971073; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TfLIqTT0LmU7urkglwy8+XlaAX/gX2pAvtSDgZLAdwA=;
+ b=nKVht+kPKsP9vNlKc/9QSIoeEaDHathkV6819kcfAX2tY2YI1RASdKW7eeX4A5MWaF
+ jCKb99CulFrphryJjkzysYPnIYFgs0w0WtCW+vUEqvAcGvV9b/w9zzdq51RSOLFCu1jk
+ kXVHFAx7/rcg4TqaEz4NUZ3iqtzfbwFjUDVV3LapcVlDIqgu+fH3o66M3SMN6KHYU40T
+ NWfMmpqUmmf8NERBzTddeC6GQAa9+H1tOjEd+lhMSS85B+Oi620dlByaXxveahImKOAH
+ s8YOdBR9keagdHzlwgZ/Ky5zbdwG0UVMOQDRA8QgHAHxL2TQe+OtBaSPT7KMHkGsfqfX
+ nlQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698366089; x=1698970889;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1698366273; x=1698971073;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UdVIdSrs28T71Wm//kzSnw4twN9ZL5+ggwqRBNL1Bns=;
- b=OnMAXtTnub6/ztkpOVazLAqfPXDA+1bQWRkbgTib+uZYjNJW9vTYpAvIKiY5mUH2n4
- fHGuy8l8C6djuuGX9uiEU4FlnICf86IUjxHx8EsEzYrOgyXnU4Cu666MENhabN5nwIjY
- dSHEtWOqrXnBelYNhxPjc2VXQtPBdaWfc1xFjeQbroyvuywYOe1qffoSzhnsMxaBQDR5
- 1YGyf4EatJ+RYoyBXoaugngUDwaR/iN8dEwWlbGP0wk/bn+dlHjwEwVQJAuPGdLTp4KM
- n4pC7asm7B+WLdgl7IEOuyy6imU4ciVR3WMsd3sOeXyXd2MSz9nASdmNNPbUElYoBPAW
- 0UfA==
-X-Gm-Message-State: AOJu0Yz1yqcAxA+tXAE2ztdXnrLRlm5j4dbJw7etV6a8qRfl8nsbWE2n
- aDeZ15ct2Z5PU2ftBsNiu/uy3xrRyGkQtNDjpffp3A==
-X-Google-Smtp-Source: AGHT+IGh9Vnzyw89qBThWB/yJ/zAGrI98+Lf85/12ixyPsdfvIxfXJakvkpmX9ykeGS1SkeS6xg3erP+cWPGA6cFZuc=
-X-Received: by 2002:a17:90a:5d:b0:27d:10ab:2329 with SMTP id
- 29-20020a17090a005d00b0027d10ab2329mr1157604pjb.14.1698366089384; Thu, 26 Oct
- 2023 17:21:29 -0700 (PDT)
+ bh=TfLIqTT0LmU7urkglwy8+XlaAX/gX2pAvtSDgZLAdwA=;
+ b=HCQ03zXkKtrmZzDxif7R6jytPPfJvHCqnxISo8WpEoeK/5frU8v/CRgZDrLwJ0TgkO
+ XZrfM2c3vZxwGKEjeJ9SWroFIZg6SvEvO7ZXK29wvTYVdKEzumx7Xk3ts1nIdL6NmZdp
+ y8iO5MWhKO4dQKXt8mh8Bw91ptk/KgrsYKupjbepeitiH+NlMhL8Y7WDgEI56XVbGi03
+ voBr+Qnz57m97t3Ur6pxWOlAZjeMCLctsRQM9WzY+kEdXjlueDwqOme8C1w7A1YBCV1P
+ bfvH9KdpWgQpn5bg3L6Pb9O904LadcWED/GQ/R8YNAPqkKDJjAzk78SDz2QrSspYhTho
+ 2E+A==
+X-Gm-Message-State: AOJu0YyFzkNzzC4ctelTWLp7cVPdoRCfae9dS2gSokXE8Zx5yT9a/ZuD
+ MifeHUoNXkgic94w5DHbKeuVfUmwnzv3lw==
+X-Google-Smtp-Source: AGHT+IEcMLdO07hG7N3sC7vX4WnELRN450dA63dPnZaJp1+jLc4blNe44dd21Ppc38VElMlLdQ7XZQ==
+X-Received: by 2002:a17:90b:3449:b0:27d:6404:bffc with SMTP id
+ lj9-20020a17090b344900b0027d6404bffcmr1178886pjb.1.1698366272858; 
+ Thu, 26 Oct 2023 17:24:32 -0700 (PDT)
+Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:b6a2:eace:f54:1956])
+ by smtp.gmail.com with ESMTPSA id
+ 22-20020a17090a031600b0027476c68cc3sm167606pje.22.2023.10.26.17.24.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Oct 2023 17:24:32 -0700 (PDT)
+From: Chris Packham <judge.packham@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Chris Packham <judge.packham@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Marc Zyngier <maz@kernel.org>, Peng Fan <peng.fan@nxp.com>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Simon Glass <sjg@chromium.org>, Will Deacon <willdeacon@google.com>,
+ Ye Li <ye.li@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ meitao <meitaogao@asrmicro.com>
+Subject: [PATCH 0/3] Revert HAFDBS changes
+Date: Fri, 27 Oct 2023 13:23:51 +1300
+Message-ID: <20231027002409.430285-1-judge.packham@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
- <20231025065103.3101666-2-masahisa.kojima@linaro.org>
- <CAC_iWjJ2nNjLeJe201Nx1Uay2xqMgesZdzzsUOO8bpUe3_VXvw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ2nNjLeJe201Nx1Uay2xqMgesZdzzsUOO8bpUe3_VXvw@mail.gmail.com>
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Fri, 27 Oct 2023 09:21:18 +0900
-Message-ID: <CADQ0-X94TOt4xTaGPz7Bir2RWzMr8e_SB-cSAX0=PHvCp8Zceg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] board: developerbox: remove obsolete NOR flash layout
- definition
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, jaswinder.singh@linaro.org, ryosuke.saito@linaro.org,
- sugimoto.yoshio@socionext.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,83 +93,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+As discussed this series reverts the HAFDBS changes that caused an issue
+on AC5/AC5X. I think there are some improvements that can be made to the
+initial memory map for the AC5/AC5X but so far nothing I've found makes
+it compatible with the HAFDBS changes.
 
-On Fri, 27 Oct 2023 at 03:58, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Wed, 25 Oct 2023 at 09:52, Masahisa Kojima
-> <masahisa.kojima@linaro.org> wrote:
-> >
-> > There are two kinds of NOR flash layout for the Developerbox.
-> > Capsule update for the old layout is no longer available since
-> > it has small capacity for secure world images and can not
-> > house the TA such as fTPM.
-> > This commit removes the definition related to the obsolete
-> > NOR flash layout for the UEFI capsule update.
-> >
-> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
-> > ---
-> >  include/configs/synquacer.h | 19 -------------------
-> >  1 file changed, 19 deletions(-)
-> >
-> > diff --git a/include/configs/synquacer.h b/include/configs/synquacer.h
-> > index cd7359c2f8..e36e63e81e 100644
-> > --- a/include/configs/synquacer.h
-> > +++ b/include/configs/synquacer.h
-> > @@ -40,20 +40,6 @@
-> >
-> >  /* Since U-Boot 64bit PCIe support is limited, disable 64bit MMIO support */
-> >
-> > -#ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-> > -#define DEFAULT_DFU_ALT_INFO
-> > -#else
-> > -#define DEFAULT_DFU_ALT_INFO "dfu_alt_info="                           \
-> > -                       "mtd nor1=u-boot.bin raw 200000 100000;"        \
-> > -                       "fip.bin raw 180000 78000;"                     \
-> > -                       "optee.bin raw 500000 100000\0"
-> > -#endif
->
-> We don't need any of these because we use the .dfu_alt_string to
-> generate those right?
 
-You are correct. We can generate dfu_alt_info from .dfu_string.
+Chris Packham (3):
+  Revert "armv8: enable HAFDBS for other ELx when FEAT_HAFDBS is
+    present"
+  Revert "arm64: Use level-2 for largest block mappings when FEAT_HAFDBS
+    is present"
+  Revert "arm64: Use FEAT_HAFDBS to track dirty pages when available"
 
-Thanks,
-Masahisa Kojima
+ arch/arm/cpu/armv8/cache_v8.c      | 30 +++---------------------------
+ arch/arm/include/asm/armv8/mmu.h   | 20 ++++----------------
+ arch/arm/include/asm/global_data.h |  2 --
+ 3 files changed, 7 insertions(+), 45 deletions(-)
 
->
-> > -
-> > -/* GUIDs for capsule updatable firmware images */
-> > -#define DEVELOPERBOX_UBOOT_IMAGE_GUID \
-> > -       EFI_GUID(0x53a92e83, 0x4ef4, 0x473a, 0x8b, 0x0d, \
-> > -                0xb5, 0xd8, 0xc7, 0xb2, 0xd6, 0x00)
-> > -
-> >  #ifdef CONFIG_FWU_MULTI_BANK_UPDATE
-> >  #define DEVELOPERBOX_FIP_IMAGE_GUID \
-> >         EFI_GUID(0x7d6dc310, 0x52ca, 0x43b8, 0xb7, 0xb9, \
-> > @@ -64,10 +50,6 @@
-> >                  0x33, 0xe0, 0xb9, 0x16, 0xf3, 0x98)
-> >  #endif
-> >
-> > -#define DEVELOPERBOX_OPTEE_IMAGE_GUID \
-> > -       EFI_GUID(0xc1b629f1, 0xce0e, 0x4894, 0x82, 0xbf, \
-> > -                0xf0, 0xa3, 0x83, 0x87, 0xe6, 0x30)
-> > -
-> >  /* Distro boot settings */
-> >  #ifdef CONFIG_CMD_USB
-> >  #define BOOT_TARGET_DEVICE_USB(func)   func(USB, usb, 0)
-> > @@ -107,7 +89,6 @@
-> >         "ramdisk_addr_r=0xa0000000\0"           \
-> >         "scriptaddr=0x88000000\0"               \
-> >         "pxefile_addr_r=0x88100000\0"           \
-> > -       DEFAULT_DFU_ALT_INFO                    \
-> >         BOOTENV
-> >
-> >  #endif /* __CONFIG_H */
-> > --
-> > 2.34.1
-> >
-> Thanks
-> /Ilias
+-- 
+2.42.0
+
