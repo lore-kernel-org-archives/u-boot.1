@@ -4,71 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA3AC27C47
-	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 15:56:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409DBC27C47
+	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 16:00:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B6888786A;
-	Sat, 28 Oct 2023 17:56:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 58D3A878AB;
+	Sat, 28 Oct 2023 18:00:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="H3FCIwI/";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ViL+ADRR";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=infradead.org header.i=@infradead.org header.b="NBHBAwGI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 230C487853; Sat, 28 Oct 2023 17:56:28 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id AB24B878DE; Sat, 28 Oct 2023 18:00:43 +0200 (CEST)
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F042287556
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 17:56:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77FAD87556
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 18:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SHkfd6N6hz9sZL;
- Sat, 28 Oct 2023 17:56:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1698508585;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WrKUFujqdj8UyxCVjMzJnFkvYyKXiHjtMeBEzhtFyX4=;
- b=H3FCIwI/EwPX2yw/rPewUEu04M1fjc6aNR8gxapvQE9v4R2Oas8mc00YOf6VTgrhVyVa6a
- ju6dE3zoRN0GqwUNsjPBUKv1Db/4nAho4WsJgmw+2gy4ACmguJ2GaVWFLP0h0YBCWO2nZq
- BeYty4M33tBj9zX3OIJijsEG/3t8jFHVoHs7g2S41hmQrSdN57sRBHC6h05Kbqia9i5h72
- RhAnd65BempDDeTQnbfEAKTBKRm/E4ny0NKbl5U1CW03JPerHg97q+d0J98Qen8oRwv1fy
- dIDPR8uXzUVisezXPCylA12VUXR1yhrcdmZSutpxwVB87k+I5LAj5XLofvdXGQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1698508583;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=WrKUFujqdj8UyxCVjMzJnFkvYyKXiHjtMeBEzhtFyX4=;
- b=ViL+ADRRkdAqYWAM70Ytd0YGiTiPynF7kaqQeQ6h37WHc7SXn8lPqg7/EnJKz/gQDBnfjf
- QM6HGjfJi+1qWYO6j1Hx9+4kuKJrqgTRp7+CQdurOZ52J9bpFHLZhR8nNEYC6thW4akaIq
- 3xz7kSwXmWGpkWUQzFGT5E7wQ+RjpYQ08OCzQgqVA2cohxHEmfYM2+KDYu40W9mYZFWf/7
- uKMMF/nl7hxzedgY7H5cqy0A5mzNejkOHU7Vj5KlsVC39IDK79pFDpCDXW7nGoKAHouKhu
- cvPIPzTrpJPtnCz0nfLQmtz6SYL5dcDHPYFgQ/L6vr6jQnSB9onSPJz6WVQwIw==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PULL] u-boot-sh/master_tmio_fixes
-Date: Sat, 28 Oct 2023 17:55:35 +0200
-Message-ID: <20231028155605.1983833-1-marek.vasut+renesas@mailbox.org>
+ spf=none smtp.mailfrom=rdunlap@infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+ bh=ff4n1jsCiEdyBssR3St9dKCeTqurWLxsez3pEHvyako=; b=NBHBAwGIrKasAi17RFhkFe54G6
+ faZeZiL5C4UvS4Uzd1fynS6/5s3NR3tdz/zW3upxl8/4Lg00JSL7V/YOBU7FnxOI5S1h3Ta3gekEG
+ YcW9111NEF3T6hL+YZ8KC/WKxjejDcbnv3ooamzrZOVsrCCatxhYG7B+l3hR9XmIzkPK88Ht48kbL
+ 9jQVPFacWZwslx68bUHddNJcDP7JJBLIm0J/RnnoClgN4ObcsSMKGdpnqOvIQ+E+pr/N/2kIJaeIT
+ WsKS6RewPhu+vB+II0re8sGBYGyvYsao/4h3TobpoVDsCx9VVZj+SZAoqPfQAhBZRwkMcAcIlgHtb
+ flcUkRug==;
+Received: from [50.53.46.231] (helo=[192.168.254.15])
+ by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qwljo-000d0h-1O; Sat, 28 Oct 2023 16:00:36 +0000
+Message-ID: <8fba0cd3-6666-4ea0-822b-006a457e0101@infradead.org>
+Date: Sat, 28 Oct 2023 09:00:34 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] kbuild: Correct missing architecture-specific hyphens
+To: Masahiro Yamada <masahiroy@kernel.org>, Simon Glass <sjg@chromium.org>
+Cc: linux-arm-kernel@lists.infradead.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>,
+ Nicolas Schier <nicolas@fjasle.eu>, linux-kbuild@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20231026072628.4115527-1-sjg@chromium.org>
+ <20231026072628.4115527-2-sjg@chromium.org>
+ <CAK7LNAReQB4KF_Ka=SUWSJ2psvqCrEm=BOkKXCYDK7Ux9uYutg@mail.gmail.com>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <CAK7LNAReQB4KF_Ka=SUWSJ2psvqCrEm=BOkKXCYDK7Ux9uYutg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 6876325ba97af7c52aa
-X-MBO-RS-META: ta368jxhk4kirqazhxz6swt95ftozrc9
-X-Rspamd-Queue-Id: 4SHkfd6N6hz9sZL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,31 +75,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit fb428b61819444b9337075f49c72f326f5d12085:
 
-  Merge branch '2023-10-24-assorted-general-fixes-and-updates' (2023-10-24 19:12:21 -0400)
 
-are available in the Git repository at:
+On 10/28/23 02:50, Masahiro Yamada wrote:
+> On Thu, Oct 26, 2023 at 4:27 PM Simon Glass <sjg@chromium.org> wrote:
+>>
+>> These should add a hyphen to indicate that it makes a adjective. Fix
+>> them.
+>>
+>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>> ---
+> 
+> 
+> This is trivial.
+> Applied to linux-kbuild. Thanks.
+> 
+> 
+> git grep -i 'arch specific'
+> 
+>  or
+> 
+> git grep -i 'architecture specific'
+> 
+> finds similar patterns, but presumably we are not
+> keen on fixing them tree-wide.
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master_tmio_fixes
+or '32 bit', '64 bit', but I agree with "not keen on
+fixing them tree-wide."
 
-for you to fetch changes up to 1332bdc2df7f71727e3cb9ca3f45b27b9e7b5531:
 
-  mmc: tmio: Disable 1/1024 clock divider on Renesas R-Car platforms (2023-10-27 11:21:28 +0200)
-
-----------------------------------------------------------------
-Marek Vasut (3):
-      mmc: sh_sdhi: Drop unused driver
-      mmc: tmio: Always check for errors after receiving an IRQ
-      mmc: tmio: Disable 1/1024 clock divider on Renesas R-Car platforms
-
-Paul Barker (1):
-      mmc: renesas-sdhi: Fix error handling in rzg2l_sdhi_setup
-
- drivers/mmc/Kconfig        |   6 -
- drivers/mmc/Makefile       |   1 -
- drivers/mmc/renesas-sdhi.c |   4 +-
- drivers/mmc/sh_sdhi.c      | 910 ---------------------------------------------
- drivers/mmc/tmio-common.c  |   8 +-
- 5 files changed, 9 insertions(+), 920 deletions(-)
- delete mode 100644 drivers/mmc/sh_sdhi.c
+-- 
+~Randy
