@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D600C27C47
-	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 17:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B00C0032E
+	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 17:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 768BB8704D;
-	Sat, 28 Oct 2023 19:36:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E04FD8755C;
+	Sat, 28 Oct 2023 19:36:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Hkwrwd+M";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="h8dKv8gt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50B938704D; Sat, 28 Oct 2023 19:36:17 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id 578848786A; Sat, 28 Oct 2023 19:36:20 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E9B086F6B
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 19:36:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D75186F6B
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 19:36:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 325CCB8168A;
- Sat, 28 Oct 2023 17:36:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 473B4C433C9;
- Sat, 28 Oct 2023 17:36:11 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id A45E960AF0;
+ Sat, 28 Oct 2023 17:36:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10087C433C8;
+ Sat, 28 Oct 2023 17:36:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1698514573;
- bh=upSlIfbuLA16D2Slc8jAwnWGI+Dtzthx/nsGBZ454No=;
+ s=k20201202; t=1698514576;
+ bh=qLER9RkPZxXLhCZqE6W/UiDYxQP1SUDJ9462L3fKWNU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Hkwrwd+MMogW3e+3WT5SpU5NPrfnm3FyTnUAvRHfcvgOcT41avRhjz2T1T0JV13AZ
- 4ojT8Q+nFB9jWaCkixW3XJVa/+TWdqKXSe0fJqNEF0VVAL61Ve5T1vOvKg8VCOQTCd
- jDCxm92mvneQ71O7WxpqQ53GuSJW4rcm3Mw1HiUm5biT2R8f4xyNUa/dQhQkXgeiVh
- RRtAWEPOx8KYI7IItTFgZUaZ1ulF9fzEyKBkVHjPs01qPYLu+MNnPqq9tPVFoOeoya
- gseWlTHWdqJsQ5Enxe/aIfE9TVG9mKyj/tlIwEvrn9I0gz66IrnR5xffxtizRXtnXS
- XhCk6fcIGaA0Q==
+ b=h8dKv8gtmHvnkIDGxm8eQJ+P2YF+Bi1X/eJ4X2ApQHPnWsOEAedBKDn5Tfvvyflo9
+ jZzzzgaUYeRlUyUw/hhLABB5X7MmFEW0XMSudh4QCdVaBtkLQNZi2gWBmbn1C91QwW
+ yfG/5z7FAc3MXB4t3fkyzCgSRg0B/R/M6NgIR6CyGF17CfGo+HaTJdAwIX9fE7PuQb
+ 8LTzkGSUfJGXAeeY4+ZFLaRRvK0HFuOahbYXJu1k03JKRsyKOA6WxVCr0Ip8cKHEMh
+ ZQkFEffkSmrNNJsIb9HQB/33l/yJ1FVHlDu1L+IPzBWBzPL+P7GD2qDT+YiPMmARmH
+ lwdAMK+3XZXcw==
 From: Roger Quadros <rogerq@kernel.org>
 To: nm@ti.com,
 	trini@konsulko.com
 Cc: s-vadapalli@ti.com, r-gunasekaran@ti.com, vigneshr@ti.com, srk@ti.com,
  marcel.ziswiler@toradex.com, u-boot@lists.denx.de,
  Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v2 1/3] arm: dts: k3-am625-sk-u-boot.dtsi: Update main_bcdma
- and main_pktdma nodes
-Date: Sat, 28 Oct 2023 20:36:01 +0300
-Message-Id: <20231028173603.24338-2-rogerq@kernel.org>
+Subject: [PATCH v2 2/3] arm: dts: k3-am625-verdin-wifi-dev-u-boot.dtsi: Fix
+ DMA/Ethernet
+Date: Sat, 28 Oct 2023 20:36:02 +0300
+Message-Id: <20231028173603.24338-3-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231028173603.24338-1-rogerq@kernel.org>
 References: <20231028173603.24338-1-rogerq@kernel.org>
@@ -72,24 +71,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-
 Update main_bcdma and main_pktdma nodes for native configuration in the
-absence of DM services.
+absence of DM services. u-boot k3-udma driver expects these additional
+register fields else probe will fail.
 
 Reported-by: Nishanth Menon <nm@ti.com>
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 Reviewed-by: Nishanth Menon <nm@ti.com>
+Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 ---
- arch/arm/dts/k3-am625-sk-u-boot.dtsi | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index b78d34b459..7ae5e01f7c 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -126,7 +126,30 @@
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+index afa24d07a4..75cb60b57d 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+@@ -42,6 +42,33 @@
  	bootph-all;
  };
  
@@ -106,7 +104,7 @@ index b78d34b459..7ae5e01f7c 100644
 +		    "ringrt" , "cfg", "tchan", "rchan";
 +};
 +
- &main_pktdma {
++&main_pktdma {
 +	reg = <0x00 0x485c0000 0x00 0x100>,
 +	      <0x00 0x4a800000 0x00 0x20000>,
 +	      <0x00 0x4aa00000 0x00 0x20000>,
@@ -117,9 +115,12 @@ index b78d34b459..7ae5e01f7c 100644
 +	      <0x00 0x48430000 0x00 0x1000>;
 +	reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt",
 +		    "cfg", "tchan", "rchan", "rflow";
++	bootph-all;
++};
++
+ &cpsw3g {
  	bootph-all;
  };
- 
 -- 
 2.34.1
 
