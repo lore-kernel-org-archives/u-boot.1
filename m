@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853D3C0032E
-	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 14:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA3AC27C47
+	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 15:56:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29FE78778C;
-	Sat, 28 Oct 2023 16:24:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B6888786A;
+	Sat, 28 Oct 2023 17:56:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JzBVC65L";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="H3FCIwI/";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ViL+ADRR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7427787617; Sat, 28 Oct 2023 16:24:03 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 230C487853; Sat, 28 Oct 2023 17:56:28 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F209087881
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 16:23:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F042287556
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 17:56:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-66d87554434so21817716d6.2
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 07:23:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698503038; x=1699107838; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WQ3SYa5LIz5H0nLIgmqKHLRWV8As0HnKLWlf2KwFmrs=;
- b=JzBVC65LoYwtGdtKmChDbVqCuNrkSv5+9gGlq5rcLmppHiLOI8ULaODz07osoEvkH+
- 4wdFLKQ8EE+0AgBD/cdfHBmPIXsp1+AfjrhCdmV5tLvtPQJ5VJ066p9zPz2UBv/IWWhj
- JRfAReR3x9kkMCNtYmwrd+I8UtIL4FR8UJQOM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698503038; x=1699107838;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WQ3SYa5LIz5H0nLIgmqKHLRWV8As0HnKLWlf2KwFmrs=;
- b=rUWTDZf/Tb1mlHw7VRLTXm2mGTYXCN0YGACqxk32XahUkPYbLrgzOKVs0oEyDmCSzG
- qRFKg2dZ6FikqJyFtsyQYUYrJuxt/ZFB3bQUD7ukA4DVcma7AwPTZfQ9G4Fz0KLbiR+z
- W2BOMCY2e825rFibafvNn7dP6QrTpD9RS7ySMJTp2/X/80CMdfsp6Yc1tnw0CRBO2d9J
- m2uvPsnxGwJ/Mu3v1zr8xG+VEBVWdum+oedkNBh4bWM1IQG50Tu8UvRcmP1c0oXfCJYv
- 8sFMEMrDtlVB+2CJLdxXMIJ2f+9gv9hjou8sLf1XgJ+MQqvecReQtHPNPNZPpJEBzdU1
- b+RA==
-X-Gm-Message-State: AOJu0YxVv1mcogP/3Pl8bKq2RukRDwVmSgUFAckpC7MrpIyC3PNfMC3q
- HaxtHaRC40ePo5iEM1wVZnOGnQ==
-X-Google-Smtp-Source: AGHT+IF/2ND0+nlAgTvmWaRL1iVX1X4scFYH6qnqUeBUXJ8ZpV7dk+RDENcDPzPGyHQSWNZXntVQ7A==
-X-Received: by 2002:a05:6214:d6f:b0:65a:fc2a:c2ab with SMTP id
- 15-20020a0562140d6f00b0065afc2ac2abmr5962327qvs.49.1698503038697; 
- Sat, 28 Oct 2023 07:23:58 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6f2b-3a78-9e8e-d344.res6.spectrum.com.
- [2603:6081:7b00:6400:6f2b:3a78:9e8e:d344])
- by smtp.gmail.com with ESMTPSA id
- s3-20020ad44b23000000b0063c71b62239sm1666489qvw.42.2023.10.28.07.23.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Oct 2023 07:23:57 -0700 (PDT)
-Date: Sat, 28 Oct 2023 10:23:56 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Martin =?iso-8859-1?Q?F=E4cknitz?= <faecknitz@hotsplots.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] mpc85xx: relocate code in non-SPL build
-Message-ID: <20231028142356.GQ496310@bill-the-cat>
-References: <20231019230655.24974-1-faecknitz@hotsplots.de>
- <20231028132653.GH496310@bill-the-cat>
- <200e9d8c-5658-0fc0-36dd-cf36c3065ad0@hotsplots.de>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SHkfd6N6hz9sZL;
+ Sat, 28 Oct 2023 17:56:25 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1698508585;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WrKUFujqdj8UyxCVjMzJnFkvYyKXiHjtMeBEzhtFyX4=;
+ b=H3FCIwI/EwPX2yw/rPewUEu04M1fjc6aNR8gxapvQE9v4R2Oas8mc00YOf6VTgrhVyVa6a
+ ju6dE3zoRN0GqwUNsjPBUKv1Db/4nAho4WsJgmw+2gy4ACmguJ2GaVWFLP0h0YBCWO2nZq
+ BeYty4M33tBj9zX3OIJijsEG/3t8jFHVoHs7g2S41hmQrSdN57sRBHC6h05Kbqia9i5h72
+ RhAnd65BempDDeTQnbfEAKTBKRm/E4ny0NKbl5U1CW03JPerHg97q+d0J98Qen8oRwv1fy
+ dIDPR8uXzUVisezXPCylA12VUXR1yhrcdmZSutpxwVB87k+I5LAj5XLofvdXGQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1698508583;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=WrKUFujqdj8UyxCVjMzJnFkvYyKXiHjtMeBEzhtFyX4=;
+ b=ViL+ADRRkdAqYWAM70Ytd0YGiTiPynF7kaqQeQ6h37WHc7SXn8lPqg7/EnJKz/gQDBnfjf
+ QM6HGjfJi+1qWYO6j1Hx9+4kuKJrqgTRp7+CQdurOZ52J9bpFHLZhR8nNEYC6thW4akaIq
+ 3xz7kSwXmWGpkWUQzFGT5E7wQ+RjpYQ08OCzQgqVA2cohxHEmfYM2+KDYu40W9mYZFWf/7
+ uKMMF/nl7hxzedgY7H5cqy0A5mzNejkOHU7Vj5KlsVC39IDK79pFDpCDXW7nGoKAHouKhu
+ cvPIPzTrpJPtnCz0nfLQmtz6SYL5dcDHPYFgQ/L6vr6jQnSB9onSPJz6WVQwIw==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PULL] u-boot-sh/master_tmio_fixes
+Date: Sat, 28 Oct 2023 17:55:35 +0200
+Message-ID: <20231028155605.1983833-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MG32ZOqPIK3onVKp"
-Content-Disposition: inline
-In-Reply-To: <200e9d8c-5658-0fc0-36dd-cf36c3065ad0@hotsplots.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 6876325ba97af7c52aa
+X-MBO-RS-META: ta368jxhk4kirqazhxz6swt95ftozrc9
+X-Rspamd-Queue-Id: 4SHkfd6N6hz9sZL
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,93 +85,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The following changes since commit fb428b61819444b9337075f49c72f326f5d12085:
 
---MG32ZOqPIK3onVKp
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+  Merge branch '2023-10-24-assorted-general-fixes-and-updates' (2023-10-24 19:12:21 -0400)
 
-On Sat, Oct 28, 2023 at 04:21:18PM +0200, Martin F=E4cknitz wrote:
-> Works now. I used T1042D4RDB_SDCARD_defconfig.
->=20
-> relocate_code in arch/powerpc/cpu/mpc85xx/start.o before patch (non-SPL b=
-uild):
->=20
-> 00000dc0 <relocate_code>:
->  dc0:   7c 61 1b 78     mr      r1,r3
->  dc4:   7c 89 23 78     mr      r9,r4
->  dc8:   7c aa 2b 78     mr      r10,r5
->  dcc:   48 00 00 05     bl      dd0 <relocate_code+0x10>
->  dd0:   7d 88 02 a6     mflr    r12
->  dd4:   80 0c 01 fc     lwz     r0,508(r12)
->  dd8:   7d 80 62 14     add     r12,r0,r12
->=20
-> 00000ddc <in_ram>:
->  ...
->=20
-> After Patch:
-> 00000dc0 <relocate_code>:
->   dc0:       7c 61 1b 78     mr      r1,r3
->   dc4:       7c 89 23 78     mr      r9,r4
->   dc8:       7c aa 2b 78     mr      r10,r5
->   dcc:       48 00 00 05     bl      dd0 <relocate_code+0x10>
->   dd0:       7d 88 02 a6     mflr    r12
->   dd4:       80 0c 02 c8     lwz     r0,712(r12)
->   dd8:       7d 80 62 14     add     r12,r0,r12
->   ...
->   ea0:       7c 08 03 a6     mtlr    r0
->   ea4:       4e 80 00 20     blr
->=20
-> 00000ea8 <in_ram>:
->  ...
->=20
-> In SPL build, relocate_code is same in both builds (because of
-> CONFIG_SPL_SKIP_RELOCATE).
+are available in the Git repository at:
 
-Thanks for confirming!
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master_tmio_fixes
 
->=20
->=20
-> On 28.10.2023 15:26, Tom Rini wrote:
-> > On Fri, Oct 20, 2023 at 01:06:55AM +0200, Martin F=E4cknitz wrote:
-> >=20
-> >> When building a non-SPL image, relocation is needed. This patch restor=
-es
-> >> the old behaviour before commit b35316fb67: CONFIG_SPL_SKIP_RELOCATE w=
-as
-> >> only defined if CONFIG_SPL_BUILD was defined.
-> >>
-> >> Fixes: b35316fb67cb ("Convert CONFIG_SPL_INIT_MINIMAL et al to Kconfig=
-")
-> >> Signed-off-by: Martin F=E4cknitz <faecknitz@hotsplots.de>
-> >=20
-> > This is now applied to u-boot/master, thanks!  But also, can you please
-> > confirm that top of tree now works for you, and which defconfig that is?
-> > As part of my testing I check for size changes before/after and this
-> > doesn't change any platform, which would lead to how I had missed the
-> > problem during the conversion.
-> >=20
->=20
+for you to fetch changes up to 1332bdc2df7f71727e3cb9ca3f45b27b9e7b5531:
 
---=20
-Tom
+  mmc: tmio: Disable 1/1024 clock divider on Renesas R-Car platforms (2023-10-27 11:21:28 +0200)
 
---MG32ZOqPIK3onVKp
-Content-Type: application/pgp-signature; name="signature.asc"
+----------------------------------------------------------------
+Marek Vasut (3):
+      mmc: sh_sdhi: Drop unused driver
+      mmc: tmio: Always check for errors after receiving an IRQ
+      mmc: tmio: Disable 1/1024 clock divider on Renesas R-Car platforms
 
------BEGIN PGP SIGNATURE-----
+Paul Barker (1):
+      mmc: renesas-sdhi: Fix error handling in rzg2l_sdhi_setup
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU9GXkACgkQFHw5/5Y0
-tyzGlwwAh+wa6LbOfuhAJn5rEweMbO2bDwbzGV4gGWDkS55npOzDVE0BK7E6ShNZ
-+RGPq3ptWsjUlrpyCDqpRxrOuzEtgo+FYjmVtKp4FJsyZcVsluwq8no9Y5jyWrxp
-Vf5Tk4KQ+Q3Fkug0SN5H/YWSRTBMMZxRXVRo9ygAtk9QhnD/FU11kM5Wi+oYSsZ/
-uzlGMm0D9nAt5XA7Eqf7TAotUExLig/r5Q8ismk8GPbMC42nmR64Mbu2r5FTrcM0
-e/frTwvpsTsonePoRWfkjXS6OhJWNwrY2ZSElDXyldyS2Et8dA9ongC5CwVdry/P
-zI9WvFu1N2W3OmU4vxBWxYbd81L0r+8lmY7Cx8YDePboaxfQyvlnqscXt6jQ7oPw
-+bfyMNfVaWyDaANiZpZPtT8WsBYVVVxGCmjyhqiY0SxwO5cuDOe1YQNJgZ2vefWE
-QE9tY+kvt1O7QTvrfOLaxTOSXsEiiQTd9Zmx7hX1OFPn5/x9XY7/tlyiz5UaPhEp
-xfxhXWkh
-=C68u
------END PGP SIGNATURE-----
-
---MG32ZOqPIK3onVKp--
+ drivers/mmc/Kconfig        |   6 -
+ drivers/mmc/Makefile       |   1 -
+ drivers/mmc/renesas-sdhi.c |   4 +-
+ drivers/mmc/sh_sdhi.c      | 910 ---------------------------------------------
+ drivers/mmc/tmio-common.c  |   8 +-
+ 5 files changed, 9 insertions(+), 920 deletions(-)
+ delete mode 100644 drivers/mmc/sh_sdhi.c
