@@ -4,74 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6755DC0032E
-	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 05:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D1EC0032E
+	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 08:10:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB617877AE;
-	Sat, 28 Oct 2023 07:36:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CF27487836;
+	Sat, 28 Oct 2023 10:10:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kxMS50BY";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="X7jnjQC8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9342877AF; Sat, 28 Oct 2023 07:36:05 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1C41487838; Sat, 28 Oct 2023 10:10:24 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 808A687761
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 07:36:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F25C787817
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 10:10:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-da2b8131c1aso268011276.2
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 22:36:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698471362; x=1699076162; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=obOmE4USD18iUvxfI4mpw0pm2esSbiAkzgbja2gfO3k=;
- b=kxMS50BYFbAwsWuNwRS5TB3QsGwbRXXHK/thhDOMD4hxD6DoTvW+XlI/vhD5Sl0d6o
- DQ+REoyCQPbXgxbeYgEolFHmpNk1EYsglS6hyF5IDde6qxnjL9OhZsORqWWgvhiPwV57
- MoyVNveWP7/SrfVaVaFLsOJfOj7alICSsdwOk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698471362; x=1699076162;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=obOmE4USD18iUvxfI4mpw0pm2esSbiAkzgbja2gfO3k=;
- b=VxFPiXVEW55FQNnG/gprUgpMGVtKRv/n7P29H7SaqeWm+SLAMBXuM5/TXXKlAAkfb3
- oFpcdVx4YQDVQbvnGyPP+uayzLIiRNm56d52MGvU7ntbwbb+4bfEvLzzm5rqmZ3fF6wy
- q70i0Z1txPOTnVZpNiSQBFp7g9SnYF5NDHJ/N9blQc0K+c/ekhDAZBF/oubqpLWf/1Nt
- ddDn13187FJ8dUwAtsokBsWlaBonZaQfRJvocKMFSncOLrtXPrqraLYBWmq7j9YNzjma
- A7dXdvPx8Xbv5NBWdlQVAjKK+D0dXlq1HWXKevCGycKzJh4L+GwYPNE3DXvdUNoq+8QS
- HDHQ==
-X-Gm-Message-State: AOJu0Yym3yvDG+6/57JntTKbTyJVBrA9U/erqgvc37Qww/tw23UKC/jA
- 4Z9Q6/ThdDOcUyd/B1HvZv9i7MJgMY1OUlX6j3/IeA==
-X-Google-Smtp-Source: AGHT+IGskdMMkmzP9omlaA+mujr7F1enkgr6en3AN4cKxJyDI/4CThVEfbaQU/YwwEELXyoGrCIfvNiWtLmuIy0/jZQ=
-X-Received: by 2002:a25:aa10:0:b0:d9a:d7a5:e445 with SMTP id
- s16-20020a25aa10000000b00d9ad7a5e445mr4425709ybi.49.1698471361987; Fri, 27
- Oct 2023 22:36:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1698480620;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ipthTY9BfYhhJuUDEO71KiOz1qfmVVAdJ8bpyeDm9kc=;
+ b=X7jnjQC8fDtyoId06KOJz1Lbb3ZwFUJC+/66mhNp3uWDOe283eRtPaVramF2hdsdJ+GL/O
+ bJkyYI8/ortRbv56WxIZk1VjVclXO3GDUmU8ZWmUNYHWXZtAE6O+TtwFvrnT+NzxBCzK7f
+ +PSBeNVOPPBklNfdJthBNyjsyXU8kTI=
+Received: from CHE01-GV0-obe.outbound.protection.outlook.com
+ (mail-gv0che01lp2040.outbound.protection.outlook.com [104.47.22.40]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-64-eUyCIFlnMHeUeiZEvDh5OA-1; Sat, 28 Oct 2023 10:10:18 +0200
+X-MC-Unique: eUyCIFlnMHeUeiZEvDh5OA-1
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
+ ZR0P278MB1154.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:55::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6933.23; Sat, 28 Oct 2023 08:10:16 +0000
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::a3b:50bf:57a:b96b]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::a3b:50bf:57a:b96b%2]) with mapi id 15.20.6933.024; Sat, 28 Oct 2023
+ 08:10:16 +0000
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+To: "rogerq@kernel.org" <rogerq@kernel.org>, "nm@ti.com" <nm@ti.com>,
+ "trini@konsulko.com" <trini@konsulko.com>
+CC: "s-vadapalli@ti.com" <s-vadapalli@ti.com>, "r-gunasekaran@ti.com"
+ <r-gunasekaran@ti.com>, "vigneshr@ti.com" <vigneshr@ti.com>, "srk@ti.com"
+ <srk@ti.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/3] arm: dts: k3-am625-sk-u-boot.dtsi: Update main_bcdma
+ and main_pktdma nodes
+Thread-Topic: [PATCH 1/3] arm: dts: k3-am625-sk-u-boot.dtsi: Update main_bcdma
+ and main_pktdma nodes
+Thread-Index: AQHaCNwGaZSt9apmdkmiD57eLJayaLBe2qMA
+Date: Sat, 28 Oct 2023 08:10:16 +0000
+Message-ID: <4e0911734e574ace2f9edbac9b7f49c1ee4515e0.camel@toradex.com>
+References: <20231027134630.244886-1-rogerq@kernel.org>
+ <20231027134630.244886-2-rogerq@kernel.org>
+In-Reply-To: <20231027134630.244886-2-rogerq@kernel.org>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB1154:EE_
+x-ms-office365-filtering-correlation-id: 0362a9d9-5be8-4974-ab55-08dbd78d5193
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0
+x-microsoft-antispam-message-info: hXRutH8QGotZHsQwNR4oOMd2l7oIb15c3hfuIP5EZHpIe5quxVL1AflnDptKKbd23kYMldK7gL9LRFWGW4fFY7gg5ep87utFOG4ZaIs9rP7l/uweKr3p4QEfIrVPmxAjtX0Hp1gsmVHV2mWDcyhZWuFivfN4IuMRyJYRE/0tcC5X0v5/WSMWZEI+MBmSxFvKiX8oTfB7cnpoYrEnpx4zDWISekPdcteLbLHLPe3xznoHy0jyNHGi+RyPVyPJTfP5y4+lesimRsHs69/AZjjG0hs/Akuwoe5o3vp+4okmr5Z9YzesrfdXGl6mdmpK+eeJA25QHSOeWhM2MzLU4kiU2ZFSRsb019/PiFQ1weQinWg6aVn9Z6eRCXtlAd4/Dr7GPT1dmswjJ4cOFdkHVenz26ZnpN2oAzmL1ToCfAphFcz3g/rw/4jaIPG5Fc9BqsW5OAc+WSPm2XQdUl178EUzCOfm63xmf4opnRXc1oM2UlPiKnhvBOsjZsKMIGjRg11sHopzsmZVt0Qk5yS59Ga3oNFtRPpens6i0Bxo0xxyUFXSXVVAlVgv/uI8iFC/4l6sr5nfAxXefbEi+SL4wJBdpwmUATuFGp6gG2vaJpCig/DI+8nVKx5u98a5HyfaIEUp
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(39830400003)(366004)(396003)(376002)(346002)(136003)(230922051799003)(186009)(451199024)(64100799003)(1800799009)(478600001)(71200400001)(6486002)(6506007)(122000001)(36756003)(38070700009)(2616005)(26005)(6512007)(38100700002)(2906002)(83380400001)(15650500001)(44832011)(5660300002)(8676002)(8936002)(86362001)(4326008)(41300700001)(66476007)(66556008)(76116006)(66446008)(54906003)(64756008)(66946007)(4001150100001)(316002)(91956017)(110136005);
+ DIR:OUT; SFP:1102
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?MU5QaktwVzdFQzVFUEoxODVSYkpHam5uUmdVOU94MkpkT0FHY2JldVFSZlFZ?=
+ =?utf-8?B?clBuN04wMFY5TDhrM2pXZHNGVW9qdGlCTUdJNTA5Rkw2ZHo5cWc5WlhsZHpD?=
+ =?utf-8?B?dVFIcUs0cXlHRW81bnE1dnQxMld2ejZ3NStOWll0dUVEaTR4ZnFML3g2eWZE?=
+ =?utf-8?B?N1JVZ2k3b3ViWkVpVG43aGkyL0h6aVRvbFdXb2VJSnNIZHVrS0Nua0pRMXpI?=
+ =?utf-8?B?U3FSWTFqb3JybEhsdHdkdE0yYmloaXdPVEZ6K29IQUZDRzNCRTJESVQ2STZZ?=
+ =?utf-8?B?bE0zZEdodi9ZMWpEVHhyK2dlbkZkeVVwYjZ4UTdrOVdCWEwyUjM4b3lzY0hk?=
+ =?utf-8?B?cGdCS2Uvem9QSzZaNFQ2OHZIYzR5WjFpTXNNajBCamZXbys1anp4TURaZkgy?=
+ =?utf-8?B?dE9mQkwyTGhSeldZNTljcW5EYmFJb3pvdm9DT3BVNkkwR3JvczBJMHdneEpv?=
+ =?utf-8?B?RHM3bS9ZZDZiVUQ3QzBGQ3QrSWE4aEFCK1UzQTFkOW5TY0lXMUNqcmNzVlQy?=
+ =?utf-8?B?QVhFL1MvbE5WNjJBaWlHdEV6TlNKald1YmlqeG5wZURpcDVnM1hSMU9yV1Y5?=
+ =?utf-8?B?S0dJcTlreDYwWG40cEh6aFRsUFlVU0hXWDYyKzVtcjZMOFMrMjFwTS9KMytH?=
+ =?utf-8?B?MTJHcTUyU0plNHBDZ2QwbmpFUmVaQnd3Y28rUXJXYmhIakRyZUxvZElXTDh1?=
+ =?utf-8?B?OVc2MWpzbTJTNWVhS1g1dUY5eS84bFRYTENSV3oveXlSVWZJVFJSNzZzbFU3?=
+ =?utf-8?B?SkFIdDVIUndZMkE4NFJ3c2VxakxUOGVJZngwZzk3dmNSQnh3MDR2MXVyWEd2?=
+ =?utf-8?B?RmwwN1k2enN0V1UrK0Ixd0M2QkZQTUthVmxhV1FYK0l2WXBXVXNmazJtdFdt?=
+ =?utf-8?B?TnlGamlKazhxU0ZCMUp3WHNhVzBhdVQrS2Y1eTVKYWRUNW9lVmo0M1VDakt4?=
+ =?utf-8?B?YisvYzU1aldMc3M4cFlqVkoxT0FydnZNNVFoSDZZS1J6bjZTZmN0eUJPY3Uy?=
+ =?utf-8?B?VUM2ODlRVHJMT2svczgvOUdBaUY1Tmw2VDlGUXNzMm1PcXd0dmNxTUEzYWxG?=
+ =?utf-8?B?T3l5V2JQbEYrc2hIbDRqeEZ1azdYY2pJVVhyQTJ0cUg2TzRyLy8vM3pWc0Y4?=
+ =?utf-8?B?M2NXa2xtVG5GY21ob0NqL1hDcDFuRzdVVU1yeXlWNnJuUURUVWZoa2Q2OHdQ?=
+ =?utf-8?B?UkZaNXVOMk5ldTcvbnlNVXBIWE5CZ0FsakJPOVlMbGVKcTFNditGd3hWY2c1?=
+ =?utf-8?B?ODhXSFJoMzJQT0tBRUtPNlJhU01mTHV0eEdJcWpRblJXK2NBcnlHS1ZOb243?=
+ =?utf-8?B?L2U4QUJjbjBiYjRTVi9ISG5BT2RIcTVQQjUxUGZucnlxUXNSM1FodkExK1Nn?=
+ =?utf-8?B?V3FTZFA4aDY4OGpBVHJyeC9GdVdBYXhwdE0vMEtOclhjeEp6R2RtelZ1Vmtt?=
+ =?utf-8?B?Q2d6MDVhTTVuT0VmbHhwWUVOZkNqb2xTM3NsbE5TNVJvWjVzTnNNOFNXNDBs?=
+ =?utf-8?B?THZzbGpzVGlDTlEwRzVvT1hzU1JRRFRiS09qRWxDMm9qTmRQNWNka2h4Q0Vw?=
+ =?utf-8?B?TnVEeGFCNTJISndtd2M3VC9DMFhnUjdOY1RjWDAyWjAvbUFJZWhHQzJZY1d5?=
+ =?utf-8?B?Wm1uLzJ1OEJENzMzK0I5elRaRUNMNUNYQURJTnpUQjYrTGM1Zmw1cDRydHFP?=
+ =?utf-8?B?RW93OW04VldhR0xFbk5xVGZoTHdsY1JpT09XNDl0MGRwMWRWUWFxRWlwNjRk?=
+ =?utf-8?B?d2xrSytyUm1vZUdZZlo0L292ek42UnVwSkRYYkV1VjlleFNWdUJxVnJhN2Rk?=
+ =?utf-8?B?M1BPQXhtaHlvZmhMTWdiWUFzZ3N2Rm5FcGppU1dzTjRLMHdOQUZJNWluQzY2?=
+ =?utf-8?B?NGVVRHdSYUk4VFdWeGo5VlJEUi95U2Y0Vmp5S084YkJkVk1zR3JBblNFUlVa?=
+ =?utf-8?B?bkF1NExaaHcxbHovZnhMejdoVkhsWmlpOUFjQ1B6Qyt3ckNFZC9yZWxKaEJF?=
+ =?utf-8?B?V1F2VlBLK3NiQUJMajgxcDg5TFlkOG9hUGJCRDJ0cGFmY3pOenRxYjBobCty?=
+ =?utf-8?B?T3Q4SWJyUDJ3QmNQS0ttREVhZThJU2JqbFZ1a3BmckxqNTdNaE1VS3g3dmx4?=
+ =?utf-8?B?RDh3S3EvZ1kyUm1DeGZqeit4S0Y1aU1iUG53czV0U0dTSjlpUWVrU2YxQ3BU?=
+ =?utf-8?B?N3c9PQ==?=
 MIME-Version: 1.0
-References: <20230725213634.255345-1-sjg@chromium.org>
- <CAHTX3dJ+es41yLzPA32kLWt70d0rGATCROJBW8aXMZjZA5w=Hg@mail.gmail.com>
-In-Reply-To: <CAHTX3dJ+es41yLzPA32kLWt70d0rGATCROJBW8aXMZjZA5w=Hg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 28 Oct 2023 05:35:43 +0000
-Message-ID: <CAPnjgZ0hYHxc6HKd2wMu4jdTtDyNDxRmcSDMCs6azNwr=tstjA@mail.gmail.com>
-Subject: Re: [PATCH 00/14] bloblist: Align to firmware handoff
-To: Michal Simek <monstr@monstr.eu>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Julius Werner <jwerner@chromium.org>, 
- Dan Handley <dan.handley@arm.com>, Jose Marinho <jose.marinho@arm.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0362a9d9-5be8-4974-ab55-08dbd78d5193
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2023 08:10:16.1430 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 5hl4suK8rLk3Tml1oSp7oUIg1aW36UH2Ru2rJuBwfmIPHlXRDeYmQUR0n/R0BQIHEWFf4xBg2wZsp++loLU9pB1Rh2ukqh5QSvtSNaHa8GM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB1154
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-ID: <757FD4DAA9BEF449AE50557591363180@CHEP278.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,96 +152,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+T24gRnJpLCAyMDIzLTEwLTI3IGF0IDE2OjQ2ICswMzAwLCBSb2dlciBRdWFkcm9zIHdyb3RlOg0K
+PiBGcm9tOiBTaWRkaGFydGggVmFkYXBhbGxpIDxzLXZhZGFwYWxsaUB0aS5jb20+DQo+IA0KPiBV
+cGRhdGUgbWFpbl9iY2RtYSBhbmQgbWFpbl9wa3RkbWEgbm9kZXMgZm9yIG5hdGl2ZSBjb25maWd1
+cmF0aW9uIGluIHRoZQ0KPiBhYnNlbmNlIG9mIERNIHNlcnZpY2VzLg0KPiANCj4gUmVwb3J0ZWQt
+Ynk6IE5pc2hhbnRoIE1lbm9uIDxubUB0aS5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IFNpZGRoYXJ0
+aCBWYWRhcGFsbGkgPHMtdmFkYXBhbGxpQHRpLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogUm9nZXIg
+UXVhZHJvcyA8cm9nZXJxQGtlcm5lbC5vcmc+DQo+IC0tLQ0KPiDCoGFyY2gvYXJtL2R0cy9rMy1h
+bTYyNS1zay11LWJvb3QuZHRzaSB8IDI3ICsrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPiDC
+oDEgZmlsZSBjaGFuZ2VkLCAyNyBpbnNlcnRpb25zKCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvYXJj
+aC9hcm0vZHRzL2szLWFtNjI1LXNrLXUtYm9vdC5kdHNpIGIvYXJjaC9hcm0vZHRzL2szLWFtNjI1
+LXNrLXUtYm9vdC5kdHNpDQo+IGluZGV4IGI3OGQzNGI0NTkuLjcxODZmMDgzMGYgMTAwNjQ0DQo+
+IC0tLSBhL2FyY2gvYXJtL2R0cy9rMy1hbTYyNS1zay11LWJvb3QuZHRzaQ0KPiArKysgYi9hcmNo
+L2FybS9kdHMvazMtYW02MjUtc2stdS1ib290LmR0c2kNCj4gQEAgLTE1NCw2ICsxNTQsMzMgQEAN
+Cj4gwqAJYm9vdHBoLWFsbDsNCj4gwqB9Ow0KPiDCoA0KPiArJm1haW5fYmNkbWEgew0KPiArCXJl
+ZyA9IDwweDAwIDB4NDg1YzAxMDAgMHgwMCAweDEwMD4sDQo+ICsJwqDCoMKgwqDCoCA8MHgwMCAw
+eDRjMDAwMDAwIDB4MDAgMHgyMDAwMD4sDQo+ICsJwqDCoMKgwqDCoCA8MHgwMCAweDRhODIwMDAw
+IDB4MDAgMHgyMDAwMD4sDQo+ICsJwqDCoMKgwqDCoCA8MHgwMCAweDRhYTQwMDAwIDB4MDAgMHgy
+MDAwMD4sDQo+ICsJwqDCoMKgwqDCoCA8MHgwMCAweDRiYzAwMDAwIDB4MDAgMHgxMDAwMDA+LA0K
+PiArCcKgwqDCoMKgwqAgPDB4MDAgMHg0ODYwMDAwMCAweDAwIDB4ODAwMD4sDQo+ICsJwqDCoMKg
+wqDCoCA8MHgwMCAweDQ4NGE0MDAwIDB4MDAgMHgyMDAwPiwNCj4gKwnCoMKgwqDCoMKgIDwweDAw
+IDB4NDg0YzIwMDAgMHgwMCAweDIwMDA+Ow0KPiArCXJlZy1uYW1lcyA9ICJnY2ZnIiwgImJjaGFu
+cnQiLCAicmNoYW5ydCIsICJ0Y2hhbnJ0IiwNCj4gKwkJwqDCoMKgICJyaW5ncnQiICwgImNmZyIs
+ICJ0Y2hhbiIsICJyY2hhbiI7DQo+ICt9Ow0KPiArDQo+ICsmbWFpbl9wa3RkbWEgew0KPiArCWJv
+b3RwaC1hbGw7DQoNCkkgYmVsaWV2ZSB0aGF0IHByb3BlcnR5IHdvdWxkIHVzdWFsbHkgYmUgYWRk
+ZWQgYXMgdGhlIGxhc3QgaXRlbSBvZiBhIG5vZGUuDQoNCj4gKwlyZWcgPSA8MHgwMCAweDQ4NWMw
+MDAwIDB4MDAgMHgxMDA+LA0KPiArCcKgwqDCoMKgwqAgPDB4MDAgMHg0YTgwMDAwMCAweDAwIDB4
+MjAwMDA+LA0KPiArCcKgwqDCoMKgwqAgPDB4MDAgMHg0YWEwMDAwMCAweDAwIDB4MjAwMDA+LA0K
+PiArCcKgwqDCoMKgwqAgPDB4MDAgMHg0YjgwMDAwMCAweDAwIDB4MjAwMDAwPiwNCj4gKwnCoMKg
+wqDCoMKgIDwweDAwIDB4NDg1ZTAwMDAgMHgwMCAweDEwMDAwPiwNCj4gKwnCoMKgwqDCoMKgIDww
+eDAwIDB4NDg0YTAwMDAgMHgwMCAweDIwMDA+LA0KPiArCcKgwqDCoMKgwqAgPDB4MDAgMHg0ODRj
+MDAwMCAweDAwIDB4MjAwMD4sDQo+ICsJwqDCoMKgwqDCoCA8MHgwMCAweDQ4NDMwMDAwIDB4MDAg
+MHgxMDAwPjsNCj4gKwlyZWctbmFtZXMgPSAiZ2NmZyIsICJyY2hhbnJ0IiwgInRjaGFucnQiLCAi
+cmluZ3J0IiwNCj4gKwkJwqDCoMKgICJjZmciLCAidGNoYW4iLCAicmNoYW4iLCAicmZsb3ciOw0K
+PiArfTsNCj4gKw0KPiDCoCZjcHN3M2cgew0KPiDCoAlib290cGgtYWxsOw0KPiDCoAlldGhlcm5l
+dC1wb3J0cyB7DQo=
 
-On Wed, 6 Sept 2023 at 12:22, Michal Simek <monstr@monstr.eu> wrote:
->
-> Hi Simon,
->
-> =C3=BAt 25. 7. 2023 v 23:36 odes=C3=ADlatel Simon Glass <sjg@chromium.org=
-> napsal:
-> >
-> > In moving from v0.8 to v0.9 the Firmware Handoff specification made som=
-e
-> > changes, including:
-> >
-> >    - Use a packed format for headers to reduce space
-> >    - Add an explicit alignment field in the header
-> >    - Renumber all the tags and reduce their size to 24 bits
-> >    - Drop use of the blob header to specify alignment, in favour of a
-> >      'void' blob type
-> >
-> > This series attempts to align to that specification, including updating
-> > the API and tests. It is likely that refinements will be made as other
-> > projects implement the spec too.
-> >
-> > As before the code is dual-licensed, to permit use in projects with a
-> > permissive license.
-> >
-> >
-> > Simon Glass (14):
-> >   bloblist: Update the tag numbering
-> >   bloblist: Adjust API to align in powers of 2
-> >   bloblist: Change the magic value
-> >   bloblist: Set version to 1
-> >   bloblist: Access record hdr_size and tag via a function
-> >   bloblist: Drop the flags value
-> >   bloblist: Drop the spare values
-> >   bloblist: Change the checksum algorithm
-> >   bloblist: Checksum the entire bloblist
-> >   bloblist: Handle alignment with a void entry
-> >   bloblist: Reduce blob-header size
-> >   bloblist: Reduce bloblist header size
-> >   bloblist: Add alignment to bloblist_new()
-> >   bloblist: Update documentation and header comment
-> >
-> >  arch/x86/lib/tables.c    |   3 +-
-> >  common/bloblist.c        | 102 ++++++++++++++++++++-------------
-> >  doc/develop/bloblist.rst |   4 +-
-> >  include/bloblist.h       | 121 +++++++++++++++++++--------------------
-> >  test/bloblist.c          |  53 +++++++++--------
-> >  5 files changed, 152 insertions(+), 131 deletions(-)
-> >
-> > --
-> > 2.41.0.487.g6d72f3e995-goog
-> >
->
-> Would it be also possible to align names in the bloblist_hdr structure?
-> magic->signature
-> align_log2->alignment
-> alloced->size
-> size->max_size
->
-> The same is for bloblist_rec.
-
-OK. I am not sure I like the size/max_size thing so I filed an issue for th=
-at.
-
->
-> I don't know the history but spec is about transfer list and transfer ent=
-ry.
-> Do you plan to rename it to avoid confusion?
-
-I don't really like transfer_list_xxx as an API. It is too
-long-winded. We used that name since it is unique and descriptive as
-to its purpose. But I think that 'bloblist' is a better name in the
-code base. Perhaps we could use xferlist instead of bloblist?
-
-Regards,
-SImon
-
-
->
-> Thanks,
-> Michal
->
-> --
-> Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-> w: www.monstr.eu p: +42-0-721842854
-> Maintainer of Linux kernel - Xilinx Microblaze
-> Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-> U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
-
-
-REgards,
-Simon
