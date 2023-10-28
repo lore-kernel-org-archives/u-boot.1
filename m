@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68C7CC0032E
-	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 13:27:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 301A8C27C47
+	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 13:27:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9652D878DA;
-	Sat, 28 Oct 2023 15:27:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44A9087B89;
+	Sat, 28 Oct 2023 15:27:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RAK/H2bL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RN7sIxQM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7274A878DE; Sat, 28 Oct 2023 15:26:59 +0200 (CEST)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id E1C55878E3; Sat, 28 Oct 2023 15:27:03 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EAFF87790
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 15:26:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8AB7878E3
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 15:27:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-41cd6e1d4fbso20726151cf.1
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 06:26:57 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7789aed0e46so222833185a.0
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 06:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698499616; x=1699104416; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698499620; x=1699104420; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4IBqvg8lsmM9aXIsegk916+t1lWGfsr1jwzv7gg9VrA=;
- b=RAK/H2bLxumYU/GbQuvQWJRq9mEQyF4eafFMj3EU4iG5/COuANzhcL4IridREOf5eZ
- FFovoV/Vf3VS1iyNSwOY5njKnXKK2+Hs/XbjM6aHdOF5TbzYnYmA4VV+FfykBVYnikKn
- YzZjmco0QSGwk60vOgSiUGm3tFtUfHgXjwnLM=
+ bh=y9tmzwo7QQO7OYjzQSflPH5VyHX4qJojN7AFvXMpGqM=;
+ b=RN7sIxQMI3dM+1Xk8ZzJE3dLHF+4vQwRQfds5XT0b/tW8wmeoNGi2D2JnpxnFDX4Ff
+ 5/H/yYIQ4aOLFkYIsgR69FXC11cgC4qkY+smvNsT4bkVSB8pPr3fTPwFMMz9/C+35+kL
+ gVUE1TMehzU7yOiYACcLqR0rfLtkDchJlxAYc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698499616; x=1699104416;
+ d=1e100.net; s=20230601; t=1698499620; x=1699104420;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4IBqvg8lsmM9aXIsegk916+t1lWGfsr1jwzv7gg9VrA=;
- b=T6jw5FTLn+T0jMGlemAAjqzXqUgPIljOg+ZzHEhRLCC+nN4ziHxcir0Aq3r9YsJuHK
- mAJEkjVSBh+FpGfHr8UNSL3xwzICFBRueiV8jAQppxamvWLDYcI4Do+w1p3tD16E1ih4
- fO3pdRdDVA2MTbY4+UXAkMR+7J4qfsOa0lnzALlABjCULkJD22a4X0VHM6rTiwttUqII
- zsTkFZzhg2P0ScixDH0duseQf7//6vTkTpF4EZ1EwP+w7vJ0SqfdyL3nj0o5kuDElcfQ
- Ls+MlcBIUs5AT8qGrHs99ZTKOypnMM0n1Xwny/YIgfBe3kaF71Z55rk5ENiiNsBOQhav
- +o9g==
-X-Gm-Message-State: AOJu0YwzRbyhDshkMmur1xm3tmwudJagKyqqvQ8GpAu5Z3ODPr48AE/8
- emGLHg4TOeL5ro72ZpYfJJvGcQ==
-X-Google-Smtp-Source: AGHT+IEL9/0BlGwdnBFYQPACVj3Cqg3UfXWf+0tdZHBpPvL949ZvwPUVgRAxZcLXDRREFMV+iDZ15g==
-X-Received: by 2002:a05:6214:5191:b0:66f:b228:f261 with SMTP id
- kl17-20020a056214519100b0066fb228f261mr5771346qvb.7.1698499616112; 
- Sat, 28 Oct 2023 06:26:56 -0700 (PDT)
+ bh=y9tmzwo7QQO7OYjzQSflPH5VyHX4qJojN7AFvXMpGqM=;
+ b=orbZ1wHUBD5+BcUXi4L/3RdywHO8dEIcsi1nm5D5y5bZaTjF2+5wGvdmJtplJM8zdC
+ VWFHsGyHyPiTX4j4xbcEa7vYJH2Nj/vJTkG9NAifM+MKoCRGa+rXU2sIjk2wOzVg+l/H
+ nt3ZuqeLGtThRHCw207mnruuGIlB8lQteF4psQSYr42oYAhUmI+pQ6Idbmh46aBeOO6E
+ k0wVrFdbYtSQBguW+s2dWpb1UVHtDqrmxKrPq5K1i1whGNdy6Qy53zF4vkeO38I0MofH
+ Ycf3HzRBZPs/sQ3PYL7DBsk2oLMiHnKDKY2flokaVSXDp7WpSA6Y4JDe5utUZ7C5oik3
+ oRtQ==
+X-Gm-Message-State: AOJu0Yx1wev57rbATbX+kkeB+leV5MDmm6UKULm2a72daK6q7qmUnxk0
+ Md0IwtD0VK0MxCXmhAxExT7zVQ==
+X-Google-Smtp-Source: AGHT+IHaKCwbMIPU5TOAaspeZBIV9Pshm3MtpGcWqo7PiCti/E34YxoeCkihRldSRITyAXvpfAcm+Q==
+X-Received: by 2002:a05:620a:4892:b0:778:9072:e45a with SMTP id
+ ea18-20020a05620a489200b007789072e45amr4480101qkb.74.1698499620547; 
+ Sat, 28 Oct 2023 06:27:00 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6f2b-3a78-9e8e-d344.res6.spectrum.com.
  [2603:6081:7b00:6400:6f2b:3a78:9e8e:d344])
  by smtp.gmail.com with ESMTPSA id
- k8-20020a0cebc8000000b00670e7ae4964sm506278qvq.91.2023.10.28.06.26.55
+ a1-20020a05620a102100b007726002d69esm1548907qkk.10.2023.10.28.06.26.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Oct 2023 06:26:55 -0700 (PDT)
-Date: Sat, 28 Oct 2023 09:26:53 -0400
+ Sat, 28 Oct 2023 06:26:59 -0700 (PDT)
+Date: Sat, 28 Oct 2023 09:26:58 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Martin =?iso-8859-1?Q?F=E4cknitz?= <faecknitz@hotsplots.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] mpc85xx: relocate code in non-SPL build
-Message-ID: <20231028132653.GH496310@bill-the-cat>
-References: <20231019230655.24974-1-faecknitz@hotsplots.de>
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ "Su, Bao Cheng (RC-CN DF FA R&D)" <baocheng.su@siemens.com>
+Subject: Re: [PATCH] board: siemens: iot2050: Fix M.2 detection
+Message-ID: <20231028132658.GI496310@bill-the-cat>
+References: <31bb24cb-2d84-4524-bb25-263f8fbe16ab@siemens.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fyDAYSBKHAbAFjqL"
+ protocol="application/pgp-signature"; boundary="qbRYZt0yRqZudKrN"
 Content-Disposition: inline
-In-Reply-To: <20231019230655.24974-1-faecknitz@hotsplots.de>
+In-Reply-To: <31bb24cb-2d84-4524-bb25-263f8fbe16ab@siemens.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,45 +93,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fyDAYSBKHAbAFjqL
-Content-Type: text/plain; charset=iso-8859-1
+--qbRYZt0yRqZudKrN
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 20, 2023 at 01:06:55AM +0200, Martin F=E4cknitz wrote:
+On Tue, Oct 17, 2023 at 07:20:14AM +0200, Jan Kiszka wrote:
 
-> When building a non-SPL image, relocation is needed. This patch restores
-> the old behaviour before commit b35316fb67: CONFIG_SPL_SKIP_RELOCATE was
-> only defined if CONFIG_SPL_BUILD was defined.
+> From: Jan Kiszka <jan.kiszka@siemens.com>
 >=20
-> Fixes: b35316fb67cb ("Convert CONFIG_SPL_INIT_MINIMAL et al to Kconfig")
-> Signed-off-by: Martin F=E4cknitz <faecknitz@hotsplots.de>
+> The "simpler" the logic, the higher the probability to not test and get
+> things wrong, again: The absence of a "-PG2" suffix is not sufficient to
+> derive that we are on PG1. There is also "IOT2050-ADVANCED-M2".
+>=20
+> Finally fix that by exactly matching against the two PG1 device names.
+>=20
+> While changing this, we can also drop the not really needed check for
+> !board_is_sr1 in board_is_m2 and call the boards by their names
+> ("board_is_pg1").
+>=20
+> Reported-and-tested-by: Bao Cheng Su <baocheng.su@siemens.com>
+> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 
-This is now applied to u-boot/master, thanks!  But also, can you please
-confirm that top of tree now works for you, and which defconfig that is?
-As part of my testing I check for size changes before/after and this
-doesn't change any platform, which would lead to how I had missed the
-problem during the conversion.
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---fyDAYSBKHAbAFjqL
+--qbRYZt0yRqZudKrN
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU9DBoACgkQFHw5/5Y0
-tyx1TAv/ZENEram1gkF6Pwidadd3P0Ce3TvHZLcPSk+LX1SYiqX1/ZAdmSv+e/ZO
-+hBmSVd56T3YmAy2r58khPCkQHiWPNXX95hN1CniNmnJ2Qil3AxJeuXj4RM4neN7
-v13Agf4aiH3GqzeP+lgD1gyOerBNIVETVclz3KGL4nRmqV3vo28jCJ2jYXbpiR1C
-v9eRDFATHPr53VTSmOMeRUSoXu0JR3kG0Odw6Ip9Cd4tiXuxdS2ddD/0V7ct3827
-g//55XSKG8maUo7TZiFvJ9X4CWU91ozwCJvmnqYejUlfx8kbcVhnHCU73cVGk2G2
-Lq0d/qj2plsNqenSKLNEDaeOJeiAWOILMsgU3yZDDZKsf0QrUC3Lwm0/RKGQO3N0
-f+nr9UVjS10EdQievEZm1ra6a8TZvyxP/kruE57dJlF513DVYOdf5THj6ja87rLc
-sNTQm2J2vntWFiX5IhhCpxTqPQaCrZlAwWOZk4wV5IeEDT77IU7HIocOmfkeicCr
-5xynHlGX
-=GLya
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU9DCIACgkQFHw5/5Y0
+tyxxKAwAgNo2TCj8xH7KYWigHOcJr3eZ40tKUjy74uyjErrq9/j6nuiaiADkJfd+
+KfTpxqEvh6zjd7jEj2wcWkcM/Qkq0qwqnPrfldH84diIiAiaFHS4P21QYZLHL2Gf
+elAVkjifHqUwOzVxdZRL1+/JN31Qpb9TVlzqSC/9mwzbQJzRtWiERCCSgovq8qXI
+H6h2ChhqW3w1AF0fJOu5rgnHF0auyBQCWXBmHhoybZyiHc8zqUbFv/6KgP4x3K/G
+kOVuZJyCIxTC9F3+l5QU/9RdFXsyYZWQ7W/w9Dn+Tw6q3BZJM5Jai70n77Ily0Sl
+527RFpE4h42JhGBWURAmmTzxkbs99rxtTVOUkoRtTm2BZWfAdRyZJ/VDjA2Xmsn2
+wj32lQA1r4jaRMnWNIj4ZiM3JKub5PkHE2M4ILAeLNfBObP7QgXNdeSjl0fcCxzK
+amdPW0vNSMfVkptWS/D9hGbqnbS0fSimCp8P+3WBwAwC6bKhAXccgfLOxc/PGkxO
+XdDnUcEU
+=cHaU
 -----END PGP SIGNATURE-----
 
---fyDAYSBKHAbAFjqL--
+--qbRYZt0yRqZudKrN--
