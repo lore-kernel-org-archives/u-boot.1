@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C931DC27C47
-	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 00:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1826C27C48
+	for <u-boot@archiver.kernel.org>; Sat, 28 Oct 2023 00:51:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4640E86C68;
-	Sat, 28 Oct 2023 02:51:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7A078717E;
+	Sat, 28 Oct 2023 02:51:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rNDUn9bO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CP3LdQi7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07EDE86C68; Sat, 28 Oct 2023 02:51:10 +0200 (CEST)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id 3681786F09; Sat, 28 Oct 2023 02:51:16 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AED9886E5A
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 02:51:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB33486C3B
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 02:51:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-41cc75c55f0so30445591cf.1
- for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 17:51:06 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-66d12b3b479so16864176d6.1
+ for <u-boot@lists.denx.de>; Fri, 27 Oct 2023 17:51:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698454265; x=1699059065; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698454271; x=1699059071; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uyOkpE11BshJcB58i/TM1hu55u4zFnEP/GangTWGoKI=;
- b=rNDUn9bOGrGyg/ITUGEcM9oleir7RFEcR/1xo/AbT+NEbnzeF+rc14/Ajt2DmiWtY3
- Fxxwf2VFGIwBNUV8hhwgBMZuo+TxPwZvHuuaW5EXsZuG3JmAQNjWcYRqS4WV33OavU1i
- lyamNj9lmm/fxizuLtlNzEoLreuC+blU03SN4=
+ bh=wBGg2+O2i5924t9s+cbw24TXL8IYAMxBUY7bTeSgZzA=;
+ b=CP3LdQi7YjLb6e5aP8T+pyKnZgdVayri9kFUJDV6yOyhJ3usVc/kMK0LKRkO0t2W5n
+ pAOGiAs11p+y3AdHqOnPm/hBt5vje+0ZFCAXJYPj4BMV0+PImn/pHqOnCbcN6b0RYTvp
+ RLB6OtGZHfSDlInbfsC746qvNxyL/x9uiJUAI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698454265; x=1699059065;
+ d=1e100.net; s=20230601; t=1698454271; x=1699059071;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uyOkpE11BshJcB58i/TM1hu55u4zFnEP/GangTWGoKI=;
- b=kkLTC7EqvFsNS8Z/+FqUsankBKD7XvcslPE9iJY7leLAayMxZv7elZmF6S3TnBY5cj
- XDT/vz29NhC5JNYvbf9LHA3crbbbVJLFI1txJZocIPAeewRSmDz+Ic0p3Iwo3qThkpK/
- rQaeXNU7Z/SNYMoIVHht9LEsPJ34S4B1coSc3O4dyIORN7wkkaiDCnAAFWSVQ+FxV+zI
- HKJwxe7QzwiVCsqxIQmvF4unQlFb+ki/9PMctUK/LyDGMRxIcAHFcoPIj0aFRjcQuaBX
- v/NS1vxQ/Qu1hg132RVtifdQ7BV8TAYhGYuvtZIH3NIYK+MqCtsM3YTYE7b80mih1HN4
- ra1Q==
-X-Gm-Message-State: AOJu0YwxApTEzPiOzhlOPPUxKwSmOddcyuwxiH/U00vH/YNWUwmNspg2
- 3ADbI7j8suoPDk/F7VreVDBS4Q==
-X-Google-Smtp-Source: AGHT+IGZ4DZA9Jt9vQeBWD7Os8bLc3HH0S8d59SkM7QpeMBszFxLkcNLlX6lC2/vAphrrsP0yTNQjQ==
-X-Received: by 2002:a05:622a:118c:b0:410:92ca:3dcd with SMTP id
- m12-20020a05622a118c00b0041092ca3dcdmr10055903qtk.9.1698454265357; 
- Fri, 27 Oct 2023 17:51:05 -0700 (PDT)
+ bh=wBGg2+O2i5924t9s+cbw24TXL8IYAMxBUY7bTeSgZzA=;
+ b=Q/+yto76VRhRsO6AbTV65JWAhk1TPzacPDcYMI56bURPhhgaMSNNyRCkrxQRdcCDaG
+ T7iT0SJssOQP7WL+H46MkFJmHdjyoNruUSbqZI+chn2LOFzdZpd/yBELF1hdhBXqSNCh
+ cz5HyfzNbkDCb0504kKm/M31Vr1NXrQTuyWuQNDb0GAb0a5hkYAkik96P1yFlVi4UNa4
+ cBiOlc4g9FLHSO446O9VrgRPNZEo7AUmmaE+Gc5PUARtpkoRJWzAst3w72XFvwJk0rfJ
+ vQoyzSyLuje1Pf5E8tBjYQvN/EiFvttdkehrP7YVIoCSHfDSjggI/WsXEtdEdMCSj1KT
+ fjaQ==
+X-Gm-Message-State: AOJu0YzvR+KtClIiCGYRV8Rai6kPKHRpb0mkFqk+21Xky2ZN3Rl7Jb0w
+ HwUE9cqqaoBkIfKx01Yau6yhPw==
+X-Google-Smtp-Source: AGHT+IEzTJfbMN/J+gLklF4NOLSGUEgTZkNQRGX9t3coJkytR1GqOoOyRl9V+DxsnaPvTm6S5yuXuA==
+X-Received: by 2002:ad4:5ca9:0:b0:66d:2813:fd18 with SMTP id
+ q9-20020ad45ca9000000b0066d2813fd18mr6089845qvh.52.1698454271589; 
+ Fri, 27 Oct 2023 17:51:11 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6f2b-3a78-9e8e-d344.res6.spectrum.com.
  [2603:6081:7b00:6400:6f2b:3a78:9e8e:d344])
  by smtp.gmail.com with ESMTPSA id
- f10-20020ac8498a000000b0041b3deef647sm1102836qtq.8.2023.10.27.17.51.04
+ t10-20020a0cea2a000000b00646e0411e8csm1092138qvp.30.2023.10.27.17.51.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Oct 2023 17:51:04 -0700 (PDT)
-Date: Fri, 27 Oct 2023 20:51:02 -0400
+ Fri, 27 Oct 2023 17:51:10 -0700 (PDT)
+Date: Fri, 27 Oct 2023 20:51:09 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de
-Cc: u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: Pull request for tpm-next-27102023
-Message-ID: <20231028005102.GF496310@bill-the-cat>
-References: <20231027112616.112555-1-ilias.apalodimas@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dylan Corrales <deathcamel58@gmail.com>,
+ Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Subject: Re: Pull request efi-2024-01-rc2-2
+Message-ID: <20231028005109.GG496310@bill-the-cat>
+References: <a400d609-3328-41c1-abad-7c395be64228@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mRVasj6tMq7raKkn"
+ protocol="application/pgp-signature"; boundary="6DtUE5QRhYmzqJRG"
 Content-Disposition: inline
-In-Reply-To: <20231027112616.112555-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <a400d609-3328-41c1-abad-7c395be64228@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,57 +96,36 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---mRVasj6tMq7raKkn
+--6DtUE5QRhYmzqJRG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 27, 2023 at 02:26:16PM +0300, Ilias Apalodimas wrote:
-> Hi Tom,
+On Fri, Oct 27, 2023 at 09:20:37PM +0200, Heinrich Schuchardt wrote:
 
-> The following changes since commit e29b932aa07fa0226d325b35d96cd4eea03701=
-29:
+> Dear Tom,
 >=20
->   Merge branch '2023-09-30-Kconfig-updates' into next (2023-10-01 11:54:3=
-1 -0400)
+> This pull request replaces pull request efi-2024-01-rc2. The two patches
+> with which you saw issues are removed.
+>=20
+> The following changes since commit fb428b61819444b9337075f49c72f326f5d120=
+85:
+>=20
+>   Merge branch '2023-10-24-assorted-general-fixes-and-updates'
+> (2023-10-24 19:12:21 -0400)
 >=20
 > are available in the Git repository at:
 >=20
->   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/tpm-next-2710=
-2023
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-01-rc2-2
 >=20
-> for you to fetch changes up to 4fd7d27ccb763ce8b836a0e4c5dd005392d38e18:
+> for you to fetch changes up to e89827998fa47408f3d0be0384c7c19cfe8e2b3f:
 >=20
->   test/py: always use autostart on tpm2 selftests (2023-10-27 13:17:21 +0=
-300)
+>   efi_loader: fix EFI_ENTRY point on get_active_pcr_banks (2023-10-26
+> 00:36:07 +0200)
 >=20
-> The pipeline https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipeli=
-nes/18327
-> showed had no red lights.
-
-Heinrich, I see that the docs job passed.  But I see:
-+++ b/doc/usage/measured_boot.rst
-@@ -0,0 +1,31 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Measured Boot
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-And was expecting htmldocs to complain and fail. It does neither (and
-did neither locally which I believe is a regression in the doc building
-side of things.
-
-> Heinrich I did not ignore your reports and I agree with both of your
-> observations.  The doc needs to mention EFI and the DT Kconfig options
-> can be squashed in the future.  However this is a big patchset with
-> a time consuming test procedure.  The changes you requested are
-> trivial and we can send them later.  I hope that's fine.
->=20
-> Simon there's one patch you haven't acked/reviewed yet, but I've
-> responded to your concerns in the ML.
-> The response is here
-> https://lore.kernel.org/u-boot/CAC_iWjJL_taKWWEi4kancnQ6Dsg1V5+4hMSvTifcd=
-r_aCH-Ykg@mail.gmail.com/
+> Gitlab CI showed not issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18303
 >=20
 
 Applied to u-boot/master, thanks!
@@ -150,22 +133,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---mRVasj6tMq7raKkn
+--6DtUE5QRhYmzqJRG
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU8WvYACgkQFHw5/5Y0
-tyxPzwv8DZYmCrDphmMW/MVkirsU3aibQsam/aCsz8yzQBZ/FNyatbStZsr7p/eu
-W+4qx6Oxfx65ryF+X6JYaXm9TJL9HUahZ96PWKeDJQRZsjQKJAl/neu9xF05Prac
-IT3YfqqI/NKARKqldXoW2ffkQlK7xAHA45bQlDeKPOmjoqpqUUacN+Cu/xE3TXvE
-I3LPd4V0SE9iqZSSYpIUXCclN8VPqC175CtzD+GF1577o8Ko9lZxJCREXtKp+qvm
-fwnja1/r+4PpYIeISOYo2T4ybaDY4eGKCPCFkRBqXbfC2HdZRbhhyPWGGNoYDgir
-Y0pEkw4WX0a4Lz1r2AMMYbDXa23SM4p5Opj7CddaRk7Cm9q8OAFWNJyHFAJ0rw7e
-Lk1bdvQjTR89cqTvYE+UXL/hTgBXQqw7zBNj6ydWkZoIWS3S4OxOdEW1zBNh5t8S
-RlsIjVkF+n9lawtM6mV8WMsycxl0m8DVmET7vyNA8q2URuJmjAEpeVvFG5ZaS4PA
-BorSHQvJ
-=35Ix
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU8Wv0ACgkQFHw5/5Y0
+tywrUAwAiD24MZ9tPwcza4wrTlcRk4SS9KSDm/YBXDhBx+7pdyVnKiqmz1hZNvA7
+Hjpww+MrCXWc6s1QRY6jkkdqZMKh7+6+D5rQ5T5F7dVDuK/EkXYr1PMvWLwK7Ek2
+KJsNr9Vs1kAcy3sK3kF8BRsDMCOMqU4FdgdOcWxjyHudf4g720TBavWpyb/kNAap
+Nj+RnEgoTi0RQP65z535Ukkru62PXfCKo26HIXOz9xM7ppomTI0JoEUWLL3Lse8f
+rrLbalTj/1g1TIGYAOWn1FO6TFPQG81jtKIZavuhFLvSDMmm5ofrqJbl4f0lrakj
+QZ6xUCCoRJjs5voMUYlgMDLLdlbELZGFTjZdXevsN6rW/hUmEu1ZRl1qPM0oh1+Q
+MUOj9DmsR5MKKTknZEdmTNs/zQ4c75yrNaufUmOCGw7e8EabXqND73R/2DT52kWl
+dC4w0j9NMXTLoDq3RM1cCXMVQik4L+AHtMXCEfRB+0F/0UBnMqrsHlMbjSY5Xpbh
+mMcV3d5L
+=IedX
 -----END PGP SIGNATURE-----
 
---mRVasj6tMq7raKkn--
+--6DtUE5QRhYmzqJRG--
