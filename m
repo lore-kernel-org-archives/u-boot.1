@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F5E9C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 15:12:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 088B9C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 15:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C72B87CBB;
+	by phobos.denx.de (Postfix) with ESMTP id 95BD787CC0;
 	Sun, 29 Oct 2023 16:09:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1698592195;
-	bh=zy/fjZnJg9QgiNAjp+LoUE9AEAUlTb3BUXVF0XZR46A=;
+	bh=Oycuat/edA/HiT92S8gAyA5XupVbufHEA1EdkI44MnE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=nMwfG2KijKHHItmLkJbMLybnxt0FBkwFsjFqPrJ3lposTf3mu7bZWLXMaQgiddIdQ
-	 M6XJK9CE/JOXE3X8pkKdUB/vZ3X1Joea8/bvoLbJ49DbpcWUiC8P0EJFgcAsDkIkvg
-	 0avJhbrLmlyVp9yswLGtryfA8/262B/5Zygu8KqVEKR2ujmdghTOagd7IYhvgwZ7eY
-	 Zz80jIGmsuVuIi81hK2GeVCaHCfdeccC8AjrI0H/bO7fjnCKSLSW80g40v/8ZNfYxn
-	 FH8GmD4fE0BX+vylDjYhHArRRcbBhm20/PYDTZHtBlj74VjzTjzLjZ42/jw2bCpGxg
-	 5FF8+xhzx1nDw==
+	b=Syb5OK4aZV24lJRBRnQkt6pc8i7uNtV1OgiI+UlgtGX2lpdRnkE/HBBP+NhfVmczc
+	 vTR3VlQ7lbxUqkov3i7kx9xvyDuLrbrU1EYqTykrsW/6YKYNIuHMSn3RGuATqbeQst
+	 thpgJKkzzgkimkHru1iu/XCClRsGb126ihiVT8unoQieypb2kpa9A0ss9JSbXD/EKl
+	 svMdoZC5pPBpA48wpg14WEoJ5vnqX3ZEj6HboZptPNgjt19O8dptDxfmGPXJD/px2U
+	 64t6MWQeC6NRN7WjBFreLByAYZGikS2ez8MbDhalKqEfddHhgEHJGptpvPwHZsexqk
+	 FesiRHM6IHmUg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EB63787C8F;
- Sun, 29 Oct 2023 16:09:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 831CB87950;
+ Sun, 29 Oct 2023 16:09:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1698592188;
- bh=zy/fjZnJg9QgiNAjp+LoUE9AEAUlTb3BUXVF0XZR46A=;
+ bh=Oycuat/edA/HiT92S8gAyA5XupVbufHEA1EdkI44MnE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=J38LTYfe32AR9XVDdkq+EzKpFZB7GK3XAMDln7gig3hwlpPLNz9JToHxdhIRkyrER
- tDedato1hL5NbmbT5euxpk8PUEjRyxSG2AkJ416061ZvSEM3ffhYFRB9DyQ6K7cAzt
- 0oQ8HkXEubaWrRk7pfgvTkpQcc4Aqltl5o4goRDv8LqFBrHRP3zdxmHghsbV0pAqnB
- YBy5ahssQPxvF6ka34IKYKVRV67GIrGJUeGz5HMackz4ShTOAifOvyAN7dR5asmEju
- rAsPPZX0z7uUtyx0kEM6T7A5W5Wa3rms52SRA0CvMKfO2wyW8Go9GfFyZHhXk7Ml/k
- BKUIsA1gkh5/A==
-Message-ID: <c2190c72-c319-41fc-8177-0080a9893f95@denx.de>
-Date: Sun, 29 Oct 2023 15:35:33 +0100
+ b=pr6I0ZHJJl/gdBL+taHT9A6vN9Goy4S9lJ5RPfb2qXUBghOQnbOHPoNtHM5f7QuxZ
+ gd7pqlxam3P58VYPGXtmVmMYv/dnK21EtkRI4h795uMdfe7TDGc7AeVqs4ua7ruoli
+ OZvS4RGQ4XQa6v4fewBYRHmfnEQPsy1zgOHbSMiRzDBNtXrTxYD52mCFDca6yG1A8m
+ XbaJfcDTFOcI34sQuedruWiOqtwTovZvcrTgJmIPF8K1e1dk7H+5pGOvnSqSVOB3yK
+ ZMEiRZHnMNkveFqQgdR8PWbkpNxffDDBfBG6wfASB2/d0umWT6fj7fO5Y8OOGj4PAj
+ 6uC01wtnQru1w==
+Message-ID: <5b653914-92a9-4b7b-87aa-51820ab90335@denx.de>
+Date: Sun, 29 Oct 2023 15:35:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/8] usb: xhci: Do not panic on event timeouts
+Subject: Re: [PATCH v2 7/8] usb: xhci: Fix DMA address calculation in queue_trb
 Content-Language: en-US
 To: Hector Martin <marcan@marcan.st>, Bin Meng <bmeng.cn@gmail.com>
 Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>,
  u-boot@lists.denx.de, asahi@lists.linux.dev
 References: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
- <20231029-usb-fixes-1-v2-6-623533f6316e@marcan.st>
+ <20231029-usb-fixes-1-v2-7-623533f6316e@marcan.st>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231029-usb-fixes-1-v2-6-623533f6316e@marcan.st>
+In-Reply-To: <20231029-usb-fixes-1-v2-7-623533f6316e@marcan.st>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,27 +71,9 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/29/23 07:37, Hector Martin wrote:
-> Now that we always check the return value, just return NULL on timeouts.
-> We can still log the error since this is a problem, but it's not reason
-> to panic.
+> We need to get the DMA address before incrementing the pointer, as that
+> might move us onto another segment.
 > 
 > Signed-off-by: Hector Martin <marcan@marcan.st>
-> ---
->   drivers/usb/host/xhci-ring.c | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-> index a969eafdc8ee..ae0ab5744df0 100644
-> --- a/drivers/usb/host/xhci-ring.c
-> +++ b/drivers/usb/host/xhci-ring.c
-> @@ -494,8 +494,9 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
->   	if (expected == TRB_TRANSFER)
->   		return NULL;
->   
-> -	printf("XHCI timeout on event type %d... cannot recover.\n", expected);
-> -	BUG();
-> +	printf("XHCI timeout on event type %d...\n", expected);
-> +
-> +	return NULL;
 
 Reviewed-by: Marek Vasut <marex@denx.de>
