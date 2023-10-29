@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D503BC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 14:15:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA98C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 14:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE3E8874E1;
-	Sun, 29 Oct 2023 15:15:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 50EF28750C;
+	Sun, 29 Oct 2023 15:33:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IWYjWVcw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e2qIOVoi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 113AB8750C; Sun, 29 Oct 2023 15:15:29 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 671B18764E; Sun, 29 Oct 2023 15:33:40 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 044EA87139
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 15:15:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40D6587172
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 15:33:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-778711ee748so296293385a.2
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:15:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-d852b28ec3bso2950157276.2
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:33:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698588925; x=1699193725; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OZRWmoPColjJxSQjAT50eDZX1daVYuFKJw05DGcWnlw=;
- b=IWYjWVcw6f4rnhtX046/Q+4rlnZPNbx+o3g/psX6LNz5ZXqG4pbh0npT1alhy1D7Ew
- GkUKA1M2YpsF9ODTCn9Szd6TgFvl3W7MwqgEYZUlRj1c2LJSnG5p+o1X0yTu4WUK+bic
- ZoSjgJOTHN6FICMs9Kxm63x8Tzpaa3Sup1+U417ZszbdKqpsuF/4he+FOgVVHCQ0a5+G
- zfJ0oIQVr09kFz1tKrmPIVkKjHPXfYOPFC79ZbhrBoQnANg9qUi+bblapc1/Ct2Ta5C0
- iodDmqOyJkfqLpJKtEnpephC2pbHrzu6ZmSR2U2v5l3qSP8F0hWp9cWY1SGT71iuhtCi
- ozpg==
+ d=konsulko.com; s=google; t=1698590017; x=1699194817; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yaI+M2fDAzsfBfDthaoIfiZaSfXHwMsc+csus2qx0bs=;
+ b=e2qIOVoilf2VMaj0F/O0oAekXh0lSh9xhkoMt8x9owpyL3zRIS6Q7N8CUmjLa7AbrE
+ erEXBveBM4pX3LlFlC6dnYmJ3Z0yaeLJxt/t+dy+mY7vYzKPvwrvQvcuz7g5fRyo0DFX
+ EZbxhZpHewDIprwEqVjcuupScMbD4T/9wVmU0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698588925; x=1699193725;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OZRWmoPColjJxSQjAT50eDZX1daVYuFKJw05DGcWnlw=;
- b=IH27AsqQ81P0pk2bIrMkavKbvxDageXiPSKHHM8EHK12+XFfLkNbTcLJpCU5EQ9T1q
- ucrVJuN/1vWusYwadoTZRYgNjTcT1cqGxnL8Uq9XaRI7qvdy70Gmn8eI5Twg3ys07MoW
- QqZsZlH5XBB64xzw0d1GMr3x5LWSWt2mJP0jOgUGHDnqBLynhT5yDzyF5SPxi/4lBV4Q
- oiVrTXVOwKU6fWeTZyrfWUlyeqRCrUJgdEg/CGqhVU0yNN4H462KpHLzckEoTHVX7pxX
- ookfcs1eD51FL33I0hZTWpQP4zJeX4vhyd/Q/cRlI4V5Aqps+bTxOw2uwy+nRoQ/X29I
- 86JA==
-X-Gm-Message-State: AOJu0YxDt50Wq2IlibeEpaBqb4uIJNJS1yKRuC0Y5kAgj/agK+iof5Yz
- l1m7z19pCsZlpIa2cnsq2QA0T9K6serXCg==
-X-Google-Smtp-Source: AGHT+IEPUVOmamDLgiNVtvepEnWWf/QuKLfSxMCjY8HWAPZsfDzBT1emNS/yDRunGw0+teWAJe9O2A==
-X-Received: by 2002:a05:622a:170f:b0:41e:1fea:8a49 with SMTP id
- h15-20020a05622a170f00b0041e1fea8a49mr9141724qtk.65.1698588925057; 
- Sun, 29 Oct 2023 07:15:25 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- hf12-20020a05622a608c00b004108fe9697asm2524784qtb.61.2023.10.29.07.15.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 29 Oct 2023 07:15:24 -0700 (PDT)
-Message-ID: <20a22ee2-2060-3e6a-61ea-963786f4e4f1@gmail.com>
-Date: Sun, 29 Oct 2023 10:15:23 -0400
+ d=1e100.net; s=20230601; t=1698590017; x=1699194817;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yaI+M2fDAzsfBfDthaoIfiZaSfXHwMsc+csus2qx0bs=;
+ b=oe/EoM8xoAvunrUBLZ0DduDceSHiK6iTAXK2IzbWv0b+uYrSosxxW3K3vvlS4zOH/t
+ kYh+Q3VfB88YUHRC2bdThMVtbsRlJJpuikX9AJRqKF43HEnYkLvjfCO6lG5W1BmiaU5q
+ wVufj88CJr+vUaZfKqf/VcYC8keTn7Ak7EHs2u00cqaLmUk9OtV1j1oY6M+dei/oWSRn
+ 16BVhAx/r0ORGxkQmX44QWtmUxbCG3t4Et8GELwNM7f9/ASNP5jYaMzXTCmC80Eims7T
+ ban9ez43pvlBU5cSRqnTt2eSju4JR5dFT/lJcZ9E8GMKnSzxLgnwZ+ynxXkrbpl0hRGf
+ zcvQ==
+X-Gm-Message-State: AOJu0YzduNxJdNhIkwOGugOarqaz5pL9DlPjNX/2FlUjnwMUHFqG5/nf
+ GpobTvHKzpLL5P+BXS72vVvA3g==
+X-Google-Smtp-Source: AGHT+IHGNEfjBFx0PtumJtGm4o+gYk9UpIi/+WRUuwFaMSpm4EtpxaMGxUSaauSrB08fsQ4ie5D5lQ==
+X-Received: by 2002:a25:cfc2:0:b0:da0:c746:386c with SMTP id
+ f185-20020a25cfc2000000b00da0c746386cmr7062448ybg.51.1698590016901; 
+ Sun, 29 Oct 2023 07:33:36 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ px1-20020a056214050100b00655e428604esm2564939qvb.137.2023.10.29.07.33.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 29 Oct 2023 07:33:36 -0700 (PDT)
+Date: Sun, 29 Oct 2023 10:33:34 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH 2/3] tpm: Convert sandbox-focussed tests to C
+Message-ID: <20231029143334.GS496310@bill-the-cat>
+References: <20231029042817.3938657-1-sjg@chromium.org>
+ <20231029172813.2.I8ff77e0c1288f6a4da564e9454eb223f72809839@changeid>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 01/15] spl: nand: Fix NULL-pointer dereference
-Content-Language: en-US
-To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Weijie Gao <weijie.gao@mediatek.com>
-References: <20231029034845.1169614-1-seanga2@gmail.com>
- <20231029034845.1169614-2-seanga2@gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231029034845.1169614-2-seanga2@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rypkj4e+DO8uRT3+"
+Content-Disposition: inline
+In-Reply-To: <20231029172813.2.I8ff77e0c1288f6a4da564e9454eb223f72809839@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,45 +93,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/28/23 23:48, Sean Anderson wrote:
-> spl_nand_fit_read unconditionally accesses load->priv. Ensure it is set.
-> 
-> Fixes: 00e180cc513 ("spl: nand: support loading i.MX container format file")
-> Fixes: 4620e8aabc1 ("spl: nand: support loading legacy image with payload compressed")
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> ---
-> 
->   common/spl/spl_nand.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-> index 07916bedbb9..a19236d9e6d 100644
-> --- a/common/spl/spl_nand.c
-> +++ b/common/spl/spl_nand.c
-> @@ -105,7 +105,7 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
->   		struct spl_load_info load;
->   
->   		load.dev = NULL;
-> -		load.priv = NULL;
-> +		load.priv = &offset;
->   		load.filename = NULL;
->   		load.bl_len = bl_len;
->   		load.read = spl_nand_fit_read;
-> @@ -116,7 +116,7 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
->   
->   		debug("Found legacy image\n");
->   		load.dev = NULL;
-> -		load.priv = NULL;
-> +		load.priv = &offset;
->   		load.filename = NULL;
->   		load.bl_len = 1;
->   		load.read = spl_nand_legacy_read;
 
-Actually, since spl_nand_legacy_read doesn't reference priv, this second hunk is
-unnecessary. Actually, spl_nand_legacy_read and spl_load_legacy_img are technically buggy
-since size/offset are supposed to be in units of bl_len. However, this basically just
-results in extra multiplies and divides, so I don't think it's desirable. I actually have
-a patch to convert everything to bytes (keeping alignment), so "fixing" this is not
-necessary for the moment.
+--rypkj4e+DO8uRT3+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---Sean
+On Sun, Oct 29, 2023 at 05:28:13PM +1300, Simon Glass wrote:
+
+> Some of the Python tests are a pain because they don't reset the TPM
+> state before each test. Driver model tests do this, so convert the
+> tests to C.
+>=20
+> This means that these tests won't run on real hardware, but we have
+> tests which do TPM init, so there is still enough coverage.
+>=20
+> Rename and update the Python tpm_init test to use 'tpm autostart',
+> since this deals with starting up ready for the tests below.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+I worry that we're removing maybe a few too many of the tests we can be
+used on real HW (and QEMU, another real use case) in favor of just
+testing them on sandbox. We can certainly have parallel sandbox-only
+test paths.
+
+[snip]
+> @@ -92,46 +79,6 @@ def tpm2_sandbox_init(u_boot_console):
+>      if skip_test:
+>          pytest.skip('skip TPM device test')
+> =20
+> -@pytest.mark.buildconfigspec('cmd_tpm_v2')
+> -def test_tpm2_sandbox_self_test_full(u_boot_console):
+> -    """Execute a TPM2_SelfTest (full) command.
+> -
+> -    Ask the TPM to perform all self tests to also enable full capabiliti=
+es.
+> -    """
+> -    if is_sandbox(u_boot_console):
+> -        u_boot_console.restart_uboot()
+> -        u_boot_console.run_command('tpm2 init')
+> -        output =3D u_boot_console.run_command('echo $?')
+> -        assert output.endswith('0')
+> -
+> -        u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
+> -        output =3D u_boot_console.run_command('echo $?')
+> -        assert output.endswith('0')
+> -
+> -    skip_test =3D u_boot_console.config.env.get('env__tpm_device_test_sk=
+ip', False)
+> -    if skip_test:
+> -        pytest.skip('skip TPM device test')
+> -    u_boot_console.run_command('tpm2 self_test full')
+> -    output =3D u_boot_console.run_command('echo $?')
+> -    assert output.endswith('0')
+> -
+> -@pytest.mark.buildconfigspec('cmd_tpm_v2')
+> -def test_tpm2_continue_self_test(u_boot_console):
+> -    """Execute a TPM2_SelfTest (continued) command.
+> -
+> -    Ask the TPM to finish its self tests (alternative to the full test) =
+in order
+> -    to enter a fully operational state.
+> -    """
+> -
+> -    skip_test =3D u_boot_console.config.env.get('env__tpm_device_test_sk=
+ip', False)
+> -    if skip_test:
+> -        pytest.skip('skip TPM device test')
+> -    if is_sandbox(u_boot_console):
+> -        tpm2_sandbox_init(u_boot_console)
+> -    u_boot_console.run_command('tpm2 self_test continue')
+> -    output =3D u_boot_console.run_command('echo $?')
+> -    assert output.endswith('0')
+> -
+
+I would think these are useful cases to check outside of sandbox. But
+I'll let Ilias chime in as I'm just assuming.
+
+--=20
+Tom
+
+--rypkj4e+DO8uRT3+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU+bToACgkQFHw5/5Y0
+tyzuVAv7BSJzBQDYc3weWZtnKhIatT0MsXlKa+LXOIFWTlzIx0awlxvVhRpW1CKe
+wVT08wFu9HJID8tSHl2nHU7D1erPIRSoDE7r0NvDIpGkgXqj843b37ztY5FSjDmd
+Y92P8SQmESOUIDmn96NTwPx5do+KYa7RfRWtYKEnUEs2HRNLYVoCZqQ7w0Ca9FOK
+UBST6mpEWjvBe/IkNyLCu4vCDH8Zd1GpHLo5HFyann4GLa1ke4KrbzFuOP+fsZWl
+WIArNoJIaSzlq6bqC8n7oYSmm5qoaowOLZx+c5ZeXMOURXmnCO2Fg0J1+860XSPF
+olbkX0clq6t83l2fBMEH0T7Qto5q3Ntyujp2I0YvmXUaL/7q/GEeVTZjQFkOlees
+Dj87ckEhR9gy/98Pt0Xp+ScNj88Qe0V/9sIWNVKY6mj3Djq758a0fquNb/EaI6Ok
+ChZKYPDHFf8WLYvzkR5acqzwURlmVyfz8fVq/8ghLwxpQ6sWQC9/tRPp1fVtIKvJ
+0DdGNw+E
+=CqYo
+-----END PGP SIGNATURE-----
+
+--rypkj4e+DO8uRT3+--
