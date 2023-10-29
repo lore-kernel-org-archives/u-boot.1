@@ -4,121 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA85C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 05:39:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC59EC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 06:38:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A29E9874DB;
-	Sun, 29 Oct 2023 06:39:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B0FD870E5;
+	Sun, 29 Oct 2023 07:38:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="ZeDDhARg";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="W9Zd6c7d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A850A874DC; Sun, 29 Oct 2023 06:39:44 +0100 (CET)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2919A874E1; Sun, 29 Oct 2023 07:38:35 +0100 (CET)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63A67874D8
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 06:39:40 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20231029053936epoutp0131051de23692c7740e82bb3bdcbc207e~SfXrmuEJK1012710127epoutp01G
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 05:39:36 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20231029053936epoutp0131051de23692c7740e82bb3bdcbc207e~SfXrmuEJK1012710127epoutp01G
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698557976;
- bh=ZvvZQrx2zmc0RVh+b4b0iZ6WBQMpXery9LPyBnMLGaY=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=ZeDDhARgwylT8tFAEwZpF+HohmjcxWIAaghusSHQDatQUgd1pqIxofXoRoCXJAmYN
- uFviY7tuzxUqvLLkXDmhQQP5NUK22zkVkNQYH+7FPEK78pMD3npqRpc+sSLVwh1Ln8
- N+BzjYjBKMNsBtS3WMI8D+xDpRcGYTFss/XNcdxQ=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTP id
- 20231029053936epcas2p4971801e0799cadd74424529d9163d133~SfXrYcySJ2193221932epcas2p4L;
- Sun, 29 Oct 2023 05:39:36 +0000 (GMT)
-Received: from epsmges2p4.samsung.com (unknown [182.195.36.101]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4SJ4wR3Yyjz4x9Pt; Sun, 29 Oct
- 2023 05:39:35 +0000 (GMT)
-Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
- epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- BF.CC.09607.710FD356; Sun, 29 Oct 2023 14:39:35 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231029053935epcas2p31e68dff026cc1d3885ade88306ec33cc~SfXqi3N761273412734epcas2p3h;
- Sun, 29 Oct 2023 05:39:35 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20231029053935epsmtrp24ef580d19e134008b80e120c939b0f9d~SfXqiSVzo2708027080epsmtrp2K;
- Sun, 29 Oct 2023 05:39:35 +0000 (GMT)
-X-AuditID: b6c32a48-963ff70000002587-e1-653df0177fc1
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 23.B3.08817.710FD356; Sun, 29 Oct 2023 14:39:35 +0900 (KST)
-Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20231029053934epsmtip23015793bbda08bc538b7c8ecd60713db~SfXqYFwi50701007010epsmtip2C;
- Sun, 29 Oct 2023 05:39:34 +0000 (GMT)
-From: "Chanho Park" <chanho61.park@samsung.com>
-To: "'Heinrich Schuchardt'" <heinrich.schuchardt@canonical.com>, "'Rick
- Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>
-Cc: "'Sughosh Ganu'" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
-In-Reply-To: <20231028232612.109832-1-heinrich.schuchardt@canonical.com>
-Subject: RE: [RFC 1/1] rng: Provide a RNG based on the RISC-V Zkr ISA extension
-Date: Sun, 29 Oct 2023 14:39:34 +0900
-Message-ID: <05e001da0a2a$4c9135a0$e5b3a0e0$@samsung.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 544CF870E5
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:38:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=marcan.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: sendonly@marcansoft.com)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id A6DC04265F;
+ Sun, 29 Oct 2023 06:38:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
+ t=1698561511; bh=WOSXcCARPO3Y877Gj9RL2Bh5pG7UjYtb7uLJsT742Qk=;
+ h=From:Subject:Date:To:Cc;
+ b=W9Zd6c7duyTvMLIUomZSiJq8XyY66VQred5V6B2yTW60oZCo5rM1ImmDnePTJUJG0
+ Jja4TXxL/1XAn/3Y5snrgdlVpjr+uPnn9jaf/Gf7IDiaQan7Md4GukZiGhDJwdr3H3
+ wjLV9GmN+2s9KkZtb8NeY2mRxKssuOk6JPT121BMux2nWLXGtBDp2gYdqgwtovjre1
+ viwVqkdlUBwSSmMRbStggcKzzgHh1EQPEJWlsPhOc6ULp52/ZNMkDmTgeGtUDSMRjS
+ 1X22TTL9ipqRPSVCeGtcoKM2jcDYbpZOhtSWZp6lFTCowRSANO5oYgR3egDzxWUK/O
+ gdXXnNywCLrqQ==
+From: Hector Martin <marcan@marcan.st>
+Subject: [PATCH v2 0/8] USB fixes: xHCI error handling
+Date: Sun, 29 Oct 2023 15:37:37 +0900
+Message-Id: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-us
-Thread-Index: AQF/9HxSBlVeCM0jiHlogvUUv84v3AGwzHiKsQbjf5A=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkk+LIzCtJLcpLzFFi42LZdljTXFf8g22qwdJNkhYXGm+yW7x9cZbR
- 4t41OYu3ezvZLR4fes3kwOqx5/QsZo9ZDb1sHneu7WHzOHtnB2MAS1S2TUZqYkpqkUJqXnJ+
- SmZeuq2Sd3C8c7ypmYGhrqGlhbmSQl5ibqqtkotPgK5bZg7QXiWFssScUqBQQGJxsZK+nU1R
- fmlJqkJGfnGJrVJqQUpOgXmBXnFibnFpXrpeXmqJlaGBgZEpUGFCdsaBs/eZCw5oVDxZcIu1
- gfG0fBcjJ4eEgInErVU7WLoYuTiEBHYwSuyZeZ4JwvnEKPG+4xAzhPONUWLl5/csMC2r1l2G
- SuxllJhwYjqU8wKo6vt5sCo2AX2Jlx3bWEESIgJtjBJnJ29nB0kwC7hJnHx2gw3E5hTwkJjw
- fykziC0sECjRfPQ1WA2LgKrExGNvwAbxClhKnGyZyAxhC0qcnPmEBWKOvMT2t3OYIU5SkPj5
- dBkrRFxc4uXRI2BzRASsJNpOLAO7TkJgIofE3+M9UA0uEvuubmOFsIUlXh3fwg5hS0l8frcX
- 6DgOILtcYseyJIjeFkaJ5rY9UL32Ej9uTmEFqWEW0JRYv0sfolxZ4sgtqNP4JDoO/2WHCPNK
- dLQJQTSqSxzYPh0aiLIS3XM+s05gVJqF5LFZSB6bheSZWQi7FjCyrGIUSy0ozk1PLTYqMIHH
- dnJ+7iZGcJrU8tjBOPvtB71DjEwcjIcYJTiYlUR4mR1tUoV4UxIrq1KL8uOLSnNSiw8xmgKD
- eiKzlGhyPjBR55XEG5pYGpiYmRmaG5kamCuJ895rnZsiJJCeWJKanZpakFoE08fEwSnVwNS4
- kcXy8sm1a/NSBdx91vO/uTFbRj6rQen7Lwa2Ex4v6q6Fv7CWsr81eeO5iUv8ko2Zvl0yEVqX
- areUf+LSlMrtBvu/5pz6tFjFgenJzT+zHx05pnvvgcdX8/MRHIq7V/56+/MR+4TcteJOv8N6
- Tn/QZ4x++j7MYInlXbMLu7dOsP99y/j/6RtxD0OnLrRi3ReaFrT0x4Gkn8zZp1Kq/twq2X0o
- olQuu3th5F9LTXb3L3lS66pSLQ4FPOZTmnQxTH/X2U2Tb7yUl/x4TPuSR/6yJkH9Pc1bpe37
- W2M2CNz/kzrnwL/dKr8e7y84KTDr4WOBM+vri77PeurRqHRJP/rfV9HOU15PrBgK36ryli78
- psRSnJFoqMVcVJwIAFhD8nUcBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeLIzCtJLcpLzFFi42LZdlhJXlf8g22qwdkLLBYXGm+yW7x9cZbR
- 4t41OYu3ezvZLR4fes3kwOqx5/QsZo9ZDb1sHneu7WHzOHtnB2MASxSXTUpqTmZZapG+XQJX
- xoGz95kLDmhUPFlwi7WB8bR8FyMnh4SAicSqdZeZQWwhgd2MEh8nxEHEZSWevdvBDmELS9xv
- OcLaxcgFVPOMUWLK790sIAk2AX2Jlx3bwBIiAh2MEns7nzF2MXJwMAt4SPw7KQnRMJNRYvbO
- 2WANnEDxCf+Xgm0TFvCXWP70M5jNIqAqMfHYG7AaXgFLiZMtE5khbEGJkzOfsEDM1JNo28gI
- EmYWkJfY/nYOM8RxChI/ny5jhTn6z9G5bBA14hIvjx4Be0BEwEqi7cQyZphnXh3fwj6BUXQW
- kg2zEDbMQrJhFpJJCxhZVjFKphYU56bnFhsWGOWllusVJ+YWl+al6yXn525iBEeXltYOxj2r
- PugdYmTiYDzEKMHBrCTCy+xokyrEm5JYWZValB9fVJqTWnyIUZqDRUmc99vr3hQhgfTEktTs
- 1NSC1CKYLBMHp1QDU+VNwxk/p7ju2r7eYkb3nc3m1w9xqTkyJ8Zxa7uuaFZxdJ+kLmClOsN3
- +fGdNR6Py+zt1a9+O3ymuYFr3RKFhbn7YmIYIhJfWZv7WzlY/fsgOLf274ZC1rYuvtCMh+1T
- 3KN97N/MWhPl9jpcSz+y57he1/sy1metOofKjwZEOpbxeMZveuQeNiu3l2VXhMQeyePGBrMM
- rnxxfqd3oHzPujmu7oavHCSXfU8Vu66452hvaMrjrxOF1hx78OXQm+Rj6mYbpu9Y2byOt3VT
- yrQe2xUWK9vnVU7N4vQ/FJHitKDuyJfFrqwe3t/e/98r/pnPKPFb+TybiZWzXS69cW10dy71
- XZPY/eWQy5dTBX1NSizFGYmGWsxFxYkAVtSpmB0DAAA=
-X-CMS-MailID: 20231029053935epcas2p31e68dff026cc1d3885ade88306ec33cc
-X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231028232641epcas2p48ab2b6db1932c3035028f44f16c831d8
-References: <CGME20231028232641epcas2p48ab2b6db1932c3035028f44f16c831d8@epcas2p4.samsung.com>
- <20231028232612.109832-1-heinrich.schuchardt@canonical.com>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALH9PWUC/22MQQ7CIBBFr9LM2jEMLEpdeQ/TBdCpZSE1TCWah
+ ruLXbt8/+e9HYRzZIFLt0PmEiWuqYE+dRAWl+6McWoMWmlDSvf4Eo9zfLMgoTV+Dr0io0hDM56
+ Zj6sJt7HxEmVb8+eIF/qt/zuFUCEF2w/eh2nQ9vpwObh0lg3GWusXpBMPnKYAAAA=
+To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>
+Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>, 
+ u-boot@lists.denx.de, asahi@lists.linux.dev, 
+ Hector Martin <marcan@marcan.st>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3894; i=marcan@marcan.st;
+ h=from:subject:message-id; bh=WOSXcCARPO3Y877Gj9RL2Bh5pG7UjYtb7uLJsT742Qk=;
+ b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlTbv7ebEpwyLy7oX1t979G7vdtabkpsqxWT/Zoud2aq9
+ l83f94NHaUsDGIcDLJiiiyNJ3pPdXtOP6eumjIdZg4rE8gQBi5OAZhIgy4jw5rdVeHh3Mua/vJ1
+ cJ5NkdbiP2PaEmPyT8Np9Z7Hjzbui2RkeKElXTLrV/275J9cff1CCydKvYjYcyxj9Zzv0/gTRVK
+ CmAA=
+X-Developer-Key: i=marcan@marcan.st; a=openpgp;
+ fpr=FC18F00317968B7BE86201CBE22A629A4C515DD5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,188 +79,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This series is the first of a few bundles of USB fixes we have been
+carrying downstream on the Asahi U-Boot branch for a few months.
 
-> -----Original Message-----
-> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Heinrich
-> Schuchardt
-> Sent: Sunday, October 29, 2023 8:26 AM
-> To: Rick Chen <rick@andestech.com>; Leo <ycliang@andestech.com>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>; u-boot@lists.denx.de; Heinrich
-> Schuchardt <heinrich.schuchardt@canonical.com>
-> Subject: [RFC 1/1] rng: Provide a RNG based on the RISC-V Zkr ISA
-> extension
-> 
-> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
-> provides an interface to a physical entropy source.
-> 
-> A RNG driver based on the seed CSR is provided. It depends on
-> mseccfg.sseed being set in the SBI firmware.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Patches #1-#6 fix a series of related robustness issues. Certain
+conditions related to endpoint stalls revealed a chain of bugs
+throughout the stack that caused U-Boot to completely fail when
+encountering some errors (and errors are a fact of life with USB).
 
-This works fine on my qemu risv with your opensbi patch and KASLR has been
-tested as well.
-Feel free to add my reviewed/tested-by tag.
+Example scenario:
+- The device stalls a bulk endpoint due to an error
+- The upper layer driver tries to use the endpoint again
+- There is no endpoint stall clear wired up in the API, so for starters
+  this is doomed to fail (fix: #4)
+- xHCI knows the endpoint is halted, but tries to queue the TRB anyway,
+  which can't work (fix: #5)
+- Since the endpoint is halted nothing happens, so the transfer times
+  out.
+- The timeout handling tries to abort the transfer
+- abort_td() tries to stop the endpoint, but since it is already halted,
+  this results in a context state error. As the transfer never started,
+  there is no completion event, so xhci_wait_for_event() is waiting for
+  the wrong event type, and logs an error and returns NULL. (fix: #2)
+- abort_td() crashes due to failing to guard against the NULL event
+  (fix: #1)
+- Even after fixing all that, abort_td() would not handle the context
+  state error properly and BUG() (fix: #3). This also fixes a race
+  condition documented in the xHCI spec that could occur even in the
+  absence of all the other bugs.
 
-Reviewed-by: Chanho Park <chanho61.park@samsung.com>
-Tested-by: Chanho Park <chanho61.park@samsung.com>
+Patch #6 addresses a related robustness issue where
+xhci_wait_for_event() panics on event timeouts other than for transfers.
+While this is clearly an unexpected condition and indicates a bug
+elsewhere, it's no reason to outright crash. USB is notoriously
+impossible to get 100% right, and we can't afford to be breaking users'
+systems at any sign of trouble. Error conditions should always be dealt
+with as gracefully as possible (even if that results in a completely
+broken USB controller, that is much preferable to aborting the boot
+process entirely, especially on devices with non-USB storage and
+keyboards where USB support is effectively optional for most users).
+Since after patch #1 we now guard all callers to xhci_wait_for_event()
+with at least trivial NULL checks, it's okay to return and continue in
+case of timeouts.
 
-Best Regards,
-Chanho Park
+Patch #7 addresses an unrelated bug I ran into while debugging all this,
+and patch #8 adds extra debug logs to make finding future issues less
+painful.
 
-> ---
->  drivers/rng/Kconfig         |  11 ++++
->  drivers/rng/Makefile        |   1 +
->  drivers/rng/riscv_zkr_rng.c | 102 ++++++++++++++++++++++++++++++++++++
->  3 files changed, 114 insertions(+)
->  create mode 100644 drivers/rng/riscv_zkr_rng.c
-> 
-> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> index 994cc35b27..f8f1d91ed2 100644
-> --- a/drivers/rng/Kconfig
-> +++ b/drivers/rng/Kconfig
-> @@ -48,6 +48,17 @@ config RNG_OPTEE
->  	  accessible to normal world but reserved and used by the OP-TEE
->  	  to avoid the weakness of a software PRNG.
-> 
-> +config RNG_RISCV_ZKR
-> +	bool "RISC-V Zkr random number generator"
-> +	depends on RISCV_SMODE
-> +	help
-> +	  This driver provides a Random Number Generator based on the
-> +	  Zkr RISC-V ISA extension which provides an interface to an
-> +	  NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
-> +
-> +	  Using this driver will lead to an exception if the M-mode
-> firmware
-> +	  has not set mseccfg.sseed=1.
-> +
->  config RNG_STM32
->  	bool "Enable random number generator for STM32"
->  	depends on ARCH_STM32 || ARCH_STM32MP
-> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> index 47b323e61e..a5d3ca4130 100644
-> --- a/drivers/rng/Makefile
-> +++ b/drivers/rng/Makefile
-> @@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
->  obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
->  obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
->  obj-$(CONFIG_RNG_STM32) += stm32_rng.o
-> +obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
->  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
->  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
->  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
-> diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
-> new file mode 100644
-> index 0000000000..f48ae35410
-> --- /dev/null
-> +++ b/drivers/rng/riscv_zkr_rng.c
-> @@ -0,0 +1,102 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * The RISC-V Zkr extension provides CSR seed which provides access to a
-> + * random number generator.
-> + */
-> +
-> +#define LOG_CATEGORY UCLASS_RNG
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <rng.h>
-> +
-> +#define DRIVER_NAME "riscv_zkr"
-> +
-> +enum opst {
-> +	/** @BIST: built in self test running */
-> +	BIST = 0b00,
-> +	/** @WAIT: sufficient amount of entropy is not yet available */
-> +	WAIT = 0b01,
-> +	/** @ES16: 16bits of entropy available */
-> +	ES16 = 0b10,
-> +	/** @DEAD: unrecoverable self-test error */
-> +	DEAD = 0b11,
-> +};
-> +
-> +static unsigned long read_seed(void)
-> +{
-> +	unsigned long ret;
-> +
-> +	__asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : :
-> "memory");
-> +
-> +	return ret;
-> +}
-> +
-> +static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
-> +{
-> +	u8 *ptr = data;
-> +
-> +	while (len) {
-> +		u32 val;
-> +
-> +		val = read_seed();
-> +
-> +		switch (val >> 30) {
-> +		case BIST:
-> +			continue;
-> +		case WAIT:
-> +			continue;
-> +		case ES16:
-> +			*ptr++ = val & 0xff;
-> +			if (--len) {
-> +				*ptr++ = val >> 8;
-> +				--len;
-> +			}
-> +			break;
-> +		case DEAD:
-> +			return -ENODEV;
-> +		}
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +/**
-> + * riscv_zkr_probe() - check if the seed register is available
-> + *
-> + * If the SBI software has not set mseccfg.sseed=1 or the Zkr
-> + * extension is not available this probe function will result
-> + * in an exception. Currently we cannot recover from this.
-> + *
-> + * @dev:	RNG device
-> + * Return:	0 if successfully probed
-> + */
-> +static int riscv_zkr_probe(struct udevice *dev)
-> +{
-> +	u32 val;
-> +
-> +	do {
-> +		val = read_seed();
-> +		val >>= 30;
-> +	} while (val == BIST || val == WAIT);
-> +
-> +	if (val == DEAD)
-> +		return -ENODEV;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct dm_rng_ops riscv_zkr_ops = {
-> +	.read = riscv_zkr_read,
-> +};
-> +
-> +U_BOOT_DRIVER(riscv_zkr) = {
-> +	.name = DRIVER_NAME,
-> +	.id = UCLASS_RNG,
-> +	.ops = &riscv_zkr_ops,
-> +	.probe = riscv_zkr_probe,
-> +};
-> +
-> +U_BOOT_DRVINFO(cpu_riscv_zkr) = {
-> +	.name = DRIVER_NAME,
-> +};
-> --
-> 2.40.1
+I believe this should fix this Fedora bug too, which is either an
+instance of the above sequence of events, or (more likely, given the
+difficulty reproducing) the race condition documented in xHCI 4.6.9:
 
+https://bugzilla.redhat.com/show_bug.cgi?id=2244305
+
+Signed-off-by: Hector Martin <marcan@marcan.st>
+---
+Changes in v2:
+- Squashed in a trivial fix for patch #1
+- Removed spurious blank line
+- Added a longer description to the cover letter
+- Link to v1: https://lore.kernel.org/r/20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st
+
+---
+Hector Martin (8):
+      usb: xhci: Guard all calls to xhci_wait_for_event
+      usb: xhci: Better error handling in abort_td()
+      usb: xhci: Allow context state errors when halting an endpoint
+      usb: xhci: Recover from halted bulk endpoints
+      usb: xhci: Fail on attempt to queue TRBs to a halted endpoint
+      usb: xhci: Do not panic on event timeouts
+      usb: xhci: Fix DMA address calculation in queue_trb
+      usb: xhci: Add more debugging
+
+ drivers/usb/host/xhci-ring.c | 99 ++++++++++++++++++++++++++++++++++++--------
+ drivers/usb/host/xhci.c      |  9 ++++
+ include/usb/xhci.h           |  2 +
+ 3 files changed, 92 insertions(+), 18 deletions(-)
+---
+base-commit: 7c0d668103abae3ec14cd96d882ba20134bb4529
+change-id: 20231027-usb-fixes-1-83bfc7013012
+
+Best regards,
+-- 
+Hector Martin <marcan@marcan.st>
 
