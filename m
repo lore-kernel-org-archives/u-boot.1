@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC59EC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 06:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41375C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 06:38:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B0FD870E5;
-	Sun, 29 Oct 2023 07:38:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE48587546;
+	Sun, 29 Oct 2023 07:38:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="W9Zd6c7d";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="jciAA1Jm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2919A874E1; Sun, 29 Oct 2023 07:38:35 +0100 (CET)
+ id 5B98C871E8; Sun, 29 Oct 2023 07:38:38 +0100 (CET)
 Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 544CF870E5
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:38:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C9528723E
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:38:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
@@ -29,38 +29,37 @@ Received: from [127.0.0.1] (localhost [127.0.0.1])
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: sendonly@marcansoft.com)
- by mail.marcansoft.com (Postfix) with ESMTPSA id A6DC04265F;
- Sun, 29 Oct 2023 06:38:29 +0000 (UTC)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id 2959E4268B;
+ Sun, 29 Oct 2023 06:38:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
- t=1698561511; bh=WOSXcCARPO3Y877Gj9RL2Bh5pG7UjYtb7uLJsT742Qk=;
- h=From:Subject:Date:To:Cc;
- b=W9Zd6c7duyTvMLIUomZSiJq8XyY66VQred5V6B2yTW60oZCo5rM1ImmDnePTJUJG0
- Jja4TXxL/1XAn/3Y5snrgdlVpjr+uPnn9jaf/Gf7IDiaQan7Md4GukZiGhDJwdr3H3
- wjLV9GmN+2s9KkZtb8NeY2mRxKssuOk6JPT121BMux2nWLXGtBDp2gYdqgwtovjre1
- viwVqkdlUBwSSmMRbStggcKzzgHh1EQPEJWlsPhOc6ULp52/ZNMkDmTgeGtUDSMRjS
- 1X22TTL9ipqRPSVCeGtcoKM2jcDYbpZOhtSWZp6lFTCowRSANO5oYgR3egDzxWUK/O
- gdXXnNywCLrqQ==
+ t=1698561514; bh=sMQh7bVawXy0WhD2dNbG6eMTmPg5iywzeluiqHfUanU=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=jciAA1JmdGdhP9JYRDTIjine8atkXbUEiyLvmK+no0mKAjXWmRZDi/A6qH0DcrArn
+ 6cy0xovmKaXF47vB5/uAA0hv9X+xOECht5/m2tZU93YnShkdCUF1mgNExDv6NgN2l0
+ fwLpzd2BmYOHbXBEz2xNGUV5nAvJDlq6kiCt33M23RurTQFHcbY51vdN1YBMPtYlzy
+ eom2sWhCXD3hmk9XAZUohTE9Sb9tns1F/6Dj2V8/yLn+ZMJcOAE8zc+g2xqOZxz3pS
+ BMNiuCxY/aWh5n+obEjxNDRCUDmlzWqImGuFkUrv6MqsyRbZD19gpjAY9LnNB+X4gG
+ d7IFtKLyo5bUA==
 From: Hector Martin <marcan@marcan.st>
-Subject: [PATCH v2 0/8] USB fixes: xHCI error handling
-Date: Sun, 29 Oct 2023 15:37:37 +0900
-Message-Id: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
+Date: Sun, 29 Oct 2023 15:37:38 +0900
+Subject: [PATCH v2 1/8] usb: xhci: Guard all calls to xhci_wait_for_event
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALH9PWUC/22MQQ7CIBBFr9LM2jEMLEpdeQ/TBdCpZSE1TCWah
- ruLXbt8/+e9HYRzZIFLt0PmEiWuqYE+dRAWl+6McWoMWmlDSvf4Eo9zfLMgoTV+Dr0io0hDM56
- Zj6sJt7HxEmVb8+eIF/qt/zuFUCEF2w/eh2nQ9vpwObh0lg3GWusXpBMPnKYAAAA=
+Message-Id: <20231029-usb-fixes-1-v2-1-623533f6316e@marcan.st>
+References: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
+In-Reply-To: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>
 Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>, 
  u-boot@lists.denx.de, asahi@lists.linux.dev, 
  Hector Martin <marcan@marcan.st>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3894; i=marcan@marcan.st;
- h=from:subject:message-id; bh=WOSXcCARPO3Y877Gj9RL2Bh5pG7UjYtb7uLJsT742Qk=;
- b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlTbv7ebEpwyLy7oX1t979G7vdtabkpsqxWT/Zoud2aq9
- l83f94NHaUsDGIcDLJiiiyNJ3pPdXtOP6eumjIdZg4rE8gQBi5OAZhIgy4jw5rdVeHh3Mua/vJ1
- cJ5NkdbiP2PaEmPyT8Np9Z7Hjzbui2RkeKElXTLrV/275J9cff1CCydKvYjYcyxj9Zzv0/gTRVK
- CmAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3992; i=marcan@marcan.st;
+ h=from:subject:message-id; bh=sMQh7bVawXy0WhD2dNbG6eMTmPg5iywzeluiqHfUanU=;
+ b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlTbv3fais4depx9xPB46IEnn3QnlW3Y/e3rwoNah5+Gp
+ 83ZoT6/rKOUhUGMg0FWTJGl8UTvqW7P6efUVVOmw8xhZQIZwsDFKQAT8fnD8FfKSGKN8ckpq3y/
+ +3IfCJtSNy/uwNTzCu5PJXout7Apps1jZFh76bjqzZ1KkcuZ/913FGN5uy1J6dKkqw1tgq+l5/N
+ pP2YDAA==
 X-Developer-Key: i=marcan@marcan.st; a=openpgp;
  fpr=FC18F00317968B7BE86201CBE22A629A4C515DD5
 X-BeenThere: u-boot@lists.denx.de
@@ -79,87 +78,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series is the first of a few bundles of USB fixes we have been
-carrying downstream on the Asahi U-Boot branch for a few months.
-
-Patches #1-#6 fix a series of related robustness issues. Certain
-conditions related to endpoint stalls revealed a chain of bugs
-throughout the stack that caused U-Boot to completely fail when
-encountering some errors (and errors are a fact of life with USB).
-
-Example scenario:
-- The device stalls a bulk endpoint due to an error
-- The upper layer driver tries to use the endpoint again
-- There is no endpoint stall clear wired up in the API, so for starters
-  this is doomed to fail (fix: #4)
-- xHCI knows the endpoint is halted, but tries to queue the TRB anyway,
-  which can't work (fix: #5)
-- Since the endpoint is halted nothing happens, so the transfer times
-  out.
-- The timeout handling tries to abort the transfer
-- abort_td() tries to stop the endpoint, but since it is already halted,
-  this results in a context state error. As the transfer never started,
-  there is no completion event, so xhci_wait_for_event() is waiting for
-  the wrong event type, and logs an error and returns NULL. (fix: #2)
-- abort_td() crashes due to failing to guard against the NULL event
-  (fix: #1)
-- Even after fixing all that, abort_td() would not handle the context
-  state error properly and BUG() (fix: #3). This also fixes a race
-  condition documented in the xHCI spec that could occur even in the
-  absence of all the other bugs.
-
-Patch #6 addresses a related robustness issue where
-xhci_wait_for_event() panics on event timeouts other than for transfers.
-While this is clearly an unexpected condition and indicates a bug
-elsewhere, it's no reason to outright crash. USB is notoriously
-impossible to get 100% right, and we can't afford to be breaking users'
-systems at any sign of trouble. Error conditions should always be dealt
-with as gracefully as possible (even if that results in a completely
-broken USB controller, that is much preferable to aborting the boot
-process entirely, especially on devices with non-USB storage and
-keyboards where USB support is effectively optional for most users).
-Since after patch #1 we now guard all callers to xhci_wait_for_event()
-with at least trivial NULL checks, it's okay to return and continue in
-case of timeouts.
-
-Patch #7 addresses an unrelated bug I ran into while debugging all this,
-and patch #8 adds extra debug logs to make finding future issues less
-painful.
-
-I believe this should fix this Fedora bug too, which is either an
-instance of the above sequence of events, or (more likely, given the
-difficulty reproducing) the race condition documented in xHCI 4.6.9:
-
-https://bugzilla.redhat.com/show_bug.cgi?id=2244305
+xhci_wait_for_event returns NULL on timeout, so the caller always has to
+check for that. This addresses immediate explosions in this part
+of the code when timeouts happen, but not the root cause for the
+timeout.
 
 Signed-off-by: Hector Martin <marcan@marcan.st>
 ---
-Changes in v2:
-- Squashed in a trivial fix for patch #1
-- Removed spurious blank line
-- Added a longer description to the cover letter
-- Link to v1: https://lore.kernel.org/r/20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st
+ drivers/usb/host/xhci-ring.c | 15 +++++++++++++++
+ drivers/usb/host/xhci.c      |  9 +++++++++
+ 2 files changed, 24 insertions(+)
 
----
-Hector Martin (8):
-      usb: xhci: Guard all calls to xhci_wait_for_event
-      usb: xhci: Better error handling in abort_td()
-      usb: xhci: Allow context state errors when halting an endpoint
-      usb: xhci: Recover from halted bulk endpoints
-      usb: xhci: Fail on attempt to queue TRBs to a halted endpoint
-      usb: xhci: Do not panic on event timeouts
-      usb: xhci: Fix DMA address calculation in queue_trb
-      usb: xhci: Add more debugging
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index c8260cbdf94b..d0960812a47b 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -511,6 +511,9 @@ static void reset_ep(struct usb_device *udev, int ep_index)
+ 	printf("Resetting EP %d...\n", ep_index);
+ 	xhci_queue_command(ctrl, 0, udev->slot_id, ep_index, TRB_RESET_EP);
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return;
++
+ 	field = le32_to_cpu(event->trans_event.flags);
+ 	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
+ 	xhci_acknowledge_event(ctrl);
+@@ -519,6 +522,9 @@ static void reset_ep(struct usb_device *udev, int ep_index)
+ 		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
+ 	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return;
++
+ 	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+ 		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
+ 		event->event_cmd.status)) != COMP_SUCCESS);
+@@ -544,6 +550,9 @@ static void abort_td(struct usb_device *udev, int ep_index)
+ 	xhci_queue_command(ctrl, 0, udev->slot_id, ep_index, TRB_STOP_RING);
+ 
+ 	event = xhci_wait_for_event(ctrl, TRB_TRANSFER);
++	if (!event)
++		return;
++
+ 	field = le32_to_cpu(event->trans_event.flags);
+ 	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
+ 	BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
+@@ -552,6 +561,9 @@ static void abort_td(struct usb_device *udev, int ep_index)
+ 	xhci_acknowledge_event(ctrl);
+ 
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return;
++
+ 	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+ 		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
+ 		event->event_cmd.status)) != COMP_SUCCESS);
+@@ -561,6 +573,9 @@ static void abort_td(struct usb_device *udev, int ep_index)
+ 		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
+ 	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return;
++
+ 	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+ 		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
+ 		event->event_cmd.status)) != COMP_SUCCESS);
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 5cacf0769ec7..d13cbff9b372 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -451,6 +451,9 @@ static int xhci_configure_endpoints(struct usb_device *udev, bool ctx_change)
+ 	xhci_queue_command(ctrl, in_ctx->dma, udev->slot_id, 0,
+ 			   ctx_change ? TRB_EVAL_CONTEXT : TRB_CONFIG_EP);
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return -ETIMEDOUT;
++
+ 	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+ 		!= udev->slot_id);
+ 
+@@ -647,6 +650,9 @@ static int xhci_address_device(struct usb_device *udev, int root_portnr)
+ 	xhci_queue_command(ctrl, virt_dev->in_ctx->dma,
+ 			   slot_id, 0, TRB_ADDR_DEV);
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return -ETIMEDOUT;
++
+ 	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != slot_id);
+ 
+ 	switch (GET_COMP_CODE(le32_to_cpu(event->event_cmd.status))) {
+@@ -722,6 +728,9 @@ static int _xhci_alloc_device(struct usb_device *udev)
+ 
+ 	xhci_queue_command(ctrl, 0, 0, 0, TRB_ENABLE_SLOT);
+ 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
++	if (!event)
++		return -ETIMEDOUT;
++
+ 	BUG_ON(GET_COMP_CODE(le32_to_cpu(event->event_cmd.status))
+ 		!= COMP_SUCCESS);
+ 
 
- drivers/usb/host/xhci-ring.c | 99 ++++++++++++++++++++++++++++++++++++--------
- drivers/usb/host/xhci.c      |  9 ++++
- include/usb/xhci.h           |  2 +
- 3 files changed, 92 insertions(+), 18 deletions(-)
----
-base-commit: 7c0d668103abae3ec14cd96d882ba20134bb4529
-change-id: 20231027-usb-fixes-1-83bfc7013012
-
-Best regards,
 -- 
-Hector Martin <marcan@marcan.st>
+2.41.0
 
