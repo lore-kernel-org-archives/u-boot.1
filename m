@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2724BC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 04:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F30C4167D
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 04:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E97D987C7C;
-	Sun, 29 Oct 2023 05:28:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 801C487C94;
+	Sun, 29 Oct 2023 05:28:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m7DDHAut";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SoN9CHy8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BB5A87C83; Sun, 29 Oct 2023 05:28:39 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id BF5AA87C89; Sun, 29 Oct 2023 05:28:41 +0100 (CET)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 282EC87C83
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 05:28:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FF7187C62
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 05:28:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3b3f6f330d4so2145785b6e.2
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 21:28:34 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-1dd1714b9b6so2362541fac.0
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 21:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698553712; x=1699158512; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698553715; x=1699158515; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U3hXlOYeze3Jbx60zC7jvsXBtnRzMszdBtxrUnxM0xc=;
- b=m7DDHAutmOo9gUPnl7IxTL1GGNnmJpZNQQUgmPx79NaUOpYeGuSIWeRkWXaS99lrry
- 4TDzE29v2csnFFI5gkOq+Nb+FAR4UckjUFX4MR7bWQOvOrCW36w57oulNFJm0Pm4skUM
- bTnEFLCbmQm2FKCoY18kiYZDoT0mJQ/+etG7k=
+ bh=Eirhkn3dxc8ehWJT0y72JAi0m+cz1aHWv/pOIG990PE=;
+ b=SoN9CHy8A/bCpXzwc02jn95HQOJapu7oZQUzTDXphIZ//fRBIhgRZal58B8mM79LFB
+ nZ8VMQXchg5MMeqISFNe1ldJgd8U6gKP9RWQ3BfNp1c59sygaM8jtsC3K+cfYQRC1tBG
+ ATzyjIfKFYRhcpxtbMdhJDOIFRJTm1sgAEUow=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698553712; x=1699158512;
+ d=1e100.net; s=20230601; t=1698553715; x=1699158515;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U3hXlOYeze3Jbx60zC7jvsXBtnRzMszdBtxrUnxM0xc=;
- b=nvoSY3a76BlOtOfiWzgBASXZpeVU6lKA8qrsOzlpxh5ckSdlUAhly0qPOdqzz4OCDw
- lSJF5lLv8wCyVcojb1k1LYV+x+IB/ysSvGXtm9yq7dV/Oc6wSS/wYZVLHOYu5zFgf9Gq
- EcZY6A5uN8tU8Z3OgFejOUofKz1u5JQUQnSsR5cRfS33MEg19Bn7kh/zMGJrQzn+mHA+
- 3f9z+SGBgQ4CP4DAjjNe2Lhj2S/qeXcqcHVJl8vBBC5G+cfVIJxzBgoaD/4NHESkXzED
- /kqG9SRoRoEOFhgK4v/7wsGLR7xy6nPqfEK+miO0M375XVuTCgKlRpvVbTYg1jYbv221
- n/WQ==
-X-Gm-Message-State: AOJu0YyD0tyIk8qO6Ox3BXe/4eLWZggi15RLX0Vr1tZ+UEqqNxqxaWIM
- k329tQ+7LZbGw81l0zgglhz4h50sEoS28sNZ78B8Iw==
-X-Google-Smtp-Source: AGHT+IFnesUK9jEL/gZkK/pdXWvr+oaQSFKcmeX42c8WTy8puzUvYkVjrkI+8y8ASo0peBoyXul4kQ==
-X-Received: by 2002:a05:6808:f8e:b0:3a8:1c07:17d3 with SMTP id
- o14-20020a0568080f8e00b003a81c0717d3mr9034212oiw.19.1698553712480; 
- Sat, 28 Oct 2023 21:28:32 -0700 (PDT)
+ bh=Eirhkn3dxc8ehWJT0y72JAi0m+cz1aHWv/pOIG990PE=;
+ b=GBs9TTjC2xTbKEfRn9rYg2Fee+XF9UA7Hg9XJGI77xC7jnhMWkAUjOkKuOUo4sz9i9
+ tTqNhlz7spVesYGOV9R4MbzBKzi52HCJ5POiDLFugsof78J0qpm6+Gh9xQHaWH3tc3pU
+ 45wl5ANU18P2OvJSDgNfC4VnUw/MqVmjHkD0wbXLnGnlfIFjclxwUoB+6rjNZkmsEEVO
+ fqRGSxyoZ11/jw249aBy74Q7+Qg2O1PSuaX2upUwhpN0UpfWghwBlFcQj+6erFqoIhtT
+ r2VMx5zA7Dj0IF3bU8+6ST/Gt8XXS9CBzx8mIG4PrBwo8G8+aXZpqZeUhPhorMmsmuCv
+ xq2Q==
+X-Gm-Message-State: AOJu0YzVJSEXNnikm8AZNWUnO9b70A5PMOBGy6KSRCDvNXkCd4U031hs
+ pa8r/F8vjyZMfItlCdw5y2woAkR6ri8Fzw4dF35wIA==
+X-Google-Smtp-Source: AGHT+IEpbDk2nf0ya+nb6/nYQImNFLuJ7h6CEOeO3uRcmD/6Flqa3kzHc8zfuN2YiryR9p2na7PKFA==
+X-Received: by 2002:a05:6871:4807:b0:1e9:feb7:71db with SMTP id
+ qc7-20020a056871480700b001e9feb771dbmr9758036oab.36.1698553715621; 
+ Sat, 28 Oct 2023 21:28:35 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- s194-20020a6377cb000000b0058ac101ad83sm2920564pgc.33.2023.10.28.21.28.29
+ s194-20020a6377cb000000b0058ac101ad83sm2920564pgc.33.2023.10.28.21.28.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Oct 2023 21:28:32 -0700 (PDT)
+ Sat, 28 Oct 2023 21:28:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>
-Subject: [PATCH 2/3] tpm: Convert sandbox-focussed tests to C
-Date: Sun, 29 Oct 2023 17:28:13 +1300
-Message-ID: <20231029172813.2.I8ff77e0c1288f6a4da564e9454eb223f72809839@changeid>
+Subject: [PATCH 3/3] tpm: Drop unwanted special cases for sandbox
+Date: Sun, 29 Oct 2023 17:28:14 +1300
+Message-ID: <20231029172813.3.I3c84965a4b5e3019562b86a47b34ae4b12469070@changeid>
 X-Mailer: git-send-email 2.42.0.820.g83a721a137-goog
 In-Reply-To: <20231029042817.3938657-1-sjg@chromium.org>
 References: <20231029042817.3938657-1-sjg@chromium.org>
@@ -89,196 +89,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the Python tests are a pain because they don't reset the TPM
-state before each test. Driver model tests do this, so convert the
-tests to C.
+These don't seem to be needed.
 
-This means that these tests won't run on real hardware, but we have
-tests which do TPM init, so there is still enough coverage.
-
-Rename and update the Python tpm_init test to use 'tpm autostart',
-since this deals with starting up ready for the tests below.
+Add a few notes about what to do next. Also mention parallel tests in
+at the top of thefile.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/dm/tpm.c              | 77 +++++++++++++++++++++++++++++++++++++-
- test/py/tests/test_tpm2.py | 57 +---------------------------
- 2 files changed, 77 insertions(+), 57 deletions(-)
+ test/py/tests/test_tpm2.py | 44 +++++++++-----------------------------
+ 1 file changed, 10 insertions(+), 34 deletions(-)
 
-diff --git a/test/dm/tpm.c b/test/dm/tpm.c
-index cde933ab2848..f8264af13789 100644
---- a/test/dm/tpm.c
-+++ b/test/dm/tpm.c
-@@ -50,14 +50,87 @@ static int test_tpm_init(struct unit_test_state *uts, enum tpm_version version)
- 	return 0;
- }
- 
--static int dm_test_tpm(struct unit_test_state *uts)
-+static int dm_test_tpm_init(struct unit_test_state *uts)
- {
- 	ut_assertok(test_tpm_init(uts, TPM_V1));
- 	ut_assertok(test_tpm_init(uts, TPM_V2));
- 
- 	return 0;
- }
--DM_TEST(dm_test_tpm, UT_TESTF_SCAN_FDT);
-+DM_TEST(dm_test_tpm_init, UT_TESTF_SCAN_FDT);
-+
-+/* Test TPM startup */
-+static int test_tpm_startup(struct unit_test_state *uts,
-+			    enum tpm_version version)
-+{
-+	struct udevice *dev;
-+
-+	/* check probe success */
-+	ut_assertok(get_tpm_version(version, &dev));
-+
-+	ut_assertok(tpm_init(dev));
-+	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
-+
-+	return 0;
-+}
-+
-+static int dm_test_tpm_startup(struct unit_test_state *uts)
-+{
-+	ut_assertok(test_tpm_startup(uts, TPM_V1));
-+	ut_assertok(test_tpm_startup(uts, TPM_V2));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm_startup, UT_TESTF_SCAN_FDT);
-+
-+/* Test TPM self-test full */
-+static int test_tpm_self_test_full(struct unit_test_state *uts,
-+				   enum tpm_version version)
-+{
-+	struct udevice *dev;
-+
-+	/* check probe success */
-+	ut_assertok(get_tpm_version(version, &dev));
-+
-+	ut_assertok(tpm_init(dev));
-+	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
-+
-+	return 0;
-+}
-+
-+static int dm_test_tpm_self_test_full(struct unit_test_state *uts)
-+{
-+	ut_assertok(test_tpm_self_test_full(uts, TPM_V1));
-+	ut_assertok(test_tpm_self_test_full(uts, TPM_V2));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm_self_test_full, UT_TESTF_SCAN_FDT);
-+
-+/* Test TPM self-test continue */
-+static int test_tpm_self_test_cont(struct unit_test_state *uts,
-+				   enum tpm_version version)
-+{
-+	struct udevice *dev;
-+
-+	/* check probe success */
-+	ut_assertok(get_tpm_version(version, &dev));
-+
-+	ut_assertok(tpm_init(dev));
-+	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
-+	ut_assertok(tpm_continue_self_test(dev));
-+
-+	return 0;
-+}
-+
-+static int dm_test_tpm_self_test_cont(struct unit_test_state *uts)
-+{
-+	ut_assertok(test_tpm_self_test_cont(uts, TPM_V1));
-+	ut_assertok(test_tpm_self_test_cont(uts, TPM_V2));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_tpm_self_test_cont, UT_TESTF_SCAN_FDT);
- 
- /* Test report_state */
- static int dm_test_tpm_report_state(struct unit_test_state *uts)
 diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-index c2579fa02c58..522ed41de633 100644
+index 522ed41de633..e01a05143b63 100644
 --- a/test/py/tests/test_tpm2.py
 +++ b/test/py/tests/test_tpm2.py
-@@ -56,25 +56,12 @@ def is_sandbox(cons):
-     return sys_arch == 'sandbox'
+@@ -27,6 +27,16 @@ behavior.
+ * Setup env__tpm_device_test_skip to True if tests with TPM devices should be
+ skipped.
  
++Parallel tests
++--------------
++
++These tests can be run in parallel on sandbox. In that case any action taken
++by one test may be independent of another. For sandbox, care should be taken to
++ensure that tests are independent.
++
++Unfortunately, tests cannot be made independent on real hardware, since there is
++no way to reset the TPM other than restarting the board. Perhaps that would be
++the best approach?
+ """
+ 
+ updates = 0
+@@ -50,11 +60,6 @@ def force_init(u_boot_console, force=False):
+             u_boot_console.run_command('tpm2 clear TPM2_RH_PLATFORM')
+         u_boot_console.run_command('echo --- end of init ---')
+ 
+-def is_sandbox(cons):
+-    # Array slice removes leading/trailing quotes.
+-    sys_arch = cons.config.buildconfig.get('config_sys_arch', '"sandbox"')[1:-1]
+-    return sys_arch == 'sandbox'
+-
  @pytest.mark.buildconfigspec('cmd_tpm_v2')
--def test_tpm2_init(u_boot_console):
-+def test_tpm2_autostart(u_boot_console):
+ def test_tpm2_autostart(u_boot_console):
      """Init the software stack to use TPMv2 commands."""
-     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
-     if skip_test:
-         pytest.skip('skip TPM device test')
--    u_boot_console.run_command('tpm2 init')
--    output = u_boot_console.run_command('echo $?')
--    assert output.endswith('0')
--
--@pytest.mark.buildconfigspec('cmd_tpm_v2')
--def test_tpm2_startup(u_boot_console):
--    """Execute a TPM2_Startup command.
--
--    Initiate the TPM internal state machine.
--    """
--    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
--    if skip_test:
--        pytest.skip('skip TPM device test')
--    u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
-+    u_boot_console.run_command('tpm2 autostart')
+@@ -65,20 +70,6 @@ def test_tpm2_autostart(u_boot_console):
      output = u_boot_console.run_command('echo $?')
      assert output.endswith('0')
  
-@@ -92,46 +79,6 @@ def tpm2_sandbox_init(u_boot_console):
-     if skip_test:
-         pytest.skip('skip TPM device test')
- 
--@pytest.mark.buildconfigspec('cmd_tpm_v2')
--def test_tpm2_sandbox_self_test_full(u_boot_console):
--    """Execute a TPM2_SelfTest (full) command.
+-def tpm2_sandbox_init(u_boot_console):
+-    """Put sandbox back into a known state so we can run a test
 -
--    Ask the TPM to perform all self tests to also enable full capabilities.
+-    This allows all tests to run in parallel, since no test depends on another.
 -    """
--    if is_sandbox(u_boot_console):
--        u_boot_console.restart_uboot()
--        u_boot_console.run_command('tpm2 init')
--        output = u_boot_console.run_command('echo $?')
--        assert output.endswith('0')
--
--        u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
--        output = u_boot_console.run_command('echo $?')
--        assert output.endswith('0')
+-    u_boot_console.restart_uboot()
+-    u_boot_console.run_command('tpm2 autostart')
+-    output = u_boot_console.run_command('echo $?')
+-    assert output.endswith('0')
 -
 -    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
 -    if skip_test:
 -        pytest.skip('skip TPM device test')
--    u_boot_console.run_command('tpm2 self_test full')
--    output = u_boot_console.run_command('echo $?')
--    assert output.endswith('0')
--
--@pytest.mark.buildconfigspec('cmd_tpm_v2')
--def test_tpm2_continue_self_test(u_boot_console):
--    """Execute a TPM2_SelfTest (continued) command.
--
--    Ask the TPM to finish its self tests (alternative to the full test) in order
--    to enter a fully operational state.
--    """
--
--    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
--    if skip_test:
--        pytest.skip('skip TPM device test')
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
--    u_boot_console.run_command('tpm2 self_test continue')
--    output = u_boot_console.run_command('echo $?')
--    assert output.endswith('0')
 -
  @pytest.mark.buildconfigspec('cmd_tpm_v2')
  def test_tpm2_clear(u_boot_console):
      """Execute a TPM2_Clear command.
+@@ -91,9 +82,6 @@ def test_tpm2_clear(u_boot_console):
+     not have a password set, otherwise this test will fail. ENDORSEMENT and
+     PLATFORM hierarchies are also available.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+-
+     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+     if skip_test:
+         pytest.skip('skip TPM device test')
+@@ -114,8 +102,6 @@ def test_tpm2_change_auth(u_boot_console):
+     Use the LOCKOUT hierarchy for this. ENDORSEMENT and PLATFORM hierarchies are
+     also available.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     force_init(u_boot_console)
+ 
+     u_boot_console.run_command('tpm2 change_auth TPM2_RH_LOCKOUT unicorn')
+@@ -140,9 +126,6 @@ def test_tpm2_get_capability(u_boot_console):
+     There is no expected default values because it would depend on the chip
+     used. We can still save them in order to check they have changed later.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+-
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
+@@ -164,8 +147,6 @@ def test_tpm2_dam_parameters(u_boot_console):
+     the authentication, otherwise the lockout will be engaged after the first
+     failed authentication attempt.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
+@@ -188,9 +169,6 @@ def test_tpm2_pcr_read(u_boot_console):
+ 
+     Perform a PCR read of the 0th PCR. Must be zero.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+-
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
+@@ -217,8 +195,6 @@ def test_tpm2_pcr_extend(u_boot_console):
+     No authentication mechanism is used here, not protecting against packet
+     replay, yet.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
 -- 
 2.42.0.820.g83a721a137-goog
 
