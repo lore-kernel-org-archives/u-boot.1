@@ -4,75 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85F30C4167D
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 04:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA85C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 05:39:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 801C487C94;
-	Sun, 29 Oct 2023 05:28:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A29E9874DB;
+	Sun, 29 Oct 2023 06:39:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SoN9CHy8";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="ZeDDhARg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF5AA87C89; Sun, 29 Oct 2023 05:28:41 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A850A874DC; Sun, 29 Oct 2023 06:39:44 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FF7187C62
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 05:28:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63A67874D8
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 06:39:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-1dd1714b9b6so2362541fac.0
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 21:28:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698553715; x=1699158515; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Eirhkn3dxc8ehWJT0y72JAi0m+cz1aHWv/pOIG990PE=;
- b=SoN9CHy8A/bCpXzwc02jn95HQOJapu7oZQUzTDXphIZ//fRBIhgRZal58B8mM79LFB
- nZ8VMQXchg5MMeqISFNe1ldJgd8U6gKP9RWQ3BfNp1c59sygaM8jtsC3K+cfYQRC1tBG
- ATzyjIfKFYRhcpxtbMdhJDOIFRJTm1sgAEUow=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698553715; x=1699158515;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Eirhkn3dxc8ehWJT0y72JAi0m+cz1aHWv/pOIG990PE=;
- b=GBs9TTjC2xTbKEfRn9rYg2Fee+XF9UA7Hg9XJGI77xC7jnhMWkAUjOkKuOUo4sz9i9
- tTqNhlz7spVesYGOV9R4MbzBKzi52HCJ5POiDLFugsof78J0qpm6+Gh9xQHaWH3tc3pU
- 45wl5ANU18P2OvJSDgNfC4VnUw/MqVmjHkD0wbXLnGnlfIFjclxwUoB+6rjNZkmsEEVO
- fqRGSxyoZ11/jw249aBy74Q7+Qg2O1PSuaX2upUwhpN0UpfWghwBlFcQj+6erFqoIhtT
- r2VMx5zA7Dj0IF3bU8+6ST/Gt8XXS9CBzx8mIG4PrBwo8G8+aXZpqZeUhPhorMmsmuCv
- xq2Q==
-X-Gm-Message-State: AOJu0YzVJSEXNnikm8AZNWUnO9b70A5PMOBGy6KSRCDvNXkCd4U031hs
- pa8r/F8vjyZMfItlCdw5y2woAkR6ri8Fzw4dF35wIA==
-X-Google-Smtp-Source: AGHT+IEpbDk2nf0ya+nb6/nYQImNFLuJ7h6CEOeO3uRcmD/6Flqa3kzHc8zfuN2YiryR9p2na7PKFA==
-X-Received: by 2002:a05:6871:4807:b0:1e9:feb7:71db with SMTP id
- qc7-20020a056871480700b001e9feb771dbmr9758036oab.36.1698553715621; 
- Sat, 28 Oct 2023 21:28:35 -0700 (PDT)
-Received: from sjg1.roam.corp.google.com ([202.144.206.254])
- by smtp.gmail.com with ESMTPSA id
- s194-20020a6377cb000000b0058ac101ad83sm2920564pgc.33.2023.10.28.21.28.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 28 Oct 2023 21:28:35 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH 3/3] tpm: Drop unwanted special cases for sandbox
-Date: Sun, 29 Oct 2023 17:28:14 +1300
-Message-ID: <20231029172813.3.I3c84965a4b5e3019562b86a47b34ae4b12469070@changeid>
-X-Mailer: git-send-email 2.42.0.820.g83a721a137-goog
-In-Reply-To: <20231029042817.3938657-1-sjg@chromium.org>
-References: <20231029042817.3938657-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20231029053936epoutp0131051de23692c7740e82bb3bdcbc207e~SfXrmuEJK1012710127epoutp01G
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 05:39:36 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20231029053936epoutp0131051de23692c7740e82bb3bdcbc207e~SfXrmuEJK1012710127epoutp01G
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1698557976;
+ bh=ZvvZQrx2zmc0RVh+b4b0iZ6WBQMpXery9LPyBnMLGaY=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=ZeDDhARgwylT8tFAEwZpF+HohmjcxWIAaghusSHQDatQUgd1pqIxofXoRoCXJAmYN
+ uFviY7tuzxUqvLLkXDmhQQP5NUK22zkVkNQYH+7FPEK78pMD3npqRpc+sSLVwh1Ln8
+ N+BzjYjBKMNsBtS3WMI8D+xDpRcGYTFss/XNcdxQ=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20231029053936epcas2p4971801e0799cadd74424529d9163d133~SfXrYcySJ2193221932epcas2p4L;
+ Sun, 29 Oct 2023 05:39:36 +0000 (GMT)
+Received: from epsmges2p4.samsung.com (unknown [182.195.36.101]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4SJ4wR3Yyjz4x9Pt; Sun, 29 Oct
+ 2023 05:39:35 +0000 (GMT)
+Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
+ epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ BF.CC.09607.710FD356; Sun, 29 Oct 2023 14:39:35 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20231029053935epcas2p31e68dff026cc1d3885ade88306ec33cc~SfXqi3N761273412734epcas2p3h;
+ Sun, 29 Oct 2023 05:39:35 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231029053935epsmtrp24ef580d19e134008b80e120c939b0f9d~SfXqiSVzo2708027080epsmtrp2K;
+ Sun, 29 Oct 2023 05:39:35 +0000 (GMT)
+X-AuditID: b6c32a48-963ff70000002587-e1-653df0177fc1
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 23.B3.08817.710FD356; Sun, 29 Oct 2023 14:39:35 +0900 (KST)
+Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20231029053934epsmtip23015793bbda08bc538b7c8ecd60713db~SfXqYFwi50701007010epsmtip2C;
+ Sun, 29 Oct 2023 05:39:34 +0000 (GMT)
+From: "Chanho Park" <chanho61.park@samsung.com>
+To: "'Heinrich Schuchardt'" <heinrich.schuchardt@canonical.com>, "'Rick
+ Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>
+Cc: "'Sughosh Ganu'" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
+In-Reply-To: <20231028232612.109832-1-heinrich.schuchardt@canonical.com>
+Subject: RE: [RFC 1/1] rng: Provide a RNG based on the RISC-V Zkr ISA extension
+Date: Sun, 29 Oct 2023 14:39:34 +0900
+Message-ID: <05e001da0a2a$4c9135a0$e5b3a0e0$@samsung.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-us
+Thread-Index: AQF/9HxSBlVeCM0jiHlogvUUv84v3AGwzHiKsQbjf5A=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkk+LIzCtJLcpLzFFi42LZdljTXFf8g22qwdJNkhYXGm+yW7x9cZbR
+ 4t41OYu3ezvZLR4fes3kwOqx5/QsZo9ZDb1sHneu7WHzOHtnB2MAS1S2TUZqYkpqkUJqXnJ+
+ SmZeuq2Sd3C8c7ypmYGhrqGlhbmSQl5ibqqtkotPgK5bZg7QXiWFssScUqBQQGJxsZK+nU1R
+ fmlJqkJGfnGJrVJqQUpOgXmBXnFibnFpXrpeXmqJlaGBgZEpUGFCdsaBs/eZCw5oVDxZcIu1
+ gfG0fBcjJ4eEgInErVU7WLoYuTiEBHYwSuyZeZ4JwvnEKPG+4xAzhPONUWLl5/csMC2r1l2G
+ SuxllJhwYjqU8wKo6vt5sCo2AX2Jlx3bWEESIgJtjBJnJ29nB0kwC7hJnHx2gw3E5hTwkJjw
+ fykziC0sECjRfPQ1WA2LgKrExGNvwAbxClhKnGyZyAxhC0qcnPmEBWKOvMT2t3OYIU5SkPj5
+ dBkrRFxc4uXRI2BzRASsJNpOLAO7TkJgIofE3+M9UA0uEvuubmOFsIUlXh3fwg5hS0l8frcX
+ 6DgOILtcYseyJIjeFkaJ5rY9UL32Ej9uTmEFqWEW0JRYv0sfolxZ4sgtqNP4JDoO/2WHCPNK
+ dLQJQTSqSxzYPh0aiLIS3XM+s05gVJqF5LFZSB6bheSZWQi7FjCyrGIUSy0ozk1PLTYqMIHH
+ dnJ+7iZGcJrU8tjBOPvtB71DjEwcjIcYJTiYlUR4mR1tUoV4UxIrq1KL8uOLSnNSiw8xmgKD
+ eiKzlGhyPjBR55XEG5pYGpiYmRmaG5kamCuJ895rnZsiJJCeWJKanZpakFoE08fEwSnVwNS4
+ kcXy8sm1a/NSBdx91vO/uTFbRj6rQen7Lwa2Ex4v6q6Fv7CWsr81eeO5iUv8ko2Zvl0yEVqX
+ areUf+LSlMrtBvu/5pz6tFjFgenJzT+zHx05pnvvgcdX8/MRHIq7V/56+/MR+4TcteJOv8N6
+ Tn/QZ4x++j7MYInlXbMLu7dOsP99y/j/6RtxD0OnLrRi3ReaFrT0x4Gkn8zZp1Kq/twq2X0o
+ olQuu3th5F9LTXb3L3lS66pSLQ4FPOZTmnQxTH/X2U2Tb7yUl/x4TPuSR/6yJkH9Pc1bpe37
+ W2M2CNz/kzrnwL/dKr8e7y84KTDr4WOBM+vri77PeurRqHRJP/rfV9HOU15PrBgK36ryli78
+ psRSnJFoqMVcVJwIAFhD8nUcBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupikeLIzCtJLcpLzFFi42LZdlhJXlf8g22qwdkLLBYXGm+yW7x9cZbR
+ 4t41OYu3ezvZLR4fes3kwOqx5/QsZo9ZDb1sHneu7WHzOHtnB2MASxSXTUpqTmZZapG+XQJX
+ xoGz95kLDmhUPFlwi7WB8bR8FyMnh4SAicSqdZeZQWwhgd2MEh8nxEHEZSWevdvBDmELS9xv
+ OcLaxcgFVPOMUWLK790sIAk2AX2Jlx3bwBIiAh2MEns7nzF2MXJwMAt4SPw7KQnRMJNRYvbO
+ 2WANnEDxCf+Xgm0TFvCXWP70M5jNIqAqMfHYG7AaXgFLiZMtE5khbEGJkzOfsEDM1JNo28gI
+ EmYWkJfY/nYOM8RxChI/ny5jhTn6z9G5bBA14hIvjx4Be0BEwEqi7cQyZphnXh3fwj6BUXQW
+ kg2zEDbMQrJhFpJJCxhZVjFKphYU56bnFhsWGOWllusVJ+YWl+al6yXn525iBEeXltYOxj2r
+ PugdYmTiYDzEKMHBrCTCy+xokyrEm5JYWZValB9fVJqTWnyIUZqDRUmc99vr3hQhgfTEktTs
+ 1NSC1CKYLBMHp1QDU+VNwxk/p7ju2r7eYkb3nc3m1w9xqTkyJ8Zxa7uuaFZxdJ+kLmClOsN3
+ +fGdNR6Py+zt1a9+O3ymuYFr3RKFhbn7YmIYIhJfWZv7WzlY/fsgOLf274ZC1rYuvtCMh+1T
+ 3KN97N/MWhPl9jpcSz+y57he1/sy1metOofKjwZEOpbxeMZveuQeNiu3l2VXhMQeyePGBrMM
+ rnxxfqd3oHzPujmu7oavHCSXfU8Vu66452hvaMrjrxOF1hx78OXQm+Rj6mYbpu9Y2byOt3VT
+ yrQe2xUWK9vnVU7N4vQ/FJHitKDuyJfFrqwe3t/e/98r/pnPKPFb+TybiZWzXS69cW10dy71
+ XZPY/eWQy5dTBX1NSizFGYmGWsxFxYkAVtSpmB0DAAA=
+X-CMS-MailID: 20231029053935epcas2p31e68dff026cc1d3885ade88306ec33cc
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231028232641epcas2p48ab2b6db1932c3035028f44f16c831d8
+References: <CGME20231028232641epcas2p48ab2b6db1932c3035028f44f16c831d8@epcas2p4.samsung.com>
+ <20231028232612.109832-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,128 +135,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These don't seem to be needed.
+Hi,
 
-Add a few notes about what to do next. Also mention parallel tests in
-at the top of thefile.
+> -----Original Message-----
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Heinrich
+> Schuchardt
+> Sent: Sunday, October 29, 2023 8:26 AM
+> To: Rick Chen <rick@andestech.com>; Leo <ycliang@andestech.com>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>; u-boot@lists.denx.de; Heinrich
+> Schuchardt <heinrich.schuchardt@canonical.com>
+> Subject: [RFC 1/1] rng: Provide a RNG based on the RISC-V Zkr ISA
+> extension
+> 
+> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+> provides an interface to a physical entropy source.
+> 
+> A RNG driver based on the seed CSR is provided. It depends on
+> mseccfg.sseed being set in the SBI firmware.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This works fine on my qemu risv with your opensbi patch and KASLR has been
+tested as well.
+Feel free to add my reviewed/tested-by tag.
 
- test/py/tests/test_tpm2.py | 44 +++++++++-----------------------------
- 1 file changed, 10 insertions(+), 34 deletions(-)
+Reviewed-by: Chanho Park <chanho61.park@samsung.com>
+Tested-by: Chanho Park <chanho61.park@samsung.com>
 
-diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-index 522ed41de633..e01a05143b63 100644
---- a/test/py/tests/test_tpm2.py
-+++ b/test/py/tests/test_tpm2.py
-@@ -27,6 +27,16 @@ behavior.
- * Setup env__tpm_device_test_skip to True if tests with TPM devices should be
- skipped.
- 
-+Parallel tests
-+--------------
-+
-+These tests can be run in parallel on sandbox. In that case any action taken
-+by one test may be independent of another. For sandbox, care should be taken to
-+ensure that tests are independent.
-+
-+Unfortunately, tests cannot be made independent on real hardware, since there is
-+no way to reset the TPM other than restarting the board. Perhaps that would be
-+the best approach?
- """
- 
- updates = 0
-@@ -50,11 +60,6 @@ def force_init(u_boot_console, force=False):
-             u_boot_console.run_command('tpm2 clear TPM2_RH_PLATFORM')
-         u_boot_console.run_command('echo --- end of init ---')
- 
--def is_sandbox(cons):
--    # Array slice removes leading/trailing quotes.
--    sys_arch = cons.config.buildconfig.get('config_sys_arch', '"sandbox"')[1:-1]
--    return sys_arch == 'sandbox'
--
- @pytest.mark.buildconfigspec('cmd_tpm_v2')
- def test_tpm2_autostart(u_boot_console):
-     """Init the software stack to use TPMv2 commands."""
-@@ -65,20 +70,6 @@ def test_tpm2_autostart(u_boot_console):
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
- 
--def tpm2_sandbox_init(u_boot_console):
--    """Put sandbox back into a known state so we can run a test
--
--    This allows all tests to run in parallel, since no test depends on another.
--    """
--    u_boot_console.restart_uboot()
--    u_boot_console.run_command('tpm2 autostart')
--    output = u_boot_console.run_command('echo $?')
--    assert output.endswith('0')
--
--    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
--    if skip_test:
--        pytest.skip('skip TPM device test')
--
- @pytest.mark.buildconfigspec('cmd_tpm_v2')
- def test_tpm2_clear(u_boot_console):
-     """Execute a TPM2_Clear command.
-@@ -91,9 +82,6 @@ def test_tpm2_clear(u_boot_console):
-     not have a password set, otherwise this test will fail. ENDORSEMENT and
-     PLATFORM hierarchies are also available.
-     """
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
--
-     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
-     if skip_test:
-         pytest.skip('skip TPM device test')
-@@ -114,8 +102,6 @@ def test_tpm2_change_auth(u_boot_console):
-     Use the LOCKOUT hierarchy for this. ENDORSEMENT and PLATFORM hierarchies are
-     also available.
-     """
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
-     force_init(u_boot_console)
- 
-     u_boot_console.run_command('tpm2 change_auth TPM2_RH_LOCKOUT unicorn')
-@@ -140,9 +126,6 @@ def test_tpm2_get_capability(u_boot_console):
-     There is no expected default values because it would depend on the chip
-     used. We can still save them in order to check they have changed later.
-     """
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
--
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
-@@ -164,8 +147,6 @@ def test_tpm2_dam_parameters(u_boot_console):
-     the authentication, otherwise the lockout will be engaged after the first
-     failed authentication attempt.
-     """
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
-@@ -188,9 +169,6 @@ def test_tpm2_pcr_read(u_boot_console):
- 
-     Perform a PCR read of the 0th PCR. Must be zero.
-     """
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
--
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
-@@ -217,8 +195,6 @@ def test_tpm2_pcr_extend(u_boot_console):
-     No authentication mechanism is used here, not protecting against packet
-     replay, yet.
-     """
--    if is_sandbox(u_boot_console):
--        tpm2_sandbox_init(u_boot_console)
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
--- 
-2.42.0.820.g83a721a137-goog
+Best Regards,
+Chanho Park
+
+> ---
+>  drivers/rng/Kconfig         |  11 ++++
+>  drivers/rng/Makefile        |   1 +
+>  drivers/rng/riscv_zkr_rng.c | 102 ++++++++++++++++++++++++++++++++++++
+>  3 files changed, 114 insertions(+)
+>  create mode 100644 drivers/rng/riscv_zkr_rng.c
+> 
+> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+> index 994cc35b27..f8f1d91ed2 100644
+> --- a/drivers/rng/Kconfig
+> +++ b/drivers/rng/Kconfig
+> @@ -48,6 +48,17 @@ config RNG_OPTEE
+>  	  accessible to normal world but reserved and used by the OP-TEE
+>  	  to avoid the weakness of a software PRNG.
+> 
+> +config RNG_RISCV_ZKR
+> +	bool "RISC-V Zkr random number generator"
+> +	depends on RISCV_SMODE
+> +	help
+> +	  This driver provides a Random Number Generator based on the
+> +	  Zkr RISC-V ISA extension which provides an interface to an
+> +	  NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
+> +
+> +	  Using this driver will lead to an exception if the M-mode
+> firmware
+> +	  has not set mseccfg.sseed=1.
+> +
+>  config RNG_STM32
+>  	bool "Enable random number generator for STM32"
+>  	depends on ARCH_STM32 || ARCH_STM32MP
+> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+> index 47b323e61e..a5d3ca4130 100644
+> --- a/drivers/rng/Makefile
+> +++ b/drivers/rng/Makefile
+> @@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
+>  obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
+>  obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
+>  obj-$(CONFIG_RNG_STM32) += stm32_rng.o
+> +obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
+>  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
+>  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
+>  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+> diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
+> new file mode 100644
+> index 0000000000..f48ae35410
+> --- /dev/null
+> +++ b/drivers/rng/riscv_zkr_rng.c
+> @@ -0,0 +1,102 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * The RISC-V Zkr extension provides CSR seed which provides access to a
+> + * random number generator.
+> + */
+> +
+> +#define LOG_CATEGORY UCLASS_RNG
+> +
+> +#include <common.h>
+> +#include <dm.h>
+> +#include <rng.h>
+> +
+> +#define DRIVER_NAME "riscv_zkr"
+> +
+> +enum opst {
+> +	/** @BIST: built in self test running */
+> +	BIST = 0b00,
+> +	/** @WAIT: sufficient amount of entropy is not yet available */
+> +	WAIT = 0b01,
+> +	/** @ES16: 16bits of entropy available */
+> +	ES16 = 0b10,
+> +	/** @DEAD: unrecoverable self-test error */
+> +	DEAD = 0b11,
+> +};
+> +
+> +static unsigned long read_seed(void)
+> +{
+> +	unsigned long ret;
+> +
+> +	__asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : :
+> "memory");
+> +
+> +	return ret;
+> +}
+> +
+> +static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
+> +{
+> +	u8 *ptr = data;
+> +
+> +	while (len) {
+> +		u32 val;
+> +
+> +		val = read_seed();
+> +
+> +		switch (val >> 30) {
+> +		case BIST:
+> +			continue;
+> +		case WAIT:
+> +			continue;
+> +		case ES16:
+> +			*ptr++ = val & 0xff;
+> +			if (--len) {
+> +				*ptr++ = val >> 8;
+> +				--len;
+> +			}
+> +			break;
+> +		case DEAD:
+> +			return -ENODEV;
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * riscv_zkr_probe() - check if the seed register is available
+> + *
+> + * If the SBI software has not set mseccfg.sseed=1 or the Zkr
+> + * extension is not available this probe function will result
+> + * in an exception. Currently we cannot recover from this.
+> + *
+> + * @dev:	RNG device
+> + * Return:	0 if successfully probed
+> + */
+> +static int riscv_zkr_probe(struct udevice *dev)
+> +{
+> +	u32 val;
+> +
+> +	do {
+> +		val = read_seed();
+> +		val >>= 30;
+> +	} while (val == BIST || val == WAIT);
+> +
+> +	if (val == DEAD)
+> +		return -ENODEV;
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct dm_rng_ops riscv_zkr_ops = {
+> +	.read = riscv_zkr_read,
+> +};
+> +
+> +U_BOOT_DRIVER(riscv_zkr) = {
+> +	.name = DRIVER_NAME,
+> +	.id = UCLASS_RNG,
+> +	.ops = &riscv_zkr_ops,
+> +	.probe = riscv_zkr_probe,
+> +};
+> +
+> +U_BOOT_DRVINFO(cpu_riscv_zkr) = {
+> +	.name = DRIVER_NAME,
+> +};
+> --
+> 2.40.1
+
 
