@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99FC3C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 07:09:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BACEFC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 07:23:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE68F874BD;
-	Sun, 29 Oct 2023 08:09:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D2A1E87118;
+	Sun, 29 Oct 2023 08:23:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="KFdXOaZd";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="xP7nC02N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2A6C871C4; Sun, 29 Oct 2023 08:09:23 +0100 (CET)
+ id 9228E871C4; Sun, 29 Oct 2023 08:23:48 +0100 (CET)
 Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 360338723E
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 08:09:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA0887113
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 08:23:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
@@ -29,37 +29,38 @@ Received: from [127.0.0.1] (localhost [127.0.0.1])
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: sendonly@marcansoft.com)
- by mail.marcansoft.com (Postfix) with ESMTPSA id D750942699;
- Sun, 29 Oct 2023 07:09:17 +0000 (UTC)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id 3EF5F42623;
+ Sun, 29 Oct 2023 07:23:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
- t=1698563359; bh=R1/ij1xn3qoay0zcqhigpB4xRnUemNR3rVgbqRUep4E=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=KFdXOaZdm6cKqWZl/AE1Qhg2kPnR4CJq4kzD91KLexPNM13phjNNrNlGcreQeUTnN
- UWN7u757jjN46HjqeYIdhoFqdug0pyQWShGdna+oO+cYLKXQbUlWHrPXG74PHw5HvN
- 3yPppjKYGB14l71+YPyR0wuc+YU3H/PQIXKJ3kpvoTEeedzLwIRimMfdJVEgKsBFdR
- 2Z4AoL1u2jlK/vG6GusC8X273QUswTHraeu6vvFItw6NNfiS9HN5tUQgD1+Cq/1/v/
- ULiJGHfeu4B+Tk0PUlkq6IaG0G3e2i8SUe3S6utoxfhHjI5bJjvOyNvL93ARi/y8NJ
- fqrlCEDoWeAaQ==
+ t=1698564225; bh=WKrBsxERVPbuUaeN4PlsI71Eh62TLmWZJ6p+CvD8wj4=;
+ h=From:Subject:Date:To:Cc;
+ b=xP7nC02Nq2yA+Dqt3TVcjUbbyPqO5bL6VsjpqhaInhDRSyS9mlUL14XqS+eT/JSdK
+ RPYd/kpG9jrHfI8+Ihk88St8admCy0SjNEV17StcuuLARb9l4iwo8jxGsGk9PTLNaa
+ ntCQMYrOFlmuS7TAzELeOpxJ1ur0SCLj7RIJZR5KrnpcqAOxjWTw9LfCars5CBZQ+6
+ rQWCCRF5f2nMIRAwLeFqKjf2JVcvICUsr/pQFCFJXJHQmz3f8LML903THLbCLrfnaa
+ rmVRrnJtNkPdDcOTfb80oPWrieZjzAurD1npGv8m99Kk2dAF1cqeOe+Xc/G9jj9R80
+ a4dw+rclW8dLg==
 From: Hector Martin <marcan@marcan.st>
-Date: Sun, 29 Oct 2023 16:09:09 +0900
-Subject: [PATCH 2/2] usb: hub: Add missing reset recovery delay
+Subject: [PATCH 0/4] USB fixes: Mass Storage bugs & 64bit support
+Date: Sun, 29 Oct 2023 16:23:27 +0900
+Message-Id: <20231029-usb-fixes-3-v1-0-0153210a7f55@marcan.st>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231029-usb-fixes-2-v1-2-9f793aa20fe4@marcan.st>
-References: <20231029-usb-fixes-2-v1-0-9f793aa20fe4@marcan.st>
-In-Reply-To: <20231029-usb-fixes-2-v1-0-9f793aa20fe4@marcan.st>
+X-B4-Tracking: v=1; b=H4sIAG8IPmUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI2NDAyNL3dLiJN20zIrUYl1j3WRzozQLI8ukRDPDJCWgjoKiVLAUUEN0bG0
+ tALpxUftdAAAA
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>
 Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>, 
  u-boot@lists.denx.de, asahi@lists.linux.dev, 
  Hector Martin <marcan@marcan.st>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=757; i=marcan@marcan.st;
- h=from:subject:message-id; bh=R1/ij1xn3qoay0zcqhigpB4xRnUemNR3rVgbqRUep4E=;
- b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlQ7VvEfFoIVkmn/LyXMti7lZ+AXfDHlePiq+akdCpd6/
- jKkNoR2lLIwiHEwyIopsjSe6D3V7Tn9nLpqynSYOaxMIEMYuDgFYCKv2xgZFv+cfF6IN8bgxMcp
- 5ral8SK5b34HPN9VJ/Tbe6naP88nvxkZ/iYUmATm89i3d+rq8Sgk1U5yDTplwzmVxeH7m893Tvx
- gBQA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1179; i=marcan@marcan.st;
+ h=from:subject:message-id; bh=WKrBsxERVPbuUaeN4PlsI71Eh62TLmWZJ6p+CvD8wj4=;
+ b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlQ7jupt9/R59YtSeMw2u+84+637/Y3/oo8SFCUXqJjns
+ XyLblHrKGVhEONgkBVTZGk80Xuq23P6OXXVlOkwc1iZQIYwcHEKwEQUmxgZXv/p8N1RdZH1ye8f
+ HkerrlTpXO+f1Sn8aUrF1W3e7FF3VzAyTD5c9zbTYEYZ7zL3r7erfb/P6n3wZb3KUzamumqB983
+ c3AA=
 X-Developer-Key: i=marcan@marcan.st; a=openpgp;
  fpr=FC18F00317968B7BE86201CBE22A629A4C515DD5
 X-BeenThere: u-boot@lists.denx.de
@@ -78,33 +79,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some devices like YubiKeys need more time before SET_ADDRESS. The spec
-says we need to wait 10ms.
+This series fixes some bugs in the USBMS driver and adds 64-bit LBA
+support. This is required to make USB HDDs >=4TB work.
+
+Note that the increased timeout won't actually work right now, due to
+broken handling in the underlying USB infrastructure. That will be fixed
+in a follow-up series, which depends on [1] being applied first. The
+USBMS part is logically stand-alone and can be applied in parallel
+before that.
+
+[1] https://lore.kernel.org/u-boot/20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st/
 
 Signed-off-by: Hector Martin <marcan@marcan.st>
 ---
- common/usb_hub.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+Hector Martin (4):
+      scsi: Fix a bunch of SCSI definitions.
+      usb: storage: Increase read/write timeout
+      usb: storage: Use the correct CBW lengths
+      usb: storage: Implement 64-bit LBA support
 
-diff --git a/common/usb_hub.c b/common/usb_hub.c
-index ba11a188ca64..858ada0f73be 100644
---- a/common/usb_hub.c
-+++ b/common/usb_hub.c
-@@ -391,6 +391,13 @@ int usb_hub_port_connect_change(struct usb_device *dev, int port)
- 		break;
- 	}
- 
-+	/*
-+	 * USB 2.0 7.1.7.5: devices must be able to accept a SetAddress()
-+	 * request (refer to Section 11.24.2 and Section 9.4 respectively)
-+	 * after the reset recovery time 10 ms
-+	 */
-+	mdelay(10);
-+
- #if CONFIG_IS_ENABLED(DM_USB)
- 	struct udevice *child;
- 
+ common/usb_storage.c | 164 ++++++++++++++++++++++++++++++++++++++++++---------
+ drivers/ata/ahci.c   |   9 ++-
+ drivers/scsi/scsi.c  |   4 +-
+ include/scsi.h       |   8 ++-
+ 4 files changed, 150 insertions(+), 35 deletions(-)
+---
+base-commit: 8ad1c9c26f7740806a162818b790d4a72f515b7e
+change-id: 20231029-usb-fixes-3-c72f829ba61b
 
+Best regards,
 -- 
-2.41.0
+Hector Martin <marcan@marcan.st>
 
