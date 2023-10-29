@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F92C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 17:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE3ADC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 17:34:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC46D8747E;
-	Sun, 29 Oct 2023 18:34:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43C7287968;
+	Sun, 29 Oct 2023 18:34:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698600863;
-	bh=vtsUQ3UVxzVpzijcPJkTbNBla41I55UWvfWY7VJ2/Pc=;
+	s=phobos-20191101; t=1698600866;
+	bh=TKu9WwWqzq61umxRiJRksc7E6tayF3qZjJsjLmauFYY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=wYM435kwQAp6JfHxiRepVXKyvrPXK8LxNjQ1SBK9RRxJktTqJ/t7DnnVR0I44MovL
-	 qwoC/s28Uk7tKafRrDrEVeQTTKsPVE8s/xcFAH0Bi78qiJmfRbXwvr1VHZUe/KDznj
-	 LocyXDPk79yiKXCUjKSyZsDcjYkouO7LteO10Aawva/OtQhiOsJdR39xqNzi7LB/tH
-	 RDXriCRUGRdwwjx2o9Zn0mYHep5oKXg4kmmOP4jc87fU2dyY9d66dRbH7wMhrfqPfB
-	 yrDsNCOaeL8yEBC3r2UdY3EcxMrrqaAQwsL2w6vASyGSyNWoS0Jd/5xJ41UeHynPw+
-	 uqzae6K2Dbnpg==
+	b=ehT3W4dtagvRXlqxIuh2w445WSMD7GJg/RiUGDMuvgt68rJhniO6Bhw1rb5rbI5LS
+	 pqVXNtsY/jRVsd3UgZFXyB25saAXL6QVUkw3C/Da1EovHU1E/6Qu3rg7Y64WiCezVW
+	 NnvCUz8yq8XW9aNh/BtZCAJOJpB9v1/UVRMqqNA+0RIr4x0E1jNufKmqj9R0HVOZWd
+	 N82ZDpw/06oFpegOlFQ8CDP4j0bOZkmlIRvDeQtEppTklJDX3ClLVLOGYxf2/MuEzn
+	 m210BshwyS9pWJJ0J8qrTplTv10C2MPiHSDzPoPApYx2kh54neYoiz+j9+ZwnUsbmv
+	 E1m3zaVSAtqcQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8FBB987817;
- Sun, 29 Oct 2023 18:34:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2F7C887832;
+ Sun, 29 Oct 2023 18:34:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1698600862;
- bh=vtsUQ3UVxzVpzijcPJkTbNBla41I55UWvfWY7VJ2/Pc=;
+ s=phobos-20191101; t=1698600863;
+ bh=TKu9WwWqzq61umxRiJRksc7E6tayF3qZjJsjLmauFYY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=nNNmpwJ82VlP7FaWdpzFfQ5nNDejqxsSwwaABCy9f9bQvBsV7vJiXJ6e29bgwQzo4
- dMXSn2sGPkUH7BSay6xcFA3lzRLxow/wlO1q8xYi8m66Cjk7Gf7XWY9JDNOLW5ucC1
- yRPEGAsOUjSMyntqNSqLq2RER9QVbVjGTpc4o+pDkSEnRtV/ddih7qvIJtbREUfMcm
- QNJrORukSwl/IhRLAl8DH7usqdJ4EZ9dFX2zxd46e4kV548Gy6F0+NRJsQP41s8wyF
- q4TBjN+jy99gRsbiEZq43XWmuTfCuPwJ6ZUiMEGPaKAXQthcc/w4JExcDiFY+wfD4l
- 3XotVltb0yEYQ==
-Message-ID: <12ee2427-8589-4b9c-b530-37fad068cc85@denx.de>
-Date: Sun, 29 Oct 2023 18:33:42 +0100
+ b=t/ybVs/vvwACk1HsAez01d7kMDa5wXNWVxKsqbs2Szi0EGZrRvrjJqlnpjLONPcPu
+ TdF5FrlI2/r/IZH5sZkMoNzh5KAc1lCZtuvL9lKeihHTfif+Grq3A40PheuCuMxrFb
+ PqN5FRyEi36G28o+bZa0+VU7UARuvCXgE+beTZqO/z8aXq/q3nnKmOhPSbHLw7amOF
+ STWK83OQOYz6qIqPaZN5NmFCEH1SoiJCfr3nYknLVVKcgeVqXlRF+zAwyDJvTpFA2w
+ NC3fc7DaJDXLI4YD6h2WP0ezV00hI/qeLQ5ek57rR1syCqAfIv2UVYMojM+rQWSj3l
+ vggIvpeH89phQ==
+Message-ID: <5d791e0a-bcd3-44f9-bf39-a47390ec012e@denx.de>
+Date: Sun, 29 Oct 2023 18:34:05 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] usb: storage: Implement 64-bit LBA support
+Subject: Re: [PATCH] usb: Ignore endpoints in non-zero altsettings
+Content-Language: en-US
 To: Hector Martin <marcan@marcan.st>, Bin Meng <bmeng.cn@gmail.com>
 Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>,
  u-boot@lists.denx.de, asahi@lists.linux.dev
-References: <20231029-usb-fixes-3-v1-0-0153210a7f55@marcan.st>
- <20231029-usb-fixes-3-v1-4-0153210a7f55@marcan.st>
- <c3cfba5e-46cb-4fec-8e0d-b8aa1b9c0098@denx.de>
- <1db9cfab-4e89-2308-e398-8ea283079314@marcan.st>
-Content-Language: en-US
+References: <20231029-usb-fixes-4-v1-1-fe973dde7e59@marcan.st>
+ <2a2c6186-5854-4bbb-ad12-d8b2062a7a63@denx.de>
+ <c3f6d8de-dff7-f0e1-4c87-9eb56e0c6eb8@marcan.st>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <1db9cfab-4e89-2308-e398-8ea283079314@marcan.st>
+In-Reply-To: <c3f6d8de-dff7-f0e1-4c87-9eb56e0c6eb8@marcan.st>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,33 +71,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/29/23 16:54, Hector Martin wrote:
-> On 29/10/2023 21.11, Marek Vasut wrote:
->> On 10/29/23 08:23, Hector Martin wrote:
->>> This makes things work properly on devices with >= 2 TiB
->>> capacity. If u-boot is built without CONFIG_SYS_64BIT_LBA,
->>> the capacity will be clamped at 2^32 - 1 sectors.
+On 10/29/23 16:50, Hector Martin wrote:
+> On 29/10/2023 21.04, Marek Vasut wrote:
+>> On 10/29/23 08:24, Hector Martin wrote:
+>>> We currently do not really handle altsettings properly, and no driver
+>>> uses them. Ignore the respective endpoint descriptors for secondary
+>>> altsettings, to avoid creating duplicate endpoint records in the
+>>> interface.
+>>>
+>>> This will have to be revisited if/when we have a driver that needs
+>>> altsettings to work properly.
 >>>
 >>> Signed-off-by: Hector Martin <marcan@marcan.st>
 >>> ---
->>>    common/usb_storage.c | 132 ++++++++++++++++++++++++++++++++++++++++++++-------
->>>    1 file changed, 114 insertions(+), 18 deletions(-)
+>>>    common/usb.c | 9 +++++++++
+>>>    1 file changed, 9 insertions(+)
 >>>
->>> diff --git a/common/usb_storage.c b/common/usb_storage.c
->>> index 95507ffbce48..3035f2ee9868 100644
->>> --- a/common/usb_storage.c
->>> +++ b/common/usb_storage.c
->>> @@ -66,7 +66,7 @@
->>>    static const unsigned char us_direction[256/8] = {
->>>    	0x28, 0x81, 0x14, 0x14, 0x20, 0x01, 0x90, 0x77,
->>>    	0x0C, 0x20, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00,
->>> -	0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01,
->>> +	0x00, 0x01, 0x00, 0x40, 0x00, 0x01, 0x00, 0x01,
+>>> diff --git a/common/usb.c b/common/usb.c
+>>> index aad13fd9c557..90f72fda00bc 100644
+>>> --- a/common/usb.c
+>>> +++ b/common/usb.c
+>>> @@ -463,6 +463,15 @@ static int usb_parse_config(struct usb_device *dev,
+>>>    				puts("Endpoint descriptor out of order!\n");
+>>>    				break;
+>>>    			}
+>>> +			if (if_desc->num_altsetting > 1) {
+>>> +				/*
+>>> +				 * Ignore altsettings, which can trigger duplicate
+>>> +				 * endpoint errors below. Revisit this when some
+>>> +				 * driver actually needs altsettings with differing
+>>> +				 * endpoint setups.
+>>> +				 */
 >>
->> What changed here ?
+>> How do you trigger this error ?
+>>
 > 
-> This is an incomplete bitmap specifying the data transfer direction for
-> every possible SCSI command ID. I'm adding the new commands I'm now using.
+> Plug in a device with altsettings, like most sound cards or UVC devices.
 
-Can you please add a code comment here, so others wouldn't ponder about 
-this too ?
+Please add that to the commit message.
