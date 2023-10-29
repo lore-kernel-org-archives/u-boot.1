@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F92C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 03:51:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1CEC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 03:51:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4349887C8B;
-	Sun, 29 Oct 2023 04:49:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5533087C8E;
+	Sun, 29 Oct 2023 04:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VjfQrQzt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZufgT/eW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F71E87751; Sun, 29 Oct 2023 04:49:07 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id DA57B87C6F; Sun, 29 Oct 2023 04:49:08 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06EE987C5D
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 04:49:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 520D2877AD
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 04:49:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-67131800219so5179386d6.3
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 20:49:04 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-778a47bc09aso253348385a.3
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 20:49:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698551343; x=1699156143; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698551345; x=1699156145; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U2BMBtgS6xiCu13NHAzka6oeMXF45J090qYY//OT7Lo=;
- b=VjfQrQztK+1aUXnOIqAwpkeok9uTbguXm4pRDzrdZqmUrlBIyexCDWsxMcL0xzLmJH
- DFkEDisvuJzZcnEier3331VzjWBr5+sXTAlYUM6ohzpenFFcxr57vXUGnZ7M+m0tNLbb
- EjgJGisCqbmTqcxGjy7WfzF1h+RJvgKDrN0QAevnut/lKWo9QIQtfGro0NpLDKfEFZ1J
- xHkEEkZ76l79Xlix0vSI5Ybm4QG5ew2Ke6Kpbg56RrQZkA9LYlRgGBYesJjLd4JrHtmt
- eZiex+fPZBG1tDn9hv9MQyLHG1UZOsyjQIea0z70ZnzxKtu8NDviBdaf1axBoTkFn1+X
- 3Dxg==
+ bh=h/M7udaK1XsPcrPcD/PWkusgpIxZnuFkNNzDosMqIBk=;
+ b=ZufgT/eWjM/VGl+ey4Tepg4HR25o1CxsLX+SsjTy7uT53EjNv5SggbasQuIwPHYWFZ
+ GUMt63YnxRUAeuvTfU/urkT5NGq05xtup9+rGR71FvwkukOVsr7T46o5ht4cEPYIj567
+ TxrrkmDgpDIt27rnZOWoDHAFbDXI7l17RlrYWFvgm0jPiuIifyJc4lO7447TDS04VmRZ
+ sO3O+ulZOEMV+cAr29dkkcYSoABmmgR5epxPHWo4rsSuJuT9kwOtwMoo3ug+PDn8pXS9
+ rYoEeSIeSrEm3TkQGi1QGzSCzRwPooGdNpjoYKyrQdzfauwapa+hV7mjuBvFOzWCPf7w
+ REMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698551343; x=1699156143;
+ d=1e100.net; s=20230601; t=1698551345; x=1699156145;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U2BMBtgS6xiCu13NHAzka6oeMXF45J090qYY//OT7Lo=;
- b=Pj0ssakGUjhLEv3syu8RPRRX8Z+OWfYO1Hu2aQZfCr92PwuTYbQbKc5ZE2YWUOSyTS
- hOOaimfSTyUtO3OaLhFV+sebc56t/3/hAd2969RbEWNJVcAL9wJwHi0R1JnRQbSeu7kU
- wqvKtveezzidbQFbJLkVnlmnrnh4paUdGolUG3EDSKMLq3+5HDDY4kIQgBtHEEBs7djJ
- QO09sUpdxS4j0eXcTl5w7U/1l+LnHX4k0ohDzKruzSVVCaOR7xlMth4LnuZO7KOviFwr
- 6hBK/5slZx/TCXvQZ2tFbsgGB0z/1YFcetTVJvEWF4GDaKsCabwXrgOcDurPWO9A0kec
- zpQQ==
-X-Gm-Message-State: AOJu0YyhcqxFiDRkQCIF2btpegjIL82IFyVSjhwWGiqpKCQ/E7G+bDr6
- dyH2rOcjc4/DfxQvIT8YrkU8IAFSauFv+A==
-X-Google-Smtp-Source: AGHT+IHHFkxo1bMIauOOqEiP2tYnzwrVDdOQW1YPMJ60aRV3bCdQemQkkF0XCy4a1TveGqtTm/Lg4g==
-X-Received: by 2002:a05:6214:19eb:b0:670:9cc7:2f03 with SMTP id
- q11-20020a05621419eb00b006709cc72f03mr4607690qvc.43.1698551343565; 
- Sat, 28 Oct 2023 20:49:03 -0700 (PDT)
+ bh=h/M7udaK1XsPcrPcD/PWkusgpIxZnuFkNNzDosMqIBk=;
+ b=MAkVDrutxdyFhAePIFojns5JbxOe+TmH/7yFl6eB2OyIaybVM5y67szzPhvHuTSlGZ
+ 4xgbcUPQl0xlA52hReXAz/PG0nkIHiU1C9ZaOIZkOc+ETlA5+n8WzJ96mVv7pufBNndx
+ 2YbjBWwGkpyWev8w6Hgs8ihBmp6mrPCU1wr5TcC0+qxVDw7ysgUPg8ZUJXNIxnOVGc5D
+ zJrFU54Yk8BMr44O0P72vRKEOAs0sCRX/357nCqsBV+2pze/qTY6C5Pz3ZBu+JmVTJ0f
+ sfdTiEfZ8igVhYR7cy1bY6hxXT6hk5nDU06j9I+Q1jY7vtCyyWM1W85dn/xXNqtkaHZy
+ dayA==
+X-Gm-Message-State: AOJu0YzEiYS4mvO6a04FcnRPQTQ49fupvcx1BCAiVU7XRrtPerZEXyNO
+ FpczsO/J41hZKXRyz3BGl5xokW57LZKEcQ==
+X-Google-Smtp-Source: AGHT+IEbWCoJGxiVcVOVpMKQ2G1EoJ274k0rFb3OXfBlfbGmKNd2v8T/l0GlIhBKkGJsup9QyoeJhA==
+X-Received: by 2002:a05:620a:5587:b0:778:912b:269b with SMTP id
+ vq7-20020a05620a558700b00778912b269bmr6665740qkn.66.1698551344882; 
+ Sat, 28 Oct 2023 20:49:04 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- y11-20020a056214016b00b0066d1d860cd1sm2188516qvs.19.2023.10.28.20.49.02
+ d26-20020a05620a137a00b007757868e75csm2105549qkl.117.2023.10.28.20.49.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 28 Oct 2023 20:49:03 -0700 (PDT)
+ Sat, 28 Oct 2023 20:49:04 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>,
-	Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 12/15] nand: Allow reinitialization
-Date: Sat, 28 Oct 2023 23:48:42 -0400
-Message-Id: <20231029034845.1169614-13-seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 13/15] arch: sandbox: Add function to create temporary files
+Date: Sat, 28 Oct 2023 23:48:43 -0400
+Message-Id: <20231029034845.1169614-14-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231029034845.1169614-1-seanga2@gmail.com>
 References: <20231029034845.1169614-1-seanga2@gmail.com>
@@ -93,119 +93,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NAND devices are destroyed in between unit tests. Provide a function to
-reinitialize the subsystem at the beginning of each test.
+When working with sparse data buffers that may be larger than the address
+space, it is convenient to work with files instead. Add a function to create
+temporary files of a certain size.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- drivers/mtd/nand/raw/nand.c | 40 ++++++++++++++++++++++++++++++-------
- include/nand.h              |  1 +
- 2 files changed, 34 insertions(+), 7 deletions(-)
+ arch/sandbox/cpu/os.c | 17 +++++++++++++++++
+ include/os.h          | 13 +++++++++++++
+ 2 files changed, 30 insertions(+)
 
-diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
-index 80017b3dddd..4c18861aa25 100644
---- a/drivers/mtd/nand/raw/nand.c
-+++ b/drivers/mtd/nand/raw/nand.c
-@@ -115,6 +115,8 @@ static void nand_init_chip(int i)
- #endif
- 
- #ifdef CONFIG_MTD_CONCAT
-+struct mtd_info *concat_mtd;
-+
- static void create_mtd_concat(void)
- {
- 	struct mtd_info *nand_info_list[CONFIG_SYS_MAX_NAND_DEVICE];
-@@ -129,28 +131,40 @@ static void create_mtd_concat(void)
- 		}
- 	}
- 	if (nand_devices_found > 1) {
--		struct mtd_info *mtd;
- 		char c_mtd_name[16];
- 
- 		/*
- 		 * We detected multiple devices. Concatenate them together.
- 		 */
- 		sprintf(c_mtd_name, "nand%d", nand_devices_found);
--		mtd = mtd_concat_create(nand_info_list, nand_devices_found,
--					c_mtd_name);
-+		concat_mtd = mtd_concat_create(nand_info_list,
-+					       nand_devices_found, c_mtd_name);
- 
--		if (mtd == NULL)
-+		if (!concat_mtd)
- 			return;
- 
--		nand_register(nand_devices_found, mtd);
-+		nand_register(nand_devices_found, concat_mtd);
- 	}
- 
- 	return;
+diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
+index 85d0d6a1703..8847c4cd0a8 100644
+--- a/arch/sandbox/cpu/os.c
++++ b/arch/sandbox/cpu/os.c
+@@ -282,6 +282,23 @@ int os_persistent_file(char *buf, int maxsize, const char *fname)
+ 	return 0;
  }
-+
-+static void destroy_mtd_concat(void)
+ 
++int os_mktemp(char *fname, off_t size)
 +{
-+	if (!concat_mtd)
-+		return;
++	int fd;
 +
-+	mtd_concat_destroy(concat_mtd);
-+	concat_mtd = NULL;
-+}
- #else
- static void create_mtd_concat(void)
- {
- }
++	fd = mkostemp(fname, O_CLOEXEC);
++	if (fd < 0)
++		return -errno;
 +
-+static void destroy_mtd_concat(void)
-+{
-+}
- #endif
- 
- unsigned long nand_size(void)
-@@ -158,10 +172,10 @@ unsigned long nand_size(void)
- 	return total_nand_size;
- }
- 
-+static int initialized;
++	if (unlink(fname) < 0)
++		return -errno;
 +
- void nand_init(void)
- {
--	static int initialized;
--
- 	/*
- 	 * Avoid initializing NAND Flash multiple times,
- 	 * otherwise it will calculate a wrong total size.
-@@ -190,6 +204,18 @@ void nand_init(void)
- 	create_mtd_concat();
- }
- 
-+void nand_reinit(void)
-+{
-+	int i;
++	if (ftruncate(fd, size))
++		return -errno;
 +
-+	destroy_mtd_concat();
-+	for (i = 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++)
-+		assert(!nand_info[i]);
-+
-+	initialized = 0;
-+	nand_init();
++	return fd;
 +}
 +
- unsigned int nand_page_size(void)
- {
- 	struct mtd_info *mtd = get_nand_dev_by_index(nand_curr_device);
-diff --git a/include/nand.h b/include/nand.h
-index fc584f5ef7a..220ffa202ef 100644
---- a/include/nand.h
-+++ b/include/nand.h
-@@ -11,6 +11,7 @@
- #include <config.h>
+ /* Restore tty state when we exit */
+ static struct termios orig_term;
+ static bool term_setup;
+diff --git a/include/os.h b/include/os.h
+index fc8a1b15cbf..877404a6c13 100644
+--- a/include/os.h
++++ b/include/os.h
+@@ -108,6 +108,19 @@ int os_unlink(const char *pathname);
+  */
+ int os_persistent_file(char *buf, int maxsize, const char *fname);
  
- extern void nand_init(void);
-+void nand_reinit(void);
- unsigned long nand_size(void);
- unsigned int nand_page_size(void);
- 
++/**
++ * os_mktemp() - Create a temporary file
++ * @fname: The template to use for the file name. This must end with 6 Xs. It
++ *         will be modified to the opened filename on success.
++ * @size: The size of the file
++ *
++ * Create a temporary file using @fname as a template, unlink it, and truncate
++ * it to @size.
++ *
++ * Return: A file descriptor, or negative errno on error
++ */
++int os_mktemp(char *fname, off_t size);
++
+ /**
+  * os_exit() - access to the OS exit() system call
+  *
 -- 
 2.37.1
 
