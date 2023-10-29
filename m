@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA301C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 13:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD841C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 13:08:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BF8987068;
-	Sun, 29 Oct 2023 14:06:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A4E7D87147;
+	Sun, 29 Oct 2023 14:08:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rtk6que7";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="iYSMYb7e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CAE987068; Sun, 29 Oct 2023 14:06:50 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 9F09E87148; Sun, 29 Oct 2023 14:08:14 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CAAD8704E
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 14:06:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF3E687068
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 14:08:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-53b32dca0bfso7427766a12.0
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 06:06:45 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-52bd9ddb741so6099156a12.0
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 06:08:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1698584805; x=1699189605;
+ d=amarulasolutions.com; s=google; t=1698584892; x=1699189692;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LLq5JIxzoFOGOINSqevc+cULGSI8qJYXbAWpzWYqF28=;
- b=rtk6que7+nWwGD9OMg0EbqNi9t6PhEo4TXlcW5KcT49d79/Q2vhisADg+V+KovCER5
- /4mtZY16u+yj7em2R/cAl4KwDfH+qZvYnupAQ5bfo+uneE0vHmvEDaAXHkfrdyyezW+H
- hUA2OMqJOVqJydkLX3qZG6SbNJhK2BRVI53P0=
+ bh=b3RXAdakbc6xDwo4J9bOtlUjF4ZrRrewsgA3Exvn6GQ=;
+ b=iYSMYb7e2RauuphGMb/qxlriibAnd+heErPfIYDfbMHETKNXcWlj1liCEbLMpV758L
+ MwB9fUvBlWdSWPstUKJPR+rmlhLbdRgqonF6D6Q2K2nLMmEu1tTMccdjULuE+YP9ApY8
+ HT/qRhiNWGTySw3FMqNs5IPs38ZRKLeJ2KS7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698584805; x=1699189605;
+ d=1e100.net; s=20230601; t=1698584892; x=1699189692;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LLq5JIxzoFOGOINSqevc+cULGSI8qJYXbAWpzWYqF28=;
- b=PYTsAco+AEGXFUPd7INIPqKphWTRSBHD5zKeaVk+4Ts7m1l3k7uzcN37xMp4Gh7kqu
- YLZRbjtTA3rWVmQ8hCLq2HO6Bb4A3H2SRza5u6Eo04IAZCw+n4W7SgFhEza/4GSP8elO
- hH1ngmgF3BNgjHFOJL5sa1pwtH9TVZL7v9H9yH0B46fcE0rbHDC4PSxLFZCtKDvPxVL1
- OiDdf0W26iqPyVkCHgHUvPGDuOvPXgg2h9Q4h104+9hl4HmXJHTQFfBfkUFwn9/nHDMb
- nnfXueXJ0gpB/GOychIG3m4q5c+hdwdE1rXTiKWgRI9i18eD+fSTzWlbce8rh1uqG/Vz
- iSCg==
-X-Gm-Message-State: AOJu0YygAAQgmbHbm46YY3nfq8FlPFSyCU+1t6oe9NOuT/AB+Cd+ar7A
- RJiCu1CKwIvygri348+phkzKabkX7Uu72MZyi5OV0g==
-X-Google-Smtp-Source: AGHT+IEAIf2w0wre7Kx9mDfU+Evfr3uOtq6V3Xa7uTVA4c2Z32vUzG7JrFMaEAUBMfGIrGOIFFF293GUx2lVZMj62bM=
-X-Received: by 2002:a50:aad0:0:b0:542:fe59:2234 with SMTP id
- r16-20020a50aad0000000b00542fe592234mr1581820edc.6.1698584804939; Sun, 29 Oct
- 2023 06:06:44 -0700 (PDT)
+ bh=b3RXAdakbc6xDwo4J9bOtlUjF4ZrRrewsgA3Exvn6GQ=;
+ b=M3jTagj3FuoGhAfBApM1Nl+arjsSaLbPNpJ57S7fext/7kxg9d2KjTWQ/Bygfyl4qT
+ f0zgF0WsbtIA462Y5JjdqQwjKVq80X1s2u5E3uhEp42yqq67Ar6OoNvm8ogEx14LGgkP
+ k0uYD7w9FborUtf5+yfKWanOpQvZsA9dNESPXCde8xrKC/NgAC2UUmEMVKgRRCimP4Dk
+ 1YB0aZwLcQX/p2N3nrRfN6dt0LAs5iFX2KULgxS/7SFIp740EH7h7W+lrEUB+Uc2URA0
+ sR/n9tgR0Qv1JQUIA0hZhR8HsFmK6QvAJ4NHDrm3HQSg/eWrN1nAOQzApKQCyIAUGUVe
+ PJkw==
+X-Gm-Message-State: AOJu0YwdQf+99gRU3ZJjCmdmH4w0bRhxP8oXTosvNDuBPrMQv2Pg/x1J
+ xjBpwRKR1mAGr5+5tuOAHhDYQHNsAZgDNmzeEaHPhQ==
+X-Google-Smtp-Source: AGHT+IEQsTAWWqYktkImpenU2+alps/J1qh0dp0HuK7FaUJ4H8zaS9n0M2wo+VGyxOsEoegMkb0LzrHpQ8Hd9tZxZXU=
+X-Received: by 2002:a05:6402:27cb:b0:53d:af00:1682 with SMTP id
+ c11-20020a05640227cb00b0053daf001682mr5657866ede.40.1698584892212; Sun, 29
+ Oct 2023 06:08:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231029034845.1169614-1-seanga2@gmail.com>
- <20231029034845.1169614-3-seanga2@gmail.com>
-In-Reply-To: <20231029034845.1169614-3-seanga2@gmail.com>
+ <20231029034845.1169614-5-seanga2@gmail.com>
+In-Reply-To: <20231029034845.1169614-5-seanga2@gmail.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 29 Oct 2023 14:06:33 +0100
-Message-ID: <CAOf5uw=reXv_eYwmTDKE8zks4NaCLG1mL5m7e82t-AhqyEt5gA@mail.gmail.com>
-Subject: Re: [PATCH 02/15] nand: Don't dereference NULL manufacturer_desc
+Date: Sun, 29 Oct 2023 14:08:00 +0100
+Message-ID: <CAOf5uwn8maN5y=_yp9Hyu45iLgrTQL3JC=-yadn-+5+LkHpntw@mail.gmail.com>
+Subject: Re: [PATCH 04/15] nand: spl_loaders: Only read enough pages to load
+ the image
 To: Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,49 +92,46 @@ Hi
 On Sun, Oct 29, 2023 at 4:48=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
 rote:
 >
-> When no manufacturer is matched, manufacturer_desc is NULL. Avoid
-> dereferencing it in that case.
+> All other implementations of nand_spl_load_image only read as many pages =
+as
+> are necessary to load the image. However, nand_spl_loaders.c loads the fu=
+ll
+> block. Align it with other load functions so that it is easier to
+> determine how large of a load buffer we need.
 >
-> Fixes: 4e67c571252 ("mtd,ubi,ubifs: sync with linux v3.15")
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
->  drivers/mtd/nand/raw/nand_base.c | 7 ++-----
->  1 file changed, 2 insertions(+), 5 deletions(-)
+>  drivers/mtd/nand/raw/nand_spl_loaders.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
-> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand=
-_base.c
-> index 6b4adcf6bdc..44b6cb63a01 100644
-> --- a/drivers/mtd/nand/raw/nand_base.c
-> +++ b/drivers/mtd/nand/raw/nand_base.c
-> @@ -4462,17 +4462,14 @@ ident_done:
->         else if (chip->jedec_version)
->                 pr_info("%s %s\n", manufacturer_desc->name,
->                         chip->jedec_params.model);
-> -       else
-> +       else if (manufacturer_desc)
->                 pr_info("%s %s\n", manufacturer_desc->name, type->name);
->  #else
->         if (chip->jedec_version)
->                 pr_info("%s %s\n", manufacturer_desc->name,
->                         chip->jedec_params.model);
-> -       else
-> +       else if (manufacturer_desc)
->                 pr_info("%s %s\n", manufacturer_desc->name, type->name);
-> -
-> -       pr_info("%s %s\n", manufacturer_desc->name,
-> -               type->name);
->  #endif
->
->         pr_info("%d MiB, %s, erase size: %d KiB, page size: %d, OOB size:=
- %d\n",
+> diff --git a/drivers/mtd/nand/raw/nand_spl_loaders.c b/drivers/mtd/nand/r=
+aw/nand_spl_loaders.c
+> index 8848cb27db9..f071b5b57f5 100644
+> --- a/drivers/mtd/nand/raw/nand_spl_loaders.c
+> +++ b/drivers/mtd/nand/raw/nand_spl_loaders.c
+> @@ -12,8 +12,11 @@ int nand_spl_load_image(uint32_t offs, unsigned int si=
+ze, void *dst)
+>         while (block <=3D lastblock) {
+>                 if (!nand_is_bad_block(block)) {
+>                         /* Skip bad blocks */
+> -                       while (page < SYS_NAND_PAGE_COUNT) {
+> +                       while (size && page < SYS_NAND_PAGE_COUNT) {
+>                                 nand_read_page(block, page, dst);
+> +
+> +                               size -=3D min(size, CONFIG_SYS_NAND_PAGE_=
+SIZE -
+> +                                                 page_offset);
+>                                 /*
+>                                  * When offs is not aligned to page addre=
+ss the
+>                                  * extra offset is copied to dst as well.=
+ Copy
 > --
 > 2.37.1
 >
 
 Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-
-
 --=20
 Michael Nazzareno Trimarchi
 Co-Founder & Chief Executive Officer
