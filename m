@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C35CC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 06:40:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 764A0C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 07:09:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5233787555;
-	Sun, 29 Oct 2023 07:38:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 258D887442;
+	Sun, 29 Oct 2023 08:09:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="wY89B0hG";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="R/Q+BBuK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AACDA87739; Sun, 29 Oct 2023 07:38:53 +0100 (CET)
+ id AA71F8723E; Sun, 29 Oct 2023 08:09:18 +0100 (CET)
 Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CACD187258
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:38:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B80D3871E8
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 08:09:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
@@ -29,37 +29,38 @@ Received: from [127.0.0.1] (localhost [127.0.0.1])
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: sendonly@marcansoft.com)
- by mail.marcansoft.com (Postfix) with ESMTPSA id 7992D42699;
- Sun, 29 Oct 2023 06:38:49 +0000 (UTC)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id DFF124265F;
+ Sun, 29 Oct 2023 07:09:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
- t=1698561531; bh=FG1JkDzGbCUxaDoCxOVb1Tj7GDoWE6jnrmiEM/52LS8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=wY89B0hGZR1xkrWYRr9Qb23Gd+TOr1JSdEbNHw7tfN0gbN8mb3OCF3Nvbu8uIZXtF
- gUok9cRutjZiKltAPbbE+XZWYcAWVsS8cZZI25dZMEQYIx1YxOIh4nAFq9Mu8zhVrv
- ohiHFKlLyFZB//Zr0NMUdc2USg4A/MYb7Pm/8esLm7dUnw5f74Vn8j0mKVXzyxu8M/
- Fxc6Rw5cc2IS2vPE+yq+yxMYHCKLnSPpQ+sFLia78Rbpw6Ron0TqvD+R+Zw7Vpxfmj
- 7CTqMb5t/u8gNGtcQ80CUHSe0rEZCWrFBlqmNDPv89JwJear062JJxnAQq2I6FV0GF
- SYoB1RiBYoROQ==
+ t=1698563354; bh=Iwu3rI3ZJ3sVIfoju2RrDVttz8JqA55b6HTohOu/b1o=;
+ h=From:Subject:Date:To:Cc;
+ b=R/Q+BBuKRsvBujhWJ6p/8CfSowZ1UMadxqZCiu0kHRGEkhER/CyXCrLC97eYx+FHK
+ dHMpsaVVE5oofLfnxH8f4uuWnEgmhDvgO/Ae+AURubgG00qQXaRPvWW+DevjJl/uIu
+ vqXxLLTgDJkLoibiNymroYmzmYHORbXRSFUrjZUeba5i/kVe2wCDDF4NjHq5DBVvgA
+ 6Xx0J3GyAcOYLkSnOutbzkhiIUxWoSIFm8/BR2lFnPuk11q6uVMPqmGvcwMwqFKn49
+ eXONXUu4jIDqVtewRiMtaOJEnFRzDwDku2g0NXh7tGPol+JgwLrbWxDwolGZT6wiIl
+ quNypxxR/RnbQ==
 From: Hector Martin <marcan@marcan.st>
-Date: Sun, 29 Oct 2023 15:37:45 +0900
-Subject: [PATCH v2 8/8] usb: xhci: Add more debugging
+Subject: [PATCH 0/2] USB fixes: Add missing timeout, ignore YubiKeys
+Date: Sun, 29 Oct 2023 16:09:07 +0900
+Message-Id: <20231029-usb-fixes-2-v1-0-9f793aa20fe4@marcan.st>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231029-usb-fixes-1-v2-8-623533f6316e@marcan.st>
-References: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
-In-Reply-To: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
+X-B4-Tracking: v=1; b=H4sIABMFPmUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI2NDAyNL3dLiJN20zIrUYl0jXUtzMxMLsxRDMwPjZCWgjoKiVLAUUEN0bG0
+ tAAjleV9dAAAA
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>
 Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>, 
  u-boot@lists.denx.de, asahi@lists.linux.dev, 
  Hector Martin <marcan@marcan.st>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3768; i=marcan@marcan.st;
- h=from:subject:message-id; bh=FG1JkDzGbCUxaDoCxOVb1Tj7GDoWE6jnrmiEM/52LS8=;
- b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlTbv09udy7h+1qVk2diYDKXSTDUMO7Rk+OTjKZe/mglo
- WNxSiW7o5SFQYyDQVZMkaXxRO+pbs/p59RVU6bDzGFlAhnCwMUpABNp2MnIMHXpSzklw/fBtjk/
- NM2rX5k9FVsy5/EKq967Kezb90TsTGFk+OdsMe38p6KVXjvjGx5/yV1Rt4rp/bKvKpGr1BfPnv0
- 6jhEA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=705; i=marcan@marcan.st;
+ h=from:subject:message-id; bh=Iwu3rI3ZJ3sVIfoju2RrDVttz8JqA55b6HTohOu/b1o=;
+ b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlQ7VnG+IsmFLXKySy/d9e0/J9m35ahjwbTjfo99pjvbs
+ x3SX3Wuo5SFQYyDQVZMkaXxRO+pbs/p59RVU6bDzGFlAhnCwMUpABPp+MLIcP7P4ZPs65V0g5Ua
+ uqa8lOWclqecVzvxmi1ffNukivLjpQz/EzdMVDuw2mny1v16frmRrxM9GhXnzryWtbZdQo7D+GA
+ pCwA=
 X-Developer-Key: i=marcan@marcan.st; a=openpgp;
  fpr=FC18F00317968B7BE86201CBE22A629A4C515DD5
 X-BeenThere: u-boot@lists.denx.de
@@ -78,112 +79,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A bunch of miscellaneous debug messages to aid in working out USB
-issues.
+This mini series fixes one bug, but in the process makes YubiKeys work,
+which then regresses people who have one *and* a USB keyboard, since we
+only support a single keyboard device.
+
+Therefore patch #1 makes U-Boot ignore YubiKeys, so #2 does not
+regress things.
 
 Signed-off-by: Hector Martin <marcan@marcan.st>
 ---
- drivers/usb/host/xhci-ring.c | 29 ++++++++++++++++++++++++++---
- 1 file changed, 26 insertions(+), 3 deletions(-)
+Hector Martin (2):
+      usb: kbd: Ignore Yubikeys
+      usb: hub: Add missing reset recovery delay
 
-diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index b60661fe05e7..dabe6cf86af2 100644
---- a/drivers/usb/host/xhci-ring.c
-+++ b/drivers/usb/host/xhci-ring.c
-@@ -214,6 +214,9 @@ static dma_addr_t queue_trb(struct xhci_ctrl *ctrl, struct xhci_ring *ring,
- 
- 	addr = xhci_trb_virt_to_dma(ring->enq_seg, (union xhci_trb *)trb);
- 
-+	debug("trb @ %llx: %08x %08x %08x %08x\n", addr,
-+	      trb_fields[0], trb_fields[1], trb_fields[2], trb_fields[3]);
-+
- 	inc_enq(ctrl, ring, more_trbs_coming);
- 
- 	return addr;
-@@ -296,6 +299,8 @@ void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
- {
- 	u32 fields[4];
- 
-+	debug("CMD: %llx 0x%x 0x%x %d\n", addr, slot_id, ep_index, cmd);
-+
- 	BUG_ON(prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING));
- 
- 	fields[0] = lower_32_bits(addr);
-@@ -471,8 +476,14 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
- 
- 		type = TRB_FIELD_TO_TYPE(le32_to_cpu(event->event_cmd.flags));
- 		if (type == expected ||
--		    (expected == TRB_NONE && type != TRB_PORT_STATUS))
-+		    (expected == TRB_NONE && type != TRB_PORT_STATUS)) {
-+			debug("Event: %08x %08x %08x %08x\n",
-+			      le32_to_cpu(event->generic.field[0]),
-+			      le32_to_cpu(event->generic.field[1]),
-+			      le32_to_cpu(event->generic.field[2]),
-+			      le32_to_cpu(event->generic.field[3]));
- 			return event;
-+		}
- 
- 		if (type == TRB_PORT_STATUS)
- 		/* TODO: remove this once enumeration has been reworked */
-@@ -484,8 +495,9 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
- 				le32_to_cpu(event->generic.field[2])) !=
- 								COMP_SUCCESS);
- 		else
--			printf("Unexpected XHCI event TRB, skipping... "
-+			printf("Unexpected XHCI event TRB, expected %d... "
- 				"(%08x %08x %08x %08x)\n",
-+				expected,
- 				le32_to_cpu(event->generic.field[0]),
- 				le32_to_cpu(event->generic.field[1]),
- 				le32_to_cpu(event->generic.field[2]),
-@@ -602,10 +614,13 @@ static void abort_td(struct usb_device *udev, int ep_index)
- static void record_transfer_result(struct usb_device *udev,
- 				   union xhci_trb *event, int length)
- {
-+	xhci_comp_code code = GET_COMP_CODE(
-+		le32_to_cpu(event->trans_event.transfer_len));
-+
- 	udev->act_len = min(length, length -
- 		(int)EVENT_TRB_LEN(le32_to_cpu(event->trans_event.transfer_len)));
- 
--	switch (GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len))) {
-+	switch (code) {
- 	case COMP_SUCCESS:
- 		BUG_ON(udev->act_len != length);
- 		/* fallthrough */
-@@ -613,16 +628,23 @@ static void record_transfer_result(struct usb_device *udev,
- 		udev->status = 0;
- 		break;
- 	case COMP_STALL:
-+		debug("Xfer STALL\n");
- 		udev->status = USB_ST_STALLED;
- 		break;
- 	case COMP_DB_ERR:
-+		debug("Xfer DB_ERR\n");
-+		udev->status = USB_ST_BUF_ERR;
-+		break;
- 	case COMP_TRB_ERR:
-+		debug("Xfer TRB_ERR\n");
- 		udev->status = USB_ST_BUF_ERR;
- 		break;
- 	case COMP_BABBLE:
-+		debug("Xfer BABBLE\n");
- 		udev->status = USB_ST_BABBLE_DET;
- 		break;
- 	default:
-+		debug("Xfer error: %d\n", code);
- 		udev->status = 0x80;  /* USB_ST_TOO_LAZY_TO_MAKE_A_NEW_MACRO */
- 	}
- }
-@@ -1016,6 +1038,7 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
- 	record_transfer_result(udev, event, length);
- 	xhci_acknowledge_event(ctrl);
- 	if (udev->status == USB_ST_STALLED) {
-+		debug("EP %d stalled\n", ep_index);
- 		reset_ep(udev, ep_index);
- 		return -EPIPE;
- 	}
+ common/usb_hub.c |  7 +++++++
+ common/usb_kbd.c | 19 +++++++++++++++++++
+ 2 files changed, 26 insertions(+)
+---
+base-commit: 8ad1c9c26f7740806a162818b790d4a72f515b7e
+change-id: 20231029-usb-fixes-2-976486d1603c
 
+Best regards,
 -- 
-2.41.0
+Hector Martin <marcan@marcan.st>
 
