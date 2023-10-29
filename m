@@ -4,64 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C089C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 07:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3394C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 07:52:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E4CE874BD;
-	Sun, 29 Oct 2023 08:36:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
+	by phobos.denx.de (Postfix) with ESMTP id BA01D87098;
+	Sun, 29 Oct 2023 08:52:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="Ece6GUJQ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bd6NEu+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D1F987021; Sun, 29 Oct 2023 08:36:37 +0100 (CET)
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ id 8AD41870F2; Sun, 29 Oct 2023 08:52:24 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66953870BF
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 08:36:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=marcan.st
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
-Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by phobos.denx.de (Postfix) with ESMTPS id 2999C8708A
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 08:52:22 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- (Authenticated sender: sendonly@marcansoft.com)
- by mail.marcansoft.com (Postfix) with ESMTPSA id 158884268B;
- Sun, 29 Oct 2023 07:36:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
- t=1698564994; bh=0asVBE0Sq2ta+eBmg3bBMjaB8alg8GHg/qNGDGecOsM=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=Ece6GUJQDlTfJCiVhbtTR7lV4j2bBOYtupImVbfqZadV0z3oNquK4ClmoUMOUryD5
- 7hZ3vEu38Dci+es+P5GnN2ywehBleFmcwKjM97oAZfHw4YyZ0EDif7sSOJaHFWfpqK
- cdZjak6NvG2YSk5T486CQsTlK80xn4am809TRO3AhJYODurCS8IPbFtTquPqPwGmj6
- 8QiAVPU1KmLYC4ye8/ASdmYFbHZqTeZW3STW9dg3qw6HcxmRYgik7QrbtUriUsVUWG
- xFZsqUeeHYYAr2zU8XR5lSSsJflHLV7pShSUca74dnewMoXKEKg8IQgNhYvCwqi8pn
- 470xtXJJ7ie7g==
-From: Hector Martin <marcan@marcan.st>
-Date: Sun, 29 Oct 2023 16:36:17 +0900
-Subject: [PATCH 2/2] usb: xhci: Hook up timeouts
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 170A43F68B
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 07:52:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1698565940;
+ bh=Vm4hlFRSgEyPOxJ8JznxEfpKNrW4j9i5PSYa8P/BYzI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=bd6NEu+ZrLve79cgw3+OBe7SJsBoyZge8ADrr2cjS4mBt4rRiE2s2kWgFtWUROoNp
+ +AkwiBA7ELHT00ezYi7xLMiiIu2f+o7CvE0C68XIYFck6SqlxgS0BnEqaftkQ55GY6
+ zd9VCBDW50awOttTwz6kmLljxmHhxnFLxYYRn91f34Vqwp+FpQD3NmghhdiG7xgTHt
+ BEyyhcj/vlvry6u66Ecz8R+CHbjK9he95TEtZrvLLbGiqBdaEs40v1pps4iScdzjRu
+ 4e5depFNLN6Y4BJulr1gC8wujVNuQRWHVffKDcOZ2+7dG3Sq786QtUgTefKtLuULhD
+ UbWxF2rXxGyBQ==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-32dc767e619so1816434f8f.1
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 00:52:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698565939; x=1699170739;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vm4hlFRSgEyPOxJ8JznxEfpKNrW4j9i5PSYa8P/BYzI=;
+ b=sLIDvnXiaX1mub4ZUiOxqdtS5odesCEhtV6Di7PqTuI+ffl+fhVHc0IAZx1dmCmKYR
+ LdlEbjOZ/JCvzMkKh8jWI+RvA/ZGR//wtxHRM2qs4bCVgDMPI4rEtYkZgwm/peEUinDM
+ OA3AfCQSwD+gSB32fCr3avisfiMIGCCgjJOVG0N2winGLwW31mzQdv3o0Zvc0mDadh+c
+ ZBrXxBOVmgkDXge8hoMsEVRywaJ9PCKHw5ggln0hKks+20dbf8lZvD3N0/iXjyhs91Ta
+ rXvPdtBMD+4Ngmn54e941SR9Hf1lRUPpbnPV194XBYHO8wL9kjSQN3iXsMkVqF4xevQs
+ 8htQ==
+X-Gm-Message-State: AOJu0YxmuNXnN8p4GOL3PexBgrCfpkuVO7nmq+9ezUUEhsi4Ef6RhZJi
+ 0isQwZmkoQTAAz0K9+0EYWRzrDWF9CvPiSOEfXJDJeLi/AiylchmGVfPFobDO5+2jxTKIOfYq8r
+ uO4jBqhR4A8Sl8vQ2PPMt0tpamwCfw64=
+X-Received: by 2002:a5d:588f:0:b0:32f:7e4e:535d with SMTP id
+ n15-20020a5d588f000000b0032f7e4e535dmr2126740wrf.15.1698565939348; 
+ Sun, 29 Oct 2023 00:52:19 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGiaBYrfpQp4PRkh33nDP4m4EDtSfeqhnIns+qA1aGMQm3y1gpnoZfAywkQ7R651hJutHkmAg==
+X-Received: by 2002:a5d:588f:0:b0:32f:7e4e:535d with SMTP id
+ n15-20020a5d588f000000b0032f7e4e535dmr2126727wrf.15.1698565938879; 
+ Sun, 29 Oct 2023 00:52:18 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ n15-20020a5d4c4f000000b0032f7e832cabsm2353349wrt.90.2023.10.29.00.52.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 29 Oct 2023 00:52:18 -0700 (PDT)
+Message-ID: <bbd19ee0-9429-42a7-9164-1e695e6d57f3@canonical.com>
+Date: Sun, 29 Oct 2023 08:52:17 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 1/1] rng: Provide a RNG based on the RISC-V Zkr ISA extension
+To: Chanho Park <chanho61.park@samsung.com>
+Cc: 'Sughosh Ganu' <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ 'Rick Chen' <rick@andestech.com>, 'Leo' <ycliang@andestech.com>
+References: <CGME20231028232641epcas2p48ab2b6db1932c3035028f44f16c831d8@epcas2p4.samsung.com>
+ <20231028232612.109832-1-heinrich.schuchardt@canonical.com>
+ <05e001da0a2a$4c9135a0$e5b3a0e0$@samsung.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <05e001da0a2a$4c9135a0$e5b3a0e0$@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231029-usb-fixes-5-v1-2-54bb13001f54@marcan.st>
-References: <20231029-usb-fixes-5-v1-0-54bb13001f54@marcan.st>
-In-Reply-To: <20231029-usb-fixes-5-v1-0-54bb13001f54@marcan.st>
-To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>
-Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>, 
- u-boot@lists.denx.de, asahi@lists.linux.dev, 
- Hector Martin <marcan@marcan.st>
-X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11216; i=marcan@marcan.st;
- h=from:subject:message-id; bh=0asVBE0Sq2ta+eBmg3bBMjaB8alg8GHg/qNGDGecOsM=;
- b=owGbwMvMwCEm+yP4NEe/cRLjabUkhlQ77qr9wt1KG3zit0cppGurt5WIevz6lf7utLFZusrmw
- 7KOP6I6SlkYxDgYZMUUWRpP9J7q9px+Tl01ZTrMHFYmkCEMXJwCMBH3fkaGpcYdcQ/qZZq/ta2J
- LFFzEQjsibJr3HZ8XsdHmZltJlKSjAyflefbK195sm2dispu8eM/l6yozWzZYNfx8Mf62a4P59v
- wAQA=
-X-Developer-Key: i=marcan@marcan.st; a=openpgp;
- fpr=FC18F00317968B7BE86201CBE22A629A4C515DD5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,285 +106,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the USB core passes through timeout info to the host
-controller, actually hook it up.
+On 10/29/23 06:39, Chanho Park wrote:
+> Hi,
+> 
+>> -----Original Message-----
+>> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Heinrich
+>> Schuchardt
+>> Sent: Sunday, October 29, 2023 8:26 AM
+>> To: Rick Chen <rick@andestech.com>; Leo <ycliang@andestech.com>
+>> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>; u-boot@lists.denx.de; Heinrich
+>> Schuchardt <heinrich.schuchardt@canonical.com>
+>> Subject: [RFC 1/1] rng: Provide a RNG based on the RISC-V Zkr ISA
+>> extension
+>>
+>> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+>> provides an interface to a physical entropy source.
+>>
+>> A RNG driver based on the seed CSR is provided. It depends on
+>> mseccfg.sseed being set in the SBI firmware.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
+> This works fine on my qemu risv with your opensbi patch and KASLR has been
+> tested as well.
+> Feel free to add my reviewed/tested-by tag.
+> 
+> Reviewed-by: Chanho Park <chanho61.park@samsung.com>
+> Tested-by: Chanho Park <chanho61.park@samsung.com>
+> 
+> Best Regards,
+> Chanho Park
 
-Signed-off-by: Hector Martin <marcan@marcan.st>
----
- drivers/usb/host/xhci-ring.c | 32 ++++++++++++++++++++------------
- drivers/usb/host/xhci.c      | 23 +++++++++++++----------
- include/usb/xhci.h           | 14 ++++++++++----
- 3 files changed, 43 insertions(+), 26 deletions(-)
+Thanks for reviewing.
 
-diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index dabe6cf86af2..14c0c60e8524 100644
---- a/drivers/usb/host/xhci-ring.c
-+++ b/drivers/usb/host/xhci-ring.c
-@@ -463,11 +463,16 @@ static int event_ready(struct xhci_ctrl *ctrl)
-  * @param expected	TRB type expected from Event TRB
-  * Return: pointer to event trb
-  */
--union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
-+union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected,
-+				    int timeout)
- {
- 	trb_type type;
- 	unsigned long ts = get_timer(0);
- 
-+	/* Fallback in case someone passes in 0 */
-+	if (!timeout)
-+		timeout = XHCI_TIMEOUT;
-+
- 	do {
- 		union xhci_trb *event = ctrl->event_ring->dequeue;
- 
-@@ -504,7 +509,7 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
- 				le32_to_cpu(event->generic.field[3]));
- 
- 		xhci_acknowledge_event(ctrl);
--	} while (get_timer(ts) < XHCI_TIMEOUT);
-+	} while (get_timer(ts) < timeout);
- 
- 	if (expected == TRB_TRANSFER)
- 		return NULL;
-@@ -528,7 +533,7 @@ static void reset_ep(struct usb_device *udev, int ep_index)
- 
- 	printf("Resetting EP %d...\n", ep_index);
- 	xhci_queue_command(ctrl, 0, udev->slot_id, ep_index, TRB_RESET_EP);
--	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+	event = xhci_wait_for_event(ctrl, TRB_COMPLETION, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return;
- 
-@@ -539,7 +544,7 @@ static void reset_ep(struct usb_device *udev, int ep_index)
- 	addr = xhci_trb_virt_to_dma(ring->enq_seg,
- 		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
- 	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
--	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+	event = xhci_wait_for_event(ctrl, TRB_COMPLETION, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return;
- 
-@@ -569,7 +574,7 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 
- 	xhci_queue_command(ctrl, 0, udev->slot_id, ep_index, TRB_STOP_RING);
- 
--	event = xhci_wait_for_event(ctrl, TRB_NONE);
-+	event = xhci_wait_for_event(ctrl, TRB_NONE, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return;
- 
-@@ -582,7 +587,8 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 			!= COMP_STOP)));
- 		xhci_acknowledge_event(ctrl);
- 
--		event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+		event = xhci_wait_for_event(ctrl, TRB_COMPLETION,
-+					    XHCI_SYS_TIMEOUT);
- 		if (!event)
- 			return;
- 		type = TRB_FIELD_TO_TYPE(le32_to_cpu(event->event_cmd.flags));
-@@ -601,7 +607,7 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 	addr = xhci_trb_virt_to_dma(ring->enq_seg,
- 		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
- 	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
--	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+	event = xhci_wait_for_event(ctrl, TRB_COMPLETION, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return;
- 
-@@ -657,10 +663,11 @@ static void record_transfer_result(struct usb_device *udev,
-  * @param pipe		contains the DIR_IN or OUT , devnum
-  * @param length	length of the buffer
-  * @param buffer	buffer to be read/written based on the request
-+ * @param timeout	timeout in milliseconds
-  * Return: returns 0 if successful else -1 on failure
-  */
- int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
--			int length, void *buffer)
-+			int length, void *buffer, int timeout)
- {
- 	int num_trbs = 0;
- 	struct xhci_generic_trb *start_trb;
-@@ -825,7 +832,7 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
- 	giveback_first_trb(udev, ep_index, start_cycle, start_trb);
- 
- again:
--	event = xhci_wait_for_event(ctrl, TRB_TRANSFER);
-+	event = xhci_wait_for_event(ctrl, TRB_TRANSFER, timeout);
- 	if (!event) {
- 		debug("XHCI bulk transfer timed out, aborting...\n");
- 		abort_td(udev, ep_index);
-@@ -862,11 +869,12 @@ again:
-  * @param req		request type
-  * @param length	length of the buffer
-  * @param buffer	buffer to be read/written based on the request
-+ * @param timeout	timeout in milliseconds
-  * Return: returns 0 if successful else error code on failure
-  */
- int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
- 			struct devrequest *req,	int length,
--			void *buffer)
-+			void *buffer, int timeout)
- {
- 	int ret;
- 	int start_cycle;
-@@ -1027,7 +1035,7 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
- 
- 	giveback_first_trb(udev, ep_index, start_cycle, start_trb);
- 
--	event = xhci_wait_for_event(ctrl, TRB_TRANSFER);
-+	event = xhci_wait_for_event(ctrl, TRB_TRANSFER, timeout);
- 	if (!event)
- 		goto abort;
- 	field = le32_to_cpu(event->trans_event.flags);
-@@ -1052,7 +1060,7 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
- 	if (GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len))
- 			== COMP_SHORT_TX) {
- 		/* Short data stage, clear up additional status stage event */
--		event = xhci_wait_for_event(ctrl, TRB_TRANSFER);
-+		event = xhci_wait_for_event(ctrl, TRB_TRANSFER, XHCI_SYS_TIMEOUT);
- 		if (!event)
- 			goto abort;
- 		BUG_ON(TRB_TO_SLOT_ID(field) != slot_id);
-diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-index a33a2460f74d..1c4afdf385f7 100644
---- a/drivers/usb/host/xhci.c
-+++ b/drivers/usb/host/xhci.c
-@@ -450,7 +450,7 @@ static int xhci_configure_endpoints(struct usb_device *udev, bool ctx_change)
- 	xhci_flush_cache((uintptr_t)in_ctx->bytes, in_ctx->size);
- 	xhci_queue_command(ctrl, in_ctx->dma, udev->slot_id, 0,
- 			   ctx_change ? TRB_EVAL_CONTEXT : TRB_CONFIG_EP);
--	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+	event = xhci_wait_for_event(ctrl, TRB_COMPLETION, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return -ETIMEDOUT;
- 
-@@ -649,7 +649,7 @@ static int xhci_address_device(struct usb_device *udev, int root_portnr)
- 
- 	xhci_queue_command(ctrl, virt_dev->in_ctx->dma,
- 			   slot_id, 0, TRB_ADDR_DEV);
--	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+	event = xhci_wait_for_event(ctrl, TRB_COMPLETION, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return -ETIMEDOUT;
- 
-@@ -727,7 +727,7 @@ static int _xhci_alloc_device(struct usb_device *udev)
- 	}
- 
- 	xhci_queue_command(ctrl, 0, 0, 0, TRB_ENABLE_SLOT);
--	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-+	event = xhci_wait_for_event(ctrl, TRB_COMPLETION, XHCI_SYS_TIMEOUT);
- 	if (!event)
- 		return -ETIMEDOUT;
- 
-@@ -1125,7 +1125,7 @@ static int _xhci_submit_int_msg(struct usb_device *udev, unsigned long pipe,
- 	 * (at most) one TD. A TD (comprised of sg list entries) can
- 	 * take several service intervals to transmit.
- 	 */
--	return xhci_bulk_tx(udev, pipe, length, buffer);
-+	return xhci_bulk_tx(udev, pipe, length, buffer, XHCI_INT_TIMEOUT);
- }
- 
- /**
-@@ -1135,17 +1135,18 @@ static int _xhci_submit_int_msg(struct usb_device *udev, unsigned long pipe,
-  * @param pipe		contains the DIR_IN or OUT , devnum
-  * @param buffer	buffer to be read/written based on the request
-  * @param length	length of the buffer
-+ * @param timeout	timeout in milliseconds
-  * Return: returns 0 if successful else -1 on failure
-  */
- static int _xhci_submit_bulk_msg(struct usb_device *udev, unsigned long pipe,
--				 void *buffer, int length)
-+				 void *buffer, int length, int timeout)
- {
- 	if (usb_pipetype(pipe) != PIPE_BULK) {
- 		printf("non-bulk pipe (type=%lu)", usb_pipetype(pipe));
- 		return -EINVAL;
- 	}
- 
--	return xhci_bulk_tx(udev, pipe, length, buffer);
-+	return xhci_bulk_tx(udev, pipe, length, buffer, timeout);
- }
- 
- /**
-@@ -1157,11 +1158,13 @@ static int _xhci_submit_bulk_msg(struct usb_device *udev, unsigned long pipe,
-  * @param length	length of the buffer
-  * @param setup		Request type
-  * @param root_portnr	Root port number that this device is on
-+ * @param timeout	timeout in milliseconds
-  * Return: returns 0 if successful else -1 on failure
-  */
- static int _xhci_submit_control_msg(struct usb_device *udev, unsigned long pipe,
- 				    void *buffer, int length,
--				    struct devrequest *setup, int root_portnr)
-+				    struct devrequest *setup, int root_portnr,
-+				    int timeout)
- {
- 	struct xhci_ctrl *ctrl = xhci_get_ctrl(udev);
- 	int ret = 0;
-@@ -1187,7 +1190,7 @@ static int _xhci_submit_control_msg(struct usb_device *udev, unsigned long pipe,
- 		}
- 	}
- 
--	return xhci_ctrl_tx(udev, pipe, setup, length, buffer);
-+	return xhci_ctrl_tx(udev, pipe, setup, length, buffer, timeout);
- }
- 
- static int xhci_lowlevel_init(struct xhci_ctrl *ctrl)
-@@ -1290,7 +1293,7 @@ static int xhci_submit_control_msg(struct udevice *dev, struct usb_device *udev,
- 			hop = hop->parent;
- */
- 	return _xhci_submit_control_msg(udev, pipe, buffer, length, setup,
--					root_portnr);
-+					root_portnr, timeout);
- }
- 
- static int xhci_submit_bulk_msg(struct udevice *dev, struct usb_device *udev,
-@@ -1298,7 +1301,7 @@ static int xhci_submit_bulk_msg(struct udevice *dev, struct usb_device *udev,
- 				int timeout)
- {
- 	debug("%s: dev='%s', udev=%p\n", __func__, dev->name, udev);
--	return _xhci_submit_bulk_msg(udev, pipe, buffer, length);
-+	return _xhci_submit_bulk_msg(udev, pipe, buffer, length, timeout);
- }
- 
- static int xhci_submit_int_msg(struct udevice *dev, struct usb_device *udev,
-diff --git a/include/usb/xhci.h b/include/usb/xhci.h
-index 04d16a256bbd..02660803fdcf 100644
---- a/include/usb/xhci.h
-+++ b/include/usb/xhci.h
-@@ -27,7 +27,11 @@
- #define MAX_EP_CTX_NUM		31
- #define XHCI_ALIGNMENT		64
- /* Generic timeout for XHCI events */
--#define XHCI_TIMEOUT		5000
-+#define XHCI_TIMEOUT		1000
-+/* Timeout for interrupt messages */
-+#define XHCI_INT_TIMEOUT	1000
-+/* Timeout for system commands */
-+#define XHCI_SYS_TIMEOUT	200
- /* Max number of USB devices for any host controller - limit in section 6.1 */
- #define MAX_HC_SLOTS            256
- /* Section 5.3.3 - MaxPorts */
-@@ -1258,11 +1262,13 @@ void xhci_setup_addressable_virt_dev(struct xhci_ctrl *ctrl,
- void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr,
- 			u32 slot_id, u32 ep_index, trb_type cmd);
- void xhci_acknowledge_event(struct xhci_ctrl *ctrl);
--union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected);
-+union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected,
-+				    int timeout);
- int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
--		 int length, void *buffer);
-+		 int length, void *buffer, int timeout);
- int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
--		 struct devrequest *req, int length, void *buffer);
-+		 struct devrequest *req, int length, void *buffer,
-+		 int timeout);
- int xhci_check_maxpacket(struct usb_device *udev);
- void xhci_flush_cache(uintptr_t addr, u32 type_len);
- void xhci_inval_cache(uintptr_t addr, u32 type_len);
+I am currently looking into detecting if the seed register is readable 
+to avoid a possible exception if the sseed flag is not set or the Zkr 
+exception is not available.
 
--- 
-2.41.0
+Best regards
+
+Heinrich
+
+> 
+>> ---
+>>   drivers/rng/Kconfig         |  11 ++++
+>>   drivers/rng/Makefile        |   1 +
+>>   drivers/rng/riscv_zkr_rng.c | 102 ++++++++++++++++++++++++++++++++++++
+>>   3 files changed, 114 insertions(+)
+>>   create mode 100644 drivers/rng/riscv_zkr_rng.c
+>>
+>> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+>> index 994cc35b27..f8f1d91ed2 100644
+>> --- a/drivers/rng/Kconfig
+>> +++ b/drivers/rng/Kconfig
+>> @@ -48,6 +48,17 @@ config RNG_OPTEE
+>>   	  accessible to normal world but reserved and used by the OP-TEE
+>>   	  to avoid the weakness of a software PRNG.
+>>
+>> +config RNG_RISCV_ZKR
+>> +	bool "RISC-V Zkr random number generator"
+>> +	depends on RISCV_SMODE
+>> +	help
+>> +	  This driver provides a Random Number Generator based on the
+>> +	  Zkr RISC-V ISA extension which provides an interface to an
+>> +	  NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
+>> +
+>> +	  Using this driver will lead to an exception if the M-mode
+>> firmware
+>> +	  has not set mseccfg.sseed=1.
+>> +
+>>   config RNG_STM32
+>>   	bool "Enable random number generator for STM32"
+>>   	depends on ARCH_STM32 || ARCH_STM32MP
+>> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+>> index 47b323e61e..a5d3ca4130 100644
+>> --- a/drivers/rng/Makefile
+>> +++ b/drivers/rng/Makefile
+>> @@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
+>>   obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
+>>   obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
+>>   obj-$(CONFIG_RNG_STM32) += stm32_rng.o
+>> +obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
+>>   obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
+>>   obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
+>>   obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+>> diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
+>> new file mode 100644
+>> index 0000000000..f48ae35410
+>> --- /dev/null
+>> +++ b/drivers/rng/riscv_zkr_rng.c
+>> @@ -0,0 +1,102 @@
+>> +// SPDX-License-Identifier: GPL-2.0-or-later
+>> +/*
+>> + * The RISC-V Zkr extension provides CSR seed which provides access to a
+>> + * random number generator.
+>> + */
+>> +
+>> +#define LOG_CATEGORY UCLASS_RNG
+>> +
+>> +#include <common.h>
+>> +#include <dm.h>
+>> +#include <rng.h>
+>> +
+>> +#define DRIVER_NAME "riscv_zkr"
+>> +
+>> +enum opst {
+>> +	/** @BIST: built in self test running */
+>> +	BIST = 0b00,
+>> +	/** @WAIT: sufficient amount of entropy is not yet available */
+>> +	WAIT = 0b01,
+>> +	/** @ES16: 16bits of entropy available */
+>> +	ES16 = 0b10,
+>> +	/** @DEAD: unrecoverable self-test error */
+>> +	DEAD = 0b11,
+>> +};
+>> +
+>> +static unsigned long read_seed(void)
+>> +{
+>> +	unsigned long ret;
+>> +
+>> +	__asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : :
+>> "memory");
+>> +
+>> +	return ret;
+>> +}
+>> +
+>> +static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
+>> +{
+>> +	u8 *ptr = data;
+>> +
+>> +	while (len) {
+>> +		u32 val;
+>> +
+>> +		val = read_seed();
+>> +
+>> +		switch (val >> 30) {
+>> +		case BIST:
+>> +			continue;
+>> +		case WAIT:
+>> +			continue;
+>> +		case ES16:
+>> +			*ptr++ = val & 0xff;
+>> +			if (--len) {
+>> +				*ptr++ = val >> 8;
+>> +				--len;
+>> +			}
+>> +			break;
+>> +		case DEAD:
+>> +			return -ENODEV;
+>> +		}
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +/**
+>> + * riscv_zkr_probe() - check if the seed register is available
+>> + *
+>> + * If the SBI software has not set mseccfg.sseed=1 or the Zkr
+>> + * extension is not available this probe function will result
+>> + * in an exception. Currently we cannot recover from this.
+>> + *
+>> + * @dev:	RNG device
+>> + * Return:	0 if successfully probed
+>> + */
+>> +static int riscv_zkr_probe(struct udevice *dev)
+>> +{
+>> +	u32 val;
+>> +
+>> +	do {
+>> +		val = read_seed();
+>> +		val >>= 30;
+>> +	} while (val == BIST || val == WAIT);
+>> +
+>> +	if (val == DEAD)
+>> +		return -ENODEV;
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static const struct dm_rng_ops riscv_zkr_ops = {
+>> +	.read = riscv_zkr_read,
+>> +};
+>> +
+>> +U_BOOT_DRIVER(riscv_zkr) = {
+>> +	.name = DRIVER_NAME,
+>> +	.id = UCLASS_RNG,
+>> +	.ops = &riscv_zkr_ops,
+>> +	.probe = riscv_zkr_probe,
+>> +};
+>> +
+>> +U_BOOT_DRVINFO(cpu_riscv_zkr) = {
+>> +	.name = DRIVER_NAME,
+>> +};
+>> --
+>> 2.40.1
+> 
+> 
 
