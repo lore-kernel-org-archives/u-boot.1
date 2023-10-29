@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2E44C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 03:50:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3203DC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 03:50:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3076987C6B;
+	by phobos.denx.de (Postfix) with ESMTP id B817787C75;
 	Sun, 29 Oct 2023 04:49:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l5jrJFGR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AXxIbugj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8B1C87C66; Sun, 29 Oct 2023 04:49:00 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 2F72287C5D; Sun, 29 Oct 2023 04:49:01 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AE5D87C5D
- for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 04:48:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 149A887740
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 04:48:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-41cc7379b23so23139091cf.3
- for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 20:48:56 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-66d12b3b479so21964106d6.1
+ for <u-boot@lists.denx.de>; Sat, 28 Oct 2023 20:48:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698551335; x=1699156135; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698551337; x=1699156137; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ek/t3/OnkB2Ff2L4jaCnFvE+iLlax+BbtikvxS1whJI=;
- b=l5jrJFGRd0UQkVf2oCW6Dk54u6nVa3xJxqxCSCBwQX5M6uomZZSCDPjGSlbuM4r9uP
- ALRH3t68oM309rSj3dQfnIxtXLFqMwecEWyg/qbQOiyb0d3r4VXfjBhZ/MmXUUUyLNsY
- LQZoAdzu5fLslyGp4dKhOdzdGVHc/UjK4lgkKky5RGBwVJ/3GIhPnAdajG3cxzqjHXI8
- CzuYYYUrDhMivj9ovBjZeKW9kTXyKk8Iq6f/yWV3q7XIOwfpv/rgjFAeiIIxVMC/Di1J
- EP+O3dYKIjaRAdEv+5jwxoHkwqNLM6xKtKCaNOtRHYB1zoYOF3Raw2Rel9AavevrdtQ4
- mopw==
+ bh=znPtt4Lt3TrrDmOEnrGnfGglc/BFZ4f7z19ngPmKdqU=;
+ b=AXxIbugj2alRIDnkgViStKNva9QagXrmMYa4kHhngbhn/snWZmCuUlUUcoWGE8IdgE
+ D3tG/D0vNcOuG891fHj/WgXUI3OM7Q4Z/NA0Bflp7sVoaZ9zM2Sim1Wh+AE4TShPPHbO
+ 1Jeu1k4SSGsFd+aCe1vqeGMS/Crq5WdloN+vS63ihLuLW02zGmwWbhUkgBawexKgd8Hp
+ FIdxq4RjQ6SCuH620E1CGAKPYQJDsQ32VG5er76yBphyVIG+fM3DOVYqjYp9L5v2687q
+ mPcq9QbzL2heoaWsTwF0cOe81UpmyCvRquohTmj/Ik6S/pvDtGpylv8SnIWSFGux8F1l
+ LkvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698551335; x=1699156135;
+ d=1e100.net; s=20230601; t=1698551337; x=1699156137;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ek/t3/OnkB2Ff2L4jaCnFvE+iLlax+BbtikvxS1whJI=;
- b=NKgDOM4wSuHKNizUNwo1dwqUgEemdwQ8kZMiUDFw1jQbaHj0XWTRH09yQkq2n4E2Qd
- Mks/IxbOE0+5Ow7sxRafTxonmH2RRoNYH8/DqmYK+F++DSSUpG7hgbyAzdn5eka563pD
- 6WQBqc4oAq49OgBt1V5uYp3CPCt2Kmno+l9gCPIeSDpSpXPDYufMRHSvh85FOFjqtBCC
- YWj1uo9BM2oUY6rCyHkXTcfAoShaWIhEMORe8uNXbeEgsHvrG7kES5JJuEqZPtMF497n
- kZWhOLzfUIigur36yxBQJwpP6aD4vWJOjxSUlgRPaYoq5Tv6bBBwouDelzqngUpd5+RY
- SMWQ==
-X-Gm-Message-State: AOJu0YySf6Tn7C+Xq8sYoA/jm9U8ekEEiunD5CUyascdKeW2z1SaLpeh
- +Xi85bllLNwru4heW7yxNPBK/H8CUm+K6w==
-X-Google-Smtp-Source: AGHT+IFjBNc8Z5g9X2FE8gZ2+xCSHn1QR8m6ln5CVS2CxQtVduL6EmtlNjw7I61oLSLhTFlF5eX/xA==
-X-Received: by 2002:a05:622a:18a4:b0:41e:2423:f0be with SMTP id
- v36-20020a05622a18a400b0041e2423f0bemr9584805qtc.40.1698551335082; 
- Sat, 28 Oct 2023 20:48:55 -0700 (PDT)
+ bh=znPtt4Lt3TrrDmOEnrGnfGglc/BFZ4f7z19ngPmKdqU=;
+ b=VAsLw9KMzfQT8bPx2KMjxpsAIzBX8C0ZVDTWKKMJiVVOXZoT9JwHx/IXP1XrxvWi8t
+ Mtrs4o9l+cfOOhrYgHcYEdnprfWfr4RBUjIIVtdKx0Jch7i1N20pAIuu8N77Jz4KW/Eq
+ MWt4VCuXARmzF9FE7feguvzcZBlDQ30ObDe56CMGLcCM53QeWpn6B0o9oMfJJZAhVRyV
+ kY/EvGb1tnDdWN74Tjt7TL9kdjMwhgHtG/tTj0BJzfSxlPJ3OJqwGsh/Ac76cfaTqOfl
+ difWzbhH1icRBurSCP43NyzL4edaFVtiYgjpwo3dZq3ziw5fIV0ykpzHybuqRSHkY+nH
+ alIw==
+X-Gm-Message-State: AOJu0YwUeXxaxKO79rLYzJEbp3rf+8uVO8qmHZqXVFiXAREUfF7kRgNX
+ hRkYI86RrgNll2IGrZ2Wq1bDOVcNXHtv7w==
+X-Google-Smtp-Source: AGHT+IFfo6x1C8gHX0mCkBw+YBzGNQbehqfYtEXTzsGFwcgvMpom4bZgCC5Ix82kL9sw3PXszrLftA==
+X-Received: by 2002:a05:6214:daa:b0:671:e02a:8bfc with SMTP id
+ h10-20020a0562140daa00b00671e02a8bfcmr1153998qvh.16.1698551337564; 
+ Sat, 28 Oct 2023 20:48:57 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- d9-20020a056214184900b0064f5d70d072sm1212736qvy.37.2023.10.28.20.48.54
+ r13-20020a0cf60d000000b0065b12c7a48dsm2161357qvm.133.2023.10.28.20.48.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 28 Oct 2023 20:48:54 -0700 (PDT)
+ Sat, 28 Oct 2023 20:48:57 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH 05/15] spl: legacy: Honor bl_len when decompressing
-Date: Sat, 28 Oct 2023 23:48:35 -0400
-Message-Id: <20231029034845.1169614-6-seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+	Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH 07/15] cmd: nand: Map memory before accessing it
+Date: Sat, 28 Oct 2023 23:48:37 -0400
+Message-Id: <20231029034845.1169614-8-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231029034845.1169614-1-seanga2@gmail.com>
 References: <20231029034845.1169614-1-seanga2@gmail.com>
@@ -94,67 +93,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When allocating a buffer to load compressed data into, we need to ensure we
-have enough space for over- and under-flow due to alignment. Otherwise we
-will clobber the malloc bookkeeping data. Calculate the correct amount of
-overhead and use it when determining the size.
+In sandbox, all memory must be mapped before accessing it. Do so for the
+nand command.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- common/spl/spl_legacy.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ cmd/nand.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
 
-diff --git a/common/spl/spl_legacy.c b/common/spl/spl_legacy.c
-index 51656fb9617..9189576b774 100644
---- a/common/spl/spl_legacy.c
-+++ b/common/spl/spl_legacy.c
-@@ -133,25 +133,31 @@ int spl_load_legacy_img(struct spl_image_info *spl_image,
- 			   map_sysmem(spl_image->load_addr, spl_image->size));
- 		break;
+diff --git a/cmd/nand.c b/cmd/nand.c
+index 71b8f964429..fe834c4ac5c 100644
+--- a/cmd/nand.c
++++ b/cmd/nand.c
+@@ -34,6 +34,7 @@
+ #include <env.h>
+ #include <watchdog.h>
+ #include <malloc.h>
++#include <mapmem.h>
+ #include <asm/byteorder.h>
+ #include <jffs2/jffs2.h>
+ #include <nand.h>
+@@ -432,7 +433,7 @@ static void nand_print_and_set_info(int idx)
+ 	env_set_hex("nand_erasesize", mtd->erasesize);
+ }
  
--	case IH_COMP_LZMA:
-+	case IH_COMP_LZMA: {
-+		ulong overhead, size;
-+
- 		lzma_len = LZMA_LEN;
- 
- 		/* dataptr points to compressed payload  */
--		dataptr = offset + sizeof(*hdr);
-+		dataptr = ALIGN_DOWN(sizeof(*hdr), load->bl_len);
-+		overhead = sizeof(*hdr) - dataptr;
-+		size = ALIGN(spl_image->size + overhead, load->bl_len);
-+		dataptr += offset;
- 
- 		debug("LZMA: Decompressing %08lx to %08lx\n",
- 		      dataptr, spl_image->load_addr);
--		src = malloc(spl_image->size);
-+		src = malloc(size);
- 		if (!src) {
- 			printf("Unable to allocate %d bytes for LZMA\n",
- 			       spl_image->size);
- 			return -ENOMEM;
+-static int raw_access(struct mtd_info *mtd, ulong addr, loff_t off,
++static int raw_access(struct mtd_info *mtd, void *buf, loff_t off,
+ 		      ulong count, int read, int no_verify)
+ {
+ 	int ret = 0;
+@@ -440,8 +441,8 @@ static int raw_access(struct mtd_info *mtd, ulong addr, loff_t off,
+ 	while (count--) {
+ 		/* Raw access */
+ 		mtd_oob_ops_t ops = {
+-			.datbuf = (u8 *)addr,
+-			.oobbuf = ((u8 *)addr) + mtd->writesize,
++			.datbuf = buf,
++			.oobbuf = buf + mtd->writesize,
+ 			.len = mtd->writesize,
+ 			.ooblen = mtd->oobsize,
+ 			.mode = MTD_OPS_RAW
+@@ -461,7 +462,7 @@ static int raw_access(struct mtd_info *mtd, ulong addr, loff_t off,
+ 			break;
  		}
  
--		load->read(load, dataptr, spl_image->size, src);
-+		load->read(load, dataptr, size, src);
- 		ret = lzmaBuffToBuffDecompress(map_sysmem(spl_image->load_addr,
- 							  spl_image->size),
--					       &lzma_len, src, spl_image->size);
-+					       &lzma_len, src + overhead,
-+					       spl_image->size);
- 		if (ret) {
- 			printf("LZMA decompression error: %d\n", ret);
- 			return ret;
-@@ -159,7 +165,7 @@ int spl_load_legacy_img(struct spl_image_info *spl_image,
+-		addr += mtd->writesize + mtd->oobsize;
++		buf += mtd->writesize + mtd->oobsize;
+ 		off += mtd->writesize;
+ 	}
  
- 		spl_image->size = lzma_len;
- 		break;
--
-+	}
- 	default:
- 		debug("Compression method %s is not supported\n",
- 		      genimg_get_comp_short_name(image_get_comp(hdr)));
+@@ -675,6 +676,7 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		int read;
+ 		int raw = 0;
+ 		int no_verify = 0;
++		void *buf;
+ 
+ 		if (argc < 4)
+ 			goto usage;
+@@ -730,32 +732,32 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		}
+ 
+ 		mtd = get_nand_dev_by_index(dev);
++		buf = map_sysmem(addr, maxsize);
+ 
+ 		if (!s || !strcmp(s, ".jffs2") ||
+ 		    !strcmp(s, ".e") || !strcmp(s, ".i")) {
+ 			if (read)
+ 				ret = nand_read_skip_bad(mtd, off, &rwsize,
+-							 NULL, maxsize,
+-							 (u_char *)addr);
++							 NULL, maxsize, buf);
+ 			else
+ 				ret = nand_write_skip_bad(mtd, off, &rwsize,
+-							  NULL, maxsize,
+-							  (u_char *)addr,
++							  NULL, maxsize, buf,
+ 							  WITH_WR_VERIFY);
+ #ifdef CONFIG_CMD_NAND_TRIMFFS
+ 		} else if (!strcmp(s, ".trimffs")) {
+ 			if (read) {
+ 				printf("Unknown nand command suffix '%s'\n", s);
++				unmap_sysmem(buf);
+ 				return 1;
+ 			}
+ 			ret = nand_write_skip_bad(mtd, off, &rwsize, NULL,
+-						maxsize, (u_char *)addr,
++						maxsize, buf,
+ 						WITH_DROP_FFS | WITH_WR_VERIFY);
+ #endif
+ 		} else if (!strcmp(s, ".oob")) {
+ 			/* out-of-band data */
+ 			mtd_oob_ops_t ops = {
+-				.oobbuf = (u8 *)addr,
++				.oobbuf = buf,
+ 				.ooblen = rwsize,
+ 				.mode = MTD_OPS_RAW
+ 			};
+@@ -765,13 +767,15 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			else
+ 				ret = mtd_write_oob(mtd, off, &ops);
+ 		} else if (raw) {
+-			ret = raw_access(mtd, addr, off, pagecount, read,
++			ret = raw_access(mtd, buf, off, pagecount, read,
+ 					 no_verify);
+ 		} else {
+ 			printf("Unknown nand command suffix '%s'.\n", s);
++			unmap_sysmem(buf);
+ 			return 1;
+ 		}
+ 
++		unmap_sysmem(buf);
+ 		printf(" %zu bytes %s: %s\n", rwsize,
+ 		       read ? "read" : "written", ret ? "ERROR" : "OK");
+ 
 -- 
 2.37.1
 
