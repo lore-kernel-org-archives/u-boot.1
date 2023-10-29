@@ -4,55 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A450C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 15:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B87CC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 29 Oct 2023 15:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C48987CC4;
-	Sun, 29 Oct 2023 16:09:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 62D1086F32;
+	Sun, 29 Oct 2023 16:51:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698592196;
-	bh=UWq2z2NFvAlEyf0vT3uIl33SxO+JU107xKHJC3VibSU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=q7MyAfbOXPhYPmgySFQdMI5Gqe8UPKgO0cVLO9eZiJozOc7uPooE/8RTenvwHtcvT
-	 l3JNfJDXHdMCOTt4icBrrYRRiIRYsbXaWqylUT3kvnogrlw/bzmzbruwoW2dWvIodH
-	 fRqXTsQfR9q+GbdE3BNDdc5bSwe57LW7JWeb61zOPpNj4vvjflpK9HZzZzF/K4vWAv
-	 EG9cIiJMEd0U/B1BygKoUCkbqi3D34gpcfuMzCTSUZlLIoTxKs+xf4orLMkximWVp1
-	 nUilab2oC6azsBLnLRwpu5pTF5qcYSGoDpp+9N910RUF53ATwygTj60A40miKnotQv
-	 J/r3p8YPiGoxw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="Z8e1GrkD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D170086E2F; Sun, 29 Oct 2023 16:51:00 +0100 (CET)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1F8A387954;
- Sun, 29 Oct 2023 16:09:49 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1698592189;
- bh=UWq2z2NFvAlEyf0vT3uIl33SxO+JU107xKHJC3VibSU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=kyWGK8e88idULhrbxZmNgXnVHCrtPoCpD+VkPhX+J4+dpqXBh89u2J11JK/5gwfjS
- 2V0WTB8kkCFUgf12mGb6xPFhX9tQqnJYh0vcLpwf5mWjTXkbtYLREErW8SmSNb9UQS
- Lk6LWYkOiXbQXPc00l6AARwND1Si5fw+Bm+1VDKoGZdS+NQHD4BiwzXKqqJy+0duzK
- 36e1bEnGTH3OOKTnXbhMRi1NLJMVSXmDiTywbub5Gcjh4eYGFEbiCe9VJKweVKSlO/
- qV6nmcRX7yBDvQe8okCLQLfKo6jPsE7frPW0L8qULLtYgrstbOWUEvXMbexEpcqqH3
- DaICOJ02Gs6vQ==
-Message-ID: <afe9aef0-fac7-465d-802f-afa79e22bd00@denx.de>
-Date: Sun, 29 Oct 2023 15:36:14 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id A11AD86F32
+ for <u-boot@lists.denx.de>; Sun, 29 Oct 2023 16:50:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=marcan.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: marcan@marcan.st)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id E963D42657;
+ Sun, 29 Oct 2023 15:50:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
+ t=1698594656; bh=2YhKpk0XXGrTL1dF8wAICueOpG1GTdA+b5mLJ+YDH3s=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=Z8e1GrkDAshhNA0VyiRe1XrK8JScBDTJP9n8dE+oINnkxR+FPipA5qCt/rCvHiM5G
+ g2v3/za31P41cU4dr5HeOIpB1ljKEi8+Fbqk6xeIzyH4lzfDwU/M5QUBohdtBkWa8n
+ jDlWCDMCC9tQM+BeFKCylnP9V/Vy4umV/xZl6vU0sPt2iQLEpg2Tgw27Wfpve3HOOA
+ 2TLdVKjG5eWPPQuUlm7dRqn4+HreQOA5sAKFILpAylmAkyDfPtyDncVaDFI0+zc0ZG
+ xWX6WvZE0NLaRroyi0IIXt3V2WFDA5p0KBNbr96x1zbxINJ+M/CP2UJ5E2vUjfMxKE
+ sX888Hz6JM1oQ==
+Message-ID: <c3f6d8de-dff7-f0e1-4c87-9eb56e0c6eb8@marcan.st>
+Date: Mon, 30 Oct 2023 00:50:51 +0900
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 8/8] usb: xhci: Add more debugging
-Content-Language: en-US
-To: Hector Martin <marcan@marcan.st>, Bin Meng <bmeng.cn@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] usb: Ignore endpoints in non-zero altsettings
+To: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>
 Cc: Mark Kettenis <kettenis@openbsd.org>, Neal Gompa <neal@gompa.dev>,
  u-boot@lists.denx.de, asahi@lists.linux.dev
-References: <20231029-usb-fixes-1-v2-0-623533f6316e@marcan.st>
- <20231029-usb-fixes-1-v2-8-623533f6316e@marcan.st>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231029-usb-fixes-1-v2-8-623533f6316e@marcan.st>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20231029-usb-fixes-4-v1-1-fe973dde7e59@marcan.st>
+ <2a2c6186-5854-4bbb-ad12-d8b2062a7a63@denx.de>
+Content-Language: en-US
+From: Hector Martin <marcan@marcan.st>
+In-Reply-To: <2a2c6186-5854-4bbb-ad12-d8b2062a7a63@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,26 +72,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/29/23 07:37, Hector Martin wrote:
-> A bunch of miscellaneous debug messages to aid in working out USB
-> issues.
+On 29/10/2023 21.04, Marek Vasut wrote:
+> On 10/29/23 08:24, Hector Martin wrote:
+>> We currently do not really handle altsettings properly, and no driver
+>> uses them. Ignore the respective endpoint descriptors for secondary
+>> altsettings, to avoid creating duplicate endpoint records in the
+>> interface.
+>>
+>> This will have to be revisited if/when we have a driver that needs
+>> altsettings to work properly.
+>>
+>> Signed-off-by: Hector Martin <marcan@marcan.st>
+>> ---
+>>   common/usb.c | 9 +++++++++
+>>   1 file changed, 9 insertions(+)
+>>
+>> diff --git a/common/usb.c b/common/usb.c
+>> index aad13fd9c557..90f72fda00bc 100644
+>> --- a/common/usb.c
+>> +++ b/common/usb.c
+>> @@ -463,6 +463,15 @@ static int usb_parse_config(struct usb_device *dev,
+>>   				puts("Endpoint descriptor out of order!\n");
+>>   				break;
+>>   			}
+>> +			if (if_desc->num_altsetting > 1) {
+>> +				/*
+>> +				 * Ignore altsettings, which can trigger duplicate
+>> +				 * endpoint errors below. Revisit this when some
+>> +				 * driver actually needs altsettings with differing
+>> +				 * endpoint setups.
+>> +				 */
 > 
-> Signed-off-by: Hector Martin <marcan@marcan.st>
-> ---
->   drivers/usb/host/xhci-ring.c | 29 ++++++++++++++++++++++++++---
->   1 file changed, 26 insertions(+), 3 deletions(-)
+> How do you trigger this error ?
 > 
-> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-> index b60661fe05e7..dabe6cf86af2 100644
-> --- a/drivers/usb/host/xhci-ring.c
-> +++ b/drivers/usb/host/xhci-ring.c
-> @@ -214,6 +214,9 @@ static dma_addr_t queue_trb(struct xhci_ctrl *ctrl, struct xhci_ring *ring,
->   
->   	addr = xhci_trb_virt_to_dma(ring->enq_seg, (union xhci_trb *)trb);
->   
-> +	debug("trb @ %llx: %08x %08x %08x %08x\n", addr,
-> +	      trb_fields[0], trb_fields[1], trb_fields[2], trb_fields[3]);
-> +
 
-Could you please use dev_dbg() instead of debug() ?
-That way you'd also get the device prefix in the output.
+Plug in a device with altsettings, like most sound cards or UVC devices.
+
+- Hector
+
