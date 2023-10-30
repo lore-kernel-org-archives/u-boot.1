@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FEFEC4167D
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 15:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50B3BC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 15:55:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 425F18709A;
-	Mon, 30 Oct 2023 16:35:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=armlinux.org.uk
+	by phobos.denx.de (Postfix) with ESMTP id 7279587AA1;
+	Mon, 30 Oct 2023 16:55:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="LV7D/IWy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PovTzf6t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33DCF8709B; Mon, 30 Oct 2023 16:35:47 +0100 (CET)
-Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk
- [IPv6:2001:4d48:ad52:32c8:5054:ff:fe00:142])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3AAD386F50; Mon, 30 Oct 2023 16:55:00 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D06B98702F
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 16:35:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=armlinux.org.uk
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=linux+u-boot=lists.denx.de@armlinux.org.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WE1tsrC5nD1he3EQ3Z3HGaPKaykIF9HkdVI/EJRhi6c=; b=LV7D/IWyq2Mw7vTdVg1EkrxxC1
- fzJ5yRFzlAYj4fcJjzZtnGfpsXsCDVpO/UNR4YqP7qxjUUybZ7nZGyfZdxNL8kBxxQkTNHp25yUtf
- 2KJzm3FlMnAL5p+Qfjj1+ikr/MrjmBoYN+ASKZakexZnFd/Jo54EhdMWhyKesftBsfU5qrKyX8seW
- 2UDWVakMncsXCtbJFuOdiZGI2aEPV89Xh1oXklyVX3NGQmGLi6KaY+dx3jnwOaLBVjTYN0oid1QbQ
- 0DQd3kQw+sLq/tI01uxlHkEV+3NVgkTq8vOAmgPzCLveX2HVgoTtA134mT1CT67pbwFxd0FsFsTiv
- mF5Xt6Vw==;
-Received: from shell.armlinux.org.uk
- ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:53860)
- by pandora.armlinux.org.uk with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <linux@armlinux.org.uk>) id 1qxUIh-0001q0-2T;
- Mon, 30 Oct 2023 15:35:35 +0000
-Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
- (envelope-from <linux@shell.armlinux.org.uk>)
- id 1qxUIg-00047C-OV; Mon, 30 Oct 2023 15:35:34 +0000
-Date: Mon, 30 Oct 2023 15:35:34 +0000
-From: "Russell King (Oracle)" <linux@armlinux.org.uk>
-To: Simon Glass <sjg@chromium.org>
-Cc: Masahiro Yamada <masahiroy@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>,
- Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
- Will Deacon <will@kernel.org>, linux-kbuild@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 3/3] arm64: boot: Support Flat Image Tree
-Message-ID: <ZT/NRvLkvR8uuP5+@shell.armlinux.org.uk>
-References: <20231026072628.4115527-1-sjg@chromium.org>
- <20231026072628.4115527-4-sjg@chromium.org>
- <CAK7LNASATGRaS-6QxzqTEq7qNVkZPXOBE8pfRBg=2bQGyy3=yw@mail.gmail.com>
- <CAFLszThguWT0u0R0EHfpBro0f-pWDwLOGk+5pQZEVhFYNKH8fQ@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 36AC487A4D
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 16:54:56 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-671357f0209so12801226d6.0
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 08:54:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698681294; x=1699286094; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7ZLSlyDGvgsgkMhZu4I7R5sZnR0pcET35880vgchu3A=;
+ b=PovTzf6tUE599iM9uk61fmBWHneHprO8gQ/mDV2wnYtD7u3hWAkFNCcKby9F7zc57F
+ cACMwA74QxE8T/CjU+2fMcSU5P3orWSkVi2GRPcWMCU5ZaG8uI1aord73DYsAQJ7MaYX
+ rDI6mBVRyT7zwcVPpXKi8ixn1usKW74yXnbrI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698681294; x=1699286094;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7ZLSlyDGvgsgkMhZu4I7R5sZnR0pcET35880vgchu3A=;
+ b=o1iX907APhaYzTp3KVMlf5Esmr1RE57Jmqv9mrTPv3yGJLkbY/J05dzQdRvsVGzaRR
+ 05ammxhwksYIsOt6p+llCY5h8av6g61zgLL5wFdeJi1cIczSf0JTVM+GAGfXvz5L/VQH
+ S4E4LTPuEUNw7gfDOw96r1FlOet6tEoRFSe7vzmVr7ztHhc4qpeFkasbVAkRQyCMQT/J
+ W8BaefkM8azR5a6rzEKutdQcJIO2drP6c/lwYi8+3b/5PxU7isAFftO3VDVMh5omx8Q3
+ 87E6BsoPgS516MjhGO5jRat4oeyeqi95R7TiQGcGUy24K282oRvMCARxhlwDI1jBbdhI
+ tC+g==
+X-Gm-Message-State: AOJu0Yyju7lJhlmg1Gyhjd0O+emiG1Hj0pf5YdpD2xUVFSBbnP9KqwYQ
+ 4+ArhyjdJjr9bE/pTc/a1R6bHVBKQMUgT051bcTOPw==
+X-Google-Smtp-Source: AGHT+IFJ6QaJZeQUzd2qA+4T9D4kH5pQ1/5j03uLGzO2YgNovQdgXUfooxhocQAxaWHr1D79X8YAxw==
+X-Received: by 2002:ad4:5ec8:0:b0:670:bcfd:307a with SMTP id
+ jm8-20020ad45ec8000000b00670bcfd307amr8580701qvb.23.1698681294584; 
+ Mon, 30 Oct 2023 08:54:54 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ mi8-20020a056214558800b0066d05ed3778sm3523615qvb.56.2023.10.30.08.54.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Oct 2023 08:54:53 -0700 (PDT)
+Date: Mon, 30 Oct 2023 11:54:51 -0400
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
+ u-boot-board-maintainers@lists.denx.de
+Subject: Dropping common.h usage
+Message-ID: <20231030155451.GT496310@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JNcFsj6dFtE+j1B4"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThguWT0u0R0EHfpBro0f-pWDwLOGk+5pQZEVhFYNKH8fQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,21 +87,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Oct 29, 2023 at 05:46:12AM +1300, Simon Glass wrote:
-> Hi Masahiro,
-> 
-> Sure, but that is a separate issue, isn't it? We already support
-> various boot targets in arm64 but not one that includes the DTs, so
-> far as I can see. The old arm 'uImage' target is pretty out-of-date
-> now.
 
-Does that mean it can be removed? ;)
+--JNcFsj6dFtE+j1B4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I've NAK'd FIT support on 32-bit Arm in the past, and I remain of the
-opinion that boot loader specific packaging of the kernel should not
-be in the kernel but should be external to it - even more so given the
-multi-platform nature of 32-bit Arm kernels.
+Hey all,
 
--- 
-RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
-FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
+Now that checkpatch.pl complains about adding common.h to new files, I
+would like to ask custodians to try and fixup patches that had been
+submitted already and use the header. In general, we can just drop the
+file entirely. If we can't it's often a quick fix of which include file
+was missing already. If it's a mess to unwind, that's another matter of
+course. Thanks!
+
+--=20
+Tom
+
+--JNcFsj6dFtE+j1B4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU/0cgACgkQFHw5/5Y0
+tyyLHAwAp2KtfzPjwtyKrEWRFug5Hv9Z1aTBH/c92XLl/0yC5Slt5mqlG0vEVFHD
+kYPoj5wqrJdw3zqc1gli+jN96Wm37Y6XXO47npyr023/1/sg8Q3PsP7BXpTVkW65
+ED+R2n7hY2ohYtoYlgErLSwJpmZfLdPzrClPrsAKf9flheuQz1YJzvA8vWJMvXtt
+XLt8GR75TN7UCOeACvRR01gsluy2YX7myN7dNr+GzN9S+1QV7WYL+7FhsQSaBhXT
+Kr01LAeES2A7eDI6QfsLLEgfhrNu3rUyh3fW1rNhDgYMEnKDYwfdSW5wAWjm2apB
+jGj+Xas16pqAJpJuTBe+tmJSu2Qm+Y7nQgV/bbZG21M64y5Q2O5xzJesAFFWA+Q9
+HpiDGYNpm+KQPivXv29cu/kRF3JkM4cDZYtTDUBvfqBRnrSwXenhS+NLiFbHMNNa
+KPen8kT6ow7XlDw9UYXdDYkhbda/S4TeOZsaB9zlq9L6OmAyhicK/32qW7KaCmUV
+FrN+fndU
+=NNRW
+-----END PGP SIGNATURE-----
+
+--JNcFsj6dFtE+j1B4--
