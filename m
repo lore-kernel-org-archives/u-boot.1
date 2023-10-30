@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941B1C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 13:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40DCCC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 15:24:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 544F78723C;
-	Mon, 30 Oct 2023 14:12:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F81587266;
+	Mon, 30 Oct 2023 16:24:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="TBqY1kPD";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Mpn5ie+D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sczpvi7m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD31C879FC; Mon, 30 Oct 2023 14:12:55 +0100 (CET)
-Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
- [64.147.123.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1198287122; Mon, 30 Oct 2023 16:24:45 +0100 (CET)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B8958706F
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 14:12:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=feathertop.org
+ by phobos.denx.de (Postfix) with ESMTPS id 57EDE87A34
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 16:24:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tim@feathertop.org
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 2FB043200945;
- Mon, 30 Oct 2023 09:12:49 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Mon, 30 Oct 2023 09:12:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
- h=cc:cc:content-transfer-encoding:content-type:date:date:from
- :from:in-reply-to:message-id:mime-version:reply-to:sender
- :subject:subject:to:to; s=fm2; t=1698671568; x=1698757968; bh=ks
- 37gSaTemFOmfEzetYVIMPdsS3fxq5voyswwol8rvg=; b=TBqY1kPDIHL6Fji6Vk
- vTlo/6115HLfB0iWNw6sJMADy+aR2eaZR0NJngtLTD/HMdj46oq5SuOn8AX5aNXv
- 8iFFD0eLK4MFLKM5QlRwt3T4v0k7APSieSeq61kuGIfswDf+hruUmmIirOp3aiYd
- svQgrTBXmUjnU4LNPTLvi5iet6lh6TiRIGD9bJQ71sc+8k5lLR8OAS5wswVIbfQG
- JV0CbIL1wLd1vI3lVG99e8hYL1Bd2KyeLUA2bTC2TQY0zLEmOQsMGtJE+JcDy0pK
- tlYfRp5hp0eW4D8CPy1pnQ/Fi5OojoNU4yHvrRMQeHxa/uhGUGcXXhf26evQdm8z
- Tdrw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:sender:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm3; t=1698671568; x=1698757968; bh=ks37gSaTemFOm
- fEzetYVIMPdsS3fxq5voyswwol8rvg=; b=Mpn5ie+DAecIZKpaXvJQ/xUMFBG9u
- F1Bt3ivAsEINQD9Vj9hftBPXVf/yl6uGj/+RPtYS8FShPJyXhlk++tfKNZrVu1vW
- GpzflI26qpC41eE9JnHOSr2Z8JqMoHhvzP8D4Ee7kcEl5Sa2ZXG5Nc4vad1S96fF
- QzBbzwycutfLNTQzP/kdCKpWswbedU2jVeThUQiibHFAG4NHfRQzIDhw9bauBNV+
- u063/Kp+IIAGuxgBCzgfG9Rcra+eyF6DXoPS0Kl8+pRs3iejZvuwbBxfrF+LjPjY
- YP/rtKnMNBf5/Cm9ImEd562bP8NEkxIAyzk8R6og2SZuHggC3hU8L8LQg==
-X-ME-Sender: <xms:z6s_ZXqf0Y4EqzvQLbp2rXi_d9LpbEryz63OFYwNNzIANRj4snSraA>
- <xme:z6s_ZRqf9jxbY7i__mg_2vPYcc8hyORT09J4C5MvvuPDdUpy2twGfy9NiURysBhqR
- 0WxnEa86A>
-X-ME-Received: <xmr:z6s_ZUNyS7cU2vgEekjm4zf0xCLoUZC5fwWBbE0Ry1hyLF1h8qKa8eYaJ-7bVfWKLWgO4GwKJpZMfewZOrVaVMnr5wUZRtvwPzo>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddttddggeejucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepvfhimhcunfhu
- nhhnuceothhimhesfhgvrghthhgvrhhtohhprdhorhhgqeenucggtffrrghtthgvrhhnpe
- duhfdtveeujeejjeffieevgfdtudegfeffvedugfetteehudevteehtefgieeitdenucev
- lhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmsehfvg
- grthhhvghrthhophdrohhrgh
-X-ME-Proxy: <xmx:z6s_Za5Eb4g4YvML4QAs32yI0VGnsvx_EUyygVyiucMYq5q0vfZ-VQ>
- <xmx:z6s_ZW5WwH9WCPK2CaP_FI2vrQH9tXGEr-QE9Gdjlu28tjS-hBveMQ>
- <xmx:z6s_ZSg92sQLtUj17p6Q3RjCwmH_9gCCBwe42KdYGJdooHFKZ0hPNQ>
- <xmx:0Ks_ZckfjoAjD1iEN4ynf4cym1ox_ZaaMZy2rxtVdpgAhZkXzZht4g>
-Feedback-ID: i1f8241ce:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 30 Oct 2023 09:12:44 -0400 (EDT)
-Received: by feathertop.org (sSMTP sendmail emulation);
- Tue, 31 Oct 2023 00:12:41 +1100
-From: Tim Lunn <tim@feathertop.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tim Lunn <tim@feathertop.org>
-Subject: [PATCH] rockchip: dts: fix bootph tags for rv1126
-Date: Tue, 31 Oct 2023 00:12:41 +1100
-Message-Id: <20231030131241.501472-1-tim@feathertop.org>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-66cfd35f595so27195666d6.2
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 08:24:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698679481; x=1699284281; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hdaAN5YPp/CHC2JW37FOm0DxydaCCaL5wWShcy4/8Fg=;
+ b=Sczpvi7mLV+uqy+TIO8xhzzv047KGXqYA4dGn2+pP+o8iLLQdnfmX+zCSocrb0t5dI
+ Kst9+STOVkhsLSmetU8YElSQQFPQW3FulSkeN2qMAFxdV+BjYRh+UDyLkdL2kXyovmKa
+ FlwZ6n7iCMl79OPB6Hd3wNG20Yb6EkOT5GaWw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698679481; x=1699284281;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hdaAN5YPp/CHC2JW37FOm0DxydaCCaL5wWShcy4/8Fg=;
+ b=EGDeGr7oxdoq787HA8vWNTJoZErMNqetV+ISLhK0owS4HuIO4+O1q7Jg6tzN+PEDwo
+ FopVN5RCpRAgqe4hVLAjjHuDk8pDClu014NcndTN4mpt4sTR4U3/Rw/QuSO39Kj1sd9r
+ 15YHGR7B8viPKCc5aLr9mtQilYXzVSg9xiNq9XqQ31jex4BRe1k4IYSuBHpsMvHf6Cpl
+ OqHJffQJO56lAArXUTdwRyb+4TLKEAzYP/GkuiVinte6t4mr4040Q5SO9QOSYCLJRpoI
+ 7jtoNWMWxorAF6Rm//+lrNeH8zqf/vnYAkFfb+mO+aKvajluBIzw245mCm+q99QD5tTB
+ JMRg==
+X-Gm-Message-State: AOJu0YwZ8Vz7AOLyzPySvbQHdA/zn328JvW+vesyYdl3GTwNOukOwfcg
+ Gm+WBCkAypxH6iEcKrr9QUHI4Q==
+X-Google-Smtp-Source: AGHT+IHGpyNsX8MWTN1+SO/bst66HJZYwVvbPlnSd+nPNrPXRxFjEe258EL5hBmR95V62so1DanmoA==
+X-Received: by 2002:ad4:5e87:0:b0:66d:2785:a2b0 with SMTP id
+ jl7-20020ad45e87000000b0066d2785a2b0mr11668781qvb.29.1698679480882; 
+ Mon, 30 Oct 2023 08:24:40 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ z16-20020a0cfc10000000b0065b24c08994sm2593311qvo.128.2023.10.30.08.24.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Oct 2023 08:24:40 -0700 (PDT)
+Date: Mon, 30 Oct 2023 11:24:38 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2] dm: core: Report bootph-pre-ram/sram node as
+ pre-reloc after relocation
+Message-ID: <20231030152438.GA3621286@bill-the-cat>
+References: <20230820220316.3517102-1-jonas@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="d4Gtrk5iK85tNlkQ"
+Content-Disposition: inline
+In-Reply-To: <20230820220316.3517102-1-jonas@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,43 +91,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RV1126 fails to boot on 2024.01-rc1.
 
-Commit 9e64428 changed the behaviour of bootph-pre-ram, to limit
-nodes to spl phase. This caused rv1126 boards to fail to boot
-with the current dts.
+--d4Gtrk5iK85tNlkQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This patch updates the pmu/grf nodes to bootph-all tags as they are
-needed in all phases. This fixes the boot issue on rv1126 boards.
+On Sun, Aug 20, 2023 at 10:03:18PM +0000, Jonas Karlman wrote:
 
-Signed-off-by: Tim Lunn <tim@feathertop.org>
----
- arch/arm/dts/rv1126-u-boot.dtsi | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+> Nodes with bootph-pre-sram/ram props are bound in multiple phases:
+> 1. At TPL (bootph-pre-sram) or SPL (bootph-pre-ram) phase
+> 2. At U-Boot proper pre-relocation phase
+> 3. At U-Boot proper normal phase
+>=20
+> However the binding and U-Boot Driver Model documentation indicate that
+> only nodes marked with bootph-all or bootph-some-ram should be bound in
+> the U-Boot proper pre-relocation phase.
+>=20
+> Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram prop
+> with a pre-reloc status only after U-Boot proper pre-relocation phase.
+> Also update the ofnode_pre_reloc documentation to closer reflect the
+> binding and driver model documentation.
+>=20
+> This changes behavior of what nodes are bound in the U-Boot proper
+> pre-relocation phase. Change to bootph-all or add bootph-some-ram prop
+> to restore prior behavior.
+>=20
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
-index 5e348278f2..918c307743 100644
---- a/arch/arm/dts/rv1126-u-boot.dtsi
-+++ b/arch/arm/dts/rv1126-u-boot.dtsi
-@@ -26,15 +26,15 @@
- };
- 
- &grf {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pmu {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pmugrf {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &xin24m {
--- 
-2.40.1
+I'm following up here now that this is committed because there's been a
+large number of commits to update dts files because of the change this
+commit makes. And I know there's other platforms still broken that need
+the same update. And it seems the change is almos always to mark more
+(or all!) nodes as bootph-all. So, is this patch really correct, and
+really what we want to be doing here? I was not expecting this much
+fallout when I saw this come in. Thanks.
 
+--=20
+Tom
+
+--d4Gtrk5iK85tNlkQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU/yrMACgkQFHw5/5Y0
+tyxLTgv4xAR66dcrTchgUYR4TgAr+uXI5i0OI757C9opiqQMvCGRgc1S15szuDzV
+mtvxxKzlDj8mNC6GU50QmWnlmKMAa+0/aOK+qyBgKYma3MGnswNVjL54+XNLSXAX
+FpH2aHofUfDoQxK0Ckom/v+MX4NYlmX2Mqe0DgbfJ/mEuz0OuUHJCDdYKs5h79tf
+PTt+h6g3Y7vWpG8D+zVNBEVdhAD27qhLLQxAM/JF6oy/ibswiSoGTMbl3kR0XdGw
+3IFew4LZ79QokOtpOm70NA5N/V1vTIG0Gb8Raa981M0nS/KvrBfKC8YyzgJSHfUN
+XnfoiMv1Wbxnns4gEpoWrChSkY08Gfs6Jx/NgSl7olLjHQKncZvBJRh/8F9/qX3J
+/g8wJYxzrRTxPISNb2Qiuj4R0xGRynQ7KG05wua6W3FZrIULSSalSyN/dL3G5NGj
+eWl1lcqYRc9+xJnuC4NH/iQmq4CnG/7d2q1ocnsRFM3DjYwoGDXtRNK0pnUNKNZt
+yW4ppxE=
+=qHdD
+-----END PGP SIGNATURE-----
+
+--d4Gtrk5iK85tNlkQ--
