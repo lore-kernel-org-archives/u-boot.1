@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECC5CC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 17:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D30C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 17:26:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17D29879DA;
-	Mon, 30 Oct 2023 18:22:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 33E2987AAE;
+	Mon, 30 Oct 2023 18:26:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dg6z88nN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BluP5aYp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AABE68725E; Mon, 30 Oct 2023 18:22:51 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id BA3F8870F3; Mon, 30 Oct 2023 18:25:58 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1ACE8879DA
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 18:22:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C4F187ABC
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 18:25:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1cc3bb32b5dso16068735ad.3
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 10:22:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5ac376d311aso44702267b3.1
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 10:25:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698686565; x=1699291365; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=t028Ex1cuKHPwgwhPanSyfhSs4o+7za7KsoKDo9XVfc=;
- b=Dg6z88nNPKNyHIEtGnc3RpPnwavUI4JuWip5FX6EHzlVN2W6Umo2HZ6qj63xpcAaqo
- uzjYnvml1yMDrRc95x6E2Ylw+tFwjvMuH7foIksTKomxHTCNFWPnnZnxVpuD5/7jTzBC
- 44Gc2cYEocAYeWFf2E6eo+Qh1dXaITEC52ZwI=
+ d=konsulko.com; s=google; t=1698686755; x=1699291555; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=K/Nnup4JL14kXr1eg86iqo2nyb3Xj/MBIdt+iCqql8A=;
+ b=BluP5aYp/A8Dj5Jx0XecDI1M8WHrITRAYxM9amYRDufcNGL9Bgcj29VX2toZj6AYVR
+ hrpzsOlPH6oEpndQZmTO+6thhv0hoUuSzGjA+xglYxGKzntU213cxQEQyhgG/+D2UyZz
+ f3raehp4X+Rco5nl5OtspdnnlpJFaBAc6gNG0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698686565; x=1699291365;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t028Ex1cuKHPwgwhPanSyfhSs4o+7za7KsoKDo9XVfc=;
- b=iH3FdGtsDOhNmGfOBiHH0OGA1HIJcNjTifHTORfe+h50ReIZXc2i8aCmA4MsA7+vxt
- BZ0OXFARD9PE2pEMgQr/AivlsWLMeC6BJt83RIHyH3Lspqo/p/RCGWQL3zq8+DLOIR3S
- ntdQ5zon82yDzw0oEt8r3Y2KtXC3cGtQ7Cg9TnHi39NZCIcWiEcfPCRIUyB47t+viIOK
- LAIxnhxbaBUWyBb+8Z6LrqzVpZc4AARziGfJKw9RcPXpe1Op6JkF2j1T0n92UoE++aO7
- k52LspCN1RvhhIsrkOc/FkZGdu5rIzfBx0rTa7JameYPV6qgWOPwDpO9wlQj7gZebKoM
- Altw==
-X-Gm-Message-State: AOJu0YxsKgSTNk4tKDGIk7gWJtRmcCHkw+1+REB6XZRk0yZXHUnHrl4a
- FbvbJJv8lNfZNaut3rbukZ62SvgDMrvtz0aW9+b0PvYN
-X-Google-Smtp-Source: AGHT+IEcYsMgF2i9kCUu+q91ukmoMnPYlQq41Nbg0sKQwXLACXvs5O5bl/URrdiNpZyLszfO8oSllw==
-X-Received: by 2002:a17:902:da86:b0:1cc:4091:264f with SMTP id
- j6-20020a170902da8600b001cc4091264fmr6342915plx.14.1698686565254; 
- Mon, 30 Oct 2023 10:22:45 -0700 (PDT)
-Received: from sjg1.united_club.lax.united.com
- ([2607:fb91:ac3:c7a8:5fcd:fc58:388:b3e1])
- by smtp.gmail.com with ESMTPSA id
- c5-20020a170902724500b001c46d04d001sm6535073pll.87.2023.10.30.10.22.44
+ d=1e100.net; s=20230601; t=1698686755; x=1699291555;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K/Nnup4JL14kXr1eg86iqo2nyb3Xj/MBIdt+iCqql8A=;
+ b=Mjy8LJqHWMZq6TksOomhoV6p7+l3x15j6AACwwxfJCpvdG3o0hv4LM1HnAX+mVavC8
+ JyfioLGWE/6FfeC3H1cLwxEjN9HyTQ7RND9G7wUnCxCb8rrE4fBMii+FKiViFzcA2rqo
+ 9dD37wXbQZ5sRqK2QmsViimAuaSaC9IxSnJL1wnhkKq4KUfq4FNsYd7YTL0Oofvh5QEv
+ +m0+CjkPSH4okhX5nTuxVQMtwQ8PmwsrqHAFO/h/4pfw7lDQD5ULeGlAPzUfLwbFtYhA
+ MZMvSCttzUlTZaOJn1s68ZMMWESIzTfWcCFXVRhqIADOD/Po0LZgum2G6HfXvOgFtQcC
+ oq4w==
+X-Gm-Message-State: AOJu0Yy7jf5vxM1UBWtltD47dKQwE0HbBMEFsn0Sbzx4Ssb0JiVRfCfw
+ wLzFdXrNMXDyOO8+Llf+PlgQ9g==
+X-Google-Smtp-Source: AGHT+IFeQtY7CW4lLjzY9Oj0+LzPLiadiKCqDTJ6/EpqxJuHtLx6OXi3ppVKeElB4Rd0WJFwHM2YMA==
+X-Received: by 2002:a25:42c9:0:b0:da0:447a:e9d8 with SMTP id
+ p192-20020a2542c9000000b00da0447ae9d8mr8810091yba.10.1698686753224; 
+ Mon, 30 Oct 2023 10:25:53 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ mi8-20020a056214558800b0066d05ed3778sm3592672qvb.56.2023.10.30.10.25.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Oct 2023 10:22:44 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH] buildman: Support upstream branch name containing /
-Date: Mon, 30 Oct 2023 10:22:30 -0700
-Message-ID: <20231030172234.867888-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.820.g83a721a137-goog
+ Mon, 30 Oct 2023 10:25:52 -0700 (PDT)
+Date: Mon, 30 Oct 2023 13:25:50 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] exynos: Avoid duplicate reset_cpu with SYSRESET enabled
+Message-ID: <20231030172550.GV496310@bill-the-cat>
+References: <20231030165502.27813-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2lDAqLrPzOgk8d52"
+Content-Disposition: inline
+In-Reply-To: <20231030165502.27813-1-semen.protsenko@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,36 +90,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Buildman assumes that branch names do not have a slash in them, since
-slash is used to delimit remotes, etc. This means that a branch called
-'WIP/tryme' in remote dm ends up being 'tryme'.
 
-Adjust the logic a little, to try to accommodate this.
+--2lDAqLrPzOgk8d52
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For now, no tests are added for this behaviour.
+On Mon, Oct 30, 2023 at 11:55:02AM -0500, Sam Protsenko wrote:
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> The sysreset uclass unconditionally provides a definition of the
+> reset_cpu() function. So does the exynos soc code. Fix the build with
+> SYSRESET enabled by omitting the function from the soc code in that
+> case. The code still needs to be kept around for use in SPL.
+>=20
+> This commit was inspired by commit 6e19dc84c14b ("sunxi: Avoid duplicate
+> reset_cpu with SYSRESET enabled").
+>=20
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 
- tools/patman/gitutil.py | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-diff --git a/tools/patman/gitutil.py b/tools/patman/gitutil.py
-index b0a12f2e8c06..10ea5ff39f5c 100644
---- a/tools/patman/gitutil.py
-+++ b/tools/patman/gitutil.py
-@@ -147,8 +147,9 @@ def get_upstream(git_dir, branch):
-     if remote == '.':
-         return merge, None
-     elif remote and merge:
--        leaf = merge.split('/')[-1]
--        return '%s/%s' % (remote, leaf), None
-+        # Drop the initial refs/heads from merge
-+        leaf = merge.split('/', maxsplit=2)[2:]
-+        return '%s/%s' % (remote, '/'.join(leaf)), None
-     else:
-         raise ValueError("Cannot determine upstream branch for branch "
-                          "'%s' remote='%s', merge='%s'"
--- 
-2.42.0.820.g83a721a137-goog
+--=20
+Tom
 
+--2lDAqLrPzOgk8d52
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU/5xgACgkQFHw5/5Y0
+tywpMQv+NA499cNdPMkJcQieOVDWRPhyLT0HNEQ8nHCsXJOo6u5R5evD7248P2QX
+cyIzhSYEaxQQu7K4n6aEpXgWUoE0mlH9ShYewFwOrNDbQSC/VwmegP3b5vzE4RJ2
+jV0WuEsgRi47ZpVCQ1yMcf7yU/aPtzl9/9RW2HTugxcqH3A+kJ08eYyEp6pSceBw
+VNMuJnhbTBL4n41hdmNhU46bdE8MQM3l9Zvd1ZNoNCUQQBBpF78wcqqpuWBn51qK
+MF3ijTeX2VwhaPqUooxlgICQWY9g/EyFzuNYxLE40FvkZq+5Ktvq/Yn9PzdogWXy
+QalBuAYSDCzYlc228FfI5G4ksdejQp0wAjNuKk/5iePOJWZ6L9ZVA/rBVttAPYrE
+7UkVJdZzRFz7b6wDGtMp3Fn5rSLPZjfrKRW8lI3kq8FB+luD3ubRk1sI3StEso8t
+QMbN1qytE2o0ai+is6g5muzDWPOGTqfbWXETZRMtksl0Rg+KyoXbCdjeLZv6ixNH
+v7LG9WCc
+=hLpp
+-----END PGP SIGNATURE-----
+
+--2lDAqLrPzOgk8d52--
