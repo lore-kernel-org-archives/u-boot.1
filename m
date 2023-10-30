@@ -4,76 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8FFC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 21:36:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF2CC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 21:37:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA06E87ACC;
-	Mon, 30 Oct 2023 22:36:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C2DBA87A02;
+	Mon, 30 Oct 2023 22:37:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KnyX6cap";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bszRQTM6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06C67879FD; Mon, 30 Oct 2023 22:36:16 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id 819B1879FD; Mon, 30 Oct 2023 22:35:52 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBD1087ACC
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 22:36:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BB5B87A02
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 22:35:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-41cc56255e3so30091371cf.3
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 14:36:13 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6d261cb07dcso3271762a34.3
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 14:35:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698701773; x=1699306573; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698701749; x=1699306549; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=86LwqRvFYgbU1k+Yt+goNeBEfXjSijchLfDUi+Lueh0=;
- b=KnyX6capxd4ixHfgN0D7zgTCFJRsfzs+QZxqE9TYlmi//RKdn7A7wYjAksYd9ANOx7
- lmJ6JI8PmlHzIkDig1feeChrqJllOX+Yg9ojV9IDaCMKC9YLXD/BPvEL8Rg4rgLnUQQx
- ICh/xmuUt/etT3/Yb9qf7/H2egnBg9KptbpJM=
+ bh=uuL8zJtkzeP8eaSCl8I1cfJNgeIdJ2bpt21Ixa26rLc=;
+ b=bszRQTM6zxpRkHPIIO39nXPSyc5AcTbehTscP7x2do5OZszOQVpjsxIFUyHKB3aJFX
+ lVXYsbK6Cyxr/An70tRtcJIr8g9Vxh3JdsPl1VqykHdnla+KqLrbQ+ShovjPRdtx9DYp
+ BRRos5gS80jP0qYxkoGEIHoh3ZbiJS6npd3oA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698701773; x=1699306573;
+ d=1e100.net; s=20230601; t=1698701749; x=1699306549;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=86LwqRvFYgbU1k+Yt+goNeBEfXjSijchLfDUi+Lueh0=;
- b=CFdLDYCTRvZAWE0wC0fpVoVLHyBLPY/Hq1O61rkAAhS4CQxCVBRHAHS4G9qa7XHmY5
- HjFc6gCYRlXx+RcR5qfVb9RE4+R8aP8tURVPw5ioicphRxBCVbvI6HbEKpMBilft16hD
- cZJy4ZzuFc05M7DmOJGfCz9ldcyo/CV4WgCmkQ5IJJtRZnHLAhTuxYI1r4BZCWmihwle
- C6JkPB1/DxHLXf8WgF6PKVGXIn5uyp6WiWBylSp2f4+iDBRiNY5LV6U9oTT+8eA4TScz
- pKCx2GeMXLaqy46a3Lvp6Pc5ooRDUqm+cde9mJM4iHmtXzfQrCWVprQxJ3eutR9UtBVx
- 4Etg==
-X-Gm-Message-State: AOJu0YzcWZJTq1v+FPWYGXE2LoiFc43+vAc3T+KK5RXUOXmo514OixjB
- ppr+uz9tFy5cwGTKiAU9aY8CbxBknBfT8z4MdFwCqw==
-X-Google-Smtp-Source: AGHT+IHArxG9Pur2JSblbcqmQa8eJTnwvG9kX9EH3ouWcU+15MLnqlj8dryN2C1sWiiBejzI6JFOqg==
-X-Received: by 2002:ac8:7f83:0:b0:419:573c:59a3 with SMTP id
- z3-20020ac87f83000000b00419573c59a3mr14974589qtj.19.1698701772783; 
- Mon, 30 Oct 2023 14:36:12 -0700 (PDT)
+ bh=uuL8zJtkzeP8eaSCl8I1cfJNgeIdJ2bpt21Ixa26rLc=;
+ b=UF9FbcMBujcSvI4LKa8qCbRlMwLYkZemZ8l9mWKVNzryN+fNktYWzg4/KeGSdlMZ8f
+ R1qQ3xV3T8t8SNxG6b7PcLUdDrujwXjDgrLVgmgdlNB+1F3b3h5qaH49zmOaueEAtQjK
+ fVWCXkEPkkeLmn0Svqt5Bdd19Z2kSbDO+dSrnKUJRjCzjy/sY6fKnIALHkogIdRQqYBf
+ hRyVQK89rQ6dZfNvvYYI9vPmCIV5nWfJZZzKJgp9u8naZ6ZZNvYkmRtYaxI5jhQPdwKF
+ ZOEpTut+bn4OpdDndFjqqcMKNqX4aSuKKUWfAswJpKnQ69M2ocWVvrnegQv0a+wKZrL3
+ Bhhw==
+X-Gm-Message-State: AOJu0YyODIIfX9ERod++zp448tyxbJmGYGZeukrDf5NT8jX9R5sk5GA/
+ R+YZWl2B2qCEE5XGd1vO5xQMVw==
+X-Google-Smtp-Source: AGHT+IGnq1/OF2xBFg3p18nAme47Ru8AuL9mZKBFVLtfluPIbe4VptkPmgr1NliyUD7iUCtJsjOtZg==
+X-Received: by 2002:a05:6830:22f7:b0:6c6:3ea5:cdbe with SMTP id
+ t23-20020a05683022f700b006c63ea5cdbemr10316984otc.18.1698701749105; 
+ Mon, 30 Oct 2023 14:35:49 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- 19-20020ac85653000000b0041b12d5fd91sm3766753qtt.55.2023.10.30.14.36.12
+ js25-20020a05622a809900b0041b7f89ad19sm3753849qtb.53.2023.10.30.14.35.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Oct 2023 14:36:12 -0700 (PDT)
-Date: Mon, 30 Oct 2023 17:36:10 -0400
+ Mon, 30 Oct 2023 14:35:48 -0700 (PDT)
+Date: Mon, 30 Oct 2023 17:35:44 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Dan Carpenter <dan.carpenter@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] addrmap: Fix off by one in addrmap_set_entry()
-Message-ID: <20231030213610.GF496310@bill-the-cat>
-References: <b2dd17c4-2da7-4785-aae6-6a9568f82fc9@moroto.mountain>
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, takahiro.akashi@linaro.org,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexey Romanov <avromanov@sberdevices.ru>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Chris Packham <judge.packham@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Fabio Estevam <festevam@gmail.com>, Gaurav Jain <gaurav.jain@nxp.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Holger Brunck <holger.brunck@hitachienergy.com>,
+ Huan Wang <alison.wang@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Qu Wenruo <wqu@suse.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Rick Chen <rick@andestech.com>, Roger Knecht <rknecht@pm.me>,
+ Roger Quadros <rogerq@kernel.org>, Samuel Holland <samuel@sholland.org>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>,
+ Tom Warren <twarren@nvidia.com>, Vignesh R <vigneshr@ti.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Subject: Re: [PATCH] Kconfig: Remove all default n/no options
+Message-ID: <20231030213544.GA496310@bill-the-cat>
+References: <e3bb5522913c8a917feb7d6309a693f7ee5dbe25.1698218728.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tiKxsWQgMN7j5bHQ"
+ protocol="application/pgp-signature"; boundary="2UM+0h7cja2gNJuT"
 Content-Disposition: inline
-In-Reply-To: <b2dd17c4-2da7-4785-aae6-6a9568f82fc9@moroto.mountain>
+In-Reply-To: <e3bb5522913c8a917feb7d6309a693f7ee5dbe25.1698218728.git.michal.simek@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Mon, 30 Oct 2023 22:37:32 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +122,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tiKxsWQgMN7j5bHQ
+--2UM+0h7cja2gNJuT
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 25, 2023 at 09:50:40AM +0300, Dan Carpenter wrote:
+On Wed, Oct 25, 2023 at 09:25:37AM +0200, Michal Simek wrote:
 
-> The > comparison needs to be changed to >=3D to prevent an out of bounds
-> write on th next line.
+> Similar change was done by commit b4c2c151b14b ("Kconfig: Remove all
+> default n/no options") and again sync is required.
 >=20
-> Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> default n/no doesn't need to be specified. It is default option anyway.
+>=20
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com> # tegra
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Angelo Dureghello <angelo@kernel-space.org>
 
-While Simon had comments of a more general nature that would be good to
-handle, start by taking this fix. Applied to u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---tiKxsWQgMN7j5bHQ
+--2UM+0h7cja2gNJuT
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVAIcoACgkQFHw5/5Y0
-tyyvXwv/bdr1fUTNEOGaT3AA4x6z87YJLbxr6iabxWnxsTpNhYeqE22sqJNjoHQ6
-jX5IZUC0FnXKj8UFy0SMg03HBzzhraviFh7nBg1+s9L7XYyTBkFyMFBgnh2l5i35
-09KlNJJkYFlGSAAvXBVEHefN+SxvuVV01fuSRDrBzWwejE3XwSvNOJoCJP8RQgRC
-C2yIb5GYRFILFkOE0zcUKFar6XsrDO3+SoKAk9kap79da3V+GOvvFN6SBIw2HDHv
-gUQ0EcEjSXpqc2CKqgCcE9ElJaTKvMe81KSikgG0XTKm5RrvSJb2yxRA6Fiyi1zP
-np98Eaq3QvXf1Jo5jyUxmEx21SURs91fK/Nk+gJMhwfWDJe00ZfbLgbc5FZ3GIeV
-I9fI6ZtpCFP+zg+J81l9XLq+1Lh+s72LL+V0JV9SzmaEontVbHNcyfZqLLmIIN6L
-GHZY4dDRMDzyDmP7H9gvqEovM9w9CpebmK9D1/2J/HSgqJbXtagEYRHqRycDh8kX
-owuAjo8f
-=K1QG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVAIbAACgkQFHw5/5Y0
+tyyUHgv9EJZM2dAALVUXDuuq4MrdNMmeTvQJbUg5kzns5g8s4cgJAfgocrmckROT
+ewwzz/R0H/xo+3j46eKWaSiPBRFHXS6VsTKj8Z9MZnwip8CcbHObK4+TZ9JP85s7
+tlAgPBK4/JUzkJxsYDXAhAcbySY80/O3MwPE99XjOoUhqRpUU/3pwDEeFU0ZvRem
+tT77KJ43yiu7C5tDPYo1ynGDU2egrsUVkT27/MwGWJQFQzV9sMbl7yaJD8BPNGoD
+wW9LEIRsz05qcOT8Oa6/tZ+erjnKrLuDW/IuwGvJyXHIMf/1B5O8jFKEXe3UyPBr
+VxGP9+HiFjdOUzC5FwxpJP7rTGSLSt37t+fxxAtfgJwbcb/irchPh8kLSTzSZaHs
+Hq57fl2hYitMUSSj8yoN3GQSvNiSqaIqSq1TbaXpmXPDzuqZd4VCUTnYKOL/3xdV
+s3z2QhfFQSHbZY7LsobMn5aLzxp3EkKf9oxLNTITd5AwQqG33hq5C7tZKV+Qxf6p
+PW44rEJF
+=sdw0
 -----END PGP SIGNATURE-----
 
---tiKxsWQgMN7j5bHQ--
+--2UM+0h7cja2gNJuT--
