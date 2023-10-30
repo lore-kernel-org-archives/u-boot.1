@@ -4,55 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65319C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 08:53:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B82E9C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 11:01:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D587B879FA;
-	Mon, 30 Oct 2023 09:53:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C16D887A05;
+	Mon, 30 Oct 2023 12:01:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698656032;
-	bh=BJN8loP0A7Hd3fyg6VqX/W3eQuwK/rkLh5Kwkm2Bs4k=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nz8/L+IoSOL5s8yqV2T+wA4gV7yHzQs34xCkWnxp7u2pdioUvpd5NC0jbEAlmAp21
-	 sApo3gmW4q1wk/J9y4fKnAy7fLRSZ7W7clk4ACudIW7wipjYsjUM6AmmLW9mlMzo0M
-	 G8FL1ctYL9Tia4GAiUbP26rGdYJsfTVccdTpmeOCJHeGf1dsbp7hrbR+sUgRu+e8Gc
-	 6b5g/ahLIqW9FQs/g4Z/LRzttD9OJ/N63Av3gz2G5+z2pBvAYrKRI2lw6Js5ab1/qG
-	 WFgrD/c2wx6ZrUplVlrAVE5fjYBeNe0noc2+p8FI0MhOxYQz/5Q0aCEix9s7RRLlQo
-	 jttyw29B6Nc8g==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VFnI6GjQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 03D8C87148; Mon, 30 Oct 2023 12:01:45 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 30B68871D4;
- Mon, 30 Oct 2023 09:53:51 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1698656031;
- bh=BJN8loP0A7Hd3fyg6VqX/W3eQuwK/rkLh5Kwkm2Bs4k=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=rO9+mdcFmzcJM8saUOXhDlFEAQ66EVAzHyGixI50NLg/KR5K5tshc7oYQAI/3PYbB
- O++fw81oHS5G3x0j9p7Roq1z3T+wf9t9X6oj5yC9WItxZEJecYuYTRDADb8HnVLs9M
- UoA09bPGkt1E0ahE+10qa3rM1dUSd0qly5sm0M04p+wKwwtxTuGoiTlEMHJvGTevzl
- OIKQmeVzJ87TMb8+hJvNGfHyoBEkgOLmPDj4YfDZKgvU8DyccMH6X5n20jHLKaOdUP
- I7xXAUD29Wx+imtCzuT9Ev7QaDduIk8EICAW4G3HIY447Mgdv7hiRnQBTjkAqZn4/Z
- xTtI+Blpz9NJA==
-Date: Mon, 30 Oct 2023 09:53:43 +0100
-From: Lukasz Majewski <lukma@denx.de>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] dfu: mmc: Add support for exposing whole mmc device
-Message-ID: <20231030095343.5a4d9570@wsk>
-In-Reply-To: <20231029223740.284149-1-marex@denx.de>
-References: <20231029223740.284149-1-marex@denx.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E74986E40
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 12:01:42 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-yadav@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39UB1dgk049979;
+ Mon, 30 Oct 2023 06:01:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698663699;
+ bh=4gvHUg/VpOn2xwCeMHRzZfPjMsLGP6FONSgZ49wTKy0=;
+ h=From:To:CC:Subject:Date;
+ b=VFnI6GjQKO5V5PAUD9/zjvS4SONZd2LfR15p53Kd465NY+RE2K0+GkZRa009lRPG+
+ XVo3GRaLe9JWth9UQsyeE33AwiAhSX/02dt5pvxOdJdfSdPA1jSfAIISppyAelXWtl
+ h/he4N2UxmcvOsF7hxVamDucVn5n3TF8NCxDRsZg=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39UB1dXP093419
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 30 Oct 2023 06:01:39 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 30
+ Oct 2023 06:01:39 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 30 Oct 2023 06:01:39 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39UB1chU029120;
+ Mon, 30 Oct 2023 06:01:39 -0500
+From: Nitin Yadav <n-yadav@ti.com>
+To: <nm@ti.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH v2 0/4] Add AM62x LP SK support
+Date: Mon, 30 Oct 2023 16:31:34 +0530
+Message-ID: <20231030110138.1347603-1-n-yadav@ti.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/.fvW0QEZm79jk1YVWx3AX4T";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,93 +76,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/.fvW0QEZm79jk1YVWx3AX4T
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+This series adds support of AM62x LP SK. The AM62x LP SK board
+is similar to AM62x SK but has some significant changes that
+requires different set of device tree at each stage of bootloader.
+Also refactors to have common nodes at k3-am62x-r5-sk-common.dtsi
+and k3-am62x-sk-common-u-boot.dtsi for all am62x SoC varients.
 
-On Sun, 29 Oct 2023 23:37:22 +0100
-Marek Vasut <marex@denx.de> wrote:
+Change Log:
 
-> Add support for exposing the whole mmc device by setting the 'size'
-> parameter to 0. This can be useful in case it is not clear what the
-> total device size is up front. Update the documentation accordingly.
->=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  doc/usage/dfu.rst     |  5 +++++
->  drivers/dfu/dfu_mmc.c | 10 ++++++++++
->  2 files changed, 15 insertions(+)
->=20
-> diff --git a/doc/usage/dfu.rst b/doc/usage/dfu.rst
-> index 68cacbbef66..8845a71df36 100644
-> --- a/doc/usage/dfu.rst
-> +++ b/doc/usage/dfu.rst
-> @@ -121,6 +121,11 @@ mmc
-> =20
->      with
-> =20
-> +    offset
-> +        is the offset in the device (hexadecimal without "0x")
-> +    size
-> +        is the size of the access area (hexadecimal without "0x")
-> +        or 0 which means whole device
->      partid
->          being the GPT or DOS partition index,
->      num
-> diff --git a/drivers/dfu/dfu_mmc.c b/drivers/dfu/dfu_mmc.c
-> index cdb3c18b01d..12c54e90ef7 100644
-> --- a/drivers/dfu/dfu_mmc.c
-> +++ b/drivers/dfu/dfu_mmc.c
-> @@ -386,6 +386,16 @@ int dfu_fill_entity_mmc(struct dfu_entity *dfu,
-> char *devstr, char **argv, int a dfu->data.mmc.lba_size
-> 	=3D third_arg; dfu->data.mmc.lba_blk_size	=3D
-> mmc->read_bl_len;=20
-> +		/*
-> +		 * In case the size is zero (i.e. mmc raw 0x10 0),
-> +		 * assume the user intends to use whole device.
-> +		 */
-> +		if (third_arg =3D=3D 0) {
-> +			struct blk_desc *blk_dev =3D
-> mmc_get_blk_desc(mmc); +
-> +			dfu->data.mmc.lba_size =3D blk_dev->lba;
-> +		}
-> +
->  		/*
->  		 * Check for an extra entry at dfu_alt_info env
-> variable
->  		 * specifying the mmc HW defined partition number
+V1 -> V2:
+ - Added deltas for board documentation.
+ - Updated commit messgae to include board schematics.
+ - Replace 'bootph-pre-ram' from 'bootph-all' in u-boot.dtsi
+ - Removed memory node from k3-am62-r5-lp-sk.dts
+ - Updated DDR part on k3-am62x-ddr-lp4-50-800-800.dtsi
+ - Squashed binman.dtsi into k3-am62-lp-sk-u-boot.dtsi
+ - Removed am62xlpsk.env environment, for now using am62.env
 
-Reviewed-by: Lukasz Majewski <lukma@denx.de>
+V1: https://lore.kernel.org/all/20230927082105.3729470-1-n-yadav@ti.com/
 
+Nitin Yadav (4):
+  arm: dts: Refactor common dtsi file for R5 and A53 SPL
+  arm: dts: Add support for AM62x LP SK
+  board: ti: am62x: add am62x_lpsk_*_defconfigs fragments
+  doc: ti: Add AM62x LP SK Board information
 
-Best regards,
+ arch/arm/dts/Makefile                         |    2 +
+ arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi        |   32 +
+ arch/arm/dts/k3-am62-lp-sk.dts                |  231 ++
+ arch/arm/dts/k3-am62-r5-lp-sk.dts             |   12 +
+ arch/arm/dts/k3-am625-r5-sk.dts               |   94 +-
+ arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  110 +-
+ arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi | 2190 +++++++++++++++++
+ arch/arm/dts/k3-am62x-r5-sk-common.dtsi       |   96 +
+ arch/arm/dts/k3-am62x-sk-common-u-boot.dtsi   |  109 +
+ board/ti/am62x/am62x_lpsk_a53.config          |    5 +
+ board/ti/am62x/am62x_lpsk_r5.config           |    5 +
+ doc/board/ti/am62x_sk.rst                     |    8 +
+ 12 files changed, 2696 insertions(+), 198 deletions(-)
+ create mode 100644 arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am62-lp-sk.dts
+ create mode 100644 arch/arm/dts/k3-am62-r5-lp-sk.dts
+ create mode 100644 arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+ create mode 100644 arch/arm/dts/k3-am62x-r5-sk-common.dtsi
+ create mode 100644 arch/arm/dts/k3-am62x-sk-common-u-boot.dtsi
+ create mode 100644 board/ti/am62x/am62x_lpsk_a53.config
+ create mode 100644 board/ti/am62x/am62x_lpsk_r5.config
 
-Lukasz Majewski
+-- 
+2.25.1
 
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/.fvW0QEZm79jk1YVWx3AX4T
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmU/bxcACgkQAR8vZIA0
-zr0XRQf/WikF6D1sZEwc6+NWlHUc+Rwhc15NYK08ZPwci6iCj+EbCTKyk+oprKvb
-6zNntAW237wL/GB2uY6RIdqaQX12yGRtVpCbLl+HFbzqhmgC35c7vqRGokglRuWz
-CmWYsIFlC/eElFdxKtvftyZj1QOcpWOvXZhLlE//VPU5Rd0t8W6kUqyD9GNLJw0D
-73Z9eQIDefAINrAz4He19117k6y0rlD5niHCnlD6rgornD3GhjL9+dV2uplM5IAo
-SGBqy5A+FskHYQgTLp8xGLEUFu5SnOysHHAjmIVFG4hpQoNb8kQbqowgBpHUnfRq
-5vEn0+Z4BeFYMbdmkrry64BV+do9PA==
-=SRCw
------END PGP SIGNATURE-----
-
---Sig_/.fvW0QEZm79jk1YVWx3AX4T--
