@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40DCCC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 15:24:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FEFEC4167D
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 15:35:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F81587266;
-	Mon, 30 Oct 2023 16:24:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 425F18709A;
+	Mon, 30 Oct 2023 16:35:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=armlinux.org.uk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sczpvi7m";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=armlinux.org.uk header.i=@armlinux.org.uk header.b="LV7D/IWy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1198287122; Mon, 30 Oct 2023 16:24:45 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 33DCF8709B; Mon, 30 Oct 2023 16:35:47 +0100 (CET)
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk
+ [IPv6:2001:4d48:ad52:32c8:5054:ff:fe00:142])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57EDE87A34
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 16:24:42 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-66cfd35f595so27195666d6.2
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 08:24:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698679481; x=1699284281; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hdaAN5YPp/CHC2JW37FOm0DxydaCCaL5wWShcy4/8Fg=;
- b=Sczpvi7mLV+uqy+TIO8xhzzv047KGXqYA4dGn2+pP+o8iLLQdnfmX+zCSocrb0t5dI
- Kst9+STOVkhsLSmetU8YElSQQFPQW3FulSkeN2qMAFxdV+BjYRh+UDyLkdL2kXyovmKa
- FlwZ6n7iCMl79OPB6Hd3wNG20Yb6EkOT5GaWw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698679481; x=1699284281;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hdaAN5YPp/CHC2JW37FOm0DxydaCCaL5wWShcy4/8Fg=;
- b=EGDeGr7oxdoq787HA8vWNTJoZErMNqetV+ISLhK0owS4HuIO4+O1q7Jg6tzN+PEDwo
- FopVN5RCpRAgqe4hVLAjjHuDk8pDClu014NcndTN4mpt4sTR4U3/Rw/QuSO39Kj1sd9r
- 15YHGR7B8viPKCc5aLr9mtQilYXzVSg9xiNq9XqQ31jex4BRe1k4IYSuBHpsMvHf6Cpl
- OqHJffQJO56lAArXUTdwRyb+4TLKEAzYP/GkuiVinte6t4mr4040Q5SO9QOSYCLJRpoI
- 7jtoNWMWxorAF6Rm//+lrNeH8zqf/vnYAkFfb+mO+aKvajluBIzw245mCm+q99QD5tTB
- JMRg==
-X-Gm-Message-State: AOJu0YwZ8Vz7AOLyzPySvbQHdA/zn328JvW+vesyYdl3GTwNOukOwfcg
- Gm+WBCkAypxH6iEcKrr9QUHI4Q==
-X-Google-Smtp-Source: AGHT+IHGpyNsX8MWTN1+SO/bst66HJZYwVvbPlnSd+nPNrPXRxFjEe258EL5hBmR95V62so1DanmoA==
-X-Received: by 2002:ad4:5e87:0:b0:66d:2785:a2b0 with SMTP id
- jl7-20020ad45e87000000b0066d2785a2b0mr11668781qvb.29.1698679480882; 
- Mon, 30 Oct 2023 08:24:40 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- z16-20020a0cfc10000000b0065b24c08994sm2593311qvo.128.2023.10.30.08.24.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Oct 2023 08:24:40 -0700 (PDT)
-Date: Mon, 30 Oct 2023 11:24:38 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] dm: core: Report bootph-pre-ram/sram node as
- pre-reloc after relocation
-Message-ID: <20231030152438.GA3621286@bill-the-cat>
-References: <20230820220316.3517102-1-jonas@kwiboo.se>
+ by phobos.denx.de (Postfix) with ESMTPS id D06B98702F
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 16:35:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=armlinux.org.uk
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=linux+u-boot=lists.denx.de@armlinux.org.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=WE1tsrC5nD1he3EQ3Z3HGaPKaykIF9HkdVI/EJRhi6c=; b=LV7D/IWyq2Mw7vTdVg1EkrxxC1
+ fzJ5yRFzlAYj4fcJjzZtnGfpsXsCDVpO/UNR4YqP7qxjUUybZ7nZGyfZdxNL8kBxxQkTNHp25yUtf
+ 2KJzm3FlMnAL5p+Qfjj1+ikr/MrjmBoYN+ASKZakexZnFd/Jo54EhdMWhyKesftBsfU5qrKyX8seW
+ 2UDWVakMncsXCtbJFuOdiZGI2aEPV89Xh1oXklyVX3NGQmGLi6KaY+dx3jnwOaLBVjTYN0oid1QbQ
+ 0DQd3kQw+sLq/tI01uxlHkEV+3NVgkTq8vOAmgPzCLveX2HVgoTtA134mT1CT67pbwFxd0FsFsTiv
+ mF5Xt6Vw==;
+Received: from shell.armlinux.org.uk
+ ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:53860)
+ by pandora.armlinux.org.uk with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <linux@armlinux.org.uk>) id 1qxUIh-0001q0-2T;
+ Mon, 30 Oct 2023 15:35:35 +0000
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
+ (envelope-from <linux@shell.armlinux.org.uk>)
+ id 1qxUIg-00047C-OV; Mon, 30 Oct 2023 15:35:34 +0000
+Date: Mon, 30 Oct 2023 15:35:34 +0000
+From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+To: Simon Glass <sjg@chromium.org>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>,
+ Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
+ Will Deacon <will@kernel.org>, linux-kbuild@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/3] arm64: boot: Support Flat Image Tree
+Message-ID: <ZT/NRvLkvR8uuP5+@shell.armlinux.org.uk>
+References: <20231026072628.4115527-1-sjg@chromium.org>
+ <20231026072628.4115527-4-sjg@chromium.org>
+ <CAK7LNASATGRaS-6QxzqTEq7qNVkZPXOBE8pfRBg=2bQGyy3=yw@mail.gmail.com>
+ <CAFLszThguWT0u0R0EHfpBro0f-pWDwLOGk+5pQZEVhFYNKH8fQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d4Gtrk5iK85tNlkQ"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230820220316.3517102-1-jonas@kwiboo.se>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAFLszThguWT0u0R0EHfpBro0f-pWDwLOGk+5pQZEVhFYNKH8fQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,64 +85,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, Oct 29, 2023 at 05:46:12AM +1300, Simon Glass wrote:
+> Hi Masahiro,
+> 
+> Sure, but that is a separate issue, isn't it? We already support
+> various boot targets in arm64 but not one that includes the DTs, so
+> far as I can see. The old arm 'uImage' target is pretty out-of-date
+> now.
 
---d4Gtrk5iK85tNlkQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Does that mean it can be removed? ;)
 
-On Sun, Aug 20, 2023 at 10:03:18PM +0000, Jonas Karlman wrote:
+I've NAK'd FIT support on 32-bit Arm in the past, and I remain of the
+opinion that boot loader specific packaging of the kernel should not
+be in the kernel but should be external to it - even more so given the
+multi-platform nature of 32-bit Arm kernels.
 
-> Nodes with bootph-pre-sram/ram props are bound in multiple phases:
-> 1. At TPL (bootph-pre-sram) or SPL (bootph-pre-ram) phase
-> 2. At U-Boot proper pre-relocation phase
-> 3. At U-Boot proper normal phase
->=20
-> However the binding and U-Boot Driver Model documentation indicate that
-> only nodes marked with bootph-all or bootph-some-ram should be bound in
-> the U-Boot proper pre-relocation phase.
->=20
-> Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram prop
-> with a pre-reloc status only after U-Boot proper pre-relocation phase.
-> Also update the ofnode_pre_reloc documentation to closer reflect the
-> binding and driver model documentation.
->=20
-> This changes behavior of what nodes are bound in the U-Boot proper
-> pre-relocation phase. Change to bootph-all or add bootph-some-ram prop
-> to restore prior behavior.
->=20
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-
-I'm following up here now that this is committed because there's been a
-large number of commits to update dts files because of the change this
-commit makes. And I know there's other platforms still broken that need
-the same update. And it seems the change is almos always to mark more
-(or all!) nodes as bootph-all. So, is this patch really correct, and
-really what we want to be doing here? I was not expecting this much
-fallout when I saw this come in. Thanks.
-
---=20
-Tom
-
---d4Gtrk5iK85tNlkQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmU/yrMACgkQFHw5/5Y0
-tyxLTgv4xAR66dcrTchgUYR4TgAr+uXI5i0OI757C9opiqQMvCGRgc1S15szuDzV
-mtvxxKzlDj8mNC6GU50QmWnlmKMAa+0/aOK+qyBgKYma3MGnswNVjL54+XNLSXAX
-FpH2aHofUfDoQxK0Ckom/v+MX4NYlmX2Mqe0DgbfJ/mEuz0OuUHJCDdYKs5h79tf
-PTt+h6g3Y7vWpG8D+zVNBEVdhAD27qhLLQxAM/JF6oy/ibswiSoGTMbl3kR0XdGw
-3IFew4LZ79QokOtpOm70NA5N/V1vTIG0Gb8Raa981M0nS/KvrBfKC8YyzgJSHfUN
-XnfoiMv1Wbxnns4gEpoWrChSkY08Gfs6Jx/NgSl7olLjHQKncZvBJRh/8F9/qX3J
-/g8wJYxzrRTxPISNb2Qiuj4R0xGRynQ7KG05wua6W3FZrIULSSalSyN/dL3G5NGj
-eWl1lcqYRc9+xJnuC4NH/iQmq4CnG/7d2q1ocnsRFM3DjYwoGDXtRNK0pnUNKNZt
-yW4ppxE=
-=qHdD
------END PGP SIGNATURE-----
-
---d4Gtrk5iK85tNlkQ--
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
