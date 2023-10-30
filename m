@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A72C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 19:47:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC39C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 21:35:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0B4B8722B;
-	Mon, 30 Oct 2023 20:47:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E855187505;
+	Mon, 30 Oct 2023 22:35:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WW2b/6dk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g+uRGByl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51E9386FB0; Mon, 30 Oct 2023 20:47:14 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 7165E87508; Mon, 30 Oct 2023 22:35:40 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4626C8722B
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 20:47:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D0D8874B0
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 22:35:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a7dd65052aso48913687b3.0
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 12:47:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a7b3d33663so50007687b3.3
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 14:35:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698695231; x=1699300031; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nYio7TTfgkkRK3hfj2MijHWHgu4fLI7UDIzCtBsZHyM=;
- b=WW2b/6dkowYXY6NJAaypIB2T7tu9AJ+cN4IeZ0qdz+yqoA8DjUG1sd7OKkSHrqDxra
- eYuTCtU4og5YS+PgoiX2uwn9sOoAdneqgoU7/mYT7/6mFdZQP5tHzqttBNqSJcf4kB64
- XMCq7TErYeQ5E1YxEjuEg2Qg4YZsVQR7MmOW98AppCfKIA6BBD6hEZQFyDnfSV3PEPfM
- yibdLKE0yAOK0ns/zUsZ5xs0l3lVr+yTy1x9m60OXqMpKpow5LqCF9GHqNB6wcqS8rIc
- F7GXL7/TQaghtzTy5MaLslTWfnj1Wgoh8e2M2cEPwrdzGFkZivbeF2h63V0e4bFD4J5+
- 6YfA==
+ d=konsulko.com; s=google; t=1698701736; x=1699306536; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=N7W8zE96IIcHxX+OPQBkDmD/nNHheFM9ViE10G3yblY=;
+ b=g+uRGBylkJHoOkAVySdZLLxdNEroDY5l2u3J2K1+e3L+5YP0AyZNFb+M18jzEKbz/Y
+ Q3flEYDcQG8lmeCyd0Z5rPNhM1yrSNDpy4tbgek/16BoNZgAZ0rKoYOK4ah8zyRuKqqw
+ HX8p4uX+kqG5OJBAF/t5Cn5QUfd6SJM8JqV50=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698695231; x=1699300031;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nYio7TTfgkkRK3hfj2MijHWHgu4fLI7UDIzCtBsZHyM=;
- b=NRgESUaIIj1i/gE15RcNUMoyfhpOtbf0i1gtjbmeLgfjU7fw3d1FFZbxUrK3p7v2nD
- HArCR3Xtn7c+2PvmvXUxOrW7qHYoIQFrGKH/5aCWhoMfEbKt2yUbKv50YlrlGiRm0rjG
- YwEKFKeq6qYCitb8DlSxpS5F0n189bb9aNaJe6qVlVTIEqj/uuJiNH7K2ZOMsEYOvAdz
- 5p8yKyPmHgWrzyojjUDGDPzCUAuzFbpDh9PnMTrHurbceUhzV+Zf+bqRr0MKADYN0hc2
- REXasJ57d723QcPXaPD84BZEfT0Q09F0dShV8NjtneTiGLw+G+k8KkanZNfP8ppExXs8
- Uutg==
-X-Gm-Message-State: AOJu0Yy8Kgi7SARxAtq24N6zEmn0yrYWnanH2IYGSRKObqOWRnGE6Ar6
- LCcgX/oD6s3ijC+wt/uryTw=
-X-Google-Smtp-Source: AGHT+IFpUpWb4w/FoN3qBBERJ6FyldwU/vwcckfS4e7a7rL4ThC8LTuh+ovFvQEf2MKY7lPF0p9ZBA==
-X-Received: by 2002:a81:c64b:0:b0:578:5e60:dcc9 with SMTP id
- q11-20020a81c64b000000b005785e60dcc9mr9872811ywj.10.1698695230883; 
- Mon, 30 Oct 2023 12:47:10 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- h13-20020a81b40d000000b0058fc7604f45sm59189ywi.130.2023.10.30.12.47.09
+ d=1e100.net; s=20230601; t=1698701736; x=1699306536;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N7W8zE96IIcHxX+OPQBkDmD/nNHheFM9ViE10G3yblY=;
+ b=euS0UuP7pmkeRB1OCUyVEWMB4FESE3EA+3PmhpaJOV6YYzYQ/q/2kJSu7pKJVPznrW
+ o6Tto4M88KcfFvL6hCTvb1Ve8kP4h2dCSw5bxCLQe5dVu4NQib/izGpqnMJgW6tO7mDZ
+ EDYME8r1Glz/U0v4AiAj0pTX4Wyt7HQQOQk1Mq8PQFE0O1Ifv9fjYZ4xJV4oWTyd+01w
+ iM3cviPvU7TR7BZ3SB35NuFF01kKl0w2BcfchAJnWm53VxlvzjVe0sJmjtCtHGmc9Fj4
+ rMRpLd0pQQWb8DYI9w+seBAwsFZVC9sQ+tXgVKd6NjCpFJDELdC3OFZ+SZuTPQIt+xx3
+ kQpg==
+X-Gm-Message-State: AOJu0YwRyviV/iPyWqbsUtuvaKh7UMm5XgY5RIa5VaLNxNc5iaCY9CiM
+ 2U/qi24M+wR39yvcWd5S13XjTw==
+X-Google-Smtp-Source: AGHT+IFqyPeWIGwKrkJEq12pNp4vRhABmZJGtoW2nft6uVI9jXhIEiWVZfxG/y2Tla9wnGIGRTCysQ==
+X-Received: by 2002:a25:ad03:0:b0:d9c:a583:9db0 with SMTP id
+ y3-20020a25ad03000000b00d9ca5839db0mr10099792ybi.39.1698701736499; 
+ Mon, 30 Oct 2023 14:35:36 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ r13-20020a0cf60d000000b0065b12c7a48dsm3746877qvm.133.2023.10.30.14.35.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Oct 2023 12:47:09 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Stefan Roese <sr@denx.de>,
-	Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH] bootstd: Skip over bad device during bootflows scanning
-Date: Mon, 30 Oct 2023 12:46:49 -0700
-Message-Id: <20231030194650.11594-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ Mon, 30 Oct 2023 14:35:36 -0700 (PDT)
+Date: Mon, 30 Oct 2023 17:35:34 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: Re: [PULL] u-boot-sh/master_tmio_fixes
+Message-ID: <20231030213534.GY496310@bill-the-cat>
+References: <20231028155605.1983833-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Wqb1Iv2Znv7ikM59"
+Content-Disposition: inline
+In-Reply-To: <20231028155605.1983833-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During scanning for the next bootdev, if bootdev_next_prio() encounters
-a device error (e.g. ENOSYS), let it continue scanning the next devices,
-not stopping prematurely.
 
-Background:
+--Wqb1Iv2Znv7ikM59
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-During scanning for bootflows, it's possible for bootstd to encounter a
-faulty device controller. Also when the same u-boot is used for another
-variant of the same board, some device controller such as SATA might
-not exist.
+On Sat, Oct 28, 2023 at 05:55:35PM +0200, Marek Vasut wrote:
 
-I've found this issue while converting the Marvell Sheevaplug board to
-use bootstd. This board has 2 variants, the original Sheevaplug has MMC and
-USB only, but the later variant comes with USB, MMC, and eSATA ports. We
-have been using the same u-boot (starting with CONFIG_IDE and later with DM
-CONFIG_SATA) for both variants. This worked well with the old
-envs-scripting booting scheme.
+> The following changes since commit fb428b61819444b9337075f49c72f326f5d120=
+85:
+>=20
+>   Merge branch '2023-10-24-assorted-general-fixes-and-updates' (2023-10-2=
+4 19:12:21 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sh.git master_tmio_fixes
+>=20
+> for you to fetch changes up to 1332bdc2df7f71727e3cb9ca3f45b27b9e7b5531:
+>=20
+>   mmc: tmio: Disable 1/1024 clock divider on Renesas R-Car platforms (202=
+3-10-27 11:21:28 +0200)
+>=20
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+Applied to u-boot/master, thanks!
 
- boot/bootdev-uclass.c | 2 --
- 1 file changed, 2 deletions(-)
+--=20
+Tom
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 44ae98a926..b1d48e5b69 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -677,8 +677,6 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
- 							BOOTFLOWIF_SHOW);
- 				log_debug("- bootdev_hunt_prio() ret %d\n",
- 					  ret);
--				if (ret)
--					return log_msg_ret("hun", ret);
- 			}
- 		} else {
- 			ret = device_probe(dev);
--- 
-2.39.2
+--Wqb1Iv2Znv7ikM59
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVAIaAACgkQFHw5/5Y0
+tyzrxwv+KZ49g6J3rsq/vAOdmPF9DxGss1HOAuwDcNiFY0/peiRXts/3VDp9JZpZ
+H4Wu+iZSDhtpLoXhPxGSvCmBN61+QpvhdF5FAZxiJvAwrvu/OkEzA2Eq8l3LZI0O
+MZM5cuZerKgvpYxzbSnKFNRqtAJ/XKN0cMzwTcvhg/2Csgw97/Aaes4WckRur/hm
+hPRa+GY2Dag6/8RkgbIM2JsXxthBvwNMT9pwmtJzwSm/9I0Ma8ybyjRnyomntZMN
+DQ+tPXOAjbHnoAvuvDOJLpomT1aP87vMQQEk0X2hX6i5GPy6NUqZnBv1z/mhjZTK
+L0crePPADfEt6mhebosdtRGCDMOSerJn5giNcC9wL37nUYBQnML43v5C2QZdxRf0
+dbDTfSrzelgbNx9BXVuvP3MrHduGlSgD+QoApHajb9KH/gt7guqSblsGNQPao9nO
+DAKxrKrv7QVOOhl2Qsr2GYg3VPmFqDuwkR/h9EmPA6Mq0v2o7ZWqm8V5UzJqlz+n
+Vk4WEc92
+=UVae
+-----END PGP SIGNATURE-----
+
+--Wqb1Iv2Znv7ikM59--
