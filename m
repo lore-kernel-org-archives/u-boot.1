@@ -4,107 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF2CC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 21:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8541CC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 22:23:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2DBA87A02;
-	Mon, 30 Oct 2023 22:37:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DA71879AF;
+	Mon, 30 Oct 2023 23:23:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bszRQTM6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aE1IXCMD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 819B1879FD; Mon, 30 Oct 2023 22:35:52 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id 93EBF87514; Mon, 30 Oct 2023 23:23:32 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BB5B87A02
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 22:35:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C021879C0
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 23:23:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6d261cb07dcso3271762a34.3
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 14:35:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40907b82ab9so35519875e9.1
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 15:23:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698701749; x=1699306549; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uuL8zJtkzeP8eaSCl8I1cfJNgeIdJ2bpt21Ixa26rLc=;
- b=bszRQTM6zxpRkHPIIO39nXPSyc5AcTbehTscP7x2do5OZszOQVpjsxIFUyHKB3aJFX
- lVXYsbK6Cyxr/An70tRtcJIr8g9Vxh3JdsPl1VqykHdnla+KqLrbQ+ShovjPRdtx9DYp
- BRRos5gS80jP0qYxkoGEIHoh3ZbiJS6npd3oA=
+ d=linaro.org; s=google; t=1698704610; x=1699309410; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=8wlFfos2cRiV+7DflEcMW8UNCaGluy6P9E+KmOAgq0s=;
+ b=aE1IXCMDbFcSpoN+XWO1p5q833fI8ctsQ6pO6aTZmMFrEmv5GlkltDuLT3kjkAuHIw
+ 248JcnCjqtv7d87OljoEBuggg9q0UPXU6ajbXUfFIKyNyiPSSV6QUs59YaHhgamc/DWi
+ OYxNLdEN8RejQ9VhnwJj56qh1MaC0OLcHAgPJg5O9wtT7OOUMSUqTN+S4TyVOZi0A15/
+ GUfLMCpbQq9Gieb21t+CpKE4ZO5fcwOi5USwHw6A4LwA3EhVseStIR9Y9w+s8WBWho9T
+ yKZiFnqAe8BFFE0OZKvYwPAJFMUUIdukeSL1ZvhYSTuLfdVcnoWCUewoWjADgK9jQ8IA
+ 1r/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698701749; x=1699306549;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uuL8zJtkzeP8eaSCl8I1cfJNgeIdJ2bpt21Ixa26rLc=;
- b=UF9FbcMBujcSvI4LKa8qCbRlMwLYkZemZ8l9mWKVNzryN+fNktYWzg4/KeGSdlMZ8f
- R1qQ3xV3T8t8SNxG6b7PcLUdDrujwXjDgrLVgmgdlNB+1F3b3h5qaH49zmOaueEAtQjK
- fVWCXkEPkkeLmn0Svqt5Bdd19Z2kSbDO+dSrnKUJRjCzjy/sY6fKnIALHkogIdRQqYBf
- hRyVQK89rQ6dZfNvvYYI9vPmCIV5nWfJZZzKJgp9u8naZ6ZZNvYkmRtYaxI5jhQPdwKF
- ZOEpTut+bn4OpdDndFjqqcMKNqX4aSuKKUWfAswJpKnQ69M2ocWVvrnegQv0a+wKZrL3
- Bhhw==
-X-Gm-Message-State: AOJu0YyODIIfX9ERod++zp448tyxbJmGYGZeukrDf5NT8jX9R5sk5GA/
- R+YZWl2B2qCEE5XGd1vO5xQMVw==
-X-Google-Smtp-Source: AGHT+IGnq1/OF2xBFg3p18nAme47Ru8AuL9mZKBFVLtfluPIbe4VptkPmgr1NliyUD7iUCtJsjOtZg==
-X-Received: by 2002:a05:6830:22f7:b0:6c6:3ea5:cdbe with SMTP id
- t23-20020a05683022f700b006c63ea5cdbemr10316984otc.18.1698701749105; 
- Mon, 30 Oct 2023 14:35:49 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- js25-20020a05622a809900b0041b7f89ad19sm3753849qtb.53.2023.10.30.14.35.46
+ d=1e100.net; s=20230601; t=1698704610; x=1699309410;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8wlFfos2cRiV+7DflEcMW8UNCaGluy6P9E+KmOAgq0s=;
+ b=DeK7qPtl8bzOBg3rEgjpxaznV64cLXXFdvcYBpNpILxLjWHADgWrgQIJqFnISH170U
+ xVjzTqTmZPrhX/iuDyh+svfjbK/LRM93L3vYQhzSQn1WefruAol8aMCVmsTbLtjKF+Km
+ SBidHgYnrqCAaq7QUXDyMVZuksS331QSziY0rUJZBQHX6/VM7Cw8yK/mgaGhuuDcQR4N
+ ft27E9YhpXm7GiWCIMxH+RZk4f0dcCPvUy1R08LWi/ByN1mNgvzJtIZZHYNg9Hy9oMeQ
+ uYeycoecB/5Pd+FDNw1xMxoxDul/eqlp4ZxqlIG+shWPEp6ub9TI8BY8nmRcUAXG68eD
+ g2fg==
+X-Gm-Message-State: AOJu0Yx+85d9tajXO6oH62TOwUN4XEyfgmhOvh2qPSbezHWdivUpq9xW
+ 2EBz82SloMXm8UBsTRkUWP6Ppg==
+X-Google-Smtp-Source: AGHT+IElbXYuiU8uGo4jkpZnXU3UF55jc8tjrO8Zko1FMocgDFPHbLdYnmrubspynwcoW0iKFYfBYQ==
+X-Received: by 2002:a5d:64a9:0:b0:32d:ddb9:289f with SMTP id
+ m9-20020a5d64a9000000b0032dddb9289fmr1116810wrp.34.1698704610070; 
+ Mon, 30 Oct 2023 15:23:30 -0700 (PDT)
+Received: from lion.localdomain (host-92-25-138-185.as13285.net.
+ [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
+ n20-20020a05600c465400b0040588d85b3asm6651wmo.15.2023.10.30.15.23.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Oct 2023 14:35:48 -0700 (PDT)
-Date: Mon, 30 Oct 2023 17:35:44 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com, takahiro.akashi@linaro.org,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexey Romanov <avromanov@sberdevices.ru>,
- Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- Bin Meng <bmeng.cn@gmail.com>, Chris Packham <judge.packham@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Fabio Estevam <festevam@gmail.com>, Gaurav Jain <gaurav.jain@nxp.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Huan Wang <alison.wang@nxp.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>,
- Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Leo <ycliang@andestech.com>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Qu Wenruo <wqu@suse.com>, Ramon Fried <rfried.dev@gmail.com>,
- Rick Chen <rick@andestech.com>, Roger Knecht <rknecht@pm.me>,
- Roger Quadros <rogerq@kernel.org>, Samuel Holland <samuel@sholland.org>,
- Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- Tom Warren <twarren@nvidia.com>, Vignesh R <vigneshr@ti.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Subject: Re: [PATCH] Kconfig: Remove all default n/no options
-Message-ID: <20231030213544.GA496310@bill-the-cat>
-References: <e3bb5522913c8a917feb7d6309a693f7ee5dbe25.1698218728.git.michal.simek@amd.com>
+ Mon, 30 Oct 2023 15:23:29 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Date: Mon, 30 Oct 2023 22:23:24 +0000
+Subject: [PATCH v2 2/7] clk/qcom: move ipq4019 driver from mach-ipq40xx
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2UM+0h7cja2gNJuT"
-Content-Disposition: inline
-In-Reply-To: <e3bb5522913c8a917feb7d6309a693f7ee5dbe25.1698218728.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Mon, 30 Oct 2023 22:37:32 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20231024-b4-qcom-clk-v2-2-6572bc2be690@linaro.org>
+References: <20231024-b4-qcom-clk-v2-0-6572bc2be690@linaro.org>
+In-Reply-To: <20231024-b4-qcom-clk-v2-0-6572bc2be690@linaro.org>
+To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Robert Marko <robert.marko@sartura.hr>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Luka Perkov <luka.perkov@sartura.hr>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.13-dev-46309
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4583;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=BB3eRYwzJOgZGWxovbINxwebhUzIEsxgWoscfRmUlb4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlQHnfs9tyd3R1XeknMV61myJNLn48ndE9zumv0s8HL+7
+ bU4kudeRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIDx+G/8X3O5p6/9Z3pcxa
+ nGG5f+npbnU+xvqGMM2tr7Ou9Id3bmZkmFkVwvDYisW1c9kpu2OXphveTGN9st57lsbUxrX7qkJ
+ yPwMA
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,45 +108,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This driver is just a stub, but it's necessary to support the upcoming
+reset driver changes.
 
---2UM+0h7cja2gNJuT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ arch/arm/Kconfig                                   |  1 +
+ arch/arm/mach-ipq40xx/Makefile                     |  1 -
+ drivers/clk/qcom/Kconfig                           |  8 +++++
+ drivers/clk/qcom/Makefile                          |  1 +
+ .../clk/qcom}/clock-ipq4019.c                      | 41 ++--------------------
+ drivers/clk/qcom/clock-qcom.c                      |  1 +
+ 6 files changed, 13 insertions(+), 40 deletions(-)
 
-On Wed, Oct 25, 2023 at 09:25:37AM +0200, Michal Simek wrote:
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 531b081de996..5aaf7e5e32af 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -766,6 +766,7 @@ config ARCH_IPQ40XX
+ 	select CLK
+ 	select SMEM
+ 	select OF_CONTROL
++	select CLK_QCOM_IPQ4019
+ 	imply CMD_DM
+ 
+ config ARCH_KEYSTONE
+diff --git a/arch/arm/mach-ipq40xx/Makefile b/arch/arm/mach-ipq40xx/Makefile
+index 08a65b8854d3..b36a935c6f9f 100644
+--- a/arch/arm/mach-ipq40xx/Makefile
++++ b/arch/arm/mach-ipq40xx/Makefile
+@@ -4,6 +4,5 @@
+ #
+ # Author: Robert Marko <robert.marko@sartura.hr>
+ 
+-obj-y += clock-ipq4019.o
+ obj-y += pinctrl-snapdragon.o
+ obj-y += pinctrl-ipq4019.o
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index a884f077d9b9..0df0d1881a49 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -23,6 +23,14 @@ config CLK_QCOM_APQ8096
+ 	  on the Snapdragon APQ8096 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
+ 
++config CLK_QCOM_IPQ4019
++	bool "Qualcomm IPQ4019 GCC"
++	select CLK_QCOM
++	help
++	  Say Y here to enable support for the Global Clock Controller
++	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
++	  and resets exposed by the GCC hardware block.
++
+ config CLK_QCOM_QCS404
+ 	bool "Qualcomm QCS404 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index 44d55583596d..cb179fdac583 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -6,4 +6,5 @@ obj-y += clock-qcom.o
+ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+ obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+ obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
++obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+ obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+diff --git a/arch/arm/mach-ipq40xx/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
+similarity index 56%
+rename from arch/arm/mach-ipq40xx/clock-ipq4019.c
+rename to drivers/clk/qcom/clock-ipq4019.c
+index c1d5c4ecdd81..04c99964df15 100644
+--- a/arch/arm/mach-ipq40xx/clock-ipq4019.c
++++ b/drivers/clk/qcom/clock-ipq4019.c
+@@ -12,12 +12,9 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+-
+ #include <dt-bindings/clock/qcom,ipq4019-gcc.h>
+ 
+-struct msm_clk_priv {
+-	phys_addr_t base;
+-};
++#include "clock-qcom.h"
+ 
+ ulong msm_set_rate(struct clk *clk, ulong rate)
+ {
+@@ -30,23 +27,7 @@ ulong msm_set_rate(struct clk *clk, ulong rate)
+ 	}
+ }
+ 
+-static int msm_clk_probe(struct udevice *dev)
+-{
+-	struct msm_clk_priv *priv = dev_get_priv(dev);
+-
+-	priv->base = dev_read_addr(dev);
+-	if (priv->base == FDT_ADDR_T_NONE)
+-		return -EINVAL;
+-
+-	return 0;
+-}
+-
+-static ulong msm_clk_set_rate(struct clk *clk, ulong rate)
+-{
+-	return msm_set_rate(clk, rate);
+-}
+-
+-static int msm_enable(struct clk *clk)
++int msm_enable(struct clk *clk)
+ {
+ 	switch (clk->id) {
+ 	case GCC_BLSP1_QUP1_SPI_APPS_CLK: /*SPI1*/
+@@ -68,21 +49,3 @@ static int msm_enable(struct clk *clk)
+ 	}
+ }
+ 
+-static struct clk_ops msm_clk_ops = {
+-	.set_rate = msm_clk_set_rate,
+-	.enable = msm_enable,
+-};
+-
+-static const struct udevice_id msm_clk_ids[] = {
+-	{ .compatible = "qcom,gcc-ipq4019" },
+-	{ }
+-};
+-
+-U_BOOT_DRIVER(clk_msm) = {
+-	.name		= "clk_msm",
+-	.id		= UCLASS_CLK,
+-	.of_match	= msm_clk_ids,
+-	.ops		= &msm_clk_ops,
+-	.priv_auto	= sizeof(struct msm_clk_priv),
+-	.probe		= msm_clk_probe,
+-};
+diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+index 5667abeb89a4..5914616fba5d 100644
+--- a/drivers/clk/qcom/clock-qcom.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -166,6 +166,7 @@ static const struct udevice_id msm_clk_ids[] = {
+ 	{ .compatible = "qcom,gcc-apq8016" },
+ 	{ .compatible = "qcom,gcc-msm8996" },
+ 	{ .compatible = "qcom,gcc-apq8096" },
++	{ .compatible = "qcom,gcc-ipq4019" },
+ 	{ .compatible = "qcom,gcc-sdm845" },
+ 	{ .compatible = "qcom,gcc-qcs404" },
+ 	{ }
 
-> Similar change was done by commit b4c2c151b14b ("Kconfig: Remove all
-> default n/no options") and again sync is required.
->=20
-> default n/no doesn't need to be specified. It is default option anyway.
->=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com> # tegra
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Reviewed-by: Angelo Dureghello <angelo@kernel-space.org>
+-- 
+2.42.0
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---2UM+0h7cja2gNJuT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVAIbAACgkQFHw5/5Y0
-tyyUHgv9EJZM2dAALVUXDuuq4MrdNMmeTvQJbUg5kzns5g8s4cgJAfgocrmckROT
-ewwzz/R0H/xo+3j46eKWaSiPBRFHXS6VsTKj8Z9MZnwip8CcbHObK4+TZ9JP85s7
-tlAgPBK4/JUzkJxsYDXAhAcbySY80/O3MwPE99XjOoUhqRpUU/3pwDEeFU0ZvRem
-tT77KJ43yiu7C5tDPYo1ynGDU2egrsUVkT27/MwGWJQFQzV9sMbl7yaJD8BPNGoD
-wW9LEIRsz05qcOT8Oa6/tZ+erjnKrLuDW/IuwGvJyXHIMf/1B5O8jFKEXe3UyPBr
-VxGP9+HiFjdOUzC5FwxpJP7rTGSLSt37t+fxxAtfgJwbcb/irchPh8kLSTzSZaHs
-Hq57fl2hYitMUSSj8yoN3GQSvNiSqaIqSq1TbaXpmXPDzuqZd4VCUTnYKOL/3xdV
-s3z2QhfFQSHbZY7LsobMn5aLzxp3EkKf9oxLNTITd5AwQqG33hq5C7tZKV+Qxf6p
-PW44rEJF
-=sdw0
------END PGP SIGNATURE-----
-
---2UM+0h7cja2gNJuT--
