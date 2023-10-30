@@ -4,71 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD1CC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 11:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 941B1C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 30 Oct 2023 13:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 367D587A93;
-	Mon, 30 Oct 2023 12:44:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 544F78723C;
+	Mon, 30 Oct 2023 14:12:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ug7pDZVe";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="TBqY1kPD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="Mpn5ie+D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2877B87A9A; Mon, 30 Oct 2023 12:44:16 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BD31C879FC; Mon, 30 Oct 2023 14:12:55 +0100 (CET)
+Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
+ [64.147.123.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80CE087A91
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 12:44:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B8958706F
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 14:12:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=feathertop.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5079f9ec8d9so4861560e87.0
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 04:44:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698666253; x=1699271053; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bbJksOQpEaD6y2xSQUr3d8gkFwZ08RODD7O8PTHKirc=;
- b=ug7pDZVeB90tyfaWDSzQFfZ7RCgmjCzoK5GSSmfMq8iH19aa3rJAo3/oiRV256J5D0
- Bq62pUw4ThRHLG/HMFZZGi0EkUp4VbUSOdi9KOcoLD4vaTCcUAwXUixhXJAiTfIZfCP4
- IpTr5+/vdqykL3IGNQ2FhAAXk6SNJPDA6Sxghnm5eqJS5Y6XJLJpWJev0x5j3ZTf6gFK
- KOKG/IJT1sEs6aSqAzQDIO1CqxtgeeKuo9BOfjZJ+JG2D7FLNIXEyoQfaP0hfqMfocMV
- OdlzWWQ7DDwA/IS1msTT2RcO5SDEx/dmvSgEgP0PLHnyVCcUI1VXFu3xthNeRVsG/+fH
- lr2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698666253; x=1699271053;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bbJksOQpEaD6y2xSQUr3d8gkFwZ08RODD7O8PTHKirc=;
- b=wZblfTlQjNZllzGI5YDGbYcQts0kk4YexX80tubaLsL984iJpyG+Ef6XGV6Lser1aF
- MAYCAW+Ji13ixtip2WSGDGQXkdxPz9cAEmUmDoCGBdRFC8Ikv5ddbThD9XeRfODjqi2S
- BL+Y2pyjFdQPPYrhzqWiLOMzHHzmvtxrN05BNnm6vxy0lfTJikji7SBcH1pgJFzD4cdM
- MqLaxW6vBA/N2woEaG8KPXHNoA/BYA3tya7nLdcHL4CHu4rLX/aOHzvOeQ/1z5PZQTQw
- QPreCNJiZRK9UBRJpURqTsx/9mPQEuk4XZpgUiRD/TmqLgHpm5k6iUCOAdt3k5n7grz3
- sTKw==
-X-Gm-Message-State: AOJu0YzY+3nCD/VIE1bMLhS4znW2HE98GawPWO8usnUq0tNixz0dsstu
- Rqc9n9DckzPF8i04YdKlqCB422q7FqE/X4H/9dvp+X8jGpdR6IWF
-X-Google-Smtp-Source: AGHT+IFff7aR5G/IPklvLolq3JZn3Et7NFaajxabY6wUHrWg6BL2j7ylQFpDo2hNrB8E2azpJMzlPyV4WS0NsBhwvqc=
-X-Received: by 2002:a05:6512:3b24:b0:500:acae:30c5 with SMTP id
- f36-20020a0565123b2400b00500acae30c5mr4337428lfv.15.1698666252751; Mon, 30
- Oct 2023 04:44:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=tim@feathertop.org
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.west.internal (Postfix) with ESMTP id 2FB043200945;
+ Mon, 30 Oct 2023 09:12:49 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute5.internal (MEProxy); Mon, 30 Oct 2023 09:12:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
+ h=cc:cc:content-transfer-encoding:content-type:date:date:from
+ :from:in-reply-to:message-id:mime-version:reply-to:sender
+ :subject:subject:to:to; s=fm2; t=1698671568; x=1698757968; bh=ks
+ 37gSaTemFOmfEzetYVIMPdsS3fxq5voyswwol8rvg=; b=TBqY1kPDIHL6Fji6Vk
+ vTlo/6115HLfB0iWNw6sJMADy+aR2eaZR0NJngtLTD/HMdj46oq5SuOn8AX5aNXv
+ 8iFFD0eLK4MFLKM5QlRwt3T4v0k7APSieSeq61kuGIfswDf+hruUmmIirOp3aiYd
+ svQgrTBXmUjnU4LNPTLvi5iet6lh6TiRIGD9bJQ71sc+8k5lLR8OAS5wswVIbfQG
+ JV0CbIL1wLd1vI3lVG99e8hYL1Bd2KyeLUA2bTC2TQY0zLEmOQsMGtJE+JcDy0pK
+ tlYfRp5hp0eW4D8CPy1pnQ/Fi5OojoNU4yHvrRMQeHxa/uhGUGcXXhf26evQdm8z
+ Tdrw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:message-id:mime-version:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm3; t=1698671568; x=1698757968; bh=ks37gSaTemFOm
+ fEzetYVIMPdsS3fxq5voyswwol8rvg=; b=Mpn5ie+DAecIZKpaXvJQ/xUMFBG9u
+ F1Bt3ivAsEINQD9Vj9hftBPXVf/yl6uGj/+RPtYS8FShPJyXhlk++tfKNZrVu1vW
+ GpzflI26qpC41eE9JnHOSr2Z8JqMoHhvzP8D4Ee7kcEl5Sa2ZXG5Nc4vad1S96fF
+ QzBbzwycutfLNTQzP/kdCKpWswbedU2jVeThUQiibHFAG4NHfRQzIDhw9bauBNV+
+ u063/Kp+IIAGuxgBCzgfG9Rcra+eyF6DXoPS0Kl8+pRs3iejZvuwbBxfrF+LjPjY
+ YP/rtKnMNBf5/Cm9ImEd562bP8NEkxIAyzk8R6og2SZuHggC3hU8L8LQg==
+X-ME-Sender: <xms:z6s_ZXqf0Y4EqzvQLbp2rXi_d9LpbEryz63OFYwNNzIANRj4snSraA>
+ <xme:z6s_ZRqf9jxbY7i__mg_2vPYcc8hyORT09J4C5MvvuPDdUpy2twGfy9NiURysBhqR
+ 0WxnEa86A>
+X-ME-Received: <xmr:z6s_ZUNyS7cU2vgEekjm4zf0xCLoUZC5fwWBbE0Ry1hyLF1h8qKa8eYaJ-7bVfWKLWgO4GwKJpZMfewZOrVaVMnr5wUZRtvwPzo>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddttddggeejucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepvfhimhcunfhu
+ nhhnuceothhimhesfhgvrghthhgvrhhtohhprdhorhhgqeenucggtffrrghtthgvrhhnpe
+ duhfdtveeujeejjeffieevgfdtudegfeffvedugfetteehudevteehtefgieeitdenucev
+ lhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmsehfvg
+ grthhhvghrthhophdrohhrgh
+X-ME-Proxy: <xmx:z6s_Za5Eb4g4YvML4QAs32yI0VGnsvx_EUyygVyiucMYq5q0vfZ-VQ>
+ <xmx:z6s_ZW5WwH9WCPK2CaP_FI2vrQH9tXGEr-QE9Gdjlu28tjS-hBveMQ>
+ <xmx:z6s_ZSg92sQLtUj17p6Q3RjCwmH_9gCCBwe42KdYGJdooHFKZ0hPNQ>
+ <xmx:0Ks_ZckfjoAjD1iEN4ynf4cym1ox_ZaaMZy2rxtVdpgAhZkXzZht4g>
+Feedback-ID: i1f8241ce:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 30 Oct 2023 09:12:44 -0400 (EDT)
+Received: by feathertop.org (sSMTP sendmail emulation);
+ Tue, 31 Oct 2023 00:12:41 +1100
+From: Tim Lunn <tim@feathertop.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tim Lunn <tim@feathertop.org>
+Subject: [PATCH] rockchip: dts: fix bootph tags for rv1126
+Date: Tue, 31 Oct 2023 00:12:41 +1100
+Message-Id: <20231030131241.501472-1-tim@feathertop.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20231029042817.3938657-1-sjg@chromium.org>
-In-Reply-To: <20231029042817.3938657-1-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 30 Oct 2023 13:43:36 +0200
-Message-ID: <CAC_iWjLADtFmYFgofM5ATpFK11ha8MrX0XqyNwYxATpOrA3Heg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] tpm: Start to tidy up TPM tests
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,42 +102,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Simon,
+RV1126 fails to boot on 2024.01-rc1.
 
-Apart from a nit in patch#2 this looks good.
-Pleas note that this doesn't apply on -master so please rebase
+Commit 9e64428 changed the behaviour of bootph-pre-ram, to limit
+nodes to spl phase. This caused rv1126 boards to fail to boot
+with the current dts.
 
-On Sun, 29 Oct 2023 at 06:28, Simon Glass <sjg@chromium.org> wrote:
->
-> This series is a starting point only. It tries to provide some direction
-> for how the TPM tests should be run on real hardware and on sandbox.
->
-> For sandbox, things are relatively easy since the TPM is reset before
-> each test. Tests should start up the TPM before doing anything. Tests
-> can be run in parallel, which is fine because tests are independent.
->
-> For real hardware, tests cannot be made independent, other than by
-> resetting the board, which if the hardware is correct, resets the TPM.
-> So there may be more work to do to figure that out. The approach taken
-> in this series for real hardware is to have a few tests which do init,
-> then have the rest of the tests assume that the init is done. Tests
-> that depend on the TPM already being inited can use 'tpm autostart'
-> which works OK on sandbox and real hardware.
->
->
-> Simon Glass (3):
->   tpm: sandbox: Support self-test continue in emulator
->   tpm: Convert sandbox-focussed tests to C
->   tpm: Drop unwanted special cases for sandbox
->
->  drivers/tpm/tpm_tis_sandbox.c |  1 +
->  test/dm/tpm.c                 | 77 ++++++++++++++++++++++++++-
->  test/py/tests/test_tpm2.py    | 99 ++++-------------------------------
->  3 files changed, 87 insertions(+), 90 deletions(-)
->
-> --
-> 2.42.0.820.g83a721a137-goog
->
+This patch updates the pmu/grf nodes to bootph-all tags as they are
+needed in all phases. This fixes the boot issue on rv1126 boards.
 
-Thanks
-/Ilias
+Signed-off-by: Tim Lunn <tim@feathertop.org>
+---
+ arch/arm/dts/rv1126-u-boot.dtsi | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
+index 5e348278f2..918c307743 100644
+--- a/arch/arm/dts/rv1126-u-boot.dtsi
++++ b/arch/arm/dts/rv1126-u-boot.dtsi
+@@ -26,15 +26,15 @@
+ };
+ 
+ &grf {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pmu {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pmugrf {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &xin24m {
+-- 
+2.40.1
+
