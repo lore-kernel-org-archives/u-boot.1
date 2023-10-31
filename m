@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89929C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 12:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2DBC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 12:56:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E11687C9D;
-	Tue, 31 Oct 2023 13:56:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D1CA87CBE;
+	Tue, 31 Oct 2023 13:56:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cT2SPv0B";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oa2nU/oh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 382C287C76; Tue, 31 Oct 2023 13:56:13 +0100 (CET)
+ id 817CF87C9F; Tue, 31 Oct 2023 13:56:14 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59AAF87C94
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 13:56:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A911187C9C
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 13:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -30,19 +30,19 @@ Received: from LT2ubnt.. (unknown [159.148.28.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DEABD42790; 
- Tue, 31 Oct 2023 12:56:04 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 33B4D42796; 
+ Tue, 31 Oct 2023 12:56:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1698756965;
- bh=T3QZ9S0V89vfZ/vdOrO6JpAXN/7cGcJpIbgZF4HK7Yc=;
+ s=20210705; t=1698756966;
+ bh=q3seRi6QZb+dvSQg2/4Tx2ri3ZeifR1OAl8yvFCn6LQ=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=cT2SPv0BRVA9aOfHBKOu9MFAlapHbsCs1o00r0RVaUplgzBwz7fh42eN2oSnNyz7b
- /7tuu0ZaXWcCsw38iI7QdZr3CmMb0EC7IGK7Ltwmw295x4f4V+2t2kDIVoHCwDZE1t
- J9t1vVDziG5hDNTFZ75bR2SMOEHrTrrsgE4Thj8+Z13xcIvz0dACOso3UysJilm2Qj
- VWSNc4UD2/l9T9waZEeqJ4EhgJZI2GawILOiJUWd30Qtu+dMnLFB4BWRy+wmgpeKih
- v9EUMxQMSG+9HH5tJtWG7j8qA2p6sTJF8PpE92RNjqDYGSpRG3xGLyabBExOEJcOPV
- xfi8UUZZTaPBA==
+ b=oa2nU/ohArS75lPKr3/Cg25MJSXPfZPIG4cAW0/IB0bvDSjtyA65EQ7h0HHrIWDty
+ HBlUs5ykMQqNIdV1SgBTGJi7f5CPn+D6wN5QkFLUB1wZA7ugaaT50pVPZkT8Fnuiaa
+ 8Q8p9NkBFuv0IGXWkrl3UEmcSL+62P0tMPLRnE49/KEYzD3BO+UD+sdWwYJJxL/yEq
+ bDFXvjqkzzywBG0ltgLWg/cA3XhiS12xjMluxcN/XgoZD3QncPOl36H19/lgF59z6u
+ p2swXUySSBwq3OTmjyhFQPB0y0Glh+Tbybvt9f81PdeqdePOrZmZW4AqF3ld3wdJ4H
+ ha8K8SXHTs2Aw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Rick Chen <rick@andestech.com>,
 	Leo <ycliang@andestech.com>
@@ -50,9 +50,10 @@ Cc: Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
  Chanho Park <chanho61.park@samsung.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 1/2] riscv: allow resume after exception
-Date: Tue, 31 Oct 2023 14:55:51 +0200
-Message-Id: <20231031125552.26698-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 2/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Date: Tue, 31 Oct 2023 14:55:52 +0200
+Message-Id: <20231031125552.26698-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
 References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
@@ -74,124 +75,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CSRs like seed are readable by S-mode, may not be determinable by
-S-mode. For safe driver probing allow to resume via a longjmp after an
-exception.
+The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+provides an interface to a physical entropy source.
+
+A RNG driver based on the seed CSR is provided. It depends on
+mseccfg.sseed being set in the SBI firmware.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 ---
 v3:
-	Add API documentation
+	no change
 v2:
-	New patch
+	catch exceptions
 ---
- arch/riscv/lib/interrupts.c | 13 +++++++++++
- doc/api/index.rst           |  1 +
- include/interrupt.h         | 45 +++++++++++++++++++++++++++++++++++++
- 3 files changed, 59 insertions(+)
- create mode 100644 include/interrupt.h
+ drivers/rng/Kconfig         |   8 +++
+ drivers/rng/Makefile        |   1 +
+ drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 125 insertions(+)
+ create mode 100644 drivers/rng/riscv_zkr_rng.c
 
-diff --git a/arch/riscv/lib/interrupts.c b/arch/riscv/lib/interrupts.c
-index 02dbcfd423..a26ccc721f 100644
---- a/arch/riscv/lib/interrupts.c
-+++ b/arch/riscv/lib/interrupts.c
-@@ -12,6 +12,7 @@
- #include <linux/compat.h>
- #include <efi_loader.h>
- #include <hang.h>
-+#include <interrupt.h>
- #include <irq_func.h>
- #include <asm/global_data.h>
- #include <asm/ptrace.h>
-@@ -21,6 +22,13 @@
+diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+index 994cc35b27..4f6e367169 100644
+--- a/drivers/rng/Kconfig
++++ b/drivers/rng/Kconfig
+@@ -48,6 +48,14 @@ config RNG_OPTEE
+ 	  accessible to normal world but reserved and used by the OP-TEE
+ 	  to avoid the weakness of a software PRNG.
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-+static struct resume_data *resume;
++config RNG_RISCV_ZKR
++	bool "RISC-V Zkr random number generator"
++	depends on RISCV_SMODE
++	help
++	  This driver provides a Random Number Generator based on the
++	  Zkr RISC-V ISA extension which provides an interface to an
++	  NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
 +
-+void set_resume(struct resume_data *data)
-+{
-+	resume = data;
-+}
-+
- static void show_efi_loaded_images(uintptr_t epc)
- {
- 	efi_print_image_infos((void *)epc);
-@@ -105,6 +113,11 @@ static void _exit_trap(ulong code, ulong epc, ulong tval, struct pt_regs *regs)
- 		"Store/AMO page fault",
- 	};
- 
-+	if (resume) {
-+		resume->code = code;
-+		longjmp(resume->jump, 1);
-+	}
-+
- 	if (code < ARRAY_SIZE(exception_code))
- 		printf("Unhandled exception: %s\n", exception_code[code]);
- 	else
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index 2f0218c47a..51b2013af3 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -12,6 +12,7 @@ U-Boot API documentation
-    efi
-    event
-    getopt
-+   interrupt
-    linker_lists
-    lmb
-    logging
-diff --git a/include/interrupt.h b/include/interrupt.h
+ config RNG_STM32
+ 	bool "Enable random number generator for STM32"
+ 	depends on ARCH_STM32 || ARCH_STM32MP
+diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+index 47b323e61e..a5d3ca4130 100644
+--- a/drivers/rng/Makefile
++++ b/drivers/rng/Makefile
+@@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
+ obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
+ obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
+ obj-$(CONFIG_RNG_STM32) += stm32_rng.o
++obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
+ obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
+ obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
+ obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
 new file mode 100644
-index 0000000000..46ef2e196d
+index 0000000000..8c9e111e2e
 --- /dev/null
-+++ b/include/interrupt.h
-@@ -0,0 +1,45 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#include <asm/setjmp.h>
-+
-+/**
-+ * struct resume_data - data for resume after interrupt
++++ b/drivers/rng/riscv_zkr_rng.c
+@@ -0,0 +1,116 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * The RISC-V Zkr extension provides CSR seed which provides access to a
++ * random number generator.
 + */
-+struct resume_data {
-+	/** @jump: longjmp buffer */
-+	jmp_buf jump;
-+	/** @code: exception code */
-+	ulong code;
++
++#define LOG_CATEGORY UCLASS_RNG
++
++#include <dm.h>
++#include <interrupt.h>
++#include <log.h>
++#include <rng.h>
++
++#define DRIVER_NAME "riscv_zkr"
++
++enum opst {
++	/** @BIST: built in self test running */
++	BIST = 0b00,
++	/** @WAIT: sufficient amount of entropy is not yet available */
++	WAIT = 0b01,
++	/** @ES16: 16bits of entropy available */
++	ES16 = 0b10,
++	/** @DEAD: unrecoverable self-test error */
++	DEAD = 0b11,
 +};
 +
++static unsigned long read_seed(void)
++{
++	unsigned long ret;
++
++	__asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : : "memory");
++
++	return ret;
++}
++
++static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
++{
++	u8 *ptr = data;
++
++	while (len) {
++		u32 val;
++
++		val = read_seed();
++
++		switch (val >> 30) {
++		case BIST:
++			continue;
++		case WAIT:
++			continue;
++		case ES16:
++			*ptr++ = val & 0xff;
++			if (--len) {
++				*ptr++ = val >> 8;
++				--len;
++			}
++			break;
++		case DEAD:
++			return -ENODEV;
++		}
++	}
++
++	return 0;
++}
++
 +/**
-+ * set_resume() - set longjmp buffer for resuming after exception
++ * riscv_zkr_probe() - check if the seed register is available
 + *
-+ * By calling this function it is possible to use a long jump to catch an
-+ * exception. The caller sets the long jump buffer with set_resume() and then
-+ * executes setjmp(). If an exception occurs, the code will return to the
-+ * setjmp caller(). The exception code will be returned in @data->code.
++ * If the SBI software has not set mseccfg.sseed=1 or the Zkr
++ * extension is not available this probe function will result
++ * in an exception. Currently we cannot recover from this.
 + *
-+ * After the critical operation call set_resume(NULL) so that an exception in
-+ * another part of the code will not accidently invoke the long jump.
-+ *
-+ * .. code-block:: c
-+ *
-+ *     // This example shows how to use set_resume().
-+ *
-+ *     struct resume_data resume;
-+ *     int ret;
-+ *
-+ *     set_resume(&resume);
-+ *     ret = setjmp(resume.jump);
-+ *     if (ret) {
-+ *          printf("An exception %ld occurred\n", resume.code);
-+ *     } else {
-+ *          // Do what might raise an exception here.
-+ *     }
-+ *     set_resume(NULL);
-+ *
-+ * @data:	pointer to structure with longjmp address
-+ * Return:	0 before an exception, 1 after an exception occurred
++ * @dev:	RNG device
++ * Return:	0 if successfully probed
 + */
-+void set_resume(struct resume_data *data);
++static int riscv_zkr_probe(struct udevice *dev)
++{
++	struct resume_data resume;
++	int ret;
++	u32 val;
++
++	/* Check if reading seed leads to interrupt */
++	set_resume(&resume);
++	ret = setjmp(resume.jump);
++	if (ret)
++		log_debug("Exception %ld reading seed CSR\n", resume.code);
++	else
++		val = read_seed();
++	set_resume(NULL);
++	if (ret)
++		return -ENODEV;
++
++	do {
++		val = read_seed();
++		val >>= 30;
++	} while (val == BIST || val == WAIT);
++
++	if (val == DEAD)
++		return -ENODEV;
++
++	return 0;
++}
++
++static const struct dm_rng_ops riscv_zkr_ops = {
++	.read = riscv_zkr_read,
++};
++
++U_BOOT_DRIVER(riscv_zkr) = {
++	.name = DRIVER_NAME,
++	.id = UCLASS_RNG,
++	.ops = &riscv_zkr_ops,
++	.probe = riscv_zkr_probe,
++};
++
++U_BOOT_DRVINFO(cpu_riscv_zkr) = {
++	.name = DRIVER_NAME,
++};
 -- 
 2.40.1
 
