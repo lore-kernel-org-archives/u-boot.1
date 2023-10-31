@@ -4,122 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2618EC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 08:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CDF1C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 08:58:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B09087506;
-	Tue, 31 Oct 2023 09:57:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C306087500;
+	Tue, 31 Oct 2023 09:58:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="BrHvHo9O";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="ZIsmcaRw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 824B387576; Tue, 31 Oct 2023 09:57:30 +0100 (CET)
+ id C1ED6879E1; Tue, 31 Oct 2023 09:58:50 +0100 (CET)
 Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0085086FBC
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 09:57:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C031A86FBC
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 09:58:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
  by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20231031085725epoutp037f45b4f5a1d47aaefa846aa1dd0dbfe3~TJW_rLyTd2960529605epoutp03l
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:57:25 +0000 (GMT)
+ 20231031085844epoutp03b4b7a1c0e233bcd87fde523ce93f9a2d~TJYIDWK-32897628976epoutp03V
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:58:44 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20231031085725epoutp037f45b4f5a1d47aaefa846aa1dd0dbfe3~TJW_rLyTd2960529605epoutp03l
+ 20231031085844epoutp03b4b7a1c0e233bcd87fde523ce93f9a2d~TJYIDWK-32897628976epoutp03V
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698742646;
- bh=f3e6P0JaxBbs3nZN97zWuxKEXB15pUvHRX77Jm/BIbs=;
+ s=mail20170921; t=1698742724;
+ bh=HzIg05hWM+9a/vugZ8Ito3xYTT32+gcxKc6paSaU0Tw=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=BrHvHo9OBKQs+D0IP8RHy0bCcD9fUUUtr9vpVsiMDkMf0qIZm8bWqpAHizPvaYBXu
- Qy9mb7KFgPyFPYc+N8JZhH0DVUYw8AazVuAC8nnh33tKtE1QyaiPANggXgro7Q3Vvr
- XfZlbVht31FdYbBJJvSRBde3NCUJ9k6t8Q/uVEgc=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20231031085725epcas1p120e588f9d2f21e408123f9a8fff55cf9~TJW_RB84-2184121841epcas1p1w;
- Tue, 31 Oct 2023 08:57:25 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.135]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4SKPCm1Ngxz4x9Q2; Tue, 31 Oct
- 2023 08:57:24 +0000 (GMT)
+ b=ZIsmcaRwYDZMS+vii8SuJxEoJhJKwbn+DZQx9QBEcj+aiEW1GbufxlG5mzUy4v1st
+ IWlnEoWv8MpD4cdgxeew+qCrFQeNmsLK0BdSOQNKl2CZhVWzQpm88qV7N6gjuE/Q2a
+ 1FeX+Ls9Ir86jgyBG/5c7KvjtdCOGpsi4q/wLGGQ=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20231031085844epcas1p4b92a882f050209f2ea14c4cbcaa75be6~TJYH1jXsT0151501515epcas1p4H;
+ Tue, 31 Oct 2023 08:58:44 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.36.134]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4SKPFH4dnSz4x9QB; Tue, 31 Oct
+ 2023 08:58:43 +0000 (GMT)
 Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 45.9B.10211.471C0456; Tue, 31 Oct 2023 17:57:24 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20231031085723epcas1p23f9e02dbc005949d1d88565ef40cef7c~TJW8nS6Na1454214542epcas1p2r;
- Tue, 31 Oct 2023 08:57:23 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031085723epsmtrp199d460c1ee1fc52e275c75bb34f50828~TJW8mq2Gy2697726977epsmtrp1P;
- Tue, 31 Oct 2023 08:57:23 +0000 (GMT)
-X-AuditID: b6c32a38-6d3fd700000027e3-ca-6540c174c3e2
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 9A.1F.08755.371C0456; Tue, 31 Oct 2023 17:57:23 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ BF.9F.09731.3C1C0456; Tue, 31 Oct 2023 17:58:43 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20231031085843epcas1p1b645138c4ff3ed1fe6803d91e9cf30d1~TJYGgd6cK0873008730epcas1p18;
+ Tue, 31 Oct 2023 08:58:43 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231031085843epsmtrp2a0b4ab0d02fd3192ad2852308cc44b3d~TJYGf6-gX1775217752epsmtrp2X;
+ Tue, 31 Oct 2023 08:58:43 +0000 (GMT)
+X-AuditID: b6c32a36-a7dff70000002603-53-6540c1c32782
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ DC.8B.08817.2C1C0456; Tue, 31 Oct 2023 17:58:42 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20231031085723epsmtip2eb79f69336e3b0516d79a31f2f9937f9~TJW8a-x2g0183001830epsmtip2Y;
- Tue, 31 Oct 2023 08:57:23 +0000 (GMT)
+ 20231031085842epsmtip1c5d2aaad5556e9bd2430ae341eed6f88~TJYGTOz942909429094epsmtip1F;
+ Tue, 31 Oct 2023 08:58:42 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Svyatoslav Ryhel'" <clamor95@gmail.com>, "'Tom Rini'"
  <trini@konsulko.com>, "'Simon Glass'" <sjg@chromium.org>
 Cc: <u-boot@lists.denx.de>
-In-Reply-To: <20231027082615.306943-4-clamor95@gmail.com>
-Subject: RE: [PATCH v9 3/8] power: pmic: add the base MAX77663 PMIC support
-Date: Tue, 31 Oct 2023 17:57:23 +0900
-Message-ID: <008a01da0bd8$43960e80$cac22b80$@samsung.com>
+In-Reply-To: <20231027082615.306943-5-clamor95@gmail.com>
+Subject: RE: [PATCH v9 4/8] power: regulator: max77663: add regulator support
+Date: Tue, 31 Oct 2023 17:58:42 +0900
+Message-ID: <008b01da0bd8$72de3e60$589abb20$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQLxkJu7998OOQM6zGAUNVB6NFUBswHNQ1RBAob7R+yuEezJMA==
+Thread-Index: AQLxkJu7998OOQM6zGAUNVB6NFUBswFa9302AWMe3FWuHp7ZgA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpjk+LIzCtJLcpLzFFi42LZdlhTX7fkoEOqQdcxDosD/b2MFt+2bGO0
- mDppM7vF272d7A4sHrMbLrJ47Jx1l93j1YFV7B5n7+xgDGCJyrbJSE1MSS1SSM1Lzk/JzEu3
- VfIOjneONzUzMNQ1tLQwV1LIS8xNtVVy8QnQdcvMAdqppFCWmFMKFApILC5W0rezKcovLUlV
- yMgvLrFVSi1IySkwLdArTswtLs1L18tLLbEyNDAwMgUqTMjO+HltHnPBDPeKv/tmMzYwtlt2
- MXJySAiYSCyY8JCpi5GLQ0hgB6PE543z2SCcT4wSP/bchcp8Y5T49XoWC0zL1Q9tUIm9jBLT
- fk5jgXBeMkrsPNbBDFLFJqAn8X/RQjBbRKBMYmnXWiYQm1lASqLp5C5GEJtTwFKiYfduNhBb
- WMBbYsflq2BxFgFViSmXVgEN5eDgBao5NkEWJMwrIChxcuYTFogx8hLb385hhjhIQeLn02Ws
- EKucJD5seswOUSMiMbuzjRnkNgmBv+wS/59uYoNocJF49OYKE4QtLPHq+BZ2CFtK4mV/GztE
- QzOjxNIlB1khnB5GiX8N16G6jSX2L53MBHIds4CmxPpd+hBhRYmdv+cyQmzmk3j3tYcVpERC
- gFeio00IokRF4tLrl0wwu+4++c86gVFpFpLfZiH5bRaSH2YhLFvAyLKKUSy1oDg3PbXYsMAE
- Ht3J+bmbGMEJUstiB+Pctx/0DjEycTAeYpTgYFYS4T1s6pAqxJuSWFmVWpQfX1Sak1p8iNEU
- GNgTmaVEk/OBKTqvJN7QxNLAxMzI2MTC0MxQSZz32KveFCGB9MSS1OzU1ILUIpg+Jg5OqQYm
- 57nTmm11Wy4d7peyFMy4uuv80305fo//OCVd/PfsqvXpdXH2sqtsbDbPOzR7t62A8OFvcb1S
- n988FXnwP1jhufDkTecyA9gcCluieubfWG2wZdfpBQv++1u/KT7WXnXGbeWvBVrT+k8Lzzhx
- fE7NhtYfK2cZnN9nEsBwJOulYltw59TN3BFnY3YHyOR//hhmlSu09ZSWjPvzFetT/slOc7nY
- eNJDbfNKtmuuKX7ns7srq35PiV+4o091lfTOT91Jrd7KjakTlqb+6X17YLt0w2xBxTUT0wUX
- HZnbvbvlEEvObrmtlrzhVl+0D7x8pqlp+j/yxuULfW8uTN9/V+tLcftXPd7sa2yShtZHFIW+
- RSixFGckGmoxFxUnAgCQ6+iWGQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrLLMWRmVeSWpSXmKPExsWy7bCSvG7xQYdUg1urNS0O9PcyWnzbso3R
- YuqkzewWb/d2sjuweMxuuMjisXPWXXaPVwdWsXucvbODMYAlissmJTUnsyy1SN8ugSvj57V5
- zAUz3Cv+7pvN2MDYbtnFyMkhIWAicfVDG1MXIxeHkMBuRomWhY/YIRJSEp+fTmXrYuQAsoUl
- Dh8uhqh5zihxrOceE0gNm4CexP9FC5lBbBGBCok5/R/ZQGxmoN6mk7sYIRq2M0pcWnMfbCin
- gKVEw+7dYEXCAt4SOy5fZQSxWQRUJaZcWsUCsowXqObYBFmQMK+AoMTJmU/AwsxAu9o2MkKM
- l5fY/nYOM8SZChI/ny5jhTjBSeLDpsfsEDUiErM725gnMArPQjJpFsKkWUgmzULSsYCRZRWj
- ZGpBcW56brFhgWFearlecWJucWleul5yfu4mRnCMaGnuYNy+6oPeIUYmDsZDjBIczEoivIdN
- HVKFeFMSK6tSi/Lji0pzUosPMUpzsCiJ84q/6E0REkhPLEnNTk0tSC2CyTJxcEo1MKkpK65b
- e0NKUj7xh/+3iv45iYdOxZgKL5c68n3PVkZ5rWLliQmXZvblKTVv+RGx8nRBQeiHn2/4JrSt
- LTBmKj1VtLR+ttqeGyJrrz/d47vjaVzJanGzV7K3dkfyK1bxz6l/zmv3R+wcG2d3p3qiyZOF
- y5efEYr/651Ud8Pu8ma1SamO/nd6LxvlRjsoyBtJfek6JvNGUL/8o+crbtM6nW1ycsWrl2k1
- fxGokDc98Cmy/Mp119js6XsOsGed+CSi+O/y9Ds/2eO7P5i5fDI/8UFj8h3j7CVWmVwXDddN
- MJNaZDR1mqDevBXzlf9nXf94ccWEawXPZmTYNoksZts0NfR22co5tzINDyyXuMuT9F+JpTgj
- 0VCLuag4EQDsCmiBAAMAAA==
-X-CMS-MailID: 20231031085723epcas1p23f9e02dbc005949d1d88565ef40cef7c
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpnk+LIzCtJLcpLzFFi42LZdlhTX/fwQYdUg3n35SwO9PcyWnzbso3R
+ YuqkzewWb/d2sjuweMxuuMjisXPWXXaPVwdWsXucvbODMYAlKtsmIzUxJbVIITUvOT8lMy/d
+ Vsk7ON453tTMwFDX0NLCXEkhLzE31VbJxSdA1y0zB2inkkJZYk4pUCggsbhYSd/Opii/tCRV
+ ISO/uMRWKbUgJafAtECvODG3uDQvXS8vtcTK0MDAyBSoMCE7o+nlZKaCT1EVm76eYW5g3OXW
+ xcjJISFgIrHp2in2LkYuDiGBHYwSd5ZeZ4FwPjFKHJz5jxHC+cYoMf1ZMwtMy5PJF5ggEnsZ
+ JQ4/WgXlvGSU+DztDxtIFZuAnsT/RQuZQWwRgTKJpV1rmUBsZgEpiaaTuxhBbE4BS4mN6y6x
+ gtjCAv4S/afugdWzCKhKvO+6DlbPC1Qz/3wDO4QtKHFy5hMWiDnyEtvfzmGGuEhB4ufTZawQ
+ u5wkZjx6wQhRIyIxu7ONGeQ4CYGf7BK3595hhGhwkfjU8pkVwhaWeHV8CzuELSXx+d1eNoiG
+ ZkaJpUsOskI4PYwS/xqus0FUGUvsXzoZ6DwOoBWaEut36UOEFSV2/p4LtZlP4t3XHlaQEgkB
+ XomONiGIEhWJS69fMsHsuvvkP+sERqVZSH6bheS3WUh+mIWwbAEjyypGsdSC4tz01GLDAiN4
+ fCfn525iBKdILbMdjJPeftA7xMjEwXiIUYKDWUmE97CpQ6oQb0piZVVqUX58UWlOavEhRlNg
+ aE9klhJNzgcm6bySeEMTSwMTMyNjEwtDM0Mlcd45j3tThATSE0tSs1NTC1KLYPqYODilGpjq
+ 89JWLW1J3LDO2/fYGjMnqYU37n+urxHcmr829uRqj8Kshewu/FrtKTfepAZK7bn23iHU8ehG
+ O5uXgf8Xbbq7x6ZrewTrwaoJV9dEK+9sau0R8+Pe+MR0u3u46YWP7hziBd/3PZhSyiUrEie+
+ gX2i0dQ5nyd4WD9x6Dm1iNVChXMhbwkrX/kE38Ald5k9fhSdV37x0CBF0CG9S7JIj9f3rkXy
+ 5qNTmzx/G/st4b0WYh7rnnaX6cS3T65fn6w983nqerOy7MZDbGUrlA4GMv5XmBAm7fpPRvfE
+ WwkzC9fbEfpa562fRRxj+uzTc9JW+5jTytsLV7XdkdIu1TpUt620X9vQI29V1M/KFH/lN0os
+ xRmJhlrMRcWJACTwycsaBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrLLMWRmVeSWpSXmKPExsWy7bCSnO7hgw6pBmdDLA709zJafNuyjdFi
+ 6qTN7BZv93ayO7B4zG64yOKxc9Zddo9XB1axe5y9s4MxgCWKyyYlNSezLLVI3y6BK6Pp5WSm
+ gk9RFZu+nmFuYNzl1sXIySEhYCLxZPIFpi5GLg4hgd2MEkuenGOBSEhJfH46la2LkQPIFpY4
+ fLgYouY5o8SCWQ/YQGrYBPQk/i9ayAxiiwhUSMzp/wgWZwbqbTq5ixGiYTujxNbjq5lAEpwC
+ lhIb111iBbGFBXwlFm/YA7aMRUBV4n3XdbAaXqCa+ecb2CFsQYmTM5+wgBzBDLSsbSMjxHx5
+ ie1v5zBD3Kkg8fPpMlaIG5wkZjx6AVUjIjG7s415AqPwLCSTZiFMmoVk0iwkHQsYWVYxSqYW
+ FOem5xYbFhjlpZbrFSfmFpfmpesl5+duYgTHiJbWDsY9qz7oHWJk4mA8xCjBwawkwnvY1CFV
+ iDclsbIqtSg/vqg0J7X4EKM0B4uSOO+3170pQgLpiSWp2ampBalFMFkmDk6pBibRKWl79/dd
+ 5LZLM9pY4CHl2P48uW6HdqFjXhzbtJBD8nYXeWecaAu1XitnKGfKf8lFPDHtrNadyU2HLhTm
+ sXk1fIwIW5q44taepv2O3kwtZ70+h343nTTr36by67dLr767cUcxsuZx2rOFBZ37HsqL8iz4
+ 7HL/9UqtL9UHpjnMebf5x/ULX3zFzsxcpB1s5sjr5fhZi/Hx/giHBv69V4Wqy9bwLn3vcCMs
+ YPnbq1L/+PgNfL5wrg81PvDb+OD5SlbHK4G/Dra6bf3wwqbIo427QfzflguerhfPCAuVrKu/
+ ECd857S7Yn2dyYRLi48tiOFMv/zh47JorSwFtp1K79K+nPwekqSz7qlF3e4lZxqVWIozEg21
+ mIuKEwF7xc9GAAMAAA==
+X-CMS-MailID: 20231031085843epcas1p1b645138c4ff3ed1fe6803d91e9cf30d1
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231027082635epcas1p4722707057e584787327a0b2bd5fb7df0
+X-CMS-RootMailID: 20231027082636epcas1p3c6033310ec81b4b92c924ef399494085
 References: <20231027082615.306943-1-clamor95@gmail.com>
- <CGME20231027082635epcas1p4722707057e584787327a0b2bd5fb7df0@epcas1p4.samsung.com>
- <20231027082615.306943-4-clamor95@gmail.com>
+ <CGME20231027082636epcas1p3c6033310ec81b4b92c924ef399494085@epcas1p3.samsung.com>
+ <20231027082615.306943-5-clamor95@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,290 +144,440 @@ X-Virus-Status: Clean
 > To: Tom Rini <trini@konsulko.com>; Jaehoon Chung <jh80.chung@samsung.com>; Simon Glass
 > <sjg@chromium.org>; Svyatoslav Ryhel <clamor95@gmail.com>
 > Cc: u-boot@lists.denx.de
-> Subject: [PATCH v9 3/8] power: pmic: add the base MAX77663 PMIC support
+> Subject: [PATCH v9 4/8] power: regulator: max77663: add regulator support
 > 
-> Add support to bind the regulators/child nodes with the pmic.
-> Also adds the pmic i2c based read/write functions to access pmic
-> registers.
+> The driver provides regulator set/get voltage
+> enable/disable functions for MAXIM MAX77663 PMICs.
 > 
 > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-Just add a minor comment at below.
+Best Regards,
+Jaehoon Chung
 
 > ---
->  doc/device-tree-bindings/pmic/max77663.txt | 84 ++++++++++++++++++++++
->  drivers/power/pmic/Kconfig                 |  9 +++
->  drivers/power/pmic/Makefile                |  1 +
->  drivers/power/pmic/max77663.c              | 81 +++++++++++++++++++++
->  include/power/max77663.h                   | 42 +++++++++++
->  5 files changed, 217 insertions(+)
->  create mode 100644 doc/device-tree-bindings/pmic/max77663.txt
->  create mode 100644 drivers/power/pmic/max77663.c
->  create mode 100644 include/power/max77663.h
+>  drivers/power/regulator/Kconfig              |   9 +
+>  drivers/power/regulator/Makefile             |   1 +
+>  drivers/power/regulator/max77663_regulator.c | 375 +++++++++++++++++++
+>  3 files changed, 385 insertions(+)
+>  create mode 100644 drivers/power/regulator/max77663_regulator.c
 > 
-> diff --git a/doc/device-tree-bindings/pmic/max77663.txt b/doc/device-tree-bindings/pmic/max77663.txt
-> new file mode 100644
-> index 0000000000..ddb7d3eb14
-> --- /dev/null
-> +++ b/doc/device-tree-bindings/pmic/max77663.txt
-> @@ -0,0 +1,84 @@
-> +MAXIM, MAX77663 PMIC
-> +
-> +This device uses two drivers:
-> +- drivers/power/pmic/max77663.c (for parent device)
-> +- drivers/power/regulator/max77663_regulator.c (for child regulators)
-> +
-> +This chapter describes the binding info for the PMIC driver and regulators.
-> +
-> +Required properties for PMIC:
-> +- compatible: "maxim,max77663"
-> +- reg: usually 0x1c or 0x3c
-> +
-> +With those two properties, the pmic device can be used for read/write only.
-> +To bind each regulator, the optional regulators subnode should exists.
-> +
-> +Optional subnode:
-> +- name: regulators (subnode list of each device's regulator)
-> +
-> +Regulators subnode contains set on supported regulators.
-> +
-> +Required properties:
-> +- regulator-name: used for regulator uclass platform data '.name',
-> +
-> +List of supported regulator nodes names for max77663:
-> +- sd0, sd1, sd2, sd3, ldo0, ldo1, ldo2, ldo3, ldo4, ldo5, ldo6, ldo7, ldo8
-> +
-> +Optional:
-> +- regulator-min-microvolt: minimum allowed Voltage to set
-> +- regulator-max-microvolt: minimum allowed Voltage to set
-> +- regulator-always-on: regulator should be never disabled
-> +- regulator-boot-on: regulator should be enabled by the bootloader
-> +
-> +Linux driver binding for this driver is compatible.
-> +
-> +Example:
-> +
-> +max77663@1c {
-> +	compatible = "maxim,max77663";
-> +	reg = <0x1c>;
-> +
-> +	regulators {
-> +		sd0 {
-> +			regulator-name = "vdd_cpu";
-> +			regulator-min-microvolt = <800000>;
-> +			regulator-max-microvolt = <1250000>;
-> +			regulator-always-on;
-> +			regulator-boot-on;
-> +		};
-> +
-> +		...
-> +
-> +		ldo0 {
-> +			regulator-name = "avdd_pll";
-> +			regulator-min-microvolt = <1200000>;
-> +			regulator-max-microvolt = <1200000>;
-> +		};
-> +
-> +		...
-> +
-> +		ldo2 {
-> +			regulator-name = "avdd_usb";
-> +			regulator-min-microvolt = <3300000>;
-> +			regulator-max-microvolt = <3300000>;
-> +			regulator-always-on;
-> +			regulator-boot-on;
-> +		};
-> +
-> +		ldo3 {
-> +			regulator-name = "vdd_sdmmc3";
-> +			regulator-min-microvolt = <3000000>;
-> +			regulator-max-microvolt = <3000000>;
-> +			regulator-always-on;
-> +			regulator-boot-on;
-> +		};
-> +
-> +		...
-> +
-> +		ldo8 {
-> +			regulator-name = "avdd_dsi_csi";
-> +			regulator-min-microvolt = <1200000>;
-> +			regulator-max-microvolt = <1200000>;
-> +		};
-> +	};
-> +};
-> diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> index 4a6f0ce093..54665d7e2b 100644
-> --- a/drivers/power/pmic/Kconfig
-> +++ b/drivers/power/pmic/Kconfig
-> @@ -184,6 +184,15 @@ config SPL_DM_PMIC_PFUZE100
->  	This config enables implementation of driver-model pmic uclass features
->  	for PMIC PFUZE100 in SPL. The driver implements read/write operations.
+> diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+> index eb5aa38c1c..581816294c 100644
+> --- a/drivers/power/regulator/Kconfig
+> +++ b/drivers/power/regulator/Kconfig
+> @@ -141,6 +141,15 @@ config SPL_REGULATOR_PWM
+>  	  This config enables implementation of driver-model regulator uclass
+>  	  features for PWM regulators in SPL.
 > 
-> +config DM_PMIC_MAX77663
-> +	bool "Enable Driver Model for PMIC MAX77663"
+> +config DM_REGULATOR_MAX77663
+> +	bool "Enable Driver Model for REGULATOR MAX77663"
+> +	depends on DM_REGULATOR && DM_PMIC_MAX77663
 > +	---help---
-> +	This config enables implementation of driver-model pmic uclass features
-> +	for PMIC MAX77663. The driver implements read/write operations.
-> +	This is a Power Management IC with a decent set of peripherals from which
-> +	4 DC-to-DC Step-Down (SD) Regulators, 9 Low-Dropout Linear (LDO) Regulators,
-> +	8 GPIOs, Real-Time Clock (RTC) and more with I2C Compatible Interface.
+> +	This config enables implementation of driver-model regulator uclass
+> +	features for REGULATOR MAX77663. The driver supports both DC-to-DC
+> +	Step-Down (SD) Regulators and Low-Dropout Linear (LDO) Regulators
+> +	found in MAX77663 PMIC and implements get/set api for value and enable.
 > +
->  config DM_PMIC_MAX77686
->  	bool "Enable Driver Model for PMIC MAX77686"
->  	---help---
-> diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-> index 0b3b3d62d0..414a9d8225 100644
-> --- a/drivers/power/pmic/Makefile
-> +++ b/drivers/power/pmic/Makefile
-> @@ -6,6 +6,7 @@
->  obj-$(CONFIG_$(SPL_TPL_)DM_PMIC) += pmic-uclass.o
->  obj-$(CONFIG_$(SPL_)DM_PMIC_FAN53555) += fan53555.o
->  obj-$(CONFIG_$(SPL_)DM_PMIC_DA9063) += da9063.o
-> +obj-$(CONFIG_$(SPL_)DM_PMIC_MAX77663) += max77663.o
->  obj-$(CONFIG_DM_PMIC_MAX77686) += max77686.o
->  obj-$(CONFIG_DM_PMIC_MAX8998) += max8998.o
->  obj-$(CONFIG_DM_PMIC_MC34708) += mc34708.o
-> diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max77663.c
+>  config DM_REGULATOR_MAX77686
+>  	bool "Enable Driver Model for REGULATOR MAX77686"
+>  	depends on DM_REGULATOR && DM_PMIC_MAX77686
+> diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+> index d9e0cd5949..8d73169b50 100644
+> --- a/drivers/power/regulator/Makefile
+> +++ b/drivers/power/regulator/Makefile
+> @@ -10,6 +10,7 @@ obj-$(CONFIG_REGULATOR_AS3722)	+= as3722_regulator.o
+>  obj-$(CONFIG_$(SPL_)REGULATOR_AXP) += axp_regulator.o
+>  obj-$(CONFIG_$(SPL_)REGULATOR_AXP_USB_POWER) += axp_usb_power.o
+>  obj-$(CONFIG_$(SPL_)DM_REGULATOR_DA9063) += da9063.o
+> +obj-$(CONFIG_$(SPL_)DM_REGULATOR_MAX77663) += max77663_regulator.o
+>  obj-$(CONFIG_DM_REGULATOR_MAX77686) += max77686.o
+>  obj-$(CONFIG_DM_REGULATOR_NPCM8XX) += npcm8xx_regulator.o
+>  obj-$(CONFIG_$(SPL_)DM_PMIC_PFUZE100) += pfuze100.o
+> diff --git a/drivers/power/regulator/max77663_regulator.c
+> b/drivers/power/regulator/max77663_regulator.c
 > new file mode 100644
-> index 0000000000..fac97ed221
+> index 0000000000..ea4b7c63e5
 > --- /dev/null
-> +++ b/drivers/power/pmic/max77663.c
-> @@ -0,0 +1,81 @@
+> +++ b/drivers/power/regulator/max77663_regulator.c
+> @@ -0,0 +1,375 @@
 > +// SPDX-License-Identifier: GPL-2.0+
 > +/*
 > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
 > + */
 > +
 > +#include <dm.h>
-> +#include <dm/lists.h>
 > +#include <power/pmic.h>
+> +#include <power/regulator.h>
 > +#include <power/max77663.h>
 > +
-> +static const struct pmic_child_info pmic_children_info[] = {
-> +	{ .prefix = "ldo", .driver = MAX77663_LDO_DRIVER },
-> +	{ .prefix = "sd", .driver = MAX77663_SD_DRIVER },
-> +	{ },
+> +/* fist row is control registers, second is voltage registers */
+> +static const char max77663_sd_reg[][MAX77663_SD_NUM] = {
+> +	{ 0x1d, 0x1e, 0x1f, 0x20, 0x21 },
+> +	{ 0x16, 0x17, 0x18, 0x19, 0x2a },
 > +};
 > +
-> +static int max77663_write(struct udevice *dev, uint reg, const uint8_t *buff,
-> +			  int len)
-> +{
-> +	int ret;
+> +static const char max77663_ldo_reg[MAX77663_LDO_NUM] = {
+> +	0x23, 0x25, 0x27, 0x29, 0x2b, 0x2d, 0x2f, 0x31, 0x33
+> +};
 > +
-> +	ret = dm_i2c_write(dev, reg, buff, len);
-> +	if (ret) {
-> +		log_debug("write error to device: %p register: %#x!\n", dev, reg);
-> +		return ret;
+> +static int max77663_sd_enable(struct udevice *dev, int op, bool *enable)
+> +{
+> +	struct dm_regulator_uclass_plat *uc_pdata =
+> +					dev_get_uclass_plat(dev);
+> +	u32 adr = uc_pdata->ctrl_reg;
+> +	int val, ret;
+> +
+> +	val = pmic_reg_read(dev->parent, adr);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	if (op == PMIC_OP_GET) {
+> +		if (val & SD_STATUS_MASK)
+> +			*enable = true;
+> +		else
+> +			*enable = false;
+> +
+> +		return 0;
+> +	} else if (op == PMIC_OP_SET) {
+> +		val &= ~SD_STATUS_MASK;
+> +
+> +		if (*enable)
+> +			val |= SD_STATUS_MASK;
+> +
+> +		ret = pmic_reg_write(dev->parent, adr, val);
+> +		if (ret)
+> +			return ret;
 > +	}
 > +
 > +	return 0;
 > +}
 > +
-> +static int max77663_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-> +{
-> +	int ret;
-> +
-> +	ret = dm_i2c_read(dev, reg, buff, len);
-> +	if (ret) {
-> +		log_debug("read error from device: %p register: %#x!\n", dev, reg);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int max77663_bind(struct udevice *dev)
-> +{
-> +	ofnode regulators_node;
-> +	int children;
-> +
-> +	regulators_node = dev_read_subnode(dev, "regulators");
-> +	if (!ofnode_valid(regulators_node)) {
-> +		log_err("%s regulators subnode not found!\n", dev->name);
-> +		return -ENXIO;
-> +	}
-> +
-> +	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
-> +
-> +	children = pmic_bind_children(dev, regulators_node, pmic_children_info);
-> +	if (!children)
-> +		log_err("%s - no child found\n", dev->name);
-> +
-> +	/* Always return success for this device */
-> +	return 0;
-> +}
-> +
-> +static struct dm_pmic_ops max77663_ops = {
-> +	.read = max77663_read,
-> +	.write = max77663_write,
-> +};
-> +
-> +static const struct udevice_id max77663_ids[] = {
-> +	{ .compatible = "maxim,max77663" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(pmic_max77663) = {
-> +	.name = "max77663_pmic",
-> +	.id = UCLASS_PMIC,
-> +	.of_match = max77663_ids,
-> +	.bind = max77663_bind,
-> +	.ops = &max77663_ops,
-> +};
-> diff --git a/include/power/max77663.h b/include/power/max77663.h
-> new file mode 100644
-> index 0000000000..0f764bcbcc
-> --- /dev/null
-> +++ b/include/power/max77663.h
-> @@ -0,0 +1,42 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
+> +/**
+> + * max77663_*_volt2hex() - convert voltage in uV into
+> + *			   applicable to register hex value
+> + *
+> + * @idx:	regulator index
+> + * @uV:		voltage in uV
+> + *
+> + * Return: voltage in hex on success, -ve on failure
 > + */
+> +static int max77663_sd_volt2hex(int idx, int uV)
+> +{
+> +	switch (idx) {
+> +	case 0:
+> +		/* SD0 has max voltage 1.4V */
+> +		if (uV > SD0_VOLT_MAX)
+> +			return -EINVAL;
+> +		break;
+> +	case 1:
+> +		/* SD1 has max voltage 1.55V */
+> +		if (uV > SD1_VOLT_MAX)
+> +			return -EINVAL;
+> +		break;
+> +	default:
+> +		/* SD2 and SD3 have max voltage 3.79V */
+> +		if (uV > SD_VOLT_MAX)
+> +			return -EINVAL;
+> +		break;
+> +	};
 > +
-> +#ifndef _MAX77663_H_
-> +#define _MAX77663_H_
+> +	if (uV < SD_VOLT_MIN)
+> +		uV = SD_VOLT_MIN;
 > +
-> +#define MAX77663_LDO_NUM		9
-> +#define MAX77663_SD_NUM			5
+> +	return (uV - SD_VOLT_BASE) / 12500;
+> +}
 > +
-> +/* Drivers name */
-> +#define MAX77663_LDO_DRIVER		"max77663_ldo"
-> +#define MAX77663_SD_DRIVER		"max77663_sd"
+> +/**
+> + * max77663_*_hex2volt() - convert register hex value into
+> + *			   actual voltage in uV
+> + *
+> + * @idx:	regulator index
+> + * @hex:	hex value of register
+> + *
+> + * Return: voltage in uV on success, -ve on failure
+> + */
+> +static int max77663_sd_hex2volt(int idx, int hex)
+> +{
+> +	switch (idx) {
+> +	case 0:
+> +		/* SD0 has max voltage 1.4V */
+> +		if (hex > SD0_VOLT_MAX_HEX)
+> +			return -EINVAL;
+> +		break;
+> +	case 1:
+> +		/* SD1 has max voltage 1.55V */
+> +		if (hex > SD1_VOLT_MAX_HEX)
+> +			return -EINVAL;
+> +		break;
+> +	default:
+> +		/* SD2 and SD3 have max voltage 3.79V */
+> +		if (hex > SD_VOLT_MAX_HEX)
+> +			return -EINVAL;
+> +		break;
+> +	};
 > +
-> +/* Step-Down (SD) Regulator calculations */
-> +#define SD_STATUS_MASK			0x30
+> +	if (hex < SD_VOLT_MIN_HEX)
+> +		hex = SD_VOLT_MIN_HEX;
 > +
-> +#define SD0_VOLT_MAX_HEX		0x40
-> +#define SD1_VOLT_MAX_HEX		0x4c
-> +#define SD_VOLT_MAX_HEX			0xff
-> +#define SD_VOLT_MIN_HEX			0x02
+> +	return SD_VOLT_BASE + hex * 12500;
+> +}
 > +
-> +#define SD0_VOLT_MAX			1400000
-> +#define SD1_VOLT_MAX			1550000
-> +#define SD_VOLT_MAX			3787500
-> +#define SD_VOLT_MIN			625000
+> +static int max77663_sd_val(struct udevice *dev, int op, int *uV)
+> +{
+> +	struct dm_regulator_uclass_plat *uc_pdata =
+> +					dev_get_uclass_plat(dev);
+> +	u32 adr = uc_pdata->volt_reg;
+> +	int idx = dev->driver_data;
+> +	int hex, ret;
 > +
-> +#define SD_VOLT_BASE			600000
+> +	if (op == PMIC_OP_GET) {
+> +		hex = pmic_reg_read(dev->parent, adr);
+> +		if (hex < 0)
+> +			return hex;
 > +
-> +/* Low-Dropout Linear (LDO) Regulator calculations */
-> +#define LDO_STATUS_MASK			0xc0
-> +#define LDO_VOLT_MASK			0x3f
-> +#define LDO_VOLT_MAX_HEX		0x3f
+> +		*uV = 0;
 > +
-> +#define LDO01_VOLT_MAX			2375000
-
-Does it mean ldo0~1 or only ldo1?
-
-> +#define LDO4_VOLT_MAX			1587500
-> +#define LDO_VOLT_MAX			3950000
+> +		ret = max77663_sd_hex2volt(idx, hex);
+> +		if (ret < 0)
+> +			return ret;
+> +		*uV = ret;
 > +
-> +#define LDO_VOLT_BASE			800000
+> +		return 0;
+> +	}
 > +
-> +#endif /* _MAX77663_H_ */
+> +	/* SD regulators use entire register for voltage */
+> +	hex = max77663_sd_volt2hex(idx, *uV);
+> +	if (hex < 0)
+> +		return hex;
+> +
+> +	return pmic_reg_write(dev->parent, adr, hex);
+> +}
+> +
+> +static int max77663_sd_probe(struct udevice *dev)
+> +{
+> +	struct dm_regulator_uclass_plat *uc_pdata =
+> +					dev_get_uclass_plat(dev);
+> +	int idx = dev->driver_data;
+> +
+> +	uc_pdata->type = REGULATOR_TYPE_BUCK;
+> +	uc_pdata->ctrl_reg = max77663_sd_reg[0][idx];
+> +	uc_pdata->volt_reg = max77663_sd_reg[1][idx];
+> +
+> +	return 0;
+> +}
+> +
+> +static int sd_get_value(struct udevice *dev)
+> +{
+> +	int uV;
+> +	int ret;
+> +
+> +	ret = max77663_sd_val(dev, PMIC_OP_GET, &uV);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return uV;
+> +}
+> +
+> +static int sd_set_value(struct udevice *dev, int uV)
+> +{
+> +	return max77663_sd_val(dev, PMIC_OP_SET, &uV);
+> +}
+> +
+> +static int sd_get_enable(struct udevice *dev)
+> +{
+> +	bool enable = false;
+> +	int ret;
+> +
+> +	ret = max77663_sd_enable(dev, PMIC_OP_GET, &enable);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return enable;
+> +}
+> +
+> +static int sd_set_enable(struct udevice *dev, bool enable)
+> +{
+> +	return max77663_sd_enable(dev, PMIC_OP_SET, &enable);
+> +}
+> +
+> +static const struct dm_regulator_ops max77663_sd_ops = {
+> +	.get_value  = sd_get_value,
+> +	.set_value  = sd_set_value,
+> +	.get_enable = sd_get_enable,
+> +	.set_enable = sd_set_enable,
+> +};
+> +
+> +U_BOOT_DRIVER(max77663_sd) = {
+> +	.name = MAX77663_SD_DRIVER,
+> +	.id = UCLASS_REGULATOR,
+> +	.ops = &max77663_sd_ops,
+> +	.probe = max77663_sd_probe,
+> +};
+> +
+> +static int max77663_ldo_enable(struct udevice *dev, int op, bool *enable)
+> +{
+> +	struct dm_regulator_uclass_plat *uc_pdata =
+> +					dev_get_uclass_plat(dev);
+> +	u32 adr = uc_pdata->ctrl_reg;
+> +	int val, ret;
+> +
+> +	val = pmic_reg_read(dev->parent, adr);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	if (op == PMIC_OP_GET) {
+> +		if (val & LDO_STATUS_MASK)
+> +			*enable = true;
+> +		else
+> +			*enable = false;
+> +
+> +		return 0;
+> +	} else if (op == PMIC_OP_SET) {
+> +		val &= ~LDO_STATUS_MASK;
+> +
+> +		if (*enable)
+> +			val |= LDO_STATUS_MASK;
+> +
+> +		ret = pmic_reg_write(dev->parent, adr, val);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int max77663_ldo_volt2hex(int idx, int uV)
+> +{
+> +	switch (idx) {
+> +	case 0:
+> +	case 1:
+> +		if (uV > LDO01_VOLT_MAX)
+> +			return -EINVAL;
+> +
+> +		return (uV - LDO_VOLT_BASE) / 25000;
+> +	case 4:
+> +		if (uV > LDO4_VOLT_MAX)
+> +			return -EINVAL;
+> +
+> +		return (uV - LDO_VOLT_BASE) / 12500;
+> +	default:
+> +		if (uV > LDO_VOLT_MAX)
+> +			return -EINVAL;
+> +
+> +		return (uV - LDO_VOLT_BASE) / 50000;
+> +	};
+> +}
+> +
+> +static int max77663_ldo_hex2volt(int idx, int hex)
+> +{
+> +	if (hex > LDO_VOLT_MAX_HEX)
+> +		return -EINVAL;
+> +
+> +	switch (idx) {
+> +	case 0:
+> +	case 1:
+> +		return (hex * 25000) + LDO_VOLT_BASE;
+> +	case 4:
+> +		return (hex * 12500) + LDO_VOLT_BASE;
+> +	default:
+> +		return (hex * 50000) + LDO_VOLT_BASE;
+> +	};
+> +}
+> +
+> +static int max77663_ldo_val(struct udevice *dev, int op, int *uV)
+> +{
+> +	struct dm_regulator_uclass_plat *uc_pdata =
+> +					dev_get_uclass_plat(dev);
+> +	u32 adr = uc_pdata->ctrl_reg;
+> +	int idx = dev->driver_data;
+> +	int hex, val, ret;
+> +
+> +	val = pmic_reg_read(dev->parent, adr);
+> +	if (val < 0)
+> +		return val;
+> +
+> +	if (op == PMIC_OP_GET) {
+> +		*uV = 0;
+> +
+> +		ret = max77663_ldo_hex2volt(idx, val & LDO_VOLT_MASK);
+> +		if (ret < 0)
+> +			return ret;
+> +
+> +		*uV = ret;
+> +		return 0;
+> +	}
+> +
+> +	hex = max77663_ldo_volt2hex(idx, *uV);
+> +	if (hex < 0)
+> +		return hex;
+> +
+> +	val &= ~LDO_VOLT_MASK;
+> +
+> +	return pmic_reg_write(dev->parent, adr, val | hex);
+> +}
+> +
+> +static int max77663_ldo_probe(struct udevice *dev)
+> +{
+> +	struct dm_regulator_uclass_plat *uc_pdata =
+> +					dev_get_uclass_plat(dev);
+> +	int idx = dev->driver_data;
+> +
+> +	uc_pdata->type = REGULATOR_TYPE_LDO;
+> +	uc_pdata->ctrl_reg = max77663_ldo_reg[idx];
+> +
+> +	return 0;
+> +}
+> +
+> +static int ldo_get_value(struct udevice *dev)
+> +{
+> +	int uV;
+> +	int ret;
+> +
+> +	ret = max77663_ldo_val(dev, PMIC_OP_GET, &uV);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return uV;
+> +}
+> +
+> +static int ldo_set_value(struct udevice *dev, int uV)
+> +{
+> +	return max77663_ldo_val(dev, PMIC_OP_SET, &uV);
+> +}
+> +
+> +static int ldo_get_enable(struct udevice *dev)
+> +{
+> +	bool enable = false;
+> +	int ret;
+> +
+> +	ret = max77663_ldo_enable(dev, PMIC_OP_GET, &enable);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return enable;
+> +}
+> +
+> +static int ldo_set_enable(struct udevice *dev, bool enable)
+> +{
+> +	return max77663_ldo_enable(dev, PMIC_OP_SET, &enable);
+> +}
+> +
+> +static const struct dm_regulator_ops max77663_ldo_ops = {
+> +	.get_value  = ldo_get_value,
+> +	.set_value  = ldo_set_value,
+> +	.get_enable = ldo_get_enable,
+> +	.set_enable = ldo_set_enable,
+> +};
+> +
+> +U_BOOT_DRIVER(max77663_ldo) = {
+> +	.name = MAX77663_LDO_DRIVER,
+> +	.id = UCLASS_REGULATOR,
+> +	.ops = &max77663_ldo_ops,
+> +	.probe = max77663_ldo_probe,
+> +};
 > --
 > 2.39.2
 
