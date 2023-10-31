@@ -4,89 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0490C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 02:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8153FC4167D
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 04:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DBCA87A5D;
-	Tue, 31 Oct 2023 03:07:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=feathertop.org
+	by phobos.denx.de (Postfix) with ESMTP id 71A03874A2;
+	Tue, 31 Oct 2023 05:49:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=feathertop.org header.i=@feathertop.org header.b="wLGgCiXr";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="qn1cmuoV";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="VPfzprnf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="F3Jif3Yp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F18087A71; Tue, 31 Oct 2023 03:07:45 +0100 (CET)
+ id 5EBD08720C; Tue, 31 Oct 2023 05:49:37 +0100 (CET)
 Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
  [64.147.123.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B72587548
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 03:07:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=feathertop.org
+ by phobos.denx.de (Postfix) with ESMTPS id 3310E874A2
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:49:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tim@feathertop.org
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id 8584C3200A39;
- Mon, 30 Oct 2023 22:07:41 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Mon, 30 Oct 2023 22:07:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=feathertop.org;
- h=cc:cc:content-transfer-encoding:content-type:date:date:from
- :from:in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm2; t=1698718061; x=
- 1698804461; bh=9oFjKyZsn9C3PpBf2e48lfJ0ufs4D7EwHmZwJXSIrYs=; b=w
- LGgCiXrTw6wONlxiZfKxtwiZObWW8vazkFWjV4M7dSs/c9AdOiOisHFlzxlsY4ZS
- qr7mxxo5hLliyt1MIbBT55gfvGpruQGsgwTxpM23qXzRNN+SDeTjz8ZdsZmFE/wj
- NCEfZRo01g242diB1KFdntTKomcS+1r5Vx1dNMlsytnUmFaSgn2i3t5Pxyf9Ax5Q
- y3KX3JP6c8MKlF6xzt+75VA+dQ+uyAY92/VSO50oxRcFtxW0lOiX/vBoe73OSt7W
- xt5itRGLEQzMemtSmtRKyLamfxoASPayRVg/tMpdwW5fr5OZIfow/M8jV/0hxWrm
- 99l/PFF8KWK9JdGhl3xWQ==
+ dmarc=pass (p=none dis=none) header.from=sholland.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=samuel@sholland.org
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.west.internal (Postfix) with ESMTP id EDEAB32009E7;
+ Tue, 31 Oct 2023 00:49:28 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute5.internal (MEProxy); Tue, 31 Oct 2023 00:49:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+ cc:cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:message-id:mime-version:reply-to:sender:subject
+ :subject:to:to; s=fm1; t=1698727768; x=1698814168; bh=hLqbSZrpMW
+ hL7en5oXvdvwNIjhaU0+XqEW+xnZV3nv4=; b=VPfzprnfWsFc+myUqX4k0fg/UX
+ qfFeFzvD/IzWEKzsLQa1GhHOKosLptgyZPwQPbYsB4H+pIpqfCj3WFpfXL0z5GJY
+ 1ohpeBcNhTqTnTTn26aTMH0HKcyOEWkNlbeICYJKE2j4uwGYniP4/i+VVvaoXdzX
+ fjwPZTirNXhBOaphxMa+ZnFXpwAg04/n37SOr5TviRqAQl2182YIBqDvj7dlySz/
+ LEisa3Shz1eiirsGaZOZFkmFtCyL7e8ZEjdf1ArG442FXDx5UunL5HSwRsgeO4Xo
+ GmdcM9FBbJg9V2NJ2vzHHGzzVD69kUqJMcBrPRM1VB9eZQ7siYnpReS/49Rw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698718061; x=
- 1698804461; bh=9oFjKyZsn9C3PpBf2e48lfJ0ufs4D7EwHmZwJXSIrYs=; b=q
- n1cmuoVIHmaNKqGRVWJoQep3O6K8OdxQHgOzPPwNX9qPm8SvnJt1YKgD9WMNHrU9
- P5sZXkJEd5W9BP7HeESWda/y4GFso6hX0jR407/oQ/elOwgF5A4T4IFzPEpsxNdj
- NHSIals8KJdSSAtlB44mYL/536YawrvnbUHSn/ZkBBsMFSVzu3XXCXPuNo/Ay2Gw
- KXrGZIIK3lzFzr9g1S6fzYxq7C/V+C8SGh/noaYRonsJhXJVNtGoi4D4CTSYcR7Q
- tARELlr7rR0p5rSkG5vtWTI0iWVgC1BRavT0KLGOoyjZRhm18TocFTty2LS7Ra34
- l2E0x9azpT4UvNbNDcMDw==
-X-ME-Sender: <xms:bGFAZcKpCeYtO048ugFzBwtO6e877TvsDu1V--rtolYtDDnDZr0eLQ>
- <xme:bGFAZcKvb6N-bntX_oHWhkUvhjFTGzVWOG1ERIRuIgqUimu4VAwksKd4XBBZekU4o
- jQgV-5k7Q>
-X-ME-Received: <xmr:bGFAZct5rijitwXApgRNtENFJ65VYAA0DezpmZm318Nezj0bipd2mXLegDRkN4778yupdHjuCbjX7wCgi3NSLkFN0tlVlrgRru0>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddggedvucetufdoteggodetrfdotf
+ :in-reply-to:message-id:mime-version:reply-to:sender:subject
+ :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+ :x-sasl-enc; s=fm3; t=1698727768; x=1698814168; bh=hLqbSZrpMWhL7
+ en5oXvdvwNIjhaU0+XqEW+xnZV3nv4=; b=F3Jif3Yp5Ur+NopKbc43Ub098OlHe
+ vzWraRGaZRw4IZKlXeRmL5j76EvcWyWGx10AD/MBjePp8bSwubchQAMqoRXh5900
+ nBTOL5e/loxknKxEso1VmuQyojCDmbzPlYledyLoWdVhqUWVJ/RO0jue0JfH6Nzh
+ b/ljNXsTyaO8XABj1y0R7fSnNYdo4sw2847bjY6L3W5H/xpGVHo1wFDy/wjL0UWd
+ 0Vq0qbQuKnTKoIXY89nmvKIm/2tYIAEKI3peRegQLDLget4sJ7xrA4vhKHIMxe/P
+ FhDBSDyslPQkVbwCZAeaHl6Hm8xTu8UIGnHuAGtuhk5G/Eu1YYpfXjQ9A==
+X-ME-Sender: <xms:V4dAZRucnOLw2nF7yW06S4Ruyrw3WLwSvsbqoZTubJHcTI9X2hzdtQ>
+ <xme:V4dAZafVyMt72X15Di2DulA1iOUjG4G6pDDEDN2MNLPepGqmpT8TTcb81qeYs9O4P
+ 2QMNIyCuOzbU9lwOQ>
+X-ME-Received: <xmr:V4dAZUxay_MyHwi-LGij3OxBuYBRoVgJ0btyLSd8Q--0cV36lutYLui4aL2ZHbZWTG7oK6g94C8wIJdq_GAB9cfNGb426eVjXzdXJk2Sl4gD0rk8y4HwX2xiQdWIJcQ57jzYwQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeefucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepvfhimhcu
- nfhunhhnuceothhimhesfhgvrghthhgvrhhtohhprdhorhhgqeenucggtffrrghtthgvrh
- hnpeefffeuhfetgeeikeejvefgtdefteehgfdvhfetfeeuffeuhffhfeekgfekgeehieen
- ucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehtihhmse
- hfvggrthhhvghrthhophdrohhrgh
-X-ME-Proxy: <xmx:bGFAZZapvane4N-j_wbLpGRVLS45aHqkLMP1xaWtVkSNxs2nl4-Lkg>
- <xmx:bGFAZTa9qVLeKxxJjBNYZjgqDTRNeQjkyZ01pLBBlVPwiG_Fo1tanA>
- <xmx:bGFAZVCw8nS_aFWmPxkX3DKex3-kg106b_s6I_3dbxow7iTOtnGqlw>
- <xmx:bWFAZfHPAuB0FqWH8kTHFCoO5c-R9XdOGousD0Dk_sEp7WGQ_X-uaA>
-Feedback-ID: i1f8241ce:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 30 Oct 2023 22:07:37 -0400 (EDT)
-Received: by feathertop.org (sSMTP sendmail emulation);
- Tue, 31 Oct 2023 13:07:34 +1100
-From: Tim Lunn <tim@feathertop.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Tim Lunn <tim@feathertop.org>
-Subject: [PATCH 2/2] rockchip: rv1126: Read cpuid from otp and set ethaddr
-Date: Tue, 31 Oct 2023 13:07:15 +1100
-Message-Id: <20231031020715.684460-3-tim@feathertop.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231031020715.684460-1-tim@feathertop.org>
-References: <20231031020715.684460-1-tim@feathertop.org>
+ cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomhepufgrmhhuvghl
+ ucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecuggftrf
+ grthhtvghrnhepkeevlefhjeeuleeltedvjedvfeefteegleehueejffehgffffeekhefh
+ hfekkeegnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
+ epshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
+X-ME-Proxy: <xmx:V4dAZYMmqeu15fCIBvy_zy9YFfppswnGiUZoMl0L5BsMrdRvsGggmA>
+ <xmx:V4dAZR_cpqZKsHKZn0eNgQRD1bFFVNwCIezyAxq-uAxGgPuCsnkCNA>
+ <xmx:V4dAZYUvSi7Os8UYv-ajTpevhKz-bA3otKA14lxFnPGoPbcMDh9ceQ>
+ <xmx:WIdAZdZ37Btd8BZctbdxuAisD82LcaohikALQJ9b_oQN5644vBGtTw>
+Feedback-ID: i0ad843c9:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
+ 31 Oct 2023 00:49:27 -0400 (EDT)
+From: Samuel Holland <samuel@sholland.org>
+To: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: Samuel Holland <samuel@sholland.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH] clk: sunxi: Use the right symbol in the Makefile
+Date: Mon, 30 Oct 2023 23:49:22 -0500
+Message-ID: <20231031044925.51756-1-samuel@sholland.org>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,51 +100,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide configuration to read cpuid and generate a persistant
-MAC address in ethaddr
+CONFIG_ARCH_SUNXI will not be enabled for RISC-V SoCs using this driver.
+Use the symbol for the driver itself instead.
 
-Signed-off-by: Tim Lunn <tim@feathertop.org>
+Signed-off-by: Samuel Holland <samuel@sholland.org>
 ---
- arch/arm/dts/rv1126-u-boot.dtsi | 12 ++++++++++++
- arch/arm/mach-rockchip/Kconfig  |  2 ++
- 2 files changed, 14 insertions(+)
 
-diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
-index 5e348278f2..811a3cee98 100644
---- a/arch/arm/dts/rv1126-u-boot.dtsi
-+++ b/arch/arm/dts/rv1126-u-boot.dtsi
-@@ -15,6 +15,18 @@
- 		compatible = "rockchip,rv1126-dmc";
- 		bootph-all;
- 	};
-+
-+	otp: otp@ff5c0000 {
-+		compatible = "rockchip,rv1126-otp";
-+		reg = <0xff5c0000 0x1000>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		status = "okay";
-+
-+		cpu_id: id@7 {
-+			reg = <0x07 0x10>;
-+		};
-+	};
- };
- 
- &gpio0 {
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index a6c69c300d..5e993383cf 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -359,6 +359,8 @@ config ROCKCHIP_RV1126
- 	select BOARD_LATE_INIT
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply OF_LIBFDT_OVERLAY
-+	imply ROCKCHIP_OTP
-+	imply MISC_INIT_R
- 	imply TPL_DM
- 	imply TPL_LIBCOMMON_SUPPORT
- 	imply TPL_LIBGENERIC_SUPPORT
+ drivers/clk/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index 26bf429acbc..af27ceb27da 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -27,7 +27,6 @@ obj-$(CONFIG_ARCH_ROCKCHIP) += rockchip/
+ obj-$(CONFIG_ARCH_SOCFPGA) += altera/
+ obj-$(CONFIG_ARCH_STM32) += stm32/
+ obj-$(CONFIG_ARCH_STM32MP) += stm32/
+-obj-$(CONFIG_ARCH_SUNXI) += sunxi/
+ obj-$(CONFIG_CLK_AT91) += at91/
+ obj-$(CONFIG_CLK_BCM6345) += clk_bcm6345.o
+ obj-$(CONFIG_CLK_BOSTON) += clk_boston.o
+@@ -43,6 +42,7 @@ obj-$(CONFIG_CLK_OWL) += owl/
+ obj-$(CONFIG_CLK_RENESAS) += renesas/
+ obj-$(CONFIG_$(SPL_TPL_)CLK_SCMI) += clk_scmi.o
+ obj-$(CONFIG_CLK_SIFIVE) += sifive/
++obj-$(CONFIG_CLK_SUNXI) += sunxi/
+ obj-$(CONFIG_CLK_UNIPHIER) += uniphier/
+ obj-$(CONFIG_CLK_VERSACLOCK) += clk_versaclock.o
+ obj-$(CONFIG_CLK_VERSAL) += clk_versal.o
 -- 
-2.40.1
+2.41.0
 
