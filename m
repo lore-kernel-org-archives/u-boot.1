@@ -4,118 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF1CC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 23:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D25CBC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 23:57:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0492887B8B;
-	Wed,  1 Nov 2023 00:56:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0003387B9F;
+	Wed,  1 Nov 2023 00:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="GKa5GKho";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="uFds8mAr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51016879E2; Wed,  1 Nov 2023 00:56:01 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ id 4196A879E2; Wed,  1 Nov 2023 00:56:05 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACF987B48
+ by phobos.denx.de (Postfix) with ESMTPS id 57FB187ACA
  for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 00:55:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chanho61.park@samsung.com
 Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20231031235554epoutp03e2ba3742d1fe89bda2c1207da0d50b9b~TVnckPSFk2688126881epoutp03L
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20231031235554epoutp04c5fddb60f676b9b0b41a0bce8dace59e~TVncu6mYs1062510625epoutp04U
  for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 23:55:54 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20231031235554epoutp03e2ba3742d1fe89bda2c1207da0d50b9b~TVnckPSFk2688126881epoutp03L
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20231031235554epoutp04c5fddb60f676b9b0b41a0bce8dace59e~TVncu6mYs1062510625epoutp04U
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
  s=mail20170921; t=1698796554;
- bh=v4+ng8dV90pZDx1doAeTw27BAIjwoB2d0QuHNQowivk=;
- h=From:To:Cc:Subject:Date:References:From;
- b=GKa5GKhovdw2rKKseBlVgSaX36Vv66cJUccB0mWaPJ/XudQ91wD/3BUTiZJTFxkem
- /D6J9jTF1CE4Ev7VnohOLWza1GBkkUhDRHI0LN+NU+EslYSECCR52QQ0dR4bkVt4DB
- 9nwltYNF+Y63U0WtAasTFozRoDJMEVtufqKDo+zg=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20231031235553epcas2p26c998f3e55872d5c6b88ae465d9e9cc8~TVncTKMGn3152231522epcas2p21;
+ bh=kU3bcniLBykrhz2Gcd46oTDCmOzkHV9G3b8LfQDR4Zs=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=uFds8mAr4YsfxjwO+9uKFskerLuEXsAxDeB9lsg/qLkYUtLw1JSeMqc27wrYyo/t7
+ mgk5WEctdYwFAweNiKtCcPDSUSbIpCgx2SRwGj+AN/nNPnmy1HY7icrqJqpGKHiFCY
+ CUy8q9grLc1Y6BGYLyZyvpSUrIHe0iM6weYwnGRE=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20231031235553epcas2p4006a4215e733219f14e20e00186812a0~TVncZUb1I0985109851epcas2p4h;
  Tue, 31 Oct 2023 23:55:53 +0000 (GMT)
-Received: from epsmgec2p1-new.samsung.com (unknown [182.195.36.90]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4SKn8T3g7Rz4x9Q2; Tue, 31 Oct
+Received: from epsmges2p2.samsung.com (unknown [182.195.36.98]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4SKn8T4jhYz4x9Pv; Tue, 31 Oct
  2023 23:55:53 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmgec2p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 39.91.18994.90491456; Wed,  1 Nov 2023 08:55:53 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
+ epsmges2p2.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 5E.B8.09622.90491456; Wed,  1 Nov 2023 08:55:53 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
  epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231031235553epcas2p3169e9a40b2b9783171f2f3e96d823dbf~TVnblzwWY0386503865epcas2p3F;
+ 20231031235553epcas2p3b61666e3169f4b9a8260beb9073c10a1~TVnbwicpJ0155801558epcas2p3O;
  Tue, 31 Oct 2023 23:55:53 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031235553epsmtrp1993b4331ded22ec38f8989aa26110b1a~TVnblN5Vj1667516675epsmtrp1x;
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231031235553epsmtrp251a06b433d0281a630ddd3db020d5adb~TVnbwAGLq0628406284epsmtrp28;
  Tue, 31 Oct 2023 23:55:53 +0000 (GMT)
-X-AuditID: b6c32a4d-743ff70000004a32-f9-6541940922be
+X-AuditID: b6c32a46-d61ff70000002596-a3-654194098ad4
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 11.68.07368.80491456; Wed,  1 Nov 2023 08:55:53 +0900 (KST)
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 44.C7.08817.90491456; Wed,  1 Nov 2023 08:55:53 +0900 (KST)
 Received: from cometzero-ubuntu..
  (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
  epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20231031235552epsmtip1ac5ce4cb9979f0c37230d8a127b1de42~TVnbXwJ3b0338903389epsmtip1r;
- Tue, 31 Oct 2023 23:55:52 +0000 (GMT)
+ 20231031235553epsmtip16d48fb7119753a6389d333317f16d18a~TVnbiaeki0185301853epsmtip1B;
+ Tue, 31 Oct 2023 23:55:53 +0000 (GMT)
 From: Chanho Park <chanho61.park@samsung.com>
 To: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
  <xypron.glpk@gmx.de>, Rick Chen <rick@andestech.com>, Leo
  <ycliang@andestech.com>, u-boot@lists.denx.de
 Cc: Chanho Park <chanho61.park@samsung.com>
-Subject: [PATCH v2 0/5] Add support for StarFive JH7110 TRNG driver
-Date: Wed,  1 Nov 2023 08:55:25 +0900
-Message-Id: <20231031235530.1500393-1-chanho61.park@samsung.com>
+Subject: [PATCH v2 2/5] clk: starfive: jh7110: Add security clocks
+Date: Wed,  1 Nov 2023 08:55:27 +0900
+Message-Id: <20231031235530.1500393-3-chanho61.park@samsung.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231031235530.1500393-1-chanho61.park@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrCKsWRmVeSWpSXmKPExsWy7bCmqS7nFMdUgzkbxC0u79e2ePviLKPF
- vWtyFm/3drJbHJ76gdHi8aHXTA5sHntOz2L2+PAxzuPOtT1sHmfv7GD06NuyijGANSrbJiM1
- MSW1SCE1Lzk/JTMv3VbJOzjeOd7UzMBQ19DSwlxJIS8xN9VWycUnQNctMwdov5JCWWJOKVAo
- ILG4WEnfzqYov7QkVSEjv7jEVim1ICWnwLxArzgxt7g0L10vL7XEytDAwMgUqDAhO+Nw1ye2
- gmucFQd+JTcwrmbvYuTgkBAwkVjT79jFyMkhJLCHUeLDblYI+xOjxKefBl2MXED2N0aJiXPO
- s4MkQOrbHrexQiT2MkrcXtHECNExjUni/R1BEJtNQFdiy/NXjCBFIgKrGSW27W8G62YW0Jbo
- /DwFzBYWcJbo6F/ECnIFi4CqxKX9dSAmr4CDxOUOCYjb5CUWP5AAKeYVEJQ4OfMJC8QQeYnm
- rbOZIc45xC7R9V0YwnaRuNvRDHWmsMSr41ugbCmJl/1tUO+WS+xYlgRymIRAC6NEc9seqDn2
- Ej9uTgE7hllAU2L9Ln2IcmWJI7egtvJJdBz+CzWFV6KjTQiiUV3iwPbpLBC2rET3nM+sELaH
- xLQJ91ggQRMrcaLhI/sERvlZSH6ZheSXWQh7FzAyr2KUSi0ozk1PTTYqMNTNSy2HR2hyfu4m
- RnDy0/Ldwfh6/V+9Q4xMHIyHGCU4mJVEeA+bOqQK8aYkVlalFuXHF5XmpBYfYjQFBu9EZinR
- 5Hxg+s0riTc0sTQwMTMzNDcyNTBXEue91zo3RUggPbEkNTs1tSC1CKaPiYNTqoHJ48iS1Q93
- /ruzseHfdt7/sZN/HajRPlC7wyVd/0mMWtRjpg1cs289zZtU7Vv2rOrvNRWWG/yLv3KuTFu5
- 9LmSIXfrnN/Laye7O5s/DNeVqpy439dI6fWZWcfVDT+7J0sqPjw+sbhq0vfLE7ubgm5P6k1Z
- 5VdQeniWOpvWxZodZd0zHgf43FyeWL0siK3/QZ7vxip78903ZYwiG1uOrP7z3KNEMGt7g8kv
- ef4DrG1VSq5TW74zMud8sbp6T+fi4u1i9sd/z362WL9EWdrvuliS4Myd6tmTDqRPPHVsebRk
- UIlF54sVC/MSZezCppm9P/dzoo3FWqnd3zos2QSDJ3DnnG55Hrrxxo7uJfNc5LknKrEUZyQa
- ajEXFScCANa9rj4HBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrCLMWRmVeSWpSXmKPExsWy7bCSnC7nFMdUg38vGC0u79e2ePviLKPF
- vWtyFm/3drJbHJ76gdHi8aHXTA5sHntOz2L2+PAxzuPOtT1sHmfv7GD06NuyijGANYrLJiU1
- J7MstUjfLoEr43DXJ7aCa5wVB34lNzCuZu9i5OSQEDCRaHvcxgpiCwnsZpS41OcDEZeVePZu
- B1SNsMT9liNANVxANZOYJGZ8P8cCkmAT0JXY8vwVI0hCRGA9o8SP5e/BJjELaEt0fp4C1i0s
- 4CzR0b8IKM7BwSKgKnFpfx2IySvgIHG5QwLElBCQl1j8QAKkmFdAUOLkzCcsEEPkJZq3zmae
- wMg3C0lqFpLUAkamVYySqQXFuem5yYYFhnmp5XrFibnFpXnpesn5uZsYwQGppbGD8d78f3qH
- GJk4GA8xSnAwK4nwHjZ1SBXiTUmsrEotyo8vKs1JLT7EKM3BoiTOazhjdoqQQHpiSWp2ampB
- ahFMlomDU6qB6bjgkrjI167PdT91zrj/TVim/8OaL/kXJXYcfSFh1KL7Y/J1z++NKrr8RtOc
- fs+s31t7RCZRL6ongFU1NH1+fgyvic3ni90R61NMFU/cOTW1+2phXpXPpEy2ZZqfd3Q5sxl3
- cHp3Rft1RP3sfTw7VbGNSYv5/QzGvs4VL7+fmr7u28sbW8vF/87790eMY763keSkuaraXyt2
- On5hW7tVaZ+Xd7XRavVW/dUl769vjY7gy9rExuFpdcMq+/HsT0yZGUu8m1mF/vtumNtob7N3
- 8ectM/LDX7gxxddPvd5c8rroG+vcGbaPPW7vl5eq+M6UkLQsc9OHR1NNdrfen7Zz2lrzU1+1
- CteU8E7b9/w7gxJLcUaioRZzUXEiADvYBaK3AgAA
-X-CMS-MailID: 20231031235553epcas2p3169e9a40b2b9783171f2f3e96d823dbf
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmphk+LIzCtJLcpLzFFi42LZdljTTJdzimOqwdSZShaX92tbvH1xltHi
+ 3jU5i7d7O9ktDk/9wGjx+NBrJgc2jz2nZzF7fPgY53Hn2h42j7N3djB69G1ZxRjAGpVtk5Ga
+ mJJapJCal5yfkpmXbqvkHRzvHG9qZmCoa2hpYa6kkJeYm2qr5OIToOuWmQO0X0mhLDGnFCgU
+ kFhcrKRvZ1OUX1qSqpCRX1xiq5RakJJTYF6gV5yYW1yal66Xl1piZWhgYGQKVJiQnbHoVg9L
+ wUP2isa/P1gbGPezdTFyckgImEgsb3sJZHNxCAnsYJRYcmMiC4TziVHi/K+JjBDON0aJGW8/
+ MMG0TO37wghiCwnsZZRYuSMEomgak8Sx7gMsIAk2AV2JLc9fgXWLCKxmlNi2v5kdJMEsoC3R
+ +XkKmC0s4CTR+Wce2CQWAVWJgw86WEFsXgEHiQsT5gDVcABtk5dY/EACJMwp4Chx6uw7NogS
+ QYmTM5+wQIyUl2jeOpsZZJeEwDV2iWcrDkBd6iIx6VozK4QtLPHq+BZ2CFtK4vO7vWwQ88sl
+ dixLguhtYZRobtvDDFFjL/Hj5hRWkBpmAU2J9bv0IcqVJY7cglrLJ9Fx+C/UlbwSHW1CEI3q
+ Ege2T2eBsGUluud8hjrAQ+Jr2xJoSE9hlJi37gDLBEaFWUi+mYXkm1kIixcwMq9iFEstKM5N
+ Ty02KjCCR3Byfu4mRnBy1HLbwTjl7Qe9Q4xMHIyHGCU4mJVEeA+bOqQK8aYkVlalFuXHF5Xm
+ pBYfYjQFBvVEZinR5Hxges4riTc0sTQwMTMzNDcyNTBXEue91zo3RUggPbEkNTs1tSC1CKaP
+ iYNTqoEpeYF2ZNcRvoAvJjkuX/RkXXrNUq4VL9vH3ekyRYjved7k17Hi/wWLPy58ptr572ui
+ UtfuuIjJB4r05J+uPMHT1qbRrO+luKAvn+mC5tqWGVbh+6YJHkv8fOf36rf5dtUxCtoy69VV
+ rI4eWyfdVZBov222tfiUm93/7go494jNaDi9fG7H4vsut9X/8Lz8dfL0/wbvN0bNZnvz8vS5
+ YjRffakyOaqfNnvKhOtvC0JtUk/I3/r2qegT990LPWem7CpaIGp22UlcKb1aUqZZ3erixMfH
+ njvWhp5Yq6685dL1ueXVH5+Wda6OnSWl6SaTsrD11nWVHT8+c25ca3pNOuG6Tvuj13+YNjlH
+ JAU3rWZUYinOSDTUYi4qTgQA6Cj1khcEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHLMWRmVeSWpSXmKPExsWy7bCSnC7nFMdUg1NNvBaX92tbvH1xltHi
+ 3jU5i7d7O9ktDk/9wGjx+NBrJgc2jz2nZzF7fPgY53Hn2h42j7N3djB69G1ZxRjAGsVlk5Ka
+ k1mWWqRvl8CVsehWD0vBQ/aKxr8/WBsY97N1MXJySAiYSEzt+8IIYgsJ7GaUWHepFCIuK/Hs
+ 3Q52CFtY4n7LEVaImklMEh3XbUFsNgFdiS3PXwH1cnGICKxnlPix/D1YEbOAtkTn5ylgzcIC
+ ThKdf+aBLWARUJU4+KADrIZXwEHiwoQ5QDUcQAvkJRY/kAAJcwo4Spw6+44NYpeDxIeJk9gh
+ ygUlTs58wgIxXl6ieets5gmMArOQpGYhSS1gZFrFKJlaUJybnltsWGCUl1quV5yYW1yal66X
+ nJ+7iREcxFpaOxj3rPqgd4iRiYPxEKMEB7OSCO9hU4dUId6UxMqq1KL8+KLSnNTiQ4zSHCxK
+ 4rzfXvemCAmkJ5akZqemFqQWwWSZODilGpiMqlwzJoisbbtyNi2FaeOJbmc/52MX9EXtv/7Y
+ rDWPy7ylKifaQuWcp82EiOLcCmHbtwrnt/4W1557qTLha8BjTjanHMfLRc8eFKUs8Ovo2H/l
+ 2wcx81u+2b/4n1/Ls0t8w7R3u5DHG5eAaxfiQ6pX2EYu3LGl9XA204zom/t6jna+PvW31alW
+ h3tCdcWLjIerf+dOnvz6adftNVsWt5/cbb6rRFXbW3z/q1u7DVcWOsn7zCv8IKp6NMjP3dNP
+ 98Dmojau4wrJpqIK38OiHBSLPnzc8EPL9UB96flodyal7P7C5Qx13rPPVknU7JL5Gxw8VzWg
+ W7HT+3WFSPi8Z7rLKnxndZ5l83nM5swqq8RSnJFoqMVcVJwIAJaLKKHRAgAA
+X-CMS-MailID: 20231031235553epcas2p3b61666e3169f4b9a8260beb9073c10a1
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: AUTO_CONFIDENTIAL
 CMS-TYPE: 102P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031235553epcas2p3169e9a40b2b9783171f2f3e96d823dbf
-References: <CGME20231031235553epcas2p3169e9a40b2b9783171f2f3e96d823dbf@epcas2p3.samsung.com>
+X-CMS-RootMailID: 20231031235553epcas2p3b61666e3169f4b9a8260beb9073c10a1
+References: <20231031235530.1500393-1-chanho61.park@samsung.com>
+ <CGME20231031235553epcas2p3b61666e3169f4b9a8260beb9073c10a1@epcas2p3.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,36 +134,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patchset adds to support StarFive JH7110 TRNG driver. Due to lack
-of readl_relaxed API, the first patch tries to import the
-APIs(read/write_relaxed) from Linux kernel's implementation. The second
-patch adds the missing security clocks which are required by the trng
-IP.
+Add STGCLK_SEC_HCLK and STGCLK_SEC_MISCAHB clocks for JH7110 TRNG
+device.
 
-This IP can support 128-bit and 256-bit random number generation but
-this patch makes 256-bit default mode for convenience.
+Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+---
+ drivers/clk/starfive/clk-jh7110.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Changes from v1:
-- Patch #3: Apply Heinrich's reviews and his codes
-- Patch #5: Add Heinrich's R-b tag
-
-Chanho Park (5):
-  riscv: import read/write_relaxed functions
-  clk: starfive: jh7110: Add security clocks
-  rng: Add StarFive JH7110 RNG driver
-  riscv: dts: jh7110: Add rng device tree node
-  configs: visionfive2: Enable JH7110 RNG driver
-
- arch/riscv/dts/jh7110.dtsi             |  10 +
- arch/riscv/include/asm/io.h            |  45 +++++
- configs/starfive_visionfive2_defconfig |   2 +
- drivers/clk/starfive/clk-jh7110.c      |  10 +
- drivers/rng/Kconfig                    |   6 +
- drivers/rng/Makefile                   |   1 +
- drivers/rng/jh7110_rng.c               | 258 +++++++++++++++++++++++++
- 7 files changed, 332 insertions(+)
- create mode 100644 drivers/rng/jh7110_rng.c
-
+diff --git a/drivers/clk/starfive/clk-jh7110.c b/drivers/clk/starfive/clk-jh7110.c
+index 31aaf3340f94..a835541e48e9 100644
+--- a/drivers/clk/starfive/clk-jh7110.c
++++ b/drivers/clk/starfive/clk-jh7110.c
+@@ -539,6 +539,16 @@ static int jh7110_stgcrg_init(struct udevice *dev)
+ 				 "pcie1_tl", "stg_axiahb",
+ 				 OFFSET(JH7110_STGCLK_PCIE1_TL)));
+ 
++	/* Security clocks */
++	clk_dm(JH7110_STG_ID_TRANS(JH7110_STGCLK_SEC_HCLK),
++	       starfive_clk_gate(priv->reg,
++				 "sec_ahb", "stg_axiahb",
++				 OFFSET(JH7110_STGCLK_SEC_HCLK)));
++	clk_dm(JH7110_STG_ID_TRANS(JH7110_STGCLK_SEC_MISCAHB),
++	       starfive_clk_gate(priv->reg,
++				 "sec_misc_ahb", "stg_axiahb",
++				 OFFSET(JH7110_STGCLK_SEC_MISCAHB)));
++
+ 	return 0;
+ }
+ 
 -- 
 2.39.2
 
