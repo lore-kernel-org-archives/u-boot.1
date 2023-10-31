@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF6FC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5476C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:18:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9312F87ACE;
-	Tue, 31 Oct 2023 06:18:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 190D087AC6;
+	Tue, 31 Oct 2023 06:18:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="V5meX+iv";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="SE4QNbEa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="kkW3KhAf";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="baYkGzQ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DD2C87AC2; Tue, 31 Oct 2023 06:18:13 +0100 (CET)
+ id 61CB786FFE; Tue, 31 Oct 2023 06:18:15 +0100 (CET)
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
  [64.147.123.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12F6D87AC2
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:18:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3731C87ABF
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:18:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=samuel@sholland.org
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 3090C3200A5B;
- Tue, 31 Oct 2023 01:18:09 -0400 (EDT)
+ by mailout.west.internal (Postfix) with ESMTP id 437213200A58;
+ Tue, 31 Oct 2023 01:18:11 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Tue, 31 Oct 2023 01:18:09 -0400
+ by compute5.internal (MEProxy); Tue, 31 Oct 2023 01:18:11 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
  cc:cc:content-transfer-encoding:content-type:date:date:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm1; t=1698729488; x=
- 1698815888; bh=iKlnWlTIsYjiMFWF56hKrnd8NjC1BUNj2DC/sE2sYC0=; b=V
- 5meX+ivMrhVPh4TRf4H+zuU2dPh/iXTya6sTVWQskC2ezF65LGDrhk57waPlD5Gs
- eAUHEXYOuoF2ypSzT88e5unFUXplvWRDcdavbhqZ5pW/voRXYC1vk/my0kJvA+DL
- a/z0DWCfEzOalUsn/FzyouvgyK481y2fN9tDfnA6l6rEj2GNJ3TR85uJrliDHRfo
- IsLQMcaAq/DmAE2pAK6RCe84Qfx4n8gAR0m1oWUAEoF1pzl4vMSFz+Znn6427ed1
- KNulZJgzjmN9SSxD9Z4A+WaTb46eaxjP+6m8PRdYdM9lcmzKXd+PYSluXTb0DKHF
- lolVUW9pukdxrzycqVkUw==
+ :reply-to:sender:subject:subject:to:to; s=fm1; t=1698729490; x=
+ 1698815890; bh=MIZlS/GAjkq/kcb0yEs4hZMbT/z+GlqoIRHaYrhJguE=; b=k
+ kW3KhAf6DoVvp7gHRkVD6I7oA0FUB2TSkQvfRaFOJVEhWZRGCVq265CvqpnX8G6z
+ IMWd64pogVFV4ctK+0iHbjXqzyvaoNqeb8yS1BLTG0RjjiWlJA45UOi5qOZar21m
+ x31052Q9THHkVpBlm9Qsi35tWLRJq7+cmxO8oAIXUbgMLE8EyTuQIYTYEiouw5pq
+ UTL/vZFuMr7EUuYCsa8ffcoA4xxw50YLapT+iMw8RTH/m+sQp0Vu3o/id+e7DAcZ
+ CfXM6rFYENFti6O8d4yGs7PsBQ9QKJ37MBaSsTvUnm/BkSMmkEBT0ybmZcGzjyS9
+ e64BLrlfctMZmvMcP1vVw==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
  :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698729488; x=
- 1698815888; bh=iKlnWlTIsYjiMFWF56hKrnd8NjC1BUNj2DC/sE2sYC0=; b=S
- E4QNbEa6GOoI5kxK8MzaNqDJ66DpG91iKEbbGoPfxiVYr9qS+LHQzZ71rq7Ym+97
- yqGXClBGfDh6UJ6Rhq5bu5PknNraEUXva+ngLsAdjm0teq7Z1s81mFA2Yuw2iDt/
- n93F1gqDp5+1MhaXNtKUijwhmwqY2Dd7wvrGW8DT6Jbe/QB8moHBEcI2eedoq6e9
- qYj4HSkZLmURo6FO24tvFz/6JET/0LqCrBuIwXAOZao402HNQo3hP9+sV3NCAt+I
- 2+9W+NGytK22Mej6wOMyTNTmcUQBtrH9IUB7nWLiKXDk6EI9kfAtI3/voITEBYo+
- DmlsyFhsfld4V+5RDs0Dg==
-X-ME-Sender: <xms:EI5AZRWynYga-EpsyTQqSy7s_6V7y6Vdjd8TSFOHWsWXHXb0mPvfxA>
- <xme:EI5AZRnNdYKRePNrPlNLKEzdNpb_O5TR3YZUeKWX--Zc_74m-Ag_k8Nu8UJbCIz9c
- 2PLi6nLrVM_ccAD4g>
-X-ME-Received: <xmr:EI5AZdYh2RosXmdXCqPwr4zLyKI4c2_X6hJ6iRr2udaltpQxf-ADQxNTOjHbBrlktvcHfgl374WTCPicv_tZFiiARm2Te9mMNTnvYVw8pOk8eVCo7L13sRZ2isp12CAr3JKj_g>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698729490; x=
+ 1698815890; bh=MIZlS/GAjkq/kcb0yEs4hZMbT/z+GlqoIRHaYrhJguE=; b=b
+ aYkGzQ9yrXVIrZ6GC3sOUHTXmZpQFPdJ9jJiAPB7Lye68UWaUoHUjEB4yTQUmQyC
+ J2GTQUPrcDh+0apcDsWC83Ya7QLXDLATWMTaJchlFICqZPSz5gzgo7gxm2iesxHa
+ fqbmRWXa8RVfzUimpA2M+6hF7oOtSGYoJ3ePSC+0pQTjx6xOjs734q8Gs1yvzvu3
+ VTCtJAzoB+DgtDWlA8QIuXehAyH4qxGfvVRRGQZyV1e/R/c7sVJVhqEJ+DrqOWOb
+ j2xl1Eg78O4XtbGHnJ7CSrrDM6Jomdw1U2UoyR05yx00CpUVsxKNO73ZTSmT/Z39
+ PXpuj8zDby7sdSfrjnqIw==
+X-ME-Sender: <xms:Eo5AZXYmt8DSmmFyNBh2x6NLWozhZkhhlPqccTf_BUTvLddf3rrekw>
+ <xme:Eo5AZWaAR6vN39CbmFqgCrLN6FAwATYtmrfiMoeEV9NVH6CkW3uPv98a-y3TABCnH
+ OAOC1JYRIj-DMkRSg>
+X-ME-Received: <xmr:Eo5AZZ-nNfTtLwjtrzg6nQuX2PLfK80ZocCbZYJlZ4kpSlYRHqWdyXmH_XM1xiYjTjp5gZ9myqkCt_DvRQws418vKRtxf9JlUTE3CEWifVZx5c0mgCuQdPDWfPX6SLdb8_BLvQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,23 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeelucetufdoteggod
  ftrfgrthhtvghrnhepudekteeuudehtdelteevgfduvddvjefhfedulefgudevgeeghefg
  udefiedtveetnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
  homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:EI5AZUUYBY3KyMza5zk54_8-407iX5_vbHKGHqnYGG84UeF1E2d6zg>
- <xmx:EI5AZbkX2RAXRZS9CoYQFAQy6I4xM9Eaph16h4ASrmgA8iXbErkrjA>
- <xmx:EI5AZRfsMQWXrgN44V6K5_rKB_kaCmp76KQnlJN_g4CepqRPfUdldQ>
- <xmx:EI5AZUDJ350AuHozuW3l-o53D_mBz2YF_Fnlloo_rm06JCYPEqXVbg>
+X-ME-Proxy: <xmx:Eo5AZdqk6Nw7jQpxrbBEV5v79DYX5ccZ6pYnszi5tqLJ_4dwxO4ioA>
+ <xmx:Eo5AZSrRZVRvq1bQbUza1p0S5aml4OQfgGLJksX44b3jXQ8RcGm1xg>
+ <xmx:Eo5AZTRn5Ch7vXB6Ey7k6Rd0qpCVMUXEu0gV8NKYN3c9i1vwTmQcSw>
+ <xmx:Eo5AZfAewAeE_TAyaQPf0tMaMmgoZckpa2J0i_9HUQaLVY806Egj4A>
 Feedback-ID: i0ad843c9:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 31 Oct 2023 01:18:08 -0400 (EDT)
+ 31 Oct 2023 01:18:10 -0400 (EDT)
 From: Samuel Holland <samuel@sholland.org>
 To: Andre Przywara <andre.przywara@arm.com>,
  Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, Icenowy Zheng <icenowy@aosc.io>,
- Jesse Taube <Mr.Bossman075@gmail.com>, Samuel Holland <samuel@sholland.org>
-Subject: [PATCH v3 1/4] sunxi: spl: Disable padding from SPL_PAD_TO
-Date: Tue, 31 Oct 2023 00:17:38 -0500
-Message-ID: <20231031051805.62430-2-samuel@sholland.org>
+ Jesse Taube <Mr.Bossman075@gmail.com>,
+ Samuel Holland <samuel@sholland.org>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 2/4] sunxi: binman: Move BL31 and SCP firmware addresses to
+ Kconfig
+Date: Tue, 31 Oct 2023 00:17:39 -0500
+Message-ID: <20231031051805.62430-3-samuel@sholland.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231031051805.62430-1-samuel@sholland.org>
 References: <20231031051805.62430-1-samuel@sholland.org>
@@ -104,39 +106,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Starting with H6, Allwinner removed the artificial 32 KiB SPL size limit
-from the boot ROM. Now SPL size is only limited by the available SRAM.
-This limit ranges from 152 KiB on H6 to a whopping 2052 KiB on R329. To
-take advantage of this additional space, we must increase SPL_MAX_SIZE.
-Since we do not want to unnecessarily pad SPL out to these giant sizes,
-we must set SPL_PAD_TO to zero. This causes no problems because binman
-already takes care of appending the SPL payload at the right offset.
+This is easier to read than the #ifdef staircase, provides better
+visibility into the memory map (alongside the other Kconfig
+definitions), and allows these addresses to be reused from code.
 
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Samuel Holland <samuel@sholland.org>
 ---
 
 (no changes since v2)
 
 Changes in v2:
- - New patch for v2
+ - New patch for v2, split from the .dtsi changes
 
- common/spl/Kconfig | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ arch/arm/dts/sunxi-u-boot.dtsi | 24 +++++++-----------------
+ arch/arm/mach-sunxi/Kconfig    | 17 +++++++++++++++++
+ 2 files changed, 24 insertions(+), 17 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 25cd18afda7..a0968ff1065 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -97,8 +97,7 @@ config SPL_PAD_TO
- 	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
- 	default 0x11000 if ARCH_MX7 || (ARCH_MX6 && !MX6_OCRAM_256KB)
- 	default 0x10000 if ARCH_KEYSTONE
--	default 0x8000 if ARCH_SUNXI && !MACH_SUN50I_H616
--	default 0x0 if ARCH_MTMIPS
-+	default 0x0 if ARCH_MTMIPS || ARCH_SUNXI
- 	default TPL_MAX_SIZE if TPL_MAX_SIZE > SPL_MAX_SIZE
- 	default SPL_MAX_SIZE
- 	help
+diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
+index a0c8abb7033..7a8764e463b 100644
+--- a/arch/arm/dts/sunxi-u-boot.dtsi
++++ b/arch/arm/dts/sunxi-u-boot.dtsi
+@@ -1,15 +1,5 @@
+ #include <config.h>
+ 
+-#ifdef CONFIG_MACH_SUN50I_H6
+-#define BL31_ADDR 0x104000
+-#define  SCP_ADDR 0x114000
+-#elif defined(CONFIG_MACH_SUN50I_H616)
+-#define BL31_ADDR 0x40000000
+-#else
+-#define BL31_ADDR  0x44000
+-#define  SCP_ADDR  0x50000
+-#endif
+-
+ / {
+ 	aliases {
+ 		mmc0 = &mmc0;
+@@ -69,8 +59,8 @@
+ 					os = "arm-trusted-firmware";
+ 					arch = "arm64";
+ 					compression = "none";
+-					load = <BL31_ADDR>;
+-					entry = <BL31_ADDR>;
++					load = <CONFIG_SUNXI_BL31_BASE>;
++					entry = <CONFIG_SUNXI_BL31_BASE>;
+ 
+ 					atf-bl31 {
+ 						filename = "bl31.bin";
+@@ -78,13 +68,13 @@
+ 					};
+ 				};
+ 
+-#ifdef SCP_ADDR
++#if CONFIG_SUNXI_SCP_BASE
+ 				scp {
+ 					description = "SCP firmware";
+ 					type = "firmware";
+ 					arch = "or1k";
+ 					compression = "none";
+-					load = <SCP_ADDR>;
++					load = <CONFIG_SUNXI_SCP_BASE>;
+ 
+ 					scp {
+ 						filename = "scp.bin";
+@@ -106,10 +96,10 @@
+ 				@config-SEQ {
+ 					description = "NAME";
+ 					firmware = "atf";
+-#ifndef SCP_ADDR
+-					loadables = "uboot";
+-#else
++#if CONFIG_SUNXI_SCP_BASE
+ 					loadables = "scp", "uboot";
++#else
++					loadables = "uboot";
+ #endif
+ 					fdt = "fdt-SEQ";
+ 				};
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index a10e4c06b6a..b0fbda0aa09 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -155,6 +155,23 @@ config SUNXI_RVBAR_ALTERNATIVE
+ 	for all other SoCs, so the content of the SRAM_VER_REG becomes
+ 	irrelevant there, and we can use the same code.
+ 
++config SUNXI_BL31_BASE
++	hex
++	default 0x00044000 if MACH_SUN50I || MACH_SUN50I_H5
++	default 0x00104000 if MACH_SUN50I_H6
++	default 0x40000000 if MACH_SUN50I_H616
++	default 0x0
++	help
++	  Address where BL31 (TF-A) is loaded, or zero if BL31 is not used.
++
++config SUNXI_SCP_BASE
++	hex
++	default 0x00050000 if MACH_SUN50I || MACH_SUN50I_H5
++	default 0x00114000 if MACH_SUN50I_H6
++	default 0x0
++	help
++	  Address where SCP firmware is loaded, or zero if it is not used.
++
+ config SUNXI_A64_TIMER_ERRATUM
+ 	bool
+ 
 -- 
 2.41.0
 
