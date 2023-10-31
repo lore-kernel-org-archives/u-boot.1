@@ -4,52 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C73BC4167D
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 11:54:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8983C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 12:04:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D5B875FA;
-	Tue, 31 Oct 2023 12:54:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id D2A8887CA9;
+	Tue, 31 Oct 2023 13:04:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VjAjn1Cy";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFCE187CB4; Tue, 31 Oct 2023 12:54:52 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 629BA875E2
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 12:54:48 +0100 (CET)
+ id 810B287CA7; Tue, 31 Oct 2023 13:04:11 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 46535875F0
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 13:04:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 772BBC15;
- Tue, 31 Oct 2023 04:55:29 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 78D573F64C;
- Tue, 31 Oct 2023 04:54:46 -0700 (PDT)
-Date: Tue, 31 Oct 2023 11:54:40 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: "Jaehoon Chung" <jh80.chung@samsung.com>
-Cc: 'Jernej =?UTF-8?B?xaBrcmFiZWMn?= <jernej.skrabec@gmail.com>, "'Jagan
- Teki'" <jagan@amarulasolutions.com>, "'Samuel Holland'"
- <samuel@sholland.org>, "'SASANO	Takayoshi'" <uaa@mx5.nisiq.net>, "'Mikhail
- Kalashnikov'" <iuncuim@gmail.com>, "'Piotr Oniszczuk'"
- <piotr.oniszczuk@gmail.com>, <u-boot@lists.denx.de>,
- <linux-sunxi@lists.linux.dev>
-Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
-Message-ID: <20231031115428.0e9edf56@donnerap.manchester.arm.com>
-In-Reply-To: <004e01da0bc5$7a210c60$6e632520$@samsung.com>
-References: <20231018155014.383566-1-andre.przywara@arm.com>
- <20231018155014.383566-2-andre.przywara@arm.com>
- <1965267.usQuhbGJ8B@archlinux>
- <CGME20231021212022epcas1p1f34ed4f9c235d0e8aaace738f009feaf@epcas1p1.samsung.com>
- <20231021221911.16a6a145@slackpad.lan>
- <004e01da0bc5$7a210c60$6e632520$@samsung.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VC456g065826;
+ Tue, 31 Oct 2023 07:04:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698753845;
+ bh=Ms6vw/gj7WGJyCw+ZYOX1njUrMN5jnzFaOQFp3+gGTw=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=VjAjn1CyXf7SKt0SAXxMh4dmYF/DWfWrPHeb3rLImkO+yOmJsJiPdglRIYtDEUMfZ
+ ehbCg5k6w4aswmhP33eKO6MH0QIgjHbVc6P5Dhy0smUaNSMc6Cl1dLyz/nxpOVw7HC
+ vET0mNQzzibITaHua06Qpi3x77AO/ZNWELTYTROo=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VC45Wb089291
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 31 Oct 2023 07:04:05 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
+ Oct 2023 07:04:05 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 31 Oct 2023 07:04:05 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VC45Jd074751;
+ Tue, 31 Oct 2023 07:04:05 -0500
+Date: Tue, 31 Oct 2023 07:04:05 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Nitin Yadav <n-yadav@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 2/4] arm: dts: Add support for AM62x LP SK
+Message-ID: <20231031120405.t3g4tdkvj7vwl5vx@skype>
+References: <20231030110138.1347603-1-n-yadav@ti.com>
+ <20231030110138.1347603-3-n-yadav@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231030110138.1347603-3-n-yadav@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,169 +78,396 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 31 Oct 2023 15:42:54 +0900
-"Jaehoon Chung" <jh80.chung@samsung.com> wrote:
+On 16:31-20231030, Nitin Yadav wrote:
+> The AM62x LP SK board is similar to the AM62x SK board,
+> but has some significant changes that requires different
+> device tree.
+> 
+> The differences are mainly:
+> - AM62x SoC in the AMC package that meets AECQ100 automotive standard.
+> - LPDDR4 versus DDR4 on the AM62x SK.
+> - TPS65219 PMIC instead of discrete regulators.
+> - IO expander pin names are wired differently.
 
-Hi Jaehoon,
+IO expander pins are wired differently
 
-> Hi,
->=20
-> > -----Original Message-----
-> > From: Andre Przywara <andre.przywara@arm.com>
-> > Sent: Sunday, October 22, 2023 6:19 AM
-> > To: Jernej =C5=A0krabec <jernej.skrabec@gmail.com>
-> > Cc: Jagan Teki <jagan@amarulasolutions.com>; Jaehoon Chung <jh80.chung@=
-samsung.com>; Samuel Holland
-> > <samuel@sholland.org>; SASANO Takayoshi <uaa@mx5.nisiq.net>; Mikhail Ka=
-lashnikov <iuncuim@gmail.com>;
-> > Piotr Oniszczuk <piotr.oniszczuk@gmail.com>; u-boot@lists.denx.de; linu=
-x-sunxi@lists.linux.dev
-> > Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup condit=
-ions
-> >=20
-> > On Sat, 21 Oct 2023 08:34:06 +0200
-> > Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
-> >  =20
-> > > On Wednesday, October 18, 2023 5:50:12 PM CEST Andre Przywara wrote: =
-=20
-> > > > So far we have a convoluted #ifdef mesh that guards the early AXP P=
-MIC
-> > > > setup in board.c. That combination of &&, || and negations is very =
-hard
-> > > > to read, maintain and especially to extend.
-> > > >
-> > > > Fortunately we have those same conditions already modelled in the
-> > > > Kconfig file, so they are actually redundant. On top of that the re=
-al
-> > > > reason we have those preprocessor guards in the first place is abou=
-t the
-> > > > symbols that are *conditionally* defined: without #ifdefs the build
-> > > > would break because of them being undefined for many boards.
-> > > >
-> > > > To simplify this, just change the guards to actually look at the sy=
-mbols
-> > > > needed, so CONFIG_AXP_xxx_VOLT instead of CONFIG_AXPyyy_POWER.
-> > > > This drastically improves the readability of this code, and makes a=
-dding
-> > > > PMIC support a pure Kconfig matter.
-> > > >
-> > > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > > > ---
-> > > >  board/sunxi/board.c   | 32 ++++++++++++++------------------
-> > > >  drivers/power/Kconfig |  2 +-
-> > > >  2 files changed, 15 insertions(+), 19 deletions(-)
-> > > >
-> > > > diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> > > > index ebaa9431984..65d79a02c25 100644
-> > > > --- a/board/sunxi/board.c
-> > > > +++ b/board/sunxi/board.c
-> > > > @@ -597,50 +597,46 @@ void sunxi_board_init(void)
-> > > >  		}
-> > > >  	}
-> > > >
-> > > > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
-> > > > -	defined CONFIG_AXP818_POWER
-> > > > +#ifdef CONFIG_AXP_DCDC1_VOLT
-> > > >  	power_failed |=3D axp_set_dcdc1(CONFIG_AXP_DCDC1_VOLT);
-> > > > +	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
-> > > >  #endif
-> > > > -#if !defined(CONFIG_AXP305_POWER)
-> > > > +#ifdef CONFIG_AXP_DCDC2_VOLT
-> > > >  	power_failed |=3D axp_set_dcdc2(CONFIG_AXP_DCDC2_VOLT);
-> > > >  	power_failed |=3D axp_set_dcdc3(CONFIG_AXP_DCDC3_VOLT);
-> > > >  #endif
-> > > > -#if !defined(CONFIG_AXP209_POWER) && !defined(CONFIG_AXP818_POWER)
-> > > > +#ifdef CONFIG_AXP_DCDC4_VOLT
-> > > >  	power_failed |=3D axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);
-> > > >  #endif
-> > > > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
-> > > > -	defined CONFIG_AXP818_POWER
-> > > > -	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
-> > > > -#endif
-> > > >
-> > > > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
-> > > > -	defined CONFIG_AXP818_POWER
-> > > > +#ifdef CONFIG_AXP_ALDO1_VOLT
-> > > >  	power_failed |=3D axp_set_aldo1(CONFIG_AXP_ALDO1_VOLT);
-> > > >  #endif
-> > > > -#if !defined(CONFIG_AXP305_POWER)
-> > > > +#ifdef CONFIG_AXP_ALDO2_VOLT
-> > > >  	power_failed |=3D axp_set_aldo2(CONFIG_AXP_ALDO2_VOLT);
-> > > >  #endif
-> > > > -#if !defined(CONFIG_AXP152_POWER) && !defined(CONFIG_AXP305_POWER)
-> > > > +#ifdef CONFIG_AXP_ALDO3_VOLT
-> > > >  	power_failed |=3D axp_set_aldo3(CONFIG_AXP_ALDO3_VOLT);
-> > > >  #endif
-> > > > -#ifdef CONFIG_AXP209_POWER
-> > > > +#ifdef CONFIG_AXP_ALDO4_VOLT
-> > > >  	power_failed |=3D axp_set_aldo4(CONFIG_AXP_ALDO4_VOLT);
-> > > >  #endif
-> > > >
-> > > > -#if defined(CONFIG_AXP221_POWER) || defined(CONFIG_AXP809_POWER) |=
-| \
-> > > > -	defined(CONFIG_AXP818_POWER)
-> > > > +#ifdef CONFIG_AXP_DLDO1_VOLT
-> > > >  	power_failed |=3D axp_set_dldo(1, CONFIG_AXP_DLDO1_VOLT);
-> > > >  	power_failed |=3D axp_set_dldo(2, CONFIG_AXP_DLDO2_VOLT);
-> > > > -#if !defined CONFIG_AXP809_POWER
-> > > > +#endif
-> > > > +#ifdef CONFIG_AXP_DLDO3_VOLT
-> > > >  	power_failed |=3D axp_set_dldo(3, CONFIG_AXP_DLDO3_VOLT);
-> > > >  	power_failed |=3D axp_set_dldo(4, CONFIG_AXP_DLDO4_VOLT);
-> > > >  #endif
-> > > > +#ifdef CONFIG_AXP_ELDO1_VOLT
-> > > >  	power_failed |=3D axp_set_eldo(1, CONFIG_AXP_ELDO1_VOLT);
-> > > >  	power_failed |=3D axp_set_eldo(2, CONFIG_AXP_ELDO2_VOLT);
-> > > >  	power_failed |=3D axp_set_eldo(3, CONFIG_AXP_ELDO3_VOLT);
-> > > >  #endif
-> > > >
-> > > > -#ifdef CONFIG_AXP818_POWER
-> > > > +#ifdef CONFIG_AXP_FLDO1_VOLT
-> > > >  	power_failed |=3D axp_set_fldo(1, CONFIG_AXP_FLDO1_VOLT);
-> > > >  	power_failed |=3D axp_set_fldo(2, CONFIG_AXP_FLDO2_VOLT);
-> > > >  	power_failed |=3D axp_set_fldo(3, CONFIG_AXP_FLDO3_VOLT);
-> > > > @@ -649,7 +645,7 @@ void sunxi_board_init(void)
-> > > >  #if defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER
-> > > >  	power_failed |=3D axp_set_sw(IS_ENABLED(CONFIG_AXP_SW_ON));
-> > > >  #endif
-> > > > -#endif
-> > > > +#endif	/* CONFIG_AXPxxx_POWER */
-> > > >  	printf("DRAM:");
-> > > >  	gd->ram_size =3D sunxi_dram_init();
-> > > >  	printf(" %d MiB\n", (int)(gd->ram_size >> 20));
-> > > > diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-> > > > index 7f3b990d231..83cb31c937a 100644
-> > > > --- a/drivers/power/Kconfig
-> > > > +++ b/drivers/power/Kconfig
-> > > > @@ -180,7 +180,7 @@ config AXP_DCDC3_VOLT
-> > > >
-> > > >  config AXP_DCDC4_VOLT
-> > > >  	int "axp pmic dcdc4 voltage"
-> > > > -	depends on AXP152_POWER || AXP221_POWER || AXP809_POWER || =20
-> > > AXP818_POWER || =20
-> > > > AXP305_POWER +	depends on AXP152_POWER || AXP221_POWER || AXP809_PO=
-WER =20
-> > > || =20
-> > > > AXP305_POWER default 1250 if AXP152_POWER
-> > > >  	default 1200 if MACH_SUN6I
-> > > >  	default 0 if MACH_SUN8I =20
-> > >
-> > > This patch is great, but this last change doesn't seem to be directly
-> > > connected? =20
-> >=20
-> > It is an existing bug: there is no axp_set_dcdc4() for the AXP818, but
-> > since the AXP818 is not included in the guards at the calling site
-> > in board.c above, we didn't notice.
-> > So without this change, all A83T boards (the only ones using AXP818)
-> > would fail compilation.
-> > I just forgot to mention it in the commit message, will add it. =20
->=20
-> Will you resend this patch after updating the commit message?
+> - Second ethernet port is currently disabled as the boards do not have
+>   the part physically installed.
 
-Well, I was actually thinking of merging it straight away (with the
-updated commit message), since I think that plus a tiny typo were the only
-changes requested in that series.
-Unless there is more from your side?
+Not sure I understand this. does this mean, it will be physically
+installed later?
 
-Cheers,
-Andre
+> - OSPI NAND vs OSPI NOR.
+
+Which one is it on LP?
+
+> - No WLAN chip instead a SDIO M.2 connector.
+
+Please use complete sentence.
+> 
+> Sk-AM62-LP: https://www.ti.com/lit/zip/sprr471
+
+Why not use https://www.ti.com/tool/SK-AM62-LP ?
+
+> 
+> Switch to binman for building bootloader images. Reuse
+> k3-am625-sk-binman and override the dtb names to that
+> of AM62x LP SK board.
+
+Drop this paragraph. There is nothing to switch to since we are
+already using binman for am62x.
+
+> 
+
+Please document in commit message which rev of kernel we picked
+arch/arm/dts/k3-am62-lp-sk.dts from.
+
+> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
+> ---
+>  arch/arm/dts/Makefile                         |    2 +
+>  arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi        |   32 +
+>  arch/arm/dts/k3-am62-lp-sk.dts                |  231 ++
+>  arch/arm/dts/k3-am62-r5-lp-sk.dts             |   12 +
+>  arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi | 2190 +++++++++++++++++
+>  5 files changed, 2467 insertions(+)
+>  create mode 100644 arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/k3-am62-lp-sk.dts
+>  create mode 100644 arch/arm/dts/k3-am62-r5-lp-sk.dts
+>  create mode 100644 arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index bde2176ec7..72ea57885f 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1337,6 +1337,8 @@ dtb-$(CONFIG_SOC_K3_AM642) += k3-am642-evm.dtb \
+>  
+>  dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
+>  			      k3-am625-r5-sk.dtb \
+> +			      k3-am62-lp-sk.dtb \
+> +			      k3-am62-r5-lp-sk.dtb \
+>  			      k3-am625-beagleplay.dtb \
+>  			      k3-am625-r5-beagleplay.dtb \
+>  			      k3-am625-verdin-wifi-dev.dtb \
+> diff --git a/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..721865371d
+> --- /dev/null
+> +++ b/arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
+> @@ -0,0 +1,32 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * AM62x LP SK dts file for SPLs
+> + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include "k3-am62x-sk-common-u-boot.dtsi"
+> +
+> +#include "k3-am625-sk-binman.dtsi"
+> +
+> +#ifdef CONFIG_TARGET_AM625_A53_EVM
+> +
+> +#define SPL_AM62_LP_SK_DTB "spl/dts/k3-am62-lp-sk.dtb"
+> +#define AM62_LP_SK_DTB "u-boot.dtb"
+> +
+> +&spl_am625_sk_dtb_unsigned {
+> +	filename = SPL_AM62_LP_SK_DTB;
+> +};
+> +
+> +&am625_sk_dtb_unsigned {
+> +	filename = AM62_LP_SK_DTB;
+> +};
+> +
+> +&spl_am625_sk_dtb {
+> +	filename = SPL_AM62_LP_SK_DTB;
+> +};
+> +
+> +&am625_sk_dtb {
+> +	filename = AM62_LP_SK_DTB;
+> +};
+> +
+
+Don't you need bootph params for the PMIC OR the mmc voltage regulator?
+
+> +#endif
+> diff --git a/arch/arm/dts/k3-am62-lp-sk.dts b/arch/arm/dts/k3-am62-lp-sk.dts
+> new file mode 100644
+> index 0000000000..5e6feb8cd1
+> --- /dev/null
+> +++ b/arch/arm/dts/k3-am62-lp-sk.dts
+> @@ -0,0 +1,231 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * AM62x LP SK: https://www.ti.com/tool/SK-AM62-LP
+> + *
+> + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "k3-am62x-sk-common.dtsi"
+> +
+> +/ {
+> +	compatible = "ti,am62-lp-sk", "ti,am625";
+> +	model = "Texas Instruments AM62x LP SK";
+> +
+> +	vmain_pd: regulator-0 {
+> +		/* TPS65988 PD CONTROLLER OUTPUT */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vmain_pd";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +	};
+> +
+> +	vcc_5v0: regulator-1 {
+> +		/* Output of TPS630702RNMR */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_5v0";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vmain_pd>;
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +	};
+> +
+> +	vcc_3v3_sys: regulator-2 {
+> +		/* output of LM61460-Q1 */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_3v3_sys";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vmain_pd>;
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +	};
+> +
+> +	vdd_mmc1: regulator-3 {
+> +		/* TPS22918DBVR */
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vdd_mmc1";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		regulator-boot-on;
+> +		enable-active-high;
+> +		vin-supply = <&vcc_3v3_sys>;
+> +		gpio = <&exp1 3 GPIO_ACTIVE_HIGH>;
+> +	};
+> +
+> +	vddshv_sdio: regulator-4 {
+> +		compatible = "regulator-gpio";
+> +		regulator-name = "vddshv_sdio";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&vddshv_sdio_pins_default>;
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		regulator-boot-on;
+> +		vin-supply = <&ldo1_reg>;
+> +		gpios = <&main_gpio0 31 GPIO_ACTIVE_HIGH>;
+> +		states = <1800000 0x0>,
+> +			 <3300000 0x1>;
+> +	};
+> +};
+> +
+> +&main_pmx0 {
+> +	vddshv_sdio_pins_default: vddshv-sdio-default-pins {
+> +		pinctrl-single,pins = <
+> +			AM62X_IOPAD(0x07c, PIN_OUTPUT, 7) /* (M19) GPMC0_CLK.GPIO0_31 */
+> +		>;
+> +	};
+> +
+> +	main_gpio1_ioexp_intr_pins_default: main-gpio1-ioexp-intr-default-pins {
+> +		pinctrl-single,pins = <
+> +			AM62X_IOPAD(0x01d4, PIN_INPUT, 7) /* (C13) UART0_RTSn.GPIO1_23 */
+> +		>;
+> +	};
+> +
+> +	pmic_irq_pins_default: pmic-irq-default-pins {
+> +		pinctrl-single,pins = <
+> +			AM62X_IOPAD(0x01f4, PIN_INPUT, 0) /* (B16) EXTINTn */
+> +		>;
+> +	};
+> +};
+> +
+> +&main_i2c1 {
+> +	exp1: gpio@22 {
+> +		compatible = "ti,tca6424";
+> +		reg = <0x22>;
+> +		gpio-controller;
+> +		#gpio-cells = <2>;
+> +		gpio-line-names = "GPIO_CPSW2_RST", "GPIO_CPSW1_RST",
+> +				   "PRU_DETECT", "MMC1_SD_EN",
+> +				   "VPP_LDO_EN", "EXP_PS_3V3_En",
+> +				   "EXP_PS_5V0_En", "EXP_HAT_DETECT",
+> +				   "GPIO_AUD_RSTn", "GPIO_eMMC_RSTn",
+> +				   "UART1_FET_BUF_EN", "BT_UART_WAKE_SOC",
+> +				   "GPIO_HDMI_RSTn", "CSI_GPIO0",
+> +				   "CSI_GPIO1", "GPIO_OLDI_INT",
+> +				   "HDMI_INTn", "TEST_GPIO2",
+> +				   "MCASP1_FET_EN", "MCASP1_BUF_BT_EN",
+> +				   "MCASP1_FET_SEL", "UART1_FET_SEL",
+> +				   "", "IO_EXP_TEST_LED";
+> +
+> +		interrupt-parent = <&main_gpio1>;
+> +		interrupts = <23 IRQ_TYPE_EDGE_FALLING>;
+> +		interrupt-controller;
+> +		#interrupt-cells = <2>;
+> +
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&main_gpio1_ioexp_intr_pins_default>;
+> +	};
+> +
+> +	exp2: gpio@23 {
+> +		compatible = "ti,tca6424";
+> +		reg = <0x23>;
+> +		gpio-controller;
+> +		#gpio-cells = <2>;
+> +		gpio-line-names = "", "",
+> +				   "", "",
+> +				   "", "",
+> +				   "", "",
+> +				   "WL_LT_EN", "CSI_RSTz",
+> +				   "", "",
+> +				   "", "",
+> +				   "", "",
+> +				   "SPI0_FET_SEL", "SPI0_FET_OE",
+> +				   "GPIO_OLDI_RSTn", "PRU_3V3_EN",
+> +				   "", "",
+> +				   "CSI_VLDO_SEL", "SOC_WLAN_SDIO_RST";
+> +	};
+> +};
+> +
+> +&sdhci1 {
+> +	vmmc-supply = <&vdd_mmc1>;
+> +	vqmmc-supply = <&vddshv_sdio>;
+> +};
+> +
+> +&cpsw_port2 {
+> +	status = "disabled";
+> +};
+> +
+> +&main_i2c0 {
+> +	tps65219: pmic@30 {
+> +		compatible = "ti,tps65219";
+> +		reg = <0x30>;
+> +		buck1-supply = <&vcc_3v3_sys>;
+> +		buck2-supply = <&vcc_3v3_sys>;
+> +		buck3-supply = <&vcc_3v3_sys>;
+> +		ldo1-supply = <&vcc_3v3_sys>;
+> +		ldo2-supply = <&buck2_reg>;
+> +		ldo3-supply = <&vcc_3v3_sys>;
+> +		ldo4-supply = <&vcc_3v3_sys>;
+> +
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pmic_irq_pins_default>;
+> +
+> +		interrupt-parent = <&gic500>;
+> +		interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;
+> +		ti,power-button;
+> +
+> +		regulators {
+> +			buck1_reg: buck1 {
+> +				regulator-name = "VDD_CORE";
+> +				regulator-min-microvolt = <750000>;
+> +				regulator-max-microvolt = <750000>;
+> +				regulator-boot-on;
+> +				regulator-always-on;
+> +			};
+> +
+> +			buck2_reg: buck2 {
+> +				regulator-name = "VCC1V8_SYS";
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-boot-on;
+> +				regulator-always-on;
+> +			};
+> +
+> +			buck3_reg: buck3 {
+> +				regulator-name = "VDD_LPDDR4";
+> +				regulator-min-microvolt = <1100000>;
+> +				regulator-max-microvolt = <1100000>;
+> +				regulator-boot-on;
+> +				regulator-always-on;
+> +			};
+> +
+> +			ldo1_reg: ldo1 {
+> +				regulator-name = "VDDSHV_SDIO";
+> +				regulator-min-microvolt = <3300000>;
+> +				regulator-max-microvolt = <3300000>;
+> +			};
+> +
+> +			ldo2_reg: ldo2 {
+> +				regulator-name = "VDDAR_CORE";
+> +				regulator-min-microvolt = <850000>;
+> +				regulator-max-microvolt = <850000>;
+> +				regulator-boot-on;
+> +				regulator-always-on;
+> +			};
+> +
+> +			ldo3_reg: ldo3 {
+> +				regulator-name = "VDDA_1V8";
+> +				regulator-min-microvolt = <1800000>;
+> +				regulator-max-microvolt = <1800000>;
+> +				regulator-boot-on;
+> +				regulator-always-on;
+> +			};
+> +
+> +			ldo4_reg: ldo4 {
+> +				regulator-name = "VDD_1V2";
+> +				regulator-min-microvolt = <1200000>;
+> +				regulator-max-microvolt = <1200000>;
+> +				regulator-boot-on;
+> +				regulator-always-on;
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&tlv320aic3106 {
+> +	DVDD-supply = <&buck2_reg>;
+> +};
+> diff --git a/arch/arm/dts/k3-am62-r5-lp-sk.dts b/arch/arm/dts/k3-am62-r5-lp-sk.dts
+> new file mode 100644
+> index 0000000000..9f4f454aec
+> --- /dev/null
+> +++ b/arch/arm/dts/k3-am62-r5-lp-sk.dts
+> @@ -0,0 +1,12 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * AM62x LP SK dts file for R5 SPL
+> + * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
+> + */
+> +
+> +#include "k3-am62-lp-sk.dts"
+> +#include "k3-am62x-ddr-lp4-50-800-800.dtsi"
+> +#include "k3-am62-ddr.dtsi"
+> +
+> +#include "k3-am62-lp-sk-u-boot.dtsi"
+> +#include "k3-am62x-r5-sk-common.dtsi"
+> diff --git a/arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi b/arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+> new file mode 100644
+> index 0000000000..a0d0376608
+> --- /dev/null
+> +++ b/arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
+> @@ -0,0 +1,2190 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * This file was generated with the
+> + * AM62x SysConfig DDR Subsystem Register Configuration Tool v0.08.61
+> + * Tue Mar 22 2022 17:03:08 GMT-0500 (Central Daylight Time)
+> + * DDR Type: LPDDR4 (MT53E1G16D1FW-046 WT:A)
+> + * F0 = 50MHz    F1 = 800MHz    F2 = 800MHz
+> + * Density (per channel): 16Gb
+> + * Number of Ranks: 1
+> + */
+> +
+> +#define DDRSS_PLL_FHS_CNT 6
+> +#define DDRSS_PLL_FREQUENCY_1 400000000
+> +#define DDRSS_PLL_FREQUENCY_2 400000000
+> +
+[...]
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
