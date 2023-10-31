@@ -4,122 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2616C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:44:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E10AC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:47:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FABE879D3;
-	Tue, 31 Oct 2023 07:44:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 80EE787578;
+	Tue, 31 Oct 2023 07:47:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Hpj+7DjZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32A0187AF1; Tue, 31 Oct 2023 07:44:37 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3AC67879D3; Tue, 31 Oct 2023 07:47:49 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20F9E86F92
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:44:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92B6687571
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:47:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20231031064431epoutp028ac62dcf7240cf5babb2502c0ab8de67~THi7ZwtZW2296522965epoutp02R
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:44:31 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20231031064431epoutp028ac62dcf7240cf5babb2502c0ab8de67~THi7ZwtZW2296522965epoutp02R
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698734671;
- bh=LbUHomerFAXy0pywkLI+OcXHuzx/fsrBWuFl/j3nOOY=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=Hpj+7DjZ12yMdiuf5fu2MmRL9J/BFmDIIm293UW2mpBJ0dMbvmDojXGct5Aj34SzV
- bIcB0J5cCqRJykfjXBNZBeuwiB9tIeFoVAWo+v4wi7FkmYBRNbiR7sg/bVJeZ1/Zx4
- nqINgNKBJbveeLVCyXfs1jyQAqpIbdWqsu6CSgWM=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20231031064430epcas1p2264c00191ca6f063f50ddacd14604564~THi7Ovfae1826118261epcas1p2N;
- Tue, 31 Oct 2023 06:44:30 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.133]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4SKLGP233Rz4x9Pv; Tue, 31 Oct
- 2023 06:44:29 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 6E.CD.10211.C42A0456; Tue, 31 Oct 2023 15:44:28 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231031064427epcas1p38d1b6644b69ec2cbb28670d7cd0358c4~THi4jn5RC1580015800epcas1p3M;
- Tue, 31 Oct 2023 06:44:27 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031064427epsmtrp195afe01e056586fd44ba1bc909ba3071~THi4i9PMu1667916679epsmtrp1e;
- Tue, 31 Oct 2023 06:44:27 +0000 (GMT)
-X-AuditID: b6c32a38-463ff700000027e3-b5-6540a24ce85b
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 3A.42.07368.B42A0456; Tue, 31 Oct 2023 15:44:27 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20231031064427epsmtip2360cf2e1b583a8a4f0eda63ba634bcf0~THi4Wm8Vt1995819958epsmtip2E;
- Tue, 31 Oct 2023 06:44:27 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Svyatoslav Ryhel'" <clamor95@gmail.com>, "'Tom Rini'"
- <trini@konsulko.com>, "'Simon Glass'" <sjg@chromium.org>
-Cc: <u-boot@lists.denx.de>
-In-Reply-To: <20231027082615.306943-2-clamor95@gmail.com>
-Subject: RE: [PATCH v9 1/8] power: pmic: palmas: support TI TPS65913 PMIC
-Date: Tue, 31 Oct 2023 15:44:27 +0900
-Message-ID: <005201da0bc5$b19f9760$14dec620$@samsung.com>
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 39V6lc8B098791;
+ Tue, 31 Oct 2023 14:47:38 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Tue, 31 Oct 2023 14:47:34 +0800
+Date: Tue, 31 Oct 2023 14:43:52 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: merle w <merlew4n6@gmail.com>
+CC: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
+ <rick@andestech.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, Anup Patel
+ <apatel@ventanamicro.com>, Kautuk Consul <kconsul@ventanamicro.com>,
+ "Chanho Park" <chanho61.park@samsung.com>, <u-boot@lists.denx.de>
+Subject: Re: [RFC v2 2/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Message-ID: <ZUCiKNIAc68zPTty@swlinux02>
+References: <20231029084533.44607-1-heinrich.schuchardt@canonical.com>
+ <20231029084533.44607-3-heinrich.schuchardt@canonical.com>
+ <CAJ8bkywF8v+JA8D=di=agqmvdsUdrmUvhyeb16_4dDr07A0ejg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQLxkJu7998OOQM6zGAUNVB6NFUBswHvqM9/APAq7MauHWtY0A==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpjk+LIzCtJLcpLzFFi42LZdlhTX9dnkUOqwcVtPBYH+nsZLb5t2cZo
- MXXSZnaLt3s72R1YPGY3XGTx2DnrLrvHqwOr2D3O3tnBGMASlW2TkZqYklqkkJqXnJ+SmZdu
- q+QdHO8cb2pmYKhraGlhrqSQl5ibaqvk4hOg65aZA7RTSaEsMacUKBSQWFyspG9nU5RfWpKq
- kJFfXGKrlFqQklNgWqBXnJhbXJqXrpeXWmJlaGBgZApUmJCd0bHwJVPBPu6KpfO2szcwbuPs
- YuTkkBAwkbj7aR0ziC0ksINRYtcb3y5GLiD7E6PEt0tnWCCcb4wShyd8YIPpuNhxkg0isZdR
- YvbC7cwQzktGiTWTXrKDVLEJ6En8X7QQbK6IQJnE0q61TCA2s4CURNPJXYwgNqeApcT2TfvB
- 6oUFPCWunH0BVs8ioCrx9/wWsHpeoJq/U9azQNiCEidnPmGBmCMvsf3tHGaIixQkfj5dxgqx
- y0ni+sbzjBA1IhKzO9vAjpMQ+Mou0Xr8ASNEg4vEpwknWSBsYYlXx7ewQ9hSEi/729ghGpoZ
- JZYuOcgK4fQwSvxruA4NAGOJ/UsnA53HAbRCU2L9Ln2IsKLEzt9zoTbzSbz72sMKUiIhwCvR
- 0SYEUaIicen1SyaYXXef/GedwKg0C8lvs5D8NgvJD7MQli1gZFnFKJZaUJybnlpsWGACj+7k
- /NxNjOAEqWWxg3Hu2w96hxiZOBgPMUpwMCuJ8B42dUgV4k1JrKxKLcqPLyrNSS0+xGgKDO2J
- zFKiyfnAFJ1XEm9oYmlgYmZkbGJhaGaoJM577FVvipBAemJJanZqakFqEUwfEwenVANTOI/9
- TLdvWw9c/vp67if51QtmRT988ypEdeEb5S/GL/fzzY6afG+OEX+wYJXIkmlhGa/2nXHy4u7w
- ytz/rkqHO0jsV7iD0+X+9g0znKoOqXCb6fqsbn3XFH9tyczXDat3h9z/XcQdahb8gvvqY/NL
- 7DNnvz3P5HVbKeTb+Qf2HqIdped2LdiwdctChX35UZKSXnvPZE2ZdbpqQ8TqwiJpB94XP4MM
- RX5p3j937fYhFtO2Mo55Jed3/Z3++W5J7MGI11rXHe4s2FVwoeLuJH8n544ttpVim5d92b+m
- 4NaORzu3Blfy3anqs0mc4VPdXRXIet8oT2P27u1lEz/m/Qr13FB410nhyPcfq5a+TT77YocS
- S3FGoqEWc1FxIgAKg9+FGQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrHLMWRmVeSWpSXmKPExsWy7bCSvK73IodUgym9JhYH+nsZLb5t2cZo
- MXXSZnaLt3s72R1YPGY3XGTx2DnrLrvHqwOr2D3O3tnBGMASxWWTkpqTWZZapG+XwJXRsfAl
- U8E+7oql87azNzBu4+xi5OSQEDCRuNhxkq2LkYtDSGA3o8S7vlnsEAkpic9PpwIlOIBsYYnD
- h4shap4zSnxdfZANpIZNQE/i/6KFzCC2iECFxJz+j2BxZqDeppO7GCEatjNKTH5xBizBKWAp
- sX3TfrAFwgKeElfOvgBrZhFQlfh7fgsTiM0LVPN3ynoWCFtQ4uTMJywgRzADLWvbyAgxX15i
- +9s5zBB3Kkj8fLqMFeIGJ4nrG89D1YhIzO5sY57AKDwLyaRZCJNmIZk0C0nHAkaWVYySqQXF
- uem5yYYFhnmp5XrFibnFpXnpesn5uZsYwVGipbGD8d78f3qHGJk4GA8xSnAwK4nwHjZ1SBXi
- TUmsrEotyo8vKs1JLT7EKM3BoiTOazhjdoqQQHpiSWp2ampBahFMlomDU6qBaXnqyY/O8Rb2
- sTeZJX/3cf8P73srWtl0ar7y+nbeKZvYVxyoDiqM/nXOll9U+afZ17O3Kwz4lNvC359L21K9
- w+u2smsdS1Z1ScD/jpzoRx0hOfbGRkeWC7+6FCgkNOPQnMe/5hlI+bdLmU6wM6zbeuv6a7e9
- j6Tfe0X800+5ZqffkpS6OMVGWW6J2oGAjk8VNzNVZea9uurUvmh+4OYXAblrT842VNs3wYWf
- d0WVcNLWI1rPq2U+9Byem1DtLPov9QTHxYrurWsyj1W2e6lZ1/CteJZ6fqfLPpELae8ymqbK
- VSzN65x+xXXGOocwt9BPNpKLAh6emflF+PTZrKh44UnpKl80hfsjZXlZd01RYinOSDTUYi4q
- TgQAVkpc9AEDAAA=
-X-CMS-MailID: 20231031064427epcas1p38d1b6644b69ec2cbb28670d7cd0358c4
-X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231027082631epcas1p39f39d354e33b0b971d9760337b240f4a
-References: <20231027082615.306943-1-clamor95@gmail.com>
- <CGME20231027082631epcas1p39f39d354e33b0b971d9760337b240f4a@epcas1p3.samsung.com>
- <20231027082615.306943-2-clamor95@gmail.com>
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJ8bkywF8v+JA8D=di=agqmvdsUdrmUvhyeb16_4dDr07A0ejg@mail.gmail.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 39V6lc8B098791
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,47 +68,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-> -----Original Message-----
-> From: Svyatoslav Ryhel <clamor95@gmail.com>
-> Sent: Friday, October 27, 2023 5:26 PM
-> To: Tom Rini <trini@konsulko.com>; Jaehoon Chung <jh80.chung@samsung.com>; Simon Glass
-> <sjg@chromium.org>; Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: u-boot@lists.denx.de
-> Subject: [PATCH v9 1/8] power: pmic: palmas: support TI TPS65913 PMIC
+Hi Xiang,
+On Tue, Oct 31, 2023 at 02:16:22PM +0800, merle w wrote:
+> drivers/rng/riscv_zkr_rng.c:10:10: fatal error: interrupt.h: No such
+> file or directory
+> 10 | #include <interrupt.h>
+> | ^~~~~~~~~~~~~
+> compilation terminated.
 > 
-> Existing PALMAS PMIC driver is fully compatible with TI TPS65913
-> PMIC found in many Tegra 4 devices, like Tegra Note 7 and ASUS
-> TF701T. TPS65913 shares same structure of regulators like TPS659038
-> so data can be reused.
+> Where is this interrupt.h?
+
+I think this file is created by the first patch of this patchset.
+"[RFC,v2,1/2] riscv: allow resume after exception"
+
+Could you try to apply this patch and then test again?
+It should compile without error.
+
+Best regards,
+Leo
+
 > 
-> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # NVIDIA Tegratab
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
-> ---
->  drivers/power/pmic/palmas.c | 1 +
->  1 file changed, 1 insertion(+)
+> Regards,
+> Xiang W
 > 
-> diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-> index eb83c88d56..b2e8a2930c 100644
-> --- a/drivers/power/pmic/palmas.c
-> +++ b/drivers/power/pmic/palmas.c
-> @@ -88,6 +88,7 @@ static struct dm_pmic_ops palmas_ops = {
-> 
->  static const struct udevice_id palmas_ids[] = {
->  	{ .compatible = "ti,tps659038", .data = TPS659038 },
-> +	{ .compatible = "ti,tps65913" , .data = TPS659038 },
->  	{ .compatible = "ti,tps65917" , .data = TPS65917 },
->  	{ }
->  };
-> --
-> 2.39.2
-
-
+> Heinrich Schuchardt <heinrich.schuchardt@canonical.com> 于2023年10月29日周日 16:46写道：
+> >
+> > The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+> > provides an interface to a physical entropy source.
+> >
+> > A RNG driver based on the seed CSR is provided. It depends on
+> > mseccfg.sseed being set in the SBI firmware.
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> > v2:
+> >         Resume after exception if seed CSR cannot be read.
+> > ---
+> >  drivers/rng/Kconfig         |   8 +++
+> >  drivers/rng/Makefile        |   1 +
+> >  drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 125 insertions(+)
+> >  create mode 100644 drivers/rng/riscv_zkr_rng.c
+> >
+> > diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+> > index 994cc35b27..4f6e367169 100644
+> > --- a/drivers/rng/Kconfig
+> > +++ b/drivers/rng/Kconfig
+> > @@ -48,6 +48,14 @@ config RNG_OPTEE
+> >           accessible to normal world but reserved and used by the OP-TEE
+> >           to avoid the weakness of a software PRNG.
+> >
+> > +config RNG_RISCV_ZKR
+> > +       bool "RISC-V Zkr random number generator"
+> > +       depends on RISCV_SMODE
+> > +       help
+> > +         This driver provides a Random Number Generator based on the
+> > +         Zkr RISC-V ISA extension which provides an interface to an
+> > +         NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
+> > +
+> >  config RNG_STM32
+> >         bool "Enable random number generator for STM32"
+> >         depends on ARCH_STM32 || ARCH_STM32MP
+> > diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+> > index 47b323e61e..a5d3ca4130 100644
+> > --- a/drivers/rng/Makefile
+> > +++ b/drivers/rng/Makefile
+> > @@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
+> >  obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
+> >  obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
+> >  obj-$(CONFIG_RNG_STM32) += stm32_rng.o
+> > +obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
+> >  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
+> >  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
+> >  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+> > diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
+> > new file mode 100644
+> > index 0000000000..8c9e111e2e
+> > --- /dev/null
+> > +++ b/drivers/rng/riscv_zkr_rng.c
+> > @@ -0,0 +1,116 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > +/*
+> > + * The RISC-V Zkr extension provides CSR seed which provides access to a
+> > + * random number generator.
+> > + */
+> > +
+> > +#define LOG_CATEGORY UCLASS_RNG
+> > +
+> > +#include <dm.h>
+> > +#include <interrupt.h>
+> > +#include <log.h>
+> > +#include <rng.h>
+> > +
+> > +#define DRIVER_NAME "riscv_zkr"
+> > +
+> > +enum opst {
+> > +       /** @BIST: built in self test running */
+> > +       BIST = 0b00,
+> > +       /** @WAIT: sufficient amount of entropy is not yet available */
+> > +       WAIT = 0b01,
+> > +       /** @ES16: 16bits of entropy available */
+> > +       ES16 = 0b10,
+> > +       /** @DEAD: unrecoverable self-test error */
+> > +       DEAD = 0b11,
+> > +};
+> > +
+> > +static unsigned long read_seed(void)
+> > +{
+> > +       unsigned long ret;
+> > +
+> > +       __asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : : "memory");
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
+> > +{
+> > +       u8 *ptr = data;
+> > +
+> > +       while (len) {
+> > +               u32 val;
+> > +
+> > +               val = read_seed();
+> > +
+> > +               switch (val >> 30) {
+> > +               case BIST:
+> > +                       continue;
+> > +               case WAIT:
+> > +                       continue;
+> > +               case ES16:
+> > +                       *ptr++ = val & 0xff;
+> > +                       if (--len) {
+> > +                               *ptr++ = val >> 8;
+> > +                               --len;
+> > +                       }
+> > +                       break;
+> > +               case DEAD:
+> > +                       return -ENODEV;
+> > +               }
+> > +       }
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +/**
+> > + * riscv_zkr_probe() - check if the seed register is available
+> > + *
+> > + * If the SBI software has not set mseccfg.sseed=1 or the Zkr
+> > + * extension is not available this probe function will result
+> > + * in an exception. Currently we cannot recover from this.
+> > + *
+> > + * @dev:       RNG device
+> > + * Return:     0 if successfully probed
+> > + */
+> > +static int riscv_zkr_probe(struct udevice *dev)
+> > +{
+> > +       struct resume_data resume;
+> > +       int ret;
+> > +       u32 val;
+> > +
+> > +       /* Check if reading seed leads to interrupt */
+> > +       set_resume(&resume);
+> > +       ret = setjmp(resume.jump);
+> > +       if (ret)
+> > +               log_debug("Exception %ld reading seed CSR\n", resume.code);
+> > +       else
+> > +               val = read_seed();
+> > +       set_resume(NULL);
+> > +       if (ret)
+> > +               return -ENODEV;
+> > +
+> > +       do {
+> > +               val = read_seed();
+> > +               val >>= 30;
+> > +       } while (val == BIST || val == WAIT);
+> > +
+> > +       if (val == DEAD)
+> > +               return -ENODEV;
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static const struct dm_rng_ops riscv_zkr_ops = {
+> > +       .read = riscv_zkr_read,
+> > +};
+> > +
+> > +U_BOOT_DRIVER(riscv_zkr) = {
+> > +       .name = DRIVER_NAME,
+> > +       .id = UCLASS_RNG,
+> > +       .ops = &riscv_zkr_ops,
+> > +       .probe = riscv_zkr_probe,
+> > +};
+> > +
+> > +U_BOOT_DRVINFO(cpu_riscv_zkr) = {
+> > +       .name = DRIVER_NAME,
+> > +};
+> > --
+> > 2.40.1
+> >
