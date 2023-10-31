@@ -4,80 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A6E4C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 11:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C73BC4167D
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 11:54:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E210887CA5;
-	Tue, 31 Oct 2023 12:54:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 76D5B875FA;
+	Tue, 31 Oct 2023 12:54:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aGj6pmYJ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 964E18757E; Tue, 31 Oct 2023 12:54:17 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7835A875EB
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 12:54:15 +0100 (CET)
+ id DFCE187CB4; Tue, 31 Oct 2023 12:54:52 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 629BA875E2
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 12:54:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d9caf5cc948so4993412276.0
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 04:54:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698753253; x=1699358053; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cdhYHpQkVUx1xx3v6V44FRYNQssqzpeyjj1sDtLIn34=;
- b=aGj6pmYJ2HdJfDRMO2iAka6gez819MyH+Q1vq9xxwiBQi8ZSQqLSQQeRQgiC6SZqQC
- 3E/mL+qvobRVuY+C8XVgUjtxdnniy8s96XI+m+fweb0kotmAEBnUrqpjswCu3TBw5ZPg
- apolfuAmmB7rSSjbYFywZoA3oFTiMisA/1ee8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698753253; x=1699358053;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cdhYHpQkVUx1xx3v6V44FRYNQssqzpeyjj1sDtLIn34=;
- b=QWGBTfMQaiNClBT70CSNXTbYIWFzG8thO2jkZUOjwJAxCpy+taF4HqjKCxmMJkRjyi
- ce6x6l2YJlDooJZDem/nK6GhHA44iar9PPI2FvCb/JyZyD6uwMmB/Culbj2+oxIR6MWi
- y0dKshv5sP8jKajDdbClRRK5MSFnHUSipQtnkh6Y+Ockb8GzhzkiZGrrATXldetpcKrT
- ZOKpTXevI3MrF+1DGFGLl6OR028IiV8K+M8MpKuteoLQps0txKY5ckpwYqnt8sb6gWWr
- FGenX9ue/kiO4HckFlWHiYv8Cud2rwLDQqjvG8M5W79lTQ57AD047sitFlzNShncG3Mu
- 2vOQ==
-X-Gm-Message-State: AOJu0YyP+eML5t0vX9IWplrjsplkS3HHE8ROQ+lqLHGjFqzs7rnpYMxF
- MygibVyG3q/tsEVouq2op6E+yQ==
-X-Google-Smtp-Source: AGHT+IG3+yM9mBvK+ak1+kMgYaYqJ24CVdskQEQm8yMd20cfmBYUiV+BxFpnXjwIU7H+Gr25McSdog==
-X-Received: by 2002:a25:db47:0:b0:d86:357:e314 with SMTP id
- g68-20020a25db47000000b00d860357e314mr11634195ybf.47.1698753249200; 
- Tue, 31 Oct 2023 04:54:09 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- ki12-20020a05622a770c00b00400a99b8b38sm422000qtb.78.2023.10.31.04.54.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 04:54:08 -0700 (PDT)
-Date: Tue, 31 Oct 2023 07:54:06 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: u-boot@lists.denx.de, greentime.hu@sifive.com, vincent.chen@sifive.com,
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
-Subject: Re: [PATCH 1/1] board: sifive: unmatched: move kernel load address
- to 0x80200000
-Message-ID: <20231031115406.GH496310@bill-the-cat>
-References: <20231026032254.23043-1-yongxuan.wang@sifive.com>
- <20231027164307.GY496310@bill-the-cat>
- <CAMWQL2grduFNgGPLYryXOaXTzVvO6Y9s6o=2MMQ3h8Mj8z8P7w@mail.gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 772BBC15;
+ Tue, 31 Oct 2023 04:55:29 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 78D573F64C;
+ Tue, 31 Oct 2023 04:54:46 -0700 (PDT)
+Date: Tue, 31 Oct 2023 11:54:40 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: "Jaehoon Chung" <jh80.chung@samsung.com>
+Cc: 'Jernej =?UTF-8?B?xaBrcmFiZWMn?= <jernej.skrabec@gmail.com>, "'Jagan
+ Teki'" <jagan@amarulasolutions.com>, "'Samuel Holland'"
+ <samuel@sholland.org>, "'SASANO	Takayoshi'" <uaa@mx5.nisiq.net>, "'Mikhail
+ Kalashnikov'" <iuncuim@gmail.com>, "'Piotr Oniszczuk'"
+ <piotr.oniszczuk@gmail.com>, <u-boot@lists.denx.de>,
+ <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
+Message-ID: <20231031115428.0e9edf56@donnerap.manchester.arm.com>
+In-Reply-To: <004e01da0bc5$7a210c60$6e632520$@samsung.com>
+References: <20231018155014.383566-1-andre.przywara@arm.com>
+ <20231018155014.383566-2-andre.przywara@arm.com>
+ <1965267.usQuhbGJ8B@archlinux>
+ <CGME20231021212022epcas1p1f34ed4f9c235d0e8aaace738f009feaf@epcas1p1.samsung.com>
+ <20231021221911.16a6a145@slackpad.lan>
+ <004e01da0bc5$7a210c60$6e632520$@samsung.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9DvxV/dabhb0M+LT"
-Content-Disposition: inline
-In-Reply-To: <CAMWQL2grduFNgGPLYryXOaXTzVvO6Y9s6o=2MMQ3h8Mj8z8P7w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,94 +66,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 31 Oct 2023 15:42:54 +0900
+"Jaehoon Chung" <jh80.chung@samsung.com> wrote:
 
---9DvxV/dabhb0M+LT
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Jaehoon,
 
-On Tue, Oct 31, 2023 at 03:56:45PM +0800, Yong-Xuan Wang wrote:
-
-> Hi Tom,
+> Hi,
 >=20
-> 0x80200000 comes from the result of the relocated_addr in booti_setup()
-> on HiFive Unmatched board. If we load the Kernel Image to this address,
-> it will not be moved. Currently one of the first two 8-byte of RISC-V
-> Kernel Image is j _start_kernel instruction, so it's OK to execute the
-> header of the Image.
-
-Thanks for confirming.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
-As a follow-up, can you please work on migrating to plain text
-environment?
-
->=20
-> Regards,
-> Yong-Xuan
->=20
->=20
-> On Sat, Oct 28, 2023 at 12:43=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Thu, Oct 26, 2023 at 03:22:52AM +0000, Yong-Xuan Wang wrote:
-> >
-> > > U-boot initially loads the kernel image to the kernel_addr_r, and
-> > > subsequently relocates it to memory address 0x80200000. Setting
-> > > kernel_addr_r to 0x80200000 can eliminate one copy operation.
+> > -----Original Message-----
+> > From: Andre Przywara <andre.przywara@arm.com>
+> > Sent: Sunday, October 22, 2023 6:19 AM
+> > To: Jernej =C5=A0krabec <jernej.skrabec@gmail.com>
+> > Cc: Jagan Teki <jagan@amarulasolutions.com>; Jaehoon Chung <jh80.chung@=
+samsung.com>; Samuel Holland
+> > <samuel@sholland.org>; SASANO Takayoshi <uaa@mx5.nisiq.net>; Mikhail Ka=
+lashnikov <iuncuim@gmail.com>;
+> > Piotr Oniszczuk <piotr.oniszczuk@gmail.com>; u-boot@lists.denx.de; linu=
+x-sunxi@lists.linux.dev
+> > Subject: Re: [PATCH 1/3] sunxi: board: simplify early PMIC setup condit=
+ions
+> >=20
+> > On Sat, 21 Oct 2023 08:34:06 +0200
+> > Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
+> >  =20
+> > > On Wednesday, October 18, 2023 5:50:12 PM CEST Andre Przywara wrote: =
+=20
+> > > > So far we have a convoluted #ifdef mesh that guards the early AXP P=
+MIC
+> > > > setup in board.c. That combination of &&, || and negations is very =
+hard
+> > > > to read, maintain and especially to extend.
+> > > >
+> > > > Fortunately we have those same conditions already modelled in the
+> > > > Kconfig file, so they are actually redundant. On top of that the re=
+al
+> > > > reason we have those preprocessor guards in the first place is abou=
+t the
+> > > > symbols that are *conditionally* defined: without #ifdefs the build
+> > > > would break because of them being undefined for many boards.
+> > > >
+> > > > To simplify this, just change the guards to actually look at the sy=
+mbols
+> > > > needed, so CONFIG_AXP_xxx_VOLT instead of CONFIG_AXPyyy_POWER.
+> > > > This drastically improves the readability of this code, and makes a=
+dding
+> > > > PMIC support a pure Kconfig matter.
+> > > >
+> > > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > > > ---
+> > > >  board/sunxi/board.c   | 32 ++++++++++++++------------------
+> > > >  drivers/power/Kconfig |  2 +-
+> > > >  2 files changed, 15 insertions(+), 19 deletions(-)
+> > > >
+> > > > diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> > > > index ebaa9431984..65d79a02c25 100644
+> > > > --- a/board/sunxi/board.c
+> > > > +++ b/board/sunxi/board.c
+> > > > @@ -597,50 +597,46 @@ void sunxi_board_init(void)
+> > > >  		}
+> > > >  	}
+> > > >
+> > > > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
+> > > > -	defined CONFIG_AXP818_POWER
+> > > > +#ifdef CONFIG_AXP_DCDC1_VOLT
+> > > >  	power_failed |=3D axp_set_dcdc1(CONFIG_AXP_DCDC1_VOLT);
+> > > > +	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
+> > > >  #endif
+> > > > -#if !defined(CONFIG_AXP305_POWER)
+> > > > +#ifdef CONFIG_AXP_DCDC2_VOLT
+> > > >  	power_failed |=3D axp_set_dcdc2(CONFIG_AXP_DCDC2_VOLT);
+> > > >  	power_failed |=3D axp_set_dcdc3(CONFIG_AXP_DCDC3_VOLT);
+> > > >  #endif
+> > > > -#if !defined(CONFIG_AXP209_POWER) && !defined(CONFIG_AXP818_POWER)
+> > > > +#ifdef CONFIG_AXP_DCDC4_VOLT
+> > > >  	power_failed |=3D axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);
+> > > >  #endif
+> > > > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
+> > > > -	defined CONFIG_AXP818_POWER
+> > > > -	power_failed |=3D axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);
+> > > > -#endif
+> > > >
+> > > > -#if defined CONFIG_AXP221_POWER || defined CONFIG_AXP809_POWER || \
+> > > > -	defined CONFIG_AXP818_POWER
+> > > > +#ifdef CONFIG_AXP_ALDO1_VOLT
+> > > >  	power_failed |=3D axp_set_aldo1(CONFIG_AXP_ALDO1_VOLT);
+> > > >  #endif
+> > > > -#if !defined(CONFIG_AXP305_POWER)
+> > > > +#ifdef CONFIG_AXP_ALDO2_VOLT
+> > > >  	power_failed |=3D axp_set_aldo2(CONFIG_AXP_ALDO2_VOLT);
+> > > >  #endif
+> > > > -#if !defined(CONFIG_AXP152_POWER) && !defined(CONFIG_AXP305_POWER)
+> > > > +#ifdef CONFIG_AXP_ALDO3_VOLT
+> > > >  	power_failed |=3D axp_set_aldo3(CONFIG_AXP_ALDO3_VOLT);
+> > > >  #endif
+> > > > -#ifdef CONFIG_AXP209_POWER
+> > > > +#ifdef CONFIG_AXP_ALDO4_VOLT
+> > > >  	power_failed |=3D axp_set_aldo4(CONFIG_AXP_ALDO4_VOLT);
+> > > >  #endif
+> > > >
+> > > > -#if defined(CONFIG_AXP221_POWER) || defined(CONFIG_AXP809_POWER) |=
+| \
+> > > > -	defined(CONFIG_AXP818_POWER)
+> > > > +#ifdef CONFIG_AXP_DLDO1_VOLT
+> > > >  	power_failed |=3D axp_set_dldo(1, CONFIG_AXP_DLDO1_VOLT);
+> > > >  	power_failed |=3D axp_set_dldo(2, CONFIG_AXP_DLDO2_VOLT);
+> > > > -#if !defined CONFIG_AXP809_POWER
+> > > > +#endif
+> > > > +#ifdef CONFIG_AXP_DLDO3_VOLT
+> > > >  	power_failed |=3D axp_set_dldo(3, CONFIG_AXP_DLDO3_VOLT);
+> > > >  	power_failed |=3D axp_set_dldo(4, CONFIG_AXP_DLDO4_VOLT);
+> > > >  #endif
+> > > > +#ifdef CONFIG_AXP_ELDO1_VOLT
+> > > >  	power_failed |=3D axp_set_eldo(1, CONFIG_AXP_ELDO1_VOLT);
+> > > >  	power_failed |=3D axp_set_eldo(2, CONFIG_AXP_ELDO2_VOLT);
+> > > >  	power_failed |=3D axp_set_eldo(3, CONFIG_AXP_ELDO3_VOLT);
+> > > >  #endif
+> > > >
+> > > > -#ifdef CONFIG_AXP818_POWER
+> > > > +#ifdef CONFIG_AXP_FLDO1_VOLT
+> > > >  	power_failed |=3D axp_set_fldo(1, CONFIG_AXP_FLDO1_VOLT);
+> > > >  	power_failed |=3D axp_set_fldo(2, CONFIG_AXP_FLDO2_VOLT);
+> > > >  	power_failed |=3D axp_set_fldo(3, CONFIG_AXP_FLDO3_VOLT);
+> > > > @@ -649,7 +645,7 @@ void sunxi_board_init(void)
+> > > >  #if defined CONFIG_AXP809_POWER || defined CONFIG_AXP818_POWER
+> > > >  	power_failed |=3D axp_set_sw(IS_ENABLED(CONFIG_AXP_SW_ON));
+> > > >  #endif
+> > > > -#endif
+> > > > +#endif	/* CONFIG_AXPxxx_POWER */
+> > > >  	printf("DRAM:");
+> > > >  	gd->ram_size =3D sunxi_dram_init();
+> > > >  	printf(" %d MiB\n", (int)(gd->ram_size >> 20));
+> > > > diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
+> > > > index 7f3b990d231..83cb31c937a 100644
+> > > > --- a/drivers/power/Kconfig
+> > > > +++ b/drivers/power/Kconfig
+> > > > @@ -180,7 +180,7 @@ config AXP_DCDC3_VOLT
+> > > >
+> > > >  config AXP_DCDC4_VOLT
+> > > >  	int "axp pmic dcdc4 voltage"
+> > > > -	depends on AXP152_POWER || AXP221_POWER || AXP809_POWER || =20
+> > > AXP818_POWER || =20
+> > > > AXP305_POWER +	depends on AXP152_POWER || AXP221_POWER || AXP809_PO=
+WER =20
+> > > || =20
+> > > > AXP305_POWER default 1250 if AXP152_POWER
+> > > >  	default 1200 if MACH_SUN6I
+> > > >  	default 0 if MACH_SUN8I =20
 > > >
-> > > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> > > ---
-> > >  include/configs/sifive-unmatched.h | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/include/configs/sifive-unmatched.h b/include/configs/sif=
-ive-unmatched.h
-> > > index 74150b7d4b..de8bfc1123 100644
-> > > --- a/include/configs/sifive-unmatched.h
-> > > +++ b/include/configs/sifive-unmatched.h
-> > > @@ -36,7 +36,7 @@
-> > >       "name=3Dsystem,size=3D-,bootable,type=3D${type_guid_gpt_system}=
-;"
-> > >
-> > >  #define CFG_EXTRA_ENV_SETTINGS \
-> > > -     "kernel_addr_r=3D0x84000000\0" \
-> > > +     "kernel_addr_r=3D0x80200000\0" \
-> > >       "kernel_comp_addr_r=3D0x88000000\0" \
-> > >       "kernel_comp_size=3D0x4000000\0" \
-> > >       "fdt_addr_r=3D0x8c000000\0" \
-> >
-> > This is I believe subtly wrong. If you want an execute in place kernel
-> > image (and are using FIT images), this can be made to work. But if you
-> > load your (Linux Kernel) Image to this address, the header will be at
-> > 0x80200000 and not the payload so you still end up moving it. Are you
-> > sure this is (a) not still moving it and (b) it's OK to be executing the
-> > header of the image like it's code (or is there some catch in the header
-> > to lead to a jump over it, in that case) ?
-> >
-> > --
-> > Tom
+> > > This patch is great, but this last change doesn't seem to be directly
+> > > connected? =20
+> >=20
+> > It is an existing bug: there is no axp_set_dcdc4() for the AXP818, but
+> > since the AXP818 is not included in the guards at the calling site
+> > in board.c above, we didn't notice.
+> > So without this change, all A83T boards (the only ones using AXP818)
+> > would fail compilation.
+> > I just forgot to mention it in the commit message, will add it. =20
+>=20
+> Will you resend this patch after updating the commit message?
 
---=20
-Tom
+Well, I was actually thinking of merging it straight away (with the
+updated commit message), since I think that plus a tiny typo were the only
+changes requested in that series.
+Unless there is more from your side?
 
---9DvxV/dabhb0M+LT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVA6tsACgkQFHw5/5Y0
-tyxXkwwAiHPwgcRW5Jymf6u7Be8/6MfffohFWY3oDvMvE/4orZ80AC7pHico3yqs
-2g1oYxzt/69ebMbvaRf0drviaRo8Z+42pIbbRxwO4Rc+IRzYgdTh9jjlbj3SXFqO
-NlfcSqprZ3tBhTUHis0JxdZ5lmwxMOm3tx9YQMup/0fHuBl25QH0EwH/GkSdhmKD
-oDmoobP+diC0wIPmhxdwzd2BwgAYoxZu/DQ0Cl4Sc0FOd9CaLUs1yBJOA8Vr6YV4
-YSrnrqDT1Dwgqu/2RkskRO+Ifk6PN/F6mpv8Gcao396e8ZEX9/1f/N+JsaxN4RIK
-vf96+R0J+edgRWm/hKYR694nh9tnsIRt89YgkMWPX4GBeI6NOHq1YpwDQHSfqwEa
-QCDQBzYPZkuPljYCta8ReFJE2GV/7PxEGBgojawcYAU/lf8qypFkIPY+i8DzLtnp
-7xaXLbo4d35neq9x3iNA8/mNlbpaj645LhrISDZbPDIHqRsYutPVi1aKtmkyap4j
-wX6lobTH
-=V+Mx
------END PGP SIGNATURE-----
-
---9DvxV/dabhb0M+LT--
+Cheers,
+Andre
