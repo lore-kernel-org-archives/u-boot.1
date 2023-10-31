@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5984C4167D
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 16:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 442F0C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 16:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BC0287CCB;
-	Tue, 31 Oct 2023 17:45:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 83ED587CCE;
+	Tue, 31 Oct 2023 17:49:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="rElSnWT5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="i5KVuvDf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE10687CDD; Tue, 31 Oct 2023 17:45:18 +0100 (CET)
+ id A1E6887CEB; Tue, 31 Oct 2023 17:49:55 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0534C87CC5
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 17:45:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC48D86E7A
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 17:49:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,24 +28,26 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1698770707;
- bh=cs4YGb256QtdQUwHn6F0JjJHjnKSf7koySgRagLJ8A8=;
- b=rElSnWT54QgZGZ9kwk9sXFVLYLM1aQDRsn3Bj9h8erUQRGrPqncWKc83TJO/NO1ACRvajs4Wo
- RnKBS8ohtYUKNwOI9NGGaE93yFhxzrLXV/RXHXZDiXtqdIMxtXyg+3pvd9cjhjBRnmDPuCgf9DR
- q80ds7C9ZG+KXD7IGpZ1nIP4HwLIxXXCjjepIbOFhAelLaMp+zzGT0QMs5i+9qs4ipI6owpX86D
- OzPgwWgmqDOWCAQbEfWO33A2F7HQIc31KWdISmlB9Hg1sVvi+gmtjTubCT875qXCMEOKZRM48Ho
- 3HlxdHsizKdeToiQQZXjysUboKFWaN8dx6JlLRthrfZg==
-Message-ID: <775cde64-e33d-48e8-907f-6dbc611a3a50@kwiboo.se>
-Date: Tue, 31 Oct 2023 17:45:01 +0100
+ s=fe-e1b5cab7be; t=1698770987;
+ bh=8GmcS/WRZTLyE63+BUN7UABCrK2jxvgJwwVOjEO2t8g=;
+ b=i5KVuvDfUcSXEThafZdZ4gtVcbY6A05eCPwqWRiKUgN2z3ERjncCjWbIpQ7t07SZrPwjLTSBJ
+ v2/W0NUrA3XCEPvJTAzNj91VbEcjj49vNwl4W5zxRYi+ZaOKep1kfaBKaPHCL3Yebyjoj3sYunM
+ Ty7eJD3YGyN4riHtIYtVOtpszDwtpau17GvZRdQVTdwhCFiNmwZt8XBrAbOTCAiQttSUOZj3QSW
+ E8ujypijsrjkIrzGUmLiPROUfue1du1H4Fft2nkli9+ekgoIs+P5NjQQEofNB6i5st29/tPWGy0
+ I78r/Avc+8QudjzqpFaGCJ1JTCcVWS3uAaTp0e5Ib2WA==
+Message-ID: <3d718a4e-0977-4a9b-8b9d-dc0e01849c82@kwiboo.se>
+Date: Tue, 31 Oct 2023 17:49:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] rockchip: rk3588: Add SPINAND as boot device
+Subject: Re: [PATCH 2/2] configs: orangepi-5-plus-rk3588: Build SPI image by
+ default
 Content-Language: en-US
 To: Slawomir Stepien <sst@poczta.fm>, kever.yang@rock-chips.com
 Cc: philipp.tomsich@vrull.eu, sjg@chromium.org, u-boot@lists.denx.de
 References: <20231031161327.1104885-1-sst@poczta.fm>
+ <20231031161327.1104885-2-sst@poczta.fm>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20231031161327.1104885-1-sst@poczta.fm>
+In-Reply-To: <20231031161327.1104885-2-sst@poczta.fm>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -54,7 +56,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 65412f12546a1d1fe79cec87
+X-ForwardEmail-ID: 6541302a1b3114e65022cfaa
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,42 +74,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2023-10-31 17:13, Slawomir Stepien wrote:
-> Mark the flash@0 as BROM_BOOTSOURCE_SPINAND.
-> Fixes use of same-as-spl in u-boot,spl-boot-order prop on Orange Pi 5
-> Plus.
+> Flashing this image to the on-board flash is useful when you want to
+> start Linux from a medium (e.g. nvme) without flashing u-boot elements
+> to it.
 > 
 > Signed-off-by: Slawomir Stepien <sst@poczta.fm>
 > ---
->  arch/arm/mach-rockchip/rk3588/rk3588.c | 1 +
+>  configs/orangepi-5-plus-rk3588_defconfig | 1 +
 >  1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> index b1f535fad5..0c8f10a97c 100644
-> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> @@ -42,6 +42,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->  	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
->  	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
->  	[BROM_BOOTSOURCE_SPINOR_RK3588] = "/spi@fe2b0000/flash@0",
-> +	[BROM_BOOTSOURCE_SPINAND] = "/spi@fe2b0000/flash@0",
+> diff --git a/configs/orangepi-5-plus-rk3588_defconfig b/configs/orangepi-5-plus-rk3588_defconfig
+> index 0473699621..9af65026a0 100644
+> --- a/configs/orangepi-5-plus-rk3588_defconfig
+> +++ b/configs/orangepi-5-plus-rk3588_defconfig
+> @@ -103,3 +103,4 @@ CONFIG_USB_OHCI_GENERIC=y
+>  CONFIG_USB_DWC3=y
+>  CONFIG_USB_DWC3_GENERIC=y
+>  CONFIG_ERRNO_STR=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
 
-This is not correct, please see [1] for an open discussion on this issue.
+This was intentionally left out from original submission due to an
+unfinished discussion at [1].
 
-Kever: Do you have any more insights into the question on [1].
-
-Is my assessment about the value BootRom writes to bootsource reg
-correct, see [1]?
-
-- FSPI (M0): 3
-- FSPI (M1): 4
-- FSPI (M2): 6
+Also note that this option is not added at correct position in defconfig
+file. Next time, please re-sync defconfig changes with a make
+savedefconfig generated file.
 
 [1] https://lore.kernel.org/u-boot/b82c02c0-0a37-8553-f498-b03f85394d59@kwiboo.se/
 
 Regards,
 Jonas
-
->  };
->  
->  static struct mm_region rk3588_mem_map[] = {
-
