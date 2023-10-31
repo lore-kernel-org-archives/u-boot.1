@@ -4,121 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09C08C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:02:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379FCC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:03:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 127128751F;
-	Tue, 31 Oct 2023 06:02:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD9218751F;
+	Tue, 31 Oct 2023 06:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="n5F3c+Oc";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="Jl5fYLsd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F23A87535; Tue, 31 Oct 2023 06:02:02 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ id 81C8387AB6; Tue, 31 Oct 2023 06:03:03 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6690C8709A
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:01:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09D848709A
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:03:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20231031050153epoutp027722b0f3b0f635459ba8ca27e3f4f7ee~TGJUqXIQ71928519285epoutp02-
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:01:53 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20231031050153epoutp027722b0f3b0f635459ba8ca27e3f4f7ee~TGJUqXIQ71928519285epoutp02-
+Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20231031050256epoutp012f8eb5119c13d38eef016e3be2087da1~TGKPYJr9a2081220812epoutp01L
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:02:56 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20231031050256epoutp012f8eb5119c13d38eef016e3be2087da1~TGKPYJr9a2081220812epoutp01L
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698728513;
- bh=xp49M/p13Tfdff4Yuu4egs6NHRL7itl7x92hKgAcSTQ=;
+ s=mail20170921; t=1698728576;
+ bh=0hlwRjg0aqoX/cS5rRCdeYaBTEXk3tnqQsII4KKeF70=;
  h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=n5F3c+OcpHCMhhmS1+Kkr4342uG4MYyr+gie0pcQBzoaVMTHN2H1vz+c2TlM+2qIS
- Yi9O5enDF0zqSpOn+MgBIDr5WJBQBBfGcxGLFFAJQuqWia5kgJU2V+vT05fY/MMDxf
- 8ltshDai9kHOqEkQieOyilw4NEKwOFAKT8YSvIJc=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20231031050153epcas1p31be5e5937cf4a2a55990f4e46df60280~TGJUcbVVX2431624316epcas1p3C;
- Tue, 31 Oct 2023 05:01:53 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.134]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4SKJ0019L4z4x9QC; Tue, 31 Oct
- 2023 05:01:52 +0000 (GMT)
+ b=Jl5fYLsd1sP8eo0/2YLyGVyiKkcUR0znWveA2hKKGLzOxSvniaxI2AUoS1SUnQgGI
+ gYCUlUnC2TBmmtLA/KtAvt/rnBqCZ7d2BL7riNC3z/Fd+TdJSrtoMldRT+whwBAQzL
+ Ak1i8JhlHWyOExDcmC98R9vHRXnswiuquvQpHu4A=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20231031050256epcas1p104a15f18030b7ec0dc72aeff5b892e4f~TGKPLGjKl2470624706epcas1p1D;
+ Tue, 31 Oct 2023 05:02:56 +0000 (GMT)
+Received: from epsmges1p5.samsung.com (unknown [182.195.36.133]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4SKJ1C0Bb1z4x9Py; Tue, 31 Oct
+ 2023 05:02:55 +0000 (GMT)
 Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- E0.CA.10211.04A80456; Tue, 31 Oct 2023 14:01:52 +0900 (KST)
+ epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 58.AD.10025.E7A80456; Tue, 31 Oct 2023 14:02:54 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231031050151epcas1p3ba08b05031441a86c6cd02eebd6e9b84~TGJTN8t0h1677316773epcas1p3M;
- Tue, 31 Oct 2023 05:01:51 +0000 (GMT)
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20231031050254epcas1p4ed27bc59086fa0854df068deb7d13101~TGKNyK4oX1200812008epcas1p4l;
+ Tue, 31 Oct 2023 05:02:54 +0000 (GMT)
 Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031050151epsmtrp1e42fae5b8ae1e106333d5e9550fca3dd~TGJTNMYAB2336823368epsmtrp1h;
- Tue, 31 Oct 2023 05:01:51 +0000 (GMT)
-X-AuditID: b6c32a38-6d3fd700000027e3-7a-65408a40a847
+ 20231031050254epsmtrp1ce2cc02bb579b67389a255cb513cb52d~TGKNxlm4b2391023910epsmtrp1g;
+ Tue, 31 Oct 2023 05:02:54 +0000 (GMT)
+X-AuditID: b6c32a39-24b00a8000002729-12-65408a7e71c8
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
  epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- AF.58.08817.F3A80456; Tue, 31 Oct 2023 14:01:51 +0900 (KST)
+ D0.78.08817.E7A80456; Tue, 31 Oct 2023 14:02:54 +0900 (KST)
 Received: from [10.113.113.235] (unknown [10.113.113.235]) by
  epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20231031050151epsmtip13b9f1ea5e3fab1008fe370df93f39c57~TGJSv91Wz0892608926epsmtip1H;
- Tue, 31 Oct 2023 05:01:51 +0000 (GMT)
-Message-ID: <2f24cef3-d9fd-4f8e-b419-db1e13ea0ebe@samsung.com>
-Date: Tue, 31 Oct 2023 14:01:50 +0900
+ 20231031050254epsmtip134d35306d2b237ff231eb0c768c4e0fb~TGKNXNzMK1617516175epsmtip1E;
+ Tue, 31 Oct 2023 05:02:54 +0000 (GMT)
+Message-ID: <9940bfe9-dbbc-4f35-bc5d-425f68adc5f5@samsung.com>
+Date: Tue, 31 Oct 2023 14:02:54 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] mmc: Add quirk to disable PWREN for dw_mmc
-To: David Hewitt <davidmhewitt@gmail.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Peng Fan
- <peng.fan@nxp.com>
+Subject: Re: [PATCH v2 1/2] power: pmic: support TI TPS65913 PMIC
 Content-Language: en-US
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@lists.denx.de
 From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20230710130030.69085-1-davidmhewitt@gmail.com>
+In-Reply-To: <20230715183431.5318-2-clamor95@gmail.com>
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBJsWRmVeSWpSXmKPExsWy7bCmga5Dl0OqwbcVbBa/HzWxWGyb/pPN
- 4seqL6wW3SurLb5t2cZo8XZvJ7sDm8fshossHjtn3WX3OHtnB6PHxnc7mDz+ztoPFLv9kCmA
- LSrbJiM1MSW1SCE1Lzk/JTMv3VbJOzjeOd7UzMBQ19DSwlxJIS8xN9VWycUnQNctMwfoDCWF
- ssScUqBQQGJxsZK+nU1RfmlJqkJGfnGJrVJqQUpOgWmBXnFibnFpXrpeXmqJlaGBgZEpUGFC
- dsbhdT2sBc+EKj49fMTWwLiWv4uRk0NCwERi5cnXjF2MXBxCAjsYJaY9vsQE4XxilJjw+TEz
- SJWQwDdGiburFLsYOcA6lr3lhqjZyyjRMPUfC0TNe0aJeQ1uIDavgJ1E/+pv7CA2i4CqxKWm
- f8wQcUGJkzOfgNWLCshL3L81A6xGWMBN4mzbLTBbRMBe4smFd2BHMAtMZ5T4vuAFK0iCWUBc
- 4taT+UwgNpuAjsT2b8fBbE4BG4kT7c/YIWrkJba/ncMM0iwhMJFD4u3uVnaIP10kNh38ywph
- C0u8Or4FKi4l8bK/jR2ioZlRYumSg6wQTg+jxL+G62wQVcYS+5dOZgL5n1lAU2L9Ln2IsKLE
- zt9zGSE280m8+9rDCgkiXomONiGIEhWJS69fMsHsuvvkP9QNHhInfu9lnMCoOAspYGYh+XMW
- kn9mISxewMiyilEstaA4Nz212LDABB7byfm5mxjBSVTLYgfj3Lcf9A4xMnEwHmKU4GBWEuE9
- bOqQKsSbklhZlVqUH19UmpNafIjRFBg9E5mlRJPzgWk8ryTe0MTSwMTMyNjEwtDMUEmc99ir
- 3hQhgfTEktTs1NSC1CKYPiYOTqkGpv7ND6ZcP/jTc+6+VP0tjb7iYUYnlp09LR34cd5/B4Fm
- uWSBpmPXPwn9q7la42KmvsJ4y3WOrHZF7U971XMdTU2lWoz3bT0vemqrkLn+ndv7Mv8G950S
- 3/7p7XLpjORonSfi9zSO7O2O7c+5Ei7A90fkwIqZH6KfvfZ/HO3DdoF7M4PYKs+yTwvyala9
- qzS/oRKnepptQub/E3tUIwTXrDgcvehSYJOJUtNTz59np5iey5v0X+g222sp9mP+8ZvrWeL3
- 7+39uGHBdLu5c/Lehn5M4ciMf1ltyMeypfBQqPTdN9XXZy6slUzqPMNSv2vjz/sF3/e0yxjZ
- 3z8R/GilQvNyS7PLLdEPsoXqXOtbrZVYijMSDbWYi4oTAUOjXmErBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrCLMWRmVeSWpSXmKPExsWy7bCSnK59l0OqQc90XYvfj5pYLLZN/8lm
- 8WPVF1aL7pXVFt+2bGO0eLu3k92BzWN2w0UWj52z7rJ7nL2zg9Fj47sdTB5/Z+0Hit1+yBTA
- FsVlk5Kak1mWWqRvl8CVcXhdD2vBM6GKTw8fsTUwruXvYuTgkBAwkVj2lruLkYtDSGA3o8Tn
- LddZuhg5geJSEp+fTmWDqBGWOHy4GKLmLaPE9vs32UBqeAXsJPpXf2MHsVkEVCUuNf1jhogL
- Spyc+QRsjqiAvMT9WzPAaoQF3CTOtt0Cs0UE7CWeXHjHBDKUWWA6o8TU9UuYQBJCAtYSH6ad
- YAWxmQXEJW49mQ8WZxPQkdj+7TiYzSlgI3Gi/Rk7yHHMAuoS6+cJQZTLS2x/O4d5AqPQLCRn
- zEIyaRZCxywkHQsYWVYxSqYWFOem5xYbFhjlpZbrFSfmFpfmpesl5+duYgRHjJbWDsY9qz7o
- HWJk4mA8xCjBwawkwnvY1CFViDclsbIqtSg/vqg0J7X4EKM0B4uSOO+3170pQgLpiSWp2amp
- BalFMFkmDk6pBqYEhxj3ExZlvlxhgbEmU1+ul9H49+HFr1PKsxtuhbnIbaqOF7k02/939dQl
- fdqzdAQnsp9aszX+Y/Kkl5tum2xKT+vc6q7k+ItFwOuaQnOqgA63zYb96zf8eM+6lr/Cz4vp
- 94RZWYH/ij6c+a4vFDvjSxf732r/rRk7Hl/RNhWSm2HqwPVGR9vXfEeT9P+8v0lViaczejcK
- xJ9+uOmL95cnlafzvKqzN4X88BQ7MjeSpfSMX+Acn8VNy4UnuvTnBkVJF091lt59983hiCPb
- Lu4/9oun+cCuYv3C/YaNP4VsMhk6dx3Z/lk9ePXdjkCvhpVzcy9evX7C6umHyeWZwmwFMUqR
- 27983MHl9U901QMlluKMREMt5qLiRAAtqTJMBwMAAA==
-X-CMS-MailID: 20231031050151epcas1p3ba08b05031441a86c6cd02eebd6e9b84
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmphk+LIzCtJLcpLzFFi42LZdljTQLeuyyHVoPWUlcWB/l5Gi0nrr7Fb
+ fNuyjdHi7d5OdgcWj9kNF1k8nvZvZffYOesuu8fZOzsYA1iism0yUhNTUosUUvOS81My89Jt
+ lbyD453jTc0MDHUNLS3MlRTyEnNTbZVcfAJ03TJzgHYqKZQl5pQChQISi4uV9O1sivJLS1IV
+ MvKLS2yVUgtScgpMC/SKE3OLS/PS9fJSS6wMDQyMTIEKE7Izut7uYy7YxFHR0bCduYHxBVsX
+ IyeHhICJRMf3p0A2F4eQwA5GiYb29ewQzidGiQV757NAON8YJbZt+M0I07Jlxyyoqr2MEud/
+ rGSFcN4zShy99oMdpIpXwE7i+usVQO0cHCwCqhL/r3hChAUlTs58wgJiiwrIS9y/NYMdpERY
+ wFFi6/JSkDCzgLjErSfzmUBsEYEaie0zLrNAxCUklhy6zwpiswnoSGz/dhyshlPAXGLCtm/s
+ EDXyEtvfzmEGOUdC4CO7ROveHkaQ+RICLhL3PjtB3C8s8er4FnYIW0riZX8bO0R9M6PE0iUH
+ WSGcHkaJfw3XoYFkLLF/6WQmkEHMApoS63fpQ4QVJXb+nssIsZhP4t3XHlaIXbwSHW1CECUq
+ Epdev2SC2XX3yX9WCNtD4v2D+YwTGBVnIYXKLCTvz0LyziyExQsYWVYxiqUWFOempxYbFpjC
+ Izs5P3cTIzg5alnuYJz+9oPeIUYmDsZDjBIczEoivIdNHVKFeFMSK6tSi/Lji0pzUosPMZoC
+ o2Yis5Rocj4wPeeVxBuaWBqYmBkZm1gYmhkqifOee9ubIiSQnliSmp2aWpBaBNPHxMEp1cDE
+ 83nyvb4JTw8GlYf/c1VKkhQ2dd8XePrSp3gbpVs9731e/nLkXirN2uGpnim9qz4vUsB1bRdz
+ 5qbX6dX/Xnxld7y4p/Q+a6RLDm/Ombjza+7p2/EVX/q0I0u+klNhx/R7qVWzLEr6j17b+tn2
+ 9f60xLuic53d5U5tua2/1PtaaY6Iy5PjEwqWLm92+Mwz/eoTKdVDYjUZpzaV+xw4bnDiRfQO
+ +2UzXF4kTjojw2W4Y9q6Xue9MZrB8v+ftZ1+1yybn3fPxUq++9/nFd7dVtnTDZ6v5rbmtDxr
+ FLi2vePnPrVA+9kH3izLmdt71CXQ2LR6kRvfihufmHSklNZ+a3wlIrnr9ZrlkuW//vNt3b9a
+ iaU4I9FQi7moOBEAPaaCCxcEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrHLMWRmVeSWpSXmKPExsWy7bCSnG5dl0OqwaTXGhYH+nsZLSatv8Zu
+ 8W3LNkaLt3s72R1YPGY3XGTxeNq/ld1j56y77B5n7+xgDGCJ4rJJSc3JLEst0rdL4MroeruP
+ uWATR0VHw3bmBsYXbF2MnBwSAiYSW3bMYu9i5OIQEtjNKHF/1152iISUxOenU4GKOIBsYYnD
+ h4shat4ySmy78pIZpIZXwE7i+usVLCA1LAKqEv+veEKEBSVOznzCAmKLCshL3L81gx2kRFjA
+ UWLr8lKQMLOAuMStJ/OZQGwRgRqJxrndbBBxCYklh+6zgpQLCSRLTHoDtohNQEdi+7fjYOWc
+ AuYSE7Z9A5vILKAusX6eEESnvMT2t3OYJzAKzUJywywky2YhdMxC0rGAkWUVo2RqQXFuem6x
+ YYFRXmq5XnFibnFpXrpecn7uJkZwFGhp7WDcs+qD3iFGJg7GQ4wSHMxKIryHTR1ShXhTEiur
+ Uovy44tKc1KLDzFKc7AoifN+e92bIiSQnliSmp2aWpBaBJNl4uCUamCyiNpcckpz6sc7mg+L
+ BF5ZKcUrfzq7d+V8OeWF82NtmjZxzv91+aDLZ2dNL19XzWOr7bcEGa32kphtvC/09herWc0b
+ usK0CjUT3Jz27lYNuv74+iK95j0FGwtvb69WeNfyjWPvtQXMlrcmRU2cZqukLrOkKpuxtJ0x
+ UdXIeuWlDz6qq+cxsvy7nbd3dd2TxVITzhfsd09Nfvt/9y3P6seTrZby9nraL1iol3n3CUtf
+ V+KX5q9m9RO1tmwNXsE252DqAt2JwivWd9+ZP/fHxSm2qr5fDQ6//MroOLeafdI0eybt461Z
+ JlKXv3bo35WbfNIguLrypGCX9Sqx4H+NgTOOGQm62z58s3OrFdO1T5PDlViKMxINtZiLihMB
+ LJx18vECAAA=
+X-CMS-MailID: 20231031050254epcas1p4ed27bc59086fa0854df068deb7d13101
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031050151epcas1p3ba08b05031441a86c6cd02eebd6e9b84
-References: <20230710130030.69085-1-davidmhewitt@gmail.com>
- <CGME20231031050151epcas1p3ba08b05031441a86c6cd02eebd6e9b84@epcas1p3.samsung.com>
+X-CMS-RootMailID: 20231031050254epcas1p4ed27bc59086fa0854df068deb7d13101
+References: <20230715183431.5318-1-clamor95@gmail.com>
+ <20230715183431.5318-2-clamor95@gmail.com>
+ <CGME20231031050254epcas1p4ed27bc59086fa0854df068deb7d13101@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,21 +135,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/10/23 22:00, David Hewitt wrote:
-> This is required for correct booting of the PINE64 PineTab2. If
-> PWREN is pulled high on this device, the SD card cannot be detected.
+On 7/16/23 03:34, Svyatoslav Ryhel wrote:
+> Existing PALMAS PMIC driver is fully compatible with TI TPS65913
+> PMIC found in many Tegra 4 devices, like Tegra Note 7 and ASUS
+> TF701T. TPS65913 shares same structure of regulators like TPS659038
+> so data can be reused.
 > 
-> This is required in other PINE64 devices (e.g. Quartz64 Model A) too.
-> 
-> See commit ba33172a36f298641f51a5e6b855c3e89e3f5d3e in
-> https://github.com/CounterPillow/u-boot-quartz64
-> 
-> Signed-off-by: David Hewitt <davidmhewitt@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # NVIDIA Tegratab
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
@@ -157,52 +150,19 @@ Best Regards,
 Jaehoon Chung
 
 > ---
-> Changes for v2:
-> - Removed an unrelated change
+>  drivers/power/pmic/palmas.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
->  drivers/mmc/dw_mmc.c          | 3 ++-
->  drivers/mmc/rockchip_dw_mmc.c | 3 +++
->  include/dwmmc.h               | 1 +
->  3 files changed, 6 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-> index 5085a3b491..cb1d99132f 100644
-> --- a/drivers/mmc/dw_mmc.c
-> +++ b/drivers/mmc/dw_mmc.c
-> @@ -530,7 +530,8 @@ static int dwmci_init(struct mmc *mmc)
->  	if (host->board_init)
->  		host->board_init(host);
+> diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
+> index 6080cbff0b..d6eb9cb433 100644
+> --- a/drivers/power/pmic/palmas.c
+> +++ b/drivers/power/pmic/palmas.c
+> @@ -87,6 +87,7 @@ static struct dm_pmic_ops palmas_ops = {
 >  
-> -	dwmci_writel(host, DWMCI_PWREN, 1);
-> +	if (!(host->quirks & DWMCI_QUIRK_DISABLE_PWREN))
-> +		dwmci_writel(host, DWMCI_PWREN, 1);
->  
->  	if (!dwmci_wait_reset(host, DWMCI_RESET_ALL)) {
->  		debug("%s[%d] Fail-reset!!\n", __func__, __LINE__);
-> diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
-> index 72c820ee63..af6ac59a46 100644
-> --- a/drivers/mmc/rockchip_dw_mmc.c
-> +++ b/drivers/mmc/rockchip_dw_mmc.c
-> @@ -78,6 +78,9 @@ static int rockchip_dwmmc_of_to_plat(struct udevice *dev)
->  	else
->  		host->dev_index = 1;
->  
-> +	if (dev_read_bool(dev, "rockchip,disable-pwren-quirk"))
-> +		host->quirks |= DWMCI_QUIRK_DISABLE_PWREN;
-> +
->  	priv->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
->  
->  	if (priv->fifo_depth < 0)
-> diff --git a/include/dwmmc.h b/include/dwmmc.h
-> index 136a95b8cd..98aebb46f1 100644
-> --- a/include/dwmmc.h
-> +++ b/include/dwmmc.h
-> @@ -141,6 +141,7 @@
->  
->  /* quirks */
->  #define DWMCI_QUIRK_DISABLE_SMU		(1 << 0)
-> +#define DWMCI_QUIRK_DISABLE_PWREN	(1 << 1)
->  
->  /**
->   * struct dwmci_host - Information about a designware MMC host
+>  static const struct udevice_id palmas_ids[] = {
+>  	{ .compatible = "ti,tps659038", .data = TPS659038 },
+> +	{ .compatible = "ti,tps65913" , .data = TPS659038 },
+>  	{ .compatible = "ti,tps65917" , .data = TPS65917 },
+>  	{ }
+>  };
 
