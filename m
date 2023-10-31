@@ -4,78 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 090EEC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8A1FC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FCD886E9E;
-	Tue, 31 Oct 2023 14:06:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AD3CD87C9D;
+	Tue, 31 Oct 2023 14:12:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N0j5zSPq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DnmC2zjF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C17686E9E; Tue, 31 Oct 2023 14:06:34 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8FF9E87B47; Tue, 31 Oct 2023 14:12:18 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 509CD86CF2
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:06:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31A2B878FC
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:12:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7789a4c01easo379537085a.0
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:06:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698757590; x=1699362390; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Hk0lA7XDwS28Uqc7WbRk7UN3guBrypVuJMchuwy07cg=;
- b=N0j5zSPq5IltEcufRSn+Gn3xxe50yxodtdlnwgtkk9lr5TmQgqF9CUcrNRFNS93+K7
- FEh5mascbPBHHWmCZgOBPUptcG+ElgnZOcubMKz1Ft32lo19RFmNiKOolbq9kZyMI8OY
- xg6TzVKhLIOlOFcJ60WJaVCWih+/GEO0F3FTw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698757590; x=1699362390;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Hk0lA7XDwS28Uqc7WbRk7UN3guBrypVuJMchuwy07cg=;
- b=TBVzK+HpYf88hTZQfTXLk20UI2CPIeMnZAkKnqmMP2lvb6jsJiwZAoIm4OcdPHkoTC
- HYZ74zAeI6gs76cSHCuRNwNDdjyxWXNo21Ln+t3TYoIwhOYmA4KbZlY3D2P4tGk2+Gsp
- UONw3hcmownHlk9gvrOjb2nrlYn3EVLPawp8HjIzEOm23RA7HDHlOEr/1Yh0GuGNI2TG
- qIBTig4+q4ALT4yipmz25GWQBHnSsiDdADVxUFzBT1TzQttjfu4vdXAhzIgMeZSSNAV/
- Bf3k/phXBqu0CvrCIod3Tl7UDV4/YiBCvyvTegr4DXORNiXChtFsrHgpnieWKPc8Mn3t
- OxuQ==
-X-Gm-Message-State: AOJu0YxCPjXGrtiX8tcj0L/EX8iMlAS8Zurh9SY9CNE29PVjOJofmcRf
- JnJlsssx1QRZabdNt/wH89NwOw==
-X-Google-Smtp-Source: AGHT+IER3vF6XNU6LxwhAkbaA7hCFqJNxttXnAI/B1WLwumlPcrmYGvnzsW7Ywais5HLgFTC81rD7w==
-X-Received: by 2002:a05:620a:8404:b0:76f:456:3916 with SMTP id
- pc4-20020a05620a840400b0076f04563916mr11312590qkn.43.1698757590001; 
- Tue, 31 Oct 2023 06:06:30 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- e17-20020a05620a12d100b0077412ca0ae1sm478672qkl.65.2023.10.31.06.06.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 06:06:29 -0700 (PDT)
-Date: Tue, 31 Oct 2023 09:06:27 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com,
- rfried.dev@gmail.com, v.v.mitrofanov@yadro.com,
- seanedmond@microsoft.com, emohandesi@linux.microsoft.com
-Subject: Re: [UBOOT PATCH v2] test/py: net: Add a TFTP put test
-Message-ID: <20231031130627.GJ496310@bill-the-cat>
-References: <cee2db4bbaf9656499f7f7dbf29b1b6738822d1a.1698756564.git.love.kumar@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDC91o058669;
+ Tue, 31 Oct 2023 08:12:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698757929;
+ bh=1jqiVEXjNHrdezMZ/yjkWstmthQhn7U3L6qhnmUHFc8=;
+ h=From:To:CC:Subject:Date;
+ b=DnmC2zjFWWA64If64Q1s7WmuOAs5p1MimwWVUcle26HgmFRe/nq4IbiPEvBRkDTT0
+ 5e6EZ4LnSO0tSc5hwjWybpB3BWxVFAth9uPEIG/oLIqR6vI+Zmj3IzSBFfWGq0xbSQ
+ vPrrhvmWFZGVq51++vXgk+RWPhnb0riKIAmlCV0o=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDC9Yo101894
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 31 Oct 2023 08:12:09 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
+ Oct 2023 08:12:09 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 31 Oct 2023 08:12:09 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDC8xA015117;
+ Tue, 31 Oct 2023 08:12:09 -0500
+From: Devarsh Thakkar <devarsht@ti.com>
+To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
+ <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
+ <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
+CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
+ <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>, <devarsht@ti.com>
+Subject: [PATCH v2 0/5]  Move video memory reservation for SPL to the
+Date: Tue, 31 Oct 2023 18:42:03 +0530
+Message-ID: <20231031131208.435268-1-devarsht@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gzFCjPmX9Q59SGfV"
-Content-Disposition: inline
-In-Reply-To: <cee2db4bbaf9656499f7f7dbf29b1b6738822d1a.1698756564.git.love.kumar@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,55 +79,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Move video memory reservation for SPL at end of RAM so that it does
+not interefere with reservations for next stage so that the next stage
+need not have holes in between for passed regions and instead it can
+maintain continuity in reservations.
 
---gzFCjPmX9Q59SGfV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Also catch the bloblist before starting reservations to avoid the same
+problem.
 
-On Tue, Oct 31, 2023 at 06:22:29PM +0530, Love Kumar wrote:
+While at it, also fill missing fields in video handoff struct before
+passing it to next stage.
 
-> Execute tftpput command for uploading files to a server and validate its
-> size & CRC32.
->=20
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
-> ---
-> Changes in v2:
-> - Add marking for cmd_tftpput config
-> ---
->  test/py/tests/test_net.py | 72 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 72 insertions(+)
-[snip]
-> +    fnu =3D "_".join([datetime.datetime.now().strftime("%y%m%d%H%M%S"), =
-fn])
-[snip]
-> +            "tftpput $fileaddr $filesize $serverip:%s" % (fnu)
+This is as per discussions at :
+For moving SPL framebuffer reservation at end of RAM:
 
-I think we need to have the filename to upload as be part of the board
-env as well, otherwise this is going to fill up the tftpserver over
-time. I use a 1MiB file and that times boards times number of iterations
-I end up doing means I'll start noticing in a few months that I've got
-less free space than I expected in that format.
+https://lore.kernel.org/all/CAPnjgZ3xSoe_G3yrqwuAvoiVjUfZ+YQgkOR0ZTVXGT9VK8TwJg@mail.gmail.com/
 
---=20
-Tom
+For filling missing video handoff fields :
+https://lore.kernel.org/all/CAPnjgZ1Hs0rNf0JDirp6YPsOQ5=QqQSP9g9qRwLoOASUV8a4cw@mail.gmail.com/
 
---gzFCjPmX9Q59SGfV
-Content-Type: application/pgp-signature; name="signature.asc"
+Changelog (w.r.t previous RFC series that was sent before):
+V2:
+- Make a generic function to reserve video memory at SPL stage
+- Add debug prints while skipping framebuffer allocation at uboot
+- Correct commenting style as suggested
 
------BEGIN PGP SIGNATURE-----
+Previous RFC series:
+https://lore.kernel.org/all/20231016160611.1353458-1-devarsht@ti.com/
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVA+9MACgkQFHw5/5Y0
-tyyX3AwAsn1y9mZSaGByflBagO+z4GNMDgREILt53k8TBum4Y6+PLWHh/VrojWgm
-Sd89RmTtlSE3eN6IEWBAmRb4l8zuwWIepuJ8KMmKBF/wGGGggt/53+mLWPlyDzkl
-AG5v7ptUnCwX5ZP8tXvIHJI42GLm7WqVC19c08ELCU/rGkjAQHvOA8N++EBmCTxl
-2OIXyxjkG+UsdjAXE3OzTMnnKtjockJtT9yYrIUsih3QjWGZI+CM3Wk0X69C3Qhb
-bx3MGyutj/HICVo4vhn95EdW+EX9zT+oqX7h7qOUMrF6ySzWr5H39XXBp7Yy2bmH
-yDmFH8VLpd8cWHdFEC+YE4ltos5orhH2/VMHEY53ofAxhubto4zLw5u8bUVXC/Su
-6GJIYhQlvygbtUozBrgDIQTFDznIPbnDLpShU+shAj4RuP37YaqKsKjNrYaHVJfR
-l6umk8gqywECfx655hGakc7td6+BZF/AhCwwKHl5wJDdCvTcX3zmHC4xP/PKozcI
-x/77QzjC
-=9Wga
------END PGP SIGNATURE-----
+Test logs (at tip of U-Boot 2024.01-rc1+ this series (with debugs)):
+https://gist.github.com/devarsht/43dbcc02c585a0b18f8f99e910bf5ef9
 
---gzFCjPmX9Q59SGfV--
+Devarsh Thakkar (5):
+  arm: mach-k3: common: Reserve video memory from end of the RAM
+  board: ti: am62x: evm: Remove video_setup from spl_board_init
+  common/board_f: Catch bloblist before starting resevations
+  video: Skip framebuffer reservation if already reserved
+  video: Fill video handoff in video post probe
+
+ arch/arm/mach-k3/common.c    |  2 ++
+ board/ti/am62x/evm.c         | 18 ------------------
+ common/board_f.c             | 33 +++++++++++++++++++++++++++++---
+ common/spl/spl.c             | 19 ++++++++++++++++++
+ drivers/video/video-uclass.c | 37 ++++++++++++++++++++++++++----------
+ include/spl.h                |  4 ++++
+ 6 files changed, 82 insertions(+), 31 deletions(-)
+
+-- 
+2.34.1
+
