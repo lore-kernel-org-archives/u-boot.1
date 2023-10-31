@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57896C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E2AC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:13:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6AD987CCF;
-	Tue, 31 Oct 2023 14:12:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42AC487CD0;
+	Tue, 31 Oct 2023 14:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="n41DkO2Q";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b2pYkmYm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5441087CBC; Tue, 31 Oct 2023 14:12:24 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id B7DDF87610; Tue, 31 Oct 2023 14:12:24 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B91D87CC0
+ by phobos.denx.de (Postfix) with ESMTPS id 5927D87CC2
  for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:12:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCFYG011079;
- Tue, 31 Oct 2023 08:12:15 -0500
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCHAn086536;
+ Tue, 31 Oct 2023 08:12:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698757935;
- bh=bQKEexrlk4P8CpipyJZM2MKplx01jHZMxJd3r4z9V84=;
+ s=ti-com-17Q1; t=1698757937;
+ bh=Fgr1aCZQAZ8NNdrDegVMdDVRILEWoB4R4BHiaKc3MSY=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=n41DkO2QbVpmJiMQIQVYXLKEuNBvcKwvNdjoUyaeuozSzpygnCeeLvmEWavfKHUJn
- yFnbLYEN9Ubzv+PCAQIVPPO73wG7PV2sgGZXfXXWhi0Feq3NhmoUtc+Y1WLWg1BDT/
- SIOOQsgfpuwoVAVVI+ZGTCxH5P85XykWsNzrCf44=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDCF0A000312
+ b=b2pYkmYmmaxUmKm9cCwNHQR7Ey1Wl6SwLjkq1D0tFrYF53kagsbdYDv9XLMcaB1ih
+ 5fl5UhThedqiAKbkYdgYWxm4PPuVSMems037xK0JAmVFchOMCehShGLQ4wcryF98NG
+ TWrhUatV1KLyshlTvaaoY5+46kcWTQvSka+NSi60=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDCHkR000331
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 31 Oct 2023 08:12:15 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 31 Oct 2023 08:12:17 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 08:12:15 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 08:12:17 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 08:12:15 -0500
+ Frontend Transport; Tue, 31 Oct 2023 08:12:17 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCES0010537;
- Tue, 31 Oct 2023 08:12:15 -0500
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCGF0067144;
+ Tue, 31 Oct 2023 08:12:16 -0500
 From: Devarsh Thakkar <devarsht@ti.com>
 To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
  <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
  <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
 CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
  <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>, <devarsht@ti.com>
-Subject: [PATCH v2 4/5] video: Skip framebuffer reservation if already reserved
-Date: Tue, 31 Oct 2023 18:42:07 +0530
-Message-ID: <20231031131208.435268-5-devarsht@ti.com>
+Subject: [PATCH v2 5/5] video: Fill video handoff in video post probe
+Date: Tue, 31 Oct 2023 18:42:08 +0530
+Message-ID: <20231031131208.435268-6-devarsht@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231031131208.435268-1-devarsht@ti.com>
 References: <20231031131208.435268-1-devarsht@ti.com>
@@ -81,43 +81,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Skip framebufer reservation if it was already reserved
-from previous stage and whose information was passed
-using a bloblist.
+Fill video handoff fields in video_post_probe
+as at this point we have full framebuffer related
+information.
 
+Also fill all the fields available in video hand-off
+struct as those were missing earlier and u-boot
+framework expects them to be filled for some of the
+functionalities.
+
+Reported-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-V2:
-- Add debug prints
-- Fix commenting style
+V2: No change
 ---
- drivers/video/video-uclass.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ drivers/video/video-uclass.c | 25 +++++++++++++++----------
+ 1 file changed, 15 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index f743ed74c8..335a1a1828 100644
+index 335a1a1828..635b70f668 100644
 --- a/drivers/video/video-uclass.c
 +++ b/drivers/video/video-uclass.c
-@@ -123,6 +123,18 @@ int video_reserve(ulong *addrp)
- 	struct udevice *dev;
- 	ulong size;
+@@ -153,16 +153,6 @@ int video_reserve(ulong *addrp)
+ 	debug("Video frame buffers from %lx to %lx\n", gd->video_bottom,
+ 	      gd->video_top);
  
-+	if (IS_ENABLED(CONFIG_SPL_VIDEO_HANDOFF) && spl_phase() > PHASE_SPL) {
-+		/* Skip allocation if already received a bloblist which
-+		 * filled below fields
-+		 */
-+		if (gd->fb_base && gd->video_top && gd->video_bottom) {
-+			debug("Found pre-reserved video memory from %lx to %lx\n",
-+			      gd->video_bottom, gd->video_top);
-+			debug("Skipping video frame buffer allocation\n");
-+			return 0;
-+		}
+-	if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(VIDEO_HANDOFF)) {
+-		struct video_handoff *ho;
+-
+-		ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
+-		if (!ho)
+-			return log_msg_ret("blf", -ENOENT);
+-		ho->fb = *addrp;
+-		ho->size = size;
+-	}
+-
+ 	return 0;
+ }
+ 
+@@ -558,6 +548,21 @@ static int video_post_probe(struct udevice *dev)
+ 
+ 	priv->fb_size = priv->line_length * priv->ysize;
+ 
++	/* Set up video handoff fields for passing video blob to next stage */
++	if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(BLOBLIST)) {
++		struct video_handoff *ho;
++
++		ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
++		if (!ho)
++			return log_msg_ret("blf", -ENOENT);
++		ho->fb = gd->video_bottom;
++		ho->size = gd->video_top - gd->video_bottom;
++		ho->xsize = priv->xsize;
++		ho->ysize = priv->ysize;
++		ho->line_length = priv->line_length;
++		ho->bpix = priv->bpix;
 +	}
 +
- 	gd->video_top = *addrp;
- 	for (uclass_find_first_device(UCLASS_VIDEO, &dev);
- 	     dev;
+ 	if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
+ 		priv->copy_fb = map_sysmem(plat->copy_base, plat->size);
+ 
 -- 
 2.34.1
 
