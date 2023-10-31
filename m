@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E2AC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:13:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34D8BC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:13:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42AC487CD0;
-	Tue, 31 Oct 2023 14:12:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BECE287CCC;
+	Tue, 31 Oct 2023 14:12:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b2pYkmYm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VPD7tRth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7DDF87610; Tue, 31 Oct 2023 14:12:24 +0100 (CET)
+ id 909D387CC4; Tue, 31 Oct 2023 14:12:48 +0100 (CET)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5927D87CC2
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:12:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ED5C87B26
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:12:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCHAn086536;
- Tue, 31 Oct 2023 08:12:17 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCel6086681;
+ Tue, 31 Oct 2023 08:12:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698757937;
- bh=Fgr1aCZQAZ8NNdrDegVMdDVRILEWoB4R4BHiaKc3MSY=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=b2pYkmYmmaxUmKm9cCwNHQR7Ey1Wl6SwLjkq1D0tFrYF53kagsbdYDv9XLMcaB1ih
- 5fl5UhThedqiAKbkYdgYWxm4PPuVSMems037xK0JAmVFchOMCehShGLQ4wcryF98NG
- TWrhUatV1KLyshlTvaaoY5+46kcWTQvSka+NSi60=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDCHkR000331
+ s=ti-com-17Q1; t=1698757960;
+ bh=V1m7Vo4IoUvTFUo4yrCsoqBI+qzlzfeyuiBC0QmTOEg=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=VPD7tRthb8XlHcM75m9fbM6gA4gYOUXm7XV7gIc1M3wTrh957ty+FGWm/+1GpAvyC
+ tOZ6iczvPXDZlXzff9x0jauURPpVxTSTuk+doMd87oOjN+tgFDGs55eNNeCvC1Z7qK
+ 36sQihmCLj1hqj0eLR+ss3xFcG3srYa1pUsgV/5M=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDCe2w102052
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 31 Oct 2023 08:12:17 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 31 Oct 2023 08:12:40 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 08:12:17 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 08:12:40 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 08:12:17 -0500
+ Frontend Transport; Tue, 31 Oct 2023 08:12:40 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCGF0067144;
- Tue, 31 Oct 2023 08:12:16 -0500
-From: Devarsh Thakkar <devarsht@ti.com>
-To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
- <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
- <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
-CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
- <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>, <devarsht@ti.com>
-Subject: [PATCH v2 5/5] video: Fill video handoff in video post probe
-Date: Tue, 31 Oct 2023 18:42:08 +0530
-Message-ID: <20231031131208.435268-6-devarsht@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231031131208.435268-1-devarsht@ti.com>
-References: <20231031131208.435268-1-devarsht@ti.com>
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCdlo067343;
+ Tue, 31 Oct 2023 08:12:40 -0500
+Date: Tue, 31 Oct 2023 18:42:39 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Nitin Yadav <n-yadav@ti.com>
+CC: <nm@ti.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 4/4] doc: ti: Add AM62x LP SK Board information
+Message-ID: <20231031131239.thto32cvlox6fhzg@dhruva>
+References: <20231030110138.1347603-1-n-yadav@ti.com>
+ <20231030110138.1347603-5-n-yadav@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231030110138.1347603-5-n-yadav@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,66 +78,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fill video handoff fields in video_post_probe
-as at this point we have full framebuffer related
-information.
+Hi,
 
-Also fill all the fields available in video hand-off
-struct as those were missing earlier and u-boot
-framework expects them to be filled for some of the
-functionalities.
+On Oct 30, 2023 at 16:31:38 +0530, Nitin Yadav wrote:
+> Add link for AM62x LP SK in platform information. AM62x LP SK
+> has config fragments to build U-boot, Adding information to
+> update UBOOT_CFG_CORTEXR with lpsk fragments over am62x defconfig.
+> 
+> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
+> ---
+>  doc/board/ti/am62x_sk.rst | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+> 
+> diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
+> index d7437c6d22..9d7ce1fd54 100644
+> --- a/doc/board/ti/am62x_sk.rst
+> +++ b/doc/board/ti/am62x_sk.rst
+> @@ -41,6 +41,7 @@ https://www.ti.com/lit/pdf/spruiv7
+>  Platform information:
+>  
+>  * https://www.ti.com/tool/SK-AM62B
+> +* https://www.ti.com/tool/SK-AM62-LP
+>  
+>  Boot Flow:
+>  ----------
+> @@ -86,6 +87,13 @@ Set the variables corresponding to this platform:
+>   $ export OPTEE_PLATFORM=k3-am62x
+>   $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+>  
+> +For SK-AM62x-LP, set the UBOOT_CFG_CORTEXR variable as shown below:
+> +
+> +.. code-block:: bash
+> +
+> + $ export UBOOT_CFG_CORTEXR=am62x_evm_r5_defconfig am62x_lpsk_r5.config
+> + $ export UBOOT_CFG_CORTEXA=am62x_evm_a53_defconfig am62x_lpsk_a53.config
+> +
 
-Reported-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
----
-V2: No change
----
- drivers/video/video-uclass.c | 25 +++++++++++++++----------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index 335a1a1828..635b70f668 100644
---- a/drivers/video/video-uclass.c
-+++ b/drivers/video/video-uclass.c
-@@ -153,16 +153,6 @@ int video_reserve(ulong *addrp)
- 	debug("Video frame buffers from %lx to %lx\n", gd->video_bottom,
- 	      gd->video_top);
- 
--	if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(VIDEO_HANDOFF)) {
--		struct video_handoff *ho;
--
--		ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
--		if (!ho)
--			return log_msg_ret("blf", -ENOENT);
--		ho->fb = *addrp;
--		ho->size = size;
--	}
--
- 	return 0;
- }
- 
-@@ -558,6 +548,21 @@ static int video_post_probe(struct udevice *dev)
- 
- 	priv->fb_size = priv->line_length * priv->ysize;
- 
-+	/* Set up video handoff fields for passing video blob to next stage */
-+	if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(BLOBLIST)) {
-+		struct video_handoff *ho;
-+
-+		ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
-+		if (!ho)
-+			return log_msg_ret("blf", -ENOENT);
-+		ho->fb = gd->video_bottom;
-+		ho->size = gd->video_top - gd->video_bottom;
-+		ho->xsize = priv->xsize;
-+		ho->ysize = priv->ysize;
-+		ho->line_length = priv->line_length;
-+		ho->bpix = priv->bpix;
-+	}
-+
- 	if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
- 		priv->copy_fb = map_sysmem(plat->copy_base, plat->size);
- 
+>  .. am62x_evm_rst_include_start_build_steps
+>  
+>  1. Trusted Firmware-A:
+> -- 
+> 2.25.1
+> 
+> 
+
 -- 
-2.34.1
-
+Best regards,
+Dhruva Gole <d-gole@ti.com>
