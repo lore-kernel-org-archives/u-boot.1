@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3312FC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 17:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B48DC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 18:47:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20A43874C4;
-	Tue, 31 Oct 2023 18:46:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 95211875F1;
+	Tue, 31 Oct 2023 19:47:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QeA8z2VB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XGNFpmDL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 960AF875DC; Tue, 31 Oct 2023 18:46:33 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id A624C875FF; Tue, 31 Oct 2023 19:47:09 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B0DF874B7
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 18:46:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5457A875DE
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 19:47:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-778927f2dd3so348717285a.2
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:46:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-507e85ebf50so8381771e87.1
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 11:47:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698774390; x=1699379190; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0yjXefJMiQwOm9iUrHuAcp0feH32yqK3sWNMYrnOR+Q=;
- b=QeA8z2VBdk08WgVcJcuUShiy4zy206Tfy7T6Mq2+FUTWgIXrlnKL1FzP8B7V6WG1zi
- hJLF6pUOCIiOtgVVOQrYslIoQn2Eh6eovqLUBK6umruRCGHGEubN2ls1QyjvtPUAMPz5
- IfoN/qJWqJ7+TaMMRTSJDfGcdfyMdhkD/uMk8=
+ d=gmail.com; s=20230601; t=1698778026; x=1699382826; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R/Smet0cryX3tIpCeHd2/yzx/dIuM7pyM+XLw7YH4dU=;
+ b=XGNFpmDLcT6xOL1J3U6iGgJpXltvwyLODL5hvpPWl6v5CNTWt6h3ZW+Tt7Hi9lPb9J
+ BIkxdATTq+i9zkn2Z0OCOP+KYwHYOtqGn34fa+X+5y6pHQPruW2A/9OE5sl7hSeQ8uTN
+ IPkVKw4sI3xhC+2Mv+EFGJunLgIgoiDFJdIjNuU2JrBR+TDKxiqAAVWO/IjF/bYT3oDk
+ f19M3UrIgssxkI+eRqcIOnhRJrrs8CiwNWTY5kYsyEvKjNgfLOnb+NVxplUhhuu3IHNc
+ 2UrNdY2giG+EPW03xxcMzeCqd8/quIlhmlYB6uaaunRrQjRVIV6qW1MgGzwJhQqe2mlx
+ iL+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698774390; x=1699379190;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0yjXefJMiQwOm9iUrHuAcp0feH32yqK3sWNMYrnOR+Q=;
- b=PEpNAf6LB4tJ/9tdqRQZjMRZvR5oeOtCFka6ouGAKNZhdm8n1jBEQWmo5m4aDUHL0H
- o1L44UA0GpXhvCuJ/ll1JLV45LEwRcQPAV/Qm5+kJIG/y8f2qWw5xiCpgMFJaaqvSyq5
- MykQTj0FDDjxwMHGEneHXoXhmJrvYC52dR0CFeO0tzqdxS3BQVus6vGtZo8Cg2vs2KC7
- vepmXLxHR5X1XcHf/nnQ/BmSBWgijiSrPfldFBL7a68Y3JIgA5rHcT599kkZmy6BszoU
- deUZYpprAPOO68UqNcySlSL0ebEKkYcyjVdObaDwfzMgDoXZpOdkPtMI5gYuEqnB6YUR
- yThQ==
-X-Gm-Message-State: AOJu0YwEaBs5E9k8pQThv8nVZQep2fnqFsVHuFWZPPfPEQbgMKF8ESEj
- uit9JQ3QR7YxBTbByW7HdQK4MdQ8QAg4FihL2u5zPQ==
-X-Google-Smtp-Source: AGHT+IHwQlBo0uAiAVHgCuZU/VjNVIWapnaQrMXId2JOKBRlo2tXgIbOVlr6IQRYxF0gq0qs8w4vng==
-X-Received: by 2002:a05:620a:b09:b0:778:6a53:f13f with SMTP id
- t9-20020a05620a0b0900b007786a53f13fmr11973718qkg.21.1698774390214; 
- Tue, 31 Oct 2023 10:46:30 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- d9-20020a05620a166900b0077890c8896bsm685752qko.134.2023.10.31.10.46.29
+ d=1e100.net; s=20230601; t=1698778026; x=1699382826;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R/Smet0cryX3tIpCeHd2/yzx/dIuM7pyM+XLw7YH4dU=;
+ b=U34vRHsxaxGeClkE5CF7tHwxr/20BXeGgvkbKO+lXkNN93oWY3GoXKEddlGKkEzW3N
+ iA2eSppyzxaUF5LDBP8R1m2EZ9jcGOIdiW/gEefq9ljgIgTxoRpbwXILTohk97jfIyfH
+ Yg/9FJiCUU+VteSAitR8Kpe2rfRYi4YUCMNt/rhlx31vMv2p0idkPtrwnwLSEHIuN734
+ nY1ssuooEUY33YAy0wIpPBovFoHeF34I6PMKlm4EyEZrkH1Fhuf0Ev2JQp9ofgp1BPfd
+ U4yzsZN3narRwa/hiFxEGcKUhE5u3D4cBenU3dxu6ZucHzz9nsPonVHGkmyIcrfFiamG
+ 0TNA==
+X-Gm-Message-State: AOJu0Ywaa1WBPp41boRYVD9i684r21VkjP2/RLNh9FhMUHBwStZsBM6c
+ QKvyE1fXnRBzoAXi/iDUa9o=
+X-Google-Smtp-Source: AGHT+IFsBHS2oJPX5eNudJI6Swgae5g5y4DQx/4Pa/D2NQTcCEMB5WNolw/VZ33U7DSEW8/ywW9lzg==
+X-Received: by 2002:a19:9112:0:b0:503:2561:adbc with SMTP id
+ t18-20020a199112000000b005032561adbcmr9345357lfd.64.1698778025950; 
+ Tue, 31 Oct 2023 11:47:05 -0700 (PDT)
+Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
+ u7-20020ac25bc7000000b0050804a97f01sm278794lfn.160.2023.10.31.11.47.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 10:46:29 -0700 (PDT)
-Date: Tue, 31 Oct 2023 13:46:27 -0400
-From: Tom Rini <trini@konsulko.com>
-To: abdellatif.elkhlifi@arm.com
-Cc: u-boot@lists.denx.de, nd@arm.com, Emekcan Aras <emekcan.aras@arm.com>
-Subject: Re: [PATCH 3/3] corstone1000: enable PSCI reset
-Message-ID: <20231031174627.GY496310@bill-the-cat>
-References: <20231026125051.321493-1-abdellatif.elkhlifi@arm.com>
- <20231026125051.321493-4-abdellatif.elkhlifi@arm.com>
+ Tue, 31 Oct 2023 11:47:05 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: 
+Cc: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v1 0/1] Step up as co-maintainer of Tegra SOC platform
+Date: Tue, 31 Oct 2023 20:46:49 +0200
+Message-Id: <20231031184650.9141-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3YV1d6s1wiazXSZ0"
-Content-Disposition: inline
-In-Reply-To: <20231026125051.321493-4-abdellatif.elkhlifi@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,45 +88,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+I would like to volunteer as Tegra SOC co-maintainer.
 
---3YV1d6s1wiazXSZ0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Svyatoslav Ryhel (1):
+  MAINTAINERS: Step up as co-maintainer of Tegra SOC platform
 
-On Thu, Oct 26, 2023 at 01:50:51PM +0100, abdellatif.elkhlifi@arm.com wrote:
+ MAINTAINERS | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-> From: Emekcan Aras <emekcan.aras@arm.com>
->=20
-> enable PSCI reset used for the system reset
->=20
-> Even though Corstone-1000 does not implement the entire PSCI APIs,
-> it relies on PSCI reset interface for the system reset.
->=20
-> Signed-off-by: Emekcan Aras <emekcan.aras@arm.com>
-> Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+-- 
+2.39.2
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---3YV1d6s1wiazXSZ0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVBPXMACgkQFHw5/5Y0
-tyztvQv+NTHSTnB0Da+x4lYQKhlUAaym0cY5ZK9PhxjuQ57wtJwL6nPCnwv4dnae
-vEiGp1fPW4gOkmsorJ5oSZMIz3+Ar55OQVzYtn74JeH3lXx1RwRZ+mmaVk2GFE0Z
-pBpsYGxhqmajV0V0lbiJf0J9nnhaB3twAtffvByA7PaHDo2ags0XdfOv3U4WEdNE
-G6MCgxSP71BOoLtmmzLwZkWd3UAWGtdw/H0DXmJp3PabXLn7ui9OOhsH1yL+r3/x
-alRYib4GeNqXa63+D6c/ZiLRuyGMWDHIR7VrAiSDaRQK/9OCAYfRXTz1Wc+lEE++
-kHNqgikP8SnNBQI9ryhKNF6Xzx8MCgOcx7/h4mOC3X+KSqAyofxakkhPlsA6zJiK
-agnQQLg4daMnRF6781sOG4OgF14jdEygorOMG+QcFj+vDXJacjFJMkbjzXNW+mKo
-dhZW07o9V4v6D7mD688Dpj3mDwtZg3UhvJxE4rW0PBOgWwq9E/ldAYpdeMXV/2qL
-vAuET+9J
-=Q7Eq
------END PGP SIGNATURE-----
-
---3YV1d6s1wiazXSZ0--
