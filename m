@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A77E4C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 17:46:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05517C4167D
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 17:46:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 857E887CF4;
-	Tue, 31 Oct 2023 18:46:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E3CFC87D02;
+	Tue, 31 Oct 2023 18:46:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RRLzm1bz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uVKCdfoK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B2C787CEB; Tue, 31 Oct 2023 18:46:10 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id C1D6587CE3; Tue, 31 Oct 2023 18:46:10 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB40387CE5
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 18:46:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E823F87CF5
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 18:46:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-77a453eb01cso43155785a.0
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:46:06 -0700 (PDT)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-41cd97d7272so39539771cf.0
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:46:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698774362; x=1699379162; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698774367; x=1699379167; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=owMRWyMFmIx04FT00+MOYAccnUl4lD5qlmtAXeL+Owc=;
- b=RRLzm1bzYtqeypMoX/TWWCD3Ax/Y5Q5cTEWt+PZZ8k93k4Kst0RzNgDmqjmGc63WvH
- xs8enAx+hr6kxU1oGMuaOGt1Hk5HpQLZgTAtGHUumlWSYe1ywYSezXqZUWYoO1z19Erg
- ilFyQeQ6Dq/VE5tsGZ/vAIWJ0kyfL1z/9Dg7M=
+ bh=P16yFjKm94ga8xrrAc9ZuAa3Z4Pw74ja4Q8LnWgIvLw=;
+ b=uVKCdfoK6FUe5VGug3RM6av/pJok2TQCxeKHy0ozgzS+3mKBA1IvYyNTyW3YVn3wxl
+ TPxn1fQuad1JQeIZGWuD364FHRYQl1jFx7bMtBQVpj4V5HwrMQZZW9PoPkf0fSFD3gV9
+ pXzvAS1UVlUiCNFiFxxa8nxFu1JroGKGujKZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698774362; x=1699379162;
+ d=1e100.net; s=20230601; t=1698774367; x=1699379167;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=owMRWyMFmIx04FT00+MOYAccnUl4lD5qlmtAXeL+Owc=;
- b=ffypZYOZHGeMLfCMtBbS4tvMAou4ONySSh84PewihR5AS8eXVqPtQncSVLBFhz7u5O
- mRD0DShZM6wJ+uQ0HQD7eJZTTmLUJBsSlfovdkQHlw+Z2MxMR8W+fipbgWhna3nXFbiF
- PPt1CMq9jQJXPh0rIq7Aoh0qmZJdHIXH/r7a7DAZHvhRx8ODvEwcMmJrhrqU7g02lcWt
- MavR6cR5PO/yNU9WXqn7abt6qAOjlDcU3tTWrAm26BXtGg5rdDqh2hRlsH1ZpQyfLCJ1
- QYffWZLAUlhaMlpDUGFxwjT5jIZFWU8vqgUpYnKbMPnjznUPWnqYGYE89zwXj5KC765+
- vWgQ==
-X-Gm-Message-State: AOJu0YzQtjUDw5aFfwT410+WotSxZrjFYaYP1pw8Pc2ph5Tuc2ya1Agb
- g+B8jCLJsLpYcK8FEQOHbtgYQvxmy3rE65oaOY1+AQ==
-X-Google-Smtp-Source: AGHT+IGzs6N7sWa6aRSg2Xt0LGZ6p4uBs0k+yyLh+exmcj/NTOaRkpkL4iiBeK9wbbxuuW3wyKwShg==
-X-Received: by 2002:a05:620a:471f:b0:779:e517:f425 with SMTP id
- bs31-20020a05620a471f00b00779e517f425mr15098238qkb.20.1698774362101; 
- Tue, 31 Oct 2023 10:46:02 -0700 (PDT)
+ bh=P16yFjKm94ga8xrrAc9ZuAa3Z4Pw74ja4Q8LnWgIvLw=;
+ b=Tnztka+2y40nxXw305EXAxVFqCvQq4AKKxtqN+QCa/l4+3UqrfANsGDf9wHH8MWb7l
+ zjSKZYP1guia5INSlragVXQhUFo8ZNt5D3jyPC5SyVlgfptqOZXETi77OXcpOn7x3rov
+ Ahmd4Hz0BgKddOnMWDJdJyDgpT3Wks3f57U1XXVPIQnml6VRsZ9nLLfQ1aBzOaM7Zo6E
+ jBAP/TyX0ObLA4xpmshi4oG0TLFcRG4LAupelH1TVRwXLTba2zgpuKRnQaQINJV+cWPO
+ Olne0uinG6091Ph2/lLb/+V128yUy/aBI6o2koP3Efp0JmZ2rAIBeKVmMfjlZqfew4Ck
+ cGdA==
+X-Gm-Message-State: AOJu0YwbCnvUBt66SUfaod2ua7etu0qCgKi13jq/1crO4lBo+DDxXN23
+ gZf1Ez6e3rV6w9Ogf+C2IAfSwA==
+X-Google-Smtp-Source: AGHT+IEAezUsbgZjG7tlAb1pyOYCC8MqB4gjRKIRJmFmaFO6N7NapvXsU+TcbGJoJctJHAUU7Irieg==
+X-Received: by 2002:a05:622a:4d3:b0:41c:e9b9:5e10 with SMTP id
+ q19-20020a05622a04d300b0041ce9b95e10mr15772739qtx.35.1698774366725; 
+ Tue, 31 Oct 2023 10:46:06 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- c5-20020a05620a134500b0076f1d8b1c2dsm701087qkl.12.2023.10.31.10.46.01
+ gx5-20020a05622a27c500b0041ce9ebaad2sm687659qtb.43.2023.10.31.10.46.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 10:46:01 -0700 (PDT)
-Date: Tue, 31 Oct 2023 13:45:59 -0400
+ Tue, 31 Oct 2023 10:46:06 -0700 (PDT)
+Date: Tue, 31 Oct 2023 13:46:04 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Vishal Mahaveer <vishalm@ti.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, Bryan Brattlof <bb@ti.com>
-Subject: Re: [RESEND PATCH 1/1] clk: ti: k3-pll: Add calibration support for
- non fractional mode
-Message-ID: <20231031174559.GS496310@bill-the-cat>
-References: <20231023133546.32283-1-vishalm@ti.com>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, jaswinder.singh@linaro.org,
+ ryosuke.saito@linaro.org, sugimoto.yoshio@socionext.com,
+ ilias.apalodimas@linaro.org
+Subject: Re: [PATCH 1/3] board: developerbox: remove obsolete NOR flash
+ layout definition
+Message-ID: <20231031174604.GT496310@bill-the-cat>
+References: <20231025065103.3101666-1-masahisa.kojima@linaro.org>
+ <20231025065103.3101666-2-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h7NBjHR0o4ohlqXo"
+ protocol="application/pgp-signature"; boundary="TcsRkjGY5/eXIAfF"
 Content-Disposition: inline
-In-Reply-To: <20231023133546.32283-1-vishalm@ti.com>
+In-Reply-To: <20231025065103.3101666-2-masahisa.kojima@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,40 +95,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---h7NBjHR0o4ohlqXo
+--TcsRkjGY5/eXIAfF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 23, 2023 at 08:35:46AM -0500, Vishal Mahaveer wrote:
+On Wed, Oct 25, 2023 at 03:51:01PM +0900, Masahisa Kojima wrote:
 
-> PLL calibration needs to be enabled when operating in non fractional
-> mode. Add the sequence to do a fast calibration when using PLL
-> in this mode.
+> There are two kinds of NOR flash layout for the Developerbox.
+> Capsule update for the old layout is no longer available since
+> it has small capacity for secure world images and can not
+> house the TA such as fTPM.
+> This commit removes the definition related to the obsolete
+> NOR flash layout for the UEFI capsule update.
 >=20
-> Signed-off-by: Vishal Mahaveer <vishalm@ti.com>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---h7NBjHR0o4ohlqXo
+--TcsRkjGY5/eXIAfF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVBPVcACgkQFHw5/5Y0
-tyzLRgv+Ju4NAfZABC7iBo91NtVIhqkCD8XUbXOgpPF+JTCKYONbwcvBSkVHzuKm
-MR0HrpxjzB9atKOyE2SZFy7LyAsrSzFvMw3pYtk/NwhAQT0Px4TTlajfB2kf9Mov
-tb+zY3oft4zs5cSSkfV5gxQhubH9Xq1Jbw1H3yBq/cKv6HZcvZWyqVw9KgvHmD5O
-BqefMZ53hpm8Jo5Bn33G/d7lRx4v2JAedPBG6NNqOBl72WChOs9yXOKx76quYUkt
-aTQUCLRPb5zZu9HMXDgjLCFUfRtskCzx4elbsFw5hPA0MINJYZHLb8xV9L8x53aO
-yqhqCYD86UyLTdkR1CzMK0nG52iAWHkZxUIKXwLVfK8tMqhrvoA0wDTtvMQsbOTL
-invgJtmr8tGjgcXLh5msHMTqS4X0zHjvICWWrvrd3R4ecOO9vWZ3TSViv/9K447T
-RDhXogTq8iQK1RwgINHEH2hZfl2EpjY4jsD8I+IJKgYxwFkLOfmbc+oiBhWMLE8p
-kRhK+fwa
-=RIV1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVBPVwACgkQFHw5/5Y0
+tyxifAv/R/K1R8TDzU4zOlfiBsJD3xlbN2UCQI9O2rfkoR+3k3m9yj+GFAOZUY/o
+kQxBNJ9jtxmOtCrWyeBZy+Dc7j+vR/gJLHkpexCPsrcspa24BQRZrfWM9/kOJA2W
+sbk0zzNZAAEpwuYY78agFoppAEZD35I3nsW5/64tgHxf/O3fykYnGA4/O+uHa3Gp
+FbYbZDmLkAvhGprvbvsCQdbu9ViCQ4EIqX0+LA8iVpN/DZdjuTwkLPtFTSRzbUg+
+D2nF6cuxsaypRVSA3qGxOvl54Xu9VBTWsh4NJPOQYS7V0/rn/SQ/Ac53fQ0CmIS4
+qaP6JLTU97XN1ZinT6JHf0RN3r+m9o0rqVN9kDDG6JwwYeDg5uW85Lrl+Fp3n2NB
+kmeynVCymuMQoxLm3YOu6WmmKSvp66uITOoDwyWYpqHKAbpMLLdvnJsQGrnctyJG
+Yc62mu1puhWBId3Wmgf/85cDohQDfY6gGNXbmQE81nuZM1ADFrIX3aw45ne1Qak6
+VzituNUl
+=58Cc
 -----END PGP SIGNATURE-----
 
---h7NBjHR0o4ohlqXo--
+--TcsRkjGY5/eXIAfF--
