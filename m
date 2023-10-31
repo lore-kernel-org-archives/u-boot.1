@@ -4,109 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD98C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 12:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78250C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D82C587C8F;
-	Tue, 31 Oct 2023 13:59:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C47387C8F;
+	Tue, 31 Oct 2023 14:01:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="F9NC9Op3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bmAdURpG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6578987C8F; Tue, 31 Oct 2023 13:59:31 +0100 (CET)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::60e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BB5B187C8F; Tue, 31 Oct 2023 14:01:09 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 545F187B53
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 13:59:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3A4687B53
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:01:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kp3Z7QA9fsmXA/OpX4qKeHiZ6MGI95cYbEeOj5uf6QvwMVwawuSZ3gLlAZMBNMUY2FW5asAgaAinqYtI9Aw0ku+5UPhvR9ocu4tr42/rFJnmwebg0I1P7AI7y/Y/rTw5UvEwFT04nQZFB/mkHOgFVuIo5RBF3qvlobWSuYEZc4J/upK24RUU9LjrdL0j39TZ1S4zJgzo7LAsmWznLTryhUMjVtugv7puboP5EZYS90bXLplPDjBj2ngnxD+mnH/ps9oZu0vDU5VNYN2iWTLMLWs/8TdkCTAC5JOcAvqsNqMb+gHVmNg931PeptSh9Bm8+8CDROcfuZQ1AoZiZwVhiQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7mGmtX1c97XVM7DtDyHht9OpCvzrPNaObtQJ4YZf5+A=;
- b=j4htzzuNL4iTc7zV/cHBiIAI0dOU19SbQ+9bG4i3SOWdEbQL/zsWFBthFl2C66lbBv9Z0KxXti/HTOe1FIuUfNVLBrzKnKSj+jHfOTxKLSMM2kI9SyWGAd1sAYqTzgqPRxf2YXbaX1FVI5p2OfsnbHDdPxa3cKnHpPIX+gRm+cEOT47leoCPxp4Q8+dT7jLK6nxn74u6RhPNd6Uh3VANP3fky4CJBQdsIac4sXhN6OFAh/QzI3DReQDI0zDfHAbfmbgBcKDjdeIThb4VEk9FKsu1piwQ7gw5PtBMnvFdZI/575IRfl+Cz4b9VSHi6SKTc5pIm9pf+xnnQSeeKnWg+w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7mGmtX1c97XVM7DtDyHht9OpCvzrPNaObtQJ4YZf5+A=;
- b=F9NC9Op3fIDFGRBaf2F8XxpM3+U97CbE14BlpcB69SKP90RanAMDENAJ8pP7kdHW7+i3vo/znXVpYDOGTn5N+TF6lrl0niV3R7RNmlH6kbSQukO714zpsEzZKhwxWl6spdDaaqCeKZTDx1c+WlN44e5VfX6d/uoBoWQpkyOVBtk=
-Received: from CY5PR19CA0131.namprd19.prod.outlook.com (2603:10b6:930:64::19)
- by DM4PR12MB5309.namprd12.prod.outlook.com (2603:10b6:5:390::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.28; Tue, 31 Oct
- 2023 12:59:24 +0000
-Received: from CY4PEPF0000E9D4.namprd03.prod.outlook.com
- (2603:10b6:930:64:cafe::3a) by CY5PR19CA0131.outlook.office365.com
- (2603:10b6:930:64::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.19 via Frontend
- Transport; Tue, 31 Oct 2023 12:59:24 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000E9D4.mail.protection.outlook.com (10.167.241.147) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6954.19 via Frontend Transport; Tue, 31 Oct 2023 12:59:24 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 31 Oct
- 2023 07:59:23 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 31 Oct
- 2023 05:59:23 -0700
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.32 via Frontend
- Transport; Tue, 31 Oct 2023 07:59:21 -0500
-From: Love Kumar <love.kumar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>, <rfried.dev@gmail.com>,
- <v.v.mitrofanov@yadro.com>, <seanedmond@microsoft.com>,
- <emohandesi@linux.microsoft.com>
-Subject: [UBOOT PATCH v2] test/py: net: Add dhcp abort test
-Date: Tue, 31 Oct 2023 18:29:20 +0530
-Message-ID: <214217fdd0d69a107482c5c6f6dce96894aa5dc1.1698757115.git.love.kumar@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3b2ec5ee2e4so3398857b6e.3
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:01:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698757264; x=1699362064; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VJbUGEK6s8VDEHmk8SuyzqyarikmsOwxvE4EGBswG3A=;
+ b=bmAdURpGV3H4IzSY8jaQVX4SsuSZVmrdvjIcvsc1IW9bfYcGyGXt22WT+EwqmB0r5d
+ xjembOAzXo1pm8gNighiBTTqfCdB2kgRJYaYGJjsyQoUn+kQu7nXCOyf9Q5Al21vdVAm
+ z/6G+uFLZr/ECFDgxb+Tqx64RsvG0y9JJ1KdA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698757264; x=1699362064;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VJbUGEK6s8VDEHmk8SuyzqyarikmsOwxvE4EGBswG3A=;
+ b=ubQDTt9W5Jk+RKIkyAW4TsSncSDdtGmnqBpLNUGlhSDyy3zPE6Mwg4i/xCWPbPtdhf
+ qyqfkVgVtT92/N1s6mAVV3hiUzKOEDqMLwHnH6zft3QtMF8Myt3Y4cUsIeNmCQdxviEZ
+ MkrR66dRk548kKpjdw0u9fcq1Be1uWFya1DYH8eyI68EsZFs4HxO79D+vweC9R0+36Yp
+ y7e07r0sQ6y3aWDcnK2cMhkZDpG0oJodVLgF+6+OjuEsbUp31GcFfI29XX0VhG3HWAPj
+ LNcndJxiMYOjEjQFiZHSMVgnGxQLgFHS6Wile6n7Kxnhf8353zeN9ZwNzul4QD6gmBbP
+ f0uw==
+X-Gm-Message-State: AOJu0YxngxW3lMxFi9YbeFPb4qGxjxTMh2eQmmtx5PjJy0Vy9zHcepVA
+ PqrEfKjPT65exeP1We4KgbSIKg==
+X-Google-Smtp-Source: AGHT+IEPY4ghsRfJWkDg8yz/IDkGcq5XN9mnZVrrm9Nom4aU4vDLxjeulfTLHUF3URnkxT75RSOvCg==
+X-Received: by 2002:a05:6358:903:b0:168:dc03:5b90 with SMTP id
+ r3-20020a056358090300b00168dc035b90mr17455204rwi.23.1698757264164; 
+ Tue, 31 Oct 2023 06:01:04 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ l3-20020ad44443000000b00674a45499dcsm495113qvt.88.2023.10.31.06.01.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Oct 2023 06:01:03 -0700 (PDT)
+Date: Tue, 31 Oct 2023 09:01:01 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, ycliang@andestech.com,
+ yanhong.wang@starfivetech.com, minda.chen@starfivetech.com,
+ xingyu.wu@starfivetech.com
+Subject: Re: [PATCH 1/2] riscv: dts: jh7110: Add a gpio-restart node
+Message-ID: <20231031130101.GI496310@bill-the-cat>
+References: <CGME20231031082448epcas1p33a8ff166d2e48df3dcd6c0b1f0132efc@epcas1p3.samsung.com>
+ <20231031082439.395320-1-jh80.chung@samsung.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D4:EE_|DM4PR12MB5309:EE_
-X-MS-Office365-Filtering-Correlation-Id: a72a4e49-b256-4e6e-4eb5-08dbda113531
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: XJqPzCgvKOSH9D/vDeGKce5zVQWs2Zv0hiNfPInSkQF2iIsBaNk/0dqtHtqRxiGivorXbWs2UfLg++mPadNjFqpx5uNrHwySS35m/oRtbnsVSrH7iILjjiWrAgMpzM7CO1Foc1+2290it5Y48wuC0kL5wvTOzor9O89PiMkq8Gytn806dKAqd0lPgcFta9HDliHI1LtOYwDLF2kdLnhNMVs24pqpY4iicxQvxvy1/h/Nr/IM45WDc8S8mAOkTr9fUcSWliQtNrEWifaM0dmYckSq7bSjx++wYX9hgnQ5z3E3bPsw2KpZ2e/RGaaw4rRjMKRd00sAv9PzzEkzvI7eKe50rJrR+8yTmjgcCkxbs237fs0QUx1t+KB7oXlzUxFeG5PClauAe0sYiQBUuBSIBPyCZ1p4eXXkHPvExt6HWRqjnE+hfinG7HkVXC8Rn/5Ye+EOmn87IqXLR6uRbBTEAUWTqFbP6euoMnTGmKH/rWPZx7kaKkis4FKQeMXgGjpC39bmHVNb9BXXc/Jd26mZI77d7uWdtVhFrhp4U0hiKET6GVt6NAH5AFv4FmGSVVxTvkB56/DdGTenbbhGnI1VQqh6rp+v3uGWf3ww01SrRkh6B36iw1ut8GIvQGx7F5HmQe6BJ4YPYigQM/Bk6IFpTrMAFGjAabxy8v69lljDhracPdgSZJ3n+aw+dQjjSD8egi+jkoDyBtklVeWDN5SS8X2nwgrI3qE/hy3xCOWde5EW9L+4sX0VXC/JFm5UP8TNTLiWWJ1TkLEoKzbKqA8ETw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(396003)(376002)(136003)(346002)(230922051799003)(82310400011)(64100799003)(186009)(1800799009)(451199024)(36840700001)(40470700004)(46966006)(478600001)(83380400001)(47076005)(26005)(2616005)(2906002)(336012)(426003)(5660300002)(41300700001)(54906003)(8936002)(44832011)(8676002)(4326008)(316002)(70206006)(70586007)(36860700001)(86362001)(36756003)(81166007)(356005)(82740400003)(6916009)(40480700001)(40460700003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2023 12:59:24.3686 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a72a4e49-b256-4e6e-4eb5-08dbda113531
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D4.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5309
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="/KBf6PZGtLjjiM7A"
+Content-Disposition: inline
+In-Reply-To: <20231031082439.395320-1-jh80.chung@samsung.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,80 +93,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Abort the dhcp request in the middle by pressing ctrl + c on u-boot
-prompt and validate the abort status.
 
-Signed-off-by: Love Kumar <love.kumar@amd.com>
----
-Changes in v2:
-- Mark CMD_MII command dependency
----
- test/py/tests/test_net.py | 45 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+--/KBf6PZGtLjjiM7A
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
-index b2241ae6a482..6d32ad2db687 100644
---- a/test/py/tests/test_net.py
-+++ b/test/py/tests/test_net.py
-@@ -7,6 +7,7 @@
- import pytest
- import u_boot_utils
- import uuid
-+import re
- 
- """
- Note: This test relies on boardenv_* containing configuration values to define
-@@ -115,6 +116,50 @@ def test_net_dhcp(u_boot_console):
-     global net_set_up
-     net_set_up = True
- 
-+@pytest.mark.buildconfigspec("cmd_dhcp")
-+@pytest.mark.buildconfigspec("cmd_mii")
-+def test_net_dhcp_abort(u_boot_console):
-+    """Test the dhcp command by pressing ctrl+c in the middle of dhcp request
-+
-+    The boardenv_* file may be used to enable/disable this test; see the
-+    comment at the beginning of this file.
-+    """
-+
-+    test_dhcp = u_boot_console.config.env.get("env__net_dhcp_server", False)
-+    if not test_dhcp:
-+        pytest.skip("No DHCP server available")
-+
-+    u_boot_console.run_command("setenv autoload no")
-+
-+    # Phy reset before running dhcp command
-+    output = u_boot_console.run_command("mii device")
-+    eth_num = re.search(r"Current device: '(.+?)'", output).groups()[0]
-+    u_boot_console.run_command(f"mii device {eth_num}")
-+    output = u_boot_console.run_command("mii info")
-+    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
-+    u_boot_console.run_command(f"mii modify {eth_addr} 0 0x8000 0x8000")
-+
-+    u_boot_console.run_command("dhcp", wait_for_prompt=False)
-+    try:
-+        u_boot_console.wait_for("Waiting for PHY auto negotiation to complete")
-+    except:
-+        pytest.skip("Timeout waiting for PHY auto negotiation to complete")
-+
-+    u_boot_console.wait_for("done")
-+
-+    # Sending Ctrl-C
-+    output = u_boot_console.run_command(
-+        chr(3), wait_for_echo=False, send_nl=False
-+    )
-+
-+    assert "TIMEOUT" not in output
-+    assert "DHCP client bound to address " not in output
-+    assert "Abort" in output
-+
-+    # Provide a time to recover from Abort - if it is not performed
-+    # There is message like: ethernet@ff0e0000: No link.
-+    u_boot_console.run_command("sleep 1")
-+
- @pytest.mark.buildconfigspec('cmd_dhcp6')
- def test_net_dhcp6(u_boot_console):
-     """Test the dhcp6 command.
--- 
-2.25.1
+On Tue, Oct 31, 2023 at 05:24:38PM +0900, Jaehoon Chung wrote:
 
+> Add gpio-restart node to do reset.
+>=20
+> Before applied this patch, System Reset Extension doesn't appear with
+> sbi command.
+>=20
+> OpenSBI 1.3
+> Machine:
+>   Vendor ID 489
+>   Architecture ID 8000000000000007
+>   Implementation ID 4210427
+> Extensions:
+>   sbi_set_timer
+>   sbi_console_putchar
+> ...[snip]...
+>   IPI Extension
+>   RFENCE Extension
+>   Hart State Management Extension
+>   Performance Monitoring Unit Extension
+>=20
+> After applied this patch, System Reset Extension is supported from SBI.
+>=20
+> OpenSBI 1.3
+> Machine:
+>   Vendor ID 489
+>   Architecture ID 8000000000000007
+>   Implementation ID 4210427
+> Extensions:
+>   sbi_set_timer
+>   sbi_console_putchar
+> ...[snip]...
+>   IPI Extension
+>   RFENCE Extension
+>   Hart State Management Extension
+>   System Reset Extension
+>   Performance Monitoring Unit Extension
+>=20
+> Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
+> ---
+>  arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi | 5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/risc=
+v/dts/jh7110-starfive-visionfive-2.dtsi
+> index e40f57a15080..e94f9fe826a8 100644
+> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
+> @@ -34,6 +34,11 @@
+>  		device_type =3D "memory";
+>  		reg =3D <0x0 0x40000000 0x2 0x0>;
+>  	};
+> +
+> +	gpio-restart {
+> +		compatible =3D "gpio-restart";
+> +		gpios =3D <&sysgpio 35 GPIO_ACTIVE_HIGH>;
+> +	};
+>  };
+> =20
+>  &osc {
+
+My only concern with this change (and a few other similar things I've
+seen of late) is where is this change with respect to the upstream
+kernel? The goal is the dts files should be able to be dropped in from
+the kernel (except for -u-boot.dtsi), so we don't want to have changed
+get dropped when they're re-synced.
+
+--=20
+Tom
+
+--/KBf6PZGtLjjiM7A
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVA+ngACgkQFHw5/5Y0
+tyzz7QwAnBNk/XpdcqgQ4gH5PSyKw9Ex9I9OvXG/Ca/Tip3nLUYxP0M3RdVybe5x
+oI4ambB+03IgpmhHQifbLXHfL1y5FmwISOT1RDd5eOTCuSHn827IiN/UgJ66OGio
+ibml4IuAICalAPzDFtgjSBWCMc7iJ2Q0YDaE0sY77Lcqq6NeVjrWABTbBbfjTlVv
+mlzll6wjTLogVePsMARJizWBRyQtCXvIGnyG8+KpzieW+yNXU9Z8kRC1u+Vzdjsg
+mXuQVctr9UZNdCWiXdZ5+pbSVNTw4ZOvW+cFK399J4XCiVQdsiFgF1VK9ibCgJjU
+6xSQA478Kwxrx6GW3bxv9PhazsEvPoBqsLWl4k6qdUucYus84NU7kO1IETYA6377
+mgT5hrcjET8LZnClPFUISXVianonPOK4lVRNVY7gNc0LX1SE6d8ubdd9gVkaGSnR
+lrsXfC/rpOUPaC5bmAoi/EC9ZBDomaoiPute/FcxcxCxObJZiwTtLmWJRroGuHKB
+XB0/I1Ah
+=Fc7a
+-----END PGP SIGNATURE-----
+
+--/KBf6PZGtLjjiM7A--
