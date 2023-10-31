@@ -4,78 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03599C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 18:47:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDFB3C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 18:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1070A875F5;
-	Tue, 31 Oct 2023 19:47:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 400858760F;
+	Tue, 31 Oct 2023 19:50:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fsJNcKp6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CxpREvtR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7040875ED; Tue, 31 Oct 2023 19:47:09 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 35D66875ED; Tue, 31 Oct 2023 19:50:03 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9520A875F1
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 19:47:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF6048760F
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 19:50:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-507c91582fdso8684171e87.2
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 11:47:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-540c54944c4so244916a12.1
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 11:50:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698778027; x=1699382827; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yhGV3JQv45J74qLc6gznDny+8lzcoxSSwiPZlA865/M=;
- b=fsJNcKp6f8GhO3TaSFi5mhqJQrnNpF1H/LhuVym6ERTJWlIZGGdmqpVvBW1QABuFci
- sSg04npGWN8NCqzi+06rbZDyNIWNLmPpG2B2q0kSjqN87n4jFbGNV7u3pL6QUMPOLGiA
- vWJeA73d9B95Q/KYGLwVxZJqcUo/oYqhm9VDI2Kz/DTUSOW+HMUCLYENoTRfwWoolVbT
- nujUjDghFxNp3Wzx1M6E9TBZkzI8MpOVCeMIt+hdXfSTmb7FlcSpj195tlgNSh40VgTS
- kgoL+TguCEIELstbCVCe659XDMq0BMsNCofUrrR2j2bBlwkW8bZdJDq83kQ7BsaqiCzy
- Y0pQ==
+ d=chromium.org; s=google; t=1698778200; x=1699383000; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=rBfnG+cB9f8OKMJ7aQ8KF6gPPHD8RVlxQTDfZWB2NXE=;
+ b=CxpREvtRoK7HdF6YnUWroE9MuZJGbLM5byAaROmEc2V6NJ4RWkW+RlO4rhJcM4rA80
+ mVeZzU5K7wLDf6bWQuKfkh2is7LLm90nXccyPoe+TJPx7l1XSvTnn5GxmNtI5E9KEZga
+ rKBtFPnqMmjy8wSYAU4LSVcX1gwLiaa743Nzg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698778027; x=1699382827;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yhGV3JQv45J74qLc6gznDny+8lzcoxSSwiPZlA865/M=;
- b=PWO3dKHe6r9bzjpyDVLuAaRzzz4sqQ7s9yHHO7bYK4aEVDjvUPDSzNlYKvBJgY2DwP
- pP4wTqkAYtUyMfesjNK5qUs8Kqb0gok9CW7/Q48bgQ9qsvl/gfpZU2q4MSLDDTMqqcRM
- y7P+aErNeIHsxE0YZo3VFka3hPLAbyY0dAtZeRVOmhx7RebjYetPcK4c8zsWfHhpybrg
- krp/nIqFxbdX+2mMBR6YPDzo+dPuxpK+k0hz7nkcOrenitXK/DqPc1TLQdcYdy2nA/Yh
- ATDwJtRKz0DikvCYzGGwTSgbU00RkoSXIgs4/5mnmnKoiyzZoY8ndHXqfdmlNh26Q2bK
- wGYA==
-X-Gm-Message-State: AOJu0YyMnC81Vl8kNMt0wk2PwuqxeUsAvg/fLaXlnUl7lsXPpoY5usQS
- E/hHkVOenw3NHrXk2rXFc94=
-X-Google-Smtp-Source: AGHT+IEpwFWyvI7dQEE8EBrWA/zVUcWG3bGkC/Tgd+Emq7kT/k8YlZaFyErj7P6SpQIGgtc+7WKwXA==
-X-Received: by 2002:a19:5513:0:b0:507:a8d1:6e57 with SMTP id
- n19-20020a195513000000b00507a8d16e57mr9508133lfe.40.1698778026606; 
- Tue, 31 Oct 2023 11:47:06 -0700 (PDT)
-Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- u7-20020ac25bc7000000b0050804a97f01sm278794lfn.160.2023.10.31.11.47.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 11:47:06 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: 
-Cc: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] MAINTAINERS: Step up as co-maintainer of Tegra SOC
- platform
-Date: Tue, 31 Oct 2023 20:46:50 +0200
-Message-Id: <20231031184650.9141-2-clamor95@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231031184650.9141-1-clamor95@gmail.com>
-References: <20231031184650.9141-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1698778200; x=1699383000;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rBfnG+cB9f8OKMJ7aQ8KF6gPPHD8RVlxQTDfZWB2NXE=;
+ b=ZvFxIz5sDhV3Qx91Ov2a8jue1i+aameSr9QqDT4RrOUtotPGZnAAMmpPEDUkqoBzGI
+ +At9UbPx90N64cUiyO5kr6N1xeCQf0fiiupkJcOuy11TYL4S0YgbqePaMEWUqMozdw6K
+ AAPIPXXiB3O8It6UvLNHrbVTEiAsvocVBNkbtiZ93XapLakWuyJ5CaIh3yZbF1CVlh+5
+ E/LsSU6y5LLnjDuQ2hUdDfOCZ+4UoQDZ7e9l3Jpwl+KektWZ2+unekZL7qc9ph61AYlI
+ vOye4QLpi8GRsK4XQystLMDzcQqgWBJtrwBBQ4dgcpqw9lNTNA5V54pNYt2/8ZTQEBJL
+ FA6g==
+X-Gm-Message-State: AOJu0YyQ/iQuATok4X2CtE1Uglx+/IryjRTlMsiG0TK2Ut7jiW3lfOVq
+ nMssUvuwzuk7VDYQsRl3D9ONft6x1Fd54pRqhCqZ/69rZRV7AIyX4Blx0Q==
+X-Google-Smtp-Source: AGHT+IF2c1kStHHvjnpDsMNQTQlalX4AgbyDg8KQqj7qiLCxYAMP8RU1IH/Q3MvwwEHh+/5D6AFwtvdA4l4ikC2Qklc=
+X-Received: by 2002:a50:aa92:0:b0:543:57dd:503 with SMTP id
+ q18-20020a50aa92000000b0054357dd0503mr2864010edc.3.1698778199577; Tue, 31 Oct
+ 2023 11:49:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 31 Oct 2023 12:49:42 -0600
+Message-ID: <CAPnjgZ2WT0NkisCdMo-1Jhe9ycXFZtFcGw665N_-Q1Vowepm0w@mail.gmail.com>
+Subject: Re bootstd: Skip over bad device during bootflows scanning
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,35 +77,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update maintainers for Tegra SoC platform. Include device trees
-and drivers which contain tegra in the name.
+Hi Tony,
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- MAINTAINERS | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+Sorry I cannot reply to the patch[1].
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cde778bc4d..f07386dc77 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -665,11 +665,14 @@ F:	drivers/video/sunxi/
- F:	tools/sunxi*
- 
- ARM TEGRA
--M:	Tom Warren <twarren@nvidia.com>
-+M:	Thierry Reding <treding@nvidia.com>
-+M:	Svyatoslav Ryhel <clamor95@gmail.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-tegra.git
--F:	arch/arm/mach-tegra/
-+F:	arch/arm/dts/tegra*
- F:	arch/arm/include/asm/arch-tegra*/
-+F:	arch/arm/mach-tegra/
-+F:	drivers/*/tegra*
- 
- ARM TI
- M:	Tom Rini <trini@konsulko.com>
--- 
-2.39.2
+Can you please send the console trace for this situation? I don't want
+to ignore errors completely, so wonder if there is a special error
+code which could be produced when a device is missing?
 
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20231030194650.11594-1-mibodhi@gmail.com/
