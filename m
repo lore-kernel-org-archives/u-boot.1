@@ -4,126 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86716C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:09:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B30BC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:16:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0A3087ABF;
-	Tue, 31 Oct 2023 07:09:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 7B29B86EE5;
+	Tue, 31 Oct 2023 07:16:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="h/a5Uz0N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="a5aRvlXU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D2F587AD7; Tue, 31 Oct 2023 07:09:49 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BAC3286EC9; Tue, 31 Oct 2023 07:16:39 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6AFD87A6E
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:09:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DA5F8709A
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:16:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20231031060944epoutp02a9c5ebbc719133729f011a5370a75b3d~THEkKfJYi2141921419epoutp02Z
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:09:44 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20231031060944epoutp02a9c5ebbc719133729f011a5370a75b3d~THEkKfJYi2141921419epoutp02Z
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698732584;
- bh=n6XUE6/tPVq9ZmGzexlm3z5b2H5Sn0R5o04eZZo7VwE=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=h/a5Uz0N8deHRFEuELT9FgNhiaeLJDDNCEZbr9DsDdEsPmWHMObxKEH7qn4cuEM2r
- OnF8tix/+zZ1gf7P+wuwsJbbERmf1bnZQFLPcQAnwaLDYNNR9g/dsOctutUEhUKhMh
- omCuKa/jYwNFK7Sq1dsMf2fasCLrjFOIjTPLMdjQ=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20231031060944epcas1p45c0399a1b40c7fd821348ef92ecab731~THEjxtOrL1693516935epcas1p4j;
- Tue, 31 Oct 2023 06:09:44 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.36.135]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4SKKVH05lpz4x9Pv; Tue, 31 Oct
- 2023 06:09:43 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 53.A7.19104.62A90456; Tue, 31 Oct 2023 15:09:42 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20231031060942epcas1p1876a7ef8fff3e53885d0d244f5277d7d~THEiPThWA2928529285epcas1p1k;
- Tue, 31 Oct 2023 06:09:42 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031060942epsmtrp1c9c803a21641de2f948562281e2f4a61~THEiOi7WF2952029520epsmtrp15;
- Tue, 31 Oct 2023 06:09:42 +0000 (GMT)
-X-AuditID: b6c32a4c-559ff70000004aa0-3c-65409a269743
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 44.6F.07368.62A90456; Tue, 31 Oct 2023 15:09:42 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20231031060941epsmtip2c6984de5ab52cf6bb2f369f9b714b4cb~THEh026Fc1834918349epsmtip27;
- Tue, 31 Oct 2023 06:09:41 +0000 (GMT)
-Message-ID: <7c7c903a-df99-4b93-a14f-f1b03d90fcb3@samsung.com>
-Date: Tue, 31 Oct 2023 15:09:41 +0900
+ spf=pass smtp.mailfrom=merlew4n6@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-540105dea92so8067612a12.2
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 23:16:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698732996; x=1699337796; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lxsZxNcyYuW2xXFbIFS2StMKGpUo9CpWdZHbUBaSAC8=;
+ b=a5aRvlXUSSRP/z/qsMnZJgDzYZKIMWbsZB3UpnEL0m/ktTyFkOKC8I6Ylt73F9tM0o
+ 0IPakU3cpNJHIt2zcJk9xbZn1Bkx6Zpy+xvesJU5IjQYUkf/CHCcmXwtgcurN1i99I/f
+ fo6MjBHIElIkF7bSnUdmIKpHes4MnBFlBRB0fVbRX9M3CDkW8FzRejJXL0xKRCm0fpZB
+ rJeH2npe2v6lEcOk3jJ/F1DQu6+vuqsytoI15k72V2jKxRC6OOGQW5ZDugHIdszjJb7p
+ RQxJEdUAWEwS6IeAqqP9ScCdBa2Tz+LDg3+WofDyi2owLxCLAzyuN+CsvtUFzOaSvdbc
+ O8gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698732996; x=1699337796;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lxsZxNcyYuW2xXFbIFS2StMKGpUo9CpWdZHbUBaSAC8=;
+ b=XLYvKmZ7bA6BTwJvHZBsw/8hkdqt9/bgUnw2h+9+OEfqhbImmxDqQiJg/uwqCAkmh4
+ qYziNeXryJTPUuS3oh8B9D5K9nUSt/CaPRbs9xQFtpbakiIp/pxUP+KkYq7B19ndjDbf
+ pBj5XHDZ5UtWT/BmyqIg7HZu8mkGK99/VTTTY/3QpAtt5e2I1o4W4MzpJ24e1PpjhcmP
+ JZ/4/P4JIimBm8/GYzUtDTmh49ov5dRkfzOxzuI+cWm745jBKYNTl+xl9CwCbnaPaeMe
+ sahrEjXeFMTheOby/lOd548oQbPYCREH/oVyUqkI9cedrr6SFYx8VfiVMwD5kCdRFFhC
+ Mbcw==
+X-Gm-Message-State: AOJu0YzyW2qcljXjgg0DxZH7OeJacOSOX0vxSIe0gLBsnr+2bZ3SFdnI
+ LaYlGXwOfP4q5hvQTNDwqDjmQssQpC1AaRixJvqluZJ+rxAeURwe
+X-Google-Smtp-Source: AGHT+IHsgQ6hMDA5kx16LElzfCVhVipyyuH95ESkvMMbB53W7gby9nAhovGp5/oV0YeKwYKhoHEGJyBA/2eGISHNpT4=
+X-Received: by 2002:a50:9356:0:b0:543:55f4:58ce with SMTP id
+ n22-20020a509356000000b0054355f458cemr1905090eda.13.1698732995250; Mon, 30
+ Oct 2023 23:16:35 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] power: regulator: add AXP313 support
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>, Jagan Teki
- <jagan@amarulasolutions.com>
-Cc: Samuel Holland <samuel@sholland.org>, Jernej Skrabec
- <jernej.skrabec@gmail.com>, SASANO Takayoshi <uaa@mx5.nisiq.net>, Mikhail
- Kalashnikov <iuncuim@gmail.com>, Piotr Oniszczuk
- <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20231018155014.383566-4-andre.przywara@arm.com>
-Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA01SYUxTVxjNbV/bV7eSt1rjXf9YGyfBrKVPWvZ0whhzWyc4G50LIXPdC30p
- pe1r0xYFZhZAJpNUrKmL0khLMiWojAamQxCYFCJ2iwk2bt1Q1myUCXWAMosTpq7tk41/5/vu
- Ofec734XZQu7uGLUQDsoG02apNxVyLdDGXLZRk8epQh5VESb9zEgRuvdCPGwy8Ul7vo6AHFi
- oJdLnF4aZRN3fz/CJWb6j/CIjhMxXh5f/fWDCEfd7m0H6h7POE99485loJ76pgmoW2+L1LF4
- M9Dwio3bSilSR9kkFF1i0RlofY60YI/2La0qW4HL8C3Ea1IJTZqpHOn2Qo3sHYMpEU0q2U+a
- yhMtDWm3SzNzt9ks5Q5KUmqxO3KklFVnsqqscjtptpfTejlNObbiCsVmVYL4ibH0++EJYHWL
- K24+DCLVIC5qAHwUYkrY0DcIGsAqVIj1AfjH33e4TDEP4Px0DYcpFgBsOXSStSz57WqYxRz0
- A1j3uQthijkAw+1fIUmWAMuF8X++BEmMYK/AyPANDtN/CQaboinOGmwdjIyd4iXxaiwHLvxY
- k8JsbC0ci/oSDigqwj6E0ZAteT8ba2DBn729qRRc7FXYvTCSwvyEtino5zDadbB75jQ7KYDY
- ORTGLsR4TOztcGR2ksvg1TA2cvF5Xwynjx3mMYJDAJ49M8hhCieAT6vDzxVZ8Luz7lQkNpYB
- /b2ZTHs97FlqBoxzGpyNOzlJCsQE8IvDQoayAYbuTbOWvcajzzgMVsPFIT/PBdZ7VryLZ8X8
- nhXzeP43bgHIeSCmrHaznirBrbiMpg78t/MSi7kLpD7vpsLL4JH/iTwAWCgIAIiypSLBkCqP
- Egp0ZGUVZbNobeUmyh4AqsSGjrPFa0osid9PO7S4cotCmb05S0ng2bh0reCj+XqdENOTDspI
- UVbKtqxjoXxxNav+jWyebyp3h8Ww834ktB8RYZ9NlWnzzlBI5Xhr1d5rde89/ljO3xo6OdcT
- 1Do7DvZPjN12PSu89T6t+cs566eRXdHrL7x+1F2kOi47eLFotPESZuLUamtRe7qkRnagyB3o
- DFdK6hq5tcCwa6d2okJ5b/xC/t6fWu4vvLg0UFz8Q9g1WTeQZva1jexefNuYFc71dlS0aU0Z
- lXyI/VqIvmv8pXXxZifXfS1DsCOU352vT+8DeLO3xq0Zmhl+UHCJzalytp16NO2//vSY21c/
- FzeXTQTpc/7Y+cmjaV37iq6apnxPCrDAy+mRN6+4N5QhjbcGP933Ad5p2lh1JfNPKWIvJfFN
- bJud/Bexyk7cRQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgkeLIzCtJLcpLzFFi42LZdlhJXldtlkOqwedlAhYr5v1ktLjQPpnF
- 4sumCWwWz+evY7SYsm8Xm8Wc3xeYLZ4/6mSzeLu3k91i3ZRX7A6cHms/3mf1WDNvDaPHzll3
- 2T3O3tnB6PFi80xGj2W3RTxefZ3LGMAexWWTkpqTWZZapG+XwJVx6shjxoLJUhUXv5xkaWD8
- KtLFyMkhIWAi8fDAdaYuRi4OIYHdjBLLjvxjgUhISXx+OpWti5EDyBaWOHy4GKLmLaPEwl03
- 2UBqeAXsJL7+mcoIYrMIqErcP3KWFSIuKHFy5hOwOaIC8hL3b81gB7GFBWwlvl1tBLOZBcQl
- bj2ZzwRiiwiESUyeNIkFIt7FJHFxrR6ILSSQL/Hyz22wGjYBHYnt346D2ZxAc2aeXM8Kchuz
- gLrE+nlCEK3yEtvfzmGewCg0C8kVs5Bsm4XQMQtJxwJGllWMkqkFxbnpucmGBYZ5qeV6xYm5
- xaV56XrJ+bmbGMGRpaWxg/He/H96hxiZOBgPMUpwMCuJ8B42dUgV4k1JrKxKLcqPLyrNSS0+
- xCjNwaIkzms4Y3aKkEB6YklqdmpqQWoRTJaJg1OqgWnuH+amkmddjUbJmxTrbjY4FWguEjn0
- 5p46y4Enn53iBesFX8crcx6Qc9JiUHfdYHL+w4oP4ebrP/x3UFXXLdKbfKhc/ZhY5zmhaNF3
- 79dVeQdoL7TkPPaqlyG7sOfbdJ05t3sFPLg2MYXynzv1KlbBkLFHvf0Qw2q2ymuMT5XrBMW9
- FT4FWMsdlUu6w3etdeKxp8qGSvusFafuOlhzkH2vbA7HpFCL8868y2/3Kd0x8X3r+N7E02ha
- ySzNeB6/X0s1tNZMW/Z0SWNz61vei1vXd2kzZppv/f5c6Xtz4Lp9vV0/NziV2ITWu/5eu0NW
- /dtJ3lVHrcxj/nCt9n85c9ZuCeH6h4XneXLqzxW2KrEUZyQaajEXFScCAJreXBkbAwAA
-X-CMS-MailID: 20231031060942epcas1p1876a7ef8fff3e53885d0d244f5277d7d
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031060942epcas1p1876a7ef8fff3e53885d0d244f5277d7d
-References: <20231018155014.383566-1-andre.przywara@arm.com>
- <20231018155014.383566-4-andre.przywara@arm.com>
- <CGME20231031060942epcas1p1876a7ef8fff3e53885d0d244f5277d7d@epcas1p1.samsung.com>
+References: <20231029084533.44607-1-heinrich.schuchardt@canonical.com>
+ <20231029084533.44607-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231029084533.44607-3-heinrich.schuchardt@canonical.com>
+From: merle w <merlew4n6@gmail.com>
+Date: Tue, 31 Oct 2023 14:16:22 +0800
+Message-ID: <CAJ8bkywF8v+JA8D=di=agqmvdsUdrmUvhyeb16_4dDr07A0ejg@mail.gmail.com>
+Subject: Re: [RFC v2 2/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Anup Patel <apatel@ventanamicro.com>, 
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,83 +91,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/19/23 00:50, Andre Przywara wrote:
-> The X-Powers AXP313a is a small PMIC with just three buck converters and
-> three LDOs, one of which is actually fixed (so not modelled here).
-> 
-> Add the compatible string and the respective regulator ranges to allow
-> drivers to adjust voltages.
-> 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+drivers/rng/riscv_zkr_rng.c:10:10: fatal error: interrupt.h: No such
+file or directory
+10 | #include <interrupt.h>
+| ^~~~~~~~~~~~~
+compilation terminated.
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+Where is this interrupt.h?
 
-Best Regards,
-Jaehoon Chung
+Regards,
+Xiang W
 
+Heinrich Schuchardt <heinrich.schuchardt@canonical.com> =E4=BA=8E2023=E5=B9=
+=B410=E6=9C=8829=E6=97=A5=E5=91=A8=E6=97=A5 16:46=E5=86=99=E9=81=93=EF=BC=
+=9A
+>
+> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+> provides an interface to a physical entropy source.
+>
+> A RNG driver based on the seed CSR is provided. It depends on
+> mseccfg.sseed being set in the SBI firmware.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/power/pmic/axp.c                |  1 +
->  drivers/power/regulator/axp_regulator.c | 17 +++++++++++++++++
->  include/axp_pmic.h                      |  1 +
->  3 files changed, 19 insertions(+)
-> 
-> diff --git a/drivers/power/pmic/axp.c b/drivers/power/pmic/axp.c
-> index 025dac24f28..0e1e45fba74 100644
-> --- a/drivers/power/pmic/axp.c
-> +++ b/drivers/power/pmic/axp.c
-> @@ -87,6 +87,7 @@ static const struct udevice_id axp_pmic_ids[] = {
->  	{ .compatible = "x-powers,axp209", .data = AXP209_ID },
->  	{ .compatible = "x-powers,axp221", .data = AXP221_ID },
->  	{ .compatible = "x-powers,axp223", .data = AXP223_ID },
-> +	{ .compatible = "x-powers,axp313a", .data = AXP313_ID },
->  	{ .compatible = "x-powers,axp803", .data = AXP803_ID },
->  	{ .compatible = "x-powers,axp806", .data = AXP806_ID },
->  	{ .compatible = "x-powers,axp809", .data = AXP809_ID },
-> diff --git a/drivers/power/regulator/axp_regulator.c b/drivers/power/regulator/axp_regulator.c
-> index 02f320eac1e..d27e09538e0 100644
-> --- a/drivers/power/regulator/axp_regulator.c
-> +++ b/drivers/power/regulator/axp_regulator.c
-> @@ -173,6 +173,22 @@ static const struct axp_regulator_plat axp22x_regulators[] = {
->  	{ }
->  };
->  
+> v2:
+>         Resume after exception if seed CSR cannot be read.
+> ---
+>  drivers/rng/Kconfig         |   8 +++
+>  drivers/rng/Makefile        |   1 +
+>  drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
+>  3 files changed, 125 insertions(+)
+>  create mode 100644 drivers/rng/riscv_zkr_rng.c
+>
+> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+> index 994cc35b27..4f6e367169 100644
+> --- a/drivers/rng/Kconfig
+> +++ b/drivers/rng/Kconfig
+> @@ -48,6 +48,14 @@ config RNG_OPTEE
+>           accessible to normal world but reserved and used by the OP-TEE
+>           to avoid the weakness of a software PRNG.
+>
+> +config RNG_RISCV_ZKR
+> +       bool "RISC-V Zkr random number generator"
+> +       depends on RISCV_SMODE
+> +       help
+> +         This driver provides a Random Number Generator based on the
+> +         Zkr RISC-V ISA extension which provides an interface to an
+> +         NIST SP 800-90B or BSI AIS-31 compliant physical entropy source=
+.
+> +
+>  config RNG_STM32
+>         bool "Enable random number generator for STM32"
+>         depends on ARCH_STM32 || ARCH_STM32MP
+> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+> index 47b323e61e..a5d3ca4130 100644
+> --- a/drivers/rng/Makefile
+> +++ b/drivers/rng/Makefile
+> @@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) +=3D msm_rng.o
+>  obj-$(CONFIG_RNG_NPCM) +=3D npcm_rng.o
+>  obj-$(CONFIG_RNG_OPTEE) +=3D optee_rng.o
+>  obj-$(CONFIG_RNG_STM32) +=3D stm32_rng.o
+> +obj-$(CONFIG_RNG_RISCV_ZKR) +=3D riscv_zkr_rng.o
+>  obj-$(CONFIG_RNG_ROCKCHIP) +=3D rockchip_rng.o
+>  obj-$(CONFIG_RNG_IPROC200) +=3D iproc_rng200.o
+>  obj-$(CONFIG_RNG_SMCCC_TRNG) +=3D smccc_trng.o
+> diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
+> new file mode 100644
+> index 0000000000..8c9e111e2e
+> --- /dev/null
+> +++ b/drivers/rng/riscv_zkr_rng.c
+> @@ -0,0 +1,116 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
 > +/*
-> + * The "dcdc1" regulator has another range, beyond 1.54V up to 3.4V, in
-> + * steps of 100mV. We cannot model this easily, but also don't need that,
-> + * since it's typically only used for ~1.1V anyway, so just ignore it.
-> + * Also the DCDC3 regulator is described wrongly in the (available) manual,
-> + * experiments show that the split point is at 1200mV, as for DCDC1/2.
+> + * The RISC-V Zkr extension provides CSR seed which provides access to a
+> + * random number generator.
 > + */
-> +static const struct axp_regulator_plat axp313_regulators[] = {
-> +	{ "dcdc1", 0x10, BIT(0), 0x13, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc2", 0x10, BIT(1), 0x14, 0x7f,  500, 1540,  10, 70 },
-> +	{ "dcdc3", 0x10, BIT(2), 0x15, 0x7f,  500, 1840,  10, 70 },
-> +	{ "aldo1", 0x10, BIT(3), 0x16, 0x1f,  500, 3500, 100, NA },
-> +	{ "dldo1", 0x10, BIT(4), 0x17, 0x1f,  500, 3500, 100, NA },
-> +	{ }
+> +
+> +#define LOG_CATEGORY UCLASS_RNG
+> +
+> +#include <dm.h>
+> +#include <interrupt.h>
+> +#include <log.h>
+> +#include <rng.h>
+> +
+> +#define DRIVER_NAME "riscv_zkr"
+> +
+> +enum opst {
+> +       /** @BIST: built in self test running */
+> +       BIST =3D 0b00,
+> +       /** @WAIT: sufficient amount of entropy is not yet available */
+> +       WAIT =3D 0b01,
+> +       /** @ES16: 16bits of entropy available */
+> +       ES16 =3D 0b10,
+> +       /** @DEAD: unrecoverable self-test error */
+> +       DEAD =3D 0b11,
 > +};
 > +
->  static const struct axp_regulator_plat axp803_regulators[] = {
->  	{ "dcdc1", 0x10, BIT(0), 0x20, 0x1f, 1600, 3400, 100, NA },
->  	{ "dcdc2", 0x10, BIT(1), 0x21, 0x7f,  500, 1300,  10, 70 },
-> @@ -274,6 +290,7 @@ static const struct axp_regulator_plat *const axp_regulators[] = {
->  	[AXP209_ID]	= axp20x_regulators,
->  	[AXP221_ID]	= axp22x_regulators,
->  	[AXP223_ID]	= axp22x_regulators,
-> +	[AXP313_ID]	= axp313_regulators,
->  	[AXP803_ID]	= axp803_regulators,
->  	[AXP806_ID]	= axp806_regulators,
->  	[AXP809_ID]	= axp809_regulators,
-> diff --git a/include/axp_pmic.h b/include/axp_pmic.h
-> index 4ac64865831..aabafc8501b 100644
-> --- a/include/axp_pmic.h
-> +++ b/include/axp_pmic.h
-> @@ -32,6 +32,7 @@ enum {
->  	AXP209_ID,
->  	AXP221_ID,
->  	AXP223_ID,
-> +	AXP313_ID,
->  	AXP803_ID,
->  	AXP806_ID,
->  	AXP809_ID,
-
+> +static unsigned long read_seed(void)
+> +{
+> +       unsigned long ret;
+> +
+> +       __asm__ __volatile__("csrrw %0, seed, x0" : "=3Dr" (ret) : : "mem=
+ory");
+> +
+> +       return ret;
+> +}
+> +
+> +static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
+> +{
+> +       u8 *ptr =3D data;
+> +
+> +       while (len) {
+> +               u32 val;
+> +
+> +               val =3D read_seed();
+> +
+> +               switch (val >> 30) {
+> +               case BIST:
+> +                       continue;
+> +               case WAIT:
+> +                       continue;
+> +               case ES16:
+> +                       *ptr++ =3D val & 0xff;
+> +                       if (--len) {
+> +                               *ptr++ =3D val >> 8;
+> +                               --len;
+> +                       }
+> +                       break;
+> +               case DEAD:
+> +                       return -ENODEV;
+> +               }
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +/**
+> + * riscv_zkr_probe() - check if the seed register is available
+> + *
+> + * If the SBI software has not set mseccfg.sseed=3D1 or the Zkr
+> + * extension is not available this probe function will result
+> + * in an exception. Currently we cannot recover from this.
+> + *
+> + * @dev:       RNG device
+> + * Return:     0 if successfully probed
+> + */
+> +static int riscv_zkr_probe(struct udevice *dev)
+> +{
+> +       struct resume_data resume;
+> +       int ret;
+> +       u32 val;
+> +
+> +       /* Check if reading seed leads to interrupt */
+> +       set_resume(&resume);
+> +       ret =3D setjmp(resume.jump);
+> +       if (ret)
+> +               log_debug("Exception %ld reading seed CSR\n", resume.code=
+);
+> +       else
+> +               val =3D read_seed();
+> +       set_resume(NULL);
+> +       if (ret)
+> +               return -ENODEV;
+> +
+> +       do {
+> +               val =3D read_seed();
+> +               val >>=3D 30;
+> +       } while (val =3D=3D BIST || val =3D=3D WAIT);
+> +
+> +       if (val =3D=3D DEAD)
+> +               return -ENODEV;
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct dm_rng_ops riscv_zkr_ops =3D {
+> +       .read =3D riscv_zkr_read,
+> +};
+> +
+> +U_BOOT_DRIVER(riscv_zkr) =3D {
+> +       .name =3D DRIVER_NAME,
+> +       .id =3D UCLASS_RNG,
+> +       .ops =3D &riscv_zkr_ops,
+> +       .probe =3D riscv_zkr_probe,
+> +};
+> +
+> +U_BOOT_DRVINFO(cpu_riscv_zkr) =3D {
+> +       .name =3D DRIVER_NAME,
+> +};
+> --
+> 2.40.1
+>
