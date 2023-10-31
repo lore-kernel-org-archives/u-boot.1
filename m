@@ -4,117 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F9F6C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 08:25:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83839C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 08:25:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C078759B;
-	Tue, 31 Oct 2023 09:24:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7EE687A10;
+	Tue, 31 Oct 2023 09:25:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="OpuDHJjY";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="SDhNQM/H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 065BD8759B; Tue, 31 Oct 2023 09:24:57 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ id 3079C874C4; Tue, 31 Oct 2023 09:25:02 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89EB1874C4
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 09:24:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3C2A879FE
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 09:24:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
 Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20231031082450epoutp0358655b0d173d417660f384fcd7294461~TI6hdJCnk3131531315epoutp03S
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:24:50 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20231031082450epoutp0358655b0d173d417660f384fcd7294461~TI6hdJCnk3131531315epoutp03S
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20231031082457epoutp01b1179dddeac284c689a344ec4bd5c80e~TI6npdNjf2812928129epoutp01F
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:24:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20231031082457epoutp01b1179dddeac284c689a344ec4bd5c80e~TI6npdNjf2812928129epoutp01F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698740690;
- bh=MEmUyiXJPPawF1bdMKSRTu0f5lHZOFtLg1qojwX8CgY=;
- h=From:To:Cc:Subject:Date:References:From;
- b=OpuDHJjYO3wE6eEnZNZ1zCqmYtkTS8WoFdVcKXzaQ4FBGqZFNQUpDdvgnGdEMlKZk
- jr4Bv/nFo6O4VNxg9+L3z1/hqvrugA2lkT/EPYKMX7jo3hk4ciachzyZk7OEHwbNqS
- Q5Gb1xXOjKG6/NzNoO8I4fNmcsqv19pcTTM9uf+k=
+ s=mail20170921; t=1698740697;
+ bh=CcaYagbVuHIBZEHe5/0dWuU8shnnZLAxNBN5Zyx2E9Y=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=SDhNQM/Hn7s/NskIAvFw6BBO4rN3pjoX7wGO3MIjONxPFB7N4134TfrFUiIGcVCob
+ L4fMAAh9fc8NLpehCeVAR2TEOwjlH4JR/8OGti3J91MJAFEXnldPFb2KWTycVXnjDY
+ Edpkxei4xE/jcsgPj3W+sA57ElCO2dB6UR0eWwYM=
 Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20231031082449epcas1p12c48c6c825b6e95fd8b2a68c1b0b169a~TI6g-tOFZ0729007290epcas1p1n;
- Tue, 31 Oct 2023 08:24:49 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.36.134]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4SKNV90MSzz4x9QM; Tue, 31 Oct
- 2023 08:24:49 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 41.4A.19104.0D9B0456; Tue, 31 Oct 2023 17:24:48 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20231031082456epcas1p2071daa5317af591ba25c9028af36aa26~TI6nTZ1ZG1733717337epcas1p2H;
+ Tue, 31 Oct 2023 08:24:56 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.36.132]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4SKNVJ0zS4z4x9QB; Tue, 31 Oct
+ 2023 08:24:56 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ DB.75.09744.8D9B0456; Tue, 31 Oct 2023 17:24:56 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
  epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231031082448epcas1p33a8ff166d2e48df3dcd6c0b1f0132efc~TI6fjR9Gb1463914639epcas1p3E;
- Tue, 31 Oct 2023 08:24:48 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031082448epsmtrp1f46e571e2492c36ffe220e83ae637122~TI6fiEFzv0871608716epsmtrp1P;
- Tue, 31 Oct 2023 08:24:48 +0000 (GMT)
-X-AuditID: b6c32a4c-559ff70000004aa0-e5-6540b9d0217c
+ 20231031082455epcas1p35b81686fe8c2d836539f8103c9cde629~TI6mbyOT41463914639epcas1p3c;
+ Tue, 31 Oct 2023 08:24:55 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231031082455epsmtrp2d01967060c8b709b5ab7997c0c66b337~TI6ma6i1a3070930709epsmtrp2a;
+ Tue, 31 Oct 2023 08:24:55 +0000 (GMT)
+X-AuditID: b6c32a35-7239ea8000002610-5f-6540b9d8676e
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- B3.AA.07368.0D9B0456; Tue, 31 Oct 2023 17:24:48 +0900 (KST)
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ DE.EC.08755.7D9B0456; Tue, 31 Oct 2023 17:24:55 +0900 (KST)
 Received: from localhost.localdomain (unknown [10.113.113.235]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20231031082448epsmtip251c86e80c94f6e6e964e7049d0c9bba3~TI6fWYidf1092410924epsmtip2q;
- Tue, 31 Oct 2023 08:24:48 +0000 (GMT)
+ 20231031082455epsmtip2b9377b1eddfd1286183286e7d05247c9~TI6mNFq9k0518305183epsmtip2X;
+ Tue, 31 Oct 2023 08:24:55 +0000 (GMT)
 From: Jaehoon Chung <jh80.chung@samsung.com>
 To: u-boot@lists.denx.de
 Cc: ycliang@andestech.com, yanhong.wang@starfivetech.com,
  minda.chen@starfivetech.com, xingyu.wu@starfivetech.com, Jaehoon Chung
  <jh80.chung@samsung.com>
-Subject: [PATCH 1/2] riscv: dts: jh7110: Add a gpio-restart node
-Date: Tue, 31 Oct 2023 17:24:38 +0900
-Message-Id: <20231031082439.395320-1-jh80.chung@samsung.com>
+Subject: [PATCH 2/2] configs: starfive2: Enable CONFIG_SYSRET config
+Date: Tue, 31 Oct 2023 17:24:39 +0900
+Message-Id: <20231031082439.395320-2-jh80.chung@samsung.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231031082439.395320-1-jh80.chung@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmru6FnQ6pBh8O2Vjc+NXGajFpeaDF
- 272d7BYLZ5xlsvjR9YjR4vGh10wObB57Ts9i9jh7ZwejR9+WVYwet8/yBrBEZdtkpCampBYp
- pOYl56dk5qXbKnkHxzvHm5oZGOoaWlqYKynkJeam2iq5+AToumXmAO1WUihLzCkFCgUkFhcr
- 6dvZFOWXlqQqZOQXl9gqpRak5BSYFugVJ+YWl+al6+WlllgZGhgYmQIVJmRnPOmdzF6wirvi
- 7MUrbA2Mczi7GDk5JARMJC529zB3MXJxCAnsYZTou97FBOF8YpS4cX4WG4TzjVHixd3FLF2M
- HGAtSxqFIOJ7GSX2n3vMAuF8YZRYe2IJC8hcNgEdie3fjjOB2CICEhK/+q8yghQxC8xllPh3
- 6DQjSEJYwEHizs3rYA0sAqoSh9b/ZwWxeQVsJFpeHWCBOFBeYual7+wQcUGJkzOfgMWZgeLN
- W2eDHS4hcIhd4sxMmPNcJO6vFYfoFZZ4dXwLO4QtJfGyv40dor6ZUWLpkoOsEE4P0EUN19kg
- qowl9i+dzAQyiFlAU2L9Ln2IsKLEzt9zGSEW80m8+9rDCrGLV6KjTQiiREXi0uuXTDC77j6B
- +EVCwEPi3KtWsBuEBGIlJjW2sUxglJ+F5J1ZSN6ZhbB4ASPzKkap1ILi3PTUZMMCQ9281HJ4
- 1Cbn525iBCdCLZ8djN/X/9U7xMjEwXiIUYKDWUmE97CpQ6oQb0piZVVqUX58UWlOavEhRlNg
- IE9klhJNzgem4rySeEMTSwMTMyNjEwtDM0Mlcd6YT+0pQgLpiSWp2ampBalFMH1MHJxSDUzs
- /Uu472VPn7Cz0XB9/tSOm3a/lhxLzzvdcHF316SnGz0+XfhUWBJzcJvfijVKa0py98/f8NP4
- 9YUcvgc6jJ+vfymW32MbdsJwTWHX9QrVSTerciU+L2+/zDfp+5HP5luz7c1uqvBNDbm3oX12
- 6qk8w6n/tKu2fZp5lUV6msgTh/Yf09TMctLfHnble2Y2d9JS+W5L5w89W1c9XNU5r31famjd
- iSvX7e82haZdCNr5s2WW2vVzspt8lrY/FGRytGFZeVj44MflQbVXTkzcOOPbZb8dDz/arpg/
- 86hTYP7Pcz6T5ZOfnJLb3me3NVqcQV059IjY+or+juh5j+zDxMVOdxz3UfCf4N22fMO13E07
- XiuxFGckGmoxFxUnAgCySEmJDQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrELMWRmVeSWpSXmKPExsWy7bCSvO6FnQ6pBusWiljc+NXGajFpeaDF
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpmk+LIzCtJLcpLzFFi42LZdljTQPfGTodUg5UnWC1u/GpjtZi0PNDi
+ 7d5OdouFM84yWfzoesRo8fjQayYHNo89p2cxe5y9s4PRo2/LKkaP22d5A1iism0yUhNTUosU
+ UvOS81My89JtlbyD453jTc0MDHUNLS3MlRTyEnNTbZVcfAJ03TJzgHYrKZQl5pQChQISi4uV
+ 9O1sivJLS1IVMvKLS2yVUgtScgpMC/SKE3OLS/PS9fJSS6wMDQyMTIEKE7IzluwQLvjHUvFh
+ 3mLWBsbVLF2MnBwSAiYSX/tmsnUxcnEICexglPg89wwThPOJUeLZ4n+sEM43Rom+Rc+ZYFru
+ PfkCVbWXUeL8tE0sEM4XRomX1z8yglSxCehIbP92HKxDREBC4lf/VUaQImaBuYwS/w6dBisS
+ FnCR+HZ7HtglLAKqEtv3HQZr4BWwkZh7q5cVYp28xMxL39m7GDk4OAVsJdZdNYAoEZQ4OfMJ
+ WCszUEnz1tnMIPMlBK6xS2xvnc4I0esisXB7KzOELSzx6vgWdghbSuLzu71sEA3NjBJLlxxk
+ hXB6gK5ruM4GUWUssX/pZCaQzcwCmhLrd+lDhBUldv6eywixmU/i3dceVpASCQFeiY42IYgS
+ FYlLr18ywey6++Q/1C8eEj/+LGaHhNYERonv+yYxT2BUmIXkoVlIHpqFsHkBI/MqRrHUguLc
+ 9NRiwwJDeBwn5+duYgSnRi3THYwT337QO8TIxMF4iFGCg1lJhPewqUOqEG9KYmVValF+fFFp
+ TmrxIUZTYGhPZJYSTc4HJue8knhDE0sDEzMjYxMLQzNDJXFe5ke9KUIC6YklqdmpqQWpRTB9
+ TBycUg1MCkePJIr7zpn44MSnj2bGFww51K3u8hltYFndLVB2NLP8mmgh1/mprHvb6xJaJrO+
+ D6s//+DPlVtiQq6PJG5ftT9WzvY/Ma+GnfOSw1+3Y11z127bxNWdxtV5bLG4UElH3ik2gWD5
+ 1kNBM3Lbu7YznFZ5c0Pt3mXvfLZaru5DMfIKSdsrZJeamcUZs/y8FpdfZFs+e8kmYY03/04x
+ uK+1v8txcdGDtdPtJVQWX282C+ZPOTK34gTPnYkq4jZ7TSUbp11aJvY08I6twqvXXj9tt1lN
+ q81cVrnAfvGxbvFpCyur9Yq+Ot22+5MRWP9Es2PG8byNYTlX3Xic8x1j7pflCuzYF6hlnzb7
+ eO4Nya1KLMUZiYZazEXFiQAxBzgHFgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJLMWRmVeSWpSXmKPExsWy7bCSvO71nQ6pBrOf6ljc+NXGajFpeaDF
  272d7BYLZ5xlsvjR9YjR4vGh10wObB57Ts9i9jh7ZwejR9+WVYwet8/yBrBEcdmkpOZklqUW
- 6dslcGU86Z3MXrCKu+LsxStsDYxzOLsYOTgkBEwkljQKdTFycQgJ7GaUuPHgHlsXIydQXEri
- 89OpbBA1whKHDxeDhIUEPjFK/O9kArHZBHQktn87DmaLCEhI/Oq/yggyh1lgIaNEa+tKFpCE
- sICDxJ2b18FsFgFViUPr/7OC2LwCNhItrw6wQOySl5h56Ts7RFxQ4uTMJ2BxZqB489bZzBMY
- +WYhSc1CklrAyLSKUTK1oDg3PTfZsMAwL7Vcrzgxt7g0L10vOT93EyM4GLU0djDem/9P7xAj
- EwfjIUYJDmYlEd7Dpg6pQrwpiZVVqUX58UWlOanFhxilOViUxHkNZ8xOERJITyxJzU5NLUgt
- gskycXBKNTCty3a032v/hLX6zLa9v+RPXHSU36Sev/X9h3f9pfPVJt7ZvyM3p7NYrokldPGX
- ONZJ5lduZag/UfweqpCyP+7d9FwTr5/Ge2d/UOH/kJAdL+O107W9UVDN9L/VWrW5fyaU73QX
- s1g5Y39i1NXuTsfF1zbEHA6ze/MnzW/z0Sfe5yRrxec9v+s6lefmFi7H/yn3K+qD3mut8ZW9
- /XXtjbk7H5UGrDbUbfT/0RXz6pHpD/Z1BYyReUkdvUmalzoZf5Xcst5c8XTl1MJHqezH5dmb
- VwncvvBJYp/CtaPbTlnXPZKudLV4dFvVfObKC/tY31lsL60y2njcVOjRY2ePxVvMhGwnPnl2
- zG1JBU+hV4+2EktxRqKhFnNRcSIA4xDWlbUCAAA=
-X-CMS-MailID: 20231031082448epcas1p33a8ff166d2e48df3dcd6c0b1f0132efc
+ 6dslcGUs2SFc8I+l4sO8xawNjKtZuhg5OSQETCTuPfnCBGILCexmlNi2wxwiLiXx+elUti5G
+ DiBbWOLw4eIuRi6gkk+MEg+OX2EGqWET0JHY/u04WK+IgITEr/6rjCBFzAILGSVaW1eCLRAW
+ cJH4dnsemM0ioCqxfd9hsAZeARuJubd6WSGWyUvMvPSdHWQZp4CtxLqrBhD32Ejc3rSBDaJc
+ UOLkzCdgY5iBypu3zmaewCgwC0lqFpLUAkamVYySqQXFuem5xYYFhnmp5XrFibnFpXnpesn5
+ uZsYwaGrpbmDcfuqD3qHGJk4GA8xSnAwK4nwHjZ1SBXiTUmsrEotyo8vKs1JLT7EKM3BoiTO
+ K/6iN0VIID2xJDU7NbUgtQgmy8TBKdXAxKNT4Zt7yspe3FSxLHtvqXmQwZpLT0W5LxduUmFl
+ T5ltEPc856DUC+mLr9fa7bLh+lm0VePrldf357JcOXvc4q6Dx/Xlc6VWc/1cMKlmqZb71L6D
+ Pv/OKnHtO8MuVsK5saI3fC/7IbGdSc+aink7djqm7bUWfzVfzNIrS3FPReIV9zVTU+ZGyF42
+ mNcUUf9YUfLtys6veaUs686yRpuxZB3fkbKRlaFjleeuksIPfr3rvokLyNr+eLhvwxvPN537
+ D5tPCmKULWhnOWbp0PyTPanry+aXWWs4Kq9VTy9yNr6nFXlikbqzxd3A9jN5lv8k5z+/8dej
+ PqaAbT1/Z9OCrNKy23tOnjn4I/hzb7iwEktxRqKhFnNRcSIAGBe+zswCAAA=
+X-CMS-MailID: 20231031082455epcas1p35b81686fe8c2d836539f8103c9cde629
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031082448epcas1p33a8ff166d2e48df3dcd6c0b1f0132efc
-References: <CGME20231031082448epcas1p33a8ff166d2e48df3dcd6c0b1f0132efc@epcas1p3.samsung.com>
+X-CMS-RootMailID: 20231031082455epcas1p35b81686fe8c2d836539f8103c9cde629
+References: <20231031082439.395320-1-jh80.chung@samsung.com>
+ <CGME20231031082455epcas1p35b81686fe8c2d836539f8103c9cde629@epcas1p3.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,63 +133,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add gpio-restart node to do reset.
-
-Before applied this patch, System Reset Extension doesn't appear with
-sbi command.
-
-OpenSBI 1.3
-Machine:
-  Vendor ID 489
-  Architecture ID 8000000000000007
-  Implementation ID 4210427
-Extensions:
-  sbi_set_timer
-  sbi_console_putchar
-...[snip]...
-  IPI Extension
-  RFENCE Extension
-  Hart State Management Extension
-  Performance Monitoring Unit Extension
-
-After applied this patch, System Reset Extension is supported from SBI.
-
-OpenSBI 1.3
-Machine:
-  Vendor ID 489
-  Architecture ID 8000000000000007
-  Implementation ID 4210427
-Extensions:
-  sbi_set_timer
-  sbi_console_putchar
-...[snip]...
-  IPI Extension
-  RFENCE Extension
-  Hart State Management Extension
-  System Reset Extension
-  Performance Monitoring Unit Extension
+Enable CONFIG_SYSREST config to do reset.
 
 Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
 ---
- arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ configs/starfive_visionfive2_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-index e40f57a15080..e94f9fe826a8 100644
---- a/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-+++ b/arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi
-@@ -34,6 +34,11 @@
- 		device_type = "memory";
- 		reg = <0x0 0x40000000 0x2 0x0>;
- 	};
-+
-+	gpio-restart {
-+		compatible = "gpio-restart";
-+		gpios = <&sysgpio 35 GPIO_ACTIVE_HIGH>;
-+	};
- };
- 
- &osc {
+diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+index b21754feafce..afa74e17ebd5 100644
+--- a/configs/starfive_visionfive2_defconfig
++++ b/configs/starfive_visionfive2_defconfig
+@@ -122,6 +122,7 @@ CONFIG_PINCTRL_STARFIVE=y
+ # CONFIG_RAM_SIFIVE is not set
+ CONFIG_SYS_NS16550=y
+ CONFIG_CADENCE_QSPI=y
++CONFIG_SYSRESET=y
+ CONFIG_TIMER_EARLY=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
 -- 
 2.25.1
 
