@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5476C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:18:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD48C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 190D087AC6;
-	Tue, 31 Oct 2023 06:18:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 920DB87AC2;
+	Tue, 31 Oct 2023 06:18:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="kkW3KhAf";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="baYkGzQ9";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="e6cmOsqX";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="g0nnzrbu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61CB786FFE; Tue, 31 Oct 2023 06:18:15 +0100 (CET)
+ id 5715E87AE0; Tue, 31 Oct 2023 06:18:17 +0100 (CET)
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
  [64.147.123.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3731C87ABF
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:18:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 59F7987AD6
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:18:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 437213200A58;
- Tue, 31 Oct 2023 01:18:11 -0400 (EDT)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.west.internal (Postfix) with ESMTP id 7E55A3200A55;
+ Tue, 31 Oct 2023 01:18:13 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Tue, 31 Oct 2023 01:18:11 -0400
+ by compute2.internal (MEProxy); Tue, 31 Oct 2023 01:18:13 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
  cc:cc:content-transfer-encoding:content-type:date:date:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm1; t=1698729490; x=
- 1698815890; bh=MIZlS/GAjkq/kcb0yEs4hZMbT/z+GlqoIRHaYrhJguE=; b=k
- kW3KhAf6DoVvp7gHRkVD6I7oA0FUB2TSkQvfRaFOJVEhWZRGCVq265CvqpnX8G6z
- IMWd64pogVFV4ctK+0iHbjXqzyvaoNqeb8yS1BLTG0RjjiWlJA45UOi5qOZar21m
- x31052Q9THHkVpBlm9Qsi35tWLRJq7+cmxO8oAIXUbgMLE8EyTuQIYTYEiouw5pq
- UTL/vZFuMr7EUuYCsa8ffcoA4xxw50YLapT+iMw8RTH/m+sQp0Vu3o/id+e7DAcZ
- CfXM6rFYENFti6O8d4yGs7PsBQ9QKJ37MBaSsTvUnm/BkSMmkEBT0ybmZcGzjyS9
- e64BLrlfctMZmvMcP1vVw==
+ :reply-to:sender:subject:subject:to:to; s=fm1; t=1698729493; x=
+ 1698815893; bh=jBWpfOaonL2oxWwLDELa5WgRCw9F4kU/exj55UWFIZs=; b=e
+ 6cmOsqXRzHdN9n0+zIdYyJ5DCJ2CosQtFpkcp38HpMqPTF+eGsqfYdTE15vi6Zcg
+ K20lOHXVYX0leVG7KI0r3ALDtSTEuPDXU2VcwurkNtPIntRXR11HKvB9Jh8o8VsU
+ bTqjTeMlX3SbUjhEHnSfOV4O+kzvVNYA2lMFDyj+5E89I0G5vgxVAtLE6jSayz8r
+ kG/ZxrIBBUYoVjEr25tFwpub716Oj2TzG/EqdRsKrtslCxokjnsFZvT2OYxe2dvr
+ HR+NuguFQFqb1BWVWXLnaae2JeJNgGjn2Z7jB3QahdV84nOsHF/PZ35eoLPNoJLY
+ sWHABxmy+jgFOEUYVdkjQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
  :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698729490; x=
- 1698815890; bh=MIZlS/GAjkq/kcb0yEs4hZMbT/z+GlqoIRHaYrhJguE=; b=b
- aYkGzQ9yrXVIrZ6GC3sOUHTXmZpQFPdJ9jJiAPB7Lye68UWaUoHUjEB4yTQUmQyC
- J2GTQUPrcDh+0apcDsWC83Ya7QLXDLATWMTaJchlFICqZPSz5gzgo7gxm2iesxHa
- fqbmRWXa8RVfzUimpA2M+6hF7oOtSGYoJ3ePSC+0pQTjx6xOjs734q8Gs1yvzvu3
- VTCtJAzoB+DgtDWlA8QIuXehAyH4qxGfvVRRGQZyV1e/R/c7sVJVhqEJ+DrqOWOb
- j2xl1Eg78O4XtbGHnJ7CSrrDM6Jomdw1U2UoyR05yx00CpUVsxKNO73ZTSmT/Z39
- PXpuj8zDby7sdSfrjnqIw==
-X-ME-Sender: <xms:Eo5AZXYmt8DSmmFyNBh2x6NLWozhZkhhlPqccTf_BUTvLddf3rrekw>
- <xme:Eo5AZWaAR6vN39CbmFqgCrLN6FAwATYtmrfiMoeEV9NVH6CkW3uPv98a-y3TABCnH
- OAOC1JYRIj-DMkRSg>
-X-ME-Received: <xmr:Eo5AZZ-nNfTtLwjtrzg6nQuX2PLfK80ZocCbZYJlZ4kpSlYRHqWdyXmH_XM1xiYjTjp5gZ9myqkCt_DvRQws418vKRtxf9JlUTE3CEWifVZx5c0mgCuQdPDWfPX6SLdb8_BLvQ>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698729493; x=
+ 1698815893; bh=jBWpfOaonL2oxWwLDELa5WgRCw9F4kU/exj55UWFIZs=; b=g
+ 0nnzrbu5KXuN7MxtOuXH39hihJEdj6ggAxDdlN+tRxe39bfwikddrrr4tX7WDxdb
+ 4dYICOMqt+IWw5SNMgLDboxM7/U9Tlh5WXlMQhskBizuGjJWubnosjz3GmBuBCjz
+ HrDBrRs0bYm3bHe9mq8kgBRk95sHGyoeNxlCTPCmdf6DHB2v9ddUwOFj/LSlCZES
+ +lpWYknoIZjWWC3vtrU+NsS2ySVyA6XZh/ARoZZFxSHEvrUqiirBQedaaKHd1JZe
+ WBnBEblrvtmkZl/r5mewHrDIbUTKZkWf5bV6haFc3ARyAL3K8QIsSmmQX1+S1IlZ
+ KI6QCTMdDEdXJc3vc63YQ==
+X-ME-Sender: <xms:FI5AZbA7NSpIe0jqx6Brpn_8FJTRKPFe170Fx6lBGVuO-U82rQjRkA>
+ <xme:FI5AZRimgLqlFgTjge9MxwUPt4SPakPWkMGhLMDJxwyQR5BR5PH2A-eCEnReLea19
+ NewFdxLJtAH09MM0g>
+X-ME-Received: <xmr:FI5AZWmggOOvfUBmYUUm3AUtLbqx-e5JE6VruxEhE5UgZtL0gTahRnwYaYzq6_OtffDMOvKDLdjJRo0xI0QKqZpo7_Ch-qvCN3MjCe_MsIprdvVX1NRAo26Qiph_yl17Fn_duQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,23 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeelucetufdoteggod
  ftrfgrthhtvghrnhepudekteeuudehtdelteevgfduvddvjefhfedulefgudevgeeghefg
  udefiedtveetnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
  homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:Eo5AZdqk6Nw7jQpxrbBEV5v79DYX5ccZ6pYnszi5tqLJ_4dwxO4ioA>
- <xmx:Eo5AZSrRZVRvq1bQbUza1p0S5aml4OQfgGLJksX44b3jXQ8RcGm1xg>
- <xmx:Eo5AZTRn5Ch7vXB6Ey7k6Rd0qpCVMUXEu0gV8NKYN3c9i1vwTmQcSw>
- <xmx:Eo5AZfAewAeE_TAyaQPf0tMaMmgoZckpa2J0i_9HUQaLVY806Egj4A>
+X-ME-Proxy: <xmx:FI5AZdwOkqEbL5KjzdyarYFQeCNxdFdhKIUV0ZUn6nnT1uZv9UrZmQ>
+ <xmx:FI5AZQTAnbtK8Po_WT5NQrEgEnQ2fbBQIh91eESMVrmyqKCsdABO9w>
+ <xmx:FI5AZQb2RJmdTNurU5yhk1Jwh5bITfAKVxnfAvypRvXKIjgNmeZUGQ>
+ <xmx:FY5AZWNz7vS7IE_5qF4X49hidu6bDNFNs12L8_6BVthZLF__sMonuQ>
 Feedback-ID: i0ad843c9:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 31 Oct 2023 01:18:10 -0400 (EDT)
+ 31 Oct 2023 01:18:12 -0400 (EDT)
 From: Samuel Holland <samuel@sholland.org>
 To: Andre Przywara <andre.przywara@arm.com>,
  Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, Icenowy Zheng <icenowy@aosc.io>,
- Jesse Taube <Mr.Bossman075@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 2/4] sunxi: binman: Move BL31 and SCP firmware addresses to
- Kconfig
-Date: Tue, 31 Oct 2023 00:17:39 -0500
-Message-ID: <20231031051805.62430-3-samuel@sholland.org>
+ Jesse Taube <Mr.Bossman075@gmail.com>, Samuel Holland <samuel@sholland.org>
+Subject: [PATCH v3 3/4] sunxi: binman: Support FIT generation for 32-bit SoCs
+Date: Tue, 31 Oct 2023 00:17:40 -0500
+Message-ID: <20231031051805.62430-4-samuel@sholland.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231031051805.62430-1-samuel@sholland.org>
 References: <20231031051805.62430-1-samuel@sholland.org>
@@ -106,112 +104,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is easier to read than the #ifdef staircase, provides better
-visibility into the memory map (alongside the other Kconfig
-definitions), and allows these addresses to be reused from code.
+Some 32-bit SoCs can use SCP firmware to implement additional PSCI
+functionality, such as system suspend. In order to load this firmware
+from SPL, we need to generate and use a FIT instead of a legacy image.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Adjust the binman FIT definition so it does not rely on TF-A BL31, as
+this is not used on 32-bit SoCs. Instead, after loading the firmware,
+U-Boot proper is executed directly.
+
 Signed-off-by: Samuel Holland <samuel@sholland.org>
 ---
 
 (no changes since v2)
 
 Changes in v2:
- - New patch for v2, split from the .dtsi changes
+ - Rely on binman min-size instead of using explicit offsets
+ - Use Kconfig for firmware addresses instead of an #ifdef staircase
 
- arch/arm/dts/sunxi-u-boot.dtsi | 24 +++++++-----------------
- arch/arm/mach-sunxi/Kconfig    | 17 +++++++++++++++++
- 2 files changed, 24 insertions(+), 17 deletions(-)
+ arch/arm/dts/sunxi-u-boot.dtsi | 23 ++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
 
 diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
-index a0c8abb7033..7a8764e463b 100644
+index 7a8764e463b..ed1cb91eeb5 100644
 --- a/arch/arm/dts/sunxi-u-boot.dtsi
 +++ b/arch/arm/dts/sunxi-u-boot.dtsi
-@@ -1,15 +1,5 @@
+@@ -1,5 +1,11 @@
  #include <config.h>
  
--#ifdef CONFIG_MACH_SUN50I_H6
--#define BL31_ADDR 0x104000
--#define  SCP_ADDR 0x114000
--#elif defined(CONFIG_MACH_SUN50I_H616)
--#define BL31_ADDR 0x40000000
--#else
--#define BL31_ADDR  0x44000
--#define  SCP_ADDR  0x50000
--#endif
--
++#ifdef CONFIG_ARM64
++#define ARCH "arm64"
++#else
++#define ARCH "arm"
++#endif
++
  / {
  	aliases {
  		mmc0 = &mmc0;
-@@ -69,8 +59,8 @@
- 					os = "arm-trusted-firmware";
- 					arch = "arm64";
- 					compression = "none";
--					load = <BL31_ADDR>;
--					entry = <BL31_ADDR>;
-+					load = <CONFIG_SUNXI_BL31_BASE>;
-+					entry = <CONFIG_SUNXI_BL31_BASE>;
+@@ -34,30 +40,32 @@
+ 			filename = "spl/sunxi-spl.bin";
+ 		};
  
- 					atf-bl31 {
- 						filename = "bl31.bin";
-@@ -78,13 +68,13 @@
+-#ifdef CONFIG_ARM64
++#ifdef CONFIG_SPL_LOAD_FIT
+ 		fit {
+-			description = "Configuration to load ATF before U-Boot";
++			description = "Configuration to load U-Boot and firmware";
+ 			#address-cells = <1>;
+ 			fit,fdt-list = "of-list";
+ 
+ 			images {
+ 				uboot {
+-					description = "U-Boot (64-bit)";
++					description = "U-Boot";
+ 					type = "standalone";
+ 					os = "u-boot";
+-					arch = "arm64";
++					arch = ARCH;
+ 					compression = "none";
+ 					load = <CONFIG_TEXT_BASE>;
++					entry = <CONFIG_TEXT_BASE>;
+ 
+ 					u-boot-nodtb {
  					};
  				};
  
--#ifdef SCP_ADDR
-+#if CONFIG_SUNXI_SCP_BASE
- 				scp {
- 					description = "SCP firmware";
++#if CONFIG_SUNXI_BL31_BASE
+ 				atf {
+ 					description = "ARM Trusted Firmware";
  					type = "firmware";
- 					arch = "or1k";
+ 					os = "arm-trusted-firmware";
+-					arch = "arm64";
++					arch = ARCH;
  					compression = "none";
--					load = <SCP_ADDR>;
-+					load = <CONFIG_SUNXI_SCP_BASE>;
+ 					load = <CONFIG_SUNXI_BL31_BASE>;
+ 					entry = <CONFIG_SUNXI_BL31_BASE>;
+@@ -67,6 +75,7 @@
+ 						missing-msg = "atf-bl31-sunxi";
+ 					};
+ 				};
++#endif
  
- 					scp {
- 						filename = "scp.bin";
-@@ -106,10 +96,10 @@
+ #if CONFIG_SUNXI_SCP_BASE
+ 				scp {
+@@ -95,7 +104,11 @@
+ 
  				@config-SEQ {
  					description = "NAME";
++#if CONFIG_SUNXI_BL31_BASE
  					firmware = "atf";
--#ifndef SCP_ADDR
--					loadables = "uboot";
--#else
-+#if CONFIG_SUNXI_SCP_BASE
- 					loadables = "scp", "uboot";
 +#else
-+					loadables = "uboot";
- #endif
- 					fdt = "fdt-SEQ";
- 				};
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index a10e4c06b6a..b0fbda0aa09 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -155,6 +155,23 @@ config SUNXI_RVBAR_ALTERNATIVE
- 	for all other SoCs, so the content of the SRAM_VER_REG becomes
- 	irrelevant there, and we can use the same code.
- 
-+config SUNXI_BL31_BASE
-+	hex
-+	default 0x00044000 if MACH_SUN50I || MACH_SUN50I_H5
-+	default 0x00104000 if MACH_SUN50I_H6
-+	default 0x40000000 if MACH_SUN50I_H616
-+	default 0x0
-+	help
-+	  Address where BL31 (TF-A) is loaded, or zero if BL31 is not used.
-+
-+config SUNXI_SCP_BASE
-+	hex
-+	default 0x00050000 if MACH_SUN50I || MACH_SUN50I_H5
-+	default 0x00114000 if MACH_SUN50I_H6
-+	default 0x0
-+	help
-+	  Address where SCP firmware is loaded, or zero if it is not used.
-+
- config SUNXI_A64_TIMER_ERRATUM
- 	bool
- 
++					firmware = "uboot";
++#endif
+ #if CONFIG_SUNXI_SCP_BASE
+ 					loadables = "scp", "uboot";
+ #else
 -- 
 2.41.0
 
