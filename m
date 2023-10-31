@@ -4,54 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E10AC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBDEC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 07:04:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80EE787578;
-	Tue, 31 Oct 2023 07:47:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C62687AF4;
+	Tue, 31 Oct 2023 08:04:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qH3NrNOh";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AC67879D3; Tue, 31 Oct 2023 07:47:49 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id BAE4987AF6; Tue, 31 Oct 2023 08:03:59 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B6687571
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:47:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9BA5487A22
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:03:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39V6lc8B098791;
- Tue, 31 Oct 2023 14:47:38 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Tue, 31 Oct 2023 14:47:34 +0800
-Date: Tue, 31 Oct 2023 14:43:52 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: merle w <merlew4n6@gmail.com>
-CC: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
- <rick@andestech.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, Anup Patel
- <apatel@ventanamicro.com>, Kautuk Consul <kconsul@ventanamicro.com>,
- "Chanho Park" <chanho61.park@samsung.com>, <u-boot@lists.denx.de>
-Subject: Re: [RFC v2 2/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-Message-ID: <ZUCiKNIAc68zPTty@swlinux02>
-References: <20231029084533.44607-1-heinrich.schuchardt@canonical.com>
- <20231029084533.44607-3-heinrich.schuchardt@canonical.com>
- <CAJ8bkywF8v+JA8D=di=agqmvdsUdrmUvhyeb16_4dDr07A0ejg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 337E6B8077F
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:03:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACA80C43395
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:03:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1698735835;
+ bh=KOt/6Bh0881X6hZfLd45iFiPDRPO/IaJmQQYpuDVKI0=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=qH3NrNOh96Z0KT5JpxiiCbHuAKKZVgpNG+8L6k+NNrguvROADqrZbB3itVpz1X+gp
+ iczt8jT1rGDuxzIbPidyppB7NqyIfAYSeIvPvXWeBhU+FKNaBkv2NQptJh03VACA+7
+ /pJE+B8r5lS2s37CL/BTD5WvLJygnBbd3hzU8KiqSepB4kzV9rL+5NfCwsWvnHL+Fq
+ LS+R6gN5Bhg9Ll01u2O/KpqMsR+kaTkA0WqXtx/a9iJVJCRURy+fG9QxiOFNtvIOqU
+ PxRYQWwS+kAT3k9vwN5V/aCyF4pFprGqBvSXpYTWav4+q3i6/MhF70NBTpmGQjvo/K
+ R4BJOSC7XPLqA==
+Received: by mail-oi1-f173.google.com with SMTP id
+ 5614622812f47-3b2e72fe47fso3490352b6e.1
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 00:03:55 -0700 (PDT)
+X-Gm-Message-State: AOJu0Yz6aHwuegG6ePj3u+KoVAHZAW5b+1PpSUQdMXdyxvsMMGCGe4hm
+ /vL0zyAZM+MT87RaNS/sQINOOEbetuBCq8f/sak=
+X-Google-Smtp-Source: AGHT+IFhQbL2GXvlStOCa9WbIcCqYEWgNQXQ5SvyyYzHaZ0dCtw7TrWnmT++4MnCQr/b51E4av5FWAhY1H0ZF2//3r8=
+X-Received: by 2002:a05:6870:4c05:b0:1e9:d158:2465 with SMTP id
+ pk5-20020a0568704c0500b001e9d1582465mr14892187oab.17.1698735834939; Tue, 31
+ Oct 2023 00:03:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAJ8bkywF8v+JA8D=di=agqmvdsUdrmUvhyeb16_4dDr07A0ejg@mail.gmail.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39V6lc8B098791
+References: <20231026072628.4115527-1-sjg@chromium.org>
+ <20231026072628.4115527-4-sjg@chromium.org>
+ <CAK7LNASATGRaS-6QxzqTEq7qNVkZPXOBE8pfRBg=2bQGyy3=yw@mail.gmail.com>
+ <CAFLszThguWT0u0R0EHfpBro0f-pWDwLOGk+5pQZEVhFYNKH8fQ@mail.gmail.com>
+ <ZT/NRvLkvR8uuP5+@shell.armlinux.org.uk>
+ <20231030161209.GU496310@bill-the-cat>
+In-Reply-To: <20231030161209.GU496310@bill-the-cat>
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Tue, 31 Oct 2023 16:03:18 +0900
+X-Gmail-Original-Message-ID: <CAK7LNAQ=K9Az9UN0O-tCC6VFwMWgdNJUcHBmmQTn5-Y7_m8OOQ@mail.gmail.com>
+Message-ID: <CAK7LNAQ=K9Az9UN0O-tCC6VFwMWgdNJUcHBmmQTn5-Y7_m8OOQ@mail.gmail.com>
+Subject: Re: [PATCH 3/3] arm64: boot: Support Flat Image Tree
+To: Tom Rini <trini@konsulko.com>
+Cc: "Russell King (Oracle)" <linux@armlinux.org.uk>,
+ Simon Glass <sjg@chromium.org>, linux-arm-kernel@lists.infradead.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>, 
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, 
+ Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
+ Will Deacon <will@kernel.org>, 
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,201 +91,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Xiang,
-On Tue, Oct 31, 2023 at 02:16:22PM +0800, merle w wrote:
-> drivers/rng/riscv_zkr_rng.c:10:10: fatal error: interrupt.h: No such
-> file or directory
-> 10 | #include <interrupt.h>
-> | ^~~~~~~~~~~~~
-> compilation terminated.
-> 
-> Where is this interrupt.h?
+On Tue, Oct 31, 2023 at 1:12=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Mon, Oct 30, 2023 at 03:35:34PM +0000, Russell King (Oracle) wrote:
+> > On Sun, Oct 29, 2023 at 05:46:12AM +1300, Simon Glass wrote:
+> > > Hi Masahiro,
+> > >
+> > > Sure, but that is a separate issue, isn't it? We already support
+> > > various boot targets in arm64 but not one that includes the DTs, so
+> > > far as I can see. The old arm 'uImage' target is pretty out-of-date
+> > > now.
+> >
+> > Does that mean it can be removed? ;)
+> >
+> > I've NAK'd FIT support on 32-bit Arm in the past, and I remain of the
+> > opinion that boot loader specific packaging of the kernel should not
+> > be in the kernel but should be external to it - even more so given the
+> > multi-platform nature of 32-bit Arm kernels.
+>
+> I'll point it out here rather than Simon. As part of
+> https://github.com/open-source-firmware FIT is a standard and not "boot
+> loader specific". And one of the points of a FIT image is that you can
+> easily support multi-platform kernels in a single file (without
+> optimizing things further, at a cost in tens of milliseconds on a Pi 3
+> anyhow) and with user-controlled security.
+>
+> --
+> Tom
 
-I think this file is created by the first patch of this patchset.
-"[RFC,v2,1/2] riscv: allow resume after exception"
 
-Could you try to apply this patch and then test again?
-It should compile without error.
 
-Best regards,
-Leo
+It is a copy of the document in U-Boot.
 
-> 
-> Regards,
-> Xiang W
-> 
-> Heinrich Schuchardt <heinrich.schuchardt@canonical.com> 于2023年10月29日周日 16:46写道：
-> >
-> > The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
-> > provides an interface to a physical entropy source.
-> >
-> > A RNG driver based on the seed CSR is provided. It depends on
-> > mseccfg.sseed being set in the SBI firmware.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> > v2:
-> >         Resume after exception if seed CSR cannot be read.
-> > ---
-> >  drivers/rng/Kconfig         |   8 +++
-> >  drivers/rng/Makefile        |   1 +
-> >  drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
-> >  3 files changed, 125 insertions(+)
-> >  create mode 100644 drivers/rng/riscv_zkr_rng.c
-> >
-> > diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> > index 994cc35b27..4f6e367169 100644
-> > --- a/drivers/rng/Kconfig
-> > +++ b/drivers/rng/Kconfig
-> > @@ -48,6 +48,14 @@ config RNG_OPTEE
-> >           accessible to normal world but reserved and used by the OP-TEE
-> >           to avoid the weakness of a software PRNG.
-> >
-> > +config RNG_RISCV_ZKR
-> > +       bool "RISC-V Zkr random number generator"
-> > +       depends on RISCV_SMODE
-> > +       help
-> > +         This driver provides a Random Number Generator based on the
-> > +         Zkr RISC-V ISA extension which provides an interface to an
-> > +         NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
-> > +
-> >  config RNG_STM32
-> >         bool "Enable random number generator for STM32"
-> >         depends on ARCH_STM32 || ARCH_STM32MP
-> > diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> > index 47b323e61e..a5d3ca4130 100644
-> > --- a/drivers/rng/Makefile
-> > +++ b/drivers/rng/Makefile
-> > @@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
-> >  obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
-> >  obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
-> >  obj-$(CONFIG_RNG_STM32) += stm32_rng.o
-> > +obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
-> >  obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
-> >  obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
-> >  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
-> > diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
-> > new file mode 100644
-> > index 0000000000..8c9e111e2e
-> > --- /dev/null
-> > +++ b/drivers/rng/riscv_zkr_rng.c
-> > @@ -0,0 +1,116 @@
-> > +// SPDX-License-Identifier: GPL-2.0-or-later
-> > +/*
-> > + * The RISC-V Zkr extension provides CSR seed which provides access to a
-> > + * random number generator.
-> > + */
-> > +
-> > +#define LOG_CATEGORY UCLASS_RNG
-> > +
-> > +#include <dm.h>
-> > +#include <interrupt.h>
-> > +#include <log.h>
-> > +#include <rng.h>
-> > +
-> > +#define DRIVER_NAME "riscv_zkr"
-> > +
-> > +enum opst {
-> > +       /** @BIST: built in self test running */
-> > +       BIST = 0b00,
-> > +       /** @WAIT: sufficient amount of entropy is not yet available */
-> > +       WAIT = 0b01,
-> > +       /** @ES16: 16bits of entropy available */
-> > +       ES16 = 0b10,
-> > +       /** @DEAD: unrecoverable self-test error */
-> > +       DEAD = 0b11,
-> > +};
-> > +
-> > +static unsigned long read_seed(void)
-> > +{
-> > +       unsigned long ret;
-> > +
-> > +       __asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : : "memory");
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
-> > +{
-> > +       u8 *ptr = data;
-> > +
-> > +       while (len) {
-> > +               u32 val;
-> > +
-> > +               val = read_seed();
-> > +
-> > +               switch (val >> 30) {
-> > +               case BIST:
-> > +                       continue;
-> > +               case WAIT:
-> > +                       continue;
-> > +               case ES16:
-> > +                       *ptr++ = val & 0xff;
-> > +                       if (--len) {
-> > +                               *ptr++ = val >> 8;
-> > +                               --len;
-> > +                       }
-> > +                       break;
-> > +               case DEAD:
-> > +                       return -ENODEV;
-> > +               }
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +/**
-> > + * riscv_zkr_probe() - check if the seed register is available
-> > + *
-> > + * If the SBI software has not set mseccfg.sseed=1 or the Zkr
-> > + * extension is not available this probe function will result
-> > + * in an exception. Currently we cannot recover from this.
-> > + *
-> > + * @dev:       RNG device
-> > + * Return:     0 if successfully probed
-> > + */
-> > +static int riscv_zkr_probe(struct udevice *dev)
-> > +{
-> > +       struct resume_data resume;
-> > +       int ret;
-> > +       u32 val;
-> > +
-> > +       /* Check if reading seed leads to interrupt */
-> > +       set_resume(&resume);
-> > +       ret = setjmp(resume.jump);
-> > +       if (ret)
-> > +               log_debug("Exception %ld reading seed CSR\n", resume.code);
-> > +       else
-> > +               val = read_seed();
-> > +       set_resume(NULL);
-> > +       if (ret)
-> > +               return -ENODEV;
-> > +
-> > +       do {
-> > +               val = read_seed();
-> > +               val >>= 30;
-> > +       } while (val == BIST || val == WAIT);
-> > +
-> > +       if (val == DEAD)
-> > +               return -ENODEV;
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static const struct dm_rng_ops riscv_zkr_ops = {
-> > +       .read = riscv_zkr_read,
-> > +};
-> > +
-> > +U_BOOT_DRIVER(riscv_zkr) = {
-> > +       .name = DRIVER_NAME,
-> > +       .id = UCLASS_RNG,
-> > +       .ops = &riscv_zkr_ops,
-> > +       .probe = riscv_zkr_probe,
-> > +};
-> > +
-> > +U_BOOT_DRVINFO(cpu_riscv_zkr) = {
-> > +       .name = DRIVER_NAME,
-> > +};
-> > --
-> > 2.40.1
-> >
+The file was split into two, but the content is the same.
+
+
+[original in U-Boot]
+https://github.com/u-boot/u-boot/blob/v2023.10/doc/usage/fit/source_file_fo=
+rmat.rst
+
+
+[flat-image-tree]
+https://github.com/open-source-firmware/flat-image-tree/blob/v0.8/source/ch=
+apter1-introduction.rst
+https://github.com/open-source-firmware/flat-image-tree/blob/v0.8/source/ch=
+apter2-source-file-format.rst
+
+
+
+
+
+--
+Best Regards
+Masahiro Yamada
