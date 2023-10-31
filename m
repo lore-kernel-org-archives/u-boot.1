@@ -4,75 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EE20C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 07:57:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2596AC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 08:07:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1DD687282;
-	Tue, 31 Oct 2023 08:57:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id 7EB07874C4;
+	Tue, 31 Oct 2023 09:07:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="Cskp9sFT";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7755C87AB2; Tue, 31 Oct 2023 08:56:59 +0100 (CET)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1698739636;
+	bh=hBtujsFbjrArzd7qVSBk1CUFF1Fie+iS9qsxUo9TJko=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=mMnosqx+ZCfiuzadjD5Rf7cL4SJKCIqYNF1hyrjrGSKl4sgha/UhMQ3fHGAOio9AH
+	 6PeEU0GCypLpHab6ckWGaQZoGul53YjIkVU5uURpcwkfpLIHLeIG7W4pEsJ+9pmbq4
+	 MKgwCyDbCxTkrpN7nxpGwMyWkjoryAN/7cWCbTruqLC/caVfr/W2fE3nMA/lx58Dmv
+	 2uhXIXxInzV+cZfr5JwKfgCQj50MWY4Y0FWUK7SlYhp0abQyIMwJq45ToCQiJOaNvd
+	 1HYmtAzPDiQoPDloC/++cXioRAUN9gkKjzdw3AX7lxz6hyqSwPIwPlXRKltxRuoFc5
+	 AkFCiLQjPrPyQ==
+Received: from [192.168.1.107] (82-131-157-32.pool.digikabel.hu
+ [82.131.157.32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52CB587134
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:56:57 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yongxuan.wang@sifive.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6ce2cc39d12so3411822a34.1
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 00:56:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1698739016; x=1699343816; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wJZHlgELWjAqEAG/rY84BjxVp2GRRJlABqs+exdNXl8=;
- b=Cskp9sFTRLy3RU6o+hGFwiD3j2bl156PTc8kmBnXBEK27QJ8eaUHadofSmpGLIIUGc
- gRFsno0rOv32x8LA0pzqSXJ/do4FZixGsoN1U+5wBWJhfZqSSLqIDZ1Pw77YgsZ+iF+N
- deIAxU77W9QXxottysK5ySfDEKja062NYZr75th2tAtUwtB68b/uexRpVTplW9TT+twe
- ubWcwVhcgPBn0mY5guLmWDgubjeNEwpiQO22X+SLTKo9jcmApAyoa0h6lNW8y8Eq+7CM
- hCDlGl+45AXlBwQ1OGk16itKsmAeFTdfCTs8Ns5DJxKlH4prXsmwLVKFe7xoZKzJjcFT
- KFgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698739016; x=1699343816;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wJZHlgELWjAqEAG/rY84BjxVp2GRRJlABqs+exdNXl8=;
- b=NpdKyCB3DevdsLSheJFvTp1A3L++8PDj2Rg8SPmIDP61Arg6gheRUFxJbNXWsmW01s
- 8mfrX5ucoggfrcvJ/3ww+7tDAsOcAktVANeZrx4Fd2Kt25zQj4tHJjZ1WVMaMnhoUMaq
- 0LxXM4bhcyIeIX2/dy9bYohyYEDmb/O0ftRHoNNkGgaEHAeW95wvIb21n2qx85prKw2c
- JWGIF2llEW9La6btHiXukw9lGCIJhy6I8SuqeRX8qEJNSPjayAd9LOWr2t8C7Ro08G3P
- 65fG0bKhA6sdHLzAC3X2WYn1FIx40TuDqN/HvqaYxFXGOip/BY4HH9efIacbuxLeigCR
- 8Q0Q==
-X-Gm-Message-State: AOJu0YyIOB4y4Skrk0WwtXnz3yJo0OiZP74Kj+AoiiEPMUM6ng3PoHKu
- wFBk1JzgkA+nBnJkEkL7pfon3F6kq8bRMMCCkHUrDA==
-X-Google-Smtp-Source: AGHT+IEowVqXdkVCowek0f+4y0U2vXkAmrIAvctRLl2d0pIlMPN+oSHjOgzC+Hfeqr5Is6TUeOFaVFbx+dPaSbCbAdw=
-X-Received: by 2002:a05:6830:14c6:b0:6ce:4035:b801 with SMTP id
- t6-20020a05683014c600b006ce4035b801mr12799488otq.13.1698739015923; Tue, 31
- Oct 2023 00:56:55 -0700 (PDT)
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 509F5874B0;
+ Tue, 31 Oct 2023 09:07:14 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1698739635;
+ bh=hBtujsFbjrArzd7qVSBk1CUFF1Fie+iS9qsxUo9TJko=;
+ h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=q+J2yr9wYYIC6RNUM6L8c5WXcDIVjNWswXuYNFHHZBtG7nljTr+LUdfnYO659RXap
+ ZtYLJLkJKce4yOKl3k7hYbKhUA8fSumwtIhnn89fXxvTJCCvx8Oe2HMiv1wamp3tXG
+ sndu8pZo+1jrQbl8KWifQkdvRpRAaoGDGjwgGHlcvn6QQyB3HVZXh7Ga0UCV2XBTXf
+ SXxatCluxbAXzxQcoSkENg4WleuwUCxK91Ru6UtuV306BRWJ47Aw6CISrPu5rw7PT9
+ NpyQk0oaPUj84ICH1kfIIlbjEJsB7fxdB7RueX5OJqlDneuJX8jKoe5wHhhW6KFve8
+ BKVU1rjPMUy7Q==
+Subject: Re: [PATCH v3 1/3] bootcount: Remove legacy I2C driver
+To: Philip Richard Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, trini@konsulko.com
+References: <20231031073844.15683-2-pro@denx.de>
+ <20231031073844.15683-4-pro@denx.de>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <cdaada91-ba1e-542d-72e7-b1459a9613bc@denx.de>
+Date: Tue, 31 Oct 2023 09:06:58 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-References: <20231026032254.23043-1-yongxuan.wang@sifive.com>
- <20231027164307.GY496310@bill-the-cat>
-In-Reply-To: <20231027164307.GY496310@bill-the-cat>
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Date: Tue, 31 Oct 2023 15:56:45 +0800
-Message-ID: <CAMWQL2grduFNgGPLYryXOaXTzVvO6Y9s6o=2MMQ3h8Mj8z8P7w@mail.gmail.com>
-Subject: Re: [PATCH 1/1] board: sifive: unmatched: move kernel load address to
- 0x80200000
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, greentime.hu@sifive.com, vincent.chen@sifive.com, 
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20231031073844.15683-4-pro@denx.de>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,59 +65,41 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello Philip,
 
-0x80200000 comes from the result of the relocated_addr in booti_setup()
-on HiFive Unmatched board. If we load the Kernel Image to this address,
-it will not be moved. Currently one of the first two 8-byte of RISC-V
-Kernel Image is j _start_kernel instruction, so it's OK to execute the
-header of the Image.
+On 31.10.23 08:38, Philip Richard Oberfichtner wrote:
+> The legacy I2C bootcounter will hereby be removed and eventually
+> be replaced by a driver model implementation in the follow-up commit.
+> 
+> The legacy driver has the following drawbacks:
+> 	- It's not adhering to the driver model
+> 	- Settings are grabbed from Kconfig rather than device tree
+> 	- i2c_{read,write} are being used instead of dm_i2c_{read,write}
+> 
+> Signed-off-by: Philip Richard Oberfichtner <pro@denx.de>
+> ---
+> 
+> Notes:
+>     Changes in v3: none
+>     Changes in v2: none
+> 
+>  drivers/bootcount/Kconfig         | 24 +++--------------
+>  drivers/bootcount/Makefile        |  1 -
+>  drivers/bootcount/bootcount_i2c.c | 43 -------------------------------
+>  3 files changed, 3 insertions(+), 65 deletions(-)
+>  delete mode 100644 drivers/bootcount/bootcount_i2c.c
 
-Regards,
-Yong-Xuan
+Reviewed-by: Heiko Schocher <hs@denx.de>
 
-
-On Sat, Oct 28, 2023 at 12:43=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Thu, Oct 26, 2023 at 03:22:52AM +0000, Yong-Xuan Wang wrote:
->
-> > U-boot initially loads the kernel image to the kernel_addr_r, and
-> > subsequently relocates it to memory address 0x80200000. Setting
-> > kernel_addr_r to 0x80200000 can eliminate one copy operation.
-> >
-> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> > ---
-> >  include/configs/sifive-unmatched.h | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/include/configs/sifive-unmatched.h b/include/configs/sifiv=
-e-unmatched.h
-> > index 74150b7d4b..de8bfc1123 100644
-> > --- a/include/configs/sifive-unmatched.h
-> > +++ b/include/configs/sifive-unmatched.h
-> > @@ -36,7 +36,7 @@
-> >       "name=3Dsystem,size=3D-,bootable,type=3D${type_guid_gpt_system};"
-> >
-> >  #define CFG_EXTRA_ENV_SETTINGS \
-> > -     "kernel_addr_r=3D0x84000000\0" \
-> > +     "kernel_addr_r=3D0x80200000\0" \
-> >       "kernel_comp_addr_r=3D0x88000000\0" \
-> >       "kernel_comp_size=3D0x4000000\0" \
-> >       "fdt_addr_r=3D0x8c000000\0" \
->
-> This is I believe subtly wrong. If you want an execute in place kernel
-> image (and are using FIT images), this can be made to work. But if you
-> load your (Linux Kernel) Image to this address, the header will be at
-> 0x80200000 and not the payload so you still end up moving it. Are you
-> sure this is (a) not still moving it and (b) it's OK to be executing the
-> header of the image like it's code (or is there some catch in the header
-> to lead to a jump over it, in that case) ?
->
-> --
-> Tom
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
