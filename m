@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7B47C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 09:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0538C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 09:34:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2114487565;
-	Tue, 31 Oct 2023 10:08:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 66C2387B41;
+	Tue, 31 Oct 2023 10:34:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TYLpyf3V";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1KnGIwzG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C4D987A22; Tue, 31 Oct 2023 10:08:53 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 609C287B4B; Tue, 31 Oct 2023 10:34:14 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC3E2874CE
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:08:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6306987B3E
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:34:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-32d834ec222so3414938f8f.0
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 02:08:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2c5629fdbf8so74974931fa.0
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 02:34:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698743330; x=1699348130; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4QZSMdk7qF8KgQXghYhKJPb2JSIHAlWNQZ4Id4iUQtY=;
- b=TYLpyf3Vy1THqIv0CQ7JI/lJhWtr6nlhJx53QVP4Pl4GnlIZMWxv2OZGB6HAVc6yQp
- VEAUzmguevj0o8JlNErqkjnexk0QnjWDsBd04TbhrNbJNsprYcOW3tsHyjVibtWAUjQB
- cnjrEpwjHty5NLG7kV5PBDMidJorFhltIDvZJevoGLxo18SCm00MkeIlgyaINDzwYTK3
- GKix6TJBkMSqPGsvbmxCEtrkCywfwMry9GIMY3k+R/JjZ9mIKXnAPaImkq21d9f9Yv6o
- /q3D18MSAL5su4CZnGpazolO+I4m9dIUcKRoa7FMiLNbQUy+r9Eq0neFyf5OTsU7TJRB
- kFig==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1698744847; x=1699349647;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4e8OiZ08C+/j5TcIVicz0JVQGjFn8nhVL9d7waZSlMI=;
+ b=1KnGIwzGvjJBElIe2utUUw+3SM597VJXfr6UDG01Tgn/TreXUJtM/d8TSGt77EhT09
+ PI7gKHsdtujrNxmD5L6A0U1olAkJ88fSkUhxi9Hp/mwnOI5gNKG66lN01JvBSG+5tgKZ
+ 6K7XbxkIP4Y4BHZc3k7mXXpn3sNBAN057RuDygLeRabyKuJB5KeoQCF+SsTPS/7zjl5E
+ 1F8y6IO7w+3ZzK9VTKKYU6sPbkVerv04XDzyuV/bJbbprUrCrZEtbbauEiMSJaDQ6BQ2
+ PSw0yBsZCyYZp0koBhdzrUCC3x+8Ccyk5ND+3MrAs9d/KA+RVeFfK1a/DY/WeCDhNsng
+ 6hVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698743330; x=1699348130;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4QZSMdk7qF8KgQXghYhKJPb2JSIHAlWNQZ4Id4iUQtY=;
- b=QFToY8ej6ejWA9abEp4CS6SpMduYIN6IkpxbfZ/fNAsX6m+kGYEoFsSyu7bIW7+1wU
- tdvrUSyoyptUCovrfM11yFPZIZ/h13OXCOgsbmiaIXrVBGTK2mtOj/zKOpkpnDKP8p+4
- 7BQtshb7sruI/AlnYnIP2FtJ4WW3eyQnR5nD5zkRkx1TraPgs5XLA4Tnt366DoFY3O3j
- rAJkJKlgsNPAp+sWbhdyOxlK3iJFB36kjTvbIuu7Z8Rya3k55SemILx1DuF5mozurqhb
- VlXNos5EVIlQmg/HGTEFbVBtZrWZJpKtOHbIKvjjdZH5IajXYjtWI8tBei/cgJIsksia
- 3R7Q==
-X-Gm-Message-State: AOJu0YzUfU2BY2m7p0peRlCFDa0Q4lMku0FWiE5QVvxSPe1PgaQistgs
- khVYNNsi//CMiTeVISXUq2KbJjRnnWl+UQlUxgg=
-X-Google-Smtp-Source: AGHT+IFgW2MWpq8S3GHhLj5zAeEKRdjHipdy3neSmrqha74G8OtPtdHB7CQ+zoQOhw8LdrfoJH9yBfk513X4tWe5lS4=
-X-Received: by 2002:a05:6000:154b:b0:32f:917a:db22 with SMTP id
- 11-20020a056000154b00b0032f917adb22mr1988746wry.53.1698743329934; Tue, 31 Oct
- 2023 02:08:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698744847; x=1699349647;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4e8OiZ08C+/j5TcIVicz0JVQGjFn8nhVL9d7waZSlMI=;
+ b=dczE3hZD59sxDYWTmtI8/sH8cO9w/Az6xO+m9Z9aP4y0jfe39pGIc8XG3tPl1BPue/
+ YzO/ywHS5xHWcm1Nqmw9+UrzwWBhXJ0wd4yhmaxMkCHJ/8csI3mTzf3M53pbk2y7QWql
+ 8YOFGeDDpICJuBrPwj5PWLF+L8EbbMPU9DNyrS+fURj0cpNC9STDnsKnN0ew30u3WZLa
+ 5cUDKMv3JEu3UIx53jKMa2It2GNxoRYvNQdVYSFsD6sC71Y2uCGnprInao3+sf3sjMdC
+ VINs13OmVKL0dIjbbapDecf3Niu6CO+j4B5vpi7cSYglmb5BB2vvgvfBy1qac/eqotde
+ eF0Q==
+X-Gm-Message-State: AOJu0Yz/8n5rqoIPIkXmZ+RwRPJxDeivK6x9aUBshr09/ccECgLx4mNJ
+ nIbcCo0qEDW7f6OL6IkwBu1gAA==
+X-Google-Smtp-Source: AGHT+IG/YOLwoYgECngu2H1MmYDuLtpOf+DmJZ2TUx4ZnLoYibujGORO6jSZdjgP9B689f6WSxYDRA==
+X-Received: by 2002:a2e:2a85:0:b0:2bf:b106:6296 with SMTP id
+ q127-20020a2e2a85000000b002bfb1066296mr8811639ljq.4.1698744846929; 
+ Tue, 31 Oct 2023 02:34:06 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ f17-20020a05600c4e9100b00405c7591b09sm1208523wmq.35.2023.10.31.02.34.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Oct 2023 02:34:06 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH] dfu: mmc: Add support for exposing whole mmc device
+In-Reply-To: <20231029223740.284149-1-marex@denx.de>
+References: <20231029223740.284149-1-marex@denx.de>
+Date: Tue, 31 Oct 2023 10:34:05 +0100
+Message-ID: <8734xrcf02.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20231027082615.306943-1-clamor95@gmail.com>
- <CGME20231027082635epcas1p4722707057e584787327a0b2bd5fb7df0@epcas1p4.samsung.com>
- <20231027082615.306943-4-clamor95@gmail.com>
- <008a01da0bd8$43960e80$cac22b80$@samsung.com>
-In-Reply-To: <008a01da0bd8$43960e80$cac22b80$@samsung.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 31 Oct 2023 11:08:38 +0200
-Message-ID: <CAPVz0n2L9JiEpqQ6JzaLi9Z_-PJUxkAgsWtHRf5U9T5G1wDTvw@mail.gmail.com>
-Subject: Re: [PATCH v9 3/8] power: pmic: add the base MAX77663 PMIC support
-To: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,327 +89,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 31 =D0=B6=D0=BE=D0=B2=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 10:5=
-7 Jaehoon Chung <jh80.chung@samsung.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
->
->
-> > -----Original Message-----
-> > From: Svyatoslav Ryhel <clamor95@gmail.com>
-> > Sent: Friday, October 27, 2023 5:26 PM
-> > To: Tom Rini <trini@konsulko.com>; Jaehoon Chung <jh80.chung@samsung.co=
-m>; Simon Glass
-> > <sjg@chromium.org>; Svyatoslav Ryhel <clamor95@gmail.com>
-> > Cc: u-boot@lists.denx.de
-> > Subject: [PATCH v9 3/8] power: pmic: add the base MAX77663 PMIC support
-> >
-> > Add support to bind the regulators/child nodes with the pmic.
-> > Also adds the pmic i2c based read/write functions to access pmic
-> > registers.
-> >
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
->
-> Just add a minor comment at below.
->
-> > ---
-> >  doc/device-tree-bindings/pmic/max77663.txt | 84 ++++++++++++++++++++++
-> >  drivers/power/pmic/Kconfig                 |  9 +++
-> >  drivers/power/pmic/Makefile                |  1 +
-> >  drivers/power/pmic/max77663.c              | 81 +++++++++++++++++++++
-> >  include/power/max77663.h                   | 42 +++++++++++
-> >  5 files changed, 217 insertions(+)
-> >  create mode 100644 doc/device-tree-bindings/pmic/max77663.txt
-> >  create mode 100644 drivers/power/pmic/max77663.c
-> >  create mode 100644 include/power/max77663.h
-> >
-> > diff --git a/doc/device-tree-bindings/pmic/max77663.txt b/doc/device-tr=
-ee-bindings/pmic/max77663.txt
-> > new file mode 100644
-> > index 0000000000..ddb7d3eb14
-> > --- /dev/null
-> > +++ b/doc/device-tree-bindings/pmic/max77663.txt
-> > @@ -0,0 +1,84 @@
-> > +MAXIM, MAX77663 PMIC
-> > +
-> > +This device uses two drivers:
-> > +- drivers/power/pmic/max77663.c (for parent device)
-> > +- drivers/power/regulator/max77663_regulator.c (for child regulators)
-> > +
-> > +This chapter describes the binding info for the PMIC driver and regula=
-tors.
-> > +
-> > +Required properties for PMIC:
-> > +- compatible: "maxim,max77663"
-> > +- reg: usually 0x1c or 0x3c
-> > +
-> > +With those two properties, the pmic device can be used for read/write =
-only.
-> > +To bind each regulator, the optional regulators subnode should exists.
-> > +
-> > +Optional subnode:
-> > +- name: regulators (subnode list of each device's regulator)
-> > +
-> > +Regulators subnode contains set on supported regulators.
-> > +
-> > +Required properties:
-> > +- regulator-name: used for regulator uclass platform data '.name',
-> > +
-> > +List of supported regulator nodes names for max77663:
-> > +- sd0, sd1, sd2, sd3, ldo0, ldo1, ldo2, ldo3, ldo4, ldo5, ldo6, ldo7, =
-ldo8
-> > +
-> > +Optional:
-> > +- regulator-min-microvolt: minimum allowed Voltage to set
-> > +- regulator-max-microvolt: minimum allowed Voltage to set
-> > +- regulator-always-on: regulator should be never disabled
-> > +- regulator-boot-on: regulator should be enabled by the bootloader
-> > +
-> > +Linux driver binding for this driver is compatible.
-> > +
-> > +Example:
-> > +
-> > +max77663@1c {
-> > +     compatible =3D "maxim,max77663";
-> > +     reg =3D <0x1c>;
-> > +
-> > +     regulators {
-> > +             sd0 {
-> > +                     regulator-name =3D "vdd_cpu";
-> > +                     regulator-min-microvolt =3D <800000>;
-> > +                     regulator-max-microvolt =3D <1250000>;
-> > +                     regulator-always-on;
-> > +                     regulator-boot-on;
-> > +             };
-> > +
-> > +             ...
-> > +
-> > +             ldo0 {
-> > +                     regulator-name =3D "avdd_pll";
-> > +                     regulator-min-microvolt =3D <1200000>;
-> > +                     regulator-max-microvolt =3D <1200000>;
-> > +             };
-> > +
-> > +             ...
-> > +
-> > +             ldo2 {
-> > +                     regulator-name =3D "avdd_usb";
-> > +                     regulator-min-microvolt =3D <3300000>;
-> > +                     regulator-max-microvolt =3D <3300000>;
-> > +                     regulator-always-on;
-> > +                     regulator-boot-on;
-> > +             };
-> > +
-> > +             ldo3 {
-> > +                     regulator-name =3D "vdd_sdmmc3";
-> > +                     regulator-min-microvolt =3D <3000000>;
-> > +                     regulator-max-microvolt =3D <3000000>;
-> > +                     regulator-always-on;
-> > +                     regulator-boot-on;
-> > +             };
-> > +
-> > +             ...
-> > +
-> > +             ldo8 {
-> > +                     regulator-name =3D "avdd_dsi_csi";
-> > +                     regulator-min-microvolt =3D <1200000>;
-> > +                     regulator-max-microvolt =3D <1200000>;
-> > +             };
-> > +     };
-> > +};
-> > diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> > index 4a6f0ce093..54665d7e2b 100644
-> > --- a/drivers/power/pmic/Kconfig
-> > +++ b/drivers/power/pmic/Kconfig
-> > @@ -184,6 +184,15 @@ config SPL_DM_PMIC_PFUZE100
-> >       This config enables implementation of driver-model pmic uclass fe=
-atures
-> >       for PMIC PFUZE100 in SPL. The driver implements read/write operat=
-ions.
-> >
-> > +config DM_PMIC_MAX77663
-> > +     bool "Enable Driver Model for PMIC MAX77663"
-> > +     ---help---
-> > +     This config enables implementation of driver-model pmic uclass fe=
-atures
-> > +     for PMIC MAX77663. The driver implements read/write operations.
-> > +     This is a Power Management IC with a decent set of peripherals fr=
-om which
-> > +     4 DC-to-DC Step-Down (SD) Regulators, 9 Low-Dropout Linear (LDO) =
-Regulators,
-> > +     8 GPIOs, Real-Time Clock (RTC) and more with I2C Compatible Inter=
-face.
-> > +
-> >  config DM_PMIC_MAX77686
-> >       bool "Enable Driver Model for PMIC MAX77686"
-> >       ---help---
-> > diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-> > index 0b3b3d62d0..414a9d8225 100644
-> > --- a/drivers/power/pmic/Makefile
-> > +++ b/drivers/power/pmic/Makefile
-> > @@ -6,6 +6,7 @@
-> >  obj-$(CONFIG_$(SPL_TPL_)DM_PMIC) +=3D pmic-uclass.o
-> >  obj-$(CONFIG_$(SPL_)DM_PMIC_FAN53555) +=3D fan53555.o
-> >  obj-$(CONFIG_$(SPL_)DM_PMIC_DA9063) +=3D da9063.o
-> > +obj-$(CONFIG_$(SPL_)DM_PMIC_MAX77663) +=3D max77663.o
-> >  obj-$(CONFIG_DM_PMIC_MAX77686) +=3D max77686.o
-> >  obj-$(CONFIG_DM_PMIC_MAX8998) +=3D max8998.o
-> >  obj-$(CONFIG_DM_PMIC_MC34708) +=3D mc34708.o
-> > diff --git a/drivers/power/pmic/max77663.c b/drivers/power/pmic/max7766=
-3.c
-> > new file mode 100644
-> > index 0000000000..fac97ed221
-> > --- /dev/null
-> > +++ b/drivers/power/pmic/max77663.c
-> > @@ -0,0 +1,81 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-> > + */
-> > +
-> > +#include <dm.h>
-> > +#include <dm/lists.h>
-> > +#include <power/pmic.h>
-> > +#include <power/max77663.h>
-> > +
-> > +static const struct pmic_child_info pmic_children_info[] =3D {
-> > +     { .prefix =3D "ldo", .driver =3D MAX77663_LDO_DRIVER },
-> > +     { .prefix =3D "sd", .driver =3D MAX77663_SD_DRIVER },
-> > +     { },
-> > +};
-> > +
-> > +static int max77663_write(struct udevice *dev, uint reg, const uint8_t=
- *buff,
-> > +                       int len)
-> > +{
-> > +     int ret;
-> > +
-> > +     ret =3D dm_i2c_write(dev, reg, buff, len);
-> > +     if (ret) {
-> > +             log_debug("write error to device: %p register: %#x!\n", d=
-ev, reg);
-> > +             return ret;
-> > +     }
-> > +
-> > +     return 0;
-> > +}
-> > +
-> > +static int max77663_read(struct udevice *dev, uint reg, uint8_t *buff,=
- int len)
-> > +{
-> > +     int ret;
-> > +
-> > +     ret =3D dm_i2c_read(dev, reg, buff, len);
-> > +     if (ret) {
-> > +             log_debug("read error from device: %p register: %#x!\n", =
-dev, reg);
-> > +             return ret;
-> > +     }
-> > +
-> > +     return 0;
-> > +}
-> > +
-> > +static int max77663_bind(struct udevice *dev)
-> > +{
-> > +     ofnode regulators_node;
-> > +     int children;
-> > +
-> > +     regulators_node =3D dev_read_subnode(dev, "regulators");
-> > +     if (!ofnode_valid(regulators_node)) {
-> > +             log_err("%s regulators subnode not found!\n", dev->name);
-> > +             return -ENXIO;
-> > +     }
-> > +
-> > +     debug("%s: '%s' - found regulators subnode\n", __func__, dev->nam=
-e);
-> > +
-> > +     children =3D pmic_bind_children(dev, regulators_node, pmic_childr=
-en_info);
-> > +     if (!children)
-> > +             log_err("%s - no child found\n", dev->name);
-> > +
-> > +     /* Always return success for this device */
-> > +     return 0;
-> > +}
-> > +
-> > +static struct dm_pmic_ops max77663_ops =3D {
-> > +     .read =3D max77663_read,
-> > +     .write =3D max77663_write,
-> > +};
-> > +
-> > +static const struct udevice_id max77663_ids[] =3D {
-> > +     { .compatible =3D "maxim,max77663" },
-> > +     { }
-> > +};
-> > +
-> > +U_BOOT_DRIVER(pmic_max77663) =3D {
-> > +     .name =3D "max77663_pmic",
-> > +     .id =3D UCLASS_PMIC,
-> > +     .of_match =3D max77663_ids,
-> > +     .bind =3D max77663_bind,
-> > +     .ops =3D &max77663_ops,
-> > +};
-> > diff --git a/include/power/max77663.h b/include/power/max77663.h
-> > new file mode 100644
-> > index 0000000000..0f764bcbcc
-> > --- /dev/null
-> > +++ b/include/power/max77663.h
-> > @@ -0,0 +1,42 @@
-> > +/* SPDX-License-Identifier: GPL-2.0+ */
-> > +/*
-> > + *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-> > + */
-> > +
-> > +#ifndef _MAX77663_H_
-> > +#define _MAX77663_H_
-> > +
-> > +#define MAX77663_LDO_NUM             9
-> > +#define MAX77663_SD_NUM                      5
-> > +
-> > +/* Drivers name */
-> > +#define MAX77663_LDO_DRIVER          "max77663_ldo"
-> > +#define MAX77663_SD_DRIVER           "max77663_sd"
-> > +
-> > +/* Step-Down (SD) Regulator calculations */
-> > +#define SD_STATUS_MASK                       0x30
-> > +
-> > +#define SD0_VOLT_MAX_HEX             0x40
-> > +#define SD1_VOLT_MAX_HEX             0x4c
-> > +#define SD_VOLT_MAX_HEX                      0xff
-> > +#define SD_VOLT_MIN_HEX                      0x02
-> > +
-> > +#define SD0_VOLT_MAX                 1400000
-> > +#define SD1_VOLT_MAX                 1550000
-> > +#define SD_VOLT_MAX                  3787500
-> > +#define SD_VOLT_MIN                  625000
-> > +
-> > +#define SD_VOLT_BASE                 600000
-> > +
-> > +/* Low-Dropout Linear (LDO) Regulator calculations */
-> > +#define LDO_STATUS_MASK                      0xc0
-> > +#define LDO_VOLT_MASK                        0x3f
-> > +#define LDO_VOLT_MAX_HEX             0x3f
-> > +
-> > +#define LDO01_VOLT_MAX                       2375000
->
-> Does it mean ldo0~1 or only ldo1?
->
+On dim., oct. 29, 2023 at 23:37, Marek Vasut <marex@denx.de> wrote:
 
-0 and 1, then 4 and then the rest. They are grouped by common the
-properties (max voltage and step)
-
-Best regards,
-Svyatoslav R.
-
-> > +#define LDO4_VOLT_MAX                        1587500
-> > +#define LDO_VOLT_MAX                 3950000
-> > +
-> > +#define LDO_VOLT_BASE                        800000
-> > +
-> > +#endif /* _MAX77663_H_ */
-> > --
-> > 2.39.2
+> Add support for exposing the whole mmc device by setting the 'size'
+> parameter to 0. This can be useful in case it is not clear what the
+> total device size is up front. Update the documentation accordingly.
 >
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>  doc/usage/dfu.rst     |  5 +++++
+>  drivers/dfu/dfu_mmc.c | 10 ++++++++++
+>  2 files changed, 15 insertions(+)
 >
+> diff --git a/doc/usage/dfu.rst b/doc/usage/dfu.rst
+> index 68cacbbef66..8845a71df36 100644
+> --- a/doc/usage/dfu.rst
+> +++ b/doc/usage/dfu.rst
+> @@ -121,6 +121,11 @@ mmc
+>  
+>      with
+>  
+> +    offset
+> +        is the offset in the device (hexadecimal without "0x")
+> +    size
+> +        is the size of the access area (hexadecimal without "0x")
+> +        or 0 which means whole device
+>      partid
+>          being the GPT or DOS partition index,
+>      num
+> diff --git a/drivers/dfu/dfu_mmc.c b/drivers/dfu/dfu_mmc.c
+> index cdb3c18b01d..12c54e90ef7 100644
+> --- a/drivers/dfu/dfu_mmc.c
+> +++ b/drivers/dfu/dfu_mmc.c
+> @@ -386,6 +386,16 @@ int dfu_fill_entity_mmc(struct dfu_entity *dfu, char *devstr, char **argv, int a
+>  		dfu->data.mmc.lba_size		= third_arg;
+>  		dfu->data.mmc.lba_blk_size	= mmc->read_bl_len;
+>  
+> +		/*
+> +		 * In case the size is zero (i.e. mmc raw 0x10 0),
+> +		 * assume the user intends to use whole device.
+> +		 */
+> +		if (third_arg == 0) {
+> +			struct blk_desc *blk_dev = mmc_get_blk_desc(mmc);
+> +
+> +			dfu->data.mmc.lba_size = blk_dev->lba;
+> +		}
+> +
+>  		/*
+>  		 * Check for an extra entry at dfu_alt_info env variable
+>  		 * specifying the mmc HW defined partition number
+> -- 
+> 2.42.0
