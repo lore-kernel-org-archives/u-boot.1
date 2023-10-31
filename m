@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4616C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:09:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9AC3C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:10:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 404BD87AC7;
-	Tue, 31 Oct 2023 06:09:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45B6D87AD8;
+	Tue, 31 Oct 2023 06:09:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N4h6cVlD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FApypx93";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5919E87557; Tue, 31 Oct 2023 06:09:40 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id F0AC587557; Tue, 31 Oct 2023 06:09:56 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 338C987ACF
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:09:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A61E87ADB
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:09:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2c523ac38fbso77339621fa.0
- for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 22:09:38 -0700 (PDT)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-507b96095abso7559881e87.3
+ for <u-boot@lists.denx.de>; Mon, 30 Oct 2023 22:09:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698728977; x=1699333777; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698728994; x=1699333794; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:references
  :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to;
- bh=MnsPtX3DP9JK3VCdiioF2UfDlaneKwV0VVEccAge5LI=;
- b=N4h6cVlDKj5JvkJe9ZgwQSYPJrx6RYDVhZPZ0832/k55wjpGAPEuLcH0dBBfeINKrS
- S6rOl/2FZsJtosnuiMbX7WeSaLGBP5Eb74tq1w1idCvNcGNMmG7IiPfFL274rPCIEQlY
- +YDKqfU0tUvQmZbomF6P0hakGGqrfE9X/RGrFd6EqiDrc93VOwP/T7BaDY9+8/RaZIT2
- gK421u1NErTKRw/04ntlKJQ64+DlOR0vu7fFZEcPadcUNT6zYvOMKkTSsy1FBdwmXFFh
- cfzmo6JHhPOSa02ps7IKSBurpkspCPg5befwHswEIqBTj109uH4CvUui7TF0mxc1QTx2
- 24wA==
+ bh=vH1zTW53GiRITnqHNe8IF/mY7MgfNrEai+91D3zgZ6E=;
+ b=FApypx9334qrAyYOzdoyELNawdx6WllyjZLPaBnxRMSioUmf+Jso4fBZcy9WMBSCm9
+ oE4sDZ3mgtCBgNOFapBJIToHmAE0KJologmPFqjZubsHiDabXburWu0SV2iAJatELIBm
+ YEm5YWhhvVIu18xhaLEzqpvrmt3RkLibdKaSdJCCd2e89rv3Y4XnscUBq0ly4oM71oLe
+ xDkOSKq2QTUICRif2MZLe1pdUT6fK7D1KbX9w1fqQKAeZWgmsxiPmHFkP3GN5CiCoLhM
+ inv2QXM+gYDsgwoGOhsQUe2Iw0GNah5Cynj1+YsXoKEmTcAfqLEQwxRrjiyN3IQNqye+
+ U2NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698728977; x=1699333777;
+ d=1e100.net; s=20230601; t=1698728994; x=1699333794;
  h=content-transfer-encoding:mime-version:message-id:references
  :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=MnsPtX3DP9JK3VCdiioF2UfDlaneKwV0VVEccAge5LI=;
- b=j9Zktc0tWPdQARrarXjpitWRMvHseKcWFAc5FrqTRilgVvjbc6HGQaly1JdEhQaT95
- S03bAxsh50UHboFja5R82ziSNz3hiStzfWmkOYafR6UZEhtXXleL1ReIGUYG2+z/fT7h
- FnQ+PFtVF30kfL92MSyZjrY/W2e7wncxIc+81eTyBOadhDuRtAAzGI+NqyA9mZLCsrUd
- oSEGpubFVDR6I4VvM7lfPg4vXRrj6OhhGAo/I0INuMjKlooklaZqwUTntzKV+VQN8aK+
- zJiQ3BO3AHduYSVoGErm6vBimO29EB2eaVUgB2BCtTeXlpiIOAqtnykdmB2DgIPn81yL
- E8UA==
-X-Gm-Message-State: AOJu0Yxvxc5TiYtxrRdgtqyeXKRUesfkUgqsSyOpLiJNV4IMki7BGpk8
- t8/eRfTOAjf2fxWhERY5jt67gJ5Nro8=
-X-Google-Smtp-Source: AGHT+IG3pw8kbv4Vh/uqm7MFiT05RIL71Bo12r14LKV/r0yoPpOC4OC0nZ/MjGsH0QwuHmDFOjS+GA==
-X-Received: by 2002:a2e:a48d:0:b0:2c5:6cb:2e52 with SMTP id
- h13-20020a2ea48d000000b002c506cb2e52mr8114431lji.42.1698728977166; 
- Mon, 30 Oct 2023 22:09:37 -0700 (PDT)
+ bh=vH1zTW53GiRITnqHNe8IF/mY7MgfNrEai+91D3zgZ6E=;
+ b=fEm8/Jr/UwUzKA2Qaeo2xRa8wrcoqrjFA67X4riEQv1zAYtyPvYBKFnMmE58wM3T03
+ /Q3Wqxas0tx17LPUVF881jau1Lda97Il8EJTsBhRnJx5FQSNrqCuuvOWWoP04PezmDdY
+ AYw59D9ayUTnJuMkZnyitlB7FSFeYSBlX5qEI/wuy3nJdEWLEMcVvyhLsSgPf2/VHHUc
+ T2Ik9DpYNbjX/ggk8I3eLjWpcZmKgNo6uDPLbikcyeVeksYBQRzKgw/oNK2fa/z06vGc
+ niIXGTtNvels8k7U11vKxL1P2CcpoJDujyCLuAt4n5nb1KbgxQCytTAOtQxghma7ZGPm
+ i1xg==
+X-Gm-Message-State: AOJu0Yw6ybr08aQm2mPZv/x8WwR8e6dVGgmQ1WvCGy2Dgk77/CtMERG4
+ EQU6KobHliMH5HvU8XnjXQo=
+X-Google-Smtp-Source: AGHT+IH1UURFH33uWEvlK4FfpV4mLqr5tu+9yNxUrQAZf4xFWmmI5t3lWq33NXR7B1A1sKsA8q55bA==
+X-Received: by 2002:a05:6512:10cd:b0:507:9e56:5b1c with SMTP id
+ k13-20020a05651210cd00b005079e565b1cmr11129800lfg.13.1698728993977; 
+ Mon, 30 Oct 2023 22:09:53 -0700 (PDT)
 Received: from [127.0.0.1] ([46.211.28.155]) by smtp.gmail.com with ESMTPSA id
- d4-20020a2e96c4000000b002c503c2dc97sm76656ljj.64.2023.10.30.22.09.36
+ m8-20020ac24288000000b00507a1b05d2bsm81167lfh.308.2023.10.30.22.09.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Oct 2023 22:09:36 -0700 (PDT)
-Date: Tue, 31 Oct 2023 07:09:35 +0200
+ Mon, 30 Oct 2023 22:09:53 -0700 (PDT)
+Date: Tue, 31 Oct 2023 07:09:52 +0200
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
 CC: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] power: pmic: support TI TPS65913 PMIC
+Subject: Re: [PATCH v2 2/2] power: pmic: fix regulators behaviour
 User-Agent: K-9 Mail for Android
-In-Reply-To: <9940bfe9-dbbc-4f35-bc5d-425f68adc5f5@samsung.com>
+In-Reply-To: <71985400-586d-4504-9091-10ee1fd55cfd@samsung.com>
 References: <20230715183431.5318-1-clamor95@gmail.com>
- <20230715183431.5318-2-clamor95@gmail.com>
- <CGME20231031050254epcas1p4ed27bc59086fa0854df068deb7d13101@epcas1p4.samsung.com>
- <9940bfe9-dbbc-4f35-bc5d-425f68adc5f5@samsung.com>
-Message-ID: <818D9DD5-CB38-469F-A28A-676847D39AA7@gmail.com>
+ <20230715183431.5318-3-clamor95@gmail.com>
+ <CGME20231031050317epcas1p3355c1c22bb69bd9c6679ff393711a326@epcas1p3.samsung.com>
+ <71985400-586d-4504-9091-10ee1fd55cfd@samsung.com>
+Message-ID: <E98981CD-7138-4C2C-B8EC-5CB05C3BEE98@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
@@ -98,16 +98,28 @@ X-Virus-Status: Clean
 
 
 
-31 =D0=B6=D0=BE=D0=B2=D1=82=D0=BD=D1=8F 2023 =D1=80=2E 07:02:54 GMT+02:00,=
+31 =D0=B6=D0=BE=D0=B2=D1=82=D0=BD=D1=8F 2023 =D1=80=2E 07:03:17 GMT+02:00,=
  Jaehoon Chung <jh80=2Echung@samsung=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=
 =D0=B0=D0=B2(-=D0=BB=D0=B0):
 >On 7/16/23 03:34, Svyatoslav Ryhel wrote:
->> Existing PALMAS PMIC driver is fully compatible with TI TPS65913
->> PMIC found in many Tegra 4 devices, like Tegra Note 7 and ASUS
->> TF701T=2E TPS65913 shares same structure of regulators like TPS659038
->> so data can be reused=2E
+>> Currently device tree entries of regulators are completely
+>> ignored and regulators are probed only if they are called
+>> by the device which uses it=2E This results into two issues:
+>> regulators which must run under boot-on or always-on mode
+>> are ignored and not enabled; dts props like voltage are
+>> not applied to the regulator so the regulator may be enabled
+>> with random actual voltage, which may have unexpected
+>> consequences=2E
 >>=20
->> Tested-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom> # NVIDIA Tegratab
+>> This patch changes this behavior=2E Post-probe function is
+>> introduced which performs probing of each pmics child and if
+>> it is a regulator, regulator_autoset function is called, which
+>> handles always-on and boot-on regulators, but if none of those
+>> props are set, the regulator is disabled=2E
+>>=20
+>> Later disabled regulators can be re-enabled by devices which
+>> use them without issues=2E
+>>=20
 >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
 >
 >Reviewed-by: Jaehoon Chung <jh80=2Echung@samsung=2Ecom>
@@ -119,20 +131,47 @@ power: pmic: add TPS65913 support patchset is outdated already and should =
 not be applied!
 
 >> ---
->>  drivers/power/pmic/palmas=2Ec | 1 +
->>  1 file changed, 1 insertion(+)
+>>  drivers/power/pmic/pmic-uclass=2Ec | 18 ++++++++++++++++++
+>>  1 file changed, 18 insertions(+)
 >>=20
->> diff --git a/drivers/power/pmic/palmas=2Ec b/drivers/power/pmic/palmas=
-=2Ec
->> index 6080cbff0b=2E=2Ed6eb9cb433 100644
->> --- a/drivers/power/pmic/palmas=2Ec
->> +++ b/drivers/power/pmic/palmas=2Ec
->> @@ -87,6 +87,7 @@ static struct dm_pmic_ops palmas_ops =3D {
+>> diff --git a/drivers/power/pmic/pmic-uclass=2Ec b/drivers/power/pmic/pm=
+ic-uclass=2Ec
+>> index 0e2f5e1f41=2E=2E8a26b519c9 100644
+>> --- a/drivers/power/pmic/pmic-uclass=2Ec
+>> +++ b/drivers/power/pmic/pmic-uclass=2Ec
+>> @@ -16,6 +16,7 @@
+>>  #include <dm/device-internal=2Eh>
+>>  #include <dm/uclass-internal=2Eh>
+>>  #include <power/pmic=2Eh>
+>> +#include <power/regulator=2Eh>
+>>  #include <linux/ctype=2Eh>
 >> =20
->>  static const struct udevice_id palmas_ids[] =3D {
->>  	{ =2Ecompatible =3D "ti,tps659038", =2Edata =3D TPS659038 },
->> +	{ =2Ecompatible =3D "ti,tps65913" , =2Edata =3D TPS659038 },
->>  	{ =2Ecompatible =3D "ti,tps65917" , =2Edata =3D TPS65917 },
->>  	{ }
+>>  #if CONFIG_IS_ENABLED(PMIC_CHILDREN)
+>> @@ -198,9 +199,26 @@ static int pmic_pre_probe(struct udevice *dev)
+>>  	return 0;
+>>  }
+>> =20
+>> +static int pmic_post_probe(struct udevice *dev)
+>> +{
+>> +	struct udevice *child;
+>> +	int ret;
+>> +
+>> +	device_foreach_child_probe(child, dev) {
+>> +		if (device_get_uclass_id(child) =3D=3D UCLASS_REGULATOR) {
+>> +			ret =3D regulator_autoset(child);
+>> +			if (ret =3D=3D -EMEDIUMTYPE)
+>> +				regulator_set_enable(child, false);
+>> +		};
+>> +	};
+>> +
+>> +	return 0;
+>> +}
+>> +
+>>  UCLASS_DRIVER(pmic) =3D {
+>>  	=2Eid		=3D UCLASS_PMIC,
+>>  	=2Ename		=3D "pmic",
+>>  	=2Epre_probe	=3D pmic_pre_probe,
+>> +	=2Epost_probe	=3D pmic_post_probe,
+>>  	=2Eper_device_auto	=3D sizeof(struct uc_pmic_priv),
 >>  };
 >
