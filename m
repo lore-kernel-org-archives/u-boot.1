@@ -4,121 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50B60C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:03:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F214C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:04:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C63FC87ABA;
-	Tue, 31 Oct 2023 06:03:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07B4D8751F;
+	Tue, 31 Oct 2023 06:04:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="d8l2kHn+";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="I226O/1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D219287ABB; Tue, 31 Oct 2023 06:03:24 +0100 (CET)
+ id 0C63787ABA; Tue, 31 Oct 2023 06:04:00 +0100 (CET)
 Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 600188709A
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:03:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23F778709A
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:03:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
  by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20231031050319epoutp03fc1bd5dab265a269ed3acae80ba9948e~TGKlB1G9P3094330943epoutp03v
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:03:19 +0000 (GMT)
+ 20231031050355epoutp03a91656d63010e2ebc55ae1077ef667d9~TGLGAeWBQ3077730777epoutp03i
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:03:55 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20231031050319epoutp03fc1bd5dab265a269ed3acae80ba9948e~TGKlB1G9P3094330943epoutp03v
+ 20231031050355epoutp03a91656d63010e2ebc55ae1077ef667d9~TGLGAeWBQ3077730777epoutp03i
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698728599;
- bh=8EOLFCvWh6T/9q9/PFpcTFIinsMa+W2jurWCD+Beyj4=;
+ s=mail20170921; t=1698728635;
+ bh=k/lVMXSkwDPYP0Iu3CnDYSV3MhHdei31fdvzf8AziZ0=;
  h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=d8l2kHn+uqbkVkUWcdwpb4t5fuLQNBtFIS7Y/Dq93I+/6X851toF714xnNTEMgMbk
- vJ5s59jTiMqVASgZeEAvXTzuizeJxNm0mxBsYvhsomki52OJ/RKR9v8R8qPi5mBtV7
- zlRNVuca/kaHcIe5D2xN1jLOd42yswWxmFGlFJLY=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ b=I226O/1z+5X6JE8kGZsGVnH/z1wkej9sLXX5QBQpcwzIqR6yO9DGGrcIGrteNMaw6
+ Nppe0MuxONI/q7ktIOfCUKf6kq6gtt2mTbFWzWxeNTdZgALwiOx0Iha/jnY/tbjcSq
+ PE1ke1QXkVAchZeFyQ1QIDnO18wTEbjJT7SQIny0=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
  epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20231031050319epcas1p436265956e88ca19e7c983fd7aaa27972~TGKku_-9V2081020810epcas1p46;
- Tue, 31 Oct 2023 05:03:19 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.38.237]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4SKJ1f06Jgz4x9Q8; Tue, 31 Oct
- 2023 05:03:18 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- E9.6B.10211.59A80456; Tue, 31 Oct 2023 14:03:17 +0900 (KST)
+ 20231031050354epcas1p4334df83174ee80efb318adaa66ba42fc~TGLFz5D6q0772607726epcas1p45;
+ Tue, 31 Oct 2023 05:03:54 +0000 (GMT)
+Received: from epsmges1p3.samsung.com (unknown [182.195.36.133]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4SKJ2K4YMsz4x9QB; Tue, 31 Oct
+ 2023 05:03:53 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ C4.93.09739.8BA80456; Tue, 31 Oct 2023 14:03:52 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231031050317epcas1p3355c1c22bb69bd9c6679ff393711a326~TGKjNYUoC1932119321epcas1p3-;
- Tue, 31 Oct 2023 05:03:17 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93~TGLDpui2p0506105061epcas1p4H;
+ Tue, 31 Oct 2023 05:03:52 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031050317epsmtrp1d3900c288840ae0266f6d050ccc25e22~TGKjMtSNt2446624466epsmtrp1e;
- Tue, 31 Oct 2023 05:03:17 +0000 (GMT)
-X-AuditID: b6c32a38-463ff700000027e3-cf-65408a956bf2
+ 20231031050352epsmtrp1bc148850dac049360369f5fca78f8239~TGLDpG3_92446624466epsmtrp1U;
+ Tue, 31 Oct 2023 05:03:52 +0000 (GMT)
+X-AuditID: b6c32a37-e67fa7000000260b-7e-65408ab8b4d9
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 42.AC.08755.59A80456; Tue, 31 Oct 2023 14:03:17 +0900 (KST)
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 91.88.08817.8BA80456; Tue, 31 Oct 2023 14:03:52 +0900 (KST)
 Received: from [10.113.113.235] (unknown [10.113.113.235]) by
  epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20231031050317epsmtip1545e0fe6a6b7b2059198142c3ee1f87c~TGKi8SsE41603016030epsmtip1a;
- Tue, 31 Oct 2023 05:03:17 +0000 (GMT)
-Message-ID: <71985400-586d-4504-9091-10ee1fd55cfd@samsung.com>
-Date: Tue, 31 Oct 2023 14:03:17 +0900
+ 20231031050352epsmtip1c08142ea0d77260f2a2a25dc1e860ec9~TGLDcru7W1482814828epsmtip1R;
+ Tue, 31 Oct 2023 05:03:52 +0000 (GMT)
+Message-ID: <e8ec2104-cd32-4eeb-ab62-9902f7b31896@samsung.com>
+Date: Tue, 31 Oct 2023 14:03:52 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] power: pmic: fix regulators behaviour
+Subject: Re: [PATCH] mmc: spl: select SPL_BLK for SPL_DM_MMC
 Content-Language: en-US
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: u-boot@lists.denx.de
+To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, u-boot@lists.denx.de
+Cc: Peng Fan <peng.fan@nxp.com>
 From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20230715183431.5318-3-clamor95@gmail.com>
+In-Reply-To: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmplk+LIzCtJLcpLzFFi42LZdlhTX3dql0OqQf9Ea4sD/b2MFpPWX2O3
- +LZlG6PF272d7A4sHrMbLrJ4PO3fyu6xc9Zddo+zd3YwBrBEZdtkpCampBYppOYl56dk5qXb
- KnkHxzvHm5oZGOoaWlqYKynkJeam2iq5+AToumXmAO1UUihLzCkFCgUkFhcr6dvZFOWXlqQq
- ZOQXl9gqpRak5BSYFugVJ+YWl+al6+WlllgZGhgYmQIVJmRn/Gi8yFhwRbBi5bLsBsZFfF2M
- nBwSAiYS3dPbWLoYuTiEBHYwSrx5dpYZwvnEKPHq/U9GCOcbo8TNzRtYYVqmfdzNBGILCexl
- lLi2qBqi6D2jxPaJ09lBErwCdhKnf39jBrFZBFQlrq17yQYRF5Q4OfMJC4gtKiAvcf/WDLB6
- YQFHiYdPLoENZRYQl7j1ZD6YLSJQI7F9xmUWiLiExJJD98GOYBPQkdj+7ThYDaeAuUTP7CdQ
- NfIS29/OAXtBQuAju8THSQuhrnaRWPH1J5QtLPHq+BZ2CFtK4mV/GztEQzOjxNIlB1khnB5G
- iX8N19kgqowl9i+dDLSOA2iFpsT6XfoQYUWJnb/nMkJs5pN497WHFaREQoBXoqNNCKJEReLS
- 65dMMLvuPvkPdYOHxLP1d5gmMCrOQgqXWUj+n4Xkn1kIixcwsqxiFEstKM5NTy02LDCBx3Zy
- fu4mRnB61LLYwTj37Qe9Q4xMHIyHGCU4mJVEeA+bOqQK8aYkVlalFuXHF5XmpBYfYjQFxs5E
- ZinR5Hxggs4riTc0sTQwMTMyNrEwNDNUEuc99qo3RUggPbEkNTs1tSC1CKaPiYNTqoFpgo2o
- nJtKmP0UpR9K7Lb8bslHD23ZNdmp/NTZD7vEpQNZjPQndUbkPot9IyuztIKTseup4cIz11Oi
- 01h0FilrHfv9UOxR977lDEYTGLwSD81q3Ohgf2PqO6tJqvEJP/0Uyv72B+94vGTa1cQ6tanN
- E5yXPX7jmcXC8eTz919t1TZ3HQ6kZ3bbXZyac3/qsZfqpxv4aqaF8C99daJqd4FN64Z55mfl
- 9h2ISg+fONX8oK2L23zTOYrLbicc2bfcfqKRMOstQdWO/9yuL75kxpv8r9n58uz7uxuEWGqd
- 7y1nLHL14WE/+ezHkeA57CVvzT8GTN9/pYB97flrPy7+s7ix98/ZRW3fqgRyxe5k/mXhVWIp
- zkg01GIuKk4EAHu+nu0YBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrALMWRmVeSWpSXmKPExsWy7bCSnO7ULodUg1fnlCwO9PcyWkxaf43d
- 4tuWbYwWb/d2sjuweMxuuMji8bR/K7vHzll32T3O3tnBGMASxWWTkpqTWZZapG+XwJXxo/Ei
- Y8EVwYqVy7IbGBfxdTFyckgImEhM+7ibqYuRi0NIYDejxMWZD5ghElISn59OZeti5ACyhSUO
- Hy6GqHnLKLFyzV52kBpeATuJ07+/gdWzCKhKXFv3kg0iLihxcuYTFhBbVEBe4v6tGWD1wgKO
- Eg+fXGICsZkFxCVuPZkPZosI1Eg0zu1mg4hLSCw5dJ8VxBYSSJbYce8gWA2bgI7E9m/HwWxO
- AXOJntkg8zmA6tUl1s8TgmiVl9j+dg7zBEahWUiumIVk2yyEjllIOhYwsqxilEwtKM5Nzy02
- LDDMSy3XK07MLS7NS9dLzs/dxAiOBC3NHYzbV33QO8TIxMF4iFGCg1lJhPewqUOqEG9KYmVV
- alF+fFFpTmrxIUZpDhYlcV7xF70pQgLpiSWp2ampBalFMFkmDk6pBqZdgenPM3K+an9/cC4l
- durHpm+zi4yceXltGzYo6relPMz3LD6h+UGNp/nPBbFzG7kX7l+qvfq3i+XiN9kX5b7mVX49
- zsdoukzIbv2clEedGeWf9PZ6zm5UNSty3JhQfOLBXrkIH809DKY9OxxyFoly2jju3n+p2vnO
- 3Gfvzy67NlnxnLfTpwnqbH0TA2pOXr1upmPEMEuqeLqm8PYlgT1TuM1ab9w/JTgh+eei308k
- 7E6/2dJ1RDzU+HtM4IeZKjVq6iav1uY8tvs4IWbq5Kfy/MsfsNarPzj9xl6i8tfWj5d39KQK
- 8/5h+fjzx8UL9h23PrBMrl9tLrhy3dK5z/4rxImf1tUxYp7ifffFcoEbSizFGYmGWsxFxYkA
- 232poPMCAAA=
-X-CMS-MailID: 20231031050317epcas1p3355c1c22bb69bd9c6679ff393711a326
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrDKsWRmVeSWpSXmKPExsWy7bCmge6OLodUg7ePLS2evpnBYvFj1RdW
+ i7d7O9kdmD0OXe1k9Th7Zwejx8Z3O5gCmKOybTJSE1NSixRS85LzUzLz0m2VvIPjneNNzQwM
+ dQ0tLcyVFPISc1NtlVx8AnTdMnOANikplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1Jy
+ CkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjO2fX3HWPCYveLY0++sDYwr2boYOTkkBEwkHp0/
+ xNLFyMUhJLCDUaLv0xZmCOcTo8Tdg4vYIJxvjBL7305ihGlZtvomO0RiL6PE54swzntGieu3
+ DjOBVPEK2Em82HCIFcRmEVCVODtlMiNEXFDi5MwnLCC2qIC8xP1bM9hBbGEBG4l7c5rBepkF
+ xCVuPZkPZHNwiAj4SOzcxQ0RlpeY/mod2Eg2AR2J7d+Og5VzCrhI3Jm+lw2mZvvbOWAvSAjc
+ Y5c4P/k/M8TVLhL/f/xggrCFJV4d38IOYUtJvOxvY4doaGaUWLrkICuE08Mo8a/hOjSYjCX2
+ L50MdhGzgKbE+l36EGFFiZ2/5zJCbOaTePe1hxWkREKAV6KjTQiiREXi0uuXTDC77j75zwph
+ e0hM6PrBNIFRcRZSsMxC8v4sJP/MQli8gJFlFaNYakFxbnpqsWGBMTy6k/NzNzGCk6GW+Q7G
+ aW8/6B1iZOJgPMQowcGsJMJ72NQhVYg3JbGyKrUoP76oNCe1+BCjKTByJjJLiSbnA9NxXkm8
+ oYmlgYmZkbGJhaGZoZI4761nvSlCAumJJanZqakFqUUwfUwcnFINTAfqFh2QO6OzKvUBU9tt
+ /8ajjz/vYOizyggsW/hjP1PhlKC/zZKpJjt21n61s92fbWUzvUq+crW06qdXilzTZ9plW7Hy
+ 3tLMS9p75k4ur3pj1ps3r4U0Js2f359419f7s2lh+jutdZsnP1Ze0qL4uK2+05Rt7hwFLW/W
+ YzN0lyqWmk3nPeucXfjGKMh73TrjrrN9VzkW3jnQXmW/+bHCnYnCd09981g/d97/l+wrFVzE
+ dvmWxm53eRissHlp085701xm7RP8VLpozvUPDRyu8etTWA9VPHbzvGa1SLKiMl5kPa/CDk5X
+ o02bMsNdFv/9neDC9L86sMKLuZG96vG8qm+bNtXcuDJbIWXi4VOu35RYijMSDbWYi4oTAUgc
+ Z00PBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKLMWRmVeSWpSXmKPExsWy7bCSnO6OLodUg0Nd0hZP38xgsfix6gur
+ xdu9newOzB6Hrnayepy9s4PRY+O7HUwBzFFcNimpOZllqUX6dglcGdu+vmMseMxecezpd9YG
+ xpVsXYycHBICJhLLVt9k72Lk4hAS2M0o0dg1nQkiISXx+elUoCIOIFtY4vDhYpCwkMBbRokv
+ B7lAbF4BO4kXGw6xgtgsAqoSZ6dMZoSIC0qcnPmEBcQWFZCXuH9rBjuILSxgI3FvTjPYeGYB
+ cYlbT+YzgYwXEfCR2LmLGyIsLzH91TpWiFXOErOf7wJrZRPQkdj+7ThYK6eAi8Sd6XvBLmMW
+ UJdYP08IpnX72znMExiFZiE5YhaSZbMQOmYh6VjAyLKKUTK1oDg3PbfYsMAoL7Vcrzgxt7g0
+ L10vOT93EyM45LW0djDuWfVB7xAjEwfjIUYJDmYlEd7Dpg6pQrwpiZVVqUX58UWlOanFhxil
+ OViUxHm/ve5NERJITyxJzU5NLUgtgskycXBKNTCF82z4oXPNzSa/MvpFZvO5NyUbgiZciDln
+ vOqW77QntwXTNH+KM3u3zeOT2jLtrkFbQONMzxmHLojdXB/ofWT9/BQZVedCmd13Tj/1tPr1
+ azLTI52yTcxrv0Q/te10WMUh3uMckPQldN/qyg83m9cucun+43Pj/DQX3rdO0xXLrzadKG4z
+ yUgscFz9ZKKQyeN//i+l7yrclg0+trPO0o23XOXdHLOefcFWi4Sj8y7Ha7as/+u3QtL/a/bP
+ bXuWvBVRl7vyXDQuyuuFvLTQxPa7y05+Ofp01va6PXFl2X7cGRyv2dKOGtotuNwtGb2W73P4
+ vWNVMpv6H7wKeDlNLOPFpcLDN36YPQ3Z8siZ13G6EktxRqKhFnNRcSIAY7HPY+gCAAA=
+X-CMS-MailID: 20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031050317epcas1p3355c1c22bb69bd9c6679ff393711a326
-References: <20230715183431.5318-1-clamor95@gmail.com>
- <20230715183431.5318-3-clamor95@gmail.com>
- <CGME20231031050317epcas1p3355c1c22bb69bd9c6679ff393711a326@epcas1p3.samsung.com>
+X-CMS-RootMailID: 20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93
+References: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
+ <CGME20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,26 +132,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/16/23 03:34, Svyatoslav Ryhel wrote:
-> Currently device tree entries of regulators are completely
-> ignored and regulators are probed only if they are called
-> by the device which uses it. This results into two issues:
-> regulators which must run under boot-on or always-on mode
-> are ignored and not enabled; dts props like voltage are
-> not applied to the regulator so the regulator may be enabled
-> with random actual voltage, which may have unexpected
-> consequences.
+On 8/24/23 00:45, Oleksandr Suvorov wrote:
+> mmc_bind() in mmc-uclass.c calls blk_create_devicef() which is
+> defined in blk-uclass.c, so SPL_BLK is required by SPL_DM_MMC.
+> Implicitly select SPL_BLK for SPL_DM_MMC.
 > 
-> This patch changes this behavior. Post-probe function is
-> introduced which performs probing of each pmics child and if
-> it is a regulator, regulator_autoset function is called, which
-> handles always-on and boot-on regulators, but if none of those
-> props are set, the regulator is disabled.
-> 
-> Later disabled regulators can be re-enabled by devices which
-> use them without issues.
-> 
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
@@ -162,46 +146,20 @@ Best Regards,
 Jaehoon Chung
 
 > ---
->  drivers/power/pmic/pmic-uclass.c | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
 > 
-> diff --git a/drivers/power/pmic/pmic-uclass.c b/drivers/power/pmic/pmic-uclass.c
-> index 0e2f5e1f41..8a26b519c9 100644
-> --- a/drivers/power/pmic/pmic-uclass.c
-> +++ b/drivers/power/pmic/pmic-uclass.c
-> @@ -16,6 +16,7 @@
->  #include <dm/device-internal.h>
->  #include <dm/uclass-internal.h>
->  #include <power/pmic.h>
-> +#include <power/regulator.h>
->  #include <linux/ctype.h>
->  
->  #if CONFIG_IS_ENABLED(PMIC_CHILDREN)
-> @@ -198,9 +199,26 @@ static int pmic_pre_probe(struct udevice *dev)
->  	return 0;
->  }
->  
-> +static int pmic_post_probe(struct udevice *dev)
-> +{
-> +	struct udevice *child;
-> +	int ret;
-> +
-> +	device_foreach_child_probe(child, dev) {
-> +		if (device_get_uclass_id(child) == UCLASS_REGULATOR) {
-> +			ret = regulator_autoset(child);
-> +			if (ret == -EMEDIUMTYPE)
-> +				regulator_set_enable(child, false);
-> +		};
-> +	};
-> +
-> +	return 0;
-> +}
-> +
->  UCLASS_DRIVER(pmic) = {
->  	.id		= UCLASS_PMIC,
->  	.name		= "pmic",
->  	.pre_probe	= pmic_pre_probe,
-> +	.post_probe	= pmic_post_probe,
->  	.per_device_auto	= sizeof(struct uc_pmic_priv),
->  };
+>  drivers/mmc/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> index de01b9687ba..d24677de076 100644
+> --- a/drivers/mmc/Kconfig
+> +++ b/drivers/mmc/Kconfig
+> @@ -46,6 +46,7 @@ config SPL_DM_MMC
+>  	depends on SPL_DM && DM_MMC
+>  	default n if ARCH_MVEBU && !MVEBU_SPL_BOOT_DEVICE_MMC
+>  	default y
+> +	select SPL_BLK
+>  	help
+>  	  This enables the MultiMediaCard (MMC) uclass which supports MMC and
+>  	  Secure Digital I/O (SDIO) cards. Both removable (SD, micro-SD, etc.)
 
