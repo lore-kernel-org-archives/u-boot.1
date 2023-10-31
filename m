@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11126C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 17:45:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C34C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 17:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 654DD875DC;
-	Tue, 31 Oct 2023 18:45:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CBB2387ADA;
+	Tue, 31 Oct 2023 18:45:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YZbDJ7QV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M/PVlXD+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBF9F87635; Tue, 31 Oct 2023 18:45:45 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id B0E0387AB2; Tue, 31 Oct 2023 18:45:49 +0100 (CET)
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0CC087517
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 18:45:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF3BC87A5E
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 18:45:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-778925998cbso410595485a.0
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:45:43 -0700 (PDT)
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-49618e09f16so2337481e0c.2
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 10:45:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698774342; x=1699379142; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698774346; x=1699379146; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6m5Pc9hfMxSrBbExTjNhPPhxmnQZZ2LaLHd+FKWjang=;
- b=YZbDJ7QV0LzXtA/TmH+eUKxMVpNPDqbDUbP4XnzYy5DvFmDORdBF+1Bfavv5h7+hNQ
- RpTE020+Rm98C7iUBs6K/VjbM5koKIrsVKXpwpJclw1iGNQPjdgRb8QoALdIICYChkMs
- eiVqm7CfvD44EMYsWvBvm3+HPrk0HbhqCn7Hk=
+ bh=3ATo+OrF3FxS1Sc1Msv5TSRIqEysix6Zt77yxKYvrn8=;
+ b=M/PVlXD+1UKN+qOoit8YKSr6pgc7XwdyOHanAYnbGNe8mKnCTVPb67r4cWJwqp9Ou6
+ H4EFFLdfKzwOAhwaasN2qVvtCQdnCnEa3cAnmJiy7BFJF6IXeh4Syw9YTQ9D8QrVLLUN
+ MElLp5S3xnTHPh8PGmTZr3kg3i7YOiakusjjs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698774342; x=1699379142;
+ d=1e100.net; s=20230601; t=1698774346; x=1699379146;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6m5Pc9hfMxSrBbExTjNhPPhxmnQZZ2LaLHd+FKWjang=;
- b=IVytvqdbfm9FgVGntg+JJQ2qd4fhxHnnOaBnY/Cd6vUF+CiUbiAcY/J4/605InPeWi
- jvFJEeej4H/+v3RYNobfi+xloWxVR+vlapyxcU32qFrJJfAP6mC8qXcH/TKPrTxk6GTa
- K5Fusg89b3HQkD5LP7V5RjPbcWUUZp3MWO1a7Qxx3C3Clj7uDEpDhx+bFgUAPdCKzmB/
- tKLTmLLnl3XygaKuaUxblD3VrVK/YqEkWxEld0H1YBSUUYNqWyWdNcoaFs5yo1/Eyczl
- vwZT5s/tcn/5Rc99qXjw1BqIMigo+KoXGyWKINAj9qeOYyvXtPcQMItK0L+tsLlS+Ga4
- yiFw==
-X-Gm-Message-State: AOJu0YzlKlYKDzqQFMAOHhFMVAkdujZVzMNsUUhvbyoM8L7M4e0k2i8r
- GkI/enqEvDieZrCx04wvZayU9+fPfxL9ACem5cDMEQ==
-X-Google-Smtp-Source: AGHT+IGV7WR6uLjwQoYsHEQ5fBiDKMxnGiSLcKzZKhPe8ZptDRrpeHdemuYuyZqsywCSNHS+7zeSnA==
-X-Received: by 2002:a05:6214:1bcc:b0:65b:ed3:9a02 with SMTP id
- m12-20020a0562141bcc00b0065b0ed39a02mr17763140qvc.17.1698774342214; 
- Tue, 31 Oct 2023 10:45:42 -0700 (PDT)
+ bh=3ATo+OrF3FxS1Sc1Msv5TSRIqEysix6Zt77yxKYvrn8=;
+ b=NsnNctspHeBTjJli5sy9cggrmocKeSp000QPBITTzCSqUU9OHWZX0PMQtjObD/Ngvj
+ 727+Pj9mmAPeQLCuXgZcie5Zcj2dPnnCWtbjejMEYnavToAAUskbo+Siky5DMl+Tndye
+ 9DJrMhiPfdy1gnxtEwIhClf5HjkdCKxI+S5tL+J65AQq3Lo5DAf+YTEAtPioVroDC1UQ
+ tj0ePRy46o/jg925RIcBzDAkNWjVkIvMYk75b6GEw3MXy5aRuLKVbkcbVGsSbk7Qe4t0
+ rwMi6z5WV/hlsasuYYMB74/+Vq/SrKfzCbJMFNBk1qkhF/yvhn6DVRxf9kKwFn9mFk/e
+ wKdQ==
+X-Gm-Message-State: AOJu0YzZ54cKBdqJOX2Nw4CJBpHshograb30KC5pIY6Jol5Klwfwtaxv
+ xjyM7rVDMW7Mt0YQSyLvyY8ekA==
+X-Google-Smtp-Source: AGHT+IGfjenpxgHL9h1kSEYxCWCyVgjoUGd2Orfa4NxJqzQ2WGd63GRGhXWNTAEVKqm4m+GkEaKlGg==
+X-Received: by 2002:a1f:72c1:0:b0:495:d846:ebc0 with SMTP id
+ n184-20020a1f72c1000000b00495d846ebc0mr12187876vkc.16.1698774346434; 
+ Tue, 31 Oct 2023 10:45:46 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- f9-20020a056214164900b0065af71585b5sm721875qvw.58.2023.10.31.10.45.41
+ kh3-20020a056214514300b00655d711180dsm722088qvb.17.2023.10.31.10.45.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 10:45:41 -0700 (PDT)
-Date: Tue, 31 Oct 2023 13:45:39 -0400
+ Tue, 31 Oct 2023 10:45:46 -0700 (PDT)
+Date: Tue, 31 Oct 2023 13:45:44 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Jim Liu <jim.t90615@gmail.com>
 Cc: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
  u-boot@lists.denx.de
-Subject: Re: [PATCH v4 1/4] pinctrl: npcm8xx: Add name for gpio function
-Message-ID: <20231031174539.GO496310@bill-the-cat>
+Subject: Re: [PATCH v4 2/4] configs: npcm: Support more uart baud rate
+Message-ID: <20231031174544.GP496310@bill-the-cat>
 References: <20231023070225.3142578-1-JJLIU0@nuvoton.com>
- <20231023070225.3142578-2-JJLIU0@nuvoton.com>
+ <20231023070225.3142578-3-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pGVVqQfGhDlDQ19b"
+ protocol="application/pgp-signature"; boundary="kf76XBDNAygjHfQx"
 Content-Disposition: inline
-In-Reply-To: <20231023070225.3142578-2-JJLIU0@nuvoton.com>
+In-Reply-To: <20231023070225.3142578-3-JJLIU0@nuvoton.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,45 +93,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---pGVVqQfGhDlDQ19b
+--kf76XBDNAygjHfQx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 23, 2023 at 03:02:22PM +0800, Jim Liu wrote:
+On Mon, Oct 23, 2023 at 03:02:23PM +0800, Jim Liu wrote:
 
-> GPIO function name is needed in the debug log
+> Add uart baud rate table to arbel(npcm8xx) and poleg(npcm7xx)
 >=20
 > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 >=20
 > Changes for v2:
->    - add commit message
+>    - Add commit message
 > Changes for v3:
->    - no change
+>    - Modify CONFIG_SYS_BAUDRATE_TABLE
 > Changes for v4:
->    - no change
+>    - No change
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---pGVVqQfGhDlDQ19b
+--kf76XBDNAygjHfQx
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVBPUAACgkQFHw5/5Y0
-tyw6Igv/W+8D58hLHh7GZVytltID9g1wW8CDPKhKcU4bc0z2EnObmlDs8mA5NGXf
-+5dRxH8XgcGbD6IJnp3DXPLiv6q+DptFSiQVXXizh1DK9mtzLoP2eYXy87XuLdpC
-feMqpmNpht0aR3PakAfV2vmc9Ty3FCzOl0JRqlu+P8DoWBEuWrNiGtFLvH7fqPp8
-Q9q79qym/R44JIJLUP/MjXq6lob23/xV4Rf8Xc8AUCWiK1ylezezBbMO2Xj8kZCW
-d1Kh80njCfbcTbgasOh+5VsIasPjPz/OOJQhDDUgBjRMLuPFwGytL4jYKquVhVwO
-yH7qF1oysn3sT6Xn5/kI8BFlLnXaynqpSLaGPT0XgOpm0B5Ui28EdzNyJaglusUf
-IdfTauzVO9uTZEyoSwZuFBQdz/WKOw7PpOCieo6WUAUrk7aSc6RsunrCJ2kD7tot
-7Dcfd3YQwik4RzMw0IJVwnJlzdesEcv5mgFGP5z0fA8YW/e8wYPDL7NIUMytywwf
-SQDLr7s6
-=Y4/I
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVBPUgACgkQFHw5/5Y0
+tywK1Av/V0gwM/zT8xHUVvkGswZ7kRqkhj2Zjacuggwxa/Cqr+jIcPi/P6K1CmMM
+93Geb8U3PaXRIhe57ETnmSf6YdtlH3X2OcJEhi8hnEbCwf/tU0HZH/nuHf/0TyET
++QQG0lq2LjxxeHWqYZeINTi0c0dZFMqCMEhpHd/OWa6wiDDCpXLy49Tdi+SbTVjB
+ruU9Pt9WF5ylK9/Q72QwuL3wN8Z9jpCb4aPzUL/Dimk9+RF3mVUjUmokuF6UxAn5
+abxOy1EepPRZT2ItCpG1tupLkap4Kmjox4lVH5b0wCXfVJQ/X6nPqUc4tAZAktz1
+sKpJbeYMD2bTiewSrmBkEHNKwKI8BcKMw7oQgi04zCbspWa57kbPJ9UhEcKzh1l0
+dtBFQjURdrgDQVVakYsfY1VFGWHO5GtWD0sNnS/j2l5IDvOZ8VHrq7pvc/kalxiq
+kutE++cP/pq8nwom1Px7vHuSVtCU3l22L+mnDPwUTN0A2fPcpxhOiAlWfXG0G4KX
+VW8QcWCr
+=PPP+
 -----END PGP SIGNATURE-----
 
---pGVVqQfGhDlDQ19b--
+--kf76XBDNAygjHfQx--
