@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53081C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D72D3C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:29:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDE0787CCC;
-	Tue, 31 Oct 2023 14:28:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A032287B5D;
+	Tue, 31 Oct 2023 14:28:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mztR4C0K";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xpUXPDyu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF8E387AB8; Tue, 31 Oct 2023 14:28:21 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 782D687B53; Tue, 31 Oct 2023 14:28:23 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA1AB87B53
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:28:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3740487C9E
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:28:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-yadav@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSEJ0094047;
- Tue, 31 Oct 2023 08:28:14 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSI7f063417;
+ Tue, 31 Oct 2023 08:28:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698758894;
- bh=Ms54gVJghUeN9zRmaXtJHfw9/lIHaMP+Wtqz/vExRxQ=;
+ s=ti-com-17Q1; t=1698758898;
+ bh=4yDXctINbHO8Be3KLaH4gBu2UT3S2ubpYzxSnEDA+zY=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=mztR4C0KQalbCQ7tAiToscxRqLt+K8rnPBIpwOLJo6M3yJ279avIzFM4vrMUcDkhW
- +w3kCmn7Qi0pFJUKCl4yF1HtgMNWwMmAsjOvK2upGbr96xC5MnbEjqc6uoCrAzzyGo
- wVtdSO9iRuNR76fE2a2cnB9wTJSalG+p0pYCdj6g=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDSD5g007460
+ b=xpUXPDyuEg1Y3LtfeyqRNlRwo0xC35osee3aLL0dPPYbmZ/zFoEa9TztZzXKpU58D
+ BfOHCXB8MTuNlbAZrdUX1BU4ZyPqnZDHe4YqA+Z5ZuMIVry1UMjgrpcVbBsCFb9I5U
+ EXQ7Z8WCSdmwKbL6DJzxs1+dkqLLUfQXCJlyRk6A=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDSI5S111311
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 31 Oct 2023 08:28:13 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 31 Oct 2023 08:28:18 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 08:28:13 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 08:28:18 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 08:28:14 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSCoH030401;
- Tue, 31 Oct 2023 08:28:13 -0500
+ Frontend Transport; Tue, 31 Oct 2023 08:28:18 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSHEV030443;
+ Tue, 31 Oct 2023 08:28:17 -0500
 From: Nitin Yadav <n-yadav@ti.com>
 To: <nm@ti.com>, <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 2/6] ram: k3-ddrss: k3-ddrss: Fix updating ddr size with ecc
- off
-Date: Tue, 31 Oct 2023 18:58:05 +0530
-Message-ID: <20231031132809.1524341-3-n-yadav@ti.com>
+Subject: [PATCH 5/6] board: ti: am62x: Add am62xsip_sk_r5.config defconfig
+ fragment
+Date: Tue, 31 Oct 2023 18:58:08 +0530
+Message-ID: <20231031132809.1524341-6-n-yadav@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231031132809.1524341-1-n-yadav@ti.com>
 References: <20231031132809.1524341-1-n-yadav@ti.com>
@@ -79,33 +79,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When DDR ECC is off (ecc_reserved_space = 0) k3_ddrss_ddr_fdt_fixup()
-doesn't update the DDR size in the memory node of DT. Fix this by
-dropping check for ecc_reserved_space to be non zero.
+Add config fragments am62xsip_sk_r5.config for R5 configuration.
 
-This allows R5 SPL to fixup A53 SPL DT with right DDR size as discovered
-during DDR init or based on R5 SPL DT input.
-
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
 Signed-off-by: Nitin Yadav <n-yadav@ti.com>
 ---
- drivers/ram/k3-ddrss/k3-ddrss.c | 3 ---
- 1 file changed, 3 deletions(-)
+ board/ti/am62x/am62xsip_sk_r5.config | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 board/ti/am62x/am62xsip_sk_r5.config
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index b54557f02c..28129d52a6 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -664,9 +664,6 @@ int k3_ddrss_ddr_fdt_fixup(struct udevice *dev, void *blob, struct bd_info *bd)
- 	u64 size[CONFIG_NR_DRAM_BANKS];
- 	int bank;
- 
--	if (ddrss->ecc_reserved_space == 0)
--		return 0;
--
- 	for (bank = CONFIG_NR_DRAM_BANKS - 1; bank >= 0; bank--) {
- 		if (ddrss->ecc_reserved_space > bd->bi_dram[bank].size) {
- 			ddrss->ecc_reserved_space -= bd->bi_dram[bank].size;
+diff --git a/board/ti/am62x/am62xsip_sk_r5.config b/board/ti/am62x/am62xsip_sk_r5.config
+new file mode 100644
+index 0000000000..75acc4cedc
+--- /dev/null
++++ b/board/ti/am62x/am62xsip_sk_r5.config
+@@ -0,0 +1,5 @@
++# Defconfig fragment to apply on top of am62x_evm_r5_defconfig
++
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62sip-r5-sk"
++CONFIG_SPL_OF_LIST="k3-am62sip-r5-sk"
++CONFIG_OF_LIST="k3-am62sip-r5-sk"
 -- 
 2.25.1
 
