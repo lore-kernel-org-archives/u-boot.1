@@ -4,93 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AA1C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5519CC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 06:43:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF5C587B07;
-	Tue, 31 Oct 2023 07:41:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
+	by phobos.denx.de (Postfix) with ESMTP id C4053879D3;
+	Tue, 31 Oct 2023 07:43:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="CVL8PfQt";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="ASsWU1Dg";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="qJdmIX57";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD56487B0A; Tue, 31 Oct 2023 07:41:04 +0100 (CET)
-Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
- [64.147.123.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 497BE87A1D; Tue, 31 Oct 2023 07:43:07 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67F0687559
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:40:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0483186F92
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 07:43:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sholland.org
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.west.internal (Postfix) with ESMTP id EFAB83200A42;
- Tue, 31 Oct 2023 02:40:55 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Tue, 31 Oct 2023 02:40:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
- cc:cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm1; t=1698734455; x=
- 1698820855; bh=1QJKhepAVt61ztA9Q/JgKFMmMaeNBD+Lah0Rxi4GZVM=; b=C
- VL8PfQtCnnhu3XTsAGzpBBVL0oA+GJJp8R2WmA5kz/tyWNMItBUjvRUkSpQePdDC
- mhUKqFEifBf5PBdFCQsbQwatJcQQqGbZ2vlTW78oXW8mRUSBHyBjM40k8V4X0AHb
- WhG7/pguIbpZsJtA+kMDwoWPWi3qxvjTaOOejWYrwVpkYTu5jPeC09kO3Vxt+x0y
- ZjakcYA0U9VJuI2r6vm+vmhOM1/rXmlZ82AgtvSmFfExshvVv1r+/gmRr9OLlp5G
- ZoGsGHcZt2feJfea4KgrosdeBoTH8vLM3SAZ4KlKcEffFNX8/0vbPXEazzD/Ds83
- DDh3JuO3ngfDRM79j6VFg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698734455; x=
- 1698820855; bh=1QJKhepAVt61ztA9Q/JgKFMmMaeNBD+Lah0Rxi4GZVM=; b=A
- SsWU1DgOHclnxY+PUr2B18JjvQ44i0AUwe85ZUI1YVCj7ykthzUs2TjxBcy10CRz
- t99JbbtJoYgQgkfVZaNN5afbay47ooBTY1CfDyiSrUiKeOw4t/gCMALgzpjTuyWj
- mVIfX4IRnkRtElTIIg30WzqP1Kq1A7ECSbqDSRSKf1O2gVlaGNjNDcTcBZG7+ZPu
- lc/Iu925neD4JAlfiXLlmhZKXkEiF5DvASCW8BAqAaZCovgltgCB4Bafe0f1nhd6
- MoeYlvRrqtQ7A7qCFaQC7rrxlpvMEI37DJuQz5vodTjxYdL/6HtHZCecZiOxJYEy
- IwT7Ny+dulNtZW8sRN52g==
-X-ME-Sender: <xms:d6FAZRmk-3ZHyld0QkFNo3qIdfPX5KgYCegWo9bNI_puRgp97ZYsdA>
- <xme:d6FAZc1wlfsT9cG46IQe-1_wCsypngs-h2Q1mUGgWISRQlgYpr8SK-N3wtHH8vn7G
- i--u-9K2EqXSLgNLw>
-X-ME-Received: <xmr:d6FAZXqNVRwo19Zm0aVS9M8WLjxded8K_vr7dz25VtQ7jM-ILzsZq0_iwqxvoXxyISsCyG0iUXerXbUg1B15rw0AdlY-M81AGgrXcsAUsQ3ftfD5ayAQxFodPvZjUSGEMZjDBw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgleehucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufgrmhhu
- vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepudekteeuudehtdelteevgfduvddvjefhfedulefgudevgeeghefg
- udefiedtveetnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:d6FAZRlF5Go7d5xBIjpLFbyj5E-n2oRcjy-NfIFNP3W3PaGTp0E2Pw>
- <xmx:d6FAZf2llTZZK1xk-5gz__TemVd8acyuNxvZqdtIb4W7TnU41q9Ywg>
- <xmx:d6FAZQuX-5x5CSpqa4cwjCvXdHuN33IJAWNUh70tLEaC2aAa8rgFzg>
- <xmx:d6FAZRze6LjmRbkJM_ossK9moSXRNF-Tw3DszacdnKnSvZ3Q_vCG9Q>
-Feedback-ID: i0ad843c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 31 Oct 2023 02:40:54 -0400 (EDT)
-From: Samuel Holland <samuel@sholland.org>
-To: Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: Icenowy Zheng <icenowy@aosc.xyz>, Hans de Goede <hdegoede@redhat.com>,
- Chen-Yu Tsai <wens@csie.org>, Adam Sampson <ats@offog.org>,
- Stefan Roese <sr@denx.de>, Maxime Ripard <mripard@kernel.org>,
- u-boot@lists.denx.de, Samuel Holland <samuel@sholland.org>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: [PATCH 5/5] gpio: axp: Remove virtual VBUS enable GPIO
-Date: Tue, 31 Oct 2023 01:39:55 -0500
-Message-ID: <20231031064039.50942-6-samuel@sholland.org>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231031064039.50942-1-samuel@sholland.org>
-References: <20231031064039.50942-1-samuel@sholland.org>
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20231031064259epoutp01f0c7c2586accace3f56d786525cb3f02~THhmKt0Os2570425704epoutp01P
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:42:59 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20231031064259epoutp01f0c7c2586accace3f56d786525cb3f02~THhmKt0Os2570425704epoutp01P
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1698734579;
+ bh=i9ndbnLUdeNtHod3MR/uxONNFq1nHD7uKZ0zQX8iYlw=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=qJdmIX57OjLngFCA6rmAKCpPqQgkbECxOIgus+Gtdam9eHYv8aSXZ6YNp+nKvuHYn
+ xERJ9t5NB6rySQiPM+RJnl23GkgfmM1/39D7IKPfaG0g9RMFkIVpKUl1eAJYdGo/8A
+ 6NFb+8+MfSuT6vsxtgsXRFknnNJbZgmJ7e5Rsim4=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20231031064256epcas1p36f8ed2fad1287547dedb320c37a9f77b~THhj1v3DF0960609606epcas1p3I;
+ Tue, 31 Oct 2023 06:42:56 +0000 (GMT)
+Received: from epsmges1p3.samsung.com (unknown [182.195.38.231]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4SKLDb28XDz4x9Pr; Tue, 31 Oct
+ 2023 06:42:55 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 2A.25.09739.FE1A0456; Tue, 31 Oct 2023 15:42:55 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20231031064254epcas1p38ab8b48b9f2a78e97ef09afb8b913dfc~THhh4nOgA0980609806epcas1p39;
+ Tue, 31 Oct 2023 06:42:54 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20231031064254epsmtrp1f997ca575e709512dd5f5a2be5ffc1ca~THhh323Dl1582015820epsmtrp1K;
+ Tue, 31 Oct 2023 06:42:54 +0000 (GMT)
+X-AuditID: b6c32a37-c0bff7000000260b-cf-6540a1ef3439
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ BD.90.08817.EE1A0456; Tue, 31 Oct 2023 15:42:54 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20231031064254epsmtip22d241de3b44b441e15c7e389f593b7eb~THhhnEByG1825218252epsmtip2L;
+ Tue, 31 Oct 2023 06:42:54 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Andre Przywara'" <andre.przywara@arm.com>,
+ =?utf-8?Q?'Jernej_=C5=A0krabec'?= <jernej.skrabec@gmail.com>
+Cc: "'Jagan Teki'" <jagan@amarulasolutions.com>, "'Samuel Holland'"
+ <samuel@sholland.org>, "'SASANO	Takayoshi'" <uaa@mx5.nisiq.net>, "'Mikhail
+ Kalashnikov'" <iuncuim@gmail.com>, "'Piotr Oniszczuk'"
+ <piotr.oniszczuk@gmail.com>, <u-boot@lists.denx.de>,
+ <linux-sunxi@lists.linux.dev>
+In-Reply-To: <20231021221911.16a6a145@slackpad.lan>
+Subject: RE: [PATCH 1/3] sunxi: board: simplify early PMIC setup conditions
+Date: Tue, 31 Oct 2023 15:42:54 +0900
+Message-ID: <004e01da0bc5$7a210c60$6e632520$@samsung.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQICxhFctULs6tp52ii3zw4GQnpLbQIv9iDYAYRZowICsinPVQKiUJM2r8m3kjA=
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLJsWRmVeSWpSXmKPExsWy7bCmvu77hQ6pBvdu81msmPeT0eJC+2QW
+ iy+bJrBZPJ+/jtFiyr5dbBZzfl9gtnj+qJPN4u3eTnaLdVNesTtweqz9eJ/VY828NYweO2fd
+ Zfc4e2cHo8eLzTMZPZbdFvF49XUuYwB7VLZNRmpiSmqRQmpecn5KZl66rZJ3cLxzvKmZgaGu
+ oaWFuZJCXmJuqq2Si0+ArltmDtBpSgpliTmlQKGAxOJiJX07m6L80pJUhYz84hJbpdSClJwC
+ 0wK94sTc4tK8dL281BIrQwMDI1OgwoTsjOdzFrEWNHpWXJu8hrGB8adbFyMnh4SAicSzh2uZ
+ uxi5OIQEdjBKfHk4mQ3C+cQosbzvHpTzjVFi//6tTF2MHGAtt3fFQsT3MkrsPbOEFcJ5ySix
+ reMoK8hcNgE9if+LFjKD2CIC+RKv/rxhByliFljAJLF52SOwIk4BY4nbD66ygdjCAt4SD869
+ AGtgEVCV6LxxjAXE5hWwlDjUc58RwhaUODnzCVicWUBbYtnC18wQTyhI/Hy6jBVimZ/E8t7f
+ bBA1IhKzO9ugarZwSKx/5QVhu0jMPT2bEcIWlnh1fAs7hC0l8bK/DexQCYFmRomlSw6yQjg9
+ jBL/Gq6zQVQZS+xfOhkcFswCmhLrd+lDhBUldv6eywixmE/i3dceVkhw8Up0tAlBlKhIXHr9
+ kglm190n/1knMCrNQvLaLCSvzULywiyEZQsYWVYxiqUWFOempxYbFhjDozs5P3cTIzjdapnv
+ YJz29oPeIUYmDsZDjBIczEoivIdNHVKFeFMSK6tSi/Lji0pzUosPMZoCA3sis5Rocj4w4eeV
+ xBuaWBqYmBkZm1gYmhkqifPeetabIiSQnliSmp2aWpBaBNPHxMEp1cBkvSXulY97nOE6LfGP
+ 0i8O+nXrvOUpOeH3T6TZ/GJSyG6O+ezTt3OZ/fDat36CjmDR+2NzBOPsRSKXLWS+9PJLxEaZ
+ Pzs88mavzdPMyHlrFX/cLEj7QcWclzdfr/q8eDXbOZbt6b+XP5yu+PnZHS3bi38Cp3pvcpte
+ Znc1JDTzbNqm4Msnkm4bdnzaHsF0pbinhO+k/2bxegHTykcyd1+frDz88UW7xK0PJs6CXr1L
+ Z7/NPbtv54+5D393d76wCVP4uFrWMeXKRqVXvEUnqx9I7LPLahC4Hbr3WsQqo/SGt6etZ/3+
+ HGHrYO3+5I7F0f3RF28YLbvLZxjfWbJ5PXsIb8DFDUfuTE/cPf3lowaxU0osxRmJhlrMRcWJ
+ ALrb8FlABAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprKIsWRmVeSWpSXmKPExsWy7bCSvO67hQ6pBm1fdC1WzPvJaHGhfTKL
+ xZdNE9gsns9fx2gxZd8uNos5vy8wWzx/1Mlm8XZvJ7vFuimv2B04PdZ+vM/qsWbeGkaPnbPu
+ snucvbOD0ePF5pmMHstui3i8+jqXMYA9issmJTUnsyy1SN8ugStjyuLVzAVHjCoaJ01gaWDs
+ 1Oxi5OCQEDCRuL0rtouRi0NIYDejxPKzT5m7GDmB4lISn59OZYOoEZY4fLgYJCwk8JxRYuZE
+ dxCbTUBP4v+ihWDlIgL5Eq/+vGEHsZkFljBJ7JvtDTGzlUniy+VFYAlOAWOJ2w+usoHYwgLe
+ Eg/OvQBrZhFQlei8cYwFxOYVsJQ41HOfEcIWlDg58wkLxFBtiac3n8LZyxa+hrpTQeLn02Ws
+ EEf4SSzv/c0GUSMiMbuzjXkCo/AsJKNmIRk1C8moWUhaFjCyrGKUTC0ozk3PLTYsMMpLLdcr
+ TswtLs1L10vOz93ECI45La0djHtWfdA7xMjEwXiIUYKDWUmE97CpQ6oQb0piZVVqUX58UWlO
+ avEhRmkOFiVx3m+ve1OEBNITS1KzU1MLUotgskwcnFINTFZPFjGnzEl9OnEt98b0L4+eLXq5
+ ulL5+i2pW1KXpqyQzunTuDk50Puq5IG4EHtN368fG2N+zxD7t1bR1HOWWcMujzXLVnsy9XNv
+ VOr8+Mlf4sRc1WnSXmFSDq1rsv83Xr1mK2+79Eql1ZM9Ez/fWH1VYZOURLuhmsKUZ8qmIYtv
+ rWI6v0k6ePEvvf37t+/J3HzqVeA2tam7vErrHr1YEqC14PK8VdONAhzDfdTD7wtUK+ntDJbe
+ Ya0kd8mori5zUu6eB9+2vOVksdhyLXdb2OR5d0wLr8QdtmSPSPOuPrsokemJrbbFtBeV/ge2
+ bck75PFrywybrWtTF36KOL5ORfLC3vZZBUcm72q+85il+4ivEktxRqKhFnNRcSIAFWkpACgD
+ AAA=
+X-CMS-MailID: 20231031064254epcas1p38ab8b48b9f2a78e97ef09afb8b913dfc
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: SVC_REQ_APPROVE
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231021212022epcas1p1f34ed4f9c235d0e8aaace738f009feaf
+References: <20231018155014.383566-1-andre.przywara@arm.com>
+ <20231018155014.383566-2-andre.przywara@arm.com>
+ <1965267.usQuhbGJ8B@archlinux>
+ <CGME20231021212022epcas1p1f34ed4f9c235d0e8aaace738f009feaf@epcas1p1.samsung.com>
+ <20231021221911.16a6a145@slackpad.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,241 +144,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that this functionality is modeled using the device tree and
-regulator uclass, the named GPIO is not referenced anywhere. Remove
-it, along with the rest of the support for AXP virtual GPIOs.
+Hi,
 
-Signed-off-by: Samuel Holland <samuel@sholland.org>
----
-
- drivers/gpio/axp_gpio.c   | 75 +++++++++++----------------------------
- drivers/gpio/sunxi_gpio.c |  8 -----
- include/axp221.h          |  4 ---
- include/axp809.h          |  4 ---
- include/axp818.h          |  4 ---
- include/sunxi_gpio.h      |  8 -----
- 6 files changed, 21 insertions(+), 82 deletions(-)
-
-diff --git a/drivers/gpio/axp_gpio.c b/drivers/gpio/axp_gpio.c
-index af6631697f5..b10c3fe1934 100644
---- a/drivers/gpio/axp_gpio.c
-+++ b/drivers/gpio/axp_gpio.c
-@@ -16,6 +16,9 @@
- #include <errno.h>
- #include <sunxi_gpio.h>
- 
-+#define AXP_GPIO_PREFIX			"AXP0-"
-+#define AXP_GPIO_COUNT			4
-+
- static int axp_gpio_set_value(struct udevice *dev, unsigned pin, int val);
- 
- static u8 axp_get_gpio_ctrl_reg(unsigned pin)
-@@ -47,28 +50,14 @@ static int axp_gpio_direction_input(struct udevice *dev, unsigned pin)
- static int axp_gpio_direction_output(struct udevice *dev, unsigned pin,
- 				     int val)
- {
--	__maybe_unused int ret;
- 	u8 reg;
- 
--	switch (pin) {
--#ifdef AXP_MISC_CTRL_N_VBUSEN_FUNC
--	/* Only available on later PMICs */
--	case SUNXI_GPIO_AXP0_VBUS_ENABLE:
--		ret = pmic_bus_clrbits(AXP_MISC_CTRL,
--				       AXP_MISC_CTRL_N_VBUSEN_FUNC);
--		if (ret)
--			return ret;
--
--		return axp_gpio_set_value(dev, pin, val);
--#endif
--	default:
--		reg = axp_get_gpio_ctrl_reg(pin);
--		if (reg == 0)
--			return -EINVAL;
-+	reg = axp_get_gpio_ctrl_reg(pin);
-+	if (reg == 0)
-+		return -EINVAL;
- 
--		return pmic_bus_write(reg, val ? AXP_GPIO_CTRL_OUTPUT_HIGH :
--						 AXP_GPIO_CTRL_OUTPUT_LOW);
--	}
-+	return pmic_bus_write(reg, val ? AXP_GPIO_CTRL_OUTPUT_HIGH :
-+					 AXP_GPIO_CTRL_OUTPUT_LOW);
- }
- 
- static int axp_gpio_get_value(struct udevice *dev, unsigned pin)
-@@ -76,25 +65,16 @@ static int axp_gpio_get_value(struct udevice *dev, unsigned pin)
- 	u8 reg, val, mask;
- 	int ret;
- 
--	switch (pin) {
--#ifdef AXP_MISC_CTRL_N_VBUSEN_FUNC
--	/* Only available on later PMICs */
--	case SUNXI_GPIO_AXP0_VBUS_ENABLE:
--		ret = pmic_bus_read(AXP_VBUS_IPSOUT, &val);
--		mask = AXP_VBUS_IPSOUT_DRIVEBUS;
--		break;
--#endif
--	default:
--		reg = axp_get_gpio_ctrl_reg(pin);
--		if (reg == 0)
--			return -EINVAL;
-+	reg = axp_get_gpio_ctrl_reg(pin);
-+	if (reg == 0)
-+		return -EINVAL;
- 
--		ret = pmic_bus_read(AXP_GPIO_STATE, &val);
--		mask = 1 << (pin + AXP_GPIO_STATE_OFFSET);
--	}
-+	ret = pmic_bus_read(AXP_GPIO_STATE, &val);
- 	if (ret)
- 		return ret;
- 
-+	mask = 1 << (pin + AXP_GPIO_STATE_OFFSET);
-+
- 	return (val & mask) ? 1 : 0;
- }
- 
-@@ -102,25 +82,12 @@ static int axp_gpio_set_value(struct udevice *dev, unsigned pin, int val)
- {
- 	u8 reg;
- 
--	switch (pin) {
--#ifdef AXP_MISC_CTRL_N_VBUSEN_FUNC
--	/* Only available on later PMICs */
--	case SUNXI_GPIO_AXP0_VBUS_ENABLE:
--		if (val)
--			return pmic_bus_setbits(AXP_VBUS_IPSOUT,
--						AXP_VBUS_IPSOUT_DRIVEBUS);
--		else
--			return pmic_bus_clrbits(AXP_VBUS_IPSOUT,
--						AXP_VBUS_IPSOUT_DRIVEBUS);
--#endif
--	default:
--		reg = axp_get_gpio_ctrl_reg(pin);
--		if (reg == 0)
--			return -EINVAL;
-+	reg = axp_get_gpio_ctrl_reg(pin);
-+	if (reg == 0)
-+		return -EINVAL;
- 
--		return pmic_bus_write(reg, val ? AXP_GPIO_CTRL_OUTPUT_HIGH :
--						 AXP_GPIO_CTRL_OUTPUT_LOW);
--	}
-+	return pmic_bus_write(reg, val ? AXP_GPIO_CTRL_OUTPUT_HIGH :
-+					 AXP_GPIO_CTRL_OUTPUT_LOW);
- }
- 
- static const struct dm_gpio_ops gpio_axp_ops = {
-@@ -135,8 +102,8 @@ static int gpio_axp_probe(struct udevice *dev)
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 
- 	/* Tell the uclass how many GPIOs we have */
--	uc_priv->bank_name = strdup(SUNXI_GPIO_AXP0_PREFIX);
--	uc_priv->gpio_count = SUNXI_GPIO_AXP0_GPIO_COUNT;
-+	uc_priv->bank_name = AXP_GPIO_PREFIX;
-+	uc_priv->gpio_count = AXP_GPIO_COUNT;
- 
- 	return 0;
- }
-diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
-index e4463a223f7..b5e74a0da94 100644
---- a/drivers/gpio/sunxi_gpio.c
-+++ b/drivers/gpio/sunxi_gpio.c
-@@ -247,15 +247,7 @@ int sunxi_name_to_gpio(const char *name)
- {
- 	unsigned int gpio;
- 	int ret;
--#if !defined CONFIG_SPL_BUILD && defined CONFIG_AXP_GPIO
--	char lookup[8];
- 
--	if (strcasecmp(name, "AXP0-VBUS-ENABLE") == 0) {
--		sprintf(lookup, SUNXI_GPIO_AXP0_PREFIX "%d",
--			SUNXI_GPIO_AXP0_VBUS_ENABLE);
--		name = lookup;
--	}
--#endif
- 	ret = gpio_lookup_name(name, NULL, NULL, &gpio);
- 
- 	return ret ? ret : gpio;
-diff --git a/include/axp221.h b/include/axp221.h
-index 32b988f3a9c..8a4a3cca82f 100644
---- a/include/axp221.h
-+++ b/include/axp221.h
-@@ -53,10 +53,6 @@
- #ifdef CONFIG_AXP221_POWER
- #define AXP_POWER_STATUS		0x00
- #define AXP_POWER_STATUS_ALDO_IN		BIT(0)
--#define AXP_VBUS_IPSOUT			0x30
--#define AXP_VBUS_IPSOUT_DRIVEBUS		(1 << 2)
--#define AXP_MISC_CTRL			0x8f
--#define AXP_MISC_CTRL_N_VBUSEN_FUNC		(1 << 4)
- #define AXP_GPIO0_CTRL			0x90
- #define AXP_GPIO1_CTRL			0x92
- #define AXP_GPIO_CTRL_OUTPUT_LOW		0x00 /* Drive pin low */
-diff --git a/include/axp809.h b/include/axp809.h
-index 71a7cb2aaa1..3bd71b3d1a3 100644
---- a/include/axp809.h
-+++ b/include/axp809.h
-@@ -47,10 +47,6 @@
- #ifdef CONFIG_AXP809_POWER
- #define AXP_POWER_STATUS		0x00
- #define AXP_POWER_STATUS_ALDO_IN		BIT(0)
--#define AXP_VBUS_IPSOUT			0x30
--#define AXP_VBUS_IPSOUT_DRIVEBUS		(1 << 2)
--#define AXP_MISC_CTRL			0x8f
--#define AXP_MISC_CTRL_N_VBUSEN_FUNC		(1 << 4)
- #define AXP_GPIO0_CTRL			0x90
- #define AXP_GPIO1_CTRL			0x92
- #define AXP_GPIO_CTRL_OUTPUT_LOW	0x00 /* Drive pin low */
-diff --git a/include/axp818.h b/include/axp818.h
-index 08ac35d15fa..b3a9686e0e5 100644
---- a/include/axp818.h
-+++ b/include/axp818.h
-@@ -61,10 +61,6 @@
- #ifdef CONFIG_AXP818_POWER
- #define AXP_POWER_STATUS		0x00
- #define AXP_POWER_STATUS_ALDO_IN		BIT(0)
--#define AXP_VBUS_IPSOUT			0x30
--#define AXP_VBUS_IPSOUT_DRIVEBUS		(1 << 2)
--#define AXP_MISC_CTRL			0x8f
--#define AXP_MISC_CTRL_N_VBUSEN_FUNC		(1 << 4)
- #define AXP_GPIO0_CTRL			0x90
- #define AXP_GPIO1_CTRL			0x92
- #define AXP_GPIO_CTRL_OUTPUT_LOW	0x00 /* Drive pin low */
-diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
-index db3742c0397..31783e08732 100644
---- a/include/sunxi_gpio.h
-+++ b/include/sunxi_gpio.h
-@@ -82,7 +82,6 @@ enum sunxi_gpio_number {
- 	SUNXI_GPIO_L_START = 352,
- 	SUNXI_GPIO_M_START = SUNXI_GPIO_NEXT(SUNXI_GPIO_L),
- 	SUNXI_GPIO_N_START = SUNXI_GPIO_NEXT(SUNXI_GPIO_M),
--	SUNXI_GPIO_AXP0_START = 1024,
- };
- 
- /* SUNXI GPIO number definitions */
-@@ -99,8 +98,6 @@ enum sunxi_gpio_number {
- #define SUNXI_GPM(_nr)	(SUNXI_GPIO_M_START + (_nr))
- #define SUNXI_GPN(_nr)	(SUNXI_GPIO_N_START + (_nr))
- 
--#define SUNXI_GPAXP0(_nr)	(SUNXI_GPIO_AXP0_START + (_nr))
--
- /* GPIO pin function config */
- #define SUNXI_GPIO_INPUT	0
- #define SUNXI_GPIO_OUTPUT	1
-@@ -185,11 +182,6 @@ enum sunxi_gpio_number {
- #define SUNXI_GPIO_PULL_UP	1
- #define SUNXI_GPIO_PULL_DOWN	2
- 
--/* Virtual AXP0 GPIOs */
--#define SUNXI_GPIO_AXP0_PREFIX "AXP0-"
--#define SUNXI_GPIO_AXP0_VBUS_ENABLE	5
--#define SUNXI_GPIO_AXP0_GPIO_COUNT	6
--
- struct sunxi_gpio_plat {
- 	void			*regs;
- 	char			bank_name[3];
--- 
-2.41.0
-
+> -----Original Message-----
+> From: Andre Przywara <andre.przywara=40arm.com>
+> Sent: Sunday, October 22, 2023 6:19 AM
+> To: Jernej =C5=A0krabec=20<jernej.skrabec=40gmail.com>=0D=0A>=20Cc:=20Jag=
+an=20Teki=20<jagan=40amarulasolutions.com>;=20Jaehoon=20Chung=20<jh80.chung=
+=40samsung.com>;=20Samuel=20Holland=0D=0A>=20<samuel=40sholland.org>;=20SAS=
+ANO=20Takayoshi=20<uaa=40mx5.nisiq.net>;=20Mikhail=20Kalashnikov=20<iuncuim=
+=40gmail.com>;=0D=0A>=20Piotr=20Oniszczuk=20<piotr.oniszczuk=40gmail.com>;=
+=20u-boot=40lists.denx.de;=20linux-sunxi=40lists.linux.dev=0D=0A>=20Subject=
+:=20Re:=20=5BPATCH=201/3=5D=20sunxi:=20board:=20simplify=20early=20PMIC=20s=
+etup=20conditions=0D=0A>=20=0D=0A>=20On=20Sat,=2021=20Oct=202023=2008:34:06=
+=20+0200=0D=0A>=20Jernej=20=C5=A0krabec=20<jernej.skrabec=40gmail.com>=20wr=
+ote:=0D=0A>=20=0D=0A>=20>=20On=20Wednesday,=20October=2018,=202023=205:50:1=
+2=20PM=20CEST=20Andre=20Przywara=20wrote:=0D=0A>=20>=20>=20So=20far=20we=20=
+have=20a=20convoluted=20=23ifdef=20mesh=20that=20guards=20the=20early=20AXP=
+=20PMIC=0D=0A>=20>=20>=20setup=20in=20board.c.=20That=20combination=20of=20=
+&&,=20=7C=7C=20and=20negations=20is=20very=20hard=0D=0A>=20>=20>=20to=20rea=
+d,=20maintain=20and=20especially=20to=20extend.=0D=0A>=20>=20>=0D=0A>=20>=
+=20>=20Fortunately=20we=20have=20those=20same=20conditions=20already=20mode=
+lled=20in=20the=0D=0A>=20>=20>=20Kconfig=20file,=20so=20they=20are=20actual=
+ly=20redundant.=20On=20top=20of=20that=20the=20real=0D=0A>=20>=20>=20reason=
+=20we=20have=20those=20preprocessor=20guards=20in=20the=20first=20place=20i=
+s=20about=20the=0D=0A>=20>=20>=20symbols=20that=20are=20*conditionally*=20d=
+efined:=20without=20=23ifdefs=20the=20build=0D=0A>=20>=20>=20would=20break=
+=20because=20of=20them=20being=20undefined=20for=20many=20boards.=0D=0A>=20=
+>=20>=0D=0A>=20>=20>=20To=20simplify=20this,=20just=20change=20the=20guards=
+=20to=20actually=20look=20at=20the=20symbols=0D=0A>=20>=20>=20needed,=20so=
+=20CONFIG_AXP_xxx_VOLT=20instead=20of=20CONFIG_AXPyyy_POWER.=0D=0A>=20>=20>=
+=20This=20drastically=20improves=20the=20readability=20of=20this=20code,=20=
+and=20makes=20adding=0D=0A>=20>=20>=20PMIC=20support=20a=20pure=20Kconfig=
+=20matter.=0D=0A>=20>=20>=0D=0A>=20>=20>=20Signed-off-by:=20Andre=20Przywar=
+a=20<andre.przywara=40arm.com>=0D=0A>=20>=20>=20---=0D=0A>=20>=20>=20=20boa=
+rd/sunxi/board.c=20=20=20=7C=2032=20++++++++++++++------------------=0D=0A>=
+=20>=20>=20=20drivers/power/Kconfig=20=7C=20=202=20+-=0D=0A>=20>=20>=20=202=
+=20files=20changed,=2015=20insertions(+),=2019=20deletions(-)=0D=0A>=20>=20=
+>=0D=0A>=20>=20>=20diff=20--git=20a/board/sunxi/board.c=20b/board/sunxi/boa=
+rd.c=0D=0A>=20>=20>=20index=20ebaa9431984..65d79a02c25=20100644=0D=0A>=20>=
+=20>=20---=20a/board/sunxi/board.c=0D=0A>=20>=20>=20+++=20b/board/sunxi/boa=
+rd.c=0D=0A>=20>=20>=20=40=40=20-597,50=20+597,46=20=40=40=20void=20sunxi_bo=
+ard_init(void)=0D=0A>=20>=20>=20=20=09=09=7D=0D=0A>=20>=20>=20=20=09=7D=0D=
+=0A>=20>=20>=0D=0A>=20>=20>=20-=23if=20defined=20CONFIG_AXP221_POWER=20=7C=
+=7C=20defined=20CONFIG_AXP809_POWER=20=7C=7C=20=5C=0D=0A>=20>=20>=20-=09def=
+ined=20CONFIG_AXP818_POWER=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_DCDC1_VO=
+LT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_dcdc1(CONFIG_AXP_=
+DCDC1_VOLT);=0D=0A>=20>=20>=20+=09power_failed=20=7C=3D=20axp_set_dcdc5(CON=
+FIG_AXP_DCDC5_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=20-=23if=
+=20=21defined(CONFIG_AXP305_POWER)=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_=
+DCDC2_VOLT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_dcdc2(CON=
+FIG_AXP_DCDC2_VOLT);=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set=
+_dcdc3(CONFIG_AXP_DCDC3_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=
+=20-=23if=20=21defined(CONFIG_AXP209_POWER)=20&&=20=21defined(CONFIG_AXP818=
+_POWER)=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_DCDC4_VOLT=0D=0A>=20>=20>=
+=20=20=09power_failed=20=7C=3D=20axp_set_dcdc4(CONFIG_AXP_DCDC4_VOLT);=0D=
+=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=20-=23if=20defined=20CONFIG_AXP22=
+1_POWER=20=7C=7C=20defined=20CONFIG_AXP809_POWER=20=7C=7C=20=5C=0D=0A>=20>=
+=20>=20-=09defined=20CONFIG_AXP818_POWER=0D=0A>=20>=20>=20-=09power_failed=
+=20=7C=3D=20axp_set_dcdc5(CONFIG_AXP_DCDC5_VOLT);=0D=0A>=20>=20>=20-=23endi=
+f=0D=0A>=20>=20>=0D=0A>=20>=20>=20-=23if=20defined=20CONFIG_AXP221_POWER=20=
+=7C=7C=20defined=20CONFIG_AXP809_POWER=20=7C=7C=20=5C=0D=0A>=20>=20>=20-=09=
+defined=20CONFIG_AXP818_POWER=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_ALDO1=
+_VOLT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_aldo1(CONFIG_A=
+XP_ALDO1_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=20-=23if=20=21d=
+efined(CONFIG_AXP305_POWER)=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_ALDO2_V=
+OLT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_aldo2(CONFIG_AXP=
+_ALDO2_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=20-=23if=20=21def=
+ined(CONFIG_AXP152_POWER)=20&&=20=21defined(CONFIG_AXP305_POWER)=0D=0A>=20>=
+=20>=20+=23ifdef=20CONFIG_AXP_ALDO3_VOLT=0D=0A>=20>=20>=20=20=09power_faile=
+d=20=7C=3D=20axp_set_aldo3(CONFIG_AXP_ALDO3_VOLT);=0D=0A>=20>=20>=20=20=23e=
+ndif=0D=0A>=20>=20>=20-=23ifdef=20CONFIG_AXP209_POWER=0D=0A>=20>=20>=20+=23=
+ifdef=20CONFIG_AXP_ALDO4_VOLT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=
+=20axp_set_aldo4(CONFIG_AXP_ALDO4_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=0A=
+>=20>=20>=0D=0A>=20>=20>=20-=23if=20defined(CONFIG_AXP221_POWER)=20=7C=7C=
+=20defined(CONFIG_AXP809_POWER)=20=7C=7C=20=5C=0D=0A>=20>=20>=20-=09defined=
+(CONFIG_AXP818_POWER)=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_DLDO1_VOLT=0D=
+=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_dldo(1,=20CONFIG_AXP_D=
+LDO1_VOLT);=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_dldo(2,=
+=20CONFIG_AXP_DLDO2_VOLT);=0D=0A>=20>=20>=20-=23if=20=21defined=20CONFIG_AX=
+P809_POWER=0D=0A>=20>=20>=20+=23endif=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_A=
+XP_DLDO3_VOLT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_dldo(3=
+,=20CONFIG_AXP_DLDO3_VOLT);=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20=
+axp_set_dldo(4,=20CONFIG_AXP_DLDO4_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=
+=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP_ELDO1_VOLT=0D=0A>=20>=20>=20=20=09pow=
+er_failed=20=7C=3D=20axp_set_eldo(1,=20CONFIG_AXP_ELDO1_VOLT);=0D=0A>=20>=
+=20>=20=20=09power_failed=20=7C=3D=20axp_set_eldo(2,=20CONFIG_AXP_ELDO2_VOL=
+T);=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_eldo(3,=20CONFIG=
+_AXP_ELDO3_VOLT);=0D=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=0D=0A>=20>=20=
+>=20-=23ifdef=20CONFIG_AXP818_POWER=0D=0A>=20>=20>=20+=23ifdef=20CONFIG_AXP=
+_FLDO1_VOLT=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_fldo(1,=
+=20CONFIG_AXP_FLDO1_VOLT);=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20a=
+xp_set_fldo(2,=20CONFIG_AXP_FLDO2_VOLT);=0D=0A>=20>=20>=20=20=09power_faile=
+d=20=7C=3D=20axp_set_fldo(3,=20CONFIG_AXP_FLDO3_VOLT);=0D=0A>=20>=20>=20=40=
+=40=20-649,7=20+645,7=20=40=40=20void=20sunxi_board_init(void)=0D=0A>=20>=
+=20>=20=20=23if=20defined=20CONFIG_AXP809_POWER=20=7C=7C=20defined=20CONFIG=
+_AXP818_POWER=0D=0A>=20>=20>=20=20=09power_failed=20=7C=3D=20axp_set_sw(IS_=
+ENABLED(CONFIG_AXP_SW_ON));=0D=0A>=20>=20>=20=20=23endif=0D=0A>=20>=20>=20-=
+=23endif=0D=0A>=20>=20>=20+=23endif=09/*=20CONFIG_AXPxxx_POWER=20*/=0D=0A>=
+=20>=20>=20=20=09printf(=22DRAM:=22);=0D=0A>=20>=20>=20=20=09gd->ram_size=
+=20=3D=20sunxi_dram_init();=0D=0A>=20>=20>=20=20=09printf(=22=20%d=20MiB=5C=
+n=22,=20(int)(gd->ram_size=20>>=2020));=0D=0A>=20>=20>=20diff=20--git=20a/d=
+rivers/power/Kconfig=20b/drivers/power/Kconfig=0D=0A>=20>=20>=20index=207f3=
+b990d231..83cb31c937a=20100644=0D=0A>=20>=20>=20---=20a/drivers/power/Kconf=
+ig=0D=0A>=20>=20>=20+++=20b/drivers/power/Kconfig=0D=0A>=20>=20>=20=40=40=
+=20-180,7=20+180,7=20=40=40=20config=20AXP_DCDC3_VOLT=0D=0A>=20>=20>=0D=0A>=
+=20>=20>=20=20config=20AXP_DCDC4_VOLT=0D=0A>=20>=20>=20=20=09int=20=22axp=
+=20pmic=20dcdc4=20voltage=22=0D=0A>=20>=20>=20-=09depends=20on=20AXP152_POW=
+ER=20=7C=7C=20AXP221_POWER=20=7C=7C=20AXP809_POWER=20=7C=7C=0D=0A>=20>=20AX=
+P818_POWER=20=7C=7C=0D=0A>=20>=20>=20AXP305_POWER=20+=09depends=20on=20AXP1=
+52_POWER=20=7C=7C=20AXP221_POWER=20=7C=7C=20AXP809_POWER=0D=0A>=20>=20=7C=
+=7C=0D=0A>=20>=20>=20AXP305_POWER=20default=201250=20if=20AXP152_POWER=0D=
+=0A>=20>=20>=20=20=09default=201200=20if=20MACH_SUN6I=0D=0A>=20>=20>=20=20=
+=09default=200=20if=20MACH_SUN8I=0D=0A>=20>=0D=0A>=20>=20This=20patch=20is=
+=20great,=20but=20this=20last=20change=20doesn't=20seem=20to=20be=20directl=
+y=0D=0A>=20>=20connected?=0D=0A>=20=0D=0A>=20It=20is=20an=20existing=20bug:=
+=20there=20is=20no=20axp_set_dcdc4()=20for=20the=20AXP818,=20but=0D=0A>=20s=
+ince=20the=20AXP818=20is=20not=20included=20in=20the=20guards=20at=20the=20=
+calling=20site=0D=0A>=20in=20board.c=20above,=20we=20didn't=20notice.=0D=0A=
+>=20So=20without=20this=20change,=20all=20A83T=20boards=20(the=20only=20one=
+s=20using=20AXP818)=0D=0A>=20would=20fail=20compilation.=0D=0A>=20I=20just=
+=20forgot=20to=20mention=20it=20in=20the=20commit=20message,=20will=20add=
+=20it.=0D=0A=0D=0AWill=20you=20resend=20this=20patch=20after=20updating=20t=
+he=20commit=20message?=0D=0A=0D=0ABest=20Regards,=0D=0AJaehoon=20Chung=0D=
+=0A=0D=0A>=20=0D=0A>=20Cheers,=0D=0A>=20Andre=0D=0A=0D=0A
