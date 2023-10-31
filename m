@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457F8C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:12:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72556C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:12:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DCEA87AF6;
+	by phobos.denx.de (Postfix) with ESMTP id CFD9E87C9F;
 	Tue, 31 Oct 2023 14:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w1O7xWvP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MNpctKFT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF47F87C8A; Tue, 31 Oct 2023 14:12:19 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id E46D287C9E; Tue, 31 Oct 2023 14:12:22 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097BC87B53
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:12:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9908F878FC
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:12:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCBls058678;
- Tue, 31 Oct 2023 08:12:11 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCCVq086520;
+ Tue, 31 Oct 2023 08:12:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698757931;
- bh=Mlnp2TCm1WeW+EZVLmZqBJoB1+wpNoXa7bNtWmkxtMs=;
+ s=ti-com-17Q1; t=1698757933;
+ bh=2YB5TIBa4ng3kl5LQAGzp+SKzb6868UU2wJH2pgd38Y=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=w1O7xWvPuDluUau8/P0sbvx6pxDnQTZ8zsTazFZacwrdoosVIEJbM2qftWf1Ex24u
- pTyor/Z1Vp06GRmofHoEzsLyG2UYwB1Tw71xbG5u/a8FgaOS/6GogOZqPz/ixNnovD
- xJkTZLuLLNY1AEZTU7fpsbbeuB9eiaYFeotHCG+c=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDCBK8032716
+ b=MNpctKFT1USPpO4fXVU6FVUfi8qIAphFrA5xX1DV+l8vF/V7u/l5hNReh0TmYxAW3
+ j8XLV9YKDUiqivaulBQ3QGB45FsDrccPB9stfu1zR6CK2413jerbJiK2P8W72xpp1e
+ 2Pb/bAaPkbHU/E0qJYXPlgGJAPl8sg7oLbK5RXS4=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDCCQN101932
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 31 Oct 2023 08:12:11 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 31 Oct 2023 08:12:12 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 08:12:10 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 08:12:12 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 08:12:10 -0500
+ Frontend Transport; Tue, 31 Oct 2023 08:12:12 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCAmk010333;
- Tue, 31 Oct 2023 08:12:10 -0500
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDCB7I004527;
+ Tue, 31 Oct 2023 08:12:12 -0500
 From: Devarsh Thakkar <devarsht@ti.com>
 To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
  <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
  <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
 CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
  <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>, <devarsht@ti.com>
-Subject: [PATCH v2 1/5] arm: mach-k3: common: Reserve video memory from end of
- the RAM
-Date: Tue, 31 Oct 2023 18:42:04 +0530
-Message-ID: <20231031131208.435268-2-devarsht@ti.com>
+Subject: [PATCH v2 2/5] board: ti: am62x: evm: Remove video_setup from
+ spl_board_init
+Date: Tue, 31 Oct 2023 18:42:05 +0530
+Message-ID: <20231031131208.435268-3-devarsht@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231031131208.435268-1-devarsht@ti.com>
 References: <20231031131208.435268-1-devarsht@ti.com>
@@ -82,100 +82,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add function spl_reserve_video which is a wrapper
-around video_reserve to setup video memory and update
-the relocation address pointer.
-
-Setup video memory before page table reservation so that
-framebuffer memory gets reserved from the end of RAM.
-
-This is as per the new policy being discussed for passing
-blobs where each of the reserved areas for bloblists
-to be passed need to be reserved at the end of RAM.
-
-This is done to enable the next stage to directly skip
-the pre-reserved area from previous stage right from the end of RAM
-without having to make any gaps/holes to accommodate those
-regions which was the case before as previous stage
-reserved region not from the end of RAM.
+Remove video_setup from evm_init sequence since video memory
+is  getting called at an earlier place to make sure
+video memory is reserved at the end of RAM.
 
 Suggested-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
 ---
-V2: Make a generic function "spl_reserve_video" under
-    common/spl which can be re-used by other platforms too
-    for reserving video memory from spl.
+V2: No change
 ---
- arch/arm/mach-k3/common.c |  2 ++
- common/spl/spl.c          | 19 +++++++++++++++++++
- include/spl.h             |  4 ++++
- 3 files changed, 25 insertions(+)
+ board/ti/am62x/evm.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index c3006ba387..03e3b46282 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -537,6 +537,8 @@ void spl_enable_dcache(void)
- 	if (ram_top >= 0x100000000)
- 		ram_top = (phys_addr_t) 0x100000000;
- 
-+	gd->relocaddr = ram_top;
-+	spl_reserve_video();
- 	gd->arch.tlb_addr = ram_top - gd->arch.tlb_size;
- 	gd->arch.tlb_addr &= ~(0x10000 - 1);
- 	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 732d90d39e..89172f2ebf 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -41,6 +41,7 @@
- #include <fdt_support.h>
- #include <bootcount.h>
- #include <wdt.h>
-+#include <video.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- DECLARE_BINMAN_MAGIC_SYM;
-@@ -151,6 +152,24 @@ void spl_fixup_fdt(void *fdt_blob)
- #endif
+diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+index ad93908840..88e02155ee 100644
+--- a/board/ti/am62x/evm.c
++++ b/board/ti/am62x/evm.c
+@@ -60,27 +60,9 @@ int dram_init_banksize(void)
  }
  
-+int spl_reserve_video(void)
-+{
-+	if (CONFIG_IS_ENABLED(VIDEO)) {
-+		ulong addr;
-+		int ret;
-+
-+		addr = gd->relocaddr;
-+		ret = video_reserve(&addr);
-+		if (ret)
-+			return ret;
-+		debug("Reserving %luk for video at: %08lx\n",
-+		      ((unsigned long)gd->relocaddr - addr) >> 10, addr);
-+		gd->relocaddr = addr;
-+	}
-+
-+	return 0;
-+}
-+
- ulong spl_get_image_pos(void)
+ #if defined(CONFIG_SPL_BUILD)
+-static int video_setup(void)
+-{
+-	if (CONFIG_IS_ENABLED(VIDEO)) {
+-		ulong addr;
+-		int ret;
+-
+-		addr = gd->relocaddr;
+-		ret = video_reserve(&addr);
+-		if (ret)
+-			return ret;
+-		debug("Reserving %luk for video at: %08lx\n",
+-		      ((unsigned long)gd->relocaddr - addr) >> 10, addr);
+-		gd->relocaddr = addr;
+-	}
+-
+-	return 0;
+-}
+ 
+ void spl_board_init(void)
  {
- 	if (!CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS))
-diff --git a/include/spl.h b/include/spl.h
-index 0d49e4a454..9682e51fc1 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -825,6 +825,10 @@ int spl_usb_load(struct spl_image_info *spl_image,
- 
- int spl_ymodem_load_image(struct spl_image_info *spl_image,
- 			  struct spl_boot_device *bootdev);
-+/**
-+ * spl_reserve_video() - Reserve video and update relocation address
-+ */
-+int spl_reserve_video(void);
- 
- /**
-  * spl_invoke_atf - boot using an ARM trusted firmware image
+-	video_setup();
+ 	enable_caches();
+ 	if (IS_ENABLED(CONFIG_SPL_SPLASH_SCREEN) && IS_ENABLED(CONFIG_SPL_BMP))
+ 		splash_display();
 -- 
 2.34.1
 
