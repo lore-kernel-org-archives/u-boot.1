@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD48C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:18:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B88C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:18:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 920DB87AC2;
-	Tue, 31 Oct 2023 06:18:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 325E187AE0;
+	Tue, 31 Oct 2023 06:18:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="e6cmOsqX";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="g0nnzrbu";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="Rm3m7q/q";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="BzpIoqVe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5715E87AE0; Tue, 31 Oct 2023 06:18:17 +0100 (CET)
+ id 70D3986FFE; Tue, 31 Oct 2023 06:18:19 +0100 (CET)
 Received: from wout3-smtp.messagingengine.com (wout3-smtp.messagingengine.com
  [64.147.123.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59F7987AD6
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:18:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EF8387AE4
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:18:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=sholland.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id 7E55A3200A55;
- Tue, 31 Oct 2023 01:18:13 -0400 (EDT)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.west.internal (Postfix) with ESMTP id 91EDC3200A58;
+ Tue, 31 Oct 2023 01:18:15 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Tue, 31 Oct 2023 01:18:13 -0400
+ by compute4.internal (MEProxy); Tue, 31 Oct 2023 01:18:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
  cc:cc:content-transfer-encoding:content-type:date:date:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm1; t=1698729493; x=
- 1698815893; bh=jBWpfOaonL2oxWwLDELa5WgRCw9F4kU/exj55UWFIZs=; b=e
- 6cmOsqXRzHdN9n0+zIdYyJ5DCJ2CosQtFpkcp38HpMqPTF+eGsqfYdTE15vi6Zcg
- K20lOHXVYX0leVG7KI0r3ALDtSTEuPDXU2VcwurkNtPIntRXR11HKvB9Jh8o8VsU
- bTqjTeMlX3SbUjhEHnSfOV4O+kzvVNYA2lMFDyj+5E89I0G5vgxVAtLE6jSayz8r
- kG/ZxrIBBUYoVjEr25tFwpub716Oj2TzG/EqdRsKrtslCxokjnsFZvT2OYxe2dvr
- HR+NuguFQFqb1BWVWXLnaae2JeJNgGjn2Z7jB3QahdV84nOsHF/PZ35eoLPNoJLY
- sWHABxmy+jgFOEUYVdkjQ==
+ :reply-to:sender:subject:subject:to:to; s=fm1; t=1698729495; x=
+ 1698815895; bh=JJvm4TSuEb/1tTG5oIzrcgyUnxbcAZqndwTPl/Fq1Fg=; b=R
+ m3m7q/qdIToCYrjOXisPjr6ZEvY5dS4U913B4FHWqbLqVmAvO4wdzyvch1PAd9B1
+ gEB3uxCXAoHTLTpGd0OlpyHh6LdypBfm2S0xXIaPKIrpNn2B5rN4IUO4iAIMee1l
+ 1fXp1QMPdm8/b6KLGb27+qirFxov1+2pvfQ9ZK0cPe6SK4GPQsuZWs8KwrQQo92p
+ 7ffqTlds4eEPxdPSQNRN0Psr5hXRiRdnNoKgcNKs8UmpUL8riGenoe5tNEbkhag/
+ 1Rf4D8EbcNLTJLpv4ReDvXnUfoLbkczFvdSdq4H2bvG3hrSZxGMEplWAv0ig3yo+
+ l5lODlWLN7MAza+lby01Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
  :in-reply-to:in-reply-to:message-id:mime-version:references
  :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698729493; x=
- 1698815893; bh=jBWpfOaonL2oxWwLDELa5WgRCw9F4kU/exj55UWFIZs=; b=g
- 0nnzrbu5KXuN7MxtOuXH39hihJEdj6ggAxDdlN+tRxe39bfwikddrrr4tX7WDxdb
- 4dYICOMqt+IWw5SNMgLDboxM7/U9Tlh5WXlMQhskBizuGjJWubnosjz3GmBuBCjz
- HrDBrRs0bYm3bHe9mq8kgBRk95sHGyoeNxlCTPCmdf6DHB2v9ddUwOFj/LSlCZES
- +lpWYknoIZjWWC3vtrU+NsS2ySVyA6XZh/ARoZZFxSHEvrUqiirBQedaaKHd1JZe
- WBnBEblrvtmkZl/r5mewHrDIbUTKZkWf5bV6haFc3ARyAL3K8QIsSmmQX1+S1IlZ
- KI6QCTMdDEdXJc3vc63YQ==
-X-ME-Sender: <xms:FI5AZbA7NSpIe0jqx6Brpn_8FJTRKPFe170Fx6lBGVuO-U82rQjRkA>
- <xme:FI5AZRimgLqlFgTjge9MxwUPt4SPakPWkMGhLMDJxwyQR5BR5PH2A-eCEnReLea19
- NewFdxLJtAH09MM0g>
-X-ME-Received: <xmr:FI5AZWmggOOvfUBmYUUm3AUtLbqx-e5JE6VruxEhE5UgZtL0gTahRnwYaYzq6_OtffDMOvKDLdjJRo0xI0QKqZpo7_Ch-qvCN3MjCe_MsIprdvVX1NRAo26Qiph_yl17Fn_duQ>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1698729495; x=
+ 1698815895; bh=JJvm4TSuEb/1tTG5oIzrcgyUnxbcAZqndwTPl/Fq1Fg=; b=B
+ zpIoqVeszsdooI611eVf8yXRwOmJzy9638yxQOAYfIUecuIN89VdpibgVgZaUf9F
+ DZ4WO4dOSpuV8rnyDBE2RfCm2VT8g3xfVBR0UcS35CWQjTd0FmHbhs54TNv6zrzH
+ lCuqdx0RPNKqDGQtHV7zNytvbG6mhZ1dKIdMgJwL6imOXBJxr1OT/Qx8l+XjKJRg
+ NQAG7GIKK8tus9/VmYXYzbcAncvScIoKj6BaDBDu4AikagTHQXxbt7ElT3gHKWBO
+ dXlUeB+RKMc+hDMUNWvWnSriVCLfGY2qppGAbhpuxcVjHImJ6/Itzn5vH//07QyL
+ Ims5Cdxt6Wx8e0RVW0uNQ==
+X-ME-Sender: <xms:F45AZTyMT4LX7exeDy4rriOLJjNxqfZx7s-SNJsNjEfSIceW1f5xyA>
+ <xme:F45AZbS5Ioug3mBct0HfjQxMhR3rt2JCyJ8itXz_O3My5Y-AAXBVnrDuMtCje_u9-
+ W55c8jp2M6Y4fmcxw>
+X-ME-Received: <xmr:F45AZdUh8bGDGJLETu9BliYex-FaDPV_gxVrqbJ7PlXv9giH3F-CyiLmKZ30d633svWMOCNzFrmq_JcPEmHgI75LKPlZthPlJT833p-pUGuGXWvrTo9SenVsuEi3IlAMOFjGbQ>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeelucetufdoteggodetrfdotf
  fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
  uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -68,21 +68,21 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedruddtuddgjeelucetufdoteggod
  ftrfgrthhtvghrnhepudekteeuudehtdelteevgfduvddvjefhfedulefgudevgeeghefg
  udefiedtveetnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
  homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:FI5AZdwOkqEbL5KjzdyarYFQeCNxdFdhKIUV0ZUn6nnT1uZv9UrZmQ>
- <xmx:FI5AZQTAnbtK8Po_WT5NQrEgEnQ2fbBQIh91eESMVrmyqKCsdABO9w>
- <xmx:FI5AZQb2RJmdTNurU5yhk1Jwh5bITfAKVxnfAvypRvXKIjgNmeZUGQ>
- <xmx:FY5AZWNz7vS7IE_5qF4X49hidu6bDNFNs12L8_6BVthZLF__sMonuQ>
+X-ME-Proxy: <xmx:F45AZdgxUJNmhG5slChHTqq1TgHzkdheDI8jAscV0HKeUGXVxZjvdA>
+ <xmx:F45AZVANUUXxM8HTVBYJh9HeL2nYEXKyUh-RnsMAGi8y4RcYD2LDlA>
+ <xmx:F45AZWInH3wiktI7ilJsygiJp2Ix0KRL6UbX3S5mMAEPf-NM1yerig>
+ <xmx:F45AZQ_5PtEUY6VkyyfBkQUZwx0fh4RdELoUYW8Hw9SfIRmBQa1UaA>
 Feedback-ID: i0ad843c9:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 31 Oct 2023 01:18:12 -0400 (EDT)
+ 31 Oct 2023 01:18:14 -0400 (EDT)
 From: Samuel Holland <samuel@sholland.org>
 To: Andre Przywara <andre.przywara@arm.com>,
  Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, Icenowy Zheng <icenowy@aosc.io>,
  Jesse Taube <Mr.Bossman075@gmail.com>, Samuel Holland <samuel@sholland.org>
-Subject: [PATCH v3 3/4] sunxi: binman: Support FIT generation for 32-bit SoCs
-Date: Tue, 31 Oct 2023 00:17:40 -0500
-Message-ID: <20231031051805.62430-4-samuel@sholland.org>
+Subject: [PATCH v3 4/4] sunxi: Enable SPL FIT loading for 32-bit SoCs
+Date: Tue, 31 Oct 2023 00:17:41 -0500
+Message-ID: <20231031051805.62430-5-samuel@sholland.org>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231031051805.62430-1-samuel@sholland.org>
 References: <20231031051805.62430-1-samuel@sholland.org>
@@ -104,13 +104,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some 32-bit SoCs can use SCP firmware to implement additional PSCI
-functionality, such as system suspend. In order to load this firmware
-from SPL, we need to generate and use a FIT instead of a legacy image.
-
-Adjust the binman FIT definition so it does not rely on TF-A BL31, as
-this is not used on 32-bit SoCs. Instead, after loading the firmware,
-U-Boot proper is executed directly.
+Now that 32-bit SoCs can load U-Boot proper (and possibly other
+firmware) from a FIT, use this method by default. SPL_FIT_IMAGE_TINY is
+required to stay within the 24 or 32 KiB SPL size limit on early SoCs;
+for consistency, enable it everywhere.
 
 Signed-off-by: Samuel Holland <samuel@sholland.org>
 ---
@@ -118,86 +115,38 @@ Signed-off-by: Samuel Holland <samuel@sholland.org>
 (no changes since v2)
 
 Changes in v2:
- - Rely on binman min-size instead of using explicit offsets
- - Use Kconfig for firmware addresses instead of an #ifdef staircase
+ - New patch for v2, split from the .dtsi changes
 
- arch/arm/dts/sunxi-u-boot.dtsi | 23 ++++++++++++++++++-----
- 1 file changed, 18 insertions(+), 5 deletions(-)
+ arch/arm/Kconfig   | 1 +
+ common/spl/Kconfig | 3 +--
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/sunxi-u-boot.dtsi b/arch/arm/dts/sunxi-u-boot.dtsi
-index 7a8764e463b..ed1cb91eeb5 100644
---- a/arch/arm/dts/sunxi-u-boot.dtsi
-+++ b/arch/arm/dts/sunxi-u-boot.dtsi
-@@ -1,5 +1,11 @@
- #include <config.h>
- 
-+#ifdef CONFIG_ARM64
-+#define ARCH "arm64"
-+#else
-+#define ARCH "arm"
-+#endif
-+
- / {
- 	aliases {
- 		mmc0 = &mmc0;
-@@ -34,30 +40,32 @@
- 			filename = "spl/sunxi-spl.bin";
- 		};
- 
--#ifdef CONFIG_ARM64
-+#ifdef CONFIG_SPL_LOAD_FIT
- 		fit {
--			description = "Configuration to load ATF before U-Boot";
-+			description = "Configuration to load U-Boot and firmware";
- 			#address-cells = <1>;
- 			fit,fdt-list = "of-list";
- 
- 			images {
- 				uboot {
--					description = "U-Boot (64-bit)";
-+					description = "U-Boot";
- 					type = "standalone";
- 					os = "u-boot";
--					arch = "arm64";
-+					arch = ARCH;
- 					compression = "none";
- 					load = <CONFIG_TEXT_BASE>;
-+					entry = <CONFIG_TEXT_BASE>;
- 
- 					u-boot-nodtb {
- 					};
- 				};
- 
-+#if CONFIG_SUNXI_BL31_BASE
- 				atf {
- 					description = "ARM Trusted Firmware";
- 					type = "firmware";
- 					os = "arm-trusted-firmware";
--					arch = "arm64";
-+					arch = ARCH;
- 					compression = "none";
- 					load = <CONFIG_SUNXI_BL31_BASE>;
- 					entry = <CONFIG_SUNXI_BL31_BASE>;
-@@ -67,6 +75,7 @@
- 						missing-msg = "atf-bl31-sunxi";
- 					};
- 				};
-+#endif
- 
- #if CONFIG_SUNXI_SCP_BASE
- 				scp {
-@@ -95,7 +104,11 @@
- 
- 				@config-SEQ {
- 					description = "NAME";
-+#if CONFIG_SUNXI_BL31_BASE
- 					firmware = "atf";
-+#else
-+					firmware = "uboot";
-+#endif
- #if CONFIG_SUNXI_SCP_BASE
- 					loadables = "scp", "uboot";
- #else
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index d812685c984..42781d02f0f 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1167,6 +1167,7 @@ config ARCH_SUNXI
+ 	imply SPL_GPIO
+ 	imply SPL_LIBCOMMON_SUPPORT
+ 	imply SPL_LIBGENERIC_SUPPORT
++	imply SPL_LOAD_FIT
+ 	imply SPL_MMC if MMC
+ 	imply SPL_POWER
+ 	imply SPL_SERIAL
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index a0968ff1065..aebbfbf99d2 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -567,8 +567,7 @@ config SYS_MMCSD_RAW_MODE_EMMC_BOOT_PARTITION
+ config SPL_FIT_IMAGE_TINY
+ 	bool "Remove functionality from SPL FIT loading to reduce size"
+ 	depends on SPL_FIT
+-	default y if MACH_SUN50I || MACH_SUN50I_H5 || SUN50I_GEN_H6
+-	default y if ARCH_IMX8M || ARCH_IMX9
++	default y if ARCH_IMX8M || ARCH_IMX9 || ARCH_SUNXI
+ 	help
+ 	  Enable this to reduce the size of the FIT image loading code
+ 	  in SPL, if space for the SPL binary is very tight.
 -- 
 2.41.0
 
