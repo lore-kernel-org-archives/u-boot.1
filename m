@@ -4,118 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F214C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D3DC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 05:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07B4D8751F;
-	Tue, 31 Oct 2023 06:04:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20EFD87ACB;
+	Tue, 31 Oct 2023 06:04:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="I226O/1z";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="cn6PM8iQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C63787ABA; Tue, 31 Oct 2023 06:04:00 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ id B328A87ACB; Tue, 31 Oct 2023 06:04:15 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23F778709A
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:03:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C34387AC7
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:04:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20231031050355epoutp03a91656d63010e2ebc55ae1077ef667d9~TGLGAeWBQ3077730777epoutp03i
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:03:55 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20231031050355epoutp03a91656d63010e2ebc55ae1077ef667d9~TGLGAeWBQ3077730777epoutp03i
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20231031050409epoutp04897feb7a532e4021ec51208d4f973e9e~TGLTlhMEQ1304413044epoutp04y
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 05:04:09 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20231031050409epoutp04897feb7a532e4021ec51208d4f973e9e~TGLTlhMEQ1304413044epoutp04y
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698728635;
- bh=k/lVMXSkwDPYP0Iu3CnDYSV3MhHdei31fdvzf8AziZ0=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=I226O/1z+5X6JE8kGZsGVnH/z1wkej9sLXX5QBQpcwzIqR6yO9DGGrcIGrteNMaw6
- Nppe0MuxONI/q7ktIOfCUKf6kq6gtt2mTbFWzWxeNTdZgALwiOx0Iha/jnY/tbjcSq
- PE1ke1QXkVAchZeFyQ1QIDnO18wTEbjJT7SQIny0=
+ s=mail20170921; t=1698728649;
+ bh=Wm8OUFeYQmpaUHWn7R82vI9P+m2HZD+pOcKlI/TKdwM=;
+ h=Date:Subject:To:From:In-Reply-To:References:From;
+ b=cn6PM8iQ38N9UimlBwqUlBO1n1pSowuvGuDT+jMugpSeeJqpAhaU+D0+Vvaq+Cu2X
+ IxlkaX3e8wa5w+vrzi6G/nALSc3ftP6UBgU2YXFeemh8UvEeuBect1IBTBDfR+dkmm
+ 8xNv0KDolSou0BZ5pbdHC6SoiAZyeMYG7qrwRRo4=
 Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20231031050354epcas1p4334df83174ee80efb318adaa66ba42fc~TGLFz5D6q0772607726epcas1p45;
- Tue, 31 Oct 2023 05:03:54 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.36.133]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4SKJ2K4YMsz4x9QB; Tue, 31 Oct
- 2023 05:03:53 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- C4.93.09739.8BA80456; Tue, 31 Oct 2023 14:03:52 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93~TGLDpui2p0506105061epcas1p4H;
- Tue, 31 Oct 2023 05:03:52 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231031050352epsmtrp1bc148850dac049360369f5fca78f8239~TGLDpG3_92446624466epsmtrp1U;
- Tue, 31 Oct 2023 05:03:52 +0000 (GMT)
-X-AuditID: b6c32a37-e67fa7000000260b-7e-65408ab8b4d9
+ epcas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20231031050409epcas1p12c96d8e9995f2aed77c5bd75d833c537~TGLTSh1ya2367623676epcas1p1O;
+ Tue, 31 Oct 2023 05:04:09 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.38.232]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4SKJ2b73sZz4x9Pr; Tue, 31 Oct
+ 2023 05:04:07 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ AE.8F.09731.7CA80456; Tue, 31 Oct 2023 14:04:07 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20231031050407epcas1p250bf5bb525b416e61ca4b9a2425a30b8~TGLRwejN52477724777epcas1p2F;
+ Tue, 31 Oct 2023 05:04:07 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231031050407epsmtrp25973a18f30fa2772cb9eb4d9b13e7c52~TGLRv516C1485014850epsmtrp2m;
+ Tue, 31 Oct 2023 05:04:07 +0000 (GMT)
+X-AuditID: b6c32a36-2ef8ea8000002603-b5-65408ac7726c
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 91.88.08817.8BA80456; Tue, 31 Oct 2023 14:03:52 +0900 (KST)
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ C8.3A.07368.7CA80456; Tue, 31 Oct 2023 14:04:07 +0900 (KST)
 Received: from [10.113.113.235] (unknown [10.113.113.235]) by
  epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20231031050352epsmtip1c08142ea0d77260f2a2a25dc1e860ec9~TGLDcru7W1482814828epsmtip1R;
- Tue, 31 Oct 2023 05:03:52 +0000 (GMT)
-Message-ID: <e8ec2104-cd32-4eeb-ab62-9902f7b31896@samsung.com>
-Date: Tue, 31 Oct 2023 14:03:52 +0900
+ 20231031050407epsmtip1e8931a007f5a5caa863fa189e983fe73~TGLRlGNNJ1482814828epsmtip1g;
+ Tue, 31 Oct 2023 05:04:07 +0000 (GMT)
+Message-ID: <539140a0-3f14-4247-a802-be488b28ade5@samsung.com>
+Date: Tue, 31 Oct 2023 14:04:07 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: spl: select SPL_BLK for SPL_DM_MMC
+Subject: Re: [PATCH] power: mp5416: Fix LDO SVAL for MP5416 PMIC
 Content-Language: en-US
-To: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, u-boot@lists.denx.de
-Cc: Peng Fan <peng.fan@nxp.com>
+To: Sidharth Prabukumar <sidharth.prabukumar@gmail.com>, u-boot@lists.denx.de
 From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
+In-Reply-To: <20230924223022.313107-1-sidharth.prabukumar@gmail.com>
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrDKsWRmVeSWpSXmKPExsWy7bCmge6OLodUg7ePLS2evpnBYvFj1RdW
- i7d7O9kdmD0OXe1k9Th7Zwejx8Z3O5gCmKOybTJSE1NSixRS85LzUzLz0m2VvIPjneNNzQwM
- dQ0tLcyVFPISc1NtlVx8AnTdMnOANikplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1Jy
- CkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjO2fX3HWPCYveLY0++sDYwr2boYOTkkBEwkHp0/
- xNLFyMUhJLCDUaLv0xZmCOcTo8Tdg4vYIJxvjBL7305ihGlZtvomO0RiL6PE54swzntGieu3
- DjOBVPEK2Em82HCIFcRmEVCVODtlMiNEXFDi5MwnLCC2qIC8xP1bM9hBbGEBG4l7c5rBepkF
- xCVuPZkPZHNwiAj4SOzcxQ0RlpeY/mod2Eg2AR2J7d+Og5VzCrhI3Jm+lw2mZvvbOWAvSAjc
- Y5c4P/k/M8TVLhL/f/xggrCFJV4d38IOYUtJvOxvY4doaGaUWLrkICuE08Mo8a/hOjSYjCX2
- L50MdhGzgKbE+l36EGFFiZ2/5zJCbOaTePe1hxWkREKAV6KjTQiiREXi0uuXTDC77j75zwph
- e0hM6PrBNIFRcRZSsMxC8v4sJP/MQli8gJFlFaNYakFxbnpqsWGBMTy6k/NzNzGCk6GW+Q7G
- aW8/6B1iZOJgPMQowcGsJMJ72NQhVYg3JbGyKrUoP76oNCe1+BCjKTByJjJLiSbnA9NxXkm8
- oYmlgYmZkbGJhaGZoZI4761nvSlCAumJJanZqakFqUUwfUwcnFINTAfqFh2QO6OzKvUBU9tt
- /8ajjz/vYOizyggsW/hjP1PhlKC/zZKpJjt21n61s92fbWUzvUq+crW06qdXilzTZ9plW7Hy
- 3tLMS9p75k4ur3pj1ps3r4U0Js2f359419f7s2lh+jutdZsnP1Ze0qL4uK2+05Rt7hwFLW/W
- YzN0lyqWmk3nPeucXfjGKMh73TrjrrN9VzkW3jnQXmW/+bHCnYnCd09981g/d97/l+wrFVzE
- dvmWxm53eRissHlp085701xm7RP8VLpozvUPDRyu8etTWA9VPHbzvGa1SLKiMl5kPa/CDk5X
- o02bMsNdFv/9neDC9L86sMKLuZG96vG8qm+bNtXcuDJbIWXi4VOu35RYijMSDbWYi4oTAUgc
- Z00PBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKLMWRmVeSWpSXmKPExsWy7bCSnO6OLodUg0Nd0hZP38xgsfix6gur
- xdu9newOzB6Hrnayepy9s4PRY+O7HUwBzFFcNimpOZllqUX6dglcGdu+vmMseMxecezpd9YG
- xpVsXYycHBICJhLLVt9k72Lk4hAS2M0o0dg1nQkiISXx+elUoCIOIFtY4vDhYpCwkMBbRokv
- B7lAbF4BO4kXGw6xgtgsAqoSZ6dMZoSIC0qcnPmEBcQWFZCXuH9rBjuILSxgI3FvTjPYeGYB
- cYlbT+YzgYwXEfCR2LmLGyIsLzH91TpWiFXOErOf7wJrZRPQkdj+7ThYK6eAi8Sd6XvBLmMW
- UJdYP08IpnX72znMExiFZiE5YhaSZbMQOmYh6VjAyLKKUTK1oDg3PbfYsMAoL7Vcrzgxt7g0
- L10vOT93EyM45LW0djDuWfVB7xAjEwfjIUYJDmYlEd7Dpg6pQrwpiZVVqUX58UWlOanFhxil
- OViUxHm/ve5NERJITyxJzU5NLUgtgskycXBKNTCF82z4oXPNzSa/MvpFZvO5NyUbgiZciDln
- vOqW77QntwXTNH+KM3u3zeOT2jLtrkFbQONMzxmHLojdXB/ofWT9/BQZVedCmd13Tj/1tPr1
- azLTI52yTcxrv0Q/te10WMUh3uMckPQldN/qyg83m9cucun+43Pj/DQX3rdO0xXLrzadKG4z
- yUgscFz9ZKKQyeN//i+l7yrclg0+trPO0o23XOXdHLOefcFWi4Sj8y7Ha7as/+u3QtL/a/bP
- bXuWvBVRl7vyXDQuyuuFvLTQxPa7y05+Ofp01va6PXFl2X7cGRyv2dKOGtotuNwtGb2W73P4
- vWNVMpv6H7wKeDlNLOPFpcLDN36YPQ3Z8siZ13G6EktxRqKhFnNRcSIAY7HPY+gCAAA=
-X-CMS-MailID: 20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrIKsWRmVeSWpSXmKPExsWy7bCmvu7xLodUg4vXLCyevV7FZvF2bye7
+ A5PHzll32T3O3tnBGMAUlW2TkZqYklqkkJqXnJ+SmZduq+QdHO8cb2pmYKhraGlhrqSQl5ib
+ aqvk4hOg65aZAzRfSaEsMacUKBSQWFyspG9nU5RfWpKqkJFfXGKrlFqQklNgWqBXnJhbXJqX
+ rpeXWmJlaGBgZApUmJCd8W79KZaCuZwVb2beYWpgvM7excjJISFgIvHz4UbGLkYuDiGBHYwS
+ D/49BksICXxilHhzIwki8Y1RYtXSH3AdO7YvYIIo2sso0XtaH6LoPaPE0Z2HmUESvAJ2Ei2T
+ voI1sAioStyav4kdIi4ocXLmExYQW1RAXuL+rRlgcWEBB4kbW2eAxZkFxCVuPZkPtICDQ0TA
+ X+LfRzeQMJuAjsT2b8fB9nIKuEgs7TjLDFEuL7H97RxmkBskBI6xSzy4c4oZ4lAXiW3fLkPZ
+ whKvjm+BekBK4vO7vWwQDc2MEkuXHGSFcHoYJf41XGeDqDKW2L90MtgVzAKaEut36UOEFSV2
+ /p7LCLGZT+Ld1x5WkBIJAV6JjjYhiBIViUuvXzLB7Lr75D8rhO0hcWR3JxsksKYzSmzcdp5p
+ AqPCLKRwmYXk/1lInpuFcMUCRpZVjGKpBcW56anFhgVG8NhOzs/dxAhOe1pmOxgnvf2gd4iR
+ iYPxEKMEB7OSCO9hU4dUId6UxMqq1KL8+KLSnNTiQ4ymwNiZyCwlmpwPTLx5JfGGJpYGJmZG
+ xiYWhmaGSuK8cx73pggJpCeWpGanphakFsH0MXFwSjUwTcjgaU/9FFNnf2uGu/ir22yHj7Yz
+ szS86WG6vN+z5MgMzoQunc+JT82eGU+Py7N6/NFt+e4nH8y+rjaY28SYMmNX1L/Hjs0/3Wr1
+ zyz8cVFQbsMNzwVbRTezps92n5ouezRrp4mW04v3ojqyp7h7ezuKH2Q6FlRvNpx3zStb+v+c
+ 3hyGfK8C92sSGcv8jj2puryiXytzk6p2oFaTpxqfa0Tg2gU3ItT/F+4sfBS+fIrzZEH95Z+c
+ y6PfKXitdGSSXS6e6Rn3yL5xptLW2YJ929JlIxSnqhRk+eWJbc1syt4gbbbFuORA5Kf7QTz/
+ 5r9x3b7y5osFGyRyt6za2FqRO3O6RVqlS/WdbqapTVlKLMUZiYZazEXFiQBbOvbNBAQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrALMWRmVeSWpSXmKPExsWy7bCSnO7xLodUg5vrVS2evV7FZvF2bye7
+ A5PHzll32T3O3tnBGMAUxWWTkpqTWZZapG+XwJXxbv0ploK5nBVvZt5hamC8zt7FyMkhIWAi
+ sWP7AiYQW0hgN6PEtKvVEHEpic9Pp7J1MXIA2cIShw8XdzFyAZW8ZZQ40PGfGaSGV8BOomXS
+ V7A5LAKqErfmb2KHiAtKnJz5hAXEFhWQl7h/awZYXFjAQeLG1hlgcWYBcYlbT+aD7RUR8JU4
+ 1nifBeIGZ4nvHXsZQWw2AR2J7d+Og9VwCrhILO04ywxyD7OAusT6eUIQY+Qltr+dwzyBUXAW
+ ks2zkGyYhdAxC0nHAkaWVYySqQXFuem5yYYFhnmp5XrFibnFpXnpesn5uZsYwYGspbGD8d78
+ f3qHGJk4GA8xSnAwK4nwHjZ1SBXiTUmsrEotyo8vKs1JLT7EKM3BoiTOazhjdoqQQHpiSWp2
+ ampBahFMlomDU6qBaa3Zx+WCJ9hqmp+6FZ5/IN83Ub1PKLGpYpaG2B+dE7YS5ufLysyLXryo
+ PzZdaMk986i/Guc8fl9sNvUu2/XMXCPywN/DPzZMt9Q9LtDJUbqlaZVk5JGG2BsBDRmNfgdU
+ dV1EXUv1z0axX3j9a/253EfnJh83Dbomb28opLB74e8iuQ/XAjcHrZSy2rzmWgFHsnfvFL3X
+ xWU84S+O9xopHfabzZDodlKzSnn9VusZDzfeeHh+EsuG+3uU9jzSPnvuVaWAl/fqQNtd3MeV
+ Ppans8jurbwn1Hbc6dG2LF79Dd583n6TJ/1Qar5uxrHUY2Lbmfw6NZPTN8q2HXDoOP7crCOx
+ tmgZ8+5T+taFRpt+KrEUZyQaajEXFScCAK3/TgHTAgAA
+X-CMS-MailID: 20231031050407epcas1p250bf5bb525b416e61ca4b9a2425a30b8
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93
-References: <20230823154547.10711-1-oleksandr.suvorov@foundries.io>
- <CGME20231031050352epcas1p49c7f9320c0200242a7851041f6e6ad93@epcas1p4.samsung.com>
+X-CMS-RootMailID: 20231031050407epcas1p250bf5bb525b416e61ca4b9a2425a30b8
+References: <20230924223022.313107-1-sidharth.prabukumar@gmail.com>
+ <CGME20231031050407epcas1p250bf5bb525b416e61ca4b9a2425a30b8@epcas1p2.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,13 +130,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/24/23 00:45, Oleksandr Suvorov wrote:
-> mmc_bind() in mmc-uclass.c calls blk_create_devicef() which is
-> defined in blk-uclass.c, so SPL_BLK is required by SPL_DM_MMC.
-> Implicitly select SPL_BLK for SPL_DM_MMC.
+On 9/25/23 07:30, Sidharth Prabukumar wrote:
+> The MP5416 PMIC's LDO set-value formula is incorrect. This patch fixes
+> it by using the correct formula.
 > 
-> Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Sidharth Prabukumar <sidharth.prabukumar@gmail.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
@@ -146,20 +143,20 @@ Best Regards,
 Jaehoon Chung
 
 > ---
+>  include/power/mp5416.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
->  drivers/mmc/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index de01b9687ba..d24677de076 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -46,6 +46,7 @@ config SPL_DM_MMC
->  	depends on SPL_DM && DM_MMC
->  	default n if ARCH_MVEBU && !MVEBU_SPL_BOOT_DEVICE_MMC
->  	default y
-> +	select SPL_BLK
->  	help
->  	  This enables the MultiMediaCard (MMC) uclass which supports MMC and
->  	  Secure Digital I/O (SDIO) cards. Both removable (SD, micro-SD, etc.)
+> diff --git a/include/power/mp5416.h b/include/power/mp5416.h
+> index dc096fed3f..4326baaa42 100644
+> --- a/include/power/mp5416.h
+> +++ b/include/power/mp5416.h
+> @@ -32,7 +32,7 @@ enum {
+>  #define MP5416_VSET_SW3_GVAL(x) ((((x) & 0x7f) * 12500) + 600000)
+>  #define MP5416_VSET_SW4_GVAL(x) ((((x) & 0x7f) * 25000) + 800000)
+>  #define MP5416_VSET_LDO_GVAL(x) ((((x) & 0x7f) * 25000) + 800000)
+> -#define MP5416_VSET_LDO_SVAL(x) ((((x) & 0x7f) * 25000) + 800000)
+> +#define MP5416_VSET_LDO_SVAL(x) (((x) - 800000) / 25000)
+>  #define MP5416_VSET_SW1_SVAL(x) (((x) - 600000) / 12500)
+>  #define MP5416_VSET_SW2_SVAL(x) (((x) - 800000) / 25000)
+>  #define MP5416_VSET_SW3_SVAL(x) (((x) - 600000) / 12500)
 
