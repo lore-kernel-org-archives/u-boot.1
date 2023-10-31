@@ -4,66 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D831C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 11:23:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BDF0C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 11:33:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46E1E87B4D;
-	Tue, 31 Oct 2023 12:23:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D76987CA5;
+	Tue, 31 Oct 2023 12:33:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M1hJuQUa";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id DDFA787B1B; Tue, 31 Oct 2023 08:58:22 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1698752024;
+	bh=D2JG+Zgw5xTM3DnR7haQTAhiHl8zo6LlbTN+XOaqlUY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=faMaz7gAtLo4RhyOLzPFecxpZc1JCUoNJp011FrOOG1bUtVJNaRmstSxuI37ZNuyl
+	 whuaUewaS5w18ZHpSU8YPki+WFi/gSBtxbIezoSeH254PM+4APQgOfwrMihVqAVWK9
+	 O02mBG/wEMDofY7qyEjWMLyWcdtMq4XLOZlUbyD5wvdW1Xs2QSQhiaFh6BFbLc9ESt
+	 nEwqmP/MZD1JenB9WdwkS3eMjfrrICKLxXn5r6u30Wmx0vEx9rYIHaOgtGHrYGUCM9
+	 D9si6Z3dfK5gNsq4xF3+fYGu60o8p5AJmUfPlYxKWMzPoILj6e/SUfSvCUsMJh9lmr
+	 wyznhKoUcBqCQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4DD687134
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 08:58:19 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39V7wHHH118568;
- Tue, 31 Oct 2023 02:58:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698739097;
- bh=AtUhvmD2bLDX3cgNczhdnHe0/XzH07M0nctDIB9eKnk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=M1hJuQUa2oXt7O2IqjRaBkf7i/4FDNS/RGqA8bVnR4m6t8EvmqphGQZ0fBkiRWcpW
- Csle+0YyD9OUeFb19B18j7w/y3XQ+WfjjNNZWp37AJ//FLefFohnnnuSoNY0JOA7ym
- GTxCnDsFLyOOQi+JNcBhD7k3ytnyLxGVS6vtri6c=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39V7wHdB068974
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 31 Oct 2023 02:58:17 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 02:58:17 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 02:58:17 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39V7wGF0104617;
- Tue, 31 Oct 2023 02:58:17 -0500
-Date: Tue, 31 Oct 2023 13:28:16 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Nitin Yadav <n-yadav@ti.com>
-CC: <nm@ti.com>, <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 3/4] board: ti: am62x: add am62x_lpsk_*_defconfigs
- fragments
-Message-ID: <20231031075816.74ximv5vw3ixqt5r@dhruva>
-References: <20231030110138.1347603-1-n-yadav@ti.com>
- <20231030110138.1347603-4-n-yadav@ti.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 02D2987C99;
+ Tue, 31 Oct 2023 12:33:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1698752023;
+ bh=D2JG+Zgw5xTM3DnR7haQTAhiHl8zo6LlbTN+XOaqlUY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=qmrCcLBHpvWNnLqtJcwyc+PQ11o+xgASQC5E5FiCHa7klvHJUIEmdMzSWIexDcXOr
+ OFN51jyfg4lwwjGxrMCkrDPaHjNsmHnlW2lc4WRoPeaNlqZffjtMJQFBukuY/1/8sN
+ dQHTgGzsUq4lOoEoUrXmt8uNxFXN8Q2s9m93vjMEWfZ98eJ0J7H+4BEfxdzvfTVAqW
+ QX4wTBVv+68rrs6ih2UfeLK+T+qRC2XE4nfn3zkzXwrHP9+dFXQ2H+02blFFt4KwRV
+ uXNhedM0PVPNhyR+vR4Mx6Uw09po8vHu5lfRHx/0alcnSinwWUZWVMq15RJUFM4FMk
+ kvilLPAt58EyQ==
+Message-ID: <3b12d961-3077-4673-8076-1fc074a4c4d0@denx.de>
+Date: Tue, 31 Oct 2023 12:33:41 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231030110138.1347603-4-n-yadav@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Tue, 31 Oct 2023 12:23:29 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] cmd: mmc: Add mmc reg read command for reading card
+ registers
+To: =?UTF-8?Q?Lothar_Wa=C3=9Fmann?= <LW@KARO-electronics.de>
+Cc: u-boot@lists.denx.de, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tobias Waldekranz <tobias@waldekranz.com>
+References: <20231010124728.7930-1-marex@denx.de>
+ <20231031092641.0675aee4@karo-electronics.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20231031092641.0675aee4@karo-electronics.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,54 +75,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nitin,
-
-On Oct 30, 2023 at 16:31:37 +0530, Nitin Yadav wrote:
-> Add defconfig fragments for AM62x LP SK for for AM62x LP SK.
-
-Please check and re-word the commit message.
-
+On 10/31/23 09:26, Lothar Waßmann wrote:
+> Hi,
 > 
-> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
-> ---
->  board/ti/am62x/am62x_lpsk_a53.config | 5 +++++
->  board/ti/am62x/am62x_lpsk_r5.config  | 5 +++++
->  2 files changed, 10 insertions(+)
->  create mode 100644 board/ti/am62x/am62x_lpsk_a53.config
->  create mode 100644 board/ti/am62x/am62x_lpsk_r5.config
+> On Tue, 10 Oct 2023 14:47:28 +0200 Marek Vasut wrote:
+>> Add extension to the 'mmc' command to read out the card registers.
+>> Currently, only the eMMC OCR/CID/CSD/EXTCSD/RCA/DSR register are
+>> supported. A register value can either be displayed or read into
+>> an environment variable.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+>> Cc: Ramon Fried <rfried.dev@gmail.com>
+>> Cc: Roger Knecht <rknecht@pm.me>
+>> Cc: Sean Edmond <seanedmond@microsoft.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tobias Waldekranz <tobias@waldekranz.com>
+>> ---
+>> V2: - Update documentation
+>> ---
+>>   cmd/Kconfig           |  8 ++++
+>>   cmd/mmc.c             | 96 +++++++++++++++++++++++++++++++++++++++++++
+>>   doc/usage/cmd/mmc.rst | 26 ++++++++++++
+>>   3 files changed, 130 insertions(+)
+>>
+> [...]
+>> +	if (!strcmp(argv[2], "ocr")) {
+>> +		printf("OCR: 0x%08x\n", mmc->ocr);
+>> +		if (argv[4])
+>> +			env_set_hex(argv[4], mmc->ocr);
+>> +		return CMD_RET_SUCCESS;
+>> +	}
+>> +	if (!strcmp(argv[2], "rca")) {
+>> +		printf("RCA: 0x%08x\n", mmc->rca);
+>> +		if (argv[4])
+>> +			env_set_hex(argv[4], mmc->rca);
+>> +		return CMD_RET_SUCCESS;
+>> +	}
+>> +	if (!strcmp(argv[2], "extcsd") &&
+>> +	    mmc->version >= MMC_VERSION_4_41) {
+>> +		ret = mmc_send_ext_csd(mmc, ext_csd);
+>> +		if (ret)
+>> +			return ret;
+> 			return CMD_RET_FAILURE;
 > 
-> diff --git a/board/ti/am62x/am62x_lpsk_a53.config b/board/ti/am62x/am62x_lpsk_a53.config
-> new file mode 100644
-> index 0000000000..a568324997
-> --- /dev/null
-> +++ b/board/ti/am62x/am62x_lpsk_a53.config
-> @@ -0,0 +1,5 @@
-> +# Defconfig fragment to apply on top of am62x_evm_a53_defconfig
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="k3-am62-lp-sk"
-> +CONFIG_SPL_OF_LIST="k3-am62-lp-sk"
-> +CONFIG_OF_LIST="k3-am62-lp-sk"
-> diff --git a/board/ti/am62x/am62x_lpsk_r5.config b/board/ti/am62x/am62x_lpsk_r5.config
-> new file mode 100644
-> index 0000000000..1532f4e336
-> --- /dev/null
-> +++ b/board/ti/am62x/am62x_lpsk_r5.config
-> @@ -0,0 +1,5 @@
-> +# Defconfig fragment to apply on top of am62x_evm_r5_defconfig
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="k3-am62-r5-lp-sk"
-> +CONFIG_SPL_OF_LIST="k3-am62-r5-lp-sk"
-> +CONFIG_OF_LIST="k3-am62-r5-lp-sk"
 
-Changes look fine, so with commit message fixed,
-
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-
-> -- 
-> 2.25.1
-> 
-> 
-
--- 
-Best regards,
-Dhruva Gole <d-gole@ti.com>
+Fixed in V3, thanks .
