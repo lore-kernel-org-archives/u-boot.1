@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 735E3C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D2BC4167D
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:55:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE52087613;
-	Tue, 31 Oct 2023 14:44:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4454B87AAE;
+	Tue, 31 Oct 2023 14:55:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HvreiJAc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="njqOZZyB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D6D08760C; Tue, 31 Oct 2023 14:44:20 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 6204787ACE; Tue, 31 Oct 2023 14:55:21 +0100 (CET)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DCB386F6F
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:44:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F1948748F
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:55:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-40859c466efso43974405e9.3
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:44:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-6ce353df504so3608009a34.3
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 06:55:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1698759858; x=1699364658;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ucD9m4W2OaY8kUpn50QfRHu20CdLKMJZUNjUPahKgX0=;
- b=HvreiJAcaKoqth6eXqcXy7wbzmkj/h1moiqQ45Zh1KCtmYxV0/o1ePmIKNOYCkraJB
- vxCIyx4cQsX40IyL+eal+ZcYUKgdE86G4KiXq8d+QzU/BE7JpKYIbofYtnVg5j4jE0YQ
- sxSXYGof1rUghjGsJz9yh6/SnsNahnzMpvHFqP9BhltGHCTuY9YCiGSj4hZbAY3FyPe8
- Rx4KHhsQXRbrwlHobbSkwRbIUG/lm3JfJr2HI1RMF9Hslr5HgMPghno1lN3o0iewky6c
- RpVayXbovJlOAG+9McENmuAcjgeGBwApzAGsHJIjv0waECgbwckDsWEbJJiQEz4Pqw/M
- uhXQ==
+ d=konsulko.com; s=google; t=1698760517; x=1699365317; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fnzZeLc5sLPNoCpk9oYmGDQBGQ9zDncOvWQRvu1hwjY=;
+ b=njqOZZyBOfh6iGLp5j0M1MIgcjkv9I3jc5bYuOR7jzRPXrRxulKQpVit5GneYJ+Ink
+ DR4LbSsvGVs714LqxPyd5MD5oYJWyniRC8wMx6121Az5X2SWNPj2Ks+vSUdgTMhHQhWq
+ NsH0UG+tCoYQDQDlYONb6zpxq78jUFNqBbGbw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698759858; x=1699364658;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ucD9m4W2OaY8kUpn50QfRHu20CdLKMJZUNjUPahKgX0=;
- b=kLh49Y74jwJRHSLZlIUicRx7ss2EcvNpF+NZ07+jRgXFKNwT0R2HItb+FmhAGTZy+7
- K7RMGqLUxeX2wXdHMXINftWd9faU30CFnC2lFb+3wORFUoXz7+jnHOzzP4DpPSGjGBNt
- 9AD2sClI6hDDlpwnhxqFhwrM+aPV0wS/AvMwazpVql9S+Dz61O0X4RI4FqEjOc+XMvhd
- uzt0XN28hqY4YlSQvcLN6u+9EhITK6zOsJwUcl/bzf4Ls/m13VOModWQwcBdtlKxJkF1
- 43+6WHWhYbSQXiiZCN7UJMzE2dPzuTZkEYXixlrVoJb9ZLVqZ759FvlSf3/GDqkt09y+
- FKUw==
-X-Gm-Message-State: AOJu0YyonoZ2l909eIBLLkkf5JJVvEIpjWJ5VICgTb7T99UoouE6le95
- OhMtcBWwEC6UNW2dpLpvMHfnczpSKdkRoi4rDy8=
-X-Google-Smtp-Source: AGHT+IEV4vaUADKEdMtTLnhf6DfLOWMpsXVJOs088ICC9FDK9Yo6YD5GLu/0p9JFIqYV6SJL9lnOLA==
-X-Received: by 2002:a05:600c:1ca9:b0:403:9b7:a720 with SMTP id
- k41-20020a05600c1ca900b0040309b7a720mr11313714wms.1.1698759857584; 
- Tue, 31 Oct 2023 06:44:17 -0700 (PDT)
-Received: from [192.168.2.51] ([82.66.159.240])
- by smtp.gmail.com with ESMTPSA id
- p12-20020a05600c358c00b004060f0a0fd5sm1839737wmq.13.2023.10.31.06.44.17
+ d=1e100.net; s=20230601; t=1698760517; x=1699365317;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fnzZeLc5sLPNoCpk9oYmGDQBGQ9zDncOvWQRvu1hwjY=;
+ b=h0comDqf2c26NsYzYR2U7iL3DDvMKUBDpV93X5P1qMalDgxFGccRmlmEl2ScZiK8Ny
+ 3kxXtWjKQoA+0VhBzWvy2SR0CH1a0Gh35L0MN4TZyHNdh52NABtKcB3XZELfmR+TlzI7
+ rNFlVDsvvYwS+tJ68Ui8qTcduo7iEygQVsEj+ZAHDHL4jzbvxru4bfsFUKExS1lq/hSJ
+ 5RzLt3mqaRx8epicmpFLfEX79k1fH9b+2YDzvSTORMxpG/cLYatgCo/xOS9L7VF+Arn/
+ Ytx1OP/U4Xbc0mNSSk7QpE2pA1R6xVhPUN23RZGmyPi+n1Delk3Lwgh1cWjxRAM7dQik
+ JmeA==
+X-Gm-Message-State: AOJu0YxYTacOQoecTtzNvfpZqkyOkx8RU5LOi5mCAZBwvqRat9dnpUeM
+ U5XrO4O/yPqfSWenJHbzX4TWZQ==
+X-Google-Smtp-Source: AGHT+IGpaTygO9sfsFjQwYRBpuUuww+hddrYs1HWdYR2sIR3zjqFr00uIyb+4Kdhkmmjk6HUD7u/Eg==
+X-Received: by 2002:a05:6808:155:b0:3ae:55e5:43b6 with SMTP id
+ h21-20020a056808015500b003ae55e543b6mr12941352oie.48.1698760517501; 
+ Tue, 31 Oct 2023 06:55:17 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ c5-20020a05620a134500b0076f1d8b1c2dsm524923qkl.12.2023.10.31.06.55.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Oct 2023 06:44:17 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Wojciech Nizinski <niziak@spox.org>
-In-Reply-To: <20230925103714.4153612-1-niziak@spox.org>
-References: <20230925103714.4153612-1-niziak@spox.org>
-Subject: Re: [PATCH] fastboot: fix CRC32 chunk size checking
-Message-Id: <169875985703.23715.12855995127246102526.b4-ty@baylibre.com>
-Date: Tue, 31 Oct 2023 14:44:17 +0100
+ Tue, 31 Oct 2023 06:55:17 -0700 (PDT)
+Date: Tue, 31 Oct 2023 09:55:15 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Nitin Yadav <n-yadav@ti.com>
+Cc: nm@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 3/6] board: ti: am62x: Avoid overwriting reserve mem for
+ AM62 SIP
+Message-ID: <20231031135515.GK496310@bill-the-cat>
+References: <20231031132809.1524341-1-n-yadav@ti.com>
+ <20231031132809.1524341-4-n-yadav@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4-dev-6aa5d
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p4HQkpgCyms1DmLE"
+Content-Disposition: inline
+In-Reply-To: <20231031132809.1524341-4-n-yadav@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,24 +92,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Mon, 25 Sep 2023 12:37:15 +0200, Wojciech Nizinski wrote:
-> genimage create android-sparse file with CRC32 chunk at end. When
-> U-Boot's fastboot receives this chunk it returns error message:
-> `Fail Bogus chunk size for chunk type Dont Care`
-> 
-> According to reference implementation of Android's sparse file format:
-> 
-> <https://android.googlesource.com/platform/system/core/+/refs/heads/main/
-> libsparse/output_file.cpp#513>
-> 
-> [...]
+--p4HQkpgCyms1DmLE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+On Tue, Oct 31, 2023 at 06:58:06PM +0530, Nitin Yadav wrote:
+> AM62 SIP has 512MB RAM. But the top of the RAM is reserved for
+> TF-A and OPTEE. U-Boot relocating there would cause overwriting
+> of these reserved regions. Fix this by limit U-Boot to first
+> 64MB of RAM for all boards with 512MB.
+>=20
+> Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
+> ---
+>  board/ti/am62x/evm.c | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+>=20
+> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+> index ad93908840..ad3e415592 100644
+> --- a/board/ti/am62x/evm.c
+> +++ b/board/ti/am62x/evm.c
+> @@ -18,6 +18,7 @@
+>  #include <asm/io.h>
+>  #include <asm/arch/hardware.h>
+>  #include <dm/uclass.h>
+> +#include <linux/sizes.h>
+> =20
+>  DECLARE_GLOBAL_DATA_PTR;
+> =20
+> @@ -59,6 +60,16 @@ int dram_init_banksize(void)
+>  	return fdtdec_setup_memory_banksize();
+>  }
+> =20
+> +phys_size_t get_effective_memsize(void)
+> +{
+> +	/*
+> +	* Just below 512MB are TF-A and OPTEE reserve regions, thus
+> +	* SPL/U-Boot RAM has to start below that. Leave 64MB space for
+> +	* all reserved memories.
+> +	*/
+> +	return gd->ram_size =3D=3D SZ_512M ? SZ_512M - SZ_64M : gd->ram_size;
+> +}
 
-[1/1] fastboot: fix CRC32 chunk size checking
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/355aab94d1f675ec1118906e1f88dfdf6a3582eb
+Where are TF-A and OPTEE in other cases? Are we not able to read the
+reserved memory nodes and handle this through that?
 
--- 
-Mattijs
+--=20
+Tom
+
+--p4HQkpgCyms1DmLE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVBB0AACgkQFHw5/5Y0
+tyyD2Qv/ffITg8JPCniuhwD2kqPEWeHXwnTjDzv/S0M34XuREyZH0DGcWAS/crAd
+QWho/IEzit5+K96E+uLd3r0l6sIK9M+SBlMBq9evOhZVwgYD5cil6dXJ30Vk6hT8
+KJ+V0MxOYqQ/QRHP/TfV2oPQwweTzC93QXUR5Jrw8fZeZRyFXgFJ+lpKfC9sZOli
+MEhb/RcmAvCTmDjWnA9Oo1w9/gIxr14sKkHDpowLcYivlVX4RbJc4hWvH+ldyb3r
+XoxBZObaumsghl1orsvY6NBAZkGjFMg2PXwbK/GyQjCI+7hpHdultqXHmOU8sZ6S
+LikqNmBBl37iN3qFHlIcltq60ObId578y9y1gtRAFNuscOT+ylCSSbB2BtOLkmgm
+Y2NV3A7YRqeKbJdKtWGN3rrupIBdSF4ciK2KIcPbF8pr23k0j6DVmznFpDr9fU5s
+6bpobi9rN+B7/MVJyKUhfohE1el0EdLuRjAHbeEq5WoKCLTaVHGArJgja7aOD4NC
+EHZsgIh5
+=CiZS
+-----END PGP SIGNATURE-----
+
+--p4HQkpgCyms1DmLE--
