@@ -4,61 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB2DBC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 12:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD98C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 12:59:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D1CA87CBE;
-	Tue, 31 Oct 2023 13:56:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id D82C587C8F;
+	Tue, 31 Oct 2023 13:59:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oa2nU/oh";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="F9NC9Op3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 817CF87C9F; Tue, 31 Oct 2023 13:56:14 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6578987C8F; Tue, 31 Oct 2023 13:59:31 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::60e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A911187C9C
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 13:56:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 545F187B53
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 13:59:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (unknown [159.148.28.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 33B4D42796; 
- Tue, 31 Oct 2023 12:56:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1698756966;
- bh=q3seRi6QZb+dvSQg2/4Tx2ri3ZeifR1OAl8yvFCn6LQ=;
- h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
- MIME-Version;
- b=oa2nU/ohArS75lPKr3/Cg25MJSXPfZPIG4cAW0/IB0bvDSjtyA65EQ7h0HHrIWDty
- HBlUs5ykMQqNIdV1SgBTGJi7f5CPn+D6wN5QkFLUB1wZA7ugaaT50pVPZkT8Fnuiaa
- 8Q8p9NkBFuv0IGXWkrl3UEmcSL+62P0tMPLRnE49/KEYzD3BO+UD+sdWwYJJxL/yEq
- bDFXvjqkzzywBG0ltgLWg/cA3XhiS12xjMluxcN/XgoZD3QncPOl36H19/lgF59z6u
- p2swXUySSBwq3OTmjyhFQPB0y0Glh+Tbybvt9f81PdeqdePOrZmZW4AqF3ld3wdJ4H
- ha8K8SXHTs2Aw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 2/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-Date: Tue, 31 Oct 2023 14:55:52 +0200
-Message-Id: <20231031125552.26698-3-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
-References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kp3Z7QA9fsmXA/OpX4qKeHiZ6MGI95cYbEeOj5uf6QvwMVwawuSZ3gLlAZMBNMUY2FW5asAgaAinqYtI9Aw0ku+5UPhvR9ocu4tr42/rFJnmwebg0I1P7AI7y/Y/rTw5UvEwFT04nQZFB/mkHOgFVuIo5RBF3qvlobWSuYEZc4J/upK24RUU9LjrdL0j39TZ1S4zJgzo7LAsmWznLTryhUMjVtugv7puboP5EZYS90bXLplPDjBj2ngnxD+mnH/ps9oZu0vDU5VNYN2iWTLMLWs/8TdkCTAC5JOcAvqsNqMb+gHVmNg931PeptSh9Bm8+8CDROcfuZQ1AoZiZwVhiQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7mGmtX1c97XVM7DtDyHht9OpCvzrPNaObtQJ4YZf5+A=;
+ b=j4htzzuNL4iTc7zV/cHBiIAI0dOU19SbQ+9bG4i3SOWdEbQL/zsWFBthFl2C66lbBv9Z0KxXti/HTOe1FIuUfNVLBrzKnKSj+jHfOTxKLSMM2kI9SyWGAd1sAYqTzgqPRxf2YXbaX1FVI5p2OfsnbHDdPxa3cKnHpPIX+gRm+cEOT47leoCPxp4Q8+dT7jLK6nxn74u6RhPNd6Uh3VANP3fky4CJBQdsIac4sXhN6OFAh/QzI3DReQDI0zDfHAbfmbgBcKDjdeIThb4VEk9FKsu1piwQ7gw5PtBMnvFdZI/575IRfl+Cz4b9VSHi6SKTc5pIm9pf+xnnQSeeKnWg+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7mGmtX1c97XVM7DtDyHht9OpCvzrPNaObtQJ4YZf5+A=;
+ b=F9NC9Op3fIDFGRBaf2F8XxpM3+U97CbE14BlpcB69SKP90RanAMDENAJ8pP7kdHW7+i3vo/znXVpYDOGTn5N+TF6lrl0niV3R7RNmlH6kbSQukO714zpsEzZKhwxWl6spdDaaqCeKZTDx1c+WlN44e5VfX6d/uoBoWQpkyOVBtk=
+Received: from CY5PR19CA0131.namprd19.prod.outlook.com (2603:10b6:930:64::19)
+ by DM4PR12MB5309.namprd12.prod.outlook.com (2603:10b6:5:390::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.28; Tue, 31 Oct
+ 2023 12:59:24 +0000
+Received: from CY4PEPF0000E9D4.namprd03.prod.outlook.com
+ (2603:10b6:930:64:cafe::3a) by CY5PR19CA0131.outlook.office365.com
+ (2603:10b6:930:64::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.19 via Frontend
+ Transport; Tue, 31 Oct 2023 12:59:24 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000E9D4.mail.protection.outlook.com (10.167.241.147) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6954.19 via Frontend Transport; Tue, 31 Oct 2023 12:59:24 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 31 Oct
+ 2023 07:59:23 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Tue, 31 Oct
+ 2023 05:59:23 -0700
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.32 via Frontend
+ Transport; Tue, 31 Oct 2023 07:59:21 -0500
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>, <rfried.dev@gmail.com>,
+ <v.v.mitrofanov@yadro.com>, <seanedmond@microsoft.com>,
+ <emohandesi@linux.microsoft.com>
+Subject: [UBOOT PATCH v2] test/py: net: Add dhcp abort test
+Date: Tue, 31 Oct 2023 18:29:20 +0530
+Message-ID: <214217fdd0d69a107482c5c6f6dce96894aa5dc1.1698757115.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9D4:EE_|DM4PR12MB5309:EE_
+X-MS-Office365-Filtering-Correlation-Id: a72a4e49-b256-4e6e-4eb5-08dbda113531
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: XJqPzCgvKOSH9D/vDeGKce5zVQWs2Zv0hiNfPInSkQF2iIsBaNk/0dqtHtqRxiGivorXbWs2UfLg++mPadNjFqpx5uNrHwySS35m/oRtbnsVSrH7iILjjiWrAgMpzM7CO1Foc1+2290it5Y48wuC0kL5wvTOzor9O89PiMkq8Gytn806dKAqd0lPgcFta9HDliHI1LtOYwDLF2kdLnhNMVs24pqpY4iicxQvxvy1/h/Nr/IM45WDc8S8mAOkTr9fUcSWliQtNrEWifaM0dmYckSq7bSjx++wYX9hgnQ5z3E3bPsw2KpZ2e/RGaaw4rRjMKRd00sAv9PzzEkzvI7eKe50rJrR+8yTmjgcCkxbs237fs0QUx1t+KB7oXlzUxFeG5PClauAe0sYiQBUuBSIBPyCZ1p4eXXkHPvExt6HWRqjnE+hfinG7HkVXC8Rn/5Ye+EOmn87IqXLR6uRbBTEAUWTqFbP6euoMnTGmKH/rWPZx7kaKkis4FKQeMXgGjpC39bmHVNb9BXXc/Jd26mZI77d7uWdtVhFrhp4U0hiKET6GVt6NAH5AFv4FmGSVVxTvkB56/DdGTenbbhGnI1VQqh6rp+v3uGWf3ww01SrRkh6B36iw1ut8GIvQGx7F5HmQe6BJ4YPYigQM/Bk6IFpTrMAFGjAabxy8v69lljDhracPdgSZJ3n+aw+dQjjSD8egi+jkoDyBtklVeWDN5SS8X2nwgrI3qE/hy3xCOWde5EW9L+4sX0VXC/JFm5UP8TNTLiWWJ1TkLEoKzbKqA8ETw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(396003)(376002)(136003)(346002)(230922051799003)(82310400011)(64100799003)(186009)(1800799009)(451199024)(36840700001)(40470700004)(46966006)(478600001)(83380400001)(47076005)(26005)(2616005)(2906002)(336012)(426003)(5660300002)(41300700001)(54906003)(8936002)(44832011)(8676002)(4326008)(316002)(70206006)(70586007)(36860700001)(86362001)(36756003)(81166007)(356005)(82740400003)(6916009)(40480700001)(40460700003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2023 12:59:24.3686 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a72a4e49-b256-4e6e-4eb5-08dbda113531
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9D4.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5309
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,179 +123,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
-provides an interface to a physical entropy source.
+Abort the dhcp request in the middle by pressing ctrl + c on u-boot
+prompt and validate the abort status.
 
-A RNG driver based on the seed CSR is provided. It depends on
-mseccfg.sseed being set in the SBI firmware.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+Signed-off-by: Love Kumar <love.kumar@amd.com>
 ---
-v3:
-	no change
-v2:
-	catch exceptions
+Changes in v2:
+- Mark CMD_MII command dependency
 ---
- drivers/rng/Kconfig         |   8 +++
- drivers/rng/Makefile        |   1 +
- drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 125 insertions(+)
- create mode 100644 drivers/rng/riscv_zkr_rng.c
+ test/py/tests/test_net.py | 45 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
 
-diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-index 994cc35b27..4f6e367169 100644
---- a/drivers/rng/Kconfig
-+++ b/drivers/rng/Kconfig
-@@ -48,6 +48,14 @@ config RNG_OPTEE
- 	  accessible to normal world but reserved and used by the OP-TEE
- 	  to avoid the weakness of a software PRNG.
+diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+index b2241ae6a482..6d32ad2db687 100644
+--- a/test/py/tests/test_net.py
++++ b/test/py/tests/test_net.py
+@@ -7,6 +7,7 @@
+ import pytest
+ import u_boot_utils
+ import uuid
++import re
  
-+config RNG_RISCV_ZKR
-+	bool "RISC-V Zkr random number generator"
-+	depends on RISCV_SMODE
-+	help
-+	  This driver provides a Random Number Generator based on the
-+	  Zkr RISC-V ISA extension which provides an interface to an
-+	  NIST SP 800-90B or BSI AIS-31 compliant physical entropy source.
+ """
+ Note: This test relies on boardenv_* containing configuration values to define
+@@ -115,6 +116,50 @@ def test_net_dhcp(u_boot_console):
+     global net_set_up
+     net_set_up = True
+ 
++@pytest.mark.buildconfigspec("cmd_dhcp")
++@pytest.mark.buildconfigspec("cmd_mii")
++def test_net_dhcp_abort(u_boot_console):
++    """Test the dhcp command by pressing ctrl+c in the middle of dhcp request
 +
- config RNG_STM32
- 	bool "Enable random number generator for STM32"
- 	depends on ARCH_STM32 || ARCH_STM32MP
-diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-index 47b323e61e..a5d3ca4130 100644
---- a/drivers/rng/Makefile
-+++ b/drivers/rng/Makefile
-@@ -10,6 +10,7 @@ obj-$(CONFIG_RNG_MSM) += msm_rng.o
- obj-$(CONFIG_RNG_NPCM) += npcm_rng.o
- obj-$(CONFIG_RNG_OPTEE) += optee_rng.o
- obj-$(CONFIG_RNG_STM32) += stm32_rng.o
-+obj-$(CONFIG_RNG_RISCV_ZKR) += riscv_zkr_rng.o
- obj-$(CONFIG_RNG_ROCKCHIP) += rockchip_rng.o
- obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
- obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
-diff --git a/drivers/rng/riscv_zkr_rng.c b/drivers/rng/riscv_zkr_rng.c
-new file mode 100644
-index 0000000000..8c9e111e2e
---- /dev/null
-+++ b/drivers/rng/riscv_zkr_rng.c
-@@ -0,0 +1,116 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * The RISC-V Zkr extension provides CSR seed which provides access to a
-+ * random number generator.
-+ */
++    The boardenv_* file may be used to enable/disable this test; see the
++    comment at the beginning of this file.
++    """
 +
-+#define LOG_CATEGORY UCLASS_RNG
++    test_dhcp = u_boot_console.config.env.get("env__net_dhcp_server", False)
++    if not test_dhcp:
++        pytest.skip("No DHCP server available")
 +
-+#include <dm.h>
-+#include <interrupt.h>
-+#include <log.h>
-+#include <rng.h>
++    u_boot_console.run_command("setenv autoload no")
 +
-+#define DRIVER_NAME "riscv_zkr"
++    # Phy reset before running dhcp command
++    output = u_boot_console.run_command("mii device")
++    eth_num = re.search(r"Current device: '(.+?)'", output).groups()[0]
++    u_boot_console.run_command(f"mii device {eth_num}")
++    output = u_boot_console.run_command("mii info")
++    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
++    u_boot_console.run_command(f"mii modify {eth_addr} 0 0x8000 0x8000")
 +
-+enum opst {
-+	/** @BIST: built in self test running */
-+	BIST = 0b00,
-+	/** @WAIT: sufficient amount of entropy is not yet available */
-+	WAIT = 0b01,
-+	/** @ES16: 16bits of entropy available */
-+	ES16 = 0b10,
-+	/** @DEAD: unrecoverable self-test error */
-+	DEAD = 0b11,
-+};
++    u_boot_console.run_command("dhcp", wait_for_prompt=False)
++    try:
++        u_boot_console.wait_for("Waiting for PHY auto negotiation to complete")
++    except:
++        pytest.skip("Timeout waiting for PHY auto negotiation to complete")
 +
-+static unsigned long read_seed(void)
-+{
-+	unsigned long ret;
++    u_boot_console.wait_for("done")
 +
-+	__asm__ __volatile__("csrrw %0, seed, x0" : "=r" (ret) : : "memory");
++    # Sending Ctrl-C
++    output = u_boot_console.run_command(
++        chr(3), wait_for_echo=False, send_nl=False
++    )
 +
-+	return ret;
-+}
++    assert "TIMEOUT" not in output
++    assert "DHCP client bound to address " not in output
++    assert "Abort" in output
 +
-+static int riscv_zkr_read(struct udevice *dev, void *data, size_t len)
-+{
-+	u8 *ptr = data;
++    # Provide a time to recover from Abort - if it is not performed
++    # There is message like: ethernet@ff0e0000: No link.
++    u_boot_console.run_command("sleep 1")
 +
-+	while (len) {
-+		u32 val;
-+
-+		val = read_seed();
-+
-+		switch (val >> 30) {
-+		case BIST:
-+			continue;
-+		case WAIT:
-+			continue;
-+		case ES16:
-+			*ptr++ = val & 0xff;
-+			if (--len) {
-+				*ptr++ = val >> 8;
-+				--len;
-+			}
-+			break;
-+		case DEAD:
-+			return -ENODEV;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+/**
-+ * riscv_zkr_probe() - check if the seed register is available
-+ *
-+ * If the SBI software has not set mseccfg.sseed=1 or the Zkr
-+ * extension is not available this probe function will result
-+ * in an exception. Currently we cannot recover from this.
-+ *
-+ * @dev:	RNG device
-+ * Return:	0 if successfully probed
-+ */
-+static int riscv_zkr_probe(struct udevice *dev)
-+{
-+	struct resume_data resume;
-+	int ret;
-+	u32 val;
-+
-+	/* Check if reading seed leads to interrupt */
-+	set_resume(&resume);
-+	ret = setjmp(resume.jump);
-+	if (ret)
-+		log_debug("Exception %ld reading seed CSR\n", resume.code);
-+	else
-+		val = read_seed();
-+	set_resume(NULL);
-+	if (ret)
-+		return -ENODEV;
-+
-+	do {
-+		val = read_seed();
-+		val >>= 30;
-+	} while (val == BIST || val == WAIT);
-+
-+	if (val == DEAD)
-+		return -ENODEV;
-+
-+	return 0;
-+}
-+
-+static const struct dm_rng_ops riscv_zkr_ops = {
-+	.read = riscv_zkr_read,
-+};
-+
-+U_BOOT_DRIVER(riscv_zkr) = {
-+	.name = DRIVER_NAME,
-+	.id = UCLASS_RNG,
-+	.ops = &riscv_zkr_ops,
-+	.probe = riscv_zkr_probe,
-+};
-+
-+U_BOOT_DRVINFO(cpu_riscv_zkr) = {
-+	.name = DRIVER_NAME,
-+};
+ @pytest.mark.buildconfigspec('cmd_dhcp6')
+ def test_net_dhcp6(u_boot_console):
+     """Test the dhcp6 command.
 -- 
-2.40.1
+2.25.1
 
