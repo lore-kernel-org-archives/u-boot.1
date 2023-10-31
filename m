@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4784C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119ECC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 31 Oct 2023 13:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DED687AB8;
+	by phobos.denx.de (Postfix) with ESMTP id D8DE687C8F;
 	Tue, 31 Oct 2023 14:28:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HRPJKRxI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nBQiim3v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF60C87C9D; Tue, 31 Oct 2023 14:28:20 +0100 (CET)
+ id 715D287CAE; Tue, 31 Oct 2023 14:28:21 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA5E4875F9
- for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:28:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 069B887B5D
+ for <u-boot@lists.denx.de>; Tue, 31 Oct 2023 14:28:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-yadav@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSF6M015942;
- Tue, 31 Oct 2023 08:28:15 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSGuk015971;
+ Tue, 31 Oct 2023 08:28:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698758895;
- bh=MzWfFCXs5MwQloMTwU5ZauxbyP0RndOIjQRCC3WUsVU=;
+ s=ti-com-17Q1; t=1698758896;
+ bh=6Cp84QzYlpOupOc4eeWK/2uyj4hi+KoCySA+Oi8Ji4s=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=HRPJKRxIbClcC9Ou2DXCpLO5ogqvsK6AE/Y3FC4a93WaUQPsnBZvxpS2fZ79Q0UHM
- hZCT1FIKdhBvUJbCDGw2+lPXgFbFXdQQbP43ypblRv423sb87QbNrrM6S6luY0fYuV
- ZN1x3tPjOpitULHD/99h54NnSdYo52tohxZ7bWs4=
+ b=nBQiim3v+gYL/L5h2WeNVVwyiF6NteGpJDN/UK2LsqPKFGxbpoET5lnbTH8LAnf/3
+ xMCwZ/BvaS2UXXlDYdvXGZcVC7cqgSgd+uvBUKY3adGdYnl5jNFks00DVs8IWAeS5I
+ wUmm+srTVc83JDBoHZ5WtZBWGwTqutQ/JS90AKLs=
 Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDSF88106384
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39VDSGQm111292
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 31 Oct 2023 08:28:15 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE103.ent.ti.com
+ Tue, 31 Oct 2023 08:28:16 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE103.ent.ti.com
  (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 31
- Oct 2023 08:28:15 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 08:28:16 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 31 Oct 2023 08:28:15 -0500
+ Frontend Transport; Tue, 31 Oct 2023 08:28:16 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSEBR030417;
- Tue, 31 Oct 2023 08:28:14 -0500
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39VDSF9w003477;
+ Tue, 31 Oct 2023 08:28:16 -0500
 From: Nitin Yadav <n-yadav@ti.com>
 To: <nm@ti.com>, <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 3/6] board: ti: am62x: Avoid overwriting reserve mem for AM62
- SIP
-Date: Tue, 31 Oct 2023 18:58:06 +0530
-Message-ID: <20231031132809.1524341-4-n-yadav@ti.com>
+Subject: [PATCH 4/6] arm: dts: Add support for AM62x SIP SKEVM at R5 SPL
+Date: Tue, 31 Oct 2023 18:58:07 +0530
+Message-ID: <20231031132809.1524341-5-n-yadav@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231031132809.1524341-1-n-yadav@ti.com>
 References: <20231031132809.1524341-1-n-yadav@ti.com>
@@ -79,46 +78,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AM62 SIP has 512MB RAM. But the top of the RAM is reserved for
-TF-A and OPTEE. U-Boot relocating there would cause overwriting
-of these reserved regions. Fix this by limit U-Boot to first
-64MB of RAM for all boards with 512MB.
+The AM62x SIP SKEVM board has different type of DDR than
+AM62x SK board. This requires different r5 SPL device tree.
+These dt changes add support for AM62x SIP SKEVM at R5 SPL.
 
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+SK-AM62-SIP: https://www.ti.com/tool/download/SPRR482
+
 Signed-off-by: Nitin Yadav <n-yadav@ti.com>
 ---
- board/ti/am62x/evm.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/arm/dts/Makefile             |  1 +
+ arch/arm/dts/k3-am62sip-r5-sk.dts | 23 +++++++++++++++++++++++
+ 2 files changed, 24 insertions(+)
+ create mode 100644 arch/arm/dts/k3-am62sip-r5-sk.dts
 
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index ad93908840..ad3e415592 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -18,6 +18,7 @@
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
- #include <dm/uclass.h>
-+#include <linux/sizes.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -59,6 +60,16 @@ int dram_init_banksize(void)
- 	return fdtdec_setup_memory_banksize();
- }
- 
-+phys_size_t get_effective_memsize(void)
-+{
-+	/*
-+	* Just below 512MB are TF-A and OPTEE reserve regions, thus
-+	* SPL/U-Boot RAM has to start below that. Leave 64MB space for
-+	* all reserved memories.
-+	*/
-+	return gd->ram_size == SZ_512M ? SZ_512M - SZ_64M : gd->ram_size;
-+}
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 72ea57885f..e611dc1b3c 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1339,6 +1339,7 @@ dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
+ 			      k3-am625-r5-sk.dtb \
+ 			      k3-am62-lp-sk.dtb \
+ 			      k3-am62-r5-lp-sk.dtb \
++			      k3-am62sip-r5-sk.dtb \
+ 			      k3-am625-beagleplay.dtb \
+ 			      k3-am625-r5-beagleplay.dtb \
+ 			      k3-am625-verdin-wifi-dev.dtb \
+diff --git a/arch/arm/dts/k3-am62sip-r5-sk.dts b/arch/arm/dts/k3-am62sip-r5-sk.dts
+new file mode 100644
+index 0000000000..c95d80852a
+--- /dev/null
++++ b/arch/arm/dts/k3-am62sip-r5-sk.dts
+@@ -0,0 +1,23 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * AM62x SIP SKEVM dts file for R5 SPL
++ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++ */
 +
- #if defined(CONFIG_SPL_BUILD)
- static int video_setup(void)
- {
++#include "k3-am625-sk.dts"
++#include "k3-am62x-sip-ddr-lp4-50-800.dtsi"
++#include "k3-am62-ddr.dtsi"
++
++#include "k3-am625-sk-u-boot.dtsi"
++#include "k3-am62x-r5-sk-common.dtsi"
++#include "k3-am625-sk-binman.dtsi"
++
++/ {
++	memory@80000000 {
++		device_type = "memory";
++		/* 512M RAM */
++		reg = <0x00000000 0x80000000 0x00000000 0x20000000>;
++
++		bootph-pre-ram;
++	};
++};
 -- 
 2.25.1
 
