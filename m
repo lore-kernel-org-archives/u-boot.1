@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B6D2C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 16:32:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF31AC4167D
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 16:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9F4F87D61;
-	Wed,  1 Nov 2023 17:28:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65FA087D66;
+	Wed,  1 Nov 2023 17:28:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LWWZeFm+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IgW9gyji";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E55487D3E; Wed,  1 Nov 2023 17:28:52 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 292C187D5C; Wed,  1 Nov 2023 17:28:53 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A18A587D49
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 17:28:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2B5887D33
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 17:28:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7789a4c01ddso483219985a.1
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 09:28:43 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-672096e0e89so80506d6.1
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 09:28:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698856122; x=1699460922; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1698856120; x=1699460920; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5YuUYcd5qCMHGa8GmHwR6jjVCXP8Siwoeiigc8FQ5ZE=;
- b=LWWZeFm+MDCLeWOSSj3ZsUpf1T83TR0sUGs4RoS04+u1jCM3hYlF0VxHosIsXme2GX
- 4SAcqE/QKa2SaKHRMlIURYzvEVtJc02baBzGt3i/9bZbXV1gbhjrH08YDJ6d3EiizACo
- nqCThKJUTVywXdH+YYcUWo235znj39vLmaPpM=
+ :reply-to; bh=v3orS5t3KquFHwL6I6rLF4x7gOdrROeecb8N/AzXdJg=;
+ b=IgW9gyjiUzY/fw7Q64U4Q1FPDPfPCtRPj4rNol7Cqf5CjzRj4tNiNyqskQlZsIKI0f
+ WBns7c0LpEJjKEMRRPVQYVucfhfl6BKcqXdbDU3PxO8ngF+NkuCATLipXKi/k70aDsVc
+ uiinshmZWW+rgNRz/zk9fHLJcofIQfmCEsg3I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698856122; x=1699460922;
+ d=1e100.net; s=20230601; t=1698856120; x=1699460920;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5YuUYcd5qCMHGa8GmHwR6jjVCXP8Siwoeiigc8FQ5ZE=;
- b=c+hYzURrIm0W9sCuPKSFygKf972D5V5zqUleRWPwblbLv0WG/4572In5Q3hLgentBL
- 8dW/A7CZxit8aPy0kDltfpyPwymr9oOi1kd3QX5/L2aV6S2yJ3B//8DrknxRJKaTdfH/
- SJ6PhaiuLLHm3MP44XOS1Vjq8TjzgrEOoMlRYgF5oKGvDrOyUpjkmiC7M42gxTJeN6HL
- kTibi1aOxs8ZPmHJoReUvbrZ6b9AJrhtI2ZFHHZ5Y+insFHXLVtDMqX4UkdvGun1NOiQ
- yQbSKgAQ22VB2+yKR6LqWbsVJ3njldhCjQeleDRNrJCbpYzl3L11Ea25SvY/H/mfwqYz
- FT9A==
-X-Gm-Message-State: AOJu0YwhU9u8kTpHlW6K9yYKcAHLdATnGy6FoM+Dsnce6+c2wI7JTOYR
- +eUGgkveAVLJYC5lhu19KTWt5Ucz9munbfMzUB0Jxw==
-X-Google-Smtp-Source: AGHT+IHKhmk6xMNMowM3UIcMSiETZtgvNZbL/WWvlERaOBHavSaRhpUV6oYxHIUBnl8oCL+6pXIhOw==
-X-Received: by 2002:a05:6214:2122:b0:66d:50a8:2439 with SMTP id
- r2-20020a056214212200b0066d50a82439mr25652557qvc.23.1698856122259; 
- Wed, 01 Nov 2023 09:28:42 -0700 (PDT)
+ bh=v3orS5t3KquFHwL6I6rLF4x7gOdrROeecb8N/AzXdJg=;
+ b=XYcHxy2Qfg0doC1J9/9zHau2CucYbSPJCgKnoQ8rYHKw53Rz8DaQq94RLFNBhHptdp
+ BLqTnzBqg2df0yyqKf2E7gXUh5+8QSsq8Zd+QSWEU6ia8LwxYKOKuJuIYIjhfxV9dKDx
+ iN6LUXg01z8o9HlVnZKXLRlEuFt8TisLIQA0JK2AKko1ShnZF1KZ3QYsFHYxQhczsPsy
+ JCRmGO/G1oSCcSPylXt0ee1P+n9+BqduR77ESBTb0aiwc/BDDvpbq/L696G6pabR7QD/
+ lpKF2lBXRrZ/retHgAaGaf+zq6PHwMFOqlK+UFrIFtFLqN8JnXyKxDv45qECgB2c7jFD
+ REaA==
+X-Gm-Message-State: AOJu0YykiSxOJl4m/bwe9Ic5dNdHqHGgw0Y44GH30ZPTE5P8LWcnHrzo
+ XfRhA5m0/sWS89QbeUWF7NCk0doAD13aOHF1xB0mxQ==
+X-Google-Smtp-Source: AGHT+IF/Exgq107ad17018xRTRs9dJ4lzhRAqW0Fm1cteZxa3wX6w4UPm6W5ZBt01xGGoRS6yyN6JQ==
+X-Received: by 2002:ad4:5bc7:0:b0:672:4e8c:9ab1 with SMTP id
+ t7-20020ad45bc7000000b006724e8c9ab1mr10598367qvt.53.1698856119879; 
+ Wed, 01 Nov 2023 09:28:39 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- o3-20020a0cecc3000000b0065b21f1b687sm1610238qvq.80.2023.11.01.09.28.41
+ o3-20020a0cecc3000000b0065b21f1b687sm1610238qvq.80.2023.11.01.09.28.39
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Nov 2023 09:28:41 -0700 (PDT)
+ Wed, 01 Nov 2023 09:28:39 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 20/20] x86: Drop <common.h> from remaining header files
-Date: Wed,  1 Nov 2023 12:28:24 -0400
-Message-Id: <20231101162824.3755579-20-trini@konsulko.com>
+Subject: [PATCH 17/20] ti: k3: Drop <common.h> usage
+Date: Wed,  1 Nov 2023 12:28:21 -0400
+Message-Id: <20231101162824.3755579-17-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231101162824.3755579-1-trini@konsulko.com>
 References: <20231101162824.3755579-1-trini@konsulko.com>
@@ -88,39 +88,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-None of these header files need to include <common.h> so we can just
-drop that entirely.
+None of these files need <common.h> to be included, drop it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/x86/include/asm/arch-slimbootloader/slimbootloader.h | 1 -
- arch/x86/include/asm/dma-mapping.h                        | 1 -
- 2 files changed, 2 deletions(-)
+ arch/arm/mach-k3/am62ax/am62a_qos_data.c | 1 -
+ arch/arm/mach-k3/am642_init.c            | 1 -
+ arch/arm/mach-k3/am654_init.c            | 1 -
+ arch/arm/mach-k3/arm64-mmu.c             | 1 -
+ arch/arm/mach-k3/common.c                | 1 -
+ arch/arm/mach-k3/j721e_init.c            | 1 -
+ arch/arm/mach-k3/j721s2_init.c           | 1 -
+ arch/arm/mach-k3/r5_mpu.c                | 1 -
+ arch/arm/mach-k3/security.c              | 1 -
+ arch/arm/mach-k3/sysfw-loader.c          | 1 -
+ board/ti/am62ax/evm.c                    | 1 -
+ board/ti/am64x/evm.c                     | 1 -
+ board/ti/am65x/evm.c                     | 1 -
+ board/ti/j721e/evm.c                     | 1 -
+ board/ti/j721s2/evm.c                    | 1 -
+ 15 files changed, 15 deletions(-)
 
-diff --git a/arch/x86/include/asm/arch-slimbootloader/slimbootloader.h b/arch/x86/include/asm/arch-slimbootloader/slimbootloader.h
-index 05dd1b2b4471..460bfc4f2d4f 100644
---- a/arch/x86/include/asm/arch-slimbootloader/slimbootloader.h
-+++ b/arch/x86/include/asm/arch-slimbootloader/slimbootloader.h
-@@ -6,7 +6,6 @@
- #ifndef __SLIMBOOTLOADER_ARCH_H__
- #define __SLIMBOOTLOADER_ARCH_H__
- 
+diff --git a/arch/arm/mach-k3/am62ax/am62a_qos_data.c b/arch/arm/mach-k3/am62ax/am62a_qos_data.c
+index 01b76f7493c3..38db4f2f5c8e 100644
+--- a/arch/arm/mach-k3/am62ax/am62a_qos_data.c
++++ b/arch/arm/mach-k3/am62ax/am62a_qos_data.c
+@@ -5,7 +5,6 @@
+  *
+  * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
+  */
 -#include <common.h>
- #include <asm/hob.h>
+ #include <asm/arch/hardware.h>
+ #include "common.h"
  
- /**
-diff --git a/arch/x86/include/asm/dma-mapping.h b/arch/x86/include/asm/dma-mapping.h
-index 8be1003e6baf..c79ec64afd7a 100644
---- a/arch/x86/include/asm/dma-mapping.h
-+++ b/arch/x86/include/asm/dma-mapping.h
+diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
+index c871e92330bc..6085379f1db1 100644
+--- a/arch/arm/mach-k3/am642_init.c
++++ b/arch/arm/mach-k3/am642_init.c
 @@ -7,7 +7,6 @@
- #ifndef __ASM_X86_DMA_MAPPING_H
- #define __ASM_X86_DMA_MAPPING_H
+  *	Dave Gerlach <d-gerlach@ti.com>
+  */
  
 -#include <common.h>
- #include <asm/cache.h>
+ #include <fdt_support.h>
+ #include <spl.h>
+ #include <asm/io.h>
+diff --git a/arch/arm/mach-k3/am654_init.c b/arch/arm/mach-k3/am654_init.c
+index 0d3889cde2ba..2c5d6334527c 100644
+--- a/arch/arm/mach-k3/am654_init.c
++++ b/arch/arm/mach-k3/am654_init.c
+@@ -6,7 +6,6 @@
+  *	Lokesh Vutla <lokeshvutla@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <fdt_support.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
+index f8087d2421e7..14e7c896f915 100644
+--- a/arch/arm/mach-k3/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64-mmu.c
+@@ -9,7 +9,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
+ 
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index c3006ba387ec..eff2fff3c706 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -6,7 +6,6 @@
+  *	Lokesh Vutla <lokeshvutla@ti.com>
+  */
+ 
+-#include <common.h>
  #include <cpu_func.h>
- #include <linux/dma-direction.h>
+ #include <image.h>
+ #include <init.h>
+diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
+index b1f7e25ed092..099301d61ac0 100644
+--- a/arch/arm/mach-k3/j721e_init.c
++++ b/arch/arm/mach-k3/j721e_init.c
+@@ -6,7 +6,6 @@
+  *	Lokesh Vutla <lokeshvutla@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <spl.h>
+ #include <asm/io.h>
+diff --git a/arch/arm/mach-k3/j721s2_init.c b/arch/arm/mach-k3/j721s2_init.c
+index a5be84b147c0..7d4481009041 100644
+--- a/arch/arm/mach-k3/j721s2_init.c
++++ b/arch/arm/mach-k3/j721s2_init.c
+@@ -6,7 +6,6 @@
+  *	David Huang <d-huang@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <spl.h>
+ #include <asm/io.h>
+diff --git a/arch/arm/mach-k3/r5_mpu.c b/arch/arm/mach-k3/r5_mpu.c
+index 2aec96277e6f..6786e7e1e5af 100644
+--- a/arch/arm/mach-k3/r5_mpu.c
++++ b/arch/arm/mach-k3/r5_mpu.c
+@@ -6,7 +6,6 @@
+  *	Lokesh Vutla <lokeshvutla@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <linux/kernel.h>
+ #include "common.h"
+diff --git a/arch/arm/mach-k3/security.c b/arch/arm/mach-k3/security.c
+index 89659f479eed..3b7c26c6125a 100644
+--- a/arch/arm/mach-k3/security.c
++++ b/arch/arm/mach-k3/security.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <asm/io.h>
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <hang.h>
+diff --git a/arch/arm/mach-k3/sysfw-loader.c b/arch/arm/mach-k3/sysfw-loader.c
+index ef245fef9c4b..aa401ae3a09e 100644
+--- a/arch/arm/mach-k3/sysfw-loader.c
++++ b/arch/arm/mach-k3/sysfw-loader.c
+@@ -6,7 +6,6 @@
+  *	Andreas Dannenberg <dannenberg@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <image.h>
+ #include <log.h>
+diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
+index f2dd3b4192ee..cd3360a43029 100644
+--- a/board/ti/am62ax/evm.c
++++ b/board/ti/am62ax/evm.c
+@@ -8,7 +8,6 @@
+ 
+ #include <asm/arch/hardware.h>
+ #include <asm/io.h>
+-#include <common.h>
+ #include <dm/uclass.h>
+ #include <env.h>
+ #include <fdt_support.h>
+diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
+index a080b2b0d258..a6dcff2eb434 100644
+--- a/board/ti/am64x/evm.c
++++ b/board/ti/am64x/evm.c
+@@ -7,7 +7,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <dm/uclass.h>
+ #include <k3-ddrss.h>
+diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
+index 8bb13ef5b2b3..97a70954b232 100644
+--- a/board/ti/am65x/evm.c
++++ b/board/ti/am65x/evm.c
+@@ -7,7 +7,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <fdt_support.h>
+ #include <image.h>
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index d4f7c1d9f938..de9034206ae9 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -7,7 +7,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <env.h>
+ #include <fdt_support.h>
+ #include <generic-phy.h>
+diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+index 7795300abc80..7a911381094a 100644
+--- a/board/ti/j721s2/evm.c
++++ b/board/ti/j721s2/evm.c
+@@ -7,7 +7,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <env.h>
+ #include <fdt_support.h>
+ #include <generic-phy.h>
 -- 
 2.34.1
 
