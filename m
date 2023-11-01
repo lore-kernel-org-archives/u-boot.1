@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2801C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 17:06:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0EE7C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 17:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7E2887D32;
-	Wed,  1 Nov 2023 18:05:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CF2A8774F;
+	Wed,  1 Nov 2023 18:06:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PqQvFzoq";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F368F876D7; Wed,  1 Nov 2023 18:05:39 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E63287716
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 18:05:32 +0100 (CET)
+ id 788048708D; Wed,  1 Nov 2023 18:06:09 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id DB5DF876D7
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 18:06:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1H5Nwv047001;
- Wed, 1 Nov 2023 12:05:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698858323;
- bh=WdV7rHE7tzX1oFRHYow158EMtyifqTBh+3NUKj1cZDU=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=PqQvFzoqD6WWgxpbP3pkJvBAX5JoBqksK72gB+qY2z12SNsLB2LXRqIMjKEvy0L+t
- 0SZkIV5CxE1dBYBsAGloOfBnJLNKN7BtsjMs1SHrSzjQoCMJ6B+mx9YaZQYk8M5GLk
- 3VPNKoIfGI9hfl7a1ZJp8atzJQmD8HU8qiI/TUoM=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1H5Nrl069800
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 1 Nov 2023 12:05:23 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
- Nov 2023 12:05:23 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 1 Nov 2023 12:05:23 -0500
-Received: from lelv0327.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1H5KBA014687;
- Wed, 1 Nov 2023 12:05:22 -0500
-From: Andrew Davis <afd@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>, Praneeth Bajjuri
- <praneeth@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Mattijs
- Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
-Subject: [PATCH 2/2] configs: Add am62x_beagleplay_* defconfigs
-Date: Wed, 1 Nov 2023 12:05:19 -0500
-Message-ID: <20231101170519.39627-3-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231101170519.39627-1-afd@ti.com>
-References: <20231101170519.39627-1-afd@ti.com>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7D0B82F4;
+ Wed,  1 Nov 2023 10:06:45 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 640D53F738;
+ Wed,  1 Nov 2023 10:06:02 -0700 (PDT)
+Date: Wed, 1 Nov 2023 17:05:59 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Anup Patel
+ <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>, Chanho Park
+ <chanho61.park@samsung.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ u-boot@lists.denx.de, Peter Hoyes <Peter.Hoyes@arm.com>
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Message-ID: <20231101170559.680ab493@donnerap.manchester.arm.com>
+In-Reply-To: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,40 +60,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add am62x_beagleplay_r5_defconfig for R5 SPL and
-am62x_beagleplay_a53_defconfig for A53 SPL and U-Boot support.
+On Tue, 31 Oct 2023 14:55:50 +0200
+Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
 
-These defconfigs are composite defconfigs built from the config fragment
-board/ti/am62x/beagleplay_*.config applied onto the base
-am62x_evm_*_defconfig.
+Hi Heinrich,
 
-Signed-off-by: Andrew Davis <afd@ti.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
- configs/am62x_beagleplay_a53_defconfig | 3 +++
- configs/am62x_beagleplay_r5_defconfig  | 3 +++
- 2 files changed, 6 insertions(+)
- create mode 100644 configs/am62x_beagleplay_a53_defconfig
- create mode 100644 configs/am62x_beagleplay_r5_defconfig
+> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+> provides an interface to a physical entropy source.
+> 
+> A RNG driver based on the seed CSR is provided. It depends on
+> mseccfg.sseed being set in the SBI firmware.
 
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-new file mode 100644
-index 00000000000..ad708e15397
---- /dev/null
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -0,0 +1,3 @@
-+// The BeaglePlay defconfig for A53 core
-+#include "configs/am62x_evm_a53_defconfig"
-+#include "board/ti/am62x/beagleplay_a53.config"
-diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
-new file mode 100644
-index 00000000000..276b1f81a3e
---- /dev/null
-+++ b/configs/am62x_beagleplay_r5_defconfig
-@@ -0,0 +1,3 @@
-+// The BeaglePlay defconfig for R5 core
-+#include "configs/am62x_evm_r5_defconfig"
-+#include "board/ti/am62x/beagleplay_r5.config"
--- 
-2.39.2
+As you might have seen, I added a similar driver for the respective Arm
+functionality:
+https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
+
+And I see that you seem to use the same mechanism to probe and init the
+driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
+implemented.
+One downside of this approach is that the driver is always loaded (and
+visible in the DM tree), even with the feature not being available.
+That doesn't seem too much of a problem on the first glance, but it
+occupies a device number, and any subsequent other DM_RNG devices
+(like virtio-rng) typically get higher device numbers. So without
+the feature, but with virtio-rng, I get:
+VExpress64# rng 0
+No RNG device
+VExpress64# rng 1
+00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...
+....
+
+Now the EFI code always picks RNG device 0, which means we don't get
+entropy in this case.
+
+Do you have any idea how to solve this?
+Maybe EFI tries to probe further - but that sounds arbitrary.
+Or we find another way for probing the device, maybe via some artificial
+CPU feature "bus"? There is UCLASS_CPU, but that doesn't look helpful?
+
+If anyone has any idea, I'd be grateful.
+
+Cheers,
+Andre
+
+> If the seed CSR readable, is not determinable by S-mode without risking
+> an exception. For safe driver probing allow to resume via a longjmp
+> after an exception.
+> 
+> As the driver depends on mseccfg.sseed=1 we should wait with merging the
+> driver until a decision has been taken in the RISC-V PRS TG on prescribing
+> this.
+> 
+> Setting mseccfg.sseed=1 is queued for OpenSBI [1]. This has been discussed
+> in the RISC-V Boot & Runtime Services TG. Standardization has to be pursued
+> via the upcoming platform specification.
+> 
+> A bug fix for QEMU relating to the Zkr extension is available in [2].
+> 
+> A similar Linux driver has been proposed in [3].
+> 
+> [1] lib: sbi: Configure seed bits when MSECCFG is readable
+>     https://patchwork.ozlabs.org/project/opensbi/patch/20230712083254.1585244-1-sameo@rivosinc.com/
+> [2] [PATCH v2 1/1] target/riscv: correct csr_ops[CSR_MSECCFG]
+>     https://lore.kernel.org/qemu-devel/20231030102105.19501-1-heinrich.schuchardt@canonical.com/
+> [3] [PATCH v4 4/4] RISC-V: Implement archrandom when Zkr is available
+>     https://lore.kernel.org/linux-riscv/20230712084134.1648008-5-sameo@rivosinc.com/
+> 
+> v3:
+> 	Add API documentation.
+> v2:
+> 	Catch exception if mseccfg.sseed=0.
+> 
+> Heinrich Schuchardt (2):
+>   riscv: allow resume after exception
+>   rng: Provide a RNG based on the RISC-V Zkr ISA extension
+> 
+>  arch/riscv/lib/interrupts.c |  13 ++++
+>  doc/api/index.rst           |   1 +
+>  drivers/rng/Kconfig         |   8 +++
+>  drivers/rng/Makefile        |   1 +
+>  drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
+>  include/interrupt.h         |  45 ++++++++++++++
+>  6 files changed, 184 insertions(+)
+>  create mode 100644 drivers/rng/riscv_zkr_rng.c
+>  create mode 100644 include/interrupt.h
+> 
 
