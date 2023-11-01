@@ -4,113 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4534C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 12:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C28C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 12:10:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6CA4868D1;
-	Wed,  1 Nov 2023 13:06:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BFFD8770E;
+	Wed,  1 Nov 2023 13:10:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h2yoRBJC";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="NRb9zwgq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4B4187700; Wed,  1 Nov 2023 13:06:33 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::60e])
+ id BBA2F87710; Wed,  1 Nov 2023 13:10:27 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74F958767F
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 13:06:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D276287702
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 13:10:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N88Ese6xktkHFdO8Z49ovPZaNmg3x/BG2GJPuZOqDPe+wMpuEApF43xhaDGGISbzqGFCIfFXI8ez25EAh5Gs2I3cK/VXNLsblPbY+rQICLNJe0Hnwjp2mx4K5HN9vSkejYKONlGrTGTUkaC8gOlb7J9VzttOGgzVLMQ/mix/u6DzvYhZTK4tHiUEDU+Dk8FEP+Qnn/qhK/jnwRihp32F6VkmlZBUieYL5ng1i6xRRKwH7XFeISHq3wtxaqPJ6E5fWetwJZ9rMoVxkd5pZfg0gVa82GXrH715SV+SOrQYdeONVyRewz4/cCjPrNwwMymTuY0WzhdvlFsl48DL4PkFOA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pDiOiX0I5gGeKJlDEqq0DZA2e66OSAOpHYee7xnEn/I=;
- b=nlvOkGCp6jS7p8onXETR5Q1pfOzNAhJ++GMluvEq79oAFUsi3U7piLiwnCPuxNc1+rUek07ZNNKF4F/9/x6DgA5Omb1CkqZcr9FiakM0Kso7O54yuOsLCYWoRyDA5OYQrX3ttFpv0tdeYVCWolwA3URyXaeSacsbpHdrjpOitMWJHrzLApVAm7r3c9jCkDMfq2QOXsjAgFepgVBEalC17HrD9zeDN9KVajSNXoeuKtv4sySbpFM9optzQR8fUmk/iFv961+TsKk/Skdkz+ARHJJM5OXdkb0X8MlNkikzMM34S/XIsSohctw2eUri/G5urwEYjv6Z5s1g0EiwNO+4kA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pDiOiX0I5gGeKJlDEqq0DZA2e66OSAOpHYee7xnEn/I=;
- b=h2yoRBJCXik2gOU9g6ZbQEHmwBQkxfpeTOPKoPSLU4ITBdYW8bQUMY25Oc7FcxVplRmzGK4MYCJHy0UG4RkTWqbJFPFvImDcVfntKgSIcTUVgikuGfaLL7ekAqXZX1p33+5zvO1N93hHes47FvrCdj8Vdv13lkuXy9n04MxCJto=
-Received: from MW4PR03CA0304.namprd03.prod.outlook.com (2603:10b6:303:dd::9)
- by MW6PR12MB9017.namprd12.prod.outlook.com (2603:10b6:303:23b::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.29; Wed, 1 Nov
- 2023 12:06:22 +0000
-Received: from CO1PEPF000044FC.namprd21.prod.outlook.com
- (2603:10b6:303:dd:cafe::22) by MW4PR03CA0304.outlook.office365.com
- (2603:10b6:303:dd::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.19 via Frontend
- Transport; Wed, 1 Nov 2023 12:06:22 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044FC.mail.protection.outlook.com (10.167.241.202) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6977.0 via Frontend Transport; Wed, 1 Nov 2023 12:06:21 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Wed, 1 Nov
- 2023 07:06:18 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Piyush Mehta
- <piyush.mehta@amd.com>, Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
- Robert Hancock <robert.hancock@calian.com>, Simon Glass <sjg@chromium.org>,
- Tanmay Shah <tanmay.shah@amd.com>
-Subject: [PATCH] arm64: zynqmp: Add description for nvmem efuse layout
-Date: Wed, 1 Nov 2023 13:06:15 +0100
-Message-ID: <af81299cafc2bd13ed30dcd69bdf6efb5fbb7f68.1698840373.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20231101121019epoutp01c2e9e58b2432ad7bdf90156b5aadfdb8~Tforh1H9Y1239412394epoutp01N
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 12:10:19 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20231101121019epoutp01c2e9e58b2432ad7bdf90156b5aadfdb8~Tforh1H9Y1239412394epoutp01N
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1698840619;
+ bh=Fk2jbHnaVJEb091Mgz3tm4RxvqwTB0uJTyUft96jQ6E=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=NRb9zwgqH/6/PATQjXRMRbHoAF4eryYXbyGw1Y2RWq2QyQ89AzXKa6yw7ZKbEBUD3
+ HESfLU2J8tYLplJjVU9G2QZZAlxvsVYN++m9SEsQVvYnAi+qIAmqK3ZxCEyO6LZ1O8
+ YGTan2eHF8vVc0v2bVecV0eDtu87RbHBeMujtmQI=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTP id
+ 20231101121018epcas2p168060df23372db5a282c96230f7b2a24~TforA6ppi0531205312epcas2p1T;
+ Wed,  1 Nov 2023 12:10:18 +0000 (GMT)
+Received: from epsmges2p4.samsung.com (unknown [182.195.36.90]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4SL5Rt3bfRz4x9Pt; Wed,  1 Nov
+ 2023 12:10:18 +0000 (GMT)
+Received: from epcas2p2.samsung.com ( [182.195.41.54]) by
+ epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ D7.02.09607.A2042456; Wed,  1 Nov 2023 21:10:18 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20231101121018epcas2p2bc3c00b78b4f7048ea876691b9054724~TfoqU9tVe1183111831epcas2p2f;
+ Wed,  1 Nov 2023 12:10:18 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20231101121018epsmtrp124d5d6c08d327354e8b0b8500f11dc02~TfoqUWvr23072630726epsmtrp11;
+ Wed,  1 Nov 2023 12:10:18 +0000 (GMT)
+X-AuditID: b6c32a48-963ff70000002587-bd-6542402a34df
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 74.E2.18939.92042456; Wed,  1 Nov 2023 21:10:17 +0900 (KST)
+Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20231101121017epsmtip26b918681d4c5aef3bb2c78a7963aa892~TfoqHPI8k0204102041epsmtip2S;
+ Wed,  1 Nov 2023 12:10:17 +0000 (GMT)
+From: "Chanho Park" <chanho61.park@samsung.com>
+To: "'Heinrich Schuchardt'" <xypron.glpk@gmx.de>
+Cc: "'Sughosh Ganu'" <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>,
+ "'Rick Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>,
+ "'Jaehoon Chung'" <jh80.chung@samsung.com>
+In-Reply-To: <e3df899c-0510-4dc1-8868-0c5a41732350@gmx.de>
+Subject: RE: [PATCH v3 3/5] rng: Add StarFive JH7110 RNG driver
+Date: Wed, 1 Nov 2023 21:10:17 +0900
+Message-ID: <01c701da0cbc$60e227f0$22a677d0$@samsung.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1881; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=8YBIptOQgxdbpkYUFxiyjSQgA5lDqzXFxsWXiSeyTlk=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlQne1NesdD/0mpaEoYnXl46d+lq858un8au8u63T/R0q
- o3l78zriGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABNJLWeY78xlWLhcLk/65/27
- BvfUAq2Dd/9NY5gfyNl4JFV2ldoiw8XsV175/RF4OZ0XAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044FC:EE_|MW6PR12MB9017:EE_
-X-MS-Office365-Filtering-Correlation-Id: a9f9cffa-803d-4b5a-ad1e-08dbdad2f6c8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 8H89KbKOOZuLvkPYqCtdR7WYGjQ4RnoO4Zn/CPF63BbGTKA0BwddSdGC/BmPUOm0r/pbpyX/kYHeMIOZYlzeTDU9mMzCEI9y5n7mTONzYIsBvl8f2tSoGDd/0dc/pUUCIUciOq7f9ICPhA23ZszFnH9V6jwZAl53we8V4+P51qTAIGzHFPo8wDS5bkLZSW8vXbjBT4m13sXJMrUpPEKhXIL6Rpf4C+/1Zlhq+QmCiSUPAFyqHq1/xr5Kr/0Ccwaisu360FLGU+QFexRYcNbTpiMAhxhnqoAA2QdEQ0ETVgJaQqPaNTz+ykkwP7K65ZvhzaePv5eNiH3aHpNRKscjECkDTQip3zCvSW62i72IQwm0BLjoc5kHWMb+RrFXVCR6GQsORXax5A8c3646rpNJ//5GzaWGGwS+94QSCU6aySJWU56Y3IVFHVmLvZ2DQNqKP5Cm0/FW+tvwAExdgbKKtJXqiJDLIavjsCQMetB8sLXRA8YgB8+S9HXgAi5/l6bMAuoCNNLu2k6tAEi794Smb2vrvaAzaVcZoeYhYtP0rHqsXkErPu0UVaiphW1VwQN02r+IjDFvLc5XEgwAYkzaM63fYVMG3/A9wAFW2YFi9tz4P5HpLAh8Bk1yIlzlMazdK+qcqUNDa4OLH71Zm+aMJb/ImIjmnhVl8CmO/iznGXj+AflvLuP/GlvCKlBRjbjedQu8frpUSvhFuV327BgsmRMioSeXH0PGl9vKTPP3mp7abKrJMqbHTMriDBbmPC/vF1+rJ4q6Gz4Pqk1PM6chmQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(346002)(39860400002)(396003)(376002)(230922051799003)(64100799003)(451199024)(1800799009)(186009)(82310400011)(36840700001)(40470700004)(46966006)(356005)(81166007)(40480700001)(82740400003)(2616005)(36756003)(86362001)(47076005)(26005)(426003)(336012)(478600001)(6666004)(16526019)(36860700001)(83380400001)(8676002)(110136005)(8936002)(316002)(54906003)(966005)(70206006)(70586007)(41300700001)(2906002)(5660300002)(4326008)(44832011)(40460700003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2023 12:06:21.9672 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a9f9cffa-803d-4b5a-ad1e-08dbdad2f6c8
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044FC.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB9017
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQJPEwdrzRv1A9DpY22BSMay/vjCawI90PYIARQgf8sCg3uM7K9MpsQA
+Content-Language: en-us
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIJsWRmVeSWpSXmKPExsWy7bCmma6Wg1OqweEDUhY3frWxWrx9cZbR
+ 4t41OYu3ezvZLQ5P/cBo8fjQayYHNo89p2cxe3z4GOdx59oeNo+zd3YwevRtWcUYwBqVbZOR
+ mpiSWqSQmpecn5KZl26r5B0c7xxvamZgqGtoaWGupJCXmJtqq+TiE6DrlpkDdICSQlliTilQ
+ KCCxuFhJ386mKL+0JFUhI7+4xFYptSAlp8C8QK84Mbe4NC9dLy+1xMrQwMDIFKgwITujZ/El
+ loIrphXXZ19nbGCco9XFyMEhIWAiMfefQRcjF4eQwA5Gidl7NjNDOJ8YJXb/nMYK53ybsoax
+ i5ETrGPa4cVMEImdjBLLZr5ig3BeMEo87ZnNAlLFJqAv8bJjGyuILSJgIHFxzjJ2kCJmgd2M
+ Eud/zQMr4hSwkuhYdBtsrLCAvUTLlc1gcRYBFYn/t/rYQGxeAUuJtXe3skDYghInZz4Bs5kF
+ 5CW2v53DDHGSgsTPp8uglrlJfF4+kRGiRlzi5dEjYIslBGZySLTcOAv1g4tE18XNbBC2sMSr
+ 41vYIWwpiZf9beyQkCmX2LEsCaK3hVGiuW0P1DJ7iR83p7CC1DALaEqs36UPUa4sceQW1Gl8
+ Eh2H/0JN4ZXoaBOCaFSXOLB9OguELSvRPecz6wRGpVlIHpuF5LFZSB6YhbBrASPLKkax1ILi
+ 3PTUYqMCE3hkJ+fnbmIEp00tjx2Ms99+0DvEyMTBeIhRgoNZSYT3sKlDqhBvSmJlVWpRfnxR
+ aU5q8SFGU2BQT2SWEk3OBybuvJJ4QxNLAxMzM0NzI1MDcyVx3nutc1OEBNITS1KzU1MLUotg
+ +pg4OKUamPrMfU78NXZNOP1HPdo0s5XrwtOT+zbuDmbsSkkR7fB4sPPo8YRbDWUxp8RYzfgX
+ T9DomRTMfGLt9oZ7NfVzloXNt72hOufdhKv7trCfMvKafnrSyUozR8HCiXyylvlLnhY0flnh
+ ZLlVIiDWXOguly5nHcNMab0Tu+/aJS4/9M3rTtO+gCunes4//H6qtXQ5w927Layv3x7WrO+7
+ +7p6x6+jl9znXBX2+nfouzlb54b+w2f2b3+guS3JuT3XyGb/3gqeJ8kHvp89r1BR9/ruB9Gl
+ EhtK/RqENRbHb765P9JoPe8s9bad0/07t91Yf8Pm75uTlV3C8sfVTuxv4SwS2bSy6PLLA2bq
+ N6OYXmr/kVZUYinOSDTUYi4qTgQA8bDc4iQEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprIIsWRmVeSWpSXmKPExsWy7bCSvK6Wg1OqwQ1uixu/2lgt3r44y2hx
+ 75qcxdu9newWh6d+YLR4fOg1kwObx57Ts5g9PnyM87hzbQ+bx9k7Oxg9+rasYgxgjeKySUnN
+ ySxLLdK3S+DK6Fl8iaXgimnF9dnXGRsY52h1MXJySAiYSEw7vJgJxBYS2M4osXSvEURcVuLZ
+ ux3sELawxP2WI6xdjFxANc8YJZ78us8KkmAT0Jd42bENzBYRMJC4OGcZO0gRs8B+Ronu06/Z
+ ITq+MkrcftrPDFLFKWAl0bHoNiOILSxgL9FyZTMLiM0ioCLx/1YfG4jNK2ApsfbuVhYIW1Di
+ 5MwnYDazgLbE05tPoWx5ie1v5zBDnKcg8fPpMlaYs/8cncsGc/ar41vYIa5zk/i8fCIjRK+4
+ xMujR9gnMIrOQrJiFpIVs5CsmIWkZQEjyypG0dSC4tz03OQCQ73ixNzi0rx0veT83E2M4FjT
+ CtrBuGz9X71DjEwcjIcYJTiYlUR4D5s6pArxpiRWVqUW5ccXleakFh9ilOZgURLnVc7pTBES
+ SE8sSc1OTS1ILYLJMnFwSjUwJWTP/rxptlqpXOqTZZ+vmx1We51srP+ntfDLSskUQ1ZLVU3F
+ Ut4Jq0W5Y9WN52ZtdHD6br5HvNwpvUpVq+N5YZPA5yaTwzM9f0Wym2xs7rvxotH1fITHVZbp
+ V2smTdi2d62C2KTIB3ND+040RT0ufaVwe8fjS++n/dkw+fvKRWvfhj7lP23MrM42a9rjyHmX
+ jP45Tzt68KTJYrMlF0vubpfKOTa5ojiyJdHNRPLatABBner1OZk2HfoXL7K/d1hV+T2q/cmJ
+ m+3egp4zOV7wL19jpXt6ViAT4/+r/JPN6lSfbrmR/Pmet+FlAXHujh/fDr1y7JyR2c718nn1
+ tRzjRsHWXpnYgw3/f5Xum7R4jhJLcUaioRZzUXEiAKX8FtwkAwAA
+X-CMS-MailID: 20231101121018epcas2p2bc3c00b78b4f7048ea876691b9054724
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231101114040epcas2p3658fcb45be38f9928884983b7441c5ef
+References: <20231101114017.1845960-1-chanho61.park@samsung.com>
+ <CGME20231101114040epcas2p3658fcb45be38f9928884983b7441c5ef@epcas2p3.samsung.com>
+ <20231101114017.1845960-4-chanho61.park@samsung.com>
+ <e3df899c-0510-4dc1-8868-0c5a41732350@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,77 +138,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Based on discussion with DT folks at link below there is not going to be
-any name restrictions for child names. That's why add description for
-current nvmem layout.
+Hi,
 
-Link: https://lore.kernel.org/lkml/20231013101450.573-3-praveen.teja.kundanala@amd.com/
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+> -----Original Message-----
+> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Sent: Wednesday, November 1, 2023 9:00 PM
+> To: Chanho Park <chanho61.park@samsung.com>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>; u-boot@lists.denx.de; Rick
+> Chen <rick@andestech.com>; Leo <ycliang@andestech.com>; Jaehoon Chung
+> <jh80.chung@samsung.com>
+> Subject: Re: [PATCH v3 3/5] rng: Add StarFive JH7110 RNG driver
+> 
+> On 11/1/23 13:40, Chanho Park wrote:
+> > Adds to support JH7110 TRNG driver which is based on linux kernel's
+> > jh7110-trng.c. This can support to generate 256-bit random numbers and
+> > 128-bit but this makes 256-bit default for convenience.
+> >
+> > Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+> > ---
+> >   drivers/rng/Kconfig      |   6 +
+> >   drivers/rng/Makefile     |   1 +
+> >   drivers/rng/jh7110_rng.c | 271 +++++++++++++++++++++++++++++++++++++++
+> >   3 files changed, 278 insertions(+)
+> >   create mode 100644 drivers/rng/jh7110_rng.c
+> >
+> > diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+> > index 994cc35b2744..0dba1e06b429 100644
+> > --- a/drivers/rng/Kconfig
+> > +++ b/drivers/rng/Kconfig
+> > @@ -91,4 +91,10 @@ config TPM_RNG
+> >   	  functionality. Enable random number generator on TPM
+> >   	  devices.
+> >
+> > +config RNG_JH7110
+> > +	bool "StarFive JH7110 Random Number Generator support"
+> > +	depends on DM_RNG && STARFIVE_JH7110
+> > +	help
+> > +	  Enable True Random Number Generator in StarFive JH7110 SoCs.
+> > +
+> >   endif
+> > diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
+> > index 47b323e61ee3..9de762c8a1c3 100644
+> > --- a/drivers/rng/Makefile
+> > +++ b/drivers/rng/Makefile
+> > @@ -15,3 +15,4 @@ obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
+> >   obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
+> >   obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
+> >   obj-$(CONFIG_TPM_RNG) += tpm_rng.o
+> > +obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
+> > diff --git a/drivers/rng/jh7110_rng.c b/drivers/rng/jh7110_rng.c
+> > new file mode 100644
+> > index 000000000000..075a2d78eb2c
+> > --- /dev/null
+> > +++ b/drivers/rng/jh7110_rng.c
+> > @@ -0,0 +1,271 @@
+> > +// SPDX-License-Identifier: GPL-2.0-or-later
+> > +/*
+> > + * TRNG driver for the StarFive JH7110 SoC
+> > + *
+> > + */
+> > +
+> > +#include <clk.h>
+> > +#include <dm.h>
+> > +#include <reset.h>
+> > +#include <rng.h>
+> > +#include <asm/io.h>
+> > +#include <linux/iopoll.h>
+> > +
+> > +/* trng register offset */
+> > +#define STARFIVE_CTRL			0x00
+> > +#define STARFIVE_STAT			0x04
+> > +#define STARFIVE_MODE			0x08
+> > +#define STARFIVE_SMODE			0x0C
+> > +#define STARFIVE_IE			0x10
+> > +#define STARFIVE_ISTAT			0x14
+> > +#define STARFIVE_RAND0			0x20
+> > +#define STARFIVE_RAND1			0x24
+> > +#define STARFIVE_RAND2			0x28
+> > +#define STARFIVE_RAND3			0x2C
+> > +#define STARFIVE_RAND4			0x30
+> > +#define STARFIVE_RAND5			0x34
+> > +#define STARFIVE_RAND6			0x38
+> > +#define STARFIVE_RAND7			0x3C
+> > +#define STARFIVE_AUTO_RQSTS		0x60
+> > +#define STARFIVE_AUTO_AGE		0x64
+> > +
+> > +/* CTRL CMD */
+> > +#define STARFIVE_CTRL_EXEC_NOP		0x0
+> > +#define STARFIVE_CTRL_GENE_RANDNUM	0x1
+> > +#define STARFIVE_CTRL_EXEC_RANDRESEED	0x2
+> > +
+> > +/* STAT */
+> > +#define STARFIVE_STAT_NONCE_MODE	BIT(2)
+> > +#define STARFIVE_STAT_R256		BIT(3)
+> > +#define STARFIVE_STAT_MISSION_MODE	BIT(8)
+> > +#define STARFIVE_STAT_SEEDED		BIT(9)
+> > +#define STARFIVE_STAT_LAST_RESEED(x)	((x) << 16)
+> > +#define STARFIVE_STAT_SRVC_RQST		BIT(27)
+> > +#define STARFIVE_STAT_RAND_GENERATING	BIT(30)
+> > +#define STARFIVE_STAT_RAND_SEEDING	BIT(31)
+> > +#define STARFIVE_STAT_RUNNING		(STARFIVE_STAT_RAND_GENERATING | \
+> > +					 STARFIVE_STAT_RAND_SEEDING)
+> > +
+> > +/* MODE */
+> > +#define STARFIVE_MODE_R256		BIT(3)
+> > +
+> > +/* SMODE */
+> > +#define STARFIVE_SMODE_NONCE_MODE	BIT(2)
+> > +#define STARFIVE_SMODE_MISSION_MODE	BIT(8)
+> > +#define STARFIVE_SMODE_MAX_REJECTS(x)	((x) << 16)
+> > +
+> > +/* IE */
+> > +#define STARFIVE_IE_RAND_RDY_EN		BIT(0)
+> > +#define STARFIVE_IE_SEED_DONE_EN	BIT(1)
+> > +#define STARFIVE_IE_LFSR_LOCKUP_EN	BIT(4)
+> > +#define STARFIVE_IE_GLBL_EN		BIT(31)
+> > +
+> > +#define STARFIVE_IE_ALL			(STARFIVE_IE_GLBL_EN | \
+> > +					 STARFIVE_IE_RAND_RDY_EN | \
+> > +					 STARFIVE_IE_SEED_DONE_EN | \
+> > +					 STARFIVE_IE_LFSR_LOCKUP_EN)
+> > +
+> > +/* ISTAT */
+> > +#define STARFIVE_ISTAT_RAND_RDY		BIT(0)
+> > +#define STARFIVE_ISTAT_SEED_DONE	BIT(1)
+> > +#define STARFIVE_ISTAT_LFSR_LOCKUP	BIT(4)
+> > +
+> > +#define STARFIVE_RAND_LEN		sizeof(u32)
+> > +
+> > +enum mode {
+> > +	PRNG_128BIT,
+> > +	PRNG_256BIT,
+> > +};
+> > +
+> > +struct starfive_trng_plat {
+> > +	void *base;
+> > +	struct clk *hclk;
+> > +	struct clk *ahb;
+> > +	struct reset_ctl *rst;
+> > +	u32 mode;
+> > +};
+> > +
+> > +static inline int starfive_trng_wait_idle(struct starfive_trng_plat
+> *trng)
+> > +{
+> > +	u32 stat;
+> > +
+> > +	return readl_relaxed_poll_timeout(trng->base + STARFIVE_STAT, stat,
+> > +					  !(stat & STARFIVE_STAT_RUNNING),
+> > +					  100000);
+> > +}
+> > +
+> > +static inline void starfive_trng_irq_mask_clear(struct
+> starfive_trng_plat *trng)
+> > +{
+> > +	/* clear register: ISTAT */
+> > +	u32 data = readl(trng->base + STARFIVE_ISTAT);
+> > +
+> > +	writel(data, trng->base + STARFIVE_ISTAT);
+> > +}
+> > +
+> > +static int starfive_trng_cmd(struct starfive_trng_plat *trng, u32 cmd)
+> > +{
+> > +	u32 stat, flg;
+> > +	int ret;
+> > +
+> > +	switch (cmd) {
+> > +	case STARFIVE_CTRL_GENE_RANDNUM:
+> > +		writel(cmd, trng->base + STARFIVE_CTRL);
+> > +		flg = STARFIVE_ISTAT_RAND_RDY;
+> > +		break;
+> > +	case STARFIVE_CTRL_EXEC_RANDRESEED:
+> > +		writel(cmd, trng->base + STARFIVE_CTRL);
+> > +		flg = STARFIVE_ISTAT_SEED_DONE;
+> > +		break;
+> > +	default:
+> > +		return -EINVAL;
+> > +	}
+> > +
+> > +	ret = readl_relaxed_poll_timeout(trng->base + STARFIVE_ISTAT, stat,
+> > +					 (stat & flg), 1000);
+> > +	writel(flg, trng->base + STARFIVE_ISTAT);
+> > +
+> > +	return ret;
+> > +}
+> > +
+> > +static int starfive_trng_read(struct udevice *dev, void *data, size_t
+> len)
+> > +{
+> > +	struct starfive_trng_plat *trng = dev_get_plat(dev);
+> > +	u8 *buffer = data;
+> > +	int iter_mask;
+> > +
+> > +	if (trng->mode == PRNG_256BIT)
+> > +		iter_mask = 7;
+> > +	else
+> > +		iter_mask = 3;
+> > +
+> > +	for (int i = 0; len; ++i, i &= iter_mask) {
+> > +		u32 val;
+> > +		size_t step;
+> > +		int ret;
+> > +
+> 
+> I think you are missing
+> 
+>     if (!i) {
+> 
+> here as one call to starfive_trng_cmd is giving you 128 or 256 bits of
+> entropy.
+> 
+> > +		ret = starfive_trng_cmd(trng, STARFIVE_CTRL_GENE_RANDNUM);
+> 
+> }
 
- arch/arm/dts/zynqmp.dtsi | 49 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
+Oh. I missed this while I made the patches. Thanks for the heads up.
+I'll quickly update it in the next patch.
 
-diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-index 2253e773d386..735543513f02 100644
---- a/arch/arm/dts/zynqmp.dtsi
-+++ b/arch/arm/dts/zynqmp.dtsi
-@@ -214,6 +214,55 @@
- 				soc_revision: soc-revision@0 {
- 					reg = <0x0 0x4>;
- 				};
-+				/* efuse access */
-+				efuse_dna: efuse-dna@c {
-+					reg = <0xc 0xc>;
-+				};
-+				efuse_usr0: efuse-usr0@20 {
-+					reg = <0x20 0x4>;
-+				};
-+				efuse_usr1: efuse-usr1@24 {
-+					reg = <0x24 0x4>;
-+				};
-+				efuse_usr2: efuse-usr2@28 {
-+					reg = <0x28 0x4>;
-+				};
-+				efuse_usr3: efuse-usr3@2c {
-+					reg = <0x2c 0x4>;
-+				};
-+				efuse_usr4: efuse-usr4@30 {
-+					reg = <0x30 0x4>;
-+				};
-+				efuse_usr5: efuse-usr5@34 {
-+					reg = <0x34 0x4>;
-+				};
-+				efuse_usr6: efuse-usr6@38 {
-+					reg = <0x38 0x4>;
-+				};
-+				efuse_usr7: efuse-usr7@3c {
-+					reg = <0x3c 0x4>;
-+				};
-+				efuse_miscusr: efuse-miscusr@40 {
-+					reg = <0x40 0x4>;
-+				};
-+				efuse_chash: efuse-chash@50 {
-+					reg = <0x50 0x4>;
-+				};
-+				efuse_pufmisc: efuse-pufmisc@54 {
-+					reg = <0x54 0x4>;
-+				};
-+				efuse_sec: efuse-sec@58 {
-+					reg = <0x58 0x4>;
-+				};
-+				efuse_spkid: efuse-spkid@5c {
-+					reg = <0x5c 0x4>;
-+				};
-+				efuse_ppk0hash: efuse-ppk0hash@a0 {
-+					reg = <0xa0 0x30>;
-+				};
-+				efuse_ppk1hash: efuse-ppk1hash@d0 {
-+					reg = <0xd0 0x30>;
-+				};
- 			};
- 
- 			zynqmp_pcap: pcap {
--- 
-2.36.1
+Best Regards,
+Chanho Park
 
