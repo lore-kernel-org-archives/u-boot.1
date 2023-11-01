@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FBDBC4167D
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 21:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BBD6C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 21:03:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96A2D876F2;
-	Wed,  1 Nov 2023 22:03:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CE9B87692;
+	Wed,  1 Nov 2023 22:03:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PP7gCpvK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KA7arW0S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF97F87691; Wed,  1 Nov 2023 22:03:22 +0100 (CET)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id A84BD87712; Wed,  1 Nov 2023 22:03:24 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A8787683
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 22:03:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B0826876D4
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 22:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-41cd4446cf5so796701cf.3
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 14:03:19 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-66d0760cd20so2555006d6.0
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 14:03:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698872598; x=1699477398; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698872600; x=1699477400; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/a6a+3+KknYQBjDrfWgAfVyQkwZfFxPQu3zc5H9BHVA=;
- b=PP7gCpvKj0xUlEjpSwKxdPiAuXPHbOByIqMC7c7l9AIdg4jjxVyeCVn+/5cCapf38J
- eSKLMRMo4rdLOKVLpsaf8QfAFS+h8X4ilTp9gmYb3x8inQ68w/1XcJlA1+TaoSQeo0y9
- 1lNm9jOV+vZzr5fP9VWE/k8p30Q/GxXLLvz1ZESQV4Ty4Flhxjd2s+eQyN4aI8fbF4ux
- h8seZTR8Oi2F168DQ21nhBzQmKCOOvixSIsf4EQcxlD9j4zyfLabnTzMWIan07cnTWmd
- eJAKhTuB7HFPfoXa4jFjZAus8yuxqivwJxRlL6BOlwJl3ZyXHp7ZAxm67JPgawS8gm63
- R28A==
+ bh=zvOo+4CM7292F52lH54iGZRSc1xjahtTMtwWt1xOnmc=;
+ b=KA7arW0SWdc7xPcF3WYap5sEzNleH5ZcNv8Zc1IKtlC0Rbzb67V04s4dOffCj2AsQ8
+ VqtSKCuVfOcark05p5vHUUKXotPdn/3a41zl93nvY/jFEO0MLpAQNZBG0d4Tgf2N1gqT
+ hAfPEPQAxVo1KWd3Xhn/f1+rxPsn4VU4VV9k7jhdm2bXXPqfpqfAtugGqWxZo8MJL0HH
+ lc8/3gTRy4uIViPdbzKCf8rUPH5T5wwVujmL+sv8zCMuFjTVm+fXCsbEzgUMocGiNMSQ
+ P24bYKnYumUsja9C0crcjc+233/yJwS030aSxBmDAmTnnPDqO8THYt4vkjGNan4DpmJo
+ XGvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698872598; x=1699477398;
+ d=1e100.net; s=20230601; t=1698872600; x=1699477400;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/a6a+3+KknYQBjDrfWgAfVyQkwZfFxPQu3zc5H9BHVA=;
- b=cf4mxpMkXGWEkNoo/dfih8ZtSHa25ga0vX1lvz2z1RCW6Mp40ude4px8uWLvs0v/jk
- bDXLzawboIi+GGT0VzziObFkfcntSHNI4vYQuFOoImJ153mpv85Gj4fa7DzPu/iRpMEy
- hik0lmVbwOI1/Was/vRrvgFrzRUDQ4TvdqX9+9bKpH14fE+IUlSM9Vdezz1G/rPmk5xa
- uhi+f5idMHbOWaYweqwUHVWAybqyCez2830fnRH9p4HuIH6l7l1kHl/JxexBda0ZaYBS
- fYljf1ZVxBByA5SSQzdOVKwztGS6AX1oq3VkpnJQpfQNvnrNyh1zr3wofZ4VwWo5/lml
- +GjA==
-X-Gm-Message-State: AOJu0Yw3/Ts+omknIP/7ds8+wSFHLDjxL6y2H76G2eTV1gwWCi5P7HGh
- iBMAryd8ZVRs8m78ZkBJ0+s=
-X-Google-Smtp-Source: AGHT+IF4qr+3gpVxKeERDVu7CKaxPsujEYQypOGOb+hB60Y4nO42X/33MrfLj4/d8vxCX1wlzXlk9w==
-X-Received: by 2002:a05:622a:190c:b0:418:1088:7d69 with SMTP id
- w12-20020a05622a190c00b0041810887d69mr19829466qtc.18.1698872597871; 
- Wed, 01 Nov 2023 14:03:17 -0700 (PDT)
+ bh=zvOo+4CM7292F52lH54iGZRSc1xjahtTMtwWt1xOnmc=;
+ b=J5Y14ZvBgFhOGqXbkBb11SxLd8GzAgsXzo3QNOWRe3ZbDjcKvZRXPunbVdoumI7VmT
+ 5LeA3luIh7wrZZR7X1T9vBe9WR764WS74cNGfMjACKZu+RETbB7SjTGEln6a6qZrdPsH
+ 5sv4BnhQ5fPbLvXVpTX0WDAk+AwALOZRLkF9m/XLb/hAFhyMZXNWsk0weR8oslovY9NK
+ Xp8Lzz31vZwoF6Gsu3CeCVsnXvoXozEXDqwHjgsoFLw/vLRZUfjYE+Sl05aO9hwxMU5U
+ Pu48GySxSTe7je3o+KBATtyywQDVFsGTju2GM4VOhj0Fa2sZejLwagHM2S7D7T3EY9mC
+ pffw==
+X-Gm-Message-State: AOJu0YwrQPCPAs9Ru68Cf0wAXhaXby3fdYMHMTIti7LsASPCC1cjz2WZ
+ 2Xoy63PRFkB9dD4Eg7a9bRc=
+X-Google-Smtp-Source: AGHT+IHqwofBkRZwGc7iinrnKTVFdggCWaiQmIbWVZuS5lGcANj7eQk+OM7ou4HKOX8zThUO6XnDcg==
+X-Received: by 2002:a05:6214:5592:b0:66c:fa89:a894 with SMTP id
+ mi18-20020a056214559200b0066cfa89a894mr5718644qvb.10.1698872600345; 
+ Wed, 01 Nov 2023 14:03:20 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- b19-20020ac86bd3000000b0041b3a1462fbsm1709371qtt.37.2023.11.01.14.03.17
+ r14-20020a0cf60e000000b0066d32666a27sm1785183qvm.66.2023.11.01.14.03.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 14:03:17 -0700 (PDT)
+ Wed, 01 Nov 2023 14:03:19 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
-To: bigunclemax@gmail.com,
-	u-boot@lists.denx.de
+To: Lukasz Majewski <lukma@denx.de>,
+	forbidden405@outlook.com
 Cc: Sean Anderson <seanga2@gmail.com>,
-	Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH v1] clk: use private clk struct in CLK_CCF's
- enable/disable functions
-Date: Wed,  1 Nov 2023 17:03:07 -0400
-Message-Id: <169887250361.1352526.9757279098005499151.b4-ty@gmail.com>
+	u-boot@lists.denx.de
+Subject: Re: (subset) [PATCH RESEND 0/5] clk: A few bugfixes/enhancements for
+ CCF
+Date: Wed,  1 Nov 2023 17:03:09 -0400
+Message-Id: <169887250361.1352526.3142070703195089231.b4-ty@gmail.com>
 X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20230905221649.3577929-1-bigunclemax@gmail.com>
-References: <20230905221649.3577929-1-bigunclemax@gmail.com>
+In-Reply-To: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
+References: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -95,24 +95,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Sep 2023 01:16:49 +0300, Maksim Kiselev wrote:
-> In clk_enable()/clk_disable() functions, when CCF is activated,
-> we must pass a private clk struct to enable()/disable() ops functions.
-> Otherwise, the use of a container_of() construction within these ops
-> should be banned. Because passing a non-private clk struct to
-> container_of() results in an out of range error.
+On Fri, 18 Aug 2023 01:03:59 +0800, Yang Xiwen wrote:
+> They are found during my development for HiSilicon clock driver. Details
+> are in commit logs.
 > 
-> At the moment, clk-mux, clk-fixed-factor, clk-gate and possibly other
-> clocks use container_of() in their enable()/disable() functions.
-> Therefore, for these functions to work correclty, private clk struct
-> must be passed.
 > 
-> [...]
 
 Applied, thanks!
 
-[1/1] clk: use private clk struct in CLK_CCF's enable/disable functions
-      commit: 0755db477fa7478e2659568bb7da038a9eaabb8d
+[3/5] clk: also handle ENOENT in *_optional functions
+      commit: c4b52fda6924e92c6745351f32c4cafc36034170
 
 Best regards,
 -- 
