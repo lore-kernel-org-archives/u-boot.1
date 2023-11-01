@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49BB5C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 20:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A13C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 20:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C471B87700;
-	Wed,  1 Nov 2023 21:35:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 50FBD87714;
+	Wed,  1 Nov 2023 21:35:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VTIN9f4L";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FMdomSdl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FAA6876E7; Wed,  1 Nov 2023 21:35:47 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 41CED87704; Wed,  1 Nov 2023 21:35:48 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0029F87704
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 21:35:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B37B87700
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 21:35:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1KZbfc103075;
- Wed, 1 Nov 2023 15:35:37 -0500
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1KZXpA105880;
+ Wed, 1 Nov 2023 15:35:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698870937;
- bh=SkOM9iW6NJloLkEpuAKQ4ACXzHgIjjPi0c4vxMgk2n0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=VTIN9f4L+MZ0fII00Ap1sHRG2rrP+M/2mH/FKgXx3U7u0zbtg49sYjU1IHAgwf3ip
- DkDPpJtwJCsAU58IYCfgyUaZ3gGivybE8jZlQDVcu7p526zOt3a2BlbF15tfFcdWHd
- Jy7G4tClKixzkq2qBdGYfhnaMZGnHFB8t8eas6+0=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1KZadc060170
+ s=ti-com-17Q1; t=1698870933;
+ bh=wG+1ROTijwMqXgBEK4q7lXv3e9Cix+3cMXdicPusx5U=;
+ h=From:To:CC:Subject:Date;
+ b=FMdomSdlJWVWGEKAZ8xgRijIYFju4Sf+BXHKYJlyCB2vF9Lf7g+MxZotHF7dOMdB/
+ iulmHlbzKF2fnAd/syG0qcSYla2aSG4lZHPji8iuayJS+puEpDwKxuvD6homdwAOb9
+ RP+lUhfPh0PKw7h1UGQX1B5s03p52Wvri7AWrjWw=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1KZXC1060154
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 1 Nov 2023 15:35:37 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 1 Nov 2023 15:35:33 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
- Nov 2023 15:35:36 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 15:35:32 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 1 Nov 2023 15:35:36 -0500
+ Frontend Transport; Wed, 1 Nov 2023 15:35:33 -0500
 Received: from lelv0327.itg.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1KZWFZ089745; 
- Wed, 1 Nov 2023 15:35:36 -0500
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1KZWFU089745; 
+ Wed, 1 Nov 2023 15:35:32 -0500
 From: Andrew Davis <afd@ti.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
  <n-francis@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon
@@ -56,12 +56,10 @@ To: Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
  Bryan Brattlof <bb@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>, Le Jin
  <le.jin@siemens.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
 CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
-Subject: [PATCH 6/7] arm: mach-k3: am62ax: Move board selection to mach-k3
-Date: Wed, 1 Nov 2023 15:35:29 -0500
-Message-ID: <20231101203530.80359-6-afd@ti.com>
+Subject: [PATCH 1/7] board: ti: Add dependency from TARGET selection to SOC
+Date: Wed, 1 Nov 2023 15:35:24 -0500
+Message-ID: <20231101203530.80359-1-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231101203530.80359-1-afd@ti.com>
-References: <20231101203530.80359-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -82,124 +80,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently each set of board targets from a vendor is selected inside
-the board directory for that vendor. This has the problem of multiple
-targets, one from each vendor, being selectable at the same time.
-For instance you can select both TARGET_AM654_A53_EVM and
-TARGET_IOT2050_A53 in the same build.
+Currently the K3 selection for TARGET boards does not depend on the SoC
+for which it is based. This leds to the odd ability to select for instance
+both SOC_K3_AM625 and TARGET_J721E_A72_EVM.
 
-To fix this we need to move the target board choice to a common location
-for each parent SoC selection. Do this in arch/arm/mach-k3.
+To fix this the target choice should depend on the matching SOC config.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- arch/arm/mach-k3/Kconfig                      |  2 +-
- {board/ti => arch/arm/mach-k3}/am62ax/Kconfig | 29 ++++---------------
- board/ti/am62ax/Kconfig                       | 27 -----------------
- 3 files changed, 7 insertions(+), 51 deletions(-)
- copy {board/ti => arch/arm/mach-k3}/am62ax/Kconfig (52%)
+ board/siemens/iot2050/Kconfig     | 2 +-
+ board/ti/am62ax/Kconfig           | 1 +
+ board/ti/am62x/Kconfig            | 1 +
+ board/ti/am64x/Kconfig            | 1 +
+ board/ti/am65x/Kconfig            | 1 +
+ board/ti/j721e/Kconfig            | 1 +
+ board/ti/j721s2/Kconfig           | 1 +
+ board/toradex/verdin-am62/Kconfig | 1 +
+ 8 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index a460952f119..cd7dc5140ac 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -190,7 +190,7 @@ config K3_X509_SWRV
- source "arch/arm/mach-k3/am65x/Kconfig"
- source "arch/arm/mach-k3/am64x/Kconfig"
- source "arch/arm/mach-k3/am62x/Kconfig"
--source "board/ti/am62ax/Kconfig"
-+source "arch/arm/mach-k3/am62ax/Kconfig"
- source "arch/arm/mach-k3/j721e/Kconfig"
- source "board/ti/j721s2/Kconfig"
+diff --git a/board/siemens/iot2050/Kconfig b/board/siemens/iot2050/Kconfig
+index a6170aae807..737cda64744 100644
+--- a/board/siemens/iot2050/Kconfig
++++ b/board/siemens/iot2050/Kconfig
+@@ -8,8 +8,8 @@
  
-diff --git a/board/ti/am62ax/Kconfig b/arch/arm/mach-k3/am62ax/Kconfig
-similarity index 52%
-copy from board/ti/am62ax/Kconfig
-copy to arch/arm/mach-k3/am62ax/Kconfig
-index 30e1a068660..c5f1ef87126 100644
+ config TARGET_IOT2050_A53
+ 	bool "IOT2050 running on A53"
++	depends on SOC_K3_AM654
+ 	select ARM64
+-	select SOC_K3_AM654
+ 	select BOARD_LATE_INIT
+ 	select SYS_DISABLE_DCACHE_OPS
+ 	select BINMAN
+diff --git a/board/ti/am62ax/Kconfig b/board/ti/am62ax/Kconfig
+index 61f289faccd..30e1a068660 100644
 --- a/board/ti/am62ax/Kconfig
-+++ b/arch/arm/mach-k3/am62ax/Kconfig
-@@ -1,11 +1,12 @@
- # SPDX-License-Identifier: GPL-2.0+
- #
--# Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
--#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#	Andrew Davis <afd@ti.com>
-+
-+if SOC_K3_AM62A7
++++ b/board/ti/am62ax/Kconfig
+@@ -5,6 +5,7 @@
  
  choice
--	prompt "TI K3 AM62Ax based boards"
--	depends on SOC_K3_AM62A7
-+	prompt "K3 AM62Ax based boards"
+ 	prompt "TI K3 AM62Ax based boards"
++	depends on SOC_K3_AM62A7
  	optional
  
  config TARGET_AM62A7_A53_EVM
-@@ -30,24 +31,6 @@ config TARGET_AM62A7_R5_EVM
+diff --git a/board/ti/am62x/Kconfig b/board/ti/am62x/Kconfig
+index cd17e939e5a..b4b70337d18 100644
+--- a/board/ti/am62x/Kconfig
++++ b/board/ti/am62x/Kconfig
+@@ -5,6 +5,7 @@
  
- endchoice
+ choice
+ 	prompt "TI K3 AM62x based boards"
++	depends on SOC_K3_AM625
+ 	optional
  
--if TARGET_AM62A7_R5_EVM || TARGET_AM62A7_A53_EVM
--
--config SYS_BOARD
--       default "am62ax"
--
--config SYS_VENDOR
--       default "ti"
--
--config SYS_CONFIG_NAME
--       default "am62ax_evm"
--
--source "board/ti/common/Kconfig"
--
--endif
--
--if TARGET_AM62A7_R5_EVM
--
--config SPL_LDSCRIPT
--	default "arch/arm/mach-omap2/u-boot-spl.lds"
-+source "board/ti/am62ax/Kconfig"
+ config TARGET_AM625_A53_EVM
+diff --git a/board/ti/am64x/Kconfig b/board/ti/am64x/Kconfig
+index fb596e4adfc..2dbc6197b75 100644
+--- a/board/ti/am64x/Kconfig
++++ b/board/ti/am64x/Kconfig
+@@ -4,6 +4,7 @@
  
- endif
-diff --git a/board/ti/am62ax/Kconfig b/board/ti/am62ax/Kconfig
-index 30e1a068660..51e7b3e0eab 100644
---- a/board/ti/am62ax/Kconfig
-+++ b/board/ti/am62ax/Kconfig
-@@ -3,33 +3,6 @@
- # Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
- #
+ choice
+ 	prompt "K3 AM64 based boards"
++	depends on SOC_K3_AM642
+ 	optional
  
--choice
--	prompt "TI K3 AM62Ax based boards"
--	depends on SOC_K3_AM62A7
--	optional
--
--config TARGET_AM62A7_A53_EVM
--	bool "TI K3 based AM62A7 EVM running on A53"
--	select ARM64
--	select BINMAN
--	imply BOARD
--	imply SPL_BOARD
--	imply TI_I2C_BOARD_DETECT
--
--config TARGET_AM62A7_R5_EVM
--	bool "TI K3 based AM62A7 EVM running on R5"
--	select CPU_V7R
--	select SYS_THUMB_BUILD
--	select K3_LOAD_SYSFW
--	select RAM
--	select SPL_RAM
--	select K3_DDRSS
--	select BINMAN
--	imply SYS_K3_SPL_ATF
--	imply TI_I2C_BOARD_DETECT
--
--endchoice
--
- if TARGET_AM62A7_R5_EVM || TARGET_AM62A7_A53_EVM
+ config TARGET_AM642_A53_EVM
+diff --git a/board/ti/am65x/Kconfig b/board/ti/am65x/Kconfig
+index 5fd19d652a6..7c1bcfc899c 100644
+--- a/board/ti/am65x/Kconfig
++++ b/board/ti/am65x/Kconfig
+@@ -5,6 +5,7 @@
  
- config SYS_BOARD
+ choice
+ 	prompt "K3 AM65 based boards"
++	depends on SOC_K3_AM654
+ 	optional
+ 
+ config TARGET_AM654_A53_EVM
+diff --git a/board/ti/j721e/Kconfig b/board/ti/j721e/Kconfig
+index e6cb21f77bd..23867ad8e04 100644
+--- a/board/ti/j721e/Kconfig
++++ b/board/ti/j721e/Kconfig
+@@ -5,6 +5,7 @@
+ 
+ choice
+ 	prompt "K3 J721E based boards"
++	depends on SOC_K3_J721E
+ 	optional
+ 
+ config TARGET_J721E_A72_EVM
+diff --git a/board/ti/j721s2/Kconfig b/board/ti/j721s2/Kconfig
+index f6d1cb57653..a4a5d16ba21 100644
+--- a/board/ti/j721s2/Kconfig
++++ b/board/ti/j721s2/Kconfig
+@@ -5,6 +5,7 @@
+ 
+ choice
+ 	prompt "K3 J721S2 board"
++	depends on SOC_K3_J721S2
+ 	optional
+ 
+ config TARGET_J721S2_A72_EVM
+diff --git a/board/toradex/verdin-am62/Kconfig b/board/toradex/verdin-am62/Kconfig
+index e7522244070..abc2984f250 100644
+--- a/board/toradex/verdin-am62/Kconfig
++++ b/board/toradex/verdin-am62/Kconfig
+@@ -5,6 +5,7 @@
+ 
+ choice
+ 	prompt "Toradex Verdin AM62 based boards"
++	depends on SOC_K3_AM625
+ 	optional
+ 
+ config TARGET_VERDIN_AM62_A53
 -- 
 2.39.2
 
