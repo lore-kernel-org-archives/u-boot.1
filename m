@@ -4,79 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E4BCC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:32:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EA32C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:33:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8418A8714F;
-	Wed,  1 Nov 2023 19:32:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 084CF876A2;
+	Wed,  1 Nov 2023 19:33:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aEorPL5W";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w9gHiPnx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EFC387D3E; Wed,  1 Nov 2023 19:32:10 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 41CBF87D88; Wed,  1 Nov 2023 19:33:42 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F269870FF
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:32:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE9FE870FF
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:33:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7788db95652so2030385a.2
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 11:32:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698863527; x=1699468327; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VTehGfHPaOXvZmV5aL+CwV91i4pPqoWpcnGezzYLDzA=;
- b=aEorPL5WJkQmyywIg3ll15wGMMsyHdS0YYBOJKrqk/4uo0lHcB5QDijjR9H3agiRqr
- gH17VccHLKgslYFT/VKOjuOnAA7pO/Ejt3idC756CowL+5ZtlFjN40uU6l4yMYNeaDQK
- tSJHmn2ni1wtgYx8BF4LMZg6jPi0Pi2S7fnw6RZkPKbekffKeXD+8X+cSCFk21wYJWwA
- JPYITNUI3boWEdhWHo+4phyPXTXNTIRJC5skwuX4QNPBPaURtSEfPmLvEUkRg1lhARJ5
- H8HNZC0jDpn7dtKeplNVq2/ediAg9CmHng0jLe/HrU9E3vNl/MyPV5eacV4ItPyEB3zt
- uhGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698863527; x=1699468327;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VTehGfHPaOXvZmV5aL+CwV91i4pPqoWpcnGezzYLDzA=;
- b=E9btRHGshaO8t71UrA3B+xasmt3G7tUssTRZeVzk91sCvcKxzBoSNzszfx7Bdy6DCm
- 6ODGTHI2Ky/Q3zB8j3273U3xDb9tZWEqp2ivQfl5J+FXK60mYNRR5Aj+FSTCxAApFEBQ
- PjF3oUq4ZZxz2N54d14KHVsv6UuMJgJexPGp026jdCmOFs72iYBNUtyedqJjqLRHN248
- XX/xURTHwub81Z5vZ0hkfxxxLrubIJZ2tEElFAUdWR3l61aSQveSAx3OwzaJk8lyEk2M
- 9vCj09SdRiCA9xddukw8V818oHG0yuQOsMxAjGEVDNBMNt2JYqvpHUgAl8kMQiEPQyag
- 7Crg==
-X-Gm-Message-State: AOJu0YycfxMJmeMQg/GZJsfOnkAIEoDXOX2wSKdre8RJ78FqdjKhZDRY
- bbz8orQ3Sr3ghZmFdrpY1lXNoloLIqArYA==
-X-Google-Smtp-Source: AGHT+IFD6zUKln+sFkmO8gp2rgsnaL4IY8+TcRFRu8nd35R8LwaJ61Hu2h62l3LqN95BPQ+BoYsOug==
-X-Received: by 2002:a05:620a:2912:b0:779:cf04:3c47 with SMTP id
- m18-20020a05620a291200b00779cf043c47mr18714022qkp.24.1698863527137; 
- Wed, 01 Nov 2023 11:32:07 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- e25-20020a05620a12d900b007678973eaa1sm1656330qkl.127.2023.11.01.11.32.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 11:32:06 -0700 (PDT)
-Message-ID: <142fae2e-7d24-581f-4974-b98237e54681@gmail.com>
-Date: Wed, 1 Nov 2023 14:32:06 -0400
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1IXVXr078647;
+ Wed, 1 Nov 2023 13:33:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698863611;
+ bh=ER1J4p5MyGWyBDEmtNPxN+zkOMJgxU5e4Tfny2QzrQM=;
+ h=From:To:CC:Subject:Date;
+ b=w9gHiPnxvbXMXqKV6VnaJPn2/pO0q8eoAx0YC3HMpl93bppdqsG4x+AyvJp+8efvB
+ K4TuN1IS0MGRsjJqB+eUqnObTd92lD6Tq9pLXcTTAaVe0Lf+jvvSeb/dsuDvESBoN+
+ mLpFjwfPEtZpbIIcFdS9dYOOyJuT7KIGl4cSq/e4=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1IXVp3001433
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 1 Nov 2023 13:33:31 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
+ Nov 2023 13:33:31 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 1 Nov 2023 13:33:31 -0500
+Received: from lelv0327.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1IXUW4109942;
+ Wed, 1 Nov 2023 13:33:30 -0500
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH] arm: mach-k3: Move K3 common schema.yaml out of board
+ directory
+Date: Wed, 1 Nov 2023 13:33:29 -0500
+Message-ID: <20231101183329.65091-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: cli: Add explicit kconfig dependency for CONFIG_IS_ENABLED macro
-Content-Language: en-US
-To: Pavel Korotkevich <pawday@mail.ru>, u-boot@lists.denx.de
-References: <24370129-51c8-5a0f-4c3a-3c3a86e65968@mail.ru>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <24370129-51c8-5a0f-4c3a-3c3a86e65968@mail.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,18 +80,199 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gOC81LzIzIDE5OjMyLCBQYXZlbCBLb3JvdGtldmljaCB3cm90ZToNCj4gIEZyb20gZmUy
-Y2ViN2M0MzY1MTEyMDU1ZWNmYzNiYmY2OGFkNDczMzBiNzQ0ZCBNb24gU2VwIDE3IDAwOjAw
-OjAwIDIwMDENCj4gRnJvbTogUGF2ZWwgS29yb3RrZXZpY2ggPHBhd2RheUBtYWlsLnJ1Pg0K
-PiBEYXRlOiBTdW4sIDYgQXVnIDIwMjMgMDI6MDA6NDEgKzAzMDANCj4gU3ViamVjdDogW1BB
-VENIXSBjbGk6IEFkZCBleHBsaWNpdCBrY29uZmlnIGRlcGVuZGVuY3kgZm9yIENPTkZJR19J
-U19FTkFCTEVEIG1hY3JvDQoNClBsZWFzZSBhZGQgYSBzdWl0YWJsZSBjb21taXQgbWVzc2Fn
-ZSBhbmQgdXNlIGBnaXQgc2VuZC1lbWFpbGAgKG9yIHNpbWlsYXIpIHRvIHNlbmQgeW91ciBw
-YXRjaGVzLg0KDQotLVNlYW4NCg0KPiAtLS0NCj4gIMKgaW5jbHVkZS9jbGkuaCB8IDIgKysN
-Cj4gIMKgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQ0KPiANCj4gZGlmZiAtLWdp
-dCBhL2luY2x1ZGUvY2xpLmggYi9pbmNsdWRlL2NsaS5oDQo+IGluZGV4IDA5NGE2NjAyZDcu
-LmQ2ZGJiZGUwNzAgMTAwNjQ0DQo+IC0tLSBhL2luY2x1ZGUvY2xpLmgNCj4gKysrIGIvaW5j
-bHVkZS9jbGkuaA0KPiBAQCAtOSw2ICs5LDggQEANCj4gDQo+ICDCoCNpbmNsdWRlIDxzdGRi
-b29sLmg+DQo+IA0KPiArI2luY2x1ZGUgPGxpbnV4L2tjb25maWcuaD4NCj4gKw0KPiAgwqAv
-KioNCj4gIMKgICogc3RydWN0IGNsaV9jaF9zdGF0ZSAtIHN0YXRlIGluZm9ybWF0aW9uIGZv
-ciByZWFkaW5nIGNtZGxpbmUgY2hhcmFjdGVycw0KPiAgwqAgKg0KDQo=
+This file is common for all K3, move it out of board/ directory and
+into mach-k3. As we need to change the path in k3-binman.dtsi let's
+take this opportunity to switch to absolute paths which makes adding
+non-TI boards (like Toradex Verdin) not need to override these paths.
+
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 66 -------------------
+ arch/arm/dts/k3-binman.dtsi                   | 28 ++++----
+ .../common => arch/arm/mach-k3}/schema.yaml   |  0
+ 3 files changed, 14 insertions(+), 80 deletions(-)
+ rename {board/ti/common => arch/arm/mach-k3}/schema.yaml (100%)
+
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+index 089b2a5f5cd..b489d8afbe3 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+@@ -13,72 +13,6 @@
+ 	filename = "../../ti/keys/ti-degenerate-key.pem";
+ };
+ 
+-#ifndef CONFIG_ARM64
+-
+-&bcfg_yaml {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&pcfg_yaml {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&rcfg_yaml {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&scfg_yaml {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-/* combined-tifs-cfg */
+-
+-&bcfg_yaml_tifs {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&pcfg_yaml_tifs {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&rcfg_yaml_tifs {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&scfg_yaml_tifs {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-/* combined-dm-cfg */
+-
+-&pcfg_yaml_dm {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&rcfg_yaml_dm {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-/* combined-sysfw-cfg */
+-
+-&bcfg_yaml_sysfw {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&pcfg_yaml_sysfw {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&rcfg_yaml_sysfw {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-&scfg_yaml_sysfw {
+-	schema = "../../ti/common/schema.yaml";
+-};
+-
+-#endif /* CONFIG_ARM64 */
+-
+ #ifdef CONFIG_TARGET_VERDIN_AM62_R5
+ 
+ &binman {
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index 2ea2dd18a12..0212d44ee3b 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -32,28 +32,28 @@
+ 		filename = "board-cfg.bin";
+ 		bcfg_yaml: ti-board-config {
+ 			config = "board-cfg.yaml";
+-			schema = "../common/schema.yaml";
++			schema = "arch/arm/mach-k3/schema.yaml";
+ 		};
+ 	};
+ 	pm-cfg {
+ 		filename = "pm-cfg.bin";
+ 		pcfg_yaml: ti-board-config {
+ 			config = "pm-cfg.yaml";
+-			schema = "../common/schema.yaml";
++			schema = "arch/arm/mach-k3/schema.yaml";
+ 		};
+ 	};
+ 	rm-cfg {
+ 		filename = "rm-cfg.bin";
+ 		rcfg_yaml: ti-board-config {
+ 			config = "rm-cfg.yaml";
+-			schema = "../common/schema.yaml";
++			schema = "arch/arm/mach-k3/schema.yaml";
+ 		};
+ 	};
+ 	sec-cfg {
+ 		filename = "sec-cfg.bin";
+ 		scfg_yaml: ti-board-config {
+ 			config = "sec-cfg.yaml";
+-			schema = "../common/schema.yaml";
++			schema = "arch/arm/mach-k3/schema.yaml";
+ 		};
+ 	};
+ 	combined-tifs-cfg {
+@@ -61,19 +61,19 @@
+ 		ti-board-config {
+ 			bcfg_yaml_tifs: board-cfg {
+ 				config = "board-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			scfg_yaml_tifs: sec-cfg {
+ 				config = "sec-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			pcfg_yaml_tifs: pm-cfg {
+ 				config = "pm-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			rcfg_yaml_tifs: rm-cfg {
+ 				config = "rm-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 		};
+ 	};
+@@ -82,11 +82,11 @@
+ 		ti-board-config {
+ 			pcfg_yaml_dm: pm-cfg {
+ 				config = "pm-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			rcfg_yaml_dm: rm-cfg {
+ 				config = "rm-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 		};
+ 	};
+@@ -95,19 +95,19 @@
+ 		ti-board-config {
+ 			bcfg_yaml_sysfw: board-cfg {
+ 				config = "board-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			scfg_yaml_sysfw: sec-cfg {
+ 				config = "sec-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			pcfg_yaml_sysfw: pm-cfg {
+ 				config = "pm-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 			rcfg_yaml_sysfw: rm-cfg {
+ 				config = "rm-cfg.yaml";
+-				schema = "../common/schema.yaml";
++				schema = "arch/arm/mach-k3/schema.yaml";
+ 			};
+ 		};
+ 	};
+diff --git a/board/ti/common/schema.yaml b/arch/arm/mach-k3/schema.yaml
+similarity index 100%
+rename from board/ti/common/schema.yaml
+rename to arch/arm/mach-k3/schema.yaml
+-- 
+2.39.2
+
