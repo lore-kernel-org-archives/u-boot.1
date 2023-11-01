@@ -4,125 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6ECC4167B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 05:45:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D9EC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 05:46:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 884FA8769D;
-	Wed,  1 Nov 2023 06:45:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67CC6876A2;
+	Wed,  1 Nov 2023 06:46:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="cY7hQTTD";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WAERT790";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27AC987CEA; Wed,  1 Nov 2023 06:45:56 +0100 (CET)
+ id A950A876A2; Wed,  1 Nov 2023 06:46:22 +0100 (CET)
 Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 801CA87D03
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 06:45:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 389E587D06
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 06:46:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
  by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20231101054548epoutp04847969417db52cb2e8240e6d886dd8c5~TaY9UTDdD1730217302epoutp04s
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 05:45:48 +0000 (GMT)
+ 20231101054603epoutp048c2281e498cada941ac6dba86b468266~TaZLc3Hgb1791817918epoutp04g
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 05:46:03 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20231101054548epoutp04847969417db52cb2e8240e6d886dd8c5~TaY9UTDdD1730217302epoutp04s
+ 20231101054603epoutp048c2281e498cada941ac6dba86b468266~TaZLc3Hgb1791817918epoutp04g
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698817548;
- bh=NV/6nvDNGIGURA54CxsLf16gEa5tkjuA1BKTk9MbOlM=;
+ s=mail20170921; t=1698817563;
+ bh=J96aso14lF4vyClHaxLIoAh02ewvMjLdYlRSjJi5UZA=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=cY7hQTTDYkeflqNzXbQlkhEbXabNYAGWYMQSNCONP5uPkc0wDe4xLfrpUPN8eMBCG
- lE5p4fHVMAS4QUw1dsYPCiJRhrwT6BHusYjzePUfiE9rmgHyV/YBY2cpiir55q306Y
- 14EsKJ3XnAhDO1yFWY1AXOVdXsUJmX+gsVBnoJg4=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20231101054548epcas1p1a6e54e0d222bd5a784c0ec110f9ab407~TaY9DthfI2429024290epcas1p1S;
- Wed,  1 Nov 2023 05:45:48 +0000 (GMT)
-Received: from epsmges1p1.samsung.com (unknown [182.195.38.234]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4SKwwC2yF1z4x9Q2; Wed,  1 Nov
- 2023 05:45:47 +0000 (GMT)
+ b=WAERT790mxMyuCFOoZcSQqfbunULobXhfoAzG49y1zD+8TYmb+lVpb/2sQ8Ysr8Bs
+ i2lSfbgWdNXr+mtyMV/bdxMmr6xUlsRHuvJ2MmDXokUMQtA37QoJrcSgfpFuLC5Dym
+ Nui+DI1hkqZNROmlj6nJxhKUY+hD/NnkVapfjaW4=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20231101054603epcas1p24c09402a0699029262a098894f2218c3~TaZK39WLY1079510795epcas1p2h;
+ Wed,  1 Nov 2023 05:46:03 +0000 (GMT)
+Received: from epsmges1p5.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4SKwwV218vz4x9Q6; Wed,  1 Nov
+ 2023 05:46:02 +0000 (GMT)
 Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 95.D8.09744.B06E1456; Wed,  1 Nov 2023 14:45:47 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20231101054547epcas1p313d45da890d2c3dc03ab440a751dd3e0~TaY7shz9O1249612496epcas1p3Z;
- Wed,  1 Nov 2023 05:45:47 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231101054547epsmtrp1b1cf8dbbcf3b0ded5871bea7c6ffd340~TaY7r3IzM2135521355epsmtrp1V;
- Wed,  1 Nov 2023 05:45:47 +0000 (GMT)
-X-AuditID: b6c32a35-eabff70000002610-f4-6541e60b0927
+ epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 0A.87.10025.A16E1456; Wed,  1 Nov 2023 14:46:02 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20231101054601epcas1p46ac0f62b761bb8b4b435c4e8c31df7f7~TaZJHbMdN1909219092epcas1p44;
+ Wed,  1 Nov 2023 05:46:01 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231101054601epsmtrp28e99f2341d58dbaa9202981477513cec~TaZJFqKae1114311143epsmtrp2L;
+ Wed,  1 Nov 2023 05:46:01 +0000 (GMT)
+X-AuditID: b6c32a39-c2bf870000002729-7e-6541e61a9f0d
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- D0.0F.08817.A06E1456; Wed,  1 Nov 2023 14:45:46 +0900 (KST)
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 4B.7C.18939.916E1456; Wed,  1 Nov 2023 14:46:01 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20231101054546epsmtip2f09ed323073008acf683db7db201081f~TaY7hHFa50811208112epsmtip2t;
- Wed,  1 Nov 2023 05:45:46 +0000 (GMT)
+ 20231101054601epsmtip257771ce792092df4bca3fd205a1329fd~TaZI0ByL50810108101epsmtip2Z;
+ Wed,  1 Nov 2023 05:46:01 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Henrik Grimler'" <henrik@grimler.se>, "'Sean Anderson'"
- <sean.anderson@seco.com>
-Cc: <u-boot@lists.denx.de>, "'Rayagonda	Kokatanur'"
- <rayagonda.kokatanur@broadcom.com>, "'Bharat Kumar Reddy Gooty'"
- <bharat.gooty@broadcom.com>
-In-Reply-To: <018b01da0c5f$fe8e3550$fbaa9ff0$@samsung.com>
-Subject: RE: [PATCH] mmc: sdhci: Rework SDHCI_QUIRK_BROKEN_R1B
-Date: Wed, 1 Nov 2023 14:45:46 +0900
-Message-ID: <020a01da0c86$a966ab80$fc340280$@samsung.com>
+To: "'Fabio Estevam'" <festevam@gmail.com>, "'Marek Vasut'" <marex@denx.de>
+Cc: <u-boot@lists.denx.de>, "'Abdellatif	El Khlifi'"
+ <abdellatif.elkhlifi@arm.com>, "'Heinrich Schuchardt'" <xypron.glpk@gmx.de>,
+ "'Ilias Apalodimas'" <ilias.apalodimas@linaro.org>, "'Ramon	Fried'"
+ <rfried.dev@gmail.com>, "'Roger Knecht'" <rknecht@pm.me>, "'Sean Edmond'"
+ <seanedmond@microsoft.com>, "'Simon Glass'" <sjg@chromium.org>, "'Tobias
+ Waldekranz'" <tobias@waldekranz.com>
+In-Reply-To: <CAOMZO5B7YMuSRxjMnvuQ0u3MgLxZ=B9PwrqDe0DNOd3nJT7eXw@mail.gmail.com>
+Subject: RE: [PATCH v4] cmd: mmc: Add mmc reg read command for reading card
+ registers
+Date: Wed, 1 Nov 2023 14:46:00 +0900
+Message-ID: <020b01da0c86$b1efba80$15cf2f80$@samsung.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQGkfDbXQ+XSUf1bqSstKAK0/j5oAwHLhqSzAbZ7QqEDPyTDT7CaC5fQ
+Thread-Index: AQLDyBprx2d92eVVj28hfBS8HDvcsAEyVXU9AiD5DJ+uduKywA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgk+LIzCtJLcpLzFFi42LZdljTQJf7mWOqwb/LohYX/h9ns3i7ZBej
- xfalTawW8+63MFm83dvJ7sDqMev+WTaPo1fusXqcvbOD0ePZv2/sASxR2TYZqYkpqUUKqXnJ
- +SmZeem2St7B8c7xpmYGhrqGlhbmSgp5ibmptkouPgG6bpk5QIuVFMoSc0qBQgGJxcVK+nY2
- RfmlJakKGfnFJbZKqQUpOQWmBXrFibnFpXnpenmpJVaGBgZGpkCFCdkZ09fLF3QpVly4eZy1
- gfGjZBcjJ4eEgInE/jdXmboYuTiEBHYwShyes4UVwvnEKNF0+CYzhPONUeLd7q9AGQ6wlm8P
- wyDiexklFq77zAbhvGSU2HNtOTvIXDYBPYn/ixYyg9giAhESB48vA9vBLDAFaNKh82AJTgEr
- iRPPLwJNZecQFrCTaFUEmc8ioCLx+E05SAGvgKXEhlWzWCFsQYmTM5+wgNjMAvIS29/OYYb4
- QEHi59NlrBCb3CSuHTrFBFEjIjG7sw3sfgmBVg6J/V96GSEaXCRmt8HYwhKvjm9hh7ClJF72
- t7FDNDQzSixdcpAVwulhlPjXcJ0NospYYv/SyUwglzILaEqs36UPEVaU2Pl7LiPEZj6Jd197
- oIHFK9HRJgRRoiJx6fVLJphdd5/8Z53AqDQLyW+zkPw2C8kPsxCWLWBkWcUollpQnJueWmxY
- YAiP6+T83E2M4CSpZbqDceLbD3qHGJk4GA8xSnAwK4nwHjZ1SBXiTUmsrEotyo8vKs1JLT7E
- aAoM7InMUqLJ+cA0nVcSb2hiaWBiZmRsYmFoZqgkzsv8qDdFSCA9sSQ1OzW1ILUIpo+Jg1Oq
- gUnkQUDwnowjLb0lBf2sFjnO3FJ3/9T8qv1Zvv+qr2Oh7boWnetiz69ZXLBaonT8stllsUsM
- FTwNCs/8Y9d2hnK7Hr6VNtPZZ/WVFb/P/D3Bx7xmvdi5WwU+Cst1rpQvZo2ebGjl8ottVYH0
- iZDENKep3xWai34uKttyqOCF+mrJllfStdEnDV0fTj0fnBHL8+j3rAc72v3EPL5MWyxx8XN0
- zpnY9LMdfCvWJSsHb762X/zFJPsfPcfifzJevC0TxNX1JGdvhffGNzeezDJUMDN8xVz2iK9x
- jU/Vxbl6d9Kbt52MEC6Yvtn4ecWO/K9dFzMKmKZvfXCDc6bx67WKl9l8u/0jPk7iCppiyhxr
- vVCJpTgj0VCLuag4EQBjHibDGwQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrILMWRmVeSWpSXmKPExsWy7bCSvC7XM8dUg/a/lhYX/h9ns3i7ZBej
- xfalTawW8+63MFm83dvJ7sDqMev+WTaPo1fusXqcvbOD0ePZv2/sASxRXDYpqTmZZalF+nYJ
- XBnT18sXdClWXLh5nLWB8aNkFyMHh4SAicS3h2FdjFwcQgK7GSX6WjsZuxg5geJSEp+fTmWD
- qBGWOHy4GKLmOaPE/GdbWUBq2AT0JP4vWsgMYosIREgc2T+RCaSIWWAKo8Tmh0tZITpeMEqc
- ebOJDaSKU8BK4sTzi0AJdg5hATuJVkWQ+SwCKhKP35SDFPAKWEpsWDWLFcIWlDg58wnYKmYB
- bYmnN59C2fIS29/OYYY4U0Hi59NlrBAnuElcO3SKCaJGRGJ2ZxvzBEbhWUhGzUIyahaSUbOQ
- tCxgZFnFKJlaUJybnltsWGCUl1quV5yYW1yal66XnJ+7iREcK1paOxj3rPqgd4iRiYPxEKME
- B7OSCO9hU4dUId6UxMqq1KL8+KLSnNTiQ4zSHCxK4rzfXvemCAmkJ5akZqemFqQWwWSZODil
- GpgKerKX/b9afH+7n8PVD8uvzpuasObHz9wNyy6L6G4/pF3Z+ybhbUPU17R5RrOe1s/XWGAW
- c03+lh1XmUdU8CrJTl0/3RuHS33WqTqdjCnW2Jt8+NTOE/n/ufY4lGw3V7Le+oCjYcmtyDqW
- 9B6t+RMmRuXM0Z30Kt9YKDV/kseNHo78nmsr31xx/nDTZN7cji7brYyKcXJRqvseJ01NafNi
- ervv6ERPt7DlU/vzq9J6Gt+srb/Navd0yb7Ipq99K7q5d7UIau7v2lF3L0d0zY/ja9vXtk0N
- U1udH8Pu/oW9Q/5b1FNJrkcz9E7ahE6p0j2dpK87tUqDYZP1m5Jlj3bzfg/yTJr8MHeqrOIL
- 1idKLMUZiYZazEXFiQDhxxpBBAMAAA==
-X-CMS-MailID: 20231101054547epcas1p313d45da890d2c3dc03ab440a751dd3e0
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrMJsWRmVeSWpSXmKPExsWy7bCmga7UM8dUg9VnOC1eXe9ltXh41d+i
+ t+U3s8WbtkZGi8Ofz7Jb3Dx4ntFi/6I6i29btjFaLDq+kNXi7d5OdovDUz8wOnB7rJm3htFj
+ dsNFFo95s06weOycdZfd48PHOI871/aweZy9s4PRo3XHX3aPo3vOsXn82baUMYArKtsmIzUx
+ JbVIITUvOT8lMy/dVsk7ON453tTMwFDX0NLCXEkhLzE31VbJxSdA1y0zB+hiJYWyxJxSoFBA
+ YnGxkr6dTVF+aUmqQkZ+cYmtUmpBSk6BaYFecWJucWleul5eaomVoYGBkSlQYUJ2xoSzD1gL
+ FvFUTN18nrmBcSl3FyMnh4SAicTVA0vZuxi5OIQEdjBKbJ7TxwbhfGKU6Jh+ACjDAeG8MoJp
+ 2NH/AqpmJ6PEhM/nGCGcl4wSSyb2soFUsQnoSfxftJAZxBYR8JbYOfcmWAezQDuzxImdL1hB
+ EpwCgRKHrjwD2yAsEC7x81omSJhFQEXiZ9NCsDm8ApYS547MZIGwBSVOznwCZjMLaEssW/ia
+ GeIiBYmfT5exQuxyklhy5iQbRI2IxOzONmaQvRICFzgkjs86ywTR4CJxYONtFghbWOLV8S3s
+ ELaUxOd3e9kgGpoZJZYuOcgK4fQwSvxruM4GUWUssX/pZCaQq5kFNCXW79KHCCtK7Pw9lxFi
+ M5/Eu689rCAlEgK8Eh1tQhAlKhKXXr9kgtl198l/1gmMSrOQ/DYLyW+zkPwwC2HZAkaWVYxi
+ qQXFuempxYYFpvDYTs7P3cQITs1aljsYp7/9oHeIkYmD8RCjBAezkgjvYVOHVCHelMTKqtSi
+ /Pii0pzU4kOMpsDQnsgsJZqcD8wOeSXxhiaWBiZmRsYmFoZmhkrivOfe9qYICaQnlqRmp6YW
+ pBbB9DFxcEo1MEWGa17Knx7hz+dzdIPrr//uUnU2oYU75n/QTruWLP93d3LkTw6XTn2RKclV
+ JxfU9cUumMVm/li36MQx932uvjdU/GzYzpQXarMLl9e3PrAX/50rMU2zf23pzj3eelusPrux
+ 12401OfhFCyI/7Vawbf7IN+nT/dUcj67dll/eV5adEFkIi/bf8vYs7LpZe9Ou6/bup9xQfuG
+ KQ/Nb8mIXjGNqbStu1UmHDzb50ebkPyRMhs1njfTf4onSiQfvpv3QDqtYlYx95aef9snXLhV
+ d3cD+6QjbUGdKf6pk58W6GjNVO2P1d6lz7ezX1Cp+jKTmvRm8dt1gurxvk+qOI3VQxepp5uH
+ PtnUdijlbq0SS3FGoqEWc1FxIgA+UNJeVgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrJIsWRmVeSWpSXmKPExsWy7bCSvK7kM8dUg8ezBSxeXe9ltXh41d+i
+ t+U3s8WbtkZGi8Ofz7Jb3Dx4ntFi/6I6i29btjFaLDq+kNXi7d5OdovDUz8wOnB7rJm3htFj
+ dsNFFo95s06weOycdZfd48PHOI871/aweZy9s4PRo3XHX3aPo3vOsXn82baUMYArissmJTUn
+ syy1SN8ugSvj8o6DzAU9XBWTZqxia2Dcx9HFyMkhIWAisaP/BRuILSSwnVHiVK8uRFxK4vPT
+ qUBxDiBbWOLw4eIuRi6gkueMEptPP2YBqWET0JP4v2ghM0iNiICvxJXH3CA1zAK9zBJ9P2+z
+ QzScZJQ4/PU2I0gDp0CgxKErz9hBbGGBUImvZ3uYQWwWARWJn00LwY7gFbCUOHdkJguELShx
+ cuYTMJtZQFvi6c2ncPayha+ZIQ5VkPj5dBkriC0i4CSx5MxJNogaEYnZnW3MExiFZyEZNQvJ
+ qFlIRs1C0rKAkWUVo2hqQXFuem5ygaFecWJucWleul5yfu4mRnBsagXtYFy2/q/eIUYmDsZD
+ jBIczEoivIdNHVKFeFMSK6tSi/Lji0pzUosPMUpzsCiJ8yrndKYICaQnlqRmp6YWpBbBZJk4
+ OKUamNTipnjqXBLizmiMDV7+53anomTs1Tpl/ismsa3bI/+ddF0RynOna0nh/W0F0WGhu72e
+ aKnU8bX1fitXfDJdV41h09UQFVPZ70cecl4KtTZ++ErFyUHxslQY39amBs9TBz/6Pf+SseRC
+ zZpmh6oNYQcYLA7IB7a7lRV4blWO3JKrV/Z4Z5e746uf9vpiM/Jm6u77F3gu1mPhjHtB5UYf
+ qvNfn82749XH3XQjhEPb2KalWmHnosVZuj8+28tYlzY7in8++ddqPfdXa+uUX3IH7YI3bo7k
+ DbkaIm9ToPXMtfyj91Vhn42zIj9532/2qzreLHZqypxZBz9vV5v3+luMx8x9d4V/Xos57dqp
+ J/xFiaU4I9FQi7moOBEAErbn5zwDAAA=
+X-CMS-MailID: 20231101054601epcas1p46ac0f62b761bb8b4b435c4e8c31df7f7
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231028203117epcas1p35399709e03bceaaeee24d53537118823
-References: <20231027205702.1549693-1-sean.anderson@seco.com>
- <CGME20231028203117epcas1p35399709e03bceaaeee24d53537118823@epcas1p3.samsung.com>
- <ZT1viTCUl-LKj8Dm@grimlerstat.localdomain>
- <018b01da0c5f$fe8e3550$fbaa9ff0$@samsung.com>
+X-CMS-RootMailID: 20231031160921epcas1p34f70e9e582204ef204a9b73eb5f330ae
+References: <20231031122020.95007-1-marex@denx.de>
+ <CGME20231031160921epcas1p34f70e9e582204ef204a9b73eb5f330ae@epcas1p3.samsung.com>
+ <CAOMZO5B7YMuSRxjMnvuQ0u3MgLxZ=B9PwrqDe0DNOd3nJT7eXw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -142,115 +146,30 @@ X-Virus-Status: Clean
 
 
 > -----Original Message-----
-> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Jaehoon Chung
-> Sent: Wednesday, November 1, 2023 10:09 AM
-> To: 'Henrik Grimler' <henrik@grimler.se>; 'Sean Anderson' <sean.anderson@seco.com>
-> Cc: u-boot@lists.denx.de; 'Rayagonda Kokatanur' <rayagonda.kokatanur@broadcom.com>; 'Bharat Kumar
-> Reddy Gooty' <bharat.gooty@broadcom.com>
-> Subject: RE: [PATCH] mmc: sdhci: Rework SDHCI_QUIRK_BROKEN_R1B
-> 
-> Hi,
-> 
-> > -----Original Message-----
-> > From: Henrik Grimler <henrik@grimler.se>
-> > Sent: Sunday, October 29, 2023 5:31 AM
-> > To: Sean Anderson <sean.anderson@seco.com>
-> > Cc: u-boot@lists.denx.de; Jaehoon Chung <jh80.chung@samsung.com>; Rayagonda Kokatanur
-> > <rayagonda.kokatanur@broadcom.com>; Bharat Kumar Reddy Gooty <bharat.gooty@broadcom.com>
-> > Subject: Re: [PATCH] mmc: sdhci: Rework SDHCI_QUIRK_BROKEN_R1B
-> >
-> > Hi Sean,
-> >
-> > Tested on odroid-u2 (exynos4412-odroid) on top of 2024.01-rc1, still
-> > works fine, so feel free to add:
-> >
-> > Tested-by: Henrik Grimler <henrik@grimler.se>
-> >
-> > Best regards,
-> > Henrik Grimler
-> >
-> > On Fri, Oct 27, 2023 at 04:57:03PM -0400, Sean Anderson wrote:
-> > > As noted in commit 3a6383207be ("mmc: sdhci: add the quirk for broken
-> > > r1b response"), some MMC controllers don't always set the transfer
-> > > complete bit with R1b responses.
-> > >
-> > > According to the SD Host Controller Simplified Specification v4.20,
-> > >
-> > > > In the case of a command pairing with response-with-busy[, Transfer
-> > > > Complete] is set when busy is de-asserted. Refer to DAT Line Active
-> > > > and Command Inhibit (DAT) in the Present State register.
-> > >
-> > > By polling the DAT Line Active bit in the present state register, we can
-> > > detect when we are no longer busy, without waiting for a long timeout.
-> > > This results in much faster reads/writes on buggy controllers.
-> > >
-> > > Signed-off-by: Sean Anderson <sean.anderson@seco.com>
-> 
-> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Applied to u-boot-mmc/master. Thanks!
-
-Best Regards,
-Jaehoon Chung
-
-> 
-> Best Regards,
-> Jaehoon Chung
-> 
-> > > ---
-> > > I've CC'd a few people who've added this quirk to controllers recently.
-> > > Please let me know if your hardware still works. It's possible that my
-> > > hardware is buggy in a different way.
-> > >
-> > >  drivers/mmc/sdhci.c | 19 ++++++++++++-------
-> > >  include/sdhci.h     |  1 +
-> > >  2 files changed, 13 insertions(+), 7 deletions(-)
-> > >
-> > > diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-> > > index fc9c6c37996..0178ed8a11e 100644
-> > > --- a/drivers/mmc/sdhci.c
-> > > +++ b/drivers/mmc/sdhci.c
-> > > @@ -306,14 +306,19 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
-> > >  		if (stat & SDHCI_INT_ERROR)
-> > >  			break;
-> > >
-> > > -		if (get_timer(start) >= SDHCI_READ_STATUS_TIMEOUT) {
-> > > -			if (host->quirks & SDHCI_QUIRK_BROKEN_R1B) {
-> > > +		if (host->quirks & SDHCI_QUIRK_BROKEN_R1B &&
-> > > +		    cmd->resp_type & MMC_RSP_BUSY && !data) {
-> > > +			unsigned int state =
-> > > +				sdhci_readl(host, SDHCI_PRESENT_STATE);
-> > > +
-> > > +			if (!(state & SDHCI_DAT_ACTIVE))
-> > >  				return 0;
-> > > -			} else {
-> > > -				printf("%s: Timeout for status update!\n",
-> > > -				       __func__);
-> > > -				return -ETIMEDOUT;
-> > > -			}
-> > > +		}
-> > > +
-> > > +		if (get_timer(start) >= SDHCI_READ_STATUS_TIMEOUT) {
-> > > +			printf("%s: Timeout for status update: %08x %08x\n",
-> > > +			       __func__, stat, mask);
-> > > +			return -ETIMEDOUT;
-> > >  		}
-> > >  	} while ((stat & mask) != mask);
-> > >
-> > > diff --git a/include/sdhci.h b/include/sdhci.h
-> > > index 70fefca2a97..a1b74e3bd79 100644
-> > > --- a/include/sdhci.h
-> > > +++ b/include/sdhci.h
-> > > @@ -57,6 +57,7 @@
-> > >  #define SDHCI_PRESENT_STATE	0x24
-> > >  #define  SDHCI_CMD_INHIBIT	BIT(0)
-> > >  #define  SDHCI_DATA_INHIBIT	BIT(1)
-> > > +#define  SDHCI_DAT_ACTIVE	BIT(2)
-> > >  #define  SDHCI_DOING_WRITE	BIT(8)
-> > >  #define  SDHCI_DOING_READ	BIT(9)
-> > >  #define  SDHCI_SPACE_AVAILABLE	BIT(10)
-> > > --
-> > > 2.35.1.1320.gc452695387.dirty
-> > >
-
-
+> From: Fabio Estevam <festevam=40gmail.com>
+> Sent: Wednesday, November 1, 2023 1:09 AM
+> To: Marek Vasut <marex=40denx.de>
+> Cc: u-boot=40lists.denx.de; Jaehoon Chung <jh80.chung=40samsung.com>; Abd=
+ellatif El Khlifi
+> <abdellatif.elkhlifi=40arm.com>; Heinrich Schuchardt <xypron.glpk=40gmx.d=
+e>; Ilias Apalodimas
+> <ilias.apalodimas=40linaro.org>; Ramon Fried <rfried.dev=40gmail.com>; Ro=
+ger Knecht <rknecht=40pm.me>; Sean
+> Edmond <seanedmond=40microsoft.com>; Simon Glass <sjg=40chromium.org>; To=
+bias Waldekranz
+> <tobias=40waldekranz.com>
+> Subject: Re: =5BPATCH v4=5D cmd: mmc: Add mmc reg read command for readin=
+g card registers
+>=20
+> On Tue, Oct 31, 2023 at 9:20=E2=80=AFAM=20Marek=20Vasut=20<marex=40denx.d=
+e>=20wrote:=0D=0A>=20>=0D=0A>=20>=20Add=20extension=20to=20the=20'mmc'=20co=
+mmand=20to=20read=20out=20the=20card=20registers.=0D=0A>=20>=20Currently,=
+=20only=20the=20eMMC=20OCR/CID/CSD/EXTCSD/RCA/DSR=20register=20are=0D=0A>=
+=20>=20supported.=20A=20register=20value=20can=20either=20be=20displayed=20=
+or=20read=20into=0D=0A>=20>=20an=20environment=20variable.=0D=0A>=20>=0D=0A=
+>=20>=20Tested-by:=20Jaehoon=20Chung=20<jh80.chung=40samsung.com>=0D=0A>=20=
+>=20Reviewed-by:=20Jaehoon=20Chung=20<jh80.chung=40samsung.com>=0D=0A>=20>=
+=20Signed-off-by:=20Marek=20Vasut=20<marex=40denx.de>=0D=0A>=20=0D=0A>=20Re=
+viewed-by:=20Fabio=20Estevam=20<festevam=40gmail.com>=0D=0A=0D=0AApplied=20=
+to=20u-boot-mmc/master.=20Thanks=21=0D=0A=0D=0ABest=20Regards,=0D=0AJaehoon=
+=20Chung=0D=0A=0D=0A
