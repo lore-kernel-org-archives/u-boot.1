@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2344BC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 12:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D53FC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 12:35:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4653A87B35;
-	Wed,  1 Nov 2023 13:33:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A316B87B35;
+	Wed,  1 Nov 2023 13:35:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34C9387B61; Wed,  1 Nov 2023 13:33:21 +0100 (CET)
+ id 0980F86A4B; Wed,  1 Nov 2023 13:35:34 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 42CE886A4B
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 13:33:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 91F5587B35
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 13:35:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E86362F4;
- Wed,  1 Nov 2023 05:33:56 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AEEE42F4;
+ Wed,  1 Nov 2023 05:36:10 -0700 (PDT)
 Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
  [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9E7C33F738;
- Wed,  1 Nov 2023 05:33:14 -0700 (PDT)
-Date: Wed, 1 Nov 2023 12:33:12 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2515D3F738;
+ Wed,  1 Nov 2023 05:35:28 -0700 (PDT)
+Date: Wed, 1 Nov 2023 12:35:25 +0000
 From: Andre Przywara <andre.przywara@arm.com>
 To: Samuel Holland <samuel@sholland.org>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [PATCH] pinctrl: sunxi: Avoid using .bss for SPL
-Message-ID: <20231101123312.3bdd7664@donnerap.manchester.arm.com>
-In-Reply-To: <20231031045743.53647-1-samuel@sholland.org>
-References: <20231031045743.53647-1-samuel@sholland.org>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH] clk: sunxi: Use the right symbol in the Makefile
+Message-ID: <20231101123525.2aa95276@donnerap.manchester.arm.com>
+In-Reply-To: <20231031044925.51756-1-samuel@sholland.org>
+References: <20231031044925.51756-1-samuel@sholland.org>
 Organization: ARM
 X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
@@ -56,43 +57,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 30 Oct 2023 23:57:40 -0500
+On Mon, 30 Oct 2023 23:49:22 -0500
 Samuel Holland <samuel@sholland.org> wrote:
 
-> sunxi platforms put .bss in DRAM, so .bss is not available in SPL before
-> DRAM controller initialization. Therefore, this buffer must be placed in
-> the .data section.
+> CONFIG_ARCH_SUNXI will not be enabled for RISC-V SoCs using this driver.
+> Use the symbol for the driver itself instead.
 
-Right, this results in 0 bytes of .BSS, down from 5.
-Though I am wondering how much of the (SPL-)DM code gets away without
-using BSS, or if we get accidental BSS additions from the framework, over
-time.
-
-But if this patch helps your SPL_DM efforts:
+That works, no changes at all in all sunxi binaries after this patch.
 
 > Signed-off-by: Samuel Holland <samuel@sholland.org>
 
 Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
-Cheers,
+Thanks,
 Andre
 
 > ---
 > 
->  drivers/pinctrl/sunxi/pinctrl-sunxi.c | 2 +-
+>  drivers/clk/Makefile | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> index bdf6360f176..37ea93715d1 100644
-> --- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> +++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
-> @@ -50,7 +50,7 @@ static const char *sunxi_pinctrl_get_pin_name(struct udevice *dev,
->  					      uint pin_selector)
->  {
->  	const struct sunxi_pinctrl_desc *desc = dev_get_priv(dev);
-> -	static char pin_name[sizeof("PN31")];
-> +	static char pin_name[sizeof("PN31")] __section(".data");
->  
->  	snprintf(pin_name, sizeof(pin_name), "P%c%d",
->  		 pin_selector / SUNXI_GPIOS_PER_BANK + desc->first_bank + 'A',
+> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+> index 26bf429acbc..af27ceb27da 100644
+> --- a/drivers/clk/Makefile
+> +++ b/drivers/clk/Makefile
+> @@ -27,7 +27,6 @@ obj-$(CONFIG_ARCH_ROCKCHIP) += rockchip/
+>  obj-$(CONFIG_ARCH_SOCFPGA) += altera/
+>  obj-$(CONFIG_ARCH_STM32) += stm32/
+>  obj-$(CONFIG_ARCH_STM32MP) += stm32/
+> -obj-$(CONFIG_ARCH_SUNXI) += sunxi/
+>  obj-$(CONFIG_CLK_AT91) += at91/
+>  obj-$(CONFIG_CLK_BCM6345) += clk_bcm6345.o
+>  obj-$(CONFIG_CLK_BOSTON) += clk_boston.o
+> @@ -43,6 +42,7 @@ obj-$(CONFIG_CLK_OWL) += owl/
+>  obj-$(CONFIG_CLK_RENESAS) += renesas/
+>  obj-$(CONFIG_$(SPL_TPL_)CLK_SCMI) += clk_scmi.o
+>  obj-$(CONFIG_CLK_SIFIVE) += sifive/
+> +obj-$(CONFIG_CLK_SUNXI) += sunxi/
+>  obj-$(CONFIG_CLK_UNIPHIER) += uniphier/
+>  obj-$(CONFIG_CLK_VERSACLOCK) += clk_versaclock.o
+>  obj-$(CONFIG_CLK_VERSAL) += clk_versal.o
 
