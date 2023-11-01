@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ECD3C4167D
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 16:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8241CC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 16:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E1DC87D5B;
+	by phobos.denx.de (Postfix) with ESMTP id 875E987D5C;
 	Wed,  1 Nov 2023 17:28:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UdyaZ55u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bwzgWqRG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5A2487D5C; Wed,  1 Nov 2023 17:28:51 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 47D2787D5B; Wed,  1 Nov 2023 17:28:52 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 581DC87D0A
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 17:28:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0242687D3E
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 17:28:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-66d24ccc6f2so9362456d6.0
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-66d24ccc6f2so9362556d6.0
  for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 09:28:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1698856121; x=1699460921; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=X3NdQqlOEFjU06s1YEO43FgC/DjqQ+d5Epr/j/nr5mk=;
- b=UdyaZ55uPlo/XOXHtc8g6BMftIbOizaG2z9218YyHW3FnsX1DNFqeHTmlHIiAj6AWw
- fI6TomWGH3oRaWkRQFNLdUfBhJCRET606psqocfowdJLOK77YVBpJR1go9PVsjx4h2AN
- 4nmppH5oT9XOei9BFyIvUbgI1h8yWXmYY315s=
+ :reply-to; bh=r7mIFz4h2/5PAoCFa8K8rUQ4IUtlk0x8HXh7/LdwQsA=;
+ b=bwzgWqRGzGrmeC8fnssII4UxoRsNMbYMuA6xpcjWviPdZSeBx/PyV/P5EZqh6rIRQJ
+ fv8WohDCNuBEYhoetEPKWDcbhIzVW6D/rw/5RLz1o4IEz3Oa2Xbe2wYG3xpse2X2L8rX
+ SqE3yckKA3WZWToy/oWvLw0fhzbz1PgrNbgC0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1698856121; x=1699460921;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X3NdQqlOEFjU06s1YEO43FgC/DjqQ+d5Epr/j/nr5mk=;
- b=DIDC7o5onbVyAEmm8U0GaZ/5Rnin/b2IJ7uwDh6oHdsf3ZLYCaM16gxpZsxTQW+vXc
- 4lHVUGGNIqQq/mJLJakh8H/9Qra5U+pZ6gLEZ/hjs0++JZpYFubggUQzOv6wsvF7pYHU
- b+Cy09C7lUNZkPPzsti0h6ZVn8YTuPCsYzX7u7sh8/KxnGfAjmkw7IxJTUt4STV5KNGX
- 5cE52zr35smgF0rxVk6GAdKGWuJRORDbEt15B1EXuWUUXme6WQ9K4JIdLQYsOAtIVV0L
- V4MExW9cSiOTdJPdJLeIFOU9IrDIhZLhibwud+LNvrScDA2v4DRuqp2KS1kSiEi7Cm4V
- rTqA==
-X-Gm-Message-State: AOJu0YzIkGdTUXvHn1RBWfd5mqSGMODv6iDIo3KgQpLwJhTpnxZ03ZVT
- IQDG7l8l7i71BxNXdi4m1sgWwrfCpKCoCc8bdqxgAg==
-X-Google-Smtp-Source: AGHT+IHOXOpEGgZK8P8pjlcQ5/LrI1oNUMhOGkw+jtrXUNohzmbyn689JDpPmE4BH7dtNg01LYW/nQ==
+ bh=r7mIFz4h2/5PAoCFa8K8rUQ4IUtlk0x8HXh7/LdwQsA=;
+ b=EVtX7YEOpD9LCl8ZhcOqEEZv7LkcCyr9Q2FV5ZdNXMD7jcrWM2jquh4D1gyqLle441
+ PnE9SyWrzjk1xC3nP5kKuROtLIwS8Tf6zVNofD67JOYLTuxvaHbIqV/GORuKS1fUd2YM
+ ujbNZ/JzmwuXN8aD88F+ygRaAby47pKnXpFbNggU3aEpz92lSH8/rHtkiSzdeRtv9JuB
+ iCBshzzBNg/MzkyV4YXu5QEIdH7JJOsmU3Qp/6r2mF7h9sYY9tB+3bgk4DfXjI5hbCgA
+ 9L/AP53TD7a+VMWOX4C6TNoICu+YljPisAE/CE6p4f2yYzjLI1bsBsY2lLs5RJUtJX2o
+ Ykeg==
+X-Gm-Message-State: AOJu0YywYU/+z+v2yZPNWD9lWrd+Ib4jEmAUHfLgBTQhIBAErUfiQBQ8
+ PrpfUe/6VeaxlidYrYyItUkFRegk1C5pbaid3e2QpA==
+X-Google-Smtp-Source: AGHT+IH980WTnMmOqfRpVeH1lSWYdOWaJtQDjp6UFf55+ts/djGnyezNavR0MyYJkAzyKct6JDQmXQ==
 X-Received: by 2002:a05:6214:48f:b0:66d:9b75:750b with SMTP id
- pt15-20020a056214048f00b0066d9b75750bmr9544572qvb.8.1698856120699; 
- Wed, 01 Nov 2023 09:28:40 -0700 (PDT)
+ pt15-20020a056214048f00b0066d9b75750bmr9544651qvb.8.1698856121666; 
+ Wed, 01 Nov 2023 09:28:41 -0700 (PDT)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
@@ -64,9 +64,9 @@ Received: from bill-the-cat.lan
  Wed, 01 Nov 2023 09:28:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 18/20] sandbox: Drop <common.h>
-Date: Wed,  1 Nov 2023 12:28:22 -0400
-Message-Id: <20231101162824.3755579-18-trini@konsulko.com>
+Subject: [PATCH 19/20] arm: Drop <common.h> from remaining header files
+Date: Wed,  1 Nov 2023 12:28:23 -0400
+Message-Id: <20231101162824.3755579-19-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231101162824.3755579-1-trini@konsulko.com>
 References: <20231101162824.3755579-1-trini@konsulko.com>
@@ -88,67 +88,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-None of these headers need <common.h> to be included, drop it.
+None of these header files need to include <common.h> so we can just
+drop that entirely.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/sandbox/include/asm/clk.h          | 1 -
- arch/sandbox/include/asm/mbox.h         | 2 --
- arch/sandbox/include/asm/power-domain.h | 2 --
- arch/sandbox/include/asm/reset.h        | 2 --
- 4 files changed, 7 deletions(-)
+ arch/arm/mach-davinci/include/mach/dm365_lowlevel.h | 1 -
+ arch/arm/mach-ipq40xx/pinctrl-snapdragon.h          | 2 --
+ arch/arm/mach-keystone/include/mach/mux-k2g.h       | 1 -
+ arch/arm/mach-mvebu/include/mach/efuse.h            | 2 --
+ arch/arm/mach-tegra/xusb-padctl-common.h            | 1 -
+ arch/arm/mach-zynqmp/include/mach/psu_init_gpl.h    | 1 -
+ 6 files changed, 8 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/clk.h b/arch/sandbox/include/asm/clk.h
-index df7156fe3174..2b7dbca8f755 100644
---- a/arch/sandbox/include/asm/clk.h
-+++ b/arch/sandbox/include/asm/clk.h
+diff --git a/arch/arm/mach-davinci/include/mach/dm365_lowlevel.h b/arch/arm/mach-davinci/include/mach/dm365_lowlevel.h
+index eb1488e74425..0cd13d8aaa59 100644
+--- a/arch/arm/mach-davinci/include/mach/dm365_lowlevel.h
++++ b/arch/arm/mach-davinci/include/mach/dm365_lowlevel.h
+@@ -8,7 +8,6 @@
+ #ifndef __DM365_LOWLEVEL_H
+ #define __DM365_LOWLEVEL_H
+ 
+-#include <common.h>
+ #include <asm/arch/hardware.h>
+ #include <asm/io.h>
+ 
+diff --git a/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h b/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h
+index 2341a713495d..b4823a309fce 100644
+--- a/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h
++++ b/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h
+@@ -8,8 +8,6 @@
+ #ifndef _PINCTRL_SNAPDRAGON_H
+ #define _PINCTRL_SNAPDRAGON_H
+ 
+-#include <common.h>
+-
+ struct msm_pinctrl_data {
+ 	int pin_count;
+ 	int functions_count;
+diff --git a/arch/arm/mach-keystone/include/mach/mux-k2g.h b/arch/arm/mach-keystone/include/mach/mux-k2g.h
+index 67d47f817216..dfb5ad43506a 100644
+--- a/arch/arm/mach-keystone/include/mach/mux-k2g.h
++++ b/arch/arm/mach-keystone/include/mach/mux-k2g.h
+@@ -9,7 +9,6 @@
+ #ifndef __ASM_ARCH_MUX_K2G_H
+ #define __ASM_ARCH_MUX_K2G_H
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ 
+ #define K2G_PADCFG_REG	(KS2_DEVICE_STATE_CTRL_BASE + 0x1000)
+diff --git a/arch/arm/mach-mvebu/include/mach/efuse.h b/arch/arm/mach-mvebu/include/mach/efuse.h
+index b125c30beb8c..fd8ebceb26cf 100644
+--- a/arch/arm/mach-mvebu/include/mach/efuse.h
++++ b/arch/arm/mach-mvebu/include/mach/efuse.h
+@@ -6,8 +6,6 @@
+ #ifndef _MVEBU_EFUSE_H
+ #define _MVEBU_EFUSE_H
+ 
+-#include <common.h>
+-
+ struct efuse_val {
+ 	union {
+ 		struct {
+diff --git a/arch/arm/mach-tegra/xusb-padctl-common.h b/arch/arm/mach-tegra/xusb-padctl-common.h
+index e3fd613f2be1..a576e6f61658 100644
+--- a/arch/arm/mach-tegra/xusb-padctl-common.h
++++ b/arch/arm/mach-tegra/xusb-padctl-common.h
 @@ -6,7 +6,6 @@
- #ifndef __SANDBOX_CLK_H
- #define __SANDBOX_CLK_H
+ #ifndef _TEGRA_XUSB_PADCTL_COMMON_H_
+ #define _TEGRA_XUSB_PADCTL_COMMON_H_
  
 -#include <common.h>
- #include <clk.h>
- #include <dt-structs.h>
- #include <linux/clk-provider.h>
-diff --git a/arch/sandbox/include/asm/mbox.h b/arch/sandbox/include/asm/mbox.h
-index 70f36d7afef6..499e9a67f6ac 100644
---- a/arch/sandbox/include/asm/mbox.h
-+++ b/arch/sandbox/include/asm/mbox.h
-@@ -6,8 +6,6 @@
- #ifndef __SANDBOX_MBOX_H
- #define __SANDBOX_MBOX_H
+ #include <fdtdec.h>
+ #include <dm/ofnode.h>
  
+diff --git a/arch/arm/mach-zynqmp/include/mach/psu_init_gpl.h b/arch/arm/mach-zynqmp/include/mach/psu_init_gpl.h
+index 434a7fa20e43..783d7c45c7ba 100644
+--- a/arch/arm/mach-zynqmp/include/mach/psu_init_gpl.h
++++ b/arch/arm/mach-zynqmp/include/mach/psu_init_gpl.h
+@@ -4,7 +4,6 @@
+ #define _PSU_INIT_GPL_H_
+ 
+ #include <asm/io.h>
 -#include <common.h>
--
- #define SANDBOX_MBOX_PING_XOR 0x12345678
  
- struct udevice;
-diff --git a/arch/sandbox/include/asm/power-domain.h b/arch/sandbox/include/asm/power-domain.h
-index 1845bc8d3baf..4d5e861dbce2 100644
---- a/arch/sandbox/include/asm/power-domain.h
-+++ b/arch/sandbox/include/asm/power-domain.h
-@@ -6,8 +6,6 @@
- #ifndef __SANDBOX_POWER_DOMAIN_H
- #define __SANDBOX_POWER_DOMAIN_H
+ int mask_pollonvalue(unsigned long add, u32 mask, u32 value);
  
--#include <common.h>
--
- struct udevice;
- 
- int sandbox_power_domain_query(struct udevice *dev, unsigned long id);
-diff --git a/arch/sandbox/include/asm/reset.h b/arch/sandbox/include/asm/reset.h
-index 40d3e61c110a..f0709b41c09f 100644
---- a/arch/sandbox/include/asm/reset.h
-+++ b/arch/sandbox/include/asm/reset.h
-@@ -6,8 +6,6 @@
- #ifndef __SANDBOX_RESET_H
- #define __SANDBOX_RESET_H
- 
--#include <common.h>
--
- struct udevice;
- 
- int sandbox_reset_query(struct udevice *dev, unsigned long id);
 -- 
 2.34.1
 
