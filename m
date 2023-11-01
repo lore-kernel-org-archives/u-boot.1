@@ -4,92 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B82C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 14:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3971C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 14:20:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8183C87D22;
-	Wed,  1 Nov 2023 15:11:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id DC83587A6A;
+	Wed,  1 Nov 2023 15:20:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="iYerkKsU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B62787CF6; Wed,  1 Nov 2023 15:05:21 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE01587D0B
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 15:05:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ id 1C29887730; Wed,  1 Nov 2023 15:20:24 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 10C9587D2B
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 15:20:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 2837E100024;
- Wed,  1 Nov 2023 17:05:15 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2837E100024
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1698847515;
- bh=yFZ5X6oU0nBWWN0p3IFNYnE3fJI9f0SRKMvP6nyzEUE=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=iYerkKsUGkiUfRlA5nAwTZ1G6oU4z08+aO/LxwuIPyVMX/rQtqRT9nokk2iOfFwI2
- yUg4NCwsauu28Oj2w25klfmCGm+dpG3yAf5CWCOBCzWVSn8JhzrEge+euevY2feaw5
- bTJFQyVoPHtrPa5cjFmAgdoFjohq83iThQUA2R33kQ5PM+5UL/garUS/nFNKS9fBph
- GniC8Yj+qxYbzLGjZj59tWUrO0zwwSd7q3EqWyu6h7lJUZeVAdwnW4HUGpXivWvxiP
- ThkEOcJlBjG36zekZBZToudOhLwf6gHx0K9QZUImR4ndraOSR2BzvU51oWlw7cmA1t
- veIXjMOeyyd0w==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed,  1 Nov 2023 17:05:15 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Wed, 1 Nov 2023 17:05:14 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>
-CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, Dmitry Rokosov <ddrokosov@salutedevices.com>, Alexey
- Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v1 2/2] drivers: sm: bind child sm devices in the device tree
-Date: Wed, 1 Nov 2023 17:04:57 +0300
-Message-ID: <20231101140500.9025-3-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231101140500.9025-1-avromanov@salutedevices.com>
-References: <20231101140500.9025-1-avromanov@salutedevices.com>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 379C02F4;
+ Wed,  1 Nov 2023 07:20:58 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BDE6D3F64C;
+ Wed,  1 Nov 2023 07:20:15 -0700 (PDT)
+Date: Wed, 1 Nov 2023 14:20:12 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Ludwig Kormann <ludwig.kormann@ict42.de>
+Cc: hdegoede@redhat.com, jagan@amarulasolutions.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v4 1/1] arm: dts: icnova-a20-adb4006: Add board support
+Message-ID: <20231101142012.62ad6b7e@donnerap.manchester.arm.com>
+In-Reply-To: <20231101072832.2748412-1-ludwig.kormann@ict42.de>
+References: <20231101072832.2748412-1-ludwig.kormann@ict42.de>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181050 [Nov 01 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- salutedevices.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/01 13:00:00 #22378131
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Wed, 01 Nov 2023 15:11:11 +0100
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,30 +56,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+On Wed,  1 Nov 2023 08:28:32 +0100
+Ludwig Kormann <ludwig.kormann@ict42.de> wrote:
 
-One well-known sm child device that provides secure power control is the
-Secure Power Controller. This device utilizes SMC calls to communicate
-with power domains on the secure monitor side.
+Hi Ludwig,
 
-Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
----
- drivers/sm/meson-sm.c | 1 +
- 1 file changed, 1 insertion(+)
+thanks for the respin!
 
-diff --git a/drivers/sm/meson-sm.c b/drivers/sm/meson-sm.c
-index faef369f35..1dd1584855 100644
---- a/drivers/sm/meson-sm.c
-+++ b/drivers/sm/meson-sm.c
-@@ -194,6 +194,7 @@ U_BOOT_DRIVER(meson_sm) = {
- 	.id = UCLASS_SM,
- 	.of_match = meson_sm_ids,
- 	.probe = meson_sm_probe,
-+	.bind = dm_scan_fdt_dev,
- 	.priv_auto = sizeof(struct meson_sm_priv),
- 	.ops = &sm_ops,
- };
--- 
-2.25.1
+> Add board support for ICnova A20 SomPi compute module on
+> ICnova ADB4006 development board.
+>=20
+> Specification:
+> SoM
+> - Processor: Allwinner A20 Cortex-A7 Dual Core at 1GHz
+> - 512MB DDR3 RAM
+> - Fast Ethernet (Phy: Realtek RTL8201CP)
+> ADB4006
+> - I2C
+> - 2x USB 2.0
+> - 1x Fast Ethernet port
+> - 1x SATA
+> - 2x buttons (PWRON, Boot)
+> - 2x LEDS
+> - serial console
+> - HDMI
+> - =C2=B5SD-Card slot
+> - Audio Line-In / Line-Out
+> - GPIO pinheaders
+>=20
+> https://wiki.in-circuit.de/index.php5?title=3DICnova_ADB4006
+> https://wiki.in-circuit.de/index.php5?title=3DICnova_A20_SODIMM
+>=20
+> devicetree upstreamed with linux 6.5
+
+Looks good now, the defconfig is fine, and it compiles. I will take it in
+the current cycle still.
+
+> Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+> changes in v4:
+> - rebase on master
+> - add CONFIG_SYS_64BIT_LBA
+> - drop dts from patch, already upstreamed
+>=20
+> changes in v3:
+> - rebase on v2023.10
+>=20
+> changes in v2:
+> - rebase on v2023.07-rc2
+> - remove pin defines from defconfig
+> - get dts reviewed on the linux mailing list and
+>   scheduled for kernel 6.5 [1]
+>=20
+> [1]
+> https://git.kernel.org/pub/scm/linux/kernel/git/sunxi/linux.git
+> commit de2bdfb7f79d5c655eb056d459e02be2c7f13c8b
+>=20
+> ---
+>  arch/arm/dts/Makefile                |  1 +
+>  board/sunxi/MAINTAINERS              |  5 +++++
+>  configs/icnova-a20-adb4006_defconfig | 21 +++++++++++++++++++++
+>  3 files changed, 27 insertions(+)
+>  create mode 100644 configs/icnova-a20-adb4006_defconfig
+>=20
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 55aceb51cd..d947b8de56 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -693,6 +693,7 @@ dtb-$(CONFIG_MACH_SUN7I) +=3D \
+>  	sun7i-a20-haoyu-marsboard.dtb \
+>  	sun7i-a20-hummingbird.dtb \
+>  	sun7i-a20-i12-tvbox.dtb \
+> +	sun7i-a20-icnova-a20-adb4006.dtb \
+>  	sun7i-a20-icnova-swac.dtb \
+>  	sun7i-a20-itead-ibox.dtb \
+>  	sun7i-a20-lamobo-r1.dtb \
+> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
+> index 4bbe3f62fa..0061437211 100644
+> --- a/board/sunxi/MAINTAINERS
+> +++ b/board/sunxi/MAINTAINERS
+> @@ -236,6 +236,11 @@ M:	Stefan Roese <sr@denx.de>
+>  S:	Maintained
+>  F:	configs/icnova-a20-swac_defconfig
+> =20
+> +ICnova-A20-ADB4006 BOARD
+> +M:	Ludwig Kormann <ludwig.kormann@ict42.de>
+> +S:	Maintained
+> +F:	configs/icnova-a20-adb4006_defconfig
+> +
+>  ITEAD IBOX BOARD
+>  M:	Marcus Cooper <codekipper@gmail.com>
+>  S:	Maintained
+> diff --git a/configs/icnova-a20-adb4006_defconfig b/configs/icnova-a20-ad=
+b4006_defconfig
+> new file mode 100644
+> index 0000000000..22cbb612e3
+> --- /dev/null
+> +++ b/configs/icnova-a20-adb4006_defconfig
+> @@ -0,0 +1,21 @@
+> +CONFIG_ARM=3Dy
+> +CONFIG_ARCH_SUNXI=3Dy
+> +CONFIG_DEFAULT_DEVICE_TREE=3D"sun7i-a20-icnova-a20-adb4006"
+> +CONFIG_SPL=3Dy
+> +CONFIG_MACH_SUN7I=3Dy
+> +CONFIG_DRAM_CLK=3D384
+> +CONFIG_AHCI=3Dy
+> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +CONFIG_SPL_I2C=3Dy
+> +CONFIG_SCSI_AHCI=3Dy
+> +CONFIG_SYS_64BIT_LBA=3Dy
+> +CONFIG_SYS_I2C_MVTWSI=3Dy
+> +CONFIG_SYS_I2C_SLAVE=3D0x7f
+> +CONFIG_SYS_I2C_SPEED=3D400000
+> +CONFIG_ETH_DESIGNWARE=3Dy
+> +CONFIG_MII=3Dy
+> +CONFIG_SUN7I_GMAC=3Dy
+> +CONFIG_AXP_ALDO4_VOLT=3D2800
+> +CONFIG_SCSI=3Dy
+> +CONFIG_USB_EHCI_HCD=3Dy
+> +CONFIG_USB_OHCI_HCD=3Dy
 
