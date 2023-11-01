@@ -4,74 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15456C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 17:12:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD07CC4167D
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 17:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C0A387008;
-	Wed,  1 Nov 2023 18:12:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3050B87D47;
+	Wed,  1 Nov 2023 18:12:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XDVyJgO+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mf0VDDa9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE26187C51; Wed,  1 Nov 2023 18:12:08 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 0DED887D5B; Wed,  1 Nov 2023 18:12:21 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AC0586E24
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 18:12:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADD7287D49
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 18:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mr.bossman075@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-28041176e77so73625a91.0
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 10:12:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-670e7ae4a2eso9546796d6.1
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 10:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698858722; x=1699463522; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PhCuB0RikpX08XFReaZkAu7p6quFkBri/8+PSHJP+94=;
- b=XDVyJgO+5GfX9GRFClJKifPgDzv14pWS63Z1eTwdxM5CQ40IVxGJeFGND+zi1M4Mk1
- QsUa93/iVRwy2d6gs8XKBhO2FyzcXDZOBIFez0hNdnRWseayDEYT41CLZE4JbjhN8ZUZ
- 0tXeoO6KmsQyZKZMG7ARALNoAKDJP9OlpNOdwmEH6QKCLGdNgJg2aoXKr0Zm9tIvMHXL
- 5JFSGU09kmwfyDJcY5UhQTgIQbnBdGPA1v95Fqfi5GHYSDwa4yYQel/MooD5BjW5MqJx
- RaQGa3FM2Ygj5+nq6MkbpCbL93MfTz8dX+zkI8srvxYA4/3ucXMfzj+x1VQI47VQBQ4O
- BKFQ==
+ d=gmail.com; s=20230601; t=1698858732; x=1699463532; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uRuxvJsK/N1oREgCV2uD8VdTs3lvdBwA54CvH8KsMlU=;
+ b=mf0VDDa9FhIejZTgg7fRteLjCt7jNlXV0PDfWutFpbITg+Zg4ui1nv4rnsZKH6u/Uy
+ n3nosnc5UBl9JuT8rlXRzmBXnhvreSxLOsN3A7MqvW1XQStRcjoagR13uOtQHcIvz7ZL
+ /+6p6aH8OfrEdu+C/cWoa96noZZDGUlQT3Up0T4wySUo8Yr0xZdahbf62x+rc2zwaPgy
+ xanEVzA3XulLUuoxPAIgv/RfFZJvND6TBboufxnRNAeSIcnFtS5xqfi3QZPbDGe21WKg
+ h3oFr/GmUK+M6NHwXBlN2uvlv6DfljYWLnoiRj9K+Lqgs+bczh7fAlK1LPwHWGHvU9Rm
+ hg9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698858722; x=1699463522;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PhCuB0RikpX08XFReaZkAu7p6quFkBri/8+PSHJP+94=;
- b=ipEc3WHIXuGanPZu8LRteNDDh91U7yLsv+kUaSQm0GE1AbslFUdbTAkcn1PSUnhhxL
- DK1+pN6lgoVV0VKeKO+n1nCPBzW593vaKc5Q8rsVDeticaMRUMB26+EwKQkh7nAVAk1H
- zRn8/n9XnyrazVZ0ZE/ufDlDKwoDgQelydhJFN6XeTQPcL7lQJ5ccU9qPQmHPznW3rW8
- X63wKYMjYh7ESDtDHOoxalAl7gqxZbMBX/3h9zH+sWofKrwyu/6WuFBBPGXfYpNsZPWB
- z4YILLJQ38qgP0CH0b7mYLRT+14DSdTfD7obV7N9la5eB9MI7eZFWhtY838z9aZHIO85
- BEnQ==
-X-Gm-Message-State: AOJu0YxiE0nDlYXUfd2giE4r97muLeYw/O7TeTm9xQU1kVcpRy19p1e/
- PL6xUSdDklslvBRT7qA6jWRG6W9ELFOnnMzISUM=
-X-Google-Smtp-Source: AGHT+IF8tJQFGSuP50e1YTDmb4+7tkfs009Vs/Q2KvGgKBI3Aau5PhEyCJjD8y4HEHI4NJJs9vOWTb/P8HlkZ+wxag0=
-X-Received: by 2002:a17:90b:1042:b0:27d:9b5:f28d with SMTP id
- gq2-20020a17090b104200b0027d09b5f28dmr13614947pjb.8.1698858722488; Wed, 01
- Nov 2023 10:12:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698858732; x=1699463532;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=uRuxvJsK/N1oREgCV2uD8VdTs3lvdBwA54CvH8KsMlU=;
+ b=Y0PyW1Gk23R7CDEr8odl9+wFvBfAi1Q/UMRl+kRB0vu/maiOwyhc7u5K5p3vFmn805
+ 2eah1R3cxLgychgJGsn14tYvJ9LcqLpBmUJGAAK+uwdTmv647kwQGIu6TFSo55Ou4nWT
+ DbMVu38EVb/t8cFN3FXvInndN68MedkZsaaK080p+N/3hD6LuGCMLSVnTEhDqclYjNXW
+ 0kaKFSraLBHvfDovkFtcJLgHI9Yjrasv1NiFgw/X//GPO9lYpjoEDTtT6HbZ/YaORv/+
+ Fl6qiC9xeocC7j0YS5if4iRKNXjZBtTzkgH1Ee1b5LSEyZx2TPoAOVztnWG2uAypDLi3
+ KdsA==
+X-Gm-Message-State: AOJu0Yz7tdDwh4poMyCMg4G7cK1DV3UT63jbxLSfWqT/wIrOi2vPJrF0
+ /YL+LUveaSjWSy/iO5ihHW0=
+X-Google-Smtp-Source: AGHT+IEh9pcDdj7MSOdioIiR+CHysM01noGu3l8//+J+dTQNeFosR4AJLog5PEU1ITw+Aw2h9Wcy5Q==
+X-Received: by 2002:a05:6214:5c6:b0:66f:ac56:fb9b with SMTP id
+ t6-20020a05621405c600b0066fac56fb9bmr4718605qvz.22.1698858732348; 
+ Wed, 01 Nov 2023 10:12:12 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ cp13-20020ad44aed000000b0066d32666a20sm1651513qvb.71.2023.11.01.10.12.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Nov 2023 10:12:12 -0700 (PDT)
+Message-ID: <d4bc9fbc-d8de-0a72-d8cd-c54dcf5a4d5e@gmail.com>
+Date: Wed, 1 Nov 2023 13:12:11 -0400
 MIME-Version: 1.0
-References: <20231031051805.62430-1-samuel@sholland.org>
-In-Reply-To: <20231031051805.62430-1-samuel@sholland.org>
-From: Jesse T <mr.bossman075@gmail.com>
-Date: Wed, 1 Nov 2023 13:11:25 -0400
-Message-ID: <CAJFTR8Rb0QdQMSx2pSr6_2y3QgoaJwJs6e_bFhng8LdqejB5fw@mail.gmail.com>
-Subject: Re: [PATCH v3 0/4] sunxi: SPL FIT support for 32-bit sunxi SoCs
-To: Samuel Holland <samuel@sholland.org>
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- u-boot@lists.denx.de, Icenowy Zheng <icenowy@aosc.io>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v4 3/8] clk: k210: Move soc_clk_dump function
+Content-Language: en-US
+To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
+ <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
+ <20231017165649.1492-4-ivprusov@sberdevices.ru>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20231017165649.1492-4-ivprusov@sberdevices.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +104,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 31, 2023 at 1:18=E2=80=AFAM Samuel Holland <samuel@sholland.org=
-> wrote:
->
-> This series makes the necessary changes so 32-bit sunxi SoCs can load
-> additional device trees or firmware from SPL along with U-Boot proper.
-> Crust (SCP firmware) has support for A33 and H3, and H3 also needs to
-> load an eGon blob to support CPU 0 hotplug (a silicon bug workaround).
->
-> FIT unlocks more features (signatures, multiple DTBs, etc.), so enable
-> it by default. A10 (sun4i) only has 24 KiB of SRAM A1, so it needs
-> SPL_FIT_IMAGE_TINY. For consistency, enable that option everywhere.
->
-> After this series is applied, we can increase SPL_MAX_SIZE for H6 and
-> newer SoCs, both 32-bit (e.g. A50, T113) and 64-bit. I did not do that
-> yet because there is some discussion to be had about the correct value:
-> it must be adjusted to guarantee return-to-FEL functionality, and the
-> exact adjustment depends on the sunxi-fel tool implementation.
->
-> Changes in v3:
->  - Rebased and collected tags
->
-> Changes in v2:
->  - Disable padding from SPL_PAD_TO
->  - Rely on binman min-size instead of using explicit offsets
->  - Use Kconfig for firmware addresses instead of an #ifdef staircase
->
-> Samuel Holland (4):
->   sunxi: spl: Disable padding from SPL_PAD_TO
->   sunxi: binman: Move BL31 and SCP firmware addresses to Kconfig
->   sunxi: binman: Support FIT generation for 32-bit SoCs
->   sunxi: Enable SPL FIT loading for 32-bit SoCs
->
->  arch/arm/Kconfig               |  1 +
->  arch/arm/dts/sunxi-u-boot.dtsi | 39 ++++++++++++++++++----------------
->  arch/arm/mach-sunxi/Kconfig    | 17 +++++++++++++++
->  common/spl/Kconfig             |  6 ++----
->  4 files changed, 41 insertions(+), 22 deletions(-)
->
-> --
-> 2.41.0
->
+On 10/17/23 12:56, Igor Prusov wrote:
+> Move clock dump function to avoid forward declaration after switching to
+> dump in clk_ops.
+> 
+> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+> ---
+>   drivers/clk/clk_k210.c | 92 +++++++++++++++++++++---------------------
+>   1 file changed, 46 insertions(+), 46 deletions(-)
+> 
+> diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
+> index c534cc07e0..2f17152021 100644
+> --- a/drivers/clk/clk_k210.c
+> +++ b/drivers/clk/clk_k210.c
+> @@ -1238,52 +1238,6 @@ static int k210_clk_request(struct clk *clk)
+>   	return 0;
+>   }
+>   
+> -static const struct clk_ops k210_clk_ops = {
+> -	.request = k210_clk_request,
+> -	.set_rate = k210_clk_set_rate,
+> -	.get_rate = k210_clk_get_rate,
+> -	.set_parent = k210_clk_set_parent,
+> -	.enable = k210_clk_enable,
+> -	.disable = k210_clk_disable,
+> -};
+> -
+> -static int k210_clk_probe(struct udevice *dev)
+> -{
+> -	int ret;
+> -	struct k210_clk_priv *priv = dev_get_priv(dev);
+> -
+> -	priv->base = dev_read_addr_ptr(dev_get_parent(dev));
+> -	if (!priv->base)
+> -		return -EINVAL;
+> -
+> -	ret = clk_get_by_index(dev, 0, &priv->in0);
+> -	if (ret)
+> -		return ret;
+> -
+> -	/*
+> -	 * Force setting defaults, even before relocation. This is so we can
+> -	 * set the clock rate for PLL1 before we relocate into aisram.
+> -	 */
+> -	if (!(gd->flags & GD_FLG_RELOC))
+> -		clk_set_defaults(dev, CLK_DEFAULTS_POST_FORCE);
+> -
+> -	return 0;
+> -}
+> -
+> -static const struct udevice_id k210_clk_ids[] = {
+> -	{ .compatible = "canaan,k210-clk" },
+> -	{ },
+> -};
+> -
+> -U_BOOT_DRIVER(k210_clk) = {
+> -	.name = "k210_clk",
+> -	.id = UCLASS_CLK,
+> -	.of_match = k210_clk_ids,
+> -	.ops = &k210_clk_ops,
+> -	.probe = k210_clk_probe,
+> -	.priv_auto = sizeof(struct k210_clk_priv),
+> -};
+> -
+>   #if IS_ENABLED(CONFIG_CMD_CLK)
+>   static char show_enabled(struct k210_clk_priv *priv, int id)
+>   {
+> @@ -1342,3 +1296,49 @@ int soc_clk_dump(void)
+>   	return 0;
+>   }
+>   #endif
+> +
+> +static const struct clk_ops k210_clk_ops = {
+> +	.request = k210_clk_request,
+> +	.set_rate = k210_clk_set_rate,
+> +	.get_rate = k210_clk_get_rate,
+> +	.set_parent = k210_clk_set_parent,
+> +	.enable = k210_clk_enable,
+> +	.disable = k210_clk_disable,
+> +};
+> +
+> +static int k210_clk_probe(struct udevice *dev)
+> +{
+> +	int ret;
+> +	struct k210_clk_priv *priv = dev_get_priv(dev);
+> +
+> +	priv->base = dev_read_addr_ptr(dev_get_parent(dev));
+> +	if (!priv->base)
+> +		return -EINVAL;
+> +
+> +	ret = clk_get_by_index(dev, 0, &priv->in0);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/*
+> +	 * Force setting defaults, even before relocation. This is so we can
+> +	 * set the clock rate for PLL1 before we relocate into aisram.
+> +	 */
+> +	if (!(gd->flags & GD_FLG_RELOC))
+> +		clk_set_defaults(dev, CLK_DEFAULTS_POST_FORCE);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id k210_clk_ids[] = {
+> +	{ .compatible = "canaan,k210-clk" },
+> +	{ },
+> +};
+> +
+> +U_BOOT_DRIVER(k210_clk) = {
+> +	.name = "k210_clk",
+> +	.id = UCLASS_CLK,
+> +	.of_match = k210_clk_ids,
+> +	.ops = &k210_clk_ops,
+> +	.probe = k210_clk_probe,
+> +	.priv_auto = sizeof(struct k210_clk_priv),
+> +};
 
-Acked-by: Jesse Taube <Mr.Bossman075@gmail.com>
-
-Looks good!
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
