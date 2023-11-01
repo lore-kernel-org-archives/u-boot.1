@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B73C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 14:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B82C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 14:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70B5D87D1A;
-	Wed,  1 Nov 2023 15:11:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8183C87D22;
+	Wed,  1 Nov 2023 15:11:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="MuNZSJXe";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="iYerkKsU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 664F187CF6; Wed,  1 Nov 2023 15:05:20 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 4B62787CF6; Wed,  1 Nov 2023 15:05:21 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5DB87D06
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 15:05:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE01587D0B
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 15:05:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 34659120035;
- Wed,  1 Nov 2023 17:05:14 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 34659120035
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 2837E100024;
+ Wed,  1 Nov 2023 17:05:15 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2837E100024
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1698847514;
- bh=X8N+NLz4a+p7W8gWxruFdL14oYTRzWa6jt9J7lTlCZI=;
+ s=mail; t=1698847515;
+ bh=yFZ5X6oU0nBWWN0p3IFNYnE3fJI9f0SRKMvP6nyzEUE=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=MuNZSJXe1ryAE10wIDe+tbzYQhtM82BHkkGZalbezNm1RbpdVmSAUybjJtHxbs1lv
- Ah6R6B68ZRYXT7GI1VkTVqkn3zK28DZMn4GFUfZG6xe6U5HtXAqC9uNh5QjSmoab/9
- 11Z4y+XOFueRnuSIGSZhCm6QD+giPSKIneMvTul7CX5f1Scy1ju0lQ4U4LNDoOIwZp
- txD02C72XkbaPFgBOOEPj3BOKlopCeKpQLdgUK//ElNPtxf1U/ZqToiqlluZCBC1Br
- iYNJZN3pua/f2HJ0xG3wdaFr9qwxN8GAAIlvbbZyvWGMMWTnxr0DOFiCXkLASerIrE
- iNF/9GVFmgPqg==
+ b=iYerkKsUGkiUfRlA5nAwTZ1G6oU4z08+aO/LxwuIPyVMX/rQtqRT9nokk2iOfFwI2
+ yUg4NCwsauu28Oj2w25klfmCGm+dpG3yAf5CWCOBCzWVSn8JhzrEge+euevY2feaw5
+ bTJFQyVoPHtrPa5cjFmAgdoFjohq83iThQUA2R33kQ5PM+5UL/garUS/nFNKS9fBph
+ GniC8Yj+qxYbzLGjZj59tWUrO0zwwSd7q3EqWyu6h7lJUZeVAdwnW4HUGpXivWvxiP
+ ThkEOcJlBjG36zekZBZToudOhLwf6gHx0K9QZUImR4ndraOSR2BzvU51oWlw7cmA1t
+ veIXjMOeyyd0w==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed,  1 Nov 2023 17:05:14 +0300 (MSK)
+ Wed,  1 Nov 2023 17:05:15 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Wed, 1 Nov 2023 17:05:13 +0300
+ 15.2.1118.37; Wed, 1 Nov 2023 17:05:14 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v1 1/2] clk: a1: add new clocks for USB stack
-Date: Wed, 1 Nov 2023 17:04:56 +0300
-Message-ID: <20231101140500.9025-2-avromanov@salutedevices.com>
+ <kernel@sberdevices.ru>, Dmitry Rokosov <ddrokosov@salutedevices.com>, Alexey
+ Romanov <avromanov@salutedevices.com>
+Subject: [PATCH v1 2/2] drivers: sm: bind child sm devices in the device tree
+Date: Wed, 1 Nov 2023 17:04:57 +0300
+Message-ID: <20231101140500.9025-3-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231101140500.9025-1-avromanov@salutedevices.com>
 References: <20231101140500.9025-1-avromanov@salutedevices.com>
@@ -67,7 +68,7 @@ X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
 X-KSMG-Rule-ID: 10
 X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181052 [Nov 01 2023]
+X-KSMG-AntiSpam-Lua-Profiles: 181050 [Nov 01 2023]
 X-KSMG-AntiSpam-Version: 6.0.0.2
 X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
 X-KSMG-AntiSpam-Rate: 0
@@ -76,10 +77,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 543 543
  1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s,
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ salutedevices.com:7.1.1;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1, FromAlignment: s,
  ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
@@ -105,31 +106,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since we sync device tree with Linux, we have to add this
-clock definition for USB stack.
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
 
+One well-known sm child device that provides secure power control is the
+Secure Power Controller. This device utilizes SMC calls to communicate
+with power domains on the secure monitor side.
+
+Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/clk/meson/a1.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/sm/meson-sm.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-index 1075ba7333..d0f5bb3753 100644
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -241,6 +241,12 @@ static const struct meson_clk_info *meson_clocks[] = {
- 	[CLKID_USB_PHY_IN] = CLK_GATE("usb_phy_in", A1_SYS_OSCIN_CTRL, 2,
- 		EXTERNAL_XTAL
- 	),
-+	[CLKID_USB_CTRL_IN] = CLK_GATE("usb_ctrl_in", A1_SYS_OSCIN_CTRL, 3,
-+		EXTERNAL_XTAL
-+	),
-+	[CLKID_USB_CTRL] = CLK_GATE("usb_ctrl", A1_SYS_CLK_EN0, 28,
-+		CLKID_SYS
-+	),
- 	[CLKID_USB_PHY] = CLK_GATE("usb_phy", A1_SYS_CLK_EN0, 27,
- 		CLKID_SYS
- 	),
+diff --git a/drivers/sm/meson-sm.c b/drivers/sm/meson-sm.c
+index faef369f35..1dd1584855 100644
+--- a/drivers/sm/meson-sm.c
++++ b/drivers/sm/meson-sm.c
+@@ -194,6 +194,7 @@ U_BOOT_DRIVER(meson_sm) = {
+ 	.id = UCLASS_SM,
+ 	.of_match = meson_sm_ids,
+ 	.probe = meson_sm_probe,
++	.bind = dm_scan_fdt_dev,
+ 	.priv_auto = sizeof(struct meson_sm_priv),
+ 	.ops = &sm_ops,
+ };
 -- 
 2.25.1
 
