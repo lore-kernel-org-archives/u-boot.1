@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81BB8C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6701AC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:23:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8445B8757D;
-	Wed,  1 Nov 2023 19:20:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AC71E87D7B;
+	Wed,  1 Nov 2023 19:23:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D+LDqWaV";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="cTNH6M4E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E70E8757D; Wed,  1 Nov 2023 19:20:31 +0100 (CET)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4E02387524; Wed,  1 Nov 2023 19:23:31 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16FC187524
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:20:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D648186C3B
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:23:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-1eb6c559ab4so87501fac.0
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 11:20:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698862824; x=1699467624; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NMwoMpjS31KvtokHPPx7b71b3ifpASzTaIxaV5G/sM0=;
- b=D+LDqWaV+CuRiPwh4lEU1A4UUbh2Xyxz9Jvauj17jyKGNNxSzvBBmTmKe4KgaCA6wS
- Nk3SnRqh886rs1GHnhNpblD5In3GL05eB6Wi+aQ9mt+nWraZITYbDrmMmmYvR4oTrJFE
- ToV80emXJwm3Bl6H1RJ9eXDBvdROsQShC6mG5KlyPZLD3lwCqcYkl1VuhteFw7ZHEex9
- sfMyInDZtIIilUVziefoDVHeEtWiXsMh0LBhqx/IkQqMvrlDlKt9i02bj1TLwGDjKp7N
- JLfOrkfbn9JzU8AZPI2jwsSfh9JbznGq2DDoxNl1fcHqN6ggTGQ3q1gH35Am2YvFqIrK
- b/cA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698862824; x=1699467624;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NMwoMpjS31KvtokHPPx7b71b3ifpASzTaIxaV5G/sM0=;
- b=s9sB8D6f6TV4YLHnePxXIH+MiAfPV4Lq+OPa+OoW8Ioqad/9M7ktxkr717dod0efkS
- tqAv4Zpzq2Sr4UQPPYgaqR02aNTjSOXaaHAQSeWhyTjKITSewJXGWJYzuNyvzzx8ihVX
- BsLghpL++aS27SeMvtcGU3ugJ1sH7cL0XWSppSBEE6t/dHGFOD6o07HH3Q5Hh0Qs0+jW
- w1sI2n0WdldWIluC2QykZWPYHzwGy/qrfecQj9KGXKjGDLh2CdjVR6tSrqex3PeGNqdl
- lyyQ84LfytxbiatzmMMFUGuJE0YpJ8EN/IeA0Td76kiOZSUt8lCauT4MQIPWJ8umH4IB
- pe8A==
-X-Gm-Message-State: AOJu0Yyrsx9hRAzlT3+shcfqtZvOJIC+afcBVPzZ+QhxgrLPrZmWHcDk
- jesu0Yjkg9nU56Q8KgAZIPc=
-X-Google-Smtp-Source: AGHT+IGABbcl2uOA7DqL8LZoqAAA32mSYyGCD/QqoLx32BXdDpbMDw8vEenSPHQYeoWVp8y7S5L1Uw==
-X-Received: by 2002:a05:6871:c48e:b0:1e9:dae7:f58a with SMTP id
- ci14-20020a056871c48e00b001e9dae7f58amr14852131oac.22.1698862824532; 
- Wed, 01 Nov 2023 11:20:24 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- d13-20020ac8544d000000b00419576c7b75sm1609252qtq.23.2023.11.01.11.20.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 11:20:24 -0700 (PDT)
-Message-ID: <18809097-1344-325f-fb54-21fccb86210e@gmail.com>
-Date: Wed, 1 Nov 2023 14:20:23 -0400
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1698863006; x=1701455006;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=ynNVK4+r6LnIF3JjNhHEFKyGGedTqPHiwyqA4Lb/CFk=;
+ b=cTNH6M4EFLpqk/Gls6KHg8302ryCxpVH8FhIpw2XbtkY2cOYogm0vkw4cmBk5YN0
+ H/n+OtnVpYd5PAggZUUt83a7U6TsX6A1EfL8W4t9DY3aut7o2TEOywEyeg38j4a1
+ JP9utzz8PeBdrokgx9uS4pKbbqP8iYmd36We+mFdZVw=;
+X-AuditID: ac14000a-b2f4b700000074e4-38-6542979eaded
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 68.B8.29924.E9792456;
+ Wed,  1 Nov 2023 19:23:26 +0100 (CET)
+Received: from [192.168.10.3] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 1 Nov 2023
+ 19:23:25 +0100
+Message-ID: <33df3edd-3ede-4cb9-83b0-984c1cada5bb@phytec.de>
+Date: Wed, 1 Nov 2023 19:23:24 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
 Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Peter Hoyes <Peter.Hoyes@arm.com>
-References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
- <20231101170559.680ab493@donnerap.manchester.arm.com>
- <5f170b50-94ac-5bf6-87d2-a3e12b8ba364@gmail.com>
- <20231101174951.2baa2471@donnerap.manchester.arm.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231101174951.2baa2471@donnerap.manchester.arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Dhruva Gole <d-gole@ti.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <nm@ti.com>
+References: <20231031133732.265589-1-w.egorov@phytec.de>
+ <20231101155734.5mzpvq4xcm2o5emm@dhruva>
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20231101155734.5mzpvq4xcm2o5emm@dhruva>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrILMWRmVeSWpSXmKPExsWyRpKBR3fedKdUg+fn5Cxa1npYvPlxlsni
+ 7d5Odovud+oOLB5n7+xg9OjvbmH1OH5jO1MAcxSXTUpqTmZZapG+XQJXxvOGMywF59Qqfn+c
+ ydbAuFOui5GTQ0LARGJJZwtbFyMXh5DAYiaJ5nl3WCGcO4wSv1u7WUGqeAVsJJa/n8QOYrMI
+ qEjM3XuEDSIuKHFy5hMWEFtUQF7i/q0ZYDXCAt4SX7/tALOZBcQlbj2ZzwRiiwDV/Fm1lAUi
+ 7izRePolWI2QQLJE47yFYLvYBNQl7mz4BmZzCphKzF12DareQmLxm4NQM+Ultr+dwwzRKy/x
+ 4tJyFohv5CWmnXvNDGGHShzZtJppAqPwLCSnzkJy0iwkY2chGbuAkWUVo1BuZnJ2alFmtl5B
+ RmVJarJeSuomRlA0iDBw7WDsm+NxiJGJg/EQowQHs5II72FTh1Qh3pTEyqrUovz4otKc1OJD
+ jNIcLErivPd7mBKFBNITS1KzU1MLUotgskwcnFINjMkb5ppNankZ9Dlq9fpvMUt17ya8Whjx
+ VTuB9Vffv3ypJ5VrU360WL45mPZ5q9rum1/vL/Myjo5Z9FXW32ynczCPwBpuL559h2fzaO/s
+ aaqda6fG0bJZQ3PWFheTV4L3bWKv+tq933rTdurN5JUXljO8Ysi/eW2C5kc1X9dKtoVJdzsn
+ HDoaO1GJpTgj0VCLuag4EQDG2OE7dAIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,123 +89,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/1/23 13:49, Andre Przywara wrote:
-> On Wed, 1 Nov 2023 13:16:24 -0400
-> Sean Anderson <seanga2@gmail.com> wrote:
-> 
-> Hi Sean,
-> 
->> On 11/1/23 13:05, Andre Przywara wrote:
->>> On Tue, 31 Oct 2023 14:55:50 +0200
->>> Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
->>>
->>> Hi Heinrich,
->>>    
->>>> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
->>>> provides an interface to a physical entropy source.
->>>>
->>>> A RNG driver based on the seed CSR is provided. It depends on
->>>> mseccfg.sseed being set in the SBI firmware.
->>>
->>> As you might have seen, I added a similar driver for the respective Arm
->>> functionality:
->>> https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
->>>
->>> And I see that you seem to use the same mechanism to probe and init the
->>> driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
->>> implemented.
->>> One downside of this approach is that the driver is always loaded (and
->>> visible in the DM tree), even with the feature not being available.
->>> That doesn't seem too much of a problem on the first glance, but it
->>> occupies a device number, and any subsequent other DM_RNG devices
->>> (like virtio-rng) typically get higher device numbers. So without
->>> the feature, but with virtio-rng, I get:
->>> VExpress64# rng 0
->>> No RNG device
->>> VExpress64# rng 1
->>> 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...
->>> ....
->>>
->>> Now the EFI code always picks RNG device 0, which means we don't get
->>> entropy in this case.
->>>
->>> Do you have any idea how to solve this?
->>> Maybe EFI tries to probe further - but that sounds arbitrary.
->>> Or we find another way for probing the device, maybe via some artificial
->>> CPU feature "bus"? There is UCLASS_CPU, but that doesn't look helpful?
->>>
->>> If anyone has any idea, I'd be grateful.
+Hi Dhruva,
+
+Am 01.11.23 um 16:57 schrieb Dhruva Gole:
+> Hi,
+>
+> On Oct 31, 2023 at 14:37:31 +0100, Wadim Egorov wrote:
+>> Add basic support for PHYTEC phyCORE-AM62x SoM.
 >>
->> Wouldn't the right way be to detect the hardware in bind()?
-> 
-> Yes, that's what I thought as well and tried, but the problem is that for
-> those "fixed drivers" (the ones using U_BOOT_DRVINFO) returning a
-> failure in bind() is fatal to the boot sequence:
-> ============
-> Model: FVP Base
-> DRAM:  2 GiB (effective 4 GiB)
-> No match for driver 'arm-rndr'
-> initcall failed at call 00000000fef3d744 (err=-19)
-> ### ERROR ### Please RESET the board ###
-> 
-> That is what a proper "CPU bus" would probably solve, as I agree that
-> failing bind() should be the proper solution.
-
-Hm, so maybe this should go in riscv_cpu_bind?
-
---Sean
-
-> Cheers,
-> Andre
-> 
->> --Sean
+>> Supported features:
+>>    - 2GB DDR4 RAM
+>>    - eMMC Flash
+>>    - OSPI NOR Flash
+>>    - external uSD
+>>    - Ethernet
+>>    - debug UART
 >>
->>> Cheers,
->>> Andre
->>>    
->>>> If the seed CSR readable, is not determinable by S-mode without risking
->>>> an exception. For safe driver probing allow to resume via a longjmp
->>>> after an exception.
->>>>
->>>> As the driver depends on mseccfg.sseed=1 we should wait with merging the
->>>> driver until a decision has been taken in the RISC-V PRS TG on prescribing
->>>> this.
->>>>
->>>> Setting mseccfg.sseed=1 is queued for OpenSBI [1]. This has been discussed
->>>> in the RISC-V Boot & Runtime Services TG. Standardization has to be pursued
->>>> via the upcoming platform specification.
->>>>
->>>> A bug fix for QEMU relating to the Zkr extension is available in [2].
->>>>
->>>> A similar Linux driver has been proposed in [3].
->>>>
->>>> [1] lib: sbi: Configure seed bits when MSECCFG is readable
->>>>       https://patchwork.ozlabs.org/project/opensbi/patch/20230712083254.1585244-1-sameo@rivosinc.com/
->>>> [2] [PATCH v2 1/1] target/riscv: correct csr_ops[CSR_MSECCFG]
->>>>       https://lore.kernel.org/qemu-devel/20231030102105.19501-1-heinrich.schuchardt@canonical.com/
->>>> [3] [PATCH v4 4/4] RISC-V: Implement archrandom when Zkr is available
->>>>       https://lore.kernel.org/linux-riscv/20230712084134.1648008-5-sameo@rivosinc.com/
->>>>
->>>> v3:
->>>> 	Add API documentation.
->>>> v2:
->>>> 	Catch exception if mseccfg.sseed=0.
->>>>
->>>> Heinrich Schuchardt (2):
->>>>     riscv: allow resume after exception
->>>>     rng: Provide a RNG based on the RISC-V Zkr ISA extension
->>>>
->>>>    arch/riscv/lib/interrupts.c |  13 ++++
->>>>    doc/api/index.rst           |   1 +
->>>>    drivers/rng/Kconfig         |   8 +++
->>>>    drivers/rng/Makefile        |   1 +
->>>>    drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
->>>>    include/interrupt.h         |  45 ++++++++++++++
->>>>    6 files changed, 184 insertions(+)
->>>>    create mode 100644 drivers/rng/riscv_zkr_rng.c
->>>>    create mode 100644 include/interrupt.h
->>>>   
->>>    
+>> Product page SoM: https://www.phytec.com/product/phycore-am62x
 >>
-> 
+>> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+>> ---
+>>   arch/arm/dts/Makefile                         |    4 +-
+>>   .../arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi | 2190 +++++++++++++++++
+>>   arch/arm/dts/k3-am62-phycore-som.dtsi         |  324 +++
+>>   .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  229 ++
+>>   arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   |  266 ++
+>>   arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  532 ++++
+>>   arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  |  134 +
+>>   arch/arm/mach-k3/Kconfig                      |    1 +
+>>   board/phytec/phycore_am62x/Kconfig            |   52 +
+>>   board/phytec/phycore_am62x/MAINTAINERS        |   15 +
+>>   board/phytec/phycore_am62x/Makefile           |    8 +
+>>   board/phytec/phycore_am62x/board-cfg.yaml     |   36 +
+>>   board/phytec/phycore_am62x/phycore-am62x.c    |   59 +
+>>   board/phytec/phycore_am62x/phycore_am62x.env  |   23 +
+>>   board/phytec/phycore_am62x/pm-cfg.yaml        |   12 +
+>>   board/phytec/phycore_am62x/rm-cfg.yaml        | 1088 ++++++++
+>>   board/phytec/phycore_am62x/sec-cfg.yaml       |  379 +++
+>>   configs/phycore_am62x_a53_defconfig           |  116 +
+>>   configs/phycore_am62x_r5_defconfig            |  131 +
+>>   include/configs/phycore_am62x.h               |   15 +
+>>   20 files changed, 5613 insertions(+), 1 deletion(-)
+>>   create mode 100644 arch/arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi
+>>   create mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
+>>   create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi
+>>   create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
+>>   create mode 100644 arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+>>   create mode 100644 arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
+>>   create mode 100644 board/phytec/phycore_am62x/Kconfig
+>>   create mode 100644 board/phytec/phycore_am62x/MAINTAINERS
+>>   create mode 100644 board/phytec/phycore_am62x/Makefile
+>>   create mode 100644 board/phytec/phycore_am62x/board-cfg.yaml
+>>   create mode 100644 board/phytec/phycore_am62x/phycore-am62x.c
+>>   create mode 100644 board/phytec/phycore_am62x/phycore_am62x.env
+>>   create mode 100644 board/phytec/phycore_am62x/pm-cfg.yaml
+>>   create mode 100644 board/phytec/phycore_am62x/rm-cfg.yaml
+>>   create mode 100644 board/phytec/phycore_am62x/sec-cfg.yaml
+>>   create mode 100644 configs/phycore_am62x_a53_defconfig
+>>   create mode 100644 configs/phycore_am62x_r5_defconfig
+>>   create mode 100644 include/configs/phycore_am62x.h
+>>
+>> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+>> index 55aceb51cd..8b371266dc 100644
+>> --- a/arch/arm/dts/Makefile
+>> +++ b/arch/arm/dts/Makefile
+>> @@ -1383,7 +1383,9 @@ dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
+>>   			      k3-am625-beagleplay.dtb \
+>>   			      k3-am625-r5-beagleplay.dtb \
+>>   			      k3-am625-verdin-wifi-dev.dtb \
+>> -			      k3-am625-verdin-r5.dtb
+>> +			      k3-am625-verdin-r5.dtb \
+>> +			      k3-am625-phyboard-lyra-rdk.dtb \
+>> +			      k3-am625-r5-phycore-som-2gb.dtb
+> Thanks for upstreaming Wadim!
+>
+> However I would prefer that you split all these patches into smaller
+> chunks for each file (preferrably) or group together files that have
+> like 20-30 lines of changes.
 
+Hm, seems to be difficult and not really reasonable to split like that.
+The big files are generated files or copy pasted from TI's evm. So I do 
+not think they need a big attention in the review process.
+
+- All yaml files are identical to TI's evm
+- k3-am62-phycore-som-ddr4-2gb.dtsi generated with TI's SysConfig DDR Tool
+- k3-am62-phycore-som.dtsi & k3-am625-phyboard-lyra-rdk.dts are 1:1 
+copies from vanilla Linux tree
+
+The rest is pretty small and reviewable IMO.
+
+I agree, I should have created a cover letter. I can do that in the next 
+series.
+
+Please let me know if you still want me to split it into more patches.
+But it would be nice if you could tell me how to split it exactly 
+without ending up with broken pieces.
+
+Regards,
+Wadim
+
+>
+> It's difficult to review thousands of lines of code at once, hope you
+> understand.
+>
+> Also would appreciate it if you sent the series with a cover letter
+> summarising your changes. You can also attach boot logs or any
+> additional info you may want the people reviewing/ testing the patches to
+> know in the cover letter.
+>
+>>   
+>>   dtb-$(CONFIG_SOC_K3_AM62A7) += k3-am62a7-sk.dtb \
+>>   			      k3-am62a7-r5-sk.dtb
+> [..snip..]
+>
