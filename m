@@ -4,63 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EDE5C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 15:57:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF87C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 16:10:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F2C3876C5;
-	Wed,  1 Nov 2023 16:57:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 21044876C5;
+	Wed,  1 Nov 2023 17:10:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CvW/rVCN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aAutcILl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E04F8876D9; Wed,  1 Nov 2023 16:57:41 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 351068765E; Wed,  1 Nov 2023 17:10:43 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C4B2875E5
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 16:57:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6664B876C5
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 17:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A1FvZp9030899;
- Wed, 1 Nov 2023 10:57:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698854255;
- bh=DdpR1G8AGvqIGEnGXalqTXxL/RzB2kUkd6jnGm8xFUA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=CvW/rVCN6ZxBdkoq/gJmyttJy7uR5MngqHxrCnuXI5S62ld7kiZC70QG3LkTP29aF
- 6S/CNzyWjg54lSk2+dc4kIdzs1iHGRtiee7HD5prMllUqpfOx+Fp7r/pANCVqgO+E6
- AhqPh/ETHlcsvMYGKTglC+34zofgI/iexS0n/g88=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A1FvZh5005146
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 1 Nov 2023 10:57:35 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
- Nov 2023 10:57:35 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 1 Nov 2023 10:57:35 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A1FvYjw085866;
- Wed, 1 Nov 2023 10:57:35 -0500
-Date: Wed, 1 Nov 2023 21:27:34 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, <nm@ti.com>
-Subject: Re: [PATCH 1/2] board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
-Message-ID: <20231101155734.5mzpvq4xcm2o5emm@dhruva>
-References: <20231031133732.265589-1-w.egorov@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2c509f2c46cso97081601fa.1
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 09:10:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1698855037; x=1699459837; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lm4cvAbqhAZu6q0CXOwHwUoPv/ZKFEt9z1Jn+buwzvE=;
+ b=aAutcILlgpnguiXNwYZVSneXf7NMuTF9fqRcua47M3ykPWpN6XDEA9odexGAW1j570
+ rI/kFsEHUYzOpdiQ0SDcQj+kb42b6ZS9z1woip7T/ABJBSaClG0lNPSlnwvohMuJcvfj
+ +lO3xy7TAbMDLrpSmpLultKpZHSlhjluIkgUo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698855037; x=1699459837;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lm4cvAbqhAZu6q0CXOwHwUoPv/ZKFEt9z1Jn+buwzvE=;
+ b=nsj3uING6qYWqCCVuXFWhwRTFnjEeGb/lEpEYbG6hSmE79n/wDTvwfbSFBJet5HAZW
+ fRySNUfbHKHSDHqf7cZX/YPBkF3veUPcBLKQ+0iynI8XzUsbjMYytXoJSo6ymPwuoOvO
+ 3XtIXKj1HVzVcbAkzIzmbq3r8909RaN0XF8X0KPdRAP2nJVPhWNb5cK67cJNdVcqNAOE
+ Tg0zvp9EModF6V5VV10VZ6fcIlTDMVnd8Xwtyf0dHa8vzPcgBUDVPpQUfpdarM4crDOO
+ rYjkc6Z6s5PB3b2PBUT+c8eFOJ0E/v1rpsibEB66+ilpOrtm/aHvmu9ht+hphDR+qlGp
+ 7x4w==
+X-Gm-Message-State: AOJu0YwGQiUS+UVetiUp8LNWpu5gILQy7W7Bir3kbAYUHCE5tCfdZWU/
+ Pp3D4E+Co5TxxO0ctuxU38RjAFM7MVWfuMYyEEKHBQ==
+X-Google-Smtp-Source: AGHT+IExdY46f828uZE8XsCXN7KISGP7/t2du4kxFt/XJaVEg4fP9QVdvxUIwbktA+V9dk/2ANUhOs1/evG05rYPy40=
+X-Received: by 2002:a05:6512:3e0c:b0:507:9e51:a6c7 with SMTP id
+ i12-20020a0565123e0c00b005079e51a6c7mr15831979lfv.58.1698855037182; Wed, 01
+ Nov 2023 09:10:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231031133732.265589-1-w.egorov@phytec.de>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231030194650.11594-1-mibodhi@gmail.com>
+ <CAJaLiFz3gcT5bA8q2f5h8tqSDeMKhQQkg-Z5KdQAmATmA0EKRg@mail.gmail.com>
+ <CAJaLiFyFMb5nxeRVw7WWRHvf+5FKAku=p_j6EfCkmTAHR41t1g@mail.gmail.com>
+In-Reply-To: <CAJaLiFyFMb5nxeRVw7WWRHvf+5FKAku=p_j6EfCkmTAHR41t1g@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 1 Nov 2023 10:10:20 -0600
+Message-ID: <CAPnjgZ3fp_23gA9ZF-kjx-3vBmU5sxNUY8Pyy+vKdrGMxOFJ6g@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Skip over bad device during bootflows scanning
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,95 +85,249 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tony,
 
-On Oct 31, 2023 at 14:37:31 +0100, Wadim Egorov wrote:
-> Add basic support for PHYTEC phyCORE-AM62x SoM.
-> 
-> Supported features:
->   - 2GB DDR4 RAM
->   - eMMC Flash
->   - OSPI NOR Flash
->   - external uSD
->   - Ethernet
->   - debug UART
-> 
-> Product page SoM: https://www.phytec.com/product/phycore-am62x
-> 
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  arch/arm/dts/Makefile                         |    4 +-
->  .../arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi | 2190 +++++++++++++++++
->  arch/arm/dts/k3-am62-phycore-som.dtsi         |  324 +++
->  .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  229 ++
->  arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   |  266 ++
->  arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  532 ++++
->  arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  |  134 +
->  arch/arm/mach-k3/Kconfig                      |    1 +
->  board/phytec/phycore_am62x/Kconfig            |   52 +
->  board/phytec/phycore_am62x/MAINTAINERS        |   15 +
->  board/phytec/phycore_am62x/Makefile           |    8 +
->  board/phytec/phycore_am62x/board-cfg.yaml     |   36 +
->  board/phytec/phycore_am62x/phycore-am62x.c    |   59 +
->  board/phytec/phycore_am62x/phycore_am62x.env  |   23 +
->  board/phytec/phycore_am62x/pm-cfg.yaml        |   12 +
->  board/phytec/phycore_am62x/rm-cfg.yaml        | 1088 ++++++++
->  board/phytec/phycore_am62x/sec-cfg.yaml       |  379 +++
->  configs/phycore_am62x_a53_defconfig           |  116 +
->  configs/phycore_am62x_r5_defconfig            |  131 +
->  include/configs/phycore_am62x.h               |   15 +
->  20 files changed, 5613 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi
->  create mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
->  create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi
->  create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
->  create mode 100644 arch/arm/dts/k3-am625-phycore-som-binman.dtsi
->  create mode 100644 arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
->  create mode 100644 board/phytec/phycore_am62x/Kconfig
->  create mode 100644 board/phytec/phycore_am62x/MAINTAINERS
->  create mode 100644 board/phytec/phycore_am62x/Makefile
->  create mode 100644 board/phytec/phycore_am62x/board-cfg.yaml
->  create mode 100644 board/phytec/phycore_am62x/phycore-am62x.c
->  create mode 100644 board/phytec/phycore_am62x/phycore_am62x.env
->  create mode 100644 board/phytec/phycore_am62x/pm-cfg.yaml
->  create mode 100644 board/phytec/phycore_am62x/rm-cfg.yaml
->  create mode 100644 board/phytec/phycore_am62x/sec-cfg.yaml
->  create mode 100644 configs/phycore_am62x_a53_defconfig
->  create mode 100644 configs/phycore_am62x_r5_defconfig
->  create mode 100644 include/configs/phycore_am62x.h
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 55aceb51cd..8b371266dc 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -1383,7 +1383,9 @@ dtb-$(CONFIG_SOC_K3_AM625) += k3-am625-sk.dtb \
->  			      k3-am625-beagleplay.dtb \
->  			      k3-am625-r5-beagleplay.dtb \
->  			      k3-am625-verdin-wifi-dev.dtb \
-> -			      k3-am625-verdin-r5.dtb
-> +			      k3-am625-verdin-r5.dtb \
-> +			      k3-am625-phyboard-lyra-rdk.dtb \
-> +			      k3-am625-r5-phycore-som-2gb.dtb
+On Tue, 31 Oct 2023 at 13:45, Tony Dinh <mibodhi@gmail.com> wrote:
+>
+> On Tue, Oct 31, 2023 at 12:26=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wr=
+ote:
+> >
+> > Hi Simon,
+> >
+> > On Mon, Oct 30, 2023 at 12:47=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> =
+wrote:
+> > >
+> > > During scanning for the next bootdev, if bootdev_next_prio() encounte=
+rs
+> > > a device error (e.g. ENOSYS), let it continue scanning the next devic=
+es,
+> > > not stopping prematurely.
+> > >
+> > > Background:
+> > >
+> > > During scanning for bootflows, it's possible for bootstd to encounter=
+ a
+> > > faulty device controller. Also when the same u-boot is used for anoth=
+er
+> > > variant of the same board, some device controller such as SATA might
+> > > not exist.
+> > >
+> > > I've found this issue while converting the Marvell Sheevaplug board t=
+o
+> > > use bootstd. This board has 2 variants, the original Sheevaplug has M=
+MC and
+> > > USB only, but the later variant comes with USB, MMC, and eSATA ports.=
+ We
+> > > have been using the same u-boot (starting with CONFIG_IDE and later w=
+ith DM
+> > > CONFIG_SATA) for both variants. This worked well with the old
+> > > envs-scripting booting scheme.
+> > >
+> > > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > > ---
+> > >
+> > >  boot/bootdev-uclass.c | 2 --
+> > >  1 file changed, 2 deletions(-)
+> > >
+> > > diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+> > > index 44ae98a926..b1d48e5b69 100644
+> > > --- a/boot/bootdev-uclass.c
+> > > +++ b/boot/bootdev-uclass.c
+> > > @@ -677,8 +677,6 @@ int bootdev_next_prio(struct bootflow_iter *iter,=
+ struct udevice **devp)
+> > >                                                         BOOTFLOWIF_SH=
+OW);
+> > >                                 log_debug("- bootdev_hunt_prio() ret =
+%d\n",
+> > >                                           ret);
+> > > -                               if (ret)
+> > > -                                       return log_msg_ret("hun", ret=
+);
+> > >                         }
+> > >                 } else {
+> > >                         ret =3D device_probe(dev);
+> > > --
+> > > 2.39.2
+> > >
+> >
+> > Per your request, here is the console trace log when the device error
+> > occurs. Perhaps we could improve bootdev_next_prio() to make the error
+> > status more visible in the console with printf? I've briefly looked at
+> > other device bootdev hunt drivers and did not see enough console
+> > output for this type of error, so it might be better that we have this
+> > output either in bootdev_next_prio() or bootdev_hunt_drv().
+> >
+> > <BEGIN LOG>
+> > U-Boot 2024.01-rc1-tld-1-00003-gd697d7b93a-dirty (Oct 26 2023 - 16:17:1=
+6 -0700)
+> > Marvell-Sheevaplug
+> >
+> > SoC:   Kirkwood 88F6281_A0
+> > DRAM:  512 MiB
+> > Core:  17 devices, 12 uclasses, devicetree: separate
+> > NAND:  512 MiB
+> > MMC:   338-uclass_find_device_by_seq() 0
+> > 346-uclass_find_device_by_seq()    - 0 'mvsdio@90000'
+> > 349-uclass_find_device_by_seq()    - found
+> > 252-  mvebu_mmc_power_up() mvebu_mmc mvsdio@90000: power up
+> > 399-mvebu_mmc_initialize() mvebu_mmc mvsdio@90000: mvebu_mmc_initialize
+> > 338-uclass_find_device_by_seq() 1
+> > 346-uclass_find_device_by_seq()    - 0 'mvsdio@90000'
+> > 353-uclass_find_device_by_seq()    - not found
+> > mvsdio@90000: 0
+> > Loading Environment from NAND... 338-uclass_find_device_by_seq() 0
+> > 346-uclass_find_device_by_seq()    - 0 'ethernet-controller@72000'
+> > 349-uclass_find_device_by_seq()    - found
+> > OK
+> > In:    serial
+> > Out:   serial
+> > Err:   serial
+> > Net:   eth0: ethernet-controller@72000
+> > Hit any key to stop autoboot:  0
+> >
+> > =3D> env def -a
+> > ## Resetting to default environment
+> >
+> > =3D> bootflow scan -l
+> > Scanning for bootflows in all bootdevs
+> > Seq  Method       State   Uclass    Part  Name                      Fil=
+ename
+> > ---  -----------  ------  --------  ----  ------------------------
+> > ----------------
+> > 338-uclass_find_device_by_seq() 0
+> > 346-uclass_find_device_by_seq()    - 0 'extlinux'
+> > 349-uclass_find_device_by_seq()    - found
+> > 338-uclass_find_device_by_seq() 1
+> > 346-uclass_find_device_by_seq()    - 0 'extlinux'
+> > 346-uclass_find_device_by_seq()    - 1 'script'
+> > 349-uclass_find_device_by_seq()    - found
+> > 338-uclass_find_device_by_seq() 2
+> > 346-uclass_find_device_by_seq()    - 0 'extlinux'
+> > 346-uclass_find_device_by_seq()    - 1 'script'
+> > 346-uclass_find_device_by_seq()    - 2 'pxe'
+> > 349-uclass_find_device_by_seq()    - found
+> > 871-   bootdev_hunt_prio() Hunting for priority 1
+> > 883-   bootdev_hunt_prio() exit 0
+> > 715-  bootdev_setup_iter() - bootdev_hunt_prio() ret 0
+> > 83-bootstd_get_bootdev_order() - targets <NULL> 00000000
+> > 746-  bootdev_setup_iter() setup labels 00000000
+> > 641-   bootdev_next_prio() next prio 0: dev=3D00000000/none
+> > 659-   bootdev_next_prio() - ethernet-controller@72000.boo: 6, want 0
+> > 659-   bootdev_next_prio() - mvsdio@90000.bootdev: 2, want 0
+> > 668-   bootdev_next_prio() None found at prio 0, moving to 1
+> > 871-   bootdev_hunt_prio() Hunting for priority 1
+> > 883-   bootdev_hunt_prio() exit 0
+> > 678-   bootdev_next_prio() - bootdev_hunt_prio() ret 0
+> > 659-   bootdev_next_prio() - ethernet-controller@72000.boo: 6, want 1
+> > 659-   bootdev_next_prio() - mvsdio@90000.bootdev: 2, want 1
+> > 668-   bootdev_next_prio() None found at prio 1, moving to 2
+> > 871-   bootdev_hunt_prio() Hunting for priority 2
+> > Hunting with: mmc
+> > 783-    bootdev_hunt_drv() Hunting with: mmc
+> > 879-   bootdev_hunt_prio() bootdev_hunt_drv() return 0
+> > 883-   bootdev_hunt_prio() exit 0
+> > 678-   bootdev_next_prio() - bootdev_hunt_prio() ret 0
+> > 659-   bootdev_next_prio() - ethernet-controller@72000.boo: 6, want 2
+> > 659-   bootdev_next_prio() - mvsdio@90000.bootdev: 2, want 2
+> > 756-  bootdev_setup_iter() Selected bootdev: mvsdio@90000.bootdev
+> > 134-bootflow_iter_set_dev() iter: Setting dev to mvsdio@90000.bootdev, =
+flags 0
+> > Scanning bootdev 'mvsdio@90000.bootdev':
+> > 573-bootdev_get_bootflow() ->get_bootflow mvsdio@90000.bootdev,0=3D0000=
+0000
+> > 337-   mvebu_mmc_set_ios() mvebu_mmc mvsdio@90000: bus[0] clock[0]
+> > 321-   mvebu_mmc_set_bus() mvebu_mmc mvsdio@90000: ctrl 0xf809:
+> > push-pull 1bit-width
+> > 279-   mvebu_mmc_set_clk() mvebu_mmc mvsdio@90000: clock off
+> > 337-   mvebu_mmc_set_ios() mvebu_mmc mvsdio@90000: bus[1] clock[0]
+> > 321-   mvebu_mmc_set_bus() mvebu_mmc mvsdio@90000: ctrl 0xf809:
+> > push-pull 1bit-width
+> > 279-   mvebu_mmc_set_clk() mvebu_mmc mvsdio@90000: clock off
+> > 337-   mvebu_mmc_set_ios() mvebu_mmc mvsdio@90000: bus[1] clock[97703]
+> > 321-   mvebu_mmc_set_bus() mvebu_mmc mvsdio@90000: ctrl 0xf809:
+> > push-pull 1bit-width
+> > 287-   mvebu_mmc_set_clk() mvebu_mmc mvsdio@90000: clock (97703) div : =
+1022
+> > 85-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: cmdidx [0x0]
+> > resp_type[0x0] cmdarg[0x0]
+> > 88-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: cmd 0 (hw state 0x20f=
+8)
+> > 233-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: resp[0x0] mvebu_mmc
+> > mvsdio@90000: cmdidx [0x8] resp_type[0x15] cmdarg[0x1aa]
+> > 88-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: cmd 8 (hw state 0x20f=
+8)
+> > 233-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: resp[0x15]
+> > mvebu_mmc mvsdio@90000: cmdidx [0x37] resp_type[0x15] cmdarg[0x0]
+> > 88-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: cmd 55 (hw state 0x20=
+f8)
+> > 233-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: resp[0x15]
+> > mvebu_mmc mvsdio@90000: cmdidx [0x0] resp_type[0x0] cmdarg[0x0]
+> > 88-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: cmd 0 (hw state 0x20f=
+8)
+> > 233-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: resp[0x0] mvebu_mmc
+> > mvsdio@90000: cmdidx [0x1] resp_type[0x1] cmdarg[0x0]
+> > 88-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: cmd 1 (hw state 0x20f=
+8)
+> > 233-  mvebu_mmc_send_cmd() mvebu_mmc mvsdio@90000: resp[0x1] Card did
+> > not respond to voltage select! : -110
+> > 333-bootdev_get_sibling_blk() act: returning err=3D-95
+> > 550-default_get_bootflow() sibling_blk ret=3D-95, blk=3D(none)
+> > 559-default_get_bootflow() blk: returning err=3D-108
+> > 375-      bootflow_check() check: returning err=3D-108
+> > 414- bootflow_scan_first() check - ret=3D-108
+> > 191-           iter_incr() entry: err=3D-108
+> > 248-           iter_incr() inc_dev=3D1
+> > 281-           iter_incr() labels 00000000
+> > 641-   bootdev_next_prio() next prio 2: dev=3D1fb4e800/mvsdio@90000.boo=
+tdev
+> > 668-   bootdev_next_prio() None found at prio 2, moving to 3
+> > 871-   bootdev_hunt_prio() Hunting for priority 3
+> > 883-   bootdev_hunt_prio() exit 0
+> > 678-   bootdev_next_prio() - bootdev_hunt_prio() ret 0
+> > 659-   bootdev_next_prio() - ethernet-controller@72000.boo: 6, want 3
+> > 659-   bootdev_next_prio() - mvsdio@90000.bootdev: 2, want 3
+> > 668-   bootdev_next_prio() None found at prio 3, moving to 4
+> > 871-   bootdev_hunt_prio() Hunting for priority 4
+> >
+> > Hunting with: ahci
+> > 783-    bootdev_hunt_drv() Hunting with: ahci
+> > Removing devices on SATA bus...
+> > Cannot find SATA device (err=3D0)
+> > 786-    bootdev_hunt_drv()   - hunt result -38
+> > 879-   bootdev_hunt_prio() bootdev_hunt_drv() return -38
+> > 883-   bootdev_hunt_prio() exit -38
+> > 678-   bootdev_next_prio() - bootdev_hunt_prio() ret -38
+> > 681-   bootdev_next_prio() hun: returning err=3D-38
+> > 308-           iter_incr() ret=3D-38, dev=3D00000000 none
+> > 134-bootflow_iter_set_dev() iter: Setting dev to (none), flags 0
+> > No more bootdevs
+> > 326-           iter_incr() incr: returning err=3D-19
+> > 434-  bootflow_scan_next() iter_incr: ret=3D-19
+> > 436-  bootflow_scan_next() done: returning err=3D-19
+> > 422- bootflow_scan_first() get: returning err=3D-19
+> > ---  -----------  ------  --------  ----  ------------------------
+> > ----------------
+> > (0 bootflows, 0 valid)
+> >
+> > <END LOG>
+>
+> A bit more information:  drivers/ata/sata.c outputs these lines:
+>
+> Removing devices on SATA bus...
+> Cannot find SATA device (err=3D0)
 
-Thanks for upstreaming Wadim!
+Thanks for the trace!
 
-However I would prefer that you split all these patches into smaller
-chunks for each file (preferrably) or group together files that have
-like 20-30 lines of changes.
+I believe the problem is that sata_rescan() returns -ENOSYS. That
+error means that there is a device but it does not implement the
+uclass method requested. In this case -ENOENT would be a better error,
+since there is nothing there.
 
-It's difficult to review thousands of lines of code at once, hope you
-understand.
+Then in bootdev_hunt_drv(), check for -ENOENT from the info->hunt()
+call and ignore it.
 
-Also would appreciate it if you sent the series with a cover letter
-summarising your changes. You can also attach boot logs or any
-additional info you may want the people reviewing/ testing the patches to
-know in the cover letter.
+You should also update bootdev_hunter_func() docs to indicate what
+-ENOENT means.
 
->  
->  dtb-$(CONFIG_SOC_K3_AM62A7) += k3-am62a7-sk.dtb \
->  			      k3-am62a7-r5-sk.dtb
-[..snip..]
-
--- 
-Best regards,
-Dhruva Gole <d-gole@ti.com>
+Regards,
+Simon
