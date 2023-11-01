@@ -4,90 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77126C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 17:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15456C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 17:12:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E53F4870FF;
-	Wed,  1 Nov 2023 18:11:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C0A387008;
+	Wed,  1 Nov 2023 18:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nckupwXV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XDVyJgO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB1DA86E24; Wed,  1 Nov 2023 18:11:38 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id BE26187C51; Wed,  1 Nov 2023 18:12:08 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A982186FB2
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 18:11:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AC0586E24
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 18:12:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-77063481352so92183785a.1
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 10:11:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-28041176e77so73625a91.0
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 10:12:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698858693; x=1699463493; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=46h/KhN/7RdInOJ3BBu0welC5pqJf6vbaHJ5AuuWfxc=;
- b=nckupwXVMFqEoc6niyd7x9iZfbzMpsgCh9I/AAmypwWqBED1DOzpBGTEtrwTrf/g8s
- KiRpQFax7ocDYPIy9wUSQuWUrK2I8Ru4ysxSeBymMPLkgNvY/s/A9kKhV/DCheSVYTxB
- +I8UVS954AYB6PxADckik6Pbs90GMMhGPIFx8L8ruOBroLIW7cGWD1MVbeNDrwfZ1/ho
- yQjPrmuoz7ZEGgedf6pSxRMe9IQD1weZEHFp2DoHJbWNRPe8F+gIJzlQC0rBuLxo7WUI
- d+I7rtNa0oxr/H52b0GRbC/2wFD3yFxNwFrL0ETaiSTP/Q5OPT7qb8pekLK4fWn+OOjf
- 4hiA==
+ d=gmail.com; s=20230601; t=1698858722; x=1699463522; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PhCuB0RikpX08XFReaZkAu7p6quFkBri/8+PSHJP+94=;
+ b=XDVyJgO+5GfX9GRFClJKifPgDzv14pWS63Z1eTwdxM5CQ40IVxGJeFGND+zi1M4Mk1
+ QsUa93/iVRwy2d6gs8XKBhO2FyzcXDZOBIFez0hNdnRWseayDEYT41CLZE4JbjhN8ZUZ
+ 0tXeoO6KmsQyZKZMG7ARALNoAKDJP9OlpNOdwmEH6QKCLGdNgJg2aoXKr0Zm9tIvMHXL
+ 5JFSGU09kmwfyDJcY5UhQTgIQbnBdGPA1v95Fqfi5GHYSDwa4yYQel/MooD5BjW5MqJx
+ RaQGa3FM2Ygj5+nq6MkbpCbL93MfTz8dX+zkI8srvxYA4/3ucXMfzj+x1VQI47VQBQ4O
+ BKFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698858693; x=1699463493;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=46h/KhN/7RdInOJ3BBu0welC5pqJf6vbaHJ5AuuWfxc=;
- b=HfSbqS0+WE2uJNrKlnhv4wHMg+b7lnlkvtYxxo8auh+amCgRhg3EAT89KOfBc4RLe6
- NOxpYwUgEKl5IOppte+QuwJzbCAe+ypyCJlAgE8zlPZo0N0tIm9vfjwj8E+sp4QnjBcu
- Zy970OPd4pc6xx7rUAU2iYzryYPfqfwayUmoNYs5+0/EtTxQSrlLgmMtKnbqQqiDcbEz
- 7osNnnYh4iC0c4di5MsP7dAllh1qYIlOyTuso1AGDoHdYUhDEsaDVwSrTMyyhJyD/5gE
- JeIf3xBYrHZ8tBZbc9VM2J+XO3ECJQn0bGzH2UfW4iKGhjZQDCyrokfZkQZm4T7a/vaV
- P5Hw==
-X-Gm-Message-State: AOJu0Yx6xaProsWQw84j+daSV3fqISwW7Ta1LBRG51OEe1ZV5Dwzwdv8
- jvG4n4nFBm/yFgwoNUPzLH8=
-X-Google-Smtp-Source: AGHT+IEcwjX/wTuzVtFvF9fyx6gqKP6h8lXShoRRIbfXGmfv9FK3wjgzUwWau5AEn1kE3m2qRG5YpA==
-X-Received: by 2002:a05:620a:1488:b0:778:8ebc:129e with SMTP id
- w8-20020a05620a148800b007788ebc129emr8351667qkj.15.1698858693336; 
- Wed, 01 Nov 2023 10:11:33 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- a14-20020a05620a02ee00b0076f21383b6csm1582561qko.112.2023.11.01.10.11.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 10:11:33 -0700 (PDT)
-Message-ID: <df88e98f-99de-abca-de7c-6d755c6283ff@gmail.com>
-Date: Wed, 1 Nov 2023 13:11:31 -0400
+ d=1e100.net; s=20230601; t=1698858722; x=1699463522;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PhCuB0RikpX08XFReaZkAu7p6quFkBri/8+PSHJP+94=;
+ b=ipEc3WHIXuGanPZu8LRteNDDh91U7yLsv+kUaSQm0GE1AbslFUdbTAkcn1PSUnhhxL
+ DK1+pN6lgoVV0VKeKO+n1nCPBzW593vaKc5Q8rsVDeticaMRUMB26+EwKQkh7nAVAk1H
+ zRn8/n9XnyrazVZ0ZE/ufDlDKwoDgQelydhJFN6XeTQPcL7lQJ5ccU9qPQmHPznW3rW8
+ X63wKYMjYh7ESDtDHOoxalAl7gqxZbMBX/3h9zH+sWofKrwyu/6WuFBBPGXfYpNsZPWB
+ z4YILLJQ38qgP0CH0b7mYLRT+14DSdTfD7obV7N9la5eB9MI7eZFWhtY838z9aZHIO85
+ BEnQ==
+X-Gm-Message-State: AOJu0YxiE0nDlYXUfd2giE4r97muLeYw/O7TeTm9xQU1kVcpRy19p1e/
+ PL6xUSdDklslvBRT7qA6jWRG6W9ELFOnnMzISUM=
+X-Google-Smtp-Source: AGHT+IF8tJQFGSuP50e1YTDmb4+7tkfs009Vs/Q2KvGgKBI3Aau5PhEyCJjD8y4HEHI4NJJs9vOWTb/P8HlkZ+wxag0=
+X-Received: by 2002:a17:90b:1042:b0:27d:9b5:f28d with SMTP id
+ gq2-20020a17090b104200b0027d09b5f28dmr13614947pjb.8.1698858722488; Wed, 01
+ Nov 2023 10:12:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v4 5/8] clk: Add dump operation to clk_ops
-Content-Language: en-US
-To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
- <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: prusovigor@gmail.com, kernel@sberdevices.ru,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
- <20231017165649.1492-6-ivprusov@sberdevices.ru>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231017165649.1492-6-ivprusov@sberdevices.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20231031051805.62430-1-samuel@sholland.org>
+In-Reply-To: <20231031051805.62430-1-samuel@sholland.org>
+From: Jesse T <mr.bossman075@gmail.com>
+Date: Wed, 1 Nov 2023 13:11:25 -0400
+Message-ID: <CAJFTR8Rb0QdQMSx2pSr6_2y3QgoaJwJs6e_bFhng8LdqejB5fw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] sunxi: SPL FIT support for 32-bit sunxi SoCs
+To: Samuel Holland <samuel@sholland.org>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ u-boot@lists.denx.de, Icenowy Zheng <icenowy@aosc.io>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,33 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/17/23 12:56, Igor Prusov wrote:
-> This adds dump function to struct clk_ops which should replace
-> soc_clk_dump. It allows clock drivers to provide custom dump
-> implementation without overriding generic CCF dump function.
-> 
-> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->   include/clk-uclass.h | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/include/clk-uclass.h b/include/clk-uclass.h
-> index a22f1a5d84..30621e4823 100644
-> --- a/include/clk-uclass.h
-> +++ b/include/clk-uclass.h
-> @@ -39,6 +39,9 @@ struct clk_ops {
->   	int (*set_parent)(struct clk *clk, struct clk *parent);
->   	int (*enable)(struct clk *clk);
->   	int (*disable)(struct clk *clk);
-> +#if IS_ENABLED(CONFIG_CMD_CLK)
-> +	int (*dump)(struct udevice *dev);
-> +#endif
->   };
->   
->   #if 0 /* For documentation only */
+On Tue, Oct 31, 2023 at 1:18=E2=80=AFAM Samuel Holland <samuel@sholland.org=
+> wrote:
+>
+> This series makes the necessary changes so 32-bit sunxi SoCs can load
+> additional device trees or firmware from SPL along with U-Boot proper.
+> Crust (SCP firmware) has support for A33 and H3, and H3 also needs to
+> load an eGon blob to support CPU 0 hotplug (a silicon bug workaround).
+>
+> FIT unlocks more features (signatures, multiple DTBs, etc.), so enable
+> it by default. A10 (sun4i) only has 24 KiB of SRAM A1, so it needs
+> SPL_FIT_IMAGE_TINY. For consistency, enable that option everywhere.
+>
+> After this series is applied, we can increase SPL_MAX_SIZE for H6 and
+> newer SoCs, both 32-bit (e.g. A50, T113) and 64-bit. I did not do that
+> yet because there is some discussion to be had about the correct value:
+> it must be adjusted to guarantee return-to-FEL functionality, and the
+> exact adjustment depends on the sunxi-fel tool implementation.
+>
+> Changes in v3:
+>  - Rebased and collected tags
+>
+> Changes in v2:
+>  - Disable padding from SPL_PAD_TO
+>  - Rely on binman min-size instead of using explicit offsets
+>  - Use Kconfig for firmware addresses instead of an #ifdef staircase
+>
+> Samuel Holland (4):
+>   sunxi: spl: Disable padding from SPL_PAD_TO
+>   sunxi: binman: Move BL31 and SCP firmware addresses to Kconfig
+>   sunxi: binman: Support FIT generation for 32-bit SoCs
+>   sunxi: Enable SPL FIT loading for 32-bit SoCs
+>
+>  arch/arm/Kconfig               |  1 +
+>  arch/arm/dts/sunxi-u-boot.dtsi | 39 ++++++++++++++++++----------------
+>  arch/arm/mach-sunxi/Kconfig    | 17 +++++++++++++++
+>  common/spl/Kconfig             |  6 ++----
+>  4 files changed, 41 insertions(+), 22 deletions(-)
+>
+> --
+> 2.41.0
+>
 
-Please add documentation.
+Acked-by: Jesse Taube <Mr.Bossman075@gmail.com>
 
---Sean
+Looks good!
