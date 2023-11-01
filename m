@@ -4,63 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E4C4C4167D
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 09:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9300C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 09:50:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B0BE86F18;
-	Wed,  1 Nov 2023 10:33:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0BE5687641;
+	Wed,  1 Nov 2023 10:50:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ddQck87a";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CEB487CD1; Wed,  1 Nov 2023 10:33:43 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 318A686B9A
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 10:33:39 +0100 (CET)
+ id 0034B87651; Wed,  1 Nov 2023 10:50:41 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A88F0875F1
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 10:50:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=4da3=GO=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1698831203;
- bh=zZnsGjTJoXx+inCs/JGGFLmg1XRPlwZXLAjFViHX8VQ=;
- b=ddQck87aMTdJKJ4xa5BHRgIqKpc/D9wTrOIC1R8HspKFqiHbGc2IIOtSpNjtGY0iCWcdBkjMj
- Iuwk+iej+R7K/9a9cPO9DuUUWaFGW3E/3o3+U5pGn8GkYzUZlZZQHASQ4yIjV7pikl3gmY+slCw
- cOz759bdb1jz3Ph/Qal3ttPHY071I9SIWnPTZvQgNa2mRbNvQF6Vm1Ia0Gi2ob01LaWz/pKDGyV
- Zg3JsS6LX1+CAXq+WdvxC9uRTjJ6ar2gBgiRUqeFoHGVjh9bboJRJtzEZTHn5oY5GR740MmiLpc
- 6XVlR/0uYCrhy0hyRf19uq/+hhLp07YaWAlq2zoQ8ZLg==
-Message-ID: <9e7015ae-8a1a-41dc-a960-01525ecec913@kwiboo.se>
-Date: Wed, 1 Nov 2023 10:33:18 +0100
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4A8492F4;
+ Wed,  1 Nov 2023 02:51:19 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DEF953F67D;
+ Wed,  1 Nov 2023 02:50:36 -0700 (PDT)
+Date: Wed, 1 Nov 2023 09:50:34 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+Cc: u-boot@lists.denx.de, Samuel Holland <samuel@sholland.org>, Jagan Teki
+ <jagan@amarulasolutions.com>
+Subject: Re: [PATCH] sunxi: restore modified memory
+Message-ID: <20231101095034.44d14187@donnerap.manchester.arm.com>
+In-Reply-To: <20230721145721.616040-1-andrej.skvortzov@gmail.com>
+References: <20230721145721.616040-1-andrej.skvortzov@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] power: regulator: Fix an handling error about EALREADY
-Content-Language: en-US
-To: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: sjg@chromium.org, patrice.chotard@foss.st.com,
- eugen.hristev@collabora.com, trini@konsulko.com, u-boot@lists.denx.de
-References: <CGME20231101072318epcas1p2dbf8d1c1bbbb521c8e6744fae8e0b01d@epcas1p2.samsung.com>
- <20231101072316.190541-1-jh80.chung@samsung.com>
- <ea09f0bc-738c-4585-bc2a-eab3cd7e59ec@kwiboo.se>
- <025e01da0c9a$573ccbf0$05b663d0$@samsung.com>
- <025f01da0c9a$e4da4e60$ae8eeb20$@samsung.com>
- <026001da0c9c$20059840$6010c8c0$@samsung.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <026001da0c9c$20059840$6010c8c0$@samsung.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 65421b62f4420dfa529c8868
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,119 +57,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-11-01 09:19, Jaehoon Chung wrote:
-> 
-> 
->> -----Original Message-----
->> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Jaehoon Chung
->> Sent: Wednesday, November 1, 2023 5:11 PM
->> To: 'Jonas Karlman' <jonas@kwiboo.se>
->> Cc: sjg@chromium.org; patrice.chotard@foss.st.com; eugen.hristev@collabora.com; trini@konsulko.com; u-
->> boot@lists.denx.de
->> Subject: RE: [PATCH] power: regulator: Fix an handling error about EALREADY
->>
->>
->>
->>> -----Original Message-----
->>> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Jaehoon Chung
->>> Sent: Wednesday, November 1, 2023 5:07 PM
->>> To: 'Jonas Karlman' <jonas@kwiboo.se>
->>> Cc: sjg@chromium.org; patrice.chotard@foss.st.com; eugen.hristev@collabora.com; trini@konsulko.com;
->> u-
->>> boot@lists.denx.de
->>> Subject: RE: [PATCH] power: regulator: Fix an handling error about EALREADY
->>>
->>>
->>>
->>>> -----Original Message-----
->>>> From: Jonas Karlman <jonas@kwiboo.se>
->>>> Sent: Wednesday, November 1, 2023 4:47 PM
->>>> To: Jaehoon Chung <jh80.chung@samsung.com>
->>>> Cc: sjg@chromium.org; patrice.chotard@foss.st.com; eugen.hristev@collabora.com; trini@konsulko.com;
->>> u-
->>>> boot@lists.denx.de
->>>> Subject: Re: [PATCH] power: regulator: Fix an handling error about EALREADY
->>>>
->>>> On 2023-11-01 08:23, Jaehoon Chung wrote:
->>>>> If reegulator is already enabled, it will be return to EALREADY.
->>>>> But driver that its function is called can notice as error, even though
->>>>> it's working fine.
->>>>>
->>>>> Fixes: 4fcba5d556b ("regulator: implement basic reference counter")
->>>>>
->>>>> Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
->>>>> ---
->>>>>  drivers/power/regulator/regulator-uclass.c | 4 ++++
->>>>>  1 file changed, 4 insertions(+)
->>>>>
->>>>> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-
->>> uclass.c
->>>>> index 3a6ba69f6d5f..fc1c3eb93c9d 100644
->>>>> --- a/drivers/power/regulator/regulator-uclass.c
->>>>> +++ b/drivers/power/regulator/regulator-uclass.c
->>>>> @@ -187,6 +187,10 @@ int regulator_set_enable(struct udevice *dev, bool enable)
->>>>>  		}
->>>>>  	}
->>>>>
->>>>> +	/* Regulator is already enabled */
->>>>> +	if (ret == -EALREADY)
->>>>> +		return 0;
->>>>> +
->>>>
->>>> Use of regulator_set_enable_if_allowed() will cover this error,
->>>> and regulator_set_enable() should continue to return this error.
-> 
-> regulator_set_enable_if_allowed() can be covered. But regulator_set_enable is called in some drivers.
-> You means that it needs to replace to regulator_set_enable_if_allowed() from regulator_set_enable() about all driver?
+On Fri, 21 Jul 2023 17:57:21 +0300
+Andrey Skvortsov <andrej.skvortzov@gmail.com> wrote:
 
-I think that was the consensus when basic reference counter was
-implemented for gpio/fixed regulators. It should return -EALREADY when
-a regulator is already enabled, and if a caller need a more relaxed
-enable/disable regulator_set_enable_if_allowed() could be used.
+Hi Andrey,
 
-Tried to fix a few commons callers in following series, but did not
-cover hw I could not test. Can see that I missed the meson usb driver
-and was something I could have tested.
+sorry for the late reply!
 
-Keep fixed/gpio regulator enable count in balance
-https://patchwork.ozlabs.org/cover/1810049/
+> On A64 with 2G of RAM words at following addresses were modified with
+> 'aa55aa55' value:
+>  - 50000000
+>  - 60000000
+>  - 84000000
+>  - 88000000
+>  - 90000000
+>  - A0000000
+>  - A0000200
+> 
+> That made harder to pick memory range for persistent storage in RAM.
 
-Regards,
-Jonas
+In general I now think this patch is fine, since DRAM content can indeed
+be preserved across some reboot types.
+Some things below:
 
+> Signed-off-by: Andrey Skvortsov <andrej.skvortzov@gmail.com>
+> ---
+>  arch/arm/mach-sunxi/dram_helpers.c  | 16 ++++++++++++++--
+>  arch/arm/mach-sunxi/dram_sunxi_dw.c | 16 ++++++++++++++--
+>  2 files changed, 28 insertions(+), 4 deletions(-)
 > 
-> Best Regards,
-> Jaehoon Chung
-> 
->>
->> Well.. I will recheck about your comment.
->>
->> Best Regards,
->> Jaehoon Chung
->>
->>>
->>> When I have checked on my target, It seems that it can't cover all cases.
->>>
->>> On odroid-c4, USB doesn't work, even though its regulator is enabled.
->>>
->>> => ums 0 mmc 0
->>> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0x1dacc00
->>> No USB device found
->>> Couldn't init USB controller.
->>>
->>>
->>> Best Regards,
->>> Jaehoon Chung
->>>
->>>>
->>>> Regards,
->>>> Jonas
->>>>
->>>>>  	return ret;
->>>>>  }
->>>>>
->>>
->>
-> 
-> 
+> diff --git a/arch/arm/mach-sunxi/dram_helpers.c b/arch/arm/mach-sunxi/dram_helpers.c
+> index 2c873192e6..e3d236a4b3 100644
+> --- a/arch/arm/mach-sunxi/dram_helpers.c
+> +++ b/arch/arm/mach-sunxi/dram_helpers.c
+> @@ -32,12 +32,24 @@ void mctl_await_completion(u32 *reg, u32 mask, u32 val)
+>  #ifndef CONFIG_MACH_SUNIV
+>  bool mctl_mem_matches(u32 offset)
+>  {
+> +	unsigned long tmp_base;
+> +	unsigned long tmp_offset;
+
+The type doesn't match the return type of readl.
+Please use uint32_t here.
+And the names are somewhat misleading, at least to my mind, since they are
+not a base address and an offset, but rather just values at a base
+address and at an offset from that.
+So I think val_base and val_offset would be better.
+
+> +	bool ret;
+> +
+> +        /* Save original values */
+> +	tmp_base = readl(CFG_SYS_SDRAM_BASE);
+> +	tmp_offset = readl((ulong)CFG_SYS_SDRAM_BASE + offset);
+> +
+>  	/* Try to write different values to RAM at two addresses */
+>  	writel(0, CFG_SYS_SDRAM_BASE);
+>  	writel(0xaa55aa55, (ulong)CFG_SYS_SDRAM_BASE + offset);
+>  	dsb();
+>  	/* Check if the same value is actually observed when reading back */
+> -	return readl(CFG_SYS_SDRAM_BASE) ==
+> -	       readl((ulong)CFG_SYS_SDRAM_BASE + offset);
+> +	ret = readl(CFG_SYS_SDRAM_BASE) == readl((ulong)CFG_SYS_SDRAM_BASE + offset);
+> +
+> +	/* Restore original values */
+> +	writel(tmp_base, CFG_SYS_SDRAM_BASE);
+> +	writel(tmp_offset, (ulong)CFG_SYS_SDRAM_BASE + offset);
+> +	return ret;
+>  }
+>  #endif
+> diff --git a/arch/arm/mach-sunxi/dram_sunxi_dw.c b/arch/arm/mach-sunxi/dram_sunxi_dw.c
+> index 9107b114df..6245815fa2 100644
+> --- a/arch/arm/mach-sunxi/dram_sunxi_dw.c
+> +++ b/arch/arm/mach-sunxi/dram_sunxi_dw.c
+> @@ -657,13 +657,25 @@ static int mctl_channel_init(uint16_t socid, struct dram_para *para)
+>   */
+>  static bool mctl_mem_matches_base(u32 offset, ulong base)
+
+Mmh, somehow I dimly remember commenting on this before (some other
+patch?), but this function is essentially the same as above, isn't it?
+If someone has some spare cycles, they could be merged, implementing
+mctl_mem_matches() as a tiny wrapper around mctl_mem_matches_base(), to
+preserve all callers.
+
+Shouldn't block this patch, though.
+
+Cheers,
+Andre
+
+
+>  {
+> +	unsigned long tmp_base;
+> +	unsigned long tmp_offset;
+> +	bool ret;
+> +
+> +	/* Save original values */
+> +	tmp_base = readl(base);
+> +	tmp_offset = readl((ulong)base + offset);
+> +
+>  	/* Try to write different values to RAM at two addresses */
+>  	writel(0, base);
+>  	writel(0xaa55aa55, base + offset);
+>  	dsb();
+>  	/* Check if the same value is actually observed when reading back */
+> -	return readl(base) ==
+> -	       readl(base + offset);
+> +	ret = readl(base) == readl(base + offset);
+> +
+> +	/* Restore original values */
+> +	writel(tmp_base, base);
+> +	writel(tmp_offset, (ulong)base + offset);
+> +	return ret;
+>  }
+>  
+>  static void mctl_auto_detect_dram_size_rank(uint16_t socid, struct dram_para *para, ulong base, struct rank_para *rank)
 
