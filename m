@@ -4,83 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE90C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FFADC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1913D87D8D;
-	Wed,  1 Nov 2023 19:42:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 58E6487762;
+	Wed,  1 Nov 2023 19:51:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L/PkZkAP";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="IYS0UJoL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 769F487D8F; Wed,  1 Nov 2023 19:42:17 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6AFDF876DC; Wed,  1 Nov 2023 19:51:02 +0100 (CET)
+Received: from APC01-SG2-obe.outbound.protection.outlook.com
+ (mail-sgaapc01olkn2082e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:feab::82e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88B5187D8C
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44BC187762
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:50:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7788ebea620so2371085a.3
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 11:42:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698864126; x=1699468926; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sfi+VaZwjyhmmoSfe1Q6+EUrJy7DEr+vYbsiNkspcWw=;
- b=L/PkZkAP8HFxgx+MnBP6v0p7fC3wqgUY4dOlivgnecnC3rDH+5FLO++p53Ra+qLPrp
- MYCRJGGoE0zmhxwwJ9aaN6vs1Soze+EeV03jVHKmsLpmufb3QJrsLGBo/xoNtuujnBbW
- tRhX5P0UceMs/Mc7kyn2uMFIKVzPu9Ql0hs16v2tdMKXRioE2tcoyh9SeP3ddbfWzwzw
- 1DuzP+B+STUjLM4OWr0uRSy5fWCp3gca7ZbOyKB3ex54gqYrj6jg1ZyjqJREjqHrcVZO
- kWNkkGS8qamzHFU03mTRlc2XPx0o/shT3BMjMnNjCUrX5Hmgs7tep3hdvTXMNfxqaYSw
- bhsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698864126; x=1699468926;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sfi+VaZwjyhmmoSfe1Q6+EUrJy7DEr+vYbsiNkspcWw=;
- b=uO8kdQU2UWLpm3RUGiB6K5xyKuzOJQtXPjDEcDuvtyqQJZBgPsVjBHSe5/SRcW2DW1
- HfxM/g4+SPGtJW0DMI+5Z9Mua3I/hVqpEYlG8VjFHc6mkIl2Cj2//TX2Waagtgv1NWmw
- QmP3q4qBvlcQt4nIQKx67X+E0HbDOleVIpTjKDBhrMw+4jWmd5U5NmX2h0vCA1rP3Gkc
- 9B54FHWbJZ/kbKVn2v2FVYLOlOtGd9hXqi2M3PsE9gC8P+ER/BWlk6cwarg/Kwqw/D1O
- b/zMaCKED8rmhw3PLLqhK62bUts2GqXCa78cBMas+Mpz9yxP7+gNhvH/j3yd7N+n8Ysz
- qf5w==
-X-Gm-Message-State: AOJu0YwdsJzS7xhzOeF5FTujIY5CDJwubrLwomc7gc8rSiFixj67zewJ
- yKCc9Og92I9pbAHHjdk5Ir8=
-X-Google-Smtp-Source: AGHT+IFdUl7m7ugfgcJNxl5afnB0zJopiOoJAYKW1PIiLX1Hnl10zkjMEKz8WDvyEANnTvtI1VLfmg==
-X-Received: by 2002:a05:620a:4048:b0:771:31c:adcb with SMTP id
- i8-20020a05620a404800b00771031cadcbmr20186232qko.7.1698864126179; 
- Wed, 01 Nov 2023 11:42:06 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- bj42-20020a05620a192a00b00767da9b6ae9sm1670343qkb.11.2023.11.01.11.42.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 11:42:05 -0700 (PDT)
-Message-ID: <e5141f84-7a00-a159-3c2b-d8c4ea6ecbc5@gmail.com>
-Date: Wed, 1 Nov 2023 14:42:04 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH RESEND 1/5] clk: export clk_register_mux_table()
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=DrGr4tkR4f9kRCx1WTmAyL3n3DerCfv9HJF6jo+djUJhTcDMFqx2+5blqhH2G9YkFRO9U8TQftfovud62i8aSoG2YALAObTvbwebPi2ICqL65zbHcO3ERwCw/dZfvAOssbFcv4UtelNA40euonToH07UJiS0zffOJqhf3bDNqnITOjMeU5CVpMcgZ+iaHgY2b9Ic3W5EYRrFZr+SPUrX/o2VRE+sv9zXM4Wfc+gbVi+pVQcRvxZleageyeAbKJyMXisxkce6DvTEaxkxUdLaGM2LYrHHeFzvjDC6rdq/AVZ5oQbBJHalqgMxjyW/l+xm0WhdgkyEUVumTQYCk0t8hw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HzM8h2cjK4LgseGWQdhWFOIdDjENOKV8K5bktiel1nM=;
+ b=Rh3aulE6OftuK+c+PO5lwSAUprisR6REH9DQKSsRJpajgoD0ZlF+pvySC0fzRoLImKeuS6Gb86WdF8hNx2B4ZJR3oxMj5iSMyFYJB9t2m+L9HjdNqePQRyIOncsU7ZtWUaBmKkho8wyZ4BmqmApKM+/aoQmg9Wrq39EFN1A6nPzklP6xOPlFThRKAG4Z3O2PVm1B2/e4xmlxrX1dHWEbZaCDlFrPJbPWq7ArigJG7hPKZ4onrjKUDl/7zCRxi6nHz/M1HjICcbQeAzXNh0FP+9LhBjk9eXaeeBs/f7oUruFJTeS/ac4sTWOdLkMPlwY0wcmB3EAPQymR+KgFpRu1xA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HzM8h2cjK4LgseGWQdhWFOIdDjENOKV8K5bktiel1nM=;
+ b=IYS0UJoLN/zQ8boEJtn2yYm/PiI1ROKV0eK2Abgxw+20j6AHy3NVVZ9bt7qu3hCFCjuJ25P2av0tnMzqtJeVy2yldhuoKZ7rynTWj7OFayUf6scnMsBiDBo0QeqEQF7Dd3hOtEeRRXPPc5mCKSBcZKvj85yaNnqwssVmuiD7CxDpwkBHJzcD2K4CEFYBmkwwSF/GlsPxxuXGtQHaxMcnD6K2k51bXJcsVsuIGVaWIvibu6dNkNfWpmSpcVMQWc2O1BU8KfeMOjNm3qEbpnwYWm1+Uiefy4Wkx+p67tJ+89i/a2H6DSQ/v4gVR/rbBN6I7gk0KaqTQaGmw7uuEgYmJQ==
+Received: from KL1PR06MB6964.apcprd06.prod.outlook.com (2603:1096:820:121::11)
+ by KL1PR06MB6986.apcprd06.prod.outlook.com (2603:1096:820:11e::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.19; Wed, 1 Nov
+ 2023 18:50:54 +0000
+Received: from KL1PR06MB6964.apcprd06.prod.outlook.com
+ ([fe80::15b3:c9f7:221e:ead9]) by KL1PR06MB6964.apcprd06.prod.outlook.com
+ ([fe80::15b3:c9f7:221e:ead9%5]) with mapi id 15.20.6954.020; Wed, 1 Nov 2023
+ 18:50:54 +0000
+Message-ID: <KL1PR06MB6964D09D62F826D2408DD6BA96A7A@KL1PR06MB6964.apcprd06.prod.outlook.com>
+Date: Thu, 2 Nov 2023 02:50:47 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RESEND 5/5] clk: ccf: call clock provided ops directly for
+ endisable()
 Content-Language: en-US
-To: Yang Xiwen <forbidden405@outlook.com>, Lukasz Majewski <lukma@denx.de>
+To: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
 Cc: u-boot@lists.denx.de
 References: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
- <20230818-clk-fix-v1-1-49ec18f820bf@outlook.com>
- <36a30ab5-652c-80d4-5e33-c0be3cde113b@gmail.com>
- <KL1PR06MB6964F8FB84EA5744C01BD48096A7A@KL1PR06MB6964.apcprd06.prod.outlook.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <KL1PR06MB6964F8FB84EA5744C01BD48096A7A@KL1PR06MB6964.apcprd06.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+ <20230818-clk-fix-v1-5-49ec18f820bf@outlook.com>
+ <f996c4ea-81c6-815e-cab1-2d0b09b22135@gmail.com>
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <f996c4ea-81c6-815e-cab1-2d0b09b22135@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-TMN: [OCW88NGMGYqLw8Ovx6OlPWywT91Arqpb]
+X-ClientProxiedBy: TYXPR01CA0059.jpnprd01.prod.outlook.com
+ (2603:1096:403:a::29) To KL1PR06MB6964.apcprd06.prod.outlook.com
+ (2603:1096:820:121::11)
+X-Microsoft-Original-Message-ID: <f94b7313-0dd4-477b-b144-d3b2d08d14ad@outlook.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: KL1PR06MB6964:EE_|KL1PR06MB6986:EE_
+X-MS-Office365-Filtering-Correlation-Id: 98c83713-ca6d-4105-a97f-08dbdb0b7982
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: wAlYl7k7R64ZPkQfwU99OZx+DWLBTmrQSL/oolR7UQq1aOF1fcSGvWWZt3Ytm/3eFjY9i7UUshyqqXh97a+3Lclujj0PHkriHhdObFYS0mzVfnW5CkdQ5pf1BrQ0YAvYpSAWdpjDEBUkiJsrMU10hnuv5j5KCO1M+DnLwLFJH3mJwPc5lYGzuePu/kns1Ww70FFuSAChM92Gm1lOZytkC1+6F1HrYzHl5ntFodwfgfMJ4T5FD9zBo1PswNO36de7BgHfs3h1jEkginZ+0+1+UhEzm0hcMlmlkjOL3I5DO6PLEMY/nJhck06Mi4VTFhJqTH/OvzCMnLcag3Q6AegYJbH0/Hs9nmXAE/Va7WSQjLf4fsVCqf/EuFq5sF+tYpW2dw0zuTEgrwo+EBwjPwp//mNlclotDgY0WrH91oQcgxvAPgJW8cmTy5F1osGddk6GgpXSFAXUkpUmGODp/kpEWnaB9tYm5wUwEij9FuL+mDCVmzaaOKxl6q+fck7weVsBUY0caAA4CYq48w8Z//bfmQWg6nDJr3OkH49idFc/0a2qa+B0kUv7r/vsRDBQnFbK80qxQabQU9YBxpWxsjplqhrKK2iKpLTtaGFqQfI33BE=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OGx4c04zbm94amFCRTQyL3U1MzE2OXJ6MjMvYUpoKzFrbDBlVGpIcVB3OUVE?=
+ =?utf-8?B?dENFbTdtVVNmdGRnWlJFV2VUMzVwcEZtLy9pREFDWnVkYnQ3S2RZbktnNm93?=
+ =?utf-8?B?S2RWTHNoMUlkSHNlMlpTQzQ1OFpGcHpVQ25SZVVFSnNDdDZ1WGloY3NBTGl3?=
+ =?utf-8?B?TGkrMG16Z3B3RG1zTHNFUUQvWHJqcWkwZStqeCtLMUtVMCt2eFVpL3RDbThS?=
+ =?utf-8?B?T3ZKN3FrZlNTQnJTZzNEb2Z0QUZFUXZmVCtVOUJMUjlxa0UwZEZ2VWdESnY2?=
+ =?utf-8?B?OU94aElmQlV1RjY5eWdZc3BIV2J6U2FxYlJVQkJKMU10bUdEN0xkZWRoQXZp?=
+ =?utf-8?B?Q0MrQmlZeElGSUE2TUo0MUlBTURTNXdhb09uLzZFWi95dlg0eEJHY3lxNnZS?=
+ =?utf-8?B?SUhrblBZZEsvVGdqSHJLTkgrb0FxTmxhUlRrRU56cUJ0d09qTUhIZ2FrSldy?=
+ =?utf-8?B?Y2VmYXlGRmZMMzVVZkVmZlA1MktUUU9pSDFOWEh3MFdvUUROYnRKaEwxMmtB?=
+ =?utf-8?B?R1lHOG1lOWU1TVNUK0NkYjB3ZzFGVW0yKzRzb2pVWUFHa2NhdFJkNHJINWJ4?=
+ =?utf-8?B?V1hCOUR2Q2hNTWNuNUZhOFQ2Sk4xTmV2Q01UWHVTWmI3Rm1vTzhKYytVeDRC?=
+ =?utf-8?B?cDI2OXJhSlpXbE96cXY5TnJpUjU3NFhQRktCc2Q1bXc3QXQreXRGekxYc2ZL?=
+ =?utf-8?B?OVFhU3ViS1FXa2xRdnJIeFJoUHJrWXI3cUkzZVFZYm9wVytlUjEwcEREd3lY?=
+ =?utf-8?B?dDJXN1pQMnFiUUV1U281bVdVeGppbE83RUxRMm4xbElyZnVldnJJOXZKRmZi?=
+ =?utf-8?B?WTV5ZTZVTTVBdXVTbVV6SzBtOEVwOFUvRDlCVGtLMDZzdktQekdUR2FWZkt6?=
+ =?utf-8?B?cFpHeGFXcGZxTkJVMXo1cnVHWTNSbXFCdzVvMTUyUjA1ejdCdkZQaWsxek9u?=
+ =?utf-8?B?T2xNNG5GRmhjNHVZVFoxYzhXelJCQXBPQm1VMzl4a1BOVHFPWWE4T0tSZHJt?=
+ =?utf-8?B?d3RTNUQvZmI5N3J3T0I0T2daYXVmL1QrVWEzYTIzMDdFb0pYRTAwRmprbHlT?=
+ =?utf-8?B?ZGtWbUxkR3RwUDFpd0NIbXZMWUZJdjBNYjZEdWZHVXorS2RYYStIR1d6ZEhU?=
+ =?utf-8?B?MkhCbGt4dDBtUVFObnRTcktTMDhtV3gzYXc4Q1k4WithK2NuKzhra05jK3Q5?=
+ =?utf-8?B?MFRzMzh6UXN4VjFocXk3cWlhbmREeXV3b1RMQjBWSUd4YU1Xb09TUmhZbTRD?=
+ =?utf-8?B?MFBhZlJta1hzUHNGU1lvbExvWkJPWGxvS2ZSVjBQWk11WW1OdmcrRTZEWnNs?=
+ =?utf-8?B?cGl2R0Mvbkh0TWx1L1VKMEZYNVNCTjdjUy9pbkk2WTEyR0VpN1BadWlrSXQx?=
+ =?utf-8?B?NVVvZXpLWk5RUXRTS0pwWkhzbUFIWFQyQVJVMW5xSHhlNVp1TnNBSzZMekpw?=
+ =?utf-8?B?V00yYWZTaEt4WWQrdTRHNHRsWWI1RTg3d1NNYUx3Wk5tOUtZaStUQ2cvaUdC?=
+ =?utf-8?B?RERwblJ6MUkxc2t1RWg4WTJwbnJ1L2xob2dYMGo4Q1ZOaVlkZG5MdU12eVhj?=
+ =?utf-8?B?K1ZJY3d3aDIxWm5CMGJlb0wzOGc0YzIxbldZK3F5RWJvbXE2ZThxWXlxMTEx?=
+ =?utf-8?Q?BzmMGh12ylITzmozINFvas+CNZ9itnzhXVqf7C0pv7Dk=3D?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98c83713-ca6d-4105-a97f-08dbdb0b7982
+X-MS-Exchange-CrossTenant-AuthSource: KL1PR06MB6964.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Nov 2023 18:50:53.5157 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR06MB6986
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,36 +131,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMTEvMS8yMyAxNDozNywgWWFuZyBYaXdlbiB3cm90ZToNCj4gT24gMTEvMi8yMDIzIDE6
-NTAgQU0sIFNlYW4gQW5kZXJzb24gd3JvdGU6DQo+PiBPbiA4LzE3LzIzIDEzOjA0LCBZYW5n
-IFhpd2VuIHZpYSBCNCBSZWxheSB3cm90ZToNCj4+PiBGcm9tOiBZYW5nIFhpd2VuIDxmb3Ji
-aWRkZW40MDVAb3V0bG9vay5jb20+DQo+Pj4NCj4+PiBJdCdzIGFscmVhZHkgaW1wbGVtZW50
-ZWQgaW4gY2xrLW11eC5jLCBleHBvcnQgaXQgaW4gdGhlIGhlYWRlciBmaWxlLg0KPj4+DQo+
-Pj4gU2lnbmVkLW9mZi1ieTogWWFuZyBYaXdlbiA8Zm9yYmlkZGVuNDA1QG91dGxvb2suY29t
-Pg0KPj4+IC0tLQ0KPj4+ICDCoCBpbmNsdWRlL2xpbnV4L2Nsay1wcm92aWRlci5oIHwgNiAr
-KysrKysNCj4+PiAgwqAgMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKQ0KPj4+DQo+
-Pj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvY2xrLXByb3ZpZGVyLmggYi9pbmNsdWRl
-L2xpbnV4L2Nsay1wcm92aWRlci5oDQo+Pj4gaW5kZXggYjhhY2FjZDQ5ZS4uODAxNDA0NDgw
-YiAxMDA2NDQNCj4+PiAtLS0gYS9pbmNsdWRlL2xpbnV4L2Nsay1wcm92aWRlci5oDQo+Pj4g
-KysrIGIvaW5jbHVkZS9saW51eC9jbGstcHJvdmlkZXIuaA0KPj4+IEBAIC0yNDcsNiArMjQ3
-LDEyIEBAIHN0cnVjdCBjbGsgKmNsa19yZWdpc3Rlcl9tdXgoc3RydWN0IGRldmljZSAqZGV2
-LA0KPj4+IGNvbnN0IGNoYXIgKm5hbWUsDQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCB2b2lk
-IF9faW9tZW0gKnJlZywgdTggc2hpZnQsIHU4IHdpZHRoLA0KPj4+ICDCoMKgwqDCoMKgwqDC
-oMKgwqAgdTggY2xrX211eF9mbGFncyk7DQo+Pj4gIMKgICtzdHJ1Y3QgY2xrICpjbGtfcmVn
-aXN0ZXJfbXV4X3RhYmxlKHN0cnVjdCBkZXZpY2UgKmRldiwgY29uc3QgY2hhcg0KPj4+ICpu
-YW1lLA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29uc3Qg
-Y2hhciAqIGNvbnN0ICpwYXJlbnRfbmFtZXMsIHU4IG51bV9wYXJlbnRzLA0KPj4+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdW5zaWduZWQgbG9uZyBmbGFncywN
-Cj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHZvaWQgX19pb21l
-bSAqcmVnLCB1OCBzaGlmdCwgdTMyIG1hc2ssDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB1OCBjbGtfbXV4X2ZsYWdzLCB1MzIgKnRhYmxlKTsNCj4+PiAr
-DQo+Pj4gIMKgIHN0cnVjdCBjbGsgKmNsa19yZWdpc3Rlcl9maXhlZF9yYXRlKHN0cnVjdCBk
-ZXZpY2UgKmRldiwgY29uc3QgY2hhcg0KPj4+ICpuYW1lLA0KPj4+ICDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdWxvbmcgcmF0ZSk7DQo+Pj4gICANCj4+
-DQo+PiBXaHkgZG8geW91IHdhbnQgdG8gZXhwb3J0IHRoaXM/IE5vbmUgb2YgeW91ciBvdGhl
-ciBwYXRjaGVzIHVzZSBpdC4NCj4gSXQgd2lsbCBiZSB1c2VkIGluIEhpU2lsaWNvbiBjbGsg
-ZnJhbWV3b3JrIGRyaXZlciB3aGljaCBpIHdpbGwgc2VuZA0KPiBhZnRlciB0aGlzIHNlcmll
-cyBpcyBhcHBsaWVkLiBBbmQgdGhpcyBmdW5jdGlvbiBpcyBleHBvcnRlZCBpbiBMaW51eA0K
-PiBrZXJuZWwgQ0NGLiBTbyBpIHRoaW5rIGl0J3MgZmluZSB0byBleHBvcnQgaXQgaW4gVS1C
-b290IGFzIHdlbGwuDQoNClBsZWFzZSBqdXN0IHNlbmQgaXQgYWxvbmcgd2l0aCB0aGF0IHNl
-cmllcyB0aGVuLg0KDQotLVNlYW4NCg0K
+On 11/2/2023 2:19 AM, Sean Anderson wrote:
+> On 8/17/23 13:04, Yang Xiwen via B4 Relay wrote:
+>> From: Yang Xiwen <forbidden405@outlook.com>
+>>
+>> Calling into CCF framework will cause a clock being enabled twice
+>> instead of once (clk->enable_count becomes 2 rather than 1), thus making
+>> it hard to disable (needs to call clk_disable() twice).
+>> Fix that by calling clock provided ops directly.
+> 
+> Can you describe this scenario more? From what I can tell, clk_enable
+> doesn't
+> increment enable_count for CCF clocks.
+> 
+Well, it's hard to describe clearly. But I can only tell this patch
+fixed the issue when i was trying to write an Ethernet driver[1] which
+calls clk_disable() and expects the clock to be disabled after that.
+Also I found that CCF driver does not have a corresponding test file. I
+will try to write a test for that in next release.
+> --Sean
+> 
+>> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+>> ---
+>>   drivers/clk/clk.c | 12 +++++++++++-
+>>   1 file changed, 11 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+>> index a38daaac0c..00d082c46f 100644
+>> --- a/drivers/clk/clk.c
+>> +++ b/drivers/clk/clk.c
+>> @@ -14,6 +14,7 @@
+>>   #include <dm/uclass.h>
+>>   #include <dm/lists.h>
+>>   #include <dm/device-internal.h>
+>> +#include <linux/clk-provider.h>
+>>     int clk_register(struct clk *clk, const char *drv_name,
+>>            const char *name, const char *parent_name)
+>> @@ -115,11 +116,20 @@ int ccf_clk_set_parent(struct clk *clk, struct
+>> clk *parent)
+>>   static int ccf_clk_endisable(struct clk *clk, bool enable)
+>>   {
+>>       struct clk *c;
+>> +    const struct clk_ops *ops;
+>>       int err = clk_get_by_id(clk->id, &c);
+>>         if (err)
+>>           return err;
+>> -    return enable ? clk_enable(c) : clk_disable(c);
+>> +    else
+>> +        ops = clk_dev_ops(c->dev);
+>> +
+>> +    if (enable && ops->enable)
+>> +        return ops->enable(c);
+>> +    else if (!enable && ops->disable)
+>> +        return ops->disable(c);
+>> +
+>> +    return -ENOSYS;
+>>   }
+>>     int ccf_clk_enable(struct clk *clk)
+>>
+> 
+[1]
+https://lore.kernel.org/all/20230814-wip-hisi_femac-trunk-v2-0-1e29f400585d@outlook.com/
+
+-- 
+Best regards,
+Yang Xiwen
+
