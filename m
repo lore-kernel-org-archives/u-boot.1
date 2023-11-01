@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EFC6C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:19:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81BB8C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 18:20:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBBD48757D;
-	Wed,  1 Nov 2023 19:19:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8445B8757D;
+	Wed,  1 Nov 2023 19:20:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ETa2ypCm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D+LDqWaV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C366E87524; Wed,  1 Nov 2023 19:19:33 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 0E70E8757D; Wed,  1 Nov 2023 19:20:31 +0100 (CET)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83D758757D
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:19:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16FC187524
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 19:20:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3b2ea7cc821so83131b6e.1
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 11:19:30 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-1eb6c559ab4so87501fac.0
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 11:20:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698862769; x=1699467569; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1698862824; x=1699467624; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=JxkQkZ/OVvikXq5CZhpTznQe7u8zzTMG1HW2DU3JrIc=;
- b=ETa2ypCmVCGudp0j8aWzyzNTCcZhzH1HlvObSIcpe9rpuidKQlkWZgIhAs7CmIWWi3
- ZP5U5OFpUsOptBfx3fRtXfqMYGDfjEZMG6qQbzqubOwFBNECfgkOpfQJjVHp/OGFWuOi
- QNG0VugY9BlO9iSKDe1G14v3yXwUikMbdNQJUqBRtLDRCTu9s2JI+kX5ZTuyTz/PFjSx
- SreBWGneo7dFsPcdb5XV6seMoxrZbO2qIIKLd0DsW0EAlxU1skQt44J63MTq3MJD1/FZ
- UYzsrOdBQi83hA+vvyuPV53PsGDCIqNTmVehsqJ85hOiywf7BeqfV+kuoerNJUmJEeVB
- nRhA==
+ bh=NMwoMpjS31KvtokHPPx7b71b3ifpASzTaIxaV5G/sM0=;
+ b=D+LDqWaV+CuRiPwh4lEU1A4UUbh2Xyxz9Jvauj17jyKGNNxSzvBBmTmKe4KgaCA6wS
+ Nk3SnRqh886rs1GHnhNpblD5In3GL05eB6Wi+aQ9mt+nWraZITYbDrmMmmYvR4oTrJFE
+ ToV80emXJwm3Bl6H1RJ9eXDBvdROsQShC6mG5KlyPZLD3lwCqcYkl1VuhteFw7ZHEex9
+ sfMyInDZtIIilUVziefoDVHeEtWiXsMh0LBhqx/IkQqMvrlDlKt9i02bj1TLwGDjKp7N
+ JLfOrkfbn9JzU8AZPI2jwsSfh9JbznGq2DDoxNl1fcHqN6ggTGQ3q1gH35Am2YvFqIrK
+ b/cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698862769; x=1699467569;
+ d=1e100.net; s=20230601; t=1698862824; x=1699467624;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JxkQkZ/OVvikXq5CZhpTznQe7u8zzTMG1HW2DU3JrIc=;
- b=dgIL3NQHiOH4wJPZTdQhot7VjJnUDplGSx2odZ+kLXj56A9+YjdAvNgaJQsDBMOn3Q
- 7wLITFwLou1LsvjUU+aeTNR5Xc6rV1ZPIVgVik40Nubbk84xuSzWaAx/g2dvCW14jLLG
- PHx6rDQQuRNCdK5fCy58BMKB4k5vDsl7VZNbsQOa8D7WjX8YT1r/1rUw6KC8bQxLWQfz
- wSBWFG8H7KKRkYItabmH7QYgibdHvsOkOr6WDibTNp6zjwBLpPgfW0nAW0Ys8LPWA7qY
- gSd/YjNU6HiJ3hPE3TaXBrwrk+4seKw5VQpz2xzN7R1mZHOfII4LEhinTTMD0teVANJv
- yRDQ==
-X-Gm-Message-State: AOJu0Ywa0Z8IX3JLwdCRuEZXdqTxj2/TB5P+R2wdZLRwIIJ1aZJ4cPdf
- pT0d7Ul0d+xV+GDtHUXXcKo=
-X-Google-Smtp-Source: AGHT+IHh0m4p8h/WjiKXn+EalOxQt6fOa7rcNT5NQgOiC9+1OCZ2CiLjfYEdgBmYrC4N1kQVvQdWjg==
-X-Received: by 2002:a05:6808:f89:b0:3b2:e9ae:5d4f with SMTP id
- o9-20020a0568080f8900b003b2e9ae5d4fmr19941173oiw.24.1698862769137; 
- Wed, 01 Nov 2023 11:19:29 -0700 (PDT)
+ bh=NMwoMpjS31KvtokHPPx7b71b3ifpASzTaIxaV5G/sM0=;
+ b=s9sB8D6f6TV4YLHnePxXIH+MiAfPV4Lq+OPa+OoW8Ioqad/9M7ktxkr717dod0efkS
+ tqAv4Zpzq2Sr4UQPPYgaqR02aNTjSOXaaHAQSeWhyTjKITSewJXGWJYzuNyvzzx8ihVX
+ BsLghpL++aS27SeMvtcGU3ugJ1sH7cL0XWSppSBEE6t/dHGFOD6o07HH3Q5Hh0Qs0+jW
+ w1sI2n0WdldWIluC2QykZWPYHzwGy/qrfecQj9KGXKjGDLh2CdjVR6tSrqex3PeGNqdl
+ lyyQ84LfytxbiatzmMMFUGuJE0YpJ8EN/IeA0Td76kiOZSUt8lCauT4MQIPWJ8umH4IB
+ pe8A==
+X-Gm-Message-State: AOJu0Yyrsx9hRAzlT3+shcfqtZvOJIC+afcBVPzZ+QhxgrLPrZmWHcDk
+ jesu0Yjkg9nU56Q8KgAZIPc=
+X-Google-Smtp-Source: AGHT+IGABbcl2uOA7DqL8LZoqAAA32mSYyGCD/QqoLx32BXdDpbMDw8vEenSPHQYeoWVp8y7S5L1Uw==
+X-Received: by 2002:a05:6871:c48e:b0:1e9:dae7:f58a with SMTP id
+ ci14-20020a056871c48e00b001e9dae7f58amr14852131oac.22.1698862824532; 
+ Wed, 01 Nov 2023 11:20:24 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- m22-20020a05620a24d600b00767d572d651sm1645829qkn.87.2023.11.01.11.19.28
+ d13-20020ac8544d000000b00419576c7b75sm1609252qtq.23.2023.11.01.11.20.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 11:19:28 -0700 (PDT)
-Message-ID: <f996c4ea-81c6-815e-cab1-2d0b09b22135@gmail.com>
-Date: Wed, 1 Nov 2023 14:19:27 -0400
+ Wed, 01 Nov 2023 11:20:24 -0700 (PDT)
+Message-ID: <18809097-1344-325f-fb54-21fccb86210e@gmail.com>
+Date: Wed, 1 Nov 2023 14:20:23 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH RESEND 5/5] clk: ccf: call clock provided ops directly for
- endisable()
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
 Content-Language: en-US
-To: forbidden405@outlook.com, Lukasz Majewski <lukma@denx.de>
-Cc: u-boot@lists.denx.de
-References: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
- <20230818-clk-fix-v1-5-49ec18f820bf@outlook.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Peter Hoyes <Peter.Hoyes@arm.com>
+References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+ <20231101170559.680ab493@donnerap.manchester.arm.com>
+ <5f170b50-94ac-5bf6-87d2-a3e12b8ba364@gmail.com>
+ <20231101174951.2baa2471@donnerap.manchester.arm.com>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20230818-clk-fix-v1-5-49ec18f820bf@outlook.com>
+In-Reply-To: <20231101174951.2baa2471@donnerap.manchester.arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,57 +103,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/17/23 13:04, Yang Xiwen via B4 Relay wrote:
-> From: Yang Xiwen <forbidden405@outlook.com>
+On 11/1/23 13:49, Andre Przywara wrote:
+> On Wed, 1 Nov 2023 13:16:24 -0400
+> Sean Anderson <seanga2@gmail.com> wrote:
 > 
-> Calling into CCF framework will cause a clock being enabled twice
-> instead of once (clk->enable_count becomes 2 rather than 1), thus making
-> it hard to disable (needs to call clk_disable() twice).
-> Fix that by calling clock provided ops directly.
+> Hi Sean,
+> 
+>> On 11/1/23 13:05, Andre Przywara wrote:
+>>> On Tue, 31 Oct 2023 14:55:50 +0200
+>>> Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+>>>
+>>> Hi Heinrich,
+>>>    
+>>>> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+>>>> provides an interface to a physical entropy source.
+>>>>
+>>>> A RNG driver based on the seed CSR is provided. It depends on
+>>>> mseccfg.sseed being set in the SBI firmware.
+>>>
+>>> As you might have seen, I added a similar driver for the respective Arm
+>>> functionality:
+>>> https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
+>>>
+>>> And I see that you seem to use the same mechanism to probe and init the
+>>> driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
+>>> implemented.
+>>> One downside of this approach is that the driver is always loaded (and
+>>> visible in the DM tree), even with the feature not being available.
+>>> That doesn't seem too much of a problem on the first glance, but it
+>>> occupies a device number, and any subsequent other DM_RNG devices
+>>> (like virtio-rng) typically get higher device numbers. So without
+>>> the feature, but with virtio-rng, I get:
+>>> VExpress64# rng 0
+>>> No RNG device
+>>> VExpress64# rng 1
+>>> 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...
+>>> ....
+>>>
+>>> Now the EFI code always picks RNG device 0, which means we don't get
+>>> entropy in this case.
+>>>
+>>> Do you have any idea how to solve this?
+>>> Maybe EFI tries to probe further - but that sounds arbitrary.
+>>> Or we find another way for probing the device, maybe via some artificial
+>>> CPU feature "bus"? There is UCLASS_CPU, but that doesn't look helpful?
+>>>
+>>> If anyone has any idea, I'd be grateful.
+>>
+>> Wouldn't the right way be to detect the hardware in bind()?
+> 
+> Yes, that's what I thought as well and tried, but the problem is that for
+> those "fixed drivers" (the ones using U_BOOT_DRVINFO) returning a
+> failure in bind() is fatal to the boot sequence:
+> ============
+> Model: FVP Base
+> DRAM:  2 GiB (effective 4 GiB)
+> No match for driver 'arm-rndr'
+> initcall failed at call 00000000fef3d744 (err=-19)
+> ### ERROR ### Please RESET the board ###
+> 
+> That is what a proper "CPU bus" would probably solve, as I agree that
+> failing bind() should be the proper solution.
 
-Can you describe this scenario more? From what I can tell, clk_enable doesn't
-increment enable_count for CCF clocks.
+Hm, so maybe this should go in riscv_cpu_bind?
 
 --Sean
 
-> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-> ---
->   drivers/clk/clk.c | 12 +++++++++++-
->   1 file changed, 11 insertions(+), 1 deletion(-)
+> Cheers,
+> Andre
 > 
-> diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-> index a38daaac0c..00d082c46f 100644
-> --- a/drivers/clk/clk.c
-> +++ b/drivers/clk/clk.c
-> @@ -14,6 +14,7 @@
->   #include <dm/uclass.h>
->   #include <dm/lists.h>
->   #include <dm/device-internal.h>
-> +#include <linux/clk-provider.h>
->   
->   int clk_register(struct clk *clk, const char *drv_name,
->   		 const char *name, const char *parent_name)
-> @@ -115,11 +116,20 @@ int ccf_clk_set_parent(struct clk *clk, struct clk *parent)
->   static int ccf_clk_endisable(struct clk *clk, bool enable)
->   {
->   	struct clk *c;
-> +	const struct clk_ops *ops;
->   	int err = clk_get_by_id(clk->id, &c);
->   
->   	if (err)
->   		return err;
-> -	return enable ? clk_enable(c) : clk_disable(c);
-> +	else
-> +		ops = clk_dev_ops(c->dev);
-> +
-> +	if (enable && ops->enable)
-> +		return ops->enable(c);
-> +	else if (!enable && ops->disable)
-> +		return ops->disable(c);
-> +
-> +	return -ENOSYS;
->   }
->   
->   int ccf_clk_enable(struct clk *clk)
+>> --Sean
+>>
+>>> Cheers,
+>>> Andre
+>>>    
+>>>> If the seed CSR readable, is not determinable by S-mode without risking
+>>>> an exception. For safe driver probing allow to resume via a longjmp
+>>>> after an exception.
+>>>>
+>>>> As the driver depends on mseccfg.sseed=1 we should wait with merging the
+>>>> driver until a decision has been taken in the RISC-V PRS TG on prescribing
+>>>> this.
+>>>>
+>>>> Setting mseccfg.sseed=1 is queued for OpenSBI [1]. This has been discussed
+>>>> in the RISC-V Boot & Runtime Services TG. Standardization has to be pursued
+>>>> via the upcoming platform specification.
+>>>>
+>>>> A bug fix for QEMU relating to the Zkr extension is available in [2].
+>>>>
+>>>> A similar Linux driver has been proposed in [3].
+>>>>
+>>>> [1] lib: sbi: Configure seed bits when MSECCFG is readable
+>>>>       https://patchwork.ozlabs.org/project/opensbi/patch/20230712083254.1585244-1-sameo@rivosinc.com/
+>>>> [2] [PATCH v2 1/1] target/riscv: correct csr_ops[CSR_MSECCFG]
+>>>>       https://lore.kernel.org/qemu-devel/20231030102105.19501-1-heinrich.schuchardt@canonical.com/
+>>>> [3] [PATCH v4 4/4] RISC-V: Implement archrandom when Zkr is available
+>>>>       https://lore.kernel.org/linux-riscv/20230712084134.1648008-5-sameo@rivosinc.com/
+>>>>
+>>>> v3:
+>>>> 	Add API documentation.
+>>>> v2:
+>>>> 	Catch exception if mseccfg.sseed=0.
+>>>>
+>>>> Heinrich Schuchardt (2):
+>>>>     riscv: allow resume after exception
+>>>>     rng: Provide a RNG based on the RISC-V Zkr ISA extension
+>>>>
+>>>>    arch/riscv/lib/interrupts.c |  13 ++++
+>>>>    doc/api/index.rst           |   1 +
+>>>>    drivers/rng/Kconfig         |   8 +++
+>>>>    drivers/rng/Makefile        |   1 +
+>>>>    drivers/rng/riscv_zkr_rng.c | 116 ++++++++++++++++++++++++++++++++++++
+>>>>    include/interrupt.h         |  45 ++++++++++++++
+>>>>    6 files changed, 184 insertions(+)
+>>>>    create mode 100644 drivers/rng/riscv_zkr_rng.c
+>>>>    create mode 100644 include/interrupt.h
+>>>>   
+>>>    
+>>
 > 
 
