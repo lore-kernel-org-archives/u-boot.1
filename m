@@ -4,93 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF5FC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 07:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07D27C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 07:23:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA4968721D;
-	Wed,  1 Nov 2023 08:04:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ict42.de
+	by phobos.denx.de (Postfix) with ESMTP id 2F56387559;
+	Wed,  1 Nov 2023 08:23:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ict42.de header.i=@ict42.de header.b="e/fQKLP5";
-	dkim=permerror (0-bit key) header.d=ict42.de header.i=@ict42.de header.b="6uEeRObD";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="pIWn/BqZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3BF287499; Wed,  1 Nov 2023 08:04:18 +0100 (CET)
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
- [81.169.146.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E25858761C; Wed,  1 Nov 2023 08:23:27 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 409328720C
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 08:04:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 459D986D62
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 08:23:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ict42.de
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=ludwig.kormann@ict42.de
-ARC-Seal: i=1; a=rsa-sha256; t=1698822253; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=PVam/2hFv/O1EpBjeL8CxGmVHucnvP94Olu+8jOQSAP7+RJTroo0YzNcpO9+pmFm0G
- AZs13kp/SGwSSQTfO8v8o9OW3QpZDP1vGus8VbqD2l/NP9ctzrcF21vgdfH7QD7bWSoB
- uyYUNlXLGv/TZcresb3OLPO2dB1a2xoUiBvLATeJd3TWT2WJI8dI/gHluJ+zQQb+Sqwt
- 5rXrANyhl9be182ODXyQ+GQwKx378tXiSkOQnvHbLZxguBCDWBYB5xqKwm5JEL4AVz1p
- 6o6owA65KznLYwUuLXgatkk4YD43vzcfGRWT57amegGsC+YUOzd9XnT5hQfmsIUmav9O
- auNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1698822253;
- s=strato-dkim-0002; d=strato.com;
- h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
- From:Subject:Sender;
- bh=1E90L37nkBeD7vA5IS6t6bKKn48yaTUgrMIOr5H/6pM=;
- b=AwEaPfEWrjQRz0Na38NzY5KnIkH47rzUjzgyQFv8vdqUNTygtvAppStD1XwdqNTvms
- nopQW9H/ZkFJjNvNnX9yqf376H8S5Cmd1DRm9hcBtOkHgNKSNFo0OdVy0w1nkHP63EjQ
- GSu83Mi0zAkK4CgSHC6ZByaLG0tcgMrFaNIrST/zMRxVSU1TYIlFKqjxVC5EcYOzwP38
- 0Lk+qfGPln9nsP6QK7IT0AWymLmUMDZ5IBrz5fu0bjIhGGF6LGWweRnkoP9UixH35ZpY
- ofSnxZzKdEsdcV2+k4heTcMOqqaBhLmZhqX0F9XjEdEbZLczvDOLLbyMUDH0niJpTWbT
- v0zw==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1698822253;
- s=strato-dkim-0002; d=ict42.de;
- h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
- From:Subject:Sender;
- bh=1E90L37nkBeD7vA5IS6t6bKKn48yaTUgrMIOr5H/6pM=;
- b=e/fQKLP5MUNoFO7o8s3tJjW4xSs85MrBUGASBwgUwjm0ikZtjU7yvufgkSLu6osRpI
- V4VNPABTTEmVkuVawCqpZB6g1j4SqONux4uG1RmmttjTasxfF9yD+JmR5i69lk6ZgdMN
- n+scXX5xPRPBuLr8mfB1GL3kZQ/7W/zNnmF+pIS3/zNQJw/XjIRMz+AuBb1r3Ozwb6Uw
- 0tP5wXiMKgbrd4LYsYBTz1DBVUPC1T0SMHp9jvmcs5c73S7+NRtLmzi2m7Qs9BN/i7NX
- DBQR0HTYJiM4mHJYIkc4TJwgA5XR9LEKZfmP3QdkU/BjtgmmRMtmDn+KSqO6nWbaONTU
- Zynw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1698822253;
- s=strato-dkim-0003; d=ict42.de;
- h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
- From:Subject:Sender;
- bh=1E90L37nkBeD7vA5IS6t6bKKn48yaTUgrMIOr5H/6pM=;
- b=6uEeRObDccVOUZvEjGlmM0wo73IJZiLrqO97g+3ScEf0riCSK9rXUBB5Ro7ngk5iqU
- Rh3CRXniMOch2fQO5UAg==
-X-RZG-AUTH: ":IHkAYkmvNfSwjg/qSc4u8zZOVaURsoXe3UH2mQA0Kgl2F4tJkg7tCR14B0tQRciSQkqaueMYDMKD"
-Received: from [192.168.4.220] by smtp.strato.de (RZmta 49.9.1 DYNA|AUTH)
- with ESMTPSA id w61ae2zA174DaGs
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Wed, 1 Nov 2023 08:04:13 +0100 (CET)
-Message-ID: <8f675d53-5f4e-26ba-bf9e-17210ed7b201@ict42.de>
-Date: Wed, 1 Nov 2023 08:04:12 +0100
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20231101072320epoutp046069ba3820cecd78c39e8fae585d3eef~TbuHBS8Dd1370913709epoutp04Z
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 07:23:20 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20231101072320epoutp046069ba3820cecd78c39e8fae585d3eef~TbuHBS8Dd1370913709epoutp04Z
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1698823400;
+ bh=jzk6yJtiVmmNptVidb/sDkJlKsb6ouUdsntnSBG9kjc=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=pIWn/BqZkwjSrFs4V2CWr5FiaIk7oay1i0/tQ0A5zIO0tOrRetifZCRc70f05cgrC
+ 70HdLy3F+3Euwexa4IN3yUmGo4wCCUgeFWYBmmFZRTi4Veg3HEOwwAkkK/N3/OsP+E
+ 2N1446SbqpoJbyH9tRRL+ZFrwMytd3TfkAimp6vo=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20231101072319epcas1p4ca763d8dc62f841ab71d2781cb0a35a5~TbuGl8WNt1463914639epcas1p4X;
+ Wed,  1 Nov 2023 07:23:19 +0000 (GMT)
+Received: from epsmges1p4.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4SKz4k6bLXz4x9Q2; Wed,  1 Nov
+ 2023 07:23:18 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 86.AD.10211.6ECF1456; Wed,  1 Nov 2023 16:23:18 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20231101072318epcas1p2dbf8d1c1bbbb521c8e6744fae8e0b01d~TbuFQ9X0I0461304613epcas1p2T;
+ Wed,  1 Nov 2023 07:23:18 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231101072318epsmtrp24f981f5ba37f4690cd622bfe9addf85a~TbuFQT6bz0134301343epsmtrp2S;
+ Wed,  1 Nov 2023 07:23:18 +0000 (GMT)
+X-AuditID: b6c32a38-6d3fd700000027e3-2b-6541fce6b873
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ F8.B3.18939.6ECF1456; Wed,  1 Nov 2023 16:23:18 +0900 (KST)
+Received: from localhost.localdomain (unknown [10.113.113.235]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20231101072318epsmtip1f13b6b45b728bdffa3094bd6de5fb008~TbuFADH4K0801008010epsmtip18;
+ Wed,  1 Nov 2023 07:23:18 +0000 (GMT)
+From: Jaehoon Chung <jh80.chung@samsung.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, patrice.chotard@foss.st.com,
+ eugen.hristev@collabora.com, trini@konsulko.com, Jaehoon Chung
+ <jh80.chung@samsung.com>
+Subject: [PATCH] power: regulator: Fix an handling error about EALREADY
+Date: Wed,  1 Nov 2023 16:23:16 +0900
+Message-Id: <20231101072316.190541-1-jh80.chung@samsung.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.1
-Subject: Re: [PATCH RESEND v3 1/1] arm: dts: icnova-a20-adb4006: Add board
- support
-Content-Language: de-DE
-To: Andre Przywara <andre.przywara@arm.com>,
- linux-sunxi <linux-sunxi@lists.linux.dev>
-Cc: hdegoede@redhat.com, jagan@amarulasolutions.com, u-boot@lists.denx.de
-References: <20231009113916.2668425-1-ludwig.kormann@ict42.de>
- <20231024232608.6e9b2516@slackpad.lan>
-From: Ludwig Kormann <ludwig.kormann@ict42.de>
-In-Reply-To: <20231024232608.6e9b2516@slackpad.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpkk+LIzCtJLcpLzFFi42LZdlhTT/fZH8dUgw/rTSxaF91mtLjxq43V
+ 4ufJ9+wW37ZsY7SYOmkzu8XbvZ3sDmwesxsusnjsuLuE0eNp/1Z2j1cHVrF7nL2zg9Gjb8sq
+ xgC2qGybjNTElNQihdS85PyUzLx0WyXv4HjneFMzA0NdQ0sLcyWFvMTcVFslF58AXbfMHKA7
+ lBTKEnNKgUIBicXFSvp2NkX5pSWpChn5xSW2SqkFKTkFpgV6xYm5xaV56Xp5qSVWhgYGRqZA
+ hQnZGS83P2UsOMpW8fmSTAPjDtYuRk4OCQETid93fwLZXBxCAjsYJbafecgEkhAS+MQoMemA
+ A0QCyO7cPJ8ZpqPt0152iMRORomjx94wQThfGCWmPvnOCFLFJqAjsf3bcbBRIgISEr/6rzKC
+ FDEL9DFKtK36B5YQFnCXaHkEMoqTg0VAVeLDthlgcV4BG4klPx8yQqyTl5h56Ts7RFxQ4uTM
+ JywgNjNQvHnrbGaQoRIC59glHt7vY4FocJF4Mucw1K3CEq+Ob2GHsKUkPr/bywbR0MwosXTJ
+ QVYIp4dR4l/DdTaIKmOJ/UsnA53BAbRCU2L9Ln2IsKLEzt9zGSE280m8+9rDClIiIcAr0dEm
+ BFGiInHp9UsmmF13n/yHhrCHxIr3e5lByoUEYiVuzbeYwCg/C8k7s5C8Mwth7wJG5lWMYqkF
+ xbnpqcWGBSbwWE3Oz93ECE6LWhY7GOe+/aB3iJGJg/EQowQHs5II72FTh1Qh3pTEyqrUovz4
+ otKc1OJDjKbAAJ7ILCWanA9MzHkl8YYmlgYmZkbGJhaGZoZK4rzHXvWmCAmkJ5akZqemFqQW
+ wfQxcXBKNTBJPApf+1S7nvl0T12Dw0Melf86NuEntc6kOR6Od9eQrYo3W6Sw94TNrm/MYcJT
+ 5s6d8/pLvWP0J9eWtrfdxt+tf+2dsj+S69ld/rtTwv/MPfN5T0++xc4zuhP450xtkv+aW1Fn
+ dHbLngn733sw+Og0f3u+sn79lbNzXazC30/Z99/l1JWz9hov3lrU/2X+zJ/i63Z99gqb5b4z
+ RBMnC/2q+7Zk7ovGphLZhF1Rn0Wf9BnF5CjITrePKLj8V/fOim0vg048zRR0MzF3yTWp6t9o
+ sHH/zPakGSu5GW9H5fsuU1kp8lN6xmGN0ETZVakaVT0tCn/3KcxNe7z+Htebo99P8zss/n19
+ A9/GmTbPkwIzlViKMxINtZiLihMBmoGAfhQEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNLMWRmVeSWpSXmKPExsWy7bCSnO6zP46pBi96xS1aF91mtLjxq43V
+ 4ufJ9+wW37ZsY7SYOmkzu8XbvZ3sDmwesxsusnjsuLuE0eNp/1Z2j1cHVrF7nL2zg9Gjb8sq
+ xgC2KC6blNSczLLUIn27BK6Ml5ufMhYcZav4fEmmgXEHaxcjJ4eEgIlE26e97F2MXBxCAtsZ
+ JT78/cMEkZCS+Px0KlsXIweQLSxx+HAxRM0nRokN00+ygNSwCehIbP92HKxeREBC4lf/VUaQ
+ ImaBSYwSK7b9ZwRJCAu4S7Q8AtnAycEioCrxYdsMsAZeARuJJT8fMkIsk5eYeek7O0RcUOLk
+ zCdgC5iB4s1bZzNPYOSbhSQ1C0lqASPTKkbR1ILi3PTc5AJDveLE3OLSvHS95PzcTYzg8NQK
+ 2sG4bP1fvUOMTByMhxglOJiVRHgPmzqkCvGmJFZWpRblxxeV5qQWH2KU5mBREudVzulMERJI
+ TyxJzU5NLUgtgskycXBKNTB1bblQYtRksL3Z+Z9l6ZW786fY2O4N/+rDN3/1tuNLu9UfTeSq
+ vry664J5BdfZ1jAdnrVOcQ9rv77LYLwj8UPuAP/3ELd8N75PwVaGS2qzXZrcZs7refKz98Oq
+ H/XT+8xrDzd4LbzyJ/9T8627a6+Zx8zX//1xI0ub2osn5ZNFRFbdEmq+NOHtZvl9nH95q1mN
+ Jt/0Xawl+9j6cWe3+weF6X6/gjXfTun+b/UoVC7Cdc9G0ZBzIWmz1ZeuenHD+WjSumXqAUrG
+ pznmNNy42X69gLer4mDtu9UK2Y0pDx6GhDkFLlh5jPnyP/45rQ4tOkJ+0zee14xZwWPNmFB5
+ Zu7i1yfWnL9acvl67Ppp+h9eKbEUZyQaajEXFScCAIswWNS+AgAA
+X-CMS-MailID: 20231101072318epcas1p2dbf8d1c1bbbb521c8e6744fae8e0b01d
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: SVC_REQ_APPROVE
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231101072318epcas1p2dbf8d1c1bbbb521c8e6744fae8e0b01d
+References: <CGME20231101072318epcas1p2dbf8d1c1bbbb521c8e6744fae8e0b01d@epcas1p2.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,349 +131,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andre,
+If reegulator is already enabled, it will be return to EALREADY.
+But driver that its function is called can notice as error, even though
+it's working fine.
 
-thanks for the update! I will send the updated patch today.
+Fixes: 4fcba5d556b ("regulator: implement basic reference counter")
 
-kind regards
-Ludwig
+Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
+---
+ drivers/power/regulator/regulator-uclass.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Am 25.10.23 um 00:26 schrieb Andre Przywara:
-> On Mon,  9 Oct 2023 13:39:16 +0200
-> Ludwig Kormann <ludwig.kormann@ict42.de> wrote:
->
-> Hi Ludwig,
->
->> Add board support for ICnova A20 SomPi compute module on
->> ICnova ADB4006 development board.
->>
->> Specification:
->> SoM
->> - Processor: Allwinner A20 Cortex-A7 Dual Core at 1GHz
->> - 512MB DDR3 RAM
->> - Fast Ethernet (Phy: Realtek RTL8201CP)
->> ADB4006
->> - I2C
->> - 2x USB 2.0
->> - 1x Fast Ethernet port
->> - 1x SATA
->> - 2x buttons (PWRON, Boot)
->> - 2x LEDS
->> - serial console
->> - HDMI
->> - µSD-Card slot
->> - Audio Line-In / Line-Out
->> - GPIO pinheaders
->>
->> https://wiki.in-circuit.de/index.php5?title=ICnova_ADB4006
->> https://wiki.in-circuit.de/index.php5?title=ICnova_A20_SODIMM
->>
->> devicetree upstreamed with linux 6.5
-> As you have probably seen, the DT files have been synced into U-Boot's
-> master branch yesterday.
-> So if you rebase this on top of master, so just send the defconfig
-> (with CONFIG_SYS_64BIT_LBA added) and the Makefile change in a new
-> patch, I am happy to take it still this cycle.
->
-> Cheers,
-> Andre
-
-thanks for the update! I will send the updated patch today.
-
-kind regards
-Ludwig
-
-
->> Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
->> ---
->> changes in v3:
->> - rebase on v2023.10
->>
->> changes in v2:
->> - rebase on v2023.07-rc2
->> - remove pin defines from defconfig
->> - get dts reviewed on the linux mailing list and
->>    scheduled for kernel 6.5 [1]
->>
->> [1]
->> https://git.kernel.org/pub/scm/linux/kernel/git/sunxi/linux.git
->> commit de2bdfb7f79d5c655eb056d459e02be2c7f13c8b
->>
->> ---
->>   arch/arm/dts/Makefile                         |   1 +
->>   arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts | 137 ++++++++++++++++++
->>   arch/arm/dts/sun7i-a20-icnova-a20.dtsi        |  62 ++++++++
->>   board/sunxi/MAINTAINERS                       |   5 +
->>   configs/icnova-a20-adb4006_defconfig          |  20 +++
->>   5 files changed, 225 insertions(+)
->>   create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
->>   create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20.dtsi
->>   create mode 100644 configs/icnova-a20-adb4006_defconfig
->>
->> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
->> index 85fd5b1157..16d5930b78 100644
->> --- a/arch/arm/dts/Makefile
->> +++ b/arch/arm/dts/Makefile
->> @@ -667,6 +667,7 @@ dtb-$(CONFIG_MACH_SUN7I) += \
->>   	sun7i-a20-haoyu-marsboard.dtb \
->>   	sun7i-a20-hummingbird.dtb \
->>   	sun7i-a20-i12-tvbox.dtb \
->> +	sun7i-a20-icnova-a20-adb4006.dtb \
->>   	sun7i-a20-icnova-swac.dtb \
->>   	sun7i-a20-itead-ibox.dtb \
->>   	sun7i-a20-lamobo-r1.dtb \
->> diff --git a/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
->> new file mode 100644
->> index 0000000000..577ead1d02
->> --- /dev/null
->> +++ b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
->> @@ -0,0 +1,137 @@
->> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
->> +// Copyright (C) 2023 In-Circuit GmbH
->> +
->> +/dts-v1/;
->> +
->> +#include "sun7i-a20-icnova-a20.dtsi"
->> +
->> +#include <dt-bindings/gpio/gpio.h>
->> +#include <dt-bindings/leds/common.h>
->> +
->> +/ {
->> +	model = "In-Circuit ICnova A20 ADB4006";
->> +	compatible = "incircuit,icnova-a20-adb4006", "incircuit,icnova-a20",
->> +		     "allwinner,sun7i-a20";
->> +
->> +	aliases {
->> +		serial0 = &uart0;
->> +	};
->> +
->> +	chosen {
->> +		stdout-path = "serial0:115200n8";
->> +	};
->> +
->> +	hdmi-connector {
->> +		compatible = "hdmi-connector";
->> +		type = "a";
->> +
->> +		port {
->> +			hdmi_con_in: endpoint {
->> +				remote-endpoint = <&hdmi_out_con>;
->> +			};
->> +		};
->> +	};
->> +
->> +	leds {
->> +		compatible = "gpio-leds";
->> +
->> +		led-0 {
->> +			function = LED_FUNCTION_POWER;
->> +			color = <LED_COLOR_ID_YELLOW>;
->> +			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>; /* PH21 */
->> +			default-state = "on";
->> +		};
->> +
->> +		led-1 {
->> +			function = LED_FUNCTION_HEARTBEAT;
->> +			color = <LED_COLOR_ID_RED>;
->> +			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>; /* PH20 */
->> +			linux,default-trigger = "heartbeat";
->> +		};
->> +	};
->> +};
->> +
->> +&ahci {
->> +	target-supply = <&reg_ahci_5v>;
->> +	status = "okay";
->> +};
->> +
->> +&codec {
->> +	status = "okay";
->> +};
->> +
->> +&de {
->> +	status = "okay";
->> +};
->> +
->> +&ehci0 {
->> +	status = "okay";
->> +};
->> +
->> +&ehci1 {
->> +	status = "okay";
->> +};
->> +
->> +&hdmi {
->> +	status = "okay";
->> +};
->> +
->> +&hdmi_out {
->> +	hdmi_out_con: endpoint {
->> +		remote-endpoint = <&hdmi_con_in>;
->> +	};
->> +};
->> +
->> +&mmc0 {
->> +	vmmc-supply = <&reg_vcc3v3>;
->> +	bus-width = <4>;
->> +	cd-gpios = <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
->> +	status = "okay";
->> +};
->> +
->> +&ohci0 {
->> +	status = "okay";
->> +};
->> +
->> +&ohci1 {
->> +	status = "okay";
->> +};
->> +
->> +&otg_sram {
->> +	status = "okay";
->> +};
->> +
->> +&reg_ahci_5v {
->> +	status = "okay";
->> +};
->> +
->> +&ac_power_supply {
->> +	status = "okay";
->> +};
->> +
->> +&reg_usb1_vbus {
->> +	status = "okay";
->> +};
->> +
->> +&reg_usb2_vbus {
->> +	status = "okay";
->> +};
->> +
->> +&uart0 {
->> +	pinctrl-names = "default";
->> +	pinctrl-0 = <&uart0_pb_pins>;
->> +	status = "okay";
->> +};
->> +
->> +&usb_otg {
->> +	dr_mode = "otg";
->> +	status = "okay";
->> +};
->> +
->> +&usbphy {
->> +	usb0_id_det-gpios = <&pio 7 4 GPIO_ACTIVE_HIGH>; /* PH4 */
->> +	usb0_vbus_det-gpios = <&pio 7 5 GPIO_ACTIVE_HIGH>; /* PH5 */
->> +	usb1_vbus-supply = <&reg_usb1_vbus>;
->> +	usb2_vbus-supply = <&reg_usb2_vbus>;
->> +	status = "okay";
->> +};
->> diff --git a/arch/arm/dts/sun7i-a20-icnova-a20.dtsi b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
->> new file mode 100644
->> index 0000000000..46616c6bc8
->> --- /dev/null
->> +++ b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
->> @@ -0,0 +1,62 @@
->> +// SPDX-License-Identifier: (GPL-2.0 OR MIT)
->> +// Copyright (C) 2023 In-Circuit GmbH
->> +
->> +#include "sun7i-a20.dtsi"
->> +#include "sunxi-common-regulators.dtsi"
->> +
->> +#include <dt-bindings/interrupt-controller/irq.h>
->> +
->> +&cpu0 {
->> +	cpu-supply = <&reg_dcdc2>;
->> +};
->> +
->> +&gmac {
->> +	pinctrl-names = "default";
->> +	pinctrl-0 = <&gmac_mii_pins>;
->> +	phy-handle = <&phy1>;
->> +	phy-mode = "mii";
->> +	status = "okay";
->> +};
->> +
->> +&i2c0 {
->> +	status = "okay";
->> +
->> +	axp209: pmic@34 {
->> +		reg = <0x34>;
->> +		interrupt-parent = <&nmi_intc>;
->> +		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
->> +	};
->> +};
->> +
->> +&gmac_mdio {
->> +	phy1: ethernet-phy@1 {
->> +		reg = <1>;
->> +	};
->> +};
->> +
->> +#include "axp209.dtsi"
->> +
->> +&reg_dcdc2 {
->> +	regulator-always-on;
->> +	regulator-min-microvolt = <1000000>;
->> +	regulator-max-microvolt = <1400000>;
->> +	regulator-name = "vdd-cpu";
->> +};
->> +
->> +&reg_dcdc3 {
->> +	regulator-always-on;
->> +	regulator-min-microvolt = <1000000>;
->> +	regulator-max-microvolt = <1400000>;
->> +	regulator-name = "vdd-int-dll";
->> +};
->> +
->> +&reg_ldo1 {
->> +	regulator-name = "vdd-rtc";
->> +};
->> +
->> +&reg_ldo2 {
->> +	regulator-always-on;
->> +	regulator-min-microvolt = <3000000>;
->> +	regulator-max-microvolt = <3000000>;
->> +	regulator-name = "avcc";
->> +};
->> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
->> index 98bbd2dd25..67cdd01371 100644
->> --- a/board/sunxi/MAINTAINERS
->> +++ b/board/sunxi/MAINTAINERS
->> @@ -236,6 +236,11 @@ M:	Stefan Roese <sr@denx.de>
->>   S:	Maintained
->>   F:	configs/icnova-a20-swac_defconfig
->>   
->> +ICnova-A20-ADB4006 BOARD
->> +M:	Ludwig Kormann <ludwig.kormann@ict42.de>
->> +S:	Maintained
->> +F:	configs/icnova-a20-adb4006_defconfig
->> +
->>   ITEAD IBOX BOARD
->>   M:	Marcus Cooper <codekipper@gmail.com>
->>   S:	Maintained
->> diff --git a/configs/icnova-a20-adb4006_defconfig b/configs/icnova-a20-adb4006_defconfig
->> new file mode 100644
->> index 0000000000..f70ffe45ab
->> --- /dev/null
->> +++ b/configs/icnova-a20-adb4006_defconfig
->> @@ -0,0 +1,20 @@
->> +CONFIG_ARM=y
->> +CONFIG_ARCH_SUNXI=y
->> +CONFIG_DEFAULT_DEVICE_TREE="sun7i-a20-icnova-a20-adb4006"
->> +CONFIG_SPL=y
->> +CONFIG_MACH_SUN7I=y
->> +CONFIG_DRAM_CLK=384
->> +CONFIG_AHCI=y
->> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->> +CONFIG_SPL_I2C=y
->> +CONFIG_SCSI_AHCI=y
->> +CONFIG_SYS_I2C_MVTWSI=y
->> +CONFIG_SYS_I2C_SLAVE=0x7f
->> +CONFIG_SYS_I2C_SPEED=400000
->> +CONFIG_ETH_DESIGNWARE=y
->> +CONFIG_MII=y
->> +CONFIG_SUN7I_GMAC=y
->> +CONFIG_AXP_ALDO4_VOLT=2800
->> +CONFIG_SCSI=y
->> +CONFIG_USB_EHCI_HCD=y
->> +CONFIG_USB_OHCI_HCD=y
->
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 3a6ba69f6d5f..fc1c3eb93c9d 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -187,6 +187,10 @@ int regulator_set_enable(struct udevice *dev, bool enable)
+ 		}
+ 	}
+ 
++	/* Regulator is already enabled */
++	if (ret == -EALREADY)
++		return 0;
++
+ 	return ret;
+ }
+ 
+-- 
+2.25.1
 
