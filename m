@@ -4,118 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11201C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 11:04:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40AC2C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 11:05:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCA9487641;
-	Wed,  1 Nov 2023 12:04:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 8359D87641;
+	Wed,  1 Nov 2023 12:05:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="idnxNvbX";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MV1W5m20";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C1C987641; Wed,  1 Nov 2023 12:04:21 +0100 (CET)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7121A876F2; Wed,  1 Nov 2023 12:05:14 +0100 (CET)
+Received: from mail-m127230.xmail.ntesmail.com
+ (mail-m127230.xmail.ntesmail.com [115.236.127.230])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 806D8875A8
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 12:04:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E86F875A8
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 12:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20231101110412epoutp03f39d3e5a585719cea6b648cb2d48dca9~Teu9bwSGY2700427004epoutp03G
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 11:04:12 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20231101110412epoutp03f39d3e5a585719cea6b648cb2d48dca9~Teu9bwSGY2700427004epoutp03G
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698836652;
- bh=i7BcMMFN3knZWC5bd9aBv81sIRW80rsC/DxpBkBuXeo=;
- h=From:To:Cc:Subject:Date:References:From;
- b=idnxNvbXKA0vfCWh1/MTn2Hsx5/qjkcHTwFX2NBIaZWcw59m38BvKpbpun6todK3z
- q69ES/helJtOtwdiE05jx31hPBV2A3tvlgxDhj8wzCMtZsGyCBNua59Mumg3XlQNNw
- s+jy2tlkSo043k93lypneZMVNqce4POBMai6IdWY=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20231101110412epcas1p2cba4b92cd545c2ed643c180dea6383bf~Teu8_8xvg0945009450epcas1p2L;
- Wed,  1 Nov 2023 11:04:12 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.38.232]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4SL3zb3yMQz4x9Pq; Wed,  1 Nov
- 2023 11:04:11 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- 35.DA.09739.BA032456; Wed,  1 Nov 2023 20:04:11 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20231101110411epcas1p13348bdc968aeae008244c48b6a67efd0~Teu71Nfbk0335303353epcas1p1r;
- Wed,  1 Nov 2023 11:04:11 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231101110411epsmtrp1206bf0caea50b3d7be5d0b78638b64cf~Teu7z0_ON0757007570epsmtrp1n;
- Wed,  1 Nov 2023 11:04:11 +0000 (GMT)
-X-AuditID: b6c32a37-c0bff7000000260b-c2-654230ab4fcd
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 72.84.07368.BA032456; Wed,  1 Nov 2023 20:04:11 +0900 (KST)
-Received: from localhost.localdomain (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20231101110410epsmtip1df006306ec3b22d8be2d68648396560a~Teu7nt5rB3073430734epsmtip1n;
- Wed,  1 Nov 2023 11:04:10 +0000 (GMT)
-From: Jaehoon Chung <jh80.chung@samsung.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, patrice.chotard@foss.st.com,
- eugen.hristev@collabora.com, trini@konsulko.com, neil.armstrong@linaro.org,
- jonas@kwiboo.se, Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [PATCH] usb: dwc3-meson-g12a: Use regulator_set_enable_if_allowed
-Date: Wed,  1 Nov 2023 20:04:09 +0900
-Message-Id: <20231101110409.212536-1-jh80.chung@samsung.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=MV1W5m20N+1Z+PWWNdN3mPFAhk036sW6qKxmoARk5fnbLi46b8uAEaj7OrEyKVFG6bWfBuuYdQHnhdblFXwAjUD8QbYw6mgwfYKSkZJOJFD9IX9PxdgMDuLO+CkFyVOI5WPk1QW6ORuiMjMJAQqlpUZ51c4hv765dVglb+xnkRw=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=YfVDc47dmn343FsBDuiQe4wjJB2H6QBXiXCALi4Roww=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 727C0400424;
+ Wed,  1 Nov 2023 19:04:58 +0800 (CST)
+Message-ID: <1c6b6cc9-840c-4608-b15b-fdde4ac24b9f@rock-chips.com>
+Date: Wed, 1 Nov 2023 19:04:58 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] board: rockchip: add FriendlyElec NanoPC-T6 rk3588 board
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, John Clark <inindev@gmail.com>,
+ sst@poczta.fm
+Cc: Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki
+ <jagan@edgeble.ai>, Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ chenfen <chenfen@rock-chips.com>, =?UTF-8?B?6LW15Luq5bOw?=
+ <zyf@rock-chips.com>
+References: <20231007212552.11109-1-inindev@gmail.com>
+ <3145ccc9-d6d6-ee81-4158-9ac576f1a236@rock-chips.com>
+ <b82c02c0-0a37-8553-f498-b03f85394d59@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <b82c02c0-0a37-8553-f498-b03f85394d59@kwiboo.se>
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhhIQ1ZOTUoYTBkfQhhMSkhVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8b8a8ed62e2eb3kusn727c0400424
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDY6Txw*Ijw8ExojCw8oEhQ0
+ LR0KCTJVSlVKTUJDQ0hNTUJCSkxPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDTUlNNwY+
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGJsWRmVeSWpSXmKPExsWy7bCmvu5qA6dUg/5eWYvWRbcZLW78amO1
- OPnmKovF+523GC1+nnzPbvFtyzZGi6mTNrNbvN3bye7A4TG74SKLx467Sxg9nvZvZfd4dWAV
- u8eJCZeYPO5c28PmcfbODkaPvi2rGAM4orJtMlITU1KLFFLzkvNTMvPSbZW8g+Od403NDAx1
- DS0tzJUU8hJzU22VXHwCdN0yc4BuU1IoS8wpBQoFJBYXK+nb2RTll5akKmTkF5fYKqUWpOQU
- mBboFSfmFpfmpevlpZZYGRoYGJkCFSZkZ6y4PpuxYA5XxcuTTcwNjGc4uhg5OSQETCTuvj3C
- 2MXIxSEksINR4t3ONmYI5xOjxLPHG1kgnG+MEntunWCDaVm+oZEdIrGXUWL18YNQzhdGiWn3
- m8Gq2AR0JLZ/O84EYosISEj86r8KtoRZYBejxK6jrUAOB4ewgJfEhmcsIDUsAqoSS5fdZwex
- eQVsJA5/aWCH2CYvMfPSd6i4oMTJmU/A6pmB4s1bZ4PdKiHwkV1iUddvRogGF4mVa75BnSos
- 8er4FqhBUhIv+9vYIRqaGSWWLjnICuH0MEr8a7gO1WEssX/pZCaQ65gFNCXW79KHCCtK7Pw9
- lxFiM5/Eu689rCAlEgK8Eh1tQhAlKhKXXr9kgtl198l/VgjbQ6L963M2kHIhgViJv138Exjl
- ZyF5ZxaSd2Yh7F3AyLyKUSy1oDg3PbXYsMAYHq3J+bmbGMEJVMt8B+O0tx/0DjEycTAeYpTg
- YFYS4T1s6pAqxJuSWFmVWpQfX1Sak1p8iNEUGMATmaVEk/OBKTyvJN7QxNLAxMzI2MTC0MxQ
- SZz31rPeFCGB9MSS1OzU1ILUIpg+Jg5OqQamLhmfNV98pkQ4/2+3Sp+YwHhw+lpfpx3sn5Xr
- ou6c2LL994XfKnndvvVRj7sSHt7v52KNurxSLTP5QsyMLze+eKU07ynzmMrxMmfBwU7fbq/1
- xpMzJ3DlsG/fryLio5BVtU6P4fLFzxs/TF50OFXNsPz0uZURvfOFm2clLL1exH5QZIH2M6VE
- Pk2F7CVPpaLW8i06u215u0+31HNRncocG+cCdeXqVdtFPjqwPqzY+c7K93/e3hulE6zC9fhD
- M1h4g1v+zI2WNPjydc3068ZXy9zMfQysXxR5SD2pzgs6KHD6Fn/Geq/cems5r1eef3fV7Ut8
- yR4/rcH1yNSv8i7/vi42CLmfoOOg+3H/LDYlluKMREMt5qLiRAAnordDKQQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrELMWRmVeSWpSXmKPExsWy7bCSnO5qA6dUgydH2S1aF91mtLjxq43V
- 4uSbqywW73feYrT4efI9u8W3LdsYLaZO2sxu8XZvJ7sDh8fshossHjvuLmH0eNq/ld3j1YFV
- 7B4nJlxi8rhzbQ+bx9k7Oxg9+rasYgzgiOKySUnNySxLLdK3S+DKWHF9NmPBHK6KlyebmBsY
- z3B0MXJySAiYSCzf0MjexcjFISSwm1FifdNJJoiElMTnp1PZuhg5gGxhicOHi0HCQgKfGCVm
- dpeD2GwCOhLbvx0HKxcRkJD41X+VEWQOs8AhRom2vmvMIL3CAl4SG56xgNSwCKhKLF12nx3E
- 5hWwkTj8pYEdYpW8xMxL36HighInZz4Bq2cGijdvnc08gZFvFpLULCSpBYxMqxglUwuKc9Nz
- kw0LDPNSy/WKE3OLS/PS9ZLzczcxgoNZS2MH4735//QOMTJxMALdxsGsJMJ72NQhVYg3JbGy
- KrUoP76oNCe1+BCjNAeLkjiv4YzZKUIC6YklqdmpqQWpRTBZJg5OqQYm9dolm9etyDDZVl54
- gCPYvSq73aenLChwibTBH5a5CYtOhN3ruL3r17RTzOXC4h9nKTdv+3Hq+9e87k3HtU+XfV3P
- ZB13/qjtrduzLfuSpq8pTVh66MkEy9OrFhe+sqrc9kwx07vb0/KkfdjT81zfVuv/r12fuFl9
- F6+yOMcRgw+pi45GMdqsWba/cJYTo8CkdEm15JyXd2eKGJ3crpJTa2MidqB60r3Vv+aJPJ77
- 1vg3e2RMzDzOW+/Fn/Mt/NP9IH25l52hamxDbCbLjVkBESu8fD/kz/PgE5lZcb79zHW7R2KS
- ovPqd+reyWd/sPuE7ZnS9kXH4qtdzNh3S9VJ+8mqF8YfCpwqmLvnQvdqJZbijERDLeai4kQA
- XLTa/9UCAAA=
-X-CMS-MailID: 20231101110411epcas1p13348bdc968aeae008244c48b6a67efd0
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231101110411epcas1p13348bdc968aeae008244c48b6a67efd0
-References: <CGME20231101110411epcas1p13348bdc968aeae008244c48b6a67efd0@epcas1p1.samsung.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,40 +79,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some meson targets are using a fixed regulator about usb.
-It's always returning to EARLEADY, so driver doesn't init fine.
-To prevent this problem, use the regulator_set_enable_if_allowed
-instead of regulator_set_enable.
+Add Slawomir Stepien;
 
-Fixes: 4fcba5d556b ("regulator: implement basic reference counter")
+Hi Jonas,  John, Slawomir:
 
-Signed-off-by: Jaehoon Chung <jh80.chung@samsung.com>
----
- drivers/usb/dwc3/dwc3-meson-g12a.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
-index e0356e653fcc..59276483c19d 100644
---- a/drivers/usb/dwc3/dwc3-meson-g12a.c
-+++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
-@@ -291,7 +291,7 @@ int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode)
- 
- #if CONFIG_IS_ENABLED(DM_REGULATOR)
- 	if (priv->vbus_supply) {
--		int ret = regulator_set_enable(priv->vbus_supply,
-+		int ret = regulator_set_enable_if_allowed(priv->vbus_supply,
- 					(mode == USB_DR_MODE_PERIPHERAL));
- 		if (ret)
- 			return ret;
-@@ -420,7 +420,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
- 	}
- 
- 	if (priv->vbus_supply) {
--		ret = regulator_set_enable(priv->vbus_supply, true);
-+		ret = regulator_set_enable_if_allowed(priv->vbus_supply, true);
- 		if (ret)
- 			return ret;
- 	}
--- 
-2.25.1
+On 2023/10/18 04:47, Jonas Karlman wrote:
+> Hi Kever,
+>
+> On 2023-10-08 11:09, Kever Yang wrote:
+>> On 2023/10/8 05:25, John Clark wrote:
+>>> NanoPC-T6 is a Rockchip RK3588 based SBC by FriendlyElec.
+>>>
+>>> There are four variants depending on the DRAM size: 4G/32GB eMMC, 8G/64GB eMMC,
+>>> 16G/16MB SPI NOR, and 16G/256GB eMMC/16MB SPI NOR
+>> So the board is using SPI NOR flash.
+>>
+>>
+>> [...]
+>>
+>>> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>>> index b1f535fad5..e08ebfa39b 100644
+>>> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+>>> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+>>> @@ -40,6 +40,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>>>    const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>>    	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe2e0000",
+>>>    	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
+>>> +	[BROM_BOOTSOURCE_SPINAND] = "/spi@fe2b0000/flash@0",
+>> Why need a SPI NAND?
+>>
+>> If this is really needed, will be a separate patch to support a new boot
+>> source from bootrom.
+> I have done spi boot testing on a few rk3588 boards with SPI NOR flash,
+> and there seem to be a correlation between the bootsource/bootdevice id
+> written to reg by the bootrom and the fspi iomux used by the board.
+>
+> Following bootsource/bootdevice value can be read from reg,
+>
+> - FSPI (M0): 3
+> - FSPI (M1): 4
+> - FSPI (M2): 6
+>
+> based on testing on the following boards:
+>
+> - Radxa ROCK 5 Model A - fspim0_pins - rk3588s
+> - Xunlong Orange Pi 5 - fspim0_pins - rk3588s
+>      brom_bootdevice_id: 3
+>
+> - FriendlyElec NanoPC-T6 - fspim1_pins - rk3588
+> - Xunlong Orange Pi 5 Plus - fspim1_pins - rk3588
+>      brom_bootdevice_id: 4
+>
+> - Radxa ROCK 5 Model B - fspim2_pins - rk3588
+>      brom_bootdevice_id: 6
+>
+> Can these observations be correct? And if so, maybe we should use
+> following constants for RK3588?
+>
+>    BROM_BOOTSOURCE_FSPI_M0 = 3
+>    BROM_BOOTSOURCE_FSPI_M1 = 4
+>    BROM_BOOTSOURCE_FSPI_M2 = 6
 
+Very good finding, I have check internally with bootrom owner, the 
+definition is exactly same as
+
+these three option for SPI M0 to M2.
+
+>
+> Any insights into what values bootrom will write to reg would be very
+> helpful.
+
+After add FSPI M0-M2, the spi NAND/NOR source has complete support, 
+there is no separate definition
+
+for SPI NAND and SPI NOR for now until RK3588, all three ports can 
+support both SPI NAND and spi NOR.
+
+
+Thanks,
+
+- Kever
+
+>
+> Regards,
+> Jonas
+>
+>>
+>> Thanks,
+>> - Kever
+>>
