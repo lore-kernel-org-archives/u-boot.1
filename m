@@ -4,123 +4,124 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDBBFC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 00:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6583DC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 01:09:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F370875F5;
-	Wed,  1 Nov 2023 01:52:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 82FE287B87;
+	Wed,  1 Nov 2023 02:09:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="AnTXE6aQ";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="jfYVwcfX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9F43875F6; Wed,  1 Nov 2023 01:52:39 +0100 (CET)
+ id 1DDEC87BB0; Wed,  1 Nov 2023 02:09:12 +0100 (CET)
 Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F018875EC
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 01:52:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A19487B85
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 02:09:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
  by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20231101005231epoutp043f5615f991a43df91a35bb729b01c460~TWY4N__Vv0089600896epoutp04U
- for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 00:52:31 +0000 (GMT)
+ 20231101010900epoutp04d3b6e18e58a70710ffa139d4d71564ca~TWnSHEn4I2211922119epoutp04G
+ for <u-boot@lists.denx.de>; Wed,  1 Nov 2023 01:09:00 +0000 (GMT)
 DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20231101005231epoutp043f5615f991a43df91a35bb729b01c460~TWY4N__Vv0089600896epoutp04U
+ 20231101010900epoutp04d3b6e18e58a70710ffa139d4d71564ca~TWnSHEn4I2211922119epoutp04G
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698799951;
- bh=iLtytW+sy+CBTlra/2gePJp+Ukdw4jU4yg3yxzOxZxk=;
- h=From:To:In-Reply-To:Subject:Date:References:From;
- b=AnTXE6aQIj+HSEpKQanQecNYkUqhqDi2r7r3VkvT+49MIJIVDxAw7+g05LGpUs9rs
- oqslnJtcobvyma+X8zQ4rx1ZvT4ltlAn7aW0AzdPGVubMp8ZTtGEtzV2KW3wJ4bKGa
- Z9cqf+aUQtweSpzn1mk4jqp4Id42ZAR8cgJY8VSg=
+ s=mail20170921; t=1698800941;
+ bh=wu3k5RR9Yvf8NX16WnwB/y81i9lQI+OG1isE2cEF8Lw=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=jfYVwcfXomwuQpbrt2uzYdRZEow9EmsvVPX0s+HZWQ/WZZk8B9iHs6WXwPa5rrof4
+ D/brxpitgYYw35Bo6f7lThnCl180Oy19cZAxf2Ff/gXUNPP7+D7JYKWrVLOJkYhE2i
+ 27UVdSTXKYPEZ3F2VaDOxVMQtkLwuxrWO9aa94n4=
 Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20231101005230epcas1p3a4ea933924e7d91ee1191f42edad1c03~TWY3-AwUN1754117541epcas1p3U;
- Wed,  1 Nov 2023 00:52:30 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.36.145]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4SKpPn4rf8z4x9Q2; Wed,  1 Nov
- 2023 00:52:29 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- B6.F7.09739.D41A1456; Wed,  1 Nov 2023 09:52:29 +0900 (KST)
+ epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20231101010900epcas1p24e9dbf1a5e3dd2ef637004d4ef4d116b~TWnR8K0F_3192331923epcas1p2N;
+ Wed,  1 Nov 2023 01:09:00 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.38.231]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4SKpmq6JLfz4x9Q2; Wed,  1 Nov
+ 2023 01:08:59 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ AF.E6.09744.B25A1456; Wed,  1 Nov 2023 10:08:59 +0900 (KST)
 Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
  epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20231101005229epcas1p1592bb6b973098bfee4c2fecbfc0cbd80~TWY2gQkmr0339303393epcas1p1o;
- Wed,  1 Nov 2023 00:52:29 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ 20231101010859epcas1p157d08937fd7964a5fff2866c100fdd70~TWnQy8jNf2816428164epcas1p14;
+ Wed,  1 Nov 2023 01:08:59 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
  epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20231101005229epsmtrp2cca2c7d6b88f336ad6750664ebfec75b~TWY2fjgYf0686506865epsmtrp2J;
- Wed,  1 Nov 2023 00:52:29 +0000 (GMT)
-X-AuditID: b6c32a37-c0bff7000000260b-4b-6541a14d9fcf
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 49.FA.08817.D41A1456; Wed,  1 Nov 2023 09:52:29 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ 20231101010859epsmtrp2272e767f972ebfd9c8ced4cedf80d364~TWnQyVjSN1642916429epsmtrp2x;
+ Wed,  1 Nov 2023 01:08:59 +0000 (GMT)
+X-AuditID: b6c32a35-7239ea8000002610-98-6541a52bf391
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 8F.DC.07368.B25A1456; Wed,  1 Nov 2023 10:08:59 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20231101005228epsmtip26824f978f8e54089f4ad06ca95df67c1~TWY2Pj9eR0849808498epsmtip2T;
- Wed,  1 Nov 2023 00:52:28 +0000 (GMT)
+ 20231101010859epsmtip1bed30c24f8feec635ca228620dfb3bca~TWnQh25Qp1677816778epsmtip1R;
+ Wed,  1 Nov 2023 01:08:59 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Chanho Park'" <chanho61.park@samsung.com>, "'Sughosh Ganu'"
- <sughosh.ganu@linaro.org>, "'Heinrich Schuchardt'" <xypron.glpk@gmx.de>,
- "'Rick Chen'" <rick@andestech.com>, "'Leo'" <ycliang@andestech.com>,
- <u-boot@lists.denx.de>
-In-Reply-To: <20231031235530.1500393-4-chanho61.park@samsung.com>
-Subject: RE: [PATCH v2 3/5] rng: Add StarFive JH7110 RNG driver
-Date: Wed, 1 Nov 2023 09:52:28 +0900
-Message-ID: <016c01da0c5d$b0449f30$10cddd90$@samsung.com>
+To: "'Henrik Grimler'" <henrik@grimler.se>, "'Sean Anderson'"
+ <sean.anderson@seco.com>
+Cc: <u-boot@lists.denx.de>, "'Rayagonda	Kokatanur'"
+ <rayagonda.kokatanur@broadcom.com>, "'Bharat Kumar Reddy Gooty'"
+ <bharat.gooty@broadcom.com>
+In-Reply-To: <ZT1viTCUl-LKj8Dm@grimlerstat.localdomain>
+Subject: RE: [PATCH] mmc: sdhci: Rework SDHCI_QUIRK_BROKEN_R1B
+Date: Wed, 1 Nov 2023 10:08:59 +0900
+Message-ID: <018b01da0c5f$fe8e3550$fbaa9ff0$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQKT+xXLwr3a99t9wWLY9o27f2hMVAJJLqHvAhBbHJ2uzfceoA==
+Thread-Index: AQGkfDbXQ+XSUf1bqSstKAK0/j5oAwHLhqSzAbZ7QqGws7UwUA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprEJsWRmVeSWpSXmKPExsWy7bCmga7vQsdUg31NChaX92tbvH1xltHi
- 3jU5i7d7O9ktDk/9wGjx+NBrJgc2jz2nZzF7fPgY53Hn2h42j7N3djB69G1ZxRjAGpVtk5Ga
- mJJapJCal5yfkpmXbqvkHRzvHG9qZmCoa2hpYa6kkJeYm2qr5OIToOuWmQO0X0mhLDGnFCgU
- kFhcrKRvZ1OUX1qSqpCRX1xiq5RakJJTYFqgV5yYW1yal66Xl1piZWhgYGQKVJiQnXHjgkDB
- BI+KOw29TA2MNy27GDk5JARMJBYvambvYuTiEBLYwSjRd3wtK4TziVHi9sYfjBDON0aJLfce
- ssC0fFj1iAkisZdR4tHuh8wQzktGiR89OxlBqtgE9CT+L1oIlhAReMMo8fXUXrYuRg4OTgFH
- iWlbS0FqhAXsJXbt+s4MYrMIqEj8OfCZHcTmFbCUuPasiwnCFpQ4OfMJ2GZmAXmJ7W/nMENc
- oSDx8+kyVhBbRMBJYtbCt0wQNSISszvbwPZKCDRySKxZMo0dosFFYs7GL4wQtrDEq+NboOJS
- Ep/fgdwG0tDMKLF0yUFWCKeHUeJfw3U2iCpjif1LJzOBfMAsoCmxfpc+RFhRYufvuYwQm/kk
- 3n3tYQUpkRDglehoE4IoUZG49PolE8yuu0/+s0LYHhLLN/5gmcCoOAvJn7OQ/DkLyT+zEBYv
- YGRZxSiWWlCcm55abFhgDI/u5PzcTYzgxKllvoNx2tsPeocYmTgYDzFKcDArifAeNnVIFeJN
- SaysSi3Kjy8qzUktPsRoCgz5icxSosn5wNSdVxJvaGJpYGJmZGxiYWhmqCTOe+tZb4qQQHpi
- SWp2ampBahFMHxMHp1QD01Relw9X7zzVu+TUZfWnY6VMZPTkxhflvVKT1NrDi3fd+vzA6bZV
- 7M67p9JX3326l2GKOu/nhrQPDiX33NZZlJxqaVpZPu+8WiJn0tGNKhe/sq650PfrzjOF0OZ1
- Vnsj1rauPb9ZW37vsqJnITplJ28edzl8wPPfod4r+/iV50Z9Nb4hExy4w/ChCNvNHsdnrirf
- GGVz+KZGX3k4j6OGWV50eeqrglW2rJUS6e9SC3dw6EqEHRQs6dySX1O0bm3Q162bH8YIij0M
- kI399pc31iZiB/9GPmZVx5qbAiv85v//UdBQvEV4X1bf//P3F6oyZIcszS8s2GSfWPj/dSKr
- UdDJ2Nif+63jlDYWG7DcV2Ipzkg01GIuKk4EAKhZ5/0lBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrPLMWRmVeSWpSXmKPExsWy7bCSvK7vQsdUg6d72Cwu79e2ePviLKPF
- vWtyFm/3drJbHJ76gdHi8aHXTA5sHntOz2L2+PAxzuPOtT1sHmfv7GD06NuyijGANYrLJiU1
- J7MstUjfLoEr48YFgYIJHhV3GnqZGhhvWnYxcnJICJhIfFj1iKmLkYtDSGA3o8Sk/Q/YIBJS
- Ep+fTgWyOYBsYYnDh4shap4zSnS0fAGrYRPQk/i/aCEzSEJE4AOjROPKU4wQVccZJTa2tIB1
- cwo4SkzbWgrSICxgL7Fr13dmEJtFQEXiz4HP7CA2r4ClxLVnXUwQtqDEyZlPWEBsZgFtiac3
- n0LZ8hLb385hhjhOQeLn02WsILaIgJPErIVvmSBqRCRmd7YxT2AUmoVk1Cwko2YhGTULScsC
- RpZVjJKpBcW56bnFhgVGeanlesWJucWleel6yfm5mxjBcaKltYNxz6oPeocYmTgYDzFKcDAr
- ifAeNnVIFeJNSaysSi3Kjy8qzUktPsQozcGiJM777XVvipBAemJJanZqakFqEUyWiYNTqoFJ
- 7syWHyuXlrVy1qvE9t0OO8I1Of7mXnbWHdq7Z/u9kpi1O//1ZM1121qeKVy7fMBy0yKr3jj3
- +Ld/T886eOTO0xvSbz7oH+Hlb4tft/P9RaG2d9q3Ju7rYtWe6KZlL6iV8exh09ZJk+/+3xlu
- lPFqsnn1gYfsNvvduoT9cqPfzvtto9dqql4d92ad78zutX173CzWGyxZdVrz2dPSkM6Ojuvh
- Zi/vfn2jvcZ478Ho7rXNyWdUnslF+6oxXjJe9enKlNcCM51MCn23cjrW3vxfExV5VCt6jk5d
- k7ekz3zdItVQq0OT2cP1RfZpfHOcJ7o0SPd/qDmfTdTjw+0HxHSWGZYrrPMRmXY0fAa38MdH
- SizFGYmGWsxFxYkAbjzw6AIDAAA=
-X-CMS-MailID: 20231101005229epcas1p1592bb6b973098bfee4c2fecbfc0cbd80
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmk+LIzCtJLcpLzFFi42LZdlhTT1d7qWOqQf9HI4sL/4+zWbxdsovR
+ YvvSJlaLefdbmCze7u1kd2D1mHX/LJvH0Sv3WD3O3tnB6PHs3zf2AJaobJuM1MSU1CKF1Lzk
+ /JTMvHRbJe/geOd4UzMDQ11DSwtzJYW8xNxUWyUXnwBdt8wcoMVKCmWJOaVAoYDE4mIlfTub
+ ovzSklSFjPziElul1IKUnALTAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMu6tOsxXsla7on3SL
+ pYHxrGgXIyeHhICJxL+j11i6GLk4hAR2MEqc7roP5XxilJjc18sE4XxjlDh0aQ47TMv/p89Z
+ IRJ7GSW2zFkE5bxklHg26SwzSBWbgJ7E/0ULwWwRgQiJg8eXgY1iFpjCKPHu0HmwBKeAuUTf
+ s+dAC9k5hAXsJFoVQaIsAioSu1e9YASxeQUsJVobNrBD2IISJ2c+YQGxmQXkJba/ncMMcZCC
+ xM+ny1ghVjlJ/Gl8A1UjIjG7s40ZZK2EQCuHxKyvs1ggGlwkLh+5xwRhC0u8Or4F6jMpic/v
+ 9rJBNDQzSixdcpAVwulhlPjXcJ0NospYYv/SyUDdHEArNCXW79KHCCtK7Pw9lxFiM5/Eu689
+ rCAlEgK8Eh1tQhAlKhKXXr9kgtl198l/1gmMSrOQ/DYLyW+zkPwwC2HZAkaWVYxiqQXFuemp
+ xYYFhvDoTs7P3cQITpVapjsYJ779oHeIkYmD8RCjBAezkgjvYVOHVCHelMTKqtSi/Pii0pzU
+ 4kOMpsDQnsgsJZqcD0zWeSXxhiaWBiZmRsYmFoZmhkrivMyPelOEBNITS1KzU1MLUotg+pg4
+ OKUamJYWvOMt+3XJ8vfTaeGfNF7uFOn+vHH6ZcVl87gm754hrMBftkzuiYy+gMWG859uXJgp
+ WRShoss3f63iMstLx0TvLSv9FrdvzRy/wOMdJ0+Wf2mUM8m+tz72oWbtmSelVzjtXVjvyyxn
+ VVu8tO26u8zp+keehv2Vei+ad4RoLr+Sv+zZMqNi7tlKFUknenaulat8Y+C8Sf5WInvhj0O3
+ t1ua7fF0sas3XLenhLEjedLa99x7ri7ULinaPrX30Ny57Mundk/5XWciLBY/pdLymVrvlzsX
+ xa1b9YM4DN5dk0+TiF3x6enL06lMWnJqAh1muw9OlXzK6/rthHNCkfmxHpurPb1972b+av0y
+ 51n4AyklluKMREMt5qLiRADss16aHgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrELMWRmVeSWpSXmKPExsWy7bCSnK72UsdUg4kfpCwu/D/OZvF2yS5G
+ i+1Lm1gt5t1vYbJ4u7eT3YHVY9b9s2weR6/cY/U4e2cHo8ezf9/YA1iiuGxSUnMyy1KL9O0S
+ uDLurjrNVrBXuqJ/0i2WBsazol2MnBwSAiYS/58+Z+1i5OIQEtjNKHHk4BtmiISUxOenU9m6
+ GDmAbGGJw4eLIWqeM0rsftMBVsMmoCfxf9FCMFtEIELiyP6JTCBFzAJTGCU2P1wKNXUXo8SS
+ zjcsIFWcAuYSfc+eA9nsHMICdhKtiiBRFgEVid2rXjCC2LwClhKtDRvYIWxBiZMzn7CA3MAM
+ tKttI1gJs4C8xPa3c6DOVJD4+XQZK8QJThJ/GiEWMQuISMzubGOewCg8C8mkWQiTZiGZNAtJ
+ xwJGllWMkqkFxbnpucmGBYZ5qeV6xYm5xaV56XrJ+bmbGMHRoqWxg/He/H96hxiZOBgPMUpw
+ MCuJ8B42dUgV4k1JrKxKLcqPLyrNSS0+xCjNwaIkzms4Y3aKkEB6YklqdmpqQWoRTJaJg1Oq
+ gSm8R3mVY8JxrYNvez/WLWb98ngO482sDyEzDF5Z+Thy+K578cV7dvS2W3Jfjq+zn1+h+uHq
+ e1XBsuUfpvHXKJjaLmOacH9a8ezyh8+XPjnGcf6tvMREdZO9j5PjHPpr9rC4qImYXPv8dLW3
+ 1IWaRY36vz2lGA4dXvaHWaM15dzyVfET9h+e8Oetkeu9iW5nT4aYnj21ifmq3BZTFufqg77C
+ 91eeUNn1xGjiww/W66YbHJ+RLPGf13OHT6eeZtacmB9i7lytyiuM5nzof3bmeoepSmDDetcz
+ WTfs4qUmLQ551C1y8lS8z2bp/ZrvRILXrP0VwFP55OSmRS/SG8RW9F14n1nzKHhuxZ3cGauz
+ wtNqlFiKMxINtZiLihMB7GOQDAUDAAA=
+X-CMS-MailID: 20231101010859epcas1p157d08937fd7964a5fff2866c100fdd70
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 X-Sendblock-Type: SVC_REQ_APPROVE
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231031235553epcas2p1e580a6b433c6e848368162a6b52e479d
-References: <20231031235530.1500393-1-chanho61.park@samsung.com>
- <CGME20231031235553epcas2p1e580a6b433c6e848368162a6b52e479d@epcas2p1.samsung.com>
- <20231031235530.1500393-4-chanho61.park@samsung.com>
+X-CMS-RootMailID: 20231028203117epcas1p35399709e03bceaaeee24d53537118823
+References: <20231027205702.1549693-1-sean.anderson@seco.com>
+ <CGME20231028203117epcas1p35399709e03bceaaeee24d53537118823@epcas1p3.samsung.com>
+ <ZT1viTCUl-LKj8Dm@grimlerstat.localdomain>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,345 +138,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
+Hi,
 
 > -----Original Message-----
-> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Chanho Park
-> Sent: Wednesday, November 1, 2023 8:55 AM
-> To: Sughosh Ganu <sughosh.ganu@linaro.org>; Heinrich Schuchardt <xypron.glpk@gmx.de>; Rick Chen
-> <rick@andestech.com>; Leo <ycliang@andestech.com>; u-boot@lists.denx.de
-> Cc: Chanho Park <chanho61.park@samsung.com>
-> Subject: [PATCH v2 3/5] rng: Add StarFive JH7110 RNG driver
+> From: Henrik Grimler <henrik@grimler.se>
+> Sent: Sunday, October 29, 2023 5:31 AM
+> To: Sean Anderson <sean.anderson@seco.com>
+> Cc: u-boot@lists.denx.de; Jaehoon Chung <jh80.chung@samsung.com>; Rayagonda Kokatanur
+> <rayagonda.kokatanur@broadcom.com>; Bharat Kumar Reddy Gooty <bharat.gooty@broadcom.com>
+> Subject: Re: [PATCH] mmc: sdhci: Rework SDHCI_QUIRK_BROKEN_R1B
 > 
-> Adds to support JH7110 TRNG driver which is based on linux kernel's
-> jh7110-trng.c. This can support to generate 256-bit random numbers and
-> 128-bit but this makes 256-bit default for convenience.
+> Hi Sean,
 > 
-> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
-> ---
->  drivers/rng/Kconfig      |   6 +
->  drivers/rng/Makefile     |   1 +
->  drivers/rng/jh7110_rng.c | 258 +++++++++++++++++++++++++++++++++++++++
->  3 files changed, 265 insertions(+)
->  create mode 100644 drivers/rng/jh7110_rng.c
+> Tested on odroid-u2 (exynos4412-odroid) on top of 2024.01-rc1, still
+> works fine, so feel free to add:
 > 
-> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
-> index 994cc35b2744..0dba1e06b429 100644
-> --- a/drivers/rng/Kconfig
-> +++ b/drivers/rng/Kconfig
-> @@ -91,4 +91,10 @@ config TPM_RNG
->  	  functionality. Enable random number generator on TPM
->  	  devices.
+> Tested-by: Henrik Grimler <henrik@grimler.se>
 > 
-> +config RNG_JH7110
-> +	bool "StarFive JH7110 Random Number Generator support"
-> +	depends on DM_RNG && STARFIVE_JH7110
-> +	help
-> +	  Enable True Random Number Generator in StarFive JH7110 SoCs.
-> +
->  endif
-> diff --git a/drivers/rng/Makefile b/drivers/rng/Makefile
-> index 47b323e61ee3..9de762c8a1c3 100644
-> --- a/drivers/rng/Makefile
-> +++ b/drivers/rng/Makefile
-> @@ -15,3 +15,4 @@ obj-$(CONFIG_RNG_IPROC200) += iproc_rng200.o
->  obj-$(CONFIG_RNG_SMCCC_TRNG) += smccc_trng.o
->  obj-$(CONFIG_RNG_ARM_RNDR) += arm_rndr.o
->  obj-$(CONFIG_TPM_RNG) += tpm_rng.o
-> +obj-$(CONFIG_RNG_JH7110) += jh7110_rng.o
-> diff --git a/drivers/rng/jh7110_rng.c b/drivers/rng/jh7110_rng.c
-> new file mode 100644
-> index 000000000000..37ea8cc39945
-> --- /dev/null
-> +++ b/drivers/rng/jh7110_rng.c
-> @@ -0,0 +1,258 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * TRNG driver for the StarFive JH7110 SoC
-> + *
-> + */
-> +
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <reset.h>
-> +#include <rng.h>
-> +#include <asm/io.h>
-> +#include <linux/iopoll.h>
-> +
-> +/* trng register offset */
-> +#define STARFIVE_CTRL			0x00
-> +#define STARFIVE_STAT			0x04
-> +#define STARFIVE_MODE			0x08
-> +#define STARFIVE_SMODE			0x0C
-> +#define STARFIVE_IE			0x10
-> +#define STARFIVE_ISTAT			0x14
-> +#define STARFIVE_RAND0			0x20
-> +#define STARFIVE_RAND1			0x24
-> +#define STARFIVE_RAND2			0x28
-> +#define STARFIVE_RAND3			0x2C
-> +#define STARFIVE_RAND4			0x30
-> +#define STARFIVE_RAND5			0x34
-> +#define STARFIVE_RAND6			0x38
-> +#define STARFIVE_RAND7			0x3C
-> +#define STARFIVE_AUTO_RQSTS		0x60
-> +#define STARFIVE_AUTO_AGE		0x64
-> +
-> +/* CTRL CMD */
-> +#define STARFIVE_CTRL_EXEC_NOP		0x0
-> +#define STARFIVE_CTRL_GENE_RANDNUM	0x1
-> +#define STARFIVE_CTRL_EXEC_RANDRESEED	0x2
-> +
-> +/* STAT */
-> +#define STARFIVE_STAT_NONCE_MODE	BIT(2)
-> +#define STARFIVE_STAT_R256		BIT(3)
-> +#define STARFIVE_STAT_MISSION_MODE	BIT(8)
-> +#define STARFIVE_STAT_SEEDED		BIT(9)
-> +#define STARFIVE_STAT_LAST_RESEED(x)	((x) << 16)
-> +#define STARFIVE_STAT_SRVC_RQST		BIT(27)
-> +#define STARFIVE_STAT_RAND_GENERATING	BIT(30)
-> +#define STARFIVE_STAT_RAND_SEEDING	BIT(31)
-> +#define STARFIVE_STAT_RUNNING		(STARFIVE_STAT_RAND_GENERATING | \
-> +					 STARFIVE_STAT_RAND_SEEDING)
-> +
-> +/* MODE */
-> +#define STARFIVE_MODE_R256		BIT(3)
-> +
-> +/* SMODE */
-> +#define STARFIVE_SMODE_NONCE_MODE	BIT(2)
-> +#define STARFIVE_SMODE_MISSION_MODE	BIT(8)
-> +#define STARFIVE_SMODE_MAX_REJECTS(x)	((x) << 16)
-> +
-> +/* IE */
-> +#define STARFIVE_IE_RAND_RDY_EN		BIT(0)
-> +#define STARFIVE_IE_SEED_DONE_EN	BIT(1)
-> +#define STARFIVE_IE_LFSR_LOCKUP_EN	BIT(4)
-> +#define STARFIVE_IE_GLBL_EN		BIT(31)
-> +
-> +#define STARFIVE_IE_ALL			(STARFIVE_IE_GLBL_EN | \
-> +					 STARFIVE_IE_RAND_RDY_EN | \
-> +					 STARFIVE_IE_SEED_DONE_EN | \
-> +					 STARFIVE_IE_LFSR_LOCKUP_EN)
-> +
-> +/* ISTAT */
-> +#define STARFIVE_ISTAT_RAND_RDY		BIT(0)
-> +#define STARFIVE_ISTAT_SEED_DONE	BIT(1)
-> +#define STARFIVE_ISTAT_LFSR_LOCKUP	BIT(4)
-> +
-> +#define STARFIVE_RAND_LEN		sizeof(u32)
-> +
-> +enum mode {
-> +	PRNG_128BIT,
-> +	PRNG_256BIT,
-> +};
-> +
-> +struct starfive_trng_plat {
-> +	void *base;
-> +	struct clk *hclk;
-> +	struct clk *ahb;
-> +	struct reset_ctl *rst;
-> +	u32 mode;
-> +};
-> +
-> +static inline int starfive_trng_wait_idle(struct starfive_trng_plat *trng)
-> +{
-> +	u32 stat;
-> +
-> +	return readl_relaxed_poll_timeout(trng->base + STARFIVE_STAT, stat,
-> +					  !(stat & STARFIVE_STAT_RUNNING),
-> +					  100000);
-> +}
-> +
-> +static inline void starfive_trng_irq_mask_clear(struct starfive_trng_plat *trng)
-> +{
-> +	/* clear register: ISTAT */
-> +	u32 data = readl(trng->base + STARFIVE_ISTAT);
-> +
-> +	writel(data, trng->base + STARFIVE_ISTAT);
-> +}
-> +
-> +static int starfive_trng_cmd(struct starfive_trng_plat *trng, u32 cmd)
-> +{
-> +	u32 stat, flg;
-> +	int ret;
-> +
-> +	switch (cmd) {
-> +	case STARFIVE_CTRL_GENE_RANDNUM:
-> +		writel(cmd, trng->base + STARFIVE_CTRL);
-> +		flg = STARFIVE_ISTAT_RAND_RDY;
-> +		break;
-> +	case STARFIVE_CTRL_EXEC_RANDRESEED:
-> +		writel(cmd, trng->base + STARFIVE_CTRL);
-> +		flg = STARFIVE_ISTAT_SEED_DONE;
-> +		break;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +
-> +	ret = readl_relaxed_poll_timeout(trng->base + STARFIVE_ISTAT, stat,
-> +					 (stat & flg), 1000);
-> +	writel(flg, trng->base + STARFIVE_ISTAT);
-> +
-> +	return ret;
-> +}
-> +
-> +static int starfive_trng_read(struct udevice *dev, void *data, size_t len)
-> +{
-> +	struct starfive_trng_plat *trng = dev_get_plat(dev);
-> +	u8 *buffer = data;
-> +	int iter_mask;
-> +
-> +	if (trng->mode == PRNG_256BIT)
-> +		iter_mask = 7;
-> +	else
-> +		iter_mask = 3;
-> +
-> +	for (int i = 0; len; ++i, i &= iter_mask) {
-> +		u32 val;
-> +		size_t step;
-> +		int ret;
-> +
-> +		ret = starfive_trng_cmd(trng, STARFIVE_CTRL_GENE_RANDNUM);
-> +		if (ret)
-> +			return ret;
-> +
-> +		val = readl(trng->base + STARFIVE_RAND0 +
-> +			    (i * STARFIVE_RAND_LEN));
-> +		step = min_t(size_t, len, STARFIVE_RAND_LEN);
-> +		memcpy(buffer, &val, step);
-> +		buffer += step;
-> +		len -= step;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int starfive_trng_init(struct starfive_trng_plat *trng)
-> +{
-> +	u32 mode, intr = 0;
-> +
-> +	/* setup Auto Request/Age register */
-> +	writel(0, trng->base + STARFIVE_AUTO_AGE);
-> +	writel(0, trng->base + STARFIVE_AUTO_RQSTS);
-> +
-> +	/* clear register: ISTAT */
-> +	starfive_trng_irq_mask_clear(trng);
-> +
-> +	intr |= STARFIVE_IE_ALL;
-> +	writel(intr, trng->base + STARFIVE_IE);
-> +
-> +	mode = readl(trng->base + STARFIVE_MODE);
-> +
-> +	switch (trng->mode) {
-> +	case PRNG_128BIT:
-> +		mode &= ~STARFIVE_MODE_R256;
-> +		break;
-> +	case PRNG_256BIT:
-> +		mode |= STARFIVE_MODE_R256;
-> +		break;
-> +	default:
-> +		mode |= STARFIVE_MODE_R256;
-> +		break;
-> +	}
-> +
-> +	writel(mode, trng->base + STARFIVE_MODE);
-> +
-> +	return starfive_trng_cmd(trng, STARFIVE_CTRL_EXEC_RANDRESEED);
-> +}
-> +
-> +static int starfive_trng_probe(struct udevice *dev)
-> +{
-> +	struct starfive_trng_plat *pdata = dev_get_plat(dev);
-> +	int err;
-> +
-> +	err = clk_enable(pdata->hclk);
-> +	if (err)
-> +		return err;
-> +
-> +	err = clk_enable(pdata->ahb);
-> +	if (err)
+> Best regards,
+> Henrik Grimler
+> 
+> On Fri, Oct 27, 2023 at 04:57:03PM -0400, Sean Anderson wrote:
+> > As noted in commit 3a6383207be ("mmc: sdhci: add the quirk for broken
+> > r1b response"), some MMC controllers don't always set the transfer
+> > complete bit with R1b responses.
+> >
+> > According to the SD Host Controller Simplified Specification v4.20,
+> >
+> > > In the case of a command pairing with response-with-busy[, Transfer
+> > > Complete] is set when busy is de-asserted. Refer to DAT Line Active
+> > > and Command Inhibit (DAT) in the Present State register.
+> >
+> > By polling the DAT Line Active bit in the present state register, we can
+> > detect when we are no longer busy, without waiting for a long timeout.
+> > This results in much faster reads/writes on buggy controllers.
+> >
+> > Signed-off-by: Sean Anderson <sean.anderson@seco.com>
 
-Doesn't need to disable the previous clk about pdata->hclk?
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
+Best Regards,
+Jaehoon Chung
 
-> +		return err;
-> +
-> +	err = reset_deassert(pdata->rst);
-> +	if (err)
-
-Ditto about clocks of hclk and ahb?
-
-How about handle error?
-
-err = clk_enable(pdata->hclk);
-if (err)
-	...
-
-err = clk_enable(pdata->ahb);
-if (err)
-	goto err_ahb;
-
-...
-
-Return starfive_tring_init(pdata);
-
-goto_err_reset:
-	clk_disable(pdata->ahb);
-goto err_ahb:
-	clk_disable(pdata->hclk);
-
-return err;
-
-> +		return err;
-> +
-> +	pdata->mode = PRNG_256BIT;
-> +
-> +	return starfive_trng_init(pdata);
-> +}
-> +
-> +static int starfive_trng_of_to_plat(struct udevice *dev)
-> +{
-> +	struct starfive_trng_plat *pdata = dev_get_plat(dev);
-> +
-> +	pdata->base = (void *)dev_read_addr(dev);
-> +	if (!pdata->base)
-> +		return -ENODEV;
-> +
-> +	pdata->hclk = devm_clk_get(dev, "hclk");
-> +	if (IS_ERR(pdata->hclk))
-> +		return -ENODEV;
-> +
-> +	pdata->ahb = devm_clk_get(dev, "ahb");
-> +	if (IS_ERR(pdata->ahb))
-> +		return -ENODEV;
-> +
-> +	pdata->rst = devm_reset_control_get(dev, NULL);
-> +	if (IS_ERR(pdata->rst))
-> +		return -ENODEV;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct dm_rng_ops starfive_trng_ops = {
-> +	.read = starfive_trng_read,
-> +};
-> +
-> +static const struct udevice_id starfive_trng_match[] = {
-> +	{
-> +		.compatible = "starfive,jh7110-trng",
-> +	},
-> +	{},
-> +};
-> +
-> +U_BOOT_DRIVER(starfive_trng) = {
-> +	.name = "jh7110-trng",
-> +	.id = UCLASS_RNG,
-> +	.of_match = starfive_trng_match,
-> +	.probe = starfive_trng_probe,
-> +	.ops = &starfive_trng_ops,
-> +	.plat_auto = sizeof(struct starfive_trng_plat),
-> +	.of_to_plat = starfive_trng_of_to_plat,
-> +};
-> --
-> 2.39.2
-
+> > ---
+> > I've CC'd a few people who've added this quirk to controllers recently.
+> > Please let me know if your hardware still works. It's possible that my
+> > hardware is buggy in a different way.
+> >
+> >  drivers/mmc/sdhci.c | 19 ++++++++++++-------
+> >  include/sdhci.h     |  1 +
+> >  2 files changed, 13 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> > index fc9c6c37996..0178ed8a11e 100644
+> > --- a/drivers/mmc/sdhci.c
+> > +++ b/drivers/mmc/sdhci.c
+> > @@ -306,14 +306,19 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
+> >  		if (stat & SDHCI_INT_ERROR)
+> >  			break;
+> >
+> > -		if (get_timer(start) >= SDHCI_READ_STATUS_TIMEOUT) {
+> > -			if (host->quirks & SDHCI_QUIRK_BROKEN_R1B) {
+> > +		if (host->quirks & SDHCI_QUIRK_BROKEN_R1B &&
+> > +		    cmd->resp_type & MMC_RSP_BUSY && !data) {
+> > +			unsigned int state =
+> > +				sdhci_readl(host, SDHCI_PRESENT_STATE);
+> > +
+> > +			if (!(state & SDHCI_DAT_ACTIVE))
+> >  				return 0;
+> > -			} else {
+> > -				printf("%s: Timeout for status update!\n",
+> > -				       __func__);
+> > -				return -ETIMEDOUT;
+> > -			}
+> > +		}
+> > +
+> > +		if (get_timer(start) >= SDHCI_READ_STATUS_TIMEOUT) {
+> > +			printf("%s: Timeout for status update: %08x %08x\n",
+> > +			       __func__, stat, mask);
+> > +			return -ETIMEDOUT;
+> >  		}
+> >  	} while ((stat & mask) != mask);
+> >
+> > diff --git a/include/sdhci.h b/include/sdhci.h
+> > index 70fefca2a97..a1b74e3bd79 100644
+> > --- a/include/sdhci.h
+> > +++ b/include/sdhci.h
+> > @@ -57,6 +57,7 @@
+> >  #define SDHCI_PRESENT_STATE	0x24
+> >  #define  SDHCI_CMD_INHIBIT	BIT(0)
+> >  #define  SDHCI_DATA_INHIBIT	BIT(1)
+> > +#define  SDHCI_DAT_ACTIVE	BIT(2)
+> >  #define  SDHCI_DOING_WRITE	BIT(8)
+> >  #define  SDHCI_DOING_READ	BIT(9)
+> >  #define  SDHCI_SPACE_AVAILABLE	BIT(10)
+> > --
+> > 2.35.1.1320.gc452695387.dirty
+> >
 
