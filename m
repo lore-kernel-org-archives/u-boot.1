@@ -4,45 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C140C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 10:54:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95953C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 10:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F99F8772F;
-	Thu,  2 Nov 2023 11:54:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 871508772F;
+	Thu,  2 Nov 2023 11:59:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F1B7A87746; Thu,  2 Nov 2023 11:54:01 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 303668771C
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 11:53:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3A2Arl8f083230;
- Thu, 2 Nov 2023 18:53:47 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Thu, 2 Nov 2023 18:53:46 +0800
-Date: Thu, 2 Nov 2023 18:49:56 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/master
-Message-ID: <ZUN-1ADrFIKePtRs@swlinux02>
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="RYqYbqKq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8F85687746; Thu,  2 Nov 2023 11:59:12 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1888E8771C
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 11:59:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d84c24a810dso797106276.2
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 03:59:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1698922746; x=1699527546;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hWH5hkTX7aB8y+wfMyvfs9waeP5sLe0aownKN5QnjDo=;
+ b=RYqYbqKqcgztKn9w5LLf/o3tThdc+nyDNxMj5OVvVKLz5FCoW36cjuCKXBxB7H6xH7
+ dmm/fNmw/Mtzyk+fWxmkghSpISceCSnS15PLTIttti2AGYwLvpYfTdDDSHslzJfgmU4W
+ FpWwqQ63TyPZAkhG1UPKeWWi49UL4aoOom3OM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698922746; x=1699527546;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hWH5hkTX7aB8y+wfMyvfs9waeP5sLe0aownKN5QnjDo=;
+ b=o8TKgPcIc2ewrwu7+Tq3eUcWTIgj92pCp8cGf3SzNGX4nKgxeGFiPcSYbZwFushBQx
+ 49ZZyPhDM1MQ1nvqBLPZzN6QQvVVa+gO9FeG+PaoXkHevaHPu4UvAiAndsQa75ULqfTd
+ 2sYvvfyOTEBUWxpqdUcpf8rKTlGB6znh13ga5+12MLMlADaJRLuHmsduyErn9zqNoOR2
+ T9tGzkJiaWU3m2TTgNOBg22jlm1mhwVg8vz6tf+b+rGgtHN0b/ExB59lKBfXC/9W0PSe
+ 7DNV5MJMFye6W2EWAZkrJCUXuoRBja4qeRbnRnsgo3mdJdQfL5CzoYd306ZY196ehdl+
+ fSsA==
+X-Gm-Message-State: AOJu0YxU55PxrjnTV5GzGpK0taQyp3TjymK369BNylpmUFaRMZKgVA5X
+ 1n8Y8hv1pfjyR6WtzolvLOXol9/rqI7DouGV/JC0Lg==
+X-Google-Smtp-Source: AGHT+IEQochCG9LMjQwa0os31aVZ9poNbibPIpAObyWb7Q9bFswvWqYGoANRUFkrGKXfYWiwj1XfGrP11na67fGBPhE=
+X-Received: by 2002:a25:3752:0:b0:da0:52e6:a867 with SMTP id
+ e79-20020a253752000000b00da052e6a867mr15622669yba.1.1698922746214; Thu, 02
+ Nov 2023 03:59:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3A2Arl8f083230
+References: <20231029034845.1169614-1-seanga2@gmail.com>
+ <20231029034845.1169614-12-seanga2@gmail.com>
+In-Reply-To: <20231029034845.1169614-12-seanga2@gmail.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Thu, 2 Nov 2023 11:58:54 +0100
+Message-ID: <CABGWkvormOkuyHMFJJ11mCXx53gDVg5yZmk1H3mH1+AhZza88g@mail.gmail.com>
+Subject: Re: [PATCH 11/15] nand: Add function to unregister NAND devices
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>, 
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,79 +86,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Sean, All,
 
-The following changes since commit a803f87202aa48974bdff4d8100464a8288931e4:
+On Sun, Oct 29, 2023 at 4:49=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
+rote:
+>
+> This performs the opposite of nand_register, allowing drivers to unregist=
+er
+> nand devices. This is probably unnecessary for most regular drivers, but =
+we
+> expect sandbox drivers to get repeatedly bound/unbound, so this will help
+> avoid dangling pointers.
+>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
+>
+>  drivers/mtd/nand/raw/nand.c | 17 +++++++++++++++++
+>  include/nand.h              |  1 +
+>  2 files changed, 18 insertions(+)
+>
+> diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
+> index 3abd82068fb..80017b3dddd 100644
+> --- a/drivers/mtd/nand/raw/nand.c
+> +++ b/drivers/mtd/nand/raw/nand.c
+> @@ -74,6 +74,23 @@ int nand_register(int devnum, struct mtd_info *mtd)
+>         return 0;
+>  }
+>
+> +void nand_unregister(struct mtd_info *mtd)
+> +{
+> +       int devnum =3D nand_mtd_to_devnum(mtd);
+> +
+> +       if (devnum < 0)
+> +               return;
+> +
+> +       if (nand_curr_device =3D=3D devnum)
+> +               nand_curr_device =3D -1;
+> +
+> +       total_nand_size -=3D mtd->size / 1024;
+> +
+> +       del_mtd_device(nand_info[devnum]);
+> +
+> +       nand_info[devnum] =3D NULL;
+> +}
+> +
+>  #if !CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
+>  static void nand_init_chip(int i)
+>  {
+> diff --git a/include/nand.h b/include/nand.h
+> index c1d7533aaac..fc584f5ef7a 100644
+> --- a/include/nand.h
+> +++ b/include/nand.h
+> @@ -22,6 +22,7 @@ int nand_mtd_to_devnum(struct mtd_info *mtd);
+>  #if CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
+>  void board_nand_init(void);
+>  int nand_register(int devnum, struct mtd_info *mtd);
+> +void nand_unregister(struct mtd_info *mtd);
+>  #else
+>  struct nand_chip;
+>
+> --
+> 2.37.1
+>
 
-  Merge https://source.denx.de/u-boot/custodians/u-boot-mmc (2023-11-01 09:44:33 -0400)
+Reviewed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-are available in the Git repository at:
+Thanks and regards,
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+Dario
+--=20
 
-for you to fetch changes up to 9d22d4a7cef7f2fdaf5c060b71574e6f82ea5ff0:
+Dario Binacchi
 
-  configs: visionfive2: Enable JH7110 RNG driver (2023-11-02 17:45:53 +0800)
+Senior Embedded Linux Developer
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18407
-----------------------------------------------------------------
+dario.binacchi@amarulasolutions.com
 
-+ CI: Use OpenSBI 1.3.1 release for testing
-+ riscv: Support resume after exception
-+ rng: Support RNG provided by RISC-V Zkr ISA extension
-+ board: starfive VF2: Support jtag
-+ board: starfive VF2: Support TRNG driver
-+ board: sifive unmatched: Move kernel load address
+__________________________________
 
-----------------------------------------------------------------
-Chanho Park (7):
-      riscv: cpu: jh7110: Add gpio helper macros
-      board: starfive: spl: Support jtag for VisionFive2 board
-      riscv: import read/write_relaxed functions
-      clk: starfive: jh7110: Add security clocks
-      rng: Add StarFive JH7110 RNG driver
-      riscv: dts: jh7110: Add rng device tree node
-      configs: visionfive2: Enable JH7110 RNG driver
 
-Heinrich Schuchardt (3):
-      CI: use OpenSBI 1.3.1 for testing
-      riscv: allow resume after exception
-      rng: Provide a RNG based on the RISC-V Zkr ISA extension
+Amarula Solutions SRL
 
-Samuel Holland (3):
-      riscv: Sort target configs alphabetically
-      riscv: Align the trap handler to 64 bytes
-      riscv: Weakly define invalidate_icache_range()
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
 
-Yong-Xuan Wang (1):
-      board: sifive: unmatched: move kernel load address to 0x80200000
+T. +39 042 243 5310
+info@amarulasolutions.com
 
- .azure-pipelines.yml                      |   8 +-
- .gitlab-ci.yml                            |   8 +-
- arch/riscv/Kconfig                        |  18 +-
- arch/riscv/cpu/mtrap.S                    |   2 +-
- arch/riscv/dts/jh7110.dtsi                |  10 ++
- arch/riscv/include/asm/arch-jh7110/gpio.h |  85 +++++++++
- arch/riscv/include/asm/io.h               |  45 +++++
- arch/riscv/lib/cache.c                    |   2 +-
- arch/riscv/lib/interrupts.c               |  13 ++
- board/starfive/visionfive2/spl.c          |  23 +++
- configs/starfive_visionfive2_defconfig    |   2 +
- doc/api/index.rst                         |   1 +
- doc/api/interrupt.rst                     |   6 +
- drivers/clk/starfive/clk-jh7110.c         |  10 ++
- drivers/rng/Kconfig                       |  14 ++
- drivers/rng/Makefile                      |   2 +
- drivers/rng/jh7110_rng.c                  | 274 ++++++++++++++++++++++++++++++
- drivers/rng/riscv_zkr_rng.c               | 116 +++++++++++++
- include/configs/sifive-unmatched.h        |   2 +-
- include/interrupt.h                       |  45 +++++
- 20 files changed, 666 insertions(+), 20 deletions(-)
- create mode 100644 arch/riscv/include/asm/arch-jh7110/gpio.h
- create mode 100644 doc/api/interrupt.rst
- create mode 100644 drivers/rng/jh7110_rng.c
- create mode 100644 drivers/rng/riscv_zkr_rng.c
- create mode 100644 include/interrupt.h
-
- Best regards,
- Leo
+www.amarulasolutions.com
