@@ -4,72 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8368AC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 10:45:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C140C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 10:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96495875E7;
-	Thu,  2 Nov 2023 11:45:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F99F8772F;
+	Thu,  2 Nov 2023 11:54:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OIuoiSHs";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14AEA875C5; Thu,  2 Nov 2023 11:45:22 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F1B7A87746; Thu,  2 Nov 2023 11:54:01 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E0EC875C5
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 11:45:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-d9a3d737d66so754408276.2
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 03:45:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1698921916; x=1699526716;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qzUo0f7wlx9e+RndXHgOpHQM4k8MjOB2A7pkniKQNJA=;
- b=OIuoiSHsQQTId2ePFiu0BlwEHr+hctFIJHs9SyagZODQWAQLFVdf3+ehVtrr5/yeWX
- sfd1Qg5ZUrcJd0mUEAGOCaFiPRpnQCe5TDk4gOLwjQvoIC8kDtq9HMlZcQAzBIUMR5xd
- YFMD57LwPPF5l4OnXYjBAkmycUR3bCSbwMEZc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698921916; x=1699526716;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qzUo0f7wlx9e+RndXHgOpHQM4k8MjOB2A7pkniKQNJA=;
- b=wW6LZCBETT+XxER+5gsmVjG4lsgriNJk7+RWMgDvrPvSAMaZvg1IHKNaeFoXZ/Z8XY
- bvW15GuMWpB+z72VpcScN7T07EhsfTMlcbybtqojcsD7X1Bl/tP1uhmTj5T8QD0Ikq8T
- HIpcVskILF3YZRKV6YhStEZomKqZvoSc/mkOIF0r582r9iZJUdNdbodZin3Vc1JrFMWI
- IF93cODPJvcOMedUuF4JI5Q4ce338hZUr/4AoNRBxMWZIwtonxpetm6jWZV5qxvaCRmn
- s8tFP1A9JjUnhpymMkG8CruvzwHUBoYNAAVGorfDj/YxOu4OdN496fuHyTTlcsG6kabo
- b30A==
-X-Gm-Message-State: AOJu0YwWx71l3TdZeUSRSDrF9i1Qwu0jJDvYjxKQ1QpONa6KOPpzn0aM
- vXhK1+iSkv5eI6Jzymh5t1DkgPEmcQ22tOKefXo94Q==
-X-Google-Smtp-Source: AGHT+IEvoJ2J3EhShWnF9bj4tpLDqA6pnMcn4n/tOKImTBRce4ZwxbaEs4A7ez4pAQVp8vPiI3ZhlHECLptwAikOG3o=
-X-Received: by 2002:a05:6902:100e:b0:da3:b603:8314 with SMTP id
- w14-20020a056902100e00b00da3b6038314mr5282595ybt.0.1698921915938; Thu, 02 Nov
- 2023 03:45:15 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 303668771C
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 11:53:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3A2Arl8f083230;
+ Thu, 2 Nov 2023 18:53:47 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Thu, 2 Nov 2023 18:53:46 +0800
+Date: Thu, 2 Nov 2023 18:49:56 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
+Subject: [GIT PULL] u-boot-riscv/master
+Message-ID: <ZUN-1ADrFIKePtRs@swlinux02>
 MIME-Version: 1.0
-References: <20231029034845.1169614-1-seanga2@gmail.com>
- <20231029034845.1169614-11-seanga2@gmail.com>
-In-Reply-To: <20231029034845.1169614-11-seanga2@gmail.com>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 2 Nov 2023 11:45:05 +0100
-Message-ID: <CABGWkvoZO+PThfzTtfPhu=hp-d7gcLAVxsLa9brE+z8zdv9D5A@mail.gmail.com>
-Subject: Re: [PATCH 10/15] mtd: Add some fallbacks for add/del_mtd_device
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3A2Arl8f083230
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,111 +59,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sean, All
+Hi Tom,
 
-On Sun, Oct 29, 2023 at 4:49=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
-rote:
->
-> This allows using these functions without ifdefs. OneNAND depends on MTD,
-> so this ifdef was redundant in the first place.
->
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> ---
->
->  drivers/mtd/nand/raw/nand.c         |  2 --
->  drivers/mtd/onenand/onenand_uboot.c |  2 --
->  include/linux/mtd/mtd.h             | 12 ++++++++++++
->  3 files changed, 12 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
-> index 4da41438790..3abd82068fb 100644
-> --- a/drivers/mtd/nand/raw/nand.c
-> +++ b/drivers/mtd/nand/raw/nand.c
-> @@ -60,13 +60,11 @@ int nand_register(int devnum, struct mtd_info *mtd)
->         sprintf(dev_name[devnum], "nand%d", devnum);
->         mtd->name =3D dev_name[devnum];
->
-> -#ifdef CONFIG_MTD
->         /*
->          * Add MTD device so that we can reference it later
->          * via the mtdcore infrastructure (e.g. ubi).
->          */
->         add_mtd_device(mtd);
-> -#endif
->
->         total_nand_size +=3D mtd->size / 1024;
->
-> diff --git a/drivers/mtd/onenand/onenand_uboot.c b/drivers/mtd/onenand/on=
-enand_uboot.c
-> index 04791df69bb..ecacabefadc 100644
-> --- a/drivers/mtd/onenand/onenand_uboot.c
-> +++ b/drivers/mtd/onenand/onenand_uboot.c
-> @@ -44,14 +44,12 @@ void onenand_init(void)
->                         puts("Flex-");
->                 puts("OneNAND: ");
->
-> -#ifdef CONFIG_MTD
->                 /*
->                  * Add MTD device so that we can reference it later
->                  * via the mtdcore infrastructure (e.g. ubi).
->                  */
->                 onenand_mtd.name =3D dev_name;
->                 add_mtd_device(&onenand_mtd);
-> -#endif
->         }
->         print_size(onenand_chip.chipsize, "\n");
->  }
-> diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
-> index 09f52698877..7a66c7af749 100644
-> --- a/include/linux/mtd/mtd.h
-> +++ b/include/linux/mtd/mtd.h
-> @@ -552,8 +552,20 @@ unsigned mtd_mmap_capabilities(struct mtd_info *mtd)=
-;
->
->  #ifdef __UBOOT__
->  /* drivers/mtd/mtdcore.h */
-> +#if CONFIG_IS_ENABLED(MTD)
->  int add_mtd_device(struct mtd_info *mtd);
->  int del_mtd_device(struct mtd_info *mtd);
-> +#else
-> +static inline int add_mtd_device(struct mtd_info *mtd)
-> +{
-> +       return -ENOSYS;
-> +}
-> +
-> +static inline int del_mtd_device(struct mtd_info *mtd)
-> +{
-> +       return -ENOSYS;
-> +}
-> +#endif
->
->  #ifdef CONFIG_MTD_PARTITIONS
->  int add_mtd_partitions(struct mtd_info *, const struct mtd_partition *, =
-int);
-> --
-> 2.37.1
->
+The following changes since commit a803f87202aa48974bdff4d8100464a8288931e4:
 
-Reviewed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+  Merge https://source.denx.de/u-boot/custodians/u-boot-mmc (2023-11-01 09:44:33 -0400)
 
-Thanks and regards,
-Dario
---=20
+are available in the Git repository at:
 
-Dario Binacchi
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
 
-Senior Embedded Linux Developer
+for you to fetch changes up to 9d22d4a7cef7f2fdaf5c060b71574e6f82ea5ff0:
 
-dario.binacchi@amarulasolutions.com
+  configs: visionfive2: Enable JH7110 RNG driver (2023-11-02 17:45:53 +0800)
 
-__________________________________
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18407
+----------------------------------------------------------------
 
++ CI: Use OpenSBI 1.3.1 release for testing
++ riscv: Support resume after exception
++ rng: Support RNG provided by RISC-V Zkr ISA extension
++ board: starfive VF2: Support jtag
++ board: starfive VF2: Support TRNG driver
++ board: sifive unmatched: Move kernel load address
 
-Amarula Solutions SRL
+----------------------------------------------------------------
+Chanho Park (7):
+      riscv: cpu: jh7110: Add gpio helper macros
+      board: starfive: spl: Support jtag for VisionFive2 board
+      riscv: import read/write_relaxed functions
+      clk: starfive: jh7110: Add security clocks
+      rng: Add StarFive JH7110 RNG driver
+      riscv: dts: jh7110: Add rng device tree node
+      configs: visionfive2: Enable JH7110 RNG driver
 
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
+Heinrich Schuchardt (3):
+      CI: use OpenSBI 1.3.1 for testing
+      riscv: allow resume after exception
+      rng: Provide a RNG based on the RISC-V Zkr ISA extension
 
-T. +39 042 243 5310
-info@amarulasolutions.com
+Samuel Holland (3):
+      riscv: Sort target configs alphabetically
+      riscv: Align the trap handler to 64 bytes
+      riscv: Weakly define invalidate_icache_range()
 
-www.amarulasolutions.com
+Yong-Xuan Wang (1):
+      board: sifive: unmatched: move kernel load address to 0x80200000
+
+ .azure-pipelines.yml                      |   8 +-
+ .gitlab-ci.yml                            |   8 +-
+ arch/riscv/Kconfig                        |  18 +-
+ arch/riscv/cpu/mtrap.S                    |   2 +-
+ arch/riscv/dts/jh7110.dtsi                |  10 ++
+ arch/riscv/include/asm/arch-jh7110/gpio.h |  85 +++++++++
+ arch/riscv/include/asm/io.h               |  45 +++++
+ arch/riscv/lib/cache.c                    |   2 +-
+ arch/riscv/lib/interrupts.c               |  13 ++
+ board/starfive/visionfive2/spl.c          |  23 +++
+ configs/starfive_visionfive2_defconfig    |   2 +
+ doc/api/index.rst                         |   1 +
+ doc/api/interrupt.rst                     |   6 +
+ drivers/clk/starfive/clk-jh7110.c         |  10 ++
+ drivers/rng/Kconfig                       |  14 ++
+ drivers/rng/Makefile                      |   2 +
+ drivers/rng/jh7110_rng.c                  | 274 ++++++++++++++++++++++++++++++
+ drivers/rng/riscv_zkr_rng.c               | 116 +++++++++++++
+ include/configs/sifive-unmatched.h        |   2 +-
+ include/interrupt.h                       |  45 +++++
+ 20 files changed, 666 insertions(+), 20 deletions(-)
+ create mode 100644 arch/riscv/include/asm/arch-jh7110/gpio.h
+ create mode 100644 doc/api/interrupt.rst
+ create mode 100644 drivers/rng/jh7110_rng.c
+ create mode 100644 drivers/rng/riscv_zkr_rng.c
+ create mode 100644 include/interrupt.h
+
+ Best regards,
+ Leo
