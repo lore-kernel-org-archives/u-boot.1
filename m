@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52922C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 12:58:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF4AAC4167B
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 13:27:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1F9B8777A;
-	Thu,  2 Nov 2023 13:57:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id E4A04875A1;
+	Thu,  2 Nov 2023 14:27:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="PHLu84sI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TBfDHEB0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1B7686CEC; Thu,  2 Nov 2023 10:17:13 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 08A42875FD; Thu,  2 Nov 2023 14:27:26 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 316D28752D
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:17:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9861C87588
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 14:27:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 99B3E120009;
- Thu,  2 Nov 2023 12:17:08 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 99B3E120009
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1698916628;
- bh=m3S3VWPKFBwQlPhMltB6QkGTl2rZhk9MeubtkWlEOrA=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=PHLu84sIk464hQyj9CbA3A3owWpKEa5c7oygye/EFaDFBviwcjLF/+EsmO4jNo4Ea
- CAY7OZOPmzZxqqzDpRC7zTCfncavIOYrEEtOPQJ/PUmAuvE2UB/FyzJMjggla9XW9a
- rSNqKLGABBocgrXxgBEMc5IHw/3L+PNrrk78jeE28NoPn9he+JegXUsYSdFMFEwJca
- zybqN0g5GkY3Ga7+CPDCGQzsUPtvWo9lbIVPU3zeAfyEJPDIptmAFjz1pD4T18bOMc
- oiPEYxQRt5paswKCKVXZYMX4ULzx4xoeGue8DOSF5Gw4J4fq7or2bX5tGwv8H/6+4r
- UhzfJRNw5glSA==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  2 Nov 2023 12:17:08 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Thu, 2 Nov 2023 12:17:08 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <sughosh.ganu@linaro.org>, <xypron.glpk@gmx.de>,
- <ilias.apalodimas@linaro.org>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <kernel@sberdevices.ru>, Alexey Romanov
- <avromanov@salutedevices.com>
-Subject: [PATCH v2 1/2] rng: move platform_get_rng_device() to rng-uclass.c
-Date: Thu, 2 Nov 2023 12:16:44 +0300
-Message-ID: <20231102091648.40520-2-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231102091648.40520-1-avromanov@salutedevices.com>
-References: <20231102091648.40520-1-avromanov@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a86b6391e9so11471427b3.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 06:27:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698931640; x=1699536440; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=N8cEzirDcMusZD5vO4x1OdT7G70JFyUYCIZG6xg57uY=;
+ b=TBfDHEB0EfFoho2Su3bLoubzPDxhBXIdSM0jSnrMbRjSHiGmpMRb0qOCsvFxD5fl6B
+ V+ylFoCrGNhzYj6usNPHWb7BAYimqEiDcJYaWDk4Ko2NPWLmQIvFafuSOlALHnUPKuFQ
+ xVp/0Uh6UHDBFI+TmJlMYIslQCtyVh8bZSKIs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698931640; x=1699536440;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N8cEzirDcMusZD5vO4x1OdT7G70JFyUYCIZG6xg57uY=;
+ b=qrYiTaWT8hnlIruv+rkkhkDMMPgLbOd9zVUYkeEXtRaMcL+i1nMxQaiB8DHTiSCR9w
+ OPIA4vSLOWnncl51Suq4iwItq4lWC4y5ZTFMH+oiBKsRbnjyHxzPhfxUPl5hBdXDp9aA
+ L3LUNGrjhXmsnunuR0DqGtqiuq/ExKvF11VtYM2f/39DXBi0MetOHdxiSBuY569apgLJ
+ GqsgaY0chYeIRLHiFjqDUmQ57/gLHdnp32OmBkej3uOaAXsUXtdL6iGAeCLFdNhWx2WA
+ HwrRwWBZEMNw9/W6SrPtV42xokWG00/gz3hRVNOfPWohPPLPq7/tWhMnQVnzn4a1dl49
+ fkOg==
+X-Gm-Message-State: AOJu0YwJA8Ox+hV/wRJvhqX3mMF6hAjLVRQ3szephmFsNc/zFQPFOV5H
+ PI7uWcoyOAErDZp1A9mPqwLAZQ==
+X-Google-Smtp-Source: AGHT+IF3f1v3c9L8p0Le3i5+aegviwPpHHoTu3fXtmIvzryWm+eon9L34Ogo9WyQ5TL4yj+jxT9nXQ==
+X-Received: by 2002:a25:ae10:0:b0:da0:5b63:d062 with SMTP id
+ a16-20020a25ae10000000b00da05b63d062mr19059331ybj.35.1698931640196; 
+ Thu, 02 Nov 2023 06:27:20 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ q9-20020a0ce9c9000000b0066d04196c3dsm2391598qvo.49.2023.11.02.06.27.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Nov 2023 06:27:19 -0700 (PDT)
+Date: Thu, 2 Nov 2023 09:27:17 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Cc: u-boot@lists.denx.de, greentime.hu@sifive.com, vincent.chen@sifive.com,
+ Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
+Subject: Re: [PATCH 1/1] board: sifive: unmatched: move kernel load address
+ to 0x80200000
+Message-ID: <20231102132717.GE496310@bill-the-cat>
+References: <20231026032254.23043-1-yongxuan.wang@sifive.com>
+ <20231027164307.GY496310@bill-the-cat>
+ <CAMWQL2grduFNgGPLYryXOaXTzVvO6Y9s6o=2MMQ3h8Mj8z8P7w@mail.gmail.com>
+ <20231031115406.GH496310@bill-the-cat>
+ <CAMWQL2g=5QC4aPq2onYy1XsPVYXOv6LuAE+hMuL4y=KhP0KBgA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181068 [Nov 02 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/02 06:57:00 #22385341
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Thu, 02 Nov 2023 13:57:39 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Mg0iW4Mjz+eShrGu"
+Content-Disposition: inline
+In-Reply-To: <CAMWQL2g=5QC4aPq2onYy1XsPVYXOv6LuAE+hMuL4y=KhP0KBgA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,116 +96,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The correct declaration place for platform_get_rng_device()
-function is here. Also, this function is re-implemented to provide
-the first successfully probed RNG device.
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
----
- drivers/rng/rng-uclass.c | 16 ++++++++++++++++
- include/efi_rng.h        |  2 --
- include/rng.h            | 11 +++++++++++
- lib/efi_loader/efi_rng.c | 27 ---------------------------
- 4 files changed, 27 insertions(+), 29 deletions(-)
+--Mg0iW4Mjz+eShrGu
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/rng/rng-uclass.c b/drivers/rng/rng-uclass.c
-index 53108e1b31..d7236b9335 100644
---- a/drivers/rng/rng-uclass.c
-+++ b/drivers/rng/rng-uclass.c
-@@ -9,6 +9,22 @@
- #include <dm.h>
- #include <rng.h>
- 
-+int platform_get_rng_device(struct udevice **dev)
-+{
-+	int ret;
-+	struct udevice *devp;
-+
-+	ret = uclass_first_device_check(UCLASS_RNG, &devp);
-+	if (ret) {
-+		pr_err("Unable to get RNG device (%d)\n", ret);
-+		return -ENODEV;
-+	}
-+
-+	*dev = devp;
-+
-+	return 0;
-+}
-+
- int dm_rng_read(struct udevice *dev, void *buffer, size_t size)
- {
- 	const struct dm_rng_ops *ops = device_get_ops(dev);
-diff --git a/include/efi_rng.h b/include/efi_rng.h
-index 3c622381cb..f22e54adb0 100644
---- a/include/efi_rng.h
-+++ b/include/efi_rng.h
-@@ -23,6 +23,4 @@ struct efi_rng_protocol {
- 				       efi_uintn_t rng_value_length, uint8_t *rng_value);
- };
- 
--efi_status_t platform_get_rng_device(struct udevice **dev);
--
- #endif /* _EFI_RNG_H_ */
-diff --git a/include/rng.h b/include/rng.h
-index 37af554363..255c85d3e8 100644
---- a/include/rng.h
-+++ b/include/rng.h
-@@ -20,6 +20,17 @@ struct udevice;
-  */
- int dm_rng_read(struct udevice *dev, void *buffer, size_t size);
- 
-+/**
-+ * platform_get_rng_device() - retrieve random number generator
-+ *
-+ * This function retrieves the first udevice implementing a hardware
-+ * random number generator. Device is already probed.
-+ *
-+ * @dev:	udevice
-+ * Return:	status code
-+ */
-+int platform_get_rng_device(struct udevice **dev);
-+
- /**
-  * struct dm_rng_ops - operations for the hwrng uclass
-  *
-diff --git a/lib/efi_loader/efi_rng.c b/lib/efi_loader/efi_rng.c
-index bb11d8d0e0..0d8bf770f5 100644
---- a/lib/efi_loader/efi_rng.c
-+++ b/lib/efi_loader/efi_rng.c
-@@ -17,33 +17,6 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- const efi_guid_t efi_guid_rng_protocol = EFI_RNG_PROTOCOL_GUID;
- 
--/**
-- * platform_get_rng_device() - retrieve random number generator
-- *
-- * This function retrieves the udevice implementing a hardware random
-- * number generator.
-- *
-- * This function may be overridden if special initialization is needed.
-- *
-- * @dev:	udevice
-- * Return:	status code
-- */
--__weak efi_status_t platform_get_rng_device(struct udevice **dev)
--{
--	int ret;
--	struct udevice *devp;
--
--	ret = uclass_get_device(UCLASS_RNG, 0, &devp);
--	if (ret) {
--		debug("Unable to get rng device\n");
--		return EFI_DEVICE_ERROR;
--	}
--
--	*dev = devp;
--
--	return EFI_SUCCESS;
--}
--
- /**
-  * rng_getinfo() - get information about random number generation
-  *
--- 
-2.30.1
+On Thu, Nov 02, 2023 at 06:27:37PM +0800, Yong-Xuan Wang wrote:
+> Hi Tom,
+>=20
+> On Tue, Oct 31, 2023 at 7:54=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Tue, Oct 31, 2023 at 03:56:45PM +0800, Yong-Xuan Wang wrote:
+> >
+> > > Hi Tom,
+> > >
+> > > 0x80200000 comes from the result of the relocated_addr in booti_setup=
+()
+> > > on HiFive Unmatched board. If we load the Kernel Image to this addres=
+s,
+> > > it will not be moved. Currently one of the first two 8-byte of RISC-V
+> > > Kernel Image is j _start_kernel instruction, so it's OK to execute the
+> > > header of the Image.
+> >
+> > Thanks for confirming.
+> >
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+> >
+> > As a follow-up, can you please work on migrating to plain text
+> > environment?
+> >
+> > >
+> > > Regards,
+> > > Yong-Xuan
+> > >
+> > >
+> > > On Sat, Oct 28, 2023 at 12:43=E2=80=AFAM Tom Rini <trini@konsulko.com=
+> wrote:
+> > > >
+> > > > On Thu, Oct 26, 2023 at 03:22:52AM +0000, Yong-Xuan Wang wrote:
+> > > >
+> > > > > U-boot initially loads the kernel image to the kernel_addr_r, and
+> > > > > subsequently relocates it to memory address 0x80200000. Setting
+> > > > > kernel_addr_r to 0x80200000 can eliminate one copy operation.
+> > > > >
+> > > > > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > > > > ---
+> > > > >  include/configs/sifive-unmatched.h | 2 +-
+> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/include/configs/sifive-unmatched.h b/include/configs=
+/sifive-unmatched.h
+> > > > > index 74150b7d4b..de8bfc1123 100644
+> > > > > --- a/include/configs/sifive-unmatched.h
+> > > > > +++ b/include/configs/sifive-unmatched.h
+> > > > > @@ -36,7 +36,7 @@
+> > > > >       "name=3Dsystem,size=3D-,bootable,type=3D${type_guid_gpt_sys=
+tem};"
+> > > > >
+> > > > >  #define CFG_EXTRA_ENV_SETTINGS \
+> > > > > -     "kernel_addr_r=3D0x84000000\0" \
+> > > > > +     "kernel_addr_r=3D0x80200000\0" \
+> > > > >       "kernel_comp_addr_r=3D0x88000000\0" \
+> > > > >       "kernel_comp_size=3D0x4000000\0" \
+> > > > >       "fdt_addr_r=3D0x8c000000\0" \
+> > > >
+> > > > This is I believe subtly wrong. If you want an execute in place ker=
+nel
+> > > > image (and are using FIT images), this can be made to work. But if =
+you
+> > > > load your (Linux Kernel) Image to this address, the header will be =
+at
+> > > > 0x80200000 and not the payload so you still end up moving it. Are y=
+ou
+> > > > sure this is (a) not still moving it and (b) it's OK to be executin=
+g the
+> > > > header of the image like it's code (or is there some catch in the h=
+eader
+> > > > to lead to a jump over it, in that case) ?
+> > > >
+> > > > --
+> > > > Tom
+> >
+> > --
+> > Tom
+>=20
+> Sure. Could you please provide more details or examples of the plain text
+> environment? I want to ensure I fully understand your request before
+> proceeding.
 
+Sure.  An example conversion is:
+commit fc2af2d978b525e188b15d909e321caf9445bdb0
+Author: Simon Glass <sjg@chromium.org>
+Date:   Thu Jul 27 15:54:30 2023 -0600
+
+    arm: rpi: Switch to a text environment
+   =20
+    Use the new environment format so we can drop most of the config.h file.
+   =20
+    Signed-off-by: Simon Glass <sjg@chromium.org>
+
+--=20
+Tom
+
+--Mg0iW4Mjz+eShrGu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVDo7IACgkQFHw5/5Y0
+tyzB7wv/V9aLODV4/ZbCwdj4dgQf3mlgVzx7hcqtjum1SbX3AdNtGeQPss5gJ0nC
+khP7vVHC4uaMHgGQvtarQDvbq0kpiSGP5dFzPQ86puVv59tSCeqRFGV8amas9nv0
+g9bXisZQayCyN/3UQ6MENdmWhLlz4WhKFgDLNSKuAGOWrlCCeJAK/LTyAaOpc3sL
+/TqvkYKPYIxL7JAnWB9P+9ylBf2Q6KapO/pApC378awv+sqIn/Sr+KkG6GkmUvTe
+cy5tkXZeWdgYzeBbRM5Z1W6al8ViTwgEewU9BqP3OaGAeHVqk/XqZs05aSeIqk7v
+F2DuVW0v9W6xPRv1IkRm8lhMTY2+EBGsTzXlKPmSGlZA76s2l5PueMI1WkpoZunK
+yp8rlZ2Ho+UPWtxpj3gL1Y2x18utceKh26RaQAL6V04IiIYoUy6KZeWx1ivauz5h
+IGG1U+9aMFAyLpdoeLSQfeiRmW3ANQZhDyHxJDao3RE5sK2Tex6SHdKAXuODVeiH
+BH3NPhQF
+=BvuA
+-----END PGP SIGNATURE-----
+
+--Mg0iW4Mjz+eShrGu--
