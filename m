@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9B3C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0964C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:46:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2D0D87622;
-	Thu,  2 Nov 2023 23:35:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69E4A874B7;
+	Thu,  2 Nov 2023 23:46:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kSAW4V4i";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PGCd/LAV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A305874B7; Thu,  2 Nov 2023 23:35:35 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 74094875B5; Thu,  2 Nov 2023 23:46:27 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30E5887452
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:35:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B772F87489
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:46:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-507b96095abso1757412e87.3
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:35:31 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-53de8fc1ad8so2495740a12.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:46:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698964530; x=1699569330; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965180; x=1699569980; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6VNHhizotoH1NYopnhMF1vC3lw/gjM2WRiE1pG56oGk=;
- b=kSAW4V4iDQ+X+pe/J3jgm9a46HmXGkcdWqrIc2f8Qm4DOo+XKSZEtjrFhQMuGJgygQ
- YSMASwhbQT1Ht4MM5B52xNBn9L8jIU63rgBmEGP/Wc6gOXdGiIsBX/puSDgQ3imRmjEj
- /TG7WgXyxKyizfQKwdY4F9zogZqPUBWgn50o0=
+ bh=BamMOqmFcGiIgEiy3N1QvZJLWrpRqXsQHgBNFl3sphg=;
+ b=PGCd/LAVG3taDEjkS+RB3BCscI6XGVOqgFcyke78hPycZ8rcCe4HI9PKWC72AcCkyq
+ oZx8Mo2jN87gB5LbGIHOvxXILHz2PX89ky3zgnzu1P7CYHinQ+HW2mpOIPGOp3ngzGQL
+ k11jrs/5Tva8yyISfwhdSJQubB2bXb+EztaZU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698964530; x=1699569330;
+ d=1e100.net; s=20230601; t=1698965180; x=1699569980;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6VNHhizotoH1NYopnhMF1vC3lw/gjM2WRiE1pG56oGk=;
- b=A3xvEi/l2NDHuSzqTYM8OToWZ+UVMJ3EWbIFbTIB9vff07baziD+7DRf8Py/tpTlnz
- nMn10KQQ6tdgrgS33ijmDo9OmAmx1bwA5C3C8VLH3LUctGUpy1qZOYMjBKnIMnQyJiwM
- TGrid9ddcTI4+ox6Erb4/0cTXsKXD0Gn2tjc3pGQXHGK+9/64eSzZmVaNod7RHsMI4oz
- BMPNof5DtzW0VEApwsRTJETgk+LHDzllvGX/MuiqrcsSk8AFZjuKdy/dBoV8g83QOne7
- AV5t27avORJIA+K5AwovYFLXiKl/WKy8ZeLbRAh+fS9vG2hM1bwI4ieRCYfGexLzJuRK
- I/cw==
-X-Gm-Message-State: AOJu0YyBTfx5Zv8h/s39lZkcGlKrDkO10aK60vw3TU/FeGJ5KE9LgY1f
- wzDIYbankv5cjxAqIq8TuJ6l4slkZA/rk6bMSeQhOA==
-X-Google-Smtp-Source: AGHT+IGu5YNdRznXh/BgKruVD2KMPeJi8HGN3CJbWKKHsUTCDjhIliPWuoK17BwvCU5ObuvTNsYM/23j9X50g2FbPk0=
-X-Received: by 2002:ac2:598e:0:b0:509:467a:5e36 with SMTP id
- w14-20020ac2598e000000b00509467a5e36mr3234816lfn.20.1698964529234; Thu, 02
- Nov 2023 15:35:29 -0700 (PDT)
+ bh=BamMOqmFcGiIgEiy3N1QvZJLWrpRqXsQHgBNFl3sphg=;
+ b=tQf0gNMQp4yHXklUm9O9MoEh2+pH2Jyb3FOOdHZ3SWcKjlFlQgrOmNZvfXyrWjw42U
+ t/pDu3zdtsP8ycy6j9oZOpAeggHonqyeYenUKnzeFJmheIO3H3wBHkepw1NYPDjA36Jb
+ Rrv26hF5Rp8JMPqa+LEJ4aJI62opkqQ7qytAXAbnhpW5lgH3TxSQAaNG+xH3UeCNc9WS
+ EdmaXZeqAJgApkEhYz9QSc2oN8/VqGnqocOipLDHpLbqdXsRN4yUqs0qFhyf+6cMlSAI
+ Y/yCzLVAb9+ZDOEGxEAAAhsADsxTcERHTU5UARGTOo7feJ+g8prulmh/WzwC1t0i4SWD
+ OXvg==
+X-Gm-Message-State: AOJu0YxwW6M2q70k3DMHYDNUDZ3lcXWBUx37BnYAJVhNRtbR0uH6Ir96
+ GyqWbas7TASlLItpi6d8+uRbRdJR6jodP3rLwso0vw==
+X-Google-Smtp-Source: AGHT+IHOyH20u8Xli2Whb4rUxssKR4a7mDHqLzibI8omX+kDVEMtka5T3nt3JQ6kGjcHTWVEKIJzvTTkbCSlPB3HIhw=
+X-Received: by 2002:a50:d482:0:b0:543:7706:af82 with SMTP id
+ s2-20020a50d482000000b005437706af82mr7018115edi.32.1698965180103; Thu, 02 Nov
+ 2023 15:46:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231102091648.40520-1-avromanov@salutedevices.com>
- <20231102091648.40520-2-avromanov@salutedevices.com>
-In-Reply-To: <20231102091648.40520-2-avromanov@salutedevices.com>
+References: <20231031131208.435268-1-devarsht@ti.com>
+ <20231031131208.435268-2-devarsht@ti.com>
+In-Reply-To: <20231031131208.435268-2-devarsht@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Nov 2023 22:35:12 +0000
-Message-ID: <CAPnjgZ1Uv3AWZE9L0+coaoEx0cHNJq=oHNutPZFBSN0s=uL+GA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] rng: move platform_get_rng_device() to rng-uclass.c
-To: Alexey Romanov <avromanov@salutedevices.com>
-Cc: sughosh.ganu@linaro.org, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- trini@konsulko.com, u-boot@lists.denx.de, kernel@sberdevices.ru
+Date: Thu, 2 Nov 2023 22:46:06 +0000
+Message-ID: <CAPnjgZ3U_HDUfm+GBDSm44FZFx7n5nrZbM3gHHYkyYj7P2582w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] arm: mach-k3: common: Reserve video memory from
+ end of the RAM
+To: Devarsh Thakkar <devarsht@ti.com>
+Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
+ bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
+ yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
+ a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,137 +85,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+Hi Devarsh,
 
-On Thu, 2 Nov 2023 at 12:58, Alexey Romanov <avromanov@salutedevices.com> wrote:
+On Tue, 31 Oct 2023 at 13:12, Devarsh Thakkar <devarsht@ti.com> wrote:
 >
-> The correct declaration place for platform_get_rng_device()
-> function is here. Also, this function is re-implemented to provide
-> the first successfully probed RNG device.
+> Add function spl_reserve_video which is a wrapper
+> around video_reserve to setup video memory and update
+> the relocation address pointer.
 >
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+> Setup video memory before page table reservation so that
+> framebuffer memory gets reserved from the end of RAM.
+>
+> This is as per the new policy being discussed for passing
+> blobs where each of the reserved areas for bloblists
+> to be passed need to be reserved at the end of RAM.
+>
+> This is done to enable the next stage to directly skip
+> the pre-reserved area from previous stage right from the end of RAM
+> without having to make any gaps/holes to accommodate those
+> regions which was the case before as previous stage
+> reserved region not from the end of RAM.
+>
+> Suggested-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
 > ---
->  drivers/rng/rng-uclass.c | 16 ++++++++++++++++
->  include/efi_rng.h        |  2 --
->  include/rng.h            | 11 +++++++++++
->  lib/efi_loader/efi_rng.c | 27 ---------------------------
->  4 files changed, 27 insertions(+), 29 deletions(-)
+> V2: Make a generic function "spl_reserve_video" under
+>     common/spl which can be re-used by other platforms too
+>     for reserving video memory from spl.
+> ---
+>  arch/arm/mach-k3/common.c |  2 ++
+>  common/spl/spl.c          | 19 +++++++++++++++++++
+>  include/spl.h             |  4 ++++
+>  3 files changed, 25 insertions(+)
+
 >
-> diff --git a/drivers/rng/rng-uclass.c b/drivers/rng/rng-uclass.c
-> index 53108e1b31..d7236b9335 100644
-> --- a/drivers/rng/rng-uclass.c
-> +++ b/drivers/rng/rng-uclass.c
-> @@ -9,6 +9,22 @@
->  #include <dm.h>
->  #include <rng.h>
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index c3006ba387..03e3b46282 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -537,6 +537,8 @@ void spl_enable_dcache(void)
+>         if (ram_top >= 0x100000000)
+>                 ram_top = (phys_addr_t) 0x100000000;
 >
-> +int platform_get_rng_device(struct udevice **dev)
+> +       gd->relocaddr = ram_top;
+> +       spl_reserve_video();
+
+Need to check error here
+
+>         gd->arch.tlb_addr = ram_top - gd->arch.tlb_size;
+>         gd->arch.tlb_addr &= ~(0x10000 - 1);
+>         debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index 732d90d39e..89172f2ebf 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -41,6 +41,7 @@
+>  #include <fdt_support.h>
+>  #include <bootcount.h>
+>  #include <wdt.h>
+> +#include <video.h>
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+>  DECLARE_BINMAN_MAGIC_SYM;
+> @@ -151,6 +152,24 @@ void spl_fixup_fdt(void *fdt_blob)
+>  #endif
+>  }
+>
+> +int spl_reserve_video(void)
 > +{
-> +       int ret;
-> +       struct udevice *devp;
+> +       if (CONFIG_IS_ENABLED(VIDEO)) {
+> +               ulong addr;
+> +               int ret;
 > +
-> +       ret = uclass_first_device_check(UCLASS_RNG, &devp);
-> +       if (ret) {
-> +               pr_err("Unable to get RNG device (%d)\n", ret);
-> +               return -ENODEV;
+> +               addr = gd->relocaddr;
+> +               ret = video_reserve(&addr);
+> +               if (ret)
+> +                       return ret;
+> +               debug("Reserving %luk for video at: %08lx\n",
+> +                     ((unsigned long)gd->relocaddr - addr) >> 10, addr);
+> +               gd->relocaddr = addr;
 > +       }
-> +
-> +       *dev = devp;
 > +
 > +       return 0;
 > +}
-
-Why not delete this function? It doesn't seem to do anything useful
-except return the wrong error code if something goes wrong :-)
-
-I worry that people might add other logic to it.
-
-Also you might consider using rng0, rng1 aliases so people can
-actually choose the device to use? If you want that you could
-uclass_get_device_by_seq()
-
 > +
->  int dm_rng_read(struct udevice *dev, void *buffer, size_t size)
+>  ulong spl_get_image_pos(void)
 >  {
->         const struct dm_rng_ops *ops = device_get_ops(dev);
-> diff --git a/include/efi_rng.h b/include/efi_rng.h
-> index 3c622381cb..f22e54adb0 100644
-> --- a/include/efi_rng.h
-> +++ b/include/efi_rng.h
-> @@ -23,6 +23,4 @@ struct efi_rng_protocol {
->                                        efi_uintn_t rng_value_length, uint8_t *rng_value);
->  };
+>         if (!CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS))
+> diff --git a/include/spl.h b/include/spl.h
+> index 0d49e4a454..9682e51fc1 100644
+> --- a/include/spl.h
+> +++ b/include/spl.h
+> @@ -825,6 +825,10 @@ int spl_usb_load(struct spl_image_info *spl_image,
 >
-> -efi_status_t platform_get_rng_device(struct udevice **dev);
-> -
->  #endif /* _EFI_RNG_H_ */
-> diff --git a/include/rng.h b/include/rng.h
-> index 37af554363..255c85d3e8 100644
-> --- a/include/rng.h
-> +++ b/include/rng.h
-> @@ -20,6 +20,17 @@ struct udevice;
->   */
->  int dm_rng_read(struct udevice *dev, void *buffer, size_t size);
->
+>  int spl_ymodem_load_image(struct spl_image_info *spl_image,
+>                           struct spl_boot_device *bootdev);
 > +/**
-> + * platform_get_rng_device() - retrieve random number generator
-> + *
-> + * This function retrieves the first udevice implementing a hardware
-> + * random number generator. Device is already probed.
-> + *
-> + * @dev:       udevice
-> + * Return:     status code
+> + * spl_reserve_video() - Reserve video and update relocation address
+
+This needs more detail about:
+- gd->relocaddr
+- where the video memory is allocated
+- where the allocation is stored (in the video-device plat?)
+- return value
+
 > + */
-> +int platform_get_rng_device(struct udevice **dev);
-
-Better naming (if you do keep this) is rng_get_first()
-
-There is no such thing as a 'platform' in U-Boot.
-
-> +
->  /**
->   * struct dm_rng_ops - operations for the hwrng uclass
->   *
-> diff --git a/lib/efi_loader/efi_rng.c b/lib/efi_loader/efi_rng.c
-> index bb11d8d0e0..0d8bf770f5 100644
-> --- a/lib/efi_loader/efi_rng.c
-> +++ b/lib/efi_loader/efi_rng.c
-> @@ -17,33 +17,6 @@ DECLARE_GLOBAL_DATA_PTR;
+> +int spl_reserve_video(void);
 >
->  const efi_guid_t efi_guid_rng_protocol = EFI_RNG_PROTOCOL_GUID;
->
-> -/**
-> - * platform_get_rng_device() - retrieve random number generator
-> - *
-> - * This function retrieves the udevice implementing a hardware random
-> - * number generator.
-> - *
-> - * This function may be overridden if special initialization is needed.
-> - *
-> - * @dev:       udevice
-> - * Return:     status code
-> - */
-> -__weak efi_status_t platform_get_rng_device(struct udevice **dev)
-> -{
-> -       int ret;
-> -       struct udevice *devp;
-> -
-> -       ret = uclass_get_device(UCLASS_RNG, 0, &devp);
-> -       if (ret) {
-> -               debug("Unable to get rng device\n");
-> -               return EFI_DEVICE_ERROR;
-> -       }
-> -
-> -       *dev = devp;
-> -
-> -       return EFI_SUCCESS;
-> -}
-> -
 >  /**
->   * rng_getinfo() - get information about random number generation
->   *
+>   * spl_invoke_atf - boot using an ARM trusted firmware image
 > --
-> 2.30.1
+> 2.34.1
 >
 
 Regards,
