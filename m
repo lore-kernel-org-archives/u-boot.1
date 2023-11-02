@@ -4,72 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9C23C0018A
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 11:08:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63103C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 11:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32683876F5;
-	Thu,  2 Nov 2023 12:08:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id AB00887753;
+	Thu,  2 Nov 2023 12:10:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="n90sKUl4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1541887605; Thu,  2 Nov 2023 12:08:27 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E585787753; Thu,  2 Nov 2023 12:10:48 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBE588772F
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 12:08:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-d9a58f5f33dso814085276.1
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 04:08:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1698923301; x=1699528101;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=55emeRPt82uH39JhTL6zd274yI3OR2IWxU5TvMTlPs8=;
- b=n90sKUl4292SOWPaxelI4wdeNFth5UZV16F97Og0e/NVJfH3slTacXUjGDmpbCpdCX
- DT0idjwv2sg4T6mgHN61RWQkSHNPCLJ/ALfQ7EPK/kz3BvojvoHgTbj+2+FxUmVuSRdp
- f1Ayg/bHyKIp7lsw3I5opO5uIylmJwdpmC0kU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698923302; x=1699528102;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=55emeRPt82uH39JhTL6zd274yI3OR2IWxU5TvMTlPs8=;
- b=CeEPcV97ivJQbbZpELW9y94s88yybmxl4ljoZM++tykqk8WZx/xjYUX7GiehZn+vWH
- UER9l6EydrlMFJLbIUZp4KkfjC7WXzv15+TXg5zIYyQBj7it2PUoZiox4Z/YZBUbAYj0
- T/ur3VN0NlwnJu/kOwQzgrrF5Li3jCBOynKv1gPXjZ+j0ibCAOljIme2lWvAUJlsAC5W
- 1FtiChFX00oGUqiVgUUbdZkg1gsTwgk6ifC1RKp0AjAWlDKhNL7FqcJwrG2fsOg4tCzB
- ioZdtKvbiAFINULlq3YOnY83hXtCPvJbxPCAeprovXEbN7ae8Kcf5OlhMqRfZ/vVF2ap
- BqsQ==
-X-Gm-Message-State: AOJu0YwcfqcLoKkge+Z9kBpXKA7jGPhK8XXRbYgLmX3u3AaUUrGJF3EC
- qJMFyS0EQ7/fabVu2nW7xcTB+cO7nyjAuZbjLA0wSg==
-X-Google-Smtp-Source: AGHT+IE/ieUIWcqHIOaKeHkOkpcN8H0AHoigHN6138+WfpriAZ9Rdsp+4v2EVk5VKc1gsGydA/s4eygxnt8ova95Rd4=
-X-Received: by 2002:a25:2d14:0:b0:da0:68a0:7cc6 with SMTP id
- t20-20020a252d14000000b00da068a07cc6mr16035310ybt.17.1698923301694; Thu, 02
- Nov 2023 04:08:21 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id CA1CD876F5
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 12:10:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3A2BAaF3089681;
+ Thu, 2 Nov 2023 19:10:36 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 2 Nov 2023
+ 19:10:36 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>
+Subject: [PATCH V2] doc: falcon: riscv: Falcon Mode boot on RISC-V
+Date: Thu, 2 Nov 2023 19:10:28 +0800
+Message-ID: <20231102111028.1723775-1-randolph@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231029034845.1169614-1-seanga2@gmail.com>
- <20231029034845.1169614-13-seanga2@gmail.com>
-In-Reply-To: <20231029034845.1169614-13-seanga2@gmail.com>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 2 Nov 2023 12:08:10 +0100
-Message-ID: <CABGWkvpJNvUKSJBcXaxAztPgDObQsF5TPuyHkM9wFOyJZRxJ0A@mail.gmail.com>
-Subject: Re: [PATCH 12/15] nand: Allow reinitialization
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3A2BAaF3089681
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,152 +60,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sean, All
+Add documentation to introduce the Falcon Mode on RISC-V.
+In this mode, the boot sequence is SPL -> OpenSBI -> Linux kernel.
 
-On Sun, Oct 29, 2023 at 4:49=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
-rote:
->
-> NAND devices are destroyed in between unit tests. Provide a function to
-> reinitialize the subsystem at the beginning of each test.
->
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> ---
->
->  drivers/mtd/nand/raw/nand.c | 40 ++++++++++++++++++++++++++++++-------
->  include/nand.h              |  1 +
->  2 files changed, 34 insertions(+), 7 deletions(-)
->
-> diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
-> index 80017b3dddd..4c18861aa25 100644
-> --- a/drivers/mtd/nand/raw/nand.c
-> +++ b/drivers/mtd/nand/raw/nand.c
-> @@ -115,6 +115,8 @@ static void nand_init_chip(int i)
->  #endif
->
->  #ifdef CONFIG_MTD_CONCAT
-> +struct mtd_info *concat_mtd;
-> +
->  static void create_mtd_concat(void)
->  {
->         struct mtd_info *nand_info_list[CONFIG_SYS_MAX_NAND_DEVICE];
-> @@ -129,28 +131,40 @@ static void create_mtd_concat(void)
->                 }
->         }
->         if (nand_devices_found > 1) {
-> -               struct mtd_info *mtd;
->                 char c_mtd_name[16];
->
->                 /*
->                  * We detected multiple devices. Concatenate them togethe=
-r.
->                  */
->                 sprintf(c_mtd_name, "nand%d", nand_devices_found);
-> -               mtd =3D mtd_concat_create(nand_info_list, nand_devices_fo=
-und,
-> -                                       c_mtd_name);
-> +               concat_mtd =3D mtd_concat_create(nand_info_list,
-> +                                              nand_devices_found, c_mtd_=
-name);
->
-> -               if (mtd =3D=3D NULL)
-> +               if (!concat_mtd)
->                         return;
->
-> -               nand_register(nand_devices_found, mtd);
-> +               nand_register(nand_devices_found, concat_mtd);
->         }
->
->         return;
->  }
-> +
-> +static void destroy_mtd_concat(void)
-> +{
-> +       if (!concat_mtd)
-> +               return;
-> +
-> +       mtd_concat_destroy(concat_mtd);
-> +       concat_mtd =3D NULL;
-> +}
->  #else
->  static void create_mtd_concat(void)
->  {
->  }
-> +
-> +static void destroy_mtd_concat(void)
-> +{
-> +}
->  #endif
->
->  unsigned long nand_size(void)
-> @@ -158,10 +172,10 @@ unsigned long nand_size(void)
->         return total_nand_size;
->  }
->
-> +static int initialized;
-> +
->  void nand_init(void)
->  {
-> -       static int initialized;
-> -
->         /*
->          * Avoid initializing NAND Flash multiple times,
->          * otherwise it will calculate a wrong total size.
-> @@ -190,6 +204,18 @@ void nand_init(void)
->         create_mtd_concat();
->  }
->
-> +void nand_reinit(void)
-> +{
-> +       int i;
-> +
-> +       destroy_mtd_concat();
-> +       for (i =3D 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++)
-> +               assert(!nand_info[i]);
-> +
-> +       initialized =3D 0;
-> +       nand_init();
-> +}
-> +
->  unsigned int nand_page_size(void)
->  {
->         struct mtd_info *mtd =3D get_nand_dev_by_index(nand_curr_device);
-> diff --git a/include/nand.h b/include/nand.h
-> index fc584f5ef7a..220ffa202ef 100644
-> --- a/include/nand.h
-> +++ b/include/nand.h
-> @@ -11,6 +11,7 @@
->  #include <config.h>
->
->  extern void nand_init(void);
-> +void nand_reinit(void);
->  unsigned long nand_size(void);
->  unsigned int nand_page_size(void);
->
-> --
-> 2.37.1
->
+Signed-off-by: Randolph <randolph@andestech.com>
+---
+ doc/develop/falcon.rst | 159 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 159 insertions(+)
 
-Reviewed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+index 2f25fc8532..b553f0d0ea 100644
+--- a/doc/develop/falcon.rst
++++ b/doc/develop/falcon.rst
+@@ -256,3 +256,162 @@ the following command:
+ Falcon Mode was presented at the RMLL 2012. Slides are available at:
+ 
+ http://schedule2012.rmll.info/IMG/pdf/LSM2012_UbootFalconMode_Babic.pdf
++
++Falcon Mode Boot on RISC-V
++--------------------------
++
++Introduction
++------------
++
++In the RISC-V environment, OpenSBI is required to enable a supervisor mode
++to execute certain privileged operations. The typical boot sequence on
++RISC-V is SPL -> OpenSBI -> U-Boot -> Linux kernel. SPL will load and start
++the OpenSBI initializations, then OpenSBI will bring up the next image, U-Boot.
++The OpenSBI binary must be prepared in advance of the U-Boot build process
++and it will be packed together with U-Boot into a file called u-boot.itb.
++
++The Falcon Mode on RISC-V platforms is a distinct boot process. Borrowing
++ideas from the U-Boot Falcon Mode on ARM, it skips the U-Boot proper phase
++in the normal boot process and allows OpenSBI to load and start the Linux
++kernel. Its boot sequence is SPL -> OpenSBI -> Linux kernel. The OpenSBI
++binary and Linux kernel binary must be prepared prior to the U-Boot build
++process and they will be packed together as linux.itb in this process.
++
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT enables the Falcon Mode boot on RISC-V.
++This configuration tells OpenSBI that Linux kernel is its next OS image and
++makes it load and start the kernel afterwards.
++
++Note that the Falcon Mode boot bypasses a lot of initializations by U-Boot.
++If the Linux kernel expects hardware initializations by U-Boot, make sure to
++port the relevant code to the SPL build process.
++
++Configurations
++--------------
++
++CONFIG_SPL_LOAD_FIT_ADDRESS
++    Specifies the address to load u-boot.itb in a normal boot. When the Falcon
++    Mode boot is enabled, it specifies the load address of linux.itb.
++
++CONFIG_SYS_TEXT_BASE
++    Specifies the address of the text section for a u-boot proper in a normal
++    boot. When the Falcon Mode boot is enabled, it specifies the text section
++    address for the Linux kernel image.
++
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT
++    Activates the Falcon Mode boot on RISC-V.
++
++Function that a board must implement
++------------------------------------
++
++Initially, SPL places the FDT blob right after the kernel. As the kernel does
++not include the BSS section in its size calculation, SPL ends up placing the
++FDT blob within the BSS section of the kernel. This may cause the FDT blob to
++be cleared during kernel BSS initialization. To avoid the issue, be sure to
++move the FDT blob out of the kernel first.
++
++void spl_perform_fixups(struct spl_image_info *spl_image)
++    required, necessary action to move the FDT blob out of the Linux kernel BSS
++    section
++
++Example for Andes AE350 Board
++-----------------------------
++
++A FDT blob is required to boot the Linux kernel from the SPL. Andes AE350
++platforms generally come with a builtin dtb. If you want to load a custom DTB,
++follow the steps below:
++
++1. Load the custom DTB to SDRAM::
++
++        => fatload mmc 0:1 0x20000000 user_custom.dtb
++
++2. Set the SPI speed::
++
++        => sf probe 0:0 50000000 0
++
++3. Erase sectors from the SPI Flash::
++
++        => sf erase 0xf0000 0x10000
++
++4. Write the FDT blob to the erased sectors of the Flash::
++
++        => sf write 0x20000000 0xf0000 0x10000
++
++Console Log of AE350 Falcon Mode Boot
++-------------------------------------
++
++U-Boot SPL 2023.01-00031-g777ecdea66 (Oct 31 2023 - 18:41:36 +0800)
++Trying to boot from RAM
++
++OpenSBI v1.2-51-g7304e42
++   ____                    _____ ____ _____
++  / __ \                  / ____|  _ \_   _|
++ | |  | |_ __   ___ _ __ | (___ | |_) || |
++ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
++ | |__| | |_) |  __/ | | |____) | |_) || |_
++  \____/| .__/ \___|_| |_|_____/|____/_____|
++        | |
++        |_|
++
++Platform Name             : andestech,ax25
++Platform Features         : medeleg
++Platform HART Count       : 1
++Platform IPI Device       : andes_plicsw
++Platform Timer Device     : andes_plmt @ 60000000Hz
++Platform Console Device   : uart8250
++Platform HSM Device       : andes_smu
++Platform PMU Device       : andes_pmu
++Platform Reboot Device    : atcwdt200
++Platform Shutdown Device  : ---
++Firmware Base             : 0x0
++Firmware Size             : 196 KB
++Runtime SBI Version       : 1.0
++
++Domain0 Name              : root
++Domain0 Boot HART         : 0
++Domain0 HARTs             : 0*
++Domain0 Region00          : 0x0000000000000000-0x000000000003ffff ()
++Domain0 Region01          : 0x00000000e6000000-0x00000000e60fffff (I,R)
++Domain0 Region02          : 0x00000000e6400000-0x00000000e67fffff (I)
++Domain0 Region03          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
++Domain0 Next Address      : 0x0000000001800000
++Domain0 Next Arg1         : 0x0000000001700000
++Domain0 Next Mode         : S-mode
++Domain0 SysReset          : yes
++
++Boot HART ID              : 0
++Boot HART Domain          : root
++Boot HART Priv Version    : v1.11
++Boot HART Base ISA        : rv64imafdcx
++Boot HART ISA Extensions  : none
++Boot HART PMP Count       : 8
++Boot HART PMP Granularity : 4
++Boot HART PMP Address Bits: 31
++Boot HART MHPM Count      : 4
++Boot HART MHPM Bits       : 64
++Boot HART MIDELEG         : 0x0000000000000222
++Boot HART MEDELEG         : 0x000000000000b109
++[    0.000000] Linux version 6.1.47-09019-g0584b09ad862-dirty
++[    0.000000] OF: fdt: Ignoring memory range 0x0 - 0x1800000
++[    0.000000] Machine model: andestech,ax25
++[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
++[    0.000000] printk: bootconsole [sbi0] enabled
++[    0.000000] Disabled 4-level and 5-level paging
++[    0.000000] efi: UEFI not found.
++[    0.000000] Zone ranges:
++[    0.000000]   DMA32    [mem 0x0000000001800000-0x000000003fffffff]
++[    0.000000]   Normal   empty
++[    0.000000] Movable zone start for each node
++[    0.000000] Early memory node ranges
++[    0.000000]   node   0: [mem 0x0000000001800000-0x000000003fffffff]
++[    0.000000] Initmem setup node 0 [mem 0x0000000001800000-0x000000003fffffff]
++[    0.000000] SBI specification v1.0 detected
++[    0.000000] SBI implementation ID=0x1 Version=0x10002
++[    0.000000] SBI TIME extension detected
++[    0.000000] SBI IPI extension detected
++[    0.000000] SBI RFENCE extension detected
++[    0.000000] SBI SRST extension detected
++[    0.000000] SBI HSM extension detected
++[    0.000000] riscv: base ISA extensions acim
++[    0.000000] riscv: ELF capabilities acim
++[    0.000000] percpu: Embedded 18 pages/cpu s35000 r8192 d30536 u73728
++[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 252500
+-- 
+2.34.1
 
-Thanks and regards,
-Dario
-
---=20
-
-Dario Binacchi
-
-Senior Embedded Linux Developer
-
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
