@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C23BC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D977EC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D749874D0;
-	Thu,  2 Nov 2023 23:49:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E00918774C;
+	Thu,  2 Nov 2023 23:49:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JzAlupEo";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A7o3MLyC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDDED876DF; Thu,  2 Nov 2023 23:49:22 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 9A72387743; Thu,  2 Nov 2023 23:49:25 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E969587743
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA2CF8774C
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a7afd45199so18421747b3.0
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:18 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d9ac31cb051so1514722276.3
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965357; x=1699570157; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tvwWA7yqRrbOGZIAyEvHc7+79AgOOyBVWhUGLGq+o+c=;
- b=JzAlupEoANhPH5QyvqhA60vlrcDuafjDAeFeSTUP8pZqNbXJT5e9az/FXo9hdNADSu
- Qi00Vwgb1d6XeCraTcZo2mvMPoZi1uHkfKmo6Fhe9UIAjKqEJ5HhMoeBHi1Ac3vAjHQO
- SLrzwQZbmhdcSIP24iOP36zIUhzrsrk7JTkTs=
+ d=chromium.org; s=google; t=1698965359; x=1699570159; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tBSOqYYaT4Kyi6K35rL5yZ9LbwVT1zZdccyacJWxBBI=;
+ b=A7o3MLyC62dyPVRbPd8NPorxGLTIAOR12O+LlhTV3NN4E6ovaDd9sCQaJHCQHT/qM5
+ 1A4nnZyJ15/K5tc3kZ8orFY0eZ4g+WzSGc6UDbeYqHraXM/v4f0OM9MrwQYkdn8RPy/e
+ mgI7u5Pu8gOzdkha/WZHDzi/0juUEumO7KTWs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965357; x=1699570157;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tvwWA7yqRrbOGZIAyEvHc7+79AgOOyBVWhUGLGq+o+c=;
- b=FfMWzCGLJPPT2/f+X7hcVLjZDckSb/XtTRV7IL8At4+QdWWyZE9qxQ/+KKG36bDNq6
- s3nFksZRokyLu064OYwGWdMrfawk2nVSwrGiZKcPlMPwyfZMdjmpcLTs1Xuu6ff/a+qH
- uvL6Z9Gn/pjUTc7YqxRH6gVav41ReOY0iOZDqWYRM+57rHhKpo9XeL7oThYReIlU0Iy7
- wnUTDeCpvIs9yB07sMU+HoQfy2AoURaCBxsHlc5ruCobu7eIBBjNw/KtwU0dydO6dWdZ
- iX0jVw/KMoBp+Sa7kgi/bEWnJR57y4q5HCi2Zv17+0ezPMvy5bbVqpwAl5UbH+3JKA9Y
- 4nfw==
-X-Gm-Message-State: AOJu0YzG3T/pXCujYoVGcckrYbHGGdl8hC2up8tx4GhoHVftzOEyafQl
- 19EVVxxBsubLeQqb0BT0ltuDxfgk+nREb1wOnq+ROsD1OluLEVo4FeY=
-X-Google-Smtp-Source: AGHT+IF3dZUZYN9ySFSRMnYcsB77SRIN3VrkX9Vtje0FWe6f+/WmVCxp1eLZtNVLQKtKhEVYhExtMy1jfBaXpo/8zyM=
-X-Received: by 2002:a81:494c:0:b0:5a8:7cb2:15d0 with SMTP id
- w73-20020a81494c000000b005a87cb215d0mr1180656ywa.11.1698965357243; Thu, 02
- Nov 2023 15:49:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698965359; x=1699570159;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tBSOqYYaT4Kyi6K35rL5yZ9LbwVT1zZdccyacJWxBBI=;
+ b=TwL2kSYVusYAkpvhk9cPipv6kHvUaW51hO2hoHeIH/xdhxtSSDYX6lluVbFP9F633o
+ v3Du4NAtoHpP+Bv/Xr90M80KjcBfj8d7G+kEhJuA+p9Nh1KhSTj43tY7KrLot3UsWDxW
+ vxX5HK/FrEtEo08EKxK4iEeCzjD4bStgRhB3nSCdxRnrI0f/s0HGqASCIDiyFv3qNajA
+ 5ERgSlAIkY4Mt6cGrCPnVWq3EM8N6U15pK1LbZno9BMf2Avmw5tq+hUoRJKhI/4ge00n
+ 1ALkNm81o1/9dSsiWUUwjU2rIk3uj1EIK4H9SphYqKncsXUugTc73f9xt7OeNj1DVtwW
+ M44w==
+X-Gm-Message-State: AOJu0YwI1iw9/fCmlE3+qhzCuUmKeLLI3L3p3n9+EpTZBVjaYqbpMapN
+ znrEIT3ldnG2AoC+lK7DaCh/TMZAkchvZvTMhMwOQg==
+X-Google-Smtp-Source: AGHT+IGZCNKcJWmMSHASwxZ9aiMw60KT0gFwenfO9h2gMFznH3Edxdwr5xpj9owvKZTgGNU37+IABUvemeUWwU4jyPE=
+X-Received: by 2002:a25:ab03:0:b0:d80:1604:f6e9 with SMTP id
+ u3-20020a25ab03000000b00d801604f6e9mr20425163ybi.44.1698965359215; Thu, 02
+ Nov 2023 15:49:19 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 2 Nov 2023 17:49:11 -0500
+ HTTPREST; Thu, 2 Nov 2023 17:49:13 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231018134030.27260-1-mps@arvanta.net>
-References: <20231018134030.27260-1-mps@arvanta.net>
-Date: Thu, 2 Nov 2023 17:49:11 -0500
-X-Google-Sender-Auth: l5wQc8ZzwQkD-KSr1ZbBt0Mf5IE
-Message-ID: <CAPnjgZ1Q+-S1eoKnZLwM1rvTbOX6xq6HPUWRAvx6BZgFAPatsA@mail.gmail.com>
-Subject: Re: [PATCH v2] cros_ec: spi: disable annoying key echo on console
-To: =?UTF-8?Q?Milan_P=2E_Stani=C4=87?= <mps@arvanta.net>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+In-Reply-To: <20231014204033.3077052-7-sjg@chromium.org>
+References: <20231014204033.3077052-7-sjg@chromium.org>
+ <20231014204033.3077052-1-sjg@chromium.org>
+Date: Thu, 2 Nov 2023 17:49:13 -0500
+X-Google-Sender-Auth: iV2sDkru-UvHXeYGJAQdU6G2Pq8
+Message-ID: <CAPnjgZ2OZU_HjqUVrtnXeEAPA=3j5KQ11-Z8=w-LAXVj71n6-A@mail.gmail.com>
+Subject: Re: [PATCH 6/6] binman: Move stage header into a CBFS attribute
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,18 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-on Peach-pi console every key press is echoed with message
-'cros_ec_command: Returned status 1'
+cbfsutil completely changed the way that stages are formatted in CBFS.
+Adjust the binman implementation to do the same.
 
-this is not proper fix, just hack to disable this message
+This mirrors commit 81dc20e744 in coreboot.
 
-Signed-off-by: Milan P. Stani=C4=87 <mps@arvanta.net>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-changed patch to use log_debug and added forgoten Signed-off-by and
-and Reviewed-by Simon response mail
 
- drivers/misc/cros_ec_spi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/binman/cbfs_util.py      | 64 +++++++++++++++++++++-------------
+ tools/binman/cbfs_util_test.py |  7 ++--
+ 2 files changed, 42 insertions(+), 29 deletions(-)
 
 Applied to u-boot-dm, thanks!
