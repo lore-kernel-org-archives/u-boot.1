@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A65EEC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 10:27:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8368AC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 10:45:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 852B2875A8;
-	Thu,  2 Nov 2023 11:27:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id 96495875E7;
+	Thu,  2 Nov 2023 11:45:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="DyNXLd1E";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OIuoiSHs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2690887735; Thu,  2 Nov 2023 11:27:53 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 14AEA875C5; Thu,  2 Nov 2023 11:45:22 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9AF3875A5
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 11:27:48 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yongxuan.wang@sifive.com
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5844bc378feso391421eaf.0
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 03:27:48 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E0EC875C5
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 11:45:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-d9a3d737d66so754408276.2
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 03:45:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1698920867; x=1699525667; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1698921916; x=1699526716;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=72hBqAuuzQK8IeARQ42XmR/HvZN62nCkwjP4daIE+1E=;
- b=DyNXLd1E54FklTpeggCLNeTpZ4z+6dHFCvP7sjNygEyn8A0l6Tvm4Sy7rW6ewPPrHk
- 0rjeQ7uCoVsrebHmV1BArX1w7BjjvH1GwAwoIFqEkSpAq8HBUj8mW+79pd4IfsUm7OWT
- nda+v2cOXmtDptJ+YBaBXAu7HOJEAM+8ODmIDiLo+Jeh9Lq5dLXLUaEvk2CWtwDmqHHi
- SzkdS9lADRlv57FdblwiRqFl62A7fHRDGK6OMnP0DLPsloOtr/DRxxfLwOYyeYbOIh98
- V6q3XkUNTL5Sz/wFbg3jBKdyZB9VRBzE2S2+QBNZeiFlFPxpq49vMCfOdTPFYOWyVyZm
- fduA==
+ bh=qzUo0f7wlx9e+RndXHgOpHQM4k8MjOB2A7pkniKQNJA=;
+ b=OIuoiSHsQQTId2ePFiu0BlwEHr+hctFIJHs9SyagZODQWAQLFVdf3+ehVtrr5/yeWX
+ sfd1Qg5ZUrcJd0mUEAGOCaFiPRpnQCe5TDk4gOLwjQvoIC8kDtq9HMlZcQAzBIUMR5xd
+ YFMD57LwPPF5l4OnXYjBAkmycUR3bCSbwMEZc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698920867; x=1699525667;
+ d=1e100.net; s=20230601; t=1698921916; x=1699526716;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=72hBqAuuzQK8IeARQ42XmR/HvZN62nCkwjP4daIE+1E=;
- b=wmdZ1AgJG9FFW2/IJwRgtJ5bPdrGGEKTPQ5DnVyltEASGeSThzVl8FmEd+g8r7rtHH
- QPKom4BG67tDx0fYtHy6uNX6M6fDUSWWCRJHd3urXBLgEtVYHwxE5SzGv8+RQ4qbkYDA
- I/XvxyvE0AUq7tD9HIDot428pVf0mbg8eDwPNkfS7NYP0VDLMJgIm+78+aAsaGvk7Fyg
- +uf2t0wIDlaegYJzmdApx2w67yBXcccpHk68BQsY/DNbxHtjdoKaaolGQ3eLS9tZX2PG
- tgWjOo15LrsUjDgcOhU4nhRYcmc3/MIEXwSVzhN3adWj6MrRn0DyV5ZEVr3j0sI0TTie
- Fd6A==
-X-Gm-Message-State: AOJu0YxRSL+D88lEg0xN9Pr1gbHPcIpPFWEnjUaElXBs2HUrOATKzkh/
- dx+ypIWLkczG5p1NqPxJq975Gx7BYcIvZTFmP6zmaA==
-X-Google-Smtp-Source: AGHT+IGUqTZDj0QR5UZm6O5jkqoGLN0du9AwNLmFZi/1t6DqnTj2ajG6VHWBTGNOAsru3HV/asn78lhj7oJ93kw/xPQ=
-X-Received: by 2002:a4a:d036:0:b0:581:ea96:f7f3 with SMTP id
- w22-20020a4ad036000000b00581ea96f7f3mr17437050oor.7.1698920867369; Thu, 02
- Nov 2023 03:27:47 -0700 (PDT)
+ bh=qzUo0f7wlx9e+RndXHgOpHQM4k8MjOB2A7pkniKQNJA=;
+ b=wW6LZCBETT+XxER+5gsmVjG4lsgriNJk7+RWMgDvrPvSAMaZvg1IHKNaeFoXZ/Z8XY
+ bvW15GuMWpB+z72VpcScN7T07EhsfTMlcbybtqojcsD7X1Bl/tP1uhmTj5T8QD0Ikq8T
+ HIpcVskILF3YZRKV6YhStEZomKqZvoSc/mkOIF0r582r9iZJUdNdbodZin3Vc1JrFMWI
+ IF93cODPJvcOMedUuF4JI5Q4ce338hZUr/4AoNRBxMWZIwtonxpetm6jWZV5qxvaCRmn
+ s8tFP1A9JjUnhpymMkG8CruvzwHUBoYNAAVGorfDj/YxOu4OdN496fuHyTTlcsG6kabo
+ b30A==
+X-Gm-Message-State: AOJu0YwWx71l3TdZeUSRSDrF9i1Qwu0jJDvYjxKQ1QpONa6KOPpzn0aM
+ vXhK1+iSkv5eI6Jzymh5t1DkgPEmcQ22tOKefXo94Q==
+X-Google-Smtp-Source: AGHT+IEvoJ2J3EhShWnF9bj4tpLDqA6pnMcn4n/tOKImTBRce4ZwxbaEs4A7ez4pAQVp8vPiI3ZhlHECLptwAikOG3o=
+X-Received: by 2002:a05:6902:100e:b0:da3:b603:8314 with SMTP id
+ w14-20020a056902100e00b00da3b6038314mr5282595ybt.0.1698921915938; Thu, 02 Nov
+ 2023 03:45:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231026032254.23043-1-yongxuan.wang@sifive.com>
- <20231027164307.GY496310@bill-the-cat>
- <CAMWQL2grduFNgGPLYryXOaXTzVvO6Y9s6o=2MMQ3h8Mj8z8P7w@mail.gmail.com>
- <20231031115406.GH496310@bill-the-cat>
-In-Reply-To: <20231031115406.GH496310@bill-the-cat>
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Date: Thu, 2 Nov 2023 18:27:37 +0800
-Message-ID: <CAMWQL2g=5QC4aPq2onYy1XsPVYXOv6LuAE+hMuL4y=KhP0KBgA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] board: sifive: unmatched: move kernel load address to
- 0x80200000
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, greentime.hu@sifive.com, vincent.chen@sifive.com, 
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
+References: <20231029034845.1169614-1-seanga2@gmail.com>
+ <20231029034845.1169614-11-seanga2@gmail.com>
+In-Reply-To: <20231029034845.1169614-11-seanga2@gmail.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Thu, 2 Nov 2023 11:45:05 +0100
+Message-ID: <CABGWkvoZO+PThfzTtfPhu=hp-d7gcLAVxsLa9brE+z8zdv9D5A@mail.gmail.com>
+Subject: Re: [PATCH 10/15] mtd: Add some fallbacks for add/del_mtd_device
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,84 +86,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Sean, All
 
-On Tue, Oct 31, 2023 at 7:54=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Sun, Oct 29, 2023 at 4:49=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
+rote:
 >
-> On Tue, Oct 31, 2023 at 03:56:45PM +0800, Yong-Xuan Wang wrote:
+> This allows using these functions without ifdefs. OneNAND depends on MTD,
+> so this ifdef was redundant in the first place.
 >
-> > Hi Tom,
-> >
-> > 0x80200000 comes from the result of the relocated_addr in booti_setup()
-> > on HiFive Unmatched board. If we load the Kernel Image to this address,
-> > it will not be moved. Currently one of the first two 8-byte of RISC-V
-> > Kernel Image is j _start_kernel instruction, so it's OK to execute the
-> > header of the Image.
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
 >
-> Thanks for confirming.
+>  drivers/mtd/nand/raw/nand.c         |  2 --
+>  drivers/mtd/onenand/onenand_uboot.c |  2 --
+>  include/linux/mtd/mtd.h             | 12 ++++++++++++
+>  3 files changed, 12 insertions(+), 4 deletions(-)
 >
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
+> index 4da41438790..3abd82068fb 100644
+> --- a/drivers/mtd/nand/raw/nand.c
+> +++ b/drivers/mtd/nand/raw/nand.c
+> @@ -60,13 +60,11 @@ int nand_register(int devnum, struct mtd_info *mtd)
+>         sprintf(dev_name[devnum], "nand%d", devnum);
+>         mtd->name =3D dev_name[devnum];
 >
-> As a follow-up, can you please work on migrating to plain text
-> environment?
+> -#ifdef CONFIG_MTD
+>         /*
+>          * Add MTD device so that we can reference it later
+>          * via the mtdcore infrastructure (e.g. ubi).
+>          */
+>         add_mtd_device(mtd);
+> -#endif
 >
-> >
-> > Regards,
-> > Yong-Xuan
-> >
-> >
-> > On Sat, Oct 28, 2023 at 12:43=E2=80=AFAM Tom Rini <trini@konsulko.com> =
-wrote:
-> > >
-> > > On Thu, Oct 26, 2023 at 03:22:52AM +0000, Yong-Xuan Wang wrote:
-> > >
-> > > > U-boot initially loads the kernel image to the kernel_addr_r, and
-> > > > subsequently relocates it to memory address 0x80200000. Setting
-> > > > kernel_addr_r to 0x80200000 can eliminate one copy operation.
-> > > >
-> > > > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> > > > ---
-> > > >  include/configs/sifive-unmatched.h | 2 +-
-> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/include/configs/sifive-unmatched.h b/include/configs/s=
-ifive-unmatched.h
-> > > > index 74150b7d4b..de8bfc1123 100644
-> > > > --- a/include/configs/sifive-unmatched.h
-> > > > +++ b/include/configs/sifive-unmatched.h
-> > > > @@ -36,7 +36,7 @@
-> > > >       "name=3Dsystem,size=3D-,bootable,type=3D${type_guid_gpt_syste=
-m};"
-> > > >
-> > > >  #define CFG_EXTRA_ENV_SETTINGS \
-> > > > -     "kernel_addr_r=3D0x84000000\0" \
-> > > > +     "kernel_addr_r=3D0x80200000\0" \
-> > > >       "kernel_comp_addr_r=3D0x88000000\0" \
-> > > >       "kernel_comp_size=3D0x4000000\0" \
-> > > >       "fdt_addr_r=3D0x8c000000\0" \
-> > >
-> > > This is I believe subtly wrong. If you want an execute in place kerne=
-l
-> > > image (and are using FIT images), this can be made to work. But if yo=
-u
-> > > load your (Linux Kernel) Image to this address, the header will be at
-> > > 0x80200000 and not the payload so you still end up moving it. Are you
-> > > sure this is (a) not still moving it and (b) it's OK to be executing =
-the
-> > > header of the image like it's code (or is there some catch in the hea=
-der
-> > > to lead to a jump over it, in that case) ?
-> > >
-> > > --
-> > > Tom
+>         total_nand_size +=3D mtd->size / 1024;
 >
+> diff --git a/drivers/mtd/onenand/onenand_uboot.c b/drivers/mtd/onenand/on=
+enand_uboot.c
+> index 04791df69bb..ecacabefadc 100644
+> --- a/drivers/mtd/onenand/onenand_uboot.c
+> +++ b/drivers/mtd/onenand/onenand_uboot.c
+> @@ -44,14 +44,12 @@ void onenand_init(void)
+>                         puts("Flex-");
+>                 puts("OneNAND: ");
+>
+> -#ifdef CONFIG_MTD
+>                 /*
+>                  * Add MTD device so that we can reference it later
+>                  * via the mtdcore infrastructure (e.g. ubi).
+>                  */
+>                 onenand_mtd.name =3D dev_name;
+>                 add_mtd_device(&onenand_mtd);
+> -#endif
+>         }
+>         print_size(onenand_chip.chipsize, "\n");
+>  }
+> diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
+> index 09f52698877..7a66c7af749 100644
+> --- a/include/linux/mtd/mtd.h
+> +++ b/include/linux/mtd/mtd.h
+> @@ -552,8 +552,20 @@ unsigned mtd_mmap_capabilities(struct mtd_info *mtd)=
+;
+>
+>  #ifdef __UBOOT__
+>  /* drivers/mtd/mtdcore.h */
+> +#if CONFIG_IS_ENABLED(MTD)
+>  int add_mtd_device(struct mtd_info *mtd);
+>  int del_mtd_device(struct mtd_info *mtd);
+> +#else
+> +static inline int add_mtd_device(struct mtd_info *mtd)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline int del_mtd_device(struct mtd_info *mtd)
+> +{
+> +       return -ENOSYS;
+> +}
+> +#endif
+>
+>  #ifdef CONFIG_MTD_PARTITIONS
+>  int add_mtd_partitions(struct mtd_info *, const struct mtd_partition *, =
+int);
 > --
-> Tom
+> 2.37.1
+>
 
-Sure. Could you please provide more details or examples of the plain text
-environment? I want to ensure I fully understand your request before
-proceeding.
+Reviewed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-Regards,
-Yong-Xuan
+Thanks and regards,
+Dario
+--=20
+
+Dario Binacchi
+
+Senior Embedded Linux Developer
+
+dario.binacchi@amarulasolutions.com
+
+__________________________________
+
+
+Amarula Solutions SRL
+
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
+
+T. +39 042 243 5310
+info@amarulasolutions.com
+
+www.amarulasolutions.com
