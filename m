@@ -4,76 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5524C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 14:02:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D49FFC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 14:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DE9487085;
-	Thu,  2 Nov 2023 15:02:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 61029877B6;
+	Thu,  2 Nov 2023 15:06:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="cgIW2kns";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g/7ivIc9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CCFB8701E; Thu,  2 Nov 2023 15:02:11 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id BB8BB8701E; Thu,  2 Nov 2023 15:06:10 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8712486F7D
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 15:02:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-da2e786743aso997107276.0
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 07:02:03 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 16002877A1
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 15:06:00 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-418201cb9e9so5297111cf.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 07:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1698933722; x=1699538522;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V8+/JUzLJwUnKBTeNjEykH7hoo4h4Dt3pPYgIX4TS1Y=;
- b=cgIW2knsaJ/ebX7O1zgudwGBJ9JApUl384ow8VJPQyz78euE5mHknX/UOZp1EVtrAn
- jgjqRL00bRr9mePK8+eMXtmrrli/hY3LA5ciqoKSJ1b61I1ELy1rBazqN1kRTA4A0ofQ
- y88iNj/fMgHqBQoh3/NlanRX/s78DRx5rfW8U=
+ d=gmail.com; s=20230601; t=1698933957; x=1699538757; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pwKmqEuEh0UqwDEfIKLzT3cBAVRd4YSmr/PNM1qYjxY=;
+ b=g/7ivIc9cWJsGdvtQcJ8mtY+qz2fAoDKjX3pG2bdpMVWrQLfagRjMIjsJCi53C1DMG
+ gG/cVImdCwWgyPolOEJcZ45KVFrNGgjeee8fvpPL8uneA9Yy5uoEsGBDZtrc5yE1t9lg
+ wjy7Sjz+RI57b5redeEsXB9F8oFVjn8zS67GUQileQnxNcAA7Xn3W7I/qxdB5p4yC3Dh
+ J8FfpVojQTRYilrXiHdYvgReYHliPKxDrKpEuZjAPMOG8f8YQ1DZ6ktNQNldwdkw14zW
+ ofJ3ESaTJR1i2R7DXv+QcYkmDW+161uqwduUIuna9zmF56PO1MJhuguAVQByNiEZo+rA
+ 8XEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698933722; x=1699538522;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V8+/JUzLJwUnKBTeNjEykH7hoo4h4Dt3pPYgIX4TS1Y=;
- b=gK5qDgLi7jtN+pCJxUIlszVCmJeY9mttXIVWDZ5QhHVdBAuqKl/iYnl6bQonxpwDSv
- gRi88E0o/6zSTWoUD1Bhpv5nGxe2mpOLidoo1QrS30ZTPuKmsyyQxe3G94JjypsM0XL1
- 6lCDbaohWwRoaNhuMTBTGsnYR1hVv714xrO3WzLB21MbVStaYJZTznzr1kBqAvDcGAEB
- e9lmyhEp6/EXzIJsLMVzQG3ckOYxFKrTAYjuDp4yc7ncJj7uL/cxMmvELZKOifZQiwYF
- szQLmNS/X8XeCQbjSO9/NzX9/da8v8dRtexKbkngWrZLaOY9ywyQ7VOU2H9g9yWfLBZO
- oaPQ==
-X-Gm-Message-State: AOJu0YyOmGwj9sbBzBOp/TbCWJafRg8B3j6b2Q++yPkzgTAijo4iUI3e
- Ol4kh0XXQZQfJzop5zdqPht711kQQyQu/B2mLki/MA==
-X-Google-Smtp-Source: AGHT+IF95mLtIf+4ZgiUGRDlVN0QunQfFRmZqSRsBl4seaTvBEj4RI51Y0JMOgUtI10snIwKQZ21cd5M4ZB/MmLkqIE=
-X-Received: by 2002:a25:d285:0:b0:d9a:52ee:6080 with SMTP id
- j127-20020a25d285000000b00d9a52ee6080mr17855007ybg.37.1698933722122; Thu, 02
- Nov 2023 07:02:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1698933957; x=1699538757;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pwKmqEuEh0UqwDEfIKLzT3cBAVRd4YSmr/PNM1qYjxY=;
+ b=uBUavyncdgLtadwhwBhUa2MgOJWDtcRxUYNgvqPuza49D5lXiWAxpqIQVcEOWdNMHW
+ gWHUS9l7lN2g86WagWZzBLrolNCXXco5cvKAaJ0ona4f6Tsw+QYxih6SOj88LjwyLBlo
+ CRmzJh8cCkOEnfyMXURgPbP0MrpZpLd5bO/RWtUeVUeekIWLU+TXMnt7g6AQkC2L2yJx
+ MML6Ckaymb1UZDcuZAaT4Q7ck+BBW9wSHGvMypIPKoOkAfvoheloZsPGFIg2ysyREDLx
+ XPfAgLrqjgzDpASpDxOdZHl3lmYdjgn2rE7YyAUx+VjV/jDPeUaVlihvBBpvGMY/dwmB
+ 57dg==
+X-Gm-Message-State: AOJu0Yw6ib/lkWyJozfEk744JqG96Kpb55KVTV6ysZGoLqqtLZRKlR78
+ 0oTZEI83X/Li8jrjNf1oaZ4=
+X-Google-Smtp-Source: AGHT+IHW1uZLiZiuf2jZzLTqG54WC0EA3xyfqNG0gFksujs4b4WqpnsaKhAkwdC6SCVqbyltuv8eVw==
+X-Received: by 2002:a05:622a:cb:b0:403:b219:89ed with SMTP id
+ p11-20020a05622a00cb00b00403b21989edmr22210281qtw.30.1698933956492; 
+ Thu, 02 Nov 2023 07:05:56 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ q23-20020ac87357000000b0041b25ebc190sm2311181qtp.44.2023.11.02.07.05.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Nov 2023 07:05:56 -0700 (PDT)
+Message-ID: <b0f0c63e-e8b4-ba15-19c0-aca39a8f621b@gmail.com>
+Date: Thu, 2 Nov 2023 10:05:54 -0400
 MIME-Version: 1.0
-References: <20231029034845.1169614-1-seanga2@gmail.com>
-In-Reply-To: <20231029034845.1169614-1-seanga2@gmail.com>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 2 Nov 2023 15:01:51 +0100
-Message-ID: <CABGWkvq_Yw2Q7ZX9UeaO6a0Uf6V+-1Uh6BNOga6neq_tUVQNFA@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
 Subject: Re: [PATCH 00/15] nand: Add sandbox tests
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>, 
+Content-Language: en-US
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Heiko Schocher <hs@denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, 
- Weijie Gao <weijie.gao@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
+References: <20231029034845.1169614-1-seanga2@gmail.com>
+ <CABGWkvq_Yw2Q7ZX9UeaO6a0Uf6V+-1Uh6BNOga6neq_tUVQNFA@mail.gmail.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <CABGWkvq_Yw2Q7ZX9UeaO6a0Uf6V+-1Uh6BNOga6neq_tUVQNFA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,181 +100,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sean, All,
-
-On Sun, Oct 29, 2023 at 4:48=E2=80=AFAM Sean Anderson <seanga2@gmail.com> w=
-rote:
->
-> This series tests raw nand flash in sandbox and fixes various bugs discov=
-ered in
-> the process. I've tried to do things in a contemporary manner, avoiding t=
-he
-> (numerous) variations present on only a few boards. The test is pretty mi=
-nimal.
-> Future work could test the rest of the nand API as well as the MTD API.
->
-> Bloat at [1] (for boards with SPL_NAND_SUPPORT enabled). Almost
-> everything grows by a few bytes due to nand_page_size. A few boards grow =
-more,
-> mostly those using nand_spl_loaders.c.
->
-> [1] https://gist.github.com/Forty-Bot/9694f3401893c9e706ccc374922de6c2
->
->
-> Sean Anderson (15):
->   spl: nand: Fix NULL-pointer dereference
->   nand: Don't dereference NULL manufacturer_desc
->   nand: Calculate SYS_NAND_PAGE_COUNT automatically
->   nand: spl_loaders: Only read enough pages to load the image
->   spl: legacy: Honor bl_len when decompressing
->   spl: nand: Set bl_len to page size
->   cmd: nand: Map memory before accessing it
->   spl: nand: Map memory before accessing it
->   mtd: Rename SPL_MTD_SUPPORT to SPL_MTD
->   mtd: Add some fallbacks for add/del_mtd_device
->   nand: Add function to unregister NAND devices
->   nand: Allow reinitialization
->   arch: sandbox: Add function to create temporary files
->   nand: Add sandbox driver
->   test: spl: Add a test for NAND
->
->  README                                        |   9 +-
->  arch/sandbox/cpu/os.c                         |  17 +
->  arch/sandbox/dts/test.dts                     |  67 ++
->  arch/sandbox/include/asm/spl.h                |   1 +
->  cmd/nand.c                                    |  26 +-
->  common/spl/Kconfig                            |   2 +-
->  common/spl/spl_legacy.c                       |  18 +-
->  common/spl/spl_nand.c                         |  22 +-
->  configs/am335x_baltos_defconfig               |   3 +-
->  configs/am335x_evm_defconfig                  |   3 +-
->  configs/am335x_evm_spiboot_defconfig          |   2 +-
->  configs/am335x_guardian_defconfig             |   1 -
->  configs/am335x_hs_evm_defconfig               |   2 +-
->  configs/am335x_hs_evm_uart_defconfig          |   2 +-
->  configs/am335x_igep003x_defconfig             |   3 +-
->  configs/am335x_sl50_defconfig                 |   2 +-
->  configs/am3517_evm_defconfig                  |   3 +-
->  configs/am43xx_evm_defconfig                  |   3 +-
->  configs/am43xx_evm_rtconly_defconfig          |   3 +-
->  configs/am43xx_evm_usbhost_boot_defconfig     |   3 +-
->  configs/am43xx_hs_evm_defconfig               |   3 +-
->  configs/am62ax_evm_r5_defconfig               |   2 +-
->  configs/am65x_evm_a53_defconfig               |   2 +-
->  configs/axm_defconfig                         |   1 -
->  configs/chiliboard_defconfig                  |   1 -
->  configs/cm_t43_defconfig                      |   2 +-
->  configs/corvus_defconfig                      |   1 -
->  configs/da850evm_nand_defconfig               |   1 -
->  configs/devkit3250_defconfig                  |   1 -
->  configs/devkit8000_defconfig                  |   1 -
->  configs/dra7xx_evm_defconfig                  |   1 -
->  configs/draco_defconfig                       |   1 -
->  configs/etamin_defconfig                      |   1 -
->  .../gardena-smart-gateway-at91sam_defconfig   |   1 -
->  configs/igep00x0_defconfig                    |   3 +-
->  configs/imx6ulz_smm_m2_defconfig              |   2 +-
->  configs/imx8mn_bsh_smm_s2_defconfig           |   2 +-
->  configs/j7200_evm_a72_defconfig               |   2 +-
->  configs/j7200_evm_r5_defconfig                |   2 +-
->  configs/j721e_evm_a72_defconfig               |   2 +-
->  configs/j721e_evm_r5_defconfig                |   2 +-
->  configs/j721s2_evm_a72_defconfig              |   2 +-
->  configs/j721s2_evm_r5_defconfig               |   2 +-
->  configs/m53menlo_defconfig                    |   1 -
->  configs/omap35_logic_defconfig                |   3 +-
->  configs/omap35_logic_somlv_defconfig          |   3 +-
->  configs/omap3_beagle_defconfig                |   3 +-
->  configs/omap3_evm_defconfig                   |   3 +-
->  configs/omap3_logic_defconfig                 |   3 +-
->  configs/omap3_logic_somlv_defconfig           |   3 +-
->  configs/omapl138_lcdk_defconfig               |   1 -
->  configs/phycore-am335x-r2-regor_defconfig     |   3 +-
->  configs/phycore-am335x-r2-wega_defconfig      |   3 +-
->  configs/pxm2_defconfig                        |   1 -
->  configs/rastaban_defconfig                    |   1 -
->  configs/rut_defconfig                         |   1 -
->  configs/sama5d3_xplained_nandflash_defconfig  |   1 -
->  configs/sama5d3xek_nandflash_defconfig        |   1 -
->  configs/sama5d4_xplained_nandflash_defconfig  |   1 -
->  configs/sama5d4ek_nandflash_defconfig         |   1 -
->  configs/sandbox64_defconfig                   |  10 +-
->  configs/sandbox_defconfig                     |   9 +
->  configs/sandbox_noinst_defconfig              |  21 +-
->  configs/smartweb_defconfig                    |   1 -
->  configs/socfpga_secu1_defconfig               |   2 +-
->  configs/stm32746g-eval_spl_defconfig          |   2 +-
->  configs/stm32f746-disco_spl_defconfig         |   2 +-
->  configs/stm32f769-disco_spl_defconfig         |   2 +-
->  configs/stm32mp15_basic_defconfig             |   2 +-
->  configs/stm32mp15_dhcom_basic_defconfig       |   2 +-
->  configs/stm32mp15_dhcor_basic_defconfig       |   2 +-
->  configs/taurus_defconfig                      |   1 -
->  configs/thuban_defconfig                      |   1 -
->  drivers/mtd/Makefile                          |   2 +-
->  drivers/mtd/nand/raw/Kconfig                  |  27 +-
->  drivers/mtd/nand/raw/Makefile                 |   1 +
->  drivers/mtd/nand/raw/am335x_spl_bch.c         |   8 +-
->  drivers/mtd/nand/raw/atmel_nand.c             |  10 +-
->  drivers/mtd/nand/raw/denali_spl.c             |   5 +
->  drivers/mtd/nand/raw/fsl_ifc_spl.c            |   8 +
->  drivers/mtd/nand/raw/lpc32xx_nand_mlc.c       |   5 +
->  drivers/mtd/nand/raw/mt7621_nand_spl.c        |   5 +
->  drivers/mtd/nand/raw/mxc_nand_spl.c           |  10 +-
->  drivers/mtd/nand/raw/mxs_nand_spl.c           |   5 +
->  drivers/mtd/nand/raw/nand.c                   |  66 +-
->  drivers/mtd/nand/raw/nand_base.c              |   7 +-
->  drivers/mtd/nand/raw/nand_spl_loaders.c       |   5 +-
->  drivers/mtd/nand/raw/nand_spl_simple.c        |  10 +-
->  drivers/mtd/nand/raw/omap_gpmc.c              |   3 +-
->  drivers/mtd/nand/raw/sand_nand.c              | 711 ++++++++++++++++++
->  drivers/mtd/nand/raw/sunxi_nand_spl.c         |   8 +-
->  drivers/mtd/onenand/onenand_uboot.c           |   2 -
->  include/linux/mtd/mtd.h                       |  12 +
->  include/mtd/cfi_flash.h                       |   2 +-
->  include/nand.h                                |   3 +
->  include/os.h                                  |  13 +
->  include/system-constants.h                    |   3 +
->  test/dm/Makefile                              |   1 +
->  test/dm/nand.c                                | 106 +++
->  test/image/Kconfig                            |   9 +
->  test/image/Makefile                           |   1 +
->  test/image/spl_load_nand.c                    |  54 ++
->  102 files changed, 1269 insertions(+), 153 deletions(-)
->  create mode 100644 drivers/mtd/nand/raw/sand_nand.c
->  create mode 100644 test/dm/nand.c
->  create mode 100644 test/image/spl_load_nand.c
->
-> --
-> 2.37.1
->
-
-The CI pipeline fails:
-https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/1840=
-9
-
-It seems like the problem is only for the clang tests (sandbox64 with
-clang test.py and sandbox with clang test.py)
-
-Regards,
-Dario
-
---=20
-
-Dario Binacchi
-
-Senior Embedded Linux Developer
-
-dario.binacchi@amarulasolutions.com
-
-__________________________________
-
-
-Amarula Solutions SRL
-
-Via Le Canevare 30, 31100 Treviso, Veneto, IT
-
-T. +39 042 243 5310
-info@amarulasolutions.com
-
-www.amarulasolutions.com
+T24gMTEvMi8yMyAxMDowMSwgRGFyaW8gQmluYWNjaGkgd3JvdGU6DQo+IFNlYW4sIEFsbCwN
+Cj4gDQo+IE9uIFN1biwgT2N0IDI5LCAyMDIzIGF0IDQ6NDjigK9BTSBTZWFuIEFuZGVyc29u
+IDxzZWFuZ2EyQGdtYWlsLmNvbT4gd3JvdGU6DQo+Pg0KPj4gVGhpcyBzZXJpZXMgdGVzdHMg
+cmF3IG5hbmQgZmxhc2ggaW4gc2FuZGJveCBhbmQgZml4ZXMgdmFyaW91cyBidWdzIGRpc2Nv
+dmVyZWQgaW4NCj4+IHRoZSBwcm9jZXNzLiBJJ3ZlIHRyaWVkIHRvIGRvIHRoaW5ncyBpbiBh
+IGNvbnRlbXBvcmFyeSBtYW5uZXIsIGF2b2lkaW5nIHRoZQ0KPj4gKG51bWVyb3VzKSB2YXJp
+YXRpb25zIHByZXNlbnQgb24gb25seSBhIGZldyBib2FyZHMuIFRoZSB0ZXN0IGlzIHByZXR0
+eSBtaW5pbWFsLg0KPj4gRnV0dXJlIHdvcmsgY291bGQgdGVzdCB0aGUgcmVzdCBvZiB0aGUg
+bmFuZCBBUEkgYXMgd2VsbCBhcyB0aGUgTVREIEFQSS4NCj4+DQo+PiBCbG9hdCBhdCBbMV0g
+KGZvciBib2FyZHMgd2l0aCBTUExfTkFORF9TVVBQT1JUIGVuYWJsZWQpLiBBbG1vc3QNCj4+
+IGV2ZXJ5dGhpbmcgZ3Jvd3MgYnkgYSBmZXcgYnl0ZXMgZHVlIHRvIG5hbmRfcGFnZV9zaXpl
+LiBBIGZldyBib2FyZHMgZ3JvdyBtb3JlLA0KPj4gbW9zdGx5IHRob3NlIHVzaW5nIG5hbmRf
+c3BsX2xvYWRlcnMuYy4NCj4+DQo+PiBbMV0gaHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vRm9y
+dHktQm90Lzk2OTRmMzQwMTg5M2M5ZTcwNmNjYzM3NDkyMmRlNmMyDQo+Pg0KPj4NCj4+IFNl
+YW4gQW5kZXJzb24gKDE1KToNCj4+ICAgIHNwbDogbmFuZDogRml4IE5VTEwtcG9pbnRlciBk
+ZXJlZmVyZW5jZQ0KPj4gICAgbmFuZDogRG9uJ3QgZGVyZWZlcmVuY2UgTlVMTCBtYW51ZmFj
+dHVyZXJfZGVzYw0KPj4gICAgbmFuZDogQ2FsY3VsYXRlIFNZU19OQU5EX1BBR0VfQ09VTlQg
+YXV0b21hdGljYWxseQ0KPj4gICAgbmFuZDogc3BsX2xvYWRlcnM6IE9ubHkgcmVhZCBlbm91
+Z2ggcGFnZXMgdG8gbG9hZCB0aGUgaW1hZ2UNCj4+ICAgIHNwbDogbGVnYWN5OiBIb25vciBi
+bF9sZW4gd2hlbiBkZWNvbXByZXNzaW5nDQo+PiAgICBzcGw6IG5hbmQ6IFNldCBibF9sZW4g
+dG8gcGFnZSBzaXplDQo+PiAgICBjbWQ6IG5hbmQ6IE1hcCBtZW1vcnkgYmVmb3JlIGFjY2Vz
+c2luZyBpdA0KPj4gICAgc3BsOiBuYW5kOiBNYXAgbWVtb3J5IGJlZm9yZSBhY2Nlc3Npbmcg
+aXQNCj4+ICAgIG10ZDogUmVuYW1lIFNQTF9NVERfU1VQUE9SVCB0byBTUExfTVREDQo+PiAg
+ICBtdGQ6IEFkZCBzb21lIGZhbGxiYWNrcyBmb3IgYWRkL2RlbF9tdGRfZGV2aWNlDQo+PiAg
+ICBuYW5kOiBBZGQgZnVuY3Rpb24gdG8gdW5yZWdpc3RlciBOQU5EIGRldmljZXMNCj4+ICAg
+IG5hbmQ6IEFsbG93IHJlaW5pdGlhbGl6YXRpb24NCj4+ICAgIGFyY2g6IHNhbmRib3g6IEFk
+ZCBmdW5jdGlvbiB0byBjcmVhdGUgdGVtcG9yYXJ5IGZpbGVzDQo+PiAgICBuYW5kOiBBZGQg
+c2FuZGJveCBkcml2ZXINCj4+ICAgIHRlc3Q6IHNwbDogQWRkIGEgdGVzdCBmb3IgTkFORA0K
+Pj4NCj4+ICAgUkVBRE1FICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHwgICA5ICstDQo+PiAgIGFyY2gvc2FuZGJveC9jcHUvb3MuYyAgICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAxNyArDQo+PiAgIGFyY2gvc2FuZGJveC9kdHMvdGVzdC5kdHMgICAgICAg
+ICAgICAgICAgICAgICB8ICA2NyArKw0KPj4gICBhcmNoL3NhbmRib3gvaW5jbHVkZS9hc20v
+c3BsLmggICAgICAgICAgICAgICAgfCAgIDEgKw0KPj4gICBjbWQvbmFuZC5jICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjYgKy0NCj4+ICAgY29tbW9uL3NwbC9L
+Y29uZmlnICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstDQo+PiAgIGNvbW1v
+bi9zcGwvc3BsX2xlZ2FjeS5jICAgICAgICAgICAgICAgICAgICAgICB8ICAxOCArLQ0KPj4g
+ICBjb21tb24vc3BsL3NwbF9uYW5kLmMgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjIg
+Ky0NCj4+ICAgY29uZmlncy9hbTMzNXhfYmFsdG9zX2RlZmNvbmZpZyAgICAgICAgICAgICAg
+IHwgICAzICstDQo+PiAgIGNvbmZpZ3MvYW0zMzV4X2V2bV9kZWZjb25maWcgICAgICAgICAg
+ICAgICAgICB8ICAgMyArLQ0KPj4gICBjb25maWdzL2FtMzM1eF9ldm1fc3BpYm9vdF9kZWZj
+b25maWcgICAgICAgICAgfCAgIDIgKy0NCj4+ICAgY29uZmlncy9hbTMzNXhfZ3VhcmRpYW5f
+ZGVmY29uZmlnICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9hbTMzNXhfaHNf
+ZXZtX2RlZmNvbmZpZyAgICAgICAgICAgICAgIHwgICAyICstDQo+PiAgIGNvbmZpZ3MvYW0z
+MzV4X2hzX2V2bV91YXJ0X2RlZmNvbmZpZyAgICAgICAgICB8ICAgMiArLQ0KPj4gICBjb25m
+aWdzL2FtMzM1eF9pZ2VwMDAzeF9kZWZjb25maWcgICAgICAgICAgICAgfCAgIDMgKy0NCj4+
+ICAgY29uZmlncy9hbTMzNXhfc2w1MF9kZWZjb25maWcgICAgICAgICAgICAgICAgIHwgICAy
+ICstDQo+PiAgIGNvbmZpZ3MvYW0zNTE3X2V2bV9kZWZjb25maWcgICAgICAgICAgICAgICAg
+ICB8ICAgMyArLQ0KPj4gICBjb25maWdzL2FtNDN4eF9ldm1fZGVmY29uZmlnICAgICAgICAg
+ICAgICAgICAgfCAgIDMgKy0NCj4+ICAgY29uZmlncy9hbTQzeHhfZXZtX3J0Y29ubHlfZGVm
+Y29uZmlnICAgICAgICAgIHwgICAzICstDQo+PiAgIGNvbmZpZ3MvYW00M3h4X2V2bV91c2Jo
+b3N0X2Jvb3RfZGVmY29uZmlnICAgICB8ICAgMyArLQ0KPj4gICBjb25maWdzL2FtNDN4eF9o
+c19ldm1fZGVmY29uZmlnICAgICAgICAgICAgICAgfCAgIDMgKy0NCj4+ICAgY29uZmlncy9h
+bTYyYXhfZXZtX3I1X2RlZmNvbmZpZyAgICAgICAgICAgICAgIHwgICAyICstDQo+PiAgIGNv
+bmZpZ3MvYW02NXhfZXZtX2E1M19kZWZjb25maWcgICAgICAgICAgICAgICB8ICAgMiArLQ0K
+Pj4gICBjb25maWdzL2F4bV9kZWZjb25maWcgICAgICAgICAgICAgICAgICAgICAgICAgfCAg
+IDEgLQ0KPj4gICBjb25maWdzL2NoaWxpYm9hcmRfZGVmY29uZmlnICAgICAgICAgICAgICAg
+ICAgfCAgIDEgLQ0KPj4gICBjb25maWdzL2NtX3Q0M19kZWZjb25maWcgICAgICAgICAgICAg
+ICAgICAgICAgfCAgIDIgKy0NCj4+ICAgY29uZmlncy9jb3J2dXNfZGVmY29uZmlnICAgICAg
+ICAgICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9kYTg1MGV2bV9uYW5kX2Rl
+ZmNvbmZpZyAgICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9kZXZraXQzMjUw
+X2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9kZXZr
+aXQ4MDAwX2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmln
+cy9kcmE3eHhfZXZtX2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAg
+Y29uZmlncy9kcmFjb19kZWZjb25maWcgICAgICAgICAgICAgICAgICAgICAgIHwgICAxIC0N
+Cj4+ICAgY29uZmlncy9ldGFtaW5fZGVmY29uZmlnICAgICAgICAgICAgICAgICAgICAgIHwg
+ICAxIC0NCj4+ICAgLi4uL2dhcmRlbmEtc21hcnQtZ2F0ZXdheS1hdDkxc2FtX2RlZmNvbmZp
+ZyAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9pZ2VwMDB4MF9kZWZjb25maWcgICAgICAgICAg
+ICAgICAgICAgIHwgICAzICstDQo+PiAgIGNvbmZpZ3MvaW14NnVsel9zbW1fbTJfZGVmY29u
+ZmlnICAgICAgICAgICAgICB8ICAgMiArLQ0KPj4gICBjb25maWdzL2lteDhtbl9ic2hfc21t
+X3MyX2RlZmNvbmZpZyAgICAgICAgICAgfCAgIDIgKy0NCj4+ICAgY29uZmlncy9qNzIwMF9l
+dm1fYTcyX2RlZmNvbmZpZyAgICAgICAgICAgICAgIHwgICAyICstDQo+PiAgIGNvbmZpZ3Mv
+ajcyMDBfZXZtX3I1X2RlZmNvbmZpZyAgICAgICAgICAgICAgICB8ICAgMiArLQ0KPj4gICBj
+b25maWdzL2o3MjFlX2V2bV9hNzJfZGVmY29uZmlnICAgICAgICAgICAgICAgfCAgIDIgKy0N
+Cj4+ICAgY29uZmlncy9qNzIxZV9ldm1fcjVfZGVmY29uZmlnICAgICAgICAgICAgICAgIHwg
+ICAyICstDQo+PiAgIGNvbmZpZ3MvajcyMXMyX2V2bV9hNzJfZGVmY29uZmlnICAgICAgICAg
+ICAgICB8ICAgMiArLQ0KPj4gICBjb25maWdzL2o3MjFzMl9ldm1fcjVfZGVmY29uZmlnICAg
+ICAgICAgICAgICAgfCAgIDIgKy0NCj4+ICAgY29uZmlncy9tNTNtZW5sb19kZWZjb25maWcg
+ICAgICAgICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9vbWFwMzVfbG9naWNf
+ZGVmY29uZmlnICAgICAgICAgICAgICAgIHwgICAzICstDQo+PiAgIGNvbmZpZ3Mvb21hcDM1
+X2xvZ2ljX3NvbWx2X2RlZmNvbmZpZyAgICAgICAgICB8ICAgMyArLQ0KPj4gICBjb25maWdz
+L29tYXAzX2JlYWdsZV9kZWZjb25maWcgICAgICAgICAgICAgICAgfCAgIDMgKy0NCj4+ICAg
+Y29uZmlncy9vbWFwM19ldm1fZGVmY29uZmlnICAgICAgICAgICAgICAgICAgIHwgICAzICst
+DQo+PiAgIGNvbmZpZ3Mvb21hcDNfbG9naWNfZGVmY29uZmlnICAgICAgICAgICAgICAgICB8
+ICAgMyArLQ0KPj4gICBjb25maWdzL29tYXAzX2xvZ2ljX3NvbWx2X2RlZmNvbmZpZyAgICAg
+ICAgICAgfCAgIDMgKy0NCj4+ICAgY29uZmlncy9vbWFwbDEzOF9sY2RrX2RlZmNvbmZpZyAg
+ICAgICAgICAgICAgIHwgICAxIC0NCj4+ICAgY29uZmlncy9waHljb3JlLWFtMzM1eC1yMi1y
+ZWdvcl9kZWZjb25maWcgICAgIHwgICAzICstDQo+PiAgIGNvbmZpZ3MvcGh5Y29yZS1hbTMz
+NXgtcjItd2VnYV9kZWZjb25maWcgICAgICB8ICAgMyArLQ0KPj4gICBjb25maWdzL3B4bTJf
+ZGVmY29uZmlnICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgLQ0KPj4gICBjb25maWdz
+L3Jhc3RhYmFuX2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgICAgfCAgIDEgLQ0KPj4gICBj
+b25maWdzL3J1dF9kZWZjb25maWcgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgLQ0K
+Pj4gICBjb25maWdzL3NhbWE1ZDNfeHBsYWluZWRfbmFuZGZsYXNoX2RlZmNvbmZpZyAgfCAg
+IDEgLQ0KPj4gICBjb25maWdzL3NhbWE1ZDN4ZWtfbmFuZGZsYXNoX2RlZmNvbmZpZyAgICAg
+ICAgfCAgIDEgLQ0KPj4gICBjb25maWdzL3NhbWE1ZDRfeHBsYWluZWRfbmFuZGZsYXNoX2Rl
+ZmNvbmZpZyAgfCAgIDEgLQ0KPj4gICBjb25maWdzL3NhbWE1ZDRla19uYW5kZmxhc2hfZGVm
+Y29uZmlnICAgICAgICAgfCAgIDEgLQ0KPj4gICBjb25maWdzL3NhbmRib3g2NF9kZWZjb25m
+aWcgICAgICAgICAgICAgICAgICAgfCAgMTAgKy0NCj4+ICAgY29uZmlncy9zYW5kYm94X2Rl
+ZmNvbmZpZyAgICAgICAgICAgICAgICAgICAgIHwgICA5ICsNCj4+ICAgY29uZmlncy9zYW5k
+Ym94X25vaW5zdF9kZWZjb25maWcgICAgICAgICAgICAgIHwgIDIxICstDQo+PiAgIGNvbmZp
+Z3Mvc21hcnR3ZWJfZGVmY29uZmlnICAgICAgICAgICAgICAgICAgICB8ICAgMSAtDQo+PiAg
+IGNvbmZpZ3Mvc29jZnBnYV9zZWN1MV9kZWZjb25maWcgICAgICAgICAgICAgICB8ICAgMiAr
+LQ0KPj4gICBjb25maWdzL3N0bTMyNzQ2Zy1ldmFsX3NwbF9kZWZjb25maWcgICAgICAgICAg
+fCAgIDIgKy0NCj4+ICAgY29uZmlncy9zdG0zMmY3NDYtZGlzY29fc3BsX2RlZmNvbmZpZyAg
+ICAgICAgIHwgICAyICstDQo+PiAgIGNvbmZpZ3Mvc3RtMzJmNzY5LWRpc2NvX3NwbF9kZWZj
+b25maWcgICAgICAgICB8ICAgMiArLQ0KPj4gICBjb25maWdzL3N0bTMybXAxNV9iYXNpY19k
+ZWZjb25maWcgICAgICAgICAgICAgfCAgIDIgKy0NCj4+ICAgY29uZmlncy9zdG0zMm1wMTVf
+ZGhjb21fYmFzaWNfZGVmY29uZmlnICAgICAgIHwgICAyICstDQo+PiAgIGNvbmZpZ3Mvc3Rt
+MzJtcDE1X2RoY29yX2Jhc2ljX2RlZmNvbmZpZyAgICAgICB8ICAgMiArLQ0KPj4gICBjb25m
+aWdzL3RhdXJ1c19kZWZjb25maWcgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgLQ0KPj4g
+ICBjb25maWdzL3RodWJhbl9kZWZjb25maWcgICAgICAgICAgICAgICAgICAgICAgfCAgIDEg
+LQ0KPj4gICBkcml2ZXJzL210ZC9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAgICAgICAg
+fCAgIDIgKy0NCj4+ICAgZHJpdmVycy9tdGQvbmFuZC9yYXcvS2NvbmZpZyAgICAgICAgICAg
+ICAgICAgIHwgIDI3ICstDQo+PiAgIGRyaXZlcnMvbXRkL25hbmQvcmF3L01ha2VmaWxlICAg
+ICAgICAgICAgICAgICB8ICAgMSArDQo+PiAgIGRyaXZlcnMvbXRkL25hbmQvcmF3L2FtMzM1
+eF9zcGxfYmNoLmMgICAgICAgICB8ICAgOCArLQ0KPj4gICBkcml2ZXJzL210ZC9uYW5kL3Jh
+dy9hdG1lbF9uYW5kLmMgICAgICAgICAgICAgfCAgMTAgKy0NCj4+ICAgZHJpdmVycy9tdGQv
+bmFuZC9yYXcvZGVuYWxpX3NwbC5jICAgICAgICAgICAgIHwgICA1ICsNCj4+ICAgZHJpdmVy
+cy9tdGQvbmFuZC9yYXcvZnNsX2lmY19zcGwuYyAgICAgICAgICAgIHwgICA4ICsNCj4+ICAg
+ZHJpdmVycy9tdGQvbmFuZC9yYXcvbHBjMzJ4eF9uYW5kX21sYy5jICAgICAgIHwgICA1ICsN
+Cj4+ICAgZHJpdmVycy9tdGQvbmFuZC9yYXcvbXQ3NjIxX25hbmRfc3BsLmMgICAgICAgIHwg
+ICA1ICsNCj4+ICAgZHJpdmVycy9tdGQvbmFuZC9yYXcvbXhjX25hbmRfc3BsLmMgICAgICAg
+ICAgIHwgIDEwICstDQo+PiAgIGRyaXZlcnMvbXRkL25hbmQvcmF3L214c19uYW5kX3NwbC5j
+ICAgICAgICAgICB8ICAgNSArDQo+PiAgIGRyaXZlcnMvbXRkL25hbmQvcmF3L25hbmQuYyAg
+ICAgICAgICAgICAgICAgICB8ICA2NiArLQ0KPj4gICBkcml2ZXJzL210ZC9uYW5kL3Jhdy9u
+YW5kX2Jhc2UuYyAgICAgICAgICAgICAgfCAgIDcgKy0NCj4+ICAgZHJpdmVycy9tdGQvbmFu
+ZC9yYXcvbmFuZF9zcGxfbG9hZGVycy5jICAgICAgIHwgICA1ICstDQo+PiAgIGRyaXZlcnMv
+bXRkL25hbmQvcmF3L25hbmRfc3BsX3NpbXBsZS5jICAgICAgICB8ICAxMCArLQ0KPj4gICBk
+cml2ZXJzL210ZC9uYW5kL3Jhdy9vbWFwX2dwbWMuYyAgICAgICAgICAgICAgfCAgIDMgKy0N
+Cj4+ICAgZHJpdmVycy9tdGQvbmFuZC9yYXcvc2FuZF9uYW5kLmMgICAgICAgICAgICAgIHwg
+NzExICsrKysrKysrKysrKysrKysrKw0KPj4gICBkcml2ZXJzL210ZC9uYW5kL3Jhdy9zdW54
+aV9uYW5kX3NwbC5jICAgICAgICAgfCAgIDggKy0NCj4+ICAgZHJpdmVycy9tdGQvb25lbmFu
+ZC9vbmVuYW5kX3Vib290LmMgICAgICAgICAgIHwgICAyIC0NCj4+ICAgaW5jbHVkZS9saW51
+eC9tdGQvbXRkLmggICAgICAgICAgICAgICAgICAgICAgIHwgIDEyICsNCj4+ICAgaW5jbHVk
+ZS9tdGQvY2ZpX2ZsYXNoLmggICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstDQo+PiAg
+IGluY2x1ZGUvbmFuZC5oICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMyAr
+DQo+PiAgIGluY2x1ZGUvb3MuaCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8
+ICAxMyArDQo+PiAgIGluY2x1ZGUvc3lzdGVtLWNvbnN0YW50cy5oICAgICAgICAgICAgICAg
+ICAgICB8ICAgMyArDQo+PiAgIHRlc3QvZG0vTWFrZWZpbGUgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB8ICAgMSArDQo+PiAgIHRlc3QvZG0vbmFuZC5jICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICB8IDEwNiArKysNCj4+ICAgdGVzdC9pbWFnZS9LY29uZmlnICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA5ICsNCj4+ICAgdGVzdC9pbWFnZS9NYWtl
+ZmlsZSAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAxICsNCj4+ICAgdGVzdC9pbWFn
+ZS9zcGxfbG9hZF9uYW5kLmMgICAgICAgICAgICAgICAgICAgIHwgIDU0ICsrDQo+PiAgIDEw
+MiBmaWxlcyBjaGFuZ2VkLCAxMjY5IGluc2VydGlvbnMoKyksIDE1MyBkZWxldGlvbnMoLSkN
+Cj4+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvbXRkL25hbmQvcmF3L3NhbmRfbmFu
+ZC5jDQo+PiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCB0ZXN0L2RtL25hbmQuYw0KPj4gICBjcmVh
+dGUgbW9kZSAxMDA2NDQgdGVzdC9pbWFnZS9zcGxfbG9hZF9uYW5kLmMNCj4+DQo+PiAtLQ0K
+Pj4gMi4zNy4xDQo+Pg0KPiANCj4gVGhlIENJIHBpcGVsaW5lIGZhaWxzOg0KPiBodHRwczov
+L3NvdXJjZS5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3UtYm9vdC1uYW5kLWZsYXNoLy0v
+cGlwZWxpbmVzLzE4NDA5DQo+IA0KPiBJdCBzZWVtcyBsaWtlIHRoZSBwcm9ibGVtIGlzIG9u
+bHkgZm9yIHRoZSBjbGFuZyB0ZXN0cyAoc2FuZGJveDY0IHdpdGgNCj4gY2xhbmcgdGVzdC5w
+eSBhbmQgc2FuZGJveCB3aXRoIGNsYW5nIHRlc3QucHkpDQoNCkkgY2FuJ3QgdmlldyB0aGF0
+IGxpbmsuIENhbiB5b3UgcG9zdCB0aGUgZXJyb3Igc29tZXdoZXJlIGVsc2U/DQoNCkkgc2F3
+IGEgY2xhbmcgZXJyb3IgWzFdIHdoZW4gcnVubmluZyBDSSBiZWZvcmUgc2VuZGluZyB0aGlz
+IG91dCwgYnV0IEkgdGhvdWdodCBJIGhhZCBmaXhlZCBpdC4NCg0KLS1TZWFuDQoNClsxXSBo
+dHRwczovL3NvdXJjZS5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3UtYm9vdC1jbGsvLS9w
+aXBlbGluZXMvMTgzNTUNCg0KICAgIHNhbmRib3g6ICArICAgc2FuZGJveA0KK2RyaXZlcnMv
+bXRkL25hbmQvcmF3L3NhbmRfbmFuZC5jOjM4NjoyOiBlcnJvcjogdmFyaWFibGUgJ3NyYycg
+aXMgdXNlZCB1bmluaXRpYWxpemVkIHdoZW5ldmVyIHN3aXRjaCBkZWZhdWx0IGlzIHRha2Vu
+IFstV2Vycm9yLC1Xc29tZXRpbWVzLXVuaW5pdGlhbGl6ZWRdDQorICAgICAgICBkZWZhdWx0
+Og0KKyAgICAgICAgXn5+fn5+fg0KK2RyaXZlcnMvbXRkL25hbmQvcmF3L3NhbmRfbmFuZC5j
+OjM5NToxNDogbm90ZTogdW5pbml0aWFsaXplZCB1c2Ugb2NjdXJzIGhlcmUNCisgICAgICAg
+IG1lbWNweShidWYsIHNyYyArIGNoaXAtPmNvbHVtbiwgdG9fY29weSk7DQorICAgICAgICAg
+ICAgICAgICAgICBefn4NCitkcml2ZXJzL210ZC9uYW5kL3Jhdy9zYW5kX25hbmQuYzozNjI6
+NjogZXJyb3I6IHZhcmlhYmxlICdzcmMnIGlzIHVzZWQgdW5pbml0aWFsaXplZCB3aGVuZXZl
+ciAnaWYnIGNvbmRpdGlvbiBpcyB0cnVlIFstV2Vycm9yLC1Xc29tZXRpbWVzLXVuaW5pdGlh
+bGl6ZWRdDQorICAgICAgICBpZiAoIWNoaXAtPnNlbGVjdGVkKQ0KKyAgICAgICAgICAgIF5+
+fn5+fn5+fn5+fn5+fg0KK2RyaXZlcnMvbXRkL25hbmQvcmF3L3NhbmRfbmFuZC5jOjM2Mjoy
+OiBub3RlOiByZW1vdmUgdGhlICdpZicgaWYgaXRzIGNvbmRpdGlvbiBpcyBhbHdheXMgZmFs
+c2UNCisgICAgICAgIF5+fn5+fn5+fn5+fn5+fn5+fn5+DQorZHJpdmVycy9tdGQvbmFuZC9y
+YXcvc2FuZF9uYW5kLmM6MzYwOjE1OiBub3RlOiBpbml0aWFsaXplIHRoZSB2YXJpYWJsZSAn
+c3JjJyB0byBzaWxlbmNlIHRoaXMgd2FybmluZw0KKyAgICAgICAgY29uc3QgdTggKnNyYzsN
+CisgICAgICAgICAgICAgICAgICAgICBeDQorICAgICAgICAgICAgICAgICAgICAgID0gTlVM
+TA0KKzIgZXJyb3JzIGdlbmVyYXRlZC4NCittYWtlWzVdOiAqKiogW3NjcmlwdHMvTWFrZWZp
+bGUuYnVpbGQ6MjU2OiBkcml2ZXJzL210ZC9uYW5kL3Jhdy9zYW5kX25hbmQub10gRXJyb3Ig
+MQ0KK21ha2VbNF06ICoqKiBbc2NyaXB0cy9NYWtlZmlsZS5idWlsZDozOTc6IGRyaXZlcnMv
+bXRkL25hbmQvcmF3XSBFcnJvciAyDQorbWFrZVszXTogKioqIFtzY3JpcHRzL01ha2VmaWxl
+LmJ1aWxkOjM5NzogZHJpdmVycy9tdGQvbmFuZF0gRXJyb3IgMg0KK21ha2VbMl06ICoqKiBb
+c2NyaXB0cy9NYWtlZmlsZS5idWlsZDozOTc6IGRyaXZlcnMvbXRkXSBFcnJvciAyDQorbWFr
+ZVsxXTogKioqIFtNYWtlZmlsZToxODU4OiBkcml2ZXJzXSBFcnJvciAyDQorbWFrZTogKioq
+IFtNYWtlZmlsZToxNzc6IHN1Yi1tYWtlXSBFcnJvciAyDQoNCg0K
