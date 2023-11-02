@@ -4,179 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32942C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D46C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 604C7875A5;
-	Thu,  2 Nov 2023 10:13:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 36DB6875A5;
+	Thu,  2 Nov 2023 10:15:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ISML7FTQ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="goWwVLkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD4178771C; Thu,  2 Nov 2023 10:13:50 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4C20F87719; Thu,  2 Nov 2023 10:15:21 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6159982BC1
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:13:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C8E7875A5
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:15:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SQuFojNlV+heQLucEXkIF/edjr1xDoFlk2lKapVuGcAbRESnXSFkq/lPB/XZ940QzNbcndZJNr/4046Ian2yjQs4WYkwjUqcr7CN7D8K6UtdLtBD4mjQVBsFDQP5RvQJTVg29QcpN/fqER8wub+HjswMB1wAQeMvEP3llfwvSXVMYtlwhAoSeegp0Q8K7w0wXAqrjw9quJMOspjS6x3+Zbpc9Km0WMyg7FTuLtS70ObmcLn1VqfzoanqiAvD7uKWsR3h1Whd5eFwEFVIe3p9tanCVFvNe4JqFJ3wHIyWIJNQVJ6pnJGzPuab4g/5vmXdd6aUNVRrJ5IR/ocY7FbjgA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3wr4ZTmd8EwdpQsP/jA/DW9a9F1ze6xkHRRgWEwfqhw=;
- b=mKYlrUEhSbqxuBCMA7dHQVUWRFMSVb5Enwlx6tVE1mWEBprKXI165tKsmCQpk9k2Z5wD5OSUCEQd51MEOGE+GAwBXI6XP9JGhxdeC31T9xitYe0axgNefDuQipLquxPl35/P9tc254cFHXUmP/wki4BjkDqEKTMtcpvCPDUDmDsLogXNx0SEjYeVbW/A2ztWzvu59tL6J5AKgN0Jxn7tFT2yK423qu3AqryE1DjX5xdfe4DzdzuhJERpjmN1+52dhJ5/8lProp+6cT64JSyrsQcXWMAJQdTGqk0fFfUvk7xntha9A4eGniUJRI0K9nHNigBzOl7QZ54va0TokhDrhQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3wr4ZTmd8EwdpQsP/jA/DW9a9F1ze6xkHRRgWEwfqhw=;
- b=ISML7FTQtVRcyEO6BiQ1rN1/ektjW2fPD5F+B/uRMIwnHdwSceSLO6ZVGRAj6Xwy3igLcDsFiK2y+gAKfwUzFUFvS8GhWl5hSWVjJA1cJgLskEBCeNFbpQC/sc4QML79enHfNyN4/RTJoBNp7W9CP5RsWtaGO6e3Z2RJKHlwLEs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by SN7PR12MB8001.namprd12.prod.outlook.com (2603:10b6:806:340::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.28; Thu, 2 Nov
- 2023 09:13:41 +0000
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::4993:59af:a31a:abff]) by BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::4993:59af:a31a:abff%6]) with mapi id 15.20.6933.029; Thu, 2 Nov 2023
- 09:13:41 +0000
-Message-ID: <5883967a-5591-45ef-99bc-12478573d21d@amd.com>
-Date: Thu, 2 Nov 2023 10:13:26 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pci: xilinx: Enable MMIO region
-Content-Language: en-US
-To: Mayuresh Chitale <mchitale@ventanamicro.com>, Bo Gan
- <ganboing@gmail.com>, Puhan Zhou <puh4n.zhou@gmail.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Shengyu Qu <wiagn233@outlook.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20231102082303.354944-1-mchitale@ventanamicro.com>
- <20231102082303.354944-4-mchitale@ventanamicro.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231102082303.354944-4-mchitale@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR10CA0103.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:803:28::32) To BYAPR12MB4758.namprd12.prod.outlook.com
- (2603:10b6:a03:a5::28)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-32d81864e3fso375345f8f.2
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 02:15:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1698916516; x=1699521316;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XWoPrFglO5KjhNaCBpsJ5/W9cx2ugwb2e+GXIcXU5SU=;
+ b=goWwVLkr64E5vVD0ZB4LFfpVR2w+T7UzfETwdHs+4DYeqlORPdVT+zlSn6+g1hxvrC
+ 3MJ0rZ9biI8xF9IpUy+p5Y99CV2ua9LGFASH2OcW2dw2N+7uXbN+AXnP04e1ElIofSQW
+ qkHEOwkvvwKics1RaQSS1XMzDH5q5QQ5W1TLWRMmge9CmgYYX0htZqV5AZ6KdJ50zBTZ
+ LjYz0Li6gBfAAfaiQea/w7s2xk0DhJvKZDGVfX51TL3tauj+gtqqJU3pI9WuUonvueLA
+ LEZrds/rXsgHQCaDE81tAE2M1WWsAIktGrcA5jYjrApsCrpsOdZQvo1M99w14xuvQRth
+ D7Zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698916516; x=1699521316;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=XWoPrFglO5KjhNaCBpsJ5/W9cx2ugwb2e+GXIcXU5SU=;
+ b=XuiDJRfsgL9dKv1ezm3AWxH6J4sujplqEGBY9870/mNU4T8M9tfqcGWiHrYBOuEEPS
+ dF5x+NKYN/WP9GQ3xb9L2wR9NVzH2of4xHavjq8v9pk6AhIGhhDXKGtIoYj0O8qKWRWp
+ oWUCrhsa5yS4lu05dggoWArEdiSpLR8NKdEXwEykUvGuhyfWf5C6d/EIzWPLih3JteO5
+ aMc/n1PCGX9ySFZCTayWq+01saYKR1k+rrKsxdDpT0cRSgAt+eKtB+DtaYOcoyKYUSsr
+ xhzimQ9cy8J6CXG+vd7sspoKnZLHZeVa3VaqqOnEfxzDhC3rulCWTWN3kJIuqb7Mnnf5
+ QLSQ==
+X-Gm-Message-State: AOJu0YyL6zPiqOe6MASktDb0qtrp8T8GEQVDWGRG9PvKaIrZ8t9d3EM3
+ xHFhEaP22KBy/g9ZkP4imJDFIw==
+X-Google-Smtp-Source: AGHT+IF3K3MjmuauBU28pOcvq1S0ItB/ITqeA4AcogyZ2VWSjZ45uVtqyONU127yAzAH0lMClsQ0bQ==
+X-Received: by 2002:a5d:4fc9:0:b0:31f:9b4f:1910 with SMTP id
+ h9-20020a5d4fc9000000b0031f9b4f1910mr12623883wrw.63.1698916515849; 
+ Thu, 02 Nov 2023 02:15:15 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ g8-20020a5d5548000000b0031ad5fb5a0fsm1883143wrw.58.2023.11.02.02.15.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Nov 2023 02:15:15 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: lukma@denx.de, u-boot@lists.denx.de
+Subject: Re: [PATCH] dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
+In-Reply-To: <169876380794.37728.2863914527348419844.b4-ty@baylibre.com>
+References: <CGME20220620111357epcas1p103474818319b5dc45260e043b4ffe3cc@epcas1p1.samsung.com>
+ <20220620111354.448512-1-jh80.chung@samsung.com>
+ <169876380794.37728.2863914527348419844.b4-ty@baylibre.com>
+Date: Thu, 02 Nov 2023 10:15:14 +0100
+Message-ID: <87h6m4zfbx.fsf@baylibre.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|SN7PR12MB8001:EE_
-X-MS-Office365-Filtering-Correlation-Id: 39186073-9de7-4417-d0af-08dbdb840184
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HEiL56aSXGAlQgGvBWUqbiGkqapgz7knR5wqMlUvA1LfUmaimC++rH9jC/MUB0Rn9mj/ggiWwkoWGRMxUH2ycq1GAmwGEZbnJOwuHBzV56MlMtlNLTccq+63rE3RJi1DWEn3h+WRPevop1eIj5sNhmCfC88IU03tXc/9RxugDGOQsDk+yEos+5luq6THKfKEWBu1nKK6vRgnbSO7nTSMjF/7T3Kfw467Ez7VRAUXEeqqfgmkS3ivN/5SLVonqeS4j1ECTl9mRNO4lvewxbJMD+m9DPFY2RjZuFPk+TqhuVhTPwc7IzwvonaetSTcWGwvn2Tj0UyE8+bC1PfQb2X/w34Sp3uIl8jBzr33aBhdeXcpv97N+iOgJXo0Qw1oCznggxNwwiZKP8nxkSv3JCkVBamrBUUhbHv/L2ItVCCNBSflNgPx+MWf0/jA3OmBhv1jtF/e6MRDdDOJUUCJdHZDryh3d6N8v2qTwEKntY+l2xizwzgZsy52803/V30a/bAgnv/kYdDEjE4rO0qM48lOqVMKSBIkUFEByivdaGKO7jZ9YMl9l0CzHZ2YdbmdmOavijdAdHtxZqBy57AVNf4HCUQ7S/tTDr552RmGaZ2Q25YxQtTU/ro5JXGT7YXUvA3Myfr44vRLyzN44GENTawekw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(366004)(376002)(39860400002)(346002)(396003)(230922051799003)(64100799003)(451199024)(1800799009)(186009)(2616005)(86362001)(26005)(31696002)(5660300002)(8676002)(4326008)(8936002)(110136005)(66946007)(83380400001)(31686004)(66556008)(66476007)(44832011)(316002)(41300700001)(7416002)(54906003)(53546011)(478600001)(38100700002)(36756003)(6486002)(2906002)(6512007)(6666004)(6506007)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OVdsc1QwQnplNzJOQ0lGSVczUndSSlF5MStMb3BPZWRhNVF6b1FBZlhpZWg4?=
- =?utf-8?B?TXJJMUNaOXl5QkQ0cEx2YkIrWjlKUE9CMjJuNjVnYjdYVkxYUEhQd09oRW1C?=
- =?utf-8?B?VEc4OUk0SUJTckQzcGRpRDNUK0VZbVRhNEdUaU94Q2xTZVJDNlk1b2VycXQ2?=
- =?utf-8?B?NE4wZmU2SDNHUk5GSUxsbmV4aisvSHBHRExsRUhJdmFSamhRYXp6RmFleUZt?=
- =?utf-8?B?cGYybzkwRHYyalNMa2J1R1FqUGVHOFdDYk5tOTNEWEp3WkYwTmhJZ2NxdnBj?=
- =?utf-8?B?K0VEMFdBaVoyd2p1VlIvbTJKS05GeTM0L3o5S1dPa1hyZmNIVE1vTkxselZJ?=
- =?utf-8?B?QzNsZjJMUlpTVlVEODZSeUI3Mkp3WFVacFloaXhuMXdEUGJMcWJKdWNRN1c4?=
- =?utf-8?B?ODJrT1Y4bXRnYXhPSGNnNlQwbExFS1MzcHQ0aEVjVWNxNU55SHdiemFBT3ps?=
- =?utf-8?B?bTlPNnhSeUNGN1F5MmtnM3BCL0ltcmF6aDdFaGpoZ0hUZjZiM1E3UHpHbDU1?=
- =?utf-8?B?L3VycGFaUE5vbUV5Z0RmeDlxd0FpUnpQMm90STZOLzdsbUx5NGFUYll2bjNH?=
- =?utf-8?B?Wnd3VVBWd3Y4aUQ5Z21Rc2JRRkQ4R21qL2ZkVUQ3RzY5U2loUUNCN1NDQ295?=
- =?utf-8?B?QlJNU1dLQkVuZ0NHT21wdW5IM3dFbDdxWVl3cTRCaWE5NHpEU3orYjFrcVR6?=
- =?utf-8?B?d2RMaEFsVWMxWS9CTnU0Y2pFWlBRWmQvQnFLYnpOSVg3SnNjZWp2U1k5TDQv?=
- =?utf-8?B?SmxzK1VPU1hVbGZGMjBLM2t5VkNaRXRwRjhTbVduSktWVEFINTdid1gzRWIr?=
- =?utf-8?B?MXppN0FSSjhFcFU4NU43T3VtZkZWYW8xOFEwemtuVGJnSW85cnl3QmJhdjlL?=
- =?utf-8?B?VDZFd20veHRRcFdUUGNvY09CMXdnZGhLTmMyeUErUFpEZEtEMDNzbXlmSEpw?=
- =?utf-8?B?TVJKeE9ZbzZoSzRXb0pyMVNtVTIvdFJ0aTJSQVl1Wjg1R3NSZHVDR1BoV1gx?=
- =?utf-8?B?cFIycm96cloxYUQyUDhUa2hvTDhhSmExYyt3M0FCQ08xWEx2MHpoMEhTUlAw?=
- =?utf-8?B?WVNBSUdYZGZEQnlIVGM2U2t6bmF2bHhleENNUFhTMWZTWFp2YUZkekJtTmtO?=
- =?utf-8?B?M3RPbmsxamM2MDgvQXBBT2MweW9SMnJxVW5XSEtlMGY3OCtJcFRpUnUxd0wy?=
- =?utf-8?B?WjlORzRtUmpTOVBTYkhSSlhtL0NWeW0xd2lqWVNTVC9PSUdpSDVlMmZjUFpo?=
- =?utf-8?B?RjkxbUsyWktBYzV5WTFFVWRhSHRKMGVHT3M4cDRhbGpkcTNaRDJVSm5kc2Ns?=
- =?utf-8?B?N0t3V0F5OFlPaDNmdkJqb3dONnRMQThscHdiSi9lTXBYZlRxQXBadmNCa3VL?=
- =?utf-8?B?dGN0MXhlNklBVHZyak9WWEMwSmt2TXVEeUtmL2pTM2d2NVZnZUpPMysrUnpV?=
- =?utf-8?B?cTY4QzNBbnRlNGxvS1RMMTc3dm95NWRXaGttZTRGZmhwdVd2RW5QYXdKcWlk?=
- =?utf-8?B?WS9FTmFkVWFpY3BtUkYwb3YxaTNIL2xxSFV6MXYyQmFycWNocnVYUFZGaDBJ?=
- =?utf-8?B?TlJRSm5ucDBWM2d6bEFUWEZqdXIvK3lDVFBVWDVuRThWNVBPcDhLNE5PUE55?=
- =?utf-8?B?M3F1bDRpbzBkZmtCK1FzWWFsVWtEQUFvV3J4QSsyVW9ETEVtaFZTQVY3R0VG?=
- =?utf-8?B?V0pLTUlGRWMzU0hvbldMUWw0MkMwWmExUHUveVkwK1hYWllDZk1vLzRDbHBP?=
- =?utf-8?B?L2NqaDRWNjhHL1NvaUJHbkYwSHFaMDljeUF4WkZEMUk4L2djZTkrbnp0S1Vj?=
- =?utf-8?B?VzJjZGtuMitzMmhxM0N2U2x6UEZFeElOcVo2VlpENHJRMUt0M0pGS0R6Tkdj?=
- =?utf-8?B?R0pXb0pjSzNYN0p3bmJUQ21BeEozMXRqS0ZjM1h2L0VzOXJ0Wm5aZ3AvVStU?=
- =?utf-8?B?RDhua3B4WmtJQ3YyOW9qQmt5ZlZNc09vNkVjMmVNdSsvVVowM1BQMFdEZmtk?=
- =?utf-8?B?M2NHekxZYWxsczkwbFRKV1pZTHQxd2FJdkZMdm94SE9Wa1hyUWR6Yi9vYzdB?=
- =?utf-8?B?ak9pNHZKVmdTUmVXWjcyMGdYc0FiS1dxdU4xK1NHMzJ3elA1ZWNFa3p2WVpY?=
- =?utf-8?Q?/4Oy02Na7qxz1GMmQjVw/ba6v?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 39186073-9de7-4417-d0af-08dbdb840184
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2023 09:13:41.3363 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nQOPf4pV+nZ2xRdXaP6xVqtyxNIoKXV544mOoWL8jvTST9Rar5wbf+SySeGnT1r2
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8001
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -193,55 +90,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jaehoon,
+
+On mar., oct. 31, 2023 at 15:50, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
+
+> Hi,
+>
+> On Mon, 20 Jun 2022 20:13:54 +0900, Jaehoon Chung wrote:
+>> Add CONFIG_DFU_NAME_MAX_SIZE to change the proper size.
+>> If name is longer than default size, it can do wrong behavior during updating
+>> image. So it need to change the proper maximum size.
+>> 
+>> This patch is proviced the solution to change value with configuration.
+>> 
+>> 
+>> [...]
+>
+> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+>
+> [1/1] dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
+>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/de9b2e10f10996050a10998a0836abe2f9e425e3
 
 
-On 11/2/23 09:23, Mayuresh Chitale wrote:
-> 
-> The host bridge MMIO region is disabled by default due to which MMIO
-> accesses cause an exception. Fix it by setting the bridge enable bit.
-> This change is ported from the linux pcie-xilinx driver.
-> 
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> ---
->   drivers/pci/pcie_xilinx.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
-> 
-> diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-> index 20b630027f..d1fbd40175 100644
-> --- a/drivers/pci/pcie_xilinx.c
-> +++ b/drivers/pci/pcie_xilinx.c
-> @@ -25,6 +25,8 @@ struct xilinx_pcie {
->   /* Register definitions */
->   #define XILINX_PCIE_REG_PSCR		0x144
->   #define XILINX_PCIE_REG_PSCR_LNKUP	BIT(11)
-> +#define XILINX_PCIE_REG_RPSC		0x148
-> +#define XILINX_PCIE_REG_RPSC_BEN	BIT(0)
->   
->   /**
->    * pcie_xilinx_link_up() - Check whether the PCIe link is up
-> @@ -142,6 +144,7 @@ static int pcie_xilinx_of_to_plat(struct udevice *dev)
->   	struct xilinx_pcie *pcie = dev_get_priv(dev);
->   	fdt_addr_t addr;
->   	fdt_size_t size;
-> +	u32 rpsc;
->   
->   	addr = dev_read_addr_size(dev, &size);
->   	if (addr == FDT_ADDR_T_NONE)
-> @@ -149,6 +152,11 @@ static int pcie_xilinx_of_to_plat(struct udevice *dev)
->   
->   	pcie->cfg_base = map_physmem(addr, size, MAP_NOCACHE);
->   
-> +	/* Enable the Bridge enable bit */
-> +	rpsc = __raw_readl(pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-> +	rpsc |= XILINX_PCIE_REG_RPSC_BEN;
-> +	__raw_writel(rpsc, pcie->cfg_base + XILINX_PCIE_REG_RPSC);
-> +
->   	return 0;
->   }
->   
+This patch breaks CI for both arm32 and arm64 platforms:
 
-This looks good but depends on previous patch in this series that's why
-Reviewed-by: Michal Simek <michal.simek@amd.com>
+* https://source.denx.de/u-boot/custodians/u-boot-dfu/-/jobs/725163
+* https://source.denx.de/u-boot/custodians/u-boot-dfu/-/jobs/725164
 
-Thanks,
-Michal
+It breaks because multiple boards which include dfu.h without having
+CONFIG_DFU being set.
+
+Tom attempted to fix this with:
+https://patchwork.ozlabs.org/project/uboot/list/?series=369275
+
+But that had some different issues, see:
+https://libera.irclog.whitequark.org/u-boot/2023-10-31#35154532;
+
+I've fixed it up with the following diff:
+
+diff --git a/include/dfu.h b/include/dfu.h
+index 4573f753c565..2c3ffa3f9297 100644
+--- a/include/dfu.h
++++ b/include/dfu.h
+@@ -99,7 +99,12 @@ struct virt_internal_data {
+        int dev_num;
+ };
+ 
++
++#if defined(CONFIG_DFU_NAME_MAX_SIZE)
+ #define DFU_NAME_SIZE                  CONFIG_DFU_NAME_MAX_SIZE
++#else
++#define DFU_NAME_SIZE                  32
++#endif
+ #ifndef DFU_DEFAULT_POLL_TIMEOUT
+ #define DFU_DEFAULT_POLL_TIMEOUT 0
+ #endif
+
+If you have a better idea to fix this, can you please let me know?
+Otherwise, I will squash this to keep CI green.
+
+Thank you
+
+>
+> --
+> Mattijs
