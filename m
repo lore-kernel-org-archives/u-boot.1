@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045DBC0018A
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:49:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B454C4167D
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F4898770D;
-	Thu,  2 Nov 2023 23:49:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 91ABB8772C;
+	Thu,  2 Nov 2023 23:49:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VI0TwuBT";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AkYNDeud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9C2E87735; Thu,  2 Nov 2023 23:49:17 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id F24D087745; Thu,  2 Nov 2023 23:49:18 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51BEC876DF
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBCCA87711
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-d9caf5cc948so1494273276.0
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:11 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5af6c445e9eso17896427b3.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965350; x=1699570150; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965352; x=1699570152; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4FZWD8y+8EeQ1EiLu7E2C4lV+BgA3Iv+5Jp1Yy7/0wE=;
- b=VI0TwuBT+C2mkt0g2zzgzFmVEPWyQw2hRa45O8GAkCmLkMMb0QH5TsWoUeKwkRXO/t
- TruWgXz1V8rjzzvNQtBUksTRFoIQkPLL2x7IrEpdJYQK1K6bqM2GoKqxm5hK316Xas3z
- N2huYHCuG9xZIZYK+30RJzf9lalvwVoeLqyOw=
+ bh=/ceuEWl/XLPp6jD2SwJe++hx+RYwxbm5SzhADhcryTc=;
+ b=AkYNDeuduSyUSKOXAwLLd1CCyq81DcebMwWFGU0yap7/k0Dg3Vee5D7bG+3wfNMegT
+ N8P1U1d7WDUd+8fqZeLlmrI37FKR/J8Cv7jlr459cSoDUOYvoclcNnqp64shRF0va5Q2
+ 3zpWK+VX+12Fxn5jSYdiwO1XC6BKa57nouPYA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965350; x=1699570150;
+ d=1e100.net; s=20230601; t=1698965352; x=1699570152;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4FZWD8y+8EeQ1EiLu7E2C4lV+BgA3Iv+5Jp1Yy7/0wE=;
- b=IQuvwpKWmuOTm2dPAgFOKPl43U+lnLtfjt+4pKVRPqx9M27YVZv6AruANqNERKp1cx
- meptxSQxrpobcrJhpnPgmEGoj5SoW1GvYlNautppwNSvX6329NY8s6RyPDvCNB53hBTj
- BGnR/DCjlyJLhc4bkTeNCw6HZZroS9VYqOdQBVgiFxuwBty5L0r4LcqTXG7WuoxZoM67
- hS+Hsau292FbS4wm12JOc3d7IFoTCVxBtjJiisTAMUfob2id6JUsWvvgMAUTdFzQQmbt
- x586KmvfugKgOgXXtwQaYYgmYj4JgpfeIjIv7Cgp/Mb3QVwQosL0sLJ6zvz8ecKnDOUU
- R9kA==
-X-Gm-Message-State: AOJu0YzKK4Jn2R5iC1ULljaCHrU5EkKqxqH89zryeF/nvKzLM5Th0KGb
- NafSKAu+olo8oF4N0O8TT4A3iPnZtA60CiRi7Csi2BvN03SPatp59po=
-X-Google-Smtp-Source: AGHT+IG+vJBzLieeEI08nTFJRiUwJEBQKBWNZ0KdcTcUb8aJDwhT+Q8VRAXDaREXolTjaWSzOdCbKSRbq2MBDG7OIn0=
-X-Received: by 2002:a25:7407:0:b0:da0:39ed:3ebb with SMTP id
- p7-20020a257407000000b00da039ed3ebbmr19434528ybc.3.1698965349846; Thu, 02 Nov
- 2023 15:49:09 -0700 (PDT)
+ bh=/ceuEWl/XLPp6jD2SwJe++hx+RYwxbm5SzhADhcryTc=;
+ b=tdSO56Koe2PisBHZo2axjS12YnYHtg/rTVGEJ2/GS3cgoY+kl8oydYrrIWt9RqEbmn
+ hrcQxwlqyrmwjyYtnsjyHGPyG62mwSLazL1+xP6Hi07/CzSgypqqpTCUEXr5R1dyh4eP
+ SE21OzYRZLYnfxppZ2H384ramK5Wn70xXKbQizkigCmDOXq0iytcji5JjdpEyDfXCxOV
+ Bu0MrF2QuNljUnOb3NzkRjse4jYG3+/nlYk7BZQyLz3jGj7HfVK/gfclYpXa5sRi9F+J
+ ntvlKxy1m1cAMIBsQ8ckkTxsPTJyD8VC2yRSkpBnGs/41ftYxNv+7mJu3VPwDwAIyw77
+ 4tdA==
+X-Gm-Message-State: AOJu0YxtOLOsFu/TDMoNDW7fqU3O+yMosX84wx1AKstVYDYlsGEjYw0Z
+ sRhZdROsDzBAZVYK2ewANdqZT7zDnkHTipKmKI66GDP87rvL2ZjfDgY=
+X-Google-Smtp-Source: AGHT+IF4KS1QL3llCW+hosAKZdXwAkakm0nzCxoct/8RQc2mj/rF4dUS/P/jZVXAP9m5J+Ha39/f6uvDO3dHKaSLE8w=
+X-Received: by 2002:a81:98d0:0:b0:59b:c0d7:6766 with SMTP id
+ p199-20020a8198d0000000b0059bc0d76766mr1084588ywg.37.1698965352440; Thu, 02
+ Nov 2023 15:49:12 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 2 Nov 2023 17:49:06 -0500
+ HTTPREST; Thu, 2 Nov 2023 17:49:07 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231024180342.GC496310@bill-the-cat>
-References: <20231024180342.GC496310@bill-the-cat>
- <20231024063047.20874-1-heinrich.schuchardt@canonical.com>
-Date: Thu, 2 Nov 2023 17:49:06 -0500
-X-Google-Sender-Auth: OkDwfBdKftRdfYP2TwZ6vwyEmsM
-Message-ID: <CAPnjgZ0K80wziHJxCeASzm63r8CEmUt7h-Rf_rtBdfbdq0kBew@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] sandbox: eliminate unused functions from binaries
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ1nA0bOBW4Kk+eFSJS7d=WF3DQBgVWauXTKvjdS_P6Qcg@mail.gmail.com>
+References: <CAPnjgZ1nA0bOBW4Kk+eFSJS7d=WF3DQBgVWauXTKvjdS_P6Qcg@mail.gmail.com>
+ <20231023080103.3780998-1-n-francis@ti.com>
+ <20231023080103.3780998-2-n-francis@ti.com>
+Date: Thu, 2 Nov 2023 17:49:07 -0500
+X-Google-Sender-Auth: V2tmW-1lQ3d67ZNWCsrEqNHUxYI
+Message-ID: <CAPnjgZ2Mfa+UV9U_M3wjYQVB9-OKsC2pZ7nkjQ5oJftK38bR7Q@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] binman: openssl: x509: ti_secure_rom: Add support
+ for bootcore_opts
+To: Simon Glass <sjg@chromium.org>
+Cc: trini@konsulko.com, alpernebiyasak@gmail.com, u-boot@lists.denx.de, 
+ vigneshr@ti.com, u-kumar1@ti.com, a-nandan@ti.com, 
+ Neha Malcom Francis <n-francis@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,20 +88,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 24, 2023 at 08:30:47AM +0200, Heinrich Schuchardt wrote:
-
-> The sandbox should closely mimic other architectures.
+On Mon, 23 Oct 2023 at 01:01, Neha Malcom Francis <n-francis@ti.com> wrote:
 >
-> Place each function or data in a separate section and let the linker
-> eliminate unused ones. This will reduce the binary size.
+> According to the TRMs of K3 platform of devices, the ROM boot image
+> format specifies a "Core Options Field" that provides the capability to
+> set the boot core in lockstep when set to 0 or to split mode when set
+> to 2. Add support for providing the same from the binman DTS. Also
+> modify existing test case for ensuring future coverage.
 >
-> In the linker script mark that u_boot_sandbox_getopt are to be kept.
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+> Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
+> Section 4.5.4.1 Boot Info
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Changes in v4:
+>         - corrected function comments, 0 for lockstep, 2 for split mode
+>
+> Changes in v3:
+>         - updated function comments
+>         - removed inconsistency in setting bootcore_opts to 32
+>
+> Changes in v2:
+>         - included TRM link in commit message
+>
+>  tools/binman/btool/openssl.py           |  6 ++++--
+>  tools/binman/entries.rst                |  1 +
+>  tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
+>  tools/binman/etype/x509_cert.py         |  3 ++-
+>  tools/binman/test/297_ti_secure_rom.dts |  1 +
+>  5 files changed, 17 insertions(+), 5 deletions(-)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
--- 
-Tom
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot-dm, thanks!
