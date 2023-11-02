@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51459C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 06:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E543C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 06:48:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98F9B87253;
-	Thu,  2 Nov 2023 07:46:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B30187703;
+	Thu,  2 Nov 2023 07:46:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m99/jeRv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aqYgzIES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD84786E88; Thu,  2 Nov 2023 07:46:39 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 86C0D876F5; Thu,  2 Nov 2023 07:46:42 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE95D87703
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 07:46:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 620918037B
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 07:46:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1cc5fa0e4d5so5276095ad.0
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 23:46:34 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1cc53d0030fso5273955ad.0
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 23:46:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698907592; x=1699512392; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1698907596; x=1699512396; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YJblxL503HrvYGakGMsGmRKvit2ltsCs9InMyBUP3XE=;
- b=m99/jeRvdAKBEp4IS/lTWcWeNxfYZD3zXU5egclx1h2ELttw579bLLc+VvDnT3G57F
- l6qeIZdhkTKt05lCWPTy/PJYUktA4pdfDPmLaBoergs+UFNLnB1JwQOH7O3UnxYt8Vhx
- eNAWJLhfR3oZZkAYC+obYI+OMdtSiVQPCGxaG1UKIdRkwkRsraxUoNqVFwUumeumz7OL
- DpLGn7soV5ZgG5cTSWNSntvUYOsr31Jah2A4B8HbDP1WMsA0ya+NL1W1sMWZIp/iCgi4
- 8+G50sVb1A+Vcei4tYosYFdlc+TScuEUdO+bKYBfgqffr54AEuiKiitahEGGHuWKHMEF
- L8dQ==
+ bh=cib8KL/yfgl91t4t3wFdlqpTDFoTGfWf+CPOfiYxJw8=;
+ b=aqYgzIESv8IBj4XSuzsz03fWelB4hb09QTVWCfBs0l+ttb12ngPUJZQf295/xOnGf2
+ mhUwzNidKhuUkPr0AOlGtatD0XF6tYNlCuc0VQ7cCHXILs63IEDZdlbgaxVqRu3WIvvh
+ 1XtaTL4Tx0dLQ5M+ce6CS6ac4c8/Jr0/P1b68HUyD/T4jA3fvrv2BU+MX83pZ1oaBGBp
+ cCMvEax6eEMPchSwJoiR4jEfJVKs/DUBm6+UvNA+wjSN/WNbwDmlEGXnrmStXhGIj1Ec
+ Xlc8Ku4X2E7n90mFTxqW2EBBR7QQBIlHPKjLPX3iCM9AOT0VAEYa/mQqJlVyFWcqkejX
+ mfiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698907592; x=1699512392;
+ d=1e100.net; s=20230601; t=1698907596; x=1699512396;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YJblxL503HrvYGakGMsGmRKvit2ltsCs9InMyBUP3XE=;
- b=obtMNAiFNVs1/yKPV7hokPQHYUsGnW8/J1uUZeKzwo+t+b5lLUsluSq3ECO26LVyu+
- 2qRU5yN/XzfeNB7X3CAjrA1py7F6uQd42dYR3nRxuNy+6oOJp/bDMWWRuEBpRReGBzg/
- LH4TqKNCvoxTIlfUxjkgsGjK/GtWq+Qk1hueikCvSzSFf1xYuApidbgWzkGC79snmTfg
- CEUVzsikbNBRqHrWRp6dYSqmL0tjXWyRrLV1ajtwFgwUYBYfpbD/EbRX/gtjUL57Votw
- 3E6rnwELF+1HiATT4LrZ1w0vxOKu8aQjZlthrAJZP0jbMRvhC3t9jfxv5gUKpM+zaF4I
- xmbg==
-X-Gm-Message-State: AOJu0Yx5BjwGQVTAvRKTGiHQ7Et0eAyavpydvwJP2xuHpGDFLRzgxC6j
- WgS4I344dUX8ByPxiPquJhxxmfuvBMqT/t+yq5U=
-X-Google-Smtp-Source: AGHT+IEDIXIuf0f3BrWnsn3nP7S03OPzm2WrldJw8b/L3K5ayvGGrt5/e6k5Jox+u4cMzn8dFZB6gw==
-X-Received: by 2002:a17:903:2346:b0:1cc:449b:41e2 with SMTP id
- c6-20020a170903234600b001cc449b41e2mr15777009plh.23.1698907592572; 
- Wed, 01 Nov 2023 23:46:32 -0700 (PDT)
+ bh=cib8KL/yfgl91t4t3wFdlqpTDFoTGfWf+CPOfiYxJw8=;
+ b=QU0CQ7zpKbZg0I6cAwk9+BCFlPfppV6aIHxwkUePHfiOiu1te/VgTxB/XvF0AT7jiR
+ unEoOx1MflNmC5Axsr402JuR8LxL08W4ZHn8sHVWtDzGC7TbgHMIFRsU4UZlTP34XXT9
+ GuBBWnA4S2GwtF0Ygu3PiPm2Lxuj5HZZ5i2SrLbKBO79A0i+DCVR5+kk6sgrLsymawHb
+ M+7RHPy/+6Ye7gNfL2Tz1HhbOPheb3XsyBQI2pXPj0Ka3fcbbxCI4jxRFImJPm1QMZ3M
+ Y1CX5+Lc8PU/sfGiV2S3i/EqjLVzeL5JfZTBA3pE85DjwvnReddeVu/WRd35MaEidMJN
+ SX0Q==
+X-Gm-Message-State: AOJu0YzWfx0WKzGJoEPNix8LRiRiLsM0NpovF63uBknOh8pNjpcyXRor
+ +Z8gXXsbbS/fE4+QMBKKyPfukLlwUH6XN6fgQZs=
+X-Google-Smtp-Source: AGHT+IESZCxMLARuT8zYTLewn2ta1DpIHxOf5Y4DOO7hRhOJd8zPtBLoFHYhNSTVFkS8GR7DeaF99A==
+X-Received: by 2002:a17:902:c948:b0:1cc:33e7:95f5 with SMTP id
+ i8-20020a170902c94800b001cc33e795f5mr6620210pla.33.1698907596394; 
+ Wed, 01 Nov 2023 23:46:36 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- z18-20020a170902ee1200b001cc2bc10510sm2328349plb.128.2023.11.01.23.46.31
+ ij6-20020a170902ab4600b001cc307bcdbdsm2389819plb.211.2023.11.01.23.46.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Nov 2023 23:46:31 -0700 (PDT)
+ Wed, 01 Nov 2023 23:46:35 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -71,10 +71,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v9 5/9] efi_loader: add missing const classifier for event
- service
-Date: Thu,  2 Nov 2023 15:44:55 +0900
-Message-Id: <20231102064459.3466953-6-masahisa.kojima@linaro.org>
+Subject: [PATCH v9 6/9] efi_loader: add return to efibootmgr event group
+Date: Thu,  2 Nov 2023 15:44:56 +0900
+Message-Id: <20231102064459.3466953-7-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231102064459.3466953-1-masahisa.kojima@linaro.org>
 References: <20231102064459.3466953-1-masahisa.kojima@linaro.org>
@@ -96,71 +95,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-const classifier is missing in EventGroup parameter of
-CreateEventEx(). Fix it to remove the compiler warning.
-
-NotifyContext parameter of CreateEventEx() is also defined
-with const in UEFI specification, but NotifyContext parameter
-of CreateEvent() is defined without const.
-Since current implementation calls the common efi_create_event()
-function from both CreateEventEx() and CreateEvent() services,
-NotifyContext parameter leaves as is.
+When the image loaded by efibootmgr returns, efibootmgr
+needs to clean the resources. Adding the event of returning
+to efibootmgr is useful to simplify the implementation.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 ---
- include/efi_api.h             | 2 +-
- include/efi_loader.h          | 2 +-
- lib/efi_loader/efi_boottime.c | 4 ++--
- 3 files changed, 4 insertions(+), 4 deletions(-)
+ cmd/bootefi.c                 | 12 ++++++++++++
+ include/efi_api.h             |  3 +++
+ include/efi_loader.h          |  2 ++
+ lib/efi_loader/efi_boottime.c |  3 +++
+ 4 files changed, 20 insertions(+)
 
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index 20e5c94a33..4d74969ad6 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -356,6 +356,7 @@ static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
+ 	efi_status_t ret;
+ 	efi_uintn_t exit_data_size = 0;
+ 	u16 *exit_data = NULL;
++	struct efi_event *evt;
+ 
+ 	/* On ARM switch from EL3 or secure mode to EL2 or non-secure mode */
+ 	switch_to_non_secure_mode();
+@@ -394,6 +395,17 @@ out:
+ 			log_err("Failed to remove loadfile2 for initrd\n");
+ 	}
+ 
++	/* Notify EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR event group. */
++	list_for_each_entry(evt, &efi_events, link) {
++		if (evt->group &&
++		    !guidcmp(evt->group,
++			     &efi_guid_event_group_return_to_efibootmgr)) {
++			efi_signal_event(evt);
++			EFI_CALL(systab.boottime->close_event(evt));
++			break;
++		}
++	}
++
+ 	/* Control is returned to U-Boot, disable EFI watchdog */
+ 	efi_set_watchdog(0);
+ 
 diff --git a/include/efi_api.h b/include/efi_api.h
-index 8f5ef5f680..c2d6964467 100644
+index c2d6964467..0e92cb8a7f 100644
 --- a/include/efi_api.h
 +++ b/include/efi_api.h
-@@ -192,7 +192,7 @@ struct efi_boot_services {
- 					struct efi_event *event,
- 					void *context),
- 				void *notify_context,
--				efi_guid_t *event_group,
-+				const efi_guid_t *event_group,
- 				struct efi_event **event);
- };
+@@ -404,6 +404,9 @@ struct efi_runtime_services {
+ #define EFI_EVENT_GROUP_RESET_SYSTEM \
+ 	EFI_GUID(0x62da6a56, 0x13fb, 0x485a, 0xa8, 0xda, \
+ 		 0xa3, 0xdd, 0x79, 0x12, 0xcb, 0x6b)
++#define EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR \
++	EFI_GUID(0xb4a40fe6, 0x9149, 0x4f29, 0x94, 0x47, \
++		 0x49, 0x38, 0x7a, 0x7f, 0xab, 0x87)
  
+ /* EFI Configuration Table and GUID definitions */
+ #define NULL_GUID \
 diff --git a/include/efi_loader.h b/include/efi_loader.h
-index e24410505f..e164e6067d 100644
+index e164e6067d..31954e84c3 100644
 --- a/include/efi_loader.h
 +++ b/include/efi_loader.h
-@@ -685,7 +685,7 @@ efi_status_t efi_create_event(uint32_t type, efi_uintn_t notify_tpl,
- 			      void (EFIAPI *notify_function) (
- 					struct efi_event *event,
- 					void *context),
--			      void *notify_context, efi_guid_t *group,
-+			      void *notify_context, const efi_guid_t *group,
- 			      struct efi_event **event);
- /* Call this to set a timer */
- efi_status_t efi_set_timer(struct efi_event *event, enum efi_timer_delay type,
+@@ -290,6 +290,8 @@ extern const efi_guid_t efi_guid_event_group_memory_map_change;
+ extern const efi_guid_t efi_guid_event_group_ready_to_boot;
+ /* event group ResetSystem() invoked (before ExitBootServices) */
+ extern const efi_guid_t efi_guid_event_group_reset_system;
++/* event group return to efibootmgr */
++extern const efi_guid_t efi_guid_event_group_return_to_efibootmgr;
+ /* GUID of the device tree table */
+ extern const efi_guid_t efi_guid_fdt;
+ extern const efi_guid_t efi_guid_loaded_image;
 diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 0b7579cb5a..f9b10a9763 100644
+index f9b10a9763..3767fa2db4 100644
 --- a/lib/efi_loader/efi_boottime.c
 +++ b/lib/efi_loader/efi_boottime.c
-@@ -712,7 +712,7 @@ efi_status_t efi_create_event(uint32_t type, efi_uintn_t notify_tpl,
- 			      void (EFIAPI *notify_function) (
- 					struct efi_event *event,
- 					void *context),
--			      void *notify_context, efi_guid_t *group,
-+			      void *notify_context, const efi_guid_t *group,
- 			      struct efi_event **event)
- {
- 	struct efi_event *evt;
-@@ -790,7 +790,7 @@ efi_status_t EFIAPI efi_create_event_ex(uint32_t type, efi_uintn_t notify_tpl,
- 							struct efi_event *event,
- 							void *context),
- 					void *notify_context,
--					efi_guid_t *event_group,
-+					const efi_guid_t *event_group,
- 					struct efi_event **event)
- {
- 	efi_status_t ret;
+@@ -90,6 +90,9 @@ const efi_guid_t efi_guid_event_group_ready_to_boot =
+ /* event group ResetSystem() invoked (before ExitBootServices) */
+ const efi_guid_t efi_guid_event_group_reset_system =
+ 			EFI_EVENT_GROUP_RESET_SYSTEM;
++/* event group return to efibootmgr */
++const efi_guid_t efi_guid_event_group_return_to_efibootmgr =
++			EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR;
+ /* GUIDs of the Load File and Load File2 protocols */
+ const efi_guid_t efi_guid_load_file_protocol = EFI_LOAD_FILE_PROTOCOL_GUID;
+ const efi_guid_t efi_guid_load_file2_protocol = EFI_LOAD_FILE2_PROTOCOL_GUID;
 -- 
 2.34.1
 
