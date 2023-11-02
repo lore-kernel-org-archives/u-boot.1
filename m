@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C7EC001B0
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E5B2C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:49:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB57786FA8;
-	Thu,  2 Nov 2023 23:46:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 99A3E8771C;
+	Thu,  2 Nov 2023 23:49:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TD45z+wj";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="acPPLQ4f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F05F887467; Thu,  2 Nov 2023 23:46:41 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 3C9AF87716; Thu,  2 Nov 2023 23:49:14 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6E4287713
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:46:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 608AF87467
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-d9beb863816so1515604276.1
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:46:36 -0700 (PDT)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5a7b91faf40so17660717b3.1
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965195; x=1699569995; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1698965348; x=1699570148; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=smHZlRvWEqbfImUmuKEa7bl5eK9Gwhlrj5CValZEpcQ=;
- b=TD45z+wjfdgIyOBs9qjyPRy01M8Hjg900ss6muF23ENddir+IwfNjS3T2+10vISEwf
- zBXIVTf79lMygCgRFlQyx7KH3nrqQNStuwQ5eUwYQak3Mc3NFeRYXejPxmaiiRoYPmCv
- FFHN4bnxotNQrLDjwOD5qEahpTUEPsdV5ICOU=
+ bh=AbvrCpKUAMUn7JT54Ux55HPk44On26eoi3BEk8XqZiw=;
+ b=acPPLQ4fbgwQoCgBCpIBH42AQIlPE1D30TAYoiKBRsPK4UDGJ6Uj7ylXMnvXDcCBZf
+ MkOJjYJRHv8ZNnqVlrxTc7PWmkMow9WneUaelEJKu1JwwQDaco4WGh96q2jV/7yCQp4T
+ O2YVCZRDkhIFTnZ4BbpMD+x1hYL3DEINZK35o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965195; x=1699569995;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1698965348; x=1699570148;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=smHZlRvWEqbfImUmuKEa7bl5eK9Gwhlrj5CValZEpcQ=;
- b=C/UFnH8Nxcow9f+jd6UcWKkliqZ+uGDjaHf8tqPwN/GXEAFf8Skb4yezeM2mm43UOW
- EdqkHZwE8NK3guQATyFE6u6kDijoC9VYGG6Qq2XZV9YyVZZ+irCtmxxCpdSBFRf0qQBp
- v7YZhChyaAvj0SGQ3uqSXCnPGu3RVO0BFmOi0oxap63duk7wzP3RRdkCtF5bgLT+dmX0
- 2JKRwTZKnHxcbNbMH2o62iXFEJTXLNo8W+qzwwZP2/DuaHwKpyzTw7RExJIp8603dRCW
- YRDeKOxHZwHTE/R/ncO0/6/kCBKWfcYK3PlALqqNC9sIPgPLztwRw2yNunwA2Rv3MvK9
- oiqQ==
-X-Gm-Message-State: AOJu0YwyCFhmvJqkZ1zigeBWWNzDzF6hWYUhM9FgHqS9+K4lU/rmnnga
- EoALvPY6PL9lIVBkNuSzrWqzXcCNE6RWHwydBcsh1Q==
-X-Google-Smtp-Source: AGHT+IGWJnZFmeNupXn+3L47RogUEj8qp1FWouG6PyvBCuVmBx+ktpDSqIx6vaay1ECglNIEUG+17LlQnxStKAnN7kM=
-X-Received: by 2002:a25:2f8e:0:b0:da0:47d8:4659 with SMTP id
- v136-20020a252f8e000000b00da047d84659mr16382052ybv.52.1698965195207; Thu, 02
- Nov 2023 15:46:35 -0700 (PDT)
+ bh=AbvrCpKUAMUn7JT54Ux55HPk44On26eoi3BEk8XqZiw=;
+ b=FaF03v5iafeL0mH8CXL0YgnbpKbjJjbg14q06B80DrQs5jUBowkIsaybVKil5A6SHE
+ TFKG87hSIw1a/k0kDGOETsbDwl8gdyER+ksMOf8lhTuSj7O8I0vxBg/6VddsMcnSU8+h
+ tlhdEgqml0zMgiFtq7fEzDxI9YzW/nPP8TkRuUuEyDFu8745PVBDrsQ/YGZfgsqW0h1j
+ D8TYuAYPO25GPMiQCdDrUEqvquAxXjA/0NLTunnnyFpRzlPgqkqhAymHI4GuEohOl6so
+ kRBKk0wlTJIn9gCDDR/BIu9SD+D7DvpQPi04CRoUUdldgrlTheeI/bakHqlRX9B1+7hY
+ uUfQ==
+X-Gm-Message-State: AOJu0YzW8ToC/NJfbO3hREC/+4ljVakWNRNXEOHVZPKr4rnNAVlAK8ZL
+ kPyvxToc1xukE7b/oqUmr51m4V2Y3qLUT+proMK25dE/hzbxU9J/VDg=
+X-Google-Smtp-Source: AGHT+IGpi3XqQtGdKJfKA/drEUCWMn9AfjCH5o9ac5+fWi/6CKmwb6BLUQQoPQxGZlh9po3cpqHws8yLUBgZCdojtgg=
+X-Received: by 2002:a0d:cb15:0:b0:59b:dbb7:5c74 with SMTP id
+ n21-20020a0dcb15000000b0059bdbb75c74mr1045712ywd.32.1698965347862; Thu, 02
+ Nov 2023 15:49:07 -0700 (PDT)
+Received: from 480794996271 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 2 Nov 2023 17:49:05 -0500
 MIME-Version: 1.0
-References: <20231031131208.435268-1-devarsht@ti.com>
- <20231031131208.435268-4-devarsht@ti.com>
-In-Reply-To: <20231031131208.435268-4-devarsht@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Nov 2023 22:46:07 +0000
-Message-ID: <CAPnjgZ2n8u6pYNoQ5n1qqQpZkDs-uM4-FMHbT4Pq6aZtt+ixjg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/5] common/board_f: Catch bloblist before starting
- resevations
-To: Devarsh Thakkar <devarsht@ti.com>
-Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
- bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
- yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
- a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
+In-Reply-To: <20231101171753.88754-1-sjg@chromium.org>
+References: <20231101171753.88754-1-sjg@chromium.org>
+Date: Thu, 2 Nov 2023 17:49:05 -0500
+X-Google-Sender-Auth: gWd2oqT4aw7htPdnZ2O-eVV2Qy8
+Message-ID: <CAPnjgZ2qrShdXjpVNmCVScU4qFLRNgP0GkJWUAcAE9wgr3SKsA@mail.gmail.com>
+Subject: Re: [PATCH] u_boot_pylib: Ensure subprocess is closed down
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,98 +83,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Devarsh,
+It isn't clear why we need to have two different paths for closing down
+the pipe. Unify them and use the Python to avoid this warning:
 
-On Tue, 31 Oct 2023 at 13:12, Devarsh Thakkar <devarsht@ti.com> wrote:
->
-> Start reservations needed for init sequence only after catching
-> bloblists from previous stage.
->
-> This is to avoid catching bloblists in the middle causing
-> gaps while u-boot is reserving.
->
-> Adjust the relocaddr as per video hand-off information
-> received from previous stage so that further reservations
-> start only after regions reserved for previous stages
->
-> Skip reservation for video memory if it was already
-> filled by a bloblist.
->
-> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-> ---
-> V2: Fix typo in commit title and checkpatch warnings/checks
-> ---
->  common/board_f.c | 33 ++++++++++++++++++++++++++++++---
->  1 file changed, 30 insertions(+), 3 deletions(-)
->
-> diff --git a/common/board_f.c b/common/board_f.c
-> index d4d7d01f8f..acf802c9cb 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -403,7 +403,7 @@ __weak int arch_reserve_mmu(void)
->         return 0;
->  }
->
-> -static int reserve_video(void)
-> +static int reserve_video_from_videoblob(void)
->  {
->         if (IS_ENABLED(CONFIG_SPL_VIDEO_HANDOFF) && spl_phase() > PHASE_SPL) {
->                 struct video_handoff *ho;
-> @@ -412,8 +412,34 @@ static int reserve_video(void)
->                 if (!ho)
->                         return log_msg_ret("blf", -ENOENT);
->                 video_reserve_from_bloblist(ho);
-> -               gd->relocaddr = ho->fb;
-> -       } else if (CONFIG_IS_ENABLED(VIDEO)) {
-> +
-> +               /* Sanity check fb from blob is before current relocaddr */
-> +               if (likely(gd->relocaddr > (unsigned long)ho->fb))
-> +                       gd->relocaddr = ho->fb;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +/*
-> + * Check if any bloblist received specifying reserved areas from previous stage and adjust
-> + * gd->relocaddr accordingly, so that we start reserving after pre-reserved areas
-> + * from previous stage.
-> + *
-> + * NOTE:
-> + * IT is recommended that all bloblists from previous stage are reserved from ram_top
-> + * as next stage will simply start reserving further regions after them.
-> + */
-> +static int setup_relocaddr_from_bloblist(void)
-> +{
-> +       reserve_video_from_videoblob();
-> +
-> +       return 0;
-> +}
-> +
-> +static int reserve_video(void)
-> +{
-> +       if (CONFIG_IS_ENABLED(VIDEO)) {
->                 ulong addr;
->                 int ret;
->
-> @@ -923,6 +949,7 @@ static const init_fnc_t init_sequence_f[] = {
->         reserve_pram,
->  #endif
->         reserve_round_4k,
-> +       setup_relocaddr_from_bloblist,
->         arch_reserve_mmu,
->         reserve_video,
+  subprocess.py:1127: ResourceWarning: subprocess 83531 is still running
 
-But you have renamed this function, so how does this commit build?
+Note that this code appears to originally have come from [1] and was
+committed into the ChromeOS chromiumos/platform/crosutils repo in the
+bin/cros_image_to_target.py file. The addition of the extra code path
+came later, so that is chosen for the fixes tag.
 
-buildman -b <branch> --board sandbox_spl
+[1] https://codereview.chromium.org/3391008
 
-might help?
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: a10fd93cbc patman: Make command methods return a CommandResult
+---
 
->         reserve_trace,
-> --
-> 2.34.1
->
+ tools/u_boot_pylib/command.py | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-Regards,
-Simon
+Applied to u-boot-dm, thanks!
