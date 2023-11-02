@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D977EC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37AAC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E00918774C;
-	Thu,  2 Nov 2023 23:49:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6820B8776E;
+	Thu,  2 Nov 2023 23:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A7o3MLyC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cokAFcpv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A72387743; Thu,  2 Nov 2023 23:49:25 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 5326C87768; Thu,  2 Nov 2023 23:49:28 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA2CF8774C
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AD4A876DF
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d9ac31cb051so1514722276.3
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:20 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5a8ee23f043so17873617b3.3
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965359; x=1699570159; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965362; x=1699570162; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tBSOqYYaT4Kyi6K35rL5yZ9LbwVT1zZdccyacJWxBBI=;
- b=A7o3MLyC62dyPVRbPd8NPorxGLTIAOR12O+LlhTV3NN4E6ovaDd9sCQaJHCQHT/qM5
- 1A4nnZyJ15/K5tc3kZ8orFY0eZ4g+WzSGc6UDbeYqHraXM/v4f0OM9MrwQYkdn8RPy/e
- mgI7u5Pu8gOzdkha/WZHDzi/0juUEumO7KTWs=
+ bh=UB6hchb2aUz65KgkgrVT6MXpSL1/cRrBXoAU9VjBvaw=;
+ b=cokAFcpvAzwQzPolyt7xPuyuw9iGH755lVZccXLvVGuSENDyGolGzYL7W5ZIoC3Mmj
+ n5gw4huef1hBC6RlE2ALJJefvkyeX+4+LrzWRKMvUsUDmN2yU+1qcPc2fuwfQ7IGtOAW
+ vW+MfrFoe1M0CUkUbBmDs/YWZTc7/vhuY0I2U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965359; x=1699570159;
+ d=1e100.net; s=20230601; t=1698965362; x=1699570162;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=tBSOqYYaT4Kyi6K35rL5yZ9LbwVT1zZdccyacJWxBBI=;
- b=TwL2kSYVusYAkpvhk9cPipv6kHvUaW51hO2hoHeIH/xdhxtSSDYX6lluVbFP9F633o
- v3Du4NAtoHpP+Bv/Xr90M80KjcBfj8d7G+kEhJuA+p9Nh1KhSTj43tY7KrLot3UsWDxW
- vxX5HK/FrEtEo08EKxK4iEeCzjD4bStgRhB3nSCdxRnrI0f/s0HGqASCIDiyFv3qNajA
- 5ERgSlAIkY4Mt6cGrCPnVWq3EM8N6U15pK1LbZno9BMf2Avmw5tq+hUoRJKhI/4ge00n
- 1ALkNm81o1/9dSsiWUUwjU2rIk3uj1EIK4H9SphYqKncsXUugTc73f9xt7OeNj1DVtwW
- M44w==
-X-Gm-Message-State: AOJu0YwI1iw9/fCmlE3+qhzCuUmKeLLI3L3p3n9+EpTZBVjaYqbpMapN
- znrEIT3ldnG2AoC+lK7DaCh/TMZAkchvZvTMhMwOQg==
-X-Google-Smtp-Source: AGHT+IGZCNKcJWmMSHASwxZ9aiMw60KT0gFwenfO9h2gMFznH3Edxdwr5xpj9owvKZTgGNU37+IABUvemeUWwU4jyPE=
-X-Received: by 2002:a25:ab03:0:b0:d80:1604:f6e9 with SMTP id
- u3-20020a25ab03000000b00d801604f6e9mr20425163ybi.44.1698965359215; Thu, 02
- Nov 2023 15:49:19 -0700 (PDT)
+ bh=UB6hchb2aUz65KgkgrVT6MXpSL1/cRrBXoAU9VjBvaw=;
+ b=lw3401v7sMrWSH17Cqogq37vc1yfzBTeHH6dcdcU0uEF9Mu3YA/H1PtGTGYGS2B2xT
+ YXOQaYjxdVxt8aCIcB6YjyDEASqCpq6gcz6Og0kLEU3XK1wpJTc+BpEgAzXezKXcalrg
+ AphOlbqSe9U4RLYiZ9a93OmuAIICwavmcUUoTIXv7X4nkV4dw/bV5dpIV7Mesa2PABN8
+ Lj8maFS+B5AKER2KtVmkOwzhtvZtDYOl7Rl5ZdQ2zoedzngJTRLcaC4lSHiiRFfQQygw
+ KH4nlK1FU1rHWzUGkHZ+9PzmA7A5INy5lw4VJEp6fCScuVimO6yZ8pvBtLS+V4L82NQT
+ tqDg==
+X-Gm-Message-State: AOJu0Yxx++HpufUWltO3z0YiHzIqGJqVMimJQOhlHu1g/h40gTlaFf4t
+ A3WstA/UrI+x5w2M/9UTa2y2932o4qgAM2IrxeVr+w==
+X-Google-Smtp-Source: AGHT+IFWA9n9yms2tPDE/h27q7fzMBS2R0W/Z8b3lyYQHQhuBPuOYV5W48jN8Dr7mwXOKPgEGMvK9T+GZ1SExTBxVRI=
+X-Received: by 2002:a81:4f93:0:b0:59c:678:7a32 with SMTP id
+ d141-20020a814f93000000b0059c06787a32mr1213788ywb.29.1698965361982; Thu, 02
+ Nov 2023 15:49:21 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 2 Nov 2023 17:49:13 -0500
+ HTTPREST; Thu, 2 Nov 2023 17:49:16 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231014204033.3077052-7-sjg@chromium.org>
-References: <20231014204033.3077052-7-sjg@chromium.org>
+In-Reply-To: <20231014204033.3077052-6-sjg@chromium.org>
+References: <20231014204033.3077052-6-sjg@chromium.org>
  <20231014204033.3077052-1-sjg@chromium.org>
-Date: Thu, 2 Nov 2023 17:49:13 -0500
-X-Google-Sender-Auth: iV2sDkru-UvHXeYGJAQdU6G2Pq8
-Message-ID: <CAPnjgZ2OZU_HjqUVrtnXeEAPA=3j5KQ11-Z8=w-LAXVj71n6-A@mail.gmail.com>
-Subject: Re: [PATCH 6/6] binman: Move stage header into a CBFS attribute
+Date: Thu, 2 Nov 2023 17:49:15 -0500
+X-Google-Sender-Auth: UVC7czbKMlpX86Vm7wfFYeekFxM
+Message-ID: <CAPnjgZ2CdcwWu0nLs1uFNF17WG=J=SgiJmPmzDPbr+m4Pxdk+A@mail.gmail.com>
+Subject: Re: [PATCH 5/6] binman: Rename TYPE_STAGE to TYPE_LEGACY_STAGE
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -88,16 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-cbfsutil completely changed the way that stages are formatted in CBFS.
-Adjust the binman implementation to do the same.
-
-This mirrors commit 81dc20e744 in coreboot.
+In preparation for changing how stages are stored, rename the existing
+stage tag.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/cbfs_util.py      | 64 +++++++++++++++++++++-------------
- tools/binman/cbfs_util_test.py |  7 ++--
- 2 files changed, 42 insertions(+), 29 deletions(-)
+ cmd/cbfs.c                     |  2 +-
+ include/cbfs.h                 |  2 +-
+ tools/binman/cbfs_util.py      | 12 ++++++------
+ tools/binman/cbfs_util_test.py |  3 ++-
+ 4 files changed, 10 insertions(+), 9 deletions(-)
 
 Applied to u-boot-dm, thanks!
