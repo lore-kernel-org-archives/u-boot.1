@@ -4,77 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F94C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  1 Nov 2023 23:23:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD29DC4167D
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 02:12:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B2E5870FF;
-	Thu,  2 Nov 2023 00:23:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F5FC8763B;
+	Thu,  2 Nov 2023 03:11:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mIQc6R0A";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="ngCQYuzc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8299875A8; Thu,  2 Nov 2023 00:23:00 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3C31487650; Thu,  2 Nov 2023 03:11:37 +0100 (CET)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41C70870FF
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 00:22:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D424875F5
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 03:11:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-41cd1fe4645so1389211cf.0
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 16:22:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1698880956; x=1699485756; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I/ve4MCFRvTWPwSzul0FpDsXAzgxlc0fbht+L1YnbPs=;
- b=mIQc6R0A5We6MTih+Qb1ECp3ErXGzOjm7+OYBC4vYGFPteweBeGFIhnYFsvJ4wKP3c
- UPTQ49/C1J1HgFs+QzuCwGjzW4gZhA9q4FdmCPyhqrDCb6bmeWpfNBSzAoQD6M6ETTe9
- FkNmghkP7goUmeo9cnG51e4jD+tUB2A8es40I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698880956; x=1699485756;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=I/ve4MCFRvTWPwSzul0FpDsXAzgxlc0fbht+L1YnbPs=;
- b=cd3PDpOnWftKFcniUZJnOn9t/h7u/faOiNOpu0FFPtYDit/RYxIIc+sKAKCRaxqUw3
- qFW1t4yP42EzqAbchNhwpuul9hCBxYskFJ9i+ycXXj00azrzoY2UXLAJMTmuoRiUqkMQ
- 4NIPNR1XHnWDjcfUmK9YuLr5EmIaQxuxEXkDTnnRCiFgENWVqTqoiPWdJ9llHx4b9BTA
- E3TeX+xjjt5S+2mCAeobbpRqRNhGkv7EcN4mV33C1P/E0lCDOOjzIeiiFucWRqBTSGhT
- BGHbLYw+W3BfujFG2+5HJU3TgubMIPRXw/VZjOg4RbMIhHA0cMJeIwrEgNxxylg9//vQ
- aiog==
-X-Gm-Message-State: AOJu0YzHgUjJ2h99tLxYPfac0DcZAMiyhTaNntq+8SmP13l006a0415Y
- FEvVWywpLfq1SgDHUznZxZ96/g==
-X-Google-Smtp-Source: AGHT+IF50R0oDu7YLZTaq7LmUkM13NIc5aHIZHY89otHKIKDk8NPKUpVhtvGqgjYDlhhYYd/8IpeBQ==
-X-Received: by 2002:a05:622a:1a8d:b0:41c:c3ad:922d with SMTP id
- s13-20020a05622a1a8d00b0041cc3ad922dmr19310351qtc.52.1698880955967; 
- Wed, 01 Nov 2023 16:22:35 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- r9-20020ac87949000000b004181c32dcc3sm1793170qtt.16.2023.11.01.16.22.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Nov 2023 16:22:35 -0700 (PDT)
-Date: Wed, 1 Nov 2023 19:22:33 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Pavel Korotkevich <pawday@mail.ru>, u-boot@lists.denx.de
-Subject: Re: cli: Add explicit kconfig dependency for CONFIG_IS_ENABLED macro
-Message-ID: <20231101232233.GD496310@bill-the-cat>
-References: <24370129-51c8-5a0f-4c3a-3c3a86e65968@mail.ru>
- <142fae2e-7d24-581f-4974-b98237e54681@gmail.com>
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20231102021124epoutp0450c3c36211926bdccc4509d4c13c8cbe~TrHCiRi871539615396epoutp04e
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 02:11:24 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20231102021124epoutp0450c3c36211926bdccc4509d4c13c8cbe~TrHCiRi871539615396epoutp04e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1698891084;
+ bh=dNsHB4kZxAm1dJyleY8DkcrIn3L74RNY8MJONVoo5jI=;
+ h=Date:Subject:To:From:In-Reply-To:References:From;
+ b=ngCQYuzcTSRA39WppYt9PjgW0m8oVs4gBOV47+JFY7A99qCo8HEZ4VbZ9jV2UT8FG
+ A1AkXAbc7HvG+3hw0S7bCEdD9pP2+nSfXyWCFT7JohMveASGJUCxIxqut05gshxyGL
+ 5EWyBV5s64dOUbWKXYCalk5IUhXwKPbSLLgM+ua8=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20231102021123epcas1p307b30de5aaf194cc764faf8351b8e1f4~TrHCOEoVw3242532425epcas1p3F;
+ Thu,  2 Nov 2023 02:11:23 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4SLS6L37R3z4x9Q6; Thu,  2 Nov
+ 2023 02:11:22 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 62.5B.09731.A4503456; Thu,  2 Nov 2023 11:11:22 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a~TrHAlbrEj2061720617epcas1p2v;
+ Thu,  2 Nov 2023 02:11:22 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20231102021122epsmtrp11a8d82c6fdf84ea45d3a2ad291e9db4a~TrHAkyesc2153521535epsmtrp1i;
+ Thu,  2 Nov 2023 02:11:22 +0000 (GMT)
+X-AuditID: b6c32a36-a7dff70000002603-6a-6543054a0b81
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ FD.0F.08755.94503456; Thu,  2 Nov 2023 11:11:22 +0900 (KST)
+Received: from [10.113.113.235] (unknown [10.113.113.235]) by
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20231102021121epsmtip1ab32541e4d4bfbe6ccadba2cfe6ee849~TrHASRdAa0400304003epsmtip1O;
+ Thu,  2 Nov 2023 02:11:21 +0000 (GMT)
+Message-ID: <3e69afd5-4204-4fbb-84cf-af6ad5865a6b@samsung.com>
+Date: Thu, 2 Nov 2023 11:11:21 +0900
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OeND2phzpNaswbmn"
-Content-Disposition: inline
-In-Reply-To: <142fae2e-7d24-581f-4974-b98237e54681@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/8] mmc: renesas-sdhi: Drop <common.h>
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de, Marek
+ Vasut <marek.vasut+renesas@mailbox.org>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>, Peng Fan
+ <peng.fan@nxp.com>
+From: Jaehoon Chung <jh80.chung@samsung.com>
+In-Reply-To: <20231101200600.119507-5-paul.barker.ct@bp.renesas.com>
+Content-Transfer-Encoding: 7bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBJsWRmVeSWpSXmKPExsWy7bCmnq4Xq3OqwdvnYhbbVzUzW7xtLrZo
+ XXmHzeLPyR+sFj9WfWG1eLu3k92BzWPli9nsHmfv7GD02Dl7H5PHgcnnWD02vtvB5PHtzESW
+ ALaobJuM1MSU1CKF1Lzk/JTMvHRbJe/geOd4UzMDQ11DSwtzJYW8xNxUWyUXnwBdt8wcoDOU
+ FMoSc0qBQgGJxcVK+nY2RfmlJakKGfnFJbZKqQUpOQWmBXrFibnFpXnpenmpJVaGBgZGpkCF
+ CdkZj48fZSu4xlrx/v975gbGiyxdjBwcEgImEl/2CncxcnEICexglDi74gcrhPOJUWLBpZlM
+ EM43Rom2v1MZuxg5wTpOfDsJVbWXUeJF+xYWCOc9o8TthkmsIHN5BewkFk9yBTFZBFQkdmyI
+ A+nlFRCUODnzCQuILSogL3H/1gx2EFtYwFri9MN/YPOZBcQlbj2ZD7ZYROApo8S9VW+YQBJs
+ AjoS278dB7M5BVwkjq1bxwbRIC+x/e0cZpAGCYFODolbb+cwQvzmInF6UyTE0cISr45vYYew
+ pSRe9rexQ9Q3M0osXXKQFcLpYZT413CdDaLKWGL/0slMIIOYBTQl1u/ShwgrSuz8PRfqUj6J
+ d197WCF28Up0tAlBlKhIXHr9kglm190n/1khbA+JRWcPskHC6iKjxNWNDSwTGBVmIQXMLKQA
+ mIXkt1kIVyxgZFnFKJZaUJybnlpsWGAEj+3k/NxNjOAkqmW2g3HS2w96hxiZOBgPMUpwMCuJ
+ 8B42dUgV4k1JrKxKLcqPLyrNSS0+xGgKjJ2JzFKiyfnANJ5XEm9oYmlgYmZkbGJhaGaoJM47
+ 53FvipBAemJJanZqakFqEUwfEwenVAMTC1+j2Z2SV/qKSrYdJpWaEheO/Spz4mlvNz2u9va7
+ o/QZN8vi/ymiPaenbFy7ZsfyxYZKKcefnzoocVPURF8vY+u8UCX9hD0rtjXMv3VnUgpnulz6
+ ZuGty5a+efDr44V7GQ08iW+5D+693jzRkdtp+VNH5fJFH2T2BKz67MM0sWPRsU2dIc+ijrJY
+ TnOxulwfYFnygu0yu1HapMsmc4+57y4sL759NKWT9wzb1++3hNYHcl7Qjyi7+17FS+RwiMeq
+ 6pRHHzSSJCw9z7N83zavW9Ou1+7XrL6jE5sFFwvntT028Tu3/3DA0qnuneW++xsTBJcd+91t
+ v1RgsiTfl6mrc0KNTFVc4jdyLZwVtfeaEktxRqKhFnNRcSIAPuSs8CsEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGLMWRmVeSWpSXmKPExsWy7bCSnK4Xq3Oqwcw8i+2rmpkt3jYXW7Su
+ vMNm8efkD1aLH6u+sFq83dvJ7sDmsfLFbHaPs3d2MHrsnL2PyePA5HOsHhvf7WDy+HZmIksA
+ WxSXTUpqTmZZapG+XQJXxuPjR9kKrrFWvP//nrmB8SJLFyMnh4SAicSJbydZuxi5OIQEdjNK
+ nF22mRUiISXx+elUti5GDiBbWOLw4WKImreMEnd3/mcHifMK2EksnuQKYrIIqEjs2BAH0skr
+ IChxcuYTsPGiAvIS92/NYAexhQWsJU4//McIYjMLiEvcejKfCWSkiMBTRolZjdvA1goJ1Eoc
+ aH/GBGKzCehIbP92HMzmFHCROLZuHdg5zALqEuvnCUHMkZfY/nYO8wRGwVlIVs9CsmIWQscs
+ JB0LGFlWMUqmFhTnpucWGxYY5qWW6xUn5haX5qXrJefnbmIER4WW5g7G7as+6B1iZOJgPMQo
+ wcGsJMJ72NQhVYg3JbGyKrUoP76oNCe1+BCjNAeLkjiv+IveFCGB9MSS1OzU1ILUIpgsEwen
+ VAPTPm7LeCe7G7vffOU2s3e6tEDw+s3fbw/9F3n82+dO/43I/9q9Cief3hDfKzJ7h9/jhyZa
+ hzbtCePhXK3+ZdUex+rfdpOVTf8WJ3qbMLxfxtx+5barqYHl4t0akqyVJwoXBewOu+7B/myZ
+ fN2Kb0yyTt2pj25M9zaa47ZOledGy6ZJe6c8r4+s5S4LX1S44hj3xcnrVX79//d7rdft20VG
+ 22bmHz/m9ephgc3HfkN/TZ4LFoa79WU/THm18Gd6WsSa4olv3u9fn3lXoWXjzrL9wqo7Bd2r
+ 6i75LbCd/G7OpJSLQmlf+pu+RE6w2fu+wWLNMtVEWd09q4+yfXuYcszael4Cp6jx/PdCCS8X
+ SjuubFZiKc5INNRiLipOBACAcie6+QIAAA==
+X-CMS-MailID: 20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: SVC_REQ_APPROVE
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a
+References: <20231101200600.119507-1-paul.barker.ct@bp.renesas.com>
+ <20231101200600.119507-5-paul.barker.ct@bp.renesas.com>
+ <CGME20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a@epcas1p2.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,60 +136,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/2/23 05:05, Paul Barker wrote:
+> In line with changes elsewhere, drop inclusion of the common header.
+> 
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
---OeND2phzpNaswbmn
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-On Wed, Nov 01, 2023 at 02:32:06PM -0400, Sean Anderson wrote:
-> On 8/5/23 19:32, Pavel Korotkevich wrote:
-> >  From fe2ceb7c4365112055ecfc3bbf68ad47330b744d Mon Sep 17 00:00:00 2001
-> > From: Pavel Korotkevich <pawday@mail.ru>
-> > Date: Sun, 6 Aug 2023 02:00:41 +0300
-> > Subject: [PATCH] cli: Add explicit kconfig dependency for CONFIG_IS_ENA=
-BLED macro
->=20
-> Please add a suitable commit message and use `git send-email` (or similar=
-) to send your patches.
->=20
-> --Sean
->=20
-> > ---
-> >  =A0include/cli.h | 2 ++
-> >  =A01 file changed, 2 insertions(+)
-> >=20
-> > diff --git a/include/cli.h b/include/cli.h
-> > index 094a6602d7..d6dbbde070 100644
-> > --- a/include/cli.h
-> > +++ b/include/cli.h
-> > @@ -9,6 +9,8 @@
-> >=20
-> >  =A0#include <stdbool.h>
-> >=20
-> > +#include <linux/kconfig.h>
+Best Regards,
+Jaehoon Chung
 
-This is a hard NAK, that file is -included by the build.
+> ---
+>  drivers/mmc/renesas-sdhi.c | 1 -
+>  1 file changed, 1 deletion(-)
+> 
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 865efdd32184..8cd501c5f7c7 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
+>   */
+>  
+> -#include <common.h>
+>  #include <bouncebuf.h>
+>  #include <clk.h>
+>  #include <fdtdec.h>
 
---=20
-Tom
-
---OeND2phzpNaswbmn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVC3bkACgkQFHw5/5Y0
-tyzvQQv/ZULbs86KCAZJyN6V8RkF12CzHRGC7aD4wZgXirkwQPiIKiG7TJdW2SRn
-gjVTzkcaIau6yguyeTZ9fqXsBe6ftD8EDpCaU+Al4kU+2eMYairgSdBHpoowplZG
-har3TpbhYE+zvehID/ZF34PXCRRVC8p/pcEkUj8XNMS0D69sg0vI8weZlq6NJ5OX
-IpEwLVQacfTtrf14Fckd4JWMEG01vQB/ypSSUDiDqIWR66P86ydko5daEIN57xRz
-sJVslOax4CRJ2y1pbVfh5bYCcOpsSizrOdvhrwjtRT1p5ii/SS7+4nTIzVhAxF3l
-fL1rc1oI6m2aP4hrkHr74Eb3To8sTy+QfOtDcA5vrzJ64OKpZWG2CyT7J1Irq1wA
-rr2wyaOKvJSIaPlWS//u8To/2lJa0rIhwWv+sPqfrE/M7b3T+rM39n1qnBs5rX4h
-Tb8z10hOAerd7Vep6rjrgD2+y/PgIJzHosb8QMzSiYF0eShNLTa/x5HOvR+uAI8Z
-PGy6SQDa
-=hl6A
------END PGP SIGNATURE-----
-
---OeND2phzpNaswbmn--
