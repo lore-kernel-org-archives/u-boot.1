@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5792EC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 14:18:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A9DC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 14:20:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C61D187780;
-	Thu,  2 Nov 2023 15:18:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5DCFC877C4;
+	Thu,  2 Nov 2023 15:20:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MpZ842gZ";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="T3vDdLNQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 540B686FAE; Thu,  2 Nov 2023 15:18:39 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id DAFD9877C6; Thu,  2 Nov 2023 15:20:11 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D83E877B7
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 15:18:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01CF486FAE
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 15:20:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-d8a000f6a51so994582276.3
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 07:18:34 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3b2e22f1937so526679b6e.1
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 07:20:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1698934713; x=1699539513;
+ d=amarulasolutions.com; s=google; t=1698934804; x=1699539604;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eb5mhuPn7jT+oYlI6jH1G46J2tGTP8z6XJ/M6FCrbRg=;
- b=MpZ842gZ2PYCrfL/xXe9aphnGZfflM1Z//yJjbHAprRlUMseYYea86eQ7wnRGLnon9
- W9qZ6ZXGEVWpZHW5Bgt8nrqgRyPZwVCYnXDNV1dN1xPSsnZqnmQVPKd5MCKGedU6vAze
- UkKvXNdMI80Pp8hwGkE3OY0CQUKl8BiXV6b3o=
+ bh=5c7Lk+lR/88MoMNme8CBmqXsd/i0nQQtNr10vppG5yI=;
+ b=T3vDdLNQVYZJ+pabcgS+5961MKubF8mYY4biRfwplRDyavUA2hfaU7jIqMiCOINo2L
+ qG13+nefvbBDJDE1oEcsxTrKyhT2InwgBDmbMAexf/Cm41byjc05Gy/pdRbOe8yRS6Yl
+ w3pqrTeYvUtzcswJU6HMOIPUm/fvgLmv9+y6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698934713; x=1699539513;
+ d=1e100.net; s=20230601; t=1698934804; x=1699539604;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eb5mhuPn7jT+oYlI6jH1G46J2tGTP8z6XJ/M6FCrbRg=;
- b=E1MOi8K5OVUFvSZhIyAOc7Fvuy1O4O7fP/O4q5t0Ge3CT2nUDJhfmyJAa944sAbj37
- 7K6c9U0muudACjp4/v40emXxasl5YPgmZ816WwVFw/Mq4U8ZWi1GBF+y3Hb3EfeLGUiK
- w3I5cG6ocpIx72V9P7W7FAfhYTilXnfMbz8S3Huk36NaHWuHaPPftgtk2xcH9WPp02LI
- C2IyEWO1lsSHsrorZmqvJZt2663vC8smvrzkkl1gitt9I8hbPr+KXulVlQ8WSt0IDezf
- yFBoNRuxI+I8tY2G45lj1xmidAkLDg0GZoOU9paE8dlx6kgY975FLyUq4nOmAnd9I14x
- Fxug==
-X-Gm-Message-State: AOJu0YwCPQiGoTFkIWt9Jat9OrYXyD04byzEHDwx2VxXK0Q5LzU0arXI
- G5qdox88i+GHLLQQLp6wI6MIq1AMtEzX6xh6zNiQ3A==
-X-Google-Smtp-Source: AGHT+IFtonTJQwCas5KIWdNmDhX0PW9c63VL7HABUAG8YmC2swqjPMZKyJpzp+lmvOAOBI1rtdCY8x1iVNhJngVaslY=
-X-Received: by 2002:a25:5f0e:0:b0:d9a:c946:c18a with SMTP id
- t14-20020a255f0e000000b00d9ac946c18amr17039761ybb.28.1698934713179; Thu, 02
- Nov 2023 07:18:33 -0700 (PDT)
+ bh=5c7Lk+lR/88MoMNme8CBmqXsd/i0nQQtNr10vppG5yI=;
+ b=pSC2DHwXLMZ0POAjkCBeMOXmbaw5vDH17oiIRvbTszClx6Fukh9BbeezMiNKZmwZYl
+ ZFYS8DbH0Ahv4GwpWVOY7SOlC1gUwf6FXv7Zby4K7DDenI97UaLuvkLULHc+yTmpqxuZ
+ f9eIB72q7FHt+gTK3of8+frUAAR8nie4dvXddBhyrt8KJSRouQNrC7tnlwXHLotoqX1V
+ xh0Wo10VZzazSQSR5pqhuWZzi3TwLZ64gfaOqW5aNqkG7hg5My2Sh+a+Z/XY1z4aJjv0
+ utq4U6QlSDvj5fhaIfDR4FDhccHhxJJ4mIQOdS24ssKwoxLbdxwtXW7MOqjj4MXwgm/5
+ chuA==
+X-Gm-Message-State: AOJu0YwCz+jp6fQpPojA9FAtWg9jz4DJbD65kU418tAaPs31CytIf/LP
+ 5vx2MMdSgX4gBg/M6Ct6iQpuqjaWI1oWI0+k+5FTFQ==
+X-Google-Smtp-Source: AGHT+IF9B8R0V0agBNmCgBYAba6FMvfyrFV/HpF2D6Kh19iaGiDYxN582XgHizpD0SG7o7V32X76nQszyJ6Mk2ctI2w=
+X-Received: by 2002:a05:6808:aaf:b0:3a8:f3e7:d696 with SMTP id
+ r15-20020a0568080aaf00b003a8f3e7d696mr19147532oij.45.1698934804198; Thu, 02
+ Nov 2023 07:20:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231029034845.1169614-1-seanga2@gmail.com>
- <CABGWkvq_Yw2Q7ZX9UeaO6a0Uf6V+-1Uh6BNOga6neq_tUVQNFA@mail.gmail.com>
- <b0f0c63e-e8b4-ba15-19c0-aca39a8f621b@gmail.com>
- <CABGWkvquxkPBVKeE2TMCOFcwfDGhh_ynH5gnU7FXO7x=TWqPjA@mail.gmail.com>
- <fd7d7511-6554-4746-ddf7-cab9de02fa8c@gmail.com>
-In-Reply-To: <fd7d7511-6554-4746-ddf7-cab9de02fa8c@gmail.com>
+ <20231029034845.1169614-4-seanga2@gmail.com>
+ <CABGWkvoD4gkLzp5XrV3d6iuupCPimRPpgOgQNV_7C6YgZtCqrg@mail.gmail.com>
+ <4d592edb-8f59-a13b-2c03-4798e73d372e@gmail.com>
+In-Reply-To: <4d592edb-8f59-a13b-2c03-4798e73d372e@gmail.com>
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Thu, 2 Nov 2023 15:18:22 +0100
-Message-ID: <CABGWkvo5_P332dFDf5hXrC1vv7XCx2rprFTaVKcKQtQf1f5w2g@mail.gmail.com>
-Subject: Re: [PATCH 00/15] nand: Add sandbox tests
+Date: Thu, 2 Nov 2023 15:19:53 +0100
+Message-ID: <CABGWkvqcax+jEBbLMSwd92KwcTG6HseO1YEu_zgndtfEe+wEzQ@mail.gmail.com>
+Subject: Re: [PATCH 03/15] nand: Calculate SYS_NAND_PAGE_COUNT automatically
 To: Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Michael Trimarchi <michael@amarulasolutions.com>, 
- Tom Rini <trini@konsulko.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Heiko Schocher <hs@denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, 
- Weijie Gao <weijie.gao@mediatek.com>
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,254 +88,827 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 2, 2023 at 3:13=E2=80=AFPM Sean Anderson <seanga2@gmail.com> wr=
+Sean, All
+
+On Thu, Nov 2, 2023 at 3:17=E2=80=AFPM Sean Anderson <seanga2@gmail.com> wr=
 ote:
 >
-> On 11/2/23 10:08, Dario Binacchi wrote:
-> > On Thu, Nov 2, 2023 at 3:06=E2=80=AFPM Sean Anderson <seanga2@gmail.com=
-> wrote:
+> On 11/2/23 05:53, Dario Binacchi wrote:
+> > Sean, All
+> >
+> > On Sun, Oct 29, 2023 at 4:48=E2=80=AFAM Sean Anderson <seanga2@gmail.co=
+m> wrote:
 > >>
-> >> On 11/2/23 10:01, Dario Binacchi wrote:
-> >>> Sean, All,
-> >>>
-> >>> On Sun, Oct 29, 2023 at 4:48=E2=80=AFAM Sean Anderson <seanga2@gmail.=
-com> wrote:
-> >>>>
-> >>>> This series tests raw nand flash in sandbox and fixes various bugs d=
-iscovered in
-> >>>> the process. I've tried to do things in a contemporary manner, avoid=
-ing the
-> >>>> (numerous) variations present on only a few boards. The test is pret=
-ty minimal.
-> >>>> Future work could test the rest of the nand API as well as the MTD A=
-PI.
-> >>>>
-> >>>> Bloat at [1] (for boards with SPL_NAND_SUPPORT enabled). Almost
-> >>>> everything grows by a few bytes due to nand_page_size. A few boards =
-grow more,
-> >>>> mostly those using nand_spl_loaders.c.
-> >>>>
-> >>>> [1] https://gist.github.com/Forty-Bot/9694f3401893c9e706ccc374922de6=
-c2
-> >>>>
-> >>>>
-> >>>> Sean Anderson (15):
-> >>>>     spl: nand: Fix NULL-pointer dereference
-> >>>>     nand: Don't dereference NULL manufacturer_desc
-> >>>>     nand: Calculate SYS_NAND_PAGE_COUNT automatically
-> >>>>     nand: spl_loaders: Only read enough pages to load the image
-> >>>>     spl: legacy: Honor bl_len when decompressing
-> >>>>     spl: nand: Set bl_len to page size
-> >>>>     cmd: nand: Map memory before accessing it
-> >>>>     spl: nand: Map memory before accessing it
-> >>>>     mtd: Rename SPL_MTD_SUPPORT to SPL_MTD
-> >>>>     mtd: Add some fallbacks for add/del_mtd_device
-> >>>>     nand: Add function to unregister NAND devices
-> >>>>     nand: Allow reinitialization
-> >>>>     arch: sandbox: Add function to create temporary files
-> >>>>     nand: Add sandbox driver
-> >>>>     test: spl: Add a test for NAND
-> >>>>
-> >>>>    README                                        |   9 +-
-> >>>>    arch/sandbox/cpu/os.c                         |  17 +
-> >>>>    arch/sandbox/dts/test.dts                     |  67 ++
-> >>>>    arch/sandbox/include/asm/spl.h                |   1 +
-> >>>>    cmd/nand.c                                    |  26 +-
-> >>>>    common/spl/Kconfig                            |   2 +-
-> >>>>    common/spl/spl_legacy.c                       |  18 +-
-> >>>>    common/spl/spl_nand.c                         |  22 +-
-> >>>>    configs/am335x_baltos_defconfig               |   3 +-
-> >>>>    configs/am335x_evm_defconfig                  |   3 +-
-> >>>>    configs/am335x_evm_spiboot_defconfig          |   2 +-
-> >>>>    configs/am335x_guardian_defconfig             |   1 -
-> >>>>    configs/am335x_hs_evm_defconfig               |   2 +-
-> >>>>    configs/am335x_hs_evm_uart_defconfig          |   2 +-
-> >>>>    configs/am335x_igep003x_defconfig             |   3 +-
-> >>>>    configs/am335x_sl50_defconfig                 |   2 +-
-> >>>>    configs/am3517_evm_defconfig                  |   3 +-
-> >>>>    configs/am43xx_evm_defconfig                  |   3 +-
-> >>>>    configs/am43xx_evm_rtconly_defconfig          |   3 +-
-> >>>>    configs/am43xx_evm_usbhost_boot_defconfig     |   3 +-
-> >>>>    configs/am43xx_hs_evm_defconfig               |   3 +-
-> >>>>    configs/am62ax_evm_r5_defconfig               |   2 +-
-> >>>>    configs/am65x_evm_a53_defconfig               |   2 +-
-> >>>>    configs/axm_defconfig                         |   1 -
-> >>>>    configs/chiliboard_defconfig                  |   1 -
-> >>>>    configs/cm_t43_defconfig                      |   2 +-
-> >>>>    configs/corvus_defconfig                      |   1 -
-> >>>>    configs/da850evm_nand_defconfig               |   1 -
-> >>>>    configs/devkit3250_defconfig                  |   1 -
-> >>>>    configs/devkit8000_defconfig                  |   1 -
-> >>>>    configs/dra7xx_evm_defconfig                  |   1 -
-> >>>>    configs/draco_defconfig                       |   1 -
-> >>>>    configs/etamin_defconfig                      |   1 -
-> >>>>    .../gardena-smart-gateway-at91sam_defconfig   |   1 -
-> >>>>    configs/igep00x0_defconfig                    |   3 +-
-> >>>>    configs/imx6ulz_smm_m2_defconfig              |   2 +-
-> >>>>    configs/imx8mn_bsh_smm_s2_defconfig           |   2 +-
-> >>>>    configs/j7200_evm_a72_defconfig               |   2 +-
-> >>>>    configs/j7200_evm_r5_defconfig                |   2 +-
-> >>>>    configs/j721e_evm_a72_defconfig               |   2 +-
-> >>>>    configs/j721e_evm_r5_defconfig                |   2 +-
-> >>>>    configs/j721s2_evm_a72_defconfig              |   2 +-
-> >>>>    configs/j721s2_evm_r5_defconfig               |   2 +-
-> >>>>    configs/m53menlo_defconfig                    |   1 -
-> >>>>    configs/omap35_logic_defconfig                |   3 +-
-> >>>>    configs/omap35_logic_somlv_defconfig          |   3 +-
-> >>>>    configs/omap3_beagle_defconfig                |   3 +-
-> >>>>    configs/omap3_evm_defconfig                   |   3 +-
-> >>>>    configs/omap3_logic_defconfig                 |   3 +-
-> >>>>    configs/omap3_logic_somlv_defconfig           |   3 +-
-> >>>>    configs/omapl138_lcdk_defconfig               |   1 -
-> >>>>    configs/phycore-am335x-r2-regor_defconfig     |   3 +-
-> >>>>    configs/phycore-am335x-r2-wega_defconfig      |   3 +-
-> >>>>    configs/pxm2_defconfig                        |   1 -
-> >>>>    configs/rastaban_defconfig                    |   1 -
-> >>>>    configs/rut_defconfig                         |   1 -
-> >>>>    configs/sama5d3_xplained_nandflash_defconfig  |   1 -
-> >>>>    configs/sama5d3xek_nandflash_defconfig        |   1 -
-> >>>>    configs/sama5d4_xplained_nandflash_defconfig  |   1 -
-> >>>>    configs/sama5d4ek_nandflash_defconfig         |   1 -
-> >>>>    configs/sandbox64_defconfig                   |  10 +-
-> >>>>    configs/sandbox_defconfig                     |   9 +
-> >>>>    configs/sandbox_noinst_defconfig              |  21 +-
-> >>>>    configs/smartweb_defconfig                    |   1 -
-> >>>>    configs/socfpga_secu1_defconfig               |   2 +-
-> >>>>    configs/stm32746g-eval_spl_defconfig          |   2 +-
-> >>>>    configs/stm32f746-disco_spl_defconfig         |   2 +-
-> >>>>    configs/stm32f769-disco_spl_defconfig         |   2 +-
-> >>>>    configs/stm32mp15_basic_defconfig             |   2 +-
-> >>>>    configs/stm32mp15_dhcom_basic_defconfig       |   2 +-
-> >>>>    configs/stm32mp15_dhcor_basic_defconfig       |   2 +-
-> >>>>    configs/taurus_defconfig                      |   1 -
-> >>>>    configs/thuban_defconfig                      |   1 -
-> >>>>    drivers/mtd/Makefile                          |   2 +-
-> >>>>    drivers/mtd/nand/raw/Kconfig                  |  27 +-
-> >>>>    drivers/mtd/nand/raw/Makefile                 |   1 +
-> >>>>    drivers/mtd/nand/raw/am335x_spl_bch.c         |   8 +-
-> >>>>    drivers/mtd/nand/raw/atmel_nand.c             |  10 +-
-> >>>>    drivers/mtd/nand/raw/denali_spl.c             |   5 +
-> >>>>    drivers/mtd/nand/raw/fsl_ifc_spl.c            |   8 +
-> >>>>    drivers/mtd/nand/raw/lpc32xx_nand_mlc.c       |   5 +
-> >>>>    drivers/mtd/nand/raw/mt7621_nand_spl.c        |   5 +
-> >>>>    drivers/mtd/nand/raw/mxc_nand_spl.c           |  10 +-
-> >>>>    drivers/mtd/nand/raw/mxs_nand_spl.c           |   5 +
-> >>>>    drivers/mtd/nand/raw/nand.c                   |  66 +-
-> >>>>    drivers/mtd/nand/raw/nand_base.c              |   7 +-
-> >>>>    drivers/mtd/nand/raw/nand_spl_loaders.c       |   5 +-
-> >>>>    drivers/mtd/nand/raw/nand_spl_simple.c        |  10 +-
-> >>>>    drivers/mtd/nand/raw/omap_gpmc.c              |   3 +-
-> >>>>    drivers/mtd/nand/raw/sand_nand.c              | 711 +++++++++++++=
-+++++
-> >>>>    drivers/mtd/nand/raw/sunxi_nand_spl.c         |   8 +-
-> >>>>    drivers/mtd/onenand/onenand_uboot.c           |   2 -
-> >>>>    include/linux/mtd/mtd.h                       |  12 +
-> >>>>    include/mtd/cfi_flash.h                       |   2 +-
-> >>>>    include/nand.h                                |   3 +
-> >>>>    include/os.h                                  |  13 +
-> >>>>    include/system-constants.h                    |   3 +
-> >>>>    test/dm/Makefile                              |   1 +
-> >>>>    test/dm/nand.c                                | 106 +++
-> >>>>    test/image/Kconfig                            |   9 +
-> >>>>    test/image/Makefile                           |   1 +
-> >>>>    test/image/spl_load_nand.c                    |  54 ++
-> >>>>    102 files changed, 1269 insertions(+), 153 deletions(-)
-> >>>>    create mode 100644 drivers/mtd/nand/raw/sand_nand.c
-> >>>>    create mode 100644 test/dm/nand.c
-> >>>>    create mode 100644 test/image/spl_load_nand.c
-> >>>>
-> >>>> --
-> >>>> 2.37.1
-> >>>>
-> >>>
-> >>> The CI pipeline fails:
-> >>> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipeline=
-s/18409
-> >>>
-> >>> It seems like the problem is only for the clang tests (sandbox64 with
-> >>> clang test.py and sandbox with clang test.py)
+> >> Contrary to what the help message says, this is the number of pages pe=
+r
+> >> block. Calculate it automatically based on SYS_NAND_BLOCK_SIZE and
+> >> SYS_NAND_PAGE_SIZE.
 > >>
-> >> I can't view that link. Can you post the error somewhere else?
+> >> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> >> ---
 > >>
-> >> I saw a clang error [1] when running CI before sending this out, but I=
- thought I had fixed it.
+> >>   README                                          | 9 ++++-----
+> >>   configs/am335x_baltos_defconfig                 | 1 -
+> >>   configs/am335x_evm_defconfig                    | 1 -
+> >>   configs/am335x_guardian_defconfig               | 1 -
+> >>   configs/am335x_igep003x_defconfig               | 1 -
+> >>   configs/am3517_evm_defconfig                    | 1 -
+> >>   configs/am43xx_evm_defconfig                    | 1 -
+> >>   configs/am43xx_evm_rtconly_defconfig            | 1 -
+> >>   configs/am43xx_evm_usbhost_boot_defconfig       | 1 -
+> >>   configs/am43xx_hs_evm_defconfig                 | 1 -
+> >>   configs/axm_defconfig                           | 1 -
+> >>   configs/chiliboard_defconfig                    | 1 -
+> >>   configs/corvus_defconfig                        | 1 -
+> >>   configs/da850evm_nand_defconfig                 | 1 -
+> >>   configs/devkit3250_defconfig                    | 1 -
+> >>   configs/devkit8000_defconfig                    | 1 -
+> >>   configs/dra7xx_evm_defconfig                    | 1 -
+> >>   configs/draco_defconfig                         | 1 -
+> >>   configs/etamin_defconfig                        | 1 -
+> >>   configs/gardena-smart-gateway-at91sam_defconfig | 1 -
+> >>   configs/igep00x0_defconfig                      | 1 -
+> >>   configs/m53menlo_defconfig                      | 1 -
+> >>   configs/omap35_logic_defconfig                  | 1 -
+> >>   configs/omap35_logic_somlv_defconfig            | 1 -
+> >>   configs/omap3_beagle_defconfig                  | 1 -
+> >>   configs/omap3_evm_defconfig                     | 1 -
+> >>   configs/omap3_logic_defconfig                   | 1 -
+> >>   configs/omap3_logic_somlv_defconfig             | 1 -
+> >>   configs/omapl138_lcdk_defconfig                 | 1 -
+> >>   configs/phycore-am335x-r2-regor_defconfig       | 1 -
+> >>   configs/phycore-am335x-r2-wega_defconfig        | 1 -
+> >>   configs/pxm2_defconfig                          | 1 -
+> >>   configs/rastaban_defconfig                      | 1 -
+> >>   configs/rut_defconfig                           | 1 -
+> >>   configs/sama5d3_xplained_nandflash_defconfig    | 1 -
+> >>   configs/sama5d3xek_nandflash_defconfig          | 1 -
+> >>   configs/sama5d4_xplained_nandflash_defconfig    | 1 -
+> >>   configs/sama5d4ek_nandflash_defconfig           | 1 -
+> >>   configs/smartweb_defconfig                      | 1 -
+> >>   configs/taurus_defconfig                        | 1 -
+> >>   configs/thuban_defconfig                        | 1 -
+> >>   drivers/mtd/nand/raw/Kconfig                    | 8 --------
+> >>   drivers/mtd/nand/raw/am335x_spl_bch.c           | 3 ++-
+> >>   drivers/mtd/nand/raw/atmel_nand.c               | 5 +++--
+> >>   drivers/mtd/nand/raw/mxc_nand_spl.c             | 5 +++--
+> >>   drivers/mtd/nand/raw/nand_spl_loaders.c         | 2 +-
+> >>   drivers/mtd/nand/raw/nand_spl_simple.c          | 5 +++--
+> >>   drivers/mtd/nand/raw/omap_gpmc.c                | 3 ++-
+> >>   include/system-constants.h                      | 3 +++
+> >>   49 files changed, 21 insertions(+), 62 deletions(-)
 > >>
-> >> --Sean
+> >> diff --git a/README b/README
+> >> index 60c6b8a19db..00d422737fb 100644
+> >> --- a/README
+> >> +++ b/README
+> >> @@ -1191,11 +1191,10 @@ The following options need to be configured:
+> >>                  Support for a lightweight UBI (fastmap) scanner and
+> >>                  loader
 > >>
-> >> [1] https://source.denx.de/u-boot/custodians/u-boot-clk/-/pipelines/18=
-355
+> >> -               CONFIG_SYS_NAND_5_ADDR_CYCLE, CONFIG_SYS_NAND_PAGE_COU=
+NT,
+> >> -               CONFIG_SYS_NAND_PAGE_SIZE, CONFIG_SYS_NAND_OOBSIZE,
+> >> -               CONFIG_SYS_NAND_BLOCK_SIZE, CONFIG_SYS_NAND_BAD_BLOCK_=
+POS,
+> >> -               CFG_SYS_NAND_ECCPOS, CFG_SYS_NAND_ECCSIZE,
+> >> -               CFG_SYS_NAND_ECCBYTES
+> >> +               CONFIG_SYS_NAND_5_ADDR_CYCLE, CONFIG_SYS_NAND_PAGE_SIZ=
+E,
+> >> +               CONFIG_SYS_NAND_OOBSIZE, CONFIG_SYS_NAND_BLOCK_SIZE,
+> >> +               CONFIG_SYS_NAND_BAD_BLOCK_POS, CFG_SYS_NAND_ECCPOS,
+> >> +               CFG_SYS_NAND_ECCSIZE, CFG_SYS_NAND_ECCBYTES
+> >>                  Defines the size and behavior of the NAND that SPL us=
+es
+> >>                  to read U-Boot
 > >>
-> >>      sandbox:  +   sandbox
-> >> +drivers/mtd/nand/raw/sand_nand.c:386:2: error: variable 'src' is used=
- uninitialized whenever switch default is taken [-Werror,-Wsometimes-uninit=
-ialized]
-> >> +        default:
-> >> +        ^~~~~~~
-> >> +drivers/mtd/nand/raw/sand_nand.c:395:14: note: uninitialized use occu=
-rs here
-> >> +        memcpy(buf, src + chip->column, to_copy);
-> >> +                    ^~~
-> >> +drivers/mtd/nand/raw/sand_nand.c:362:6: error: variable 'src' is used=
- uninitialized whenever 'if' condition is true [-Werror,-Wsometimes-uniniti=
-alized]
-> >> +        if (!chip->selected)
-> >> +            ^~~~~~~~~~~~~~~
-> >> +drivers/mtd/nand/raw/sand_nand.c:362:2: note: remove the 'if' if its =
-condition is always false
-> >> +        ^~~~~~~~~~~~~~~~~~~~
-> >> +drivers/mtd/nand/raw/sand_nand.c:360:15: note: initialize the variabl=
-e 'src' to silence this warning
-> >> +        const u8 *src;
-> >> +                     ^
-> >> +                      =3D NULL
-> >> +2 errors generated.
-> >> +make[5]: *** [scripts/Makefile.build:256: drivers/mtd/nand/raw/sand_n=
-and.o] Error 1
-> >> +make[4]: *** [scripts/Makefile.build:397: drivers/mtd/nand/raw] Error=
- 2
-> >> +make[3]: *** [scripts/Makefile.build:397: drivers/mtd/nand] Error 2
-> >> +make[2]: *** [scripts/Makefile.build:397: drivers/mtd] Error 2
-> >> +make[1]: *** [Makefile:1858: drivers] Error 2
-> >> +make: *** [Makefile:177: sub-make] Error 2
+> >> diff --git a/configs/am335x_baltos_defconfig b/configs/am335x_baltos_d=
+efconfig
+> >> index 16993ef5386..3891e48e9c7 100644
+> >> --- a/configs/am335x_baltos_defconfig
+> >> +++ b/configs/am335x_baltos_defconfig
+> >> @@ -67,7 +67,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconf=
+ig
+> >> index f048e60f7f3..73f221d55bc 100644
+> >> --- a/configs/am335x_evm_defconfig
+> >> +++ b/configs/am335x_evm_defconfig
+> >> @@ -84,7 +84,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/am335x_guardian_defconfig b/configs/am335x_guardi=
+an_defconfig
+> >> index 01d848ceede..5369e46bc1b 100644
+> >> --- a/configs/am335x_guardian_defconfig
+> >> +++ b/configs/am335x_guardian_defconfig
+> >> @@ -99,7 +99,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH16_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x100
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/am335x_igep003x_defconfig b/configs/am335x_igep00=
+3x_defconfig
+> >> index 4dd6366ef67..4c5c82f9bdd 100644
+> >> --- a/configs/am335x_igep003x_defconfig
+> >> +++ b/configs/am335x_igep003x_defconfig
+> >> @@ -85,7 +85,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_MTD_UBI_FASTMAP=3Dy
+> >> diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconf=
+ig
+> >> index 0a83ac9378c..111929fb912 100644
+> >> --- a/configs/am3517_evm_defconfig
+> >> +++ b/configs/am3517_evm_defconfig
+> >> @@ -75,7 +75,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/am43xx_evm_defconfig b/configs/am43xx_evm_defconf=
+ig
+> >> index 6571afd345e..5f2356bcd32 100644
+> >> --- a/configs/am43xx_evm_defconfig
+> >> +++ b/configs/am43xx_evm_defconfig
+> >> @@ -72,7 +72,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH16_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/am43xx_evm_rtconly_defconfig b/configs/am43xx_evm=
+_rtconly_defconfig
+> >> index e84aed4d54d..30681e7eeb6 100644
+> >> --- a/configs/am43xx_evm_rtconly_defconfig
+> >> +++ b/configs/am43xx_evm_rtconly_defconfig
+> >> @@ -62,7 +62,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH16_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/am43xx_evm_usbhost_boot_defconfig b/configs/am43x=
+x_evm_usbhost_boot_defconfig
+> >> index 0cae3242b04..6c4cc99e5ff 100644
+> >> --- a/configs/am43xx_evm_usbhost_boot_defconfig
+> >> +++ b/configs/am43xx_evm_usbhost_boot_defconfig
+> >> @@ -75,7 +75,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH16_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/am43xx_hs_evm_defconfig b/configs/am43xx_hs_evm_d=
+efconfig
+> >> index 370ee967258..49ecb4c9e66 100644
+> >> --- a/configs/am43xx_hs_evm_defconfig
+> >> +++ b/configs/am43xx_hs_evm_defconfig
+> >> @@ -68,7 +68,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH16_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/axm_defconfig b/configs/axm_defconfig
+> >> index f9c02144c4a..e1a01b24b88 100644
+> >> --- a/configs/axm_defconfig
+> >> +++ b/configs/axm_defconfig
+> >> @@ -86,7 +86,6 @@ CONFIG_MTD=3Dy
+> >>   # CONFIG_SYS_NAND_USE_FLASH_BBT is not set
+> >>   CONFIG_NAND_ATMEL=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/chiliboard_defconfig b/configs/chiliboard_defconf=
+ig
+> >> index 06642d282d1..0cd649d643a 100644
+> >> --- a/configs/chiliboard_defconfig
+> >> +++ b/configs/chiliboard_defconfig
+> >> @@ -63,7 +63,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/corvus_defconfig b/configs/corvus_defconfig
+> >> index ecf61f0d1e6..5eaa6dbb5fc 100644
+> >> --- a/configs/corvus_defconfig
+> >> +++ b/configs/corvus_defconfig
+> >> @@ -81,7 +81,6 @@ CONFIG_SYS_NAND_DRIVER_ECC_LAYOUT=3Dy
+> >>   # CONFIG_SYS_NAND_USE_FLASH_BBT is not set
+> >>   CONFIG_NAND_ATMEL=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/da850evm_nand_defconfig b/configs/da850evm_nand_d=
+efconfig
+> >> index 5f6f5d788d0..62b8edde248 100644
+> >> --- a/configs/da850evm_nand_defconfig
+> >> +++ b/configs/da850evm_nand_defconfig
+> >> @@ -88,7 +88,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_USE_FLASH_BBT=3Dy
+> >>   CONFIG_NAND_DAVINCI=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/devkit3250_defconfig b/configs/devkit3250_defconf=
+ig
+> >> index ec4031da51d..569b156c997 100644
+> >> --- a/configs/devkit3250_defconfig
+> >> +++ b/configs/devkit3250_defconfig
+> >> @@ -73,7 +73,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_USE_FLASH_BBT=3Dy
+> >>   CONFIG_NAND_LPC32XX_SLC=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   # CONFIG_SYS_NAND_5_ADDR_CYCLE is not set
+> >> diff --git a/configs/devkit8000_defconfig b/configs/devkit8000_defconf=
+ig
+> >> index ef16da176a9..a7f82442eb0 100644
+> >> --- a/configs/devkit8000_defconfig
+> >> +++ b/configs/devkit8000_defconfig
+> >> @@ -77,7 +77,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_HAM1_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconf=
+ig
+> >> index 19ca89fa867..c3a3ec2cd42 100644
+> >> --- a/configs/dra7xx_evm_defconfig
+> >> +++ b/configs/dra7xx_evm_defconfig
+> >> @@ -104,7 +104,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/draco_defconfig b/configs/draco_defconfig
+> >> index ee19920a703..2a82087ab31 100644
+> >> --- a/configs/draco_defconfig
+> >> +++ b/configs/draco_defconfig
+> >> @@ -100,7 +100,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/etamin_defconfig b/configs/etamin_defconfig
+> >> index c0ce7a33569..4ac0abc56b0 100644
+> >> --- a/configs/etamin_defconfig
+> >> +++ b/configs/etamin_defconfig
+> >> @@ -104,7 +104,6 @@ CONFIG_SYS_MAX_NAND_DEVICE=3D3
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH16_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x80000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x80
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/gardena-smart-gateway-at91sam_defconfig b/configs=
+/gardena-smart-gateway-at91sam_defconfig
+> >> index 439fcc05753..0fb92ff1638 100644
+> >> --- a/configs/gardena-smart-gateway-at91sam_defconfig
+> >> +++ b/configs/gardena-smart-gateway-at91sam_defconfig
+> >> @@ -99,7 +99,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_NAND_ATMEL=3Dy
+> >>   CONFIG_SPL_GENERATE_ATMEL_PMECC_HEADER=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+> >> index 993bbe29c6b..3b1af07f057 100644
+> >> --- a/configs/igep00x0_defconfig
+> >> +++ b/configs/igep00x0_defconfig
+> >> @@ -78,7 +78,6 @@ CONFIG_SYS_MTDPARTS_RUNTIME=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/m53menlo_defconfig b/configs/m53menlo_defconfig
+> >> index ef9e15d1520..e1ddc0af5db 100644
+> >> --- a/configs/m53menlo_defconfig
+> >> +++ b/configs/m53menlo_defconfig
+> >> @@ -90,7 +90,6 @@ CONFIG_SYS_NAND_USE_FLASH_BBT=3Dy
+> >>   CONFIG_NAND_MXC=3Dy
+> >>   CONFIG_MXC_NAND_HWECC=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_def=
+config
+> >> index 539b0cfa4f7..3a656072534 100644
+> >> --- a/configs/omap35_logic_defconfig
+> >> +++ b/configs/omap35_logic_defconfig
+> >> @@ -74,7 +74,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_log=
+ic_somlv_defconfig
+> >> index f14ce3d23db..868e89114b7 100644
+> >> --- a/configs/omap35_logic_somlv_defconfig
+> >> +++ b/configs/omap35_logic_somlv_defconfig
+> >> @@ -83,7 +83,6 @@ CONFIG_SYS_MAX_FLASH_SECT=3D256
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/omap3_beagle_defconfig b/configs/omap3_beagle_def=
+config
+> >> index cabd3659385..7f0b927528d 100644
+> >> --- a/configs/omap3_beagle_defconfig
+> >> +++ b/configs/omap3_beagle_defconfig
+> >> @@ -83,7 +83,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_HAM1_CODE_HW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/omap3_evm_defconfig b/configs/omap3_evm_defconfig
+> >> index 33ff39ff548..3434783d45b 100644
+> >> --- a/configs/omap3_evm_defconfig
+> >> +++ b/configs/omap3_evm_defconfig
+> >> @@ -74,7 +74,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defco=
+nfig
+> >> index 7d3d602c9d9..78bfbbd1a22 100644
+> >> --- a/configs/omap3_logic_defconfig
+> >> +++ b/configs/omap3_logic_defconfig
+> >> @@ -73,7 +73,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic=
+_somlv_defconfig
+> >> index 0141a425e07..aefd8861db3 100644
+> >> --- a/configs/omap3_logic_somlv_defconfig
+> >> +++ b/configs/omap3_logic_somlv_defconfig
+> >> @@ -84,7 +84,6 @@ CONFIG_SYS_MAX_FLASH_SECT=3D256
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_NAND_OMAP_ECCSCHEME_BCH8_CODE_HW_DETECTION_SW=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/omapl138_lcdk_defconfig b/configs/omapl138_lcdk_d=
+efconfig
+> >> index 47feff21bd4..63554d56016 100644
+> >> --- a/configs/omapl138_lcdk_defconfig
+> >> +++ b/configs/omapl138_lcdk_defconfig
+> >> @@ -84,7 +84,6 @@ CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_USE_FLASH_BBT=3Dy
+> >>   CONFIG_NAND_DAVINCI=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_BUSWIDTH_16BIT=3Dy
+> >> diff --git a/configs/phycore-am335x-r2-regor_defconfig b/configs/phyco=
+re-am335x-r2-regor_defconfig
+> >> index 4bdf8822181..85d53d06357 100644
+> >> --- a/configs/phycore-am335x-r2-regor_defconfig
+> >> +++ b/configs/phycore-am335x-r2-regor_defconfig
+> >> @@ -76,7 +76,6 @@ CONFIG_DM_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/phycore-am335x-r2-wega_defconfig b/configs/phycor=
+e-am335x-r2-wega_defconfig
+> >> index 7644fbec273..60607548a25 100644
+> >> --- a/configs/phycore-am335x-r2-wega_defconfig
+> >> +++ b/configs/phycore-am335x-r2-wega_defconfig
+> >> @@ -76,7 +76,6 @@ CONFIG_DM_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/pxm2_defconfig b/configs/pxm2_defconfig
+> >> index 2ea007d0de5..e1d1066815b 100644
+> >> --- a/configs/pxm2_defconfig
+> >> +++ b/configs/pxm2_defconfig
+> >> @@ -99,7 +99,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/rastaban_defconfig b/configs/rastaban_defconfig
+> >> index 9f538a2f83d..21495341e26 100644
+> >> --- a/configs/rastaban_defconfig
+> >> +++ b/configs/rastaban_defconfig
+> >> @@ -100,7 +100,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/rut_defconfig b/configs/rut_defconfig
+> >> index ccf25667b50..248073be1f2 100644
+> >> --- a/configs/rut_defconfig
+> >> +++ b/configs/rut_defconfig
+> >> @@ -99,7 +99,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/sama5d3_xplained_nandflash_defconfig b/configs/sa=
+ma5d3_xplained_nandflash_defconfig
+> >> index a1b6122f8eb..a0802f9c5fe 100644
+> >> --- a/configs/sama5d3_xplained_nandflash_defconfig
+> >> +++ b/configs/sama5d3_xplained_nandflash_defconfig
+> >> @@ -86,7 +86,6 @@ CONFIG_PMECC_CAP=3D4
+> >>   CONFIG_SPL_GENERATE_ATMEL_PMECC_HEADER=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/sama5d3xek_nandflash_defconfig b/configs/sama5d3x=
+ek_nandflash_defconfig
+> >> index 6278a6c68a7..d96bb91e65d 100644
+> >> --- a/configs/sama5d3xek_nandflash_defconfig
+> >> +++ b/configs/sama5d3xek_nandflash_defconfig
+> >> @@ -90,7 +90,6 @@ CONFIG_PMECC_CAP=3D4
+> >>   CONFIG_SPL_GENERATE_ATMEL_PMECC_HEADER=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/sama5d4_xplained_nandflash_defconfig b/configs/sa=
+ma5d4_xplained_nandflash_defconfig
+> >> index d12f749d7f4..68101a12fc2 100644
+> >> --- a/configs/sama5d4_xplained_nandflash_defconfig
+> >> +++ b/configs/sama5d4_xplained_nandflash_defconfig
+> >> @@ -84,7 +84,6 @@ CONFIG_PMECC_CAP=3D8
+> >>   CONFIG_SPL_GENERATE_ATMEL_PMECC_HEADER=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/sama5d4ek_nandflash_defconfig b/configs/sama5d4ek=
+_nandflash_defconfig
+> >> index 27bfcdf0084..b8062db775d 100644
+> >> --- a/configs/sama5d4ek_nandflash_defconfig
+> >> +++ b/configs/sama5d4ek_nandflash_defconfig
+> >> @@ -81,7 +81,6 @@ CONFIG_PMECC_CAP=3D8
+> >>   CONFIG_SPL_GENERATE_ATMEL_PMECC_HEADER=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x40000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x1000
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0xe0
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/smartweb_defconfig b/configs/smartweb_defconfig
+> >> index 10cbccb69b0..80d2c0f1cc1 100644
+> >> --- a/configs/smartweb_defconfig
+> >> +++ b/configs/smartweb_defconfig
+> >> @@ -84,7 +84,6 @@ CONFIG_MTD=3Dy
+> >>   # CONFIG_SYS_NAND_USE_FLASH_BBT is not set
+> >>   CONFIG_NAND_ATMEL=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/taurus_defconfig b/configs/taurus_defconfig
+> >> index cc5755178b7..9be30c8d8a4 100644
+> >> --- a/configs/taurus_defconfig
+> >> +++ b/configs/taurus_defconfig
+> >> @@ -94,7 +94,6 @@ CONFIG_MTD=3Dy
+> >>   # CONFIG_SYS_NAND_USE_FLASH_BBT is not set
+> >>   CONFIG_NAND_ATMEL=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/configs/thuban_defconfig b/configs/thuban_defconfig
+> >> index 116700e0df0..1134624f9d2 100644
+> >> --- a/configs/thuban_defconfig
+> >> +++ b/configs/thuban_defconfig
+> >> @@ -100,7 +100,6 @@ CONFIG_MTD=3Dy
+> >>   CONFIG_MTD_RAW_NAND=3Dy
+> >>   CONFIG_SYS_NAND_BLOCK_SIZE=3D0x20000
+> >>   CONFIG_SYS_NAND_ONFI_DETECTION=3Dy
+> >> -CONFIG_SYS_NAND_PAGE_COUNT=3D0x40
+> >>   CONFIG_SYS_NAND_PAGE_SIZE=3D0x800
+> >>   CONFIG_SYS_NAND_OOBSIZE=3D0x40
+> >>   CONFIG_SYS_NAND_U_BOOT_LOCATIONS=3Dy
+> >> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconf=
+ig
+> >> index 72547f00fbe..ee484dc0f51 100644
+> >> --- a/drivers/mtd/nand/raw/Kconfig
+> >> +++ b/drivers/mtd/nand/raw/Kconfig
+> >> @@ -660,14 +660,6 @@ config SYS_NAND_ONFI_DETECTION
+> >>            And fetching device parameters flashed on device, by parsin=
+g
+> >>            ONFI parameter page.
 > >>
+> >> -config SYS_NAND_PAGE_COUNT
+> >> -       hex "NAND chip page count"
+> >> -       depends on SPL_NAND_SUPPORT && (NAND_ATMEL || NAND_MXC || \
+> >> -               SPL_NAND_AM33XX_BCH || SPL_NAND_LOAD || SPL_NAND_SIMPL=
+E || \
+> >> -               NAND_OMAP_GPMC)
+> >> -       help
+> >> -         Number of pages in the NAND chip.
+> >> -
+> >>   config SYS_NAND_PAGE_SIZE
+> >>          hex "NAND chip page size"
+> >>          depends on ARCH_SUNXI || NAND_OMAP_GPMC || NAND_LPC32XX_SLC |=
+| \
+> >> diff --git a/drivers/mtd/nand/raw/am335x_spl_bch.c b/drivers/mtd/nand/=
+raw/am335x_spl_bch.c
+> >> index 6ab3f1f42c5..3843ffc9a24 100644
+> >> --- a/drivers/mtd/nand/raw/am335x_spl_bch.c
+> >> +++ b/drivers/mtd/nand/raw/am335x_spl_bch.c
+> >> @@ -11,6 +11,7 @@
+> >>
+> >>   #include <common.h>
+> >>   #include <nand.h>
+> >> +#include <system-constants.h>
+> >>   #include <asm/io.h>
+> >>   #include <linux/delay.h>
+> >>   #include <linux/mtd/nand_ecc.h>
+> >> @@ -32,7 +33,7 @@ static int nand_command(int block, int page, uint32_=
+t offs,
+> >>          u8 cmd)
+> >>   {
+> >>          struct nand_chip *this =3D mtd_to_nand(mtd);
+> >> -       int page_addr =3D page + block * CONFIG_SYS_NAND_PAGE_COUNT;
+> >> +       int page_addr =3D page + block * SYS_NAND_PAGE_COUNT;
+> >>          void (*hwctrl)(struct mtd_info *mtd, int cmd,
+> >>                          unsigned int ctrl) =3D this->cmd_ctrl;
+> >>
+> >> diff --git a/drivers/mtd/nand/raw/atmel_nand.c b/drivers/mtd/nand/raw/=
+atmel_nand.c
+> >> index 6b17e744a69..cfc6578ae83 100644
+> >> --- a/drivers/mtd/nand/raw/atmel_nand.c
+> >> +++ b/drivers/mtd/nand/raw/atmel_nand.c
+> >> @@ -12,6 +12,7 @@
+> >>
+> >>   #include <common.h>
+> >>   #include <log.h>
+> >> +#include <system-constants.h>
+> >>   #include <asm/gpio.h>
+> >>   #include <asm/arch/gpio.h>
+> >>   #include <dm/device_compat.h>
+> >> @@ -1258,7 +1259,7 @@ static struct nand_chip nand_chip;
+> >>   static int nand_command(int block, int page, uint32_t offs, u8 cmd)
+> >>   {
+> >>          struct nand_chip *this =3D mtd_to_nand(mtd);
+> >> -       int page_addr =3D page + block * CONFIG_SYS_NAND_PAGE_COUNT;
+> >> +       int page_addr =3D page + block * SYS_NAND_PAGE_COUNT;
+> >>          void (*hwctrl)(struct mtd_info *mtd, int cmd,
+> >>                          unsigned int ctrl) =3D this->cmd_ctrl;
+> >>
+> >> @@ -1359,7 +1360,7 @@ int spl_nand_erase_one(int block, int page)
+> >>          if (nand_chip.select_chip)
+> >>                  nand_chip.select_chip(mtd, 0);
+> >>
+> >> -       page_addr =3D page + block * CONFIG_SYS_NAND_PAGE_COUNT;
+> >> +       page_addr =3D page + block * SYS_NAND_PAGE_COUNT;
+> >>          hwctrl(mtd, NAND_CMD_ERASE1, NAND_CTRL_CLE | NAND_CTRL_CHANGE=
+);
+> >>          /* Row address */
+> >>          hwctrl(mtd, (page_addr & 0xff), NAND_CTRL_ALE | NAND_CTRL_CHA=
+NGE);
+> >> diff --git a/drivers/mtd/nand/raw/mxc_nand_spl.c b/drivers/mtd/nand/ra=
+w/mxc_nand_spl.c
+> >> index 309e75d01e5..059bf38f50e 100644
+> >> --- a/drivers/mtd/nand/raw/mxc_nand_spl.c
+> >> +++ b/drivers/mtd/nand/raw/mxc_nand_spl.c
+> >> @@ -13,6 +13,7 @@
+> >>   #include <common.h>
+> >>   #include <hang.h>
+> >>   #include <nand.h>
+> >> +#include <system-constants.h>
+> >>   #include <linux/mtd/rawnand.h>
+> >>   #include <asm/arch/imx-regs.h>
+> >>   #include <asm/io.h>
+> >> @@ -304,13 +305,13 @@ int nand_spl_load_image(uint32_t from, unsigned =
+int size, void *buf)
+> >>                   * Check if we have crossed a block boundary, and if =
+so
+> >>                   * check for bad block.
+> >>                   */
+> >> -               if (!(page % CONFIG_SYS_NAND_PAGE_COUNT)) {
+> >> +               if (!(page % SYS_NAND_PAGE_COUNT)) {
+> >>                          /*
+> >>                           * Yes, new block. See if this block is good.=
+ If not,
+> >>                           * loop until we find a good block.
+> >>                           */
+> >>                          while (is_badblock(page)) {
+> >> -                               page =3D page + CONFIG_SYS_NAND_PAGE_C=
+OUNT;
+> >> +                               page =3D page + SYS_NAND_PAGE_COUNT;
+> >>                                  /* Check i we've reached the end of f=
+lash. */
+> >>                                  if (page >=3D maxpages)
+> >>                                          return -1;
+> >> diff --git a/drivers/mtd/nand/raw/nand_spl_loaders.c b/drivers/mtd/nan=
+d/raw/nand_spl_loaders.c
+> >> index 156b44d8358..8848cb27db9 100644
+> >> --- a/drivers/mtd/nand/raw/nand_spl_loaders.c
+> >> +++ b/drivers/mtd/nand/raw/nand_spl_loaders.c
+> >> @@ -12,7 +12,7 @@ int nand_spl_load_image(uint32_t offs, unsigned int =
+size, void *dst)
+> >>          while (block <=3D lastblock) {
+> >>                  if (!nand_is_bad_block(block)) {
+> >>                          /* Skip bad blocks */
+> >> -                       while (page < CONFIG_SYS_NAND_PAGE_COUNT) {
+> >> +                       while (page < SYS_NAND_PAGE_COUNT) {
+> >>                                  nand_read_page(block, page, dst);
+> >>                                  /*
+> >>                                   * When offs is not aligned to page a=
+ddress the
+> >> diff --git a/drivers/mtd/nand/raw/nand_spl_simple.c b/drivers/mtd/nand=
+/raw/nand_spl_simple.c
+> >> index 2f3af9edd4c..2ebcac56900 100644
+> >> --- a/drivers/mtd/nand/raw/nand_spl_simple.c
+> >> +++ b/drivers/mtd/nand/raw/nand_spl_simple.c
+> >> @@ -6,6 +6,7 @@
+> >>
+> >>   #include <common.h>
+> >>   #include <nand.h>
+> >> +#include <system-constants.h>
+> >>   #include <asm/io.h>
+> >>   #include <linux/mtd/nand_ecc.h>
+> >>   #include <linux/mtd/rawnand.h>
+> >> @@ -27,7 +28,7 @@ static int nand_command(int block, int page, uint32_=
+t offs,
+> >>          u8 cmd)
+> >>   {
+> >>          struct nand_chip *this =3D mtd_to_nand(mtd);
+> >> -       int page_addr =3D page + block * CONFIG_SYS_NAND_PAGE_COUNT;
+> >> +       int page_addr =3D page + block * SYS_NAND_PAGE_COUNT;
+> >>
+> >>          while (!this->dev_ready(mtd))
+> >>                  ;
+> >> @@ -59,7 +60,7 @@ static int nand_command(int block, int page, uint32_=
+t offs,
+> >>          u8 cmd)
+> >>   {
+> >>          struct nand_chip *this =3D mtd_to_nand(mtd);
+> >> -       int page_addr =3D page + block * CONFIG_SYS_NAND_PAGE_COUNT;
+> >> +       int page_addr =3D page + block * SYS_NAND_PAGE_COUNT;
+> >>          void (*hwctrl)(struct mtd_info *mtd, int cmd,
+> >>                          unsigned int ctrl) =3D this->cmd_ctrl;
+> >>
+> >> diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/o=
+map_gpmc.c
+> >> index 1a5ed0de31a..6e99538dea1 100644
+> >> --- a/drivers/mtd/nand/raw/omap_gpmc.c
+> >> +++ b/drivers/mtd/nand/raw/omap_gpmc.c
+> >> @@ -6,6 +6,7 @@
+> >>
+> >>   #include <common.h>
+> >>   #include <log.h>
+> >> +#include <system-constants.h>
+> >>   #include <asm/io.h>
+> >>   #include <dm/uclass.h>
+> >>   #include <linux/errno.h>
+> >> @@ -1298,7 +1299,7 @@ static int nand_is_bad_block(int block)
+> >>
+> >>   static int nand_read_page(int block, int page, uchar *dst)
+> >>   {
+> >> -       int page_addr =3D block * CONFIG_SYS_NAND_PAGE_COUNT + page;
+> >> +       int page_addr =3D block * SYS_NAND_PAGE_COUNT + page;
+> >>          loff_t ofs =3D page_addr * CONFIG_SYS_NAND_PAGE_SIZE;
+> >>          int ret;
+> >>          size_t len =3D CONFIG_SYS_NAND_PAGE_SIZE;
+> >> diff --git a/include/system-constants.h b/include/system-constants.h
+> >> index 59371568d1e..c50d54f37a4 100644
+> >> --- a/include/system-constants.h
+> >> +++ b/include/system-constants.h
+> >> @@ -41,4 +41,7 @@
+> >>   #define SPL_PAYLOAD_ARGS_ADDR  0
+> >>   #endif
+> >>
+> >> +#define SYS_NAND_PAGE_COUNT \
+> >> +       (CONFIG_SYS_NAND_BLOCK_SIZE / CONFIG_SYS_NAND_PAGE_SIZE)
+> >> +
+> >>   #endif
+> >> --
+> >> 2.37.1
 > >>
 > >
-> > +test/dm/nand.c:83:2: error: expression result unused [-Werror,-Wunused=
--value]
-> > +        ut_assertok(nand_erase_opts(mtd, &opts));
-> > +        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > +include/test/ut.h:309:27: note: expanded from macro 'ut_assertok'
-> > +#define ut_assertok(cond)       ut_asserteq(0, cond)
-> > +                                ^~~~~~~~~~~~~~~~~~~~
-> > +include/test/ut.h:162:2: note: expanded from macro 'ut_asserteq'
-> > +        __ret;                                                        =
-  \
-> > +        ^~~~~
-> > +1 error generated.
-> > +make[3]: *** [scripts/Makefile.build:257: test/dm/nand.o] Error 1
-> > +make[2]: *** [scripts/Makefile.build:397: test/dm] Error 2
-> > +make[1]: *** [Makefile:1858: test] Error 2
-> > +make: *** [Makefile:177: sub-make] Error 2
+> > Reviewed-by:  Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> >
+> > What do you think about adding another patch to modify SYS_NAND_PAGE_CO=
+UNT
+> > so that it is clearer that it refers to the number of pages in a block?
 >
-> ...well that's a new one. Wonder why it doesn't complain about all the ot=
-her uses of
-> ut_assertok (which, invariably, discard the value in the same way).
+> I would probably just merge that into this patch. How about SYS_NAND_BLOC=
+K_PAGES?
 
-That's what I thought as well. It seems to be related to CLANG. Could it be=
- the
-'unused-value' flag? I can't figure out why it causes the problem at
-that point,
-given that the 'ut_assertok()' is called even before the one that
-generates the error.
+It's okay with me.
 
+Thanks and regards,
 Dario
 
 >
 > --Sean
->
 
 
---
+
+--=20
 
 Dario Binacchi
 
