@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE825C4167D
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D452C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:06:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3D5987230;
-	Thu,  2 Nov 2023 23:03:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A8CCC87663;
+	Thu,  2 Nov 2023 23:06:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hWgPQY9R";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="kZWhyOzw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iFuULjKU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D6A287049; Thu,  2 Nov 2023 23:03:27 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 63B9387663; Thu,  2 Nov 2023 23:06:28 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81A9887663
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:03:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1171E87049
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:06:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4SLyYk1kT8z9sTP;
- Thu,  2 Nov 2023 23:03:22 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1698962602;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=MUD+senG+koLpuWzYkv4kUFwkTMEnQ8YX16TfSUVlAk=;
- b=hWgPQY9R0bAx2yIRuCBvJ8cXEB0+XkZ5lQtT5zhrFnUbiuZBMZcIbdEnJ0AnYYvHwf+BbJ
- zT2gRKoYBaoItKTd6aPYkrKdl3xLph1g4NVlVTIMX4gkLx1xP48CJ1eA6cb+G52QH2x0eU
- CXna0hbHjJ8oo0w2WkmpXn4hG9DeSvzUry33QpIWIvhCQD7tXnQISxFJay/plhSvz0w/6w
- TxdjDGpnfpJ0um04Jc14FwN+P2qNd7jnJSkyP32lmw+a/ehxaoTyPpJ/yhKQULvbCFn2TM
- PMsxV7JGDf4YXLwpYLZ0SlWKtZxgpp7ryVEmQGiiey/EfwN9B5YAC5TJx8858A==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1698962600;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=MUD+senG+koLpuWzYkv4kUFwkTMEnQ8YX16TfSUVlAk=;
- b=kZWhyOzwqM70dE6rNTISflgmjHs6J1KQbDQIjJHNRWlbG9CzHFvjw0Fz/AQD9gXs5wuDvp
- 4eSSOB+LyH6VuTP5+vxSvb8K8N2Q640sdR+645u9Y/K7qZyaraAUSZ1ELELseHdWxShgAp
- vu0PJhfqF0AY4FdZOPr0fx/dHpMPOoueCrKIwd0AMwm6l4kKPWre1HdwumdIUFBz4oeHqP
- pa3HHrKVwQZM7idfUy3Nc7N7kKcHS2jUT8tgt8liFOFU9KOpM97d5HulfEXoHeB/evs9A0
- 1kKldyYOFaXJxHgAAO9VqiThQfERwRU95oCCEZ9WVRLVsbGGYrfoShyaB3WsnA==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PULL] u-boot-sh/master_common_h_cleanup
-Date: Thu,  2 Nov 2023 23:02:51 +0100
-Message-ID: <20231102220304.86045-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-66fbcaf03c6so8964836d6.1
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:06:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1698962783; x=1699567583; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hThONaLzHkH/kvn6e66xq+qWJcJKm47gQNutuLlbdLs=;
+ b=iFuULjKUXKdZKYAritR6mdHuNftYML7chWvfBaTjTfZ3cIWGRfwUg9Rorr/C6fv9Ix
+ Oo9wVcRvzgzAHtEThkJ57YIB/lPQVb5nVzUUy04w5bUHGXW2iBa+pmkYc1Jb2+xIT/XT
+ Lth9InRAoG79Z6q+SZx3dKEox7ktIB8vo2QT8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698962783; x=1699567583;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hThONaLzHkH/kvn6e66xq+qWJcJKm47gQNutuLlbdLs=;
+ b=FJvy7CMuWTYj4LSpbEVTBqU1MBl/4IsUDQ9vgbE2ZgQ1aMrwIjMCPK0rXfA4OOvizK
+ hMQ8ONrn6m0E4GdD5POjiBKcNSyoPIYFhVlFJU085txc0+t42M4eBiUkzybYbyYrVcFD
+ OnFymYlkDljcqL8RngXLkE51BgWJu/64mZEVApgYf1gXWoMpGfkVzL3Efnn7pW3LiWdI
+ VML1EXLQZRWGcpuEnuj8PDcdYwYbqzsnD/geNY2/Yt7U/EMWaG7cuFAA8lDljwNED4Zr
+ TMg9a+0j7IeH066ExyM+7Mpity5jYXyOSrTwUnKrpmlKl3e0GGXN67tl2O7Juv7zRzK+
+ PPVw==
+X-Gm-Message-State: AOJu0YyUCshy6bO0s4U9HVtPPVxaJS5X6RBNBMRFwFvT0ov8jHmhzN5i
+ CbgYPKKoKJkX6VWDZklpH/tKwQ==
+X-Google-Smtp-Source: AGHT+IFlcLpAg/buEaTSyw0WuMshhLmzAot3n6qqifTXB0vzAdCgvYihyPPJjk0rNObrTMkfDYAjSA==
+X-Received: by 2002:a05:6214:b6f:b0:672:ab2:d9ec with SMTP id
+ ey15-20020a0562140b6f00b006720ab2d9ecmr14515193qvb.28.1698962782794; 
+ Thu, 02 Nov 2023 15:06:22 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ du10-20020a05621409aa00b0065b2be40d58sm129871qvb.25.2023.11.02.15.06.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Nov 2023 15:06:20 -0700 (PDT)
+Date: Thu, 2 Nov 2023 18:06:18 -0400
+From: Tom Rini <trini@konsulko.com>
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, sjg@chromium.org, dphadke@linux.microsoft.com,
+ ilias.apalodimas@linaro.org
+Subject: Re: [PATCH v3 4/5] dm: core: Modify default for OFNODE_MULTI_TREE
+Message-ID: <20231102220618.GA2106979@bill-the-cat>
+References: <20230912213504.65513-1-seanedmond@linux.microsoft.com>
+ <20230912213504.65513-5-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 273bdda92dd98ed3cbf
-X-MBO-RS-META: hmdo9zgxxarqr3y7ifufka6thcn6ch7d
-X-Rspamd-Queue-Id: 4SLyYk1kT8z9sTP
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="oJ5ydPNtPt1UPFmq"
+Content-Disposition: inline
+In-Reply-To: <20230912213504.65513-5-seanedmond@linux.microsoft.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,46 +92,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit a803f87202aa48974bdff4d8100464a8288931e4:
 
-  Merge https://source.denx.de/u-boot/custodians/u-boot-mmc (2023-11-01 09:44:33 -0400)
+--oJ5ydPNtPt1UPFmq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-are available in the Git repository at:
+On Tue, Sep 12, 2023 at 02:35:03PM -0700, seanedmond@linux.microsoft.com wr=
+ote:
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master_common_h_cleanup
+> From: Sean Edmond <seanedmond@microsoft.com>
+>=20
+> There is a preference to use the "ofnode" API for FDT fixups
+> moving forward.  The FDT fixup will usually be for the kernel FDT.  To
+> fixup the kernel FDT with the ofnode API, it's required to set the
+> OFNODE_MULTI_TREE option.
+>=20
+> To ensure existing users of kaslr fdt fixup are not impacted, Let's modify
+> the default value for OFNODE_MULTI_TREE to ensure it's always set if
+> !OF_LIVE.  This will cause a 1007 byte increase in the code size.
+>=20
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>  drivers/core/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-for you to fetch changes up to 7d824618d7eb5340e63892c919abc62d831e7482:
+This leads to failure to build such as:
+Building current source for 1 boards (1 thread, 12 jobs per thread)
+       arm:  +   integratorap_cm946es
++(integratorap_cm946es) arm-linux-gnueabi-ld.bfd: common/board_r.o: in func=
+tion `initr_dm':
++(integratorap_cm946es) common/board_r.c:231:(.text.initr_dm+0x4): undefine=
+d reference to `oftree_reset'
++(integratorap_cm946es) make[1]: *** [Makefile:1765: u-boot] Error 1
++(integratorap_cm946es) make: *** [Makefile:177: sub-make] Error 2
+=20
+--=20
+Tom
 
-  board: rzg2l: Drop <common.h> (2023-11-02 11:30:19 +0100)
+--oJ5ydPNtPt1UPFmq
+Content-Type: application/pgp-signature; name="signature.asc"
 
-----------------------------------------------------------------
-Paul Barker (8):
-      arm: armv8: mmu: Prepare for common.h removal
-      arm: mach-rmobile: Drop <common.h>
-      serial: sh: Drop <common.h>
-      pinctrl: rzg2l: Drop <common.h>
-      mmc: renesas-sdhi: Drop <common.h>
-      gpio: rzg2l: Drop <common.h>
-      clk: rzg2l: Drop <common.h>
-      board: rzg2l: Drop <common.h>
+-----BEGIN PGP SIGNATURE-----
 
- arch/arm/include/asm/armv8/mmu.h         | 2 ++
- arch/arm/mach-rmobile/board.c            | 2 +-
- arch/arm/mach-rmobile/cpu_info-r8a7740.c | 2 +-
- arch/arm/mach-rmobile/cpu_info-rcar.c    | 2 +-
- arch/arm/mach-rmobile/cpu_info-rzg.c     | 2 +-
- arch/arm/mach-rmobile/cpu_info-rzg2l.c   | 1 -
- arch/arm/mach-rmobile/cpu_info.c         | 2 +-
- arch/arm/mach-rmobile/emac.c             | 1 -
- arch/arm/mach-rmobile/memmap-gen3.c      | 4 ++--
- arch/arm/mach-rmobile/memmap-rzg2l.c     | 2 +-
- arch/arm/mach-rmobile/pfc-r8a7740.c      | 2 +-
- arch/arm/mach-rmobile/psci-r8a779a0.c    | 1 -
- board/renesas/rzg2l/rzg2l.c              | 1 -
- drivers/clk/renesas/r9a07g044-cpg.c      | 1 -
- drivers/clk/renesas/rzg2l-cpg.c          | 1 -
- drivers/gpio/rzg2l-gpio.c                | 1 -
- drivers/mmc/renesas-sdhi.c               | 1 -
- drivers/pinctrl/renesas/rzg2l-pfc.c      | 1 -
- drivers/serial/serial_sh.c               | 1 -
- 19 files changed, 11 insertions(+), 19 deletions(-)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVEHVYACgkQFHw5/5Y0
+tywSaAv+M0Pa3pDlET9vxDS3/RyPioSwq5TUl6S3QmpUx3FHE28tCG4vuPiXBRnS
+nB/d1ZqSZ8Q+iYjXRU5mLyGQM0XyGGcybsTNH7T6jDvjtVLblK6Ctd+UEu60Lxgp
+OhhUWaK99V25d9/X+7AolYvw6Db9zja9eEDSiyDnI5ajklBot6doxkmNV0mKJb8q
+oIV0uKee3mcAO/2FS//tvnJSzOBWSTQYyU1Wr3ZYAMswElaCaI4WZMdYsLFp7mTI
+TRv2n/WfUXmI+pBHPdUqY7O5bnM8IlNnnfwRtyThARo/b7SkT0Wdy2fPxo6rVodH
+LPIuWUBm4W2C50z5TEX5P2TeTWuRjgLQRqchYvHXQqMMO+4X/THJy4xakrdsJ54u
+eIqrS3Cf5+uYGpkT6z3/2s40YEY9HabqnMjs/DnTUdxaMgNBNxfOUnY7hehaafuu
+me8hCiYQqy/oCQLPG0TwGAZvGrIB06faAtcEWWYI2Q6xVndrIckF4RS9NjualMoH
+ZKd9ew8A
+=NSnU
+-----END PGP SIGNATURE-----
+
+--oJ5ydPNtPt1UPFmq--
