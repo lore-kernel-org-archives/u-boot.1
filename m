@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 205C8C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 12:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D83C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 12:22:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85EAF87773;
-	Thu,  2 Nov 2023 13:21:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5EAB8778F;
+	Thu,  2 Nov 2023 13:21:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="nVzGObbP";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="c8vsISZt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ECF7875E7; Thu,  2 Nov 2023 13:20:51 +0100 (CET)
+ id C41A987788; Thu,  2 Nov 2023 13:20:53 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F35487777
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 13:20:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4474587787
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 13:20:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id D30B9120036;
- Thu,  2 Nov 2023 15:20:36 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru D30B9120036
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 688D4120038;
+ Thu,  2 Nov 2023 15:20:38 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 688D4120038
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1698927636;
- bh=U5a1PcgFW0qYF5fotPS0ChxNWPV54cgX4f6A4PxugzY=;
+ s=mail; t=1698927638;
+ bh=RL5hqS1sElFkg6RJw8t39U/suakMvWx1nkQfKO8rqB4=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=nVzGObbPig/+cYKGRtOBmDdnJbV7u91QThVcy4+xI/iDgmED9Bi28CCOj70YkywGO
- wAhlBE/VCu3BUsBsM2Q1vxGp7wgO2ITeof231JYKiqHJCNeBCj/mvksu4Qrm28UFSw
- +Jl6ExhcCU0C2exZjVW4IDxOhsYYDc5vz4I/4lLWyzQqLeQilOq2rQojvif+VhdjTY
- ZWZBBW02OpSX62vQR5OJejLJR1ypNFMynLwGtabOmuuKQ3+HQqyED4cI8t2qbztWfe
- XJHoLpdMkfsclQNgq3PfCO3/pNT9hphW5KWq7WYJDMRO3uFj1aWtMK2hVnEhvMp0wO
- NXNZty9QA/lLw==
+ b=c8vsISZtdpOr6pLW2GcB3l9DETQxPMzrxAgbrI85MpqLBK8AEe+bsNqDH2bLK3t04
+ FV6jP202DT88mNBI3ukynd7rex0lCkykB03yeK2SPcAWxDGYN7bzQcVr4XzCASzq2z
+ FP/WvVutacwG0BCxJgT5+Owu/wmTf5yFOBxnvWLydNfpnjtAkH6i86pEDHas5uQyed
+ K7EiY+fYXoG5BuN/uo2uuIT3ZLRfDSNCOYr/YqJHMPfwoly1zdZLxqnXO35BOuSjHE
+ Ld+C5PDPqsVcnV4oi/lbqPshQ7rsVbAuYi2GG0GeJGZW334FA3zsWzZcd9TSCXzyj1
+ 60ETbqb9dgGpg==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  2 Nov 2023 15:20:36 +0300 (MSK)
+ Thu,  2 Nov 2023 15:20:38 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Thu, 2 Nov 2023 15:20:36 +0300
+ 15.2.1118.37; Thu, 2 Nov 2023 15:20:37 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
  <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
@@ -60,9 +60,9 @@ CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
  <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
  Stanley <joel@jms.id.au>, <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, 
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v5 6/8] cmd: clk: Use dump function from clk_ops
-Date: Thu, 2 Nov 2023 15:20:15 +0300
-Message-ID: <20231102122017.56995-7-ivprusov@sberdevices.ru>
+Subject: [PATCH v5 8/8] cmd: clk: Make soc_clk_dump static
+Date: Thu, 2 Nov 2023 15:20:17 +0300
+Message-ID: <20231102122017.56995-9-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231102122017.56995-1-ivprusov@sberdevices.ru>
 References: <20231102122017.56995-1-ivprusov@sberdevices.ru>
@@ -111,43 +111,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add another loop to dump additional info from clock providers that
-implement dump operation.
+After introducing dump to clk_ops there is no need to override or expose
+this symbol anymore.
 
 Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
 ---
- cmd/clk.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ cmd/clk.c     | 4 ++--
+ include/clk.h | 2 --
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/cmd/clk.c b/cmd/clk.c
-index c7c379d7a6..4b9709d3ff 100644
+index 4b9709d3ff..7bbcbfeda3 100644
 --- a/cmd/clk.c
 +++ b/cmd/clk.c
-@@ -62,6 +62,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
- int __weak soc_clk_dump(void)
+@@ -59,7 +59,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
+ 	}
+ }
+ 
+-int __weak soc_clk_dump(void)
++static int soc_clk_dump(void)
  {
  	struct udevice *dev;
-+	const struct clk_ops *ops;
- 
- 	printf(" Rate               Usecnt      Name\n");
- 	printf("------------------------------------------\n");
-@@ -69,6 +70,14 @@ int __weak soc_clk_dump(void)
- 	uclass_foreach_dev_probe(UCLASS_CLK, dev)
- 		show_clks(dev, -1, 0);
- 
-+	uclass_foreach_dev_probe(UCLASS_CLK, dev) {
-+		ops = dev_get_driver_ops(dev);
-+		if (ops && ops->dump) {
-+			printf("\n%s %s:\n", dev->driver->name, dev->name);
-+			ops->dump(dev);
-+		}
-+	}
-+
+ 	const struct clk_ops *ops;
+@@ -81,7 +81,7 @@ int __weak soc_clk_dump(void)
  	return 0;
  }
  #else
+-int __weak soc_clk_dump(void)
++static int soc_clk_dump(void)
+ {
+ 	puts("Not implemented\n");
+ 	return 1;
+diff --git a/include/clk.h b/include/clk.h
+index d91285235f..bf0d9c9d7f 100644
+--- a/include/clk.h
++++ b/include/clk.h
+@@ -674,8 +674,6 @@ static inline bool clk_valid(struct clk *clk)
+ 	return clk && !!clk->dev;
+ }
+ 
+-int soc_clk_dump(void);
+-
+ #endif
+ 
+ #define clk_prepare_enable(clk) clk_enable(clk)
 -- 
 2.34.1
 
