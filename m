@@ -4,77 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 031D0C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 08:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2ABDC4167D
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 08:55:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5787B87652;
-	Thu,  2 Nov 2023 09:45:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CA95A8771C;
+	Thu,  2 Nov 2023 09:55:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TVFTM8zT";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E177E8768D; Thu,  2 Nov 2023 09:45:07 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5E8C1876CB; Thu,  2 Nov 2023 09:55:18 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F5CE87620
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 09:45:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EDB7876CB
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 09:55:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9d216597f64so96456766b.3
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 01:45:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698914702; x=1699519502; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pmH+V6GBMi67TNX4NKfU7osHAb1WkR6xENvq8X0Z+ik=;
- b=TVFTM8zT3Nd8GYxmay3ZWPeTvgN+kOHlSVBcTF213f1FTIqS/JNgTrb4zTxaR3lSQj
- DSbYOxqJMrzrSbGqqNQAo7YSvIOcM5ovQmKScllNbW0D/f4E2sxV/j3SD+2jNJbOMN2U
- vAxqPZnQjpTYq4gxeJ4j13vHgVGhHoZU6FcwQHzRcK/WaoIkNSSaFYoKQkuJXPEu5jZw
- vJP9/eyF8pfMrt4W8CJhKkm1E6aa/NczGGnzWStKnLALwpg5fk/pFUYfgULpV6ePkUHB
- DygZl5bbZFxTJOalEOtcF+MQC2S7vXQxeg2e9PmWPmga5dWOMA6ow8u+ECeLCDu/Ajsm
- Df9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698914702; x=1699519502;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pmH+V6GBMi67TNX4NKfU7osHAb1WkR6xENvq8X0Z+ik=;
- b=WoeCx/5nYne4F9jpWlA7GlPfrESaNJZtUHxrABWzSpojmAIBMjSzDoRahI2yvZ23IS
- 0Q1Nz25KCjO9LJJbuHqNrXuQNOqp1f2cwEqZlI5Li6xGunNfZgp7+rNeTShvmHL0b6lo
- AlgvYoX5/dSqVIpv0ITdt+O8k9koEV0zRTORJX4kI/q/GEfnG1ciAT1+FAwgEQJoMT1k
- /5q0/YDSw8AVjZpxbTTCyrs5xQ3TvFGWFdlcFHOpS6E5Yik2ZVR1pm6gqcoplPJWncXN
- 77XHFYkhtnnD9ZOySmx34BQDah0sSsteqdTsyrA21Dz29nz/VbGvJhAbP5PTsKFOyQkn
- i5IA==
-X-Gm-Message-State: AOJu0Yy7aJ/hiylj+eThlfXMjPMY0RBfg5Y3FsP7GyOZEnlg+86Ha2M4
- 7NhN6org/7oPFKMp/sb5t6RFcbRyEee+crt27/M=
-X-Google-Smtp-Source: AGHT+IF67gl0y6StTa5wjPPcGMKox1ROJ58j5FaWyxfzuxr08fZ+r+ZsYz0PlNqpbx+peTArH3vvTaT685J0OMeIFd4=
-X-Received: by 2002:a17:907:9496:b0:9ae:55f5:180a with SMTP id
- dm22-20020a170907949600b009ae55f5180amr4013551ejc.9.1698914702234; Thu, 02
- Nov 2023 01:45:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.int.toradex.com (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 67BDB20145;
+ Thu,  2 Nov 2023 09:55:15 +0100 (CET)
+Date: Thu, 2 Nov 2023 09:55:07 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Andrew Davis <afd@ti.com>
+Cc: Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Bryan Brattlof <bb@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Le Jin <le.jin@siemens.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 5/7] arm: mach-k3: am62x: Move board selection to mach-k3
+Message-ID: <ZUNj6yyW/DdMYAV4@francesco-nb.int.toradex.com>
+References: <20231101203530.80359-1-afd@ti.com>
+ <20231101203530.80359-5-afd@ti.com>
 MIME-Version: 1.0
-References: <20231027074326.3357618-1-masahisa.kojima@linaro.org>
-In-Reply-To: <20231027074326.3357618-1-masahisa.kojima@linaro.org>
-From: Weizhao Ouyang <o451686892@gmail.com>
-Date: Thu, 2 Nov 2023 16:44:51 +0800
-Message-ID: <CAHk0Hot9EYPvPCty4JgsH3GHTiCEBt26oJu_DS5EVQJ_SMMGuw@mail.gmail.com>
-Subject: Re: [PATCH] scripts/Makefile.lib: print error when no public key is
- specified
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231101203530.80359-5-afd@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,56 +60,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 27, 2023 at 3:45=E2=80=AFPM Masahisa Kojima
-<masahisa.kojima@linaro.org> wrote:
->
-> The current build system embeds the EFI Signature List(ESL)
-> into the dtb to be used in the EFI capsule authentication.
-> This ESL file is specified through the CONFIG_EFI_CAPSULE_ESL_FILE
-> Kconfig option. If CONFIG_EFI_CAPSULE_ESL_FILE is not specified,
-> U-boot build ends up with failure but the cause of failure is not
-> easily understandable. Current error message is as follows.
->
-> FATAL ERROR: Error reading file into data: Is a directoryCheck /home/ubun=
-tu/src/ledge/u-boot/arch/arm/dts/.synquacer-sc2a11-developerbox.dtb.pre.tmp=
- for errors
-> make[2]: *** [scripts/Makefile.lib:355: arch/arm/dts/synquacer-sc2a11-dev=
-eloperbox.dtb] Error 1
-> make[1]: *** [dts/Makefile:44: arch-dtbs] Error 2
-> make: *** [Makefile:1165: dts/dt.dtb] Error 2
-> make: *** Waiting for unfinished jobs....
->
-> This commit shows the error message that CONFIG_EFI_CAPSULE_ESL_FILE
-> must be specified when the EFI capsule authentication is enabled, then
-> terminate the build with error.
->
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
->  scripts/Makefile.lib | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 8dc6ec82cd..16bbc277a9 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -339,7 +339,12 @@ cmd_capsule_esl_gen =3D \
->         $(shell sed "s:ESL_BIN_FILE:$(capsule_esl_path):" $(capsule_esl_i=
-nput_file) > $@)
->
->  $(obj)/.capsule_esl.dtsi: FORCE
-> +ifeq ($(CONFIG_EFI_CAPSULE_ESL_FILE),"")
-> +       $(error "CONFIG_EFI_CAPSULE_ESL_FILE is empty, EFI capsule authen=
-tication \
-> +       public key must be specified when CONFIG_EFI_CAPSULE_AUTHENTICATE=
- is enabled")
-> +else
->         $(call cmd_capsule_esl_gen)
-> +endif
->
->  capsule_esl_input_file=3D$(srctree)/lib/efi_loader/capsule_esl.dtsi.in
->  capsule_esl_dtsi =3D .capsule_esl.dtsi
-> --
-> 2.34.1
->
+Hello Andrew,
 
-Reviewed-by: Weizhao Ouyang <o451686892@gmail.com>
+On Wed, Nov 01, 2023 at 03:35:28PM -0500, Andrew Davis wrote:
+> Currently each set of board targets from a vendor is selected inside
+> the board directory for that vendor. This has the problem of multiple
+> targets, one from each vendor, being selectable at the same time.
+> For instance you can select both TARGET_AM654_A53_EVM and
+> TARGET_IOT2050_A53 in the same build.
+> 
+> To fix this we need to move the target board choice to a common location
+> for each parent SoC selection. Do this in arch/arm/mach-k3.
+
+Is this oddity specific of ti k3 based board or is this a generic issue
+in u-boot? Asking to understand if a k3-specific fix is the correct one
+here.
+
+Francesco
+
