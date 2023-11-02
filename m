@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C87BC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1CC7C4167B
 	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 12:57:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E9028771C;
-	Thu,  2 Nov 2023 13:57:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C47E87772;
+	Thu,  2 Nov 2023 13:57:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="KyHhOIjK";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="PWa7o6ba";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A536F8757D; Thu,  2 Nov 2023 10:17:06 +0100 (CET)
+ id D5208875C5; Thu,  2 Nov 2023 10:17:12 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59EB2875B8
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:17:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD80C86CEC
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4806910002F;
- Thu,  2 Nov 2023 12:17:01 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4806910002F
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 5600210002F;
+ Thu,  2 Nov 2023 12:17:10 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 5600210002F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1698916621;
- bh=ynEdvJGkKZvyTcN0cl3AMvqagD3hQRTTUYD5kCYSBdc=;
+ s=mail; t=1698916630;
+ bh=0e522WdQ88bql7267bwD2OWLhNscuky6CVKshKyNG2Y=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=KyHhOIjK9KzRu0EqwvVvNUxOEGdy8J9CYNDXXVJc0juYCEMEFteA4ar3EHee/hTPO
- N7WGYftHCj0FL6acQEAueTZWIm4fXXK3GyA5/GbnwEUQ5Z49HNM7Kku6q3G2kCp49Y
- dOPiJAetqcac07TbqJ4LlWfXHi97+kbst+3T+ZJqBike4Pd4sblc5xImbhGSwll/GT
- p2GmCPGNiHXmOh6vGX70vmwnJnmBtD4t9HNcEMRScV5cH6t7XMPOGZmDrhmW0Amaek
- 49sPRsTBnAuBreJMUS1p32AgKyZTcL9dvdCysTIb2298bPn9q222kKxEU6k/xe7NXn
- EXivBrfDjx0gA==
+ b=PWa7o6baeBu/fwhvEgdHzKQzoLSVHkKPn94gOWYgKtEIE1lfn+aHMp5mD9Webc1rC
+ /x9DmQcDGD0svof2pnvcG029KoKT8OwXM9XBHOdE4n2Ei5THu/L7fCX7HEFGXnSyaF
+ VvqV8R9WjJj1zyTIThUVmmJ/5UgOJwi0pcZUdKk8Y7Ooh1DF7khqO3QL0o5Sr8hQTS
+ ZOVlPBV00LwEdvDGlZnlwXPfjhb2u5M2WmdGjdAhR+8EqpngKiECpUau6HqO0PCR/9
+ YGMRDHgiivTKNPYtKqu3M4HSeFcQZNcxCPYYObxnJ7CTJa/xYck1lNsRukN0xN8WRc
+ Yqmo9mOUIsK6g==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  2 Nov 2023 12:17:01 +0300 (MSK)
+ Thu,  2 Nov 2023 12:17:10 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Thu, 2 Nov 2023 12:17:00 +0300
+ 15.2.1118.37; Thu, 2 Nov 2023 12:17:09 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <sughosh.ganu@linaro.org>, <xypron.glpk@gmx.de>,
  <ilias.apalodimas@linaro.org>, <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <kernel@sberdevices.ru>, Alexey Romanov
  <avromanov@salutedevices.com>
-Subject: [PATCH v2 0/2] Add dm_rng_read_default() helper
-Date: Thu, 2 Nov 2023 12:16:43 +0300
-Message-ID: <20231102091648.40520-1-avromanov@salutedevices.com>
+Subject: [PATCH v2 2/2] rng: add dm_rng_read_default() helper
+Date: Thu, 2 Nov 2023 12:16:45 +0300
+Message-ID: <20231102091648.40520-3-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231102091648.40520-1-avromanov@salutedevices.com>
+References: <20231102091648.40520-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -103,28 +105,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello!
+Add dm_rng_read_default() function, which obtain a series
+of random bytes. In some cases, such function would be
+useful because it allows the caller to abstract away from
+RNG device.
 
-This patchset adds dm_rng_read_default() helper function, 
-that selects the first rng device and uses it to obtain
-random bytes.
+Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+---
+ drivers/rng/rng-uclass.c | 18 ++++++++++++++++++
+ include/rng.h            | 10 ++++++++++
+ 2 files changed, 28 insertions(+)
 
-V2:
-
-- Move platform_get_rng_device() to rng-uclass.c. 
-- Re-implement it to get first successfully probed device.
-- Use it in dm_rng_read_default().
-
-Alexey Romanov (2):
-  rng: move platform_get_rng_device() to rng-uclass.c
-  rng: add dm_rng_read_default() helper
-
- drivers/rng/rng-uclass.c | 34 ++++++++++++++++++++++++++++++++++
- include/efi_rng.h        |  2 --
- include/rng.h            | 21 +++++++++++++++++++++
- lib/efi_loader/efi_rng.c | 27 ---------------------------
- 4 files changed, 55 insertions(+), 29 deletions(-)
-
+diff --git a/drivers/rng/rng-uclass.c b/drivers/rng/rng-uclass.c
+index d7236b9335..e298623e1d 100644
+--- a/drivers/rng/rng-uclass.c
++++ b/drivers/rng/rng-uclass.c
+@@ -35,6 +35,24 @@ int dm_rng_read(struct udevice *dev, void *buffer, size_t size)
+ 	return ops->read(dev, buffer, size);
+ }
+ 
++int dm_rng_read_default(void *buffer, size_t size)
++{
++	struct udevice *rng;
++	int ret;
++
++	ret = platform_get_rng_device(&rng);
++	if (ret)
++		return ret;
++
++	ret = dm_rng_read(rng, buffer, size);
++	if (ret) {
++		pr_err("Can't read from RNG device (%d)\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
+ UCLASS_DRIVER(rng) = {
+ 	.name = "rng",
+ 	.id = UCLASS_RNG,
+diff --git a/include/rng.h b/include/rng.h
+index 255c85d3e8..6412fedad2 100644
+--- a/include/rng.h
++++ b/include/rng.h
+@@ -20,6 +20,16 @@ struct udevice;
+  */
+ int dm_rng_read(struct udevice *dev, void *buffer, size_t size);
+ 
++/**
++ * dm_rng_read_default() - same as dm_rng_read(), except that caller
++ * don't need to pass an argument with RNG udevice.
++ * @buffer:	input buffer to put the read random seed into
++ * @size:	number of bytes of random seed read
++ *
++ * Return: 0 if OK, -ve on error
++ */
++int dm_rng_read_default(void *buffer, size_t size);
++
+ /**
+  * platform_get_rng_device() - retrieve random number generator
+  *
 -- 
 2.30.1
 
