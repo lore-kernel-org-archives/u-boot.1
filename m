@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E5B2C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045DBC0018A
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:49:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99A3E8771C;
-	Thu,  2 Nov 2023 23:49:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F4898770D;
+	Thu,  2 Nov 2023 23:49:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="acPPLQ4f";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VI0TwuBT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C9AF87716; Thu,  2 Nov 2023 23:49:14 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id A9C2E87735; Thu,  2 Nov 2023 23:49:17 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 608AF87467
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51BEC876DF
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5a7b91faf40so17660717b3.1
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:09 -0700 (PDT)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-d9caf5cc948so1494273276.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965348; x=1699570148; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965350; x=1699570150; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AbvrCpKUAMUn7JT54Ux55HPk44On26eoi3BEk8XqZiw=;
- b=acPPLQ4fbgwQoCgBCpIBH42AQIlPE1D30TAYoiKBRsPK4UDGJ6Uj7ylXMnvXDcCBZf
- MkOJjYJRHv8ZNnqVlrxTc7PWmkMow9WneUaelEJKu1JwwQDaco4WGh96q2jV/7yCQp4T
- O2YVCZRDkhIFTnZ4BbpMD+x1hYL3DEINZK35o=
+ bh=4FZWD8y+8EeQ1EiLu7E2C4lV+BgA3Iv+5Jp1Yy7/0wE=;
+ b=VI0TwuBT+C2mkt0g2zzgzFmVEPWyQw2hRa45O8GAkCmLkMMb0QH5TsWoUeKwkRXO/t
+ TruWgXz1V8rjzzvNQtBUksTRFoIQkPLL2x7IrEpdJYQK1K6bqM2GoKqxm5hK316Xas3z
+ N2huYHCuG9xZIZYK+30RJzf9lalvwVoeLqyOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965348; x=1699570148;
+ d=1e100.net; s=20230601; t=1698965350; x=1699570150;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AbvrCpKUAMUn7JT54Ux55HPk44On26eoi3BEk8XqZiw=;
- b=FaF03v5iafeL0mH8CXL0YgnbpKbjJjbg14q06B80DrQs5jUBowkIsaybVKil5A6SHE
- TFKG87hSIw1a/k0kDGOETsbDwl8gdyER+ksMOf8lhTuSj7O8I0vxBg/6VddsMcnSU8+h
- tlhdEgqml0zMgiFtq7fEzDxI9YzW/nPP8TkRuUuEyDFu8745PVBDrsQ/YGZfgsqW0h1j
- D8TYuAYPO25GPMiQCdDrUEqvquAxXjA/0NLTunnnyFpRzlPgqkqhAymHI4GuEohOl6so
- kRBKk0wlTJIn9gCDDR/BIu9SD+D7DvpQPi04CRoUUdldgrlTheeI/bakHqlRX9B1+7hY
- uUfQ==
-X-Gm-Message-State: AOJu0YzW8ToC/NJfbO3hREC/+4ljVakWNRNXEOHVZPKr4rnNAVlAK8ZL
- kPyvxToc1xukE7b/oqUmr51m4V2Y3qLUT+proMK25dE/hzbxU9J/VDg=
-X-Google-Smtp-Source: AGHT+IGpi3XqQtGdKJfKA/drEUCWMn9AfjCH5o9ac5+fWi/6CKmwb6BLUQQoPQxGZlh9po3cpqHws8yLUBgZCdojtgg=
-X-Received: by 2002:a0d:cb15:0:b0:59b:dbb7:5c74 with SMTP id
- n21-20020a0dcb15000000b0059bdbb75c74mr1045712ywd.32.1698965347862; Thu, 02
- Nov 2023 15:49:07 -0700 (PDT)
+ bh=4FZWD8y+8EeQ1EiLu7E2C4lV+BgA3Iv+5Jp1Yy7/0wE=;
+ b=IQuvwpKWmuOTm2dPAgFOKPl43U+lnLtfjt+4pKVRPqx9M27YVZv6AruANqNERKp1cx
+ meptxSQxrpobcrJhpnPgmEGoj5SoW1GvYlNautppwNSvX6329NY8s6RyPDvCNB53hBTj
+ BGnR/DCjlyJLhc4bkTeNCw6HZZroS9VYqOdQBVgiFxuwBty5L0r4LcqTXG7WuoxZoM67
+ hS+Hsau292FbS4wm12JOc3d7IFoTCVxBtjJiisTAMUfob2id6JUsWvvgMAUTdFzQQmbt
+ x586KmvfugKgOgXXtwQaYYgmYj4JgpfeIjIv7Cgp/Mb3QVwQosL0sLJ6zvz8ecKnDOUU
+ R9kA==
+X-Gm-Message-State: AOJu0YzKK4Jn2R5iC1ULljaCHrU5EkKqxqH89zryeF/nvKzLM5Th0KGb
+ NafSKAu+olo8oF4N0O8TT4A3iPnZtA60CiRi7Csi2BvN03SPatp59po=
+X-Google-Smtp-Source: AGHT+IG+vJBzLieeEI08nTFJRiUwJEBQKBWNZ0KdcTcUb8aJDwhT+Q8VRAXDaREXolTjaWSzOdCbKSRbq2MBDG7OIn0=
+X-Received: by 2002:a25:7407:0:b0:da0:39ed:3ebb with SMTP id
+ p7-20020a257407000000b00da039ed3ebbmr19434528ybc.3.1698965349846; Thu, 02 Nov
+ 2023 15:49:09 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 2 Nov 2023 17:49:05 -0500
+ HTTPREST; Thu, 2 Nov 2023 17:49:06 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231101171753.88754-1-sjg@chromium.org>
-References: <20231101171753.88754-1-sjg@chromium.org>
-Date: Thu, 2 Nov 2023 17:49:05 -0500
-X-Google-Sender-Auth: gWd2oqT4aw7htPdnZ2O-eVV2Qy8
-Message-ID: <CAPnjgZ2qrShdXjpVNmCVScU4qFLRNgP0GkJWUAcAE9wgr3SKsA@mail.gmail.com>
-Subject: Re: [PATCH] u_boot_pylib: Ensure subprocess is closed down
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <20231024180342.GC496310@bill-the-cat>
+References: <20231024180342.GC496310@bill-the-cat>
+ <20231024063047.20874-1-heinrich.schuchardt@canonical.com>
+Date: Thu, 2 Nov 2023 17:49:06 -0500
+X-Google-Sender-Auth: OkDwfBdKftRdfYP2TwZ6vwyEmsM
+Message-ID: <CAPnjgZ0K80wziHJxCeASzm63r8CEmUt7h-Rf_rtBdfbdq0kBew@mail.gmail.com>
+Subject: Re: [PATCH v3 1/1] sandbox: eliminate unused functions from binaries
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,23 +85,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It isn't clear why we need to have two different paths for closing down
-the pipe. Unify them and use the Python to avoid this warning:
+On Tue, Oct 24, 2023 at 08:30:47AM +0200, Heinrich Schuchardt wrote:
 
-  subprocess.py:1127: ResourceWarning: subprocess 83531 is still running
+> The sandbox should closely mimic other architectures.
+>
+> Place each function or data in a separate section and let the linker
+> eliminate unused ones. This will reduce the binary size.
+>
+> In the linker script mark that u_boot_sandbox_getopt are to be kept.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Note that this code appears to originally have come from [1] and was
-committed into the ChromeOS chromiumos/platform/crosutils repo in the
-bin/cros_image_to_target.py file. The addition of the extra code path
-came later, so that is chosen for the fixes tag.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-[1] https://codereview.chromium.org/3391008
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: a10fd93cbc patman: Make command methods return a CommandResult
----
-
- tools/u_boot_pylib/command.py | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+-- 
+Tom
 
 Applied to u-boot-dm, thanks!
