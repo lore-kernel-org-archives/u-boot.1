@@ -4,69 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609FBC4167D
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 00:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8984CC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 00:49:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DA2687783;
-	Fri,  3 Nov 2023 01:39:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 4736586F8A;
+	Fri,  3 Nov 2023 01:49:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j+4BROHt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="rUIIYDI6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47AF786FC1; Fri,  3 Nov 2023 01:39:06 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9431C87645; Thu,  2 Nov 2023 21:45:17 +0100 (CET)
+Received: from smtp-out.freemail.hu (fmfe35.freemail.hu [46.107.16.240])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2174876D2
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 01:38:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63DE187622
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 21:45:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c8C4019791;
- Thu, 2 Nov 2023 19:38:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698971888;
- bh=1WCZNMl4GeqAHnMKx/PLZzT+uOhIH10RJbxNufZfp8w=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=j+4BROHtPiJmLFdWkkAgllIlDjrIhDOu1L6P1jr7ohpT96/8vgn701IxlaueW+nIt
- XDjq3KDfX7g2BItZYc5Ri4Goh2OPqudRP8BtZ6NEzNc7sGkzLD4thAGuR9+lEqzQzg
- AFuVcyUxra5j52f0/P2Kgz0CTXAlKAT86AEuAE6c=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A30c8vM017614
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 2 Nov 2023 19:38:08 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
- Nov 2023 19:38:08 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 2 Nov 2023 19:38:08 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c8U5007511;
- Thu, 2 Nov 2023 19:38:08 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH 04/15] board: ti: j721e: evm: Drop unused headers
-Date: Thu, 2 Nov 2023 19:37:54 -0500
-Message-ID: <20231103003805.2420005-5-nm@ti.com>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20231103003805.2420005-1-nm@ti.com>
-References: <20231103003805.2420005-1-nm@ti.com>
+ dmarc=none (p=none dis=none) header.from=freemail.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+Received: from localhost.localdomain (catv-80-98-74-198.catv.fixed.vodafone.hu
+ [80.98.74.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4SLwqV5Z9dz1BM;
+ Thu,  2 Nov 2023 21:45:10 +0100 (CET)
+From: egyszeregy@freemail.hu
+To: u-boot@lists.denx.de
+Cc: otavio@ossystems.com.br, festevam@gmail.com,
+ =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
+Subject: [PATCH 1/1] [u-boot][master][PATCH v6] pico-imx7d: add baseboard SD
+ card boot detect
+Date: Thu,  2 Nov 2023 21:44:54 +0100
+Message-ID: <20231102204454.269-1-egyszeregy@freemail.hu>
+X-Mailer: git-send-email 2.42.0.windows.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1698957911; 
+ s=20181004; d=freemail.hu;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ l=8645; bh=lTC/uNeboA7N7R+GAfS7SYv3PgJASv8q1AI02nQFhAg=;
+ b=rUIIYDI6bQyGUYPnc9HkraRxoIneHzpzi8sdbHgXpNWVkZ8zpC/UQAELEStY0jag
+ 0Gu+iNOypAoMd8UxImlK7xmQs0Cq7F25B5obtuR/95wWkSBBXXvVT4M46SufxWYIK4i
+ kX+E0bK1D9l2E2hJ7TkQZVeu7wd+MAZJyUp5+hk4UeCdnMxzEdCmDwS1MuTd/bUbcSu
+ Q9kBgkxG4FZMFkGHxCZmZyjDecb1JJoTjUUzDveKM+OGbTGsFhQ7VU1sa+oXEiYSLKL
+ bpTOhTkPdEuiIb8qwVTWAB8JHmUJoh103UT7TNRUVyMx0dy57CelaQTNMa0WI5xDW+x
+ fzcQSZTNfA==
+X-Mailman-Approved-At: Fri, 03 Nov 2023 01:49:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,39 +71,293 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop headers that are no longer necessary for build
+From: Benjamin Szőke <egyszeregy@freemail.hu>
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
+Technexion PICO-IMX7 SoM is supporting USDHC3 (eMMC or micro SD on SoM)
+and USDHC1 (SD on carrier board) to use on any carrier board like
+PICO-NYMPH. Based on the U-Boot version from Technexion it adds
+baseboard SD card boot detect to able to boot from selected USDHC1
+or USDHC3 boot devices.
+
+Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
 ---
- board/ti/j721e/evm.c | 8 --------
- 1 file changed, 8 deletions(-)
+ arch/arm/dts/imx7d-pico-pi-u-boot.dtsi   | 11 +--
+ board/technexion/pico-imx7d/Makefile     |  2 +-
+ board/technexion/pico-imx7d/pico-imx7d.c | 53 +++++++++++++-
+ board/technexion/pico-imx7d/spl.c        | 91 ++++++++++++++++++++++--
+ include/configs/pico-imx7d.h             |  4 +-
+ 5 files changed, 146 insertions(+), 15 deletions(-)
 
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 75d51a0552c4..8f0996c32ee6 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -8,21 +8,13 @@
-  */
+diff --git a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
+index 843b4583e5..3dd01e36a4 100644
+--- a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
++++ b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
+@@ -1,11 +1,12 @@
+ #include "imx7s-u-boot.dtsi"
  
- #include <common.h>
--#include <env.h>
--#include <fdt_support.h>
- #include <generic-phy.h>
- #include <image.h>
--#include <init.h>
--#include <log.h>
- #include <net.h>
- #include <asm/arch/hardware.h>
--#include <asm/global_data.h>
+ /{
+-    aliases {
+-        mmc0 = &usdhc3;
+-        usb0 = &usbotg1;
+-        display0 = &lcdif;
+-    };
++	aliases {
++		mmc0 = &usdhc3;
++		mmc1 = &usdhc1;
++		usb0 = &usbotg1;
++		display0 = &lcdif;
++	};
+ };
+ 
+ &usbotg1 {
+diff --git a/board/technexion/pico-imx7d/Makefile b/board/technexion/pico-imx7d/Makefile
+index 4ae3d606b5..61b55fcc55 100644
+--- a/board/technexion/pico-imx7d/Makefile
++++ b/board/technexion/pico-imx7d/Makefile
+@@ -1,4 +1,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ # (C) Copyright 2017 NXP Semiconductors
+ 
+-obj-y  := pico-imx7d.o spl.o
++obj-y  := pico-imx7d.o spl.o ../../freescale/common/mmc.o
+diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/pico-imx7d/pico-imx7d.c
+index 6e98b85b28..157aea6189 100644
+--- a/board/technexion/pico-imx7d/pico-imx7d.c
++++ b/board/technexion/pico-imx7d/pico-imx7d.c
+@@ -13,6 +13,7 @@
+ #include <asm/global_data.h>
  #include <asm/gpio.h>
--#include <asm/io.h>
- #include <spl.h>
- #include <dm.h>
--#include <dm/uclass-internal.h>
--#include <linux/printk.h>
+ #include <asm/mach-imx/iomux-v3.h>
++#include <asm/mach-imx/boot_mode.h>
+ #include <asm/io.h>
+ #include <common.h>
+ #include <miiphy.h>
+@@ -25,6 +26,11 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define UART_PAD_CTRL  (PAD_CTL_DSE_3P3V_49OHM | \
+ 	PAD_CTL_PUS_PU100KOHM | PAD_CTL_HYS)
  
- #include "../common/board_detect.h"
++#define PICO_MMC0 0
++#define PICO_MMC0_BLK 2
++#define PICO_MMC1 1
++#define PICO_MMC1_BLK 0
++
+ int dram_init(void)
+ {
+ 	gd->ram_size = imx_ddr_size();
+@@ -106,7 +112,7 @@ int board_phy_config(struct phy_device *phydev)
+ {
+ 	unsigned short val;
  
+-	/* To enable AR8035 ouput a 125MHz clk from CLK_25M */
++	/* To enable AR8035 output a 125MHz clk from CLK_25M */
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
+@@ -176,6 +182,12 @@ int board_late_init(void)
+ 
+ 	set_wdog_reset(wdog);
+ 
++#if CONFIG_IS_ENABLED(FSL_ESDHC_IMX)
++#if defined(CONFIG_ENV_IS_IN_MMC) || defined(CONFIG_ENV_IS_NOWHERE)
++	board_late_mmc_env_init();
++#endif /* CONFIG_ENV_IS_IN_MMC or CONFIG_ENV_IS_NOWHERE */
++#endif
++
+ 	/*
+ 	 * Do not assert internal WDOG_RESET_B_DEB(controlled by bit 4),
+ 	 * since we use PMIC_PWRON to reset the board.
+@@ -210,3 +222,42 @@ int board_ehci_hcd_init(int port)
+ 	}
+ 	return 0;
+ }
++
++int mmc_get_env_dev(void)
++{
++	int dev_no = 0;
++
++	switch (get_boot_device()) {
++	case SD3_BOOT:
++	case MMC3_BOOT:
++		env_set("bootdev", "MMC3");
++		dev_no = PICO_MMC0;
++		break;
++	case SD1_BOOT:
++		env_set("bootdev", "SD1");
++		dev_no = PICO_MMC1;
++		break;
++	default:
++		printf("Wrong boot device!");
++	}
++
++	return dev_no;
++}
++
++int mmc_map_to_kernel_blk(int dev_no)
++{
++	int blk_no = 0;
++
++	switch (dev_no) {
++	case PICO_MMC0:
++		blk_no = PICO_MMC0_BLK;
++		break;
++	case PICO_MMC1:
++		blk_no = PICO_MMC1_BLK;
++		break;
++	default:
++		printf("Invalid MMC device!");
++	}
++
++	return blk_no;
++}
+diff --git a/board/technexion/pico-imx7d/spl.c b/board/technexion/pico-imx7d/spl.c
+index c6b21aaa42..0192eafbaa 100644
+--- a/board/technexion/pico-imx7d/spl.c
++++ b/board/technexion/pico-imx7d/spl.c
+@@ -15,6 +15,7 @@
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch-mx7/mx7-ddr.h>
+ #include <asm/mach-imx/iomux-v3.h>
++#include <asm/mach-imx/boot_mode.h>
+ #include <asm/gpio.h>
+ #include <asm/sections.h>
+ #include <fsl_esdhc_imx.h>
+@@ -159,7 +160,20 @@ void reset_cpu(void)
+ #define USDHC_PAD_CTRL (PAD_CTL_DSE_3P3V_32OHM | PAD_CTL_SRE_SLOW | \
+ 	PAD_CTL_HYS | PAD_CTL_PUE | PAD_CTL_PUS_PU47KOHM)
+ 
+-static iomux_v3_cfg_t const usdhc3_pads[] = {
++#define USDHC1_CD_GPIO	IMX_GPIO_NR(5, 0)
++/* EMMC/SD */
++static const iomux_v3_cfg_t usdhc1_pads[] = {
++	MX7D_PAD_SD1_CLK__SD1_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX7D_PAD_SD1_CMD__SD1_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX7D_PAD_SD1_DATA0__SD1_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX7D_PAD_SD1_DATA1__SD1_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX7D_PAD_SD1_DATA2__SD1_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX7D_PAD_SD1_DATA3__SD1_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++	MX7D_PAD_SD1_CD_B__GPIO5_IO0  | MUX_PAD_CTRL(USDHC_PAD_CTRL),
++};
++
++#define USDHC3_CD_GPIO IMX_GPIO_NR(1, 14)
++static const iomux_v3_cfg_t usdhc3_emmc_pads[] = {
+ 	MX7D_PAD_SD3_CLK__SD3_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+ 	MX7D_PAD_SD3_CMD__SD3_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+ 	MX7D_PAD_SD3_DATA0__SD3_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+@@ -173,20 +187,83 @@ static iomux_v3_cfg_t const usdhc3_pads[] = {
+ 	MX7D_PAD_GPIO1_IO14__GPIO1_IO14 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
+ };
+ 
+-static struct fsl_esdhc_cfg usdhc_cfg[1] = {
++static struct fsl_esdhc_cfg usdhc_cfg[2] = {
+ 	{USDHC3_BASE_ADDR},
++	{USDHC1_BASE_ADDR},
+ };
+ 
+ int board_mmc_getcd(struct mmc *mmc)
+ {
+-	/* Assume uSDHC3 emmc is always present */
+-	return 1;
++	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
++	int ret = 0;
++
++	switch (cfg->esdhc_base) {
++	case USDHC1_BASE_ADDR:
++		ret = !gpio_get_value(USDHC1_CD_GPIO);
++		break;
++	case USDHC3_BASE_ADDR:
++		ret = !gpio_get_value(USDHC3_CD_GPIO);
++		break;
++	}
++
++	return ret;
+ }
+ 
+ int board_mmc_init(struct bd_info *bis)
+ {
+-	imx_iomux_v3_setup_multiple_pads(usdhc3_pads, ARRAY_SIZE(usdhc3_pads));
+-	usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
+-	return fsl_esdhc_initialize(bis, &usdhc_cfg[0]);
++	int ret;
++	u32 index;
++
++	/*
++	 * Following map is done:
++	 * (USDHC)	(Physical Port)
++	 * usdhc3	SOM MicroSD/MMC
++	 * usdhc1	Carrier board MicroSD
++	 * Always set boot USDHC as mmc0
++	 */
++
++	imx_iomux_v3_setup_multiple_pads(usdhc3_emmc_pads,
++					 ARRAY_SIZE(usdhc3_emmc_pads));
++	gpio_direction_input(USDHC3_CD_GPIO);
++
++	imx_iomux_v3_setup_multiple_pads(usdhc1_pads,
++					 ARRAY_SIZE(usdhc1_pads));
++	gpio_direction_input(USDHC1_CD_GPIO);
++
++	switch (get_boot_device()) {
++	case SD1_BOOT:
++		usdhc_cfg[0].esdhc_base = USDHC1_BASE_ADDR;
++		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
++		usdhc_cfg[0].max_bus_width = 4;
++		usdhc_cfg[1].esdhc_base = USDHC3_BASE_ADDR;
++		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
++		usdhc_cfg[1].max_bus_width = 4;
++		break;
++	case MMC3_BOOT:
++		usdhc_cfg[0].esdhc_base = USDHC3_BASE_ADDR;
++		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
++		usdhc_cfg[0].max_bus_width = 8;
++		usdhc_cfg[1].esdhc_base = USDHC1_BASE_ADDR;
++		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
++		usdhc_cfg[1].max_bus_width = 4;
++		break;
++	case SD3_BOOT:
++	default:
++		usdhc_cfg[0].esdhc_base = USDHC3_BASE_ADDR;
++		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
++		usdhc_cfg[0].max_bus_width = 4;
++		usdhc_cfg[1].esdhc_base = USDHC1_BASE_ADDR;
++		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
++		usdhc_cfg[1].max_bus_width = 4;
++		break;
++	}
++
++	for (index = 0; index < CFG_SYS_FSL_USDHC_NUM; ++index) {
++		ret = fsl_esdhc_initialize(bis, &usdhc_cfg[index]);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
+ }
+ #endif
+diff --git a/include/configs/pico-imx7d.h b/include/configs/pico-imx7d.h
+index 096e5bbe66..e7a8cb20df 100644
+--- a/include/configs/pico-imx7d.h
++++ b/include/configs/pico-imx7d.h
+@@ -13,7 +13,7 @@
+ #define CFG_MXC_UART_BASE		UART5_IPS_BASE_ADDR
+ 
+ /* MMC Config */
+-#define CFG_SYS_FSL_ESDHC_ADDR	0
++#define CFG_SYS_FSL_ESDHC_ADDR	USDHC3_BASE_ADDR
+ 
+ #define CFG_DFU_ENV_SETTINGS \
+ 	"dfu_alt_info=" \
+@@ -79,9 +79,11 @@
+ 		"name=rootfs,size=0,uuid=${uuid_gpt_rootfs}\0" \
+ 	"fastboot_partition_alias_system=rootfs\0" \
+ 	"setup_emmc=mmc dev 0; gpt write mmc 0 $partitions; reset;\0" \
++	"mmcautodetect=yes\0" \
+ 	PICO_BOOT_ENV
+ 
+ #define BOOT_TARGET_DEVICES(func) \
++	func(MMC, mmc, 1) \
+ 	func(MMC, mmc, 0) \
+ 	func(USB, usb, 0) \
+ 	func(PXE, pxe, na) \
 -- 
-2.40.0
+2.42.0.windows.2
 
