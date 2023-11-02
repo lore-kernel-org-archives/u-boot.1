@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37AAC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADD9C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6820B8776E;
-	Thu,  2 Nov 2023 23:49:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E924A87749;
+	Thu,  2 Nov 2023 23:49:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cokAFcpv";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ObbqJUFp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5326C87768; Thu,  2 Nov 2023 23:49:28 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 9A54087743; Thu,  2 Nov 2023 23:49:30 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AD4A876DF
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6961E87725
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5a8ee23f043so17873617b3.3
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:23 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a87ac9d245so18101787b3.3
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965362; x=1699570162; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965364; x=1699570164; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UB6hchb2aUz65KgkgrVT6MXpSL1/cRrBXoAU9VjBvaw=;
- b=cokAFcpvAzwQzPolyt7xPuyuw9iGH755lVZccXLvVGuSENDyGolGzYL7W5ZIoC3Mmj
- n5gw4huef1hBC6RlE2ALJJefvkyeX+4+LrzWRKMvUsUDmN2yU+1qcPc2fuwfQ7IGtOAW
- vW+MfrFoe1M0CUkUbBmDs/YWZTc7/vhuY0I2U=
+ bh=nWlc1BcaH8TLsDHA5nxMi4zRoqUowceYHpvbmdTcef4=;
+ b=ObbqJUFpFkIiA/MPJ8uliFjFsWt9Lgj9XcbWLFSuUEtwkg3d3qnkYqGj4O2yClzzL5
+ kmq6uhZlLX5Y5N0LUUpvE/1MPJ7S0tEFkzhxu5diVRwWbXCQBdWMvhkplqXGZmgCOa0f
+ qMLRo8Iy2NL8P70lXEonPrET2/rTY5MW6J5g0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965362; x=1699570162;
+ d=1e100.net; s=20230601; t=1698965364; x=1699570164;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UB6hchb2aUz65KgkgrVT6MXpSL1/cRrBXoAU9VjBvaw=;
- b=lw3401v7sMrWSH17Cqogq37vc1yfzBTeHH6dcdcU0uEF9Mu3YA/H1PtGTGYGS2B2xT
- YXOQaYjxdVxt8aCIcB6YjyDEASqCpq6gcz6Og0kLEU3XK1wpJTc+BpEgAzXezKXcalrg
- AphOlbqSe9U4RLYiZ9a93OmuAIICwavmcUUoTIXv7X4nkV4dw/bV5dpIV7Mesa2PABN8
- Lj8maFS+B5AKER2KtVmkOwzhtvZtDYOl7Rl5ZdQ2zoedzngJTRLcaC4lSHiiRFfQQygw
- KH4nlK1FU1rHWzUGkHZ+9PzmA7A5INy5lw4VJEp6fCScuVimO6yZ8pvBtLS+V4L82NQT
- tqDg==
-X-Gm-Message-State: AOJu0Yxx++HpufUWltO3z0YiHzIqGJqVMimJQOhlHu1g/h40gTlaFf4t
- A3WstA/UrI+x5w2M/9UTa2y2932o4qgAM2IrxeVr+w==
-X-Google-Smtp-Source: AGHT+IFWA9n9yms2tPDE/h27q7fzMBS2R0W/Z8b3lyYQHQhuBPuOYV5W48jN8Dr7mwXOKPgEGMvK9T+GZ1SExTBxVRI=
-X-Received: by 2002:a81:4f93:0:b0:59c:678:7a32 with SMTP id
- d141-20020a814f93000000b0059c06787a32mr1213788ywb.29.1698965361982; Thu, 02
- Nov 2023 15:49:21 -0700 (PDT)
+ bh=nWlc1BcaH8TLsDHA5nxMi4zRoqUowceYHpvbmdTcef4=;
+ b=LKFRse71bpudFy3zNrAmM+V4jvOxsdgX50whWoKTf9LkqwbXq+PfOIGYX751cUH3E7
+ xIpW8tzvA7BvqxdPNef6AJa+A6jirdGn7e6lc0W7VOBMB+v5/Tw490JTRo+t/w0cyVrk
+ mx+UK9kPYSKr2At6NW2NgNgravQ9Z7+WJzobL3xB5qnNcxipv/aSBNdzq9fgWScD7W0r
+ 4oM8sD1NBoPz4loEaHSi3ymxYlKl2iS5c+lMMx4ke9loA+6VmVFGoQRqfwK6qIcl8ad9
+ eY2MqUNa/XTw52+o/vAHDhyOAh45zWAg8K0rLfbkyrTB7EdQatsaWeX2Fy8Rm3qsEK6Z
+ kb3w==
+X-Gm-Message-State: AOJu0YxssntJwLGf6Ysmmb1/et4QN7ZbwDz6WOrEkyJoEmg9re7URzsv
+ uqQiH3zzr6mSIhbF09KY7O+TEt0rDHYaFUXKiS1Tmg==
+X-Google-Smtp-Source: AGHT+IF8qgdLmGhN1BOuc3LYySGsO7WfDLPNrcdidMUaVxLG3xjSCUvJ2kYb7DkgjYH+2n599uO0MtzSeNk1dJP8WR0=
+X-Received: by 2002:a0d:d912:0:b0:577:3d46:f90e with SMTP id
+ b18-20020a0dd912000000b005773d46f90emr1173448ywe.32.1698965363958; Thu, 02
+ Nov 2023 15:49:23 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 2 Nov 2023 17:49:16 -0500
+ HTTPREST; Thu, 2 Nov 2023 17:49:18 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231014204033.3077052-6-sjg@chromium.org>
-References: <20231014204033.3077052-6-sjg@chromium.org>
+In-Reply-To: <20231014204033.3077052-5-sjg@chromium.org>
+References: <20231014204033.3077052-5-sjg@chromium.org>
  <20231014204033.3077052-1-sjg@chromium.org>
-Date: Thu, 2 Nov 2023 17:49:15 -0500
-X-Google-Sender-Auth: UVC7czbKMlpX86Vm7wfFYeekFxM
-Message-ID: <CAPnjgZ2CdcwWu0nLs1uFNF17WG=J=SgiJmPmzDPbr+m4Pxdk+A@mail.gmail.com>
-Subject: Re: [PATCH 5/6] binman: Rename TYPE_STAGE to TYPE_LEGACY_STAGE
+Date: Thu, 2 Nov 2023 17:49:18 -0500
+X-Google-Sender-Auth: MuqFNdelzeSfykcvMNODY_ZsWmU
+Message-ID: <CAPnjgZ2X9U5b0NtCWB2BbmgkHEfACQ6Wvinaxhv36o7pqME2Ow@mail.gmail.com>
+Subject: Re: [PATCH 4/6] binman: Replace FILENAME_ALIGN 16 with
+ ATTRIBUTE_ALIGN 4
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
@@ -88,16 +89,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In preparation for changing how stages are stored, rename the existing
-stage tag.
+cbfsutil changed to 4-byte alignment for filenames instead of 16.
+Adjust the binman implementation to do the same.
+
+This mirrors commit 5779ca718c in coreboot.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/cbfs.c                     |  2 +-
- include/cbfs.h                 |  2 +-
- tools/binman/cbfs_util.py      | 12 ++++++------
- tools/binman/cbfs_util_test.py |  3 ++-
- 4 files changed, 10 insertions(+), 9 deletions(-)
+ tools/binman/cbfs_util.py      | 10 +++++-----
+ tools/binman/cbfs_util_test.py | 19 ++++++++++---------
+ tools/binman/ftest.py          | 10 +++++-----
+ 3 files changed, 20 insertions(+), 19 deletions(-)
 
 Applied to u-boot-dm, thanks!
