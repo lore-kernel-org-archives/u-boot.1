@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC2FAC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 02:44:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D658CC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 06:25:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65622876C9;
-	Thu,  2 Nov 2023 03:44:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A719F86F5B;
+	Thu,  2 Nov 2023 07:25:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hcC1n3uK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vUPi8H8x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47735876C4; Thu,  2 Nov 2023 03:44:24 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A810186F32; Thu,  2 Nov 2023 07:25:17 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C704876B1
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 03:44:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0971A86F32
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 07:25:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1cc1ee2d8dfso3670645ad.3
- for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 19:44:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1698893057; x=1699497857; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Mq/Yx0dPCYv5b6DZiCo//WoxA3IP5J7Ah5LGbEw/zsU=;
- b=hcC1n3uKN2pXM4D+xIAUdcH1P0a4W87pG+bF1rocXMoCSYB7BdSyAKel2rdfBZSc08
- rcfZSiGMvhWvxHLBNzKOrImSMU2s9xwvTLPtjgVzv44JBEjXEk6a4jgx1DATebL8hWzQ
- MyVJyBg36KIy5BghxQFiQfHu+x1GxaIMf3v2Ka3K9AVAJVCNObNyp6W95mGlPTLqPMhb
- YqApDor8sZtpU9nKvpVEKz+aZACtb2uTQLIfjLHw70PHRF1MWDLLgGXM2A/fPiJgoTGe
- nQllQeLVtO2qjHX3iTuZsRqIpjwpCA4XN4KAD2LAifrk2KaBm7/FBGM5n1FcFBcn1WLa
- l1xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698893057; x=1699497857;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Mq/Yx0dPCYv5b6DZiCo//WoxA3IP5J7Ah5LGbEw/zsU=;
- b=H7LpoPgaBFERkQmJUyPFMQG0nFcZTvgHXlV5es4OkpYWIgZkr+ZcpSn24AuLO5IRbN
- 2VFMgCwaPQ2vX1ze8rNzEM16fgzMElPhNsoDu5W5pSO88w9/un3klFUBsJlcwz0u7ps2
- cGpz87Sl5SpoSGRxXMt11uPxXZ+WSYpDdzcmA2v6pLZWg5QPCtBM+DmSiRrGOpWoO7hC
- Ndk4jGDjtq0cmwumD7AFKN46OHE6nLCKylt6DpNVPX4JeAWcqTQCZq5Qgq/IB8NycJnn
- pMszJomOmgu5xzXYuas9pjoT4flMm6tp5iNBJ1d5Hne1YIdLYlpK0Pb83QyBxt7H1l0F
- mriA==
-X-Gm-Message-State: AOJu0YzE2u/XbjBu8NRX5542wxMg/TNXD4FdBlktmSNkYmCJAI8sIOrZ
- S7SC71Q7czUOSa74oea9IPzB1UdY8/ekzc7T5QSMnQ==
-X-Google-Smtp-Source: AGHT+IGNvzrItF+0DMpw4uP13ucVj/f0wKccxHdCW2Yef29R4H9zCInXKGq8S0oRGJrJGlPS4SM00TUYwOZgoeOEsRU=
-X-Received: by 2002:a17:90b:4b08:b0:280:77b0:f5de with SMTP id
- lx8-20020a17090b4b0800b0028077b0f5demr9158894pjb.26.1698893057328; Wed, 01
- Nov 2023 19:44:17 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A26P5IZ060037;
+ Thu, 2 Nov 2023 01:25:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698906305;
+ bh=BqdYDMNS3Cx6XOIsn9nOBv0MqxqC81QEBA2fOBsWGy8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=vUPi8H8xQC03aM5Ik9c7m76ScP81G6BZfvtuY4wfbXNx5YWGVxQ2dZ6fFDAcSldwM
+ 0f33LUy5qnCv0o4v0+BpKLtUnpy7Qg6mBDUYsbMlWs42yV+KI575yBx+hawL4Jft9t
+ ikm2o/YuYDHSh1TZ48zTiiUGnsgfIAxVTN30g9ko=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A26P5JC022263
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 2 Nov 2023 01:25:05 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
+ Nov 2023 01:25:05 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 2 Nov 2023 01:25:05 -0500
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A26P08B077509;
+ Thu, 2 Nov 2023 01:25:01 -0500
+Message-ID: <84e2d5ff-1b9c-4149-a9db-2f4c591c3ee0@ti.com>
+Date: Thu, 2 Nov 2023 11:55:00 +0530
 MIME-Version: 1.0
-References: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
- <20231025062845.3100964-6-masahisa.kojima@linaro.org>
- <CAC_iWjJJSTFQKctpsRzg=M9RVkD7G8qVSbfsMhfieW9k9oCrKg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJJSTFQKctpsRzg=M9RVkD7G8qVSbfsMhfieW9k9oCrKg@mail.gmail.com>
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Thu, 2 Nov 2023 11:44:06 +0900
-Message-ID: <CADQ0-X8i084DJ8xbzQcuQPM5baJJNZOtHo-PjMThAwam=AEefQ@mail.gmail.com>
-Subject: Re: [PATCH v8 5/7] efi_loader: support boot from URI device path
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] board: ti: Add dependency from TARGET selection to SOC
+Content-Language: en-US
+To: Andrew Davis <afd@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Bryan Brattlof
+ <bb@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>, Le Jin
+ <le.jin@siemens.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
+CC: <u-boot@lists.denx.de>
+References: <20231101203530.80359-1-afd@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231101203530.80359-1-afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,382 +83,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Andrew,
 
-On Fri, 27 Oct 2023 at 04:35, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Kojima-san,
->
-> Thanks the device path handling seems saner in this version.
->
-> On Wed, 25 Oct 2023 at 09:30, Masahisa Kojima
-> <masahisa.kojima@linaro.org> wrote:
-> >
-> > This supports to boot from the URI device path.
-> > When user selects the URI device path, bootmgr downloads
-> > the file using wget into the address specified by loadaddr
-> > env variable.
-> > If the file is .iso or .img file, mount the image with blkmap
-> > then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > Since boot option indicating the default file is automatically
-> > created when new disk is detected, system can boot by selecting
-> > the automatically created blkmap boot option.
-> > If the file is PE-COFF file, load and start the downloaded file.
-> >
-> > The buffer used to download the ISO image file must be
-> > reserved to avoid the unintended access to the image and
-> > expose the ramdisk to the OS.
-> > For PE-COFF file case, this memory reservation is done
-> > in LoadImage Boot Service.
-> >
-> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > ---
-> >  cmd/bootefi.c                |   5 +
-> >  include/efi_loader.h         |   1 +
-> >  lib/efi_loader/Kconfig       |   9 ++
-> >  lib/efi_loader/efi_bootmgr.c | 229 +++++++++++++++++++++++++++++++++++
-> >  4 files changed, 244 insertions(+)
-> >
-> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> > index 20e5c94a33..74203ec5b6 100644
-> > --- a/cmd/bootefi.c
-> > +++ b/cmd/bootefi.c
-> > @@ -394,6 +394,11 @@ out:
-> >                         log_err("Failed to remove loadfile2 for initrd\n");
-> >         }
-> >
-> > +       if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT)) {
-> > +               if (efi_bootmgr_release_ramdisk() != EFI_SUCCESS)
-> > +                       log_err("Failed to remove ramdisk\n");
-> > +       }
-> > +
->
-> So, I know I am the one who did this first and removed the loadfile2
-> protocol by calling a function in a boot failure.
-> I didn't like it back then either but we didn't have events.  I think
-> it's best if we define an event for reverting  the memory changes
-> instead of calling functions (and I will fix the same thing for
-> loadfile2 protocol destruction)
+On 02/11/23 02:05, Andrew Davis wrote:
+> Currently the K3 selection for TARGET boards does not depend on the SoC
+> for which it is based. This leds to the odd ability to select for instance
+> both SOC_K3_AM625 and TARGET_J721E_A72_EVM.
+> 
+> To fix this the target choice should depend on the matching SOC config.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>   board/siemens/iot2050/Kconfig     | 2 +-
+>   board/ti/am62ax/Kconfig           | 1 +
+>   board/ti/am62x/Kconfig            | 1 +
+>   board/ti/am64x/Kconfig            | 1 +
+>   board/ti/am65x/Kconfig            | 1 +
+>   board/ti/j721e/Kconfig            | 1 +
+>   board/ti/j721s2/Kconfig           | 1 +
+>   board/toradex/verdin-am62/Kconfig | 1 +
+>   8 files changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/board/siemens/iot2050/Kconfig b/board/siemens/iot2050/Kconfig
+> index a6170aae807..737cda64744 100644
+> --- a/board/siemens/iot2050/Kconfig
+> +++ b/board/siemens/iot2050/Kconfig
+> @@ -8,8 +8,8 @@
+>   
+>   config TARGET_IOT2050_A53
+>   	bool "IOT2050 running on A53"
+> +	depends on SOC_K3_AM654
+>   	select ARM64
+> -	select SOC_K3_AM654
+>   	select BOARD_LATE_INIT
+>   	select SYS_DISABLE_DCACHE_OPS
+>   	select BINMAN
+> diff --git a/board/ti/am62ax/Kconfig b/board/ti/am62ax/Kconfig
+> index 61f289faccd..30e1a068660 100644
+> --- a/board/ti/am62ax/Kconfig
+> +++ b/board/ti/am62ax/Kconfig
+> @@ -5,6 +5,7 @@
+>   
+>   choice
+>   	prompt "TI K3 AM62Ax based boards"
+> +	depends on SOC_K3_AM62A7
+>   	optional
+>   
+>   config TARGET_AM62A7_A53_EVM
+> diff --git a/board/ti/am62x/Kconfig b/board/ti/am62x/Kconfig
+> index cd17e939e5a..b4b70337d18 100644
+> --- a/board/ti/am62x/Kconfig
+> +++ b/board/ti/am62x/Kconfig
+> @@ -5,6 +5,7 @@
+>   
+>   choice
+>   	prompt "TI K3 AM62x based boards"
+> +	depends on SOC_K3_AM625
+>   	optional
+>   
+>   config TARGET_AM625_A53_EVM
+> diff --git a/board/ti/am64x/Kconfig b/board/ti/am64x/Kconfig
+> index fb596e4adfc..2dbc6197b75 100644
+> --- a/board/ti/am64x/Kconfig
+> +++ b/board/ti/am64x/Kconfig
+> @@ -4,6 +4,7 @@
+>   
+>   choice
+>   	prompt "K3 AM64 based boards"
+> +	depends on SOC_K3_AM642
+>   	optional
+>   
+>   config TARGET_AM642_A53_EVM
+> diff --git a/board/ti/am65x/Kconfig b/board/ti/am65x/Kconfig
+> index 5fd19d652a6..7c1bcfc899c 100644
+> --- a/board/ti/am65x/Kconfig
+> +++ b/board/ti/am65x/Kconfig
+> @@ -5,6 +5,7 @@
+>   
+>   choice
+>   	prompt "K3 AM65 based boards"
+> +	depends on SOC_K3_AM654
+>   	optional
+>   
+>   config TARGET_AM654_A53_EVM
+> diff --git a/board/ti/j721e/Kconfig b/board/ti/j721e/Kconfig
+> index e6cb21f77bd..23867ad8e04 100644
+> --- a/board/ti/j721e/Kconfig
+> +++ b/board/ti/j721e/Kconfig
+> @@ -5,6 +5,7 @@
+>   
+>   choice
+>   	prompt "K3 J721E based boards"
+> +	depends on SOC_K3_J721E
+>   	optional
+>   
+>   config TARGET_J721E_A72_EVM
+> diff --git a/board/ti/j721s2/Kconfig b/board/ti/j721s2/Kconfig
+> index f6d1cb57653..a4a5d16ba21 100644
+> --- a/board/ti/j721s2/Kconfig
+> +++ b/board/ti/j721s2/Kconfig
+> @@ -5,6 +5,7 @@
+>   
+>   choice
+>   	prompt "K3 J721S2 board"
+> +	depends on SOC_K3_J721S2
+>   	optional
+>   
+>   config TARGET_J721S2_A72_EVM
+> diff --git a/board/toradex/verdin-am62/Kconfig b/board/toradex/verdin-am62/Kconfig
+> index e7522244070..abc2984f250 100644
+> --- a/board/toradex/verdin-am62/Kconfig
+> +++ b/board/toradex/verdin-am62/Kconfig
+> @@ -5,6 +5,7 @@
+>   
+>   choice
+>   	prompt "Toradex Verdin AM62 based boards"
+> +	depends on SOC_K3_AM625
+>   	optional
+>   
+>   config TARGET_VERDIN_AM62_A53
 
-We discussed this offline, and we decided to implement this resource
-release by EFI event.
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
->
-> Heinrich what do you think?
->
-> >         /* Control is returned to U-Boot, disable EFI watchdog */
-> >         efi_set_watchdog(0);
-> >
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index e24410505f..2fea1f17fb 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -937,6 +937,7 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
-> >                                   efi_uintn_t load_options_size,
-> >                                   void *load_options);
-> >  efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
->
-> [...]
->
-> >
-> > +#include <blk.h>
-> > +#include <blkmap.h>
-> >  #include <common.h>
-> >  #include <charset.h>
-> > +#include <dm.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
-> > +#include <net.h>
-> >  #include <efi_default_filename.h>
-> >  #include <efi_loader.h>
-> >  #include <efi_variable.h>
-> > @@ -19,6 +23,10 @@
-> >  static const struct efi_boot_services *bs;
-> >  static const struct efi_runtime_services *rs;
-> >
-> > +static u32 image_size;
-> > +static ulong image_addr;
-> > +static struct udevice *ramdisk_blk_dev = NULL;
-> > +
-> >  const efi_guid_t efi_guid_bootmenu_auto_generated =
-> >                 EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
-> >
-> > @@ -168,6 +176,197 @@ out:
-> >         return ret;
-> >  }
-> >
-> > +/**
-> > + * mount_image() - mount the image with blkmap
-> > + *
-> > + * @lo_label:  u16 label string of load option
-> > + * @addr:      image address
-> > + * @size:      image size
-> > + * Return:     pointer to the UCLASS_BLK udevice, NULL if failed
-> > + */
-> > +static struct udevice *mount_image(u16 *lo_label, ulong addr, int size)
-> > +{
-> > +       int err;
-> > +       struct blkmap *bm;
-> > +       struct udevice *bm_dev;
-> > +       char *label = NULL, *p;
-> > +
-> > +       label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
-> > +       if (!label)
-> > +               return NULL;
-> > +
-> > +       p = label;
-> > +       utf16_utf8_strcpy(&p, lo_label);
-> > +       err = blkmap_create_ramdisk(label, addr, size, &bm_dev);
-> > +       if (err) {
-> > +               efi_free_pool(label);
-> > +               return NULL;
-> > +       }
-> > +       bm = dev_get_plat(bm_dev);
-> > +
-> > +       efi_free_pool(label);
-> > +
-> > +       return bm->blk;
-> > +}
-> > +
-> > +/**
-> > + * try_load_default_file() - try to load the default file
-> > + *
-> > + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> > + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > + *
-> > + * @dev                        pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
-> > + * @image_handle:      pointer to handle for newly installed image
-> > + * Return:             status code
-> > + */
-> > +static efi_status_t try_load_default_file(struct udevice *dev,
-> > +                                         efi_handle_t *image_handle)
-> > +{
-> > +       efi_status_t ret;
-> > +       efi_handle_t handle;
-> > +       struct efi_handler *handler;
-> > +       struct efi_device_path *file_path;
-> > +       struct efi_device_path *device_path;
-> > +
-> > +       if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
-> > +               log_warning("DM_TAG_EFI not found\n");
-> > +               return EFI_INVALID_PARAMETER;
-> > +       }
-> > +
-> > +       ret = efi_search_protocol(handle,
-> > +                                 &efi_simple_file_system_protocol_guid, &handler);
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
->
-> nit; but do we really need this check? Or is it just to fail early
-> before efi_load_image() gets called?
-
-UEFI specification requires EFI_SIMPLE_FILE_SYSTEM_PROTOCOL is installed to
-load the default file, so it is checked here.
-
->
-> > +
-> > +       ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
-> > +                                        (void **)&device_path, efi_root, NULL,
-> > +                                        EFI_OPEN_PROTOCOL_GET_PROTOCOL));
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       file_path = expand_media_path(device_path);
-> > +       ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
-> > +                                     image_handle));
-> > +       efi_free_pool(file_path);
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +/**
-> > + * load_default_file_from_blk_dev() - load the default file
-> > + *
-> > + * @blk                pointer to the UCLASS_BLK udevice
-> > + * @handle:    pointer to handle for newly installed image
-> > + * Return:     status code
-> > + */
-> > +static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
-> > +                                                  efi_handle_t *handle)
-> > +{
-> > +       efi_status_t ret;
-> > +       struct udevice *partition;
-> > +
-> > +       /* image that has no partition table but a file system */
-> > +       ret = try_load_default_file(blk, handle);
-> > +       if (ret == EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       /* try the partitions */
-> > +       device_foreach_child(partition, blk) {
-> > +               enum uclass_id id;
-> > +
-> > +               id = device_get_uclass_id(partition);
-> > +               if (id != UCLASS_PARTITION)
-> > +                       continue;
-> > +
-> > +               ret = try_load_default_file(partition, handle);
-> > +               if (ret == EFI_SUCCESS)
-> > +                       return ret;
-> > +       }
-> > +
-> > +       return EFI_NOT_FOUND;
-> > +}
-> > +
-> > +/**
-> > + * try_load_from_uri_path() - Handle the URI device path
-> > + *
-> > + * @uridp:     uri device path
-> > + * @lo_label:  label of load option
-> > + * @handle:    pointer to handle for newly installed image
-> > + * Return:     status code
-> > + */
-> > +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> > +                                          u16 *lo_label,
-> > +                                          efi_handle_t *handle)
-> > +{
-> > +       char *s;
-> > +       int err;
-> > +       int uri_len;
-> > +       efi_status_t ret;
-> > +
-> > +       s = env_get("loadaddr");
-> > +       if (!s) {
-> > +               log_err("Error: loadaddr is not set\n");
-> > +               return EFI_INVALID_PARAMETER;
-> > +       }
-> > +       image_addr = hextoul(s, NULL);
-> > +       err = wget_with_dns(image_addr, uridp->uri);
-> > +       if (err < 0)
-> > +               return EFI_INVALID_PARAMETER;
-> > +       image_size = env_get_hex("filesize", 0);
-> > +       if (!image_size)
-> > +               return EFI_INVALID_PARAMETER;
-> > +
-> > +       /*
-> > +        * If the file extension is ".iso" or ".img", mount it and try to load
-> > +        * the default file.
-> > +        * If the file is PE-COFF image, load the downloaded file.
-> > +        */
-> > +       uri_len = strlen(uridp->uri);
-> > +       if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
-> > +           !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
-> > +               struct udevice *blk;
-> > +
-> > +               blk = mount_image(lo_label, image_addr, image_size);
-> > +               if (!blk)
-> > +                       return EFI_LOAD_ERROR;
-> > +
-> > +               ret = load_default_file_from_blk_dev(blk, handle);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       return ret;
-> > +
-> > +               ramdisk_blk_dev = blk;
-> > +
-> > +               /*
-> > +                * TODO: expose the ramdisk to OS.
-> > +                * Need to pass the ramdisk information by the architecture-specific
-> > +                * methods such as 'pmem' device-tree node.
-> > +                */
-> > +               ret = efi_add_memory_map(image_addr, image_size,
-> > +                                        EFI_RESERVED_MEMORY_TYPE);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       efi_bootmgr_release_ramdisk();
-> > +       } else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
-> > +               efi_handle_t mem_handle = NULL;
-> > +               struct efi_device_path *file_path;
-> > +
-> > +               file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> > +                                           (uintptr_t)image_addr, image_size);
-> > +               ret = efi_install_multiple_protocol_interfaces(
-> > +                       &mem_handle, &efi_guid_device_path, file_path, NULL);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       return ret;
-> > +
-> > +               ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
-> > +                                             (void *)image_addr, image_size,
-> > +                                             handle));
-> > +       } else {
-> > +               log_err("Error: file type is not supported\n");
-> > +               return EFI_UNSUPPORTED;
-> > +       }
-> > +
-> > +       return ret;
-> > +}
-> > +
-> >  /**
-> >   * try_load_entry() - try to load image for boot option
-> >   *
-> > @@ -211,6 +410,14 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
-> >                 if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
-> >                         /* file_path doesn't contain a device path */
-> >                         ret = try_load_from_short_path(lo.file_path, handle);
-> > +               } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-> > +                       if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
-> > +                               ret = try_load_from_uri_path(
-> > +                                       (struct efi_device_path_uri *)
-> > +                                               lo.file_path,
-> > +                                       lo.label, handle);
-> > +                       else
-> > +                               ret = EFI_LOAD_ERROR;
-> >                 } else {
-> >                         file_path = expand_media_path(lo.file_path);
-> >                         ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-> > @@ -345,6 +552,28 @@ error:
-> >         return ret;
-> >  }
-> >
-> > +/**
-> > + * efi_bootmgr_release_ramdisk() - release ramdisk resource
-> > + *
-> > + * Return:             status code
-> > + */
-> > +efi_status_t efi_bootmgr_release_ramdisk(void)
-> > +{
-> > +       efi_status_t ret = EFI_SUCCESS;
-> > +
-> > +       if (ramdisk_blk_dev) {
-> > +               ret = efi_add_memory_map(image_addr, image_size,
-> > +                                        EFI_CONVENTIONAL_MEMORY);
-> > +
-> > +               if (blkmap_destroy(ramdisk_blk_dev->parent))
-> > +                       ret = EFI_DEVICE_ERROR;
->
-> This seems a bit weird.  We are changing the return error value on
-> multiple errors.
-> The efi_add_memory_map() shouldn't fail, unless something *really* bad
-> has happened.
-> Can we check for the return code in this and print an appropriate error?
-
-Yes, I will do.
-
->
-> This function also has 2 callers, one of them isn't checking the
-> return value.  Again at least print a message so users are aware that
-> some memory cant be reclaimed
-
-OK.
-
-Thanks,
-Masahisa Kojima
-
-
-
->
-> Thanks
-> /Ilias
->
-> > +
-> > +               ramdisk_blk_dev = NULL;
-> > +       }
-> > +
-> > +       return ret;
-> > +}
-> > +
-> >  /**
-> >   * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootable media
-> >   *
-> > --
-> > 2.34.1
-> >
+-- 
+Thanking You
+Neha Malcom Francis
