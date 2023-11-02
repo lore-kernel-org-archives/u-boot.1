@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A34EEC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96D01C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:50:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6421587767;
-	Thu,  2 Nov 2023 23:49:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D053C87771;
+	Thu,  2 Nov 2023 23:49:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HSiFgVpb";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Va+83WNO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 139BD87745; Thu,  2 Nov 2023 23:49:31 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 9713487745; Thu,  2 Nov 2023 23:49:34 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25CD087764
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C2CA687725
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:49:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5a90d6ab962so18011027b3.2
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:28 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-da0344eb3fdso1507005276.3
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:49:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965367; x=1699570167; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965369; x=1699570169; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Jg2OTojgCxFXuFTktGJExVF7aAPgJ97MBBJtrePT+uo=;
- b=HSiFgVpb02pvkDwnEh9CgfcTZMdIvxhLVBULLFK+FhDA7WAuqzpDU01wY8CLLG/wTz
- 5A1+1KAIVNW0eSDElX1ifTXWVU6VZ0jTNH0oa3RI/lDlfS892E3I5r0nefYyL+0oZvro
- Wtrp0+Z7PgMBmVgE1eCkvuoaAkDMvUAM46ht4=
+ bh=BE57JCJfZSC+4ol5QKcXv2BU8t/x99Zj+fPUAIhjE/M=;
+ b=Va+83WNOacARUFlHjIOBwQvgHs6rVX10zHR2+jkuAMm5hbtArhz4wTeBFPsc+2XNlw
+ yyigurH1aom8nyNdSrbIWpkhtR78BJXhpTNII0IjLLaH0L8UkVVhrNhKiWnm+uKKCYwe
+ PBzlY2qqydP8+QPcbGaV8XVV1QBEEeZM6n4DI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965367; x=1699570167;
+ d=1e100.net; s=20230601; t=1698965369; x=1699570169;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Jg2OTojgCxFXuFTktGJExVF7aAPgJ97MBBJtrePT+uo=;
- b=Ydnwvgki89YvMzoSYb0QIQ86nVOrL1s0Zm0BJN5nsk4M4+LIKlxoPXzg5/xMDWsHj0
- kJRM2PEIwmSe3kzkjGFgehrzRi9K+McSnPLNTePbdA+wcr/qG5l4k60lGg+F4OtrSgvK
- jaxmqSpip/lfvuKYEfxkAi2ZP6LheVmzo5jK4fPtRWLMxgdhWFaBpaQyheTiGxBU3BVd
- 7IwNhVLYiromYYbp+0dmTFusaG9C3biBd7KeizzTfmOADjfP4MiIpjYXmwPDf0J5yGF2
- vJXdcbiRj4FYGngzbSzG7XlT8qw5EKFqknaxGcnIyIzwmkVxOSKZhFJ4qWeMu9TsmFFo
- MxhA==
-X-Gm-Message-State: AOJu0YwQws/ubsgJYxZuyyEZl1c0M2V0MfRbq+2Vaby+NWLBkyygnPig
- meVsz7kHqJxZz2y2SpUU3tMD2dFDMM4NuPa2qQ8HbQ==
-X-Google-Smtp-Source: AGHT+IHcOS8DYNDoySH9R0mWiotbaCAkqlbFR0fqxrtJYhFhQfdpCWHcln2aAZ2hp/qfoK0J+Y2HpOOudtrvM/pvWZQ=
-X-Received: by 2002:a81:9a54:0:b0:5a7:fa8b:3fa6 with SMTP id
- r81-20020a819a54000000b005a7fa8b3fa6mr1238755ywg.9.1698965366693; Thu, 02 Nov
- 2023 15:49:26 -0700 (PDT)
+ bh=BE57JCJfZSC+4ol5QKcXv2BU8t/x99Zj+fPUAIhjE/M=;
+ b=tvO59/I/2m9jjExeKAbixqxxIGfgGjMCkodQAonDBCeGd+4FNC+WEmFzT+kvoAoSd2
+ 0m3MmHJFgexdJmMSE8vnJwsIZT4gsKnZlVugfbIMH4wq+y1UnLYMXhaIeBu2P5gXqTQu
+ uDj4Q2GTyJ9DJCS4ZC5/16yNPk66jfBLLhTuGhDQQdvmA/zclLQ88gi38CFkpqwcE9CS
+ DVO6oPDJ1rGUHN3QVYKezLuo7Nrcvr+Puf9fexHdBUB9BBcz3tXrjO4j5PQBXqyENISu
+ H4bIaC2btqHf785l/DBf+3B6+A01bhZOhOkjTjHzT8y51zEuKQ1nuRf57ZNEoNfU28ka
+ 6PSA==
+X-Gm-Message-State: AOJu0YwuPN2GmLawwq8u1ZMtq2FH1jlUQ9hKMQ8v8SxK3VKKDz+Jc7Is
+ Ye1CT25gn52tA1h5mzXdossTDS8vXSQ1c13UyGCTEg/FjfC7j8P7t1A=
+X-Google-Smtp-Source: AGHT+IGzVOWhc64wWRxUq0JwxS+38JWMCbet3Xwb/Htc910JG4ipkO4+ybHQp0yJQJbjrrt4Ie6LiHJDw5U6H48HtBw=
+X-Received: by 2002:a5b:b44:0:b0:da0:76eb:3d31 with SMTP id
+ b4-20020a5b0b44000000b00da076eb3d31mr18063550ybr.15.1698965369284; Thu, 02
+ Nov 2023 15:49:29 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 2 Nov 2023 17:49:20 -0500
+ HTTPREST; Thu, 2 Nov 2023 17:49:23 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231014204033.3077052-4-sjg@chromium.org>
-References: <20231014204033.3077052-4-sjg@chromium.org>
+In-Reply-To: <ee189e3a-7ba2-4367-9ba4-4a959bf8bdf9@ti.com>
+References: <ee189e3a-7ba2-4367-9ba4-4a959bf8bdf9@ti.com>
  <20231014204033.3077052-1-sjg@chromium.org>
-Date: Thu, 2 Nov 2023 17:49:20 -0500
-X-Google-Sender-Auth: _BNHFdAen_sVaaqhoXvBZ4k96IA
-Message-ID: <CAPnjgZ1YYCYx5uP-FyHWOam4vz-xwHBmir=1TzKJkNd_1za=tw@mail.gmail.com>
-Subject: Re: [PATCH 3/6] binman: Ensure attributes always come last in the
- metadata
-To: Simon Glass <sjg@chromium.org>
+ <20231014204033.3077052-3-sjg@chromium.org>
+Date: Thu, 2 Nov 2023 17:49:23 -0500
+X-Google-Sender-Auth: VMn1nNFTCpMQDRB-3oCp8zUh8a8
+Message-ID: <CAPnjgZ0He5yChVtwYu1srJFvr0TQATjZV1rK+neCQYWgjKzAyw@mail.gmail.com>
+Subject: Re: [PATCH 2/6] binman: Don't add compression attribute for
+ uncompressed files
+To: Neha Malcom Francis <n-francis@ti.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,19 +89,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-cbfsutil changed to write zero bytes instead of 0xff when a small
-padding must be added. Adjust the binman implementation to do the same.
+Hi Simon
 
-Drop the code which looks for an unused attribute tag, since it is not
-used. A future patch moves the attributes to the end of the header in
-any case, so no data will follow the attributes.
-
-This mirrors commit f0cc7adb2f in coreboot.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- tools/binman/cbfs_util.py | 46 ++++++++++++++++++++-------------------
- 1 file changed, 24 insertions(+), 22 deletions(-)
-
+On 15/10/23 02:10, Simon Glass wrote:
+> cbfsutil changed to skip adding a compression attribute if there is no
+> compression. Adjust the binman implementation to do the same.
+>
+> This mirrors commit 105cdf5625 in coreboot.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>   tools/binman/cbfs_util.py      | 13 ++++++++-----
+>   tools/binman/cbfs_util_test.py |  8 ++++----
+>   tools/binman/ftest.py          |  6 +++---
+>   3 files changed, 15 insertions(+), 12 deletions(-)
+>
 Applied to u-boot-dm, thanks!
