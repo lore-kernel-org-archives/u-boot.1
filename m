@@ -4,122 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD29DC4167D
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 02:12:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC2FAC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 02:44:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F5FC8763B;
-	Thu,  2 Nov 2023 03:11:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 65622876C9;
+	Thu,  2 Nov 2023 03:44:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="ngCQYuzc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hcC1n3uK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C31487650; Thu,  2 Nov 2023 03:11:37 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 47735876C4; Thu,  2 Nov 2023 03:44:24 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D424875F5
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 03:11:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C704876B1
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 03:44:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20231102021124epoutp0450c3c36211926bdccc4509d4c13c8cbe~TrHCiRi871539615396epoutp04e
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 02:11:24 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20231102021124epoutp0450c3c36211926bdccc4509d4c13c8cbe~TrHCiRi871539615396epoutp04e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698891084;
- bh=dNsHB4kZxAm1dJyleY8DkcrIn3L74RNY8MJONVoo5jI=;
- h=Date:Subject:To:From:In-Reply-To:References:From;
- b=ngCQYuzcTSRA39WppYt9PjgW0m8oVs4gBOV47+JFY7A99qCo8HEZ4VbZ9jV2UT8FG
- A1AkXAbc7HvG+3hw0S7bCEdD9pP2+nSfXyWCFT7JohMveASGJUCxIxqut05gshxyGL
- 5EWyBV5s64dOUbWKXYCalk5IUhXwKPbSLLgM+ua8=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20231102021123epcas1p307b30de5aaf194cc764faf8351b8e1f4~TrHCOEoVw3242532425epcas1p3F;
- Thu,  2 Nov 2023 02:11:23 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.38.237]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4SLS6L37R3z4x9Q6; Thu,  2 Nov
- 2023 02:11:22 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 62.5B.09731.A4503456; Thu,  2 Nov 2023 11:11:22 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a~TrHAlbrEj2061720617epcas1p2v;
- Thu,  2 Nov 2023 02:11:22 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231102021122epsmtrp11a8d82c6fdf84ea45d3a2ad291e9db4a~TrHAkyesc2153521535epsmtrp1i;
- Thu,  2 Nov 2023 02:11:22 +0000 (GMT)
-X-AuditID: b6c32a36-a7dff70000002603-6a-6543054a0b81
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- FD.0F.08755.94503456; Thu,  2 Nov 2023 11:11:22 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20231102021121epsmtip1ab32541e4d4bfbe6ccadba2cfe6ee849~TrHASRdAa0400304003epsmtip1O;
- Thu,  2 Nov 2023 02:11:21 +0000 (GMT)
-Message-ID: <3e69afd5-4204-4fbb-84cf-af6ad5865a6b@samsung.com>
-Date: Thu, 2 Nov 2023 11:11:21 +0900
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1cc1ee2d8dfso3670645ad.3
+ for <u-boot@lists.denx.de>; Wed, 01 Nov 2023 19:44:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698893057; x=1699497857; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mq/Yx0dPCYv5b6DZiCo//WoxA3IP5J7Ah5LGbEw/zsU=;
+ b=hcC1n3uKN2pXM4D+xIAUdcH1P0a4W87pG+bF1rocXMoCSYB7BdSyAKel2rdfBZSc08
+ rcfZSiGMvhWvxHLBNzKOrImSMU2s9xwvTLPtjgVzv44JBEjXEk6a4jgx1DATebL8hWzQ
+ MyVJyBg36KIy5BghxQFiQfHu+x1GxaIMf3v2Ka3K9AVAJVCNObNyp6W95mGlPTLqPMhb
+ YqApDor8sZtpU9nKvpVEKz+aZACtb2uTQLIfjLHw70PHRF1MWDLLgGXM2A/fPiJgoTGe
+ nQllQeLVtO2qjHX3iTuZsRqIpjwpCA4XN4KAD2LAifrk2KaBm7/FBGM5n1FcFBcn1WLa
+ l1xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698893057; x=1699497857;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Mq/Yx0dPCYv5b6DZiCo//WoxA3IP5J7Ah5LGbEw/zsU=;
+ b=H7LpoPgaBFERkQmJUyPFMQG0nFcZTvgHXlV5es4OkpYWIgZkr+ZcpSn24AuLO5IRbN
+ 2VFMgCwaPQ2vX1ze8rNzEM16fgzMElPhNsoDu5W5pSO88w9/un3klFUBsJlcwz0u7ps2
+ cGpz87Sl5SpoSGRxXMt11uPxXZ+WSYpDdzcmA2v6pLZWg5QPCtBM+DmSiRrGOpWoO7hC
+ Ndk4jGDjtq0cmwumD7AFKN46OHE6nLCKylt6DpNVPX4JeAWcqTQCZq5Qgq/IB8NycJnn
+ pMszJomOmgu5xzXYuas9pjoT4flMm6tp5iNBJ1d5Hne1YIdLYlpK0Pb83QyBxt7H1l0F
+ mriA==
+X-Gm-Message-State: AOJu0YzE2u/XbjBu8NRX5542wxMg/TNXD4FdBlktmSNkYmCJAI8sIOrZ
+ S7SC71Q7czUOSa74oea9IPzB1UdY8/ekzc7T5QSMnQ==
+X-Google-Smtp-Source: AGHT+IGNvzrItF+0DMpw4uP13ucVj/f0wKccxHdCW2Yef29R4H9zCInXKGq8S0oRGJrJGlPS4SM00TUYwOZgoeOEsRU=
+X-Received: by 2002:a17:90b:4b08:b0:280:77b0:f5de with SMTP id
+ lx8-20020a17090b4b0800b0028077b0f5demr9158894pjb.26.1698893057328; Wed, 01
+ Nov 2023 19:44:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/8] mmc: renesas-sdhi: Drop <common.h>
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de, Marek
- Vasut <marek.vasut+renesas@mailbox.org>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>, Peng Fan
- <peng.fan@nxp.com>
-From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20231101200600.119507-5-paul.barker.ct@bp.renesas.com>
-Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBJsWRmVeSWpSXmKPExsWy7bCmnq4Xq3OqwdvnYhbbVzUzW7xtLrZo
- XXmHzeLPyR+sFj9WfWG1eLu3k92BzWPli9nsHmfv7GD02Dl7H5PHgcnnWD02vtvB5PHtzESW
- ALaobJuM1MSU1CKF1Lzk/JTMvHRbJe/geOd4UzMDQ11DSwtzJYW8xNxUWyUXnwBdt8wcoDOU
- FMoSc0qBQgGJxcVK+nY2RfmlJakKGfnFJbZKqQUpOQWmBXrFibnFpXnpenmpJVaGBgZGpkCF
- CdkZj48fZSu4xlrx/v975gbGiyxdjBwcEgImEl/2CncxcnEICexglDi74gcrhPOJUWLBpZlM
- EM43Rom2v1MZuxg5wTpOfDsJVbWXUeJF+xYWCOc9o8TthkmsIHN5BewkFk9yBTFZBFQkdmyI
- A+nlFRCUODnzCQuILSogL3H/1gx2EFtYwFri9MN/YPOZBcQlbj2ZD7ZYROApo8S9VW+YQBJs
- AjoS278dB7M5BVwkjq1bxwbRIC+x/e0cZpAGCYFODolbb+cwQvzmInF6UyTE0cISr45vYYew
- pSRe9rexQ9Q3M0osXXKQFcLpYZT413CdDaLKWGL/0slMIIOYBTQl1u/ShwgrSuz8PRfqUj6J
- d197WCF28Up0tAlBlKhIXHr9kglm190n/1khbA+JRWcPskHC6iKjxNWNDSwTGBVmIQXMLKQA
- mIXkt1kIVyxgZFnFKJZaUJybnlpsWGAEj+3k/NxNjOAkqmW2g3HS2w96hxiZOBgPMUpwMCuJ
- 8B42dUgV4k1JrKxKLcqPLyrNSS0+xGgKjJ2JzFKiyfnANJ5XEm9oYmlgYmZkbGJhaGaoJM47
- 53FvipBAemJJanZqakFqEUwfEwenVAMTC1+j2Z2SV/qKSrYdJpWaEheO/Spz4mlvNz2u9va7
- o/QZN8vi/ymiPaenbFy7ZsfyxYZKKcefnzoocVPURF8vY+u8UCX9hD0rtjXMv3VnUgpnulz6
- ZuGty5a+efDr44V7GQ08iW+5D+693jzRkdtp+VNH5fJFH2T2BKz67MM0sWPRsU2dIc+ijrJY
- TnOxulwfYFnygu0yu1HapMsmc4+57y4sL759NKWT9wzb1++3hNYHcl7Qjyi7+17FS+RwiMeq
- 6pRHHzSSJCw9z7N83zavW9Ou1+7XrL6jE5sFFwvntT028Tu3/3DA0qnuneW++xsTBJcd+91t
- v1RgsiTfl6mrc0KNTFVc4jdyLZwVtfeaEktxRqKhFnNRcSIAPuSs8CsEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGLMWRmVeSWpSXmKPExsWy7bCSnK4Xq3Oqwcw8i+2rmpkt3jYXW7Su
- vMNm8efkD1aLH6u+sFq83dvJ7sDmsfLFbHaPs3d2MHrsnL2PyePA5HOsHhvf7WDy+HZmIksA
- WxSXTUpqTmZZapG+XQJXxuPjR9kKrrFWvP//nrmB8SJLFyMnh4SAicSJbydZuxi5OIQEdjNK
- nF22mRUiISXx+elUti5GDiBbWOLw4WKImreMEnd3/mcHifMK2EksnuQKYrIIqEjs2BAH0skr
- IChxcuYTsPGiAvIS92/NYAexhQWsJU4//McIYjMLiEvcejKfCWSkiMBTRolZjdvA1goJ1Eoc
- aH/GBGKzCehIbP92HMzmFHCROLZuHdg5zALqEuvnCUHMkZfY/nYO8wRGwVlIVs9CsmIWQscs
- JB0LGFlWMUqmFhTnpucWGxYY5qWW6xUn5haX5qXrJefnbmIER4WW5g7G7as+6B1iZOJgPMQo
- wcGsJMJ72NQhVYg3JbGyKrUoP76oNCe1+BCjNAeLkjiv+IveFCGB9MSS1OzU1ILUIpgsEwen
- VAPTPm7LeCe7G7vffOU2s3e6tEDw+s3fbw/9F3n82+dO/43I/9q9Cief3hDfKzJ7h9/jhyZa
- hzbtCePhXK3+ZdUex+rfdpOVTf8WJ3qbMLxfxtx+5barqYHl4t0akqyVJwoXBewOu+7B/myZ
- fN2Kb0yyTt2pj25M9zaa47ZOledGy6ZJe6c8r4+s5S4LX1S44hj3xcnrVX79//d7rdft20VG
- 22bmHz/m9ephgc3HfkN/TZ4LFoa79WU/THm18Gd6WsSa4olv3u9fn3lXoWXjzrL9wqo7Bd2r
- 6i75LbCd/G7OpJSLQmlf+pu+RE6w2fu+wWLNMtVEWd09q4+yfXuYcszael4Cp6jx/PdCCS8X
- SjuubFZiKc5INNRiLipOBACAcie6+QIAAA==
-X-CMS-MailID: 20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a
-References: <20231101200600.119507-1-paul.barker.ct@bp.renesas.com>
- <20231101200600.119507-5-paul.barker.ct@bp.renesas.com>
- <CGME20231102021122epcas1p21c93e275b1c2b5bda7353dcdf09a9a2a@epcas1p2.samsung.com>
+References: <20231025062845.3100964-1-masahisa.kojima@linaro.org>
+ <20231025062845.3100964-6-masahisa.kojima@linaro.org>
+ <CAC_iWjJJSTFQKctpsRzg=M9RVkD7G8qVSbfsMhfieW9k9oCrKg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJJSTFQKctpsRzg=M9RVkD7G8qVSbfsMhfieW9k9oCrKg@mail.gmail.com>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Thu, 2 Nov 2023 11:44:06 +0900
+Message-ID: <CADQ0-X8i084DJ8xbzQcuQPM5baJJNZOtHo-PjMThAwam=AEefQ@mail.gmail.com>
+Subject: Re: [PATCH v8 5/7] efi_loader: support boot from URI device path
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,30 +88,382 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/2/23 05:05, Paul Barker wrote:
-> In line with changes elsewhere, drop inclusion of the common header.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Hi Ilias,
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+On Fri, 27 Oct 2023 at 04:35, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Kojima-san,
+>
+> Thanks the device path handling seems saner in this version.
+>
+> On Wed, 25 Oct 2023 at 09:30, Masahisa Kojima
+> <masahisa.kojima@linaro.org> wrote:
+> >
+> > This supports to boot from the URI device path.
+> > When user selects the URI device path, bootmgr downloads
+> > the file using wget into the address specified by loadaddr
+> > env variable.
+> > If the file is .iso or .img file, mount the image with blkmap
+> > then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> > Since boot option indicating the default file is automatically
+> > created when new disk is detected, system can boot by selecting
+> > the automatically created blkmap boot option.
+> > If the file is PE-COFF file, load and start the downloaded file.
+> >
+> > The buffer used to download the ISO image file must be
+> > reserved to avoid the unintended access to the image and
+> > expose the ramdisk to the OS.
+> > For PE-COFF file case, this memory reservation is done
+> > in LoadImage Boot Service.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >  cmd/bootefi.c                |   5 +
+> >  include/efi_loader.h         |   1 +
+> >  lib/efi_loader/Kconfig       |   9 ++
+> >  lib/efi_loader/efi_bootmgr.c | 229 +++++++++++++++++++++++++++++++++++
+> >  4 files changed, 244 insertions(+)
+> >
+> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> > index 20e5c94a33..74203ec5b6 100644
+> > --- a/cmd/bootefi.c
+> > +++ b/cmd/bootefi.c
+> > @@ -394,6 +394,11 @@ out:
+> >                         log_err("Failed to remove loadfile2 for initrd\n");
+> >         }
+> >
+> > +       if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT)) {
+> > +               if (efi_bootmgr_release_ramdisk() != EFI_SUCCESS)
+> > +                       log_err("Failed to remove ramdisk\n");
+> > +       }
+> > +
+>
+> So, I know I am the one who did this first and removed the loadfile2
+> protocol by calling a function in a boot failure.
+> I didn't like it back then either but we didn't have events.  I think
+> it's best if we define an event for reverting  the memory changes
+> instead of calling functions (and I will fix the same thing for
+> loadfile2 protocol destruction)
 
-Best Regards,
-Jaehoon Chung
+We discussed this offline, and we decided to implement this resource
+release by EFI event.
 
-> ---
->  drivers/mmc/renesas-sdhi.c | 1 -
->  1 file changed, 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-> index 865efdd32184..8cd501c5f7c7 100644
-> --- a/drivers/mmc/renesas-sdhi.c
-> +++ b/drivers/mmc/renesas-sdhi.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
->   */
->  
-> -#include <common.h>
->  #include <bouncebuf.h>
->  #include <clk.h>
->  #include <fdtdec.h>
+>
+> Heinrich what do you think?
+>
+> >         /* Control is returned to U-Boot, disable EFI watchdog */
+> >         efi_set_watchdog(0);
+> >
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index e24410505f..2fea1f17fb 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -937,6 +937,7 @@ efi_status_t efi_set_load_options(efi_handle_t handle,
+> >                                   efi_uintn_t load_options_size,
+> >                                   void *load_options);
+> >  efi_status_t efi_bootmgr_load(efi_handle_t *handle, void **load_options);
+>
+> [...]
+>
+> >
+> > +#include <blk.h>
+> > +#include <blkmap.h>
+> >  #include <common.h>
+> >  #include <charset.h>
+> > +#include <dm.h>
+> >  #include <log.h>
+> >  #include <malloc.h>
+> > +#include <net.h>
+> >  #include <efi_default_filename.h>
+> >  #include <efi_loader.h>
+> >  #include <efi_variable.h>
+> > @@ -19,6 +23,10 @@
+> >  static const struct efi_boot_services *bs;
+> >  static const struct efi_runtime_services *rs;
+> >
+> > +static u32 image_size;
+> > +static ulong image_addr;
+> > +static struct udevice *ramdisk_blk_dev = NULL;
+> > +
+> >  const efi_guid_t efi_guid_bootmenu_auto_generated =
+> >                 EFICONFIG_AUTO_GENERATED_ENTRY_GUID;
+> >
+> > @@ -168,6 +176,197 @@ out:
+> >         return ret;
+> >  }
+> >
+> > +/**
+> > + * mount_image() - mount the image with blkmap
+> > + *
+> > + * @lo_label:  u16 label string of load option
+> > + * @addr:      image address
+> > + * @size:      image size
+> > + * Return:     pointer to the UCLASS_BLK udevice, NULL if failed
+> > + */
+> > +static struct udevice *mount_image(u16 *lo_label, ulong addr, int size)
+> > +{
+> > +       int err;
+> > +       struct blkmap *bm;
+> > +       struct udevice *bm_dev;
+> > +       char *label = NULL, *p;
+> > +
+> > +       label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
+> > +       if (!label)
+> > +               return NULL;
+> > +
+> > +       p = label;
+> > +       utf16_utf8_strcpy(&p, lo_label);
+> > +       err = blkmap_create_ramdisk(label, addr, size, &bm_dev);
+> > +       if (err) {
+> > +               efi_free_pool(label);
+> > +               return NULL;
+> > +       }
+> > +       bm = dev_get_plat(bm_dev);
+> > +
+> > +       efi_free_pool(label);
+> > +
+> > +       return bm->blk;
+> > +}
+> > +
+> > +/**
+> > + * try_load_default_file() - try to load the default file
+> > + *
+> > + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
+> > + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> > + *
+> > + * @dev                        pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
+> > + * @image_handle:      pointer to handle for newly installed image
+> > + * Return:             status code
+> > + */
+> > +static efi_status_t try_load_default_file(struct udevice *dev,
+> > +                                         efi_handle_t *image_handle)
+> > +{
+> > +       efi_status_t ret;
+> > +       efi_handle_t handle;
+> > +       struct efi_handler *handler;
+> > +       struct efi_device_path *file_path;
+> > +       struct efi_device_path *device_path;
+> > +
+> > +       if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
+> > +               log_warning("DM_TAG_EFI not found\n");
+> > +               return EFI_INVALID_PARAMETER;
+> > +       }
+> > +
+> > +       ret = efi_search_protocol(handle,
+> > +                                 &efi_simple_file_system_protocol_guid, &handler);
+> > +       if (ret != EFI_SUCCESS)
+> > +               return ret;
+>
+> nit; but do we really need this check? Or is it just to fail early
+> before efi_load_image() gets called?
 
+UEFI specification requires EFI_SIMPLE_FILE_SYSTEM_PROTOCOL is installed to
+load the default file, so it is checked here.
+
+>
+> > +
+> > +       ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
+> > +                                        (void **)&device_path, efi_root, NULL,
+> > +                                        EFI_OPEN_PROTOCOL_GET_PROTOCOL));
+> > +       if (ret != EFI_SUCCESS)
+> > +               return ret;
+> > +
+> > +       file_path = expand_media_path(device_path);
+> > +       ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
+> > +                                     image_handle));
+> > +       efi_free_pool(file_path);
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +/**
+> > + * load_default_file_from_blk_dev() - load the default file
+> > + *
+> > + * @blk                pointer to the UCLASS_BLK udevice
+> > + * @handle:    pointer to handle for newly installed image
+> > + * Return:     status code
+> > + */
+> > +static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
+> > +                                                  efi_handle_t *handle)
+> > +{
+> > +       efi_status_t ret;
+> > +       struct udevice *partition;
+> > +
+> > +       /* image that has no partition table but a file system */
+> > +       ret = try_load_default_file(blk, handle);
+> > +       if (ret == EFI_SUCCESS)
+> > +               return ret;
+> > +
+> > +       /* try the partitions */
+> > +       device_foreach_child(partition, blk) {
+> > +               enum uclass_id id;
+> > +
+> > +               id = device_get_uclass_id(partition);
+> > +               if (id != UCLASS_PARTITION)
+> > +                       continue;
+> > +
+> > +               ret = try_load_default_file(partition, handle);
+> > +               if (ret == EFI_SUCCESS)
+> > +                       return ret;
+> > +       }
+> > +
+> > +       return EFI_NOT_FOUND;
+> > +}
+> > +
+> > +/**
+> > + * try_load_from_uri_path() - Handle the URI device path
+> > + *
+> > + * @uridp:     uri device path
+> > + * @lo_label:  label of load option
+> > + * @handle:    pointer to handle for newly installed image
+> > + * Return:     status code
+> > + */
+> > +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> > +                                          u16 *lo_label,
+> > +                                          efi_handle_t *handle)
+> > +{
+> > +       char *s;
+> > +       int err;
+> > +       int uri_len;
+> > +       efi_status_t ret;
+> > +
+> > +       s = env_get("loadaddr");
+> > +       if (!s) {
+> > +               log_err("Error: loadaddr is not set\n");
+> > +               return EFI_INVALID_PARAMETER;
+> > +       }
+> > +       image_addr = hextoul(s, NULL);
+> > +       err = wget_with_dns(image_addr, uridp->uri);
+> > +       if (err < 0)
+> > +               return EFI_INVALID_PARAMETER;
+> > +       image_size = env_get_hex("filesize", 0);
+> > +       if (!image_size)
+> > +               return EFI_INVALID_PARAMETER;
+> > +
+> > +       /*
+> > +        * If the file extension is ".iso" or ".img", mount it and try to load
+> > +        * the default file.
+> > +        * If the file is PE-COFF image, load the downloaded file.
+> > +        */
+> > +       uri_len = strlen(uridp->uri);
+> > +       if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+> > +           !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+> > +               struct udevice *blk;
+> > +
+> > +               blk = mount_image(lo_label, image_addr, image_size);
+> > +               if (!blk)
+> > +                       return EFI_LOAD_ERROR;
+> > +
+> > +               ret = load_default_file_from_blk_dev(blk, handle);
+> > +               if (ret != EFI_SUCCESS)
+> > +                       return ret;
+> > +
+> > +               ramdisk_blk_dev = blk;
+> > +
+> > +               /*
+> > +                * TODO: expose the ramdisk to OS.
+> > +                * Need to pass the ramdisk information by the architecture-specific
+> > +                * methods such as 'pmem' device-tree node.
+> > +                */
+> > +               ret = efi_add_memory_map(image_addr, image_size,
+> > +                                        EFI_RESERVED_MEMORY_TYPE);
+> > +               if (ret != EFI_SUCCESS)
+> > +                       efi_bootmgr_release_ramdisk();
+> > +       } else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
+> > +               efi_handle_t mem_handle = NULL;
+> > +               struct efi_device_path *file_path;
+> > +
+> > +               file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+> > +                                           (uintptr_t)image_addr, image_size);
+> > +               ret = efi_install_multiple_protocol_interfaces(
+> > +                       &mem_handle, &efi_guid_device_path, file_path, NULL);
+> > +               if (ret != EFI_SUCCESS)
+> > +                       return ret;
+> > +
+> > +               ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
+> > +                                             (void *)image_addr, image_size,
+> > +                                             handle));
+> > +       } else {
+> > +               log_err("Error: file type is not supported\n");
+> > +               return EFI_UNSUPPORTED;
+> > +       }
+> > +
+> > +       return ret;
+> > +}
+> > +
+> >  /**
+> >   * try_load_entry() - try to load image for boot option
+> >   *
+> > @@ -211,6 +410,14 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
+> >                 if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
+> >                         /* file_path doesn't contain a device path */
+> >                         ret = try_load_from_short_path(lo.file_path, handle);
+> > +               } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
+> > +                       if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
+> > +                               ret = try_load_from_uri_path(
+> > +                                       (struct efi_device_path_uri *)
+> > +                                               lo.file_path,
+> > +                                       lo.label, handle);
+> > +                       else
+> > +                               ret = EFI_LOAD_ERROR;
+> >                 } else {
+> >                         file_path = expand_media_path(lo.file_path);
+> >                         ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
+> > @@ -345,6 +552,28 @@ error:
+> >         return ret;
+> >  }
+> >
+> > +/**
+> > + * efi_bootmgr_release_ramdisk() - release ramdisk resource
+> > + *
+> > + * Return:             status code
+> > + */
+> > +efi_status_t efi_bootmgr_release_ramdisk(void)
+> > +{
+> > +       efi_status_t ret = EFI_SUCCESS;
+> > +
+> > +       if (ramdisk_blk_dev) {
+> > +               ret = efi_add_memory_map(image_addr, image_size,
+> > +                                        EFI_CONVENTIONAL_MEMORY);
+> > +
+> > +               if (blkmap_destroy(ramdisk_blk_dev->parent))
+> > +                       ret = EFI_DEVICE_ERROR;
+>
+> This seems a bit weird.  We are changing the return error value on
+> multiple errors.
+> The efi_add_memory_map() shouldn't fail, unless something *really* bad
+> has happened.
+> Can we check for the return code in this and print an appropriate error?
+
+Yes, I will do.
+
+>
+> This function also has 2 callers, one of them isn't checking the
+> return value.  Again at least print a message so users are aware that
+> some memory cant be reclaimed
+
+OK.
+
+Thanks,
+Masahisa Kojima
+
+
+
+>
+> Thanks
+> /Ilias
+>
+> > +
+> > +               ramdisk_blk_dev = NULL;
+> > +       }
+> > +
+> > +       return ret;
+> > +}
+> > +
+> >  /**
+> >   * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootable media
+> >   *
+> > --
+> > 2.34.1
+> >
