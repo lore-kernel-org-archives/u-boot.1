@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB77AC4167D
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:47:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23DB6C0018A
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 22:47:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22806876ED;
-	Thu,  2 Nov 2023 23:46:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 84A4787656;
+	Thu,  2 Nov 2023 23:46:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TkiQrQrE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RUqb7Eb+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4BC6876E3; Thu,  2 Nov 2023 23:46:33 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 3146687656; Thu,  2 Nov 2023 23:46:41 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4ED987650
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:46:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B82BE87718
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 23:46:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5230a22cfd1so2469969a12.1
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:46:30 -0700 (PDT)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d9b9adaf291so1457006276.1
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 15:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1698965190; x=1699569990; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1698965195; x=1699569995; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=77IDeVh6a4aYEFX/0A2ilMGL6a3UjHiYgtpll3Sz+Wo=;
- b=TkiQrQrEMRS02IXKEUJ5tkNJzZZ2qQ6sRpBi5KNLL/7js+4DW/6ZkUsuIFBmDVUm/7
- 5oGItcf3uEvpkX7YsokHKtWIz7i5kSzg22LRz67XHYx0lpKua7qrF1OlToUtcqyZjC5c
- GfdSFs++6ou6T6J8aEUenu9rDIwBlDtlpuft4=
+ bh=3mzbgpTE5g6ugqJMInnuc7Py74FdnObe59KxnblnK20=;
+ b=RUqb7Eb+WJ444RNnniVnmi4Zx/4/wpgjh9000poGWoYv7s+l/wGzvT0RNiCsQowCPT
+ qiv1FxAl0Sc8rb+vWCzoe5Qlc3Aogbl9kWZ4MgqC0YaBCVidt3acxRSZyog6ZBb/QuJs
+ ZEFiGZn8hS4Wx9im5ZCG3BNe20aNUadwhXZ3Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698965190; x=1699569990;
+ d=1e100.net; s=20230601; t=1698965195; x=1699569995;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=77IDeVh6a4aYEFX/0A2ilMGL6a3UjHiYgtpll3Sz+Wo=;
- b=eb3LzELYTh/BuMNEn708Za+NWPI8kS2gX0INCz1JlwxrF04T7z64zZkTGq2hVHdF8c
- fJNBpy39cB3j8z5PpiTZlAcPwd6hGLqoV7eR0pXQxdwsFNGLku/UN6KXiOVoWQyIk/9h
- CQryNDyLwGgBTXFTJS7kDk5/SKdhLAq4sjDWYt66W08Cn/Eh89+BIe9z3+TfqXRou6f+
- LDdq+uDzGcPCIV5LeB5dXmCwK0hZOBmXIzqBUvAF2kZxTH4S7+gUC9WgRvFMUQ1/VBSo
- v4QO8dyPnYirtMfA91OGgdU/6guBwu7SarKEmxV3kfo8Rj3H99w9rlHgXglnHTCUoDpH
- tDew==
-X-Gm-Message-State: AOJu0YyTWh282xsmTyyLwGm7j0o4PkEQIrwy7bMn+r32nqdKhxXPvsaC
- lrVMtq0+aglp+Bo8fHXoW7eEdWFd6BC0j0dzQ05+hw==
-X-Google-Smtp-Source: AGHT+IH5Y1wk+OtB/xQa5OjdhpqITDJGKsETuF+bdmvJCwPYGfNI6qtVah16PwoxztKqDZqA8wGuAjAA/U/rZo78+Ek=
-X-Received: by 2002:aa7:c1cb:0:b0:540:3a46:cdcd with SMTP id
- d11-20020aa7c1cb000000b005403a46cdcdmr15621328edp.29.1698965190240; Thu, 02
- Nov 2023 15:46:30 -0700 (PDT)
+ bh=3mzbgpTE5g6ugqJMInnuc7Py74FdnObe59KxnblnK20=;
+ b=Ljjin07CO+Td9jz5uYOeXxweaQlDDirs4MRS1ondKTL19sF6ljQ/tm0q5cflw5xq0t
+ jfEHRBPXBnbOe/QoKhU/CFZI8fqY6fOBDqP6TMa4Oh2iDVvuzHSX4MJYJ8OQif2dMwhf
+ J1VBYmvQpkMrzgluRQS6Va9KehoNkLqmFfBXbnw4fc9Jv5WisW+cFBsckmKBRDPh2DY2
+ 8lg+EehuT6emHtmSl62OUAPRUjE3wh2+Ms1auDk7D5Raef5I8LVL4keM9A0g0/8jYB1j
+ oO1qiTEho03bLJWUIIvTLQDLp5+YWlN4SlvpEGr6IDN+Ilxq0NupCBqmJ62tobGfSoYc
+ A4dQ==
+X-Gm-Message-State: AOJu0Yy8LvSulaYUDDVSmIj0wdyXFqpvolgKACe7mTdDtZ/KJv/0vqxU
+ 4qMgPPA2ygolYgx1IMOlWsrjBzW0pc5uYuehTRQQdg==
+X-Google-Smtp-Source: AGHT+IH08D780U6eoJT/hGqGfrQja+W+cx2bG5/ZVGLWxZl5v43bZFxoX9Z4IQvERzOQZaJmqEBIM+DeFypDvJCWfRg=
+X-Received: by 2002:a25:aa42:0:b0:da0:c746:3861 with SMTP id
+ s60-20020a25aa42000000b00da0c7463861mr18567133ybi.35.1698965195172; Thu, 02
+ Nov 2023 15:46:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231031131208.435268-1-devarsht@ti.com>
- <20231031131208.435268-5-devarsht@ti.com>
-In-Reply-To: <20231031131208.435268-5-devarsht@ti.com>
+ <20231031131208.435268-6-devarsht@ti.com>
+In-Reply-To: <20231031131208.435268-6-devarsht@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 2 Nov 2023 22:46:09 +0000
-Message-ID: <CAPnjgZ0u9K5NR0apoTHFRKHxksT2O7_GDaOhdbm4sagvvgiBNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 4/5] video: Skip framebuffer reservation if already
- reserved
+Date: Thu, 2 Nov 2023 22:46:10 +0000
+Message-ID: <CAPnjgZ3MOddtx9=OvbXXVhbg8iHDt3kyp7Ju2JLs-UnPJNGHZQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] video: Fill video handoff in video post probe
 To: Devarsh Thakkar <devarsht@ti.com>
 Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
  bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
@@ -85,54 +84,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Devarsh,
+
 On Tue, 31 Oct 2023 at 13:12, Devarsh Thakkar <devarsht@ti.com> wrote:
 >
-> Skip framebufer reservation if it was already reserved
-> from previous stage and whose information was passed
-> using a bloblist.
+> Fill video handoff fields in video_post_probe
+> as at this point we have full framebuffer related
+
+framebuffer-related
+
+> information.
 >
+> Also fill all the fields available in video hand-off
+> struct as those were missing earlier and u-boot
+
+U-Boot
+
+> framework expects them to be filled for some of the
+> functionalities.
+>
+> Reported-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
-> V2:
-> - Add debug prints
-> - Fix commenting style
+> V2: No change
 > ---
->  drivers/video/video-uclass.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
+>  drivers/video/video-uclass.c | 25 +++++++++++++++----------
+>  1 file changed, 15 insertions(+), 10 deletions(-)
 >
 > diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-> index f743ed74c8..335a1a1828 100644
+> index 335a1a1828..635b70f668 100644
 > --- a/drivers/video/video-uclass.c
 > +++ b/drivers/video/video-uclass.c
-> @@ -123,6 +123,18 @@ int video_reserve(ulong *addrp)
->         struct udevice *dev;
->         ulong size;
+> @@ -153,16 +153,6 @@ int video_reserve(ulong *addrp)
+>         debug("Video frame buffers from %lx to %lx\n", gd->video_bottom,
+>               gd->video_top);
 >
-> +       if (IS_ENABLED(CONFIG_SPL_VIDEO_HANDOFF) && spl_phase() > PHASE_SPL) {
-> +               /* Skip allocation if already received a bloblist which
+> -       if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(VIDEO_HANDOFF)) {
+> -               struct video_handoff *ho;
+> -
+> -               ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
+> -               if (!ho)
+> -                       return log_msg_ret("blf", -ENOENT);
+> -               ho->fb = *addrp;
+> -               ho->size = size;
 
-comment style
+You also need to fill out the other fields in there:
 
-/*
- * Skip ...
+struct video_handoff {
+   u64 fb;
+   u32 size;
+   u16 xsize;
+   u16 ysize;
+   u32 line_length;
+   u8 bpix;
+};
 
-> +                * filled below fields
-> +                */
-> +               if (gd->fb_base && gd->video_top && gd->video_bottom) {
-> +                       debug("Found pre-reserved video memory from %lx to %lx\n",
-> +                             gd->video_bottom, gd->video_top);
-> +                       debug("Skipping video frame buffer allocation\n");
-> +                       return 0;
-> +               }
+
+> -       }
+> -
+>         return 0;
+>  }
+>
+> @@ -558,6 +548,21 @@ static int video_post_probe(struct udevice *dev)
+>
+>         priv->fb_size = priv->line_length * priv->ysize;
+>
+> +       /* Set up video handoff fields for passing video blob to next stage */
+> +       if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(BLOBLIST)) {
+> +               struct video_handoff *ho;
+> +
+> +               ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
+> +               if (!ho)
+> +                       return log_msg_ret("blf", -ENOENT);
+> +               ho->fb = gd->video_bottom;
+
+This is a bit odd, since it assumes there is a single video
+framebuffer. I suppose that is normally the case, but please add a
+comment saying that only one is supported.
+
+> +               ho->size = gd->video_top - gd->video_bottom;
+> +               ho->xsize = priv->xsize;
+> +               ho->ysize = priv->ysize;
+> +               ho->line_length = priv->line_length;
+> +               ho->bpix = priv->bpix;
 > +       }
 > +
->         gd->video_top = *addrp;
->         for (uclass_find_first_device(UCLASS_VIDEO, &dev);
->              dev;
+>         if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
+>                 priv->copy_fb = map_sysmem(plat->copy_base, plat->size);
+>
 > --
 > 2.34.1
 >
+
+Please can you add some documentation to doc/develop/spl.rst or similar?
 
 Regards,
 Simon
