@@ -4,125 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B176C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 07:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE33BC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 07:55:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0155487656;
-	Thu,  2 Nov 2023 08:54:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F50987671;
+	Thu,  2 Nov 2023 08:55:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=bp.renesas.com header.i=@bp.renesas.com header.b="m7yAoShw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zEe+zd/m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D477887656; Thu,  2 Nov 2023 08:54:51 +0100 (CET)
-Received: from JPN01-OS0-obe.outbound.protection.outlook.com
- (mail-os0jpn01on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:201a::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2C9808761A; Thu,  2 Nov 2023 08:55:28 +0100 (CET)
+Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
+ [IPv6:2607:f8b0:4864:20::930])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E7908767C
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 08:54:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
+ by phobos.denx.de (Postfix) with ESMTPS id 243F687688
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 08:55:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=biju.das.jz@bp.renesas.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gz4IdJaL7gnXWcsqeSNbkTSpuwQKtgWOaqHCmBLd5i9WIfyfFeJ/VCo2+2YgQdOqDz8djwGbnB6iHJDUeq6mehypBj+AxJE1US4/L2J8PjBOzSP9lQsUBbsIOMnXojhBDOJXW/0kXJp0oMX3oSf/QGswhTe5/0VpiXzj4QZ9SPp1pgC+uwn69BZCbjrxhWm/rB8k68PQzp75C3g2N30JjbOXEMhUA8eggHzSHXdpat8cFEx//23KpHoOFIuIsdYoDljDrCHNEoX2pOA1stGgPvZk7zpxRbDbO/VAoDhw0iWJJHA/3VH8Nrz5wsHH9cxcmkYTTUxVdD6wjdfhfinGIw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xWaFe1uyZt+6uvmEFUzVcxoOEqRBpR/YubXwUfui3Ac=;
- b=OXHEWf3aQoskAAjqliT6+TIg3+UJKoQOvHS5fGUgKL3xjgI6ESuUo5nLz5MKNKMQsRcMy+EPWW2ITwJ9YzCBP+FBceh9mfrsl+3sCv/BP1NRXCK5IChXmVtRILnfpeueRQ9p26Z6i1PWvsvK87fRjGPjj/qobTnw0sSQplCY6JBXS/aRQuawpcLI8uQdM9dQWbNw00gftl1A85gKyzF8iTL3Jme4FyCX+LQNmO3eBPu7cYl9IBApd9+mmj53P0oEJR44xOp1pZjywL1iPyZOt6BpaFrdRi5r+YsOPNhFwwnpTRIqVFqRBaFOWH50lL2+iBzPoeXGKEIJE06PBty0Jg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bp.renesas.com; dmarc=pass action=none
- header.from=bp.renesas.com; dkim=pass header.d=bp.renesas.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bp.renesas.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xWaFe1uyZt+6uvmEFUzVcxoOEqRBpR/YubXwUfui3Ac=;
- b=m7yAoShwcqxEK6ulEVchqHpm29i57yeHVMJi/39JkjKWDo/SgL7jP+2a6+6f96QKapMPf6FWZDX7LGign2lTaB42fGp2BZLrld4ZSvNLJGnIxolgG2diOwPglKZmZPQdsvYQeXdybAW+rGehz5CoaxdaMRgj9pc3K9vTNkbknqI=
-Received: from TYCPR01MB11269.jpnprd01.prod.outlook.com
- (2603:1096:400:3c0::10) by OS3PR01MB8522.jpnprd01.prod.outlook.com
- (2603:1096:604:199::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.19; Thu, 2 Nov
- 2023 07:54:39 +0000
-Received: from TYCPR01MB11269.jpnprd01.prod.outlook.com
- ([fe80::6cb:4ed9:b0be:36c0]) by TYCPR01MB11269.jpnprd01.prod.outlook.com
- ([fe80::6cb:4ed9:b0be:36c0%7]) with mapi id 15.20.6954.019; Thu, 2 Nov 2023
- 07:54:37 +0000
-From: Biju Das <biju.das.jz@bp.renesas.com>
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-CC: Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: RE: [PATCH 2/8] arm: mach-rmobile: Drop <common.h>
-Thread-Topic: [PATCH 2/8] arm: mach-rmobile: Drop <common.h>
-Thread-Index: AQHaDP7+z2/K3g2YBkSSfN4GE4shq7Bmp/zw
-Date: Thu, 2 Nov 2023 07:54:37 +0000
-Message-ID: <TYCPR01MB11269318ABD0588D031AF46BF86A6A@TYCPR01MB11269.jpnprd01.prod.outlook.com>
-References: <20231101200600.119507-1-paul.barker.ct@bp.renesas.com>
- <20231101200600.119507-2-paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20231101200600.119507-2-paul.barker.ct@bp.renesas.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bp.renesas.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYCPR01MB11269:EE_|OS3PR01MB8522:EE_
-x-ms-office365-filtering-correlation-id: b8a7c1a5-cad2-4c7f-fb31-08dbdb78f643
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: zdbnF2vNcGH+iIQ1jAeHqfHcIKoaTRmp6wk4YdfB4TGQysG+cRDX5ENlcC85FAwFTwAmnctce07+rLs6PiAH45gwAxiQjlN1E02Lz8U0evNQUjvwWqIg674nF68qNIJkzJ+llmJRd4bI14klzhS/PHZAVCMf6GpHBIPXXqihWo9YMedahlg9IwhNIqVy2yVDd7YojKCEl4hrNbDShB8Vememcf8XlXfZ3K3LqbxrcR8ihHy7ZwHFckXAksI/FYGJ2Th2jEYXcI7rj1SN3U4b3tEiCInhaUtrzn7ROSLMQFJMNXS3E7Vd8Zhs97IkB134wYju3KBhQV7L0eLc6Qtea8Cyu7Flvt7F35bKmDFPFr1rdfK8dxrD/gmY5QNrbrloaqEQJteCbohK0UVLtwnbV+ZLxtE2KqT7qF+eIMUXB1f1Ktf1Jifk/3W0C3Q0GKxFpIcQTZ/LDCP+7EyPuWMAzHsL4aUuLbLgoU3ZnuMNv8PiXVI/4QU0Trt41LAbXL0/G54hVgAjsqW/aiRK+2Gr1II160otW2dAmgH1cNHJkrr1F3S2lLlhzCONs7AlAKSZi3JhJeSd22RQNnbWPRu3FwEMjXDNAZUQPDEcQVrvwSv0WnBuvdU7nAFM9W23dpk6NV3qLc+08eytxIIom/C5ug==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYCPR01MB11269.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(346002)(396003)(39860400002)(376002)(136003)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(76116006)(38100700002)(110136005)(122000001)(66946007)(52536014)(66556008)(64756008)(66446008)(2906002)(9686003)(66476007)(41300700001)(316002)(83380400001)(8676002)(8936002)(4326008)(55016003)(26005)(86362001)(107886003)(5660300002)(33656002)(6506007)(7696005)(71200400001)(478600001)(38070700009)(2004002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?0Rex7NlV6ypTI+EjVEWvnSkjYDVZawa5E/l5x8/sKXLWCUWh/Xg0gLC4adFA?=
- =?us-ascii?Q?Hjib2FLs2Kz38YoC/EGBUKGoCxAD6h60Qd1sapCG8cbb34pqQILv0bh4fEob?=
- =?us-ascii?Q?b/qT+8wEaI7FdeqR4enTdsEg/ueZpC5hWiWifRhxO+ec6/6ssiYnzQlK2Nie?=
- =?us-ascii?Q?5wDAb6l6etsiXz4K154lWX56OhVKzesu4XCeKPJBIYEiOgzpYE0t00mnZTrm?=
- =?us-ascii?Q?E09s2mGB2YeNhwTtQ6sHTTxSI+kBOtObtATNCpmpoNaLJy8Yg77bSvP7ZMTQ?=
- =?us-ascii?Q?cxaPg4Eul8eTZJMb9CMs3q2XXMblLkbZAgar/HCwYb3hgLhbrZJra8JXvdIX?=
- =?us-ascii?Q?lJRuXfWsAczvhEvkZKN+hUMGjSmYPAxoRsq7V9/GQ0aBZ/Sx771wOBmjR/Nh?=
- =?us-ascii?Q?Kqolgt1sWji8owxc8F7Il5BdsQ2OsuIEjc5or+OuDYa1o656DGY1UQr7rUp4?=
- =?us-ascii?Q?vCGYazpqd7g+XK8e/rDxGvPiggFoQYAtrKXi+s1hN+TiN7hIxZcQYa5cPwRL?=
- =?us-ascii?Q?n/43KxBOB0WipxtMsCFWKfVRM2OxGttucCJWUM87T/KjAqr5Lcd6/yuFha6g?=
- =?us-ascii?Q?jxmeR1Db2aOrEXbpB9G4WixtDJs+bRxqKW3Ta3YSRegdi1Tml06WeBFWm1xs?=
- =?us-ascii?Q?KC7dC26AYUkZ5Vr4ENoZZuANVh6NRiUlPsMCJbTbyJFeTU0cGjkyTr6YY37m?=
- =?us-ascii?Q?c4mJAifBMp0jpn0dzfo0q0KirgFBB9k5vm3grYVmp8c/zfEja8GhiS48KSXZ?=
- =?us-ascii?Q?B6mHG3kitz52M/mpn4yOaMCGwHqz8QTpCt1u+g0gubbrcNjyBGdd+vdObKPF?=
- =?us-ascii?Q?YTNTlFfapevHJZRy+PfpofWpLuRgeLH6iQNk+vKVWIX2Xx5mzFKcUDGHetAE?=
- =?us-ascii?Q?cZjaJ8ovhlRIMNInwyopTvt3dx4Arxl/KY3cyLGMTKaPCL5Rr0G8Uw9heyXx?=
- =?us-ascii?Q?NpxeUr1UmbW+zEawsy50OymQpV5WIPgQtEJe9dYGKWQPj31ZBst1IWUsHBBC?=
- =?us-ascii?Q?x3H8ZKj8X4DvlHDXouythwSFTttIDBeVS8DXhYMGD7Q+327MS3sX5xS+UB0j?=
- =?us-ascii?Q?zd4KU9qlD8d7aqhXq7GKG7hIzr7k4lsPFkya5H884WOJQ8N0iXw/qDnzbJ4U?=
- =?us-ascii?Q?Hn06AHdBoim2Q55OYjBil3yHQ1oSY4rSwMLw8+kk55GakGfW90HMYraY5oTE?=
- =?us-ascii?Q?N1VCjeUaenTe8lruNgHN44jIym09VAFppaFIEK5dYU660tmx9iaHxKi6NOEb?=
- =?us-ascii?Q?AUAGrzE7G3zpnc+y8ykWNsH7sIQvE/fvVj/05+wVhEz33y2VfCvJW5C01fH6?=
- =?us-ascii?Q?MpNf+SAQsGLuTBMuXdY4cEbP3LzyH5aw3YEHfztMqdHEvafflk9R1sduoki7?=
- =?us-ascii?Q?F+jpZVXA4svJls5SQV1XeSsacQXhAWPYUjjLg7VCleqOgunlOTxRY7xerbnX?=
- =?us-ascii?Q?/DcPIElUrD1fMYDB8YMW4T6OHVqRv1k+msaL8jOGoEGhy6FUsrwEY84+yXor?=
- =?us-ascii?Q?cQgxyei2S7Km8gIQb/rE3H85LjsL5/mtLoptsq/70N7xFvw1+BFaiUuDX7xb?=
- =?us-ascii?Q?axkIxpT05pJh5/Jk/Ao23raNO0lZf6vV+g4Qz5O3TxQostkaT2gdAW8e3D1Z?=
- =?us-ascii?Q?Dw=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-7b5f28da928so248318241.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 00:55:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698911708; x=1699516508; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nYOCw552mSGMchcwdvPUHFxbOQvnywjw+dPuuyhghPM=;
+ b=zEe+zd/mzArgSRt1ETFn2Ap/DMWXTboC5RN5WPGcZzeB6uv5Z30sQm5q33g12Yax8F
+ Wz+O0o621o5MhjU2c5McoOnT/K397Uxo2oEn97riP2BGJyWbZRFN17lbldJpW1LbNJ5u
+ kp/GXHoHV2PKMpgLpw01M1CmsNZ+zIc2U1PqT2wFtl45HVYQG3buojWImTwqIp9iBPCy
+ fTjXzHzFH8y1jlKVu2nkv3scN14E3eaN/9uk+bk9wa+MX3GPTcmjCZQrrI74tO9M2oKs
+ xatVAnxjUgoXzdblko7tmzNxE8eShzu8pGEZb+49vUgtuEhlHnivLNdcaq5osJs7GB7Q
+ iusA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698911708; x=1699516508;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nYOCw552mSGMchcwdvPUHFxbOQvnywjw+dPuuyhghPM=;
+ b=LQ0u84JP2zYwIVITx/+WxWgG0u4X4b4f9YsJ4Ex+TXo/h2tzix5oftsVKEKjBhjH8s
+ FUpNRBxcvRs24GVOgz4TOQDWG13bV5bwK2hdup9livBuOTHQtU1m2x1dqshMYRyGaUrz
+ HVnrdCSW1nmSHO6oT1ngdFe9U5M7BCbmZ+CH+R/Syjvtsrj9H1AlfOltFTJTZIKKgKLf
+ HfIYzpgR60gx/RlnJPis89+wADeiKWLPyRgvgy4ugEntDi1jeHPSyzhCeABUfWk0O0sx
+ STSixlCV4qtfZATokNEJBviQmb7HzSYVHec+jhfB6zyKNprbe0noKxZ6odc4Ti2EB7dp
+ YkJA==
+X-Gm-Message-State: AOJu0Yy6JzLqJQ1/wcPgIeX3xy1OI/OOu2vuMrBi29xVqvBkx7dz1t06
+ FiEz/sDcvOwMNO9opkRXFdApMTj3za4qWyGuU2GUvQ==
+X-Google-Smtp-Source: AGHT+IEqWYYtot6llZah731MCYZqWxDXGX3q+0pLRl2TGblIlQnu7kFdwcq0gfsmqMnEnKM0bDF+679r6KexHYyQfY4=
+X-Received: by 2002:a67:c112:0:b0:457:c933:a228 with SMTP id
+ d18-20020a67c112000000b00457c933a228mr13406185vsj.26.1698911707807; Thu, 02
+ Nov 2023 00:55:07 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: bp.renesas.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB11269.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b8a7c1a5-cad2-4c7f-fb31-08dbdb78f643
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Nov 2023 07:54:37.6780 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 2dU+Wo1CzCeJSZUFX0E9qOLPusuufG8QdQRTOTFXZ9riO5ncutBpgh5VJUJJkXWdVvxLm6I3bQWFLW33Y61FVnCbtZvUPd+an0ur1Cn4znc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3PR01MB8522
+References: <20231024-b4-qcom-clk-v2-0-6572bc2be690@linaro.org>
+ <20231024-b4-qcom-clk-v2-3-6572bc2be690@linaro.org>
+In-Reply-To: <20231024-b4-qcom-clk-v2-3-6572bc2be690@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 2 Nov 2023 13:24:54 +0530
+Message-ID: <CAFA6WYOrNDVZqZD2FJREpk+T2iosKxAeueiKnhN0kOstkuUr2Q@mail.gmail.com>
+Subject: Re: [PATCH v2 3/7] clk/qcom: handle resets and clocks in one device
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Robert Marko <robert.marko@sartura.hr>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Luka Perkov <luka.perkov@sartura.hr>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de, 
+ Konrad Dybcio <konrad.dybcio@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,200 +93,1074 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
-
-Thanks for the patch.
-
-> Subject: [PATCH 2/8] arm: mach-rmobile: Drop <common.h>
->=20
-> For most source files we can just drop <common.h>. We need to add an
-> include for <asm/u-boot.h> in a couple of places. Also sort the include
-> list in memmap-gen3.c while we're here.
-
-Why only sorting memmap-gen3.c? why not sorting all the files touching here=
-?
-
-Cheers,
-Biju
-
->=20
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+On Tue, 31 Oct 2023 at 03:54, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> From: Konrad Dybcio <konrad.dybcio@linaro.org>
+>
+> Qualcomm's clock controller blocks actually do much more than it
+> says on the tin.. They provide clocks, resets and power domains.
+> Currently, U-Boot requires one to spawn 2 separate devices for
+> controlling clocks and resets, both spanning the same register space.
+> Refactor the code to make it work with just a single DT node, making
+> it compatible with upstream Linux bindings and dropping the dedicated
+> reset driver in favour of including it in the clock driver.
+>
+> Heavily inspired by Renesas code for a similar hw block.
+>
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@linaro.org>
+> [caleb: moved drivers to clk/qcom, added reset driver and adjusted bind
+> logic. Imported qcom,gcc-ipq4019.h from Linux]
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/mach-rmobile/board.c            | 2 +-
->  arch/arm/mach-rmobile/cpu_info-r8a7740.c | 2 +-
->  arch/arm/mach-rmobile/cpu_info-rcar.c    | 2 +-
->  arch/arm/mach-rmobile/cpu_info-rzg.c     | 2 +-
->  arch/arm/mach-rmobile/cpu_info-rzg2l.c   | 1 -
->  arch/arm/mach-rmobile/cpu_info.c         | 2 +-
->  arch/arm/mach-rmobile/emac.c             | 1 -
->  arch/arm/mach-rmobile/memmap-gen3.c      | 4 ++--
->  arch/arm/mach-rmobile/memmap-rzg2l.c     | 2 +-
->  arch/arm/mach-rmobile/pfc-r8a7740.c      | 2 +-
->  arch/arm/mach-rmobile/psci-r8a779a0.c    | 1 -
->  11 files changed, 9 insertions(+), 12 deletions(-)
->=20
-> diff --git a/arch/arm/mach-rmobile/board.c b/arch/arm/mach-rmobile/board.=
-c
-> index a10371f74e0c..79c7e02671f2 100644
-> --- a/arch/arm/mach-rmobile/board.c
-> +++ b/arch/arm/mach-rmobile/board.c
-> @@ -3,7 +3,7 @@
->   * (C) Copyright 2012 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.co=
-m>
->   * (C) Copyright 2012 Renesas Solutions Corp.
->   */
-> -#include <common.h>
-> +
->  #include <init.h>
->  #include <asm/io.h>
->=20
-> diff --git a/arch/arm/mach-rmobile/cpu_info-r8a7740.c b/arch/arm/mach-
-> rmobile/cpu_info-r8a7740.c
-> index dcbe25f37ab9..5a94235c4b9e 100644
-> --- a/arch/arm/mach-rmobile/cpu_info-r8a7740.c
-> +++ b/arch/arm/mach-rmobile/cpu_info-r8a7740.c
-> @@ -3,7 +3,7 @@
->   * (C) Copyright 2012 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.co=
-m>
->   * (C) Copyright 2012 Renesas Solutions Corp.
->   */
-> -#include <common.h>
-> +
->  #include <asm/io.h>
->=20
->  u32 rmobile_get_cpu_type(void)
-> diff --git a/arch/arm/mach-rmobile/cpu_info-rcar.c b/arch/arm/mach-
-> rmobile/cpu_info-rcar.c
-> index 8fc4cd7f9de8..b9d8b5e57b5a 100644
-> --- a/arch/arm/mach-rmobile/cpu_info-rcar.c
-> +++ b/arch/arm/mach-rmobile/cpu_info-rcar.c
-> @@ -4,7 +4,7 @@
->   *
->   * Copyright (C) 2013,2014 Renesas Electronics Corporation
->   */
-> -#include <common.h>
-> +
->  #include <asm/io.h>
->=20
->  #define PRR_MASK		0x7fff
-> diff --git a/arch/arm/mach-rmobile/cpu_info-rzg.c b/arch/arm/mach-
-> rmobile/cpu_info-rzg.c
-> index 1c18fd06f0b6..4ade4bc02198 100644
-> --- a/arch/arm/mach-rmobile/cpu_info-rzg.c
-> +++ b/arch/arm/mach-rmobile/cpu_info-rzg.c
-> @@ -3,7 +3,7 @@
->   * Copyright (C) 2021 Renesas Electronics Corporation
->   *
->   */
-> -#include <common.h>
-> +
->  #include <linux/libfdt.h>
->=20
->  /* If the firmware passed a device tree, use it for soc identification. =
-*/
-> diff --git a/arch/arm/mach-rmobile/cpu_info-rzg2l.c b/arch/arm/mach-
-> rmobile/cpu_info-rzg2l.c
-> index de4892ee901e..f69649dc7eaf 100644
-> --- a/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-> +++ b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-> @@ -4,7 +4,6 @@
->   *
->   */
->=20
-> -#include <common.h>
->  #include <asm/io.h>
->  #include <linux/libfdt.h>
->=20
-> diff --git a/arch/arm/mach-rmobile/cpu_info.c b/arch/arm/mach-
-> rmobile/cpu_info.c
-> index 6804b1da2cda..895c0f5336b6 100644
-> --- a/arch/arm/mach-rmobile/cpu_info.c
-> +++ b/arch/arm/mach-rmobile/cpu_info.c
-> @@ -3,7 +3,7 @@
->   * (C) Copyright 2012 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.co=
-m>
->   * (C) Copyright 2012-2021 Renesas Solutions Corp.
->   */
-> -#include <common.h>
-> +
->  #include <cpu_func.h>
->  #include <asm/cache.h>
->  #include <init.h>
-> diff --git a/arch/arm/mach-rmobile/emac.c b/arch/arm/mach-rmobile/emac.c
-> index cb9bce0cf23b..95651626da4a 100644
-> --- a/arch/arm/mach-rmobile/emac.c
-> +++ b/arch/arm/mach-rmobile/emac.c
-> @@ -6,7 +6,6 @@
->   * Copyright (C) 2012  Nobuhiro Iwamatsu
-> <nobuhiro.iwamatsu.yj@renesas.com>
->   */
->=20
-> -#include <common.h>
->  #include <net.h>
->  #include <linux/errno.h>
->  #include <netdev.h>
-> diff --git a/arch/arm/mach-rmobile/memmap-gen3.c b/arch/arm/mach-
-> rmobile/memmap-gen3.c
-> index a68eb806b353..4dff9e07629d 100644
-> --- a/arch/arm/mach-rmobile/memmap-gen3.c
-> +++ b/arch/arm/mach-rmobile/memmap-gen3.c
-> @@ -5,10 +5,10 @@
->   * Copyright (C) 2017 Marek Vasut <marek.vasut@gmail.com>
->   */
->=20
-> -#include <common.h>
-> -#include <cpu_func.h>
->  #include <asm/armv8/mmu.h>
->  #include <asm/global_data.h>
-> +#include <asm/u-boot.h>
-> +#include <cpu_func.h>
->=20
->  #define GEN3_NR_REGIONS 16
->=20
-> diff --git a/arch/arm/mach-rmobile/memmap-rzg2l.c b/arch/arm/mach-
-> rmobile/memmap-rzg2l.c
-> index a08d0ea08fc0..9934a775220b 100644
-> --- a/arch/arm/mach-rmobile/memmap-rzg2l.c
-> +++ b/arch/arm/mach-rmobile/memmap-rzg2l.c
-> @@ -6,9 +6,9 @@
->   * Copyright (C) 2023 Renesas Electronics Corp.
->   */
->=20
-> -#include <common.h>
->  #include <asm/armv8/mmu.h>
->  #include <asm/global_data.h>
-> +#include <asm/u-boot.h>
->  #include <cpu_func.h>
->=20
->  #define RZG2L_NR_REGIONS 16
-> diff --git a/arch/arm/mach-rmobile/pfc-r8a7740.c b/arch/arm/mach-
-> rmobile/pfc-r8a7740.c
-> index 5d42a68266b1..4f4847699b07 100644
-> --- a/arch/arm/mach-rmobile/pfc-r8a7740.c
-> +++ b/arch/arm/mach-rmobile/pfc-r8a7740.c
-> @@ -18,7 +18,7 @@
->   * along with this program; if not, write to the Free Software
->   * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
-> USA
->   */
-> -#include <common.h>
-> +
->  #include <sh_pfc.h>
->  #include <asm/gpio.h>
->  #include <asm/arch/irqs.h>
-> diff --git a/arch/arm/mach-rmobile/psci-r8a779a0.c b/arch/arm/mach-
-> rmobile/psci-r8a779a0.c
-> index 6a85eb22cac2..b6c49e731f9d 100644
-> --- a/arch/arm/mach-rmobile/psci-r8a779a0.c
-> +++ b/arch/arm/mach-rmobile/psci-r8a779a0.c
-> @@ -6,7 +6,6 @@
->   *
->   */
->=20
-> -#include <common.h>
->  #include <asm/io.h>
->  #include <asm/psci.h>
->  #include <asm/secure.h>
-> --
-> 2.39.2
+>  arch/arm/Kconfig                                   |   1 +
+>  arch/arm/dts/qcom-ipq4019.dtsi                     |  14 +-
+>  arch/arm/dts/qcs404-evb.dts                        |  19 +-
+>  drivers/clk/qcom/clock-apq8016.c                   |  17 ++
+>  drivers/clk/qcom/clock-apq8096.c                   |  16 ++
+>  drivers/clk/qcom/clock-ipq4019.c                   |  96 +++++++++-
+>  drivers/clk/qcom/clock-qcom.c                      | 119 +++++++++++--
+>  drivers/clk/qcom/clock-qcom.h                      |  22 ++-
+>  drivers/clk/qcom/clock-qcs404.c                    |  50 +++++-
+>  drivers/clk/qcom/clock-sdm845.c                    |  42 +++++
+>  drivers/reset/Kconfig                              |   7 -
+>  drivers/reset/Makefile                             |   1 -
+>  drivers/reset/reset-qcom.c                         | 195 ---------------------
+>  .../{qcom,ipq4019-gcc.h => qcom,gcc-ipq4019.h}     |  73 ++++++++
+>  include/dt-bindings/reset/qcom,ipq4019-reset.h     |  92 ----------
+>  15 files changed, 422 insertions(+), 342 deletions(-)
+>
 
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+
+-Sumit
+
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 5aaf7e5e32af..faccfaf720a8 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1067,6 +1067,7 @@ config ARCH_SNAPDRAGON
+>         select DM
+>         select DM_GPIO
+>         select DM_SERIAL
+> +       select DM_RESET
+>         select GPIO_EXTRA_HEADER
+>         select MSM_SMEM
+>         select OF_CONTROL
+> diff --git a/arch/arm/dts/qcom-ipq4019.dtsi b/arch/arm/dts/qcom-ipq4019.dtsi
+> index 0850ae56e9a8..f9489e42ea2c 100644
+> --- a/arch/arm/dts/qcom-ipq4019.dtsi
+> +++ b/arch/arm/dts/qcom-ipq4019.dtsi
+> @@ -66,14 +66,6 @@
+>                         status = "disabled";
+>                 };
+>
+> -               reset: gcc-reset@1800000 {
+> -                       compatible = "qcom,gcc-reset-ipq4019";
+> -                       reg = <0x1800000 0x60000>;
+> -                       #clock-cells = <1>;
+> -                       #reset-cells = <1>;
+> -                       bootph-all;
+> -               };
+> -
+>                 soc_gpios: pinctrl@1000000 {
+>                         compatible = "qcom,ipq4019-pinctrl";
+>                         reg = <0x1000000 0x300000>;
+> @@ -136,7 +128,7 @@
+>                         #phy-cells = <0>;
+>                         reg = <0x9a000 0x800>;
+>                         reg-names = "phy_base";
+> -                       resets = <&reset USB3_UNIPHY_PHY_ARES>;
+> +                       resets = <&gcc USB3_UNIPHY_PHY_ARES>;
+>                         reset-names = "por_rst";
+>                         status = "disabled";
+>                 };
+> @@ -146,7 +138,7 @@
+>                         #phy-cells = <0>;
+>                         reg = <0xa6000 0x40>;
+>                         reg-names = "phy_base";
+> -                       resets = <&reset USB3_HSPHY_POR_ARES>, <&reset USB3_HSPHY_S_ARES>;
+> +                       resets = <&gcc USB3_HSPHY_POR_ARES>, <&gcc USB3_HSPHY_S_ARES>;
+>                         reset-names = "por_rst", "srif_rst";
+>                         status = "disabled";
+>                 };
+> @@ -179,7 +171,7 @@
+>                         #phy-cells = <0>;
+>                         reg = <0xa8000 0x40>;
+>                         reg-names = "phy_base";
+> -                       resets = <&reset USB2_HSPHY_POR_ARES>, <&reset USB2_HSPHY_S_ARES>;
+> +                       resets = <&gcc USB2_HSPHY_POR_ARES>, <&gcc USB2_HSPHY_S_ARES>;
+>                         reset-names = "por_rst", "srif_rst";
+>                         status = "disabled";
+>                 };
+> diff --git a/arch/arm/dts/qcs404-evb.dts b/arch/arm/dts/qcs404-evb.dts
+> index 8d7893c11695..84224a8a3d39 100644
+> --- a/arch/arm/dts/qcs404-evb.dts
+> +++ b/arch/arm/dts/qcs404-evb.dts
+> @@ -208,11 +208,6 @@
+>                         #address-cells = <0x1>;
+>                         #size-cells = <0x0>;
+>                         #clock-cells = <1>;
+> -               };
+> -
+> -               reset: gcc-reset@1800000 {
+> -                       compatible = "qcom,gcc-reset-qcs404";
+> -                       reg = <0x1800000 0x80000>;
+>                         #reset-cells = <1>;
+>                 };
+>
+> @@ -245,8 +240,8 @@
+>                         clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
+>                                  <&gcc GCC_USB3_PHY_PIPE_CLK>;
+>                         clock-names = "ahb", "pipe";
+> -                       resets = <&reset GCC_USB3_PHY_BCR>,
+> -                                <&reset GCC_USB3PHY_PHY_BCR>;
+> +                       resets = <&gcc GCC_USB3_PHY_BCR>,
+> +                                <&gcc GCC_USB3PHY_PHY_BCR>;
+>                         reset-names = "com", "phy";
+>                 };
+>
+> @@ -257,8 +252,8 @@
+>                         clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
+>                                  <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
+>                         clock-names = "ahb", "sleep";
+> -                       resets = <&reset GCC_USB_HS_PHY_CFG_AHB_BCR>,
+> -                                <&reset GCC_USB2A_PHY_BCR>;
+> +                       resets = <&gcc GCC_USB_HS_PHY_CFG_AHB_BCR>,
+> +                                <&gcc GCC_USB2A_PHY_BCR>;
+>                         reset-names = "phy", "por";
+>                 };
+>
+> @@ -269,8 +264,8 @@
+>                         clocks = <&gcc GCC_USB_HS_PHY_CFG_AHB_CLK>,
+>                                  <&gcc GCC_USB2A_PHY_SLEEP_CLK>;
+>                         clock-names = "ahb", "sleep";
+> -                       resets = <&reset GCC_QUSB2_PHY_BCR>,
+> -                                <&reset GCC_USB2_HS_PHY_ONLY_BCR>;
+> +                       resets = <&gcc GCC_QUSB2_PHY_BCR>,
+> +                                <&gcc GCC_USB2_HS_PHY_ONLY_BCR>;
+>                         reset-names = "phy", "por";
+>                 };
+>
+> @@ -335,7 +330,7 @@
+>                                  <&gcc GCC_ETH_PTP_CLK>,
+>                                  <&gcc GCC_ETH_RGMII_CLK>;
+>
+> -                       resets = <&reset GCC_EMAC_BCR>;
+> +                       resets = <&gcc GCC_EMAC_BCR>;
+>                         reset-names = "emac";
+>
+>                         snps,tso;
+> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+> index 90f2a93d9ed5..3bddbd275906 100644
+> --- a/drivers/clk/qcom/clock-apq8016.c
+> +++ b/drivers/clk/qcom/clock-apq8016.c
+> @@ -13,6 +13,7 @@
+>  #include <errno.h>
+>  #include <asm/io.h>
+>  #include <linux/bitops.h>
+> +
+>  #include "clock-qcom.h"
+>
+>  /* GPLL0 clock control registers */
+> @@ -116,3 +117,19 @@ int msm_enable(struct clk *clk)
+>  {
+>         return 0;
+>  }
+> +
+> +static const struct udevice_id gcc_apq8016_of_match[] = {
+> +       {
+> +               .compatible = "qcom,gcc-apq8016",
+> +               /* TODO: add reset map */
+> +       },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_apq8016) = {
+> +       .name           = "gcc_apq8016",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = gcc_apq8016_of_match,
+> +       .bind           = qcom_cc_bind,
+> +       .flags          = DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+> index d5388c69aefe..64b8cdf4c54b 100644
+> --- a/drivers/clk/qcom/clock-apq8096.c
+> +++ b/drivers/clk/qcom/clock-apq8096.c
+> @@ -99,3 +99,19 @@ int msm_enable(struct clk *clk)
+>  {
+>         return 0;
+>  }
+> +
+> +static const struct udevice_id gcc_apq8096_of_match[] = {
+> +       {
+> +               .compatible = "qcom,gcc-apq8096",
+> +               /* TODO: add reset map */
+> +       },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_apq8096) = {
+> +       .name           = "gcc_apq8096",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = gcc_apq8096_of_match,
+> +       .bind           = qcom_cc_bind,
+> +       .flags          = DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/drivers/clk/qcom/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
+> index 04c99964df15..db869f874219 100644
+> --- a/drivers/clk/qcom/clock-ipq4019.c
+> +++ b/drivers/clk/qcom/clock-ipq4019.c
+> @@ -12,7 +12,7 @@
+>  #include <common.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> -#include <dt-bindings/clock/qcom,ipq4019-gcc.h>
+> +#include <dt-bindings/clock/qcom,gcc-ipq4019.h>
+>
+>  #include "clock-qcom.h"
+>
+> @@ -49,3 +49,97 @@ int msm_enable(struct clk *clk)
+>         }
+>  }
+>
+> +static const struct qcom_reset_map gcc_ipq4019_resets[] = {
+> +       [WIFI0_CPU_INIT_RESET] = { 0x1f008, 5 },
+> +       [WIFI0_RADIO_SRIF_RESET] = { 0x1f008, 4 },
+> +       [WIFI0_RADIO_WARM_RESET] = { 0x1f008, 3 },
+> +       [WIFI0_RADIO_COLD_RESET] = { 0x1f008, 2 },
+> +       [WIFI0_CORE_WARM_RESET] = { 0x1f008, 1 },
+> +       [WIFI0_CORE_COLD_RESET] = { 0x1f008, 0 },
+> +       [WIFI1_CPU_INIT_RESET] = { 0x20008, 5 },
+> +       [WIFI1_RADIO_SRIF_RESET] = { 0x20008, 4 },
+> +       [WIFI1_RADIO_WARM_RESET] = { 0x20008, 3 },
+> +       [WIFI1_RADIO_COLD_RESET] = { 0x20008, 2 },
+> +       [WIFI1_CORE_WARM_RESET] = { 0x20008, 1 },
+> +       [WIFI1_CORE_COLD_RESET] = { 0x20008, 0 },
+> +       [USB3_UNIPHY_PHY_ARES] = { 0x1e038, 5 },
+> +       [USB3_HSPHY_POR_ARES] = { 0x1e038, 4 },
+> +       [USB3_HSPHY_S_ARES] = { 0x1e038, 2 },
+> +       [USB2_HSPHY_POR_ARES] = { 0x1e01c, 4 },
+> +       [USB2_HSPHY_S_ARES] = { 0x1e01c, 2 },
+> +       [PCIE_PHY_AHB_ARES] = { 0x1d010, 11 },
+> +       [PCIE_AHB_ARES] = { 0x1d010, 10 },
+> +       [PCIE_PWR_ARES] = { 0x1d010, 9 },
+> +       [PCIE_PIPE_STICKY_ARES] = { 0x1d010, 8 },
+> +       [PCIE_AXI_M_STICKY_ARES] = { 0x1d010, 7 },
+> +       [PCIE_PHY_ARES] = { 0x1d010, 6 },
+> +       [PCIE_PARF_XPU_ARES] = { 0x1d010, 5 },
+> +       [PCIE_AXI_S_XPU_ARES] = { 0x1d010, 4 },
+> +       [PCIE_AXI_M_VMIDMT_ARES] = { 0x1d010, 3 },
+> +       [PCIE_PIPE_ARES] = { 0x1d010, 2 },
+> +       [PCIE_AXI_S_ARES] = { 0x1d010, 1 },
+> +       [PCIE_AXI_M_ARES] = { 0x1d010, 0 },
+> +       [ESS_RESET] = { 0x12008, 0},
+> +       [GCC_BLSP1_BCR] = {0x01000, 0},
+> +       [GCC_BLSP1_QUP1_BCR] = {0x02000, 0},
+> +       [GCC_BLSP1_UART1_BCR] = {0x02038, 0},
+> +       [GCC_BLSP1_QUP2_BCR] = {0x03008, 0},
+> +       [GCC_BLSP1_UART2_BCR] = {0x03028, 0},
+> +       [GCC_BIMC_BCR] = {0x04000, 0},
+> +       [GCC_TLMM_BCR] = {0x05000, 0},
+> +       [GCC_IMEM_BCR] = {0x0E000, 0},
+> +       [GCC_ESS_BCR] = {0x12008, 0},
+> +       [GCC_PRNG_BCR] = {0x13000, 0},
+> +       [GCC_BOOT_ROM_BCR] = {0x13008, 0},
+> +       [GCC_CRYPTO_BCR] = {0x16000, 0},
+> +       [GCC_SDCC1_BCR] = {0x18000, 0},
+> +       [GCC_SEC_CTRL_BCR] = {0x1A000, 0},
+> +       [GCC_AUDIO_BCR] = {0x1B008, 0},
+> +       [GCC_QPIC_BCR] = {0x1C000, 0},
+> +       [GCC_PCIE_BCR] = {0x1D000, 0},
+> +       [GCC_USB2_BCR] = {0x1E008, 0},
+> +       [GCC_USB2_PHY_BCR] = {0x1E018, 0},
+> +       [GCC_USB3_BCR] = {0x1E024, 0},
+> +       [GCC_USB3_PHY_BCR] = {0x1E034, 0},
+> +       [GCC_SYSTEM_NOC_BCR] = {0x21000, 0},
+> +       [GCC_PCNOC_BCR] = {0x2102C, 0},
+> +       [GCC_DCD_BCR] = {0x21038, 0},
+> +       [GCC_SNOC_BUS_TIMEOUT0_BCR] = {0x21064, 0},
+> +       [GCC_SNOC_BUS_TIMEOUT1_BCR] = {0x2106C, 0},
+> +       [GCC_SNOC_BUS_TIMEOUT2_BCR] = {0x21074, 0},
+> +       [GCC_SNOC_BUS_TIMEOUT3_BCR] = {0x2107C, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT0_BCR] = {0x21084, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT1_BCR] = {0x2108C, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT2_BCR] = {0x21094, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT3_BCR] = {0x2109C, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT4_BCR] = {0x210A4, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT5_BCR] = {0x210AC, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT6_BCR] = {0x210B4, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT7_BCR] = {0x210BC, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT8_BCR] = {0x210C4, 0},
+> +       [GCC_PCNOC_BUS_TIMEOUT9_BCR] = {0x210CC, 0},
+> +       [GCC_TCSR_BCR] = {0x22000, 0},
+> +       [GCC_MPM_BCR] = {0x24000, 0},
+> +       [GCC_SPDM_BCR] = {0x25000, 0},
+> +};
+> +
+> +static struct msm_clk_data ipq4019_data = {
+> +       .resets = gcc_ipq4019_resets,
+> +       .num_resets = ARRAY_SIZE(gcc_ipq4019_resets),
+> +};
+> +
+> +static const struct udevice_id gcc_ipq4019_of_match[] = {
+> +       {
+> +               .compatible = "qcom,gcc-ipq4019",
+> +               .data = (ulong)&ipq4019_data,
+> +       },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_ipq4019) = {
+> +       .name           = "gcc_ipq4019",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = gcc_ipq4019_of_match,
+> +       .bind           = qcom_cc_bind,
+> +       .flags          = DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+> index 5914616fba5d..a661837e4e11 100644
+> --- a/drivers/clk/qcom/clock-qcom.c
+> +++ b/drivers/clk/qcom/clock-qcom.c
+> @@ -1,8 +1,13 @@
+> -// SPDX-License-Identifier: BSD-3-Clause
+> +// SPDX-License-Identifier: BSD-3-Clause AND GPL-2.0
+>  /*
+> - * Clock drivers for Qualcomm APQ8016, APQ8096
+> + * Clock and reset drivers for Qualcomm platforms Global Clock
+> + * Controller (GCC).
+>   *
+>   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+> + * (C) Copyright 2020 Sartura Ltd. (reset driver)
+> + *     Author: Robert Marko <robert.marko@sartura.hr>
+> + * (C) Copyright 2022 Linaro Ltd. (reset driver)
+> + *     Author: Sumit Garg <sumit.garg@linaro.org>
+>   *
+>   * Based on Little Kernel driver, simplified
+>   */
+> @@ -10,9 +15,13 @@
+>  #include <common.h>
+>  #include <clk-uclass.h>
+>  #include <dm.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>  #include <errno.h>
+>  #include <asm/io.h>
+>  #include <linux/bitops.h>
+> +#include <reset-uclass.h>
+> +
+>  #include "clock-qcom.h"
+>
+>  /* CBCR register fields */
+> @@ -137,12 +146,15 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
+>
+>  static int msm_clk_probe(struct udevice *dev)
+>  {
+> +       struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
+>         struct msm_clk_priv *priv = dev_get_priv(dev);
+>
+>         priv->base = dev_read_addr(dev);
+>         if (priv->base == FDT_ADDR_T_NONE)
+>                 return -EINVAL;
+>
+> +       priv->data = data;
+> +
+>         return 0;
+>  }
+>
+> @@ -161,22 +173,97 @@ static struct clk_ops msm_clk_ops = {
+>         .enable = msm_clk_enable,
+>  };
+>
+> -static const struct udevice_id msm_clk_ids[] = {
+> -       { .compatible = "qcom,gcc-msm8916" },
+> -       { .compatible = "qcom,gcc-apq8016" },
+> -       { .compatible = "qcom,gcc-msm8996" },
+> -       { .compatible = "qcom,gcc-apq8096" },
+> -       { .compatible = "qcom,gcc-ipq4019" },
+> -       { .compatible = "qcom,gcc-sdm845" },
+> -       { .compatible = "qcom,gcc-qcs404" },
+> -       { }
+> -};
+> -
+> -U_BOOT_DRIVER(clk_msm) = {
+> -       .name           = "clk_msm",
+> +U_BOOT_DRIVER(qcom_clk) = {
+> +       .name           = "qcom_clk",
+>         .id             = UCLASS_CLK,
+> -       .of_match       = msm_clk_ids,
+>         .ops            = &msm_clk_ops,
+>         .priv_auto      = sizeof(struct msm_clk_priv),
+>         .probe          = msm_clk_probe,
+>  };
+> +
+> +int qcom_cc_bind(struct udevice *parent)
+> +{
+> +       struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(parent);
+> +       struct udevice *clkdev, *rstdev;
+> +       struct driver *drv;
+> +       int ret;
+> +
+> +       /* Get a handle to the common clk handler */
+> +       drv = lists_driver_lookup_name("qcom_clk");
+> +       if (!drv)
+> +               return -ENOENT;
+> +
+> +       /* Register the clock controller */
+> +       ret = device_bind_with_driver_data(parent, drv, "qcom_clk", (ulong)data,
+> +                                          dev_ofnode(parent), &clkdev);
+> +       if (ret)
+> +               return ret;
+> +
+> +       /* Bail out early if resets are not specified for this platform */
+> +       if (!data->resets)
+> +               return ret;
+> +
+> +       /* Get a handle to the common reset handler */
+> +       drv = lists_driver_lookup_name("qcom_reset");
+> +       if (!drv)
+> +               return -ENOENT;
+> +
+> +       /* Register the reset controller */
+> +       ret = device_bind_with_driver_data(parent, drv, "qcom_reset", (ulong)data,
+> +                                          dev_ofnode(parent), &rstdev);
+> +       if (ret)
+> +               device_unbind(clkdev);
+> +
+> +       return ret;
+> +}
+> +
+> +static int qcom_reset_set(struct reset_ctl *rst, bool assert)
+> +{
+> +       struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(rst->dev);
+> +       void __iomem *base = dev_get_priv(rst->dev);
+> +       const struct qcom_reset_map *map;
+> +       u32 value;
+> +
+> +       map = &data->resets[rst->id];
+> +
+> +       value = readl(base + map->reg);
+> +
+> +       if (assert)
+> +               value |= BIT(map->bit);
+> +       else
+> +               value &= ~BIT(map->bit);
+> +
+> +       writel(value, base + map->reg);
+> +
+> +       return 0;
+> +}
+> +
+> +static int qcom_reset_assert(struct reset_ctl *rst)
+> +{
+> +       return qcom_reset_set(rst, true);
+> +}
+> +
+> +static int qcom_reset_deassert(struct reset_ctl *rst)
+> +{
+> +       return qcom_reset_set(rst, false);
+> +}
+> +
+> +static const struct reset_ops qcom_reset_ops = {
+> +       .rst_assert = qcom_reset_assert,
+> +       .rst_deassert = qcom_reset_deassert,
+> +};
+> +
+> +static int qcom_reset_probe(struct udevice *dev)
+> +{
+> +       /* Set our priv pointer to the base address */
+> +       dev_set_priv(dev, (void *)dev_read_addr(dev));
+> +
+> +       return 0;
+> +}
+> +
+> +U_BOOT_DRIVER(qcom_reset) = {
+> +       .name = "qcom_reset",
+> +       .id = UCLASS_RESET,
+> +       .ops = &qcom_reset_ops,
+> +       .probe = qcom_reset_probe,
+> +};
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index c90bbefa5881..a9f895c2422e 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -1,11 +1,9 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * Qualcomm APQ8016, APQ8096, SDM845
+> - *
+>   * (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@linaro.org>
+>   */
+> -#ifndef _CLOCK_SNAPDRAGON_H
+> -#define _CLOCK_SNAPDRAGON_H
+> +#ifndef _CLOCK_QCOM_H
+> +#define _CLOCK_QCOM_H
+>
+>  #define CFG_CLK_SRC_CXO   (0 << 8)
+>  #define CFG_CLK_SRC_GPLL0 (1 << 8)
+> @@ -32,10 +30,22 @@ struct bcr_regs {
+>         uintptr_t D;
+>  };
+>
+> -struct msm_clk_priv {
+> -       phys_addr_t base;
+> +struct qcom_reset_map {
+> +       unsigned int reg;
+> +       u8 bit;
+>  };
+>
+> +struct msm_clk_data {
+> +       const struct qcom_reset_map     *resets;
+> +       unsigned long                   num_resets;
+> +};
+> +
+> +struct msm_clk_priv {
+> +       phys_addr_t             base;
+> +       struct msm_clk_data     *data;
+> +};
+> +
+> +int qcom_cc_bind(struct udevice *parent);
+>  void clk_enable_gpll0(phys_addr_t base, const struct pll_vote_clk *gpll0);
+>  void clk_bcr_update(phys_addr_t apps_cmd_rgcr);
+>  void clk_enable_cbc(phys_addr_t cbcr);
+> diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
+> index 80218af73ef6..10ac3609be42 100644
+> --- a/drivers/clk/qcom/clock-qcs404.c
+> +++ b/drivers/clk/qcom/clock-qcs404.c
+> @@ -11,9 +11,10 @@
+>  #include <errno.h>
+>  #include <asm/io.h>
+>  #include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,gcc-qcs404.h>
+> +
+>  #include "clock-qcom.h"
+>
+> -#include <dt-bindings/clock/qcom,gcc-qcs404.h>
+>
+>  /* GPLL0 clock control registers */
+>  #define GPLL0_STATUS_ACTIVE BIT(31)
+> @@ -235,3 +236,50 @@ int msm_enable(struct clk *clk)
+>
+>         return 0;
+>  }
+> +
+> +static const struct qcom_reset_map qcs404_gcc_resets[] = {
+> +       [GCC_GENI_IR_BCR] = { 0x0F000 },
+> +       [GCC_CDSP_RESTART] = { 0x18000 },
+> +       [GCC_USB_HS_BCR] = { 0x41000 },
+> +       [GCC_USB2_HS_PHY_ONLY_BCR] = { 0x41034 },
+> +       [GCC_QUSB2_PHY_BCR] = { 0x4103c },
+> +       [GCC_USB_HS_PHY_CFG_AHB_BCR] = { 0x0000c, 1 },
+> +       [GCC_USB2A_PHY_BCR] = { 0x0000c, 0 },
+> +       [GCC_USB3_PHY_BCR] = { 0x39004 },
+> +       [GCC_USB_30_BCR] = { 0x39000 },
+> +       [GCC_USB3PHY_PHY_BCR] = { 0x39008 },
+> +       [GCC_PCIE_0_BCR] = { 0x3e000 },
+> +       [GCC_PCIE_0_PHY_BCR] = { 0x3e004 },
+> +       [GCC_PCIE_0_LINK_DOWN_BCR] = { 0x3e038 },
+> +       [GCC_PCIEPHY_0_PHY_BCR] = { 0x3e03c },
+> +       [GCC_PCIE_0_AXI_MASTER_STICKY_ARES] = { 0x3e040, 6},
+> +       [GCC_PCIE_0_AHB_ARES] = { 0x3e040, 5 },
+> +       [GCC_PCIE_0_AXI_SLAVE_ARES] = { 0x3e040, 4 },
+> +       [GCC_PCIE_0_AXI_MASTER_ARES] = { 0x3e040, 3 },
+> +       [GCC_PCIE_0_CORE_STICKY_ARES] = { 0x3e040, 2 },
+> +       [GCC_PCIE_0_SLEEP_ARES] = { 0x3e040, 1 },
+> +       [GCC_PCIE_0_PIPE_ARES] = { 0x3e040, 0 },
+> +       [GCC_EMAC_BCR] = { 0x4e000 },
+> +       [GCC_WDSP_RESTART] = {0x19000},
+> +};
+> +
+> +static const struct msm_clk_data qcs404_gcc_data = {
+> +       .resets = qcs404_gcc_resets,
+> +       .num_resets = ARRAY_SIZE(qcs404_gcc_resets),
+> +};
+> +
+> +static const struct udevice_id gcc_qcs404_of_match[] = {
+> +       {
+> +               .compatible = "qcom,gcc-qcs404",
+> +               .data = (ulong)&qcs404_gcc_data
+> +       },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_qcs404) = {
+> +       .name           = "gcc_qcs404",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = gcc_qcs404_of_match,
+> +       .bind           = qcom_cc_bind,
+> +       .flags          = DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
+> index 95a057b82986..a7a43f69b9b3 100644
+> --- a/drivers/clk/qcom/clock-sdm845.c
+> +++ b/drivers/clk/qcom/clock-sdm845.c
+> @@ -15,6 +15,7 @@
+>  #include <asm/io.h>
+>  #include <linux/bitops.h>
+>  #include <dt-bindings/clock/qcom,gcc-sdm845.h>
+> +
+>  #include "clock-qcom.h"
+>
+>  #define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
+> @@ -96,3 +97,44 @@ int msm_enable(struct clk *clk)
+>  {
+>         return 0;
+>  }
+> +
+> +static const struct qcom_reset_map sdm845_gcc_resets[] = {
+> +       [GCC_QUPV3_WRAPPER_0_BCR] = { 0x17000 },
+> +       [GCC_QUPV3_WRAPPER_1_BCR] = { 0x18000 },
+> +       [GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
+> +       [GCC_QUSB2PHY_SEC_BCR] = { 0x12004 },
+> +       [GCC_SDCC2_BCR] = { 0x14000 },
+> +       [GCC_SDCC4_BCR] = { 0x16000 },
+> +       [GCC_UFS_CARD_BCR] = { 0x75000 },
+> +       [GCC_UFS_PHY_BCR] = { 0x77000 },
+> +       [GCC_USB30_PRIM_BCR] = { 0xf000 },
+> +       [GCC_USB30_SEC_BCR] = { 0x10000 },
+> +       [GCC_USB3_PHY_PRIM_BCR] = { 0x50000 },
+> +       [GCC_USB3PHY_PHY_PRIM_BCR] = { 0x50004 },
+> +       [GCC_USB3_DP_PHY_PRIM_BCR] = { 0x50008 },
+> +       [GCC_USB3_PHY_SEC_BCR] = { 0x5000c },
+> +       [GCC_USB3PHY_PHY_SEC_BCR] = { 0x50010 },
+> +       [GCC_USB3_DP_PHY_SEC_BCR] = { 0x50014 },
+> +       [GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
+> +};
+> +
+> +static const struct msm_clk_data qcs404_gcc_data = {
+> +       .resets = sdm845_gcc_resets,
+> +       .num_resets = ARRAY_SIZE(sdm845_gcc_resets),
+> +};
+> +
+> +static const struct udevice_id gcc_sdm845_of_match[] = {
+> +       {
+> +               .compatible = "qcom,gcc-sdm845",
+> +               .data = (ulong)&qcs404_gcc_data,
+> +       },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_sdm845) = {
+> +       .name           = "gcc_sdm845",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = gcc_sdm845_of_match,
+> +       .bind           = qcom_cc_bind,
+> +       .flags          = DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+> index 73bbd3069258..88e04d93f2a0 100644
+> --- a/drivers/reset/Kconfig
+> +++ b/drivers/reset/Kconfig
+> @@ -156,13 +156,6 @@ config RESET_IMX7
+>         help
+>           Support for reset controller on i.MX7/8 SoCs.
+>
+> -config RESET_QCOM
+> -       bool "Reset driver for Qualcomm SoCs"
+> -       depends on DM_RESET && (ARCH_SNAPDRAGON || ARCH_IPQ40XX)
+> -       default y
+> -       help
+> -         Support for reset controller on Qualcomm SoCs.
+> -
+>  config RESET_SIFIVE
+>         bool "Reset Driver for SiFive SoC's"
+>         depends on DM_RESET && CLK_SIFIVE_PRCI && (TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED)
+> diff --git a/drivers/reset/Makefile b/drivers/reset/Makefile
+> index e2239a250a3a..7b0066f80188 100644
+> --- a/drivers/reset/Makefile
+> +++ b/drivers/reset/Makefile
+> @@ -24,7 +24,6 @@ obj-$(CONFIG_RESET_MTMIPS) += reset-mtmips.o
+>  obj-$(CONFIG_RESET_SUNXI) += reset-sunxi.o
+>  obj-$(CONFIG_RESET_HISILICON) += reset-hisilicon.o
+>  obj-$(CONFIG_RESET_IMX7) += reset-imx7.o
+> -obj-$(CONFIG_RESET_QCOM) += reset-qcom.o
+>  obj-$(CONFIG_RESET_SIFIVE) += reset-sifive.o
+>  obj-$(CONFIG_RESET_SYSCON) += reset-syscon.o
+>  obj-$(CONFIG_RESET_RASPBERRYPI) += reset-raspberrypi.o
+> diff --git a/drivers/reset/reset-qcom.c b/drivers/reset/reset-qcom.c
+> deleted file mode 100644
+> index 94315e76d545..000000000000
+> --- a/drivers/reset/reset-qcom.c
+> +++ /dev/null
+> @@ -1,195 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0
+> -/*
+> - * Copyright (c) 2020 Sartura Ltd.
+> - * Copyright (c) 2022 Linaro Ltd.
+> - *
+> - * Author: Robert Marko <robert.marko@sartura.hr>
+> - *         Sumit Garg <sumit.garg@linaro.org>
+> - *
+> - * Based on Linux driver
+> - */
+> -
+> -#include <asm/io.h>
+> -#include <common.h>
+> -#include <dm.h>
+> -#include <reset-uclass.h>
+> -#include <linux/bitops.h>
+> -#include <malloc.h>
+> -
+> -struct qcom_reset_priv {
+> -       phys_addr_t base;
+> -};
+> -
+> -struct qcom_reset_map {
+> -       unsigned int reg;
+> -       u8 bit;
+> -};
+> -
+> -#ifdef CONFIG_ARCH_IPQ40XX
+> -#include <dt-bindings/reset/qcom,ipq4019-reset.h>
+> -static const struct qcom_reset_map gcc_qcom_resets[] = {
+> -       [WIFI0_CPU_INIT_RESET] = { 0x1f008, 5 },
+> -       [WIFI0_RADIO_SRIF_RESET] = { 0x1f008, 4 },
+> -       [WIFI0_RADIO_WARM_RESET] = { 0x1f008, 3 },
+> -       [WIFI0_RADIO_COLD_RESET] = { 0x1f008, 2 },
+> -       [WIFI0_CORE_WARM_RESET] = { 0x1f008, 1 },
+> -       [WIFI0_CORE_COLD_RESET] = { 0x1f008, 0 },
+> -       [WIFI1_CPU_INIT_RESET] = { 0x20008, 5 },
+> -       [WIFI1_RADIO_SRIF_RESET] = { 0x20008, 4 },
+> -       [WIFI1_RADIO_WARM_RESET] = { 0x20008, 3 },
+> -       [WIFI1_RADIO_COLD_RESET] = { 0x20008, 2 },
+> -       [WIFI1_CORE_WARM_RESET] = { 0x20008, 1 },
+> -       [WIFI1_CORE_COLD_RESET] = { 0x20008, 0 },
+> -       [USB3_UNIPHY_PHY_ARES] = { 0x1e038, 5 },
+> -       [USB3_HSPHY_POR_ARES] = { 0x1e038, 4 },
+> -       [USB3_HSPHY_S_ARES] = { 0x1e038, 2 },
+> -       [USB2_HSPHY_POR_ARES] = { 0x1e01c, 4 },
+> -       [USB2_HSPHY_S_ARES] = { 0x1e01c, 2 },
+> -       [PCIE_PHY_AHB_ARES] = { 0x1d010, 11 },
+> -       [PCIE_AHB_ARES] = { 0x1d010, 10 },
+> -       [PCIE_PWR_ARES] = { 0x1d010, 9 },
+> -       [PCIE_PIPE_STICKY_ARES] = { 0x1d010, 8 },
+> -       [PCIE_AXI_M_STICKY_ARES] = { 0x1d010, 7 },
+> -       [PCIE_PHY_ARES] = { 0x1d010, 6 },
+> -       [PCIE_PARF_XPU_ARES] = { 0x1d010, 5 },
+> -       [PCIE_AXI_S_XPU_ARES] = { 0x1d010, 4 },
+> -       [PCIE_AXI_M_VMIDMT_ARES] = { 0x1d010, 3 },
+> -       [PCIE_PIPE_ARES] = { 0x1d010, 2 },
+> -       [PCIE_AXI_S_ARES] = { 0x1d010, 1 },
+> -       [PCIE_AXI_M_ARES] = { 0x1d010, 0 },
+> -       [ESS_RESET] = { 0x12008, 0},
+> -       [GCC_BLSP1_BCR] = {0x01000, 0},
+> -       [GCC_BLSP1_QUP1_BCR] = {0x02000, 0},
+> -       [GCC_BLSP1_UART1_BCR] = {0x02038, 0},
+> -       [GCC_BLSP1_QUP2_BCR] = {0x03008, 0},
+> -       [GCC_BLSP1_UART2_BCR] = {0x03028, 0},
+> -       [GCC_BIMC_BCR] = {0x04000, 0},
+> -       [GCC_TLMM_BCR] = {0x05000, 0},
+> -       [GCC_IMEM_BCR] = {0x0E000, 0},
+> -       [GCC_ESS_BCR] = {0x12008, 0},
+> -       [GCC_PRNG_BCR] = {0x13000, 0},
+> -       [GCC_BOOT_ROM_BCR] = {0x13008, 0},
+> -       [GCC_CRYPTO_BCR] = {0x16000, 0},
+> -       [GCC_SDCC1_BCR] = {0x18000, 0},
+> -       [GCC_SEC_CTRL_BCR] = {0x1A000, 0},
+> -       [GCC_AUDIO_BCR] = {0x1B008, 0},
+> -       [GCC_QPIC_BCR] = {0x1C000, 0},
+> -       [GCC_PCIE_BCR] = {0x1D000, 0},
+> -       [GCC_USB2_BCR] = {0x1E008, 0},
+> -       [GCC_USB2_PHY_BCR] = {0x1E018, 0},
+> -       [GCC_USB3_BCR] = {0x1E024, 0},
+> -       [GCC_USB3_PHY_BCR] = {0x1E034, 0},
+> -       [GCC_SYSTEM_NOC_BCR] = {0x21000, 0},
+> -       [GCC_PCNOC_BCR] = {0x2102C, 0},
+> -       [GCC_DCD_BCR] = {0x21038, 0},
+> -       [GCC_SNOC_BUS_TIMEOUT0_BCR] = {0x21064, 0},
+> -       [GCC_SNOC_BUS_TIMEOUT1_BCR] = {0x2106C, 0},
+> -       [GCC_SNOC_BUS_TIMEOUT2_BCR] = {0x21074, 0},
+> -       [GCC_SNOC_BUS_TIMEOUT3_BCR] = {0x2107C, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT0_BCR] = {0x21084, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT1_BCR] = {0x2108C, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT2_BCR] = {0x21094, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT3_BCR] = {0x2109C, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT4_BCR] = {0x210A4, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT5_BCR] = {0x210AC, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT6_BCR] = {0x210B4, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT7_BCR] = {0x210BC, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT8_BCR] = {0x210C4, 0},
+> -       [GCC_PCNOC_BUS_TIMEOUT9_BCR] = {0x210CC, 0},
+> -       [GCC_TCSR_BCR] = {0x22000, 0},
+> -       [GCC_MPM_BCR] = {0x24000, 0},
+> -       [GCC_SPDM_BCR] = {0x25000, 0},
+> -};
+> -#endif
+> -
+> -#ifdef CONFIG_TARGET_QCS404EVB
+> -#include <dt-bindings/clock/qcom,gcc-qcs404.h>
+> -static const struct qcom_reset_map gcc_qcom_resets[] = {
+> -       [GCC_GENI_IR_BCR] = { 0x0F000 },
+> -       [GCC_CDSP_RESTART] = { 0x18000 },
+> -       [GCC_USB_HS_BCR] = { 0x41000 },
+> -       [GCC_USB2_HS_PHY_ONLY_BCR] = { 0x41034 },
+> -       [GCC_QUSB2_PHY_BCR] = { 0x4103c },
+> -       [GCC_USB_HS_PHY_CFG_AHB_BCR] = { 0x0000c, 1 },
+> -       [GCC_USB2A_PHY_BCR] = { 0x0000c, 0 },
+> -       [GCC_USB3_PHY_BCR] = { 0x39004 },
+> -       [GCC_USB_30_BCR] = { 0x39000 },
+> -       [GCC_USB3PHY_PHY_BCR] = { 0x39008 },
+> -       [GCC_PCIE_0_BCR] = { 0x3e000 },
+> -       [GCC_PCIE_0_PHY_BCR] = { 0x3e004 },
+> -       [GCC_PCIE_0_LINK_DOWN_BCR] = { 0x3e038 },
+> -       [GCC_PCIEPHY_0_PHY_BCR] = { 0x3e03c },
+> -       [GCC_PCIE_0_AXI_MASTER_STICKY_ARES] = { 0x3e040, 6},
+> -       [GCC_PCIE_0_AHB_ARES] = { 0x3e040, 5 },
+> -       [GCC_PCIE_0_AXI_SLAVE_ARES] = { 0x3e040, 4 },
+> -       [GCC_PCIE_0_AXI_MASTER_ARES] = { 0x3e040, 3 },
+> -       [GCC_PCIE_0_CORE_STICKY_ARES] = { 0x3e040, 2 },
+> -       [GCC_PCIE_0_SLEEP_ARES] = { 0x3e040, 1 },
+> -       [GCC_PCIE_0_PIPE_ARES] = { 0x3e040, 0 },
+> -       [GCC_EMAC_BCR] = { 0x4e000 },
+> -       [GCC_WDSP_RESTART] = {0x19000},
+> -};
+> -#endif
+> -
+> -static int qcom_reset_assert(struct reset_ctl *rst)
+> -{
+> -       struct qcom_reset_priv *priv = dev_get_priv(rst->dev);
+> -       const struct qcom_reset_map *reset_map = gcc_qcom_resets;
+> -       const struct qcom_reset_map *map;
+> -       u32 value;
+> -
+> -       map = &reset_map[rst->id];
+> -
+> -       value = readl(priv->base + map->reg);
+> -       value |= BIT(map->bit);
+> -       writel(value, priv->base + map->reg);
+> -
+> -       return 0;
+> -}
+> -
+> -static int qcom_reset_deassert(struct reset_ctl *rst)
+> -{
+> -       struct qcom_reset_priv *priv = dev_get_priv(rst->dev);
+> -       const struct qcom_reset_map *reset_map = gcc_qcom_resets;
+> -       const struct qcom_reset_map *map;
+> -       u32 value;
+> -
+> -       map = &reset_map[rst->id];
+> -
+> -       value = readl(priv->base + map->reg);
+> -       value &= ~BIT(map->bit);
+> -       writel(value, priv->base + map->reg);
+> -
+> -       return 0;
+> -}
+> -
+> -static const struct reset_ops qcom_reset_ops = {
+> -       .rst_assert = qcom_reset_assert,
+> -       .rst_deassert = qcom_reset_deassert,
+> -};
+> -
+> -static const struct udevice_id qcom_reset_ids[] = {
+> -       { .compatible = "qcom,gcc-reset-ipq4019" },
+> -       { .compatible = "qcom,gcc-reset-qcs404" },
+> -       { }
+> -};
+> -
+> -static int qcom_reset_probe(struct udevice *dev)
+> -{
+> -       struct qcom_reset_priv *priv = dev_get_priv(dev);
+> -
+> -       priv->base = dev_read_addr(dev);
+> -       if (priv->base == FDT_ADDR_T_NONE)
+> -               return -EINVAL;
+> -
+> -       return 0;
+> -}
+> -
+> -U_BOOT_DRIVER(qcom_reset) = {
+> -       .name = "qcom_reset",
+> -       .id = UCLASS_RESET,
+> -       .of_match = qcom_reset_ids,
+> -       .ops = &qcom_reset_ops,
+> -       .probe = qcom_reset_probe,
+> -       .priv_auto = sizeof(struct qcom_reset_priv),
+> -};
+> diff --git a/include/dt-bindings/clock/qcom,ipq4019-gcc.h b/include/dt-bindings/clock/qcom,gcc-ipq4019.h
+> similarity index 58%
+> rename from include/dt-bindings/clock/qcom,ipq4019-gcc.h
+> rename to include/dt-bindings/clock/qcom,gcc-ipq4019.h
+> index 7130e222e41c..7e8a7be6dcda 100644
+> --- a/include/dt-bindings/clock/qcom,ipq4019-gcc.h
+> +++ b/include/dt-bindings/clock/qcom,gcc-ipq4019.h
+> @@ -93,4 +93,77 @@
+>  #define GCC_APSS_CPU_PLLDIV_CLK                                74
+>  #define GCC_PCNOC_AHB_CLK_SRC                          75
+>
+> +#define WIFI0_CPU_INIT_RESET                           0
+> +#define WIFI0_RADIO_SRIF_RESET                         1
+> +#define WIFI0_RADIO_WARM_RESET                         2
+> +#define WIFI0_RADIO_COLD_RESET                         3
+> +#define WIFI0_CORE_WARM_RESET                          4
+> +#define WIFI0_CORE_COLD_RESET                          5
+> +#define WIFI1_CPU_INIT_RESET                           6
+> +#define WIFI1_RADIO_SRIF_RESET                         7
+> +#define WIFI1_RADIO_WARM_RESET                         8
+> +#define WIFI1_RADIO_COLD_RESET                         9
+> +#define WIFI1_CORE_WARM_RESET                          10
+> +#define WIFI1_CORE_COLD_RESET                          11
+> +#define USB3_UNIPHY_PHY_ARES                           12
+> +#define USB3_HSPHY_POR_ARES                            13
+> +#define USB3_HSPHY_S_ARES                              14
+> +#define USB2_HSPHY_POR_ARES                            15
+> +#define USB2_HSPHY_S_ARES                              16
+> +#define PCIE_PHY_AHB_ARES                              17
+> +#define PCIE_AHB_ARES                                  18
+> +#define PCIE_PWR_ARES                                  19
+> +#define PCIE_PIPE_STICKY_ARES                          20
+> +#define PCIE_AXI_M_STICKY_ARES                         21
+> +#define PCIE_PHY_ARES                                  22
+> +#define PCIE_PARF_XPU_ARES                             23
+> +#define PCIE_AXI_S_XPU_ARES                            24
+> +#define PCIE_AXI_M_VMIDMT_ARES                         25
+> +#define PCIE_PIPE_ARES                                 26
+> +#define PCIE_AXI_S_ARES                                        27
+> +#define PCIE_AXI_M_ARES                                        28
+> +#define ESS_RESET                                      29
+> +#define GCC_BLSP1_BCR                                  30
+> +#define GCC_BLSP1_QUP1_BCR                             31
+> +#define GCC_BLSP1_UART1_BCR                            32
+> +#define GCC_BLSP1_QUP2_BCR                             33
+> +#define GCC_BLSP1_UART2_BCR                            34
+> +#define GCC_BIMC_BCR                                   35
+> +#define GCC_TLMM_BCR                                   36
+> +#define GCC_IMEM_BCR                                   37
+> +#define GCC_ESS_BCR                                    38
+> +#define GCC_PRNG_BCR                                   39
+> +#define GCC_BOOT_ROM_BCR                               40
+> +#define GCC_CRYPTO_BCR                                 41
+> +#define GCC_SDCC1_BCR                                  42
+> +#define GCC_SEC_CTRL_BCR                               43
+> +#define GCC_AUDIO_BCR                                  44
+> +#define GCC_QPIC_BCR                                   45
+> +#define GCC_PCIE_BCR                                   46
+> +#define GCC_USB2_BCR                                   47
+> +#define GCC_USB2_PHY_BCR                               48
+> +#define GCC_USB3_BCR                                   49
+> +#define GCC_USB3_PHY_BCR                               50
+> +#define GCC_SYSTEM_NOC_BCR                             51
+> +#define GCC_PCNOC_BCR                                  52
+> +#define GCC_DCD_BCR                                    53
+> +#define GCC_SNOC_BUS_TIMEOUT0_BCR                      54
+> +#define GCC_SNOC_BUS_TIMEOUT1_BCR                      55
+> +#define GCC_SNOC_BUS_TIMEOUT2_BCR                      56
+> +#define GCC_SNOC_BUS_TIMEOUT3_BCR                      57
+> +#define GCC_PCNOC_BUS_TIMEOUT0_BCR                     58
+> +#define GCC_PCNOC_BUS_TIMEOUT1_BCR                     59
+> +#define GCC_PCNOC_BUS_TIMEOUT2_BCR                     60
+> +#define GCC_PCNOC_BUS_TIMEOUT3_BCR                     61
+> +#define GCC_PCNOC_BUS_TIMEOUT4_BCR                     62
+> +#define GCC_PCNOC_BUS_TIMEOUT5_BCR                     63
+> +#define GCC_PCNOC_BUS_TIMEOUT6_BCR                     64
+> +#define GCC_PCNOC_BUS_TIMEOUT7_BCR                     65
+> +#define GCC_PCNOC_BUS_TIMEOUT8_BCR                     66
+> +#define GCC_PCNOC_BUS_TIMEOUT9_BCR                     67
+> +#define GCC_TCSR_BCR                                   68
+> +#define GCC_QDSS_BCR                                   69
+> +#define GCC_MPM_BCR                                    70
+> +#define GCC_SPDM_BCR                                   71
+> +
+>  #endif
+> diff --git a/include/dt-bindings/reset/qcom,ipq4019-reset.h b/include/dt-bindings/reset/qcom,ipq4019-reset.h
+> deleted file mode 100644
+> index ed047d7402df..000000000000
+> --- a/include/dt-bindings/reset/qcom,ipq4019-reset.h
+> +++ /dev/null
+> @@ -1,92 +0,0 @@
+> -/* Copyright (c) 2015 The Linux Foundation. All rights reserved.
+> - *
+> - * Permission to use, copy, modify, and/or distribute this software for any
+> - * purpose with or without fee is hereby granted, provided that the above
+> - * copyright notice and this permission notice appear in all copies.
+> - *
+> - * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+> - * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+> - * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+> - * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+> - * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+> - * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+> - * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+> - *
+> - */
+> -#ifndef __QCOM_RESET_IPQ4019_H__
+> -#define __QCOM_RESET_IPQ4019_H__
+> -
+> -#define WIFI0_CPU_INIT_RESET                           0
+> -#define WIFI0_RADIO_SRIF_RESET                         1
+> -#define WIFI0_RADIO_WARM_RESET                         2
+> -#define WIFI0_RADIO_COLD_RESET                         3
+> -#define WIFI0_CORE_WARM_RESET                          4
+> -#define WIFI0_CORE_COLD_RESET                          5
+> -#define WIFI1_CPU_INIT_RESET                           6
+> -#define WIFI1_RADIO_SRIF_RESET                         7
+> -#define WIFI1_RADIO_WARM_RESET                         8
+> -#define WIFI1_RADIO_COLD_RESET                         9
+> -#define WIFI1_CORE_WARM_RESET                          10
+> -#define WIFI1_CORE_COLD_RESET                          11
+> -#define USB3_UNIPHY_PHY_ARES                           12
+> -#define USB3_HSPHY_POR_ARES                            13
+> -#define USB3_HSPHY_S_ARES                              14
+> -#define USB2_HSPHY_POR_ARES                            15
+> -#define USB2_HSPHY_S_ARES                              16
+> -#define PCIE_PHY_AHB_ARES                              17
+> -#define PCIE_AHB_ARES                                  18
+> -#define PCIE_PWR_ARES                                  19
+> -#define PCIE_PIPE_STICKY_ARES                          20
+> -#define PCIE_AXI_M_STICKY_ARES                         21
+> -#define PCIE_PHY_ARES                                  22
+> -#define PCIE_PARF_XPU_ARES                             23
+> -#define PCIE_AXI_S_XPU_ARES                            24
+> -#define PCIE_AXI_M_VMIDMT_ARES                         25
+> -#define PCIE_PIPE_ARES                                 26
+> -#define PCIE_AXI_S_ARES                                        27
+> -#define PCIE_AXI_M_ARES                                        28
+> -#define ESS_RESET                                      29
+> -#define GCC_BLSP1_BCR                                  30
+> -#define GCC_BLSP1_QUP1_BCR                             31
+> -#define GCC_BLSP1_UART1_BCR                            32
+> -#define GCC_BLSP1_QUP2_BCR                             33
+> -#define GCC_BLSP1_UART2_BCR                            34
+> -#define GCC_BIMC_BCR                                   35
+> -#define GCC_TLMM_BCR                                   36
+> -#define GCC_IMEM_BCR                                   37
+> -#define GCC_ESS_BCR                                    38
+> -#define GCC_PRNG_BCR                                   39
+> -#define GCC_BOOT_ROM_BCR                               40
+> -#define GCC_CRYPTO_BCR                                 41
+> -#define GCC_SDCC1_BCR                                  42
+> -#define GCC_SEC_CTRL_BCR                               43
+> -#define GCC_AUDIO_BCR                                  44
+> -#define GCC_QPIC_BCR                                   45
+> -#define GCC_PCIE_BCR                                   46
+> -#define GCC_USB2_BCR                                   47
+> -#define GCC_USB2_PHY_BCR                               48
+> -#define GCC_USB3_BCR                                   49
+> -#define GCC_USB3_PHY_BCR                               50
+> -#define GCC_SYSTEM_NOC_BCR                             51
+> -#define GCC_PCNOC_BCR                                  52
+> -#define GCC_DCD_BCR                                    53
+> -#define GCC_SNOC_BUS_TIMEOUT0_BCR                      54
+> -#define GCC_SNOC_BUS_TIMEOUT1_BCR                      55
+> -#define GCC_SNOC_BUS_TIMEOUT2_BCR                      56
+> -#define GCC_SNOC_BUS_TIMEOUT3_BCR                      57
+> -#define GCC_PCNOC_BUS_TIMEOUT0_BCR                     58
+> -#define GCC_PCNOC_BUS_TIMEOUT1_BCR                     59
+> -#define GCC_PCNOC_BUS_TIMEOUT2_BCR                     60
+> -#define GCC_PCNOC_BUS_TIMEOUT3_BCR                     61
+> -#define GCC_PCNOC_BUS_TIMEOUT4_BCR                     62
+> -#define GCC_PCNOC_BUS_TIMEOUT5_BCR                     63
+> -#define GCC_PCNOC_BUS_TIMEOUT6_BCR                     64
+> -#define GCC_PCNOC_BUS_TIMEOUT7_BCR                     65
+> -#define GCC_PCNOC_BUS_TIMEOUT8_BCR                     66
+> -#define GCC_PCNOC_BUS_TIMEOUT9_BCR                     67
+> -#define GCC_TCSR_BCR                                   68
+> -#define GCC_QDSS_BCR                                   69
+> -#define GCC_MPM_BCR                                    70
+> -#define GCC_SPDM_BCR                                   71
+> -
+> -#endif
+>
+> --
+> 2.42.0
+>
