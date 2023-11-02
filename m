@@ -4,51 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74962C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:38:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF5AC4167D
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:47:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F18EF87735;
-	Thu,  2 Nov 2023 10:38:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A18668763E;
+	Thu,  2 Nov 2023 10:47:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D9B87742; Thu,  2 Nov 2023 10:38:32 +0100 (CET)
+ id F2F4F8765E; Thu,  2 Nov 2023 10:47:48 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AD5B87467
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:38:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D87FF87605
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:47:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
+ spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3A29cKwL057846;
- Thu, 2 Nov 2023 17:38:20 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Thu, 2 Nov 2023 17:38:16 +0800
-Date: Thu, 2 Nov 2023 17:34:28 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Chanho Park <chanho61.park@samsung.com>
-CC: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Rick Chen <rick@andestech.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 4/5] riscv: dts: jh7110: Add rng device tree node
-Message-ID: <ZUNtJH0RYnMStXEk@swlinux02>
-References: <20231101121652.1865516-1-chanho61.park@samsung.com>
- <CGME20231101121716epcas2p108b1506ffd6a2b31bdc36b810dda15a6@epcas2p1.samsung.com>
- <20231101121652.1865516-5-chanho61.park@samsung.com>
+ by Atcsqr.andestech.com with ESMTP id 3A29lbiu060663;
+ Thu, 2 Nov 2023 17:47:37 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 2 Nov 2023
+ 17:47:36 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>
+Subject: [PATCH] doc: falcon: riscv: Falcon Mode boot on RISC-V
+Date: Thu, 2 Nov 2023 17:47:24 +0800
+Message-ID: <20231102094724.1270004-1-randolph@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231101121652.1865516-5-chanho61.park@samsung.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.173]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3A29cKwL057846
+X-MAIL: Atcsqr.andestech.com 3A29lbiu060663
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,12 +60,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 01, 2023 at 09:16:51PM +0900, Chanho Park wrote:
-> Adds jh7110 trng device tree node.
-> 
-> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
-> ---
->  arch/riscv/dts/jh7110.dtsi | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+Add documentation to introduce the Falcon Mode on RISC-V
+In this mode, boot sequence is SPL -> OpenSBI -> Linux kernel.
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+Signed-off-by: Randolph <randolph@andestech.com>
+---
+ doc/develop/falcon.rst | 159 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 159 insertions(+)
+
+diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+index 2f25fc8532..75648c76d7 100644
+--- a/doc/develop/falcon.rst
++++ b/doc/develop/falcon.rst
+@@ -256,3 +256,162 @@ the following command:
+ Falcon Mode was presented at the RMLL 2012. Slides are available at:
+ 
+ http://schedule2012.rmll.info/IMG/pdf/LSM2012_UbootFalconMode_Babic.pdf
++
++Falcon Mode Boot on RISC-V
++--------------------------
++
++Introduction
++------------
++
++In the RISC-V environment, OpenSBI is required to enable a supervisor to
++execute certain privileged operations. The typical boot sequence on
++RISC-V is SPL -> OpenSBI -> u-boot proper -> Linux kernel. SPL will load
++and start the OpenSBI initializations, then OpenSBI will bring up the next
++image, U-Boot proper. The OpenSBI binary must be prepared in advance of the
++u-boot build process and it will be packed together with u-boot proper into
++a file called u-boot.itb.
++
++The Falcon Mode is a distinct boot process for RISC-V platforms. Borrowing
++ideas from the U-Boot Falcon Mode, it skips the U-Boot proper phase in the
++normal boot process and allows OpenSBI to load and start the Linux kernel.
++Its boot sequence is SPL -> OpenSBI -> Linux kernel. The OpenSBI binary and
++Linux kernel binary must be prepared prior to the u-boot build process and
++they will be packed together as linux.itb in this process.
++
++To enable the Falcon boot on RISC-V, CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT
++is set. This configuration tells OpenSBI that Linux kernel is its next
++OS image and makes it load and start the kernel afterwards.
++
++Note that the Falcon boot bypasses a lot of initializations by U-Boot. If the
++Linux kernel expects hardware initializations by U-Boot, make sure to port the
++relevant code to the SPL build process.
++
++Configurations
++--------------
++
++CONFIG_SPL_LOAD_FIT_ADDRESS
++    Specifies the address to load u-boot.itb in a normal boot. When the Falcon
++    boot is enabled, it specifies the load address of linux.itb.
++
++CONFIG_SYS_TEXT_BASE
++    Specifies the address of the text section for a u-boot proper in a normal
++    boot. When the falcon boot is enabled, it specifies the text section address
++    for the Linux kernel image.
++
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT
++    Activates the Falcon boot on RISC-V.
++
++Function that a board must implement
++------------------------------------
++
++Initially, SPL places the FDT blob right after the kernel. As the kernel does
++not include the BSS section in its size calculation, SPL ends up placing the
++FDT blob within the BSS section of the kernel. This may cause the FDT blob to
++be cleared during kernel BSS initialization. To avoid the issue, be sure to
++move the FDT blob out of the kernel first.
++
++void spl_perform_fixups(struct spl_image_info *spl_image)
++    required, necessary action to move the FDT blob out of the Linux kernel BSS section
++
++Example for Andes AE350 Board
++-----------------------------
++
++A FDT blob is required to boot the Linux kernel from the SPL. Andes AE350
++platforms generally come with a builtin dtb. If you want to load a custom FDT
++blob, follow the steps below:
++
++1. Load the custom FDT blob to SDRAM::
++
++        => fatload mmc 0:1 0x20000000 user_custom.dtb
++
++2. Set the SPI speed::
++
++        => sf probe 0:0 50000000 0
++
++3. Erase sectors from the SPI Flash::
++
++        => sf erase 0xf0000 0x10000
++
++4. Write the FDT blob to the erased sectors of the Flash::
++
++        => sf write 0x20000000 0xf0000 0x10000
++
++Console Log of AE350 Falcon Boot
++--------------------------------
++
++U-Boot SPL 2023.01-00031-g777ecdea66 (Oct 31 2023 - 18:41:36 +0800)
++Trying to boot from RAM
++
++OpenSBI v1.2-51-g7304e42
++   ____                    _____ ____ _____
++  / __ \                  / ____|  _ \_   _|
++ | |  | |_ __   ___ _ __ | (___ | |_) || |
++ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
++ | |__| | |_) |  __/ | | |____) | |_) || |_
++  \____/| .__/ \___|_| |_|_____/|____/_____|
++        | |
++        |_|
++
++Platform Name             : andestech,ax25
++Platform Features         : medeleg
++Platform HART Count       : 1
++Platform IPI Device       : andes_plicsw
++Platform Timer Device     : andes_plmt @ 60000000Hz
++Platform Console Device   : uart8250
++Platform HSM Device       : andes_smu
++Platform PMU Device       : andes_pmu
++Platform Reboot Device    : atcwdt200
++Platform Shutdown Device  : ---
++Firmware Base             : 0x0
++Firmware Size             : 196 KB
++Runtime SBI Version       : 1.0
++
++Domain0 Name              : root
++Domain0 Boot HART         : 0
++Domain0 HARTs             : 0*
++Domain0 Region00          : 0x0000000000000000-0x000000000003ffff ()
++Domain0 Region01          : 0x00000000e6000000-0x00000000e60fffff (I,R)
++Domain0 Region02          : 0x00000000e6400000-0x00000000e67fffff (I)
++Domain0 Region03          : 0x0000000000000000-0xffffffffffffffff (R,W,X)
++Domain0 Next Address      : 0x0000000001800000
++Domain0 Next Arg1         : 0x0000000001700000
++Domain0 Next Mode         : S-mode
++Domain0 SysReset          : yes
++
++Boot HART ID              : 0
++Boot HART Domain          : root
++Boot HART Priv Version    : v1.11
++Boot HART Base ISA        : rv64imafdcx
++Boot HART ISA Extensions  : none
++Boot HART PMP Count       : 8
++Boot HART PMP Granularity : 4
++Boot HART PMP Address Bits: 31
++Boot HART MHPM Count      : 4
++Boot HART MHPM Bits       : 64
++Boot HART MIDELEG         : 0x0000000000000222
++Boot HART MEDELEG         : 0x000000000000b109
++[    0.000000] Linux version 6.1.47-09019-g0584b09ad862-dirty
++[    0.000000] OF: fdt: Ignoring memory range 0x0 - 0x1800000
++[    0.000000] Machine model: andestech,ax25
++[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
++[    0.000000] printk: bootconsole [sbi0] enabled
++[    0.000000] Disabled 4-level and 5-level paging
++[    0.000000] efi: UEFI not found.
++[    0.000000] Zone ranges:
++[    0.000000]   DMA32    [mem 0x0000000001800000-0x000000003fffffff]
++[    0.000000]   Normal   empty
++[    0.000000] Movable zone start for each node
++[    0.000000] Early memory node ranges
++[    0.000000]   node   0: [mem 0x0000000001800000-0x000000003fffffff]
++[    0.000000] Initmem setup node 0 [mem 0x0000000001800000-0x000000003fffffff]
++[    0.000000] SBI specification v1.0 detected
++[    0.000000] SBI implementation ID=0x1 Version=0x10002
++[    0.000000] SBI TIME extension detected
++[    0.000000] SBI IPI extension detected
++[    0.000000] SBI RFENCE extension detected
++[    0.000000] SBI SRST extension detected
++[    0.000000] SBI HSM extension detected
++[    0.000000] riscv: base ISA extensions acim
++[    0.000000] riscv: ELF capabilities acim
++[    0.000000] percpu: Embedded 18 pages/cpu s35000 r8192 d30536 u73728
++[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 252500
+-- 
+2.34.1
+
