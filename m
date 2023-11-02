@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2772FC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 14:07:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49B6C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 14:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94F51877C5;
-	Thu,  2 Nov 2023 15:07:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F052877BD;
+	Thu,  2 Nov 2023 15:08:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1698934075;
-	bh=qSZV3mUY1oNwl1e3kOpiIdt9dB3gdUpsihmVZMR6C1o=;
+	s=phobos-20191101; t=1698934093;
+	bh=kG6pciVH3AMy+UxQzxT3ex4jHpHit9G/ldUWV8achpk=;
 	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=DoNha0RBxytxWDjl4h9H3mTkzZPYKPtyTleAvbNKWKQp5uxN1LjlZbpMneHVLbbsu
-	 gz/Y3fb7I8EN2BEXC/ZKGzLgLKT09aJeDpTr4/rIss90DbwacmytDE91BhHWmCTFyK
-	 uKI4JILLutCw5P6yVPFVkNNMWTMoR/PAaJIBpOLojDXnhpjoHNql5WDPkYtovIHNQK
-	 3sLEASL4nQp64bayJca6d3x0wPlV7RyP7qKhPn/GHK5XvZdQOXhgnluNtRdZqUshIz
-	 f7MTYRGpnwsC+Al5HM9Rd80bCLL1GG/ELNHG3M7qIRcRB1RxrszfyVMWyCqSjXlLCK
-	 mt8xBF2MjYB9Q==
+	b=bcd1bJHBuyj9zdQwMPKDivWv3Tg4CIXqrDetmd7P09iyI8IPLe2Rga25Pr9NyQ1cu
+	 yjgmIvs7Jwa6hbxQDJkx0QQnnoYPtdpP4JhvPn+Go5aTTvUCueHeewQlFKFdDPjcXh
+	 t3OIM+XC6BxNLj4gf63AU6vJ4zMiC/9NUwqsO+zSFPOgIKbA0GohUw2VD/l0Q4n6rT
+	 Pg6R20C9TvZn4VCf3Pdc3qTiTPWnsnspaUbQatxCnyd8oUXVbA9zVQG0MGOHe9N3zG
+	 rrbWDZkOJt4rhSEkLP2jw5SJxBna4I487f3so9qJv7GafmIhUbFSydcQ0ldFyRgFOQ
+	 O8dBzPoEpxJpQ==
 Received: from [192.168.1.107] (82-131-157-32.pool.digikabel.hu
  [82.131.157.32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A6D19877BC;
- Thu,  2 Nov 2023 15:07:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2AD9C877B6;
+ Thu,  2 Nov 2023 15:08:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1698934074;
- bh=qSZV3mUY1oNwl1e3kOpiIdt9dB3gdUpsihmVZMR6C1o=;
+ s=phobos-20191101; t=1698934092;
+ bh=kG6pciVH3AMy+UxQzxT3ex4jHpHit9G/ldUWV8achpk=;
  h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
- b=hqnFf5kOaVmmzotBCXxfeBivwrrAZMZWtuMpav+60sRMdxSjQSTxT1tEE9Vgb+DMP
- FvWo2SkmFEuTBDrjfBwXIZcxezIxtnPWSDsAZzkk8EU8cV+WY3zxLBJ4hxOk6xieKS
- 7fdK7E6pFhQF51pKqee0u+FXHhdO+in/1AbrGoWHfPWGoMP6jUr6+mMF1KAoEfnP7M
- +cCmSuzSWML9NaNR+jd9VBuTLyCOWjmBENyu0eKfwHjN3InN76gARbsz8VIJb114FH
- yyBNSQelAY0AmFipxeFgTO7zI/ju1UcsWCeKAt5/wO7CWQgk+4f4IzfSEC0qpJDEp3
- fynWnnTH1RpQA==
-Subject: Re: [PATCH v3 2/3] i2c: Implement i2c_get_chip_by_phandle()
+ b=qVUqF0OnNN17D07u2KlUhaV/0Bo4iBeAzqX9yZVVlAVKKK1B0h16DjewwOf71vw7k
+ A721OCf8s64MS7jId1qef9M0c8Hmex8cKErPDVrmKDDWvNnZ0/j0dYLOWUa4swSHsk
+ 162j4eLtQv74hRI2GBnqiJrOCcDTgGsrmtq7Gh11D7uhIytEakzbd3V6fF7qXAi4vY
+ 533tMBu/XT9W16JCMXjfu1GdTbDvQXnhh1sR09InQ74S3uyTlhXJMUEZXWJgoNZkwz
+ TD0eDvoiaFLHphzoyd8cFR9bhQwJXydzGHnwiREzCsdVCItXHT1jc0yd4t/V7g+hN+
+ b54r0mVYlORiA==
+Subject: Re: [PATCH v3 3/3] bootcount: Add driver model I2C driver
 To: Philip Richard Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com
 References: <20231031073844.15683-2-pro@denx.de>
- <20231031073844.15683-6-pro@denx.de>
+ <20231031073844.15683-8-pro@denx.de>
 From: Heiko Schocher <hs@denx.de>
-Message-ID: <613a1e1e-e08a-178f-41a6-b47f23089fa2@denx.de>
-Date: Thu, 2 Nov 2023 15:07:42 +0100
+Message-ID: <dfcf1445-6bae-66da-bcfc-f544dfe022c9@denx.de>
+Date: Thu, 2 Nov 2023 15:08:01 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20231031073844.15683-6-pro@denx.de>
+In-Reply-To: <20231031073844.15683-8-pro@denx.de>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -74,20 +74,35 @@ X-Virus-Status: Clean
 Hello Philip,
 
 On 31.10.23 08:38, Philip Richard Oberfichtner wrote:
-> This new function enhances the i2c_get_chip*() toolbox by implementing a
-> variant that does not require a chip_addr. Instead, the desired device
-> is pointed to by a phandle.
+> This adds a generic I2C bootcounter adhering to driver model to replace
+> the previously removed legacy implementation.
+> 
+> There is no change in functionality, it can be used on any I2C device.
+> The device tree configuration may look like this for example:
+> 
+> 	bootcount {
+> 		compatible = "u-boot,bootcount-i2c";
+> 		i2cbcdev = <&i2c_rtc>;
+> 		offset = <0x11>;
+> 	};
 > 
 > Signed-off-by: Philip Richard Oberfichtner <pro@denx.de>
 > ---
 > 
 > Notes:
->     Changes in v3: none
->     Changes in v2: new
+>     Changes in v3:
+>     	- Remove common.h #include
+>     
+>     Changes in v2:
+>     	- Adaption of Kconfig help message
+>     	- Rename chip to bcdev
+>     	- Adapt probe to use i2c_get_chip_by_phandle()
 > 
->  drivers/i2c/i2c-uclass.c | 75 ++++++++++++++++++++++++++++++++++++++++
->  include/i2c.h            | 12 +++++++
->  2 files changed, 87 insertions(+)
+>  drivers/bootcount/Kconfig            |  10 +++
+>  drivers/bootcount/Makefile           |   1 +
+>  drivers/bootcount/bootcount_dm_i2c.c | 102 +++++++++++++++++++++++++++
+>  3 files changed, 113 insertions(+)
+>  create mode 100644 drivers/bootcount/bootcount_dm_i2c.c
 
 Applied to u-boot-i2c.git master
 
@@ -95,6 +110,7 @@ Thanks!
 
 bye,
 Heiko
+
 -- 
 DENX Software Engineering GmbH,      Managing Director: Erika Unter
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
