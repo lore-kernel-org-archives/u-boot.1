@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8D9C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:36:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C41EC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:37:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A18B87492;
-	Thu,  2 Nov 2023 10:36:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2A438772B;
+	Thu,  2 Nov 2023 10:37:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D365875BA; Thu,  2 Nov 2023 10:36:54 +0100 (CET)
+ id 207718772E; Thu,  2 Nov 2023 10:37:23 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50A5E87467
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:36:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C895A87467
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:37:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3A29acUc057467;
- Thu, 2 Nov 2023 17:36:38 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3A29b9vl057584;
+ Thu, 2 Nov 2023 17:37:09 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Thu, 2 Nov 2023 17:36:35 +0800
-Date: Thu, 2 Nov 2023 17:32:45 +0800
+ Thu, 2 Nov 2023 17:37:07 +0800
+Date: Thu, 2 Nov 2023 17:33:19 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Chanho Park <chanho61.park@samsung.com>
 CC: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
  <xypron.glpk@gmx.de>, Rick Chen <rick@andestech.com>, Jaehoon Chung
  <jh80.chung@samsung.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 1/5] riscv: import read/write_relaxed functions
-Message-ID: <ZUNsvSaBJreC8Hdw@swlinux02>
+Subject: Re: [PATCH v4 2/5] clk: starfive: jh7110: Add security clocks
+Message-ID: <ZUNs33H42bDbrioY@swlinux02>
 References: <20231101121652.1865516-1-chanho61.park@samsung.com>
- <CGME20231101121716epcas2p335461b14cfdeb28ed5682c295f9170d3@epcas2p3.samsung.com>
- <20231101121652.1865516-2-chanho61.park@samsung.com>
+ <CGME20231101121716epcas2p33092739b0c4129df204ecf265faf6aee@epcas2p3.samsung.com>
+ <20231101121652.1865516-3-chanho61.park@samsung.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231101121652.1865516-2-chanho61.park@samsung.com>
+In-Reply-To: <20231101121652.1865516-3-chanho61.park@samsung.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3A29acUc057467
+X-MAIL: Atcsqr.andestech.com 3A29b9vl057584
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,13 +65,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 01, 2023 at 09:16:48PM +0900, Chanho Park wrote:
-> This imports mmio functions from Linux's arch/riscv/include/asm/mmio.h
-> to use read/write[b|w|l|q]_relaxed functions.
+On Wed, Nov 01, 2023 at 09:16:49PM +0900, Chanho Park wrote:
+> Add STGCLK_SEC_HCLK and STGCLK_SEC_MISCAHB clocks for JH7110 TRNG
+> device.
 > 
 > Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 > ---
->  arch/riscv/include/asm/io.h | 45 +++++++++++++++++++++++++++++++++++++
->  1 file changed, 45 insertions(+)
+>  drivers/clk/starfive/clk-jh7110.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
