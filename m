@@ -4,175 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAA0BC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C58BBC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 09:34:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 531418771C;
-	Thu,  2 Nov 2023 10:16:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 94B1A87616;
+	Thu,  2 Nov 2023 10:34:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NXBFGav7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ukVp74ZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E4B982BC1; Thu,  2 Nov 2023 10:16:14 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9C09A8762A; Thu,  2 Nov 2023 10:34:44 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20DDF875A5
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:15:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6D5A87605
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 10:34:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NH+XJlr+Mh9nC6LspD57QlbdtQNqTmlKvBPcdlyQtNFTgu/dgxRhx11LlQgubnyh+lWxrqsFImdZ1NFEuTkNDJbjE3FY9JukFUR9DvtqAiJ5z0GRfL/x5OjUOpyjoI9ciUOUSSfPl+EAt2hmzGm1XcKko/LUfEqkB1rPWeYtdaF4TnSt2vmWACU6HvGeSAq6HouFoKwNKp+6BisBuhlNz3Ca+CuNWg95q+P897iJRMQPD+P9vQUsYxRfBmtyUCmr7HstSbNEb94eKV1Bqk3/zlxOHeNworYHw7a05y/t9hCjJWc/SXtCkIQB5h8yVzDbIBjek2xOa36Oo/eWPFL3oA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CYivvZUrc6pHYLudG4hsqZAqbosainDTjm45EkaPDb4=;
- b=SHfi1nRKImIQo56GEMOU77EzvK1oUU5umDxaKQtSeTRiC/X7F0L6m80YsvY39bGWWwsiqthyeF7vcjMi9Bk5rdg48HHCp9ojsmBi+nwWJcCPn57XhX23BWnTU1meAbKa0jN7XGrO4LUNSbAbaZc/76n7zaz1IptW5j0vMg4nuN9E6IK1pXzdyMM7mCnM8WBxBpzmyBSfGO/AIHe1He4lebqQ5oXZ1SGTE+CeCHl+yrLNOrPPMbvTTDZYLXuy6C7QluhD+CPDdwIZbqOR/qyRxydV5Y2v8rTf2ru9/dQXZJtOTbTzyx/4wYWVfl2bTrk2zf9YmkZKFAQ16ECHmqA8Mg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CYivvZUrc6pHYLudG4hsqZAqbosainDTjm45EkaPDb4=;
- b=NXBFGav7y/x5s/BTJ/O6ocpZYnER5G7tpgnod9nrtf11xMUNJB5BzbsMFoZPGmEc+7WxLzPsc3y/ijSk7qCZuQewZFL2WxMlbeJebluMIw6n0Y1x2969Z0lNKwxQiOy4x9GQWOPxFjnjx0203yQlkNhnuD7ttIQS0bbJtVHedvo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by SN7PR12MB8001.namprd12.prod.outlook.com (2603:10b6:806:340::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.28; Thu, 2 Nov
- 2023 09:15:53 +0000
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::4993:59af:a31a:abff]) by BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::4993:59af:a31a:abff%6]) with mapi id 15.20.6933.029; Thu, 2 Nov 2023
- 09:15:53 +0000
-Message-ID: <b13846bc-10ef-4d40-9444-7ab05a3c8645@amd.com>
-Date: Thu, 2 Nov 2023 10:15:41 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: axi_emac: Use reg property for DMA registers
-Content-Language: en-US
-To: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20231102082303.354944-1-mchitale@ventanamicro.com>
- <20231102082303.354944-3-mchitale@ventanamicro.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231102082303.354944-3-mchitale@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0111.eurprd06.prod.outlook.com
- (2603:10a6:803:8c::40) To BYAPR12MB4758.namprd12.prod.outlook.com
- (2603:10b6:a03:a5::28)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-507a98517f3so819103e87.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 02:34:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698917680; x=1699522480; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3TUi7oeOUKilSbUz1t03K2l1uvmVIY0YnSGJo6bU744=;
+ b=ukVp74ZVqV0wg4W2jeWY++JmvExTKkIARf8zRMt6XqylWXadyoQGe0gFkBx2rcDTh+
+ 8ZlfSX/nlUQabhEZEPJOfMS/zHqy4alSFXUQQxx+aS5D/2u8/O+Eg+BXXWJ1StuAnO1R
+ rJ7qLH8nXSdU0TzqIlpLoyVxIwW9EKzEnm0DjlKbf6BHJIXP/UKudO365ozlaoSm5a6u
+ /2OUl9q9HFtwOtltoALvKze4szmmxx06IqdcE09MofaNT2oUlfOHr3HlerLFLeb8Viqm
+ xM6BIlYY0lObJlm1kYZdbAsDQLL4VX7V6lVOjCFzCksGNrH+zoochcHScmWceDnsMH96
+ 3A6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698917680; x=1699522480;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3TUi7oeOUKilSbUz1t03K2l1uvmVIY0YnSGJo6bU744=;
+ b=HiyhEe8BskvOuIqsr1tv3XRhMjmyZ8PJ4408gEZKhkr8og9sGhdOUEPkrkhT9sC4Pf
+ XCTp/P7zFIk0sj83p4uvxl8X50eMmsYI2yHaj74C5LMAGyXC1uNeIV0PRj2I1kax5jRO
+ pL2NLbXREi7RMahqrZrB1r2X6WEIp/sGgwmqLI6ovu85i16rhnMwL3lEZmF+loc1xB1A
+ W4yQNUr/l1eVHFmQt0IPsbI5GKTya9RyiXY7yVuMUPbt8l38MtB4fqL5ZPQRBzvp65U9
+ eiaEwXGHj9KmT77/0U4i07rnQiLc0yg4bxKX6M0OClRJdcJJ3f8eesxIg7pmepO3f8js
+ ISyg==
+X-Gm-Message-State: AOJu0YyvS9zVb4Exifwquzemz31Vm8jXPIfthmaNcM/lUwwnNbjA1KFZ
+ LLhVpQuGrYRng0O6EF1sHcCzKj6yyWFRWj0K5tZxlw==
+X-Google-Smtp-Source: AGHT+IHKx9VwK1lelZN5rNnSvEf/qXUdCAnJCh77jnDsoRzpipfpl8dAJO8Vj4cUpMMxH7ZWI1EoCA1YTTnncshVZhs=
+X-Received: by 2002:a19:4344:0:b0:507:a0d6:f178 with SMTP id
+ m4-20020a194344000000b00507a0d6f178mr12588649lfj.35.1698917679832; Thu, 02
+ Nov 2023 02:34:39 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|SN7PR12MB8001:EE_
-X-MS-Office365-Filtering-Correlation-Id: 03929ff3-4683-4d24-0d50-08dbdb845056
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: p7Es9IgB1nB3oKcV0gy3axQik0Xod5ayaOpGTr+57jyE1Spbobr5Fk7O68iJakrKSzmWNHDPuB0cazS9Re2Pal5/W34JmGzFsBcyEf3q4utjKZmOjhNLxLjvpIjJvPNsTMn4O0S/9zRoSxlSX/UXEFNuo7md4CMsI2hGYD3Q92S5DrH0N1nQ3tR0cDLPlk+QOEZXvNQW4cixaRZyNp4IIaa+Ajj28cehOn5NEGhbnXo/bkULMBnLsCfYFgL0VOyUWd1d1sf6W3jISQwSU67+CCQAuQHexF/y8j2Ez2yhRf+T1DoX1h9sSgkPC0ynrAmTh1QI7zkV96JhxqGWvCRruThj+Z4sVFpeBF8qpeuwuFESFZ2F27jKAaGvPk7KZUvaa7oUJyHk+CqBLwFJfNFtQCL7ueoFL705bM3q41K6r8sY1aAm5Pk5GWGjyF60hVIm4rtxCUj8tFXiidQVPHaNIS8gsD4H7DC32jES7/XoBXWNXBaeeqxgnMdlnO5IW6CVAcNyty4MlmreCBmL6qXF2SNK95jVPxKqGygjIPX3qVQLnBFguZ4ETzJAfOfA1Qusy9qbwkvK7wPpPGSsxzndRejtl+JFqJ5vxJM4vdnsIC6AUj2PRZjsg/vWQfuupy2pIeCNAShoYEh0geou2YTMFA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(230922051799003)(451199024)(1800799009)(186009)(2616005)(86362001)(26005)(31696002)(5660300002)(8676002)(4326008)(8936002)(110136005)(66946007)(83380400001)(31686004)(66556008)(66476007)(44832011)(54906003)(53546011)(508600001)(38100700002)(36756003)(6486002)(2906002)(6512007)(6666004)(6506007)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bEpCR3JjVEJ3NGdsSk8rRU4xMU16MUlzS01IUjVTbVhVUjBJZ0VWNkdNQTE2?=
- =?utf-8?B?UHpHUDNqUm1JNU5iWGtGSEttcDFwNVM2azM0WmljR3NQVExWUTNwS3ZmYTRM?=
- =?utf-8?B?NmN5RWNCQURkTXhJcHdHSUNRNldLL0cwUCtLNW5hOFR2SUlZS2dpMjdzQVla?=
- =?utf-8?B?c255UVA4Z2swOU1rUGNqcWlGeVZGcDVuUTRUdEdFR3FYaUdjeThjSzZNSmZj?=
- =?utf-8?B?b1EwY1dZVEhQTmFpVmoxaHpUeGFpVFhEMmRvdEdZbUk4bFQ5dCsvQVBhNUU1?=
- =?utf-8?B?b2hpTjdFUE55dk9qU3JoUnE0TGVhQjVKVGJ5c0lBdDVleXRzNFpHQzFsQklz?=
- =?utf-8?B?ZU9JL2VUNndVYzFIbmtmVWxveS9hUVJWa2hoQmNsR3Z0bHJlMlY3dTgwTjRT?=
- =?utf-8?B?bU80ek5aRUpLZkpTcForTFJWQzhuUEpWQ0JQYWh2MXZRcTRpV2orbjFTR2wr?=
- =?utf-8?B?aTJJNHhmM0k1WE9TRGZWT0JTZUNxcksxNGt2Vmx6WEI2WWJmbVRuWnhnM2tC?=
- =?utf-8?B?ZnZqSjdnaUFWTnpPcVVaWURaQ0N1L012VDNtdFh4Z1dpbUdZbmZaTmsrUzRs?=
- =?utf-8?B?c0lZemplVmhyWU9HdXJZeUwyZnkzUUh1Y2UwMzYwbWl5K2x0clZLdW45TjM3?=
- =?utf-8?B?SDU5TW01RDFHcXIyNmpSNTMrRlZZNkgzZURMVFZHMGt0UndwaGk0dkQzdWpV?=
- =?utf-8?B?OTlhUnBodCtURmpuRExxQm4zY0FhTDB5YlUvK2Q0LzBtbDhkRFZjUFlRZEdS?=
- =?utf-8?B?NFRQdC9MdTVGbjlkK3JHUGlUQnhweGZyajMxeUp2S084Vkg3S3hWUHpUdlpO?=
- =?utf-8?B?dVJFbitZK1Eyd1dVSTdqcGVuTmFHTEVwd0daYTJ2VFVUbnFEQmNJY1Y4bEhC?=
- =?utf-8?B?d29HVVpRcXdzUmxFd2swczdOZjFwaFFoMmE0dmRPUWFuTDBINU1UUGVQSVpQ?=
- =?utf-8?B?Q2RWM3pMT1N2TlQvaFY1NmQxSUU0TWR4bEQrTDVUdGJWQmJlZmNUZDU1Q3Vk?=
- =?utf-8?B?UjdSY01GZFZuKzJjelBONUZ1NlNpRDJHaVZsL1Z4OXhGZ2d5ZlgxUE9abFA3?=
- =?utf-8?B?dGVpMVN6MDgyNXJoWTF6Y0JDRVdnTUpxQ3YzS1dEcmJ0eUcvSkhGcVhBYjZn?=
- =?utf-8?B?TTF6WDJ6M25mMTlTVHRtNk55MndPSXNCN3hQejNjaU5QTjR5cngvcENGV21F?=
- =?utf-8?B?dXdxSllhTDhJQ2tzUzM1TWNJamZxdkpnVFR2eExwbWdJdjFXSTZ0QmJRZ1lF?=
- =?utf-8?B?UDJXdlRIWE45NUlmMXc4YWFhSGsrZUY0TUtwK0pibkFydG82cDBNbEdmR3BG?=
- =?utf-8?B?eGZxb2ttTkxhSmQ1R0V3ZjVFN3htRVpMSFZ3K2VwTm1EMjZ6a0dvdDdpT1dR?=
- =?utf-8?B?NEpVSmNZazFUeFdNbEpSTHc5bHdtOW5YWnF5Sk1mSmE2L1NkbFFPOE9Vakl4?=
- =?utf-8?B?VWhmN212MXp3MWh4bFhLdndLM28wQ0t3TDdlaVNUTEhtb00xY293Z1gvdlNi?=
- =?utf-8?B?OWlSTkpWZFA1R090eFFqY1kwWmNxUmxrbTIydjlObkpzckd5SGZCdWFXb1Zv?=
- =?utf-8?B?YlQvaFJNamRxMGNWQ3ZINU1oUnc4VklySVpQUkJNRDZpbDlSN3ltM3VPMVc2?=
- =?utf-8?B?SlhwNnZhclFHUFhJNFVCaEhvTS9tQmUrUnNLcW8xYm1BUU5uRERPcklYZHpn?=
- =?utf-8?B?dzJxUTNxT3RmTm9GczBmc1AyZ0pkQjBsM0l5dHRnd0ZPN0pzd0d4RVRwa3Fh?=
- =?utf-8?B?MVFrZkdkelFNeDhvcVpmajM5VzVvd1Q1cUpZOTRFOE1iYXNwd1NZUWZFd2Fi?=
- =?utf-8?B?LzUrbnhKanFFdUJSdHhhUncwalNZbXRjUTIxNjR3TzlHVkVudmJVWmQ4Q1Iz?=
- =?utf-8?B?V1duVXNnengrdmtKOUxFbUFIaXZOcm5SeWw2b0Y5L3pURlkrWXo3c3VROWxJ?=
- =?utf-8?B?UVJNY0pvb1cya0h0T3pzc1dqVmlYaUIzV2wvV1Yyd01RNlI5ZkJ3cDRHdzZv?=
- =?utf-8?B?dEJMUzg2UFdWVVU5Z2R1eG5jN3lGNWVUY2Jac3dmUFBBMFJXV2pGN1lvRmRB?=
- =?utf-8?B?TFlOdjR1MmZlMS9QY1gwNEdVQkoycmY2ODErZlovYU12eXY5eHZRZ3BlQ3dY?=
- =?utf-8?Q?kimWYZfa5K+R4kDxVKd3JPwuo?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03929ff3-4683-4d24-0d50-08dbdb845056
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2023 09:15:53.5650 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GmpjElkmS8l+85V7YWX95SMJopZ+l5Uwz0ZbKV//JPn78NR+kcdZ4wS/Z8SCjx+x
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8001
+References: <20231102064459.3466953-1-masahisa.kojima@linaro.org>
+ <20231102064459.3466953-7-masahisa.kojima@linaro.org>
+In-Reply-To: <20231102064459.3466953-7-masahisa.kojima@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 2 Nov 2023 11:34:03 +0200
+Message-ID: <CAC_iWj+_1iULpBZbhY2OommJOW93uO2mANy+O7uzPZK9+Om29w@mail.gmail.com>
+Subject: Re: [PATCH v9 6/9] efi_loader: add return to efibootmgr event group
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,46 +87,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 11/2/23 09:23, Mayuresh Chitale wrote:
-> As per the xlnx,axi-ethernet-1.00.a DT documentation in linux, the AXI
-> DMA registers can be obtained via the reg property or via a separate
-> node for the axistream DMA controller. Currently only the latter is
-> supported, so add support to fetch the DMA controller registers from the
-> "reg" property.
-> 
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+On Thu, 2 Nov 2023 at 08:46, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
+>
+> When the image loaded by efibootmgr returns, efibootmgr
+> needs to clean the resources. Adding the event of returning
+> to efibootmgr is useful to simplify the implementation.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 > ---
->   drivers/net/xilinx_axi_emac.c | 9 ++++-----
->   1 file changed, 4 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/net/xilinx_axi_emac.c b/drivers/net/xilinx_axi_emac.c
-> index 54f2232768..ef151ee51b 100644
-> --- a/drivers/net/xilinx_axi_emac.c
-> +++ b/drivers/net/xilinx_axi_emac.c
-> @@ -903,12 +903,11 @@ static int axi_emac_of_to_plat(struct udevice *dev)
->   
->   	ret = dev_read_phandle_with_args(dev, "axistream-connected", NULL, 0, 0,
->   					 &axistream_node);
-> -	if (ret) {
-> -		printf("%s: axistream is not found\n", __func__);
-> -		return -EINVAL;
-> -	}
-> +	if (!ret)
-> +		plat->dmatx = (struct axidma_reg *)ofnode_get_addr(axistream_node.node);
-> +	else
-> +		plat->dmatx = (struct axidma_reg *)dev_read_addr_index(dev, 1);
->   
-> -	plat->dmatx = (struct axidma_reg *)ofnode_get_addr(axistream_node.node);
->   	if (!plat->dmatx) {
->   		printf("%s: axi_dma register space not found\n", __func__);
->   		return -EINVAL;
+>  cmd/bootefi.c                 | 12 ++++++++++++
+>  include/efi_api.h             |  3 +++
+>  include/efi_loader.h          |  2 ++
+>  lib/efi_loader/efi_boottime.c |  3 +++
+>  4 files changed, 20 insertions(+)
+>
+> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> index 20e5c94a33..4d74969ad6 100644
+> --- a/cmd/bootefi.c
+> +++ b/cmd/bootefi.c
+> @@ -356,6 +356,7 @@ static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
+>         efi_status_t ret;
+>         efi_uintn_t exit_data_size = 0;
+>         u16 *exit_data = NULL;
+> +       struct efi_event *evt;
+>
+>         /* On ARM switch from EL3 or secure mode to EL2 or non-secure mode */
+>         switch_to_non_secure_mode();
+> @@ -394,6 +395,17 @@ out:
+>                         log_err("Failed to remove loadfile2 for initrd\n");
+>         }
+>
+> +       /* Notify EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR event group. */
+> +       list_for_each_entry(evt, &efi_events, link) {
+> +               if (evt->group &&
+> +                   !guidcmp(evt->group,
+> +                            &efi_guid_event_group_return_to_efibootmgr)) {
+> +                       efi_signal_event(evt);
+> +                       EFI_CALL(systab.boottime->close_event(evt));
+> +                       break;
+> +               }
+> +       }
+> +
+>         /* Control is returned to U-Boot, disable EFI watchdog */
+>         efi_set_watchdog(0);
+>
+> diff --git a/include/efi_api.h b/include/efi_api.h
+> index c2d6964467..0e92cb8a7f 100644
+> --- a/include/efi_api.h
+> +++ b/include/efi_api.h
+> @@ -404,6 +404,9 @@ struct efi_runtime_services {
+>  #define EFI_EVENT_GROUP_RESET_SYSTEM \
+>         EFI_GUID(0x62da6a56, 0x13fb, 0x485a, 0xa8, 0xda, \
+>                  0xa3, 0xdd, 0x79, 0x12, 0xcb, 0x6b)
+> +#define EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR \
+> +       EFI_GUID(0xb4a40fe6, 0x9149, 0x4f29, 0x94, 0x47, \
+> +                0x49, 0x38, 0x7a, 0x7f, 0xab, 0x87)
+>
+>  /* EFI Configuration Table and GUID definitions */
+>  #define NULL_GUID \
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index e164e6067d..31954e84c3 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -290,6 +290,8 @@ extern const efi_guid_t efi_guid_event_group_memory_map_change;
+>  extern const efi_guid_t efi_guid_event_group_ready_to_boot;
+>  /* event group ResetSystem() invoked (before ExitBootServices) */
+>  extern const efi_guid_t efi_guid_event_group_reset_system;
+> +/* event group return to efibootmgr */
+> +extern const efi_guid_t efi_guid_event_group_return_to_efibootmgr;
+>  /* GUID of the device tree table */
+>  extern const efi_guid_t efi_guid_fdt;
+>  extern const efi_guid_t efi_guid_loaded_image;
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> index f9b10a9763..3767fa2db4 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -90,6 +90,9 @@ const efi_guid_t efi_guid_event_group_ready_to_boot =
+>  /* event group ResetSystem() invoked (before ExitBootServices) */
+>  const efi_guid_t efi_guid_event_group_reset_system =
+>                         EFI_EVENT_GROUP_RESET_SYSTEM;
+> +/* event group return to efibootmgr */
+> +const efi_guid_t efi_guid_event_group_return_to_efibootmgr =
+> +                       EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR;
+>  /* GUIDs of the Load File and Load File2 protocols */
+>  const efi_guid_t efi_guid_load_file_protocol = EFI_LOAD_FILE_PROTOCOL_GUID;
+>  const efi_guid_t efi_guid_load_file2_protocol = EFI_LOAD_FILE2_PROTOCOL_GUID;
+> --
+> 2.34.1
+>
 
-This looks good to me. Can you please send it separately?
-It is really independent of change from other patches.
+Now that we have the event we have touse it for loadfie2 in the future
 
-Reviewed-by: Michal Simek <michal.simek@amd.com>
-
-Thanks,
-Michal
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
