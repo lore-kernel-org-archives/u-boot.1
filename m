@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D07C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 17:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F0EFC4167D
+	for <u-boot@archiver.kernel.org>; Thu,  2 Nov 2023 18:51:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B5D98714F;
-	Thu,  2 Nov 2023 18:34:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AAD686FAC;
+	Thu,  2 Nov 2023 19:51:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dfcRTv8M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L7WXmxDJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E155A87725; Thu,  2 Nov 2023 18:34:26 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 91B33876D6; Thu,  2 Nov 2023 19:51:39 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF06F86EB5
- for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 18:34:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4B3486FAC
+ for <u-boot@lists.denx.de>; Thu,  2 Nov 2023 19:51:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A2HYHuh031040;
- Thu, 2 Nov 2023 12:34:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698946457;
- bh=qNkTpktVmFuj4ANfaaJw0UmzN5AS+Tm3pEXU3FkygTk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=dfcRTv8MXQlVTI1q2lL7/rd2xXc8nZvD4Z9gS+TqErhtX9CnYN5sJhTyIQNuC5xnv
- QRdcDrOAWcDQ2ZoKl73b2uc7TzaSUReNjBsXabKpQ9CV/zbYPIcIGHqgwv5xlpWRQp
- ccMH2YkvQcqzEeYA0xF7RqNN+5EBFL3/sZQt4bk8=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A2HYHlb021690
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 2 Nov 2023 12:34:17 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
- Nov 2023 12:34:17 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 2 Nov 2023 12:34:17 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A2HYHCM046086;
- Thu, 2 Nov 2023 12:34:17 -0500
-Date: Thu, 2 Nov 2023 12:34:17 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>, Praneeth Bajjuri
- <praneeth@ti.com>, Robert Nelson <robertcnelson@gmail.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Jan Kiszka <jan.kiszka@siemens.com>, Heinrich
- Schuchardt <heinrich.schuchardt@canonical.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/2] configs: Add am62x_beagleplay_* defconfigs
-Message-ID: <20231102173417.ts32zfd3sf7ojner@margarine>
-References: <20231101170519.39627-1-afd@ti.com>
- <20231101170519.39627-3-afd@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a7afd45199so15936187b3.0
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 11:51:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1698951093; x=1699555893; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0mfzVp4NMJWGEsZQFFf/r6p2ud8+tWO7p7e80uGWmF4=;
+ b=L7WXmxDJbVQxG77w/Pbs3PbSszkPoUgs3lEHeALcwMcuMOct+x8diksyORHIirs+6G
+ R8Tj33jr2aOQ4snS3MbSmH31W79RRTVEJCWP81CTvL/ZqEWK6WAHNIW3KPoMsYBk6E+N
+ zpq+8Swsli8HO5MVOONmYFOugHCHG60EbC7EZDvwYoCKv5Y+4u1HqklaeDaQZGU1qPfI
+ SQlj4VpAfq8/ITYH2iJ5o2HrkOMiS8zUCBXZ0xNkYHjVGVvMPtHV6eDIp6awXF4JikQq
+ nhuo2KgYVRsrkkIMObRMwCT4D33rbRkRaZ73clBQ3Abo9YIi/SfH5/fagk6jCyI/F9bf
+ lvDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698951093; x=1699555893;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0mfzVp4NMJWGEsZQFFf/r6p2ud8+tWO7p7e80uGWmF4=;
+ b=TzgUbfHe4Ce05tT4I6J8L0DDoG5dq/ErC8tZdHBl85ntJeudFX6CFayiQwIPb3eveM
+ g8bOXSioItjXMpQdx6qB+zUTAZr8PjqFyRS5jau5/GWPNAgGyYvrP/pBF6WHMqsKkr+k
+ EXWe0lbUW6sNGVNpGJN9H5Ibdfvm5dDofkNjR5ytXMDUgcdqBGLIi9vhFa5aNsMc11yB
+ t0LRDHh9/aws9wLQ5w1KZkH3PkhdVCdyRILxH4OdCL3XiyMDRSLHapmUZtD2So21N79H
+ T/+rcjK49Q45ddNrdWYYsdj4ErsBzB2ysT3m7FhOA3HzOt2PVgnHjp9OO5BJO2oBo95x
+ 4wnw==
+X-Gm-Message-State: AOJu0YyTyxn5fyoclQ6RAYRI5VVdlKrQ8V5hR01GPvhQNcCXgETw2fYV
+ JMzWhF3Q91ol7e4B4DgP61s=
+X-Google-Smtp-Source: AGHT+IESS2kOk0ec80eOSvehzgQSasgpgAVa4xbX01xRIbxuqb6ZyxaIDV5GLVHhVM5ogAB1YuVVCA==
+X-Received: by 2002:a25:324f:0:b0:d9a:bddd:f714 with SMTP id
+ y76-20020a25324f000000b00d9abdddf714mr18099235yby.9.1698951093185; 
+ Thu, 02 Nov 2023 11:51:33 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ w142-20020a25c794000000b00da0c49a588asm60446ybe.8.2023.11.02.11.51.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Nov 2023 11:51:32 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <sr@denx.de>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v2] bootstd: Skip over bad device during bootflows scanning
+Date: Thu,  2 Nov 2023 11:51:15 -0700
+Message-Id: <20231102185116.21708-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231101170519.39627-3-afd@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,47 +90,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:05-20231101, Andrew Davis wrote:
-> Add am62x_beagleplay_r5_defconfig for R5 SPL and
-> am62x_beagleplay_a53_defconfig for A53 SPL and U-Boot support.
-> 
-> These defconfigs are composite defconfigs built from the config fragment
-> board/ti/am62x/beagleplay_*.config applied onto the base
-> am62x_evm_*_defconfig.
-> 
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  configs/am62x_beagleplay_a53_defconfig | 3 +++
->  configs/am62x_beagleplay_r5_defconfig  | 3 +++
->  2 files changed, 6 insertions(+)
->  create mode 100644 configs/am62x_beagleplay_a53_defconfig
->  create mode 100644 configs/am62x_beagleplay_r5_defconfig
-> 
-> diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-> new file mode 100644
-> index 00000000000..ad708e15397
-> --- /dev/null
-> +++ b/configs/am62x_beagleplay_a53_defconfig
-> @@ -0,0 +1,3 @@
-> +// The BeaglePlay defconfig for A53 core
-> +#include "configs/am62x_evm_a53_defconfig"
-> +#include "board/ti/am62x/beagleplay_a53.config"
-> diff --git a/configs/am62x_beagleplay_r5_defconfig b/configs/am62x_beagleplay_r5_defconfig
-> new file mode 100644
-> index 00000000000..276b1f81a3e
-> --- /dev/null
-> +++ b/configs/am62x_beagleplay_r5_defconfig
-> @@ -0,0 +1,3 @@
-> +// The BeaglePlay defconfig for R5 core
-> +#include "configs/am62x_evm_r5_defconfig"
-> +#include "board/ti/am62x/beagleplay_r5.config"
+During bootstd scanning for bootdevs, if bootdev_hunt_drv() encounters
+a device not found error (e.g. ENOENT), let it return a successful status
+so that bootstd will continue scanning the next devices, not stopping
+prematurely.
 
-Let us also update the documentation doc/board/ti/am62x_beagleplay.rst
-to point people to this configuration?
+Background:
 
+During scanning for bootflows, it's possible for bootstd to encounter a
+faulty device controller. Also when the same u-boot is used for another
+variant of the same board, some device controller such as SATA might
+not exist.
 
+I've found this issue while converting the Marvell Sheevaplug board to
+use bootstd. This board has 2 variants, the original Sheevaplug has MMC and
+USB only, but the later variant comes with USB, MMC, and eSATA ports. We
+have been using the same u-boot (starting with CONFIG_IDE and later with DM
+CONFIG_SATA) for both variants. This worked well with the old
+envs-scripting booting scheme.
+
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
+
+Changes in v2:
+- Restore bootdev_next_prio() to the original.
+- Add a check in bootdev_hunt_drv(). If its descendant bootdev hunt driver
+function returns -ENOENT, set the hunt status to successful (this is the
+case where the device does not exist, or a bad device controller).
+- Update bootdev_hunter_func() docs to indicate that a return
+status -ENOENT is not an error, just a "device not found" status.
+- Set status of sata_rescan() to -ENOENT when the SATA device is not found.
+
+ boot/bootdev-uclass.c | 2 +-
+ drivers/ata/sata.c    | 2 +-
+ include/bootdev.h     | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 44ae98a926..4926a50da8 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -784,7 +784,7 @@ static int bootdev_hunt_drv(struct bootdev_hunter *info, uint seq, bool show)
+ 		if (info->hunt) {
+ 			ret = info->hunt(info, show);
+ 			log_debug("  - hunt result %d\n", ret);
+-			if (ret)
++			if (ret && ret != -ENOENT)
+ 				return ret;
+ 		}
+ 		std->hunters_used |= BIT(seq);
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index dcb5fcf476..64fc078bad 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -65,7 +65,7 @@ int sata_rescan(bool verbose)
+ 	ret = uclass_find_first_device(UCLASS_AHCI, &dev);
+ 	if (ret || !dev) {
+ 		printf("Cannot find SATA device (err=%d)\n", ret);
+-		return -ENOSYS;
++		return -ENOENT;
+ 	}
+ 
+ 	ret = device_remove(dev, DM_REMOVE_NORMAL);
+diff --git a/include/bootdev.h b/include/bootdev.h
+index b079a91b5b..35fa25aff1 100644
+--- a/include/bootdev.h
++++ b/include/bootdev.h
+@@ -65,7 +65,7 @@ struct bootdev_hunter;
+  *
+  * @info: Info structure describing this hunter
+  * @show: true to show information from the hunter
+- * Returns: 0 if OK, -ve on error
++ * Returns: 0 if OK, -ENOENT on device not found, otherwise -ve on error
+  */
+ typedef int (*bootdev_hunter_func)(struct bootdev_hunter *info, bool show);
+ 
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.39.2
+
