@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178D5C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 04:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CDABC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 04:41:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45EAB8761B;
+	by phobos.denx.de (Postfix) with ESMTP id B99AF87657;
 	Fri,  3 Nov 2023 05:40:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Qhka+peW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ahj9zdPD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC1B087657; Fri,  3 Nov 2023 05:40:40 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 36A21875FD; Fri,  3 Nov 2023 05:40:41 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1AD9875FD
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 05:40:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15A64875DA
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 05:40:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A34eSXe023986;
- Thu, 2 Nov 2023 23:40:28 -0500
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A34eRsk061783;
+ Thu, 2 Nov 2023 23:40:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1698986428;
- bh=xhs1XyvUOLbwiS2Lg7Job9i3nRjkp9lBpcDM6tsfP3Y=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Qhka+peWpz07lXKi3lzLnr0NrlR0Bbzen0rSMPshUPMnYwFAsWvKkkWT+hCTZi0o7
- q9Pj7/US2sAIOIfhrfCVZXKcR2S3Q9gK5kerKWiJEf5TKkZAL4H0zx2J7t5pUKSTpX
- oKX6/u/jRdZwPgwltW47gGmyvKaSfhbS+i/xq7K8=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A34eSbw032075
+ s=ti-com-17Q1; t=1698986427;
+ bh=XT0ddN3BFzS7YVDOdD2bQuTK7/Jd4DOVaTU+A9jbEtU=;
+ h=From:To:CC:Subject:Date;
+ b=ahj9zdPD98Gh9MRyqp8PbvBAgJAiGJyKMkHeeAizTUxNTBkFgUSufMZYu+ZQtW67N
+ T4FPaDPtBKSjgdBaHaGcEVbQAZwC180vYdh9ploXegvBiTVoLUiR60jtVM5yoBc0Pc
+ hzUG85geaylhLsMaaZbjH4bMooCzGF8gNl8WOFMc=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A34eRr8032065
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 2 Nov 2023 23:40:28 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 2 Nov 2023 23:40:27 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
  Nov 2023 23:40:27 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 2 Nov 2023 23:40:27 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A34eRnj109887;
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A34eRYH123811;
  Thu, 2 Nov 2023 23:40:27 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -55,12 +55,10 @@ CC: Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>, Robert Nelson
  <robertcnelson@gmail.com>, <u-boot@lists.denx.de>,
  Nishanth Menon <nm@ti.com>
-Subject: [PATCH V2 2/2] doc: board: ti: k3 docs: Use ::prompt
-Date: Thu, 2 Nov 2023 23:40:26 -0500
-Message-ID: <20231103044026.7743-3-nm@ti.com>
+Subject: [PATCH V2 0/2] doc: board: ti: Cleanup ::prompt usage
+Date: Thu, 2 Nov 2023 23:40:24 -0500
+Message-ID: <20231103044026.7743-1-nm@ti.com>
 X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20231103044026.7743-1-nm@ti.com>
-References: <20231103044026.7743-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,474 +79,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use prompt instead of code-block to have copy-paste friendly command
-documentation.
+Due to the sequence of merges, it looks like many of k3 documentation
+used code-blocks while the rest of the docs migrated to ::prompt.
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
-Changes since v1:
-minor fixup for whitespace indentation.
+Sync all to a common style.
 
-V1: https://lore.kernel.org/r/20231103000915.2413501-4-nm@ti.com
+based off:
+master 07fe79c93c5c Merge tag 'i2cfixes-for-v2024-01-rc2' of https://source.denx.de/u-boot/custodians/u-boot-i2c
+
+Changes since V1:
+* squashed up the gdb patch to patch#1
+* fixedup patch #2 for whitespace indentation miss
+
+v1: https://lore.kernel.org/r/20231103000915.2413501-1-nm@ti.com
+
+Nishanth Menon (2):
+  doc: board: ti: Use prompt prompt_style to simplify documentation
+  doc: board: ti: k3 docs: Use ::prompt
+
+ doc/board/ti/am335x_evm.rst       |  39 ++++-------
  doc/board/ti/am62x_beagleplay.rst |  46 ++++++-------
  doc/board/ti/am62x_sk.rst         |  18 +++---
  doc/board/ti/am64x_evm.rst        |  20 +++---
  doc/board/ti/am65x_evm.rst        | 104 +++++++++++++++---------------
+ doc/board/ti/dra7xx_evm.rst       |   3 +-
  doc/board/ti/j7200_evm.rst        |  20 +++---
  doc/board/ti/j721e_evm.rst        |  40 ++++++------
  doc/board/ti/j721s2_evm.rst       |  18 +++---
- 7 files changed, 133 insertions(+), 133 deletions(-)
+ doc/board/ti/k3.rst               |  44 ++++++-------
+ doc/board/ti/ks2_evm.rst          |  15 ++---
+ 11 files changed, 174 insertions(+), 193 deletions(-)
 
-diff --git a/doc/board/ti/am62x_beagleplay.rst b/doc/board/ti/am62x_beagleplay.rst
-index 39913b29ab2c..97ab0a4350ed 100644
---- a/doc/board/ti/am62x_beagleplay.rst
-+++ b/doc/board/ti/am62x_beagleplay.rst
-@@ -55,15 +55,15 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash $
- 
-- $ export UBOOT_CFG_CORTEXR="am62x_evm_r5_defconfig beagleplay_r5.config"
-- $ export UBOOT_CFG_CORTEXA="am62x_evm_a53_defconfig beagleplay_a53.config"
-- $ export TFA_BOARD=lite
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-am62x
-- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
-+  export UBOOT_CFG_CORTEXR="am62x_evm_r5_defconfig beagleplay_r5.config"
-+  export UBOOT_CFG_CORTEXA="am62x_evm_a53_defconfig beagleplay_a53.config"
-+  export TFA_BOARD=lite
-+  # we dont use any extra TFA parameters
-+  unset TFA_EXTRA_ARGS
-+  export OPTEE_PLATFORM=k3-am62x
-+  export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
- 
- .. include::  am62x_sk.rst
-     :start-after: .. am62x_evm_rst_include_start_build_steps
-@@ -174,24 +174,24 @@ boot1 partition depends on A/B update requirements.
- 
- The following are the steps from Linux shell to program eMMC:
- 
--.. code-block:: bash
-+.. prompt:: bash #
- 
--  # # Enable Boot0 boot
--  # mmc bootpart enable 1 2 /dev/mmcblk0
--  # mmc bootbus set single_backward x1 x8 /dev/mmcblk0
--  # mmc hwreset enable /dev/mmcblk0
-+  # Enable Boot0 boot
-+  mmc bootpart enable 1 2 /dev/mmcblk0
-+  mmc bootbus set single_backward x1 x8 /dev/mmcblk0
-+  mmc hwreset enable /dev/mmcblk0
- 
--  # # Clear eMMC boot0
--  # echo '0' >> /sys/class/block/mmcblk0boot0/force_ro
--  # dd if=/dev/zero of=/dev/mmcblk0boot0 count=32 bs=128k
--  # # Write tiboot3.bin
--  # dd if=tiboot3.bin of=/dev/mmcblk0boot0 bs=128k
-+  # Clear eMMC boot0
-+  echo '0' >> /sys/class/block/mmcblk0boot0/force_ro
-+  dd if=/dev/zero of=/dev/mmcblk0boot0 count=32 bs=128k
-+  # Write tiboot3.bin
-+  dd if=tiboot3.bin of=/dev/mmcblk0boot0 bs=128k
- 
--  # # Copy the rest of the boot binaries
--  # mount /dev/mmcblk0p1 /boot/firmware
--  # cp tispl.bin /boot/firmware
--  # cp u-boot.img /boot/firmware
--  # sync
-+  # Copy the rest of the boot binaries
-+  mount /dev/mmcblk0p1 /boot/firmware
-+  cp tispl.bin /boot/firmware
-+  cp u-boot.img /boot/firmware
-+  sync
- 
- .. warning ::
- 
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index d7437c6d22f7..25e25fb56ac4 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -76,15 +76,15 @@ Set the variables corresponding to this platform:
- .. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash $
- 
-- $ export UBOOT_CFG_CORTEXR=am62x_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=am62x_evm_a53_defconfig
-- $ export TFA_BOARD=lite
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-am62x
-- $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
-+  export UBOOT_CFG_CORTEXR=am62x_evm_r5_defconfig
-+  export UBOOT_CFG_CORTEXA=am62x_evm_a53_defconfig
-+  export TFA_BOARD=lite
-+  # we dont use any extra TFA parameters
-+  unset TFA_EXTRA_ARGS
-+  export OPTEE_PLATFORM=k3-am62x
-+  export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
- 
- .. am62x_evm_rst_include_start_build_steps
- 
-@@ -270,6 +270,6 @@ detailed setup information.
- 
- To start OpenOCD and connect to the board
- 
--.. code-block:: bash
-+.. prompt:: bash $
- 
-   openocd -f board/ti_am625evm.cfg
-diff --git a/doc/board/ti/am64x_evm.rst b/doc/board/ti/am64x_evm.rst
-index db27461cb14d..fe661b1f49c8 100644
---- a/doc/board/ti/am64x_evm.rst
-+++ b/doc/board/ti/am64x_evm.rst
-@@ -65,16 +65,16 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
--
-- $ export UBOOT_CFG_CORTEXR=am64x_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=am64x_evm_a53_defconfig
-- $ export TFA_BOARD=lite
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-am64x
-- $ # we dont use any extra TFA parameters
-- $ unset OPTEE_EXTRA_ARGS
-+.. prompt:: bash $
-+
-+  export UBOOT_CFG_CORTEXR=am64x_evm_r5_defconfig
-+  export UBOOT_CFG_CORTEXA=am64x_evm_a53_defconfig
-+  export TFA_BOARD=lite
-+  # we dont use any extra TFA parameters
-+  unset TFA_EXTRA_ARGS
-+  export OPTEE_PLATFORM=k3-am64x
-+  # we dont use any extra TFA parameters
-+  unset OPTEE_EXTRA_ARGS
- 
- .. am64x_evm_rst_include_start_build_steps
- 
-diff --git a/doc/board/ti/am65x_evm.rst b/doc/board/ti/am65x_evm.rst
-index 7cebb1ca62d3..d8c58fad2a5e 100644
---- a/doc/board/ti/am65x_evm.rst
-+++ b/doc/board/ti/am65x_evm.rst
-@@ -75,16 +75,16 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash $
- 
-- $ export UBOOT_CFG_CORTEXR=am65x_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=am65x_evm_a53_defconfig
-- $ export TFA_BOARD=generic
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-am65x
-- $ # we dont use any extra OP-TEE parameters
-- $ unset OPTEE_EXTRA_ARGS
-+  export UBOOT_CFG_CORTEXR=am65x_evm_r5_defconfig
-+  export UBOOT_CFG_CORTEXA=am65x_evm_a53_defconfig
-+  export TFA_BOARD=generic
-+  # we dont use any extra TFA parameters
-+  unset TFA_EXTRA_ARGS
-+  export OPTEE_PLATFORM=k3-am65x
-+  # we dont use any extra OP-TEE parameters
-+  unset OPTEE_EXTRA_ARGS
- 
- .. am65x_evm_rst_include_start_build_steps
- 
-@@ -159,32 +159,32 @@ The following commands can be used to download tiboot3.bin, tispl.bin,
- u-boot.img, and sysfw.itb from an SD card and write them to the eMMC boot0
- partition at respective addresses.
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => mmc dev 0 1
-- => fatload mmc 1 ${loadaddr} tiboot3.bin
-- => mmc write ${loadaddr} 0x0 0x400
-- => fatload mmc 1 ${loadaddr} tispl.bin
-- => mmc write ${loadaddr} 0x400 0x1000
-- => fatload mmc 1 ${loadaddr} u-boot.img
-- => mmc write ${loadaddr} 0x1400 0x2000
-- => fatload mmc 1 ${loadaddr} sysfw.itb
-- => mmc write ${loadaddr} 0x3600 0x800
-+  mmc dev 0 1
-+  fatload mmc 1 ${loadaddr} tiboot3.bin
-+  mmc write ${loadaddr} 0x0 0x400
-+  fatload mmc 1 ${loadaddr} tispl.bin
-+  mmc write ${loadaddr} 0x400 0x1000
-+  fatload mmc 1 ${loadaddr} u-boot.img
-+  mmc write ${loadaddr} 0x1400 0x2000
-+  fatload mmc 1 ${loadaddr} sysfw.itb
-+  mmc write ${loadaddr} 0x3600 0x800
- 
- To give the ROM access to the boot partition, the following commands must be
- used for the first time:
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => mmc partconf 0 1 1 1
-- => mmc bootbus 0 1 0 0
-+  mmc partconf 0 1 1 1
-+  mmc bootbus 0 1 0 0
- 
- To create a software partition for the rootfs, the following command can be
- used:
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => gpt write mmc 0 ${partitions}
-+  gpt write mmc 0 ${partitions}
- 
- eMMC layout:
- 
-@@ -194,11 +194,11 @@ eMMC layout:
- Kernel image and DT are expected to be present in the /boot folder of rootfs.
- To boot kernel from eMMC, use the following commands:
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => setenv mmcdev 0
-- => setenv bootpart 0
-- => boot
-+  setenv mmcdev 0
-+  setenv bootpart 0
-+  boot
- 
- OSPI:
- -----
-@@ -210,17 +210,17 @@ Below commands can be used to download tiboot3.bin, tispl.bin, u-boot.img,
- and sysfw.itb over tftp and then flash those to OSPI at their respective
- addresses.
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => sf probe
-- => tftp ${loadaddr} tiboot3.bin
-- => sf update $loadaddr 0x0 $filesize
-- => tftp ${loadaddr} tispl.bin
-- => sf update $loadaddr 0x80000 $filesize
-- => tftp ${loadaddr} u-boot.img
-- => sf update $loadaddr 0x280000 $filesize
-- => tftp ${loadaddr} sysfw.itb
-- => sf update $loadaddr 0x6C0000 $filesize
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl.bin
-+  sf update $loadaddr 0x80000 $filesize
-+  tftp ${loadaddr} u-boot.img
-+  sf update $loadaddr 0x280000 $filesize
-+  tftp ${loadaddr} sysfw.itb
-+  sf update $loadaddr 0x6C0000 $filesize
- 
- Flash layout for OSPI:
- 
-@@ -233,10 +233,10 @@ ospi.rootfs just like in SD card case. U-Boot looks for UBI volume named
- 
- To boot kernel from OSPI, at the U-Boot prompt:
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => setenv boot ubi
-- => boot
-+  setenv boot ubi
-+  boot
- 
- UART:
- -----
-@@ -280,19 +280,19 @@ is fully loaded (from sysfw.itb) and started.
- Example bash script sequence for running on a Linux host PC feeding all boot
- artifacts needed to the device:
- 
--.. code-block:: text
-+.. prompt:: bash $
- 
-- MCU_DEV=/dev/ttyUSB1
-- MAIN_DEV=/dev/ttyUSB0
-+  MCU_DEV=/dev/ttyUSB1
-+  MAIN_DEV=/dev/ttyUSB0
- 
-- stty -F $MCU_DEV 115200 cs8 -cstopb -parenb
-- stty -F $MAIN_DEV 115200 cs8 -cstopb -parenb
-+  stty -F $MCU_DEV 115200 cs8 -cstopb -parenb
-+  stty -F $MAIN_DEV 115200 cs8 -cstopb -parenb
- 
-- sb --xmodem tiboot3.bin > $MCU_DEV < $MCU_DEV
-- sb --ymodem sysfw.itb > $MCU_DEV < $MCU_DEV
-- sb --ymodem tispl.bin > $MAIN_DEV < $MAIN_DEV
-- sleep 1
-- sb --xmodem u-boot.img > $MAIN_DEV < $MAIN_DEV
-+  sb --xmodem tiboot3.bin > $MCU_DEV < $MCU_DEV
-+  sb --ymodem sysfw.itb > $MCU_DEV < $MCU_DEV
-+  sb --ymodem tispl.bin > $MAIN_DEV < $MAIN_DEV
-+  sleep 1
-+  sb --xmodem u-boot.img > $MAIN_DEV < $MAIN_DEV
- 
- Debugging U-Boot
- ----------------
-@@ -314,6 +314,6 @@ detailed setup information.
- 
- To start OpenOCD and connect to the board
- 
--.. code-block:: bash
-+.. prompt:: bash $
- 
-   openocd -f board/ti_am654evm.cfg
-diff --git a/doc/board/ti/j7200_evm.rst b/doc/board/ti/j7200_evm.rst
-index bcf8dc1c5f0d..f2c2e7f5db1c 100644
---- a/doc/board/ti/j7200_evm.rst
-+++ b/doc/board/ti/j7200_evm.rst
-@@ -64,16 +64,16 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash $
- 
-- $ export UBOOT_CFG_CORTEXR=j7200_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=j7200_evm_a72_defconfig
-- $ export TFA_BOARD=generic
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-j7200
-- $ # we dont use any extra OP-TEE parameters
-- $ unset OPTEE_EXTRA_ARGS
-+  export UBOOT_CFG_CORTEXR=j7200_evm_r5_defconfig
-+  export UBOOT_CFG_CORTEXA=j7200_evm_a72_defconfig
-+  export TFA_BOARD=generic
-+  # we dont use any extra TFA parameters
-+  unset TFA_EXTRA_ARGS
-+  export OPTEE_PLATFORM=k3-j7200
-+  # we dont use any extra OP-TEE parameters
-+  unset OPTEE_EXTRA_ARGS
- 
- .. j7200_evm_rst_include_start_build_steps
- 
-@@ -225,6 +225,6 @@ detailed setup information.
- 
- To start OpenOCD and connect to the board
- 
--.. code-block:: bash
-+.. prompt:: bash $
- 
-   openocd -f board/ti_j7200evm.cfg
-diff --git a/doc/board/ti/j721e_evm.rst b/doc/board/ti/j721e_evm.rst
-index cadaac017811..344a38d37486 100644
---- a/doc/board/ti/j721e_evm.rst
-+++ b/doc/board/ti/j721e_evm.rst
-@@ -69,16 +69,16 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash $
- 
-- $ export UBOOT_CFG_CORTEXR=j721e_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=j721e_evm_a72_defconfig
-- $ export TFA_BOARD=generic
-- $ # we dont use any extra TFA parameters
-- $ unset TFA_EXTRA_ARGS
-- $ export OPTEE_PLATFORM=k3-j721e
-- $ # we dont use any extra OP-TEE parameters
-- $ unset OPTEE_EXTRA_ARGS
-+ export UBOOT_CFG_CORTEXR=j721e_evm_r5_defconfig
-+ export UBOOT_CFG_CORTEXA=j721e_evm_a72_defconfig
-+ export TFA_BOARD=generic
-+ # we dont use any extra TFA parameters
-+ unset TFA_EXTRA_ARGS
-+ export OPTEE_PLATFORM=k3-j721e
-+ # we dont use any extra OP-TEE parameters
-+ unset OPTEE_EXTRA_ARGS
- 
- .. j721e_evm_rst_include_start_build_steps
- 
-@@ -202,17 +202,17 @@ Below commands can be used to download tiboot3.bin, tispl.bin, u-boot.img,
- and sysfw.itb over tftp and then flash those to OSPI at their respective
- addresses.
- 
--.. code-block:: text
-+.. prompt:: bash =>
- 
-- => sf probe
-- => tftp ${loadaddr} tiboot3.bin
-- => sf update $loadaddr 0x0 $filesize
-- => tftp ${loadaddr} tispl.bin
-- => sf update $loadaddr 0x80000 $filesize
-- => tftp ${loadaddr} u-boot.img
-- => sf update $loadaddr 0x280000 $filesize
-- => tftp ${loadaddr} sysfw.itb
-- => sf update $loadaddr 0x6C0000 $filesize
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl.bin
-+  sf update $loadaddr 0x80000 $filesize
-+  tftp ${loadaddr} u-boot.img
-+  sf update $loadaddr 0x280000 $filesize
-+  tftp ${loadaddr} sysfw.itb
-+  sf update $loadaddr 0x6C0000 $filesize
- 
- Flash layout for OSPI:
- 
-@@ -254,6 +254,6 @@ detailed setup information.
- 
- To start OpenOCD and connect to the board
- 
--.. code-block:: bash
-+.. prompt:: bash $
- 
-   openocd -f board/ti_j721eevm.cfg
-diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-index fec2acabe845..6db375a125b3 100644
---- a/doc/board/ti/j721s2_evm.rst
-+++ b/doc/board/ti/j721s2_evm.rst
-@@ -75,15 +75,15 @@ Set the variables corresponding to this platform:
- .. include::  k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
--.. code-block:: bash
-+.. prompt:: bash $
- 
-- $ export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
-- $ export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
-- $ export TFA_BOARD=generic
-- $ export TFA_EXTRA_ARGS="K3_USART=0x8"
-- $ # The following is not a typo, j784s4 is the OP-TEE platform for j721s2
-- $ export OPTEE_PLATFORM=k3-j784s4
-- $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
-+  export UBOOT_CFG_CORTEXR=j721s2_evm_r5_defconfig
-+  export UBOOT_CFG_CORTEXA=j721s2_evm_a72_defconfig
-+  export TFA_BOARD=generic
-+  export TFA_EXTRA_ARGS="K3_USART=0x8"
-+  # The following is not a typo, j784s4 is the OP-TEE platform for j721s2
-+  export OPTEE_PLATFORM=k3-j784s4
-+  export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
- 
- .. j721s2_evm_rst_include_start_build_steps
- 
-@@ -296,7 +296,7 @@ Debugging U-Boot on J721S2-EVM
- 
- To start OpenOCD and connect to the board
- 
--.. code-block:: bash
-+.. prompt:: bash $
- 
-   openocd -f board/ti_j721s2evm.cfg
- 
 -- 
 2.37.2
 
