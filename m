@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EFEDC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A8CC4167D
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:47:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A00B8719D;
-	Fri,  3 Nov 2023 20:44:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id B409086B18;
+	Fri,  3 Nov 2023 20:47:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Sj1E0vYU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BohR9cTO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 296C7871FC; Fri,  3 Nov 2023 20:44:25 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 2D4C186B18; Fri,  3 Nov 2023 20:47:06 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53D4C870BF
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:44:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E4F786E54
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:47:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-507bd644a96so3430754e87.3
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 12:44:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-66d0169cf43so14335226d6.3
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 12:47:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1699040657; x=1699645457; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y9C6QqZpylMTp/R9eCJV2w4kCiD+sfpMIyvH1fMgjZY=;
- b=Sj1E0vYU9H1263KuU/4rO5KFUoIlKIPGsYiYsyZcvSQXEwgFiHJFsuYo6xolAOqCbi
- s8Cn1Wzk3L8AbzGer2E94OOiZsE0mHrs6RkIMdNi9GtBH+crSJpUodSS4AcPtXMEjF/C
- k5xMFGfesdPlc/XHl8PoYBYYfHed+F2MaHTjFIwT4EW0nKdq+778CFVVa/daCxl7RTna
- NL5KAnRRaNoUgVC2JBBjpXcCpeATLUnyTwWH1HuedeZL5VXTE3vutKyWrEUiow7uTauv
- iy13KhGbb5o5seJKN6v45tBZKIBLW8Wh1izVhR3RbP4VnZTi4yRkJVLhfVpE+1C4sDII
- JKig==
+ d=konsulko.com; s=google; t=1699040821; x=1699645621; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iSLad2IN4xegI8UDhyRg83UG7n/go1b74x0lLZK3l74=;
+ b=BohR9cTOc0UHM+X+mibJ0EsvItniAQX06NBWaLy+egEPt2Hh/L2K8BNpSFQ9VP2WUc
+ fCV6TswF7QD7nI38W5dIiaYD0FP0kA6wklekGxaS3PMOSWrNCRGnPMbH7LCAvnWnnpUb
+ CLpsEZcIp+VldEKBPqPnlkHHODN8R72QA2wXc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699040657; x=1699645457;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y9C6QqZpylMTp/R9eCJV2w4kCiD+sfpMIyvH1fMgjZY=;
- b=ToBmJTriHNf2VD3j7wue4wd5iy7lST26W/tQul/+Jwi8hH+xP9fPfMdkbozVTOefwO
- 8og0Lz1F+LlsvqWuxdVPIUnMUVXwuz09nmm/2ZwDBRBc6zMrzG4eEvrPuK8n06CY5/Po
- s5PCsEoetxs1WTHJuri1i6I6AoM1tR4yZP5y39X4vC6Ia02Bshd6wPlrlnIoQDKrAqH6
- QgxUFes46BEIHCpbsMzdMoI1n9UfHURjzOoQ1WDT/dLBn7jmrNjR0vFy+OZ75d5UpTtR
- Xg7lNDPnhJ/QZ5nxYdMv63pdtPrJG4XrqLAOa02+ul4M5RZNxtGJDFSz0+5L/WaX/5sI
- pgfw==
-X-Gm-Message-State: AOJu0YxTO/27zB7bzL5GjTZoP9aUZRXYjQBQXylFb4VRHZfEcDP3N+De
- 66l0jTdzP9Dprg7HbvDokgyg77SW+d3qPPJRuzQJ1xvYIbaJoZivQzw=
-X-Google-Smtp-Source: AGHT+IEBbQYf5od8ZYc57YyUO+4oZOXcVXXEh194z8ifQa4WrBIgv8K+SjH46BTC2fAvzed7Dl3wT1o7QM6w2ceiaZ4=
-X-Received: by 2002:a19:ca5b:0:b0:507:9ff3:ae82 with SMTP id
- h27-20020a19ca5b000000b005079ff3ae82mr16028223lfj.18.1699040657289; Fri, 03
- Nov 2023 12:44:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1699040821; x=1699645621;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iSLad2IN4xegI8UDhyRg83UG7n/go1b74x0lLZK3l74=;
+ b=IgM90WmRWZKXc9qNkvnnvaipzMzNWGxss0LTP/6Vp07RaA1EuFupnQ8dkpcpapP3l7
+ wlSS6qMES3Nkd/jd+HxAvC+0xAGY1UOOaXLzUG63wxaftLMMO1DtBiyb4kWuXtNiroqT
+ 7aNuE3T4KsuL86iH67A6a2SPOTnGi2yQeDGiql9z2D1nqU96DwimULgbhG4q8WdDstCh
+ ozPJ0/JB4Jv0531LSg5YoG7vHBseOX9pWLuc4V90pYzr6szRbSQoPSmDKNTtZtNnugx3
+ vi+zbXCDNfmBfvSeHnMxcT+5fKaXWOCSaP+dE6dU9/7r56uZvPBQIWU38UMlVpYX+7cL
+ Gwdg==
+X-Gm-Message-State: AOJu0Yw8O2QUqqCIty0aKUrOCcKFLMA2XgKo4SIQ0TwerLX04mWr1bmI
+ LcDl5baU18iIbv6QBzbPmAlK9A==
+X-Google-Smtp-Source: AGHT+IE6oN0/kjO2YxNiFIl7nbB/rgRO1v2b7EdIPK44cICryYnuejJkW2FWBdSa4SdcOQBMus48BQ==
+X-Received: by 2002:a05:6214:dc7:b0:66d:2ae0:44cc with SMTP id
+ 7-20020a0562140dc700b0066d2ae044ccmr32961835qvt.21.1699040820700; 
+ Fri, 03 Nov 2023 12:47:00 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ f7-20020a0cc307000000b0064f4e0b2089sm1033464qvi.33.2023.11.03.12.46.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Nov 2023 12:47:00 -0700 (PDT)
+Date: Fri, 3 Nov 2023 15:46:58 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/3] drivers: gpio-uclass: support PMIC GPIO children
+Message-ID: <20231103194658.GS496310@bill-the-cat>
+References: <20231024083801.202365-1-clamor95@gmail.com>
+ <20231024083801.202365-2-clamor95@gmail.com>
+ <20231103190339.GA2621465@bill-the-cat>
+ <4FA8B3C5-B9FF-498D-A369-57AC099785AF@gmail.com>
 MIME-Version: 1.0
-References: <20231024062032.8543-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ07zojtkV6ReQiC3XPf_AW96YnAc6APqhfk7wUDMmyOrA@mail.gmail.com>
- <CAPnjgZ3zFnAaivWa1BaUDbTfzRc-SZ_H8+YSvAKtwBJ64=XftQ@mail.gmail.com>
- <1ac5013d-8991-4abd-baad-94776801c58c@canonical.com>
- <87a5s6qwfe.fsf@bloch.sibelius.xs4all.nl>
- <20231025211354.GZ496310@bill-the-cat>
- <f5e39630-0065-42e3-95a9-91e608e2c919@canonical.com>
-In-Reply-To: <f5e39630-0065-42e3-95a9-91e608e2c919@canonical.com>
-From: Simon Glass <sjg@google.com>
-Date: Fri, 3 Nov 2023 13:44:06 -0600
-Message-ID: <CAPnjgZ1zzWZ48nn2ux7yd1pJ4mWVOt4w2ToBZC6MR2wcxbnMsQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/1] efi_loader: expose the device-tree file name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de, Mark Kettenis <mark.kettenis@xs4all.nl>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yLhvnR/A1GkbJ17m"
+Content-Disposition: inline
+In-Reply-To: <4FA8B3C5-B9FF-498D-A369-57AC099785AF@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,138 +95,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Wed, 25 Oct 2023 at 15:22, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 10/25/23 23:13, Tom Rini wrote:
-> > On Wed, Oct 25, 2023 at 10:28:05PM +0200, Mark Kettenis wrote:
-> >>> Date: Wed, 25 Oct 2023 21:57:44 +0200
-> >>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>>
-> >>> On 10/25/23 20:23, Simon Glass wrote:
-> >>>> Hi Heinrich,
-> >>>>
-> >>>> On Tue, 24 Oct 2023 at 18:02, Simon Glass <sjg@google.com> wrote:
-> >>>>>
-> >>>>> Hi Heinrich,
-> >>>>>
-> >>>>> On Mon, 23 Oct 2023 at 23:20, Heinrich Schuchardt
-> >>>>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>>>
-> >>>>>> Forward and backward compatibility of Linux kernel device-trees is
-> >>>>>> sometimes missing. One solution approach is to load a kernel specific
-> >>>>>> device-tree. This can either be done via a U-Boot scripts (like the one
-> >>>>>> generated by Debian package flash-kernel or by a boot loader like GRUB.
-> >>>>>> The boot loader approach currently requires to know the device-tree name
-> >>>>>> before first boot which makes it unusable for generic images.
-> >>>>>>
-> >>>>>> Expose the device-tree file name as EFI variable FdtFile.
-> >>>>>> This will allow bootloaders to load a kernel specific device-tree.
-> >>>>>
-> >>>>> kernel-specific
-> >>>>>
-> >>>>>>
-> >>>>>> The variable will not be exposed on ACPI based systems or if the
-> >>>>>> environment variable fdtfile is not defined.
-> >>>>>>
-> >>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >>>>>> ---
-> >>>>>> v4:
-> >>>>>>           Generalize the description of the content of $fdtfile.
-> >>>>>> v3:
-> >>>>>>           Add documentation
-> >>>>>> v2:
-> >>>>>>           Use a unique GUID to enable future U-Boot independent
-> >>>>>>           standardization.
-> >>>>>>           Do not try to add the variable on ACPI based systems.
-> >>>>>> ---
-> >>>>>>    doc/develop/uefi/uefi.rst  | 14 ++++++++++++++
-> >>>>>>    include/efi_loader.h       |  5 +++++
-> >>>>>>    lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
-> >>>>>>    3 files changed, 49 insertions(+)
-> >>>>>>
-> >>>>>> diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> >>>>>> index fb16ac743a..702c490831 100644
-> >>>>>> --- a/doc/develop/uefi/uefi.rst
-> >>>>>> +++ b/doc/develop/uefi/uefi.rst
-> >>>>>> @@ -916,6 +916,20 @@ So our final format of the FilePathList[] is::
-> >>>>>>
-> >>>>>>        Loaded image - end node (0xff) - VenMedia - initrd_1 - [end node (0x01) - initrd_n ...] - end node (0xff)
-> >>>>>>
-> >>>>>> +EFI variable FdtFile
-> >>>>>> +~~~~~~~~~~~~~~~~~~~~
-> >>>>>> +
-> >>>>>> +Ideally U-Boot would always expose a device-tree that can be used for booting
-> >>>>>> +any operating systems. Unfortunately operating systems like Linux sometimes
-> >>>>>> +break forward and backward compatibility. In this case there is a need to load
-> >>>>>> +an operating system version specific device-tree.
-> >>>>>
-> >>>>> This seems to be a strong statement. Given the effort that goes into
-> >>>>> the DT, changes are supposed to be backwards-compatible. Is this
-> >>>>> generally true, or is it just that we want an up-to-date DT for the
-> >>>>> kernel to enable new features?
-> >>>>
-> >>>> Did you see this comment?
-> >>>
-> >>> It would have been nice to put the person which made that comment on copy.
-> >>>
-> >>> The truth lies in the world "supposed":
-> >>>
-> >>> The idea of a device-tree that never needs to change is quite old and
-> >>> never became true on ARM devices.
-> >>>
-> >>> We all know Linux tends to break both forward and backward compatibility
-> >>> of device-trees. Here is a nice example:
-> >>>
-> >>> d0c6707ca423 ("arm64: dts: allwinner: H5: NanoPi Neo Plus2: phy-mode
-> >>> rgmii-id")
-> >>>
-> >>> Driver changes broke forward and backwards compatibility of a lot of
-> >>> Allwinner boards.
-> >>
-> >> Well, that happened in 2020.  Things have gotten better over time.
+--yLhvnR/A1GkbJ17m
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Nov 03, 2023 at 09:39:51PM +0200, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 3 =D0=BB=D0=B8=D1=81=D1=82=D0=BE=D0=BF=D0=B0=D0=B4=D0=B0 2023 =D1=80. 21:=
+03:39 GMT+02:00, Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=
+=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+> >On Tue, Oct 24, 2023 at 11:37:59AM +0300, Svyatoslav Ryhel wrote:
 > >
-> > Well, yes and no.  Given the brief summary here, I bet this was just
-> > like when phy-mode and am335x platforms had DT compatibility broken and
-> > the answer was that it was OK because the DT was incorrectly describing
-> > hardware. So this is the reminder that there are cases of breaking DT
-> > compatibility that are allowed. Even if the DT has been out (and wrong)
-> > for several years.
+> >> UCLASS_PMIC may have GPIO children without exposed fdt node,
+> >> in this case if requesting fails, check if uclass is PMIC.
+> >> If so, iterate through its children to find correct device.
+> >>=20
+> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> >> ---
+> >>  drivers/gpio/gpio-uclass.c | 19 ++++++++++++++++---
+> >>  1 file changed, 16 insertions(+), 3 deletions(-)
+> >>=20
+> >> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+> >> index 7aece85a70..a3fc470a5d 100644
+> >> --- a/drivers/gpio/gpio-uclass.c
+> >> +++ b/drivers/gpio/gpio-uclass.c
+> >> @@ -1143,9 +1143,22 @@ static int gpio_request_tail(int ret, const cha=
+r *nodename,
+> >>  		ret =3D uclass_get_device_by_ofnode(UCLASS_GPIO, args->node,
+> >>  						  &desc->dev);
+> >>  		if (ret) {
+> >> -			debug("%s: uclass_get_device_by_ofnode failed\n",
+> >> -			      __func__);
+> >> -			goto err;
+> >> +			struct udevice *pmic;
+> >> +			ret =3D uclass_get_device_by_ofnode(UCLASS_PMIC, args->node,
+> >> +							  &pmic);
+> >> +			if (ret) {
+> >> +				log_err("PMIC device get failed, err %d\n", ret);
+> >> +				goto err;
+> >> +			}
+> >> +
+> >> +			device_foreach_child(desc->dev, pmic) {
+> >> +				if (device_get_uclass_id(desc->dev) =3D=3D UCLASS_GPIO)
+> >> +					break;
+> >> +			}
+> >> +
+> >> +			/* if loop exits without GPIO device return error */
+> >> +			if (device_get_uclass_id(desc->dev) !=3D UCLASS_GPIO)
+> >> +				goto err;
+> >>  		}
+> >>  	}
+> >>  	ret =3D gpio_find_and_xlate(desc, args);
 > >
-> > That's not the main point of this thread and I don't want to derail
-> > things further along this point, I just want to note that the details
-> > here reminded me of when things are allowed to be incompatible with
-> > previous trees.
-> >
->
+> >This needs to check for DM_PMIC or so as it leads to a lot of size
+> >increase and one failure to link due to running out of space now.
+>=20
+> Thanks for checking! I will look into it deeper to reduce the size inflat=
+ion, not sure though why it occurs at all.
 
-Unfortunately I was off the list for a week or so, but I see this one
-so will reply here.
+Note that it's not a huge inflation (it's 128 bytes), but for every
+board that includes this file, in SPL, it grows that much, and then
+sometimes might also be "and now we pull in funcX" as well.
 
-> You are conflating things:
->
-> The EFI variable is a hint to the GRUB OS to find the correct
-> device-tree file without scanning hundreds of device-tree. You can not
-> build a compatibility check for it into U-Boot.
+--=20
+Tom
 
-Actually we can...and I think that is what we should do.
+--yLhvnR/A1GkbJ17m
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
-> In distro-boot we are using the same value from environment variable
-> $fdtfile. Here you could check the compatible string but this might
-> break booting .
+-----BEGIN PGP SIGNATURE-----
 
-We need to figure that point out. The compatible string is
-programmatically is defined to be correct, so it is the filename that
-may/may not be useful. What am I missing?
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVFTisACgkQFHw5/5Y0
+tyzFhwv+NxLCm8V0ZZjlgOObABk7BzeBOdC5P8LFcbP6VXZWwpt3ZH9taavBVOms
+pDh8jJuanN3LiFrpz8p4slaFJSDpuHlOYthvOdZvCcUsl2+8isXdfqHo0GRLLbO2
+UWMroZI9J1aytv8EGJkMXNyOnjsaHQ39L/KEWQ1NLH4ROhKLjrCcfN0c8UlxkRw7
+IxatnjKbguSaVhcSbmyRKN1i9qmjhNzWPWmLf+PdHTyImyojIWy83179W98xWVU1
+jMrjXwXrQKBsApL3zh/4j+ZWvWWsyJKu6g3SVxWpHeAGLAPvPwa3i9Ts1X4Sj4CL
+eDZCYrC6BuEve74v33ZC5PkBAyzWp9RkgZb04RMGvSECuzpsrDk6Res3FmCVJ2AE
+Dp0Th2BDAroAXHb6nT4hlPTalRrYiQ6p4ciT3LTbATmEC8yr2ccX84qslg+S8KrJ
+FxZ/cu3/hgMU5E1E6ngxf7YlfkYB73Z1qqsocWHHDg80y7a3zVEIE3+4wEmPmVbo
+xb0IY5Xx
+=zfof
+-----END PGP SIGNATURE-----
 
-For distro-boot, do you mean the scripts? We are trying to deprecate
-those. Of course we have brought in all the same work-arounds, etc.,
-but with bootstd we can start to clean things up, I hope.
-
-So let's think about how we can have U-Boot choose the right DT to boot with.
-
-Regards,
-Simon
+--yLhvnR/A1GkbJ17m--
