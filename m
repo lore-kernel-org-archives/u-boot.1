@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FD78C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 22:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F54C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 22:47:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D673870F4;
-	Fri,  3 Nov 2023 23:45:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 95B848745B;
+	Fri,  3 Nov 2023 23:47:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="t7xFP8NA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cNItZirF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6953587239; Fri,  3 Nov 2023 23:45:12 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5CC4F87468; Fri,  3 Nov 2023 23:47:48 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99C00870A4
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 23:45:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27B2A86FA5
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 23:47:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A3MitAC037246;
- Fri, 3 Nov 2023 17:44:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699051495;
- bh=SsawWVptl5EGGOLo/bchWl6oyUpZuY9okH8ZdsZMrGo=;
- h=From:To:CC:Subject:Date;
- b=t7xFP8NA6bDRBBns6fb1AmFRoz/ET2T8gQmwT9iyl4Fp3EgBYupaNepjbejxW4LDI
- 924EXDGNR4iTPUt6vQa739N9NizH8ZwVObPzY3YlQyJFvz4MzDCzRdiK8VhJg6tUAl
- kSD+M5TjJ56aLxXrmgZObW2dU3LPj6ALv6zJzzKw=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A3Mit6p025191
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 3 Nov 2023 17:44:55 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
- Nov 2023 17:44:55 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 3 Nov 2023 17:44:55 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A3MitSI003668;
- Fri, 3 Nov 2023 17:44:55 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Francesco Dolcini <francesco@dolcini.it>, Andrew Davis <afd@ti.com>
-Subject: [PATCH] arm: mach-k3: Move K3 degenerate keys out of board folder
-Date: Fri, 3 Nov 2023 17:44:53 -0500
-Message-ID: <20231103224453.3264313-1-nm@ti.com>
-X-Mailer: git-send-email 2.40.0
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5845b7ee438so431963eaf.1
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 15:47:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699051665; x=1699656465; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nnx5yCMY7UVwOWi8MtMC1arMe2QcymGZX1Li9gSRpOE=;
+ b=cNItZirFwtRDts0L2T+/bjwybZ2uX9/1LpQsliFKD3Lod/9OfZ0s5rMC/BcFk751dW
+ nPGJjH+uzRjxcmMucX/oj1vEdXg2H/L1gMmuubwi60woA/yY6MwqaXGI2SguOUJzwxcq
+ N07w7XDJQsM/qEfBkpFeokDHLSj/bEJqHBA7uIpmrsumhQEohiWukPlfOmhRh+toPupV
+ pMCnRvBGW2DiT7CHomlHDcOtovkiO8FDAgug3Ev6asQg86GNqPvOObliN7BzKTGCYjxt
+ WbHW2dytoNdpmstcW/urDnuL9F9xAjT0gEtUqNUyXHpVW24dh8wDqfZ1aI9czgvaPmq/
+ RT1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699051665; x=1699656465;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nnx5yCMY7UVwOWi8MtMC1arMe2QcymGZX1Li9gSRpOE=;
+ b=uSg8B3fWaKsO+URQTshwC6iuhJPWtC1MlmXqFqf2T088oS6iD0v3fMizpgKp9kJv+w
+ +VK3r3RCqhrUALX8iRAIVz/zXB1Eet576UV5e3aR37MxrX7UIdaSF/4lPRh/EcMy8VBg
+ lNKw6eIC465jdxMrAgXmMavafnnYDZW1vVA7YLDT8eWI9bortTQ/0jcvhbLbVNRA6XvW
+ JFrxu29IMrL1bRwQ4sgMdXrZfMHyPnDY/Ig7hrCH+WSs9WmqkeND2rSrCvN5VDVJ6m2a
+ vPwbo1vs1PaFpAFwkiyevc1NzkQNuQVGlD54kPV6NXMYlOSAv6fvriUXFADw6NuGUu+x
+ LthA==
+X-Gm-Message-State: AOJu0Yz8ujp/j5n6YyKoYd/4vxRN1xY/O9UV/RT+0PZl7eiXvnCIjNFN
+ 9Hukwk0fI++Kv1CchhCWIwwK8PSAjUw=
+X-Google-Smtp-Source: AGHT+IFTiqtfLwEeaaLNnG5bIcVCZLbTsoYqVMZEpA+8ynYZulUFFabcIP0k52UximGmQSSd6ZQQ6g==
+X-Received: by 2002:a05:6830:390a:b0:6c0:c1ba:8f78 with SMTP id
+ br10-20020a056830390a00b006c0c1ba8f78mr25380789otb.0.1699051664731; 
+ Fri, 03 Nov 2023 15:47:44 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b4e9:3424:1f72:d6d3])
+ by smtp.gmail.com with ESMTPSA id
+ c21-20020a05622a025500b004180fdcb482sm1080805qtx.81.2023.11.03.15.47.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Nov 2023 15:47:44 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] pico-imx7d: Remove board_phy_config()
+Date: Fri,  3 Nov 2023 19:47:33 -0300
+Message-Id: <20231103224733.59410-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,57 +89,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file is common for all of K3, move it out of board/ directory and
-into mach-k3. And change the relative paths to absolute paths in the
-binman paths.
+From: Fabio Estevam <festevam@denx.de>
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
+With Ethernet DM in place, there is no longer the need for having
+the board_phy_config() anymore.
+
+Remove it.
+
+Tested on imx7d-pico-pi board:
+
+=> setenv autoload no
+=> dhcp
+BOOTP broadcast 1
+*** Unhandled DHCP Option in OFFER/ACK: 42
+DHCP client bound to address 192.168.0.138 (138 ms)
+=> tftp zImage
+Using ethernet@30be0000 device
+TFTP from server 192.168.0.16; our IP address is 192.168.0.138
+Filename 'zImage'.
+Load address: 0x80800000
+Loading: #################################################################
+....
+	 #################################################################
+	 ##########
+	 4.3 MiB/s
+done
+Bytes transferred = 9034120 (89d988 hex)
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
-Cc: Neha Malcom Francis <n-francis@ti.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: Francesco Dolcini <francesco@dolcini.it>
-Cc: Andrew Davis <afd@ti.com>
+ board/technexion/pico-imx7d/pico-imx7d.c | 26 ------------------------
+ 1 file changed, 26 deletions(-)
 
-Similar to the patch https://lore.kernel.org/all/20231101183329.65091-1-afd@ti.com/
-
- arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi         | 2 +-
- arch/arm/dts/k3-binman.dtsi                               | 2 +-
- {board/ti/keys => arch/arm/mach-k3}/ti-degenerate-key.pem | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename {board/ti/keys => arch/arm/mach-k3}/ti-degenerate-key.pem (100%)
-
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-index b489d8afbe36..a6d7c2df20e0 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-@@ -10,7 +10,7 @@
- };
+diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/pico-imx7d/pico-imx7d.c
+index 6e98b85b2873..5def6eda43e5 100644
+--- a/board/technexion/pico-imx7d/pico-imx7d.c
++++ b/board/technexion/pico-imx7d/pico-imx7d.c
+@@ -101,32 +101,6 @@ static int setup_fec(void)
  
- &dkey_pem {
--	filename = "../../ti/keys/ti-degenerate-key.pem";
-+	filename = "arch/arm/mach-k3/ti-degenerate-key.pem";
- };
+ 	return set_clk_enet(ENET_125MHZ);
+ }
+-
+-int board_phy_config(struct phy_device *phydev)
+-{
+-	unsigned short val;
+-
+-	/* To enable AR8035 ouput a 125MHz clk from CLK_25M */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
+-
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, 0xe);
+-	val &= 0xffe7;
+-	val |= 0x18;
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, val);
+-
+-	/* introduce tx clock delay */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x5);
+-	val = phy_read(phydev, MDIO_DEVAD_NONE, 0x1e);
+-	val |= 0x0100;
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, val);
+-
+-	if (phydev->drv->config)
+-		phydev->drv->config(phydev);
+-
+-	return 0;
+-}
+ #endif
  
- #ifdef CONFIG_TARGET_VERDIN_AM62_R5
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 0212d44ee3b2..af0f83100bd5 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -20,7 +20,7 @@
- 	ti-degenerate-key {
- 		filename = "ti-degenerate-key.pem";
- 		dkey_pem: blob-ext {
--			filename = "../keys/ti-degenerate-key.pem";
-+			filename = "arch/arm/mach-k3/ti-degenerate-key.pem";
- 		};
- 	};
- };
-diff --git a/board/ti/keys/ti-degenerate-key.pem b/arch/arm/mach-k3/ti-degenerate-key.pem
-similarity index 100%
-rename from board/ti/keys/ti-degenerate-key.pem
-rename to arch/arm/mach-k3/ti-degenerate-key.pem
+ static void setup_iomux_uart(void)
 -- 
-2.40.0
+2.34.1
 
