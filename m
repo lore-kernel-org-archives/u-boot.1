@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF3EC4167D
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 13:34:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1017EC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 13:42:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42F66870EF;
-	Fri,  3 Nov 2023 14:34:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C73186FD8;
+	Fri,  3 Nov 2023 14:42:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="umqYbDc1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WuBEj4X+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BAC8871B2; Fri,  3 Nov 2023 14:34:41 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id E002686F56; Fri,  3 Nov 2023 14:42:20 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B6B870EF
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 14:34:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7033086FD8
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 14:42:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-32faea0fa1fso1010308f8f.1
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 06:34:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-77774120c6eso113467485a.2
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 06:42:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1699018477; x=1699623277;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=zViyrKbhex3njpbNg9nGg8wtU7F4cgj/57h4o+ONlP4=;
- b=umqYbDc1OTT9tpTHGUDyEn1O6Exi4HXc/85pNUsA0nUp8Vnq57AvhgnkuCNhvW/VPj
- hB18F0qQE0Y+bw85fKSRh3lQA97goRhxC+McSkt750tpYrL7k8vTFp4MWkitbVlBpqN2
- SUP3ZnF2gZkJV+OYE0jTmntLSO3eE7eBMrjnAb8uKxss2x2dW+5U8mHbckDcNwj4mGvu
- +v0zhv1mymnwrDgnLEKjzOmj6kVG9YHjg8LTHNhmIEyqqlu62DjoHSeo79tuLvNKl69y
- hpsjVTWOTUb2N3jomVa8E3mqbOuAMdU7X36fwiUL3En0Xp/oEcnWwxsBUciYpHizX0ck
- vOAw==
+ d=konsulko.com; s=google; t=1699018935; x=1699623735; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kZ6d8lvutkBOg8izvY5fRAOnhVN8x6SqifJxJ0HKM6U=;
+ b=WuBEj4X+G7yYtbkozjG3Zg+pcmGr89V86nX/ccYwyWTivccBrHeegZ+MZw75ZHS7Pw
+ JbEZjP2K5ejeYad6H9xHjVsOK/lTpoyMDJR+54GUntpCtpg+7JkPxHkXdLr7DsokV2gu
+ xSaob6DqiaUJFMzeFUyzcUKog5C2Zw5WEGHNc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699018477; x=1699623277;
- h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zViyrKbhex3njpbNg9nGg8wtU7F4cgj/57h4o+ONlP4=;
- b=sfAf0TtCaGlJUU3gC+Q0VE+/dEKLEYC3yVlURttjUlc3Pa0gpR6kfM2tZaAmo3+mFq
- pPTChveNEi2slF0jzsaisAoLWNlWCyh02oTa3FjdJbdBcPoKsELeJCKGmIalaHClkjtD
- zD244+l4Q4ZkKlvY3lqbJCndQPEHRw4WXQgq2mCL+SXkj5OiInF9xzPM/skjfmhejjQB
- MLrUt0E/inqaFgesan8uJlNuYUX6V8ICjBGQHERw2qvpDSBI5D4XNB3gykPfuLxnFEIz
- 3g3QMd0I8hoob6w/WXsCmmNTxmIin09BHGrcyyGkOZcwqyHjHtri/xGrAYFKsLONecCt
- fSUw==
-X-Gm-Message-State: AOJu0YzpI+OVp3kYwxyv+WnEDeI+LiIAHqYrdcVCQbM5UgkBmLShIQXF
- O7JXw9rGU+BDvLSnof7vtlZqLjCISOa6xXakZxA=
-X-Google-Smtp-Source: AGHT+IGyjD92odW6+OyxUUw3L7hPD3UuRp0QRkK9wuFSsFemtY7hqYb06Qr3VBm64GvjrQ8swIUl+A==
-X-Received: by 2002:a5d:6da7:0:b0:32f:952f:c51c with SMTP id
- u7-20020a5d6da7000000b0032f952fc51cmr3112670wrs.18.1699018476270; 
- Fri, 03 Nov 2023 06:34:36 -0700 (PDT)
-Received: from localhost ([2a01:cb19:85e2:8300:dbea:ecb8:b89e:dd0f])
- by smtp.gmail.com with ESMTPSA id
- t6-20020a5d49c6000000b0031aef72a021sm1863124wrs.86.2023.11.03.06.34.35
+ d=1e100.net; s=20230601; t=1699018935; x=1699623735;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kZ6d8lvutkBOg8izvY5fRAOnhVN8x6SqifJxJ0HKM6U=;
+ b=ccRr90fys8z26TfT9nut3lwN1Q5HR5/xo/0Er3R5ILmJeFjANfT8UlcZqEbbJLetDI
+ FnE9dNMhkiyV4VPmlDEHQN+G9S6NwT5ImUK/40yfTtO8bejtXk6vy3mHTEn1xHaAfNOf
+ r4S7r5clFBDRM8fqNzqyOAPYwuxszS+YRAErfpgEEH19tHFt3E6bZoIV4NhFGl85DWGh
+ ketCJl+0cXRm3BZwiozlRSbpWA5lRk6h0wvqlVZKGMVA3UmJbrDhfMpXGHuogZcI9Dia
+ 1yxXXUh2M74M4D34Nl4V9+fYY0olXZ7R/1wpCUj0tnBCmjhZlurqulMFz6v/fuPPyHae
+ fIhQ==
+X-Gm-Message-State: AOJu0Yw5u9lYBEb1mpwcAai/zYv+4apNJtQlLyj1kSMl8wVlP02mAMFJ
+ 0f/Ahi552kXtLkYUDLzdKlNx0w==
+X-Google-Smtp-Source: AGHT+IEPMS2pe3f0UwV2HgMEq04IEOttrDmgL7Q2w9Qq2NyjZHXwOqQ+RiVwS6VPeMLMssI132oFHg==
+X-Received: by 2002:a05:620a:4144:b0:773:f6b6:4085 with SMTP id
+ k4-20020a05620a414400b00773f6b64085mr26613299qko.54.1699018935121; 
+ Fri, 03 Nov 2023 06:42:15 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ t6-20020a05620a004600b007743446efd1sm739922qkt.35.2023.11.03.06.42.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 06:34:35 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-dfu-20231103
-Date: Fri, 03 Nov 2023 14:34:35 +0100
-Message-ID: <87v8ajm044.fsf@baylibre.com>
+ Fri, 03 Nov 2023 06:42:14 -0700 (PDT)
+Date: Fri, 3 Nov 2023 09:42:12 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-dm
+Message-ID: <20231103134212.GO496310@bill-the-cat>
+References: <CAPnjgZ1QEypD08Py_9k=upHF2SqO3wZ7h5uVT0Pz2qza=a4J1g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dJj/PLkcOA3ZTzOM"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1QEypD08Py_9k=upHF2SqO3wZ7h5uVT0Pz2qza=a4J1g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,45 +90,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Here is my first pull request of u-boot-dfu which includes:
+--dJj/PLkcOA3ZTzOM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-- Fix CRC chunk size in fastboot
-- Make size optional for dfu on mmc
+On Thu, Nov 02, 2023 at 10:54:31PM +0000, Simon Glass wrote:
 
-The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/18433
+> Hi Tom,
+>=20
+> Just various bugfixes, apart from the TI one
+>=20
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/3227baad05481=
+e37d75aeae7c7c1467fd6903f7d
+>=20
+> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D54&view=
+=3Dresults
+> (not finished yet)
+>=20
+>=20
+> The following changes since commit 07fe79c93c5caba181f37844ca95fbda4db3f6=
+13:
+>=20
+>   Merge tag 'i2cfixes-for-v2024-01-rc2' of
+> https://source.denx.de/u-boot/custodians/u-boot-i2c (2023-11-02
+> 10:12:33 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-pull-2nov23
+>=20
+> for you to fetch changes up to 3227baad05481e37d75aeae7c7c1467fd6903f7d:
+>=20
+>   u_boot_pylib: Ensure subprocess is closed down (2023-11-02 09:38:54 -06=
+00)
+>=20
 
-Thanks,
-Mattijs
+Applied to u-boot/master, thanks!
 
-The following changes since commit cbba1b7766bd93d74e28202c46e69095ac13760b:
+--=20
+Tom
 
-  Merge branch '2023-10-30-assorted-general-updates' (2023-10-30 16:01:54 -0400)
+--dJj/PLkcOA3ZTzOM
+Content-Type: application/pgp-signature; name="signature.asc"
 
-are available in the Git repository at:
+-----BEGIN PGP SIGNATURE-----
 
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20231103
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVE+LEACgkQFHw5/5Y0
+tyx4pwv/fcIkUYkl/F6yuxR+7/r/2lTjzor52+FdQ7Nbtdhr7Fvd/7LpVDzpaRU/
+I5EhK5x8nl5s0cWP5hok84UFJV7xkhcZuVdWpbczDt4+pCQrgH5uLoAiJXjt7taE
+aZqztfdyCrNHC6JMWowaJ7Omy5UADotx3g28dGSpcNxZ3vbv30FUFm6K5hnc4hLk
+fSKylJp/SJ8g5OhpRugigCSxn42lu7v6AsNIO30yv3murffTO7apctK1q5y2/Qqt
+plptnELE0Opgp+xcvyg0FOWdG0q8yPaxQpS24O6FXPeJBRVxAYnv1XpO/JoJW3Xs
+jDvR++rMVmqHjzlC/sdij74nOUVZ2LwqNGJlxwtfxvVOfJkTW1UrBrioMqz9TcGg
+Y9+xaTtuLriQluojpvgC+800kZc/HAvjzpMSUX/jTIL4I19h+wYLqTOsTVtD17pq
+7WYqv0/xl73pRyK2iqzKYi8Y1hfVkNTgFcla/7h5ZeYutXqwWimGecHEMLvV6AlZ
+WJB/i0Go
+=Z16/
+-----END PGP SIGNATURE-----
 
-for you to fetch changes up to 60d904a494c6e89c323bc13fa9348869e07e86d3:
-
-  dfu: mmc: Add support for exposing whole mmc device (2023-10-31 14:53:05 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20231103
-
-- Fix CRC chunk size in fastboot
-- Make size optional for dfu on mmc
-
-----------------------------------------------------------------
-Marek Vasut (1):
-      dfu: mmc: Add support for exposing whole mmc device
-
-Wojciech Nizinski (1):
-      fastboot: fix CRC32 chunk size checking
-
- doc/usage/dfu.rst     |  5 +++++
- drivers/dfu/dfu_mmc.c | 10 ++++++++++
- lib/image-sparse.c    |  4 ++--
- 3 files changed, 17 insertions(+), 2 deletions(-)
-
+--dJj/PLkcOA3ZTzOM--
