@@ -4,56 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A629EC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 12:40:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FB0C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 13:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9282F87150;
-	Fri,  3 Nov 2023 13:40:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=poczta.fm
+	by phobos.denx.de (Postfix) with ESMTP id 5B1FA86F56;
+	Fri,  3 Nov 2023 14:31:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=poczta.fm header.i=@poczta.fm header.b="pAt7lu7K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HTgPS16Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5F228743A; Fri,  3 Nov 2023 11:30:27 +0100 (CET)
-Received: from smtpo26.interia.pl (smtpo26.interia.pl [217.74.67.26])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5228B86F81; Fri,  3 Nov 2023 14:31:40 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC7A986BD4
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 11:30:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=poczta.fm
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sst@poczta.fm
-Received: from nr200 (unknown [80.68.225.159])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
- (No client certificate requested)
- by poczta.interia.pl (INTERIA.PL) with ESMTPSA;
- Fri,  3 Nov 2023 11:30:21 +0100 (CET)
-Date: Fri, 3 Nov 2023 11:30:20 +0100
-From: Slawomir Stepien <sst@poczta.fm>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: inindev@gmail.com, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] rockchip: rk3588: Add SPINAND as boot device
-Message-ID: <ZUTLvIgPDtJqg2vI@nr200>
-References: <20231031161327.1104885-1-sst@poczta.fm>
- <775cde64-e33d-48e8-907f-6dbc611a3a50@kwiboo.se>
- <f8152606-c139-4fc4-a4ac-e12b11b30608@rock-chips.com>
- <ZUS-uMc7p8xHlISM@nr200>
- <6e1b6efd-8376-4435-acd9-99bb27ff6fac@kwiboo.se>
+ by phobos.denx.de (Postfix) with ESMTPS id 5DCF386F35
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 14:31:36 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-32f78dcf036so1923477f8f.0
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 06:31:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1699018296; x=1699623096; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mYDpuhK8kmv5UTyAi9/NmEHUcBnrCsAkAjSF5VlRnik=;
+ b=HTgPS16QYAKk2t7ERQk2WyA/0K6pcki5zddh2vybkLhBS3A3HcTHtdH9rqSezDvl9E
+ b9fJDP2C7jMTWM37P0t5xbE7kjCMBoD8OWanOkMmrUyPMW9fDgCENbdtAp8XxzAc5vtw
+ aDSsnAr31nDqZEwFabsvp48S4OPQ8ts67F7s9oZRn5Qp+PgJDbEEKTP0oTFJW18wZ4Lm
+ 3CS1m4ErM40vFY0HGqVdnmZ44yzw88MPYGwfEinnXm7penPQ8cA5ago5EdXNY+FoOwG2
+ JDlX84xTiem18cQJecTcF3e3U4lmqN3qm8aUrIQiH3a0gX38CRDue+UCgDOA+Lh7zTI3
+ T/zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699018296; x=1699623096;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mYDpuhK8kmv5UTyAi9/NmEHUcBnrCsAkAjSF5VlRnik=;
+ b=qgq7mFft0FgfFB3me55BCzYF3X6tbv/so7sMEVoJ+xEg6SVTmGbiIwBTDz933quOT7
+ BYAhpz5TNdz/BT19x/GfoMYFfpr75CJ2V4tPOfvMl4A3QnOvpdnG5BwzKRmTzQMovmXV
+ dxngticJQEY11LGjegp096P4qMWRnJrvqJvME7wusuVpAudaoFqea4abIgXglfxS0l4s
+ 9Abytd4AndeLOOEKBDpycxztN45rYenqwXiYmZF0YuHkjGOudpO6HH2YBtZMjXM1eY7L
+ cTaIT7JFd13IRsabghXVj6Z5aGWQYRkLmXFnQ2GvEn1BcmA1nWNIuhgvKDldinWnGxAl
+ sM0Q==
+X-Gm-Message-State: AOJu0YzAQyNbNuygGhMfnNiWHaeswCBRHXGZl9ZBJNAJb3/3R+lGAzOy
+ +Tw0dI7+0riLsh5D2U0q6/xcjw==
+X-Google-Smtp-Source: AGHT+IGRgVqDHcug2X24SycsD9l/ckaRj5+5e5bLpJQqyy4Puk2xjhZJDYRixCJnPAdsNpOva/YDlQ==
+X-Received: by 2002:a05:6000:1846:b0:32d:8a7c:6efc with SMTP id
+ c6-20020a056000184600b0032d8a7c6efcmr3222642wri.9.1699018295776; 
+ Fri, 03 Nov 2023 06:31:35 -0700 (PDT)
+Received: from [192.168.1.7] (host-92-25-138-185.as13285.net. [92.25.138.185])
+ by smtp.gmail.com with ESMTPSA id
+ k17-20020adfb351000000b003143c9beeaesm1890275wrd.44.2023.11.03.06.31.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 03 Nov 2023 06:31:35 -0700 (PDT)
+Message-ID: <8f74ab2e-2111-4fb0-8cac-7be1566cfe0c@linaro.org>
+Date: Fri, 3 Nov 2023 13:31:34 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <6e1b6efd-8376-4435-acd9-99bb27ff6fac@kwiboo.se>
-X-IPL-Priority-Group: 0-0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poczta.fm; s=dk;
- t=1699007423; bh=KI/M0gfGhfT6hCGkWyF3W4gMQzNSHN15OvrjmukrePw=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type;
- b=pAt7lu7KsViv7rSF/IfDiIwFht1rTq68BBFHH2OMZFW+o0MkgwGrwR/5wqYlXRUs2
- i4t8i2xqTtwhJ6CFF+q1fvTB/k4m8z9dsBGVvqKX5hT0rnXW2REm8syRR67J7Zqr0S
- GScHIruU+YoVTo7sypZX7fUPVJ0Fnepj2XczHiFs=
-X-Mailman-Approved-At: Fri, 03 Nov 2023 13:40:20 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] MAINTAINERS: update Qualcomm maintainer
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de
+References: <20231031-b4-qcom-maintainer-v1-1-d905d73d8cab@linaro.org>
+ <CAFA6WYP=RU2o4mYdmqYLnOxXLFgnp1L0S5oPYNgXsBPtaOhyUQ@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYP=RU2o4mYdmqYLnOxXLFgnp1L0S5oPYNgXsBPtaOhyUQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,146 +96,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On lis 03, 2023 11:03, Jonas Karlman wrote:
-> On 2023-11-03 10:34, Slawomir Stepien wrote:
-> > Hi Jonas and Kever
-> > 
-> > Thanks for clarifying the situation Kever! Please see below my proposition. What do you think?
-> 
-> Yes, this matches my proposition at [1], and I have a series queued now
-> that we have gotten the answer.
-> 
-> Have included your commit to enable ROCKCHIP_SPI_IMAGE on Orange Pi 5
-> Plus, John Clark's commit to enable on NanoPC-T6 my own to enable on
-> Orange Pi 5.
-> 
-> Should hit the list later today after full runtime testing.
 
-Lovely, thank you! I have read all your comments from below. I'm trusting your judgment.
 
-> > On lis 02, 2023 15:27, Kever Yang wrote:
-> >> Hi Jonas,
-> >>
-> >> On 2023/11/1 00:45, Jonas Karlman wrote:
-> >>> On 2023-10-31 17:13, Slawomir Stepien wrote:
-> >>>> Mark the flash@0 as BROM_BOOTSOURCE_SPINAND.
-> >>>> Fixes use of same-as-spl in u-boot,spl-boot-order prop on Orange Pi 5
-> >>>> Plus.
-> >>>>
-> >>>> Signed-off-by: Slawomir Stepien <sst@poczta.fm>
-> >>>> ---
-> >>>>   arch/arm/mach-rockchip/rk3588/rk3588.c | 1 +
-> >>>>   1 file changed, 1 insertion(+)
-> >>>>
-> >>>> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> >>>> index b1f535fad5..0c8f10a97c 100644
-> >>>> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> >>>> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> >>>> @@ -42,6 +42,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
-> >>>>   	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
-> >>>>   	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
-> >>>>   	[BROM_BOOTSOURCE_SPINOR_RK3588] = "/spi@fe2b0000/flash@0",
-> >>>> +	[BROM_BOOTSOURCE_SPINAND] = "/spi@fe2b0000/flash@0",
-> >>> This is not correct, please see [1] for an open discussion on this issue.
-> >>>
-> >>> Kever: Do you have any more insights into the question on [1].
-> >>
-> >> As I reply in another mail, the FSPI M0~M2 is all the option for SPI
-> >> NAND/NOR in rk3588.
-> > 
-> > So based on that info, something like this?:
-> > 
-> > 1. BROM_BOOTSOURCE_SPINAND - removed (not used at all).
+On 02/11/2023 11:49, Sumit Garg wrote:
+> On Tue, 31 Oct 2023 at 20:49, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> As Ramon has been inactive for some time now, add myself and Neil
+>> Armstrong to maintain Qualcomm efforts going forwards.
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>> I greatly appreciate the work done by Ramon Fried in keeping Qualcomm
+>> support alive in U-Boot the last few years. However it's clear that
+>> he hasn't been very active for some time now.
+>>
+>> I am currently working on a large cleanup effort to modernise Qualcomm
+>> support and enable several new reference platforms. To better facilitate
+>> this and to handle Qualcomm support going forwards, make myself maintainer
+>> of ARM SNAPDRAGON as well as my colleague Neil Armstrong (Amlogic
+>> maintainer).
 > 
-> Should not be removed, because this is still valid for old generation
-> SoCs.
+> Thanks Caleb and Neil for stepping up here. Although I won't be doing
+> any major development in the near future, I would like to keep an eye
+> on the Qcom platforms I maintain as of now. So you can add me as a
+> reviewer here if that's fine with you.
+
+Definitely, I'll include you. Thanks Sumit
 > 
-> > 2. BROM_BOOTSOURCE_SPINOR_RK3588 - removed (not needed after this patch).
+> -Sumit
 > 
-> Yes, this should be replaced with FSPI_M2.
-> 
-> > 3. Updated also the rk3568.c since it also has FSPI M0 (only this one mux), so I would assume it
-> > will be value of 3 there too.
-> 
-> No need to change this, the RK356x does not have iomux on fspi, so lets
-> treat this as an old generation SoCs.
-> 
-> > 4. The BROM_BOOTSOURCE_SPINOR is still there, since the rk3399 does not use the FSPI (that is my
-> > understanding after checking the TRM doc).
-> 
-> Agreed, should not be changed for same reasons as SPINAND.
-> 
-> > 
-> > diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > index 7dab18fbc3..9f16d28aec 100644
-> > --- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > +++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > @@ -46,9 +46,10 @@ enum {
-> >  	BROM_BOOTSOURCE_NAND = 1,
-> >  	BROM_BOOTSOURCE_EMMC = 2,
-> >  	BROM_BOOTSOURCE_SPINOR = 3,
-> > -	BROM_BOOTSOURCE_SPINAND = 4,
-> > +	BROM_BOOTSOURCE_FSPI_M0 = 3,
-> > +	BROM_BOOTSOURCE_FSPI_M1 = 4,
-> >  	BROM_BOOTSOURCE_SD = 5,
-> > -	BROM_BOOTSOURCE_SPINOR_RK3588 = 6,
-> > +	BROM_BOOTSOURCE_FSPI_M2 = 6,
-> >  	BROM_BOOTSOURCE_USB = 10,
-> >  	BROM_LAST_BOOTSOURCE = BROM_BOOTSOURCE_USB
-> >  };
-> > diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> > index 69ef19cc85..ccb63c6a88 100644
-> > --- a/arch/arm/mach-rockchip/rk3568/rk3568.c
-> > +++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
-> > @@ -83,7 +83,7 @@ static struct mm_region rk3568_mem_map[] = {
-> >  
-> >  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
-> >  	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe310000",
-> > -	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe300000/flash@0",
-> > +	[BROM_BOOTSOURCE_FSPI_M0] = "/spi@fe300000/flash@0",
-> >  	[BROM_BOOTSOURCE_SD] = "/mmc@fe2b0000",
-> >  };
-> >  
-> > diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> > index b1f535fad5..c36f783d29 100644
-> > --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
-> > +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
-> > @@ -39,9 +39,10 @@ DECLARE_GLOBAL_DATA_PTR;
-> >  
-> >  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
-> >  	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe2e0000",
-> > -	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
-> > +	[BROM_BOOTSOURCE_FSPI_M0] = "/spi@fe2b0000/flash@0",
-> >  	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
-> > -	[BROM_BOOTSOURCE_SPINOR_RK3588] = "/spi@fe2b0000/flash@0",
-> > +	[BROM_BOOTSOURCE_FSPI_M1] = "/spi@fe2b0000/flash@0",
-> > +	[BROM_BOOTSOURCE_FSPI_M2] = "/spi@fe2b0000/flash@0",
-> 
-> Fully agree with this change, and have made same/similar. However, the
-> logic for boot_devices will possible have to be changed/updated if there
-> is a board using SPI NAND with a different node name in the future.
-> 
-> Regards,
-> Jonas
-> 
-> >  };
-> >  
-> >  static struct mm_region rk3588_mem_map[] = {
-> > 
-> >>> Is my assessment about the value BootRom writes to bootsource reg
-> >>> correct, see [1]?
-> >>>
-> >>> - FSPI (M0): 3
-> >>> - FSPI (M1): 4
-> >>> - FSPI (M2): 6
-> >>>
-> >>> [1] https://lore.kernel.org/u-boot/b82c02c0-0a37-8553-f498-b03f85394d59@kwiboo.se/
-> >>>
-> >>> Regards,
-> >>> Jonas
-> >>>
-> >>>>   };
-> >>>>   static struct mm_region rk3588_mem_map[] = {
+>>
+>> I hope Ramon continues to participate in discussions and reviews going
+>> forward.
+>> ---
+>> base-commit: cbba1b7766bd93d74e28202c46e69095ac13760b
+>>
+>> // Caleb (they/them)
+>> ---
+>>  MAINTAINERS | 3 ++-
+>>  1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index cde778bc4d3d..be3666d14047 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -567,7 +567,8 @@ S:  Supported
+>>  F:     arch/arm/dts/am335x-sancloud*
+>>
+>>  ARM SNAPDRAGON
+>> -M:     Ramon Fried <rfried.dev@gmail.com>
+>> +M:     Caleb Connolly <caleb.connolly@linaro.org>
+>> +M:     Neil Armstrong <neil.armstrong@linaro.org>
+>>  S:     Maintained
+>>  F:     arch/arm/mach-snapdragon/
+>>  F:     drivers/gpio/msm_gpio.c
+>>
 
 -- 
-Slawomir Stepien
+// Caleb (they/them)
