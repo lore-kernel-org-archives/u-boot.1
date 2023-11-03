@@ -4,91 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCE4C4167D
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 17:42:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF1AC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 17:48:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA3E2870E1;
-	Fri,  3 Nov 2023 18:42:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E7BFD870E1;
+	Fri,  3 Nov 2023 18:48:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BBnsl1cd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QJ1iiWyO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 384AF86E5A; Fri,  3 Nov 2023 18:42:16 +0100 (CET)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 244BC87106; Fri,  3 Nov 2023 18:48:56 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CBF986E09
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 18:42:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3868B86EB5
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 18:48:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3b58d96a3bbso466122b6e.1
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 10:42:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699033329; x=1699638129; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uSSI8UIDZ4FFM093AQoageCJqW/HCKDE9R01HfjCxzg=;
- b=BBnsl1cdePj7lA8zeOAv2QC0UrHMI0+RtWwJFk60kxTeu3TPrIK5TCkoxQ2dVixlXY
- fiq5YjypQC3m1WnL36n/sZFOpi9DM84nExsRoANAt+Ip/g3KfzTlSzI/8wIBBZry+fzw
- AFY+qprnd9nQCSp+oamysK0IMv0iabZkVPqps=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699033329; x=1699638129;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uSSI8UIDZ4FFM093AQoageCJqW/HCKDE9R01HfjCxzg=;
- b=c0Kf/+7mSpyS9Pi9xO/lJ9eNH43Kp+cLMorqzTYHAPDxD0yrPNltwgb969LUbZZdhk
- ZCXzG9TNmv0XR8SL8R0MhSIngMPj8cDBjV2bKDX+PmsWREgnWpD4v0nICTLZXLqR7xs/
- NuB/xTCXPvgSOcjt4/nUKCKY5q9C2HHa2YfcBGHYxAU47s8e9zfw70gf6B3a98/Lvcn6
- izBivNwL0P7/wdwHTzrspddzholEDxXh81q6SMCn0HLAs8l0B5WzqUcT/iwyBDRs24sg
- rs3Sm9/O40oqPsTHB6empvOYMTWyxg/ja/u6nKY8IZSjbs8FpjAl+t+VIIWbf+na7vsF
- HPvQ==
-X-Gm-Message-State: AOJu0Yzst9TZDjk9wHmtX9qRiHwpo01qpl25PY91HLzrgkhsivHCe/Kb
- ndbs9KYT0AqbAgKQefpE697Mpg==
-X-Google-Smtp-Source: AGHT+IG/XGfRKaWfaaLf0bZiZMSA+lisdeElnZN0nzwbl28rajG6suRaI7UXNK6Tgrp9BMWHzvnnlg==
-X-Received: by 2002:aca:f11:0:b0:3ae:5442:ed1b with SMTP id
- 17-20020aca0f11000000b003ae5442ed1bmr21717505oip.43.1699033329163; 
- Fri, 03 Nov 2023 10:42:09 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- l11-20020a05620a0c0b00b00767177a5bebsm909950qki.56.2023.11.03.10.42.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 10:42:08 -0700 (PDT)
-Date: Fri, 3 Nov 2023 13:42:05 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH v2] smbios: arm64: Allow table to be written at a fixed
- addr
-Message-ID: <20231103174205.GQ496310@bill-the-cat>
-References: <20231025123117.v2.1.I054cad60e00f8cfde39256c7c7d9c960987fb9be@changeid>
- <734658D7-8081-44DC-8168-6EBDBA8D951D@gmx.de>
- <CAPnjgZ2ZFSbUYPVq+A1jQBy8s=DOO8Cz+epHGL++KSEN-pr-wA@mail.gmail.com>
- <32facf81-f2bf-460a-9104-cae1dcef0cbe@gmx.de>
- <CAPnjgZ20bRUP7KFwRpe7dmbxbQFMJmHB55dkXpEjv3fyX++M3A@mail.gmail.com>
- <CAPnjgZ1Ao_ikgwPR8-fGVzbBfzRQYm0bxz9LgVHs1FP7+HG3cw@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A3HmK3k022367;
+ Fri, 3 Nov 2023 12:48:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699033700;
+ bh=5G7z9L8/n+kBfBl0AlU/pJxWc+IiZ6kFaQ5/LjfgDNo=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=QJ1iiWyOOkl3c5K1gD2XU3OR90Fi96bfrOMTo9JxsWZrokQOAuSxsWNbhRZuDHI1b
+ CWJ/uNrtd9d9YSArkdiMHwYcJKDn3RMKun6k9rM9VQaE0ZcaUzxPjj0q+kD0xndiPW
+ qZFqhXS/FScu8/1As6ZYUyEPf7vsI6WktZ/xnO6E=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A3HmKMf076007
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 3 Nov 2023 12:48:20 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
+ Nov 2023 12:48:20 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 3 Nov 2023 12:48:20 -0500
+Received: from [10.250.149.140] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A3HmETt028120;
+ Fri, 3 Nov 2023 12:48:15 -0500
+Message-ID: <24320603-e448-11e1-fb80-74db72fb009c@ti.com>
+Date: Fri, 3 Nov 2023 23:18:13 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="u6vsrdzjXYzrPUV+"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1Ao_ikgwPR8-fGVzbBfzRQYm0bxz9LgVHs1FP7+HG3cw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2 1/5] arm: mach-k3: common: Reserve video memory from
+ end of the RAM
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <agust@denx.de>, <trini@konsulko.com>,
+ <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
+ <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>,
+ <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
+ <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>
+References: <20231031131208.435268-1-devarsht@ti.com>
+ <20231031131208.435268-2-devarsht@ti.com>
+ <CAPnjgZ3U_HDUfm+GBDSm44FZFx7n5nrZbM3gHHYkyYj7P2582w@mail.gmail.com>
+Content-Language: en-US
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <CAPnjgZ3U_HDUfm+GBDSm44FZFx7n5nrZbM3gHHYkyYj7P2582w@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,156 +87,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---u6vsrdzjXYzrPUV+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks for the review.
 
-On Fri, Nov 03, 2023 at 11:12:40AM -0600, Simon Glass wrote:
-> Hi,
->=20
-> On Sat, 28 Oct 2023 at 12:41, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > [unfortunately I am not receiving email from the list at present]
-> >
-> > Hi Heinrich,
-> >
-> > On Wed, 25 Oct 2023 at 21:39, Heinrich Schuchardt <xypron.glpk@gmx.de> =
-wrote:
-> > >
-> > > On 10/25/23 04:49, Simon Glass wrote:
-> > > > Hi Heinrich,
-> > > >
-> > > > On Tue, 24 Oct 2023 at 18:22, Heinrich Schuchardt <xypron.glpk@gmx.=
-de> wrote:
-> > > >>
-> > > >>
-> > > >>
-> > > >> Am 25. Oktober 2023 01:31:19 MESZ schrieb Simon Glass <sjg@chromiu=
-m.org>:
-> > > >>> U-Boot typically sets up its malloc() pool near the top of memory=
-=2E On
-> > > >>> ARM64 systems this can result in an SMBIOS table above 4GB which =
-is
-> > > >>> not supported by SMBIOSv2.
-> > > >>>
-> > > >>> Work around this problem by providing a new option to choose an a=
-ddress
-> > > >>> below 4GB (but as high as possible), if needed.
-> > > >>
-> > > >> You must not overwrite memory controlled by the EFI subsystem with=
-out calling its allocator.  We should provide SMBIOS 3. SMBIOS 2 is only a =
-fallback for outdated tools.
-> > > >
-> > > > That is not my intention and I don't believe this code does that. E=
-FI
-> > > > is not running at this point, is it?
-> > >
-> > > The function install_smbios_table() only exists if CONFIG_EFI_LOADER=
-=3Dy.
-> >
-> > That is because ARM devices don't normally need it, right? Anyway,
-> > that option isn't related to this patch. If ARM devices started using
-> > SMBIOS and had another way to pass it to Linux (other than EFI) then
-> > we would want to install it.
-> >
-> > >
-> > > We have:
-> > > EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, install_smbios_table);
-> > > This is invoked after efi_memory_init().
-> > >
-> > > The EFI specification requires that the memory area occupied by the
-> > > SMBIOS table uses one of a specific set of memory types where
-> > > EfiRuntimeServicesData is recommended. So you must call
-> > >
-> > > u64 addr =3D UINT_MAX;
-> > > ret =3D efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
-> > > EFI_RUNTIME_SERVICES_DATA, efi_size_in_pages(size), *addr);
-> > >
-> > > to allocate the memory. If the return code is not EFI_SUCCESS, no mem=
-ory
-> > > below 4 GiB is available.
-> >
-> > The root problem here is that x86 and ARM used to work differently.
-> > When the ARM SMBIOS stuff was done, it worked by writing the SMBIOS
-> > table as part of the 'bootefi' command. On x86, the tables were
-> > written on startup, so you can examine them within U-Boot. Clearly the
-> > x86 approach is correct. For one thing, a previous-stage bootloader
-> > may set up the tables, so it simply isn't valid to write them in that
-> > case. So we need to separate writing the tables from telling EFI about
-> > them.
-> >
-> > So I have fixed that, so ARM now writes the tables at the start. But
-> > using an EFI allocation function is clearly not right. This is generic
-> > code, nothing to do with EFI, really. In fact, the SMBIOS writing
-> > should move out of efi_loader. The install_smbios_table() function
-> > should be somewhere in lib, i suppose, with just efi_smbios_register()
-> > sitting in lib/efi_loader
-> >
-> > Also, why is efi_memory_init() called early in init? Is there anything
-> > that needs that in the init sequence? Could we move it to the end, or
-> > perhaps skip it completely until the 'bootefi' command is used?
-> >
-> > Another point I should make is that it should be fine for U-Boot to
-> > put something in memory and then call efi_add_memory_map() to tell EFI
-> > about it. What problems does that cause? It isn't as if EFI allocates
-> > things in the 'conventional' memory (is that the name for memory below
-> > 4GB?) This is how efi_acpi_register() works.
-> >
-> > (Aside: it is bizarre to me that CONFIG_EFI_LOADER appears in
-> > drivers/video/rockchip_rk_vop.c and other such files)
-> >
-> > >
-> > > >
-> > > > The bit I am confused about is that we don't support SMBIOS3 in
-> > > > U-Boot. I am trying to fix an introduced bug...
-> > >
-> > > I would not know why we should not use SMBIOS 3.
-> >
-> > Neither do I. Perhaps there are compatibility concerns? If it is OK to
-> > do that then we could go back to my previous series [1]. What do you
-> > think?
->=20
-> Tom responded but I missed it. In part it says:
->=20
-> "So, can we please start by just doing the minimal changes to get the
-> SMBIOS table done correctly for memory above 4G, via EFI, and then start
-> the next steps?"
->=20
-> I am OK to do an EFI hack for ARM so long as we agree that after the
-> release we will revert it and generate the table using generic memory
-> allocation, not dependent on EFI. Does that sound reasonable?
->=20
-> I don't seem to have received any response from Heinrich to the
-> various points I made above. I cannot see any response on patchwork
-> either.
+On 03/11/23 04:16, Simon Glass wrote:
+> Hi Devarsh,
+> 
+> On Tue, 31 Oct 2023 at 13:12, Devarsh Thakkar <devarsht@ti.com> wrote:
+>>
+>> Add function spl_reserve_video which is a wrapper
+>> around video_reserve to setup video memory and update
+>> the relocation address pointer.
+>>
+>> Setup video memory before page table reservation so that
+>> framebuffer memory gets reserved from the end of RAM.
+>>
+>> This is as per the new policy being discussed for passing
+>> blobs where each of the reserved areas for bloblists
+>> to be passed need to be reserved at the end of RAM.
+>>
+>> This is done to enable the next stage to directly skip
+>> the pre-reserved area from previous stage right from the end of RAM
+>> without having to make any gaps/holes to accommodate those
+>> regions which was the case before as previous stage
+>> reserved region not from the end of RAM.
+>>
+>> Suggested-by: Simon Glass <sjg@chromium.org>
+>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+>> ---
+>> V2: Make a generic function "spl_reserve_video" under
+>>      common/spl which can be re-used by other platforms too
+>>      for reserving video memory from spl.
+>> ---
+>>   arch/arm/mach-k3/common.c |  2 ++
+>>   common/spl/spl.c          | 19 +++++++++++++++++++
+>>   include/spl.h             |  4 ++++
+>>   3 files changed, 25 insertions(+)
+> 
+>>
+>> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+>> index c3006ba387..03e3b46282 100644
+>> --- a/arch/arm/mach-k3/common.c
+>> +++ b/arch/arm/mach-k3/common.c
+>> @@ -537,6 +537,8 @@ void spl_enable_dcache(void)
+>>          if (ram_top >= 0x100000000)
+>>                  ram_top = (phys_addr_t) 0x100000000;
+>>
+>> +       gd->relocaddr = ram_top;
+>> +       spl_reserve_video();
+> 
+> Need to check error here
+> 
 
-Drop it right after the release? No. We will replace it with what's more
-appropriate once we figure out what that is. And please don't call it a
-hack, unless I'm missing something I don't see yet how to make use of
-the SMBIOS table on ARM without EFI.  I see something that implies MIPS
-can (and loongarch and ia64).
+Ok, I can check for error and print a message, but would still proceed 
+with build (similar to reserve_video in u-boot proper (from which this 
+is derived)), I hope that is fine.
 
---=20
-Tom
+>>          gd->arch.tlb_addr = ram_top - gd->arch.tlb_size;
+>>          gd->arch.tlb_addr &= ~(0x10000 - 1);
+>>          debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
+>> diff --git a/common/spl/spl.c b/common/spl/spl.c
+>> index 732d90d39e..89172f2ebf 100644
+>> --- a/common/spl/spl.c
+>> +++ b/common/spl/spl.c
+>> @@ -41,6 +41,7 @@
+>>   #include <fdt_support.h>
+>>   #include <bootcount.h>
+>>   #include <wdt.h>
+>> +#include <video.h>
+>>
+>>   DECLARE_GLOBAL_DATA_PTR;
+>>   DECLARE_BINMAN_MAGIC_SYM;
+>> @@ -151,6 +152,24 @@ void spl_fixup_fdt(void *fdt_blob)
+>>   #endif
+>>   }
+>>
+>> +int spl_reserve_video(void)
+>> +{
+>> +       if (CONFIG_IS_ENABLED(VIDEO)) {
+>> +               ulong addr;
+>> +               int ret;
+>> +
+>> +               addr = gd->relocaddr;
+>> +               ret = video_reserve(&addr);
+>> +               if (ret)
+>> +                       return ret;
+>> +               debug("Reserving %luk for video at: %08lx\n",
+>> +                     ((unsigned long)gd->relocaddr - addr) >> 10, addr);
+>> +               gd->relocaddr = addr;
+>> +       }
+>> +
+>> +       return 0;
+>> +}
+>> +
+>>   ulong spl_get_image_pos(void)
+>>   {
+>>          if (!CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS))
+>> diff --git a/include/spl.h b/include/spl.h
+>> index 0d49e4a454..9682e51fc1 100644
+>> --- a/include/spl.h
+>> +++ b/include/spl.h
+>> @@ -825,6 +825,10 @@ int spl_usb_load(struct spl_image_info *spl_image,
+>>
+>>   int spl_ymodem_load_image(struct spl_image_info *spl_image,
+>>                            struct spl_boot_device *bootdev);
+>> +/**
+>> + * spl_reserve_video() - Reserve video and update relocation address
+> 
+> This needs more detail about:
+> - gd->relocaddr
 
---u6vsrdzjXYzrPUV+
-Content-Type: application/pgp-signature; name="signature.asc"
+Points to current relocation address which points to region below 
+reserved area ?
 
------BEGIN PGP SIGNATURE-----
+> - where the video memory is allocated
+I didn't get you, allocation is stored in RAM, is that what you mean ?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVFMOoACgkQFHw5/5Y0
-tyyWbAwAgjdTTuZ7NY+AueqdH6IjdHutW/weod10dPODVSJwxAuyNooIe/sIsiqu
-w69BJpz6G2VpQ54Izhas+cMT6d7SCPbynTdaXfTP+4CcZskJEoyIojie7cRmSBg3
-fPZO0N1RTItr6JPtTGK3cuz85XZ7s/WERjJpHXYHYTZs9I48Pqlj14U8f2N4XNFP
-pYrsE9pQfCKjhBiX3jvl1ZI8cxZC1/F87w+dibmM0saSU/e8WOvFPTtprptV8UNA
-L1mDOO4nOj0DGpyWqpqkDW4Qov99/pxXUAaMrMxcykZM/K07f88odygbO0Mwhsv9
-SDp6Dpq2+nTJ46RI6McovZVfYh61e0AeEhrfxmY3074DqDceHlPRTb4ULdA7lfzK
-1cZDqiXkDeHNagQrX5Xaf5mQWgrgYrkGduqBRc7Cm+Fls3Oe/1sQoXUKwZ5MSeJn
-AbXO+aI9Z/SF1Od6mtWve9sgWe6SkYoV7TNV1WGcbAlFkNiTJj6vecapmB4F+vv6
-P+Y9irHr
-=XB7F
------END PGP SIGNATURE-----
+> - where the allocation is stored (in the video-device plat?)ok
 
---u6vsrdzjXYzrPUV+--
+> - return value
+> 
+
+Just a point of note, this spl_reserve_video is inspired by 
+reserve_video from u-boot proper and we are essentially leaving upto 
+users to follow the "guideline" to reserve video from RAM by setting
+gd->relocaddr to end of RAM before calling to function.
+
+But if we want to directly enforce the guideline, I can move that logic 
+inside this API and we can have spl_reserve_video_from_ramtop, let me 
+know your opinion on this if we want to go this way.
+
+Regards
+Devarsh
+
+>> + */
+>> +int spl_reserve_video(void);
+>>
+>>   /**
+>>    * spl_invoke_atf - boot using an ARM trusted firmware image
+>> --
+>> 2.34.1
+>>
+> 
+> Regards,
+> Simon
