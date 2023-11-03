@@ -4,73 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 249B6C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:20:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58FC5C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 305C886FEC;
-	Fri,  3 Nov 2023 20:20:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C61487438;
+	Fri,  3 Nov 2023 20:26:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="acpl3mQf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q+V27TPo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E883086FEC; Fri,  3 Nov 2023 20:20:13 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EF7C487444; Fri,  3 Nov 2023 20:26:21 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 931B986FD8
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:20:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E99986E6C
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:26:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A3JK1kq126398;
- Fri, 3 Nov 2023 14:20:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699039201;
- bh=JgYlgJaDnh6J6bzPXtjY2ZdLH2T+oT1Mm/FLHhW1NKY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=acpl3mQf69s5JeiknBj8YBHoI96u77BOp8XJkOnB0438iQjyoEzEJXenDbzq5MZUL
- /T69H5H/T3AjNGH8922Xg823ZxMmPFwr9dcr5Pltv6rlYGTj8uud1raXk+IgFNlCO0
- RLg5s0MMc+8hxd5QCQRX+zlY/HGbPF+0B046HzYE=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A3JK1ST131043
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 3 Nov 2023 14:20:01 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
- Nov 2023 14:20:01 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 3 Nov 2023 14:20:01 -0500
-Received: from [10.250.33.210] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A3JK03i123227;
- Fri, 3 Nov 2023 14:20:00 -0500
-Message-ID: <ee1eec62-c7ca-450c-959f-f83d5b71f8ca@ti.com>
-Date: Fri, 3 Nov 2023 14:20:00 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5a82f176860so29334167b3.1
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 12:26:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699039576; x=1699644376; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=p29PqIqR+THMEloLzPFQ6qO4/rmVZZqkfg7Mm0mPqQI=;
+ b=Q+V27TPo+sCFlO8FKQCG9oBvDkGsTxZQb0GyR8GzwuE2OCns4bkK2c/40IYzQAEt1u
+ zq+Dw/MJ/t4d2GvsbhrL6Af8MpHTrESJ/iD79KfGnspjvEhONEYGHWTj/AqllFMnUMHY
+ 4b5EH6Yz2EcOzhRJVih9OUEvmVkNFzlEjiCUs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699039576; x=1699644376;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=p29PqIqR+THMEloLzPFQ6qO4/rmVZZqkfg7Mm0mPqQI=;
+ b=PMra4lj4y/k/9lTqz92hna8w54l2HMc+zn0tbexuCm/mR/+/G1YA4RO4aWKqK3pxeT
+ IYrUJTDgC9ACYKkSc4WXR+fPMC4x+4cgEAOFdqN5wqVOIxrzQoIznLVIB4Zofsi+ux21
+ zK5rSdfmxeMqNG2qt6HdI9EoJdXKneI/MDJwJ77gvG33f7dbs1Tkxv3o9g2s+ty6SzQ7
+ s2c/cgj/xEDCKU3Y0BPkOb8Wu1rTvJW0yNJYu91OXBqcbQtXyncDkIseAsUC2nIdIbWr
+ MZnnFuza8ZCmUYU7GdiwFDxoIkugXxZx+eEPhFyrMjyqwpPiGjhFg+2hIr6mUdnVlblD
+ VpkQ==
+X-Gm-Message-State: AOJu0YySFtZBn+hARfEo25Oi2qW/o8grvaEB4b2ghVat8gEKJoag9Ltb
+ nlKktH1aful1csmrf4PJBjAYqw==
+X-Google-Smtp-Source: AGHT+IHeSjEFUESVkLFACQU/rWp7MDyYiWNV6TnD9o673kg/xeXVlcFMnNaV/0F0nbZ7m9dtKInA+w==
+X-Received: by 2002:a25:d709:0:b0:da0:442f:988e with SMTP id
+ o9-20020a25d709000000b00da0442f988emr20610118ybg.19.1699039575806; 
+ Fri, 03 Nov 2023 12:26:15 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ t9-20020a0cef49000000b0066d12d1351fsm1000071qvs.143.2023.11.03.12.25.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Nov 2023 12:25:55 -0700 (PDT)
+Date: Fri, 3 Nov 2023 15:25:48 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: Re: [PATCH v2] smbios: arm64: Allow table to be written at a fixed
+ addr
+Message-ID: <20231103192548.GR496310@bill-the-cat>
+References: <20231025123117.v2.1.I054cad60e00f8cfde39256c7c7d9c960987fb9be@changeid>
+ <734658D7-8081-44DC-8168-6EBDBA8D951D@gmx.de>
+ <CAPnjgZ2ZFSbUYPVq+A1jQBy8s=DOO8Cz+epHGL++KSEN-pr-wA@mail.gmail.com>
+ <32facf81-f2bf-460a-9104-cae1dcef0cbe@gmx.de>
+ <CAPnjgZ20bRUP7KFwRpe7dmbxbQFMJmHB55dkXpEjv3fyX++M3A@mail.gmail.com>
+ <CAPnjgZ1Ao_ikgwPR8-fGVzbBfzRQYm0bxz9LgVHs1FP7+HG3cw@mail.gmail.com>
+ <CC91949C-3BBF-452B-906F-93520A314858@gmx.de>
+ <CAPnjgZ0sgCtPXa5ZOOpW-zyCnVm_cNU3OyDjzPercdY1=Y1_dQ@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/15] board: ti: Add j721e_beagleboneai64_* config
- fragments and env file
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sinthu Raja <sinthu.raja@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Reid Tonking <reidt@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
-References: <20231103003805.2420005-1-nm@ti.com>
- <20231103003805.2420005-15-nm@ti.com>
- <f0f4b6af-9831-4231-8316-1e0b0dd2dab2@ti.com>
- <20231103190629.flhz4cr5wyjyym2g@remix>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231103190629.flhz4cr5wyjyym2g@remix>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2VHKUw9uykRhR5Xp"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0sgCtPXa5ZOOpW-zyCnVm_cNU3OyDjzPercdY1=Y1_dQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,63 +107,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/3/23 2:06 PM, Nishanth Menon wrote:
-> On 13:51-20231103, Andrew Davis wrote:
->> On 11/2/23 7:38 PM, Nishanth Menon wrote:
->>> Add defconfig fragments for J721E based BeagleBone AI-64 and
->>> corresponding customized environment.
->>>
->>> Signed-off-by: Nishanth Menon <nm@ti.com>
->>> ---
->>>    board/ti/j721e/beagleboneai64.env        | 19 ++++++++
->>>    board/ti/j721e/beagleboneai64_a72.config | 55 ++++++++++++++++++++++++
->>>    board/ti/j721e/beagleboneai64_r5.config  | 19 ++++++++
->>
->> Beagle boards are not TI boards, add the board support to board/beagle/
-> 
-> Huh, why bring in commercials and organization changes here? am335x
-> and am62 are under the TI umbrella.
-> 
 
-The SoCs used are yes, the boards are not, we only make our EVM/SK
-line of boards in house.
+--2VHKUw9uykRhR5Xp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We did AM335x wrong, in board/ti/am335x/board.c we tried to support
-like 11 different boards in one file. And while it might have made adding
-our own extra EVMs easier, it only made things less clear for folks trying
-to add their own AM335x based boards[0].
+On Fri, Nov 03, 2023 at 12:14:46PM -0600, Simon Glass wrote:
+> Hi Heinrich,
+>=20
+> On Fri, 3 Nov 2023 at 11:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wro=
+te:
+> >
+> >
+> >
+> > Am 3. November 2023 19:12:40 OEZ schrieb Simon Glass <sjg@chromium.org>:
+> > >Hi,
+> > >
+> > >On Sat, 28 Oct 2023 at 12:41, Simon Glass <sjg@chromium.org> wrote:
+> > >>
+> > >> [unfortunately I am not receiving email from the list at present]
+> > >>
+> > >> Hi Heinrich,
+> > >>
+> > >> On Wed, 25 Oct 2023 at 21:39, Heinrich Schuchardt <xypron.glpk@gmx.d=
+e> wrote:
+> > >> >
+> > >> > On 10/25/23 04:49, Simon Glass wrote:
+> > >> > > Hi Heinrich,
+> > >> > >
+> > >> > > On Tue, 24 Oct 2023 at 18:22, Heinrich Schuchardt <xypron.glpk@g=
+mx.de> wrote:
+> > >> > >>
+> > >> > >>
+> > >> > >>
+> > >> > >> Am 25. Oktober 2023 01:31:19 MESZ schrieb Simon Glass <sjg@chro=
+mium.org>:
+> > >> > >>> U-Boot typically sets up its malloc() pool near the top of mem=
+ory. On
+> > >> > >>> ARM64 systems this can result in an SMBIOS table above 4GB whi=
+ch is
+> > >> > >>> not supported by SMBIOSv2.
+> > >> > >>>
+> > >> > >>> Work around this problem by providing a new option to choose a=
+n address
+> > >> > >>> below 4GB (but as high as possible), if needed.
+> > >> > >>
+> > >> > >> You must not overwrite memory controlled by the EFI subsystem w=
+ithout calling its allocator.  We should provide SMBIOS 3. SMBIOS 2 is only=
+ a fallback for outdated tools.
+> > >> > >
+> > >> > > That is not my intention and I don't believe this code does that=
+=2E EFI
+> > >> > > is not running at this point, is it?
+> > >> >
+> > >> > The function install_smbios_table() only exists if CONFIG_EFI_LOAD=
+ER=3Dy.
+> > >>
+> > >> That is because ARM devices don't normally need it, right? Anyway,
+> > >> that option isn't related to this patch. If ARM devices started using
+> > >> SMBIOS and had another way to pass it to Linux (other than EFI) then
+> > >> we would want to install it.
+> > >>
+> > >> >
+> > >> > We have:
+> > >> > EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, install_smbios_table);
+> > >> > This is invoked after efi_memory_init().
+> > >> >
+> > >> > The EFI specification requires that the memory area occupied by the
+> > >> > SMBIOS table uses one of a specific set of memory types where
+> > >> > EfiRuntimeServicesData is recommended. So you must call
+> > >> >
+> > >> > u64 addr =3D UINT_MAX;
+> > >> > ret =3D efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
+> > >> > EFI_RUNTIME_SERVICES_DATA, efi_size_in_pages(size), *addr);
+> > >> >
+> > >> > to allocate the memory. If the return code is not EFI_SUCCESS, no =
+memory
+> > >> > below 4 GiB is available.
+> > >>
+> > >> The root problem here is that x86 and ARM used to work differently.
+> > >> When the ARM SMBIOS stuff was done, it worked by writing the SMBIOS
+> > >> table as part of the 'bootefi' command. On x86, the tables were
+> > >> written on startup, so you can examine them within U-Boot. Clearly t=
+he
+> > >> x86 approach is correct. For one thing, a previous-stage bootloader
+> > >> may set up the tables, so it simply isn't valid to write them in that
+> > >> case. So we need to separate writing the tables from telling EFI abo=
+ut
+> > >> them.
+> > >>
+> > >> So I have fixed that, so ARM now writes the tables at the start. But
+> > >> using an EFI allocation function is clearly not right. This is gener=
+ic
+> > >> code, nothing to do with EFI, really. In fact, the SMBIOS writing
+> > >> should move out of efi_loader. The install_smbios_table() function
+> > >> should be somewhere in lib, i suppose, with just efi_smbios_register=
+()
+> > >> sitting in lib/efi_loader
+> > >>
+> > >> Also, why is efi_memory_init() called early in init? Is there anythi=
+ng
+> > >> that needs that in the init sequence? Could we move it to the end, or
+> > >> perhaps skip it completely until the 'bootefi' command is used?
+> > >>
+> > >> Another point I should make is that it should be fine for U-Boot to
+> > >> put something in memory and then call efi_add_memory_map() to tell E=
+FI
+> > >> about it. What problems does that cause? It isn't as if EFI allocates
+> > >> things in the 'conventional' memory (is that the name for memory bel=
+ow
+> > >> 4GB?) This is how efi_acpi_register() works.
+> > >>
+> > >> (Aside: it is bizarre to me that CONFIG_EFI_LOADER appears in
+> > >> drivers/video/rockchip_rk_vop.c and other such files)
+> > >>
+> > >> >
+> > >> > >
+> > >> > > The bit I am confused about is that we don't support SMBIOS3 in
+> > >> > > U-Boot. I am trying to fix an introduced bug...
+> > >> >
+> > >> > I would not know why we should not use SMBIOS 3.
+> > >>
+> > >> Neither do I. Perhaps there are compatibility concerns? If it is OK =
+to
+> > >> do that then we could go back to my previous series [1]. What do you
+> > >> think?
+> > >
+> > >Tom responded but I missed it. In part it says:
+> > >
+> > >"So, can we please start by just doing the minimal changes to get the
+> > >SMBIOS table done correctly for memory above 4G, via EFI, and then sta=
+rt
+> > >the next steps?"
+> > >
+> > >I am OK to do an EFI hack for ARM so long as we agree that after the
+> > >release we will revert it and generate the table using generic memory
+> > >allocation, not dependent on EFI. Does that sound reasonable?
+> > >
+> > >I don't seem to have received any response from Heinrich to the
+> > >various points I made above. I cannot see any response on patchwork
+> > >either.
+> > >
+> > >Regards,
+> > >Simon
+> >
+> > All memory below the stack is controlled by the EFI subsystem. I notifi=
+ed you of the function you need to call. I can't see what information you a=
+re lacking.
+>=20
+> That is fine when EFI is used, but what about when it is not? That is
+> the piece I don't yet understand.
 
-We don't integrate support for any other board partner like this. Our
-friends over at Toradex or Phytec are currently upstreaming boards based
-on K3 SoCs and in doing so have shown us some areas we can improve.
+We also don't have the use case for when EFI is not used defined and
+understood, so it can wait until then?
 
-We focus on these little short-cuts to make adding our EVMs (or boards
-that look like our EVMs) easy. But that only leads to extra work and
-code duplication for external boards.
+--=20
+Tom
 
-If something is actually common to the SoC then lets move it to
-arch/arm/mach-k3/j721e. Tricks like board-variants.c only hide the
-issue and doesn't help folks wanting to add their boards based on our
-SoCs to their board/<vendor>/ directory.
+--2VHKUw9uykRhR5Xp
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Andrew
+-----BEGIN PGP SIGNATURE-----
 
-[0] See "Software Design" https://jaycarlson.net/embedded-linux/#am335x
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVFSTkACgkQFHw5/5Y0
+tyxZ3wwAiWXT1eKXk1pScVx1fXQBkEFbRrBcREtx640Zq5kyHZCN1OPTDwlUIJvw
+nEiemuTVL2jNUnzOvPG0Z+W0XoP/yIsj4k91G/UBzceu2e8nEFFE4NSumlX/iEaW
+DcTKPadd/qxj4nvez/QOTiKHxBIogwTM5NfpKbiOd2LORMEvz5xRCpitSNAe4X3G
+OVART0TylwY29P8bkNf+SGNs12ejeC/2EfhJstznfUyGnsfKRqURd6/sau4gDVJg
+4q6wJmoWLIvf4P3vQzDaZ4QD/SH9BAX7edTqUtH0OYunnKi6lg7pwgaYw18ShMdp
+N1Smzv7a/iMGVb5taCQ92Lo1EplC628E9+HsfW9tA7msA5dXvJFB/bv1eFfZ0SO8
+BRcKPZQincuhiC1w1ZYxXMEKBnf/jem1o6an0rA4RfED2iIr+FNLBcRWUwWyy8zL
+wf5Am848iedzpMjP3DElksR8an7tm+jQ2P8dU/OcE9yEddktZ0IFD+JyFInRpkjZ
+vAHJLxT4
+=4JDo
+-----END PGP SIGNATURE-----
 
-> $ git grep beagle board/|cut -d ':' -f1|sort -u
-> board/ti/am335x/board.c
-> board/ti/am335x/board.h
-> board/ti/am57xx/board.c
-> board/ti/am62x/beagleplay_a53.config
-> board/ti/am62x/beagleplay_r5.config
-> board/ti/am62x/MAINTAINERS
-> board/ti/beagle/beagle.c
-> board/ti/beagle/Kconfig
-> board/ti/beagle/led.c
-> board/ti/beagle/MAINTAINERS
-> board/ti/beagle/Makefile
-> board/ti/j721e/beagleboneai64_a72.config
-> board/ti/j721e/beagleboneai64_r5.config
-> board/ti/j721e/MAINTAINERS
-> board/timll/devkit8000/README
-> 
+--2VHKUw9uykRhR5Xp--
