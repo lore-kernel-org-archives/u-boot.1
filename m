@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D29BFC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 14:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753D0C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 14:39:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF47D871CD;
-	Fri,  3 Nov 2023 15:34:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BB09B871DA;
+	Fri,  3 Nov 2023 15:39:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zR6M2tlM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DTIMG8RD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1E8E871BC; Fri,  3 Nov 2023 15:34:39 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 4F8C38723E; Fri,  3 Nov 2023 15:39:34 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 293CC871E1
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 15:34:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 07ED0871B2
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 15:39:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=loic.poulain@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-507a29c7eefso2645163e87.1
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 07:34:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-66d17bdabe1so12342616d6.0
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 07:39:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699022075; x=1699626875; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d1blHmjAjkOpfB5rtWBv7BqFpGVriQg1Lyul871M1W4=;
- b=zR6M2tlMzQd8fqG+LPRioMEZ4gAWe0bBhY2bdHops45nkpCAQkswttDqavMgtb7gkv
- LjmpmlYDwad7AHwDTUreyK0B7dXavLCrnjzT4KN416w6nAVXpZbMLkUUsJ5vRqdUlXMe
- CXASTvCCrt621S7lMO3rZzbVzf5uIJ2WrIlQT7iqWCiTI+AQKHSLjH6aGhUx0LnmWji6
- srVqY2BqIIe05a3rjr46GncPO8MmpQg2jlieHj7DC/nwDPyHrj1b3elwSnC3S/GPAXzT
- Gut3bL+CyHlvJhTqXFE20+C7kpIz22kHSN6mbbhYug3GhoC0rXm4rpZZrCqwEjHW5kk7
- cu+Q==
+ d=konsulko.com; s=google; t=1699022369; x=1699627169; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b2MgCwiPzJxz9pbEaCvtg+OrynrmNp5eSGZTtFS9byE=;
+ b=DTIMG8RD1+8mAZ2+T8HciQi4/oIrhhsbbDjO6k2jwUQn4QnjzzdoPpNY1QK7BGznGG
+ Ji3hDvWTs3PXRu5ex9KeWED9k1NMYdr8stdB54jo7NcUiPXyvfT5npCa38AmwfbvtB46
+ gRq/WjcpTN6byfgQ0gy6I4UNBrTEtxsQZv4GM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699022075; x=1699626875;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d1blHmjAjkOpfB5rtWBv7BqFpGVriQg1Lyul871M1W4=;
- b=GO00YPriL0+4Jw8zTUlyRzDs2cXnh0JzZ9QWMJEwaLPu2ndV7RxaRpX6y4ntzpigdj
- lfRx42WxDXWmEzHBQ++6N0yx66GUhYulj/3KtUNJLoLICuOlDqIhfS2U1v4BsHK+3QxV
- 7SJxMazPMNdybCe7JDoQbI7c09NZ+vuAVMRLgLua5RWIwWpKnu3HiPyqOk8nB986yata
- fACC9RG5xSoZOVwG7KjMlwlHou9oGQ1+vQtkgp6khS2+1THcWvirtAPhzaGPbanfozYU
- ykQDZvKqzQGMZuT386GRBQ7vrb7SyGnHmppTB3Ke5kbH88unmkb9rrQziii4cioshFn+
- rGCw==
-X-Gm-Message-State: AOJu0Yxwox4MCfFal4jkkuhFa+iWqYTP2zSF+QHHWCp1I4Z6hIfWW30b
- 8mE8MfymQUexm9IcfgbIrkBIGg==
-X-Google-Smtp-Source: AGHT+IHY+TnSFQVWdLIiM/OfnvZkZjqRV7xApvOLI20aqZn790w/HtY9tmv/ai+vCQVUkPCkmnQ88A==
-X-Received: by 2002:ac2:4c3c:0:b0:509:44bc:8596 with SMTP id
- u28-20020ac24c3c000000b0050944bc8596mr4680469lfq.58.1699022075299; 
- Fri, 03 Nov 2023 07:34:35 -0700 (PDT)
-Received: from loic-ThinkPad-T470p.. ([2a01:e0a:82c:5f0:bd3f:e301:dcee:2fff])
- by smtp.gmail.com with ESMTPSA id
- 12-20020a05600c020c00b004063ea92492sm2683598wmi.22.2023.11.03.07.34.34
+ d=1e100.net; s=20230601; t=1699022369; x=1699627169;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b2MgCwiPzJxz9pbEaCvtg+OrynrmNp5eSGZTtFS9byE=;
+ b=tOw+6OeKZy9AEtCeg1qNTvR9fQdup2JdDSdcn9s/WebG26T+ql9YdVPoBEqXEMFxi2
+ 9yumbK2cVSNZMKAsp+3Wu4b3RoK2WN+Q+N3ndgb9DT4VxgLFz9Akvj+GEcuVxVAMBx9/
+ zWYNDBeG4CeJsP8MFriIOR1LnZf4jE82gBtEX+wVT55P/PLPIkkZ4rODfJgfkWsKy9vP
+ LPa3N/VGhSZFpvpImJEkjNO+Wry0AqBYVSRlhhFZJxEFGFzUflY3unLKAybOwAhFU+NW
+ QKlTIiHsSvtQax371Os+o3qtSLAEpqPSY1BT9gWVuf0gKR2gC8VFV3fyyWqCejf1AOy4
+ rZDA==
+X-Gm-Message-State: AOJu0YyAdPpxmocwjxkvy5NfgLjl6kAZCWewskWbJ568w1UchP9io+Jy
+ ksmcP1cfuk8E72wRhq55pk7UPA==
+X-Google-Smtp-Source: AGHT+IHV7wW7BlFeQL9EknK7MCG9XBouPoBl4sv3N0TnrEoDF0xPHCcQ5hTLgzd+9XQOlYpsrtXYRA==
+X-Received: by 2002:a05:6214:e4c:b0:66d:1624:2203 with SMTP id
+ o12-20020a0562140e4c00b0066d16242203mr23749885qvc.20.1699022368836; 
+ Fri, 03 Nov 2023 07:39:28 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ s8-20020ad45248000000b00670867d7bdfsm785823qvq.122.2023.11.03.07.39.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 07:34:34 -0700 (PDT)
-From: Loic Poulain <loic.poulain@linaro.org>
-To: sjg@chromium.org,
-	marex@denx.de
-Cc: u-boot@lists.denx.de, abbaraju.manojsai@amarulasolutions.com,
- seanga2@gmail.com, Loic Poulain <loic.poulain@linaro.org>
-Subject: [PATCH 3/3] spl: fit: Load compressed blob to heap buffer
-Date: Fri,  3 Nov 2023 15:34:26 +0100
-Message-Id: <20231103143426.3643712-3-loic.poulain@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231103143426.3643712-1-loic.poulain@linaro.org>
-References: <20231103143426.3643712-1-loic.poulain@linaro.org>
+ Fri, 03 Nov 2023 07:39:28 -0700 (PDT)
+Date: Fri, 3 Nov 2023 10:39:25 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Nishanth Menon <nm@ti.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 00/15] board: ti: Add support for BeagleBone AI-64
+Message-ID: <20231103143925.GP496310@bill-the-cat>
+References: <20231103003805.2420005-1-nm@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="H8xTa4VyveQjiAQd"
+Content-Disposition: inline
+In-Reply-To: <20231103003805.2420005-1-nm@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,70 +94,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CONFIG_SYS_LOAD_ADDR is usually configured as the address where
-the kernel should be loaded at. It can be problematic to use it
-as a generic temporary buffer for FIT compressed blobs.
 
-An example is when the image is a compressed kernel with load
-address equal to CONFIG_SYS_LOAD_ADDR, this causes (inplace)
-decompression to fail.
+--H8xTa4VyveQjiAQd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Instead we can simply allocate a temporary buffer in the heap
+On Thu, Nov 02, 2023 at 07:37:50PM -0500, Nishanth Menon wrote:
 
-Signed-off-by: Loic Poulain <loic.poulain@linaro.org>
----
- common/spl/spl_fit.c | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
+> Cleanups for J721e/J7200 and add support for BeagleBone AI-64
+>=20
+> Based off:
+> master 07fe79c93c5c Merge tag 'i2cfixes-for-v2024-01-rc2' of https://sour=
+ce.denx.de/u-boot/custodians/u-boot-i2c
+>=20
+> Boot Logs:
+> J721e-SK: https://gist.github.com/nmenon/c144e64f1da9fd49997ef5794b056bb0
+> J721e-EVM: https://gist.github.com/nmenon/e79bed6807da05c723e71687fb3c0b90
+> J7200-HSEVM: https://gist.github.com/nmenon/5658dd6fa2f67bce915c77b25c02f=
+897
+>=20
+> BeagleBone AI-64:
+> SD/MMC boot: https://gist.github.com/nmenon/1e07858fb8ca39ca87e40d3894e4d=
+9b7
+> eMMC boot: https://gist.github.com/nmenon/9b0602df1f1be2c6b512d135b0afae60
+> eMMC boot with SDcard detected: https://gist.github.com/nmenon/82058014f4=
+b2f6b9ed21431bc675e12a
+>=20
+> U-Boot CI: https://github.com/u-boot/u-boot/pull/444
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 08428660b0..8a807db5ba 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -249,7 +249,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
- 	ulong size;
- 	ulong load_addr;
- 	void *load_ptr;
--	void *src;
-+	void *src, *src_ptr;
- 	ulong overhead;
- 	int nr_sectors;
- 	uint8_t image_comp, type = -1;
-@@ -289,8 +289,6 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
- 	}
- 
- 	if (external_data) {
--		void *src_ptr;
--
- 		/* External data */
- 		if (fit_image_get_data_size(fit, node, &len))
- 			return -ENOENT;
-@@ -302,10 +300,13 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
- 			return 0;
- 		}
- 
--		if (image_comp != IH_COMP_NONE)
--			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
--		else
-+		if (image_comp != IH_COMP_NONE) {
-+			src_ptr = malloc_cache_aligned(len + 2 * info->bl_len);
-+			if (!src_ptr)
-+				return -ENOMEM;
-+		} else {
- 			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
-+		}
- 		length = len;
- 
- 		overhead = get_aligned_image_overhead(info, offset);
-@@ -383,6 +384,9 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
- 			image_info->entry_point = FDT_ERROR;
- 	}
- 
-+	if (external_data && image_comp != IH_COMP_NONE)
-+		free(src_ptr);
-+
- 	return 0;
- }
- 
--- 
-2.34.1
+Looking at the end result of the code, the split of evm.c looks good.
+One small thing is dropping common.h from the board files.
 
+--=20
+Tom
+
+--H8xTa4VyveQjiAQd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVFBhkACgkQFHw5/5Y0
+tyy6xgv/b1t6auXGDHZ/CiW2zihtzW/jv1/2yuHz5RiVFgzWB+fL1fxHyNEt945b
+v1Pm/jJJ1yPRgQHw75BZXGJOlTXGjpro5jh4VTzYIE0Unbp9mUtUnIKUszm5FEhZ
+A8/8XZpEaBDZS7jKNA7xhb4eDokT4r8L26OrjxFCdxROnKuAw4aQyzMQIvGA6KTZ
+w2obuf1cPW8Mzz4Iznpcq4vIoi5ia3RFFkQAVlIrrtjkPdsM06+iIsS2T6QIn5vC
+2mZcrAYdg5oLFw2EQVcmcl9QAqHigOWXH8tz4Nvp5/T099At+GaEKa4ue1ehvTSG
+RGMcmcdRTCvmUuTV50vDrY2NoGsF8UINPRLO2wsJywIKiRGNpQQzn3DoMfuC0BEU
+Ebvm7nGX2XVzI81siFUD/C+UujOYQSowvKLup7oRlY7icgBYlsNGXYXbSSBITOSp
+BAuRDWlm/8Ye1bi4qwhYwiuw68moXcyBL9fl8TF62EblcBRmtVCAqyj8TAntWmjO
+u6d5rrtw
+=zYz2
+-----END PGP SIGNATURE-----
+
+--H8xTa4VyveQjiAQd--
