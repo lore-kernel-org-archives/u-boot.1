@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27CF4C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 18:15:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7723C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 18:17:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 549668711B;
-	Fri,  3 Nov 2023 19:15:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 527218706B;
+	Fri,  3 Nov 2023 19:17:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q1mC5vOD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Gxogx1RE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF2C6871A6; Fri,  3 Nov 2023 19:15:13 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id DBE5386F32; Fri,  3 Nov 2023 19:17:15 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA5EE8711A
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 19:15:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90E2C86F32
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 19:17:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-53df747cfe5so3967934a12.2
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 11:15:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-27fe16e8e02so395974a91.0
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 11:17:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699035305; x=1699640105; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5rao7ToSwPphiCHOYYaEXgCbctYHwmb0zwOyV/hEYGc=;
- b=Q1mC5vODoUGxWKNacQcKN2cYbf+jb4M38NXcMIYjYeNUrMuf8JzeABTuxmbXofQ01I
- qB1z9Xi8KvZLtUA1Z2WIK26J+jbceh9CeVJXStOHMw+dXXLZvDlm9HGWOaNwITVwYvzv
- idH3qKjIexSq0Oeo0ZP4vZ+ETRcrkZffeuViI=
+ d=gmail.com; s=20230601; t=1699035429; x=1699640229; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=R/4udU5o+HpsmfWU4kmmFrhZ/X52fNMWrjQ3Wjafjrs=;
+ b=Gxogx1REZDEGSd4T8cTa88+6owK8MKupJNAp0sFdQwpdRpfHD9mv6zysDaXpI/wFmb
+ neUT+QjQO06EB1iltjStISlkdO4HsYRk6HsvG9aF2s2HBxPG0qIgepB+prKkneppqzA9
+ szDvpcnN1tWHXDmXtsCO7+0GkD3L2/oq/IYS9+2nqBUTwFvXHixDTOlV95TKja7Vh8qW
+ 5xnSMqbCsolvgt4ZhRozWM4NmXna8a+2jOhYUwI8J802f253+0TmzdWUfKchSMlyLkQm
+ anGI7WpAkyLVqPZYSF5ouS8g+z43rPe7OJN2NXxTWxtaS4j/fSxW8u2swZZ+0yXrGs4R
+ juqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699035305; x=1699640105;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5rao7ToSwPphiCHOYYaEXgCbctYHwmb0zwOyV/hEYGc=;
- b=QDjgjm0ND994gSVbV3HcRchKYqIA5cFzoyH5cVhCNvEySnGi/TaSIMQoyynmZjvRVT
- /zE2a9OSDUdxw5fxCSnQHLzErDu6JNAKKLPJ9M6IufIkm+YxQ2mrsE1BeFq7FYNBjCRJ
- bVY4dAaXb/lCf8GuF0XqQ+h9r/D7ubr7i0ntBk37c68IH6UUfs428lJIAahxJjGGIi5e
- XRhWLFGqQsC3oO95F2dHKrV6fzn6iOwXq6GbiENbM/ICj8487LpGIxXl+RryBQkfWauR
- tlv0rcsQZq1xn7fvAISKlIGBdL//w5I4+KkF5VkGoTo2RNHxKpyvD9y5FtXR6kxFf1uU
- z7lQ==
-X-Gm-Message-State: AOJu0Yzv1zjrAaGBXn5/6p1pIaVXp2ei4tBJOG6rBWNOhQlAclJ/0lIt
- AP6Pt3emb+/Lz0cz/6orY8dHGUifI0tqV0JmUP+cJw==
-X-Google-Smtp-Source: AGHT+IH4afNfilaMTNS2mTSzgjkCyh3dcMvFF2pK5FUVJMTlcrRYpSSxiy+Tcpbx7GNU1654mfim+J8GTQ+FM+APntQ=
-X-Received: by 2002:aa7:d402:0:b0:540:fcc5:3ada with SMTP id
- z2-20020aa7d402000000b00540fcc53adamr19219307edq.9.1699035304536; Fri, 03 Nov
- 2023 11:15:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1699035429; x=1699640229;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=R/4udU5o+HpsmfWU4kmmFrhZ/X52fNMWrjQ3Wjafjrs=;
+ b=s87TEsA84jwPieXlSvbO0Laoyf394SUJ4vS1yWYlfqfx62D6UW1PuSbItL+ZRvNK5Z
+ 2j5XDO1KAESKsATBJhFv3x9ZQCkWG4157BCz/zVLFHXr/Y73kHIQDMuZxSClQHHFDEma
+ obVktk2RoSFaSYyZLwcN7kllDNsCi+KCnJtTXINyi4oMXPjyj4Kt86P2LTj+fJW6tmO2
+ Vm0B4gtrK218vAIKEZtWiDQghlmhhjNA5M/ioxecav9B3Qc73MZX8a4eqELLHF4Blo69
+ TlircCmBILYEsqx+KOedCybX4ZJblmsb15CB7UVpugF3M+9HLwgnaXgzLFBFGq3nOkCD
+ 3vTw==
+X-Gm-Message-State: AOJu0Yx/imnWnv7QG4Gx9RuEU0nYNInm8FXf/BZnVvIlsHgUBFMtjDC8
+ 9CyrXcx6VhHmxCOAos//nuqWj1w9bXWVSb7VEKc=
+X-Google-Smtp-Source: AGHT+IHznSziKuoQTH41kM7ytyCKmYdXgQl2UJsG3LIPfnIC46DR9lzaqZdT8z3RCQi2ipZhdu0I3KuFbbHhaUev1Bk=
+X-Received: by 2002:a17:90a:b896:b0:280:2bcc:65be with SMTP id
+ o22-20020a17090ab89600b002802bcc65bemr18164369pjr.2.1699035428830; Fri, 03
+ Nov 2023 11:17:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231025123117.v2.1.I054cad60e00f8cfde39256c7c7d9c960987fb9be@changeid>
- <734658D7-8081-44DC-8168-6EBDBA8D951D@gmx.de>
- <CAPnjgZ2ZFSbUYPVq+A1jQBy8s=DOO8Cz+epHGL++KSEN-pr-wA@mail.gmail.com>
- <32facf81-f2bf-460a-9104-cae1dcef0cbe@gmx.de>
- <CAPnjgZ20bRUP7KFwRpe7dmbxbQFMJmHB55dkXpEjv3fyX++M3A@mail.gmail.com>
- <CAPnjgZ1Ao_ikgwPR8-fGVzbBfzRQYm0bxz9LgVHs1FP7+HG3cw@mail.gmail.com>
- <CC91949C-3BBF-452B-906F-93520A314858@gmx.de>
-In-Reply-To: <CC91949C-3BBF-452B-906F-93520A314858@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 3 Nov 2023 12:14:46 -0600
-Message-ID: <CAPnjgZ0sgCtPXa5ZOOpW-zyCnVm_cNU3OyDjzPercdY1=Y1_dQ@mail.gmail.com>
-Subject: Re: [PATCH v2] smbios: arm64: Allow table to be written at a fixed
- addr
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Mark Kettenis <kettenis@openbsd.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>
+References: <20231102204454.269-1-egyszeregy@freemail.hu>
+In-Reply-To: <20231102204454.269-1-egyszeregy@freemail.hu>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 3 Nov 2023 15:16:57 -0300
+Message-ID: <CAOMZO5CExQY0UOdyBiv+ppbTYfrw9Y12-+Hj_zhQyjCDy2JRCA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] [u-boot][master][PATCH v6] pico-imx7d: add baseboard
+ SD card boot detect
+To: egyszeregy@freemail.hu
+Cc: u-boot@lists.denx.de, otavio@ossystems.com.br
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,127 +87,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Thu, Nov 2, 2023 at 5:45=E2=80=AFPM <egyszeregy@freemail.hu> wrote:
+>
+> From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+>
+> Technexion PICO-IMX7 SoM is supporting USDHC3 (eMMC or micro SD on SoM)
+> and USDHC1 (SD on carrier board) to use on any carrier board like
+> PICO-NYMPH. Based on the U-Boot version from Technexion it adds
+> baseboard SD card boot detect to able to boot from selected USDHC1
+> or USDHC3 boot devices.
+>
+> Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+> ---
 
-On Fri, 3 Nov 2023 at 11:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
->
->
-> Am 3. November 2023 19:12:40 OEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi,
-> >
-> >On Sat, 28 Oct 2023 at 12:41, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> [unfortunately I am not receiving email from the list at present]
-> >>
-> >> Hi Heinrich,
-> >>
-> >> On Wed, 25 Oct 2023 at 21:39, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >> >
-> >> > On 10/25/23 04:49, Simon Glass wrote:
-> >> > > Hi Heinrich,
-> >> > >
-> >> > > On Tue, 24 Oct 2023 at 18:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >> > >>
-> >> > >>
-> >> > >>
-> >> > >> Am 25. Oktober 2023 01:31:19 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >> > >>> U-Boot typically sets up its malloc() pool near the top of memory. On
-> >> > >>> ARM64 systems this can result in an SMBIOS table above 4GB which is
-> >> > >>> not supported by SMBIOSv2.
-> >> > >>>
-> >> > >>> Work around this problem by providing a new option to choose an address
-> >> > >>> below 4GB (but as high as possible), if needed.
-> >> > >>
-> >> > >> You must not overwrite memory controlled by the EFI subsystem without calling its allocator.  We should provide SMBIOS 3. SMBIOS 2 is only a fallback for outdated tools.
-> >> > >
-> >> > > That is not my intention and I don't believe this code does that. EFI
-> >> > > is not running at this point, is it?
-> >> >
-> >> > The function install_smbios_table() only exists if CONFIG_EFI_LOADER=y.
-> >>
-> >> That is because ARM devices don't normally need it, right? Anyway,
-> >> that option isn't related to this patch. If ARM devices started using
-> >> SMBIOS and had another way to pass it to Linux (other than EFI) then
-> >> we would want to install it.
-> >>
-> >> >
-> >> > We have:
-> >> > EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, install_smbios_table);
-> >> > This is invoked after efi_memory_init().
-> >> >
-> >> > The EFI specification requires that the memory area occupied by the
-> >> > SMBIOS table uses one of a specific set of memory types where
-> >> > EfiRuntimeServicesData is recommended. So you must call
-> >> >
-> >> > u64 addr = UINT_MAX;
-> >> > ret = efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
-> >> > EFI_RUNTIME_SERVICES_DATA, efi_size_in_pages(size), *addr);
-> >> >
-> >> > to allocate the memory. If the return code is not EFI_SUCCESS, no memory
-> >> > below 4 GiB is available.
-> >>
-> >> The root problem here is that x86 and ARM used to work differently.
-> >> When the ARM SMBIOS stuff was done, it worked by writing the SMBIOS
-> >> table as part of the 'bootefi' command. On x86, the tables were
-> >> written on startup, so you can examine them within U-Boot. Clearly the
-> >> x86 approach is correct. For one thing, a previous-stage bootloader
-> >> may set up the tables, so it simply isn't valid to write them in that
-> >> case. So we need to separate writing the tables from telling EFI about
-> >> them.
-> >>
-> >> So I have fixed that, so ARM now writes the tables at the start. But
-> >> using an EFI allocation function is clearly not right. This is generic
-> >> code, nothing to do with EFI, really. In fact, the SMBIOS writing
-> >> should move out of efi_loader. The install_smbios_table() function
-> >> should be somewhere in lib, i suppose, with just efi_smbios_register()
-> >> sitting in lib/efi_loader
-> >>
-> >> Also, why is efi_memory_init() called early in init? Is there anything
-> >> that needs that in the init sequence? Could we move it to the end, or
-> >> perhaps skip it completely until the 'bootefi' command is used?
-> >>
-> >> Another point I should make is that it should be fine for U-Boot to
-> >> put something in memory and then call efi_add_memory_map() to tell EFI
-> >> about it. What problems does that cause? It isn't as if EFI allocates
-> >> things in the 'conventional' memory (is that the name for memory below
-> >> 4GB?) This is how efi_acpi_register() works.
-> >>
-> >> (Aside: it is bizarre to me that CONFIG_EFI_LOADER appears in
-> >> drivers/video/rockchip_rk_vop.c and other such files)
-> >>
-> >> >
-> >> > >
-> >> > > The bit I am confused about is that we don't support SMBIOS3 in
-> >> > > U-Boot. I am trying to fix an introduced bug...
-> >> >
-> >> > I would not know why we should not use SMBIOS 3.
-> >>
-> >> Neither do I. Perhaps there are compatibility concerns? If it is OK to
-> >> do that then we could go back to my previous series [1]. What do you
-> >> think?
-> >
-> >Tom responded but I missed it. In part it says:
-> >
-> >"So, can we please start by just doing the minimal changes to get the
-> >SMBIOS table done correctly for memory above 4G, via EFI, and then start
-> >the next steps?"
-> >
-> >I am OK to do an EFI hack for ARM so long as we agree that after the
-> >release we will revert it and generate the table using generic memory
-> >allocation, not dependent on EFI. Does that sound reasonable?
-> >
-> >I don't seem to have received any response from Heinrich to the
-> >various points I made above. I cannot see any response on patchwork
-> >either.
-> >
-> >Regards,
-> >Simon
->
-> All memory below the stack is controlled by the EFI subsystem. I notified you of the function you need to call. I can't see what information you are lacking.
+Also, you failed to describe what were the changes compared to the last ver=
+sion.
 
-That is fine when EFI is used, but what about when it is not? That is
-the piece I don't yet understand.
-
-Regards,
-Simon
+I have already pointed this out in previous reviews. Please don't
+ignore review comments.
