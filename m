@@ -4,122 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD738C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 05:49:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF407C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 06:37:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0FAF87652;
-	Fri,  3 Nov 2023 06:49:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id B6B5186F66;
+	Fri,  3 Nov 2023 07:37:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="PyAC6wqo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dRX3XfNK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA4248760F; Fri,  3 Nov 2023 06:49:53 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E03F687657; Fri,  3 Nov 2023 07:36:59 +0100 (CET)
+Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
+ [IPv6:2607:f8b0:4864:20::a2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4E4787663
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 06:49:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9718286DCE
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 07:36:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20231103054941epoutp044637d7f80ad9f7fe658f3edabefa03c8~UBu6wLsfX0325603256epoutp04c
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 05:49:41 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20231103054941epoutp044637d7f80ad9f7fe658f3edabefa03c8~UBu6wLsfX0325603256epoutp04c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1698990581;
- bh=vJR8mEVlowayB1uqFcY38W7/t30qwPSspvtkfT5xrLU=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=PyAC6wqoIEgHSdClzSGL/2/Y7/3h0F46qLUEvP7coFgevR+SV9qWK32PaacO4mf15
- jogACgyjv1nISgNsLGDHqntG4s9dORSGMrhgIOXYiulo4yRlkYsvky5zN5t0Phh/xC
- RMoyTyrKD9PNby1PGRt7iYtiYQl8qjFJqYRnzT0Q=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20231103054941epcas1p423c91fc5386377281ecf1008618ab29d~UBu6htS5x2777027770epcas1p4B;
- Fri,  3 Nov 2023 05:49:41 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.135]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4SM8vm2BYDz4x9Q1; Fri,  3 Nov
- 2023 05:49:40 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 9C.24.10211.2F984456; Fri,  3 Nov 2023 14:49:38 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20231103054937epcas1p2a71620a09d60cb180d0876f340c34c6a~UBu3NxVLF0042700427epcas1p2V;
- Fri,  3 Nov 2023 05:49:37 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20231103054937epsmtrp2c2b40c658e30089e580639ac2d7c650a~UBu3NKGtu1055210552epsmtrp2A;
- Fri,  3 Nov 2023 05:49:37 +0000 (GMT)
-X-AuditID: b6c32a38-463ff700000027e3-83-654489f2262f
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- FE.E9.08817.1F984456; Fri,  3 Nov 2023 14:49:37 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20231103054937epsmtip2da76b1e67feec33ee60ddf2e80c57956~UBu2v6S9h0057900579epsmtip2M;
- Fri,  3 Nov 2023 05:49:37 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Mattijs Korpershoek'" <mkorpershoek@baylibre.com>
-Cc: <lukma@denx.de>, <u-boot@lists.denx.de>
-In-Reply-To: <056c01da0df2$1cd85fc0$56891f40$@samsung.com>
-Subject: RE: [PATCH] dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
-Date: Fri, 3 Nov 2023 14:49:36 +0900
-Message-ID: <000801da0e19$87c90380$975b0a80$@samsung.com>
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-49d0f24a815so704519e0c.2
+ for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 23:36:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1698993414; x=1699598214; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ub0sMN4IsUiSvlQsRacfkWniAjpo9Cd2H+ZDn7ZZMGs=;
+ b=dRX3XfNK1PlXL3dBi6RRoX6irwwqmKY9EFxSoviespVUake229dOgBBsYkvvqwGKhB
+ LW+vmIpEoM+qatGsHcScHdssjQWe5OXdapUDCnfPJB21KUXSEkKyOv9eNru0qEcttja/
+ DeE7LKqk4EmEGfCPdZ48AKqqOy7Hl/6rrE2g1pcvnvrBAaaQW7ZDedQX7wumt6+mUEHs
+ SuzCx/DAJhvYTFATizco7JA45Bgr/oddZWtsU0+nDDFoRJNR3BsBX/InwyXZnZECdeuw
+ 8PZwN9pp8b3OIb1Cxtx4PUZbNMIlQhKu5B/PGNxwprNW0WbKvqavTjRwlIlIFv9ZTYzt
+ EIfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1698993414; x=1699598214;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ub0sMN4IsUiSvlQsRacfkWniAjpo9Cd2H+ZDn7ZZMGs=;
+ b=tTiB+CNEIM7mubtrIzMTUNV8cdWEyxjFKV6xmssl7ryFsAtSiuDNB7cgSL8k7SDCHo
+ WS7jDRj+WT1xkgz6ADUxdNfk/rkH5wymDmSf4kgK+5qFsy3RMJnykZ7HBstUtLDS5KIF
+ d/bIpOKZTP8OJDMMEL5slZ1Z5NbFIQo2dGp9jDc9M1/hNTYPL80W42SRXvS5jWcFS9i2
+ qGssnbPsP22xQzEpK2a2GIW5Dd8uZ9MNHhxPXFdWryY5PVIOvLfod4N/SWA8w9ihIQB8
+ 0XBC3wI4Y5iEJltwMogOQzuTOvz87p4WFax2qOGorRmhrrmUxHhd1jHtHOWys0vsajnB
+ mw9g==
+X-Gm-Message-State: AOJu0YzdCw1cfklve3VmNn7iz6jXXfZ1K7knfKhKZEPDvf3Qf0Wf1RoV
+ Rd9Bgkspl4/vpnyp/ac/sFqnQiUqEgKUtiJbnOSPkw==
+X-Google-Smtp-Source: AGHT+IENSm/WTVTremq+xJU1o9tBfBqHfWhv+iG+7/Mo1HHUKL08laGFJANjG4Rlcnprw9zpzfeS0ToEf1qLvGbzvqI=
+X-Received: by 2002:a67:ab0c:0:b0:452:6ac0:ed19 with SMTP id
+ u12-20020a67ab0c000000b004526ac0ed19mr15861404vse.31.1698993414001; Thu, 02
+ Nov 2023 23:36:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: ko
-Thread-Index: AQIPhsvHc8pCwIt4eyJoMgh6J8uRpgIEyzJBAVyJXtkCQLOwBgIsNP5sr76sYaA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmru6nTpdUg22rBS2ev7vMZPHi2Fx2
- i7d7O9kdmD3e32hl95g36wSLx9k7OxgDmKOybTJSE1NSixRS85LzUzLz0m2VvIPjneNNzQwM
- dQ0tLcyVFPISc1NtlVx8AnTdMnOANikplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1Jy
- CkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjM2d/xhLvipUbHzzya2BsZuxS5GTg4JAROJV3Nv
- sIPYQgI7GCXePM7vYuQCsj8xSnTsvc0E4XxjlLh0+xMTTMeN/XdYIRJ7GSWWnexkhmh/ySgx
- 4aghiM0moCfxf9FCsLiIgLnElulzwGxmAW2JP00PGEFsTgEriffbe8FsYQEXiYufZoOdwSKg
- IrF0/1JWEJtXwFJi6vavzBC2oMTJmU9YIObIS2x/CzFTQkBB4ufTZawQcRGJ2Z1tUHv9JK5+
- bgP7QELgI7vE8uXzgBIcQI6LxNVz8hC9whKvjm9hh7ClJD6/28sGUd/MKLF0yUFWCKeHUeJf
- w3U2iCpjif1LJzOBDGIW0JRYv0sfIqwosfP3XEaII/gk3n3tYYXYxSvR0SYEUaIicen1SyaY
- XXef/GedwKg0C8lrs5C8NgvJO7MQli1gZFnFKJZaUJybnlpsWGACj+zk/NxNjOBEqGWxg3Hu
- 2w96hxiZOBgPMUpwMCuJ8Dp6u6QK8aYkVlalFuXHF5XmpBYfYjQFBvZEZinR5HxgKs4riTc0
- sTQwMTMyNrEwNDNUEuc99qo3RUggPbEkNTs1tSC1CKaPiYNTqoEpbMO684d3TbkltV5n01rH
- z6+2imzKWbHxpGPMFZVPugtTfn5ZHDx9zcSp5sUODXMW1rJmzs9VzWK2nmYddCKApezSuz/6
- 1kslVB2S1sx5o35cLIPbcJFTqrvilOML25dfFiyV/Tj/8aVNtZJ2KkWhs/siqt6+dvwoPMGi
- bcE3P7+Qb1ONn8o1ez5ODrZfyLjl2HpHvQCWoPC7RRODLx47Z1qw/ObT7FkCbSuX2T3n7Ouc
- 2FWdYJAWkH5qTbu8zduDGRemFnLLRSSbXxK7oBjLcLjiHfek77GOQqXajg92SsjLqpy7+PvX
- 4WlJ02azaifufzFlzhrnt0dedAt37bAPbN/56NEPGc/JCusLRVgeK7EUZyQaajEXFScCAGAa
- pTsNBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKLMWRmVeSWpSXmKPExsWy7bCSvO7HTpdUg7WPdSyev7vMZPHi2Fx2
- i7d7O9kdmD3e32hl95g36wSLx9k7OxgDmKO4bFJSczLLUov07RK4MjZ3/GEu+KlRsfPPJrYG
- xm7FLkZODgkBE4kb+++wdjFycQgJ7GaUOPvpMhNEQkri89OpbF2MHEC2sMThw8UQNc8ZJU71
- nGcDqWET0JP4v2ghM4gtImAusWX6HGaQemYBXYnj980h6qcxSSy6sYAVpIZTwEri/fZeRhBb
- WMBF4uKn2ewgNouAisTS/UvBangFLCWmbv/KDGELSpyc+YQFxGYW0JbofdjKCGHLS2x/O4cZ
- 4k4FiZ9Pl7FCxEUkZne2Qd3jJ3H1cxvTBEbhWUhGzUIyahaSUbOQtC9gZFnFKJlaUJybnlts
- WGCUl1quV5yYW1yal66XnJ+7iREcE1paOxj3rPqgd4iRiYPxEKMEB7OSCK+jt0uqEG9KYmVV
- alF+fFFpTmrxIUZpDhYlcd5vr3tThATSE0tSs1NTC1KLYLJMHJxSDUznhMt2i+s6vry++MkK
- 7TiLeRda5zCoJW+p0bnKFqdW5Sb9/7r/xczbgSsOt8Wd1vt/4vDsIxOuz6t/e1A48O9ie5m3
- O7tiVrM7yLIKa2hLp5fO+OG0t8fM2tBDK9tLRJvJTWCDakuG/M/I85+D9GyOv8j4FPvvs+aj
- Er10lTMFGVoNsk9y/CyMJDyf1d1919RntCvyf++JaQVigX+cd7gIfDrbtMxc5NR0R/u49w1P
- fvG8X3XKWybjTcu7U82ndQKn+4QWrOqQCbde9Vo79SKP15uG2T83OrmHvVQJde5Ie5tqZp94
- ReP275N7Jh8W4FglxHhP8uqe2l0rVN33P1/++oCd1xlO/68vreI7DyixFGckGmoxFxUnAgC1
- uowh+AIAAA==
-X-CMS-MailID: 20231103054937epcas1p2a71620a09d60cb180d0876f340c34c6a
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20220620111357epcas1p103474818319b5dc45260e043b4ffe3cc
-References: <CGME20220620111357epcas1p103474818319b5dc45260e043b4ffe3cc@epcas1p1.samsung.com>
- <20220620111354.448512-1-jh80.chung@samsung.com>
- <169876380794.37728.2863914527348419844.b4-ty@baylibre.com>
- <87h6m4zfbx.fsf@baylibre.com> <056c01da0df2$1cd85fc0$56891f40$@samsung.com>
+References: <20231025-b4-qcom-pinctrl-v1-0-9123d6a217eb@linaro.org>
+ <20231025-b4-qcom-pinctrl-v1-1-9123d6a217eb@linaro.org>
+In-Reply-To: <20231025-b4-qcom-pinctrl-v1-1-9123d6a217eb@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 3 Nov 2023 12:06:42 +0530
+Message-ID: <CAFA6WYNNz2krcqo3z1E0LGX8jwr3q7hLtQuH=vTxPjG_EzkE0A@mail.gmail.com>
+Subject: Re: [PATCH 1/6] pinctrl: qcom: move out of mach-snapdragon
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Robert Marko <robert.marko@sartura.hr>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Luka Perkov <luka.perkov@sartura.hr>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,145 +92,470 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Tue, 31 Oct 2023 at 19:52, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+> Move the Qualcomm pinctrl drivers out of mach-snapdragon and over to the
+> rest of the pinctrl drivers, adjust the drivers so that support for each
+> platform can be enabled/disabled individually and introduce platform
+> specific configuration options.
+>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  arch/arm/mach-snapdragon/Kconfig                   |  4 +++
+>  arch/arm/mach-snapdragon/Makefile                  |  5 ---
+>  drivers/pinctrl/Kconfig                            |  1 +
+>  drivers/pinctrl/Makefile                           |  1 +
+>  drivers/pinctrl/qcom/Kconfig                       | 39 ++++++++++++++++++++++
+>  drivers/pinctrl/qcom/Makefile                      |  9 +++++
+>  .../pinctrl/qcom}/pinctrl-apq8016.c                | 19 +++++++++--
+>  .../pinctrl/qcom}/pinctrl-apq8096.c                | 19 +++++++++--
+>  .../pinctrl/qcom/pinctrl-qcom.c                    | 39 ++++++++++++----------
+>  .../pinctrl/qcom/pinctrl-qcom.h                    | 11 +++---
+>  .../pinctrl/qcom}/pinctrl-qcs404.c                 | 19 +++++++++--
+>  .../pinctrl/qcom}/pinctrl-sdm845.c                 | 19 +++++++++--
+>  12 files changed, 148 insertions(+), 37 deletions(-)
+>
 
-> -----Original Message-----
-> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Jaehoon Chung
-> Sent: Friday, November 3, 2023 10:07 AM
-> To: 'Mattijs Korpershoek' <mkorpershoek@baylibre.com>
-> Cc: lukma@denx.de; u-boot@lists.denx.de
-> Subject: RE: [PATCH] dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
-> 
-> Hi Mathtjjs,
-> 
-> > -----Original Message-----
-> > From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > Sent: Thursday, November 2, 2023 6:15 PM
-> > To: Jaehoon Chung <jh80.chung@samsung.com>
-> > Cc: lukma@denx.de; u-boot@lists.denx.de
-> > Subject: Re: [PATCH] dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
-> >
-> > Hi Jaehoon,
-> >
-> > On mar., oct. 31, 2023 at 15:50, Mattijs Korpershoek <mkorpershoek@baylibre.com> wrote:
-> >
-> > > Hi,
-> > >
-> > > On Mon, 20 Jun 2022 20:13:54 +0900, Jaehoon Chung wrote:
-> > >> Add CONFIG_DFU_NAME_MAX_SIZE to change the proper size.
-> > >> If name is longer than default size, it can do wrong behavior during updating
-> > >> image. So it need to change the proper maximum size.
-> > >>
-> > >> This patch is proviced the solution to change value with configuration.
-> > >>
-> > >>
-> > >> [...]
-> > >
-> > > Thanks, Applied to https://protect2.fireeye.com/v1/url?k=195a8ba3-78d19e99-195b00ec-74fe4860008a-
-> > e609da47a4bcadff&q=1&e=b6fd9ce6-85b6-46a3-81aa-8aa89d16a9ed&u=https%3A%2F%2Fsource.denx.de%2Fu-
-> > boot%2Fcustodians%2Fu-boot-dfu (u-boot-dfu-next)
-> > >
-> > > [1/1] dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
-> > >       https://protect2.fireeye.com/v1/url?k=b04b2ae8-d1c03fd2-b04aa1a7-74fe4860008a-
-> > d8ec8502221dcca0&q=1&e=b6fd9ce6-85b6-46a3-81aa-8aa89d16a9ed&u=https%3A%2F%2Fsource.denx.de%2Fu-
-> > boot%2Fcustodians%2Fu-boot-dfu%2F-%2Fcommit%2Fde9b2e10f10996050a10998a0836abe2f9e425e3
-> >
-> >
-> > This patch breaks CI for both arm32 and arm64 platforms:
-> >
-> > * https://protect2.fireeye.com/v1/url?k=3179f7cc-50f2e2f6-31787c83-74fe4860008a-
-> > a4f5d2c73833c4d5&q=1&e=b6fd9ce6-85b6-46a3-81aa-8aa89d16a9ed&u=https%3A%2F%2Fsource.denx.de%2Fu-
-> > boot%2Fcustodians%2Fu-boot-dfu%2F-%2Fjobs%2F725163
-> > * https://protect2.fireeye.com/v1/url?k=22773f8e-43fc2ab4-2276b4c1-74fe4860008a-
-> > f6dc3d75fe9b283a&q=1&e=b6fd9ce6-85b6-46a3-81aa-8aa89d16a9ed&u=https%3A%2F%2Fsource.denx.de%2Fu-
-> > boot%2Fcustodians%2Fu-boot-dfu%2F-%2Fjobs%2F725164
-> 
-> I couldn't access the above CI URL.
-> 
-> >
-> > It breaks because multiple boards which include dfu.h without having
-> > CONFIG_DFU being set.
-> >
-> > Tom attempted to fix this with:
-> > https://protect2.fireeye.com/v1/url?k=452a9007-24a1853d-452b1b48-74fe4860008a-
-> > a88f870953497071&q=1&e=b6fd9ce6-85b6-46a3-81aa-
-> > 8aa89d16a9ed&u=https%3A%2F%2Fpatchwork.ozlabs.org%2Fproject%2Fuboot%2Flist%2F%3Fseries%3D369275
-> >
-> > But that had some different issues, see:
-> > https://protect2.fireeye.com/v1/url?k=f1c007bd-904b1287-f1c18cf2-74fe4860008a-
-> > a305de1bab5bdff1&q=1&e=b6fd9ce6-85b6-46a3-81aa-
-> > 8aa89d16a9ed&u=https%3A%2F%2Flibera.irclog.whitequark.org%2Fu-boot%2F2023-10-31%2335154532;
-> >
-> > I've fixed it up with the following diff:
-> >
-> > diff --git a/include/dfu.h b/include/dfu.h
-> > index 4573f753c565..2c3ffa3f9297 100644
-> > --- a/include/dfu.h
-> > +++ b/include/dfu.h
-> > @@ -99,7 +99,12 @@ struct virt_internal_data {
-> >         int dev_num;
-> >  };
-> >
-> > +
-> > +#if defined(CONFIG_DFU_NAME_MAX_SIZE)
-> >  #define DFU_NAME_SIZE                  CONFIG_DFU_NAME_MAX_SIZE
-> > +#else
-> > +#define DFU_NAME_SIZE                  32
-> > +#endif
-> >  #ifndef DFU_DEFAULT_POLL_TIMEOUT
-> >  #define DFU_DEFAULT_POLL_TIMEOUT 0
-> >  #endif
-> >
-> > If you have a better idea to fix this, can you please let me know?
-> 
-> After checking this, let you inform.
+Apart from nit below, feel free to add:
 
-It seems that it is depended on USB_GADGET and SPL_USB_GADGET. How about this?
-About <dfu.h> is included in some board files, It needs to check more.
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-index 6502aba96f54..9922da56e704 100644
---- a/drivers/dfu/Kconfig
-+++ b/drivers/dfu/Kconfig
-@@ -13,6 +13,14 @@ config DFU_OVER_TFTP
-        bool
-        depends on NET
+> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+> index eaf75abf4bd5..d12eb42ef9e2 100644
+> --- a/arch/arm/mach-snapdragon/Kconfig
+> +++ b/arch/arm/mach-snapdragon/Kconfig
+> @@ -17,6 +17,7 @@ config SDM845
+>         default n
+>         select LINUX_KERNEL_IMAGE_HEADER
+>         imply CLK_QCOM_SDM845
+> +       imply PINCTRL_QCOM_SDM845
+>
+>  config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+>         default 0x80000000
+> @@ -29,6 +30,7 @@ config TARGET_DRAGONBOARD410C
+>         select BOARD_LATE_INIT
+>         select ENABLE_ARM_SOC_BOOT0_HOOK
+>         imply CLK_QCOM_APQ8016
+> +       imply PINCTRL_QCOM_APQ8016
+>         help
+>           Support for 96Boards Dragonboard 410C. This board complies with
+>           96Board Open Platform Specifications. Features:
+> @@ -43,6 +45,7 @@ config TARGET_DRAGONBOARD410C
+>  config TARGET_DRAGONBOARD820C
+>         bool "96Boards Dragonboard 820C"
+>         imply CLK_QCOM_APQ8096
+> +       imply PINCTRL_QCOM_APQ8096
+>         help
+>           Support for 96Boards Dragonboard 820C. This board complies with
+>           96Board Open Platform Specifications. Features:
+> @@ -77,6 +80,7 @@ config TARGET_QCS404EVB
+>         bool "Qualcomm Technologies, Inc. QCS404 EVB"
+>         select LINUX_KERNEL_IMAGE_HEADER
+>         imply CLK_QCOM_QCS404
+> +       imply PINCTRL_QCOM_QCS404
+>         help
+>           Support for Qualcomm Technologies, Inc. QCS404 evaluation board.
+>           Features:
+> diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+> index 497ee35cf7d3..3a3a297c1768 100644
+> --- a/arch/arm/mach-snapdragon/Makefile
+> +++ b/arch/arm/mach-snapdragon/Makefile
+> @@ -8,9 +8,4 @@ obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
+>  obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
+>  obj-y += misc.o
+>  obj-y += dram.o
+> -obj-y += pinctrl-snapdragon.o
+> -obj-y += pinctrl-apq8016.o
+> -obj-y += pinctrl-apq8096.o
+> -obj-y += pinctrl-qcs404.o
+> -obj-y += pinctrl-sdm845.o
+>  obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
+> diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+> index 75b3ff47a2e8..53f32ea1612e 100644
+> --- a/drivers/pinctrl/Kconfig
+> +++ b/drivers/pinctrl/Kconfig
+> @@ -355,6 +355,7 @@ source "drivers/pinctrl/mvebu/Kconfig"
+>  source "drivers/pinctrl/nexell/Kconfig"
+>  source "drivers/pinctrl/nuvoton/Kconfig"
+>  source "drivers/pinctrl/nxp/Kconfig"
+> +source "drivers/pinctrl/qcom/Kconfig"
+>  source "drivers/pinctrl/renesas/Kconfig"
+>  source "drivers/pinctrl/rockchip/Kconfig"
+>  source "drivers/pinctrl/sunxi/Kconfig"
+> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+> index fc1f01a02cbd..603c2e0a2da2 100644
+> --- a/drivers/pinctrl/Makefile
+> +++ b/drivers/pinctrl/Makefile
+> @@ -17,6 +17,7 @@ obj-$(CONFIG_ARCH_RMOBILE) += renesas/
+>  obj-$(CONFIG_ARCH_RZN1) += renesas/
+>  obj-$(CONFIG_PINCTRL_SANDBOX)  += pinctrl-sandbox.o
+>  obj-$(CONFIG_PINCTRL_SUNXI)    += sunxi/
+> +obj-$(CONFIG_PINCTRL_QCOM) += qcom/
+>  obj-$(CONFIG_PINCTRL_UNIPHIER) += uniphier/
+>  obj-$(CONFIG_PINCTRL_PIC32)    += pinctrl_pic32.o
+>  obj-$(CONFIG_PINCTRL_EXYNOS)   += exynos/
+> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+> new file mode 100644
+> index 000000000000..412925c48788
+> --- /dev/null
+> +++ b/drivers/pinctrl/qcom/Kconfig
+> @@ -0,0 +1,39 @@
+> +if ARCH_SNAPDRAGON
+> +
+> +config PINCTRL_QCOM
+> +       depends on PINCTRL_GENERIC
+> +       def_bool n
+> +
+> +menu "Qualcomm pinctrl drivers"
+> +
+> +config PINCTRL_QCOM_APQ8016
+> +       bool "Qualcomm APQ8016 GCC"
+> +       select PINCTRL_QCOM
+> +       help
+> +         Say Y here to enable support for pinctrl on the MSM8916 / APQ8016
+> +         Snapdragon 410 SoC, as well as the associated GPIO driver.
+> +
+> +config PINCTRL_QCOM_APQ8096
+> +       bool "Qualcomm APQ8096 GCC"
+> +       select PINCTRL_QCOM
+> +       help
+> +         Say Y here to enable support for pinctrl on the MSM8996 / APQ8096
+> +         Snapdragon 820 SoC, as well as the associated GPIO driver.
+> +
+> +config PINCTRL_QCOM_QCS404
+> +       bool "Qualcomm QCS404 GCC"
+> +       select PINCTRL_QCOM
+> +       help
+> +         Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
+> +         as well as the associated GPIO driver.
+> +
+> +config PINCTRL_QCOM_SDM845
+> +       bool "Qualcomm SDM845 GCC"
+> +       select PINCTRL_QCOM
+> +       help
+> +         Say Y here to enable support for pinctrl on the Snapdragon 845 SoC,
+> +         as well as the associated GPIO driver.
+> +
+> +endmenu
+> +
+> +endif
+> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+> new file mode 100644
+> index 000000000000..86f507427301
+> --- /dev/null
+> +++ b/drivers/pinctrl/qcom/Makefile
+> @@ -0,0 +1,9 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (c) 2023 Linaro Ltd.
+> +
+> +obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
+> +obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
+> +obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+> +obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+> +obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+> diff --git a/arch/arm/mach-snapdragon/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> similarity index 75%
+> rename from arch/arm/mach-snapdragon/pinctrl-apq8016.c
+> rename to drivers/pinctrl/qcom/pinctrl-apq8016.c
+> index 70c0be0bca90..bcbc0df50715 100644
+> --- a/arch/arm/mach-snapdragon/pinctrl-apq8016.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+> @@ -6,8 +6,10 @@
+>   *
+>   */
+>
+> -#include "pinctrl-snapdragon.h"
+>  #include <common.h>
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+>
+>  #define MAX_PIN_NAME_LEN 32
+>  static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> @@ -52,10 +54,23 @@ static unsigned int apq8016_get_function_mux(unsigned int selector)
+>         return msm_pinctrl_functions[selector].val;
+>  }
+>
+> -struct msm_pinctrl_data apq8016_data = {
+> +static const struct msm_pinctrl_data apq8016_data = {
+>         .pin_count = 133,
+>         .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>         .get_function_name = apq8016_get_function_name,
+>         .get_function_mux = apq8016_get_function_mux,
+>         .get_pin_name = apq8016_get_pin_name,
+>  };
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +       { .compatible = "qcom,msm8916-pinctrl", .data = (ulong)&apq8016_data },
+> +       { /* Sentinal */ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_apq8016) = {
+> +       .name           = "pinctrl_apq8016",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = msm_pinctrl_ids,
+> +       .ops            = &msm_pinctrl_ops,
+> +       .bind           = msm_pinctrl_bind,
+> +};
+> diff --git a/arch/arm/mach-snapdragon/pinctrl-apq8096.c b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> similarity index 74%
+> rename from arch/arm/mach-snapdragon/pinctrl-apq8096.c
+> rename to drivers/pinctrl/qcom/pinctrl-apq8096.c
+> index 45462f01c2c7..525085617680 100644
+> --- a/arch/arm/mach-snapdragon/pinctrl-apq8096.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+> @@ -6,8 +6,10 @@
+>   *
+>   */
+>
+> -#include "pinctrl-snapdragon.h"
+>  #include <common.h>
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+>
+>  #define MAX_PIN_NAME_LEN 32
+>  static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> @@ -47,10 +49,23 @@ static unsigned int apq8096_get_function_mux(unsigned int selector)
+>         return msm_pinctrl_functions[selector].val;
+>  }
+>
+> -struct msm_pinctrl_data apq8096_data = {
+> +static const struct msm_pinctrl_data apq8096_data = {
+>         .pin_count = 157,
+>         .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>         .get_function_name = apq8096_get_function_name,
+>         .get_function_mux = apq8096_get_function_mux,
+>         .get_pin_name = apq8096_get_pin_name,
+>  };
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +       { .compatible = "qcom,msm8996-pinctrl", .data = (ulong)&apq8096_data },
+> +       { /* Sentinal */ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_apq8096) = {
+> +       .name           = "pinctrl_apq8096",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = msm_pinctrl_ids,
+> +       .ops            = &msm_pinctrl_ops,
+> +       .bind           = msm_pinctrl_bind,
+> +};
+> diff --git a/arch/arm/mach-snapdragon/pinctrl-snapdragon.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> similarity index 85%
+> rename from arch/arm/mach-snapdragon/pinctrl-snapdragon.c
+> rename to drivers/pinctrl/qcom/pinctrl-qcom.c
+> index 826dc5148661..d41272ce9c95 100644
+> --- a/arch/arm/mach-snapdragon/pinctrl-snapdragon.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+> @@ -11,10 +11,11 @@
+>  #include <errno.h>
+>  #include <asm/io.h>
+>  #include <dm/device_compat.h>
+> +#include <dm/device-internal.h>
+>  #include <dm/lists.h>
+>  #include <dm/pinctrl.h>
+>  #include <linux/bitops.h>
+> -#include "pinctrl-snapdragon.h"
+> +#include "pinctrl-qcom.h"
+>
+>  struct msm_pinctrl_priv {
+>         phys_addr_t base;
+> @@ -109,7 +110,7 @@ static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+>         return 0;
+>  }
+>
+> -static struct pinctrl_ops msm_pinctrl_ops = {
+> +struct pinctrl_ops msm_pinctrl_ops = {
+>         .get_pins_count = msm_get_pins_count,
+>         .get_pin_name = msm_get_pin_name,
+>         .set_state = pinctrl_generic_set_state,
+> @@ -121,12 +122,24 @@ static struct pinctrl_ops msm_pinctrl_ops = {
+>         .get_function_name = msm_get_function_name,
+>  };
+>
+> -static int msm_pinctrl_bind(struct udevice *dev)
+> +int msm_pinctrl_bind(struct udevice *dev)
+>  {
+>         ofnode node = dev_ofnode(dev);
+> +       struct msm_pinctrl_data *data = (struct msm_pinctrl_data *)dev_get_driver_data(dev);
+> +       struct driver *drv;
+> +       struct udevice *pinctrl_dev;
+>         const char *name;
+>         int ret;
+>
+> +       drv = lists_driver_lookup_name("qcom_pinctrl");
+> +       if (!drv)
+> +               return -ENOENT;
+> +
+> +       ret = device_bind_with_driver_data(dev_get_parent(dev), drv, ofnode_get_name(node), (ulong)data,
+> +                                          dev_ofnode(dev), &pinctrl_dev);
+> +       if (ret)
+> +               return ret;
+> +
+>         ofnode_get_property(node, "gpio-controller", &ret);
+>         if (ret < 0)
+>                 return 0;
+> @@ -139,28 +152,18 @@ static int msm_pinctrl_bind(struct udevice *dev)
+>         /* Bind gpio node */
+>         ret = device_bind_driver_to_node(dev, "gpio_msm",
+>                                          name, node, NULL);
+> -       if (ret)
+> +       if (ret) {
+> +               device_unbind(pinctrl_dev);
+>                 return ret;
+> -
+> -       dev_dbg(dev, "bind %s\n", name);
+> +       }
+>
+>         return 0;
+>  }
+>
+> -static const struct udevice_id msm_pinctrl_ids[] = {
+> -       { .compatible = "qcom,msm8916-pinctrl", .data = (ulong)&apq8016_data },
+> -       { .compatible = "qcom,msm8996-pinctrl", .data = (ulong)&apq8096_data },
+> -       { .compatible = "qcom,sdm845-pinctrl", .data = (ulong)&sdm845_data },
+> -       { .compatible = "qcom,qcs404-pinctrl", .data = (ulong)&qcs404_data },
+> -       { }
+> -};
+> -
+> -U_BOOT_DRIVER(pinctrl_snapdraon) = {
+> -       .name           = "pinctrl_msm",
+> +U_BOOT_DRIVER(qcom_pinctrl) = {
+> +       .name           = "qcom_pinctrl",
 
-+config DFU_NAME_MAX_SIZE
-+       int "Size of the name to be added in dfu entity"
-+       default 32
-+       depends on DFU || USB_GADGET_DOWNLOAD || SPL_USB_GADGET
-+       help
-+         This value is used to maximum size. If name is longer than default size,
-+         we need to change the proper maximum size.
-+
- if DFU
- config DFU_WRITE_ALT
-        bool
-@@ -112,13 +120,5 @@ config SYS_DFU_MAX_FILE_SIZE
-          this to the maximum filesize (in bytes) for the buffer.
-          If undefined it defaults to the CONFIG_SYS_DFU_DATA_BUF_SIZE.
+nit: I would prefer to rename driver as: pinctrl_qcom
 
--config DFU_NAME_MAX_SIZE
--       int "Size of the name to be added in dfu entity"
--       default 32
--       depends on DFU
--       help
--         This value is used to maximum size. If name is longer than default size,
--         we need to change the proper maximum size.
+-Sumit
 
-I'm running CI with some patch. After checked, I will inform.
-
-Best Regards,
-Jaehoon Chung
-
-> 
-> > Otherwise, I will squash this to keep CI green.
-> >
-> > Thank you
-> >
-> > >
-> > > --
-> > > Mattijs
-
-
+>         .id             = UCLASS_PINCTRL,
+> -       .of_match       = msm_pinctrl_ids,
+>         .priv_auto      = sizeof(struct msm_pinctrl_priv),
+>         .ops            = &msm_pinctrl_ops,
+>         .probe          = msm_pinctrl_probe,
+> -       .bind           = msm_pinctrl_bind,
+>  };
+> diff --git a/arch/arm/mach-snapdragon/pinctrl-snapdragon.h b/drivers/pinctrl/qcom/pinctrl-qcom.h
+> similarity index 68%
+> rename from arch/arm/mach-snapdragon/pinctrl-snapdragon.h
+> rename to drivers/pinctrl/qcom/pinctrl-qcom.h
+> index 178ee01a41f4..1edd9a43ffda 100644
+> --- a/arch/arm/mach-snapdragon/pinctrl-snapdragon.h
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcom.h
+> @@ -5,8 +5,8 @@
+>   * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
+>   *
+>   */
+> -#ifndef _PINCTRL_SNAPDRAGON_H
+> -#define _PINCTRL_SNAPDRAGON_H
+> +#ifndef _PINCTRL_QCOM_H
+> +#define _PINCTRL_QCOM_H
+>
+>  struct udevice;
+>
+> @@ -25,9 +25,8 @@ struct pinctrl_function {
+>         int val;
+>  };
+>
+> -extern struct msm_pinctrl_data apq8016_data;
+> -extern struct msm_pinctrl_data apq8096_data;
+> -extern struct msm_pinctrl_data sdm845_data;
+> -extern struct msm_pinctrl_data qcs404_data;
+> +extern struct pinctrl_ops msm_pinctrl_ops;
+> +
+> +int msm_pinctrl_bind(struct udevice *dev);
+>
+>  #endif
+> diff --git a/arch/arm/mach-snapdragon/pinctrl-qcs404.c b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> similarity index 78%
+> rename from arch/arm/mach-snapdragon/pinctrl-qcs404.c
+> rename to drivers/pinctrl/qcom/pinctrl-qcs404.c
+> index a6e53c4412ec..272331c90b5c 100644
+> --- a/arch/arm/mach-snapdragon/pinctrl-qcs404.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+> @@ -5,8 +5,10 @@
+>   * (C) Copyright 2022 Sumit Garg <sumit.garg@linaro.org>
+>   */
+>
+> -#include "pinctrl-snapdragon.h"
+>  #include <common.h>
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+>
+>  #define MAX_PIN_NAME_LEN 32
+>  static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> @@ -59,10 +61,23 @@ static unsigned int qcs404_get_function_mux(unsigned int selector)
+>         return msm_pinctrl_functions[selector].val;
+>  }
+>
+> -struct msm_pinctrl_data qcs404_data = {
+> +static struct msm_pinctrl_data qcs404_data = {
+>         .pin_count = 126,
+>         .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>         .get_function_name = qcs404_get_function_name,
+>         .get_function_mux = qcs404_get_function_mux,
+>         .get_pin_name = qcs404_get_pin_name,
+>  };
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +       { .compatible = "qcom,qcs404-pinctrl", .data = (ulong)&qcs404_data },
+> +       { /* Sentinal */ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_qcs404) = {
+> +       .name           = "pinctrl_qcs404",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = msm_pinctrl_ids,
+> +       .ops            = &msm_pinctrl_ops,
+> +       .bind           = msm_pinctrl_bind,
+> +};
+> diff --git a/arch/arm/mach-snapdragon/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
+> similarity index 70%
+> rename from arch/arm/mach-snapdragon/pinctrl-sdm845.c
+> rename to drivers/pinctrl/qcom/pinctrl-sdm845.c
+> index 40f2f012fa0d..1a09c5c81dc6 100644
+> --- a/arch/arm/mach-snapdragon/pinctrl-sdm845.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
+> @@ -6,8 +6,10 @@
+>   *
+>   */
+>
+> -#include "pinctrl-snapdragon.h"
+>  #include <common.h>
+> +#include <dm.h>
+> +
+> +#include "pinctrl-qcom.h"
+>
+>  #define MAX_PIN_NAME_LEN 32
+>  static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+> @@ -35,10 +37,23 @@ static unsigned int sdm845_get_function_mux(unsigned int selector)
+>         return msm_pinctrl_functions[selector].val;
+>  }
+>
+> -struct msm_pinctrl_data sdm845_data = {
+> +static struct msm_pinctrl_data sdm845_data = {
+>         .pin_count = 150,
+>         .functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>         .get_function_name = sdm845_get_function_name,
+>         .get_function_mux = sdm845_get_function_mux,
+>         .get_pin_name = sdm845_get_pin_name,
+>  };
+> +
+> +static const struct udevice_id msm_pinctrl_ids[] = {
+> +       { .compatible = "qcom,sdm845-pinctrl", .data = (ulong)&sdm845_data },
+> +       { /* Sentinal */ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_sdm845) = {
+> +       .name           = "pinctrl_sdm845",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = msm_pinctrl_ids,
+> +       .ops            = &msm_pinctrl_ops,
+> +       .bind           = msm_pinctrl_bind,
+> +};
+>
+> --
+> 2.42.0
+>
