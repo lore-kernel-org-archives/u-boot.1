@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1017EC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 13:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B59C0018A
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 13:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C73186FD8;
-	Fri,  3 Nov 2023 14:42:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3031A86B81;
+	Fri,  3 Nov 2023 14:49:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WuBEj4X+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IDi3CoUS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E002686F56; Fri,  3 Nov 2023 14:42:20 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 3C1F086B18; Fri,  3 Nov 2023 14:49:52 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7033086FD8
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 14:42:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C817871A7
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 14:49:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-77774120c6eso113467485a.2
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 06:42:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-32ddfb38c02so1259492f8f.3
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 06:49:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699018935; x=1699623735; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kZ6d8lvutkBOg8izvY5fRAOnhVN8x6SqifJxJ0HKM6U=;
- b=WuBEj4X+G7yYtbkozjG3Zg+pcmGr89V86nX/ccYwyWTivccBrHeegZ+MZw75ZHS7Pw
- JbEZjP2K5ejeYad6H9xHjVsOK/lTpoyMDJR+54GUntpCtpg+7JkPxHkXdLr7DsokV2gu
- xSaob6DqiaUJFMzeFUyzcUKog5C2Zw5WEGHNc=
+ d=linaro.org; s=google; t=1699019387; x=1699624187; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HJLvvIiRtomqaDKitTrYOEHsezKmLsC96CVrOr+1csM=;
+ b=IDi3CoUSgINxXDzz/JR0UmkLLf6KqBXPLS6RzGHKiTgKAMjvZFMLrfEr9eLlL153LQ
+ fOpRy0QYyvWwCMKWCzbosw1c34yvNKUJRhGgZIEXi7QiP3b6zBYSxe1WeyRB6Y4ULKHb
+ Y9WmlExkOyhivA39EzBzbV4vD4/1bfeItyqD2anvSWiNOUrQkhxo7Mj747qYTt5eaumv
+ jHK0LD/0wsczESfFdvQ6AMTMd0gLUjvf/4kGLiLNOuAf9spbOt4ejIn5QSXt4jWllSr/
+ 8gIdZzZ/JRinAy2O8+MX1mz47r7+iIqNG8WZhXv7//fZGk4rQbtYC0Yzhs/XqEzNteUX
+ P50w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699018935; x=1699623735;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kZ6d8lvutkBOg8izvY5fRAOnhVN8x6SqifJxJ0HKM6U=;
- b=ccRr90fys8z26TfT9nut3lwN1Q5HR5/xo/0Er3R5ILmJeFjANfT8UlcZqEbbJLetDI
- FnE9dNMhkiyV4VPmlDEHQN+G9S6NwT5ImUK/40yfTtO8bejtXk6vy3mHTEn1xHaAfNOf
- r4S7r5clFBDRM8fqNzqyOAPYwuxszS+YRAErfpgEEH19tHFt3E6bZoIV4NhFGl85DWGh
- ketCJl+0cXRm3BZwiozlRSbpWA5lRk6h0wvqlVZKGMVA3UmJbrDhfMpXGHuogZcI9Dia
- 1yxXXUh2M74M4D34Nl4V9+fYY0olXZ7R/1wpCUj0tnBCmjhZlurqulMFz6v/fuPPyHae
- fIhQ==
-X-Gm-Message-State: AOJu0Yw5u9lYBEb1mpwcAai/zYv+4apNJtQlLyj1kSMl8wVlP02mAMFJ
- 0f/Ahi552kXtLkYUDLzdKlNx0w==
-X-Google-Smtp-Source: AGHT+IEPMS2pe3f0UwV2HgMEq04IEOttrDmgL7Q2w9Qq2NyjZHXwOqQ+RiVwS6VPeMLMssI132oFHg==
-X-Received: by 2002:a05:620a:4144:b0:773:f6b6:4085 with SMTP id
- k4-20020a05620a414400b00773f6b64085mr26613299qko.54.1699018935121; 
- Fri, 03 Nov 2023 06:42:15 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- t6-20020a05620a004600b007743446efd1sm739922qkt.35.2023.11.03.06.42.14
+ d=1e100.net; s=20230601; t=1699019387; x=1699624187;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HJLvvIiRtomqaDKitTrYOEHsezKmLsC96CVrOr+1csM=;
+ b=wpSCGKnokkpYzMGX1p6n/a4KBY8lnGezFk4XvoqLhNxdaI4k6e2Xy6uYeu6vQj4Dpm
+ MZXkkY13KuI7ssgo2l6nE2M6udT8qxrkCKylyby8C9PdlB0URse7kq8xSlkHGoW941HU
+ w+eV49DswRndeplXpRgaYzJ5c0wkhvwGMzTpsUiSRgv/wDiiKRttrhqd/T145mVuzCs1
+ p7WFr5M370J+BVVgJf8xXLQJnEBHsuIkPiUHA7ZH8UmqLyAGXzkJY6bu/t029maYo7SQ
+ q3ylLHGakY67K5Jvo6REvjw0XGNgeyH5ZBt5ly3390ogx8i0foaGfAKeqCWEuIshQtGo
+ Rd3A==
+X-Gm-Message-State: AOJu0YxZoyqlq5SZ0uEhtTrL+f1sp2T+S9X1n+DtzX0ZffD83wiPlzA4
+ ntPuW/I3nzZ0+og3kk3Oq7PI4CvpQk05lufoX2s6aw==
+X-Google-Smtp-Source: AGHT+IFh5UYQ4JwBk/wJdFCy2BiwyQ9+EFKZ4zL5ZHVt6BXyLwlsNjk/y/378egLrfy7kV/JCraFSg==
+X-Received: by 2002:adf:fa4f:0:b0:317:5747:b955 with SMTP id
+ y15-20020adffa4f000000b003175747b955mr17609303wrr.17.1699019387711; 
+ Fri, 03 Nov 2023 06:49:47 -0700 (PDT)
+Received: from lion.caleb.rex.connolly.tech (host-92-25-138-185.as13285.net.
+ [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
+ s16-20020a5d5110000000b0032f7865a4c7sm1937326wrt.21.2023.11.03.06.49.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 06:42:14 -0700 (PDT)
-Date: Fri, 3 Nov 2023 09:42:12 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-dm
-Message-ID: <20231103134212.GO496310@bill-the-cat>
-References: <CAPnjgZ1QEypD08Py_9k=upHF2SqO3wZ7h5uVT0Pz2qza=a4J1g@mail.gmail.com>
+ Fri, 03 Nov 2023 06:49:47 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Please pull qcom-next-20231103
+Date: Fri,  3 Nov 2023 13:49:46 +0000
+Message-ID: <20231103134946.365001-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dJj/PLkcOA3ZTzOM"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1QEypD08Py_9k=upHF2SqO3wZ7h5uVT0Pz2qza=a4J1g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,65 +88,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---dJj/PLkcOA3ZTzOM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+As discussed, here is the maintainers update for Snapdragon. Sumit Garg who
+maintains a few of the Qualcomm platforms in U-boot has also been added as
+a reviewer.
 
-On Thu, Nov 02, 2023 at 10:54:31PM +0000, Simon Glass wrote:
+The following changes since commit cbba1b7766bd93d74e28202c46e69095ac13760b:
 
-> Hi Tom,
->=20
-> Just various bugfixes, apart from the TI one
->=20
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/3227baad05481=
-e37d75aeae7c7c1467fd6903f7d
->=20
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D54&view=
-=3Dresults
-> (not finished yet)
->=20
->=20
-> The following changes since commit 07fe79c93c5caba181f37844ca95fbda4db3f6=
-13:
->=20
->   Merge tag 'i2cfixes-for-v2024-01-rc2' of
-> https://source.denx.de/u-boot/custodians/u-boot-i2c (2023-11-02
-> 10:12:33 -0400)
->=20
-> are available in the Git repository at:
->=20
->   git://git.denx.de/u-boot-dm.git tags/dm-pull-2nov23
->=20
-> for you to fetch changes up to 3227baad05481e37d75aeae7c7c1467fd6903f7d:
->=20
->   u_boot_pylib: Ensure subprocess is closed down (2023-11-02 09:38:54 -06=
-00)
->=20
+  Merge branch '2023-10-30-assorted-general-updates' (2023-10-30 16:01:54 -0400)
 
-Applied to u-boot/master, thanks!
+are available in the Git repository at:
 
---=20
-Tom
+  git@source.denx.de:/u-boot/custodians/u-boot-snapdragon.git tags/qcom-pull-20231103
 
---dJj/PLkcOA3ZTzOM
-Content-Type: application/pgp-signature; name="signature.asc"
+for you to fetch changes up to 48eb294bec471d5d4e176ad030671a221f307074:
 
------BEGIN PGP SIGNATURE-----
+  MAINTAINERS: update Qualcomm maintainer (2023-11-03 13:17:50 +0000)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVE+LEACgkQFHw5/5Y0
-tyx4pwv/fcIkUYkl/F6yuxR+7/r/2lTjzor52+FdQ7Nbtdhr7Fvd/7LpVDzpaRU/
-I5EhK5x8nl5s0cWP5hok84UFJV7xkhcZuVdWpbczDt4+pCQrgH5uLoAiJXjt7taE
-aZqztfdyCrNHC6JMWowaJ7Omy5UADotx3g28dGSpcNxZ3vbv30FUFm6K5hnc4hLk
-fSKylJp/SJ8g5OhpRugigCSxn42lu7v6AsNIO30yv3murffTO7apctK1q5y2/Qqt
-plptnELE0Opgp+xcvyg0FOWdG0q8yPaxQpS24O6FXPeJBRVxAYnv1XpO/JoJW3Xs
-jDvR++rMVmqHjzlC/sdij74nOUVZ2LwqNGJlxwtfxvVOfJkTW1UrBrioMqz9TcGg
-Y9+xaTtuLriQluojpvgC+800kZc/HAvjzpMSUX/jTIL4I19h+wYLqTOsTVtD17pq
-7WYqv0/xl73pRyK2iqzKYi8Y1hfVkNTgFcla/7h5ZeYutXqwWimGecHEMLvV6AlZ
-WJB/i0Go
-=Z16/
------END PGP SIGNATURE-----
+Caleb Connolly (1):
+      MAINTAINERS: update Qualcomm maintainer
 
---dJj/PLkcOA3ZTzOM--
+ MAINTAINERS | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Thanks,
+
+--
+// Caleb (they/them)
