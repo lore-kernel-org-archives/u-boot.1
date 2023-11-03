@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B5EFC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 15:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B6CC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 15:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6111E87467;
-	Fri,  3 Nov 2023 16:39:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C235087037;
+	Fri,  3 Nov 2023 16:39:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xcvxI+JN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eU1kGPZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2B48870F9; Fri,  3 Nov 2023 16:39:39 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id B126687480; Fri,  3 Nov 2023 16:39:41 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 651888710F
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 16:39:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B210B86FA2
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 16:39:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2c594196344so29791901fa.3
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 08:39:33 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40853c639abso16592795e9.0
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 08:39:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699025972; x=1699630772; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699025975; x=1699630775; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Wum8FcvdH2bGPQw0CampEGidduAHrn+RPHDhzUNaT68=;
- b=xcvxI+JN5cao7pc/QJUok6PnA1T0rIvkezBJEdk7aERYSEmn2r2CObO/s0WoCK5wFs
- xoOzP8Q798ABUBcKgzB0wL/K07D5b6Z4ucOuxdXDOt1LKb6kGTZG3xvwmSC7ZgETOZPm
- /tHoldOWHSiQYOpbxTHaJcOaIQq6EIgQMjNK2+wbcFFj5vTpLd2y17MzISh8Nv1kBIYr
- uB9vR+u3xoqzsTLczzJAMMEtQgykoRjlldXHxRjLdS82aJlHbZLZd/I2jDpyLyu1vwqF
- gX8JuUzU+W3+bb3gK3cpe4VsACDU0IP7ZT2UWOaGC8tQNQCX+BbkWM2K3IOGWRr7vuW9
- 4f+Q==
+ :reply-to; bh=TL8pGhUOm4oSqsu9B3FNFUdsCcrqCr/10daTxm3efdQ=;
+ b=eU1kGPZVpmU/ph3KEcVzgTeZC/4rufNbdjTBpUE0QQsPAqyMkcOpoUH2wa0PJCDOJR
+ 9d69GPJL/fNmNMknYH8w00tL+VqfEUbd6i3Jhd38qAOfKV6hggSmO03ZqMAzdMNIfj9U
+ H6qzqNgFMt9AYnzxtFR36foZ4kn1sWrmQpv7QNrD53okWq6fCNeb7MBKk8jfaXYekTW+
+ wYhdKG4YhM6fJLGFig6u8TRt6SjgBl9z1hBEHn0qrTtmnkycFehkUuA7kvc6pCKfVMvK
+ k+8ar21N3Kmil9v+5DkM0PzMohb15aw4hR/iMN6HXPuksKuUkZcAlZISn3sM+uBeUJ0V
+ iWAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699025972; x=1699630772;
+ d=1e100.net; s=20230601; t=1699025975; x=1699630775;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wum8FcvdH2bGPQw0CampEGidduAHrn+RPHDhzUNaT68=;
- b=QIsxKHbeyq9qWo0JrFGEDh/E5uU4jmYrpax7eO9mhk9NIJl40wXo2xZm/xwFQByIpe
- sVH08HmLNQ8XeE090ceU9kN8m6b4fQsBdYAqk66g+OFDxN3V1a92fB6gSV8fcvVr6Ha4
- HRa0iVuxvZ++77PPjuTB5/4AXmOmf50DWO80WztjG3FixoUGA+6vxtRE755i4IfwKFeC
- cp4KtkDyI4Jd9/RCUvlRfEHI+cNmnOAw9lT9lu9jT/drCKwav3fgi6U1jx54wlMYg++k
- d+qbcPc1Jf7h41uOVcH53Gq90u0l0MXio5pAoaubk0fnDSVjU/2T9OXfbQYnzvSq2NHx
- 4fCA==
-X-Gm-Message-State: AOJu0YyKSXLeZMjyRyxx4X/RBJVi83ivKR+K7uwpqqvH0zYUJ+evY+i0
- kqASPTlLcrpAkp8eCX/0fZg9BQ==
-X-Google-Smtp-Source: AGHT+IGjECyOPCE9rgUNWUQ3UNx0EoDdpXJpLTZPqzImOzeKGMclfu/kp5hHz5zJm+CHgZztK1Scjw==
-X-Received: by 2002:a2e:3c12:0:b0:2c5:1542:57e9 with SMTP id
- j18-20020a2e3c12000000b002c5154257e9mr18538319lja.41.1699025972656; 
- Fri, 03 Nov 2023 08:39:32 -0700 (PDT)
+ bh=TL8pGhUOm4oSqsu9B3FNFUdsCcrqCr/10daTxm3efdQ=;
+ b=GnihyZXO1eJtv5TOlfys5s/pSJ6R7rrMpUlNSVi99MyXW1fCySURN9liOpKWvFTaYi
+ Gt7B5CKFoyf+v5xNyaqnbW56WPEvfwoJKsUDha1wjSlBDK1/vUeGlCcaEJ2NW2gcwN/0
+ 1y6pYDQ3+/C3DPgrCr/C08lC5abOBl4gAGHOHIzXzrlC1MgDQ7NQyIZpJVra/0TgkwZF
+ KamKGrrlgYTKl0ClPh1yFzdo+jCYLNklCw0k7/JOJYTmANiz88y0RSUCo3OecpH7YWzm
+ rmEhKOMwAkYPU6qCwmt2KYUPN5Yk56AJuTdFiWkt/GLjcXilfzz9m3N50a97yM/clEu4
+ N8/g==
+X-Gm-Message-State: AOJu0Yzm1N1KPSYFz+ckRyu0q0PbV1CeONEDx07o2FFDF3UYii+Vp/Vm
+ l5rXO+YYVnlpmR8ZQCc0Q/VnbQ==
+X-Google-Smtp-Source: AGHT+IGf+U8BCq290B9i4GUYHwZlZajY6mSEbKUcqh7IcsCVK0KB1UNNj2pkhCA26farzFOYkymQ9A==
+X-Received: by 2002:a05:600c:4ecb:b0:407:5ad0:ab5b with SMTP id
+ g11-20020a05600c4ecb00b004075ad0ab5bmr18227375wmq.8.1699025975176; 
+ Fri, 03 Nov 2023 08:39:35 -0700 (PDT)
 Received: from lion.localdomain (host-92-25-138-185.as13285.net.
  [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
- fm15-20020a05600c0c0f00b00405391f485fsm2928334wmb.41.2023.11.03.08.39.31
+ fm15-20020a05600c0c0f00b00405391f485fsm2928334wmb.41.2023.11.03.08.39.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 08:39:32 -0700 (PDT)
+ Fri, 03 Nov 2023 08:39:34 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 03 Nov 2023 15:39:26 +0000
-Subject: [PATCH v3 2/7] clk/qcom: move ipq4019 driver from mach-ipq40xx
+Date: Fri, 03 Nov 2023 15:39:28 +0000
+Subject: [PATCH v3 4/7] clk/qcom: sdm845: add register map for simple gate
+ clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231103-b4-qcom-clk-v3-2-8d2d460ece84@linaro.org>
+Message-Id: <20231103-b4-qcom-clk-v3-4-8d2d460ece84@linaro.org>
 References: <20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org>
 In-Reply-To: <20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -84,13 +85,13 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
  u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4632;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7408;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=iYFPT2lJUrsBSjeNthaSCN9/BiAzK2lKNsXZEWPQhqE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlRXEQMLVu64Zd48yob7630Nmj8f2G97TvZ86Yr1N/V2F
- JvfOvano5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEwkzYCRof2vasJlg0UptoZK
- GjUVLCcKRI5W+pausMyPKfiwrVzlEcNv9mTOfY0m12/8q5zrpdr87ebr4+HsZrwHPv+z2X184h7
- 7cgA=
+ bh=E/nZc7E17Ykir35ydpDJEkFvOGJwbjw9RvWljfPBdvE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlRXEcNLlyd2bp9Uezr/lcamiMZjebPr5Rw73m1687jvj
+ 0KN2n61jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRfScY/kpwMxrsZjsRcHLK
+ 42Oz/vvw/zrUuGamN28Lg0bI1qsG8fsZfrPrRc2Yv2R2iHw723YutpRWds0J0t9qJ37xO67I+yq
+ 15Q4A
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -109,152 +110,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This driver is just a stub, but it's necessary to support the upcoming
-reset driver changes.
+Many gate clocks can be enabled with a single register write, add support
+for defining these simple gate clocks and add the ones found on SDM845.
+
+While we're here, inline clk_init_uart() into msm_set_rate().
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/Kconfig                                   |  1 +
- arch/arm/mach-ipq40xx/Makefile                     |  1 -
- drivers/clk/qcom/Kconfig                           |  8 +++++
- drivers/clk/qcom/Makefile                          |  1 +
- .../clk/qcom}/clock-ipq4019.c                      | 41 ++--------------------
- drivers/clk/qcom/clock-qcom.c                      |  1 +
- 6 files changed, 13 insertions(+), 40 deletions(-)
+ drivers/clk/qcom/clock-qcom.h   | 26 ++++++++++++
+ drivers/clk/qcom/clock-sdm845.c | 87 +++++++++++++++++++++++++++++++++++------
+ 2 files changed, 101 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index d812685c9842..8833ee3e8654 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -766,6 +766,7 @@ config ARCH_IPQ40XX
- 	select CLK
- 	select SMEM
- 	select OF_CONTROL
-+	select CLK_QCOM_IPQ4019
- 	imply CMD_DM
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index a9f895c2422e..6d399db987b6 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -5,6 +5,8 @@
+ #ifndef _CLOCK_QCOM_H
+ #define _CLOCK_QCOM_H
  
- config ARCH_KEYSTONE
-diff --git a/arch/arm/mach-ipq40xx/Makefile b/arch/arm/mach-ipq40xx/Makefile
-index 08a65b8854d3..b36a935c6f9f 100644
---- a/arch/arm/mach-ipq40xx/Makefile
-+++ b/arch/arm/mach-ipq40xx/Makefile
-@@ -4,6 +4,5 @@
- #
- # Author: Robert Marko <robert.marko@sartura.hr>
- 
--obj-y += clock-ipq4019.o
- obj-y += pinctrl-snapdragon.o
- obj-y += pinctrl-ipq4019.o
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index a884f077d9b9..0df0d1881a49 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -23,6 +23,14 @@ config CLK_QCOM_APQ8096
- 	  on the Snapdragon APQ8096 SoC. This driver supports the clocks
- 	  and resets exposed by the GCC hardware block.
- 
-+config CLK_QCOM_IPQ4019
-+	bool "Qualcomm IPQ4019 GCC"
-+	select CLK_QCOM
-+	help
-+	  Say Y here to enable support for the Global Clock Controller
-+	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
-+	  and resets exposed by the GCC hardware block.
++#include <asm/io.h>
 +
- config CLK_QCOM_QCS404
- 	bool "Qualcomm QCS404 GCC"
- 	select CLK_QCOM
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index 44d55583596d..cb179fdac583 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -6,4 +6,5 @@ obj-y += clock-qcom.o
- obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
- obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
- obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
-+obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
- obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-diff --git a/arch/arm/mach-ipq40xx/clock-ipq4019.c b/drivers/clk/qcom/clock-ipq4019.c
-similarity index 56%
-rename from arch/arm/mach-ipq40xx/clock-ipq4019.c
-rename to drivers/clk/qcom/clock-ipq4019.c
-index c1d5c4ecdd81..04c99964df15 100644
---- a/arch/arm/mach-ipq40xx/clock-ipq4019.c
-+++ b/drivers/clk/qcom/clock-ipq4019.c
-@@ -12,12 +12,9 @@
+ #define CFG_CLK_SRC_CXO   (0 << 8)
+ #define CFG_CLK_SRC_GPLL0 (1 << 8)
+ #define CFG_CLK_SRC_GPLL0_EVEN (6 << 8)
+@@ -30,6 +32,18 @@ struct bcr_regs {
+ 	uintptr_t D;
+ };
+ 
++struct gate_clk {
++	uintptr_t reg;
++	u32 en_val;
++	const char *name;
++};
++
++#ifdef DEBUG
++#define GATE_CLK(clk, reg, val) [clk] = { reg, val, #clk }
++#else
++#define GATE_CLK(clk, reg, val) [clk] = { reg, val, NULL }
++#endif
++
+ struct qcom_reset_map {
+ 	unsigned int reg;
+ 	u8 bit;
+@@ -38,6 +52,8 @@ struct qcom_reset_map {
+ struct msm_clk_data {
+ 	const struct qcom_reset_map	*resets;
+ 	unsigned long			num_resets;
++	const struct gate_clk		*clks;
++	unsigned long			num_clks;
+ };
+ 
+ struct msm_clk_priv {
+@@ -55,4 +71,14 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
+ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
+ 		      int source);
+ 
++static inline void qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
++{
++	u32 val;
++	if (id >= priv->data->num_clks || priv->data->clks[id].reg == 0)
++		return;
++
++	val = readl(priv->base + priv->data->clks[id].reg);
++	writel(val | priv->data->clks[id].en_val, priv->base + priv->data->clks[id].reg);
++}
++
+ #endif
+diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
+index a7a43f69b9b3..57124e2a661a 100644
+--- a/drivers/clk/qcom/clock-sdm845.c
++++ b/drivers/clk/qcom/clock-sdm845.c
+@@ -11,6 +11,7 @@
  #include <common.h>
+ #include <clk-uclass.h>
  #include <dm.h>
++#include <linux/delay.h>
  #include <errno.h>
--
- #include <dt-bindings/clock/qcom,ipq4019-gcc.h>
- 
--struct msm_clk_priv {
--	phys_addr_t base;
--};
-+#include "clock-qcom.h"
- 
- ulong msm_set_rate(struct clk *clk, ulong rate)
- {
-@@ -30,23 +27,7 @@ ulong msm_set_rate(struct clk *clk, ulong rate)
- 	}
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+@@ -71,30 +72,90 @@ const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
+ 	return f - 1;
  }
  
--static int msm_clk_probe(struct udevice *dev)
+-static int clk_init_uart(struct msm_clk_priv *priv, uint rate)
 -{
--	struct msm_clk_priv *priv = dev_get_priv(dev);
+-	const struct freq_tbl *freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
 -
--	priv->base = dev_read_addr(dev);
--	if (priv->base == FDT_ADDR_T_NONE)
--		return -EINVAL;
+-	clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
+-						freq->pre_div, freq->m, freq->n, freq->src);
 -
 -	return 0;
 -}
 -
--static ulong msm_clk_set_rate(struct clk *clk, ulong rate)
--{
--	return msm_set_rate(clk, rate);
--}
--
--static int msm_enable(struct clk *clk)
-+int msm_enable(struct clk *clk)
+ ulong msm_set_rate(struct clk *clk, ulong rate)
  {
+ 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++	const struct freq_tbl *freq;
+ 
  	switch (clk->id) {
- 	case GCC_BLSP1_QUP1_SPI_APPS_CLK: /*SPI1*/
-@@ -68,21 +49,3 @@ static int msm_enable(struct clk *clk)
+-	case GCC_QUPV3_WRAP1_S1_CLK: /*UART2*/
+-		return clk_init_uart(priv, rate);
++	case GCC_QUPV3_WRAP1_S1_CLK: /* UART9 */
++		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
++		clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
++				     freq->pre_div, freq->m, freq->n, freq->src);
++
++		return freq->freq;
+ 	default:
+ 		return 0;
  	}
  }
  
--static struct clk_ops msm_clk_ops = {
--	.set_rate = msm_clk_set_rate,
--	.enable = msm_enable,
--};
--
--static const struct udevice_id msm_clk_ids[] = {
--	{ .compatible = "qcom,gcc-ipq4019" },
--	{ }
--};
--
--U_BOOT_DRIVER(clk_msm) = {
--	.name		= "clk_msm",
--	.id		= UCLASS_CLK,
--	.of_match	= msm_clk_ids,
--	.ops		= &msm_clk_ops,
--	.priv_auto	= sizeof(struct msm_clk_priv),
--	.probe		= msm_clk_probe,
--};
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 5667abeb89a4..5914616fba5d 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -166,6 +166,7 @@ static const struct udevice_id msm_clk_ids[] = {
- 	{ .compatible = "qcom,gcc-apq8016" },
- 	{ .compatible = "qcom,gcc-msm8996" },
- 	{ .compatible = "qcom,gcc-apq8096" },
-+	{ .compatible = "qcom,gcc-ipq4019" },
- 	{ .compatible = "qcom,gcc-sdm845" },
- 	{ .compatible = "qcom,gcc-qcs404" },
- 	{ }
++static const struct gate_clk sdm845_clks[] = {
++	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,		0x5200c, 0x00000400),
++	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,		0x5200c, 0x00000800),
++	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,		0x5200c, 0x00001000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,		0x5200c, 0x00002000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK,		0x5200c, 0x00004000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,		0x5200c, 0x00008000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S6_CLK,		0x5200c, 0x00010000),
++	GATE_CLK(GCC_QUPV3_WRAP0_S7_CLK,		0x5200c, 0x00020000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,		0x5200c, 0x00400000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,		0x5200c, 0x00800000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,		0x5200c, 0x02000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,		0x5200c, 0x04000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,		0x5200c, 0x08000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S6_CLK,		0x5200c, 0x10000000),
++	GATE_CLK(GCC_QUPV3_WRAP1_S7_CLK,		0x5200c, 0x20000000),
++	GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,		0x5200c, 0x00000040),
++	GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,		0x5200c, 0x00000080),
++	GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,		0x5200c, 0x00100000),
++	GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,		0x5200c, 0x00200000),
++	GATE_CLK(GCC_SDCC2_AHB_CLK,			0x14008, 0x00000001),
++	GATE_CLK(GCC_SDCC2_APPS_CLK,			0x14004, 0x00000001),
++	GATE_CLK(GCC_SDCC4_AHB_CLK,			0x16008, 0x00000001),
++	GATE_CLK(GCC_SDCC4_APPS_CLK,			0x16004, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_AHB_CLK,			0x75010, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_AXI_CLK,			0x7500c, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_CLKREF_CLK,		0x8c004, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_ICE_CORE_CLK,		0x75058, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_PHY_AUX_CLK,		0x7508c, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_0_CLK,		0x75018, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_RX_SYMBOL_1_CLK,		0x750a8, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_TX_SYMBOL_0_CLK,		0x75014, 0x00000001),
++	GATE_CLK(GCC_UFS_CARD_UNIPRO_CORE_CLK,		0x75054, 0x00000001),
++	GATE_CLK(GCC_UFS_MEM_CLKREF_CLK,		0x8c000, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77010, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x7700c, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,		0x77058, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,		0x7708c, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,		0x77018, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,		0x770a8, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,		0x77014, 0x00000001),
++	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,		0x77054, 0x00000001),
++	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,		0x0f00c, 0x00000001),
++	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x0f014, 0x00000001),
++	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x0f010, 0x00000001),
++	GATE_CLK(GCC_USB30_SEC_MASTER_CLK,		0x1000c, 0x00000001),
++	GATE_CLK(GCC_USB30_SEC_MOCK_UTMI_CLK,		0x10014, 0x00000001),
++	GATE_CLK(GCC_USB30_SEC_SLEEP_CLK,		0x10010, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_CLKREF_CLK,		0x8c008, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,		0x0f04c, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,		0x0f050, 0x00000001),
++	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,		0x0f054, 0x00000001),
++	GATE_CLK(GCC_USB3_SEC_CLKREF_CLK,		0x8c028, 0x00000001),
++	GATE_CLK(GCC_USB3_SEC_PHY_AUX_CLK,		0x1004c, 0x00000001),
++	GATE_CLK(GCC_USB3_SEC_PHY_PIPE_CLK,		0x10054, 0x00000001),
++	GATE_CLK(GCC_USB3_SEC_PHY_COM_AUX_CLK,		0x10050, 0x00000001),
++	GATE_CLK(GCC_USB_PHY_CFG_AHB2PHY_CLK,		0x6a004, 0x00000001),
++};
++
+ int msm_enable(struct clk *clk)
+ {
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++
++	debug("%s: clk %s\n", __func__, sdm845_clks[clk->id].name);
++
++	qcom_gate_clk_en(priv, clk->id);
++
+ 	return 0;
+ }
+ 
+@@ -121,6 +182,8 @@ static const struct qcom_reset_map sdm845_gcc_resets[] = {
+ static const struct msm_clk_data qcs404_gcc_data = {
+ 	.resets = sdm845_gcc_resets,
+ 	.num_resets = ARRAY_SIZE(sdm845_gcc_resets),
++	.clks = sdm845_clks,
++	.num_clks = ARRAY_SIZE(sdm845_clks),
+ };
+ 
+ static const struct udevice_id gcc_sdm845_of_match[] = {
 
 -- 
 2.42.0
