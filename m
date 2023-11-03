@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F54C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 22:47:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DFE6C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 22:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95B848745B;
-	Fri,  3 Nov 2023 23:47:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 873B186E02;
+	Fri,  3 Nov 2023 23:52:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cNItZirF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HouQ7G8Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CC4F87468; Fri,  3 Nov 2023 23:47:48 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 3CE7886DAF; Fri,  3 Nov 2023 23:52:09 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27B2A86FA5
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 23:47:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E15E8703A
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 23:51:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5845b7ee438so431963eaf.1
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 15:47:46 -0700 (PDT)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1cc2b8deb23so4693165ad.1
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 15:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699051665; x=1699656465; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Nnx5yCMY7UVwOWi8MtMC1arMe2QcymGZX1Li9gSRpOE=;
- b=cNItZirFwtRDts0L2T+/bjwybZ2uX9/1LpQsliFKD3Lod/9OfZ0s5rMC/BcFk751dW
- nPGJjH+uzRjxcmMucX/oj1vEdXg2H/L1gMmuubwi60woA/yY6MwqaXGI2SguOUJzwxcq
- N07w7XDJQsM/qEfBkpFeokDHLSj/bEJqHBA7uIpmrsumhQEohiWukPlfOmhRh+toPupV
- pMCnRvBGW2DiT7CHomlHDcOtovkiO8FDAgug3Ev6asQg86GNqPvOObliN7BzKTGCYjxt
- WbHW2dytoNdpmstcW/urDnuL9F9xAjT0gEtUqNUyXHpVW24dh8wDqfZ1aI9czgvaPmq/
- RT1w==
+ d=gmail.com; s=20230601; t=1699051917; x=1699656717; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zvgUiO+7itevWSakiHAyVR/E9VhFTno/fCCZsjpX1wk=;
+ b=HouQ7G8Yv6CEiRDceu0n42EKOWNyjkQtfMX0Fdig5I4cwNmejy9+/mtz2372hgecp+
+ r6RhmDycsVj5PVONqIF62TxXRiADz2Lk6TTgV5QDEM3OQdmp5egHUyEk717pgBI0uymW
+ zUI9ReZynnWx0dc/tUwKs0to+hUwHHD1PIlKJmxmuRvnh92xHlkzcDAqC8cdQfVOCdf4
+ Zz1WAI6RzfC7aeNAvpsQMW4OYhFM/+qDhJmZtBZVza8V7+M1ZiiCFaQ81F82XmQQEum9
+ 3Osbeh8rlLW8ej/O27SBxRkBRrky0FPTuPgioO2cVxwRZvKisGvYi011El80Af+xMy17
+ g1xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699051665; x=1699656465;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Nnx5yCMY7UVwOWi8MtMC1arMe2QcymGZX1Li9gSRpOE=;
- b=uSg8B3fWaKsO+URQTshwC6iuhJPWtC1MlmXqFqf2T088oS6iD0v3fMizpgKp9kJv+w
- +VK3r3RCqhrUALX8iRAIVz/zXB1Eet576UV5e3aR37MxrX7UIdaSF/4lPRh/EcMy8VBg
- lNKw6eIC465jdxMrAgXmMavafnnYDZW1vVA7YLDT8eWI9bortTQ/0jcvhbLbVNRA6XvW
- JFrxu29IMrL1bRwQ4sgMdXrZfMHyPnDY/Ig7hrCH+WSs9WmqkeND2rSrCvN5VDVJ6m2a
- vPwbo1vs1PaFpAFwkiyevc1NzkQNuQVGlD54kPV6NXMYlOSAv6fvriUXFADw6NuGUu+x
- LthA==
-X-Gm-Message-State: AOJu0Yz8ujp/j5n6YyKoYd/4vxRN1xY/O9UV/RT+0PZl7eiXvnCIjNFN
- 9Hukwk0fI++Kv1CchhCWIwwK8PSAjUw=
-X-Google-Smtp-Source: AGHT+IFTiqtfLwEeaaLNnG5bIcVCZLbTsoYqVMZEpA+8ynYZulUFFabcIP0k52UximGmQSSd6ZQQ6g==
-X-Received: by 2002:a05:6830:390a:b0:6c0:c1ba:8f78 with SMTP id
- br10-20020a056830390a00b006c0c1ba8f78mr25380789otb.0.1699051664731; 
- Fri, 03 Nov 2023 15:47:44 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b4e9:3424:1f72:d6d3])
- by smtp.gmail.com with ESMTPSA id
- c21-20020a05622a025500b004180fdcb482sm1080805qtx.81.2023.11.03.15.47.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 15:47:44 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] pico-imx7d: Remove board_phy_config()
-Date: Fri,  3 Nov 2023 19:47:33 -0300
-Message-Id: <20231103224733.59410-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1699051917; x=1699656717;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zvgUiO+7itevWSakiHAyVR/E9VhFTno/fCCZsjpX1wk=;
+ b=QpMnBz4MQy/5QU7150rc/hW+bh0MHeGyRWHts9hEpQrhxwy2kME8dk+7IUS7KTdwh9
+ 2BC8eTn4m5BvbowElJbxmVjAV587/jGH0kMSMt3g5f/TaaIJovBFfsmHhQs+/eNe1rTO
+ IzeMMHmzpdQvPoIT7ScGOfidfxy1jB4mnlScAh8WdX3MGeECBxfH9NyflUtRzfyWIeW0
+ 6DI3wtQvyFAW9NCchykVnNWctmLWnau7Jh5ZZTEekYb2d74XXqjzD+54e9aJwqS8Zu6k
+ GBWIdTxH/0sYcAQMFAAQt4MC75l4O/bNpdF0uCAyL6EYrDo6L6nv4nJ3rQuKkRXCN9rm
+ qU4A==
+X-Gm-Message-State: AOJu0Yx7kup92ZiUw/bQNAIOQenLwKTUzI6xZBZqDttFz9om7UvGli2F
+ iuIVStBvv4pkocSfgHCcJWLoxUAFs4NKVaDr978=
+X-Google-Smtp-Source: AGHT+IEkSTcSnh7qeLpCsZyemHnAfgmXWCKHpgcQSQSVJ+l7SmmaKy/IVQVC1iej5tnYz5VeJ9NKynfAJoKUGN6tBdg=
+X-Received: by 2002:a17:90a:fe10:b0:280:a26f:5860 with SMTP id
+ ck16-20020a17090afe1000b00280a26f5860mr10823759pjb.1.1699051916868; Fri, 03
+ Nov 2023 15:51:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231103211640.423-1-egyszeregy@freemail.hu>
+In-Reply-To: <20231103211640.423-1-egyszeregy@freemail.hu>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 3 Nov 2023 19:51:45 -0300
+Message-ID: <CAOMZO5CDvCqjC_0Ka_-k39jpWW=0BXZjpgnMbcNeSZhFBdWYAg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] pico-imx7d: fix typo in AR8035 comment
+To: egyszeregy@freemail.hu
+Cc: u-boot@lists.denx.de, otavio@ossystems.com.br
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,75 +86,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+Hi Benjamin,
 
-With Ethernet DM in place, there is no longer the need for having
-the board_phy_config() anymore.
+On Fri, Nov 3, 2023 at 6:16=E2=80=AFPM <egyszeregy@freemail.hu> wrote:
+>
+> From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+>
+> Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+> ---
+>  board/technexion/pico-imx7d/pico-imx7d.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/=
+pico-imx7d/pico-imx7d.c
+> index 6e98b85b28..7f5a092457 100644
+> --- a/board/technexion/pico-imx7d/pico-imx7d.c
+> +++ b/board/technexion/pico-imx7d/pico-imx7d.c
+> @@ -106,7 +106,7 @@ int board_phy_config(struct phy_device *phydev)
+>  {
+>         unsigned short val;
+>
+> -       /* To enable AR8035 ouput a 125MHz clk from CLK_25M */
+> +       /* To enable AR8035 output a 125MHz clk from CLK_25M */
 
-Remove it.
+After looking closer to this code, now that we have Ethernet DM in
+place, this whole board_phy_config()
+can be removed completely. This also causes the typo to be removed :-)
 
-Tested on imx7d-pico-pi board:
-
-=> setenv autoload no
-=> dhcp
-BOOTP broadcast 1
-*** Unhandled DHCP Option in OFFER/ACK: 42
-DHCP client bound to address 192.168.0.138 (138 ms)
-=> tftp zImage
-Using ethernet@30be0000 device
-TFTP from server 192.168.0.16; our IP address is 192.168.0.138
-Filename 'zImage'.
-Load address: 0x80800000
-Loading: #################################################################
-....
-	 #################################################################
-	 ##########
-	 4.3 MiB/s
-done
-Bytes transferred = 9034120 (89d988 hex)
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- board/technexion/pico-imx7d/pico-imx7d.c | 26 ------------------------
- 1 file changed, 26 deletions(-)
-
-diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/pico-imx7d/pico-imx7d.c
-index 6e98b85b2873..5def6eda43e5 100644
---- a/board/technexion/pico-imx7d/pico-imx7d.c
-+++ b/board/technexion/pico-imx7d/pico-imx7d.c
-@@ -101,32 +101,6 @@ static int setup_fec(void)
- 
- 	return set_clk_enet(ENET_125MHZ);
- }
--
--int board_phy_config(struct phy_device *phydev)
--{
--	unsigned short val;
--
--	/* To enable AR8035 ouput a 125MHz clk from CLK_25M */
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
--
--	val = phy_read(phydev, MDIO_DEVAD_NONE, 0xe);
--	val &= 0xffe7;
--	val |= 0x18;
--	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, val);
--
--	/* introduce tx clock delay */
--	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x5);
--	val = phy_read(phydev, MDIO_DEVAD_NONE, 0x1e);
--	val |= 0x0100;
--	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, val);
--
--	if (phydev->drv->config)
--		phydev->drv->config(phydev);
--
--	return 0;
--}
- #endif
- 
- static void setup_iomux_uart(void)
--- 
-2.34.1
-
+Here is the patch I sent:
+https://lore.kernel.org/u-boot/20231103224733.59410-1-festevam@gmail.com/
