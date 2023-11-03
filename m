@@ -4,80 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753D0C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 14:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E89C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 15:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB09B871DA;
-	Fri,  3 Nov 2023 15:39:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E8D3871F3;
+	Fri,  3 Nov 2023 16:39:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DTIMG8RD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j3UOkChv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F8C38723E; Fri,  3 Nov 2023 15:39:34 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id B5C7287037; Fri,  3 Nov 2023 16:39:36 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07ED0871B2
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 15:39:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7414087037
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 16:39:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-66d17bdabe1so12342616d6.0
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 07:39:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-507c8316abcso2890182e87.1
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 08:39:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699022369; x=1699627169; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=b2MgCwiPzJxz9pbEaCvtg+OrynrmNp5eSGZTtFS9byE=;
- b=DTIMG8RD1+8mAZ2+T8HciQi4/oIrhhsbbDjO6k2jwUQn4QnjzzdoPpNY1QK7BGznGG
- Ji3hDvWTs3PXRu5ex9KeWED9k1NMYdr8stdB54jo7NcUiPXyvfT5npCa38AmwfbvtB46
- gRq/WjcpTN6byfgQ0gy6I4UNBrTEtxsQZv4GM=
+ d=linaro.org; s=google; t=1699025971; x=1699630771; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kXf+6v1EhgsiRIP/cBxm1fQIr2rY8OIv4e/Alk3FPpo=;
+ b=j3UOkChvELcu9cCAXkRwUN8dksIu/5eWKmHh8CpIJtfaVscIG5ZEWYfdJOsCx0fNpU
+ LyvAKw+8H0P15RjUiX5LltO6KAmJEfCLP3gMcg9ppv9aV9D5xsohq9oI3vhUmwj9XqNL
+ iUVysEMfQQAxLveIv/MXGj4AQ/Gjj6ue+ZPGwTTu0iGQWVzF9sx6LCrqpE1YI5tikud5
+ ScrNxmTfegmwQa4KtX1MEGC/1OsuFiDIqmEFqs5rfUvKVEzf3qVLIwaIDBaCtP+pm0ew
+ lwTBcWVMyo56DvV0Z/vOxMo5Tvib3Mj57yIqGDIjeFsTHkrkCChonG6x70QVN0Mu0uTI
+ 8P4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699022369; x=1699627169;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b2MgCwiPzJxz9pbEaCvtg+OrynrmNp5eSGZTtFS9byE=;
- b=tOw+6OeKZy9AEtCeg1qNTvR9fQdup2JdDSdcn9s/WebG26T+ql9YdVPoBEqXEMFxi2
- 9yumbK2cVSNZMKAsp+3Wu4b3RoK2WN+Q+N3ndgb9DT4VxgLFz9Akvj+GEcuVxVAMBx9/
- zWYNDBeG4CeJsP8MFriIOR1LnZf4jE82gBtEX+wVT55P/PLPIkkZ4rODfJgfkWsKy9vP
- LPa3N/VGhSZFpvpImJEkjNO+Wry0AqBYVSRlhhFZJxEFGFzUflY3unLKAybOwAhFU+NW
- QKlTIiHsSvtQax371Os+o3qtSLAEpqPSY1BT9gWVuf0gKR2gC8VFV3fyyWqCejf1AOy4
- rZDA==
-X-Gm-Message-State: AOJu0YyAdPpxmocwjxkvy5NfgLjl6kAZCWewskWbJ568w1UchP9io+Jy
- ksmcP1cfuk8E72wRhq55pk7UPA==
-X-Google-Smtp-Source: AGHT+IHV7wW7BlFeQL9EknK7MCG9XBouPoBl4sv3N0TnrEoDF0xPHCcQ5hTLgzd+9XQOlYpsrtXYRA==
-X-Received: by 2002:a05:6214:e4c:b0:66d:1624:2203 with SMTP id
- o12-20020a0562140e4c00b0066d16242203mr23749885qvc.20.1699022368836; 
- Fri, 03 Nov 2023 07:39:28 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- s8-20020ad45248000000b00670867d7bdfsm785823qvq.122.2023.11.03.07.39.27
+ d=1e100.net; s=20230601; t=1699025971; x=1699630771;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kXf+6v1EhgsiRIP/cBxm1fQIr2rY8OIv4e/Alk3FPpo=;
+ b=Dt5z4JeuD84gpSqPoBp9vGjKJjlpH/Tyw3LEamDk4pKDRej9NFID3Ax2if7mXcTV/k
+ IFn/h76hPHT1/hdmZG4o0DPcJAOZA/tcLGBHCtTK0oE2IfHz+85OxheaRmF0Jv/jb7Kj
+ SWrgiwWkwwlFKPMEJKfa/qzeCQLHTUlenxwV+W8EAzgV4TpbhgmBzhDjj5SzpGRiKMz5
+ oN/hilfakI1Eo/KYkn8kzBZQCi8QeojFPhaxWrvP2fP/CkjOyXh0GyH9hnGSLtZ3+SnF
+ 7FoukQIwSkU+m0TqOu/k1AJJeDXCl1jKVYmhGkLpa6JIp9z0tdMQHXpkFBkKbXfsF2Vb
+ zlEw==
+X-Gm-Message-State: AOJu0YyfNN3BW0FnJMVYD/I7pVZKmWyCLfPdSfWq522ibLRPhVe73nc7
+ Hzar37al+eHaSYxHnkvF6659hw==
+X-Google-Smtp-Source: AGHT+IFbQTt5S3feVN3ZweDHyyQyx6/NpsMHEWetVW9ceD8Nv6za/Vb6M7zyhQr2BUaCz1E/lcIt8g==
+X-Received: by 2002:ac2:4435:0:b0:500:a378:db71 with SMTP id
+ w21-20020ac24435000000b00500a378db71mr15964251lfl.57.1699025970597; 
+ Fri, 03 Nov 2023 08:39:30 -0700 (PDT)
+Received: from lion.localdomain (host-92-25-138-185.as13285.net.
+ [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
+ fm15-20020a05600c0c0f00b00405391f485fsm2928334wmb.41.2023.11.03.08.39.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Nov 2023 07:39:28 -0700 (PDT)
-Date: Fri, 3 Nov 2023 10:39:25 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 00/15] board: ti: Add support for BeagleBone AI-64
-Message-ID: <20231103143925.GP496310@bill-the-cat>
-References: <20231103003805.2420005-1-nm@ti.com>
+ Fri, 03 Nov 2023 08:39:30 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v3 0/7] arm: mach-snapdragon: Qualcomm clock driver cleanup
+Date: Fri, 03 Nov 2023 15:39:24 +0000
+Message-Id: <20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="H8xTa4VyveQjiAQd"
-Content-Disposition: inline
-In-Reply-To: <20231103003805.2420005-1-nm@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACwURWUC/32NQQ6CMBBFr0K6tloGrNSV9zAu2lJgIrQ6JURDu
+ LuFnYlx+Wby/ptZdIQusnM2M3ITRgw+QbHLmO20bx3HOjEDAUUuoOSm5E8bBm77O2/yU1OVEio
+ lJEuG0dFxQ9rbbnUCYYv+MOg4Olr/D3INvrba9Za4wzgGem/xKV+vvztTzgVXtZLFURmlK7j06
+ DWFfaCWrUMT/JEhyfJ4AmPBOKnEl7wsyweQVjg8BAEAAA==
+To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Robert Marko <robert.marko@sartura.hr>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Luka Perkov <luka.perkov@sartura.hr>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Konrad Dybcio <konrad.dybcio@linaro.org>
+X-Mailer: b4 0.13-dev-4bd13
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5032;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=pgpWtvvBQ0F3ff6gQR1dh21JOJrn2n8Q7FZAMgQAEPk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlRXEQN5k7bU1Q5M2u1r2O4Hnnspcc8g/qLrGw5trlPm5
+ xLu+rV2lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgImI6TMytDHunD9T9DD/f+0T
+ iSInt2eWvj6TIbrQYUvCrT15X92XzWH4p7G8mX2rj5Bsx4n2oqU9ChtKfyRYmExrPbj/06p962K
+ D3wAA
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,57 +112,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series begins making some headway towards cleaning up Qualcomm
+platform support in u-boot. The following is a rough overview of the
+changes:
 
---H8xTa4VyveQjiAQd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* Move the Qualcomm clock drivers out of mach-snapdragon and into clk/qcom
+* Introduce per-platform clock driver configs to decouple Qualcomm platform
+  support from mach-snapdragon targets.
+* Add the IPQ4019 clock driver, removing it from mach-ipq40xx and introducing
+  the reset map.
+* Merge the qcom reset driver is into clk/qcom and rework it to be
+  compatible with upstream devicetrees.
+* A callback model is added so that multiple clock drivers can be
+  compiled in at once.
+* SDM845 gains support for enabling/disabling all gate clocks (CBC's) by
+  way of a new "gate_clk" abstraction.
+* Preperatory cleanup work is done to simplify the bringup process for
+  new platforms.
 
-On Thu, Nov 02, 2023 at 07:37:50PM -0500, Nishanth Menon wrote:
+Further details are included in each commit.
 
-> Cleanups for J721e/J7200 and add support for BeagleBone AI-64
->=20
-> Based off:
-> master 07fe79c93c5c Merge tag 'i2cfixes-for-v2024-01-rc2' of https://sour=
-ce.denx.de/u-boot/custodians/u-boot-i2c
->=20
-> Boot Logs:
-> J721e-SK: https://gist.github.com/nmenon/c144e64f1da9fd49997ef5794b056bb0
-> J721e-EVM: https://gist.github.com/nmenon/e79bed6807da05c723e71687fb3c0b90
-> J7200-HSEVM: https://gist.github.com/nmenon/5658dd6fa2f67bce915c77b25c02f=
-897
->=20
-> BeagleBone AI-64:
-> SD/MMC boot: https://gist.github.com/nmenon/1e07858fb8ca39ca87e40d3894e4d=
-9b7
-> eMMC boot: https://gist.github.com/nmenon/9b0602df1f1be2c6b512d135b0afae60
-> eMMC boot with SDcard detected: https://gist.github.com/nmenon/82058014f4=
-b2f6b9ed21431bc675e12a
->=20
-> U-Boot CI: https://github.com/u-boot/u-boot/pull/444
+The primary goal of this series is to prepare for enabling several new
+Qualcomm platforms in u-boot as well as additional peripherals, while
+minimising the amount of copy/pasted board-specific code.
 
-Looking at the end result of the code, the split of evm.c looks good.
-One small thing is dropping common.h from the board files.
+This series conflicts with a previous series introducing support for the
+Qualcomm RB2 board [1], I plan to resend this initial support pending
+acceptance of this series and several other cleanups.
 
---=20
-Tom
+[1]: https://lore.kernel.org/u-boot/20230324080418.3856409-1-bhupesh.sharma@linaro.org/
 
---H8xTa4VyveQjiAQd
-Content-Type: application/pgp-signature; name="signature.asc"
+---
+Changes in v3:
+* Rebased on qcom-next [1]
+* Dropped erroneous LOG_DEBUG define
+* Add drivers/clk/qcom to MAINTAINERS
+* Link to v2: https://lore.kernel.org/r/20231024-b4-qcom-clk-v2-0-6572bc2be690@linaro.org
 
------BEGIN PGP SIGNATURE-----
+Changes in v2:
+* Added missing headers in clock-qcom.c for "fix rcg divider value"
+  patch
+* Use writel() instead of setbits_le32() in "fix rcg divider value"
+  patch to ensure that writes are propagated to hardware.
+* Adjust RCG configuration to be more similar to Linux
+* Remove sysmap headers and define macros directly in platform clock
+  code.
+* avoid renaming msm_* to qcom_* for now
+* only add relevant gate_clks for sdm845
+* Link to v1: https://lore.kernel.org/r/20231024-b4-qcom-clk-v1-0-9d96359b9a82@linaro.org
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVFBhkACgkQFHw5/5Y0
-tyy6xgv/b1t6auXGDHZ/CiW2zihtzW/jv1/2yuHz5RiVFgzWB+fL1fxHyNEt945b
-v1Pm/jJJ1yPRgQHw75BZXGJOlTXGjpro5jh4VTzYIE0Unbp9mUtUnIKUszm5FEhZ
-A8/8XZpEaBDZS7jKNA7xhb4eDokT4r8L26OrjxFCdxROnKuAw4aQyzMQIvGA6KTZ
-w2obuf1cPW8Mzz4Iznpcq4vIoi5ia3RFFkQAVlIrrtjkPdsM06+iIsS2T6QIn5vC
-2mZcrAYdg5oLFw2EQVcmcl9QAqHigOWXH8tz4Nvp5/T099At+GaEKa4ue1ehvTSG
-RGMcmcdRTCvmUuTV50vDrY2NoGsF8UINPRLO2wsJywIKiRGNpQQzn3DoMfuC0BEU
-Ebvm7nGX2XVzI81siFUD/C+UujOYQSowvKLup7oRlY7icgBYlsNGXYXbSSBITOSp
-BAuRDWlm/8Ye1bi4qwhYwiuw68moXcyBL9fl8TF62EblcBRmtVCAqyj8TAntWmjO
-u6d5rrtw
-=zYz2
------END PGP SIGNATURE-----
+[1]: https://source.denx.de/u-boot/custodians/u-boot-snapdragon
 
---H8xTa4VyveQjiAQd--
+---
+Caleb Connolly (6):
+      clk/qcom: move from mach-snapdragon
+      clk/qcom: move ipq4019 driver from mach-ipq40xx
+      clk/qcom: sdm845: add register map for simple gate clocks
+      clk/qcom: use function pointers for enable and set_rate
+      clk/qcom: add mnd_width to clk_rcg_set_rate_mnd()
+      clk/qcom: fix rcg divider value
+
+Konrad Dybcio (1):
+      clk/qcom: handle resets and clocks in one device
+
+ MAINTAINERS                                        |   1 +
+ arch/arm/Kconfig                                   |   2 +
+ arch/arm/dts/qcom-ipq4019.dtsi                     |  14 +-
+ arch/arm/dts/qcs404-evb.dts                        |  19 +-
+ arch/arm/mach-ipq40xx/Makefile                     |   1 -
+ arch/arm/mach-ipq40xx/clock-ipq4019.c              |  88 ------
+ arch/arm/mach-snapdragon/Kconfig                   |   4 +
+ arch/arm/mach-snapdragon/Makefile                  |   5 -
+ arch/arm/mach-snapdragon/clock-sdm845.c            |  98 -------
+ arch/arm/mach-snapdragon/clock-snapdragon.c        | 181 ------------
+ arch/arm/mach-snapdragon/clock-snapdragon.h        |  48 ----
+ .../mach-snapdragon/include/mach/sysmap-apq8016.h  |  39 ---
+ .../mach-snapdragon/include/mach/sysmap-apq8096.h  |  37 ---
+ .../mach-snapdragon/include/mach/sysmap-qcs404.h   |  88 ------
+ .../mach-snapdragon/include/mach/sysmap-sdm845.h   |  42 ---
+ board/qualcomm/dragonboard820c/dragonboard820c.c   |   6 +-
+ drivers/clk/Kconfig                                |   1 +
+ drivers/clk/Makefile                               |   1 +
+ drivers/clk/qcom/Kconfig                           |  52 ++++
+ drivers/clk/qcom/Makefile                          |  10 +
+ .../clk/qcom}/clock-apq8016.c                      |  60 +++-
+ .../clk/qcom}/clock-apq8096.c                      |  56 +++-
+ .../reset-qcom.c => clk/qcom/clock-ipq4019.c}      | 160 ++++-------
+ drivers/clk/qcom/clock-qcom.c                      | 307 +++++++++++++++++++++
+ drivers/clk/qcom/clock-qcom.h                      | 100 +++++++
+ .../clk/qcom}/clock-qcs404.c                       | 167 +++++++++--
+ drivers/clk/qcom/clock-sdm845.c                    | 187 +++++++++++++
+ drivers/reset/Kconfig                              |   7 -
+ drivers/reset/Makefile                             |   1 -
+ include/configs/dragonboard410c.h                  |   1 -
+ include/configs/dragonboard820c.h                  |   1 -
+ include/configs/dragonboard845c.h                  |   1 -
+ include/configs/qcs404-evb.h                       |   1 -
+ .../{qcom,ipq4019-gcc.h => qcom,gcc-ipq4019.h}     |  73 +++++
+ include/dt-bindings/reset/qcom,ipq4019-reset.h     |  92 ------
+ 35 files changed, 1053 insertions(+), 898 deletions(-)
+---
+base-commit: b9221f7d86f9511ad2a816f589d41bc02dbcd6f8
+
+// Caleb (they/them)
+
