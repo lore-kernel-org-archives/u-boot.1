@@ -4,133 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E9AC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 03:54:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C6EC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 04:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04622875DC;
-	Fri,  3 Nov 2023 04:54:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 780868758C;
+	Fri,  3 Nov 2023 05:40:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="WQkAuO++";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tuu+zdQd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 677B28712F; Fri,  3 Nov 2023 02:37:44 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20602.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe12::602])
+ id 7774786F69; Fri,  3 Nov 2023 05:40:39 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB4B287645
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 02:37:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61FB6875F5
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 05:40:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hongxing.zhu@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GKVOJBHtkPdwxUrdyFejkUwxaYrRwvwWEYo6BEtpvRGFeHZHxBLUcYzH63zZKRdd0qTUyooP5H3LBQB90gfSN76caGlXBzquCfThoyoB8A8dX2moMqtLlrMw3OU4f0PZTuCCT3tKSpTXZoyyiZNIhDoTrzfaKOlr6LMZ35RC7MzWLJuVCON6p+123r7G7whzbOqzzirEwF5hXjwKFL52xARniT/mjJlh6aAK8TaEjaDtNZ0r/p0INVKAHudS0yQDwZoGUjmDbi788C9jZZnCzsbKLms34qJB+SQJA/cKK9aYH+TOZhs3do/CW8ClifDtpgm7TUdiZZMzcrFF2juTBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=H+a9To+L8W7dqfb7rMIZenhx2VApzgipTQgC91LwRaA=;
- b=ayOjKlmFqELexPB0GUDmUuuDkslw/5ipojd/zhyasHFlO5jBRMqRsB9CVkO9oafOCfk+G+ArXMBirwW2Tx2of17X+YT6MEYH6aUv0l+wZr2nCTuw53fA9MZzZYEFXwfff+HAN6QLnq8IFciXwcpElvE1pZDhVdR7huyAgjIDwiOjtFrogo3lnwBQd9vC0JB3TuXmQN7XgO7JYLJ4uR3F6px5QZbU7Ik6ET6Ril4taf/6eTL2F1USNMojuaLlx5xJQ7HBBjpb6m8/yv1q545TI7qgusFqHezyErk0Uy/QOhE4UqqsbDsot2HfshXr0DdOmVAFaaCn21MT5ZOBb2XJFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=H+a9To+L8W7dqfb7rMIZenhx2VApzgipTQgC91LwRaA=;
- b=WQkAuO++XNl/cnUvIp1JTK4eR5X51HQGL7dzL/EWW8qN0mUwgZmHmvxS606SF1XlgjutXZO4LRF0XG7CsYAMTdK51uI0ohSW2H5fk+Adc2/PR2enuk7qZ90e5tMKfRrLAM2A+J5nE6AvtgDzsD3S6/P37UpB+5QJi1LTn7GdmY8=
-Received: from AS8PR04MB8676.eurprd04.prod.outlook.com (2603:10a6:20b:42b::10)
- by AM8PR04MB7361.eurprd04.prod.outlook.com (2603:10a6:20b:1d2::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.19; Fri, 3 Nov
- 2023 01:37:38 +0000
-Received: from AS8PR04MB8676.eurprd04.prod.outlook.com
- ([fe80::ee2f:6e8a:3c9c:c3ea]) by AS8PR04MB8676.eurprd04.prod.outlook.com
- ([fe80::ee2f:6e8a:3c9c:c3ea%4]) with mapi id 15.20.6954.018; Fri, 3 Nov 2023
- 01:37:37 +0000
-From: Hongxing Zhu <hongxing.zhu@nxp.com>
-To: "sjg@chromium.org" <sjg@chromium.org>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: uboot reports adding disk failed(EFI_NOT_FOUND) and first disk is
- gone in next scsi scan
-Thread-Topic: uboot reports adding disk failed(EFI_NOT_FOUND) and first disk
- is gone in next scsi scan
-Thread-Index: AdoMbvzePOEhAsuLTy2OTmnmM9WusgBhnjhA
-Date: Fri, 3 Nov 2023 01:37:37 +0000
-Message-ID: <AS8PR04MB867669CC8B5EB411BDEF45348CA5A@AS8PR04MB8676.eurprd04.prod.outlook.com>
-References: <AS8PR04MB86760A4BC079AF5BD57C81B98CA7A@AS8PR04MB8676.eurprd04.prod.outlook.com>
-In-Reply-To: <AS8PR04MB86760A4BC079AF5BD57C81B98CA7A@AS8PR04MB8676.eurprd04.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR04MB8676:EE_|AM8PR04MB7361:EE_
-x-ms-office365-filtering-correlation-id: 3c8ceec6-24cf-41d6-f529-08dbdc0d763f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 4PL9591vYT22VaKR682vfdyKJjALTAT+xHyIYFqRbqjnq8VCQRHrTObbJOPFpxwvqhZUrFvvn6VRufLzonFPSn0e5iFr1WGZaT6DDdf143lNxODwENWcT+W3gq9nQ7/HCVEMmGygVfXuWatKPE02sHKxuyzr3Nwo/9cLg7Lh2B/aVoCFFNScMIuEI7VY1kIMOZuFOdw2KWnN4MyYMTob70UAkajec9EqYQ6zfp2uQljW+4bD9d+7owZJy2olWLeqmB1qsT6HElCaQt+HpCwDD6GXRqxB49BisLEitM4F+BfyY+286P25fDR4jq01O8qV6G/xT5LHv5FyD0lDiH0Cb0m134DpZiTikSruNPsolP32sPEz5GbsE92EgcQnQqlDGCtuEyCQTAEaN2zwBzEBcmupsbt3YOSUJXqFwFXgCd09w3uCw/YyExe/9kNXbaRAHY7nOXNelWaA3Y1QYRptzdY36NbtGM+ZS27wocTcjjDrXxfEPSVZcb43rKBUNTyuIc/gh8kdWi/VpyXxVlHt9Avcj6j+StHuIzhZOtsN/goT++0Vw5rxPxvm24u9HCMs41wX9+//j4T2pGtEL4QybbU8gbaqxK53A9fQ8xSXxyhyVsWYyyCXdTVm20H7jRkD
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8676.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(396003)(39860400002)(346002)(136003)(376002)(230922051799003)(186009)(451199024)(1800799009)(64100799003)(44832011)(5660300002)(38100700002)(83380400001)(52536014)(2906002)(122000001)(38070700009)(41300700001)(53546011)(478600001)(6506007)(33656002)(7696005)(55016003)(9686003)(86362001)(71200400001)(4326008)(8676002)(8936002)(76116006)(66476007)(64756008)(66946007)(66446008)(6916009)(316002)(66556008)(26005);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?gb2312?B?ME5qNitaeFNhSGNKcTdoUm1RNUtkUlF6M3kvVHRaWndnWGNMUHdZVnZGNmJh?=
- =?gb2312?B?Y241VzJqaXEwWWVjL3UwWEYxRHRNVFlBWVhod0RKMTFwZmFrcSt4a0tnSlBk?=
- =?gb2312?B?TUJENjVvWnZmblYwc1pnWDV4U1FXSXhsVTVoc3BKejkwdkh6eEZIQWdPM2hz?=
- =?gb2312?B?ZVBmcHY2TjVqemdiQWlRU3pHR3h1dFp3Vlc1Vno1UEs5emNWbC9WazVlMjNp?=
- =?gb2312?B?MWVYSUdPYWJCalp0WFZndU1CditPRVRkenNwajIwNWxkQ0M2MTJhY2pGem43?=
- =?gb2312?B?dEVLZ0Zqa1dpdVBobFJaRGZTRU5oYm5aRWtMeFo4emxMTUJhVXQwS1Vhd0l3?=
- =?gb2312?B?VDBTcXN0V1JodWlSMzRVdXV4N2d5MFNweENuVE9xYm5NNjJZLzRjNW5pVUpE?=
- =?gb2312?B?ZHlGWER1SDdXV3BBRTJpZThlV2k3U3hzL2NwOTlIM2ZSa1hva0VCY3BGNDNs?=
- =?gb2312?B?bGhxMGN5MFE5L055a0RCUUsrMEVWeE94K09pRmVnQXp4VWdYOFhOV01tRktE?=
- =?gb2312?B?S01RWXNzOXhsUDk0QWFhcng5YjhlQjZid1FTR1gyOHJmOHhhVC9lam92aDlm?=
- =?gb2312?B?QmhPS3Q5d1NpZUZEVzEyNTZ2MGFaWlpQd1ZvektQQU1SdTZPMC9SQjVzOFVH?=
- =?gb2312?B?Sk1GeVlLUkxLTFFPbkJOckRUam4zckd3WEc1VnJ0UU50c0FyWUt6THdZV081?=
- =?gb2312?B?b2JPWXQ5OFM4QXhOZ0NTanljbmU0eDA1bDNhTE5FUFU2SERoNnZ0dDM5OFhX?=
- =?gb2312?B?K1Ewc2M3ZVVZOU1qa0VUbVVLbmRleTg4MWpzT3BhczFubVBEeXRPNklHcGd5?=
- =?gb2312?B?WSsxcUJyOFdYeE5UUjJxZmYwQ2F3WnFMOWVMTlhHc1BtbW5kZkxKKyswTHov?=
- =?gb2312?B?Tkg2UEpVRzZZVkY4M3E4eUFFWUJ6UFVTUi80YmhkYmZEdDYyUFZvRUFxTmxI?=
- =?gb2312?B?YjFqSEg2VzhBTzN3ZmZ5Z0JsM0IycWxhU3VNc2Rya2lodjNiU3FFaE5sd1ky?=
- =?gb2312?B?MmVxT0xIajBqVmNUZmQ0Z0diYXl5SFVwZHFHMXRzd1Jibk9zbXl2R3dhYmFq?=
- =?gb2312?B?YnJsazJ6L09ST1lOZk9wODVKb1VZUVA3K240SlpoY1YyRzZLYk9JMUZETFho?=
- =?gb2312?B?RXdzcGp2QkF3OVh1VVNBY1kraGp3RC9WbUVUYzNmTEZaTFJoMFQ1VDF2emhh?=
- =?gb2312?B?dWt3Z1FxZ01oMStaQ3c4d2huVW1IM1UwQ1lkV01jNEJ3Q3B6c3RtMkJWWGhh?=
- =?gb2312?B?dS9URmY5Zk9DU3ZOSEZjUlZBTEhCRG9YdUFYOUlzb2k5cFJPSExna0E4Rzl2?=
- =?gb2312?B?U2tIYU5iQzR0bnpVWFhDajd2QlMyaFE3ank0R0EzaXhrcHdaN0M0TFVDQjhE?=
- =?gb2312?B?MHF4aW9PT3ArS3BOYnBXSS9LeUQxSEU0VlByTVBKMXNaV0FQeFJkaVNEMndp?=
- =?gb2312?B?enRkeUp1dmVhVkFJeHY5QnZURVZ3a1kzNDE1UzEvaEdBZHNKRnlyTU5wZEFl?=
- =?gb2312?B?UXc4M3AzcWZ1MDZoMDVpclRqNU0wK3AzTWcrRURrOHVUbnFjN1p2MWdnelA3?=
- =?gb2312?B?YjNRSFM3djFZMFZHSXdWQTFLRXUvTFAwKyszVmsvSERQRWxMTUxTck1HSlZ5?=
- =?gb2312?B?TGo5YTdLVTFUQUJwcTZud0Y5ZTRVdUJvMjRUbVl5WGM5bDdlc0JxcTNCaVd0?=
- =?gb2312?B?YXVOcHlVTjhyMWF0REtvbGI1ZS9PUlVwdHpSd3hXa2MxejlENlp3NFZLVDY3?=
- =?gb2312?B?Ymo4RGNMVHlmVDEwSmEyNGQwcFpVZFNLNE9QUGtuNElmMWo5dGYxanBnVjhD?=
- =?gb2312?B?MEF0YXVYdzZHeDl4RmhjV2wxYWFBdjhVV2FoU2NtdXN6N0FCNHJoUW9VWUY3?=
- =?gb2312?B?MEZubGV0ajFPSDRvaUh6U3RnR096UlAyd29KOWJ4WUZzRVJSdm5CZ0dDV2Qx?=
- =?gb2312?B?S0NIRGhBK2c0Tkd5K1FxaEg2OXdMN1M2UHRNWk9wdlgrS2VYVUZDY2Uzb3JJ?=
- =?gb2312?B?aCt6UjJKSFNtK1o3R1ovLzROZnVkUEtEUEUzL3pIVUxZSnd1VkJPNlVGcjRi?=
- =?gb2312?B?R0FVSWQvNGl6REx4NTRleWtZTFFyWWtlVWxja2NmQ0lmMmZWMy9hSkFod21S?=
- =?gb2312?Q?dfgoZlKZHS2CW8dj7tcVixBm2?=
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A34eSHO061788;
+ Thu, 2 Nov 2023 23:40:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698986428;
+ bh=dbsAcYF4yFduf1cheKi/BfSd8bKpyOi/fE5xHWsvvP4=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=tuu+zdQdjCtXhnkrgig2el6ogXwpkcgiB2x6CVGsbBgPvYNB3afZ8AbbaEF7hlg0E
+ 9jHSncojb8ZRQAlZW+KAzhvwLTUHOUsDTmwve9sTIt1biOfyIbPMwHMkmZaRS5G3EP
+ bgBxVoQo5onlT+aVxZqGnJBkv7CnWkHpJkwVbI90=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A34eSbv032075
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 2 Nov 2023 23:40:28 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
+ Nov 2023 23:40:27 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 2 Nov 2023 23:40:27 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A34eRVp107794;
+ Thu, 2 Nov 2023 23:40:27 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+CC: Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Robert Nelson
+ <robertcnelson@gmail.com>, <u-boot@lists.denx.de>,
+ Nishanth Menon <nm@ti.com>
+Subject: [PATCH V2 1/2] doc: board: ti: Use prompt prompt_style to simplify
+ documentation
+Date: Thu, 2 Nov 2023 23:40:25 -0500
+Message-ID: <20231103044026.7743-2-nm@ti.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20231103044026.7743-1-nm@ti.com>
+References: <20231103044026.7743-1-nm@ti.com>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8676.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c8ceec6-24cf-41d6-f529-08dbdc0d763f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Nov 2023 01:37:37.9434 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: EluSX5t/tAeB10MsC6kUiPXrigyta4VORTqO3v5IV+nOmyXfFaQTlQZ82DSEvKjcVnfcoaOvRLc3+aIAKKHlFg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7361
-X-Mailman-Approved-At: Fri, 03 Nov 2023 04:54:05 +0100
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,71 +82,412 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU2ltb246DQpJIGZvdW5kIHRoYXQgdGhlIEVGSSBjb21wbGFpbmVkIHRoYXQgdGhlIGRpc2sg
-aW5zdGFsbCBwYXRoIGlzIG5vdCB1cGRhdGVkIGZvciB0aGUgc2Vjb25kIGRpc2suDQpUaGUgaW5z
-dGFsbCBwYXRoIGlzIKGwRUZJOiBpbnN0YWxsZWQgZGV2aWNlIHBhdGggJy9WZW5IdyhlNjFkNzNi
-OS1hMzg0LTRhY2MtYWVhYi04MmU4MjhmMzYyOGIpL1Njc2koMCwwKSehsQ0Kd2hlbiBmaXJzdCBk
-aXNrIGlzIGFkZGVkLg0KDQpCdXQgdGhlIHBhdGggaXMgc2FtZSB3aGVuIHRoZSBzZWNvbmQgb3Ig
-bGF0ZXIgZGlza3MgYXJlIGFkZGVkLCBhbmQgRUZJIHJlcG9ycyB0aGF0IHRoZSBwYXRoIGhhZCBi
-ZWVuIGluc3RhbGxlZCBhbHJlYWR5Lg0KRUZJOiBQYXRoIC9WZW5IdyhlNjFkNzNiOS1hMzg0LTRh
-Y2MtYWVhYi04MmU4MjhmMzYyOGIpL1Njc2koMCwwKSBhbHJlYWR5IGluc3RhbGxlZA0KDQpUaGF0
-oa9zIHdoeSB0aGUgYmVsb3cgZXJyb3Igd2hlbiBydW4gZWZpX2Rpc2tfY3JlYXRlX3JhdygpIGZ1
-bmN0aW9uLg0KQWRkaW5nIGRpc2sgZm9yIGFoY2lfc2NzaS5pZDBsdW4wIGZhaWxlZCAoZXJyPS05
-MjIzMzcyMDM2ODU0Nzc1Nzg4LzB4ODAwMDAwMDAwMDAwMDAxNCkNCg0KRG8geW91IGhhdmUgYW55
-IGNsdWVzIGFib3V0IHRoaXM/DQpUaGFua3MgaW4gYWR2YW5jZWQuDQoNCkJlc3QgUmVnYXJkcw0K
-UmljaGFyZCBaaHUNCg0KRnJvbTogSG9uZ3hpbmcgWmh1DQpTZW50OiAyMDIzxOoxMdTCMcjVIDEw
-OjU3DQpUbzogc2pnQGNocm9taXVtLm9yZw0KQ2M6IHUtYm9vdEBsaXN0cy5kZW54LmRlDQpTdWJq
-ZWN0OiB1Ym9vdCByZXBvcnRzIGFkZGluZyBkaXNrIGZhaWxlZChFRklfTk9UX0ZPVU5EKSBhbmQg
-Zmlyc3QgZGlzayBpcyBnb25lIGluIG5leHQgc2NzaSBzY2FuDQoNCkhpIFNpbW9uOg0KTmljZSB0
-byBtZWV0IHlvdS4NClRoZSB1LWJvb3QgSSB1c2VkIGlzIGJhc2VkIG9uIHYyMDIzLjA0IHRhZ2dl
-ZCB2ZXJzaW9uLg0KTGF5ZXJzY2FwZSBMWDIxNjBBIFJEQiBib2FyZCBoYXMgZm91ciBTQVRBIGNv
-bnRyb2xsZXJzLg0KQmFzZWQgb24gTFgyMTYwQSBSREIgYm9hcmQgYW5kIHR3byBvciBtb3JlIFNB
-VEEgZGlza3MgY29ubmVjdGVkLg0KSSBlbmNvdW50ZXIgb25lIKGwc2NzaSBzY2FuobEgcHJvYmxl
-bS4NCg0KQWZ0ZXIgdGhlIGZpcnN0IFNBVEEgZGlzayBpcyBkZXRlY3RlZCBhbmQgcHJvYmVkIHBy
-b3Blcmx5IGluIHRoZSBmaXJzdCChsHNjc2kgc2NhbqGxLg0KVGhlIG90aGVyIGRpc2tzIHdvdWxk
-IGNvbXBsYWluIHRoYXQgobBFRklfTk9UX0ZPVU5EobEgZXJyb3IgbGlzdGVkIGJlbG93LA0Kd2hl
-biBydW4gdGhlIGZpcnN0IKGwc2NzaSBzY2FuobEgY29tbWFuZCBpbiB1Ym9vdCBlbnZpcm9ubWVu
-dC4NCkRvZXMgdGhpcyBlcnJvciBtYXR0ZXI/DQpCVFcsIKGwc2NzaSBpbmZvobEgc2F5cyB0aGF0
-IGFsbCBkaXNrIGluZm8gY2FuIGJlIGR1bXBlZCwgYW5kIGFsbCBkaXNrcyBhcmUgd29ya3Mgd2Vs
-bCwNCmFmdGVyIHRoZSBmaXJzdCChsHNjc2kgc2NhbqGxDQoNCkluIHRoZSBjb25zZWN1dGl2ZSBy
-ZXNjYW4gb3BlcmF0aW9ucyBpc3N1ZWQgYnkgobBzY3NpIHJlc2V0obEgb3IgobBzY3NpIHNjYW6h
-sSBjb21tZW5kcywNCnRoZSBkaXNrcyB3b3VsZCByZXBvcnQgobB1bmFibGUgdG8gdW5iaW5kIGRl
-dmljZXMgKC0xRSmhsSBlcnJvci4NClRoZSBmaXJzdCBkaXNrIGlzIGRpc2FwcGVhcmVkIGF0IGFs
-bCBhZnRlciB0aGUgbmV4dCChsHNjc2kgc2NhbqGxIG9wZXJhdGlvbnMgaXMgZmluaXNoZWQuDQoN
-CkRpZCB5b3UgdXNlZCB0byBlbmNvdW50ZXIgc3VjaCBraW5kIG9mIGlzc3VlPw0KDQpBbnkgc3Vn
-Z2VzdGlvbnMgYW5kIGd1aWRhbmNlIGFyZSB2ZXJ5IGFwcHJlY2lhdGVkLg0KTG9nczoNCj0+IHNj
-c2kgc2Nhbg0Kc2Nhbm5pbmcgYnVzIGZvciBkZXZpY2VzLi4uDQpUYXJnZXQgc3BpbnVwIHRvb2sg
-MCBtcy4NCkFIQ0kgMDAwMS4wMzAxIDMyIHNsb3RzIDEgcG9ydHMgNiBHYnBzIDB4MSBpbXBsIFNB
-VEEgbW9kZQ0KZmxhZ3M6IDY0Yml0IG5jcSBwbSBjbG8gb25seSBwbXAgZmJzcyBwaW8gc2x1bSBw
-YXJ0IGNjYyBhcHN0DQogIERldmljZSAwOiAoMDowKSBWZW5kb3I6IEFUQSBQcm9kLjogU1QxMDAw
-RE0wMTAtMkVQMSBSZXY6IENDNDMNCiAgICAgICAgICAgIFR5cGU6IEhhcmQgRGlzaw0KICAgICAg
-ICAgICAgQ2FwYWNpdHk6IDk1Mzg2OS43IE1CID0gOTMxLjUgR0IgKDE5NTM1MjUxNjggeCA1MTIp
-DQpUYXJnZXQgc3BpbnVwIHRvb2sgMCBtcy4NCkFIQ0kgMDAwMS4wMzAxIDMyIHNsb3RzIDEgcG9y
-dHMgNiBHYnBzIDB4MSBpbXBsIFNBVEEgbW9kZQ0KZmxhZ3M6IDY0Yml0IG5jcSBwbSBjbG8gb25s
-eSBwbXAgZmJzcyBwaW8gc2x1bSBwYXJ0IGNjYyBhcHN0DQpBZGRpbmcgZGlzayBmb3IgYWhjaV9z
-Y3NpLmlkMGx1bjAgZmFpbGVkIChlcnI9LTkyMjMzNzIwMzY4NTQ3NzU3ODgvMHg4MDAwMDAwMDAw
-MDAwMDE0KQ0KU0FUQSBsaW5rIDAgdGltZW91dC4NCkFIQ0kgMDAwMS4wMzAxIDMyIHNsb3RzIDEg
-cG9ydHMgNiBHYnBzIDB4MSBpbXBsIFNBVEEgbW9kZQ0KZmxhZ3M6IDY0Yml0IG5jcSBwbSBjbG8g
-b25seSBwbXAgZmJzcyBwaW8gc2x1bSBwYXJ0IGNjYyBhcHN0DQpTQVRBIGxpbmsgMCB0aW1lb3V0
-Lg0KQUhDSSAwMDAxLjAzMDEgMzIgc2xvdHMgMSBwb3J0cyA2IEdicHMgMHgxIGltcGwgU0FUQSBt
-b2RlDQpmbGFnczogNjRiaXQgbmNxIHBtIGNsbyBvbmx5IHBtcCBmYnNzIHBpbyBzbHVtIHBhcnQg
-Y2NjIGFwc3QNCj0+IHNjc2kgaW5mbw0KRGV2aWNlIDA6ICgwOjApIFZlbmRvcjogQVRBIFByb2Qu
-OiBTVDEwMDBETTAxMC0yRVAxIFJldjogQ0M0Mw0KICAgICAgICAgICAgVHlwZTogSGFyZCBEaXNr
-DQogICAgICAgICAgICBDYXBhY2l0eTogOTUzODY5LjcgTUIgPSA5MzEuNSBHQiAoMTk1MzUyNTE2
-OCB4IDUxMikNCkRldmljZSAxOiAoMDowKSBWZW5kb3I6IEFUQSBQcm9kLjogU1Q1MDBETTAwMi0x
-QkQxNCBSZXY6IEtDNDUNCiAgICAgICAgICAgIFR5cGU6IEhhcmQgRGlzaw0KICAgICAgICAgICAg
-Q2FwYWNpdHk6IDQ3Njk0MC4wIE1CID0gNDY1LjcgR0IgKDk3Njc3MzE2OCB4IDUxMikNCj0+IGxz
-IHNjc2kgMDoxDQo8RElSPiAgICAgICA0MDk2IC4NCjxESVI+ICAgICAgIDQwOTYgLi4NCjxESVI+
-ICAgICAgMTYzODQgbG9zdCtmb3VuZA0KPHNuaXA+DQo8RElSPiAgICAgICA0MDk2IHZhcg0KPFNZ
-TT4gICAgICAgICAxMiBsaW51eHJjDQo9PiBscyBzY3NpIDE6MQ0KPERJUj4gICAgICAgNDA5NiAu
-DQo8RElSPiAgICAgICA0MDk2IC4uDQo8RElSPiAgICAgIDE2Mzg0IGxvc3QrZm91bmQNCjxzbmlw
-Pg0KPERJUj4gICAgICAgNDA5NiB1c3INCjxESVI+ICAgICAgIDQwOTYgdmFyDQoNCj0+IHNjc2kg
-cmVzZXQNCg0KUmVzZXQgU0NTSQ0Kc2Nhbm5pbmcgYnVzIGZvciBkZXZpY2VzLi4uDQp1bmFibGUg
-dG8gdW5iaW5kIGRldmljZXMgKC0xRSkNCj0+IGxzIHNjc2kgMDoxDQoqKiBCYWQgZGV2aWNlIHNw
-ZWNpZmljYXRpb24gc2NzaSAwICoqDQpDb3VsZG4ndCBmaW5kIHBhcnRpdGlvbiBzY3NpIDA6MQ0K
-PT4gbHMgc2NzaSAxOjENCjxESVI+ICAgICAgIDQwOTYgLg0KPERJUj4gICAgICAgNDA5NiAuLg0K
-PERJUj4gICAgICAxNjM4NCBsb3N0K2ZvdW5kDQo8c25pcD4NCjxESVI+ICAgICAgIDQwOTYgdmFy
-DQoNCj0+IHNjc2kgaW5mbw0KRGV2aWNlIDE6ICgwOjApIFZlbmRvcjogQVRBIFByb2QuOiBTVDUw
-MERNMDAyLTFCRDE0IFJldjogS0M0NQ0KICAgICAgICAgICAgVHlwZTogSGFyZCBEaXNrDQogICAg
-ICAgICAgICBDYXBhY2l0eTogNDc2OTQwLjAgTUIgPSA0NjUuNyBHQiAoOTc2NzczMTY4IHggNTEy
-KQ0KDQpCZXN0IFJlZ2FyZHMNClJpY2hhcmQgWmh1DQoNCg==
+The sphinx-prompt documentation[0] provides examples on how we can use
+prompt as a parameter to simplify the description. Use the same.
+
+While at it, ensure to make all relevant prompts clarified such as gdb
+prompts.
+
+[0] http://sbrunner.github.io/sphinx-prompt/
+
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+Changes since V1:
+Squashed up gdb prompt as well to this patch.
+
+V1: https://lore.kernel.org/r/20231103000915.2413501-2-nm@ti.com
+ doc/board/ti/am335x_evm.rst | 39 +++++++++++---------------------
+ doc/board/ti/dra7xx_evm.rst |  3 +--
+ doc/board/ti/k3.rst         | 44 ++++++++++++++++++-------------------
+ doc/board/ti/ks2_evm.rst    | 15 +++++--------
+ 4 files changed, 41 insertions(+), 60 deletions(-)
+
+diff --git a/doc/board/ti/am335x_evm.rst b/doc/board/ti/am335x_evm.rst
+index 2ba651eb6df9..769362816b78 100644
+--- a/doc/board/ti/am335x_evm.rst
++++ b/doc/board/ti/am335x_evm.rst
+@@ -84,8 +84,7 @@ bootable image was not created.
+ 
+ Within the SECDEV package exists an image creation script:
+ 
+-.. prompt:: bash
+-   :prompts: $
++.. prompt:: bash $
+ 
+    ${TI_SECURE_DEV_PKG}/scripts/create-boot-image.sh
+ 
+@@ -97,8 +96,7 @@ possible.
+ The script is basically the only required interface to the TI SECDEV
+ package for creating a bootable SPL image for secure TI devices.
+ 
+-.. prompt:: bash
+-   :prompts: $
++.. prompt:: bash $
+ 
+    create-boot-image.sh \
+ 		<IMAGE_FLAG> <INPUT_FILE> <OUTPUT_FILE> <SPL_LOAD_ADDR>
+@@ -184,8 +182,7 @@ The exact details of the how the images are secured is handled by the
+ SECDEV package. Within the SECDEV package exists a script to process
+ an input binary image:
+ 
+-.. prompt:: bash
+-   :prompts: $
++.. prompt:: bash $
+ 
+    ${TI_SECURE_DEV_PKG}/scripts/secure-binary-image.sh
+ 
+@@ -206,8 +203,7 @@ only accessible when the ARM core is operating in the secure mode).
+ Invoking the secure-binary-image script for Secure Devices
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+-.. prompt:: bash
+-   :prompts: $
++.. prompt:: bash $
+ 
+    secure-binary-image.sh <INPUT_FILE> <OUTPUT_FILE>
+ 
+@@ -247,8 +243,7 @@ into memory, then written to NAND.
+ 
+ 2. Flashing NAND via MMC/SD
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    # select BOOTSEL to MMC/SD boot and boot from MMC/SD card
+    mmc rescan
+@@ -334,8 +329,7 @@ had a FAT partition (such as on a Beaglebone Black) it is not enough to
+ write garbage into the area, you must delete it from the partition table
+ first.
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    # Ensure we are able to talk with this mmc device
+    mmc rescan
+@@ -366,8 +360,7 @@ the FAT filesystem (only the uImage MUST be for this to function
+ afterwards) along with a Falcon Mode aware MLO and the FAT partition has
+ already been created and marked bootable:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    mmc rescan
+    # Load kernel and device tree into memory, perform export
+@@ -386,8 +379,7 @@ This will print a number of lines and then end with something like:
+ 
+ So then you:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    fatwrite mmc 0:1 0x80f80000 args 8928
+ 
+@@ -400,8 +392,7 @@ already located on the NAND somewhere (such as filesystem or mtd partition)
+ along with a Falcon Mode aware MLO written to the correct locations for
+ booting and mtdparts have been configured correctly for the board:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    nand read ${loadaddr} kernel
+    load nand rootfs ${fdtaddr} /boot/am335x-evm.dtb
+@@ -425,8 +416,7 @@ The output of the 'dm tree' command shows which driver is bound to which
+ device, so the user can easily configure their platform differently from
+ the command line:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    dm tree
+ 
+@@ -444,8 +434,7 @@ the command line:
+ Typically here any network command performed using the usb_ether
+ interface would work, while using other gadgets would fail:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    fastboot usb 0
+ 
+@@ -462,8 +451,7 @@ least from a bootloader point of view). The solution here would be to
+ use the unbind command specifying the class and index parameters (as
+ shown above in the 'dm tree' output) to target the driver to unbind:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    unbind ethernet 1
+ 
+@@ -471,8 +459,7 @@ The output of the 'dm tree' command now shows the availability of the
+ first USB device controller, the fastboot gadget will now be able to
+ bind with it:
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    dm tree
+ 
+diff --git a/doc/board/ti/dra7xx_evm.rst b/doc/board/ti/dra7xx_evm.rst
+index 4503b5e92229..8e5d95535fa0 100644
+--- a/doc/board/ti/dra7xx_evm.rst
++++ b/doc/board/ti/dra7xx_evm.rst
+@@ -71,8 +71,7 @@ example we load MLO and u-boot.img from the build into DDR and then use
+ 'mmc bootbus' to set the required rate (see TRM) and 'mmc partconfig' to
+ set boot0 as the boot device.
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    setenv autoload no
+    usb start
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 89d70db88647..75ee23883aae 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -197,7 +197,7 @@ All of that to say you will need both a 32bit and 64bit cross compiler
+ .. k3_rst_include_end_common_env_vars_desc
+ 
+ .. k3_rst_include_start_common_env_vars_defn
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+  export CC32=arm-linux-gnueabihf-
+  export CC64=aarch64-linux-gnu-
+@@ -247,7 +247,7 @@ Building tiboot3.bin
+    uses the split binary flow)
+ 
+ .. k3_rst_include_start_build_steps_spl_r5
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+  # inside u-boot source
+  make $UBOOT_CFG_CORTEXR
+@@ -283,7 +283,7 @@ firmware if your device using a split firmware.
+    application cores on the main domain.
+ 
+ .. k3_rst_include_start_build_steps_tfa
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+  # inside trusted-firmware-a source
+  make CROSS_COMPILE=$CC64 ARCH=aarch64 PLAT=k3 SPD=opteed $TFA_EXTRA_ARGS \
+@@ -299,7 +299,7 @@ use the `lite` option.
+    using the TrustZone technology built into the core.
+ 
+ .. k3_rst_include_start_build_steps_optee
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+  # inside optee_os source
+  make CROSS_COMPILE=$CC32 CROSS_COMPILE64=$CC64 CFG_ARM64_core=y $OPTEE_EXTRA_ARGS \
+@@ -311,7 +311,7 @@ use the `lite` option.
+    64bit core in the main domain.
+ 
+ .. k3_rst_include_start_build_steps_uboot
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+  # inside u-boot source
+  make $UBOOT_CFG_CORTEXA
+@@ -410,14 +410,14 @@ and the same can be extended to other platforms
+   be passing to mkimage for signing the fitImage and embedding the key in
+   the u-boot dtb.
+ 
+-  .. prompt:: bash
++  .. prompt:: bash $
+ 
+     mkimage -r -f fitImage.its -k $UBOOT_PATH/board/ti/keys -K
+     $UBOOT_PATH/build/a72/dts/dt.dtb
+ 
+   For signing a secondary platform, pass the -K parameter to that DTB
+ 
+-  .. prompt:: bash
++  .. prompt:: bash $
+ 
+     mkimage -f fitImage.its -k $UBOOT_PATH/board/ti/keys -K
+     $UBOOT_PATH/build/a72/arch/arm/dts/k3-j721e-sk.dtb
+@@ -476,8 +476,7 @@ then the saveenv command and can be used across various bootmodes too.
+ 
+ **Writing to MMC/EMMC**
+ 
+-.. prompt:: bash
+-  :prompts: =>
++.. prompt:: bash =>
+ 
+   env export -t $loadaddr <list of variables>
+   fatwrite mmc ${mmcdev} ${loadaddr} ${bootenvfile} ${filesize}
+@@ -490,8 +489,7 @@ mmcdev) and set the environments.
+ If manually needs to be done then the environment can be read from the
+ filesystem and then imported
+ 
+-.. prompt:: bash
+-  :prompts: =>
++.. prompt:: bash =>
+ 
+   fatload mmc ${mmcdev} ${loadaddr} ${bootenvfile}
+   env import -t ${loadaddr} ${filesize}
+@@ -551,7 +549,7 @@ Refer to the release notes corresponding to the `OpenOCD version
+   box support by OpenOCD. The board-specific documentation will
+   cover the details and any adapter/dongle recommendations.
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+  openocd -v
+ 
+@@ -569,7 +567,7 @@ systems, but equivalent instructions should exist for systems with
+ other package managers. Please refer to the `OpenOCD Documentation
+ <https://openocd.org/>`_ for more recent installation steps.
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+   # Check the packages to be installed: needs deb-src in sources.list
+   sudo apt build-dep openocd
+@@ -599,7 +597,7 @@ The step is not necessary if the distribution supports the OpenOCD, but
+ if building from a source, ensure that the udev rules are installed
+ correctly to ensure a sane system.
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+   # Go to the OpenOCD source directory
+   cd openocd
+@@ -617,7 +615,7 @@ Step 2: Setup GDB
+ 
+ Most systems come with gdb-multiarch package.
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+   # Install gdb-multiarch package
+   sudo apt-get install gdb-multiarch
+@@ -833,7 +831,7 @@ Startup OpenOCD to debug the platform as follows:
+ 
+ .. k3_rst_include_start_openocd_cfg_XDS110
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+   openocd -f board/{board_of_choice}.cfg
+ 
+@@ -847,7 +845,7 @@ Startup OpenOCD to debug the platform as follows:
+   <https://github.com/openocd-org/openocd/blob/master/tcl/target/ti_k3.cfg#L59>`_
+   to decide if the SoC is supported or not.
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+   openocd -f openocd_connect.cfg
+ 
+@@ -922,13 +920,13 @@ To debug using this server, use GDB directly or your preferred
+ GDB-based IDE. To start up GDB in the terminal, run the following
+ command.
+ 
+-.. prompt:: bash
++.. prompt:: bash $
+ 
+   gdb-multiarch
+ 
+ To connect to your desired core, run the following command within GDB:
+ 
+-.. code-block:: bash
++.. prompt:: bash (gdb)
+ 
+   target extended-remote localhost:{port for desired core}
+ 
+@@ -945,13 +943,13 @@ To load symbols:
+ 
+ * Prior to relocation:
+ 
+-.. code-block:: bash
++.. prompt:: bash (gdb)
+ 
+   symbol-file {path to elf file}
+ 
+ * After relocation:
+ 
+-.. code-block:: bash
++.. prompt:: bash (gdb)
+ 
+   # Drop old symbol file
+   symbol-file
+@@ -962,7 +960,7 @@ To load symbols:
+ 
+ In the above example of AM625,
+ 
+-.. code-block:: bash
++.. prompt:: bash (gdb)
+ 
+   target extended-remote localhost:3338     <- R5F (Wakeup Domain)
+   target extended-remote localhost:3334     <- A53 (Main Domain)
+@@ -982,7 +980,7 @@ breakpoints. To exit the debug loop added above, add any breakpoints
+ needed and run the following GDB commands to step out of the debug
+ loop set in the ``board_init_f`` function.
+ 
+-.. code-block:: bash
++.. prompt:: bash (gdb)
+ 
+   set x = 0
+   continue
+diff --git a/doc/board/ti/ks2_evm.rst b/doc/board/ti/ks2_evm.rst
+index 0a789037a6a8..c8591484b032 100644
+--- a/doc/board/ti/ks2_evm.rst
++++ b/doc/board/ti/ks2_evm.rst
+@@ -122,8 +122,7 @@ Don't forget to add CROSS_COMPILE.
+ 
+ To build u-boot.bin, u-boot-spi.gph, MLO:
+ 
+-.. prompt:: bash
+-   :prompts: $
++.. prompt:: bash $
+ 
+    make k2hk_evm_defconfig
+    make
+@@ -197,8 +196,7 @@ instructions:
+ 4. Free Run the target as described earlier (step 4) to get U-Boot prompt
+ 5. At the U-Boot console type following to setup U-Boot environment variables.
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    setenv addr_uboot 0x87000000
+    setenv filesize <size in hex of u-boot-spi.gph rounded to hex 0x10000>
+@@ -226,8 +224,7 @@ instructions:
+ 4. Free Run the target as described earlier (step 4) to get U-Boot prompt
+ 5. At the U-Boot console type following to setup U-Boot environment variables.
+ 
+-.. prompt:: bash
+-   :prompts: =>
++.. prompt:: bash =>
+ 
+    setenv filesize <size in hex of MLO rounded to hex 0x10000>
+    run burn_uboot_nand
+@@ -249,10 +246,10 @@ Open BMC and regular UART terminals.
+ 1. On the regular UART port start xmodem transfer of the u-boot.bin
+ 2. Using BMC terminal set the ARM-UART bootmode and reboot the EVM
+ 
+-.. prompt:: bash
++.. prompt:: bash BMC>
+ 
+-   BMC> bootmode #4
+-   MBC> reboot
++  bootmode #4
++  reboot
+ 
+ 3. When xmodem is complete you should see the U-Boot starts on the UART port
+ 
+-- 
+2.37.2
+
