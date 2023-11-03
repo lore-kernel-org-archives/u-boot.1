@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E195CC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEC90C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:43:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BCC987495;
-	Fri,  3 Nov 2023 20:40:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3887587232;
+	Fri,  3 Nov 2023 20:43:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WZhHc9CO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EQ90qs9Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9001287489; Fri,  3 Nov 2023 20:40:00 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id C59DF87274; Fri,  3 Nov 2023 20:43:18 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A405886E54
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:39:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F56886F67
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:43:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-53ed4688b9fso4000034a12.0
- for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 12:39:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2c6b30aca06so33127351fa.3
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 12:43:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699040393; x=1699645193; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=d7HnO0dNeoAHLsEexCzlbJkGDubEot2xMXB2AgLqkos=;
- b=WZhHc9COzZwcXb2PtmiTHjMHMcmOTZ7VCJ8Y+4L7upduFtUAK/jqVWr/IhcndLcacw
- 9pRuIIke+ZW94DB7yt9HKKnXvNa8GYMKN2dcNggUvQNQLZXr2m7P5bwD1VKDMfqSFyki
- qe5u0khfE8cWEwUqnbCCgFN4gklLicactSurxbYpjr9O+p7nVvjsGoD41SXJrFAzcWNP
- w9in8YhNME4zLA4qqZ25OAu09EtP8YJh+Rnoc9kiuZLiiNVFWK1DwIGpnlUnXFtLuth7
- PlFNcgNBwUWrlTvawHzOZX+kpf3VhJmiTmcncfjYSqEEjxQoK5rTc3wjH2PTLw+t6YJr
- vEdQ==
+ d=linaro.org; s=google; t=1699040591; x=1699645391; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zBa4BjfxI5HdhNf3j79+ZhdWZQkWY4P/288mCqirBZE=;
+ b=EQ90qs9QDz4L2ygsexl9ndy7xzJoVwl/7+vQxkqT5Le1PwE5j1MrNV1fA+pRyFCXH/
+ 7bj0ZPtQkfKhEPtIDDgUgdABy1fTs7OzwJT3FqwEAMt2g6eTgPOzEasmLyCvH8gX8dKY
+ M0mLZPfsaM/mfqvn1ddzkpEm4GjYUYNUpLiXQL2EzrPr7m9YmKYNlLI4i4b+7fVqmhW7
+ nfGXUCwq2OSRmomUGpSfxATEXHd5UbgCULwCRBo7Hi3hTo0aoAj6OFt/iewdZOLaz9x4
+ T/j2KCfLuXAGPXpFZufGlmkJC12mS7Ky1O2bJf61HNRQHhz303HELAlzklW5Xq3CyKZb
+ vxKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699040393; x=1699645193;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=d7HnO0dNeoAHLsEexCzlbJkGDubEot2xMXB2AgLqkos=;
- b=eXB5vP0Sg7y+apMu7P1eOtVHqzq87zq8fuO2y4NdhTwkGMXa6LvPbtRoQKCAczKD76
- Y50l/xFzoqAS3M31y7mwgM+uXgcLEG2BuLpt1PpqIwcfDcdJESVq8p961C7iE7J+ZLXg
- gkyDvRdWSOzOpK3ff02viSp/jbwNHO0y56QqdFYlxd2qg4uZDiXTELrJ0I+iNR0129cJ
- nyDy9hp13PHJ40XGun68otEiPdtuHqOZr1ndPFPwz4mgyMeAuGiLYuFmnTwWgY0QCWzz
- aUfqUIVKWmQ4+3qdfeHRpXhAAEBNqN0QE/CxDcPPbTjqxiuPyEq0KAiIs98U39eKsMum
- 5HjA==
-X-Gm-Message-State: AOJu0YyVa18pntKGpuPb2alN9jWBP6O8w1nO6GnOuSYlxilJW6FJy7OF
- ya2E4W4VMGc+ZgKZNPZ0NqPM/qni7Rk=
-X-Google-Smtp-Source: AGHT+IF/KIbQmRVLJWIvvjtcfypKLm2sbM/M4dqZ15y3Bfg9fijiHnVU3tKEd5IGZKdp08Fd7engkw==
-X-Received: by 2002:a50:9ecb:0:b0:540:61ad:6083 with SMTP id
- a69-20020a509ecb000000b0054061ad6083mr17304430edf.6.1699040392898; 
- Fri, 03 Nov 2023 12:39:52 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.252.165]) by smtp.gmail.com with ESMTPSA id
- v29-20020a50955d000000b0054358525a5bsm1288483eda.62.2023.11.03.12.39.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Nov 2023 12:39:52 -0700 (PDT)
-Date: Fri, 03 Nov 2023 21:39:51 +0200
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/3] drivers: gpio-uclass: support PMIC GPIO children
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231103190339.GA2621465@bill-the-cat>
-References: <20231024083801.202365-1-clamor95@gmail.com>
- <20231024083801.202365-2-clamor95@gmail.com>
- <20231103190339.GA2621465@bill-the-cat>
-Message-ID: <4FA8B3C5-B9FF-498D-A369-57AC099785AF@gmail.com>
+ d=1e100.net; s=20230601; t=1699040591; x=1699645391;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zBa4BjfxI5HdhNf3j79+ZhdWZQkWY4P/288mCqirBZE=;
+ b=JREXHLaXo4IzhoAGshkMOxv3a7fU6nNBFVo+hkMmyjG/b80T6sTnWTE10TER7GoRmT
+ IhK036OmA47C330Uxu9/lRqle4Z356nSY1NMlcweaGfHwA2i9c/F61+wAzn+cdB/V5eA
+ xVfxw0XQVAhIEuCG5gI16VGSOpc5Es2fSaSfE4//xVa2oCT50rMSyTl/4h6esfs6u4cm
+ CpecAqZizA46C7SCN7YxhsQyi7Fkl8K9hPbymNRIA/AKDf7hKog6ptAs5vTamal1NdX3
+ GlXNpA+7Jaw/5iPeHQHHsX9iIZ3vGEehSd6qBtobf9+Fybqwr9OvjUNtiblatEoCIH0k
+ tLww==
+X-Gm-Message-State: AOJu0Ywi4PC9AZDDeGdwgY7UXY4OIYHOA9LX3b9+Z3T38Mli3YVFOiWb
+ uVfwplvywS64U+vWOravqjZFFwtF30jDbKHUS7Sl2A==
+X-Google-Smtp-Source: AGHT+IH7l+/pPH1a0La+EyCickWJBMdCJ20ADhMkxTjMRFUj/Hp1mgl8gRgXVS0WN4QMSbJd2O8lwjanL12zQwutAzc=
+X-Received: by 2002:a05:6512:6d1:b0:507:c7ae:32cc with SMTP id
+ u17-20020a05651206d100b00507c7ae32ccmr20521282lff.41.1699040591492; Fri, 03
+ Nov 2023 12:43:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <0c1abfbc-fd2a-4dd9-8447-53e5ee32ab85@canonical.com>
+ <CAPnjgZ18Utd0V7kctaqD6aZqfmNy9Qogg8dw5WaHkAar9C+Dxw@mail.gmail.com>
+ <750bac2f-3bcd-4ae1-b5ed-a82e8159846b@canonical.com>
+ <CAPnjgZ3KZLTHUWnnQtBsiaeRRXgHjbqdkfw6cW+_+aXZ9zpogA@mail.gmail.com>
+ <ea1ba7c2-7f9c-4702-a6da-efb728771e24@canonical.com>
+ <20231020162410.GK3119521@bill-the-cat>
+ <CAPnjgZ0zwQ+J-17YEhAtTtLhTcK7K9=nqNNqOdNmG5bY+rFrhg@mail.gmail.com>
+ <7481371f-657d-46d6-b8e7-74da7a200ee9@canonical.com>
+ <CAPnjgZ3_WSS+Z2xsRTvf-7ChPN42OVLgLf8ZvGv=2FVrNuHkhA@mail.gmail.com>
+ <87h6mhqri9.fsf@bloch.sibelius.xs4all.nl>
+ <20231023163455.GL496310@bill-the-cat>
+ <87fs21qnex.fsf@bloch.sibelius.xs4all.nl>
+ <CAPnjgZ3Yqf3-9wjVTYh5eR_=rFuf-2eWUvZmfv=U1xDCVEWSXQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3Yqf3-9wjVTYh5eR_=rFuf-2eWUvZmfv=U1xDCVEWSXQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 3 Nov 2023 21:42:35 +0200
+Message-ID: <CAC_iWjLJD36GahKj9Ks_4QMtOn1gatpxwid1paPavvsxeUNBpg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+To: Simon Glass <sjg@google.com>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>, 
+ heinrich.schuchardt@canonical.com, u-boot@lists.denx.de, dianders@google.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,59 +97,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon
 
-
-3 =D0=BB=D0=B8=D1=81=D1=82=D0=BE=D0=BF=D0=B0=D0=B4=D0=B0 2023 =D1=80=2E 21=
-:03:39 GMT+02:00, Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
->On Tue, Oct 24, 2023 at 11:37:59AM +0300, Svyatoslav Ryhel wrote:
+On Fri, 3 Nov 2023 at 21:17, Simon Glass <sjg@google.com> wrote:
 >
->> UCLASS_PMIC may have GPIO children without exposed fdt node,
->> in this case if requesting fails, check if uclass is PMIC=2E
->> If so, iterate through its children to find correct device=2E
->>=20
->> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail=2Ecom>
->> ---
->>  drivers/gpio/gpio-uclass=2Ec | 19 ++++++++++++++++---
->>  1 file changed, 16 insertions(+), 3 deletions(-)
->>=20
->> diff --git a/drivers/gpio/gpio-uclass=2Ec b/drivers/gpio/gpio-uclass=2E=
-c
->> index 7aece85a70=2E=2Ea3fc470a5d 100644
->> --- a/drivers/gpio/gpio-uclass=2Ec
->> +++ b/drivers/gpio/gpio-uclass=2Ec
->> @@ -1143,9 +1143,22 @@ static int gpio_request_tail(int ret, const char=
- *nodename,
->>  		ret =3D uclass_get_device_by_ofnode(UCLASS_GPIO, args->node,
->>  						  &desc->dev);
->>  		if (ret) {
->> -			debug("%s: uclass_get_device_by_ofnode failed\n",
->> -			      __func__);
->> -			goto err;
->> +			struct udevice *pmic;
->> +			ret =3D uclass_get_device_by_ofnode(UCLASS_PMIC, args->node,
->> +							  &pmic);
->> +			if (ret) {
->> +				log_err("PMIC device get failed, err %d\n", ret);
->> +				goto err;
->> +			}
->> +
->> +			device_foreach_child(desc->dev, pmic) {
->> +				if (device_get_uclass_id(desc->dev) =3D=3D UCLASS_GPIO)
->> +					break;
->> +			}
->> +
->> +			/* if loop exits without GPIO device return error */
->> +			if (device_get_uclass_id(desc->dev) !=3D UCLASS_GPIO)
->> +				goto err;
->>  		}
->>  	}
->>  	ret =3D gpio_find_and_xlate(desc, args);
+> Hi,
 >
->This needs to check for DM_PMIC or so as it leads to a lot of size
->increase and one failure to link due to running out of space now=2E
+> On Mon, 23 Oct 2023 at 11:06, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+> >
+> > > Date: Mon, 23 Oct 2023 12:34:55 -0400
+> > > From: Tom Rini <trini@konsulko.com>
+> > >
+> > > On Mon, Oct 23, 2023 at 05:37:34PM +0200, Mark Kettenis wrote:
+> > > > > From: Simon Glass <sjg@google.com>
+> > > > > Date: Mon, 23 Oct 2023 00:08:40 -0700
+> > > > >
+> > > > > > > fdt_node_check_compatible() does most of the work...then you need to
+> > > > > > > check which FDT has the most specific match (i.e. latest in the string
+> > > > > > > list). That handles things like board revisions, variants, etc.
+> > > > > > >
+> > > > > > > My concern is about adding a feature when there is already a defined
+> > > > > > > spec and mechanism for this to work. What happens when we load the
+> > > > > > > file and the compatible is wrong?
+> > > > > > >
+> > > > > > > At best, I see the filename as a hint.
+> > > > > > >
+> > > > > > > [Perhaps this is the wrong time to ask, but why are kernels +DT not
+> > > > > > > shipped in FIT on ARM?]
+> > > > > >
+> > > > > > FIT is U-Boot specific. For Linux distributions it is easier to use a
+> > > > > > firmware agnostic method of booting.
+> > > > >
+> > > > > I'd like to suggest that distros use both. Then U-Boot can work as it
+> > > > > was designed and we can avoid these work-arounds.
+> > > > >
+> > > > > FIT is actually implemented in various other bootloaders. In fact
+> > > > > perhaps grub is the only one that doesn't? I can't think of any
+> > > > > others.
+> > > >
+> > > > Simon, please stop pushing this.  OpenBSD's bootloader does not
+> > > > support FIT and we have no interest in supporting it.  Our users
+> > > > expect to be able to just copy a new kernel in place and use it and
+> > > > our OS upgrade procedure depends on this as well.  And this is
+> > > > incompatble with FIT.  I've explained this about a dozen times to you
+> > > > now.
+> > >
+> > > In the context of this thread, genuinely, how will OpenBSD (and the rest
+> > > of the BSD families) operate? I agree U-Boot doesn't want to have to
+> > > know all of the UFSes, so that means the SCT will be populated either by
+> > > the DT passed to U-Boot, or the DT we were built with. Is it that since
+> > > the next stage is an EFI app, it will check that variable and use that
+> > > hint?
+> >
+> > Yes, that is exactly what I want to do.  Hopefully the DT that is
+> > passed to U-Boot or that U-Boot was built with will be good enough in
+> > most cases.  But when it isn't users can use the OpenBSD bootloader
+> > (which is an EFI app) to load an updated DT.
+> >
+> > I can't speak for the other BSDs, but I think both FreeBSD and NetBSD
+> > have a very similar boot mechanism.
+>
+> I've been thinking about this patch a bit more, and I have grave misgivings.
+>
+> I predict that if we take this, it will become an ABI from U-Boot and
+> we will not be able to drop it.
+>
+> Here is what I suggest instead: provide a protocol for U-Boot to
+> provide the DT over EFI. Provide any information needed by U-Boot,
+> such as the directory containing the files.
+>
+> We already have the ability to put a DT in the system table. We
+> already have a way to package DT into a FIT and allow U-Boot to select
+> the correct one.
+>
+> With something like this it will be impossible for U-Boot to boot a
+> distro without using grub, etc. since it won't know what DT to use.
+> This information would be held in a script somewhere which no one can
+> figure out without executing it.
 
-Thanks for checking! I will look into it deeper to reduce the size inflati=
-on, not sure though why it occurs at all=2E
-Best regards,
-Svyatoslav R=2E
+That's not entirely correct.  If you want to boot an OS with EFI
+without GRUB you will boot via the EFI bootmanager. We already have a
+way of adding the initrd we need to use in EFI boot options. Adding
+the DT in a similar fashion wouldn't be too hard.
+
+Thanks
+/Ilias
+>
+> I think we need to carefully think about the design of this.
+>
+> Regards,
+> Simon
