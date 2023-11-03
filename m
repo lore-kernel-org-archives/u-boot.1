@@ -4,54 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41396C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 01:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F9B0C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 02:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92442874D8;
-	Sat,  4 Nov 2023 02:05:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id C8CF087092;
+	Sat,  4 Nov 2023 03:43:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="lkmueMuE";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="0OyBtJ3r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B77D1874D8; Sat,  4 Nov 2023 02:05:01 +0100 (CET)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id B395E87463
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 02:04:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
+ id 8A42986CF4; Fri,  3 Nov 2023 22:16:55 +0100 (CET)
+Received: from smtp-out.freemail.hu (fmfe39.freemail.hu [46.107.16.244])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 823E186A26
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 22:16:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from [192.168.1.75] (d173-180-12-152.bchsia.telus.net
- [173.180.12.152])
- by linux.microsoft.com (Postfix) with ESMTPSA id A4C4C20B74C0;
- Fri,  3 Nov 2023 18:04:55 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A4C4C20B74C0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1699059895;
- bh=0Sjf647ZABJyRaWv9oGliDjM/JkYkMSgAFNg2HmkojQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=lkmueMuEMvwHSzh2TdqsQrfXSpN6J50yyuU4ItJQRyEdyneNWsSHUeTf5RM+1xsxk
- gSlp5voXiz6SM49l3271mqZ5NmdJUt9OqqkL/QvOh1xgwb22pRkXPqL1DpMT1KNazC
- ptSoTVtLiHenCIii+ZTM36x/2o4i43Nmrw3t7AOI=
-Message-ID: <7dd18ad7-6d6c-47ea-9dc0-3b59ddf25460@linux.microsoft.com>
-Date: Fri, 3 Nov 2023 18:04:55 -0700
+ dmarc=none (p=none dis=none) header.from=freemail.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+Received: from localhost.localdomain (catv-80-98-74-198.catv.fixed.vodafone.hu
+ [80.98.74.198])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4SMYTb01Pkzl9;
+ Fri,  3 Nov 2023 22:16:50 +0100 (CET)
+From: egyszeregy@freemail.hu
+To: u-boot@lists.denx.de
+Cc: otavio@ossystems.com.br, festevam@gmail.com,
+ =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
+Subject: [PATCH 1/1] pico-imx7d: fix typo in AR8035 comment
+Date: Fri,  3 Nov 2023 22:16:40 +0100
+Message-ID: <20231103211640.423-1-egyszeregy@freemail.hu>
+X-Mailer: git-send-email 2.42.0.windows.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] net: bootp: BOOTP/DHCPv4 retransmission
- improvements
-Content-Language: en-GB
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-3-seanedmond@linux.microsoft.com>
- <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
-From: Sean Edmond <seanedmond@linux.microsoft.com>
-In-Reply-To: <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1699046211; 
+ s=20181004; d=freemail.hu;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ l=827; bh=+enMxx4/S5A/sm0sFnrLGcNM/DhlUEUavscdaDAPrF8=;
+ b=0OyBtJ3rmJfOz2jmm9jezfyT+R8XU7LV884FhFC71UVRrefh7TQzHZ+1zJ7CPloE
+ DJbSSZAYTJS1DXEASoFjIie0e5Y99MFbCxxVVVpNUKBKjhHG7vvT1o7mmJu+mLV3jHj
+ L8bB+4PfH5qo9EBaI7wNwCceqB6hioQTVwgnKPg3alMNKgVS01eS22lGyCEJeX5ZGxQ
+ K5qschHX5V49zb7dW5F5hZi/EDRMbILsmvvzYvl0cJAWHZc29iW+zgv9wM8cLf4NOEZ
+ iIQSqT98Oej9W4GB0o9SPmcOWgZt0Ck5MTXw7D4W5Yc8FWVLyuegf4CHtaG5XgM2rYi
+ 2VLX+xzPoQ==
+X-Mailman-Approved-At: Sat, 04 Nov 2023 03:43:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,186 +70,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Benjamin Szőke <egyszeregy@freemail.hu>
 
-On 2023-10-23 11:06 p.m., Heinrich Schuchardt wrote:
-> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
->> From: Sean Edmond <seanedmond@microsoft.com>
->>
->> This patch introduces 3 improvements to align with RFC 951:
->> - retransmission backoff interval maximum is configurable
->> - initial retranmission backoff interval is configurable
->> - transaction ID is kept the same for each BOOTP/DHCPv4 request
->>
->> In applications where thousands of nodes are serviced by a single DHCP
->> server, maximizing the retransmission backoff interval at 2 seconds (the
->> current u-boot default) exerts high pressure on the DHCP server and
->> network layer.
->>
->> RFC 951 “7.2. Client Retransmission Strategy” states that the
->> retransmission backoff interval should maximize at 60 seconds. This
->
-> %s/maximize at/be limited to/
->
->> patch allows the interval to be configurable using the environment
->> variable "bootpretransmitperiodmax"
->
-> If there is an RFC defining the value, why do we need an environment
-> variable?
->
->>
->> The initial retranmission backoff period defaults to 250ms, which is
->> also too small for these scenarios with many clients.  This patch makes
->> the initial retransmission interval to be configurable using the
->> environment variable "bootpretransmitperiodinit".
->>
->> Also, on a retransmission it is not expected for the transaction ID to
->> change (only the 'secs' field should be updated). Let's save the
->> transaction ID and use the same transaction ID for each BOOTP/DHCPv4
->> exchange.
->>
->> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
->> ---
->>   net/bootp.c | 56 ++++++++++++++++++++++++++++++++++++++---------------
->>   1 file changed, 40 insertions(+), 16 deletions(-)
->>
->> diff --git a/net/bootp.c b/net/bootp.c
->> index 6800290963..bab17a9ceb 100644
->> --- a/net/bootp.c
->> +++ b/net/bootp.c
->> @@ -42,6 +42,17 @@
->>    */
->>   #define TIMEOUT_MS    ((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
->>
->> +/*
->> + * According to rfc951 : 7.2. Client Retransmission Strategy
->> + * "After the 'average' backoff reaches about 60 seconds, it should be
->> + * increased no further, but still randomized."
->> + *
->> + * U-Boot has saturated this backoff at 2 seconds for a long time.
->> + * To modify, set the environment variable "bootpretransmitperiodmax"
->> + */
->> +#define RETRANSMIT_PERIOD_MAX_MS    2000
->
-> This does not match RFC 951. Please, why shouldn't we use the standard
-> value by default?
->
->> +#define RETRANSMIT_PERIOD_INIT_MS    250
->
-> This constant should be described too.
->
->> +
->>   #ifndef CFG_DHCP_MIN_EXT_LEN        /* minimal length of extension 
->> list */
->>   #define CFG_DHCP_MIN_EXT_LEN 64
->>   #endif
->> @@ -53,6 +64,7 @@
->>   u32        bootp_ids[CFG_BOOTP_ID_CACHE_SIZE];
->>   unsigned int    bootp_num_ids;
->>   int        bootp_try;
->> +u32        bootp_id;
->>   ulong        bootp_start;
->>   ulong        bootp_timeout;
->>   char net_nis_domain[32] = {0,}; /* Our NIS domain */
->> @@ -60,6 +72,7 @@ char net_hostname[32] = {0,}; /* Our hostname */
->>   char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] = {0,}; /* Our 
->> bootpath */
->>
->>   static ulong time_taken_max;
->> +static u32   retransmit_period_max_ms;
->>
->>   #if defined(CONFIG_CMD_DHCP)
->>   static dhcp_state_t dhcp_state = INIT;
->> @@ -414,8 +427,8 @@ static void bootp_timeout_handler(void)
->>           }
->>       } else {
->>           bootp_timeout *= 2;
->> -        if (bootp_timeout > 2000)
->> -            bootp_timeout = 2000;
->> +        if (bootp_timeout > retransmit_period_max_ms)
->> +            bootp_timeout = retransmit_period_max_ms;
->
-> RFC 951 requires that the backoff time is randomized.
->
-I added randomization in v3.  Note, in that update I haven't put any 
-guards around the use of rand()/srand() (as is the case in net_rand.h).  
-Perhaps it's safe to assume it will always be present for inclusion of net?
+Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
+---
+ board/technexion/pico-imx7d/pico-imx7d.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Best regards
->
-> Heinrich
->
->> net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
->>           bootp_request();
->>       }
->> @@ -711,10 +724,14 @@ static int bootp_extended(u8 *e)
->>
->>   void bootp_reset(void)
->>   {
->> +    char *ep;  /* Environment pointer */
->> +
->>       bootp_num_ids = 0;
->>       bootp_try = 0;
->>       bootp_start = get_timer(0);
->> -    bootp_timeout = 250;
->> +
->> +    bootp_timeout = env_get_ulong("bootpretransmitperiodinit", 10, 
->> RETRANSMIT_PERIOD_INIT_MS);
->> +
->>   }
->>
->>   void bootp_request(void)
->> @@ -726,7 +743,6 @@ void bootp_request(void)
->>   #ifdef CONFIG_BOOTP_RANDOM_DELAY
->>       ulong rand_ms;
->>   #endif
->> -    u32 bootp_id;
->>       struct in_addr zero_ip;
->>       struct in_addr bcast_ip;
->>       char *ep;  /* Environment pointer */
->> @@ -742,6 +758,9 @@ void bootp_request(void)
->>       else
->>           time_taken_max = TIMEOUT_MS;
->>
->> +    retransmit_period_max_ms = 
->> env_get_ulong("bootpretransmitperiodmax", 10,
->> +                         RETRANSMIT_PERIOD_MAX_MS);
->> +
->>   #ifdef CONFIG_BOOTP_RANDOM_DELAY        /* Random BOOTP delay */
->>       if (bootp_try == 0)
->>           srand_mac();
->> @@ -801,18 +820,23 @@ void bootp_request(void)
->>       extlen = bootp_extended((u8 *)bp->bp_vend);
->>   #endif
->>
->> -    /*
->> -     *    Bootp ID is the lower 4 bytes of our ethernet address
->> -     *    plus the current time in ms.
->> -     */
->> -    bootp_id = ((u32)net_ethaddr[2] << 24)
->> -        | ((u32)net_ethaddr[3] << 16)
->> -        | ((u32)net_ethaddr[4] << 8)
->> -        | (u32)net_ethaddr[5];
->> -    bootp_id += get_timer(0);
->> -    bootp_id = htonl(bootp_id);
->> -    bootp_add_id(bootp_id);
->> -    net_copy_u32(&bp->bp_id, &bootp_id);
->> +    /* Only generate a new transaction ID for each new BOOTP request */
->> +    if (bootp_try == 1) {
->> +        /*
->> +         *    Bootp ID is the lower 4 bytes of our ethernet address
->> +         *    plus the current time in ms.
->> +         */
->> +        bootp_id = ((u32)net_ethaddr[2] << 24)
->> +            | ((u32)net_ethaddr[3] << 16)
->> +            | ((u32)net_ethaddr[4] << 8)
->> +            | (u32)net_ethaddr[5];
->> +        bootp_id += get_timer(0);
->> +        bootp_id = htonl(bootp_id);
->> +        bootp_add_id(bootp_id);
->> +        net_copy_u32(&bp->bp_id, &bootp_id);
->> +    } else {
->> +        net_copy_u32(&bp->bp_id, &bootp_id);
->> +    }
->>
->>       /*
->>        * Calculate proper packet lengths taking into account the
+diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/pico-imx7d/pico-imx7d.c
+index 6e98b85b28..7f5a092457 100644
+--- a/board/technexion/pico-imx7d/pico-imx7d.c
++++ b/board/technexion/pico-imx7d/pico-imx7d.c
+@@ -106,7 +106,7 @@ int board_phy_config(struct phy_device *phydev)
+ {
+ 	unsigned short val;
+ 
+-	/* To enable AR8035 ouput a 125MHz clk from CLK_25M */
++	/* To enable AR8035 output a 125MHz clk from CLK_25M */
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x7);
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0xe, 0x8016);
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0xd, 0x4007);
+-- 
+2.42.0.windows.2
+
