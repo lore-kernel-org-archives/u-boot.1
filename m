@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936FDC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 00:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10437C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 00:43:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5247687737;
-	Fri,  3 Nov 2023 01:39:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D752387755;
+	Fri,  3 Nov 2023 01:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p2Bva4p9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XnAOyVif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3ADBB8768D; Fri,  3 Nov 2023 01:38:42 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 67E69876DF; Fri,  3 Nov 2023 01:38:44 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B3EF876FA
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 01:38:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 37E6687702
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 01:38:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c8c8097494;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c8En019787;
  Thu, 2 Nov 2023 19:38:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1698971888;
- bh=TJ5nX5B7HECrlKONvBOPERR5cZ8ujdPUut82IldsITM=;
+ bh=Oq4a0+epA1mKXhQAD2No8yfuyxLDS6JyVu1nOUiqdL4=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=p2Bva4p9qwgi3yGav7YiQqoh6gQaWDQqegdKw9oLohpC76HmmQ6TLXfQPJgoWfCxw
- RpX2Lzqq7VRHUYoyvGDXfj5bxTaodxd7GUKoXF6oGh3WflRDXJF6S3DsQjOG20k398
- eHNb0QFzPd/6GNjZlBBHDCmnuHw85HoGPH/n8mUg=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A30c8Sa017606
+ b=XnAOyVifQtVmabZQ4B/a80yL23crE3r82gn8cY2vP4GT7/XKAxi5N0XrWQekW6sim
+ 1QhuquH1CqQMScPSAmWhX9mU0qnX3cGRq01BYyu3UmAH9sSLQwkDCYvL2XMjDtgGGK
+ g3bSvMdsRfYd6PohCz3ey3aWS5rHGvC8nh8vxjIA=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A30c8RQ021128
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 2 Nov 2023 19:38:08 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
  Nov 2023 19:38:08 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 2 Nov 2023 19:38:08 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c8C8043174;
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c82b043177;
  Thu, 2 Nov 2023 19:38:08 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -57,9 +57,9 @@ CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
  Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 01/15] arm: mach-k3: j721e: Improve support for UDA FS
-Date: Thu, 2 Nov 2023 19:37:51 -0500
-Message-ID: <20231103003805.2420005-2-nm@ti.com>
+Subject: [PATCH 03/15] board: ti: j721e: evm: Drop board check for ESM
+Date: Thu, 2 Nov 2023 19:37:53 -0500
+Message-ID: <20231103003805.2420005-4-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20231103003805.2420005-1-nm@ti.com>
 References: <20231103003805.2420005-1-nm@ti.com>
@@ -83,47 +83,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 5019170970ad ("arch: arm: mach-k3: j721e: add support for UDA
-FS") introduced basic UDA FS support, however, we can Take approach
-similar to commit 0f1c1e8b368b ("arm: mach-k3: am625: Add support for
-UDA FS"). While boot partition support with EMMC boot is useful, it is
-constrained by the size of boot hardware partition itself.
-
-In the case of K3 devices, tispl images can contain OP-TEE images that
-can substantially vary in size and the u-boot image itself can vary over
-time as we enable various features.
-
-So use the CSD information in the case of EMMC_BOOT configuration being
-enabled to pick boot partition or UDA FS mode operation to pick.
-
-If EMMC_BOOT is disabled, then depend on filesystem configuration to
-pick data from UDA.
+When config is enabled, the esm dt probe makes sense. Simplify by
+dropping board specific checks.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- arch/arm/mach-k3/j721e_init.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ board/ti/j721e/evm.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
-index b1f7e25ed092..bcdfbfc79c4a 100644
---- a/arch/arm/mach-k3/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e_init.c
-@@ -294,7 +294,14 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index d4f7c1d9f938..75d51a0552c4 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -531,10 +531,8 @@ err_free_gpio:
+ 
+ void spl_board_init(void)
  {
- 	switch (boot_device) {
- 	case BOOT_DEVICE_MMC1:
--		return (spl_mmc_emmc_boot_partition(mmc) ? MMCSD_MODE_EMMCBOOT : MMCSD_MODE_FS);
-+		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT)) {
-+			if (spl_mmc_emmc_boot_partition(mmc))
-+				return MMCSD_MODE_EMMCBOOT;
-+			return MMCSD_MODE_FS;
-+		}
-+		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
-+			return MMCSD_MODE_FS;
-+		return MMCSD_MODE_EMMCBOOT;
- 	case BOOT_DEVICE_MMC2:
- 		return MMCSD_MODE_FS;
- 	default:
+-#if defined(CONFIG_ESM_K3) || defined(CONFIG_ESM_PMIC)
+ 	struct udevice *dev;
+ 	int ret;
+-#endif
+ 
+ 	if ((IS_ENABLED(CONFIG_TARGET_J721E_A72_EVM) ||
+ 	     IS_ENABLED(CONFIG_TARGET_J7200_A72_EVM)) &&
+@@ -543,24 +541,20 @@ void spl_board_init(void)
+ 			probe_daughtercards();
+ 	}
+ 
+-#ifdef CONFIG_ESM_K3
+-	if (board_ti_k3_is("J721EX-PM2-SOM")) {
++	if (IS_ENABLED(CONFIG_ESM_K3)) {
+ 		ret = uclass_get_device_by_driver(UCLASS_MISC,
+ 						  DM_DRIVER_GET(k3_esm), &dev);
+ 		if (ret)
+ 			printf("ESM init failed: %d\n", ret);
+ 	}
+-#endif
+ 
+-#ifdef CONFIG_ESM_PMIC
+-	if (board_ti_k3_is("J721EX-PM2-SOM")) {
++	if (IS_ENABLED(CONFIG_ESM_PMIC)) {
+ 		ret = uclass_get_device_by_driver(UCLASS_MISC,
+ 						  DM_DRIVER_GET(pmic_esm),
+ 						  &dev);
+ 		if (ret)
+ 			printf("ESM PMIC init failed: %d\n", ret);
+ 	}
+-#endif
+ 	if ((IS_ENABLED(CONFIG_TARGET_J7200_A72_EVM) || IS_ENABLED(CONFIG_TARGET_J721E_A72_EVM)) &&
+ 	    IS_ENABLED(CONFIG_HBMC_AM654)) {
+ 		struct udevice *dev;
 -- 
 2.40.0
 
