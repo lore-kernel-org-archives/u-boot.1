@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2E0C4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 00:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6943FC4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 00:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85CA18726C;
-	Fri,  3 Nov 2023 01:30:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0325F87724;
+	Fri,  3 Nov 2023 01:38:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OXU5oBor";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JO1SPgMi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BAEE8720C; Fri,  3 Nov 2023 01:30:26 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4C9A9876D2; Fri,  3 Nov 2023 01:38:21 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2821987596
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 01:30:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B622686FCD
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 01:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.cournoyer@gmail.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-778af1b5b1eso87001785a.2
- for <u-boot@lists.denx.de>; Thu, 02 Nov 2023 17:30:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698971419; x=1699576219; darn=lists.denx.de;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=uLcMZRPFnhuPwvzvEW1Srv4lm75gSFhYMxd+V/uKxPY=;
- b=OXU5oBorJ8dlcN5/FPuMgNpVbyhXDY5r8J/+HJ1dynLnSkRLh6YvBR1xYtD4BOKzjG
- cYa3eZEQ5baYzeOD3OFrNlTuworjLv3kiUgmmWoMBRrIo/vdruVbBwlbGmXonRMzY9b+
- qVU4rvX7tvts1JpiwJl78WdxM8XxlSV+tu9EpQxSpvgtRyFyBCl2grqQLcIgt7S86C9V
- a5BGiWuXYi7Q46Cmp7g1T8BYUiHRshTBIaYRNq+M++zuyjU6bPB8mUJxPtcy+rhFUtaK
- k0iJ6UlzftU6hyObRAHixLo378712cBO8wVh4sAiMGEKAf/Mkf2MXMH/zCUqbncAizoR
- l3IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698971419; x=1699576219;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uLcMZRPFnhuPwvzvEW1Srv4lm75gSFhYMxd+V/uKxPY=;
- b=nzPK55Z0grMUXsxDWAIsr5SO/xErLGDWnFz9TiWMulDbrJyVk34Dfv6/wfCLe7oUw5
- zYq7EODGS1wyXQFAcgsG2Nkz9b3kJW22FYa2wPzpNxWomMVSuSx06jeIqpyBVY6tZr1G
- 6jgeThadMYIWdSu/DM2r1n4fz+8ujFxsLS+YEqto8RNFDVIxzUM7BOOOpVZnch3uYKQM
- ELp3j1zM+tDsd538SeplUt29JpJLD1U+rMM1v7u+vF67xZC4nQaFVAQBLPUoqzFud3X3
- zuL+ijFk4pO/2WCK5nrZ6HGRCLXzR05AIqtc7v+qanc0dJ/pD7uTmcGS2pESixqAvPCc
- +LyA==
-X-Gm-Message-State: AOJu0YwecCecmQlKALAzhMOyGQODRe40MCtLQCFQ3AmmwFzy8xRRb7pv
- 2Vav7DtOLRvENfOfoOB8WJcy7T+TG+I=
-X-Google-Smtp-Source: AGHT+IFywaAVsce8NkyroY3Kbz7BTgIC1xokFjrpreAwkigbK4fycvgUEgMLTCQLeppoHJABPaNvKw==
-X-Received: by 2002:ac8:57d3:0:b0:41c:bb5e:ba1b with SMTP id
- w19-20020ac857d3000000b0041cbb5eba1bmr25098892qta.38.1698971418651; 
- Thu, 02 Nov 2023 17:30:18 -0700 (PDT)
-Received: from hurd (dsl-10-131-160.b2b2c.ca. [72.10.131.160])
- by smtp.gmail.com with ESMTPSA id
- y7-20020ac81287000000b00419c40a0d70sm206191qti.54.2023.11.02.17.30.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 17:30:17 -0700 (PDT)
-From: Maxim Cournoyer <maxim.cournoyer@gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] patman: Add a 'keep_change_id' setting
-In-Reply-To: <CAPnjgZ2V0QejBkqyCB98rt4v7AZbuOp-cDHFy5oA0GBsXjvk4w@mail.gmail.com>
- (Simon Glass's message of "Thu, 2 Nov 2023 17:49:28 -0500")
-References: <CAPnjgZ1U-EYeSbhQ_HEM0do8RhPBW_XgLUewXUTtWxnkOCjcAg@mail.gmail.com>
- <20231013011924.23877-1-maxim.cournoyer@gmail.com>
- <20231013030633.7191-1-maxim.cournoyer@gmail.com>
- <CAPnjgZ2V0QejBkqyCB98rt4v7AZbuOp-cDHFy5oA0GBsXjvk4w@mail.gmail.com>
-Date: Thu, 02 Nov 2023 20:30:16 -0400
-Message-ID: <87pm0rlluv.fsf@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c9Ss003495;
+ Thu, 2 Nov 2023 19:38:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1698971889;
+ bh=llbbJ6V5KeCcvwBxTspfPcN7Hh6WIzG5DFo2TRTX2XI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=JO1SPgMighigjBRq3sXiyg+e/g4jUZxvwjcwZWHzLeE2fgLMQXIH9dQGDiagPj/Fn
+ 6USRHLzn8cH7YJ+O5H+fQieK6qo/cc49ZXu4LWv3hRdzkBQCvxDspZu1Z8MolakjGj
+ DJ/ubJxBECCnCDdbxvsSMvO/PNYbsvsyaA6OoKAM=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A30c9aA124940
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 2 Nov 2023 19:38:09 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
+ Nov 2023 19:38:08 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 2 Nov 2023 19:38:08 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A30c83O030049;
+ Thu, 2 Nov 2023 19:38:08 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH 07/15] board: ti: j721e: evm: Use IS_ENABLED with
+ CONFIG_PHYS_64BIT
+Date: Thu, 2 Nov 2023 19:37:57 -0500
+Message-ID: <20231103003805.2420005-8-nm@ti.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20231103003805.2420005-1-nm@ti.com>
+References: <20231103003805.2420005-1-nm@ti.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,35 +84,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Use IS_ENABLED to replace the #ifdeffery.
 
-Simon Glass <sjg@chromium.org> writes:
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+ board/ti/j721e/evm.c | 25 +++++++++++--------------
+ 1 file changed, 11 insertions(+), 14 deletions(-)
 
-> On Thu, 12 Oct 2023 at 20:06, Maxim Cournoyer <maxim.cournoyer@gmail.com> wrote:
->>
->> A Change-Id can be useful for traceability purposes, and some projects
->> may wish to have them preserved.  This change makes it configurable
->> via a new 'keep_change_id' setting.
->>
->> Signed-off-by: Maxim Cournoyer <maxim.cournoyer@gmail.com>
->> ---
->>
->> Changes in v2:
->> - Add missing argument to send parser
->> - Correctly propagate args.keep_change_id
->>
->>  tools/patman/__main__.py        |  2 ++
->>  tools/patman/control.py         | 12 +++++++++---
->>  tools/patman/patchstream.py     | 17 ++++++++++++-----
->>  tools/patman/patman.rst         | 11 ++++++-----
->>  tools/patman/test_checkpatch.py | 16 ++++++++++++++++
->>  5 files changed, 45 insertions(+), 13 deletions(-)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Applied to u-boot-dm, thanks!
-
-And thanks for the timely review! :-)
-
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index d49993fffe39..0fc141776818 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -39,22 +39,19 @@ int board_init(void)
+ 
+ int dram_init(void)
+ {
+-#ifdef CONFIG_PHYS_64BIT
+-	gd->ram_size = 0x100000000;
+-#else
+-	gd->ram_size = 0x80000000;
+-#endif
++	if (IS_ENABLED(CONFIG_PHYS_64BIT))
++		gd->ram_size = 0x100000000;
++	else
++		gd->ram_size = 0x80000000;
+ 
+ 	return 0;
+ }
+ 
+ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ {
+-#ifdef CONFIG_PHYS_64BIT
+ 	/* Limit RAM used by U-Boot to the DDR low region */
+-	if (gd->ram_top > 0x100000000)
++	if (IS_ENABLED(CONFIG_PHYS_64BIT) && gd->ram_top > 0x100000000)
+ 		return 0x100000000;
+-#endif
+ 
+ 	return gd->ram_top;
+ }
+@@ -66,12 +63,12 @@ int dram_init_banksize(void)
+ 	gd->bd->bi_dram[0].size = 0x80000000;
+ 	gd->ram_size = 0x80000000;
+ 
+-#ifdef CONFIG_PHYS_64BIT
+-	/* Bank 1 declares the memory available in the DDR high region */
+-	gd->bd->bi_dram[1].start = CFG_SYS_SDRAM_BASE1;
+-	gd->bd->bi_dram[1].size = 0x80000000;
+-	gd->ram_size = 0x100000000;
+-#endif
++	if (IS_ENABLED(CONFIG_PHYS_64BIT)) {
++		/* Bank 1 declares the memory available in the DDR high region */
++		gd->bd->bi_dram[1].start = CFG_SYS_SDRAM_BASE1;
++		gd->bd->bi_dram[1].size = 0x80000000;
++		gd->ram_size = 0x100000000;
++	}
+ 
+ 	return 0;
+ }
 -- 
-Maxim
+2.40.0
+
