@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22D4FC4332F
-	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 18:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F4D6C4332F
+	for <u-boot@archiver.kernel.org>; Fri,  3 Nov 2023 19:03:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D75E86E33;
-	Fri,  3 Nov 2023 19:51:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DA34887239;
+	Fri,  3 Nov 2023 20:03:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="O7nmDHlo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dc0wTJmK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D286386E09; Fri,  3 Nov 2023 19:51:52 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7DA4A8725C; Fri,  3 Nov 2023 20:03:51 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B1E68711B
- for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 19:51:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AEBB8708D
+ for <u-boot@lists.denx.de>; Fri,  3 Nov 2023 20:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A3IpYgb024718;
- Fri, 3 Nov 2023 13:51:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699037494;
- bh=Q+7JtsF7Q1E4hbRVZht08ShVTv943RNQ2R6TirR4YTU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=O7nmDHloYDs36ghC0sf41J8rmsOR/3J5HGWnGGaE9siyfcP6ZicWqDD3WWd8WmrGp
- gwqNqIJhrelYzPMmVrYaNdCgm4Lz3Paxps5JHt0PstWB8FuRahtqzCWgHmmUIuumJP
- FqMjX8+o+7+aKc31Q7BOzkIX9GShN0eVFaDnBpKA=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A3IpYd2015422
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 3 Nov 2023 13:51:34 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 3
- Nov 2023 13:51:34 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 3 Nov 2023 13:51:34 -0500
-Received: from [10.250.33.210] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A3IpXLn102157;
- Fri, 3 Nov 2023 13:51:33 -0500
-Message-ID: <f0f4b6af-9831-4231-8316-1e0b0dd2dab2@ti.com>
-Date: Fri, 3 Nov 2023 13:51:33 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6ce2ea3a944so1397967a34.1
+ for <u-boot@lists.denx.de>; Fri, 03 Nov 2023 12:03:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699038222; x=1699643022; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kRN13URGgWvtRy/GnKCOA+CNoJYpCv01YBg0tJpX5Yw=;
+ b=dc0wTJmK4jcOPxxDqmCAt0H2Vqe5FfgzfcVYGGVj5bBdazGRojTgavxvmeljgoQvUp
+ Wk6er4T14quYb2tUvL73kNlvcQebB+GBU4KcTR/72i41Rqg1wuQFVQBh05vGi8h63Q/q
+ F4ggA28vHJ5CQ8eadwUIWlPBL+uvpPkS79QAE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699038222; x=1699643022;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kRN13URGgWvtRy/GnKCOA+CNoJYpCv01YBg0tJpX5Yw=;
+ b=WHwJUmBeuH6oSaexGpxxNfXEufbIfqgRNGi7telcEJLprWlH6Q4W304PhmaFlQQDI1
+ 5mVmL+xzim0Kq3npgqST0Z2TERWZqyf1tc5Vwr+6RP1a/IVQk88q9HOM62x4OZL2N9Os
+ WuiqQNxkmNjAcsHeMksnBfmDHxsjf1eQfehC5Vcg0dyzkyuGz101yHLLcYmgLCZ89OE6
+ dIWKgZAPfZ766Do0ABdJLWJ6HPCQnkMRJqabohXeAUmFPRqALZDMKL2F/gPff0fjNiXD
+ 3VwbVCGHEDnZHPDX8zaoaHUHO7kspbEe+B+dGy89vfJ3QFACJCBbBroeznH1gUtqPC6+
+ CIqg==
+X-Gm-Message-State: AOJu0YzXx7icN0K0hPQe5g9uubg/AJzITnjggGzaCZQiYUxSRI2ucVSz
+ IQkTVfDO3QoSJP79nLNCLmTk2A==
+X-Google-Smtp-Source: AGHT+IGRI9P3QhkomJUtZP6Zv6V33VSf7NlhNG3YVC9tEui0ghYPZ5MVWqeOehJogpDQo06W34k8/A==
+X-Received: by 2002:a9d:748d:0:b0:6c4:c151:8ebe with SMTP id
+ t13-20020a9d748d000000b006c4c1518ebemr23414186otk.22.1699038222637; 
+ Fri, 03 Nov 2023 12:03:42 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ g4-20020ac81244000000b004197d6d97c4sm941912qtj.24.2023.11.03.12.03.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Nov 2023 12:03:42 -0700 (PDT)
+Date: Fri, 3 Nov 2023 15:03:39 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 1/3] drivers: gpio-uclass: support PMIC GPIO children
+Message-ID: <20231103190339.GA2621465@bill-the-cat>
+References: <20231024083801.202365-1-clamor95@gmail.com>
+ <20231024083801.202365-2-clamor95@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/15] board: ti: Add j721e_beagleboneai64_* config
- fragments and env file
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Robert Nelson <robertcnelson@gmail.com>, Jason Kridner
- <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
-References: <20231103003805.2420005-1-nm@ti.com>
- <20231103003805.2420005-15-nm@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231103003805.2420005-15-nm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ncC+qMQ/LQXeJfGC"
+Content-Disposition: inline
+In-Reply-To: <20231024083801.202365-2-clamor95@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,133 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/2/23 7:38 PM, Nishanth Menon wrote:
-> Add defconfig fragments for J721E based BeagleBone AI-64 and
-> corresponding customized environment.
-> 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
+
+--ncC+qMQ/LQXeJfGC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Oct 24, 2023 at 11:37:59AM +0300, Svyatoslav Ryhel wrote:
+
+> UCLASS_PMIC may have GPIO children without exposed fdt node,
+> in this case if requesting fails, check if uclass is PMIC.
+> If so, iterate through its children to find correct device.
+>=20
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 > ---
->   board/ti/j721e/beagleboneai64.env        | 19 ++++++++
->   board/ti/j721e/beagleboneai64_a72.config | 55 ++++++++++++++++++++++++
->   board/ti/j721e/beagleboneai64_r5.config  | 19 ++++++++
+>  drivers/gpio/gpio-uclass.c | 19 ++++++++++++++++---
+>  1 file changed, 16 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
+> index 7aece85a70..a3fc470a5d 100644
+> --- a/drivers/gpio/gpio-uclass.c
+> +++ b/drivers/gpio/gpio-uclass.c
+> @@ -1143,9 +1143,22 @@ static int gpio_request_tail(int ret, const char *=
+nodename,
+>  		ret =3D uclass_get_device_by_ofnode(UCLASS_GPIO, args->node,
+>  						  &desc->dev);
+>  		if (ret) {
+> -			debug("%s: uclass_get_device_by_ofnode failed\n",
+> -			      __func__);
+> -			goto err;
+> +			struct udevice *pmic;
+> +			ret =3D uclass_get_device_by_ofnode(UCLASS_PMIC, args->node,
+> +							  &pmic);
+> +			if (ret) {
+> +				log_err("PMIC device get failed, err %d\n", ret);
+> +				goto err;
+> +			}
+> +
+> +			device_foreach_child(desc->dev, pmic) {
+> +				if (device_get_uclass_id(desc->dev) =3D=3D UCLASS_GPIO)
+> +					break;
+> +			}
+> +
+> +			/* if loop exits without GPIO device return error */
+> +			if (device_get_uclass_id(desc->dev) !=3D UCLASS_GPIO)
+> +				goto err;
+>  		}
+>  	}
+>  	ret =3D gpio_find_and_xlate(desc, args);
 
-Beagle boards are not TI boards, add the board support to board/beagle/
+This needs to check for DM_PMIC or so as it leads to a lot of size
+increase and one failure to link due to running out of space now.
 
-Andrew
+--=20
+Tom
 
->   3 files changed, 93 insertions(+)
->   create mode 100644 board/ti/j721e/beagleboneai64.env
->   create mode 100644 board/ti/j721e/beagleboneai64_a72.config
->   create mode 100644 board/ti/j721e/beagleboneai64_r5.config
-> 
-> diff --git a/board/ti/j721e/beagleboneai64.env b/board/ti/j721e/beagleboneai64.env
-> new file mode 100644
-> index 000000000000..4f0a94a8113e
-> --- /dev/null
-> +++ b/board/ti/j721e/beagleboneai64.env
-> @@ -0,0 +1,19 @@
-> +#include <env/ti/ti_common.env>
-> +#include <env/ti/default_findfdt.env>
-> +#include <env/ti/mmc.env>
-> +
-> +name_kern=Image
-> +console=ttyS2,115200n8
-> +args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-> +run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-> +set_led_state_fail_load= led led-0 off; led led-1 on;
-> +	led led-2 off; led led-3 on; led led-4 off
-> +set_led_state_start_load=led led-0 on; led led-1 off;
-> +	led led-2 on; led led-3 off; led led-4 on
-> +boot=mmc
-> +mmcdev=1
-> +bootpart=1:1
-> +bootdir=/boot
-> +boot_targets=mmc1 mmc0 usb pxe
-> +bootmeths=script extlinux efi pxe
-> +rd_spec=-
-> diff --git a/board/ti/j721e/beagleboneai64_a72.config b/board/ti/j721e/beagleboneai64_a72.config
-> new file mode 100644
-> index 000000000000..926f725508e5
-> --- /dev/null
-> +++ b/board/ti/j721e/beagleboneai64_a72.config
-> @@ -0,0 +1,55 @@
-> +# Defconfig fragment to apply on top of j721e_evm_a72_defconfig
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-beagleboneai64"
-> +CONFIG_SPL_OF_LIST="k3-j721e-beagleboneai64"
-> +CONFIG_OF_LIST="k3-j721e-beagleboneai64"
-> +CONFIG_BOOTCOMMAND="run set_led_state_start_load;run findfdt; run envboot; bootflow scan -lb;run set_led_state_fail_load"
-> +CONFIG_EXT4_WRITE=y
-> +CONFIG_LZO=y
-> +CONFIG_AUTOBOOT_KEYED=y
-> +CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
-> +CONFIG_AUTOBOOT_DELAY_STR="d"
-> +CONFIG_AUTOBOOT_STOP_STR=" "
-> +
-> +# No Flash
-> +CONFIG_HBMC_AM654=n
-> +CONFIG_UFS=n
-> +
-> +# Sierra disabled for now till stability
-> +CONFIG_PHY_CADENCE_SIERRA=n
-> +CONFIG_PHY_J721E_WIZ=n
-> +# Torrent only for DP. no DP splash screen
-> +CONFIG_PHY_CADENCE_TORRENT=n
-> +
-> +# Use the Beaglebone-AI64 env file
-> +CONFIG_ENV_SOURCE_FILE="beagleboneai64"
-> +# No dependency on EEPROM detection
-> +CONFIG_TI_I2C_BOARD_DETECT=n
-> +# No board fixup to do
-> +CONFIG_OF_BOARD_SETUP=n
-> +
-> +# Do not use emmc boot - use FS only
-> +CONFIG_SUPPORT_EMMC_BOOT=n
-> +CONFIG_MMC_IO_VOLTAGE=y
-> +# CONFIG_SPL_MMC_IO_VOLTAGE is not set
-> +CONFIG_MMC_UHS_SUPPORT=y
-> +# CONFIG_SPL_MMC_UHS_SUPPORT is not set
-> +CONFIG_MMC_HS200_SUPPORT=y
-> +# CONFIG_SPL_MMC_HS200_SUPPORT is not set
-> +
-> +# Enable GPIO control
-> +CONFIG_DM_GPIO=y
-> +CONFIG_SPL_GPIO=y
-> +CONFIG_DA8XX_GPIO=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPIO_READ=y
-> +# Enable LEDs
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_SPL_LED=y
-> +CONFIG_SPL_LED_GPIO=y
-> +# Enable I2C bus
-> +CONFIG_SPL_I2C=y
-> +CONFIG_DM_I2C=y
-> +CONFIG_SYS_I2C_OMAP24XX=y
-> +CONFIG_CMD_I2C=y
-> diff --git a/board/ti/j721e/beagleboneai64_r5.config b/board/ti/j721e/beagleboneai64_r5.config
-> new file mode 100644
-> index 000000000000..cf124fb70cf1
-> --- /dev/null
-> +++ b/board/ti/j721e/beagleboneai64_r5.config
-> @@ -0,0 +1,19 @@
-> +# Defconfig fragment to apply on top of:
-> +# j721e_evm_r5_defconfig
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-r5-beagleboneai64"
-> +CONFIG_SPL_OF_LIST="k3-j721e-r5-beagleboneai64"
-> +
-> +# No ESM, PMIC or AVS adjustment till PMIC is enabled
-> +CONFIG_ESM_K3=n
-> +CONFIG_K3_AVS0=n
-> +CONFIG_ESM_PMIC=n
-> +
-> +# Do not use emmc boot - we will use FS only
-> +CONFIG_SUPPORT_EMMC_BOOT=n
-> +
-> +CONFIG_HBMC_AM654=n
-> +# No dependency on EEPROM detection
-> +CONFIG_TI_I2C_BOARD_DETECT=n
-> +# No board fixup to do
-> +CONFIG_OF_BOARD_SETUP=n
+--ncC+qMQ/LQXeJfGC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVFRAUACgkQFHw5/5Y0
+tyzTJwwAhdZo2lc9/oTKJTOR8BaNcTN+tg7W2ZKNjJGWlM5s1jua/gU0bWJubGVs
+3iT9epuoSLxPSmw6daPvSSDk+LQ818Xai0qcbxkfKmVsPVwyZ3LQCAnmJhbJy8wQ
+NCJWWwI7CvOuMq1Ysxpbbz3lk5nAgYUykfoyssSTbt1lELQWvMPilMwIm8Pcjtx3
+8vVZuv/4tmspRLWmWsgSulqu8+Op/4zKuN8T0iWMiJdgYZH7f0P4dowBWoKrYAla
+rAYq6BV20z4P5zTtvTeDXh3D06nFUy2ZCIS0ErQ1xzpYPNdMkzws2Tl6CR+QTuHx
+ahm968oB5qhGVxN63Od1G53OC0IL/AUqQDvNTGVrHIfs2HpuMsSmIfAO7yiuclkM
+GDywzynZfIt5uWnPKRHV+pLwty3rE2jHqkARMzo9h/c5zutklk+/Si5H4Gfd9brs
+mn4ML8EBG+tV/XKCyRKV4JgNlqFm9UhPlV5s8wbSuS8SwI19jW3urB1h3zxbmPsF
+B9VvZnAE
+=OENg
+-----END PGP SIGNATURE-----
+
+--ncC+qMQ/LQXeJfGC--
