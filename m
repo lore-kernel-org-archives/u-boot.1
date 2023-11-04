@@ -4,53 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D0BC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 15:10:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BE9AC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 15:11:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FA2587091;
-	Sat,  4 Nov 2023 16:10:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0B237870EE;
+	Sat,  4 Nov 2023 16:10:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699110634;
-	bh=Ohtq7vJLgQoqdPSrIpxNW8CYOzfVU3P5rhSZ2gSPjJY=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=WA7jb3m9URLswnxXleGi9PEbt3ZaxQCCvgVsFTHbYPzK4v0ogJbjKujwzr+mOVBOn
-	 81tLcSM0Qk7Rp37aVQWny1QClZdrfzgyeEK1nNAnquMDn8afG8oZ8nEMVv2slxGKy9
-	 n/bdXgTmraUmzMRzc8mnl7gcgb28iGAzR2RElImnEmrW7sHF/dY01lWvEr4+BIx6Rg
-	 oHPe3EvlAkcNba1j3sdGZOfQXGqTSJBYhN6Xbjd4Y8rnhVrTuWYo7Y4nFbflilliNW
-	 gPiks9xi8ou3s6NhIvcS+IEC795AI2vBD+xGL3fSnyaOkr4Tkklos82BtypV7nzMmN
-	 D0ftLFIhTACQg==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IOK/wn1S";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6381487119; Sat,  4 Nov 2023 16:10:51 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E19FF8708A;
- Sat,  4 Nov 2023 16:10:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699110627;
- bh=Ohtq7vJLgQoqdPSrIpxNW8CYOzfVU3P5rhSZ2gSPjJY=;
- h=From:To:Cc:Subject:Date:From;
- b=cXpHT4kfhWJvNfGtzwvFdsoLzS32SmBoHt6syriMJ+k8CRwNmgDqPBEx0GF5hCxQr
- ZIjNlSR+bwofQlTGUcLwyX+/UBxsAyW+8Ajatb1XPspeD9rPNJWyb9Zsm7T+tBAp2f
- SIfKELy+YzGfasriCEKY8NTxiGuQdEBbCXtrSw/0u7HebXgRbfHc7Y8In7hKtIY/WG
- 9LHWXuRXN82+0dEIAM8Vf77xIeVM6RfT7XwD1n0V91uMfEFOZ1l73lOk0WtUDuYUBB
- QMT7gdYGw+L1U0g7bbFyJ8b0TNFlKM4NH+9qp/MQ6tOgJX7Nym7Crtxs9ar2hRtux5
- M//rEJ+21feag==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Duncan Hare <DuncanCHare@yahoo.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH] net: wget: Support non-default HTTP port
-Date: Sat,  4 Nov 2023 16:09:54 +0100
-Message-ID: <20231104151012.51516-1-marex@denx.de>
-X-Mailer: git-send-email 2.42.0
+ by phobos.denx.de (Postfix) with ESMTPS id E90C3870EE
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 16:10:46 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-77897c4ac1fso178546585a.3
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 08:10:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699110635; x=1699715435; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0Qa7gqcJQDsDH2lppr3XdAGAU5FABpfBQ8MAsXbqpsU=;
+ b=IOK/wn1S+kt1+frDlIFB8wwSwYWyC37AVpxMoohx3BsfWwOQCZtyXRuoO5q7831njO
+ RwqokyR4kqd6Q+/rASqHsv2y6UyvnExKYUhnHr+OX1H18zfDg9XzZlj3qjn8YwqmZq2J
+ vrRtEUfxcU/jNejiyOZemj46360SYOwo9EDoiMtOWsgoGGgHLHy+6RN+BBU/TWRpEhKT
+ psL9pExGcscBdlc4gFJg0KsPKEhhY0qNw0vUIMmsQvTdATcbmfMAGqSduHFAwBbY4Fhj
+ a8kp9PqYvbmzHQ1Ngud5iINgk/Q52wAQNPEPrt3JGvTKXWXauzkqNVCMZxTl24lhjGYE
+ J7Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699110635; x=1699715435;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Qa7gqcJQDsDH2lppr3XdAGAU5FABpfBQ8MAsXbqpsU=;
+ b=q7QgcMgF7ytFzhmAgZW9fklfdoiz3b7AHfG8g//x3kVw+l9iXwsl/4QxTKl1dWR5X7
+ D8vDDstgxbdXXAmZs7d7bOl97gD+FSkoiWtujuIhUmiXkXa9AWQMvEyaV/eQty20HbZy
+ Guji3xTGItx+Fk6zx5uPf+dYmaOdl4Q+8zEcHjIR/RWI6wuWF1Sbg3nDD6Vs8lAfyLkQ
+ goPpVG4qFNbEDEpyykjTRIvPA3WCgOTKt3lJQ6edihloQsoxd8RjPVq1xvOS926OjLtW
+ 3yfNqbOYHIRnoF/34HRgojWfBA//hhzRYLjgyuON9AqttbnQ7ypbyQYmmMLuT5SgGSsL
+ r7+Q==
+X-Gm-Message-State: AOJu0YxHVpYMhx8bPS73hTjyhEbVBBphSLScZX99Ew1Xg3KGQKRGy3sS
+ R+GWMnMJxl2OJRQ4NjCQXXY=
+X-Google-Smtp-Source: AGHT+IF8SVxdUtq/1d4SHTTANOeua6Do9BHXrS+AWmlQFf1cIit9x0OCwjaaghmmJDF1Rad4jiwdSg==
+X-Received: by 2002:a05:620a:888d:b0:778:910f:d89e with SMTP id
+ qk13-20020a05620a888d00b00778910fd89emr19641092qkn.72.1699110635554; 
+ Sat, 04 Nov 2023 08:10:35 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ oo12-20020a05620a530c00b007758b25ac3bsm1646226qkn.82.2023.11.04.08.10.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 04 Nov 2023 08:10:35 -0700 (PDT)
+Message-ID: <e1a1482a-cf05-005d-817a-96a925cf6f87@gmail.com>
+Date: Sat, 4 Nov 2023 11:10:34 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH 1/3] spl: fit: Discard decompression if not supported
+Content-Language: en-US
+To: Loic Poulain <loic.poulain@linaro.org>, sjg@chromium.org, marex@denx.de
+Cc: u-boot@lists.denx.de, abbaraju.manojsai@amarulasolutions.com
+References: <20231103143426.3643712-1-loic.poulain@linaro.org>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20231103143426.3643712-1-loic.poulain@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,100 +94,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the wget command is hard wired to HTTP port 80. This is
-inconvenient, as it is extremely easy to start trivial HTTP server
-as an unprivileged user using e.g. python http module to serve the
-files, but such a server has to run on one of the higher ports:
-"
-$ python3 -m http.server -d $(pwd) 8080
-"
+On 11/3/23 10:34, Loic Poulain wrote:
+> And simplify further decompression testing.
+> 
+> Signed-off-by: Loic Poulain <loic.poulain@linaro.org>
+> ---
+>   common/spl/spl_fit.c | 27 +++++++++++++++++++++------
+>   1 file changed, 21 insertions(+), 6 deletions(-)
+> 
+> diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+> index 70d8d5942d..1d42cb1d10 100644
+> --- a/common/spl/spl_fit.c
+> +++ b/common/spl/spl_fit.c
+> @@ -208,6 +208,20 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
+>   	return (data_size + info->bl_len - 1) / info->bl_len;
+>   }
+>   
+> +static inline bool spl_fit_decompression_supported(uint8_t comp)
+> +{
+> +	switch (comp) {
+> +	case IH_COMP_GZIP:
+> +		return IS_ENABLED(CONFIG_SPL_GZIP);
+> +	case IH_COMP_LZMA:
+> +		return IS_ENABLED(CONFIG_SPL_LZMA);
+> +	case IH_COMP_NONE:
+> +		return true;
+> +	}
+> +
+> +	return false;
+> +}
+> +
+>   /**
+>    * load_simple_fit(): load the image described in a certain FIT node
+>    * @info:	points to information about the device to load data from
+> @@ -235,7 +249,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
+>   	void *src;
+>   	ulong overhead;
+>   	int nr_sectors;
+> -	uint8_t image_comp = -1, type = -1;
+> +	uint8_t image_comp, type = -1;
+>   	const void *data;
+>   	const void *fit = ctx->fit;
+>   	bool external_data = false;
+> @@ -248,9 +262,11 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
+>   			debug("%s ", genimg_get_type_name(type));
+>   	}
+>   
+> -	if (spl_decompression_enabled()) {
+> -		fit_image_get_comp(fit, node, &image_comp);
+> -		debug("%s ", genimg_get_comp_name(image_comp));
+> +	fit_image_get_comp(fit, node, &image_comp);
+> +	if (!spl_fit_decompression_supported(image_comp)) {
+> +		debug("Discard unsupported compression %s ",
+> +		      genimg_get_comp_name(image_comp));
+> +		image_comp = IH_COMP_NONE;
+>   	}
+>   
+>   	if (fit_image_get_load(fit, node, &load_addr)) {
+> @@ -283,8 +299,7 @@ static int load_simple_fit(struct spl_load_info *info, ulong sector,
+>   			return 0;
+>   		}
+>   
+> -		if (spl_decompression_enabled() &&
+> -		    (image_comp == IH_COMP_GZIP || image_comp == IH_COMP_LZMA))
+> +		if (image_comp != IH_COMP_NONE)
+>   			src_ptr = map_sysmem(ALIGN(CONFIG_SYS_LOAD_ADDR, ARCH_DMA_MINALIGN), len);
+>   		else
+>   			src_ptr = map_sysmem(ALIGN(load_addr, ARCH_DMA_MINALIGN), len);
 
-Make it possible to configure HTTP server port the same way it is
-possible to configure TFTP server port, using environment variable
-'httpdstp' (similar to 'tftpdstp'). Retain port 80 as the default
-fallback port. This way, users can start their own trivial server
-and conveniently download whatever files they need into U-Boot.
+Why doesn't spl_decompression_enabled work here?
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: Duncan Hare <DuncanCHare@yahoo.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
----
- include/net/wget.h |  1 -
- net/wget.c         | 14 ++++++++++----
- 2 files changed, 10 insertions(+), 5 deletions(-)
-
-diff --git a/include/net/wget.h b/include/net/wget.h
-index da0920de118..6714f7ea573 100644
---- a/include/net/wget.h
-+++ b/include/net/wget.h
-@@ -17,6 +17,5 @@ enum wget_state {
- };
- 
- #define DEBUG_WGET		0	/* Set to 1 for debug messages */
--#define SERVER_PORT		80
- #define WGET_RETRY_COUNT	30
- #define WGET_TIMEOUT		2000UL
-diff --git a/net/wget.c b/net/wget.c
-index 8bb4d72db1a..e1e580c8351 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -14,6 +14,9 @@
- #include <net/tcp.h>
- #include <net/wget.h>
- 
-+/* The default, change with environment variable 'httpdstp' */
-+#define SERVER_PORT		80
-+
- static const char bootfile1[] = "GET ";
- static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
- static const char http_eom[] = "\r\n\r\n";
-@@ -91,19 +94,22 @@ static void wget_send_stored(void)
- 	int len = retry_len;
- 	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
- 	unsigned int tcp_seq_num = retry_tcp_ack_num;
-+	unsigned int server_port;
- 	uchar *ptr, *offset;
- 
-+	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
-+
- 	switch (current_wget_state) {
- 	case WGET_CLOSED:
- 		debug_cond(DEBUG_WGET, "wget: send SYN\n");
- 		current_wget_state = WGET_CONNECTING;
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
-+		net_send_tcp_packet(0, server_port, our_port, action,
- 				    tcp_seq_num, tcp_ack_num);
- 		packets = 0;
- 		break;
- 	case WGET_CONNECTING:
- 		pkt_q_idx = 0;
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
-+		net_send_tcp_packet(0, server_port, our_port, action,
- 				    tcp_seq_num, tcp_ack_num);
- 
- 		ptr = net_tx_packet + net_eth_hdr_size() +
-@@ -118,14 +124,14 @@ static void wget_send_stored(void)
- 
- 		memcpy(offset, &bootfile3, strlen(bootfile3));
- 		offset += strlen(bootfile3);
--		net_send_tcp_packet((offset - ptr), SERVER_PORT, our_port,
-+		net_send_tcp_packet((offset - ptr), server_port, our_port,
- 				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
- 		current_wget_state = WGET_CONNECTED;
- 		break;
- 	case WGET_CONNECTED:
- 	case WGET_TRANSFERRING:
- 	case WGET_TRANSFERRED:
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
-+		net_send_tcp_packet(0, server_port, our_port, action,
- 				    tcp_seq_num, tcp_ack_num);
- 		break;
- 	}
--- 
-2.42.0
-
+--Sean
