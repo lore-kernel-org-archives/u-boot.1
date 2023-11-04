@@ -4,78 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7212C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 911D8C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 08:02:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41A7F87007;
-	Sat,  4 Nov 2023 08:53:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C51658719F;
+	Sat,  4 Nov 2023 09:01:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QMpFB0VA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h5sIrsB9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9BF486A6B; Sat,  4 Nov 2023 08:53:10 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6C1D887115; Sat,  4 Nov 2023 09:01:56 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D7E486A6B
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:53:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4679E870BC
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 09:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699084381; x=1699689181; i=xypron.glpk@gmx.de;
- bh=LiSVTFFrZ332jYjF0XUn9inQe+lIrUxdFEDdK503vSg=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=QMpFB0VAEks52GO41pcq08gTUOI+XUK7lWmsZ01yBObmYn/nLxJv03J47ek7dNr4
- TUZGsTuCfCSB96IQ0c7CiUB7AJjQP3V2+spk08aOS4ry2TTNh4z3xbcgOpx/xlu9g
- KeLgP+bUikt7uB5kR4UNbT1kZJZdT2IaI+Bsf4OIKC8pO5uhPioWrEwBbXceWvFQZ
- OFlbpGe+dSo4rz99KWpfdGWstQk5N5wdSJAHlOa15McwE3BxiOVPliDpeB17sC0LT
- kdZdpjCkIu49eLrKmO3AlJcLIZiDERbC7HuAfCN8zbwuL4TAzPTYO5MejWzPdw86m
- NOYhdqE7SMP7VFhkWg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.0.29.1] ([159.148.28.2]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MAfYw-1rA8lJ2ECO-00B7dd; Sat, 04
- Nov 2023 08:53:01 +0100
-Message-ID: <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
-Date: Sat, 4 Nov 2023 09:53:00 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A481gjk019479;
+ Sat, 4 Nov 2023 03:01:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699084902;
+ bh=j9vBhUzlrXA4VgPkKR2hoq8LMkTeuQ6hDpIy8XRVj/U=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=h5sIrsB97/Yt12jNygqkTSu6+ZWJ+Suu8Ji19Sx3uYbxCNzsZX1hK95GsXbsdYXMQ
+ Nyq1CBGh8SHrUeuMD/k4+em5Nk7/Zsp2YzMXZKicPYhQNqfGaE2WzE67YCjzUkn8oC
+ RMgMe+h2hVD2EaKAI2d87h4fV4zq69WaDSdU/ur8=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A481gwe025396
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 4 Nov 2023 03:01:42 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 4
+ Nov 2023 03:01:42 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 4 Nov 2023 03:01:42 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A481gHF097905;
+ Sat, 4 Nov 2023 03:01:42 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
+ <u-boot@lists.denx.de>, <bb@ti.com>, <praneeth@ti.com>
+Subject: [PATCH 4/5] doc: board: Move am62x_beagleplay to it's own vendor
+Date: Sat, 4 Nov 2023 03:01:36 -0500
+Message-ID: <20231104080137.9628-5-nm@ti.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20231104080137.9628-1-nm@ti.com>
+References: <20231104080137.9628-1-nm@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
-Content-Language: en-US, de-DE
-To: Sean Edmond <seanedmond@linux.microsoft.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-2-seanedmond@linux.microsoft.com>
- <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
- <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ejAjfgXv2F7RAD2/BjsAEQp9c8TCD/s0ZnVJvaratq8EpCxe8TS
- 2pYdgBDDQGmkH9bSBSoXVpOu5tY3GH+aQ8CkYbV8Mlwn/kmwVKtz/qaCZdwbCNvKTAAIM1y
- e/4aruEyP/3CuiLhtrljQvifLejkm70QMzP7EZIB2bz+KOHegCBfsjJ4U3NWmcs/BJw8z0N
- xjHtASHlq1NZCPMChcj6g==
-UI-OutboundReport: notjunk:1;M01:P0:m9oPmqyUcUk=;xfjY6i3qwPkn1KapWmcOuULOfki
- lhmlhF5BoFGWG7t0Tm67GMYshfYiB7ehcuylL8Yhj0jhPRsYjbi8FwjkXu5QDy1j9lKcCwM15
- sDzZzw/OsxDqCgI/oyYD8jQ7Xnu4OadH2jvydGx995gbpxlZsIGORi2+aceAzjamx80zm9QV8
- yXGnrqjSRyzlSjtVJmEpduTuJvWW6IjgAxkY47WGYeB2mudAJeOTWxnZvREo+sosFiSIGqgKs
- eV368BY4GbymLUF1gb0yKazrVKQbSIkQHFrMPMvARW/CrVXm+MkzgZR7HnUlfbDQULraXRBEJ
- kSlbjj2ik/y7wEDz8uRQlXIxbCr3AlEESUNLGPI+R6pLPqmyV8DXEOUICT0vTH7eBjwkmB2Or
- eHoY5aqDacFLwbhGYzJ0miz20iUKkDWUAD/pmd6aT9K8lmjvNw1QuZCxw4m7PmoZXT/8RCP4p
- yqZJwBtbz1CwwOVzi84phoF4Ve8NeawjiJRGo2d93UTLRrcd8JQNz6jNAIuqOSt5YogY2J/LJ
- IYzPtBoPA8rGSjFdDSJq8heC/BxiL5YDdUl7xs2egXiSB1Z95J1uSgp6m4oaRuySXcU6Ctqlw
- frY4v4oQquAd8l99dZM8zPzHjjbETwSG3r4XgL0G2giqvhfTo8Z5tdgSa6G8TnDNf+x/eMAFf
- cm0z8ODlDRmd7PbwntGV2YZ79vGtTZrivoxlrI2jC16aAZnB+HhUIbHUHg/uNXDS01BJCL8W9
- cHJY5CdhbP0Lu3xKXV5lxV9prbIZzIgE595JZhThbRCviDCxTLKYq1Lzk2N4pMCtj6jWtovxu
- jNacapkoowCOYCFDWyBye8XJwJtk8zJY4LIXNi7qTrlEltHXSa2RO8asWbg/teAMjXeinu2K0
- +9ImXlfsDavH4yss2MJtKlaaRuemCUY/j2ePbeI+e0pg7n3mDrZ4bMPTdBZFDBA32SJIXhMlb
- Pjapa74EnJ6pt3RmkL8BePNKhmA=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,189 +83,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/4/23 03:03, Sean Edmond wrote:
->
-> On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
->> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
->>> From: Sean Edmond <seanedmond@microsoft.com>
->>>
->>> Allow dhcp server pass pxe config file full path by using option 209
->>>
->>> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
->>> ---
->>> =C2=A0 cmd/Kconfig |=C2=A0 4 ++++
->>> =C2=A0 cmd/pxe.c=C2=A0=C2=A0 | 10 ++++++++++
->>> =C2=A0 net/bootp.c | 21 +++++++++++++++++++++
->>> =C2=A0 3 files changed, 35 insertions(+)
->>>
->>> diff --git a/cmd/Kconfig b/cmd/Kconfig
->>> index 5bc0a92d57..adbb1a6187 100644
->>> --- a/cmd/Kconfig
->>> +++ b/cmd/Kconfig
->>> @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default 0x15 if ARM
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default 0x0 if X86
->>>
->>> +config BOOTP_PXE_DHCP_OPTION
->>> +=C2=A0=C2=A0=C2=A0 bool "Request & store 'pxe_configfile' from BOOTP/=
-DHCP server"
->>> +=C2=A0=C2=A0=C2=A0 depends on BOOTP_PXE
->>
->> Why should this be disabled by default?
->>
->> Do we really want a separate config variable?
->>
-> I expect most won't use this option to get the file path (they'll use
-> the default paths as per the PXE specification).=C2=A0 It makes more sen=
-se
-> for me to keep it optional, like many of the other options?
+Move BeaglePlay documentation to beagle as a board vendor and update
+references accordingly.
 
-RFC 5701 seems to require this option. Hence we should make it default
-yes. Boards that have a build size issue can opt out.
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+ doc/board/{ti => beagle}/am62x_beagleplay.rst | 22 +++++++++----------
+ .../{ti => beagle}/img/beagleplay_emmc.svg    |  0
+ doc/board/beagle/index.rst                    | 13 +++++++++++
+ doc/board/index.rst                           |  1 +
+ doc/board/ti/k3.rst                           |  2 +-
+ 5 files changed, 26 insertions(+), 12 deletions(-)
+ rename doc/board/{ti => beagle}/am62x_beagleplay.rst (96%)
+ rename doc/board/{ti => beagle}/img/beagleplay_emmc.svg (100%)
+ create mode 100644 doc/board/beagle/index.rst
 
-Best regards
-
-Heinrich
-
->>> +
->>> =C2=A0 config BOOTP_VCI_STRING
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 string
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 depends on CMD_BOOTP
->>> diff --git a/cmd/pxe.c b/cmd/pxe.c
->>> index 704589702f..9404f44518 100644
->>> --- a/cmd/pxe.c
->>> +++ b/cmd/pxe.c
->>> @@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context
->>> *ctx, unsigned long pxefile_a
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int ret =3D get_pxe_file(ctx, pxelinux_=
-configfile, pxefile_addr_r);
->>>
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 free(pxelinux_configfile);
->>> +=C2=A0=C2=A0=C2=A0 /* set to NULL to avoid double-free if DHCP is tri=
-ed again */
->>> +=C2=A0=C2=A0=C2=A0 pxelinux_configfile =3D NULL;
->>>
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
->>> =C2=A0 }
->>> @@ -141,6 +143,14 @@ int pxe_get(ulong pxefile_addr_r, char
->>> **bootdirp, ulong *sizep, bool use_ipv6)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 env_get("bootfile"), use_ipv6))
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -ENOMEM;
->>>
->>> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pxelinux_configfile && !us=
-e_ipv6) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (pxe_dhcp_option_path(&=
-ctx, pxefile_addr_r) > 0)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 go=
-to done;
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto error_exit;
->>> +=C2=A0=C2=A0=C2=A0 }
->>> +
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OP=
-TION) &&
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pxelinux_config=
-file && use_ipv6) {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (pxe_dhcp_op=
-tion_path(&ctx, pxefile_addr_r) > 0)
->>> diff --git a/net/bootp.c b/net/bootp.c
->>> index 7b0f45e18a..6800290963 100644
->>> --- a/net/bootp.c
->>> +++ b/net/bootp.c
->>> @@ -26,6 +26,7 @@
->>> =C2=A0 #ifdef CONFIG_BOOTP_RANDOM_DELAY
->>> =C2=A0 #include "net_rand.h"
->>> =C2=A0 #endif
->>> +#include <malloc.h>
->>>
->>> =C2=A0 #define BOOTP_VENDOR_MAGIC=C2=A0=C2=A0=C2=A0 0x63825363=C2=A0=
-=C2=A0=C2=A0 /* RFC1048 Magic Cookie */
->>>
->>> @@ -601,6 +602,10 @@ static int dhcp_extended(u8 *e, int
->>> message_type, struct in_addr server_ip,
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *e++=C2=A0 =3D 42;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *cnt +=3D 1;
->>> =C2=A0 #endif
->>> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *e++ =3D 209;=C2=A0=C2=A0=
-=C2=A0 /* PXELINUX Config File */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *cnt +=3D 1;
->>> +=C2=A0=C2=A0=C2=A0 }
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* no options, so back up to avoid send=
-ing an empty request
->>> list */
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (*cnt =3D=3D 0)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 e -=3D 2;
->>> @@ -909,6 +914,22 @@ static void dhcp_process_options(uchar *popt,
->>> uchar *end)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 net_boot_file_name[size] =3D 0;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 }
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 break;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 209:=C2=A0=C2=A0=C2=
-=A0 /* PXELINUX Config File */
->>
->> This 209 appears in multiple places. Please, define a constant, e.g.
->> DHCP_OPTION_CONFIG_FILE, in bootp.h and use the symbolic name. Please,
->> document the constant referring to RFC 5071.
-> fixed in v3.
->>
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if=
- (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 /* In case it has already been allocated when get
->>> DHCP Offer packet,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 * free first to avoid memory leak.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 if (pxelinux_configfile)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 free(pxelinux_configfile);
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 pxelinux_configfile =3D (char *)malloc((oplen + 1) *
->>> sizeof(char));
->>> +
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 if (pxelinux_configfile)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 strlcpy(pxelinux_configfile,=
- popt + 2, oplen + 1);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 else
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 printf("Error: Failed to all=
-ocate
->>> pxelinux_configfile\n");
->>
->> We do the same in dhcp6_parse_options(). Please, factor out a common
->> function to avoid code duplication.
-> I would prefer to keep these seperate for several reasons:
-> - our DHCP server team has asked for the DHCP6 "pxe config file" parsing
-> to change.=C2=A0 I attempted to add to upstream here:
-> https://lore.kernel.org/u-boot/20230725231329.5653-1-seanedmond@linux.mi=
-crosoft.com/. I will attempt to submitted that patch again
-> - PXE config file isn't standardized yet for DHCPv6 (the current
-> implementation was a proposal from our DHCP server team)
-> - LWIP will eventually superceed bootp.c in u-boot, but we'll probably
-> be keeping dhcpv6.c for a bit (keeping the duplicate code will make the
-> migration easier)
->>
->> Best regards
->>
->> Heinrich
->>
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 br=
-eak;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default:
->>> =C2=A0 #if defined(CONFIG_BOOTP_VENDOREX)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 if (dhcp_vendorex_proc(popt))
+diff --git a/doc/board/ti/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
+similarity index 96%
+rename from doc/board/ti/am62x_beagleplay.rst
+rename to doc/board/beagle/am62x_beagleplay.rst
+index 11bafaf5e137..3209a881849c 100644
+--- a/doc/board/ti/am62x_beagleplay.rst
++++ b/doc/board/beagle/am62x_beagleplay.rst
+@@ -23,7 +23,7 @@ Boot Flow:
+ ----------
+ Below is the pictorial representation of boot flow:
+ 
+-.. image:: img/boot_diagram_k3_current.svg
++.. image:: ../ti/img/boot_diagram_k3_current.svg
+   :alt: Boot flow diagram
+ 
+ - On this platform, 'TI Foundational Security' (TIFS) functions as the
+@@ -34,7 +34,7 @@ Below is the pictorial representation of boot flow:
+ 
+ Sources:
+ --------
+-.. include::  k3.rst
++.. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_boot_sources
+     :end-before: .. k3_rst_include_end_boot_sources
+ 
+@@ -42,17 +42,17 @@ Build procedure:
+ ----------------
+ 0. Setup the environment variables:
+ 
+-.. include::  k3.rst
++.. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_common_env_vars_desc
+     :end-before: .. k3_rst_include_end_common_env_vars_desc
+ 
+-.. include::  k3.rst
++.. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_board_env_vars_desc
+     :end-before: .. k3_rst_include_end_board_env_vars_desc
+ 
+ Set the variables corresponding to this platform:
+ 
+-.. include::  k3.rst
++.. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_common_env_vars_defn
+     :end-before: .. k3_rst_include_end_common_env_vars_defn
+ .. prompt:: bash $
+@@ -65,7 +65,7 @@ Set the variables corresponding to this platform:
+   export OPTEE_PLATFORM=k3-am62x
+   export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+ 
+-.. include::  am62x_sk.rst
++.. include::  ../ti/am62x_sk.rst
+     :start-after: .. am62x_evm_rst_include_start_build_steps
+     :end-before: .. am62x_evm_rst_include_end_build_steps
+ 
+@@ -82,12 +82,12 @@ Image formats
+ 
+ - tiboot3.bin
+ 
+-.. image:: img/multi_cert_tiboot3.bin.svg
++.. image:: ../ti/img/multi_cert_tiboot3.bin.svg
+   :alt: tiboot3.bin image format
+ 
+ - tispl.bin
+ 
+-.. image:: img/dm_tispl.bin.svg
++.. image:: ../ti/img/dm_tispl.bin.svg
+   :alt: tispl.bin image format
+ 
+ Additional hardware for U-Boot development
+@@ -240,7 +240,7 @@ LED patterns during boot
+ A53 SPL DDR Memory Layout
+ -------------------------
+ 
+-.. include::  am62x_sk.rst
++.. include::  ../ti/am62x_sk.rst
+     :start-after: .. am62x_evm_rst_include_start_ddr_mem_layout
+     :end-before: .. am62x_evm_rst_include_end_ddr_mem_layout
+ 
+@@ -284,11 +284,11 @@ detailed setup and debugging information.
+   environment's distribution needs to be updated, it might be necessary to
+   build OpenOCD from the source.
+ 
+-.. include::  k3.rst
++.. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_openocd_connect_tag_connect
+     :end-before: .. k3_rst_include_end_openocd_connect_tag_connect
+ 
+-.. include::  k3.rst
++.. include::  ../ti/k3.rst
+     :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
+     :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
+ 
+diff --git a/doc/board/ti/img/beagleplay_emmc.svg b/doc/board/beagle/img/beagleplay_emmc.svg
+similarity index 100%
+rename from doc/board/ti/img/beagleplay_emmc.svg
+rename to doc/board/beagle/img/beagleplay_emmc.svg
+diff --git a/doc/board/beagle/index.rst b/doc/board/beagle/index.rst
+new file mode 100644
+index 000000000000..e6f9b7480d31
+--- /dev/null
++++ b/doc/board/beagle/index.rst
+@@ -0,0 +1,13 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++BeagleBoard.org
++###############
++
++
++ARM based boards
++----------------
++
++.. toctree::
++   :maxdepth: 2
++
++   am62x_beagleplay
+diff --git a/doc/board/index.rst b/doc/board/index.rst
+index 35dd3bcf5fad..9e4cecc889e0 100644
+--- a/doc/board/index.rst
++++ b/doc/board/index.rst
+@@ -17,6 +17,7 @@ Board-specific doc
+    asus/index
+    atmel/index
+    beacon/index
++   beagle/index
+    broadcom/index
+    bsh/index
+    cloos/index
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 129edd4ff93d..45f62fb094e8 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -30,8 +30,8 @@ K3 Based SoCs
+ .. toctree::
+    :maxdepth: 1
+ 
+-   am62x_beagleplay
+    am62x_sk
++   ../beagle/am62x_beagleplay
+    ../toradex/verdin-am62
+    am64x_evm
+    am65x_evm
+-- 
+2.37.2
 
