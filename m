@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0CDC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 15:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A449C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 15:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B60E4870ED;
-	Sat,  4 Nov 2023 16:23:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 852E3870C7;
+	Sat,  4 Nov 2023 16:24:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kkpBNmfR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fvp9mYsC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4ACCD8710B; Sat,  4 Nov 2023 16:23:14 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
+ id 9335B86F65; Sat,  4 Nov 2023 16:24:38 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 605B486F65
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 16:23:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E1909870ED
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 16:24:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7b9cd171d0dso1324422241.0
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 08:23:08 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6707401e22eso18798416d6.2
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 08:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699111387; x=1699716187; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699111473; x=1699716273; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=m8YsGPoM2nP3Oro4YpLc0li5niugDAB0IrtRvzNgb/Q=;
- b=kkpBNmfRvX8FekjAI71HR17KdKcNETayW2Js4uYE6yY+/Ig3VjJbrMmfYVGuciNlql
- Jh9lNtk2x7u+KOur6cMo349IElY6qJRtDTF7qZrbVhK/g0GGoDTpETnQokifPu8gFu89
- yj1em2IbQzlbzM4TWYcm6JUbUz8QEGh7PQjTaGATOOHMjnIxupqAaIGanOEdS0fAnU5e
- G1eIKWdSpDYBK1TNWXQCskWPBu/xA+GF9cKAt6EuyekR3IpFR0xEDhKSTVcCCAfHzDgP
- Dr8jh+rePWieB9hDV72qX6tnCYUaQplZ2TwmpGXXv/cXuLJxsb3YapCr0WM9MV0QmE50
- SRCw==
+ bh=dL2RkhTpXekTF8Ai6P/vNUxWJG4LIEK0Z2pmSz4RQmw=;
+ b=fvp9mYsCt33v8OfEJzC2v8fXwYz2SoWY5Lsh5UJQ060DiKpab7fyyKUeVHOIkXP5wX
+ l+pDGt214j9SJiFu5zCNqFDox0t3UKuDuZz1m5g49UATwBRB2FW1D76CGtRHI46BthH9
+ IEJtrKC8wEiDCk90W8SLfP3rNMQMuotNG+Yj74TceV4XrvJFf0NMmJPoBNtwRxz2dAXb
+ tUR95CBfjixTpNDbC4+LwmVui51BZw6CTYLeY2pyiN6EwLK+K2F+dpCxpNEPeWrNL0SR
+ PQjKlB3ENz7ipx+sL6W/eA6xTUHt/OZmq+HdWx41IPSLtuZG1dTOPweXCjm7kgcp3xn/
+ 2pLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699111387; x=1699716187;
+ d=1e100.net; s=20230601; t=1699111473; x=1699716273;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=m8YsGPoM2nP3Oro4YpLc0li5niugDAB0IrtRvzNgb/Q=;
- b=YcvtLzRtZWeLysEq80BIzV3J3RV2HM6GtW7245UobsrKzzK3/ZXhdOURXsgSClRe/C
- qxmAISaHtFctxnLqyvqq72GU24AlXlcbdrPOcfbP2YNI13ef7Ut8yjIlKgYTBYCCDNDn
- 5TOEyYpq2v/npu3lE2ysSjKlDsB9bvU+emrGxMYBqABFQTmlOqgVoRJA3HEwFFKV6aLI
- ldjMtzeJvr0qdOtmEDwRXabYWxDo5h+pZuq/xT50One8mF212rpaYg6FWeDtAj7N3VQ2
- aTfyycbC2sk6tsNnVI7GW7WFiCvlFPxgas0W7M/FXFhXVsaKgbFRPJrR1hEmsnM7yRTC
- 2kRA==
-X-Gm-Message-State: AOJu0Yyp2gjABA4BLKJwoMDuBnjmhdO0pa+5Zpf5dXzRSZ4YbItS46Q3
- w/Wx75W2wMewkr3dLIl8qSQ=
-X-Google-Smtp-Source: AGHT+IGEVwLuE1wJ8IUOFTi16FAk+iRReYA53iw/os78VvzWuJAQ1NnVHT7QaRG98zhRxBN3U5mPag==
-X-Received: by 2002:a67:cb91:0:b0:45d:9e46:fb50 with SMTP id
- h17-20020a67cb91000000b0045d9e46fb50mr3001730vsl.10.1699111386575; 
- Sat, 04 Nov 2023 08:23:06 -0700 (PDT)
+ bh=dL2RkhTpXekTF8Ai6P/vNUxWJG4LIEK0Z2pmSz4RQmw=;
+ b=Rym6mOzpdsIq5mxDXiEyZmmJFtXlrerM9Dtls3gPakvF9K3B7Kf1TMCWdr6l7tpbxN
+ HjxeKf6UTcp+qdf8Df1hUbqWmJQLs0St0ulFcFK8vrUDNCJg5jzBVoGhzcXm5p13i8s8
+ G8wSwZoMXuGXl3NXiPYMYEiKL8qdl4S1NJcLzjNxW9M/TjTC/I+Y2U4mTgFbaYGOfZv+
+ vNXghclv9/BPyRD1ORYd1F8VgYQLKgJXIzIkVim3lEjZGZ6w25uHFk3GdH6g7J2HW4H2
+ QXy98MmLX0ymQCliU0JZi919HXcf7h9dWzgRL5nuvClpShRKegTTrQl30MzoaPYqF9mJ
+ aGWQ==
+X-Gm-Message-State: AOJu0YyWWlFv30iJKOff9PejS6d6W6TnarNlJoyF8JX/+zA5qvgdrm7t
+ l0uhvgfZM0w8GOk+B7sTmV0=
+X-Google-Smtp-Source: AGHT+IE04H40wfAcCOloCWAQXdg+ekQlqAHdCNu7UL7HnxPjA6DF48eJgvCUGRHaYCI5YXknuhYV4w==
+X-Received: by 2002:a05:6214:c88:b0:671:2c2f:4fe6 with SMTP id
+ r8-20020a0562140c8800b006712c2f4fe6mr22660073qvr.46.1699111473641; 
+ Sat, 04 Nov 2023 08:24:33 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- kh6-20020a056214514600b006714f8b5512sm1727582qvb.6.2023.11.04.08.23.05
+ u14-20020a0cf88e000000b006585069e894sm1692509qvn.109.2023.11.04.08.24.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Nov 2023 08:23:06 -0700 (PDT)
-Message-ID: <81a727a6-599d-c5f8-e85b-9f66012d5e74@gmail.com>
-Date: Sat, 4 Nov 2023 11:23:05 -0400
+ Sat, 04 Nov 2023 08:24:33 -0700 (PDT)
+Message-ID: <712d1810-93ad-8fd5-8989-1274b5ce49ce@gmail.com>
+Date: Sat, 4 Nov 2023 11:24:32 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH v5 6/8] cmd: clk: Use dump function from clk_ops
+Subject: Re: [PATCH v5 5/8] clk: Add dump operation to clk_ops
 Content-Language: en-US
 To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
  <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
@@ -83,9 +83,9 @@ Cc: prusovigor@gmail.com, kernel@sberdevices.ru,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com
 References: <20231102122017.56995-1-ivprusov@sberdevices.ru>
- <20231102122017.56995-7-ivprusov@sberdevices.ru>
+ <20231102122017.56995-6-ivprusov@sberdevices.ru>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231102122017.56995-7-ivprusov@sberdevices.ru>
+In-Reply-To: <20231102122017.56995-6-ivprusov@sberdevices.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,42 +105,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/2/23 08:20, Igor Prusov wrote:
-> Add another loop to dump additional info from clock providers that
-> implement dump operation.
+> This adds dump function to struct clk_ops which should replace
+> soc_clk_dump. It allows clock drivers to provide custom dump
+> implementation without overriding generic CCF dump function.
 > 
 > Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
->   cmd/clk.c | 9 +++++++++
->   1 file changed, 9 insertions(+)
+>   include/clk-uclass.h | 15 +++++++++++++++
+>   1 file changed, 15 insertions(+)
 > 
-> diff --git a/cmd/clk.c b/cmd/clk.c
-> index c7c379d7a6..4b9709d3ff 100644
-> --- a/cmd/clk.c
-> +++ b/cmd/clk.c
-> @@ -62,6 +62,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
->   int __weak soc_clk_dump(void)
->   {
->   	struct udevice *dev;
-> +	const struct clk_ops *ops;
+> diff --git a/include/clk-uclass.h b/include/clk-uclass.h
+> index a22f1a5d84..793bf14160 100644
+> --- a/include/clk-uclass.h
+> +++ b/include/clk-uclass.h
+> @@ -25,6 +25,7 @@ struct ofnode_phandle_args;
+>    * @set_parent: Set current clock parent
+>    * @enable: Enable a clock.
+>    * @disable: Disable a clock.
+> + * @dump: Print clock information.
+>    *
+>    * The individual methods are described more fully below.
+>    */
+> @@ -39,6 +40,9 @@ struct clk_ops {
+>   	int (*set_parent)(struct clk *clk, struct clk *parent);
+>   	int (*enable)(struct clk *clk);
+>   	int (*disable)(struct clk *clk);
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	int (*dump)(struct udevice *dev);
+> +#endif
+>   };
 >   
->   	printf(" Rate               Usecnt      Name\n");
->   	printf("------------------------------------------\n");
-> @@ -69,6 +70,14 @@ int __weak soc_clk_dump(void)
->   	uclass_foreach_dev_probe(UCLASS_CLK, dev)
->   		show_clks(dev, -1, 0);
->   
-> +	uclass_foreach_dev_probe(UCLASS_CLK, dev) {
-> +		ops = dev_get_driver_ops(dev);
-> +		if (ops && ops->dump) {
-> +			printf("\n%s %s:\n", dev->driver->name, dev->name);
-> +			ops->dump(dev);
-> +		}
-> +	}
+>   #if 0 /* For documentation only */
+> @@ -135,6 +139,17 @@ int enable(struct clk *clk);
+>    * Return: zero on success, or -ve error code.
+>    */
+>   int disable(struct clk *clk);
 > +
->   	return 0;
->   }
->   #else
+> +/**
+> + * dump() - Print clock information.
+> + * @clk:	The clock device to dump.
+> + *
+> + * If present, this function is called by "clk dump" command for each
+> + * bound device.
+> + *
+> + * Return: zero on success, or -ve error code.
+> + */
+> +int dump(struct udevice *dev);
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Actually, this should return void, since we don't do anything with the return code.
+
+--Sean
+
+>   #endif
+>   
+>   #endif
+
