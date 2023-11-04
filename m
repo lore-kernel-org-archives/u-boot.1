@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 074F9C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:25:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFF82C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A3E787084;
+	by phobos.denx.de (Postfix) with ESMTP id D159B870BC;
 	Sat,  4 Nov 2023 17:25:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HbSpA0zG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U5XWLFI7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E1486F50; Sat,  4 Nov 2023 17:25:37 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 27B5087115; Sat,  4 Nov 2023 17:25:41 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCC0386F50
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 17:25:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1BA287084
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 17:25:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-7a6830df017so100067939f.3
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 09:25:33 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-7a93df91813so111333839f.2
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 09:25:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699115132; x=1699719932; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=sirnUu/7qRWsc7Eoh45I5dDM3BEXdQkR49ka4KEUWSE=;
- b=HbSpA0zGOquJiUnclCUIP9Il7039F6/E4TuAZ3zkiqb+/K8etG9J2ddqjrpOZVYjz5
- fwaPx1ieXGsLY9qf1WXNRDecESV6naeumTSsGQhobAMiaoOFBu76QokJLb/Ro/7XPDy+
- 4dDqb/wFP8AaqH4ycPI8C7K8g24kntNv+JgO0=
+ d=chromium.org; s=google; t=1699115133; x=1699719933; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AK4WUS08A+jpapEz1MOcF2EgJLlZk0u4+3/cRUoVJVs=;
+ b=U5XWLFI7TLfPSA64eyr/bTYm81wlEibqMdzz2W0LT2yp3+j0GtL5GNx3HTK05Y3qlA
+ rSG84/wNHTZGbInoUX6CUbyKWL2+J8TF16wnJ6KL0CAWTftWKyYhOpY4KodTGKqBgDzW
+ YzgPckUfx0Bm7UPDX+hU9DpwnYXjYbIk+qFXU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699115132; x=1699719932;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sirnUu/7qRWsc7Eoh45I5dDM3BEXdQkR49ka4KEUWSE=;
- b=Xq0pmOJan/NhDHBX5588sJ20t7HIUbp6qGgqGfGFI39TA4joBMp20h+hLKLkCZrera
- /+fuE64JO9/J8GtSHIP5OkwY5tZroyVvq9g2BX7w/CpPFxhvEkLMrv8b5gYTQBlUERue
- 0hQc/85Ft/MLYMvDQqVx/YZA8Zz82ZYnHA5xe/+jp0OEQItI9BeMge91LRsoVBXS2jYk
- m/v7+s/ce25HoTT02dbJ1W7FrkSKzTLwMThJIKib8Tkp1ld/TLnI4ZUDWTljdZ/2sQg/
- q+ZnMyQMV4YiuyatvNdjn2gahgnUKlCMtWe3INzFbpcwnvzdeoBmIFV5uumbDugDxQaf
- opCg==
-X-Gm-Message-State: AOJu0Yx0HYDaEXv0+LnkGFAxJYNhmLU3rfJGxnQZTbqlI8lbqcJtbtGJ
- WtAk8+qbwY3Lk5bVo3pPc+HTBQ+I59fxtFQ2UK/hqQ==
-X-Google-Smtp-Source: AGHT+IHELjrcdabAz3SuHL4bBQlQ95/v2LEwgxnCio7MeP1fV5ZNejkchX2hPVeKEkHOZbYV8hFelQ==
-X-Received: by 2002:a6b:c84d:0:b0:7ab:4faa:cb3 with SMTP id
- y74-20020a6bc84d000000b007ab4faa0cb3mr27191950iof.16.1699115132235; 
- Sat, 04 Nov 2023 09:25:32 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1699115133; x=1699719933;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AK4WUS08A+jpapEz1MOcF2EgJLlZk0u4+3/cRUoVJVs=;
+ b=Xu6ooitgvdZQWpWcPeHYW8RQNuX7YcqRXqh8f7NAaYFxBuLcouMhqTT2G2cJHzyZJE
+ htuP9JnmI4EaMzFx8ZSj8mEpXwIsUcS17N5zE3RkobkiECwXp/l1o/yQTnTix5YFAaRC
+ DyXKo3WFBaZkk4Vbj8SPb8zawOiZ6OvUY6Q3N6/kvbSNHnh3SsA0FBR3XossRlOk1BlU
+ gijmQXVpKKYR/+BnydySuj0f9iqafN97q+OKzfWfQwyTT/oBIRGvRhFu/6txXUlOdkA3
+ W/FaGxf9qyeXNlcv6QzUxITeFWCqf5nR+T5Bji7ohnDd9mYZp5G8uZ/LMiqalTm1PUkr
+ eXSQ==
+X-Gm-Message-State: AOJu0Yx+D8C5/hSUDAuMSjoCKcMxUV04c7rmRdgTDh2OYxwqMa2umFYF
+ viAdgi76s123QVKRqq0n8pe2VZY2s8VSfSui8q+FAA==
+X-Google-Smtp-Source: AGHT+IHrERasBZLOJ1JzpR2Mt4Nv5Et1XLt6ft3F1g0wBgpihSSzjaf+kGSn8sk4Fb26KWb+1MXQXg==
+X-Received: by 2002:a05:6602:2c51:b0:792:8d16:91ef with SMTP id
+ x17-20020a0566022c5100b007928d1691efmr32531611iov.18.1699115133483; 
+ Sat, 04 Nov 2023 09:25:33 -0700 (PDT)
 Received: from sjg1.united_club.lax.united.com
  (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- t4-20020a028784000000b0042bb296863asm1119013jai.56.2023.11.04.09.25.31
+ t4-20020a028784000000b0042bb296863asm1119013jai.56.2023.11.04.09.25.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Nov 2023 09:25:31 -0700 (PDT)
+ Sat, 04 Nov 2023 09:25:33 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Nishanth Menon <nm@ti.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/5] patman: Split out arg parsing into its own file
-Date: Sat,  4 Nov 2023 10:25:20 -0600
-Message-ID: <20231104162527.1736401-1-sjg@chromium.org>
+Subject: [PATCH 2/5] patman: Move the main program into a function
+Date: Sat,  4 Nov 2023 10:25:21 -0600
+Message-ID: <20231104162527.1736401-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
+In-Reply-To: <20231104162527.1736401-1-sjg@chromium.org>
+References: <20231104162527.1736401-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,316 +89,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this code into a separate cmdline module, as is done with the
-other tools.
-
-Use the same HAS_TESTS check as buildman
+Add a new run_patman() function to hold the main logic.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/__main__.py | 116 +-----------------------------
- tools/patman/cmdline.py  | 147 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 150 insertions(+), 113 deletions(-)
- create mode 100644 tools/patman/cmdline.py
+ tools/patman/__main__.py | 127 +++++++++++++++++++++------------------
+ 1 file changed, 67 insertions(+), 60 deletions(-)
 
 diff --git a/tools/patman/__main__.py b/tools/patman/__main__.py
-index 197ac1aad103..0e559b5810be 100755
+index 0e559b5810be..87850295e704 100755
 --- a/tools/patman/__main__.py
 +++ b/tools/patman/__main__.py
-@@ -6,7 +6,6 @@
- 
- """See README for more information"""
- 
--from argparse import ArgumentParser
- try:
-     import importlib.resources
- except ImportError:
-@@ -23,128 +22,19 @@ if __name__ == "__main__":
-     sys.path.append(os.path.join(our_path, '..'))
- 
- # Our modules
-+from patman import cmdline
- from patman import control
- from patman import func_test
--from patman import gitutil
--from patman import project
--from patman import settings
- from u_boot_pylib import terminal
- from u_boot_pylib import test_util
+@@ -30,63 +30,70 @@ from u_boot_pylib import test_util
  from u_boot_pylib import tools
  
--epilog = '''Create patches from commits in a branch, check them and email them
--as specified by tags you place in the commits. Use -n to do a dry run first.'''
--
--parser = ArgumentParser(epilog=epilog)
--parser.add_argument('-b', '--branch', type=str,
--    help="Branch to process (by default, the current branch)")
--parser.add_argument('-c', '--count', dest='count', type=int,
--    default=-1, help='Automatically create patches from top n commits')
--parser.add_argument('-e', '--end', type=int, default=0,
--    help='Commits to skip at end of patch list')
--parser.add_argument('-D', '--debug', action='store_true',
--    help='Enabling debugging (provides a full traceback on error)')
--parser.add_argument('-p', '--project', default=project.detect_project(),
--                    help="Project name; affects default option values and "
--                    "aliases [default: %(default)s]")
--parser.add_argument('-P', '--patchwork-url',
--                    default='https://patchwork.ozlabs.org',
--                    help='URL of patchwork server [default: %(default)s]')
--parser.add_argument('-s', '--start', dest='start', type=int,
--    default=0, help='Commit to start creating patches from (0 = HEAD)')
--parser.add_argument('-v', '--verbose', action='store_true', dest='verbose',
--                    default=False, help='Verbose output of errors and warnings')
--parser.add_argument('-H', '--full-help', action='store_true', dest='full_help',
--                    default=False, help='Display the README file')
--
--subparsers = parser.add_subparsers(dest='cmd')
--send = subparsers.add_parser(
--    'send', help='Format, check and email patches (default command)')
--send.add_argument('-i', '--ignore-errors', action='store_true',
--       dest='ignore_errors', default=False,
--       help='Send patches email even if patch errors are found')
--send.add_argument('-l', '--limit-cc', dest='limit', type=int, default=None,
--       help='Limit the cc list to LIMIT entries [default: %(default)s]')
--send.add_argument('-m', '--no-maintainers', action='store_false',
--       dest='add_maintainers', default=True,
--       help="Don't cc the file maintainers automatically")
--send.add_argument(
--    '--get-maintainer-script', dest='get_maintainer_script', type=str,
--    action='store',
--    default=os.path.join(gitutil.get_top_level(), 'scripts',
--                         'get_maintainer.pl') + ' --norolestats',
--    help='File name of the get_maintainer.pl (or compatible) script.')
--send.add_argument('-n', '--dry-run', action='store_true', dest='dry_run',
--       default=False, help="Do a dry run (create but don't email patches)")
--send.add_argument('-r', '--in-reply-to', type=str, action='store',
--                  help="Message ID that this series is in reply to")
--send.add_argument('-t', '--ignore-bad-tags', action='store_true',
--                  default=False,
--                  help='Ignore bad tags / aliases (default=warn)')
--send.add_argument('-T', '--thread', action='store_true', dest='thread',
--                  default=False, help='Create patches as a single thread')
--send.add_argument('--cc-cmd', dest='cc_cmd', type=str, action='store',
--       default=None, help='Output cc list for patch file (used by git)')
--send.add_argument('--no-binary', action='store_true', dest='ignore_binary',
--                  default=False,
--                  help="Do not output contents of changes in binary files")
--send.add_argument('--no-check', action='store_false', dest='check_patch',
--                  default=True,
--                  help="Don't check for patch compliance")
--send.add_argument('--tree', dest='check_patch_use_tree', default=False,
--                  action='store_true',
--                  help=("Set `tree` to True. If `tree` is False then we'll "
--                  "pass '--no-tree' to checkpatch (default: tree=%(default)s)"))
--send.add_argument('--no-tree', dest='check_patch_use_tree',
--                  action='store_false', help="Set `tree` to False")
--send.add_argument('--no-tags', action='store_false', dest='process_tags',
--                  default=True, help="Don't process subject tags as aliases")
--send.add_argument('--no-signoff', action='store_false', dest='add_signoff',
--                  default=True, help="Don't add Signed-off-by to patches")
--send.add_argument('--smtp-server', type=str,
--                  help="Specify the SMTP server to 'git send-email'")
--send.add_argument('--keep-change-id', action='store_true',
--                  help='Preserve Change-Id tags in patches to send.')
--
--send.add_argument('patchfiles', nargs='*')
--
--# Only add the 'test' action if the test data files are available.
--if os.path.exists(func_test.TEST_DATA_DIR):
--    test_parser = subparsers.add_parser('test', help='Run tests')
--    test_parser.add_argument('testname', type=str, default=None, nargs='?',
--                             help="Specify the test to run")
--
--status = subparsers.add_parser('status',
--                               help='Check status of patches in patchwork')
--status.add_argument('-C', '--show-comments', action='store_true',
--                    help='Show comments from each patch')
--status.add_argument('-d', '--dest-branch', type=str,
--                    help='Name of branch to create with collected responses')
--status.add_argument('-f', '--force', action='store_true',
--                    help='Force overwriting an existing branch')
--
--# Parse options twice: first to get the project and second to handle
--# defaults properly (which depends on project)
--# Use parse_known_args() in case 'cmd' is omitted
--argv = sys.argv[1:]
--args, rest = parser.parse_known_args(argv)
--if hasattr(args, 'project'):
--    settings.Setup(parser, args.project)
--    args, rest = parser.parse_known_args(argv)
--
--# If we have a command, it is safe to parse all arguments
--if args.cmd:
--    args = parser.parse_args(argv)
--else:
--    # No command, so insert it after the known arguments and before the ones
--    # that presumably relate to the 'send' subcommand
--    nargs = len(rest)
--    argv = argv[:-nargs] + ['send'] + rest
--    args = parser.parse_args(argv)
  
- if __name__ != "__main__":
-     pass
- 
-+args = cmdline.parse_args()
+-if __name__ != "__main__":
+-    pass
+-
+-args = cmdline.parse_args()
+-
+-if not args.debug:
+-    sys.tracebacklimit = 0
+-
+-# Run our meagre tests
+-if args.cmd == 'test':
+-    from patman import func_test
+-    from patman import test_checkpatch
+-
+-    result = test_util.run_test_suites(
+-        'patman', False, False, False, None, None, None,
+-        [test_checkpatch.TestPatch, func_test.TestFunctional,
+-         'gitutil', 'settings'])
+-
+-    sys.exit(0 if result.wasSuccessful() else 1)
+-
+-# Process commits, produce patches files, check them, email them
+-elif args.cmd == 'send':
+-    # Called from git with a patch filename as argument
+-    # Printout a list of additional CC recipients for this patch
+-    if args.cc_cmd:
+-        fd = open(args.cc_cmd, 'r')
+-        re_line = re.compile('(\S*) (.*)')
+-        for line in fd.readlines():
+-            match = re_line.match(line)
+-            if match and match.group(1) == args.patchfiles[0]:
+-                for cc in match.group(2).split('\0'):
+-                    cc = cc.strip()
+-                    if cc:
+-                        print(cc)
+-        fd.close()
+-
+-    elif args.full_help:
+-        with importlib.resources.path('patman', 'README.rst') as readme:
+-            tools.print_full_help(str(readme))
+-    else:
+-        # If we are not processing tags, no need to warning about bad ones
+-        if not args.process_tags:
+-            args.ignore_bad_tags = True
+-        control.send(args)
+-
+-# Check status of patches in patchwork
+-elif args.cmd == 'status':
+-    ret_code = 0
+-    try:
+-        control.patchwork_status(args.branch, args.count, args.start, args.end,
+-                                 args.dest_branch, args.force,
+-                                 args.show_comments, args.patchwork_url)
+-    except Exception as e:
+-        terminal.tprint('patman: %s: %s' % (type(e).__name__, e),
+-                        colour=terminal.Color.RED)
+-        if args.debug:
+-            print()
+-            traceback.print_exc()
+-        ret_code = 1
+-    sys.exit(ret_code)
++def run_patman():
++    """Run patamn
 +
- if not args.debug:
-     sys.tracebacklimit = 0
- 
-diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
-new file mode 100644
-index 000000000000..d6496c0cb780
---- /dev/null
-+++ b/tools/patman/cmdline.py
-@@ -0,0 +1,147 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright 2023 Google LLC
-+#
-+
-+"""Handles parsing of buildman arguments
-+
-+This creates the argument parser and uses it to parse the arguments passed in
-+"""
-+
-+import argparse
-+import os
-+import pathlib
-+import sys
-+
-+from patman import gitutil
-+from patman import project
-+from patman import settings
-+
-+PATMAN_DIR = pathlib.Path(__file__).parent
-+HAS_TESTS = os.path.exists(PATMAN_DIR / "func_test.py")
-+
-+def parse_args():
-+    """Parse command line arguments from sys.argv[]
-+
-+    Returns:
-+        tuple containing:
-+            options: command line options
-+            args: command lin arguments
++    This is the main program. It collects arguments and runs either the tests or
++    the control module.
 +    """
-+    epilog = '''Create patches from commits in a branch, check them and email
-+        them as specified by tags you place in the commits. Use -n to do a dry
-+        run first.'''
++    args = cmdline.parse_args()
 +
-+    parser = argparse.ArgumentParser(epilog=epilog)
-+    parser.add_argument('-b', '--branch', type=str,
-+        help="Branch to process (by default, the current branch)")
-+    parser.add_argument('-c', '--count', dest='count', type=int,
-+        default=-1, help='Automatically create patches from top n commits')
-+    parser.add_argument('-e', '--end', type=int, default=0,
-+        help='Commits to skip at end of patch list')
-+    parser.add_argument('-D', '--debug', action='store_true',
-+        help='Enabling debugging (provides a full traceback on error)')
-+    parser.add_argument('-p', '--project', default=project.detect_project(),
-+                        help="Project name; affects default option values and "
-+                        "aliases [default: %(default)s]")
-+    parser.add_argument('-P', '--patchwork-url',
-+                        default='https://patchwork.ozlabs.org',
-+                        help='URL of patchwork server [default: %(default)s]')
-+    parser.add_argument('-s', '--start', dest='start', type=int,
-+        default=0, help='Commit to start creating patches from (0 = HEAD)')
-+    parser.add_argument(
-+        '-v', '--verbose', action='store_true', dest='verbose', default=False,
-+        help='Verbose output of errors and warnings')
-+    parser.add_argument(
-+        '-H', '--full-help', action='store_true', dest='full_help',
-+        default=False, help='Display the README file')
++    if not args.debug:
++        sys.tracebacklimit = 0
 +
-+    subparsers = parser.add_subparsers(dest='cmd')
-+    send = subparsers.add_parser(
-+        'send', help='Format, check and email patches (default command)')
-+    send.add_argument('-i', '--ignore-errors', action='store_true',
-+           dest='ignore_errors', default=False,
-+           help='Send patches email even if patch errors are found')
-+    send.add_argument('-l', '--limit-cc', dest='limit', type=int, default=None,
-+           help='Limit the cc list to LIMIT entries [default: %(default)s]')
-+    send.add_argument('-m', '--no-maintainers', action='store_false',
-+           dest='add_maintainers', default=True,
-+           help="Don't cc the file maintainers automatically")
-+    send.add_argument(
-+        '--get-maintainer-script', dest='get_maintainer_script', type=str,
-+        action='store',
-+        default=os.path.join(gitutil.get_top_level(), 'scripts',
-+                             'get_maintainer.pl') + ' --norolestats',
-+        help='File name of the get_maintainer.pl (or compatible) script.')
-+    send.add_argument('-n', '--dry-run', action='store_true', dest='dry_run',
-+           default=False, help="Do a dry run (create but don't email patches)")
-+    send.add_argument('-r', '--in-reply-to', type=str, action='store',
-+                      help="Message ID that this series is in reply to")
-+    send.add_argument('-t', '--ignore-bad-tags', action='store_true',
-+                      default=False,
-+                      help='Ignore bad tags / aliases (default=warn)')
-+    send.add_argument('-T', '--thread', action='store_true', dest='thread',
-+                      default=False, help='Create patches as a single thread')
-+    send.add_argument('--cc-cmd', dest='cc_cmd', type=str, action='store',
-+           default=None, help='Output cc list for patch file (used by git)')
-+    send.add_argument('--no-binary', action='store_true', dest='ignore_binary',
-+                      default=False,
-+                      help="Do not output contents of changes in binary files")
-+    send.add_argument('--no-check', action='store_false', dest='check_patch',
-+                      default=True,
-+                      help="Don't check for patch compliance")
-+    send.add_argument(
-+        '--tree', dest='check_patch_use_tree', default=False,
-+        action='store_true',
-+        help=("Set `tree` to True. If `tree` is False then we'll pass "
-+              "'--no-tree' to checkpatch (default: tree=%(default)s)"))
-+    send.add_argument('--no-tree', dest='check_patch_use_tree',
-+                      action='store_false', help="Set `tree` to False")
-+    send.add_argument(
-+        '--no-tags', action='store_false', dest='process_tags', default=True,
-+        help="Don't process subject tags as aliases")
-+    send.add_argument('--no-signoff', action='store_false', dest='add_signoff',
-+                      default=True, help="Don't add Signed-off-by to patches")
-+    send.add_argument('--smtp-server', type=str,
-+                      help="Specify the SMTP server to 'git send-email'")
-+    send.add_argument('--keep-change-id', action='store_true',
-+                      help='Preserve Change-Id tags in patches to send.')
++    # Run our meagre tests
++    if args.cmd == 'test':
++        from patman import func_test
++        from patman import test_checkpatch
 +
-+    send.add_argument('patchfiles', nargs='*')
++        result = test_util.run_test_suites(
++            'patman', False, False, False, None, None, None,
++            [test_checkpatch.TestPatch, func_test.TestFunctional,
++             'gitutil', 'settings'])
 +
-+    # Only add the 'test' action if the test data files are available.
-+    if HAS_TESTS:
-+        test_parser = subparsers.add_parser('test', help='Run tests')
-+        test_parser.add_argument('testname', type=str, default=None, nargs='?',
-+                                 help="Specify the test to run")
++        sys.exit(0 if result.wasSuccessful() else 1)
 +
-+    status = subparsers.add_parser('status',
-+                                   help='Check status of patches in patchwork')
-+    status.add_argument('-C', '--show-comments', action='store_true',
-+                        help='Show comments from each patch')
-+    status.add_argument(
-+        '-d', '--dest-branch', type=str,
-+        help='Name of branch to create with collected responses')
-+    status.add_argument('-f', '--force', action='store_true',
-+                        help='Force overwriting an existing branch')
++    # Process commits, produce patches files, check them, email them
++    elif args.cmd == 'send':
++        # Called from git with a patch filename as argument
++        # Printout a list of additional CC recipients for this patch
++        if args.cc_cmd:
++            fd = open(args.cc_cmd, 'r')
++            re_line = re.compile('(\S*) (.*)')
++            for line in fd.readlines():
++                match = re_line.match(line)
++                if match and match.group(1) == args.patchfiles[0]:
++                    for cc in match.group(2).split('\0'):
++                        cc = cc.strip()
++                        if cc:
++                            print(cc)
++            fd.close()
 +
-+    # Parse options twice: first to get the project and second to handle
-+    # defaults properly (which depends on project)
-+    # Use parse_known_args() in case 'cmd' is omitted
-+    argv = sys.argv[1:]
-+    args, rest = parser.parse_known_args(argv)
-+    if hasattr(args, 'project'):
-+        settings.Setup(parser, args.project)
-+        args, rest = parser.parse_known_args(argv)
++        elif args.full_help:
++            with importlib.resources.path('patman', 'README.rst') as readme:
++                tools.print_full_help(str(readme))
++        else:
++            # If we are not processing tags, no need to warning about bad ones
++            if not args.process_tags:
++                args.ignore_bad_tags = True
++            control.send(args)
 +
-+    # If we have a command, it is safe to parse all arguments
-+    if args.cmd:
-+        args = parser.parse_args(argv)
-+    else:
-+        # No command, so insert it after the known arguments and before the ones
-+        # that presumably relate to the 'send' subcommand
-+        nargs = len(rest)
-+        argv = argv[:-nargs] + ['send'] + rest
-+        args = parser.parse_args(argv)
++    # Check status of patches in patchwork
++    elif args.cmd == 'status':
++        ret_code = 0
++        try:
++            control.patchwork_status(args.branch, args.count, args.start, args.end,
++                                     args.dest_branch, args.force,
++                                     args.show_comments, args.patchwork_url)
++        except Exception as e:
++            terminal.tprint('patman: %s: %s' % (type(e).__name__, e),
++                            colour=terminal.Color.RED)
++            if args.debug:
++                print()
++                traceback.print_exc()
++            ret_code = 1
++        sys.exit(ret_code)
 +
-+    return args
++
++if __name__ == "__main__":
++    sys.exit(run_patman())
 -- 
 2.42.0.869.gea05f2083d-goog
 
