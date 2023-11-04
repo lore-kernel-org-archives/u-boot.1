@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 994A9C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 22:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB31C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 22:58:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA5078703A;
-	Sat,  4 Nov 2023 23:58:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 442EF87067;
+	Sat,  4 Nov 2023 23:58:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ekrdBjJX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YTXYHz12";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40F3F87053; Sat,  4 Nov 2023 23:58:06 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 7F2898703A; Sat,  4 Nov 2023 23:58:06 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3B698703A
+ by phobos.denx.de (Postfix) with ESMTPS id D376087034
  for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 23:58:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-52bd9ddb741so5383983a12.0
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9dd5879a126so232116966b.3
  for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 15:58:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699138680; x=1699743480; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=emGqk505QqSUd5Ec9XkYC4aTNmPUAQEStw5uwspfYzo=;
- b=ekrdBjJXmcB/y/RnadkSktCR/yc5OOfn/U6YqGOrujqkaYYezbN46zoFKC7FGxwKif
- zhWFfGhWr9DmDyfhyhMywqk3vMZYx5ULVxx+KLbJB87ZxG+zM547F4pPoN8wKAXdKicY
- 1obVFq7CIe3almH0y/kS6+MqwmOQ3j8wApL44=
+ bh=iSynca1gQPDDohdwk0wNYs+TtVnbonJLHV7iSF5+pIM=;
+ b=YTXYHz12cW4KlXyOhQHeGUGjXLKSc5VITVj/7qhPjRDUOM3ghRewhOOtMKPoAy/g5H
+ pYbwyOqwE8mnUMRKIvA16qG0GnHz67vyejm9f0E/IxlTANuGgmY+rh2Fdx+ZWe0vShnJ
+ t4o7W+xYeETpBI9qIVRCki9vJxaNgYHo3XUR8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699138680; x=1699743480;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=emGqk505QqSUd5Ec9XkYC4aTNmPUAQEStw5uwspfYzo=;
- b=CTzs8FMblwiHKJFT5rk3YBUqpkvU3jGgQalus/stBGo4ebEP6Gc8CjuWNMrEnYzSqE
- krdKBWdXxaiP1yRM+X6tIsgfnFt1AmlmTQzQfKraj+mc3qQIaeTIAX+QsU65FW1jL1hC
- OUUkKqyie5lz9MB4j7Waa0uR5fzTxyQO8WNmnUxHCsPu4ggj1O5KaWXbfnN5cAFwbSZE
- fu9wg3UBbooUkw+/O+VzEfWiHXwf8z8LDXP4u3EF+gEXlngqmWT9pkZNlfFQbjyokwza
- 9dbLgNPmlpM7dsJ6v3rNplXmqRCFZ/JGYrM8QHVDXk6G86g8HdxRUIvquVupEUM5tZTz
- YUpw==
-X-Gm-Message-State: AOJu0YyPto4vTwnGE/ExkbPbv7ZrieBBKmayeAdwVdfCGxmfmjQ7AFjC
- iKRn6OercbuKMjrXk/gGStHDA8vA9VNwwL3pJREGeW8KkvXMbjiPJKk=
-X-Google-Smtp-Source: AGHT+IHtN/WuDc78vguMQnxQREdrOXVrfhXTnWUkZOybZaLjkAprgKAraHbDv8ErNILkTNcDhWCQPwnoQtZGCHaZM6o=
-X-Received: by 2002:a50:a690:0:b0:53d:b52a:5f4b with SMTP id
- e16-20020a50a690000000b0053db52a5f4bmr18352468edc.41.1699138679681; Sat, 04
- Nov 2023 15:57:59 -0700 (PDT)
+ bh=iSynca1gQPDDohdwk0wNYs+TtVnbonJLHV7iSF5+pIM=;
+ b=aeaYPHLhlzs5VR5eZzdiqxeMqIY1+Iv4OHbm59LN1/CGq2F92Vz0t+Q4buMSjIUaVe
+ wj2KrqXJlU/lCv4uMA6X6voq/q6ZPA+JykBd/gRKWzdgplokytf3u6wTnBlfs9i+DonC
+ Ic1AyPVkgaO334A0szS5xEiusLaRF1/cm6rWUyEAlCtUNrz25yyyg6okQFFttqCZVDvo
+ LIKBRxvVRpy1OyBdirb+bhGz4JtkHDIXgqEEJVlzemregAOjdr3pKKtEetp16d2n5RmN
+ 1/T3ZzcS5Zp8X/wnRl4bqtViix6S7WaeUeDfSjqAEb6OETNx+X5gJHLqLu/zRpynQBjZ
+ FUlg==
+X-Gm-Message-State: AOJu0Yy5Nyt8nPDoWMSrv5ydwGuWAPaX3Pfq7PEiS4MU18HuywMvYoyJ
+ Ig+xGFBIeZFkC2BBDwejt/T6Rwd3ZVaqX7p0nKHAjA==
+X-Google-Smtp-Source: AGHT+IFLzZlgfgbgIVA43Q+GdmUee9OXA0avbLevJQZY77PWj+0IWtMbzAS83TnU/3kJRAq92TAKzdWQAL16L/RaeBQ=
+X-Received: by 2002:a17:906:da87:b0:9dd:bfe4:21cb with SMTP id
+ xh7-20020a170906da8700b009ddbfe421cbmr3602528ejb.5.1699138679682; Sat, 04 Nov
+ 2023 15:57:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231104195733.1576679-1-seanga2@gmail.com>
-In-Reply-To: <20231104195733.1576679-1-seanga2@gmail.com>
+References: <20231104184716.13743-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3st2CHJeSVkZGL-N7fDQqebK9VD0vodsXaz+Er96sB1g@mail.gmail.com>
+ <ab1b51cb-3d7b-4e65-b28f-e42e6a0c70cb@canonical.com>
+In-Reply-To: <ab1b51cb-3d7b-4e65-b28f-e42e6a0c70cb@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 4 Nov 2023 22:57:43 +0000
-Message-ID: <CAPnjgZ0iuuaVEmZNGNUFwxSE5xqvbVix+kVnm=68j9mO16inFQ@mail.gmail.com>
-Subject: Re: [PATCH] sandbox: Close file after mmaping it
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 4 Nov 2023 22:57:39 +0000
+Message-ID: <CAPnjgZ2fbA1ySUnz=df7+U5bVNSF78aB7-hSN=k4E2C9QrZHRw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] dm: fix misleading messages
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,15 +82,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 4 Nov 2023 at 19:57, Sean Anderson <seanga2@gmail.com> wrote:
->
-> After opening pathname, we must close ifd once we are done with it.
->
-> Fixes: b9274095c2c ("sandbox: Add a way to map a file into memory")
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> ---
->
->  arch/sandbox/cpu/os.c | 15 ++++++++++-----
->  1 file changed, 10 insertions(+), 5 deletions(-)
+Hi Heinrich,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sat, 4 Nov 2023 at 20:00, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 11/4/23 21:45, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Sat, 4 Nov 2023 at 18:47, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> When no RNG device exists for a driver referenced via U_BOOT_DRVINFO() we
+> >> get messages like:
+> >>
+> >>      No match for driver 'arm-rndr'
+> >>      Some drivers were not found
+> >>
+> >> This is misleading as it is not the driver that was not found, it is the
+> >> device that is not found. Correct the messages.
+> >>
+> >> Reported-by: Andre Przywara <andre.przywara@arm.com>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >>   drivers/core/lists.c | 2 +-
+> >>   drivers/core/root.c  | 2 +-
+> >>   2 files changed, 2 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+> >> index 8034a8f48d..e39d3acc97 100644
+> >> --- a/drivers/core/lists.c
+> >> +++ b/drivers/core/lists.c
+> >> @@ -97,7 +97,7 @@ static int bind_drivers_pass(struct udevice *parent, bool pre_reloc_only)
+> >>                          if (CONFIG_IS_ENABLED(OF_PLATDATA))
+> >>                                  drt->dev = dev;
+> >>                  } else if (ret != -EPERM) {
+> >> -                       dm_warn("No match for driver '%s'\n", entry->name);
+> >> +                       dm_warn("No device for driver '%s'\n", entry->name);
+> >
+> > This should be "No match for driver_info"
+> >
+> > It is not a device
+> >
+> >>                          if (!result || ret != -ENOENT)
+> >>                                  result = ret;
+> >>                  }
+> >> diff --git a/drivers/core/root.c b/drivers/core/root.c
+> >> index d4ae652bcf..29c918eb73 100644
+> >> --- a/drivers/core/root.c
+> >> +++ b/drivers/core/root.c
+> >> @@ -167,7 +167,7 @@ int dm_scan_plat(bool pre_reloc_only)
+> >>
+> >>          ret = lists_bind_drivers(DM_ROOT_NON_CONST, pre_reloc_only);
+> >>          if (ret == -ENOENT) {
+> >> -               dm_warn("Some drivers were not found\n");
+> >> +               dm_warn("Some devices were not found\n");
+> >
+> > Some driver_infos were not found
+>
+> This suggestion does not match the case that Andre and I were discussing in
+>
+> https://lore.kernel.org/u-boot/1ad4bd2c-e667-42b6-b637-8816a6c60d94@canonical.com/T/#m13fbf9011d74f713080284fb9963c90646d527fb
+>
+> U_BOOT_DRVINFO(cpu_arm_rndr) is triggering the arm-rndr driver's bind
+> method. The bind method returns -ENOENT if there is no matching device.
+>
+> Neither the driver U_BOOT_DRIVER(arm_rndr) nor the driver info
+> U_BOOT_DRVINFO(cpu_arm_rndr) is missing. It is the non-existence of a
+> matching device that triggers the messages.
+
+There are various errors which can be returned.
+
+Then perhaps for that specific -ENOENT code you could indicate that
+the device was matched but refused to bind? We just need to avoid
+confusing language, although of course what is there is confusing too.
+
+As mentioned to Andrew, we should not be using DRVINFO records outside SPL.
+
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > They are not devices
+> >
+> >>                  ret = 0;
+> >>          }
+> >>
+> >> --
+> >> 2.40.1
+> >>
+> >
+> > Also please add a Fixes tag, I think for this:
+> >
+> > 20e442ab2df dm: Rename U_BOOT_DEVICE() to U_BOOT_DRVINFO()
+> >
+> > Regards,
+> > Simon
+>
