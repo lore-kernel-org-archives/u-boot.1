@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B260FC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:26:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D85C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:48:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65957874B9;
-	Sat,  4 Nov 2023 08:23:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FBC587115;
+	Sat,  4 Nov 2023 08:48:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OszrVc1s";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QBK8ohe4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B445786EC9; Sat,  4 Nov 2023 08:23:07 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C23D087113; Sat,  4 Nov 2023 08:48:38 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B6BA87137
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:22:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E45D387007
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:48:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LsgC031805;
- Sat, 4 Nov 2023 02:21:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699082514;
- bh=+OmgdZ+XEHuE+HQXdviUmeW57/g0bQYTiSzM2Aa3KB0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=OszrVc1sH0ab3ScOeVwu3DmMw4wu+HZjtw81vjXyY5JbV4E4t/m/AX5FLV2E7br0T
- HNPhvLHypav8FOuwiJ6+NK7L5unZ5QQlyUTGvkQe604O+dHbOrGUXbn1uMSfy51q8f
- Ul3PDrb3KsyDgwEbppk4cBdunbnmtKAbi4mZkeLU=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A47Ls7C120805
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 4 Nov 2023 02:21:54 -0500
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 4
- Nov 2023 02:21:54 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 4 Nov 2023 02:21:54 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A47Lsc3065276;
- Sat, 4 Nov 2023 02:21:54 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH V2 08/12] arm: mach-k3: arm64-mmu: Refactor to be independent
- of board
-Date: Sat, 4 Nov 2023 02:21:46 -0500
-Message-ID: <20231104072150.3339-9-nm@ti.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20231104072150.3339-1-nm@ti.com>
-References: <20231104072150.3339-1-nm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1699084107; x=1699688907; i=xypron.glpk@gmx.de;
+ bh=B4smjJfepZYgQTDKFwxo5XCYmGBksONVJsFeFVI1jm8=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=QBK8ohe4JZKeZNU7nbltmzaGS98oiyU/mlyK6PZf6Gdr+8aivtoOKWnW2l/UL27Z
+ V3sFRwI8FMciiL3R4gSPHetvtGt3N44Mm4OSRgeESViMGtEBsd3gZ348uPenvZiY+
+ SfkOd3yhWlUtfwlmmkPtkWg/2GlkgBAhWk6fZxHcB/JTB8PQqQhcopaqKs0QWCLIq
+ jjc9QXyj7/BUkJnR4ynml29kcXlDyQeDZms+6BCFcA3zL0/nRP/+/IJWOo9M0ag/z
+ LIPh20vxxvZqtsvyHDFKIfIBgv4XZPVo6Xu4418kYGE5wgX2dioNQD4pNKo1zlFFb
+ YPMkY+oMTEU6Rfygbw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.0.29.1] ([159.148.28.2]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MmlT2-1rgS6f1zNe-00jp2T; Sat, 04
+ Nov 2023 08:48:27 +0100
+Message-ID: <bd79e1f1-3192-49ab-9429-a0ade36aa248@gmx.de>
+Date: Sat, 4 Nov 2023 09:48:21 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] net: bootp: BOOTP/DHCPv4 retransmission
+ improvements
+To: Sean Edmond <seanedmond@linux.microsoft.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
+ <20231024002159.74477-3-seanedmond@linux.microsoft.com>
+ <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
+ <7dd18ad7-6d6c-47ea-9dc0-3b59ddf25460@linux.microsoft.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <7dd18ad7-6d6c-47ea-9dc0-3b59ddf25460@linux.microsoft.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:8qcL104knzQpr8lMiWobRPjTDO/zGexGJXOzqHBHWlN53IZRwm1
+ XWta98yi98w5QJnVL9CktnZ644lHxb0MC89yMGZT1KqHEiylIKKStRp1NKzJkQr+VDT9hwN
+ 2h9BIHRDcLSVfvUrvQETJ/4xdyWTUyOCRE4Ipvgqh7SzhUKQKsWqmitEVIBFfgfN5rDNELM
+ yB7eWuosl47byYAT01hRw==
+UI-OutboundReport: notjunk:1;M01:P0:bg9u6dWA/Cc=;+oaYvmMO2u3lPsVh+5vjbIpjhFM
+ 4980BWqaASl6ivT9D3iCN6wjSqKF64sHtGqd14uJ6ijoMUSDXPliVskW/iUZuDLmFIRVCgV5A
+ UaN5aU0bQbZWv+NIHTo7VKdIMxyu06a+lA43kV1vDfcHCsxlzx7rXznpegkIZw1LlWoybVZuK
+ CkS3+Sr6ufGGz3U3DstLVE+naDX99TEPcazzUo2ww0pFfJVTimuNZhaXDyGkC04L2dPp+5ZI/
+ kazyeK1sX9klInJC0JxBrz64dSfX6WuJGNgu5FUwVUbs1qi0qwB8CIShkJmcvRfZxOl42TmQB
+ +RsAehJdLyl84hAxGE214STyQyftgk641VZaLFsVafd1n/No7GCpx6pX5NY49lfkY5Vc4d4NM
+ pDXlN4UPLvUcrVVBP7LeLeqUKMkWdAw2Azgm6HvaVWOEAYbsuusxNV2e9j6yyS1X2Ooim/lcP
+ +fwo/at200kP1LI0bUQSH3tQ2slahYjsrY0sZqvrfiXeLUYFGbzqLEIYvtooqm01tZDb8SmX/
+ ijnNK4jiW6LtiAevQjFCPZBh5H2JB4RGhDvoYkqwd2eDxaB3GOe7tEaalZ5OMRG7YJ3BJ8MSa
+ tzSQ4lXApVwvMfFnrGmEeZaReKqa6xwn/ErczC6biLXoLz6xsVeTcqEdh+rJIrHB1q8xl1T9M
+ cp82UGQn/nxAEWFAulOnhPf49kL1A0weKY4fJDWUCUU8N0qxlQwyPmFAkaOGqYOiJ1/q6/IVm
+ irRg8EVYWjDQrOK7M5U/QE6KFrRSjWOHn6jo87OdXbKVoYJ/06q1fwD4AhXjMR5rcQhzDsXoE
+ HtCnU/G1lsLDe8k+GlLeeI7boJB4M0hBacaQ3DL++CuKiGOdOmft+sT9f9uB0N7XgzaSH6DtH
+ AR5gGdmjSwF1iwDLu8YAJ2HLtc1i8Nz/rPgl/66zHFp1UVi0lgRLqol59NPNz+UNiK5pWQX+l
+ xT7vrw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,126 +93,235 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor J721E J7200 definition to make this independent of board
-macros.
+On 11/4/23 03:04, Sean Edmond wrote:
+>
+> On 2023-10-23 11:06 p.m., Heinrich Schuchardt wrote:
+>> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
+>>> From: Sean Edmond <seanedmond@microsoft.com>
+>>>
+>>> This patch introduces 3 improvements to align with RFC 951:
+>>> - retransmission backoff interval maximum is configurable
+>>> - initial retranmission backoff interval is configurable
+>>> - transaction ID is kept the same for each BOOTP/DHCPv4 request
+>>>
+>>> In applications where thousands of nodes are serviced by a single DHCP
+>>> server, maximizing the retransmission backoff interval at 2 seconds (t=
+he
+>>> current u-boot default) exerts high pressure on the DHCP server and
+>>> network layer.
+>>>
+>>> RFC 951 =E2=80=9C7.2. Client Retransmission Strategy=E2=80=9D states t=
+hat the
+>>> retransmission backoff interval should maximize at 60 seconds. This
+>>
+>> %s/maximize at/be limited to/
+>>
+>>> patch allows the interval to be configurable using the environment
+>>> variable "bootpretransmitperiodmax"
+>>
+>> If there is an RFC defining the value, why do we need an environment
+>> variable?
+>>
+>>>
+>>> The initial retranmission backoff period defaults to 250ms, which is
+>>> also too small for these scenarios with many clients.=C2=A0 This patch=
+ makes
+>>> the initial retransmission interval to be configurable using the
+>>> environment variable "bootpretransmitperiodinit".
+>>>
+>>> Also, on a retransmission it is not expected for the transaction ID to
+>>> change (only the 'secs' field should be updated). Let's save the
+>>> transaction ID and use the same transaction ID for each BOOTP/DHCPv4
+>>> exchange.
+>>>
+>>> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+>>> ---
+>>> =C2=A0 net/bootp.c | 56 ++++++++++++++++++++++++++++++++++++++--------=
+-------
+>>> =C2=A0 1 file changed, 40 insertions(+), 16 deletions(-)
+>>>
+>>> diff --git a/net/bootp.c b/net/bootp.c
+>>> index 6800290963..bab17a9ceb 100644
+>>> --- a/net/bootp.c
+>>> +++ b/net/bootp.c
+>>> @@ -42,6 +42,17 @@
+>>> =C2=A0=C2=A0 */
+>>> =C2=A0 #define TIMEOUT_MS=C2=A0=C2=A0=C2=A0 ((3 + (CONFIG_NET_RETRY_CO=
+UNT * 5)) * 1000)
+>>>
+>>> +/*
+>>> + * According to rfc951 : 7.2. Client Retransmission Strategy
+>>> + * "After the 'average' backoff reaches about 60 seconds, it should b=
+e
+>>> + * increased no further, but still randomized."
+>>> + *
+>>> + * U-Boot has saturated this backoff at 2 seconds for a long time.
+>>> + * To modify, set the environment variable "bootpretransmitperiodmax"
+>>> + */
+>>> +#define RETRANSMIT_PERIOD_MAX_MS=C2=A0=C2=A0=C2=A0 2000
+>>
+>> This does not match RFC 951. Please, why shouldn't we use the standard
+>> value by default?
+>>
+>>> +#define RETRANSMIT_PERIOD_INIT_MS=C2=A0=C2=A0=C2=A0 250
+>>
+>> This constant should be described too.
+>>
+>>> +
+>>> =C2=A0 #ifndef CFG_DHCP_MIN_EXT_LEN=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 /* minimal length of extension
+>>> list */
+>>> =C2=A0 #define CFG_DHCP_MIN_EXT_LEN 64
+>>> =C2=A0 #endif
+>>> @@ -53,6 +64,7 @@
+>>> =C2=A0 u32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_ids[CFG_BOO=
+TP_ID_CACHE_SIZE];
+>>> =C2=A0 unsigned int=C2=A0=C2=A0=C2=A0 bootp_num_ids;
+>>> =C2=A0 int=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_try;
+>>> +u32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id;
+>>> =C2=A0 ulong=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_start;
+>>> =C2=A0 ulong=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_timeout;
+>>> =C2=A0 char net_nis_domain[32] =3D {0,}; /* Our NIS domain */
+>>> @@ -60,6 +72,7 @@ char net_hostname[32] =3D {0,}; /* Our hostname */
+>>> =C2=A0 char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] =3D {0,}; /*=
+ Our
+>>> bootpath */
+>>>
+>>> =C2=A0 static ulong time_taken_max;
+>>> +static u32=C2=A0=C2=A0 retransmit_period_max_ms;
+>>>
+>>> =C2=A0 #if defined(CONFIG_CMD_DHCP)
+>>> =C2=A0 static dhcp_state_t dhcp_state =3D INIT;
+>>> @@ -414,8 +427,8 @@ static void bootp_timeout_handler(void)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_timeout *=
+=3D 2;
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (bootp_timeout > 2000)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo=
+otp_timeout =3D 2000;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (bootp_timeout > retran=
+smit_period_max_ms)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo=
+otp_timeout =3D retransmit_period_max_ms;
+>>
+>> RFC 951 requires that the backoff time is randomized.
+>>
+> I added randomization in v3.=C2=A0 Note, in that update I haven't put an=
+y
+> guards around the use of rand()/srand() (as is the case in net_rand.h).
+> Perhaps it's safe to assume it will always be present for inclusion of n=
+et?
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
- arch/arm/mach-k3/arm64-mmu.c | 50 ++++++++++++++++++------------------
- 1 file changed, 25 insertions(+), 25 deletions(-)
+If you need rand(), you have to ensure that CONFIG_LIB_RAND=3Dy, e.g. let
+CONFIG_CMD_BOOTP select CONFIG_LIB_RAND.
 
-diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
-index f8087d2421e7..8cb6614035a5 100644
---- a/arch/arm/mach-k3/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64-mmu.c
-@@ -68,12 +68,11 @@ struct mm_region *mem_map = am654_mem_map;
- 
- #ifdef CONFIG_SOC_K3_J721E
- 
--#ifdef CONFIG_TARGET_J721E_A72_EVM
--/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
-+#ifdef CONFIG_SOC_K3_J721E_J7200
-+#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
- 
- /* ToDo: Add 64bit IO */
--struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -90,13 +89,13 @@ struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
- 	}, {
- 		.virt = 0xa0000000UL,
- 		.phys = 0xa0000000UL,
--		.size = 0x1bc00000UL,
-+		.size = 0x04800000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
- 			 PTE_BLOCK_NON_SHARE
- 	}, {
--		.virt = 0xbbc00000UL,
--		.phys = 0xbbc00000UL,
--		.size = 0x44400000UL,
-+		.virt = 0xa4800000UL,
-+		.phys = 0xa4800000UL,
-+		.size = 0x5b800000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_INNER_SHARE
- 	}, {
-@@ -112,26 +111,21 @@ struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		.virt = 0x4d80000000UL,
--		.phys = 0x4d80000000UL,
--		.size = 0x0002000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
--			 PTE_BLOCK_INNER_SHARE
- 	}, {
- 		/* List terminator */
- 		0,
- 	}
- };
- 
--struct mm_region *mem_map = j721e_mem_map;
--#endif /* CONFIG_TARGET_J721E_A72_EVM */
-+struct mm_region *mem_map = j7200_mem_map;
- 
--#ifdef CONFIG_TARGET_J7200_A72_EVM
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
-+#else /* CONFIG_SOC_K3_J721E_J7200 */
-+
-+/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
-+#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
- 
- /* ToDo: Add 64bit IO */
--struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -148,13 +142,13 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
- 	}, {
- 		.virt = 0xa0000000UL,
- 		.phys = 0xa0000000UL,
--		.size = 0x04800000UL,
-+		.size = 0x1bc00000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
- 			 PTE_BLOCK_NON_SHARE
- 	}, {
--		.virt = 0xa4800000UL,
--		.phys = 0xa4800000UL,
--		.size = 0x5b800000UL,
-+		.virt = 0xbbc00000UL,
-+		.phys = 0xbbc00000UL,
-+		.size = 0x44400000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
- 			 PTE_BLOCK_INNER_SHARE
- 	}, {
-@@ -170,14 +164,20 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		.virt = 0x4d80000000UL,
-+		.phys = 0x4d80000000UL,
-+		.size = 0x0002000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
-+			 PTE_BLOCK_INNER_SHARE
- 	}, {
- 		/* List terminator */
- 		0,
- 	}
- };
- 
--struct mm_region *mem_map = j7200_mem_map;
--#endif /* CONFIG_TARGET_J7200_A72_EVM */
-+struct mm_region *mem_map = j721e_mem_map;
-+#endif /* CONFIG_SOC_K3_J721E_J7200 */
- 
- #endif /* CONFIG_SOC_K3_J721E */
- 
--- 
-2.37.2
+Best regards
+
+Heinrich
+
+>
+>> Best regards
+>>
+>> Heinrich
+>>
+>>> net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_request()=
+;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> @@ -711,10 +724,14 @@ static int bootp_extended(u8 *e)
+>>>
+>>> =C2=A0 void bootp_reset(void)
+>>> =C2=A0 {
+>>> +=C2=A0=C2=A0=C2=A0 char *ep;=C2=A0 /* Environment pointer */
+>>> +
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_num_ids =3D 0;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_try =3D 0;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_start =3D get_timer(0);
+>>> -=C2=A0=C2=A0=C2=A0 bootp_timeout =3D 250;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0 bootp_timeout =3D env_get_ulong("bootpretransmitpe=
+riodinit", 10,
+>>> RETRANSMIT_PERIOD_INIT_MS);
+>>> +
+>>> =C2=A0 }
+>>>
+>>> =C2=A0 void bootp_request(void)
+>>> @@ -726,7 +743,6 @@ void bootp_request(void)
+>>> =C2=A0 #ifdef CONFIG_BOOTP_RANDOM_DELAY
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ulong rand_ms;
+>>> =C2=A0 #endif
+>>> -=C2=A0=C2=A0=C2=A0 u32 bootp_id;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct in_addr zero_ip;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct in_addr bcast_ip;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *ep;=C2=A0 /* Environment pointer =
+*/
+>>> @@ -742,6 +758,9 @@ void bootp_request(void)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 else
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 time_taken_max =
+=3D TIMEOUT_MS;
+>>>
+>>> +=C2=A0=C2=A0=C2=A0 retransmit_period_max_ms =3D
+>>> env_get_ulong("bootpretransmitperiodmax", 10,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 RETRANSMIT_PERIOD_MAX_MS);
+>>> +
+>>> =C2=A0 #ifdef CONFIG_BOOTP_RANDOM_DELAY=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 /* Random BOOTP delay */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (bootp_try =3D=3D 0)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 srand_mac();
+>>> @@ -801,18 +820,23 @@ void bootp_request(void)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 extlen =3D bootp_extended((u8 *)bp->bp_=
+vend);
+>>> =C2=A0 #endif
+>>>
+>>> -=C2=A0=C2=A0=C2=A0 /*
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 Bootp ID is the lower 4 =
+bytes of our ethernet address
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 plus the current time in=
+ ms.
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0 */
+>>> -=C2=A0=C2=A0=C2=A0 bootp_id =3D ((u32)net_ethaddr[2] << 24)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | ((u32)net_ethaddr[3] << =
+16)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | ((u32)net_ethaddr[4] << =
+8)
+>>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | (u32)net_ethaddr[5];
+>>> -=C2=A0=C2=A0=C2=A0 bootp_id +=3D get_timer(0);
+>>> -=C2=A0=C2=A0=C2=A0 bootp_id =3D htonl(bootp_id);
+>>> -=C2=A0=C2=A0=C2=A0 bootp_add_id(bootp_id);
+>>> -=C2=A0=C2=A0=C2=A0 net_copy_u32(&bp->bp_id, &bootp_id);
+>>> +=C2=A0=C2=A0=C2=A0 /* Only generate a new transaction ID for each new=
+ BOOTP request */
+>>> +=C2=A0=C2=A0=C2=A0 if (bootp_try =3D=3D 1) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 =
+Bootp ID is the lower 4 bytes of our ethernet address
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 =
+plus the current time in ms.
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id =3D ((u32)net_eth=
+addr[2] << 24)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
+((u32)net_ethaddr[3] << 16)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
+((u32)net_ethaddr[4] << 8)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
+(u32)net_ethaddr[5];
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id +=3D get_timer(0)=
+;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id =3D htonl(bootp_i=
+d);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_add_id(bootp_id);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 net_copy_u32(&bp->bp_id, &=
+bootp_id);
+>>> +=C2=A0=C2=A0=C2=A0 } else {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 net_copy_u32(&bp->bp_id, &=
+bootp_id);
+>>> +=C2=A0=C2=A0=C2=A0 }
+>>>
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Calculate proper packet lengths=
+ taking into account the
 
