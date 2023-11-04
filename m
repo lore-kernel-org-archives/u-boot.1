@@ -4,55 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2497C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DD16C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC67B87114;
-	Sat,  4 Nov 2023 08:00:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 25C08871A1;
+	Sat,  4 Nov 2023 08:22:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YMzHV4XA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gnBKtSTI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DDFC8711B; Sat,  4 Nov 2023 08:00:21 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CBAD487196; Sat,  4 Nov 2023 08:22:08 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EB62870FC
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:00:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B18C8710B
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:22:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (unknown [159.148.28.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id E33E33FB9D; 
- Sat,  4 Nov 2023 07:00:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699081210;
- bh=DPK0oMHm1WXA4O0dLKMUBxFPW6kSky9Mi4EdE2oXgqI=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=YMzHV4XAsLgNY6ywjdBRXBmAAhZ9m/k3mAmCYS3iVQVVaHQQpdzjLXFmWJ8gCygwM
- J2a8c6874xv3LT2xBFNdc/aynzSwYijHn3ngbKTmnmE/bIuuKs9tK2TvoXdGnj8sgR
- gck8MrvF8Nq7495ArjTq/ASrVdRLRtR3WJAEibJdcfADNCzUMvVH86rQyMFlICSvkM
- hWLFTrWdeDpWI97CYOwfl+Sc7IknabS/yubQ6KL/PucEjciF45KTXdC7ZQCzkuDUu6
- yuNDzadUCsJOAr/pYFcf97Zew4AkVsVwozkV2EgzuTyxEk9ethcJ+0BdannzlRnn46
- ufnCaGXQpzliw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] rng: fix ARMv8.5 RNDR driver
-Date: Sat,  4 Nov 2023 09:00:07 +0200
-Message-Id: <20231104070007.30099-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A47Lrwo031795;
+ Sat, 4 Nov 2023 02:21:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699082513;
+ bh=sZT/ZifHc6eBmVnUVxGWp1027BV2bYGJ3Zm38o8qzO0=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=gnBKtSTI1X7j+YmyoOuVcGiGerFshuUeQ8w5HOsGb2r/n52bq6YOjKJssMTiuJ3rC
+ 2+zA5od1UjzWtO9c/h3qvv0Nq3GD9sGBkZhip8JkSXH5IUAHGX8SHz98Bur43vQrpn
+ TJnrgDIcf5rVdt1/SKF2cVZQr2ALh3UbxYvprGco=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A47LrKX029605
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 4 Nov 2023 02:21:53 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 4
+ Nov 2023 02:21:53 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 4 Nov 2023 02:21:53 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LruR017193;
+ Sat, 4 Nov 2023 02:21:53 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH V2 03/12] board: ti: j721e: evm: Switch to using IS_ENABLED
+Date: Sat, 4 Nov 2023 02:21:41 -0500
+Message-ID: <20231104072150.3339-4-nm@ti.com>
+X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20231104072150.3339-1-nm@ti.com>
+References: <20231104072150.3339-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,45 +83,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In different parts of our code we assume that the first RNG device is the
-one to be used. Therefore it is preferable to detect the availability of
-the RNDR register already in the bind method.
+Switch to using IS_ENABLED() for inline function usage.
 
-For signaling the non-existence of a device the driver model requires using
-ENOENT (and not ENODEV).
-
-Fixes: 31565bb0aa2d ("driver: rng: Add DM_RNG interface for ARMv8.5 RNDR registers")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- drivers/rng/arm_rndr.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ board/ti/j721e/evm.c | 83 ++++++++++++++++++++++----------------------
+ 1 file changed, 42 insertions(+), 41 deletions(-)
 
-diff --git a/drivers/rng/arm_rndr.c b/drivers/rng/arm_rndr.c
-index 55989743ea..4512330e68 100644
---- a/drivers/rng/arm_rndr.c
-+++ b/drivers/rng/arm_rndr.c
-@@ -62,10 +62,10 @@ static const struct dm_rng_ops arm_rndr_ops = {
- 	.read = arm_rndr_read,
- };
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index 8f0996c32ee6..17640ae79665 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -300,53 +300,54 @@ static int probe_daughtercards(void)
+ 		printf("Detected: %s rev %s\n", ep.name, ep.version);
+ 		daughter_card_detect_flags[i] = true;
  
--static int arm_rndr_probe(struct udevice *dev)
-+static int arm_rndr_bind(struct udevice *dev)
- {
- 	if (!cpu_has_rndr())
--		return -ENODEV;
-+		return -ENOENT;
+-#ifndef CONFIG_SPL_BUILD
+-		int j;
+-		/*
+-		 * Populate any MAC addresses from daughtercard into the U-Boot
+-		 * environment, starting with a card-specific offset so we can
+-		 * have multiple ext_cards contribute to the MAC pool in a well-
+-		 * defined manner.
+-		 */
+-		for (j = 0; j < mac_addr_cnt; j++) {
+-			if (!is_valid_ethaddr((u8 *)mac_addr[j]))
+-				continue;
+-
+-			eth_env_set_enetaddr_by_index("eth",
+-						      ext_cards[i].eth_offset + j,
+-						      (uchar *)mac_addr[j]);
++		if (!IS_ENABLED(CONFIG_SPL_BUILD)) {
++			int j;
++			/*
++			 * Populate any MAC addresses from daughtercard into the U-Boot
++			 * environment, starting with a card-specific offset so we can
++			 * have multiple ext_cards contribute to the MAC pool in a well-
++			 * defined manner.
++			 */
++			for (j = 0; j < mac_addr_cnt; j++) {
++				if (!is_valid_ethaddr((u8 *)mac_addr[j]))
++					continue;
++
++				eth_env_set_enetaddr_by_index("eth",
++							      ext_cards[i].eth_offset + j,
++							      (uchar *)mac_addr[j]);
++			}
+ 		}
+-#endif
+ 	}
+-#ifndef CONFIG_SPL_BUILD
+-	char name_overlays[1024] = { 0 };
+ 
+-	for (i = 0; i < ARRAY_SIZE(ext_cards); i++) {
+-		if (!daughter_card_detect_flags[i])
+-			continue;
++	if (!IS_ENABLED(CONFIG_SPL_BUILD)) {
++		char name_overlays[1024] = { 0 };
+ 
+-		/* Skip if no overlays are to be added */
+-		if (!strlen(ext_cards[i].dtbo_name))
+-			continue;
++		for (i = 0; i < ARRAY_SIZE(ext_cards); i++) {
++			if (!daughter_card_detect_flags[i])
++				continue;
+ 
+-		/*
+-		 * Make sure we are not running out of buffer space by checking
+-		 * if we can fit the new overlay, a trailing space to be used
+-		 * as a separator, plus the terminating zero.
+-		 */
+-		if (strlen(name_overlays) + strlen(ext_cards[i].dtbo_name) + 2 >
+-		    sizeof(name_overlays))
+-			return -ENOMEM;
+-
+-		/* Append to our list of overlays */
+-		strcat(name_overlays, ext_cards[i].dtbo_name);
+-		strcat(name_overlays, " ");
+-	}
++			/* Skip if no overlays are to be added */
++			if (!strlen(ext_cards[i].dtbo_name))
++				continue;
+ 
+-	/* Apply device tree overlay(s) to the U-Boot environment, if any */
+-	if (strlen(name_overlays))
+-		return env_set("name_overlays", name_overlays);
+-#endif
++			/*
++			 * Make sure we are not running out of buffer space by checking
++			 * if we can fit the new overlay, a trailing space to be used
++			 * as a separator, plus the terminating zero.
++			 */
++			if (strlen(name_overlays) + strlen(ext_cards[i].dtbo_name) + 2 >
++			    sizeof(name_overlays))
++				return -ENOMEM;
++
++			/* Append to our list of overlays */
++			strcat(name_overlays, ext_cards[i].dtbo_name);
++			strcat(name_overlays, " ");
++		}
++
++		/* Apply device tree overlay(s) to the U-Boot environment, if any */
++		if (strlen(name_overlays))
++			return env_set("name_overlays", name_overlays);
++	}
  
  	return 0;
  }
-@@ -74,7 +74,7 @@ U_BOOT_DRIVER(arm_rndr) = {
- 	.name = DRIVER_NAME,
- 	.id = UCLASS_RNG,
- 	.ops = &arm_rndr_ops,
--	.probe = arm_rndr_probe,
-+	.bind = arm_rndr_bind,
- };
- 
- U_BOOT_DRVINFO(cpu_arm_rndr) = {
 -- 
-2.40.1
+2.37.2
 
