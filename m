@@ -4,46 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F19C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 01:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8945AC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 01:03:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 733CB8757D;
-	Sat,  4 Nov 2023 02:01:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 738F187120;
+	Sat,  4 Nov 2023 02:03:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="oQ6QVSE+";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="L1BT6kHS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C66F187450; Sat,  4 Nov 2023 02:00:45 +0100 (CET)
+ id E560A8710B; Sat,  4 Nov 2023 02:03:33 +0100 (CET)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 4AC8787252
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 02:00:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 381E587120
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 02:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 7703920B74C0;
- Fri,  3 Nov 2023 18:00:20 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 7703920B74C0
+Received: from [192.168.1.75] (d173-180-12-152.bchsia.telus.net
+ [173.180.12.152])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 8A8AE20B74C0;
+ Fri,  3 Nov 2023 18:03:20 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 8A8AE20B74C0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1699059620;
- bh=7B6JK6rwxPY4YKxMD/7jRDVjNa3jWi48Qh624aPDFAA=;
- h=From:To:Cc:Subject:Date:From;
- b=oQ6QVSE+HXnLUU0Ui3GnMZ6oNom6+KFzTWTzXl5SddXL7Xz8FfdqwnpJ7co+rp5Y/
- hBME/MB09oeCNEQB9nQhbywoWerzO3MYbrHUmVj82+in3qAfwYmGNeB/RP8Po3aKIp
- F3l8cIHuADfqTsxaLSe1cgjTaPm6jHoxI1vDcnO0=
-From: seanedmond@linux.microsoft.com
-To: u-boot@lists.denx.de
-Cc: xypron.glpk@gmx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
- sjg@chromium.org, ilias.apalodimas@linaro.org
-Subject: [PATCH v3 0/3] BOOTP/DHCPv4 enhancements
-Date: Fri,  3 Nov 2023 18:00:02 -0700
-Message-ID: <20231104010005.2483397-1-seanedmond@linux.microsoft.com>
-X-Mailer: git-send-email 2.42.0
+ s=default; t=1699059800;
+ bh=xILvVbhmg2L9/Lk9KUCoLSdBpGyUeQSLJPgVsuu5PQw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=L1BT6kHS7boJix8HoaccJwRjlp5/vJV8/DZtBwyRwl/fH4rI2q5yJSRNWk/RXGqOi
+ Lv/7WOpgTbjrVPNA4vAqr3z3grA2vYIqq1H3WfQsZh/50zdZGSE3FcZQYgKj1+dHZP
+ EY9Gn2vKhJWwZhi5LFjlA05xWcKE9uZqNEtPhvcA=
+Message-ID: <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
+Date: Fri, 3 Nov 2023 18:03:19 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
+Content-Language: en-GB
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
+ <20231024002159.74477-2-seanedmond@linux.microsoft.com>
+ <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+From: Sean Edmond <seanedmond@linux.microsoft.com>
+In-Reply-To: <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -61,55 +67,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sean Edmond <seanedmond@microsoft.com>
 
-In our datacenter application, a single DHCP server is servicing 36000+ clients.
-Improvements are required to the DHCPv4 retransmission behavior to align with
-RFC and ensure less pressure is exerted on the server:
-- retransmission backoff interval maximum is configurable 
-  (environment variable bootpretransmitperiodmax)
-- initial retransmission backoff interval is configurable 
-  (environment variable bootpretransmitperiodinit)
-- transaction ID is kept the same for each BOOTP/DHCPv4 request 
-  (not recreated on each retry)
-
-For our application we'll use:
-- bootpretransmitperiodmax=16000
-- bootpretransmitperiodinit=2000
-
-A new configuration BOOTP_RANDOM_XID has been added to enable a randomized
-BOOTP/DHCPv4 transaction ID.
-
-Add functionality for DHCPv4 sending/parsing option 209 (PXE config file).
-Enabled with Kconfig BOOTP_PXE_DHCP_OPTION.  Note, this patch was
-submitted previously but this latest version has been enhanced to
-avoid a possible double free().
-
-changes in v3:
-- add define for option 209 and rfc5071 reference
-- Set RETRANSMIT_PERIOD_MAX_MS=60000
-- Add randomization factor to retransmission timeout
-- Add depends for BOOTP_RANDOM_XID
-
-changes in v2:
-- use env_get_ulong() to get environment variables
-
-Sean Edmond (3):
-  net: Get pxe config file from dhcp option 209
-  net: bootp: BOOTP/DHCPv4 retransmission improvements
-  net: bootp: add config option BOOTP_RANDOM_XID
-
-Sean Edmond (3):
-  net: Get pxe config file from dhcp option 209
-  net: bootp: BOOTP/DHCPv4 retransmission improvements
-  net: bootp: add config option BOOTP_RANDOM_XID
-
- cmd/Kconfig | 11 +++++++
- cmd/pxe.c   | 10 ++++++
- net/bootp.c | 93 ++++++++++++++++++++++++++++++++++++++++++++---------
- net/bootp.h |  2 ++
- 4 files changed, 101 insertions(+), 15 deletions(-)
-
--- 
-2.42.0
-
+On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
+> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
+>> From: Sean Edmond <seanedmond@microsoft.com>
+>>
+>> Allow dhcp server pass pxe config file full path by using option 209
+>>
+>> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+>> ---
+>>   cmd/Kconfig |  4 ++++
+>>   cmd/pxe.c   | 10 ++++++++++
+>>   net/bootp.c | 21 +++++++++++++++++++++
+>>   3 files changed, 35 insertions(+)
+>>
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index 5bc0a92d57..adbb1a6187 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
+>>       default 0x15 if ARM
+>>       default 0x0 if X86
+>>
+>> +config BOOTP_PXE_DHCP_OPTION
+>> +    bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
+>> +    depends on BOOTP_PXE
+>
+> Why should this be disabled by default?
+>
+> Do we really want a separate config variable?
+>
+I expect most won't use this option to get the file path (they'll use 
+the default paths as per the PXE specification).  It makes more sense 
+for me to keep it optional, like many of the other options?
+>> +
+>>   config BOOTP_VCI_STRING
+>>       string
+>>       depends on CMD_BOOTP
+>> diff --git a/cmd/pxe.c b/cmd/pxe.c
+>> index 704589702f..9404f44518 100644
+>> --- a/cmd/pxe.c
+>> +++ b/cmd/pxe.c
+>> @@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context 
+>> *ctx, unsigned long pxefile_a
+>>       int ret = get_pxe_file(ctx, pxelinux_configfile, pxefile_addr_r);
+>>
+>>       free(pxelinux_configfile);
+>> +    /* set to NULL to avoid double-free if DHCP is tried again */
+>> +    pxelinux_configfile = NULL;
+>>
+>>       return ret;
+>>   }
+>> @@ -141,6 +143,14 @@ int pxe_get(ulong pxefile_addr_r, char 
+>> **bootdirp, ulong *sizep, bool use_ipv6)
+>>                 env_get("bootfile"), use_ipv6))
+>>           return -ENOMEM;
+>>
+>> +    if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
+>> +        pxelinux_configfile && !use_ipv6) {
+>> +        if (pxe_dhcp_option_path(&ctx, pxefile_addr_r) > 0)
+>> +            goto done;
+>> +
+>> +        goto error_exit;
+>> +    }
+>> +
+>>       if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION) &&
+>>           pxelinux_configfile && use_ipv6) {
+>>           if (pxe_dhcp_option_path(&ctx, pxefile_addr_r) > 0)
+>> diff --git a/net/bootp.c b/net/bootp.c
+>> index 7b0f45e18a..6800290963 100644
+>> --- a/net/bootp.c
+>> +++ b/net/bootp.c
+>> @@ -26,6 +26,7 @@
+>>   #ifdef CONFIG_BOOTP_RANDOM_DELAY
+>>   #include "net_rand.h"
+>>   #endif
+>> +#include <malloc.h>
+>>
+>>   #define BOOTP_VENDOR_MAGIC    0x63825363    /* RFC1048 Magic Cookie */
+>>
+>> @@ -601,6 +602,10 @@ static int dhcp_extended(u8 *e, int 
+>> message_type, struct in_addr server_ip,
+>>       *e++  = 42;
+>>       *cnt += 1;
+>>   #endif
+>> +    if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+>> +        *e++ = 209;    /* PXELINUX Config File */
+>> +        *cnt += 1;
+>> +    }
+>>       /* no options, so back up to avoid sending an empty request 
+>> list */
+>>       if (*cnt == 0)
+>>           e -= 2;
+>> @@ -909,6 +914,22 @@ static void dhcp_process_options(uchar *popt, 
+>> uchar *end)
+>>                   net_boot_file_name[size] = 0;
+>>               }
+>>               break;
+>> +        case 209:    /* PXELINUX Config File */
+>
+> This 209 appears in multiple places. Please, define a constant, e.g.
+> DHCP_OPTION_CONFIG_FILE, in bootp.h and use the symbolic name. Please,
+> document the constant referring to RFC 5071.
+fixed in v3.
+>
+>> +            if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+>> +                /* In case it has already been allocated when get 
+>> DHCP Offer packet,
+>> +                 * free first to avoid memory leak.
+>> +                 */
+>> +                if (pxelinux_configfile)
+>> +                    free(pxelinux_configfile);
+>> +
+>> +                pxelinux_configfile = (char *)malloc((oplen + 1) * 
+>> sizeof(char));
+>> +
+>> +                if (pxelinux_configfile)
+>> +                    strlcpy(pxelinux_configfile, popt + 2, oplen + 1);
+>> +                else
+>> +                    printf("Error: Failed to allocate 
+>> pxelinux_configfile\n");
+>
+> We do the same in dhcp6_parse_options(). Please, factor out a common
+> function to avoid code duplication.
+I would prefer to keep these seperate for several reasons:
+- our DHCP server team has asked for the DHCP6 "pxe config file" parsing 
+to change.  I attempted to add to upstream here: 
+https://lore.kernel.org/u-boot/20230725231329.5653-1-seanedmond@linux.microsoft.com/. 
+I will attempt to submitted that patch again
+- PXE config file isn't standardized yet for DHCPv6 (the current 
+implementation was a proposal from our DHCP server team)
+- LWIP will eventually superceed bootp.c in u-boot, but we'll probably 
+be keeping dhcpv6.c for a bit (keeping the duplicate code will make the 
+migration easier)
+>
+> Best regards
+>
+> Heinrich
+>
+>> +            }
+>> +            break;
+>>           default:
+>>   #if defined(CONFIG_BOOTP_VENDOREX)
+>>               if (dhcp_vendorex_proc(popt))
