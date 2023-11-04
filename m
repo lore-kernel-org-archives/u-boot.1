@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8945AC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 01:03:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41396C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 01:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 738F187120;
-	Sat,  4 Nov 2023 02:03:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 92442874D8;
+	Sat,  4 Nov 2023 02:05:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="L1BT6kHS";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="lkmueMuE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E560A8710B; Sat,  4 Nov 2023 02:03:33 +0100 (CET)
+ id B77D1874D8; Sat,  4 Nov 2023 02:05:01 +0100 (CET)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 381E587120
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 02:03:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id B395E87463
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 02:04:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
 Received: from [192.168.1.75] (d173-180-12-152.bchsia.telus.net
  [173.180.12.152])
- by linux.microsoft.com (Postfix) with ESMTPSA id 8A8AE20B74C0;
- Fri,  3 Nov 2023 18:03:20 -0700 (PDT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 8A8AE20B74C0
+ by linux.microsoft.com (Postfix) with ESMTPSA id A4C4C20B74C0;
+ Fri,  3 Nov 2023 18:04:55 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A4C4C20B74C0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1699059800;
- bh=xILvVbhmg2L9/Lk9KUCoLSdBpGyUeQSLJPgVsuu5PQw=;
+ s=default; t=1699059895;
+ bh=0Sjf647ZABJyRaWv9oGliDjM/JkYkMSgAFNg2HmkojQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=L1BT6kHS7boJix8HoaccJwRjlp5/vJV8/DZtBwyRwl/fH4rI2q5yJSRNWk/RXGqOi
- Lv/7WOpgTbjrVPNA4vAqr3z3grA2vYIqq1H3WfQsZh/50zdZGSE3FcZQYgKj1+dHZP
- EY9Gn2vKhJWwZhi5LFjlA05xWcKE9uZqNEtPhvcA=
-Message-ID: <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
-Date: Fri, 3 Nov 2023 18:03:19 -0700
+ b=lkmueMuEMvwHSzh2TdqsQrfXSpN6J50yyuU4ItJQRyEdyneNWsSHUeTf5RM+1xsxk
+ gSlp5voXiz6SM49l3271mqZ5NmdJUt9OqqkL/QvOh1xgwb22pRkXPqL1DpMT1KNazC
+ ptSoTVtLiHenCIii+ZTM36x/2o4i43Nmrw3t7AOI=
+Message-ID: <7dd18ad7-6d6c-47ea-9dc0-3b59ddf25460@linux.microsoft.com>
+Date: Fri, 3 Nov 2023 18:04:55 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
+Subject: Re: [PATCH v2 2/3] net: bootp: BOOTP/DHCPv4 retransmission
+ improvements
 Content-Language: en-GB
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
  ilias.apalodimas@linaro.org, u-boot@lists.denx.de
 References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-2-seanedmond@linux.microsoft.com>
- <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+ <20231024002159.74477-3-seanedmond@linux.microsoft.com>
+ <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
 From: Sean Edmond <seanedmond@linux.microsoft.com>
-In-Reply-To: <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+In-Reply-To: <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,145 +69,185 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
+On 2023-10-23 11:06 p.m., Heinrich Schuchardt wrote:
 > On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
 >> From: Sean Edmond <seanedmond@microsoft.com>
 >>
->> Allow dhcp server pass pxe config file full path by using option 209
+>> This patch introduces 3 improvements to align with RFC 951:
+>> - retransmission backoff interval maximum is configurable
+>> - initial retranmission backoff interval is configurable
+>> - transaction ID is kept the same for each BOOTP/DHCPv4 request
+>>
+>> In applications where thousands of nodes are serviced by a single DHCP
+>> server, maximizing the retransmission backoff interval at 2 seconds (the
+>> current u-boot default) exerts high pressure on the DHCP server and
+>> network layer.
+>>
+>> RFC 951 “7.2. Client Retransmission Strategy” states that the
+>> retransmission backoff interval should maximize at 60 seconds. This
+>
+> %s/maximize at/be limited to/
+>
+>> patch allows the interval to be configurable using the environment
+>> variable "bootpretransmitperiodmax"
+>
+> If there is an RFC defining the value, why do we need an environment
+> variable?
+>
+>>
+>> The initial retranmission backoff period defaults to 250ms, which is
+>> also too small for these scenarios with many clients.  This patch makes
+>> the initial retransmission interval to be configurable using the
+>> environment variable "bootpretransmitperiodinit".
+>>
+>> Also, on a retransmission it is not expected for the transaction ID to
+>> change (only the 'secs' field should be updated). Let's save the
+>> transaction ID and use the same transaction ID for each BOOTP/DHCPv4
+>> exchange.
 >>
 >> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 >> ---
->>   cmd/Kconfig |  4 ++++
->>   cmd/pxe.c   | 10 ++++++++++
->>   net/bootp.c | 21 +++++++++++++++++++++
->>   3 files changed, 35 insertions(+)
+>>   net/bootp.c | 56 ++++++++++++++++++++++++++++++++++++++---------------
+>>   1 file changed, 40 insertions(+), 16 deletions(-)
 >>
->> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index 5bc0a92d57..adbb1a6187 100644
->> --- a/cmd/Kconfig
->> +++ b/cmd/Kconfig
->> @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
->>       default 0x15 if ARM
->>       default 0x0 if X86
->>
->> +config BOOTP_PXE_DHCP_OPTION
->> +    bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
->> +    depends on BOOTP_PXE
->
-> Why should this be disabled by default?
->
-> Do we really want a separate config variable?
->
-I expect most won't use this option to get the file path (they'll use 
-the default paths as per the PXE specification).  It makes more sense 
-for me to keep it optional, like many of the other options?
->> +
->>   config BOOTP_VCI_STRING
->>       string
->>       depends on CMD_BOOTP
->> diff --git a/cmd/pxe.c b/cmd/pxe.c
->> index 704589702f..9404f44518 100644
->> --- a/cmd/pxe.c
->> +++ b/cmd/pxe.c
->> @@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context 
->> *ctx, unsigned long pxefile_a
->>       int ret = get_pxe_file(ctx, pxelinux_configfile, pxefile_addr_r);
->>
->>       free(pxelinux_configfile);
->> +    /* set to NULL to avoid double-free if DHCP is tried again */
->> +    pxelinux_configfile = NULL;
->>
->>       return ret;
->>   }
->> @@ -141,6 +143,14 @@ int pxe_get(ulong pxefile_addr_r, char 
->> **bootdirp, ulong *sizep, bool use_ipv6)
->>                 env_get("bootfile"), use_ipv6))
->>           return -ENOMEM;
->>
->> +    if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
->> +        pxelinux_configfile && !use_ipv6) {
->> +        if (pxe_dhcp_option_path(&ctx, pxefile_addr_r) > 0)
->> +            goto done;
->> +
->> +        goto error_exit;
->> +    }
->> +
->>       if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION) &&
->>           pxelinux_configfile && use_ipv6) {
->>           if (pxe_dhcp_option_path(&ctx, pxefile_addr_r) > 0)
 >> diff --git a/net/bootp.c b/net/bootp.c
->> index 7b0f45e18a..6800290963 100644
+>> index 6800290963..bab17a9ceb 100644
 >> --- a/net/bootp.c
 >> +++ b/net/bootp.c
->> @@ -26,6 +26,7 @@
->>   #ifdef CONFIG_BOOTP_RANDOM_DELAY
->>   #include "net_rand.h"
->>   #endif
->> +#include <malloc.h>
+>> @@ -42,6 +42,17 @@
+>>    */
+>>   #define TIMEOUT_MS    ((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
 >>
->>   #define BOOTP_VENDOR_MAGIC    0x63825363    /* RFC1048 Magic Cookie */
->>
->> @@ -601,6 +602,10 @@ static int dhcp_extended(u8 *e, int 
->> message_type, struct in_addr server_ip,
->>       *e++  = 42;
->>       *cnt += 1;
->>   #endif
->> +    if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
->> +        *e++ = 209;    /* PXELINUX Config File */
->> +        *cnt += 1;
->> +    }
->>       /* no options, so back up to avoid sending an empty request 
+>> +/*
+>> + * According to rfc951 : 7.2. Client Retransmission Strategy
+>> + * "After the 'average' backoff reaches about 60 seconds, it should be
+>> + * increased no further, but still randomized."
+>> + *
+>> + * U-Boot has saturated this backoff at 2 seconds for a long time.
+>> + * To modify, set the environment variable "bootpretransmitperiodmax"
+>> + */
+>> +#define RETRANSMIT_PERIOD_MAX_MS    2000
+>
+> This does not match RFC 951. Please, why shouldn't we use the standard
+> value by default?
+>
+>> +#define RETRANSMIT_PERIOD_INIT_MS    250
+>
+> This constant should be described too.
+>
+>> +
+>>   #ifndef CFG_DHCP_MIN_EXT_LEN        /* minimal length of extension 
 >> list */
->>       if (*cnt == 0)
->>           e -= 2;
->> @@ -909,6 +914,22 @@ static void dhcp_process_options(uchar *popt, 
->> uchar *end)
->>                   net_boot_file_name[size] = 0;
->>               }
->>               break;
->> +        case 209:    /* PXELINUX Config File */
+>>   #define CFG_DHCP_MIN_EXT_LEN 64
+>>   #endif
+>> @@ -53,6 +64,7 @@
+>>   u32        bootp_ids[CFG_BOOTP_ID_CACHE_SIZE];
+>>   unsigned int    bootp_num_ids;
+>>   int        bootp_try;
+>> +u32        bootp_id;
+>>   ulong        bootp_start;
+>>   ulong        bootp_timeout;
+>>   char net_nis_domain[32] = {0,}; /* Our NIS domain */
+>> @@ -60,6 +72,7 @@ char net_hostname[32] = {0,}; /* Our hostname */
+>>   char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] = {0,}; /* Our 
+>> bootpath */
+>>
+>>   static ulong time_taken_max;
+>> +static u32   retransmit_period_max_ms;
+>>
+>>   #if defined(CONFIG_CMD_DHCP)
+>>   static dhcp_state_t dhcp_state = INIT;
+>> @@ -414,8 +427,8 @@ static void bootp_timeout_handler(void)
+>>           }
+>>       } else {
+>>           bootp_timeout *= 2;
+>> -        if (bootp_timeout > 2000)
+>> -            bootp_timeout = 2000;
+>> +        if (bootp_timeout > retransmit_period_max_ms)
+>> +            bootp_timeout = retransmit_period_max_ms;
 >
-> This 209 appears in multiple places. Please, define a constant, e.g.
-> DHCP_OPTION_CONFIG_FILE, in bootp.h and use the symbolic name. Please,
-> document the constant referring to RFC 5071.
-fixed in v3.
+> RFC 951 requires that the backoff time is randomized.
 >
->> +            if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
->> +                /* In case it has already been allocated when get 
->> DHCP Offer packet,
->> +                 * free first to avoid memory leak.
->> +                 */
->> +                if (pxelinux_configfile)
->> +                    free(pxelinux_configfile);
->> +
->> +                pxelinux_configfile = (char *)malloc((oplen + 1) * 
->> sizeof(char));
->> +
->> +                if (pxelinux_configfile)
->> +                    strlcpy(pxelinux_configfile, popt + 2, oplen + 1);
->> +                else
->> +                    printf("Error: Failed to allocate 
->> pxelinux_configfile\n");
->
-> We do the same in dhcp6_parse_options(). Please, factor out a common
-> function to avoid code duplication.
-I would prefer to keep these seperate for several reasons:
-- our DHCP server team has asked for the DHCP6 "pxe config file" parsing 
-to change.  I attempted to add to upstream here: 
-https://lore.kernel.org/u-boot/20230725231329.5653-1-seanedmond@linux.microsoft.com/. 
-I will attempt to submitted that patch again
-- PXE config file isn't standardized yet for DHCPv6 (the current 
-implementation was a proposal from our DHCP server team)
-- LWIP will eventually superceed bootp.c in u-boot, but we'll probably 
-be keeping dhcpv6.c for a bit (keeping the duplicate code will make the 
-migration easier)
->
+I added randomization in v3.  Note, in that update I haven't put any 
+guards around the use of rand()/srand() (as is the case in net_rand.h).  
+Perhaps it's safe to assume it will always be present for inclusion of net?
+
 > Best regards
 >
 > Heinrich
 >
->> +            }
->> +            break;
->>           default:
->>   #if defined(CONFIG_BOOTP_VENDOREX)
->>               if (dhcp_vendorex_proc(popt))
+>> net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
+>>           bootp_request();
+>>       }
+>> @@ -711,10 +724,14 @@ static int bootp_extended(u8 *e)
+>>
+>>   void bootp_reset(void)
+>>   {
+>> +    char *ep;  /* Environment pointer */
+>> +
+>>       bootp_num_ids = 0;
+>>       bootp_try = 0;
+>>       bootp_start = get_timer(0);
+>> -    bootp_timeout = 250;
+>> +
+>> +    bootp_timeout = env_get_ulong("bootpretransmitperiodinit", 10, 
+>> RETRANSMIT_PERIOD_INIT_MS);
+>> +
+>>   }
+>>
+>>   void bootp_request(void)
+>> @@ -726,7 +743,6 @@ void bootp_request(void)
+>>   #ifdef CONFIG_BOOTP_RANDOM_DELAY
+>>       ulong rand_ms;
+>>   #endif
+>> -    u32 bootp_id;
+>>       struct in_addr zero_ip;
+>>       struct in_addr bcast_ip;
+>>       char *ep;  /* Environment pointer */
+>> @@ -742,6 +758,9 @@ void bootp_request(void)
+>>       else
+>>           time_taken_max = TIMEOUT_MS;
+>>
+>> +    retransmit_period_max_ms = 
+>> env_get_ulong("bootpretransmitperiodmax", 10,
+>> +                         RETRANSMIT_PERIOD_MAX_MS);
+>> +
+>>   #ifdef CONFIG_BOOTP_RANDOM_DELAY        /* Random BOOTP delay */
+>>       if (bootp_try == 0)
+>>           srand_mac();
+>> @@ -801,18 +820,23 @@ void bootp_request(void)
+>>       extlen = bootp_extended((u8 *)bp->bp_vend);
+>>   #endif
+>>
+>> -    /*
+>> -     *    Bootp ID is the lower 4 bytes of our ethernet address
+>> -     *    plus the current time in ms.
+>> -     */
+>> -    bootp_id = ((u32)net_ethaddr[2] << 24)
+>> -        | ((u32)net_ethaddr[3] << 16)
+>> -        | ((u32)net_ethaddr[4] << 8)
+>> -        | (u32)net_ethaddr[5];
+>> -    bootp_id += get_timer(0);
+>> -    bootp_id = htonl(bootp_id);
+>> -    bootp_add_id(bootp_id);
+>> -    net_copy_u32(&bp->bp_id, &bootp_id);
+>> +    /* Only generate a new transaction ID for each new BOOTP request */
+>> +    if (bootp_try == 1) {
+>> +        /*
+>> +         *    Bootp ID is the lower 4 bytes of our ethernet address
+>> +         *    plus the current time in ms.
+>> +         */
+>> +        bootp_id = ((u32)net_ethaddr[2] << 24)
+>> +            | ((u32)net_ethaddr[3] << 16)
+>> +            | ((u32)net_ethaddr[4] << 8)
+>> +            | (u32)net_ethaddr[5];
+>> +        bootp_id += get_timer(0);
+>> +        bootp_id = htonl(bootp_id);
+>> +        bootp_add_id(bootp_id);
+>> +        net_copy_u32(&bp->bp_id, &bootp_id);
+>> +    } else {
+>> +        net_copy_u32(&bp->bp_id, &bootp_id);
+>> +    }
+>>
+>>       /*
+>>        * Calculate proper packet lengths taking into account the
