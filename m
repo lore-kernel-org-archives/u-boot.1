@@ -4,56 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15059C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:32:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E45C5C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:32:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5767C8712E;
-	Sat,  4 Nov 2023 17:32:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF70D87086;
+	Sat,  4 Nov 2023 17:32:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699115538;
-	bh=/dFPSv5AuXhEqGI5aHuoHyBfY8jPuQQiNtnqYkKEdVk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=ksLz5XCSedFbctiOjMQgjES/tgCRCZLgcrxPXhGYefUJJAwglyfwYORktmCSB0lex
-	 BZI29dRQicmEC4rzzmnnxCnjsa/0t5ZfMaFkceKwu8LaruIprh2PVKVTXUO3EghEUq
-	 kZCNu1gF8B9gq2BaR/ZpAPMMToFr9tL5/BAHGpNkr6xWCMscGj7eyIQdhDcLyPl5lq
-	 0Rl2ag89t5RgqLpu6kTxCdUl5l5iorC+Cp8MzvGF0JyW52ZPUTbEsbAXAF5lSl2u6E
-	 3Mcyss+lsqxRB6ThHizar8etYsd3SbFwLgJO/cn445ekk4pB+odLipXitRn1aYKmD5
-	 arXQ0aW5KadRQ==
+	s=phobos-20191101; t=1699115573;
+	bh=1plNeaffWD7uQVzevvtFkwj3p/V0NidqBNgZSmxR/9I=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=wCyNtEZBRkhBk+m8CjEvTBFG6Rjo1tGPpatO7OdSOakgZaTwJ8Vk+mfSblhOR2cOp
+	 /DblzJmDQQqYYo/AvjdQGc4aVISsrRnV3wKvZ8n+XH3IymG9tcRf7Qqa3fZ00ZMQAr
+	 LzcoPiJjDYjlIFCFi664IWj0YhwP9soXS8sFMqdBcTwnkn8cECExtT88X4N8GkaFuI
+	 oTkDYxnBUIyLIMPdjG8fHMfBAlb+lsoMmTbGAZsqwcQdaCZuaTTF/SMGsKVLKfXeeW
+	 AJJc7jUcXTVvopFqohB1WBadBsO0il0UJemlAP0AuM2SD4/c2gOmZQldPvfRF5mP2N
+	 mpQU2/bRP6fpA==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id EBCB186F63;
- Sat,  4 Nov 2023 17:32:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6652A86E05;
+ Sat,  4 Nov 2023 17:32:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699115533;
- bh=/dFPSv5AuXhEqGI5aHuoHyBfY8jPuQQiNtnqYkKEdVk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pNs8L+iqbMlo+09+/tHzfymj3uwW6rfHxNnJOItYxZYMw3OncFW3mhKwzuX9xh64o
- T1buY7RUGtHq0n0m4HNRagfyQNTgkpHHNBbdDhv5x/GReijOIbN+KkjZSTybnW0WVi
- wyjZMENE6OG53Ca+eTfr0i44WZlyjWY/dE0zLiZstoL1Q4jfhh1ZfolexX/zXgDcPn
- JUx3T+ASiy5vzBp+hSoFTz+sa09cXXvHF5wys4HkuqU1xRffhGZgwrRQWAZzl8OnIU
- 2wWoNFDzf2nomVwmpwuWnE3pLAAdIHyeMII4Bu/hCQEINCZEC6h61mWugKc1SIoxjr
- tvPE/x39Te6rQ==
+ s=phobos-20191101; t=1699115572;
+ bh=1plNeaffWD7uQVzevvtFkwj3p/V0NidqBNgZSmxR/9I=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lQ1AqgYxvL34vYPM/efqb7xOUYtN4JrFiTOm8djmgl515fKpfQUXALTOIm5exGk+0
+ f229nIrbotFnaqP3UpGYkea/otiDrhTKGnL6FbHwK5oU1IJrnXolSwgpdYQ4XGtqRK
+ CbgMuQU+fWFJwpZxFhf5FM30rRqdodjNGn4V6naYMMkeE60f1LaYSvj6SNYp1RRb0k
+ htrgWzY8CUk67EPqOt5rHbc/1khPSfKmpDqmh7D/fx5WLy50pTKmn6z8/RjLGmKcCC
+ lq7VPuDYHyMUYt0DvQUwsEZmNiJ7xfUiIJoQS8j3ctOWL815eRTVhgGsnjvKcknlXG
+ Jh4KxVzpRQLMw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Andreas Geisreiter <ageisreiter@dh-electronics.de>,
  Christoph Niedermaier <cniedermaier@dh-electronics.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 2/2] arm: stm32: Limit u-boot.itb size to 0x160000 bytes on DH
- STM32MP15 DHSOM
-Date: Sat,  4 Nov 2023 17:31:57 +0100
-Message-ID: <20231104163203.117382-2-marex@denx.de>
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ u-boot@dh-electronics.com
+Subject: [PATCH 1/2] arm: imx6: Enable TCP, IPv6, wget on DH i.MX6 DHCOM
+Date: Sat,  4 Nov 2023 17:32:20 +0100
+Message-ID: <20231104163243.117404-1-marex@denx.de>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231104163203.117382-1-marex@denx.de>
-References: <20231104163203.117382-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,57 +67,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The maximum size of u-boot.itb in SPI NOR on DH STM32MP15 DHSOM is
-0x160000 . Define this size in U-Boot config to prevent misconfigured
-builds from emitting larger u-boot.itb than the one which fits the
-SPI NOR area reserved for the blob.
-
-The SPI NOR layout is as follows:
-0x00_0000..0x03_ffff ... SPL 1
-0x04_0000..0x07_ffff ... SPL 2
-0x08_0000..0x1d_ffff ... U-Boot
-0x1e_0000..0x1e_ffff ... Environment 1
-0x1f_0000..0x1f_ffff ... Environment 2
+Enable support for TCP protocol, wget, and IPv6 on this platform.
+The former two allow users download payload into the U-Boot from
+a web server, which may be more convenient or easier to set up
+than TFTP server. The later is enabled to future proof the IP
+stack on this platform.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
 Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
 Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- configs/stm32mp15_dhcom_basic_defconfig | 2 ++
- configs/stm32mp15_dhcor_basic_defconfig | 2 ++
- 2 files changed, 4 insertions(+)
+ configs/dh_imx6_defconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-index 08aac878f8e..1d241529be7 100644
---- a/configs/stm32mp15_dhcom_basic_defconfig
-+++ b/configs/stm32mp15_dhcom_basic_defconfig
-@@ -25,6 +25,8 @@ CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0xc2000000
- CONFIG_SYS_MEMTEST_START=0xc0000000
- CONFIG_SYS_MEMTEST_END=0xc4000000
-+CONFIG_HAS_BOARD_SIZE_LIMIT=y
-+CONFIG_BOARD_SIZE_LIMIT=1441792
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
-diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-index 8cd6924b580..6e0c4a8cf9f 100644
---- a/configs/stm32mp15_dhcor_basic_defconfig
-+++ b/configs/stm32mp15_dhcor_basic_defconfig
-@@ -23,6 +23,8 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_SPI=y
- # CONFIG_ARMV7_VIRT is not set
- CONFIG_SYS_LOAD_ADDR=0xc2000000
-+CONFIG_HAS_BOARD_SIZE_LIMIT=y
-+CONFIG_BOARD_SIZE_LIMIT=1441792
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
+diff --git a/configs/dh_imx6_defconfig b/configs/dh_imx6_defconfig
+index 5a83b6a08a2..8d2d46ab659 100644
+--- a/configs/dh_imx6_defconfig
++++ b/configs/dh_imx6_defconfig
+@@ -55,6 +55,9 @@ CONFIG_CMD_SATA=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_WDT=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_BOOTCOUNT=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+@@ -71,6 +74,10 @@ CONFIG_USE_ETHPRIME=y
+ CONFIG_ETHPRIME="FEC"
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_ARP_TIMEOUT=200
++CONFIG_IP_DEFRAG=y
++CONFIG_TFTP_TSIZE=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DWC_AHSATA=y
+ CONFIG_LBA48=y
 -- 
 2.42.0
 
