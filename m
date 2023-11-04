@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 680BBC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:42:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FFCC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8C3D86FC3;
-	Sat,  4 Nov 2023 20:42:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69A2C8703A;
+	Sat,  4 Nov 2023 20:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aEivncyU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XPanSjaj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08DE486E1C; Sat,  4 Nov 2023 20:42:30 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 6DCE88703A; Sat,  4 Nov 2023 20:42:35 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 755ED86487
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:42:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78DA786487
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:42:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7a694a365d9so134220539f.0
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:42:26 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7a98fdeaac7so116316439f.1
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:42:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699126945; x=1699731745; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=S2OX4Eo9v+rQhNr2FvX3vObjPM79OTe5nhhahXKdqeM=;
- b=aEivncyU3206nIU2JWW/8fwrUsBGigd5ONXt3g0fWHq3pEZcKDR3xz5Dwc3t7AQFZD
- xY0SnDb9F25tv+G3zfl5CrRfRCq/+kxWuAWtLP7yh9zfQiXoLwmG+VU0Tn1sTdrsFkvO
- 8EO9uWw22SwnHSe4s7LIHGgeqhUKotb5DEX3s=
+ d=chromium.org; s=google; t=1699126950; x=1699731750; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mUczbla/3nICzQP9ZmDHPTBpFCCiTIH02+1QSP6Uf6s=;
+ b=XPanSjajnltqWWdvWgA7ubne/JT6m4I9qtEpmwPEIV2mVsQENUPUjM5s+997pr7Qct
+ iTThXHaJLZf225wxNW/PfFBnqNno5kr1Fc8WJpEkKKMUAB58uBOtejVW0wqljTMbevHl
+ dKBGaLZnw7qgzUT2Jcj6YN07Zyn4AAic/mIWk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699126945; x=1699731745;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S2OX4Eo9v+rQhNr2FvX3vObjPM79OTe5nhhahXKdqeM=;
- b=NOZsAptjxVG5Tfjg+pKFTLFZFlBBOC0m20qpAdMO8nAX2sLE85T4W5BuXB2KNm0mAg
- jmdYOUOqIF+Rbja3HetfrlCa3j3A9qv+3pmO8KBcKwYAWdoyR8doDPjW1gV2NaRWMTBL
- +ihKSpWe5t731wH/BOGggH3AnixY+ABbpoHOmi+82/5d4GD309DBEMi9RGKbZoObh71s
- E9bjeDvvFBFNAFJ2q+WTxEUQxdM76fxMrgwEW7iYaoIiSjnaRMwFlnhRK3QDGbORo/np
- 05cv113STCjU+SJBukqi6DIRvGQITKSyyqbclNk1nzIJobUXOMKtQ0fRFhETSUsBCR36
- 3eKQ==
-X-Gm-Message-State: AOJu0YyVEJE5zTOwYB55Sv5XxR9xtv6pCYF/+o722ZIH276au2nEzQAh
- vhyAe6vQdCXpBJPEi0stM8PJTQ==
-X-Google-Smtp-Source: AGHT+IEQmOlHpL29TdFXJFPMr5evJiymQwNEjalBxAKtB6JFDUpkecBI6UNYhrYY+8vXDuE77TuE4Q==
-X-Received: by 2002:a05:6602:3419:b0:7a9:4b18:4c89 with SMTP id
- n25-20020a056602341900b007a94b184c89mr31619795ioz.6.1699126945152; 
- Sat, 04 Nov 2023 12:42:25 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1699126950; x=1699731750;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mUczbla/3nICzQP9ZmDHPTBpFCCiTIH02+1QSP6Uf6s=;
+ b=nnV6L/opkODtZZboylOL7qLRi5wMVliCQbEPEw/lj9YeMXF59S8a3GgIsxTe33TfLK
+ NwTJkYg322a54vIxj5nKH/3sUxstoCoZRifgYbdzuohoI9rVFLV3L+d21ClJ3gmv4UOV
+ RqC0Eru9VRcdq/rQfNkHYIy1DsreCY8HEzBeULP7BgpwQfO/Zag8IZOsiKi9fBjU9vUm
+ dXiNUY5pw81FL1414rnx2znI6dZeUfpGOyRJQvBMD4ieM9W40TmVBimCygYcdLETkyAZ
+ 6ZUVTBTxMDKs1IOB3lg0dSKzu2KPvTUCFFDf8QrFDuqU+sLhJ8FdAzP7LDrpmPqCOg5s
+ 0iyQ==
+X-Gm-Message-State: AOJu0YxOcVqdrBNxTm6li088nr9KnAimfBmkNFiau8B4AMSQqBXHrtfv
+ 2kaPepBHk4kT3frFhHFNAvRBiQ==
+X-Google-Smtp-Source: AGHT+IF/fXvPBrPumTSxUQEBjtRyCDMgeyWz6G5jCVwdriNrUNr0MdYxjACyDjlaZtmvTvcGBTB3Yw==
+X-Received: by 2002:a05:6602:1592:b0:790:a073:f122 with SMTP id
+ e18-20020a056602159200b00790a073f122mr37121229iow.2.1699126950221; 
+ Sat, 04 Nov 2023 12:42:30 -0700 (PDT)
 Received: from sjg1.united_club.lax.united.com
  (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- o4-20020a6b5a04000000b0079fbb834232sm1293318iob.19.2023.11.04.12.42.24
+ o4-20020a6b5a04000000b0079fbb834232sm1293318iob.19.2023.11.04.12.42.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Nov 2023 12:42:24 -0700 (PDT)
+ Sat, 04 Nov 2023 12:42:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: linux-arm-kernel@lists.infradead.org
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
  Masahiro Yamada <masahiroy@kernel.org>, Simon Glass <sjg@chromium.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, Nick Terrell <terrelln@fb.com>,
- Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 0/3] arm64: Add a build target for Flat Image Tree
-Date: Sat,  4 Nov 2023 13:42:01 -0600
-Message-ID: <20231104194207.3370542-1-sjg@chromium.org>
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH v2 1/3] kbuild: arm64: Add BOOT_TARGETS variable
+Date: Sat,  4 Nov 2023 13:42:02 -0600
+Message-ID: <20231104194207.3370542-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
+In-Reply-To: <20231104194207.3370542-1-sjg@chromium.org>
+References: <20231104194207.3370542-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,51 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Flat Image Tree (FIT) is a widely used file format for packaging a
-kernel and associated devicetree files[1]. It is not specific to any
-one bootloader, as it is supported by U-Boot, coreboot, Linuxboot,
-Tianocore and Barebox.
+Add a new variable containing a list of possible targets. Mark them as
+phony. This matches the approach taken for arch/arm
 
-This series adds support for building a FIT as part of the kernel
-build. This makes it easy to try out the kernel - just load the FIT
-onto your tftp server and it will run automatically on any supported
-arm64 board.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-The script is written in Python, since it is easy to build a FIT using
-the Python libfdt bindings. For now, no attempt is made to compress
-files in parallel, so building the 900-odd files takes a while, about
-6 seconds with my testing.
+(no changes since v1)
 
-The series also includes a few minor clean-up patches.
+ arch/arm64/Makefile | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-[1] https://github.com/open-source-firmware/flat-image-tree
-
-Changes in v2:
-- Split double-quote change out into its own patch
-- Drop patch previously applied
-- Add .gitignore file
-- Move fit rule to Makefile.lib using an intermediate file
-- Drop dependency on CONFIG_EFI_ZBOOT
-- Pick up .dtb files separately from the kernel
-- Correct pylint to-many-args warning for write_kernel()
-- Include the kernel image in the file count
-- Add a pointer to the FIT spec and mention of its wide industry usage
-- Mention the kernel version in the FIT description
-
-Simon Glass (3):
-  kbuild: arm64: Add BOOT_TARGETS variable
-  arm: boot: Use double quotes for image name
-  arm64: boot: Support Flat Image Tree
-
- MAINTAINERS                |   7 +
- arch/arm64/Makefile        |   7 +-
- arch/arm64/boot/.gitignore |   2 +
- arch/arm64/boot/Makefile   |   9 +-
- scripts/Makefile.lib       |  20 ++-
- scripts/make_fit.py        | 288 +++++++++++++++++++++++++++++++++++++
- 6 files changed, 329 insertions(+), 4 deletions(-)
- create mode 100755 scripts/make_fit.py
-
+diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+index 4bd85cc0d32b..7b77b63e978f 100644
+--- a/arch/arm64/Makefile
++++ b/arch/arm64/Makefile
+@@ -150,6 +150,10 @@ libs-$(CONFIG_EFI_STUB) += $(objtree)/drivers/firmware/efi/libstub/lib.a
+ # Default target when executing plain make
+ boot		:= arch/arm64/boot
+ 
++BOOT_TARGETS	:= Image.gz vmlinuz.efi
++
++PHONY += $(BOOT_TARGETS)
++
+ ifeq ($(CONFIG_EFI_ZBOOT),)
+ KBUILD_IMAGE	:= $(boot)/Image.gz
+ else
+@@ -159,7 +163,7 @@ endif
+ all:	$(notdir $(KBUILD_IMAGE))
+ 
+ 
+-Image vmlinuz.efi: vmlinux
++$(BOOT_TARGETS): vmlinux
+ 	$(Q)$(MAKE) $(build)=$(boot) $(boot)/$@
+ 
+ Image.%: Image
 -- 
 2.42.0.869.gea05f2083d-goog
 
