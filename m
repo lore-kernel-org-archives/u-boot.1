@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4889CC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:26:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C97DC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:26:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6912187116;
+	by phobos.denx.de (Postfix) with ESMTP id E3C008712E;
 	Sat,  4 Nov 2023 17:25:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QvHn02o0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ksyhd/AD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D117387084; Sat,  4 Nov 2023 17:25:42 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 7045686F50; Sat,  4 Nov 2023 17:25:43 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7094A8710C
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 17:25:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA22987092
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 17:25:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7a93b7fedb8so113611039f.3
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 09:25:37 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7a669a4ec51so111936339f.3
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 09:25:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699115136; x=1699719936; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699115134; x=1699719934; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iAKXON5MTBTQDFps/8MyNqWbUug5AIuUSlB0Ur/w9Pg=;
- b=QvHn02o0zgsGzVxa4xpzmt+npxLDST73/vMOrTHu4pXLx4y2+QW3dmjanJvrEcs+zh
- 0Y04z488BWQNo2R8cpxDaLcES1G0Z6nxGw6BpFpHuIB+WOibZ44mTjC9+lnsU4CrK427
- LkyVz0OnTdoiq3oExWqP9z5/tXt37dAxoEOIs=
+ bh=iPIAinNV0gSmK41jN4CgwPMYogxEl1TAWNeFg3x+UN0=;
+ b=ksyhd/ADtOIMRIni1phIuO5CzhwSni+MGqpc+YoNNKvptmBNXwGb84dSt42F3ynAnu
+ UDEEQCXRwi6JbSFxUa9XjTECIciXClqNBpCFTPmtx+al6jAzrUo0d+FxOh4sktmhDCd3
+ lcpdrDklV8NN5SICFLiNpSHQEaBtrkCob3aCw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699115136; x=1699719936;
+ d=1e100.net; s=20230601; t=1699115134; x=1699719934;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iAKXON5MTBTQDFps/8MyNqWbUug5AIuUSlB0Ur/w9Pg=;
- b=Qhirg6ofznX2NcdX3fR2yD8HNbWS+PQSyyPL9EY4xhgnZVasexf3kz/xYM1iOHw06V
- VtbvSnyUx1UBJ95dkI01zMC9+rHhVmxm8Xc8bYZ/sNqNWbLX1EEWCb3tpNdjgkj0nMIW
- FIBAAPXP0Og3xstqhfdN9DTlgcZChf7xzYEO0pc6pfAwDKtEqjzl7Fdt6qEoiMTJvnVO
- XANjYU0YdTpYg3No/D5a59xsQbipEIPUj6KCqXRWrHeXh77dpma2yQdyT/q2boa/X7zM
- TNjKJLD2R8TJmdttvUh5T/7WLp78yr2CPyzuft2DrIrrv0kt9bccYOKdRw68ArFd68Tm
- EBYg==
-X-Gm-Message-State: AOJu0YxpKavwgvbvxxcZVfLmLw3iGXTr+oGMtG1gfA13vZIusje33cXj
- b6iFCUzDFJ6+LhgiwTVsMfBxJZnluzdWoEQ3omEBcQ==
-X-Google-Smtp-Source: AGHT+IG0mUSBjvNXf0Zi4ccNZbbctsCeWYhVv/LKdE/LSOMVN7uTIfDhw9i3/OxlobPs2dDHT5aLLA==
-X-Received: by 2002:a05:6602:1589:b0:7a2:dee5:84b6 with SMTP id
- e9-20020a056602158900b007a2dee584b6mr29496466iow.21.1699115135934; 
- Sat, 04 Nov 2023 09:25:35 -0700 (PDT)
+ bh=iPIAinNV0gSmK41jN4CgwPMYogxEl1TAWNeFg3x+UN0=;
+ b=wHbJwuSmDtmyqZEUbzgJAAhpNHVELLy5uV0/q8w7a4+QXA59P3tI55eor5nDmkQgCc
+ jXfkQCeiTm87DSp/NyKMcCT4IaVMV9do6lFYLZw0qFFeyydYxPbsRhy+w0uZxGlHZJ8g
+ A5EIQ6bn3yT+zbBc+jbibP3y4RzJzXPpq90TgXOdK84F4ffPRufsVcPalgYLk1ku09vY
+ iuvGkCLCM8ftfz85qdMT2N/Z1rUPixpN0YmQU5DQDWTi4HPT7/HbgEQAOaTHd5lE1/a9
+ +demnhEeumtPPd0l0Nbroh1LPSA2VBxgjeLZJ0HAmyWrEx8t2MCtHs6YviSqKwPhtDKx
+ zFSQ==
+X-Gm-Message-State: AOJu0YzLE1sP4rFKe40/fo5k8lm4nxA6Le+RVocSfNpPsUuGzY5SFtL5
+ ob/mDokqG4HI0wIkDZ1mQ5EKs0BYWkc2cZuL/mxr6w==
+X-Google-Smtp-Source: AGHT+IFklQyTZ0HZLDrp+6mbpz9c3zO9jV3DQMf05OnV7arzzlY8LzUnW4fYpQClSg7sPhWDg70mbA==
+X-Received: by 2002:a05:6602:2c55:b0:787:8cf:fd08 with SMTP id
+ x21-20020a0566022c5500b0078708cffd08mr32702243iov.17.1699115134207; 
+ Sat, 04 Nov 2023 09:25:34 -0700 (PDT)
 Received: from sjg1.united_club.lax.united.com
  (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- t4-20020a028784000000b0042bb296863asm1119013jai.56.2023.11.04.09.25.35
+ t4-20020a028784000000b0042bb296863asm1119013jai.56.2023.11.04.09.25.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Nov 2023 09:25:35 -0700 (PDT)
+ Sat, 04 Nov 2023 09:25:33 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Nishanth Menon <nm@ti.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 5/5] patman: Correct Python 3.6 behaviour
-Date: Sat,  4 Nov 2023 10:25:24 -0600
-Message-ID: <20231104162527.1736401-5-sjg@chromium.org>
+Subject: [PATCH 3/5] patman: Correct easy pylint warnings in __main__
+Date: Sat,  4 Nov 2023 10:25:22 -0600
+Message-ID: <20231104162527.1736401-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231104162527.1736401-1-sjg@chromium.org>
 References: <20231104162527.1736401-1-sjg@chromium.org>
@@ -89,42 +89,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The importlib_resources import is not actually used. Fix this so that
-patman can run on Python 3.6 to some extent, once
-'pip3 install importlib-resources' has been run.
+Tidy up the code a little to reduce the number of pylint warnings.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/patman/__main__.py | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ tools/patman/__main__.py | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
 diff --git a/tools/patman/__main__.py b/tools/patman/__main__.py
-index d53f686a2d45..f645b38b6470 100755
+index 87850295e704..3ca858cd3157 100755
 --- a/tools/patman/__main__.py
 +++ b/tools/patman/__main__.py
-@@ -7,10 +7,10 @@
- """See README for more information"""
- 
- try:
--    import importlib.resources
-+    from importlib import resources
- except ImportError:
-     # for Python 3.6
--    import importlib_resources
-+    import importlib_resources as resources
- import os
- import re
+@@ -16,10 +16,10 @@ import re
  import sys
-@@ -69,7 +69,7 @@ def run_patman():
-                                 print(cca)
+ import traceback
+ 
+-if __name__ == "__main__":
+-    # Allow 'from patman import xxx to work'
+-    our_path = os.path.dirname(os.path.realpath(__file__))
+-    sys.path.append(os.path.join(our_path, '..'))
++# Allow 'from patman import xxx to work'
++# pylint: disable=C0413
++our_path = os.path.dirname(os.path.realpath(__file__))
++sys.path.append(os.path.join(our_path, '..'))
+ 
+ # Our modules
+ from patman import cmdline
+@@ -43,6 +43,7 @@ def run_patman():
+ 
+     # Run our meagre tests
+     if args.cmd == 'test':
++        # pylint: disable=C0415
+         from patman import func_test
+         from patman import test_checkpatch
+ 
+@@ -58,16 +59,15 @@ def run_patman():
+         # Called from git with a patch filename as argument
+         # Printout a list of additional CC recipients for this patch
+         if args.cc_cmd:
+-            fd = open(args.cc_cmd, 'r')
+-            re_line = re.compile('(\S*) (.*)')
+-            for line in fd.readlines():
+-                match = re_line.match(line)
+-                if match and match.group(1) == args.patchfiles[0]:
+-                    for cc in match.group(2).split('\0'):
+-                        cc = cc.strip()
+-                        if cc:
+-                            print(cc)
+-            fd.close()
++            re_line = re.compile(r'(\S*) (.*)')
++            with open(args.cc_cmd, 'r', encoding='utf-8') as inf:
++                for line in inf.readlines():
++                    match = re_line.match(line)
++                    if match and match.group(1) == args.patchfiles[0]:
++                        for cca in match.group(2).split('\0'):
++                            cca = cca.strip()
++                            if cca:
++                                print(cca)
  
          elif args.full_help:
--            with importlib.resources.path('patman', 'README.rst') as readme:
-+            with resources.path('patman', 'README.rst') as readme:
-                 tools.print_full_help(str(readme))
-         else:
-             # If we are not processing tags, no need to warning about bad ones
+             with importlib.resources.path('patman', 'README.rst') as readme:
+@@ -85,8 +85,8 @@ def run_patman():
+             control.patchwork_status(args.branch, args.count, args.start, args.end,
+                                      args.dest_branch, args.force,
+                                      args.show_comments, args.patchwork_url)
+-        except Exception as e:
+-            terminal.tprint('patman: %s: %s' % (type(e).__name__, e),
++        except Exception as exc:
++            terminal.tprint(f'patman: {type(exc).__name__}: {exc}',
+                             colour=terminal.Color.RED)
+             if args.debug:
+                 print()
 -- 
 2.42.0.869.gea05f2083d-goog
 
