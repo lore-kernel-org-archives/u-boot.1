@@ -4,85 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41256C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 15:35:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 074F9C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 653DF870BC;
-	Sat,  4 Nov 2023 16:35:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A3E787084;
+	Sat,  4 Nov 2023 17:25:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B0ndXFZI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HbSpA0zG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A94A6870BC; Sat,  4 Nov 2023 16:35:25 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id A1E1486F50; Sat,  4 Nov 2023 17:25:37 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F04E8708A
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 16:35:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CCC0386F50
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 17:25:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3b4145e887bso1633174b6e.3
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 08:35:20 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-7a6830df017so100067939f.3
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 09:25:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699112119; x=1699716919; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Is9bYnZoa9Ia/ljgC302IwC99pSN1vD90wLtE/KKKzc=;
- b=B0ndXFZISsP56sEWIR2AFcdPCiSLj6SwV9Q+Oof44orFa9fT6vvhtrViypC7E5h8Tl
- iA7PXIEfWRJH0iN0PwTazMUaFD7E4KzQ2ssDdEzxXYDs8fLy9oOSrrcd5XubNhS/6Dwl
- MbH0l20iXgwsjyitosEmkjW2rptdnCXG5k5z88tIFDkKebYrdgJIwIi8DBahN7oUzzvD
- s3AMcOg1wyuwoGCwNt3dPAKPE7Ukc8qTxj3WdVxXGHrwleClP6XW/P1iZLn8UMohh5Qu
- 84R7YO3mszAu9Tcb325BL4yCNFmqwQGrXP4vht1K5/6bgz7VN0VK5g50+Tg4rs+3MaPW
- KT6Q==
+ d=chromium.org; s=google; t=1699115132; x=1699719932; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sirnUu/7qRWsc7Eoh45I5dDM3BEXdQkR49ka4KEUWSE=;
+ b=HbSpA0zGOquJiUnclCUIP9Il7039F6/E4TuAZ3zkiqb+/K8etG9J2ddqjrpOZVYjz5
+ fwaPx1ieXGsLY9qf1WXNRDecESV6naeumTSsGQhobAMiaoOFBu76QokJLb/Ro/7XPDy+
+ 4dDqb/wFP8AaqH4ycPI8C7K8g24kntNv+JgO0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699112119; x=1699716919;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Is9bYnZoa9Ia/ljgC302IwC99pSN1vD90wLtE/KKKzc=;
- b=qHNwy3RL2ujYzB3rD2q4c+CCBdBcJlnpYRRCf49RJ88ag69/uqSdyMe57UoVLNzltV
- 3JqqdOmjWtZ7kumsm9SASogyIZq1p0mSjHoCnAfZY/IHYB0lA8EkylXMfUPYWpDvCyAO
- aIOf/ZnXpJ46EmC8okFJ2tuslh4+B9A1Y6rGxNbhDpVZHNkB082d/myMqDsoQn+3UwZ/
- /UXxVP7A5lKR2QnEjbtXVTIvpqYgvBDXXJfYPq5zVjUJ+XeJOkZZzDByCyy23X+Of2eD
- 05ZtNWzEc+Lawxz3XoY9NkmIMTm24X9/04zVhA/m4Lf9BOYIgpkkLK7qaviZF+puPXBZ
- QLJg==
-X-Gm-Message-State: AOJu0Yy12rC5Xs28EQlZJfrLGrJcqXd2m3wEQkOluj69mkC4rNwqeqsE
- aYzdp2Fiqt3EjqYNAJ8drzY=
-X-Google-Smtp-Source: AGHT+IG35GQpngCwk3ltU26MeqxCB2v/wVCocFJfmbDv9wPVu1iwk+szcmKESrm1skticxCUx1HTcg==
-X-Received: by 2002:a05:6808:10c4:b0:3a7:1e98:80ad with SMTP id
- s4-20020a05680810c400b003a71e9880admr30628952ois.9.1699112119572; 
- Sat, 04 Nov 2023 08:35:19 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- v17-20020a05620a091100b0076f18be9a64sm1649086qkv.81.2023.11.04.08.35.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Nov 2023 08:35:19 -0700 (PDT)
-Message-ID: <1059a193-8543-320a-4d88-19afe46771a6@gmail.com>
-Date: Sat, 4 Nov 2023 11:35:18 -0400
+ d=1e100.net; s=20230601; t=1699115132; x=1699719932;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sirnUu/7qRWsc7Eoh45I5dDM3BEXdQkR49ka4KEUWSE=;
+ b=Xq0pmOJan/NhDHBX5588sJ20t7HIUbp6qGgqGfGFI39TA4joBMp20h+hLKLkCZrera
+ /+fuE64JO9/J8GtSHIP5OkwY5tZroyVvq9g2BX7w/CpPFxhvEkLMrv8b5gYTQBlUERue
+ 0hQc/85Ft/MLYMvDQqVx/YZA8Zz82ZYnHA5xe/+jp0OEQItI9BeMge91LRsoVBXS2jYk
+ m/v7+s/ce25HoTT02dbJ1W7FrkSKzTLwMThJIKib8Tkp1ld/TLnI4ZUDWTljdZ/2sQg/
+ q+ZnMyQMV4YiuyatvNdjn2gahgnUKlCMtWe3INzFbpcwnvzdeoBmIFV5uumbDugDxQaf
+ opCg==
+X-Gm-Message-State: AOJu0Yx0HYDaEXv0+LnkGFAxJYNhmLU3rfJGxnQZTbqlI8lbqcJtbtGJ
+ WtAk8+qbwY3Lk5bVo3pPc+HTBQ+I59fxtFQ2UK/hqQ==
+X-Google-Smtp-Source: AGHT+IHELjrcdabAz3SuHL4bBQlQ95/v2LEwgxnCio7MeP1fV5ZNejkchX2hPVeKEkHOZbYV8hFelQ==
+X-Received: by 2002:a6b:c84d:0:b0:7ab:4faa:cb3 with SMTP id
+ y74-20020a6bc84d000000b007ab4faa0cb3mr27191950iof.16.1699115132235; 
+ Sat, 04 Nov 2023 09:25:32 -0700 (PDT)
+Received: from sjg1.united_club.lax.united.com
+ (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ t4-20020a028784000000b0042bb296863asm1119013jai.56.2023.11.04.09.25.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 04 Nov 2023 09:25:31 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Nishanth Menon <nm@ti.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/5] patman: Split out arg parsing into its own file
+Date: Sat,  4 Nov 2023 10:25:20 -0600
+Message-ID: <20231104162527.1736401-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH RESEND 5/5] clk: ccf: call clock provided ops directly for
- endisable()
-Content-Language: en-US
-To: Yang Xiwen <forbidden405@outlook.com>, Lukasz Majewski <lukma@denx.de>
-Cc: u-boot@lists.denx.de
-References: <20230818-clk-fix-v1-0-49ec18f820bf@outlook.com>
- <20230818-clk-fix-v1-5-49ec18f820bf@outlook.com>
- <f996c4ea-81c6-815e-cab1-2d0b09b22135@gmail.com>
- <f94b7313-0dd4-477b-b144-d3b2d08d14ad@outlook.com>
- <SEZPR06MB695927A6DEEEF8489A06897396A7A@SEZPR06MB6959.apcprd06.prod.outlook.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <SEZPR06MB695927A6DEEEF8489A06897396A7A@SEZPR06MB6959.apcprd06.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,99 +86,316 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/1/23 16:33, Yang Xiwen wrote:
-> On 11/2/2023 2:50 AM, Yang Xiwen wrote:
->> On 11/2/2023 2:19 AM, Sean Anderson wrote:
->>> On 8/17/23 13:04, Yang Xiwen via B4 Relay wrote:
->>>> From: Yang Xiwen <forbidden405@outlook.com>
->>>>
->>>> Calling into CCF framework will cause a clock being enabled twice
->>>> instead of once (clk->enable_count becomes 2 rather than 1), thus making
->>>> it hard to disable (needs to call clk_disable() twice).
->>>> Fix that by calling clock provided ops directly.
->>>
->>> Can you describe this scenario more? From what I can tell, clk_enable
->>> doesn't
->>> increment enable_count for CCF clocks.
->>>
->> Well, it's hard to describe clearly. But I can only tell this patch
->> fixed the issue when i was trying to write an Ethernet driver[1] which
->> calls clk_disable() and expects the clock to be disabled after that.
->> Also I found that CCF driver does not have a corresponding test file. I
->> will try to write a test for that in next release.
-> Okay, fine. I read the source again and let me try to explain the whole
-> thing to you briefly. Let's see what happens when we are calling
-> clk_enable(gate).
-> 
-> The source of clk.c is listed below and labeled for clarity:
-> 
-> ```
-> 1	if (CONFIG_IS_ENABLED(CLK_CCF)) {
-> 2		/* Take id 0 as a non-valid clk, such as dummy */
-> 3		if (clk->id && !clk_get_by_id(clk->id, &clkp)) {
-> 4			if (clkp->enable_count) {
-> 5				clkp->enable_count++;
-> 6				return 0;
-> 7			}
-> 8			if (clkp->dev->parent &&
-> 9			    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
-> 10				ret = clk_enable(dev_get_clk_ptr(clkp->dev->parent));
-> 11				if (ret) {
-> 12					printf("Enable %s failed\n",
-> 13					       clkp->dev->parent->name);
-> 14					return ret;
-> 15				}
-> 16			}
-> 17		}
-> 18
-> 19		if (ops->enable) {
-> 20			ret = ops->enable(clk);
-> 21			if (ret) {
-> 22				printf("Enable %s failed\n", clk->dev->name);
-> 23				return ret;
-> 24			}
-> 25		}
-> 26		if (clkp)
-> 27			clkp->enable_count++;
-> 28	} else {
-> 29		if (!ops->enable)
-> 30			return -ENOSYS;
-> 31		return ops->enable(clk);
-> ```
-> 
-> The following steps are executed:
-> 
-> 1. Actually, a "fake" clk is passed to clk_enable() and only clk->id is
-> valid. The actual clk is "clkp";
-> 2. Initially, we runs till `ret = ops->enable(clk)`(line 20), i.e.
-> ccf_clk_enable(clk);
-> 3. Thankfully, ccf_clk_enable() calls clk_get_by_id() to get the real
-> clk and call clk_enable(clkp) again so we won't have an endless loop here.
-> 4. So ops->enable(clk) actually equals to clk_enable(clkp). It's obvious
-> that there is a `clkp->enable_count++` inside the nested function call
-> since it's still 0. Now it becomes 1;
-> 5. The nested clk_enable(clkp) now returns to the outer clk_enable(clk);
-> 6. Unfortunately, there is a `if (clkp) clkp->enable_count++;`(line 26)
-> afterwards. Now it becomes 2.
-> 7. Finally, we got a clk being enabled twice. "clkp->enable_count" is 2 now.
+Move this code into a separate cmdline module, as is done with the
+other tools.
 
-OK, thank you for writing this up; it is clearer now. Please include this in
-your commit message.
+Use the same HAS_TESTS check as buildman
 
-> Obviously it's not the intended behavior. We can either fix clk_enable()
-> or ccf_clk_endisable() to resolve this. But I choose to touch
-> ccf_clk_endisable() since it's less commonly used.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Hm, what if we added something like clk_raw_enable, which just did
+ tools/patman/__main__.py | 116 +-----------------------------
+ tools/patman/cmdline.py  | 147 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 150 insertions(+), 113 deletions(-)
+ create mode 100644 tools/patman/cmdline.py
 
-> 19		if (ops->enable) {
-> 20			ret = ops->enable(clk);
-> 21			if (ret) {
-> 22				printf("Enable %s failed\n", clk->dev->name);
-> 23				return ret;
-> 24			}
-> 25		}
+diff --git a/tools/patman/__main__.py b/tools/patman/__main__.py
+index 197ac1aad103..0e559b5810be 100755
+--- a/tools/patman/__main__.py
++++ b/tools/patman/__main__.py
+@@ -6,7 +6,6 @@
+ 
+ """See README for more information"""
+ 
+-from argparse import ArgumentParser
+ try:
+     import importlib.resources
+ except ImportError:
+@@ -23,128 +22,19 @@ if __name__ == "__main__":
+     sys.path.append(os.path.join(our_path, '..'))
+ 
+ # Our modules
++from patman import cmdline
+ from patman import control
+ from patman import func_test
+-from patman import gitutil
+-from patman import project
+-from patman import settings
+ from u_boot_pylib import terminal
+ from u_boot_pylib import test_util
+ from u_boot_pylib import tools
+ 
+-epilog = '''Create patches from commits in a branch, check them and email them
+-as specified by tags you place in the commits. Use -n to do a dry run first.'''
+-
+-parser = ArgumentParser(epilog=epilog)
+-parser.add_argument('-b', '--branch', type=str,
+-    help="Branch to process (by default, the current branch)")
+-parser.add_argument('-c', '--count', dest='count', type=int,
+-    default=-1, help='Automatically create patches from top n commits')
+-parser.add_argument('-e', '--end', type=int, default=0,
+-    help='Commits to skip at end of patch list')
+-parser.add_argument('-D', '--debug', action='store_true',
+-    help='Enabling debugging (provides a full traceback on error)')
+-parser.add_argument('-p', '--project', default=project.detect_project(),
+-                    help="Project name; affects default option values and "
+-                    "aliases [default: %(default)s]")
+-parser.add_argument('-P', '--patchwork-url',
+-                    default='https://patchwork.ozlabs.org',
+-                    help='URL of patchwork server [default: %(default)s]')
+-parser.add_argument('-s', '--start', dest='start', type=int,
+-    default=0, help='Commit to start creating patches from (0 = HEAD)')
+-parser.add_argument('-v', '--verbose', action='store_true', dest='verbose',
+-                    default=False, help='Verbose output of errors and warnings')
+-parser.add_argument('-H', '--full-help', action='store_true', dest='full_help',
+-                    default=False, help='Display the README file')
+-
+-subparsers = parser.add_subparsers(dest='cmd')
+-send = subparsers.add_parser(
+-    'send', help='Format, check and email patches (default command)')
+-send.add_argument('-i', '--ignore-errors', action='store_true',
+-       dest='ignore_errors', default=False,
+-       help='Send patches email even if patch errors are found')
+-send.add_argument('-l', '--limit-cc', dest='limit', type=int, default=None,
+-       help='Limit the cc list to LIMIT entries [default: %(default)s]')
+-send.add_argument('-m', '--no-maintainers', action='store_false',
+-       dest='add_maintainers', default=True,
+-       help="Don't cc the file maintainers automatically")
+-send.add_argument(
+-    '--get-maintainer-script', dest='get_maintainer_script', type=str,
+-    action='store',
+-    default=os.path.join(gitutil.get_top_level(), 'scripts',
+-                         'get_maintainer.pl') + ' --norolestats',
+-    help='File name of the get_maintainer.pl (or compatible) script.')
+-send.add_argument('-n', '--dry-run', action='store_true', dest='dry_run',
+-       default=False, help="Do a dry run (create but don't email patches)")
+-send.add_argument('-r', '--in-reply-to', type=str, action='store',
+-                  help="Message ID that this series is in reply to")
+-send.add_argument('-t', '--ignore-bad-tags', action='store_true',
+-                  default=False,
+-                  help='Ignore bad tags / aliases (default=warn)')
+-send.add_argument('-T', '--thread', action='store_true', dest='thread',
+-                  default=False, help='Create patches as a single thread')
+-send.add_argument('--cc-cmd', dest='cc_cmd', type=str, action='store',
+-       default=None, help='Output cc list for patch file (used by git)')
+-send.add_argument('--no-binary', action='store_true', dest='ignore_binary',
+-                  default=False,
+-                  help="Do not output contents of changes in binary files")
+-send.add_argument('--no-check', action='store_false', dest='check_patch',
+-                  default=True,
+-                  help="Don't check for patch compliance")
+-send.add_argument('--tree', dest='check_patch_use_tree', default=False,
+-                  action='store_true',
+-                  help=("Set `tree` to True. If `tree` is False then we'll "
+-                  "pass '--no-tree' to checkpatch (default: tree=%(default)s)"))
+-send.add_argument('--no-tree', dest='check_patch_use_tree',
+-                  action='store_false', help="Set `tree` to False")
+-send.add_argument('--no-tags', action='store_false', dest='process_tags',
+-                  default=True, help="Don't process subject tags as aliases")
+-send.add_argument('--no-signoff', action='store_false', dest='add_signoff',
+-                  default=True, help="Don't add Signed-off-by to patches")
+-send.add_argument('--smtp-server', type=str,
+-                  help="Specify the SMTP server to 'git send-email'")
+-send.add_argument('--keep-change-id', action='store_true',
+-                  help='Preserve Change-Id tags in patches to send.')
+-
+-send.add_argument('patchfiles', nargs='*')
+-
+-# Only add the 'test' action if the test data files are available.
+-if os.path.exists(func_test.TEST_DATA_DIR):
+-    test_parser = subparsers.add_parser('test', help='Run tests')
+-    test_parser.add_argument('testname', type=str, default=None, nargs='?',
+-                             help="Specify the test to run")
+-
+-status = subparsers.add_parser('status',
+-                               help='Check status of patches in patchwork')
+-status.add_argument('-C', '--show-comments', action='store_true',
+-                    help='Show comments from each patch')
+-status.add_argument('-d', '--dest-branch', type=str,
+-                    help='Name of branch to create with collected responses')
+-status.add_argument('-f', '--force', action='store_true',
+-                    help='Force overwriting an existing branch')
+-
+-# Parse options twice: first to get the project and second to handle
+-# defaults properly (which depends on project)
+-# Use parse_known_args() in case 'cmd' is omitted
+-argv = sys.argv[1:]
+-args, rest = parser.parse_known_args(argv)
+-if hasattr(args, 'project'):
+-    settings.Setup(parser, args.project)
+-    args, rest = parser.parse_known_args(argv)
+-
+-# If we have a command, it is safe to parse all arguments
+-if args.cmd:
+-    args = parser.parse_args(argv)
+-else:
+-    # No command, so insert it after the known arguments and before the ones
+-    # that presumably relate to the 'send' subcommand
+-    nargs = len(rest)
+-    argv = argv[:-nargs] + ['send'] + rest
+-    args = parser.parse_args(argv)
+ 
+ if __name__ != "__main__":
+     pass
+ 
++args = cmdline.parse_args()
++
+ if not args.debug:
+     sys.tracebacklimit = 0
+ 
+diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
+new file mode 100644
+index 000000000000..d6496c0cb780
+--- /dev/null
++++ b/tools/patman/cmdline.py
+@@ -0,0 +1,147 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright 2023 Google LLC
++#
++
++"""Handles parsing of buildman arguments
++
++This creates the argument parser and uses it to parse the arguments passed in
++"""
++
++import argparse
++import os
++import pathlib
++import sys
++
++from patman import gitutil
++from patman import project
++from patman import settings
++
++PATMAN_DIR = pathlib.Path(__file__).parent
++HAS_TESTS = os.path.exists(PATMAN_DIR / "func_test.py")
++
++def parse_args():
++    """Parse command line arguments from sys.argv[]
++
++    Returns:
++        tuple containing:
++            options: command line options
++            args: command lin arguments
++    """
++    epilog = '''Create patches from commits in a branch, check them and email
++        them as specified by tags you place in the commits. Use -n to do a dry
++        run first.'''
++
++    parser = argparse.ArgumentParser(epilog=epilog)
++    parser.add_argument('-b', '--branch', type=str,
++        help="Branch to process (by default, the current branch)")
++    parser.add_argument('-c', '--count', dest='count', type=int,
++        default=-1, help='Automatically create patches from top n commits')
++    parser.add_argument('-e', '--end', type=int, default=0,
++        help='Commits to skip at end of patch list')
++    parser.add_argument('-D', '--debug', action='store_true',
++        help='Enabling debugging (provides a full traceback on error)')
++    parser.add_argument('-p', '--project', default=project.detect_project(),
++                        help="Project name; affects default option values and "
++                        "aliases [default: %(default)s]")
++    parser.add_argument('-P', '--patchwork-url',
++                        default='https://patchwork.ozlabs.org',
++                        help='URL of patchwork server [default: %(default)s]')
++    parser.add_argument('-s', '--start', dest='start', type=int,
++        default=0, help='Commit to start creating patches from (0 = HEAD)')
++    parser.add_argument(
++        '-v', '--verbose', action='store_true', dest='verbose', default=False,
++        help='Verbose output of errors and warnings')
++    parser.add_argument(
++        '-H', '--full-help', action='store_true', dest='full_help',
++        default=False, help='Display the README file')
++
++    subparsers = parser.add_subparsers(dest='cmd')
++    send = subparsers.add_parser(
++        'send', help='Format, check and email patches (default command)')
++    send.add_argument('-i', '--ignore-errors', action='store_true',
++           dest='ignore_errors', default=False,
++           help='Send patches email even if patch errors are found')
++    send.add_argument('-l', '--limit-cc', dest='limit', type=int, default=None,
++           help='Limit the cc list to LIMIT entries [default: %(default)s]')
++    send.add_argument('-m', '--no-maintainers', action='store_false',
++           dest='add_maintainers', default=True,
++           help="Don't cc the file maintainers automatically")
++    send.add_argument(
++        '--get-maintainer-script', dest='get_maintainer_script', type=str,
++        action='store',
++        default=os.path.join(gitutil.get_top_level(), 'scripts',
++                             'get_maintainer.pl') + ' --norolestats',
++        help='File name of the get_maintainer.pl (or compatible) script.')
++    send.add_argument('-n', '--dry-run', action='store_true', dest='dry_run',
++           default=False, help="Do a dry run (create but don't email patches)")
++    send.add_argument('-r', '--in-reply-to', type=str, action='store',
++                      help="Message ID that this series is in reply to")
++    send.add_argument('-t', '--ignore-bad-tags', action='store_true',
++                      default=False,
++                      help='Ignore bad tags / aliases (default=warn)')
++    send.add_argument('-T', '--thread', action='store_true', dest='thread',
++                      default=False, help='Create patches as a single thread')
++    send.add_argument('--cc-cmd', dest='cc_cmd', type=str, action='store',
++           default=None, help='Output cc list for patch file (used by git)')
++    send.add_argument('--no-binary', action='store_true', dest='ignore_binary',
++                      default=False,
++                      help="Do not output contents of changes in binary files")
++    send.add_argument('--no-check', action='store_false', dest='check_patch',
++                      default=True,
++                      help="Don't check for patch compliance")
++    send.add_argument(
++        '--tree', dest='check_patch_use_tree', default=False,
++        action='store_true',
++        help=("Set `tree` to True. If `tree` is False then we'll pass "
++              "'--no-tree' to checkpatch (default: tree=%(default)s)"))
++    send.add_argument('--no-tree', dest='check_patch_use_tree',
++                      action='store_false', help="Set `tree` to False")
++    send.add_argument(
++        '--no-tags', action='store_false', dest='process_tags', default=True,
++        help="Don't process subject tags as aliases")
++    send.add_argument('--no-signoff', action='store_false', dest='add_signoff',
++                      default=True, help="Don't add Signed-off-by to patches")
++    send.add_argument('--smtp-server', type=str,
++                      help="Specify the SMTP server to 'git send-email'")
++    send.add_argument('--keep-change-id', action='store_true',
++                      help='Preserve Change-Id tags in patches to send.')
++
++    send.add_argument('patchfiles', nargs='*')
++
++    # Only add the 'test' action if the test data files are available.
++    if HAS_TESTS:
++        test_parser = subparsers.add_parser('test', help='Run tests')
++        test_parser.add_argument('testname', type=str, default=None, nargs='?',
++                                 help="Specify the test to run")
++
++    status = subparsers.add_parser('status',
++                                   help='Check status of patches in patchwork')
++    status.add_argument('-C', '--show-comments', action='store_true',
++                        help='Show comments from each patch')
++    status.add_argument(
++        '-d', '--dest-branch', type=str,
++        help='Name of branch to create with collected responses')
++    status.add_argument('-f', '--force', action='store_true',
++                        help='Force overwriting an existing branch')
++
++    # Parse options twice: first to get the project and second to handle
++    # defaults properly (which depends on project)
++    # Use parse_known_args() in case 'cmd' is omitted
++    argv = sys.argv[1:]
++    args, rest = parser.parse_known_args(argv)
++    if hasattr(args, 'project'):
++        settings.Setup(parser, args.project)
++        args, rest = parser.parse_known_args(argv)
++
++    # If we have a command, it is safe to parse all arguments
++    if args.cmd:
++        args = parser.parse_args(argv)
++    else:
++        # No command, so insert it after the known arguments and before the ones
++        # that presumably relate to the 'send' subcommand
++        nargs = len(rest)
++        argv = argv[:-nargs] + ['send'] + rest
++        args = parser.parse_args(argv)
++
++    return args
+-- 
+2.42.0.869.gea05f2083d-goog
 
-and the same thing for disable.
-
---Sean
