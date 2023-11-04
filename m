@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CA6AC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 08:11:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FD34C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 08:11:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ED15871A1;
-	Sat,  4 Nov 2023 09:11:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A656D87091;
+	Sat,  4 Nov 2023 09:11:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="S/RZQfmL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GrN56CJ5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C620F8719F; Sat,  4 Nov 2023 09:11:23 +0100 (CET)
+ id E37BE871E7; Sat,  4 Nov 2023 09:11:25 +0100 (CET)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA16787091
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 09:11:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DD77870FC
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 09:11:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A48B584007374;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A48B5hT007370;
  Sat, 4 Nov 2023 03:11:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1699085465;
- bh=Ewqi3zaH+7AZB71BpRcNy28bxOXbLLU+go91+TlhPL0=;
+ bh=BKRE4gu1Rm5HS5xdDq2piSQYCnrw1OmsmxX94P6CQhw=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=S/RZQfmLDGQF64Ll9Fl6WjnElAOr0ieA/SXvqaHWpuiiDzrInEXH4jS6myiMj/JiA
- hVVdw78gZKcSyGNsgSaJT1PtihEJMK4+5XPAe+FsH9gf/ycnqVHVcNLHscJLZpev4w
- 5sA94dEOyAoJPJfEHQmlROmjrvUCXK5xsQPONjbs=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A48B5mh057184
+ b=GrN56CJ5p4QynydfKuaDw/drRWWNiJMw17HDJFgjo9D5Tpw0yMNMy6oJB5iuXv9mU
+ 3t3nEl38jhtsMDUQOxSBBgPbdCeONBrbGzJ7Gewq7L3cxvY2h69/wViD9E7bWpl09a
+ jBJAqYPiKzEFpewMYcAi+WkVwvqWhIBO9z5szYfk=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A48B5N7017590
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Sat, 4 Nov 2023 03:11:05 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 4
  Nov 2023 03:11:05 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE114.ent.ti.com
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
  (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Sat, 4 Nov 2023 03:11:05 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A48B5If027303;
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A48B5FE108911;
  Sat, 4 Nov 2023 03:11:05 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -57,9 +57,9 @@ CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
  Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH V2 4/4] doc: board: beagle: Add BeagleBone AI-64 documentation
-Date: Sat, 4 Nov 2023 03:11:03 -0500
-Message-ID: <20231104081103.10607-5-nm@ti.com>
+Subject: [PATCH V2 3/4] configs: Add j721e_beagleboneai64_* configs
+Date: Sat, 4 Nov 2023 03:11:02 -0500
+Message-ID: <20231104081103.10607-4-nm@ti.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20231104081103.10607-1-nm@ti.com>
 References: <20231104081103.10607-1-nm@ti.com>
@@ -83,370 +83,331 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add base documentation for BeagleBone AI-64.
+Add basic support for mmc/emmc and networking support for BeagleBone
+AI-64.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- doc/board/beagle/index.rst                |   1 +
- doc/board/beagle/j721e_beagleboneai64.rst | 327 ++++++++++++++++++++++
- doc/board/ti/k3.rst                       |   1 +
- 3 files changed, 329 insertions(+)
- create mode 100644 doc/board/beagle/j721e_beagleboneai64.rst
+ configs/j721e_beagleboneai64_a72_defconfig | 171 +++++++++++++++++++++
+ configs/j721e_beagleboneai64_r5_defconfig  | 131 ++++++++++++++++
+ 2 files changed, 302 insertions(+)
+ create mode 100644 configs/j721e_beagleboneai64_a72_defconfig
+ create mode 100644 configs/j721e_beagleboneai64_r5_defconfig
 
-diff --git a/doc/board/beagle/index.rst b/doc/board/beagle/index.rst
-index e6f9b7480d31..9124546ebc79 100644
---- a/doc/board/beagle/index.rst
-+++ b/doc/board/beagle/index.rst
-@@ -11,3 +11,4 @@ ARM based boards
-    :maxdepth: 2
- 
-    am62x_beagleplay
-+   j721e_beagleboneai64
-diff --git a/doc/board/beagle/j721e_beagleboneai64.rst b/doc/board/beagle/j721e_beagleboneai64.rst
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
 new file mode 100644
-index 000000000000..d6b9c8ca606a
+index 000000000000..9e16c98d15c5
 --- /dev/null
-+++ b/doc/board/beagle/j721e_beagleboneai64.rst
-@@ -0,0 +1,327 @@
-+.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+.. sectionauthor:: Nishanth Menon <nm@ti.com>
-+
-+J721E/TDA4VM Beagleboard.org BeagleBone AI-64
-+=============================================
-+
-+Introduction:
-+-------------
-+
-+BeagleBoard.org BeagleBone AI-64 is an open source hardware single
-+board computer based on the Texas Instruments TDA4VM SoC featuring
-+dual-core 2.0GHz Arm Cortex-A72 processor, C7x+MMA and 2 C66x
-+floating-point VLIW DSPs, 3x dual ARM Cortex-R5 co-processors,
-+2x 6-core Programmable Real-Time Unit and Industrial Communication
-+SubSystem, PowerVR Rogue 8XE GE8430 3D GPU. The board features 4GB
-+DDR4, USB3.0 Type-C, 2x USB SS Type-A, miniDisplayPort, 2x 4-lane
-+CSI, DSI, 16GB eMMC flash, 1G Ethernet, M.2 E-key for WiFi/BT, and
-+BeagleBone expansion headers.
-+
-+Further information can be found at:
-+
-+* Product Page: https://beagleboard.org/ai-64
-+* Hardware documentation: https://git.beagleboard.org/beagleboard/beaglebone-ai-64
-+
-+Boot Flow:
-+----------
-+Below is the pictorial representation of boot flow:
-+
-+.. image:: ../ti/img/boot_diagram_j721e.svg
-+  :alt: Boot flow diagram
-+
-+- On this platform, DMSC runs 'TI Foundational Security' (TIFS) which
-+  functions as the security enclave master. The 'Device Manager' (DM),
-+  also known as the 'TISCI server' in "TI terminology", running on boot
-+  R5F, offers all the essential services required for device management.
-+  The A72, C7x, C6x or R5F (Aux cores) sends requests to TIFS/DM to
-+  accomplish the needed services, as illustrated in the diagram above.
-+
-+Sources:
-+--------
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure:
-+----------------
-+0. Setup the environment variables:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+.. prompt:: bash $
-+
-+  export UBOOT_CFG_CORTEXR=j721e_beagleboneai64_r5_defconfig
-+  export UBOOT_CFG_CORTEXA=j721e_beagleboneai64_a72_defconfig
-+  export TFA_BOARD=generic
-+  # we dont use any extra TFA parameters
-+  unset TFA_EXTRA_ARGS
-+  export OPTEE_PLATFORM=k3-j721e
-+  # we dont use any extra OP-TEE parameters
-+  unset OPTEE_EXTRA_ARGS
-+
-+.. include::  ../ti/j721e_evm.rst
-+    :start-after: .. j721e_evm_rst_include_start_build_steps
-+    :end-before: .. j721e_evm_rst_include_end_build_steps
-+
-+Target Images
-+--------------
-+Copy the below images to an SD card and boot:
-+
-+* tiboot3-j721e-gp-evm.bin from R5 build as tiboot3.bin
-+* tispl.bin_unsigned from Cortex-A build as tispl.bin
-+* u-boot.img_unsigned from Cortex-A build as u-boot.img
-+
-+Image formats
-+-------------
-+
-+- tiboot3.bin
-+
-+.. image:: ../ti/img/no_multi_cert_tiboot3.bin.svg
-+  :alt: tiboot3.bin image format
-+
-+- tispl.bin
-+
-+.. image:: ../ti/img/dm_tispl.bin.svg
-+  :alt: tispl.bin image format
-+
-+- sysfw.itb
-+
-+.. image:: ../ti/img/sysfw.itb.svg
-+  :alt: sysfw.itb image format
-+
-+Additional hardware for U-Boot development
-+------------------------------------------
-+
-+* Serial Console is critical for U-Boot development on BeagleBone AI-64. See
-+  `BeagleBone AI-64 connector documentation
-+  <https://docs.beagleboard.org/latest/boards/beaglebone/ai-64/ch07.html>`_.
-+* uSD is preferred option over eMMC, and a SD/MMC reader will be needed.
-+* (optionally) JTAG is useful when working with very early stages of boot.
-+
-+Default storage options
-+-----------------------
-+
-+There are multiple storage media options on BeagleBone AI-64, but primarily:
-+
-+* Onboard eMMC (default) - reliable, fast and meant for deployment use.
-+* SD/MMC card interface (hold 'BOOT' switch and power on) - Entirely
-+  depends on the SD card quality.
-+
-+Flash to uSD card or how to deal with "bricked" Board
-+--------------------------------------------------------
-+
-+When deploying or working on Linux, it's common to use the onboard
-+eMMC. However, avoiding the eMMC and using the uSD card is safer when
-+working with U-Boot.
-+
-+If you choose to  hand format your own bootable uSD card, be
-+aware that it can be difficult. The following information
-+may be helpful, but remember that it is only sometimes
-+reliable, and partition options can cause issues. These
-+can potentially help:
-+
-+* https://git.ti.com/cgit/arago-project/tisdk-setup-scripts/tree/create-sdcard.sh
-+* https://elinux.org/Beagleboard:Expanding_File_System_Partition_On_A_microSD
-+
-+The simplest option is to start with a standard distribution
-+image like those in `BeagleBoard.org Distros Page
-+<https://www.beagleboard.org/distros>`_ and download a disk image for
-+BeagleBone AI-64. Pick a 16GB+ uSD card to be on the safer side.
-+
-+With an SD/MMC Card reader and `Balena Etcher
-+<https://etcher.balena.io/>`_, having a functional setup in minutes is
-+a trivial matter, and it works on almost all Host Operating Systems.
-+Yes Windows users, Windows Subsystem for Linux(WSL) based development
-+with U-Boot and update uSD card is practical.
-+
-+Updating U-Boot is a matter of copying the tiboot3.bin, tispl.bin and
-+u-boot.img to the "BOOT" partition of the uSD card. Remember to sync
-+and unmount (or Eject - depending on the Operating System) the uSD
-+card prior to physically removing from SD card reader.
-+
-+Also see following section on switch setting used for booting using
-+uSD card.
-+
-+.. note::
-+  Great news! If the board has not been damaged physically, there's no
-+  need to worry about it being "bricked" on this platform. You only have
-+  to flash an uSD card, plug it in, and reinstall the image on eMMC. This
-+  means that even if you make a mistake, you can quickly fix it and rest
-+  easy.
-+
-+  If you are frequently working with uSD cards, you might find the
-+  following useful:
-+
-+  * `USB-SD-Mux <https://www.linux-automation.com/en/products/usb-sd-mux.html>`_
-+  * `SD-Wire <https://wiki.tizen.org/SDWire>`_
-+
-+Flash to eMMC
-+-------------
-+
-+The eMMC layout selected is user-friendly for developers. The
-+boot hardware partition of the eMMC only contains the fixed-size
-+tiboot3.bin image. This is because the contents of the boot partitions
-+need to run from the SoC's internal SRAM, which remains a fixed size
-+constant. The other components of the boot sequence, such as tispl.bin
-+and u-boot.img, are located in the /BOOT partition in the User Defined
-+Area (UDA) hardware partition of the eMMC. These components can vary
-+significantly in size. The choice of keeping tiboot3.bin in boot0 or
-+boot1 partition depends on A/B update requirements.
-+
-+.. image:: img/beagleplay_emmc.svg
-+  :alt: eMMC partitions and boot file organization for BeagleBone AI-64
-+
-+The following are the steps from Linux shell to program eMMC:
-+
-+.. prompt:: bash #
-+
-+  # Enable Boot0 boot
-+  mmc bootpart enable 1 2 /dev/mmcblk0
-+  mmc bootbus set single_backward x1 x8 /dev/mmcblk0
-+  mmc hwreset enable /dev/mmcblk0
-+
-+  # Clear eMMC boot0
-+  echo '0' >> /sys/class/block/mmcblk0boot0/force_ro
-+  dd if=/dev/zero of=/dev/mmcblk0boot0 count=32 bs=128k
-+  # Write tiboot3.bin
-+  dd if=tiboot3.bin of=/dev/mmcblk0boot0 bs=128k
-+
-+  # Copy the rest of the boot binaries
-+  mount /dev/mmcblk0p1 /boot/firmware
-+  cp tispl.bin /boot/firmware
-+  cp u-boot.img /boot/firmware
-+  sync
-+
-+.. warning ::
-+
-+  U-Boot is configured to prioritize booting from an SD card if it
-+  detects a valid boot partition and boot files on it, even if the
-+  system initially booted from eMMC. The boot order is set as follows:
-+
-+  * SD/MMC
-+  * eMMC
-+  * USB
-+  * PXE
-+
-+LED patterns during boot
-+------------------------
-+
-+.. list-table:: USR LED status indication
-+   :widths: 16 16
-+   :header-rows: 1
-+
-+   * - USR LEDs (012345)
-+     - Indicates
-+
-+   * - 00000
-+     - Boot failure or R5 image not started up
-+
-+   * - 11111
-+     - A53 SPL/U-boot has started up
-+
-+   * - 10101
-+     - OS boot process has been initiated
-+
-+   * - 01010
-+     - OS boot process failed and drops to U-Boot shell
-+
-+.. note ::
-+
-+  In the table above, 0 indicates LED switched off and 1 indicates LED
-+  switched ON.
-+
-+.. warning ::
-+
-+  The green LED very next to the serial connector labelled "WKUP UART0"
-+  is the power LED (LED6). This is the same color as the rest of the USR
-+  LEDs. If the "green" LED6 power LED is not glowing, the system power
-+  supply is not functional. Please refer to `BeagleBone AI-64 documentation
-+  <https://beagleboard.org/ai-64/>`_ for further information.
-+
-+Switch Setting for Boot Mode
-+----------------------------
-+
-+The boot time option is configured via "BOOT" button on the board.
-+See `BeagleBone AI-64 Schematics <https://git.beagleboard.org/beagleboard/beaglebone-ai-64/-/blob/main/BeagleBone_AI-64_SCH.pdf>`_
-+for details.
-+
-+.. list-table:: Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - BOOT Switch Position
-+     - Primary Boot
-+     - Secondary Boot
-+
-+   * - Not Pressed
-+     - eMMC
-+     - SD Card
-+
-+   * - Pressed
-+     - SD Card
-+     - SD Card
-+
-+To switch to SD card boot mode, hold the BOOT button while powering on
-+with Type-C power supply, then release when power LED lights up.
-+
-+Debugging U-Boot
-+----------------
-+
-+See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-+detailed setup and debugging information.
-+
-+.. warning::
-+
-+  **OpenOCD support since**: v0.12.0
-+
-+  If the default package version of OpenOCD in your development
-+  environment's distribution needs to be updated, it might be necessary to
-+  build OpenOCD from the source.
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_tag_connect
-+    :end-before: .. k3_rst_include_end_openocd_connect_tag_connect
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
-+    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
-+
-+For example, with BeagleBone AI-64 (J721e platform), the openocd_connect.cfg:
-+
-+.. code-block:: tcl
-+
-+  # TUMPA example:
-+  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
-+  source [find interface/ftdi/tumpa.cfg]
-+
-+  transport select jtag
-+
-+  # default JTAG configuration has only SRST and no TRST
-+  reset_config srst_only srst_push_pull
-+
-+  # delay after SRST goes inactive
-+  adapter srst delay 20
-+
-+  if { ![info exists SOC] } {
-+    # Set the SoC of interest
-+    set SOC j721e
-+  }
-+
-+  source [find target/ti_k3.cfg]
-+
-+  ftdi tdo_sample_edge falling
-+
-+  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
-+  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
-+  adapter speed 16000
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 45f62fb094e8..723cfe2703b7 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -36,6 +36,7 @@ K3 Based SoCs
-    am64x_evm
-    am65x_evm
-    j7200_evm
-+   ../beagle/j721e_beagleboneai64
-    j721e_evm
-    j721s2_evm
- 
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -0,0 +1,171 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SOC_K3_J721E=y
++CONFIG_TARGET_J721E_A72_BEAGLEBONEAI64=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-beagleboneai64"
++CONFIG_SPL_TEXT_BASE=0x80080000
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++# CONFIG_PSCI_RESET is not set
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
++CONFIG_BOOTSTD_FULL=y
++CONFIG_BOOTSTD_DEFAULTS=y
++CONFIG_AUTOBOOT_KEYED=y
++CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
++CONFIG_AUTOBOOT_DELAY_STR="d"
++CONFIG_AUTOBOOT_STOP_STR=" "
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_BOOTCOMMAND="run set_led_state_start_load;run findfdt; run envboot; bootflow scan -lb;run set_led_state_fail_load"
++CONFIG_LOGLEVEL=7
++CONFIG_SPL_MAX_SIZE=0xc0000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x80a00000
++CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_NOR_SUPPORT=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_SYS_MAXARGS=64
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPIO_READ=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_MMC_SPEED_MODE_SET=y
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_SPL_EFI_PARTITION is not set
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x20000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x82000000
++CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=0
++CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_DM_I2C_GPIO=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_LED=y
++CONFIG_SPL_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_SPL_LED_GPIO=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS200_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD_UBI=y
++CONFIG_MULTIPLEXER=y
++CONFIG_MUX_MMIO=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_PHY_FIXED=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_PHY=y
++CONFIG_SPL_PHY=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_RAM=y
++CONFIG_SPL_RAM=y
++CONFIG_REMOTEPROC_TI_K3_DSP=y
++CONFIG_REMOTEPROC_TI_K3_R5F=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_SCSI=y
++CONFIG_DM_SCSI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_CDNS3=y
++CONFIG_USB_CDNS3_GADGET=y
++CONFIG_USB_CDNS3_HOST=y
++CONFIG_SPL_USB_CDNS3_GADGET=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6163
++CONFIG_SPL_DFU=y
++CONFIG_LZO=y
+diff --git a/configs/j721e_beagleboneai64_r5_defconfig b/configs/j721e_beagleboneai64_r5_defconfig
+new file mode 100644
+index 000000000000..5e6ad7bc2f02
+--- /dev/null
++++ b/configs/j721e_beagleboneai64_r5_defconfig
+@@ -0,0 +1,131 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x70000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SOC_K3_J721E=y
++CONFIG_K3_EARLY_CONS=y
++CONFIG_TARGET_J721E_R5_BEAGLEBONEAI64=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41cf59f0
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-r5-beagleboneai64"
++CONFIG_SPL_TEXT_BASE=0x41c00000
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_SIZE_LIMIT=0xf59f0
++CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
++CONFIG_USE_BOOTCOMMAND=y
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_MAX_SIZE=0xf59f0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x41cf59f0
++CONFIG_SPL_BSS_MAX_SIZE=0xa000
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
++CONFIG_SPL_EARLY_BSS=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_EXT4=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_REMOTEPROC=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_HUSH_PARSER=y
++CONFIG_SYS_MAXARGS=64
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_CMD_DFU=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_REMOTEPROC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIST="k3-j721e-r5-common-proc-board"
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_OF_LIST="k3-j721e-r5-beagleboneai64"
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_SPL_CLK_K3_PLL=y
++CONFIG_SPL_CLK_K3=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_FS_LOADER=y
++CONFIG_SPL_FS_LOADER=y
++CONFIG_SPL_MMC_HS200_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_POWER_DOMAIN=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_TPS65941=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_TPS65941=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_TIMER=y
++CONFIG_SPL_TIMER=y
++CONFIG_OMAP_TIMER=y
++CONFIG_FS_EXT4=y
++CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
 -- 
 2.37.2
 
