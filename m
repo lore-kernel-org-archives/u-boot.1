@@ -4,67 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 256C5C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B35C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:43:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B54E8700F;
-	Sat,  4 Nov 2023 20:43:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A4245870A5;
+	Sat,  4 Nov 2023 20:43:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NtCiWkQz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n8ivLrfN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37FF686F7C; Sat,  4 Nov 2023 20:43:00 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 7B67486F7C; Sat,  4 Nov 2023 20:43:00 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AF5D87086
+ by phobos.denx.de (Postfix) with ESMTPS id 42EE98708A
  for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:42:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5401bab7525so5368679a12.2
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-54394328f65so5212771a12.3
  for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:42:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699126978; x=1699731778; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DWddhVZFZiBORLm57HoBR8jte9F12rd34ICNsoPDy0k=;
- b=NtCiWkQzo14hLIOHEvPeHu6V7dee9wWuK3eEUDlkRm8lxaCJd49gHbhcTtNmrUdOwQ
- hLy6BQps7HeLloot/7gUiOGl1/G/fjj7ex9th4SFMiSlxGUH+AhGRE2R1RLE1rQqagS8
- L/BOzmeMkuPKqNmgtjmP5wmr9EcbNnpyhCYaE=
+ bh=raCBbg8k21hFmd/xilkZ7HErH8g1kg9IL4Jfch0bPlU=;
+ b=n8ivLrfNla2J3yBnn9wuNHqn6rcJ91P8mm9+J+GASKfumZamengIHBR/KUK3gXDnD3
+ QUVtSHd2WWma1GN1j1hzbdq2tMRHgE1Ec/TjjDd6jiquEvMjwXOWXBcl6WbL6Rd9lZzB
+ qJXRNHQbB4bEGr6fKYZlpRpC0ytW0+rC0M9Co=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699126978; x=1699731778;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DWddhVZFZiBORLm57HoBR8jte9F12rd34ICNsoPDy0k=;
- b=kBDouFWuYIYu8rSa9CnwMoAe/Vs8L/dFO1OFzh9iyr5UWBtPZs6SzTeYOUJcg2u87W
- i2pef8FLNqZ8m8lpglindzYPNiY9dE9YPusDlq5CKDYaC/IPd90X+PeQ3+DPitoe7QWP
- h8Np4WvRviuzq08bzd/xJgZ0aXvLEbprPifYHbfWm4EBKm/rz/MHwQ/ha4wBFZw01wur
- 07PS2qQXBSXOugAP80mA3rvl6HxMVFORYz1t48jtW22EXBDQyu65S+zHy5zXrY5NuBB7
- +fJ0hyvC2KeDGEoy/3M+9Cvjm+VZYTBvoGhfi8nVthE1M854Gl24bjuitXej9HSFfzYQ
- caRw==
-X-Gm-Message-State: AOJu0YxaXPYQtbDE5llXEESuVNf26TYuQ3R077HaCw7z20Q0vVSivgcU
- VEp3JgIvu9J0qNUO9h8lnZxQ0PE8ckvJKMCK31TjdQ==
-X-Google-Smtp-Source: AGHT+IEl1MPGUTBZLxM1rj6K2m862/OJwGCCFWKNWhGL2h8kvOnG5H1s9GBe5fsdZm53yFIGEeis5UaWB1GhOQSJ3ZQ=
-X-Received: by 2002:a05:6402:951:b0:53e:8e2e:2b8f with SMTP id
- h17-20020a056402095100b0053e8e2e2b8fmr19815719edz.9.1699126977582; Sat, 04
+ bh=raCBbg8k21hFmd/xilkZ7HErH8g1kg9IL4Jfch0bPlU=;
+ b=m2i1WVw5+ok3x8NPiWDDk7YwYoJ4KUgLhluGd27K+PykujhBvVzK7crIsc0jQgd2ih
+ mffpk51vfrhHPRzHKcA6brFMO0qnEM5/lH7kIZCO4RqzVSeGp0jyp9p4vlVjofGV/37I
+ QmRlLz8orqaeRFHwPQUI+/dXd9xeKqNR49xMRWQ814WoFPU71q27topQNqxg7flKIlia
+ fbJdZJAJ49/XvVtha5Wu+RBtpe4/H1JNSXejUW84p1c3Wq9bXQ+rbaKAYMAwtoYUfvlc
+ oBmyrYsZnWYUeJwLxQXLNrrv9qy5NVODsOEuiIiZWceWz0lP35cjATKT3wDjSrivZJJm
+ 28TA==
+X-Gm-Message-State: AOJu0Yx5CR5OQZsptZHOEcECD4kSdL4E/WrSvxFYsM9JMJG8XYraEmWQ
+ Jrtj71CE19p1B9PNxzwBRmvD5xAyHdIZdeEzkest391bOEYRZaDw0So=
+X-Google-Smtp-Source: AGHT+IE2aVpBAynwDF24BPWHkPkL/UNqQjlEz8w+u4IwuTkGyZzVBwy+h2fpfdfOhFr5mZMaj7cYnJXvQv1KS1pi9oE=
+X-Received: by 2002:a50:baa7:0:b0:533:97c:8414 with SMTP id
+ x36-20020a50baa7000000b00533097c8414mr21157876ede.7.1699126977578; Sat, 04
  Nov 2023 12:42:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231104065107.23623-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231104065107.23623-1-heinrich.schuchardt@canonical.com>
+References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
+In-Reply-To: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 4 Nov 2023 19:42:41 +0000
-Message-ID: <CAPnjgZ36uRkVGKicr_hD-=0HO+i9giQ7vRxo0uKD+BGQnLWdWw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] rng: detect RISC-V Zkr RNG device in bind method
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Xiang W <merlew4n6@gmail.com>, Andre Przywara <andre.przywara@arm.com>
+Date: Sat, 4 Nov 2023 19:42:38 +0000
+Message-ID: <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
+Subject: Re: Need advise with u-boot on SH-7785LCR
+To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,25 +80,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi John,
 
-On Sat, 4 Nov 2023 at 06:51, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Sat, 4 Nov 2023 at 13:59, John Paul Adrian Glaubitz
+<glaubitz@physik.fu-berlin.de> wrote:
 >
-> The existence of devices should be checked in the bind method and not in
-> the probe method. Adjust the RISC-V Zkr RNG driver accordingly.
+> Hello!
 >
-> Use ENOENT (and not ENODEV) to signal that the device is not available.
+> I am Debian's maintainer for the SuperH (sh4) port as well as one of the upstream
+> maintainers of SuperH support in the kernel. I own various SuperH boards with one
+> of them being the Renesas SH-7785LCR board which used to be supported by u-boot
+> up to including v2019.01.
 >
-> Fixes: ceec977ba1a9 ("rng: Provide a RNG based on the RISC-V Zkr ISA extension")
-> Reported-by: Andre Przywara <andre.przywara@arm.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  drivers/rng/riscv_zkr_rng.c | 34 ++++++++++++++++++++++++++--------
->  1 file changed, 26 insertions(+), 8 deletions(-)
+> My board is currently running v2014.01 with the following output:
+>
+> U-Boot 2014.01 (Jan 30 2015 - 11:01:14)
+>
+> CPU: SH4
+> BOARD: Renesas Technology Corp. R0P7785LC0011RL
+> DRAM:  384MB
+> Flash: 64MB
+> PCI: SH7780 PCI host bridge found.
+> PCI:   Bus Dev VenId DevId Class Int
+>   00:00.0     - 10ec:8169 - Network controller
+>   00:01.0     - 1095:3512 - Mass storage controller
+> In:    serial
+> Out:   serial
+> Err:   serial
+> Net:   RTL8169#0
+> Warning: RTL8169#0 MAC addresses don't match:
+> Address in SROM is         00:00:87:6b:bd:72
+> Address in environment is  74:90:50:00:02:03
+>
+> Hit any key to stop autoboot:  0
+> => printenv
+> baudrate=115200
+> bootargs=console=ttySC1,115200 root=/dev/sda1 ip=dhcp
+> bootcmd=usb reset; fatload usb 0:1 0x89000000 uImage-git.gz; pmb ; bootm
+> bootdelay=3
+> bootdevice=0:1
+> ethact=RTL8169#0
+> ethaddr=74:90:50:00:02:03
+> stderr=serial
+> stdin=serial
+> stdout=serial
+> usbload=usb reset; fatload usb 0:1 0x89000000 uImage-git.gz; pmb ; bootm
+> ver=U-Boot 2014.01 (Jan 30 2015 - 11:01:14)
+>
+> Environment size: 396/262140 bytes
+> =>
+>
+> I am currently running into the problem that u-boot hangs after verifying the image
+> checksum when trying to boot a cross-built kernel. This has happened in the past before
+> while often the kernel would boot just fine after performing some resets.
+>
+> When the boot hangs, it looks like this:
+>
+> => usb reset; fatload usb 0:1 0x89000000 uImage-next.gz ; pmb ; bootm
+> (Re)start USB...
+> USB0:   scanning bus 0 for devices... 2 USB Device(s) found
+>        scanning usb for storage devices... 1 Storage Device(s) found
+> reading uImage-next.gz
+> 4348967 bytes read in 2470 ms (1.7 MiB/s)
+> ## Booting kernel from Legacy Image at 89000000 ...
+>    Image Name:   Linux-6.6.0-rc1-00007-g63f1ee206
+>    Image Type:   SuperH Linux Kernel Image (gzip compressed)
+>    Data Size:    4348903 Bytes = 4.1 MiB
+>    Load Address: 80001000
+>    Entry Point:  80002000
+>    Verifying Checksum ... OK
+> (hangs)
+>
+> My first attempt at fixing this would be upgrading the board to v2019.01.
+>
+> Unfortunately, I have not found any documentation yet which explains how to upgrade
+> the u-boot firmware on this particular board. Does anyone know whether there are
+> any tools for this available? I can see an "erase" command in the u-boot command
+> list, but there is no command for writing a new u-boot firmware to flash.
+>
+> I have already reached out to Nobuhiro Iwamatsu who is the original author of support
+> for these boards in u-boot and also provided me with the particular hardware. However,
+> I haven't heard back from him yet.
+>
+> Another question that I have is the loading address. I need to load the kernel to the
+> loading address 0x89000000 as otherwise the machine won't boot. However, according to
+> the output of the u-boot mkimage tool, the loading address is 0x80001000 and not
+> 0x8900000. Could the different addresses be related to the unusual memory layout
+> of this board which has to be switched with the "pmb" command prior boot?
+>
+> Also, I was wondering what it would take to convert this particular board to CONFIG_DM_USB
+> and CONFIG_DM_PCI. I would be interested in getting support for SuperH boards in u-boot
+> into a better shape with broader hardware support.
+>
+> From the kernel side, we're currently working on converting SuperH to Device Trees, so I'm
+> expecting SuperH Linux to be better suited to modern versions of u-boot in the future.
+>
+> For now, it would be a great help if anyone could help me with the hanging boot issue.
 
-This device should be in the DT, so you have some control over which
-RNG is used.
+Is it possible to check if it reaches the kernel? E.g. with
+earlyprintk ? It would be good to know if U-Boot managers to jump to
+Linux, or not.
 
 Regards,
 Simon
