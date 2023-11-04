@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E45C5C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:32:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91722C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 16:33:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF70D87086;
-	Sat,  4 Nov 2023 17:32:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FC0B87163;
+	Sat,  4 Nov 2023 17:32:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699115573;
-	bh=1plNeaffWD7uQVzevvtFkwj3p/V0NidqBNgZSmxR/9I=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=wCyNtEZBRkhBk+m8CjEvTBFG6Rjo1tGPpatO7OdSOakgZaTwJ8Vk+mfSblhOR2cOp
-	 /DblzJmDQQqYYo/AvjdQGc4aVISsrRnV3wKvZ8n+XH3IymG9tcRf7Qqa3fZ00ZMQAr
-	 LzcoPiJjDYjlIFCFi664IWj0YhwP9soXS8sFMqdBcTwnkn8cECExtT88X4N8GkaFuI
-	 oTkDYxnBUIyLIMPdjG8fHMfBAlb+lsoMmTbGAZsqwcQdaCZuaTTF/SMGsKVLKfXeeW
-	 AJJc7jUcXTVvopFqohB1WBadBsO0il0UJemlAP0AuM2SD4/c2gOmZQldPvfRF5mP2N
-	 mpQU2/bRP6fpA==
+	s=phobos-20191101; t=1699115574;
+	bh=zqDoll3z10AWJcbeNLynSZb9e4LGpcqknlt+RD9tCC0=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SJ4ptLgb0oBQdjvQQx+g2qD9vSDEZk9kDCUxST8Djzyi4smSctHxddPsqpISBpspl
+	 lnWze4qJvW2n5IURajh4xap4/FiwxiRO6L43fMC7tA+qxQQ6t5t4nbtDN0VxPvusf1
+	 Ep/wXdh+c6jqMUN//TQVWMHqV68uB/Gt9oW4D0nEAkVaXL3wKQC5D5rEldid1/EIDa
+	 I9NIBK4FgocQxfp7JtkZVIEE2H3/R8YcE5ysv1y+PS86h4s3CQsCl2ZszPf/gECBuK
+	 kGzORQXVcX5eVmSyJbZSXe+2i5I+LBBjukRRr0bk6TrX1k4EDKDgcPvrjUtK/QSduQ
+	 OHiiEnbPXXPwg==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6652A86E05;
+ by phobos.denx.de (Postfix) with ESMTPSA id D1E7E86F63;
  Sat,  4 Nov 2023 17:32:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699115572;
- bh=1plNeaffWD7uQVzevvtFkwj3p/V0NidqBNgZSmxR/9I=;
- h=From:To:Cc:Subject:Date:From;
- b=lQ1AqgYxvL34vYPM/efqb7xOUYtN4JrFiTOm8djmgl515fKpfQUXALTOIm5exGk+0
- f229nIrbotFnaqP3UpGYkea/otiDrhTKGnL6FbHwK5oU1IJrnXolSwgpdYQ4XGtqRK
- CbgMuQU+fWFJwpZxFhf5FM30rRqdodjNGn4V6naYMMkeE60f1LaYSvj6SNYp1RRb0k
- htrgWzY8CUk67EPqOt5rHbc/1khPSfKmpDqmh7D/fx5WLy50pTKmn6z8/RjLGmKcCC
- lq7VPuDYHyMUYt0DvQUwsEZmNiJ7xfUiIJoQS8j3ctOWL815eRTVhgGsnjvKcknlXG
- Jh4KxVzpRQLMw==
+ s=phobos-20191101; t=1699115573;
+ bh=zqDoll3z10AWJcbeNLynSZb9e4LGpcqknlt+RD9tCC0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=sMoPgpwvdKNkpkB8ScoFHW5us25NuNLymVwNZ/+JNbHzvanzYlFelllFiseo3Vbbn
+ ObDkUAcwyM8yeCa/4P/M0RPN+1Vg3gv10aRF/y/lVFyBedrcTVSGYXjiHVc5YjMGDN
+ kDQrG70QKaWJlbCcieyDFyXin5WXnkaR2+3gj/EqmZIzbzrFrwoBO2bHnd+nAjbAaq
+ jlWY2QyXt4fJ2IsMg15ePr2MgJisPeI/bYBjdA4piguoPCAdrmfuF6S20wCN7WVm87
+ 7HGsZcexgt2f4Wx6QdkhfOHaFwHxNu+f+tw69Y2zXJvog04ibjysvK+dWZO+OHx0JF
+ aLJ73fSxpMcmw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
@@ -45,10 +46,12 @@ Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Christoph Niedermaier <cniedermaier@dh-electronics.com>,
  Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
  u-boot@dh-electronics.com
-Subject: [PATCH 1/2] arm: imx6: Enable TCP, IPv6, wget on DH i.MX6 DHCOM
-Date: Sat,  4 Nov 2023 17:32:20 +0100
-Message-ID: <20231104163243.117404-1-marex@denx.de>
+Subject: [PATCH 2/2] arm64: imx8mp: Enable TCP, IPv6, wget on DH i.MX8MP DHCOM
+Date: Sat,  4 Nov 2023 17:32:21 +0100
+Message-ID: <20231104163243.117404-2-marex@denx.de>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231104163243.117404-1-marex@denx.de>
+References: <20231104163243.117404-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -82,34 +85,56 @@ Cc: Fabio Estevam <festevam@gmail.com>
 Cc: Stefano Babic <sbabic@denx.de>
 Cc: u-boot@dh-electronics.com
 ---
- configs/dh_imx6_defconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+ configs/imx8mp_dhcom_pdk2_defconfig | 5 +++++
+ configs/imx8mp_dhcom_pdk3_defconfig | 5 +++++
+ 2 files changed, 10 insertions(+)
 
-diff --git a/configs/dh_imx6_defconfig b/configs/dh_imx6_defconfig
-index 5a83b6a08a2..8d2d46ab659 100644
---- a/configs/dh_imx6_defconfig
-+++ b/configs/dh_imx6_defconfig
-@@ -55,6 +55,9 @@ CONFIG_CMD_SATA=y
- CONFIG_CMD_USB=y
+diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
+index a77139ab06a..54c02dfd7ab 100644
+--- a/configs/imx8mp_dhcom_pdk2_defconfig
++++ b/configs/imx8mp_dhcom_pdk2_defconfig
+@@ -109,6 +109,9 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_SDP=y
  CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_WDT=y
+ CONFIG_CMD_DHCP=y
 +CONFIG_CMD_DHCP6=y
 +CONFIG_CMD_TFTPPUT=y
 +CONFIG_CMD_WGET=y
- CONFIG_CMD_BOOTCOUNT=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_TIME=y
-@@ -71,6 +74,10 @@ CONFIG_USE_ETHPRIME=y
- CONFIG_ETHPRIME="FEC"
- CONFIG_VERSION_VARIABLE=y
- CONFIG_ARP_TIMEOUT=200
-+CONFIG_IP_DEFRAG=y
-+CONFIG_TFTP_TSIZE=y
+ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_PXE=y
+@@ -151,6 +154,8 @@ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_IP_DEFRAG=y
+ CONFIG_TFTP_TSIZE=y
 +CONFIG_PROT_TCP_SACK=y
 +CONFIG_IPV6=y
- CONFIG_BOUNCE_BUFFER=y
- CONFIG_DWC_AHSATA=y
- CONFIG_LBA48=y
+ CONFIG_SPL_DM=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
+index c1f8fbd3ec3..6799f0c8b73 100644
+--- a/configs/imx8mp_dhcom_pdk3_defconfig
++++ b/configs/imx8mp_dhcom_pdk3_defconfig
+@@ -111,6 +111,9 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_SDP=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_DHCP=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_PXE=y
+@@ -153,6 +156,8 @@ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_IP_DEFRAG=y
+ CONFIG_TFTP_TSIZE=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
+ CONFIG_SPL_DM=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
 -- 
 2.42.0
 
