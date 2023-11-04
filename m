@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A605C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB711C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:45:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42DC5870B3;
-	Sat,  4 Nov 2023 20:44:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A5478718A;
+	Sat,  4 Nov 2023 20:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g24op28y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bF/fc+Y4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EDBE386EEE; Sat,  4 Nov 2023 20:43:57 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 8B88187163; Sat,  4 Nov 2023 20:44:14 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 221378712E
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:43:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 447A986EEE
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:44:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-53e04b17132so5167950a12.0
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:43:54 -0700 (PDT)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2c501bd6ff1so45095511fa.3
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:44:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699127032; x=1699731832; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699127043; x=1699731843; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YCoLj9bvOdS97FReR22SF/sNnPJz6koGSIM3juM6tNA=;
- b=g24op28yOuP6oHRBTuXtrtCiHJD6YqZZ55Z/f5OPcWmt9pRK36cB10Clbn+nD+fUmB
- sDAFvGToRrqdAqbpvraYqpTv7BbuvVzLSoF4f6zckaRHf95y8UXimza8gTqcCj77IhAt
- MrA4raUsY4EQ5+/c3KNQ6fwEz7yw40W+iLtv0=
+ bh=meGqjiO934B+9nP7qFMan9HgGw4ApSouuNG/KdpAkag=;
+ b=bF/fc+Y4byL9EkmNHFYuP6HpRUSGK0Mja2iGmbuxqvmO5g2V520wswS2DbHpRotEWL
+ JQgyKmSqtBnprl2qAGfiOGNrhC4FPtwfRXGlSgbGAFzCgmLsedfPH7qrcGLd+IoBweBU
+ hhQK6jUQknaAmGREHBTrLfkJ0/Xi7UJzqI0+s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699127032; x=1699731832;
+ d=1e100.net; s=20230601; t=1699127043; x=1699731843;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YCoLj9bvOdS97FReR22SF/sNnPJz6koGSIM3juM6tNA=;
- b=NeQB+2Ig4TcXDfEV4GADwDfrLVa+LkJkkGiCVi7A48WOaK9T01mm2KZh4Ah2NmR9Ju
- F/SV9IXHpu2DYF9V2fW8fK87YhBvNE1A7+i6bcp1AMzMSSsC+h2k7obte9FFtrhCOYF8
- wVotuGWbBiM0oE4DkjmY2bhFssmQkLX2BBdhFt5O0E5/MYeO38NDz2xAsmWa236F+/I+
- ncm4+c0i9sQz1N+8zCEn5U6g1wyrKwPPsDXo6N1r/8tvwfI8RF4hvszmXc2Tz/cpDghG
- 5+5QH8DW5jux9bCzTVTpoxmEXiyhZd+M4d4g0CTDWJ7MH/TQyEjUWk62dQy/l5eP7HKr
- LZtg==
-X-Gm-Message-State: AOJu0YzOgqmJJkU1NeSkO0rN7MlCbLjd1J1TXjIgDwXHdo4EZXfOgdeq
- oNoN2E3TCY85np2iLdxajpVnGZZ3Mh+G/m57iqSFZw==
-X-Google-Smtp-Source: AGHT+IF37tMFsoyKKtoQpG6ClLwH3KUVuQbKSZRcr+3ABQf7xRBbjLdfIYOy3NhCM9CFKmrJ6JySPDiOR5VBem4J4Rs=
-X-Received: by 2002:a05:6402:b6c:b0:53f:8ef:1b22 with SMTP id
- cb12-20020a0564020b6c00b0053f08ef1b22mr18980637edb.2.1699127031660; Sat, 04
- Nov 2023 12:43:51 -0700 (PDT)
+ bh=meGqjiO934B+9nP7qFMan9HgGw4ApSouuNG/KdpAkag=;
+ b=XyCn4mLX2YgjpaUw14NU2PpQdXkTAnycyNfHn24TyX7RHQTbPKDrUdeWMKlrzzNLpp
+ T+J075rlKqEHa1tsOeRMS5ZdLM1QO/MrC7ep/OZ2CVaEBZ79Ga4TDf/xrt17Zgo/8Qhf
+ mlYgyaRXmnmyDWZ9mxc+jtV+bG3y7S2DBuDAGagtQL0bogwqsjhKTDVKeuib9oVrc0J0
+ xQRObskF1sFLVYVuQx6Pig6V8Xd8+15aiv1kYfa9wZO4BQWjk311kZomo/izQ9jIWBZS
+ 9ZjyCPFxcgD1xlUJpROpmYCw4cTB9Fsasrxt0JH7f54e/nhdeJBMLhkJBOQlEH2M+Dxs
+ PFZw==
+X-Gm-Message-State: AOJu0YzwPreDge+62u3A/NGz2QjAhA3R7v/uBl5DMryeA+F5Hgi+8AZR
+ 8MgEc697pWtpP0ev6MmOIEWe5t9KahwpRTjIljBToA==
+X-Google-Smtp-Source: AGHT+IFwPgiX9UQ7teSns8Syt3qwK67TuS3GnjgCmhMQqPGR7xqB1RJSBAcyUYkgeGFC85y6LyYGWCKpoMElfj+v5Fc=
+X-Received: by 2002:a19:f613:0:b0:509:47c0:5454 with SMTP id
+ x19-20020a19f613000000b0050947c05454mr6740117lfe.12.1699127043363; Sat, 04
+ Nov 2023 12:44:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
- <20230919113705.109639-2-rasmus.villemoes@prevas.dk>
- <6ac71b7e-d84e-10d5-e500-0d54e5d6c191@gmail.com>
- <3fd4d611-891a-fc3d-7385-c2d621cf2eac@prevas.dk>
- <8d3ef056-1d72-727f-f158-f034c34d5786@gmail.com>
-In-Reply-To: <8d3ef056-1d72-727f-f158-f034c34d5786@gmail.com>
+References: <AS8PR04MB86760A4BC079AF5BD57C81B98CA7A@AS8PR04MB8676.eurprd04.prod.outlook.com>
+ <AS8PR04MB867669CC8B5EB411BDEF45348CA5A@AS8PR04MB8676.eurprd04.prod.outlook.com>
+In-Reply-To: <AS8PR04MB867669CC8B5EB411BDEF45348CA5A@AS8PR04MB8676.eurprd04.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 4 Nov 2023 19:43:40 +0000
-Message-ID: <CAPnjgZ1kFjsZ96fkOu9KgOMiSG8W_YcO7ERJcRtdD1OOkPYY5A@mail.gmail.com>
-Subject: Re: [PATCH 1/4] mkimage: also honour -B even without external data
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>
+Date: Sat, 4 Nov 2023 19:43:52 +0000
+Message-ID: <CAPnjgZ1r60UomKz5DkH-POvsj0jKq1rNENniwZpAn3AWHk94EA@mail.gmail.com>
+Subject: Re: uboot reports adding disk failed(EFI_NOT_FOUND) and first disk is
+ gone in next scsi scan
+To: Hongxing Zhu <hongxing.zhu@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,116 +85,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Richard,
 
-On Fri, 29 Sept 2023 at 07:16, Sean Anderson <seanga2@gmail.com> wrote:
->
-> On 9/28/23 03:10, Rasmus Villemoes wrote:
-> > On 27/09/2023 21.02, Sean Anderson wrote:
-> >> On 9/19/23 07:37, Rasmus Villemoes wrote:
-> >>> In some cases, using the "external data" feature is impossible or
-> >>> undesirable, but one may still want (or need) the FIT image to have a
-> >>> certain alignment. Also, given the current 'mkimage -h' output,
-> >>>
-> >>>     -B =3D> align size in hex for FIT structure and header
-> >>>
-> >>> it is quite unexpected for -B to be effectively ignored without -E.
-> >>
-> >> FWIW, this behavior is documented in doc/mkimage.1 (which should also =
-be
-> >> updated if this behavior is implemented):
-> >>
-> >> | The alignment, in hexadecimal, that external data will be aligned to=
-.
-> >> | This option only has an effect when -E is specified.
-> >
-> > I'll send a follow-up to fix that, thanks.
-> >
-> >> And, for additional context, the documentation for -E is
-> >>
-> >> | After processing, move the image data outside the FIT and store a da=
-ta
-> >> | offset in the FIT. Images will be placed one after the other
-> >> | immediately after the FIT, with each one aligned to a 4-byte boundar=
-y.
-> >> | The existing =E2=80=98data=E2=80=99 property in each image will be r=
-eplaced with
-> >> | =E2=80=98data-offset=E2=80=99 and =E2=80=98data-size=E2=80=99 proper=
-ties. A =E2=80=98data-offset=E2=80=99 of 0
-> >> | indicates that it starts in the first (4-byte-aligned) byte after th=
-e
-> >> | FIT.
-> >>
-> >> Based on this documentation and my understanding of the code as-is, -B
-> >> controls the alignment of the images themselves,
-> >
-> > Yes, when -E is in effect. My patch does not affect the case where -E i=
-s
-> > present.
->
-> Wherever possible, flags should be orthogonal. That is, they should have =
-the
-> same effect (or at least the same spirit) regardless of the presence of o=
-ther
-> flags. This matches their UX, as orthogonally selectable options.
->
-> >> not the size multiple of the FIT.
-> >
-> > It is _also_ that, but mostly as a "necessary side effect" of getting
-> > the first image aligned. In order to achieve the desired alignment of
-> > the first external image, the FIT structure itself is aligned to the -B
-> > value, and each image's size similarly aligned up to that value so the
-> > next image ends on a -B multiple again. So with both -E and -B, the FIT
-> > structure itself is indeed also padded to the -B value, as the `mkimage
-> > -h` output suggests.
->
-> The intent of -B is to align images. That the FIT itself is padded is an
-> implementation detail.
->
-> > What I want, and expected from `mkimage -h`, is to make the whole FIT
-> > have a certain size multiple, without using -E, so in that case the
-> > alignment of the FIT is the primary goal.
->
-> Why does mkimage have to do this? Can't you just use truncate or, in a
-> binman context, align-size?
->
-> >> However, from what I can tell, this patch does not actually
-> >> affect the alignment of the images,
-> >
-> > No, because the images are (still) embedded within the FIT as ordinary
-> > values of the data=3D properties, and it's a basic property of the DTB
-> > format that those are always 4-byte aligned, and you can't (easily)
-> > change that [1]. Which, I suppose, is one of the reasons U-Boot invente=
-d
-> > the "external data" mechanism - so for example the .dtbs embedded in th=
-e
-> > FIT can all be guaranteed to be on an 8-byte boundary, and thus the
-> > selected one can be used in-place when passed to linux.
-> >
-> >> but rather adjusts the size of the
-> >> overall FIT to a certain alignment. I find this rather unexpected.
-> >
-> > Well, as I said, _I_ was surprised by -B having no effect based on the
-> > `mkimage -h` output, so the two sources of documentation were not in
-> > sync. The man page was/is correct wrt. the actual code.
->
-> The mkimage -h putput is too terse to record the complete behavior of
-> each option. Perhaps we should add a warning when -B is specified without
-> -E.
->
-> > Rasmus
-> >
-> > [1] There's a nop tag one can insert, and I think I saw somebody
-> > actually suggesting to do that to align the embedded data=3D properties=
-,
-> > but it's quite error-prone and inflexible, as any subsequent
-> > modification of the .dtb before that property will ruin the alignment.
->
-> This would indeed be the way to go. I don't think we should worry about
-> further modification of the fdt, as this could also ruin the alignment
-> of external images.
++Heinrich as I think this is an EFI bug.
 
-Are you planning a new version of this series?
+On Thu, 2 Nov 2023 at 19:37, Hongxing Zhu <hongxing.zhu@nxp.com> wrote:
+>
+> Hi Simon:
+> I found that the EFI complained that the disk install path is not updated=
+ for the second disk.
+> The install path is =E2=80=9CEFI: installed device path '/VenHw(e61d73b9-=
+a384-4acc-aeab-82e828f3628b)/Scsi(0,0)'=E2=80=9D
+>
+> when first disk is added.
+>
+> But the path is same when the second or later disks are added, and EFI re=
+pors that the path had been installed already.
+> EFI: Path /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/Scsi(0,0) already =
+installed
+>
+>
+>
+> That=E2=80=99s why the below error when run efi_disk_create_raw() functio=
+n.
+>
+> Adding disk for ahci_scsi.id0lun0 failed (err=3D-9223372036854775788/0x80=
+00000000000014)
+>
+>
+>
+> Do you have any clues about this?
+>
+> Thanks in advanced.
+>
+> Best Regards
+>
+> Richard Zhu
+>
+>
+>
+> From: Hongxing Zhu
+> Sent: 2023=E5=B9=B411=E6=9C=881=E6=97=A5 10:57
+> To: sjg@chromium.org
+> Cc: u-boot@lists.denx.de
+> Subject: uboot reports adding disk failed(EFI_NOT_FOUND) and first disk i=
+s gone in next scsi scan
+>
+>
+>
+> Hi Simon:
+> Nice to meet you.
+> The u-boot I used is based on v2023.04 tagged version.
+> Layerscape LX2160A RDB board has four SATA controllers.
+> Based on LX2160A RDB board and two or more SATA disks connected.
+> I encounter one =E2=80=9Cscsi scan=E2=80=9D problem.
+>
+>
+> After the first SATA disk is detected and probed properly in the first =
+=E2=80=9Cscsi scan=E2=80=9D.
+> The other disks would complain that =E2=80=9CEFI_NOT_FOUND=E2=80=9D error=
+ listed below,
+> when run the first =E2=80=9Cscsi scan=E2=80=9D command in uboot environme=
+nt.
+>
+> Does this error matter?
+> BTW, =E2=80=9Cscsi info=E2=80=9D says that all disk info can be dumped, a=
+nd all disks are works well,
+>
+> after the first =E2=80=9Cscsi scan=E2=80=9D
+>
+> In the consecutive rescan operations issued by =E2=80=9Cscsi reset=E2=80=
+=9D or =E2=80=9Cscsi scan=E2=80=9D commends,
+> the disks would report =E2=80=9Cunable to unbind devices (-1E)=E2=80=9D e=
+rror.
+> The first disk is disappeared at all after the next =E2=80=9Cscsi scan=E2=
+=80=9D operations is finished.
+>
+>
+> Did you used to encounter such kind of issue?
+>
+> Any suggestions and guidance are very appreciated.
+>
+> Logs:
+> =3D> scsi scan
+>
+> scanning bus for devices...
+>
+> Target spinup took 0 ms.
+>
+> AHCI 0001.0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>
+> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>
+>   Device 0: (0:0) Vendor: ATA Prod.: ST1000DM010-2EP1 Rev: CC43
+>
+>             Type: Hard Disk
+>
+>             Capacity: 953869.7 MB =3D 931.5 GB (1953525168 x 512)
+>
+> Target spinup took 0 ms.
+>
+> AHCI 0001.0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>
+> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>
+> Adding disk for ahci_scsi.id0lun0 failed (err=3D-9223372036854775788/0x80=
+00000000000014)
+>
+> SATA link 0 timeout.
+>
+> AHCI 0001.0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>
+> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>
+> SATA link 0 timeout.
+>
+> AHCI 0001.0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>
+> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+> =3D> scsi info
+>
+> Device 0: (0:0) Vendor: ATA Prod.: ST1000DM010-2EP1 Rev: CC43
+>
+>             Type: Hard Disk
+>
+>             Capacity: 953869.7 MB =3D 931.5 GB (1953525168 x 512)
+>
+> Device 1: (0:0) Vendor: ATA Prod.: ST500DM002-1BD14 Rev: KC45
+>
+>             Type: Hard Disk
+>
+>             Capacity: 476940.0 MB =3D 465.7 GB (976773168 x 512)
+>
+> =3D> ls scsi 0:1
+>
+> <DIR>       4096 .
+>
+> <DIR>       4096 ..
+>
+> <DIR>      16384 lost+found
+>
+> <snip>
+>
+> <DIR>       4096 var
+>
+> <SYM>         12 linuxrc
+>
+> =3D> ls scsi 1:1
+>
+> <DIR>       4096 .
+>
+> <DIR>       4096 ..
+>
+> <DIR>      16384 lost+found
+>
+> <snip>
+>
+> <DIR>       4096 usr
+>
+> <DIR>       4096 var
+>
+>
+>
+> =3D> scsi reset
+>
+>
+>
+> Reset SCSI
+>
+> scanning bus for devices...
+>
+> unable to unbind devices (-1E)
+> =3D> ls scsi 0:1
+>
+> ** Bad device specification scsi 0 **
+>
+> Couldn't find partition scsi 0:1
+>
+> =3D> ls scsi 1:1
+>
+> <DIR>       4096 .
+>
+> <DIR>       4096 ..
+>
+> <DIR>      16384 lost+found
+>
+> <snip>
+>
+> <DIR>       4096 var
+>
+>
+> =3D> scsi info
+>
+> Device 1: (0:0) Vendor: ATA Prod.: ST500DM002-1BD14 Rev: KC45
+>
+>             Type: Hard Disk
+>
+>             Capacity: 476940.0 MB =3D 465.7 GB (976773168 x 512)
+>
+>
+>
+> Best Regards
+>
+> Richard Zhu
+>
+>
 
 Regards,
 Simon
