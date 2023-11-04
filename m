@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E4BC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:25:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B260FC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:26:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D3068744F;
-	Sat,  4 Nov 2023 08:23:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65957874B9;
+	Sat,  4 Nov 2023 08:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aFv2Itgs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OszrVc1s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15BD586EC9; Sat,  4 Nov 2023 08:22:53 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id B445786EC9; Sat,  4 Nov 2023 08:23:07 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41BD487123
+ by phobos.denx.de (Postfix) with ESMTPS id 5B6BA87137
  for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:22:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LsKO061069;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LsgC031805;
  Sat, 4 Nov 2023 02:21:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1699082514;
- bh=HLO2zP9DyDz+puPa+gP24RYNxMHC6qEDwpdWj3TtdjU=;
+ bh=+OmgdZ+XEHuE+HQXdviUmeW57/g0bQYTiSzM2Aa3KB0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=aFv2ItgsecPvZAgiR98TzNjMKZS+9EDMg5Agd1nHbvCGR4uHFWkH/FiSBiqb/20bC
- c2aE7dYhs9Mhp1KAQdTyFbXr5le9JQWBHkOtyf4KrqQUZ7YvKVFFWzXwtwvGFFC9pG
- RypCT7krW6GKwyY5wiZzD08MP5SIwoLlqqGJav0E=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A47LsAN001185
+ b=OszrVc1sH0ab3ScOeVwu3DmMw4wu+HZjtw81vjXyY5JbV4E4t/m/AX5FLV2E7br0T
+ HNPhvLHypav8FOuwiJ6+NK7L5unZ5QQlyUTGvkQe604O+dHbOrGUXbn1uMSfy51q8f
+ Ul3PDrb3KsyDgwEbppk4cBdunbnmtKAbi4mZkeLU=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A47Ls7C120805
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Sat, 4 Nov 2023 02:21:54 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 4
  Nov 2023 02:21:54 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Sat, 4 Nov 2023 02:21:54 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LsdB103859;
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A47Lsc3065276;
  Sat, 4 Nov 2023 02:21:54 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -57,10 +57,10 @@ CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
  Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH V2 12/12] doc: board: ti: j721e_evm: Use board relative path
- for include directives
-Date: Sat, 4 Nov 2023 02:21:50 -0500
-Message-ID: <20231104072150.3339-13-nm@ti.com>
+Subject: [PATCH V2 08/12] arm: mach-k3: arm64-mmu: Refactor to be independent
+ of board
+Date: Sat, 4 Nov 2023 02:21:46 -0500
+Message-ID: <20231104072150.3339-9-nm@ti.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20231104072150.3339-1-nm@ti.com>
 References: <20231104072150.3339-1-nm@ti.com>
@@ -84,90 +84,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using include directives within a section that is included by non
-TI board rst file, k3.rst and other include paths need to be relative to
-doc/board/ base.
+Refactor J721E J7200 definition to make this independent of board
+macros.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- doc/board/ti/j721e_evm.rst | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ arch/arm/mach-k3/arm64-mmu.c | 50 ++++++++++++++++++------------------
+ 1 file changed, 25 insertions(+), 25 deletions(-)
 
-diff --git a/doc/board/ti/j721e_evm.rst b/doc/board/ti/j721e_evm.rst
-index 344a38d37486..b012171b45ee 100644
---- a/doc/board/ti/j721e_evm.rst
-+++ b/doc/board/ti/j721e_evm.rst
-@@ -48,7 +48,7 @@ support. Below is the pictorial representation of boot flow:
- Sources:
- --------
+diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
+index f8087d2421e7..8cb6614035a5 100644
+--- a/arch/arm/mach-k3/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64-mmu.c
+@@ -68,12 +68,11 @@ struct mm_region *mem_map = am654_mem_map;
  
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_boot_sources
-     :end-before: .. k3_rst_include_end_boot_sources
+ #ifdef CONFIG_SOC_K3_J721E
  
-@@ -56,17 +56,17 @@ Build procedure:
- ----------------
- 0. Setup the environment variables:
+-#ifdef CONFIG_TARGET_J721E_A72_EVM
+-/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
+-#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
++#ifdef CONFIG_SOC_K3_J721E_J7200
++#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
  
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_desc
-     :end-before: .. k3_rst_include_end_common_env_vars_desc
+ /* ToDo: Add 64bit IO */
+-struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
++struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
+ 	{
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+@@ -90,13 +89,13 @@ struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+ 	}, {
+ 		.virt = 0xa0000000UL,
+ 		.phys = 0xa0000000UL,
+-		.size = 0x1bc00000UL,
++		.size = 0x04800000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+ 			 PTE_BLOCK_NON_SHARE
+ 	}, {
+-		.virt = 0xbbc00000UL,
+-		.phys = 0xbbc00000UL,
+-		.size = 0x44400000UL,
++		.virt = 0xa4800000UL,
++		.phys = 0xa4800000UL,
++		.size = 0x5b800000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+ 			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+@@ -112,26 +111,21 @@ struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, {
+-		.virt = 0x4d80000000UL,
+-		.phys = 0x4d80000000UL,
+-		.size = 0x0002000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+-			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+ 		/* List terminator */
+ 		0,
+ 	}
+ };
  
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_board_env_vars_desc
-     :end-before: .. k3_rst_include_end_board_env_vars_desc
+-struct mm_region *mem_map = j721e_mem_map;
+-#endif /* CONFIG_TARGET_J721E_A72_EVM */
++struct mm_region *mem_map = j7200_mem_map;
  
- Set the variables corresponding to this platform:
+-#ifdef CONFIG_TARGET_J7200_A72_EVM
+-#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
++#else /* CONFIG_SOC_K3_J721E_J7200 */
++
++/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
++#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
  
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_common_env_vars_defn
-     :end-before: .. k3_rst_include_end_common_env_vars_defn
- .. prompt:: bash $
-@@ -84,14 +84,14 @@ Set the variables corresponding to this platform:
+ /* ToDo: Add 64bit IO */
+-struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
++struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+ 	{
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+@@ -148,13 +142,13 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
+ 	}, {
+ 		.virt = 0xa0000000UL,
+ 		.phys = 0xa0000000UL,
+-		.size = 0x04800000UL,
++		.size = 0x1bc00000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+ 			 PTE_BLOCK_NON_SHARE
+ 	}, {
+-		.virt = 0xa4800000UL,
+-		.phys = 0xa4800000UL,
+-		.size = 0x5b800000UL,
++		.virt = 0xbbc00000UL,
++		.phys = 0xbbc00000UL,
++		.size = 0x44400000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+ 			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+@@ -170,14 +164,20 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
++	}, {
++		.virt = 0x4d80000000UL,
++		.phys = 0x4d80000000UL,
++		.size = 0x0002000000UL,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
++			 PTE_BLOCK_INNER_SHARE
+ 	}, {
+ 		/* List terminator */
+ 		0,
+ 	}
+ };
  
- 1. Trusted Firmware-A:
+-struct mm_region *mem_map = j7200_mem_map;
+-#endif /* CONFIG_TARGET_J7200_A72_EVM */
++struct mm_region *mem_map = j721e_mem_map;
++#endif /* CONFIG_SOC_K3_J721E_J7200 */
  
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_build_steps_tfa
-     :end-before: .. k3_rst_include_end_build_steps_tfa
- 
- 
- 2. OP-TEE:
- 
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_build_steps_optee
-     :end-before: .. k3_rst_include_end_build_steps_optee
- 
-@@ -99,13 +99,13 @@ Set the variables corresponding to this platform:
- 
- * 3.1 R5:
- 
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_build_steps_spl_r5
-     :end-before: .. k3_rst_include_end_build_steps_spl_r5
- 
- * 3.2 A72:
- 
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_build_steps_uboot
-     :end-before: .. k3_rst_include_end_build_steps_uboot
- .. j721e_evm_rst_include_end_build_steps
-@@ -248,7 +248,7 @@ detailed setup information.
-   environment's distribution needs to be updated, it might be necessary to
-   build OpenOCD from the source.
- 
--.. include::  k3.rst
-+.. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-     :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+ #endif /* CONFIG_SOC_K3_J721E */
  
 -- 
 2.37.2
