@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1245AC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:25:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F36C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:25:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0ECD87206;
-	Sat,  4 Nov 2023 08:23:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4939687239;
+	Sat,  4 Nov 2023 08:23:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EycUFkpI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k7Q6olGm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 540B2871E7; Sat,  4 Nov 2023 08:22:44 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 5450E86EC9; Sat,  4 Nov 2023 08:22:49 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 629F787149
+ by phobos.denx.de (Postfix) with ESMTPS id 5A18387136
  for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:22:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A47Ls8u061061;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LsYh130575;
  Sat, 4 Nov 2023 02:21:54 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1699082514;
- bh=O48QxO8DFCl9DskEQNd0N4NTqv9z6Pn+WH0AxxfdQeU=;
+ bh=JRbd6bvCxHASUAqznsX4e/poBMQhZYN47bRrDsehEKc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=EycUFkpI40h6mtRpXp+RBle0LBWE9grWdLAcL372P+K8a9Ih3A8oLwwwjcLAV5ENW
- dwHGwuI5tWeAmCJtewvNPGNHLDYWtls0rembsw++PuYLIary3AxBy0JKHm0JL21MSB
- DkrJRgDBcd+QpGcuEicK5PVpS9W7NkB6tEqM5ldE=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A47LsCd001176
+ b=k7Q6olGmJk7WLejNje/uZqV8SASvNh1JNl5z+yAbmFSi7j9RCaMsQ/FoHJ6tVZU6n
+ mPUlxn6sEh6uDw0Grr8I16sZ9bSHiDwwiv/SSD7vHYGcg9pQ9Ptv5JRcG2f+LLFJBU
+ Z9Qny81R6KiXckbutvc+EvlrkKGIwvh45b0wSv+M=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A47LsAY002809
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Sat, 4 Nov 2023 02:21:54 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 4
  Nov 2023 02:21:54 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Sat, 4 Nov 2023 02:21:54 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A47Ls9O067681;
- Sat, 4 Nov 2023 02:21:54 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A47LrMe103851;
+ Sat, 4 Nov 2023 02:21:53 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
@@ -57,9 +57,10 @@ CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
  Jason Kridner <jkridner@beagleboard.org>, Nishanth Menon <nm@ti.com>,
  <u-boot@lists.denx.de>
-Subject: [PATCH V2 11/12] configs: j7200_evm_a72_defconfig: Switch to bootstd
-Date: Sat, 4 Nov 2023 02:21:49 -0500
-Message-ID: <20231104072150.3339-12-nm@ti.com>
+Subject: [PATCH V2 06/12] arm: mach-k3: Kconfig: Introduce a symbol to
+ indicate J7200
+Date: Sat, 4 Nov 2023 02:21:44 -0500
+Message-ID: <20231104072150.3339-7-nm@ti.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20231104072150.3339-1-nm@ti.com>
 References: <20231104072150.3339-1-nm@ti.com>
@@ -83,33 +84,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to using bootstd. Note with this change, we will stop using
-distro_bootcmd and instead depend entirely on bootflow method of
-starting the system up.
+J7200 shares quite a few characteristics with J721E. However a few sets
+are different. Introduce a Kconfig to differentiate the two to allow for
+new boards to be introduced in a seamless manner.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- configs/j7200_evm_a72_defconfig | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ arch/arm/mach-k3/Kconfig | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index 889358afc316..b7bc9ad178f6 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -29,10 +29,11 @@ CONFIG_SPL_SPI=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_OF_SYSTEM_SETUP=y
--CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
- CONFIG_LOGLEVEL=7
- CONFIG_SPL_MAX_SIZE=0xc0000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 9168bf842dca..57e2dd966eb8 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -24,6 +24,11 @@ config SOC_K3_AM62A7
+ 
+ endchoice
+ 
++if SOC_K3_J721E
++config SOC_K3_J721E_J7200
++	bool "TI's K3 based J7200 SoC variant Family Support"
++endif
++
+ config SYS_SOC
+ 	default "k3"
+ 
 -- 
 2.37.2
 
