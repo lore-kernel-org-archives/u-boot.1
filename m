@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A707DC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 21:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2774C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 21:53:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0977786FF4;
-	Sat,  4 Nov 2023 22:52:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EEDE387097;
+	Sat,  4 Nov 2023 22:52:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RpbPFXdY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lM+ZX/rj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07186870B3; Sat,  4 Nov 2023 22:52:51 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 94947870C7; Sat,  4 Nov 2023 22:52:53 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9FAC86053
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 22:52:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C5DA8708A
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 22:52:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3593f3ef420so2185305ab.1
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 14:52:48 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6d3099818c0so524490a34.1
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 14:52:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699134767; x=1699739567; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P888Z8YXSifNT3WnhQJKmUVKjlQjxCIt/hfQBQkUlmk=;
- b=RpbPFXdYDCaPIrcfTlZoMMeTOEFIcbFvKD1iPuOfOYqweK6YxK9pyyQiC+4dl6vo6l
- OHQ2kVahYD6/1BHyvSDKx2nK9klkcW47PIGn20wH3Fq6uXSEbAcJUuLMwdiHUIX8G7HP
- NxwLWPo+aX12uvF9y1hN19IPHjRoW/GerZFTBIZazBfyS43g4Nz5bp2nNxg6ap5H2caD
- MPFi2vaZhgKUZhJ9hSeocNg1WVGMfQBi3w4CIf0VFRoCxAj8Lr93BQdoIWYykVjwZMEG
- zJN75sq+uWzd0aIhLpkS1Jb4zdF1es7lbUyFXbiLVhG/q7j67SdACw1ELLC28TZd01SJ
- gPbA==
+ d=gmail.com; s=20230601; t=1699134769; x=1699739569; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lDW4hqeUzvulvY2Y3lkBy15M8X2CLX9z+R98Aelzcpk=;
+ b=lM+ZX/rja37d9i13lGmyqocvr4MIzpS5SM+x/0Qc/JavignYj1rCQOhMe71dueAbar
+ RrrupcxZbLqvpBePFcE0uHmI0DGoqUlXk6we9VQjBe3eVGL7CPCFLsgw85CRPJ6VavWP
+ Lp26jwV+UtN4N7gOjHE7UaO1Uij5EwZBq4Bj3cR//AtZNZQFHJd7mrXd3jfQeyWjwfxW
+ Up6t6s/VQUEuhTyRMkW2QwST5vzBJE2hGg/c8GIJsWdibYxaGDNow6+kgEpPkWHMKMbP
+ chSr15UI9UTRqNFKEugVZElhlrKqN7t5AuQct9ZI25LJnyELbPGGIBg0YQ6XR962iZC4
+ b/Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699134767; x=1699739567;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P888Z8YXSifNT3WnhQJKmUVKjlQjxCIt/hfQBQkUlmk=;
- b=ogDxkbD2ETR1s7cf1KksIUlVpn21DpSafcyCWvKwmCBTyiLU32o2/uiCwXAkwcfrda
- 073WBuCkyIMcb9ZvrKQqMrtElbnyynAuXw9fmu5F1MzSss5k6u5Vc4apNmd4PVavVwBK
- zw2c3RviGVsAOVYkl2DQ+SM3ljOnIF5Gn056MLGraCsgWsh1980JzfZMGUe6e0VKK6IG
- KkK12obslgUrllS2KKohymPXZ4RpPp6kX6C4kDTujRVAh2r2nuq3/FMjJbPAFKdmIVRn
- k3ufby7HfKoviG1cLf0rsAwzoc0DUMT+4gw/15HSuyAjAQZI503nDDxQINTAUuQOJkId
- uVXA==
-X-Gm-Message-State: AOJu0Yz18QTHOAEplMu3ccFm4npVUfIpdghIdCCDsDYu93cPZNf6v/nS
- bngzJrVfMJHQfzlmR8iVdH0=
-X-Google-Smtp-Source: AGHT+IGk83CxVbUbNc8JNfloKRQZ+q8agyp+HFSlQhwNedlFD5ROmeOgOW8Dimez4Jb+q1vjsCuWOA==
-X-Received: by 2002:a5d:924a:0:b0:7a9:7aa9:c175 with SMTP id
- e10-20020a5d924a000000b007a97aa9c175mr27119941iol.1.1699134767404; 
- Sat, 04 Nov 2023 14:52:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1699134769; x=1699739569;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lDW4hqeUzvulvY2Y3lkBy15M8X2CLX9z+R98Aelzcpk=;
+ b=YwhCn+wq/tCKmc4enhExk79R65fODttJui6zksJAl6B9H97fbiIplgC9lL18TVw4P5
+ FSYDSFk4Qv8SgGmtjFFKiZpM2x3fWUxW4sD3blvZLYhYhgfe7jCUkw63+g+pB5P0CNWD
+ Y2vWT7dDeUjSvA94OKq+s9JkAmagiNIt+fi8wPNWTwDuic4NMiTued4RnzNTkoCqs8GE
+ 97A7gYoj+W/8RIC726qNsKoz5Uub2hhJhdTvi6q491lgJThZW+Hh9IaGZ2kHoJZk+ZgQ
+ wZV/Oo54p3Yj8uEuYt/etDE7pIhRpdQTniNX7P1hOOEIrehkWZ5UXRPUkOYJfnt7tznj
+ oy8w==
+X-Gm-Message-State: AOJu0Yxa/+iwke9kZHVhoSntFsKwXG4ZCikg+IvD6k4MC+UkfN50EUlq
+ R8ub3PhXfovNvNruvx/RKAFplH3tiBU=
+X-Google-Smtp-Source: AGHT+IHZKx89qv/8zTDOSRSkQZNALpAsxccX1/SPD/TDMniKyiXCp1QEMrVVAYjSZ9sdBzRrDMIRTg==
+X-Received: by 2002:a05:6808:1a24:b0:3b2:ec6d:edcd with SMTP id
+ bk36-20020a0568081a2400b003b2ec6dedcdmr28159024oib.3.1699134769212; 
+ Sat, 04 Nov 2023 14:52:49 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:b4e9:3424:1f72:d6d3])
  by smtp.gmail.com with ESMTPSA id
- o68-20020a257347000000b00da0abddeb02sm2239669ybc.34.2023.11.04.14.52.45
+ o68-20020a257347000000b00da0abddeb02sm2239669ybc.34.2023.11.04.14.52.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Nov 2023 14:52:46 -0700 (PDT)
+ Sat, 04 Nov 2023 14:52:48 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de
 Cc: u-boot@lists.denx.de,
 	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 1/2] pico-pi-imx6ul: Connvert to DM_SERIAL
-Date: Sat,  4 Nov 2023 18:52:41 -0300
-Message-Id: <20231104215242.310349-1-festevam@gmail.com>
+Subject: [PATCH v2 2/2] pico-pi-imx6ul: Convert to watchdog driver model
+Date: Sat,  4 Nov 2023 18:52:42 -0300
+Message-Id: <20231104215242.310349-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231104215242.310349-1-festevam@gmail.com>
+References: <20231104215242.310349-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,28 +94,62 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-The conversion to DM_SERIAL is mandatory, so select this option.
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
 Changes since v1:
-- None
+- Also added imx6ul-pico-pi-u-boot.dtsi which I forgot to add in v1.
 
- configs/pico-pi-imx6ul_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/imx6ul-pico-pi-u-boot.dtsi | 15 +++++++++++++++
+ configs/pico-pi-imx6ul_defconfig        |  3 +++
+ 2 files changed, 18 insertions(+)
+ create mode 100644 arch/arm/dts/imx6ul-pico-pi-u-boot.dtsi
 
+diff --git a/arch/arm/dts/imx6ul-pico-pi-u-boot.dtsi b/arch/arm/dts/imx6ul-pico-pi-u-boot.dtsi
+new file mode 100644
+index 000000000000..95bd9c905954
+--- /dev/null
++++ b/arch/arm/dts/imx6ul-pico-pi-u-boot.dtsi
+@@ -0,0 +1,15 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++#include "imx7s-u-boot.dtsi"
++
++/ {
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
++};
++
++&wdog1 {
++	bootph-pre-ram;
++};
 diff --git a/configs/pico-pi-imx6ul_defconfig b/configs/pico-pi-imx6ul_defconfig
-index 1eee1e6c2ff5..3af968d55128 100644
+index 3af968d55128..604a213e1ea4 100644
 --- a/configs/pico-pi-imx6ul_defconfig
 +++ b/configs/pico-pi-imx6ul_defconfig
-@@ -70,6 +70,7 @@ CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_PFUZE100=y
- CONFIG_DM_REGULATOR_FIXED=y
+@@ -72,6 +72,8 @@ CONFIG_DM_REGULATOR_FIXED=y
  CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DM_SERIAL=y
+ CONFIG_DM_SERIAL=y
  CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
  CONFIG_USB=y
  CONFIG_SPL_USB_HOST=y
+ CONFIG_USB_MAX_CONTROLLER_COUNT=2
+@@ -82,3 +84,4 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
+ CONFIG_CI_UDC=y
+ CONFIG_SPL_USB_SDP_SUPPORT=y
++CONFIG_IMX_WATCHDOG=y
 -- 
 2.34.1
+
 
