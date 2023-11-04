@@ -4,75 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15899C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3931C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:00:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D92786DB1;
-	Sat,  4 Nov 2023 20:57:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C45A83414;
+	Sat,  4 Nov 2023 21:00:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RD8ZDcz8";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="dx/atKxu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F411583414; Sat,  4 Nov 2023 20:57:43 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B790686828; Sat,  4 Nov 2023 21:00:40 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A85386BC5
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:57:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEA43803AC
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 21:00:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-778a92c06d6so199011785a.2
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:57:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699127856; x=1699732656; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/ZyN8vbDy3W26gCMTAeIja8Z8SMMmbiZ9RZ9ab0zNmo=;
- b=RD8ZDcz8b9Dh6q+E4yxOp5gVtAdOVwClXQyyuGv01yG618HiUk6mfql4V/qfOirxg/
- Gtbgiamd9rwxuSqGrpL29JU0OlJO09Yf2PC0V725k+fD+i0ruhEtKi5RjFo1kbVAlMsw
- leXHWKg54m51ZsY99Nv4+iaI6R18ZgCoq7xUq/b0rmprVxGA1CIT+czbyBmKEAlA/JC1
- SXMftXo2G3hZdMcg1dzJiq20Bo/kZlBHgOlv5i95HIncr0nXsLIlEOxr29lc6LpUXJbC
- rWX5d0Aoj9Wu06GdVpI519D8pH+QtCiVTbIHng+5Tuk9YSKVrwDL0+QjzzttDQYAOZtO
- RvEw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 5A16B40620
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:00:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699128014;
+ bh=Iui24WYhRG4C79ehk0syB4lEyHBoAP4RJCUSRd18eD8=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=dx/atKxuCiat2ZMuuF49cgnfMIBqIe1bJNPN9DMhkSyBtsKOTeQyWg2lfx3gwXki+
+ EHWjKCAem4FS/aQAc/f1kd9ZGoT9N+BGMV1qjn/zL7lUhWvBkFb/CiGvep6d4yCXxR
+ nWO3Jca7eClBnJ7Yy9Uf96Vnt6hDZUJ6mBYZ+U57EXX7KzwBNxYiCLFXe4n66TVM9S
+ KQ6j+9n97uczDO5b+EEBfE7b5CaG7nNU8eFVEGc13JinIMGCw/nI+PJmdKAoeb1zVE
+ GHiouKoA9VHgIF4wMluUoz+ryTMOXUvoRDpDVIQMlLYnGqZSXSog/tPCmpQwKC2qjP
+ EfCIWieshWDCA==
+Received: by mail-lf1-f70.google.com with SMTP id
+ 2adb3069b0e04-507c4c57567so3118142e87.0
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 13:00:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699127856; x=1699732656;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/ZyN8vbDy3W26gCMTAeIja8Z8SMMmbiZ9RZ9ab0zNmo=;
- b=OcH942VAZTKSmHo96j2hV9kWh1vaW6Zm+lQcsMoA/ob0iJJNT8ETtEYdXptHIrux2h
- yltlWytj5GzaIUCgaZw+oI8thH3Q7JInC377ew3Ltru/Ii/bwwp3ax4jjI5re/1HBzwk
- CkVqufjuJ/IrcXO/Kkb/sXrZ6ZXaZP+RvOMjeemqMgkLK/R5RSHkmnkWVmajL1/QfilP
- rKIOrnewxzzMq8xhjiPe6rp2hxYTqsKuefOiQxkH40Xatf55TZbeZw9iMc/UshiAR8oQ
- 1rQJOpQxG9+6GV9TB6a/Fb8B4ORsLyc445ilTnh0xsf6fo9m9CBhJo+r+axG8dgh7wfn
- vscA==
-X-Gm-Message-State: AOJu0YyINZ4aABEgxNasfLnbQCcVyctVsg5coS7h8ZIGxQH7QQGroixR
- ZvEHSy13VPeGXBnMAui1Xs397tmF0YD4Dg==
-X-Google-Smtp-Source: AGHT+IGMZvPDLXy3nfCKS5pjlJKF6IHEfDtC2ajrn+Z7yqLBajdU6fI83zkU73zv7zdnmmDsqPPn0w==
-X-Received: by 2002:a05:620a:140a:b0:76f:20df:f032 with SMTP id
- d10-20020a05620a140a00b0076f20dff032mr23174994qkj.69.1699127855632; 
- Sat, 04 Nov 2023 12:57:35 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- c17-20020a05620a135100b007742ad3047asm1802278qkl.54.2023.11.04.12.57.35
+ d=1e100.net; s=20230601; t=1699128013; x=1699732813;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Iui24WYhRG4C79ehk0syB4lEyHBoAP4RJCUSRd18eD8=;
+ b=oeuyLOXrYqz05n/9OUcRuVtYi7Wcepy9WVsVe6tsRTbD6aj1tO+rnrDkf02KAhEmyh
+ 55tpubTeKX0H8KQBFo4Eh1hNAHHrLpbpO3ymZC1SLIBpKstAQp0a7mBFy0X13xMcZc39
+ ZXwJvL0Qe6hkzEgwld9oVH/aLolhRhDSGsym+1OFYIA3BX57Ih37XZWTU2hlQR2czM1i
+ sSOsDbK2/zUU7SO5ClOL/2jH6on6XZOKIhq+JTOfpCn/Nzv3UCdpvQTzRA6Xl46bNHEa
+ rX6ZsEjHp2vGZ6GsU4G+v0NTeXqEA3zXXrvf/4b61Ym0j5AixV+yvG1WYoEi8TwBL9wA
+ BmRg==
+X-Gm-Message-State: AOJu0YyzXhMchTk67ZuxCsnwWjon87Yt9muw7JKJKoOyevlSWlWyPfHd
+ kFxgVblDdQjLEIBHNweiwzHm4o1Zd2tsdg/RA5Hqtsm7Xm/7WA893YJPWtzb2qjG31N+gHqblVk
+ c8RDxudy36vy2nfd0zrW+gRx9JGX0QBfBbfxpz7Nivw==
+X-Received: by 2002:a05:6512:2396:b0:507:9623:8ae8 with SMTP id
+ c22-20020a056512239600b0050796238ae8mr26567289lfv.29.1699128013567; 
+ Sat, 04 Nov 2023 13:00:13 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFj05IA8U11OhXGPhqvOmKt9G+q+Ab2PU5lDtPZpMLL/k7cpfslFwu2z0KuROnDAptqkqAftg==
+X-Received: by 2002:a05:6512:2396:b0:507:9623:8ae8 with SMTP id
+ c22-20020a056512239600b0050796238ae8mr26567267lfv.29.1699128013099; 
+ Sat, 04 Nov 2023 13:00:13 -0700 (PDT)
+Received: from [10.0.29.1] ([159.148.28.2]) by smtp.gmail.com with ESMTPSA id
+ d12-20020ac244cc000000b005079994a9e2sm595917lfm.252.2023.11.04.13.00.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Nov 2023 12:57:35 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Simon Glass <sjg@chromium.org>
-Cc: Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] sandbox: Close file after mmaping it
-Date: Sat,  4 Nov 2023 15:57:33 -0400
-Message-Id: <20231104195733.1576679-1-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
+ Sat, 04 Nov 2023 13:00:12 -0700 (PDT)
+Message-ID: <ab1b51cb-3d7b-4e65-b28f-e42e6a0c70cb@canonical.com>
+Date: Sat, 4 Nov 2023 22:00:11 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] dm: fix misleading messages
+To: Simon Glass <sjg@chromium.org>
+Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de
+References: <20231104184716.13743-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3st2CHJeSVkZGL-N7fDQqebK9VD0vodsXaz+Er96sB1g@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ3st2CHJeSVkZGL-N7fDQqebK9VD0vodsXaz+Er96sB1g@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,61 +103,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After opening pathname, we must close ifd once we are done with it.
+On 11/4/23 21:45, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Sat, 4 Nov 2023 at 18:47, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> When no RNG device exists for a driver referenced via U_BOOT_DRVINFO() we
+>> get messages like:
+>>
+>>      No match for driver 'arm-rndr'
+>>      Some drivers were not found
+>>
+>> This is misleading as it is not the driver that was not found, it is the
+>> device that is not found. Correct the messages.
+>>
+>> Reported-by: Andre Przywara <andre.przywara@arm.com>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   drivers/core/lists.c | 2 +-
+>>   drivers/core/root.c  | 2 +-
+>>   2 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+>> index 8034a8f48d..e39d3acc97 100644
+>> --- a/drivers/core/lists.c
+>> +++ b/drivers/core/lists.c
+>> @@ -97,7 +97,7 @@ static int bind_drivers_pass(struct udevice *parent, bool pre_reloc_only)
+>>                          if (CONFIG_IS_ENABLED(OF_PLATDATA))
+>>                                  drt->dev = dev;
+>>                  } else if (ret != -EPERM) {
+>> -                       dm_warn("No match for driver '%s'\n", entry->name);
+>> +                       dm_warn("No device for driver '%s'\n", entry->name);
+> 
+> This should be "No match for driver_info"
+> 
+> It is not a device
+> 
+>>                          if (!result || ret != -ENOENT)
+>>                                  result = ret;
+>>                  }
+>> diff --git a/drivers/core/root.c b/drivers/core/root.c
+>> index d4ae652bcf..29c918eb73 100644
+>> --- a/drivers/core/root.c
+>> +++ b/drivers/core/root.c
+>> @@ -167,7 +167,7 @@ int dm_scan_plat(bool pre_reloc_only)
+>>
+>>          ret = lists_bind_drivers(DM_ROOT_NON_CONST, pre_reloc_only);
+>>          if (ret == -ENOENT) {
+>> -               dm_warn("Some drivers were not found\n");
+>> +               dm_warn("Some devices were not found\n");
+> 
+> Some driver_infos were not found
 
-Fixes: b9274095c2c ("sandbox: Add a way to map a file into memory")
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
----
+This suggestion does not match the case that Andre and I were discussing in
 
- arch/sandbox/cpu/os.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+https://lore.kernel.org/u-boot/1ad4bd2c-e667-42b6-b637-8816a6c60d94@canonical.com/T/#m13fbf9011d74f713080284fb9963c90646d527fb
 
-diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
-index 85d0d6a1703..95c26d855ab 100644
---- a/arch/sandbox/cpu/os.c
-+++ b/arch/sandbox/cpu/os.c
-@@ -219,7 +219,7 @@ int os_map_file(const char *pathname, int os_flags, void **bufp, int *sizep)
- {
- 	void *ptr;
- 	off_t size;
--	int ifd;
-+	int ifd, ret = 0;
- 
- 	ifd = os_open(pathname, os_flags);
- 	if (ifd < 0) {
-@@ -229,23 +229,28 @@ int os_map_file(const char *pathname, int os_flags, void **bufp, int *sizep)
- 	size = os_filesize(ifd);
- 	if (size < 0) {
- 		printf("Cannot get file size of '%s'\n", pathname);
--		return -EIO;
-+		ret = -EIO;
-+		goto out;
- 	}
- 	if ((unsigned long long)size > (unsigned long long)SIZE_MAX) {
- 		printf("File '%s' too large to map\n", pathname);
--		return -EIO;
-+		ret = -EIO;
-+		goto out;
- 	}
- 
- 	ptr = mmap(0, size, PROT_READ | PROT_WRITE, MAP_SHARED, ifd, 0);
- 	if (ptr == MAP_FAILED) {
- 		printf("Can't map file '%s': %s\n", pathname, strerror(errno));
--		return -EPERM;
-+		ret = -EPERM;
-+		goto out;
- 	}
- 
- 	*bufp = ptr;
- 	*sizep = size;
- 
--	return 0;
-+out:
-+	os_close(ifd);
-+	return ret;
- }
- 
- int os_unmap(void *buf, int size)
--- 
-2.37.1
+U_BOOT_DRVINFO(cpu_arm_rndr) is triggering the arm-rndr driver's bind 
+method. The bind method returns -ENOENT if there is no matching device.
+
+Neither the driver U_BOOT_DRIVER(arm_rndr) nor the driver info 
+U_BOOT_DRVINFO(cpu_arm_rndr) is missing. It is the non-existence of a 
+matching device that triggers the messages.
+
+Best regards
+
+Heinrich
+
+> 
+> They are not devices
+> 
+>>                  ret = 0;
+>>          }
+>>
+>> --
+>> 2.40.1
+>>
+> 
+> Also please add a Fixes tag, I think for this:
+> 
+> 20e442ab2df dm: Rename U_BOOT_DEVICE() to U_BOOT_DRVINFO()
+> 
+> Regards,
+> Simon
 
