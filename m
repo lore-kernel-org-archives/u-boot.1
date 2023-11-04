@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D85C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:48:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7212C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 07:53:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FBC587115;
-	Sat,  4 Nov 2023 08:48:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41A7F87007;
+	Sat,  4 Nov 2023 08:53:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QBK8ohe4";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QMpFB0VA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C23D087113; Sat,  4 Nov 2023 08:48:38 +0100 (CET)
+ id A9BF486A6B; Sat,  4 Nov 2023 08:53:10 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E45D387007
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:48:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D7E486A6B
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 08:53:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699084107; x=1699688907; i=xypron.glpk@gmx.de;
- bh=B4smjJfepZYgQTDKFwxo5XCYmGBksONVJsFeFVI1jm8=;
+ t=1699084381; x=1699689181; i=xypron.glpk@gmx.de;
+ bh=LiSVTFFrZ332jYjF0XUn9inQe+lIrUxdFEDdK503vSg=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=QBK8ohe4JZKeZNU7nbltmzaGS98oiyU/mlyK6PZf6Gdr+8aivtoOKWnW2l/UL27Z
- V3sFRwI8FMciiL3R4gSPHetvtGt3N44Mm4OSRgeESViMGtEBsd3gZ348uPenvZiY+
- SfkOd3yhWlUtfwlmmkPtkWg/2GlkgBAhWk6fZxHcB/JTB8PQqQhcopaqKs0QWCLIq
- jjc9QXyj7/BUkJnR4ynml29kcXlDyQeDZms+6BCFcA3zL0/nRP/+/IJWOo9M0ag/z
- LIPh20vxxvZqtsvyHDFKIfIBgv4XZPVo6Xu4418kYGE5wgX2dioNQD4pNKo1zlFFb
- YPMkY+oMTEU6Rfygbw==
+ b=QMpFB0VAEks52GO41pcq08gTUOI+XUK7lWmsZ01yBObmYn/nLxJv03J47ek7dNr4
+ TUZGsTuCfCSB96IQ0c7CiUB7AJjQP3V2+spk08aOS4ry2TTNh4z3xbcgOpx/xlu9g
+ KeLgP+bUikt7uB5kR4UNbT1kZJZdT2IaI+Bsf4OIKC8pO5uhPioWrEwBbXceWvFQZ
+ OFlbpGe+dSo4rz99KWpfdGWstQk5N5wdSJAHlOa15McwE3BxiOVPliDpeB17sC0LT
+ kdZdpjCkIu49eLrKmO3AlJcLIZiDERbC7HuAfCN8zbwuL4TAzPTYO5MejWzPdw86m
+ NOYhdqE7SMP7VFhkWg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.0.29.1] ([159.148.28.2]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MmlT2-1rgS6f1zNe-00jp2T; Sat, 04
- Nov 2023 08:48:27 +0100
-Message-ID: <bd79e1f1-3192-49ab-9429-a0ade36aa248@gmx.de>
-Date: Sat, 4 Nov 2023 09:48:21 +0200
+Received: from [10.0.29.1] ([159.148.28.2]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MAfYw-1rA8lJ2ECO-00B7dd; Sat, 04
+ Nov 2023 08:53:01 +0100
+Message-ID: <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
+Date: Sat, 4 Nov 2023 09:53:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] net: bootp: BOOTP/DHCPv4 retransmission
- improvements
+Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
+Content-Language: en-US, de-DE
 To: Sean Edmond <seanedmond@linux.microsoft.com>
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
  ilias.apalodimas@linaro.org, u-boot@lists.denx.de
 References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-3-seanedmond@linux.microsoft.com>
- <5d6aba63-d050-4365-8a4d-9cd2b528e804@gmx.de>
- <7dd18ad7-6d6c-47ea-9dc0-3b59ddf25460@linux.microsoft.com>
-Content-Language: en-US, de-DE
+ <20231024002159.74477-2-seanedmond@linux.microsoft.com>
+ <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+ <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <7dd18ad7-6d6c-47ea-9dc0-3b59ddf25460@linux.microsoft.com>
+In-Reply-To: <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8qcL104knzQpr8lMiWobRPjTDO/zGexGJXOzqHBHWlN53IZRwm1
- XWta98yi98w5QJnVL9CktnZ644lHxb0MC89yMGZT1KqHEiylIKKStRp1NKzJkQr+VDT9hwN
- 2h9BIHRDcLSVfvUrvQETJ/4xdyWTUyOCRE4Ipvgqh7SzhUKQKsWqmitEVIBFfgfN5rDNELM
- yB7eWuosl47byYAT01hRw==
-UI-OutboundReport: notjunk:1;M01:P0:bg9u6dWA/Cc=;+oaYvmMO2u3lPsVh+5vjbIpjhFM
- 4980BWqaASl6ivT9D3iCN6wjSqKF64sHtGqd14uJ6ijoMUSDXPliVskW/iUZuDLmFIRVCgV5A
- UaN5aU0bQbZWv+NIHTo7VKdIMxyu06a+lA43kV1vDfcHCsxlzx7rXznpegkIZw1LlWoybVZuK
- CkS3+Sr6ufGGz3U3DstLVE+naDX99TEPcazzUo2ww0pFfJVTimuNZhaXDyGkC04L2dPp+5ZI/
- kazyeK1sX9klInJC0JxBrz64dSfX6WuJGNgu5FUwVUbs1qi0qwB8CIShkJmcvRfZxOl42TmQB
- +RsAehJdLyl84hAxGE214STyQyftgk641VZaLFsVafd1n/No7GCpx6pX5NY49lfkY5Vc4d4NM
- pDXlN4UPLvUcrVVBP7LeLeqUKMkWdAw2Azgm6HvaVWOEAYbsuusxNV2e9j6yyS1X2Ooim/lcP
- +fwo/at200kP1LI0bUQSH3tQ2slahYjsrY0sZqvrfiXeLUYFGbzqLEIYvtooqm01tZDb8SmX/
- ijnNK4jiW6LtiAevQjFCPZBh5H2JB4RGhDvoYkqwd2eDxaB3GOe7tEaalZ5OMRG7YJ3BJ8MSa
- tzSQ4lXApVwvMfFnrGmEeZaReKqa6xwn/ErczC6biLXoLz6xsVeTcqEdh+rJIrHB1q8xl1T9M
- cp82UGQn/nxAEWFAulOnhPf49kL1A0weKY4fJDWUCUU8N0qxlQwyPmFAkaOGqYOiJ1/q6/IVm
- irRg8EVYWjDQrOK7M5U/QE6KFrRSjWOHn6jo87OdXbKVoYJ/06q1fwD4AhXjMR5rcQhzDsXoE
- HtCnU/G1lsLDe8k+GlLeeI7boJB4M0hBacaQ3DL++CuKiGOdOmft+sT9f9uB0N7XgzaSH6DtH
- AR5gGdmjSwF1iwDLu8YAJ2HLtc1i8Nz/rPgl/66zHFp1UVi0lgRLqol59NPNz+UNiK5pWQX+l
- xT7vrw==
+X-Provags-ID: V03:K1:ejAjfgXv2F7RAD2/BjsAEQp9c8TCD/s0ZnVJvaratq8EpCxe8TS
+ 2pYdgBDDQGmkH9bSBSoXVpOu5tY3GH+aQ8CkYbV8Mlwn/kmwVKtz/qaCZdwbCNvKTAAIM1y
+ e/4aruEyP/3CuiLhtrljQvifLejkm70QMzP7EZIB2bz+KOHegCBfsjJ4U3NWmcs/BJw8z0N
+ xjHtASHlq1NZCPMChcj6g==
+UI-OutboundReport: notjunk:1;M01:P0:m9oPmqyUcUk=;xfjY6i3qwPkn1KapWmcOuULOfki
+ lhmlhF5BoFGWG7t0Tm67GMYshfYiB7ehcuylL8Yhj0jhPRsYjbi8FwjkXu5QDy1j9lKcCwM15
+ sDzZzw/OsxDqCgI/oyYD8jQ7Xnu4OadH2jvydGx995gbpxlZsIGORi2+aceAzjamx80zm9QV8
+ yXGnrqjSRyzlSjtVJmEpduTuJvWW6IjgAxkY47WGYeB2mudAJeOTWxnZvREo+sosFiSIGqgKs
+ eV368BY4GbymLUF1gb0yKazrVKQbSIkQHFrMPMvARW/CrVXm+MkzgZR7HnUlfbDQULraXRBEJ
+ kSlbjj2ik/y7wEDz8uRQlXIxbCr3AlEESUNLGPI+R6pLPqmyV8DXEOUICT0vTH7eBjwkmB2Or
+ eHoY5aqDacFLwbhGYzJ0miz20iUKkDWUAD/pmd6aT9K8lmjvNw1QuZCxw4m7PmoZXT/8RCP4p
+ yqZJwBtbz1CwwOVzi84phoF4Ve8NeawjiJRGo2d93UTLRrcd8JQNz6jNAIuqOSt5YogY2J/LJ
+ IYzPtBoPA8rGSjFdDSJq8heC/BxiL5YDdUl7xs2egXiSB1Z95J1uSgp6m4oaRuySXcU6Ctqlw
+ frY4v4oQquAd8l99dZM8zPzHjjbETwSG3r4XgL0G2giqvhfTo8Z5tdgSa6G8TnDNf+x/eMAFf
+ cm0z8ODlDRmd7PbwntGV2YZ79vGtTZrivoxlrI2jC16aAZnB+HhUIbHUHg/uNXDS01BJCL8W9
+ cHJY5CdhbP0Lu3xKXV5lxV9prbIZzIgE595JZhThbRCviDCxTLKYq1Lzk2N4pMCtj6jWtovxu
+ jNacapkoowCOYCFDWyBye8XJwJtk8zJY4LIXNi7qTrlEltHXSa2RO8asWbg/teAMjXeinu2K0
+ +9ImXlfsDavH4yss2MJtKlaaRuemCUY/j2ePbeI+e0pg7n3mDrZ4bMPTdBZFDBA32SJIXhMlb
+ Pjapa74EnJ6pt3RmkL8BePNKhmA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,235 +92,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/4/23 03:04, Sean Edmond wrote:
+On 11/4/23 03:03, Sean Edmond wrote:
 >
-> On 2023-10-23 11:06 p.m., Heinrich Schuchardt wrote:
+> On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
 >> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
 >>> From: Sean Edmond <seanedmond@microsoft.com>
 >>>
->>> This patch introduces 3 improvements to align with RFC 951:
->>> - retransmission backoff interval maximum is configurable
->>> - initial retranmission backoff interval is configurable
->>> - transaction ID is kept the same for each BOOTP/DHCPv4 request
->>>
->>> In applications where thousands of nodes are serviced by a single DHCP
->>> server, maximizing the retransmission backoff interval at 2 seconds (t=
-he
->>> current u-boot default) exerts high pressure on the DHCP server and
->>> network layer.
->>>
->>> RFC 951 =E2=80=9C7.2. Client Retransmission Strategy=E2=80=9D states t=
-hat the
->>> retransmission backoff interval should maximize at 60 seconds. This
->>
->> %s/maximize at/be limited to/
->>
->>> patch allows the interval to be configurable using the environment
->>> variable "bootpretransmitperiodmax"
->>
->> If there is an RFC defining the value, why do we need an environment
->> variable?
->>
->>>
->>> The initial retranmission backoff period defaults to 250ms, which is
->>> also too small for these scenarios with many clients.=C2=A0 This patch=
- makes
->>> the initial retransmission interval to be configurable using the
->>> environment variable "bootpretransmitperiodinit".
->>>
->>> Also, on a retransmission it is not expected for the transaction ID to
->>> change (only the 'secs' field should be updated). Let's save the
->>> transaction ID and use the same transaction ID for each BOOTP/DHCPv4
->>> exchange.
+>>> Allow dhcp server pass pxe config file full path by using option 209
 >>>
 >>> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 >>> ---
->>> =C2=A0 net/bootp.c | 56 ++++++++++++++++++++++++++++++++++++++--------=
--------
->>> =C2=A0 1 file changed, 40 insertions(+), 16 deletions(-)
+>>> =C2=A0 cmd/Kconfig |=C2=A0 4 ++++
+>>> =C2=A0 cmd/pxe.c=C2=A0=C2=A0 | 10 ++++++++++
+>>> =C2=A0 net/bootp.c | 21 +++++++++++++++++++++
+>>> =C2=A0 3 files changed, 35 insertions(+)
 >>>
->>> diff --git a/net/bootp.c b/net/bootp.c
->>> index 6800290963..bab17a9ceb 100644
->>> --- a/net/bootp.c
->>> +++ b/net/bootp.c
->>> @@ -42,6 +42,17 @@
->>> =C2=A0=C2=A0 */
->>> =C2=A0 #define TIMEOUT_MS=C2=A0=C2=A0=C2=A0 ((3 + (CONFIG_NET_RETRY_CO=
-UNT * 5)) * 1000)
+>>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>>> index 5bc0a92d57..adbb1a6187 100644
+>>> --- a/cmd/Kconfig
+>>> +++ b/cmd/Kconfig
+>>> @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default 0x15 if ARM
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default 0x0 if X86
 >>>
->>> +/*
->>> + * According to rfc951 : 7.2. Client Retransmission Strategy
->>> + * "After the 'average' backoff reaches about 60 seconds, it should b=
-e
->>> + * increased no further, but still randomized."
->>> + *
->>> + * U-Boot has saturated this backoff at 2 seconds for a long time.
->>> + * To modify, set the environment variable "bootpretransmitperiodmax"
->>> + */
->>> +#define RETRANSMIT_PERIOD_MAX_MS=C2=A0=C2=A0=C2=A0 2000
+>>> +config BOOTP_PXE_DHCP_OPTION
+>>> +=C2=A0=C2=A0=C2=A0 bool "Request & store 'pxe_configfile' from BOOTP/=
+DHCP server"
+>>> +=C2=A0=C2=A0=C2=A0 depends on BOOTP_PXE
 >>
->> This does not match RFC 951. Please, why shouldn't we use the standard
->> value by default?
+>> Why should this be disabled by default?
 >>
->>> +#define RETRANSMIT_PERIOD_INIT_MS=C2=A0=C2=A0=C2=A0 250
+>> Do we really want a separate config variable?
 >>
->> This constant should be described too.
->>
->>> +
->>> =C2=A0 #ifndef CFG_DHCP_MIN_EXT_LEN=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 /* minimal length of extension
->>> list */
->>> =C2=A0 #define CFG_DHCP_MIN_EXT_LEN 64
->>> =C2=A0 #endif
->>> @@ -53,6 +64,7 @@
->>> =C2=A0 u32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_ids[CFG_BOO=
-TP_ID_CACHE_SIZE];
->>> =C2=A0 unsigned int=C2=A0=C2=A0=C2=A0 bootp_num_ids;
->>> =C2=A0 int=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_try;
->>> +u32=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id;
->>> =C2=A0 ulong=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_start;
->>> =C2=A0 ulong=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_timeout;
->>> =C2=A0 char net_nis_domain[32] =3D {0,}; /* Our NIS domain */
->>> @@ -60,6 +72,7 @@ char net_hostname[32] =3D {0,}; /* Our hostname */
->>> =C2=A0 char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] =3D {0,}; /*=
- Our
->>> bootpath */
->>>
->>> =C2=A0 static ulong time_taken_max;
->>> +static u32=C2=A0=C2=A0 retransmit_period_max_ms;
->>>
->>> =C2=A0 #if defined(CONFIG_CMD_DHCP)
->>> =C2=A0 static dhcp_state_t dhcp_state =3D INIT;
->>> @@ -414,8 +427,8 @@ static void bootp_timeout_handler(void)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_timeout *=
-=3D 2;
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (bootp_timeout > 2000)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo=
-otp_timeout =3D 2000;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (bootp_timeout > retran=
-smit_period_max_ms)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bo=
-otp_timeout =3D retransmit_period_max_ms;
->>
->> RFC 951 requires that the backoff time is randomized.
->>
-> I added randomization in v3.=C2=A0 Note, in that update I haven't put an=
-y
-> guards around the use of rand()/srand() (as is the case in net_rand.h).
-> Perhaps it's safe to assume it will always be present for inclusion of n=
-et?
+> I expect most won't use this option to get the file path (they'll use
+> the default paths as per the PXE specification).=C2=A0 It makes more sen=
+se
+> for me to keep it optional, like many of the other options?
 
-If you need rand(), you have to ensure that CONFIG_LIB_RAND=3Dy, e.g. let
-CONFIG_CMD_BOOTP select CONFIG_LIB_RAND.
+RFC 5701 seems to require this option. Hence we should make it default
+yes. Boards that have a build size issue can opt out.
 
 Best regards
 
 Heinrich
 
->
+>>> +
+>>> =C2=A0 config BOOTP_VCI_STRING
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 string
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 depends on CMD_BOOTP
+>>> diff --git a/cmd/pxe.c b/cmd/pxe.c
+>>> index 704589702f..9404f44518 100644
+>>> --- a/cmd/pxe.c
+>>> +++ b/cmd/pxe.c
+>>> @@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context
+>>> *ctx, unsigned long pxefile_a
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int ret =3D get_pxe_file(ctx, pxelinux_=
+configfile, pxefile_addr_r);
+>>>
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 free(pxelinux_configfile);
+>>> +=C2=A0=C2=A0=C2=A0 /* set to NULL to avoid double-free if DHCP is tri=
+ed again */
+>>> +=C2=A0=C2=A0=C2=A0 pxelinux_configfile =3D NULL;
+>>>
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
+>>> =C2=A0 }
+>>> @@ -141,6 +143,14 @@ int pxe_get(ulong pxefile_addr_r, char
+>>> **bootdirp, ulong *sizep, bool use_ipv6)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 env_get("bootfile"), use_ipv6))
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return -ENOMEM;
+>>>
+>>> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pxelinux_configfile && !us=
+e_ipv6) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (pxe_dhcp_option_path(&=
+ctx, pxefile_addr_r) > 0)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 go=
+to done;
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 goto error_exit;
+>>> +=C2=A0=C2=A0=C2=A0 }
+>>> +
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OP=
+TION) &&
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 pxelinux_config=
+file && use_ipv6) {
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (pxe_dhcp_op=
+tion_path(&ctx, pxefile_addr_r) > 0)
+>>> diff --git a/net/bootp.c b/net/bootp.c
+>>> index 7b0f45e18a..6800290963 100644
+>>> --- a/net/bootp.c
+>>> +++ b/net/bootp.c
+>>> @@ -26,6 +26,7 @@
+>>> =C2=A0 #ifdef CONFIG_BOOTP_RANDOM_DELAY
+>>> =C2=A0 #include "net_rand.h"
+>>> =C2=A0 #endif
+>>> +#include <malloc.h>
+>>>
+>>> =C2=A0 #define BOOTP_VENDOR_MAGIC=C2=A0=C2=A0=C2=A0 0x63825363=C2=A0=
+=C2=A0=C2=A0 /* RFC1048 Magic Cookie */
+>>>
+>>> @@ -601,6 +602,10 @@ static int dhcp_extended(u8 *e, int
+>>> message_type, struct in_addr server_ip,
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *e++=C2=A0 =3D 42;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *cnt +=3D 1;
+>>> =C2=A0 #endif
+>>> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *e++ =3D 209;=C2=A0=C2=A0=
+=C2=A0 /* PXELINUX Config File */
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *cnt +=3D 1;
+>>> +=C2=A0=C2=A0=C2=A0 }
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* no options, so back up to avoid send=
+ing an empty request
+>>> list */
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (*cnt =3D=3D 0)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 e -=3D 2;
+>>> @@ -909,6 +914,22 @@ static void dhcp_process_options(uchar *popt,
+>>> uchar *end)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 net_boot_file_name[size] =3D 0;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 }
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 break;
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 case 209:=C2=A0=C2=A0=C2=
+=A0 /* PXELINUX Config File */
+>>
+>> This 209 appears in multiple places. Please, define a constant, e.g.
+>> DHCP_OPTION_CONFIG_FILE, in bootp.h and use the symbolic name. Please,
+>> document the constant referring to RFC 5071.
+> fixed in v3.
+>>
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if=
+ (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 /* In case it has already been allocated when get
+>>> DHCP Offer packet,
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 * free first to avoid memory leak.
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 if (pxelinux_configfile)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 free(pxelinux_configfile);
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 pxelinux_configfile =3D (char *)malloc((oplen + 1) *
+>>> sizeof(char));
+>>> +
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 if (pxelinux_configfile)
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 strlcpy(pxelinux_configfile,=
+ popt + 2, oplen + 1);
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 else
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 printf("Error: Failed to all=
+ocate
+>>> pxelinux_configfile\n");
+>>
+>> We do the same in dhcp6_parse_options(). Please, factor out a common
+>> function to avoid code duplication.
+> I would prefer to keep these seperate for several reasons:
+> - our DHCP server team has asked for the DHCP6 "pxe config file" parsing
+> to change.=C2=A0 I attempted to add to upstream here:
+> https://lore.kernel.org/u-boot/20230725231329.5653-1-seanedmond@linux.mi=
+crosoft.com/. I will attempt to submitted that patch again
+> - PXE config file isn't standardized yet for DHCPv6 (the current
+> implementation was a proposal from our DHCP server team)
+> - LWIP will eventually superceed bootp.c in u-boot, but we'll probably
+> be keeping dhcpv6.c for a bit (keeping the duplicate code will make the
+> migration easier)
+>>
 >> Best regards
 >>
 >> Heinrich
 >>
->>> net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_request()=
-;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->>> @@ -711,10 +724,14 @@ static int bootp_extended(u8 *e)
->>>
->>> =C2=A0 void bootp_reset(void)
->>> =C2=A0 {
->>> +=C2=A0=C2=A0=C2=A0 char *ep;=C2=A0 /* Environment pointer */
->>> +
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_num_ids =3D 0;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_try =3D 0;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_start =3D get_timer(0);
->>> -=C2=A0=C2=A0=C2=A0 bootp_timeout =3D 250;
->>> +
->>> +=C2=A0=C2=A0=C2=A0 bootp_timeout =3D env_get_ulong("bootpretransmitpe=
-riodinit", 10,
->>> RETRANSMIT_PERIOD_INIT_MS);
->>> +
->>> =C2=A0 }
->>>
->>> =C2=A0 void bootp_request(void)
->>> @@ -726,7 +743,6 @@ void bootp_request(void)
->>> =C2=A0 #ifdef CONFIG_BOOTP_RANDOM_DELAY
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ulong rand_ms;
->>> =C2=A0 #endif
->>> -=C2=A0=C2=A0=C2=A0 u32 bootp_id;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct in_addr zero_ip;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 struct in_addr bcast_ip;
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 char *ep;=C2=A0 /* Environment pointer =
-*/
->>> @@ -742,6 +758,9 @@ void bootp_request(void)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 else
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 time_taken_max =
-=3D TIMEOUT_MS;
->>>
->>> +=C2=A0=C2=A0=C2=A0 retransmit_period_max_ms =3D
->>> env_get_ulong("bootpretransmitperiodmax", 10,
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 RETRANSMIT_PERIOD_MAX_MS);
->>> +
->>> =C2=A0 #ifdef CONFIG_BOOTP_RANDOM_DELAY=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 /* Random BOOTP delay */
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (bootp_try =3D=3D 0)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 srand_mac();
->>> @@ -801,18 +820,23 @@ void bootp_request(void)
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 extlen =3D bootp_extended((u8 *)bp->bp_=
-vend);
->>> =C2=A0 #endif
->>>
->>> -=C2=A0=C2=A0=C2=A0 /*
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 Bootp ID is the lower 4 =
-bytes of our ethernet address
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 plus the current time in=
- ms.
->>> -=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> -=C2=A0=C2=A0=C2=A0 bootp_id =3D ((u32)net_ethaddr[2] << 24)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | ((u32)net_ethaddr[3] << =
-16)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | ((u32)net_ethaddr[4] << =
-8)
->>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | (u32)net_ethaddr[5];
->>> -=C2=A0=C2=A0=C2=A0 bootp_id +=3D get_timer(0);
->>> -=C2=A0=C2=A0=C2=A0 bootp_id =3D htonl(bootp_id);
->>> -=C2=A0=C2=A0=C2=A0 bootp_add_id(bootp_id);
->>> -=C2=A0=C2=A0=C2=A0 net_copy_u32(&bp->bp_id, &bootp_id);
->>> +=C2=A0=C2=A0=C2=A0 /* Only generate a new transaction ID for each new=
- BOOTP request */
->>> +=C2=A0=C2=A0=C2=A0 if (bootp_try =3D=3D 1) {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 =
-Bootp ID is the lower 4 bytes of our ethernet address
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *=C2=A0=C2=A0=C2=A0 =
-plus the current time in ms.
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id =3D ((u32)net_eth=
-addr[2] << 24)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
-((u32)net_ethaddr[3] << 16)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
-((u32)net_ethaddr[4] << 8)
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | =
-(u32)net_ethaddr[5];
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id +=3D get_timer(0)=
-;
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_id =3D htonl(bootp_i=
-d);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bootp_add_id(bootp_id);
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 net_copy_u32(&bp->bp_id, &=
-bootp_id);
->>> +=C2=A0=C2=A0=C2=A0 } else {
->>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 net_copy_u32(&bp->bp_id, &=
-bootp_id);
->>> +=C2=A0=C2=A0=C2=A0 }
->>>
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
->>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Calculate proper packet lengths=
- taking into account the
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 br=
+eak;
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 default:
+>>> =C2=A0 #if defined(CONFIG_BOOTP_VENDOREX)
+>>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 if (dhcp_vendorex_proc(popt))
 
