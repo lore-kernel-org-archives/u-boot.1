@@ -4,67 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DDBC4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D57FBC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:56:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EF4586FC9;
-	Sat,  4 Nov 2023 21:53:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0AF5E86FC9;
+	Sat,  4 Nov 2023 21:56:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q72sJIQi";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="d4e63YuD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B97DA86F7C; Sat,  4 Nov 2023 20:18:21 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1932086FF4; Sat,  4 Nov 2023 21:56:37 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D937686F6C
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:17:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E67386FC3
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 21:56:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=worryelectric@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4083f61312eso23993775e9.3
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:17:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699125476; x=1699730276; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Tyh4t1uim4lgU8yNQ4KORWf4JNxmi+/dY0uMuuvSfBk=;
- b=Q72sJIQi6Ja7vXADlqO7ybCyh5DcoW+A2v5QT+Md/XHZor05tQl0Ng/TygaB5SSUlu
- 27kLRc1d4V8aeo6y60xvr3ww51RCH60ELe11ltEVvDhPV7g55jwQmKQOXwEsgoVA/DPH
- kw10+ebWSgwUo9Zil/xCAthtcgS79aKym/jJHrKm45hD2Ohx40iDSX/NKI6kXouDHd7j
- zB9OudLZBbHQnIPkhGDb4Vc8iBkYSjAq2OEn3wxla12oicOXDjBcW8aOzPc7Sv+RUs8F
- NimwLpV85MJKLYjwglw59r/916u7qXsHci57CiwtFCLvzzW4vamEQFv/uZz6C94KjPxh
- Qx5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699125476; x=1699730276;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Tyh4t1uim4lgU8yNQ4KORWf4JNxmi+/dY0uMuuvSfBk=;
- b=EP4J7f1hwvx7+6B9BWTZLdUwOH0BA0HgsmAMT0OpnfwG9KGa5Qfyp4w35T/QZtJlhY
- CrqcCF34j7pSIz5myiRGKEfQJUMqINboLaBxueGqBoWOV5nVWJ8xX2v+1jYa8dbosxM0
- U9+kdpNohvF8kJu0989YwBQSUbmouXxJ7+vZ5mhbzjf8RdtBTOGAWcSGnA+FEGy8YOHb
- lR2iHAYU1DkoqD1RVHCPiunoHrOP4njD3YlobmwQ95tsD0RD3M52TMSqGmbA7d3cGSAZ
- NGn+eJMdjmGNLgGHC2zxstk08XoJQzYW3TUopNwzE7wgCRfTs+nB5cz6GbYx3RS8P4d9
- xUZg==
-X-Gm-Message-State: AOJu0YwDZ1YSY+ZWmkt5jZSOaqquLztw3yuEGXWCmphzYRifSp8mByfe
- RLQWdZc6aZO+f57r7CdDZcqkM9JYf8KSonNIvKhBtHbFLHw=
-X-Google-Smtp-Source: AGHT+IFHGsVwnQV3EXUP0U4DXynA6UReOQL9Jbfr3OnFt5UQ9qrcigy9oVlhSrAAbmXj+Za9t582SrW0RWwAJfGuylk=
-X-Received: by 2002:a05:600c:4f43:b0:3fb:a100:2581 with SMTP id
- m3-20020a05600c4f4300b003fba1002581mr21064187wmq.14.1699125476054; Sat, 04
- Nov 2023 12:17:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1699131392; x=1699736192; i=xypron.glpk@gmx.de;
+ bh=uq1wr5cKEohw63UEosTGmsr17sU8Dej4bHOOZB4p1QQ=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=d4e63YuD1FmbU9kxjB2LGszYmR3gg6H5mUc+1oVacJmy/uCMQJ+JV+0RLiJP9MXX
+ mtfgqzjoj84ZCiD1KDgX03z3AYTtuvuCtHyAwSAGVid4qACXOOQJfvXDCDCFOt8JQ
+ FwE6KYERampQQr5rILKtB1xJGDoA7dQKMiy7cnz2nn7GqJYWJab/LbOw8WwTm6QGI
+ UvKk+EsFyhsb6LzhHpX2gEuXpaqOtvEDbjmrlz7lqfmGzfJaQ2bVZhMVv3tk2vWWg
+ 3ya6Kyi8mnqV9AKyOXMJyR1ntjHccDG768AAJJIiwSeE6g6jgYfcRB5iakl+QAfvi
+ Ayf3DWyWLZarevfKrw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([159.148.28.2]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MIwzA-1qjUQv3D90-00KOtq; Sat, 04
+ Nov 2023 21:56:31 +0100
+Date: Sat, 04 Nov 2023 22:56:30 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, Hongxing Zhu <hongxing.zhu@nxp.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: =?US-ASCII?Q?Re=3A_uboot_reports_adding_disk_failed=28EFI=5FNOT=5FF?=
+ =?US-ASCII?Q?OUND=29_and_first_disk_is_gone_in_next_scsi_scan?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAPnjgZ1r60UomKz5DkH-POvsj0jKq1rNENniwZpAn3AWHk94EA@mail.gmail.com>
+References: <AS8PR04MB86760A4BC079AF5BD57C81B98CA7A@AS8PR04MB8676.eurprd04.prod.outlook.com>
+ <AS8PR04MB867669CC8B5EB411BDEF45348CA5A@AS8PR04MB8676.eurprd04.prod.outlook.com>
+ <CAPnjgZ1r60UomKz5DkH-POvsj0jKq1rNENniwZpAn3AWHk94EA@mail.gmail.com>
+Message-ID: <2F0F7B2D-8DDF-439C-9889-8FA0B21CF36C@gmx.de>
 MIME-Version: 1.0
-From: electricworry <worryelectric@gmail.com>
-Date: Sat, 4 Nov 2023 19:17:44 +0000
-Message-ID: <CABZPTZSQHhcVuqLmg6nEiKBfF4p+R+y5sDCGaa19qztSEs54BA@mail.gmail.com>
-Subject: Adding support for Orange Pi Zero 3
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Sat, 04 Nov 2023 21:53:23 +0100
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:suv2TexNz04fdU/U6TT0n/Eb0v6IBCMTzHvBQYDTHjTSmZ24KvY
+ 57HCoMMmms+oR0doz1gdAxiKxI6VIXTbxwcIAJnmrJaIGoKNkNVEgEsRzxZ3kX0Q4F6UANM
+ pyJcMatXT90J0pxMlp3pdIBb6qAOFDY6r1OCI18idu6Qk8fPXuOByJyNqHRvP+thhJG9rKN
+ LLsHzR+8YTuJNbGLRmWyQ==
+UI-OutboundReport: notjunk:1;M01:P0:RfzjVW1lfRs=;U0xoiFxYXkrhN8UCODB8P7lqYYq
+ l/AHHEHIttARtQ8Dx0UhwHTNPQZ6YcVNZ+8CmfTu9ac/fqNDhILiC5ESOdt4pxpefmuiK7NFt
+ Qb0EMn4qoa8kz6T3mex5vzMV+sqAeS5ytlb9OLqB3hwu6c8dXF1MSdGkyGnaQgqaD78pO6ccH
+ Q1lTlQ+14L2L9yCAEttDO+O+yLfvvWXo622wCnh2DSj3citc0VyDrVrpJWKs5qPkIgKhtCxTo
+ PihMr+Eiz40NP8aXt1owXYYmprG/c/yyDY0mUHCi8yuEEC6OKNbsaUWZDgfrrzTrlRkXRi9cl
+ +KmFDMqTYK32hmK0wgUKhyFec1yxkuCNMhRL9Hnmt5jWc+vIezC+a6VU7ZnEJJnsh853/hiF2
+ /tmM2OTYo56UtGworqQfblaXAJFaxrJrtRBz3V8o6XIw9dLDYuBL0Ml8qO7wvAEOyHCT6dr+y
+ zUsXRBNFT6hsHbDZI+kO2HQ/txhuZQWQPlSCS0iO/GG1rhuW8Khy04iAuzr9AxJSbvPBBq7KX
+ U9B419flYOncWfPNZw7n6aHZdgwxpklhPaUWoMwA49ebt95VosgenzbCMmajJYOnIS9Qf5Viu
+ 61Ro3KxGSaE2hXoKcRhBpFC5T2nodEMImTNRQLs0zrMDkiOFSm+cn/alc1NQxbFBsNyDa0vtH
+ r/V5C5Txk4TkaYN1XN4LtF0l3TocBG36i4VLjWwZV7MUaemrvpBl+bTuQ7xIDTZ8DIrcEwvqq
+ d8hE20r4yTndi5DkqXystJkdmMlTfMN8g/fDZCGXbjXwUPV+CoTZ78Nl+W1IBcZaSEaM2TxzH
+ CdwBe/0T6Nzay2uYYlVZvm0qKa5tYqmjk0s3zD9e6SbXfNy+dY5QjBvHCZm4JcaP+ijdGLFWV
+ j5XTEpz4V096/Z7hqESmqJWEdowEtcz5gr6lWa4OaiJ2KPgmiSYqtH3F30ZCn5H6xklIvYU/k
+ 3qlIiHIvMsepf+yEXWu6xEGyuVI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,37 +91,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I would like to contribute improvements u-boot to enable support for
-the Orange Pi Zero 3 board. I have already gained a good understanding
-of the project and the standards for changes, and so I have made
-modifications and tested them on my board.
 
-Before submitting patches for review I've got a few questions I'd like
-to discuss.
 
-The board is an Allwinner H618. From what I can gather this is just an
-H616 with minor changes. The changes are so minor that I've been able
-to implement the support as changes to the existing files for H616.
-For example, to add LPDDR4 support I have been able to make changes to
-arch/arm/mach-sunxi/dram_sun50i_h616.c and done so in a well
-configured way that won't impact anything else. Is doing it in this
-way acceptable or would the preference be to have a separate file
-(e.g. dram_sun50i_h618.c) to keep H616 and H618 separate? The way I've
-done it feels right because it really is just a minor upgrade, but
-there might be other opinions I should hear first.
+Am 4=2E November 2023 21:43:52 OEZ schrieb Simon Glass <sjg@chromium=2Eorg=
+>:
+>Hi Richard,
+>
+>+Heinrich as I think this is an EFI bug=2E
+>
+>On Thu, 2 Nov 2023 at 19:37, Hongxing Zhu <hongxing=2Ezhu@nxp=2Ecom> wrot=
+e:
+>>
+>> Hi Simon:
+>> I found that the EFI complained that the disk install path is not updat=
+ed for the second disk=2E
+>> The install path is =E2=80=9CEFI: installed device path '/VenHw(e61d73b=
+9-a384-4acc-aeab-82e828f3628b)/Scsi(0,0)'=E2=80=9D
+>>
+>> when first disk is added=2E
 
-Further, with regards to attribution, all of my changes are based on
-code in https://github.com/orangepi-xunlong/u-boot-orangepi. I've not
-been able to cherry-pick changes because that codebase has departed
-severely from the u-boot master branch and it's not as elegantly
-maintained, so I've had to surgically move just the changes required
-to get my board working. Their repo is correctly marked as GPL-2.0 so
-compatible with merging, but the exact author of every line of code
-will be difficult to attribute. Is it sufficient for me to cite that
-downstream repo as the source of the patches?
+This should be fixed this in U-Boot v2023=2E10=2E
 
-Thanks in advance. I've not submitted a patch here before so I could
-benefit from some hand-holding to not create problems for people, but
-I'm pretty confident that the changes I've made comply with the
-standards of the project and that there won't be much of an issue
-having them accepted.
+https://github=2Ecom/trini/u-boot/commit/e07368ea57d224557570a6715dcffdbc8=
+83a8079
+
+Best regards
+
+Heinrich
+
+>>
+>> But the path is same when the second or later disks are added, and EFI =
+repors that the path had been installed already=2E
+>> EFI: Path /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b)/Scsi(0,0) alread=
+y installed
+>>
+>>
+>>
+>> That=E2=80=99s why the below error when run efi_disk_create_raw() funct=
+ion=2E
+>>
+>> Adding disk for ahci_scsi=2Eid0lun0 failed (err=3D-9223372036854775788/=
+0x8000000000000014)
+>>
+>>
+>>
+>> Do you have any clues about this?
+>>
+>> Thanks in advanced=2E
+>>
+>> Best Regards
+>>
+>> Richard Zhu
+>>
+>>
+>>
+>> From: Hongxing Zhu
+>> Sent: 2023=E5=B9=B411=E6=9C=881=E6=97=A5 10:57
+>> To: sjg@chromium=2Eorg
+>> Cc: u-boot@lists=2Edenx=2Ede
+>> Subject: uboot reports adding disk failed(EFI_NOT_FOUND) and first disk=
+ is gone in next scsi scan
+>>
+>>
+>>
+>> Hi Simon:
+>> Nice to meet you=2E
+>> The u-boot I used is based on v2023=2E04 tagged version=2E
+>> Layerscape LX2160A RDB board has four SATA controllers=2E
+>> Based on LX2160A RDB board and two or more SATA disks connected=2E
+>> I encounter one =E2=80=9Cscsi scan=E2=80=9D problem=2E
+>>
+>>
+>> After the first SATA disk is detected and probed properly in the first =
+=E2=80=9Cscsi scan=E2=80=9D=2E
+>> The other disks would complain that =E2=80=9CEFI_NOT_FOUND=E2=80=9D err=
+or listed below,
+>> when run the first =E2=80=9Cscsi scan=E2=80=9D command in uboot environ=
+ment=2E
+>>
+>> Does this error matter?
+>> BTW, =E2=80=9Cscsi info=E2=80=9D says that all disk info can be dumped,=
+ and all disks are works well,
+>>
+>> after the first =E2=80=9Cscsi scan=E2=80=9D
+>>
+>> In the consecutive rescan operations issued by =E2=80=9Cscsi reset=E2=
+=80=9D or =E2=80=9Cscsi scan=E2=80=9D commends,
+>> the disks would report =E2=80=9Cunable to unbind devices (-1E)=E2=80=9D=
+ error=2E
+>> The first disk is disappeared at all after the next =E2=80=9Cscsi scan=
+=E2=80=9D operations is finished=2E
+>>
+>>
+>> Did you used to encounter such kind of issue?
+>>
+>> Any suggestions and guidance are very appreciated=2E
+>>
+>> Logs:
+>> =3D> scsi scan
+>>
+>> scanning bus for devices=2E=2E=2E
+>>
+>> Target spinup took 0 ms=2E
+>>
+>> AHCI 0001=2E0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>>
+>> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>>
+>>   Device 0: (0:0) Vendor: ATA Prod=2E: ST1000DM010-2EP1 Rev: CC43
+>>
+>>             Type: Hard Disk
+>>
+>>             Capacity: 953869=2E7 MB =3D 931=2E5 GB (1953525168 x 512)
+>>
+>> Target spinup took 0 ms=2E
+>>
+>> AHCI 0001=2E0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>>
+>> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>>
+>> Adding disk for ahci_scsi=2Eid0lun0 failed (err=3D-9223372036854775788/=
+0x8000000000000014)
+>>
+>> SATA link 0 timeout=2E
+>>
+>> AHCI 0001=2E0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>>
+>> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>>
+>> SATA link 0 timeout=2E
+>>
+>> AHCI 0001=2E0301 32 slots 1 ports 6 Gbps 0x1 impl SATA mode
+>>
+>> flags: 64bit ncq pm clo only pmp fbss pio slum part ccc apst
+>> =3D> scsi info
+>>
+>> Device 0: (0:0) Vendor: ATA Prod=2E: ST1000DM010-2EP1 Rev: CC43
+>>
+>>             Type: Hard Disk
+>>
+>>             Capacity: 953869=2E7 MB =3D 931=2E5 GB (1953525168 x 512)
+>>
+>> Device 1: (0:0) Vendor: ATA Prod=2E: ST500DM002-1BD14 Rev: KC45
+>>
+>>             Type: Hard Disk
+>>
+>>             Capacity: 476940=2E0 MB =3D 465=2E7 GB (976773168 x 512)
+>>
+>> =3D> ls scsi 0:1
+>>
+>> <DIR>       4096 =2E
+>>
+>> <DIR>       4096 =2E=2E
+>>
+>> <DIR>      16384 lost+found
+>>
+>> <snip>
+>>
+>> <DIR>       4096 var
+>>
+>> <SYM>         12 linuxrc
+>>
+>> =3D> ls scsi 1:1
+>>
+>> <DIR>       4096 =2E
+>>
+>> <DIR>       4096 =2E=2E
+>>
+>> <DIR>      16384 lost+found
+>>
+>> <snip>
+>>
+>> <DIR>       4096 usr
+>>
+>> <DIR>       4096 var
+>>
+>>
+>>
+>> =3D> scsi reset
+>>
+>>
+>>
+>> Reset SCSI
+>>
+>> scanning bus for devices=2E=2E=2E
+>>
+>> unable to unbind devices (-1E)
+>> =3D> ls scsi 0:1
+>>
+>> ** Bad device specification scsi 0 **
+>>
+>> Couldn't find partition scsi 0:1
+>>
+>> =3D> ls scsi 1:1
+>>
+>> <DIR>       4096 =2E
+>>
+>> <DIR>       4096 =2E=2E
+>>
+>> <DIR>      16384 lost+found
+>>
+>> <snip>
+>>
+>> <DIR>       4096 var
+>>
+>>
+>> =3D> scsi info
+>>
+>> Device 1: (0:0) Vendor: ATA Prod=2E: ST500DM002-1BD14 Rev: KC45
+>>
+>>             Type: Hard Disk
+>>
+>>             Capacity: 476940=2E0 MB =3D 465=2E7 GB (976773168 x 512)
+>>
+>>
+>>
+>> Best Regards
+>>
+>> Richard Zhu
+>>
+>>
+>
+>Regards,
+>Simon
