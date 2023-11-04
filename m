@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5816C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA9AAC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:38:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6B50871A1;
-	Sat,  4 Nov 2023 21:38:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 98218871D7;
+	Sat,  4 Nov 2023 21:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NC93Ya0M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jZcAWBwK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C151C87083; Sat,  4 Nov 2023 21:38:08 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 4879487083; Sat,  4 Nov 2023 21:38:09 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D2D486F65
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 21:37:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E37ED86FC3
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 21:38:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-66cfc96f475so19731426d6.3
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 13:37:59 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-41cb615c6fbso19153801cf.1
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 13:38:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699130277; x=1699735077; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699130278; x=1699735078; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RRbwhPzKqs+wgHGjH3YtUMbtwBdJmErU+sUpNWJ+7Hk=;
- b=NC93Ya0M3rFYJkM66ygHn1xLW2TD9ZXDxG1jNUXyR3FsziRrnm38HH5Zy0hUaUwZAx
- FH3hphqORwl3CN6eqDfOdjEJ7R4C4JZQd7edkk3a/Wr71HKALbvwJA/PznXwr7P7xXI8
- Js6XBuUAA/+0C0tly2nUbvUXDAqCWQVeUOx3Gh/m0BNIE2A6N4VHZXCydrZ2Q4sQrCwX
- HklvvZ3NAj8z185B0z0xErdPWm3vxLRQbxBbajpLwqliFf56NyIv0L8OOte3j59LfEcy
- KTROWHjsz47RanrC1SvGphtShzXH0IWSF/B9thk1yUNj8YbE/BqYbXZ4TugZjTu5G8X8
- NdVg==
+ bh=lJOkqdLukBGP095E97cm6V9ohjayF3kGeG9ZqA/YVOw=;
+ b=jZcAWBwKKeB7UxrKdJq2FwjpkIramZl7sDfVTb8tv/WD0lNi1JF7S6ZO8m9ybo0xmN
+ 9GzPGf947JkpXoYD+2b/so68UviTwDJsNAEM1aFQ2E98px1d0fZBhOg+sXk6BpCcQc0M
+ gAG1C+/obz0cn0MLzpqrdW+yB8WV+BKs+azvhDwLObZR23gtooE8NVTGDXSiLVl/x9sc
+ qvmnm9fIe2wFjNPEZx98DI6MmIFudg4j7HbO8p3Y3koCXqyVvIOULF2dCyzZ19v3vDiR
+ dWxkB6PessL9Oc9y2SYIyNdHo0mY7za1WXXq71qPvVT3PapSL4Kv7RQu6QgmqaEfxgAl
+ Yokw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699130277; x=1699735077;
+ d=1e100.net; s=20230601; t=1699130278; x=1699735078;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RRbwhPzKqs+wgHGjH3YtUMbtwBdJmErU+sUpNWJ+7Hk=;
- b=U8kDR99ssRjCKYWK1MlBb8Lk6cUkgkwwFCkPI2SKcAVm8qROc7Uras7/xLWFvtq2TW
- MQiaYVS6gaL9yuwc8/EFEz+ti12p/OVeNmIFdQa/BYKOIKBluQZF3H8ZNxyP7hW0SgvP
- VdN07B5QtFpl8GVzAEzTtkpNnUh1nnGffimm2r2fhIQrjaNDc7DKaCFJWuqOuAnsMOn+
- UGMguVlWsDQVkiU6awTW4tJnQxBOn4+d9QQn4jzhHKUhljsQO+f/VULN3pFsZvidCv7v
- O12Kkh7MCKAUIeAUtUuJin6Pdvhc+7hAVAopSj+YvDD9hPJOSgkeaPGwnspmWX+paN0/
- YoxA==
-X-Gm-Message-State: AOJu0YxeLsX5OslIFYsOoEyT1OLGC8+eHTC9zyX7pyz73GDkXj7QY1nX
- ZBcyv7gZ32IaOhhwyioG3Y05furVxAPRNA==
-X-Google-Smtp-Source: AGHT+IFA9+T8tYuPJmXun9o/Xvs0bLHpcgOBM3xDtk7uwzsqnlmb5nRxRE6VsuAuzmAz9URTFEHrYQ==
-X-Received: by 2002:a05:6214:3009:b0:66d:65ae:18f6 with SMTP id
- ke9-20020a056214300900b0066d65ae18f6mr28645335qvb.50.1699130277260; 
- Sat, 04 Nov 2023 13:37:57 -0700 (PDT)
+ bh=lJOkqdLukBGP095E97cm6V9ohjayF3kGeG9ZqA/YVOw=;
+ b=OBM8Yc7QqJ28E36843P81RZ1y9SJIVL0CatNagHkMuDQsFqh2J0u7440zQMOf3v9K7
+ mH0ymE0gYcFcUpCMWKf1zM2W87RQ5GKpolZY5P6psdwskXWs3wnGuaLXHh5NWzUFl81n
+ Av+B4FOCCDbBnfxInDR8Z3tzR8hIl2i/6o7kIrjvvO6Y4YLSEm8QeUTxJW2gl7kXqlW3
+ X52kDo7+YLK2rkXcSHiEERV7uXoCSqAQfELje3XE5iJJiIf/JCPE8vBmB6jRP7nrUCgG
+ teE8llq2zKl4bQDAt606YyKXNbJzqvZMuRb+LivZ9oq7TAgBSQBEgChshc0IdakoYKxw
+ khVg==
+X-Gm-Message-State: AOJu0Ywy85Mmplq5srNwCpuWKE1WsgYi6TGzBnqo3Rpqi5WXPz241VSg
+ fTIMihFcDwLDq/r9rDcGMbfmJXYOnZd2Pg==
+X-Google-Smtp-Source: AGHT+IENT9mRXQviFEBfPPGDUQFtLHXr0cuShPzPa79xjQH3FDBQH5Q+XEer/3CTUzIU+UVHVsR5Xg==
+X-Received: by 2002:a05:622a:138b:b0:41b:7738:a8cf with SMTP id
+ o11-20020a05622a138b00b0041b7738a8cfmr31378896qtk.17.1699130278488; 
+ Sat, 04 Nov 2023 13:37:58 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- d9-20020a0cf0c9000000b0066d1348bdddsm1934057qvl.44.2023.11.04.13.37.56
+ o24-20020ac86d18000000b0041cc2852f62sm1899608qtt.5.2023.11.04.13.37.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Nov 2023 13:37:56 -0700 (PDT)
+ Sat, 04 Nov 2023 13:37:58 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>
 Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v2 01/15] spl: nand: Fix NULL-pointer dereference
-Date: Sat,  4 Nov 2023 16:37:39 -0400
-Message-Id: <20231104203753.1579217-2-seanga2@gmail.com>
+ Heiko Schocher <hs@denx.de>
+Subject: [PATCH v2 02/15] nand: Don't dereference NULL manufacturer_desc
+Date: Sat,  4 Nov 2023 16:37:40 -0400
+Message-Id: <20231104203753.1579217-3-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231104203753.1579217-1-seanga2@gmail.com>
 References: <20231104203753.1579217-1-seanga2@gmail.com>
@@ -93,31 +93,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-spl_nand_fit_read unconditionally accesses load->priv. Ensure it is set.
+When no manufacturer is matched, manufacturer_desc is NULL. Avoid
+dereferencing it in that case.
 
-Fixes: 00e180cc513 ("spl: nand: support loading i.MX container format file")
+Fixes: 4e67c571252 ("mtd,ubi,ubifs: sync with linux v3.15")
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 ---
 
-Changes in v2:
-- Don't set load->priv for spl_nand_legacy_read since it doesn't use it.
+(no changes since v1)
 
- common/spl/spl_nand.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mtd/nand/raw/nand_base.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index 07916bedbb9..5b6932bf7e0 100644
---- a/common/spl/spl_nand.c
-+++ b/common/spl/spl_nand.c
-@@ -105,7 +105,7 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
+diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+index 6b4adcf6bdc..44b6cb63a01 100644
+--- a/drivers/mtd/nand/raw/nand_base.c
++++ b/drivers/mtd/nand/raw/nand_base.c
+@@ -4462,17 +4462,14 @@ ident_done:
+ 	else if (chip->jedec_version)
+ 		pr_info("%s %s\n", manufacturer_desc->name,
+ 			chip->jedec_params.model);
+-	else
++	else if (manufacturer_desc)
+ 		pr_info("%s %s\n", manufacturer_desc->name, type->name);
+ #else
+ 	if (chip->jedec_version)
+ 		pr_info("%s %s\n", manufacturer_desc->name,
+ 			chip->jedec_params.model);
+-	else
++	else if (manufacturer_desc)
+ 		pr_info("%s %s\n", manufacturer_desc->name, type->name);
+-
+-	pr_info("%s %s\n", manufacturer_desc->name,
+-		type->name);
+ #endif
  
- 		load.dev = NULL;
--		load.priv = NULL;
-+		load.priv = &offset;
- 		load.filename = NULL;
- 		load.bl_len = bl_len;
- 		load.read = spl_nand_fit_read;
+ 	pr_info("%d MiB, %s, erase size: %d KiB, page size: %d, OOB size: %d\n",
 -- 
 2.37.1
 
