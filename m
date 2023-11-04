@@ -4,65 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9B35C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A067C4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 19:44:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4245870A5;
-	Sat,  4 Nov 2023 20:43:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1E95B87119;
+	Sat,  4 Nov 2023 20:43:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n8ivLrfN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jJJBsvyW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B67486F7C; Sat,  4 Nov 2023 20:43:00 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 0397687119; Sat,  4 Nov 2023 20:43:44 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42EE98708A
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:42:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03F7886EEE
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:43:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-54394328f65so5212771a12.3
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:42:58 -0700 (PDT)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-507a55302e0so4263921e87.0
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:43:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699126978; x=1699731778; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699127018; x=1699731818; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=raCBbg8k21hFmd/xilkZ7HErH8g1kg9IL4Jfch0bPlU=;
- b=n8ivLrfNla2J3yBnn9wuNHqn6rcJ91P8mm9+J+GASKfumZamengIHBR/KUK3gXDnD3
- QUVtSHd2WWma1GN1j1hzbdq2tMRHgE1Ec/TjjDd6jiquEvMjwXOWXBcl6WbL6Rd9lZzB
- qJXRNHQbB4bEGr6fKYZlpRpC0ytW0+rC0M9Co=
+ bh=pVF+qoLpNEMYIwrQNY+fUKyheLehPqoQZ4ldYIqeOiI=;
+ b=jJJBsvyW1u0x0Rbb4JKsW3Oahr002fo0gxBKtKae8nYjaUDVajQtl/hBrwJgPYe7FR
+ vbDyf0SANPfahN/m93gk18muRIAr7AKSobk03w+kgUwcD+g2bwhRx1aI6XdeO4R4Do6R
+ XxCPU5tvwlTF4bCnUpBxYJciIxolMDKj56wqk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699126978; x=1699731778;
+ d=1e100.net; s=20230601; t=1699127018; x=1699731818;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=raCBbg8k21hFmd/xilkZ7HErH8g1kg9IL4Jfch0bPlU=;
- b=m2i1WVw5+ok3x8NPiWDDk7YwYoJ4KUgLhluGd27K+PykujhBvVzK7crIsc0jQgd2ih
- mffpk51vfrhHPRzHKcA6brFMO0qnEM5/lH7kIZCO4RqzVSeGp0jyp9p4vlVjofGV/37I
- QmRlLz8orqaeRFHwPQUI+/dXd9xeKqNR49xMRWQ814WoFPU71q27topQNqxg7flKIlia
- fbJdZJAJ49/XvVtha5Wu+RBtpe4/H1JNSXejUW84p1c3Wq9bXQ+rbaKAYMAwtoYUfvlc
- oBmyrYsZnWYUeJwLxQXLNrrv9qy5NVODsOEuiIiZWceWz0lP35cjATKT3wDjSrivZJJm
- 28TA==
-X-Gm-Message-State: AOJu0Yx5CR5OQZsptZHOEcECD4kSdL4E/WrSvxFYsM9JMJG8XYraEmWQ
- Jrtj71CE19p1B9PNxzwBRmvD5xAyHdIZdeEzkest391bOEYRZaDw0So=
-X-Google-Smtp-Source: AGHT+IE2aVpBAynwDF24BPWHkPkL/UNqQjlEz8w+u4IwuTkGyZzVBwy+h2fpfdfOhFr5mZMaj7cYnJXvQv1KS1pi9oE=
-X-Received: by 2002:a50:baa7:0:b0:533:97c:8414 with SMTP id
- x36-20020a50baa7000000b00533097c8414mr21157876ede.7.1699126977578; Sat, 04
- Nov 2023 12:42:57 -0700 (PDT)
+ bh=pVF+qoLpNEMYIwrQNY+fUKyheLehPqoQZ4ldYIqeOiI=;
+ b=fBh2z0pLqIDH0ltDP9nGkM+umB47f1+lkNw7/H/TZfUX9iFz44x1LnDfSZmqY9Ddoz
+ ji3jzzo+VriCbmnB7B2Dajyhpd/6TEqEeSz0jc1aoXOx5MbiFPfCH+o8Yayz9KNexHcs
+ rqBEk2mNHrnXzGYW17cRR1V6b3Rxtuqu2xLJZJ8PKPx7raa5Ft9cuZPfHOrzw2EYCM7U
+ 9Mw0dgpJDA1XNROF8kQ9yAkA/YlqRiZUCt+/rdryox19sF7MVGBV5x6GVMUmW0i7+43U
+ 61px/cq8TmCEm0SW32mmvx20Z7Ve+R5mZXLaE6ezSkDT6iYPZ4iFB7fVW5re0LORn9ZI
+ cvqw==
+X-Gm-Message-State: AOJu0Yw5UNgLLBSvevYN3ScQ9KCurGxinms3fSQ4obyUjRaVFRjm3KUk
+ 7rz94aUQkFDkqOFNBkmvMOhWoVsTm3KBJyA0uB266g==
+X-Google-Smtp-Source: AGHT+IHIExAodVjN1+s5jOXCNnKHZ4c5uawggLMU8Y6bi+6DIMp1wUkMCfBWsZUaoaRe0vWCI5rkaUsMbeTXhH6+9wM=
+X-Received: by 2002:a05:6512:491:b0:507:b0a1:6088 with SMTP id
+ v17-20020a056512049100b00507b0a16088mr19319707lfq.46.1699127017514; Sat, 04
+ Nov 2023 12:43:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
-In-Reply-To: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
+References: <20231024-b4-prevbl-fdt-v1-1-541f71dba802@linaro.org>
+ <CAPnjgZ3mcyST+6dLk1r=cXwQDFT1CNAfOXXfbMaSFGt+HqCiCg@mail.gmail.com>
+ <df7c8647-abfe-43a8-869d-6a570a109f9c@linaro.org>
+ <CAPnjgZ3HM-f_Af0uKEz+4vDT0f4-6AWhOOEaDNqYWko70f6rvA@mail.gmail.com>
+ <87cyx2re5k.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87cyx2re5k.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 4 Nov 2023 19:42:38 +0000
-Message-ID: <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
-Subject: Re: Need advise with u-boot on SH-7785LCR
-To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
-Cc: u-boot@lists.denx.de
+Date: Sat, 4 Nov 2023 19:43:25 +0000
+Message-ID: <CAPnjgZ1h_Fss3_98EDZPtDYBUaFnUtXnP5Q3E32UPq_5yKRXrQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: init: add an option to use FDT from previous
+ bootloader
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: caleb.connolly@linaro.org, dsankouski@gmail.com, 
+ vladimir.zapolskiy@linaro.org, rfried.dev@gmail.com, xypron.glpk@gmx.de, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,106 +87,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi John,
+Hi Mark,
 
-On Sat, 4 Nov 2023 at 13:59, John Paul Adrian Glaubitz
-<glaubitz@physik.fu-berlin.de> wrote:
+On Wed, 25 Oct 2023 at 08:05, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> Hello!
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Tue, 24 Oct 2023 12:34:39 -0700
+> >
+> > > This mechanism of retrieving the DTB is also used on the apple M1 I
+> > > think, and any other board where we're booting U-Boot as a drop-in for
+> > > the kernel on arm64.
+> >
+> > I believe M1 is an open source project so perhaps they could adopt
+> > firmware handoff when it is finalised.
 >
-> I am Debian's maintainer for the SuperH (sh4) port as well as one of the upstream
-> maintainers of SuperH support in the kernel. I own various SuperH boards with one
-> of them being the Renesas SH-7785LCR board which used to be supported by u-boot
-> up to including v2019.01.
+> Hi Simon,
 >
-> My board is currently running v2014.01 with the following output:
+> I'll repeat what I've said before; handoff for M1 is deliberately 100%
+> compatible with handoff to the Linux kernel such that it is possible
+> to bypass U-Boot and directly boot a Linux kernel.  This is a feature
+> the Asahi Linux developers depend on.
 >
-> U-Boot 2014.01 (Jan 30 2015 - 11:01:14)
->
-> CPU: SH4
-> BOARD: Renesas Technology Corp. R0P7785LC0011RL
-> DRAM:  384MB
-> Flash: 64MB
-> PCI: SH7780 PCI host bridge found.
-> PCI:   Bus Dev VenId DevId Class Int
->   00:00.0     - 10ec:8169 - Network controller
->   00:01.0     - 1095:3512 - Mass storage controller
-> In:    serial
-> Out:   serial
-> Err:   serial
-> Net:   RTL8169#0
-> Warning: RTL8169#0 MAC addresses don't match:
-> Address in SROM is         00:00:87:6b:bd:72
-> Address in environment is  74:90:50:00:02:03
->
-> Hit any key to stop autoboot:  0
-> => printenv
-> baudrate=115200
-> bootargs=console=ttySC1,115200 root=/dev/sda1 ip=dhcp
-> bootcmd=usb reset; fatload usb 0:1 0x89000000 uImage-git.gz; pmb ; bootm
-> bootdelay=3
-> bootdevice=0:1
-> ethact=RTL8169#0
-> ethaddr=74:90:50:00:02:03
-> stderr=serial
-> stdin=serial
-> stdout=serial
-> usbload=usb reset; fatload usb 0:1 0x89000000 uImage-git.gz; pmb ; bootm
-> ver=U-Boot 2014.01 (Jan 30 2015 - 11:01:14)
->
-> Environment size: 396/262140 bytes
-> =>
->
-> I am currently running into the problem that u-boot hangs after verifying the image
-> checksum when trying to boot a cross-built kernel. This has happened in the past before
-> while often the kernel would boot just fine after performing some resets.
->
-> When the boot hangs, it looks like this:
->
-> => usb reset; fatload usb 0:1 0x89000000 uImage-next.gz ; pmb ; bootm
-> (Re)start USB...
-> USB0:   scanning bus 0 for devices... 2 USB Device(s) found
->        scanning usb for storage devices... 1 Storage Device(s) found
-> reading uImage-next.gz
-> 4348967 bytes read in 2470 ms (1.7 MiB/s)
-> ## Booting kernel from Legacy Image at 89000000 ...
->    Image Name:   Linux-6.6.0-rc1-00007-g63f1ee206
->    Image Type:   SuperH Linux Kernel Image (gzip compressed)
->    Data Size:    4348903 Bytes = 4.1 MiB
->    Load Address: 80001000
->    Entry Point:  80002000
->    Verifying Checksum ... OK
-> (hangs)
->
-> My first attempt at fixing this would be upgrading the board to v2019.01.
->
-> Unfortunately, I have not found any documentation yet which explains how to upgrade
-> the u-boot firmware on this particular board. Does anyone know whether there are
-> any tools for this available? I can see an "erase" command in the u-boot command
-> list, but there is no command for writing a new u-boot firmware to flash.
->
-> I have already reached out to Nobuhiro Iwamatsu who is the original author of support
-> for these boards in u-boot and also provided me with the particular hardware. However,
-> I haven't heard back from him yet.
->
-> Another question that I have is the loading address. I need to load the kernel to the
-> loading address 0x89000000 as otherwise the machine won't boot. However, according to
-> the output of the u-boot mkimage tool, the loading address is 0x80001000 and not
-> 0x8900000. Could the different addresses be related to the unusual memory layout
-> of this board which has to be switched with the "pmb" command prior boot?
->
-> Also, I was wondering what it would take to convert this particular board to CONFIG_DM_USB
-> and CONFIG_DM_PCI. I would be interested in getting support for SuperH boards in u-boot
-> into a better shape with broader hardware support.
->
-> From the kernel side, we're currently working on converting SuperH to Device Trees, so I'm
-> expecting SuperH Linux to be better suited to modern versions of u-boot in the future.
->
-> For now, it would be a great help if anyone could help me with the hanging boot issue.
+> If you want us to make changes here, you need to convince the Linux
+> kernel developers to adjust Documentation/arch/arm64/bootig.rst to
+> allow for the firmware handoff convention.
 
-Is it possible to check if it reaches the kernel? E.g. with
-earlyprintk ? It would be good to know if U-Boot managers to jump to
-Linux, or not.
+I don't have an infinite memory. In fact it does not extend all that
+far back, so I appreciate you mentioning this again.
+
+What is U-Boot for, if Asahi boots Linux directly?
+
+In any case, firmware handoff needs to be treated separately from
+Linux handoff. If you are trying to push the Linux approach into
+firmware, it will cause all sorts of things to become impossible,
+including universal payload. We can handle this with magic values in
+the registers, if needed.
+
+Of course, I have to mention that if we used a sensible format with
+metadata for Linux (like FIT) programs would *know* what they are
+booting, and be able to set things up correctly accordingly. It is
+high time we started thinking about this a bit more holistically,
+instead of going for the lower common denominator.
 
 Regards,
 Simon
