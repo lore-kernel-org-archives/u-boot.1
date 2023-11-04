@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE06C4332F
-	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DDBC4332F
+	for <u-boot@archiver.kernel.org>; Sat,  4 Nov 2023 20:53:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAEA087456;
-	Sat,  4 Nov 2023 21:38:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4EF4586FC9;
+	Sat,  4 Nov 2023 21:53:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kCi/3Z6t";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q72sJIQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9649287440; Sat,  4 Nov 2023 21:38:20 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id B97DA86F7C; Sat,  4 Nov 2023 20:18:21 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FEB68701C
- for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 21:38:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D937686F6C
+ for <u-boot@lists.denx.de>; Sat,  4 Nov 2023 20:17:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-778925998cbso197076685a.0
- for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 13:38:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=worryelectric@gmail.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4083f61312eso23993775e9.3
+ for <u-boot@lists.denx.de>; Sat, 04 Nov 2023 12:17:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699130289; x=1699735089; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S3n1lmP+rJVgM0ljOGVDGizm06HWWCA6XEN/2Y62ds8=;
- b=kCi/3Z6tplXBttlIRR6OTkS8j2kPmDPGwyOt/fKAJYNd24BpxVT1FXxmKVizN/rGUR
- m9E+IiQsD2Id8iiRzJQQ+KmZaJwA7B0acw8CHThBBt3GT8Mj/tLh+9zG6mDE+OIEN46J
- HIqh1oqJcibnwHme1lWThmYdMhcjv9yBBsi7Ud4jEBxOe65eLZIsyibZHowmStuO9WEL
- OXsO3C2dDL30bKIWsrGCLXj6kkL2e1Z89bc0H2/qdmmTYlkW81Ffk9w8HxbL99Drn9YG
- 2VbCWac8yFRx2yj8eTfWDoBQN+lCJGFYbr1GLvA/ViPDoQIE3SlwQyUrrVXXUE/zLq8h
- PklA==
+ d=gmail.com; s=20230601; t=1699125476; x=1699730276; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Tyh4t1uim4lgU8yNQ4KORWf4JNxmi+/dY0uMuuvSfBk=;
+ b=Q72sJIQi6Ja7vXADlqO7ybCyh5DcoW+A2v5QT+Md/XHZor05tQl0Ng/TygaB5SSUlu
+ 27kLRc1d4V8aeo6y60xvr3ww51RCH60ELe11ltEVvDhPV7g55jwQmKQOXwEsgoVA/DPH
+ kw10+ebWSgwUo9Zil/xCAthtcgS79aKym/jJHrKm45hD2Ohx40iDSX/NKI6kXouDHd7j
+ zB9OudLZBbHQnIPkhGDb4Vc8iBkYSjAq2OEn3wxla12oicOXDjBcW8aOzPc7Sv+RUs8F
+ NimwLpV85MJKLYjwglw59r/916u7qXsHci57CiwtFCLvzzW4vamEQFv/uZz6C94KjPxh
+ Qx5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699130289; x=1699735089;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S3n1lmP+rJVgM0ljOGVDGizm06HWWCA6XEN/2Y62ds8=;
- b=ClH30xcRBFlluN4gpXim88zxLBsDa4E5fRJ+ITxZXVqmjvityFCTT7zOOzfjKvjpui
- Qwg9B6gJqKL03U8w2bVxMT3mccwm30wwrh3YOEOe9fOT9VTGH/UMhsX2WDglRsJYovw5
- b2ipHV8VT2uB1BB5mJOF9FwCfp10ZBK5ZwtyjnMG+5eZqTrZhn9Mu8OtC6+0Qtg+DYGu
- ONfAozMMuDXVN172S+KLH9OD5ym90I+TlOT3JB8emD9XfdSDknGvjVWa5T532lPZJGiZ
- ILlBfpUNRdpYMNtxEHOEbQX1IrjRaP6ML2t/qHQgFM4SNdJ9j5Ck8AMo2lrHGSnKyfkZ
- PkoA==
-X-Gm-Message-State: AOJu0YyVMsmcTWZIttofVyKlZHUzVZoN+b3LQJAhYm/lu30iaLqN3+iT
- 7dAbbEBfzGBtPXHt1OVGr/r00ywwda2y7g==
-X-Google-Smtp-Source: AGHT+IHmWQJfopThhaWZhpqwG4u2aQbvXisHFHMlyutBLu2k5XS6zUnYhPporMFmqmx9XuIeW20FyA==
-X-Received: by 2002:a05:620a:44d4:b0:77a:5249:935d with SMTP id
- y20-20020a05620a44d400b0077a5249935dmr11789424qkp.62.1699130288891; 
- Sat, 04 Nov 2023 13:38:08 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- h10-20020a05620a400a00b0076efaec147csm1833246qko.45.2023.11.04.13.38.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Nov 2023 13:38:08 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Tom Rini <trini@konsulko.com>,
-	Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v2 11/15] nand: Add function to unregister NAND devices
-Date: Sat,  4 Nov 2023 16:37:49 -0400
-Message-Id: <20231104203753.1579217-12-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231104203753.1579217-1-seanga2@gmail.com>
-References: <20231104203753.1579217-1-seanga2@gmail.com>
+ d=1e100.net; s=20230601; t=1699125476; x=1699730276;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Tyh4t1uim4lgU8yNQ4KORWf4JNxmi+/dY0uMuuvSfBk=;
+ b=EP4J7f1hwvx7+6B9BWTZLdUwOH0BA0HgsmAMT0OpnfwG9KGa5Qfyp4w35T/QZtJlhY
+ CrqcCF34j7pSIz5myiRGKEfQJUMqINboLaBxueGqBoWOV5nVWJ8xX2v+1jYa8dbosxM0
+ U9+kdpNohvF8kJu0989YwBQSUbmouXxJ7+vZ5mhbzjf8RdtBTOGAWcSGnA+FEGy8YOHb
+ lR2iHAYU1DkoqD1RVHCPiunoHrOP4njD3YlobmwQ95tsD0RD3M52TMSqGmbA7d3cGSAZ
+ NGn+eJMdjmGNLgGHC2zxstk08XoJQzYW3TUopNwzE7wgCRfTs+nB5cz6GbYx3RS8P4d9
+ xUZg==
+X-Gm-Message-State: AOJu0YwDZ1YSY+ZWmkt5jZSOaqquLztw3yuEGXWCmphzYRifSp8mByfe
+ RLQWdZc6aZO+f57r7CdDZcqkM9JYf8KSonNIvKhBtHbFLHw=
+X-Google-Smtp-Source: AGHT+IFHGsVwnQV3EXUP0U4DXynA6UReOQL9Jbfr3OnFt5UQ9qrcigy9oVlhSrAAbmXj+Za9t582SrW0RWwAJfGuylk=
+X-Received: by 2002:a05:600c:4f43:b0:3fb:a100:2581 with SMTP id
+ m3-20020a05600c4f4300b003fba1002581mr21064187wmq.14.1699125476054; Sat, 04
+ Nov 2023 12:17:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: electricworry <worryelectric@gmail.com>
+Date: Sat, 4 Nov 2023 19:17:44 +0000
+Message-ID: <CABZPTZSQHhcVuqLmg6nEiKBfF4p+R+y5sDCGaa19qztSEs54BA@mail.gmail.com>
+Subject: Adding support for Orange Pi Zero 3
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sat, 04 Nov 2023 21:53:23 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,61 +81,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This performs the opposite of nand_register, allowing drivers to unregister
-nand devices. This is probably unnecessary for most regular drivers, but we
-expect sandbox drivers to get repeatedly bound/unbound, so this will help
-avoid dangling pointers.
+I would like to contribute improvements u-boot to enable support for
+the Orange Pi Zero 3 board. I have already gained a good understanding
+of the project and the standards for changes, and so I have made
+modifications and tested them on my board.
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
----
+Before submitting patches for review I've got a few questions I'd like
+to discuss.
 
-(no changes since v1)
+The board is an Allwinner H618. From what I can gather this is just an
+H616 with minor changes. The changes are so minor that I've been able
+to implement the support as changes to the existing files for H616.
+For example, to add LPDDR4 support I have been able to make changes to
+arch/arm/mach-sunxi/dram_sun50i_h616.c and done so in a well
+configured way that won't impact anything else. Is doing it in this
+way acceptable or would the preference be to have a separate file
+(e.g. dram_sun50i_h618.c) to keep H616 and H618 separate? The way I've
+done it feels right because it really is just a minor upgrade, but
+there might be other opinions I should hear first.
 
- drivers/mtd/nand/raw/nand.c | 17 +++++++++++++++++
- include/nand.h              |  1 +
- 2 files changed, 18 insertions(+)
+Further, with regards to attribution, all of my changes are based on
+code in https://github.com/orangepi-xunlong/u-boot-orangepi. I've not
+been able to cherry-pick changes because that codebase has departed
+severely from the u-boot master branch and it's not as elegantly
+maintained, so I've had to surgically move just the changes required
+to get my board working. Their repo is correctly marked as GPL-2.0 so
+compatible with merging, but the exact author of every line of code
+will be difficult to attribute. Is it sufficient for me to cite that
+downstream repo as the source of the patches?
 
-diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
-index 3abd82068fb..80017b3dddd 100644
---- a/drivers/mtd/nand/raw/nand.c
-+++ b/drivers/mtd/nand/raw/nand.c
-@@ -74,6 +74,23 @@ int nand_register(int devnum, struct mtd_info *mtd)
- 	return 0;
- }
- 
-+void nand_unregister(struct mtd_info *mtd)
-+{
-+	int devnum = nand_mtd_to_devnum(mtd);
-+
-+	if (devnum < 0)
-+		return;
-+
-+	if (nand_curr_device == devnum)
-+		nand_curr_device = -1;
-+
-+	total_nand_size -= mtd->size / 1024;
-+
-+	del_mtd_device(nand_info[devnum]);
-+
-+	nand_info[devnum] = NULL;
-+}
-+
- #if !CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
- static void nand_init_chip(int i)
- {
-diff --git a/include/nand.h b/include/nand.h
-index c1d7533aaac..fc584f5ef7a 100644
---- a/include/nand.h
-+++ b/include/nand.h
-@@ -22,6 +22,7 @@ int nand_mtd_to_devnum(struct mtd_info *mtd);
- #if CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
- void board_nand_init(void);
- int nand_register(int devnum, struct mtd_info *mtd);
-+void nand_unregister(struct mtd_info *mtd);
- #else
- struct nand_chip;
- 
--- 
-2.37.1
-
+Thanks in advance. I've not submitted a patch here before so I could
+benefit from some hand-holding to not create problems for people, but
+I'm pretty confident that the changes I've made comply with the
+standards of the project and that there won't be much of an issue
+having them accepted.
