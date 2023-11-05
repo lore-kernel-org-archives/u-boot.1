@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF418C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 14:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFE4C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 14:07:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1331E86B81;
-	Sun,  5 Nov 2023 15:06:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C392C8642D;
+	Sun,  5 Nov 2023 15:07:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X7HvYYC0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mWXeDFgE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B2A08642D; Sun,  5 Nov 2023 15:05:59 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id BE2E286F23; Sun,  5 Nov 2023 15:07:04 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 294A586BF7
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 15:05:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 666F58642D
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 15:06:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-54394328f65so5912950a12.3
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 06:05:49 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-543456dbd7bso9156051a12.1
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 06:06:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699193148; x=1699797948; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699193206; x=1699798006; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qwk/knGI1FsEWpJOXjbqEUQAKtn9SypFtVVqp8rrBh0=;
- b=X7HvYYC0v8w6eMXIHTsctoOsaMpEVWv/Bmh7kOaNmB248scHmZizYvY2Gyyq8F6gqF
- 9GHfUMa5ngHJ7wIA2tUoopP8EII2F9eNrsE70FkFPD4/It2Svfk/+tqo2G9/sxcF2+CL
- Ty+1IjXZesrOzmnkpmhbSSin2Ipc4zagAUMa/hTN2RxbW3VeChUWrbMsBJQHtrSwd3lV
- owCD8kNAaylFlIB9WnFTXA3NCu2QljBDDe6BDptvSNIiQdIQUgxfB3VuvXtnA4jOQY9u
- U2Uck6gC/xWXuz8f7Y/yZ4JMsQmjcVXM2Hu7Urqty7FE7SiFF4HCNWlrA30afDvizGnQ
- pcDg==
+ bh=8TwxqI2UwRmrmBsXajK/iCN6nZfT3wEd01Qx7qZ9Y94=;
+ b=mWXeDFgEinZFz8Sbhh+s/j69imL4DhPCGgo3c03mwOqV0got+211zAhYpuDUFFge3g
+ 1IxnFOmVdZD2EC9iO5OWXyN3AWGm4WOwXS1ZCZ/5y041GIRuhhT0z3hzE4zO2h5WfnVO
+ KG8C871cBS0jKprk2tChbBwdDKwZzV2HtOQ7/W4UJBn1tkM0UbZYZZCwFqCEQMs5pq1r
+ NxYmm8JTaqtj/suj2S1Cm1GiTv6zhx4+rg3O7oWu3VrK+F+Ii/BiAfMV+OJWgAWQppfW
+ QqaGb3N5eADir65qaK2+ypk5YHwyDJmia58KAttzj8vXyZ3oJnX6cA215XqhvMIofEej
+ jAJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699193148; x=1699797948;
+ d=1e100.net; s=20230601; t=1699193206; x=1699798006;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qwk/knGI1FsEWpJOXjbqEUQAKtn9SypFtVVqp8rrBh0=;
- b=EoyYn8Krqit8+stdGThwuedykmK56VRsGAFl/r42j2KbEenW5N/9Ac9NyV9iMsqeXL
- egc4BeI2Y/calFpJB5gWef8Lp1FwasMhMK6mrRjOFagQQv5if/ufVJe0QG2RzMl4II8N
- JNSX3Uctj33vYfffyu5ybMX2m5DVHKncM+kFAgJ2SdPE9HZTBDiwnH67d/lnnv+8XnHW
- 9ZO3bA2JdfFQiapxmz3biauIFItcUSXUlxCFYZC39QKKPM5n4o9/nkF2Ig7Eq833DKCb
- xj6DCRt1oFjyaZ2xq6yK/5GVHTU9+PEUfzA1EOjhsLjzGX0u4mxlyi6kgErm04Izz+Zb
- PiHw==
-X-Gm-Message-State: AOJu0YyBFkA8xfZ4hH9bD4XSrjCfsj/5i0Fx9FQXrD6r72LyaZIHXehu
- dKG+jAk2xf7lP8iu38fG3QEGr07Tg4LHqHDOEzE=
-X-Google-Smtp-Source: AGHT+IEVUYIqMoBWYnY1X+1nNMixaDl+3B4Mlil96FrotsSCXLLTmfDSwhmw5pRwLiGj3OHogXe83ke2/RA2U+rw9o0=
-X-Received: by 2002:a05:6402:124e:b0:53e:1375:33ce with SMTP id
- l14-20020a056402124e00b0053e137533cemr22107817edw.30.1699193148425; Sun, 05
- Nov 2023 06:05:48 -0800 (PST)
+ bh=8TwxqI2UwRmrmBsXajK/iCN6nZfT3wEd01Qx7qZ9Y94=;
+ b=XF20JWZvSz4rHaC2FiM1wIAMGJdIk+vJT2X7xXxeAyKK836JE+u6BN3bVSD1IDDgAH
+ uVbAvKGg5BdhVTj2WXFVcMYg5ceIdRJDqY6iqD9wAX3o/8saL3sPcX2MpyPARhmz7hVl
+ cGZ1vZZt97+TrfDseVhDKRaQ1hGI0zxmVzYqDAiDiNbTKRb/sEO4to3+hKlYVGEv4BQf
+ 9Ne0ZBRsMZKMuGZ8lPIO+rOGIMSL9TCEwjKmGsI+Ur3xqryJuG3rQ9Mzrcrz9pH8/3RF
+ GcUlfxBzqV5sxMaXG3W9LgauHvcG6F055VgKB1DxjhsoFcO5wyu9jdD7+ttSAGrRe98Z
+ Ao6g==
+X-Gm-Message-State: AOJu0YzcgjGksqRXsWoAg32xgDBydCg/V80guVQXm64mjMrCLXDUhZA6
+ cy5Rippsnebl3jBqVF380rcztoft5XC18Aux6fY=
+X-Google-Smtp-Source: AGHT+IH73FEY2HWThCLrsNTxhJ3Du8WWjDhKH6UZ7aiTAiPPKM+A8fjGURDTmYbUzffRvjzR903aeqyMFMvNiKtKZh4=
+X-Received: by 2002:a50:bace:0:b0:544:3d4d:db15 with SMTP id
+ x72-20020a50bace000000b005443d4ddb15mr4385263ede.19.1699193205724; Sun, 05
+ Nov 2023 06:06:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-5-sjg@chromium.org>
-In-Reply-To: <20231002011450.462468-5-sjg@chromium.org>
+ <20231001191444.v3.4.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
+In-Reply-To: <20231001191444.v3.4.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 5 Nov 2023 22:05:37 +0800
-Message-ID: <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
-Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
+Date: Sun, 5 Nov 2023 22:06:35 +0800
+Message-ID: <CAEUhbmU_kjxj8gCFVJvHYa7it5vgihgyCVLB_DJny8+ct=vWKg@mail.gmail.com>
+Subject: Re: [PATCH v3 04/12] x86: coreboot: Add a boot script
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -87,33 +87,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
+On Mon, Oct 2, 2023 at 9:14=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
 :
 >
-> This is needed to support Truetype fonts. In any case, the compiler
-> expects SSE to be available in 64-bit mode. Enable it.
+> Provide the user with a list of available boot options. Selecting one
+> causes it to be booted. Pressing <ESC> causes U-Boot to return to the
+> command-line prompt.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
 > ---
 >
-> (no changes since v1)
+> Changes in v3:
+> - Clear the screen before booting
 >
->  arch/x86/config.mk        |  1 -
->  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
->  2 files changed, 11 insertions(+), 1 deletion(-)
+> Changes in v2:
+> - Add new patch to add a coreboot boot script
+>
+>  configs/coreboot64_defconfig | 1 +
+>  configs/coreboot_defconfig   | 1 +
+>  2 files changed, 2 insertions(+)
 >
 
-I didn't suggest we enable SSE for x86. This is the wrong approach.
-
-We should rewrite the Truetype support codes to avoid using float/double ty=
-pes.
-
-This way the Truetype codes can be used on any other architectures
-without the need for the compiler to emit explicit floating
-instructions.
-
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
