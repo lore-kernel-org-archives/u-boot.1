@@ -4,94 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8522BC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 21:54:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44296C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 22:43:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BC3D86E75;
-	Sun,  5 Nov 2023 22:54:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id D66FC86F23;
+	Sun,  5 Nov 2023 23:43:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Pdfle4Ih";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mMGFcsTr";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BZdeuo7J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1E6686E47; Sun,  5 Nov 2023 22:54:18 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 5CBD086C8E; Sun,  5 Nov 2023 23:43:24 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B34AA86E47
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 22:54:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27D3286C15
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 23:43:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E25F43FA95
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 21:54:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699221254;
- bh=GYjwEylvZ6aTZRXGX1UAo7APcYpk46vjmmkPuZVulkk=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Pdfle4Ih3/WcFxR28IrvBTvJq/GQAatvqtuaJNYmdOroguHRf9LhE272BEZH9eJOn
- OR+5ZcwmNFP+dtHyxdQpWWGzzBUCUKASDb5EwPkPEIF/iYeb/JSMSjPwalFHw1kNKB
- ja43+W66LvHNrHm5IR02iWI9QoiCRnGOKq3HbwxcOOXDPIkC+nRPhh3r5WY+nBPrqJ
- nqbqgr3HlXBHmKo8QwpBqVG2LUem3zpkeXfe0fDc/EuRvDosZY9xhmgFFD4kPesHsA
- xBRenI9rve/fWhWYuMe4V16ObArEotm5P0COJaV/17PnvUPpU6IeWiHLtBqx6eXdXU
- xJsH4/BT168aQ==
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-2804e851d5cso3331776a91.0
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 13:54:14 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699221253; x=1699826053;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GYjwEylvZ6aTZRXGX1UAo7APcYpk46vjmmkPuZVulkk=;
- b=sp0VCc9qC6WZD/KhgkbKM4IhzkD9xMrEEtH31T+3ZI9xhLqy5y33MfTH/t7/tL7dGL
- 3loQImQnYE10FLQ7bmbxbsI4/vgOVe83Jg+dyn/PlUYd8wBCbRf28P2eaLdSKTe3y1PN
- j+zqjLP0Jze3U5+xt7mt4V+GT4wV1iPTaJnvzpJTCLZ09BNcCUgEJ95JTZmHC0fOzVGm
- b/BBy/S1QY+OWexs9xdTyRyraw0OUIxBPSaRqyMhLARPK3if862wRn+Jzf3cQ/SmR5/D
- 5nBLDSPpsKwyArfaZX76qKXwuzDatGh8CTseYwshV26AQh90PApF6fkZ1xMtYJ3qeP95
- IhPA==
-X-Gm-Message-State: AOJu0YzlYGH9lJGnb6ue7xbxCAWja4q2z5WD60s2aQs+oNBdmmqa85Ts
- dRa3fvf5r5a9C13lsy1DwvyYBISDPxG4KvkEu4iYqJz5aQ/NghdEh0TcCTzODfx2094gL33ZPtd
- ZM2CcwREKYZNjHNPmR/gnYZO7pOnN3pU=
-X-Received: by 2002:a17:90a:19ce:b0:280:2985:56af with SMTP id
- 14-20020a17090a19ce00b00280298556afmr22528860pjj.45.1699221253122; 
- Sun, 05 Nov 2023 13:54:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFE6MWlQyA7winWglBasnX3BxfG7bSukWtCXrSQTAwbdUKXMFmof8TtmVYaCH2Df9LLKSvPcA==
-X-Received: by 2002:a17:90a:19ce:b0:280:2985:56af with SMTP id
- 14-20020a17090a19ce00b00280298556afmr22528848pjj.45.1699221252748; 
- Sun, 05 Nov 2023 13:54:12 -0800 (PST)
-Received: from [100.70.206.203] ([206.181.83.18])
- by smtp.gmail.com with ESMTPSA id
- 18-20020a17090a199200b002810810cc80sm268291pji.37.2023.11.05.13.54.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Nov 2023 13:54:12 -0800 (PST)
-Message-ID: <e0d4ec60-96fe-44c0-ac18-69b69bc14283@canonical.com>
-Date: Sun, 5 Nov 2023 23:54:07 +0200
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4SNqJS09Htz9sqw;
+ Sun,  5 Nov 2023 23:43:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1699224200;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=g1VVpiBZ1R15PPyN+ynACiRUo/x1FSPhJ4JnB/dXNWQ=;
+ b=mMGFcsTrKt7De67WReooIJwM1MmbEVJTFMpA9Fib9FrSfGoyUpwqw6Xn9qcDBRKGOz9ACS
+ 0mYq1r7sZhFAoIvUIpTJbSbH/SS3W2p5FvrMr5fviBHPXgtYVGygrG82yz9756BJiuvbK9
+ VUxA2sf9qAXELD8TvfSBMIOwtlpipzlRnk+SIg730lLxtgFl284X+puIp6FP8DIbDd5TZ+
+ ZRVl7qdcBeh5r5k8wD4vUAmRxJ1uzatAv0Z2VEnCgBgqt5CQ5dlArJKLiodvLhyvI6IPCb
+ LPaT6M9lBYov/oNsHA2hWvOir9cLheGo3rxVPbFdPt18t4fP/WtpDhLWUkoeEQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1699224198;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=g1VVpiBZ1R15PPyN+ynACiRUo/x1FSPhJ4JnB/dXNWQ=;
+ b=BZdeuo7Jnf7F94swOp5swDe+4AcmUUJ8pZ1mBLTnwOo7wHwB47UYjcUDWl1SY884g++4GK
+ nqxVzeTGWu87KU5KmLgpTdsEamA5t2oBh7lOB6dYFv7Tc+Z6AbBejj7TZJ9DEc4UzrLs4C
+ +lZqxug6MiPLBME4VjSGbD+KxGVrWfV5HHPg33fHSyOeFjAQd0yPpD5EtvOCqfS20FVgKg
+ 7fl/FqjAjSyMosbYW1kHfFA0VvM96h+pDZhYTaF7NCJd/Mo5tdSzlloSaCsz5pnjYf9LPx
+ 5HAk/kreLvn7TDaNsQeeJ1fTuZbFvpdyMowIV4+nYZS4E6+Lnj594tZXFtdxUw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH] mmc: renesas-sdhi: Disable clock after tuning reset when
+ possible
+Date: Sun,  5 Nov 2023 23:42:45 +0100
+Message-ID: <20231105224304.103997-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] rng: detect RISC-V Zkr RNG device in bind method
-To: Simon Glass <sjg@chromium.org>
-Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Xiang W <merlew4n6@gmail.com>, Andre Przywara <andre.przywara@arm.com>
-References: <20231104065107.23623-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ36uRkVGKicr_hD-=0HO+i9giQ7vRxo0uKD+BGQnLWdWw@mail.gmail.com>
- <874c3e34-56db-4f3a-acad-099d16735333@canonical.com>
- <CAPnjgZ3LHxNtf1RGRJzwT-9vF_03JdN_3SRF3o9QYNzshpp1cQ@mail.gmail.com>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAPnjgZ3LHxNtf1RGRJzwT-9vF_03JdN_3SRF3o9QYNzshpp1cQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: gu6ttd71tzqb8fwd6u8me83z65973a8j
+X-MBO-RS-ID: b216631e3cdf8e0aeca
+X-Rspamd-Queue-Id: 4SNqJS09Htz9sqw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,56 +87,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/5/23 18:25, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Sun, 5 Nov 2023 at 03:47, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> On 11/4/23 21:42, Simon Glass wrote:
->>> Hi Heinrich,
->>>
->>> On Sat, 4 Nov 2023 at 06:51, Heinrich Schuchardt
->>> <heinrich.schuchardt@canonical.com> wrote:
->>>>
->>>> The existence of devices should be checked in the bind method and not in
->>>> the probe method. Adjust the RISC-V Zkr RNG driver accordingly.
->>>>
->>>> Use ENOENT (and not ENODEV) to signal that the device is not available.
->>>>
->>>> Fixes: ceec977ba1a9 ("rng: Provide a RNG based on the RISC-V Zkr ISA extension")
->>>> Reported-by: Andre Przywara <andre.przywara@arm.com>
->>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>> ---
->>>>    drivers/rng/riscv_zkr_rng.c | 34 ++++++++++++++++++++++++++--------
->>>>    1 file changed, 26 insertions(+), 8 deletions(-)
->>>
->>> This device should be in the DT, so you have some control over which
->>> RNG is used.
->>
->> The device-tree provided by QEMU does not contain such a device as Zkr
->> is an ISA extension and not a device. This device-tree is not under the
->> control of the U-Boot project.
-> 
-> Why do you bring up QEMU? I would expect that it follows the norma dt
-> bindings, so it should not be any different from real hardware?
+Currently the renesas_sdhi_reset_tuning() unconditionally leaves SDHI
+clock enabled after the tuning reset. This is not always necessary.
 
-Yes Simon, QEMU follows the normal bindings. If you want to change 
-these, please, contribute to the RISC-V working groups or to the Linux 
-kernel project.
+After the driver performed tuning reset at the end of probe function,
+or in the unlikely case that tuning failed during regular operation,
+the SDHI clock can be disabled after the tuning reset. The following
+set_ios call would reconfigure the clock as needed.
 
-> 
-> Anyway, you could add it. It is just a binding. I believe RISC-V has
-> all sorts of isa options which result in different machine features.
-> 
-> What are you going to do when you want to choose between the ISA RNG
-> and a TPM one?
+In case of regular set_ios call which requires a tuning reset, keep
+the clock enabled or disabled according to the mmc->clk_disable state.
 
-First of all there are different configurations switches for both 
-drivers. But of course you can enable both. They will be different 
-U-Boot devices. The rng command has a parameter to choose a RNG device 
-by device number. This is not different to having two USB drives.
+With this in place, the controllers which have not been accessed via
+block subsystem after boot are left in quiescent state. However, if an
+MMC device is used e.g. for environment storage, that controller would
+be accessed during the environment load and left active, including its
+clock which would still be generated. This is due to the design of the
+MMC subsystem, which does not deinit a controller after it was started
+once, the controller is only deinited in case of mmc rescan, or before
+OS boot.
 
-Best regards
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Note: To address the part where MMC device has been inited once and
+      is never deinited until rescan or OS boot, it would likely be
+      necessary to implement something like runtime PM, possibly
+      based on the cyclic framework. Basically, keep track of when
+      the MMC was accessed last, and if certain time elapsed, deinit
+      the MMC. This could also be used to handle card detect polling
+      at the same time.
+---
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+---
+ drivers/mmc/renesas-sdhi.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-Heinrich
+diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+index 8cd501c5f7c..97aaf1e4ec3 100644
+--- a/drivers/mmc/renesas-sdhi.c
++++ b/drivers/mmc/renesas-sdhi.c
+@@ -318,7 +318,7 @@ static unsigned int renesas_sdhi_init_tuning(struct tmio_sd_priv *priv)
+ 		RENESAS_SDHI_SCC_DTCNTL_TAPNUM_MASK;
+ }
+ 
+-static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv)
++static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv, bool clk_disable)
+ {
+ 	u32 reg;
+ 
+@@ -350,6 +350,12 @@ static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv)
+ 	reg = tmio_sd_readl(priv, RENESAS_SDHI_SCC_RVSCNTL);
+ 	reg &= ~RENESAS_SDHI_SCC_RVSCNTL_RVSEN;
+ 	tmio_sd_writel(priv, reg, RENESAS_SDHI_SCC_RVSCNTL);
++
++	if (clk_disable) {
++		reg = tmio_sd_readl(priv, TMIO_SD_CLKCTL);
++		reg &= ~TMIO_SD_CLKCTL_SCLKEN;
++		tmio_sd_writel(priv, reg, TMIO_SD_CLKCTL);
++	}
+ }
+ 
+ static int renesas_sdhi_hs400(struct udevice *dev)
+@@ -629,7 +635,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
+ out:
+ 	if (ret < 0) {
+ 		dev_warn(dev, "Tuning procedure failed\n");
+-		renesas_sdhi_reset_tuning(priv);
++		renesas_sdhi_reset_tuning(priv, true);
+ 	}
+ 
+ 	return ret;
+@@ -668,7 +674,7 @@ static int renesas_sdhi_set_ios(struct udevice *dev)
+ 	    (mmc->selected_mode != UHS_SDR104) &&
+ 	    (mmc->selected_mode != MMC_HS_200) &&
+ 	    (mmc->selected_mode != MMC_HS_400)) {
+-		renesas_sdhi_reset_tuning(priv);
++		renesas_sdhi_reset_tuning(priv, mmc->clk_disable);
+ 	}
+ #endif
+ 
+@@ -1095,7 +1101,7 @@ static int renesas_sdhi_probe(struct udevice *dev)
+     CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
+     CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
+ 	if (priv->caps & TMIO_SD_CAP_RCAR_UHS)
+-		renesas_sdhi_reset_tuning(priv);
++		renesas_sdhi_reset_tuning(priv, true);
+ #endif
+ 	return 0;
+ 
+-- 
+2.42.0
+
