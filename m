@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 219B3C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 959C5C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:40:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40F4286FC9;
-	Sun,  5 Nov 2023 09:38:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A11B886FD5;
+	Sun,  5 Nov 2023 09:38:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="Lig31Lce";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="g5AQQm/W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B24486FC3; Sun,  5 Nov 2023 09:38:37 +0100 (CET)
+ id A7A5686F97; Sun,  5 Nov 2023 09:38:39 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 609F586F85
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 09:38:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6F4A86F5E
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 09:38:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C796312000A;
- Sun,  5 Nov 2023 11:38:28 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C796312000A
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 3E5F5120008;
+ Sun,  5 Nov 2023 11:38:27 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 3E5F5120008
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699173508;
- bh=WuXesCnXs2xO9MoUr7ZLz5YFmmv9/oihs9pF04dBe90=;
+ s=mail; t=1699173507;
+ bh=jGTxk10GVXwoChZo8gLhEquVJTx2A3YO3B3jyjhpAwI=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=Lig31LceXa7MgFTAN3d8309dmBSN2CIVTR7R5Kg12+Gfm7z2vE5pp6PpzzBV8S1U7
- CydmadEk/jiB71jGu17tdXZ6tsxgf0AoRTu/57cN0+tXF7HKXUSBQ8OWn4OHhQxgB2
- k+TlE0S6eY8LSG6G1aYVyv5KPBfhDQgfofIHNC/b7uV9kcByXzWh6g3jqDuthRjIMI
- h81fOoNqAFUp+p8oar1iMVofiC/F9sa56uNHilXOiVJ0SYc59XvfsojbIK/XQMpVXl
- kLUVSOzGo0cs/8BcFkzn6LIHH0PPwatzQ1NmTQRanTf2Y5CZ8gWkKt/nJpydVN2aX+
- eZqnh+HaS5uHg==
+ b=g5AQQm/WVC2o7tvpHHfdu2T5ekUTqQSk097MY2R1FXLebH4Q9olSt5VqdtGoPMO2j
+ AdEtjvJhF1n6jynJesvd+6I7eDos27qH75jWaJGaMNSyj2iSxII+D8AM2NTnXkIyR6
+ l0i0acIY4a3CWwnkXKl5+rLYDCRoLFWguCkP/K2v+s4Ws26cF7eJX07Wu1pl5/29Ic
+ PavgLVXIyCHl9fma+cYLoyOCgfRA510APxKhKBXQtmENnDVeYCPdizFB9B/ZFeJWRD
+ YO2TzKwegM2/hCJJi/EM9pi7jXIA1TP7EROcFnJJhSPhrHWvDpyaVJ0KpthK9bIPHn
+ xIiZOmeRK8mKw==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun,  5 Nov 2023 11:38:28 +0300 (MSK)
+ Sun,  5 Nov 2023 11:38:27 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Sun, 5 Nov 2023 11:38:28 +0300
+ 15.2.1118.37; Sun, 5 Nov 2023 11:38:26 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
  Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
@@ -60,9 +60,9 @@ CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
  <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
  Stanley <joel@jms.id.au>, <u-boot-amlogic@groups.io>,
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v6 4/8] clk: amlogic: Move driver and ops structs
-Date: Sun, 5 Nov 2023 11:38:05 +0300
-Message-ID: <20231105083809.3293-5-ivprusov@sberdevices.ru>
+Subject: [PATCH v6 2/8] clk: ast2600: Move soc_clk_dump function
+Date: Sun, 5 Nov 2023 11:38:03 +0300
+Message-ID: <20231105083809.3293-3-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231105083809.3293-1-ivprusov@sberdevices.ru>
 References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
@@ -111,71 +111,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move driver and ops structs to avoid forward declaration after switching
-to dump in clk_ops.
+Move clock dump function to avoid forward declaration after switching to
+dump in clk_ops.
 
 Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/clk/meson/a1.c | 34 +++++++++++++++++-----------------
- 1 file changed, 17 insertions(+), 17 deletions(-)
+ drivers/clk/aspeed/clk_ast2600.c | 70 ++++++++++++++++----------------
+ 1 file changed, 35 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-index 1075ba7333..e3fa9db7d0 100644
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -601,14 +601,6 @@ static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
- 	return meson_mux_set_parent_by_id(clk, parent_clk->id);
- }
- 
--static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
--	.get_rate	= meson_clk_get_rate,
--	.set_rate	= meson_clk_set_rate,
--	.set_parent	= meson_clk_set_parent,
--};
--
- static int meson_clk_probe(struct udevice *dev)
- {
- 	struct meson_clk *priv = dev_get_priv(dev);
-@@ -638,15 +630,6 @@ static const struct udevice_id meson_clk_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(meson_clk) = {
--	.name		= "meson-clk-a1",
--	.id		= UCLASS_CLK,
--	.of_match	= meson_clk_ids,
--	.priv_auto	= sizeof(struct meson_clk),
--	.ops		= &meson_clk_ops,
--	.probe		= meson_clk_probe,
--};
--
- static const char *meson_clk_get_name(struct clk *clk, int id)
- {
- 	const struct meson_clk_info *info;
-@@ -727,3 +710,20 @@ int soc_clk_dump(void)
- 
+diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
+index e5ada5b6d4..b3cc8392fa 100644
+--- a/drivers/clk/aspeed/clk_ast2600.c
++++ b/drivers/clk/aspeed/clk_ast2600.c
+@@ -1104,41 +1104,6 @@ static int ast2600_clk_enable(struct clk *clk)
  	return 0;
  }
-+
-+static struct clk_ops meson_clk_ops = {
-+	.disable	= meson_clk_disable,
-+	.enable		= meson_clk_enable,
-+	.get_rate	= meson_clk_get_rate,
-+	.set_rate	= meson_clk_set_rate,
-+	.set_parent	= meson_clk_set_parent,
+ 
+-struct clk_ops ast2600_clk_ops = {
+-	.get_rate = ast2600_clk_get_rate,
+-	.set_rate = ast2600_clk_set_rate,
+-	.enable = ast2600_clk_enable,
+-};
+-
+-static int ast2600_clk_probe(struct udevice *dev)
+-{
+-	struct ast2600_clk_priv *priv = dev_get_priv(dev);
+-
+-	priv->scu = devfdt_get_addr_ptr(dev);
+-	if (IS_ERR(priv->scu))
+-		return PTR_ERR(priv->scu);
+-
+-	ast2600_init_rgmii_clk(priv->scu, &rgmii_clk_defconfig);
+-	ast2600_init_rmii_clk(priv->scu, &rmii_clk_defconfig);
+-	ast2600_configure_mac12_clk(priv->scu);
+-	ast2600_configure_mac34_clk(priv->scu);
+-	ast2600_configure_rsa_ecc_clk(priv->scu);
+-
+-	return 0;
+-}
+-
+-static int ast2600_clk_bind(struct udevice *dev)
+-{
+-	int ret;
+-
+-	/* The reset driver does not have a device node, so bind it here */
+-	ret = device_bind_driver(gd->dm_root, "ast_sysreset", "reset", &dev);
+-	if (ret)
+-		debug("Warning: No reset driver: ret=%d\n", ret);
+-
+-	return 0;
+-}
+-
+ struct aspeed_clks {
+ 	ulong id;
+ 	const char *name;
+@@ -1203,6 +1168,41 @@ int soc_clk_dump(void)
+ 	return 0;
+ }
+ 
++struct clk_ops ast2600_clk_ops = {
++	.get_rate = ast2600_clk_get_rate,
++	.set_rate = ast2600_clk_set_rate,
++	.enable = ast2600_clk_enable,
 +};
 +
-+U_BOOT_DRIVER(meson_clk) = {
-+	.name		= "meson-clk-a1",
-+	.id		= UCLASS_CLK,
-+	.of_match	= meson_clk_ids,
-+	.priv_auto	= sizeof(struct meson_clk),
-+	.ops		= &meson_clk_ops,
-+	.probe		= meson_clk_probe,
-+};
++static int ast2600_clk_probe(struct udevice *dev)
++{
++	struct ast2600_clk_priv *priv = dev_get_priv(dev);
++
++	priv->scu = devfdt_get_addr_ptr(dev);
++	if (IS_ERR(priv->scu))
++		return PTR_ERR(priv->scu);
++
++	ast2600_init_rgmii_clk(priv->scu, &rgmii_clk_defconfig);
++	ast2600_init_rmii_clk(priv->scu, &rmii_clk_defconfig);
++	ast2600_configure_mac12_clk(priv->scu);
++	ast2600_configure_mac34_clk(priv->scu);
++	ast2600_configure_rsa_ecc_clk(priv->scu);
++
++	return 0;
++}
++
++static int ast2600_clk_bind(struct udevice *dev)
++{
++	int ret;
++
++	/* The reset driver does not have a device node, so bind it here */
++	ret = device_bind_driver(gd->dm_root, "ast_sysreset", "reset", &dev);
++	if (ret)
++		debug("Warning: No reset driver: ret=%d\n", ret);
++
++	return 0;
++}
++
+ static const struct udevice_id ast2600_clk_ids[] = {
+ 	{ .compatible = "aspeed,ast2600-scu", },
+ 	{ },
 -- 
 2.34.1
 
