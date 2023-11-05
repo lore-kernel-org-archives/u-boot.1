@@ -4,97 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83FFC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:42:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 645F6C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 09:37:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40CF287030;
-	Sun,  5 Nov 2023 09:38:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
+	by phobos.denx.de (Postfix) with ESMTP id 4F74D86EFD;
+	Sun,  5 Nov 2023 10:37:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=physik.fu-berlin.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="XQcW2ifC";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 341AA86F8A; Sun,  5 Nov 2023 09:38:45 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 03F3086F39; Sun,  5 Nov 2023 10:37:01 +0100 (CET)
+Received: from outpost1.zedat.fu-berlin.de (outpost1.zedat.fu-berlin.de
+ [130.133.4.66])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CD8D86FEB
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 09:38:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=sberdevices.ru
+ by phobos.denx.de (Postfix) with ESMTPS id B828886E05
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 10:36:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=physik.fu-berlin.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C99E212000C;
- Sun,  5 Nov 2023 11:38:31 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C99E212000C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699173511;
- bh=fsnPjLvRt18ExMQSD2xbZ3j/SqrCBtTjrEDwf2fGYQc=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=XQcW2ifCwCj20q286ZtR6a/szeLATur561dGyXixkhsV3f3Ww6SqNtYlAi+ULdo6e
- hfdZl93LNEhtlZnB6sOedUwmnf914OgpSl3AKMpRkzgCXLJ/jFoGSAhGOWtrJJlWUb
- QF4p5ZJV38Lk+912ljs1dznSps2CbH0e/j7+d+MKvY1LiQKI67Xa1752hy5Mx+kz9M
- 0zX5MfWTtDbbsyjCcyK5MUK7zw9bbVHAhDsgL36P4LOxyQsY+w/e3jCo91RuRYDC/Y
- LxfaQQdZ8kPqvJfrc23wp3mZCiOCD0kYhIm6W7S7GFjZ9ah9Ui17JjV7C531vPHmZJ
- f5iluHHyqhJrw==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun,  5 Nov 2023 11:38:31 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Sun, 5 Nov 2023 11:38:31 +0300
-From: Igor Prusov <ivprusov@sberdevices.ru>
-To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
- Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
- <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
- Stanley <joel@jms.id.au>, <u-boot-amlogic@groups.io>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v6 8/8] cmd: clk: Make soc_clk_dump static
-Date: Sun, 5 Nov 2023 11:38:09 +0300
-Message-ID: <20231105083809.3293-9-ivprusov@sberdevices.ru>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231105083809.3293-1-ivprusov@sberdevices.ru>
-References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
+ spf=pass smtp.mailfrom=glaubitz@zedat.fu-berlin.de
+Received: from inpost2.zedat.fu-berlin.de ([130.133.4.69])
+ by outpost.zedat.fu-berlin.de (Exim 4.95) with esmtps (TLS1.3)
+ tls TLS_AES_256_GCM_SHA384
+ (envelope-from <glaubitz@zedat.fu-berlin.de>)
+ id 1qzZYw-003Js9-AI; Sun, 05 Nov 2023 10:36:58 +0100
+Received: from p5dc55299.dip0.t-ipconnect.de ([93.197.82.153]
+ helo=[192.168.178.81]) by inpost2.zedat.fu-berlin.de (Exim 4.95)
+ with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (envelope-from <glaubitz@physik.fu-berlin.de>)
+ id 1qzZYw-000S62-2w; Sun, 05 Nov 2023 10:36:58 +0100
+Message-ID: <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
+Subject: Re: Need advise with u-boot on SH-7785LCR
+From: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Date: Sun, 05 Nov 2023 10:36:57 +0100
+In-Reply-To: <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
+References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
+ <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
+Autocrypt: addr=glaubitz@physik.fu-berlin.de; prefer-encrypt=mutual;
+ keydata=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
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181122 [Nov 03 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
- {Tracking_from_domain_doesnt_match_to}, sberdevices.ru:7.1.1,5.0.1;
- p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
- {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/05 03:40:00 #22405617
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-Original-Sender: glaubitz@physik.fu-berlin.de
+X-Originating-IP: 93.197.82.153
+X-ZEDAT-Hint: PO
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,53 +71,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After introducing dump to clk_ops there is no need to override or expose
-this symbol anymore.
+Hi Simon,
 
-Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
----
- cmd/clk.c     | 4 ++--
- include/clk.h | 2 --
- 2 files changed, 2 insertions(+), 4 deletions(-)
+On Sat, 2023-11-04 at 19:42 +0000, Simon Glass wrote:
+> Is it possible to check if it reaches the kernel? E.g. with
+> earlyprintk ? It would be good to know if U-Boot managers to jump to
+> Linux, or not.
 
-diff --git a/cmd/clk.c b/cmd/clk.c
-index 4b9709d3ff..7bbcbfeda3 100644
---- a/cmd/clk.c
-+++ b/cmd/clk.c
-@@ -59,7 +59,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
- 	}
- }
- 
--int __weak soc_clk_dump(void)
-+static int soc_clk_dump(void)
- {
- 	struct udevice *dev;
- 	const struct clk_ops *ops;
-@@ -81,7 +81,7 @@ int __weak soc_clk_dump(void)
- 	return 0;
- }
- #else
--int __weak soc_clk_dump(void)
-+static int soc_clk_dump(void)
- {
- 	puts("Not implemented\n");
- 	return 1;
-diff --git a/include/clk.h b/include/clk.h
-index 249c0e0ab4..3d6394477b 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -676,8 +676,6 @@ static inline bool clk_valid(struct clk *clk)
- 	return clk && !!clk->dev;
- }
- 
--int soc_clk_dump(void);
--
- #endif
- 
- #define clk_prepare_enable(clk) clk_enable(clk)
--- 
-2.34.1
+Thanks, this is actually a very good idea. In fact, we recently restored
+earlyprintk support on SuperH which got disabled by accident [1], so I
+would have an opportunity to use it right away.
 
+Do you have maybe any clue as for how to update u-boot on this machine?
+
+Might be a good idea to start from the most recent version that is supporte=
+d
+on this target. I assume the "erase" command will erase the flash. But ther=
+e
+doesn't seem to be a "program" command.
+
+Adrian
+
+--=20
+ .''`.  John Paul Adrian Glaubitz
+: :' :  Debian Developer
+`. `'   Physicist
+  `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
