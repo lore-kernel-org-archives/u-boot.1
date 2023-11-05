@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E02DC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 16:29:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69768C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 16:29:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46C2B86F45;
-	Sun,  5 Nov 2023 17:29:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8574286FB8;
+	Sun,  5 Nov 2023 17:29:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QQlsGntg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JO1Xjeth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CFE486F38; Sun,  5 Nov 2023 17:29:33 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 4C60586F38; Sun,  5 Nov 2023 17:29:41 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 025C186F44
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 17:29:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B82D786F38
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 17:29:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9d224dca585so548958866b.1
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 08:29:28 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-540c54944c4so7358148a12.1
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 08:29:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699201768; x=1699806568; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XTDWJHHuE3JdKW6g184IR2hpm1Eqr3ajkVCzD6Kapkw=;
- b=QQlsGntgnU27Fj+uImY9XjFj5Ka2bhdj99Iy+TdO2ewqp8sr/5zvzGTuuXkaGCxT3z
- K2qphzWAcwgkZwk+GYzA8ECSjp7WWtQAhHCWac+H+c01U8zbYWTBnM73Rpjn/xpVEUdS
- rVCmjOvdpJ2dFCMPDcae/S54qVNmeorE/6gNk=
+ d=chromium.org; s=google; t=1699201774; x=1699806574; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QPlv07iunzTBhRKOzgqBA7J8rsT4/5gF1h3f8J5qWjQ=;
+ b=JO1XjethEf1MVNP0d5UHzalWQ/rb3e0LcDpR/TSbsXLVAtKOkVu/81mzh70ZnscJ4n
+ PopzpeYyCdAvIXL7dXgpGBVrJews/yxeI6ZwULY6FfavD5SNRHJ/ErLPbxBgjR+m0xiZ
+ 4bWNXHZAB3W3+xE7IX/X5JMXuCxRKq/4GMClw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699201768; x=1699806568;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XTDWJHHuE3JdKW6g184IR2hpm1Eqr3ajkVCzD6Kapkw=;
- b=tSjmcVPgk4T4CtqbnoIflKz4reZVtwhrGE4tkA67fe6m0G6XgwnAPEPeBQcjCm2aQY
- LcaVyaG62m81S/eXrEEL+2KzW+a5qf20EnMEXSBhzKkjgXXYO+viVhhkKnGGIm7vJ7jr
- JmQ/Kp8w2642GbPndSIeibWCC+0JKMXrhfof3mgrFYrozoS8SKYrgGIQc+eDnWjFZ7g4
- H50kyYLOL73wGh48CcxSeeiOtepb0RDtCN4lIA58N7rSaU26+1a04I6kVm4exzNa1ekH
- ImjMyRqsgBKwP3n33XkJwoOcCzpUp39btm2JOieXIzlT/GblOAuZHvql4eSJyNDDzD3Q
- ReeQ==
-X-Gm-Message-State: AOJu0YyMRLLuFIX8gF76F6UE3xCIckrFls3rRK6FoAiU2gjvdUTjeWPt
- v8s6zTOX/x9NJclsBcO7A2TcjyYsHt2omgem6I5aqQ==
-X-Google-Smtp-Source: AGHT+IGo7le9ouM54E2Jt4t8Lti+ydjLBKONHjMfFgBf+52XG2/0XXkz0CuVO325XFvJjSR3+DoECBM4DTnwxZh8E9g=
-X-Received: by 2002:a17:907:7b99:b0:9bd:d405:4e80 with SMTP id
- ne25-20020a1709077b9900b009bdd4054e80mr13108625ejc.46.1699201767762; Sun, 05
- Nov 2023 08:29:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699201774; x=1699806574;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QPlv07iunzTBhRKOzgqBA7J8rsT4/5gF1h3f8J5qWjQ=;
+ b=RqM4LQ1KTbEJFsmuk/Uv3I3MOlSUbVXezlLRXrkY5FmCsDa1+R2FTW0necfQxggvD+
+ se9YY/d8/DdheUr4IeH7Vt1mqtOZUlx2vLG8BLzKJv5fkNBv2gK9BV4CQDdGsQnMVINu
+ O05cHjH4E4BEAGD91cGg57YI7uCHmMRXC+Y9CuTaDteMKYsFr2PY7E5dOsgaysXTl5fl
+ 34CfB3U7EzJQ/a6vPNTmWrA7Hf59ZbUvcSt6mWy1zXI2METiNYIAlZjnTWYJq10pmiq8
+ Rx/yr1u920qwdyK4ukuWzwl5H9oog851wOuz4LfnWsnVOjUV1gNJOsghPOfwzK1T/NIg
+ OgSA==
+X-Gm-Message-State: AOJu0YxGNTALUUa33rvp6rBTD1R6UaMmfKRQqmHCIAp4Njho+4asPuli
+ 4H8ilrjyF66jfeWEBVdPrJ/N5XtyVyDtymfaUBAH+2MgGdKeCICb+d8=
+X-Google-Smtp-Source: AGHT+IGq1PngIvnrdjVCK8P6Zj4tALpi3bF6cMNlhVRBB5iZ743qtfo0rdySSLuqzm8PTK8mgFirEIgE71GgPYZZHxs=
+X-Received: by 2002:aa7:d8d5:0:b0:543:5dd9:a72 with SMTP id
+ k21-20020aa7d8d5000000b005435dd90a72mr7756356eds.1.1699201774193; Sun, 05 Nov
+ 2023 08:29:34 -0800 (PST)
 MIME-Version: 1.0
-References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
- <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
- <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
-In-Reply-To: <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
+References: <20231002011450.462468-1-sjg@chromium.org>
+ <20231002011450.462468-5-sjg@chromium.org>
+ <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
+In-Reply-To: <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Nov 2023 16:29:16 +0000
-Message-ID: <CAPnjgZ35bJSBE_HqVxh_fb42AYm+vYmx-oyaDQzXqcsmqFvHxA@mail.gmail.com>
-Subject: Re: Need advise with u-boot on SH-7785LCR
-To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
-Cc: u-boot@lists.denx.de
+Date: Sun, 5 Nov 2023 16:29:22 +0000
+Message-ID: <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
+Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,40 +84,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi John,
+Hi Bin,
 
-On Sun, 5 Nov 2023 at 09:37, John Paul Adrian Glaubitz
-<glaubitz@physik.fu-berlin.de> wrote:
+On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > Hi Simon,
 >
-> On Sat, 2023-11-04 at 19:42 +0000, Simon Glass wrote:
-> > Is it possible to check if it reaches the kernel? E.g. with
-> > earlyprintk ? It would be good to know if U-Boot managers to jump to
-> > Linux, or not.
+> On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
+te:
+> >
+> > This is needed to support Truetype fonts. In any case, the compiler
+> > expects SSE to be available in 64-bit mode. Enable it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  arch/x86/config.mk        |  1 -
+> >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
+> >  2 files changed, 11 insertions(+), 1 deletion(-)
+> >
 >
-> Thanks, this is actually a very good idea. In fact, we recently restored
-> earlyprintk support on SuperH which got disabled by accident [1], so I
-> would have an opportunity to use it right away.
+> I didn't suggest we enable SSE for x86. This is the wrong approach.
 >
-> Do you have maybe any clue as for how to update u-boot on this machine?
+> We should rewrite the Truetype support codes to avoid using float/double =
+types.
 >
-> Might be a good idea to start from the most recent version that is supported
-> on this target. I assume the "erase" command will erase the flash. But there
-> doesn't seem to be a "program" command.
+> This way the Truetype codes can be used on any other architectures
+> without the need for the compiler to emit explicit floating
+> instructions.
 
-No, sorry I don't have any idea about that. You could check the
-MAINTAINERS files in U-Boot and Linux for other people, perhaps, or
-check commit / blame logs?
+I am not aware of any such library. At present, enabling truetype on
+coreboot64 causes a hang.
 
 Regards,
 Simon
-
->
-> Adrian
->
-> --
->  .''`.  John Paul Adrian Glaubitz
-> : :' :  Debian Developer
-> `. `'   Physicist
->   `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
