@@ -4,70 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69768C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 16:29:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A520C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 20:05:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8574286FB8;
-	Sun,  5 Nov 2023 17:29:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6941386F63;
+	Sun,  5 Nov 2023 21:05:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JO1Xjeth";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CsKift1e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C60586F38; Sun,  5 Nov 2023 17:29:41 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id DD96A86EB5; Sun,  5 Nov 2023 21:05:14 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B82D786F38
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 17:29:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83CE986EB5
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 21:05:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-540c54944c4so7358148a12.1
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 08:29:34 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-79f82b26abfso114290539f.1
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 12:05:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699201774; x=1699806574; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QPlv07iunzTBhRKOzgqBA7J8rsT4/5gF1h3f8J5qWjQ=;
- b=JO1XjethEf1MVNP0d5UHzalWQ/rb3e0LcDpR/TSbsXLVAtKOkVu/81mzh70ZnscJ4n
- PopzpeYyCdAvIXL7dXgpGBVrJews/yxeI6ZwULY6FfavD5SNRHJ/ErLPbxBgjR+m0xiZ
- 4bWNXHZAB3W3+xE7IX/X5JMXuCxRKq/4GMClw=
+ d=chromium.org; s=google; t=1699214710; x=1699819510; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=q1D7VZ1IeGj0+uYov6L2gJA0ATY2A4rbQ1twiCn0AsM=;
+ b=CsKift1elW4uUo+f+wWjCPfSUSLoi40J7Hai+AIeQKr4kywqAjYWqBePsR9FUXkLyL
+ ff4CXI2PBTCzF47S3T9w7etGIZcDBk28w1f5CXQyM/cNU7/8KlajKqgzOFUAB5pFZOlr
+ 8MV5Qm/bVxfQmR4NjaPtWQFKcbRLTF4ZIPD+4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699201774; x=1699806574;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QPlv07iunzTBhRKOzgqBA7J8rsT4/5gF1h3f8J5qWjQ=;
- b=RqM4LQ1KTbEJFsmuk/Uv3I3MOlSUbVXezlLRXrkY5FmCsDa1+R2FTW0necfQxggvD+
- se9YY/d8/DdheUr4IeH7Vt1mqtOZUlx2vLG8BLzKJv5fkNBv2gK9BV4CQDdGsQnMVINu
- O05cHjH4E4BEAGD91cGg57YI7uCHmMRXC+Y9CuTaDteMKYsFr2PY7E5dOsgaysXTl5fl
- 34CfB3U7EzJQ/a6vPNTmWrA7Hf59ZbUvcSt6mWy1zXI2METiNYIAlZjnTWYJq10pmiq8
- Rx/yr1u920qwdyK4ukuWzwl5H9oog851wOuz4LfnWsnVOjUV1gNJOsghPOfwzK1T/NIg
- OgSA==
-X-Gm-Message-State: AOJu0YxGNTALUUa33rvp6rBTD1R6UaMmfKRQqmHCIAp4Njho+4asPuli
- 4H8ilrjyF66jfeWEBVdPrJ/N5XtyVyDtymfaUBAH+2MgGdKeCICb+d8=
-X-Google-Smtp-Source: AGHT+IGq1PngIvnrdjVCK8P6Zj4tALpi3bF6cMNlhVRBB5iZ743qtfo0rdySSLuqzm8PTK8mgFirEIgE71GgPYZZHxs=
-X-Received: by 2002:aa7:d8d5:0:b0:543:5dd9:a72 with SMTP id
- k21-20020aa7d8d5000000b005435dd90a72mr7756356eds.1.1699201774193; Sun, 05 Nov
- 2023 08:29:34 -0800 (PST)
-MIME-Version: 1.0
-References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-5-sjg@chromium.org>
- <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
-In-Reply-To: <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1699214710; x=1699819510;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=q1D7VZ1IeGj0+uYov6L2gJA0ATY2A4rbQ1twiCn0AsM=;
+ b=T6og1t1GgtVLAY0P/G5HCyXgqiZVsyxaLDNZlxhOIKWZuOIeYuf260JJoGw9gzEL7W
+ Nc4ZrtTwwPGPODuQ/4fC88b9umFQlNUOwZ+z9oLd7x87anmG+1ZpZU5j4nNHmKttc9FY
+ kvTTxZJ4galluzKaJvguOcy8UVvY3bg7eYUnLz9Bj9qhHIk4J6m86ZmfWNvpsd/vHRtX
+ y3pUctpjVDYRsZ6cdfgWVgpZyfkiidc9YE+TWRbyy6pwXHUwbOxm0eMcexrlB3/7ifPD
+ 27gx31mfYxjLzt/N0TlaDagpkZcWpw+Agfwl14Dznd2nKvwzpZODo0lg1dix0GigS4jr
+ 8i6Q==
+X-Gm-Message-State: AOJu0Ywqjn1N+OuxHPS199IrU5mtj5ZJSGb8GCUFOMiCf7SKAJgjX6vY
+ gfFpWumlKNblE1gfnKxopnhU/5nOquHPyzJGYeJ/9A==
+X-Google-Smtp-Source: AGHT+IHxtJ9RiBgyDpuv0p59DrLjylQ9kYYVFnDJh6VR4HuBG57W5bEDC7h0qxx+vuJ0T5sk9CX5tw==
+X-Received: by 2002:a05:6602:2a51:b0:7a9:61fa:9605 with SMTP id
+ k17-20020a0566022a5100b007a961fa9605mr34258492iov.5.1699214709932; 
+ Sun, 05 Nov 2023 12:05:09 -0800 (PST)
+Received: from sjg1.united_club.lax.united.com
+ (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ w19-20020a029693000000b0044d10eda3a8sm1685512jai.158.2023.11.05.12.05.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Nov 2023 12:05:09 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Nov 2023 16:29:22 +0000
-Message-ID: <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
-Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marc Kleine-Budde <mkl@pengutronix.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Safae Ouajih <souajih@baylibre.com>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH 0/4] bootm: Handle compressed arm64 images with bootm
+Date: Sun,  5 Nov 2023 13:03:50 -0700
+Message-ID: <20231105200453.1887418-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,40 +95,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bin,
+This little series corrects a problem I noticed with arm64 images,
+where the kernel is not recognised:
 
-On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Hi Simon,
->
-> On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
-> >
-> > This is needed to support Truetype fonts. In any case, the compiler
-> > expects SSE to be available in 64-bit mode. Enable it.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  arch/x86/config.mk        |  1 -
-> >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
-> >  2 files changed, 11 insertions(+), 1 deletion(-)
-> >
->
-> I didn't suggest we enable SSE for x86. This is the wrong approach.
->
-> We should rewrite the Truetype support codes to avoid using float/double =
-types.
->
-> This way the Truetype codes can be used on any other architectures
-> without the need for the compiler to emit explicit floating
-> instructions.
+   ## Loading kernel from FIT Image at 10000000 ...
+      Using 'conf-930' configuration
+      Verifying Hash Integrity ... OK
+      Trying 'kernel' kernel subimage
+        Description:  Linux-6.6.0-rc7-next-20231024-00003-g259c196f194c
+        Type:         Kernel Image (no loading done)
+        Compression:  gzip compressed
+        Data Start:   0x10000138
+        Data Size:    13667956 Bytes = 13 MiB
+      Verifying Hash Integrity ... OK
+   Bad Linux ARM64 Image magic!
 
-I am not aware of any such library. At present, enabling truetype on
-coreboot64 causes a hang.
+The problem is that the arm64 magic is checked before the image is
+decompressed.
 
-Regards,
-Simon
+Another issue is that the load address is read from the 'load' property
+even with a kernel_noload image. This means that the kernel is loaded
+to address 0, which may not be valid on the board. We can use the
+kernel_addr_r environment variable instead.
+
+A patch is included to show the kernel load-address, so it is easy to
+see what is going on.
+
+
+Simon Glass (4):
+  bootm: Allow ignoring the load address with kernel_noload
+  bootm: Move arm64-image processing later
+  image: Show the load address when decompressing
+  image: Correct load_bug typo
+
+ boot/bootm.c    | 61 ++++++++++++++++++++++++++++++-------------------
+ boot/image.c    | 13 +++++++----
+ include/image.h |  2 +-
+ 3 files changed, 48 insertions(+), 28 deletions(-)
+
+-- 
+2.42.0.869.gea05f2083d-goog
+
