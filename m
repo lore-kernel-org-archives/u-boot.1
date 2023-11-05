@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE35BC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 14:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FFDC4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 14:12:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3245186F23;
-	Sun,  5 Nov 2023 15:07:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1541986CB1;
+	Sun,  5 Nov 2023 15:12:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g2g68TYb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D06NU+uT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C286886EEE; Sun,  5 Nov 2023 15:07:22 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 07E5286CB1; Sun,  5 Nov 2023 15:12:09 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C30E86F1C
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 15:06:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 694458642D
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 15:12:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-53ed4688b9fso5877249a12.0
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 06:06:52 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-9df8d0c556eso53364466b.2
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 06:12:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699193211; x=1699798011; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699193523; x=1699798323; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aNimV0pxiND1l+DJCiLTbaFSb12s73HBDj3fw9Su7Y4=;
- b=g2g68TYbjSQkBdRfbDBalA1vjz4BITmvZyi+LG+DGZ81TbRabbZhOn0HHYroMkFQTy
- Uj/L9vthgTfaNSASbZ3CHsWXKjHC97jg9hW0nm+1eu0/stjLy3GGnd9fgovEM3Cam1UB
- oQtH0ZHSULI0PzTaKcZNk8wsWxXpB+dWtyv8wHxP3GdRmhQ60UuXrhoxzc61A7sQt2Eo
- US/5YL0nwHRCd+L7L18cks6VRzAEANuSLsF4oaL1Aus8Uv8RjQS+4uMhiRyOwGOE7KGP
- 3m6fzQTv/EfoCs/5NAh0V/v6yTh+zxdStiEc8U0tr45VgjYaEBk1xqI+xTAitVzF+8KB
- SwVg==
+ bh=xTgPsB/x2sJaemWvOMYepXasZ3stUuhX6/T7Tb60EwA=;
+ b=D06NU+uTtnc7N4HvtEG6zzH6XtH6eIbFR4rbgiwSwaElH/iXlT/vdjYDF935z6jv9G
+ ppjPOa2ozU9Dx6HRtdhqcw2ODjyFmq6GhASt+fw/EsMlwqFo4ujBhEPV21MWEJ+IKaYk
+ jqkKHq+/+Rnq7N9/REn6mXaikRkQQDQb4y+ggmkEgYJAjN6zjgw1os9iDPYmaf0RBAB+
+ m2ofCtuwP5iQXcFcSTdcGN6ITol1CqtExum0WYLvibVa49pyU+bAJT+lU0JpmIHjkxFI
+ sWGrx8Dq/PnkXuef7gHkFaCviVYFqNtQZwdL9KGpjGvAuVdg/c3O6J6CIlw2CmBDaRUK
+ 87Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699193211; x=1699798011;
+ d=1e100.net; s=20230601; t=1699193523; x=1699798323;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aNimV0pxiND1l+DJCiLTbaFSb12s73HBDj3fw9Su7Y4=;
- b=I+UtoDkWT0KeWEjKvUz+FoBh4Nu6DeN+AIh3cTrux7bDjrGra2P/n++R/t0jNvSAcg
- SaSYUbfxp77Xov1yHxqCI0s9c5g7jweV3xgWf6PvCUPB3fMeXmL4e7ZKYI16XqPJTmbb
- h5b4aIvsKD6KPXVJdr3lnys7L92TbXb5dy0v41xblWKdBWnYzQ4J/x/ejTeZYQCWHXWC
- SpqVOHk8A+vkBToN1Mcmwg1FF3+Pf/R3BRX+iTJle/ulabNCPt4ZnIY+Osfw76jK55UQ
- rcROILs05JtmVzj90/7wJ5MweNu6DBtIlZQtUksW/yRbJtlN3N92z+Qnp3fqgPmHtpSP
- qR+g==
-X-Gm-Message-State: AOJu0Yzgt8TP3K44j7YYCP2Xoh1Tq9z6EmYKlf++Koqsxs3+xtYtwdHK
- mpJro/pJkUYT4XjWjtT/+zals0xGX+hpeVLMMzY=
-X-Google-Smtp-Source: AGHT+IHMhbGe/0iKpPmqXkwOs7BT5weh7PjUxuJOSoq1/Ul+9L8p0OTGnjx+uSOGLgIud2TzaU0lGTb69VWfr5ygMto=
-X-Received: by 2002:a50:9b48:0:b0:544:5b1d:ff87 with SMTP id
- a8-20020a509b48000000b005445b1dff87mr2939720edj.38.1699193211347; Sun, 05 Nov
- 2023 06:06:51 -0800 (PST)
+ bh=xTgPsB/x2sJaemWvOMYepXasZ3stUuhX6/T7Tb60EwA=;
+ b=tEeR94vHuQYYOPILmnitIFxbwoo1/HRzFTgfxPYV0dCKPJ/iWz88X2D2gft+PU2foe
+ YqJZ/aVPmLsPHKhgqIamntusCqfXDYxr2hc1XTAVyfRWC+9J0yYXzrIotqYPjmeohraV
+ jtuOZ8ckIQYK0IwR2ukKab7pPxP/Ob2LLND2H2n6+TicEMh2qvyGAUuJkNTr3BofXIWN
+ A8+yrW32oKtiOkp+RZHHKh9FF5+z6kyADzBWj5YTIuvP7CXDIl4npQ5i//wcq644lBbU
+ wUERqUdzU8WhwNg6SaqqBq7CLs7aIc9pKPDyWCVBBTy71iZZhyl24sdJxoj6LwY2O2vf
+ 2q4g==
+X-Gm-Message-State: AOJu0YxsshShd6K3CV4mrFZKTeqIbzOcikfJQbn+KEWSzFX6ox6qvbk5
+ jIiyDLFkxi1PO1IKAf/cG6OHtfZFTdEtHp6PbM4qPZ0E
+X-Google-Smtp-Source: AGHT+IHnOGi2+izkGEX9F9aajlTxo9GTxfdCHHAaJsn6NJAnz7GSICGCasKGRF7OZ3PvvcdzbQJ3VQTZ+X2+cwOkBw8=
+X-Received: by 2002:a17:907:94c8:b0:9cf:f762:1911 with SMTP id
+ dn8-20020a17090794c800b009cff7621911mr11001718ejc.66.1699193522655; Sun, 05
+ Nov 2023 06:12:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-4-sjg@chromium.org>
-In-Reply-To: <20231002011450.462468-4-sjg@chromium.org>
+References: <20231101180447.99361-1-sjg@chromium.org>
+In-Reply-To: <20231101180447.99361-1-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 5 Nov 2023 22:06:40 +0800
-Message-ID: <CAEUhbmWzREZNRim4qAoMmonjwMNE4hyXcUzVDV+_HdtNS3Z2Hg@mail.gmail.com>
-Subject: Re: [PATCH v3 08/12] video: Drop unnecessary truetype operations from
- SPL
+Date: Sun, 5 Nov 2023 22:11:52 +0800
+Message-ID: <CAEUhbmXAQ2a3LRbTkEv+X6kE5_q44kX16p9QXy1NdYDreZJ1Nw@mail.gmail.com>
+Subject: Re: [PATCH v2] x86: serial: ns16550: Allow the UART to be silently
+ disabled
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>
+ Andre Przywara <andre.przywara@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,20 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 2, 2023 at 11:32=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
+Hi Simon,
+
+On Thu, Nov 2, 2023 at 2:04=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
+:
 >
-> Saving and restoring entries is used for expo and for the command line,
-> which we don't use in SPL. Drop these methods.
+> U-Boot normally requires a UART. When booting from coreboot it is
+> sometimes just not available, e.g. when no sysinfo or DBG2 information
+> is provided.
+>
+> In this case we need to continue running, since the display can be used.
+> Add a flag to disable serial for this case.
+>
+> This allows U-Boot to start up and operation from the display, instead
+> of hanging on start-up.
+>
+> This could perhaps be hidden behind a Kconfig option to reduce code
+> size.
+
+I think using a generic Kconfig option and filtering this out in the
+generic serial probe code is better than what is proposed in this
+patch.
+
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
-> Changes in v3:
-> - Add new patch to drop unnecessary truetype operations from SPL
+> Changes in v2:
+> - Drop RFC tag since there were no comments
 >
->  drivers/video/console_truetype.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+>  drivers/serial/ns16550.c         | 17 +++++++++++++++--
+>  drivers/serial/serial_coreboot.c |  1 +
+>  include/ns16550.h                |  1 +
+>  3 files changed, 17 insertions(+), 2 deletions(-)
 >
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Regards,
+Bin
