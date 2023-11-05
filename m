@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EFE4C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 14:07:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 496A8C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 14:08:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C392C8642D;
-	Sun,  5 Nov 2023 15:07:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CCF4386F91;
+	Sun,  5 Nov 2023 15:07:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mWXeDFgE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jy7TLaM+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE2E286F23; Sun,  5 Nov 2023 15:07:04 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 2C98486CB1; Sun,  5 Nov 2023 15:06:57 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 666F58642D
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 15:06:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54FC186EEE
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 15:06:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-543456dbd7bso9156051a12.1
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 06:06:46 -0800 (PST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-53d9f001b35so5982192a12.2
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 06:06:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699193206; x=1699798006; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699193203; x=1699798003; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8TwxqI2UwRmrmBsXajK/iCN6nZfT3wEd01Qx7qZ9Y94=;
- b=mWXeDFgEinZFz8Sbhh+s/j69imL4DhPCGgo3c03mwOqV0got+211zAhYpuDUFFge3g
- 1IxnFOmVdZD2EC9iO5OWXyN3AWGm4WOwXS1ZCZ/5y041GIRuhhT0z3hzE4zO2h5WfnVO
- KG8C871cBS0jKprk2tChbBwdDKwZzV2HtOQ7/W4UJBn1tkM0UbZYZZCwFqCEQMs5pq1r
- NxYmm8JTaqtj/suj2S1Cm1GiTv6zhx4+rg3O7oWu3VrK+F+Ii/BiAfMV+OJWgAWQppfW
- QqaGb3N5eADir65qaK2+ypk5YHwyDJmia58KAttzj8vXyZ3oJnX6cA215XqhvMIofEej
- jAJQ==
+ bh=A79gK6CsOsSi4DOdE+LiS+XaD2Ok3vHgW5vJCe938W4=;
+ b=Jy7TLaM+ffMCCVu2+UombOS4VLwMN0z4dTlIcQm8HIrTl70iopSwChSgKI9RZ7g35R
+ oyskIoOsdHXRJmXsPMEcHKgaKrBJmhY2WWCTWPzKwUxHVOtBBJNqfG6C9UHNIlJQuynb
+ VCGx8bVKKK3som1ClLgVCu1eoOxS0CEgIYz3n7WdX10g/hYaKy8RDRWUqqPQ4K9gXs6u
+ nxeRLpEkB0aRTDK4RoEqn45df8vLO6s9bOjD85qKCX1+nVP002lg4rlJhGNSuTO3IfyJ
+ 6Hod8liqzinzmvyTCQgKLIo21OuGN2+vzy0bNTBU18oFW8vF9cI8aQICLq+iAR6bHGWI
+ RZgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699193206; x=1699798006;
+ d=1e100.net; s=20230601; t=1699193203; x=1699798003;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8TwxqI2UwRmrmBsXajK/iCN6nZfT3wEd01Qx7qZ9Y94=;
- b=XF20JWZvSz4rHaC2FiM1wIAMGJdIk+vJT2X7xXxeAyKK836JE+u6BN3bVSD1IDDgAH
- uVbAvKGg5BdhVTj2WXFVcMYg5ceIdRJDqY6iqD9wAX3o/8saL3sPcX2MpyPARhmz7hVl
- cGZ1vZZt97+TrfDseVhDKRaQ1hGI0zxmVzYqDAiDiNbTKRb/sEO4to3+hKlYVGEv4BQf
- 9Ne0ZBRsMZKMuGZ8lPIO+rOGIMSL9TCEwjKmGsI+Ur3xqryJuG3rQ9Mzrcrz9pH8/3RF
- GcUlfxBzqV5sxMaXG3W9LgauHvcG6F055VgKB1DxjhsoFcO5wyu9jdD7+ttSAGrRe98Z
- Ao6g==
-X-Gm-Message-State: AOJu0YzcgjGksqRXsWoAg32xgDBydCg/V80guVQXm64mjMrCLXDUhZA6
- cy5Rippsnebl3jBqVF380rcztoft5XC18Aux6fY=
-X-Google-Smtp-Source: AGHT+IH73FEY2HWThCLrsNTxhJ3Du8WWjDhKH6UZ7aiTAiPPKM+A8fjGURDTmYbUzffRvjzR903aeqyMFMvNiKtKZh4=
-X-Received: by 2002:a50:bace:0:b0:544:3d4d:db15 with SMTP id
- x72-20020a50bace000000b005443d4ddb15mr4385263ede.19.1699193205724; Sun, 05
- Nov 2023 06:06:45 -0800 (PST)
+ bh=A79gK6CsOsSi4DOdE+LiS+XaD2Ok3vHgW5vJCe938W4=;
+ b=oAvCtWHsYMFnlHrfAXkGq+zeyTUoSg249hW6qbxdSNK0xqk5LA948qstNyuCHZ8/wU
+ 60x9jOfAqg1XipcXuhJg9v0DXPsIkPqcMsoNFJnbLgpBEyYeU8LYEWKl9dQi4El2fGrI
+ oZPAAHyKmsabIa7OnLxHzs2sE3NcyOOvyn6IHIc4QONc6Do5U0xdmcMvogkoWCEtUel5
+ zKG2HyErBzU+33p8jIjRGvwLEK+QlD30FPWdlQGuf5kYzspJYWOGQp6wBnILvEa8nozJ
+ 9W7En7sEgOTUyOhMyMaJXpPIm/EjjmYBMNHlGYiz/xdumI4XvchiRzo3YSeMq4bDlqgq
+ kpfA==
+X-Gm-Message-State: AOJu0Yye6pO70xtZ+2yraJNAUwFwjrsvEN2MLKBvONr46vqDHa8rSp4v
+ 0QKuw5NyEEWPBfClFSYUYBXDusY+f6emJo0CejU=
+X-Google-Smtp-Source: AGHT+IGLp1MlCnkuZqQAsheiytK+8+PJBw7QEipK8PLcn7OO8hDROI+vpvbIhCVUM1R96cNHpcUoeS5UWH5u3cTpGy8=
+X-Received: by 2002:a05:6402:292f:b0:53d:a4a3:e5cc with SMTP id
+ ee47-20020a056402292f00b0053da4a3e5ccmr16166606edb.42.1699193203607; Sun, 05
+ Nov 2023 06:06:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20231002011450.462468-1-sjg@chromium.org>
- <20231001191444.v3.4.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
-In-Reply-To: <20231001191444.v3.4.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
+ <20231001191444.v3.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
+In-Reply-To: <20231001191444.v3.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Sun, 5 Nov 2023 22:06:35 +0800
-Message-ID: <CAEUhbmU_kjxj8gCFVJvHYa7it5vgihgyCVLB_DJny8+ct=vWKg@mail.gmail.com>
-Subject: Re: [PATCH v3 04/12] x86: coreboot: Add a boot script
+Date: Sun, 5 Nov 2023 22:06:32 +0800
+Message-ID: <CAEUhbmXs+r6Rngsv91ku4FWpq59w8Wq=PjX_sGdHjkaY4md8wA@mail.gmail.com>
+Subject: Re: [PATCH v3 01/12] efi: Correct handling of frame buffer
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Graf <agraf@csgraf.de>, 
+ Anatolij Gustschin <agust@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,25 +90,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 2, 2023 at 9:14=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
+On Mon, Oct 2, 2023 at 10:23=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Provide the user with a list of available boot options. Selecting one
-> causes it to be booted. Pressing <ESC> causes U-Boot to return to the
-> command-line prompt.
+> The efi_gop driver uses private fields from the video uclass to obtain a
+> pointer to the frame buffer. Use the platform data instead.
+>
+> Check the VIDEO_COPY setting to determine which frame buffer to use. Once
+> the next stage is running (and making use of U-Boot's EFI boot services)
+> U-Boot does not handle copying from priv->fb to the hardware framebuffer,
+> so we must allow EFI to write directly to the hardware framebuffer.
+>
+> We could provide a function to read this, but it seems better to just
+> document how it works. The original change ignored an explicit comment
+> in the video.h file ("Things that are private to the uclass: don't use
+> these in the driver") which is why this was missed when the VIDEO_COPY
+> feature was added.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
 > ---
 >
-> Changes in v3:
-> - Clear the screen before booting
+> (no changes since v2)
 >
 > Changes in v2:
-> - Add new patch to add a coreboot boot script
+> - Rebase to -next
+> - Add some more comments to the header file
+> - Add fixes tag
 >
->  configs/coreboot64_defconfig | 1 +
->  configs/coreboot_defconfig   | 1 +
->  2 files changed, 2 insertions(+)
+>  include/video.h          |  9 ++++++---
+>  lib/efi_loader/efi_gop.c | 12 +++++++-----
+>  2 files changed, 13 insertions(+), 8 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
