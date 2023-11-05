@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B5A6C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:39:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8B1C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:40:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 502FA86F63;
+	by phobos.denx.de (Postfix) with ESMTP id D155586FA5;
 	Sun,  5 Nov 2023 09:38:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="RHcL+7r1";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="kUa5Chla";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6D8186FD0; Sun,  5 Nov 2023 09:38:39 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 844DF86FB7; Sun,  5 Nov 2023 09:38:37 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E002686FD7
+ by phobos.denx.de (Postfix) with ESMTPS id 59F2F86F91
  for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 09:38:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4688C12000B;
- Sun,  5 Nov 2023 11:38:30 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4688C12000B
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 8125810000B;
+ Sun,  5 Nov 2023 11:38:29 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 8125810000B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699173510;
- bh=U5a1PcgFW0qYF5fotPS0ChxNWPV54cgX4f6A4PxugzY=;
+ s=mail; t=1699173509;
+ bh=jiQKm6hpxHvMg6mOxxv+8AgTvhcQHv3PABbxmduXppg=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=RHcL+7r11BJmU+DqjzSfIGcIZx5/8B5pP3YVcuj/tzRPlJeD7T0TXTSrtVvJxtXh3
- Ti/SpXPvbHvYfPiAIVRbz4ACkGyTNDOr2KVcsddrlPZ4MVjpwYUQ4oUOzl95/ZMo5p
- 5Na5ByHgclsBqxN1lUVqX1BkSaKWE/Sh62rkjJOZUH8va5zdn8R/vr7Dzx6BNvGqoY
- ns0zVgV7qnrcZsJIGGOlSK+61/i0+K27KjggHUogjs455UHXrsFEC1+VuOmWPiVrHu
- GSzuCLzQT93kb1hbx1MwrkJN8Oa/NX0sY+oPMi6LI26YFCe2wi6GNyQ6ZAvAc/TeG5
- +Zl4AUFSjI9JQ==
+ b=kUa5ChlaQjQiqzH5GEf/x/Krz9n0yH0Sc9gTQfCX48u6Jh6lG6yeWbqnoixd3nQ3o
+ ICfkQjzoGM1p7vafJ5hm8Y23AuzOROAIvtVP8pWejbH966kTID6ZVaKOplxDZlzD6x
+ m3s//GPLWQaQLbQ/pgmJQ+unFpPcnMnpiIWMcSIKuJB8dRfJMD9E82AtHCfJ/RouXN
+ ZhZU9FxP6TtJ9v1sj8EPjJ9D54s0H5g93UmPvr1iFrIhkqZnCaz9kG0C7bi7S0W7fj
+ Y0xJ4Pl9i4z6d+vruR5FQ1INq98FF94c9d23sGRTJRtH3C2hhWjxzrt1RJdqIafVj8
+ eP+6scjkEE5vA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun,  5 Nov 2023 11:38:30 +0300 (MSK)
+ Sun,  5 Nov 2023 11:38:29 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
@@ -60,9 +60,9 @@ CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
  <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
  Stanley <joel@jms.id.au>, <u-boot-amlogic@groups.io>,
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v6 6/8] cmd: clk: Use dump function from clk_ops
-Date: Sun, 5 Nov 2023 11:38:07 +0300
-Message-ID: <20231105083809.3293-7-ivprusov@sberdevices.ru>
+Subject: [PATCH v6 5/8] clk: Add dump operation to clk_ops
+Date: Sun, 5 Nov 2023 11:38:06 +0300
+Message-ID: <20231105083809.3293-6-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231105083809.3293-1-ivprusov@sberdevices.ru>
 References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
@@ -83,9 +83,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 543 543
  1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
- {Tracking_from_domain_doesnt_match_to}, sberdevices.ru:7.1.1,5.0.1;
- p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
+ {Tracking_from_domain_doesnt_match_to},
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1;
  127.0.0.199:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
  {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
@@ -111,43 +112,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add another loop to dump additional info from clock providers that
-implement dump operation.
+This adds dump function to struct clk_ops which should replace
+soc_clk_dump. It allows clock drivers to provide custom dump
+implementation without overriding generic CCF dump function.
 
 Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- cmd/clk.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ include/clk-uclass.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/cmd/clk.c b/cmd/clk.c
-index c7c379d7a6..4b9709d3ff 100644
---- a/cmd/clk.c
-+++ b/cmd/clk.c
-@@ -62,6 +62,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
- int __weak soc_clk_dump(void)
- {
- 	struct udevice *dev;
-+	const struct clk_ops *ops;
+diff --git a/include/clk-uclass.h b/include/clk-uclass.h
+index a22f1a5d84..3419daab34 100644
+--- a/include/clk-uclass.h
++++ b/include/clk-uclass.h
+@@ -25,6 +25,7 @@ struct ofnode_phandle_args;
+  * @set_parent: Set current clock parent
+  * @enable: Enable a clock.
+  * @disable: Disable a clock.
++ * @dump: Print clock information.
+  *
+  * The individual methods are described more fully below.
+  */
+@@ -39,6 +40,9 @@ struct clk_ops {
+ 	int (*set_parent)(struct clk *clk, struct clk *parent);
+ 	int (*enable)(struct clk *clk);
+ 	int (*disable)(struct clk *clk);
++#if IS_ENABLED(CONFIG_CMD_CLK)
++	void (*dump)(struct udevice *dev);
++#endif
+ };
  
- 	printf(" Rate               Usecnt      Name\n");
- 	printf("------------------------------------------\n");
-@@ -69,6 +70,14 @@ int __weak soc_clk_dump(void)
- 	uclass_foreach_dev_probe(UCLASS_CLK, dev)
- 		show_clks(dev, -1, 0);
- 
-+	uclass_foreach_dev_probe(UCLASS_CLK, dev) {
-+		ops = dev_get_driver_ops(dev);
-+		if (ops && ops->dump) {
-+			printf("\n%s %s:\n", dev->driver->name, dev->name);
-+			ops->dump(dev);
-+		}
-+	}
+ #if 0 /* For documentation only */
+@@ -135,6 +139,17 @@ int enable(struct clk *clk);
+  * Return: zero on success, or -ve error code.
+  */
+ int disable(struct clk *clk);
 +
- 	return 0;
- }
- #else
++/**
++ * dump() - Print clock information.
++ * @clk:	The clock device to dump.
++ *
++ * If present, this function is called by "clk dump" command for each
++ * bound device.
++ *
++ * Return: zero on success, or -ve error code.
++ */
++void dump(struct udevice *dev);
+ #endif
+ 
+ #endif
 -- 
 2.34.1
 
