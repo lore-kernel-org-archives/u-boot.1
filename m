@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EBAC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C317C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 08:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1A086FFF;
-	Sun,  5 Nov 2023 09:38:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE44186F5F;
+	Sun,  5 Nov 2023 09:38:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="gcjsouIF";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="b0V3S8Xt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53AA086F8A; Sun,  5 Nov 2023 09:38:42 +0100 (CET)
+ id A548486FD5; Sun,  5 Nov 2023 09:38:37 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA7A386F80
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 09:38:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C49786F39
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 09:38:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 14443100009;
- Sun,  5 Nov 2023 11:38:28 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 14443100009
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 54595100002;
+ Sun,  5 Nov 2023 11:38:26 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 54595100002
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699173508;
- bh=gBOdzydja8Nsi8AZU2xyNEDvA6Dqk2mnbxHqrUlwk0M=;
+ s=mail; t=1699173506;
+ bh=IqKNktyVLhcA8Aw87Pu2NltAWnBVQN+KKg5tD/A4MOM=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=gcjsouIFhz7i+1IAcV14GOhFO+MhbkBxmoyYedJWKv/pvzA5GW73SNQjvu3Lbl7x6
- ZRZ1MMPU+etEl/v9wL3u52eMvfNSl6MEkyhHwqCqFGG/igAI1VDLZYXQfMYLYnPJoF
- kHLHtu65O/PP/IHisSIWamkQkvktsH2+rtWICJupkqHCeJn7/IeHMZTc9Un19EDPla
- JbPM/z6gSN4bBymLjtDVpqzXagALo03uVHt5fnvYASSxGjN7ZHruGnCg/8zVedfDWB
- +PiFBgAqHReAlXLSeTx9AfT/DcCW4yaDD9xtmYvmJ1gh6SnKH28u6bNtY5l2Dq4n+c
- 5XD6V/sMYY/Dg==
+ b=b0V3S8Xt1QvHr8zh6TWvByJ4tkC2Fi1qy0cut1H7IxVwTfMjwPe4CKDPtQQ0Pjrzz
+ Lky4jtB6EhDt9ah5w4KUk6qP0+spbTjvyLIIYAdCi+YP88gw7tnDCiFeTzjik+deYu
+ FEQYbP+1XUo2ptA5HRVIsjJj93BkNHC5hSul8Acv33Y2m+ZKKuZesdcH/ZBwuX4dpx
+ UrOQ+tsJdHmEdcdVCM3AknJYa7AFM/vMm4ePtaFAe0tVMi8TfrkiE1wo/v6kJxsprF
+ lOx7OFSzOI9QcvWyY8nMVftwgwgvAaiTqR6qPeN8CQZuDgJBPIxBfctGJvYogJfw1j
+ lXlcOPdMZYSIQ==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun,  5 Nov 2023 11:38:27 +0300 (MSK)
+ Sun,  5 Nov 2023 11:38:26 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Sun, 5 Nov 2023 11:38:27 +0300
+ 15.2.1118.37; Sun, 5 Nov 2023 11:38:25 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
  Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
@@ -60,9 +60,9 @@ CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
  <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
  Stanley <joel@jms.id.au>, <u-boot-amlogic@groups.io>,
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v6 3/8] clk: k210: Move soc_clk_dump function
-Date: Sun, 5 Nov 2023 11:38:04 +0300
-Message-ID: <20231105083809.3293-4-ivprusov@sberdevices.ru>
+Subject: [PATCH v6 1/8] clk: zynq: Move soc_clk_dump to Zynq clock driver
+Date: Sun, 5 Nov 2023 11:38:02 +0300
+Message-ID: <20231105083809.3293-2-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231105083809.3293-1-ivprusov@sberdevices.ru>
 References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
@@ -112,122 +112,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move clock dump function to avoid forward declaration after switching to
-dump in clk_ops.
+Move clock dump function in preparation for switching to dump function
+in clk_ops.
 
 Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Acked-by: Michal Simek <michal.simek@amd.com>
 ---
- drivers/clk/clk_k210.c | 92 +++++++++++++++++++++---------------------
- 1 file changed, 46 insertions(+), 46 deletions(-)
+ arch/arm/mach-zynq/clk.c | 57 ---------------------------------------
+ drivers/clk/clk_zynq.c   | 58 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+), 57 deletions(-)
 
-diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
-index c534cc07e0..2f17152021 100644
---- a/drivers/clk/clk_k210.c
-+++ b/drivers/clk/clk_k210.c
-@@ -1238,52 +1238,6 @@ static int k210_clk_request(struct clk *clk)
- 	return 0;
- }
+diff --git a/arch/arm/mach-zynq/clk.c b/arch/arm/mach-zynq/clk.c
+index 1945f60e08..e6a67326dd 100644
+--- a/arch/arm/mach-zynq/clk.c
++++ b/arch/arm/mach-zynq/clk.c
+@@ -13,20 +13,6 @@
  
--static const struct clk_ops k210_clk_ops = {
--	.request = k210_clk_request,
--	.set_rate = k210_clk_set_rate,
--	.get_rate = k210_clk_get_rate,
--	.set_parent = k210_clk_set_parent,
--	.enable = k210_clk_enable,
--	.disable = k210_clk_disable,
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static const char * const clk_names[clk_max] = {
+-	"armpll", "ddrpll", "iopll",
+-	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
+-	"ddr2x", "ddr3x", "dci",
+-	"lqspi", "smc", "pcap", "gem0", "gem1",
+-	"fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1",
+-	"sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma",
+-	"usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper",
+-	"sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper",
+-	"can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper",
+-	"uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper",
+-	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
 -};
 -
--static int k210_clk_probe(struct udevice *dev)
+ /**
+  * set_cpu_clk_info() - Setup clock information
+  *
+@@ -65,46 +51,3 @@ int set_cpu_clk_info(void)
+ 
+ 	return 0;
+ }
+-
+-/**
+- * soc_clk_dump() - Print clock frequencies
+- * Returns zero on success
+- *
+- * Implementation for the clk dump command.
+- */
+-int soc_clk_dump(void)
 -{
--	int ret;
--	struct k210_clk_priv *priv = dev_get_priv(dev);
+-	struct udevice *dev;
+-	int i, ret;
 -
--	priv->base = dev_read_addr_ptr(dev_get_parent(dev));
--	if (!priv->base)
--		return -EINVAL;
--
--	ret = clk_get_by_index(dev, 0, &priv->in0);
+-	ret = uclass_get_device_by_driver(UCLASS_CLK,
+-		DM_DRIVER_GET(zynq_clk), &dev);
 -	if (ret)
 -		return ret;
 -
--	/*
--	 * Force setting defaults, even before relocation. This is so we can
--	 * set the clock rate for PLL1 before we relocate into aisram.
--	 */
--	if (!(gd->flags & GD_FLG_RELOC))
--		clk_set_defaults(dev, CLK_DEFAULTS_POST_FORCE);
+-	printf("clk\t\tfrequency\n");
+-	for (i = 0; i < clk_max; i++) {
+-		const char *name = clk_names[i];
+-		if (name) {
+-			struct clk clk;
+-			unsigned long rate;
+-
+-			clk.id = i;
+-			ret = clk_request(dev, &clk);
+-			if (ret < 0)
+-				return ret;
+-
+-			rate = clk_get_rate(&clk);
+-
+-			clk_free(&clk);
+-
+-			if ((rate == (unsigned long)-ENOSYS) ||
+-			    (rate == (unsigned long)-ENXIO))
+-				printf("%10s%20s\n", name, "unknown");
+-			else
+-				printf("%10s%20lu\n", name, rate);
+-		}
+-	}
 -
 -	return 0;
 -}
--
--static const struct udevice_id k210_clk_ids[] = {
--	{ .compatible = "canaan,k210-clk" },
--	{ },
--};
--
--U_BOOT_DRIVER(k210_clk) = {
--	.name = "k210_clk",
--	.id = UCLASS_CLK,
--	.of_match = k210_clk_ids,
--	.ops = &k210_clk_ops,
--	.probe = k210_clk_probe,
--	.priv_auto = sizeof(struct k210_clk_priv),
--};
--
- #if IS_ENABLED(CONFIG_CMD_CLK)
- static char show_enabled(struct k210_clk_priv *priv, int id)
- {
-@@ -1342,3 +1296,49 @@ int soc_clk_dump(void)
+diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
+index e80500e382..be5226175f 100644
+--- a/drivers/clk/clk_zynq.c
++++ b/drivers/clk/clk_zynq.c
+@@ -454,6 +454,64 @@ static int dummy_enable(struct clk *clk)
  	return 0;
  }
- #endif
-+
-+static const struct clk_ops k210_clk_ops = {
-+	.request = k210_clk_request,
-+	.set_rate = k210_clk_set_rate,
-+	.get_rate = k210_clk_get_rate,
-+	.set_parent = k210_clk_set_parent,
-+	.enable = k210_clk_enable,
-+	.disable = k210_clk_disable,
+ 
++static const char * const clk_names[clk_max] = {
++	"armpll", "ddrpll", "iopll",
++	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
++	"ddr2x", "ddr3x", "dci",
++	"lqspi", "smc", "pcap", "gem0", "gem1",
++	"fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1",
++	"sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma",
++	"usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper",
++	"sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper",
++	"can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper",
++	"uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper",
++	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
 +};
 +
-+static int k210_clk_probe(struct udevice *dev)
++/**
++ * soc_clk_dump() - Print clock frequencies
++ * Returns zero on success
++ *
++ * Implementation for the clk dump command.
++ */
++int soc_clk_dump(void)
 +{
-+	int ret;
-+	struct k210_clk_priv *priv = dev_get_priv(dev);
++	struct udevice *dev;
++	int i, ret;
 +
-+	priv->base = dev_read_addr_ptr(dev_get_parent(dev));
-+	if (!priv->base)
-+		return -EINVAL;
-+
-+	ret = clk_get_by_index(dev, 0, &priv->in0);
++	ret = uclass_get_device_by_driver(UCLASS_CLK,
++					  DM_DRIVER_GET(zynq_clk), &dev);
 +	if (ret)
 +		return ret;
 +
-+	/*
-+	 * Force setting defaults, even before relocation. This is so we can
-+	 * set the clock rate for PLL1 before we relocate into aisram.
-+	 */
-+	if (!(gd->flags & GD_FLG_RELOC))
-+		clk_set_defaults(dev, CLK_DEFAULTS_POST_FORCE);
++	printf("clk\t\tfrequency\n");
++	for (i = 0; i < clk_max; i++) {
++		const char *name = clk_names[i];
++
++		if (name) {
++			struct clk clk;
++			unsigned long rate;
++
++			clk.id = i;
++			ret = clk_request(dev, &clk);
++			if (ret < 0)
++				return ret;
++
++			rate = clk_get_rate(&clk);
++
++			clk_free(&clk);
++
++			if ((rate == (unsigned long)-ENOSYS) ||
++			    (rate == (unsigned long)-ENXIO))
++				printf("%10s%20s\n", name, "unknown");
++			else
++				printf("%10s%20lu\n", name, rate);
++		}
++	}
 +
 +	return 0;
 +}
 +
-+static const struct udevice_id k210_clk_ids[] = {
-+	{ .compatible = "canaan,k210-clk" },
-+	{ },
-+};
-+
-+U_BOOT_DRIVER(k210_clk) = {
-+	.name = "k210_clk",
-+	.id = UCLASS_CLK,
-+	.of_match = k210_clk_ids,
-+	.ops = &k210_clk_ops,
-+	.probe = k210_clk_probe,
-+	.priv_auto = sizeof(struct k210_clk_priv),
-+};
+ static struct clk_ops zynq_clk_ops = {
+ 	.get_rate = zynq_clk_get_rate,
+ #ifndef CONFIG_SPL_BUILD
 -- 
 2.34.1
 
