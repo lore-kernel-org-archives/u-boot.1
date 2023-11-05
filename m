@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9413C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 20:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4650FC4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 20:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65A5186FA5;
-	Sun,  5 Nov 2023 21:05:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB1FF86EB5;
+	Sun,  5 Nov 2023 21:06:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nc2e7d92";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CMRJGSOA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FCD486F1C; Sun,  5 Nov 2023 21:05:22 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 4FBE886E95; Sun,  5 Nov 2023 21:06:46 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2355886EB5
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 21:05:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 829BC86EB5
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 21:06:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7ad501764f4so17723139f.3
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 12:05:15 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-540c54944c4so7573266a12.1
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 12:06:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699214713; x=1699819513; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u1UY2bjmsU2lv9rbZ9NzomNDYnLHjboXj6Z6bYpXZNc=;
- b=Nc2e7d92gl5wkUaw6uzg8zwHWwL8Tzynz4LYc4HBMnqxNd9f/zBw3H7Rs+LvdtegIU
- uZjbCIQ6KE9KtPTZkZzUYeTko5hU5pFCs1FVXWDGhjRopcU9UmaHhoAa4DPK5aSapcLs
- f7/d72mokTrFJANkToWRKNy5H9oMm031WIXzQ=
+ d=chromium.org; s=google; t=1699214796; x=1699819596; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CA6ZeOoyQd3+A1hpKay+Q09ivyG132Fs7OkaVdf/yA4=;
+ b=CMRJGSOAnhHDUvsJQ4xIobKqw75xtNQ7iRjLqr8kFoMrrV8yPOn/w5DPdJKxQAKDpi
+ cr9Wc2X/HVT9kv3I4simtEPcDCR3Rjso9tM+QzgJZZak6rd7m3NHFv+Ha+XWrN28WXEQ
+ n7dcuHROTcrum6l5HopV1JumhMAbGaoenyK4M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699214713; x=1699819513;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u1UY2bjmsU2lv9rbZ9NzomNDYnLHjboXj6Z6bYpXZNc=;
- b=wf7gbFlrJQPJTCooiwkTaZ1d1vf8nVy19lmqqrPIFAwDjbWOeRYoUT2y4cgGQdqrTW
- qpxBEW+R1fr1WHXLM2V47ij2OjSxVdlvPvpIVlXlKQeoz8DxTKzXS/bpFDRf9x08apo+
- azP0HXM2UUiTTg5JZ+3GV68Pj86lohWRVKPZS/SrI0EQtHRTutD7EZFa74KCYl+vWU9H
- 5MTgR+tcRJ9bKzXpkiuIIni6YEJuHEMg7mABVVZ5ZizzYF6UY463KSGdWuf3F7ZUAO0q
- CzyXmdt3ne2Dfu9lzxs3YTnlg1IgBbQbL4KPCh2WLxos+8FO+UnT6ISw2i0s/fob1BnQ
- AbvA==
-X-Gm-Message-State: AOJu0YxA1u2b39PHZNvGSOxCjRAMBJHgnhX54A/BwcB1/eUPVFtY5jCF
- PqFXrmpizyJEMvbsU30rw58EAx03VIy3yM/+4Hzz1Q==
-X-Google-Smtp-Source: AGHT+IGCAI2LVq1CdsCM0MbUq/3GyxA1VntQIjitmKbCK+hcKClzLiGdxY9QfDYn4mBll9YfbZnjeA==
-X-Received: by 2002:a05:6602:160f:b0:7a6:6c00:3893 with SMTP id
- x15-20020a056602160f00b007a66c003893mr36283546iow.4.1699214713782; 
- Sun, 05 Nov 2023 12:05:13 -0800 (PST)
-Received: from sjg1.united_club.lax.united.com
- (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- w19-20020a029693000000b0044d10eda3a8sm1685512jai.158.2023.11.05.12.05.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Nov 2023 12:05:13 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marc Kleine-Budde <mkl@pengutronix.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>
-Subject: [PATCH 4/4] image: Correct load_bug typo
-Date: Sun,  5 Nov 2023 13:03:54 -0700
-Message-ID: <20231105130351.4.I33852d11a04a125d8a4fd7938a8eb989454e7fd3@changeid>
-X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
-In-Reply-To: <20231105200453.1887418-1-sjg@chromium.org>
-References: <20231105200453.1887418-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1699214796; x=1699819596;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CA6ZeOoyQd3+A1hpKay+Q09ivyG132Fs7OkaVdf/yA4=;
+ b=ZfzF8R8x95sCLlLtfe1ohTip6ounTfmxyKGzqSRUsm2A/nBRLfT2/16zbHfoDwYaDC
+ yG/CLs8ZrnuZLIIClqfWc5emQvxzsnTOwskg84N5hspL5xCTXchKE4NXSYh9GAUgSgGj
+ s/oUyl94EpJNidHNCkE+bwhUwITCv9mELFMTwN3yKFE1kXzAzgPshisiDfVZGlxTGHaq
+ c5R0CplDSvli3Q090achN0ltbdqVVSGAses6gpgQMMLg3V0RXQcKqHyfAAuxx4YrUE75
+ DYbyXpA9HBqs47tARGg+Wer7/uuR0R+Rqua3p+uw76kwScwPzjMnhucsMdFsHP8jqna4
+ ZxOA==
+X-Gm-Message-State: AOJu0YzEw0BmTphkP6mjiL981Bsm+1HfT/VvWix/nSJS0n7IpTbKtPpr
+ SGvdMhHU8RbJaaO3IKUZIJJRxUQCpQf98AidWAELu4vk1Wb5t+Qw4pg=
+X-Google-Smtp-Source: AGHT+IGlJCnclEiewrc6LfcHQrlgBcWD1B86ekPKSP7YF5L1OjSE1If5tSgJU6fYn2Unf4aOjCQhvTo6Z+og3M/0FqQ=
+X-Received: by 2002:a50:d71d:0:b0:544:7a0d:9f83 with SMTP id
+ t29-20020a50d71d000000b005447a0d9f83mr2051073edi.20.1699214796310; Sun, 05
+ Nov 2023 12:06:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231105200453.1887418-1-sjg@chromium.org>
+In-Reply-To: <20231105200453.1887418-1-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 5 Nov 2023 20:06:19 +0000
+Message-ID: <CAPnjgZ2y+9jtJCd4TVf28C7gVxVkqSNtbXbmKMhYOctt3=EwKw@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bootm: Handle compressed arm64 images with bootm
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
+ Eddie James <eajames@linux.ibm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Marc Kleine-Budde <mkl@pengutronix.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>, 
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,27 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct a typo in the function comment for image_decomp().
+Hi,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Sun, 5 Nov 2023 at 20:05, Simon Glass <sjg@chromium.org> wrote:
+>
+> This little series corrects a problem I noticed with arm64 images,
+> where the kernel is not recognised:
+>
+>    ## Loading kernel from FIT Image at 10000000 ...
+>       Using 'conf-930' configuration
+>       Verifying Hash Integrity ... OK
+>       Trying 'kernel' kernel subimage
+>         Description:  Linux-6.6.0-rc7-next-20231024-00003-g259c196f194c
+>         Type:         Kernel Image (no loading done)
+>         Compression:  gzip compressed
+>         Data Start:   0x10000138
+>         Data Size:    13667956 Bytes = 13 MiB
+>       Verifying Hash Integrity ... OK
+>    Bad Linux ARM64 Image magic!
+>
+> The problem is that the arm64 magic is checked before the image is
+> decompressed.
+>
+> Another issue is that the load address is read from the 'load' property
+> even with a kernel_noload image. This means that the kernel is loaded
+> to address 0, which may not be valid on the board. We can use the
+> kernel_addr_r environment variable instead.
+>
+> A patch is included to show the kernel load-address, so it is easy to
+> see what is going on.
+>
+>
+> Simon Glass (4):
+>   bootm: Allow ignoring the load address with kernel_noload
+>   bootm: Move arm64-image processing later
+>   image: Show the load address when decompressing
+>   image: Correct load_bug typo
+>
+>  boot/bootm.c    | 61 ++++++++++++++++++++++++++++++-------------------
+>  boot/image.c    | 13 +++++++----
+>  include/image.h |  2 +-
+>  3 files changed, 48 insertions(+), 28 deletions(-)
+>
+> --
+> 2.42.0.869.gea05f2083d-goog
+>
 
- include/image.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This series has a few problems still, but I am sending it now since I
+believe it fixes a real problem on arm64. I will tidy it up soon.
 
-diff --git a/include/image.h b/include/image.h
-index 2e3cf839ee36..0fe67852c563 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -936,7 +936,7 @@ int image_decomp_type(const unsigned char *buf, ulong len);
-  * @load:	Destination load address in U-Boot memory
-  * @image_start Image start address (where we are decompressing from)
-  * @type:	OS type (IH_OS_...)
-- * @load_bug:	Place to decompress to
-+ * @load_buf:	Place to decompress to
-  * @image_buf:	Address to decompress from
-  * @image_len:	Number of bytes in @image_buf to decompress
-  * @unc_len:	Available space for decompression
--- 
-2.42.0.869.gea05f2083d-goog
-
+Regards,
+Simon
