@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44D6FC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 16:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E02DC4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 16:29:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54BF386C56;
-	Sun,  5 Nov 2023 17:25:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 46C2B86F45;
+	Sun,  5 Nov 2023 17:29:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EU1i5Sd7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QQlsGntg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B018C86EF2; Sun,  5 Nov 2023 17:25:38 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 1CFE486F38; Sun,  5 Nov 2023 17:29:33 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E25986B0A
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 17:25:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 025C186F44
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 17:29:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-543923af573so6315700a12.0
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 08:25:35 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-9d224dca585so548958866b.1
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 08:29:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699201535; x=1699806335; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699201768; x=1699806568; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yRON6SqRbp0UbkKPnZYWZ+XsSVHP+yfBv+oUPBzq9PI=;
- b=EU1i5Sd772I1/bqPLqISBk8wdEsHRGgpK73+vkOG9Ec4JXHHTTN2yYNETKtet0m2jP
- V8QUfTbRH+4s/gyZET7gVZKVKi53r+73riLBFkhcMpFGYA5MMfn8rJpqTMyXv1OdtjqM
- CmU1dogxTIdqdDb734RZBixUrwY+QmamDOXWk=
+ bh=XTDWJHHuE3JdKW6g184IR2hpm1Eqr3ajkVCzD6Kapkw=;
+ b=QQlsGntgnU27Fj+uImY9XjFj5Ka2bhdj99Iy+TdO2ewqp8sr/5zvzGTuuXkaGCxT3z
+ K2qphzWAcwgkZwk+GYzA8ECSjp7WWtQAhHCWac+H+c01U8zbYWTBnM73Rpjn/xpVEUdS
+ rVCmjOvdpJ2dFCMPDcae/S54qVNmeorE/6gNk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699201535; x=1699806335;
+ d=1e100.net; s=20230601; t=1699201768; x=1699806568;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yRON6SqRbp0UbkKPnZYWZ+XsSVHP+yfBv+oUPBzq9PI=;
- b=JmWBNUHPKL2fKiqtuhf9GaQr5bdZ36eLcwJSxiaM+iURl96N2LeCEtCbHwO6sSiAd/
- SkrnuGKPv6iUpjlKQuGnUPaf64GXIZyvATCqCYX+mjFAPVS+P6TFonxjdxWpOdZ+e9IN
- tBcJwVISzmm0g2Qw7IVEVxs1fl3CJyJf4JSUSeMmgempaio+I7FtUWbj5WioOncefr0N
- M6j95ublHLJkk1alrJpI4BFBm0c7LcKtxKUJ+WUdavsWC+mA6zxsD25xGEokO2xMgvhi
- QQr31nXd3nVNDECg3ymmjgvc60kSAcBRk2eB4zsX8sB9NZCnLXSWlaaJn0Yp1LxRo8kt
- w21Q==
-X-Gm-Message-State: AOJu0YxhD60hYwv76nTt/AQmE2gjgzzfJLVIwh9Z7ixbo01JuNWe6CO1
- s9RrbQDrpxt2/p1a5Ow5cVERZLyVrhG+OwAbT/Y/Yg==
-X-Google-Smtp-Source: AGHT+IHpJPhUrCr8n1tVTGnXsVIytSIujyc3j0WawxXZiE86L64x8Z32mKPyT2RslJJqaDNnKmxgLAuJqo/YJMBN91E=
-X-Received: by 2002:aa7:c494:0:b0:540:f0d8:d748 with SMTP id
- m20-20020aa7c494000000b00540f0d8d748mr23875762edq.23.1699201535264; Sun, 05
- Nov 2023 08:25:35 -0800 (PST)
+ bh=XTDWJHHuE3JdKW6g184IR2hpm1Eqr3ajkVCzD6Kapkw=;
+ b=tSjmcVPgk4T4CtqbnoIflKz4reZVtwhrGE4tkA67fe6m0G6XgwnAPEPeBQcjCm2aQY
+ LcaVyaG62m81S/eXrEEL+2KzW+a5qf20EnMEXSBhzKkjgXXYO+viVhhkKnGGIm7vJ7jr
+ JmQ/Kp8w2642GbPndSIeibWCC+0JKMXrhfof3mgrFYrozoS8SKYrgGIQc+eDnWjFZ7g4
+ H50kyYLOL73wGh48CcxSeeiOtepb0RDtCN4lIA58N7rSaU26+1a04I6kVm4exzNa1ekH
+ ImjMyRqsgBKwP3n33XkJwoOcCzpUp39btm2JOieXIzlT/GblOAuZHvql4eSJyNDDzD3Q
+ ReeQ==
+X-Gm-Message-State: AOJu0YyMRLLuFIX8gF76F6UE3xCIckrFls3rRK6FoAiU2gjvdUTjeWPt
+ v8s6zTOX/x9NJclsBcO7A2TcjyYsHt2omgem6I5aqQ==
+X-Google-Smtp-Source: AGHT+IGo7le9ouM54E2Jt4t8Lti+ydjLBKONHjMfFgBf+52XG2/0XXkz0CuVO325XFvJjSR3+DoECBM4DTnwxZh8E9g=
+X-Received: by 2002:a17:907:7b99:b0:9bd:d405:4e80 with SMTP id
+ ne25-20020a1709077b9900b009bdd4054e80mr13108625ejc.46.1699201767762; Sun, 05
+ Nov 2023 08:29:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20231104065107.23623-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ36uRkVGKicr_hD-=0HO+i9giQ7vRxo0uKD+BGQnLWdWw@mail.gmail.com>
- <874c3e34-56db-4f3a-acad-099d16735333@canonical.com>
-In-Reply-To: <874c3e34-56db-4f3a-acad-099d16735333@canonical.com>
+References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
+ <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
+ <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
+In-Reply-To: <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Nov 2023 16:25:23 +0000
-Message-ID: <CAPnjgZ3LHxNtf1RGRJzwT-9vF_03JdN_3SRF3o9QYNzshpp1cQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] rng: detect RISC-V Zkr RNG device in bind method
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Xiang W <merlew4n6@gmail.com>, Andre Przywara <andre.przywara@arm.com>
+Date: Sun, 5 Nov 2023 16:29:16 +0000
+Message-ID: <CAPnjgZ35bJSBE_HqVxh_fb42AYm+vYmx-oyaDQzXqcsmqFvHxA@mail.gmail.com>
+Subject: Re: Need advise with u-boot on SH-7785LCR
+To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,44 +82,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi John,
 
-On Sun, 5 Nov 2023 at 03:47, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Sun, 5 Nov 2023 at 09:37, John Paul Adrian Glaubitz
+<glaubitz@physik.fu-berlin.de> wrote:
 >
-> On 11/4/23 21:42, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Sat, 4 Nov 2023 at 06:51, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> The existence of devices should be checked in the bind method and not in
-> >> the probe method. Adjust the RISC-V Zkr RNG driver accordingly.
-> >>
-> >> Use ENOENT (and not ENODEV) to signal that the device is not available.
-> >>
-> >> Fixes: ceec977ba1a9 ("rng: Provide a RNG based on the RISC-V Zkr ISA extension")
-> >> Reported-by: Andre Przywara <andre.przywara@arm.com>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   drivers/rng/riscv_zkr_rng.c | 34 ++++++++++++++++++++++++++--------
-> >>   1 file changed, 26 insertions(+), 8 deletions(-)
-> >
-> > This device should be in the DT, so you have some control over which
-> > RNG is used.
+> Hi Simon,
 >
-> The device-tree provided by QEMU does not contain such a device as Zkr
-> is an ISA extension and not a device. This device-tree is not under the
-> control of the U-Boot project.
+> On Sat, 2023-11-04 at 19:42 +0000, Simon Glass wrote:
+> > Is it possible to check if it reaches the kernel? E.g. with
+> > earlyprintk ? It would be good to know if U-Boot managers to jump to
+> > Linux, or not.
+>
+> Thanks, this is actually a very good idea. In fact, we recently restored
+> earlyprintk support on SuperH which got disabled by accident [1], so I
+> would have an opportunity to use it right away.
+>
+> Do you have maybe any clue as for how to update u-boot on this machine?
+>
+> Might be a good idea to start from the most recent version that is supported
+> on this target. I assume the "erase" command will erase the flash. But there
+> doesn't seem to be a "program" command.
 
-Why do you bring up QEMU? I would expect that it follows the norma dt
-bindings, so it should not be any different from real hardware?
-
-Anyway, you could add it. It is just a binding. I believe RISC-V has
-all sorts of isa options which result in different machine features.
-
-What are you going to do when you want to choose between the ISA RNG
-and a TPM one?
+No, sorry I don't have any idea about that. You could check the
+MAINTAINERS files in U-Boot and Linux for other people, perhaps, or
+check commit / blame logs?
 
 Regards,
 Simon
+
+>
+> Adrian
+>
+> --
+>  .''`.  John Paul Adrian Glaubitz
+> : :' :  Debian Developer
+> `. `'   Physicist
+>   `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
