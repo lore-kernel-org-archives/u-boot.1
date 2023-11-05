@@ -4,73 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44296C4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 22:43:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D69F6C4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 23:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D66FC86F23;
-	Sun,  5 Nov 2023 23:43:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C86C686EB9;
+	Mon,  6 Nov 2023 00:13:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mMGFcsTr";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BZdeuo7J";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="agdiOV1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CBD086C8E; Sun,  5 Nov 2023 23:43:24 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 26C9786EB9; Mon,  6 Nov 2023 00:13:53 +0100 (CET)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27D3286C15
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 23:43:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC32E86EB5
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 00:13:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4SNqJS09Htz9sqw;
- Sun,  5 Nov 2023 23:43:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1699224200;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=g1VVpiBZ1R15PPyN+ynACiRUo/x1FSPhJ4JnB/dXNWQ=;
- b=mMGFcsTrKt7De67WReooIJwM1MmbEVJTFMpA9Fib9FrSfGoyUpwqw6Xn9qcDBRKGOz9ACS
- 0mYq1r7sZhFAoIvUIpTJbSbH/SS3W2p5FvrMr5fviBHPXgtYVGygrG82yz9756BJiuvbK9
- VUxA2sf9qAXELD8TvfSBMIOwtlpipzlRnk+SIg730lLxtgFl284X+puIp6FP8DIbDd5TZ+
- ZRVl7qdcBeh5r5k8wD4vUAmRxJ1uzatAv0Z2VEnCgBgqt5CQ5dlArJKLiodvLhyvI6IPCb
- LPaT6M9lBYov/oNsHA2hWvOir9cLheGo3rxVPbFdPt18t4fP/WtpDhLWUkoeEQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1699224198;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=g1VVpiBZ1R15PPyN+ynACiRUo/x1FSPhJ4JnB/dXNWQ=;
- b=BZdeuo7Jnf7F94swOp5swDe+4AcmUUJ8pZ1mBLTnwOo7wHwB47UYjcUDWl1SY884g++4GK
- nqxVzeTGWu87KU5KmLgpTdsEamA5t2oBh7lOB6dYFv7Tc+Z6AbBejj7TZJ9DEc4UzrLs4C
- +lZqxug6MiPLBME4VjSGbD+KxGVrWfV5HHPg33fHSyOeFjAQd0yPpD5EtvOCqfS20FVgKg
- 7fl/FqjAjSyMosbYW1kHfFA0VvM96h+pDZhYTaF7NCJd/Mo5tdSzlloSaCsz5pnjYf9LPx
- 5HAk/kreLvn7TDaNsQeeJ1fTuZbFvpdyMowIV4+nYZS4E6+Lnj594tZXFtdxUw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] mmc: renesas-sdhi: Disable clock after tuning reset when
- possible
-Date: Sun,  5 Nov 2023 23:42:45 +0100
-Message-ID: <20231105224304.103997-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20231105231341epoutp015fdd9f1c743e6ef2fe2339f3d02acd36~U3RBUCDpY2724227242epoutp01s
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 23:13:41 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20231105231341epoutp015fdd9f1c743e6ef2fe2339f3d02acd36~U3RBUCDpY2724227242epoutp01s
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1699226021;
+ bh=G9ct3tzwAAcA9kE+uNUibjv1POZ7xXJjhyciimOL18g=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=agdiOV1zv5fEcnpnfd7dhjS2kjYoEGwMD1c7UFlDT2+27+m/i8llfA5XUUyGr9utz
+ ZZFTkRI27TC9sGbuIZnGdGxZE9s4xxo9v/JMilQ68pv7QzeZ7pZiX2QtRod2XGa8rF
+ 6P53km9CNZRDIcS/jL7YRvSoMRx+PgMR7SXIfeYE=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTP id
+ 20231105231341epcas2p4f64cbf727272c1adc90facfe8067091c~U3RBC4jDY0348703487epcas2p4z;
+ Sun,  5 Nov 2023 23:13:41 +0000 (GMT)
+Received: from epsmgec2p1-new.samsung.com (unknown [182.195.36.90]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4SNqzT0GN4z4x9Q8; Sun,  5 Nov
+ 2023 23:13:41 +0000 (GMT)
+Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
+ epsmgec2p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ C4.B8.18994.4A128456; Mon,  6 Nov 2023 08:13:40 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20231105231340epcas2p119f8245b5f344caa3d8120a829f82759~U3RAeleH02024120241epcas2p18;
+ Sun,  5 Nov 2023 23:13:40 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231105231340epsmtrp25b19571f7c2e5a1b325535ae4fb51cf8~U3RAddCFr1858218582epsmtrp2K;
+ Sun,  5 Nov 2023 23:13:40 +0000 (GMT)
+X-AuditID: b6c32a4d-743ff70000004a32-ba-654821a45d15
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 50.8E.08755.4A128456; Mon,  6 Nov 2023 08:13:40 +0900 (KST)
+Received: from cometzero-ubuntu..
+ (75-12-16-202.lightspeed.irvnca.sbcglobal.net [75.12.16.202]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20231105231340epsmtip2719495cc4baa47eaa0707987ebd1b797~U3RAQF05m1198511985epsmtip2P;
+ Sun,  5 Nov 2023 23:13:40 +0000 (GMT)
+From: Chanho Park <chanho61.park@samsung.com>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Stefan
+ Roese <sr@denx.de>, Yanhong Wang <yanhong.wang@starfivetech.com>, Xingyu Wu
+ <xingyu.wu@starfivetech.com>, u-boot@lists.denx.de
+Cc: Chanho Park <chanho61.park@samsung.com>
+Subject: [PATCH 1/4] clk: starfive: jh7110: Add watchdog clocks
+Date: Mon,  6 Nov 2023 08:13:15 +0900
+Message-Id: <20231105231318.992857-2-chanho61.park@samsung.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231105231318.992857-1-chanho61.park@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: gu6ttd71tzqb8fwd6u8me83z65973a8j
-X-MBO-RS-ID: b216631e3cdf8e0aeca
-X-Rspamd-Queue-Id: 4SNqJS09Htz9sqw
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmk+LIzCtJLcpLzFFi42LZdljTXHeJokeqwZy1NhaX92tbvH1xltHi
+ 5LoPTBZv93ayWyyccZbJ4kfXI0aLx4deMzmwe+w5PYvZY96sEyweZ+/sYPTo27KK0eP2Wd4A
+ 1qhsm4zUxJTUIoXUvOT8lMy8dFsl7+B453hTMwNDXUNLC3MlhbzE3FRbJRefAF23zBygK5QU
+ yhJzSoFCAYnFxUr6djZF+aUlqQoZ+cUltkqpBSk5BeYFesWJucWleel6eaklVoYGBkamQIUJ
+ 2Rk/+mYwFhznqGjoe8LcwDiTvYuRk0NCwESi/WQHUxcjF4eQwB5Giaftj5hAEkICnxglNsyJ
+ gUh8Y5R4NHUBG0zHzPaT7BCJvYwSd2+8ZoVwpjFJbHgzF2wum4CuxJbnrxhBbBGBU4wS6y4p
+ g9jMAtoSnZ+nANVwcAgL2Es83yQJEmYRUJV48H0ZC0iYFyj8caoriCkhIC+x+IEESAWngINE
+ 7+5tYCfwCghKnJz5hAVioLxE89bZzCAXSAg8Ypf4sO0PC8SdLhK3V/1hgrCFJV4d3wL1sZTE
+ 53d72SDml0vsWJYE0dvCKNHctocZosZe4sfNKawgNcwCmhLrd+lDlCtLHLkFtZZPouPwX3aI
+ MK9ER5sQRKO6xIHt06EOkJXonvOZFcL2kFg4ew00nCYzSkw+uZ1xAqPCLCTfzELyzSyExQsY
+ mVcxSqUWFOempyYbFRjq5qWWw2M4OT93EyM4VWr57mB8vf6v3iFGJg7GQ4wSHMxKIryO3i6p
+ QrwpiZVVqUX58UWlOanFhxhNgaE9kVlKNDkfmKzzSuINTSwNTMzMDM2NTA3MlcR577XOTRES
+ SE8sSc1OTS1ILYLpY+LglGpg6vu4e87P+4YNzicX/zBTvW7wYiEvX+L51VIXcv+dWPvCf6/W
+ 0QWqon86+lelR+ntaNQJKEh603ttiROH7dz0GKcYpiqmi5VV73/Gr1TcWb/k18QLAQvLQ/nM
+ 3m2zEH7Po7ll2T7XjUu1TppHPtu10H6rt2Kqu5n0uotHDE22tLJu0I5b+eL74wUz7Su7RCIf
+ v7w6zaKCTXpiTPNSXd3tvZHrGO66rem7obhd7O0rxuqVdkGnRF8I+ypv3N/zQEY6WHQnt8iJ
+ ogft5zu3hn4ptV3U8qKVZ5pqqdOFpuzDTr57n5p8OX/5ivr1Pf0figX4j5o/frAiqODQsSPf
+ aw9tTvk/3V9id+36zS77489kNSixFGckGmoxFxUnAgCLa52kHgQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCLMWRmVeSWpSXmKPExsWy7bCSvO4SRY9Ug6nT1C0u79e2ePviLKPF
+ yXUfmCze7u1kt1g44yyTxY+uR4wWjw+9ZnJg99hzehazx7xZJ1g8zt7ZwejRt2UVo8fts7wB
+ rFFcNimpOZllqUX6dglcGT/6ZjAWHOeoaOh7wtzAOJO9i5GTQ0LARGJm+0kgm4tDSGA3o8TR
+ wy+hErISz97tgLKFJe63HGGFKJrEJLH7y1U2kASbgK7EluevGEESIgIXGCUm7JjFCJJgFtCW
+ 6Pw8Baibg0NYwF7i+SZJkDCLgKrEg+/LWEDCvEDhj1NdQUwJAXmJxQ8kQCo4BRwkendvA5su
+ BFTx4+shZhCbV0BQ4uTMJywQw+UlmrfOZp7AKDALSWoWktQCRqZVjJKpBcW56bnFhgWGeanl
+ esWJucWleel6yfm5mxjBAa2luYNx+6oPeocYmTgYDzFKcDArifA6erukCvGmJFZWpRblxxeV
+ 5qQWH2KU5mBREucVf9GbIiSQnliSmp2aWpBaBJNl4uCUamCaFG8teH9ycNrW2t/KVuVPb3du
+ NjHYKzRn45ZarpdqPLcc194pdJul0y8ePLEgPouzK/9/3P6TCnV9fYceJH3ZnfxuuVdu/LfJ
+ /N09vZFZkn+3zJjMzTFbtTx6ycr1U6007895GVyjq3jsV0rXtE6Gow92tfz4PLVVJ2dihfv+
+ oJ4+xqs+fd7G84X7NrNseTKldvlbSdFNOc6ny9h0xYVXFSx9HLYxzblddeuOxtRHuw9I+3/2
+ 1mTncLCaH7xq3taaKuHwaXcX8ISksBz5o30UaGnrtL9iF4K1i1fW7BSuWpTSEDOd+9GLV2Ed
+ Dim7K179Slqj33HpquW5Z/p/9sxcyhHJraNUGPSEb0HuDCWW4oxEQy3mouJEAPWBGpjXAgAA
+X-CMS-MailID: 20231105231340epcas2p119f8245b5f344caa3d8120a829f82759
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231105231340epcas2p119f8245b5f344caa3d8120a829f82759
+References: <20231105231318.992857-1-chanho61.park@samsung.com>
+ <CGME20231105231340epcas2p119f8245b5f344caa3d8120a829f82759@epcas2p1.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,97 +134,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the renesas_sdhi_reset_tuning() unconditionally leaves SDHI
-clock enabled after the tuning reset. This is not always necessary.
+Add JH7110_SYSCLK_WDT_APB and JH7110_SYSCLK_WDT_CORE clocks for JH7110
+watchdog device.
 
-After the driver performed tuning reset at the end of probe function,
-or in the unlikely case that tuning failed during regular operation,
-the SDHI clock can be disabled after the tuning reset. The following
-set_ios call would reconfigure the clock as needed.
-
-In case of regular set_ios call which requires a tuning reset, keep
-the clock enabled or disabled according to the mmc->clk_disable state.
-
-With this in place, the controllers which have not been accessed via
-block subsystem after boot are left in quiescent state. However, if an
-MMC device is used e.g. for environment storage, that controller would
-be accessed during the environment load and left active, including its
-clock which would still be generated. This is due to the design of the
-MMC subsystem, which does not deinit a controller after it was started
-once, the controller is only deinited in case of mmc rescan, or before
-OS boot.
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 ---
-Note: To address the part where MMC device has been inited once and
-      is never deinited until rescan or OS boot, it would likely be
-      necessary to implement something like runtime PM, possibly
-      based on the cyclic framework. Basically, keep track of when
-      the MMC was accessed last, and if certain time elapsed, deinit
-      the MMC. This could also be used to handle card detect polling
-      at the same time.
----
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Peng Fan <peng.fan@nxp.com>
----
- drivers/mmc/renesas-sdhi.c | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ drivers/clk/starfive/clk-jh7110.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index 8cd501c5f7c..97aaf1e4ec3 100644
---- a/drivers/mmc/renesas-sdhi.c
-+++ b/drivers/mmc/renesas-sdhi.c
-@@ -318,7 +318,7 @@ static unsigned int renesas_sdhi_init_tuning(struct tmio_sd_priv *priv)
- 		RENESAS_SDHI_SCC_DTCNTL_TAPNUM_MASK;
- }
+diff --git a/drivers/clk/starfive/clk-jh7110.c b/drivers/clk/starfive/clk-jh7110.c
+index a835541e48e9..a38694809a00 100644
+--- a/drivers/clk/starfive/clk-jh7110.c
++++ b/drivers/clk/starfive/clk-jh7110.c
+@@ -434,6 +434,15 @@ static int jh7110_syscrg_init(struct udevice *dev)
+ 	       starfive_clk_gate(priv->reg,
+ 				 "i2c5_apb", "apb0",
+ 				 OFFSET(JH7110_SYSCLK_I2C5_APB)));
++	/* Watchdog clocks */
++	clk_dm(JH7110_SYS_ID_TRANS(JH7110_SYSCLK_WDT_APB),
++	       starfive_clk_gate(priv->reg,
++				 "wdt_apb", "apb0",
++				 OFFSET(JH7110_SYSCLK_WDT_APB)));
++	clk_dm(JH7110_SYS_ID_TRANS(JH7110_SYSCLK_WDT_CORE),
++	       starfive_clk_gate(priv->reg,
++				 "wdt_core", "oscillator",
++				 OFFSET(JH7110_SYSCLK_WDT_CORE)));
  
--static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv)
-+static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv, bool clk_disable)
- {
- 	u32 reg;
- 
-@@ -350,6 +350,12 @@ static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv)
- 	reg = tmio_sd_readl(priv, RENESAS_SDHI_SCC_RVSCNTL);
- 	reg &= ~RENESAS_SDHI_SCC_RVSCNTL_RVSEN;
- 	tmio_sd_writel(priv, reg, RENESAS_SDHI_SCC_RVSCNTL);
-+
-+	if (clk_disable) {
-+		reg = tmio_sd_readl(priv, TMIO_SD_CLKCTL);
-+		reg &= ~TMIO_SD_CLKCTL_SCLKEN;
-+		tmio_sd_writel(priv, reg, TMIO_SD_CLKCTL);
-+	}
- }
- 
- static int renesas_sdhi_hs400(struct udevice *dev)
-@@ -629,7 +635,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
- out:
- 	if (ret < 0) {
- 		dev_warn(dev, "Tuning procedure failed\n");
--		renesas_sdhi_reset_tuning(priv);
-+		renesas_sdhi_reset_tuning(priv, true);
- 	}
- 
- 	return ret;
-@@ -668,7 +674,7 @@ static int renesas_sdhi_set_ios(struct udevice *dev)
- 	    (mmc->selected_mode != UHS_SDR104) &&
- 	    (mmc->selected_mode != MMC_HS_200) &&
- 	    (mmc->selected_mode != MMC_HS_400)) {
--		renesas_sdhi_reset_tuning(priv);
-+		renesas_sdhi_reset_tuning(priv, mmc->clk_disable);
- 	}
- #endif
- 
-@@ -1095,7 +1101,7 @@ static int renesas_sdhi_probe(struct udevice *dev)
-     CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
-     CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
- 	if (priv->caps & TMIO_SD_CAP_RCAR_UHS)
--		renesas_sdhi_reset_tuning(priv);
-+		renesas_sdhi_reset_tuning(priv, true);
- #endif
- 	return 0;
- 
+ 	/* enable noc_bus_stg_axi clock */
+ 	if (!clk_get_by_id(JH7110_SYSCLK_NOC_BUS_STG_AXI, &pclk))
 -- 
-2.42.0
+2.39.2
 
