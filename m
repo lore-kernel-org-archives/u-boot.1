@@ -4,75 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4650FC4332F
-	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 20:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE7BC4332F
+	for <u-boot@archiver.kernel.org>; Sun,  5 Nov 2023 21:19:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB1FF86EB5;
-	Sun,  5 Nov 2023 21:06:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6B6EB867E2;
+	Sun,  5 Nov 2023 22:19:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CMRJGSOA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nFHYi93f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FBE886E95; Sun,  5 Nov 2023 21:06:46 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 4495F86487; Sun,  5 Nov 2023 22:19:17 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 829BC86EB5
- for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 21:06:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD70C86BEC
+ for <u-boot@lists.denx.de>; Sun,  5 Nov 2023 22:19:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-540c54944c4so7573266a12.1
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 12:06:37 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-66d0169cf43so25524976d6.3
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 13:19:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699214796; x=1699819596; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CA6ZeOoyQd3+A1hpKay+Q09ivyG132Fs7OkaVdf/yA4=;
- b=CMRJGSOAnhHDUvsJQ4xIobKqw75xtNQ7iRjLqr8kFoMrrV8yPOn/w5DPdJKxQAKDpi
- cr9Wc2X/HVT9kv3I4simtEPcDCR3Rjso9tM+QzgJZZak6rd7m3NHFv+Ha+XWrN28WXEQ
- n7dcuHROTcrum6l5HopV1JumhMAbGaoenyK4M=
+ d=konsulko.com; s=google; t=1699219153; x=1699823953; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MQsgZTl3kNMQ+QoRpNASAB2VhHQTWL7kamCFJOJ0jd4=;
+ b=nFHYi93fRmgezVF/fiOwGwqUAIV5cek6TI49+q7aSvuZC2/1gUv+dTnqh30TN6pcni
+ asCJgIYDgS9216IKcOFYIb6+IreEs5h5zExZBJVPjVJEIdVpCoLK/LjOgnYyQQRymtLU
+ HbAH04iys1Zcxa8BzY42atyEgIlLqgMnnYNVc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699214796; x=1699819596;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CA6ZeOoyQd3+A1hpKay+Q09ivyG132Fs7OkaVdf/yA4=;
- b=ZfzF8R8x95sCLlLtfe1ohTip6ounTfmxyKGzqSRUsm2A/nBRLfT2/16zbHfoDwYaDC
- yG/CLs8ZrnuZLIIClqfWc5emQvxzsnTOwskg84N5hspL5xCTXchKE4NXSYh9GAUgSgGj
- s/oUyl94EpJNidHNCkE+bwhUwITCv9mELFMTwN3yKFE1kXzAzgPshisiDfVZGlxTGHaq
- c5R0CplDSvli3Q090achN0ltbdqVVSGAses6gpgQMMLg3V0RXQcKqHyfAAuxx4YrUE75
- DYbyXpA9HBqs47tARGg+Wer7/uuR0R+Rqua3p+uw76kwScwPzjMnhucsMdFsHP8jqna4
- ZxOA==
-X-Gm-Message-State: AOJu0YzEw0BmTphkP6mjiL981Bsm+1HfT/VvWix/nSJS0n7IpTbKtPpr
- SGvdMhHU8RbJaaO3IKUZIJJRxUQCpQf98AidWAELu4vk1Wb5t+Qw4pg=
-X-Google-Smtp-Source: AGHT+IGlJCnclEiewrc6LfcHQrlgBcWD1B86ekPKSP7YF5L1OjSE1If5tSgJU6fYn2Unf4aOjCQhvTo6Z+og3M/0FqQ=
-X-Received: by 2002:a50:d71d:0:b0:544:7a0d:9f83 with SMTP id
- t29-20020a50d71d000000b005447a0d9f83mr2051073edi.20.1699214796310; Sun, 05
- Nov 2023 12:06:36 -0800 (PST)
-MIME-Version: 1.0
-References: <20231105200453.1887418-1-sjg@chromium.org>
-In-Reply-To: <20231105200453.1887418-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 5 Nov 2023 20:06:19 +0000
-Message-ID: <CAPnjgZ2y+9jtJCd4TVf28C7gVxVkqSNtbXbmKMhYOctt3=EwKw@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bootm: Handle compressed arm64 images with bootm
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Eddie James <eajames@linux.ibm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ d=1e100.net; s=20230601; t=1699219153; x=1699823953;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MQsgZTl3kNMQ+QoRpNASAB2VhHQTWL7kamCFJOJ0jd4=;
+ b=ffGNDxTPs/PWzI1pwWBW5RomYeJGoLJtmbk2/zsolQ7tNvDF/6wzl80xeGGXoKwbZJ
+ h8ozRW6S67WHbxj6oJ4Z0LHYPybjZsaQqzUk9X1eM2Q58BMaADbzCOG7eboQz9mqF/gc
+ OyvKOD7uQtI7ON9kUUpddmFc5UoYa155kw4ae4sB+WUcWEcgJy/ZDPhj+M3esRRk9Ng0
+ vRdkQvyI62d0vn0oS54PgN0Vc5DObx67EuCVUImaXnz1MuXySAG9sriwgYptpFFgQeDp
+ 4hPz+DX3SsRSuOh2E3pE/kJ817+fGlgShOFX0ijHN/jXhi8R56LVr0acDSHfjXNa5Gev
+ xk0Q==
+X-Gm-Message-State: AOJu0YxzsojnNYoleETTtHFow23hd1Y5UG0NE1e/MzgINJxTiRFW0oCD
+ u7/PdHlQxZpkDM9hykGl8lf0IA==
+X-Google-Smtp-Source: AGHT+IEkpiRmDrDelQCcTMcP18PlB55UOQlROERJKa9mTEHka7ylrR/M82xU3wyu/sCv/yImUDUwkw==
+X-Received: by 2002:a05:6214:c49:b0:672:a2f4:d3d6 with SMTP id
+ r9-20020a0562140c4900b00672a2f4d3d6mr24078184qvj.62.1699219153349; 
+ Sun, 05 Nov 2023 13:19:13 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ s8-20020ad45248000000b00670867d7bdfsm2851432qvq.122.2023.11.05.13.19.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Nov 2023 13:19:12 -0800 (PST)
+Date: Sun, 5 Nov 2023 16:19:10 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Marc Kleine-Budde <mkl@pengutronix.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>, 
- Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH 1/4] bootm: Allow ignoring the load address with
+ kernel_noload
+Message-ID: <20231105211910.GE496310@bill-the-cat>
+References: <20231105200453.1887418-1-sjg@chromium.org>
+ <20231105130351.1.Iae1cd9e0e207784e680480ee52021ec5caed877e@changeid>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="DuUqjcGSXPdyfrp8"
+Content-Disposition: inline
+In-Reply-To: <20231105130351.1.Iae1cd9e0e207784e680480ee52021ec5caed877e@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,54 +97,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Sun, 5 Nov 2023 at 20:05, Simon Glass <sjg@chromium.org> wrote:
->
-> This little series corrects a problem I noticed with arm64 images,
-> where the kernel is not recognised:
->
->    ## Loading kernel from FIT Image at 10000000 ...
->       Using 'conf-930' configuration
->       Verifying Hash Integrity ... OK
->       Trying 'kernel' kernel subimage
->         Description:  Linux-6.6.0-rc7-next-20231024-00003-g259c196f194c
->         Type:         Kernel Image (no loading done)
->         Compression:  gzip compressed
->         Data Start:   0x10000138
->         Data Size:    13667956 Bytes = 13 MiB
->       Verifying Hash Integrity ... OK
->    Bad Linux ARM64 Image magic!
->
-> The problem is that the arm64 magic is checked before the image is
-> decompressed.
->
-> Another issue is that the load address is read from the 'load' property
-> even with a kernel_noload image. This means that the kernel is loaded
-> to address 0, which may not be valid on the board. We can use the
-> kernel_addr_r environment variable instead.
->
-> A patch is included to show the kernel load-address, so it is easy to
-> see what is going on.
->
->
-> Simon Glass (4):
->   bootm: Allow ignoring the load address with kernel_noload
->   bootm: Move arm64-image processing later
->   image: Show the load address when decompressing
->   image: Correct load_bug typo
->
->  boot/bootm.c    | 61 ++++++++++++++++++++++++++++++-------------------
->  boot/image.c    | 13 +++++++----
->  include/image.h |  2 +-
->  3 files changed, 48 insertions(+), 28 deletions(-)
->
-> --
-> 2.42.0.869.gea05f2083d-goog
->
+--DuUqjcGSXPdyfrp8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This series has a few problems still, but I am sending it now since I
-believe it fixes a real problem on arm64. I will tidy it up soon.
+On Sun, Nov 05, 2023 at 01:03:51PM -0700, Simon Glass wrote:
 
-Regards,
-Simon
+> This image type is supposed to ignore the load address. But at present
+> it fails if the load address is missing. If it is zero, the image is
+> loaded at address 0, which may not work on all boards.
+>=20
+> Make use of the kernel_addr_r environment variable, instead, since this
+> seems to be a more reliable final address for the kernel.
+>=20
+> Another option would be to create a new Kconfig for this, or to use a
+> region of memory known to be free, e.g. calculated from the DRAM banks.
+> But in any case we should try to avoid conflicting with the
+> kernel_addr_r variable. So the approach in this patch seems reasonable
+> to me.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+How are you creating the image in question here? A noload FIT is
+supposed to just supposed to go from where it is. Where do things fall
+down later?
+
+--=20
+Tom
+
+--DuUqjcGSXPdyfrp8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVIBsgACgkQFHw5/5Y0
+tyy7NQv6AzZyAn5YF/5lvE5V0uGHY6bnAip5vTqAVOMOUFtJ+pUowD1ZIx25i2KK
+WxXmlkET/a55bHwmLNYZAVV3r+LHJwJxfDcxLiM8Ch45f5K5rItL6DQUH6MOIctx
+8Ih8TMMESv66JkiYVi1ItSBkp0KWZ749FCHUk4+njRv3cHX5Y3xEYpAYfO3Chd0L
+JH3CwXXfGZ4Ua7iwQaZAIOc7iWZA2XSk/XkW/gZbDpHjWp2h7URMrW+IRNpOTMZ/
+wd0Cyok3+nXM7ZzAOXb54DtMs5drKp4KQeBd41yyXCmucrTbvDKlJZIffrVznIgL
+1cEUwLpnzP2qtTFTiPlUWAYgEM15uwxilanpThwGmFUwYJ0t1hHISbu42sfqnWek
+asFwfF/BV6l7Py7onggyP/HKqHrxfyUw9EMPe23z2caWI10y7uezkuRGNDEPpUjG
+OLfcsf1M3NA5Ij6AEASQ/6s9ovPZPp0iA8ghoII/wyEAMykKtFd2tbZZEsc1AQgI
+ue7qOANW
+=4MuY
+-----END PGP SIGNATURE-----
+
+--DuUqjcGSXPdyfrp8--
