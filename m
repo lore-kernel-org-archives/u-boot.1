@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBBACC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:35:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4478BC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:35:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 563C086FB7;
-	Mon,  6 Nov 2023 09:33:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D831486EF6;
+	Mon,  6 Nov 2023 09:33:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZjdVfi85";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CIMNdJjd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 537CD86F9E; Mon,  6 Nov 2023 09:32:58 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 9C13286FA5; Mon,  6 Nov 2023 09:33:07 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9253B86EF2
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 09:32:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25DAA86BEC
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 09:32:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9a58dbd5daeso637232466b.2
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 00:32:53 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9dd3f4a0f5aso373206366b.1
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 00:32:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699259573; x=1699864373; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699259574; x=1699864374; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=weAEhBrGe+j/hdO8KCxg6DCxB9TdEm3TAHPNZMUmMSA=;
- b=ZjdVfi85Olq2q4IlE6Wza/YUo1ddq22gB6VFVrJBYi+hU3kPYtgeeNFenHDP7WLv2D
- G1ug1OUIiqWZf8u4d1wDV7H43v/0fixHsyoTUOVpqQbSyqYFnOPIND75b7lw+q4NJcsh
- ApII4Bavbdc6q5L/uV0xt9o3psa3kDdWR84wBT0PoNbuSjjml1mXxeidE3pIYt1H6IQ2
- oqFY5KESCwyhqhfgQe9XwsSOcPJWlJfN7FwYCXIyoigPfSIGhi90BG7PZq7Frd7OM/3O
- iRoT7ehiKz4wILfXlO4IBfv3bkkn0O42egdSNPhYNlI2rPgHlzM+/07WBm3EGlqn/fBr
- 5yCQ==
+ bh=aI2/iGKpqT9UTNxCnFvtFoxczlE6xvWHQ5enQvnZNlc=;
+ b=CIMNdJjd+6EkDCs5hQd0HO7h4bL3Hm7CjSZfrj0SQGyuWa5+AEOuc776gA6TLng5eg
+ bOX9rn32eIR8MAwsWrIjoOHp19O/4lPA9NThw4O9FXGJGuIYP+b5/lFQvD+cllgoXRwj
+ sUVuyU2cMWscJGxsFteBMvSN3Vw0rlIxAgUzKypEzbYYT2erTPwNtNUHPnwmlt5uLywi
+ cm72NC/LF6w7Tj0PPNYEJXHsJ6bV6WTJ+9hENQ0ba4QOaaN710Kws0CQgFORsY0usUql
+ mB+45peeEc/KDKF9Jz9nR/1ib3j+2SfYdyoEfmHJlD5VOHkErGGvcc0X1jPoCpHbM8Gj
+ Sdcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699259573; x=1699864373;
+ d=1e100.net; s=20230601; t=1699259574; x=1699864374;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=weAEhBrGe+j/hdO8KCxg6DCxB9TdEm3TAHPNZMUmMSA=;
- b=VtbTvw4WXi3ebCe2m9BN4JZkRs1rLL/QqSQ34n+p8HCLYRHjiK79q91cRJPtgP74M0
- BwhTH94kVYGrGAojyfBI6rgXL1EwP4ZvZEV9NH1drSHKhc7uKvWhFd30PS+D/rXp9tLi
- IR3+XHqHh/6R+yTtEQ5ERgWfrjSNw1zTa3rTlfcV9VHeQC3aEFB9eYTYgsC+a3Kdwmo9
- IyG4n5QVVj3GNG0tDTvtJajI6C9yKpqdrymU10JxTGhf6qghfISoWeRsFGPWNERlSGa7
- P5bKAkG5k56Z/1CiLeEwU3R5g3rZPs8/3ijxiP6xZ++pBi/biJBQFtnkODkIIEo/ZJw5
- OCKg==
-X-Gm-Message-State: AOJu0YwQaallPee4VJtoBABC+dWd3xyQcNqEs5vKYCGFAIq+5uz+zWK7
- MrGk060esThASogw2oMCEXReOoNI20w=
-X-Google-Smtp-Source: AGHT+IFNnll3qOLjThgZnx3dxOoDlXKEAa7biToKx7YP5UHJAtRABzjAvYWalhg9iDI3/heJ5UeONg==
-X-Received: by 2002:a17:907:9625:b0:9c3:70d5:dc57 with SMTP id
- gb37-20020a170907962500b009c370d5dc57mr16151957ejc.40.1699259573084; 
- Mon, 06 Nov 2023 00:32:53 -0800 (PST)
+ bh=aI2/iGKpqT9UTNxCnFvtFoxczlE6xvWHQ5enQvnZNlc=;
+ b=Y12ij6blQD5gCPMT25rfXC0O54JYUqTupV6HXD2gXDGUkeFZL3y2hNBnWpBaAJt1q7
+ 58CpwJvW6G3r9DYmsab2bWsqQpo7N4TFVrXudGCiBLyuXvlsS2MROAiHiXho/IHJPmu3
+ 05K7YgrgSVJxKwULNX7/hq8iHoOg6GabhXpfA6N+I9bYHZaC70Jnaibj62OQSMbUyvVh
+ rZ0ObsfWGY1dgW0icc1HJYI0ydZiUNC3ec9ccpPyiGaHaQBwAMeD82WrLIOBRTI/SDJP
+ ktPnWv9V/nunHvDsJJsWyjTlUSw8cqsUirP7QFlyhtPg9Ux6Hx01shUT3oX5AMTtKPVa
+ Lulw==
+X-Gm-Message-State: AOJu0YzId7f0razKwUf8bsn9oWC+mgH/L0pLN0KEhiqKaw/oj7Kc+Hrk
+ 764c588lMRyv5KcuOLfdlLM=
+X-Google-Smtp-Source: AGHT+IGWJOf1dmie7WwNB3c9/zISbu0DpCT4eaStPdLQu+XOKMJy+KaRbdr4ib6rowYKmJ4db2vmfg==
+X-Received: by 2002:a17:907:7291:b0:9c7:fd91:4309 with SMTP id
+ dt17-20020a170907729100b009c7fd914309mr12719430ejc.0.1699259574356; 
+ Mon, 06 Nov 2023 00:32:54 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- t21-20020a170906269500b009a1a653770bsm3799715ejc.87.2023.11.06.00.32.52
+ t21-20020a170906269500b009a1a653770bsm3799715ejc.87.2023.11.06.00.32.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 00:32:52 -0800 (PST)
+ Mon, 06 Nov 2023 00:32:53 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/5] board: lg-x3: convert LG Optimus 4X and Vu to use DM
- PMIC
-Date: Mon,  6 Nov 2023 10:32:25 +0200
-Message-Id: <20231106083229.256322-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/5] board: endeavoru: convert HTC One X to use DM PMIC
+Date: Mon,  6 Nov 2023 10:32:26 +0200
+Message-Id: <20231106083229.256322-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231106083229.256322-1-clamor95@gmail.com>
 References: <20231106083229.256322-1-clamor95@gmail.com>
@@ -96,28 +95,28 @@ board and switch to DM based driver with device tree support.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-lg-x3.dtsi |  1 +
- board/lg/x3-t30/x3-t30-spl.c    |  2 +-
- board/lg/x3-t30/x3-t30.c        | 97 ++-------------------------------
- configs/x3_t30_defconfig        |  4 ++
- 4 files changed, 11 insertions(+), 93 deletions(-)
+ arch/arm/dts/tegra30-htc-endeavoru.dts |  1 +
+ board/htc/endeavoru/endeavoru-spl.c    |  2 +-
+ board/htc/endeavoru/endeavoru.c        | 72 +++-----------------------
+ configs/endeavoru_defconfig            |  4 ++
+ 4 files changed, 12 insertions(+), 67 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-lg-x3.dtsi b/arch/arm/dts/tegra30-lg-x3.dtsi
-index 6e52fc5a53..aa207a70c7 100644
---- a/arch/arm/dts/tegra30-lg-x3.dtsi
-+++ b/arch/arm/dts/tegra30-lg-x3.dtsi
-@@ -110,6 +110,7 @@
- 					regulator-name = "vdd_ddr_rx";
- 					regulator-min-microvolt = <2850000>;
- 					regulator-max-microvolt = <2850000>;
+diff --git a/arch/arm/dts/tegra30-htc-endeavoru.dts b/arch/arm/dts/tegra30-htc-endeavoru.dts
+index 5c7b2deae5..22320de708 100644
+--- a/arch/arm/dts/tegra30-htc-endeavoru.dts
++++ b/arch/arm/dts/tegra30-htc-endeavoru.dts
+@@ -81,6 +81,7 @@
+ 					regulator-name = "avdd_dsi_csi";
+ 					regulator-min-microvolt = <1200000>;
+ 					regulator-max-microvolt = <1200000>;
 +					regulator-boot-on;
  				};
  			};
  		};
-diff --git a/board/lg/x3-t30/x3-t30-spl.c b/board/lg/x3-t30/x3-t30-spl.c
-index 864f2de45f..00f79dd1db 100644
---- a/board/lg/x3-t30/x3-t30-spl.c
-+++ b/board/lg/x3-t30/x3-t30-spl.c
+diff --git a/board/htc/endeavoru/endeavoru-spl.c b/board/htc/endeavoru/endeavoru-spl.c
+index 7921ff1a73..2525b50d3e 100644
+--- a/board/htc/endeavoru/endeavoru-spl.c
++++ b/board/htc/endeavoru/endeavoru-spl.c
 @@ -9,7 +9,7 @@
   *  Svyatoslav Ryhel <clamor95@gmail.com>
   */
@@ -127,11 +126,11 @@ index 864f2de45f..00f79dd1db 100644
  #include <asm/arch-tegra/tegra_i2c.h>
  #include <linux/delay.h>
  
-diff --git a/board/lg/x3-t30/x3-t30.c b/board/lg/x3-t30/x3-t30.c
-index a08e00dd87..2eaf16ded4 100644
---- a/board/lg/x3-t30/x3-t30.c
-+++ b/board/lg/x3-t30/x3-t30.c
-@@ -7,60 +7,14 @@
+diff --git a/board/htc/endeavoru/endeavoru.c b/board/htc/endeavoru/endeavoru.c
+index e1a0b242e2..6835b1ee70 100644
+--- a/board/htc/endeavoru/endeavoru.c
++++ b/board/htc/endeavoru/endeavoru.c
+@@ -7,48 +7,12 @@
   *  Svyatoslav Ryhel <clamor95@gmail.com>
   */
  
@@ -141,120 +140,94 @@ index a08e00dd87..2eaf16ded4 100644
 -#include <i2c.h>
 -#include <log.h>
  #include <asm/arch/pinmux.h>
- #include <asm/arch/clock.h>
+-#include <asm/arch/gp_padctrl.h>
 -#include <asm/arch/gpio.h>
--#include <asm/arch/tegra.h>
- #include <asm/arch-tegra/fuse.h>
 -#include <asm/gpio.h>
 -#include <linux/delay.h>
--#include "pinmux-config-x3.h"
+-#include "pinmux-config-endeavoru.h"
 -
--#define MAX77663_I2C_ADDR		0x1C
--
--#define MAX77663_REG_SD2		0x18
--#define MAX77663_REG_LDO2		0x27
--#define MAX77663_REG_LDO3		0x29
--#define MAX77663_REG_LDO5		0x2D
--#define MAX77663_REG_ONOFF_CFG1		0x41
--#define   ONOFF_PWR_OFF			BIT(1)
+-#define TPS80032_CTL1_I2C_ADDR		0x48
+-#define TPS80032_PHOENIX_DEV_ON		0x25
+-#define   DEVOFF			BIT(0)
+-#define TPS80032_LDO1_CFG_STATE		0x9E
+-#define TPS80032_LDO1_CFG_VOLTAGE	0x9F
 -
 -#ifdef CONFIG_CMD_POWEROFF
 -int do_poweroff(struct cmd_tbl *cmdtp, int flag,
 -		int argc, char *const argv[])
 -{
 -	struct udevice *dev;
--	uchar data_buffer[1];
 -	int ret;
 -
--	ret = i2c_get_chip_for_busnum(0, MAX77663_I2C_ADDR, 1, &dev);
+-	ret = i2c_get_chip_for_busnum(0, TPS80032_CTL1_I2C_ADDR, 1, &dev);
 -	if (ret) {
 -		log_debug("cannot find PMIC I2C chip\n");
 -		return 0;
 -	}
--
--	ret = dm_i2c_read(dev, MAX77663_REG_ONOFF_CFG1, data_buffer, 1);
--	if (ret)
--		return ret;
 +#include <power/regulator.h>
  
--	data_buffer[0] |= ONOFF_PWR_OFF;
--
--	ret = dm_i2c_write(dev, MAX77663_REG_ONOFF_CFG1, data_buffer, 1);
+-	ret = dm_i2c_reg_write(dev, TPS80032_PHOENIX_DEV_ON, DEVOFF);
 -	if (ret)
 -		return ret;
 -
--	/* wait some time and then print error */
+-	// wait some time and then print error
 -	mdelay(5000);
 -
 -	printf("Failed to power off!!!\n");
 -	return 1;
 -}
 -#endif
-+#include "pinmux-config-x3.h"
++#include "pinmux-config-endeavoru.h"
  
  /*
   * Routine: pinmux_init
-@@ -82,52 +36,11 @@ void pinmux_init(void)
- #endif
+@@ -60,37 +24,13 @@ void pinmux_init(void)
+ 		ARRAY_SIZE(endeavoru_pinmux_common));
  }
  
 -#ifdef CONFIG_MMC_SDHCI_TEGRA
--static void max77663_voltage_init(void)
--{
+-static void tps80032_voltage_init(void)
++int nvidia_board_init(void)
+ {
 -	struct udevice *dev;
 -	int ret;
 -
--	ret = i2c_get_chip_for_busnum(0, MAX77663_I2C_ADDR, 1, &dev);
--	if (ret) {
+-	ret = i2c_get_chip_for_busnum(0, TPS80032_CTL1_I2C_ADDR, 1, &dev);
+-	if (ret)
 -		log_debug("cannot find PMIC I2C chip\n");
--		return;
--	}
 -
--	/* 0x60 for 1.8v, bit7:0 = voltage */
--	ret = dm_i2c_reg_write(dev, MAX77663_REG_SD2, 0x60);
+-	/* TPS80032: LDO1_REG = 1.2v to DSI */
+-	ret = dm_i2c_reg_write(dev, TPS80032_LDO1_CFG_VOLTAGE, 0x03);
 -	if (ret)
--		log_debug("vdd_1v8_vio set failed: %d\n", ret);
+-		log_debug("avdd_dsi_csi voltage set failed: %d\n", ret);
 -
--	/* 0xF2 for 3.30v, enabled: bit7:6 = 11 = enable, bit5:0 = voltage */
--	ret = dm_i2c_reg_write(dev, MAX77663_REG_LDO2, 0xF2);
+-	/* TPS80032: LDO1_REG enable */
+-	ret = dm_i2c_reg_write(dev, TPS80032_LDO1_CFG_STATE, 0x01);
 -	if (ret)
--		log_debug("avdd_usb set failed: %d\n", ret);
--
--	/* 0xEC for 3.00v, enabled: bit7:6 = 11 = enable, bit5:0 = voltage */
--	ret = dm_i2c_reg_write(dev, MAX77663_REG_LDO3, 0xEC);
--	if (ret)
--		log_debug("vdd_usd set failed: %d\n", ret);
--
--	/* 0xE9 for 2.85v, enabled: bit7:6 = 11 = enable, bit5:0 = voltage */
--	ret = dm_i2c_reg_write(dev, MAX77663_REG_LDO5, 0xE9);
--	if (ret)
--		log_debug("vcore_emmc set failed: %d\n", ret);
+-		log_debug("avdd_dsi_csi enable failed: %d\n", ret);
 -}
--
++	/* Set up boot-on regulators */
++	regulators_enable_boot_on(true);
+ 
 -/*
 - * Routine: pin_mux_mmc
 - * Description: setup the MMC muxes, power rails, etc.
 - */
 -void pin_mux_mmc(void)
 -{
--	/* Bring up uSD and eMMC power */
--	max77663_voltage_init();
--}
+-	/* Bring up DSI power */
+-	tps80032_voltage_init();
++	return 0;
+ }
 -#endif	/* MMC */
--
- int nvidia_board_init(void)
- {
-+	/* Set up boot-on regulators */
-+	regulators_enable_boot_on(true);
-+
- 	/* Set up panel bridge clocks */
- 	clock_start_periph_pll(PERIPH_ID_EXTPERIPH3, CLOCK_ID_PERIPH,
- 			       24 * 1000000);
-diff --git a/configs/x3_t30_defconfig b/configs/x3_t30_defconfig
-index a151f58524..90cbc2078a 100644
---- a/configs/x3_t30_defconfig
-+++ b/configs/x3_t30_defconfig
-@@ -45,6 +45,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+ 
+ #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
+ int ft_board_setup(void *blob, struct bd_info *bd)
+diff --git a/configs/endeavoru_defconfig b/configs/endeavoru_defconfig
+index d605acdfc8..7212675546 100644
+--- a/configs/endeavoru_defconfig
++++ b/configs/endeavoru_defconfig
+@@ -44,6 +44,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
  CONFIG_CMD_UMS_ABORT_KEYED=y
  # CONFIG_CMD_SETEXPR is not set
  CONFIG_CMD_PAUSE=y
@@ -262,18 +235,17 @@ index a151f58524..90cbc2078a 100644
  CONFIG_CMD_EXT4_WRITE=y
  # CONFIG_SPL_DOS_PARTITION is not set
  # CONFIG_SPL_EFI_PARTITION is not set
-@@ -64,11 +65,14 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+@@ -61,10 +62,13 @@ CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
  CONFIG_SYS_I2C_TEGRA=y
  CONFIG_BUTTON_KEYBOARD=y
  CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_MAX77663=y
++CONFIG_DM_PMIC_TPS80031=y
  CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_MAX77663=y
  CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_TPS80031=y
  CONFIG_PWM_TEGRA=y
  CONFIG_SYS_NS16550=y
- CONFIG_TEGRA20_SLINK=y
-+CONFIG_SYSRESET_MAX77663=y
++CONFIG_SYSRESET_TPS80031=y
  CONFIG_USB=y
  CONFIG_USB_EHCI_HCD=y
  CONFIG_USB_EHCI_TEGRA=y
