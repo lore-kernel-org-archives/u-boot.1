@@ -4,74 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1BD5C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 17:26:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45345C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 17:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13F548702F;
+	by phobos.denx.de (Postfix) with ESMTP id ADF208701D;
 	Mon,  6 Nov 2023 18:25:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L2QoIkKw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GbpGUnbL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0165186F9A; Mon,  6 Nov 2023 18:25:36 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 702098701B; Mon,  6 Nov 2023 18:25:36 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74CDE8701B
+ by phobos.denx.de (Postfix) with ESMTPS id 7858587021
  for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 18:25:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5441305cbd1so5770880a12.2
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-9dd3f4a0f5aso467638666b.1
  for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 09:25:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699291530; x=1699896330; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nk6r45gCJFINrCpPcr6xdgHGvJUfhj37x0TdiBVvcDk=;
- b=L2QoIkKwkdGPOYCirAsaazWZTRhlsK3NqYG4EPbelTfh3xwSjhbt78c8mu8JlVIauV
- mEH4Det+ZrNJsuC20aT1T9Dd7wfeSlMG8Vf2fci6w0tADWoxCFAWpjTWlwMYEPhYQAFY
- RaS9UrqWdltN9hK9qQdzp6u0AZEIlCi6kXNhw=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fixAnR2hPcK0ckSvzwBfhiTk9faqtZkBPbmn+2FjZiQ=;
+ b=GbpGUnbLz7MhKjjR8pAuDFN/mf0DnN/SppXlROzExQjxfW03yX8Szd7eF+z5XmXSeG
+ 6+dbidoqvlLIZjnBSLPiMUL7xaVJvEeSaKvlFHvHcOCGzy/GDIboPks8/S4c4daaig8i
+ yzE0OYKZaL9qVUAdm+1CN1eTFvHn5zgp4yQNI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699291530; x=1699896330;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nk6r45gCJFINrCpPcr6xdgHGvJUfhj37x0TdiBVvcDk=;
- b=EcwpSbX/i4QyCj6adjz74USWkvpfyzEF/Bl2ZgixDqmnr28UxeKFEMrB9QveZfx1Qg
- OIftzfHwPx+98TyHkuynKIs3AfUm13XT86KAOJGRFUYo7Lq0VTYSMhZHE/lef3+lr1vl
- 20VZqalTTTd+NGmQeMyb5pF+hO03K5ss+jzT1LYRNkhHBwJXtev2qof3s1jK7rJTU0Mj
- XjfJrgO+QGKk7W5mre993XlHiTvdaw82OH18fVVDImtoTPpXvMf17EraSmTmKaUgffhC
- imGXsrpuzXBNvd/Kl38CUzo8TLQgZ3c7fD+EdJTGwNBAMOYtE/6+3OWc1utueU6/0lFG
- ATzw==
-X-Gm-Message-State: AOJu0YxGxSDTuPeu7RDsYldznngCjJLLgUhqLyqR6mya0z1fIpAZ6Fx7
- ErxfN46HU4UvKFCFDO1TRBSwazHWQLjYzvAXGukOcQ==
-X-Google-Smtp-Source: AGHT+IHmGeZTI0iXSQB1aS5lZ9jMPHK1RriFWxMtWpb2QSRmu6UjdtZa9I9rtntPZvRpBdmokBHx/s/POyGnugk2u4c=
-X-Received: by 2002:a50:baa7:0:b0:533:97c:8414 with SMTP id
- x36-20020a50baa7000000b00533097c8414mr25211535ede.7.1699291529885; Mon, 06
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fixAnR2hPcK0ckSvzwBfhiTk9faqtZkBPbmn+2FjZiQ=;
+ b=XhVDtSE+BtPYiC/SNgbqoKWQDvlkI1B6ZuoCBeEoGwdux9hKZPcUs0MCpbNVlVif27
+ vOV84rxP9h26UMOnN2h52hmLbSnPBq5qp5g4e7lsABXY/MY8A6gJbISVW0LLCXlo/Fgl
+ Ekjo/8xMtIdcg8sV/+peWiM6c11hsGibxGNXqEQq0vypXbCYngynS+ATGRXpC9zwY9A1
+ iyy42jkRogAXQ5vC/U/G6uZkNyGKKD29Gqd4kjLpXDt5PAcU+il1Q7rd6l6sG/ExIgR7
+ fOUfKTDJkOBP1NyZuElf2oFTXU9kQU/hvTApzkZRo2hJpEL3vwOYuRHGaW5QpwodTg4N
+ YeFQ==
+X-Gm-Message-State: AOJu0Yy5l2wOXDCCUJh8+ZR1b2i8Hkux9rb0O7wH/1u0R/7u+m15P+zO
+ bI6B7PGSozBE9jlOJdqogSEoWlPu0pCMSxbTyUga+qO0/Z7MCrDgGh4=
+X-Google-Smtp-Source: AGHT+IEsyJM7HEgDlesDb+m5ENCNPOw+PmqFBSR14lALd3yE/cYuerwVskjC8l+Nf8mDIPmEKbfhhXsaLnoc8IaDvaU=
+X-Received: by 2002:a17:907:96a5:b0:9bf:2bf:65f3 with SMTP id
+ hd37-20020a17090796a500b009bf02bf65f3mr15145016ejc.7.1699291529883; Mon, 06
  Nov 2023 09:25:29 -0800 (PST)
 MIME-Version: 1.0
-References: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
- <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
- <CAJaLiFwx0j6Knthtgdy-wGDxaHYDuYEUws2LAkt05stc3f3ZBw@mail.gmail.com>
- <CAPnjgZ1FAEDs-f01Q-RCAV=sMWq40cD5UDo9O6SbqTRazS9gQA@mail.gmail.com>
- <CAJaLiFzsJP5u5ziHW7U5_0uqeGdr4uxHRG7kso2K-jahqLKBsg@mail.gmail.com>
- <CAJaLiFyqr88c8L1Lg+99XnP4geebwqrdKhSV4_h9uf1Mjr94Qw@mail.gmail.com>
-In-Reply-To: <CAJaLiFyqr88c8L1Lg+99XnP4geebwqrdKhSV4_h9uf1Mjr94Qw@mail.gmail.com>
+References: <20231106140712.1780114-1-bhargav.r@ltts.com>
+ <20231106140712.1780114-2-bhargav.r@ltts.com>
+In-Reply-To: <20231106140712.1780114-2-bhargav.r@ltts.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Nov 2023 10:25:15 -0700
-Message-ID: <CAPnjgZ1vxy+hYpHaCGC=g2sFOK_xPCP4N_QFvxdO4xVb-SP+FA@mail.gmail.com>
-Subject: Re: bootstd: Scanning for USB bootflow will remove existing SCSI
- bootflow
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Mon, 6 Nov 2023 10:25:10 -0700
+Message-ID: <CAPnjgZ3nWCoTNh9ZeuE=N7BsHP-XQOCdjJxHtzYP2RFfeiV6Hw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] driver: power: add support for TPS65224
+To: Bhargav Raviprakash <bhargav.r@ltts.com>
+Cc: u-boot@lists.denx.de, jh80.chung@samsung.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,63 +81,268 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
+Hi Bhargav,
 
-On Wed, 4 Oct 2023 at 21:23, Tony Dinh <mibodhi@gmail.com> wrote:
+On Mon, 6 Nov 2023 at 10:11, Bhargav Raviprakash <bhargav.r@ltts.com> wrote:
 >
-> Hi Simon,
+> Added support for PMIC TPS65224. Includes driver for pmic,
+> and disabling Watchdog.
 >
-> On Mon, Oct 2, 2023 at 12:25=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wro=
-te:
-> >
-> > Hi Simon,
-> >
-> > On Sun, Oct 1, 2023 at 6:22=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > Hi Tony,
-> > >
-> > > On Tue, 26 Sept 2023 at 13:40, Tony Dinh <mibodhi@gmail.com> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > On Tue, Sep 26, 2023 at 4:37=E2=80=AFAM Simon Glass <sjg@chromium.o=
-rg> wrote:
-> > > > >
-> > > > > Hi Tony,
-> > > > >
-> > > > > On Mon, 25 Sept 2023 at 14:02, Tony Dinh <mibodhi@gmail.com> wrot=
-e:
-> > > > > >
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > Here is an observation during testing the bootflow command.
-> > > > > >
-> > > > > > If there is a SCSI bootflow, scanning for USB bootflow will rem=
-ove that existing
-> > > > > > SCSI bootflow. To bring it back, I scanned for SCSI bootflow ag=
-ain, and it was
-> > > > > > back to normal. Perhaps there is some kind of indexing problem?
-> > > > >
-> > > > > Yes that's right. The 'botflow scan' command is not additive. The
-> > > > > first thing it does is removing existing bootflows.
-> > > >
-> > > > Thanks for clarifying that. I assumed it is additive, because the
-> > > > existing USB bootflow was not removed when I did a "bootflow scan
-> > > > scsi" immediately after (see the end of the log).
-> > >
-> > > Yes, but I'm not sure what is going on there. Perhaps it is a bug?
-> > > When you scan SCSI it should not also scan USB.
-> >
-> > Yes, it looks like a bug. I think I can see the problem and am working
-> > on a patch.
+> Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
+> ---
+>  drivers/power/pmic/Kconfig    |   6 ++
+>  drivers/power/pmic/Makefile   |   1 +
+>  drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
+>  include/power/tps65224.h      |  57 ++++++++++++++
+>  4 files changed, 205 insertions(+)
+>  create mode 100644 drivers/power/pmic/tps65224.c
+>  create mode 100644 include/power/tps65224.h
 >
-> Just to let you know, I'm out of time to work on this topic. I will
-> revisit it some other time, if you have not already tracked it down.
+> diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+> index 4a6f0ce093..b06bd31823 100644
+> --- a/drivers/power/pmic/Kconfig
+> +++ b/drivers/power/pmic/Kconfig
+> @@ -378,6 +378,12 @@ config PMIC_TPS65941
+>         The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
+>         This driver binds the pmic children.
+>
+> +config PMIC_TPS65224
+> +       bool "Enable driver for Texas Instruments TPS65224 PMIC"
+> +       help
+> +       The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
+> +       This driver binds the pmic children.
+> +
+>  config PMIC_TPS65219
+>         bool "Enable driver for Texas Instruments TPS65219 PMIC"
+>         depends on DM_PMIC
+> diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+> index 0b3b3d62d0..cec16e57d3 100644
+> --- a/drivers/power/pmic/Makefile
+> +++ b/drivers/power/pmic/Makefile
+> @@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
+>  obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
+>  obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
+>  obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
+> +obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
+>  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
+>
+>  ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
+> diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
+> new file mode 100644
+> index 0000000000..33395f6edf
+> --- /dev/null
+> +++ b/drivers/power/pmic/tps65224.c
+> @@ -0,0 +1,141 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
+> + */
+> +#include <fdtdec.h>
+> +#include <errno.h>
+> +#include <dm.h>
+> +#include <i2c.h>
+> +#include <log.h>
+> +#include <power/pmic.h>
+> +#include <power/regulator.h>
+> +#include <power/tps65224.h>
+> +#include <dm/device.h>
+> +
+> +static const struct pmic_child_info pmic_children_info[] = {
+> +       { .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
+> +       { .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
+> +       { },
+> +};
+> +
+> +static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
+> +                         int len)
+> +{
+> +       if (dm_i2c_write(dev, reg, buff, len)) {
+> +               pr_err("write error to device: %p register: %#x!\n", dev, reg);
+> +               return -EIO;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
+> +{
+> +       if (dm_i2c_read(dev, reg, buff, len)) {
+> +               pr_err("read error from device: %p register: %#x!\n", dev, reg);
+> +               return -EIO;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int tps65224_bind(struct udevice *dev)
+> +{
+> +       ofnode regulators_node;
+> +       int children;
+> +
+> +       if (dev->driver_data == TPS65224_WD)
+> +               return 0;
+> +
+> +       regulators_node = dev_read_subnode(dev, "regulators");
+> +       if (!ofnode_valid(regulators_node)) {
+> +               debug("%s: %s regulators subnode not found!\n", __func__,
+> +                     dev->name);
+> +               return -ENXIO;
+> +       }
+> +
+> +       debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
+> +
+> +       children = pmic_bind_children(dev, regulators_node, pmic_children_info);
+> +       if (!children)
+> +               printf("%s: %s - no child found\n", __func__, dev->name);
+> +
+> +       /* Probe all the child devices */
 
-If you are able to use 'bootflow scan -l' in each case, then I might
-be able to see what it is scanning USB, when you are asking for SCSI.
-I also wonder if this bug may have been fixed due to other changes?
+bind, not probe
+
+> +       return dm_scan_fdt_dev(dev);
+> +}
+> +
+> +static int stop_watchdog(struct udevice *wd_i2c_dev)
+> +{
+> +       int ret;
+> +
+> +       /* Maintain WD long window */
+> +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
+> +       if (ret < 0) {
+> +               debug("failed to read i2c reg (%d)\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       ret &= ~TPS65224_WD_PWRHOLD_MASK;
+> +       ret |= TPS65224_WD_PWRHOLD_MASK;
+> +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
+> +       if (ret) {
+> +               debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
+> +               return ret;
+> +       }
+> +
+> +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
+> +       if (ret < 0) {
+> +               debug("failed to read back i2c reg (%d)\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       /* Disable WD */
+> +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
+> +       if (ret < 0) {
+> +               debug("failed to read i2c reg (%d)\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       ret &= ~TPS65224_WD_EN_MASK;
+> +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
+> +       if (ret) {
+> +               debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
+> +               return ret;
+> +       }
+> +
+> +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
+> +       if (ret < 0) {
+> +               debug("failed to read back i2c reg (%d)\n", ret);
+> +               return ret;
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +static int tps65224_probe(struct udevice *dev)
+> +{
+> +       if (dev->driver_data == TPS65224_WD)
+> +               return stop_watchdog(dev);
+> +
+> +       return 0;
+> +}
+> +
+> +static struct dm_pmic_ops tps65224_ops = {
+> +       .read = tps65224_read,
+> +       .write = tps65224_write,
+> +};
+> +
+> +static const struct udevice_id tps65224_ids[] = {
+> +       { .compatible = "ti,tps65224", .data = TPS65224 },
+> +       { .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(pmic_tps65224) = {
+> +       .name = "tps65224_pmic",
+> +       .id = UCLASS_PMIC,
+> +       .of_match = tps65224_ids,
+> +       .bind = tps65224_bind,
+> +       .probe = tps65224_probe,
+> +       .ops = &tps65224_ops,
+> +};
+> diff --git a/include/power/tps65224.h b/include/power/tps65224.h
+> new file mode 100644
+> index 0000000000..24e91b6a67
+> --- /dev/null
+> +++ b/include/power/tps65224.h
+> @@ -0,0 +1,57 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
+> + *
+> + */
+> +#ifndef _POWER_TPS65224_H_
+> +#define _POWER_TPS65224_H_
+> +
+> +#define TPS65224                          0x0
+> +#define TPS65224_WD                       0x20
+> +
+> +/* I2C device address for pmic tps65224 */
+> +#define TPS65224_I2C_ADDR                (0x12 >> 1)
+> +#define TPS65224_LDO_NUM                  3
+> +#define TPS65224_BUCK_NUM                 4
+> +
+> +/* Drivers name */
+> +#define TPS65224_LDO_DRIVER              "tps65224_ldo"
+> +#define TPS65224_BUCK_DRIVER             "tps65224_buck"
+> +
+> +#define TPS65224_BUCK_VOLT_MASK           0xFF
+> +#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
+> +#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
+> +#define TPS65224_BUCK_VOLT_MAX            3300000
+> +#define TPS65224_BUCK_MODE_MASK           0x1
+> +
+> +#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
+> +#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
+> +#define TPS65224_LDO_VOLT_MIN_HEX         0x4
+> +#define TPS65224_LDO1_VOLT_MAX            3300000
+> +#define TPS65224_LDO23_VOLT_MAX           3400000
+> +#define TPS65224_LDO_MODE_MASK            0x1
+> +#define TPS65224_LDO_BYPASS_EN            0x80
+> +#define TP65224_BUCK_CONF_SLEW_MASK       0x3
+> +
+> +/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
+> +#define TPS65224_LDO123_BYP_CONFIG        7
+> +
+> +#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
+> +#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
+> +#define TPS65224_LDO1_VOLT_MIN            1200000
+> +#define TPS65224_LDO23_VOLT_MIN           600000
+> +#define TPS65224_LDO4_VOLT_MIN            1200000
+> +#define TPS65224_LDO1_VSET_MIN            0x0C
+> +#define TPS65224_LDO23_VSET_MIN           0x00
+> +#define TPS65224_LDO123_VSET_MIN          0x0
+> +#define TPS65224_LDO1_VSET_MAX            0x36
+> +#define TPS65224_LDO23_VSET_MAX           0x38
+> +#define TPS65224_LDO123_STEP              50000
+> +#define TPS65224_LDO4_STEP                25000
+> +
+> +#define TPS65224_WD_MODE_REG              0x406
+> +#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
+> +#define TPS65224_WD_THR_CFG               0x409
+> +#define TPS65224_WD_EN_MASK               BIT(6)
+> +
+> +#endif // _POWER_TPS65224_H_
+> --
+> 2.25.1
+>
 
 Regards,
 Simon
