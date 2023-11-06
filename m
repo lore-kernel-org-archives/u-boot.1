@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C11B4C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78667C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:58:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 238ED870ED;
-	Mon,  6 Nov 2023 21:58:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 857098710C;
+	Mon,  6 Nov 2023 21:58:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P+mls8sm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PktRxJHM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D736A8709F; Mon,  6 Nov 2023 21:57:57 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id F12AB8709F; Mon,  6 Nov 2023 21:57:58 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6FCC86F5D
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:57:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE067870BA
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:57:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40842752c6eso37837795e9.1
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:57:55 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40907b82ab9so35249085e9.1
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:57:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699304275; x=1699909075; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699304276; x=1699909076; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EgUoKXKqzbGvXXPMNN+Di4BMa47JWNghl7VzfJepnMg=;
- b=P+mls8smvRjx9vOFjhELnCRYrbpzPKVEvqczMO6ID8dx9IqUJhLctAv2Udn8ZwLINb
- I/0bO8O798w3s/9xMENjq/Kv/bxyf3doFli/bkiJC+y8TnwfhB9oiPWSOJ9QUWuKA+pg
- ZdgmI86L+qeYUwwnwboAt7288XHKkzEHsebN0U5Qal4SyUIkrk7RQhLgcFO+eYidThWV
- CSgvYhS5BdhQ4ifdLsZb2dk4l9SSNkJ3YxSLEFQyUxsuNWqMk3lR7QYRsUuFTpl8l13q
- cDNZfK5bz42lnsEK+fF8bqtSb4nU3diqjWFz/QUIsnR52XV9qIYfvPoufg7ldUrNEv75
- +SjA==
+ :reply-to; bh=u3Lwir3usfpmNklHHBGdbJjieVpk5O4AvgqPjpUlFxs=;
+ b=PktRxJHMmpn3gNE7MwN10QQDbBel9uzQOgeMyYyeVz6exucTFdNNrZ8/I4RoyFitBa
+ SLsClza3ZAjYK4cfF3/GfBFYuFdtXlmNAqkP+YQMf8rnG4Qf13SYLJ0QuD6rWQ9oPeOx
+ 5Syyur3+QHAzPGkUZSdyA3ievNXzdoay5C9ClqTx2qAcUQUAOjOLx1iZQ86IOhGNPPWg
+ SyDUW0WPLlhWpQ5YC7TQ8kyXBebtKnzNSpOnXzfHn9FldnQk8lqbbYB+cvv6rS6DVcSN
+ WbWGieAHBH8uf23yV/XWITjSkJn2saVfUTONQ1zY3Y63l8z36vMEZp75V0+OZ2rdsvTV
+ FUeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699304275; x=1699909075;
+ d=1e100.net; s=20230601; t=1699304276; x=1699909076;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EgUoKXKqzbGvXXPMNN+Di4BMa47JWNghl7VzfJepnMg=;
- b=KOfzNZiPvmVw48AlWUYWkJEUfuL/UX+bVQFZGa9aOLwDt8MH7Tkz5VpPG3+pcr6kle
- arowN8IMk/2v+ZXgSN/AgKcuNKWDRKQHvIAnmVwz/TqWRqAzXPHk/IO9YOHRXoKiy/pj
- 5mMT71VeCqhk82Lh5VDSYppiIfkAH2S/31QL6rQC3DfVLJWciFOt5Ynevxj8V/R/p07a
- zgb1ef9zn2DnDNNo4r0UsFDjt0nmj9flM0gYQ0/VI2UlkkZynzpw61Ircwhs40jgIhoV
- QhfUrUFu1JEuttgfZ31qUog1wmL/tojKoonVSHG+EoFTJ8uTcq1PYl/FEDVEk8T9j09S
- gi3A==
-X-Gm-Message-State: AOJu0YzeY6VKdog1KqhNw3vAaQA6cFDIpVc9hFmQksEfngiYHsOF1W8m
- LNEUoEgpCSZYlilp9JMX9ycOHxWIkZB0OoePekGEJQ==
-X-Google-Smtp-Source: AGHT+IGWWjAXlNn9BCgsjaejCpexzEH93rbrePSzY2a4B59yzpTKHQeoXLLZxx9AQJnZeGRqA08fmA==
-X-Received: by 2002:a5d:6d87:0:b0:32f:908e:c7e0 with SMTP id
- l7-20020a5d6d87000000b0032f908ec7e0mr19047585wrs.28.1699304275338; 
- Mon, 06 Nov 2023 12:57:55 -0800 (PST)
+ bh=u3Lwir3usfpmNklHHBGdbJjieVpk5O4AvgqPjpUlFxs=;
+ b=UObTT9iiN7ZJoHGDYMJ9vdQHAE6eUsTxf5yD6siajgo2p0qIGl7s7bodwmFbtaOMdZ
+ WRNKkRTEvBHe3VHCMm8h3xrtiFZ6O57v0U7k666X1UNh9q62h+ArzlG8u4ImN5ECgl5X
+ Y1SiCN8tvGU3PrAMx76hvdGsRvwB+jeV7Cetf++npMXrA2HGOFP2WXFH+B0iKDiHgNfc
+ sAMoGShb/4cD8Uh/LtIEB5cs4XHowuwbErYOjermALAN1ow7kGMTGIVD9KWicBDqJslr
+ 17KWKJ1eB0Mxz5Ov9yDW5kZ1m7lkjbHgRG3p+G8lR+3vmd7D1QZm9EIzxmU6nvUzB8z8
+ JITQ==
+X-Gm-Message-State: AOJu0YzMszbaRmgzOwM6X2Y6J7Z+T1MheKwk9jfBCr5XWnVFHwAMFs6b
+ xZjNZRBelo9ECLBw/PCPUlygDA==
+X-Google-Smtp-Source: AGHT+IHLau+NAgzPf+2YvzVMdJrBjygE4lzDaU1vYu6pQWQQtC4wHbErlMPrnGxVOPjtBfUrRfU/Ag==
+X-Received: by 2002:a05:6000:18a4:b0:32f:8a45:937f with SMTP id
+ b4-20020a05600018a400b0032f8a45937fmr594036wri.2.1699304276166; 
+ Mon, 06 Nov 2023 12:57:56 -0800 (PST)
 Received: from lion.localdomain (host-92-25-138-185.as13285.net.
  [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
- n11-20020a5d4c4b000000b0032f7d1e2c7csm511210wrt.95.2023.11.06.12.57.54
+ n11-20020a5d4c4b000000b0032f7d1e2c7csm511210wrt.95.2023.11.06.12.57.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 12:57:54 -0800 (PST)
+ Mon, 06 Nov 2023 12:57:55 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 06 Nov 2023 20:57:31 +0000
-Subject: [PATCH 3/5] gpio: qcom_pmic: fix support for upstream DT
+Date: Mon, 06 Nov 2023 20:57:32 +0000
+Subject: [PATCH 4/5] spmi: msm: fix register range names
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231106-b4-qcom-dt-compat-v1-3-0ccbb7841241@linaro.org>
+Message-Id: <20231106-b4-qcom-dt-compat-v1-4-0ccbb7841241@linaro.org>
 References: <20231106-b4-qcom-dt-compat-v1-0-0ccbb7841241@linaro.org>
 In-Reply-To: <20231106-b4-qcom-dt-compat-v1-0-0ccbb7841241@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, 
@@ -81,13 +81,13 @@ To: Ramon Fried <rfried.dev@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1610;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4848;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=1VfLHjE8wkBO4Peq2fBSUYFrT5F/hijlL5AW3vAqzFY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlTPYP/prdcjoj/xfPpRIrc5fZXr08A46X43gzeTOafkH
- 9+tUVzZUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbSMZ3hr7TNIpOVf9SmXy8u
- 3lzYuHXmse3vLB7+mhp3npWlf86BxDsM/3MEeN3VCkuqwqbu+iZwQ778k/SKS9aN9ddvtvifnbL
- YxgcA
+ bh=douo1xqSRB+pL2QxBKbvYfai1vUp5nATabk40aa2fpA=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlTPYP/uCG0V5oKPNec8vzxzrROvLfp5iVWxbPrf3NW3J
+ zwzV7TuKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABP5c4zhf1pSmtuSIr8JbYLb
+ w4/r23FMcPb08uGwjFqbvVa878HdU4wM6z83MGySF2Xb3Ov5jr3Y6a/ziy37iuomvni925+p+vL
+ LRwA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -106,57 +106,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux devicetrees use the "gpio-ranges" property, add support for
-parsing it instead of "gpio-count" so that upstream DTs can be used with
-U-Boot.
+The core and chnl register ranges were swapped on SDM845. Fix it, and
+fetch the register ranges by name instead of by index.
+
+Drop the cosmetic "version" variable and clean up the debug logging.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ arch/arm/dts/sdm845.dtsi |  2 +-
+ drivers/spmi/spmi-msm.c  | 46 ++++++++++++++++++----------------------------
+ 2 files changed, 19 insertions(+), 29 deletions(-)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 3dbc02d83198..e6405881c637 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -247,11 +247,37 @@ static int qcom_gpio_probe(struct udevice *dev)
- 	return 0;
- }
+diff --git a/arch/arm/dts/sdm845.dtsi b/arch/arm/dts/sdm845.dtsi
+index 4798ace0ff8b..98f3744027bb 100644
+--- a/arch/arm/dts/sdm845.dtsi
++++ b/arch/arm/dts/sdm845.dtsi
+@@ -63,7 +63,7 @@
+ 			reg = <0xc440000 0x1100>,
+ 			      <0xc600000 0x2000000>,
+ 			      <0xe600000 0x100000>;
+-			reg-names = "cnfg", "core", "obsrvr";
++			reg-names = "core", "chnls", "obsrvr";
+ 			#address-cells = <0x1>;
+ 			#size-cells = <0x1>;
  
-+/*
-+ * Parse basic GPIO count specified via the gpio-ranges property
-+ * as specified in Linux devicetrees
-+ * Returns < 0 on error, otherwise gpio count
-+ */
-+static int qcom_gpio_of_parse_ranges(struct udevice *dev)
-+{
-+	int ret;
-+	struct ofnode_phandle_args args;
-+
-+	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "gpio-ranges",
-+					     NULL, 3, 0, &args);
-+	if (ret)
-+		return log_msg_ret("gpio-ranges", ret);
-+
-+	return args.args[2];
-+}
-+
- static int qcom_gpio_of_to_plat(struct udevice *dev)
+diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
+index 27a035c0a595..f8834e60c266 100644
+--- a/drivers/spmi/spmi-msm.c
++++ b/drivers/spmi/spmi-msm.c
+@@ -70,7 +70,7 @@ enum pmic_arb_channel {
+ 
+ struct msm_spmi_priv {
+ 	phys_addr_t arb_chnl;  /* ARB channel mapping base */
+-	phys_addr_t spmi_core; /* SPMI core */
++	phys_addr_t spmi_chnls; /* SPMI core */
+ 	phys_addr_t spmi_obs;  /* SPMI observer */
+ 	/* SPMI channel map */
+ 	uint8_t channel_map[SPMI_MAX_SLAVES][SPMI_MAX_PERIPH];
+@@ -95,10 +95,10 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
+ 
+ 	/* Disable IRQ mode for the current channel*/
+ 	writel(0x0,
+-	       priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
++	       priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
+ 
+ 	/* Write single byte */
+-	writel(val, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
++	writel(val, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
+ 
+ 	/* Prepare write command */
+ 	reg |= SPMI_CMD_EXT_REG_WRITE_LONG << SPMI_CMD_OPCODE_SHIFT;
+@@ -113,12 +113,12 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
+ 		ch_offset = SPMI_CH_OFFSET(channel);
+ 
+ 	/* Send write command */
+-	writel(reg, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
++	writel(reg, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
+ 
+ 	/* Wait till CMD DONE status */
+ 	reg = 0;
+ 	while (!reg) {
+-		reg = readl(priv->spmi_core + SPMI_CH_OFFSET(channel) +
++		reg = readl(priv->spmi_chnls + SPMI_CH_OFFSET(channel) +
+ 			    SPMI_REG_STATUS);
+ 	}
+ 
+@@ -186,47 +186,37 @@ static struct dm_spmi_ops msm_spmi_ops = {
+ static int msm_spmi_probe(struct udevice *dev)
  {
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-+	int ret;
+ 	struct msm_spmi_priv *priv = dev_get_priv(dev);
+-	phys_addr_t config_addr;
++	phys_addr_t core_addr;
+ 	u32 hw_ver;
+-	u32 version;
+ 	int i;
+-	int err;
  
- 	uc_priv->gpio_count = dev_read_u32_default(dev, "gpio-count", 0);
-+	if (!uc_priv->gpio_count) {
-+		ret = qcom_gpio_of_parse_ranges(dev);
-+		if (ret > 0)
-+			uc_priv->gpio_count = ret;
-+		else
-+			printf("gpio-ranges error: %d\n", ret);
-+	}
- 	uc_priv->bank_name = dev_read_string(dev, "gpio-bank-name");
- 	if (uc_priv->bank_name == NULL)
- 		uc_priv->bank_name = "qcom_pmic";
+-	config_addr = dev_read_addr_index(dev, 0);
+-	priv->spmi_core = dev_read_addr_index(dev, 1);
+-	priv->spmi_obs = dev_read_addr_index(dev, 2);
++	core_addr = dev_read_addr_name(dev, "core");
++	priv->spmi_chnls = dev_read_addr_name(dev, "chnls");
++	priv->spmi_obs = dev_read_addr_name(dev, "obsrvr");
+ 
+-	hw_ver = readl(config_addr + PMIC_ARB_VERSION);
++	hw_ver = readl(core_addr + PMIC_ARB_VERSION);
+ 
+ 	if (hw_ver < PMIC_ARB_VERSION_V3_MIN) {
+ 		priv->arb_ver = V2;
+-		version = 2;
+-		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
++		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
+ 	} else if (hw_ver < PMIC_ARB_VERSION_V5_MIN) {
+ 		priv->arb_ver = V3;
+-		version = 3;
+-		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
++		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
+ 	} else {
+ 		priv->arb_ver = V5;
+-		version = 5;
+-		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V5;
+-
+-		if (err) {
+-			dev_err(dev, "could not read APID->PPID mapping table, rc= %d\n", err);
+-			return -1;
+-		}
++		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V5;
+ 	}
+ 
+-	dev_dbg(dev, "PMIC Arb Version-%d (0x%x)\n", version, hw_ver);
++	dev_dbg(dev, "PMIC Arb Version-%d (%#x)\n", hw_ver >> 28, hw_ver);
+ 
+ 	if (priv->arb_chnl == FDT_ADDR_T_NONE ||
+-	    priv->spmi_core == FDT_ADDR_T_NONE ||
++	    priv->spmi_chnls == FDT_ADDR_T_NONE ||
+ 	    priv->spmi_obs == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+ 
+-	dev_dbg(dev, "priv->arb_chnl address (%llu)\n", priv->arb_chnl);
+-	dev_dbg(dev, "priv->spmi_core address (%llu)\n", priv->spmi_core);
+-	dev_dbg(dev, "priv->spmi_obs address (%llu)\n", priv->spmi_obs);
++	dev_dbg(dev, "priv->arb_chnl address (%#08llx)\n", priv->arb_chnl);
++	dev_dbg(dev, "priv->spmi_chnls address (%#08llx)\n", priv->spmi_chnls);
++	dev_dbg(dev, "priv->spmi_obs address (%#08llx)\n", priv->spmi_obs);
+ 	/* Scan peripherals connected to each SPMI channel */
+ 	for (i = 0; i < SPMI_MAX_PERIPH; i++) {
+ 		uint32_t periph = readl(priv->arb_chnl + ARB_CHANNEL_OFFSET(i));
 
 -- 
 2.42.0
