@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B627C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022B3C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:33:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C14F86FFD;
-	Mon,  6 Nov 2023 17:32:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 223DF8709A;
+	Mon,  6 Nov 2023 17:32:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rM/EnIuc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hOvYQNBD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCC7B87069; Mon,  6 Nov 2023 17:32:48 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id F1E8187069; Mon,  6 Nov 2023 17:32:49 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C230A870A4
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:32:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E8C886FE8
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:32:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-41e1974783cso29738031cf.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:32:45 -0800 (PST)
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3b6a837a2e1so132874b6e.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:32:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699288364; x=1699893164; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699288366; x=1699893166; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ydhaEQFohny1Bgsvz2wE8VVquDhy58ZbYgQG/GuWLW8=;
- b=rM/EnIuciu9RA8R9bR7qFm8upjVJmPUwTy7iupU2/d65VyN+bYAqzmCv/eFMW6evMT
- 42LbyO1A79HixYqPQlc1Qkqvb1paTgLYylTph045uInm+4CPjwTruJjROAqmWW6MZZKq
- NmiaHFt+gmIVnDUJuq2AAgRXYij0lD5+x+ycM=
+ bh=YguKor1i6UVMka0+VvWtvQvDxwq9qZTZuyL65948g30=;
+ b=hOvYQNBDpf8cVIKudOZFGOcVYmCCtxgTqTKfByA+0nNk2u3NQNd68P2oBzy13o0z4Z
+ h/6te9Kd26kODLLYBCoqqhameTxY1nGMk7Twi3+mJd3b7I4vo/0EPQ4ZFhY5HOhRsESH
+ LLQDqOf+9SL1ITi6NoJF5Rbp0L2CSn1DX1DKg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699288364; x=1699893164;
+ d=1e100.net; s=20230601; t=1699288366; x=1699893166;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ydhaEQFohny1Bgsvz2wE8VVquDhy58ZbYgQG/GuWLW8=;
- b=pl2I7TWTp5xXJJIbdfgPDp7oqakfE/rIE9qziawPFv2FKA7MUln2Da2jMLP29jDxsn
- MV9EDRCYBziCoRHJEPxewAj2o0bJjk2j0N63WoezA6yfK4TZ9ScO2DTpu4zHnMZ3TEPz
- mW579fjfkBx3O3OYQsVirmafno70EcjJHxwPXVOYMfaPJO7k9QK4+0ABhC+2/zaICqS8
- a7Vsr4z36lh2MZGQUU0KkeGQGTyyXRqCExvM6y8cmnEkYAdcAyNfmJlHi/dh2TPQPLSt
- LRJdWZHH++6Vbafa8A4KzS4H5kZFbTFtCBD12KmrDnO9Nsy8yXvXV+sHsr4t7Z50c/T6
- XG3w==
-X-Gm-Message-State: AOJu0YzK28fcqIvD81sRvZk3PRbZIyOLl+570m8X/t6ibkkWoR2pf1lE
- NKNuydWCtgNVR/lOKqeaoRIQecVpqz2/AeEeP5jVIA==
-X-Google-Smtp-Source: AGHT+IHovXecf7s31YVJ2GIaFZQvps/mQO/SRg/4hl0hSiJsLDbZY2aMBPabUir3PkKa+KweTliRXA==
-X-Received: by 2002:ac8:5c48:0:b0:418:597:b71d with SMTP id
- j8-20020ac85c48000000b004180597b71dmr38087044qtj.4.1699288364462; 
- Mon, 06 Nov 2023 08:32:44 -0800 (PST)
+ bh=YguKor1i6UVMka0+VvWtvQvDxwq9qZTZuyL65948g30=;
+ b=NWYv36kApbFvZmXQKHrk9uBmyC12/giR+Un2vSU/XtQs9wCv8K74iqInnT1Pjva4I5
+ LIckRRyO+i/4FeNQVW4coFBH8BJCIpHjr/XJC3Zk9uLIWyGiOd3vv3ULn67k0I7DHDHo
+ nr3FcUHs03vBvIbA6YwKbQXGFgCgJvKCslQXUEnMSwt6dBI9KpsjOAfCaO6OY6YSVC7k
+ pz2WAqVAzlW3PlQz0gL/NNcTkIhUZRxq3C+hKjlo3ooS2FYG9hAqThvI+GR5tSmazH3l
+ 5mBfnYwoodMPPQ7gdyzJ3M7kF/7bgSutNR8mlr7C9PRFs4FgBmsepYnXk8t6PWBHRUln
+ oZqg==
+X-Gm-Message-State: AOJu0YwtU/v4zUk9T7Ob7GudivcnEQ7vhHpQDy3I4DuHC+//YXgMmx7O
+ zIqju0k5pUaPYJvdj3be3334tQ==
+X-Google-Smtp-Source: AGHT+IGYjX0yt+sRj0pSLmfiqnXMnLIQ25BNFyHisPDC8+OZc5ddsWY66ETQIk6JB5CszClFoLk9ew==
+X-Received: by 2002:a05:6808:de4:b0:3b2:f16e:3f6d with SMTP id
+ g36-20020a0568080de400b003b2f16e3f6dmr30620852oic.21.1699288366125; 
+ Mon, 06 Nov 2023 08:32:46 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- a22-20020ac84d96000000b0041b12d5fd91sm3550113qtw.55.2023.11.06.08.32.43
+ mn20-20020a0562145ed400b0064f4258184csm3570746qvb.53.2023.11.06.08.32.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 08:32:44 -0800 (PST)
-Date: Mon, 6 Nov 2023 11:32:42 -0500
+ Mon, 06 Nov 2023 08:32:45 -0800 (PST)
+Date: Mon, 6 Nov 2023 11:32:43 -0500
 From: Tom Rini <trini@konsulko.com>
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com
-Subject: Re: [PATCH] net: Get pxe config file from dhcp option 209
-Message-ID: <20231106163242.GM496310@bill-the-cat>
-References: <20230725232030.6531-1-seanedmond@linux.microsoft.com>
+To: Linus Walleij <linus.walleij@linaro.org>
+Cc: u-boot@lists.denx.de, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Subject: Re: [PATCH v2] bmips: Add Inteno XG6846 board
+Message-ID: <20231106163243.GA61955@bill-the-cat>
+References: <20230926092339.2228321-1-linus.walleij@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ODkrh+uyG4DstjvP"
+ protocol="application/pgp-signature"; boundary="2BRaPioAoiUKW+Je"
 Content-Disposition: inline
-In-Reply-To: <20230725232030.6531-1-seanedmond@linux.microsoft.com>
+In-Reply-To: <20230926092339.2228321-1-linus.walleij@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,41 +91,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ODkrh+uyG4DstjvP
+--2BRaPioAoiUKW+Je
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 25, 2023 at 04:20:30PM -0700, seanedmond@linux.microsoft.com wr=
-ote:
+On Tue, Sep 26, 2023 at 11:23:39AM +0200, Linus Walleij wrote:
 
-> From: Sean Edmond <seanedmond@microsoft.com>
+> This adds support for the Inteno XG6846 board based on the
+> Broadcom MIPS 6328 SoC.
 >=20
-> Allow dhcp server pass pxe config file full path by using option 209
+> The default boot will read a uImage from flash and boot it.
 >=20
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> Reviewed-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---ODkrh+uyG4DstjvP
+--2BRaPioAoiUKW+Je
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJFSoACgkQFHw5/5Y0
-tywP1Av+J04RnpsXlrI0vVVqcpzCzeHg1k5cj5dd1sAIEK/Kw/AXcG3vB1GWGJgY
-tPR3eaHUSEumdlADJTnfEON135Pp01aYF3SNSjoMC6PEIE3WibG2x/EapB8luq8M
-jrN7KMBPwPm1vRDV3Q5sMnRrcvrV0ze6CyEnHJ+21WqclfZFUt5IhHYak0MhJ2zI
-Aopg7T1XMlfht9SAqS8A/BQIN6oRqk/Y1LdV658YfFvjaW/FJPvOvEZzNMup0sVR
-/ck2Ii63CjwM642ansS1lnnO/ITPdqNlYMRENV+uxCnm2avvXWXed1BQ64IVLWb0
-DYZIy5GSu0Djg+TuPv+06wRrvgPRG/MotrU6ZcTgqJydr110a5dCnms/04xu49Ic
-iB1rXJrngicgpZtF0obsyJDk1wLmgMu5LQuTwYk1HQ3Po/H8HBaZw0v6Pqbe/RqT
-DpKXX202s0WFk6jQV/QxhzWUmI9UHVCUzAASm1aQ0XIY4AWFwbUr4s1EMhVUNb80
-W2LS7Cx9
-=AshG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJFSsACgkQFHw5/5Y0
+tyxrMgwAq06xZ94f4bDotsJJ3Sj9A9k4G3maNG2XXHyiXRki6aBfzz+ZKke9AAWI
+mUoaGUlr3LuZESmoAWHJrkRf1l7V/rRpX16TCMBAH/6Ts3xMb7MFcvJhaZoXJBnp
+wdzKjr3bQU09oC1wvriQfrVuzJrdnCY3HrLE91EFA2nPNqtxiQjyDfKL4d3sZhHd
+ngWc0hRoGIEQECF11SdWYG5mVNER7i+sI80f22TaSBBqR0kSwcwUaIviER1ze6SP
+9sD0Dqhc83q+yU5X0iQ0ZNQqHeedP8zyWUCa916gapsDFDeCF5F0gI/QKfIDmH5A
+dHXo5If/DwFOXXmPpIA4vks1ZpVI7fxhNSExY9mEoqILto/hIcom+axZG66Pwv0d
+vqE2ZF/TRXqxjis2D0pK5UqMWcjSPZB4GvIpIL/O9+WMlAI5VfD4LvtXmpuTeZuX
+aNVpnjA1OkToTpgsW08pFIkaiBLIt+v2EdbTidTXKeqCLMoAnKrleNBDmQ6/rBzI
+I4YaSh2q
+=3gQg
 -----END PGP SIGNATURE-----
 
---ODkrh+uyG4DstjvP--
+--2BRaPioAoiUKW+Je--
