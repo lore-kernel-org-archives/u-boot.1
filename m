@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F61FC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:35:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF57C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:35:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E45C8715B;
-	Mon,  6 Nov 2023 17:33:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BAB6287113;
+	Mon,  6 Nov 2023 17:33:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L2E/5hIO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SPYfLjiM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD6E187125; Mon,  6 Nov 2023 17:33:33 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 9B6E487114; Mon,  6 Nov 2023 17:33:36 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 050F587137
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:33:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DA7F86FF4
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:33:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-779d0c05959so74932485a.1
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:33:30 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-77063481352so459064685a.1
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:33:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699288410; x=1699893210; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3y3Hl/+H9Cx5g0N51QiyyRoWJ3VktASOb4zi0ZFlQfw=;
- b=L2E/5hIO8oRnX6x2J6uFzQEA/3z/6qBwcCSd3TZnODVdG33XzcYJccqVRsW+icfJJC
- vutsQwX0TR59CMabsFYfs1sqy2gBiI5jQRhVuCazMdA/NhpRA629sSjnnkygKnefEMIp
- a1skGjbmxcLwMpnz/0ZbkSnNLlj5IdfJr7abRGYvOddnLW7EdbdfBfLPjSzjbhbQBkyG
- 13NBy8sc26bx3VbpSWmnIeJ31FyOlM3rjmbqv0pCeOaw2P+EQWI6lZcASc4rBZGtXwPN
- krQNw8IDi53RQOF58i/L02lSdiOLUuRTNJn292FOaMwkOauGp24OSmSdkyGtVJ1puM6V
- H9tg==
+ d=konsulko.com; s=google; t=1699288413; x=1699893213; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+szqMFI851KfjlqJhGFT37ugh5mBY5j7MV2aW3r8iuM=;
+ b=SPYfLjiM8QamBiu3xUIGp4waixmU0WXn54PEbz2+Y4ivQGKdz8KX1oSuPdxQ1vAbZV
+ vGCLx/bBVVhTS2ce8YH/gkioAJL7DttuEraIgUtSzty4ePQTMur9IoX+Dx11GY99ELy/
+ j66540XuYAiDbOSxz/1evgXApBTzdGHWkw+pc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699288410; x=1699893210;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3y3Hl/+H9Cx5g0N51QiyyRoWJ3VktASOb4zi0ZFlQfw=;
- b=qO/ttqOcwiu8qDaep3uP8BiLxZFExEqBC0TPBZdJw/elwt8MP79iJNPEHvMjFDCgPW
- fpBwCRPMC6+L9YkCut2HY2zYPCz+u9bkNPSI14X7dr/wUT+P3+UNyzVniEE5hVYfycMb
- GIRUtaoNpAIzkPpQgyk+U1HBGP5ExK/Rr5mUidSOTronM6CJ4fTvRPNnfAvbOm2C4O/s
- HIGIlJMrgc+9/J3ee+1RoGKaz+xTtGuXPwYMfza+32++wf/jFI8Ytj7n3tC/hMRI64mJ
- K4QbIlO9aVXCFiFKns4k+7CU2+cZtNZ0fItCyF6zhk5ZEtXaMV6Cx7m/cXQWSYTS6qUT
- aujA==
-X-Gm-Message-State: AOJu0Yx+SzrUzEDp8lWkEdJTT3QmJDolkxqxYh8zTB/bWwN6F52VlgCV
- T9s+NWDGm67l2RsQtOofW5TZAzgkmOc=
-X-Google-Smtp-Source: AGHT+IFH6dRRGvKVnk6ENXYkJ7BvVi2BFQ1HfKWNd3wliIQYA4Su8mIhb4vWYHrUYuF2rjj9lYJWsw==
-X-Received: by 2002:a05:620a:2711:b0:778:9b9f:ccbb with SMTP id
- b17-20020a05620a271100b007789b9fccbbmr32212298qkp.0.1699288409646; 
- Mon, 06 Nov 2023 08:33:29 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:91e3:ce2:e2f8:4628])
- by smtp.gmail.com with ESMTPSA id
- az42-20020a05620a172a00b0077407e3d68asm3407235qkb.111.2023.11.06.08.33.28
+ d=1e100.net; s=20230601; t=1699288413; x=1699893213;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+szqMFI851KfjlqJhGFT37ugh5mBY5j7MV2aW3r8iuM=;
+ b=hpICE6s0/FI6q0F1WNug9K2uqkm9pp5eJVZiKhpF+SS1k0DxF245Olr6StNhWLGbxh
+ aw+qtJ/qmIAEhPXD5tAmNuz0hkSFpBvuXbMJFsHzYCZfmH0Ei/6RJsla9/L3MdsT8ioX
+ jHebJ68TDImO7P9llJ4k4PCv33f7sM4ty0OgbKUjtjwh+8a0Y/0qvmahhwgn7Z2wZTvo
+ 2oFG0ZohrVXf41fwvOlfV4lh6XqeIrhL/WN2eWXhNdfz6fhoqj/zy/OK6ACggpM8Eg7T
+ lss+B5QdNLBbnmnDfqKtD28UoFuVQyV2bxeCdDslDBUqCGW/EWb8k64GrCl8tjznXZ4K
+ cFWw==
+X-Gm-Message-State: AOJu0Yy+FC2SZklsHPa0qu4zYRll+KwoKrKjNObQrmDdMadBqJgkgk37
+ Td3G9OxRVGvSJcPHuk210wDjpw==
+X-Google-Smtp-Source: AGHT+IEhtRAwoHDaBl98chcBFT56Q+vqd3XLiqbJuYCTv6GRSWIPxqmJRvvJrPcENAxl48Vhe4tyFQ==
+X-Received: by 2002:a05:620a:2592:b0:773:a91c:6164 with SMTP id
+ x18-20020a05620a259200b00773a91c6164mr14186797qko.19.1699288413133; 
+ Mon, 06 Nov 2023 08:33:33 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ e6-20020a056214162600b00671248b9cfcsm3551804qvw.67.2023.11.06.08.33.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 08:33:29 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH 2/2] warp7: Convert to watchdog driver model
-Date: Mon,  6 Nov 2023 13:33:23 -0300
-Message-Id: <20231106163323.2883561-2-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231106163323.2883561-1-festevam@gmail.com>
-References: <20231106163323.2883561-1-festevam@gmail.com>
+ Mon, 06 Nov 2023 08:33:32 -0800 (PST)
+Date: Mon, 6 Nov 2023 11:33:30 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Frank de Brabander <debrabander@gmail.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com
+Subject: Re: [PATCH] net: phy: TI DP83869 fix invalid clock delay configuration
+Message-ID: <20231106163330.GV496310@bill-the-cat>
+References: <20231006122439.10720-1-debrabander@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="sT323ZYaHul2mQ/M"
+Content-Disposition: inline
+In-Reply-To: <20231006122439.10720-1-debrabander@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,65 +90,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
 
-Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
-the 'reset' command in U-Boot to not cause a board reset.
-    
-Fix it by switching to the watchdog driver model via sysreset, which
-is the preferred method for implementing the watchdog reset.
+--sT323ZYaHul2mQ/M
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- arch/arm/dts/imx7s-warp-u-boot.dtsi | 10 ++++++++++
- configs/warp7_defconfig             |  3 +++
- 2 files changed, 13 insertions(+)
+On Fri, Oct 06, 2023 at 02:24:39PM +0200, Frank de Brabander wrote:
 
-diff --git a/arch/arm/dts/imx7s-warp-u-boot.dtsi b/arch/arm/dts/imx7s-warp-u-boot.dtsi
-index 4f44598c9a27..98784fd7a2ef 100644
---- a/arch/arm/dts/imx7s-warp-u-boot.dtsi
-+++ b/arch/arm/dts/imx7s-warp-u-boot.dtsi
-@@ -7,6 +7,12 @@
- 	chosen {
- 		stdout-path = &uart1;
- 	};
-+
-+	wdt-reboot {
-+		compatible = "wdt-reboot";
-+		wdt = <&wdog1>;
-+		bootph-pre-ram;
-+	};
- };
- 
- &aips3 {
-@@ -24,3 +30,7 @@
- &uart1 {
- 	bootph-all;
- };
-+
-+&wdog1 {
-+	bootph-pre-ram;
-+};
-diff --git a/configs/warp7_defconfig b/configs/warp7_defconfig
-index 26d992d3c2d8..4ceb0a4f2917 100644
---- a/configs/warp7_defconfig
-+++ b/configs/warp7_defconfig
-@@ -67,6 +67,8 @@ CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_SPECIFY_CONSOLE_INDEX=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_IMX_THERMAL=y
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
-@@ -80,5 +82,6 @@ CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_ETHER=y
- CONFIG_USB_ETH_CDC=y
- CONFIG_USBNET_HOST_ADDR="de:ad:be:af:00:00"
-+CONFIG_IMX_WATCHDOG=y
- CONFIG_OPTEE_TZDRAM_SIZE=0x3000000
- CONFIG_BOOTM_OPTEE=y
--- 
-2.34.1
+> Setting the clock delay from the device tree settings
+> rx-internal-delay-ps and tx-internal-delay-ps was broken:
+>=20
+>  - The expected value in the device tree is suppose to be a
+>    delay in picoseconds, but the driver only allowed an array index.
+>  - Driver converted this array index to the actual delay in
+>    picoseconds and tried to apply this in the device register. This
+>    however is not a valid register value. The actual logic here was
+>    reversed, it converted an register representation of the delay to
+>    the device tree delay in picoseconds.
+>=20
+> Only when the internal delays were NOT configured in the device tree
+> and they default value of 7 (=3D2000ps) was used, a valid value was
+> loaded in the register.
+>=20
+> Signed-off-by: Frank de Brabander <debrabander@gmail.com>
 
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--sT323ZYaHul2mQ/M
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJFVoACgkQFHw5/5Y0
+tyzh2QwAjqCRQwHWxvQPh5OxfrsrdoHHM4HcTOIxLA33TKcAcSFXrgTH2DZ3fGBf
+N+CM+TUq5d22XW/BmhUfXITw7jdA8DEcRhAhSLWuEoWo2zwU9NSZDAPYEXPmLLhF
+6DaJCjma1OFY0gxAeqsdrarf0od+xkiTeRpBBwWcgSakmd7Ws+NCCnANmJ+GW0e6
+KlrsZPUfLSMWWdapg0g/mVY36HsTagzX9cyymUbRn7TYqWvf9JbkM9ejcaW+u4Ar
+e6do5ny5gvbgORBtvVUlf/ndu89WfgKkxCLRXdAe0dp16OJa9qdVIRz9rsSPyQbC
+r2OUlJDvpGdHwRL+nLFWNoT61aqJGXul7Nr/cCmFcdwgH1nOD/Ul3Z1wxvkn1/GM
+Nr22iqdx9BK4tshN+ccR9cslYRsKWJc6RoED6ZArHnTIZGtEiQ2dwMrHMF/AcjfM
+OwfspgFihRMoFrR+0IxPDCQV+jNB/m9LdA7kGkazBW8vCZ7thyJ6gyZa6LSs8DFr
+xkPqySEN
+=0APa
+-----END PGP SIGNATURE-----
+
+--sT323ZYaHul2mQ/M--
