@@ -4,75 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1075C4167D
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 13:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4388AC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 13:54:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C70686E40;
-	Mon,  6 Nov 2023 14:28:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 75D248700A;
+	Mon,  6 Nov 2023 14:54:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LeEgejfn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UEthuX9j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 596A786E05; Mon,  6 Nov 2023 14:28:04 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 5FEFF87026; Mon,  6 Nov 2023 14:54:08 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB809864C3
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 14:28:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AA1387005
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 14:54:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-507c78d258fso5791308e87.2
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 05:28:00 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-6cd0963c61cso2359528a34.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 05:54:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699277280; x=1699882080; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c0r3q9taDeXX4hLv3DLCyw/qqHiPEZKEgEgIV2RlUVE=;
- b=LeEgejfn5gFowmwgapucYeEPfwcAadD3Mt/jUBkgjdjOp2vmw2gCmF7s1NymI9un37
- 0MKrNyyGytCTs+4A+N5g22FaPA8vDDdid/k7iBj8A3fATNJ7SpiFkTtt95z3YSusFUee
- 5FNHV2to80BoCcJ8GDxN732tkfUs+DvLO5PAdPwpy5Nn9MXSHT3aK8Ota2UVfz7jEuOg
- jIaHmB/xPnhQh/pZthGGvPnzjyY+MFsnQv8XFtWf7f/FAPfp8VV2N6dq0523QHkTCfjq
- a/mzY587xX2wG7Xa8eIDbATwbyBFoos9mzwX2tEzmjL4GNvXWV543dk2aEEHlU2CQQId
- SztQ==
+ d=gmail.com; s=20230601; t=1699278845; x=1699883645; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=glzYlQK+Tpg+eRKC67XkY0snIZ7KfAWbro6R6T6DHeg=;
+ b=UEthuX9jb9OkIZ8cIOfoavNGxm+P+DTcyUjQynDm6SO+0+yqnl3/YH5vXqtW5w1h9h
+ ++Tvg4f6CJiFgaQq72XIjvFHSPx0ZXFNuvPb09DL87r5Zzu3vLj2OXauqoDGgoKisRw3
+ 5IKCBo4yLmwrT+lqtHFZLcNcobkJnFrziJ/VVCqvVl/MCZPuwVuvOd4zNgJPLWpwsGq+
+ +qUY3NJwKEEma47dl8Z91ruMASL9G8qXKrj2dvcX8XwNGyh4p9Qn1H2SlZ0cN8j6hDF+
+ YTgQgUffJccfZ2IgxH9PHMqtafsGsYvn7cVTZOHSIx82sjtc4CfAVBS0bf3fR3vwKRN2
+ BgyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699277280; x=1699882080;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=c0r3q9taDeXX4hLv3DLCyw/qqHiPEZKEgEgIV2RlUVE=;
- b=O54iFriDIorwuUHyXTFSCakwv50si3vIHGmCR1uI1+ZoI8UX6ciekkdbKe6yUj9MoN
- 3jv9wBVxrjL61LR7HdmOsw0k4xWtdHzCzpgRyeMKVNZu/HuMb6++hN4a4XyzcmJ1vzrg
- /fO9gpOk4Azj4ocaQmc3fsBt0nt7WFzOQo1pnqJKPJno3N4Zn8Vu0aa+gX+BrFgpObFg
- VU0MIm+geXcDCn+91vSz+wJEZ/DUe3Hc4tLIKXfoPlpXxSz5qxxQkaRfNEsmvewlevy2
- ZfwgfJgew+CfDfiNJgOSEsiSwMFrbU83Pv0mMtDXzPLNRA40UU5g0vn0gPj+bkk8pZNJ
- CnWQ==
-X-Gm-Message-State: AOJu0YzGuo0bc4o+DQ2MPW3sAaqoc655bcdqaDZzp62TyBdyUvskkTI8
- nEuab+qSCVNm4rZMAutRUdwBb3t7c0JOOIkuCf0=
-X-Google-Smtp-Source: AGHT+IGC8pSJ/0ZGJh7eFIcBiO6NUQD9KQQ4ZUJ0FPbP10yvsPbxzfMzKuPXkTN5Jxdp1MuxO2mFc5XqsoX4UNDZbMU=
-X-Received: by 2002:a05:6512:1081:b0:507:9640:f256 with SMTP id
- j1-20020a056512108100b005079640f256mr25015603lfg.36.1699277279794; Mon, 06
- Nov 2023 05:27:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699278845; x=1699883645;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=glzYlQK+Tpg+eRKC67XkY0snIZ7KfAWbro6R6T6DHeg=;
+ b=GXnyn6Z5pZY8EfEc1MjzHxekUlBYNOMJwSLix0P0tPywu4Bn6GkS5yR+R/Ppcb/JHH
+ q9DO3GqDEaYEp/8pag4SS9WTQEw54ZXg+RZ6MrZjPgkvc70HrpRJ1h4uoE5EqiXpdERb
+ yTpcGrVn7DFCbuyJNLlJW0IEq37kwtDZXLNJLvWtoNEIeb+Zbr0RZ3vC5tqHlN4OuKGE
+ qc2PSdQqARuaSk+Qqn4/xs1F4tE6XcoJqMRDMqLdLTGyqNWob8HQo9tAUMBLFKLyj407
+ dzecJcSGr/jMoWwXEahBXChfmeCeTfcsIZ7xfOldNdtkgq6bGJoG8YwDfE0XX7Tm84Zt
+ azjQ==
+X-Gm-Message-State: AOJu0Yxl/39lfHIAjBYOo96/yQBWK+ZhyUGgxiWHJtbZDajkJJBCogQa
+ KB/LC5TRgmNR3KfXnPacR7Q=
+X-Google-Smtp-Source: AGHT+IF9etcOYqVJW8Db/O5WkM/ZEGw0KxQk2QEV4Ps/08IZHxat0FJ+xnR3f346sL/aWhdhQo6+Ow==
+X-Received: by 2002:a9d:6390:0:b0:6d3:1e5a:d928 with SMTP id
+ w16-20020a9d6390000000b006d31e5ad928mr13652446otk.9.1699278844670; 
+ Mon, 06 Nov 2023 05:54:04 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ ki23-20020a05622a771700b004166ab2e509sm3395792qtb.92.2023.11.06.05.54.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Nov 2023 05:54:04 -0800 (PST)
+Message-ID: <f546ba08-10b9-0cb4-4fa7-f7541dab1288@gmail.com>
+Date: Mon, 6 Nov 2023 08:54:03 -0500
 MIME-Version: 1.0
-References: <20231106083229.256322-1-clamor95@gmail.com>
- <CALeDE9P=aUfEvhh-FD_mwRZ+5rgMkQbn+v6skqW7s3EVvnf6eg@mail.gmail.com>
- <CAPVz0n0LDVh-8W=o2Hp-AXU_=Jg5CnuYh54LxsE6XH=DD7nD5A@mail.gmail.com>
- <CALeDE9NLfGRpLxNNqNGOY3S-d9hWP1DWDjL526JNw_8xPqjaXw@mail.gmail.com>
-In-Reply-To: <CALeDE9NLfGRpLxNNqNGOY3S-d9hWP1DWDjL526JNw_8xPqjaXw@mail.gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 6 Nov 2023 15:27:48 +0200
-Message-ID: <CAPVz0n1WepmE6pTxSaeK6yHH2ji6_L+LF7a=TZk6hLWS8GcHKA@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] Convert recently merged T30 boards to use DM PMIC
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use units
+ of bytes
+Content-Language: en-US
+To: Xavier Drudis Ferran <xdrudis@tinet.cat>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?Q?Marek_Beh=c3=ban?= <marek.behun@nic.cz>,
+ Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ uboot-imx@nxp.com
+References: <20231106022603.3405551-1-seanga2@gmail.com>
+ <20231106022603.3405551-9-seanga2@gmail.com>
+ <ZUjdhAccsYbJS6AL@xdrudis.tinet.cat>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <ZUjdhAccsYbJS6AL@xdrudis.tinet.cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,78 +102,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 15:13=
- Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Mon, Nov 6, 2023 at 11:58=E2=80=AFAM Svyatoslav Ryhel <clamor95@gmail.=
-com> wrote:
-> >
-> > =D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 1=
-3:46 Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > Hi Svyatoslav,
-> > >
-> > > > Since the proposed PMIC patches have been accepted, I see the need
-> > > > to convert boards which I maintain to use DM drivers instead of boa=
-rd hacks.
-> > > >
-> > > > Svyatoslav Ryhel (5):
-> > > >   board: lg-x3: convert LG Optimus 4X and Vu to use DM PMIC
-> > > >   board: endeavoru: convert HTC One X to use DM PMIC
-> > >
-> > > Is there a reason why the two above devices don't appear to have thei=
-r
-> > > .dts files in the upstream kernel?
-> > >
-> >
-> > Yes, there is a reason. Linux maintainers treat submitters as
-> > existential enemies or as dirt at least. I was trying to work with
-> > linux but I have no desire to spend any time to upstream endeavoru or
-> > lg_x3.
->
-> The usual policy for acceptance into U-Boot is to have upstream review
-> in the kernel first.
->
+On 11/6/23 07:35, Xavier Drudis Ferran wrote:
+> Thanks for your work. I'm still reading... but...
+> 
+> 
+> El Sun, Nov 05, 2023 at 09:25:46PM -0500, Sean Anderson deia:
+>> diff --git a/include/spl.h b/include/spl.h
+>> index 951e136b9ea..ecfc50e0095 100644
+>> --- a/include/spl.h
+>> +++ b/include/spl.h
+>> @@ -297,10 +297,10 @@ struct spl_load_info {
+>>   	 * read() - Read from device
+>>   	 *
+>>   	 * @load: Information about the load state
+>> -	 * @sector: Sector number to read from (each @load->bl_len bytes)
+>> -	 * @count: Number of sectors to read
+>> +	 * @offset: Offset to read from in bytes, in multiples of @load->bl_len
+>> +	 * @count: Number of bytes to read, in multiples of @load->bl_len
+> 
+> I'm no native English speaker, but would it be easier to understand? :
+> 
+> +	 * @offset: Offset to read from in bytes, a multiple of @load->bl_len
+> +	 * @count: Number of bytes to read, a multiple of @load->bl_len
+> 
+> 
+> 
 
-May you point to a policy which clearly and explicitly states this as
-a mandatory condition?
+I think it would have to be worded
 
-> > > >   board: transformer-t30: convert ASUS Transformers to use DM PMIC
-> > > >   board: grouper: convert ASUS Google Nexus 7 (2012) to use DM PMIC
-> > > >   ARM: dts: tegra30: enable USB PHY node on some devices
-> > > >
-> > > >  arch/arm/dts/tegra30-asus-grouper-common.dtsi |   7 +
-> > > >  .../dts/tegra30-asus-nexus7-grouper-E1565.dts |   1 +
-> > > >  .../dts/tegra30-asus-nexus7-grouper-PM269.dts |   1 +
-> > > >  .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |   1 +
-> > > >  arch/arm/dts/tegra30-asus-p1801-t.dts         |  17 ++
-> > > >  arch/arm/dts/tegra30-asus-tf600t.dts          |  15 ++
-> > > >  arch/arm/dts/tegra30-asus-transformer.dtsi    |   9 +
-> > > >  arch/arm/dts/tegra30-htc-endeavoru.dts        |   8 +
-> > > >  arch/arm/dts/tegra30-lg-x3.dtsi               |   9 +
-> > > >  board/asus/grouper/Kconfig                    |   8 -
-> > > >  board/asus/grouper/Makefile                   |   4 +-
-> > > >  .../asus/grouper/configs/grouper_E1565.config |   6 +-
-> > > >  .../asus/grouper/configs/grouper_PM269.config |   6 +-
-> > > >  board/asus/grouper/configs/tilapia.config     |   6 +-
-> > > >  board/asus/grouper/grouper-spl-max.c          |   2 +-
-> > > >  board/asus/grouper/grouper-spl-ti.c           |   2 +-
-> > > >  board/asus/grouper/grouper.c                  | 154 +-------------=
-----
-> > > >  board/asus/transformer-t30/Kconfig            |  10 --
-> > > >  .../transformer-t30/configs/tf600t.config     |   2 +-
-> > > >  .../transformer-t30/transformer-t30-spl.c     |   2 +-
-> > > >  board/asus/transformer-t30/transformer-t30.c  | 121 +-------------
-> > > >  board/htc/endeavoru/endeavoru-spl.c           |   2 +-
-> > > >  board/htc/endeavoru/endeavoru.c               |  72 +-------
-> > > >  board/lg/x3-t30/x3-t30-spl.c                  |   2 +-
-> > > >  board/lg/x3-t30/x3-t30.c                      |  97 +----------
-> > > >  configs/endeavoru_defconfig                   |   4 +
-> > > >  configs/grouper_common_defconfig              |   1 +
-> > > >  configs/transformer_t30_defconfig             |   5 +
-> > > >  configs/x3_t30_defconfig                      |   4 +
-> > > >  29 files changed, 128 insertions(+), 450 deletions(-)
-> > > >
-> > > > --
-> > > > 2.40.1
-> > > >
+@offset: Offset to read from in bytes, as a multiple of @load->bl_len
+
+but to me these both mean the same thing.
+
+--Sean
