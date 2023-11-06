@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE94C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:16:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B029EC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7892F86F91;
-	Mon,  6 Nov 2023 12:16:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E371F86C33;
+	Mon,  6 Nov 2023 12:17:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D7ljuDqm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ed/YwHgd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E62C86C33; Mon,  6 Nov 2023 12:16:44 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 49EE586FBD; Mon,  6 Nov 2023 12:16:47 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8348686F42
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:16:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 154ED86F68
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:16:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6c311ca94b4so3645531b3a.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 03:16:40 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3b3e7f56ca4so2383707b6e.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 03:16:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699269398; x=1699874198; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699269402; x=1699874202; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AqNZNjqQYhADk2f9LcxrecaAQ0zvQd04y6QhLiDYaOs=;
- b=D7ljuDqmFDJF+PQT4hgzAUbpfhvnDnX53tiJqnuidozxZaC3oclXBltv5a/9cxCPeW
- fkt8/SBESMWCUTDHmOyfxiO93FO6drAu6wG41aZSLGeL5vmuGdM8DV6vsugcVP8DWacC
- vZ2T0/13Gm98BlQMwbu6oC8Rab8nA5I+dZ/pwaYoq++liaXJe43DSYhYVymaFwrmZ8uQ
- 1tu2ZfobJ7xv1nxdWvlqIQmXiOWp6w3bJYndMJ0GlC0f0dPVZ9I6mWLPDCuDxbLv5mhR
- ACzr/Z7AwWIrGXUMq5msmjH4NwzmJVWcpMev09gY4NIkx7ZdLGLeyzvZ8J12YO262RWf
- LpxQ==
+ bh=LpkU9wk3gj829EVx8p2lHMNKkbubof1kR3KeYVvX1vo=;
+ b=Ed/YwHgdQOj18GvQzcDhIJ/B3Eh7/Uos7vfe4bJ1esnwI0buMclQthdWyNs5qQPnGA
+ aHexe4uJYHfJKLY4mX0jc9atFJGeuQGEVjbGYEhGeHbr+UqHyQXniX3n9pOhy2DMPFx8
+ ONWbdMEiVHxgvNXaKAyd+mHSUGL8x4LUMBcBL5HHxQdcvlnUh+ngWDX9NYGgXHFYEUIV
+ VCqLAszhkORO0a148JBeTwcRJN70pFZcKUki65Pj5rbRM8+e3z6ZtD9eCkTDgbIwlyBX
+ v8SUcM5yEgfvh+SEKs5V9ITiBPKNUb7qD1UTmupkXqH0QIYDzgkG4bgXUpZekBawXv/U
+ THdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699269398; x=1699874198;
+ d=1e100.net; s=20230601; t=1699269402; x=1699874202;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AqNZNjqQYhADk2f9LcxrecaAQ0zvQd04y6QhLiDYaOs=;
- b=QqNjC4s/YltwLUjlSuux5uAx1T3Qdon+J+jn8bq8i0Ie2PwI/ITLWy+qVmic4u6N/R
- QnHOiyI77hedO1p3SliBN3BCIelfVhSoBfcZ2g0OssCfmi1JQ+uAz7wi56C2zuMzaSDJ
- xx6zvCDUPmrp7n8F3SW0RM1WwUpxt8OFxBaC8XEUfrqTYISFI4wpXAxVWgeFMi2LHPYb
- yalXiBAvU2z12MFF1EyUL+Rsy+beZWFhfBy3ozFPn6iX7qC6o3xDDYe0PSDKGZceceCS
- AArIIiL4ivDOMVF+pXmI9syZhXEeUrNLACA5ehUhnhgekhIB3T2qIkLTnDADa2tPtPfb
- HZUA==
-X-Gm-Message-State: AOJu0YytytpCkjuJiDq1aGCK+HZU7uFx1zlPVcPxzo7HqMrxguPMFDSB
- Vt4LBn7Cj79q4tsvij1+1QO0xxQL9Dv43xEOhgo=
-X-Google-Smtp-Source: AGHT+IGVq+1BmHJkOvAbpCWgnjJEfKWgAOeyvtrkZk9lTlmN/v91ofK4MYx+Fr0I51kxsj4A/MORGA==
-X-Received: by 2002:a05:6a00:1143:b0:693:3851:bd3e with SMTP id
- b3-20020a056a00114300b006933851bd3emr26639258pfm.3.1699269398675; 
- Mon, 06 Nov 2023 03:16:38 -0800 (PST)
+ bh=LpkU9wk3gj829EVx8p2lHMNKkbubof1kR3KeYVvX1vo=;
+ b=Pr1lZtbkdTjtiAljvquD4Uhk/T/T4Zq21PYa+8CLXWbkYb0mxWcaMcB3L7jq93yMOF
+ DSgAv4PRaOB+4+bGKo1Ri2gi0JxxlIY+bXl5WfbHe348FddLrHTRmLoYkIFLSia8mJ81
+ q51HMw81ZTvk19dY6w4EMd5cjchxaoq22L49SuOl8IEqLgPBSIzSBqJrSwd+MkzH6h7J
+ obLa3WgrREnOVKmIOjEVGcbGUDkSJ2m9ddvt6O+KzWHEzFXIFt6GyxKiAnciW7XDR/6t
+ MtW2miT9mMHdsw7ZKtpSyN9+mjPBDXfDVy8mVPBcsjqa5Ueb4Z3IfEGa9Of1gLKYMyhz
+ +xdA==
+X-Gm-Message-State: AOJu0YzILWn4g/sEbPojUppR5RGqJBuMvEH/bx41x4hl9tpJLgCbSLTu
+ sY4IWwR69nDq6ZNMgq1WMbzZvas3EOzpcWtYgyk=
+X-Google-Smtp-Source: AGHT+IEIv2/a9IarLJJ+3cR8msojih8lX+9SS3C0Kiw264LsYwnRWS6JR5eWuzQcMIihLjPGTXKsIg==
+X-Received: by 2002:a05:6808:8f6:b0:3ae:511e:179e with SMTP id
+ d22-20020a05680808f600b003ae511e179emr28702985oic.54.1699269402466; 
+ Mon, 06 Nov 2023 03:16:42 -0800 (PST)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- n1-20020aa78a41000000b0068fbaea118esm5467580pfa.45.2023.11.06.03.16.37
+ u4-20020aa78484000000b006bd8f4e398csm5437676pfn.135.2023.11.06.03.16.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 03:16:38 -0800 (PST)
+ Mon, 06 Nov 2023 03:16:41 -0800 (PST)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -73,9 +73,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Masahisa Kojima <masahisa.kojima@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>
-Subject: [PATCH v10 1/9] net: wget: prevent overwriting reserved memory
-Date: Mon,  6 Nov 2023 20:14:56 +0900
-Message-Id: <20231106111504.3631058-2-masahisa.kojima@linaro.org>
+Subject: [PATCH v10 2/9] net: wget: add wget with dns utility function
+Date: Mon,  6 Nov 2023 20:14:57 +0900
+Message-Id: <20231106111504.3631058-3-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231106111504.3631058-1-masahisa.kojima@linaro.org>
 References: <20231106111504.3631058-1-masahisa.kojima@linaro.org>
@@ -97,169 +97,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This introduces the valid range check to store the received
-blocks using lmb. The same logic is implemented in tftp.
+Current wget takes the target uri in this format:
+ "<http server ip>:<file path>"  e.g.) 192.168.1.1:/bar
+The http server ip address must be resolved before
+calling wget.
+
+This commit adds the utility function runs wget with dhs.
+User can call wget with the uri like "http://foo/bar".
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 ---
- net/wget.c | 80 +++++++++++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 73 insertions(+), 7 deletions(-)
+ include/net.h |  9 +++++++++
+ net/wget.c    | 54 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 63 insertions(+)
 
+diff --git a/include/net.h b/include/net.h
+index e254df7d7f..57889d8b7a 100644
+--- a/include/net.h
++++ b/include/net.h
+@@ -926,4 +926,13 @@ void eth_set_enable_bootdevs(bool enable);
+ static inline void eth_set_enable_bootdevs(bool enable) {}
+ #endif
+ 
++/**
++ * wget_with_dns() - runs dns host IP address resulution before wget
++ *
++ * @dst_addr:	destination address to download the file
++ * @uri:	uri string of target file of wget
++ * Return:	downloaded file size, negative if failed
++ */
++int wget_with_dns(ulong dst_addr, char *uri);
++
+ #endif /* __NET_H__ */
 diff --git a/net/wget.c b/net/wget.c
-index 8bb4d72db1..6f97eb1d12 100644
+index 6f97eb1d12..2087146b37 100644
 --- a/net/wget.c
 +++ b/net/wget.c
-@@ -4,16 +4,20 @@
-  * Copyright Duncan Hare <dh@synoia.com> 2017
-  */
- 
-+#include <asm/global_data.h>
- #include <command.h>
- #include <common.h>
- #include <display_options.h>
- #include <env.h>
- #include <image.h>
-+#include <lmb.h>
- #include <mapmem.h>
+@@ -15,6 +15,7 @@
  #include <net.h>
  #include <net/tcp.h>
  #include <net/wget.h>
++#include <stdlib.h>
  
-+DECLARE_GLOBAL_DATA_PTR;
-+
- static const char bootfile1[] = "GET ";
- static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
- static const char http_eom[] = "\r\n\r\n";
-@@ -56,6 +60,29 @@ static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
- static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
- static int retry_len;			/* TCP retry length */
+ DECLARE_GLOBAL_DATA_PTR;
  
-+static ulong wget_load_size;
+@@ -512,3 +513,56 @@ void wget_start(void)
+ 
+ 	wget_send(TCP_SYN, 0, 0, 0);
+ }
 +
-+/**
-+ * wget_init_max_size() - initialize maximum load size
-+ *
-+ * Return:	0 if success, -1 if fails
-+ */
-+static int wget_init_load_size(void)
++#if (IS_ENABLED(CONFIG_CMD_DNS))
++int wget_with_dns(ulong dst_addr, char *uri)
 +{
-+	struct lmb lmb;
-+	phys_size_t max_size;
++	int ret;
++	char *s, *host_name, *file_name, *str_copy;
 +
-+	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
++	/*
++	 * Download file using wget.
++	 *
++	 * U-Boot wget takes the target uri in this format.
++	 *  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/sample/test.iso
++	 * Need to resolve the http server ip address before starting wget.
++	 */
++	str_copy = strdup(uri);
++	if (!str_copy)
++		return -ENOMEM;
 +
-+	max_size = lmb_get_free_size(&lmb, image_load_addr);
-+	if (!max_size)
-+		return -1;
++	s = str_copy + strlen("http://");
++	host_name = strsep(&s, "/");
++	if (!s) {
++		log_err("Error: invalied uri, no file path\n");
++		ret = -EINVAL;
++		goto out;
++	}
++	file_name = s;
 +
-+	wget_load_size = max_size;
++	/* TODO: If the given uri has ip address for the http server, skip dns */
++	net_dns_resolve = host_name;
++	net_dns_env_var = "httpserverip";
++	if (net_loop(DNS) < 0) {
++		log_err("Error: dns lookup of %s failed, check setup\n", net_dns_resolve);
++		ret = -EINVAL;
++		goto out;
++	}
++	s = env_get("httpserverip");
++	if (!s) {
++		ret = -EINVAL;
++		goto out;
++	}
 +
-+	return 0;
++	strlcpy(net_boot_file_name, s, sizeof(net_boot_file_name));
++	strlcat(net_boot_file_name, ":/", sizeof(net_boot_file_name)); /* append '/' which is removed by strsep() */
++	strlcat(net_boot_file_name, file_name, sizeof(net_boot_file_name));
++	image_load_addr = dst_addr;
++	ret = net_loop(WGET);
++
++out:
++	free(str_copy);
++
++	return ret;
 +}
-+
- /**
-  * store_block() - store block in memory
-  * @src: source of data
-@@ -64,10 +91,25 @@ static int retry_len;			/* TCP retry length */
-  */
- static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
- {
-+	ulong store_addr = image_load_addr + offset;
- 	ulong newsize = offset + len;
- 	uchar *ptr;
- 
--	ptr = map_sysmem(image_load_addr + offset, len);
-+	if (IS_ENABLED(CONFIG_LMB)) {
-+		ulong end_addr = image_load_addr + wget_load_size;
-+
-+		if (!end_addr)
-+			end_addr = ULONG_MAX;
-+
-+		if (store_addr < image_load_addr ||
-+		    store_addr + len > end_addr) {
-+			printf("\nwget error: ");
-+			printf("trying to overwrite reserved memory...\n");
-+			return -1;
-+		}
-+	}
-+
-+	ptr = map_sysmem(store_addr, len);
- 	memcpy(ptr, src, len);
- 	unmap_sysmem(ptr);
- 
-@@ -248,25 +290,39 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
- 
- 			net_boot_file_size = 0;
- 
--			if (len > hlen)
--				store_block(pkt + hlen, 0, len - hlen);
-+			if (len > hlen) {
-+				if (store_block(pkt + hlen, 0, len - hlen) != 0) {
-+					wget_loop_state = NETLOOP_FAIL;
-+					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
-+					net_set_state(NETLOOP_FAIL);
-+					return;
-+				}
-+			}
- 
- 			debug_cond(DEBUG_WGET,
- 				   "wget: Connected Pkt %p hlen %x\n",
- 				   pkt, hlen);
- 
- 			for (i = 0; i < pkt_q_idx; i++) {
-+				int err;
-+
- 				ptr1 = map_sysmem(
- 					(phys_addr_t)(pkt_q[i].pkt),
- 					pkt_q[i].len);
--				store_block(ptr1,
--					    pkt_q[i].tcp_seq_num -
--					    initial_data_seq_num,
--					    pkt_q[i].len);
-+				err = store_block(ptr1,
-+					  pkt_q[i].tcp_seq_num -
-+					  initial_data_seq_num,
-+					  pkt_q[i].len);
- 				unmap_sysmem(ptr1);
- 				debug_cond(DEBUG_WGET,
- 					   "wget: Connctd pkt Q %p len %x\n",
- 					   pkt_q[i].pkt, pkt_q[i].len);
-+				if (err) {
-+					wget_loop_state = NETLOOP_FAIL;
-+					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
-+					net_set_state(NETLOOP_FAIL);
-+					return;
-+				}
- 			}
- 		}
- 	}
-@@ -338,6 +394,7 @@ static void wget_handler(uchar *pkt, u16 dport,
- 				len) != 0) {
- 			wget_fail("wget: store error\n",
- 				  tcp_seq_num, tcp_ack_num, action);
-+			net_set_state(NETLOOP_FAIL);
- 			return;
- 		}
- 
-@@ -428,6 +485,15 @@ void wget_start(void)
- 	debug_cond(DEBUG_WGET,
- 		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
- 
-+	if (IS_ENABLED(CONFIG_LMB)) {
-+		if (wget_init_load_size()) {
-+			printf("\nwget error: ");
-+			printf("trying to overwrite reserved memory...\n");
-+			net_set_state(NETLOOP_FAIL);
-+			return;
-+		}
-+	}
-+
- 	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
- 	tcp_set_tcp_handler(wget_handler);
- 
++#endif
 -- 
 2.34.1
 
