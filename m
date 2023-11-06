@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC31BC4167D
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:38:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C83CC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:43:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E24F68701B;
-	Mon,  6 Nov 2023 21:38:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D5F028701B;
+	Mon,  6 Nov 2023 21:43:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="caEA8yZ5";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RQdn+iXG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50A9E8701D; Mon,  6 Nov 2023 21:38:57 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 1DEB08708B; Mon,  6 Nov 2023 21:43:19 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAEAD86FB4
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:38:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82AB68701B
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:43:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-540c54944c4so9823386a12.1
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:38:52 -0800 (PST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-507d1cc0538so6628245e87.2
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:43:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699303132; x=1699907932; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699303392; x=1699908192; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Nkpmv4lD98XvaFOwbLAJMYY0AYfkY2b+tjp2EdJSN1k=;
- b=caEA8yZ5X4SG4wAVbAHzRyV2M+a6PkE1OEGA9X9D3YlSZOdD6boTNU42ay5lrhO/aY
- bfJp2lZHV2+erCTJIXJRfvLnzqLYSXZMfzlIZQVnW1h89taVuKZmpj930O1iF97lGBNt
- qU2cg8PZcshB4aEMCBElbE5dN9MrwsL1ux1/M=
+ bh=cvoOMKpRIylYQoKudHwPbM15xksYg3taFhrhbLrpJEM=;
+ b=RQdn+iXGEAUSfNbzu4YtlZmFm/bTduH//oe24mV2Jd0V79qQgHXgD6P3pjSWnJEz+C
+ /RZLzJ5Sa0NGJ22NIoD6dn40v01o5HOHQpm8j3qkKq3vNu0K0bVdibgb/PcWlxQL35Xc
+ KBBW+MMBHFAgrK3xVBjFYUwWbZ97FJCOMZLGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699303132; x=1699907932;
+ d=1e100.net; s=20230601; t=1699303392; x=1699908192;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Nkpmv4lD98XvaFOwbLAJMYY0AYfkY2b+tjp2EdJSN1k=;
- b=mFadz3UFQozm6nwdNVcHDd01v/s8flLe15MXZoH8rid3Uqhb5UHXfTMEUN7gcbbPDM
- h2s+xHdvfihl2qaTFCP8Smz0HbcnpznVPa8StPLrRdTeJD3Hl0FCvMYEQO33YKhwPfvM
- Bqb0olstmqLWeTXk2yfmDUKhw9vNTQEcFZABWwoSOnqJGBXOPlx/vw0B+SDOLdpFG3Du
- Gkg17DpQERSc+afHLi3zk+kwlhaF+GiGTclfOvfG+YRC8UPDodLeK3HiTN2GfA1MlUER
- U8e2CnMtcJA+yG37qZFq7ocqW4FeDgZc1SxuCFmfak79mK+dZBF6Gfcvhvn1L3UlBMoY
- 0jqA==
-X-Gm-Message-State: AOJu0YwJu+ZwJk25KaHBJlfb8hehMftE1MD6RzpJnqmnbHqcgGoz5SsV
- V1KQX01TFE70752Nc3twImhTzV/s1AQ3HAn82QmhCbEvwFDtWeTKokM=
-X-Google-Smtp-Source: AGHT+IFGVgjEmVRr9+Ry0k42JhQGXa2XEp8qcXo9RF6sk7zmioijMtzEe6oFXqV/BYN9BMq2Szz9l65NNyL2tbIyI/8=
-X-Received: by 2002:a05:6402:138a:b0:52c:f73:3567 with SMTP id
- b10-20020a056402138a00b0052c0f733567mr536232edv.13.1699303131933; Mon, 06 Nov
- 2023 12:38:51 -0800 (PST)
+ bh=cvoOMKpRIylYQoKudHwPbM15xksYg3taFhrhbLrpJEM=;
+ b=b9qugny4v94/HR4g1yrIqq6CVYqU4EdcpQXmMNwNKwnm/VLsQlTqQKMPbz+kPElx+Y
+ 4f/c433CvRP0ZDbZkockNOA1ZXI0rfVsLp/cnDzXVnMGUJ7nlMWE63Drwb0Wa8uTfUcW
+ WSlj7p+8HJS+vwWPISH5GyfGgCg9iTdbmSHz3jdEyJ6RUvfwFV/tpfwk7oyraiviQXw1
+ CNFTAfBF5XM7hpVn0gTsuPzkXKnWr9w5EE1TsQDBUBnOxHnyleLHTvcdW6RrY+VjucO1
+ thfvMOHyWhhfyg+9L/1Irj6r4PmjeB5/RKc2Pk6yps0uDaI113wpxBJzDdjPzrQcUolm
+ g3HA==
+X-Gm-Message-State: AOJu0Yw3iE+LW8FPrzTbjaeCfB0UrsvnIJ8OJPpL6NpL6SCckkyimXqD
+ Iaj0rXWjtt5V1tcZZrunvZHwd1QyJ1/LJZkB0kyPcw==
+X-Google-Smtp-Source: AGHT+IEmgYwIYr7mZtghDqDPJYck6vLb3EE/mkMiME5RSm7VH+VnUVoCl4CqTkmCCv307Pt6amuAFMrWDF/VL8iE03M=
+X-Received: by 2002:ac2:52b4:0:b0:507:a229:f53e with SMTP id
+ r20-20020ac252b4000000b00507a229f53emr19860671lfm.24.1699303391265; Mon, 06
+ Nov 2023 12:43:11 -0800 (PST)
 MIME-Version: 1.0
-References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
- <20231101170559.680ab493@donnerap.manchester.arm.com>
- <50ff2080-5831-4963-937d-331248b59973@canonical.com>
- <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
- <20231104171212.3d041a4f@slackpad.lan>
- <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
- <20231106172601.12c36750@donnerap.manchester.arm.com>
-In-Reply-To: <20231106172601.12c36750@donnerap.manchester.arm.com>
+References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
+ <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
+ <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
+ <CAPnjgZ35bJSBE_HqVxh_fb42AYm+vYmx-oyaDQzXqcsmqFvHxA@mail.gmail.com>
+ <1b27e5f825851f6a3c0c198c0b42e50bc36f67b8.camel@physik.fu-berlin.de>
+ <CAPnjgZ1PmHzB1jYRwjDUiUAydSvS=-Q50mzDLdHROr2xA1NYWg@mail.gmail.com>
+ <60c58204161b27c044b19a657a3270e77519fafa.camel@physik.fu-berlin.de>
+In-Reply-To: <60c58204161b27c044b19a657a3270e77519fafa.camel@physik.fu-berlin.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Nov 2023 13:38:39 -0700
-Message-ID: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Anup Patel <apatel@ventanamicro.com>, 
- Xiang W <merlew4n6@gmail.com>, Chanho Park <chanho61.park@samsung.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov <avromanov@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 6 Nov 2023 13:42:59 -0700
+Message-ID: <CAPnjgZ3Xk87GOYXaUZNPE7wjDi4fGim5zZCt0H_QW=THTPJyKQ@mail.gmail.com>
+Subject: Re: Need advise with u-boot on SH-7785LCR
+To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+ Marek Vasut <marex@denx.de>, Vagrant Cascadian <vagrant@debian.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,190 +88,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
++Marek Vasut <marex@denx.de>
++Vagrant Cascadian <vagrant@debian.org>
 
-On Mon, 6 Nov 2023 at 10:26, Andre Przywara <andre.przywara@arm.com> wrote:
+
+On Mon, 6 Nov 2023 at 10:33, John Paul Adrian Glaubitz <
+glaubitz@physik.fu-berlin.de> wrote:
+
+> Hi Simon!
 >
-> On Sat, 4 Nov 2023 19:45:06 +0000
-> Simon Glass <sjg@chromium.org> wrote:
->
-> Hi,
->
-> > On Sat, 4 Nov 2023 at 17:13, Andre Przywara <andre.przywara@arm.com> wrote:
-> > >
-> > > On Fri, 3 Nov 2023 13:38:58 -0600
-> > > Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > > Hi Heinrich,
-> > > >
-> > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
-> > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > >
-> > > > > On 11/1/23 19:05, Andre Przywara wrote:
-> > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
-> > > > > > Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
-> > > > > >
-> > > > > > Hi Heinrich,
-> > > > > >
-> > > > > >> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
-> > > > > >> provides an interface to a physical entropy source.
-> > > > > >>
-> > > > > >> A RNG driver based on the seed CSR is provided. It depends on
-> > > > > >> mseccfg.sseed being set in the SBI firmware.
-> > > > > >
-> > > > > > As you might have seen, I added a similar driver for the respective Arm
-> > > > > > functionality:
-> > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
-> > > > > >
-> > > > > > And I see that you seem to use the same mechanism to probe and init the
-> > > > > > driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
-> > > > > > implemented.
-> > > > > > One downside of this approach is that the driver is always loaded (and
-> > > > > > visible in the DM tree), even with the feature not being available.
-> > > > > > That doesn't seem too much of a problem on the first glance, but it
-> > > > > > occupies a device number, and any subsequent other DM_RNG devices
-> > > > > > (like virtio-rng) typically get higher device numbers. So without
-> > > > > > the feature, but with virtio-rng, I get:
-> > > > > > VExpress64# rng 0
-> > > > > > No RNG device
-> > > >
-> > > > Why do we get this? If the device is not there, the bind() function
-> > > > can return -ENODEV
-> > > >
-> > > > I see this in U-Boot:
-> > > >
-> > > > U_BOOT_DRVINFO(cpu_arm_rndr) = {
-> > > >
-> > > > We should not use this.
-> > >
-> > > Agreed.
-> > >
-> > > > Use the devicetree.
-> > >
-> > > No, this is definitely not something for the DT, at least not on ARM.
-> > > It's perfectly discoverable via the architected CPU ID registers.
-> > > Similar to PCI and USB devices, which we don't probe via the DT as well.
-> > >
-> > > It's arguably not proper "driver" material per se, as I've argued before, but
-> > > it's the simplest solution and fits in nicely otherwise.
-> > >
-> > > I was wondering if it might be something for UCLASS_CPU, something like
-> > > a "CPU feature bus": to let devices register on one on the many CPU
-> > > features (instead of compatible strings), then only bind() those
-> > > drivers it the respective bit is set.
-> > >
-> > > Does that make sense? Would that be doable without boiling the ocean?
-> > > As I don't know if we see many users apart from this.
+> On Mon, 2023-11-06 at 10:24 -0700, Simon Glass wrote:
+> > > So, I assume, I should just be able to write u-boot.bin to
+> /dev/mtdblock0?
 > >
-> > I have seen this so many times, where people want to avoid putting
-> > things in the DT and then are surprised that everything is difficult,
-> > broken and confusing. Why not just follow the rules? It is not just
-> > about whether we can avoid it, etc. It is about how devices fit
-> > together cohesively in the system, and how U-Boot operates.
+> > Maybe, but you will likely brick the device if you have no other way
+> > to write to flash.
 >
-> A devicetree is only for peripherals *that cannot be located by probing*.
-
-I have to stop you there. It absolutely is not limited to that.
-
-> Which are traditionally most peripherals in non-server Arm SoCs. While I
-> do love the DT, the best DT node is the one you don't need.
-
-We need it in U-Boot, at least.
-
-I'll send a patch with a warning on U_BOOT_DRVINFO() as it seems that
-some people did not see the header-file comment.
-
-Let's just stop this discussion and instead talk about the binding we need.
-
+> The flash memory is actually on a daughter board that can be easily
+> replaced
+> and I have multiple of these daughter boards. It turns out that just
+> writing
+> the image to /dev/mtdblock0 works and I can boot the board into the freshly
+> flashed u-boot version.
 >
-> But as Heinrich also said: those instructions are not peripherals, they
-> are part of an instruction set extensions, the same story as with x86's
-> RDRAND instruction. We don't have those in ACPI or so as well, because
-> CPUID has you covered. The same on ARM, ID_AA64ISAR0_EL1 is readable on
-> every chip (outside of EL0), and tells you whether you have the RNDR
-> register or not. IIUC RISC-V is slightly different here, since not all ISA
-> extensions are covered by CSRs, hence some of them indeed listed in the DT.
+> However, the u-boot version 2019.01 built from git won't work while the old
+> 2014.01 version that I copied onto disk from /dev/mtdblock0 does work when
+> flashing it to a second daughter board.
 >
-> So a proper solution(TM) would be to split this up in architectural
-> *instructions* and proper TRNG *devices*, maybe wrapping this up in some
-> function that tests both. This is roughly what the kernel does, somewhat
-> abstracted by the concept of "entropy sources", which could be TRNG
-> devices, CPU instructions, interrupt jitter or even "instruction execution
-> jitter"[1], with the latter two definitely not being devices really at all.
+> So, flashing works indeed like this and I can successfully start u-boot
+> after
+> flashing it into /dev/mtdblock0. Now I just need to figure out what the
+> difference
+> between 2014.01 and 2019.01 is and why the latter doesn't work.
 >
-> But I don't know if U-Boot wants to go through the hassle of this whole
-> framework, as we tend to implement things much easier. But a simple
-> get_cpu_random() function, implemented per architecture, and with some
-> kind of success flag, should be easy enough to do. Then either the users
-> (UEFI?) explicitly call this before trying UCLASS_RNG, or we wrap this for
-> every RNG user.
+> I have uploaded both versions here:
 >
-> Cheers,
-> Andre
+> > https://people.debian.org/~glaubitz/u-boot-sh7785lcr/
 >
-> > > > > > VExpress64# rng 1
-> > > > > > 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...
-> > > > >
-> > > > >
-> > > > > Essentially in any case were you have multiple drivers for the same
-> > > > > device using uclass_get_device(, 0, ) and uclass_find_first_device()
-> > > > > will only give you the first bound device and not the first successfully
-> > > > > probed device. Furthermore neither of this functions causes probing.
-> > > > > This is not restricted to the RNG drivers but could also happen with
-> > > > > multiple TPM drivers or multiple watchdogs.
-> > > > >
-> > > > > This patch is related to the problem:
-> > > > >
-> > > > > [PATCH v1] rng: add dm_rng_read_default() helper
-> > > > > https://lore.kernel.org/u-boot/4e28a388-f5b1-4cf7-b0e3-b12a876d0567@gmx.de/T/#me44263ec9141e3ea65ee232aa9a411fc6201bd95
-> > > > >
-> > > > > We have weak function platform_get_rng_device() which should be moved to
-> > > > > drivers/rng/rng-uclass.c.
-> > > > >
-> > > > > We could add a function to drivers/core/uclass.c to retrieve the first
-> > > > > successfully probed device. Another approach would be to implement
-> > > > > uclass_driver.post_probe() in the RNG uclass to take note of the first
-> > > > > successfully probed device.
-> > > > >
-> > > > > @Simon:
-> > > > > What would make most sense from a DM design standpoint?
-> > > >
-> > > > I am sure I provided feedback on this at the time, but I don't
-> > > > remember. OK I just found it here [1]. So the problem is entirely
-> > > > because my feedback was not addressed. Please just address it and
-> > > > avoid this sort of mess.
-> > >
-> > > Yeah, Tom just merged it, but that's not Heinrich's fault ;-)
-> > >
-> > > > So arm_rndr should have a devicetree compatible string and be bound
-> > > > like anything else. If for some reason the device doesn't exist in the
-> > > > hardware, it can return -ENODEV from its bind() method.
-> > > >
-> > > > If you want to control which RNG device is used for booting, you could
-> > > > add a property to /bootstd with a phandle to the device. We are trying
-> > > > to provide a standard approach to booting in U-Boot, used by all
-> > > > methods. Doing one-off things for particular cases is best avoided.
-> > >
-> > > Picking the first usable device doesn't sound much like a one-off to me.
-> > > After all the caller (be it UEFI or the rng command) later detect that
-> > > this is not usable. So there might be some merit to cover this more
-> > > automatically, either in the caller, or by providing a suitable wrapper
-> > > function?
-> >
-> > Or just follow the existing mechanisms which have been in U-Boot for
-> > years. Please...!
-> >
-> > [..]
-> >
-> >
-> > Regards,
-> > Simon
-> >  >
-> > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20230830113230.3925868-1-andre.przywara@arm.com/
-> > >
+> Maybe someone with more experience can spot anything obvious like incorrect
+> address offsets etc.
 >
-
-Regards,
-Simon
+> PS: I'm actually called Adrian, despite the long name ;-).
+>
+> Adrian
+>
+> --
+>  .''`.  John Paul Adrian Glaubitz
+> : :' :  Debian Developer
+> `. `'   Physicist
+>   `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
+>
