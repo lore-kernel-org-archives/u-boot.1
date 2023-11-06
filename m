@@ -4,55 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C91C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 21:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9852AC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 23:41:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 064ED87016;
-	Mon,  6 Nov 2023 22:55:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D73A86BEC;
+	Tue,  7 Nov 2023 00:41:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YawQnu+l";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D659C85C98; Mon,  6 Nov 2023 22:55:10 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E903087016
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 22:55:07 +0100 (CET)
+ id E710A86F02; Tue,  7 Nov 2023 00:41:35 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9059D86A4C
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 00:41:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 39D53DA7;
- Mon,  6 Nov 2023 13:55:51 -0800 (PST)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 34FCD3F703;
- Mon,  6 Nov 2023 13:55:05 -0800 (PST)
-Date: Mon, 6 Nov 2023 21:53:52 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>, Anup Patel
- <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>, Chanho Park
- <chanho61.park@samsung.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- u-boot@lists.denx.de, Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov
- <avromanov@salutedevices.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-Message-ID: <20231106215331.0d770df8@slackpad.lan>
-In-Reply-To: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
-References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
- <20231101170559.680ab493@donnerap.manchester.arm.com>
- <50ff2080-5831-4963-937d-331248b59973@canonical.com>
- <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
- <20231104171212.3d041a4f@slackpad.lan>
- <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
- <20231106172601.12c36750@donnerap.manchester.arm.com>
- <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-53e3b8f906fso8488204a12.2
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 15:41:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699314092; x=1699918892; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zgzSkUm7lI0zR5Th4XLpKP7HNyJ9z0HTgMzeEd0cotc=;
+ b=YawQnu+l/+M452G2sFBnhhRo1Q8W5ei9XFw74yB+m+4Z9QeCy4TFyZ6HnNDL2z0Pcx
+ OZuD/U82fG/muhKlQQVb27pSbdHnErGdiyFQaCH+XAvLDlwmskcP0tTEay1+b/laZzYT
+ NKifREyCjdPgEYsF+o6p3XWsfOSC4bbTl/anuEJVV1MBSBjWbCuv46TX1X4PXk4U7k0+
+ jZh925JfX1I1cb4i8k6mV9XaRMt0Gcv6jZruZizRLxNmabPBjChc9GvHNj0flag0rqpO
+ wk1jWuQmEwLv8QgTuNdufx/5wJmZN6COP5TEhgqqFaoa+PVWPSbNsYybpOBWg8Agglmy
+ 8l1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699314092; x=1699918892;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zgzSkUm7lI0zR5Th4XLpKP7HNyJ9z0HTgMzeEd0cotc=;
+ b=NvxHryRSmVa9EGAMqCmhIfHvlcMKMkK6Li0KVxFn3RHXxxQLIxAyA3p7h4UhMSjcCX
+ w/RNhEEO1zqG0KYgPQ4YRagD6h5lzYwhBnaMt3nqMXjz3ks/Jbt6PdtWT5Tx7cOSChgo
+ M1c5uypHA8sR44BCaPgpGxu5MLi/tdIMTtvCr8XYejcHrQqvTsDpSSjmguMfcOjHjOOX
+ 1OF8lM3NPRgKxsWjE7auVvkGSbR4+RL4cpXsPAqfj+osEunnEkZD/tmowY14P64puMqx
+ a4qIhO9CcL+GufX/Cx9qnTZOAfYTmqnj+mhWGrXHdl/wsCKORF5VRcxWkfBNOItBCsRN
+ O+jw==
+X-Gm-Message-State: AOJu0YzVoEvnhfYhw240GkNYA0ewPODsgkMhYksUIYgr8+A8AnU+nqZP
+ O0C8y/cgrIsfUABNSOxJ+bOeDxc0U8Psbe3/UIE=
+X-Google-Smtp-Source: AGHT+IGRh3p/2QzbZBwBAradYGvwWO4pUmehSnqShMcDP06hTkVE68NNIyd0lf6Zfo5GIQ8YzA3XAZ2O/FzwK65co0k=
+X-Received: by 2002:aa7:d6d4:0:b0:53f:6ed5:4dab with SMTP id
+ x20-20020aa7d6d4000000b0053f6ed54dabmr25911251edr.24.1699314091830; Mon, 06
+ Nov 2023 15:41:31 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
+ <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
+ <CAJaLiFwx0j6Knthtgdy-wGDxaHYDuYEUws2LAkt05stc3f3ZBw@mail.gmail.com>
+ <CAPnjgZ1FAEDs-f01Q-RCAV=sMWq40cD5UDo9O6SbqTRazS9gQA@mail.gmail.com>
+ <CAJaLiFzsJP5u5ziHW7U5_0uqeGdr4uxHRG7kso2K-jahqLKBsg@mail.gmail.com>
+ <CAJaLiFyqr88c8L1Lg+99XnP4geebwqrdKhSV4_h9uf1Mjr94Qw@mail.gmail.com>
+ <CAPnjgZ1vxy+hYpHaCGC=g2sFOK_xPCP4N_QFvxdO4xVb-SP+FA@mail.gmail.com>
+ <CAJaLiFzLFOH08CGRt5QY4-keSuO=947_gF1meyRiMWz5H0gcyg@mail.gmail.com>
+ <20231106195057.GD496310@bill-the-cat>
+ <CAJaLiFwRQAX1GJ=JDLS=F=kz=PF-b+9wLBRxG40JhvjzVP+9Ug@mail.gmail.com>
+In-Reply-To: <CAJaLiFwRQAX1GJ=JDLS=F=kz=PF-b+9wLBRxG40JhvjzVP+9Ug@mail.gmail.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 6 Nov 2023 15:41:19 -0800
+Message-ID: <CAJaLiFzyz+C7xUK_e=V=qvVqzL0SZvXRPf9QY=O5dO9335NfVA@mail.gmail.com>
+Subject: Re: bootstd: Scanning for USB bootflow will remove existing SCSI
+ bootflow
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,219 +96,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 6 Nov 2023 13:38:39 -0700
-Simon Glass <sjg@chromium.org> wrote:
-
 Hi Simon,
 
-> On Mon, 6 Nov 2023 at 10:26, Andre Przywara <andre.przywara@arm.com> wrote:
+On Mon, Nov 6, 2023 at 12:51=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrote=
+:
+>
+> On Mon, Nov 6, 2023 at 11:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
+te:
 > >
-> > On Sat, 4 Nov 2023 19:45:06 +0000
-> > Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi,
-> >  
-> > > On Sat, 4 Nov 2023 at 17:13, Andre Przywara <andre.przywara@arm.com> wrote:  
+> > On Mon, Nov 06, 2023 at 11:42:51AM -0800, Tony Dinh wrote:
+> > > Hi Simon,
+> > >
+> > > On Mon, Nov 6, 2023 at 9:25=E2=80=AFAM Simon Glass <sjg@chromium.org>=
+ wrote:
 > > > >
-> > > > On Fri, 3 Nov 2023 13:38:58 -0600
-> > > > Simon Glass <sjg@chromium.org> wrote:
+> > > > Hi Tony,
 > > > >
-> > > > Hi Simon,
-> > > >  
-> > > > > Hi Heinrich,
+> > > > On Wed, 4 Oct 2023 at 21:23, Tony Dinh <mibodhi@gmail.com> wrote:
 > > > > >
-> > > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
-> > > > > <heinrich.schuchardt@canonical.com> wrote:  
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Mon, Oct 2, 2023 at 12:25=E2=80=AFPM Tony Dinh <mibodhi@gmail.=
+com> wrote:
 > > > > > >
-> > > > > > On 11/1/23 19:05, Andre Przywara wrote:  
-> > > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
-> > > > > > > Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On Sun, Oct 1, 2023 at 6:22=E2=80=AFPM Simon Glass <sjg@chromiu=
+m.org> wrote:
 > > > > > > >
-> > > > > > > Hi Heinrich,
-> > > > > > >  
-> > > > > > >> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
-> > > > > > >> provides an interface to a physical entropy source.
-> > > > > > >>
-> > > > > > >> A RNG driver based on the seed CSR is provided. It depends on
-> > > > > > >> mseccfg.sseed being set in the SBI firmware.  
+> > > > > > > Hi Tony,
 > > > > > > >
-> > > > > > > As you might have seen, I added a similar driver for the respective Arm
-> > > > > > > functionality:
-> > > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
+> > > > > > > On Tue, 26 Sept 2023 at 13:40, Tony Dinh <mibodhi@gmail.com> =
+wrote:
+> > > > > > > >
+> > > > > > > > Hi Simon,
+> > > > > > > >
+> > > > > > > > On Tue, Sep 26, 2023 at 4:37=E2=80=AFAM Simon Glass <sjg@ch=
+romium.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi Tony,
+> > > > > > > > >
+> > > > > > > > > On Mon, 25 Sept 2023 at 14:02, Tony Dinh <mibodhi@gmail.c=
+om> wrote:
+> > > > > > > > > >
+> > > > > > > > > > Hi Simon,
+> > > > > > > > > >
+> > > > > > > > > > Here is an observation during testing the bootflow comm=
+and.
+> > > > > > > > > >
+> > > > > > > > > > If there is a SCSI bootflow, scanning for USB bootflow =
+will remove that existing
+> > > > > > > > > > SCSI bootflow. To bring it back, I scanned for SCSI boo=
+tflow again, and it was
+> > > > > > > > > > back to normal. Perhaps there is some kind of indexing =
+problem?
+> > > > > > > > >
+> > > > > > > > > Yes that's right. The 'botflow scan' command is not addit=
+ive. The
+> > > > > > > > > first thing it does is removing existing bootflows.
+> > > > > > > >
+> > > > > > > > Thanks for clarifying that. I assumed it is additive, becau=
+se the
+> > > > > > > > existing USB bootflow was not removed when I did a "bootflo=
+w scan
+> > > > > > > > scsi" immediately after (see the end of the log).
 > > > > > > >
-> > > > > > > And I see that you seem to use the same mechanism to probe and init the
-> > > > > > > driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
-> > > > > > > implemented.
-> > > > > > > One downside of this approach is that the driver is always loaded (and
-> > > > > > > visible in the DM tree), even with the feature not being available.
-> > > > > > > That doesn't seem too much of a problem on the first glance, but it
-> > > > > > > occupies a device number, and any subsequent other DM_RNG devices
-> > > > > > > (like virtio-rng) typically get higher device numbers. So without
-> > > > > > > the feature, but with virtio-rng, I get:
-> > > > > > > VExpress64# rng 0
-> > > > > > > No RNG device  
+> > > > > > > Yes, but I'm not sure what is going on there. Perhaps it is a=
+ bug?
+> > > > > > > When you scan SCSI it should not also scan USB.
+> > > > > >
+> > > > > > Yes, it looks like a bug. I think I can see the problem and am =
+working
+> > > > > > on a patch.
 > > > > >
-> > > > > Why do we get this? If the device is not there, the bind() function
-> > > > > can return -ENODEV
-> > > > >
-> > > > > I see this in U-Boot:
-> > > > >
-> > > > > U_BOOT_DRVINFO(cpu_arm_rndr) = {
-> > > > >
-> > > > > We should not use this.  
+> > > > > Just to let you know, I'm out of time to work on this topic. I wi=
+ll
+> > > > > revisit it some other time, if you have not already tracked it do=
+wn.
 > > > >
-> > > > Agreed.
-> > > >  
-> > > > > Use the devicetree.  
-> > > >
-> > > > No, this is definitely not something for the DT, at least not on ARM.
-> > > > It's perfectly discoverable via the architected CPU ID registers.
-> > > > Similar to PCI and USB devices, which we don't probe via the DT as well.
-> > > >
-> > > > It's arguably not proper "driver" material per se, as I've argued before, but
-> > > > it's the simplest solution and fits in nicely otherwise.
-> > > >
-> > > > I was wondering if it might be something for UCLASS_CPU, something like
-> > > > a "CPU feature bus": to let devices register on one on the many CPU
-> > > > features (instead of compatible strings), then only bind() those
-> > > > drivers it the respective bit is set.
-> > > >
-> > > > Does that make sense? Would that be doable without boiling the ocean?
-> > > > As I don't know if we see many users apart from this.  
+> > > > If you are able to use 'bootflow scan -l' in each case, then I migh=
+t
+> > > > be able to see what it is scanning USB, when you are asking for SCS=
+I.
+> > > > I also wonder if this bug may have been fixed due to other changes?
 > > >
-> > > I have seen this so many times, where people want to avoid putting
-> > > things in the DT and then are surprised that everything is difficult,
-> > > broken and confusing. Why not just follow the rules? It is not just
-> > > about whether we can avoid it, etc. It is about how devices fit
-> > > together cohesively in the system, and how U-Boot operates.  
+> > > I'm wondering about that, too. I will rerun the test with the master
+> > > branch with debug trace. If we cannot see it, I'll do it again when
+> > > other bootstd patches are merged. Right now I am not sure which of
+> > > your bootstd patches I should apply to the tree for testing, do you
+> > > have a list for that?
 > >
-> > A devicetree is only for peripherals *that cannot be located by probing*.  
-> 
-> I have to stop you there. It absolutely is not limited to that.
+> > Right now the only outstanding bootstd patch I know of is your recent
+> > one, as I was waiting for Simon's review (which he did today) before
+> > merging and applying.
+>
+> Thanks Tom! I'll run the test in my tree as is then.
 
-I am very sorry, but I - (and seemingly everyone else in the kernel DT
-community?) - seem to disagree here.
+The good news: apparently one of your recent bootstd patches has fixed
+this problem! I think your bootstd mmc scanning patch is probably
+where it was fixed.
 
-> > Which are traditionally most peripherals in non-server Arm SoCs. While I
-> > do love the DT, the best DT node is the one you don't need.  
-> 
-> We need it in U-Boot, at least.
-> 
-> I'll send a patch with a warning on U_BOOT_DRVINFO() as it seems that
-> some people did not see the header-file comment.
+I tested with rc2 plus my recent patch (not yet merged to master) in the tr=
+ee:
+https://patchwork.ozlabs.org/project/uboot/patch/20231102185116.21708-1-mib=
+odhi@gmail.com/
 
-Fair enough.
+For future reference, I've included the log here after the break.
 
-> Let's just stop this discussion and instead talk about the binding we need.
+All the best,
+Tony
 
-Alright, if that is your decision, I will send a patch to revert
-that "driver". There will never be a binding for a CPU instruction
-discoverable by the architected CPU ID register.
-I had some gripes with that "driver" in the first place, but it was so
-temptingly simple and fit in so nicely, for instance into the UEFI
-entropy service without even touching that code, that I couldn't resist
-to just try it. And it actually solved a nasty problem for us, where
-the kernel boot was stuck for minutes waiting for enough entropy to ...
-let a script create a random filename ;-)
-But we also have virtio-rng, so are not limited to the instructions.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+<BEGIN LOG>
 
-But well, I guess I will just bite the bullet and go along the proper
-route and create some RNG instruction abstraction, as sketched in that
-other email.
+U-Boot 2024.01-rc2-tld-1-00002-g148117d278 (Nov 06 2023 - 13:36:33 -0800)
+Thecus N2350
 
-Cheers,
-Andre
+SoC:   MV88F6820-A0 at 1066 MHz
+DRAM:  1 GiB (533 MHz, 32-bit, ECC not enabled)
+Core:  65 devices, 23 uclasses, devicetree: separate
+NAND:  512 MiB
+MMC:
+Loading Environment from SPIFlash... SF: Detected mx25l3205d with page
+size 256 Bytes, erase size 4 KiB, total 4 MiB
+*** Warning - bad CRC, using default environment
 
+Model: Thecus N2350
+Net:
+Warning: ethernet@70000 (eth0) using random MAC address - 2e:49:f0:ba:d8:b8
+eth0: ethernet@70000
+Hit any key to stop autoboot:  0
+N2350 > setenv def -a
+N2350 > bootdev l
+Seq  Probed  Status  Uclass    Name
+---  ------  ------  --------  ------------------
+  0   [   ]      OK  ethernet  ethernet@70000.bootdev
+---  ------  ------  --------  ------------------
+(1 bootdev)
 
-> 
-> >
-> > But as Heinrich also said: those instructions are not peripherals, they
-> > are part of an instruction set extensions, the same story as with x86's
-> > RDRAND instruction. We don't have those in ACPI or so as well, because
-> > CPUID has you covered. The same on ARM, ID_AA64ISAR0_EL1 is readable on
-> > every chip (outside of EL0), and tells you whether you have the RNDR
-> > register or not. IIUC RISC-V is slightly different here, since not all ISA
-> > extensions are covered by CSRs, hence some of them indeed listed in the DT.
-> >
-> > So a proper solution(TM) would be to split this up in architectural
-> > *instructions* and proper TRNG *devices*, maybe wrapping this up in some
-> > function that tests both. This is roughly what the kernel does, somewhat
-> > abstracted by the concept of "entropy sources", which could be TRNG
-> > devices, CPU instructions, interrupt jitter or even "instruction execution
-> > jitter"[1], with the latter two definitely not being devices really at all.
-> >
-> > But I don't know if U-Boot wants to go through the hassle of this whole
-> > framework, as we tend to implement things much easier. But a simple
-> > get_cpu_random() function, implemented per architecture, and with some
-> > kind of success flag, should be easy enough to do. Then either the users
-> > (UEFI?) explicitly call this before trying UCLASS_RNG, or we wrap this for
-> > every RNG user.
-> >
-> > Cheers,
-> > Andre
-> >  
-> > > > > > > VExpress64# rng 1
-> > > > > > > 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...  
-> > > > > >
-> > > > > >
-> > > > > > Essentially in any case were you have multiple drivers for the same
-> > > > > > device using uclass_get_device(, 0, ) and uclass_find_first_device()
-> > > > > > will only give you the first bound device and not the first successfully
-> > > > > > probed device. Furthermore neither of this functions causes probing.
-> > > > > > This is not restricted to the RNG drivers but could also happen with
-> > > > > > multiple TPM drivers or multiple watchdogs.
-> > > > > >
-> > > > > > This patch is related to the problem:
-> > > > > >
-> > > > > > [PATCH v1] rng: add dm_rng_read_default() helper
-> > > > > > https://lore.kernel.org/u-boot/4e28a388-f5b1-4cf7-b0e3-b12a876d0567@gmx.de/T/#me44263ec9141e3ea65ee232aa9a411fc6201bd95
-> > > > > >
-> > > > > > We have weak function platform_get_rng_device() which should be moved to
-> > > > > > drivers/rng/rng-uclass.c.
-> > > > > >
-> > > > > > We could add a function to drivers/core/uclass.c to retrieve the first
-> > > > > > successfully probed device. Another approach would be to implement
-> > > > > > uclass_driver.post_probe() in the RNG uclass to take note of the first
-> > > > > > successfully probed device.
-> > > > > >
-> > > > > > @Simon:
-> > > > > > What would make most sense from a DM design standpoint?  
-> > > > >
-> > > > > I am sure I provided feedback on this at the time, but I don't
-> > > > > remember. OK I just found it here [1]. So the problem is entirely
-> > > > > because my feedback was not addressed. Please just address it and
-> > > > > avoid this sort of mess.  
-> > > >
-> > > > Yeah, Tom just merged it, but that's not Heinrich's fault ;-)
-> > > >  
-> > > > > So arm_rndr should have a devicetree compatible string and be bound
-> > > > > like anything else. If for some reason the device doesn't exist in the
-> > > > > hardware, it can return -ENODEV from its bind() method.
-> > > > >
-> > > > > If you want to control which RNG device is used for booting, you could
-> > > > > add a property to /bootstd with a phandle to the device. We are trying
-> > > > > to provide a standard approach to booting in U-Boot, used by all
-> > > > > methods. Doing one-off things for particular cases is best avoided.  
-> > > >
-> > > > Picking the first usable device doesn't sound much like a one-off to me.
-> > > > After all the caller (be it UEFI or the rng command) later detect that
-> > > > this is not usable. So there might be some merit to cover this more
-> > > > automatically, either in the caller, or by providing a suitable wrapper
-> > > > function?  
-> > >
-> > > Or just follow the existing mechanisms which have been in U-Boot for
-> > > years. Please...!
-> > >
-> > > [..]
-> > >
-> > >
-> > > Regards,
-> > > Simon  
-> > >  >  
-> > > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20230830113230.3925868-1-andre.przywara@arm.com/  
-> > > >  
-> >  
-> 
-> Regards,
-> Simon
+N2350 > bootflow scan usb
+Bus usb@58000: USB EHCI 1.00
+Bus usb3@f0000: MVEBU XHCI INIT controller @ 0xf10f4000
+Register 2000120 NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+Bus usb3@f8000: MVEBU XHCI INIT controller @ 0xf10fc000
+Register 2000120 NbrPorts 2
+Starting the controller
+USB XHCI 1.00
+scanning bus usb@58000 for devices... 1 USB Device(s) found
+scanning bus usb3@f0000 for devices... 1 USB Device(s) found
+scanning bus usb3@f8000 for devices... 2 USB Device(s) found
+** File not found /boot/boot.bmp **
 
+N2350 > bootflow l
+Showing all bootflows
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------
+----------------
+  0  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
+/boot/boot.scr
+---  -----------  ------  --------  ----  ------------------------
+----------------
+(1 bootflow, 1 valid)
+
+N2350 > bootflow scan scsi
+pcie0.0: Link down
+pcie1.0: Link down
+scanning bus for devices...
+SATA link 0 timeout.
+Target spinup took 0 ms.
+AHCI 0001.0000 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
+flags: 64bit ncq led only pmp fbss pio slum part sxs
+  Device 0: (1:0) Vendor: ATA Prod.: ST750LX003-1AC15 Rev: SM12
+            Type: Hard Disk
+            Capacity: 715404.8 MB =3D 698.6 GB (1465149168 x 512)
+** File not found /boot/boot.bmp **
+
+N2350 > bootflow l
+Showing all bootflows
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------
+----------------
+  0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
+/boot/boot.scr
+---  -----------  ------  --------  ----  ------------------------
+----------------
+(1 bootflow, 1 valid)
+
+N2350 > bootflow scan usb
+** File not found /boot/boot.bmp **
+N2350 > bootflow l
+Showing all bootflows
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------
+----------------
+  0  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
+/boot/boot.scr
+---  -----------  ------  --------  ----  ------------------------
+----------------
+(1 bootflow, 1 valid)
+
+N2350 > bootflow scan scsi
+** File not found /boot/boot.bmp **
+N2350 > bootflow l
+Showing all bootflows
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------
+----------------
+  0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
+/boot/boot.scr
+---  -----------  ------  --------  ----  ------------------------
+----------------
+(1 bootflow, 1 valid)
+N2350 >
+N2350 > bootflow scan usb
+** File not found /boot/boot.bmp **
+N2350 > bootflow l
+Showing all bootflows
+Seq  Method       State   Uclass    Part  Name                      Filenam=
+e
+---  -----------  ------  --------  ----  ------------------------
+----------------
+  0  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
+/boot/boot.scr
+---  -----------  ------  --------  ----  ------------------------
+----------------
+(1 bootflow, 1 valid)
+
+<END LOG>
