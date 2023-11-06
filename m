@@ -4,59 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF8AC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 07:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 963B2C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:15:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 929B786EF6;
-	Mon,  6 Nov 2023 08:49:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2C61D86EF2;
+	Mon,  6 Nov 2023 09:15:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Qo0d2xGJ";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Ha9JAXH7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBF6286F68; Mon,  6 Nov 2023 08:49:16 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4604886EBA; Mon,  6 Nov 2023 09:15:43 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2070c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7d00::70c])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84C1686E82
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 08:49:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E60386E05
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 09:15:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pali@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 02AABB80D88;
- Mon,  6 Nov 2023 07:49:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 086C7C433C7;
- Mon,  6 Nov 2023 07:49:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699256949;
- bh=+fSPCXz02vgWzJ7+w8IEw4Ilonz4pdBYmflPChdXM9U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Qo0d2xGJCv3Eda+5rP/7t7s6sxEf0uT81L9mKQh9hZUVUwGEsf65+ktFBt49rnBOA
- CFhPjHMEjKca4JZrkU+7k0tnGz8ZpWqJznQ0ULX88wSVjIis8B1fySNmPxCEUtf1wC
- fW4ExP4mCjAd1rFfx/dJX05xkyYQtj/73cJfP/Ezdx7fg7FpQPlCK/Sta1cpRWgZFr
- P/MAax6v/Gg0LwZynI1RWv4U/esOdPvavqDtm/04C8PLtVaC3XUI5UmpqT5zEa4VMV
- sysOe4i4af6/xOC4ltt45GOvebpM+F3TSYcJtbIRvair1KhY/7KIXlTBpGwkhZLQHx
- naK0LpNT8NSTQ==
-Received: by pali.im (Postfix)
- id 1457A802; Mon,  6 Nov 2023 08:49:06 +0100 (CET)
-Date: Mon, 6 Nov 2023 08:49:05 +0100
-From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek =?utf-8?B?QmVow7pu?= <marek.behun@nic.cz>,
- Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v6 00/25] spl: Use common function for loading/parsing
- images
-Message-ID: <20231106074905.pgrdj6zhsgy66a2e@pali>
-References: <20231106022603.3405551-1-seanga2@gmail.com>
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JCJx/ti61Ad8lW98bD0FwEMz41hHPwDucj3uytuORQ7Oj3OaKjdCMih9RQs3kS3q8VgA/rvvKx5DKtjiCInO4q51WIFBe8cxT9FB303rHgs2nkzy7g/LXV+1abGSZMLzmPAnMuRutk5y2BOU4bntz5GVEg7PkxBIrZkZU52nfyN7izvKK5cfrZDyqz1KCffH3THfSGePtyrFMmme1jR3SlhXfZwu43bSvadpGMIlQw5Raq5W68wnBjR4gds5X729woMuWqKaN6be2ZAy1Rev6ywNUzKtnxoNNAwZm04EaU8oZ0XBrRTFi8ZI8cP1l9pkKOOmQ8hFn1faUrM73I8Xog==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vH+b+f/3ssmnRs22+XEDIWmQ1zXFiHZvfsYazIrVP80=;
+ b=ekMs76dYqSXJL3h5iiSqwvUe0qveok/2tDCxpjF0zsaLeOPp1QU6o47K7qAJu4xCy12DvadN3OnJXGLq1hSMk3E8JSM0zEA0kW5pylluVRbmadBA0m/Zmk/Kpv9kAarG1VzMZVgDzgKFcdaj9gfnsj1K/qGAj27wGCGTSJVtVDTFmN1lri6Wlkbj8bmbaGudQ3Y0Axpr9KwBQf2q2WpD/hsHRGI5qRtGHFR8RiilLhkWo0WkaTomOv80AD3wWtaxxHbz1bWj4kILnNOz/DAbJMNx+9fLTcxO0d6hjuNQb8M7Vp6JgP8SaXWWTeAEMasFvQIYZdoaDEoueqSjk5pa6Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vH+b+f/3ssmnRs22+XEDIWmQ1zXFiHZvfsYazIrVP80=;
+ b=Ha9JAXH7T93gTWlj40juJX1zUe3g+YGwYLUI+c4awvrO9vWylfoS57OQwPIRJT8xewH9IA6uzxhxYoVx4W0zzpynVSy2e3hi4LNtHzdTmJN27S0AHhnbb3kBF3q/7Wi3c27rk1Mkw1nDwu2GYPllIoh+x1oSdrcNV/7p4Dr2H1Q=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by GV1PR10MB6683.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:85::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28; Mon, 6 Nov
+ 2023 08:15:37 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::3d76:c11a:5c3f:3245]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::3d76:c11a:5c3f:3245%5]) with mapi id 15.20.6954.027; Mon, 6 Nov 2023
+ 08:15:36 +0000
+Message-ID: <a5dee47d-409b-49ad-b0f2-f8d49669958d@prevas.dk>
+Date: Mon, 6 Nov 2023 09:15:34 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] mkimage: also honour -B even without external data
+Content-Language: en-US, da
+To: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
+ <20230919113705.109639-2-rasmus.villemoes@prevas.dk>
+ <6ac71b7e-d84e-10d5-e500-0d54e5d6c191@gmail.com>
+ <3fd4d611-891a-fc3d-7385-c2d621cf2eac@prevas.dk>
+ <8d3ef056-1d72-727f-f158-f034c34d5786@gmail.com>
+ <CAPnjgZ1kFjsZ96fkOu9KgOMiSG8W_YcO7ERJcRtdD1OOkPYY5A@mail.gmail.com>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <CAPnjgZ1kFjsZ96fkOu9KgOMiSG8W_YcO7ERJcRtdD1OOkPYY5A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM0PR02CA0134.eurprd02.prod.outlook.com
+ (2603:10a6:20b:28c::31) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
-User-Agent: NeoMutt/20180716
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|GV1PR10MB6683:EE_
+X-MS-Office365-Filtering-Correlation-Id: abf4a731-fe08-4351-ed67-08dbdea08e47
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: aQkKEzTFkNNDf2RaoiA/sXC5e9o2YFuCcZdUwSkj3oDlDwFuxYWnxeV8OdXUfkVInlG7LD26siKAeqMs85EbJbW71G9vDifuXirsunpYmoqdtM9zkUgQBDZhXS+BK7xkwY5excFBRrYfI3jVw/sFa+psucQxy+ZnkZW/nO5KfPmgqWXjBxoPcwv6gIjZm8xX6E7DcUwOzn9L2fE8BO6V+1pei+ebnIviFQEvqEZ39r81RNhbRmnzmyto0lmb3btgf+SKb553d6ukUSz9NQaIp9g0iy9odfm+owKUQvYgBWaIVunZH6mpvXulE9Wrq/e2ZOgqy+FKzps42qyN6laTRYKiaztAV3ICdjiRt+/slFwHdJtedM5Vbokv59JuhMACNUTRqDsbGxt2HT5hc2z9+p4W/Jk41q6+9stN0l01qFlUHhjujKMkpUHCLvfE1HkA1PucG0jMaw3Pe8/Fmnza6mpDKn44HaJZV3w/s7jvONu6EklZ/nO8n0+Ea3dltmNe8fSc3w26HXo62GOAW07bskHT4Kuap9KKpUWjWwuzVEKct/xerrlNT3w05hUY309jY6cPmR1+hNwyDji3ue6nCcdenw3X+8qtEzwEPQjSNNfnK1flFMqZG62kcwGQKjVXgwLnW3fRWu3Dj3ev2COXXQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(396003)(366004)(136003)(39850400004)(346002)(230922051799003)(186009)(1800799009)(451199024)(64100799003)(31686004)(2616005)(6512007)(6486002)(6506007)(478600001)(2906002)(38100700002)(36756003)(86362001)(558084003)(31696002)(5660300002)(41300700001)(66476007)(54906003)(66556008)(66946007)(26005)(44832011)(110136005)(316002)(8936002)(4326008)(8976002)(8676002)(43740500002)(45980500001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YTgwaWxqcm1CTmlQcHY4NEY1cm1kbDdnTFdkdkRWM2doMjBxUHFWRy9nRXZX?=
+ =?utf-8?B?Z1NSRko3YlRsVnBZdW45czc2NUNWZ2FFbDNvUWJGUGo0SWtnbGtRSlRPWHVK?=
+ =?utf-8?B?UFRsY1dEcUlhTG13OUJLSFMwOFhad0YxMHplakdYejJiemU5TFk1UWIvdEQz?=
+ =?utf-8?B?djMrb3RQY1FsR1FmdW8zOGtiem9rYjRLSWp6aFV3Q2MwMGVTSzkrMFdOVm56?=
+ =?utf-8?B?QUJ0SUVPWkNlVXp6bDJ4WU9YUURKSlUvbGFhTXlCKy9PQ00vOVNHaDFmUzFI?=
+ =?utf-8?B?bE42MXdkam1lVklReHcyNHZwTnhzOHJPNVdDQUlCOWg2bGRaQUIwRFhmQTVL?=
+ =?utf-8?B?VmtxNjFVL1lEdXNIaGRmMEQ2OVdHZlpuT2xudGV5YVpzSnQ4YjdOUWlsT3Zz?=
+ =?utf-8?B?UU5ITGl5T0t2ejZIU2k0N2xGbHhKNFhrejlxRXA4ZlZUL0xhcW1OTWFDV2Zq?=
+ =?utf-8?B?WlgwbjVpemFwa2Y3OFpHZ2MzazVtWFgvWDBlK2kxSTFPdXRlbWdDKzh5Z1ZZ?=
+ =?utf-8?B?YXNYVVowMStkTElGVmFjZzFGNUdCVHRNK2JlbWd1alFYZEVibmk1UTBlU0dG?=
+ =?utf-8?B?WXVZV3ZsYTNuV0hUTUtTQ254RWNRM01VUWNDWlRhaEQySS9lZHZjc0dLN0FJ?=
+ =?utf-8?B?SFlLTzVlUHptZGdhUE9KWmQ0QkJIdVlNOVJYMGJodG5Jb09UeG9WTEJ6TGdw?=
+ =?utf-8?B?azY3QUI3QzE3SCs3bng5QmlRQW5DRjNvM2FrRU9IQ2Y5S2VIL3lkaUxkMHlU?=
+ =?utf-8?B?QXBDa2JkcnNzRDg2Z3piUm1LbFFBT1lxMUdDRjQzR3FxblgzeGNwdDhBUlYr?=
+ =?utf-8?B?SmxHVmN3Q25FNmFzOTJwSldxVzYwMW9sOVd1QTBzWmVWS0NVSzVQUi8rN1Bo?=
+ =?utf-8?B?TjdmbjBSZHFEOHMwQ1RsZlJSWWt1VE4zZkNWK1d1eU5HVHhRUlM0SHp5bkNx?=
+ =?utf-8?B?WXVST0Rza3ArZzI4eVdZOE1JSkNZU2RwRFdxSVBNcTExa2cwaEkvOGZ2MzU2?=
+ =?utf-8?B?TUV3VUN2aFpxMG1SVklGZXVMdXB5SWpwWmNYbEY1dVVvWUpDK0ZoQTB4QjZv?=
+ =?utf-8?B?NmZpdURVWjVobUxQTXRTQm50M2kyT3dDNkp1bDQrd0FSb1JBc3M0VENxR29W?=
+ =?utf-8?B?aXNDSWVLRjEvTjBkazc2WUtxeVlGQUdDOEZGQU5TRTQ0eDY2cG5HR1I4YjN3?=
+ =?utf-8?B?RW9tSlltWjRxc1lNaFFHYVlWWjZLMjZXcDhVSGswNkpXL2R3WWRZa1ZzaVlU?=
+ =?utf-8?B?ckZSb3lEME5IcmRsVWUvM0lLYVp1dHJvSEJMdDVlckg1TUZsSjB3akRnUFlR?=
+ =?utf-8?B?WkJCdDZxa0NqZVlMWk9MeXV5MElkRGU3YmpxenVSM2VOTlBReVZDc2xOZFVP?=
+ =?utf-8?B?dUt2RmFQY3B6WExFNWZTZ2FkMVJSUXFtakVpZmJpOHF2b2YwQmpuWG9DYnMx?=
+ =?utf-8?B?aTIrb3RrYXJ6YUNYc0t1R2FKK21OQzJQSnN3aEYwYldBNEo3dWo1eUJyV1lz?=
+ =?utf-8?B?RzNsWW91cFNrSUF3VkZPZzhuY3VVcXZJRWdJbERZNTUrMVBXcXp4Vi95a2pm?=
+ =?utf-8?B?VnlRTDNleUIycEM4NUlnL3oxcUtYVC9ZOWRINWdrSlpibmRraFNhRHBqRjl0?=
+ =?utf-8?B?MlhTbmMyV0l3TFh4MUV3M1VBMW5UcklSRXFKakppT0p6REdQdG1kZ1pENHNL?=
+ =?utf-8?B?dGpSNU5zZVowaGRzcGhISHQ2VXNURHhrRXZoTnN0K1dYbnFFdjJTZVZrQzlG?=
+ =?utf-8?B?blNteUVPSk5GMTlFOFBGaklWVWdIaGI0cnQrUWN5SWdMOWRMeTl5aS93YVEy?=
+ =?utf-8?B?ODRXclRZSHJsZ29ZYzBTZlFqb2dJcGt3SFZUL29mNE4wK2k1cVk3Z1ljSUNy?=
+ =?utf-8?B?ekFGa0Q2SkNVdVplWXBEYXU1ZDk4WmFsV0FKWlA5SFJsRGYwVVNpVVVkVnQv?=
+ =?utf-8?B?akFqbWxjdXl5eGxCQlJkRkJnRlQ0aDlQb1FoT1dzdEtISnNEUjZPWDRVSFFk?=
+ =?utf-8?B?VWxXMVVQTTlSbDRXYlJKNFhrVDE5cU1kNnlwRFBJajJFYkxRTVQ5YkphWTBV?=
+ =?utf-8?B?V0U5c1BFdS9YeFA4YmhKZlJRL2ZMZUJoRlZVUm1LeUlYNjFDYzNRUStzV3dk?=
+ =?utf-8?B?SUR0WGo4Z1FNWTBRQ1duRU1vNzZreWFUc3h4MkQ3YW9xMktsTWVVMXh6MXAy?=
+ =?utf-8?B?YkE9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: abf4a731-fe08-4351-ed67-08dbdea08e47
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2023 08:15:36.8209 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: b79WMKQk6UBmoz0IpmSu4LuJMR8OKbFj3i6FXg4pvTAVXafcfl3WnG5DllfHLbawjwjU2unTxeGsxX8M451FpdQF7VJ1T9QryPWkClkaJw4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB6683
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,178 +149,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-What you are doing is the worst thing in the world. You have been
-ignoring all my changes which I have been sending for one year, then you
-wrote me that I'm not competent to do any kind of programming, later you
-wrote that you would ignore all my requests and stop responding to any
-questions, then you have removed all my code from u-boot and showed me
-as the worst person in the world.
+On 04/11/2023 20.43, Simon Glass wrote:
+> Hi Rasmus,
 
-But seems that this is not enough for you. You have to continue
-attacking on me, and making everything even worse.
+> Are you planning a new version of this series?
 
-WHAT YOU WANT FROM ME NOW???? WHY YOU ARE CONTACTING ME??? IS NOT IT
-ENOUGH WHAT YOU HAVE TO ME?? Or you do think that I forgot what you have
-been doing with me last years? Speak up!
+No. AFAICT there's nothing to be done on my end.
 
-On Sunday 05 November 2023 21:25:38 Sean Anderson wrote:
-> This series adds support for loading all image types (Legacy (with and without
-> LZMA), FIT (with and without LOAD_FIT_FULL), and i.MX) to the MMC, SPI, NOR,
-> NET, FAT, EXT, NVMe, and semihosting load methods. It does this by introducing a
-> helper function which handles the minutiae of invoking the proper parsing
-> function, and reading the rest of the image.
-> 
-> Hopefully, this will make it easier for load methods to support all image types
-> that U-Boot supports, without having undocumented unsupported image types. I
-> applied this to several loaders which were invoking spl_load_simple_fit and/or
-> spl_parse_image_header, but I did not use it with others (e.g. DFU/RAM) which
-> had complications in the mix.
-> 
-> This series is organized roughly into two parts. Patches up to "spl: Add generic
-> spl_load function" are all setup or size-reduction oriented. Later patches
-> generally convert various load functions to spl_load.
-> 
-> bloat-o-meter results (for CONFIG_SPL only) at [1]. Size growth has been the
-> bigegst challenge to preparing this series. I have used every trick I can think
-> of to reduce bloat. Some SAMA boards no longer fit, but I have a plan to fix
-> them [2].
-> 
-> This is bar far the largest and most-difficult revision of this series to-date.
-> There are probably still things which can reduce the size, but I have been
-> working on this series for the better part of two months and I think it is a
-> good idea to get some feedback. Because of the SAMA bloat, this series will not
-> pass CI, so I expect to do a v7 before this is ready to apply. Feel free,
-> however, to apply patches in the first half (especially the fixes).
-> 
-> This version of the series is better-tested than ever before, thanks to some new
-> unit tests. However, things like the i.MX ROMAPI are untested. NAND should also
-> be tested more-widely, for reasons listed in the commit message. I encourage you
-> try this series out on your favorite board.
-> 
-> This series depends on [3]. (Almost passing) CI at [4].
-> 
-> [1] https://gist.github.com/Forty-Bot/5bfe88676dd3c2aec6ebc23abb08e06f
->     This includes some changes to am335x_evm_spiboot and am65x_evm_r5_usbdfu
->     which have since been undone.
-> [2] https://lore.kernel.org/u-boot/20231105022742.632175-1-seanga2@gmail.com/
-> [3] https://lore.kernel.org/u-boot/20231104203753.1579217-1-seanga2@gmail.com/
-> [4] https://source.denx.de/u-boot/custodians/u-boot-clk/-/pipelines/18447
-> 
-> Changes in v6:
-> - Fix uninitialized return value when we can't get a blk_desc
-> - Don't close fd before spl_load_simple_fit
-> - Remove NULL assignments in spl_load_info
-> - Remove dev from spl_load_info
-> - Take advantage of bl_len's power-of-twoness
-> - Refactor spl_load_info->read to use units of bytes
-> - Remove filename from spl_load_info
-> - Only support bl_len when we have to
-> - Remove spl_nand_legacy_read
-> - Split off LZMA decompression into its own function
-> - Support testing LEGACY_LZMA filesystem images
-> - Use pseudo-LTO for spl_load
-> - Align reads to bl_len
-> - Add SYS_MMCSD_RAW_MODE to help determine whether SPL_MMC loads
->   anything directly.
-> - Convert nand to spl_load
-> - Fix LZMA support
-> - Fix load address
-> - Fix invalid return from spl_blk_load_image
-> - Fix soft reset after loading from SPI
-> - Explicitly initialize load_info members to reduce text size
-> - Rebase on u-boot/next
-> - Add option to disable DMA alignment for FAT
-> 
-> Changes in v5:
-> - Make SHOW_ERRORS depend on LIBCOMMON
-> - Load the header in spl_load as well
-> - Don't bother trying to DMA-align the buffer, since we can't really fix
->   it.
-> - Convert NVMe to spl_load
-> 
-> Changes in v4:
-> - Fix format specifiers in debug prints
-> - Reword/fix some of the doc comments for spl_load
-> - Rebase on u-boot/master
-> 
-> Changes in v3:
-> - Fix using ffs instead of fls
-> - Fix using not initializing bl_len when info->filename was NULL
-> - Fix failing on success
-> 
-> Changes in v2:
-> - Use reverse-xmas-tree style for locals in spl_simple_read. This is not
->   complete, since overhead depends on bl_mask.
-> - Convert semihosting as well
-> - Consolidate spi_load_image_os into spl_spi_load_image
-> 
-> Sean Anderson (25):
->   spl: blk_fs: Fix uninitialized return value when we can't get a
->     blk_desc
->   arm: Disable SPL_FS_FAT when it isn't used
->   spl: Make SHOW_ERRORS depend on LIBCOMMON
->   spl: semihosting: Don't close fd before spl_load_simple_fit
->   spl: Remove NULL assignments in spl_load_info
->   spl: Remove dev from spl_load_info
->   spl: Take advantage of bl_len's power-of-twoness
->   spl: Refactor spl_load_info->read to use units of bytes
->   spl: Remove filename from spl_load_info
->   spl: Only support bl_len when we have to
->   spl: nand: Remove spl_nand_legacy_read
->   spl: legacy: Split off LZMA decompression into its own function
->   test: spl: Support testing LEGACY_LZMA filesystem images
->   spl: Add generic spl_load function
->   spl: Convert ext to use spl_load
->   spl: Convert fat to spl_load
->   spl: Convert mmc to spl_load
->   spl: Convert nand to spl_load
->   spl: Convert net to spl_load
->   spl: Convert nor to spl_load
->   spl: Convert NVMe to spl_load
->   spl: Convert semihosting to spl_load
->   spl: Convert spi to spl_load
->   spl: spi: Consolidate spi_load_image_os into spl_spi_load_image
->   spl: fat: Add option to disable DMA alignment
-> 
->  arch/arm/mach-imx/spl_imx_romapi.c        |  24 ++--
->  arch/arm/mach-sunxi/spl_spi_sunxi.c       |   5 +-
->  common/spl/Kconfig                        |  37 +++++-
->  common/spl/spl.c                          |  13 +-
->  common/spl/spl_blk_fs.c                   |  73 +++--------
->  common/spl/spl_ext.c                      |  36 +++---
->  common/spl/spl_fat.c                      |  62 ++++------
->  common/spl/spl_fit.c                      |  74 ++++-------
->  common/spl/spl_imx_container.c            |  55 ++++-----
->  common/spl/spl_legacy.c                   | 110 ++++-------------
->  common/spl/spl_mmc.c                      | 101 ++-------------
->  common/spl/spl_nand.c                     | 104 ++++------------
->  common/spl/spl_net.c                      |  29 +----
->  common/spl/spl_nor.c                      |  42 ++-----
->  common/spl/spl_ram.c                      |   2 +-
->  common/spl/spl_semihosting.c              |  65 ++--------
->  common/spl/spl_spi.c                      | 130 ++++---------------
->  common/spl/spl_ymodem.c                   |   4 +-
->  configs/am335x_evm_spiboot_defconfig      |   2 +-
->  configs/am65x_evm_r5_usbdfu_defconfig     |   1 -
->  configs/xilinx_zynqmp_mini_qspi_defconfig |   3 +
->  configs/zynq_cse_nand_defconfig           |   3 +
->  configs/zynq_cse_nor_defconfig            |   3 +
->  configs/zynq_cse_qspi_defconfig           |   3 +
->  drivers/usb/gadget/f_sdp.c                |  10 +-
->  include/spl.h                             |  60 +++++++--
->  include/spl_load.h                        | 144 ++++++++++++++++++++++
->  include/test/spl.h                        |   4 +
->  test/image/Kconfig                        |   1 +
->  test/image/spl_load.c                     |  13 +-
->  test/image/spl_load_fs.c                  |  32 +++--
->  test/image/spl_load_nand.c                |   2 +
->  test/image/spl_load_net.c                 |   2 +
->  test/image/spl_load_nor.c                 |   2 +
->  test/image/spl_load_os.c                  |  16 ++-
->  test/image/spl_load_spi.c                 |   1 +
->  36 files changed, 536 insertions(+), 732 deletions(-)
->  create mode 100644 include/spl_load.h
-> 
-> -- 
-> 2.37.1
-> 
+Rasmus
+
