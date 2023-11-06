@@ -4,76 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 876A9C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 19:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9100DC4167D
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:04:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A04D686F9F;
-	Mon,  6 Nov 2023 20:59:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AD0DC86F9F;
+	Mon,  6 Nov 2023 21:04:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ezzdpvr7";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F235868AE; Mon,  6 Nov 2023 20:59:02 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E22A86F9F
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 20:58:59 +0100 (CET)
+ id 2FB0986F9F; Mon,  6 Nov 2023 21:04:37 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id B81EF87091
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:04:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-507975d34e8so7048821e87.1
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 11:58:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699300738; x=1699905538; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ksSf4lc9rpLIWqRdRV0s1hr3ciZ/SnhFu1C0d4FIVl8=;
- b=Ezzdpvr76P7Qj+/TpD5mdX5w0hQT3/y+90t6eMmzGJ6mGHBmf4s3NXYjaM0hwIGpJx
- qiGymdQDL4nAYKxK5fxEIwuAnPu2LgbFWt168pW7pGVeAWvB+5WSYjnPw3nOB4qcs4I/
- 218AX92uPD5y/j64C5hoNAbykoD5/e8p4GGuM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699300738; x=1699905538;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ksSf4lc9rpLIWqRdRV0s1hr3ciZ/SnhFu1C0d4FIVl8=;
- b=aglC74FH0XgYUaXwjoqaYnFJN2u/lzacvWpAl2krcsd8tvYBOgn9GinMbRmmHKfTGt
- ll4wc3svXrh8X9XWx053CHUTWUZjudZEfFr939BL+94yqGxc546bB6W7HPtS55JmIrMz
- 3lx8W0g9nAEXMk0BAtHKXryrmB/FuWwg8BI/Re9JodMl3rX5fsQ2a9v4pffZ4aGybX5O
- EPCRKGnEoZuzRRKastG7Iq43TOYABU1b0y0/2z4vPLwBx5rmSieZZDJJ2V+yZON2JQQz
- KVUCF8HuTfS0lnkMb3LIAcmxO7ENMa91QEDbss7Cs53y4c15qkRuafL7xrRiUQ2FGABF
- ecgA==
-X-Gm-Message-State: AOJu0YxtAlFlimuwNKt/DQ6jXlnZJ5kSzrQI8bWiWWtpbTYI6/MbjTnB
- fvpqSUnPKkX5ofika/v0zwmU0w6S6/bZYpnQloyxCQ==
-X-Google-Smtp-Source: AGHT+IEPhG9hXqfAN7urI2meEtJH1AaJLlUtCi7w2jTK3G/T7UbGHqP28nUPnw7K8BK1dQ5lir2PDii+yP/zBHZewPY=
-X-Received: by 2002:a05:6512:1307:b0:509:4025:1ac6 with SMTP id
- x7-20020a056512130700b0050940251ac6mr16883800lfu.54.1699300738229; Mon, 06
- Nov 2023 11:58:58 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,282,1694703600"; 
+ d="asc'?scan'208";a="185754859"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 07 Nov 2023 05:04:30 +0900
+Received: from unknown (unknown [10.226.92.3])
+ by relmlir5.idc.renesas.com (Postfix) with SMTP id C5AA6400A662;
+ Tue,  7 Nov 2023 05:04:28 +0900 (JST)
+Date: Mon, 6 Nov 2023 20:04:27 +0000
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH] mmc: renesas-sdhi: Disable clock after tuning reset when
+ possible
+Message-ID: <20231106200427.lkp4hogh3xflwxh7@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20231105224304.103997-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20231105200453.1887418-1-sjg@chromium.org>
- <20231105130351.1.Iae1cd9e0e207784e680480ee52021ec5caed877e@changeid>
- <20231105211910.GE496310@bill-the-cat>
- <CAPnjgZ26DyfvayO8BgQvCoEVDfmxotG7A7GMWc9T0wK0Okho8w@mail.gmail.com>
- <20231106183020.GB496310@bill-the-cat>
-In-Reply-To: <20231106183020.GB496310@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Nov 2023 12:58:46 -0700
-Message-ID: <CAPnjgZ20ZY3SO3sXWjNk6uAvgBKcNK+XRRs+k0MmrTcj6A1zjw@mail.gmail.com>
-Subject: Re: [PATCH 1/4] bootm: Allow ignoring the load address with
- kernel_noload
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="mg2w2vs7vmtbpil7"
+Content-Disposition: inline
+In-Reply-To: <20231105224304.103997-1-marek.vasut+renesas@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,49 +58,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
+--mg2w2vs7vmtbpil7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 6 Nov 2023 at 11:30, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Nov 06, 2023 at 10:25:00AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sun, 5 Nov 2023 at 14:19, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Nov 05, 2023 at 01:03:51PM -0700, Simon Glass wrote:
-> > >
-> > > > This image type is supposed to ignore the load address. But at present
-> > > > it fails if the load address is missing. If it is zero, the image is
-> > > > loaded at address 0, which may not work on all boards.
-> > > >
-> > > > Make use of the kernel_addr_r environment variable, instead, since this
-> > > > seems to be a more reliable final address for the kernel.
-> > > >
-> > > > Another option would be to create a new Kconfig for this, or to use a
-> > > > region of memory known to be free, e.g. calculated from the DRAM banks.
-> > > > But in any case we should try to avoid conflicting with the
-> > > > kernel_addr_r variable. So the approach in this patch seems reasonable
-> > > > to me.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > How are you creating the image in question here? A noload FIT is
-> > > supposed to just supposed to go from where it is. Where do things fall
-> > > down later?
-> >
-> > The image is Image.gz built by Linux, for example. So compression =
-> > "gzip" which means that it has to be decompressed.
-> >
-> > Things fall down as soon as U-Boot looks at the image, since it
-> > doesn't have the ARM64 magic.
->
-> Can you provide logs and env? "booti" is supposed to handle this case
-> already, and if it's not we should figure out when / why it broke.
+On Sun, Nov 05, 2023 at 11:42:45PM +0100, Marek Vasut wrote:
+> Currently the renesas_sdhi_reset_tuning() unconditionally leaves SDHI
+> clock enabled after the tuning reset. This is not always necessary.
+>=20
+> After the driver performed tuning reset at the end of probe function,
+> or in the unlikely case that tuning failed during regular operation,
+> the SDHI clock can be disabled after the tuning reset. The following
+> set_ios call would reconfigure the clock as needed.
+>=20
+> In case of regular set_ios call which requires a tuning reset, keep
+> the clock enabled or disabled according to the mmc->clk_disable state.
+>=20
+> With this in place, the controllers which have not been accessed via
+> block subsystem after boot are left in quiescent state. However, if an
+> MMC device is used e.g. for environment storage, that controller would
+> be accessed during the environment load and left active, including its
+> clock which would still be generated. This is due to the design of the
+> MMC subsystem, which does not deinit a controller after it was started
+> once, the controller is only deinited in case of mmc rescan, or before
+> OS boot.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Note: To address the part where MMC device has been inited once and
+>       is never deinited until rescan or OS boot, it would likely be
+>       necessary to implement something like runtime PM, possibly
+>       based on the cyclic framework. Basically, keep track of when
+>       the MMC was accessed last, and if certain time elapsed, deinit
+>       the MMC. This could also be used to handle card detect polling
+>       at the same time.
+> ---
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> ---
+>  drivers/mmc/renesas-sdhi.c | 14 ++++++++++----
+>  1 file changed, 10 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 8cd501c5f7c..97aaf1e4ec3 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -318,7 +318,7 @@ static unsigned int renesas_sdhi_init_tuning(struct t=
+mio_sd_priv *priv)
+>  		RENESAS_SDHI_SCC_DTCNTL_TAPNUM_MASK;
+>  }
+> =20
+> -static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv)
+> +static void renesas_sdhi_reset_tuning(struct tmio_sd_priv *priv, bool cl=
+k_disable)
+>  {
+>  	u32 reg;
+> =20
+> @@ -350,6 +350,12 @@ static void renesas_sdhi_reset_tuning(struct tmio_sd=
+_priv *priv)
+>  	reg =3D tmio_sd_readl(priv, RENESAS_SDHI_SCC_RVSCNTL);
+>  	reg &=3D ~RENESAS_SDHI_SCC_RVSCNTL_RVSEN;
+>  	tmio_sd_writel(priv, reg, RENESAS_SDHI_SCC_RVSCNTL);
+> +
+> +	if (clk_disable) {
+> +		reg =3D tmio_sd_readl(priv, TMIO_SD_CLKCTL);
+> +		reg &=3D ~TMIO_SD_CLKCTL_SCLKEN;
+> +		tmio_sd_writel(priv, reg, TMIO_SD_CLKCTL);
+> +	}
+>  }
+> =20
+>  static int renesas_sdhi_hs400(struct udevice *dev)
+> @@ -629,7 +635,7 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, =
+uint opcode)
+>  out:
+>  	if (ret < 0) {
+>  		dev_warn(dev, "Tuning procedure failed\n");
+> -		renesas_sdhi_reset_tuning(priv);
+> +		renesas_sdhi_reset_tuning(priv, true);
+>  	}
+> =20
+>  	return ret;
+> @@ -668,7 +674,7 @@ static int renesas_sdhi_set_ios(struct udevice *dev)
+>  	    (mmc->selected_mode !=3D UHS_SDR104) &&
+>  	    (mmc->selected_mode !=3D MMC_HS_200) &&
+>  	    (mmc->selected_mode !=3D MMC_HS_400)) {
+> -		renesas_sdhi_reset_tuning(priv);
+> +		renesas_sdhi_reset_tuning(priv, mmc->clk_disable);
+>  	}
+>  #endif
+> =20
+> @@ -1095,7 +1101,7 @@ static int renesas_sdhi_probe(struct udevice *dev)
+>      CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
+>      CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
+>  	if (priv->caps & TMIO_SD_CAP_RCAR_UHS)
+> -		renesas_sdhi_reset_tuning(priv);
+> +		renesas_sdhi_reset_tuning(priv, true);
+>  #endif
+>  	return 0;
 
-Do you mean booti handles compression? Yes, I can see that in the code.
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+  (on RZ/G2L SMARC EVK)
 
-But in my case I am using bootm, since it is a FIT.
+Thanks,
+Paul
 
-Regards,
-Simon
+--mg2w2vs7vmtbpil7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZUlGvgAKCRDbaV4Vf/JG
+vXNbAPsF8Lqn6O6vaPjCCt/Z6aRQiDp3F1QGdJimpxvsqNFiGQEA7OlXLKvwzcZ9
+1uUP36N8Vy6Czynh0FG9peDiTf4Jtwk=
+=c17M
+-----END PGP SIGNATURE-----
+
+--mg2w2vs7vmtbpil7--
