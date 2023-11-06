@@ -4,60 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70401C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 18:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF99EC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 18:16:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B8D386BD4;
-	Mon,  6 Nov 2023 19:16:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 94F118701C;
+	Mon,  6 Nov 2023 19:16:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nyYRrQqU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E52EF86BA9; Mon,  6 Nov 2023 19:16:10 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id D9AEF8702F; Mon,  6 Nov 2023 19:16:46 +0100 (CET)
+Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6B688644E
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 19:16:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA1F786BA9
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 19:16:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=ee6a=GU=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1699294559;
- bh=dSvfgiR/1758LmYoY4GIKgBpFvTIsQ0bzFF/Io3NxqA=;
- b=nyYRrQqUqzUd1TY/6+Uw0/z3gvIh+KF5wZUoFziBu76TjI0f9DwRlEJm7+u7RxRrX+pg2AgM+
- Y+YWiXppO8nG2hjofUpGOXicf8ZXy6gwuoVi7gApj37JKB7e1O056AONOrlSxjMxVnBr9of6qgO
- ATb9jxA0iBbKeL/bowy3vBJD5HnAErWGnU4FWdFhdjlRh40+yKPhWrZDO98PoE0G07YF8dFMd9e
- HzbZ1oLWu9zZnh9+TErTNTU9vGv/hg6/YzqLRHRdeBdNVuK7I4XJAH1PHSfVF3l8W1xcfOtrs9D
- AjP2/1IqUg9Vt9JvYyhG7fzrEshTHYHOJ14Zs430P6bA==
-Message-ID: <ef28a2eb-131c-4b43-b048-f8af3160ddbb@kwiboo.se>
-Date: Mon, 6 Nov 2023 19:15:53 +0100
+ spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
+Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
+ by localhost (Postfix) with ESMTP id 4SPKLN2Nvvz9t0b;
+ Mon,  6 Nov 2023 19:16:44 +0100 (CET)
+Received: from pegase1.c-s.fr ([192.168.12.234])
+ by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id f6KudTG_MYdx; Mon,  6 Nov 2023 19:16:44 +0100 (CET)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4SPKLN1gQJz9t0H;
+ Mon,  6 Nov 2023 19:16:44 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 340038B770;
+ Mon,  6 Nov 2023 19:16:44 +0100 (CET)
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id Rx4RoT4rHlXg; Mon,  6 Nov 2023 19:16:44 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (unknown [192.168.232.33])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 013238B76D;
+ Mon,  6 Nov 2023 19:16:43 +0100 (CET)
+Received: from PO20335.IDSI0.si.c-s.fr (localhost [127.0.0.1])
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.16.1) with ESMTPS id 3A6ICFaB057744
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Mon, 6 Nov 2023 19:12:15 +0100
+Received: (from chleroy@localhost)
+ by PO20335.IDSI0.si.c-s.fr (8.17.1/8.17.1/Submit) id 3A6ICFN8057743;
+ Mon, 6 Nov 2023 19:12:15 +0100
+X-Authentication-Warning: PO20335.IDSI0.si.c-s.fr: chleroy set sender to
+ christophe.leroy@csgroup.eu using -f
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+To: Tom Rini <trini@konsulko.com>
+Cc: Christophe Leroy <christophe.leroy@csgroup.eu>, u-boot@lists.denx.de
+Subject: [PATCH] board: cssi: Remove usage of common.h
+Date: Mon,  6 Nov 2023 19:12:05 +0100
+Message-ID: <76cdb4a9954d8686a0bdf7c165152e4fcbf9bd3c.1699294233.git.christophe.leroy@csgroup.eu>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <d8ba310b353395a54222b728a4add87c846a2729.1699294227.git.christophe.leroy@csgroup.eu>
+References: <d8ba310b353395a54222b728a4add87c846a2729.1699294227.git.christophe.leroy@csgroup.eu>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3588-rock-5b: Enable CONFIG_PCI_INIT_R to
- support EFI networking
-Content-Language: en-US
-To: "=?UTF-8?Q?Martin_Roukala_=28n=C3=A9_Peres=29?="
- <martin.roukala@mupuf.org>, Kever Yang <kever.yang@rock-chips.com>, Simon
- Glass <sjg@chromium.org>
-Cc: Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
-References: <20231104130451.111020-1-martin.roukala@mupuf.org>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20231104130451.111020-1-martin.roukala@mupuf.org>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65492d5f80eea5435c4cae49
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,40 +76,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Martin,
+Remove inclusion of common.h and add relevant
+includes when necessary.
 
-On 2023-11-04 14:04, Martin Roukala (né Peres) wrote:
-> When u-boot chainloads an EFI bootloader such as iPXE, we want to have
-> already initialized the PCI subsystem so that network driver is loaded
-> and ready to use by the bootloader.
+Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+---
+ board/cssi/cmpc885/cmpc885.c | 1 -
+ board/cssi/cmpc885/nand.c    | 1 -
+ board/cssi/cmpc885/sdram.c   | 3 ++-
+ board/cssi/cmpcpro/cmpcpro.c | 1 -
+ board/cssi/mcr3000/mcr3000.c | 1 -
+ board/cssi/mcr3000/nand.c    | 1 -
+ 6 files changed, 2 insertions(+), 6 deletions(-)
 
-This change slows down boot from emmc/sd-card where scanning for pci
-devices typically is unnecessary.
-
-If pci must be initialized and scanned before an EFI app is started to
-find pci network controllers, then pci should probably be initialized by
-the efi bootmeth, not by enabling CONFIG_PCI_INIT_R for a single board.
-
-Regards,
-Jonas
-
-> 
-> Fixes: 191ece249a96 ("rockchip: rk3588-rock-5b: Enable support for PCIe SATA cards")
-> Signed-off-by: Martin Roukala (né Peres) <martin.roukala@mupuf.org>
-> ---
->  configs/rock5b-rk3588_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-> index 0595325e81..938137c851 100644
-> --- a/configs/rock5b-rk3588_defconfig
-> +++ b/configs/rock5b-rk3588_defconfig
-> @@ -36,6 +36,7 @@ CONFIG_OF_BOARD_SETUP=y
->  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5b.dtb"
->  # CONFIG_DISPLAY_CPUINFO is not set
->  CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_PCI_INIT_R=y
->  CONFIG_SPL_MAX_SIZE=0x40000
->  CONFIG_SPL_PAD_TO=0x7f8000
->  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+diff --git a/board/cssi/cmpc885/cmpc885.c b/board/cssi/cmpc885/cmpc885.c
+index 5e6aa8b8cf..e11cfafaa5 100644
+--- a/board/cssi/cmpc885/cmpc885.c
++++ b/board/cssi/cmpc885/cmpc885.c
+@@ -9,7 +9,6 @@
+  */
+ 
+ #include <env.h>
+-#include <common.h>
+ #include <mpc8xx.h>
+ #include <asm/cpm_8xx.h>
+ #include <asm/io.h>
+diff --git a/board/cssi/cmpc885/nand.c b/board/cssi/cmpc885/nand.c
+index 38100046df..b8989f226b 100644
+--- a/board/cssi/cmpc885/nand.c
++++ b/board/cssi/cmpc885/nand.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <nand.h>
+ #include <linux/bitops.h>
+ #include <linux/mtd/rawnand.h>
+diff --git a/board/cssi/cmpc885/sdram.c b/board/cssi/cmpc885/sdram.c
+index 7349b85ed2..11a50c3a52 100644
+--- a/board/cssi/cmpc885/sdram.c
++++ b/board/cssi/cmpc885/sdram.c
+@@ -4,13 +4,14 @@
+  * Charles Frey <charles.frey@c-s.fr>
+  */
+ 
+-#include <common.h>
+ #include <linux/sizes.h>
+ #include <linux/delay.h>
+ #include <init.h>
+ #include <asm/io.h>
+ #include <mpc8xx.h>
+ #include <watchdog.h>
++#include <asm/ppc.h>
++#include <asm/immap_8xx.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+diff --git a/board/cssi/cmpcpro/cmpcpro.c b/board/cssi/cmpcpro/cmpcpro.c
+index 8a30c48e35..ef30412456 100644
+--- a/board/cssi/cmpcpro/cmpcpro.c
++++ b/board/cssi/cmpcpro/cmpcpro.c
+@@ -4,7 +4,6 @@
+  */
+ 
+ #include <command.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <env.h>
+ #include <env_internal.h>
+diff --git a/board/cssi/mcr3000/mcr3000.c b/board/cssi/mcr3000/mcr3000.c
+index 3514f67490..8857c9e42c 100644
+--- a/board/cssi/mcr3000/mcr3000.c
++++ b/board/cssi/mcr3000/mcr3000.c
+@@ -7,7 +7,6 @@
+  * Board specific routines for the MCR3000 board
+  */
+ 
+-#include <common.h>
+ #include <env.h>
+ #include <hwconfig.h>
+ #include <init.h>
+diff --git a/board/cssi/mcr3000/nand.c b/board/cssi/mcr3000/nand.c
+index 11aca4ff73..5b01d30fef 100644
+--- a/board/cssi/mcr3000/nand.c
++++ b/board/cssi/mcr3000/nand.c
+@@ -6,7 +6,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <nand.h>
+ #include <linux/mtd/rawnand.h>
+ #include <asm/io.h>
+-- 
+2.41.0
 
