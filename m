@@ -4,85 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE13C4167D
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92777C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 05:14:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B826986FDE;
-	Mon,  6 Nov 2023 03:37:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D43486B0A;
+	Mon,  6 Nov 2023 06:14:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RUsbFoJU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA7786A8F; Mon,  6 Nov 2023 03:30:58 +0100 (CET)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9199787086
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:48 +0100 (CET)
+ id BB64886A8F; Mon,  6 Nov 2023 06:14:23 +0100 (CET)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
+ [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id DCA4086A8F
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 06:14:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-41cd4cc515fso28171601cf.1
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699237594; x=1699842394; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Yw4ylPHUkbdbR96BkyAVCFjs6KpN1WT+GrvxKU6SxEU=;
- b=RUsbFoJU1Iqyh/E+Sc0Eai8t3EJq7IRbqDbjT/z/5BU/DCjQiBOMPFkjbJyf5CfabE
- KRIATshwFnfjC/3TDjxFXfzmslz+xt26wSA46nD+M6D8RXozDxnF6ZbflKNY0P0OydwV
- ApYV84aoqGERaQQJ9zGrXvkLtDchWzPMwpLYDDSj0LO0qaykf+jqiq8mL1sMc3xyuvFy
- l5+J4Po76IYTuchJ/k788JYVS90icXUrkR/x3zSzxeMDHNKgwSOJluAepW5lpSwbIjf6
- FPZm7S11jQUaUnuhyuW+VxO63sghlVlM+CC1Jt+GDzyhaaGBm4sOnFHRMSAWE0g2yo/h
- a6FA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699237594; x=1699842394;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Yw4ylPHUkbdbR96BkyAVCFjs6KpN1WT+GrvxKU6SxEU=;
- b=O5JuUYM81UGwbVXfGIK9JCmmJ6LsycYKk6RsHq+zogpOSoNF9cM7NKLcmv8KZ+vfi1
- R5XstFhzBOAARuRqBmcX+wl8zbubJf9FAtlI8M1N4nEZGCzZ5lc6AhpjqKFvJOrAji0K
- CCUUCGUcKRz97rDecD1FqtyBHL6m9ZnZEMijKiJ9u0uu9tGhxXJQSHG1zGxYzOUZHrfi
- q9ynIEW6GScsDUSQil+CpzjYsuj1h/APAyqsbdRCUVlvkwX5wYjXR/mOqDJr2mmcmCXP
- gOSj0feXU684Ww7Yxaqtl7wTUqezXUlULo0knq7i0C1Knn/nhiVzUvDV+mtHx0990002
- C5hA==
-X-Gm-Message-State: AOJu0YwYEZ1giScW+B70IRs2KLbY+6KanW68OkQL3tOMJQYHr+TYmUJ6
- +ptChyQRPkN4vDmooIXLYiI=
-X-Google-Smtp-Source: AGHT+IGY952zmdHgp+Vo0MmRIYfAEEY5rwH+ZJXOHHY12tfFKrc/kaZA84mK1+Dv3tDfmqC57y+F8A==
-X-Received: by 2002:a05:6214:2b97:b0:66f:b847:71b7 with SMTP id
- kr23-20020a0562142b9700b0066fb84771b7mr28104464qvb.25.1699237594136; 
- Sun, 05 Nov 2023 18:26:34 -0800 (PST)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- mx1-20020a0562142e0100b0066d0ab215b5sm3070785qvb.13.2023.11.05.18.26.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Nov 2023 18:26:33 -0800 (PST)
-From: Sean Anderson <seanga2@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
- Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Vignesh R <vigneshr@ti.com>
-Subject: [PATCH v6 24/25] spl: spi: Consolidate spi_load_image_os into
- spl_spi_load_image
-Date: Sun,  5 Nov 2023 21:26:02 -0500
-Message-Id: <20231106022603.3405551-25-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
-References: <20231106022603.3405551-1-seanga2@gmail.com>
+ spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
+Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+ (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
+ by fd01.gateway.ufhost.com (Postfix) with ESMTP id DDCD07FE2;
+ Mon,  6 Nov 2023 13:14:11 +0800 (CST)
+Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX166.cuchost.com
+ (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 6 Nov
+ 2023 13:14:11 +0800
+Received: from localhost.localdomain (202.190.98.67) by EXMBX066.cuchost.com
+ (172.16.6.66) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 6 Nov
+ 2023 13:14:09 +0800
+From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+To: <u-boot@lists.denx.de>
+CC: Kuan Lim Lee <kuanlim.lee@starfivetech.com>, Wei Liang Lim
+ <weiliang.lim@starfivetech.com>, Simon Glass <sjg@google.com>
+Subject: [PATCH v2] timer: starfive: Add Starfive timer support
+Date: Mon, 6 Nov 2023 13:13:12 +0800
+Message-ID: <20231106051335.1757-1-kuanlim.lee@starfivetech.com>
+X-Mailer: git-send-email 2.42.0.windows.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [202.190.98.67]
+X-ClientProxiedBy: EXCAS062.cuchost.com (172.16.6.22) To EXMBX066.cuchost.com
+ (172.16.6.66)
+X-YovoleRuleAgent: yovoleflag
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,105 +62,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-spi_load_image_os performs almost the same steps as the non-falcon-boot
-path of spl_spi_load_image. The load address is different, and it also
-loads a device tree, but that's it. Refactor the boot process so that
-they can both use the same load function.
+Add timer driver in Starfive SoC. It is an timer that outside
+of CPU core and inside Starfive SoC.
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+Signed-off-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
+Reviewed-by: Simon Glass <sjg@google.com>
+
+Changes for v2:
+- correct driver name, comment, variable
 ---
+ drivers/timer/Kconfig          |  7 +++
+ drivers/timer/Makefile         |  1 +
+ drivers/timer/starfive-timer.c | 96 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 104 insertions(+)
+ create mode 100644 drivers/timer/starfive-timer.c
 
-(no changes since v5)
-
-Changes in v5:
-- Rework to load header in spl_load
-
-Changes in v2:
-- New
-
- common/spl/spl_spi.c | 54 ++++++++++++--------------------------------
- 1 file changed, 14 insertions(+), 40 deletions(-)
-
-diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
-index f49e534b749..89de73c726c 100644
---- a/common/spl/spl_spi.c
-+++ b/common/spl/spl_spi.c
-@@ -21,41 +21,6 @@
- #include <asm/io.h>
- #include <dm/ofnode.h>
- 
--#if CONFIG_IS_ENABLED(OS_BOOT)
--/*
-- * Load the kernel, check for a valid header we can parse, and if found load
-- * the kernel and then device tree.
-- */
--static int spi_load_image_os(struct spl_image_info *spl_image,
--			     struct spl_boot_device *bootdev,
--			     struct spi_flash *flash,
--			     struct legacy_img_hdr *header)
--{
--	int err;
--
--	/* Read for a header, parse or error out. */
--	spi_flash_read(flash, CFG_SYS_SPI_KERNEL_OFFS, sizeof(*header),
--		       (void *)header);
--
--	if (image_get_magic(header) != IH_MAGIC)
--		return -1;
--
--	err = spl_parse_image_header(spl_image, bootdev, header);
--	if (err)
--		return err;
--
--	spi_flash_read(flash, CFG_SYS_SPI_KERNEL_OFFS,
--		       spl_image->size, (void *)spl_image->load_addr);
--
--	/* Read device tree. */
--	spi_flash_read(flash, CFG_SYS_SPI_ARGS_OFFS,
--		       CFG_SYS_SPI_ARGS_SIZE,
--		       (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
--
--	return 0;
--}
--#endif
--
- static ulong spl_spi_fit_read(struct spl_load_info *load, ulong sector,
- 			      ulong count, void *buf)
- {
-@@ -112,9 +77,21 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 		return -ENODEV;
- 	}
- 
-+	load.priv = flash;
-+	spl_set_bl_len(&load, 1);
-+	load.read = spl_spi_fit_read;
+diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
+index 915b2af160..a98be9dfae 100644
+--- a/drivers/timer/Kconfig
++++ b/drivers/timer/Kconfig
+@@ -326,4 +326,11 @@ config XILINX_TIMER
+ 	  Select this to enable support for the timer found on
+ 	  any Xilinx boards (axi timer).
+=20
++config STARFIVE_TIMER
++	bool "Starfive timer support"
++	depends on TIMER
++	help
++	  Select this to enable support for the timer found on
++	  Starfive SoC.
 +
- #if CONFIG_IS_ENABLED(OS_BOOT)
--	if (!spl_start_uboot() && !spi_load_image_os(spl_image, bootdev, flash, header))
--		return 0;
-+	if (spl_start_uboot()) {
-+		int err = spl_load(spl_image, bootdev, &load, 0,
-+				   CFG_SYS_SPI_KERNEL_OFFS);
+ endmenu
+diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
+index 1ca74805fd..1ef814970b 100644
+--- a/drivers/timer/Makefile
++++ b/drivers/timer/Makefile
+@@ -34,3 +34,4 @@ obj-$(CONFIG_MTK_TIMER)		+=3D mtk_timer.o
+ obj-$(CONFIG_MCHP_PIT64B_TIMER)	+=3D mchp-pit64b-timer.o
+ obj-$(CONFIG_IMX_GPT_TIMER)	+=3D imx-gpt-timer.o
+ obj-$(CONFIG_XILINX_TIMER)	+=3D xilinx-timer.o
++obj-$(CONFIG_STARFIVE_TIMER)	+=3D starfive-timer.o
+diff --git a/drivers/timer/starfive-timer.c b/drivers/timer/starfive-time=
+r.c
+new file mode 100644
+index 0000000000..b9ba33277e
+--- /dev/null
++++ b/drivers/timer/starfive-timer.c
+@@ -0,0 +1,96 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2022 StarFive, Inc. All rights reserved.
++ *   Author: Lee Kuan Lim <kuanlim.lee@starfivetech.com>
++ */
 +
-+		if (!err)
-+			/* Read device tree. */
-+			return spi_flash_read(flash, CFG_SYS_SPI_ARGS_OFFS,
-+					      CFG_SYS_SPI_ARGS_SIZE,
-+					      (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
-+	}
- #endif
- 
- 	payload_offs = spl_spi_get_uboot_offs(flash);
-@@ -123,9 +100,6 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 						    payload_offs);
- 	}
- 
--	load.priv = flash;
--	spl_set_bl_len(&load, 1);
--	load.read = spl_spi_fit_read;
- 	err = spl_load(spl_image, bootdev, &load, 0, payload_offs);
- 	if (IS_ENABLED(CONFIG_SPI_FLASH_SOFT_RESET))
- 		err = spi_nor_remove(flash);
--- 
-2.37.1
++#include <common.h>
++#include <clk.h>
++#include <dm.h>
++#include <time.h>
++#include <timer.h>
++#include <asm/io.h>
++#include <dm/device-internal.h>
++#include <linux/err.h>
++
++#define	STF_TIMER_INT_STATUS	0x00
++#define STF_TIMER_CTL		0x04
++#define STF_TIMER_LOAD		0x08
++#define STF_TIMER_ENABLE	0x10
++#define STF_TIMER_RELOAD	0x14
++#define STF_TIMER_VALUE		0x18
++#define STF_TIMER_INT_CLR	0x20
++#define STF_TIMER_INT_MASK	0x24
++
++struct starfive_timer_priv {
++	void __iomem *base;
++	u32 timer_size;
++};
++
++static u64 notrace starfive_get_count(struct udevice *dev)
++{
++	struct starfive_timer_priv *priv =3D dev_get_priv(dev);
++
++	/* Read decrement timer value and convert to increment value */
++	return priv->timer_size - readl(priv->base + STF_TIMER_VALUE);
++}
++
++static const struct timer_ops starfive_ops =3D {
++	.get_count =3D starfive_get_count,
++};
++
++static int starfive_probe(struct udevice *dev)
++{
++	struct timer_dev_priv *uc_priv =3D dev_get_uclass_priv(dev);
++	struct starfive_timer_priv *priv =3D dev_get_priv(dev);
++	int timer_channel;
++	struct clk clk;
++	int ret;
++
++	priv->base =3D dev_read_addr_ptr(dev);
++	if (!priv->base)
++		return -EINVAL;
++
++	timer_channel =3D dev_read_u32_default(dev, "channel", 0);
++	priv->base =3D priv->base + (0x40 * timer_channel);
++
++	/* Get clock rate from channel selectecd*/
++	ret =3D clk_get_by_index(dev, timer_channel, &clk);
++	if (ret)
++		return ret;
++
++	ret =3D clk_enable(&clk);
++	if (ret)
++		return ret;
++	uc_priv->clock_rate =3D clk_get_rate(&clk);
++
++	/*
++	 * Initiate timer, channel 0
++	 * Unmask Interrupt Mask
++	 */
++	writel(0, priv->base + STF_TIMER_INT_MASK);
++	/* Single run mode Setting */
++	if (dev_read_bool(dev, "single-run"))
++		writel(1, priv->base + STF_TIMER_CTL);
++	/* Set Reload value */
++	priv->timer_size =3D dev_read_u32_default(dev, "timer-size", -1U);
++	writel(priv->timer_size, priv->base + STF_TIMER_LOAD);
++	/* Enable to start timer */
++	writel(1, priv->base + STF_TIMER_ENABLE);
++
++	return 0;
++}
++
++static const struct udevice_id starfive_ids[] =3D {
++	{ .compatible =3D "starfive,jh8100-timers" },
++	{ }
++};
++
++U_BOOT_DRIVER(jh8100_starfive_timer) =3D {
++	.name		=3D "starfive_timer",
++	.id		=3D UCLASS_TIMER,
++	.of_match	=3D starfive_ids,
++	.probe		=3D starfive_probe,
++	.ops		=3D &starfive_ops,
++	.priv_auto	=3D sizeof(struct starfive_timer_priv),
++};
+--=20
+2.34.1
 
