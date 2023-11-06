@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70608C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A0AC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:37:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49F4786C56;
-	Mon,  6 Nov 2023 09:33:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B50586F5F;
+	Mon,  6 Nov 2023 09:33:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QqmVVg2R";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i4ffLRdC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46DC786EF2; Mon,  6 Nov 2023 09:33:09 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id A660086F5F; Mon,  6 Nov 2023 09:33:17 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3677E86F84
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 09:32:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4669B86F95
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 09:32:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-543923af573so7141264a12.0
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 00:32:56 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-9d0b4dfd60dso611144466b.1
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 00:32:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699259576; x=1699864376; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699259577; x=1699864377; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/RD3h8FEYdBzbZnTVOzlD4UahitmDFo/XfOTOXJE2/0=;
- b=QqmVVg2RhhT0Mb8v8+IryVI+KWg4Wu9uNa22Pc9tMhiVzgY+SdrKfdCSH2mFKFNFHe
- S3B1ZXunnxfS9h1yeC6KWuGjtAIo29YcA+jB3fRcQooPljq0SEN6BwJHseIA4a//ibez
- 7LrtrnpcTvx8A1Bv26sewtKG86q4jYe8z7kxFBHx9T+sT0Yo0sJ8h/nM90JR92dvBKYV
- sH47s1YiKnUdk0V/M0tTVSBCTuPc3CYj0rJ81eRNtEHLXCuZu0Zyl2XMZgzWb2oXtkLK
- U5no7bKYVUPtx0tBdyicKG1P05bUe/uMGayRzSms7h9Xu1g7wrx7alQEFFnoPG5mIAbJ
- YKDA==
+ bh=kfpbebHmj3SbuVDSsc+mIfZFL/vs0g9TApfxj78EOH8=;
+ b=i4ffLRdCJc+VoYO3cApuUXBZdKwDHeDMmP9fxV73tVuQcF19nWyH3/QcMLBmXoZNqA
+ l3tff8eQWpq5zUgw0NgTP+gbUXl+l+YFWp6wvLbCOeGy2k63vvzS1FvalJFIcsE/Vd9F
+ Sy+2aEmevzdioJCfyT+sxXu2/LFUvsEbMB8nTzKMMN+IGoW7gAbJp9gC+W3/hokxh7OO
+ 41LvjAdzhfPWAjDB+Qefxbp/JyTN9g5iykmGv7VxiEfDIE29VLlS9HT47f8t68BSzION
+ eN2ZuYi18Oe+PigWXb2Bit2Qzd6maDdJdq/+QDtrXq8hgDJ1rra0t7MqbFC9GwAfgqDM
+ vk+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699259576; x=1699864376;
+ d=1e100.net; s=20230601; t=1699259577; x=1699864377;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/RD3h8FEYdBzbZnTVOzlD4UahitmDFo/XfOTOXJE2/0=;
- b=BFqabRljzW9i1rgY+9WVno5sYDVkJNo1DvJore4zXeileYlp+GgXKQYC3LJ3hWQmKA
- EYDUVH4eFzu9Kds/aGacB5L52TiFJTk/qmOzN5rZuEwYATNsFfPOOXThx5G0bzlIzgFL
- P7W4pPtdL3TZepBH+hXSVPUZS51YhZmJQPkBYkCrBOl/d8C95Ip/6JnljOKetbiBgs1e
- qknGd5JVHQcWmDFwphNu3hUd4QPtiRN2ve9IsdlUXXdvHmTnuLjjNxygIgaBytGziqOf
- sSKZ3l8f+sNKVONO3EwnnZQ89RrRY9cRutTkXId4+3KwVTOIavT6Nhafg18bITGwgUHV
- JXKQ==
-X-Gm-Message-State: AOJu0YyKlZsy95ZsKMF7zpP5/MK/jGClGjobBy+K96Y9gYYXcINSmgHC
- yzyOSyFCQeERgwupFFnRQrM=
-X-Google-Smtp-Source: AGHT+IGN3kN7Pj7+b3f5MmR6eoUjbu3YaQOvSViEElaUGaVhlvaWkAIYHMIyI+l4jFqMMxB05jcdkA==
-X-Received: by 2002:a17:907:2cc3:b0:9bd:7f40:caa5 with SMTP id
- hg3-20020a1709072cc300b009bd7f40caa5mr11856159ejc.77.1699259575562; 
- Mon, 06 Nov 2023 00:32:55 -0800 (PST)
+ bh=kfpbebHmj3SbuVDSsc+mIfZFL/vs0g9TApfxj78EOH8=;
+ b=A9SwqiUC85szWwso3gvvJhiXg3i0jpejLnjMzNyiExE1xWxjNhdTadkygqcHCK9sAT
+ l9UPR8YL3OqhNaHumXmVeAxPYF2jFk8eHuOe83Sr5pgoHs+dYZWL4hZ3KvRV6gGFvDmD
+ roc3N31mgcXObjhAxv+iNjXk/04NR4PrxpS6RMSQ/K9MTcKPgkvXK5vpcCkknoQw7qI5
+ S7EnjKwdG2dCyzjrsTQgD3ZjfSj/4sIL1hWauldKMYmBFCHIg67sN3z4LdvhNt/+ERwc
+ tW+P+ALudIB7BUh+vUDcOKNi607wqhXOgSEXhVWh3ZqpTFzMhG5WUbUdzhqEVaFsEy4T
+ JhBg==
+X-Gm-Message-State: AOJu0YznprRq09ZjBy5R1govRcpfQSXPZ/vmTFpZLfF0Ne24Bh9bDCbK
+ 8wf3kymYX1oEwnXIMpacJ3O30lbyy10=
+X-Google-Smtp-Source: AGHT+IE/kFZYftVsHDeY+4GmDahZFLfj+uJ9fDNqTqu6reLf6HhfYzbwLrad5+IbsCug2lnNZpn9EA==
+X-Received: by 2002:a17:907:3ea7:b0:9d3:afe1:b3e5 with SMTP id
+ hs39-20020a1709073ea700b009d3afe1b3e5mr12924894ejc.75.1699259576757; 
+ Mon, 06 Nov 2023 00:32:56 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- t21-20020a170906269500b009a1a653770bsm3799715ejc.87.2023.11.06.00.32.54
+ t21-20020a170906269500b009a1a653770bsm3799715ejc.87.2023.11.06.00.32.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 00:32:54 -0800 (PST)
+ Mon, 06 Nov 2023 00:32:56 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 3/5] board: transformer-t30: convert ASUS Transformers to
+Subject: [PATCH v1 4/5] board: grouper: convert ASUS Google Nexus 7 (2012) to
  use DM PMIC
-Date: Mon,  6 Nov 2023 10:32:27 +0200
-Message-Id: <20231106083229.256322-4-clamor95@gmail.com>
+Date: Mon,  6 Nov 2023 10:32:28 +0200
+Message-Id: <20231106083229.256322-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231106083229.256322-1-clamor95@gmail.com>
 References: <20231106083229.256322-1-clamor95@gmail.com>
@@ -96,124 +96,129 @@ board and switch to DM based driver with device tree support.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-asus-p1801-t.dts         |   2 +
- arch/arm/dts/tegra30-asus-tf600t.dts          |   4 +
- arch/arm/dts/tegra30-asus-transformer.dtsi    |   2 +
- board/asus/transformer-t30/Kconfig            |  10 --
- .../transformer-t30/configs/tf600t.config     |   2 +-
- .../transformer-t30/transformer-t30-spl.c     |   2 +-
- board/asus/transformer-t30/transformer-t30.c  | 121 +-----------------
- configs/transformer_t30_defconfig             |   5 +
- 8 files changed, 21 insertions(+), 127 deletions(-)
+ .../dts/tegra30-asus-nexus7-grouper-E1565.dts |   1 +
+ .../dts/tegra30-asus-nexus7-grouper-PM269.dts |   1 +
+ .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |   1 +
+ board/asus/grouper/Kconfig                    |   8 -
+ board/asus/grouper/Makefile                   |   4 +-
+ .../asus/grouper/configs/grouper_E1565.config |   6 +-
+ .../asus/grouper/configs/grouper_PM269.config |   6 +-
+ board/asus/grouper/configs/tilapia.config     |   6 +-
+ board/asus/grouper/grouper-spl-max.c          |   2 +-
+ board/asus/grouper/grouper-spl-ti.c           |   2 +-
+ board/asus/grouper/grouper.c                  | 154 +-----------------
+ configs/grouper_common_defconfig              |   1 +
+ 12 files changed, 29 insertions(+), 163 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-asus-p1801-t.dts b/arch/arm/dts/tegra30-asus-p1801-t.dts
-index 39f7caf8d0..d62d43268b 100644
---- a/arch/arm/dts/tegra30-asus-p1801-t.dts
-+++ b/arch/arm/dts/tegra30-asus-p1801-t.dts
-@@ -101,6 +101,7 @@
- 					regulator-name = "vdd_emmc_core";
- 					regulator-min-microvolt = <3300000>;
- 					regulator-max-microvolt = <3300000>;
-+					regulator-boot-on;
- 				};
- 
- 				/* uSD slot VDD */
-@@ -108,6 +109,7 @@
- 					regulator-name = "vdd_usd";
- 					regulator-min-microvolt = <3100000>;
- 					regulator-max-microvolt = <3100000>;
-+					regulator-boot-on;
- 				};
- 
- 				/* uSD slot VDDIO */
-diff --git a/arch/arm/dts/tegra30-asus-tf600t.dts b/arch/arm/dts/tegra30-asus-tf600t.dts
-index fd9d11ca19..efc6a83b9d 100644
---- a/arch/arm/dts/tegra30-asus-tf600t.dts
-+++ b/arch/arm/dts/tegra30-asus-tf600t.dts
-@@ -84,12 +84,14 @@
- 					regulator-name = "vdd_1v2_backlight";
- 					regulator-min-microvolt = <1200000>;
- 					regulator-max-microvolt = <1200000>;
-+					regulator-boot-on;
- 				};
- 
- 				vcore_lcd: vdd2 {
- 					regulator-name = "vcore_lcd";
- 					regulator-min-microvolt = <1500000>;
- 					regulator-max-microvolt = <1500000>;
-+					regulator-boot-on;
- 				};
- 
- 				vdd_1v8_vio: vddio {
-@@ -105,6 +107,7 @@
- 					regulator-name = "vdd_emmc_core";
- 					regulator-min-microvolt = <3300000>;
- 					regulator-max-microvolt = <3300000>;
-+					regulator-boot-on;
- 				};
- 
- 				/* uSD slot VDDIO */
-@@ -119,6 +122,7 @@
- 					regulator-name = "avdd_dsi_csi";
- 					regulator-min-microvolt = <1200000>;
- 					regulator-max-microvolt = <1200000>;
+diff --git a/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts b/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
+index 945ae404ac..bfc675ca92 100644
+--- a/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
++++ b/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
+@@ -35,6 +35,7 @@
+ 					regulator-name = "vcore_emmc";
+ 					regulator-min-microvolt = <2850000>;
+ 					regulator-max-microvolt = <2850000>;
 +					regulator-boot-on;
  				};
  			};
  		};
-diff --git a/arch/arm/dts/tegra30-asus-transformer.dtsi b/arch/arm/dts/tegra30-asus-transformer.dtsi
-index 888f9ca74e..afddb83983 100644
---- a/arch/arm/dts/tegra30-asus-transformer.dtsi
-+++ b/arch/arm/dts/tegra30-asus-transformer.dtsi
-@@ -82,6 +82,7 @@
+diff --git a/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts b/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
+index 4363bfc87d..cf03011bc1 100644
+--- a/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
++++ b/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
+@@ -36,6 +36,7 @@
  					regulator-name = "vdd_emmc_core";
  					regulator-min-microvolt = <3300000>;
  					regulator-max-microvolt = <3300000>;
 +					regulator-boot-on;
  				};
- 
- 				/* uSD slot VDD */
-@@ -89,6 +90,7 @@
- 					regulator-name = "vdd_usd";
- 					regulator-min-microvolt = <3100000>;
- 					regulator-max-microvolt = <3100000>;
+ 			};
+ 		};
+diff --git a/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts b/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
+index 89348fde13..ef8b2b5049 100644
+--- a/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
++++ b/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
+@@ -35,6 +35,7 @@
+ 					regulator-name = "vcore_emmc";
+ 					regulator-min-microvolt = <2850000>;
+ 					regulator-max-microvolt = <2850000>;
 +					regulator-boot-on;
  				};
- 
- 				/* uSD slot VDDIO */
-diff --git a/board/asus/transformer-t30/Kconfig b/board/asus/transformer-t30/Kconfig
-index accc999c43..915436ba6c 100644
---- a/board/asus/transformer-t30/Kconfig
-+++ b/board/asus/transformer-t30/Kconfig
-@@ -9,14 +9,4 @@ config SYS_VENDOR
+ 			};
+ 		};
+diff --git a/board/asus/grouper/Kconfig b/board/asus/grouper/Kconfig
+index 47d9bae946..f935cce422 100644
+--- a/board/asus/grouper/Kconfig
++++ b/board/asus/grouper/Kconfig
+@@ -9,12 +9,4 @@ config SYS_VENDOR
  config SYS_CONFIG_NAME
- 	default "transformer-t30"
+ 	default "grouper"
  
--config TRANSFORMER_SPI_BOOT
--	bool "Enable support for SPI based flash"
--	select TEGRA20_SLINK
--	select DM_SPI_FLASH
--	select SPI_FLASH_WINBOND
--	help
--	  Tegra 3 based Transformers with Windows RT have core
--	  boot sequence (BCT and EBT) on separate SPI FLASH
--	  memory with 4MB size.
+-config GROUPER_TPS65911
+-	bool "Enable support TI TPS65911 PMIC"
+-	select CMD_POWEROFF
+-
+-config GROUPER_MAX77663
+-	bool "Enable support MAXIM MAX77663 PMIC"
+-	select CMD_POWEROFF
 -
  endif
-diff --git a/board/asus/transformer-t30/configs/tf600t.config b/board/asus/transformer-t30/configs/tf600t.config
-index 18ab4fbd87..e40d0fdd47 100644
---- a/board/asus/transformer-t30/configs/tf600t.config
-+++ b/board/asus/transformer-t30/configs/tf600t.config
-@@ -1,4 +1,4 @@
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-tf600t"
--CONFIG_TRANSFORMER_SPI_BOOT=y
- CONFIG_BOOTCOMMAND="setenv gpio_button 222; if run check_button; then poweroff; fi; setenv gpio_button 132; if run check_button; then echo Starting SPI flash update ...; run update_spi; fi; run bootcmd_usb0; run bootcmd_mmc1; run bootcmd_mmc0; poweroff;"
-+CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_USB_GADGET_PRODUCT_NUM=0x4d00
-diff --git a/board/asus/transformer-t30/transformer-t30-spl.c b/board/asus/transformer-t30/transformer-t30-spl.c
-index 89819b2b92..952e2c8224 100644
---- a/board/asus/transformer-t30/transformer-t30-spl.c
-+++ b/board/asus/transformer-t30/transformer-t30-spl.c
+diff --git a/board/asus/grouper/Makefile b/board/asus/grouper/Makefile
+index e4a477a366..d041cf8087 100644
+--- a/board/asus/grouper/Makefile
++++ b/board/asus/grouper/Makefile
+@@ -7,8 +7,8 @@
+ #  Svyatoslav Ryhel <clamor95@gmail.com>
+ 
+ ifdef CONFIG_SPL_BUILD
+-obj-$(CONFIG_GROUPER_MAX77663) += grouper-spl-max.o
+-obj-$(CONFIG_GROUPER_TPS65911) += grouper-spl-ti.o
++obj-$(CONFIG_DM_PMIC_MAX77663) += grouper-spl-max.o
++obj-$(CONFIG_DM_PMIC_TPS65910) += grouper-spl-ti.o
+ endif
+ 
+ obj-y += grouper.o
+diff --git a/board/asus/grouper/configs/grouper_E1565.config b/board/asus/grouper/configs/grouper_E1565.config
+index 4d8d5263fa..265295c8b3 100644
+--- a/board/asus/grouper/configs/grouper_E1565.config
++++ b/board/asus/grouper/configs/grouper_E1565.config
+@@ -1,2 +1,6 @@
+ CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-nexus7-grouper-E1565"
+-CONFIG_GROUPER_MAX77663=y
++CONFIG_CMD_POWEROFF=y
++# CONFIG_MAX77663_GPIO is not set
++CONFIG_DM_PMIC_MAX77663=y
++CONFIG_DM_REGULATOR_MAX77663=y
++CONFIG_SYSRESET_MAX77663=y
+diff --git a/board/asus/grouper/configs/grouper_PM269.config b/board/asus/grouper/configs/grouper_PM269.config
+index fc768b2051..a7ee3587ed 100644
+--- a/board/asus/grouper/configs/grouper_PM269.config
++++ b/board/asus/grouper/configs/grouper_PM269.config
+@@ -1,2 +1,6 @@
+ CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-nexus7-grouper-PM269"
+-CONFIG_GROUPER_TPS65911=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_DM_PMIC_TPS65910=y
++# CONFIG_DM_REGULATOR_TPS65910 is not set
++CONFIG_DM_REGULATOR_TPS65911=y
++CONFIG_SYSRESET_TPS65910=y
+diff --git a/board/asus/grouper/configs/tilapia.config b/board/asus/grouper/configs/tilapia.config
+index 1fb0633e3a..d461b4752a 100644
+--- a/board/asus/grouper/configs/tilapia.config
++++ b/board/asus/grouper/configs/tilapia.config
+@@ -1,3 +1,7 @@
+ CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-nexus7-tilapia-E1565"
+-CONFIG_GROUPER_MAX77663=y
+ CONFIG_SYS_PROMPT="Tegra30 (Tilapia) # "
++CONFIG_CMD_POWEROFF=y
++# CONFIG_MAX77663_GPIO is not set
++CONFIG_DM_PMIC_MAX77663=y
++CONFIG_DM_REGULATOR_MAX77663=y
++CONFIG_SYSRESET_MAX77663=y
+diff --git a/board/asus/grouper/grouper-spl-max.c b/board/asus/grouper/grouper-spl-max.c
+index 844383766a..3e58bf97cc 100644
+--- a/board/asus/grouper/grouper-spl-max.c
++++ b/board/asus/grouper/grouper-spl-max.c
 @@ -9,7 +9,7 @@
   *  Svyatoslav Ryhel <clamor95@gmail.com>
   */
@@ -223,13 +228,26 @@ index 89819b2b92..952e2c8224 100644
  #include <asm/arch-tegra/tegra_i2c.h>
  #include <linux/delay.h>
  
-diff --git a/board/asus/transformer-t30/transformer-t30.c b/board/asus/transformer-t30/transformer-t30.c
-index ba795a802e..29d77146bb 100644
---- a/board/asus/transformer-t30/transformer-t30.c
-+++ b/board/asus/transformer-t30/transformer-t30.c
-@@ -9,70 +9,13 @@
+diff --git a/board/asus/grouper/grouper-spl-ti.c b/board/asus/grouper/grouper-spl-ti.c
+index e5b78f0121..1dcce80b48 100644
+--- a/board/asus/grouper/grouper-spl-ti.c
++++ b/board/asus/grouper/grouper-spl-ti.c
+@@ -9,7 +9,7 @@
+  *  Svyatoslav Ryhel <clamor95@gmail.com>
+  */
  
- /* T30 Transformers derive from Cardhu board */
+-#include <common.h>
++#include <asm/arch/tegra.h>
+ #include <asm/arch-tegra/tegra_i2c.h>
+ #include <linux/delay.h>
+ 
+diff --git a/board/asus/grouper/grouper.c b/board/asus/grouper/grouper.c
+index 5398ec8b9f..839a95ae15 100644
+--- a/board/asus/grouper/grouper.c
++++ b/board/asus/grouper/grouper.c
+@@ -7,105 +7,13 @@
+  *  Svyatoslav Ryhel <clamor95@gmail.com>
+  */
  
 -#include <common.h>
  #include <dm.h>
@@ -241,26 +259,27 @@ index ba795a802e..29d77146bb 100644
 -#include <asm/arch/gpio.h>
 -#include <asm/gpio.h>
 -#include <linux/delay.h>
--#include "pinmux-config-transformer.h"
+-#include "pinmux-config-grouper.h"
 -
 -#define TPS65911_I2C_ADDRESS		0x2D
 -
--#define TPS65911_VDD1			0x21
--#define TPS65911_VDD1_OP		0x22
--#define TPS65911_LDO1			0x30
--#define TPS65911_LDO2			0x31
--#define TPS65911_LDO3			0x37
--#define TPS65911_LDO5			0x32
--#define TPS65911_LDO6			0x35
--
--#define TPS65911_DEVCTRL		0x3F
+-#define TPS65911_REG_LDO1		0x30
+-#define TPS65911_REG_DEVCTRL		0x3F
 -#define   DEVCTRL_PWR_OFF_MASK		BIT(7)
 -#define   DEVCTRL_DEV_ON_MASK		BIT(2)
 -#define   DEVCTRL_DEV_OFF_MASK		BIT(0)
 -
+-#define MAX77663_I2C_ADDRESS		0x3C
+-
+-#define MAX77663_REG_SD2		0x18
+-#define MAX77663_REG_LDO3		0x29
+-#define MAX77663_REG_ONOFF_CFG1		0x41
+-#define   ONOFF_PWR_OFF			BIT(1)
+-
 -#ifdef CONFIG_CMD_POWEROFF
--int do_poweroff(struct cmd_tbl *cmdtp, int flag,
--		int argc, char *const argv[])
+-#ifdef CONFIG_GROUPER_TPS65911
+-int do_poweroff(struct cmd_tbl *cmdtp,
+-		int flag, int argc, char *const argv[])
 -{
 -	struct udevice *dev;
 -	uchar data_buffer[1];
@@ -271,43 +290,76 @@ index ba795a802e..29d77146bb 100644
 -		log_debug("cannot find PMIC I2C chip\n");
 -		return 0;
 -	}
-+#include <power/regulator.h>
- 
--	ret = dm_i2c_read(dev, TPS65911_DEVCTRL, data_buffer, 1);
+-
+-	ret = dm_i2c_read(dev, TPS65911_REG_DEVCTRL, data_buffer, 1);
 -	if (ret)
 -		return ret;
 -
 -	data_buffer[0] |= DEVCTRL_PWR_OFF_MASK;
 -
--	ret = dm_i2c_write(dev, TPS65911_DEVCTRL, data_buffer, 1);
+-	ret = dm_i2c_write(dev, TPS65911_REG_DEVCTRL, data_buffer, 1);
 -	if (ret)
 -		return ret;
 -
 -	data_buffer[0] |= DEVCTRL_DEV_OFF_MASK;
 -	data_buffer[0] &= ~DEVCTRL_DEV_ON_MASK;
 -
--	ret = dm_i2c_write(dev, TPS65911_DEVCTRL, data_buffer, 1);
+-	ret = dm_i2c_write(dev, TPS65911_REG_DEVCTRL, data_buffer, 1);
 -	if (ret)
 -		return ret;
 -
 -	// wait some time and then print error
 -	mdelay(5000);
+-
 -	printf("Failed to power off!!!\n");
 -	return 1;
 -}
--#endif
-+#include "pinmux-config-transformer.h"
+-#endif /* CONFIG_GROUPER_TPS65911 */
+-
+-#ifdef CONFIG_GROUPER_MAX77663
+-int do_poweroff(struct cmd_tbl *cmdtp,
+-		int flag, int argc, char *const argv[])
+-{
+-	struct udevice *dev;
+-	uchar data_buffer[1];
+-	int ret;
+-
+-	ret = i2c_get_chip_for_busnum(0, MAX77663_I2C_ADDRESS, 1, &dev);
+-	if (ret) {
+-		log_debug("cannot find PMIC I2C chip\n");
+-		return 0;
+-	}
+-
+-	ret = dm_i2c_read(dev, MAX77663_REG_ONOFF_CFG1, data_buffer, 1);
+-	if (ret)
+-		return ret;
+-
+-	data_buffer[0] |= ONOFF_PWR_OFF;
++#include <power/regulator.h>
+ 
+-	ret = dm_i2c_write(dev, MAX77663_REG_ONOFF_CFG1, data_buffer, 1);
+-	if (ret)
+-		return ret;
+-
+-	// wait some time and then print error
+-	mdelay(5000);
+-
+-	printf("Failed to power off!!!\n");
+-	return 1;
+-}
+-#endif /* CONFIG_GROUPER_MAX77663 */
+-#endif /* CONFIG_CMD_POWEROFF */
++#include "pinmux-config-grouper.h"
  
  /*
   * Routine: pinmux_init
-@@ -92,65 +35,13 @@ void pinmux_init(void)
- 	}
+@@ -120,63 +28,13 @@ void pinmux_init(void)
+ 		ARRAY_SIZE(grouper_padctrl));
  }
  
 -#ifdef CONFIG_MMC_SDHCI_TEGRA
--static void tps65911_voltage_init(void)
-+int nvidia_board_init(void)
- {
+-static void __maybe_unused tps65911_voltage_init(void)
+-{
 -	struct udevice *dev;
 -	int ret;
 -
@@ -318,42 +370,31 @@ index ba795a802e..29d77146bb 100644
 -	}
 -
 -	/* TPS659110: LDO1_REG = 3.3v, ACTIVE to SDMMC4 */
--	ret = dm_i2c_reg_write(dev, TPS65911_LDO1, 0xc9);
+-	ret = dm_i2c_reg_write(dev, TPS65911_REG_LDO1, 0xC9);
 -	if (ret)
 -		log_debug("vcore_emmc set failed: %d\n", ret);
+-}
 -
--	if (of_machine_is_compatible("asus,tf600t")) {
--		/* TPS659110: VDD1_REG = 1.2v, ACTIVE to backlight */
--		ret = dm_i2c_reg_write(dev, TPS65911_VDD1_OP, 0x33);
--		if (ret)
--			log_debug("vdd_bl set failed: %d\n", ret);
+-static void __maybe_unused max77663_voltage_init(void)
+-{
+-	struct udevice *dev;
+-	int ret;
 -
--		ret = dm_i2c_reg_write(dev, TPS65911_VDD1, 0x0d);
--		if (ret)
--			log_debug("vdd_bl enable failed: %d\n", ret);
--
--		/* TPS659110: LDO5_REG = 3.3v, ACTIVE to SDMMC1 VIO */
--		ret = dm_i2c_reg_write(dev, TPS65911_LDO5, 0x65);
--		if (ret)
--			log_debug("vdd_usd set failed: %d\n", ret);
--
--		/* TPS659110: LDO6_REG = 1.2v, ACTIVE to MIPI */
--		ret = dm_i2c_reg_write(dev, TPS65911_LDO6, 0x11);
--		if (ret)
--			log_debug("vdd_mipi set failed: %d\n", ret);
--	} else {
--		/* TPS659110: LDO2_REG = 3.1v, ACTIVE to SDMMC1 */
--		ret = dm_i2c_reg_write(dev, TPS65911_LDO2, 0xb9);
--		if (ret)
--			log_debug("vdd_usd set failed: %d\n", ret);
-+	/* Set up boot-on regulators */
-+	regulators_enable_boot_on(true);
- 
--		/* TPS659110: LDO3_REG = 3.1v, ACTIVE to SDMMC1 VIO */
--		ret = dm_i2c_reg_write(dev, TPS65911_LDO3, 0x5d);
--		if (ret)
--			log_debug("vddio_usd set failed: %d\n", ret);
+-	ret = i2c_get_chip_for_busnum(0, MAX77663_I2C_ADDRESS, 1, &dev);
+-	if (ret) {
+-		log_debug("cannot find PMIC I2C chip\n");
+-		return;
 -	}
+-
+-	/* 0x60 for 1.8v, bit7:0 = voltage */
+-	ret = dm_i2c_reg_write(dev, MAX77663_REG_SD2, 0x60);
+-	if (ret)
+-		log_debug("vdd_1v8_vio set failed: %d\n", ret);
+-
+-	/* 0xEC for 3.00v, enabled: bit7:6 = 11 = enable, bit5:0 = voltage */
+-	ret = dm_i2c_reg_write(dev, MAX77663_REG_LDO3, 0xEC);
+-	if (ret)
+-		log_debug("vcore_emmc set failed: %d\n", ret);
 -}
 -
 -/*
@@ -361,20 +402,30 @@ index ba795a802e..29d77146bb 100644
 - * Description: setup the MMC muxes, power rails, etc.
 - */
 -void pin_mux_mmc(void)
--{
--	/* Bring up uSD and eMMC power */
++int nvidia_board_init(void)
+ {
+-#ifdef CONFIG_GROUPER_MAX77663
+-	/* Bring up eMMC power on MAX PMIC */
+-	max77663_voltage_init();
+-#endif
++	/* Set up boot-on regulators */
++	regulators_enable_boot_on(true);
+ 
+-#ifdef CONFIG_GROUPER_TPS65911
+-	/* Bring up eMMC power on TI PMIC */
 -	tps65911_voltage_init();
+-#endif
 +	return 0;
  }
 -#endif	/* MMC */
  
  #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
  int ft_board_setup(void *blob, struct bd_info *bd)
-diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
-index 092c0aa2b0..8d828c1fa6 100644
---- a/configs/transformer_t30_defconfig
-+++ b/configs/transformer_t30_defconfig
-@@ -45,6 +45,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+diff --git a/configs/grouper_common_defconfig b/configs/grouper_common_defconfig
+index 258d7b1139..616540f7d5 100644
+--- a/configs/grouper_common_defconfig
++++ b/configs/grouper_common_defconfig
+@@ -43,6 +43,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
  CONFIG_CMD_UMS_ABORT_KEYED=y
  # CONFIG_CMD_SETEXPR is not set
  CONFIG_CMD_PAUSE=y
@@ -382,21 +433,6 @@ index 092c0aa2b0..8d828c1fa6 100644
  CONFIG_CMD_EXT4_WRITE=y
  # CONFIG_SPL_DOS_PARTITION is not set
  # CONFIG_SPL_EFI_PARTITION is not set
-@@ -65,10 +66,14 @@ CONFIG_I2C_MUX=y
- CONFIG_I2C_MUX_GPIO=y
- CONFIG_BUTTON_KEYBOARD=y
- CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_TPS65910=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_TPS65911=y
- CONFIG_PWM_TEGRA=y
- CONFIG_SYS_NS16550=y
-+CONFIG_TEGRA20_SLINK=y
-+CONFIG_SYSRESET_TPS65910=y
- CONFIG_USB=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_TEGRA=y
 -- 
 2.40.1
 
