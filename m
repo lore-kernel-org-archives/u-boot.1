@@ -4,177 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65086C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:54:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82820C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C29F286BAC;
-	Mon,  6 Nov 2023 12:54:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 660F886BAC;
+	Mon,  6 Nov 2023 12:57:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MeJSyI1F";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wdI0qily";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0779B86BD6; Mon,  6 Nov 2023 12:54:11 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20613.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8a::613])
+ id 0748886F68; Mon,  6 Nov 2023 12:57:04 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20622.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e89::622])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDD4586BA9
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:54:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C59586BA9
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:57:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SQJDjO5f+kOgRvalEs4L398/MigFLDN0qE5fmy5Xt1axHid+woxAd0fi8DyNnGzUHTdHluLEAC/0rKfhqvTvtRbK/5yfucQ7Eox6Pw8A7PrqwDOF1dE9qNpNhdOGqP0TKX/Uv1RhqN7fXEER9eqhQI82nEE30CKVKAaL89VuFOWwW7i5Vx9W067cj/J9+tV4YMiWNUQlKIpGkwYZkZGVc5HvMVb3wdlDKYRGzBZ7wsI7YixNGv+KzFEvJbNbqgSx6PBfMO6pRSGkderAKoOr0qXPUijHvf30thrL+5UIOmihZxKOxdVs6Cou5qvyd1RN/5cXA5JuUEa1lD4Eub4kVg==
+ b=PqISY6GJafGwzQbyeoa4BKht74+rwcixJCT1KP2cog3u+7woEsiuG1JSv9j7ay+asg0AAB6CTDt3Cw0BG+idYwaYh0r2K03pdxr0FM02WRLGn/MIQeu1gcBO5Ii9WeLqioEUEvsAi4uIwDqSJ0LUFqilMoYPrvbs7rKIFUYSKihO8tpLPF1ouJPtgypsQIVrWhDwNXcKo9Tr2LoM61XIzLHUlRvi+WD3mPuDIZOHs74Dd+noUDUVF0/9/RYEEyJvYlQXLgeNkp0xEvl1mKY7XVwuCdlGMFgYA6XwqSvz9eb2um5LTqrarT78Bdy7wQut3oHLk1qy4xU6j0MDUcryvA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WL20LbOkwUoW4HsMcN6sp8K5GUiCH386YZ6k9Cz2Xts=;
- b=DI41f91pAIeSgAB578dOeKFLkvYLi72MmT3EFv5b5yS6k/mY7DYK4o2c+5xsPa3JEKQ3iAodquouC+eiuXqDaLkfxV6VmNOdvOkPieqgLM2vROZIV8mpe8QN64ZnEppSvdGYSFAoSBAFIL8roplu2RD1SQQbBU3dSjJpdesISzJgSqxD7uLU3bs8S21hq2+gibDNZaDVs052zpqpA9pHRu83FtRo7/gf9YgE0vEC+jhVwPt7Yeh74tFa/Cl/YX7JNWqPgo02+u8eeIWoT7mSsqhxK9vJPjfCFOUES29NK+as9ifQHuCEesAzeOCY75O/dzggWge8J6xvYRgU0gBf0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
+ bh=rDGFlKc/xAtSN9S9+oD1MkLkrJ2EyXMlm0dpsRLFRCg=;
+ b=AyWRQruXCxjyWIamXoscqaZm6rH5muIw9rsvXCUhEd7Ddn2zDuAOUIrrRLUO/ucC45CcQfGTqgIjSVRlU0ytYJ6z7jXsISLBGcSB6/AwXdDUqrW3krN0BuhefuO+MWaWJACIAYQEkT1WaV+IVJhLq6d/KSz6EGgnfZVgW3ZBoWidlp8O1End0cpp+Nj3hCN1d44Vo6vl+KnCIDoqjUZHqjalQ67JtOJBA3Pn8SrYO6ADJiecJxXf1XGb2oK/Z07RD1czo5U40SusUQm/RkGZJ/igIp9QiubIYgshvVPCi8sW775rFCn6njFoCavil68LfyG/ZVFWpTNFc5DWbUH7Bg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WL20LbOkwUoW4HsMcN6sp8K5GUiCH386YZ6k9Cz2Xts=;
- b=MeJSyI1FOGhPQ5+tiBCPfSRRedQHcfwp9vjURG2XW52PTmDQNfA+Sp2j8bIi2gcZMSy31TdGH8NJcUJsD361tuaWQ3OZZm8faeZwv5Xyf24whxAyNheNBtMqNPmrQ2DYFli/6yu9OWIESFC6rHWjShq4mOjjiv4PdAwarlIhUmE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by BN9PR12MB5051.namprd12.prod.outlook.com (2603:10b6:408:134::12)
+ bh=rDGFlKc/xAtSN9S9+oD1MkLkrJ2EyXMlm0dpsRLFRCg=;
+ b=wdI0qily9rWB/3O3zmo37cLz4TcDvEhTMZ3Dg27jLJW93i9Vk1Omz+y9XzKsSe0lLVZJrCQgJnKhWk/lMUX/wQ6yKTK8W0Umi63nQ+o8TyaOAOTwCQjE1ojyNnJKlzNe+VR4DOxafKISkcEG9YQnmMMRromKkJW74P+ksElbW1w=
+Received: from BYAPR11CA0105.namprd11.prod.outlook.com (2603:10b6:a03:f4::46)
+ by PH7PR12MB5829.namprd12.prod.outlook.com (2603:10b6:510:1d4::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28; Mon, 6 Nov
- 2023 11:54:01 +0000
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::1d07:c316:b830:70c9]) by BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::1d07:c316:b830:70c9%4]) with mapi id 15.20.6954.027; Mon, 6 Nov 2023
- 11:54:00 +0000
-Message-ID: <2435f340-8395-4810-893c-9a84d3246e0c@amd.com>
-Date: Mon, 6 Nov 2023 12:53:46 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] riscv: Add support for AMD/Xilinx MicroBlaze V
-Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>
-Cc: u-boot@lists.denx.de, git@xilinx.com,
- Conor Dooley <conor.dooley@microchip.com>, Leo <ycliang@andestech.com>,
- Randolph <randolph@andestech.com>, Rick Chen <rick@andestech.com>,
- Wei Fu <wefu@redhat.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- Yixun Lan <dlan@gentoo.org>
-References: <41c2fda5d6f96e44188d912811a63b8a40625e6e.1699027398.git.michal.simek@amd.com>
- <20231103-shell-those-d0776d5c2e41@spud>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.25; Mon, 6 Nov
+ 2023 11:56:55 +0000
+Received: from CO1PEPF000042AB.namprd03.prod.outlook.com
+ (2603:10b6:a03:f4:cafe::16) by BYAPR11CA0105.outlook.office365.com
+ (2603:10b6:a03:f4::46) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28 via Frontend
+ Transport; Mon, 6 Nov 2023 11:56:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042AB.mail.protection.outlook.com (10.167.243.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6977.16 via Frontend Transport; Mon, 6 Nov 2023 11:56:55 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Mon, 6 Nov
+ 2023 05:56:53 -0600
 From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231103-shell-those-d0776d5c2e41@spud>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0102CA0044.eurprd01.prod.exchangelabs.com
- (2603:10a6:803::21) To BYAPR12MB4758.namprd12.prod.outlook.com
- (2603:10b6:a03:a5::28)
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Conor Dooley <conor.dooley@microchip.com>, Leo <ycliang@andestech.com>,
+ Padmarao Begari <padmarao.begari@microchip.com>, Randolph
+ <randolph@andestech.com>, Rick Chen <rick@andestech.com>, Yanhong Wang
+ <yanhong.wang@starfivetech.com>, Yixun Lan <dlan@gentoo.org>
+Subject: [PATCH v2] riscv: Add support for AMD/Xilinx MicroBlaze V
+Date: Mon, 6 Nov 2023 12:56:47 +0100
+Message-ID: <d488b7016e0d1b1324c64d8a8b2f033851aab6c6.1699271804.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12034; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=MiuGkqc4wr51urXQw7Z/R8Qk63BgsjCh3iEDIYJEceM=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlSPK7WPs6yCNNaJ7Xecqn3yCI9SRp3M9kXbld5pRac57
+ L0sfEKmI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAEykegbDgu5VmcWtfgpBJy6u
+ Lsgrutv1euEEfob58c8Wbjj0b8uhhGrLX9nX4xbac16yBQA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|BN9PR12MB5051:EE_
-X-MS-Office365-Filtering-Correlation-Id: a3ad4c36-1697-4d34-34b2-08dbdebf109f
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AB:EE_|PH7PR12MB5829:EE_
+X-MS-Office365-Filtering-Correlation-Id: 19399890-e3e8-4580-7d70-08dbdebf7909
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: OR6QTH6RNdq+sso2pvYRMe9iH7krEESzgdF9Bjf4CDwDmSAqvQzTEMgmiX1cnjmzyvGlIZ2zCnSwBcDLi+1988dpKqeUJNpVR+NBaHgMLWt7UQg/mX6gEhrBAY58TOLdDSmc4JHy407Ecn6aygxxZVZKo1i2MY1zQT89gUb8NAs4F8mrcEY3LPOlq0umOKUlRzuW1+t6HEVsyeQnOeUyBfj11ZEu3X8QzwJZgEqg6HhIeT62RLw3u2AAc6FxHMXa91ZF7Zt31aFkyF1iZVb/rRFWMUh+rCq6PHYntDYAp9ik8wKT1dJrU7E3Y1+7v1piA6GNhBmo4mlUNzz7940Kvn/WG0RjHQJZ67vzqCWpY2Gk1s2n1GNxYJBS/hFG84c1cSHoD5ESQNqiWCp9ZqwEdzhNO3vKYvw8uraMPAr2SyhDkZgUpLncC7z+jj/hV0DXQSEvpJIEMWYgmFDYYbpJcGpd2VCmyR0PBARDs8e/NnyX/bNvzrKuBA8bjIdm9NkcMtkl8sIN6sTH5wWD/ZcUgEAnm4vNH4ioln4sSq3fTX/nCkbU2TPU8EYaTVVmqbWKrB2aw6Nw9DcYs2aWQimhMk9k9u1TXKkdvERACdOyJc9TxJCwDjZzXOZrVp8vFzfA4b73LGHZXhGpNnfdGQGfbg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(366004)(136003)(376002)(346002)(396003)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(478600001)(41300700001)(44832011)(6506007)(53546011)(2616005)(7416002)(6486002)(6512007)(6666004)(316002)(83380400001)(8676002)(4326008)(8936002)(5660300002)(26005)(66476007)(54906003)(66946007)(66556008)(6916009)(38100700002)(2906002)(31686004)(31696002)(86362001)(36756003)(43740500002)(45980500001);
+X-Microsoft-Antispam-Message-Info: yh3mqN4/NKX3xpsLAu5JaWGT5bLQHN9TdYUWgtsKBvd8ZTKBdmAEkDKDvA7+x1KKSNThnblFF43NYLAsVUzYsXabPm+PckTmeLs6J+YhqRNCYDVBoyH8HH+cBn/8rf+dQlVLeYflrKk7Ll9Cuxn78ukG0t90DkaZEeW990aJHb8vSIX0ne6HyeNngYo+qa6ObNFEwW220xyIlXj7SjQv5CHkglE3RfJwI/fklPaOaUT5YcosOwVy66NGbWMVHWO1lo4uXQvhh2qANchwaOQYIt9Gf9nqDR00zQ+CVVvPMxGWAdGGK+u1v/jGvW90U344TiVfE4zvimrPTx+IPjc9HmpgPRCQhbHI8/zRQG1CkN4uO0WocfMf1SRtABaU/oFxAkMeIHsHXQpz9ex4aAV30gIoxKTxFbFlvEYqAzCdsBLui5XBr99BRWjBxAPVTFMPA0oGkID6VvwvI+0dPgBBqV7cdHdrcW77346CCfy290F9j16ZjlKZHmHwmtpa/XcondtGVNq6mQ+pRvuLLxXo4S6xOoMGVkh4n1W1zYKVe546YnBvhXSTgbhKhss+Nu/WQj8DedLXSNEZX+PJwE1zn+AfQBxOhxhyAdSx4QXaddjCAOJeJWeh4aagsaYNPp9+kLiaJkTo5ax1+W3O7Zmap/UefKofI+GTEXIXgfFdNilOGNMyTRAEVX1vjNXXQG+jyEWnVPqsWqCSt/RlKBM9iYWw4QJTgNZODRNsNsdd4qr9Cjrc04WSFo6Ip5NkrwkwN9r3uzrVH1Yc9jZsq+2FhclsmU7jYp3AFW/4rzLAhiU=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(376002)(346002)(39860400002)(396003)(230922051799003)(82310400011)(186009)(64100799003)(1800799009)(451199024)(36840700001)(46966006)(40470700004)(110136005)(70206006)(2906002)(40460700003)(41300700001)(30864003)(36860700001)(47076005)(70586007)(82740400003)(54906003)(86362001)(356005)(81166007)(6666004)(478600001)(2616005)(83380400001)(16526019)(26005)(426003)(966005)(336012)(316002)(5660300002)(44832011)(36756003)(4326008)(8676002)(8936002)(40480700001)(36900700001);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?djYvS29pR3FUekI2VHpWTGZxTUpPL2VabVdzaVczYnp4bTJhWW56Z3ZtMEVI?=
- =?utf-8?B?SUtqa3JCTDFPcFBKY0o4SUkvRmt2dDM4SVZqa2MrZ1UxaXBsNXNwTGdrVStN?=
- =?utf-8?B?V3IyNzdVSXZWeGlzODZUWk8yQmJpUlRZck1rSGg5Q3lKTGlxdGVsaGQzdkEv?=
- =?utf-8?B?dmw1YXZHSlViOCs4WS9Fb3lrRVRHUG4yMG1vVDROZmNkYnUzTnFFS1ZWeVZF?=
- =?utf-8?B?emtkQSszS3BlU1cwcEp5QnhEZVJjSnFUYnlncWVrV1dhQWRabGdCN3BCZk5z?=
- =?utf-8?B?czZYU1crMENtWU1pL2JhVWl3Z2dYK2l4RlRJTXJxeTZCYStnNGUwUEJnK2JC?=
- =?utf-8?B?eE5heVprbFY4YVFQQkZXTjdyVXYrcW9DMk9MSndBb3FSNDN1Wk8raXUraW8x?=
- =?utf-8?B?L0twbmJLalQwUDVjeW8rbHFnd1lySDYvNUpKSEljWEVxOHVERU15RU83Yjh3?=
- =?utf-8?B?NWE1UFpIRVducmtLU1pyVlp0L3dlWkhFaHRUU25Bb216VWlSYWg3ZVZuZm5N?=
- =?utf-8?B?RTVDZHhYSm1LN1ZGRkxVbmpHcndER3oxaFZlYnRWK1B2bGI5QTZzL1ZYdmp1?=
- =?utf-8?B?Um5GVm5LRXA3d0dXMktva1Rad3BKVHlrdlNPVEx6djVUOWY5YmRIbnA4RGZu?=
- =?utf-8?B?ZXUwQmd6bmUvaHNGVFZTUVAwNjBsZTFPYUVCRG1WNEt2cEdUeUQ4M0pTMGh5?=
- =?utf-8?B?MXRZdzlXK3EzK1hGYUp2UVdRRjdzYUNvNWsxNTJ1blVMNm5lNGZ2UUpPZGdx?=
- =?utf-8?B?Z256NjhsSTFuczJ2em42ellyby9JMk9qQncwOFY5eVNNSXc0WWFXOTQzRFhw?=
- =?utf-8?B?dlcvcWszYmc1QlJMeU52K0lmY0ltM3M1ZnRuNzlNalVpTDV0a1JaeXZhMUhx?=
- =?utf-8?B?UTF1ekZMckYxQ2NjMlpZWVo1V1JwejZHa015R0cwS0lOckpZUlI4YUdacXRr?=
- =?utf-8?B?MDV2eXpsMmI4MjVpbFRsKzA5YkJic0JqL1hUOXZDZnR6QmZqTHBCaEZLN1hi?=
- =?utf-8?B?UlErRnB1U0Vud0xzcllhelViaEF1bFpVWmRlVk9ITW10NSs4ekorOTVVWUxF?=
- =?utf-8?B?SGtMUXlqeTJVeG53NWpnaWRpUC9xLzk3Rlk4ZDJIMitNenRVdEJncnNoRERW?=
- =?utf-8?B?cUdTTWJobkt2K3ZJRUlZQWRxTWtqdmUrUmpIZGx4SitOR1hrMkVkWEpNRjI3?=
- =?utf-8?B?VDJ4NElpSE1KMjlPY1lRbjJzZG95Y3RFR2VaaGowaWozbURoeE43YmZCNUJL?=
- =?utf-8?B?dmVzQ3l5L1dkWTlMNnBESGdtdUdNY1I3YkdUTHoxY09SVTNrTUZsWU80Q3JS?=
- =?utf-8?B?TjRpQkw3d0lvcjcwaTY5TU84U0M0QjFYcExJb2o4ZzIwL2R5bTJ2cnB1UUNh?=
- =?utf-8?B?WlNwaEJ0TkYrV1JYTVpUYktGTHVqOFRYVEpvTExJR0ovSFJRaVVOcFNkNk9N?=
- =?utf-8?B?TWJ0RkZtSFE3YVdGeW5UeHJZV1hVaHNMM2RMZ1NjaDQyOFQzQVdBR1BKMG05?=
- =?utf-8?B?L2NxaHBFc29NU1g5K0lYM1lzRjY0TlhtWlEwdWJLQWlFb1dSYmZDcHdMRllE?=
- =?utf-8?B?SDdEUytDZzUybTUzbVlwVjJReE16THBpUjVFOUZ6VTl1VkQram8wT1JFc1VE?=
- =?utf-8?B?dUx4c1FjQVlWeUdmRDdzYUZMM2FGWW5SSkJuTmhOTGtpRGF3MXIxY1RBRWVk?=
- =?utf-8?B?VlVKWjhFdjVkdWpLcEpkMG93M1A0RHc4UUxvYkZpeFJQOXdsYjJKOWtNdXA2?=
- =?utf-8?B?MDU3WFozWWFCYzJLWHRmalVISE4yQ2Z2TUtBTXlaZUlHYmtPak4vRU5xd25Y?=
- =?utf-8?B?WmhCUkR4VVZkVWRDMW93b0ZqV3NDMkUyQXlvM09pcGN6RHNzSUxMOEFpQ0F4?=
- =?utf-8?B?RitNUHE5cFg5bWRVVHp6ejRjM2JZWjZLU3dMNWhBQUlqdFVTOEJKZTBQeTYz?=
- =?utf-8?B?aVlOMDBGTGY3WWl2eDN6TDhwd2F3UkFGRWwwM2N2dUpPTVRLM3RPd29rckdv?=
- =?utf-8?B?cVY4WklYeEJldytSdml4dmZuUEFMb1IzK2hlc1IrckN5dWtPR2pTYm9NOWdJ?=
- =?utf-8?B?MUNoNms5NjlsSlY5YXNBcWdYODNETHFvMGgzVEN2c3haNHdNOE1SRXNWSks3?=
- =?utf-8?Q?YYXZiaDdienm+IPcxJDGYJKma?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3ad4c36-1697-4d34-34b2-08dbdebf109f
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2023 11:54:00.7700 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2023 11:56:55.2279 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 19399890-e3e8-4580-7d70-08dbdebf7909
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DDDtnglIHRKWClvhvrh8PjLldn+BnomGy79//85y/3YVjtOOJ8wuHf1JGCtFIVz1
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5051
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5829
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -191,108 +127,398 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Conor,
+MicroBlaze V is new AMD/Xilinx soft-core 32bit RISC-V processor IP.
+It is hardware compatible with classic MicroBlaze processor.
 
-On 11/3/23 17:25, Conor Dooley wrote:
-> Yo,
-> 
-> Since you sent it to me, I may as well comment...
-> 
-> On Fri, Nov 03, 2023 at 05:03:25PM +0100, Michal Simek wrote:
->> MicroBlaze V is new AMD/Xilinx soft-core 32bit RISC-V processor IP.
->> It is hardware compatible with classic MicroBlaze processor.
->>
->> The patch contains initial wiring and configuration for initial HW design
->> with memory, cpu, interrupt controller, timers and uartlite console.
->>
->> Provided DT is just describing one configuration and should be taken only
->> as example.
-> 
-> 
->> @@ -0,0 +1,86 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * dts file for Xilinx MicroBlaze V
->> + *
->> + * (C) Copyright 2023, Advanced Micro Devices, Inc.
->> + *
->> + * Michal Simek <michal.simek@amd.com>
->> + */
->> +
->> +/dts-v1/;
->> +/ {
->> +	#address-cells = <1>;
->> +	#size-cells = <1>;
->> +	model = "Xilinx MicroBlaze V 32bit";
->> +	compatible = "xlnx,mbv32";
->> +
->> +	cpus: cpus {
->> +		#address-cells = <1>;
->> +		#size-cells = <0>;
->> +		timebase-frequency = <102000000>;
->> +		cpu_0: cpu@0 {
->> +			device_type = "cpu";
->> +			compatible = "riscv";
-> 
-> You're missing a cpu specific compatible here.
-> "riscv" in isolation is only for {emu,simu}lators.
+The patch contains initial wiring and configuration for initial HW design
+with memory, cpu, interrupt controller, timers and uartlite console
+(interrupt controller is listed but U-Boot is not using it).
 
-Will add.
+Provided DT is just describing one configuration and should be taken only
+as example.
 
-> 
->> +			reg = <0>;
->> +			status = "okay";
->> +			riscv,isa = "rv32imafdc";
->> +			clock-frequency = <100000000>;
->> +			i-cache-size = <32768>;
->> +			d-cache-size = <32768>;
-> 
-> Missing an interrupt-controller child node for the cpu-intc, no?
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-For u-boot interrupt controller is not needed but it is listed below that's why 
-will try to wire it.
+Changes in v2:
+- Extend commit message
+- DT changes, add interrupt controller, check agains dt schema
+- The patch for amd,mbv32 compatible string is here
+https://lore.kernel.org/r/d442d916204d26f82c1c3a924a4cdfb117960e1b.1699270661.git.michal.simek@amd.com
+- The patch for board compatibility is here
+https://lore.kernel.org/r/50c277c92c41a582ef171fb75efc6a6a4f860be2.1699271616.git.michal.simek@amd.com
 
-> 
->> +		};
->> +	};
->> +
->> +	aliases {
->> +		serial0 = &uart0;
->> +	};
->> +
->> +	chosen {
->> +		bootargs = "earlycon";
->> +		stdout-path = "serial0:115200n8";
->> +	};
->> +
->> +	memory@20000000 {
->> +		device_type = "memory";
->> +		reg = <0x20000000 0x20000000>;
->> +	};
->> +
->> +	axi: axi {
->> +		#address-cells = <1>;
->> +		#size-cells = <1>;
->> +		compatible = "simple-bus";
->> +		ranges;
->> +		bootph-all;
->> +
->> +		axi_intc: interrupt-controller@41200000 {
->> +			compatible = "xlnx.xps-intc";
-> 
-> This is some non-standard interrupt controller, rather than a plic,
-> right?
+xlnx,xps-intc-1.00.a driver exists in the Linux kernel but DT binding is
+missing. That's something what we need to work on.
+arch/arm64/boot/dts/xilinx/xilinx-mbv32.dtb: /axi/interrupt-controller@41200000: failed to match any schema with compatible: ['xlnx,xps-intc-1.00.a']
 
-non-standard riscv interrupt controller. But standard microblaze interrrupt 
-controller. And of course it is not plic compatible. Based on my discussion with 
-HW designers it shouldn't be a problem to use this one.
+Public annoucement is available here if someone is interested.
+https://www.xilinx.com/products/design-tools/microblaze-v.html?utm_source=marketo&utm_medium=email&utm_campaign=EN-EM-2023-11-02-New-MicroBlaze-V-Processor&utm_term=btn&mkt_tok=NDA5LVdZWC03MjQAAAGPMMJYuPPscCags7WdvOeUSWy-_mC9aOwrobFaZRf5ok_eHoQUvTLBzJdHrkcBId9tQ4a-odfnU91WjUkIxx-iSG4OKGofjK5iZcAiK_VN8_xK
 
-> Also, should you not also have a riscv,timer node?
+---
+ arch/riscv/Kconfig                   |   4 +
+ arch/riscv/dts/Makefile              |   2 +
+ arch/riscv/dts/xilinx-mbv32.dts      | 106 +++++++++++++++++++++++++++
+ board/xilinx/Kconfig                 |   3 +-
+ board/xilinx/common/board.c          |   5 ++
+ board/xilinx/mbv/Kconfig             |  28 +++++++
+ board/xilinx/mbv/MAINTAINERS         |   7 ++
+ board/xilinx/mbv/Makefile            |   5 ++
+ board/xilinx/mbv/board.c             |  11 +++
+ configs/xilinx_mbv32_defconfig       |  30 ++++++++
+ configs/xilinx_mbv32_smode_defconfig |  32 ++++++++
+ include/configs/xilinx_mbv.h         |   6 ++
+ 12 files changed, 238 insertions(+), 1 deletion(-)
+ create mode 100644 arch/riscv/dts/xilinx-mbv32.dts
+ create mode 100644 board/xilinx/mbv/Kconfig
+ create mode 100644 board/xilinx/mbv/MAINTAINERS
+ create mode 100644 board/xilinx/mbv/Makefile
+ create mode 100644 board/xilinx/mbv/board.c
+ create mode 100644 configs/xilinx_mbv32_defconfig
+ create mode 100644 configs/xilinx_mbv32_smode_defconfig
+ create mode 100644 include/configs/xilinx_mbv.h
 
-It is design from Amd perspective as option to exchange microblaze with riscv 
-that's why all IPs around it are the same. It means xps timer is used instead.
-
-Thanks,
-Michal
-
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 6d0d812ddb55..67126d96af89 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -39,6 +39,9 @@ config TARGET_TH1520_LPI4A
+ 	bool "Support Sipeed's TH1520 Lichee PI 4A Board"
+ 	select SYS_CACHE_SHIFT_6
+ 
++config TARGET_XILINX_MBV
++	bool "Support AMD/Xilinx MicroBlaze V"
++
+ endchoice
+ 
+ config SYS_ICACHE_OFF
+@@ -82,6 +85,7 @@ source "board/sifive/unmatched/Kconfig"
+ source "board/sipeed/maix/Kconfig"
+ source "board/starfive/visionfive2/Kconfig"
+ source "board/thead/th1520_lpi4a/Kconfig"
++source "board/xilinx/mbv/Kconfig"
+ 
+ # platform-specific options below
+ source "arch/riscv/cpu/andesv5/Kconfig"
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index be6c8a422729..b05bb5607f06 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -9,6 +9,8 @@ dtb-$(CONFIG_TARGET_SIFIVE_UNMATCHED) += hifive-unmatched-a00.dtb
+ dtb-$(CONFIG_TARGET_SIPEED_MAIX) += k210-maix-bit.dtb
+ dtb-$(CONFIG_TARGET_STARFIVE_VISIONFIVE2) += jh7110-starfive-visionfive-2.dtb
+ dtb-$(CONFIG_TARGET_TH1520_LPI4A) += th1520-lichee-pi-4a.dtb
++dtb-$(CONFIG_TARGET_XILINX_MBV) += xilinx-mbv32.dtb
++
+ include $(srctree)/scripts/Makefile.dts
+ 
+ targets += $(dtb-y)
+diff --git a/arch/riscv/dts/xilinx-mbv32.dts b/arch/riscv/dts/xilinx-mbv32.dts
+new file mode 100644
+index 000000000000..6a6b8b694bd1
+--- /dev/null
++++ b/arch/riscv/dts/xilinx-mbv32.dts
+@@ -0,0 +1,106 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * dts file for AMD MicroBlaze V
++ *
++ * (C) Copyright 2023, Advanced Micro Devices, Inc.
++ *
++ * Michal Simek <michal.simek@amd.com>
++ */
++
++/dts-v1/;
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++	model = "AMD MicroBlaze V 32bit";
++	compatible = "amd,mbv";
++
++	cpus: cpus {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		timebase-frequency = <102000000>;
++		cpu_0: cpu@0 {
++			compatible = "amd,mbv32", "riscv";
++			device_type = "cpu";
++			reg = <0>;
++			riscv,isa = "rv32imafdc";
++			i-cache-size = <32768>;
++			d-cache-size = <32768>;
++			clock-frequency = <102000000>;
++			cpu0_intc: interrupt-controller {
++				compatible = "riscv,cpu-intc";
++				interrupt-controller;
++				#interrupt-cells = <1>;
++			};
++		};
++	};
++
++	aliases {
++		serial0 = &uart0;
++	};
++
++	chosen {
++		bootargs = "earlycon";
++		stdout-path = "serial0:115200n8";
++	};
++
++	memory@20000000 {
++		device_type = "memory";
++		reg = <0x20000000 0x20000000>;
++	};
++
++	clk102: clock {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <102000000>;
++	};
++
++	axi: axi {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "simple-bus";
++		ranges;
++		bootph-all;
++
++		axi_intc: interrupt-controller@41200000 {
++			compatible = "xlnx,xps-intc-1.00.a";
++			reg = <0x41200000 0x1000>;
++			interrupt-controller;
++			interrupt-parent = <&cpu0_intc>;
++			#interrupt-cells = <2>;
++			kind-of-intr = <0>;
++		};
++
++		xlnx_timer0: timer@41c00000 {
++			compatible = "xlnx,xps-timer-1.00.a";
++			reg = <0x41c00000 0x1000>;
++			interrupt-parent = <&axi_intc>;
++			interrupts = <1 2>;
++			bootph-all;
++			xlnx,one-timer-only = <0>;
++			clock-names = "s_axi_aclk";
++			clocks = <&clk102>;
++		};
++
++		xlnx_timer1: timer@41c20000 {
++			compatible = "xlnx,xps-timer-1.00.a";
++			reg = <0x41c20000 0x1000>;
++			interrupt-parent = <&axi_intc>;
++			interrupts = <0 2>;
++			xlnx,one-timer-only = <0>;
++			clock-names = "s_axi_aclk";
++			clocks = <&clk102>;
++		};
++
++		uart0: serial@40600000 {
++			compatible = "xlnx,xps-uartlite-1.00.a";
++			reg = <0x40600000 0x1000>;
++			interrupt-parent = <&axi_intc>;
++			interrupts = <2 2>;
++			bootph-all;
++			clocks = <&clk102>;
++			current-speed = <115200>;
++			xlnx,data-bits = <8>;
++			xlnx,use-parity = <0>;
++		};
++	};
++};
+diff --git a/board/xilinx/Kconfig b/board/xilinx/Kconfig
+index 4f0776e8bd95..843198fa0da8 100644
+--- a/board/xilinx/Kconfig
++++ b/board/xilinx/Kconfig
+@@ -51,10 +51,11 @@ config XILINX_OF_BOARD_DTB_ADDR
+ 
+ config BOOT_SCRIPT_OFFSET
+ 	hex "Boot script offset"
+-	depends on ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET || MICROBLAZE
++	depends on ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET || MICROBLAZE || TARGET_XILINX_MBV
+ 	default 0xFC0000 if ARCH_ZYNQ || MICROBLAZE
+ 	default 0x3E80000 if ARCH_ZYNQMP
+ 	default 0x7F80000 if ARCH_VERSAL || ARCH_VERSAL_NET
++	default 0 if TARGET_XILINX_MBV
+ 	help
+ 	   Specifies distro boot script offset in NAND/QSPI/NOR flash.
+ 
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 9309b071269f..12a877c71549 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -652,6 +652,11 @@ int embedded_dtb_select(void)
+ #endif
+ 
+ #if defined(CONFIG_LMB)
++
++#ifndef MMU_SECTION_SIZE
++#define MMU_SECTION_SIZE        (1 * 1024 * 1024)
++#endif
++
+ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ {
+ 	phys_size_t size;
+diff --git a/board/xilinx/mbv/Kconfig b/board/xilinx/mbv/Kconfig
+new file mode 100644
+index 000000000000..4bc9f72c541b
+--- /dev/null
++++ b/board/xilinx/mbv/Kconfig
+@@ -0,0 +1,28 @@
++if TARGET_XILINX_MBV
++
++config SYS_BOARD
++	default "mbv"
++
++config SYS_VENDOR
++	default "xilinx"
++
++config SYS_CPU
++	default "generic"
++
++config SYS_CONFIG_NAME
++	default "xilinx_mbv"
++
++config TEXT_BASE
++	default 0x80000000 if !RISCV_SMODE
++	default 0x80400000 if RISCV_SMODE && ARCH_RV32I
++
++config BOARD_SPECIFIC_OPTIONS
++	def_bool y
++	select GENERIC_RISCV
++	imply BOARD_LATE_INIT
++	imply CMD_SBI
++	imply CMD_PING
++
++source "board/xilinx/Kconfig"
++
++endif
+diff --git a/board/xilinx/mbv/MAINTAINERS b/board/xilinx/mbv/MAINTAINERS
+new file mode 100644
+index 000000000000..445654fe740e
+--- /dev/null
++++ b/board/xilinx/mbv/MAINTAINERS
+@@ -0,0 +1,7 @@
++XILINX MicroBlaze V BOARD
++M:	Michal Simek <michal.simek@amd.com>
++S:	Maintained
++F:	arch/riscv/dts/xilinx-mbv*
++F:	board/xilinx/mbv/
++F:	configs/xilinx_mbv*
++F:	include/configs/xilinx_mbv.h
+diff --git a/board/xilinx/mbv/Makefile b/board/xilinx/mbv/Makefile
+new file mode 100644
+index 000000000000..e2fc0c69715f
+--- /dev/null
++++ b/board/xilinx/mbv/Makefile
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# (C) Copyright 2023, Advanced Micro Devices, Inc.
++
++obj-y	+= board.o
+diff --git a/board/xilinx/mbv/board.c b/board/xilinx/mbv/board.c
+new file mode 100644
+index 000000000000..ccf4395d6ace
+--- /dev/null
++++ b/board/xilinx/mbv/board.c
+@@ -0,0 +1,11 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * (C) Copyright 2023, Advanced Micro Devices, Inc.
++ *
++ * Michal Simek <michal.simek@amd.com>
++ */
++
++int board_init(void)
++{
++	return 0;
++}
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+new file mode 100644
+index 000000000000..2689495057b0
+--- /dev/null
++++ b/configs/xilinx_mbv32_defconfig
+@@ -0,0 +1,30 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x21200000
++CONFIG_SYS_MALLOC_LEN=0x800000
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20200000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
++CONFIG_DEBUG_UART_BASE=0x40600000
++CONFIG_DEBUG_UART_CLOCK=1000000
++CONFIG_SYS_CLK_FREQ=100000000
++CONFIG_BOOT_SCRIPT_OFFSET=0x0
++CONFIG_SYS_LOAD_ADDR=0x80200000
++CONFIG_DEBUG_UART=y
++CONFIG_TARGET_XILINX_MBV=y
++CONFIG_FIT=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++# CONFIG_BOARD_LATE_INIT is not set
++# CONFIG_CMD_MII is not set
++CONFIG_CMD_TIMER=y
++CONFIG_OF_EMBED=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_DM_MTD=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_SKIP_INIT=y
++CONFIG_XILINX_UARTLITE=y
++CONFIG_XILINX_TIMER=y
++CONFIG_PANIC_HANG=y
+diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
+new file mode 100644
+index 000000000000..c724d1bad742
+--- /dev/null
++++ b/configs/xilinx_mbv32_smode_defconfig
+@@ -0,0 +1,32 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x21200000
++CONFIG_SYS_MALLOC_LEN=0x800000
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20200000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
++CONFIG_DEBUG_UART_BASE=0x40600000
++CONFIG_DEBUG_UART_CLOCK=1000000
++CONFIG_SYS_CLK_FREQ=100000000
++CONFIG_BOOT_SCRIPT_OFFSET=0x0
++CONFIG_SYS_LOAD_ADDR=0x80200000
++CONFIG_TARGET_XILINX_MBV=y
++CONFIG_RISCV_SMODE=y
++CONFIG_FIT=y
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++# CONFIG_BOARD_LATE_INIT is not set
++# CONFIG_CMD_MII is not set
++CONFIG_CMD_TIMER=y
++CONFIG_OF_EMBED=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_DM_MTD=y
++CONFIG_DEBUG_UART_UARTLITE=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_SKIP_INIT=y
++CONFIG_XILINX_UARTLITE=y
++# CONFIG_RISCV_TIMER is not set
++CONFIG_XILINX_TIMER=y
++CONFIG_PANIC_HANG=y
+diff --git a/include/configs/xilinx_mbv.h b/include/configs/xilinx_mbv.h
+new file mode 100644
+index 000000000000..dba398aeec49
+--- /dev/null
++++ b/include/configs/xilinx_mbv.h
+@@ -0,0 +1,6 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * (C) Copyright 2023, Advanced Micro Devices, Inc.
++ *
++ * Michal Simek <michal.simek@amd.com>
++ */
+-- 
+2.36.1
 
