@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF46C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 17:11:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5359AC4167D
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 17:11:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5436F87098;
+	by phobos.denx.de (Postfix) with ESMTP id D5F3E870C4;
 	Mon,  6 Nov 2023 18:11:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32B5787056; Mon,  6 Nov 2023 15:07:36 +0100 (CET)
+ id 1530686552; Mon,  6 Nov 2023 15:07:37 +0100 (CET)
 Received: from esa2.ltts.com (unknown [14.140.155.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA2BF86552
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 15:07:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87D6587032
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 15:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: 3ZSTzspzTXYGej/q+2ohrFI6hN0ispCOrDzQiYHifhE3gthALYY3vtZIXT31dYjyP6loU9UrmO
- optDFg9KgXHQ==
+IronPort-SDR: m+duX/xf18uzm5/XReGCP8NBKOlQpHWV0VxI67CZnLZ6/EQ3cms19mJX1LePYoa3l8XgLPCxpR
+ DsEmqNuS0cTw==
 Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa2.ltts.com with ESMTP; 06 Nov 2023 19:37:31 +0530
+ by esa2.ltts.com with ESMTP; 06 Nov 2023 19:37:32 +0530
 From: Bhargav Raviprakash <bhargav.r@ltts.com>
 To: u-boot@lists.denx.de
 Cc: jh80.chung@samsung.com,
 	Bhargav Raviprakash <bhargav.r@ltts.com>
-Subject: [PATCH v2 1/2] driver: power: add support for TPS65224
-Date: Mon,  6 Nov 2023 19:37:11 +0530
-Message-Id: <20231106140712.1780114-2-bhargav.r@ltts.com>
+Subject: [PATCH v2 2/2] driver: power: regulator: add support for TPS65224
+ regulator
+Date: Mon,  6 Nov 2023 19:37:12 +0530
+Message-Id: <20231106140712.1780114-3-bhargav.r@ltts.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231106140712.1780114-1-bhargav.r@ltts.com>
 References: <20231106140712.1780114-1-bhargav.r@ltts.com>
@@ -55,258 +56,569 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added support for PMIC TPS65224. Includes driver for pmic,
-and disabling Watchdog.
+Added support for PMIC TPS65224 regulators. Includes driver for
+buck and ldo.
 
 Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
 ---
- drivers/power/pmic/Kconfig    |   6 ++
- drivers/power/pmic/Makefile   |   1 +
- drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
- include/power/tps65224.h      |  57 ++++++++++++++
- 4 files changed, 205 insertions(+)
- create mode 100644 drivers/power/pmic/tps65224.c
- create mode 100644 include/power/tps65224.h
+ drivers/power/regulator/Kconfig              |  10 +
+ drivers/power/regulator/Makefile             |   1 +
+ drivers/power/regulator/tps65224_regulator.c | 495 +++++++++++++++++++
+ include/power/tps65224.h                     |   6 +-
+ 4 files changed, 510 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/power/regulator/tps65224_regulator.c
 
-diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-index 4a6f0ce093..b06bd31823 100644
---- a/drivers/power/pmic/Kconfig
-+++ b/drivers/power/pmic/Kconfig
-@@ -378,6 +378,12 @@ config PMIC_TPS65941
- 	The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
- 	This driver binds the pmic children.
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index eb5aa38c1c..cb86025a22 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -408,6 +408,16 @@ config DM_REGULATOR_TPS65941
+ 	be configured in multi phase modes & 4 LDOs. The driver implements
+ 	get/set api for value and enable.
  
-+config PMIC_TPS65224
-+	bool "Enable driver for Texas Instruments TPS65224 PMIC"
++config DM_REGULATOR_TPS65224
++	bool "Enable driver for TPS65224 PMIC regulators"
++        depends on PMIC_TPS65224
 +	help
-+	The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
-+	This driver binds the pmic children.
++	This enables implementation of driver-model regulator uclass
++	features for REGULATOR TPS65224 and the family of TPS65224 PMICs.
++	TPS65224 series of PMICs have 4 single phase BUCKs that can also
++	be configured in multi phase modes & 3 LDOs. The driver implements
++	get/set api for value and enable.
 +
- config PMIC_TPS65219
- 	bool "Enable driver for Texas Instruments TPS65219 PMIC"
- 	depends on DM_PMIC
-diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-index 0b3b3d62d0..cec16e57d3 100644
---- a/drivers/power/pmic/Makefile
-+++ b/drivers/power/pmic/Makefile
-@@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
- obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
- obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
- obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
-+obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
- obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
- 
- ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
-diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
+ config DM_REGULATOR_SCMI
+ 	bool "Enable driver for SCMI voltage domain regulators"
+ 	depends on DM_REGULATOR
+diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
+index d9e0cd5949..d4b9b7233f 100644
+--- a/drivers/power/regulator/Makefile
++++ b/drivers/power/regulator/Makefile
+@@ -34,6 +34,7 @@ obj-$(CONFIG_DM_REGULATOR_TPS65910) += tps65910_regulator.o
+ obj-$(CONFIG_DM_REGULATOR_TPS62360) += tps62360_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_STPMIC1) += stpmic1.o
+ obj-$(CONFIG_DM_REGULATOR_TPS65941) += tps65941_regulator.o
++obj-$(CONFIG_DM_REGULATOR_TPS65224) += tps65224_regulator.o
+ obj-$(CONFIG_DM_REGULATOR_SCMI) += scmi_regulator.o
+ obj-$(CONFIG_$(SPL_)DM_REGULATOR_ANATOP) += anatop_regulator.o
+ obj-$(CONFIG_DM_REGULATOR_TPS65219) += tps65219_regulator.o
+diff --git a/drivers/power/regulator/tps65224_regulator.c b/drivers/power/regulator/tps65224_regulator.c
 new file mode 100644
-index 0000000000..33395f6edf
+index 0000000000..0431556331
 --- /dev/null
-+++ b/drivers/power/pmic/tps65224.c
-@@ -0,0 +1,141 @@
++++ b/drivers/power/regulator/tps65224_regulator.c
+@@ -0,0 +1,495 @@
 +// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-+ */
-+#include <fdtdec.h>
-+#include <errno.h>
-+#include <dm.h>
-+#include <i2c.h>
-+#include <log.h>
-+#include <power/pmic.h>
-+#include <power/regulator.h>
-+#include <power/tps65224.h>
-+#include <dm/device.h>
-+
-+static const struct pmic_child_info pmic_children_info[] = {
-+	{ .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
-+	{ .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
-+	{ },
-+};
-+
-+static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
-+			  int len)
-+{
-+	if (dm_i2c_write(dev, reg, buff, len)) {
-+		pr_err("write error to device: %p register: %#x!\n", dev, reg);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-+{
-+	if (dm_i2c_read(dev, reg, buff, len)) {
-+		pr_err("read error from device: %p register: %#x!\n", dev, reg);
-+		return -EIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int tps65224_bind(struct udevice *dev)
-+{
-+	ofnode regulators_node;
-+	int children;
-+
-+	if (dev->driver_data == TPS65224_WD)
-+		return 0;
-+
-+	regulators_node = dev_read_subnode(dev, "regulators");
-+	if (!ofnode_valid(regulators_node)) {
-+		debug("%s: %s regulators subnode not found!\n", __func__,
-+		      dev->name);
-+		return -ENXIO;
-+	}
-+
-+	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
-+
-+	children = pmic_bind_children(dev, regulators_node, pmic_children_info);
-+	if (!children)
-+		printf("%s: %s - no child found\n", __func__, dev->name);
-+
-+	/* Probe all the child devices */
-+	return dm_scan_fdt_dev(dev);
-+}
-+
-+static int stop_watchdog(struct udevice *wd_i2c_dev)
-+{
-+	int ret;
-+
-+	/* Maintain WD long window */
-+	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-+	if (ret < 0) {
-+		debug("failed to read i2c reg (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	ret &= ~TPS65224_WD_PWRHOLD_MASK;
-+	ret |= TPS65224_WD_PWRHOLD_MASK;
-+	ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
-+	if (ret) {
-+		debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
-+		return ret;
-+	}
-+
-+	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-+	if (ret < 0) {
-+		debug("failed to read back i2c reg (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	/* Disable WD */
-+	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-+	if (ret < 0) {
-+		debug("failed to read i2c reg (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	ret &= ~TPS65224_WD_EN_MASK;
-+	ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
-+	if (ret) {
-+		debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
-+		return ret;
-+	}
-+
-+	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-+	if (ret < 0) {
-+		debug("failed to read back i2c reg (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int tps65224_probe(struct udevice *dev)
-+{
-+	if (dev->driver_data == TPS65224_WD)
-+		return stop_watchdog(dev);
-+
-+	return 0;
-+}
-+
-+static struct dm_pmic_ops tps65224_ops = {
-+	.read = tps65224_read,
-+	.write = tps65224_write,
-+};
-+
-+static const struct udevice_id tps65224_ids[] = {
-+	{ .compatible = "ti,tps65224", .data = TPS65224 },
-+	{ .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(pmic_tps65224) = {
-+	.name = "tps65224_pmic",
-+	.id = UCLASS_PMIC,
-+	.of_match = tps65224_ids,
-+	.bind = tps65224_bind,
-+	.probe = tps65224_probe,
-+	.ops = &tps65224_ops,
-+};
-diff --git a/include/power/tps65224.h b/include/power/tps65224.h
-new file mode 100644
-index 0000000000..24e91b6a67
---- /dev/null
-+++ b/include/power/tps65224.h
-@@ -0,0 +1,57 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
 + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
 + *
 + */
-+#ifndef _POWER_TPS65224_H_
-+#define _POWER_TPS65224_H_
++#include <fdtdec.h>
++#include <errno.h>
++#include <dm.h>
++#include <log.h>
++#include <linux/delay.h>
++#include <power/pmic.h>
++#include <power/regulator.h>
++#include <power/tps65224.h>
 +
-+#define TPS65224                          0x0
-+#define TPS65224_WD                       0x20
++#define TPS65224_BUCK234_50mV_OFFSET_START_VOLT 1200000
++#define TPS65224_BUCK234_25mV_OFFSET_START_VOLT  500000
++#define TPS65224_BUCK234_50mV_OFFSET_START_VSET 0x1B
++#define TPS65224_BUCK234_25mV_OFFSET_START_VSET 0x00
 +
-+/* I2C device address for pmic tps65224 */
-+#define TPS65224_I2C_ADDR                (0x12 >> 1)
-+#define TPS65224_LDO_NUM                  3
-+#define TPS65224_BUCK_NUM                 4
++#define TPS65224_BUCK1_20mV_OFFSET_START_VOLT_1 1660000
++#define TPS65224_BUCK1_10mV_OFFSET_START_VOLT   1100000
++#define TPS65224_BUCK1_5mV_OFFSET_START_VOLT     600000
++#define TPS65224_BUCK1_20mV_OFFSET_START_VOLT_0  500000
++#define TPS65224_BUCK1_20mV_OFFSET_START_VSET_1 0xAB
++#define TPS65224_BUCK1_10mV_OFFSET_START_VSET   0x73
++#define TPS65224_BUCK1_5mV_OFFSET_START_VSET    0x0F
++#define TPS65224_BUCK1_20mV_OFFSET_START_VSET_0 0x0A
 +
-+/* Drivers name */
-+#define TPS65224_LDO_DRIVER              "tps65224_ldo"
-+#define TPS65224_BUCK_DRIVER             "tps65224_buck"
++static const char tps65224_buck_ctrl[TPS65224_BUCK_NUM] = {0x4, 0x6, 0x8, 0xA};
++static const char tps65224_buck_vout[TPS65224_BUCK_NUM] = {0xE, 0x10, 0x12, 0x14};
++static const char tps65224_ldo_ctrl[TPS65224_BUCK_NUM] = {0x1D, 0x1E, 0x1F};
++static const char tps65224_ldo_vout[TPS65224_BUCK_NUM] = {0x23, 0x24, 0x25};
 +
-+#define TPS65224_BUCK_VOLT_MASK           0xFF
-+#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
-+#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
-+#define TPS65224_BUCK_VOLT_MAX            3300000
-+#define TPS65224_BUCK_MODE_MASK           0x1
++static int tps65224_buck_enable(struct udevice *dev, int op, bool *enable)
++{
++	int ret;
++	unsigned int adr;
++	struct dm_regulator_uclass_plat *uc_pdata;
 +
-+#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
-+#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
-+#define TPS65224_LDO_VOLT_MIN_HEX         0x4
-+#define TPS65224_LDO1_VOLT_MAX            3300000
-+#define TPS65224_LDO23_VOLT_MAX           3400000
-+#define TPS65224_LDO_MODE_MASK            0x1
-+#define TPS65224_LDO_BYPASS_EN            0x80
-+#define TP65224_BUCK_CONF_SLEW_MASK       0x3
++	uc_pdata = dev_get_uclass_plat(dev);
++	adr = uc_pdata->ctrl_reg;
 +
-+/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
-+#define TPS65224_LDO123_BYP_CONFIG        7
++	ret = pmic_reg_read(dev->parent, adr);
++	if (ret < 0)
++		return ret;
 +
-+#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
-+#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
-+#define TPS65224_LDO1_VOLT_MIN            1200000
-+#define TPS65224_LDO23_VOLT_MIN           600000
-+#define TPS65224_LDO4_VOLT_MIN            1200000
-+#define TPS65224_LDO1_VSET_MIN            0x0C
-+#define TPS65224_LDO23_VSET_MIN           0x00
-+#define TPS65224_LDO123_VSET_MIN          0x0
-+#define TPS65224_LDO1_VSET_MAX            0x36
-+#define TPS65224_LDO23_VSET_MAX           0x38
-+#define TPS65224_LDO123_STEP              50000
-+#define TPS65224_LDO4_STEP                25000
++	if (op == PMIC_OP_GET) {
++		ret &= TPS65224_BUCK_MODE_MASK;
 +
-+#define TPS65224_WD_MODE_REG              0x406
-+#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
-+#define TPS65224_WD_THR_CFG               0x409
-+#define TPS65224_WD_EN_MASK               BIT(6)
++		if (ret)
++			*enable = true;
++		else
++			*enable = false;
 +
-+#endif // _POWER_TPS65224_H_
++		return 0;
++	} else if (op == PMIC_OP_SET) {
++		if (*enable)
++			ret |= TPS65224_BUCK_MODE_MASK;
++		else
++			ret &= ~TPS65224_BUCK_MODE_MASK;
++		ret = pmic_reg_write(dev->parent, adr, ret);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int tps65224_buck_volt2val(int idx, int uV)
++{
++	if (uV > TPS65224_BUCK_VOLT_MAX)
++		return -EINVAL;
++
++	if (idx > 0) {
++		if (uV >= TPS65224_BUCK234_50mV_OFFSET_START_VOLT)
++			return (uV - TPS65224_BUCK234_50mV_OFFSET_START_VOLT) / 50000 +
++					TPS65224_BUCK234_50mV_OFFSET_START_VSET;
++		else if (uV >= TPS65224_BUCK234_25mV_OFFSET_START_VOLT)
++			return (uV - TPS65224_BUCK234_25mV_OFFSET_START_VOLT) / 25000;
++		else
++			return -EINVAL;
++	}
++
++	if (uV >= TPS65224_BUCK1_20mV_OFFSET_START_VOLT_1)
++		return (uV - TPS65224_BUCK1_20mV_OFFSET_START_VOLT_1) / 20000 +
++				TPS65224_BUCK1_20mV_OFFSET_START_VSET_1;
++	else if (uV >= TPS65224_BUCK1_10mV_OFFSET_START_VOLT)
++		return (uV - TPS65224_BUCK1_10mV_OFFSET_START_VOLT) / 10000 +
++				TPS65224_BUCK1_10mV_OFFSET_START_VSET;
++	else if (uV >= TPS65224_BUCK1_5mV_OFFSET_START_VOLT)
++		return (uV - TPS65224_BUCK1_5mV_OFFSET_START_VOLT) / 5000 +
++				TPS65224_BUCK1_5mV_OFFSET_START_VSET;
++	else if (uV >= TPS65224_BUCK1_20mV_OFFSET_START_VOLT_0)
++		return (uV - TPS65224_BUCK1_20mV_OFFSET_START_VOLT_0) / 20000 +
++				TPS65224_BUCK1_20mV_OFFSET_START_VSET_0;
++	else
++		return -EINVAL;
++}
++
++static int tps65224_buck_val2volt(int idx, int val)
++{
++	if (idx > 0) {
++		if (val > TPS65224_BUCK234_VOLT_MAX_HEX)
++			return -EINVAL;
++		else if (val >= TPS65224_BUCK234_50mV_OFFSET_START_VSET)
++			return TPS65224_BUCK234_50mV_OFFSET_START_VOLT +
++					(val - TPS65224_BUCK234_50mV_OFFSET_START_VSET) * 50000;
++		else if (val >= TPS65224_BUCK234_25mV_OFFSET_START_VSET)
++			return TPS65224_BUCK234_25mV_OFFSET_START_VOLT +
++				(val - TPS65224_BUCK234_25mV_OFFSET_START_VSET) * 25000;
++		else
++			return -EINVAL;
++	}
++
++	if (val > TPS65224_BUCK1_VOLT_MAX_HEX)
++		return -EINVAL;
++	else if (val >= TPS65224_BUCK1_20mV_OFFSET_START_VSET_1)
++		return TPS65224_BUCK1_20mV_OFFSET_START_VOLT_1 +
++				(val - TPS65224_BUCK1_20mV_OFFSET_START_VSET_1) * 20000;
++	else if (val >= TPS65224_BUCK1_10mV_OFFSET_START_VSET)
++		return TPS65224_BUCK1_10mV_OFFSET_START_VOLT +
++				(val - TPS65224_BUCK1_10mV_OFFSET_START_VSET) * 10000;
++	else if (val >= TPS65224_BUCK1_5mV_OFFSET_START_VSET)
++		return TPS65224_BUCK1_5mV_OFFSET_START_VOLT +
++				(val - TPS65224_BUCK1_5mV_OFFSET_START_VSET) * 5000;
++	else if (val >= TPS65224_BUCK1_20mV_OFFSET_START_VSET_0)
++		return TPS65224_BUCK1_20mV_OFFSET_START_VOLT_0 +
++				(val - TPS65224_BUCK1_20mV_OFFSET_START_VSET_0) * 20000;
++	else
++		return -EINVAL;
++}
++
++int tps65224_lookup_slew(int id)
++{
++	switch (id) {
++	case 0:
++		return 10000;
++	case 1:
++		return 5000;
++	case 2:
++		return 2500;
++	case 3:
++		return 1250;
++	default:
++		return -1;
++	}
++}
++
++static int tps65224_buck_val(struct udevice *dev, int op, int *uV)
++{
++	unsigned int hex, adr;
++	int ret, idx, delta, uwait, slew;
++	struct dm_regulator_uclass_plat *uc_pdata;
++
++	idx = dev->driver_data;
++	idx = (idx == 12) ? 0 : (idx - 1);
++
++	uc_pdata = dev_get_uclass_plat(dev);
++
++	if (op == PMIC_OP_GET)
++		*uV = 0;
++
++	adr = uc_pdata->volt_reg;
++
++	ret = pmic_reg_read(dev->parent, adr);
++	if (ret < 0)
++		return ret;
++
++	ret &= TPS65224_BUCK_VOLT_MASK;
++	ret = tps65224_buck_val2volt(idx, ret);
++	if (ret < 0)
++		return ret;
++
++	if (op == PMIC_OP_GET) {
++		*uV = ret;
++		return 0;
++	}
++
++	/*
++	 * Compute the delta voltage, find the slew rate and wait
++	 * for the appropriate amount of time after voltage switch
++	 */
++	if (*uV > ret)
++		delta = *uV - ret;
++	else
++		delta = ret - *uV;
++
++	slew = pmic_reg_read(dev->parent, uc_pdata->ctrl_reg + 1);
++	if (slew < 0)
++		return ret;
++
++	slew &= TP65224_BUCK_CONF_SLEW_MASK;
++	slew = tps65224_lookup_slew(slew);
++	if (slew <= 0)
++		return ret;
++
++	uwait = delta / slew;
++
++	hex = tps65224_buck_volt2val(idx, *uV);
++	if (hex < 0)
++		return hex;
++
++	ret &= 0x0;
++	ret = hex;
++
++	ret = pmic_reg_write(dev->parent, adr, ret);
++
++	udelay(uwait);
++
++	return ret;
++}
++
++static int tps65224_ldo_enable(struct udevice *dev, int op, bool *enable)
++{
++	int ret;
++	unsigned int adr;
++	struct dm_regulator_uclass_plat *uc_pdata;
++
++	uc_pdata = dev_get_uclass_plat(dev);
++	adr = uc_pdata->ctrl_reg;
++
++	ret = pmic_reg_read(dev->parent, adr);
++	if (ret < 0)
++		return ret;
++
++	if (op == PMIC_OP_GET) {
++		ret &= TPS65224_LDO_MODE_MASK;
++
++		if (ret)
++			*enable = true;
++		else
++			*enable = false;
++
++		return 0;
++	} else if (op == PMIC_OP_SET) {
++		if (*enable)
++			ret |= TPS65224_LDO_MODE_MASK;
++		else
++			ret &= ~TPS65224_LDO_MODE_MASK;
++		ret = pmic_reg_write(dev->parent, adr, ret);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int tps65224_ldo_volt2val(int idx, int uV)
++{
++	int base = TPS65224_LDO1_VOLT_MIN;
++	int max = TPS65224_LDO1_VOLT_MAX;
++	int offset = TPS65224_LDO1_VSET_MIN;
++	int step = TPS65224_LDO123_STEP;
++
++	if (idx > 0) {
++		base = TPS65224_LDO23_VOLT_MIN;
++		max = TPS65224_LDO23_VOLT_MAX;
++		offset = TPS65224_LDO23_VSET_MIN;
++		step = TPS65224_LDO123_STEP;
++	}
++
++	if (uV > max)
++		return -EINVAL;
++	else if (uV >= base)
++		return (uV - base) / step + offset;
++	else
++		return -EINVAL;
++}
++
++static int tps65224_ldo_val2volt(int idx, int val)
++{
++	int reg_base = TPS65224_LDO1_VSET_MIN;
++	int reg_max = TPS65224_LDO1_VSET_MAX;
++	int base = TPS65224_LDO1_VOLT_MIN;
++	int max = TPS65224_LDO1_VOLT_MAX;
++	int step = TPS65224_LDO123_STEP;
++	int mask = TPS65224_LDO_VOLT_MASK >> 1;
++
++	if (idx > 0) {
++		base = TPS65224_LDO23_VOLT_MIN;
++		max = TPS65224_LDO23_VOLT_MAX;
++		reg_base = TPS65224_LDO123_VSET_MIN;
++		reg_max = TPS65224_LDO23_VSET_MAX;
++		step = TPS65224_LDO123_STEP;
++	}
++
++	val = val >> 1;
++	if (val > mask || val < 0)
++		return -EINVAL;
++	else if (val >= reg_max)
++		return max;
++	else if (val <= reg_base)
++		return base;
++	else if (val >= 0)
++		return base + (step * (val - reg_base));
++	else
++		return -EINVAL;
++}
++
++static int tps65224_ldo_val(struct udevice *dev, int op, int *uV)
++{
++	unsigned int hex, adr;
++	int ret, ret_volt;
++	struct dm_regulator_uclass_plat *uc_pdata;
++	int idx;
++
++	idx = dev->driver_data - 1;
++	uc_pdata = dev_get_uclass_plat(dev);
++
++	if (op == PMIC_OP_GET)
++		*uV = 0;
++
++	adr = uc_pdata->volt_reg;
++
++	ret = pmic_reg_read(dev->parent, adr);
++	if (ret < 0)
++		return ret;
++
++	ret &= TPS65224_LDO_VOLT_MASK;
++
++	ret_volt = tps65224_ldo_val2volt(idx, ret);
++
++	if (ret_volt < 0)
++		return ret_volt;
++
++	if (op == PMIC_OP_GET) {
++		*uV = ret_volt;
++		return 0;
++	}
++
++	/* LDO1 in BYPASS mode only supports 2.2V min to 3.6V max */
++	if (idx == 0 && (ret & BIT(TPS65224_LDO123_BYP_CONFIG)) &&
++	    *uV < TPS65224_LDO1_VOLT_BYP_MIN)
++		return -EINVAL;
++
++	/* LDO2 & LDO3 in BYPASS mode supports 1.5V min to 5.5V max */
++	if (idx > 0 && (ret & BIT(TPS65224_LDO123_BYP_CONFIG)) &&
++	    *uV < TPS65224_LDO23_VOLT_BYP_MIN)
++		return -EINVAL;
++
++	hex = tps65224_ldo_volt2val(idx, *uV);
++	if (hex < 0)
++		return hex;
++
++	hex = hex << TPS65224_LDO_MODE_MASK;
++
++	ret &= ~TPS65224_LDO_VOLT_MASK;
++	ret |= hex;
++
++	ret = pmic_reg_write(dev->parent, adr, ret);
++
++	return ret;
++}
++
++static int tps65224_ldo_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_pdata;
++	int idx;
++
++	uc_pdata = dev_get_uclass_plat(dev);
++	uc_pdata->type = REGULATOR_TYPE_LDO;
++
++	idx = dev->driver_data;
++	if (idx == 1 || idx == 2 || idx == 3) {
++		debug("Single phase regulator\n");
++	} else {
++		printf("Wrong ID for regulator\n");
++		return -EINVAL;
++	}
++
++	uc_pdata->ctrl_reg = tps65224_ldo_ctrl[idx - 1];
++	uc_pdata->volt_reg = tps65224_ldo_vout[idx - 1];
++
++	return 0;
++}
++
++static int tps65224_buck_probe(struct udevice *dev)
++{
++	struct dm_regulator_uclass_plat *uc_pdata;
++	int idx;
++
++	uc_pdata = dev_get_uclass_plat(dev);
++	uc_pdata->type = REGULATOR_TYPE_BUCK;
++
++	idx = dev->driver_data;
++	if (idx == 1 || idx == 2 || idx == 3 || idx == 4) {
++		debug("Single phase regulator\n");
++	} else if (idx == 12) {
++		idx = 1;
++	} else {
++		printf("Wrong ID for regulator\n");
++		return -EINVAL;
++	}
++
++	uc_pdata->ctrl_reg = tps65224_buck_ctrl[idx - 1];
++	uc_pdata->volt_reg = tps65224_buck_vout[idx - 1];
++
++	return 0;
++}
++
++static int ldo_get_value(struct udevice *dev)
++{
++	int uV;
++	int ret;
++
++	ret = tps65224_ldo_val(dev, PMIC_OP_GET, &uV);
++	if (ret)
++		return ret;
++
++	return uV;
++}
++
++static int ldo_set_value(struct udevice *dev, int uV)
++{
++	return tps65224_ldo_val(dev, PMIC_OP_SET, &uV);
++}
++
++static int ldo_get_enable(struct udevice *dev)
++{
++	bool enable = false;
++	int ret;
++
++	ret = tps65224_ldo_enable(dev, PMIC_OP_GET, &enable);
++	if (ret)
++		return ret;
++
++	return enable;
++}
++
++static int ldo_set_enable(struct udevice *dev, bool enable)
++{
++	return tps65224_ldo_enable(dev, PMIC_OP_SET, &enable);
++}
++
++static int buck_get_value(struct udevice *dev)
++{
++	int uV;
++	int ret;
++
++	ret = tps65224_buck_val(dev, PMIC_OP_GET, &uV);
++	if (ret)
++		return ret;
++
++	return uV;
++}
++
++static int buck_set_value(struct udevice *dev, int uV)
++{
++	return tps65224_buck_val(dev, PMIC_OP_SET, &uV);
++}
++
++static int buck_get_enable(struct udevice *dev)
++{
++	bool enable = false;
++	int ret;
++
++	ret = tps65224_buck_enable(dev, PMIC_OP_GET, &enable);
++	if (ret)
++		return ret;
++
++	return enable;
++}
++
++static int buck_set_enable(struct udevice *dev, bool enable)
++{
++	return tps65224_buck_enable(dev, PMIC_OP_SET, &enable);
++}
++
++static const struct dm_regulator_ops tps65224_ldo_ops = {
++	.get_value  = ldo_get_value,
++	.set_value  = ldo_set_value,
++	.get_enable = ldo_get_enable,
++	.set_enable = ldo_set_enable,
++};
++
++U_BOOT_DRIVER(tps65224_ldo) = {
++	.name = TPS65224_LDO_DRIVER,
++	.id = UCLASS_REGULATOR,
++	.ops = &tps65224_ldo_ops,
++	.probe = tps65224_ldo_probe,
++};
++
++static const struct dm_regulator_ops tps65224_buck_ops = {
++	.get_value  = buck_get_value,
++	.set_value  = buck_set_value,
++	.get_enable = buck_get_enable,
++	.set_enable = buck_set_enable,
++};
++
++U_BOOT_DRIVER(tps65224_buck) = {
++	.name = TPS65224_BUCK_DRIVER,
++	.id = UCLASS_REGULATOR,
++	.ops = &tps65224_buck_ops,
++	.probe = tps65224_buck_probe,
++};
+diff --git a/include/power/tps65224.h b/include/power/tps65224.h
+index 24e91b6a67..c89317f03a 100644
+--- a/include/power/tps65224.h
++++ b/include/power/tps65224.h
+@@ -36,8 +36,10 @@
+ /* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
+ #define TPS65224_LDO123_BYP_CONFIG        7
+ 
+-#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
+-#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
++#define TPS65224_LDO1_VOLT_BYP_MIN        2200000
++#define TPS65224_LDO1_VOLT_BYP_MAX        3600000
++#define TPS65224_LDO23_VOLT_BYP_MIN       1500000
++#define TPS65224_LDO23_VOLT_BYP_MAX       5500000
+ #define TPS65224_LDO1_VOLT_MIN            1200000
+ #define TPS65224_LDO23_VOLT_MIN           600000
+ #define TPS65224_LDO4_VOLT_MIN            1200000
 -- 
 2.25.1
 
