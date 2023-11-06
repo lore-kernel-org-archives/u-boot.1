@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8274C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 14:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E473FC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 14:19:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F79F8704D;
-	Mon,  6 Nov 2023 15:11:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AC8D86A4B;
+	Mon,  6 Nov 2023 15:19:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G833Fjm0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KPHkNLpD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA53D8704F; Mon,  6 Nov 2023 15:11:30 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C645286EBA; Mon,  6 Nov 2023 15:19:17 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2EF287032
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 15:11:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E8390869CA
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 15:19:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-544455a4b56so3420096a12.1
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 06:11:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699279888; x=1699884688; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P2qKpujdxNvzHB/4VbcqK8W2JkKy5j9omXhfY23+7uM=;
- b=G833Fjm0SjmKNepgI/p8YltgBdt8S3GTTBYYF26ZL7VxTITFHIPJXqWi7iWqhkzALc
- 5Y8V5SIVpkZ8dV6VYPaGZy8Mn3Llc0Fai2/HzcJVQx8xhfnfamEYdmAp6Q2SaJut20v0
- cFaeZr8YOI1IAPiuHwHZe5ZXq3ZCKdd68sIFZ2t8oC8CgFaq6ZbiGs1KY90jh5HiqWyT
- VDBBg61xfRLFVaK7VX810tXp7sDIITdZyzNqK6cTAjK0CKS+iK1ToOSmurJJLLynS/Gn
- I2JHWT3KBPxD2JMGAXBWhqPYPJBn7tJcIOM5OQaZ7MMvqNr9UsYH1f3uqFT9ECQTYItW
- FVsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699279888; x=1699884688;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P2qKpujdxNvzHB/4VbcqK8W2JkKy5j9omXhfY23+7uM=;
- b=H49OO9H1nkiqCKtIeTMxL6XSJd7on5VWSgLuYJuW4n+kwlZJEGquzbn83zABXiPGbd
- KY0bIVj2isOyBDGup3GQGeyO/+QkseDEQoaKToVLUMspzxoD3BKQxs/fJEoDUl2OwBfb
- BA0p4WPtQ7LORp6Uf5wH/iTTKL74hbkVwKK7lacdISCQs9F4l09cXaIUfbHXWnOFGSbA
- 1f0oda0BlBaA73aWEhkfleHJLy1OoTGH536NdOGA4c8RwVW42p66tZTEC4Zz0ixC11Tx
- /fpjNJ3beVDaZwLI9uccewI2xzmAQ8lmr5o0R/YVnCnOSU3M7ehBmVkzjuZ359p0fAHk
- hnCg==
-X-Gm-Message-State: AOJu0YyWVhhKDH4QExz/5ACwVEd9lJvoFCMc+aKq9RmCXda3yCqhqy3K
- gF3ot9IHkpGqKxEJv1o+4I4Sy9v+DLTP1Y6p/k4=
-X-Google-Smtp-Source: AGHT+IHwXrLsWmv05q4s0Pg68jGy4hPm2GikgZg0ysCWK6zGi5aX0bk8I7bixl7xaXhn8rDig62RtSZdQHcDcsBcTj8=
-X-Received: by 2002:a05:6402:b49:b0:53e:775e:9761 with SMTP id
- bx9-20020a0564020b4900b0053e775e9761mr23148905edb.36.1699279888110; Mon, 06
- Nov 2023 06:11:28 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A6EJ4iu055447;
+ Mon, 6 Nov 2023 08:19:04 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699280344;
+ bh=1WrXV8Kc3b1lp/A87S58oZK46Ca9u2Bp7Y4FEoEss1c=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=KPHkNLpD2Y/SHsH+K7DGAqmT4jcxuAI1tR7chE+WqGSsqeSXJt+yt48ywV6/2dmaO
+ ZUVIdjOtOfC1oS/d9AEPeptOhKzcgNKhhrvWh7vohNbB3aABezTz1Mj1FJ+im4hK41
+ PjN4p6J/u9sgmcDWGsD0nZGDyuTt85UhFhs6aj9A=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A6EJ4gk092690
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 6 Nov 2023 08:19:04 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Nov 2023 08:19:04 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 6 Nov 2023 08:19:04 -0600
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A6EJ0im024951;
+ Mon, 6 Nov 2023 08:19:00 -0600
+Message-ID: <6175ab6c-c66b-41ad-b81f-de4641b154ab@ti.com>
+Date: Mon, 6 Nov 2023 19:48:59 +0530
 MIME-Version: 1.0
-References: <20231106083229.256322-1-clamor95@gmail.com>
- <CALeDE9P=aUfEvhh-FD_mwRZ+5rgMkQbn+v6skqW7s3EVvnf6eg@mail.gmail.com>
- <CAPVz0n0LDVh-8W=o2Hp-AXU_=Jg5CnuYh54LxsE6XH=DD7nD5A@mail.gmail.com>
- <CALeDE9NLfGRpLxNNqNGOY3S-d9hWP1DWDjL526JNw_8xPqjaXw@mail.gmail.com>
- <CAPVz0n1WepmE6pTxSaeK6yHH2ji6_L+LF7a=TZk6hLWS8GcHKA@mail.gmail.com>
-In-Reply-To: <CAPVz0n1WepmE6pTxSaeK6yHH2ji6_L+LF7a=TZk6hLWS8GcHKA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 6 Nov 2023 14:11:16 +0000
-Message-ID: <CALeDE9NjK3b=OskgsjCvO44M01nRZ6-5LrEgUZtYQfxy7gN5mQ@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] Convert recently merged T30 boards to use DM PMIC
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 03/15] board: ti: j721e: evm: Drop board check for ESM
+To: Nishanth Menon <nm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sinthu Raja <sinthu.raja@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Reid Tonking <reidt@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>, Robert Nelson
+ <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
+References: <20231103003805.2420005-1-nm@ti.com>
+ <20231103003805.2420005-4-nm@ti.com>
+ <251aa1ab-3244-4dac-a14a-7738a8096ea5@ti.com>
+ <20231106121903.aaypmbvfbdb2642u@pupil>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20231106121903.aaypmbvfbdb2642u@pupil>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,89 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 6, 2023 at 1:28=E2=80=AFPM Svyatoslav Ryhel <clamor95@gmail.com=
-> wrote:
->
-> =D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 15:=
-13 Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > On Mon, Nov 6, 2023 at 11:58=E2=80=AFAM Svyatoslav Ryhel <clamor95@gmai=
-l.com> wrote:
-> > >
-> > > =D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE=
- 13:46 Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> > > >
-> > > > Hi Svyatoslav,
-> > > >
-> > > > > Since the proposed PMIC patches have been accepted, I see the nee=
-d
-> > > > > to convert boards which I maintain to use DM drivers instead of b=
-oard hacks.
-> > > > >
-> > > > > Svyatoslav Ryhel (5):
-> > > > >   board: lg-x3: convert LG Optimus 4X and Vu to use DM PMIC
-> > > > >   board: endeavoru: convert HTC One X to use DM PMIC
-> > > >
-> > > > Is there a reason why the two above devices don't appear to have th=
-eir
-> > > > .dts files in the upstream kernel?
-> > > >
-> > >
-> > > Yes, there is a reason. Linux maintainers treat submitters as
-> > > existential enemies or as dirt at least. I was trying to work with
-> > > linux but I have no desire to spend any time to upstream endeavoru or
-> > > lg_x3.
-> >
-> > The usual policy for acceptance into U-Boot is to have upstream review
-> > in the kernel first.
-> >
->
-> May you point to a policy which clearly and explicitly states this as
-> a mandatory condition?
 
-There have been a number of devices rejected in the past until their
-DT are upstream but I'll leave Tom, who I've explicitly added on cc:,
-to clarify the exact policy.
+On 11/6/2023 5:49 PM, Nishanth Menon wrote:
+> On 16:03-20231104, Kumar, Udit wrote:
+>> On 11/3/2023 6:07 AM, Nishanth Menon wrote:
+>>> When config is enabled, the esm dt probe makes sense. Simplify by
+>>> dropping board specific checks.
+>>>
+>>> Signed-off-by: Nishanth Menon <nm@ti.com>
+>>> ---
+>>>    board/ti/j721e/evm.c | 10 ++--------
+>>>    1 file changed, 2 insertions(+), 8 deletions(-)
+>>>
+>>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+>>> index d4f7c1d9f938..75d51a0552c4 100644
+>>> --- a/board/ti/j721e/evm.c
+>>> +++ b/board/ti/j721e/evm.c
+>>> @@ -531,10 +531,8 @@ err_free_gpio:
+>>>    void spl_board_init(void)
+>>>    {
+>>> -#if defined(CONFIG_ESM_K3) || defined(CONFIG_ESM_PMIC)
+>>>    	struct udevice *dev;
+>>>    	int ret;
+>>> -#endif
+>>>    	if ((IS_ENABLED(CONFIG_TARGET_J721E_A72_EVM) ||
+>>>    	     IS_ENABLED(CONFIG_TARGET_J7200_A72_EVM)) &&
+>>> @@ -543,24 +541,20 @@ void spl_board_init(void)
+>>>    			probe_daughtercards();
+>>>    	}
+>>> -#ifdef CONFIG_ESM_K3
+>>> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
+>>> +	if (IS_ENABLED(CONFIG_ESM_K3)) {
+>>>    		ret = uclass_get_device_by_driver(UCLASS_MISC,
+>>>    						  DM_DRIVER_GET(k3_esm), &dev);
+>>>    		if (ret)
+>>>    			printf("ESM init failed: %d\n", ret);
+>>>    	}
+>> Nothing related to this patch, but to get esm completely functional
+>>
+>> Second k3_esm probing needs to be added in this file.
+>>
+>>
+>> Also, DT changes are needed, in next sync
+>>
+>> https://lore.kernel.org/all/20231013102941.548209-1-n-francis@ti.com/
+>>
+>>
+> Understood. no action on the current series, I assume.
 
-> > > > >   board: transformer-t30: convert ASUS Transformers to use DM PMI=
-C
-> > > > >   board: grouper: convert ASUS Google Nexus 7 (2012) to use DM PM=
-IC
-> > > > >   ARM: dts: tegra30: enable USB PHY node on some devices
-> > > > >
-> > > > >  arch/arm/dts/tegra30-asus-grouper-common.dtsi |   7 +
-> > > > >  .../dts/tegra30-asus-nexus7-grouper-E1565.dts |   1 +
-> > > > >  .../dts/tegra30-asus-nexus7-grouper-PM269.dts |   1 +
-> > > > >  .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |   1 +
-> > > > >  arch/arm/dts/tegra30-asus-p1801-t.dts         |  17 ++
-> > > > >  arch/arm/dts/tegra30-asus-tf600t.dts          |  15 ++
-> > > > >  arch/arm/dts/tegra30-asus-transformer.dtsi    |   9 +
-> > > > >  arch/arm/dts/tegra30-htc-endeavoru.dts        |   8 +
-> > > > >  arch/arm/dts/tegra30-lg-x3.dtsi               |   9 +
-> > > > >  board/asus/grouper/Kconfig                    |   8 -
-> > > > >  board/asus/grouper/Makefile                   |   4 +-
-> > > > >  .../asus/grouper/configs/grouper_E1565.config |   6 +-
-> > > > >  .../asus/grouper/configs/grouper_PM269.config |   6 +-
-> > > > >  board/asus/grouper/configs/tilapia.config     |   6 +-
-> > > > >  board/asus/grouper/grouper-spl-max.c          |   2 +-
-> > > > >  board/asus/grouper/grouper-spl-ti.c           |   2 +-
-> > > > >  board/asus/grouper/grouper.c                  | 154 +-----------=
-------
-> > > > >  board/asus/transformer-t30/Kconfig            |  10 --
-> > > > >  .../transformer-t30/configs/tf600t.config     |   2 +-
-> > > > >  .../transformer-t30/transformer-t30-spl.c     |   2 +-
-> > > > >  board/asus/transformer-t30/transformer-t30.c  | 121 +-----------=
---
-> > > > >  board/htc/endeavoru/endeavoru-spl.c           |   2 +-
-> > > > >  board/htc/endeavoru/endeavoru.c               |  72 +-------
-> > > > >  board/lg/x3-t30/x3-t30-spl.c                  |   2 +-
-> > > > >  board/lg/x3-t30/x3-t30.c                      |  97 +----------
-> > > > >  configs/endeavoru_defconfig                   |   4 +
-> > > > >  configs/grouper_common_defconfig              |   1 +
-> > > > >  configs/transformer_t30_defconfig             |   5 +
-> > > > >  configs/x3_t30_defconfig                      |   4 +
-> > > > >  29 files changed, 128 insertions(+), 450 deletions(-)
-> > > > >
-> > > > > --
-> > > > > 2.40.1
-> > > > >
+yes, no action on current series.
+
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+
+
