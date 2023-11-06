@@ -4,84 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C173C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:22:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47DDFC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5240A86C56;
-	Mon,  6 Nov 2023 16:22:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 602DB8702F;
+	Mon,  6 Nov 2023 16:29:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kGawAiMf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ng57Dfd8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 381F886E40; Mon,  6 Nov 2023 16:22:12 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id D7FB586F84; Mon,  6 Nov 2023 16:29:06 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9A6786BD4
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:22:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5463186BD4
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:29:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-66d0c777bf0so30555146d6.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:22:09 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-32f78dcf036so3413743f8f.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:29:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699284128; x=1699888928; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/Eq8JEejMlO6n1gXU846iiBs7vlJBrTQyRgidKljhUs=;
- b=kGawAiMf7d+Lg8VEAYVDlccqxYxI2OmPU6pDQOIGpj2w/mFHFHq+iwvUHMP9mCNt1O
- bv853vsreLK2G5NQVyZYnKr9KanHtAWvSi9+x7NcKnRJNpY0xA5nhVvn9Zfcfz+IjygT
- BVs56ZN2opWQtILBr7wswx6NEoyfQdhDw4e30=
+ d=linaro.org; s=google; t=1699284543; x=1699889343; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YTH6/Sr+mCs/OKYx9wlbi+aCsberASGZt0GrzBhH490=;
+ b=Ng57Dfd85cT4v5GR4FhPS3IKbkXx8nzA67qsX/tbriMK5ntl2vBFkdCar3Inez+Jf4
+ JZrsm03xe7qrjC2oR6iCjWTZFdUUf922bSJPpVTAsVRUfE3vUykYIBIwbLQDei6diKwp
+ VGoese5HAeGvsZx/glS4pcx8Lh1ZZx7DRYe2MkimzYj35IYS3fXmQKdUXuZBmebKnIRY
+ xaJSE3U/bAW2JNocK5d+1Bpd5MN8uPIWmqxwYwNG98MHuGRt+hS0AisAeK1+HXO/z402
+ o44iQ704AbpWTTKRunVQr8fNvsSC04acbcYZ9poDmITGzOmzi1avL/wjwaFuVFn242g4
+ KEog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699284128; x=1699888928;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/Eq8JEejMlO6n1gXU846iiBs7vlJBrTQyRgidKljhUs=;
- b=m/v6RLIfI3JnWgcuPSN+jSQQwNAPECdNdQvIQi6KA7TF3oYLxdBTqkG2m3Mo2Kl/7c
- bt3zb4w0BOayqhgDH7GI15VazVvflTrwHANVzp2zKwAcPWb1Zx51fBvG27Fqmm9JmwT9
- UIJBroYGwSPg2ZQLWaEbL8me70lEw/6KTMLEwzxiIlZPd8cYxBFASBm50mOpCzRPgtPp
- 4E4vQQyNmwCNHjtGRuUwj8D/J5FFRRfLxBvCgIIATAzezEITjT1jmUPQFRFxD5c06RUK
- h/Rc2Njxh/fhx7AyPjMogoKM2E9GixY0OdzcJPmLaNSlJMHuK4CyG4m2wNK2V7eq9gx0
- hX8Q==
-X-Gm-Message-State: AOJu0YyloBx8FKc0T/5U/i3uaHgOcRVN7dGtA3e5htVERMrtP84Esdm9
- Jw8d8uzVMA837alNAogdq9TJfw==
-X-Google-Smtp-Source: AGHT+IHnaoLS/KmaR2T2n3sE6qqsX3UX24Sq6nNlYTm/wIhj9WauJZofWLQOAhKdULulBr/MyCYlPg==
-X-Received: by 2002:ad4:5bcc:0:b0:65d:1270:6846 with SMTP id
- t12-20020ad45bcc000000b0065d12706846mr34728035qvt.29.1699284128325; 
- Mon, 06 Nov 2023 07:22:08 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- qh8-20020a0562144c0800b00668bb8be252sm3483441qvb.60.2023.11.06.07.22.06
+ d=1e100.net; s=20230601; t=1699284543; x=1699889343;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YTH6/Sr+mCs/OKYx9wlbi+aCsberASGZt0GrzBhH490=;
+ b=WUY0UZ/t8H3igDdjPo6U8VM12J5qU/0KqNi8pKWoZMWnmdJ8Vn8nqh3mexmrdveb9t
+ JSIoiO/FO96cTo7yTZs2mWW7IrNugcbOzibSeeYD+TC8S2TbvWOH5CQzFwC0d06+3XSr
+ apwRghQSKS7rL74sTHeYmhaUkHCUryprTFuKbDoP27yLQPQirphxMrtELQu4eslMm+zJ
+ U1OTe53bi5YSBL+90uhIVLZdSpTiGu9B/TMPZACb8H9Yzk6zZ8Nhatd9zQAZqm0BJOvK
+ X653zPc3S6xqbBrG1vQCvvvdSM8iw6lFuewJoafBCBQqezBm+HURHYkhZWWzQO1r6GBC
+ 9Ztg==
+X-Gm-Message-State: AOJu0YyffD958ofh+jEQQOxKLe26XnvG+buxOVvb8KquXLR0PwzKmLID
+ n+VnlhU5eRucio41xNBh2g8GUg==
+X-Google-Smtp-Source: AGHT+IEcITVjUZ1IAF6d5JDknKy5Aem9Zq+9j+AVIUGedoGdi9dS62AYt8jEzR6WTivvYfJyA6Gb8g==
+X-Received: by 2002:adf:d1ca:0:b0:32f:89fb:771b with SMTP id
+ b10-20020adfd1ca000000b0032f89fb771bmr10096952wrd.4.1699284543666; 
+ Mon, 06 Nov 2023 07:29:03 -0800 (PST)
+Received: from lion.localdomain (host-92-25-138-185.as13285.net.
+ [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
+ bx30-20020a5d5b1e000000b0032f7d1e2c7csm8116094wrb.95.2023.11.06.07.29.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 07:22:07 -0800 (PST)
-Date: Mon, 6 Nov 2023 10:22:05 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: Manorit Chawdhry <m-chawdhry@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sinthu Raja <sinthu.raja@ti.com>, Reid Tonking <reidt@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 10/15] configs: j721e_evm_a72_defconfig: Switch to bootstd
-Message-ID: <20231106152205.GG496310@bill-the-cat>
-References: <20231103003805.2420005-1-nm@ti.com>
- <20231103003805.2420005-11-nm@ti.com>
- <20231106052826.nbtzqzudnh7v3yix@ula0497581>
- <20231106122116.g6xwxgl4hrdpcgeh@debit>
+ Mon, 06 Nov 2023 07:29:03 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v2 0/5] arm: mach-snapdragon: Qualcomm pinctrl driver cleanup
+Date: Mon, 06 Nov 2023 15:28:59 +0000
+Message-Id: <20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zSdeEx5PPIb3jIz8"
-Content-Disposition: inline
-In-Reply-To: <20231106122116.g6xwxgl4hrdpcgeh@debit>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADwGSWUC/3WNQQ6CMBAAv0L27BpaQIGT/zAc2lJgk9riFomG8
+ Hcrd48zyWQ2iJbJRmizDdiuFCn4BPKUgZmUHy1SnxhkLguRywp1iU8THjiTNws7LHVf1U1thqK
+ uIFVaRYualTdT6vzLuSRntgO9j829SzxRXAJ/jusqfvb/YBWYYyNk0V+UFFerb4684nAOPEK37
+ /sXbsoKUsQAAAA=
+To: Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Robert Marko <robert.marko@sartura.hr>, 
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Luka Perkov <luka.perkov@sartura.hr>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.13-dev-4bd13
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3876;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=VRWBuCSsfo/T8E/tVD+W2pXI1LZbn3GI6b0wDtetH4Q=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlRPNrtjF+NttJYZsP9P/1l79UESz7rnFtd9jDbfCEz1f
+ qeSpj+3o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEzElIXhf5Vb+tG0z49/st3P
+ f9pgLT5jujBP/Smdq3uVSrqknv5Y7srIsLzKZ/JZxp4y05XJE4WMdjyb2T7751QmPaubF+4mzA1
+ wlQQA
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,83 +110,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series moves the Qualcomm pinctrl drivers from mach-snapdragon and
+mach-ipq40xx to drivers/pinctrl/qcom. It then makes the necessary changes
+to enable compatibility with Linux DTs.
 
---zSdeEx5PPIb3jIz8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The pinctrl hardware on most Qualcomm platforms is made up of "tiles",
+these are just banks of pins at different register addresses. The
+mapping between pin number and tile is totally arbitrary, this
+unfortunately means that it is necessary to have a map of pin to tile in
+order to support all pins. Up until now this driver has ignored tiles,
+meaning that the pin numbers and DT nodes are entirely different to the
+Linux DT and only a subset of pins are addressable.
 
-On Mon, Nov 06, 2023 at 06:21:16AM -0600, Nishanth Menon wrote:
-> On 10:58-20231106, Manorit Chawdhry wrote:
-> > Hi Nishanth,
-> >=20
-> > On 19:38-20231102, Nishanth Menon wrote:
-> > > Switch to using bootstd. Note with this change, we will stop using
-> > > distro_bootcmd and instead depend entirely on bootflow method of
-> > > starting the system up.
-> > >=20
-> > > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > > ---
-> > >  configs/j721e_evm_a72_defconfig | 5 +++--
-> > >  1 file changed, 3 insertions(+), 2 deletions(-)
-> > >=20
-> > > diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_=
-defconfig
-> > > index 99e0e168ebf7..98ac7ca59789 100644
-> > > --- a/configs/j721e_evm_a72_defconfig
-> > > +++ b/configs/j721e_evm_a72_defconfig
-> > > @@ -29,10 +29,11 @@ CONFIG_SPL_SPI=3Dy
-> > >  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> > >  CONFIG_SPL_LOAD_FIT=3Dy
-> > >  CONFIG_SPL_LOAD_FIT_ADDRESS=3D0x81000000
-> > > -CONFIG_DISTRO_DEFAULTS=3Dy
-> > >  CONFIG_OF_BOARD_SETUP=3Dy
-> > >  CONFIG_OF_SYSTEM_SETUP=3Dy
-> > > -CONFIG_BOOTCOMMAND=3D"run envboot; run distro_bootcmd;"
-> > > +CONFIG_BOOTSTD_FULL=3Dy
-> > > +CONFIG_BOOTSTD_DEFAULTS=3Dy
-> > > +CONFIG_BOOTCOMMAND=3D"run envboot; bootflow scan -lb"
-> >=20
-> > Coming back to [0], AM62x didn't have early remote procs but j721e does,
-> > do you have any alternatives in place before migrating J7 platforms to
-> > stdboot?
->=20
-> As I have stated before. distro boot support for remote proc has been
-> hacked up atm. what needs to happen is standardize it. Which is
-> independent of this series.
->=20
-> Please discuss with stdboot folks how to get it in. WORST case, envboot
-> is still supported, so in effect, what is achieved today can still
-> continue to occur with envboot.
+Patch 2 solves this by introducing the pin_offset map, initially
+supporting SDM845. This map is used for all pin register lookups for
+both the pinctrl and GPIO drivers. Similarly to the clock/reset drivers
+these are both associated with a single DT node, where the pinctrl
+driver is responsible for binding the GPIO drivers.
 
-There's not "stdboot folks" to talk with about this. The first step
-would be someone from TI posting some RFC patches about how exactly the
-remote proc support should be handled in that case, explaining where the
-what being run comes from and so forth. Maybe the answer is that
-"envboot" just keeps being defined and run before hand because that's
-the standard way to handle what needs doing on those processors? At
-least personally I feel like there's a gap in knowledge of what the use
-cases here are. Thanks.
+Patch 3 introduces support for gpio-reserved-ranges, this property
+is used on some boards to mark pin ranges that shouldn't be touched
+(else firmware will trigger a fault and reset the board).
 
---=20
-Tom
+This series loosely depends on the associated clock driver cleanup which can be
+found here (Makefile and perhaps DTS conflicts):
 
---zSdeEx5PPIb3jIz8
-Content-Type: application/pgp-signature; name="signature.asc"
+https://lore.kernel.org/u-boot/20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org
 
------BEGIN PGP SIGNATURE-----
+---
+Changes in v2:
+* Drop msm -> qcom rename (will be handled in a future patch)
+* Drop "handle reserved ranges" patch to be introduced alongside a user
+* Re-order APQ4019 move to be the second patch
+* Change driver name to pinctrl_qcom instead of qcom_pinctrl
+* Add MAINTAINERS entry
+* Move shared GPIO header to mach-snapdragon
+* Link to v1: https://lore.kernel.org/r/20231025-b4-qcom-pinctrl-v1-0-9123d6a217eb@linaro.org
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJBJMACgkQFHw5/5Y0
-tyxyOQv/dHew/YOEB6d/LEY52tA6S9xpP3c0cYrf4T7G32PprTqk3kvRVt7ITgNB
-IxB0y+vxl8JwcjOzWZgDPhUUYESNUFgwKE0oU/B39qRMiWpRrWLmHvXyaVFS9ikI
-zgx60OqO62BoeY13O+/d8OYzanaPpF+dPPMiFMMstjvCqtCi6qoCOMaVXBe3Un3Q
-dza3cB0stBt7jt/0Q28zsIGXeCPOAbXMX53wT6S8jPb6Kw19wzdpKDNyLsPCbfzX
-AuIksg6ZBDy2NQJ4N48ESQXmj/ULrMCj25D9xeBMvyO4Om/wcRPoKiOM18i4kv7A
-bwp2n1HtfaA9xPotvFbiY8BLaojWvDNdrDFbSd4Ub7SXDE8AMzcFr/PHcNVOUnDp
-WWgs5wzEQWZMn1axR4UaMYG17zM4/PkK3zDc4tG50dUl/AxWUNv/E6V4Yt8bPDjH
-xgYgciIrKcjE+QHPPYKacympSCvP4NCXCa1vWwdIHTJrnGyd7gcTX0jAeNtBCSba
-NP1XPQPm
-=B5Mf
------END PGP SIGNATURE-----
+---
+Caleb Connolly (5):
+      pinctrl: qcom: move out of mach-snapdragon
+      pinctrl: qcom: move ipq4019 driver from mach-ipq40xx
+      pinctrl: qcom: make compatible with linux DTs
+      msm_gpio: use unsigned int
+      fixup! pinctrl: qcom: make compatible with linux DTs
 
---zSdeEx5PPIb3jIz8--
+ MAINTAINERS                                        |   1 +
+ arch/arm/Kconfig                                   |   1 +
+ arch/arm/dts/dragonboard845c-uboot.dtsi            |   2 +-
+ arch/arm/dts/sdm845.dtsi                           |  16 +-
+ arch/arm/dts/starqltechn-uboot.dtsi                |   5 +-
+ arch/arm/dts/starqltechn.dts                       |  16 +-
+ arch/arm/mach-ipq40xx/Makefile                     |   8 -
+ arch/arm/mach-ipq40xx/pinctrl-snapdragon.c         | 166 ---------------------
+ arch/arm/mach-snapdragon/Kconfig                   |   4 +
+ arch/arm/mach-snapdragon/Makefile                  |   5 -
+ arch/arm/mach-snapdragon/include/mach/gpio.h       |  28 +++-
+ arch/arm/mach-snapdragon/pinctrl-sdm845.c          |  44 ------
+ arch/arm/mach-snapdragon/pinctrl-snapdragon.h      |  33 ----
+ drivers/gpio/msm_gpio.c                            |  42 +++---
+ drivers/pinctrl/Kconfig                            |   1 +
+ drivers/pinctrl/Makefile                           |   1 +
+ drivers/pinctrl/qcom/Kconfig                       |  46 ++++++
+ drivers/pinctrl/qcom/Makefile                      |  10 ++
+ .../pinctrl/qcom}/pinctrl-apq8016.c                |  21 ++-
+ .../pinctrl/qcom}/pinctrl-apq8096.c                |  21 ++-
+ .../pinctrl/qcom}/pinctrl-ipq4019.c                |  25 +++-
+ .../pinctrl/qcom/pinctrl-qcom.c                    |  70 +++++----
+ .../pinctrl/qcom/pinctrl-qcom.h                    |  15 +-
+ .../pinctrl/qcom}/pinctrl-qcs404.c                 |  21 ++-
+ drivers/pinctrl/qcom/pinctrl-sdm845.c              | 100 +++++++++++++
+ 25 files changed, 350 insertions(+), 352 deletions(-)
+---
+base-commit: 8c5e4ddf52ea3c1e85c44cdd5d5b2e2f6c892b4f
+
+// Caleb (they/them)
+
