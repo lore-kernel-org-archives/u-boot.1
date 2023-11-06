@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA199C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:28:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC31BC4167D
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19A2F86516;
-	Mon,  6 Nov 2023 21:28:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E24F68701B;
+	Mon,  6 Nov 2023 21:38:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t7HKch+3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="caEA8yZ5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70FD286813; Mon,  6 Nov 2023 21:27:59 +0100 (CET)
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
+ id 50A9E8701D; Mon,  6 Nov 2023 21:38:57 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1262C86053
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:27:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAEAD86FB4
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:38:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-7b9f08482c8so2142486241.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:27:57 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-540c54944c4so9823386a12.1
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:38:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699302475; x=1699907275; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zN27QPZTbRIeXIGZCV1T5151cJHxA+rLWNwSmS44tlY=;
- b=t7HKch+3Tt3czoAuSpAUEDeIcCdf+zEyAbyPZ/rN3uSvneR4bB/iW01kOVI6B1xKQu
- gL6cYA2nG+Jc3DigUnd0ikVNRzIbfLcVF3Ck2QLHAt0AnNGs7vGJw7X3YQcgrHwG6TLp
- 4uecqf4MwUQ1BCXwmb9upkv8iylHIOw8wphWA=
+ d=chromium.org; s=google; t=1699303132; x=1699907932; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nkpmv4lD98XvaFOwbLAJMYY0AYfkY2b+tjp2EdJSN1k=;
+ b=caEA8yZ5X4SG4wAVbAHzRyV2M+a6PkE1OEGA9X9D3YlSZOdD6boTNU42ay5lrhO/aY
+ bfJp2lZHV2+erCTJIXJRfvLnzqLYSXZMfzlIZQVnW1h89taVuKZmpj930O1iF97lGBNt
+ qU2cg8PZcshB4aEMCBElbE5dN9MrwsL1ux1/M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699302475; x=1699907275;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zN27QPZTbRIeXIGZCV1T5151cJHxA+rLWNwSmS44tlY=;
- b=t4kp0/vDN+OFzTpOSEXa2eh/lGCik1+Raj8Y4/TOveP6E3ZAq9yXMaOsyqhvrIhx4t
- Cfe5x3X/gnaEVnI30Fe/i5oHvYf4hvGR7lHQVJedFGGhmvsAPzL3PHGhKBe94fGva5yJ
- GH9yjZIKaAGoGGE5OeK6PXTbLbRQwPsFN9dtvgEVjfIlSyt4ijELCixClGVwnoxjLjUo
- GpAHvFGPcmaLM99OdB+syepmLQCvjeiZRBnT0WIhgGcoT8oZD4YbHJXwJIK2Lb7a9Wtd
- a5d4AHbfXHAogEg3LoYHVNyatNWEUSsSxIswVgRdA1uCVOHKt4g1bTspnxYJftSuJbJI
- NmgA==
-X-Gm-Message-State: AOJu0YyDVP+B2unSg67UBzURlbrK4HeMhgH7tR6/F/4pRqvJ49BD7YCH
- AtwQcn38T1hSp16/950DQTH/DAjwBnREXp3rrQS2xQ==
-X-Google-Smtp-Source: AGHT+IFUfLL3FZ9Pp0209QxT8oOjV7cTBJuWbIck1D/ukLsqltbAbkI5cBlWQx6S9sL6WlpNfZ9O7Q==
-X-Received: by 2002:a67:e003:0:b0:45f:481:ea5 with SMTP id
- c3-20020a67e003000000b0045f04810ea5mr4649310vsl.11.1699302475058; 
- Mon, 06 Nov 2023 12:27:55 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- m8-20020ad44488000000b0065d05c8bb5dsm3703275qvt.64.2023.11.06.12.27.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 12:27:54 -0800 (PST)
-Date: Mon, 6 Nov 2023 15:27:52 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Alexander Gendin <agendin@matrox.com>
-Subject: [tom.rini@gmail.com: Fwd: New Defects reported by Coverity Scan for
- Das U-Boot]
-Message-ID: <20231106202752.GH496310@bill-the-cat>
+ d=1e100.net; s=20230601; t=1699303132; x=1699907932;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nkpmv4lD98XvaFOwbLAJMYY0AYfkY2b+tjp2EdJSN1k=;
+ b=mFadz3UFQozm6nwdNVcHDd01v/s8flLe15MXZoH8rid3Uqhb5UHXfTMEUN7gcbbPDM
+ h2s+xHdvfihl2qaTFCP8Smz0HbcnpznVPa8StPLrRdTeJD3Hl0FCvMYEQO33YKhwPfvM
+ Bqb0olstmqLWeTXk2yfmDUKhw9vNTQEcFZABWwoSOnqJGBXOPlx/vw0B+SDOLdpFG3Du
+ Gkg17DpQERSc+afHLi3zk+kwlhaF+GiGTclfOvfG+YRC8UPDodLeK3HiTN2GfA1MlUER
+ U8e2CnMtcJA+yG37qZFq7ocqW4FeDgZc1SxuCFmfak79mK+dZBF6Gfcvhvn1L3UlBMoY
+ 0jqA==
+X-Gm-Message-State: AOJu0YwJu+ZwJk25KaHBJlfb8hehMftE1MD6RzpJnqmnbHqcgGoz5SsV
+ V1KQX01TFE70752Nc3twImhTzV/s1AQ3HAn82QmhCbEvwFDtWeTKokM=
+X-Google-Smtp-Source: AGHT+IFGVgjEmVRr9+Ry0k42JhQGXa2XEp8qcXo9RF6sk7zmioijMtzEe6oFXqV/BYN9BMq2Szz9l65NNyL2tbIyI/8=
+X-Received: by 2002:a05:6402:138a:b0:52c:f73:3567 with SMTP id
+ b10-20020a056402138a00b0052c0f733567mr536232edv.13.1699303131933; Mon, 06 Nov
+ 2023 12:38:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UxddXHrKnO89abT3"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+ <20231101170559.680ab493@donnerap.manchester.arm.com>
+ <50ff2080-5831-4963-937d-331248b59973@canonical.com>
+ <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
+ <20231104171212.3d041a4f@slackpad.lan>
+ <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
+ <20231106172601.12c36750@donnerap.manchester.arm.com>
+In-Reply-To: <20231106172601.12c36750@donnerap.manchester.arm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 6 Nov 2023 13:38:39 -0700
+Message-ID: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Xiang W <merlew4n6@gmail.com>, Chanho Park <chanho61.park@samsung.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov <avromanov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,421 +93,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andre,
 
---UxddXHrKnO89abT3
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 6 Nov 2023 at 10:26, Andre Przywara <andre.przywara@arm.com> wrote:
+>
+> On Sat, 4 Nov 2023 19:45:06 +0000
+> Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi,
+>
+> > On Sat, 4 Nov 2023 at 17:13, Andre Przywara <andre.przywara@arm.com> wrote:
+> > >
+> > > On Fri, 3 Nov 2023 13:38:58 -0600
+> > > Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > > Hi Heinrich,
+> > > >
+> > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
+> > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > >
+> > > > > On 11/1/23 19:05, Andre Przywara wrote:
+> > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
+> > > > > > Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> > > > > >
+> > > > > > Hi Heinrich,
+> > > > > >
+> > > > > >> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
+> > > > > >> provides an interface to a physical entropy source.
+> > > > > >>
+> > > > > >> A RNG driver based on the seed CSR is provided. It depends on
+> > > > > >> mseccfg.sseed being set in the SBI firmware.
+> > > > > >
+> > > > > > As you might have seen, I added a similar driver for the respective Arm
+> > > > > > functionality:
+> > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
+> > > > > >
+> > > > > > And I see that you seem to use the same mechanism to probe and init the
+> > > > > > driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
+> > > > > > implemented.
+> > > > > > One downside of this approach is that the driver is always loaded (and
+> > > > > > visible in the DM tree), even with the feature not being available.
+> > > > > > That doesn't seem too much of a problem on the first glance, but it
+> > > > > > occupies a device number, and any subsequent other DM_RNG devices
+> > > > > > (like virtio-rng) typically get higher device numbers. So without
+> > > > > > the feature, but with virtio-rng, I get:
+> > > > > > VExpress64# rng 0
+> > > > > > No RNG device
+> > > >
+> > > > Why do we get this? If the device is not there, the bind() function
+> > > > can return -ENODEV
+> > > >
+> > > > I see this in U-Boot:
+> > > >
+> > > > U_BOOT_DRVINFO(cpu_arm_rndr) = {
+> > > >
+> > > > We should not use this.
+> > >
+> > > Agreed.
+> > >
+> > > > Use the devicetree.
+> > >
+> > > No, this is definitely not something for the DT, at least not on ARM.
+> > > It's perfectly discoverable via the architected CPU ID registers.
+> > > Similar to PCI and USB devices, which we don't probe via the DT as well.
+> > >
+> > > It's arguably not proper "driver" material per se, as I've argued before, but
+> > > it's the simplest solution and fits in nicely otherwise.
+> > >
+> > > I was wondering if it might be something for UCLASS_CPU, something like
+> > > a "CPU feature bus": to let devices register on one on the many CPU
+> > > features (instead of compatible strings), then only bind() those
+> > > drivers it the respective bit is set.
+> > >
+> > > Does that make sense? Would that be doable without boiling the ocean?
+> > > As I don't know if we see many users apart from this.
+> >
+> > I have seen this so many times, where people want to avoid putting
+> > things in the DT and then are surprised that everything is difficult,
+> > broken and confusing. Why not just follow the rules? It is not just
+> > about whether we can avoid it, etc. It is about how devices fit
+> > together cohesively in the system, and how U-Boot operates.
+>
+> A devicetree is only for peripherals *that cannot be located by probing*.
 
-Hey all,
+I have to stop you there. It absolutely is not limited to that.
 
-Here's the latest report. I _think_ I passed the right options to
-get_maintainer.pl such that it would only look far enough back in git to
-find the likely authors (along with listed maintainers of the files).
+> Which are traditionally most peripherals in non-server Arm SoCs. While I
+> do love the DT, the best DT node is the one you don't need.
 
----------- Forwarded message ---------
-=46rom: <scan-admin@coverity.com>
-Date: Mon, Nov 6, 2023 at 2:58=E2=80=AFPM
-Subject: New Defects reported by Coverity Scan for Das U-Boot
-To: <tom.rini@gmail.com>
+We need it in U-Boot, at least.
 
+I'll send a patch with a warning on U_BOOT_DRVINFO() as it seems that
+some people did not see the header-file comment.
 
-Hi,
+Let's just stop this discussion and instead talk about the binding we need.
 
-Please find the latest report on new defect(s) introduced to Das
-U-Boot found with Coverity Scan.
+>
+> But as Heinrich also said: those instructions are not peripherals, they
+> are part of an instruction set extensions, the same story as with x86's
+> RDRAND instruction. We don't have those in ACPI or so as well, because
+> CPUID has you covered. The same on ARM, ID_AA64ISAR0_EL1 is readable on
+> every chip (outside of EL0), and tells you whether you have the RNDR
+> register or not. IIUC RISC-V is slightly different here, since not all ISA
+> extensions are covered by CSRs, hence some of them indeed listed in the DT.
+>
+> So a proper solution(TM) would be to split this up in architectural
+> *instructions* and proper TRNG *devices*, maybe wrapping this up in some
+> function that tests both. This is roughly what the kernel does, somewhat
+> abstracted by the concept of "entropy sources", which could be TRNG
+> devices, CPU instructions, interrupt jitter or even "instruction execution
+> jitter"[1], with the latter two definitely not being devices really at all.
+>
+> But I don't know if U-Boot wants to go through the hassle of this whole
+> framework, as we tend to implement things much easier. But a simple
+> get_cpu_random() function, implemented per architecture, and with some
+> kind of success flag, should be easy enough to do. Then either the users
+> (UEFI?) explicitly call this before trying UCLASS_RNG, or we wrap this for
+> every RNG user.
+>
+> Cheers,
+> Andre
+>
+> > > > > > VExpress64# rng 1
+> > > > > > 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...
+> > > > >
+> > > > >
+> > > > > Essentially in any case were you have multiple drivers for the same
+> > > > > device using uclass_get_device(, 0, ) and uclass_find_first_device()
+> > > > > will only give you the first bound device and not the first successfully
+> > > > > probed device. Furthermore neither of this functions causes probing.
+> > > > > This is not restricted to the RNG drivers but could also happen with
+> > > > > multiple TPM drivers or multiple watchdogs.
+> > > > >
+> > > > > This patch is related to the problem:
+> > > > >
+> > > > > [PATCH v1] rng: add dm_rng_read_default() helper
+> > > > > https://lore.kernel.org/u-boot/4e28a388-f5b1-4cf7-b0e3-b12a876d0567@gmx.de/T/#me44263ec9141e3ea65ee232aa9a411fc6201bd95
+> > > > >
+> > > > > We have weak function platform_get_rng_device() which should be moved to
+> > > > > drivers/rng/rng-uclass.c.
+> > > > >
+> > > > > We could add a function to drivers/core/uclass.c to retrieve the first
+> > > > > successfully probed device. Another approach would be to implement
+> > > > > uclass_driver.post_probe() in the RNG uclass to take note of the first
+> > > > > successfully probed device.
+> > > > >
+> > > > > @Simon:
+> > > > > What would make most sense from a DM design standpoint?
+> > > >
+> > > > I am sure I provided feedback on this at the time, but I don't
+> > > > remember. OK I just found it here [1]. So the problem is entirely
+> > > > because my feedback was not addressed. Please just address it and
+> > > > avoid this sort of mess.
+> > >
+> > > Yeah, Tom just merged it, but that's not Heinrich's fault ;-)
+> > >
+> > > > So arm_rndr should have a devicetree compatible string and be bound
+> > > > like anything else. If for some reason the device doesn't exist in the
+> > > > hardware, it can return -ENODEV from its bind() method.
+> > > >
+> > > > If you want to control which RNG device is used for booting, you could
+> > > > add a property to /bootstd with a phandle to the device. We are trying
+> > > > to provide a standard approach to booting in U-Boot, used by all
+> > > > methods. Doing one-off things for particular cases is best avoided.
+> > >
+> > > Picking the first usable device doesn't sound much like a one-off to me.
+> > > After all the caller (be it UEFI or the rng command) later detect that
+> > > this is not usable. So there might be some merit to cover this more
+> > > automatically, either in the caller, or by providing a suitable wrapper
+> > > function?
+> >
+> > Or just follow the existing mechanisms which have been in U-Boot for
+> > years. Please...!
+> >
+> > [..]
+> >
+> >
+> > Regards,
+> > Simon
+> >  >
+> > > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20230830113230.3925868-1-andre.przywara@arm.com/
+> > >
+>
 
-13 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-5 defect(s), reported by Coverity Scan earlier, were marked fixed in
-the recent build analyzed by Coverity Scan.
-
-New defect(s) Reported-by: Coverity Scan
-Showing 13 of 13 defect(s)
-
-
-** CID 467411:  Memory - corruptions  (OVERRUN)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467411:  Memory - corruptions  (OVERRUN)
-/lib/efi_loader/efi_tcg2.c: 1395 in efi_tcg2_measure_efi_app_invocation()
-1389
-1390            ret =3D tcg2_measure_gpt_data(dev, handle);
-1391            if (ret !=3D EFI_SUCCESS)
-1392                    goto out;
-1393
-1394            for (pcr_index =3D 0; pcr_index <=3D 7; pcr_index++) {
->>>     CID 467411:  Memory - corruptions  (OVERRUN)
->>>     Overrunning buffer pointed to by "(u8 *)&event" of 4 bytes by passi=
-ng it to a function which accesses it at byte offset 63.
-1395                    ret =3D measure_event(dev, pcr_index, EV_SEPARATOR,
-1396                                        sizeof(event), (u8 *)&event);
-1397                    if (ret !=3D EFI_SUCCESS)
-1398                            goto out;
-1399            }
-1400
-
-** CID 467410:    (TAINTED_SCALAR)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467410:    (TAINTED_SCALAR)
-/lib/efi_loader/efi_tcg2.c: 1385 in efi_tcg2_measure_efi_app_invocation()
-1379                                (u8 *)EFI_CALLING_EFI_APPLICATION);
-1380            if (ret !=3D EFI_SUCCESS)
-1381                    goto out;
-1382
-1383            entry =3D (struct smbios_entry *)find_smbios_table();
-1384            if (entry) {
->>>     CID 467410:    (TAINTED_SCALAR)
->>>     Passing tainted expression "entry->struct_table_length" to "tcg2_me=
-asure_smbios", which uses it as an offset.
-1385                    ret =3D tcg2_measure_smbios(dev, entry);
-1386                    if (ret !=3D EFI_SUCCESS)
-1387                            goto out;
-1388            }
-1389
-1390            ret =3D tcg2_measure_gpt_data(dev, handle);
-/lib/efi_loader/efi_tcg2.c: 1385 in efi_tcg2_measure_efi_app_invocation()
-1379                                (u8 *)EFI_CALLING_EFI_APPLICATION);
-1380            if (ret !=3D EFI_SUCCESS)
-1381                    goto out;
-1382
-1383            entry =3D (struct smbios_entry *)find_smbios_table();
-1384            if (entry) {
->>>     CID 467410:    (TAINTED_SCALAR)
->>>     Passing tainted expression "entry->struct_count" to "tcg2_measure_s=
-mbios", which uses it as a loop boundary.
-1385                    ret =3D tcg2_measure_smbios(dev, entry);
-1386                    if (ret !=3D EFI_SUCCESS)
-1387                            goto out;
-1388            }
-1389
-1390            ret =3D tcg2_measure_gpt_data(dev, handle);
-
-** CID 467409:  Uninitialized variables  (UNINIT)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467409:  Uninitialized variables  (UNINIT)
-/test/boot/measurement.c: 48 in measure()
-42      for (i =3D 0; i < size; ++i) {
-43              kernel[i] =3D 0xf0 | (i & 0xf);
-44              initrd[i] =3D (i & 0xf0) | 0xf;
-45              images.ft_addr[i] =3D i & 0xff;
-46      }
-47
->>>     CID 467409:  Uninitialized variables  (UNINIT)
->>>     Using uninitialized value "images.os.os" when calling "bootm_measur=
-e".
-48      ut_assertok(bootm_measure(&images));
-49
-50      free(images.ft_addr);
-51      free(initrd);
-52      free(kernel);
-53
-
-** CID 467408:  Insecure data handling  (TAINTED_SCALAR)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467408:  Insecure data handling  (TAINTED_SCALAR)
-/boot/bootm.c: 826 in do_bootm_states()
-820                             env_set_hex("initrd_end", images->initrd_en=
-d);
-821                     }
-822             }
-823     #endif
-824     #if CONFIG_IS_ENABLED(OF_LIBFDT) && defined(CONFIG_LMB)
-825             if (!ret && (states & BOOTM_STATE_FDT)) {
->>>     CID 467408:  Insecure data handling  (TAINTED_SCALAR)
->>>     Passing tainted expression "*images->ft_addr" to "boot_fdt_add_mem_=
-rsv_regions", which uses it as an offset.
-826                     boot_fdt_add_mem_rsv_regions(&images->lmb,
-images->ft_addr);
-827                     ret =3D boot_relocate_fdt(&images->lmb, &images->ft=
-_addr,
-828                                             &images->ft_len);
-829             }
-830     #endif
-831
-
-** CID 467407:  Uninitialized variables  (UNINIT)
-/drivers/scsi/scsi.c: 612 in do_scsi_scan_one()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467407:  Uninitialized variables  (UNINIT)
-/drivers/scsi/scsi.c: 612 in do_scsi_scan_one()
-606
-607             bdesc =3D dev_get_uclass_plat(bdev);
-608             bdesc->target =3D id;
-609             bdesc->lun =3D lun;
-610             bdesc->removable =3D bd.removable;
-611             bdesc->type =3D bd.type;
->>>     CID 467407:  Uninitialized variables  (UNINIT)
->>>     Using uninitialized value "bd.bb".
-612             bdesc->bb =3D bd.bb;
-613             memcpy(&bdesc->vendor, &bd.vendor, sizeof(bd.vendor));
-614             memcpy(&bdesc->product, &bd.product, sizeof(bd.product));
-615             memcpy(&bdesc->revision, &bd.revision,  sizeof(bd.revision)=
-);
-616             if (IS_ENABLED(CONFIG_SYS_BIG_ENDIAN)) {
-617                     ata_swap_buf_le16((u16 *)&bdesc->vendor,
-sizeof(bd.vendor) / 2);
-
-** CID 467406:  Memory - corruptions  (OVERRUN)
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467406:  Memory - corruptions  (OVERRUN)
-/lib/efi_loader/efi_tcg2.c: 885 in efi_append_scrtm_version()
-879      * @Return:     status code
-880      */
-881     static efi_status_t efi_append_scrtm_version(struct udevice *dev)
-882     {
-883             efi_status_t ret;
-884
->>>     CID 467406:  Memory - corruptions  (OVERRUN)
->>>     Overrunning array "version_string" of 50 bytes by passing it to a f=
-unction which accesses it at byte offset 63.
-885             ret =3D measure_event(dev, 0, EV_S_CRTM_VERSION,
-886                                 strlen(version_string) + 1, (u8
-*)version_string);
-887
-888             return ret;
-889     }
-890
-
-** CID 467405:  Memory - illegal accesses  (OVERRUN)
-/drivers/firmware/scmi/sandbox-scmi_agent.c: 662 in sandbox_scmi_pwd_state_=
-get()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467405:  Memory - illegal accesses  (OVERRUN)
-/drivers/firmware/scmi/sandbox-scmi_agent.c: 662 in sandbox_scmi_pwd_state_=
-get()
-656             if (domain_id > ARRAY_SIZE(scmi_pwdom)) {
-657                     out->status =3D SCMI_NOT_FOUND;
-658
-659                     return 0;
-660             }
-661
->>>     CID 467405:  Memory - illegal accesses  (OVERRUN)
->>>     Overrunning array "scmi_pwdom" of 3 8-byte elements at element inde=
-x 3 (byte offset 31) using index "domain_id" (which evaluates to 3).
-662             out->pstate =3D scmi_pwdom[domain_id].pstate;
-663             out->status =3D SCMI_SUCCESS;
-664
-665             return 0;
-666     }
-667
-
-** CID 467404:  Control flow issues  (DEADCODE)
-/test/cmd/mbr.c: 217 in build_mbr_parts()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467404:  Control flow issues  (DEADCODE)
-/test/cmd/mbr.c: 217 in build_mbr_parts()
-211                                             return 1;
-212                                     strcat(cur_buf, mbr_parts_p5);
-213                                     bytes_remaining -=3D cur_str_size;
-214
-215                             }
-216                             else if (num_parts > 5)
->>>     CID 467404:  Control flow issues  (DEADCODE)
->>>     Execution cannot reach this statement: "return 1U;".
-217                                     return 1;
-218                             }
-219                     }
-220             }
-221
-222             cur_str_size =3D sizeof(mbr_parts_tail);
-
-** CID 467403:  Error handling issues  (CHECKED_RETURN)
-/test/dm/ofnode.c: 869 in dm_test_ofnode_livetree_writing()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467403:  Error handling issues  (CHECKED_RETURN)
-/test/dm/ofnode.c: 869 in dm_test_ofnode_livetree_writing()
-863             node =3D ofnode_path("/usb@2");
-864
-865             ut_assert(!ofnode_is_enabled(node));
-866             ut_assertok(ofnode_set_enabled(node, true));
-867             ut_asserteq(true, ofnode_is_enabled(node));
-868
->>>     CID 467403:  Error handling issues  (CHECKED_RETURN)
->>>     Calling "device_bind_driver_to_node" without checking return value =
-(as is done elsewhere 12 out of 15 times).
-869             device_bind_driver_to_node(dm_root(), "usb_sandbox",
-"usb@2", node,
-870                                        &dev);
-871             ut_assertok(uclass_find_device_by_seq(UCLASS_USB, 2, &dev));
-872
-873             /* Test string property setting */
-874             ut_assert(device_is_compatible(dev, "sandbox,usb"));
-
-** CID 467402:    (CHECKED_RETURN)
-/drivers/block/rkmtd.c: 737 in rkmtd_init_plat()
-/drivers/block/rkmtd.c: 755 in rkmtd_init_plat()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467402:    (CHECKED_RETURN)
-/drivers/block/rkmtd.c: 737 in rkmtd_init_plat()
-731
-732             debug("starting_lba           : %llu\n",
-le64_to_cpu(plat->gpt_e->starting_lba));
-733             debug("ending_lba             : %llu\n",
-le64_to_cpu(plat->gpt_e->ending_lba));
-734
-735             memcpy(plat->gpt_e->partition_type_guid.b,
-&partition_basic_data_guid, 16);
-736
->>>     CID 467402:    (CHECKED_RETURN)
->>>     Calling "uuid_str_to_bin" without checking return value (as is done=
- elsewhere 9 out of 11 times).
-737             uuid_str_to_bin(plat->uuid_part_str,
-plat->gpt_e->unique_partition_guid.b,
-738                             UUID_STR_FORMAT_GUID);
-739
-740             efiname_len =3D sizeof(plat->gpt_e->partition_name) /
-sizeof(efi_char16_t);
-741             dosname_len =3D sizeof(name);
-742
-/drivers/block/rkmtd.c: 755 in rkmtd_init_plat()
-749             plat->gpt_h->header_size =3D cpu_to_le32(sizeof(gpt_header)=
-);
-750             plat->gpt_h->first_usable_lba =3D cpu_to_le64(64);
-751             plat->gpt_h->last_usable_lba =3D cpu_to_le64(LBA - 34);
-752             plat->gpt_h->num_partition_entries =3D cpu_to_le32(1);
-753             plat->gpt_h->sizeof_partition_entry =3D
-cpu_to_le32(sizeof(gpt_entry));
-754
->>>     CID 467402:    (CHECKED_RETURN)
->>>     Calling "uuid_str_to_bin" without checking return value (as is done=
- elsewhere 9 out of 11 times).
-755             uuid_str_to_bin(plat->uuid_disk_str, plat->gpt_h->disk_guid=
-=2Eb,
-756                             UUID_STR_FORMAT_GUID);
-757
-758             plat->gpt_h->partition_entry_array_crc32 =3D 0;
-759             calc_crc32 =3D efi_crc32((const unsigned char *)plat->gpt_e,
-760
-le32_to_cpu(plat->gpt_h->num_partition_entries) *
-
-** CID 467401:  Memory - corruptions  (OVERRUN)
-/drivers/firmware/scmi/sandbox-scmi_agent.c: 629 in sandbox_scmi_pwd_state_=
-set()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467401:  Memory - corruptions  (OVERRUN)
-/drivers/firmware/scmi/sandbox-scmi_agent.c: 629 in sandbox_scmi_pwd_state_=
-set()
-623                 (in->pstate !=3D SCMI_PWD_PSTATE_TYPE_LOST && in->pstat=
-e)) {
-624                     *status =3D SCMI_INVALID_PARAMETERS;
-625
-626                     return 0;
-627             }
-628
->>>     CID 467401:  Memory - corruptions  (OVERRUN)
->>>     Overrunning array "scmi_pwdom" of 3 8-byte elements at element inde=
-x 3 (byte offset 31) using index "in->domain_id" (which evaluates to 3).
-629             scmi_pwdom[in->domain_id].pstate =3D in->pstate;
-630             *status =3D SCMI_SUCCESS;
-631
-632             return 0;
-633     }
-634
-
-** CID 467400:  Memory - illegal accesses  (OVERRUN)
-/lib/efi_loader/efi_tcg2.c: 998 in tcg2_measure_variable()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467400:  Memory - illegal accesses  (OVERRUN)
-/lib/efi_loader/efi_tcg2.c: 998 in tcg2_measure_variable()
-992             guidcpy(&event->variable_name, guid);
-993             event->unicode_name_length =3D u16_strlen(var_name);
-994             event->variable_data_length =3D data_size;
-995             memcpy(event->unicode_name, var_name,
-996                    (event->unicode_name_length * sizeof(u16)));
-997             if (data) {
->>>     CID 467400:  Memory - illegal accesses  (OVERRUN)
->>>     Overrunning array of 2 bytes at byte offset 2 by dereferencing poin=
-ter "(u16 *)event->unicode_name + event->unicode_name_length". [Note: The s=
-ource code implementation of the function has been overridden by a builtin =
-model.]
-998                     memcpy((u16 *)event->unicode_name +
-event->unicode_name_length,
-999                            data, data_size);
-1000            }
-1001            ret =3D measure_event(dev, pcr_index, event_type, event_siz=
-e,
-1002                                (u8 *)event);
-1003            free(event);
-
-** CID 467399:  Code maintainability issues  (UNUSED_VALUE)
-/lib/efi_loader/efi_tcg2.c: 948 in efi_init_event_log()
-
-
-___________________________________________________________________________=
-_____________________________
-*** CID 467399:  Code maintainability issues  (UNUSED_VALUE)
-/lib/efi_loader/efi_tcg2.c: 948 in efi_init_event_log()
-942
-943             /*
-944              * Add SCRTM version to the log if previous firmmware
-945              * doesn't pass an eventlog.
-946              */
-947             if (!elog.found)
->>>     CID 467399:  Code maintainability issues  (UNUSED_VALUE)
->>>     Assigning value from "efi_append_scrtm_version(dev)" to "ret" here,=
- but that stored value is overwritten before it can be used.
-948                     ret =3D efi_append_scrtm_version(dev);
-949
-950             ret =3D create_final_event();
-951             if (ret !=3D EFI_SUCCESS)
-952                     goto free_pool;
-953
-
-
---=20
-Tom
-
---UxddXHrKnO89abT3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJTD0ACgkQFHw5/5Y0
-tyx3AgwAkYCLJbt3M3teznNls+09v6yxGBjS2UVV7nF8qckQSIk1gVWJ5h8BNZQH
-QmY0prBXI09oVFOc9HQ6BWcT9D1hYZt/OkEHxMwMpdg/YGSAKho76t1kXKy2016X
-MrhUzbWvGg+wO9TjyilHIcI43YEAht+CSlw+iV3GmErKoKifk6eHJDZoOA/fdeun
-z7piyw8NsNJ1pWKCe0wNcdnudd1n571GPppQtUjEGDOQ3DROWv/S2amEb079Dv97
-TxQO+5TXJlssCROnUJCQJys8co4kfzxtG5JYMDXMD0aia+x/LXbJc2bsWjtUV+Nx
-jRdPryAUlhZl2fq8mfCMkCAuf8Q4ChPnZ12Tk4vqtPPcDdcqJk1vUmyGUZ5z1Wu2
-KRTFBuJm7Yj9qZWJt3yMMtxQUmZuclF4xC2mqtfLUFneb9THefiM1Svc4TnFd+d7
-WTFKjOfykmpLhJwJDKOd5Y8E0fEFwyhPNcIyRUkf/CMMLbsS/iK4vafks/zIu56c
-oUes+MCx
-=p7tG
------END PGP SIGNATURE-----
-
---UxddXHrKnO89abT3--
+Regards,
+Simon
