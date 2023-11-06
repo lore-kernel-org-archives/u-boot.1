@@ -4,38 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80562C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 02:00:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94887C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 02:27:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F2B986EB5;
-	Mon,  6 Nov 2023 03:00:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id B0AEC87060;
+	Mon,  6 Nov 2023 03:26:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nXMjmxVs";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F31486E7E; Mon,  6 Nov 2023 03:00:45 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id CF1DB86ADC
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:00:42 +0100 (CET)
+ id D9CAE86CB1; Mon,  6 Nov 2023 03:26:24 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C810586CB1
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 96222C15;
- Sun,  5 Nov 2023 18:01:25 -0800 (PST)
-Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A9C7C3F703;
- Sun,  5 Nov 2023 18:00:40 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Samuel Holland <samuel@sholland.org>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: [PATCH] sunxi: h616: (really) lower SPL stack address to avoid BROM
- data
-Date: Mon,  6 Nov 2023 01:59:30 +0000
-Message-Id: <20231106015930.30439-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.35.8
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7789a4c01easo256147785a.0
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699237567; x=1699842367; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=p1Va1X3XdXiF+iEIUmHfwugKU/Uuh3QZg5MfQZcywG4=;
+ b=nXMjmxVst3EF5ztCTpfpnsMGKenbVyh+AfYj5vtzdK+rPTQmu3HfQdc+x6KITP4BWr
+ xKHM0Qj5ArwI2kvEdSe+wxWeF69o5NIAmzcgjWTUF8fYrD1lNATJM5AkfNXPxiUzmO9i
+ HTQdxW1673mIa2xho5zkGd3BDKHYtcaSeSb4uAd+bslJTtOcqvJK1gJ6W9PQ57AvMMrm
+ bPpnnC+Im7hPUKFMPrBqkgjn6in24qXHrLBSHJShpRokTshfuWb3BKPnpPB8r5POqqEO
+ QQEEnV//9NDLGjszkX35Llrovu6Mh0xQJR2oj2h4kYq/eBKBjgWNprY+Yw0eCCNyQjBj
+ q/Bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699237567; x=1699842367;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=p1Va1X3XdXiF+iEIUmHfwugKU/Uuh3QZg5MfQZcywG4=;
+ b=U0ySgEaNLL6FH18PC6BMgOmZ43gFnzxWdrTmhC1EuQmtaXVahYDzzXBAl1s5ZedgyK
+ Nad2/61+M0+hNXZsc5sEfP8DeRU2Up5Cd/bMG2lHtuEKir1SjgvI0r8eBxgVf/kUOiMt
+ XDNK5TCC+lPBu77FwzLNC9LlEhT1NAFzUorN7lxBP01ufXjusAW3q34U81oFES9zTm9s
+ STBw9h/9UxL3c4CSZJAfxfzYnL5VJlMe6107eu3G52b1gr2V2E1kwZd06zoIOxPzCP/D
+ eFfg1xcGeIJDHOs1KaTjUdI/4/WAyQD2mhxzCecFjQntC9yimKMyKL1NqkV8ON1pqSB1
+ ctEQ==
+X-Gm-Message-State: AOJu0YwXY1aSjMcR00XzhmZEbv6k1c1hFLwAKBu43+r87kD66ITNorrF
+ ugJj6WnHxRAynWYZ8SFM/g4=
+X-Google-Smtp-Source: AGHT+IGI750E2DkqUenQYNHWjBtK8upvdMfWjrWvVfqwDF+yW0q+D5VF0ahQOJdJhmizC2bJ/zd9tA==
+X-Received: by 2002:ad4:5ca3:0:b0:66c:fcfc:9174 with SMTP id
+ q3-20020ad45ca3000000b0066cfcfc9174mr40928459qvh.41.1699237567411; 
+ Sun, 05 Nov 2023 18:26:07 -0800 (PST)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ k6-20020a056214024600b0064f3b0d0143sm3024061qvt.142.2023.11.05.18.26.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 Nov 2023 18:26:06 -0800 (PST)
+From: Sean Anderson <seanga2@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
+ Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>
+Subject: [PATCH v6 01/25] spl: blk_fs: Fix uninitialized return value when we
+ can't get a blk_desc
+Date: Sun,  5 Nov 2023 21:25:39 -0500
+Message-Id: <20231106022603.3405551-2-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
+References: <20231106022603.3405551-1-seanga2@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -54,53 +98,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using the USB OTG FEL mode on the Allwinner H616, the BootROM
-stores some data at the end of SRAM C. This is also the location where
-we place the initial SPL stack, so it will overwrite this data.
-We still need the BROM code after running the SPL, so should leave that
-area alone.
-Interestingly this does not seem to have an adverse effect, I guess on
-the "way out" (when we return to FEL after the SPL has run), this data
-is not needed by the BROM, for just the trailing end of the USB operation.
-However this is still wrong, and we should not clobber BROM data.
+Initialize ret to avoid returning garbage if blk_get_devnum_by_uclass_id
+fails.
 
-Lower the SPL stack address to be situated right below the swap buffers
-we use in sunxi-fel: that should be out of the way of everyone else.
-
-This obsoletes a previous commit (eb53e7743c8f) with the same name:
-that one was changing the address in an *unused* macro in sunxi_common.h,
-so the previous patch didn't have any effect at all.
-
-Fixes: eb53e7743c8f ("sunxi: h616: lower SPL stack address to avoid BROM data")
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Fixes: 8ce6a2e1757 ("spl: blk: Support loading images from fs")
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
-Hi,
 
-sorry for the blunder with that previous patch!
-This issue came up when cleaning up some SPL code: LOW_LEVEL_SRAM_STACK,
-as changed in the previous patch, is not used anywhere. I have a patch to
-remove that whole section from sunxi-common.h, and will send that as part
-of some bigger SPL clean-up series later.
+Changes in v6:
+- New
 
-Cheers,
-Andre
-
- common/spl/Kconfig | 2 +-
+ common/spl/spl_blk_fs.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 25cd18afda7..c521b02f4a3 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -370,7 +370,7 @@ config SPL_STACK
- 	default 0x93ffb8 if ARCH_MX6 && MX6_OCRAM_256KB
- 	default 0x91ffb8 if ARCH_MX6 && !MX6_OCRAM_256KB
- 	default 0x118000 if MACH_SUN50I_H6
--	default 0x58000 if MACH_SUN50I_H616
-+	default 0x52a00 if MACH_SUN50I_H616
- 	default 0x40000 if MACH_SUN8I_R528
- 	default 0x54000 if MACH_SUN50I || MACH_SUN50I_H5
- 	default 0x18000 if MACH_SUN9I
+diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
+index 63825d620d1..144c8a65b5d 100644
+--- a/common/spl/spl_blk_fs.c
++++ b/common/spl/spl_blk_fs.c
+@@ -50,7 +50,7 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
+ 	struct blk_desc *blk_desc;
+ 	loff_t actlen, filesize;
+ 	struct blk_dev dev;
+-	int ret;
++	int ret = -ENODEV;
+ 
+ 	blk_desc = blk_get_devnum_by_uclass_id(uclass_id, devnum);
+ 	if (!blk_desc) {
 -- 
-2.35.8
+2.37.1
 
