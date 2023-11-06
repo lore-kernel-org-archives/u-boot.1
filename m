@@ -4,54 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9056FC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 17:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A47C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 17:27:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E01A28701B;
-	Mon,  6 Nov 2023 18:26:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id D6B43870B8;
+	Mon,  6 Nov 2023 18:27:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a5piJ+Po";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2A988702F; Mon,  6 Nov 2023 18:26:51 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 51C1386E6B
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 18:26:47 +0100 (CET)
+ id 30C2487098; Mon,  6 Nov 2023 18:27:26 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DD5686E6B
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 18:27:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B32381FB;
- Mon,  6 Nov 2023 09:27:30 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D48AA3F64C;
- Mon,  6 Nov 2023 09:26:44 -0800 (PST)
-Date: Mon, 6 Nov 2023 17:26:01 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>, Anup Patel
- <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>, Chanho Park
- <chanho61.park@samsung.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- u-boot@lists.denx.de, Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov
- <avromanov@salutedevices.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-Message-ID: <20231106172601.12c36750@donnerap.manchester.arm.com>
-In-Reply-To: <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
-References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
- <20231101170559.680ab493@donnerap.manchester.arm.com>
- <50ff2080-5831-4963-937d-331248b59973@canonical.com>
- <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
- <20231104171212.3d041a4f@slackpad.lan>
- <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A6HRG9N015625;
+ Mon, 6 Nov 2023 11:27:16 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699291636;
+ bh=xK1y7ugGyALEKyoeYk17zqc5ZRZUfyRLVN4krFIqlJY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=a5piJ+Pozu6fxynkYvOuJLT8pKfeUs29lcHJkPZAOazONzFx2M+MlcTQG+DkhifIg
+ AcRzysAID2v55NJ00YWRFyOg3FfEj0ca2IXP3MwAdWDuE38paPAQ6rKM0gt78JEZuj
+ GjJzcH/ksJJTLbCoU4bDU19fyYkUvuWg7NKKN75c=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A6HRGbT078937
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 6 Nov 2023 11:27:16 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Nov 2023 11:27:15 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 6 Nov 2023 11:27:15 -0600
+Received: from [10.250.34.172] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A6HREDi126967;
+ Mon, 6 Nov 2023 11:27:15 -0600
+Message-ID: <736c04ab-9c48-4957-b242-fcbde0ace68b@ti.com>
+Date: Mon, 6 Nov 2023 11:27:14 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, <vigneshr@ti.com>,
+ <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20231004132324.44198-1-rogerq@kernel.org>
+ <20231004132324.44198-2-rogerq@kernel.org>
+ <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
+ <20231004135436.ihofrxutzcdefica@audacious>
+ <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
+ <20231005163645.GS8465@bill-the-cat>
+ <20231005171010.zvza7uqyn4mcgp5g@handsaw>
+ <20231005171614.yiatmyczip2jnmf4@surround>
+ <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
+ <20231106055351.f2fny5ys6avi5qnk@ula0497581>
+ <20231106153159.GH496310@bill-the-cat>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20231106153159.GH496310@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,172 +92,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 4 Nov 2023 19:45:06 +0000
-Simon Glass <sjg@chromium.org> wrote:
-
-Hi,
-
-> On Sat, 4 Nov 2023 at 17:13, Andre Przywara <andre.przywara@arm.com> wrote:
-> >
-> > On Fri, 3 Nov 2023 13:38:58 -0600
-> > Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Simon,
-> >  
-> > > Hi Heinrich,
-> > >
-> > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:  
-> > > >
-> > > > On 11/1/23 19:05, Andre Przywara wrote:  
-> > > > > On Tue, 31 Oct 2023 14:55:50 +0200
-> > > > > Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
-> > > > >
-> > > > > Hi Heinrich,
-> > > > >  
-> > > > >> The Zkr ISA extension (ratified Nov 2021) introduced the seed CSR. It
-> > > > >> provides an interface to a physical entropy source.
-> > > > >>
-> > > > >> A RNG driver based on the seed CSR is provided. It depends on
-> > > > >> mseccfg.sseed being set in the SBI firmware.  
-> > > > >
-> > > > > As you might have seen, I added a similar driver for the respective Arm
-> > > > > functionality:
-> > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
-> > > > >
-> > > > > And I see that you seem to use the same mechanism to probe and init the
-> > > > > driver: U_BOOT_DRVINFO and fail in probe() if the feature is not
-> > > > > implemented.
-> > > > > One downside of this approach is that the driver is always loaded (and
-> > > > > visible in the DM tree), even with the feature not being available.
-> > > > > That doesn't seem too much of a problem on the first glance, but it
-> > > > > occupies a device number, and any subsequent other DM_RNG devices
-> > > > > (like virtio-rng) typically get higher device numbers. So without
-> > > > > the feature, but with virtio-rng, I get:
-> > > > > VExpress64# rng 0
-> > > > > No RNG device  
-> > >
-> > > Why do we get this? If the device is not there, the bind() function
-> > > can return -ENODEV
-> > >
-> > > I see this in U-Boot:
-> > >
-> > > U_BOOT_DRVINFO(cpu_arm_rndr) = {
-> > >
-> > > We should not use this.  
-> >
-> > Agreed.
-> >  
-> > > Use the devicetree.  
-> >
-> > No, this is definitely not something for the DT, at least not on ARM.
-> > It's perfectly discoverable via the architected CPU ID registers.
-> > Similar to PCI and USB devices, which we don't probe via the DT as well.
-> >
-> > It's arguably not proper "driver" material per se, as I've argued before, but
-> > it's the simplest solution and fits in nicely otherwise.
-> >
-> > I was wondering if it might be something for UCLASS_CPU, something like
-> > a "CPU feature bus": to let devices register on one on the many CPU
-> > features (instead of compatible strings), then only bind() those
-> > drivers it the respective bit is set.
-> >
-> > Does that make sense? Would that be doable without boiling the ocean?
-> > As I don't know if we see many users apart from this.  
+On 11/6/23 9:31 AM, Tom Rini wrote:
+> On Mon, Nov 06, 2023 at 11:23:51AM +0530, Manorit Chawdhry wrote:
+>> Hi Simon,
+>>
+>> On 11:22-20231005, Simon Glass wrote:
+>>> Hi Nishanth,
+>>>
+>>> On Thu, 5 Oct 2023 at 11:16, Nishanth Menon <nm@ti.com> wrote:
+>>>>
+>>>> On 12:10-20231005, Nishanth Menon wrote:
+>>>>> On 12:36-20231005, Tom Rini wrote:
+>>>>>> On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
+>>>>>>> On 10/4/23 8:54 AM, Nishanth Menon wrote:
+>>>>>>>> On 08:48-20231004, Andrew Davis wrote:
+>>>>>>>>> On 10/4/23 8:23 AM, Roger Quadros wrote:
+>>>>>>>>>> ti_mmc is not a valid boot_target for standard boot flow so
+>>>>>>>>>
+>>>>>>>>> Is there some way to make it into a valid boot_target? Otherwise
+>>>>>>>>> how do we use uEnv.txt files, or boot from FIT images with overlays?
+>>>>>>>>
+>>>>>>>> envboot takes care of uEnv.txt file (see
+>>>>>>>> https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
+>>>>>>>>
+>>>>>>>> Early remote proc loading and FIT image is a question for stdboot itself.
+>>>>>>>>
+>>>>>>>
+>>>>>>> If stdboot is missing these features then we shouldn't switch until it
+>>>>>>> has them. I'm all for switching to this, but only if it is complete.
+>>>>>>
+>>>>>> Depends on what you mean?  Did you mean an option to run scripts
+>>>>>> (exists) or an option to do what TI needs done, via
+>>>>>> boot/bootmeth_something.c ?  If the latter, someone from TI needs to
+>>>>>> figure out what that should be and do (but plumbing-wise everything it
+>>>>>> needs should exist).
+>>>>>
+>>>>> Andrew is generalizing here (on the wrong patch though).
+>>>>>
+>>>>> On am62x platforms, there is nothing regressing with this series. The
+>>>>> challenge is early remote_proc loading which is done for J7* platforms.
+>>>>>
+>>>>> How that is initiated as part of bootmethods is something of a gap.
+>>>>>
+>>>>> The other gap has been support for uEnv.txt -> which we can workaround
+>>>>> at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
+>>>>> -lb" in defconfig (This series from Roger already does that - hence I am
+>>>>> saying that Andrew is complaining on the wrong series).
+>>>>>
+>>>>> Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
+>>>>> uEnv.txt remoteproc loads and the various standard bootmethods should
+>>>>> "just work".
+>>>>
+>>>>
+>>>> I forgot to add: FIT image authenticated boot flow. That is really what
+>>>> ti_mmc distroboot method was trying to solve.
+>>>>
+>>>> Maybe Simon or someone know how the stdboot flow handles authenticated
+>>>> kernel image and dtb boot flow with FIT image?
+>>>
+>>> Yes you can use FIT configuration verification and things should work as normal.
+>>>
+>>
+>> Could you give any reference documentation for this?
 > 
-> I have seen this so many times, where people want to avoid putting
-> things in the DT and then are surprised that everything is difficult,
-> broken and confusing. Why not just follow the rules? It is not just
-> about whether we can avoid it, etc. It is about how devices fit
-> together cohesively in the system, and how U-Boot operates.
-
-A devicetree is only for peripherals *that cannot be located by probing*.
-Which are traditionally most peripherals in non-server Arm SoCs. While I
-do love the DT, the best DT node is the one you don't need.
-
-But as Heinrich also said: those instructions are not peripherals, they
-are part of an instruction set extensions, the same story as with x86's
-RDRAND instruction. We don't have those in ACPI or so as well, because
-CPUID has you covered. The same on ARM, ID_AA64ISAR0_EL1 is readable on
-every chip (outside of EL0), and tells you whether you have the RNDR
-register or not. IIUC RISC-V is slightly different here, since not all ISA
-extensions are covered by CSRs, hence some of them indeed listed in the DT.
-
-So a proper solution(TM) would be to split this up in architectural
-*instructions* and proper TRNG *devices*, maybe wrapping this up in some
-function that tests both. This is roughly what the kernel does, somewhat
-abstracted by the concept of "entropy sources", which could be TRNG
-devices, CPU instructions, interrupt jitter or even "instruction execution
-jitter"[1], with the latter two definitely not being devices really at all.
-
-But I don't know if U-Boot wants to go through the hassle of this whole
-framework, as we tend to implement things much easier. But a simple
-get_cpu_random() function, implemented per architecture, and with some
-kind of success flag, should be easy enough to do. Then either the users
-(UEFI?) explicitly call this before trying UCLASS_RNG, or we wrap this for
-every RNG user.
-
-Cheers,
-Andre
-
-> > > > > VExpress64# rng 1
-> > > > > 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12 07 b2  ....$.I.I..f_...  
-> > > >
-> > > >
-> > > > Essentially in any case were you have multiple drivers for the same
-> > > > device using uclass_get_device(, 0, ) and uclass_find_first_device()
-> > > > will only give you the first bound device and not the first successfully
-> > > > probed device. Furthermore neither of this functions causes probing.
-> > > > This is not restricted to the RNG drivers but could also happen with
-> > > > multiple TPM drivers or multiple watchdogs.
-> > > >
-> > > > This patch is related to the problem:
-> > > >
-> > > > [PATCH v1] rng: add dm_rng_read_default() helper
-> > > > https://lore.kernel.org/u-boot/4e28a388-f5b1-4cf7-b0e3-b12a876d0567@gmx.de/T/#me44263ec9141e3ea65ee232aa9a411fc6201bd95
-> > > >
-> > > > We have weak function platform_get_rng_device() which should be moved to
-> > > > drivers/rng/rng-uclass.c.
-> > > >
-> > > > We could add a function to drivers/core/uclass.c to retrieve the first
-> > > > successfully probed device. Another approach would be to implement
-> > > > uclass_driver.post_probe() in the RNG uclass to take note of the first
-> > > > successfully probed device.
-> > > >
-> > > > @Simon:
-> > > > What would make most sense from a DM design standpoint?  
-> > >
-> > > I am sure I provided feedback on this at the time, but I don't
-> > > remember. OK I just found it here [1]. So the problem is entirely
-> > > because my feedback was not addressed. Please just address it and
-> > > avoid this sort of mess.  
-> >
-> > Yeah, Tom just merged it, but that's not Heinrich's fault ;-)
-> >  
-> > > So arm_rndr should have a devicetree compatible string and be bound
-> > > like anything else. If for some reason the device doesn't exist in the
-> > > hardware, it can return -ENODEV from its bind() method.
-> > >
-> > > If you want to control which RNG device is used for booting, you could
-> > > add a property to /bootstd with a phandle to the device. We are trying
-> > > to provide a standard approach to booting in U-Boot, used by all
-> > > methods. Doing one-off things for particular cases is best avoided.  
-> >
-> > Picking the first usable device doesn't sound much like a one-off to me.
-> > After all the caller (be it UEFI or the rng command) later detect that
-> > this is not usable. So there might be some merit to cover this more
-> > automatically, either in the caller, or by providing a suitable wrapper
-> > function?  
+> I suspect you should start with doc/usage/fit/beaglebone_vboot.rst
 > 
-> Or just follow the existing mechanisms which have been in U-Boot for
-> years. Please...!
-> 
-> [..]
-> 
-> 
-> Regards,
-> Simon
->  >  
-> > > [1] https://patchwork.ozlabs.org/project/uboot/patch/20230830113230.3925868-1-andre.przywara@arm.com/  
-> >  
 
+ From that doc:
+
+```
+Boot the board using the commands below::
+
+     setenv bootargs console=ttyO0,115200n8 quiet root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait
+     ext2load mmc 0:2 82000000 /boot/image.fit
+     bootm 82000000
+```
+
+This is very much not stdboot :( This doc has some good and current info on building
+a secure FIT image, but much of it is showing its age. Stdboot is still missing
+
+  * ability to limit boot mode search to only one image (FIT)
+  * fetching and applying FIT overlay/config strings
+  * remote proc loading
+  * uEnv.txt processing
+
+Last two can be solved by adding to CONFIG_BOOTCOMMAND before calling `bootflow scan`
+as suggested above. Until we figure out the first two I don't see us ready to switch.
+
+Andrew
