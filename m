@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47DDFC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378ADC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 602DB8702F;
-	Mon,  6 Nov 2023 16:29:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8461F86F84;
+	Mon,  6 Nov 2023 16:29:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ng57Dfd8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XNmM8Qe+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7FB586F84; Mon,  6 Nov 2023 16:29:06 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 71DF386E40; Mon,  6 Nov 2023 16:29:20 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5463186BD4
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:29:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B75BA86F87
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:29:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-32f78dcf036so3413743f8f.0
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:29:04 -0800 (PST)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2c5056059e0so66448361fa.3
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:29:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699284543; x=1699889343; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YTH6/Sr+mCs/OKYx9wlbi+aCsberASGZt0GrzBhH490=;
- b=Ng57Dfd85cT4v5GR4FhPS3IKbkXx8nzA67qsX/tbriMK5ntl2vBFkdCar3Inez+Jf4
- JZrsm03xe7qrjC2oR6iCjWTZFdUUf922bSJPpVTAsVRUfE3vUykYIBIwbLQDei6diKwp
- VGoese5HAeGvsZx/glS4pcx8Lh1ZZx7DRYe2MkimzYj35IYS3fXmQKdUXuZBmebKnIRY
- xaJSE3U/bAW2JNocK5d+1Bpd5MN8uPIWmqxwYwNG98MHuGRt+hS0AisAeK1+HXO/z402
- o44iQ704AbpWTTKRunVQr8fNvsSC04acbcYZ9poDmITGzOmzi1avL/wjwaFuVFn242g4
- KEog==
+ d=linaro.org; s=google; t=1699284546; x=1699889346; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=e/ZiWW0cjJce+IfH34f+eIIp+X2ktDMxXDeWMBPqm1s=;
+ b=XNmM8Qe+CFm7LwzEbSTK4F9u8KbwzxNvU6egWdwLRmdyc041dFzOCXh3X0H2HgNb1d
+ jOg+Qa00k3hJZ1fM2htS/WKFj1DfWv6WpV9MRJNWCYDrjOBax9DN32Cocd8oOfRqIVgw
+ QQFXmYkSDn2/2CGvyxFAA7rXVkFJZAu0nF7q8Jq75+OYEXMTzOIVaIfKKdAjaNLgATdY
+ csnCvG9O1nLMNScPCOmspHA6Wo34IvStgIjaH8hb7GiJzhFmq6J0PL4PbKvn2Q8Ul9kY
+ smc1taZEd785U/X9pACLMaYjy+IBiOAT54ATTHzRv+s1c+JxKkiwtA5P3NUpqfFitLYv
+ MTWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699284543; x=1699889343;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YTH6/Sr+mCs/OKYx9wlbi+aCsberASGZt0GrzBhH490=;
- b=WUY0UZ/t8H3igDdjPo6U8VM12J5qU/0KqNi8pKWoZMWnmdJ8Vn8nqh3mexmrdveb9t
- JSIoiO/FO96cTo7yTZs2mWW7IrNugcbOzibSeeYD+TC8S2TbvWOH5CQzFwC0d06+3XSr
- apwRghQSKS7rL74sTHeYmhaUkHCUryprTFuKbDoP27yLQPQirphxMrtELQu4eslMm+zJ
- U1OTe53bi5YSBL+90uhIVLZdSpTiGu9B/TMPZACb8H9Yzk6zZ8Nhatd9zQAZqm0BJOvK
- X653zPc3S6xqbBrG1vQCvvvdSM8iw6lFuewJoafBCBQqezBm+HURHYkhZWWzQO1r6GBC
- 9Ztg==
-X-Gm-Message-State: AOJu0YyffD958ofh+jEQQOxKLe26XnvG+buxOVvb8KquXLR0PwzKmLID
- n+VnlhU5eRucio41xNBh2g8GUg==
-X-Google-Smtp-Source: AGHT+IEcITVjUZ1IAF6d5JDknKy5Aem9Zq+9j+AVIUGedoGdi9dS62AYt8jEzR6WTivvYfJyA6Gb8g==
-X-Received: by 2002:adf:d1ca:0:b0:32f:89fb:771b with SMTP id
- b10-20020adfd1ca000000b0032f89fb771bmr10096952wrd.4.1699284543666; 
- Mon, 06 Nov 2023 07:29:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699284546; x=1699889346;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=e/ZiWW0cjJce+IfH34f+eIIp+X2ktDMxXDeWMBPqm1s=;
+ b=jb/bN9U7vQUiAf+qAsnusGTV6cQsJqbDa1xOKtOyq+dQArHGHtkm7/1ZYLiI3TN++I
+ U/iqEZQz0MxkAFI/TXISK89LSWw60PA1blwapNhQIgWeN3k4L0t9vwz+T2xwgCzHLTHX
+ PMIu4gxBzRdQcHtW6iaZkVXKbeDiQAuutHu7J9fK66h0qkDv9vORBCOt8uK4f6klgL5Q
+ fVVZ2NnsIgpJ9WuPAvLgdkiz8PGxWxy3TKCgizmtip0F2x4GE5WghSZ6Ng6jffdU4XmD
+ z0AYdXbhGYE4iCZ5euEicvjYhdm3LEdyBMbP9f8EGdW1b19YsCNijvEijBm+ZV5NTGUO
+ JiGA==
+X-Gm-Message-State: AOJu0YyG1JEejfzAqo1sEI8fuxDvnQRlWUNntDE65t2QwDwcRf214pxz
+ rPk7T4p/uEu8FhtEoAdf7gP6lA==
+X-Google-Smtp-Source: AGHT+IHGjREtGcHBoiu4fepquBQKTMnEI0G/LeW1VCb83Cy74bjWw/PjRDyXdjSgzC4fElT9IaaMFQ==
+X-Received: by 2002:a2e:8796:0:b0:2bc:f5a0:cc25 with SMTP id
+ n22-20020a2e8796000000b002bcf5a0cc25mr23104204lji.2.1699284545915; 
+ Mon, 06 Nov 2023 07:29:05 -0800 (PST)
 Received: from lion.localdomain (host-92-25-138-185.as13285.net.
  [92.25.138.185]) by smtp.gmail.com with ESMTPSA id
- bx30-20020a5d5b1e000000b0032f7d1e2c7csm8116094wrb.95.2023.11.06.07.29.02
+ bx30-20020a5d5b1e000000b0032f7d1e2c7csm8116094wrb.95.2023.11.06.07.29.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 07:29:03 -0800 (PST)
+ Mon, 06 Nov 2023 07:29:05 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v2 0/5] arm: mach-snapdragon: Qualcomm pinctrl driver cleanup
-Date: Mon, 06 Nov 2023 15:28:59 +0000
-Message-Id: <20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org>
+Date: Mon, 06 Nov 2023 15:29:01 +0000
+Subject: [PATCH v2 2/5] pinctrl: qcom: move ipq4019 driver from
+ mach-ipq40xx
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADwGSWUC/3WNQQ6CMBAAv0L27BpaQIGT/zAc2lJgk9riFomG8
- Hcrd48zyWQ2iJbJRmizDdiuFCn4BPKUgZmUHy1SnxhkLguRywp1iU8THjiTNws7LHVf1U1thqK
- uIFVaRYualTdT6vzLuSRntgO9j829SzxRXAJ/jusqfvb/YBWYYyNk0V+UFFerb4684nAOPEK37
- /sXbsoKUsQAAAA=
+Message-Id: <20231106-b4-qcom-pinctrl-v2-2-406e8d8689ca@linaro.org>
+References: <20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org>
+In-Reply-To: <20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org>
 To: Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
@@ -85,13 +84,13 @@ To: Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
 Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
  u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3876;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10219;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=VRWBuCSsfo/T8E/tVD+W2pXI1LZbn3GI6b0wDtetH4Q=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlRPNrtjF+NttJYZsP9P/1l79UESz7rnFtd9jDbfCEz1f
- qeSpj+3o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEzElIXhf5Vb+tG0z49/st3P
- f9pgLT5jujBP/Smdq3uVSrqknv5Y7srIsLzKZ/JZxp4y05XJE4WMdjyb2T7751QmPaubF+4mzA1
- wlQQA
+ bh=FQ5ljogE2wv6Fa7iIMemlJI5ZKD7WF9y7651w5Lqiow=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhlRPNrvVeez9rZ0KNnn6JydlOplr6Qh9aHjfUvarbvVE4
+ wmTAvZ0lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgImcWczwPzToCItB78WUq9Xd
+ qdqFB3QkH/30lrq6es7ZOOYK9kYpNYb/MbIRpu15IusXbMzS4bq77w6r8eM3nPqde/QW1J4Mbq1
+ XAgA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,79 +109,343 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series moves the Qualcomm pinctrl drivers from mach-snapdragon and
-mach-ipq40xx to drivers/pinctrl/qcom. It then makes the necessary changes
-to enable compatibility with Linux DTs.
+Drop the duplicated pinctrl-snapdragon driver from mach-ipq40xx and add
+it to drivers/pinctrl/qcom.
 
-The pinctrl hardware on most Qualcomm platforms is made up of "tiles",
-these are just banks of pins at different register addresses. The
-mapping between pin number and tile is totally arbitrary, this
-unfortunately means that it is necessary to have a map of pin to tile in
-order to support all pins. Up until now this driver has ignored tiles,
-meaning that the pin numbers and DT nodes are entirely different to the
-Linux DT and only a subset of pins are addressable.
-
-Patch 2 solves this by introducing the pin_offset map, initially
-supporting SDM845. This map is used for all pin register lookups for
-both the pinctrl and GPIO drivers. Similarly to the clock/reset drivers
-these are both associated with a single DT node, where the pinctrl
-driver is responsible for binding the GPIO drivers.
-
-Patch 3 introduces support for gpio-reserved-ranges, this property
-is used on some boards to mark pin ranges that shouldn't be touched
-(else firmware will trigger a fault and reset the board).
-
-This series loosely depends on the associated clock driver cleanup which can be
-found here (Makefile and perhaps DTS conflicts):
-
-https://lore.kernel.org/u-boot/20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org
-
+Acked-by: Sumit Garg <sumit.garg@linaro.org>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Changes in v2:
-* Drop msm -> qcom rename (will be handled in a future patch)
-* Drop "handle reserved ranges" patch to be introduced alongside a user
-* Re-order APQ4019 move to be the second patch
-* Change driver name to pinctrl_qcom instead of qcom_pinctrl
-* Add MAINTAINERS entry
-* Move shared GPIO header to mach-snapdragon
-* Link to v1: https://lore.kernel.org/r/20231025-b4-qcom-pinctrl-v1-0-9123d6a217eb@linaro.org
-
----
-Caleb Connolly (5):
-      pinctrl: qcom: move out of mach-snapdragon
-      pinctrl: qcom: move ipq4019 driver from mach-ipq40xx
-      pinctrl: qcom: make compatible with linux DTs
-      msm_gpio: use unsigned int
-      fixup! pinctrl: qcom: make compatible with linux DTs
-
- MAINTAINERS                                        |   1 +
  arch/arm/Kconfig                                   |   1 +
- arch/arm/dts/dragonboard845c-uboot.dtsi            |   2 +-
- arch/arm/dts/sdm845.dtsi                           |  16 +-
- arch/arm/dts/starqltechn-uboot.dtsi                |   5 +-
- arch/arm/dts/starqltechn.dts                       |  16 +-
  arch/arm/mach-ipq40xx/Makefile                     |   8 -
  arch/arm/mach-ipq40xx/pinctrl-snapdragon.c         | 166 ---------------------
- arch/arm/mach-snapdragon/Kconfig                   |   4 +
- arch/arm/mach-snapdragon/Makefile                  |   5 -
- arch/arm/mach-snapdragon/include/mach/gpio.h       |  28 +++-
- arch/arm/mach-snapdragon/pinctrl-sdm845.c          |  44 ------
- arch/arm/mach-snapdragon/pinctrl-snapdragon.h      |  33 ----
- drivers/gpio/msm_gpio.c                            |  42 +++---
- drivers/pinctrl/Kconfig                            |   1 +
- drivers/pinctrl/Makefile                           |   1 +
- drivers/pinctrl/qcom/Kconfig                       |  46 ++++++
- drivers/pinctrl/qcom/Makefile                      |  10 ++
- .../pinctrl/qcom}/pinctrl-apq8016.c                |  21 ++-
- .../pinctrl/qcom}/pinctrl-apq8096.c                |  21 ++-
- .../pinctrl/qcom}/pinctrl-ipq4019.c                |  25 +++-
- .../pinctrl/qcom/pinctrl-qcom.c                    |  70 +++++----
- .../pinctrl/qcom/pinctrl-qcom.h                    |  15 +-
- .../pinctrl/qcom}/pinctrl-qcs404.c                 |  21 ++-
- drivers/pinctrl/qcom/pinctrl-sdm845.c              | 100 +++++++++++++
- 25 files changed, 350 insertions(+), 352 deletions(-)
----
-base-commit: 8c5e4ddf52ea3c1e85c44cdd5d5b2e2f6c892b4f
+ arch/arm/mach-ipq40xx/pinctrl-snapdragon.h         |  30 ----
+ drivers/pinctrl/qcom/Kconfig                       |   7 +
+ drivers/pinctrl/qcom/Makefile                      |   1 +
+ .../pinctrl/qcom}/pinctrl-ipq4019.c                |  23 ++-
+ 7 files changed, 27 insertions(+), 209 deletions(-)
 
-// Caleb (they/them)
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 69144ff9cdab..bd48131292e3 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -767,6 +767,7 @@ config ARCH_IPQ40XX
+ 	select SMEM
+ 	select OF_CONTROL
+ 	select CLK_QCOM_IPQ4019
++	select PINCTRL_QCOM_IPQ4019
+ 	imply CMD_DM
+ 
+ config ARCH_KEYSTONE
+diff --git a/arch/arm/mach-ipq40xx/Makefile b/arch/arm/mach-ipq40xx/Makefile
+deleted file mode 100644
+index b36a935c6f9f..000000000000
+--- a/arch/arm/mach-ipq40xx/Makefile
++++ /dev/null
+@@ -1,8 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# Copyright (c) 2019 Sartura Ltd.
+-#
+-# Author: Robert Marko <robert.marko@sartura.hr>
+-
+-obj-y += pinctrl-snapdragon.o
+-obj-y += pinctrl-ipq4019.o
+diff --git a/arch/arm/mach-ipq40xx/pinctrl-snapdragon.c b/arch/arm/mach-ipq40xx/pinctrl-snapdragon.c
+deleted file mode 100644
+index 036fec93d727..000000000000
+--- a/arch/arm/mach-ipq40xx/pinctrl-snapdragon.c
++++ /dev/null
+@@ -1,166 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * TLMM driver for Qualcomm IPQ40xx
+- *
+- * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
+- *
+- * Copyright (c) 2020 Sartura Ltd.
+- *
+- * Author: Robert Marko <robert.marko@sartura.hr>
+- *
+- */
+-
+-#include <common.h>
+-#include <dm.h>
+-#include <errno.h>
+-#include <asm/io.h>
+-#include <dm/device_compat.h>
+-#include <dm/lists.h>
+-#include <dm/pinctrl.h>
+-#include <linux/bitops.h>
+-#include "pinctrl-snapdragon.h"
+-
+-struct msm_pinctrl_priv {
+-	phys_addr_t base;
+-	struct msm_pinctrl_data *data;
+-};
+-
+-#define GPIO_CONFIG_OFFSET(x)         ((x) * 0x1000)
+-#define TLMM_GPIO_PULL_MASK GENMASK(1, 0)
+-#define TLMM_FUNC_SEL_MASK GENMASK(5, 2)
+-#define TLMM_DRV_STRENGTH_MASK GENMASK(8, 6)
+-#define TLMM_GPIO_DISABLE BIT(9)
+-
+-static const struct pinconf_param msm_conf_params[] = {
+-	{ "drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 2 },
+-	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
+-	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 2 },
+-};
+-
+-static int msm_get_functions_count(struct udevice *dev)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	return priv->data->functions_count;
+-}
+-
+-static int msm_get_pins_count(struct udevice *dev)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	return priv->data->pin_count;
+-}
+-
+-static const char *msm_get_function_name(struct udevice *dev,
+-					 unsigned int selector)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	return priv->data->get_function_name(dev, selector);
+-}
+-
+-static int msm_pinctrl_probe(struct udevice *dev)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	priv->base = devfdt_get_addr(dev);
+-	priv->data = (struct msm_pinctrl_data *)dev->driver_data;
+-
+-	return priv->base == FDT_ADDR_T_NONE ? -EINVAL : 0;
+-}
+-
+-static const char *msm_get_pin_name(struct udevice *dev, unsigned int selector)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	return priv->data->get_pin_name(dev, selector);
+-}
+-
+-static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
+-			  unsigned int func_selector)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	clrsetbits_le32(priv->base + GPIO_CONFIG_OFFSET(pin_selector),
+-			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE,
+-			priv->data->get_function_mux(func_selector) << 2);
+-	return 0;
+-}
+-
+-static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
+-			   unsigned int param, unsigned int argument)
+-{
+-	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-
+-	switch (param) {
+-	case PIN_CONFIG_DRIVE_STRENGTH:
+-		clrsetbits_le32(priv->base + GPIO_CONFIG_OFFSET(pin_selector),
+-				TLMM_DRV_STRENGTH_MASK, argument << 6);
+-		break;
+-	case PIN_CONFIG_BIAS_DISABLE:
+-		clrbits_le32(priv->base + GPIO_CONFIG_OFFSET(pin_selector),
+-			     TLMM_GPIO_PULL_MASK);
+-		break;
+-	case PIN_CONFIG_BIAS_PULL_UP:
+-		clrsetbits_le32(priv->base + GPIO_CONFIG_OFFSET(pin_selector),
+-			     TLMM_GPIO_PULL_MASK, argument);
+-		break;
+-	default:
+-		return 0;
+-	}
+-
+-	return 0;
+-}
+-
+-static int msm_pinctrl_bind(struct udevice *dev)
+-{
+-	ofnode node = dev_ofnode(dev);
+-	const char *name;
+-	int ret;
+-
+-	ofnode_get_property(node, "gpio-controller", &ret);
+-	if (ret < 0)
+-		return 0;
+-
+-	/* Get the name of gpio node */
+-	name = ofnode_get_name(node);
+-	if (!name)
+-		return -EINVAL;
+-
+-	/* Bind gpio node */
+-	ret = device_bind_driver_to_node(dev, "gpio_msm",
+-					 name, node, NULL);
+-	if (ret)
+-		return ret;
+-
+-	dev_dbg(dev, "bind %s\n", name);
+-
+-	return 0;
+-}
+-
+-static struct pinctrl_ops msm_pinctrl_ops = {
+-	.get_pins_count = msm_get_pins_count,
+-	.get_pin_name = msm_get_pin_name,
+-	.set_state = pinctrl_generic_set_state,
+-	.pinmux_set = msm_pinmux_set,
+-	.pinconf_num_params = ARRAY_SIZE(msm_conf_params),
+-	.pinconf_params = msm_conf_params,
+-	.pinconf_set = msm_pinconf_set,
+-	.get_functions_count = msm_get_functions_count,
+-	.get_function_name = msm_get_function_name,
+-};
+-
+-static const struct udevice_id msm_pinctrl_ids[] = {
+-	{ .compatible = "qcom,ipq4019-pinctrl", .data = (ulong)&ipq4019_data },
+-	{ }
+-};
+-
+-U_BOOT_DRIVER(pinctrl_snapdraon) = {
+-	.name		= "pinctrl_msm",
+-	.id		= UCLASS_PINCTRL,
+-	.of_match	= msm_pinctrl_ids,
+-	.priv_auto	= sizeof(struct msm_pinctrl_priv),
+-	.ops		= &msm_pinctrl_ops,
+-	.probe		= msm_pinctrl_probe,
+-	.bind		= msm_pinctrl_bind,
+-};
+diff --git a/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h b/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h
+deleted file mode 100644
+index 2341a713495d..000000000000
+--- a/arch/arm/mach-ipq40xx/pinctrl-snapdragon.h
++++ /dev/null
+@@ -1,30 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Qualcomm Pin control
+- *
+- * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
+- *
+- */
+-#ifndef _PINCTRL_SNAPDRAGON_H
+-#define _PINCTRL_SNAPDRAGON_H
+-
+-#include <common.h>
+-
+-struct msm_pinctrl_data {
+-	int pin_count;
+-	int functions_count;
+-	const char *(*get_function_name)(struct udevice *dev,
+-					 unsigned int selector);
+-	unsigned int (*get_function_mux)(unsigned int selector);
+-	const char *(*get_pin_name)(struct udevice *dev,
+-				    unsigned int selector);
+-};
+-
+-struct pinctrl_function {
+-	const char *name;
+-	int val;
+-};
+-
+-extern struct msm_pinctrl_data ipq4019_data;
+-
+-#endif
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 412925c48788..2fe639814785 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -20,6 +20,13 @@ config PINCTRL_QCOM_APQ8096
+ 	  Say Y here to enable support for pinctrl on the MSM8996 / APQ8096
+ 	  Snapdragon 820 SoC, as well as the associated GPIO driver.
+ 
++config PINCTRL_QCOM_IPQ4019
++	bool "Qualcomm IPQ4019 GCC"
++	select PINCTRL_QCOM
++	help
++	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
++	  as well as the associated GPIO driver.
++
+ config PINCTRL_QCOM_QCS404
+ 	bool "Qualcomm QCS404 GCC"
+ 	select PINCTRL_QCOM
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index 86f507427301..6d9aca6d7b7e 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -4,6 +4,7 @@
+ 
+ obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
++obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+ obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+diff --git a/arch/arm/mach-ipq40xx/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+similarity index 73%
+rename from arch/arm/mach-ipq40xx/pinctrl-ipq4019.c
+rename to drivers/pinctrl/qcom/pinctrl-ipq4019.c
+index 3e365f8cc86a..87058e21ce80 100644
+--- a/arch/arm/mach-ipq40xx/pinctrl-ipq4019.c
++++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+@@ -7,12 +7,13 @@
+  * Author: Robert Marko <robert.marko@sartura.hr>
+  */
+ 
+-#include "pinctrl-snapdragon.h"
+ #include <common.h>
++#include <dm.h>
++
++#include "pinctrl-qcom.h"
+ 
+ #define MAX_PIN_NAME_LEN 32
+-static char pin_name[MAX_PIN_NAME_LEN];
+-
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+ static const struct pinctrl_function msm_pinctrl_functions[] = {
+ 	{"gpio", 0},
+ 	{"blsp_uart0_0", 1}, /* Only for GPIO:16,17 */
+@@ -26,7 +27,6 @@ static const struct pinctrl_function msm_pinctrl_functions[] = {
+ 	{"mdc_0", 1}, /* Only for GPIO7 */
+ 	{"mdc_1", 2}, /* Only for GPIO52 */
+ };
+-
+ static const char *ipq4019_get_function_name(struct udevice *dev,
+ 					     unsigned int selector)
+ {
+@@ -45,10 +45,23 @@ static unsigned int ipq4019_get_function_mux(unsigned int selector)
+ 	return msm_pinctrl_functions[selector].val;
+ }
+ 
+-struct msm_pinctrl_data ipq4019_data = {
++static const struct msm_pinctrl_data ipq4019_data = {
+ 	.pin_count = 100,
+ 	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+ 	.get_function_name = ipq4019_get_function_name,
+ 	.get_function_mux = ipq4019_get_function_mux,
+ 	.get_pin_name = ipq4019_get_pin_name,
+ };
++
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{ .compatible = "qcom,ipq4019-pinctrl", .data = (ulong)&ipq4019_data },
++	{ /* Sentinal */ }
++};
++
++U_BOOT_DRIVER(pinctrl_ipq4019) = {
++	.name		= "pinctrl_ipq4019",
++	.id		= UCLASS_NOP,
++	.of_match	= msm_pinctrl_ids,
++	.ops		= &msm_pinctrl_ops,
++	.bind		= msm_pinctrl_bind,
++};
+
+-- 
+2.42.0
 
