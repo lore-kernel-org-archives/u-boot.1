@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF6EC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66186C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 432ED86FBE;
-	Mon,  6 Nov 2023 17:51:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id C676C86F87;
+	Mon,  6 Nov 2023 17:52:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="ni/8sQRN";
-	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="nPYNIiIT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f3jGjyW+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F39C86335; Mon,  6 Nov 2023 17:51:26 +0100 (CET)
-Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B621387097; Mon,  6 Nov 2023 17:52:10 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A66B86FBE
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:51:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id C624886335
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:52:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-Received: from kernel-space.org (localhost [127.0.0.1])
- by kernel-space.org (OpenSMTPD) with ESMTP id 45fbae8a;
- Mon, 6 Nov 2023 16:51:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=0f
- vUM3QeGq3iUUZkBYobLRZoeSQ=; b=ni/8sQRNcc+OdkrTK7QzMK16Ba/oZd2u9N
- yai/jGzz8Riy4d3/pw8d8cK5mlDZNzgAcrWv2tZ9R5PRoQP9ib6PwmOhH2ljKLep
- wZcaDPX7Hwzie0mN79i6R2CMOTCFkIv0TFfMcldvaPloYlvaiRKLrXtuAIg6a+Yc
- XPHqxJJjo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
- fIo1JSr/LStC+/P+DXy241m9ChTWZnABlZ2+z2NLHXBdeYEd8rt+BrPGkzfI8I4M
- /CHm0BxkZhFqK+cNPeLhXO6DJSrCeLOGTTBm0ZS6wJ2FkgttUUL409vMoO40GJrt
- osliEuE0n/IqeozhEM5meTEJPp+bF2GNJ+G3j6EGUIs=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1699289496;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jCnPjov6kvgTzHnndV45ri1J7lXTFn2Zqtvme2DR9EA=;
- b=nPYNIiITUrae0vH6oJAo2B2rS/I/JQ42MO3jrCBm/DTGqqBlWthRh7kHNzQZdBNpyNfzZA
- 1F8ZPGxf1kEsAhtZVa9D/5uHPVtW6yHboTN3K32ZAe0PZlssPWSukUiR5f/I7zR36ar0bD
- WwZvua/iNC2jZqvoRL+l2AiSSRsfskU=
-Received: from [192.168.0.2] (host-79-24-2-249.retail.telecomitalia.it
- [79.24.2.249])
- by kernel-space.org (OpenSMTPD) with ESMTPSA id 88022dc3
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Mon, 6 Nov 2023 16:51:36 +0000 (UTC)
-Message-ID: <116b6beb-6271-322e-713e-08336bb72a3b@kernel-space.org>
-Date: Mon, 6 Nov 2023 17:50:45 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-9dbb3e0ff65so646424866b.1
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:52:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699289528; x=1699894328; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fd3jwPCqgwA8prXs7k5nvHB/z/tLvqDtDEF1Dlg+HCg=;
+ b=f3jGjyW+YM5pHoTkZ1ROAf2o8S5L3qNJUatUEGSZhgoauhXNa6XCqkehaHVbG0udYP
+ iN5ztoQYCRK/P+nJmDSs8KOoAHVhvP2+gHLjbXucPnDiSU3L4ahlgPJVQqb0ne4k2/5A
+ 2nUqCgrqngV4oE2vSIyoEtbUgYhnGccxuQdy6gWL8OnrG9xT3WxecopVscmJjUujL7IR
+ Ie2KUdkr7Ejn84E3QZt3xbfxcQFdmqWaPCaDAGTXPfWII/YE/x+o+3SW8ImANpb6xz56
+ qP2nw/oyyS2QfIUeOdFW1NIZgeG88kr9MdfOyKm3bYzlmDUMdNf3B3/bOTuPSbvU1yqw
+ LSvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699289528; x=1699894328;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fd3jwPCqgwA8prXs7k5nvHB/z/tLvqDtDEF1Dlg+HCg=;
+ b=GRg6ehSy7mazGWd3YkzwB76M7Z/C2TtCR+16VA+NL2KbxNvJSUd/Lvk5ett/mSgSYG
+ geyAoti4LHUzwN1+ZNTere8PHIzlPFmHzq/UidxqPvHuPmQB6SukA/0XPAShH7vbv9ir
+ nsV7ELEypqSkYAacdVaLPWUSfWu9RBlihxKsubLIfWWHbUbXajS3I6y/faeSUwOAaljJ
+ c6ZWtB/TnepCUtnWcXjANy/2202kh9S7cVXNm35YG7FoDhqr4UwmOWAC0gClJZkXnR+y
+ Z7Eme1AGzROu5VLlqzQUpHsIWdbnj190cfMK1MuCWQUHZJC9pihpF6gggStwEFRExhFv
+ XD3Q==
+X-Gm-Message-State: AOJu0YyWvUwg8jM8qwjD+AGptciAynlV6byPsM2hu0FsPoK9frfRzONB
+ Ue9a4drKm2/DURx04gwQ8Af8oa7o12w=
+X-Google-Smtp-Source: AGHT+IH8sn3sSZrOJDl95+VlVLYAOUDjqNBNSyKpuQxSirMYU18Ruy8GkLjy0kZxKtIjxqS4lrIA8g==
+X-Received: by 2002:a17:907:2d91:b0:9ae:5765:c134 with SMTP id
+ gt17-20020a1709072d9100b009ae5765c134mr17667543ejc.15.1699289528066; 
+ Mon, 06 Nov 2023 08:52:08 -0800 (PST)
+Received: from workstation.sas.sys.sphairon.com (51-6-142-46.pool.kielnet.net.
+ [46.142.6.51]) by smtp.gmail.com with ESMTPSA id
+ u11-20020a17090617cb00b009920e9a3a73sm28267eje.115.2023.11.06.08.52.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Nov 2023 08:52:07 -0800 (PST)
+From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Linus Walleij <linus.walleij@linaro.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Subject: [PATCH] mips: implement __udivdi3
+Date: Mon,  6 Nov 2023 17:51:48 +0100
+Message-ID: <20231106165157.298319-1-daniel.schwierzeck@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Betterbird/102.11.0
-Subject: Re: [PATCH 01/20] m68k: Remove CONFIG_FSLDMAFEC
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20231101162824.3755579-1-trini@konsulko.com>
- <63a7cd49-9491-6939-48af-62b2fc586cae@kernel-space.org>
- <20231106163230.GK496310@bill-the-cat>
-Content-Language: en-US
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20231106163230.GK496310@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,30 +89,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Linus Walleij <linus.walleij@linaro.org>
 
-sure, i remove the unused dtsi,
-patch will follow.
+Squashfs wasn't compiling because the lldiv() directives
+turn into __udivdi3 and we are using private libgcc.
 
-Regards,
-angelo
+After this squashfs compiles for MIPS.
 
-On 06/11/23 5:32 PM, Tom Rini wrote:
-> On Sat, Nov 04, 2023 at 09:58:07PM +0100, Angelo Dureghello wrote:
->> Hi Tom,
->>
->> Reviewed by: Angelo Dureghello <angelo@kernel-space.org>
->>
->>
->> Thanks for the cleanup, m68k boards build fine.
->>
->> fsl_mcdmafec driver is still referenced in arch/m68k/dts/mcf54xx.dtsi,
->> (from compatible field) but no board is including it.
->> You can remove the dtsi too if you want.
-> 
-> Thanks for the review.  I'd appreciate it if you went and did the rest
-> of the cleaning of unused code around here as I'm not familiar with it,
-> I just found this one as part of looking for common.h usage.
-> 
+Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+Signed-off-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
 
+---
+Linus, this is the updated and optimized version of your initial patch.
+Sorry for the long delay ;)
+
+ arch/mips/lib/Makefile  |  2 +-
+ arch/mips/lib/udivdi3.c | 17 +++++++++++++++++
+ 2 files changed, 18 insertions(+), 1 deletion(-)
+ create mode 100644 arch/mips/lib/udivdi3.c
+
+diff --git a/arch/mips/lib/Makefile b/arch/mips/lib/Makefile
+index 9ee1fcb5c7..1621cc9a1f 100644
+--- a/arch/mips/lib/Makefile
++++ b/arch/mips/lib/Makefile
+@@ -14,4 +14,4 @@ obj-$(CONFIG_CMD_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_GO) += boot.o
+ obj-$(CONFIG_SPL_BUILD) += spl.o
+ 
+-lib-$(CONFIG_USE_PRIVATE_LIBGCC) += ashldi3.o ashrdi3.o lshrdi3.o
++lib-$(CONFIG_USE_PRIVATE_LIBGCC) += ashldi3.o ashrdi3.o lshrdi3.o udivdi3.o
+diff --git a/arch/mips/lib/udivdi3.c b/arch/mips/lib/udivdi3.c
+new file mode 100644
+index 0000000000..4d780117cf
+--- /dev/null
++++ b/arch/mips/lib/udivdi3.c
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++
++#include "libgcc.h"
++
++#if BITS_PER_LONG == 32
++
++#include <div64.h>
++
++long long __udivdi3(long long u, word_type b)
++{
++	long long ret = u;
++
++	__div64_32(&ret, b);
++	return ret;
++}
++
++#endif /* BITS_PER_LONG == 32 */
+-- 
+2.41.0
 
