@@ -4,67 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB6CC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 10:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DD6AC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 10:15:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 500F886B02;
-	Mon,  6 Nov 2023 11:12:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nic.cz
+	by phobos.denx.de (Postfix) with ESMTP id A1A6C86B02;
+	Mon,  6 Nov 2023 11:15:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infraroot.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=nic.cz header.i=@nic.cz header.b="xr2F1nXo";
+	dkim=pass (1024-bit key; secure) header.d=infraroot.at header.i=@infraroot.at header.b="HjNJ084u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCE5D86FFE; Mon,  6 Nov 2023 11:12:30 +0100 (CET)
-Received: from mail.nic.cz (mail.nic.cz [IPv6:2001:1488:800:400::400])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B89C86FFC; Mon,  6 Nov 2023 11:15:21 +0100 (CET)
+Received: from mail.infraroot.at (mail.infraroot.at [54.37.73.54])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1174C86611
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 11:12:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3220D86611
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 11:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nic.cz
+ dmarc=none (p=none dis=none) header.from=infraroot.at
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.behun@nic.cz
-Received: from dellmb (unknown [IPv6:2001:1488:fffe:6:8747:7254:5571:3010])
- by mail.nic.cz (Postfix) with ESMTPSA id 5F8B21C118E;
- Mon,  6 Nov 2023 11:12:27 +0100 (CET)
-Authentication-Results: mail.nic.cz;
- auth=pass smtp.auth=marek.behun@nic.cz smtp.mailfrom=marek.behun@nic.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
- t=1699265547; bh=lo/YlMETMC05hjY1IfDyBXNqkcG3oiToaq52raQ16Z4=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From:Reply-To:
- Subject:To:Cc;
- b=xr2F1nXopkPaBUMzEa0tEffEB/FP3+L598FaDlKg5jCy4Zp5Ig65C+MBEU0Khu1Fr
- +mUEllbyWyzbHxiC6V7m3Weu8a+HtcrzfphdWEDRIKMWFrIWXZUZuD3oISbZjkim8C
- F6DFwA2HMzIPI4NOxnXHwFUJ8OkIgJJ+FBup0d00=
-Date: Mon, 6 Nov 2023 11:12:26 +0100
-From: Marek =?UTF-8?B?QmVow7pu?= <marek.behun@nic.cz>
-To: Pali =?UTF-8?B?Um9ow6Fy?= <pali@kernel.org>
-Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v6 00/25] spl: Use common function for loading/parsing
- images
-Message-ID: <20231106111226.09664f61@dellmb>
-In-Reply-To: <20231106074905.pgrdj6zhsgy66a2e@pali>
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106074905.pgrdj6zhsgy66a2e@pali>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=goliath@infraroot.at
+Received: from localtoast.corp.sigma-star.at (unknown [82.150.214.1])
+ by mail.infraroot.at (Postfix) with ESMTPSA id 9BDD441DF3;
+ Mon,  6 Nov 2023 11:15:17 +0100 (CET)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.infraroot.at 9BDD441DF3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infraroot.at;
+ s=default; t=1699265717;
+ bh=PObjFkFh2lOQP2NqFbBeAPjWF/+jfz3OmrtsjHzDg5M=;
+ h=From:To:Cc:Subject:Date:From;
+ b=HjNJ084u1btkjkv0F+S9rHqbJyQQXJWcqu8AcugHxWyQTNn0xFKF5gnxaiRKibhHa
+ VKh+xKOwhwC9wKUYeNEx6WM7ubi1Y7zskKa7o8YnTfWgltt9m4gCsUnGUJVnwOeMGa
+ NtLs5mfGMYX2Uo0k/udoGexemO7zI09ZukHXxoeQ=
+From: David Oberhollenzer <goliath@infraroot.at>
+To: u-boot@lists.denx.de, jmcosta944@gmail.com, thomas.petazzoni@bootlin.com,
+ miquel.raynal@bootlin.com
+Cc: David Oberhollenzer <goliath@infraroot.at>
+Subject: [PATCH] fs/squashfs: enable LZ4 compression support
+Date: Mon,  6 Nov 2023 11:14:03 +0100
+Message-ID: <20231106101403.80409-1-goliath@infraroot.at>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Server: mail
-X-Rspamd-Queue-Id: 5F8B21C118E
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.10 / 20.00]; MIME_GOOD(-0.10)[text/plain];
- FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
- MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[]; FROM_HAS_DN(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
- WHITELISTED_IP(0.00)[2001:1488:fffe:6:8747:7254:5571:3010];
- ASN(0.00)[asn:25192, ipnet:2001:1488::/32, country:CZ]
-X-Rspamd-Pre-Result: action=no action; module=multimap;
- Matched map: WHITELISTED_IP
-X-Rspamd-Action: no action
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,33 +62,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 6 Nov 2023 08:49:05 +0100
-Pali Roh=C3=A1r <pali@kernel.org> wrote:
+The structure is identical to the existing compressor implementations,
+trivially adding lz4 decompression to sqfs_decompress.
 
-> What you are doing is the worst thing in the world. You have been
-> ignoring all my changes which I have been sending for one year, then you
-> wrote me that I'm not competent to do any kind of programming, later you
-> wrote that you would ignore all my requests and stop responding to any
-> questions, then you have removed all my code from u-boot and showed me
-> as the worst person in the world.
+The changes were tested using a sandbox build. An LZ4 compressed
+squashfs image was bound as a host block device.
 
-I am sorry this happened the way it did. I personally do not think that
-you're not a competent programmer. On the contrary, I think that you're
-a very good programmer, and that what happened has more to do with
-an escalation of misunderstandings and relevant people being too busy at
-unfortunate times. This naturally led to frustrations and harsh
-language, which led to this unfortunate situation.
+Signed-off-by: David Oberhollenzer <goliath@infraroot.at>
+---
+ fs/squashfs/sqfs_decompressor.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-Just wanted to let you know that I am sorry about how this whole thing
-played out, and that I feel partially responsible for a little bit of
-it, since I also made you some promises ages ago which still are not
-fulfilled :-(
+diff --git a/fs/squashfs/sqfs_decompressor.c b/fs/squashfs/sqfs_decompressor.c
+index 6b3e01cdad..cfd1153fd7 100644
+--- a/fs/squashfs/sqfs_decompressor.c
++++ b/fs/squashfs/sqfs_decompressor.c
+@@ -18,6 +18,10 @@
+ #include <u-boot/zlib.h>
+ #endif
+ 
++#if IS_ENABLED(CONFIG_LZ4)
++#include <u-boot/lz4.h>
++#endif
++
+ #if IS_ENABLED(CONFIG_ZSTD)
+ #include <linux/zstd.h>
+ #endif
+@@ -38,6 +42,10 @@ int sqfs_decompressor_init(struct squashfs_ctxt *ctxt)
+ 	case SQFS_COMP_ZLIB:
+ 		break;
+ #endif
++#if IS_ENABLED(CONFIG_LZ4)
++	case SQFS_COMP_LZ4:
++		break;
++#endif
+ #if IS_ENABLED(CONFIG_ZSTD)
+ 	case SQFS_COMP_ZSTD:
+ 		ctxt->zstd_workspace = malloc(zstd_dctx_workspace_bound());
+@@ -66,6 +74,10 @@ void sqfs_decompressor_cleanup(struct squashfs_ctxt *ctxt)
+ 	case SQFS_COMP_ZLIB:
+ 		break;
+ #endif
++#if IS_ENABLED(CONFIG_LZ4)
++	case SQFS_COMP_LZ4:
++		break;
++#endif
+ #if IS_ENABLED(CONFIG_ZSTD)
+ 	case SQFS_COMP_ZSTD:
+ 		free(ctxt->zstd_workspace);
+@@ -139,6 +151,17 @@ int sqfs_decompress(struct squashfs_ctxt *ctxt, void *dest,
+ 
+ 		break;
+ #endif
++#if IS_ENABLED(CONFIG_LZ4)
++	case SQFS_COMP_LZ4:
++		ret = LZ4_decompress_safe(source, dest, src_len, *dest_len);
++		if (ret < 0) {
++			printf("LZ4 decompression failed.\n");
++			return -EINVAL;
++		}
++
++		ret = 0;
++		break;
++#endif
+ #if IS_ENABLED(CONFIG_ZSTD)
+ 	case SQFS_COMP_ZSTD:
+ 		ret = sqfs_zstd_decompress(ctxt, dest, *dest_len, source, src_len);
+-- 
+2.41.0
 
-I have finally managed to recruit two newbie kernel hackers into our
-team. I am currently tutoring them, and one of the projects I have
-in the tutoring plan is getting the work you did out into the open. It
-will take some time, but my hopes are that it will be done.
-
-Again, I am sorry. I hope you are doing well.
-
-Marek
