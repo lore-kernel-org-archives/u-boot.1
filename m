@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64364C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:36:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB1EC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:48:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B265F87083;
-	Mon,  6 Nov 2023 16:36:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BB0C86F15;
+	Mon,  6 Nov 2023 16:48:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AhajBoHi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C3SzemIW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9ADD9870A5; Mon,  6 Nov 2023 16:36:37 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 3197A86F1A; Mon,  6 Nov 2023 16:48:04 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E7DA86F1F
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:36:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3630286E40
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:48:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-778a47bc09aso304726685a.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:36:35 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2c50fbc218bso57652681fa.3
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:48:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699284994; x=1699889794; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9sVDHS9QRIh+UuPDbMz3t9hYTTwY6A+L3mD34kduUhY=;
- b=AhajBoHiQjzB578iCTN6Kit9y2Sdgks7iDv0lGMa5a2wk/N96fXrq8YHUdsVqLAF4l
- Fit+qwLFnFFpkYZ9mlc/0kGantqKixz7NU6+W8lbBCY9yDTsiZMDib21ErWrmoPZrvZC
- vHMTxQ8320zdAQdm0tIQrx2j9IYAuEmPe/ZfI=
+ d=linaro.org; s=google; t=1699285681; x=1699890481; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8FMeOc09UyTURLTnAAxgSJtNbl0kM65QBwZWKZGXces=;
+ b=C3SzemIWICPgBaGbN79CanETd+u0JKUETGM5EGWB8NUTL+GcjIqqplmglQqy1zF9qR
+ PK8+tRskJ/fCWebtPmBYbko942YXxD+gDdmJvVT6xjuoGieBA6+XMWWjvXw1Uz4jVABF
+ eR0k3vTcu09OLHjkarBBzXSGB1OxjSYvUJX/5DbUU+3ZagNvu/RXCr2mfJSh7ApLeb9Y
+ Omkeeh+cQMAjlvjDjuEAfYrmIxD9BmU/3IwNp407ARWuuj4Sq8bWK8WIz8dOE0XVy8mF
+ HvwSuRNDiq7GRV3AI9d4AwYF9+8aMNpmLIzpESOJRwIZjJ0rpuASt+HxnR1XYzCZi2WI
+ OVvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699284994; x=1699889794;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9sVDHS9QRIh+UuPDbMz3t9hYTTwY6A+L3mD34kduUhY=;
- b=mPZ+wNT9oq+kXG24qfZLlvw5w1y4924yfWiAYgFsIpRsCTko/2Ge2LLnpyE8+4dQ84
- XJY7JxcyW+TrVs5i9R8a7iAWdKYPykn18nHs3nNLNdYleDpJjZs9Snr/wSBj5Vm17pYB
- OblMO9J4X+1t01YhzOirnEm2VwuuottAZwvjfug+hqGkLy8sWIwmLfMI5/RuepUNdiBW
- ski1gcZ2hkSMi2lzbeympocgEWwhXf7GT7VRF1OvWg3z7zR6nmdelimN6sEGIJX488Es
- fQhQwUbyJyVyjs7dFkro5ppWzblm1dBZdQ4IZRsOXNw018iQvysPQ0wNrltDoygXgqbR
- 62DA==
-X-Gm-Message-State: AOJu0YyL/O2QcQ60u1Nw9/FqGPQtxb2LsYento8fculSCrVWX2v/oPhY
- 3dPExbrFeVtZVkxG+Y5l/yLB+Q==
-X-Google-Smtp-Source: AGHT+IGWNG60KitC2xKw3D72ZxLog6nbdlpaWLrZNAQ0bOfl4ZWCIXQTHZegLmc6dtboOnDuTwwQAw==
-X-Received: by 2002:a05:620a:47b2:b0:77a:148a:3d64 with SMTP id
- dt50-20020a05620a47b200b0077a148a3d64mr30487701qkb.45.1699284993750; 
- Mon, 06 Nov 2023 07:36:33 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- w12-20020a05620a094c00b00767dcf6f4adsm3348738qkw.51.2023.11.06.07.36.33
+ d=1e100.net; s=20230601; t=1699285681; x=1699890481;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8FMeOc09UyTURLTnAAxgSJtNbl0kM65QBwZWKZGXces=;
+ b=kYT+EqGjLC+qj1cKRIVEWWaIEw0Hcr5sYYaJZyJUh+C8+8GGAoHbpcFFfjmzCVi7aR
+ 0lE45joRfE/3PhMjVGEbblLjXtn51GjTGX/p5/t1VuPZgUfRSRy3Nt4NF0pfBaSj48A7
+ qoTtTIz79sZp1RB8KUgBj6RUV0jch1Cxka3a8utnVbInU5x9nEfTp1nOSTMmGOcGBc6N
+ z8AIlCFV55rtSvf/8B0MqT3imKyrRoFFk2alc5mFQJKg3H6tygRpclvs5lgZ0CmQqe2G
+ PAa7kAIaWki1tcy72HT06zoKT+SVBIvRV4eywoKWlq5MKGga/pi+PzWdRMoy9Iq8fGHT
+ 04gg==
+X-Gm-Message-State: AOJu0YzcCynX/7d8jkeOFhzWfy6OyNRcdKxREQIytEahU/EVDSPjW62r
+ Zy1rAfaCyTyoxONKihVJcQFV9c6RcWtMNdfsZZ8=
+X-Google-Smtp-Source: AGHT+IFAQBnSWlyxEVN9QvvsFxlzdry6XecbVUdeUOo5ogTLomBKalpGjpdQ0mNltruNvtBXJwjtSg==
+X-Received: by 2002:a2e:8048:0:b0:2c5:b87:39bc with SMTP id
+ p8-20020a2e8048000000b002c50b8739bcmr23146998ljg.1.1699285681418; 
+ Mon, 06 Nov 2023 07:48:01 -0800 (PST)
+Received: from localhost.localdomain (ppp046103219117.access.hol.gr.
+ [46.103.219.117]) by smtp.gmail.com with ESMTPSA id
+ f16-20020a7bc8d0000000b0040684abb623sm12264744wml.24.2023.11.06.07.48.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 07:36:33 -0800 (PST)
-Date: Mon, 6 Nov 2023 10:36:31 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
-Message-ID: <20231106153631.GI496310@bill-the-cat>
-References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-5-sjg@chromium.org>
- <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
- <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
- <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
+ Mon, 06 Nov 2023 07:48:00 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de
+Cc: alpernebiyasak@gmail.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH] efi_loader: Increase default variable store size to 128K
+Date: Mon,  6 Nov 2023 17:47:53 +0200
+Message-Id: <20231106154754.59374-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kpAQMeKRvqTQf16j"
-Content-Disposition: inline
-In-Reply-To: <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,87 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In commit 9fd3f881c6ed ("efi_loader: Increase default variable store size to 64KiB")
+Alper has a detailed explanation of why the size needs to be bumped to at
+least 64K.  However enabling Secure boot, writing db, KEK, PK etc keys
+will further increase the size so bump it to 128K.
 
---kpAQMeKRvqTQf16j
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It's worth noting that when U-Boot stores the EFI variables in an RPMB the
+available storage is defined statically in StandAloneMM at build time.
+The U-Boot code is detecting the available true size on the fly during
+writes. When StandAloneMM is present this size defines the reserved
+memory U-Boot can use to copy any runtime variables, before booting an
+OS.
 
-On Mon, Nov 06, 2023 at 06:26:15PM +0800, Bin Meng wrote:
-> + Tom,
->=20
-> Hi Simon,
->=20
-> On Mon, Nov 6, 2023 at 12:29=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Bin,
-> >
-> > On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.org>=
- wrote:
-> > > >
-> > > > This is needed to support Truetype fonts. In any case, the compiler
-> > > > expects SSE to be available in 64-bit mode. Enable it.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  arch/x86/config.mk        |  1 -
-> > > >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
-> > > >  2 files changed, 11 insertions(+), 1 deletion(-)
-> > > >
-> > >
-> > > I didn't suggest we enable SSE for x86. This is the wrong approach.
-> > >
-> > > We should rewrite the Truetype support codes to avoid using float/dou=
-ble types.
-> > >
-> > > This way the Truetype codes can be used on any other architectures
-> > > without the need for the compiler to emit explicit floating
-> > > instructions.
-> >
-> > I am not aware of any such library. At present, enabling truetype on
-> > coreboot64 causes a hang.
-> >
->=20
-> If that's the case, we will have to either:
->=20
-> - Switch all U-Boot builds' to use software float (e.g. -msoft-float)
-> which unfortunately depends on the compiler runtime intrinsics.
-> - Introduce a Kconfig option for hard float enabling and let each
-> architecture to decide whether it implements it or not, and update
-> Truetype to depend on the hard float.
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/Kconfig | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-We generally do -msoft-float already, so introducing that for x86, and
-some Kconfig logic to ensure that no one else steps on this particular
-bug sounds reasonable.
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 4ccd26f94a93..0d024911b42e 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -133,18 +133,20 @@ endif
 
---=20
-Tom
+ config EFI_VAR_BUF_SIZE
+ 	int "Memory size of the UEFI variable store"
+-	default 16384 if EFI_MM_COMM_TEE
+-	default 65536
++	default 131072
+ 	range 4096 2147483647
+ 	help
+ 	  This defines the size in bytes of the memory area reserved for keeping
+ 	  UEFI variables.
 
---kpAQMeKRvqTQf16j
-Content-Type: application/pgp-signature; name="signature.asc"
+-	  When using StandAloneMM (CONFIG_EFI_MM_COMM_TEE=y) this value should
+-	  match the value of PcdFlashNvStorageVariableSize used to compile the
+-	  StandAloneMM module.
++	  When using StandAloneMM (CONFIG_EFI_MM_COMM_TEE=y) is used the
++	  available size for storing variables is defined in
++	  PcdFlashNvStorageVariableSize.
++	  That value is probed at runtime from U-Boot. In that case,
++	  EFI_VAR_BUF_SIZE represents the memory U-Boot reserves to present
++	  runtime variables to the OS.
 
------BEGIN PGP SIGNATURE-----
+-	  Minimum 4096, default 65536, or 16384 when using StandAloneMM.
++	  Minimum 4096, default 131072
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJB/8ACgkQFHw5/5Y0
-tyzDzQv8CA8YJTbsRxCEE1pOVExYeMsGim77mFsHT3gCMBVGbwp8F+kT7ipWx1U+
-H6LagPCkKJpnGb+v27TQpikkWsdLpiNZ5Uyu3YmrajyLHdHav9TeLxi55lOeHTVk
-026d0y8s54JDH+lSgkGKNKqWB5N4ZfRPT2N3jTXqH/Opvd19ufNYDyyFeUGXVLa9
-BW4rZDq/xWDQAwcYE+esT+ksDNEWTa+lIq/cyql5WAgWsoPIyO0KyxuahQfLRqga
-3qMrr71gQx/5R0UEb89alxDEMxkLbJRrClIj8TJ2mm987n1mMn9lGUOAHfmklGuT
-+UofTgyaZ7CyB+iiJNbJ07qVS/MR4396QxLUcHX1032hVJjoB3ocUonNi6/ChD5F
-BBxvbU6+X+fg5s0K0HPjBBanwtTeF0frw86SbvOfhqLLv6ftWxLVL/KDaOzFC1i9
-LzoGMoACWVpu5JHBumE/TvN1X7U3Vdb0t8OXmUd0fQJkOAy7cmYmaQTZ2n5qrK7O
-r5yN0xIb
-=dvBH
------END PGP SIGNATURE-----
+ config EFI_GET_TIME
+ 	bool "GetTime() runtime service"
+--
+2.40.1
 
---kpAQMeKRvqTQf16j--
