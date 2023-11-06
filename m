@@ -4,78 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C22C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 07:13:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF8AC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 07:49:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5921386F70;
-	Mon,  6 Nov 2023 08:13:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 929B786EF6;
+	Mon,  6 Nov 2023 08:49:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PqHOPq9e";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Qo0d2xGJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED85E86487; Mon,  6 Nov 2023 08:13:02 +0100 (CET)
-Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
- [IPv6:2607:f8b0:4864:20::e34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CBF6286F68; Mon,  6 Nov 2023 08:49:16 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FFBD86C31
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 08:12:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84C1686E82
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 08:49:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-45db0df090eso661643137.3
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 23:12:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699254776; x=1699859576; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hp9jOiz2i7XejeuV/+B+vbRcOthh/pNO1Mh3NlzHvtE=;
- b=PqHOPq9e9GDKOohnmHbRj6Pg7NVlAJ3sL6wwkBb26SB9ibkOwYVXafW3Y2hfTwhU0s
- Kx7dbcj/egxBkOfvmjsPyXHFMxXTc91dEsezbEi+egEucWOor3AC7TlACFltFVvK98v8
- ioPiqfUNdJ3tbV6eAyGI7DiWiwg6zTFzQEMYFVk79FdC/qQJ/AvypGVsHoTxG32a0EIY
- 705HlRpG4udIeuFeU8+OeYCWehffRsDcEZPA5kRUCCvfn74Oc9mzTQILWHInmjp6XRL8
- DsCZgleqzQD9135W0pVXQsNQO040yf/aLEyC5mmpZaDcG8BmBDF1+gg8Spb5G/ju1igE
- wPHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699254776; x=1699859576;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hp9jOiz2i7XejeuV/+B+vbRcOthh/pNO1Mh3NlzHvtE=;
- b=W4SUQh2XchAAPNeVq52n2QFsfSkPokunhMG+UcZ+TOw4GAhYkrFSLxZHgE5kt76Qmp
- s43wucyveoJJKwsniSYVb49yOMIKa6znDKTk5JaequctFqy8qS8yAEY3n7HJAsXf48eM
- xIfdeEEzN5joezAMbHO3RrvLLKwyS0bwNoX+78TKiXMn7g63ITyXSWbHgYsHgSt1XmJR
- 816wm8i31vrhHUzuVdA1/3Y1RBqoVaDkXx7NQQ30ATVW0Tve/ordUWC3x2zNmKQBFUHf
- qnkj8OtE3bUgHyHg4OhcwJ1B97FeQ8sjkd2rOKVPled0IkiJQ3C+ZeZt2f7SwujZFa1Q
- J2HA==
-X-Gm-Message-State: AOJu0Yx5h/AhORgczU2RlujBu+2RXggAKGOzEemHEbcz/cyIXAzaqiFy
- yZx2NdGzU8Nh3akdOz8puURT7lCa9lUSwiJnvfQSWw==
-X-Google-Smtp-Source: AGHT+IG/o+XN9E3WgaiceKl6hsJ6D08/vXrYDGw/8InovOpMo4nhwVUo51f9l4PM57uV0jjqHwMyx/ra/+F/qZgmNQ0=
-X-Received: by 2002:a67:c103:0:b0:45d:9223:9532 with SMTP id
- d3-20020a67c103000000b0045d92239532mr7544453vsj.19.1699254775709; Sun, 05 Nov
- 2023 23:12:55 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pali@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 02AABB80D88;
+ Mon,  6 Nov 2023 07:49:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 086C7C433C7;
+ Mon,  6 Nov 2023 07:49:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699256949;
+ bh=+fSPCXz02vgWzJ7+w8IEw4Ilonz4pdBYmflPChdXM9U=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Qo0d2xGJCv3Eda+5rP/7t7s6sxEf0uT81L9mKQh9hZUVUwGEsf65+ktFBt49rnBOA
+ CFhPjHMEjKca4JZrkU+7k0tnGz8ZpWqJznQ0ULX88wSVjIis8B1fySNmPxCEUtf1wC
+ fW4ExP4mCjAd1rFfx/dJX05xkyYQtj/73cJfP/Ezdx7fg7FpQPlCK/Sta1cpRWgZFr
+ P/MAax6v/Gg0LwZynI1RWv4U/esOdPvavqDtm/04C8PLtVaC3XUI5UmpqT5zEa4VMV
+ sysOe4i4af6/xOC4ltt45GOvebpM+F3TSYcJtbIRvair1KhY/7KIXlTBpGwkhZLQHx
+ naK0LpNT8NSTQ==
+Received: by pali.im (Postfix)
+ id 1457A802; Mon,  6 Nov 2023 08:49:06 +0100 (CET)
+Date: Mon, 6 Nov 2023 08:49:05 +0100
+From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek =?utf-8?B?QmVow7pu?= <marek.behun@nic.cz>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v6 00/25] spl: Use common function for loading/parsing
+ images
+Message-ID: <20231106074905.pgrdj6zhsgy66a2e@pali>
+References: <20231106022603.3405551-1-seanga2@gmail.com>
 MIME-Version: 1.0
-References: <20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org>
- <20231103-b4-qcom-clk-v3-7-8d2d460ece84@linaro.org>
-In-Reply-To: <20231103-b4-qcom-clk-v3-7-8d2d460ece84@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 6 Nov 2023 12:42:44 +0530
-Message-ID: <CAFA6WYMKETrXc_g+i3+COx7opNa6k1hqHb0MP8n2uQPCr4Rs_Q@mail.gmail.com>
-Subject: Re: [PATCH v3 7/7] clk/qcom: fix rcg divider value
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Robert Marko <robert.marko@sartura.hr>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Luka Perkov <luka.perkov@sartura.hr>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,322 +73,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 3 Nov 2023 at 21:11, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> The RCG divider field takes a value of (2*h - 1) where h is the divisor.
-> This allows fractional dividers to be supported by calculating them at
-> compile time using a macro.
->
-> However, the clk_rcg_set_rate_mnd() function was also performing the
-> calculation. Clean this all up and consistently use the F() macro to
-> calculate these at compile time and properly support fractional divisors.
->
-> Additionally, improve clk_bcr_update() to timeout with a warning rather
-> than hanging the board, and make the freq_tbl struct and helpers common
-> so that they can be reused by future platforms.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/clk/qcom/clock-apq8016.c |  2 +-
->  drivers/clk/qcom/clock-apq8096.c |  2 +-
->  drivers/clk/qcom/clock-qcom.c    | 64 +++++++++++++++++++++++++++++-----------
->  drivers/clk/qcom/clock-qcom.h    | 11 +++++++
->  drivers/clk/qcom/clock-qcs404.c  | 16 +++++-----
->  drivers/clk/qcom/clock-sdm845.c  | 26 ----------------
->  6 files changed, 67 insertions(+), 54 deletions(-)
->
+What you are doing is the worst thing in the world. You have been
+ignoring all my changes which I have been sending for one year, then you
+wrote me that I'm not competent to do any kind of programming, later you
+wrote that you would ignore all my requests and stop responding to any
+questions, then you have removed all my code from u-boot and showed me
+as the worst person in the world.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+But seems that this is not enough for you. You have to continue
+attacking on me, and making everything even worse.
 
--Sumit
+WHAT YOU WANT FROM ME NOW???? WHY YOU ARE CONTACTING ME??? IS NOT IT
+ENOUGH WHAT YOU HAVE TO ME?? Or you do think that I forgot what you have
+been doing with me last years? Speak up!
 
-> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> index 630619c83454..eb812934cbae 100644
-> --- a/drivers/clk/qcom/clock-apq8016.c
-> +++ b/drivers/clk/qcom/clock-apq8016.c
-> @@ -78,7 +78,7 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
->  /* SDHCI */
->  static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
->  {
-> -       int div = 8; /* 100MHz default */
-> +       int div = 15; /* 100MHz default */
->
->         if (rate == 200000000)
->                 div = 4;
-> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-> index 095c1b431245..55f16c14e046 100644
-> --- a/drivers/clk/qcom/clock-apq8096.c
-> +++ b/drivers/clk/qcom/clock-apq8096.c
-> @@ -65,7 +65,7 @@ static struct vote_clk gcc_blsp2_ahb_clk = {
->
->  static int clk_init_sdc(struct msm_clk_priv *priv, uint rate)
->  {
-> -       int div = 3;
-> +       int div = 5;
->
->         clk_enable_cbc(priv->base + SDCC2_AHB_CBCR);
->         clk_rcg_set_rate_mnd(priv->base, &sdc_regs, div, 0, 0,
-> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-> index fc478554f982..7c683e519226 100644
-> --- a/drivers/clk/qcom/clock-qcom.c
-> +++ b/drivers/clk/qcom/clock-qcom.c
-> @@ -19,6 +19,8 @@
->  #include <dm/lists.h>
->  #include <errno.h>
->  #include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/delay.h>
->  #include <linux/bitops.h>
->  #include <reset-uclass.h>
->
-> @@ -68,30 +70,42 @@ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk)
->  /* Update clock command via CMD_RCGR */
->  void clk_bcr_update(phys_addr_t apps_cmd_rcgr)
->  {
-> +       u32 count;
->         setbits_le32(apps_cmd_rcgr, APPS_CMD_RCGR_UPDATE);
->
->         /* Wait for frequency to be updated. */
-> -       while (readl(apps_cmd_rcgr) & APPS_CMD_RCGR_UPDATE)
-> -               ;
-> +       for (count = 0; count < 50000; count++) {
-> +               if (!(readl(apps_cmd_rcgr) & APPS_CMD_RCGR_UPDATE))
-> +                       break;
-> +               udelay(1);
-> +       }
-> +       WARN(count == 50000, "WARNING: RCG @ %#llx [%#010x] stuck at off\n",
-> +            apps_cmd_rcgr, readl(apps_cmd_rcgr));
->  }
->
-> -#define CFG_MODE_DUAL_EDGE (0x2 << 12) /* Counter mode */
-> +#define CFG_SRC_DIV_MASK       0b11111
-> +#define CFG_SRC_SEL_SHIFT      8
-> +#define CFG_SRC_SEL_MASK       (0x7 << CFG_SRC_SEL_SHIFT)
-> +#define CFG_MODE_SHIFT         12
-> +#define CFG_MODE_MASK          (0x3 << CFG_MODE_SHIFT)
-> +#define CFG_MODE_DUAL_EDGE     (0x2 << CFG_MODE_SHIFT)
-> +#define CFG_HW_CLK_CTRL_MASK   BIT(20)
->
-> -#define CFG_MASK 0x3FFF
-> -
-> -#define CFG_DIVIDER_MASK 0x1F
-> -
-> -/* root set rate for clocks with half integer and MND divider */
-> +/*
-> + * root set rate for clocks with half integer and MND divider
-> + * div should be pre-calculated ((div * 2) - 1)
-> + */
->  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->                           int div, int m, int n, int source, u8 mnd_width)
->  {
->         u32 cfg;
->         /* M value for MND divider. */
->         u32 m_val = m;
-> +       u32 n_minus_m = n - m;
->         /* NOT(N-M) value for MND divider. */
-> -       u32 n_val = ~((n) - (m)) * !!(n);
-> +       u32 n_val = ~n_minus_m * !!(n);
->         /* NOT 2D value for MND divider. */
-> -       u32 d_val = ~(n);
-> +       u32 d_val = ~(clamp_t(u32, n, m, n_minus_m));
->         u32 mask = BIT(mnd_width) - 1;
->
->         debug("m %#x n %#x d %#x div %#x mask %#x\n", m_val, n_val, d_val, div, mask);
-> @@ -103,15 +117,13 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->
->         /* setup src select and divider */
->         cfg  = readl(base + regs->cfg_rcgr);
-> -       cfg &= ~CFG_MASK;
-> -       cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
-> +       cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
-> +       cfg |= source & CFG_SRC_SEL_MASK; /* Select clock source */
->
-> -       /* Set the divider; HW permits fraction dividers (+0.5), but
-> -          for simplicity, we will support integers only */
->         if (div)
-> -               cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
-> +               cfg |= div & CFG_SRC_DIV_MASK;
->
-> -       if (n_val)
-> +       if (n && n != m)
->                 cfg |= CFG_MODE_DUAL_EDGE;
->
->         writel(cfg, base + regs->cfg_rcgr); /* Write new clock configuration */
-> @@ -128,7 +140,7 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->
->         /* setup src select and divider */
->         cfg  = readl(base + regs->cfg_rcgr);
-> -       cfg &= ~CFG_MASK;
-> +       cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
->         cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
->
->         /*
-> @@ -136,7 +148,7 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->          * for simplicity, we will support integers only
->          */
->         if (div)
-> -               cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
-> +               cfg |= (2 * div - 1) & CFG_SRC_DIV_MASK;
->
->         writel(cfg, base + regs->cfg_rcgr); /* Write new clock configuration */
->
-> @@ -144,6 +156,22 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->         clk_bcr_update(base + regs->cmd_rcgr);
->  }
->
-> +const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
-> +{
-> +       if (!f)
-> +               return NULL;
-> +
-> +       if (!f->freq)
-> +               return f;
-> +
-> +       for (; f->freq; f++)
-> +               if (rate <= f->freq)
-> +                       return f;
-> +
-> +       /* Default to our fastest rate */
-> +       return f - 1;
-> +}
-> +
->  static int msm_clk_probe(struct udevice *dev)
->  {
->         struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
-> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-> index 24a32cb9666d..01088c19015a 100644
-> --- a/drivers/clk/qcom/clock-qcom.h
-> +++ b/drivers/clk/qcom/clock-qcom.h
-> @@ -32,6 +32,16 @@ struct bcr_regs {
->         uintptr_t D;
->  };
->
-> +struct freq_tbl {
-> +       uint freq;
-> +       uint src;
-> +       u8 pre_div;
-> +       u16 m;
-> +       u16 n;
-> +};
-> +
-> +#define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
-> +
->  struct gate_clk {
->         uintptr_t reg;
->         u32 en_val;
-> @@ -71,6 +81,7 @@ void clk_enable_gpll0(phys_addr_t base, const struct pll_vote_clk *gpll0);
->  void clk_bcr_update(phys_addr_t apps_cmd_rgcr);
->  void clk_enable_cbc(phys_addr_t cbcr);
->  void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk);
-> +const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate);
->  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->                           int div, int m, int n, int source, u8 mnd_width);
->  void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
-> diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-> index 921abf1f699b..429ff35e1d1a 100644
-> --- a/drivers/clk/qcom/clock-qcs404.c
-> +++ b/drivers/clk/qcom/clock-qcs404.c
-> @@ -203,7 +203,7 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->                 break;
->         case GCC_SDCC1_APPS_CLK:
->                 /* SDCC1: 200MHz */
-> -               clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 4, 0, 0,
-> +               clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 7, 0, 0,
->                                      CFG_CLK_SRC_GPLL0, 8);
->                 clk_enable_gpll0(priv->base, &gpll0_vote_clk);
->                 clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
-> @@ -213,16 +213,16 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->                 break;
->         case GCC_ETH_RGMII_CLK:
->                 if (rate == 250000000)
-> -                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 0, 0,
-> +                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
->                                              CFG_CLK_SRC_GPLL1, 8);
->                 else if (rate == 125000000)
-> -                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 4, 0, 0,
-> +                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 7, 0, 0,
->                                              CFG_CLK_SRC_GPLL1, 8);
->                 else if (rate == 50000000)
-> -                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 10, 0, 0,
-> +                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 19, 0, 0,
->                                              CFG_CLK_SRC_GPLL1, 8);
->                 else if (rate == 5000000)
-> -                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 1, 50,
-> +                       clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 1, 50,
->                                              CFG_CLK_SRC_GPLL1, 8);
->                 break;
->         default:
-> @@ -239,7 +239,7 @@ static int qcs404_clk_enable(struct clk *clk)
->         switch (clk->id) {
->         case GCC_USB30_MASTER_CLK:
->                 clk_enable_cbc(priv->base + USB30_MASTER_CBCR);
-> -               clk_rcg_set_rate_mnd(priv->base, &usb30_master_regs, 4, 0, 0,
-> +               clk_rcg_set_rate_mnd(priv->base, &usb30_master_regs, 7, 0, 0,
->                                      CFG_CLK_SRC_GPLL0, 8);
->                 break;
->         case GCC_SYS_NOC_USB3_CLK:
-> @@ -261,14 +261,14 @@ static int qcs404_clk_enable(struct clk *clk)
->                 /* SPEED_1000: freq -> 250MHz */
->                 clk_enable_cbc(priv->base + ETH_PTP_CBCR);
->                 clk_enable_gpll0(priv->base, &gpll1_vote_clk);
-> -               clk_rcg_set_rate_mnd(priv->base, &emac_ptp_regs, 2, 0, 0,
-> +               clk_rcg_set_rate_mnd(priv->base, &emac_ptp_regs, 3, 0, 0,
->                                      CFG_CLK_SRC_GPLL1, 8);
->                 break;
->         case GCC_ETH_RGMII_CLK:
->                 /* SPEED_1000: freq -> 250MHz */
->                 clk_enable_cbc(priv->base + ETH_RGMII_CBCR);
->                 clk_enable_gpll0(priv->base, &gpll1_vote_clk);
-> -               clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 0, 0,
-> +               clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
->                                      CFG_CLK_SRC_GPLL1, 8);
->                 break;
->         case GCC_ETH_SLAVE_AHB_CLK:
-> diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-> index 6af1f38302d2..36ffee79d966 100644
-> --- a/drivers/clk/qcom/clock-sdm845.c
-> +++ b/drivers/clk/qcom/clock-sdm845.c
-> @@ -27,16 +27,6 @@
->  #define SE9_UART_APPS_N                0x18154
->  #define SE9_UART_APPS_D                0x18158
->
-> -#define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
-> -
-> -struct freq_tbl {
-> -       uint freq;
-> -       uint src;
-> -       u8 pre_div;
-> -       u16 m;
-> -       u16 n;
-> -};
-> -
->  static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
->         F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
->         F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-> @@ -64,22 +54,6 @@ static const struct bcr_regs uart2_regs = {
->         .D = SE9_UART_APPS_D,
->  };
->
-> -const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
-> -{
-> -       if (!f)
-> -               return NULL;
-> -
-> -       if (!f->freq)
-> -               return f;
-> -
-> -       for (; f->freq; f++)
-> -               if (rate <= f->freq)
-> -                       return f;
-> -
-> -       /* Default to our fastest rate */
-> -       return f - 1;
-> -}
-> -
->  static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
->  {
->         struct msm_clk_priv *priv = dev_get_priv(clk->dev);
->
-> --
-> 2.42.0
->
+On Sunday 05 November 2023 21:25:38 Sean Anderson wrote:
+> This series adds support for loading all image types (Legacy (with and without
+> LZMA), FIT (with and without LOAD_FIT_FULL), and i.MX) to the MMC, SPI, NOR,
+> NET, FAT, EXT, NVMe, and semihosting load methods. It does this by introducing a
+> helper function which handles the minutiae of invoking the proper parsing
+> function, and reading the rest of the image.
+> 
+> Hopefully, this will make it easier for load methods to support all image types
+> that U-Boot supports, without having undocumented unsupported image types. I
+> applied this to several loaders which were invoking spl_load_simple_fit and/or
+> spl_parse_image_header, but I did not use it with others (e.g. DFU/RAM) which
+> had complications in the mix.
+> 
+> This series is organized roughly into two parts. Patches up to "spl: Add generic
+> spl_load function" are all setup or size-reduction oriented. Later patches
+> generally convert various load functions to spl_load.
+> 
+> bloat-o-meter results (for CONFIG_SPL only) at [1]. Size growth has been the
+> bigegst challenge to preparing this series. I have used every trick I can think
+> of to reduce bloat. Some SAMA boards no longer fit, but I have a plan to fix
+> them [2].
+> 
+> This is bar far the largest and most-difficult revision of this series to-date.
+> There are probably still things which can reduce the size, but I have been
+> working on this series for the better part of two months and I think it is a
+> good idea to get some feedback. Because of the SAMA bloat, this series will not
+> pass CI, so I expect to do a v7 before this is ready to apply. Feel free,
+> however, to apply patches in the first half (especially the fixes).
+> 
+> This version of the series is better-tested than ever before, thanks to some new
+> unit tests. However, things like the i.MX ROMAPI are untested. NAND should also
+> be tested more-widely, for reasons listed in the commit message. I encourage you
+> try this series out on your favorite board.
+> 
+> This series depends on [3]. (Almost passing) CI at [4].
+> 
+> [1] https://gist.github.com/Forty-Bot/5bfe88676dd3c2aec6ebc23abb08e06f
+>     This includes some changes to am335x_evm_spiboot and am65x_evm_r5_usbdfu
+>     which have since been undone.
+> [2] https://lore.kernel.org/u-boot/20231105022742.632175-1-seanga2@gmail.com/
+> [3] https://lore.kernel.org/u-boot/20231104203753.1579217-1-seanga2@gmail.com/
+> [4] https://source.denx.de/u-boot/custodians/u-boot-clk/-/pipelines/18447
+> 
+> Changes in v6:
+> - Fix uninitialized return value when we can't get a blk_desc
+> - Don't close fd before spl_load_simple_fit
+> - Remove NULL assignments in spl_load_info
+> - Remove dev from spl_load_info
+> - Take advantage of bl_len's power-of-twoness
+> - Refactor spl_load_info->read to use units of bytes
+> - Remove filename from spl_load_info
+> - Only support bl_len when we have to
+> - Remove spl_nand_legacy_read
+> - Split off LZMA decompression into its own function
+> - Support testing LEGACY_LZMA filesystem images
+> - Use pseudo-LTO for spl_load
+> - Align reads to bl_len
+> - Add SYS_MMCSD_RAW_MODE to help determine whether SPL_MMC loads
+>   anything directly.
+> - Convert nand to spl_load
+> - Fix LZMA support
+> - Fix load address
+> - Fix invalid return from spl_blk_load_image
+> - Fix soft reset after loading from SPI
+> - Explicitly initialize load_info members to reduce text size
+> - Rebase on u-boot/next
+> - Add option to disable DMA alignment for FAT
+> 
+> Changes in v5:
+> - Make SHOW_ERRORS depend on LIBCOMMON
+> - Load the header in spl_load as well
+> - Don't bother trying to DMA-align the buffer, since we can't really fix
+>   it.
+> - Convert NVMe to spl_load
+> 
+> Changes in v4:
+> - Fix format specifiers in debug prints
+> - Reword/fix some of the doc comments for spl_load
+> - Rebase on u-boot/master
+> 
+> Changes in v3:
+> - Fix using ffs instead of fls
+> - Fix using not initializing bl_len when info->filename was NULL
+> - Fix failing on success
+> 
+> Changes in v2:
+> - Use reverse-xmas-tree style for locals in spl_simple_read. This is not
+>   complete, since overhead depends on bl_mask.
+> - Convert semihosting as well
+> - Consolidate spi_load_image_os into spl_spi_load_image
+> 
+> Sean Anderson (25):
+>   spl: blk_fs: Fix uninitialized return value when we can't get a
+>     blk_desc
+>   arm: Disable SPL_FS_FAT when it isn't used
+>   spl: Make SHOW_ERRORS depend on LIBCOMMON
+>   spl: semihosting: Don't close fd before spl_load_simple_fit
+>   spl: Remove NULL assignments in spl_load_info
+>   spl: Remove dev from spl_load_info
+>   spl: Take advantage of bl_len's power-of-twoness
+>   spl: Refactor spl_load_info->read to use units of bytes
+>   spl: Remove filename from spl_load_info
+>   spl: Only support bl_len when we have to
+>   spl: nand: Remove spl_nand_legacy_read
+>   spl: legacy: Split off LZMA decompression into its own function
+>   test: spl: Support testing LEGACY_LZMA filesystem images
+>   spl: Add generic spl_load function
+>   spl: Convert ext to use spl_load
+>   spl: Convert fat to spl_load
+>   spl: Convert mmc to spl_load
+>   spl: Convert nand to spl_load
+>   spl: Convert net to spl_load
+>   spl: Convert nor to spl_load
+>   spl: Convert NVMe to spl_load
+>   spl: Convert semihosting to spl_load
+>   spl: Convert spi to spl_load
+>   spl: spi: Consolidate spi_load_image_os into spl_spi_load_image
+>   spl: fat: Add option to disable DMA alignment
+> 
+>  arch/arm/mach-imx/spl_imx_romapi.c        |  24 ++--
+>  arch/arm/mach-sunxi/spl_spi_sunxi.c       |   5 +-
+>  common/spl/Kconfig                        |  37 +++++-
+>  common/spl/spl.c                          |  13 +-
+>  common/spl/spl_blk_fs.c                   |  73 +++--------
+>  common/spl/spl_ext.c                      |  36 +++---
+>  common/spl/spl_fat.c                      |  62 ++++------
+>  common/spl/spl_fit.c                      |  74 ++++-------
+>  common/spl/spl_imx_container.c            |  55 ++++-----
+>  common/spl/spl_legacy.c                   | 110 ++++-------------
+>  common/spl/spl_mmc.c                      | 101 ++-------------
+>  common/spl/spl_nand.c                     | 104 ++++------------
+>  common/spl/spl_net.c                      |  29 +----
+>  common/spl/spl_nor.c                      |  42 ++-----
+>  common/spl/spl_ram.c                      |   2 +-
+>  common/spl/spl_semihosting.c              |  65 ++--------
+>  common/spl/spl_spi.c                      | 130 ++++---------------
+>  common/spl/spl_ymodem.c                   |   4 +-
+>  configs/am335x_evm_spiboot_defconfig      |   2 +-
+>  configs/am65x_evm_r5_usbdfu_defconfig     |   1 -
+>  configs/xilinx_zynqmp_mini_qspi_defconfig |   3 +
+>  configs/zynq_cse_nand_defconfig           |   3 +
+>  configs/zynq_cse_nor_defconfig            |   3 +
+>  configs/zynq_cse_qspi_defconfig           |   3 +
+>  drivers/usb/gadget/f_sdp.c                |  10 +-
+>  include/spl.h                             |  60 +++++++--
+>  include/spl_load.h                        | 144 ++++++++++++++++++++++
+>  include/test/spl.h                        |   4 +
+>  test/image/Kconfig                        |   1 +
+>  test/image/spl_load.c                     |  13 +-
+>  test/image/spl_load_fs.c                  |  32 +++--
+>  test/image/spl_load_nand.c                |   2 +
+>  test/image/spl_load_net.c                 |   2 +
+>  test/image/spl_load_nor.c                 |   2 +
+>  test/image/spl_load_os.c                  |  16 ++-
+>  test/image/spl_load_spi.c                 |   1 +
+>  36 files changed, 536 insertions(+), 732 deletions(-)
+>  create mode 100644 include/spl_load.h
+> 
+> -- 
+> 2.37.1
+> 
