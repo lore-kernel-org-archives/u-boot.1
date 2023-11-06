@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DA9C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:00:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D612FC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5D4085E44;
-	Mon,  6 Nov 2023 03:36:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A70487126;
+	Mon,  6 Nov 2023 03:37:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M5jocLhc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OqL6kIX6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8B948272A; Mon,  6 Nov 2023 03:28:26 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 505B886F5F; Mon,  6 Nov 2023 03:28:40 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D65FC86FFC
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D678186FFE
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-778999c5ecfso261915185a.2
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:23 -0800 (PST)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7789aed0e46so266538185a.0
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699237581; x=1699842381; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699237582; x=1699842382; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YgoTLomyz6kcwGQtWf1qo+Eq3qdeYtjp2raVIG/BORo=;
- b=M5jocLhcvVuXi2BzxZCtMNzD491s40svUZEDDAdq4m4/PaJk9uYL6UrFNWCwUoPF+b
- HFDYo5n32S84YF1FOazFvP17SNzCeLs9Dd2OIa/i5psZDtLDQHOOUFyw2MOsKfSxE3eG
- ZfweI9UWLhUXgqsH/5Wsx/+dEasA2KfpygXJtr8taS1cU1qdG6UZRk/3GZHl2OPT4JEw
- BwKflQ4U21KYdqmeVJNR+V36qyWa+E+6zWg4mPLEohUUxNjDZHi716ZakoqHL8P0md+u
- hOC0y6eDXNMQwZLyVPLy3Hik49zeEWN5BXCg3iEtf//wvWAXyPMc1ncruaWtE2vuCUSl
- Xe0A==
+ bh=dy7pm0bvG9VeCNedKxaRfzRBpRIw5riDpRadwNWe03E=;
+ b=OqL6kIX6sOjG0VXaCHZ/2tmhiy7eIWPWU+D1BaB4wJG649c7okCkOCl0EJjBRpWny5
+ FQ6n/kMlatSUep7q0q8ZEKwmxfKJ9JLZkFMddKmO1jkKOL1hvSBP7PIDBIXg8iko7Opp
+ JJdusV8o9AuSSNkXgp+7alCKTjZ8mP4LtDubPKw6xTRukgknJEJY3HqyFrMbtyoAr1n6
+ pHwtArHYLOMC7/GZ/wjZsbdkB8KNZRjFN6qwqmwYsmGLZ1oPvD177pMDzBnVPX5/VVSr
+ zleVzyGpK19aR/IzcMVVM9DikqwFHIUK4myppYw8b9L41NWtbV+9eTNU1x3utkg9WGN5
+ onPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699237581; x=1699842381;
+ d=1e100.net; s=20230601; t=1699237582; x=1699842382;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YgoTLomyz6kcwGQtWf1qo+Eq3qdeYtjp2raVIG/BORo=;
- b=gjlAhDSAbNPAHwe6vykHr2X30Fd6VqRolFi9Svs0B5a0YFQzuVQt6XX8YpEud5+quY
- ShfIg8GEAKZ+y53lhqst/6jnWwso7EEEwjixFHZ67Umby3jRNQYQJtUN7M4JuJQgWy9i
- FtCyQGXWodnv/f8/ooSC8zScQeeXkJvkqHJZYUyYR6N9Z6+JRdHcBJZ6e4tVViwDxUR6
- tdVBizDvzJyZ3k3creIbrmhiaRHr2rb2mn+C4wkwtUvQrzASGY6DFgHPUn+U4x4Q5nJB
- LeWLd/PEYReZu/NGdTTfrBMhiBh+ByK7siHXAVmTLS2Tut3E/qMMLylpzeFBEeLoMUif
- mBCQ==
-X-Gm-Message-State: AOJu0YxHPGTQ3/9J0i2smQc2+TDQmQV3vaO1alUXqreniXHeprV3ITxR
- 1BnrHvczC1rt3JlWscW/Ynk=
-X-Google-Smtp-Source: AGHT+IFuQ5QYT0POTc8XzKg4esGCl0ppgB0DeGUDO6HkhD62fPssalDDYNUNIjXCTsTjAGvBTC63Gg==
-X-Received: by 2002:a05:620a:4094:b0:77a:739b:322e with SMTP id
- f20-20020a05620a409400b0077a739b322emr7898414qko.57.1699237581587; 
- Sun, 05 Nov 2023 18:26:21 -0800 (PST)
+ bh=dy7pm0bvG9VeCNedKxaRfzRBpRIw5riDpRadwNWe03E=;
+ b=FNSmD0Txml7xgWrpASyUK3kqMGzTNRfJxZp0KA4lef1leHUtcqS9rgUKRoa1JEPdhk
+ xmXuGfZf3VPDOhtK10D0ANuD1D/C62b62H51h0hfK3gqL+L0Hg6cUFbijfQojfNWMi48
+ +fhyHEKIQcirHPdxmU9+Cl0Zw1fHEfRw7cAtGr9O6mG/M2MXdOaT+jR+s4vkYi5+wtjH
+ mP4krCgp4GzJbcopb20tLGRT81kDu8K+uXaqGa/IkXA2MTRQM2YeJGo7xzKY8zIpT6oO
+ a4tDp4NWlDjNqN1Jfw4GLIhNGoa2GAsGivuTe3SiiRlwCC+luIlER9RCDNfrEauJBgs0
+ pbCQ==
+X-Gm-Message-State: AOJu0Yx9AqW7dfunPFlqX3Q3b7By4fbr5gnooh+DRTWEnpt9rcBV6jl4
+ fOEZr+/AU7/41kDiMmcS3tA=
+X-Google-Smtp-Source: AGHT+IFYIygGtLB9LLF+/xxha1qkfNZlFJr2NBMmWhCfQp41e5CRwxuFVUnP9T/Vszb2kHkjPebBKA==
+X-Received: by 2002:a05:620a:3a48:b0:777:ac06:ed91 with SMTP id
+ sk8-20020a05620a3a4800b00777ac06ed91mr26454158qkn.23.1699237582680; 
+ Sun, 05 Nov 2023 18:26:22 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- p25-20020a05620a22f900b007671cfe8a18sm2931832qki.13.2023.11.05.18.26.20
+ f12-20020a0cf7cc000000b0065b0554ae78sm3024540qvo.100.2023.11.05.18.26.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Nov 2023 18:26:21 -0800 (PST)
+ Sun, 05 Nov 2023 18:26:22 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
@@ -72,10 +72,9 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
  Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
  Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v6 13/25] test: spl: Support testing LEGACY_LZMA filesystem
- images
-Date: Sun,  5 Nov 2023 21:25:51 -0500
-Message-Id: <20231106022603.3405551-14-seanga2@gmail.com>
+Subject: [PATCH v6 14/25] spl: Add generic spl_load function
+Date: Sun,  5 Nov 2023 21:25:52 -0500
+Message-Id: <20231106022603.3405551-15-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
 References: <20231106022603.3405551-1-seanga2@gmail.com>
@@ -97,117 +96,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These will soon be supported, so we need to be able to test it. Export the
-lzma data and generally use the same process in spl_test_mmc_fs as
-do_spl_test_load.  If we end up needing this in third place in the future,
-it would probably be good to refactor things out.
+Implementers of SPL_LOAD_IMAGE_METHOD have to correctly determine what
+type of image is being loaded and then call the appropriate image load
+function correctly. This is tricky, because some image load functions
+expect the whole image to already be loaded (CONFIG_SPL_LOAD_FIT_FULL),
+some will load the image automatically using spl_load_info.read()
+(CONFIG_SPL_LOAD_FIT/CONFIG_SPL_LOAD_IMX_CONTAINER), and some just parse
+the header and expect the caller to do the actual loading afterwards
+(legacy/raw images). Load methods often only support a subset of the
+above methods, meaning that not all image types can be used with all
+load methods. Further, the code to invoke these functions is
+duplicated between different load functions.
+
+To address this problem, this commit introduces a "spl_load" function.
+It aims to handle image detection and correct invocation of each of the
+parse/load functions.
+
+Although this function generally results in a size reduction with
+several users, it tends to bloat boards with only a single user.
+This is generally because programmers open-coding the contents of this
+function can make optimizations based on the specific loader. For
+example, NOR flash is memory-mapped, so it never bothers calling
+load->read. The compiler can't really make these optimizations across
+translation units. LTO solves this, but it is only available on some
+arches. To address this, perform "pseudo-LTO" by inlining spl_load when
+there are one or fewer users. At the moment, there are no users, so
+define SPL_LOAD_USERS to be 0.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
 Changes in v6:
-- New
+- Use pseudo-LTO for spl_load
+- Align reads to bl_len
 
- include/test/spl.h       |  4 ++++
- test/image/spl_load.c    |  4 +++-
- test/image/spl_load_fs.c | 23 ++++++++++++++++++-----
- 3 files changed, 25 insertions(+), 6 deletions(-)
+Changes in v5:
+- Load the header in spl_load as well
+- Don't bother trying to DMA-align the buffer, since we can't really fix
+  it.
 
-diff --git a/include/test/spl.h b/include/test/spl.h
-index c1f64658502..a2a5f33e328 100644
---- a/include/test/spl.h
-+++ b/include/test/spl.h
-@@ -81,6 +81,10 @@ size_t create_image(void *dst, enum spl_test_image type,
- int check_image_info(struct unit_test_state *uts, struct spl_image_info *info1,
- 		     struct spl_image_info *info2);
- 
-+/* Some compressed data and it size */
-+extern const char lzma_compressed[];
-+extern const size_t lzma_compressed_size;
-+
- /**
-  * typedef write_image_t - Callback for writing an image
-  * @uts: Current unit test state
-diff --git a/test/image/spl_load.c b/test/image/spl_load.c
-index 35ceed67756..e1036eff28c 100644
---- a/test/image/spl_load.c
-+++ b/test/image/spl_load.c
-@@ -374,7 +374,7 @@ SPL_IMG_TEST(spl_test_image, FIT_EXTERNAL, 0);
-  * LZMA is too complex to generate on the fly, so let's use some data I put in
-  * the oven^H^H^H^H compressed earlier
-  */
--static const char lzma_compressed[] = {
-+const char lzma_compressed[] = {
- 	0x5d, 0x00, 0x00, 0x80, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
- 	0xff, 0x00, 0x02, 0x05, 0x55, 0x4e, 0x82, 0xbc, 0xc2, 0x42, 0xf6, 0x88,
- 	0x6c, 0x99, 0xd6, 0x82, 0x48, 0xa6, 0x06, 0x67, 0xf8, 0x46, 0x7c, 0xe9,
-@@ -610,6 +610,8 @@ static const char lzma_compressed[] = {
- 	0x1e, 0xff, 0xff, 0x80, 0x8e, 0x00, 0x00
- };
- 
-+const size_t lzma_compressed_size = sizeof(lzma_compressed);
-+
- int do_spl_test_load(struct unit_test_state *uts, const char *test_name,
- 		     enum spl_test_image type, struct spl_image_loader *loader,
- 		     int (*write_image)(struct unit_test_state *, void *, size_t))
-diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
-index 297ab08a820..59d0244d44b 100644
---- a/test/image/spl_load_fs.c
-+++ b/test/image/spl_load_fs.c
-@@ -320,10 +320,11 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
- 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
- 	struct blk_desc *dev_desc;
- 	size_t fs_size, fs_data, img_size, img_data,
--	       data_size = SPL_TEST_DATA_SIZE;
-+	       plain_size = SPL_TEST_DATA_SIZE;
- 	struct spl_image_info info_write = {
- 		.name = test_name,
--		.size = data_size,
-+		.size = type == LEGACY_LZMA ? lzma_compressed_size :
-+					      plain_size,
- 	}, info_read = { };
- 	struct disk_partition part = {
- 		.start = 1,
-@@ -335,7 +336,7 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
- 		.boot_device = loader->boot_device,
- 	};
- 	void *fs;
--	char *data;
-+	char *data, *plain;
- 
- 	img_size = create_image(NULL, type, &info_write, &img_data);
- 	ut_assert(img_size);
-@@ -345,7 +346,15 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
- 	ut_assertnonnull(fs);
- 
- 	data = fs + fs_data + img_data;
--	generate_data(data, data_size, test_name);
-+	if (type == LEGACY_LZMA) {
-+		plain = malloc(plain_size);
-+		ut_assertnonnull(plain);
-+		generate_data(plain, plain_size, "lzma");
-+		memcpy(data, lzma_compressed, lzma_compressed_size);
-+	} else {
-+		plain = data;
-+		generate_data(plain, plain_size, test_name);
-+	}
- 	ut_asserteq(img_size, create_image(fs + fs_data, type, &info_write,
- 					   NULL));
- 	ut_asserteq(fs_size, create_fs(fs, img_size, filename, NULL));
-@@ -366,8 +375,12 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
- 		ut_assertok(loader->load_image(&info_read, &bootdev));
- 	if (check_image_info(uts, &info_write, &info_read))
- 		return CMD_RET_FAILURE;
--	ut_asserteq_mem(data, phys_to_virt(info_write.load_addr), data_size);
-+	if (type == LEGACY_LZMA)
-+		ut_asserteq(plain_size, info_read.size);
-+	ut_asserteq_mem(plain, phys_to_virt(info_write.load_addr), plain_size);
- 
-+	if (type == LEGACY_LZMA)
-+		free(plain);
- 	free(fs);
+Changes in v4:
+- Fix format specifiers in debug prints
+- Reword/fix some of the doc comments for spl_load
+
+Changes in v3:
+- Fix using ffs instead of fls
+- Fix using not initializing bl_len when info->filename was NULL
+
+Changes in v2:
+- Use reverse-xmas-tree style for locals in spl_simple_read. This is not
+  complete, since overhead depends on bl_mask.
+
+ common/spl/spl.c   |  10 ++++
+ include/spl_load.h | 135 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 145 insertions(+)
+ create mode 100644 include/spl_load.h
+
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 7ce38ce46d4..3ce5bfeec8b 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -19,6 +19,7 @@
+ #include <mapmem.h>
+ #include <serial.h>
+ #include <spl.h>
++#include <spl_load.h>
+ #include <system-constants.h>
+ #include <asm/global_data.h>
+ #include <asm-generic/gpio.h>
+@@ -352,6 +353,15 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
  	return 0;
  }
+ 
++#if SPL_LOAD_USERS > 1
++int spl_load(struct spl_image_info *spl_image,
++	     const struct spl_boot_device *bootdev, struct spl_load_info *info,
++	     size_t size, size_t offset)
++{
++	return _spl_load(spl_image, bootdev, info, size, offset);
++}
++#endif
++
+ __weak void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+ {
+ 	typedef void __noreturn (*image_entry_noargs_t)(void);
+diff --git a/include/spl_load.h b/include/spl_load.h
+new file mode 100644
+index 00000000000..406f8b577b2
+--- /dev/null
++++ b/include/spl_load.h
+@@ -0,0 +1,135 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) Sean Anderson <seanga2@gmail.com>
++ */
++#ifndef	_SPL_LOAD_H_
++#define	_SPL_LOAD_H_
++
++#include <image.h>
++#include <imx_container.h>
++#include <mapmem.h>
++#include <spl.h>
++
++static inline int _spl_load(struct spl_image_info *spl_image,
++			    const struct spl_boot_device *bootdev,
++			    struct spl_load_info *info, size_t size,
++			    size_t offset)
++{
++	struct legacy_img_hdr *header =
++		spl_get_load_buffer(-sizeof(*header), sizeof(*header));
++	ulong base_offset, image_offset, overhead;
++	int read, ret;
++
++	read = info->read(info, offset, ALIGN(sizeof(*header),
++					      spl_get_bl_len(info)), header);
++	if (read < sizeof(*header))
++		return -EIO;
++
++	if (image_get_magic(header) == FDT_MAGIC) {
++		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)) {
++			void *buf;
++
++			/*
++			 * In order to support verifying images in the FIT, we
++			 * need to load the whole FIT into memory. Try and
++			 * guess how much we need to load by using the total
++			 * size. This will fail for FITs with external data,
++			 * but there's not much we can do about that.
++			 */
++			if (!size)
++				size = round_up(fdt_totalsize(header), 4);
++			buf = map_sysmem(CONFIG_SYS_LOAD_ADDR, size);
++			read = info->read(info, offset,
++					  ALIGN(size, spl_get_bl_len(info)),
++					  buf);
++			if (read < size)
++				return -EIO;
++
++			return spl_parse_image_header(spl_image, bootdev, buf);
++		}
++
++		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT))
++			return spl_load_simple_fit(spl_image, info, offset,
++						   header);
++	}
++
++	if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
++	    valid_container_hdr((void *)header))
++		return spl_load_imx_container(spl_image, info, offset);
++
++	if (IS_ENABLED(CONFIG_SPL_LZMA) &&
++	    image_get_magic(header) == IH_MAGIC &&
++	    image_get_comp(header) == IH_COMP_LZMA) {
++		spl_image->flags |= SPL_COPY_PAYLOAD_ONLY;
++		ret = spl_parse_image_header(spl_image, bootdev, header);
++		if (ret)
++			return ret;
++
++		return spl_load_legacy_lzma(spl_image, info, offset);
++	}
++
++	ret = spl_parse_image_header(spl_image, bootdev, header);
++	if (ret)
++		return ret;
++
++	base_offset = spl_image->offset;
++	/* Only NOR sets this flag. */
++	if (IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) &&
++	    spl_image->flags & SPL_COPY_PAYLOAD_ONLY)
++		base_offset += sizeof(*header);
++	image_offset = ALIGN_DOWN(base_offset, spl_get_bl_len(info));
++	overhead = base_offset - image_offset;
++	size = ALIGN(spl_image->size + overhead, spl_get_bl_len(info));
++
++	read = info->read(info, offset + image_offset, size,
++			  map_sysmem(spl_image->load_addr - overhead, size));
++	return read < spl_image->size ? -EIO : 0;
++}
++
++/*
++ * Although spl_load results in size reduction for callers, this is generally
++ * not enough to counteract the bloat if there is only one caller. The core
++ * problem is that the compiler can't optimize across translation units. The
++ * general solution to this is CONFIG_LTO, but that is not available on all
++ * architectures. Perform a pseudo-LTO just for this function by declaring it
++ * inline if there is one caller, and extern otherwise.
++ */
++#define SPL_LOAD_USERS \
++	0
++
++#if SPL_LOAD_USERS > 1
++/**
++ * spl_load() - Parse a header and load the image
++ * @spl_image: Image data which will be filled in by this function
++ * @bootdev: The device to load from
++ * @info: Describes how to load additional information from @bootdev. At the
++ *        minimum, read() and bl_len must be populated.
++ * @size: The size of the image, in bytes, if it is known in advance. Some boot
++ *        devices (such as filesystems) know how big an image is before parsing
++ *        the header. If 0, then the size will be determined from the header.
++ * @offset: The offset from the start of @bootdev, in bytes. This should have
++ *          the offset @header was loaded from. It will be added to any offsets
++ *          passed to @info->read().
++ *
++ * This function determines the image type (FIT, legacy, i.MX, raw, etc), calls
++ * the appropriate parsing function, determines the load address, and the loads
++ * the image from storage. It is designed to replace ad-hoc image loading which
++ * may not support all image types (especially when config options are
++ * involved).
++ *
++ * Return: 0 on success, or a negative error on failure
++ */
++int spl_load(struct spl_image_info *spl_image,
++	     const struct spl_boot_device *bootdev, struct spl_load_info *info,
++	     size_t size, size_t offset);
++#else
++static inline int spl_load(struct spl_image_info *spl_image,
++			   const struct spl_boot_device *bootdev,
++			   struct spl_load_info *info, size_t size,
++			   size_t offset)
++{
++	return _spl_load(spl_image, bootdev, info, size, offset);
++}
++#endif
++
++#endif /* _SPL_LOAD_H_ */
 -- 
 2.37.1
 
