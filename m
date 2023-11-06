@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F4DC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 12:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28294C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 12:18:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D7D786C33;
-	Mon,  6 Nov 2023 13:00:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8913A86BD7;
+	Mon,  6 Nov 2023 13:18:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="amfWF7Yf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bunPpdrq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D34C86F8F; Mon,  6 Nov 2023 13:00:26 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 35704868AE; Mon,  6 Nov 2023 13:18:53 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E2B48622B
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 13:00:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 920C786489
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 13:18:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-53b32dca0bfso8776567a12.0
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 04:00:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699272024; x=1699876824; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8+0RIXPxL7Rp6gRPd/VahNJjbO3PV+JFdmpM6YRTG/U=;
- b=amfWF7Yf4JFtnIFRBHou1m4omhQBKwqrzT1oX/RbWIU+mqw355zCkFzwZsW2f2zDwf
- RWYqE7lqislJJhCABw/SCM+LF//wLm5bdcRcrbwdlcW5uW/NUwII34jZgW/7usYQW9N1
- W67+1qXE5Tb4OWEHsW7lAXzKvzCWRyYnfNAaDrlhpukbDb/Cvf6+gfDw5SKbQz/HHz1z
- hUdvyBtNmPNBd8WTZTZakBg+Bv7F1uc0kTVhmuTfgjXoLnUwXx0RStT9Ll7Hl7Suaskn
- 58H0R1oXNQx/hRK5RD+kuQaAgMsamPuIqDJmZoO4jO+0r0t3qGCWlRU+EJ1Q7SkZYRSc
- csrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699272024; x=1699876824;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8+0RIXPxL7Rp6gRPd/VahNJjbO3PV+JFdmpM6YRTG/U=;
- b=efaKepJgaybU98kk1LaogKv4HwySSPSqSYiVHwK2q6qOWt/Hq2WKShu/hvdHVYiwb+
- W+3b65QIJnG6s07nkQnWatEF91tb7g9zo0clME+DhoWzY57+/bDZuZ6o+JLqWaI/cIbL
- M9VGQ+kTA6gHbduw27IXpcjoOUKPXEt0uZReAugG+4dwraivizI9e5T2uL1pzWbswdxS
- HzlYhecp2D9NohltNYKWQJv/whKDn6GFteBFxR4bfA8+FtycewO4RYAzSSnKTaVzS3pK
- Q4L7m6yzdtBseQTQIqgJ6Ayci1pRCjnaereDZnpJNzhH8vJFNd2EnRWFFt8jwD+Puntj
- 05RQ==
-X-Gm-Message-State: AOJu0YxoJgQwnAUvT9JtGektHXJlLmKu0wIaCxpubsrMUXi6gCyoiSRO
- +hBEaAy0LhzGMM8kUNXnS0t8uhebL27sYAqvlgU=
-X-Google-Smtp-Source: AGHT+IGFkWcu/zcoC8ItQzUIgVgqLUTNKtL2njHQUQNHT1TEkIJ16+OSxROp9eWfpng6Ig6Uzhe9Ji6GuSC3w5Qorss=
-X-Received: by 2002:aa7:c75a:0:b0:533:5d3d:7efe with SMTP id
- c26-20020aa7c75a000000b005335d3d7efemr9244622eds.6.1699272023672; Mon, 06 Nov
- 2023 04:00:23 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A6CIY4K070255;
+ Mon, 6 Nov 2023 06:18:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699273115;
+ bh=GyzUn3eyUWlLcF446E4r6RRESWzIwn7WIl3epvSyIpU=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=bunPpdrq0kfPuD6o25UtFGSamyHspw8+wzs1urOgeCK/us90TKO00BlJY8IOWy8rV
+ g0FMtZ/cCKCvjg9KNadvAaYasvNQDX7qAKZmtt2s+vsvEXpaUMhpAxv+BIrq75WESi
+ siZllmgZAcg6F0xIuTs94XMSH4i3N7Ds9C6SyL2o=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A6CIY1B128470
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 6 Nov 2023 06:18:34 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Nov 2023 06:18:34 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 6 Nov 2023 06:18:34 -0600
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A6CIYEh083768;
+ Mon, 6 Nov 2023 06:18:34 -0600
+Date: Mon, 6 Nov 2023 06:18:34 -0600
+From: Nishanth Menon <nm@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sinthu Raja <sinthu.raja@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Reid Tonking <reidt@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>, Robert Nelson
+ <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 01/15] arm: mach-k3: j721e: Improve support for UDA FS
+Message-ID: <20231106121834.khfhuzcav2fvmy23@overuse>
+References: <20231103003805.2420005-1-nm@ti.com>
+ <20231103003805.2420005-2-nm@ti.com>
+ <0b3ecb9a-7099-4296-88af-dd204ffa600f@ti.com>
 MIME-Version: 1.0
-References: <20231106090046.258589-1-clamor95@gmail.com>
-In-Reply-To: <20231106090046.258589-1-clamor95@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 6 Nov 2023 12:00:12 +0000
-Message-ID: <CALeDE9MbigiaW-c_4PABBp+=BJ7=WHmz6p25k-JL6Aq6mYJJDg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] Implement GPIO cells for PALMAS and MAX77663 PMICs
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <0b3ecb9a-7099-4296-88af-dd204ffa600f@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +84,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 6, 2023 at 10:18=E2=80=AFAM Svyatoslav Ryhel <clamor95@gmail.co=
-m> wrote:
->
-> This patchset adds support for gpio-uclass to work with pmic gpio childre=
-ns
-> properly and implements MAX77663 and PALMAS GPIO cells/children as a
-> reference and to be further used in devices I am currently maintaining.
->
-> All drivers are tested on actual hardware and confirmed to work as
-> expected. MAX77663 GPIO cell is tested on wexler qc750 tegra 3 device
+On 15:54-20231104, Kumar, Udit wrote:
+> 
+> On 11/3/2023 6:07 AM, Nishanth Menon wrote:
+> > Commit 5019170970ad ("arch: arm: mach-k3: j721e: add support for UDA
+> > FS") introduced basic UDA FS support, however, we can Take approach
+> > similar to commit 0f1c1e8b368b ("arm: mach-k3: am625: Add support for
+> > UDA FS"). While boot partition support with EMMC boot is useful, it is
+> > constrained by the size of boot hardware partition itself.
+> > 
+> > In the case of K3 devices, tispl images can contain OP-TEE images that
+> > can substantially vary in size and the u-boot image itself can vary over
+> > time as we enable various features.
+> > 
+> > So use the CSD information in the case of EMMC_BOOT configuration being
+> > enabled to pick boot partition or UDA FS mode operation to pick.
+> > 
+> > If EMMC_BOOT is disabled, then depend on filesystem configuration to
+> > pick data from UDA.
+> 
+> I am thinking, in which case we have EMMC_BOOT disabled,
+> 
+> Case here I am considering, updating u-boot to eMMC from u-boot shell, If
+> EMMC_BOOT
+> 
+> is not set then , we can not set CSD information
 
-Is the MAX77663 seems more related to the MAX77686 PMIC, why is it
-being done as s a GPIO and not a PMIC driver or the existing driver
-extended to support this chip?
 
-> and PALMAS GPIO cell is tested on tegra note 7 tegra 4 device.
->
-> ---
-> Changes from v1:
->  - isolate PMIC GPIO cells parsing behind enabling DM_PMIC
-> ---
->
-> Svyatoslav Ryhel (3):
->   drivers: gpio-uclass: support PMIC GPIO children
->   drivers: gpio: implement MAX77663 GPIO cell
->   drivers: gpio: implement PALMAS GPIO cell
->
->  drivers/gpio/Kconfig                |  16 +++
->  drivers/gpio/Makefile               |   2 +
->  drivers/gpio/gpio-uclass.c          |  19 +++
->  drivers/gpio/max77663_gpio.c        | 178 ++++++++++++++++++++++++++++
->  drivers/gpio/palmas_gpio.c          | 132 +++++++++++++++++++++
->  drivers/power/pmic/max77663.c       |   9 ++
->  drivers/power/pmic/palmas.c         |  10 +-
->  include/dt-bindings/pmic/max77663.h |  18 +++
->  include/power/max77663.h            |   1 +
->  include/power/palmas.h              |  12 ++
->  10 files changed, 396 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/gpio/max77663_gpio.c
->  create mode 100644 drivers/gpio/palmas_gpio.c
->  create mode 100644 include/dt-bindings/pmic/max77663.h
->
-> --
-> 2.40.1
->
+Yes, but we cannot use boot0 mode of operation for Beagle family. the
+size of u-boot and optee vary over time and SK's boot0 partition
+strategy does'nt work for Beagle platforms.
+
+> 
+> > 
+> > Signed-off-by: Nishanth Menon <nm@ti.com>
+> > ---
+> >   arch/arm/mach-k3/j721e_init.c | 9 ++++++++-
+> >   1 file changed, 8 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
+> > index b1f7e25ed092..bcdfbfc79c4a 100644
+> > --- a/arch/arm/mach-k3/j721e_init.c
+> > +++ b/arch/arm/mach-k3/j721e_init.c
+> > @@ -294,7 +294,14 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> >   {
+> >   	switch (boot_device) {
+> >   	case BOOT_DEVICE_MMC1:
+> > -		return (spl_mmc_emmc_boot_partition(mmc) ? MMCSD_MODE_EMMCBOOT : MMCSD_MODE_FS);
+> > +		if (IS_ENABLED(CONFIG_SUPPORT_EMMC_BOOT)) {
+> > +			if (spl_mmc_emmc_boot_partition(mmc))
+> > +				return MMCSD_MODE_EMMCBOOT;
+> > +			return MMCSD_MODE_FS;
+> > +		}
+> 
+> I had a view EMMC_BOOT should be needed config.
+> 
+> 
+> > +		if (IS_ENABLED(CONFIG_SPL_FS_FAT) || IS_ENABLED(CONFIG_SPL_FS_EXT4))
+> > +			return MMCSD_MODE_FS;
+> > +		return MMCSD_MODE_EMMCBOOT;
+> 
+> If you consider, to make EMMC_BOOT as needed config, then this is not needed
+
+EMMC_BOOT is not a mandatory config.
+> 
+> 
+> >   	case BOOT_DEVICE_MMC2:
+> >   		return MMCSD_MODE_FS;
+> >   	default:
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
