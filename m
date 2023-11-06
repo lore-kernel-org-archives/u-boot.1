@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE68C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 19:43:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA9CAC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 19:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B98F286F87;
-	Mon,  6 Nov 2023 20:43:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BAC28701D;
+	Mon,  6 Nov 2023 20:48:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LYJOsPd6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qMOWlcHU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF1E986F5D; Mon,  6 Nov 2023 20:43:06 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 12F80868AE; Mon,  6 Nov 2023 20:48:31 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 969BE8644E
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 20:43:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B06987016
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 20:48:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-543c3756521so8113324a12.2
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 11:43:04 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-778a20df8c3so339976485a.3
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 11:48:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699299784; x=1699904584; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UNme11VbryGiyyjBpK0Y7ZnQwBuSW0l+OEZSGBrJDr4=;
- b=LYJOsPd6s+oxax20VUBdViHPZF1HJ2x3GNRmyE6X9HozdyyIn+lHHvzJpkYGIu3yCR
- VQVfD583L3tvIbgsnNriQY3BuP6zRxVODgww2rQv0T54TY041CLNv3g5wx3G2/+MxJ1q
- XA7xmvX1ICpK1q4G7IGz3uMOzm3TQDknSKKlshVwDpzLsWRmP4tLLS7Deiu5q+P/kHhF
- vU9kVXFHCAI8zAmOpLOOOLku2wuFal9ROtEh7Ixx5eUv7j/dPpcGumX/LTwZg6KOaSpe
- Q9igvJeGBjIoEfh61e0lEkLE/0O4kfeUE3ztkU6rqCgJAiHiy3JysyEs2Kd4qdeZ4JWt
- z3ow==
+ d=konsulko.com; s=google; t=1699300106; x=1699904906; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zD71h07pTBtuzstukgXZx1qoaDDqr81UNLAY9es3n8A=;
+ b=qMOWlcHUZv9StXBhM5B+OWYn8fACWiR4k1N30vqpQyPZt0ze35G9FQ+zqCZzJGSARQ
+ e321zBdY9pe35w6nJIvuMVnRo84mJaJB5CHxxQVy8NWV+cOLPaHKHzeWFAd9vq7z4h6V
+ DEqy0ZnQ2nNUhBLSJiJTAC9RjDfS/Z703Mqdc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699299784; x=1699904584;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UNme11VbryGiyyjBpK0Y7ZnQwBuSW0l+OEZSGBrJDr4=;
- b=VNkrcfoRhGbUafM039inLJeRgsCMQGd0efr3BuWFXmB8w96APBq/ig0BBDFKQRfhRR
- 5NqcVT1u/hs0HGWPAruMHA80cS1J/9CpTqXpouRQ+ocu52o500FFCHBzYxFcnQnk1WCh
- lCGMHxiDVy9nOXo8KN3wmfH3tOHU2lh13uVW3luwDw4jj2z0E7nbPwacsbzoSHjvdf9h
- x8/eMZof6JD7LaiTZsE+TPdpw/vYrP5U3Xd89BvxZLQyy7J1fcEaGfnbHWn9EfKoa28k
- yfUt3cIP8E024PQb1yQ3crMpivKs9NZ+x3FIcsSolMGDRbpn/NjmvCXEiYzVlDN3s3P8
- np3w==
-X-Gm-Message-State: AOJu0YxqM1utBzsh+Puo1kXzJq6744iSE8HS3Srn8EvwO5szCFbc71vS
- betETRAMTB5zuu7AbK1l69Qr+955DIfpWaGFs5o=
-X-Google-Smtp-Source: AGHT+IFV4Ik3goU80hNsuos2ix1HBrjxJk/PgLfILuCWvG84idBsKQEQ7+pBRj7wFuG48zSOgV7cAkv0B8rRVeAvG0Q=
-X-Received: by 2002:a05:6402:229a:b0:541:875:53d8 with SMTP id
- cw26-20020a056402229a00b00541087553d8mr21911867edb.23.1699299783822; Mon, 06
- Nov 2023 11:43:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699300106; x=1699904906;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zD71h07pTBtuzstukgXZx1qoaDDqr81UNLAY9es3n8A=;
+ b=Rer3LOWrj/t8al/qK2GxTYoRY1AlWJXLZHGPwayABg0JyR2t2HysJuX62lcj7fiact
+ Q4cbST0Z0t+Kw39Gz5ocrM6UyzBgq+H6ORhwO4dyllNjoiMG8ykOVItRDvZNT83qNovQ
+ CIwBwu2YKQQHwuFzsjIU0x0m+W+C6drdPx/guOMtubpqyQpuEWsXz7kT23ueYFQPVoop
+ EWvDfWBYh9kdHOTmaOetzS/bmAG8rWTDWF0oIv3BMR4o0o6eF6yNv2TfBg92aDxxBBCc
+ hqi3fRSHY2bHDNuLfdhF/4Yvvo2T3/5nUCM/K+XH6TS1+pOzm0NzBbxBnZSxyOjBhuvr
+ LDMQ==
+X-Gm-Message-State: AOJu0YyMu6vGqwAF+McOl4gGWS9IapadNcCzdOyfuVQAoIVrPgVPdw7b
+ k0eAgfFDJSP1dggf6q9Z28vecz/ozi0ULbsFYM7/yw==
+X-Google-Smtp-Source: AGHT+IFaYx2CrJpeWtTjfp9wRHx/yc/jye4lTFMNaRJvIR5MoJhBS8fKS2ZUHhmzW4GK0JcmMHssjg==
+X-Received: by 2002:a05:620a:172b:b0:777:74b9:219f with SMTP id
+ az43-20020a05620a172b00b0077774b9219fmr37893347qkb.8.1699300105825; 
+ Mon, 06 Nov 2023 11:48:25 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ n7-20020a05620a294700b007678973eaa1sm3572766qkp.127.2023.11.06.11.48.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Nov 2023 11:48:25 -0800 (PST)
+Date: Mon, 6 Nov 2023 14:48:23 -0500
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.01-rc2 released
+Message-ID: <20231106194823.GC496310@bill-the-cat>
 MIME-Version: 1.0
-References: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
- <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
- <CAJaLiFwx0j6Knthtgdy-wGDxaHYDuYEUws2LAkt05stc3f3ZBw@mail.gmail.com>
- <CAPnjgZ1FAEDs-f01Q-RCAV=sMWq40cD5UDo9O6SbqTRazS9gQA@mail.gmail.com>
- <CAJaLiFzsJP5u5ziHW7U5_0uqeGdr4uxHRG7kso2K-jahqLKBsg@mail.gmail.com>
- <CAJaLiFyqr88c8L1Lg+99XnP4geebwqrdKhSV4_h9uf1Mjr94Qw@mail.gmail.com>
- <CAPnjgZ1vxy+hYpHaCGC=g2sFOK_xPCP4N_QFvxdO4xVb-SP+FA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1vxy+hYpHaCGC=g2sFOK_xPCP4N_QFvxdO4xVb-SP+FA@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 6 Nov 2023 11:42:51 -0800
-Message-ID: <CAJaLiFzLFOH08CGRt5QY4-keSuO=947_gF1meyRiMWz5H0gcyg@mail.gmail.com>
-Subject: Re: bootstd: Scanning for USB bootflow will remove existing SCSI
- bootflow
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9EmGG8bgd94M8nog"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,81 +86,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Mon, Nov 6, 2023 at 9:25=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Hi Tony,
->
-> On Wed, 4 Oct 2023 at 21:23, Tony Dinh <mibodhi@gmail.com> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Mon, Oct 2, 2023 at 12:25=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> w=
-rote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Sun, Oct 1, 2023 at 6:22=E2=80=AFPM Simon Glass <sjg@chromium.org>=
- wrote:
-> > > >
-> > > > Hi Tony,
-> > > >
-> > > > On Tue, 26 Sept 2023 at 13:40, Tony Dinh <mibodhi@gmail.com> wrote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Tue, Sep 26, 2023 at 4:37=E2=80=AFAM Simon Glass <sjg@chromium=
-.org> wrote:
-> > > > > >
-> > > > > > Hi Tony,
-> > > > > >
-> > > > > > On Mon, 25 Sept 2023 at 14:02, Tony Dinh <mibodhi@gmail.com> wr=
-ote:
-> > > > > > >
-> > > > > > > Hi Simon,
-> > > > > > >
-> > > > > > > Here is an observation during testing the bootflow command.
-> > > > > > >
-> > > > > > > If there is a SCSI bootflow, scanning for USB bootflow will r=
-emove that existing
-> > > > > > > SCSI bootflow. To bring it back, I scanned for SCSI bootflow =
-again, and it was
-> > > > > > > back to normal. Perhaps there is some kind of indexing proble=
-m?
-> > > > > >
-> > > > > > Yes that's right. The 'botflow scan' command is not additive. T=
-he
-> > > > > > first thing it does is removing existing bootflows.
-> > > > >
-> > > > > Thanks for clarifying that. I assumed it is additive, because the
-> > > > > existing USB bootflow was not removed when I did a "bootflow scan
-> > > > > scsi" immediately after (see the end of the log).
-> > > >
-> > > > Yes, but I'm not sure what is going on there. Perhaps it is a bug?
-> > > > When you scan SCSI it should not also scan USB.
-> > >
-> > > Yes, it looks like a bug. I think I can see the problem and am workin=
-g
-> > > on a patch.
-> >
-> > Just to let you know, I'm out of time to work on this topic. I will
-> > revisit it some other time, if you have not already tracked it down.
->
-> If you are able to use 'bootflow scan -l' in each case, then I might
-> be able to see what it is scanning USB, when you are asking for SCSI.
-> I also wonder if this bug may have been fixed due to other changes?
+--9EmGG8bgd94M8nog
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'm wondering about that, too. I will rerun the test with the master
-branch with debug trace. If we cannot see it, I'll do it again when
-other bootstd patches are merged. Right now I am not sure which of
-your bootstd patches I should apply to the tree for testing, do you
-have a list for that?
+Hey all,
 
-All the best,
-Tony
+It's release day and here is -rc2. Looking at my own queue I think I've
+got everything out that's not for -next, but there might be a few fixes
+I've overlooked and will give things a harder read once I've merged
+other things in to -next and the page is just more readable to me.
 
->
-> Regards,
-> Simon
+Speaking of, the next branch is now open and set to -rc2.
+
+In terms of a changelog,=20
+git log --merges v2024.01-rc1..v2024.01-rc2
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
+
+I hope to remain on schedule and that means the rest of the rcs every
+other Monday, and with final release on January 8th, 2024.  Thanks all!
+
+--=20
+Tom
+
+--9EmGG8bgd94M8nog
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJQwcACgkQFHw5/5Y0
+tywNgQv/fgLfptOwmgcfX4mleDWOEjujrP3mB3lp4QP1d17Sck0A0t6YdBlxwB4/
+3AmHrQUq9aBcNHyDmGJEOMRWy6ZVvldJuLK9rM5WYF7plpm0WFsJ1LfqelGYuPAA
+TDGqyHJbHjpKiTdentdhYlyoXRSkMjxxqTdzYGo3Qg5tlAhMgWfsUQ02KqXCZ+No
+iAV8nkJlJ6TDe79z34NuSP4qGV73Y3dIEk206g3J6xmfErvP1CURcrTMkzkLM4OF
++m+AOtT58JbsXM6ytRljilS9L7wzBR57WBa2QeP/PJxke6cCqqhiD9/YeqIaGRLA
+pzDuzIpRbg/07HHnR/fnIiXJZ/OfX/7DhDHnkvCSNAfHVDVh9rsB8tbedx6X+xwR
++jsjkAX3uZ+hUrCwMWF+zlj8PSid0h30FjA74aTA7l4oJ5muu7R/ZHDihddcq084
+2YcAS7XqGV7wK5AwWTDNnQa5ZMDu35jTGfop6Se0NQ/pNAkzunDWlTnpXnIiKv66
+zqQTruJw
+=M7t6
+-----END PGP SIGNATURE-----
+
+--9EmGG8bgd94M8nog--
