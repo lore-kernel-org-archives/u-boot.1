@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E21C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DA9C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADE6C8711B;
-	Mon,  6 Nov 2023 03:37:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B5D4085E44;
+	Mon,  6 Nov 2023 03:36:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JQvV00r/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M5jocLhc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1239E86FA5; Mon,  6 Nov 2023 03:28:40 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id A8B948272A; Mon,  6 Nov 2023 03:28:26 +0100 (CET)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EFD187005
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D65FC86FFC
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-41cb76f3cf0so25893471cf.2
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:26 -0800 (PST)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-778999c5ecfso261915185a.2
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699237585; x=1699842385; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699237581; x=1699842381; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jPV4Kn1XuXE4HLTvSmNG4v5+OfJcnqNbnSzhctivj1w=;
- b=JQvV00r/zMCMVCXqy/fQfWyxMH8iP8nrXHOVVeD7Efh2d4mNr3ldotgworYGt67nou
- dzPO7yporbMkSpcNFA6GzZIJmGoCeyuIovE+fns2yD/lp47vJu+aiG6Oc31/d5vPsdKl
- +G3VWuHWYdPljzSqLwdLvcDhbcRHnbqK66mJ8QcDx2h+ky2UjnOjFCJkRAF2z2+wXQ7U
- B+y1T1WiK0PdCZOGX2MSM3dvD3JFOYmVWT1EEtxJIKlR04bYPiE4tVfY7cEIyUr++XMU
- eDi6fnrgqI6o4keummqPaynsf7VPs8bDVBcymmLD+J7m1iK2nUCPSaLD2cVbiNtIKjA/
- sFbg==
+ bh=YgoTLomyz6kcwGQtWf1qo+Eq3qdeYtjp2raVIG/BORo=;
+ b=M5jocLhcvVuXi2BzxZCtMNzD491s40svUZEDDAdq4m4/PaJk9uYL6UrFNWCwUoPF+b
+ HFDYo5n32S84YF1FOazFvP17SNzCeLs9Dd2OIa/i5psZDtLDQHOOUFyw2MOsKfSxE3eG
+ ZfweI9UWLhUXgqsH/5Wsx/+dEasA2KfpygXJtr8taS1cU1qdG6UZRk/3GZHl2OPT4JEw
+ BwKflQ4U21KYdqmeVJNR+V36qyWa+E+6zWg4mPLEohUUxNjDZHi716ZakoqHL8P0md+u
+ hOC0y6eDXNMQwZLyVPLy3Hik49zeEWN5BXCg3iEtf//wvWAXyPMc1ncruaWtE2vuCUSl
+ Xe0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699237585; x=1699842385;
+ d=1e100.net; s=20230601; t=1699237581; x=1699842381;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jPV4Kn1XuXE4HLTvSmNG4v5+OfJcnqNbnSzhctivj1w=;
- b=ROK6gfKEtxfSRfJQlElX4pEdDTF8bWxfWYpbvRdQUWfK0zEJYCqnVB9Gh13hwdvTPK
- 8X31FzbsRHDM9r+tRhsI55s8c2l9CGaP1d6K+f2EYf7M2ZC1pHqpASGbvoATZHOEd7Yl
- NYd1K5fqeWJ0sSAcEWcWskvzNSppXcBJrrYa401kvTXuafxKSzEUGMbw/9qxELRoffLq
- 97SXuzgg6WyQ4BKHVMt7pDXv93XMw0gAmEOmKxR30707rbZEJz1zdSNJf4lXOpArk/XA
- nS5c/ZUybPmLSLoQCTlUP40M67VmBvkerLS102YEVe1NYktOHra+bba+xwVs5TzPHL/i
- /xfQ==
-X-Gm-Message-State: AOJu0YxDQ+ZYBdj+fJuy+xGUn+Z8uI8SsC+WiifxgN7ilM+xgii7cwAW
- /fdlIirgA9OCgkZ83f+UNeeZ+Bm6Efbp9w==
-X-Google-Smtp-Source: AGHT+IEVt5wgCRB+SX8nHkwop1VNKbz4PEBq/APo1kVaeIykxD5HjqhXR7cUE5n110FG3bXMkECAsQ==
-X-Received: by 2002:ac8:7d0d:0:b0:41c:d8b6:27ef with SMTP id
- g13-20020ac87d0d000000b0041cd8b627efmr32481315qtb.65.1699237584975; 
- Sun, 05 Nov 2023 18:26:24 -0800 (PST)
+ bh=YgoTLomyz6kcwGQtWf1qo+Eq3qdeYtjp2raVIG/BORo=;
+ b=gjlAhDSAbNPAHwe6vykHr2X30Fd6VqRolFi9Svs0B5a0YFQzuVQt6XX8YpEud5+quY
+ ShfIg8GEAKZ+y53lhqst/6jnWwso7EEEwjixFHZ67Umby3jRNQYQJtUN7M4JuJQgWy9i
+ FtCyQGXWodnv/f8/ooSC8zScQeeXkJvkqHJZYUyYR6N9Z6+JRdHcBJZ6e4tVViwDxUR6
+ tdVBizDvzJyZ3k3creIbrmhiaRHr2rb2mn+C4wkwtUvQrzASGY6DFgHPUn+U4x4Q5nJB
+ LeWLd/PEYReZu/NGdTTfrBMhiBh+ByK7siHXAVmTLS2Tut3E/qMMLylpzeFBEeLoMUif
+ mBCQ==
+X-Gm-Message-State: AOJu0YxHPGTQ3/9J0i2smQc2+TDQmQV3vaO1alUXqreniXHeprV3ITxR
+ 1BnrHvczC1rt3JlWscW/Ynk=
+X-Google-Smtp-Source: AGHT+IFuQ5QYT0POTc8XzKg4esGCl0ppgB0DeGUDO6HkhD62fPssalDDYNUNIjXCTsTjAGvBTC63Gg==
+X-Received: by 2002:a05:620a:4094:b0:77a:739b:322e with SMTP id
+ f20-20020a05620a409400b0077a739b322emr7898414qko.57.1699237581587; 
+ Sun, 05 Nov 2023 18:26:21 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- t25-20020ac87619000000b004199f47ccdbsm2997736qtq.51.2023.11.05.18.26.24
+ p25-20020a05620a22f900b007671cfe8a18sm2931832qki.13.2023.11.05.18.26.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Nov 2023 18:26:24 -0800 (PST)
+ Sun, 05 Nov 2023 18:26:21 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
@@ -72,9 +72,10 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
  Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
  Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v6 16/25] spl: Convert fat to spl_load
-Date: Sun,  5 Nov 2023 21:25:54 -0500
-Message-Id: <20231106022603.3405551-17-seanga2@gmail.com>
+Subject: [PATCH v6 13/25] test: spl: Support testing LEGACY_LZMA filesystem
+ images
+Date: Sun,  5 Nov 2023 21:25:51 -0500
+Message-Id: <20231106022603.3405551-14-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
 References: <20231106022603.3405551-1-seanga2@gmail.com>
@@ -96,141 +97,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This converts the fat loader to use spl_load. Some platforms are very
-tight on space, so we take care to only include the code we really need.
+These will soon be supported, so we need to be able to test it. Export the
+lzma data and generally use the same process in spl_test_mmc_fs as
+do_spl_test_load.  If we end up needing this in third place in the future,
+it would probably be good to refactor things out.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
-(no changes since v5)
+Changes in v6:
+- New
 
-Changes in v5:
-- Rework to load header in spl_load
+ include/test/spl.h       |  4 ++++
+ test/image/spl_load.c    |  4 +++-
+ test/image/spl_load_fs.c | 23 ++++++++++++++++++-----
+ 3 files changed, 25 insertions(+), 6 deletions(-)
 
-Changes in v3:
-- Fix failing on success
-
- common/spl/spl_fat.c     | 56 +++++++++++++---------------------------
- include/spl_load.h       |  1 +
- test/image/spl_load_fs.c |  3 +--
- 3 files changed, 20 insertions(+), 40 deletions(-)
-
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index a0c34eba48f..569f2b32928 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -11,8 +11,8 @@
- #include <common.h>
- #include <env.h>
- #include <log.h>
--#include <mapmem.h>
- #include <spl.h>
-+#include <spl_load.h>
- #include <asm/u-boot.h>
- #include <fat.h>
- #include <errno.h>
-@@ -66,58 +66,38 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
- 		       const char *filename)
- {
- 	int err;
--	struct legacy_img_hdr *header;
-+	loff_t size;
-+	struct spl_load_info load;
+diff --git a/include/test/spl.h b/include/test/spl.h
+index c1f64658502..a2a5f33e328 100644
+--- a/include/test/spl.h
++++ b/include/test/spl.h
+@@ -81,6 +81,10 @@ size_t create_image(void *dst, enum spl_test_image type,
+ int check_image_info(struct unit_test_state *uts, struct spl_image_info *info1,
+ 		     struct spl_image_info *info2);
  
- 	err = spl_register_fat_device(block_dev, partition);
- 	if (err)
- 		goto end;
- 
--	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
--
--	err = file_fat_read(filename, header, sizeof(struct legacy_img_hdr));
--	if (err <= 0)
--		goto end;
--
--	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL) &&
--	    image_get_magic(header) == FDT_MAGIC) {
--		err = file_fat_read(filename,
--				    map_sysmem(CONFIG_SYS_LOAD_ADDR, 0), 0);
--		if (err <= 0)
--			goto end;
--		err = spl_parse_image_header(spl_image, bootdev,
--					     map_sysmem(CONFIG_SYS_LOAD_ADDR,
--							err));
--		if (err == -EAGAIN)
--			return err;
--		if (err == 0)
--			err = 1;
--	} else if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
--	    image_get_magic(header) == FDT_MAGIC) {
--		struct spl_load_info load;
--
--		debug("Found FIT\n");
--		load.read = spl_fit_read;
--		spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
--		load.priv = (void *)filename;
--
--		return spl_load_simple_fit(spl_image, &load, 0, header);
--	} else {
--		err = spl_parse_image_header(spl_image, bootdev, header);
-+	/*
-+	 * Avoid pulling in this function for other image types since we are
-+	 * very short on space on some boards.
-+	 */
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)) {
-+		err = fat_size(filename, &size);
- 		if (err)
- 			goto end;
--
--		err = file_fat_read(filename, map_sysmem(spl_image->load_addr,
--							 spl_image->size), 0);
-+	} else {
-+		size = 0;
- 	}
- 
-+	load.read = spl_fit_read;
-+	spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
-+	load.priv = (void *)filename;
-+	err = spl_load(spl_image, bootdev, &load, size, 0);
++/* Some compressed data and it size */
++extern const char lzma_compressed[];
++extern const size_t lzma_compressed_size;
 +
- end:
- #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
--	if (err <= 0)
-+	if (err < 0)
- 		printf("%s: error reading image %s, err - %d\n",
- 		       __func__, filename, err);
- #endif
- 
--	return (err <= 0);
-+	return err;
- }
- 
- #if CONFIG_IS_ENABLED(OS_BOOT)
-diff --git a/include/spl_load.h b/include/spl_load.h
-index 65aa6bb4493..5e0460d956d 100644
---- a/include/spl_load.h
-+++ b/include/spl_load.h
-@@ -96,6 +96,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ /**
+  * typedef write_image_t - Callback for writing an image
+  * @uts: Current unit test state
+diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+index 35ceed67756..e1036eff28c 100644
+--- a/test/image/spl_load.c
++++ b/test/image/spl_load.c
+@@ -374,7 +374,7 @@ SPL_IMG_TEST(spl_test_image, FIT_EXTERNAL, 0);
+  * LZMA is too complex to generate on the fly, so let's use some data I put in
+  * the oven^H^H^H^H compressed earlier
   */
- #define SPL_LOAD_USERS \
- 	IS_ENABLED(CONFIG_SPL_FS_EXT4) + \
-+	IS_ENABLED(CONFIG_SPL_FS_FAT) + \
- 	0
+-static const char lzma_compressed[] = {
++const char lzma_compressed[] = {
+ 	0x5d, 0x00, 0x00, 0x80, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+ 	0xff, 0x00, 0x02, 0x05, 0x55, 0x4e, 0x82, 0xbc, 0xc2, 0x42, 0xf6, 0x88,
+ 	0x6c, 0x99, 0xd6, 0x82, 0x48, 0xa6, 0x06, 0x67, 0xf8, 0x46, 0x7c, 0xe9,
+@@ -610,6 +610,8 @@ static const char lzma_compressed[] = {
+ 	0x1e, 0xff, 0xff, 0x80, 0x8e, 0x00, 0x00
+ };
  
- #if SPL_LOAD_USERS > 1
++const size_t lzma_compressed_size = sizeof(lzma_compressed);
++
+ int do_spl_test_load(struct unit_test_state *uts, const char *test_name,
+ 		     enum spl_test_image type, struct spl_image_loader *loader,
+ 		     int (*write_image)(struct unit_test_state *, void *, size_t))
 diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
-index 01559e98c4f..333df2dfb53 100644
+index 297ab08a820..59d0244d44b 100644
 --- a/test/image/spl_load_fs.c
 +++ b/test/image/spl_load_fs.c
-@@ -425,8 +425,7 @@ static int spl_test_mmc(struct unit_test_state *uts, const char *test_name,
- 	if (spl_test_mmc_fs(uts, test_name, type, create_ext2, false))
- 		return CMD_RET_FAILURE;
+@@ -320,10 +320,11 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
+ 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+ 	struct blk_desc *dev_desc;
+ 	size_t fs_size, fs_data, img_size, img_data,
+-	       data_size = SPL_TEST_DATA_SIZE;
++	       plain_size = SPL_TEST_DATA_SIZE;
+ 	struct spl_image_info info_write = {
+ 		.name = test_name,
+-		.size = data_size,
++		.size = type == LEGACY_LZMA ? lzma_compressed_size :
++					      plain_size,
+ 	}, info_read = { };
+ 	struct disk_partition part = {
+ 		.start = 1,
+@@ -335,7 +336,7 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
+ 		.boot_device = loader->boot_device,
+ 	};
+ 	void *fs;
+-	char *data;
++	char *data, *plain;
  
--	if (type != IMX8 && type != LEGACY_LZMA &&
--	    spl_test_mmc_fs(uts, test_name, type, create_fat, false))
-+	if (spl_test_mmc_fs(uts, test_name, type, create_fat, false))
- 		return CMD_RET_FAILURE;
+ 	img_size = create_image(NULL, type, &info_write, &img_data);
+ 	ut_assert(img_size);
+@@ -345,7 +346,15 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
+ 	ut_assertnonnull(fs);
  
- 	if (type == LEGACY_LZMA)
+ 	data = fs + fs_data + img_data;
+-	generate_data(data, data_size, test_name);
++	if (type == LEGACY_LZMA) {
++		plain = malloc(plain_size);
++		ut_assertnonnull(plain);
++		generate_data(plain, plain_size, "lzma");
++		memcpy(data, lzma_compressed, lzma_compressed_size);
++	} else {
++		plain = data;
++		generate_data(plain, plain_size, test_name);
++	}
+ 	ut_asserteq(img_size, create_image(fs + fs_data, type, &info_write,
+ 					   NULL));
+ 	ut_asserteq(fs_size, create_fs(fs, img_size, filename, NULL));
+@@ -366,8 +375,12 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
+ 		ut_assertok(loader->load_image(&info_read, &bootdev));
+ 	if (check_image_info(uts, &info_write, &info_read))
+ 		return CMD_RET_FAILURE;
+-	ut_asserteq_mem(data, phys_to_virt(info_write.load_addr), data_size);
++	if (type == LEGACY_LZMA)
++		ut_asserteq(plain_size, info_read.size);
++	ut_asserteq_mem(plain, phys_to_virt(info_write.load_addr), plain_size);
+ 
++	if (type == LEGACY_LZMA)
++		free(plain);
+ 	free(fs);
+ 	return 0;
+ }
 -- 
 2.37.1
 
