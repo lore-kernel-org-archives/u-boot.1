@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7FFC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5F4DC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 12:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3764A863F7;
-	Mon,  6 Nov 2023 12:58:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D7D786C33;
+	Mon,  6 Nov 2023 13:00:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BT0y1WFM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="amfWF7Yf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF67186A6B; Mon,  6 Nov 2023 12:58:53 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 7D34C86F8F; Mon,  6 Nov 2023 13:00:26 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA77E8622B
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:58:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E2B48622B
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 13:00:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4083ac51d8aso33606735e9.2
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 03:58:51 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-53b32dca0bfso8776567a12.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 04:00:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699271931; x=1699876731; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699272024; x=1699876824; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6DCPL4M06Hz9PcdXwyTGLklHL0Rp6weSgTbwQRsEa1s=;
- b=BT0y1WFMJ+OPwFmWHa1UKRrsv/KNgAv4VM/kZmdHhsNi/MQO02fu7OsKJgApEPrRh/
- k2L4i5NJ7dql8sWwNWvi64Wvxz9HAE4nASA4alwIuwBDmY+Nb1KmCK1eFSiujpDzNZhs
- nuUPorMyda9pMpKMKuWlaI+A+FSIGh8+xOgYK15L8m0UuQ/4o99L9qBCD1LEZTqhT3T6
- sIt7lVW4R4jhtaVE9F4ecRnIQpIHH8qKvYkaXLKSkxd2uN767iazNho88cPrQQMfKbsx
- eyDsBkDvJ4xkaTPQrDg+d8+dLIFbX3fFcPm8u2xRiu0bvCNjzCeGC3geLGK5aRh4KKrs
- 3f7Q==
+ bh=8+0RIXPxL7Rp6gRPd/VahNJjbO3PV+JFdmpM6YRTG/U=;
+ b=amfWF7Yf4JFtnIFRBHou1m4omhQBKwqrzT1oX/RbWIU+mqw355zCkFzwZsW2f2zDwf
+ RWYqE7lqislJJhCABw/SCM+LF//wLm5bdcRcrbwdlcW5uW/NUwII34jZgW/7usYQW9N1
+ W67+1qXE5Tb4OWEHsW7lAXzKvzCWRyYnfNAaDrlhpukbDb/Cvf6+gfDw5SKbQz/HHz1z
+ hUdvyBtNmPNBd8WTZTZakBg+Bv7F1uc0kTVhmuTfgjXoLnUwXx0RStT9Ll7Hl7Suaskn
+ 58H0R1oXNQx/hRK5RD+kuQaAgMsamPuIqDJmZoO4jO+0r0t3qGCWlRU+EJ1Q7SkZYRSc
+ csrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699271931; x=1699876731;
+ d=1e100.net; s=20230601; t=1699272024; x=1699876824;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6DCPL4M06Hz9PcdXwyTGLklHL0Rp6weSgTbwQRsEa1s=;
- b=OKHlvnMI348+ZE2lxKIj04Yyx07UpqDyoKO3/jk+3cbntsrorzfVeGl0JUYit1vV+g
- K/gGlIzviWelibPpap08d+/TkVkaQn8EVxSNSP+b7zdH51QkgHsuIo1RxgZuKk2hNhGl
- r9RNSYKWVtED2nfyOa4++SM11ab2qRrMAX4OM1E2eeXWTGomftvm9mXoyfp+ANOpvW8q
- U0fiEqZ2DM8jYS4e0n6n+4SysvzX4vQcpDl1jNR7fOd7cPVubCiX0u93xpNlDJ1YQcWt
- q39ZxISaViQfBkqyLWZnD4HQqm7YEyduQMmwhtNF/AQ6qqHi8phGoDRubKvaUvSpbPIz
- Cbbg==
-X-Gm-Message-State: AOJu0Yx2108LLtODN7pL/GW59Tv8+GSMLXVWEpFGpD9cg4e1WJNdZgyQ
- 42Y+K8VD8KHXIea9d9D8xIU10OLlmzy4kUCxQd8=
-X-Google-Smtp-Source: AGHT+IHdQYJai7qK20v+1yqElAjcrS+/ILfl0K+q0LFKMjNM0E8c9kd4+SjK4D6fy/cUyfsIrnk4/aFI2mJw13eCcrI=
-X-Received: by 2002:a05:600c:548f:b0:408:4d0e:68b2 with SMTP id
- iv15-20020a05600c548f00b004084d0e68b2mr22830583wmb.36.1699271931028; Mon, 06
- Nov 2023 03:58:51 -0800 (PST)
+ bh=8+0RIXPxL7Rp6gRPd/VahNJjbO3PV+JFdmpM6YRTG/U=;
+ b=efaKepJgaybU98kk1LaogKv4HwySSPSqSYiVHwK2q6qOWt/Hq2WKShu/hvdHVYiwb+
+ W+3b65QIJnG6s07nkQnWatEF91tb7g9zo0clME+DhoWzY57+/bDZuZ6o+JLqWaI/cIbL
+ M9VGQ+kTA6gHbduw27IXpcjoOUKPXEt0uZReAugG+4dwraivizI9e5T2uL1pzWbswdxS
+ HzlYhecp2D9NohltNYKWQJv/whKDn6GFteBFxR4bfA8+FtycewO4RYAzSSnKTaVzS3pK
+ Q4L7m6yzdtBseQTQIqgJ6Ayci1pRCjnaereDZnpJNzhH8vJFNd2EnRWFFt8jwD+Puntj
+ 05RQ==
+X-Gm-Message-State: AOJu0YxoJgQwnAUvT9JtGektHXJlLmKu0wIaCxpubsrMUXi6gCyoiSRO
+ +hBEaAy0LhzGMM8kUNXnS0t8uhebL27sYAqvlgU=
+X-Google-Smtp-Source: AGHT+IGFkWcu/zcoC8ItQzUIgVgqLUTNKtL2njHQUQNHT1TEkIJ16+OSxROp9eWfpng6Ig6Uzhe9Ji6GuSC3w5Qorss=
+X-Received: by 2002:aa7:c75a:0:b0:533:5d3d:7efe with SMTP id
+ c26-20020aa7c75a000000b005335d3d7efemr9244622eds.6.1699272023672; Mon, 06 Nov
+ 2023 04:00:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20231106083229.256322-1-clamor95@gmail.com>
- <CALeDE9P=aUfEvhh-FD_mwRZ+5rgMkQbn+v6skqW7s3EVvnf6eg@mail.gmail.com>
-In-Reply-To: <CALeDE9P=aUfEvhh-FD_mwRZ+5rgMkQbn+v6skqW7s3EVvnf6eg@mail.gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 6 Nov 2023 13:58:40 +0200
-Message-ID: <CAPVz0n0LDVh-8W=o2Hp-AXU_=Jg5CnuYh54LxsE6XH=DD7nD5A@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] Convert recently merged T30 boards to use DM PMIC
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+References: <20231106090046.258589-1-clamor95@gmail.com>
+In-Reply-To: <20231106090046.258589-1-clamor95@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 6 Nov 2023 12:00:12 +0000
+Message-ID: <CALeDE9MbigiaW-c_4PABBp+=BJ7=WHmz6p25k-JL6Aq6mYJJDg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] Implement GPIO cells for PALMAS and MAX77663 PMICs
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,63 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 13:46=
- Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+On Mon, Nov 6, 2023 at 10:18=E2=80=AFAM Svyatoslav Ryhel <clamor95@gmail.co=
+m> wrote:
 >
-> Hi Svyatoslav,
+> This patchset adds support for gpio-uclass to work with pmic gpio childre=
+ns
+> properly and implements MAX77663 and PALMAS GPIO cells/children as a
+> reference and to be further used in devices I am currently maintaining.
 >
-> > Since the proposed PMIC patches have been accepted, I see the need
-> > to convert boards which I maintain to use DM drivers instead of board h=
-acks.
-> >
-> > Svyatoslav Ryhel (5):
-> >   board: lg-x3: convert LG Optimus 4X and Vu to use DM PMIC
-> >   board: endeavoru: convert HTC One X to use DM PMIC
->
-> Is there a reason why the two above devices don't appear to have their
-> .dts files in the upstream kernel?
->
+> All drivers are tested on actual hardware and confirmed to work as
+> expected. MAX77663 GPIO cell is tested on wexler qc750 tegra 3 device
 
-Yes, there is a reason. Linux maintainers treat submitters as
-existential enemies or as dirt at least. I was trying to work with
-linux but I have no desire to spend any time to upstream endeavoru or
-lg_x3.
+Is the MAX77663 seems more related to the MAX77686 PMIC, why is it
+being done as s a GPIO and not a PMIC driver or the existing driver
+extended to support this chip?
 
-> >   board: transformer-t30: convert ASUS Transformers to use DM PMIC
-> >   board: grouper: convert ASUS Google Nexus 7 (2012) to use DM PMIC
-> >   ARM: dts: tegra30: enable USB PHY node on some devices
-> >
-> >  arch/arm/dts/tegra30-asus-grouper-common.dtsi |   7 +
-> >  .../dts/tegra30-asus-nexus7-grouper-E1565.dts |   1 +
-> >  .../dts/tegra30-asus-nexus7-grouper-PM269.dts |   1 +
-> >  .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |   1 +
-> >  arch/arm/dts/tegra30-asus-p1801-t.dts         |  17 ++
-> >  arch/arm/dts/tegra30-asus-tf600t.dts          |  15 ++
-> >  arch/arm/dts/tegra30-asus-transformer.dtsi    |   9 +
-> >  arch/arm/dts/tegra30-htc-endeavoru.dts        |   8 +
-> >  arch/arm/dts/tegra30-lg-x3.dtsi               |   9 +
-> >  board/asus/grouper/Kconfig                    |   8 -
-> >  board/asus/grouper/Makefile                   |   4 +-
-> >  .../asus/grouper/configs/grouper_E1565.config |   6 +-
-> >  .../asus/grouper/configs/grouper_PM269.config |   6 +-
-> >  board/asus/grouper/configs/tilapia.config     |   6 +-
-> >  board/asus/grouper/grouper-spl-max.c          |   2 +-
-> >  board/asus/grouper/grouper-spl-ti.c           |   2 +-
-> >  board/asus/grouper/grouper.c                  | 154 +-----------------
-> >  board/asus/transformer-t30/Kconfig            |  10 --
-> >  .../transformer-t30/configs/tf600t.config     |   2 +-
-> >  .../transformer-t30/transformer-t30-spl.c     |   2 +-
-> >  board/asus/transformer-t30/transformer-t30.c  | 121 +-------------
-> >  board/htc/endeavoru/endeavoru-spl.c           |   2 +-
-> >  board/htc/endeavoru/endeavoru.c               |  72 +-------
-> >  board/lg/x3-t30/x3-t30-spl.c                  |   2 +-
-> >  board/lg/x3-t30/x3-t30.c                      |  97 +----------
-> >  configs/endeavoru_defconfig                   |   4 +
-> >  configs/grouper_common_defconfig              |   1 +
-> >  configs/transformer_t30_defconfig             |   5 +
-> >  configs/x3_t30_defconfig                      |   4 +
-> >  29 files changed, 128 insertions(+), 450 deletions(-)
-> >
-> > --
-> > 2.40.1
-> >
+> and PALMAS GPIO cell is tested on tegra note 7 tegra 4 device.
+>
+> ---
+> Changes from v1:
+>  - isolate PMIC GPIO cells parsing behind enabling DM_PMIC
+> ---
+>
+> Svyatoslav Ryhel (3):
+>   drivers: gpio-uclass: support PMIC GPIO children
+>   drivers: gpio: implement MAX77663 GPIO cell
+>   drivers: gpio: implement PALMAS GPIO cell
+>
+>  drivers/gpio/Kconfig                |  16 +++
+>  drivers/gpio/Makefile               |   2 +
+>  drivers/gpio/gpio-uclass.c          |  19 +++
+>  drivers/gpio/max77663_gpio.c        | 178 ++++++++++++++++++++++++++++
+>  drivers/gpio/palmas_gpio.c          | 132 +++++++++++++++++++++
+>  drivers/power/pmic/max77663.c       |   9 ++
+>  drivers/power/pmic/palmas.c         |  10 +-
+>  include/dt-bindings/pmic/max77663.h |  18 +++
+>  include/power/max77663.h            |   1 +
+>  include/power/palmas.h              |  12 ++
+>  10 files changed, 396 insertions(+), 1 deletion(-)
+>  create mode 100644 drivers/gpio/max77663_gpio.c
+>  create mode 100644 drivers/gpio/palmas_gpio.c
+>  create mode 100644 include/dt-bindings/pmic/max77663.h
+>
+> --
+> 2.40.1
+>
