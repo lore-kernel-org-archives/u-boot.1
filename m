@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A29F9C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:32:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64364C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 15:36:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D392986F87;
-	Mon,  6 Nov 2023 16:32:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B265F87083;
+	Mon,  6 Nov 2023 16:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t1/Gfayy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AhajBoHi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31C6087086; Mon,  6 Nov 2023 16:32:15 +0100 (CET)
+ id 9ADD9870A5; Mon,  6 Nov 2023 16:36:37 +0100 (CET)
 Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
  [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E13D870A2
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:32:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E7DA86F1F
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 16:36:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7789cb322deso299103685a.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:32:03 -0800 (PST)
+ af79cd13be357-778a47bc09aso304726685a.3
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 07:36:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699284722; x=1699889522; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699284994; x=1699889794; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7W0SjFfoiKHuRpc7KyoPQGEN0HwJNgA02mLvFP4MbUw=;
- b=t1/GfayySCqudcaj+8sLZBbWM2xCuoX08i3x++/9NgCI2ncRmATRiLVlbvoEwqO2gL
- tcxkHC6vdqLotsozvf5ClyF3MMu3SKJzeziWnHsC2ZGehyo749NntpGWDZjEK3PbEyea
- 0ymb1IT2nY1sj4HGGDN10CjeS1Ov+XEh5Mqlc=
+ bh=9sVDHS9QRIh+UuPDbMz3t9hYTTwY6A+L3mD34kduUhY=;
+ b=AhajBoHiQjzB578iCTN6Kit9y2Sdgks7iDv0lGMa5a2wk/N96fXrq8YHUdsVqLAF4l
+ Fit+qwLFnFFpkYZ9mlc/0kGantqKixz7NU6+W8lbBCY9yDTsiZMDib21ErWrmoPZrvZC
+ vHMTxQ8320zdAQdm0tIQrx2j9IYAuEmPe/ZfI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699284722; x=1699889522;
+ d=1e100.net; s=20230601; t=1699284994; x=1699889794;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7W0SjFfoiKHuRpc7KyoPQGEN0HwJNgA02mLvFP4MbUw=;
- b=FepgGdTkGr1xr3J2zLKTSzJ15TDZeWfBN0fWR9poKctCzq7NPpR4gHgN42JGmc4Oe6
- nrF/DvAqGyo1ympSXfcwOSoNr7wfVHJdFIhYIpo9F++Dg0FMimCfu7+GiT1FwudPB4DM
- cXWBkwPoIGG6ENPr7/AZMo3SIo/By4IzdoHpSc3FgzAHnHrOwuJ4Uq1Gbaw2WWCzeVVd
- mJY4SxW/opkxfh0fvT44kLuVT5LlAT7mm309eHLFs8AbKKrrEcufGIcSfHTIPSLucLye
- H4e8coh/xbA0sPAv1iNqGeWHa41RPYFKELC9KaeCCGbywlw6OFQ4aQ0M216uGZOWQEe6
- wvdA==
-X-Gm-Message-State: AOJu0Ywf+7iv0bgQdnrFNMidjGZ+b7sDi1aCfINrB8E6wMgPZoWDbQU/
- Oy8Scg83YlJAm8/Dl7+c9IkhPA==
-X-Google-Smtp-Source: AGHT+IEBJaJV8f+WSu+MNfU31wXAPcj0X5VQysKu7sLStJcce+gxkccS1j4YnFPKzlwzPS7dkd1S9w==
-X-Received: by 2002:a05:620a:86ce:b0:778:9be8:275c with SMTP id
- pr14-20020a05620a86ce00b007789be8275cmr32849906qkn.33.1699284721898; 
- Mon, 06 Nov 2023 07:32:01 -0800 (PST)
+ bh=9sVDHS9QRIh+UuPDbMz3t9hYTTwY6A+L3mD34kduUhY=;
+ b=mPZ+wNT9oq+kXG24qfZLlvw5w1y4924yfWiAYgFsIpRsCTko/2Ge2LLnpyE8+4dQ84
+ XJY7JxcyW+TrVs5i9R8a7iAWdKYPykn18nHs3nNLNdYleDpJjZs9Snr/wSBj5Vm17pYB
+ OblMO9J4X+1t01YhzOirnEm2VwuuottAZwvjfug+hqGkLy8sWIwmLfMI5/RuepUNdiBW
+ ski1gcZ2hkSMi2lzbeympocgEWwhXf7GT7VRF1OvWg3z7zR6nmdelimN6sEGIJX488Es
+ fQhQwUbyJyVyjs7dFkro5ppWzblm1dBZdQ4IZRsOXNw018iQvysPQ0wNrltDoygXgqbR
+ 62DA==
+X-Gm-Message-State: AOJu0YyL/O2QcQ60u1Nw9/FqGPQtxb2LsYento8fculSCrVWX2v/oPhY
+ 3dPExbrFeVtZVkxG+Y5l/yLB+Q==
+X-Google-Smtp-Source: AGHT+IGWNG60KitC2xKw3D72ZxLog6nbdlpaWLrZNAQ0bOfl4ZWCIXQTHZegLmc6dtboOnDuTwwQAw==
+X-Received: by 2002:a05:620a:47b2:b0:77a:148a:3d64 with SMTP id
+ dt50-20020a05620a47b200b0077a148a3d64mr30487701qkb.45.1699284993750; 
+ Mon, 06 Nov 2023 07:36:33 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
  [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- p25-20020a05620a22f900b007671cfe8a18sm3419856qki.13.2023.11.06.07.32.00
+ w12-20020a05620a094c00b00767dcf6f4adsm3348738qkw.51.2023.11.06.07.36.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 07:32:01 -0800 (PST)
-Date: Mon, 6 Nov 2023 10:31:59 -0500
+ Mon, 06 Nov 2023 07:36:33 -0800 (PST)
+Date: Mon, 6 Nov 2023 10:36:31 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
- Andrew Davis <afd@ti.com>, Roger Quadros <rogerq@kernel.org>,
- vigneshr@ti.com, jonas@kwiboo.se, srk@ti.com, bb@ti.com,
- praneeth@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
-Message-ID: <20231106153159.GH496310@bill-the-cat>
-References: <20231004132324.44198-1-rogerq@kernel.org>
- <20231004132324.44198-2-rogerq@kernel.org>
- <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
- <20231004135436.ihofrxutzcdefica@audacious>
- <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
- <20231005163645.GS8465@bill-the-cat>
- <20231005171010.zvza7uqyn4mcgp5g@handsaw>
- <20231005171614.yiatmyczip2jnmf4@surround>
- <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
- <20231106055351.f2fny5ys6avi5qnk@ula0497581>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
+Message-ID: <20231106153631.GI496310@bill-the-cat>
+References: <20231002011450.462468-1-sjg@chromium.org>
+ <20231002011450.462468-5-sjg@chromium.org>
+ <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
+ <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
+ <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0+q1skHCkP0EhF12"
+ protocol="application/pgp-signature"; boundary="kpAQMeKRvqTQf16j"
 Content-Disposition: inline
-In-Reply-To: <20231106055351.f2fny5ys6avi5qnk@ula0497581>
+In-Reply-To: <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,112 +95,86 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0+q1skHCkP0EhF12
-Content-Type: text/plain; charset=us-ascii
+--kpAQMeKRvqTQf16j
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 06, 2023 at 11:23:51AM +0530, Manorit Chawdhry wrote:
+On Mon, Nov 06, 2023 at 06:26:15PM +0800, Bin Meng wrote:
+> + Tom,
+>=20
 > Hi Simon,
 >=20
-> On 11:22-20231005, Simon Glass wrote:
-> > Hi Nishanth,
-> >=20
-> > On Thu, 5 Oct 2023 at 11:16, Nishanth Menon <nm@ti.com> wrote:
+> On Mon, Nov 6, 2023 at 12:29=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Bin,
+> >
+> > On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
 > > >
-> > > On 12:10-20231005, Nishanth Menon wrote:
-> > > > On 12:36-20231005, Tom Rini wrote:
-> > > > > On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
-> > > > > > On 10/4/23 8:54 AM, Nishanth Menon wrote:
-> > > > > > > On 08:48-20231004, Andrew Davis wrote:
-> > > > > > > > On 10/4/23 8:23 AM, Roger Quadros wrote:
-> > > > > > > > > ti_mmc is not a valid boot_target for standard boot flow =
-so
-> > > > > > > >
-> > > > > > > > Is there some way to make it into a valid boot_target? Othe=
-rwise
-> > > > > > > > how do we use uEnv.txt files, or boot from FIT images with =
-overlays?
-> > > > > > >
-> > > > > > > envboot takes care of uEnv.txt file (see
-> > > > > > > https://lore.kernel.org/all/20231004132324.44198-3-rogerq@ker=
-nel.org/)
-> > > > > > >
-> > > > > > > Early remote proc loading and FIT image is a question for std=
-boot itself.
-> > > > > > >
-> > > > > >
-> > > > > > If stdboot is missing these features then we shouldn't switch u=
-ntil it
-> > > > > > has them. I'm all for switching to this, but only if it is comp=
-lete.
-> > > > >
-> > > > > Depends on what you mean?  Did you mean an option to run scripts
-> > > > > (exists) or an option to do what TI needs done, via
-> > > > > boot/bootmeth_something.c ?  If the latter, someone from TI needs=
- to
-> > > > > figure out what that should be and do (but plumbing-wise everythi=
-ng it
-> > > > > needs should exist).
-> > > >
-> > > > Andrew is generalizing here (on the wrong patch though).
-> > > >
-> > > > On am62x platforms, there is nothing regressing with this series. T=
-he
-> > > > challenge is early remote_proc loading which is done for J7* platfo=
-rms.
-> > > >
-> > > > How that is initiated as part of bootmethods is something of a gap.
-> > > >
-> > > > The other gap has been support for uEnv.txt -> which we can workaro=
-und
-> > > > at the moment by using CONFIG_BOOTCOMMAND=3D"run envboot; bootflow =
-scan
-> > > > -lb" in defconfig (This series from Roger already does that - hence=
- I am
-> > > > saying that Andrew is complaining on the wrong series).
-> > > >
-> > > > Ideally, we should just have CONFIG_BOOTCOMMAND=3D"bootflow scan -l=
-b" and
-> > > > uEnv.txt remoteproc loads and the various standard bootmethods shou=
-ld
-> > > > "just work".
+> > > Hi Simon,
 > > >
+> > > On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.org>=
+ wrote:
+> > > >
+> > > > This is needed to support Truetype fonts. In any case, the compiler
+> > > > expects SSE to be available in 64-bit mode. Enable it.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+> > > > ---
+> > > >
+> > > > (no changes since v1)
+> > > >
+> > > >  arch/x86/config.mk        |  1 -
+> > > >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
+> > > >  2 files changed, 11 insertions(+), 1 deletion(-)
+> > > >
 > > >
-> > > I forgot to add: FIT image authenticated boot flow. That is really wh=
-at
-> > > ti_mmc distroboot method was trying to solve.
+> > > I didn't suggest we enable SSE for x86. This is the wrong approach.
 > > >
-> > > Maybe Simon or someone know how the stdboot flow handles authenticated
-> > > kernel image and dtb boot flow with FIT image?
-> >=20
-> > Yes you can use FIT configuration verification and things should work a=
-s normal.
-> >=20
+> > > We should rewrite the Truetype support codes to avoid using float/dou=
+ble types.
+> > >
+> > > This way the Truetype codes can be used on any other architectures
+> > > without the need for the compiler to emit explicit floating
+> > > instructions.
+> >
+> > I am not aware of any such library. At present, enabling truetype on
+> > coreboot64 causes a hang.
+> >
 >=20
-> Could you give any reference documentation for this?
+> If that's the case, we will have to either:
+>=20
+> - Switch all U-Boot builds' to use software float (e.g. -msoft-float)
+> which unfortunately depends on the compiler runtime intrinsics.
+> - Introduce a Kconfig option for hard float enabling and let each
+> architecture to decide whether it implements it or not, and update
+> Truetype to depend on the hard float.
 
-I suspect you should start with doc/usage/fit/beaglebone_vboot.rst
+We generally do -msoft-float already, so introducing that for x86, and
+some Kconfig logic to ensure that no one else steps on this particular
+bug sounds reasonable.
 
 --=20
 Tom
 
---0+q1skHCkP0EhF12
+--kpAQMeKRvqTQf16j
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJBu8ACgkQFHw5/5Y0
-tyymVwwAkFejxm4l4h3Nka64cV6HK4elqwtIy188JxRPNYkh7Cxsr9kCNPof8ZiX
-i8dq8IJoo9v4rcVA0XvYVMa1xScwxIpoMaJtfJg/DbMBIVTacqJO4IQa1DI5FbxI
-gwbbZWNpeTDDAV3DSpU8XTyeOHA3/TjcecW0GGES/4k5jgnuWyV3FAiTi8Sa5rMH
-hCS38AgfVVkAIzcCQu0fJ5ZY78ssLQWZujhsCXGBwjftfJuY26eKX40hN3Ca48ua
-MTNei8iG3O7/EMaPA8GfIqAUlqDC2hrLQejoH3noedzKVhtA8cesQgUBcIP976r+
-6dhKx3OwHmHR+WNXAU6fd5tmUSioiG/lsYixl4zkeGrFREyBX+00v74dAgpGKi9K
-JditkwBRzpr5vzeAqj6mz2qjE3N+/AzBDCk6tYA/msDnPjbhoTuu2wEM9aaIfbO7
-BrxvP05UDKUmr3fcw7aSl9BJekBz3ReLnBIYgFZWHLtNIuFRtDrxKs59mtIDyEia
-KzjDJOQ6
-=4LtK
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJB/8ACgkQFHw5/5Y0
+tyzDzQv8CA8YJTbsRxCEE1pOVExYeMsGim77mFsHT3gCMBVGbwp8F+kT7ipWx1U+
+H6LagPCkKJpnGb+v27TQpikkWsdLpiNZ5Uyu3YmrajyLHdHav9TeLxi55lOeHTVk
+026d0y8s54JDH+lSgkGKNKqWB5N4ZfRPT2N3jTXqH/Opvd19ufNYDyyFeUGXVLa9
+BW4rZDq/xWDQAwcYE+esT+ksDNEWTa+lIq/cyql5WAgWsoPIyO0KyxuahQfLRqga
+3qMrr71gQx/5R0UEb89alxDEMxkLbJRrClIj8TJ2mm987n1mMn9lGUOAHfmklGuT
++UofTgyaZ7CyB+iiJNbJ07qVS/MR4396QxLUcHX1032hVJjoB3ocUonNi6/ChD5F
+BBxvbU6+X+fg5s0K0HPjBBanwtTeF0frw86SbvOfhqLLv6ftWxLVL/KDaOzFC1i9
+LzoGMoACWVpu5JHBumE/TvN1X7U3Vdb0t8OXmUd0fQJkOAy7cmYmaQTZ2n5qrK7O
+r5yN0xIb
+=dvBH
 -----END PGP SIGNATURE-----
 
---0+q1skHCkP0EhF12--
+--kpAQMeKRvqTQf16j--
