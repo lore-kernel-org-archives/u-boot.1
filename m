@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A277C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF6EC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C997686470;
-	Mon,  6 Nov 2023 17:50:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 432ED86FBE;
+	Mon,  6 Nov 2023 17:51:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EkcDpWTb";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="ni/8sQRN";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="nPYNIiIT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F30B086FBE; Mon,  6 Nov 2023 17:50:53 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3F39C86335; Mon,  6 Nov 2023 17:51:26 +0100 (CET)
+Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8329386335
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:50:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A66B86FBE
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:51:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A6Goish057784;
- Mon, 6 Nov 2023 10:50:44 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699289444;
- bh=tgi1C+2WmtQBWiPEdVbq1YzZrMFX4g0mT/3NimsfKjI=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=EkcDpWTbjh41Y+7VHj9nxYmm9Omp+sYBb2oqVT5ybqkLBu7wOikVHD2JFRQXS86KY
- i8PouLF5Dkz6w6LvQ5I9Jvf9hze/TrcY1i9s6eEW4Th19d3KwNCwOjgz8l71GcgS5T
- I4fHCEeQooRjQq2jlQoBLUiCmSW3uB7gSjLoSIMw=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A6GoixN028650
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 6 Nov 2023 10:50:44 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Nov 2023 10:50:44 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Nov 2023 10:50:44 -0600
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A6Goivd094509;
- Mon, 6 Nov 2023 10:50:44 -0600
-Date: Mon, 6 Nov 2023 10:50:44 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sinthu Raja <sinthu.raja@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Reid Tonking <reidt@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH V2 06/12] arm: mach-k3: Kconfig: Introduce a symbol to
- indicate J7200
-Message-ID: <20231106165044.xrmlxoyfbnkmpb5v@revolt>
-References: <20231104072150.3339-1-nm@ti.com> <20231104072150.3339-7-nm@ti.com>
- <8b80a570-d558-4f5a-9390-f4c8c8d8210f@ti.com>
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id 45fbae8a;
+ Mon, 6 Nov 2023 16:51:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=0f
+ vUM3QeGq3iUUZkBYobLRZoeSQ=; b=ni/8sQRNcc+OdkrTK7QzMK16Ba/oZd2u9N
+ yai/jGzz8Riy4d3/pw8d8cK5mlDZNzgAcrWv2tZ9R5PRoQP9ib6PwmOhH2ljKLep
+ wZcaDPX7Hwzie0mN79i6R2CMOTCFkIv0TFfMcldvaPloYlvaiRKLrXtuAIg6a+Yc
+ XPHqxJJjo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ fIo1JSr/LStC+/P+DXy241m9ChTWZnABlZ2+z2NLHXBdeYEd8rt+BrPGkzfI8I4M
+ /CHm0BxkZhFqK+cNPeLhXO6DJSrCeLOGTTBm0ZS6wJ2FkgttUUL409vMoO40GJrt
+ osliEuE0n/IqeozhEM5meTEJPp+bF2GNJ+G3j6EGUIs=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1699289496;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jCnPjov6kvgTzHnndV45ri1J7lXTFn2Zqtvme2DR9EA=;
+ b=nPYNIiITUrae0vH6oJAo2B2rS/I/JQ42MO3jrCBm/DTGqqBlWthRh7kHNzQZdBNpyNfzZA
+ 1F8ZPGxf1kEsAhtZVa9D/5uHPVtW6yHboTN3K32ZAe0PZlssPWSukUiR5f/I7zR36ar0bD
+ WwZvua/iNC2jZqvoRL+l2AiSSRsfskU=
+Received: from [192.168.0.2] (host-79-24-2-249.retail.telecomitalia.it
+ [79.24.2.249])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 88022dc3
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Mon, 6 Nov 2023 16:51:36 +0000 (UTC)
+Message-ID: <116b6beb-6271-322e-713e-08336bb72a3b@kernel-space.org>
+Date: Mon, 6 Nov 2023 17:50:45 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <8b80a570-d558-4f5a-9390-f4c8c8d8210f@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Betterbird/102.11.0
+Subject: Re: [PATCH 01/20] m68k: Remove CONFIG_FSLDMAFEC
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20231101162824.3755579-1-trini@konsulko.com>
+ <63a7cd49-9491-6939-48af-62b2fc586cae@kernel-space.org>
+ <20231106163230.GK496310@bill-the-cat>
+Content-Language: en-US
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20231106163230.GK496310@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,40 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:45-20231106, Andrew Davis wrote:
-> On 11/4/23 2:21 AM, Nishanth Menon wrote:
-> > J7200 shares quite a few characteristics with J721E. However a few sets
-> > are different. Introduce a Kconfig to differentiate the two to allow for
-> > new boards to be introduced in a seamless manner.
-> > 
-> > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > ---
-> >   arch/arm/mach-k3/Kconfig | 5 +++++
-> >   1 file changed, 5 insertions(+)
-> > 
-> > diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-> > index 9168bf842dca..57e2dd966eb8 100644
-> > --- a/arch/arm/mach-k3/Kconfig
-> > +++ b/arch/arm/mach-k3/Kconfig
-> > @@ -24,6 +24,11 @@ config SOC_K3_AM62A7
-> >   endchoice
-> > +if SOC_K3_J721E
-> > +config SOC_K3_J721E_J7200
-> 
-> I'm sure you know how messy this is :(
-> 
-> We wanted to treat J7200 as a proper subset device of J721e but we
-> also know that didn't happen. These two SoCs ended up more different
-> than expected and although still very similar I believe continuing
-> to try to support both under one name is not the right solution.
-> 
-> We will split out J7200 from J721e in TF-A[0] for similar reasons,
-> might be time to do the same in u-boot.
+Hi Tom,
 
-Yes, I am aware. A follow on series to cleanup J7200 will be appreciated.
+sure, i remove the unused dtsi,
+patch will follow.
 
-
--- 
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+angelo
+
+On 06/11/23 5:32 PM, Tom Rini wrote:
+> On Sat, Nov 04, 2023 at 09:58:07PM +0100, Angelo Dureghello wrote:
+>> Hi Tom,
+>>
+>> Reviewed by: Angelo Dureghello <angelo@kernel-space.org>
+>>
+>>
+>> Thanks for the cleanup, m68k boards build fine.
+>>
+>> fsl_mcdmafec driver is still referenced in arch/m68k/dts/mcf54xx.dtsi,
+>> (from compatible field) but no board is including it.
+>> You can remove the dtsi too if you want.
+> 
+> Thanks for the review.  I'd appreciate it if you went and did the rest
+> of the cleaning of unused code around here as I'm not familiar with it,
+> I just found this one as part of looking for common.h usage.
+> 
+
+
