@@ -4,48 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92777C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 05:14:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78B7C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 05:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D43486B0A;
-	Mon,  6 Nov 2023 06:14:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id DFC0286B0A;
+	Mon,  6 Nov 2023 06:25:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BB64886A8F; Mon,  6 Nov 2023 06:14:23 +0100 (CET)
-Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
- [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id DCA4086A8F
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 06:14:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
- by fd01.gateway.ufhost.com (Postfix) with ESMTP id DDCD07FE2;
- Mon,  6 Nov 2023 13:14:11 +0800 (CST)
-Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 6 Nov
- 2023 13:14:11 +0800
-Received: from localhost.localdomain (202.190.98.67) by EXMBX066.cuchost.com
- (172.16.6.66) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 6 Nov
- 2023 13:14:09 +0800
-From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="bUndBii5";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9849086B0A; Mon,  6 Nov 2023 06:25:10 +0100 (CET)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on20618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e83::618])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FAFF86828
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 06:25:04 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=dVEc2F9ZJu6u7Vqmd33D9vNrjYHUXNxBUyIYZYu1xWPO9QQLgPaL2DmV0m9GHjzVny0arY4GRv2nQIhX+X1CrFMfNbxJBbrEI3VM1tvlFMxXsdnNjPgtzkVJsPoHvWud5ikfy/Bu+dvnILTBm7ZMZxFlmqTaJlxLTbj8AnlnCr59a7CJu9Q+dJQLxRLFs1NxsjxcnZipAJuCeef0WcqP3vh5GG8HpoNlGinxBH7PeS8zc5AZWuN2vURvfH+6cEFvrdcXoehRVQ4/fxVOX78LwBSuxtDlwvtU/rSZbHoek7VNfsZrEp/hru5XwhraKbNynjGSB5Fgtfe3QiJ6fQYYQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=w29cXG5G0lHtaUWVSi1AOcsKpliiBTuBRnBWYSbM06U=;
+ b=XzCNXB2G1Z9WEb5r7xZ7lPsVNk2jnk+i87FRQuXjNeNG9a5Xosc3dVRUpp6EK/H6x3nuafMF0Z4egkIE0JZecJx1ZACBrR9EUab0TOaxX6HV6Q2k3Z8dzqU9g0BY8wReZ4ZmmaUNV2mM8xshBtkydzLWKA6Ie6c/0OF0PefF93CFD89xnjkVmMIjz4uuFufDVqiFpZ/2Pl8oDOBXfPyJ+MsBpwqGssGDEO6dec0VY3uYp2/fsUwTd3GuDa+iYF14/Sp91sngRCAhFC9dck6d6iavxUwUKSfyXsiGMTfAmTssPcBGJZBm1yhKtCKg0z5rcNPxKCUzy6JlAyzDf+hxrw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=w29cXG5G0lHtaUWVSi1AOcsKpliiBTuBRnBWYSbM06U=;
+ b=bUndBii5q/XmQoUbX8ApoXCXXcGg7qNLscWB3IhUR7WpANKoB+D+eYN6lCSc4FL7KZ4MchzJioUdddl8VBo6HH1P1aqdSPtY0x7Gsm/A2a70xiF6rReh5peFa9snGzojunuseUFd8yUddNaOJm5oPkzQ5ABJKIQI4zHb0Yq/yaI=
+Received: from SA0PR11CA0207.namprd11.prod.outlook.com (2603:10b6:806:1bc::32)
+ by PH7PR12MB7377.namprd12.prod.outlook.com (2603:10b6:510:20c::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28; Mon, 6 Nov
+ 2023 05:24:59 +0000
+Received: from SN1PEPF000252A1.namprd05.prod.outlook.com
+ (2603:10b6:806:1bc:cafe::22) by SA0PR11CA0207.outlook.office365.com
+ (2603:10b6:806:1bc::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28 via Frontend
+ Transport; Mon, 6 Nov 2023 05:24:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SN1PEPF000252A1.mail.protection.outlook.com (10.167.242.8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6977.16 via Frontend Transport; Mon, 6 Nov 2023 05:24:58 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Sun, 5 Nov
+ 2023 23:24:58 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Sun, 5 Nov
+ 2023 23:24:46 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32 via Frontend
+ Transport; Sun, 5 Nov 2023 23:24:45 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
-CC: Kuan Lim Lee <kuanlim.lee@starfivetech.com>, Wei Liang Lim
- <weiliang.lim@starfivetech.com>, Simon Glass <sjg@google.com>
-Subject: [PATCH v2] timer: starfive: Add Starfive timer support
-Date: Mon, 6 Nov 2023 13:13:12 +0800
-Message-ID: <20231106051335.1757-1-kuanlim.lee@starfivetech.com>
-X-Mailer: git-send-email 2.42.0.windows.2
+CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <git@xilinx.com>
+Subject: [PATCH] mtd: spi-nor: Update block protection flags for ospi flash
+ parts
+Date: Mon, 6 Nov 2023 10:54:38 +0530
+Message-ID: <20231106052438.12903-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [202.190.98.67]
-X-ClientProxiedBy: EXCAS062.cuchost.com (172.16.6.22) To EXMBX066.cuchost.com
- (172.16.6.66)
-X-YovoleRuleAgent: yovoleflag
-Content-Transfer-Encoding: quoted-printable
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF000252A1:EE_|PH7PR12MB7377:EE_
+X-MS-Office365-Filtering-Correlation-Id: dd4fa5cc-a12b-4970-ceaf-08dbde88b7ec
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: GR9DY83qAPZWCBfT0qvdmcR2i/ELR6/H2vB60mASRkRaxG72ltwdjIY9YDMhy/dO9vkYzCmX0YyrzoFCSqXXhQghAzdgDEhb6KVsAkRObZ6z5+95hhX/FHU5IaMyFtCMwvhU2dhaIqQ0e5rIX8NpRjx/qNRIoB992UwxCFl1ogjqTDgJGcDuGL/z+hbOY9+iD0v4mbPQRnJeUcMXUiXlupIpJF7UgkaZ0LutpTDyKniB0J3uwLBasex0kPuoXqcG6/LjvAInCaV5dBIzhgF0URpMl6IkvquRPa2B3kZ5O0xbEoriktfntAcStWOToq5aYo6OPiyiq77Kq0gEi5+3x3qD5EXB8JcJL4fQVCOHKZndZ+dRl75BIZMtM4HfDTpXDinRNw6yC6/yuPL5wb9AUJvEzfIhZGr6qTCtNG76qDt5OGRZD2+8cwuJ3AL8QCqxNt1xGLMiqhR5ZIDoD2r2SEhr9U0VIKWCM3u3VqNyq+M7uRmbLVdPMq/ngPe/8QwKNwnQUmvs7Fa37o0VXxLmNjJIrx0Y7tMcjkktWwpA2ppvG7JXHe42Oj9FGygUT8m3/e5a73sGdhsdZsj77KhHobrZP/t3dA5ixtsGcISrxx5WqOwaTF9VmrK3h8u5JHMnvLBojESCKVIHEdj/8+mJipTxaseSR4Tp+bwm+Bhguj/K0ct88UmU16Yt1xgQpECY+Hon58cieQ++dtyTxUo8NnQGUJz9VlyMlsp7MLMVktnqkxdCFG03G1PgO6HTLoV4etTFZj6EXSBUtjTtCqY78w==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(396003)(136003)(39860400002)(376002)(230922051799003)(1800799009)(82310400011)(186009)(64100799003)(451199024)(40470700004)(36840700001)(46966006)(107886003)(1076003)(2616005)(70586007)(40460700003)(336012)(426003)(70206006)(82740400003)(26005)(478600001)(36756003)(6916009)(54906003)(316002)(6666004)(8936002)(5660300002)(8676002)(4326008)(40480700001)(2906002)(36860700001)(47076005)(41300700001)(83380400001)(81166007)(86362001)(356005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2023 05:24:58.4944 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd4fa5cc-a12b-4970-ceaf-08dbde88b7ec
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A1.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7377
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,150 +122,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add timer driver in Starfive SoC. It is an timer that outside
-of CPU core and inside Starfive SoC.
+Updating the block protection flags for Gigadevice gd25lx256e and
+ISSI is25wx256 OSPI flash parts.
 
-Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
-Signed-off-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
-Reviewed-by: Simon Glass <sjg@google.com>
-
-Changes for v2:
-- correct driver name, comment, variable
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- drivers/timer/Kconfig          |  7 +++
- drivers/timer/Makefile         |  1 +
- drivers/timer/starfive-timer.c | 96 ++++++++++++++++++++++++++++++++++
- 3 files changed, 104 insertions(+)
- create mode 100644 drivers/timer/starfive-timer.c
+ drivers/mtd/spi/spi-nor-ids.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index 915b2af160..a98be9dfae 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -326,4 +326,11 @@ config XILINX_TIMER
- 	  Select this to enable support for the timer found on
- 	  any Xilinx boards (axi timer).
-=20
-+config STARFIVE_TIMER
-+	bool "Starfive timer support"
-+	depends on TIMER
-+	help
-+	  Select this to enable support for the timer found on
-+	  Starfive SoC.
-+
- endmenu
-diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-index 1ca74805fd..1ef814970b 100644
---- a/drivers/timer/Makefile
-+++ b/drivers/timer/Makefile
-@@ -34,3 +34,4 @@ obj-$(CONFIG_MTK_TIMER)		+=3D mtk_timer.o
- obj-$(CONFIG_MCHP_PIT64B_TIMER)	+=3D mchp-pit64b-timer.o
- obj-$(CONFIG_IMX_GPT_TIMER)	+=3D imx-gpt-timer.o
- obj-$(CONFIG_XILINX_TIMER)	+=3D xilinx-timer.o
-+obj-$(CONFIG_STARFIVE_TIMER)	+=3D starfive-timer.o
-diff --git a/drivers/timer/starfive-timer.c b/drivers/timer/starfive-time=
-r.c
-new file mode 100644
-index 0000000000..b9ba33277e
---- /dev/null
-+++ b/drivers/timer/starfive-timer.c
-@@ -0,0 +1,96 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2022 StarFive, Inc. All rights reserved.
-+ *   Author: Lee Kuan Lim <kuanlim.lee@starfivetech.com>
-+ */
-+
-+#include <common.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <time.h>
-+#include <timer.h>
-+#include <asm/io.h>
-+#include <dm/device-internal.h>
-+#include <linux/err.h>
-+
-+#define	STF_TIMER_INT_STATUS	0x00
-+#define STF_TIMER_CTL		0x04
-+#define STF_TIMER_LOAD		0x08
-+#define STF_TIMER_ENABLE	0x10
-+#define STF_TIMER_RELOAD	0x14
-+#define STF_TIMER_VALUE		0x18
-+#define STF_TIMER_INT_CLR	0x20
-+#define STF_TIMER_INT_MASK	0x24
-+
-+struct starfive_timer_priv {
-+	void __iomem *base;
-+	u32 timer_size;
-+};
-+
-+static u64 notrace starfive_get_count(struct udevice *dev)
-+{
-+	struct starfive_timer_priv *priv =3D dev_get_priv(dev);
-+
-+	/* Read decrement timer value and convert to increment value */
-+	return priv->timer_size - readl(priv->base + STF_TIMER_VALUE);
-+}
-+
-+static const struct timer_ops starfive_ops =3D {
-+	.get_count =3D starfive_get_count,
-+};
-+
-+static int starfive_probe(struct udevice *dev)
-+{
-+	struct timer_dev_priv *uc_priv =3D dev_get_uclass_priv(dev);
-+	struct starfive_timer_priv *priv =3D dev_get_priv(dev);
-+	int timer_channel;
-+	struct clk clk;
-+	int ret;
-+
-+	priv->base =3D dev_read_addr_ptr(dev);
-+	if (!priv->base)
-+		return -EINVAL;
-+
-+	timer_channel =3D dev_read_u32_default(dev, "channel", 0);
-+	priv->base =3D priv->base + (0x40 * timer_channel);
-+
-+	/* Get clock rate from channel selectecd*/
-+	ret =3D clk_get_by_index(dev, timer_channel, &clk);
-+	if (ret)
-+		return ret;
-+
-+	ret =3D clk_enable(&clk);
-+	if (ret)
-+		return ret;
-+	uc_priv->clock_rate =3D clk_get_rate(&clk);
-+
-+	/*
-+	 * Initiate timer, channel 0
-+	 * Unmask Interrupt Mask
-+	 */
-+	writel(0, priv->base + STF_TIMER_INT_MASK);
-+	/* Single run mode Setting */
-+	if (dev_read_bool(dev, "single-run"))
-+		writel(1, priv->base + STF_TIMER_CTL);
-+	/* Set Reload value */
-+	priv->timer_size =3D dev_read_u32_default(dev, "timer-size", -1U);
-+	writel(priv->timer_size, priv->base + STF_TIMER_LOAD);
-+	/* Enable to start timer */
-+	writel(1, priv->base + STF_TIMER_ENABLE);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id starfive_ids[] =3D {
-+	{ .compatible =3D "starfive,jh8100-timers" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(jh8100_starfive_timer) =3D {
-+	.name		=3D "starfive_timer",
-+	.id		=3D UCLASS_TIMER,
-+	.of_match	=3D starfive_ids,
-+	.probe		=3D starfive_probe,
-+	.ops		=3D &starfive_ops,
-+	.priv_auto	=3D sizeof(struct starfive_timer_priv),
-+};
---=20
-2.34.1
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 77eb9f352c..b939780889 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -191,7 +191,8 @@ const struct flash_info spi_nor_ids[] = {
+ 	SPI_NOR_QUAD_READ | SPI_NOR_HAS_LOCK | SPI_NOR_4B_OPCODES)},
+ 	{
+ 		INFO("gd25lx256e", 0xc86819, 0, 64 * 1024, 512,
+-		     SECT_4K | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES)
++		     SECT_4K | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES |
++		     SPI_NOR_HAS_LOCK | SPI_NOR_HAS_TB)
+ 	},
+ 	/* adding these 1.8V OSPI flash parts */
+ 	{INFO("gd25lx512", 0xc8681A, 0, 64 * 1024, 1024,	SECT_4K |
+@@ -233,7 +234,8 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO("is25wp01g",  0x9d701b, 0, 64 * 1024, 2048,
+ 			SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("is25wx256",  0x9d5b19, 0, 128 * 1024, 256,
+-			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES) },
++			SECT_4K | USE_FSR | SPI_NOR_OCTAL_READ | SPI_NOR_4B_OPCODES |
++			SPI_NOR_HAS_TB) },
+ #endif
+ #ifdef CONFIG_SPI_FLASH_MACRONIX	/* MACRONIX */
+ 	/* Macronix */
+-- 
+2.17.1
 
