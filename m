@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A5FC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 12:44:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09FFFC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 12:44:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28141869DA;
-	Mon,  6 Nov 2023 13:43:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 93F5986863;
+	Mon,  6 Nov 2023 13:44:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="T/lj5Gek";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="S+FQT1+x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCA15864E5; Mon,  6 Nov 2023 13:43:55 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20614.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::614])
+ id B80BF864E5; Mon,  6 Nov 2023 13:44:04 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::629])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 630B38700A
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 13:43:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE468706C
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 13:43:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=h4qh3QrDXIEm2vES7zPCj54DIw+T+2I7CEq9i2Xn5UrrFKzZwAhtKga/fZt1QtMVjDq9c604hZg/+zzgBgx5chK8WLvaFFX9RxXsgrWeazXQ7GdwtNXx3Gt9EFV8EommHCJYJVc+ZG5/U+e0oLjCdpj/Cs1AjSKLYl/NpCEdeqPauhKZ+zWIYB04qLjq2k0u3BFjmY6BaNi7J4ImmecLF9LR6lfDWsgNWnnjquOFai2W/i/BTsHB4QCgMJDi3RwdMdobMtuLBwacJeDwCkvpqHiucp3Ypp9WKXrPOeT3nrwX47LjQquy+G8oFmhxMNqWiae23fK/RYcfnWUDdyGZrQ==
+ b=UGYIyLwraH9nFFLrY0CBDWRya1gkWFPCgQtAhL+FYhW07QHqEBBP0jyd+WeEZ2+4RnPIDvMUE5a4UCFxC6ud+XjM3wbAWZT+5wIUtMgMceNWDBTSPWB4opIERoEJcTzAIVbEXPtRpDTlfZuTlCk1MzET5uFk/caOZZ55/IPW/rt8mBqALMfc4+r8PbinMV9jUiQSjqWrE7mOIPD2hLGUo8rRcG+F6Jo7vw54cy8pZx1PVs0AcJh19Tr+5VXvo/cGd0MkpSchm4VcXocyMaNSK6d18bk7e0/0k2AdGeDQ1bblHn4K25P4BA2OD9R4rUu1uJ9ZpUJk/NHi+KyMSCyejw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LU+sbIpAleYf6LTVTuorspv0ZQwpk9uA4qcN/QVVMTM=;
- b=iyoCQVEyeVWhcEEG5jaNcdlthOwJRCSeDQaaee65a3SLayd6Mo469p7NDzk7moKcseSJZfOfUvjD0/kuKytH2doCSXDPu6MTE4is+4yPOcrY//XTijIx1zorXBx2FnyHQPPhHK/A9JgDDeoIoDmAkGHvSGOGlJr8x92y+huS01+j7JmSmVNZDQXgjAWsDW+a7OhtFIw2ov3DU1zJRFJRXtVUfDZhQ5ajsdGHGm8mcKbpP8fzudxF/eD5+aNauvWoWYRhqKz1K35DXGhKvwTumWWc/wJUUVKaPixAUS+PdUevJRyHYgCfyMJc0/KpGxGrlJcvFasnKD2t/YFSUCn/5g==
+ bh=YgG6FnZGCmBRm8c8dWcg9UpR+dpoTSvXGzj9FF6qGSQ=;
+ b=aaFwmB12fNeqTCiy8p1a0KJkgBov/jpJgWR5K59ocf3/cZ+TBlufn+0M70AEnoW42eyU8sr2gjISlhx63cMSxQb0iIDx81MdJzm4F2T4o93a5u6G7T5FDf6WQFWFsL9eukAN7NWO0QR+nflV7vQ1ZYkhTNkKxJS0LWUQ8Mq+F4/6nO9q/xx3XhPsdVvCG+CYwSzV/vRZDzY76/Vx1hCGYJVZzR9BzrpnFa1M5FwqbCASkfznkB28AjI5OjayacHsT2H/4PR4FOdhNEdt5BVviI3CX6LWr0/2+P+cVEmNIj8kNmzT4A8jGFLaEDKsbRPHwlGVXhfLuQUzoLwD8rEbTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LU+sbIpAleYf6LTVTuorspv0ZQwpk9uA4qcN/QVVMTM=;
- b=T/lj5GekJjNpU6yYvhDTmczMq4PnPpWl63Onz1MxEwsTigj5BXLC0IkvCJQtdovST6c+/841By4GFQE4yvQcSuJP4PDVOWphaMxp5iU8+35yV2oa80GCMujro5TT1R6Qdcr5pyZJxM96Uj00g9J3quB8IBzypQTzPWnivzKCYgc=
+ bh=YgG6FnZGCmBRm8c8dWcg9UpR+dpoTSvXGzj9FF6qGSQ=;
+ b=S+FQT1+xyzohwxhkQxqCM6Mwntm3Khp2a4gOp8xRue52U5PI79IOLtoceSZzgeA0P5MGUzI2i+N+4GBigNT0V/ueyb8JvtFW+P7Zot3tY2obioQX0R4HWt5GIZ+OlRV4QEl8qvSE03YXNH4A5Owvty+b1OHbCALbgVNyEUn3z3I=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by DM6PR12MB4090.namprd12.prod.outlook.com (2603:10b6:5:217::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.25; Mon, 6 Nov
- 2023 12:43:49 +0000
+ by CH3PR12MB8660.namprd12.prod.outlook.com (2603:10b6:610:177::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28; Mon, 6 Nov
+ 2023 12:43:55 +0000
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::1d07:c316:b830:70c9]) by BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::1d07:c316:b830:70c9%4]) with mapi id 15.20.6954.027; Mon, 6 Nov 2023
- 12:43:49 +0000
-Message-ID: <c465b585-63aa-48c7-9039-d2c8c93a4d82@amd.com>
-Date: Mon, 6 Nov 2023 13:43:48 +0100
+ 12:43:55 +0000
+Message-ID: <d7393cdd-d580-4c5d-bb04-0c770e3e15a2@amd.com>
+Date: Mon, 6 Nov 2023 13:43:54 +0100
 User-Agent: Mozilla Thunderbird
 From: Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v2] arm: xilinx: Add missing dual parallel flash
- description
+Subject: Re: [PATCH 0/4] xilinx: Add DTSes for mini qspi/ospi configuration
 To: u-boot@lists.denx.de, git@xilinx.com
-References: <cddf2909d0445eba08b998d42ffc31c1fa3132b9.1698045694.git.michal.simek@amd.com>
+References: <cover.1698329087.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -105,7 +104,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <cddf2909d0445eba08b998d42ffc31c1fa3132b9.1698045694.git.michal.simek@amd.com>
+In-Reply-To: <cover.1698329087.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VE1PR03CA0020.eurprd03.prod.outlook.com
@@ -113,63 +112,63 @@ X-ClientProxiedBy: VE1PR03CA0020.eurprd03.prod.outlook.com
  (2603:10b6:a03:a5::28)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|DM6PR12MB4090:EE_
-X-MS-Office365-Filtering-Correlation-Id: f58e06c5-d682-41b7-bf18-08dbdec60668
+X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|CH3PR12MB8660:EE_
+X-MS-Office365-Filtering-Correlation-Id: dd45d424-c4c9-4533-5df6-08dbdec60993
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: hv+kpfVwr21+mto2JrMebPuJkUQ9MZznxCvKbpTo+LPvEYtABLtxTLax+gnCt+r5pxo5LH5vMF2SLBnjEwUVyWtfk0kN30C/y2XzVLFqM/3XlHPdsGS9YxO52Zh+kt3NvTxtTz7246fXbG+MLSOuWdwyK9DyZsiuH8Uiz9zn/ty39NRo9aQk3yTRgI61rJXDjvqd3DqDxPXp4R9R3HYONuBY1AccuQb4mXt6QYxPe9SKUtpIKSP+vqEm8mRLDa2eRNVhV3YhW1lFpKkTg8tdF5pIMoMz7qGnCnoj45lpeerKvacJZuQ9PMR0oWIcMp6VcHZ74cwGr87zodqTGfoE91d76qfz60W+43EF8tHZKyz7hxs4uCW46ylLa/elrWPz6AS5G/9yK+BVvaBwo02wP+S9MCmk9jPi8O+lkjizgDBhkEhCWBBDIhLb9SlgyXsdynsWCX4x+fM+NKTS/m+HbCcgqnIFEO32Chc4HJ+XBBRZuNK79B5csZThTdq9OqLmB/3DN4wMMrjVEOlaYUCGBKXS3gdOB/+XTb89BLRFZQk4jebgpCDkDvDngCPU475YcLtzgldnWV91seuuFR1rZ5Oh89CrP6b6drJX5JAdY7xgGTyb75VxLH+lrJYbOi6mMmeKT3QBt0HDV2k31ys1yA==
+X-Microsoft-Antispam-Message-Info: U7+l3hksS18zgscJNVIB/6r0YGKn7QuVLBTuoRk4L58z21PZRw+vY+6YOkZ/mbg5ALzv39U7B8/im5xVJLlq1CkE1OBJA7vkWPTd8HKEs261En9NKHdNNmsGSJYo13tOiIxjlD1dpJck4GuYA0GGVRNbDzAqjCne48UT8xQfYop2oYOpTTKo+R4sv4ZIUPzZ4E3JmiFmWkIwCO9zJb3ftRPH2cPcbS7D5Pyh2xIgXgwQDI9hhi6NXnuQg06OaCViZqMLGeAhdVq9ptT8cOFcimgTrN8FDWbZ37xbiv3ThQG1LzEeuTTo5nqKp6lV6Z+ss1ZJe78Z9SdGomiHlhajqDPCAQdFJAhigt5ns4idjpTHLRm692OLkuutxFl98eEguFKoPPtcczXgzW3RUOli3Sb5AxBv+GDRzrxSiKihQpguuuHQTNZODG6lYHeoODiDBs1R+xqaO0oBR/OgQoQLM0/UbgUGexH88JVPgFxUgFB2PjR8NmVZS2xE7nc88kgkt9hDezj2wzIpHNYvILYWbde3Gr/N3WOGdDMGIcxjF3qJggXEE1EOrhM6q/oVcn2o3BiEmeX9z1KvBqS4bBlYvkFj+/5eY7LdYgc71KrvfTvIL0ZqrUJVxquTQ3H72NEQ23jVba98DkhfRnw8UcZLJey27R7RKY1BGe+2WfeX2d75+M7Q5ntEWWCF6FQUj3X59LiIA+Dnre7mL+urCH+0wl/eHNAkm1g61b/VlUwg1gQ=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(346002)(39860400002)(136003)(366004)(396003)(230922051799003)(451199024)(64100799003)(186009)(1800799009)(2616005)(53546011)(6506007)(83380400001)(6512007)(44832011)(8676002)(6486002)(2906002)(26005)(478600001)(41300700001)(5660300002)(8936002)(66946007)(66556008)(66476007)(316002)(31696002)(36756003)(86362001)(38100700002)(31686004)(45980500001)(43740500002);
+ SFS:(13230031)(396003)(366004)(136003)(346002)(39860400002)(376002)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(8936002)(8676002)(36756003)(41300700001)(2906002)(5660300002)(38100700002)(31696002)(6486002)(53546011)(966005)(66556008)(6512007)(66476007)(31686004)(86362001)(44832011)(316002)(66946007)(26005)(2616005)(6506007)(478600001)(45980500001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZXVtWDVFOFpmeFBrdDdhbGNRR2tReUdxeDRNTzhlMUs4UUZvMW1FWnQ4V2x0?=
- =?utf-8?B?dGJvU0lFaW8wNUZreUFyM05pMnpyK2t5Y0xxbVRmemp6aXNIRStGWjlOQzBR?=
- =?utf-8?B?dVduK2QzcS9wUmQ2U0JpaUZjeW53RXY1cHdOWFFKb0Nhei9IMFArZWVnZWNr?=
- =?utf-8?B?clo0MWkwemxaSVFheC8yR1FIOXJEdEh5VXFrOGRGaDQ3NFR2RVUzVVVDM050?=
- =?utf-8?B?QmZneDM4czE1YTVsTnpocFYvTDg4cnVEOEp4Ly90Q1RNcHBuQnE2djN5ei9L?=
- =?utf-8?B?dU1taWVFNWNKRTltbG1ydXpUYmZYZlF4TFVBeVpKSjBPc0tuTXRIenBnNmpq?=
- =?utf-8?B?REdoVXpHejdQbXJvV0ZPOFFYM0szMWlsYmhMakg0MDhwRk84b3FlaGd6Znlr?=
- =?utf-8?B?RTlFRS9KUWUydHRlL1EyUG1mWFZOQnFwZUMxL3NpSlQydEgwUFJvUXFjTWQ5?=
- =?utf-8?B?QVJRT0IzZjNkY2U5ZkZHWEVldmpVWlBrbzlHMUI1K1FWaDU2VndRM2x1Q0ow?=
- =?utf-8?B?aFRiRzJDLzR3UHRFaEVLYzB1WlZ1UzRZWkluZ2JOaHU1aSswK01SOVE5c0pM?=
- =?utf-8?B?bnh2aFVhUGwyN2o4YXJNczJVQmdzZmVEUWxadHMveXlvendOQWkzUFpmUlRZ?=
- =?utf-8?B?ZVd3UUpCaXRObmFlTFN4emRpT0RlYlEwcGZtRVRyaEVENUo3NGxnUlJIbExt?=
- =?utf-8?B?a044OEEwNk9HaFA0S25lejh6VmV0aVJPS2E5Qk5vTExORTY5YlVrR1I0c0o0?=
- =?utf-8?B?cWFKVndZMnY5ZyttNkVnK2w0YlBmdVNKaXd6eXB3U2lzVjhUbHRrWVRxb0Q3?=
- =?utf-8?B?cm5BT1diMDdrd1Z4WUxhYjhsbDRseWYvMWpNZzludXMyRE0xMU92c0dWUkV6?=
- =?utf-8?B?cjZuSWlEN1hBMTJKSFFpajllekQ5bVZudFNEcGFwZzFaZHRGQkg2SU5QSEhR?=
- =?utf-8?B?cGpUQWkxWkRINzYzWXRLL05lQWZJQWpCdXp2bzhGVXZBVG1iYlpDWmprNU93?=
- =?utf-8?B?TjVVaVliZ01XMGpqaDI1dzYwUEh5cWhMUlpGZ3NPRk4wMTd5cmUvRXNsK0lK?=
- =?utf-8?B?ZC93bHdPRXZnV0pUT0UvQUIrNDJ0YURnaGxrVUFJWU5lbFkxWVFIWFU1QkpO?=
- =?utf-8?B?M0NrYUdYb2hqZ2hHakl4cmtCUW9hck1GbCtLd0NnTG9TbFBOR0QzNmFXYVZu?=
- =?utf-8?B?cklYMWpGVU83ZXJvUituMHRsYzhvSzl1NHBDc2xDL1NEbTZ2Y25QRUdoRGYy?=
- =?utf-8?B?a0RQbFpjc3Y4WUZlWHMxOXVJM2l5TGthNmZrMmthdTJlbFNPdHR5ZHZWR2ov?=
- =?utf-8?B?NjFiSmVsWk9yMG42R2dUL2JHL3kzeDN3S3JoSlBrb0w3cnRuYVlEOVlQMW9K?=
- =?utf-8?B?WWYwbko1Zk5BekdwKzJyNmJSb05BenFDU1BDRzJuc1Y2eG1GQW0yOW8zeGE0?=
- =?utf-8?B?bVlFa2w2dVBuRFpuTkQ3S0VyK1QyMWw0UXliUnNDSGZmMUtac2tTcE1leDdX?=
- =?utf-8?B?QUE1eVNuSUVkcHlOc3NtSGZpc05JVDczQnNaaXFHZStFcHArTmpZaUhNM1di?=
- =?utf-8?B?SW9mYlBSQkYyYlg4R1dDQ3NrcWNrMzhPTVdVd04zVlV4K2pPRktrOVdSaEhT?=
- =?utf-8?B?OXNEcnoxUEduMlFZSUNMVFB1Mkk4QVpFZkJtY2tUTWJpYzRKcUdCdTQ4MTZo?=
- =?utf-8?B?MjIzakxKVVdidnNsUm5SeDdDWlk0Z01hemxZbG1kR0ZuRjQ3b3pycDI3bm1C?=
- =?utf-8?B?SGh5VXhFSTV1ZFU2Q1RrRWk1R1V1L29rdjAzVDI1MnU1WklPNFdFWnZiRXZo?=
- =?utf-8?B?bVR1UXFFc0hsaTkzZXVWcmh5WmZMaE1LejV0MU15b0xDRWJYUXIxZkZpdFJv?=
- =?utf-8?B?U0hCUUh2MHRrZkI4VjVnZG8vNko5SjhDT0xkaUdWSytkSVM3T2FDMlQ1MHVZ?=
- =?utf-8?B?NnBqOHhTU1VZYzZPMENXb3FKV0lrb2VNcjZleGJCSEN4b3QwVEprYU9ROXRM?=
- =?utf-8?B?U1Zoc1QyNlhPdXk5bEF2aW5DejFTZGxoQnJ1cW9Xc21BdEVsWXFpMzJxQ3dT?=
- =?utf-8?B?cHYwVmo5dXlldHZ5Z2pFUW4yUTV0MmNMK21pRXlrL2pPbDNLell0YjB0L000?=
- =?utf-8?Q?DX9djgIcn8ZFKteQr1/aZRreO?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SVIxQ003aVhVS0QvRmZpaE1Ha1gwZU8wclU4bEwraXk1Z2FCNklONlVxaVZU?=
+ =?utf-8?B?N0Z0dTM5T0hZTDFwMXFRaHlla1hRUkNnL2dNUWRwdlp3ZldIbnNBczJRR0xL?=
+ =?utf-8?B?SHdZRjd5NFFuRVlEZW5GN3hNZmMwNE45UlhZcS8xS1hTdUdpSlZQaGFNNlJH?=
+ =?utf-8?B?eEs0RFVRSlZtZkpkcmUrbDU0V3RHb21WOWJJUTJ1aGRlVUJidFpFUTBhd1FN?=
+ =?utf-8?B?d0p3L1IrVWplczB4azZQVlZsNk8zdjV0eXJ2akd5dHphY0ZBblgrWGY1dzZy?=
+ =?utf-8?B?RThNc3lFbmxkOFFYNVNXdEMySmNTZ2VrVGo2V3Rua1MwNW1BbkdvWUxPUXRL?=
+ =?utf-8?B?ejdpVzRjSk9EY1NEYzRvNGgxMENBdE5ZVHJDMndZTklJM0tnNlFrcHlFb2x0?=
+ =?utf-8?B?NS84ZmprMGhsNVE0YTc1aEx5b1gvZU1ra2lxWDBMR2JBdUhlZW5OeHFyWWph?=
+ =?utf-8?B?a1dHbWsyNmp0QVJZOHc4dzBpRHlIVnl1Nkg1SUNGWjBkQUZpSlJjNS8zd1Zy?=
+ =?utf-8?B?OXJjQmE4b2dzbzFNQmpza3l1YXlXQnFVVHF0NVZYc3lScHVkanY4bW5MYm1V?=
+ =?utf-8?B?QzlkNTlRYnBNTFFidWlhV1UxQWhHdy9PeVJVU3h2eWdmZnN5a01JaCs4TUxr?=
+ =?utf-8?B?eWVlaTczTUZGL2xNdXo1WXEyNUpRYm8wbGgrQzVjYVZjbVhOQTM5ZnZGcURk?=
+ =?utf-8?B?bWtidFo4QXltV1ZwVzVpRkZXSmtGYkoyZm5RMGFMaFA0UTdGQ1hWUU5FaUg0?=
+ =?utf-8?B?TFRBTlpmVW42Y3RhM0hRVGUxNU9lSitDVXhoZWRqLzAvZHZlS3BrWmhnd2py?=
+ =?utf-8?B?dVlrZlNsUTkrUkl3d0htVm8yM0JuYi9Bc3hBKzhPWWl3WnFPcjREc0tnUElp?=
+ =?utf-8?B?OVBxL2g0b01lSEpabGFERVdIUENxUlN2c09pRHVaek8zbmsrb3hSUWVvbEFY?=
+ =?utf-8?B?U3lBWE54cTBWVDVUcHRiaXdLdzE1VXgzOHZzYXg5K3c1VGF5ckR6SUJielBp?=
+ =?utf-8?B?dUZ1TVhXN0tRdkdFa3BVWit4MHpnWStvYWJoUG1QYzhFT0ErWis1OVVDcWhR?=
+ =?utf-8?B?QmpRblFHbnVQVk5FckV6MnVkaldUOUhKQThxeWV3bk0xaGZhVGUyMUU4TU1t?=
+ =?utf-8?B?c2VQdGFacTdCR3ZhWnRuNEdaTkIvK0FvQjNaQTJsVkxZdGNDMEhpSlBkNUVG?=
+ =?utf-8?B?WTlSTzJqSnkwVmhEa2MwaDZhT2MwcVZITXkxZC9FYVorVjIwRUhEc0N0OExq?=
+ =?utf-8?B?UzhHd0pqRTU5aXcvSVovRzdxQWdxWVJ0a2tiUkVBMlZJU1lQR3FYMnFySnI5?=
+ =?utf-8?B?MU9wb0x6dDVOOExXN1ZUdnBnSjlOakNrTnpxZUVndGlDSmhqTjB6cFloT0Jy?=
+ =?utf-8?B?RVJrOU9xcGNMQ2ZvNjcvelRNUG9yVkpRUkl4K2tBOVRjMnEvb1oyK2dVMjNV?=
+ =?utf-8?B?YTBJQ3p6L2ZzV3BnTVpKK3hxSDhjYXhlZmhOZVA2dE9pT3FZNERRY1NiU3p5?=
+ =?utf-8?B?OG1ybzY5VXRPQ3FsaFBTV3RTZDhJODBKTkJ1WktZcFdXc1NRK3A0dERsVXJw?=
+ =?utf-8?B?eUhUdVZYZnBBUjBZaXFqM3JyUFh0U0VPTE5KNWpuUTdML3VWb0pLTDdCYkpx?=
+ =?utf-8?B?bGhraWVtZ1JIQmhhL1ZsL3BYdU1OYzNhNXE3NVg3MERlNWNxYWJGbDEvZVEr?=
+ =?utf-8?B?Y2d4UUZvZzdNVXpOaVJPMnBkeTNlZktqbFVkdnJhTkZLWitHeEJSN3dIa2hR?=
+ =?utf-8?B?UzN3YVdMQWNFbm5OSHhpSEhuVkg0SXJXUzRCSVVqR09YM25Mb1I4cTA2b01G?=
+ =?utf-8?B?UkVrZmY1RlpqYjR2THh5QkdjSDZGK3dsU3dLNjYxemZ1QkJEMkwvUkJ1MXhN?=
+ =?utf-8?B?MmlnaEFrV3FPWVVPVFpyK01EWkRYNExWZlJ1N3lBSFBxWlVaNy9jSjVCMDdX?=
+ =?utf-8?B?eExIYmpja2IzbStqbHlIa3E4b1hTL3RSR2lSR1FmZzJzVDlsQ1h4UWdRcDYz?=
+ =?utf-8?B?OTJvWmZqU215TGErell3Vk1qODZaNndXNUhpTkJEWk9QTHgxTHZLVERLYlJ0?=
+ =?utf-8?B?ejlwdGsyZ292cVVOUFUybFZScUdNNGhXUGd6V0FSWUxTenBzQUxURjlVVXdT?=
+ =?utf-8?Q?ACIl8CKK6YowSjeFpTlXjvHco?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f58e06c5-d682-41b7-bf18-08dbdec60668
+X-MS-Exchange-CrossTenant-Network-Message-Id: dd45d424-c4c9-4533-5df6-08dbdec60993
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2023 12:43:49.7980 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Nov 2023 12:43:55.0966 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6EgRRKGYGue8gWEA9zEifIJsYk3oJY7i8nuho2CojS8zyyRwGhCZ8Xm+vozpGesX
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4090
+X-MS-Exchange-CrossTenant-UserPrincipalName: aWGuP/z6OjGV5hKCYsSEqpTsqw+Q5AWKii+B7tUs2EacMz77l3j5UQVFWBbGinrA
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8660
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,115 +187,90 @@ X-Virus-Status: Clean
 
 
 
-On 10/23/23 09:21, Michal Simek wrote:
-> Describe flash memories based on the latest DT binding.
+On 10/26/23 16:04, Michal Simek wrote:
+> Hi,
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+> we are using U-Boot mini configurations for years. We already upstream
+> configurations for mtest, single qspi/ospi or emmcs for all Xilinx SOCs.
+> But we didn't push configuration for different qspi/ospi configurations
+> which were missing upstream dt description. This has changed some time ago
+> by:
+> https://lore.kernel.org/all/20220126112608.955728-3-miquel.raynal@bootlin.com/
 > 
-> Changes in v2:
-> - Add missing description for zc706
+> and we are also pushing support for it in core here:
+> https://lore.kernel.org/all/20231020031817.267959-1-venkatesh.abbarapu@amd.com/
 > 
->   arch/arm/dts/zynq-zc706.dts             | 5 +++--
->   arch/arm/dts/zynq-zc770-xm013.dts       | 5 +++--
->   arch/arm/dts/zynqmp-m-a2197-01-revA.dts | 4 +++-
->   arch/arm/dts/zynqmp-m-a2197-02-revA.dts | 4 +++-
->   arch/arm/dts/zynqmp-m-a2197-03-revA.dts | 4 +++-
->   5 files changed, 15 insertions(+), 7 deletions(-)
+> that's why it is good time to also upstream description for these
+> configurations. Functionality depends on core changes but description
+> itself is independent of it.
 > 
-> diff --git a/arch/arm/dts/zynq-zc706.dts b/arch/arm/dts/zynq-zc706.dts
-> index 03eb016ed687..18963a395156 100644
-> --- a/arch/arm/dts/zynq-zc706.dts
-> +++ b/arch/arm/dts/zynq-zc706.dts
-> @@ -309,10 +309,11 @@
->   &qspi {
->   	bootph-all;
->   	status = "okay";
-> -	num-cs = <1>;
-> +	num-cs = <2>;
->   	flash@0 {
->   		compatible = "n25q128a11", "jedec,spi-nor";
-> -		reg = <0x0>;
-> +		reg = <0>, <1>;
-> +		parallel-memories = /bits/ 64 <0x1000000 0x1000000>; /* 16MB */
->   		spi-tx-bus-width = <1>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <50000000>;
-> diff --git a/arch/arm/dts/zynq-zc770-xm013.dts b/arch/arm/dts/zynq-zc770-xm013.dts
-> index 21902fbb0cc1..582aa1f1b873 100644
-> --- a/arch/arm/dts/zynq-zc770-xm013.dts
-> +++ b/arch/arm/dts/zynq-zc770-xm013.dts
-> @@ -61,10 +61,11 @@
->   
->   &qspi {
->   	status = "okay";
-> -	num-cs = <1>;
-> +	num-cs = <2>;
->   	flash@0 {
->   		compatible = "n25q128a11", "jedec,spi-nor";
-> -		reg = <0x0>;
-> +		reg = <0>, <1>;
-> +		parallel-memories = /bits/ 64 <0x1000000 0x1000000>; /* 16MB */
->   		spi-tx-bus-width = <1>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <50000000>;
-> diff --git a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
-> index 25ef646c8466..83b8a98d80ca 100644
-> --- a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
-> +++ b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
-> @@ -71,11 +71,13 @@
->   
->   &qspi {
->   	status = "okay";
-> +	num-cs = <2>;
->   	flash@0 {
->   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
-> +		reg = <0>, <1>;
-> +		parallel-memories = /bits/ 64 <0x4000000 0x4000000>; /* 64MB */
->   		#address-cells = <1>;
->   		#size-cells = <1>;
-> -		reg = <0x0>;
->   		spi-tx-bus-width = <4>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <108000000>;
-> diff --git a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
-> index ece9e6914541..dd37b726d3dc 100644
-> --- a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
-> +++ b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
-> @@ -67,11 +67,13 @@
->   
->   &qspi {
->   	status = "okay";
-> +	num-cs = <2>;
->   	flash@0 {
->   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
-> +		reg = <0>, <1>;
-> +		parallel-memories = /bits/ 64 <0x4000000 0x4000000>; /* 64MB */
->   		#address-cells = <1>;
->   		#size-cells = <1>;
-> -		reg = <0x0>;
->   		spi-tx-bus-width = <4>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <108000000>;
-> diff --git a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
-> index 7372968e5734..811cebafe9e6 100644
-> --- a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
-> +++ b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
-> @@ -67,11 +67,13 @@
->   
->   &qspi {
->   	status = "okay";
-> +	num-cs = <2>;
->   	flash@0 {
->   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
-> +		reg = <0>, <1>;
-> +		parallel-memories = /bits/ 64 <0x4000000 0x4000000>; /* 64MB */
->   		#address-cells = <1>;
->   		#size-cells = <1>;
-> -		reg = <0x0>;
->   		spi-tx-bus-width = <4>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <108000000>;
+> Thanks,
+> Michal
+> 
+> 
+> Michal Simek (4):
+>    ARM: zynq: Add DTSes for mini qspi configurations
+>    ARM: zynq: Add DTSes for mini qspi configurations
+>    arm64: versal: Add DTSes for mini qspi/ospi configuration
+>    arm64: versal-net: Add DTSes for mini qspi/ospi configuration
+> 
+>   arch/arm/dts/Makefile                         | 27 +++++++++++++++++++
+>   arch/arm/dts/versal-mini-ospi-stacked.dts     | 22 +++++++++++++++
+>   arch/arm/dts/versal-mini-qspi-parallel.dts    | 22 +++++++++++++++
+>   arch/arm/dts/versal-mini-qspi-stacked.dts     | 22 +++++++++++++++
+>   arch/arm/dts/versal-mini-qspi-x1-single.dts   | 17 ++++++++++++
+>   arch/arm/dts/versal-mini-qspi-x1-stacked.dts  | 23 ++++++++++++++++
+>   arch/arm/dts/versal-mini-qspi-x2-single.dts   | 17 ++++++++++++
+>   arch/arm/dts/versal-mini-qspi-x2-stacked.dts  | 23 ++++++++++++++++
+>   arch/arm/dts/versal-net-mini-ospi-stacked.dts | 22 +++++++++++++++
+>   .../arm/dts/versal-net-mini-qspi-parallel.dts | 22 +++++++++++++++
+>   arch/arm/dts/versal-net-mini-qspi-stacked.dts | 22 +++++++++++++++
+>   .../dts/versal-net-mini-qspi-x1-single.dts    | 17 ++++++++++++
+>   .../dts/versal-net-mini-qspi-x1-stacked.dts   | 23 ++++++++++++++++
+>   .../dts/versal-net-mini-qspi-x2-single.dts    | 17 ++++++++++++
+>   .../dts/versal-net-mini-qspi-x2-stacked.dts   | 23 ++++++++++++++++
+>   arch/arm/dts/zynq-cse-qspi-parallel.dts       | 22 +++++++++++++++
+>   arch/arm/dts/zynq-cse-qspi-stacked.dts        | 22 +++++++++++++++
+>   arch/arm/dts/zynq-cse-qspi-x1-single.dts      | 16 +++++++++++
+>   arch/arm/dts/zynq-cse-qspi-x1-stacked.dts     | 22 +++++++++++++++
+>   arch/arm/dts/zynq-cse-qspi-x2-single.dts      | 16 +++++++++++
+>   arch/arm/dts/zynq-cse-qspi-x2-stacked.dts     | 22 +++++++++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-parallel.dts    | 21 +++++++++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-single.dts      | 12 +++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-stacked.dts     | 21 +++++++++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-x1-single.dts   | 17 ++++++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-x1-stacked.dts  | 23 ++++++++++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-x2-single.dts   | 17 ++++++++++++
+>   arch/arm/dts/zynqmp-mini-qspi-x2-stacked.dts  | 23 ++++++++++++++++
+>   28 files changed, 573 insertions(+)
+>   create mode 100644 arch/arm/dts/versal-mini-ospi-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-mini-qspi-parallel.dts
+>   create mode 100644 arch/arm/dts/versal-mini-qspi-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-mini-qspi-x1-single.dts
+>   create mode 100644 arch/arm/dts/versal-mini-qspi-x1-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-mini-qspi-x2-single.dts
+>   create mode 100644 arch/arm/dts/versal-mini-qspi-x2-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-ospi-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-qspi-parallel.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-qspi-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-qspi-x1-single.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-qspi-x1-stacked.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-qspi-x2-single.dts
+>   create mode 100644 arch/arm/dts/versal-net-mini-qspi-x2-stacked.dts
+>   create mode 100644 arch/arm/dts/zynq-cse-qspi-parallel.dts
+>   create mode 100644 arch/arm/dts/zynq-cse-qspi-stacked.dts
+>   create mode 100644 arch/arm/dts/zynq-cse-qspi-x1-single.dts
+>   create mode 100644 arch/arm/dts/zynq-cse-qspi-x1-stacked.dts
+>   create mode 100644 arch/arm/dts/zynq-cse-qspi-x2-single.dts
+>   create mode 100644 arch/arm/dts/zynq-cse-qspi-x2-stacked.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-parallel.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-single.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-stacked.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x1-single.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x1-stacked.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x2-single.dts
+>   create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x2-stacked.dts
+> 
 
 Applied.
 M
