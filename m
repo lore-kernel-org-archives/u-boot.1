@@ -4,74 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C83CC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:43:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED59FC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 20:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5F028701B;
-	Mon,  6 Nov 2023 21:43:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 37349864C3;
+	Mon,  6 Nov 2023 21:46:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RQdn+iXG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HMlwrbCi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DEB08708B; Mon,  6 Nov 2023 21:43:19 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 129FF86FB4; Mon,  6 Nov 2023 21:46:19 +0100 (CET)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82AB68701B
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:43:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 332FC863C8
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 21:46:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-507d1cc0538so6628245e87.2
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:43:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3b3ec45d6e9so3009151b6e.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 12:46:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699303392; x=1699908192; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cvoOMKpRIylYQoKudHwPbM15xksYg3taFhrhbLrpJEM=;
- b=RQdn+iXGEAUSfNbzu4YtlZmFm/bTduH//oe24mV2Jd0V79qQgHXgD6P3pjSWnJEz+C
- /RZLzJ5Sa0NGJ22NIoD6dn40v01o5HOHQpm8j3qkKq3vNu0K0bVdibgb/PcWlxQL35Xc
- KBBW+MMBHFAgrK3xVBjFYUwWbZ97FJCOMZLGg=
+ d=konsulko.com; s=google; t=1699303571; x=1699908371; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=4Nxzi1v7MuipQ1c6PMUhBUlxSDKXBs3kDuJgFvohAHY=;
+ b=HMlwrbCiismqqoRIqqIVCm9hMgV/KYPd87IO3YWx6YnGLUTHyuw32fdk3lKf7ziyPA
+ DLVQQXTMrwq7OjW80Vwk0ontRL1TnWPHg/Oh4dmOR29wE568/e1Rq0IXWPRy8bGQAzt7
+ ye6sy6WODdMXg0JdymNJAJWQdg+B8OtUMCYec=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699303392; x=1699908192;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cvoOMKpRIylYQoKudHwPbM15xksYg3taFhrhbLrpJEM=;
- b=b9qugny4v94/HR4g1yrIqq6CVYqU4EdcpQXmMNwNKwnm/VLsQlTqQKMPbz+kPElx+Y
- 4f/c433CvRP0ZDbZkockNOA1ZXI0rfVsLp/cnDzXVnMGUJ7nlMWE63Drwb0Wa8uTfUcW
- WSlj7p+8HJS+vwWPISH5GyfGgCg9iTdbmSHz3jdEyJ6RUvfwFV/tpfwk7oyraiviQXw1
- CNFTAfBF5XM7hpVn0gTsuPzkXKnWr9w5EE1TsQDBUBnOxHnyleLHTvcdW6RrY+VjucO1
- thfvMOHyWhhfyg+9L/1Irj6r4PmjeB5/RKc2Pk6yps0uDaI113wpxBJzDdjPzrQcUolm
- g3HA==
-X-Gm-Message-State: AOJu0Yw3iE+LW8FPrzTbjaeCfB0UrsvnIJ8OJPpL6NpL6SCckkyimXqD
- Iaj0rXWjtt5V1tcZZrunvZHwd1QyJ1/LJZkB0kyPcw==
-X-Google-Smtp-Source: AGHT+IEmgYwIYr7mZtghDqDPJYck6vLb3EE/mkMiME5RSm7VH+VnUVoCl4CqTkmCCv307Pt6amuAFMrWDF/VL8iE03M=
-X-Received: by 2002:ac2:52b4:0:b0:507:a229:f53e with SMTP id
- r20-20020ac252b4000000b00507a229f53emr19860671lfm.24.1699303391265; Mon, 06
- Nov 2023 12:43:11 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699303571; x=1699908371;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4Nxzi1v7MuipQ1c6PMUhBUlxSDKXBs3kDuJgFvohAHY=;
+ b=DVtgjcTFHA65o6ngdmpCr/Kri3gXp3t6IswGPN7JOqxmjoXmQqWmEydFOaeRBJzd43
+ KDZDPIS5Bj5zRWEfeLSo1XnzrwW6zFHAT8vVjksbAQ7FKXmNp7sKb+DnK2O2lorHsg0x
+ uUnGMWbGRBfexIRxctfP1u9TRpXhGDhzJhZNJ1otFscQK78DRCQSC0M22cbIYsKAnixF
+ wpLrFyLHz1kDVZu+pBZWuixmsT1WhQf53YvoSJqB6f0V0ya8E3y2pVvwPPg4ZR6dV8JE
+ 3Cm7Ww3DJK1c7q/7EZ66JfsdtOOof4FAAH1967Hlv2zv23je9Y2iv3sxuSdAU/W8+nRB
+ T8rw==
+X-Gm-Message-State: AOJu0Yx516sgA8Sa+wBagsLkDMn1q7C3W9PU2tUPjHL2Deu23BfHz8Ml
+ Z4dljWCqGlwo7RuClCv3cUVx1A==
+X-Google-Smtp-Source: AGHT+IHlymEVkSsI8p/8xYG4kSNNNjVnxnIQd85ur7W4qYxM/p4Y18vi9FxL/A96F2cO30bt23Aj2w==
+X-Received: by 2002:a05:6808:19a5:b0:3a8:f3e7:d691 with SMTP id
+ bj37-20020a05680819a500b003a8f3e7d691mr39122942oib.37.1699303571707; 
+ Mon, 06 Nov 2023 12:46:11 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ u5-20020a0cea45000000b00670bd5a3720sm3764312qvp.97.2023.11.06.12.46.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Nov 2023 12:46:11 -0800 (PST)
+Date: Mon, 6 Nov 2023 15:46:08 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Message-ID: <20231106204608.GJ496310@bill-the-cat>
+References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+ <20231101170559.680ab493@donnerap.manchester.arm.com>
+ <50ff2080-5831-4963-937d-331248b59973@canonical.com>
+ <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
+ <20231104171212.3d041a4f@slackpad.lan>
+ <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
+ <20231106172601.12c36750@donnerap.manchester.arm.com>
+ <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
 MIME-Version: 1.0
-References: <bf1e575239af2f0dae872543dbc4f9974c618c95.camel@physik.fu-berlin.de>
- <CAPnjgZ0zjD+vrsyHkRpAzatZvA7Cv5-9Q+96O1mUN0Ei4H70uw@mail.gmail.com>
- <891544b36a1a9a1cd62345f341828c144e7f1ec6.camel@physik.fu-berlin.de>
- <CAPnjgZ35bJSBE_HqVxh_fb42AYm+vYmx-oyaDQzXqcsmqFvHxA@mail.gmail.com>
- <1b27e5f825851f6a3c0c198c0b42e50bc36f67b8.camel@physik.fu-berlin.de>
- <CAPnjgZ1PmHzB1jYRwjDUiUAydSvS=-Q50mzDLdHROr2xA1NYWg@mail.gmail.com>
- <60c58204161b27c044b19a657a3270e77519fafa.camel@physik.fu-berlin.de>
-In-Reply-To: <60c58204161b27c044b19a657a3270e77519fafa.camel@physik.fu-berlin.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Nov 2023 13:42:59 -0700
-Message-ID: <CAPnjgZ3Xk87GOYXaUZNPE7wjDi4fGim5zZCt0H_QW=THTPJyKQ@mail.gmail.com>
-Subject: Re: Need advise with u-boot on SH-7785LCR
-To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- Marek Vasut <marex@denx.de>, Vagrant Cascadian <vagrant@debian.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BYj++zQpFk7GhKE8"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,53 +106,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Marek Vasut <marex@denx.de>
-+Vagrant Cascadian <vagrant@debian.org>
 
+--BYj++zQpFk7GhKE8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 6 Nov 2023 at 10:33, John Paul Adrian Glaubitz <
-glaubitz@physik.fu-berlin.de> wrote:
-
-> Hi Simon!
->
-> On Mon, 2023-11-06 at 10:24 -0700, Simon Glass wrote:
-> > > So, I assume, I should just be able to write u-boot.bin to
-> /dev/mtdblock0?
+On Mon, Nov 06, 2023 at 01:38:39PM -0700, Simon Glass wrote:
+> Hi Andre,
+>=20
+> On Mon, 6 Nov 2023 at 10:26, Andre Przywara <andre.przywara@arm.com> wrot=
+e:
 > >
-> > Maybe, but you will likely brick the device if you have no other way
-> > to write to flash.
->
-> The flash memory is actually on a daughter board that can be easily
-> replaced
-> and I have multiple of these daughter boards. It turns out that just
-> writing
-> the image to /dev/mtdblock0 works and I can boot the board into the freshly
-> flashed u-boot version.
->
-> However, the u-boot version 2019.01 built from git won't work while the old
-> 2014.01 version that I copied onto disk from /dev/mtdblock0 does work when
-> flashing it to a second daughter board.
->
-> So, flashing works indeed like this and I can successfully start u-boot
-> after
-> flashing it into /dev/mtdblock0. Now I just need to figure out what the
-> difference
-> between 2014.01 and 2019.01 is and why the latter doesn't work.
->
-> I have uploaded both versions here:
->
-> > https://people.debian.org/~glaubitz/u-boot-sh7785lcr/
->
-> Maybe someone with more experience can spot anything obvious like incorrect
-> address offsets etc.
->
-> PS: I'm actually called Adrian, despite the long name ;-).
->
-> Adrian
->
-> --
->  .''`.  John Paul Adrian Glaubitz
-> : :' :  Debian Developer
-> `. `'   Physicist
->   `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
->
+> > On Sat, 4 Nov 2023 19:45:06 +0000
+> > Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi,
+> >
+> > > On Sat, 4 Nov 2023 at 17:13, Andre Przywara <andre.przywara@arm.com> =
+wrote:
+> > > >
+> > > > On Fri, 3 Nov 2023 13:38:58 -0600
+> > > > Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > > Hi Heinrich,
+> > > > >
+> > > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
+> > > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > > >
+> > > > > > On 11/1/23 19:05, Andre Przywara wrote:
+> > > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
+> > > > > > > Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> > > > > > >
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > >> The Zkr ISA extension (ratified Nov 2021) introduced the see=
+d CSR. It
+> > > > > > >> provides an interface to a physical entropy source.
+> > > > > > >>
+> > > > > > >> A RNG driver based on the seed CSR is provided. It depends on
+> > > > > > >> mseccfg.sseed being set in the SBI firmware.
+> > > > > > >
+> > > > > > > As you might have seen, I added a similar driver for the resp=
+ective Arm
+> > > > > > > functionality:
+> > > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre=
+=2Eprzywara@arm.com/
+> > > > > > >
+> > > > > > > And I see that you seem to use the same mechanism to probe an=
+d init the
+> > > > > > > driver: U_BOOT_DRVINFO and fail in probe() if the feature is =
+not
+> > > > > > > implemented.
+> > > > > > > One downside of this approach is that the driver is always lo=
+aded (and
+> > > > > > > visible in the DM tree), even with the feature not being avai=
+lable.
+> > > > > > > That doesn't seem too much of a problem on the first glance, =
+but it
+> > > > > > > occupies a device number, and any subsequent other DM_RNG dev=
+ices
+> > > > > > > (like virtio-rng) typically get higher device numbers. So wit=
+hout
+> > > > > > > the feature, but with virtio-rng, I get:
+> > > > > > > VExpress64# rng 0
+> > > > > > > No RNG device
+> > > > >
+> > > > > Why do we get this? If the device is not there, the bind() functi=
+on
+> > > > > can return -ENODEV
+> > > > >
+> > > > > I see this in U-Boot:
+> > > > >
+> > > > > U_BOOT_DRVINFO(cpu_arm_rndr) =3D {
+> > > > >
+> > > > > We should not use this.
+> > > >
+> > > > Agreed.
+> > > >
+> > > > > Use the devicetree.
+> > > >
+> > > > No, this is definitely not something for the DT, at least not on AR=
+M.
+> > > > It's perfectly discoverable via the architected CPU ID registers.
+> > > > Similar to PCI and USB devices, which we don't probe via the DT as =
+well.
+> > > >
+> > > > It's arguably not proper "driver" material per se, as I've argued b=
+efore, but
+> > > > it's the simplest solution and fits in nicely otherwise.
+> > > >
+> > > > I was wondering if it might be something for UCLASS_CPU, something =
+like
+> > > > a "CPU feature bus": to let devices register on one on the many CPU
+> > > > features (instead of compatible strings), then only bind() those
+> > > > drivers it the respective bit is set.
+> > > >
+> > > > Does that make sense? Would that be doable without boiling the ocea=
+n?
+> > > > As I don't know if we see many users apart from this.
+> > >
+> > > I have seen this so many times, where people want to avoid putting
+> > > things in the DT and then are surprised that everything is difficult,
+> > > broken and confusing. Why not just follow the rules? It is not just
+> > > about whether we can avoid it, etc. It is about how devices fit
+> > > together cohesively in the system, and how U-Boot operates.
+> >
+> > A devicetree is only for peripherals *that cannot be located by probing=
+*.
+>=20
+> I have to stop you there. It absolutely is not limited to that.
+
+It is limited to that if we're going to keep using the device trees that
+Linux uses. Full stop. There's not really wiggle room there either.
+
+--=20
+Tom
+
+--BYj++zQpFk7GhKE8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJUIoACgkQFHw5/5Y0
+tyyBggv/QFhUg3IVbdllOZduIjkhq7jA2TtliU3ZcddiW6CJQXDk2pCkdY/ZZEb3
+i1XYFplhTILUc0DTK3TMvedAsiakrfBPeDgOPCBQ3MKas5Taznuif3fx0doyPeF+
+MUEyO0Au2AOaHrk2Wkz8x/gKoegjWjfRDim6tX5YaiNiBJpWk6SVJm9VAhRcsbtC
+TYILGWzU1tEQvUK78FRocf1deK57fKhjLpyyNujjVDlC5JNLr9amMnMlNHo4/boz
+s2kVmHszC0lpx/F2ZHRaocz4xgrXgQu4FU4PzOy+aVMb3orw63mrEGHV7zgpn8yk
+6WC79ogPs6A9VU6kaqUZxRwOFidE7i6pSWIlm6FjxQyK9IaM8ofwgXTINP4KmRzd
+OgTw+rpfvj64GWKQXq8wRdvPc2ReddoQL2qlD/c8tK9CxlQZfjbp0UnGdKklpgwz
+U8Y+VmW+Yxs8Vwdj9rghTUkbqzLBmfUKN4kQZrMBIjeI86T39ioApnU2F9MvREu6
+ukfviYCt
+=tMha
+-----END PGP SIGNATURE-----
+
+--BYj++zQpFk7GhKE8--
