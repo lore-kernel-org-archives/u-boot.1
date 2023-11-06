@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34465C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F01FC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:54:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0456870BD;
-	Mon,  6 Nov 2023 17:52:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AD6686538;
+	Mon,  6 Nov 2023 17:54:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AA/5ZEEr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UAs2iw1j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5631870EE; Mon,  6 Nov 2023 17:52:46 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37E8286758; Mon,  6 Nov 2023 17:54:34 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 828568701D
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:52:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 113B98272A
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:54:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=daniel.schwierzeck@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-543923af573so8084250a12.0
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:52:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699289563; x=1699894363; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7SoJKqDgP25AiukZHak+TpoJYQP5fd1mh4vjneFuEH4=;
- b=AA/5ZEErcbJuak9ag+3n69ORuLTljo3XITDrxVjKwIrFBq/nNraCaAfRGDjyA+FvYj
- eHL4s6l3YKt8POLQoJs9u8V+6ceMsFKU6Iolnaebz5yxJ35B4soU+ZaiuxTjpEsztwb7
- widqOg54QYWLVzVPv/VQqtYg3sVS6KOhBeqrgxfqWOcG9FUbt5bko8aatwxTzKAhznmP
- 2xA1/gLjjp2v0+U6hx/utoi0hR6QXCgLWNWW1T21MsPXIg3tvI4StNf6UqTj0arEAdLH
- zBzz9t+JihDFpYVsX0rveFQbUGRdveWHm4Kt2FSvJWVmF99UngEINDCDaTI9FLvX8qWc
- AKHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699289563; x=1699894363;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7SoJKqDgP25AiukZHak+TpoJYQP5fd1mh4vjneFuEH4=;
- b=ftXbhRJksOKoI9ch9zps6z29GBwF26kLq+OmReQwvCJ0/jWWvzZy1ovx8S+ER/s9l1
- jc0u3y1zHuTy6Vj9UM6ncW8dRHJgwewl58hGRIJ89PPhd5LRCM8sFme06etGzsPY5ds+
- caPbPZ/ObvxLxaAEkpxARXtQSl3bB+G/mVuma32kkpYuFrCLZRKZjy/LFz0ILuIAYrcq
- BAog7NM4uD30n/4ZeT9RhvOXqyMvAfXrJMiwQ+9yIHvqk/yhsBIFUb6SpSIXszpzaDA/
- DTfZqt7uFgmvW0dK6qfZ+GV0Af7xdhzBDJpv1UOAHCMpaG50hzNjuJVRSY7UVog1VbeW
- 2Z8A==
-X-Gm-Message-State: AOJu0YxIFuA+LeiaE6llYywgii+npDz46QLXm9D5J3EEpiL6ywMbUyfH
- 3yL6NuMvTvBLjgYlXlUmPF1O7qA/u+0=
-X-Google-Smtp-Source: AGHT+IE+Osr66f2MCMZ0JVdZ+yJehut/M2TlKEqJ3Y7/CvEozIsUGtXaViqt4PIa4Uqm/IoiKiC1oA==
-X-Received: by 2002:a17:907:9281:b0:9ba:1d08:ad43 with SMTP id
- bw1-20020a170907928100b009ba1d08ad43mr13787723ejc.70.1699289562924; 
- Mon, 06 Nov 2023 08:52:42 -0800 (PST)
-Received: from workstation.sas.sys.sphairon.com (51-6-142-46.pool.kielnet.net.
- [46.142.6.51]) by smtp.gmail.com with ESMTPSA id
- i21-20020a170906091500b009ad87fd4e65sm28673ejd.108.2023.11.06.08.52.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 08:52:42 -0800 (PST)
-From: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-Subject: [PATCH] mips: fix change_k0_cca()
-Date: Mon,  6 Nov 2023 17:52:38 +0100
-Message-ID: <20231106165241.298426-1-daniel.schwierzeck@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A6GsQuP058481;
+ Mon, 6 Nov 2023 10:54:26 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699289666;
+ bh=w+9dcjU2myvQ4avqtNZIDDyOPD3q3cXP1CIQpKn5KIc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UAs2iw1jcn1WlQviIGLMDh/Y4AwktwsrYrMI9DrvV2cKaY8wVoe8j7hneVm+gkFaz
+ 6KUcKGXxdj55dvK9GChqoiITsyLu9/fyQJZ3kVpy5rh0l3o/Wh3ldfs347x+jPwe+s
+ pnMfA689z6xS/cS8KHFUIO/ZDS1ZfHYr5Rfl5oVs=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A6GsQ59059181
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 6 Nov 2023 10:54:26 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
+ Nov 2023 10:54:26 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 6 Nov 2023 10:54:26 -0600
+Received: from [10.250.34.172] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A6GsPi1097102;
+ Mon, 6 Nov 2023 10:54:25 -0600
+Message-ID: <e875e2ee-2d92-4b27-b9a8-6bd7d6281c49@ti.com>
+Date: Mon, 6 Nov 2023 10:54:25 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V2 08/12] arm: mach-k3: arm64-mmu: Refactor to be
+ independent of board
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Robert Nelson <robertcnelson@gmail.com>, Jason Kridner
+ <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
+References: <20231104072150.3339-1-nm@ti.com> <20231104072150.3339-9-nm@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20231104072150.3339-9-nm@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,44 +84,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The intention of change_k0_cca() is to read the C0.Config register into
-register $t0, update $t0 with the new cache coherency mode passed in $a0
-and write back $t0 to C0.Config. With MIPS32 R2 or later instruction
-sets, this can be achieved with a single instruction with INS. The
-source and destination register of the INS instruction is passed as
-first parameter. In case of change_k0_cca() it is register $t0. But
-for writing back the updated value to C0.Config, the incorrect $a0
-register is used. This is only correct in the MIPS32 R1 code path.
+On 11/4/23 2:21 AM, Nishanth Menon wrote:
+> Refactor J721E J7200 definition to make this independent of board
+> macros.
+> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> ---
+>   arch/arm/mach-k3/arm64-mmu.c | 50 ++++++++++++++++++------------------
+>   1 file changed, 25 insertions(+), 25 deletions(-)
+> 
+> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
+> index f8087d2421e7..8cb6614035a5 100644
+> --- a/arch/arm/mach-k3/arm64-mmu.c
+> +++ b/arch/arm/mach-k3/arm64-mmu.c
+> @@ -68,12 +68,11 @@ struct mm_region *mem_map = am654_mem_map;
+>   
+>   #ifdef CONFIG_SOC_K3_J721E
+>   
+> -#ifdef CONFIG_TARGET_J721E_A72_EVM
+> -/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
+> -#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
+> +#ifdef CONFIG_SOC_K3_J721E_J7200
+> +#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
+>   
+>   /* ToDo: Add 64bit IO */
+> -struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+> +struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
 
-Fix the `mtc0` instruction to write back the value of the $t0 register.
-Fix the MIPS32 R1 code path to also store the updated value in $t0.
+Git diff seems to have gotten confused with your re-ordering, makes
+this hard to review what you are actually changing here..
 
-Reported by user ddqxy138 on Github.
-https://github.com/u-boot/u-boot/commit/b838586086af3278bcaead3720c7a18813cf4619
+Also you reminded me of a patch I forgot to send from long ago, just
+sent it, should make this patch a little more simple if it goes in
+first.
 
-Signed-off-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Andrew
 
----
-
- arch/mips/lib/cache_init.S | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/mips/lib/cache_init.S b/arch/mips/lib/cache_init.S
-index 602741c65d..d64209d76a 100644
---- a/arch/mips/lib/cache_init.S
-+++ b/arch/mips/lib/cache_init.S
-@@ -431,9 +431,9 @@ LEAF(change_k0_cca)
- #else
- 	xor		a0, a0, t0
- 	andi		a0, a0, CONF_CM_CMASK
--	xor		a0, a0, t0
-+	xor		t0, a0, t0
- #endif
--	mtc0		a0, CP0_CONFIG
-+	mtc0		t0, CP0_CONFIG
- 
- 	jr.hb		ra
- 	END(change_k0_cca)
--- 
-2.41.0
-
+>   	{
+>   		.virt = 0x0UL,
+>   		.phys = 0x0UL,
+> @@ -90,13 +89,13 @@ struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+>   	}, {
+>   		.virt = 0xa0000000UL,
+>   		.phys = 0xa0000000UL,
+> -		.size = 0x1bc00000UL,
+> +		.size = 0x04800000UL,
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+>   			 PTE_BLOCK_NON_SHARE
+>   	}, {
+> -		.virt = 0xbbc00000UL,
+> -		.phys = 0xbbc00000UL,
+> -		.size = 0x44400000UL,
+> +		.virt = 0xa4800000UL,
+> +		.phys = 0xa4800000UL,
+> +		.size = 0x5b800000UL,
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>   			 PTE_BLOCK_INNER_SHARE
+>   	}, {
+> @@ -112,26 +111,21 @@ struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>   			 PTE_BLOCK_NON_SHARE |
+>   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> -	}, {
+> -		.virt = 0x4d80000000UL,
+> -		.phys = 0x4d80000000UL,
+> -		.size = 0x0002000000UL,
+> -		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+> -			 PTE_BLOCK_INNER_SHARE
+>   	}, {
+>   		/* List terminator */
+>   		0,
+>   	}
+>   };
+>   
+> -struct mm_region *mem_map = j721e_mem_map;
+> -#endif /* CONFIG_TARGET_J721E_A72_EVM */
+> +struct mm_region *mem_map = j7200_mem_map;
+>   
+> -#ifdef CONFIG_TARGET_J7200_A72_EVM
+> -#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
+> +#else /* CONFIG_SOC_K3_J721E_J7200 */
+> +
+> +/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
+> +#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
+>   
+>   /* ToDo: Add 64bit IO */
+> -struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
+> +struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
+>   	{
+>   		.virt = 0x0UL,
+>   		.phys = 0x0UL,
+> @@ -148,13 +142,13 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
+>   	}, {
+>   		.virt = 0xa0000000UL,
+>   		.phys = 0xa0000000UL,
+> -		.size = 0x04800000UL,
+> +		.size = 0x1bc00000UL,
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+>   			 PTE_BLOCK_NON_SHARE
+>   	}, {
+> -		.virt = 0xa4800000UL,
+> -		.phys = 0xa4800000UL,
+> -		.size = 0x5b800000UL,
+> +		.virt = 0xbbc00000UL,
+> +		.phys = 0xbbc00000UL,
+> +		.size = 0x44400000UL,
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>   			 PTE_BLOCK_INNER_SHARE
+>   	}, {
+> @@ -170,14 +164,20 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
+>   		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>   			 PTE_BLOCK_NON_SHARE |
+>   			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		.virt = 0x4d80000000UL,
+> +		.phys = 0x4d80000000UL,
+> +		.size = 0x0002000000UL,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
+> +			 PTE_BLOCK_INNER_SHARE
+>   	}, {
+>   		/* List terminator */
+>   		0,
+>   	}
+>   };
+>   
+> -struct mm_region *mem_map = j7200_mem_map;
+> -#endif /* CONFIG_TARGET_J7200_A72_EVM */
+> +struct mm_region *mem_map = j721e_mem_map;
+> +#endif /* CONFIG_SOC_K3_J721E_J7200 */
+>   
+>   #endif /* CONFIG_SOC_K3_J721E */
+>   
