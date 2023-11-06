@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4C0C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 10:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23227C4167D
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 641F786487;
-	Mon,  6 Nov 2023 11:53:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 00BCD86BEC;
+	Mon,  6 Nov 2023 12:16:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="czkIyuVA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nbaMX5e5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2B4A865ED; Mon,  6 Nov 2023 11:53:12 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 0065B86BEC; Mon,  6 Nov 2023 12:16:42 +0100 (CET)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D39280310
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 11:53:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A995486BA4
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:16:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1cc0d0a0355so31130945ad.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 02:53:10 -0800 (PST)
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-6ba54c3ed97so4484640b3a.2
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 03:16:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699267988; x=1699872788; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0Cf1IlMRC4n8kaTzuTGtmG2qFX1KaGCO41hl30tWJyo=;
- b=czkIyuVA0R5d6vvx6Dern7KIz8IjgyxYbT1yhX7yYm6IohlUGC8HyasunucbNy9I7g
- FJmWpfYCL/DAHs6+kjhuSHQ7rd7XkOtoZHr/JatlIVMuL5QIgWUpsHrLZS3ymo77lkS0
- eO641xvl+zaahp2RAVN0X3MP6xtjxQOd6QBIlO+JnyWNN59bdDcPDGp0Wxr6BvtMgbtm
- UF3RcxRhL3XW4CY419NZDv02jDEYhdQ+4u/lBYQlEae0CRrgOe90g0GtCUCFXkwy804H
- j/BrP4FtPL5v7EnmGRks2940Q4olavuxgiPCP9sHJjG6Snogsfk1YeptGzShWLk/n+EI
- iT1Q==
+ d=linaro.org; s=google; t=1699269395; x=1699874195; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8Bb7KyrdKQOr8af/mV5PMBEzkjqqjtfmyP7AGbj4IzY=;
+ b=nbaMX5e5jzDe9eWuavRqxViWFIb04GOu3c6Oo87Wea51XgTLUmAfE7EMxYURTN822e
+ U05dlzjYuZe8NamqQJpPKGvoBEEn3KI8m1sfZ+dts2yvCRQsy5OWI6eF6wQCEiQ/TtcI
+ soq2JWrLbR4/w0RbjCx96Q/pTlL+8h74FHAqEcgXvQUvlJMsRQEsKLVloVGQB9LXdfX7
+ rPtiJEF8WzRAMiAA/zp/ZmVkU9mS4ocGtmYQe9NMq2mtZF05ubR+uyXw86sJTuA9zYtx
+ LOQ8J73JVSu8GxIPoNKa6bz1Gp0+v1YfB/YnBIAQqrUzmYmVevC0+d2EvSba8Qlij8kJ
+ Iglg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699267988; x=1699872788;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1699269395; x=1699874195;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0Cf1IlMRC4n8kaTzuTGtmG2qFX1KaGCO41hl30tWJyo=;
- b=LnYP0S8sWbg+TqTlaCwDScnq/G3lC5m9UsdAefbwVA3JGo7A7QfRsHQ1yhNDZoSE9p
- wKf4r7mbFegkyYlbMNzkrr7TizRzo81zFVBBaOqCNQ0Sf91PeZks2HOaDQGyQ2FFrXcY
- GlNQTs45QkYQA56IiYsEXvcbGqdyjAwQUvn5L/XW+8Nc8Ap2/cq5zuiitjRnaDy/FcEg
- yz5NBJQaSwtDQ+tMdfZM9f+RktIvvSEyqVsqYoJ8VOsN1nZR+kmjJmDyX5SoyWsi5orX
- 7ZFS0ZfNZc7wNzf3VCfopyCfziqFAS33m5HAfm7eml3KaTZe4jaV5tgMuHXHsuDq6g+e
- QuoA==
-X-Gm-Message-State: AOJu0Yz2X8bP4LImDHlbsuwoNfQbExsNYWqJEnY/QAyMl3o/AID7zYFn
- 597beeXmKar/RPqlX3LdUAb5lrB+NAPzwyVqg+iTRQ==
-X-Google-Smtp-Source: AGHT+IFO5L4UTWr/b5ZYgt8jLhf8XxntqsfiV6AvVXO1HIo4kLlc8jMhNRzoMAaAqPlJAYFvrR45CbjO2nTyQj05Krc=
-X-Received: by 2002:a17:90b:3101:b0:27d:661f:59ac with SMTP id
- gc1-20020a17090b310100b0027d661f59acmr22625113pjb.38.1699267988467; Mon, 06
- Nov 2023 02:53:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20231102064459.3466953-1-masahisa.kojima@linaro.org>
- <20231102064459.3466953-8-masahisa.kojima@linaro.org>
- <CAC_iWjLs9zCHrhkQJ5yAc+b1xhEEvpyCvh6EuJfduTqcUW0Bww@mail.gmail.com>
-In-Reply-To: <CAC_iWjLs9zCHrhkQJ5yAc+b1xhEEvpyCvh6EuJfduTqcUW0Bww@mail.gmail.com>
+ bh=8Bb7KyrdKQOr8af/mV5PMBEzkjqqjtfmyP7AGbj4IzY=;
+ b=cl8fKr/p4nZzE9usB9VD4riTqv/9kxZNpRYDI9kRoBzqE1CwEwnCo1c5zbspKAKvJg
+ v9hFcogFGPr3UKWngM4iddAc6tcRjnRzz3Csdd3Nd+n3tSH8YfwYgx2ykeVtqi4nb14h
+ zwFhCiV/z5b1DX7YRV2lv/PEWgVXHgunvtoLJFRQnc8Ee/xhEUW5wRQfT3nytGEJoFAV
+ QX08CfUSrzXFnN2qS4VMxvKpwtKmNYmgxWuz8BRMgcdCfisGa/o/ObZCzaGKE6ITmGXN
+ cFIb0z6KTpC/orBQBIYREzrj1A5NVFrY79YN0I5xmsOvluUpc1rl0R16SlcPSwRDijsF
+ AFSw==
+X-Gm-Message-State: AOJu0YzgKWwIqFN1pruyDMoY3Me6Vkm8n4Nf34OVrRGIhXDhHDa3e28w
+ xap+zpR3xDc67Q5Dw5/CSijZBHl5SJniJNKvL/Y=
+X-Google-Smtp-Source: AGHT+IEKVuRW7nuu/J8MapW0i7Mh7Urel4pZLTRAEivubDmbziI/uU9FQQmYdUtNbfRGKICXPBaP+w==
+X-Received: by 2002:a05:6a20:7d84:b0:158:17e6:7a6 with SMTP id
+ v4-20020a056a207d8400b0015817e607a6mr41021718pzj.42.1699269394814; 
+ Mon, 06 Nov 2023 03:16:34 -0800 (PST)
+Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
+ pt11-20020a17090b3d0b00b0027d0adf653bsm5325886pjb.7.2023.11.06.03.16.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Nov 2023 03:16:34 -0800 (PST)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Mon, 6 Nov 2023 19:52:57 +0900
-Message-ID: <CADQ0-X-1AWfdPakT7y_t=_y_XjYhyagwXy4sz-UYqb10FQRg5g@mail.gmail.com>
-Subject: Re: [PATCH v9 7/9] efi_loader: support boot from URI device path
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Subject: [PATCH v10 0/9] Add EFI HTTP boot support
+Date: Mon,  6 Nov 2023 20:14:55 +0900
+Message-Id: <20231106111504.3631058-1-masahisa.kojima@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,303 +93,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+This series adds the EFI HTTP boot support.
+User can add the URI device path with "efidebug boot add" command.
+efibootmgr handles the URI device path, download the
+specified file using wget, mount the downloaded image with
+blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI)
+by selecting automatically created boot option when the new disk is
+detected.
 
-On Thu, 2 Nov 2023 at 20:03, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Kojima-san
->
->
-> > +
-> > +/**
-> > + * try_load_default_file() - try to load the default file
-> > + *
-> > + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> > + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > + *
-> > + * @dev                        pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
-> > + * @image_handle:      pointer to handle for newly installed image
-> > + * Return:             status code
-> > + */
-> > +static efi_status_t try_load_default_file(struct udevice *dev,
-> > +                                         efi_handle_t *image_handle)
-> > +{
-> > +       efi_status_t ret;
-> > +       efi_handle_t handle;
-> > +       struct efi_handler *handler;
-> > +       struct efi_device_path *file_path;
-> > +       struct efi_device_path *device_path;
-> > +
-> > +       if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
-> > +               log_warning("DM_TAG_EFI not found\n");
-> > +               return EFI_INVALID_PARAMETER;
-> > +       }
-> > +
-> > +       ret = efi_search_protocol(handle,
-> > +                                 &efi_simple_file_system_protocol_guid, &handler);
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
-> > +                                        (void **)&device_path, efi_root, NULL,
-> > +                                        EFI_OPEN_PROTOCOL_GET_PROTOCOL));
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       file_path = expand_media_path(device_path);
-> > +       ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
-> > +                                     image_handle));
-> > +       efi_free_pool(file_path);
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +/**
-> > + * load_default_file_from_blk_dev() - load the default file
-> > + *
-> > + * @blk                pointer to the UCLASS_BLK udevice
-> > + * @handle:    pointer to handle for newly installed image
-> > + * Return:     status code
-> > + */
-> > +static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
-> > +                                                  efi_handle_t *handle)
-> > +{
-> > +       efi_status_t ret;
-> > +       struct udevice *partition;
-> > +
-> > +       /* image that has no partition table but a file system */
-> > +       ret = try_load_default_file(blk, handle);
-> > +       if (ret == EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       /* try the partitions */
-> > +       device_foreach_child(partition, blk) {
-> > +               enum uclass_id id;
-> > +
-> > +               id = device_get_uclass_id(partition);
-> > +               if (id != UCLASS_PARTITION)
-> > +                       continue;
-> > +
-> > +               ret = try_load_default_file(partition, handle);
-> > +               if (ret == EFI_SUCCESS)
-> > +                       return ret;
-> > +       }
-> > +
-> > +       return EFI_NOT_FOUND;
-> > +}
-> > +
-> > +/**
-> > + * efi_bootmgr_release_ramdisk() - release ramdisk resource
-> > + *
-> > + * Return:             status code
-> > + */
-> > +efi_status_t efi_bootmgr_release_ramdisk(void)
-> > +{
-> > +       efi_status_t ret = EFI_SUCCESS;
-> > +
-> > +       if (ramdisk_blk_dev) {
-> > +               ret = efi_add_memory_map(image_addr, image_size,
-> > +                                        EFI_CONVENTIONAL_MEMORY);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       log_err("Reclaiming memory failed\n");
-> > +
-> > +               if (blkmap_destroy(ramdisk_blk_dev->parent)) {
-> > +                       log_err("Destroying blkmap failed\n");
-> > +                       ret = EFI_DEVICE_ERROR;
-> > +               }
-> > +
-> > +               ramdisk_blk_dev = NULL;
-> > +       }
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +/**
-> > + * efi_bootmgr_image_return_notify() - return to efibootmgr callback
-> > + *
-> > + * @event:     the event for which this notification function is registered
-> > + * @context:   event context - not used in this function
-> > + */
-> > +static void EFIAPI efi_bootmgr_image_return_notify(struct efi_event *event,
-> > +                                                  void *context)
-> > +{
-> > +       efi_status_t ret;
-> > +
-> > +       EFI_ENTRY("%p, %p", event, context);
-> > +       ret = efi_bootmgr_release_ramdisk();
-> > +       EFI_EXIT(ret);
-> > +}
-> > +
-> > +/**
-> > + * try_load_from_uri_path() - Handle the URI device path
-> > + *
-> > + * @uridp:     uri device path
-> > + * @lo_label:  label of load option
-> > + * @handle:    pointer to handle for newly installed image
-> > + * Return:     status code
-> > + */
-> > +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-> > +                                          u16 *lo_label,
-> > +                                          efi_handle_t *handle)
-> > +{
-> > +       char *s;
-> > +       int err;
-> > +       int uri_len;
-> > +       efi_status_t ret;
-> > +       struct udevice *blk;
-> > +       struct efi_event *event = NULL;
-> > +
-> > +       s = env_get("loadaddr");
-> > +       if (!s) {
-> > +               log_err("Error: loadaddr is not set\n");
-> > +               return EFI_INVALID_PARAMETER;
-> > +       }
-> > +       image_addr = hextoul(s, NULL);
-> > +       err = wget_with_dns(image_addr, uridp->uri);
-> > +       if (err < 0)
-> > +               return EFI_INVALID_PARAMETER;
-> > +       image_size = env_get_hex("filesize", 0);
-> > +       if (!image_size)
-> > +               return EFI_INVALID_PARAMETER;
-> > +
-> > +       /*
-> > +        * If the file extension is ".iso" or ".img", mount it and try to load
-> > +        * the default file.
-> > +        * If the file is PE-COFF image, load the downloaded file.
-> > +        */
-> > +       uri_len = strlen(uridp->uri);
-> > +       if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
-> > +           !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
-> > +               blk = mount_image(lo_label, image_addr, image_size);
-> > +               if (!blk)
-> > +                       return EFI_LOAD_ERROR;
-> > +
-> > +               ret = load_default_file_from_blk_dev(blk, handle);
-> > +               if (ret != EFI_SUCCESS) {
-> > +                       log_info("Cannot boot from downloaded image\n");
-> > +                       goto iso_error;
-> > +               }
-> > +
-> > +               ret = efi_create_event(EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
-> > +                                      efi_bootmgr_image_return_notify, NULL,
-> > +                                      &efi_guid_event_group_return_to_efibootmgr, &event);
-> > +               if (ret != EFI_SUCCESS) {
-> > +                       log_err("Creating event failed\n");
-> > +                       goto iso_error;
-> > +               }
-> > +
-> > +               /*
-> > +                * TODO: expose the ramdisk to OS.
-> > +                * Need to pass the ramdisk information by the architecture-specific
-> > +                * methods such as 'pmem' device-tree node.
-> > +                */
-> > +               ret = efi_add_memory_map(image_addr, image_size,
-> > +                                        EFI_RESERVED_MEMORY_TYPE);
-> > +               if (ret != EFI_SUCCESS) {
-> > +                       log_err("Memory reservation failed\n");
-> > +                       goto iso_error;
-> > +               }
-> > +
-> > +               ramdisk_blk_dev = blk;
-> > +       } else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
-> > +               efi_handle_t mem_handle = NULL;
-> > +               struct efi_device_path *file_path;
-> > +
-> > +               file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-> > +                                           (uintptr_t)image_addr, image_size);
-> > +               ret = efi_install_multiple_protocol_interfaces(
-> > +                       &mem_handle, &efi_guid_device_path, file_path, NULL);
-> > +               if (ret != EFI_SUCCESS)
-> > +                       return ret;
-> > +
-> > +               ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
-> > +                                             (void *)image_addr, image_size,
-> > +                                             handle));
-> > +       } else {
-> > +               log_err("Error: file type is not supported\n");
-> > +               return EFI_UNSUPPORTED;
-> > +       }
->
-> This is a bit confusing to read overall.  It works fine though so I
-> suggest renaming load_default_file_from_blk_dev to
-> prepare_loaded_image().  That function can mount the image, reserve
-> memory and return the file path
->
-> The code for both efi apps and iso images would look like this
->
->  if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
->       !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
->           prepare_loaded_image()
->           efi_create_event()
-> else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
->       file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
->                                               (uintptr_t)image_addr,
-> image_size);
+This version still does not include the test.
 
-Freeing this file_path for the EFI application case is missing.
-I will fix it in the next version.
+To enable EFI HTTP boot, we need to enable the following Kconfig options.
+ CONFIG_CMD_DNS
+ CONFIG_CMD_WGET
+ CONFIG_BLKMAP
+ CONFIG_EFI_HTTP_BOOT
 
->                   ret = efi_install_multiple_protocol_interfaces(
->                           &mem_handle, &efi_guid_device_path,
-> file_path, NULL);
->                   if (ret != EFI_SUCCESS)
->                           return ret;
-> } else {
->    log_err("Error: file type is not supported\n");
->    return EFI_UNSUPPORTED;
-> }
->
-> ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
->                                                 (void *)image_addr,
-> image_size,
->                                                 handle));
->
-> .....
->
->
-> IOW the if/else cases prepare the DP for you and reserve any needed
-> memory.  Once that's done you load the image from a single location
+On the Socionext Developerbox, enter the following commands then
+debian installer is downloaded into "loadaddr" and installer
+automatically starts.
+ => dhcp
+ => setenv serverip 192.168.1.1
+ => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+ => efidebug boot order 3
+ => bootefi bootmgr
 
-Yes, refactor the code and send the next version shortly.
+Note that this debian installer can not proceed the installation
+bacause RAM disk of installer image is not recogniged by the kernel.
+I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
+will be one of the solution to recognize RAM disk from kernel.
+(In EDK2, the equivalent solution is called ACPI NFIT.)
 
-Thanks,
-Masahisa Kojima
+On QEMU, I can not make DNS work from the QEMU guest.
+The following commands work on qemu_arm64(manually set the http server ip in URI).
+  => dhcp
+  => setenv gatewayip 10.0.2.2
+  => setenv httpserverip 134.160.38.1
+  => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+  => efidebug boot order 3
+  => bootefi bootmgr
 
->
-> Thanks
-> /Ilias
->
->
-> > +
-> > +       return ret;
-> > +
-> > +iso_error:
-> > +       if (blkmap_destroy(blk->parent))
-> > +               log_err("Destroying blkmap failed\n");
-> > +       if (event)
-> > +               EFI_CALL(bs->close_event(event));
-> > +       return ret;
-> > +}
-> > +
-> >  /**
-> >   * try_load_entry() - try to load image for boot option
-> >   *
-> > @@ -211,6 +471,14 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
-> >                 if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
-> >                         /* file_path doesn't contain a device path */
-> >                         ret = try_load_from_short_path(lo.file_path, handle);
-> > +               } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-> > +                       if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
-> > +                               ret = try_load_from_uri_path(
-> > +                                       (struct efi_device_path_uri *)
-> > +                                               lo.file_path,
-> > +                                       lo.label, handle);
-> > +                       else
-> > +                               ret = EFI_LOAD_ERROR;
-> >                 } else {
-> >                         file_path = expand_media_path(lo.file_path);
-> >                         ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
-> > --
-> > 2.34.1
-> >
+[TODO]
+- add test
+- stricter wget uri check
+- omit the dns process if the given uri has ip address
+   -> this will be supported when the lwip migration completes
+- uri device path support in eficonfig
+- expose ramdisk to OS
+
+[change log]
+v9 -> v10
+- fix failure in erofs python test
+- refactor try_load_from_uri_path(), call efi_load_image() in single location
+- missing free of file_path for EFI application
+- fix blkmap_create_ramdisk() size type from int to ulong
+
+v8 -> v9
+- implement new EFI event to notify that loaded image returns
+  and back to the efibootmgr
+- ramdisk cleanup is done in event callback
+- refactor error handling
+
+v7 -> v8
+- search the default file on the fly, instead of creating
+  the boot option with default file
+- delete blkmap and reserved memory in case of error or
+  when the EFI application returns
+- update the subject "Boot var automatic management for removable medias"
+  since this automatic boot option management is also applied
+  for non-removable medias
+- update error handling in efidebug command
+- call efi_add_memory_map() instead of exposing efi_reserve_memory()
+
+v6 -> v7
+- rename the funtion name from load_default_file_boot_option()
+  to load_mounted_image()
+- move some fix from patch #5 "efi_loader: support boot from URI device path" to
+  patch #4 "efi_loader: create default file boot option".
+- fix missing free() of default_file_path
+
+v5 -> v6
+- add patch #4 "Boot var automatic management for removable medias"
+- boot from automatically created boot option
+  rather than searching default file on the fly
+- introduce new CONFIG_EFI_HTTP_BOOT Kconfig option
+- comment in one place
+- use log_err() rather than printf()
+- use env_get_hex("filesize", 0) instead of return value of net_loop()
+- use more suitable error code
+- blkmap can be build for SPL/TPL
+- add CDROM short-form device path support
+
+v4 -> v5
+- add missing else statement
+- add NULL check of efi_dp_find_obj() call
+- update document to remove "limitation"
+
+v3 -> v4
+- patch#8 is added to simplify the bootmgr default boot process
+- add function comments
+
+v2 -> v3
+- Patch#6 is added, reserve the whole ramdisk memory region
+- remove .efi file extension check for PE-COFF image
+- use "if IS_ENABLED(..)" as much as possible
+- 1024 should be sizeof(net_boot_file_name)
+- call net_set_state(NETLOOP_FAIL) when wget encounters error
+- describe DNS ip address host name limitation in document
+
+v1 -> v2
+- carve out the network handling(wget and dns code) under net/wget.c
+- carve out ramdisk creation code under drivers/block/blkmap_helper.c
+- wget supports the valid range check to store the received blocks using lmb
+- support when the downloaded image have no partiton table but a file system
+- not start the .efi file in try_load_entry()
+- call efi_check_pe() for .efi file to check the file is PE-COFF image
+- add documentation for EFI HTTP Boot
+
+Masahisa Kojima (8):
+  net: wget: prevent overwriting reserved memory
+  net: wget: add wget with dns utility function
+  blk: blkmap: add ramdisk creation utility function
+  efi_loader: add missing const classifier for event service
+  efi_loader: add return to efibootmgr event group
+  efi_loader: support boot from URI device path
+  cmd: efidebug: add uri device path
+  doc: uefi: add HTTP Boot support
+
+Raymond Mao (1):
+  efi_loader: Boot var automatic management
+
+ cmd/bootefi.c                                 |  12 +
+ cmd/efidebug.c                                |  51 +++
+ doc/develop/uefi/uefi.rst                     |  30 ++
+ drivers/block/Makefile                        |   3 +-
+ drivers/block/blkmap.c                        |  15 -
+ drivers/block/blkmap_helper.c                 |  53 +++
+ include/blkmap.h                              |  29 ++
+ include/efi_api.h                             |   5 +-
+ include/efi_loader.h                          |   4 +-
+ include/net.h                                 |  17 +
+ lib/efi_loader/Kconfig                        |   9 +
+ lib/efi_loader/efi_bootmgr.c                  | 337 ++++++++++++++++++
+ lib/efi_loader/efi_boottime.c                 |   7 +-
+ lib/efi_loader/efi_disk.c                     |  18 +
+ lib/efi_loader/efi_setup.c                    |   7 +
+ net/wget.c                                    | 205 ++++++++++-
+ test/py/tests/test_efi_secboot/test_signed.py |  42 +--
+ .../test_efi_secboot/test_signed_intca.py     |  14 +-
+ .../tests/test_efi_secboot/test_unsigned.py   |  14 +-
+ test/py/tests/test_fs/test_erofs.py           |   9 +
+ .../test_fs/test_squashfs/test_sqfs_ls.py     |   9 +
+ 21 files changed, 828 insertions(+), 62 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
+
+-- 
+2.34.1
+
