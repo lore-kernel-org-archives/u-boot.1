@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF387C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:47:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F21C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 08:47:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97F2386BEC;
-	Mon,  6 Nov 2023 09:47:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CDD2786689;
+	Mon,  6 Nov 2023 09:47:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="odtUVliV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="njnbgcaf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 515A486BEC; Mon,  6 Nov 2023 09:47:02 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id CA2A9842D0; Mon,  6 Nov 2023 09:47:02 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5020F842D0
+ by phobos.denx.de (Postfix) with ESMTPS id CD8C386C56
  for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 09:46:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-32f7abbb8b4so2702178f8f.0
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4084e49a5e5so37004705e9.3
  for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 00:46:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1699260419; x=1699865219; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9iHMBMQe24ZRisUd1uPFxpSVdGqw2WtE6BHmcrCsx2s=;
- b=odtUVliVtvu7IO5dV26o9JrCWC5IEzpZJiyw4teQK7wUkLQkOOpP9Im32EyV5his1G
- TjwIWQvRi9me6MXkVSwbbHyUxBSog/1r6AcUdNE4OqcP3C+6UWwuCrZ7LU4xbsbYxByg
- 7g3m3R7K3sYlQOvZHcw+FTeMxxIFtVZb36nOcfcgHXwDmp7t1NWWRD9M1FPGFYy12JXy
- WqMCA+6hI7iY8SeCCD0fHuMf05JSJ8TjuD0PAqk2BwtRXBMerb0QmQsfI8152WsVRjr6
- x6oxfC8QVJpCaXRshyOIOYKDEgig5OY6yV3YspE7FME8Vm0B2DiJI1ve2Y47Q6XGVhQb
- mjUA==
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=lSusEc+mx0fyJT4POwsV/GeE5If486jXOVrfD/bvFCk=;
+ b=njnbgcafow8IJ1qEZiM4xPngvVQZrFH71xR5U+I12ITKNJcF7FSoK6WhaeeGjft8ie
+ nnel/mZSln5N1pemqmQYsyiqAT2DmhZY4EnsDdQowNYd9+lbFoka6d0pbbbEU7hiTyYd
+ ho8slleV4P3j6FsMqzA3QYb/UCJASEEacfzWsG/rZoW1tEbJyCqDLU2xJ0kl2ychVoFl
+ Vvfcs4GESj0VqAEk2r4ajYHIT44Z+NByhX/hSf47OE0y0gM8ju6/5p6LKAJDSfM4fWhl
+ ocUJUa9OO8KXniW/bmVBHw9m3bkchtLt03mFNNWUQOmoTOiIBBEA4J6XlaYZfA+O4+rd
+ p6DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699260419; x=1699865219;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9iHMBMQe24ZRisUd1uPFxpSVdGqw2WtE6BHmcrCsx2s=;
- b=HMFynKmaNq3lvvNl6B7YQtpJWbHxinjhj4FaEo6PtM7p6hz+ki4TFoXc3i/eV3ZGH+
- 7u64YOxtPHH/ShViEv8OxeG9jr8oo7ug93dOZmFhrnR7uk47yC9xEt/hbbJcHc/5nLS8
- 9mU7c0Eg6QrwT/fGA68hTtCamO5VmLu0/tiDmnZD4ckB7LwUgvKvyGCsFn/vQTdIqqy6
- Ed1T39vhCBgd1jBniu1UT/4caBsUTOHrLyEykA6RFQ2inB7QAXH1okl/yG51JsGFWGcH
- DvL32nx86lE+Vag3u0gbE8/gulVhQjUW4JU8vb+ikXObmXzM4AJIqTJnO3ukZ+lBwqEz
- +zUQ==
-X-Gm-Message-State: AOJu0YzD0ImAQ+b+VDbRBXlxlEJ3eIAfqtHrgrLWGruFGmv4lTnsfQ8o
- wDga66Pph+/q2DsHhUZhiLD/ig==
-X-Google-Smtp-Source: AGHT+IFCGqmvGOU3ee8vR3ebaaD2vRmONAeqrKP8nLRS0O2PQetswUbv6QhunsnFELMurpwADmJOgw==
-X-Received: by 2002:a5d:6d81:0:b0:32f:811f:5046 with SMTP id
- l1-20020a5d6d81000000b0032f811f5046mr21822248wrs.11.1699260418680; 
- Mon, 06 Nov 2023 00:46:58 -0800 (PST)
+ bh=lSusEc+mx0fyJT4POwsV/GeE5If486jXOVrfD/bvFCk=;
+ b=ZVP/nKsdWetE8pmnKEnr5STj4lpzFcXXK53EZEr/XEpWsaA48rBLo435652hWOGOeB
+ rh0On6Dn66x2I8Nxyu9AGBFboHI4h55/ZVvRJsB6+Z21iYH5v3YWUUSfNq+cmU+bWmqs
+ YuJjRQQ4RXDudkVsi+Jktkqfb/P7VKeOAgsL+fkeSJaORDt/Rd1tTnN6CNSFfzD2TY1b
+ TI5EACOtmEXqh5h1uR3D2+YOJF6REZvHt04dq4hPnbBHGIxzmEfAbEmkbXC1r22666Rn
+ Te40tvLkI+eK5JsByCqC2d1J+ykx7rLvAJrdsbNXT9iSlHe/Nv7XrE4232Nv2zn/Lv5q
+ 7rZw==
+X-Gm-Message-State: AOJu0YzTsl6U9easzpSBykZb6w/d0AwqJmTLoam/2FZjVGH42qVx8OZr
+ hKU3HM0AvQgEUo0iqBn7/CY+ZQ==
+X-Google-Smtp-Source: AGHT+IH4oBwB2GMU2ZEWUDiwnC0sE6KNZLOy/RcR9PI2fGgqaquVMeWbV0EEJJEZnCjCQ9PALZWE+A==
+X-Received: by 2002:a05:6000:18a9:b0:32f:a5af:99ca with SMTP id
+ b9-20020a05600018a900b0032fa5af99camr13394643wri.69.1699260419324; 
+ Mon, 06 Nov 2023 00:46:59 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
  h16-20020a05600004d000b0032dbf99bf4fsm8937827wri.89.2023.11.06.00.46.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 06 Nov 2023 00:46:58 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Alexey Romanov <avromanov@salutedevices.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
-In-Reply-To: <20231101140500.9025-1-avromanov@salutedevices.com>
-References: <20231101140500.9025-1-avromanov@salutedevices.com>
-Subject: Re: [PATCH v1 0/2] Meson A1: fix USB and NAND stack
-Message-Id: <169926041799.983914.17615678438055862098.b4-ty@linaro.org>
-Date: Mon, 06 Nov 2023 09:46:57 +0100
+To: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+In-Reply-To: <20231102-libretech-ac-fix-dfu-v1-1-112379165028@linaro.org>
+References: <20231102-libretech-ac-fix-dfu-v1-1-112379165028@linaro.org>
+Subject: Re: [PATCH] ARM: configs: libretech-ac: enable USB_DFU like in
+ meson64.h
+Message-Id: <169926041874.983914.10761301521289002030.b4-ty@linaro.org>
+Date: Mon, 06 Nov 2023 09:46:58 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,24 +94,18 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Wed, 01 Nov 2023 17:04:55 +0300, Alexey Romanov wrote:
-> After a recent sync device tree with the Linux Kernel,
-> some drivers broke. These patchset will fix that.
+On Thu, 02 Nov 2023 14:49:58 +0100, Neil Armstrong wrote:
+> USB_DFU was added in meson64.h but is missing in libretech-ac.h,
+> fix this to enable DFU RAM boot for libretech-ac.
 > 
-> Alexey Romanov (1):
->   clk: a1: add new clocks for USB stack
+> Fixes 4aa027b3f8 ("configs: meson64: add alternate USB DFU boot target")
 > 
-> Dmitry Rokosov (1):
->   drivers: sm: bind child sm devices in the device tree
 > 
-> [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
 
-[1/2] clk: a1: add new clocks for USB stack
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/8ec790399aa88bb8d0a02282e411f34584c74950
-[2/2] drivers: sm: bind child sm devices in the device tree
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/e9f4f7789cdcda342b2f7edb82a6141f82f4c7c2
+[1/1] ARM: configs: libretech-ac: enable USB_DFU like in meson64.h
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/c550e81171940932664a85bda315a6a073aae23c
 
 -- 
 Neil
