@@ -4,81 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FBEC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F08C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 11:46:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CC3D87049;
-	Mon,  6 Nov 2023 12:41:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4D68886F9F;
+	Mon,  6 Nov 2023 12:46:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z8g0G9IR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MGZqzFcY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0B7387026; Mon,  6 Nov 2023 12:41:24 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id EB33F86FB7; Mon,  6 Nov 2023 12:46:35 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAAE587049
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:41:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1120586F68
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 12:46:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1ccce410660so6050855ad.3
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 03:41:16 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-543923af573so7484361a12.0
+ for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 03:46:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699270859; x=1699875659; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9yfAtkx/MLAaC2e3oTVCEdGrlnmIaFPaJzkqM3lqaYU=;
- b=z8g0G9IREQIGeBV1KgbA2jvNobm+Gq3DjDh+NUwkZIrp6znUanRj3gFLMnS6XRxqZd
- Qr+ankKla3fpvwpU8yqzXu2W4jr0Vrp3DAOPJSJKBcp2RPhv/5lAcVHyua0no2TKE5DA
- PNMthT+hfM47g/oyG9uWDNq9GgET3LPqjSKB4FgcCx6q9M2knG5RlXj48S+7u0M+AtKO
- HtfvsYVzjQDFDoIbb8EzbVTUZcg7jD/JlCG6Uak+FlEVxP43lcQ5IsRkNnr48/WRKOij
- bMngA4nAsKRE6yPPtpFEtvR8SZs6mN8map/QCMIAb3uQ7zgUdEggH+s4ckPR3Gnw7bet
- Jv1A==
+ d=gmail.com; s=20230601; t=1699271193; x=1699875993; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GEWZJZXXrRKYBYdYQCeLPmGSook+GgNz4YF2RCiGRjA=;
+ b=MGZqzFcY7rcmaGoYbSJr9JTNC5k3QIYdTPlxqg97QxhSz+dYxL44jWNtbzjBfwu0Uv
+ k5oCpZxTKVbn5eHwFB2ARAfS+lWYBbxydS0buPpM7pRPjP3Heh+VFOrWAT0OUhbpvset
+ vpbDNYSn1vWzXeI3vKG8CRB3ordmQ4fP27pQqXrQoAVyepU3aLNkeIBNc+nna8HOkBZt
+ JQ8cPo/Andq24+HcJ/vsVA4mW1F3wxVdOZ1aF8aL0NhCsAzRVgBcWISQNTgwNJYQWxSk
+ caLCtwtVzP8CxQ7O3utd+Av2iouKKOi6popiOkHzo+7CtdSS1CpzBsI+Lz3KnTm1Z4fG
+ PRbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699270859; x=1699875659;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9yfAtkx/MLAaC2e3oTVCEdGrlnmIaFPaJzkqM3lqaYU=;
- b=j8zUUCuL8sUHHQiX0Ftq2RrumD9jxDOtyljcnD001lZwIbhEkrf2RBtD824byMaXqU
- jMjzUKzfDMChrkNqbM3U0+N7JeFIgIquCXwBOzxUX9SBiv/QAVQzQW1L0QOzzBf81zZT
- nqet1UX0IgMTNgi8k0cM1DfOZQx8uktYhX4cj3sSYeHPpYxLayOjp/EdjOCcj2h31rqi
- Jhosp5+zUGRai3PeL0n9FjviFdxcb5cnJCgrE8JahURDschvX5oFs36snIIfUmeK7NNM
- FukCxlgs2mI+JxEdYivdcs9GgGQcYYxAPVclV1+3Rpat/iTYSRyJddblPb2YtBzElh41
- SRtA==
-X-Gm-Message-State: AOJu0YzgB/BQ16fQZgTLIXJXfJTngYHphuNZnbquhW0Rpz6jSlj2H2gV
- 7yQdRwUsCkLT6U6VnISrJHn5forL+Gv3I0Fj/IQ=
-X-Google-Smtp-Source: AGHT+IHSTk5o+RFlRkFcXZl+QqHfaulA+NJZ4GqBWOt/EsD6Xj5dn8qN1UQnWsS4a6v0Ypy2LSq0CQ==
-X-Received: by 2002:a17:902:d512:b0:1cc:4b1b:2759 with SMTP id
- b18-20020a170902d51200b001cc4b1b2759mr21325036plg.63.1699270859514; 
- Mon, 06 Nov 2023 03:40:59 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- s10-20020a170902988a00b001c60c3f9508sm5729506plp.230.2023.11.06.03.40.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 03:40:59 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [RESEND PATCH v10 9/9] doc: uefi: add HTTP Boot support
-Date: Mon,  6 Nov 2023 20:39:20 +0900
-Message-Id: <20231106113920.3631591-10-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231106113920.3631591-1-masahisa.kojima@linaro.org>
-References: <20231106113920.3631591-1-masahisa.kojima@linaro.org>
+ d=1e100.net; s=20230601; t=1699271193; x=1699875993;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GEWZJZXXrRKYBYdYQCeLPmGSook+GgNz4YF2RCiGRjA=;
+ b=I/PFnyDepZi+LLWHlYvvdto1ZoiDww/5454GzucGlFB4r/7uwiDt2hxx7U8+Q+dql5
+ 79PzfA1x3a9T8mRGDlrMfERTxKysPmKx2axQ1IAsTZlUFtKxPPKbcgdiuKmoc+6HKFeV
+ FyTYYxZn3NtXuPGfw+V86lnW004nekn+LQxTt8n+C1IuF66KO1y19vLzvFTSmd5NGpGc
+ 98d0SSudZkH1fX2BpDLXdaYYXmD5n6doFsq/ITc1+ikMG2CaQFNVoGuXwb1YXVrU3PMK
+ TzRwgVqcju7uy/jWbQ1VcafjXl8u4o0wXwna9pkVUa94Qq4MpNgfIKohx83ceuqP4RyE
+ pWnA==
+X-Gm-Message-State: AOJu0Yzpiq/ZngTRJfp6xi7Q+IVh1ZqAsrJIz6yL8+FuQ1Vv6hE8UuAb
+ 0HA0y+iXelfsOWHhoc8ZKz7AHbyUvJXMCRb+gYo=
+X-Google-Smtp-Source: AGHT+IHJc9frpgFdX2q4RJMymNxT8i68N40wF6RVQORmSql+MzFdbxtCOGyB+CJsLinnrzf2iYva9gjQx/bVDhYzYWA=
+X-Received: by 2002:a50:d696:0:b0:543:5f3:c92 with SMTP id
+ r22-20020a50d696000000b0054305f30c92mr18855825edi.36.1699271193500; 
+ Mon, 06 Nov 2023 03:46:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231106083229.256322-1-clamor95@gmail.com>
+In-Reply-To: <20231106083229.256322-1-clamor95@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 6 Nov 2023 11:46:22 +0000
+Message-ID: <CALeDE9P=aUfEvhh-FD_mwRZ+5rgMkQbn+v6skqW7s3EVvnf6eg@mail.gmail.com>
+Subject: Re: [PATCH v1 0/5] Convert recently merged T30 boards to use DM PMIC
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,55 +84,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the description about HTTP Boot.
+Hi Svyatoslav,
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- doc/develop/uefi/uefi.rst | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+> Since the proposed PMIC patches have been accepted, I see the need
+> to convert boards which I maintain to use DM drivers instead of board hacks.
+>
+> Svyatoslav Ryhel (5):
+>   board: lg-x3: convert LG Optimus 4X and Vu to use DM PMIC
+>   board: endeavoru: convert HTC One X to use DM PMIC
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index fb16ac743a..ca9a573669 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -642,6 +642,36 @@ UEFI variables. Booting according to these variables is possible via::
- As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
- command 'efidebug' can be used to set the variables.
- 
-+UEFI HTTP Boot
-+~~~~~~~~~~~~~~
-+
-+HTTP Boot provides the capability for system deployment and configuration
-+over the network. HTTP Boot can be activated by specifying::
-+
-+    CONFIG_CMD_DNS
-+    CONFIG_CMD_WGET
-+    CONFIG_BLKMAP
-+
-+Set up the load option specifying the target URI::
-+
-+    efidebug boot add -u 1 netinst http://foo/bar
-+
-+When this load option is selected as boot selection, resolve the
-+host ip address by dns, then download the file with wget.
-+If the downloaded file extension is .iso or .img file, efibootmgr tries to
-+mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-+If the downloaded file is PE-COFF image, load the downloaded file and
-+start it.
-+
-+The current implementation tries to resolve the IP address as a host name.
-+If the uri is like "http://192.168.1.1/foobar",
-+the dns process tries to resolve the host "192.168.1.1" and it will
-+end up with "host not found".
-+
-+We need to preset the "httpserverip" environment variable to proceed the wget::
-+
-+    setenv httpserverip 192.168.1.1
-+
- Executing the built in hello world application
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--- 
-2.34.1
+Is there a reason why the two above devices don't appear to have their
+.dts files in the upstream kernel?
 
+>   board: transformer-t30: convert ASUS Transformers to use DM PMIC
+>   board: grouper: convert ASUS Google Nexus 7 (2012) to use DM PMIC
+>   ARM: dts: tegra30: enable USB PHY node on some devices
+>
+>  arch/arm/dts/tegra30-asus-grouper-common.dtsi |   7 +
+>  .../dts/tegra30-asus-nexus7-grouper-E1565.dts |   1 +
+>  .../dts/tegra30-asus-nexus7-grouper-PM269.dts |   1 +
+>  .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |   1 +
+>  arch/arm/dts/tegra30-asus-p1801-t.dts         |  17 ++
+>  arch/arm/dts/tegra30-asus-tf600t.dts          |  15 ++
+>  arch/arm/dts/tegra30-asus-transformer.dtsi    |   9 +
+>  arch/arm/dts/tegra30-htc-endeavoru.dts        |   8 +
+>  arch/arm/dts/tegra30-lg-x3.dtsi               |   9 +
+>  board/asus/grouper/Kconfig                    |   8 -
+>  board/asus/grouper/Makefile                   |   4 +-
+>  .../asus/grouper/configs/grouper_E1565.config |   6 +-
+>  .../asus/grouper/configs/grouper_PM269.config |   6 +-
+>  board/asus/grouper/configs/tilapia.config     |   6 +-
+>  board/asus/grouper/grouper-spl-max.c          |   2 +-
+>  board/asus/grouper/grouper-spl-ti.c           |   2 +-
+>  board/asus/grouper/grouper.c                  | 154 +-----------------
+>  board/asus/transformer-t30/Kconfig            |  10 --
+>  .../transformer-t30/configs/tf600t.config     |   2 +-
+>  .../transformer-t30/transformer-t30-spl.c     |   2 +-
+>  board/asus/transformer-t30/transformer-t30.c  | 121 +-------------
+>  board/htc/endeavoru/endeavoru-spl.c           |   2 +-
+>  board/htc/endeavoru/endeavoru.c               |  72 +-------
+>  board/lg/x3-t30/x3-t30-spl.c                  |   2 +-
+>  board/lg/x3-t30/x3-t30.c                      |  97 +----------
+>  configs/endeavoru_defconfig                   |   4 +
+>  configs/grouper_common_defconfig              |   1 +
+>  configs/transformer_t30_defconfig             |   5 +
+>  configs/x3_t30_defconfig                      |   4 +
+>  29 files changed, 128 insertions(+), 450 deletions(-)
+>
+> --
+> 2.40.1
+>
