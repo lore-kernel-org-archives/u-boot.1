@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3CFC4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:08:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF7DC4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 03:11:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 437A387148;
-	Mon,  6 Nov 2023 03:37:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02711871A0;
+	Mon,  6 Nov 2023 03:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eFESaNi+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VOpoYdY8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04D2D86CF7; Mon,  6 Nov 2023 03:29:24 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 43DA586F5C; Mon,  6 Nov 2023 03:30:35 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB18A86FB0
- for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23C2487070
+ for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 03:26:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7781b176131so201177285a.1
- for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:31 -0800 (PST)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-41e58a33ec9so26145191cf.1
+ for <u-boot@lists.denx.de>; Sun, 05 Nov 2023 18:26:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699237591; x=1699842391; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699237593; x=1699842393; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YaLQKHC+zvdPOY+o6hQ5bBBmRhMXgy0GIM1b3IN0l6E=;
- b=eFESaNi+cntJrtZR59LbuWgt/jb6VVgkNevZZWqoUewWJhcatl7DYCvX+Qy51Wxwwa
- AuCWS5hmnD1c0y1sVnhTOcI70tZQmgEn/cQfSRhxhzmLyaW69IPTjbsVuAVKvIUnTnXo
- L2ABgK/EEWD5y+ExuAAbp6KVDTZLtd1/hofQPXXtFWSZ7+oAtgsqSmGR3Tz8nG8QBq0G
- mcVfpDFAaINdMWBKeU4Y0pIwSy1IWlTmpRcTUHoUsNoSBx0o+5MuMFuwedjVzQrbpRZh
- y5eTlMGbiEwpfHPuR39MWqMiX+LNxLoA+DIb48T49F7Y0/PmK9cn0V38EU1t0MVQ+HK2
- e+NQ==
+ bh=x4NDwQIE8ELRnsC4W9fsPRRhduopD2rQOOrv1dEcIYQ=;
+ b=VOpoYdY840QRDaCTZ1p/iYh3hJY61rl9cLTh3YsHLSwawNwUnz60UemOcy6SmvNHM8
+ VVtjjdlpRNTpMphaUIa//lmdH3fnjteybIjS8uPD0FV2AL4PK734J8NCXl12JG1d2Zhj
+ KOgtw19uBFLzBFr0sQT/v/SYizFGmY2x03a0rQtyqjvapx+8bDPqPjKCG4N4+zdwq2Fp
+ gBPG3gY5sIjBogib9MRZ2JHUFit/PkJx7W3Z1YNBqO/u7j84oKPZ6Y6IeS6TwI/xlmRa
+ p5G/FgyHpmusH385yHEufQk46pyAK1Vi7pNj5P00oS+L7qJQ5SAoy1jbNTiHLAKXh0VJ
+ ntSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699237591; x=1699842391;
+ d=1e100.net; s=20230601; t=1699237593; x=1699842393;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YaLQKHC+zvdPOY+o6hQ5bBBmRhMXgy0GIM1b3IN0l6E=;
- b=nQhmVoQNRIzAdBJbCGEXN6SyCqpLj3RUMrDLLlbbwagSFRFAtp81iIpzHwluMrkj8I
- YlbLfJeQFiySlqKhYVT6rnqKjYbRWLnRNx5TB4h5qdFCQmQ4Rph7O5THubwblyCgN0rQ
- vRx2Vmg4ykyQzjMsFJquxmlVPgDMALlyx3IQ9uQ8OLvNHfimJMZLp4ls/7XhYu592+Wo
- wGnzJj8HQWJSeofzls8bltRT8hDHaCPDkx0bsWN5/5anwmGKTvhmcUJb0FgPsxU1PCzw
- yWHtXOHocru+bXlrd5VTeQ9KDONNXV+es+nF+oW7lJYDbbv00YIVmFinuPPTm6waZCOg
- KryQ==
-X-Gm-Message-State: AOJu0YweTbP461YkZmuBNq8Zeub/trL46g3eephue4ZnUrKYaMXcFjlE
- gohHqrXSefA2+PL4siJtockseDZvvxXFXQ==
-X-Google-Smtp-Source: AGHT+IFLAitfKEBfczTU9sf0chzyDATk/fSVPUQYrbtPiaJTlIFMf6QxCZm19lSkvey4PTyZacM3iQ==
-X-Received: by 2002:a05:620a:284a:b0:77b:94c0:ecf1 with SMTP id
- h10-20020a05620a284a00b0077b94c0ecf1mr1217837qkp.11.1699237590682; 
- Sun, 05 Nov 2023 18:26:30 -0800 (PST)
+ bh=x4NDwQIE8ELRnsC4W9fsPRRhduopD2rQOOrv1dEcIYQ=;
+ b=pvge1YPRo3mTrRg70FcCFXP3WtcPRx1qmr6LbMfq8b+kv5AqpZI/X35R5zV1iuQAhA
+ Tzw7AFFD5jxwo0FUGwqwdOYRC9gG/0qYCT+OkolcDte/D+uPfUu2H0UGJ1g9QPXkn28x
+ UgH2w3mwplM7b4kyQlvaqA5U1NgjmorN8JHVetrCXaispRnm7YQpGWZkyRmvkNxGEF+X
+ Ug9XG9QpoztV1wTyguj1uqM49+fSnp9RgUtKQhKthcOk05RndvAzzzpTr/tXSW2QqutQ
+ aJ3kOf0SyVWNODPYrLDalJ6pFS9UDiLBtATWl/2utcUFUJPqyS3PIJKUqoiXBt/2Drd5
+ ZGFQ==
+X-Gm-Message-State: AOJu0Yy5DG+LV0/ANfp8f9DjUxRsXvYngf3t5RJARt4xtj6DUQMLlwnf
+ 0HWGVK0ZJ7/UjLqwGf+Zv3w=
+X-Google-Smtp-Source: AGHT+IGPjawyn1fwufPgPR/iNkRUsPVenCefVVGxAsXpm4ax/RN0SbTSdJ5j9Ku1dXY/tgG08x75wA==
+X-Received: by 2002:a05:622a:82:b0:41c:c066:9c0 with SMTP id
+ o2-20020a05622a008200b0041cc06609c0mr36198259qtw.5.1699237592936; 
+ Sun, 05 Nov 2023 18:26:32 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- bj39-20020a05620a192700b007676f3859fasm2892253qkb.30.2023.11.05.18.26.30
+ z7-20020ac875c7000000b0041b7f007546sm2985418qtq.82.2023.11.05.18.26.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Nov 2023 18:26:30 -0800 (PST)
+ Sun, 05 Nov 2023 18:26:32 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
@@ -71,15 +71,16 @@ Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
  Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
  Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Sean Anderson <seanga2@gmail.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: [PATCH v6 21/25] spl: Convert NVMe to spl_load
-Date: Sun,  5 Nov 2023 21:25:59 -0500
-Message-Id: <20231106022603.3405551-22-seanga2@gmail.com>
+ Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Vignesh R <vigneshr@ti.com>
+Subject: [PATCH v6 23/25] spl: Convert spi to spl_load
+Date: Sun,  5 Nov 2023 21:26:01 -0500
+Message-Id: <20231106022603.3405551-24-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231106022603.3405551-1-seanga2@gmail.com>
 References: <20231106022603.3405551-1-seanga2@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,157 +98,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This converts the blk load method (used exclusively by NVMe) to use
-spl_load. As a consequence, it also adds support for LOAD_FIT_FULL and
-IMX images.
+This converts the spi load method to use spl_load. The address used for
+LOAD_FIT_FULL may be different, but there are no in-tree users of that
+config. Since payload_offs is only used without OS_BOOT, we defer its
+initialization.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
 Changes in v6:
-- Fix invalid return from spl_blk_load_image
-- Explicitly initialize load_info members
+- Fix soft reset after loading from SPI
 
 Changes in v5:
-- New
+- Rework to load header in spl_load
 
- common/spl/spl_blk_fs.c  | 66 +++++++---------------------------------
- include/spl_load.h       |  1 +
- test/image/spl_load_fs.c |  2 ++
- 3 files changed, 14 insertions(+), 55 deletions(-)
+ common/spl/spl_spi.c      | 80 +++++++--------------------------------
+ include/spl_load.h        |  1 +
+ test/image/spl_load_spi.c |  1 +
+ 3 files changed, 15 insertions(+), 67 deletions(-)
 
-diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
-index 53b8e1b11b4..ac267ab979b 100644
---- a/common/spl/spl_blk_fs.c
-+++ b/common/spl/spl_blk_fs.c
-@@ -7,6 +7,7 @@
- 
- #include <common.h>
+diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+index 3e08ac7c1a2..f49e534b749 100644
+--- a/common/spl/spl_spi.c
++++ b/common/spl/spl_spi.c
+@@ -12,11 +12,11 @@
+ #include <image.h>
+ #include <imx_container.h>
+ #include <log.h>
+-#include <mapmem.h>
+ #include <spi.h>
+ #include <spi_flash.h>
+ #include <errno.h>
  #include <spl.h>
 +#include <spl_load.h>
- #include <image.h>
- #include <fs.h>
- #include <asm/cache.h>
-@@ -48,11 +49,11 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
- 		       enum uclass_id uclass_id, int devnum, int partnum)
- {
- 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <dm/ofnode.h>
+@@ -95,9 +95,9 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
+ 	int err = 0;
+ 	unsigned int payload_offs;
+ 	struct spi_flash *flash;
 -	struct legacy_img_hdr *header;
- 	struct blk_desc *blk_desc;
--	loff_t actlen, filesize;
-+	loff_t filesize;
- 	struct blk_dev dev;
--	int ret = -ENODEV;
+ 	unsigned int sf_bus = spl_spi_boot_bus();
+ 	unsigned int sf_cs = spl_spi_boot_cs();
 +	struct spl_load_info load;
-+	int ret;
  
- 	blk_desc = blk_get_devnum_by_uclass_id(uclass_id, devnum);
- 	if (!blk_desc) {
-@@ -61,8 +62,8 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
+ 	/*
+ 	 * Load U-Boot image from SPI flash into RAM
+@@ -112,77 +112,23 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
+ 		return -ENODEV;
  	}
  
- 	blk_show_device(uclass_id, devnum);
++#if CONFIG_IS_ENABLED(OS_BOOT)
++	if (!spl_start_uboot() && !spi_load_image_os(spl_image, bootdev, flash, header))
++		return 0;
++#endif
++
+ 	payload_offs = spl_spi_get_uboot_offs(flash);
+-
 -	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
- 
-+	dev.filename = filename;
- 	dev.ifname = blk_get_uclass_name(uclass_id);
- 	snprintf(dev.dev_part_str, sizeof(dev.dev_part_str) - 1, "%x:%x",
- 		 devnum, partnum);
-@@ -70,63 +71,18 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
- 	if (ret) {
- 		printf("spl: unable to set blk_dev %s %s. Err - %d\n",
- 		       dev.ifname, dev.dev_part_str, ret);
--		goto out;
--	}
 -
--	ret = fs_read(filename, virt_to_phys(header), 0,
--		      sizeof(struct legacy_img_hdr), &actlen);
--	if (ret) {
--		printf("spl: unable to read file %s. Err - %d\n", filename,
--		       ret);
--		goto out;
--	}
--
--	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
--	    image_get_magic(header) == FDT_MAGIC) {
--		struct spl_load_info load;
--
--		debug("Found FIT\n");
--		load.read = spl_fit_read;
--		spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
--		load.priv = &dev;
--		dev.filename = filename;
--
--		return spl_load_simple_fit(spl_image, &load, 0, header);
--	}
--
--	ret = spl_parse_image_header(spl_image, bootdev, header);
--	if (ret) {
--		printf("spl: unable to parse image header. Err - %d\n",
--		       ret);
--		goto out;
--	}
--
--	ret = fs_set_blk_dev(dev.ifname, dev.dev_part_str, FS_TYPE_ANY);
--	if (ret) {
--		printf("spl: unable to set blk_dev %s %s. Err - %d\n",
--		       dev.ifname, dev.dev_part_str, ret);
--		goto out;
-+		return ret;
+ 	if (CONFIG_IS_ENABLED(OF_REAL)) {
+ 		payload_offs = ofnode_conf_read_int("u-boot,spl-payload-offset",
+ 						    payload_offs);
  	}
  
- 	ret = fs_size(filename, &filesize);
- 	if (ret) {
- 		printf("spl: unable to get file size: %s. Err - %d\n",
- 		       filename, ret);
--		goto out;
-+		return ret;
- 	}
- 
--	ret = fs_set_blk_dev(dev.ifname, dev.dev_part_str, FS_TYPE_ANY);
--	if (ret) {
--		printf("spl: unable to set blk_dev %s %s. Err - %d\n",
--		       dev.ifname, dev.dev_part_str, ret);
--		goto out;
+-#if CONFIG_IS_ENABLED(OS_BOOT)
+-	if (spl_start_uboot() || spi_load_image_os(spl_image, bootdev, flash, header))
+-#endif
+-	{
+-		/* Load u-boot, mkimage header is 64 bytes. */
+-		err = spi_flash_read(flash, payload_offs, sizeof(*header),
+-				     (void *)header);
+-		if (err) {
+-			debug("%s: Failed to read from SPI flash (err=%d)\n",
+-			      __func__, err);
+-			return err;
+-		}
+-
+-		if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL) &&
+-		    image_get_magic(header) == FDT_MAGIC) {
+-			u32 size = roundup(fdt_totalsize(header), 4);
+-
+-			err = spi_flash_read(flash, payload_offs,
+-					     size,
+-					     map_sysmem(CONFIG_SYS_LOAD_ADDR,
+-							size));
+-			if (err)
+-				return err;
+-			err = spl_parse_image_header(spl_image, bootdev,
+-					phys_to_virt(CONFIG_SYS_LOAD_ADDR));
+-		} else if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
+-			   image_get_magic(header) == FDT_MAGIC) {
+-			struct spl_load_info load;
+-
+-			debug("Found FIT\n");
+-			load.priv = flash;
+-			spl_set_bl_len(&load, 1);
+-			load.read = spl_spi_fit_read;
+-			err = spl_load_simple_fit(spl_image, &load,
+-						  payload_offs,
+-						  header);
+-		} else if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
+-			   valid_container_hdr((void *)header)) {
+-			struct spl_load_info load;
+-
+-			load.priv = flash;
+-			spl_set_bl_len(&load, 1);
+-			load.read = spl_spi_fit_read;
+-
+-			err = spl_load_imx_container(spl_image, &load,
+-						     payload_offs);
+-		} else {
+-			err = spl_parse_image_header(spl_image, bootdev, header);
+-			if (err)
+-				return err;
+-			err = spi_flash_read(flash, payload_offs + spl_image->offset,
+-					     spl_image->size,
+-					     map_sysmem(spl_image->load_addr,
+-							spl_image->size));
+-		}
+-		if (IS_ENABLED(CONFIG_SPI_FLASH_SOFT_RESET)) {
+-			err = spi_nor_remove(flash);
+-			if (err)
+-				return err;
+-		}
 -	}
 -
--	ret = fs_read(filename, (ulong)spl_image->load_addr, 0, filesize,
--		      &actlen);
--	if (ret)
--		printf("spl: unable to read file %s. Err - %d\n",
--		       filename, ret);
--out:
--	return ret;
-+	load.read = spl_fit_read;
-+	spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
-+	load.priv = &dev;
-+	return spl_load(spl_image, bootdev, &load, filesize, 0);
++	load.priv = flash;
++	spl_set_bl_len(&load, 1);
++	load.read = spl_spi_fit_read;
++	err = spl_load(spl_image, bootdev, &load, 0, payload_offs);
++	if (IS_ENABLED(CONFIG_SPI_FLASH_SOFT_RESET))
++		err = spi_nor_remove(flash);
+ 	return err;
  }
+ /* Use priorty 1 so that boards can override this */
 diff --git a/include/spl_load.h b/include/spl_load.h
-index b48f80324bb..2618109cee0 100644
+index 2a20e866cd8..1c2b296c0a2 100644
 --- a/include/spl_load.h
 +++ b/include/spl_load.h
-@@ -95,6 +95,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
-  * inline if there is one caller, and extern otherwise.
-  */
- #define SPL_LOAD_USERS \
-+	IS_ENABLED(CONFIG_SPL_BLK_FS) + \
- 	IS_ENABLED(CONFIG_SPL_FS_EXT4) + \
- 	IS_ENABLED(CONFIG_SPL_FS_FAT) + \
- 	IS_ENABLED(CONFIG_SPL_SYS_MMCSD_RAW_MODE) + \
-diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
-index 67c19da95e7..5f1de5486f4 100644
---- a/test/image/spl_load_fs.c
-+++ b/test/image/spl_load_fs.c
-@@ -395,6 +395,8 @@ static int spl_test_blk(struct unit_test_state *uts, const char *test_name,
- 	return spl_test_mmc_fs(uts, test_name, type, create_ext2, true);
- }
- SPL_IMG_TEST(spl_test_blk, LEGACY, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_blk, LEGACY_LZMA, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_blk, IMX8, DM_FLAGS);
- SPL_IMG_TEST(spl_test_blk, FIT_EXTERNAL, DM_FLAGS);
- SPL_IMG_TEST(spl_test_blk, FIT_INTERNAL, DM_FLAGS);
+@@ -103,6 +103,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ 	IS_ENABLED(CONFIG_SPL_NET) + \
+ 	IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) + \
+ 	IS_ENABLED(CONFIG_SPL_SEMIHOSTING) + \
++	IS_ENABLED(CONFIG_SPL_SPI_LOAD) + \
+ 	0
  
+ #if SPL_LOAD_USERS > 1
+diff --git a/test/image/spl_load_spi.c b/test/image/spl_load_spi.c
+index 8f9b6e0139b..54a95465e23 100644
+--- a/test/image/spl_load_spi.c
++++ b/test/image/spl_load_spi.c
+@@ -34,6 +34,7 @@ static int spl_test_spi(struct unit_test_state *uts, const char *test_name,
+ 				spl_test_spi_write_image);
+ }
+ SPL_IMG_TEST(spl_test_spi, LEGACY, DM_FLAGS);
++SPL_IMG_TEST(spl_test_spi, LEGACY_LZMA, DM_FLAGS);
+ SPL_IMG_TEST(spl_test_spi, IMX8, DM_FLAGS);
+ SPL_IMG_TEST(spl_test_spi, FIT_INTERNAL, DM_FLAGS);
+ #if !IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)
 -- 
 2.37.1
 
