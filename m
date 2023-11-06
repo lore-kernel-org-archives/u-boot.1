@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F82C4332F
-	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2678C4332F
+	for <u-boot@archiver.kernel.org>; Mon,  6 Nov 2023 16:35:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D39487124;
-	Mon,  6 Nov 2023 17:33:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9537687137;
+	Mon,  6 Nov 2023 17:33:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="au/MqT5l";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SxWLsbea";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E641E87124; Mon,  6 Nov 2023 17:33:31 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id AA5358715B; Mon,  6 Nov 2023 17:33:33 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2B9B87115
+ by phobos.denx.de (Postfix) with ESMTPS id 34C9C86FF4
  for <u-boot@lists.denx.de>; Mon,  6 Nov 2023 17:33:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7788db95652so327895085a.2
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-778a25cad6dso20894985a.0
  for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 08:33:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699288408; x=1699893208; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ht6oJst7F55AKf0gXlw/OBnxes7YmtZ6Wt6GetqOoGE=;
- b=au/MqT5l1upSQ+nre9ZC7P70W6BTDCHxSO5McIjNFbbwazAq16IdbN4Y1o4u9v8Ms4
- cWbQRT2iErIwtlCeWR6Td+asao2DMmyzKAfm/0GhoCEvAOpH4Mv2qyCwY0hpvn5wiNdF
- EpvbIRlOO5px1oulmzvAVP5YkqJmveW4iXJpE=
+ d=gmail.com; s=20230601; t=1699288408; x=1699893208; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5ac8wda8A2f5qn7q6xsYEyagdbLtJ4niwDPheQw5ZVs=;
+ b=SxWLsbeatWu0fwsd47RdK/7Fxcs0RyRUNdtVK3oj6hVzWz1Iql75dq5cBjcOJMdRBC
+ pYjt6ypxEBwiRJPaDnoVys3Xbbe61bQMbKR46FliwXlJ4ihMmywrbulXEozulSaGRcvj
+ M+DRnWLz4LxcQkielGmBEUgyvK/T2m67PVv7a+vcRA2JVCW0KvW452rRNMUbYRKWH0fG
+ bJebuod70g7kmjK8aa2ycxphF9/4nXBwX6fdnlyTZMAvFy5gVsOE/p26YRDImcgVTY/m
+ XyXsipSJh5pEpfDHChtXfl6NOxQZ8uW8RrXKDCiytFTBJCN8nOzoZQmcYjcde7OknM0o
+ Cn6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699288408; x=1699893208;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ht6oJst7F55AKf0gXlw/OBnxes7YmtZ6Wt6GetqOoGE=;
- b=Ue/N4HdBW2A3mFgRoKqVkFG0boi/Abwl/4ZexGC+I876Vzd+VCBBnb0NEH7vO5oyu3
- S0Ht4f1/Yew6qmJ1AFDxi7D4wPrpO+wId53XBuH3ZX0PJc1d3rYQU0yj8jQJS7mbF9fS
- ycFMtnHgZQcOX7PbIgsE/YHacznQEXP+qSRJc0ulADtjpAQHQWUKLshdgZsa6zdCHZvV
- ygtM9GPzRiMSmYadHIuJdoaYZ0vGLZmGQyNbEMuHeG8Gw5jgpXfwLWlwqAX3OVfcInuO
- VT0iE4hC81R6tWwpUB+xV6+SwfxF9IGxEPhsxzqGp7B+yyx4kUwsZHi2kmnf3Yg65aJx
- N5RA==
-X-Gm-Message-State: AOJu0YyJUhn6EhJfH530M7lX2Q16YOlE8n0va2KzNAJJ7l5oqVUSB2yA
- HnJXH4rnUChxZpQ7rHx+zZ2UrC8C9WmwcAfdgCPxrA==
-X-Google-Smtp-Source: AGHT+IHfZX20jf8FDYblL08uZxtZJAFjC4uMEeQ6YQJfDX4kPuuC02OCp5oXOZWCG9v/7SQr1l7R1Q==
-X-Received: by 2002:a05:620a:2801:b0:775:69b4:b4e6 with SMTP id
- f1-20020a05620a280100b0077569b4b4e6mr36352361qkp.7.1699288408495; 
- Mon, 06 Nov 2023 08:33:28 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
- [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
- m16-20020ae9e710000000b0076e1e2d6496sm3423639qka.104.2023.11.06.08.33.27
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5ac8wda8A2f5qn7q6xsYEyagdbLtJ4niwDPheQw5ZVs=;
+ b=wAi22P44QVyKZjpSdUhj8Xfsx/RqoWSQE3bVJnkffGmBcAoku4Og9JO0cvSnYd6R7R
+ InirrpJn0AdvkK1ytTkaV6AToCR2Gx8piNe9oCjURnRkndAR5ivJG4ChsM/VYLnBPGB2
+ je4bAt7gQySsEz2XYsvCg7XnNjRUJzQRmtkGQYZWUD/4SMwxHCpCx/p+0Kz0E93QB6yC
+ ZNSR4PVUcsDehrmkoCVzrZ4AcXcCbjVOi91MbkBRqsf7PklQ6QCzDToHxCl2QIvohNu9
+ wB4Y41pW/1Lek9W39a5Afjn5chIndx1h5I0F6k+nlB4nKyBwpLT9ruOKwPnK+RRiDYGX
+ ociw==
+X-Gm-Message-State: AOJu0YwEEfYWy9tdd99lR06A/KxODDKctUfMggO8MsIq9vbeMnUd2ouw
+ kEcJxVmb34QieQHtp6856dK4I3aBfHI=
+X-Google-Smtp-Source: AGHT+IHN0DpG5VrrEtzoqIuyFETHP1agvtY1WXpqfMIJr2jk8L93kj9nJvrtnP6Am56FXm99BxCiog==
+X-Received: by 2002:a05:620a:1a1a:b0:773:a789:cd15 with SMTP id
+ bk26-20020a05620a1a1a00b00773a789cd15mr33598563qkb.6.1699288407876; 
+ Mon, 06 Nov 2023 08:33:27 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:91e3:ce2:e2f8:4628])
+ by smtp.gmail.com with ESMTPSA id
+ az42-20020a05620a172a00b0077407e3d68asm3407235qkb.111.2023.11.06.08.33.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 08:33:28 -0800 (PST)
-Date: Mon, 6 Nov 2023 11:33:26 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH v2] net: eth-uclass: Setup ROM source only when ROM
- reading passes
-Message-ID: <20231106163326.GU496310@bill-the-cat>
-References: <7fb2d512973481cf412a622deb747758bb539c48.1694787003.git.michal.simek@amd.com>
+ Mon, 06 Nov 2023 08:33:27 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH 1/2] imx7s-warp-u-boot: Fix aliases and chosen nodes
+ indentation
+Date: Mon,  6 Nov 2023 13:33:22 -0300
+Message-Id: <20231106163323.2883561-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TyutDwqFvD5n+alq"
-Content-Disposition: inline
-In-Reply-To: <7fb2d512973481cf412a622deb747758bb539c48.1694787003.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,54 +90,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Fabio Estevam <festevam@denx.de>
 
---TyutDwqFvD5n+alq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The aliases and chosen nodes are currently indented using spaces.
 
-On Fri, Sep 15, 2023 at 04:10:06PM +0200, Michal Simek wrote:
+Fix them to use the standard tab indentation.
 
-> There is no reason to setup ROM source if read_rom_hwaddr hook doesn't
-> exist or reading mac address fails. It is ending up with confusion about
-> mac address source.
->=20
-> It is nicely visible if you put mac address to DT as
-> local-mac-address =3D [ff ff ff ff ff ff];
-> but also save ethaddr to variables
-> setenv -f ethaddr 02:18:31:7e:3e:01
->=20
-> Before this patch U-Boot prints that source is ROM
-> Address in ROM is		ff:ff:ff:ff:ff:ff
-> Address in environment is	02:18:31:7e:3e:01
->=20
-> After that source is DT:
-> Address in DT is		ff:ff:ff:ff:ff:ff
-> Address in environment is	02:18:31:7e:3e:01
->=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ arch/arm/dts/imx7s-warp-u-boot.dtsi | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-Applied to u-boot/master, thanks!
+diff --git a/arch/arm/dts/imx7s-warp-u-boot.dtsi b/arch/arm/dts/imx7s-warp-u-boot.dtsi
+index 49b992dcccaf..4f44598c9a27 100644
+--- a/arch/arm/dts/imx7s-warp-u-boot.dtsi
++++ b/arch/arm/dts/imx7s-warp-u-boot.dtsi
+@@ -1,12 +1,12 @@
+ / {
+-    aliases {
+-        mmc0 = &usdhc3;
+-        usb0 = &usbotg1;
+-    };
++	aliases {
++		mmc0 = &usdhc3;
++		usb0 = &usbotg1;
++	};
+ 
+-    chosen {
+-        stdout-path = &uart1;
+-    };
++	chosen {
++		stdout-path = &uart1;
++	};
+ };
+ 
+ &aips3 {
+-- 
+2.34.1
 
---=20
-Tom
-
---TyutDwqFvD5n+alq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVJFVYACgkQFHw5/5Y0
-tyxvnQwAkpAA3rDtVDIEft+mNhWoaZjWUcpv7h/nOhX2RY/zT6iy24YLTSCLHu1x
-uk4BfBEDTWGLi/h/re6CuaTxYUP5YFcWH0dJ/j9as+anUErTAQjamhrktZm+6PNH
-S47hs9n0+8i++6gUXeCz2XFVGi5wmbplxb5Kf8vZb5XjFpYFryl0buEb/kLfkDmA
-DnRLd1Wzfwal6jyeBdTnkxMu0rIrTm19kAbxX2fhP95B+CwMw9w8EJfG1OR+oyEF
-H/sMiGlm8Z20cOj7v2PeHWIYDaYbS82RAqzR3Zm9nvLQYqi/GZ0uYQHcOGzP97j/
-e4gHOAsC7qSUHLnVpE1nkQZHWKAjA8xF+aO5FbwZ3dMbBfzEjE4TT5gKm7Ih1SyN
-4XZX/oxbw/fmfiq95a1W7k/iFcKAOO4OXlBaQrtsZcuJbfb3EpuOv70gPLzNdiyb
-JhjvJEDf7YBfPvrUfWYuCwNg9EZ6ziQ/S6KUjQXxR7tyz3W2kS4USbFYVg6n8lG4
-SW5uTsbM
-=i96E
------END PGP SIGNATURE-----
-
---TyutDwqFvD5n+alq--
