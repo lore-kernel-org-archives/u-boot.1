@@ -4,74 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D8B5C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 00:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A8FC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 00:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84FB886FE8;
-	Tue,  7 Nov 2023 01:06:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B352F87098;
+	Tue,  7 Nov 2023 01:10:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lllkGs7/";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E0C18701B; Tue,  7 Nov 2023 01:06:10 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1699315828;
+	bh=112CpSsKEJ0rW27arXJge8yZmbNz7lcQa9CMNuA3af0=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=bMUQ++eCxH1JuSqjHSMwzxaRe+04x+n5fHr55bCWIYuqZbgi0WDrcZ03uKlBEWr2k
+	 pf3jbhs27RGvL2oIaCPj7sAUOBQRSfekd1k0kg84ihD2oMjBTITuh3lDrjZu1k+Qj6
+	 ZJ8wDqPfOQs9dmPAhBXlxLljmvC5a//kUhcvGWs0BXHB5juZwjlxAp9I7gpMTn8F31
+	 PQxwYUCCzoTlVho8gj9WL3wxiKA5X2yDbEgXDyM4rh/gDlEdfh47zgLK+3kCaVlb7Z
+	 KZ56bMCUAV9mPjBnohP4TDkkFtFNJqvWdPh+j3bUOMj06Dej4eKoZpzpUCQAiS0A4b
+	 /To3XgB+lrXMQ==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0BAB86CB1
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 01:06:07 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-5b982ba3604so190846a12.0
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 16:06:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699315566; x=1699920366; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TLZGFZEZKIkpx/JXLOfYq15up/+MQMxqu143WlDu9/c=;
- b=lllkGs7/1xL/xJlO311LO3UmDGMjUCDc1//ukCxlT+qyU4ciwMgyT8ISUUsllKI80P
- LHPNEkDNFhIpB0AFyjy9woEdcaq3Z8u3keQhBMkDFMxtDfYAeLf0debsAunHmEWGt1jP
- 4l0Jy6OTmMnCJf0dR+m40Rig62Qik+ISB+bq4lGNl8B/H5ibAZilmAN6kbny9IUeZweF
- 8Rh9LdU4h7brec3kVuU/+ztDQHmGmh2B8K+HZlM10aXGpi1cKZqVCyXrcyS3NkGDA7l7
- syMOPCi86M3uII3vW2y7qTpChKaqO/fI+NamySChj/b08kpqlEy33I4SNYRf4VLq3I1V
- Sung==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699315566; x=1699920366;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TLZGFZEZKIkpx/JXLOfYq15up/+MQMxqu143WlDu9/c=;
- b=g5R0YsydySM+08/Hhn0jBSRN4Rf437DPY+319G0Mi+8LEqxE/0xlgOuNA4MNSfsQCM
- 6BE6lDLzH8z9tk+A8jfsaDpcggRXTt4SUUMLCgfQSSvMc3LzAlS5rt9nZIv+PfL7DNwG
- 8DkHS3Pdm61UsgfyZQqdislrtNr5LcaveGNx0+f1kgcTMXi8TeFIQwaCby40A/tZzRns
- KKLWpJgwlekMze9ZlnHly5YFJEuPCXAqDSVwjbw4RfJnTmznp/RNbV9zXE/7iJ1BUIl/
- AKN0LHDaaAArMYLrxxp3BkalZcZog8Jy34t5drAHLNHqThK3PZNG97PoCDAshrN1Y7w8
- Fgkw==
-X-Gm-Message-State: AOJu0Yxcpwyohs/0wg0mOWpILRXxAWjz5N395PiNTh0gIRSmq/5yedgB
- Macjjign69tLkYweIxBZchwebuy8P7pM3m6Zc21rLQ==
-X-Google-Smtp-Source: AGHT+IFUfyzfKFOmZrIc8OC595LrKdu9mtgg1AyXt/afMTg/ibYwu3eqCT+XOCsmtnMn8B+8/xIGfQ==
-X-Received: by 2002:a05:6a20:e687:b0:15d:f804:6907 with SMTP id
- mz7-20020a056a20e68700b0015df8046907mr34674583pzb.0.1699315566046; 
- Mon, 06 Nov 2023 16:06:06 -0800 (PST)
-Received: from octopus.. ([2400:4050:c3e1:100:2624:f827:e7fb:10a7])
- by smtp.gmail.com with ESMTPSA id
- o187-20020a62cdc4000000b0068fd026b496sm6377573pfg.46.2023.11.06.16.06.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 16:06:05 -0800 (PST)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de,
-	AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH] firmware: scmi: correct a validity check against power domain
- id
-Date: Tue,  7 Nov 2023 09:05:47 +0900
-Message-Id: <20231107000547.182072-1-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 1E4A086CB1;
+ Tue,  7 Nov 2023 01:10:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1699315827;
+ bh=112CpSsKEJ0rW27arXJge8yZmbNz7lcQa9CMNuA3af0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=d/F75+oun57K7gm5ToMKB9/jjzJk9ULONWWB8qX/2u9RhpJaTrWApS49eyE1yi17R
+ Gukk1I7+iva+PJI24egGtli/QcXEgri6tt4ZMbqBvwDA5dCbk7PF76pqb4KpW7zVHa
+ Cf2CBbljpTk4U4Q1Ylw38q2OB4yDjeRV0vahgCSquhfdbBUYC7RVFBZYghMFDOU64z
+ pgB7X+TQ0lhDhfWCT34L4W9ldcfeiWwtiYILn0hwqJ08q5aN1H+xW/G40G7whwtsR/
+ aQ8tg1d3BkiLwlxxsfWGcoPvLuCPz+ENgVd6Rjgk2oZ8rVZSaaBMdjfQ71BWA8vHlY
+ YMnCAgT+ztbvw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH] usb: gadget: f_mass_storage: Stop ums on START-STOP UNIT SCSI
+ command
+Date: Tue,  7 Nov 2023 01:09:59 +0100
+Message-ID: <20231107001018.55640-1-marex@denx.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,56 +65,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A power domain id on sandbox should be in the range from zero to
-ARRAY_SIZE(scmi_pwdom) - 1. Correct the validity check logic.
+Exit the UMS handler loop in case START-STOP UNIT SCSI command is
+received. This is sent e.g. by the util-linux eject(1) command and
+indicates to the device that it is supposed to spin down the media
+and enter low power state.
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Fixes: CID 467401
-Fixes: CID 467405
+This effectively adds support for exitting the 'ums' command from
+host using 'eject /dev/sdN' that is on par with 'dfu-util -e' .
+
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- drivers/firmware/scmi/sandbox-scmi_agent.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+ drivers/usb/gadget/f_mass_storage.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index 9f5f497e0a6c..d13180962662 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -576,7 +576,7 @@ static int sandbox_scmi_pwd_attribs(struct udevice *dev, struct scmi_msg *msg)
- 	domain_id = *(u32 *)msg->in_msg;
- 	out = (struct scmi_pwd_attrs_out *)msg->out_msg;
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index 1d17331cb03..c725aed3f62 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -327,6 +327,7 @@ struct fsg_common {
+ 	unsigned int		short_packet_received:1;
+ 	unsigned int		bad_lun_okay:1;
+ 	unsigned int		running:1;
++	unsigned int		eject:1;
  
--	if (domain_id > ARRAY_SIZE(scmi_pwdom)) {
-+	if (domain_id >= ARRAY_SIZE(scmi_pwdom)) {
- 		out->status = SCMI_NOT_FOUND;
+ 	int			thread_wakeup_needed;
+ 	struct completion	thread_notifier;
+@@ -669,6 +670,10 @@ static int sleep_thread(struct fsg_common *common)
+ 		}
  
- 		return 0;
-@@ -613,7 +613,7 @@ static int sandbox_scmi_pwd_state_set(struct udevice *dev, struct scmi_msg *msg)
- 	in = (struct scmi_pwd_state_set_in *)msg->in_msg;
- 	status = (s32 *)msg->out_msg;
+ 		if (k == 10) {
++			/* Handle START-STOP UNIT */
++			if (common->eject)
++				return -EPIPE;
++
+ 			/* Handle CTRL+C */
+ 			if (ctrlc())
+ 				return -EPIPE;
+@@ -1325,6 +1330,8 @@ static int do_start_stop(struct fsg_common *common)
+ 		return -EINVAL;
+ 	}
  
--	if (in->domain_id > ARRAY_SIZE(scmi_pwdom)) {
-+	if (in->domain_id >= ARRAY_SIZE(scmi_pwdom)) {
- 		*status = SCMI_NOT_FOUND;
++	common->eject = 1;
++
+ 	return 0;
+ }
  
- 		return 0;
-@@ -653,7 +653,7 @@ static int sandbox_scmi_pwd_state_get(struct udevice *dev, struct scmi_msg *msg)
- 	domain_id = *(u32 *)msg->in_msg;
- 	out = (struct scmi_pwd_state_get_out *)msg->out_msg;
- 
--	if (domain_id > ARRAY_SIZE(scmi_pwdom)) {
-+	if (domain_id >= ARRAY_SIZE(scmi_pwdom)) {
- 		out->status = SCMI_NOT_FOUND;
- 
- 		return 0;
-@@ -686,7 +686,7 @@ static int sandbox_scmi_pwd_name_get(struct udevice *dev, struct scmi_msg *msg)
- 	domain_id = *(u32 *)msg->in_msg;
- 	out = (struct scmi_pwd_name_get_out *)msg->out_msg;
- 
--	if (domain_id > ARRAY_SIZE(scmi_pwdom)) {
-+	if (domain_id >= ARRAY_SIZE(scmi_pwdom)) {
- 		out->status = SCMI_NOT_FOUND;
- 
- 		return 0;
 -- 
-2.34.1
+2.42.0
 
