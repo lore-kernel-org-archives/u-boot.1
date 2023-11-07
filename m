@@ -4,67 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A53DC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C84EC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 577F786823;
-	Tue,  7 Nov 2023 13:38:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D6DCC870E4;
+	Tue,  7 Nov 2023 13:38:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="YJOdWea2";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vyoo8uj3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5928586823; Tue,  7 Nov 2023 13:38:41 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e89::62c])
+ id 3D52F867F6; Tue,  7 Nov 2023 13:38:57 +0100 (CET)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eae::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 370E186F64
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:38:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0154F870FD
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:38:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CMcl+felJAaJefhOjOXkiPYBOD7wke1968+HPtk+aa2/TGkU71+kMtt3KteS/+a1unslQOau+JX8JGorta6B9UjorjOxXUsa6DtHgLfPg3NI43/jKyDm3DBdy96JnclF2jWj5vx7YHmBzJN9wyoiWz60KNc2ub4hZW8TKLPpIibgcdDv16aKQc2ruoC2r7W7VvYhSrpohCFiRlmMGy95k5PW5BYUVfxGZp/JUorWC6wg1cIMMDC3YfA7T92lN03PBVcXDdNAm2jiBcFbGD9o/+qsHDzrqq62+dlsl18gFHdYcbsbY5uO0lV+hyY9WIxm8QWw9ffRQycYxeR+nkYi4w==
+ b=cFXXioge5dG710I06PKjeEdWidt6iK2J7GMivMe5RGGFtf4BF3TB0AfcTMsxb1xfAqltAhxmKQV0r3bvY4DNWlTKw+MWNwfdIqG9s+bkKqijp0758b+jwXp9Gwza29w02IG4wFFki0uhQVbFC5eC59xmZN24Keum/sf99Td4txYOyyNUPgTATuVURBReawxEu1vs33rTw/NaR3jlTYcDArvCGP7EG26HmgaWbePBNLGsMtJTK8cJ8eqDS04OEAzi5/Kx2odVI8V6AJ8TeFa80nx+fUwpfXyt2Ssehzy6M0VmONmUaVIdOLaZLVxlZRwfMN5ss6wM5rOAiC4mo/wwuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N8bTHAnbewF3/8kbAV8OgDLDiiAWEQGu9r075Qyj3vs=;
- b=Z610Qt+/LLRIukya9EkP19cxTzmi+tkq2KvdtVFWIl6rPS0Be545V3Zwjk0CgIqAoaBVqyqOKfjd0/7hmygZYPFpS5ORXAAkOXfCU1wq+YmPtpaHOLG5rz/eBafAFgwe0wUn6S/AtM36r9BHZhQ10Ln5ZTU+TuXCrY0dpEse8u4PBeLEF6mlWq37rvmwOhzZECv16N5mtrghCft13mX3P0G0C2H3j7cEYTeb1Ue1IzhoORbs4mG0MC1kmNwrOCKZcaLLiVgQl1qa1BgQVnQQQBCoqjKldIkvc/RC7xJeWKAdihZj5cAOkABbAf57rDD4WXt+gUIL8oYR1HxT8tcWgw==
+ bh=WHYVhboLiJ60J1SY2t4nxc1jT70y0gVln2Avb4TiF/c=;
+ b=PyDT/aamLcPrli61BXr6uBJGDLgvdJDaSUjwZw/zU+V4qxojSz43Lvkf9f+dk/gD+llGQ/OE78BMH4qqjjM0LrwJyTH2CLw6xq2s266btkdnChl9cLAxnPsCKR1wV4fsV33ClrErJ+GRRoCu9kEqTVRa2+PNaiO3c8OK1U7HZyOM87JQM1RcwxyjlxZaMSNImWffVM2UdpLF0z0RdRvzsKSObD6VLK8YtJc0ib9srtJEb2oHZzjjrIl0ZgjlRLWmeq4M8MHBKZz8JC9mip7TUyvP4pL9EOIK7bIofvGkPQECgJVCFbuFJ1ilfdym2b0Pqzw1R//S1Pehg+urlYTUdA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N8bTHAnbewF3/8kbAV8OgDLDiiAWEQGu9r075Qyj3vs=;
- b=YJOdWea23aik5nCwUhHVf+lBHlK9gsw601sLv3dZCftbei0T41Y5GAA9MzgqbVTulu3oq9fNZIJyX1WBaYz3eh0KcwbnzN+QjfP4cwNtURzmfsfVH4Ri7D49sjUamMfTQGlh64s1S7cqoScxBt4awDQK+vpCKEZRLMO0gMOmw7o=
+ bh=WHYVhboLiJ60J1SY2t4nxc1jT70y0gVln2Avb4TiF/c=;
+ b=vyoo8uj3XrqcirIkFdYd3LtLGiZNl/BaovntHRmvp79ye2/2lHQBv+XeYNj33OWymue1ThSo7mxYcSJZ0dW08tYYzMemq+JTp79LkzCbsT/iCavXa6pS9OGTy6XiOY7pf02mD66Yg1MNkhcdnyJ+6zpC+jXFtVL0y5AjJ4c3h9g=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
  by DM6PR12MB4497.namprd12.prod.outlook.com (2603:10b6:5:2a5::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Tue, 7 Nov
- 2023 12:38:29 +0000
+ 2023 12:38:50 +0000
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::1d07:c316:b830:70c9]) by BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::1d07:c316:b830:70c9%4]) with mapi id 15.20.6954.027; Tue, 7 Nov 2023
- 12:38:29 +0000
-Message-ID: <1aa1d376-cc2b-422a-829c-baf8ad6e7ac8@amd.com>
-Date: Tue, 7 Nov 2023 13:38:15 +0100
+ 12:38:50 +0000
+Message-ID: <a3267f5d-38ca-4c1b-b04f-581e645e2db0@amd.com>
+Date: Tue, 7 Nov 2023 13:38:47 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm64: zynqmp: Comment all smmu entries
+Subject: Re: [PATCH 1/2] xilinx: Enable SPI_FLASH_MTD by default
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Piyush Mehta <piyush.mehta@amd.com>,
- Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
- Robert Hancock <robert.hancock@calian.com>, Simon Glass <sjg@chromium.org>,
- Tanmay Shah <tanmay.shah@amd.com>
-References: <e868c27c52ded5d8ef25f75ba394b1ab3b31b80a.1698825657.git.michal.simek@amd.com>
+References: <b3c4a3eddb71aab9535b034380d0dbae770828d4.1698837725.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -109,7 +104,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <e868c27c52ded5d8ef25f75ba394b1ab3b31b80a.1698825657.git.michal.simek@amd.com>
+In-Reply-To: <b3c4a3eddb71aab9535b034380d0dbae770828d4.1698837725.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR0102CA0095.eurprd01.prod.exchangelabs.com
@@ -118,61 +113,61 @@ X-ClientProxiedBy: VI1PR0102CA0095.eurprd01.prod.exchangelabs.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|DM6PR12MB4497:EE_
-X-MS-Office365-Filtering-Correlation-Id: ca6f36b2-3134-4a3a-7933-08dbdf8e71ea
+X-MS-Office365-Filtering-Correlation-Id: f81e4c99-2f32-4619-6e56-08dbdf8e7e2e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: lzd3nf3h8t0fshcYSixlhezqRSNRR5bBQo5TPbAgaVzXlA7za4bO0NVqL3VUWvsWTajhCEp2SF1yI2lLeGfg+Qo4taB4rNmtkSxfiuNSfC1H5+tUL1PaP8CnYtrHkxLnkZmpHE525eOk/T700U9TYvjZFqkwQgn8q0+PMB9f720MZlM0cIiA9XD1Tm0yAU04O7NCcR6XvRVBeZ3mziirgWv4kMuqg9QzqWHJjK8oqvEvcnKrcMA+UfzCiXOfrqRi0PyGI/DjLFAraaiPvoKy/NvCS0nCRr/AcSAkGPAKdiUS7qNkWl5to9qikyfs+7bK8pO08bBaiUi+zBMB0dBbo0C5ZeD4yjXalCmPL+ODqADkkuxmKZ5z70urPJ/9Ksjla9YYLLjfEgmblrTMCldNL3P7UfQdGyNB4MppVH9s64ImCmhpjeQU9YdBGZfM0/b0CGrH8miXmYiwjRJiKybtk9wzbJ4p3tiaj7QJKd2r4fvUJsOSRqjis3TfbxaeqyqUCCh5vRnaU0r8HdKKpocNStIMwPSxM3XeVk80+sLjLwZ3vVbdpJRQKCws0JQGYLoUX4durLVMzQsPYZUoLAB87rH/fQ1uE1uAgtCynk0vr7uA6yjpd2CoHblvYQdzLu4qgTi4wEo2HP6FXrrPWcKz7A==
+X-Microsoft-Antispam-Message-Info: TBRxmMBAc99SRBfj5MCm8fMaGYeV1X8Nz/PPXR6BzcQKynXXsufcKsW6J71LRUEyum8YRHs4bwt0PDS+Hf8OkNwbTcHqKe2Dpj0AFnWuKx3aAXCab4L0q//1zNUl0/FtqYy4JbCe9cQ06nZbJdRuc19axrzzv0oY/fGHGPUO0GPelcfqnmcn8bRrZ7N+utnlXCMA6W1CMgmsm8Tq/Vt2FXyBgCzx5qvZtcqMJTvCtigNa+67zx1OO81d8qYzbPdPp1mcdmVB+W93biEwjIsbFBUMAGgzbxRx0LTQ1ZxrXASuwxsy6VLhjYlVUC0IoGEnwszSvSfCkk4tvvkGGhi5SbLuo+Vl9Q8VS97a50qk470lbIurzQNr0fWHinyOomDDDlfpmv0L4xusa/CgLCb/OyrP7iakEW/f26DMBbuymrAE+WMWZEPKUBomWmD+tg9AJ6zz9lMK1ZPsnA7Iiyz1la4XjLR/MU/dVWMmAEnpc4wT+/CEbfV3EppXyZ8LmtoDgIFmyIavir2Cb7Soq7qRbNJdvAIpJ0WgdRWoOhtoH5q0ZbQTJHYgKoNPHaRBpra9BtLWBSfN5yg/Ydta5YioBA4rnMJsM+CGu4PrJEmCmNopY7k7cDn2PnJ+RLb8UtG0hhnkUu6V5rAvTpl+FdhZgg==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(39860400002)(366004)(136003)(396003)(376002)(230922051799003)(186009)(64100799003)(1800799009)(451199024)(2906002)(41300700001)(316002)(478600001)(66946007)(66476007)(54906003)(38100700002)(8936002)(4326008)(8676002)(66556008)(36756003)(6486002)(31686004)(5660300002)(86362001)(31696002)(44832011)(83380400001)(2616005)(6666004)(6506007)(26005)(53546011)(6512007)(43740500002)(45980500001);
+ SFS:(13230031)(346002)(39860400002)(366004)(136003)(396003)(376002)(230922051799003)(186009)(64100799003)(1800799009)(451199024)(4744005)(2906002)(41300700001)(316002)(478600001)(66946007)(66476007)(38100700002)(8936002)(8676002)(66556008)(36756003)(6486002)(31686004)(5660300002)(86362001)(31696002)(44832011)(83380400001)(2616005)(6666004)(6506007)(26005)(53546011)(6512007)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OUhJNEFPTVpybzZOdXVlcFZDMkNxNmRmZzU4bUFMOVV0R1VuREZ2ak5LK3Zq?=
- =?utf-8?B?dkg0ZTBFQmtkWkZoeDRpMGVVYnMzYWtDc2FRNTVwMGxmQ1NIMHZVOTlmWldP?=
- =?utf-8?B?SHppYWpLYndCb2ZhT1Y4U1RZajVSb3MrUTRPM1phSXh2MTdpbUlYeFVCMnBC?=
- =?utf-8?B?c00yczJBTGdrL0NUUmRiRktoeUh3TG1vWWVBRzRyZHpDbEpmbXIvSE01NkZR?=
- =?utf-8?B?KzFFMXhVMnhIaklyZmJ6YUVlemhrakdwajNSL3locHRaSVdQVGlpK1JkRVF3?=
- =?utf-8?B?SGRnMThJdUs0TzF2YmZuUXI0Q0ZnR3lpV2QrQVIzMDF0MWxaSkNiUnl6bDBB?=
- =?utf-8?B?aHRCTUVlZzBzNmZTSWZrckhaZm5LYnMrZkdraDBvcU92Y2JwYmwyRThCL1ov?=
- =?utf-8?B?QTVuUXdiWVF5bUdjQUt1WUpwRU5nY3hoUlRQNUNTR1hGUjZqMmZySTNqT1pM?=
- =?utf-8?B?U2hkOTBFTHlVcEdvNTFKaDdKY24zbjN1Skx3a0UrSkg4VGZ4UFQ1Qjh4N2Rv?=
- =?utf-8?B?Q0pYTVZtUXQ4dVBXVU84U2t2NFN1aUVPenRaTFhFcW1pMkJYWmFKTWNEYUY0?=
- =?utf-8?B?eEpZRnpmMDlWbUVkMjdqMHJQb0xHUFVVWUEydXhBUWZjNit4eTJncUpyZlJn?=
- =?utf-8?B?OXlBOVVZV29xUHhrMnAzRHpMc3BleUV1U0FwbFU5U2I4a05obDcvMlgzQk81?=
- =?utf-8?B?SUg0Y2FmcW85TUZlYkwrSHM1VlpyckJHN3FZdUJtbjRQdC96dFhsQ2YwY1cv?=
- =?utf-8?B?Q0s2NWlJdlNVVDA4QkFkMVB0eEo3TWJpaEdiZnlYM3d5VzF5akkzTjVyVDEz?=
- =?utf-8?B?ZHRRQ29sdEh2ekNiY1pXYndaYmxKa1ZLN2hJVG5HR05xNUR5NjBxSTdHMnNk?=
- =?utf-8?B?eEdDWHl5UFpDWUM5QU5HZGhOSDBNVFNzak1ETnBWeUtnQXJsT3NnRmV5cjJ3?=
- =?utf-8?B?N0wraUVvbEhGY2R6TTNiVjFZZ0Y5ckl3WUxUK3dCdmEvQTZmZTE2K0ROd0xs?=
- =?utf-8?B?Z3gzUVVDQzdMcy83UXQvU2VJSnFSR3E1VXBpdUpjNHJaSVYxTkZBcXRhN05k?=
- =?utf-8?B?YzR6bmFuN0dIMEh2OXhnREN2MGtKVnRvZy9nMStyRm10T1k3YytodDNWQjZG?=
- =?utf-8?B?clgrZHdIRDhvNGVHeVp5R1VIa1pjMVNCOENOdXp4MDlsc1BhbDRWZ0dkSzFS?=
- =?utf-8?B?VVFqMyszdkM4ZG5UeXl4M2h2YmpFN2JwM0dBWDdLSWxRMEF0bzZVREdhRk1n?=
- =?utf-8?B?OU41amZzY1l1YzdJOUlDS20xVjBOQmNGRnM2bDh2TitsOXpOcXMrTEJoVnoy?=
- =?utf-8?B?RFRnY3lLK0N0bTA2ZkNuWW10UWNSSnpLeitjUXRMcXk1dm1BdXJHRzVXZS9W?=
- =?utf-8?B?K2RaTTVlTmVlSUZzZldxWWFoUzhZcWhIV1pzQllnUzJpdGNJWVdDdWcxSXE5?=
- =?utf-8?B?dVBQVk9EOS9vV0phdkdZUUNKS0w1Y1NpaEtPOVRaYUIyOG1WdnlZSXJzS1pL?=
- =?utf-8?B?OHZUMk9TVEhtL2hrNGZFejAreHBhbGYvT3NKN2x3MEJiaXRQbENML0hPdXJa?=
- =?utf-8?B?OHZSd2RXcHhOajd5R0pIUGtVZU1OUTdKY25Ja2RtZHVkUnYxbm9qVmJNMnpL?=
- =?utf-8?B?NXhoZk84Mlp0Z1ZKREJuMDVhSnF3SkNrSUhpeGxucHg1bW1keDMwMVZ4T2VU?=
- =?utf-8?B?WU5rUkhPSytHWWZsL29WVWNzVW1pZmc5ZzlPd2U0dS9ZQ3Rwdzh6RGMwK2Fl?=
- =?utf-8?B?UlZla3hLM1pLSDFZNU52Sm1LdW0zUEhtQ1BTWktQR09CMndSbHlxNDlkM2kz?=
- =?utf-8?B?UVJvQlFQOU5BMXpwWFNTRlVMYnZrWDcxcXdyVE50bzJQR0JQVUlyTVE2OTBo?=
- =?utf-8?B?a1FJME1BUjZNRFU2NU1KMjhyNlp5V1Q1U2hybVlTbmpiYzJBYTFUS21mUVZw?=
- =?utf-8?B?YWRmSTRKMUlPZGNiUVFET2JuWmw0aFlYM2FTWnZKZzdnR0ZGVmxFaVdoRWI4?=
- =?utf-8?B?Qnhhc0UxSE41LzNHNVZFNEdHV214R3JQQStadktmY2lGSUx3THFJRnhmTXpS?=
- =?utf-8?B?Q3pHNmlNZk9XL0RESWVyWVd5b1lMOTM4bUdyWGdYMGw3aXhTc1Z3em00ek9k?=
- =?utf-8?Q?xLpD8IjqTkVBRrfq2TkxLMLxs?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UE1wMHdnK2dWWUd6cWFFSGZCelRLT0tKK0IrNXl0SXk4eEFFbEpjb2RUeEd3?=
+ =?utf-8?B?VzBTaDRxeDhDVG9lWk9hSG5OeElITzZTTXlsYmMydmFnR1pBWENBUFRVQmRY?=
+ =?utf-8?B?OUIvN1NxOWtrQXJIbXNhb0ViTGlpSmZBYS8ybVNGMnZtcEUxbyt3S3kwZTFj?=
+ =?utf-8?B?SFNVajdiNnI2TDVjNnFxNXljZG1HWi9JSTJ0WVZPTTBFM0ZSY0RYdU5TajBl?=
+ =?utf-8?B?QXVNV2R6VkNFN3czVDFNTVA2QXIvRDhxRHVmeDBHZWdpMWNkejVIMk84ejJY?=
+ =?utf-8?B?aDNTYndnYm9SK2xkSVFvU0dTWStJSHJLYUh5SkdmOHEvbjdNZzIwSnJBTjhB?=
+ =?utf-8?B?bkp5WnVUOU1tWVFEUTArbVMwL293VGQ1bktSWFNhOXhEKytiZGZ4S0dvQ2o0?=
+ =?utf-8?B?WDdhS21FQlp5bFArQlhnRlhWa3ZsdU9wbldubDkyQkxNbndrSFhHaHRVNkZO?=
+ =?utf-8?B?OEY5eFU1L1RENVQ0OC9HbVdaNmRyZ1I0TUg3blhUUEVHeEQvQXhIQ3FkNmZT?=
+ =?utf-8?B?YzNOTHZZa09HWmdJWmNOdFZBOHB1c2xIYUZ0K2d3ckUva3VqSHhCR1RJYnhH?=
+ =?utf-8?B?WWlJcVhWR1BUVnNiS051S21KNXNTb2hPTE40a2UrdnE5ZmxzdHF1UGU4aVpD?=
+ =?utf-8?B?WG1iV0tPUlVxbFRZSGZuOGRMZzJ6cnlVdUhjMDM0RlNsOGFtcnE3cEpEb2c2?=
+ =?utf-8?B?cFVUUmtBSStmN3NkeVZ2QVpnUVVQbTdTVENIWUE1Q1lsVjR1bTZvV2NBaTVk?=
+ =?utf-8?B?RVk0NWRuRGpJaHlQdkRGc1RYWTFJeFU1c2MxaU0wd1FPMkZwY3RScHVlKzBM?=
+ =?utf-8?B?Vkx5ekpMVUh6d2h4NHV3dDIyVEUxaHNRLzdVN0dpWGNQVjdlTytmdENoZitx?=
+ =?utf-8?B?clFXR0hkR0JraVBST3IwUXZWaWl5ZVhyc2NnNlUxQURabU1sU3pJV0N4eDhG?=
+ =?utf-8?B?R3RSVUVpdUEvSHF2SjhDVFRxWTV1UnQwdHhkbVFkSU5hS3ZpRC9lV0tjM2ln?=
+ =?utf-8?B?OVRKeTBiQ1pJTFlsOHJYRytGZ0s2UUV1aDRyNTk2ZWUyWmVkT3ZXRUpzSVFG?=
+ =?utf-8?B?MHRvT2JUWlhQdWV0U0FhbXF5Mjdpc1JtUk45aHRDTSttMWNWbWJBV3NEQ0t6?=
+ =?utf-8?B?RG9aNnlhRlMvSlZMWEMyb0lNWjJNcHFFaHE0bHBUeFMxODI0MXlMS2hINVh0?=
+ =?utf-8?B?ODIrNVRIQjZMM0NHeFJUd2I5eXBjKy9uUzgyMnhSYjNVaHkwZDFtZldEZjFs?=
+ =?utf-8?B?TXNGUE9MN21ndkE3UzAvSFBSdXpHNUQ0Tk1ha1BYS0M4TnB5Tm1QNEhvQ3JK?=
+ =?utf-8?B?MXBqMkpPRk8zMVhCaWo0UlFWb2d6aHRwUVpiUUpmNWsvYXp5QUNSR0o1dEl2?=
+ =?utf-8?B?SlFiZEt6cUtSN0hMOUoxT0NKVHYwZzR1L2RycjV1N3E5M3dPN01vUWZFWFgr?=
+ =?utf-8?B?SjhLelJMVTZGbHltOWRrRjdrbE5hb3A0eWtaako2azNNUEd5djVJd0cwQVpF?=
+ =?utf-8?B?SDNlRFNjamZFTkhEejJQOVNHOHBVMjh0VHhmc3BKOEM1SklkRTR1Yk5VVlZr?=
+ =?utf-8?B?VnRLaUdpRE1RTVVERnlZZno0ZXpPOWlzU255bTlyeHlWSkZrN0wzcjNRSnVO?=
+ =?utf-8?B?YVczTTUvNEdVVlpMU1JLWWtOV0hSeWM3dzEvTmNiQVlNc3FlYitEM29iMUVS?=
+ =?utf-8?B?SDBkWjRqcHhSaUtFd29LdStrK3JYVEYwV2xxV1djWWpUZXEyTERnK2xzVDhP?=
+ =?utf-8?B?VXlsU2FhRGRrMFR3WnZHRWdEdXdQSEpBNU5wMjR4NlBWQ0I4UVdydytQekND?=
+ =?utf-8?B?SFZvWGIvSitCUFZDSmdHRWtnSkozR0Vza2hwVW1TRUpRZDdyRW5sYmF4Z3pV?=
+ =?utf-8?B?NFdzT2c0d25vN2RXU2s3TkdUNkE4Zm11OWF5SVVFL1pkcGhXYXRLZWJhbUVV?=
+ =?utf-8?B?MDZ3cU9abVptTEdiWktsQ2R5TE9wSE1NQUxQQ3doaHRDOW5nNzV3UExwTklR?=
+ =?utf-8?B?V2ZGeERJcGpOMnVpeHlrNzlMekZORGRUVkVBL2RQeUlOVW1wWUdsbXhMYXF1?=
+ =?utf-8?B?TFpXUURmOGhYT1p1YlZXODFyMTUvbjZ0cUFRM0hEaElYdGtWemZjRS9mU0F0?=
+ =?utf-8?Q?+RJpXZ80iFFnSO+MZ/Lh2ufzr?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca6f36b2-3134-4a3a-7933-08dbdf8e71ea
+X-MS-Exchange-CrossTenant-Network-Message-Id: f81e4c99-2f32-4619-6e56-08dbdf8e7e2e
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 12:38:29.3813 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 12:38:50.0993 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qaOe8dPBKn48B8VSOZ54iwmgcevxrrJV4geWrVnD+3uG2hRQc9Od+qYSj42W4NI2
+X-MS-Exchange-CrossTenant-UserPrincipalName: Rm/l/ijJrOfFBIlgxe9QpMIRicFxiogGYXTismnh8xFBzQxt4j2TwJxcjg4+a/Yc
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4497
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -192,296 +187,27 @@ X-Virus-Status: Clean
 
 
 
-On 11/1/23 09:01, Michal Simek wrote:
-> SMMU is disabled by default and not all masters can be enabled at the same
-> time because of limited number of entries. That's why comment all iommu
-> properties but keep them for reference in DT. In XEN case they should be
-> added back and Xen should have SMMU enabled by default.
-> Also add IDs for DP and DPDMA.
+On 11/1/23 12:22, Michal Simek wrote:
+> Provide access to qspi flash layout via mtd command.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
-> Changes in v2:
-> - add missing one for DPDMA
-> - update commit message to cover DP and DPDMA
+>   configs/xilinx_zynq_virt_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
 > 
->   arch/arm/dts/zynqmp.dtsi | 59 ++++++++++++++++++++--------------------
->   1 file changed, 30 insertions(+), 29 deletions(-)
-> 
-> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-> index 2253e773d386..66d53359d83d 100644
-> --- a/arch/arm/dts/zynqmp.dtsi
-> +++ b/arch/arm/dts/zynqmp.dtsi
-> @@ -339,7 +339,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14e8>;
-> +			/* iommus = <&smmu 0x14e8>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -352,7 +352,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14e9>;
-> +			/* iommus = <&smmu 0x14e9>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -365,7 +365,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14ea>;
-> +			/* iommus = <&smmu 0x14ea>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -378,7 +378,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14eb>;
-> +			/* iommus = <&smmu 0x14eb>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -391,7 +391,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14ec>;
-> +			/* iommus = <&smmu 0x14ec>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -404,7 +404,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14ed>;
-> +			/* iommus = <&smmu 0x14ed>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -417,7 +417,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14ee>;
-> +			/* iommus = <&smmu 0x14ee>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -430,7 +430,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <128>;
-> -			iommus = <&smmu 0x14ef>;
-> +			/* iommus = <&smmu 0x14ef>; */
->   			power-domains = <&zynqmp_firmware PD_GDMA>;
->   		};
->   
-> @@ -475,7 +475,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x868>;
-> +			/* iommus = <&smmu 0x868>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -488,7 +488,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x869>;
-> +			/* iommus = <&smmu 0x869>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -501,7 +501,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x86a>;
-> +			/* iommus = <&smmu 0x86a>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -514,7 +514,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x86b>;
-> +			/* iommus = <&smmu 0x86b>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -527,7 +527,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x86c>;
-> +			/* iommus = <&smmu 0x86c>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -540,7 +540,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x86d>;
-> +			/* iommus = <&smmu 0x86d>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -553,7 +553,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x86e>;
-> +			/* iommus = <&smmu 0x86e>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -566,7 +566,7 @@
->   			clock-names = "clk_main", "clk_apb";
->   			#dma-cells = <1>;
->   			xlnx,bus-width = <64>;
-> -			iommus = <&smmu 0x86f>;
-> +			/* iommus = <&smmu 0x86f>; */
->   			power-domains = <&zynqmp_firmware PD_ADMA>;
->   		};
->   
-> @@ -586,7 +586,7 @@
->   			interrupts = <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>;
->   			#address-cells = <1>;
->   			#size-cells = <0>;
-> -			iommus = <&smmu 0x872>;
-> +			/* iommus = <&smmu 0x872>; */
->   			power-domains = <&zynqmp_firmware PD_NAND>;
->   		};
->   
-> @@ -598,7 +598,7 @@
->   				     <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>;
->   			reg = <0x0 0xff0b0000 0x0 0x1000>;
->   			clock-names = "pclk", "hclk", "tx_clk", "rx_clk", "tsu_clk";
-> -			iommus = <&smmu 0x874>;
-> +			/* iommus = <&smmu 0x874>; */
->   			power-domains = <&zynqmp_firmware PD_ETH_0>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_GEM0>;
->   			reset-names = "gem0_rst";
-> @@ -612,7 +612,7 @@
->   				     <GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
->   			reg = <0x0 0xff0c0000 0x0 0x1000>;
->   			clock-names = "pclk", "hclk", "tx_clk", "rx_clk", "tsu_clk";
-> -			iommus = <&smmu 0x875>;
-> +			/* iommus = <&smmu 0x875>; */
->   			power-domains = <&zynqmp_firmware PD_ETH_1>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_GEM1>;
->   			reset-names = "gem1_rst";
-> @@ -626,7 +626,7 @@
->   				     <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
->   			reg = <0x0 0xff0d0000 0x0 0x1000>;
->   			clock-names = "pclk", "hclk", "tx_clk", "rx_clk", "tsu_clk";
-> -			iommus = <&smmu 0x876>;
-> +			/* iommus = <&smmu 0x876>; */
->   			power-domains = <&zynqmp_firmware PD_ETH_2>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_GEM2>;
->   			reset-names = "gem2_rst";
-> @@ -640,7 +640,7 @@
->   				     <GIC_SPI 63 IRQ_TYPE_LEVEL_HIGH>;
->   			reg = <0x0 0xff0e0000 0x0 0x1000>;
->   			clock-names = "pclk", "hclk", "tx_clk", "rx_clk", "tsu_clk";
-> -			iommus = <&smmu 0x877>;
-> +			/* iommus = <&smmu 0x877>; */
->   			power-domains = <&zynqmp_firmware PD_ETH_3>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_GEM3>;
->   			reset-names = "gem3_rst";
-> @@ -719,7 +719,7 @@
->   					<0x0 0x0 0x0 0x2 &pcie_intc 0x2>,
->   					<0x0 0x0 0x0 0x3 &pcie_intc 0x3>,
->   					<0x0 0x0 0x0 0x4 &pcie_intc 0x4>;
-> -			iommus = <&smmu 0x4d0>;
-> +			/* iommus = <&smmu 0x4d0>; */
->   			power-domains = <&zynqmp_firmware PD_PCIE>;
->   			pcie_intc: legacy-interrupt-controller {
->   				interrupt-controller;
-> @@ -740,7 +740,7 @@
->   			      <0x0 0xc0000000 0x0 0x8000000>;
->   			#address-cells = <1>;
->   			#size-cells = <0>;
-> -			iommus = <&smmu 0x873>;
-> +			/* iommus = <&smmu 0x873>; */
->   			power-domains = <&zynqmp_firmware PD_QSPI>;
->   		};
->   
-> @@ -772,8 +772,7 @@
->   			interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>;
->   			power-domains = <&zynqmp_firmware PD_SATA>;
->   			resets = <&zynqmp_reset ZYNQMP_RESET_SATA>;
-> -			iommus = <&smmu 0x4c0>, <&smmu 0x4c1>,
-> -				 <&smmu 0x4c2>, <&smmu 0x4c3>;
-> +			/* iommus = <&smmu 0x4c0>, <&smmu 0x4c1>, <&smmu 0x4c2>, <&smmu 0x4c3>; */
->   			/* dma-coherent; */
->   		};
->   
-> @@ -785,7 +784,7 @@
->   			interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
->   			reg = <0x0 0xff160000 0x0 0x1000>;
->   			clock-names = "clk_xin", "clk_ahb";
-> -			iommus = <&smmu 0x870>;
-> +			/* iommus = <&smmu 0x870>; */
->   			#clock-cells = <1>;
->   			clock-output-names = "clk_out_sd0", "clk_in_sd0";
->   			power-domains = <&zynqmp_firmware PD_SD_0>;
-> @@ -800,7 +799,7 @@
->   			interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
->   			reg = <0x0 0xff170000 0x0 0x1000>;
->   			clock-names = "clk_xin", "clk_ahb";
-> -			iommus = <&smmu 0x871>;
-> +			/* iommus = <&smmu 0x871>; */
->   			#clock-cells = <1>;
->   			clock-output-names = "clk_out_sd1", "clk_in_sd1";
->   			power-domains = <&zynqmp_firmware PD_SD_1>;
-> @@ -951,7 +950,7 @@
->   				interrupts = <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 65 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>;
-> -				iommus = <&smmu 0x860>;
-> +				/* iommus = <&smmu 0x860>; */
->   				snps,quirk-frame-length-adjustment = <0x20>;
->   				clock-names = "ref";
->   				snps,enable_guctl1_ipd_quirk;
-> @@ -983,7 +982,7 @@
->   				interrupts = <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
->   					     <GIC_SPI 74 IRQ_TYPE_LEVEL_HIGH>;
-> -				iommus = <&smmu 0x861>;
-> +				/* iommus = <&smmu 0x861>; */
->   				snps,quirk-frame-length-adjustment = <0x20>;
->   				clock-names = "ref";
->   				snps,enable_guctl1_ipd_quirk;
-> @@ -1043,6 +1042,7 @@
->   			interrupt-parent = <&gic>;
->   			clock-names = "axi_clk";
->   			power-domains = <&zynqmp_firmware PD_DP>;
-> +			/* iommus = <&smmu 0xce4>; */
->   			#dma-cells = <1>;
->   		};
->   
-> @@ -1057,6 +1057,7 @@
->   			reg-names = "dp", "blend", "av_buf", "aud";
->   			interrupts = <GIC_SPI 119 IRQ_TYPE_LEVEL_HIGH>;
->   			interrupt-parent = <&gic>;
-> +			/* iommus = <&smmu 0xce3>; */
->   			clock-names = "dp_apb_clk", "dp_aud_clk",
->   				      "dp_vtc_pixel_clk_in";
->   			power-domains = <&zynqmp_firmware PD_DP>;
+> diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+> index 6145af62b511..c3ee9beaef25 100644
+> --- a/configs/xilinx_zynq_virt_defconfig
+> +++ b/configs/xilinx_zynq_virt_defconfig
+> @@ -127,6 +127,7 @@ CONFIG_SPI_FLASH_STMICRO=y
+>   CONFIG_SPI_FLASH_SST=y
+>   CONFIG_SPI_FLASH_WINBOND=y
+>   # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+> +CONFIG_SPI_FLASH_MTD=y
+>   CONFIG_PHY_MARVELL=y
+>   CONFIG_PHY_MICREL=y
+>   CONFIG_PHY_MICREL_KSZ90X1=y
 
-applied.
+Applied.
 M
