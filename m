@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4CB9C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:53:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C48E2C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 13:05:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3924687076;
-	Tue,  7 Nov 2023 13:53:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0B30C87033;
+	Tue,  7 Nov 2023 14:05:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vHO31/AJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mm+5bXLt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FFED8711D; Tue,  7 Nov 2023 13:53:05 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id A76E186F44; Tue,  7 Nov 2023 14:05:03 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC36887076
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:53:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EC758715E
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 14:04:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-32f87b1c725so3909261f8f.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 04:53:01 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-586940ee5a5so2848481eaf.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 05:04:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699361581; x=1699966381; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=L23muOCsaZqPTdTTdN0oP8cRRGurhzulq7RZc4cSZGU=;
- b=vHO31/AJImP63OHzRqzjX082EHmtPzz+DtzpEASFMmi/+KrYcWiYR6QwuIxj+Lzu3P
- 82JFEFOwfdSZyTNgD1Ed8WwFMSOEC6NWdK/kQ61SJyoEHX1RR6/BpA8sq4E5zJBdBNTP
- Zcs1lz3PKUacVTWpS/IEKRTPTfqjMFqOjCL8bBbC2SL+N6uGxvWDoTx0z5PEoGl9CRfv
- +Mo8A4UEioGjX3LPKMvS2rQi+6a+8tjYd+FupLiWTQEauOSPwiRKGynC27NL/LTBKxyv
- NGoJo38uWb7zNS3QhqBj5EaQNxj8NXO3lqIrwXtcg3EioGgjILafSq7dPesTr48ub55n
- cQ8g==
+ d=konsulko.com; s=google; t=1699362293; x=1699967093; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sIR05KCGICqUu2frHgna+uAZ9hhauRbIb926ZlOeR4E=;
+ b=mm+5bXLtrlcbn82+xin5zwSYjfeWzzKUoEP8qAE8iU6lHGWbiUclFzc1tUjpr9MCCT
+ w7Zq3JVpAAn9A80wPxBjHECLKIkWLW8WgJsQqlbMbPEASebSZpr78M4lD0whhI20YTca
+ xOi+4Ya1tqqXd5UVB/wdB1RxS3c1fAkkdNtYs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699361581; x=1699966381;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=L23muOCsaZqPTdTTdN0oP8cRRGurhzulq7RZc4cSZGU=;
- b=vmdVLYg9E0AXkWPsTtB0GInu5fGOLqrPGLhf7AXyKu6+sXlGoeA1Gl5kxST1AaFHvB
- 39jcoMsZL5TQP+Lw/x67fK7e3jj8qaQhlSLW29zloR7kO2kk2jnhh+6M2n7TuWcfuXeA
- QktnAI8EvlD+4S1bdCxsS3zEO+Q1AjSMLOHDfkRKZBqe4Nh6sa9MkfRUPCkRErFxf5Lg
- AKn4OfM7xlaM2wlADlAedDM+toauKh/LjffjyDFGHQFxkl8J4FIRQzfLpkOstD8DdsLV
- s+S9B1EM+7Z0CMYgNbzTA1b6zdtmc5esRRWt3opoFtpU5YZ29SzytHfjxhq6BdfboN5m
- rk8w==
-X-Gm-Message-State: AOJu0Yze/aJtxsWVZRyw1KTzLiSDq8laPOkoL9fjFM+pk3n6GS/Hzuaj
- obr0u4hufsSTlONQN4ZazpqJfQ==
-X-Google-Smtp-Source: AGHT+IHnTD6ur3rp0wRHDL+iOYTVNeUPTKGmXwUGfjGFqc7xpcxgwiOw4F6+955RovViLZo+5DCMfA==
-X-Received: by 2002:a05:6000:1849:b0:32f:7ae6:64a7 with SMTP id
- c9-20020a056000184900b0032f7ae664a7mr25734135wri.55.1699361581347; 
- Tue, 07 Nov 2023 04:53:01 -0800 (PST)
-Received: from [192.168.1.7] (host-92-25-138-185.as13285.net. [92.25.138.185])
+ d=1e100.net; s=20230601; t=1699362293; x=1699967093;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sIR05KCGICqUu2frHgna+uAZ9hhauRbIb926ZlOeR4E=;
+ b=QUEIrwoe/RGlxA5gDkR/OfmH3lr8qazCLbp2KzvOsBInjPjcZHaHZJ2GAGFmh9GDws
+ dLLAd/Nk3NtXY/X8b6Qlnsp6LG2gvcdRTTZw5N+4nDpzdeYFZCR6TsNr1Uf4izkHIhh5
+ sn3Jv0Hg8TOO5kxUuhQmt/+QoMT5DDuOzSuXh/zb1wVHCviRoPDbxa2UBm6vJcB9FyEx
+ H2Cv+Zy1gQdVAzq+hVfcqtpFGGgyeaRbBqG9zDf51ez2z3P6WqKSduiamDtbsRtKhlF/
+ RwTvR4FsQqoV/lNyOYPRiABUwY0hz0DhpoeVIfpgXhqL83p09EYHQKfs32mc0YXI5SIA
+ Ykag==
+X-Gm-Message-State: AOJu0YxvTLy8QnakhoeZRxWPkgxoisW2Xfa4SnWbuQp5kWVoEqmgvRfO
+ XDM/zZe94EM/lHKvUGCOhgKWaw==
+X-Google-Smtp-Source: AGHT+IHfSuaK9NV9CWQYl5+9nHGPd5fs7dusyOGig1QBZcMc80RQqEe8qQgOUp3L4C/3zp3ewYlHTQ==
+X-Received: by 2002:a05:6358:528b:b0:169:a186:dc7e with SMTP id
+ g11-20020a056358528b00b00169a186dc7emr23440664rwa.12.1699362293460; 
+ Tue, 07 Nov 2023 05:04:53 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-2fee-489d-8907-1a68.res6.spectrum.com.
+ [2603:6081:7b00:6400:2fee:489d:8907:1a68])
  by smtp.gmail.com with ESMTPSA id
- b18-20020a5d6352000000b0032f933556b8sm2300409wrw.7.2023.11.07.04.53.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Nov 2023 04:53:00 -0800 (PST)
-Message-ID: <796d3b72-10c1-4305-b9ec-c1baa9e1024e@linaro.org>
-Date: Tue, 7 Nov 2023 12:53:00 +0000
+ a18-20020a0cefd2000000b0066d1bae2326sm4357877qvt.57.2023.11.07.05.04.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Nov 2023 05:04:52 -0800 (PST)
+Date: Tue, 7 Nov 2023 08:04:50 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>, Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marc Kleine-Budde <mkl@pengutronix.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Safae Ouajih <souajih@baylibre.com>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH 0/4] bootm: Handle compressed arm64 images with bootm
+Message-ID: <20231107130450.GA6601@bill-the-cat>
+References: <20231105200453.1887418-1-sjg@chromium.org>
+ <7a1345b9-8844-48e9-a1b5-8c7508cefeb1@prevas.dk>
+ <CAPnjgZ1BbpM_Ksr5aKg2zWLv1FPy-N_Kz6fbrkZoh=i7LfpMUA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 7/7] clk/qcom: fix rcg divider value
-To: Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Luka Perkov <luka.perkov@sartura.hr>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, u-boot@lists.denx.de
-References: <20231107-b4-qcom-clk-v4-0-82bbaf1a796d@linaro.org>
- <20231107-b4-qcom-clk-v4-7-82bbaf1a796d@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20231107-b4-qcom-clk-v4-7-82bbaf1a796d@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iq+nhj81PHefSVKn"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1BbpM_Ksr5aKg2zWLv1FPy-N_Kz6fbrkZoh=i7LfpMUA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,319 +105,90 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--iq+nhj81PHefSVKn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 07/11/2023 12:41, Caleb Connolly wrote:
-> The RCG divider field takes a value of (2*h - 1) where h is the divisor.
-> This allows fractional dividers to be supported by calculating them at
-> compile time using a macro.
-> 
-> However, the clk_rcg_set_rate_mnd() function was also performing the
-> calculation. Clean this all up and consistently use the F() macro to
-> calculate these at compile time and properly support fractional divisors.
-> 
-> Additionally, improve clk_bcr_update() to timeout with a warning rather
-> than hanging the board, and make the freq_tbl struct and helpers common
-> so that they can be reused by future platforms.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+On Tue, Nov 07, 2023 at 05:23:05AM -0700, Simon Glass wrote:
+> Hi Rasmus,
+>=20
+> On Tue, 7 Nov 2023 at 02:56, Rasmus Villemoes
+> <rasmus.villemoes@prevas.dk> wrote:
+> >
+> > On 05/11/2023 21.03, Simon Glass wrote:
+> > > This little series corrects a problem I noticed with arm64 images,
+> > > where the kernel is not recognised:
+> >
+> > The $subject is misleading, bootm works just fine with compressed arm64
+> > images, with the type set to "kernel".
+> >
+> > >         Type:         Kernel Image (no loading done)
+> > >         Compression:  gzip compressed
+> >
+> > Isn't that a non-sensical combination to begin with? Decompressing the
+> > Image.gz kernel image to any location (however you determine that
+> > destination) _is_ loading it.
+>=20
+> Yes, I agree.
+>=20
+> >
+> > If you want XIP, obviously the image must be uncompressed in the FIT. I
+> > don't understand what you're trying to do here.
+>=20
+> Hmmm, I think I have just got confused about all of this, perhaps
+> because ChromeOS uses kernel_noload with compression. Is that an
+> invalid combination?
 
-Forgot to pick up Sumit's R-b here.
-> ---
->  drivers/clk/qcom/clock-apq8016.c |  2 +-
->  drivers/clk/qcom/clock-apq8096.c |  2 +-
->  drivers/clk/qcom/clock-qcom.c    | 64 +++++++++++++++++++++++++++++-----------
->  drivers/clk/qcom/clock-qcom.h    | 11 +++++++
->  drivers/clk/qcom/clock-qcs404.c  | 16 +++++-----
->  drivers/clk/qcom/clock-sdm845.c  | 26 ----------------
->  6 files changed, 67 insertions(+), 54 deletions(-)
-> 
-> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-> index 498e8ef6780d..c0ce570edc79 100644
-> --- a/drivers/clk/qcom/clock-apq8016.c
-> +++ b/drivers/clk/qcom/clock-apq8016.c
-> @@ -78,7 +78,7 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
->  /* SDHCI */
->  static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
->  {
-> -	int div = 8; /* 100MHz default */
-> +	int div = 15; /* 100MHz default */
->  
->  	if (rate == 200000000)
->  		div = 4;
-> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-> index 367c0f06ae20..cf1a347309a5 100644
-> --- a/drivers/clk/qcom/clock-apq8096.c
-> +++ b/drivers/clk/qcom/clock-apq8096.c
-> @@ -65,7 +65,7 @@ static struct vote_clk gcc_blsp2_ahb_clk = {
->  
->  static int clk_init_sdc(struct msm_clk_priv *priv, uint rate)
->  {
-> -	int div = 3;
-> +	int div = 5;
->  
->  	clk_enable_cbc(priv->base + SDCC2_AHB_CBCR);
->  	clk_rcg_set_rate_mnd(priv->base, &sdc_regs, div, 0, 0,
-> diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-> index fc478554f982..7c683e519226 100644
-> --- a/drivers/clk/qcom/clock-qcom.c
-> +++ b/drivers/clk/qcom/clock-qcom.c
-> @@ -19,6 +19,8 @@
->  #include <dm/lists.h>
->  #include <errno.h>
->  #include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/delay.h>
->  #include <linux/bitops.h>
->  #include <reset-uclass.h>
->  
-> @@ -68,30 +70,42 @@ void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk)
->  /* Update clock command via CMD_RCGR */
->  void clk_bcr_update(phys_addr_t apps_cmd_rcgr)
->  {
-> +	u32 count;
->  	setbits_le32(apps_cmd_rcgr, APPS_CMD_RCGR_UPDATE);
->  
->  	/* Wait for frequency to be updated. */
-> -	while (readl(apps_cmd_rcgr) & APPS_CMD_RCGR_UPDATE)
-> -		;
-> +	for (count = 0; count < 50000; count++) {
-> +		if (!(readl(apps_cmd_rcgr) & APPS_CMD_RCGR_UPDATE))
-> +			break;
-> +		udelay(1);
-> +	}
-> +	WARN(count == 50000, "WARNING: RCG @ %#llx [%#010x] stuck at off\n",
-> +	     apps_cmd_rcgr, readl(apps_cmd_rcgr));
->  }
->  
-> -#define CFG_MODE_DUAL_EDGE (0x2 << 12) /* Counter mode */
-> +#define CFG_SRC_DIV_MASK	0b11111
-> +#define CFG_SRC_SEL_SHIFT	8
-> +#define CFG_SRC_SEL_MASK	(0x7 << CFG_SRC_SEL_SHIFT)
-> +#define CFG_MODE_SHIFT		12
-> +#define CFG_MODE_MASK		(0x3 << CFG_MODE_SHIFT)
-> +#define CFG_MODE_DUAL_EDGE	(0x2 << CFG_MODE_SHIFT)
-> +#define CFG_HW_CLK_CTRL_MASK	BIT(20)
->  
-> -#define CFG_MASK 0x3FFF
-> -
-> -#define CFG_DIVIDER_MASK 0x1F
-> -
-> -/* root set rate for clocks with half integer and MND divider */
-> +/*
-> + * root set rate for clocks with half integer and MND divider
-> + * div should be pre-calculated ((div * 2) - 1)
-> + */
->  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->  			  int div, int m, int n, int source, u8 mnd_width)
->  {
->  	u32 cfg;
->  	/* M value for MND divider. */
->  	u32 m_val = m;
-> +	u32 n_minus_m = n - m;
->  	/* NOT(N-M) value for MND divider. */
-> -	u32 n_val = ~((n) - (m)) * !!(n);
-> +	u32 n_val = ~n_minus_m * !!(n);
->  	/* NOT 2D value for MND divider. */
-> -	u32 d_val = ~(n);
-> +	u32 d_val = ~(clamp_t(u32, n, m, n_minus_m));
->  	u32 mask = BIT(mnd_width) - 1;
->  
->  	debug("m %#x n %#x d %#x div %#x mask %#x\n", m_val, n_val, d_val, div, mask);
-> @@ -103,15 +117,13 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->  
->  	/* setup src select and divider */
->  	cfg  = readl(base + regs->cfg_rcgr);
-> -	cfg &= ~CFG_MASK;
-> -	cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
-> +	cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
-> +	cfg |= source & CFG_SRC_SEL_MASK; /* Select clock source */
->  
-> -	/* Set the divider; HW permits fraction dividers (+0.5), but
-> -	   for simplicity, we will support integers only */
->  	if (div)
-> -		cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
-> +		cfg |= div & CFG_SRC_DIV_MASK;
->  
-> -	if (n_val)
-> +	if (n && n != m)
->  		cfg |= CFG_MODE_DUAL_EDGE;
->  
->  	writel(cfg, base + regs->cfg_rcgr); /* Write new clock configuration */
-> @@ -128,7 +140,7 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->  
->  	/* setup src select and divider */
->  	cfg  = readl(base + regs->cfg_rcgr);
-> -	cfg &= ~CFG_MASK;
-> +	cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
->  	cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
->  
->  	/*
-> @@ -136,7 +148,7 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->  	 * for simplicity, we will support integers only
->  	 */
->  	if (div)
-> -		cfg |= (2 * div - 1) & CFG_DIVIDER_MASK;
-> +		cfg |= (2 * div - 1) & CFG_SRC_DIV_MASK;
->  
->  	writel(cfg, base + regs->cfg_rcgr); /* Write new clock configuration */
->  
-> @@ -144,6 +156,22 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
->  	clk_bcr_update(base + regs->cmd_rcgr);
->  }
->  
-> +const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
-> +{
-> +	if (!f)
-> +		return NULL;
-> +
-> +	if (!f->freq)
-> +		return f;
-> +
-> +	for (; f->freq; f++)
-> +		if (rate <= f->freq)
-> +			return f;
-> +
-> +	/* Default to our fastest rate */
-> +	return f - 1;
-> +}
-> +
->  static int msm_clk_probe(struct udevice *dev)
->  {
->  	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
-> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-> index 24a32cb9666d..01088c19015a 100644
-> --- a/drivers/clk/qcom/clock-qcom.h
-> +++ b/drivers/clk/qcom/clock-qcom.h
-> @@ -32,6 +32,16 @@ struct bcr_regs {
->  	uintptr_t D;
->  };
->  
-> +struct freq_tbl {
-> +	uint freq;
-> +	uint src;
-> +	u8 pre_div;
-> +	u16 m;
-> +	u16 n;
-> +};
-> +
-> +#define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
-> +
->  struct gate_clk {
->  	uintptr_t reg;
->  	u32 en_val;
-> @@ -71,6 +81,7 @@ void clk_enable_gpll0(phys_addr_t base, const struct pll_vote_clk *gpll0);
->  void clk_bcr_update(phys_addr_t apps_cmd_rgcr);
->  void clk_enable_cbc(phys_addr_t cbcr);
->  void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk);
-> +const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate);
->  void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
->  			  int div, int m, int n, int source, u8 mnd_width);
->  void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
-> diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-> index f234ab5d6541..f5b352803927 100644
-> --- a/drivers/clk/qcom/clock-qcs404.c
-> +++ b/drivers/clk/qcom/clock-qcs404.c
-> @@ -203,7 +203,7 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->  		break;
->  	case GCC_SDCC1_APPS_CLK:
->  		/* SDCC1: 200MHz */
-> -		clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 4, 0, 0,
-> +		clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 7, 0, 0,
->  				     CFG_CLK_SRC_GPLL0, 8);
->  		clk_enable_gpll0(priv->base, &gpll0_vote_clk);
->  		clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
-> @@ -213,16 +213,16 @@ static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
->  		break;
->  	case GCC_ETH_RGMII_CLK:
->  		if (rate == 250000000)
-> -			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 0, 0,
-> +			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
->  					     CFG_CLK_SRC_GPLL1, 8);
->  		else if (rate == 125000000)
-> -			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 4, 0, 0,
-> +			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 7, 0, 0,
->  					     CFG_CLK_SRC_GPLL1, 8);
->  		else if (rate == 50000000)
-> -			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 10, 0, 0,
-> +			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 19, 0, 0,
->  					     CFG_CLK_SRC_GPLL1, 8);
->  		else if (rate == 5000000)
-> -			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 1, 50,
-> +			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 1, 50,
->  					     CFG_CLK_SRC_GPLL1, 8);
->  		break;
->  	default:
-> @@ -239,7 +239,7 @@ static int qcs404_clk_enable(struct clk *clk)
->  	switch (clk->id) {
->  	case GCC_USB30_MASTER_CLK:
->  		clk_enable_cbc(priv->base + USB30_MASTER_CBCR);
-> -		clk_rcg_set_rate_mnd(priv->base, &usb30_master_regs, 4, 0, 0,
-> +		clk_rcg_set_rate_mnd(priv->base, &usb30_master_regs, 7, 0, 0,
->  				     CFG_CLK_SRC_GPLL0, 8);
->  		break;
->  	case GCC_SYS_NOC_USB3_CLK:
-> @@ -261,14 +261,14 @@ static int qcs404_clk_enable(struct clk *clk)
->  		/* SPEED_1000: freq -> 250MHz */
->  		clk_enable_cbc(priv->base + ETH_PTP_CBCR);
->  		clk_enable_gpll0(priv->base, &gpll1_vote_clk);
-> -		clk_rcg_set_rate_mnd(priv->base, &emac_ptp_regs, 2, 0, 0,
-> +		clk_rcg_set_rate_mnd(priv->base, &emac_ptp_regs, 3, 0, 0,
->  				     CFG_CLK_SRC_GPLL1, 8);
->  		break;
->  	case GCC_ETH_RGMII_CLK:
->  		/* SPEED_1000: freq -> 250MHz */
->  		clk_enable_cbc(priv->base + ETH_RGMII_CBCR);
->  		clk_enable_gpll0(priv->base, &gpll1_vote_clk);
-> -		clk_rcg_set_rate_mnd(priv->base, &emac_regs, 2, 0, 0,
-> +		clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
->  				     CFG_CLK_SRC_GPLL1, 8);
->  		break;
->  	case GCC_ETH_SLAVE_AHB_CLK:
-> diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-> index 6af1f38302d2..36ffee79d966 100644
-> --- a/drivers/clk/qcom/clock-sdm845.c
-> +++ b/drivers/clk/qcom/clock-sdm845.c
-> @@ -27,16 +27,6 @@
->  #define SE9_UART_APPS_N		0x18154
->  #define SE9_UART_APPS_D		0x18158
->  
-> -#define F(f, s, h, m, n) { (f), (s), (2 * (h) - 1), (m), (n) }
-> -
-> -struct freq_tbl {
-> -	uint freq;
-> -	uint src;
-> -	u8 pre_div;
-> -	u16 m;
-> -	u16 n;
-> -};
-> -
->  static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
->  	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
->  	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-> @@ -64,22 +54,6 @@ static const struct bcr_regs uart2_regs = {
->  	.D = SE9_UART_APPS_D,
->  };
->  
-> -const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
-> -{
-> -	if (!f)
-> -		return NULL;
-> -
-> -	if (!f->freq)
-> -		return f;
-> -
-> -	for (; f->freq; f++)
-> -		if (rate <= f->freq)
-> -			return f;
-> -
-> -	/* Default to our fastest rate */
-> -	return f - 1;
-> -}
-> -
->  static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
->  {
->  	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> 
+Yes, that sounds like an invalid combination.
 
--- 
-// Caleb (they/them)
+> But then how does loading actually work? We don't want to put the load
+> address in the FIT, since we don't know what it is...we want to use
+> the address provided by the board. Which is kernel_noload...so how
+> should this be implemented?
+
+What do you mean, provided by the board? With kernel_noload we XIP the
+payload, because the board provided (by loading us to) a safe place to
+execute whatevers in there. In the olden days, that would mean (almost
+certainly) the zImage which in turn was already compressed and
+self-relocating. I know technically one could use the raw vmlinux
+instead. With the Linux Kernel and ARCH=3Darm64 (and a few other arches
+now too), they dropped the self-decompression part and the whole payload
+must be decompressed. We handle this case in "booti" today by having to
+have the board (via environment) say where to decompress to (and how
+much space is available). Then we move it back to where we started from,
+which is likely not necessary.
+
+Looking at
+https://www.kernel.org/doc/html/latest/arch/arm64/booting.html and
+https://www.kernel.org/doc/html/latest/riscv/boot-image-header.html
+stating "we're just like arm64" we can do better than we do today for
+this format of OS image. If aren't compressed, we only need to ensure
+that we are correctly aligned and move (and tell the user) if not. We
+can even put the 2MB check under some legacy kernel CONFIG option (3.17
+is over 9 years old). With respect to automatic decompression, if we
+don't have something telling us where a buffer is and we can't pull from
+the environment, we should tell the user and stop?
+
+--=20
+Tom
+
+--iq+nhj81PHefSVKn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVKNe8ACgkQFHw5/5Y0
+tyxKwAv8CFpLSo8sBU/kewa6uCKxQvJG3dEfLYEU+vsYKgHMdKCIXBI5NbN6TpNb
+2kPOMzxHVcY9csjyy1P6OOd4/Sc4lk6JlU72iVIuqnNA9judd7iKPAwfHD27hnjR
+7AZ//je3JmAc5HKjQwMZBMWzwbMv60MQlZG5qJPvllbsWdPjN5jjABg/SwS2rKvi
+VZxzALmBLDroZ3OYeFPgcwLvZv5gb9q2mkzRUUZYc0ekdbgQjyQCjm6QrgKEFRPZ
+U8yxExd9fwIxKN1jV3UmYiorNnXwX2SmH7mAsU5pC9EZQDBLnrjtDlbMGAp1e1vl
+RimYd35UPKRerSnzFVKFIUAaUvr2WeQ0273TL2fcYgQPzoKO9CNqb11DSYvxFxLf
++H+FIz4J1BZiIOW2SuhqIcGvNwOpG36b2EaFc3mU9IB1AEz3Kq93AFd0cJ3P3Kvx
+Ta49cH8UehMF0Iz+LgOuZp2diR9d2R+uXC+eynZ2ScJ7HYH/5sroRWx+SLbu8gQ1
+H62ZCw5v
+=SAh6
+-----END PGP SIGNATURE-----
+
+--iq+nhj81PHefSVKn--
