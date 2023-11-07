@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C06C4167D
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:42:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7098FC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:42:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B70418762E;
-	Tue,  7 Nov 2023 22:42:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C0BFD8763A;
+	Tue,  7 Nov 2023 22:42:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="irhE6OL5";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="WLRILSJm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 385DB87624; Tue,  7 Nov 2023 22:41:58 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id F38A287630; Tue,  7 Nov 2023 22:42:03 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A015D8718D
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:41:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2050F8761F
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:41:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-507c5249d55so8140268e87.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:41:55 -0800 (PST)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4083ac51d8aso46884195e9.2
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:41:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1699393314; x=1699998114;
+ d=amarulasolutions.com; s=google; t=1699393316; x=1699998116;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=IsquL7PdCIbMxcMUIqVi0JHqk/+e3sSHdYU76uxyOqI=;
- b=irhE6OL5dKNmknTXv1n5+OsK5BZ5S4yp7TbHnjOwCB7oQMOMQwQMReMobERl2Pkarq
- Agyx1gcNLIEL3CY08JyPmafOeee641QmlsbG+f5oeXd4/kVQuCL1LCXZi+3cJS635T1L
- YhCxEdmR8LGYEyqJsvNMgO0wtEkAWLG89F93A=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pwEIoBRzDMfib4wpua2a5vZNPxfG7SL92b0tVloomGY=;
+ b=WLRILSJmZLi5z9HlovP+B7BKUMMBlKW1Nmj0ULd6Ww5QBvcvYqrvKFB0hRBoZYTbtb
+ X27Dauh9BYdI/xOtiNXo9nOB+xpwNAV/tc/LyulTFxOCxemlOQRjgdRiVCgANaCCLiD/
+ OWZd527oSmjKz82vjhll9Tg8lPORpE1mtp3Gc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699393314; x=1699998114;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IsquL7PdCIbMxcMUIqVi0JHqk/+e3sSHdYU76uxyOqI=;
- b=C+61dgA3Rt6WGsIb/ejLP9uuQfZoKp3a4jKZl+SNs7eBMubngvpDi3L9BGweuGmMVL
- iZpMNeEkuLfJ+3w9U9TmxAOEc4+o02J2tmqq1FYjmMaBeu6uEOcmkZ/RHp9O5OUfIVWR
- 91HzjxkUqN46zgEQ4IVAFJV8hyacJATPzg8AG1TL6JP8F/isC7GjI6JpR5pKdu5H4Rue
- ssjXzsFBeoKywddSM+LWJuo7CPQixvv5OQ8pKs76bTNoNQpctavG4Ue5V5U/TgPHKLv3
- MsOFgoTKaH4RhYB4RtVB8hDVEePqX4dFIdasJzBiz+q47Yhnh5QrrfgFXT2Zp96cXT9T
- FoVw==
-X-Gm-Message-State: AOJu0YzZedcuW9bM4nPrTaWTq7Jqd8AEFAl1yAyPeg5tiISGm4MOjM6m
- ZNWxrjgMjbRr9p5EPrmJL4ZK+x4gFcYMCw1+iMY=
-X-Google-Smtp-Source: AGHT+IHy3ZoEotT90bbV6g6je4X+SBmXstTFHigX9pT0WQSpr6Wz9R2rQC+IXuTQHK/pLZAfYIrGlw==
-X-Received: by 2002:a05:6512:3b91:b0:503:9eb:d277 with SMTP id
- g17-20020a0565123b9100b0050309ebd277mr35575309lfv.49.1699393313875; 
- Tue, 07 Nov 2023 13:41:53 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699393316; x=1699998116;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pwEIoBRzDMfib4wpua2a5vZNPxfG7SL92b0tVloomGY=;
+ b=M1k+ckN8Mtk2QvfRa8tRXOYg6Uwe55NZpwc9mq3XvHezCqyF3k0jaKM0M7C+5iccCm
+ dQ60+XtoNiKdUKuA58p9zEPtXslgXlp/sjNDqJAQSCZBOYcDEHXx6pgi2K9dd5CdCmSl
+ VwgtTi3isqIXHyTSJgokeJrGsadeMUiURTOypzMQL4osmoNt3oH/0KH9LVngGOoMLiza
+ I4BCDbsbhIZzMMgUgDPAn3R+jyoBzdRXiVl0rlUQomtlwOl7fcvCiZ/EPMZExF34qAg/
+ gRYjp3CkyTGKD0errZ54UMokkFqrFGpu4CQiuZzIkfSIgZm+wUYx36SABe1kBN+SkIT0
+ mkpQ==
+X-Gm-Message-State: AOJu0YyD7SLrruJmAlMaqp68V7QntoSAhM5B2CE99oYguWis9OvoqatA
+ eS+vVcXIOCP2aWZDbzoHmSGrBsXrPSA94NEkavQ=
+X-Google-Smtp-Source: AGHT+IF9iMl2uWMnVgSp0I2mRzH8YBGuUvxz/yW/Nt7gYYNn6QrPXmGrGrIeOjW77PwhU+HpS+0WcQ==
+X-Received: by 2002:a05:6000:ac6:b0:32d:9718:b32a with SMTP id
+ di6-20020a0560000ac600b0032d9718b32amr56601wrb.0.1699393316627; 
+ Tue, 07 Nov 2023 13:41:56 -0800 (PST)
 Received: from pwmachine.numericable.fr ([86.120.35.5])
  by smtp.gmail.com with ESMTPSA id
- u10-20020adff88a000000b0032f7f4089b7sm3306437wrp.43.2023.11.07.13.41.52
+ u10-20020adff88a000000b0032f7f4089b7sm3306437wrp.43.2023.11.07.13.41.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 13:41:53 -0800 (PST)
+ Tue, 07 Nov 2023 13:41:56 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v11 00/24] Modernize U-Boot shell
-Date: Tue,  7 Nov 2023 23:40:57 +0200
-Message-Id: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
+Subject: [PATCH v11 02/24] test: hush: Test hush if/else
+Date: Tue,  7 Nov 2023 23:40:59 +0200
+Message-Id: <20231107214121.132079-3-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
+References: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,232 +92,348 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi.
+As asked in commit 9c6bf1715f6a ("test/py: hush_if_test: Add tests to cover
+octal/hex values"), this commit translates test_hush_if_test.py to a C test.
 
-
-During 2021 summer, Sean Anderson wrote a contribution to add a new shell, based
-on LIL, to U-Boot [1, 2].
-While one of the goals of this contribution was to address the fact actual
-U-Boot shell, which is based on Busybox hush, is old there was a discussion
-about adding a new shell versus updating the actual one [3, 4].
-
-So, in this series, with Harald Seiler, we updated the actual U-Boot shell to
-reflect what is currently in Busybox source code.
-Basically, this contribution is about taking a snapshot of Busybox shell/hush.c
-file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
-
-This contribution was written to be as backward-compatible as possible to avoid
-breaking the existing.
-So, the 2021 hush flavor offers the same as the actual, that is to say:
-1. Variable expansion.
-2. Instruction lists (;, && and ||).
-3. If, then and else.
-4. Loops (for, while and until).
-No new features offered by Busybox hush were implemented (e.g. functions).
-
-It is possible to change the parser at runtime using the "cli" command:
-=> cli print
-old
-=> cli set 2021
-=> cli print
-2021
-=> cli set old
-The default parser is the old one.
-Note that to use both parser, you would need to set both CONFIG_HUSH_2021_PARSER
-and CONFIG_HUSH_OLD_PARSER.
-
-In terms of testing, new unit tests were added to ut to ensure the new behavior
-is the same as the old one and it does not add regression.
-Nonetheless, if old behavior was buggy and fixed upstream, the fix is then added
-to U-Boot [5].
-In sandbox, all of these tests pass smoothly:
-=> printenv board
-board=sandbox
-=> ut hush
-Running 20 hush tests
-...
-Failures: 0
-=> parser set 2021
-=> ut hush
-Running 20 hush tests
-...
-Failures: 0
-
-Thanks to the effort of Harald Seiler, I was successful booting a board:
-=> printenv fdtfile
-fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
-=> cli get
-old
-=> boot
-...
-root@lepotato:~#
-root@lepotato:~# reboot
-...
-=> cli set 2021
-=> cli get
-2021
-=> printenv fdtfile
-fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
-=> boot
-...
-root@lepotato:~#
-
-I had to not use CONFIG_HUSH_2021_PARSER for the keymile board.
-Indeed, the keymile board family is the only set of boards to call
-get_local_var(), set_local_var() and unset_local_var().
-Sadly, these functions are static in this contribution.
-I could have change all of them to introduce code like this:
-*_local_var(/*...*/)
-{
-        if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
-                return *_local_var_old(/*...*/);
-        if (gd->flags & GD_FLG_HUSH_2021_PARSER)
-                return *_local_var_2021(/*...*/);
-}
-But this would have mean renaming all old hush functions calls and I did not
-want to change the old hush particularly to avoid breaking things.
-Instead, I change the keymile board to use environment variable instead of local
-ones.
-I think this particularities can be addressed in future works.
-
-I also had to enable CONFIG_LTO for kirkwoord sheevaplug and phytec bk4r1, so
-they do not hit their limits.
-
-For all these reasons, I marked this contribution as RFC to indeed collect your
-opinions.
-My goal is not to change suddenly actual shell to this one, we clearly need a
-transition period to think about it.
-I think it is better to see this contribution as a proof of concept which shows
-it is possible to update the actual shell.
-
-If you want to review it - your review will really be appreciated - here are
-some information regarding the commits:
-* commits marked as "test:" deal with unit tests.
-* commit "cli: Add Busybox upstream hush.c file." copies Busybox shell/hush.c
-into U-Boot tree, this explain why this commit contains around 12000 additions.
-* commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously added file
-to permit us to use this as new shell.
-The really good idea of #include'ing Busybox code into a wrapper file to define
-some particular functions while minimizing modifications to upstream code comes
-from Harald Seiler.
-* commit "cmd: Add new parser command" adds a new command which permits
-selecting parser at runtime.
-I am not really satisfied with the fact it calls cli_init() and cli_loop() each
-time the parser is set, so your reviews would be welcomed.
-* Other commits focus on enabling features we need (e.g. if).
-
-Changes since:
- v2:
-  * Added a small fix to compile sandbox with NO_SDL=1.
-  * Added a command to change parser at runtime.
-  * Added 2021 parser function to all run_command*().
- v3:
-  * Various bug fixes pointed by the CI.
-  * Added upstream busybox hush commits until 6th February 2022.
- v4:
-  * Various cleaning.
-  * Modified python test to accept failure output when the test are designed to
-  fail.
-  * Bumped upstream busybox hush commits until 24h March 2022.
- v5:
-  * Bumped upstream busybox hush commits until 30th January 2023.
-  * Fix how hush interprets '<' and '>', indeed we needed to escape them but I
-  removed this behavior as tests are handled by test command and not hush
-  itself. This permitted to have the ut fdt to pass.
-  * Fix a problem with how exit was handled. This was reported by the ut exit
-  test.
- v6:
-  * There was no v6 and I got mixed up with version.
- v7:
-  * Bumped upstream busybox hush commits until 9th May 2023.
-  * Renamed parser command to change parser at runtime to cli and added
-  documentation.
-  * Added better separation of patches.
-  * Removed code about __gnu_thumb1_case_si as it was merged in another series.
-  * Various cleaning.
- v8:
-  * Bumped upstream busybox hush commits until 25th May 2023.
- v9:
-  * Bumped upstream busybox hush commits until 2nd October 2023.
- v10:
-  * Fixed a build error in commit adding cli command.
-  * Add new CONFIG_HUSH_SELECTABLE to only build cli command if the two shell
-  flavors are selected.
-
-Francis Laniel (24):
-  test: Add framework to test hush behavior
-  test: hush: Test hush if/else
-  test/py: hush_if_test: Remove the test file
-  test: hush: Test hush variable expansion
-  test: hush: Test hush commands list
-  test: hush: Test hush loops
-  cli: Add Busybox upstream hush.c file
-  cli: Port Busybox 2021 hush to U-Boot
-  cli: Add menu for hush parser
-  global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
-  cmd: Add new cli command
-  cli: Enables using hush 2021 parser as command line parser
-  cli: hush_2021: Enable variables expansion for hush 2021
-  cli: hush_2021: Add functions to be called from run_command()
-  cli: add hush 2021 as parser for run_command*()
-  test: hush: Fix instructions list tests for hush 2021
-  test: hush: Fix variable expansion tests for hush 2021
-  cli: hush_2021: Enable using < and > as string compare operators
-  cli: hush_2021: Enable if keyword
-  cli: hush_2021: Enable loops
-  test: hush: Fix loop tests for hush 2021
-  cli: hush_2021: Add upstream commits up to 2nd October 2023.
-  DO NOT MERGE: only to make CI happy
-  DO NOT MERGE: ci: Build the world in any case.
-
- .azure-pipelines.yml               |     1 +
- cmd/Kconfig                        |    26 +
- cmd/Makefile                       |     2 +
- cmd/cli.c                          |   134 +
- common/Makefile                    |     3 +-
- common/cli.c                       |    82 +-
- common/cli_hush_2021.c             |   324 +
- common/cli_hush_upstream.c         | 13030 +++++++++++++++++++++++++++
- configs/sheevaplug_defconfig       |     1 +
- doc/usage/cmd/cli.rst              |    74 +
- doc/usage/index.rst                |     1 +
- include/asm-generic/global_data.h  |     8 +
- include/cli_hush.h                 |    51 +-
- include/test/hush.h                |    15 +
- include/test/suites.h              |     1 +
- test/Makefile                      |     3 +
- test/cmd_ut.c                      |     6 +
- test/hush/Makefile                 |    10 +
- test/hush/cmd_ut_hush.c            |    20 +
- test/hush/dollar.c                 |   226 +
- test/hush/if.c                     |   316 +
- test/hush/list.c                   |   140 +
- test/hush/loop.c                   |    91 +
- test/py/tests/test_hush_if_test.py |   197 -
- test/py/tests/test_ut.py           |     8 +-
- tools/patman/series.py             |     4 +
- 26 files changed, 14563 insertions(+), 211 deletions(-)
- create mode 100644 cmd/cli.c
- create mode 100644 common/cli_hush_2021.c
- create mode 100644 common/cli_hush_upstream.c
- create mode 100644 doc/usage/cmd/cli.rst
- create mode 100644 include/test/hush.h
- create mode 100644 test/hush/Makefile
- create mode 100644 test/hush/cmd_ut_hush.c
- create mode 100644 test/hush/dollar.c
- create mode 100644 test/hush/if.c
- create mode 100644 test/hush/list.c
- create mode 100644 test/hush/loop.c
- delete mode 100644 test/py/tests/test_hush_if_test.py
-
-
-Best regards and thank you in advance.
+Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-[1] https://lists.denx.de/pipermail/u-boot/2021-July/453347.html
-[2] https://runtimeterror.com/tech/lil/
-[3] https://lists.denx.de/pipermail/u-boot/2021-July/453790.html
-[4] https://lists.denx.de/pipermail/u-boot/2021-July/453848.html
-[5] https://lists.denx.de/pipermail/u-boot/2021-August/458569.html
---
+ test/hush/Makefile |   1 +
+ test/hush/if.c     | 316 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 317 insertions(+)
+ create mode 100644 test/hush/if.c
+
+diff --git a/test/hush/Makefile b/test/hush/Makefile
+index dfa2a92615..a3c9ae5106 100644
+--- a/test/hush/Makefile
++++ b/test/hush/Makefile
+@@ -4,3 +4,4 @@
+ # Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
+ 
+ obj-y += cmd_ut_hush.o
++obj-y += if.o
+diff --git a/test/hush/if.c b/test/hush/if.c
+new file mode 100644
+index 0000000000..b7200e32ec
+--- /dev/null
++++ b/test/hush/if.c
+@@ -0,0 +1,316 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * (C) Copyright 2021
++ * Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
++ */
++
++#include <common.h>
++#include <command.h>
++#include <env_attr.h>
++#include <test/hush.h>
++#include <test/ut.h>
++
++/*
++ * All tests will execute the following:
++ * if condition_to_test; then
++ *   true
++ * else
++ *   false
++ * fi
++ * If condition is true, command returns 1, 0 otherwise.
++ */
++const char *if_format = "if %s; then true; else false; fi";
++
++static int hush_test_if_base(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "true");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "false");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_base, 0);
++
++static int hush_test_if_basic_operators(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test aaa = aaa");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa < bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test bbb < aaa");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test bbb > aaa");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa > bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -eq 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -eq 456");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ne 456");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ne 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -lt 456");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -lt 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -lt 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -le 456");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -le 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -le 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -gt 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -gt 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -gt 456");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -ge 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ge 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ge 456");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_basic_operators, 0);
++
++static int hush_test_if_octal(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test 010 -eq 010");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -eq 011");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -ne 011");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -ne 010");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_octal, 0);
++
++static int hush_test_if_hexadecimal(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 0x2000001");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 0x2000000");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 0x1ffffff");
++	ut_assertok(run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_hexadecimal, 0);
++
++static int hush_test_if_mixed(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test 010 -eq 10");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -ne 10");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0xa -eq 10");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0xa -eq 012");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 2000000 -gt 0x1ffffff");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 1ffffff");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -lt 1ffffff");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -eq 2000000");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -ne 2000000");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"aaa\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -n \"aaa\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -n \"\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_mixed, 0);
++
++static int hush_test_if_inverted(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test ! aaa = aaa");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! ! aaa = aaa");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! ! aaa = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_inverted, 0);
++
++static int hush_test_if_binary(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -o bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -o bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -o bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -o bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -a bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -a bbb = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -a bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -a bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_binary, 0);
++
++static int hush_test_if_inverted_binary(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test ! aaa != aaa -o ! bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa != aaa -o ! bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa = aaa -o ! bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa = aaa -o ! bbb = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format,
++		"test ! ! aaa != aaa -o ! ! bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format,
++		"test ! ! aaa != aaa -o ! ! bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format,
++		"test ! ! aaa = aaa -o ! ! bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! ! aaa = aaa -o ! ! bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_inverted_binary, 0);
++
++static int hush_test_if_z_operator(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	/* Deal with environment variable used during test. */
++	env_set("ut_var_nonexistent", NULL);
++	env_set("ut_var_exists", "1");
++	env_set("ut_var_unset", "1");
++
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_nonexistent\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_exists\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_unset\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	env_set("ut_var_unset", NULL);
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_unset\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	/* Clear the set environment variable. */
++	env_set("ut_var_exists", NULL);
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_z_operator, 0);
+-- 
 2.34.1
 
