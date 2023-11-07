@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA24C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 20:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C926FC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 20:45:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A8B187583;
-	Tue,  7 Nov 2023 21:13:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DEF9D870BB;
+	Tue,  7 Nov 2023 21:45:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k7UuSn9Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bBSGCcsu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79C68875F3; Tue,  7 Nov 2023 21:13:54 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 7DBE88754A; Tue,  7 Nov 2023 21:45:08 +0100 (CET)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CE9287581
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 21:13:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53A7E803AC
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 21:45:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-581e9b8e5fbso32158eaf.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 12:13:51 -0800 (PST)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5842a7fdc61so3094693eaf.3
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 12:45:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699388030; x=1699992830; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699389905; x=1699994705; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=u3FOi0WQ7tsGBpa2e4v+2UAHTTyk9aqfahsjrUDgY2U=;
- b=k7UuSn9YOVNxnOqFaTndZTF/65PluEXn/5OGR2KVLsILFqTvFkqMzvFGXMVFA+4x0P
- +eN7tpAOXAvSG2LdFqUMFojKKNRSPEjE5ASvQyvlW1hlK7QLxvxNR8+eHTzIT5+aZiVe
- QdGrBAJNeo0Y6gb9fub94Fk4PW86Z8XS15rLM8zInzoDgHfqF3dgKdiCYLO2l2utHk02
- CHnN4uMvNBvcSvJYyjU77y28Szh38p9KoXUL6fjLa1qcTfJMbHmWl1PTv+Y7KsWIqs2/
- IY2jBPKa/06UiVhbR6UE3+sr3uJM/zWB2TE2Ne9RURFhFrR2xMkc4m9KtxXgR7ri3qTj
- FaxQ==
+ bh=BI7kd0PCGYzP/0taZgMoaKLAxTp4pO3ii8hNIjgQ6og=;
+ b=bBSGCcsuqys+09StP9F1fJMJqHGM7AKx4QFkCKTyzekHY1GI1f5c4bR8hnfUCRNCIa
+ +U18dKhZtsn84TAtHuUkvpXtGUMNavcwBpATNJpfPha3YWND60ayJYnhW0NWQNkh7gfR
+ 2h0UmctuJqemwmtykalRUntFHWM4MFqC7UdnGfad71mauSaYaJsihm7X530IZjhy5sve
+ 8JjYbvms2FKSApRQzdPSG8th6Iezno5ZqAJAOaziI4bUQZSupBjOOknC1q8Tf2YZQbUZ
+ P+BdJ6G9948rNvbN06T4wSJE+1nUOuAL32XdIKFcH1f5fP2OhpiLA4y8t9tcx53TjqDQ
+ AJ8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699388030; x=1699992830;
+ d=1e100.net; s=20230601; t=1699389905; x=1699994705;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=u3FOi0WQ7tsGBpa2e4v+2UAHTTyk9aqfahsjrUDgY2U=;
- b=B8j6bppOptPLfbeAZCbWQceDxQBB64LI+YL7NXLZ1hLYSI5Mb0u4HDd8aMEKYwPnI7
- vp75gnIgLevelVr9ewpHyQrkb5+K0BcighG3o+yzhs+7yWaTtIPYVeqieYoVdtJTjZ+t
- +qg7H7y5D6NQlMdycY31VsvappWXUzoxBCoSXs3Jvj2r6ufPFtcrzNLp2KRsGwTXZTW2
- sFUTQ8QBLb3Xu8N3YoYOu7J5dknRTOS/9gWopdYh2WNAsovRhQtYj0IVE9R64D90eyUY
- 3S3lkpsJRp5UjJcM+iqPK+LSbad7VKuBY1lG9111Ee8E/0Tm379EcTzyg1SsnvRAWFA4
- CSbQ==
-X-Gm-Message-State: AOJu0YzaUz0sdun4SqsSAiCzgBXtK5JPqbG9UK9YDUPRuEMWjbhdSZIE
- ICo/VMI1AEC4sJ8j5CP5KHfsRA==
-X-Google-Smtp-Source: AGHT+IFxQCzLpTnKCopafy9CuexePMGKgMWTSDS9bATzv0EWWHa4YKW0QDwQUSchNhhVgosMI1HklQ==
-X-Received: by 2002:a4a:df54:0:b0:581:d6a6:478a with SMTP id
- j20-20020a4adf54000000b00581d6a6478amr1581394oou.0.1699388030629; 
- Tue, 07 Nov 2023 12:13:50 -0800 (PST)
+ bh=BI7kd0PCGYzP/0taZgMoaKLAxTp4pO3ii8hNIjgQ6og=;
+ b=HwrpdgLh8r7aV3yQmANgfUzyH0ikpofrwFoVLYS7AwaFgoQktgx7e0NGjDXVDhcNtp
+ /qOJ14iFFt43UNaOCXi5xbCYiQq0hEtmxLLO94yn5Vfe2qgIXIzGuoyGf6H8TOTmNYq5
+ sSy5DycdcGGVUWu9ua19MJN6cdmwj5ke2/2NT+Ia3cfxdVFQwA3d8qRmiQPMlD8nWS2A
+ 1iDi/MKdllAr2UjLAAXmMokRuvVhUEDHtTKoez3ZbbRVonzsUCeUKNZaaGJtCC/e9buo
+ cTEX0Zyx/e1cdhtry16qYVlw6SQrwE0ubzbwauXuWpjFDiH7ELorXNVddMXj69TyYY/5
+ nMbg==
+X-Gm-Message-State: AOJu0YwDrg3BBhvD1V1gfDd+PszXohY6M0OExFVbF0pWBIRhq96rgget
+ NOk3sXxddpP5goRVQH2/CJtNkhOHcj8q0o0KAMpW6g==
+X-Google-Smtp-Source: AGHT+IFJed0Xj6naGwkUrcww+aQ/7oW10gPQUyekrELzeTYyTp9YWL1MtMPpNTzEK7mUCJCFO+9ENA==
+X-Received: by 2002:a4a:a50c:0:b0:57b:7e41:9f11 with SMTP id
+ v12-20020a4aa50c000000b0057b7e419f11mr681184ook.2.1699389905019; 
+ Tue, 07 Nov 2023 12:45:05 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- v15-20020a4aad8f000000b005737ca61829sm570889oom.13.2023.11.07.12.13.50
+ g15-20020a4ab04f000000b0054f85f67f31sm2087452oon.46.2023.11.07.12.45.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 12:13:50 -0800 (PST)
+ Tue, 07 Nov 2023 12:45:04 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Cc: Johan Jonker <jbx6244@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] serial: s5p: Use dev_read_addr_ptr() to get base address
-Date: Tue,  7 Nov 2023 14:13:49 -0600
-Message-Id: <20231107201349.5775-1-semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] MAINTAINERS: Fix Sam Protsenko mail
+Date: Tue,  7 Nov 2023 14:45:04 -0600
+Message-Id: <20231107204504.7063-1-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -89,36 +87,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As the address read from device tree is being cast to a pointer, it's
-better to use dev_read_addr_ptr() API for getting that address. The more
-detailed explanation can be found in commit a12a73b66476 ("drivers: use
-dev_read_addr_ptr when cast to pointer").
+Sam works for Linaro again. Use his work e-mail address for ANDROID AB
+subsystem.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/serial/serial_s5p.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
-index c24d9bca84c9..7d04dcff54fc 100644
---- a/drivers/serial/serial_s5p.c
-+++ b/drivers/serial/serial_s5p.c
-@@ -221,13 +221,11 @@ static int s5p_serial_of_to_plat(struct udevice *dev)
- {
- 	struct s5p_serial_plat *plat = dev_get_plat(dev);
- 	const ulong port_type = dev_get_driver_data(dev);
--	fdt_addr_t addr;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index cde778bc4d3d..d21f66b0b67b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -58,7 +58,7 @@ F:	lib/acpi/
  
--	addr = dev_read_addr(dev);
--	if (addr == FDT_ADDR_T_NONE)
-+	plat->reg = dev_read_addr_ptr(dev);
-+	if (!plat->reg)
- 		return -EINVAL;
- 
--	plat->reg = (struct s5p_uart *)addr;
- 	plat->reg_width = dev_read_u32_default(dev, "reg-io-width", 1);
- 	plat->port_id = dev_read_u8_default(dev, "id", dev_seq(dev));
- 
+ ANDROID AB
+ M:	Igor Opaniuk <igor.opaniuk@gmail.com>
+-R:	Sam Protsenko <joe.skb7@gmail.com>
++R:	Sam Protsenko <semen.protsenko@linaro.org>
+ S:	Maintained
+ F:	cmd/ab_select.c
+ F:	common/android_ab.c
 -- 
 2.39.2
 
