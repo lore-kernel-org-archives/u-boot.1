@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0417BC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 07:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5207C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 08:49:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D77F485C98;
-	Tue,  7 Nov 2023 08:34:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D9B687001;
+	Tue,  7 Nov 2023 09:49:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinet.cat
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z3aEAH1u";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47D4D85C98; Tue,  7 Nov 2023 08:34:11 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1710886F71; Tue,  7 Nov 2023 09:49:25 +0100 (CET)
+Received: from mx1.tinet.cat (mx1.tinet.org [195.77.216.146])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC65B87116
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 08:34:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44EEB87001
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 09:49:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=tinet.cat
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-32fb1d757f7so2861487f8f.0
- for <u-boot@lists.denx.de>; Mon, 06 Nov 2023 23:34:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699342446; x=1699947246; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eEZJAoYxQVXOUJg8i/jb/0+KnNuIJVzR4qQaTAb1kvc=;
- b=Z3aEAH1uFp977LwAyCW7mq42TsHBeBV2TIbEqKtenCKvXqsvpUimQHp/B4t6RJHwEC
- r9nGd+KE+hJVk8g2a7Yt6mPpunVOMkUesc+zSqULF+CDcNTcMIUlpJo2O5YSU6jH/Dhi
- v8IH/MANjMeWUR9n5I+Wyv5mJI+f6wTjqXiQ7krAVBTzUgepHlO5BfBDFAQ3ti65PvPO
- E1vRVvVtWfir7IuJcf66pLWuYDibw2x2S/ZBIV2fevtO51TJ9uz3lO/tgrl/zAuNZwj9
- 0vrp2gE4BB3jtbKDlbkcJTkqjnZT4JCk8BtZdqVk+ew82SlM/kqIck/zWrtblnom19Td
- KtCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699342446; x=1699947246;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eEZJAoYxQVXOUJg8i/jb/0+KnNuIJVzR4qQaTAb1kvc=;
- b=Q9MwKpeFZKdlkExS0BnFFVmXPnxVuSi9dus/ruU8OhYSkYJs+Q0Zkzf0Zeh6m3PV/3
- Xh3/6EzxM2Na/tvqGQ8TLAYGUQ67dxLSEtNkhiaQhd/fsTJAzoKqaYVoVGeW7orxZHtO
- 3NhRW0OopLCzfHH7YPD7yxiPujxVsSAJTkBnAjdiZMII7+l6MTfmFRt+kM9B7Cghc8wo
- 0j8J1p8LQXaAw8gTudKEnrriE2nyJr6exWnSquxpQJovymNAn/xqXVgwp4nPIl+VZkPY
- WsJodKZgGUtN57jBITget0epz43fbCSHPbvw9iKkle4sXz5FmkgCRF1W8OkqyN48zwaf
- EPgg==
-X-Gm-Message-State: AOJu0YzY1S4ExIpfXMWMR6XhjCWzglvHXt6W6WjJ2ckUZYie9+fWWR7X
- gLMiOS2rAg+AYNWMiBkYd8so92z6Ukgco7JLOR8=
-X-Google-Smtp-Source: AGHT+IFMDmoHREVFOhgqnTPpTHNnd6rlrMX3R18pQb2L1+m6sLClT4CblshgdqmnhIp81VL0UtvH3P9jRkrnjMb2Qb4=
-X-Received: by 2002:a5d:518c:0:b0:32d:d756:2cd3 with SMTP id
- k12-20020a5d518c000000b0032dd7562cd3mr23166348wrv.22.1699342445875; Mon, 06
- Nov 2023 23:34:05 -0800 (PST)
+ spf=pass smtp.mailfrom=xdrudis@tinet.cat
+X-ASG-Debug-ID: 1699346959-163e7b5e159a82b0001-4l7tJC
+Received: from smtp01.tinet.cat (smtp01.tinet.cat [195.77.216.131]) by
+ mx1.tinet.cat with ESMTP id Dhlnv4yJF6npDq4g;
+ Tue, 07 Nov 2023 09:49:19 +0100 (CET)
+X-Barracuda-Envelope-From: xdrudis@tinet.cat
+X-Barracuda-Effective-Source-IP: smtp01.tinet.cat[195.77.216.131]
+X-Barracuda-Apparent-Source-IP: 195.77.216.131
+Received: from xdrudis.tinet.cat (191.red-79-152-186.dynamicip.rima-tde.net
+ [79.152.186.191])
+ by smtp01.tinet.cat (Postfix) with ESMTPSA id 75720605DE48;
+ Tue,  7 Nov 2023 09:49:19 +0100 (CET)
+Date: Tue, 7 Nov 2023 09:49:06 +0100
+From: Xavier Drudis Ferran <xdrudis@tinet.cat>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek =?utf-8?B?QmVow7pu?= <marek.behun@nic.cz>,
+ Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ uboot-imx@nxp.com
+Subject: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use units
+ of bytes
+Message-ID: <ZUn577z8xINpURlO@xdrudis.tinet.cat>
+X-ASG-Orig-Subj: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use
+ units of bytes
+References: <20231106022603.3405551-1-seanga2@gmail.com>
+ <20231106022603.3405551-9-seanga2@gmail.com>
+ <ZUjdhAccsYbJS6AL@xdrudis.tinet.cat>
+ <f546ba08-10b9-0cb4-4fa7-f7541dab1288@gmail.com>
 MIME-Version: 1.0
-References: <20231106090046.258589-1-clamor95@gmail.com>
- <CALeDE9MbigiaW-c_4PABBp+=BJ7=WHmz6p25k-JL6Aq6mYJJDg@mail.gmail.com>
-In-Reply-To: <CALeDE9MbigiaW-c_4PABBp+=BJ7=WHmz6p25k-JL6Aq6mYJJDg@mail.gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 7 Nov 2023 09:33:54 +0200
-Message-ID: <CAPVz0n0CDYtrTTXgiJCPXdMnSD9gnkWvYgGKMrJ03gD__TwWnQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] Implement GPIO cells for PALMAS and MAX77663 PMICs
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <f546ba08-10b9-0cb4-4fa7-f7541dab1288@gmail.com>
+X-Barracuda-Connect: smtp01.tinet.cat[195.77.216.131]
+X-Barracuda-Start-Time: 1699346959
+X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 2098
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Bayes: INNOCENT GLOBAL 0.4994 1.0000 0.0000
+X-Barracuda-Spam-Score: 0.00
+X-Barracuda-Spam-Status: No, SCORE=0.00 using global scores of TAG_LEVEL=1000.0
+ QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.116416
+ Rule breakdown below
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,55 +85,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 14:00=
- Peter Robinson <pbrobinson@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Mon, Nov 6, 2023 at 10:18=E2=80=AFAM Svyatoslav Ryhel <clamor95@gmail.=
-com> wrote:
-> >
-> > This patchset adds support for gpio-uclass to work with pmic gpio child=
-rens
-> > properly and implements MAX77663 and PALMAS GPIO cells/children as a
-> > reference and to be further used in devices I am currently maintaining.
-> >
-> > All drivers are tested on actual hardware and confirmed to work as
-> > expected. MAX77663 GPIO cell is tested on wexler qc750 tegra 3 device
->
-> Is the MAX77663 seems more related to the MAX77686 PMIC, why is it
-> being done as s a GPIO and not a PMIC driver or the existing driver
-> extended to support this chip?
->
+El Mon, Nov 06, 2023 at 08:54:03AM -0500, Sean Anderson deia:
+> On 11/6/23 07:35, Xavier Drudis Ferran wrote:
+> > Thanks for your work. I'm still reading... but...
+> > 
+> > 
+> > El Sun, Nov 05, 2023 at 09:25:46PM -0500, Sean Anderson deia:
+> > > diff --git a/include/spl.h b/include/spl.h
+> > > index 951e136b9ea..ecfc50e0095 100644
+> > > --- a/include/spl.h
+> > > +++ b/include/spl.h
+> > > @@ -297,10 +297,10 @@ struct spl_load_info {
+> > >   	 * read() - Read from device
+> > >   	 *
+> > >   	 * @load: Information about the load state
+> > > -	 * @sector: Sector number to read from (each @load->bl_len bytes)
+> > > -	 * @count: Number of sectors to read
+> > > +	 * @offset: Offset to read from in bytes, in multiples of @load->bl_len
+> > > +	 * @count: Number of bytes to read, in multiples of @load->bl_len
+> > 
+> > I'm no native English speaker, but would it be easier to understand? :
+> > 
+> > +	 * @offset: Offset to read from in bytes, a multiple of @load->bl_len
+> > +	 * @count: Number of bytes to read, a multiple of @load->bl_len
+> > 
+> > 
+> > 
+> 
+> I think it would have to be worded
+> 
+> @offset: Offset to read from in bytes, as a multiple of @load->bl_len
+> 
+> but to me these both mean the same thing.
+> 
+> --Sean
 
-This patchset brings support for MAX77663 PMIC GPIO cell support of
-existing PMIC driver, it has nothing to do with MAX77686.
+Ah, OK. I doubted on whether it should be a comma or "as". Apparently
+it was both.
 
-> > and PALMAS GPIO cell is tested on tegra note 7 tegra 4 device.
-> >
-> > ---
-> > Changes from v1:
-> >  - isolate PMIC GPIO cells parsing behind enabling DM_PMIC
-> > ---
-> >
-> > Svyatoslav Ryhel (3):
-> >   drivers: gpio-uclass: support PMIC GPIO children
-> >   drivers: gpio: implement MAX77663 GPIO cell
-> >   drivers: gpio: implement PALMAS GPIO cell
-> >
-> >  drivers/gpio/Kconfig                |  16 +++
-> >  drivers/gpio/Makefile               |   2 +
-> >  drivers/gpio/gpio-uclass.c          |  19 +++
-> >  drivers/gpio/max77663_gpio.c        | 178 ++++++++++++++++++++++++++++
-> >  drivers/gpio/palmas_gpio.c          | 132 +++++++++++++++++++++
-> >  drivers/power/pmic/max77663.c       |   9 ++
-> >  drivers/power/pmic/palmas.c         |  10 +-
-> >  include/dt-bindings/pmic/max77663.h |  18 +++
-> >  include/power/max77663.h            |   1 +
-> >  include/power/palmas.h              |  12 ++
-> >  10 files changed, 396 insertions(+), 1 deletion(-)
-> >  create mode 100644 drivers/gpio/max77663_gpio.c
-> >  create mode 100644 drivers/gpio/palmas_gpio.c
-> >  create mode 100644 include/dt-bindings/pmic/max77663.h
-> >
-> > --
-> > 2.40.1
-> >
+They may mean the same, but I got confused by having "in bytes", and
+"in multiples" so close.
+
+"in bytes" means the value should be the correct answer to the
+question "how many bytes" (not a number of bits, not a number of
+sectors)
+
+but "in multiples of..." doesn't mean the value should be the correct
+answer to "how many of multiples". Should the value be a number of
+sectors (first multiple of bl_len) a number of dozens of sectors
+(another multiple of bl_len) or ...?
+
+In the first part "in" introduces a unit of measure, but in the second
+the same word introduces a constraint on a value. That was confusing
+to me.
+
+Not saying it doesn't mean the same or even that you should change it,
+just elaborating why I said it.
+
