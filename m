@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E756C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 19:06:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3D3C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 19:06:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDCFD87584;
-	Tue,  7 Nov 2023 20:06:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 46636875E8;
+	Tue,  7 Nov 2023 20:06:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CBJj3Vr7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H5AkzTs/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAF53875BF; Tue,  7 Nov 2023 20:06:07 +0100 (CET)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id D25DF875C6; Tue,  7 Nov 2023 20:06:11 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F7CB875BF
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 20:06:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E063870BC
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 20:06:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-5869914484fso3332145eaf.0
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 11:06:05 -0800 (PST)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3b2e308a751so5470b6e.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 11:06:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699383964; x=1699988764; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699383965; x=1699988765; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LjFvinfoEp/lieblzIudkNY2qHMs8fgFELz/BB33aNQ=;
- b=CBJj3Vr7foH4nbrfZcin8300dQjm4CFsD/VqfDmAmszs7mGq5b27uJZeUpMHP6olOQ
- ID7U005oKeTKWTMkQqrPaW5YE6pGRHFU0CxTRQtJ4lvtI6JMwSRv0en04nreC12BRSXu
- 7HSadGNzSMdUKFnvkyKQks8+4rv8Cy68jOJf2CVpcUm1n6NgEFNDLXjNs/IK+qUCqTu0
- cui91paCcEbjstYI6nV3tYcF8rYXv3OZYhxM01rBYOUBrAWZsygKhxRaegkV1fpZLJ9/
- G+/H8rA6dz9rjPlxg3ScPAnWnxIFQur4lzo8s7Ohg9S+I4hzsp35Lcoez3MdxTC/gw8Q
- 8mTQ==
+ bh=vfF15bOqd2HKm14u2HtIQKTVmgnM4eGssEsIUHfHn1E=;
+ b=H5AkzTs/TRSHFvvNamac62IcRHn0+r+kdL3gwSDBABwqcE06xtm3V7Y4gDY4SemKci
+ LQ1qz4abu4cj6h51Kwpaih/pl6yvFsPFxTEJas2i6ykSGhbPw66MoYt3tNznb8EzHnNC
+ xftbO+DnId4OQ4cXwU/fdW85d6TVUF7RBqvoiLe5KTF6eWq/5a+Vqi14BOVVf9E8unH/
+ ECdmBfV+ft1SoeNv7uWBmNitRXVZQqvdnyl05tmDm/Hlh4a5Jxykz/89XT98dcw/X/Qz
+ F4RP1vL/RMcBGWMDYLsayQl/AVgA0YQfHObZLErvJ7EFJluFaQMkrh4Iakf8LWqxZBgr
+ 4Ekg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699383964; x=1699988764;
+ d=1e100.net; s=20230601; t=1699383965; x=1699988765;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LjFvinfoEp/lieblzIudkNY2qHMs8fgFELz/BB33aNQ=;
- b=asfNF5apg28KfUq9n56EUWqmjmwQzlcQ9WEY+9psaqvMM6nDdJFOKr82FwisUrGe7a
- j0swWTcnUlRXbtERKCuFFKpa0dNllqbeZNZTXxKEuOtvbODQetPeG2V1o9pcOcMaW+ji
- iLU6TtPG+j8gubMfZWvMy9TMKhl75CsuyW/eAZCgMVnC3nKJlEeTkt68ewhCJmzQ6lG4
- JK/FE8CTfFe1f3dqw6S8dte3QfY4HsjXWhPEgha1csgi5Z5nUm7lRHS7E7/Go1s7/KJz
- fkBkd5dCkDWNrpmU09bII93JyrzrhVtNH4lGcOAvCPtDk9K8HOEcVindnJhdGUl1qUNE
- 3ROQ==
-X-Gm-Message-State: AOJu0Yx1CIeqP4ysBvLKxMkVnyRt8jRFtQTzvjtniVBWAFyzrwxO3xPW
- imGVyewsjOQ1rSZxdsXl55mXaFanGZkKOwBQvcOjWA==
-X-Google-Smtp-Source: AGHT+IF1Is4kFgsY+AEZU6uQtgvx97Kj7Hsz9g29z6+rDOeOFq/1b8XtDHV+RIzYBpICK/TKHoW3gA==
-X-Received: by 2002:a05:6820:211:b0:581:3e7d:12e8 with SMTP id
- bw17-20020a056820021100b005813e7d12e8mr33524767oob.2.1699383963913; 
- Tue, 07 Nov 2023 11:06:03 -0800 (PST)
+ bh=vfF15bOqd2HKm14u2HtIQKTVmgnM4eGssEsIUHfHn1E=;
+ b=f9L/ySjlqaxUAboQlhtMhqunT+qsx1jYjXHYSHjj0HVvBd7SVuUCGWGc2GVE70ve3Y
+ xzqpl8i4jEpE4ry5e3sKV6EK7A2yH6M0Wi+eYO/CQmSovwsoO8+tXVcs9cr9WStY5SgD
+ R0T1nXstmpZE0TpSrrT25FSEZGKX7Raz6zJ+6xJIK9w5yRaph/XgldnwHOesoBElpRYt
+ BaIGrJemwpNzjoHoGhUDh0D0RHxVpxRZjlwIKY4GCdKeC/yDn0ep/8GYjbSwBvmNzYGD
+ abyNLPUBy9E8Mfo/8htqHC4YI+h83H02ShviTkOCT2p1WhgQ/bl/9SF6kX6MgPvMxfGv
+ 2ZKw==
+X-Gm-Message-State: AOJu0Yx7gTl+NYOCESbVK2v6t1qD21jnYEEg6eeqX8aR7+PwfvceQTAt
+ qi6Bs22o9T/UGN81WROg+jXQ0w==
+X-Google-Smtp-Source: AGHT+IFugqeYUpu9+SXHGvRmmKu4ZY9hgKr5Rtlv0dHqmVq3EEO5LhNV8AY/a6k14DMYTYTXyM+d5w==
+X-Received: by 2002:a05:6808:1492:b0:3b0:f8bd:9503 with SMTP id
+ e18-20020a056808149200b003b0f8bd9503mr1847894oiw.10.1699383964749; 
+ Tue, 07 Nov 2023 11:06:04 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- q23-20020a4a3317000000b00589ce21f6bfsm114454ooq.15.2023.11.07.11.06.03
+ c3-20020a056808138300b003b2e7231faasm1632778oiw.28.2023.11.07.11.06.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 11:06:03 -0800 (PST)
+ Tue, 07 Nov 2023 11:06:04 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
 Cc: Mark Kettenis <kettenis@openbsd.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
-Date: Tue,  7 Nov 2023 13:05:59 -0600
-Message-Id: <20231107190601.17151-3-semen.protsenko@linaro.org>
+Subject: [PATCH 3/4] serial: s5p: Use named constants for register values
+Date: Tue,  7 Nov 2023 13:06:00 -0600
+Message-Id: <20231107190601.17151-4-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231107190601.17151-1-semen.protsenko@linaro.org>
 References: <20231107190601.17151-1-semen.protsenko@linaro.org>
@@ -92,43 +92,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use dev_read_u8_default() instead of fdtdec_get_int() to read the "id"
-property from device tree, as suggested in [1]. dev_* API is already
-used in this driver, so there is no reason to stick to fdtdec_* API.
-This also fixes checkpatch warning:
+Get rid of magic numbers in s5p_serial_init() when writing to UART
+registers. While at it, use BIT() macro for existing constants when
+appropriate.
 
-    WARNING: Use the livetree API (dev_read_...)
-
-[1] doc/develop/driver-model/livetree.rst
+No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/serial/serial_s5p.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ drivers/serial/serial_s5p.c | 31 +++++++++++++++++++++----------
+ 1 file changed, 21 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
-index 177215535676..c57bdd059ea6 100644
+index c57bdd059ea6..6d316ccaf31d 100644
 --- a/drivers/serial/serial_s5p.c
 +++ b/drivers/serial/serial_s5p.c
-@@ -20,8 +20,6 @@
- #include <serial.h>
- #include <clk.h>
- 
--DECLARE_GLOBAL_DATA_PTR;
--
- enum {
- 	PORT_S5P = 0,
+@@ -25,19 +25,28 @@ enum {
  	PORT_S5L
-@@ -220,8 +218,7 @@ static int s5p_serial_of_to_plat(struct udevice *dev)
+ };
  
- 	plat->reg = (struct s5p_uart *)addr;
- 	plat->reg_width = dev_read_u32_default(dev, "reg-io-width", 1);
--	plat->port_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
--					"id", dev_seq(dev));
-+	plat->port_id = dev_read_u8_default(dev, "id", dev_seq(dev));
++#define UFCON_FIFO_EN		BIT(0)
++#define UFCON_RX_FIFO_RESET	BIT(1)
++#define UMCON_RESET_VAL		0x0
++#define ULCON_WORD_8_BIT	0x3
++#define UCON_RX_IRQ_OR_POLLING	BIT(0)
++#define UCON_TX_IRQ_OR_POLLING	BIT(2)
++#define UCON_RX_ERR_IRQ_EN	BIT(6)
++#define UCON_TX_IRQ_LEVEL	BIT(9)
++
+ #define S5L_RX_FIFO_COUNT_SHIFT	0
+ #define S5L_RX_FIFO_COUNT_MASK	(0xf << S5L_RX_FIFO_COUNT_SHIFT)
+-#define S5L_RX_FIFO_FULL	(1 << 8)
++#define S5L_RX_FIFO_FULL	BIT(8)
+ #define S5L_TX_FIFO_COUNT_SHIFT	4
+ #define S5L_TX_FIFO_COUNT_MASK	(0xf << S5L_TX_FIFO_COUNT_SHIFT)
+-#define S5L_TX_FIFO_FULL	(1 << 9)
++#define S5L_TX_FIFO_FULL	BIT(9)
  
- 	if (port_type == PORT_S5L) {
- 		plat->rx_fifo_count_shift = S5L_RX_FIFO_COUNT_SHIFT;
+ #define S5P_RX_FIFO_COUNT_SHIFT	0
+ #define S5P_RX_FIFO_COUNT_MASK	(0xff << S5P_RX_FIFO_COUNT_SHIFT)
+-#define S5P_RX_FIFO_FULL	(1 << 8)
++#define S5P_RX_FIFO_FULL	BIT(8)
+ #define S5P_TX_FIFO_COUNT_SHIFT	16
+ #define S5P_TX_FIFO_COUNT_MASK	(0xff << S5P_TX_FIFO_COUNT_SHIFT)
+-#define S5P_TX_FIFO_FULL	(1 << 24)
++#define S5P_TX_FIFO_FULL	BIT(24)
+ 
+ /* Information about a serial port */
+ struct s5p_serial_plat {
+@@ -80,13 +89,15 @@ static const int udivslot[] = {
+ 
+ static void __maybe_unused s5p_serial_init(struct s5p_uart *uart)
+ {
+-	/* enable FIFOs, auto clear Rx FIFO */
+-	writel(0x3, &uart->ufcon);
+-	writel(0, &uart->umcon);
+-	/* 8N1 */
+-	writel(0x3, &uart->ulcon);
++	/* Enable FIFOs, auto clear Rx FIFO */
++	writel(UFCON_FIFO_EN | UFCON_RX_FIFO_RESET, &uart->ufcon);
++	/* No auto flow control, disable nRTS signal */
++	writel(UMCON_RESET_VAL, &uart->umcon);
++	/* 8N1, no parity bit */
++	writel(ULCON_WORD_8_BIT, &uart->ulcon);
+ 	/* No interrupts, no DMA, pure polling */
+-	writel(0x245, &uart->ucon);
++	writel(UCON_RX_IRQ_OR_POLLING | UCON_TX_IRQ_OR_POLLING |
++	       UCON_RX_ERR_IRQ_EN | UCON_TX_IRQ_LEVEL, &uart->ucon);
+ }
+ 
+ static void __maybe_unused s5p_serial_baud(struct s5p_uart *uart, u8 reg_width,
 -- 
 2.39.2
 
