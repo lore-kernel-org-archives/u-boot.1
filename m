@@ -4,57 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1F69C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 07:09:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B11CC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 07:12:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56F7786BD6;
-	Tue,  7 Nov 2023 08:09:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44DEE86BA4;
+	Tue,  7 Nov 2023 08:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OuyMhYDU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IQn6zDHr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 291B68710C; Tue,  7 Nov 2023 08:09:49 +0100 (CET)
+ id CFD4686BD6; Tue,  7 Nov 2023 08:12:11 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C6BB86689
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 08:09:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74FA786689
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 08:12:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A779gpl051217;
- Tue, 7 Nov 2023 01:09:42 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A77C4hc051970;
+ Tue, 7 Nov 2023 01:12:04 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699340982;
- bh=dtCqprl5U7emPS1FeBoFr8dtBFKIXFLoxMDe9bMNoCc=;
+ s=ti-com-17Q1; t=1699341124;
+ bh=jkRUEUFZusxzagMvU6XMq+XgF2o1Gg5mMgQQDDo4WWU=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=OuyMhYDUJB9ePHP6dRZ6jDUY3xssiaCvpLZOTnE+s6pIrmXY+DBPhB7bGCWkik+Rx
- rM2bY7ydKcwEDDW0CQyM5YAR+M3z7OZ6BEasPQSavA6VdLL0tXZbF4Rd1ct3jrEIBf
- /pK9zQ9Iodv/nIc/6JMkFw6XaqkxNRhMnXOuTJ8g=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A779gFR029938
+ b=IQn6zDHrgpTO8uHV86X2r1mZmG1kMoYK0IBVbGxoZUN8BBbXBL1X+gJd2eR0t4QkU
+ sOEyGV68g2I3TV6N/tEgNZBoLoh3i6skG7r9fdeGkmsxHSR5W0MF+nP2+oOAdOr4QK
+ h9yUpiA5RWeVVJ1BEnQqRII/kNtxPun1MPMU63xE=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A77C4hh026526
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 7 Nov 2023 01:09:42 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 7 Nov 2023 01:12:04 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Nov 2023 01:09:41 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 01:12:03 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Nov 2023 01:09:41 -0600
-Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A778gcq066318;
- Tue, 7 Nov 2023 01:09:38 -0600
-Message-ID: <cae13e5f-4790-40ce-8604-0ec2dac0c1f7@ti.com>
-Date: Tue, 7 Nov 2023 12:39:38 +0530
+ Frontend Transport; Tue, 7 Nov 2023 01:12:03 -0600
+Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A77C0rP059795;
+ Tue, 7 Nov 2023 01:12:00 -0600
+Message-ID: <59a6ceb3-1cf2-47cf-aff1-e5623acc355d@ti.com>
+Date: Tue, 7 Nov 2023 12:41:59 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2 05/12] configs: j721e_evm_a72_defconfig: Switch to
- bootstd
+Subject: Re: [PATCH V2 10/12] configs: j7200: Remove HBMC_AM654 config
 Content-Language: en-US
 To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
 CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
@@ -62,9 +61,10 @@ CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>,
  Robert Nelson <robertcnelson@gmail.com>, Jason Kridner
  <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
-References: <20231104072150.3339-1-nm@ti.com> <20231104072150.3339-6-nm@ti.com>
+References: <20231104072150.3339-1-nm@ti.com>
+ <20231104072150.3339-11-nm@ti.com>
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231104072150.3339-6-nm@ti.com>
+In-Reply-To: <20231104072150.3339-11-nm@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -84,36 +84,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
+Hi Nishanth,
 
 On 04/11/23 12:51, Nishanth Menon wrote:
-> Switch to using bootstd. Note with this change, we will stop using
-> distro_bootcmd and instead depend entirely on bootflow method of
-> starting the system up.
+> Kernel commit 1b77265626a4 ("arm64: dts: ti: k3-j7200-mcu-wakeup: Add
+> HyperBus node") was merged to kernel without its dependent patch [1].
+> Similar fix is needed in U-Boot, and hbmc currently breaks boot. Till
+> this gets fixed in U-Boot, disable the config by default so that the
+> hbmc probe that happens in board/ti/j721e/evm.c will not take place
+> and lead to boot failure.
+> 
+> This is similar to the approach in commit 5b2671594b80 ("configs:
+> j721e: Remove HBMC_AM654 config"), introduced to j7200 evm platform.
+> 
+> [1] https://lore.kernel.org/all/20230424184810.29453-1-afd@ti.com/
 > 
 > Signed-off-by: Nishanth Menon <nm@ti.com>
 > ---
->   configs/j721e_evm_a72_defconfig | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+>   configs/j7200_evm_a72_defconfig | 1 -
+>   configs/j7200_evm_r5_defconfig  | 1 -
+>   2 files changed, 2 deletions(-)
 > 
-> diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-> index 99e0e168ebf7..98ac7ca59789 100644
-> --- a/configs/j721e_evm_a72_defconfig
-> +++ b/configs/j721e_evm_a72_defconfig
-> @@ -29,10 +29,11 @@ CONFIG_SPL_SPI=y
->   # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->   CONFIG_SPL_LOAD_FIT=y
->   CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
-> -CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_OF_BOARD_SETUP=y
->   CONFIG_OF_SYSTEM_SETUP=y
-> -CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
-> +CONFIG_BOOTSTD_FULL=y
-> +CONFIG_BOOTSTD_DEFAULTS=y
-> +CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
->   CONFIG_LOGLEVEL=7
->   CONFIG_SPL_MAX_SIZE=0xc0000
->   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
+> index cb4a141675da..889358afc316 100644
+> --- a/configs/j7200_evm_a72_defconfig
+> +++ b/configs/j7200_evm_a72_defconfig
+> @@ -138,7 +138,6 @@ CONFIG_CFI_FLASH=y
+>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+>   CONFIG_FLASH_CFI_MTD=y
+>   CONFIG_SYS_FLASH_CFI=y
+> -CONFIG_HBMC_AM654=y
+>   CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
+>   CONFIG_DM_SPI_FLASH=y
+>   CONFIG_SPI_FLASH_STMICRO=y
+> diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+> index d25dd8134b63..6452c60345fd 100644
+> --- a/configs/j7200_evm_r5_defconfig
+> +++ b/configs/j7200_evm_r5_defconfig
+> @@ -114,7 +114,6 @@ CONFIG_CFI_FLASH=y
+>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+>   CONFIG_FLASH_CFI_MTD=y
+>   CONFIG_SYS_FLASH_CFI=y
+> -CONFIG_HBMC_AM654=y
+>   CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
+>   CONFIG_DM_SPI_FLASH=y
+>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
 
 Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
