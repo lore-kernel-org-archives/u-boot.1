@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79864C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 23:32:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD5DC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 23:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EACD187658;
-	Wed,  8 Nov 2023 00:32:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9F07787608;
+	Wed,  8 Nov 2023 00:34:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ocW0XHxn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mY00cQbb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00C4A87658; Wed,  8 Nov 2023 00:32:37 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 60ED28760E; Wed,  8 Nov 2023 00:34:24 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 981C2875FC
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 00:32:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7918C875FC
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 00:34:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-66d264e67d8so39472456d6.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 15:32:34 -0800 (PST)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-66d09b6d007so43541926d6.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 15:34:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699399953; x=1700004753; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9liMJacgSTuDA1+ZLqM1SyO1kDu/OfQEWhU13JkxhKc=;
- b=ocW0XHxnNN86CYln6c/uHm69YSIl7pEEWtMPGitPMq9YXDegtBkVwWzyH2rbHDwMjz
- Rs27vt2OUl2aOmF4QiBh5ZW/0nUf8/wHp/AlRQ4un5ub1UILJSMbJkmrY2xENpE1Wd83
- i7hFoudLNG8mxwlXdN1jtZTXj2kXvOV2JTiTo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699399953; x=1700004753;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1699400057; x=1700004857; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9liMJacgSTuDA1+ZLqM1SyO1kDu/OfQEWhU13JkxhKc=;
- b=NG1VooV1VvHAu/UFE7YkDZKSB6iHYIeDW0WXRDdhVM318VlHkcDsWHvDfGknBoj2mt
- wqsUJJyeLoipaAm2qJ8tH9rvhlsXOYYoFVgz7R4rULw+BIYGaik67sfsAYFc1S61SXKU
- VDnkUBaf10eBQ7i2CCDnn4ZWWDo1q87iHE1QkalpTRWiWjMuj6usZwCnMvVbnfojhFZB
- GkabFEyrf1XJo2+atGAwItt7Rkj9pry7NVsaBdlL15YTZZ2n11K+H18Mp7OBI7U/NjRU
- yEJoJa/25qGWSlzfoarauM0gSewIX3Eqi73/Fneg2WA6V8SMYcggwHIZtPilyHr7jq+Y
- BL8A==
-X-Gm-Message-State: AOJu0Yx6OVlneJcA4/Kcx4rCf+4W4gBGpwnRMReRPH35GJhpvcJKXn7Q
- SSxYqW+JG4u6YqUc20TSuWPfsw==
-X-Google-Smtp-Source: AGHT+IFn4FyWdhwB778gi/mPHJmbhJbrnIyOtk0Z70jWp1pTXqICCy+ZSnBheqhAsC8FNQjxscIP7g==
-X-Received: by 2002:a05:6214:1cc7:b0:66d:b8bf:d9e8 with SMTP id
- g7-20020a0562141cc700b0066db8bfd9e8mr269640qvd.4.1699399953391; 
- Tue, 07 Nov 2023 15:32:33 -0800 (PST)
-Received: from bill-the-cat
+ bh=aP5+xUuJLb9w/vzn2HlUJbCVZzLDVtxh4WZYo2y4EE4=;
+ b=mY00cQbbzjCo4Zrh1GKx6Y1n22j1UXXgpu+LT595MxnNVXnGwTOfP2xDR2Q2TDKCZD
+ T1VJVqHwo1P0o9zI4TpzhZtJd2gT4jcH1OM51p2hiLt65XJRi+UbpAAqfG6BAbMFv7uI
+ HkmUaX9854Ut2vqbs+bDcboDzFg/VoKuAWvek=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699400057; x=1700004857;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aP5+xUuJLb9w/vzn2HlUJbCVZzLDVtxh4WZYo2y4EE4=;
+ b=AobCjByZ5bjvDe3RB2KhlEyDK/EctiMht9zQofX5ZqDSWfQMeUc+O9Q7/EeqOEXqSo
+ gq+SJH6/jjG6Har/ct1PRsMItj17T7fygYVrw4MdXaUji93KrqiSi+v6K/K7YptdATmo
+ BawYqlCBNncwxWP+CKjas1UF7BpyTZkFnsYYL00uowZ6BSHLP4Lwuk/LWor87OfTAg2d
+ K8bbnuLsKSh/9NbADDPfHFuj9nXe7dRxr4JrL81yydbFX6WO2ABNqPOkukBsbWXNdOsr
+ vhg8FJM8pCu5d7uIyGMbrm9THTNSuBVJZyAvv8Qxq1O+TC/Sjh8OVLcCkEf8BKAp3+2j
+ 84uQ==
+X-Gm-Message-State: AOJu0Yzim5tqgeRszeXCuDrKjBLbSKWcUwyLT4HdZo4x1WIkZQH/2NNz
+ YyNVxdPeUVGzxgnzKDJNsxOPKOKSAlTCCFaXnYXhdg==
+X-Google-Smtp-Source: AGHT+IFN7mZ0QzlcYWnaP6Oz+d82MDcpkYRf8psK9m9EJUQ4saYOtwQkS2P3bBt0ZwinbXc5NyS9rQ==
+X-Received: by 2002:a05:6214:482:b0:66d:2680:5a98 with SMTP id
+ pt2-20020a056214048200b0066d26805a98mr313660qvb.41.1699400056937; 
+ Tue, 07 Nov 2023 15:34:16 -0800 (PST)
+Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
  [2603:6081:7b00:6400:5409:8f3c:5603:314])
  by smtp.gmail.com with ESMTPSA id
- e6-20020ad44426000000b0065afcf19e23sm409260qvt.62.2023.11.07.15.32.32
+ u14-20020a0cc48e000000b0065d0d0c752csm406745qvi.116.2023.11.07.15.34.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 15:32:32 -0800 (PST)
-Date: Tue, 7 Nov 2023 18:32:31 -0500
+ Tue, 07 Nov 2023 15:34:16 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Andrew Davis <afd@ti.com>,
- UBoot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/3] configs: am62ax: setup the 32k RTC crystal
-Message-ID: <20231107233231.GY6601@bill-the-cat>
-References: <20231107232139.2839534-5-bb@ti.com>
- <20231107232139.2839534-7-bb@ti.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Angelo Dureghello <angelo@kernel-space.org>
+Subject: Re: [PATCH 01/20] m68k: Remove CONFIG_FSLDMAFEC
+Date: Tue,  7 Nov 2023 18:34:15 -0500
+Message-Id: <169939997992.690013.2529695997497811606.b4-ty@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231101162824.3755579-1-trini@konsulko.com>
+References: <20231101162824.3755579-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qfUeHpyr0LzyJ+lW"
-Content-Disposition: inline
-In-Reply-To: <20231107232139.2839534-7-bb@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,57 +92,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 01 Nov 2023 12:28:05 -0400, Tom Rini wrote:
 
---qfUeHpyr0LzyJ+lW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> There are no platforms which enable this feature, so remove it.
+> 
+> 
 
-On Tue, Nov 07, 2023 at 05:21:42PM -0600, Bryan Brattlof wrote:
+Applied to u-boot/next, thanks!
 
-> The am62ax utilizes the same 32k crystal for a more accurate RTC clock
-> source. Enable the configuration to set this up for Linux.
->=20
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-> ---
->  board/ti/am62ax/evm.c            | 5 +++++
->  configs/am62ax_evm_a53_defconfig | 1 +
->  2 files changed, 6 insertions(+)
->=20
-> diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
-> index f2dd3b4192ee0..6e031784766c4 100644
-> --- a/board/ti/am62ax/evm.c
-> +++ b/board/ti/am62ax/evm.c
-> @@ -14,8 +14,13 @@
->  #include <fdt_support.h>
->  #include <spl.h>
-> =20
-> +#include "../common/rtc.c"
-
-Oh goodness, no, we don't include a C file without very good reason.
-Build that object based on whatever the right symbol name is (based on
-my feedback in 1/3) and find some appropriate header for the function
-prototype to be in as well. And this applies to 3/3 as well.
-
---=20
+-- 
 Tom
 
---qfUeHpyr0LzyJ+lW
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVKyQ8ACgkQFHw5/5Y0
-tyztzAv/T/6v/s+2ZfFd79mQzoxR8LVn14kTAHCE4CORaspGD+I5p3s7vC9pJhrY
-Iju+bCRP098LE3mUiNOK9F4DLSfIcoJxSm1ADRXN22nhQVZmnmm7jmf8ZxHv0P3G
-mjgEdu4HZtjBP5TOC58wXZepKNQGAwcqng0+yR5PAGXifOqmj+id+z8sNB1nDwpb
-1cUP9X338X9ryW7ijc70YF32GT1LCla2swLrUTTrM2UAvlD5+1YVrMCis4FP1L/+
-n3W82/LGggunNtz53Srqb4A5Vpddu7AHOwd5kuAZzc3x5loaK2eM3E0+iOq8zpsa
-Cp4m9BqORMElWGdu85FQakA+0/pp0ExG5OSsdEqpbjsUe7qJIcSZAW+w8S+ZFGBn
-TAeTMlTQNMNiKZo/67BnxsixeYb2EfrtK542MMBw0PP6DFzh7jPvPNQ7uK5Z4KTf
-HWfDrbUztCEFY1MPpHJbnOmKEGvA6I8rA+Ji2ua8mWp8jlywYyT4LW4ZuTPkTs3j
-799Xlokw
-=D7vX
------END PGP SIGNATURE-----
-
---qfUeHpyr0LzyJ+lW--
