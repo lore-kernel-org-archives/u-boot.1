@@ -4,70 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF02C4167D
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 09:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA65C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 09:47:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CB648718F;
-	Tue,  7 Nov 2023 10:46:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 06ADA871A6;
+	Tue,  7 Nov 2023 10:47:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=mupuf.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HbwM+Tn8";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4A7A8718F; Tue,  7 Nov 2023 10:46:00 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 12EEF8715B; Tue,  7 Nov 2023 10:47:16 +0100 (CET)
+Received: from mailtransmit05.runbox.com (mailtransmit05.runbox.com
+ [IPv6:2a0c:5a00:149::26])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F28CC8715B
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 10:45:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E75A871A6
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 10:47:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A79jpG3006967;
- Tue, 7 Nov 2023 03:45:51 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699350351;
- bh=j/uxCZgUwxCvYFHywXQHxr2BmkkbABL9U61F81gdyqU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=HbwM+Tn8bEgIfrpFn16K/PJxVcDU+mCDmzT2VZBzHhUWC6U3FZJoMJVNr8aU4wabp
- XNUJ4fGhJaFJs9luh9uxTDeLu5Bq0R4QAl81i4lH/5Zht6XXWLlUU8CdSjdVAqgmn1
- INfQtWAor9Qf9gT1NMMqK8xQrzJAxFm4eGj+AaZ4=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A79jpN5028365
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 7 Nov 2023 03:45:51 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Nov 2023 03:45:50 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Nov 2023 03:45:50 -0600
-Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A79jkMn017407;
- Tue, 7 Nov 2023 03:45:47 -0600
-Message-ID: <9f562302-3fb5-4b79-acec-5bf6f201f29f@ti.com>
-Date: Tue, 7 Nov 2023 15:15:46 +0530
+ dmarc=none (p=none dis=none) header.from=mupuf.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=martin.roukala@mupuf.org
+Received: from mailtransmit03.runbox ([10.9.9.163] helo=aibo.runbox.com)
+ by mailtransmit05.runbox.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
+ (envelope-from <martin.roukala@mupuf.org>)
+ id 1r0Ifu-00Cpcv-92; Tue, 07 Nov 2023 10:47:10 +0100
+Received: from [10.9.9.74] (helo=submission03.runbox)
+ by mailtransmit03.runbox with esmtp (Exim 4.86_2)
+ (envelope-from <martin.roukala@mupuf.org>)
+ id 1r0Ift-0003n2-8i; Tue, 07 Nov 2023 10:47:09 +0100
+Received: by submission03.runbox with esmtpsa [Authenticated ID (1057822)]
+ (TLS1.2:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+ (Exim 4.93) id 1r0Ifg-00DxUX-CS; Tue, 07 Nov 2023 10:46:56 +0100
+Message-ID: <f27831c4-3ba8-4f81-89fb-256c3f0f77fa@mupuf.org>
+Date: Tue, 7 Nov 2023 11:45:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] board: ti: common: board_detect: Fix EEPROM offset
- read for 1-byte
+Subject: Re: [PATCH] rockchip: rk3588-rock-5b: Enable CONFIG_PCI_INIT_R to
+ support EFI networking
 Content-Language: en-US
-To: Prasanth Babu Mantena <p-mantena@ti.com>, <trini@konsulko.com>,
- <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <matwey.kornilov@gmail.com>, <jkridner@beagleboard.org>,
- <robertcnelson@gmail.com>
-CC: <u-boot@lists.denx.de>, <nm@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>, 
- <a-nandan@ti.com>
-References: <20231030170458.21668-1-p-mantena@ti.com>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231030170458.21668-1-p-mantena@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
+References: <20231104130451.111020-1-martin.roukala@mupuf.org>
+ <ef28a2eb-131c-4b43-b048-f8af3160ddbb@kwiboo.se>
+From: Martin Roukala <martin.roukala@mupuf.org>
+In-Reply-To: <ef28a2eb-131c-4b43-b048-f8af3160ddbb@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,59 +67,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Prasanth,
+Hi Jonas,
 
-On 30/10/23 22:34, Prasanth Babu Mantena wrote:
-> EEPROM detection logic in ti_i2c_eeprom_get() involves reading
-> the total size and the 1-byte size with an offset 1. The commit
-> 9f393a2d7af8 ("board: ti: common: board_detect: Fix EEPROM read
-> quirk for 2-byte") that attempts to fix this uses a wrong pointer to
-> compare.
+On 06/11/2023 20:15, Jonas Karlman wrote:
+> Hi Martin,
 > 
-> The value with one offset is read into offset_test, but the pointer
-> used to match was still ep, resulting in an invalid comparison of the
-> values. The intent is to identify bad 2-byte addressing eeproms that
-> get stuck on the successive reads.
+> On 2023-11-04 14:04, Martin Roukala (né Peres) wrote:
+>> When u-boot chainloads an EFI bootloader such as iPXE, we want to have
+>> already initialized the PCI subsystem so that network driver is loaded
+>> and ready to use by the bootloader.
 > 
-> Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
-> Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
-> Tested-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
-> ---
-> v3 <--> v2:
-> Improved and concise commit description.
-> 
-> v2 <--> v1:
-> Fix inplace for the else condition of CONFIG_IS_ENABLED(DM_I2C).
-> Improved commit message.
-> 
->   board/ti/common/board_detect.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
-> index 9a53884c98..869f7a47f8 100644
-> --- a/board/ti/common/board_detect.c
-> +++ b/board/ti/common/board_detect.c
-> @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
->   
->   	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
->   
-> -	if (*((u32 *)ep) != (header & 0xFF))
-> +	if (offset_test != ((header >> 8) & 0xFF))
->   		one_byte_addressing = false;
->   
->   	/* Corrupted data??? */
-> @@ -180,7 +180,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
->   
->   	rc = i2c_read(dev_addr, 0x1, byte, &offset_test, sizeof(offset_test));
->   
-> -	if (*((u32 *)ep) != (header & 0xFF))
-> +	if (offset_test != ((header >> 8) & 0xFF))
->   		one_byte_addressing = false;
->   
->   	/* Corrupted data??? */
+> This change slows down boot from emmc/sd-card where scanning for pci
+> devices typically is unnecessary.
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+True.
 
--- 
-Thanking You
-Neha Malcom Francis
+> 
+> If pci must be initialized and scanned before an EFI app is started to
+> find pci network controllers, then pci should probably be initialized by
+> the efi bootmeth, not by enabling CONFIG_PCI_INIT_R for a single board.
+
+Unfortunately, it isn't that simple. I am chainloading iPXE immediately, 
+so we never end up calling bootmeth... and so iPXE fails to find any NIC 
+because u-boot did not initialize the PCI subsystem.
+
+IMO, the defconfig should work in all situations. If someone wants to 
+speed up their use case, they are free to disable the features they 
+don't need.
+
+A generic solution may be for u-boot to start probing the PCI bus when 
+asked to enumerate the NICs through SNP by the EFI binary... but until 
+this is done, the defaults should just work.
+
+Regards,
+Martin
+
+> 
+> Regards,
+> Jonas
+> 
+>>
+>> Fixes: 191ece249a96 ("rockchip: rk3588-rock-5b: Enable support for PCIe SATA cards")
+>> Signed-off-by: Martin Roukala (né Peres) <martin.roukala@mupuf.org>
+>> ---
+>>   configs/rock5b-rk3588_defconfig | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+>> index 0595325e81..938137c851 100644
+>> --- a/configs/rock5b-rk3588_defconfig
+>> +++ b/configs/rock5b-rk3588_defconfig
+>> @@ -36,6 +36,7 @@ CONFIG_OF_BOARD_SETUP=y
+>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5b.dtb"
+>>   # CONFIG_DISPLAY_CPUINFO is not set
+>>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>> +CONFIG_PCI_INIT_R=y
+>>   CONFIG_SPL_MAX_SIZE=0x40000
+>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> 
