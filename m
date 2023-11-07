@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA3CC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 16:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED3EC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 16:20:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78AD287549;
-	Tue,  7 Nov 2023 17:18:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC53D8751B;
+	Tue,  7 Nov 2023 17:18:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="kJv4Mi55";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Hr8coOS2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A09EF87538; Tue,  7 Nov 2023 17:18:54 +0100 (CET)
+ id 853C38754F; Tue,  7 Nov 2023 17:18:56 +0100 (CET)
 Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
- [217.70.183.197])
+ [IPv6:2001:4b98:dc4:8::225])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 546EE8753E
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 17:18:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D96187519
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 17:18:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id B33301C0002;
- Tue,  7 Nov 2023 16:18:50 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id F25F01C0002;
+ Tue,  7 Nov 2023 16:18:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1699373931;
+ t=1699373933;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fBLsUFrj7ZzWV72ZFUXIPF3tVIvHneUaw39hWMePdUw=;
- b=kJv4Mi55lPrRCQXqIY8nsi0hqnz0PexIuCK8QRvWW2z/rG/L/tSHeReeCSNkyG+ideFfm9
- Tlue9mL2SBjKAUISvK0zEumpzmS5d48e+55El7HKuB8nrl1GhkUQacXnszJIt05qzV46wR
- FPTKaL5xZ6Q3dPXYYNCpv83P5/YnDg4liY6oHOdxCsV4Xw7540AlQlXtiF1n4WyyBhVsRu
- /tU43dEEp3XmjB0Q8KGny5sDw1KL6MRe/o9nx3WheqpETGGsDTlMjvMLOO9sdu2HoaoFz0
- Jv1RX47XKniF1EA2nCMZRd5QywNiPj5B+fVBUP4tA7kd5ijzWwzLI5Xh/DegIw==
+ bh=sNqZ1YdeVabnvYQtBXwvydAxvSIphUmCjGNYSV1rYAA=;
+ b=Hr8coOS2heSJ3Rh9duukoiEIJMSc2ioKSmeBwAeeejhtfsZ0CWg+V9RtNT+r+o05SM8cTr
+ H15lITdfbYOl4c+Y0/bvIQcRCCQNgTbuLyp93cvNL2sFs4hoFFQDB5dv9YzUinTDMKajfY
+ YgUiuMHmHBTpwRhqdKKGet0a1wy7DG9hmKngcvvTZ/WBFqTFNH18OxL6URrqCB/5uQnE97
+ l8vdXmLpjJRbWVqxS8y7AE/eFMJSuF06lPYTJlLA5g+HrFsp8pk0zchfXE+B7qj7v5gnbk
+ d7q4bxcfaA73s+1NuAyytX5tFcwXapqgIDz4KfCM0b0innL9Y9zdEZ4yJeJ3Ww==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: nm@ti.com, thomas.richard@bootlin.com, thomas.petazzoni@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH v2 5/8] ram: k3-ddrss: Add exit retention support
-Date: Tue,  7 Nov 2023 17:17:59 +0100
-Message-Id: <20231107161802.855154-6-thomas.richard@bootlin.com>
+ gregory.clement@bootlin.com, u-kumar1@ti.com, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 7/8] board: ti: j721e: During resume spl restores TF-A and
+ DM-Firmware
+Date: Tue,  7 Nov 2023 17:18:01 +0100
+Message-Id: <20231107161802.855154-8-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231107161802.855154-1-thomas.richard@bootlin.com>
 References: <20231107161802.855154-1-thomas.richard@bootlin.com>
@@ -69,10 +70,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the exit retention support.
-The enter retention is done by DM-Firmware.
-A part of the exit retention sequence is specific to the board.
-It is done in board_k3_ddrss_lpddr4_release_retention.
+During the boot a copy of DM-Firmware is done in a reserved memory
+area before it starts.
+When resuming, R5 SPL uses this copy of DM-Firmware instead of the fit
+image.
+TF-A which saved itself in this same memory area, is restored in
+SRAM by R5 SPL.
 
 Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
 
@@ -82,336 +85,163 @@ Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 ---
 
 Changes in v2:
-- Set exit retention code for DDR behind CONFIG_K3_J721E_DDRSS
+- Check if TF-A is running in DRAM, if yes no need to restore it
+- Remove BL31_START macro, and get TF-A start address from the fit image
 
- drivers/ram/k3-ddrss/k3-ddrss.c | 307 ++++++++++++++++++++++++++++++++
- 1 file changed, 307 insertions(+)
+ arch/arm/mach-k3/common.c                 | 48 ++++++++++++++++++++++-
+ arch/arm/mach-k3/include/mach/j721e_spl.h | 28 +++++++++++++
+ arch/arm/mach-k3/sysfw-loader.c           |  9 +++--
+ 3 files changed, 81 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index b54557f02c..e47f615032 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -413,6 +413,306 @@ static int k3_ddrss_ofdata_to_priv(struct udevice *dev)
- 	return ret;
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index a35110429b..737a1a28c6 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -26,6 +26,7 @@
+ #include <env.h>
+ #include <elf.h>
+ #include <soc.h>
++#include <hang.h>
+ 
+ #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
+ enum {
+@@ -221,6 +222,11 @@ void release_resources_for_core_shutdown(void)
+ 	}
  }
  
-+#if defined(CONFIG_K3_J721E_DDRSS)
-+
-+void __weak board_k3_ddrss_lpddr4_release_retention(void) {}
-+
-+int __weak board_is_resuming(void)
++__weak int board_is_resuming(void)
 +{
 +	return 0;
 +}
 +
-+#define PLL12_CTRL  0x0068C020
-+
-+#define k3_ddrss_readreg(k3_ddrss, block, shift, reg, pt) do {		\
-+		u32 offset = 0U;					\
-+		u32 result = 0U;					\
-+		TH_OFFSET_FROM_REG(reg, shift, offset);			\
-+		result = k3_ddrss->driverdt->readreg(&k3_ddrss->pd, block, offset, pt); \
-+		if (result > 0U) {					\
-+			printf("%s: Failed to read %s\n", __func__, xstr(reg));	\
-+			hang();						\
-+		}							\
-+	} while (0)
-+
-+#define k3_ddrss_writereg(k3_ddrss, block, shift, reg, value) do {	\
-+		u32 offset = 0U;					\
-+		u32 result = 0U;					\
-+		TH_OFFSET_FROM_REG(reg, shift, offset);			\
-+		result = k3_ddrss->driverdt->writereg(&k3_ddrss->pd, block, offset, value); \
-+		if (result > 0U) {					\
-+			printf("%s: Failed to write %s\n", __func__, xstr(reg)); \
-+			hang();						\
-+		}							\
-+	} while (0)
-+
-+#define k3_ddrss_readreg_ctl(ddrss, reg, pt) \
-+	k3_ddrss_readreg(ddrss, LPDDR4_CTL_REGS, CTL_SHIFT, reg, pt)
-+
-+#define k3_ddrss_readreg_pi(ddrss, reg, pt) \
-+	k3_ddrss_readreg(ddrss, LPDDR4_PHY_INDEP_REGS, PI_SHIFT, reg, pt)
-+
-+#define k3_ddrss_readreg_phy(ddrss, reg, pt) \
-+	k3_ddrss_readreg(ddrss, LPDDR4_PHY_REGS, PHY_SHIFT, reg, pt)
-+
-+#define k3_ddrss_writereg_ctl(ddrss, reg, value) \
-+	k3_ddrss_writereg(ddrss, LPDDR4_CTL_REGS, CTL_SHIFT, reg, value)
-+
-+#define k3_ddrss_writereg_pi(ddrss, reg, value) \
-+	k3_ddrss_writereg(ddrss, LPDDR4_PHY_INDEP_REGS, PI_SHIFT, reg, value)
-+
-+#define k3_ddrss_writereg_phy(ddrss, reg, value) \
-+	k3_ddrss_writereg(ddrss, LPDDR4_PHY_REGS, PHY_SHIFT, reg, value)
-+
-+#define k3_ddrss_set_ctl(k3_ddrss, reg, mask) do {	\
-+	u32 val;					\
-+	k3_ddrss_readreg_ctl(ddrss, reg, &val);		\
-+	val |= mask;					\
-+	k3_ddrss_writereg_ctl(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_clr_ctl(k3_ddrss, reg, mask) do {		\
-+		u32 val;					\
-+		k3_ddrss_readreg_ctl(ddrss, reg, &val);		\
-+		val &= ~(mask);					\
-+		k3_ddrss_writereg_ctl(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_set_pi(k3_ddrss, reg, mask) do {		\
-+		u32 val;					\
-+		k3_ddrss_readreg_pi(ddrss, reg, &val);		\
-+		val |= mask;					\
-+		k3_ddrss_writereg_pi(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_clr_pi(k3_ddrss, reg, mask) do {		\
-+		u32 val;					\
-+		k3_ddrss_readreg_pi(ddrss, reg, &val);		\
-+		val &= ~(mask);					\
-+		k3_ddrss_writereg_pi(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_set_phy(ddrss, reg, mask) do {		\
-+	u32 val;					\
-+	k3_ddrss_readreg_phy(ddrss, reg, &val);		\
-+	val |= mask;					\
-+	k3_ddrss_writereg_phy(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_clr_phy(ddrss, reg, mask) do {		\
-+	u32 val;					\
-+	k3_ddrss_readreg_phy(ddrss, reg, &val);		\
-+	val &= ~(mask);					\
-+	k3_ddrss_writereg_phy(ddrss, reg, val);		\
-+	} while (0)
-+
-+static void k3_ddrss_lpddr4_exit_retention(struct k3_ddrss_desc *ddrss)
-+{
-+	u32 regval;
-+	unsigned long tmo;
-+	volatile unsigned int val;
-+
-+	/* disable auto entry / exit */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, (0xF << 24) | (0xF << 16));
-+
-+	/* Configure DFI Interface, DDR retention exit occurs through PHY */
-+	k3_ddrss_readreg_phy(ddrss, LPDDR4__PHY_SET_DFI_INPUT_0__REG, &regval);
-+	regval &= ~0xF0F; // Set DFI_Input_1 = 0
-+	regval |= 0x01;   // Set DFI Input_0 = 1
-+	k3_ddrss_writereg_phy(ddrss, LPDDR4__PHY_SET_DFI_INPUT_0__REG, regval);
-+
-+	/* PWRUP_SREFRESH_EXIT = 1 */
-+	k3_ddrss_set_ctl(ddrss, LPDDR4__PWRUP_SREFRESH_EXIT__REG, 0x1);
-+
-+	/* PI_PWRUP_SREFRESH_EXIT = 0 */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__PI_COL_DIFF__REG, 0x1 << 16);
-+
-+	/* DFIBUS_BOOT_FREQ = 0 */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__DFIBUS_BOOT_FREQ__REG, 0x3);
-+
-+	/* DFIBUS_FREQ_INIT = 2 */
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, &regval);
-+	regval &= ~(0x3 << 24);
-+	regval |= (0x1 << 24);
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, regval);
-+
-+	/* Force Leveling during Initialization, Enable Link Training */
-+
-+	/* PI_INIT_LVL_EN = 1 */
-+	k3_ddrss_set_pi(ddrss, LPDDR4__PI_NORMAL_LVL_SEQ__REG, (1 << 8));
-+
-+	/* PI_DRAM_INIT_EN = 0 */
-+	k3_ddrss_clr_pi(ddrss, LPDDR4__PI_DLL_RST__REG, (0x1 << 8));
-+
-+	/* PI_DFI_PHYMSTR_STATE_SEL_R = 1  (force memory into self-refresh) */
-+	k3_ddrss_set_pi(ddrss, LPDDR4__PI_DFI_VERSION__REG, (1 << 24));
-+
-+	/*  PHY_INDEP_INIT_MODE = 0 */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, (0x1 << 16));
-+	/* PHY_INDEP_TRAIN_MODE = 1 */
-+	k3_ddrss_set_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, 0x1);
-+
-+	/* PI_INIT_WORK_FREQ = 1 */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INIT_WORK_FREQ__REG, &regval);
-+	regval &= ~0x1F;
-+	regval |= 0x01;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_INIT_WORK_FREQ__REG, regval);
-+
-+	/* PI_FREQ_MAP[2:0] */
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_FREQ_MAP__REG, 0x03);
-+
-+	/* Training/leveling configurations for different frequency set points */
-+
-+	/* PI_CALVL_EN_F0 = 01b; PI_CALVL_EN_F1 = 01b; PI_CALVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_CALVL_EN_F0__REG, &regval);
-+	regval &= ~0x030303;
-+	regval |= 0x010101;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_CALVL_EN_F0__REG, regval);
-+
-+	/* PI_WRLVL_EN_F0 = 00b; PI_WRLVL_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_TDFI_CTRL_DELAY_F1__REG, &regval);
-+	regval &= ~0x03030000;
-+	regval |= 0x01000000;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_TDFI_CTRL_DELAY_F1__REG, regval);
-+
-+	/* PI_WRLVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WRLVL_EN_F2__REG, &regval);
-+	regval &= ~0x03;
-+	regval |= 0x01;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WRLVL_EN_F2__REG, regval);
-+
-+	/* PI_RDLVL_EN_F0 = 00b; PI_RDLVL_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, &regval);
-+	regval &= ~0x030003;
-+	regval |= 0x010000;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, regval);
-+
-+	/* PI_RDLVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, &regval);
-+	regval &= ~0x03;
-+	regval |= 0x01;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, regval);
-+
-+	/* PI_RDLVL_GATE_EN_F0 = 00b; PI_RDLVL_GATE_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, &regval);
-+	regval &= ~0x03000300;
-+	regval |= 0x01000000;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, regval);
-+
-+	/* PI_RDLVL_GATE_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, &regval);
-+	regval &= ~0x0300;
-+	regval |= 0x0100;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, regval);
-+
-+	/* PI_WDQLVL_EN_F0 = 00b */
-+	k3_ddrss_clr_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F0__REG, (0x3 << 8));
-+
-+	/* PI_WDQLVL_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F1__REG, &regval);
-+	regval &= ~(0x3 << 24);
-+	regval |= (0x1 << 24);
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F1__REG, regval);
-+
-+	/* PI_WDQLVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F2__REG, &regval);
-+	regval &= ~(0x3 << 8);
-+	regval |= (0x1 << 8);
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F2__REG, regval);
-+
-+	*(unsigned int *)PLL12_CTRL |= 0x80000000;
-+	val = *(volatile unsigned int *)PLL12_CTRL;
-+
-+	if ((val & 0x80000000) != 0x80000000)
-+		val = *(volatile unsigned int *)PLL12_CTRL;
-+
-+	board_k3_ddrss_lpddr4_release_retention();
-+
-+	/* LPC_SR_PHYMSTR_EN */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__LPC_SR_CTRLUPD_EN__REG, (0x1 << 16));
-+	/* PI_START=1 */
-+	k3_ddrss_set_pi(ddrss, LPDDR4__PI_START__REG, 0x01);
-+	/* START=1 */
-+	k3_ddrss_set_ctl(ddrss, LPDDR4__START__REG, 0x01);
-+
-+	debug("%s: PPL12 = %x\n", __func__, *(volatile unsigned int *)PLL12_CTRL);
-+	ddrss->ddr_fhs_cnt = 5;
-+	k3_lpddr4_freq_update(ddrss);
-+	debug("%s: PPL12 = %x\n", __func__, *(volatile unsigned int *)PLL12_CTRL);
-+
-+	tmo = timer_get_us() + 100000;
-+	do {
-+		k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INT_STATUS__REG, &regval);
-+		debug("%s: DDRSS_PI_79 = %x\n", __func__, regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & (1 << 0)) == 0x00);
-+
-+	tmo = timer_get_us() + 4000;
-+	do {
-+		k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & (1 << 9)) == 0x00);
-+
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INT_STATUS__REG, &regval);
-+	debug("%s: PI interrupt status: 0x%08x\n", __func__, regval);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
-+	debug("%s: Controller interrupt status: 0x%08x\n", __func__, regval);
-+
-+	debug("%s: Successfully exited Retention\n", __func__);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__INT_ACK_0__REG, (0x1 << 10));
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__CKSRX_F1__REG, &regval);
-+	regval &= ~(0x7F << 24);
-+	regval |= (0x2 << 24); // set low power mode exit
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__CKSRX_F1__REG, regval);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+
-+	/* wait until low power operation has been completed */
-+	tmo = timer_get_us() + 4000;
-+	do {
-+		k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & (0x1 << 10)) == 0);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__INT_ACK_0__REG, (0x1 << 10));
-+
-+	/*
-+	 * bit 6 / 14 -- lp_state valid
-+	 * bits 13:8 / 5:0 0x0F SRPD Long with Mem and Controller Clk Gating
-+	 */
-+	tmo = timer_get_us() + 4000;
-+	do {
-+		k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & 0x4F4F) != 0x4040);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+}
-+#endif /* CONFIG_K3_J721E_DDRSS */
-+
- void k3_lpddr4_probe(struct k3_ddrss_desc *ddrss)
+ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
  {
- 	u32 status = 0U;
-@@ -637,6 +937,13 @@ static int k3_ddrss_probe(struct udevice *dev)
+ 	typedef void __noreturn (*image_entry_noargs_t)(void);
+@@ -235,6 +241,32 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
  	if (ret)
- 		return ret;
+ 		panic("rproc failed to be initialized (%d)\n", ret);
  
-+#if defined(CONFIG_K3_J721E_DDRSS)
 +	if (board_is_resuming()) {
-+		k3_ddrss_lpddr4_exit_retention(ddrss);
-+		return 0;
++#if IS_ENABLED(CONFIG_SOC_K3_J721E)
++		if (!valid_elf_image(LPM_DM_SAVE))
++			panic("%s: DM-Firmware image is not valid, it cannot be loaded\n",
++			      __func__);
++
++		loadaddr = load_elf_image_phdr(LPM_DM_SAVE);
++
++		/*
++		 * Check if the start address of TF-A is in DRAM.
++		 * If not it means TF-A was running in SRAM, so it shall be
++		 * restored.
++		 */
++		if (*(ulong *)(LPM_BL31_START_SAVE) < CFG_SYS_SDRAM_BASE)
++			memcpy((void *)*(uintptr_t *)(LPM_BL31_START_SAVE),
++			       (void *)LPM_BL31_SAVE, BL31_SIZE);
++
++		ret = rproc_load(1, *(ulong *)(LPM_BL31_RESUME_SAVE), BL31_SIZE);
++		if (ret)
++			panic("%s: ATF failed to load on rproc (%d)\n", __func__, ret);
++
++		debug("%s: jumping to address %x\n", __func__, loadaddr);
++		goto start_arm64;
++#endif
 +	}
++
+ 	init_env();
+ 
+ 	if (!fit_image_info[IMAGE_ID_DM_FW].image_start) {
+@@ -250,6 +282,10 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+ 		fit_image_info[IMAGE_ID_ATF].image_start =
+ 			spl_image->entry_point;
+ 
++#if IS_ENABLED(CONFIG_SOC_K3_J721E)
++	*(uintptr_t *)(LPM_BL31_START_SAVE) = fit_image_info[IMAGE_ID_ATF].image_start;
 +#endif
 +
- 	k3_lpddr4_start(ddrss);
+ 	ret = rproc_load(1, fit_image_info[IMAGE_ID_ATF].image_start, 0x200);
+ 	if (ret)
+ 		panic("%s: ATF failed to load on rproc (%d)\n", __func__, ret);
+@@ -289,8 +325,18 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
+ 		loadaddr = load_elf_image_phdr(loadaddr);
+ 	} else {
+ 		loadaddr = fit_image_info[IMAGE_ID_DM_FW].image_start;
+-		if (valid_elf_image(loadaddr))
++		if (valid_elf_image(loadaddr)) {
+ 			loadaddr = load_elf_image_phdr(loadaddr);
++#if IS_ENABLED(CONFIG_SOC_K3_J721E)
++			if (fit_image_info[IMAGE_ID_DM_FW].image_len > (BUFFER_ADDR - LPM_DM_SAVE))
++				log_warning("%s\n: Not enough space to save DM-Firmware",
++					    __func__);
++			else
++				memcpy((void *)LPM_DM_SAVE,
++				       (void *)fit_image_info[IMAGE_ID_DM_FW].image_start,
++					   fit_image_info[IMAGE_ID_DM_FW].image_len);
++#endif
++		}
+ 	}
  
- 	if (ddrss->ti_ecc_enabled) {
+ 	debug("%s: jumping to address %x\n", __func__, loadaddr);
+diff --git a/arch/arm/mach-k3/include/mach/j721e_spl.h b/arch/arm/mach-k3/include/mach/j721e_spl.h
+index e8947917a6..8e0f141ed6 100644
+--- a/arch/arm/mach-k3/include/mach/j721e_spl.h
++++ b/arch/arm/mach-k3/include/mach/j721e_spl.h
+@@ -42,4 +42,32 @@
+ #define K3_PRIMARY_BOOTMODE		0x0
+ #define K3_BACKUP_BOOTMODE		0x1
+ 
++/* Starting buffer address is 1MB before the stack address in DDR */
++#define BUFFER_ADDR (CONFIG_SPL_STACK_R_ADDR - SZ_1M)
++
++/* This is actually the whole size of the SRAM */
++#define BL31_SIZE    0x20000
++
++/* This address belongs to a reserved memory region for the point of view of
++ * Linux, U-boot SPL must use the same address to restore TF-A and resume
++ * entry point address
++ */
++#define LPM_SAVE		0xA5000000
++#define LPM_BL31_SAVE		LPM_SAVE
++#define LPM_BL31_RESUME_SAVE	LPM_BL31_SAVE + BL31_SIZE
++#define LPM_BL31_START_SAVE	LPM_BL31_RESUME_SAVE + __SIZEOF_POINTER__
++#define LPM_DM_SAVE		LPM_BL31_START_SAVE  + __SIZEOF_POINTER__
++
++/* Check if the copy of TF-A and DM-Firmware in DRAM does not overlap an
++ * over memory section.
++ * The resume address of TF-A is also saved in DRAM.
++ * At build time we don't know the DM-Firmware size, so we keep 512k to
++ * save it.
++ */
++#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_TARGET_J7200_R5_EVM)
++#if ((LPM_DM_SAVE + SZ_512K) > BUFFER_ADDR)
++#error Not enough space to save DM-Firmware, TF-A and context for S2R
++#endif
++#endif
++
+ #endif
+diff --git a/arch/arm/mach-k3/sysfw-loader.c b/arch/arm/mach-k3/sysfw-loader.c
+index 9be2d9eaea..e6d452e590 100644
+--- a/arch/arm/mach-k3/sysfw-loader.c
++++ b/arch/arm/mach-k3/sysfw-loader.c
+@@ -84,13 +84,16 @@ static bool sysfw_loaded;
+ static void *sysfw_load_address;
+ 
+ /*
+- * Populate SPL hook to override the default load address used by the SPL
+- * loader function with a custom address for SYSFW loading.
++ * Populate SPL hook to override the default load address used by the
++ * SPL loader function with a custom address for SYSFW loading. In
++ * other case use also a custom address located in a reserved memory
++ * region. It ensures that Linux memory won't be corrupted by SPL during
++ * suspend to ram.
+  */
+ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+ {
+ 	if (sysfw_loaded)
+-		return (struct legacy_img_hdr *)(CONFIG_TEXT_BASE + offset);
++		return (struct legacy_img_hdr *)(BUFFER_ADDR + offset);
+ 	else if (sysfw_load_address)
+ 		return sysfw_load_address;
+ 	else
 -- 
 2.39.2
 
