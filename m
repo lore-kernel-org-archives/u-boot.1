@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36ADCC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 23:35:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE7DC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 23:50:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D6EB876B5;
-	Wed,  8 Nov 2023 00:35:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 924FE87694;
+	Wed,  8 Nov 2023 00:50:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="otIsiLgE";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="C/wJMqvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC2A1875FC; Wed,  8 Nov 2023 00:35:32 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD409876DC
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 00:35:20 +0100 (CET)
+ id 2702E876B5; Wed,  8 Nov 2023 00:50:15 +0100 (CET)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id 7145B8761A
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 00:50:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-41cd4cc515fso42941861cf.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 15:35:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699400110; x=1700004910; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cRAfuF5iWz6jNd0jUFQcizWvkmEkzmUFH+zECNI0AG4=;
- b=otIsiLgEdHbxePihHm4+lCeH0eIY1NI8Y9j5Ca+iBTowWZJd2Mxx5CoxiWwXiiFGmA
- 8MNUPYSmUJDkWZYqt5nIMxZrGhbQT3/qRJmFm4+wGssljwISh6A/ehJXREmk4G3REkjI
- 4hqiXrbP1jIQ8ux7jBygdkdc0eT0uLS9eLpUU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699400110; x=1700004910;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cRAfuF5iWz6jNd0jUFQcizWvkmEkzmUFH+zECNI0AG4=;
- b=o1dgmCroJQyT5fNKaCoS0YvbRbMOGh/LD7VarGBoV93nPOu5ilTpSVywAIdG1+Xclw
- g6Tg2qCkQOFPHn3Andyf9C+AQlW4aC/E/O68nids4dc6OuQwJAdYaXOyw+CB/mPDyxpg
- r/vY6cxnj5r5Lx57ofDl9kEAuzJVVjzS9RJK+fT958sqMNak8bVNLI7ul3Umqkz7VNs+
- W9y6JV7cT1u4u+VXnv+SQqHCGf+itkR4g/6Y3KJ8JGbsaEQa7XPqImCu42MqW/XHxvwW
- onrIM/52T2TE/1kV9CkYepVbkZ+sF8IKYbxULs14hCjDSxQpAxhl8GXLuZv5ymfLJcjs
- R/RQ==
-X-Gm-Message-State: AOJu0YzUe16YHjQjmhK/tYL/xBMvyw/uIdM/Ar4KTH2u8WIrcN+if/ne
- tMYfpcodzvsDyemyhB1vWoKqfRtE1GfzpDVKwPtn/Q==
-X-Google-Smtp-Source: AGHT+IGXMl4XJ8GAVO/x9dVV/x1vqfP+EYyfwCu4ey/hqu7k/3ekt8PIjiDpx9t8qrbyoiqx2wSnaQ==
-X-Received: by 2002:a0c:b214:0:b0:66d:6526:d605 with SMTP id
- x20-20020a0cb214000000b0066d6526d605mr206399qvd.63.1699400110341; 
- Tue, 07 Nov 2023 15:35:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
- [2603:6081:7b00:6400:5409:8f3c:5603:314])
- by smtp.gmail.com with ESMTPSA id
- j8-20020ad453a8000000b0064c1b27bf2dsm400222qvv.140.2023.11.07.15.35.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 15:35:09 -0800 (PST)
-Date: Tue, 7 Nov 2023 18:35:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: Re: [v5 02/30] buildman: Use oldconfig when adjusting the config
-Message-ID: <20231107233508.GA690448@bill-the-cat>
-References: <20231026183138.636948-1-trini@konsulko.com>
- <20231026183138.636948-2-trini@konsulko.com>
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from [10.7.98.35] (unknown [167.220.24.35])
+ by linux.microsoft.com (Postfix) with ESMTPSA id AB36A20B74C0;
+ Tue,  7 Nov 2023 15:50:07 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com AB36A20B74C0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1699401008;
+ bh=g2K/COOjn4b6WCdwM19MHQpAq5LJo3gtRHqMT73bhS4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=C/wJMqvoRF6eQKfELFtQ7eRiuwTa2EUel3LHtak8uEpu7KQBMf/KfJ+gkBViZMCYo
+ t0zZlRMej6bLEzE4XpUMEfbROys3FlMF/La8eaOMWX4tkILbiClOpR9nyz2CTokjJv
+ Y4anqx+rdK6cIexVWZAGaSJpC1LFAXjgSO+yf4kc=
+Message-ID: <b058f5a6-52e2-4e0c-a193-30e884b2463a@linux.microsoft.com>
+Date: Tue, 7 Nov 2023 15:50:06 -0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Y8K/MYCvNAifz7/3"
-Content-Disposition: inline
-In-Reply-To: <20231026183138.636948-2-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
+Content-Language: en-GB
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
+ <20231024002159.74477-2-seanedmond@linux.microsoft.com>
+ <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+ <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
+ <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
+From: Sean Edmond <seanedmond@linux.microsoft.com>
+In-Reply-To: <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,43 +70,182 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Y8K/MYCvNAifz7/3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2023-11-04 12:53 a.m., Heinrich Schuchardt wrote:
+> On 11/4/23 03:03, Sean Edmond wrote:
+>>
+>> On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
+>>> On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
+>>>> From: Sean Edmond <seanedmond@microsoft.com>
+>>>>
+>>>> Allow dhcp server pass pxe config file full path by using option 209
+>>>>
+>>>> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+>>>> ---
+>>>>   cmd/Kconfig |  4 ++++
+>>>>   cmd/pxe.c   | 10 ++++++++++
+>>>>   net/bootp.c | 21 +++++++++++++++++++++
+>>>>   3 files changed, 35 insertions(+)
+>>>>
+>>>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>>>> index 5bc0a92d57..adbb1a6187 100644
+>>>> --- a/cmd/Kconfig
+>>>> +++ b/cmd/Kconfig
+>>>> @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
+>>>>       default 0x15 if ARM
+>>>>       default 0x0 if X86
+>>>>
+>>>> +config BOOTP_PXE_DHCP_OPTION
+>>>> +    bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
+>>>> +    depends on BOOTP_PXE
+>>>
+>>> Why should this be disabled by default?
+>>>
+>>> Do we really want a separate config variable?
+>>>
+>> I expect most won't use this option to get the file path (they'll use
+>> the default paths as per the PXE specification).  It makes more sense
+>> for me to keep it optional, like many of the other options?
+>
+> RFC 5701 seems to require this option. Hence we should make it default
+> yes. Boards that have a build size issue can opt out.
 
-On Thu, Oct 26, 2023 at 02:31:10PM -0400, Tom Rini wrote:
+The PXELINUX specification 
+(https://wiki.syslinux.org/wiki/index.php?title=PXELINUX) doesn't state 
+that option 209 is required. In the abense of option 209, PXELINUX will 
+try the following default configuration files (this example is provided 
+on the wiki link):
+  /mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
+  /mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
+  /mybootdir/pxelinux.cfg/C0A8025B
+  /mybootdir/pxelinux.cfg/C0A8025
+  /mybootdir/pxelinux.cfg/C0A802
+  /mybootdir/pxelinux.cfg/C0A80
+  /mybootdir/pxelinux.cfg/C0A8
+  /mybootdir/pxelinux.cfg/C0A
+  /mybootdir/pxelinux.cfg/C0
+  /mybootdir/pxelinux.cfg/C
+  /mybootdir/pxelinux.cfg/default
 
-> From: Simon Glass <sjg@chromium.org>
->=20
-> We cannot be sure that the new config is consistent, particularly when
-> changing a major item like CONFIG_CMDLINE. Use 'make oldconfig' to
-> check that and avoid any such problems.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+If 209 is requested/provided it tries the provided "config file" before 
+the default paths.  RFC 5071 should be seen as an extension for PXELINUX 
+(not a requirement).  RFC 5071 only states "The Config File Option MUST 
+be supplied by the DHCP server if it appears on the Parameter Request List".
 
-For this and the rest of this series (patch 1 is already applied),
-applied to u-boot/next, thanks!
-
---=20
-Tom
-
---Y8K/MYCvNAifz7/3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVKyawACgkQFHw5/5Y0
-tywhrQwAiaxFbPfWZR6RloyOJpNYz6fX62am+RFgFVmCLVAJ6NVCOgJlIxf/70qg
-4v3Kd7eNmNBS+Da3x2/5dx6DKvq8PMNCGe6rXtVWUpwlCL0LC/QRITyExXWrgdAl
-cKRHCkJT5/nJVYV7NXAA3Cf92gO5lX99JCI0tomxcNBiRQjwSHyRpbAvMRNBUr8m
-/dRoawrzFZ9VQuJ/c1uFJm1nFrK/GU2qn+L+Ay+flDicd8Zcud9bH8ztVaLrve9O
-Ts3JXPu/n6PqFc2t+menMzf7tFUIljL5+jbcMa20mdz7tUwPNjFEWAzUdVcrWakh
-iUafUUn3KgCRfPNZ44XRnox7/Ete8vIY3Y8GYWooaAhM/lkdHl99L8+Z33s7CU4e
-qM9tmNpk/h2RYqRT91CHAq8SPpiVwmx+qBZ8B54ygPRI9VYTx1TjWM14zd0rhnXl
-fY3B7Zs0LUI/LTslmKW/T3p6ct35BXh+KiEkEv3u7haKTCnvEgCwgXiLKCGth3Pa
-VGrCUFrN
-=6q68
------END PGP SIGNATURE-----
-
---Y8K/MYCvNAifz7/3--
+>
+> Best regards
+>
+> Heinrich
+>
+>>>> +
+>>>>   config BOOTP_VCI_STRING
+>>>>       string
+>>>>       depends on CMD_BOOTP
+>>>> diff --git a/cmd/pxe.c b/cmd/pxe.c
+>>>> index 704589702f..9404f44518 100644
+>>>> --- a/cmd/pxe.c
+>>>> +++ b/cmd/pxe.c
+>>>> @@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context
+>>>> *ctx, unsigned long pxefile_a
+>>>>       int ret = get_pxe_file(ctx, pxelinux_configfile, 
+>>>> pxefile_addr_r);
+>>>>
+>>>>       free(pxelinux_configfile);
+>>>> +    /* set to NULL to avoid double-free if DHCP is tried again */
+>>>> +    pxelinux_configfile = NULL;
+>>>>
+>>>>       return ret;
+>>>>   }
+>>>> @@ -141,6 +143,14 @@ int pxe_get(ulong pxefile_addr_r, char
+>>>> **bootdirp, ulong *sizep, bool use_ipv6)
+>>>>                 env_get("bootfile"), use_ipv6))
+>>>>           return -ENOMEM;
+>>>>
+>>>> +    if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION) &&
+>>>> +        pxelinux_configfile && !use_ipv6) {
+>>>> +        if (pxe_dhcp_option_path(&ctx, pxefile_addr_r) > 0)
+>>>> +            goto done;
+>>>> +
+>>>> +        goto error_exit;
+>>>> +    }
+>>>> +
+>>>>       if (IS_ENABLED(CONFIG_DHCP6_PXE_DHCP_OPTION) &&
+>>>>           pxelinux_configfile && use_ipv6) {
+>>>>           if (pxe_dhcp_option_path(&ctx, pxefile_addr_r) > 0)
+>>>> diff --git a/net/bootp.c b/net/bootp.c
+>>>> index 7b0f45e18a..6800290963 100644
+>>>> --- a/net/bootp.c
+>>>> +++ b/net/bootp.c
+>>>> @@ -26,6 +26,7 @@
+>>>>   #ifdef CONFIG_BOOTP_RANDOM_DELAY
+>>>>   #include "net_rand.h"
+>>>>   #endif
+>>>> +#include <malloc.h>
+>>>>
+>>>>   #define BOOTP_VENDOR_MAGIC    0x63825363    /* RFC1048 Magic 
+>>>> Cookie */
+>>>>
+>>>> @@ -601,6 +602,10 @@ static int dhcp_extended(u8 *e, int
+>>>> message_type, struct in_addr server_ip,
+>>>>       *e++  = 42;
+>>>>       *cnt += 1;
+>>>>   #endif
+>>>> +    if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+>>>> +        *e++ = 209;    /* PXELINUX Config File */
+>>>> +        *cnt += 1;
+>>>> +    }
+>>>>       /* no options, so back up to avoid sending an empty request
+>>>> list */
+>>>>       if (*cnt == 0)
+>>>>           e -= 2;
+>>>> @@ -909,6 +914,22 @@ static void dhcp_process_options(uchar *popt,
+>>>> uchar *end)
+>>>>                   net_boot_file_name[size] = 0;
+>>>>               }
+>>>>               break;
+>>>> +        case 209:    /* PXELINUX Config File */
+>>>
+>>> This 209 appears in multiple places. Please, define a constant, e.g.
+>>> DHCP_OPTION_CONFIG_FILE, in bootp.h and use the symbolic name. Please,
+>>> document the constant referring to RFC 5071.
+>> fixed in v3.
+>>>
+>>>> +            if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
+>>>> +                /* In case it has already been allocated when get
+>>>> DHCP Offer packet,
+>>>> +                 * free first to avoid memory leak.
+>>>> +                 */
+>>>> +                if (pxelinux_configfile)
+>>>> +                    free(pxelinux_configfile);
+>>>> +
+>>>> +                pxelinux_configfile = (char *)malloc((oplen + 1) *
+>>>> sizeof(char));
+>>>> +
+>>>> +                if (pxelinux_configfile)
+>>>> +                    strlcpy(pxelinux_configfile, popt + 2, oplen + 
+>>>> 1);
+>>>> +                else
+>>>> +                    printf("Error: Failed to allocate
+>>>> pxelinux_configfile\n");
+>>>
+>>> We do the same in dhcp6_parse_options(). Please, factor out a common
+>>> function to avoid code duplication.
+>> I would prefer to keep these seperate for several reasons:
+>> - our DHCP server team has asked for the DHCP6 "pxe config file" parsing
+>> to change.  I attempted to add to upstream here:
+>> https://lore.kernel.org/u-boot/20230725231329.5653-1-seanedmond@linux.microsoft.com/. 
+>> I will attempt to submitted that patch again
+>> - PXE config file isn't standardized yet for DHCPv6 (the current
+>> implementation was a proposal from our DHCP server team)
+>> - LWIP will eventually superceed bootp.c in u-boot, but we'll probably
+>> be keeping dhcpv6.c for a bit (keeping the duplicate code will make the
+>> migration easier)
+>>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>>
+>>>> +            }
+>>>> +            break;
+>>>>           default:
+>>>>   #if defined(CONFIG_BOOTP_VENDOREX)
+>>>>               if (dhcp_vendorex_proc(popt))
