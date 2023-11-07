@@ -4,77 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D54C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 19:46:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3179CC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 19:56:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CE6D875DF;
-	Tue,  7 Nov 2023 20:46:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6239D875EF;
+	Tue,  7 Nov 2023 20:56:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hwn+A78b";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KLSJElrG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2081875ED; Tue,  7 Nov 2023 20:46:44 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 3F4718712E; Tue,  7 Nov 2023 19:57:25 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 917CA87564
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 20:46:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F0E7875A9
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 19:57:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6707401e1edso37193066d6.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 11:46:42 -0800 (PST)
+ spf=pass smtp.mailfrom=rathore4u@gmail.com
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-9e28724ac88so149230766b.2
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 10:57:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699386401; x=1699991201; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0Ktgj3vTXfyCyvJ5rAHSPg6DTV3Iuj5mEtx3vEiJPus=;
- b=Hwn+A78bRgpJTj7zH+IvWnmxVE6dIKe7+2ecc5ymk5I9fO7z3K1uSktMRO3NJzheCQ
- /QC0lfEzsBBOunKi6p0bCBcSmu2KSGUv5zadsvw8yaE93D1dzQTJ70mrATXKJRI98poZ
- a+nPB70F6uCPAFz9heonZeRuLfytSAvEcz4EU=
+ d=gmail.com; s=20230601; t=1699383442; x=1699988242; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=5yzEWM4B6OuBweUz+jIcxS+UspEEQ8771VAvy/JOfR8=;
+ b=KLSJElrGmo1ThXGkBq4jF9QK2tW2Q7q+k99r544katooEbW3ezl0bDWq0Ec2wQTVUM
+ FP1WFvso5asSrb6k65knEN3UORbWuU6wrny1t1fROw1hW5/eJMLNR3CmnKVypE9t5ftk
+ jwpHGo89pjs6kkjpkehQUyqIfq283XCUXuXlC7qgE5waZ3M+am+MiHfNRZdN7mdvYL2C
+ hwB97mYUMXfQ+7pBtKBsiYFAeEc8emYdDzO2atXvhKotmJKlnAQegiRQJw6FJ8S1TesO
+ q3oW7SRwV/Qe2Omvizvlb3hckD/CXBPYB5V643dPB6vlStcLlVCYOO/lNszahke2OrjQ
+ JdWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699386401; x=1699991201;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0Ktgj3vTXfyCyvJ5rAHSPg6DTV3Iuj5mEtx3vEiJPus=;
- b=myHjri0KCZnFJ6YlcwPZ81t7YYdSgRipQ5FfJEi7D03NCj9Vg5KzFexNKyBk2wSiUC
- DIDSia73drFS9x6o1ua9JJZzxvZ99sE1aqKJGiaRFzcV/Giwqq94uWytS1gEe/EgNkaP
- o69EWRh1NuyzdXZz+G387H7FKmDlKi8AmMJUcfi+JbslskfrzU8iq6nRPdH8ZQAmvg9C
- sOtKUP7SUEeEXlv1BOyF1SewbBY0HmgBAPoHW7oAgxoc/LXsu3A46nky8omHXqvKT/l3
- P4AHteIdMhkPxisn1iHwVplEkjHEon8uQOQLbpPFmxM+aeKa0wSw8y09t3Zn65jFOvKn
- 6eGQ==
-X-Gm-Message-State: AOJu0Yyw2CoQp3cACOz8OSVO1ssK7iKYQVv8iFec9td2MNHX+jXhCHKC
- wRztdGbVuBxfIYkxYUuwYISsv6OAyY3BPyWF59emXw==
-X-Google-Smtp-Source: AGHT+IF9uKrh2fcWZ4rE2A0jWEbj6U17FUP/dW0o9NE/lfJyc2bR2V6Mt0s00Prk5C+dpoa9Np3pmA==
-X-Received: by 2002:a05:6214:f6c:b0:671:739e:e2fa with SMTP id
- iy12-20020a0562140f6c00b00671739ee2famr34558733qvb.59.1699386401202; 
- Tue, 07 Nov 2023 11:46:41 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-2fee-489d-8907-1a68.res6.spectrum.com.
- [2603:6081:7b00:6400:2fee:489d:8907:1a68])
- by smtp.gmail.com with ESMTPSA id
- mx4-20020a0562142e0400b0066d132b1c8bsm213816qvb.102.2023.11.07.11.46.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 11:46:40 -0800 (PST)
-Date: Tue, 7 Nov 2023 14:46:39 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] xilinx patches for v2024.01-rc3
-Message-ID: <20231107194639.GO6601@bill-the-cat>
-References: <c57462d6-33cd-4f16-87c8-a83de771fdf7@monstr.eu>
+ d=1e100.net; s=20230601; t=1699383442; x=1699988242;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5yzEWM4B6OuBweUz+jIcxS+UspEEQ8771VAvy/JOfR8=;
+ b=UbRXfX/tv9Uh3rD7N3Bz/uclxZfbFjOCNoWFN4ZZBdlAbWOUoPNAEudN/EVBzHtFNB
+ VnUhzoYonkGA1HQLnFl7B+t+G/fbuYtZvvaLdsBoHPvx0Vu2mtAb2Wjur0j+eJSWouIv
+ HixHZ+TNR5d+x+MN1S2tiI7htk8Ub+pgXrTFLnrQn9FyMWDcIP0jXJ8tuU/SDjyayHGZ
+ Xno7TOclJdG7wk/qX2PE1T2r7ZJ+VTTfyHt26Kko7AM3pHqUBerB/6DzezH3ebouMIwG
+ kj684eQXITXkUBUiJ3LMxHJm8/bmUBSQ3Q2TPhBkilckK0xRJ4HdspNh66C2JGmvZv1b
+ VMjQ==
+X-Gm-Message-State: AOJu0YwmE0owRu4h508BIxCqSAdXIDCABC+yNviejFBwc/8z/FwiNLYP
+ 4ETZ6XiqqQcJusO1wyvMlR/V9gLRpzXdzx18fUJyYws6MJU=
+X-Google-Smtp-Source: AGHT+IHYAgGlE0XKh88Wk7LmWiomok8y7zzs/FwKy6r82ZqDoBSRXdFfUrYgNiteVt+J5+aHFS2SPn0U6ZmlRDPQCjo=
+X-Received: by 2002:a17:906:7309:b0:9d2:414c:b92 with SMTP id
+ di9-20020a170906730900b009d2414c0b92mr17963654ejc.68.1699383442302; Tue, 07
+ Nov 2023 10:57:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/O7Zofcq5fBzSxCj"
-Content-Disposition: inline
-In-Reply-To: <c57462d6-33cd-4f16-87c8-a83de771fdf7@monstr.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Shantur Rathore <shantur.rathore@gmail.com>
+Date: Tue, 7 Nov 2023 18:57:11 +0000
+Message-ID: <CAHc5_t2RP2LB=4GAdKWdckzXwiWUpAGY4T1UCu=YuJQgFWo4Qg@mail.gmail.com>
+Subject: rockpro64 rk3399 dwc3 issue
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Tue, 07 Nov 2023 20:56:12 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,67 +82,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---/O7Zofcq5fBzSxCj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I am trying to boot OS via USB3.0 ports on RK3399 base RockPro64.
+U-boot is failing to detect the drive in the USB3.0 port.
 
-On Tue, Nov 07, 2023 at 04:31:23PM +0100, Michal Simek wrote:
+If I boot linux through other mediums the drive is detected and works fine.
+Can anyone please help me figure out the issue?
 
-> Hi Tom,
->=20
-> please pull these patches to your tree. Most of them are dt related to
-> aligned our dts in u-boot with dt-schema and fix issues around it.
-> There are small updates out in spi to fix 64bit support and allow disable
-> flash locking code to save some space for our mini configurations.
-> And last change was related to reading baudrate from DT which was ack by =
-Simon.
-> There are some other things pending but not ready yet that's why I wanted=
- to
-> get these patches merged to have more time for testing.
-> Gitlab CI is not showing any issue too.
->=20
-> Thanks,
-> Michal
->=20
-> The following changes since commit 3af0e9556c968fc2c40e3778d8f1e668a90af9=
-2e:
->=20
->   Prepare v2024.01-rc2 (2023-11-06 14:47:25 -0500)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2024.01-rc3
->=20
-> for you to fetch changes up to 37f500d711ec1f6b25189c1f6022ffe5e70a38ab:
->=20
->   dt-bindings: Remove VSC8531 specific RGMII delay definitions (2023-11-07
-> 13:47:09 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---/O7Zofcq5fBzSxCj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVKlBkACgkQFHw5/5Y0
-tyxS6AwAnlepR1REWilMoUQYZ+AFqwjGntsqO7UqWVi/j0999sWiqM/3R2woK8RP
-hjWCHZQ7hH95awech0aZrP69kQINxS3mUVKdxPBdnV7P59wkttuLKTYihCVojtAG
-rem3eZcebnePjOIYV2LBMOAEE3nqOTxSoc11s4EpFoZPu9Fs6HbQHv/Ly2PT47BP
-ICZR/1yJ1LzfNZnPSEJFxleFVz6GEsFvpBItvfkXrMcZmhlL7lNDKt2u1ypMCwOy
-t5ElaG0hiUgA5pBIrYgkquoGjEXn38drZzvP8GgR4SM8dh4fDIlsZ5xZNwONlqjC
-t+//nT2gAWbArM+M1Kx1S7sOvkr8N3t5OQ2cwhwcsR90w95o+6FhY8HMXlqMXaL1
-RLmpV6VZ1pL5NZf4/iJlI09z7/vu+H/2eXj/DNMbDhYNkyX3tKkpOj/YJsZF1hki
-fuIi5/h+wo8nEwWeluxXTH0/h77dq3sDlf1YSbcuf9pdb+evbG5O1rU7sxVlNYY7
-1H4ab3AU
-=OtF8
------END PGP SIGNATURE-----
-
---/O7Zofcq5fBzSxCj--
+Kind regards,
+Shantur
