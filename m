@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5ECC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 14:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E06C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 14:30:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 059258715E;
-	Tue,  7 Nov 2023 15:29:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5CB3B8715E;
+	Tue,  7 Nov 2023 15:30:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZckKQvkj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ec0YBIJ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D1FB864E5; Tue,  7 Nov 2023 15:29:56 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 1BA86864E5; Tue,  7 Nov 2023 15:30:54 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A262871F5
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 15:29:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 93EC7864E5
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 15:30:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40859c466efso41750275e9.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 06:29:54 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5440f25dcc7so7594134a12.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 06:30:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699367393; x=1699972193; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JqbFgfkMJokpmyPyjaIzBN6QUUQrV+sfXOCzM/neoLU=;
- b=ZckKQvkj1x5ZJt6HtYwrD7raHuqwK9Rbs8QF7Cj4E94rqK0njK1Gjy3PRqav0D4EAY
- 5kmOk+b/IHiZET5MV0xNEZ3HwUVjUraTtfy0vjrL3khSqzCR1WULiNDM83e+5FohwnQJ
- jvCe+lBV2YMq8a8TQ5mgeSl1zCIr1JDCeaPcZxXnI+PBY5SgACkm83S/dISfvDsuvnO2
- W0pzVPz0r9uZTZI4rxnXInv8iHVwXnPArAT/BhzpGVhVD6Rz7zZwEOE9zcuoFIeS0WQe
- MaDpfgAVDZ5J25URjeJDXrLy0aAEsbRMwF8fRFlTrUOqNK0d9E05ZC+CKf11kWizlSN1
- akdQ==
+ d=chromium.org; s=google; t=1699367451; x=1699972251; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YlgIrrj4/tIxBuCvFFuU7dkzz8qwf+s/YvM9FpEFxKs=;
+ b=ec0YBIJ2d4tuBAg1fHlG8km6LH95iUv4ErfuC8/jgMh14omnu4LBdNzXFJ7MyYFjiN
+ 0kzb787kcw3CVBYxLa9ZnanoFb82ckAqfUpYCSQoMIM9bSBF1FLiVaDXafBG0OYT125c
+ 3vBU0fa0nV+VQDql+e7D/i3QhfGreaVVHQwjM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699367393; x=1699972193;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JqbFgfkMJokpmyPyjaIzBN6QUUQrV+sfXOCzM/neoLU=;
- b=RmJioHRn80BY7Jqk1740mJfnI27i76LOV6iMnvZl7m2ep8sEyRIBxtc5rW6ef+82JW
- Q4JH1QsPT5fZyCvGqt4LPk9DDFTLpl7MzxHLPteN+bTsY0KVW22dJOtYalohOY/HwsCC
- oq+kPPyKVVCgVQr7doy5Ycn3mfOwYpb1biT/PPQttiTAyy/CC0luAW57/3mVYu4AYgdp
- 1XHLCLt9dduuHep/gBFRg+Ft5GwNUi7tXRFJfEfX2oYHXD2aHv6Ou6kS7AuDO3NwulJz
- PZfZvjpQ6K4eEedVt5698x49zIkn4xArlMYe8mVU46Ju1OsVr7bqFVBatKVeGQouv3wi
- s9Kg==
-X-Gm-Message-State: AOJu0Yy+6tyiuWeS3Dl6HZmERYoWiSWebcCGSZ1ZVjhb+PZ+si2q/0TH
- kmv9jVIOIKUZ7ns9hK6R4rG8SQ==
-X-Google-Smtp-Source: AGHT+IHwKnxjgxYe3TI4DpX/YWrSH5nDIWaviuZFqBqX+gsWDdVtz8PFxcdBs2+8l2aWJzNa2hHNNg==
-X-Received: by 2002:a05:600c:3b20:b0:404:757e:c5ba with SMTP id
- m32-20020a05600c3b2000b00404757ec5bamr2459440wms.26.1699367393254; 
- Tue, 07 Nov 2023 06:29:53 -0800 (PST)
-Received: from [192.168.1.7] (host-92-25-138-185.as13285.net. [92.25.138.185])
- by smtp.gmail.com with ESMTPSA id
- ay8-20020a05600c1e0800b0040772138bb7sm16193404wmb.2.2023.11.07.06.29.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Nov 2023 06:29:52 -0800 (PST)
-Message-ID: <bf8287fa-27a3-45ba-93e9-5cc0772cf610@linaro.org>
-Date: Tue, 7 Nov 2023 14:29:52 +0000
+ d=1e100.net; s=20230601; t=1699367451; x=1699972251;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YlgIrrj4/tIxBuCvFFuU7dkzz8qwf+s/YvM9FpEFxKs=;
+ b=YI3YAggNffNIPKXPZmaP+EWF5LYfWM2ht/IGvsEYQTBOU7C+w5Arm66a8zM6YNcbc0
+ mGRqL1mKtZqu001x38gGyNEKQ5qhG9Vn8vNsOir80yLlRf1Xb8OWQs/wWoLHsGSEUWVF
+ vqGxc9ip4iF+cHsim3ydgq5uBjIGIDFE8y7wahSdxn5mOEPMgNDKpUQchc//mZ3P3YS3
+ yvliQXvbGXC2KJ37faKL/0Ewir5CUs3hFXyysTojbDzUOZwp2lKbRPnFMk6BPxlj1e1T
+ TdC6B5fN53J1VbalUfoAvdit28lLS+Uu2DMkaLXge7oLRuCE32OFqefH8tz+pi6i8A5p
+ ET/Q==
+X-Gm-Message-State: AOJu0YyUgOutRcdKeKrRWMyaknQlQhWUYBo5Z6uOFsEfavDG7SgXd/bO
+ tLajPXrsEneBlpm8WPCNsWPAGZUEfOioCtYmnYBMW15NmnB14UJ8Whsa8Q==
+X-Google-Smtp-Source: AGHT+IEWmalknnSYzN899Y+FVo+/SpygQ7Wkc/wppPTe9AOjiqoPdIeIsGYkURP9NGbSsTXOUxi+D2hwpnGcCI3Bjq8=
+X-Received: by 2002:a50:d6cf:0:b0:544:224b:a4d2 with SMTP id
+ l15-20020a50d6cf000000b00544224ba4d2mr10337640edj.0.1699367450763; Tue, 07
+ Nov 2023 06:30:50 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] gpio: qcom_pmic: rework pwrkey driver into a button
- driver
-Content-Language: en-US
-To: Stephan Gerhold <stephan@gerhold.net>
-Cc: Ramon Fried <rfried.dev@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-References: <20231106-b4-qcom-dt-compat-v1-0-0ccbb7841241@linaro.org>
- <20231106-b4-qcom-dt-compat-v1-2-0ccbb7841241@linaro.org>
- <ZUo7UDEVaPtHzWfk@gerhold.net>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <ZUo7UDEVaPtHzWfk@gerhold.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20231105200453.1887418-1-sjg@chromium.org>
+ <7a1345b9-8844-48e9-a1b5-8c7508cefeb1@prevas.dk>
+ <CAPnjgZ1BbpM_Ksr5aKg2zWLv1FPy-N_Kz6fbrkZoh=i7LfpMUA@mail.gmail.com>
+ <20231107130450.GA6601@bill-the-cat>
+ <CAPnjgZ0jFTG-Rq0u5yaMjSxcxdQvr578W2P+nzFx0g0GbQHjNQ@mail.gmail.com>
+ <20231107134946.GD6601@bill-the-cat>
+In-Reply-To: <20231107134946.GD6601@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 7 Nov 2023 07:30:33 -0700
+Message-ID: <CAPnjgZ2L62r2V7jtYGA2s6tKQsbYGj0q92BHhfo11UKKmWbLfg@mail.gmail.com>
+Subject: Re: [PATCH 0/4] bootm: Handle compressed arm64 images with bootm
+To: Tom Rini <trini@konsulko.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Marek Vasut <marex@denx.de>, Eddie James <eajames@linux.ibm.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marc Kleine-Budde <mkl@pengutronix.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>, 
+ Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>, 
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,416 +96,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Tue, 7 Nov 2023 at 06:49, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Nov 07, 2023 at 06:31:15AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 7 Nov 2023 at 06:04, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Nov 07, 2023 at 05:23:05AM -0700, Simon Glass wrote:
+> > > > Hi Rasmus,
+> > > >
+> > > > On Tue, 7 Nov 2023 at 02:56, Rasmus Villemoes
+> > > > <rasmus.villemoes@prevas.dk> wrote:
+> > > > >
+> > > > > On 05/11/2023 21.03, Simon Glass wrote:
+> > > > > > This little series corrects a problem I noticed with arm64 images,
+> > > > > > where the kernel is not recognised:
+> > > > >
+> > > > > The $subject is misleading, bootm works just fine with compressed arm64
+> > > > > images, with the type set to "kernel".
+> > > > >
+> > > > > >         Type:         Kernel Image (no loading done)
+> > > > > >         Compression:  gzip compressed
+> > > > >
+> > > > > Isn't that a non-sensical combination to begin with? Decompressing the
+> > > > > Image.gz kernel image to any location (however you determine that
+> > > > > destination) _is_ loading it.
+> > > >
+> > > > Yes, I agree.
+> > > >
+> > > > >
+> > > > > If you want XIP, obviously the image must be uncompressed in the FIT. I
+> > > > > don't understand what you're trying to do here.
+> > > >
+> > > > Hmmm, I think I have just got confused about all of this, perhaps
+> > > > because ChromeOS uses kernel_noload with compression. Is that an
+> > > > invalid combination?
+> > >
+> > > Yes, that sounds like an invalid combination.
+> > >
+> > > > But then how does loading actually work? We don't want to put the load
+> > > > address in the FIT, since we don't know what it is...we want to use
+> > > > the address provided by the board. Which is kernel_noload...so how
+> > > > should this be implemented?
+> > >
+> > > What do you mean, provided by the board? With kernel_noload we XIP the
+> > > payload, because the board provided (by loading us to) a safe place to
+> > > execute whatevers in there. In the olden days, that would mean (almost
+> > > certainly) the zImage which in turn was already compressed and
+> > > self-relocating. I know technically one could use the raw vmlinux
+> > > instead. With the Linux Kernel and ARCH=arm64 (and a few other arches
+> > > now too), they dropped the self-decompression part and the whole payload
+> > > must be decompressed. We handle this case in "booti" today by having to
+> > > have the board (via environment) say where to decompress to (and how
+> > > much space is available). Then we move it back to where we started from,
+> > > which is likely not necessary.
+> > >
+> > > Looking at
+> > > https://www.kernel.org/doc/html/latest/arch/arm64/booting.html and
+> > > https://www.kernel.org/doc/html/latest/riscv/boot-image-header.html
+> > > stating "we're just like arm64" we can do better than we do today for
+> > > this format of OS image. If aren't compressed, we only need to ensure
+> > > that we are correctly aligned and move (and tell the user) if not. We
+> > > can even put the 2MB check under some legacy kernel CONFIG option (3.17
+> > > is over 9 years old). With respect to automatic decompression, if we
+> > > don't have something telling us where a buffer is and we can't pull from
+> > > the environment, we should tell the user and stop?
+> >
+> > With the booti command, the kern_comp_addr_r and kern_comp_size vars
+> > are used. Perhaps I should update my patch to use those too?
+>
+> As a fallback, perhaps? But what do we do today in a FIT to handle
+> compression = "gzip" to know where to uncompress things to?
 
-On 07/11/2023 13:27, Stephan Gerhold wrote:
-> On Mon, Nov 06, 2023 at 08:57:30PM +0000, Caleb Connolly wrote:
->> The power and resin keys were implemented as GPIOs here, but their only
->> use would be as buttons. Avoid the additional layer of introspection and
->> rework this driver into a button driver.
->>
->> While we're here, replace the "qcom,pm8998-pwrkey" compatible with
->> "qcom,pm8941-pwrkey" to match upstream (Linux).
->>
->> The dragonboard410c and 820c boards are adjusted to benefit from this
->> change too, simplify their custom board init code.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> 
-> Thanks a lot for working on bringing the Qualcomm DTs in U-Boot closer
-> to Linux upstream! I agree that modelling the pwr/resin keys is better
-> than exposing tham as GPIOs.
-> 
-> I'm a bit confused about the actual diff in this patch series though.
-> Did you perhaps forget to make some changes you had planned or sent the
-> wrong version?
-> 
-> In particular:
-> 
->  - You talk about replacing the custom "qcom,pm8998-pwrkey" compatible
->    with "qcom,pm8941-pwrkey" to match upstream, but don't seem to adjust
->    the users (sdm845.dtsi)?
-> 
->  - sdm845.dtsi also uses GPIOs for PON, but you only update DB410c and
->    DB820c. Isn't SDM845 the platform you're testing on?
+In that case we decompress to the (kernel) load address in the FIT.
 
-Argh, yeah you're totally right, I have been testing in the context of
-upstream sdm845 DT and I forgot to pull in the individual changes for
-this series.
-> 
-> Some more comments below.
-> 
->> ---
->>  arch/arm/dts/dragonboard410c-uboot.dtsi          |  11 +-
->>  arch/arm/dts/dragonboard820c-uboot.dtsi          |   9 +-
->>  arch/arm/dts/dragonboard820c.dts                 |   3 -
->>  board/qualcomm/dragonboard410c/dragonboard410c.c |  29 ++--
->>  board/qualcomm/dragonboard820c/dragonboard820c.c |  29 ++--
->>  drivers/gpio/Kconfig                             |   3 +-
->>  drivers/gpio/qcom_pmic_gpio.c                    | 161 +++++++++++++++--------
->>  7 files changed, 139 insertions(+), 106 deletions(-)
->>
->> diff --git a/arch/arm/dts/dragonboard410c-uboot.dtsi b/arch/arm/dts/dragonboard410c-uboot.dtsi
->> index 3b0bd0ed0a1b..c96f1fcc8930 100644
->> --- a/arch/arm/dts/dragonboard410c-uboot.dtsi
->> +++ b/arch/arm/dts/dragonboard410c-uboot.dtsi
->> @@ -5,6 +5,9 @@
->>   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->>   */
->>  
->> +#include <dt-bindings/input/linux-event-codes.h>
->> +#include <dt-bindings/interrupt-controller/irq.h>
->> +
->>  / {
->>  
->>  	smem {
->> @@ -46,10 +49,14 @@
->>  
->>  &pm8916_pon {
->>  	key_vol_down {
->> -		gpios = <&pm8916_pon 1 0>;
->> +		interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
->> +		linux,code = <KEY_DOWN>;
->> +		label = "key_vol_down";
->>  	};
->>  
->>  	key_power {
->> -		gpios = <&pm8916_pon 0 0>;
->> +		interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
->> +		linux,code = <KEY_ENTER>;
->> +		label = "key_power";
->>  	};
->>  };
-> 
-> The upstream Linux DT looks like this:
-> 
-> 		pon@800 {
-> 			compatible = "qcom,pm8916-pon";
-> 			reg = <0x800>;
-> 			mode-bootloader = <0x2>;
-> 			mode-recovery = <0x1>;
-> 
-> 			pwrkey {
-> 				compatible = "qcom,pm8941-pwrkey";
-> 				interrupts = <0x0 0x8 0 IRQ_TYPE_EDGE_BOTH>;
-> 				debounce = <15625>;
-> 				bias-pull-up;
-> 				linux,code = <KEY_POWER>;
-> 			};
-> 
-> 			pm8916_resin: resin {
-> 				compatible = "qcom,pm8941-resin";
-> 				interrupts = <0x0 0x8 1 IRQ_TYPE_EDGE_BOTH>;
-> 				debounce = <15625>;
-> 				bias-pull-up;
-> 				linux,code = <KEY_VOLUME_DOWN>;
-> 			};
-> 		};
-> 
-> The new version you add is closer to upstream, but you also add a new
-> custom property called "label". You could just derive a unique label
-> from the node name ("pwrkey" vs "resin").
+>
+> > Do you understand what I am asking about, with bootm? It should be
+> > possible to ignore the load address. In fact, load addresses in FIT
+> > are mostly bad these days, IMO. If this is not kernel_noload, then
+> > what should we use?
+>
+> Well, your use case needs to be valid. I don't think "kernel_noload" is
+> valid with anything other than 'compression = "none"' because that's our
+> just execute things in place option. It's very dangerous to use and I
+> do not recall right now if we fixed the case where it will just let the
+> device tree be badly aligned and break the kernel, or if we say "no
+> load, but still fix THAT alignment". And your use case isn't "ignore the
+> load address" it's "ignore the load address and decompress the
+> payload(s)".  That needs _something_ to be known somehow. And I'm asking
+> how we do that today even, before saying we can or can't support
+> "kernel_noload" along with a compression of the payload.
 
-I just kinda followed what gpio-button does. I agree though this should
-be dropped and we can just use the node name.
-> 
-> For looking up the buttons in the DB410c/DB820c couldn't you just loop
-> over all buttons and find a suitable one based on button_get_code()?
-> 
-> I think having different *linux*,code values (KEY_POWER vs KEY_ENTER and
-> KEY_DOWN vs KEY_VOLUME_DOWN) is also a bit strange. If U-Boot wants
-> different key codes it's kind of not the Linux code anymore, might as
-> well call it "u-boot,code" then. :-)
+OK I see.
 
-Yeah, I don't really know what the right solution is here, in U-Boot we
-want to use these buttons as controls - like you would in ABL fastboot.
+>
+> > "provided by the board" means that the board knows the memory map, not
+> > the FIT, so only the board can provide the addresses to use for
+> > loading the kernel.
+>
+> To be clearer, where does the board document that knowledge and provide
+> it to be used? I'm not a super fan of environment variables especially
+> since we aren't always consistent with '_' or just nothing between
+> "words" of the variable. We have much better documentation these days
+> (once again, thanks everyone) so we can document environment variables
+> used here, and also what CONFIG options are used (as
+> CONFIG_SYS_BOOTM_LEN is part of the equation here and badly named as
+> been said in other threads about issues wrt decomp and overlap).
 
-> 
-> If KEY_POWER => KEY_ENTER and KEY_VOLUME_DOWN => KEY_DOWN is more useful
-> for U-Boot maybe that mapping could be done automatically in the code,
-> without having to change the real hardware description in the DT.
+I agree about env vars. We have CONFIG_SYS_LOAD_ADDR which seems like
+a better model to me.
 
-That sounds reasonable.
-> 
->> diff --git a/arch/arm/dts/dragonboard820c.dts b/arch/arm/dts/dragonboard820c.dts
->> index ad201d48749c..7db0cc9d64cc 100644
->> --- a/arch/arm/dts/dragonboard820c.dts
->> +++ b/arch/arm/dts/dragonboard820c.dts
->> @@ -112,9 +112,6 @@
->>  				pm8994_pon: pm8994_pon@800 {
->>  					compatible = "qcom,pm8994-pwrkey";
->>  					reg = <0x800 0x96>;
->> -					#gpio-cells = <2>;
->> -					gpio-controller;
->> -					gpio-bank-name="pm8994_key.";
->>  				};
-> 
-> Shouldn't we do the same change for pm8916_pon in db410c.dts?
+At the moment we have these, which have carried over from the
+distroboot scripts:
 
-Yes
-> 
->> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
->> index e5841f502953..3dbc02d83198 100644
->> --- a/drivers/gpio/qcom_pmic_gpio.c
->> +++ b/drivers/gpio/qcom_pmic_gpio.c
->> @@ -5,8 +5,10 @@
->>   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->>   */
->>  
->> +#include <button.h>
->>  #include <common.h>
->>  #include <dm.h>
->> +#include <dm/lists.h>
->>  #include <log.h>
->>  #include <power/pmic.h>
->>  #include <spmi/spmi.h>
->> @@ -275,107 +277,150 @@ U_BOOT_DRIVER(qcom_pmic_gpio) = {
->>  	.priv_auto	= sizeof(struct qcom_gpio_bank),
->>  };
->>  
->> +struct qcom_pmic_btn_priv {
->> +	u32 base;
->> +	u32 status_bit;
->> +	int code;
->> +	struct udevice *pmic;
->> +};
->>  
->>  /* Add pmic buttons as GPIO as well - there is no generic way for now */
->>  #define PON_INT_RT_STS                        0x10
->>  #define KPDPWR_ON_INT_BIT                     0
->>  #define RESIN_ON_INT_BIT                      1
->>  
->> -static int qcom_pwrkey_get_function(struct udevice *dev, unsigned offset)
->> +static enum button_state_t qcom_pwrkey_get_state(struct udevice *dev)
->>  {
->> -	return GPIOF_INPUT;
->> -}
->> +	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
->>  
->> -static int qcom_pwrkey_get_value(struct udevice *dev, unsigned offset)
->> -{
->> -	struct qcom_gpio_bank *priv = dev_get_priv(dev);
->> -
->> -	int reg = pmic_reg_read(dev->parent, priv->pid + PON_INT_RT_STS);
->> +	int reg = pmic_reg_read(priv->pmic, priv->base + PON_INT_RT_STS);
->>  
->>  	if (reg < 0)
->>  		return 0;
->>  
->> -	switch (offset) {
->> -	case 0: /* Power button */
->> -		return (reg & BIT(KPDPWR_ON_INT_BIT)) != 0;
->> -		break;
->> -	case 1: /* Reset button */
->> -	default:
->> -		return (reg & BIT(RESIN_ON_INT_BIT)) != 0;
->> -		break;
->> -	}
->> +	return (reg & BIT(priv->status_bit)) != 0;
->>  }
->>  
->> -/*
->> - * Since pmic buttons modelled as GPIO, we need empty direction functions
->> - * to trick u-boot button driver
->> - */
->> -static int qcom_pwrkey_direction_input(struct udevice *dev, unsigned int offset)
->> +static int qcom_pwrkey_get_code(struct udevice *dev)
->>  {
->> -	return 0;
->> -}
->> +	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
->>  
->> -static int qcom_pwrkey_direction_output(struct udevice *dev, unsigned int offset, int value)
->> -{
->> -	return -EOPNOTSUPP;
->> +	return priv->code;
->>  }
->>  
->> -static const struct dm_gpio_ops qcom_pwrkey_ops = {
->> -	.get_value		= qcom_pwrkey_get_value,
->> -	.get_function		= qcom_pwrkey_get_function,
->> -	.direction_input	= qcom_pwrkey_direction_input,
->> -	.direction_output	= qcom_pwrkey_direction_output,
->> -};
->> -
->>  static int qcom_pwrkey_probe(struct udevice *dev)
->>  {
->> -	struct qcom_gpio_bank *priv = dev_get_priv(dev);
->> -	int reg;
->> -	u64 pid;
->> +	struct button_uc_plat *uc_plat = dev_get_uclass_plat(dev);
->> +	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
->> +	int ret;
->> +	u64 base;
->>  
->> -	pid = dev_read_addr(dev);
->> -	if (pid == FDT_ADDR_T_NONE)
->> -		return log_msg_ret("bad address", -EINVAL);
->> +	/* Ignore the top-level button node */
->> +	if (!uc_plat->label)
->> +		return 0;
->>  
->> -	priv->pid = pid;
->> +	/* the pwrkey and resin nodes are children of the "pon" node, get the
->> +	 * PMIC device to use in pmic_reg_* calls.
->> +	 */
->> +	priv->pmic = dev->parent->parent;
->> +
->> +	base = dev_read_addr(dev);
->> +	if (!base || base == FDT_ADDR_T_NONE) {
->> +		/* Linux devicetrees don't specify an address in the pwrkey node */
->> +		base = dev_read_addr(dev->parent);
->> +		if (base == FDT_ADDR_T_NONE) {
->> +			printf("%s: Can't find address\n", dev->name);
->> +			return -EINVAL;
->> +		}
->> +	}
-> 
-> Is it worth introducing new code that supports non-standard Linux DTs?
-> Or do we need to stay compatible with old U-Boot DTs too? Would expect
-> those are always bundled together with U-Boot.
+https://u-boot.readthedocs.io/en/latest/develop/bootstd.html#environment-variables
 
-I've been aiming to minimise the number of changes made to db410c and
-db820c as I can't easily test on these boards... I don't think we need
-to worry about backwards compatibility - the DTB is usually built-in to
-the U-Boot image.
-> 
->> +
->> +	priv->base = base;
->>  
->>  	/* Do a sanity check */
->> -	reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
->> -	if (reg != 0x1)
->> -		return log_msg_ret("bad type", -ENXIO);
->> +	ret = pmic_reg_read(priv->pmic, priv->base + REG_TYPE);
->> +	if (ret != 0x1 && ret != 0xb) {
->> +		printf("%s: unexpected PMIC function type %d\n", dev->name, ret);
->> +		return -ENXIO;
->> +	}
->>  
->> -	reg = pmic_reg_read(dev->parent, priv->pid + REG_SUBTYPE);
->> -	if ((reg & 0x5) == 0)
->> -		return log_msg_ret("bad subtype", -ENXIO);
->> +	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
->> +	if ((ret & 0x7) == 0) {
->> +		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
->> +		//return -ENXIO;
-> 
-> I guess this shouldn't be commented out? :D
+So I think we should be using kern_comp_addr_r as the buffer to
+decompress to, with kernel_noload. But as you say, having env vars
+affect bootm (and boot ) is not ideal.
 
-Nope! Thanks for catching that
-> 
->> +	}
->> +
->> +	/* Bit of a hack, we use the interrupt number to derive if this is the pwrkey or resin
->> +	 * node, it just so happens to line up with the bit numbers in the interrupt status register
->> +	 */
->> +	ret = ofnode_read_u32_index(dev_ofnode(dev), "interrupts", 2, &priv->status_bit);
->> +	if (ret < 0) {
->> +		printf("%s: Couldn't read interrupts: %d\n", __func__, ret);
->> +		return ret;
->> +	}
->> +
->> +	ret = ofnode_read_u32(dev_ofnode(dev), "linux,code", &priv->code);
->> +	if (ret < 0) {
->> +		printf("%s: Couldn't read interrupts: %d\n", __func__, ret);
->> +		return ret;
->> +	}
->>  
->>  	return 0;
->>  }
->>  
->> -static int qcom_pwrkey_of_to_plat(struct udevice *dev)
->> +static int button_qcom_pmic_bind(struct udevice *parent)
->>  {
->> -	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
->> +	struct udevice *dev;
->> +	ofnode node;
->> +	int ret;
->>  
->> -	uc_priv->gpio_count = 2;
->> -	uc_priv->bank_name = dev_read_string(dev, "gpio-bank-name");
->> -	if (uc_priv->bank_name == NULL)
->> -		uc_priv->bank_name = "pwkey_qcom";
->> +	dev_for_each_subnode(node, parent) {
->> +		struct button_uc_plat *uc_plat;
->> +		const char *label;
->> +
->> +		if (!ofnode_is_enabled(node))
->> +			continue;
->> +
->> +		label = ofnode_read_string(node, "label");
->> +		if (!label) {
->> +			printf("%s: node %s has no label\n", __func__,
->> +			       ofnode_get_name(node));
->> +			/* Don't break booting, just print a warning and continue */
->> +			continue;
->> +		}
->> +		/* We need the PMIC device to be the parent, so flatten it out here */
->> +		ret = device_bind_driver_to_node(parent, "pwrkey_qcom",
->> +						 ofnode_get_name(node),
->> +						 node, &dev);
->> +		if (ret) {
->> +			printf("Failed to bind %s! %d\n", label, ret);
->> +			return ret;
->> +		}
->> +		uc_plat = dev_get_uclass_plat(dev);
->> +		uc_plat->label = label;
->> +	}
->>  
->>  	return 0;
->>  }
->>  
->> +static const struct button_ops button_qcom_pmic_ops = {
->> +	.get_state	= qcom_pwrkey_get_state,
->> +	.get_code	= qcom_pwrkey_get_code,
->> +};
->> +
->>  static const struct udevice_id qcom_pwrkey_ids[] = {
->>  	{ .compatible = "qcom,pm8916-pwrkey" },
->>  	{ .compatible = "qcom,pm8994-pwrkey" },
-> 
-> These are also qcom,pm8941-pwrkey upstream.
-> 
->> -	{ .compatible = "qcom,pm8998-pwrkey" },
->> +	{ .compatible = "qcom,pm8941-pwrkey" },
->> +	{ .compatible = "qcom,pm8998-pon" },
-> 
-> "qcom,pm8998-pon" is the outer container node for pwrkey+resin, while
-> "qcom,pm8941-pwrkey" is the actual power button. Why are both here next
-> to each other?
+Another thing we need to clarify is what kernel_noload means. I have
+taken it to mean 'ignore the load address in the FIT', not 'no loading
+is done', since if compression is enabled, we have to load it to
+somewhere.
 
-This is a bit of a U-Boot trick, if you look in the probe function
-you'll see the comment "Ignore the top-level button node". Basically the
-same Driver is used to handle the NOP parent node and the children.
-Otherwise I would have to add a new driver with UCLASS_NOP just to
-handle the pon node and bind the children.
-> 
->>  	{ }
->>  };
->>  
->>  U_BOOT_DRIVER(pwrkey_qcom) = {
->>  	.name	= "pwrkey_qcom",
->> -	.id	= UCLASS_GPIO,
->> +	.id	= UCLASS_BUTTON,
->>  	.of_match = qcom_pwrkey_ids,
->> -	.of_to_plat = qcom_pwrkey_of_to_plat,
->> +	.bind = button_qcom_pmic_bind,
->>  	.probe	= qcom_pwrkey_probe,
->> -	.ops	= &qcom_pwrkey_ops,
->> -	.priv_auto	= sizeof(struct qcom_gpio_bank),
->> +	.ops	= &button_qcom_pmic_ops,
->> +	.priv_auto	= sizeof(struct qcom_pmic_btn_priv),
->>  };
->>
-> 
-> Can we move this out of the drivers/gpio into drivers/button? Seems like
-> there are now two quite different drivers in the same file. :-)
+IMO 'ignore the load in the FIT' should be the normal situation with bootstd.
 
-Yeah, fair enough. Will do.
-> 
-> Thanks,
-> Stephan
-
--- 
-// Caleb (they/them)
+Regards,
+Simon
