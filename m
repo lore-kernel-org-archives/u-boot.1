@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2AFAC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 05:36:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E8CC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 06:13:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10DE586940;
-	Tue,  7 Nov 2023 06:36:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C171586C83;
+	Tue,  7 Nov 2023 07:13:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jxKeYvOD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OFvybBAX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8893C8695F; Tue,  7 Nov 2023 06:36:05 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 1BA8886C56; Tue,  7 Nov 2023 07:13:08 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AE1A86844
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 06:36:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B407186C56
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 07:13:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A75ZsWU117711;
- Mon, 6 Nov 2023 23:35:54 -0600
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A76CweX079898;
+ Tue, 7 Nov 2023 00:12:58 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699335354;
- bh=VrNKgFixswWV8nfd6b2Vm63BMK4nxuBpehNgeX2As0s=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=jxKeYvOD0o6TY2VZXxlZOkSkaAgrFUAGJ6Ax/zOqGw3ujnpEiMljMdPW8Lh4ggapl
- /4paAg4uxVd2G+aTI95k6bhe4e+8ALCO/c8cIWtNnWOm4unb0eIwXPSIqqh0FTVvGM
- MBzn87443IeyvBXMuyOxSbrtc+G3zjcVxeQ5kDlo=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A75Zsao001114
+ s=ti-com-17Q1; t=1699337578;
+ bh=jBehKrW9fGJlqnBpSoKl/b7XYjx+oKh2NLl95GfcJrc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=OFvybBAXV6YbZMlZqdcJsj6zhQqVfTGtBAu7E6WNDHbK9twJfuCNEdhp1yVxbJwvC
+ YB7PA7Xe2CDO8PLhcwX8fCQIJn7AfpXBc+sSGA6KzEUz2jHcSe/BESZQF26pPhksFj
+ b1QoMKcDSIluDjeHYvQjOjjv+JzPJUfV0XV32XZg=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A76CwP3029346
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 6 Nov 2023 23:35:54 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 6
- Nov 2023 23:35:54 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 7 Nov 2023 00:12:58 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
+ Nov 2023 00:12:58 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 6 Nov 2023 23:35:54 -0600
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A75ZrVu007519;
- Mon, 6 Nov 2023 23:35:53 -0600
-Date: Tue, 7 Nov 2023 11:05:53 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Nishanth Menon <nm@ti.com>, <trini@konsulko.com>, Neha Malcom Francis
- <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Francesco Dolcini <francesco@dolcini.it>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH V2 2/2] arm: mach-k3: Move TI dummy keys out of board
- folder
-Message-ID: <20231107053553.lu3pjckm5qvyimh3@ula0497581>
-References: <20231104024511.3597476-1-nm@ti.com>
- <20231104024511.3597476-3-nm@ti.com>
- <0abbcaaf-412d-4d73-9d6f-834e472e1867@ti.com>
+ Frontend Transport; Tue, 7 Nov 2023 00:12:58 -0600
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A76CsLM010050;
+ Tue, 7 Nov 2023 00:12:55 -0600
+Message-ID: <0bb13b15-0f53-4e73-b877-13f271f88dbb@ti.com>
+Date: Tue, 7 Nov 2023 11:42:53 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <0abbcaaf-412d-4d73-9d6f-834e472e1867@ti.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V2 2/4] board: beagle: Add BeagleBone AI-64 support
+To: Andrew Davis <afd@ti.com>, Nishanth Menon <nm@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
+ Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
+References: <20231104081103.10607-1-nm@ti.com>
+ <20231104081103.10607-3-nm@ti.com>
+ <5ef0f949-2ccc-4871-8c3a-3dccc76fca37@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <5ef0f949-2ccc-4871-8c3a-3dccc76fca37@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,83 +85,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11:11-20231106, Andrew Davis wrote:
-> On 11/3/23 9:45 PM, Nishanth Menon wrote:
-> > This file is used to emulate customer keys on TI development board
-> > ecosystems, move it out of board/ directory and into mach-k3. And
-> > change the relative paths to absolute paths in the binman paths.
-> > 
-> > While at it, drop the reference in verdin-binman file which is
-> > redundant.
-> > 
-> > Signed-off-by: Nishanth Menon <nm@ti.com>
-> > ---
+Hi Andrew,
+
+On 06/11/23 22:34, Andrew Davis wrote:
+> On 11/4/23 3:11 AM, Nishanth Menon wrote:
+>> Add base support for BeagleBone AI-64 board support.
+>>
+>> Further information at  https://beagleboard.org/ai-64
+>>
+>> Signed-off-by: Nishanth Menon <nm@ti.com>
+>> ---
+>>   arch/arm/mach-k3/Kconfig                      |    1 +
+>>   board/beagle/beagleboneai64/Kconfig           |   59 +
+>>   board/beagle/beagleboneai64/Makefile          |   10 +
+>>   board/beagle/beagleboneai64/beagleboneai64.c  |   30 +
+>>   .../beagle/beagleboneai64/beagleboneai64.env  |   19 +
+>>   board/beagle/beagleboneai64/board-cfg.yaml    |   36 +
+>>   board/beagle/beagleboneai64/pm-cfg.yaml       |   12 +
+>>   board/beagle/beagleboneai64/rm-cfg.yaml       | 3174 +++++++++++++++++
 > 
-> Moving custMpk.pem looks good. But I don't know how .crt and .key
-> are actually used right now, I'd guess they already get pulled in
-> during FIT signing using relative paths so this might be okay.
+> 95% of this patch is just copy/pasting the board-config yaml files. Same
+> for other K3-based boards. I'd expect in practice these files to be near
+> completely common between boards using the same SoC. Would be nice to
+> inlcude a default .yaml from aarch/arm/mach-k3/<soc> and only override
+> the couple options one wants changed for their board.
 > 
-> Good to get an ACK from +Manorit to be sure though.
+> Neha,
+> 
+> Is the above something you would be able to help with? I'm a bit out of my
+> element with all this board config schema stuff..
 > 
 
-I think the current yocto builds are not using the keys so should be
-okay. I wasn't able to get the u-boot keys and ended up using the keys
-in core-secdev. Might be a future action to actually use these keys,
-they currently just help in Upstream and people don't have to go to
-core-secdev for getting these.
+Right, apart from the rm-cfg files, everything else is very similar even across 
+SoCs. I think we can take action to have a default YAML for each SoC.
 
-Acked-by: Manorit Chawdhry <m-chawdhry@ti.com>
-
-Regards,
-Manorit
-
+> Thanks,
 > Andrew
 > 
-> > New patch in series.
-> > 
-> >   arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi | 4 ----
-> >   arch/arm/dts/k3-binman.dtsi                       | 2 +-
-> >   {board/ti => arch/arm/mach-k3}/keys/custMpk.crt   | 0
-> >   {board/ti => arch/arm/mach-k3}/keys/custMpk.key   | 0
-> >   {board/ti => arch/arm/mach-k3}/keys/custMpk.pem   | 0
-> >   5 files changed, 1 insertion(+), 5 deletions(-)
-> >   rename {board/ti => arch/arm/mach-k3}/keys/custMpk.crt (100%)
-> >   rename {board/ti => arch/arm/mach-k3}/keys/custMpk.key (100%)
-> >   rename {board/ti => arch/arm/mach-k3}/keys/custMpk.pem (100%)
-> > 
-> > diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-> > index ea22bfb9bad6..58fde95adf67 100644
-> > --- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-> > +++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-> > @@ -5,10 +5,6 @@
-> >   #include "k3-binman.dtsi"
-> > -&custmpk_pem {
-> > -	filename = "../../ti/keys/custMpk.pem";
-> > -};
-> > -
-> >   #ifdef CONFIG_TARGET_VERDIN_AM62_R5
-> >   &binman {
-> > diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-> > index b941726e6246..8d4b0b2454f6 100644
-> > --- a/arch/arm/dts/k3-binman.dtsi
-> > +++ b/arch/arm/dts/k3-binman.dtsi
-> > @@ -13,7 +13,7 @@
-> >   	custMpk {
-> >   		filename = "custMpk.pem";
-> >   		custmpk_pem: blob-ext {
-> > -			filename = "../keys/custMpk.pem";
-> > +			filename = "arch/arm/mach-k3/keys/custMpk.pem";
-> >   		};
-> >   	};
-> > diff --git a/board/ti/keys/custMpk.crt b/arch/arm/mach-k3/keys/custMpk.crt
-> > similarity index 100%
-> > rename from board/ti/keys/custMpk.crt
-> > rename to arch/arm/mach-k3/keys/custMpk.crt
-> > diff --git a/board/ti/keys/custMpk.key b/arch/arm/mach-k3/keys/custMpk.key
-> > similarity index 100%
-> > rename from board/ti/keys/custMpk.key
-> > rename to arch/arm/mach-k3/keys/custMpk.key
-> > diff --git a/board/ti/keys/custMpk.pem b/arch/arm/mach-k3/keys/custMpk.pem
-> > similarity index 100%
-> > rename from board/ti/keys/custMpk.pem
-> > rename to arch/arm/mach-k3/keys/custMpk.pem
+>>   board/beagle/beagleboneai64/sec-cfg.yaml      |  380 ++
+>>   9 files changed, 3721 insertions(+)
+>>   create mode 100644 board/beagle/beagleboneai64/Kconfig
+>>   create mode 100644 board/beagle/beagleboneai64/Makefile
+>>   create mode 100644 board/beagle/beagleboneai64/beagleboneai64.c
+>>   create mode 100644 board/beagle/beagleboneai64/beagleboneai64.env
+>>   create mode 100644 board/beagle/beagleboneai64/board-cfg.yaml
+>>   create mode 100644 board/beagle/beagleboneai64/pm-cfg.yaml
+>>   create mode 100644 board/beagle/beagleboneai64/rm-cfg.yaml
+>>   create mode 100644 board/beagle/beagleboneai64/sec-cfg.yaml
+>>
+
+[...]
+
+-- 
+Thanking You
+Neha Malcom Francis
