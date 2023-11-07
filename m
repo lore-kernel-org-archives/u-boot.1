@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0139C4167D
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB61FC4167D
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:43:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E4C987257;
+	by phobos.denx.de (Postfix) with ESMTP id AEF8B8743F;
 	Tue,  7 Nov 2023 13:43:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mV9i5C7Y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nZ+YWhVL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A690187448; Tue,  7 Nov 2023 13:43:08 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 717AC87448; Tue,  7 Nov 2023 13:43:09 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46DE9871D7
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:43:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 565848743F
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:43:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-53f9af41444so9630212a12.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 04:43:04 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5435336ab0bso9678337a12.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 04:43:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699360984; x=1699965784; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699360987; x=1699965787; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xW4u17eildPrN25azDluYIsAMIClsO6nnElms+prU8I=;
- b=mV9i5C7YoL0oHCmnyTDtI+iZP5Dzov4BX8+8vRdnppIkCHp8YSXQPLy3XUP6UaPej7
- Z5hSIwTAPhk95qrH5Gwe+SP84NX4PV1i4fq0ygepygHI7e3R+Xz9NCoXG5F6EPuJAAWa
- tftB6Gajvpc5Oc7ntbfsm4pUZuWFQHv2QqKSHDTm6Pk3lipfBRDylpQp/ULCP1jNazrO
- 1XH85DjwOlr3mr5EN4xzVcVEWf/Qn6VG5Imou43z9jcqhx1AzP6GaQhmMrUpaBxgrtUP
- 8lBto3oxt7SVm/SPXclqldwLwJSq8f/BzFeHiNg+xQSDfnRewgg691C2Irb6BDHq54Y8
- DOeQ==
+ bh=fLmHwipGg8wR07EMwguuraU2PWbbtdT7OIRNLjU7Lic=;
+ b=nZ+YWhVL1cQBVDUTH7g2Pbs5GowPQYIw0vgL7t2i2C+D7VyTuRdv/6/8pYjqsMR8XE
+ HC/uPdjb5hxNeRsv2rDYUZ+a9/sjaPlCqaQSWTUde9C+xOZE1EyK+kXZeVYkpHdBjpjP
+ 4Lyv/E4AjcHxcKAGfdHjdVYYwC5uBjjiriVPK6hFJrZqi0CQXZoLDux0Ehvulh2wXW02
+ h63YCLKTULzeqGUHBzwq7ZeQ1v76+IyxauU09oPVKNcvrBloS7hd0JRz0K5E9kM+txRM
+ xgdewMUqrToyg5X0ghjLWH4sAduZdA3XBfJEHG5/p5kFWmeef+8TLRIuFhnHufuED4op
+ ia9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699360984; x=1699965784;
+ d=1e100.net; s=20230601; t=1699360987; x=1699965787;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xW4u17eildPrN25azDluYIsAMIClsO6nnElms+prU8I=;
- b=pLaQ9VcyH4hH35em8RbH7AWxzam+GH+lIl52IJbX+uqx0Bo5Vy+f8gsUzsfpiKKFM6
- Q9xD6J/QoerM2vkcj51k1lEbxDKZgiuHnNA9n4h0ImcU/Ny5isq8qzUI5XgAnOsGi0Uv
- jSBCi1h/C4iPfF+3W7D//qcOlZNyaBCsr0PVSGwyOJdg+dNWy/lg6hEDk4oA7hzgeVWB
- TAgYaV1A5kJurXRXrBnhKot7oF73sQfSIvCvmm/a/Ujt0AR4L5OX8basStn73gLDxaRl
- zlXFOUbtOV4DpM2glp5Gq1eJEe4/GjaUBGMSipauBZpdangTKHMnB/higxDnmfJLZP/a
- vhsw==
-X-Gm-Message-State: AOJu0YxJkXV/MGVPzotM/JstOnFszi43Anh8VwKNrxOqvoSOvP5oYW5U
- eWbkedg7JeVTb19Y4oGZeBs=
-X-Google-Smtp-Source: AGHT+IFgnggRz6YzJSVPxkgvDqf9ivpY/EUheWRO3lfUsBMMR9X9BUo6l3/Za4pzAkfwekx3quFBrg==
-X-Received: by 2002:a50:a6dd:0:b0:543:8498:fda5 with SMTP id
- f29-20020a50a6dd000000b005438498fda5mr15580659edc.14.1699360983677; 
- Tue, 07 Nov 2023 04:43:03 -0800 (PST)
+ bh=fLmHwipGg8wR07EMwguuraU2PWbbtdT7OIRNLjU7Lic=;
+ b=UbXDmOoWc5jmY+GgqZxEonvIQtypm9e3jNI2JXInJx3O3782qmqKfKJ0Pi2Tza8leE
+ +ATSMavr2XWukUXJ9lbkdcDT+LgZuqEAfY3Thdhrn7f+byVYmxT30MJcDgZyQgkLWuaq
+ oybl/CFcRXWwucx+5IgIJ4IBxn8H/Ai+Yva3D+193OSkF15NaX4m83F6SRgzAOebGSdl
+ zclkRWvpCPMhUdj9sYeHIDIBnZ0c2+jmXn5HEt3Dxl31NL4/SZ/qsrp40ti7hM3+pUuB
+ TkFl5zLpMUhwciNh5RhdLT9iMuOz7nGQtQ2ygJ6rlAgpEE9u6+3zIgh8rOqZhxnvShI2
+ 6LGQ==
+X-Gm-Message-State: AOJu0YwKIarJcLmnhIwLHSYsWJdNDgnUgfbErFzu67Kfg2R5SPDS7P++
+ SRENwLHDNkMMbKvrXtdVwtQ=
+X-Google-Smtp-Source: AGHT+IE+TiyKgBSwRtd0+VyXhbv+Iz/TO6/ncknEmNjBh8pqokeXnXV40FBvv2byUjscUWjPWVIabw==
+X-Received: by 2002:a50:bb09:0:b0:542:d69d:d075 with SMTP id
+ y9-20020a50bb09000000b00542d69dd075mr21351188ede.6.1699360986669; 
+ Tue, 07 Nov 2023 04:43:06 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- u16-20020a509510000000b0053e89721d4esm5481831eda.68.2023.11.07.04.43.02
+ u16-20020a509510000000b0053e89721d4esm5481831eda.68.2023.11.07.04.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 04:43:03 -0800 (PST)
+ Tue, 07 Nov 2023 04:43:06 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -75,9 +75,10 @@ To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/5] fastboot: implement "getvar all"
-Date: Tue,  7 Nov 2023 14:42:38 +0200
-Message-Id: <20231107124241.35432-3-clamor95@gmail.com>
+Subject: [PATCH v1 4/5] lib: membuff: fix readline not returning line in case
+ of overflow
+Date: Tue,  7 Nov 2023 14:42:40 +0200
+Message-Id: <20231107124241.35432-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231107124241.35432-1-clamor95@gmail.com>
 References: <20231107124241.35432-1-clamor95@gmail.com>
@@ -101,199 +102,84 @@ X-Virus-Status: Clean
 
 From: Ion Agorria <ion@agorria.com>
 
-This commit implements "fastboot getvar all" listing
-by iterating the existing dispatchers that don't require
-parameters (as we pass NULL), uses fastboot multiresponse.
+If line overflows readline it will not be returned, fix this behavior,
+make it optional and documented properly.
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- doc/android/fastboot-protocol.rst |  3 ++
- drivers/fastboot/fb_command.c     |  3 ++
- drivers/fastboot/fb_getvar.c      | 75 +++++++++++++++++++++++++------
- include/fastboot-internal.h       |  7 +++
- 4 files changed, 75 insertions(+), 13 deletions(-)
+ boot/bootmeth_extlinux.c | 2 +-
+ common/console.c         | 2 +-
+ include/membuff.h        | 5 +++--
+ lib/membuff.c            | 4 ++--
+ 4 files changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/doc/android/fastboot-protocol.rst b/doc/android/fastboot-protocol.rst
-index e8cbd7f24e..8bd6d7168f 100644
---- a/doc/android/fastboot-protocol.rst
-+++ b/doc/android/fastboot-protocol.rst
-@@ -173,6 +173,9 @@ The various currently defined names are::
-                       bootloader requiring a signature before
-                       it will install or boot images.
+diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
+index aa2a4591eb..ae0ad1d53e 100644
+--- a/boot/bootmeth_extlinux.c
++++ b/boot/bootmeth_extlinux.c
+@@ -82,7 +82,7 @@ static int extlinux_fill_info(struct bootflow *bflow)
+ 	log_debug("parsing bflow file size %x\n", bflow->size);
+ 	membuff_init(&mb, bflow->buf, bflow->size);
+ 	membuff_putraw(&mb, bflow->size, true, &data);
+-	while (len = membuff_readline(&mb, line, sizeof(line) - 1, ' '), len) {
++	while (len = membuff_readline(&mb, line, sizeof(line) - 1, ' ', true), len) {
+ 		char *tok, *p = line;
  
-+  all                 Provides all info from commands above as
-+                      they were called one by one
-+
- Names starting with a lowercase character are reserved by this
- specification.  OEM-specific names should not start with lowercase
- characters.
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index ab72d8c781..6f621df074 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -156,6 +156,9 @@ int fastboot_handle_command(char *cmd_string, char *response)
- void fastboot_multiresponse(int cmd, char *response)
+ 		tok = strsep(&p, " ");
+diff --git a/common/console.c b/common/console.c
+index 8a869b137e..cd56035171 100644
+--- a/common/console.c
++++ b/common/console.c
+@@ -846,7 +846,7 @@ bool console_record_overflow(void)
+ int console_record_readline(char *str, int maxlen)
  {
- 	switch (cmd) {
-+	case FASTBOOT_COMMAND_GETVAR:
-+		fastboot_getvar_all(response);
-+		break;
- 	default:
- 		fastboot_fail("Unknown multiresponse command", response);
- 		break;
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 8cb8ffa2c6..fc5e1dac87 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -29,53 +29,67 @@ static void getvar_is_userspace(char *var_parameter, char *response);
- 
- static const struct {
- 	const char *variable;
-+	bool list;
- 	void (*dispatch)(char *var_parameter, char *response);
- } getvar_dispatch[] = {
- 	{
- 		.variable = "version",
--		.dispatch = getvar_version
-+		.dispatch = getvar_version,
-+		.list = true,
- 	}, {
- 		.variable = "version-bootloader",
--		.dispatch = getvar_version_bootloader
-+		.dispatch = getvar_version_bootloader,
-+		.list = true
- 	}, {
- 		.variable = "downloadsize",
--		.dispatch = getvar_downloadsize
-+		.dispatch = getvar_downloadsize,
-+		.list = true
- 	}, {
- 		.variable = "max-download-size",
--		.dispatch = getvar_downloadsize
-+		.dispatch = getvar_downloadsize,
-+		.list = true
- 	}, {
- 		.variable = "serialno",
--		.dispatch = getvar_serialno
-+		.dispatch = getvar_serialno,
-+		.list = true
- 	}, {
- 		.variable = "version-baseband",
--		.dispatch = getvar_version_baseband
-+		.dispatch = getvar_version_baseband,
-+		.list = true
- 	}, {
- 		.variable = "product",
--		.dispatch = getvar_product
-+		.dispatch = getvar_product,
-+		.list = true
- 	}, {
- 		.variable = "platform",
--		.dispatch = getvar_platform
-+		.dispatch = getvar_platform,
-+		.list = true
- 	}, {
- 		.variable = "current-slot",
--		.dispatch = getvar_current_slot
-+		.dispatch = getvar_current_slot,
-+		.list = true
- #if IS_ENABLED(CONFIG_FASTBOOT_FLASH)
- 	}, {
- 		.variable = "has-slot",
--		.dispatch = getvar_has_slot
-+		.dispatch = getvar_has_slot,
-+		.list = false
- #endif
- #if IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)
- 	}, {
- 		.variable = "partition-type",
--		.dispatch = getvar_partition_type
-+		.dispatch = getvar_partition_type,
-+		.list = false
- #endif
- #if IS_ENABLED(CONFIG_FASTBOOT_FLASH)
- 	}, {
- 		.variable = "partition-size",
--		.dispatch = getvar_partition_size
-+		.dispatch = getvar_partition_size,
-+		.list = false
- #endif
- 	}, {
- 		.variable = "is-userspace",
--		.dispatch = getvar_is_userspace
-+		.dispatch = getvar_is_userspace,
-+		.list = true
- 	}
- };
- 
-@@ -237,6 +251,38 @@ static void getvar_is_userspace(char *var_parameter, char *response)
- 	fastboot_okay("no", response);
+ 	return membuff_readline((struct membuff *)&gd->console_out, str,
+-				maxlen, '\0');
++				maxlen, '\0', false);
  }
  
-+int current_all_dispatch;
-+void fastboot_getvar_all(char *response)
-+{
-+	/*
-+	 * Find a dispatch getvar that can be listed and send
-+	 * it as INFO until we reach the end.
-+	 */
-+	while (current_all_dispatch < ARRAY_SIZE(getvar_dispatch)) {
-+		if (!getvar_dispatch[current_all_dispatch].list) {
-+			current_all_dispatch++;
-+			continue;
-+		}
-+
-+		char envstr[FASTBOOT_RESPONSE_LEN] = { 0 };
-+		getvar_dispatch[current_all_dispatch].dispatch(NULL, envstr);
-+
-+		char *envstr_start = envstr;
-+		if (!strncmp("OKAY", envstr, 4) || !strncmp("FAIL", envstr, 4))
-+			envstr_start += 4;
-+
-+		fastboot_response("INFO", response, "%s: %s",
-+				  getvar_dispatch[current_all_dispatch].variable,
-+				  envstr_start);
-+
-+		current_all_dispatch++;
-+		return;
-+	}
-+
-+	fastboot_response("OKAY", response, NULL);
-+	current_all_dispatch = 0;
-+}
-+
- /**
-  * fastboot_getvar() - Writes variable indicated by cmd_parameter to response.
-  *
-@@ -254,6 +300,9 @@ void fastboot_getvar(char *cmd_parameter, char *response)
- {
- 	if (!cmd_parameter) {
- 		fastboot_fail("missing var", response);
-+	} else if (!strncmp("all", cmd_parameter, 3) && strlen(cmd_parameter) == 3) {
-+		current_all_dispatch = 0;
-+		fastboot_response("MORE", response, NULL);
- 	} else {
- #define FASTBOOT_ENV_PREFIX	"fastboot."
- 		int i;
-diff --git a/include/fastboot-internal.h b/include/fastboot-internal.h
-index bf2f2b3c89..610d4f9141 100644
---- a/include/fastboot-internal.h
-+++ b/include/fastboot-internal.h
-@@ -18,6 +18,13 @@ extern u32 fastboot_buf_size;
+ int console_record_avail(void)
+diff --git a/include/membuff.h b/include/membuff.h
+index 21051b0c54..4eba626ce1 100644
+--- a/include/membuff.h
++++ b/include/membuff.h
+@@ -192,10 +192,11 @@ int membuff_free(struct membuff *mb);
+  * @mb: membuff to adjust
+  * @str: Place to put the line
+  * @maxlen: Maximum line length (excluding terminator)
++ * @must_fit: If true then str is empty if line doesn't fit
+  * Return: number of bytes read (including terminator) if a line has been
+- *	   read, 0 if nothing was there
++ *	   read, 0 if nothing was there or line didn't fit when must_fit is set
   */
- extern void (*fastboot_progress_callback)(const char *msg);
+-int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch);
++int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch, bool must_fit);
  
-+/**
-+ * fastboot_getvar_all() - Writes current variable being listed from "all" to response.
-+ *
-+ * @response: Pointer to fastboot response buffer
-+ */
-+void fastboot_getvar_all(char *response);
-+
  /**
-  * fastboot_getvar() - Writes variable indicated by cmd_parameter to response.
-  *
+  * membuff_extend_by() - expand a membuff
+diff --git a/lib/membuff.c b/lib/membuff.c
+index 36dc43a523..964e504d5b 100644
+--- a/lib/membuff.c
++++ b/lib/membuff.c
+@@ -288,7 +288,7 @@ int membuff_free(struct membuff *mb)
+ 			(mb->end - mb->start) - 1 - membuff_avail(mb);
+ }
+ 
+-int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
++int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch, bool must_fit)
+ {
+ 	int len;  /* number of bytes read (!= string length) */
+ 	char *s, *end;
+@@ -310,7 +310,7 @@ int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
+ 	}
+ 
+ 	/* couldn't get the whole string */
+-	if (!ok) {
++	if (!ok && must_fit) {
+ 		if (maxlen)
+ 			*orig = '\0';
+ 		return 0;
 -- 
 2.40.1
 
