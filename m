@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D7D5C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 13:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5EDC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 13:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4E6C86F44;
-	Tue,  7 Nov 2023 14:05:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DE03A86863;
+	Tue,  7 Nov 2023 14:11:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="bgcmAr0e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g90Fxlrs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EC7F86F44; Tue,  7 Nov 2023 14:05:47 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3585186BDF; Tue,  7 Nov 2023 14:11:25 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E307486FBF
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 14:05:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6228786689
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 14:11:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id E1F17CE0ECE
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:05:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C183C433C7
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:05:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699362339;
- bh=RruP1QGaZvTuXJrll5bj84ebMUg3UJxqsTsrVsJCqms=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=bgcmAr0ekyPjtlHlJRSPoSGWONG64/XmcaIrdKW4mI3D+o6ctW5e4A+4ERsddqsg8
- Acv+3kdbcNT3MoTiufI565Pu0r+e4QwHMlOmga69I0TEwjvBp/1/uRKu+byguAtB2j
- rNFwGxzIoEOChohuCTot/fFBVh+aEa1+mDYPhQZaKiCsCFT0ArI/r+KCFt81aznIkP
- MNy0APlt90qjAtX+9sGlQdqVYmJ6F2BRooRI9kP+9ROi9JzV9Z4vYXYSbRukg5LWY7
- KDmTsFn+ZxmsuU3qTVJdED7vNIqJ7q4cKx4KCXhniaEDd3j+kqIVFCr2v7xgo6IVEM
- jPHPBSMXOLEpQ==
-Received: by mail-oa1-f47.google.com with SMTP id
- 586e51a60fabf-1ef370c2e1aso3346579fac.2
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 05:05:39 -0800 (PST)
-X-Gm-Message-State: AOJu0YxXh7NlRr+NMyusDm6jZFQC3PZWGZQEWpmgDZsClmE+YLUlm6hi
- 0uq7U3xoTlWmKxrPrAs7b3nXzGCuvqHUb4vjiQQ=
-X-Google-Smtp-Source: AGHT+IEMhw9WYqCbJTZndEZaZJUtNVpum44vv8O60uyxnlRHxP3PHUzubA1MYIHj/VkTdRa2z2aQxv757U3hRX3iZOI=
-X-Received: by 2002:a05:6871:42c4:b0:1ea:4338:20b7 with SMTP id
- lt4-20020a05687142c400b001ea433820b7mr3600723oab.20.1699362338526; Tue, 07
- Nov 2023 05:05:38 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5401bab7525so9677148a12.2
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 05:11:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1699362682; x=1699967482; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qm6N9dJ/FSSYVJxVKJ48BKdFLAoG420WN2Tv4cINOOM=;
+ b=g90FxlrsSlxFEkn4GGB2fPhBq7lvquPPifnjEPVDjXXk1TlJIbWMs+Ghsp9jkzXMvO
+ LKqdwpb95S3PwIWzd4Y5bvlgg9ak5ru71IaDHwE0kXICNP8HJS3TGJdUebMscJABDZEu
+ X5STRbYzIF04BTh9Ecy71DVoVMQnMDv9xm8xM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699362682; x=1699967482;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qm6N9dJ/FSSYVJxVKJ48BKdFLAoG420WN2Tv4cINOOM=;
+ b=ruI/0MkK5v3oy77xe5zrap4eGCow1WmY201GjExbbzkhI4bHiEceZdRlQR6tgW0oq6
+ XHbKhWd7cOoZ9VDcDgv3sEqDezbmQ3m1oofMt9HskgaZNX+ehvjw1UL65bFAA1JNa75V
+ 46lrmpDsWcbeSUiRPbGpjSvnYN2HVfsQfEm6UsU2Lsij21BIlY++08XXr4nEAqWUaOSz
+ f8z4fmuIx/35gedmNT/ZtFzM3VSafKhGwxUvWBeTbF2Wjf3WHM8/0zFNVDnFowkj1vfs
+ IX0lDuzdSBMLjaWEz7IqyeWCOg+ORbA8cDx84nl+gdAP6kni69dUMdk96mKO5vqSkpEF
+ i7hw==
+X-Gm-Message-State: AOJu0YwDuB8K/bt8Kf9FIzprBrxb7ghuHZxn+L3iAJ/5sOvr+eh5FPsC
+ 3kw/dBUKLctYlvWeDC02ec5c14kaVQYIEG/8cJLDSw==
+X-Google-Smtp-Source: AGHT+IFAt9ZvNXhAP24k2CMB3H8lR8ZLGxNoilWSXS9qb1pciEkcAkih+Vf7Ea6P/P+raouRDzcRzboDY2UxfiZqHd8=
+X-Received: by 2002:a50:8e5d:0:b0:543:c50c:cacc with SMTP id
+ 29-20020a508e5d000000b00543c50ccaccmr13915784edx.41.1699362681654; Tue, 07
+ Nov 2023 05:11:21 -0800 (PST)
 MIME-Version: 1.0
 References: <20231104194207.3370542-1-sjg@chromium.org>
- <20231104194207.3370542-4-sjg@chromium.org>
-In-Reply-To: <20231104194207.3370542-4-sjg@chromium.org>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Tue, 7 Nov 2023 15:05:01 +0200
-X-Gmail-Original-Message-ID: <CAK7LNAQCu9tWcjEtak3sBVo5mQYu1abu-v-GQ0b5h7PhzuHKww@mail.gmail.com>
-Message-ID: <CAK7LNAQCu9tWcjEtak3sBVo5mQYu1abu-v-GQ0b5h7PhzuHKww@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] arm64: boot: Support Flat Image Tree
-To: Simon Glass <sjg@chromium.org>
+ <20231104194207.3370542-3-sjg@chromium.org>
+ <CAK7LNASVOdz2qdg5dwWN8HJwqJ1q_OgdeuapLhvmD6beavUqPg@mail.gmail.com>
+In-Reply-To: <CAK7LNASVOdz2qdg5dwWN8HJwqJ1q_OgdeuapLhvmD6beavUqPg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 7 Nov 2023 06:11:04 -0700
+Message-ID: <CAPnjgZ2yrk38kApMSiUOmsNM8M9cDa3gtH-ozJZzk=VjLh+PLQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] arm: boot: Use double quotes for image name
+To: Masahiro Yamada <masahiroy@kernel.org>
 Cc: linux-arm-kernel@lists.infradead.org, 
  U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>, 
- Nick Desaulniers <ndesaulniers@google.com>, Nick Terrell <terrelln@fb.com>, 
- Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, 
+ Nicolas Schier <nicolas@fjasle.eu>, linux-kbuild@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -85,157 +89,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Nov 4, 2023 at 9:42=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->  PHONY +=3D $(BOOT_TARGETS)
+Hi Masahiro,
+
+On Tue, 7 Nov 2023 at 03:13, Masahiro Yamada <masahiroy@kernel.org> wrote:
 >
-> @@ -215,6 +215,7 @@ virtconfig:
->  define archhelp
->    echo  '* Image.gz      - Compressed kernel image (arch/$(ARCH)/boot/Im=
-age.gz)'
->    echo  '  Image         - Uncompressed kernel image (arch/$(ARCH)/boot/=
-Image)'
-> +$(if $(CONFIG_EFI_ZBOOT),,echo  '  image.fit     - Flat Image Tree (arch=
-/$(ARCH)/boot/image.fit)')
-
-
-
-Why should this be hidden when CONFIG_EFI_ZBOOT=3Dy?
-
-
-
-
->    echo  '  install       - Install uncompressed kernel'
->    echo  '  zinstall      - Install compressed kernel'
->    echo  '                  Install using (your) ~/bin/installkernel or'
-> diff --git a/arch/arm64/boot/.gitignore b/arch/arm64/boot/.gitignore
-> index af5dc61f8b43..f84a7073dbcd 100644
-> --- a/arch/arm64/boot/.gitignore
-> +++ b/arch/arm64/boot/.gitignore
-> @@ -2,3 +2,5 @@
->  Image
->  Image.gz
->  vmlinuz*
-> +image.itk
-> +image.fit
-> diff --git a/arch/arm64/boot/Makefile b/arch/arm64/boot/Makefile
-> index 1761f5972443..2681f54cd2c8 100644
-> --- a/arch/arm64/boot/Makefile
-> +++ b/arch/arm64/boot/Makefile
-> @@ -16,7 +16,8 @@
+> On Sat, Nov 4, 2023 at 9:42=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
+> >
+> > The use of single quotes in the image name causes them to appear in
+> > the image description when the uImage is created. Use double quotes, to
+> > avoid this.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v2:
+> > - Split double-quote change out into its own patch
+> >
+> >  scripts/Makefile.lib | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> > index 68d0134bdbf9..03e79e319293 100644
+> > --- a/scripts/Makefile.lib
+> > +++ b/scripts/Makefile.lib
+> > @@ -487,7 +487,7 @@ UIMAGE_OPTS-y ?=3D
+> >  UIMAGE_TYPE ?=3D kernel
+> >  UIMAGE_LOADADDR ?=3D arch_must_set_this
+> >  UIMAGE_ENTRYADDR ?=3D $(UIMAGE_LOADADDR)
+> > -UIMAGE_NAME ?=3D 'Linux-$(KERNELRELEASE)'
+> > +UIMAGE_NAME ?=3D "Linux-$(KERNELRELEASE)"
+> >
+> >  quiet_cmd_uimage =3D UIMAGE  $@
+> >        cmd_uimage =3D $(BASH) $(MKIMAGE) -A $(UIMAGE_ARCH) -O linux \
+> > --
+> > 2.42.0.869.gea05f2083d-goog
+> >
 >
->  OBJCOPYFLAGS_Image :=3D-O binary -R .note -R .note.gnu.build-id -R .comm=
-ent -S
 >
-> -targets :=3D Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo Ima=
-ge.zst
-> +targets :=3D Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo \
-> +       Image.zst image.fit
+> NACK.
 >
->  $(obj)/Image: vmlinux FORCE
->         $(call if_changed,objcopy)
-> @@ -39,6 +40,10 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
->  $(obj)/Image.zst: $(obj)/Image FORCE
->         $(call if_changed,zstd)
 >
-> +# Provide the kernel for the FIT
-> +$(obj)/image.itk: $(obj)/Image FORCE
-> +       $(call if_changed,copy)
-> +
->  EFI_ZBOOT_PAYLOAD      :=3D Image
->  EFI_ZBOOT_BFD_TARGET   :=3D elf64-littleaarch64
->  EFI_ZBOOT_MACH_TYPE    :=3D ARM64
-> @@ -48,3 +53,5 @@ EFI_ZBOOT_OBJCOPY_FLAGS       =3D --add-symbol zboot_co=
-de_size=3D0x$(shell \
->                                 $(NM) vmlinux|grep _kernel_codesize|cut -=
-d' ' -f1)
+> This is because you are doing *WRONG* in 3/3.
 >
->  include $(srctree)/drivers/firmware/efi/libstub/Makefile.zboot
-> +
-> +clean-files :=3D image.itk
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 03e79e319293..1427dba4f0f9 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -494,7 +494,23 @@ quiet_cmd_uimage =3D UIMAGE  $@
->                         -C $(UIMAGE_COMPRESSION) $(UIMAGE_OPTS-y) \
->                         -T $(UIMAGE_TYPE) \
->                         -a $(UIMAGE_LOADADDR) -e $(UIMAGE_ENTRYADDR) \
-> -                       -n $(UIMAGE_NAME) -d $< $@
-> +                       -n "$(UIMAGE_NAME)" -d $< $@
+> Look at your code closely.
+>
+> https://lore.kernel.org/linux-kbuild/20231104194207.3370542-4-sjg@chromiu=
+m.org/T/#me2fb68151d6f4f330808406f9a711fffee149529
+>
+>
+>
+> In the mainline kernel, the quotation appears
+> only in the definition of UIMAGE_NAME.
+>
+>
+> masahiro@zoe:~/ref/linux(master)$ git grep UIMAGE_NAME
+> scripts/Makefile.lib:UIMAGE_NAME ?=3D 'Linux-$(KERNELRELEASE)'
+> scripts/Makefile.lib:                   -n $(UIMAGE_NAME) -d $< $@
+>
+>
+> The single quotes are consumed by shell.
+>
+>
+>
+>
+>
+>
+> This is mainline + your patch set.
+>
+> masahiro@zoe:~/ref/linux(simon-v2)$ git grep UIMAGE_NAME
+> scripts/Makefile.lib:UIMAGE_NAME ?=3D "Linux-$(KERNELRELEASE)"
+> scripts/Makefile.lib:                   -n "$(UIMAGE_NAME)" -d $< $@
+> scripts/Makefile.lib:                   --name "$(UIMAGE_NAME)" \
+>
+>
+> You quoted the definition of UIMAGE_NAME,
+> and also variable references.
+>
+>
+>
+>
+> See how it is expanded.
+>
+>
+> --name "$(UIMAGE_NAME)"
+>
+>
+>  =3D=3D>
+>
+>
+> --name ""Linux-$(KERNELRELEASE)""
+>
+>
+>  =3D=3D>
+>
+>
+> --name Linux-$(KERNELRELEASE)
+>
+>
+>
+>
+> You added double quotes in a row, just to cancel it.
 
+Yes, I understand that. But without the quotes in -n "$(UIMAGE_NAME)"
+then the name cannot contain spaces. So we do need some sort of
+quoting, right?
 
-Please do not do this.
-Just drop 2/3.
+It just seems strange to use single quotes in a Makefile variable. I
+found it confusing.
 
+I think you are saying you want to keep the single quotes in the var
+declaration and drop the quotes from the cmd_fit rule. I am OK with
+that, but I do think it is unusual not to quote something which might
+have spaces. It may cause confusion for others, as it did for me?
 
+Anyway, I'll send a new version with the quoting reverted.
 
-
-> +
-> +# Flat Image Tree (FIT)
-> +# This allows for packaging of a kernel and all devicetrees files, using
-> +# compression.
-> +# ----------------------------------------------------------------------=
------
-> +
-> +MAKE_FIT :=3D $(srctree)/scripts/make_fit.py
-> +
-> +quiet_cmd_fit =3D FIT     $@
-> +      cmd_fit =3D $(MAKE_FIT) -f $@ --arch $(UIMAGE_ARCH) --os linux \
-> +                       --name "$(UIMAGE_NAME)" \
-> +                       --compress $(UIMAGE_COMPRESSION) -k $< \
-> +                       $(dir $<)/dts
-> +
-> +$(obj)/%.fit: $(obj)/%.itk $(MAKE_FIT) FORCE
-> +       $(call if_changed,fit,gzip)
-
-
-No. This is worse than v1.
-
-Please do not create a silly copy.
-
-
-
-
-
-As I said in v1, this if_changed does not catch the DTS updates.
-So, there is no point in using it.
-
-I recommend just use 'cmd'.
-
-
-$(obj)/image.fit: $(obj)/Image FORCE
-        $(call cmd,fit)
-
-
-
-
-
-> +
-> +    Returns:
-> +        tuple:
-> +            str: Model name
-> +            bytes: Compatible stringlist
-> +    """
-> +    with fsw.add_node(f'fdt-{seq}'):
-> +        # Get the compatible / model information
-> +        with open(fname, 'rb') as inf:
-> +            data =3D inf.read()
-> +        fdt =3D libfdt.FdtRo(data)
-> +        model =3D fdt.getprop(0, 'model').as_str()
-> +        compat =3D fdt.getprop(0, 'compatible')
-> +
-> +        fsw.property_string('description', model)
-> +        fsw.property_string('type', 'flat_dt')
-> +        fsw.property_string('arch', 'arm64')
-
-
-Why hard-code 'arm64' ?
-
-
-
-
-
---=20
-Best Regards
-Masahiro Yamada
+Regards,
+Simon
