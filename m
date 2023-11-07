@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A41EC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDA9BC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:43:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F337A87670;
-	Tue,  7 Nov 2023 22:42:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7595C8767E;
+	Tue,  7 Nov 2023 22:42:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QNMUjW7n";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KfFHezlC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5E2A8764C; Tue,  7 Nov 2023 22:42:10 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 53CEE8766A; Tue,  7 Nov 2023 22:42:12 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F21F587633
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:42:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F21838762C
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:42:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4084e49a5e5so52804135e9.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:42:01 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-507e85ebf50so7694199e87.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:42:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1699393321; x=1699998121;
+ d=amarulasolutions.com; s=google; t=1699393320; x=1699998120;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2n8jxt1ds5q7Q9H17EJfwFItauiA8vIOt8u046pmLRk=;
- b=QNMUjW7nnk7hIKXGh6kC6gZdbF1m1c8SpVSc1KFLGp/FAEcRwqfG9WfBKOBIyv3/eh
- /FND03UOsb3ha2HLg0EfCbkda6qdqnD80tt+u6UpjJpDtpJ4RN0iOwCixFQhUGJWlrRO
- CwRiOg5ZHZRvKI0A+ltrD3M2MY07i1szOD5Iw=
+ bh=3/XXgNxWrhZYUrO1TGJRm2ZSzDLELBGdR02GP7otNBM=;
+ b=KfFHezlCrrczhzx5zmdjd2+PDy8qryTkrUsC8LOr5q3dKe5cc6dNsN0VpXfz1FOkOa
+ AgKqXmtSPEutLpHxo3Isfz2TUdNUSacNKa2baQxIC0rS5aGArt5xdGsIH9Q8AQ8TlofA
+ sevJgigZs9Y/tmkPZcFcfr6S7TF13AkFGWGEU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699393321; x=1699998121;
+ d=1e100.net; s=20230601; t=1699393320; x=1699998120;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2n8jxt1ds5q7Q9H17EJfwFItauiA8vIOt8u046pmLRk=;
- b=fz7NWdPfVk+oKimfJUc8GU0jax71MueaM51o0j51cX9Ez2VIOGdemrVsw4VGOPdoNz
- WIsTXNJ68z6+qyPNYVSX4SHcdbclncJrwP9slKnSbj4jXjz6Gal2fVSPnCwKTJBhhPrU
- +satAUMzOQealcmlM8WoMxB+OkmOEa7ixCdPYLF063od6KbB+YJ3CQHa0dbqT7mz5NKZ
- Sve62G7/LJNe9OWe2gHsGRRg/TKRTx+dEsHoCoW9OubdW31fhox0CCZ78fmTqfHXwsoS
- 8Cgr89osPufS8DZ0BxZPAkOeIfs5AJz/6nlerG7osRLImr4THsi/oTcIyjr7rfkc50IR
- X8TA==
-X-Gm-Message-State: AOJu0YzdeTJw2WQUUE5UnwdUtxSZ0vc86aHBehTi9b5TDy2ny//SrVrI
- uJVi47O8Xm+wZWfg3SI9QMXhT+I/bhLX5dMGm/M=
-X-Google-Smtp-Source: AGHT+IHjqvjyyxw0NfLNUK97Zq+xKQmpqC1ehA42uyK14U8wtQ3ES6fz7ZQ38dIlq3bS9KtmsrdFXw==
-X-Received: by 2002:adf:f20d:0:b0:32f:889a:2b9f with SMTP id
- p13-20020adff20d000000b0032f889a2b9fmr12293wro.15.1699393321111; 
- Tue, 07 Nov 2023 13:42:01 -0800 (PST)
+ bh=3/XXgNxWrhZYUrO1TGJRm2ZSzDLELBGdR02GP7otNBM=;
+ b=h2eL4Tyz+HVc4i8r7K5wPO3TJdU/kwzjJZXsD9sske2Ihzhy/+kR8yFGLh2Q9T/90k
+ DR+CJknJXCRFAqaSZG5cCP9PvLkHnOr+kl8GKmsRp708NgZuXeJvkLYFXqJ86JBQ+j37
+ HDHRgXlyxiMYzcX92oolpQVJMBPzBGz5D4jT6IxCU5co283CfMCtGcqmEuru58bYDwRO
+ E5qO9HjAmgpCc+c4utxs20S13IPik8AQLzCipKmC2YZ10dNxtyIrZCg5iQRNVJW+a4ns
+ 5alZYIGF0sku6X78/RFA/HumboDEXHXm3TAb+FcBnd/PrVYvUDS5g2vdnaHo3E4cR1lF
+ awmA==
+X-Gm-Message-State: AOJu0YydoeMavd9kKopVk833aIgPFIz6YQE21GaYRNIUbiz/QnPNnU/4
+ UXd1+UL/heFaTYwqI8RGAJyDze1FhcB96GDQyVc=
+X-Google-Smtp-Source: AGHT+IEsXHajcJIikpXkVoadFFdjWqQI0PPbFZBQhhy8gW3IxI3XJcyyoVC39mcLpcKzg+QiwXwEsA==
+X-Received: by 2002:a05:6512:48d1:b0:500:bf33:3add with SMTP id
+ er17-20020a05651248d100b00500bf333addmr23148181lfb.47.1699393320034; 
+ Tue, 07 Nov 2023 13:42:00 -0800 (PST)
 Received: from pwmachine.numericable.fr ([86.120.35.5])
  by smtp.gmail.com with ESMTPSA id
- u10-20020adff88a000000b0032f7f4089b7sm3306437wrp.43.2023.11.07.13.42.00
+ u10-20020adff88a000000b0032f7f4089b7sm3306437wrp.43.2023.11.07.13.41.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 13:42:00 -0800 (PST)
+ Tue, 07 Nov 2023 13:41:59 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v11 06/24] test: hush: Test hush loops
-Date: Tue,  7 Nov 2023 23:41:03 +0200
-Message-Id: <20231107214121.132079-7-francis.laniel@amarulasolutions.com>
+Subject: [PATCH v11 05/24] test: hush: Test hush commands list
+Date: Tue,  7 Nov 2023 23:41:02 +0200
+Message-Id: <20231107214121.132079-6-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
 References: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
@@ -92,31 +92,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The added tests verifies correct behavior of for, while and until loops.
+Verifies behavior of commands separated by ';', '&&' and '||'.
 
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
  test/hush/Makefile |  1 +
- test/hush/loop.c   | 65 ++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 66 insertions(+)
- create mode 100644 test/hush/loop.c
+ test/hush/list.c   | 79 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 80 insertions(+)
+ create mode 100644 test/hush/list.c
 
 diff --git a/test/hush/Makefile b/test/hush/Makefile
-index ff4fe7700b..a2d98815e5 100644
+index feb4f71956..ff4fe7700b 100644
 --- a/test/hush/Makefile
 +++ b/test/hush/Makefile
-@@ -7,3 +7,4 @@ obj-y += cmd_ut_hush.o
+@@ -6,3 +6,4 @@
+ obj-y += cmd_ut_hush.o
  obj-y += if.o
  obj-y += dollar.o
- obj-y += list.o
-+obj-y += loop.o
-diff --git a/test/hush/loop.c b/test/hush/loop.c
++obj-y += list.o
+diff --git a/test/hush/list.c b/test/hush/list.c
 new file mode 100644
-index 0000000000..ca777e38fe
+index 0000000000..052cf2783c
 --- /dev/null
-+++ b/test/hush/loop.c
-@@ -0,0 +1,65 @@
++++ b/test/hush/list.c
+@@ -0,0 +1,79 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * (C) Copyright 2021
@@ -129,59 +129,73 @@ index 0000000000..ca777e38fe
 +#include <test/hush.h>
 +#include <test/ut.h>
 +
-+static int hush_test_for(struct unit_test_state *uts)
++static int hush_test_semicolon(struct unit_test_state *uts)
 +{
-+	console_record_reset_enable();
-+
-+	ut_assertok(run_command("for loop_i in foo bar quux quux; do echo $loop_i; done", 0));
-+	ut_assert_nextline("foo");
-+	ut_assert_nextline("bar");
-+	ut_assert_nextline("quux");
-+	ut_assert_nextline("quux");
-+	ut_assert_console_end();
-+
-+	puts("Beware: this test set local variable loop_i and it cannot be unset!");
++	/* A; B = B truth table. */
++	ut_asserteq(1, run_command("false; false", 0));
++	ut_assertok(run_command("false; true", 0));
++	ut_assertok(run_command("true; true", 0));
++	ut_asserteq(1, run_command("true; false", 0));
 +
 +	return 0;
 +}
-+HUSH_TEST(hush_test_for, 0);
++HUSH_TEST(hush_test_semicolon, 0);
 +
-+static int hush_test_while(struct unit_test_state *uts)
++static int hush_test_and(struct unit_test_state *uts)
 +{
-+	console_record_reset_enable();
-+
-+	/* Exit status is that of test, so 1 since test is false to quit the loop. */
-+	ut_asserteq(1, run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
-+	ut_assert_nextline("bar");
-+	ut_assert_console_end();
-+
-+	puts("Beware: this test set local variable loop_foo and it cannot be unset!");
++	/* A && B truth table. */
++	ut_asserteq(1, run_command("false && false", 0));
++	ut_asserteq(1, run_command("false && true", 0));
++	ut_assertok(run_command("true && true", 0));
++	ut_asserteq(1, run_command("true && false", 0));
 +
 +	return 0;
 +}
-+HUSH_TEST(hush_test_while, 0);
++HUSH_TEST(hush_test_and, 0);
 +
-+static int hush_test_until(struct unit_test_state *uts)
++static int hush_test_or(struct unit_test_state *uts)
 +{
-+	console_record_reset_enable();
-+	env_set("loop_bar", "bar");
++	/* A || B truth table. */
++	ut_asserteq(1, run_command("false || false", 0));
++	ut_assertok(run_command("false || true", 0));
++	ut_assertok(run_command("true || true", 0));
++	ut_assertok(run_command("true || false", 0));
 +
-+	/*
-+	 * WARNING We have to use environment variable because it is not possible
-+	 * resetting local variable.
-+	 */
-+	ut_assertok(run_command("until test -z \"$loop_bar\"; do echo quux; setenv loop_bar; done", 0));
-+	ut_assert_nextline("quux");
-+	ut_assert_console_end();
-+
-+	/*
-+	 * Loop normally resets foo environment variable, but we reset it here in
-+	 * case the test failed.
-+	 */
-+	env_set("loop_bar", NULL);
 +	return 0;
 +}
-+HUSH_TEST(hush_test_until, 0);
++HUSH_TEST(hush_test_or, 0);
++
++static int hush_test_and_or(struct unit_test_state *uts)
++{
++	/* A && B || C truth table. */
++	ut_asserteq(1, run_command("false && false || false", 0));
++	ut_asserteq(1, run_command("false && false || true", 0));
++	ut_asserteq(1, run_command("false && true || true", 0));
++	ut_asserteq(1, run_command("false && true || false", 0));
++	ut_assertok(run_command("true && true || false", 0));
++	ut_asserteq(1, run_command("true && false || false", 0));
++	ut_assertok(run_command("true && false || true", 0));
++	ut_assertok(run_command("true && true || true", 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_and_or, 0);
++
++static int hush_test_or_and(struct unit_test_state *uts)
++{
++	/* A || B && C truth table. */
++	ut_asserteq(1, run_command("false || false && false", 0));
++	ut_asserteq(1, run_command("false || false && true", 0));
++	ut_assertok(run_command("false || true && true", 0));
++	ut_asserteq(1, run_command("false || true && false", 0));
++	ut_assertok(run_command("true || true && false", 0));
++	ut_assertok(run_command("true || false && false", 0));
++	ut_assertok(run_command("true || false && true", 0));
++	ut_assertok(run_command("true || true && true", 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_or_and, 0);
 -- 
 2.34.1
 
