@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1CBDC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 09:01:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFEF7C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 09:03:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41F6187103;
-	Tue,  7 Nov 2023 10:01:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 28B8E87126;
+	Tue,  7 Nov 2023 10:02:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KB8Lsh8Y";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="k2QIycF7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4786A87116; Tue,  7 Nov 2023 10:01:45 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 427D887134; Tue,  7 Nov 2023 10:02:58 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16F4B86BD7
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 10:01:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AC9C87116
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 10:02:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3b2ea7cc821so3449607b6e.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 01:01:43 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507bd19eac8so6974733e87.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 01:02:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699347701; x=1699952501; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ckR+RoVLPJPAMUtMQqZzbwCdRxUf/v+VoccY6k0MBZE=;
- b=KB8Lsh8YkmDpJu72fAdUJL2+55Bbx93DTKx4eqBFmllAAS7wLFSiFtJ9jp/9P3kWu2
- ArJCy0Cpwjs9L60xU11Z/03SvB+T0cFTZhAIGKX5OXty2r3LGYMc4Myv7IL+Fmp+1sqd
- wzyZ3dLo2zShdJSSog8hkaJ+kqADuUe1WJDYPj+HsjkD0QM7Fuf0UGxFQajosNxCBReN
- r5BLn4Jgw3vDuVBKpclg0KqwI+2V46lMQRCV6jRHK3pObDe0ZKjWnt+A1CvU8QICLJzV
- bxxH5h25afwhOyN5asK6140Qwi3d9WsWXKI3+hAGhYYPhM/PnPcDjrSFbEobjtOoWVW3
- tvgA==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1699347775; x=1699952575;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a3pI/829W3OuDe9zURtPQCHfr9ilIPmywUYZwkN1e5A=;
+ b=k2QIycF7LUvIj55IfmxyvzRjLuFyl5DE9EHsu2EK0VHVOtn0WlB4qCrOQEHaEtSOwg
+ 8IFoeP3hDr/Up6kH9qXfQIOl8V6RIIaDd6IX9tSfpD4pNvoift3gArDrRnhVJV9X7xt9
+ ux1YTYgdM6mKX5CnwjP/l/6Dbk8Vblag5vtbnTuPTwxCWUjzOO77beVzeiw0Okw6kVbv
+ GQL+He5ljjd4FUFQrcCgTXFwYjYF6iD6yNYby0iqr2RiZXrsBH21srte01MjDpzu0F4u
+ U1WJ7ipEKEpcikkl1/e7tlpxQKzC8BY5lJHq5667+aGhKwifkMGUV+0khWK3ZwNeMHDz
+ uK7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699347701; x=1699952501;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ckR+RoVLPJPAMUtMQqZzbwCdRxUf/v+VoccY6k0MBZE=;
- b=pTUnK9U2NwQJV/+nuO3ihBqI3BTrB+QI8vcr6qn2jIJ54Gv+87OHQbM/0+LyWYILso
- Owmah1GleLY8jmLIw27lQl4X6i+n5bpFgZFmRx6gu5fKVmWSqFONPckbjU2KH/vfnYjX
- W9oPpvlzymnwvLgVUfdvopmEcW/lbYFB9NLaFyAk7MXc6ZF16kmQm7muls5s3L377vKs
- oLRGRYO+v2ZIDGwLmie4rnaYYsIxUbPwDiMu8yUVGM5h+TpbCZEhALUwESMj7wDnP36l
- w9nIuUzlcegc4BV+VYn9iNfVRgjBjAFzLuQP6oMrbALNeIt11q59t+JDpBFBJDP58ldy
- CROA==
-X-Gm-Message-State: AOJu0YxhEjznNIZDHnkxpKi8V0eWiIJ5MQW9/EhWHGItGT7YMtTmEixs
- 8a4Im3eVOjkKm5dP/UWhRWzXbpPdBZxP1w==
-X-Google-Smtp-Source: AGHT+IGLMP5+6Vtv6zubpySSMOgdj9F3yUNwcRpaYcxAReHIvTfB+97s0XeAtpCsYOQLOY1cHzUDwQ==
-X-Received: by 2002:a05:6808:14c4:b0:3b5:663c:9b91 with SMTP id
- f4-20020a05680814c400b003b5663c9b91mr26412711oiw.12.1699347701620; 
- Tue, 07 Nov 2023 01:01:41 -0800 (PST)
-Received: from cs20-buildserver.lan ([180.217.132.54])
- by smtp.gmail.com with ESMTPSA id
- a12-20020a631a4c000000b005b3cc663c8csm982516pgm.21.2023.11.07.01.01.39
+ d=1e100.net; s=20230601; t=1699347775; x=1699952575;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=a3pI/829W3OuDe9zURtPQCHfr9ilIPmywUYZwkN1e5A=;
+ b=pmhZl9ykyy5exkzHPO0Go/wvbtB0F7hVekzO0BLX4WLoGWQ85r2L2mQtPqcWTsIiXQ
+ /KI+AOGwdZMmmp8phn0KYSPm6Mybdz1emPoRdXqC8PaqPEA7FnJ4kXdGAtWLuE5/eSLZ
+ T8cMTAQ5fTXKHztk/XJrIIQ9O94Ym0eaYeY8IiziGROBAplXFunP6S/vqzHPX7CynhyP
+ qZy2ZJ5UiuOpKIktlPXPxTHexa5GbMNCPSN4N8tOR376ygYKc3xVWRj2uDvmBFjfMMrv
+ nFo0Z059R4wptzAjwUkd91XaHAOqrZeV2mnhzScPlM+3qmaCC2B+hOkzF4gUlcbgfZQy
+ XaFQ==
+X-Gm-Message-State: AOJu0YyQI+G6vNBMztX+DyCnJDGid7Ckm8ore/mz9FBusayX01Sbs+4f
+ RPdJ42mcRcQK62cx1LSQfFWdvA==
+X-Google-Smtp-Source: AGHT+IG7ZAH/EHhLZhI90+UYVeAK3BaL5tQER/xOYg1HqEjHp2P3sVVTzsG03kF8qmWa52xZopl3fg==
+X-Received: by 2002:ac2:5204:0:b0:500:863e:fc57 with SMTP id
+ a4-20020ac25204000000b00500863efc57mr23309971lfl.25.1699347775198; 
+ Tue, 07 Nov 2023 01:02:55 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ f18-20020a5d58f2000000b0032f983f7306sm1751642wrd.78.2023.11.07.01.02.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 01:01:41 -0800 (PST)
-From: Jim Liu <jim.t90615@gmail.com>
-X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
-To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
- jim.t90615@gmail.com, seanga2@gmail.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2] clk: nuvoton: add read only feature for clk driver
-Date: Tue,  7 Nov 2023 17:01:28 +0800
-Message-Id: <20231107090128.199267-1-JJLIU0@nuvoton.com>
-X-Mailer: git-send-email 2.25.1
+ Tue, 07 Nov 2023 01:02:54 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [PATCH] usb: gadget: f_mass_storage: Stop ums on START-STOP
+ UNIT SCSI command
+In-Reply-To: <20231107001018.55640-1-marex@denx.de>
+References: <20231107001018.55640-1-marex@denx.de>
+Date: Tue, 07 Nov 2023 10:02:53 +0100
+Message-ID: <87jzqu9br6.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,101 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a flag to set ahb/apb/fiu clock divider as read-only
-It just protects the clock source and can't modify it in uboot.
+Hi Marek,
 
-Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
----
-Changes for v2:
-   - add commit message
----
- drivers/clk/nuvoton/clk_npcm.c    | 15 ++++++++++++---
- drivers/clk/nuvoton/clk_npcm.h    |  1 +
- drivers/clk/nuvoton/clk_npcm8xx.c | 12 ++++++------
- 3 files changed, 19 insertions(+), 9 deletions(-)
+Thank you for your patch.
 
-diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_npcm.c
-index 8d71f2a24b..18cb9cddbf 100644
---- a/drivers/clk/nuvoton/clk_npcm.c
-+++ b/drivers/clk/nuvoton/clk_npcm.c
-@@ -135,7 +135,7 @@ static u32 npcm_clk_get_div(struct clk *clk)
- 	return div;
- }
- 
--static u32 npcm_clk_set_div(struct clk *clk, u32 div)
-+static int npcm_clk_set_div(struct clk *clk, u32 div)
- {
- 	struct npcm_clk_priv *priv = dev_get_priv(clk->dev);
- 	struct npcm_clk_div *divider;
-@@ -145,6 +145,9 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
- 	if (!divider)
- 		return -EINVAL;
- 
-+	if (divider->flags & DIV_RO)
-+		return 0;
-+
- 	if (divider->flags & PRE_DIV2)
- 		div = div >> 1;
- 
-@@ -153,6 +156,12 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
- 	else
- 		clkdiv = ilog2(div);
- 
-+	if (clkdiv > (divider->mask >> (ffs(divider->mask) - 1))) {
-+		printf("clkdiv(%d) for clk(%ld) is over limit\n",
-+		       clkdiv, clk->id);
-+		return -EINVAL;
-+	}
-+
- 	val = readl(priv->base + divider->reg);
- 	val &= ~divider->mask;
- 	val |= (clkdiv << (ffs(divider->mask) - 1)) & divider->mask;
-@@ -253,8 +262,8 @@ static ulong npcm_clk_set_rate(struct clk *clk, ulong rate)
- 	if (ret)
- 		return ret;
- 
--	debug("%s: rate %lu, new rate (%lu / %u)\n", __func__, rate, parent_rate, div);
--	return (parent_rate / div);
-+	debug("%s: rate %lu, new rate %lu\n", __func__, rate, npcm_clk_get_rate(clk));
-+	return npcm_clk_get_rate(clk);
- }
- 
- static int npcm_clk_set_parent(struct clk *clk, struct clk *parent)
-diff --git a/drivers/clk/nuvoton/clk_npcm.h b/drivers/clk/nuvoton/clk_npcm.h
-index 06b60dc8b8..b4726d8381 100644
---- a/drivers/clk/nuvoton/clk_npcm.h
-+++ b/drivers/clk/nuvoton/clk_npcm.h
-@@ -50,6 +50,7 @@
- #define PRE_DIV2	BIT(2)	/* Pre divisor = 2 */
- #define POST_DIV2	BIT(3)	/* Post divisor = 2 */
- #define FIXED_PARENT	BIT(4)	/* clock source is fixed */
-+#define DIV_RO		BIT(5)	/* divider is read-only */
- 
- /* Parameters of PLL configuration */
- struct npcm_clk_pll {
-diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/clk_npcm8xx.c
-index 27e3cfcf55..d1b32e3237 100644
---- a/drivers/clk/nuvoton/clk_npcm8xx.c
-+++ b/drivers/clk/nuvoton/clk_npcm8xx.c
-@@ -45,12 +45,12 @@ static struct npcm_clk_select npcm8xx_clk_selectors[] = {
- };
- 
- static struct npcm_clk_div npcm8xx_clk_dividers[] = {
--	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2},
--	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2},
--	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2},
--	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1},
--	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1},
--	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1},
-+	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2 | DIV_RO},
-+	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2 | DIV_RO},
-+	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2 | DIV_RO},
-+	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1 | DIV_RO},
-+	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1 | DIV_RO},
-+	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1 | DIV_RO},
- 	{NPCM8XX_CLK_SPIX, CLKDIV3, SPIXCKDIV, DIV_TYPE1},
- 	{NPCM8XX_CLK_UART, CLKDIV1, UARTDIV1, DIV_TYPE1},
- 	{NPCM8XX_CLK_UART2, CLKDIV3, UARTDIV2, DIV_TYPE1},
--- 
-2.25.1
+On mar., nov. 07, 2023 at 01:09, Marek Vasut <marex@denx.de> wrote:
 
+> Exit the UMS handler loop in case START-STOP UNIT SCSI command is
+> received. This is sent e.g. by the util-linux eject(1) command and
+> indicates to the device that it is supposed to spin down the media
+> and enter low power state.
+>
+> This effectively adds support for exitting the 'ums' command from
+> host using 'eject /dev/sdN' that is on par with 'dfu-util -e' .
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  drivers/usb/gadget/f_mass_storage.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
+> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+> index 1d17331cb03..c725aed3f62 100644
+> --- a/drivers/usb/gadget/f_mass_storage.c
+> +++ b/drivers/usb/gadget/f_mass_storage.c
+> @@ -327,6 +327,7 @@ struct fsg_common {
+>  	unsigned int		short_packet_received:1;
+>  	unsigned int		bad_lun_okay:1;
+>  	unsigned int		running:1;
+> +	unsigned int		eject:1;
+>  
+>  	int			thread_wakeup_needed;
+>  	struct completion	thread_notifier;
+> @@ -669,6 +670,10 @@ static int sleep_thread(struct fsg_common *common)
+>  		}
+>  
+>  		if (k == 10) {
+> +			/* Handle START-STOP UNIT */
+> +			if (common->eject)
+> +				return -EPIPE;
+> +
+>  			/* Handle CTRL+C */
+>  			if (ctrlc())
+>  				return -EPIPE;
+> @@ -1325,6 +1330,8 @@ static int do_start_stop(struct fsg_common *common)
+>  		return -EINVAL;
+>  	}
+>  
+> +	common->eject = 1;
+> +
+>  	return 0;
+>  }
+>  
+> -- 
+> 2.42.0
