@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C926FC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 20:45:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A092C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:22:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEF9D870BB;
-	Tue,  7 Nov 2023 21:45:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6033387608;
+	Tue,  7 Nov 2023 22:22:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bBSGCcsu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JO7P3TS5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DBE88754A; Tue,  7 Nov 2023 21:45:08 +0100 (CET)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id C04E38760C; Tue,  7 Nov 2023 22:22:04 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53A7E803AC
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 21:45:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6504F8760D
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:22:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5842a7fdc61so3094693eaf.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 12:45:06 -0800 (PST)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3b3f6dd612cso3627003b6e.3
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:22:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699389905; x=1699994705; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699392121; x=1699996921; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BI7kd0PCGYzP/0taZgMoaKLAxTp4pO3ii8hNIjgQ6og=;
- b=bBSGCcsuqys+09StP9F1fJMJqHGM7AKx4QFkCKTyzekHY1GI1f5c4bR8hnfUCRNCIa
- +U18dKhZtsn84TAtHuUkvpXtGUMNavcwBpATNJpfPha3YWND60ayJYnhW0NWQNkh7gfR
- 2h0UmctuJqemwmtykalRUntFHWM4MFqC7UdnGfad71mauSaYaJsihm7X530IZjhy5sve
- 8JjYbvms2FKSApRQzdPSG8th6Iezno5ZqAJAOaziI4bUQZSupBjOOknC1q8Tf2YZQbUZ
- P+BdJ6G9948rNvbN06T4wSJE+1nUOuAL32XdIKFcH1f5fP2OhpiLA4y8t9tcx53TjqDQ
- AJ8A==
+ bh=dLCGF8YJJVWI3B78aL8znwuEHe9qxhGHsPhEzLlRGbg=;
+ b=JO7P3TS5nYDjD/hH3BjJKkzr0x9juCJvm0R2XSIy1ouPFbWJWiTZyCm9pVflwSO1St
+ LQp+X/J/sV6ar7lFxmbfgF9hNNTt1X3kHVO/E9JZIB5pqWXi5wY/6nPlwcmsfJrlXpTt
+ l8B4cxNWKvWzlE3S9uET3AJ6OQuijEWLGtdLvpb4K7Nqfjs1uBVTCBI6LnalTSsjkFnP
+ 9dQs6XaMK1T07n1gNBSWC0Gdz19ZWj6K4RMWkNnSchNklDns58rb5HVrH3qiyg8Fj6vs
+ sVRDsfplXh8GAettHjTeZwMB3gfo0gmisfODF5+HBGeRes9GolXBnDaXIKbnDhLXlW1l
+ 9qpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699389905; x=1699994705;
+ d=1e100.net; s=20230601; t=1699392121; x=1699996921;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BI7kd0PCGYzP/0taZgMoaKLAxTp4pO3ii8hNIjgQ6og=;
- b=HwrpdgLh8r7aV3yQmANgfUzyH0ikpofrwFoVLYS7AwaFgoQktgx7e0NGjDXVDhcNtp
- /qOJ14iFFt43UNaOCXi5xbCYiQq0hEtmxLLO94yn5Vfe2qgIXIzGuoyGf6H8TOTmNYq5
- sSy5DycdcGGVUWu9ua19MJN6cdmwj5ke2/2NT+Ia3cfxdVFQwA3d8qRmiQPMlD8nWS2A
- 1iDi/MKdllAr2UjLAAXmMokRuvVhUEDHtTKoez3ZbbRVonzsUCeUKNZaaGJtCC/e9buo
- cTEX0Zyx/e1cdhtry16qYVlw6SQrwE0ubzbwauXuWpjFDiH7ELorXNVddMXj69TyYY/5
- nMbg==
-X-Gm-Message-State: AOJu0YwDrg3BBhvD1V1gfDd+PszXohY6M0OExFVbF0pWBIRhq96rgget
- NOk3sXxddpP5goRVQH2/CJtNkhOHcj8q0o0KAMpW6g==
-X-Google-Smtp-Source: AGHT+IFJed0Xj6naGwkUrcww+aQ/7oW10gPQUyekrELzeTYyTp9YWL1MtMPpNTzEK7mUCJCFO+9ENA==
-X-Received: by 2002:a4a:a50c:0:b0:57b:7e41:9f11 with SMTP id
- v12-20020a4aa50c000000b0057b7e419f11mr681184ook.2.1699389905019; 
- Tue, 07 Nov 2023 12:45:05 -0800 (PST)
+ bh=dLCGF8YJJVWI3B78aL8znwuEHe9qxhGHsPhEzLlRGbg=;
+ b=w688FPfoWHPnmeguotQGbVnF2BKWt/qKnqL4J6Racms3QdxT0XCaiUizgFidUvQUMD
+ 2DyUJFYePrtP3C/xVgxDkz5DDAXi0dOSMmwGf8d6yBmXAMTqTQPQyP6/Ot7uTNkeHOLn
+ YJ91yNsvJ9toS6cxbt8xPsgtFmw6a8j/wFP97KSNyGoSo3arprv5zUlq9pN0pq10+vd0
+ +w65FSVqbTUqnsKe0uzultJLKG81ndjSjRYdbK5JwwY69avDx8K24iFhtwMHVv8roOsY
+ o2lVDf1yDY2j2ToHdLDxN2hQ8gZUnz5Z0gXoUswkULPGQV2bfMMuS/8mdugdhEsQwPbi
+ jQpQ==
+X-Gm-Message-State: AOJu0Yw+h3lWU+h12Sao8dLLQpiUxekgjDbDWn46mATyMn5/QU2pASaE
+ w/gdH7UTVPqykYL0fqHESanD4A==
+X-Google-Smtp-Source: AGHT+IHtbv/4fiekjeqkG3bXdWpZoVjhPwmzq1ZBuUlf+214REhM5HqVEAFj1qrLDf1h7RE2wgHk3g==
+X-Received: by 2002:aca:2b04:0:b0:3af:8672:36f8 with SMTP id
+ i4-20020aca2b04000000b003af867236f8mr260410oik.7.1699392121068; 
+ Tue, 07 Nov 2023 13:22:01 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- g15-20020a4ab04f000000b0054f85f67f31sm2087452oon.46.2023.11.07.12.45.04
+ q27-20020a0568080a9b00b003b2daf09267sm1688094oij.48.2023.11.07.13.22.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 12:45:04 -0800 (PST)
+ Tue, 07 Nov 2023 13:22:00 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] MAINTAINERS: Fix Sam Protsenko mail
-Date: Tue,  7 Nov 2023 14:45:04 -0600
-Message-Id: <20231107204504.7063-1-semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Thomas Abraham <thomas.ab@samsung.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
+Subject: [PATCH] clk: exynos: Add header guard for clk-pll.h
+Date: Tue,  7 Nov 2023 15:22:00 -0600
+Message-Id: <20231107212200.1457-1-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -87,27 +89,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sam works for Linaro again. Use his work e-mail address for ANDROID AB
-subsystem.
+The clk-pll.h is going to be included in multiple files soon. Add
+missing header guard to prevent possible build errors in future.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+Fixes: 166097e87753 ("clk: exynos: add clock driver for Exynos7420 Soc")
 ---
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/exynos/clk-pll.h | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cde778bc4d3d..d21f66b0b67b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -58,7 +58,7 @@ F:	lib/acpi/
+diff --git a/drivers/clk/exynos/clk-pll.h b/drivers/clk/exynos/clk-pll.h
+index c79aac44258b..7b7af5e67612 100644
+--- a/drivers/clk/exynos/clk-pll.h
++++ b/drivers/clk/exynos/clk-pll.h
+@@ -5,4 +5,9 @@
+  * Thomas Abraham <thomas.ab@samsung.com>
+  */
  
- ANDROID AB
- M:	Igor Opaniuk <igor.opaniuk@gmail.com>
--R:	Sam Protsenko <joe.skb7@gmail.com>
-+R:	Sam Protsenko <semen.protsenko@linaro.org>
- S:	Maintained
- F:	cmd/ab_select.c
- F:	common/android_ab.c
++#ifndef __EXYNOS_CLK_PLL_H
++#define __EXYNOS_CLK_PLL_H
++
+ unsigned long pll145x_get_rate(unsigned int *con1, unsigned long fin_freq);
++
++#endif /* __EXYNOS_CLK_PLL_H */
 -- 
 2.39.2
 
