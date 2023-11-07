@@ -4,56 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA02EC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 22:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22EDDC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 23:12:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A198F876A5;
-	Tue,  7 Nov 2023 23:58:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id B846087663;
+	Wed,  8 Nov 2023 00:12:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="VleRJB2i";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="S1ORyA9n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08FB870EB; Tue,  7 Nov 2023 23:16:31 +0100 (CET)
-Received: from smtp-out.freemail.hu (fmfe34.freemail.hu [46.107.16.239])
+ id D366A8764C; Wed,  8 Nov 2023 00:12:27 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B81A8756F
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 23:16:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E33E8763E
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 00:12:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from localhost.localdomain (catv-80-98-74-198.catv.fixed.vodafone.hu
- [80.98.74.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4SQ2cX1Ksgz1jZ;
- Tue,  7 Nov 2023 23:16:28 +0100 (CET)
-From: egyszeregy@freemail.hu
-To: u-boot@lists.denx.de
-Cc: otavio@ossystems.com.br, festevam@gmail.com, sbabic@denx.de,
- =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
-Date: Tue,  7 Nov 2023 23:16:17 +0100
-Message-ID: <20231107221617.470-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.42.0.windows.2
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 70112CE0A29;
+ Tue,  7 Nov 2023 23:12:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93A64C433C7;
+ Tue,  7 Nov 2023 23:12:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699398741;
+ bh=qWKc0fSkdyP1LKxtOWOR7VcGH1r1eryn0LrGCJ2qRNM=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=S1ORyA9n613hPW9qaspmLU2pxOJ/sPkH5LEfip3uGk8uDkIsvZgTsks1CNbY7CRA1
+ vFMwI/k+10lcj7Ge0DKd5xAfYwMMVxGsz5Y5Jysk0MsTXkVbPyQuWQf+i/2WX/ppbC
+ L2J9XWY0e60p4JDTnhTZPg3G/hKbDtBI5Cea3aejkp7e7Q7HNUhSCMQ86IrXwXEVyr
+ cQOqKfZiD05DVoRzsv1AQlSBsn+C16/DziwitRvDD5Lx4qbhjOLA77POR3GCey7PkG
+ 6CPNDtwuv7f0TBLArpGEtEPVdIB9hiPSFtbagDI8Rxux/Xbag6TUwZ5zRcdeJdtrS+
+ VqRoZOM/BGyeQ==
+Date: Tue, 7 Nov 2023 23:12:16 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Rob Herring <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, palmer@dabbelt.com
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Message-ID: <20231107-audible-undoing-293506af3890@spud>
+References: <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
+ <20231106172601.12c36750@donnerap.manchester.arm.com>
+ <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
+ <20231106204608.GJ496310@bill-the-cat>
+ <CAPnjgZ28HskiFDBDa=s_k6=WNoPfWu88bAaYCY7ew8dcYXW=aQ@mail.gmail.com>
+ <20231107193025.GN6601@bill-the-cat>
+ <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
+ <20231107221023.GS6601@bill-the-cat>
+ <20231107-flyaway-arguable-0bccc778b256@spud>
+ <20231107223837.GU6601@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1699395388; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=8942; bh=087ktsnklXOfgdZd9o7OCEyLJO9nm/k775FbGN/zyI8=;
- b=VleRJB2iwEjlx+BXZtJLllE/Kx1F4yokcgfKVU3C/6oJBCkUlReEpq1iyjql5+Du
- Pz1hV1sKrpq7h4mK7yDUVkj705IwYKFXKzAx91VfcPURVkwMVeVAt/doMCbJqFMUBQ1
- 52hgHRga1HDWYe2Roi4b/XhzflH5VPNKxqqu+h/QHM9P7LtkePM1i73WB5jupqu0amJ
- m7EDN/LAY8M2sGqDvGk/Ng+JxoIiR4gt9bHOawgyIm/HtKQkuFApwg74ooziX16jdb8
- iWE38gpWXh/Vj6rUQ+PUQ6H9JqpOLHDhA7Qdx+TVL9EMOFHfyv8plXNIWw2k55hxgYZ
- coVfJNBr/Q==
-X-Mailman-Approved-At: Tue, 07 Nov 2023 23:58:28 +0100
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="ssGjVTzN0g7HRKBZ"
+Content-Disposition: inline
+In-Reply-To: <20231107223837.GU6601@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,295 +87,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Szőke <egyszeregy@freemail.hu>
 
-Technexion PICO-IMX7 SoM is supporting USDHC3 (eMMC or micro SD on SoM)
-and USDHC1 (SD on carrier board) to use on any carrier board like
-PICO-NYMPH. Based on the U-Boot version from Technexion it adds
-baseboard SD card boot detect to able to boot from selected USDHC1
-or USDHC3 boot devices.
+--ssGjVTzN0g7HRKBZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-    - Add baseboard SD card boot detect from Technexion's U-Boot.
-    - Implement board_mmc_get_env_dev() for pico-imx7d SoM.
-    - Implement mmc_map_to_kernel_blk() for pico-imx7d SoM.
-    - Add board_late_mmc_env_init() to use from common freescale
-      functions to able to provide "mmcdev" and "mmcroot" variables
-      in environment of U-boot.
-    - Add "mmc1" alias to use for usdhc1 in imx7d-pico-pi-u-boot.dtsi.
-    - In default environment set "mmcautodetect=yes" to use boot detection.
++CC Palmer
 
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- arch/arm/dts/imx7d-pico-pi-u-boot.dtsi   |  1 +
- board/technexion/pico-imx7d/Makefile     |  2 +-
- board/technexion/pico-imx7d/pico-imx7d.c | 63 ++++++++++++++++
- board/technexion/pico-imx7d/spl.c        | 91 ++++++++++++++++++++++--
- include/configs/pico-imx7d.h             |  4 +-
- 5 files changed, 152 insertions(+), 9 deletions(-)
+On Tue, Nov 07, 2023 at 05:38:37PM -0500, Tom Rini wrote:
+> On Tue, Nov 07, 2023 at 10:27:50PM +0000, Conor Dooley wrote:
+> > On Tue, Nov 07, 2023 at 05:10:23PM -0500, Tom Rini wrote:
+> >=20
+> >=20
+> > > further clarify or not
+> > > the RISC-V ISA thing that's elsewhere in this thread (and part of the
+> > > kernel, not a U-Boot thing).
+> >=20
+> > TBH, this a bit fragmented across threads, and as someone that hasn't
+> > been following it it's a bit difficult to tell exactly what is being
+> > asked for. Would someone be able to ask it as a direct question?
+>=20
+> Sorry for being unclear, and thanks for asking. What I think the U-Boot
+> community would like to know is, what is the device-tree based way to
+> know if a RISC-V platform has the Zbb extensions
 
-diff --git a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-index 843b4583e5..6289a76486 100644
---- a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-+++ b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-@@ -3,6 +3,7 @@
- /{
-     aliases {
-         mmc0 = &usdhc3;
-+		mmc1 = &usdhc1;
-         usb0 = &usbotg1;
-         display0 = &lcdif;
-     };
-diff --git a/board/technexion/pico-imx7d/Makefile b/board/technexion/pico-imx7d/Makefile
-index 4ae3d606b5..61b55fcc55 100644
---- a/board/technexion/pico-imx7d/Makefile
-+++ b/board/technexion/pico-imx7d/Makefile
-@@ -1,4 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0+
- # (C) Copyright 2017 NXP Semiconductors
- 
--obj-y  := pico-imx7d.o spl.o
-+obj-y  := pico-imx7d.o spl.o ../../freescale/common/mmc.o
-diff --git a/board/technexion/pico-imx7d/pico-imx7d.c b/board/technexion/pico-imx7d/pico-imx7d.c
-index 6e98b85b28..edd66ac7ac 100644
---- a/board/technexion/pico-imx7d/pico-imx7d.c
-+++ b/board/technexion/pico-imx7d/pico-imx7d.c
-@@ -13,6 +13,7 @@
- #include <asm/global_data.h>
- #include <asm/gpio.h>
- #include <asm/mach-imx/iomux-v3.h>
-+#include <asm/mach-imx/boot_mode.h>
- #include <asm/io.h>
- #include <common.h>
- #include <miiphy.h>
-@@ -25,6 +26,11 @@ DECLARE_GLOBAL_DATA_PTR;
- #define UART_PAD_CTRL  (PAD_CTL_DSE_3P3V_49OHM | \
- 	PAD_CTL_PUS_PU100KOHM | PAD_CTL_HYS)
- 
-+#define PICO_MMC0 0
-+#define PICO_MMC0_BLK 2
-+#define PICO_MMC1 1
-+#define PICO_MMC1_BLK 0
-+
- int dram_init(void)
- {
- 	gd->ram_size = imx_ddr_size();
-@@ -176,6 +182,12 @@ int board_late_init(void)
- 
- 	set_wdog_reset(wdog);
- 
-+#if CONFIG_IS_ENABLED(FSL_ESDHC_IMX)
-+#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
-+	board_late_mmc_env_init();
-+#endif /* CONFIG_ENV_IS_IN_MMC or CONFIG_ENV_IS_NOWHERE */
-+#endif
-+
- 	/*
- 	 * Do not assert internal WDOG_RESET_B_DEB(controlled by bit 4),
- 	 * since we use PMIC_PWRON to reset the board.
-@@ -210,3 +222,54 @@ int board_ehci_hcd_init(int port)
- 	}
- 	return 0;
- }
-+
-+#if CONFIG_IS_ENABLED(FSL_ESDHC_IMX)
-+#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
-+int board_mmc_get_env_dev(int devno)
-+{
-+	int dev_env = 0;
-+	(void)(devno);
-+
-+	switch (get_boot_device()) {
-+	case SD3_BOOT:
-+	case MMC3_BOOT:
-+		env_set("bootdev", "MMC3");
-+		dev_env = PICO_MMC0;
-+		break;
-+	case SD1_BOOT:
-+		env_set("bootdev", "SD1");
-+		dev_env = PICO_MMC1;
-+		break;
-+	default:
-+		printf("Wrong boot device!");
-+	}
-+
-+	return dev_env;
-+}
-+
-+int mmc_map_to_kernel_blk(int dev_no)
-+{
-+	int blk_no = 0;
-+
-+	switch (dev_no) {
-+	case PICO_MMC0:
-+		blk_no = PICO_MMC0_BLK;
-+		break;
-+	case PICO_MMC1:
-+		blk_no = PICO_MMC1_BLK;
-+		break;
-+	default:
-+		printf("Invalid MMC device!");
-+	}
-+
-+	return blk_no;
-+}
-+#endif
-+
-+#if CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
-+int mmc_get_env_dev(void)
-+{
-+	return board_mmc_get_env_dev(0);
-+}
-+#endif
-+#endif /* CONFIG_FSL_ESDHC_IMX */
-diff --git a/board/technexion/pico-imx7d/spl.c b/board/technexion/pico-imx7d/spl.c
-index c6b21aaa42..0192eafbaa 100644
---- a/board/technexion/pico-imx7d/spl.c
-+++ b/board/technexion/pico-imx7d/spl.c
-@@ -15,6 +15,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/arch-mx7/mx7-ddr.h>
- #include <asm/mach-imx/iomux-v3.h>
-+#include <asm/mach-imx/boot_mode.h>
- #include <asm/gpio.h>
- #include <asm/sections.h>
- #include <fsl_esdhc_imx.h>
-@@ -159,7 +160,20 @@ void reset_cpu(void)
- #define USDHC_PAD_CTRL (PAD_CTL_DSE_3P3V_32OHM | PAD_CTL_SRE_SLOW | \
- 	PAD_CTL_HYS | PAD_CTL_PUE | PAD_CTL_PUS_PU47KOHM)
- 
--static iomux_v3_cfg_t const usdhc3_pads[] = {
-+#define USDHC1_CD_GPIO	IMX_GPIO_NR(5, 0)
-+/* EMMC/SD */
-+static const iomux_v3_cfg_t usdhc1_pads[] = {
-+	MX7D_PAD_SD1_CLK__SD1_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_CMD__SD1_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA0__SD1_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA1__SD1_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA2__SD1_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_DATA3__SD1_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	MX7D_PAD_SD1_CD_B__GPIO5_IO0  | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+};
-+
-+#define USDHC3_CD_GPIO IMX_GPIO_NR(1, 14)
-+static const iomux_v3_cfg_t usdhc3_emmc_pads[] = {
- 	MX7D_PAD_SD3_CLK__SD3_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
- 	MX7D_PAD_SD3_CMD__SD3_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
- 	MX7D_PAD_SD3_DATA0__SD3_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-@@ -173,20 +187,83 @@ static iomux_v3_cfg_t const usdhc3_pads[] = {
- 	MX7D_PAD_GPIO1_IO14__GPIO1_IO14 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
- };
- 
--static struct fsl_esdhc_cfg usdhc_cfg[1] = {
-+static struct fsl_esdhc_cfg usdhc_cfg[2] = {
- 	{USDHC3_BASE_ADDR},
-+	{USDHC1_BASE_ADDR},
- };
- 
- int board_mmc_getcd(struct mmc *mmc)
- {
--	/* Assume uSDHC3 emmc is always present */
--	return 1;
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	switch (cfg->esdhc_base) {
-+	case USDHC1_BASE_ADDR:
-+		ret = !gpio_get_value(USDHC1_CD_GPIO);
-+		break;
-+	case USDHC3_BASE_ADDR:
-+		ret = !gpio_get_value(USDHC3_CD_GPIO);
-+		break;
-+	}
-+
-+	return ret;
- }
- 
- int board_mmc_init(struct bd_info *bis)
- {
--	imx_iomux_v3_setup_multiple_pads(usdhc3_pads, ARRAY_SIZE(usdhc3_pads));
--	usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
--	return fsl_esdhc_initialize(bis, &usdhc_cfg[0]);
-+	int ret;
-+	u32 index;
-+
-+	/*
-+	 * Following map is done:
-+	 * (USDHC)	(Physical Port)
-+	 * usdhc3	SOM MicroSD/MMC
-+	 * usdhc1	Carrier board MicroSD
-+	 * Always set boot USDHC as mmc0
-+	 */
-+
-+	imx_iomux_v3_setup_multiple_pads(usdhc3_emmc_pads,
-+					 ARRAY_SIZE(usdhc3_emmc_pads));
-+	gpio_direction_input(USDHC3_CD_GPIO);
-+
-+	imx_iomux_v3_setup_multiple_pads(usdhc1_pads,
-+					 ARRAY_SIZE(usdhc1_pads));
-+	gpio_direction_input(USDHC1_CD_GPIO);
-+
-+	switch (get_boot_device()) {
-+	case SD1_BOOT:
-+		usdhc_cfg[0].esdhc_base = USDHC1_BASE_ADDR;
-+		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+		usdhc_cfg[0].max_bus_width = 4;
-+		usdhc_cfg[1].esdhc_base = USDHC3_BASE_ADDR;
-+		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
-+		usdhc_cfg[1].max_bus_width = 4;
-+		break;
-+	case MMC3_BOOT:
-+		usdhc_cfg[0].esdhc_base = USDHC3_BASE_ADDR;
-+		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
-+		usdhc_cfg[0].max_bus_width = 8;
-+		usdhc_cfg[1].esdhc_base = USDHC1_BASE_ADDR;
-+		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+		usdhc_cfg[1].max_bus_width = 4;
-+		break;
-+	case SD3_BOOT:
-+	default:
-+		usdhc_cfg[0].esdhc_base = USDHC3_BASE_ADDR;
-+		usdhc_cfg[0].sdhc_clk = mxc_get_clock(MXC_ESDHC3_CLK);
-+		usdhc_cfg[0].max_bus_width = 4;
-+		usdhc_cfg[1].esdhc_base = USDHC1_BASE_ADDR;
-+		usdhc_cfg[1].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
-+		usdhc_cfg[1].max_bus_width = 4;
-+		break;
-+	}
-+
-+	for (index = 0; index < CFG_SYS_FSL_USDHC_NUM; ++index) {
-+		ret = fsl_esdhc_initialize(bis, &usdhc_cfg[index]);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
- }
- #endif
-diff --git a/include/configs/pico-imx7d.h b/include/configs/pico-imx7d.h
-index 096e5bbe66..e7a8cb20df 100644
---- a/include/configs/pico-imx7d.h
-+++ b/include/configs/pico-imx7d.h
-@@ -13,7 +13,7 @@
- #define CFG_MXC_UART_BASE		UART5_IPS_BASE_ADDR
- 
- /* MMC Config */
--#define CFG_SYS_FSL_ESDHC_ADDR	0
-+#define CFG_SYS_FSL_ESDHC_ADDR	USDHC3_BASE_ADDR
- 
- #define CFG_DFU_ENV_SETTINGS \
- 	"dfu_alt_info=" \
-@@ -79,9 +79,11 @@
- 		"name=rootfs,size=0,uuid=${uuid_gpt_rootfs}\0" \
- 	"fastboot_partition_alias_system=rootfs\0" \
- 	"setup_emmc=mmc dev 0; gpt write mmc 0 $partitions; reset;\0" \
-+	"mmcautodetect=yes\0" \
- 	PICO_BOOT_ENV
- 
- #define BOOT_TARGET_DEVICES(func) \
-+	func(MMC, mmc, 1) \
- 	func(MMC, mmc, 0) \
- 	func(USB, usb, 0) \
- 	func(PXE, pxe, na) \
--- 
-2.42.0.windows.2
+For this one, it's pretty straightforward IMO - if riscv,isa-extensions
+contains "zbb", then you are safe to use those instructions. My
+understanding is that relying on getting illegal instruction traps is
+not a sufficient test for usability of standard extensions, as a vendor
+extension could be using the same opcodes as a standard extension.
 
+> so the RNG opcodes,
+> similar (in concept at least?) to the ARMv8.5 RNG feature.
+
+The ordinary extensions that are instructions - like Zbkb that provides
+bit manipulation instructions for cryptography you will be able to rely
+on riscv,isa-extensions also. Zkr is actually a CSR acting as an entropy
+source and is a bit more complicated. RISC-V Cryptography Extensions
+Volume I, Chapter Four [0] is the relevant thing for use of the CSR
+provided by Zkr, and it says "The seed CSR is also access controlled by
+execution mode, and attempted read or write access will raise an illegal
+instruction exception outside M mode unless access is explicitly granted."
+My take is that either the SBI implementation needs to provide S-Mode
+U-Boot with an accurate devicetree (including what extensions are valid
+for use in S-mode) or if the devicetree is provided as part of the U-Boot
+binary then it needs to match what is available at that privilege level
+on the platform. In this case, you would also be able to rely on
+riscv,isa-extensions for that detection. There is an existing dt-binding
+patch
+<https://lore.kernel.org/linux-riscv/20231107105556.517187-6-cleger@rivosin=
+c.com/>
+that adds Zkr, and my proposal would be to document that the presence of Zkr
+explicitly in riscv,isa-extensions means that the bit in mseccfg.[s,u]seed
+has been set so it can be used at the current privilege level.
+
+If that's not acceptable, and people think that having Zkr in the
+devicetree means that the hardware has the extension, regardless of
+usability at the present privilege level, then IMO we need an SBI ecall
+defined to request entablement of the CSR & report as to whether or not
+that was possible.
+
+I'm not sure how any of the above lines up with the ARMv8.5 RNG feature
+unfortunately.
+
+Cheers,
+Conor.
+
+0 - https://github.com/riscv/riscv-crypto/releases/tag/v1.0.1-scalar
+
+--ssGjVTzN0g7HRKBZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZUrEUAAKCRB4tDGHoIJi
+0vcrAP9XNRnzG/QFNGJgC93hkj55rasy0/lsEQLttkjsI6q3XAEAvC9hp2o22WFQ
+bWz9jgQQp+2jzNE0l1fkhXgJRKOyoAg=
+=ZWSf
+-----END PGP SIGNATURE-----
+
+--ssGjVTzN0g7HRKBZ--
