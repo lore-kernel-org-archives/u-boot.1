@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E06C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 14:30:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E271BC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 14:47:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CB3B8715E;
-	Tue,  7 Nov 2023 15:30:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 084D186F99;
+	Tue,  7 Nov 2023 15:47:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ec0YBIJ2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AcEyzSkZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BA86864E5; Tue,  7 Nov 2023 15:30:54 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 5013887076; Tue,  7 Nov 2023 15:47:56 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93EC7864E5
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 15:30:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FA9186F44
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 15:47:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5440f25dcc7so7594134a12.0
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 06:30:51 -0800 (PST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-53db360294fso9920262a12.3
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 06:47:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699367451; x=1699972251; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YlgIrrj4/tIxBuCvFFuU7dkzz8qwf+s/YvM9FpEFxKs=;
- b=ec0YBIJ2d4tuBAg1fHlG8km6LH95iUv4ErfuC8/jgMh14omnu4LBdNzXFJ7MyYFjiN
- 0kzb787kcw3CVBYxLa9ZnanoFb82ckAqfUpYCSQoMIM9bSBF1FLiVaDXafBG0OYT125c
- 3vBU0fa0nV+VQDql+e7D/i3QhfGreaVVHQwjM=
+ d=chromium.org; s=google; t=1699368473; x=1699973273; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NnbeJZKiQOh5K3sI9hqRkc3lnO9o5y6c5lTMMzgYvsY=;
+ b=AcEyzSkZMbjTvByQOEUPkVhvjF7/RWMUX51mA8oqbvp/X15AMwR7fzGXY91XEMnrfE
+ jhLPP0c3aNYmwvYSW9WPIuGma7NpoH3hePGhbnPDr9SpeSn0lCbhOAe2Mq4yU1Db64aM
+ HbMgdEZU0eVpbHrcNTGXsWRhvtjRULf9reQlI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699367451; x=1699972251;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YlgIrrj4/tIxBuCvFFuU7dkzz8qwf+s/YvM9FpEFxKs=;
- b=YI3YAggNffNIPKXPZmaP+EWF5LYfWM2ht/IGvsEYQTBOU7C+w5Arm66a8zM6YNcbc0
- mGRqL1mKtZqu001x38gGyNEKQ5qhG9Vn8vNsOir80yLlRf1Xb8OWQs/wWoLHsGSEUWVF
- vqGxc9ip4iF+cHsim3ydgq5uBjIGIDFE8y7wahSdxn5mOEPMgNDKpUQchc//mZ3P3YS3
- yvliQXvbGXC2KJ37faKL/0Ewir5CUs3hFXyysTojbDzUOZwp2lKbRPnFMk6BPxlj1e1T
- TdC6B5fN53J1VbalUfoAvdit28lLS+Uu2DMkaLXge7oLRuCE32OFqefH8tz+pi6i8A5p
- ET/Q==
-X-Gm-Message-State: AOJu0YyUgOutRcdKeKrRWMyaknQlQhWUYBo5Z6uOFsEfavDG7SgXd/bO
- tLajPXrsEneBlpm8WPCNsWPAGZUEfOioCtYmnYBMW15NmnB14UJ8Whsa8Q==
-X-Google-Smtp-Source: AGHT+IEWmalknnSYzN899Y+FVo+/SpygQ7Wkc/wppPTe9AOjiqoPdIeIsGYkURP9NGbSsTXOUxi+D2hwpnGcCI3Bjq8=
-X-Received: by 2002:a50:d6cf:0:b0:544:224b:a4d2 with SMTP id
- l15-20020a50d6cf000000b00544224ba4d2mr10337640edj.0.1699367450763; Tue, 07
- Nov 2023 06:30:50 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699368473; x=1699973273;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NnbeJZKiQOh5K3sI9hqRkc3lnO9o5y6c5lTMMzgYvsY=;
+ b=SXmYptfDX2afw0/tAUO7FQVLcGQijYAcy/AyIbEunFaYLuq6T3zJo2gmBtGxfnGmCy
+ uWa6eHC93Gt5vU+9ZLwrTxrGL9blPRYk10IbvH832khotEqdH6ftkenIWgz/uMvHtXkm
+ L+NCngCholqhDnXBERuFIx/j20aQOmAoonfFuNosv5jdqNNJ9whY+1qlHwiJ9+mWbhoz
+ O3b52r9iWxEErgadq9N5QEv/IwL6f42xe4bq4f7c4qMV0FL+EDAR3EhdfOdrbZUAL/Qx
+ fczVJynCjLVA6AXP+wZ9Qf1nKl+ubLg6KQKFP4G0Umi5QV/1WS2KGcSuFQGlTVFeTkW3
+ 34/Q==
+X-Gm-Message-State: AOJu0YwACjNDz6gvo8n+0uQZagJ9dC08niCqsOooVeXO6GuXgv8LqjQy
+ Iom546PJbvJQUMZT0UQRUcHBmmJ9Yt+fPJMzLjeyqg==
+X-Google-Smtp-Source: AGHT+IENfNsJXAisXICQ9hXfEFELw1udePjhEHmkIST9uDdPVV64sOD6sNTW7nyc6dFHLgikhceAKATe9uLSfW7Kz5c=
+X-Received: by 2002:a50:8adc:0:b0:543:c578:f9d2 with SMTP id
+ k28-20020a508adc000000b00543c578f9d2mr15339820edk.2.1699368473317; Tue, 07
+ Nov 2023 06:47:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20231105200453.1887418-1-sjg@chromium.org>
- <7a1345b9-8844-48e9-a1b5-8c7508cefeb1@prevas.dk>
- <CAPnjgZ1BbpM_Ksr5aKg2zWLv1FPy-N_Kz6fbrkZoh=i7LfpMUA@mail.gmail.com>
- <20231107130450.GA6601@bill-the-cat>
- <CAPnjgZ0jFTG-Rq0u5yaMjSxcxdQvr578W2P+nzFx0g0GbQHjNQ@mail.gmail.com>
- <20231107134946.GD6601@bill-the-cat>
-In-Reply-To: <20231107134946.GD6601@bill-the-cat>
+References: <20231104194207.3370542-1-sjg@chromium.org>
+ <20231104194207.3370542-3-sjg@chromium.org>
+ <CAK7LNASVOdz2qdg5dwWN8HJwqJ1q_OgdeuapLhvmD6beavUqPg@mail.gmail.com>
+ <CAPnjgZ2yrk38kApMSiUOmsNM8M9cDa3gtH-ozJZzk=VjLh+PLQ@mail.gmail.com>
+ <CAK7LNARzfMDBX9mhCaCV8QxpTic6A3JYOPBManJNh9Jas=-T9A@mail.gmail.com>
+In-Reply-To: <CAK7LNARzfMDBX9mhCaCV8QxpTic6A3JYOPBManJNh9Jas=-T9A@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 07:30:33 -0700
-Message-ID: <CAPnjgZ2L62r2V7jtYGA2s6tKQsbYGj0q92BHhfo11UKKmWbLfg@mail.gmail.com>
-Subject: Re: [PATCH 0/4] bootm: Handle compressed arm64 images with bootm
-To: Tom Rini <trini@konsulko.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Marek Vasut <marex@denx.de>, Eddie James <eajames@linux.ibm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>,
- Marc Kleine-Budde <mkl@pengutronix.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, 
- Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>, 
- Sean Anderson <seanga2@gmail.com>
+Date: Tue, 7 Nov 2023 07:47:42 -0700
+Message-ID: <CAPnjgZ27bsKOLwsK7nTw=3OEvdY4Yz5nZGsMNCmEzvsQPafjqw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] arm: boot: Use double quotes for image name
+To: Masahiro Yamada <masahiroy@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, 
+ Nicolas Schier <nicolas@fjasle.eu>, linux-kbuild@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,134 +91,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Masahiro,
 
-On Tue, 7 Nov 2023 at 06:49, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 7 Nov 2023 at 07:13, Masahiro Yamada <masahiroy@kernel.org> wrote:
 >
-> On Tue, Nov 07, 2023 at 06:31:15AM -0700, Simon Glass wrote:
-> > Hi Tom,
+> Hi Simon,
+>
+>
+> On Tue, Nov 7, 2023 at 3:11=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
 > >
-> > On Tue, 7 Nov 2023 at 06:04, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Nov 07, 2023 at 05:23:05AM -0700, Simon Glass wrote:
-> > > > Hi Rasmus,
-> > > >
-> > > > On Tue, 7 Nov 2023 at 02:56, Rasmus Villemoes
-> > > > <rasmus.villemoes@prevas.dk> wrote:
-> > > > >
-> > > > > On 05/11/2023 21.03, Simon Glass wrote:
-> > > > > > This little series corrects a problem I noticed with arm64 images,
-> > > > > > where the kernel is not recognised:
-> > > > >
-> > > > > The $subject is misleading, bootm works just fine with compressed arm64
-> > > > > images, with the type set to "kernel".
-> > > > >
-> > > > > >         Type:         Kernel Image (no loading done)
-> > > > > >         Compression:  gzip compressed
-> > > > >
-> > > > > Isn't that a non-sensical combination to begin with? Decompressing the
-> > > > > Image.gz kernel image to any location (however you determine that
-> > > > > destination) _is_ loading it.
-> > > >
-> > > > Yes, I agree.
-> > > >
-> > > > >
-> > > > > If you want XIP, obviously the image must be uncompressed in the FIT. I
-> > > > > don't understand what you're trying to do here.
-> > > >
-> > > > Hmmm, I think I have just got confused about all of this, perhaps
-> > > > because ChromeOS uses kernel_noload with compression. Is that an
-> > > > invalid combination?
-> > >
-> > > Yes, that sounds like an invalid combination.
-> > >
-> > > > But then how does loading actually work? We don't want to put the load
-> > > > address in the FIT, since we don't know what it is...we want to use
-> > > > the address provided by the board. Which is kernel_noload...so how
-> > > > should this be implemented?
-> > >
-> > > What do you mean, provided by the board? With kernel_noload we XIP the
-> > > payload, because the board provided (by loading us to) a safe place to
-> > > execute whatevers in there. In the olden days, that would mean (almost
-> > > certainly) the zImage which in turn was already compressed and
-> > > self-relocating. I know technically one could use the raw vmlinux
-> > > instead. With the Linux Kernel and ARCH=arm64 (and a few other arches
-> > > now too), they dropped the self-decompression part and the whole payload
-> > > must be decompressed. We handle this case in "booti" today by having to
-> > > have the board (via environment) say where to decompress to (and how
-> > > much space is available). Then we move it back to where we started from,
-> > > which is likely not necessary.
-> > >
-> > > Looking at
-> > > https://www.kernel.org/doc/html/latest/arch/arm64/booting.html and
-> > > https://www.kernel.org/doc/html/latest/riscv/boot-image-header.html
-> > > stating "we're just like arm64" we can do better than we do today for
-> > > this format of OS image. If aren't compressed, we only need to ensure
-> > > that we are correctly aligned and move (and tell the user) if not. We
-> > > can even put the 2MB check under some legacy kernel CONFIG option (3.17
-> > > is over 9 years old). With respect to automatic decompression, if we
-> > > don't have something telling us where a buffer is and we can't pull from
-> > > the environment, we should tell the user and stop?
+> > Hi Masahiro,
 > >
-> > With the booti command, the kern_comp_addr_r and kern_comp_size vars
-> > are used. Perhaps I should update my patch to use those too?
+> > On Tue, 7 Nov 2023 at 03:13, Masahiro Yamada <masahiroy@kernel.org> wro=
+te:
+> > >
+> > > On Sat, Nov 4, 2023 at 9:42=E2=80=AFPM Simon Glass <sjg@chromium.org>=
+ wrote:
+> > > >
+> > > > The use of single quotes in the image name causes them to appear in
+> > > > the image description when the uImage is created. Use double quotes=
+, to
+> > > > avoid this.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > Changes in v2:
+> > > > - Split double-quote change out into its own patch
+> > > >
+> > > >  scripts/Makefile.lib | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> > > > index 68d0134bdbf9..03e79e319293 100644
+> > > > --- a/scripts/Makefile.lib
+> > > > +++ b/scripts/Makefile.lib
+> > > > @@ -487,7 +487,7 @@ UIMAGE_OPTS-y ?=3D
+> > > >  UIMAGE_TYPE ?=3D kernel
+> > > >  UIMAGE_LOADADDR ?=3D arch_must_set_this
+> > > >  UIMAGE_ENTRYADDR ?=3D $(UIMAGE_LOADADDR)
+> > > > -UIMAGE_NAME ?=3D 'Linux-$(KERNELRELEASE)'
+> > > > +UIMAGE_NAME ?=3D "Linux-$(KERNELRELEASE)"
+> > > >
+> > > >  quiet_cmd_uimage =3D UIMAGE  $@
+> > > >        cmd_uimage =3D $(BASH) $(MKIMAGE) -A $(UIMAGE_ARCH) -O linux=
+ \
+> > > > --
+> > > > 2.42.0.869.gea05f2083d-goog
+> > > >
+> > >
+> > >
+> > > NACK.
+> > >
+> > >
+> > > This is because you are doing *WRONG* in 3/3.
+> > >
+> > > Look at your code closely.
+> > >
+> > > https://lore.kernel.org/linux-kbuild/20231104194207.3370542-4-sjg@chr=
+omium.org/T/#me2fb68151d6f4f330808406f9a711fffee149529
+> > >
+> > >
+> > >
+> > > In the mainline kernel, the quotation appears
+> > > only in the definition of UIMAGE_NAME.
+> > >
+> > >
+> > > masahiro@zoe:~/ref/linux(master)$ git grep UIMAGE_NAME
+> > > scripts/Makefile.lib:UIMAGE_NAME ?=3D 'Linux-$(KERNELRELEASE)'
+> > > scripts/Makefile.lib:                   -n $(UIMAGE_NAME) -d $< $@
+> > >
+> > >
+> > > The single quotes are consumed by shell.
+> > >
+> > >
+> > >
+> > >
+> > >
+> > >
+> > > This is mainline + your patch set.
+> > >
+> > > masahiro@zoe:~/ref/linux(simon-v2)$ git grep UIMAGE_NAME
+> > > scripts/Makefile.lib:UIMAGE_NAME ?=3D "Linux-$(KERNELRELEASE)"
+> > > scripts/Makefile.lib:                   -n "$(UIMAGE_NAME)" -d $< $@
+> > > scripts/Makefile.lib:                   --name "$(UIMAGE_NAME)" \
+> > >
+> > >
+> > > You quoted the definition of UIMAGE_NAME,
+> > > and also variable references.
+> > >
+> > >
+> > >
+> > >
+> > > See how it is expanded.
+> > >
+> > >
+> > > --name "$(UIMAGE_NAME)"
+> > >
+> > >
+> > >  =3D=3D>
+> > >
+> > >
+> > > --name ""Linux-$(KERNELRELEASE)""
+> > >
+> > >
+> > >  =3D=3D>
+> > >
+> > >
+> > > --name Linux-$(KERNELRELEASE)
+> > >
+> > >
+> > >
+> > >
+> > > You added double quotes in a row, just to cancel it.
+> >
+> > Yes, I understand that. But without the quotes in -n "$(UIMAGE_NAME)"
+> > then the name cannot contain spaces. So we do need some sort of
+> > quoting, right?
 >
-> As a fallback, perhaps? But what do we do today in a FIT to handle
-> compression = "gzip" to know where to uncompress things to?
+>
+> Yes.
+>
+> If you move the quoting to the variable reference,
+> it is acceptable because there is a good reason to do so.
+>
+>
+>
+> UIMAGE_NAME ?=3D Linux-$(KERNELRELEASE)
+>
+>
+>             ...
+>              -n '$(UIMAGE_NAME)' -d $< $@
+>
+>
+> This is the correct change.
 
-In that case we decompress to the (kernel) load address in the FIT.
+OK.
 
 >
-> > Do you understand what I am asking about, with bootm? It should be
-> > possible to ignore the load address. In fact, load addresses in FIT
-> > are mostly bad these days, IMO. If this is not kernel_noload, then
-> > what should we use?
 >
-> Well, your use case needs to be valid. I don't think "kernel_noload" is
-> valid with anything other than 'compression = "none"' because that's our
-> just execute things in place option. It's very dangerous to use and I
-> do not recall right now if we fixed the case where it will just let the
-> device tree be badly aligned and break the kernel, or if we say "no
-> load, but still fix THAT alignment". And your use case isn't "ignore the
-> load address" it's "ignore the load address and decompress the
-> payload(s)".  That needs _something_ to be known somehow. And I'm asking
-> how we do that today even, before saying we can or can't support
-> "kernel_noload" along with a compression of the payload.
+>
+> >
+> > It just seems strange to use single quotes in a Makefile variable. I
+> > found it confusing.
+>
+>
+> Right. Why don't you remove it, then?
+>
+>
+> For clarification, there is no concept of quoting in GNU Make.
+>
+> The single quote character ' and the double quote character " are
+> just normal characters for Make.
+>
+> GNU Make handles them just like alphabets and numbers.
+>
+> GNU Make just replaces $(UIMAGE_NAME)
+> with 'Linux-$(KERNELRELEASE)' verbatim.
+>
+>
+> It is the _shell_ that understands the quoting.
+>
+> Just in case here is the spec for
+> "2.2.2 Single-Quotes" vs "2.2.3 Double-Quotes"
+>
+> https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
+>
+>
+> Shell supports both single-quoting and double-quoting
+> for good reasons.
+>
+> There is no good or bad because both of them are meaningful.
 
-OK I see.
+Yes...I suppose I knew that Makefiles are completely literal, but
+thanks for the pointers. I tend to use double quotes by default and
+single quotes only when I have to...but it doesn't really matter so
+long as it is consistent.
+
+Anyway, moving the single quotes away from the var removes the
+confusion I had at the start of all of this.
 
 >
-> > "provided by the board" means that the board knows the memory map, not
-> > the FIT, so only the board can provide the addresses to use for
-> > loading the kernel.
 >
-> To be clearer, where does the board document that knowledge and provide
-> it to be used? I'm not a super fan of environment variables especially
-> since we aren't always consistent with '_' or just nothing between
-> "words" of the variable. We have much better documentation these days
-> (once again, thanks everyone) so we can document environment variables
-> used here, and also what CONFIG options are used (as
-> CONFIG_SYS_BOOTM_LEN is part of the equation here and badly named as
-> been said in other threads about issues wrt decomp and overlap).
+>
+>
+>
+>
+> >
+> > I think you are saying you want to keep the single quotes in the var
+> > declaration and drop the quotes from the cmd_fit rule. I am OK with
+> > that, but I do think it is unusual not to quote something which might
+> > have spaces. It may cause confusion for others, as it did for me?
+> >
+> > Anyway, I'll send a new version with the quoting reverted.
+> >
+>
+>
+> Please move the single quotes as I suggested above.
+>
+> The reason is because UIMAGE_NAME can be passed-in
+> by a user and it can contain whitespaces.
 
-I agree about env vars. We have CONFIG_SYS_LOAD_ADDR which seems like
-a better model to me.
-
-At the moment we have these, which have carried over from the
-distroboot scripts:
-
-https://u-boot.readthedocs.io/en/latest/develop/bootstd.html#environment-variables
-
-So I think we should be using kern_comp_addr_r as the buffer to
-decompress to, with kernel_noload. But as you say, having env vars
-affect bootm (and boot ) is not ideal.
-
-Another thing we need to clarify is what kernel_noload means. I have
-taken it to mean 'ignore the load address in the FIT', not 'no loading
-is done', since if compression is enabled, we have to load it to
-somewhere.
-
-IMO 'ignore the load in the FIT' should be the normal situation with bootstd.
+OK, done in v4.
 
 Regards,
 Simon
