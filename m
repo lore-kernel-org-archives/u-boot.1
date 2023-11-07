@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B051C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:46:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71816C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D6D3875CC;
-	Tue,  7 Nov 2023 22:43:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C7A2687630;
+	Tue,  7 Nov 2023 22:52:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mIYtwkbf";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="E2HJRDU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80F8B87627; Tue,  7 Nov 2023 22:43:05 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 593CB87615; Tue,  7 Nov 2023 22:52:06 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 021D78762C
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:43:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 522108761B
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:52:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-32da9ef390fso3779682f8f.2
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:43:02 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40907b82ab9so730735e9.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:52:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1699393382; x=1699998182;
+ d=amarulasolutions.com; s=google; t=1699393923; x=1699998723;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2ia2VcIMGPeQt3ekGN/hfcSr4VKDKJwCudqdZo7MvZ4=;
- b=mIYtwkbfCjdtXybWMlrrqnsSSpc54tCjghoYUNdXwQxZwXOgDjmj5OPHl6RmAriUgg
- 345rnQCsWUi2RVrb9MYO6JhGJQhrC9pkxh+i/J/3N5LO96vcrpgRvfuga79m83Em09xd
- Xcg4LAoNVfhVOfa4JKv1XxdDh1gcrqmNUYbl8=
+ bh=KJhZhseMBuA5YBV8MzIxPnt6pXuOkwSvA+z2cnd8YNo=;
+ b=E2HJRDU93LMkuQc9tW3FeZQYCrrudZAg+SgtTWbvssckrEZm2L5S3miigQVT6YcuFd
+ 34i1m4faePwgP+KleM/jdDW2+O/OKhInvedpAEZB7k1xOhm+PjyfJPTP+Q8vDoRsBjU0
+ 5NMsZgnKulz+4zk5SPOpDs1VU0Ux5j7KkEcJ8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699393382; x=1699998182;
+ d=1e100.net; s=20230601; t=1699393923; x=1699998723;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2ia2VcIMGPeQt3ekGN/hfcSr4VKDKJwCudqdZo7MvZ4=;
- b=P2a4UW69f6384U8c5rm5Y6RcVkhEeNchzoMeabTzcPAD1ZF/1TCi/FpISCWlQetyCR
- zOUPE+z8F6vQqQZ4tSK52jafWbVV7KlXj5Q33za8dRUzuKwVAA+BQ/1Q+ygkXIj0l4Dn
- l10GEKdvXOZVjoJgu93vCuAzR2oBYhKd/g3Q7Gx+9wuLwpamfoQPKKE7m22SySlv4lCM
- khCT2fyavViKPa3LNwW2HHbVJ6Ucwk3p22/8gaDucSjWzuys3kDv4ydI1dCgp3/zxLS9
- FL+ZWBFlTV8nhFbTcHlpQMzKSoz1JJJT7RlnsbIgxQdMLXDCPPWZ3l+cMm/9jekIkN6i
- zU1g==
-X-Gm-Message-State: AOJu0Yxvi916w0ljy+q/XhGqtRnbvEq18oKHr8PQ91sHcGMktJcHL+Ou
- jT09zrVyKujpymhWGFMcUZwhSQ==
-X-Google-Smtp-Source: AGHT+IHj+0ZbHTcMCSqUvEYEaDW2WZdGYgTnHD4WXFki3wtfL2lsgleBtdP9TbIGoC7t8rx5XFe/wA==
-X-Received: by 2002:a05:6000:1882:b0:32d:b2cf:8ccd with SMTP id
- a2-20020a056000188200b0032db2cf8ccdmr25487wri.47.1699393382392; 
- Tue, 07 Nov 2023 13:43:02 -0800 (PST)
+ bh=KJhZhseMBuA5YBV8MzIxPnt6pXuOkwSvA+z2cnd8YNo=;
+ b=V6mesVCXFgu27arGrnAogV24PMCx0G7svYlPFrJ4Jc8hHIJn2cIdSh+kToCuU09x8Q
+ ig0xTS9ywQ2smH45MqwMimiFs00rnhJ2bQ4nyU2S/G7WT0hyHeSZonB/cLdvVH5h6yDO
+ ttjRWfnqi5xzwvk18LPtL93km76APp+xOKktHD1yBeMhZqBTZqX2orw6EKte3ocLkD0K
+ aRhzLzfLW6Rk4dU3nOSn1cA5GXRhKC5YtHoRt/2yadmzyBJqcA+T83USRa863qANxqMN
+ y1vyV85lkT7UuMacw0HBWI44/3tmnDUK+izAxnCJZQBWL8L7fWdX0p6yQyZ6RWiXDUtW
+ mUrg==
+X-Gm-Message-State: AOJu0Yzo/isDByqltIY0v/MP264NOu69JVIYXCVZLNxlRwUpm3VQQEA0
+ N/mg686UPxXnuE562BLi/g8scw==
+X-Google-Smtp-Source: AGHT+IFU3agv3/dCWIvveYKH6zMCGqrk195HrznHJaTXGjL3rsvX4bNWtEZOnHb3+3EmJkpo+wj+Sg==
+X-Received: by 2002:a05:600c:c0c:b0:401:b425:2414 with SMTP id
+ fm12-20020a05600c0c0c00b00401b4252414mr4522078wmb.18.1699393922698; 
+ Tue, 07 Nov 2023 13:52:02 -0800 (PST)
 Received: from pwmachine.localnet ([86.120.35.5])
  by smtp.gmail.com with ESMTPSA id
- m17-20020a056000181100b0032da6f17ffdsm3335101wrh.38.2023.11.07.13.43.01
+ l41-20020a05600c1d2900b004083a105f27sm17203648wms.26.2023.11.07.13.52.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 13:43:02 -0800 (PST)
+ Tue, 07 Nov 2023 13:52:02 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Harald Seiler <hws@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Roger Knecht <rknecht@pm.me>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Alexey Romanov <avromanov@sberdevices.ru>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Hector Palacios <hector.palacios@digi.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [RFC PATCH v10 11/24] cmd: Add new cli command
-Date: Tue, 07 Nov 2023 23:43:00 +0200
-Message-ID: <5725960.DvuYhMxLoT@pwmachine>
-In-Reply-To: <9a4cea75-894f-4c71-b672-3b5607199ba5@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>
+Subject: Re: [RFC PATCH v10 00/24] Modernize U-Boot shell
+Date: Tue, 07 Nov 2023 23:52:00 +0200
+Message-ID: <1869512.tdWV9SEqCh@pwmachine>
+In-Reply-To: <CAPnjgZ2XUa6TQMoYu91WAL6T=0QGVUZMQGQA2R-bMasT0aSZig@mail.gmail.com>
 References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
- <20231004164220.15738-12-francis.laniel@amarulasolutions.com>
- <9a4cea75-894f-4c71-b672-3b5607199ba5@gmx.de>
+ <CAPnjgZ2XUa6TQMoYu91WAL6T=0QGVUZMQGQA2R-bMasT0aSZig@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="iso-8859-1"
@@ -104,406 +95,415 @@ X-Virus-Status: Clean
 Hi!
 
 
-Le jeudi 5 octobre 2023, 02:26:52 EET Heinrich Schuchardt a =E9crit :
-> On 10/4/23 18:42, Francis Laniel wrote:
-> > This command can be used to print the current parser with 'cli print'.
+Le lundi 9 octobre 2023, 20:56:30 EET Simon Glass a =E9crit :
+> Hi Francis,
 >=20
-> Please, provide a commit message that matches the code.
+> On Wed, 4 Oct 2023 at 10:42, Francis Laniel <
 >=20
-> > It can also be used to set the current parser with 'cli set'.
-> > For the moment, only one value is valid for set: old.
+> francis.laniel@amarulasolutions.com> wrote:
+> > Hi.
+> >=20
+> >=20
+> > During 2021 summer, Sean Anderson wrote a contribution to add a new
 >=20
-> If there is only one valid value, we should not provide the 'cli'
-> command to save code size. The patch seems to be in the wrong spot in
-> the series.
+> shell, based
+>=20
+> > on LIL, to U-Boot [1, 2].
+> > While one of the goals of this contribution was to address the fact act=
+ual
+> > U-Boot shell, which is based on Busybox hush, is old there was a
+>=20
+> discussion
+>=20
+> > about adding a new shell versus updating the actual one [3, 4].
+> >=20
+> > So, in this series, with Harald Seiler, we updated the actual U-Boot
+>=20
+> shell to
+>=20
+> > reflect what is currently in Busybox source code.
+> > Basically, this contribution is about taking a snapshot of Busybox
+>=20
+> shell/hush.c
+>=20
+> > file (as it exists in commit 37460f5da) and adapt it to suit U-Boot nee=
+ds.
+> >=20
+> > This contribution was written to be as backward-compatible as possible =
+to
+>=20
+> avoid
+>=20
+> > breaking the existing.
+> > So, the 2021 hush flavor offers the same as the actual, that is to say:
+> > 1. Variable expansion.
+> > 2. Instruction lists (;, && and ||).
+> > 3. If, then and else.
+> > 4. Loops (for, while and until).
+> > No new features offered by Busybox hush were implemented (e.g. function=
+s).
+> >=20
+> > It is possible to change the parser at runtime using the "cli" command:
+> > =3D> cli print
+> > old
+> > =3D> cli set 2021
+> > =3D> cli print
+> > 2021
+> > =3D> cli set old
+> > The default parser is the old one.
+> > Note that to use both parser, you would need to set both
+>=20
+> CONFIG_HUSH_2021_PARSER
+>=20
+> > and CONFIG_HUSH_OLD_PARSER.
+> >=20
+> > In terms of testing, new unit tests were added to ut to ensure the new
+>=20
+> behavior
+>=20
+> > is the same as the old one and it does not add regression.
+> > Nonetheless, if old behavior was buggy and fixed upstream, the fix is
+>=20
+> then added
+>=20
+> > to U-Boot [5].
+> > In sandbox, all of these tests pass smoothly:
+> > =3D> printenv board
+> > board=3Dsandbox
+> > =3D> ut hush
+> > Running 20 hush tests
+> > ...
+> > Failures: 0
+> > =3D> parser set 2021
+> > =3D> ut hush
+> > Running 20 hush tests
+> > ...
+> > Failures: 0
+> >=20
+> > Thanks to the effort of Harald Seiler, I was successful booting a board:
+> > =3D> printenv fdtfile
+> > fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
+> > =3D> cli get
+> > old
+>=20
+> This is a really nice integration.
+>=20
+> I think it could benefit from a new Kconfig like CONFIG_HUSH_SELECTABLE
+> which enables the cli command and selection of parser...this could perhaps
+> be enabled automatically if two parsers are selected. Then the code growth
+> (about 1KB on Thumb 2) would mostly go away.
 
-Thank you for your feedback! I normally addressed this problem in v11.
+Excellent idea!
+I added this in v11 but did not find a way to count how many options were s=
+et,=20
+so HUSH_SELECTABLE is set when the two hush flavors are selected.
 
-> > Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
-> > ---
+> For checking parsers, the code you use:
+>=20
+>    if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
+>       int hush_flags =3D FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP;
+>=20
+>       if (flag & CMD_FLAG_ENV)
+>          hush_flags |=3D FLAG_CONT_ON_NEWLINE;
+>       return parse_string_outer(cmd, hush_flags);
+>    } else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
+> ...
+>       return parse_string_outer_2021(cmd, FLAG_EXIT_FROM_LOOP);
+>    }
+>=20
+> could be written to reduce code size...i.e. there is only a need to check
+> the gd flag if HUSH_SELECTABLE is enabled, so:
+>=20
+> static inline bool use_hush_old(void)
+> {
+>  return IS_ENABLED(CONFIG_HUSH_SELECTABLE) ?
+>      gd->flags & GD_FLG_HUSH_OLD_PARSER :
+>      IS_ENABLD(CONFIG_HUSH_OLD_PARSER);
+> }
+>=20
+> Then use that function in the code able.
+
+Indeed! Thank you for the suggestion!
+
+> Size growth when swtiching to the the new parser is only 3KB, from my tes=
+t.
+> I thought it would be much more?
+>=20
+> > =3D> boot
+> > ...
+> > root@lepotato:~#
+> > root@lepotato:~# reboot
+> > ...
+> > =3D> cli set 2021
+> > =3D> cli get
+> > 2021
+> > =3D> printenv fdtfile
+> > fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
+> > =3D> boot
+> > ...
+> > root@lepotato:~#
 > >=20
-> >   cmd/Makefile          |   2 +
-> >   cmd/cli.c             | 120 ++++++++++++++++++++++++++++++++++++++++++
-> >   common/cli.c          |   3 +-
-> >   doc/usage/cmd/cli.rst |  59 +++++++++++++++++++++
-> >   doc/usage/index.rst   |   1 +
-> >   5 files changed, 184 insertions(+), 1 deletion(-)
-> >   create mode 100644 cmd/cli.c
-> >   create mode 100644 doc/usage/cmd/cli.rst
+> > I had to not use CONFIG_HUSH_2021_PARSER for the keymile board.
+> > Indeed, the keymile board family is the only set of boards to call
+> > get_local_var(), set_local_var() and unset_local_var().
+> > Sadly, these functions are static in this contribution.
+> > I could have change all of them to introduce code like this:
+> > *_local_var(/*...*/)
+> > {
 > >=20
-> > diff --git a/cmd/Makefile b/cmd/Makefile
-> > index 9bebf321c3..d468cc5065 100644
-> > --- a/cmd/Makefile
-> > +++ b/cmd/Makefile
-> > @@ -226,6 +226,8 @@ obj-$(CONFIG_CMD_AVB) +=3D avb.o
+> >         if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
+> >        =20
+> >                 return *_local_var_old(/*...*/);
+> >        =20
+> >         if (gd->flags & GD_FLG_HUSH_2021_PARSER)
+> >        =20
+> >                 return *_local_var_2021(/*...*/);
 > >=20
-> >   # Foundries.IO SCP03
-> >   obj-$(CONFIG_CMD_SCP03) +=3D scp03.o
+> > }
+> > But this would have mean renaming all old hush functions calls and I did
+>=20
+> not
+>=20
+> > want to change the old hush particularly to avoid breaking things.
+> > Instead, I change the keymile board to use environment variable instead
+>=20
+> of local
+>=20
+> > ones.
+> > I think this particularities can be addressed in future works.
+>=20
+> I agree.
+>=20
+> > I also had to enable CONFIG_LTO for kirkwoord sheevaplug and phytec
+>=20
+> bk4r1, so
+>=20
+> > they do not hit their limits.
 > >=20
-> > +obj-$(CONFIG_HUSH_PARSER) +=3D cli.o
+> > For all these reasons, I marked this contribution as RFC to indeed
 >=20
-> Don't waste binary code size. We only need the command if at least two
-> parsers are available.
+> collect your
 >=20
-> ifeq ($(CONFIG_HUSH_OLD_PARSER)$(HUSH_2021_PARSER),yy)
-> obj-y +=3D cli.o
-> endif
+> > opinions.
+> > My goal is not to change suddenly actual shell to this one, we clearly
 >=20
-> The symbol CONFIG_HUSH_PARSER should be eliminated.
+> need a
 >=20
-> > +
+> > transition period to think about it.
+> > I think it is better to see this contribution as a proof of concept whi=
+ch
+>=20
+> shows
+>=20
+> > it is possible to update the actual shell.
 > >=20
-> >   obj-$(CONFIG_ARM) +=3D arm/
-> >   obj-$(CONFIG_RISCV) +=3D riscv/
-> >   obj-$(CONFIG_SANDBOX) +=3D sandbox/
+> > If you want to review it - your review will really be appreciated - here
+>=20
+> are
+>=20
+> > some information regarding the commits:
+> > * commits marked as "test:" deal with unit tests.
+> > * commit "cli: Add Busybox upstream hush.c file." copies Busybox
+>=20
+> shell/hush.c
+>=20
+> > into U-Boot tree, this explain why this commit contains around 12000
+>=20
+> additions.
+>=20
+> > * commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously
+>=20
+> added file
+>=20
+> > to permit us to use this as new shell.
+> > The really good idea of #include'ing Busybox code into a wrapper file to
+>=20
+> define
+>=20
+> > some particular functions while minimizing modifications to upstream co=
+de
+>=20
+> comes
+>=20
+> > from Harald Seiler.
+> > * commit "cmd: Add new parser command" adds a new command which permits
+> > selecting parser at runtime.
+> > I am not really satisfied with the fact it calls cli_init() and
+>=20
+> cli_loop() each
+>=20
+> > time the parser is set, so your reviews would be welcomed.
+>=20
+> It would be great if this could go in this cycle.
+>=20
+> One minor nit is that the commit "cmd: Add new cli command" introduces a
+> build error which is fixed in the next commit. It would be better to have
+> the GD flag added in that first commit.
+
+I normally addressed this in the v11, I will think to use buildman in the=20
+future to avoid this type of mistake!
+
+> It is great to see such a simple diff from 2 years of busybox activity. It
+> augurs well for future maintenance.
+
+Indeed! This should be doable to maintain this code if we take a look at=20
+upstream busybox time to time.
+
+> I feel that in general, if if() were used instead of #if, some of the
+> #ifdef stuff might go away. For example, if some #ifdef'd code calls foo(=
+),
+> then foo() itself needs an #ifdef but if the code which calls foo() is 'if
+> (!U_BOOT) foo()' then we don't need the #ifdef around foo().
+>=20
+> Another point is that I wonder if it is worth #ifdefing out struct member=
+s.
+> Perhaps it is safer that way, but it does create more #ifdefs, where if()
+> could be used.
+>=20
+> In a few cases I saw chunks of code being added - it might be better for
+> maintenance to create a new function with the U-Boot code and call it from
+> the original site.
+
+To be honest with you, there are plenty of things to improve with the curre=
+nt=20
+code.
+I first went with #ifdef as it was already used with the old hush and I wan=
+ted=20
+to get something which works.
+But yes, it would be better to add more functions in cli_hush_2021.c and to=
+uch=20
+as few as possible cli_hush_upstream.c.
+
+> These are all minor things, though. I suggest sending a non-RFC as I
+> believe it is mostly ready to go in.
+>=20
+> > * Other commits focus on enabling features we need (e.g. if).
 > >=20
-> > diff --git a/cmd/cli.c b/cmd/cli.c
-> > new file mode 100644
-> > index 0000000000..7671785b83
-> > --- /dev/null
-> > +++ b/cmd/cli.c
-> > @@ -0,0 +1,120 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +#include <common.h>
-> > +#include <cli.h>
-> > +#include <command.h>
-> > +#include <string.h>
-> > +#include <asm/global_data.h>
-> > +
-> > +DECLARE_GLOBAL_DATA_PTR;
-> > +
-> > +static const char *gd_flags_to_parser(void)
-> > +{
-> > +	if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
-> > +		return "old";
-> > +	return NULL;
-> > +}
-> > +
-> > +static int do_cli_get(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +			 char *const argv[])
-> > +{
-> > +	const char *current =3D gd_flags_to_parser();
-> > +
-> > +	if (!current) {
-> > +		printf("current cli value is not valid, this should not happen!
-\n");
-> > +		return CMD_RET_FAILURE;
-> > +	}
-> > +
-> > +	printf("%s\n", current);
-> > +
-> > +	return CMD_RET_SUCCESS;
-> > +}
-> > +
+> > Changes since:
+> >  v2:
+> >   * Added a small fix to compile sandbox with NO_SDL=3D1.
+> >   * Added a command to change parser at runtime.
+> >   * Added 2021 parser function to all run_command*().
+> > =20
+> >  v3:
+> >   * Various bug fixes pointed by the CI.
+> >   * Added upstream busybox hush commits until 6th February 2022.
+> > =20
+> >  v4:
+> >   * Various cleaning.
+> >   * Modified python test to accept failure output when the test are
 >=20
-> Please, describe this function (and all the others) in Sphinx style.
+> designed to
 >=20
-> /**
->   * parser_string_to_gd_flags() - converts parser name to bit mask
->   *
->   * @parser:	parser name
->   * Return:	valid bit mask or -1
->   */
+> >   fail.
+> >   * Bumped upstream busybox hush commits until 24h March 2022.
+> > =20
+> >  v5:
+> >   * Bumped upstream busybox hush commits until 30th January 2023.
+> >   * Fix how hush interprets '<' and '>', indeed we needed to escape them
 >=20
-> > +static int parser_string_to_gd_flags(const char *parser)
-> > +{
-> > +	if (!strcmp(parser, "old"))
-> > +		return GD_FLG_HUSH_OLD_PARSER;
+> but I
 >=20
-> Please, do not return an invalid bit mask.
+> >   removed this behavior as tests are handled by test command and not hu=
+sh
+> >   itself. This permitted to have the ut fdt to pass.
+> >   * Fix a problem with how exit was handled. This was reported by the ut
 >=20
-> if (CONFIG_IS_ENABLED(HUSH_OLD_PARSER) && !strcmp(parser, "old"))
-> 	return GD_FLG_HUSH_OLD_PARSER;
-> if (CONFIG_IS_ENABLED(HUSH_2021_PARSER) && !strcmp(parser, "2021"))
-> 	return GD_FLG_HUSH_201_PARSER;
+> exit
 >=20
-> > +	return -1;
-> > +}
-> > +
-> > +static void reset_parser_gd_flags(void)
-> > +{
-> > +	gd->flags &=3D ~GD_FLG_HUSH_OLD_PARSER;
+> >   test.
+> > =20
+> >  v6:
+> >   * There was no v6 and I got mixed up with version.
+> > =20
+> >  v7:
+> >   * Bumped upstream busybox hush commits until 9th May 2023.
+> >   * Renamed parser command to change parser at runtime to cli and added
+> >   documentation.
+> >   * Added better separation of patches.
+> >   * Removed code about __gnu_thumb1_case_si as it was merged in another
 >=20
-> gd->flags &=3D ~(GD_FLG_HUSH_OLD_PARSER | GD_FLG_HUSH_2021_PARSER);
+> series.
 >=20
-> If there were only one parser, we wouldn't create this command.
->=20
-> > +}
-> > +
-> > +static int do_cli_set(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +		      char *const argv[])
-> > +{
-> > +	char *parser_name;
-> > +	int parser_flag;
-> > +
-> > +	if (argc < 2)
-> > +		return CMD_RET_USAGE;
-> > +
-> > +	parser_name =3D argv[1];
-> > +
-> > +	parser_flag =3D parser_string_to_gd_flags(parser_name);
->=20
-> This function should return -1 for for any value that is not supported
-> be it 'foo', 'old', or '2021'. Then you can eliminate a bunch of error
-> checking code below.
->=20
-> > +	if (parser_flag =3D=3D -1) {
-> > +		printf("Bad value for parser name: %s\n", parser_name);
-> > +		return CMD_RET_USAGE;
-> > +	}
-> > +
-> > +	if (parser_flag =3D=3D GD_FLG_HUSH_OLD_PARSER &&
-> > +		!CONFIG_IS_ENABLED(HUSH_OLD_PARSER)) {
-> > +		printf("Want to set current parser to old, but its code was not
-> > compiled!\n"); +		return CMD_RET_FAILURE;
-> > +	}
->=20
-> Superfluous check, see above.
->=20
-> > +
-> > +	if (parser_flag =3D=3D GD_FLG_HUSH_2021_PARSER &&
-> > +		!CONFIG_IS_ENABLED(HUSH_2021_PARSER)) {
-> > +		printf("Want to set current parser to 2021, but its code was=20
-not
-> > compiled!\n"); +		return CMD_RET_FAILURE;
-> > +	}
->=20
-> Superfluous check, see above.
->=20
-> > +
-> > +	reset_parser_gd_flags();
-> > +	gd->flags |=3D parser_flag;
-> > +
-> > +	cli_init();
-> > +	cli_loop();
-> > +
-> > +	/* cli_loop() should never return. */
-> > +	return CMD_RET_FAILURE;
->=20
-> Consuming stack space for every invocation of the 'cli set' command
-> cannot be intended.
->=20
-> Why don't we define cli_loop as __noreturn and ensure that it has no
-> return statement? Then gcc can generate a simple jump without consuming
-> stack.
->=20
-> cli_loop should() invoke panic() instead of returning.
->=20
-> > +}
-> > +
-> > +static struct cmd_tbl parser_sub[] =3D {
-> > +	U_BOOT_CMD_MKENT(get, 1, 1, do_cli_get, "", ""),
-> > +	U_BOOT_CMD_MKENT(set, 2, 1, do_cli_set, "", ""),
-> > +};
-> > +
-> > +static int do_cli(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +		  char *const argv[])
-> > +{
-> > +	struct cmd_tbl *cp;
-> > +
-> > +	if (argc < 2)
-> > +		return CMD_RET_USAGE;
-> > +
-> > +	/* drop initial "parser" arg */
-> > +	argc--;
-> > +	argv++;
-> > +
-> > +	cp =3D find_cmd_tbl(argv[0], parser_sub, ARRAY_SIZE(parser_sub));
-> > +	if (cp)
-> > +		return cp->cmd(cmdtp, flag, argc, argv);
-> > +
-> > +	return CMD_RET_USAGE;
-> > +}
-> > +
-> > +#if CONFIG_IS_ENABLED(SYS_LONGHELP)
-> > +static char cli_help_text[] =3D
-> > +	"get - print current cli\n"
->=20
-> "get - display parser\n"
->=20
-> > +	"set - set the current cli, possible value is: old"
->=20
-> 'cli ' is only printed automatically in the first line.
->=20
-> "cli set - set parser to one of:\n"
-> #ifdef CONFIG_HUSH_OLD_PARSER
-> "\t- old\n"
-> #endif
-> #ifdef CONFIG_HUSH_2021_PARSER
-> "\t- 2021\n"
-> #endif
->=20
-> Why would we need the 'cli set' command at all if there is only one
-> parser enabled?
-> Should we better disable the sub-command in that case?
->=20
-> > +	;
-> > +#endif
-> > +
-> > +U_BOOT_CMD(cli, 3, 1, do_cli,
-> > +	   "cli",
-> > +#if CONFIG_IS_ENABLED(SYS_LONGHELP)
-> > +	   cli_help_text
-> > +#endif
->=20
-> This is wrong. You must pass an empty string at least. Please, follow
-> the style of the other commands and place the #if in the long text.
->=20
-> > +);
-> > diff --git a/common/cli.c b/common/cli.c
-> > index e5fe1060d0..d419671e8c 100644
-> > --- a/common/cli.c
-> > +++ b/common/cli.c
-> > @@ -268,7 +268,8 @@ void cli_loop(void)
+> >   * Various cleaning.
+> > =20
+> >  v8:
+> >   * Bumped upstream busybox hush commits until 25th May 2023.
+> > =20
+> >  v9:
+> >   * Bumped upstream busybox hush commits until 2nd October 2023.
 > >=20
-> >   void cli_init(void)
-> >   {
-> >   #ifdef CONFIG_HUSH_PARSER
->=20
-> This Kconfig symbol is superfluous when you already have
-> CONFIG_HUSH_OLD_PARSER and CONFIG_HUSH_2021_PARSER.
->=20
-> Please, remove CONFIG_HUSH_PARSER from Kconfig.
->=20
-> > -	if (!(gd->flags & GD_FLG_HUSH_OLD_PARSER))
-> > +	if (!(gd->flags & GD_FLG_HUSH_OLD_PARSER)
->=20
-> The first part of the if statement is superfluous.
-> There is no harm in setting the bit again.
->=20
-> > +		&& CONFIG_IS_ENABLED(HUSH_OLD_PARSER))
+> > Francis Laniel (24):
+> >   test: Add framework to test hush behavior
+> >   test: hush: Test hush if/else
+> >   test/py: hush_if_test: Remove the test file
+> >   test: hush: Test hush variable expansion
+> >   test: hush: Test hush commands list
+> >   test: hush: Test hush loops
+> >   cli: Add Busybox upstream hush.c file
+> >   cli: Port Busybox 2021 hush to U-Boot
+> >   cli: Add menu for hush parser
+> >   global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
+> >   cmd: Add new cli command
+> >   cli: Enables using hush 2021 parser as command line parser
+> >   cli: hush_2021: Enable variables expansion for hush 2021
+> >   cli: hush_2021: Add functions to be called from run_command()
+> >   cli: add hush 2021 as parser for run_command*()
+> >   test: hush: Fix instructions list tests for hush 2021
+> >   test: hush: Fix variable expansion tests for hush 2021
+> >   cli: hush_2021: Enable using < and > as string compare operators
+> >   cli: hush_2021: Enable if keyword
+> >   cli: hush_2021: Enable loops
+> >   test: hush: Fix loop tests for hush 2021
+> >   cli: hush_2021: Add upstream commits up to 2nd October 2023.
+> >   DO NOT MERGE: only to make CI happy
+> >   DO NOT MERGE: ci: Build the world in any case.
+> > =20
+> >  .azure-pipelines.yml               |     1 +
+> >  cmd/Kconfig                        |    22 +
+> >  cmd/Makefile                       |     2 +
+> >  cmd/cli.c                          |   125 +
+> >  common/Makefile                    |     3 +-
+> >  common/cli.c                       |    82 +-
+> >  common/cli_hush_2021.c             |   324 +
+> >  common/cli_hush_upstream.c         | 13030 +++++++++++++++++++++++++++
+> >  configs/sheevaplug_defconfig       |     1 +
+> >  doc/usage/cmd/cli.rst              |    74 +
+> >  doc/usage/index.rst                |     1 +
+> >  include/asm-generic/global_data.h  |     8 +
+> >  include/cli_hush.h                 |    51 +-
+> >  include/test/hush.h                |    15 +
+> >  include/test/suites.h              |     1 +
+> >  test/Makefile                      |     3 +
+> >  test/cmd_ut.c                      |     6 +
+> >  test/hush/Makefile                 |    10 +
+> >  test/hush/cmd_ut_hush.c            |    20 +
+> >  test/hush/dollar.c                 |   226 +
+> >  test/hush/if.c                     |   316 +
+> >  test/hush/list.c                   |   140 +
+> >  test/hush/loop.c                   |    91 +
+> >  test/py/tests/test_hush_if_test.py |   197 -
+> >  test/py/tests/test_ut.py           |     8 +-
+> >  tools/patman/series.py             |     4 +
+> >  26 files changed, 14549 insertions(+), 212 deletions(-)
+> >  create mode 100644 cmd/cli.c
+> >  create mode 100644 common/cli_hush_2021.c
+> >  create mode 100644 common/cli_hush_upstream.c
+> >  create mode 100644 doc/usage/cmd/cli.rst
+> >  create mode 100644 include/test/hush.h
+> >  create mode 100644 test/hush/Makefile
+> >  create mode 100644 test/hush/cmd_ut_hush.c
+> >  create mode 100644 test/hush/dollar.c
+> >  create mode 100644 test/hush/if.c
+> >  create mode 100644 test/hush/list.c
+> >  create mode 100644 test/hush/loop.c
+> >  delete mode 100644 test/py/tests/test_hush_if_test.py
 > >=20
-> >   		gd->flags |=3D GD_FLG_HUSH_OLD_PARSER;
-> >   =09
-> >   	u_boot_hush_start();
-> >  =20
-> >   #endif
-> >=20
-> > diff --git a/doc/usage/cmd/cli.rst b/doc/usage/cmd/cli.rst
-> > new file mode 100644
-> > index 0000000000..89ece3203d
-> > --- /dev/null
-> > +++ b/doc/usage/cmd/cli.rst
-> > @@ -0,0 +1,59 @@
-> > +.. SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +cli command
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +Synopis
-> > +-------
-> > +
-> > +::
-> > +
-> > +    cli get
-> > +    cli set cli_flavor
+> > --
+> > 2.34.1
 >=20
-> We should show the available values here:
->=20
-> cli set [old|2021]
->=20
-> > +
-> > +Description
-> > +-----------
-> > +
-> > +The cli command permits getting and changing the current parser at
-> > runtime.
-> The cli command permits displaying and setting the command line parsers.
-> Currently two parsers are implemented:
->=20
-> old
->     The 'old' parser is what U-Boot provided until v2023.10.
->=20
-> 2021
->     The '2021' parser provides ....
->=20
-> Please, describe here why the '2021' parser might be preferable. Please,
-> describe which parser is the default.
->=20
-> > +
-> > +cli get
-> > +~~~~~~~
-> > +
-> > +It shows the current value of the parser used by the CLI.
->=20
-> The command display the parser used by the command line interface ('old'
-> or '2021').
->=20
-> > +
-> > +cli set
-> > +~~~~~~~
-> > +
-> > +It permits setting the value of the parser used by the CLI.
->=20
-> The command sets the parser used by the command line interface.
->=20
-> > +
-> > +Possible values are old and 2021.
-> > +Note that, to use a specific parser its code should have been compiled,
-> > that +is to say you need to enable the corresponding CONFIG_HUSH*.
-> > +Otherwise, an error message is printed.
->=20
-> Should we use .. note:: here to highlight the information?
->=20
-> > +
-> > +Examples
-> > +--------
-> > +
-> > +Get the current parser::
-> > +
-> > +    =3D> cli get
-> > +    old
-> > +
-> > +Change the current parser::
-> > +
-> > +    =3D> cli set old
->=20
-> =3D> cli set 2021
->=20
-> Who would want to set the current value?
->=20
-> > +
-> > +Trying to set the current parser to an unknown value::
-> > +
-> > +    =3D> cli set foo
-> > +    Bad value for parser name: foo
-> > +    cli - cli
-> > +
-> > +    Usage:
-> > +    cli get - print current cli
-> > +    set - set the current cli, possible value is: old
->=20
-> This looks like a bug. I would have expected at least two possible
-> values. Otherwise we would not need a 'cli' command.
->=20
-> Please, add a 'Configuration' section describing the relevant
-> configuration variables.
->=20
-> Best regards
->=20
-> Heinrich
->=20
-> > +
-> > +Return value
-> > +------------
-> > +
-> > +The return value $? indicates whether the command succeeded.
-> > diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> > index fa702920fa..90a38c5713 100644
-> > --- a/doc/usage/index.rst
-> > +++ b/doc/usage/index.rst
-> > @@ -42,6 +42,7 @@ Shell commands
-> >=20
-> >      cmd/cat
-> >      cmd/cbsysinfo
-> >      cmd/cedit
-> >=20
-> > +   cmd/cli
-> >=20
-> >      cmd/cls
-> >      cmd/cmp
-> >      cmd/coninfo
+> Regards,
+> Simon
 
 
 Best regards.
