@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71816C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE8BC4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 21:53:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7A2687630;
-	Tue,  7 Nov 2023 22:52:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id E491D8762C;
+	Tue,  7 Nov 2023 22:52:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="E2HJRDU9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Jl1PZyCi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 593CB87615; Tue,  7 Nov 2023 22:52:06 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3307087627; Tue,  7 Nov 2023 22:52:58 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 522108761B
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:52:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-40907b82ab9so730735e9.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:52:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1699393923; x=1699998723;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KJhZhseMBuA5YBV8MzIxPnt6pXuOkwSvA+z2cnd8YNo=;
- b=E2HJRDU93LMkuQc9tW3FeZQYCrrudZAg+SgtTWbvssckrEZm2L5S3miigQVT6YcuFd
- 34i1m4faePwgP+KleM/jdDW2+O/OKhInvedpAEZB7k1xOhm+PjyfJPTP+Q8vDoRsBjU0
- 5NMsZgnKulz+4zk5SPOpDs1VU0Ux5j7KkEcJ8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699393923; x=1699998723;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KJhZhseMBuA5YBV8MzIxPnt6pXuOkwSvA+z2cnd8YNo=;
- b=V6mesVCXFgu27arGrnAogV24PMCx0G7svYlPFrJ4Jc8hHIJn2cIdSh+kToCuU09x8Q
- ig0xTS9ywQ2smH45MqwMimiFs00rnhJ2bQ4nyU2S/G7WT0hyHeSZonB/cLdvVH5h6yDO
- ttjRWfnqi5xzwvk18LPtL93km76APp+xOKktHD1yBeMhZqBTZqX2orw6EKte3ocLkD0K
- aRhzLzfLW6Rk4dU3nOSn1cA5GXRhKC5YtHoRt/2yadmzyBJqcA+T83USRa863qANxqMN
- y1vyV85lkT7UuMacw0HBWI44/3tmnDUK+izAxnCJZQBWL8L7fWdX0p6yQyZ6RWiXDUtW
- mUrg==
-X-Gm-Message-State: AOJu0Yzo/isDByqltIY0v/MP264NOu69JVIYXCVZLNxlRwUpm3VQQEA0
- N/mg686UPxXnuE562BLi/g8scw==
-X-Google-Smtp-Source: AGHT+IFU3agv3/dCWIvveYKH6zMCGqrk195HrznHJaTXGjL3rsvX4bNWtEZOnHb3+3EmJkpo+wj+Sg==
-X-Received: by 2002:a05:600c:c0c:b0:401:b425:2414 with SMTP id
- fm12-20020a05600c0c0c00b00401b4252414mr4522078wmb.18.1699393922698; 
- Tue, 07 Nov 2023 13:52:02 -0800 (PST)
-Received: from pwmachine.localnet ([86.120.35.5])
- by smtp.gmail.com with ESMTPSA id
- l41-20020a05600c1d2900b004083a105f27sm17203648wms.26.2023.11.07.13.52.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 13:52:02 -0800 (PST)
-From: Francis Laniel <francis.laniel@amarulasolutions.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>
-Subject: Re: [RFC PATCH v10 00/24] Modernize U-Boot shell
-Date: Tue, 07 Nov 2023 23:52:00 +0200
-Message-ID: <1869512.tdWV9SEqCh@pwmachine>
-In-Reply-To: <CAPnjgZ2XUa6TQMoYu91WAL6T=0QGVUZMQGQA2R-bMasT0aSZig@mail.gmail.com>
-References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
- <CAPnjgZ2XUa6TQMoYu91WAL6T=0QGVUZMQGQA2R-bMasT0aSZig@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id F395687630
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 22:52:53 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 17A8061305
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 21:52:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA9BEC433C8
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 21:52:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699393971;
+ bh=UC2UJvIhg0nkxDSfMPxJY0dor27hPUUurgu3SecmmL8=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=Jl1PZyCiVk+belnjiWiQAzT7BHwzFAxRFmR9VA1aujCMeeEFzwx/ig0CIfqSbzscG
+ inq2/w6m5Ptb8UUb4scu205HiC3ThJN/Txur/L8bUsJ97TQZNOF+2nNKg9oWM3QAR2
+ GzPkI8pGyQGmH0IkUrLyD9vNIJnbu5EyOPZR6diiSD/ktgFD+/4R+dNIqRWeLwAaId
+ SaSJH6hrRSoSOZj0rmFUDUFt3fkmO22BsSKeU46iZKRTCy+6BaBUC4Vi06JY+mNRKs
+ O0cV80CZS8AO6WOxyJHJ2HAkkrJv1wWLrmAI7IiXLhklTX/0lQVccnLo12/cvrUl1F
+ X5Poz/+nfPNFw==
+Received: by mail-lf1-f46.google.com with SMTP id
+ 2adb3069b0e04-507975d34e8so8931222e87.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 13:52:51 -0800 (PST)
+X-Gm-Message-State: AOJu0Yy8eLwCGkic6tYN3/ZzJROoYI5SNZ8mi5BeHgVDXTTGXOVDUorf
+ BPoe9pyRaJPDnROygyycppuOLs5oTUlSxQJyyg==
+X-Google-Smtp-Source: AGHT+IGT+bgzFDRW82MRhZmk3/q812pW4HUj6srWvseumxvpKVRz73iod5vHIyClZfGzt58tq2EK898hdITdSZ5j2yc=
+X-Received: by 2002:a19:5211:0:b0:507:99fe:28f3 with SMTP id
+ m17-20020a195211000000b0050799fe28f3mr23352141lfb.34.1699393969760; Tue, 07
+ Nov 2023 13:52:49 -0800 (PST)
 MIME-Version: 1.0
+References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+ <20231101170559.680ab493@donnerap.manchester.arm.com>
+ <50ff2080-5831-4963-937d-331248b59973@canonical.com>
+ <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
+ <20231104171212.3d041a4f@slackpad.lan>
+ <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
+ <20231106172601.12c36750@donnerap.manchester.arm.com>
+ <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
+ <20231106204608.GJ496310@bill-the-cat>
+ <CAPnjgZ28HskiFDBDa=s_k6=WNoPfWu88bAaYCY7ew8dcYXW=aQ@mail.gmail.com>
+ <20231107193025.GN6601@bill-the-cat>
+In-Reply-To: <20231107193025.GN6601@bill-the-cat>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 7 Nov 2023 15:52:36 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
+Message-ID: <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Xiang W <merlew4n6@gmail.com>, Chanho Park <chanho61.park@samsung.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
+ Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov <avromanov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,420 +94,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
+On Tue, Nov 7, 2023 at 1:30=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Nov 07, 2023 at 01:10:44AM +0000, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 6 Nov 2023 at 13:46, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Nov 06, 2023 at 01:38:39PM -0700, Simon Glass wrote:
+> > > > Hi Andre,
+> > > >
+> > > > On Mon, 6 Nov 2023 at 10:26, Andre Przywara <andre.przywara@arm.com=
+> wrote:
+> > > > >
+> > > > > On Sat, 4 Nov 2023 19:45:06 +0000
+> > > > > Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi,
+> > > > >
+> > > > > > On Sat, 4 Nov 2023 at 17:13, Andre Przywara <andre.przywara@arm=
+.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, 3 Nov 2023 13:38:58 -0600
+> > > > > > > Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > Hi Simon,
+> > > > > > >
+> > > > > > > > Hi Heinrich,
+> > > > > > > >
+> > > > > > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
+> > > > > > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On 11/1/23 19:05, Andre Przywara wrote:
+> > > > > > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
+> > > > > > > > > > Heinrich Schuchardt <heinrich.schuchardt@canonical.com>=
+ wrote:
+> > > > > > > > > >
+> > > > > > > > > > Hi Heinrich,
+> > > > > > > > > >
+> > > > > > > > > >> The Zkr ISA extension (ratified Nov 2021) introduced t=
+he seed CSR. It
+> > > > > > > > > >> provides an interface to a physical entropy source.
+> > > > > > > > > >>
+> > > > > > > > > >> A RNG driver based on the seed CSR is provided. It dep=
+ends on
+> > > > > > > > > >> mseccfg.sseed being set in the SBI firmware.
+> > > > > > > > > >
+> > > > > > > > > > As you might have seen, I added a similar driver for th=
+e respective Arm
+> > > > > > > > > > functionality:
+> > > > > > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1=
+-andre.przywara@arm.com/
+> > > > > > > > > >
+> > > > > > > > > > And I see that you seem to use the same mechanism to pr=
+obe and init the
+> > > > > > > > > > driver: U_BOOT_DRVINFO and fail in probe() if the featu=
+re is not
+> > > > > > > > > > implemented.
+> > > > > > > > > > One downside of this approach is that the driver is alw=
+ays loaded (and
+> > > > > > > > > > visible in the DM tree), even with the feature not bein=
+g available.
+> > > > > > > > > > That doesn't seem too much of a problem on the first gl=
+ance, but it
+> > > > > > > > > > occupies a device number, and any subsequent other DM_R=
+NG devices
+> > > > > > > > > > (like virtio-rng) typically get higher device numbers. =
+So without
+> > > > > > > > > > the feature, but with virtio-rng, I get:
+> > > > > > > > > > VExpress64# rng 0
+> > > > > > > > > > No RNG device
+> > > > > > > >
+> > > > > > > > Why do we get this? If the device is not there, the bind() =
+function
+> > > > > > > > can return -ENODEV
+> > > > > > > >
+> > > > > > > > I see this in U-Boot:
+> > > > > > > >
+> > > > > > > > U_BOOT_DRVINFO(cpu_arm_rndr) =3D {
+> > > > > > > >
+> > > > > > > > We should not use this.
+> > > > > > >
+> > > > > > > Agreed.
+> > > > > > >
+> > > > > > > > Use the devicetree.
+> > > > > > >
+> > > > > > > No, this is definitely not something for the DT, at least not=
+ on ARM.
+> > > > > > > It's perfectly discoverable via the architected CPU ID regist=
+ers.
+> > > > > > > Similar to PCI and USB devices, which we don't probe via the =
+DT as well.
+> > > > > > >
+> > > > > > > It's arguably not proper "driver" material per se, as I've ar=
+gued before, but
+> > > > > > > it's the simplest solution and fits in nicely otherwise.
+> > > > > > >
+> > > > > > > I was wondering if it might be something for UCLASS_CPU, some=
+thing like
+> > > > > > > a "CPU feature bus": to let devices register on one on the ma=
+ny CPU
+> > > > > > > features (instead of compatible strings), then only bind() th=
+ose
+> > > > > > > drivers it the respective bit is set.
+> > > > > > >
+> > > > > > > Does that make sense? Would that be doable without boiling th=
+e ocean?
+> > > > > > > As I don't know if we see many users apart from this.
+> > > > > >
+> > > > > > I have seen this so many times, where people want to avoid putt=
+ing
+> > > > > > things in the DT and then are surprised that everything is diff=
+icult,
+> > > > > > broken and confusing. Why not just follow the rules? It is not =
+just
+> > > > > > about whether we can avoid it, etc. It is about how devices fit
+> > > > > > together cohesively in the system, and how U-Boot operates.
+> > > > >
+> > > > > A devicetree is only for peripherals *that cannot be located by p=
+robing*.
+> > > >
+> > > > I have to stop you there. It absolutely is not limited to that.
+> > >
+> > > It is limited to that if we're going to keep using the device trees t=
+hat
+> > > Linux uses. Full stop. There's not really wiggle room there either.
+> >
+> > That is really the problem, I agree.
+>
+> And we need to accept that, and what is/isn't something that we can
+> expect every board developer to have to tweak on top of this.
+>
+> Heck, maybe part of the issue here is that devicetree-the-spec and
+> devicetree-the-linux-kernel-input need a little differentiation and some
+> official statement along the lines of "just because X can be in the
+> device tree does not mean that X will be defined in the device tree, if
+> it can be detected in some other reliable manner" for the latter.
 
+I think Andre's statement is just missing 1 word: required
 
-Le lundi 9 octobre 2023, 20:56:30 EET Simon Glass a =E9crit :
-> Hi Francis,
->=20
-> On Wed, 4 Oct 2023 at 10:42, Francis Laniel <
->=20
-> francis.laniel@amarulasolutions.com> wrote:
-> > Hi.
-> >=20
-> >=20
-> > During 2021 summer, Sean Anderson wrote a contribution to add a new
->=20
-> shell, based
->=20
-> > on LIL, to U-Boot [1, 2].
-> > While one of the goals of this contribution was to address the fact act=
-ual
-> > U-Boot shell, which is based on Busybox hush, is old there was a
->=20
-> discussion
->=20
-> > about adding a new shell versus updating the actual one [3, 4].
-> >=20
-> > So, in this series, with Harald Seiler, we updated the actual U-Boot
->=20
-> shell to
->=20
-> > reflect what is currently in Busybox source code.
-> > Basically, this contribution is about taking a snapshot of Busybox
->=20
-> shell/hush.c
->=20
-> > file (as it exists in commit 37460f5da) and adapt it to suit U-Boot nee=
-ds.
-> >=20
-> > This contribution was written to be as backward-compatible as possible =
-to
->=20
-> avoid
->=20
-> > breaking the existing.
-> > So, the 2021 hush flavor offers the same as the actual, that is to say:
-> > 1. Variable expansion.
-> > 2. Instruction lists (;, && and ||).
-> > 3. If, then and else.
-> > 4. Loops (for, while and until).
-> > No new features offered by Busybox hush were implemented (e.g. function=
-s).
-> >=20
-> > It is possible to change the parser at runtime using the "cli" command:
-> > =3D> cli print
-> > old
-> > =3D> cli set 2021
-> > =3D> cli print
-> > 2021
-> > =3D> cli set old
-> > The default parser is the old one.
-> > Note that to use both parser, you would need to set both
->=20
-> CONFIG_HUSH_2021_PARSER
->=20
-> > and CONFIG_HUSH_OLD_PARSER.
-> >=20
-> > In terms of testing, new unit tests were added to ut to ensure the new
->=20
-> behavior
->=20
-> > is the same as the old one and it does not add regression.
-> > Nonetheless, if old behavior was buggy and fixed upstream, the fix is
->=20
-> then added
->=20
-> > to U-Boot [5].
-> > In sandbox, all of these tests pass smoothly:
-> > =3D> printenv board
-> > board=3Dsandbox
-> > =3D> ut hush
-> > Running 20 hush tests
-> > ...
-> > Failures: 0
-> > =3D> parser set 2021
-> > =3D> ut hush
-> > Running 20 hush tests
-> > ...
-> > Failures: 0
-> >=20
-> > Thanks to the effort of Harald Seiler, I was successful booting a board:
-> > =3D> printenv fdtfile
-> > fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
-> > =3D> cli get
-> > old
->=20
-> This is a really nice integration.
->=20
-> I think it could benefit from a new Kconfig like CONFIG_HUSH_SELECTABLE
-> which enables the cli command and selection of parser...this could perhaps
-> be enabled automatically if two parsers are selected. Then the code growth
-> (about 1KB on Thumb 2) would mostly go away.
+A devicetree is only *required* for peripherals *that cannot be
+located by probing*.
 
-Excellent idea!
-I added this in v11 but did not find a way to count how many options were s=
-et,=20
-so HUSH_SELECTABLE is set when the two hush flavors are selected.
+But really I'd phrase it in terms of what's needed for discoverable devices=
+.
 
-> For checking parsers, the code you use:
->=20
->    if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
->       int hush_flags =3D FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP;
->=20
->       if (flag & CMD_FLAG_ENV)
->          hush_flags |=3D FLAG_CONT_ON_NEWLINE;
->       return parse_string_outer(cmd, hush_flags);
->    } else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
-> ...
->       return parse_string_outer_2021(cmd, FLAG_EXIT_FROM_LOOP);
->    }
->=20
-> could be written to reduce code size...i.e. there is only a need to check
-> the gd flag if HUSH_SELECTABLE is enabled, so:
->=20
-> static inline bool use_hush_old(void)
-> {
->  return IS_ENABLED(CONFIG_HUSH_SELECTABLE) ?
->      gd->flags & GD_FLG_HUSH_OLD_PARSER :
->      IS_ENABLD(CONFIG_HUSH_OLD_PARSER);
-> }
->=20
-> Then use that function in the code able.
+I'm somewhat surprised at this point in time we need a statement, but
+happy to add something to the DT spec. DT has been optional for
+PCI/USB since the advent of FDT and only used there when there's extra
+resources which are not discoverable. It only seems to be a question
+when it's a not $sig bus.
 
-Indeed! Thank you for the suggestion!
+> > But I would be happy with a u-boot.dtsi file to resolve this, while we
+> > wait. I believe a binding makes sense in this case.
+>
+> We don't need a binding, we can easily check at run-time. We only barely
+> have to worry about run-time failing (yes, QEMU could be fired up with a
+> model that lacks it, or some future change, and it's cheap to check). I
+> would say we could use the cpu compatible as a binding, but I don't want
+> to then have to add a bootph property to that. And the RISC-V example
+> makes it even clearer that this is not a binding thing.
+>
+> I do not want a binding here that we just don't upstream because it will
+> make life harder for everyone else that's adding new platforms to get
+> the feature to work. Or people won't get it to work and instead add new
+> code that they most likely didn't need to, per drivers/timer/ today.
+>
+> I'll let security people argue on what level of RNG (and so perhaps RNG
+> choice on systems that have more than one source available) devices need
+> to be present.
 
-> Size growth when swtiching to the the new parser is only 3KB, from my tes=
-t.
-> I thought it would be much more?
->=20
-> > =3D> boot
-> > ...
-> > root@lepotato:~#
-> > root@lepotato:~# reboot
-> > ...
-> > =3D> cli set 2021
-> > =3D> cli get
-> > 2021
-> > =3D> printenv fdtfile
-> > fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
-> > =3D> boot
-> > ...
-> > root@lepotato:~#
-> >=20
-> > I had to not use CONFIG_HUSH_2021_PARSER for the keymile board.
-> > Indeed, the keymile board family is the only set of boards to call
-> > get_local_var(), set_local_var() and unset_local_var().
-> > Sadly, these functions are static in this contribution.
-> > I could have change all of them to introduce code like this:
-> > *_local_var(/*...*/)
-> > {
-> >=20
-> >         if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
-> >        =20
-> >                 return *_local_var_old(/*...*/);
-> >        =20
-> >         if (gd->flags & GD_FLG_HUSH_2021_PARSER)
-> >        =20
-> >                 return *_local_var_2021(/*...*/);
-> >=20
-> > }
-> > But this would have mean renaming all old hush functions calls and I did
->=20
-> not
->=20
-> > want to change the old hush particularly to avoid breaking things.
-> > Instead, I change the keymile board to use environment variable instead
->=20
-> of local
->=20
-> > ones.
-> > I think this particularities can be addressed in future works.
->=20
-> I agree.
->=20
-> > I also had to enable CONFIG_LTO for kirkwoord sheevaplug and phytec
->=20
-> bk4r1, so
->=20
-> > they do not hit their limits.
-> >=20
-> > For all these reasons, I marked this contribution as RFC to indeed
->=20
-> collect your
->=20
-> > opinions.
-> > My goal is not to change suddenly actual shell to this one, we clearly
->=20
-> need a
->=20
-> > transition period to think about it.
-> > I think it is better to see this contribution as a proof of concept whi=
-ch
->=20
-> shows
->=20
-> > it is possible to update the actual shell.
-> >=20
-> > If you want to review it - your review will really be appreciated - here
->=20
-> are
->=20
-> > some information regarding the commits:
-> > * commits marked as "test:" deal with unit tests.
-> > * commit "cli: Add Busybox upstream hush.c file." copies Busybox
->=20
-> shell/hush.c
->=20
-> > into U-Boot tree, this explain why this commit contains around 12000
->=20
-> additions.
->=20
-> > * commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously
->=20
-> added file
->=20
-> > to permit us to use this as new shell.
-> > The really good idea of #include'ing Busybox code into a wrapper file to
->=20
-> define
->=20
-> > some particular functions while minimizing modifications to upstream co=
-de
->=20
-> comes
->=20
-> > from Harald Seiler.
-> > * commit "cmd: Add new parser command" adds a new command which permits
-> > selecting parser at runtime.
-> > I am not really satisfied with the fact it calls cli_init() and
->=20
-> cli_loop() each
->=20
-> > time the parser is set, so your reviews would be welcomed.
->=20
-> It would be great if this could go in this cycle.
->=20
-> One minor nit is that the commit "cmd: Add new cli command" introduces a
-> build error which is fixed in the next commit. It would be better to have
-> the GD flag added in that first commit.
+There's the stance that you don't trust any of them, so use them all
+and mix them together.
 
-I normally addressed this in the v11, I will think to use buildman in the=20
-future to avoid this type of mistake!
+> But I think drivers/timer/ is the better example of
+> needing to just have the source present, with minimal run-time checking
+> (since it's a feature of the CPU).
 
-> It is great to see such a simple diff from 2 years of busybox activity. It
-> augurs well for future maintenance.
+Timers come up frequently (well, less so with Arm arch timer now) with
+various ways to assign timers to Linux clocksource and clockevent. My
+response there is what's the difference in the instances that you care
+about assignment? If they are all the same, then you shouldn't. If
+they aren't the same, describe the difference. Sometimes it's just one
+instance has an interrupt, so it's the clockevent. Or you need the one
+that's always on. The OS/client can figure that out if you describe
+those properties. That's better than creating arbitrary indices.
 
-Indeed! This should be doable to maintain this code if we take a look at=20
-upstream busybox time to time.
-
-> I feel that in general, if if() were used instead of #if, some of the
-> #ifdef stuff might go away. For example, if some #ifdef'd code calls foo(=
-),
-> then foo() itself needs an #ifdef but if the code which calls foo() is 'if
-> (!U_BOOT) foo()' then we don't need the #ifdef around foo().
->=20
-> Another point is that I wonder if it is worth #ifdefing out struct member=
-s.
-> Perhaps it is safer that way, but it does create more #ifdefs, where if()
-> could be used.
->=20
-> In a few cases I saw chunks of code being added - it might be better for
-> maintenance to create a new function with the U-Boot code and call it from
-> the original site.
-
-To be honest with you, there are plenty of things to improve with the curre=
-nt=20
-code.
-I first went with #ifdef as it was already used with the old hush and I wan=
-ted=20
-to get something which works.
-But yes, it would be better to add more functions in cli_hush_2021.c and to=
-uch=20
-as few as possible cli_hush_upstream.c.
-
-> These are all minor things, though. I suggest sending a non-RFC as I
-> believe it is mostly ready to go in.
->=20
-> > * Other commits focus on enabling features we need (e.g. if).
-> >=20
-> > Changes since:
-> >  v2:
-> >   * Added a small fix to compile sandbox with NO_SDL=3D1.
-> >   * Added a command to change parser at runtime.
-> >   * Added 2021 parser function to all run_command*().
-> > =20
-> >  v3:
-> >   * Various bug fixes pointed by the CI.
-> >   * Added upstream busybox hush commits until 6th February 2022.
-> > =20
-> >  v4:
-> >   * Various cleaning.
-> >   * Modified python test to accept failure output when the test are
->=20
-> designed to
->=20
-> >   fail.
-> >   * Bumped upstream busybox hush commits until 24h March 2022.
-> > =20
-> >  v5:
-> >   * Bumped upstream busybox hush commits until 30th January 2023.
-> >   * Fix how hush interprets '<' and '>', indeed we needed to escape them
->=20
-> but I
->=20
-> >   removed this behavior as tests are handled by test command and not hu=
-sh
-> >   itself. This permitted to have the ut fdt to pass.
-> >   * Fix a problem with how exit was handled. This was reported by the ut
->=20
-> exit
->=20
-> >   test.
-> > =20
-> >  v6:
-> >   * There was no v6 and I got mixed up with version.
-> > =20
-> >  v7:
-> >   * Bumped upstream busybox hush commits until 9th May 2023.
-> >   * Renamed parser command to change parser at runtime to cli and added
-> >   documentation.
-> >   * Added better separation of patches.
-> >   * Removed code about __gnu_thumb1_case_si as it was merged in another
->=20
-> series.
->=20
-> >   * Various cleaning.
-> > =20
-> >  v8:
-> >   * Bumped upstream busybox hush commits until 25th May 2023.
-> > =20
-> >  v9:
-> >   * Bumped upstream busybox hush commits until 2nd October 2023.
-> >=20
-> > Francis Laniel (24):
-> >   test: Add framework to test hush behavior
-> >   test: hush: Test hush if/else
-> >   test/py: hush_if_test: Remove the test file
-> >   test: hush: Test hush variable expansion
-> >   test: hush: Test hush commands list
-> >   test: hush: Test hush loops
-> >   cli: Add Busybox upstream hush.c file
-> >   cli: Port Busybox 2021 hush to U-Boot
-> >   cli: Add menu for hush parser
-> >   global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
-> >   cmd: Add new cli command
-> >   cli: Enables using hush 2021 parser as command line parser
-> >   cli: hush_2021: Enable variables expansion for hush 2021
-> >   cli: hush_2021: Add functions to be called from run_command()
-> >   cli: add hush 2021 as parser for run_command*()
-> >   test: hush: Fix instructions list tests for hush 2021
-> >   test: hush: Fix variable expansion tests for hush 2021
-> >   cli: hush_2021: Enable using < and > as string compare operators
-> >   cli: hush_2021: Enable if keyword
-> >   cli: hush_2021: Enable loops
-> >   test: hush: Fix loop tests for hush 2021
-> >   cli: hush_2021: Add upstream commits up to 2nd October 2023.
-> >   DO NOT MERGE: only to make CI happy
-> >   DO NOT MERGE: ci: Build the world in any case.
-> > =20
-> >  .azure-pipelines.yml               |     1 +
-> >  cmd/Kconfig                        |    22 +
-> >  cmd/Makefile                       |     2 +
-> >  cmd/cli.c                          |   125 +
-> >  common/Makefile                    |     3 +-
-> >  common/cli.c                       |    82 +-
-> >  common/cli_hush_2021.c             |   324 +
-> >  common/cli_hush_upstream.c         | 13030 +++++++++++++++++++++++++++
-> >  configs/sheevaplug_defconfig       |     1 +
-> >  doc/usage/cmd/cli.rst              |    74 +
-> >  doc/usage/index.rst                |     1 +
-> >  include/asm-generic/global_data.h  |     8 +
-> >  include/cli_hush.h                 |    51 +-
-> >  include/test/hush.h                |    15 +
-> >  include/test/suites.h              |     1 +
-> >  test/Makefile                      |     3 +
-> >  test/cmd_ut.c                      |     6 +
-> >  test/hush/Makefile                 |    10 +
-> >  test/hush/cmd_ut_hush.c            |    20 +
-> >  test/hush/dollar.c                 |   226 +
-> >  test/hush/if.c                     |   316 +
-> >  test/hush/list.c                   |   140 +
-> >  test/hush/loop.c                   |    91 +
-> >  test/py/tests/test_hush_if_test.py |   197 -
-> >  test/py/tests/test_ut.py           |     8 +-
-> >  tools/patman/series.py             |     4 +
-> >  26 files changed, 14549 insertions(+), 212 deletions(-)
-> >  create mode 100644 cmd/cli.c
-> >  create mode 100644 common/cli_hush_2021.c
-> >  create mode 100644 common/cli_hush_upstream.c
-> >  create mode 100644 doc/usage/cmd/cli.rst
-> >  create mode 100644 include/test/hush.h
-> >  create mode 100644 test/hush/Makefile
-> >  create mode 100644 test/hush/cmd_ut_hush.c
-> >  create mode 100644 test/hush/dollar.c
-> >  create mode 100644 test/hush/if.c
-> >  create mode 100644 test/hush/list.c
-> >  create mode 100644 test/hush/loop.c
-> >  delete mode 100644 test/py/tests/test_hush_if_test.py
-> >=20
-> > --
-> > 2.34.1
->=20
-> Regards,
-> Simon
-
-
-Best regards.
-
-
+Rob
