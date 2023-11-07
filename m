@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3D3C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 19:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA673C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 19:06:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46636875E8;
+	by phobos.denx.de (Postfix) with ESMTP id CB527875EF;
 	Tue,  7 Nov 2023 20:06:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H5AkzTs/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OPTHyffK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D25DF875C6; Tue,  7 Nov 2023 20:06:11 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 1C612875C3; Tue,  7 Nov 2023 20:06:13 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E063870BC
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 20:06:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 209C387584
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 20:06:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3b2e308a751so5470b6e.0
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 11:06:06 -0800 (PST)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6ce2c5b2154so3855254a34.3
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 11:06:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699383965; x=1699988765; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699383966; x=1699988766; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vfF15bOqd2HKm14u2HtIQKTVmgnM4eGssEsIUHfHn1E=;
- b=H5AkzTs/TRSHFvvNamac62IcRHn0+r+kdL3gwSDBABwqcE06xtm3V7Y4gDY4SemKci
- LQ1qz4abu4cj6h51Kwpaih/pl6yvFsPFxTEJas2i6ykSGhbPw66MoYt3tNznb8EzHnNC
- xftbO+DnId4OQ4cXwU/fdW85d6TVUF7RBqvoiLe5KTF6eWq/5a+Vqi14BOVVf9E8unH/
- ECdmBfV+ft1SoeNv7uWBmNitRXVZQqvdnyl05tmDm/Hlh4a5Jxykz/89XT98dcw/X/Qz
- F4RP1vL/RMcBGWMDYLsayQl/AVgA0YQfHObZLErvJ7EFJluFaQMkrh4Iakf8LWqxZBgr
- 4Ekg==
+ bh=M/pKtokJ16QvLgTtzXCD1ooraExBNQXaxs+a4bK0Yss=;
+ b=OPTHyffKKwZwDPP+WzqNF9MAPhxNTN1bNvhzDeiv4J2gi/la/J2RpwPV+G5kYF40T8
+ k87pQV2hYYwuftIt2OvFGCwN/03s0mAwZwtWmyGnLcpxQC94EpowKwncm76NbjTTmnX6
+ WIRxPuCfcbS9doFvqU6zC4sn+oDTdiMK3XtasOLqLlSxD9A/XoCwPSfmIVfnH2SzhiWg
+ EAMuGE4Lx+YkrOB0JplYsJ5/rKnk6vzqX+4Um4Fxm80pqOsXB4JZD7MpwzwBTpsoj4sS
+ WmVTFTK/viVo1cHDU2qIwhOoiw8+3q3cD1+PDa+Wu04qZO2ntywcYUNnDsloOb7hmF0X
+ 1nqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699383965; x=1699988765;
+ d=1e100.net; s=20230601; t=1699383966; x=1699988766;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vfF15bOqd2HKm14u2HtIQKTVmgnM4eGssEsIUHfHn1E=;
- b=f9L/ySjlqaxUAboQlhtMhqunT+qsx1jYjXHYSHjj0HVvBd7SVuUCGWGc2GVE70ve3Y
- xzqpl8i4jEpE4ry5e3sKV6EK7A2yH6M0Wi+eYO/CQmSovwsoO8+tXVcs9cr9WStY5SgD
- R0T1nXstmpZE0TpSrrT25FSEZGKX7Raz6zJ+6xJIK9w5yRaph/XgldnwHOesoBElpRYt
- BaIGrJemwpNzjoHoGhUDh0D0RHxVpxRZjlwIKY4GCdKeC/yDn0ep/8GYjbSwBvmNzYGD
- abyNLPUBy9E8Mfo/8htqHC4YI+h83H02ShviTkOCT2p1WhgQ/bl/9SF6kX6MgPvMxfGv
- 2ZKw==
-X-Gm-Message-State: AOJu0Yx7gTl+NYOCESbVK2v6t1qD21jnYEEg6eeqX8aR7+PwfvceQTAt
- qi6Bs22o9T/UGN81WROg+jXQ0w==
-X-Google-Smtp-Source: AGHT+IFugqeYUpu9+SXHGvRmmKu4ZY9hgKr5Rtlv0dHqmVq3EEO5LhNV8AY/a6k14DMYTYTXyM+d5w==
-X-Received: by 2002:a05:6808:1492:b0:3b0:f8bd:9503 with SMTP id
- e18-20020a056808149200b003b0f8bd9503mr1847894oiw.10.1699383964749; 
- Tue, 07 Nov 2023 11:06:04 -0800 (PST)
+ bh=M/pKtokJ16QvLgTtzXCD1ooraExBNQXaxs+a4bK0Yss=;
+ b=NYfRj/rxeRS/WZ/AcOYu4XzKdrCzcGLpsXrKgRuxOCkEO0m+imn3kKl4sNMznHHOG0
+ Pzv5sdPZmTKqw19kiyZ268JR8L5CqTx7Kmg+L+j8G6ulufHAd4usJ9/pFe2qOSIdPWf2
+ KQU+amVLY40LU71vvLOC/9VkSiwcepTMvkCIELsLNOJ/cOWU4X/5sjCUfqQcWJeov8YH
+ dG+C9BZKAHr9W160Fv/KZu3wsh2q1XXpFjx5o8FKdQNN/owsizuLEAwhZGDQfMAAb+zD
+ Ifj9WHDNLqv8Mmj8VUczptAP9QoszNE3dLVwj+OqeQhNVU5iHZ0QT8E/EnI+F65RgI/C
+ gzQg==
+X-Gm-Message-State: AOJu0Yy4vc6yavhMfCqa7szze7WGlCAOlsTovtCaRkh33w88bdRlWSqP
+ ZaE/E0OFas0vwau0MT44yh665g==
+X-Google-Smtp-Source: AGHT+IEeujef3uwH7xDmLloodziH5ruKnTJQJCYPep8jOX6JtYapvjz0JCrDX2iSAXfF8lTHJH94bA==
+X-Received: by 2002:a05:6830:7181:b0:6b9:a926:4a12 with SMTP id
+ el1-20020a056830718100b006b9a9264a12mr42774453otb.28.1699383965659; 
+ Tue, 07 Nov 2023 11:06:05 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- c3-20020a056808138300b003b2e7231faasm1632778oiw.28.2023.11.07.11.06.04
+ bg19-20020a056830361300b006ce2ec1d000sm1665884otb.59.2023.11.07.11.06.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 11:06:04 -0800 (PST)
+ Tue, 07 Nov 2023 11:06:05 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Simon Glass <sjg@chromium.org>,
 	Tom Rini <trini@konsulko.com>
 Cc: Mark Kettenis <kettenis@openbsd.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH 3/4] serial: s5p: Use named constants for register values
-Date: Tue,  7 Nov 2023 13:06:00 -0600
-Message-Id: <20231107190601.17151-4-semen.protsenko@linaro.org>
+Subject: [PATCH 4/4] serial: s5p: Improve coding style
+Date: Tue,  7 Nov 2023 13:06:01 -0600
+Message-Id: <20231107190601.17151-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231107190601.17151-1-semen.protsenko@linaro.org>
 References: <20231107190601.17151-1-semen.protsenko@linaro.org>
@@ -92,76 +92,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get rid of magic numbers in s5p_serial_init() when writing to UART
-registers. While at it, use BIT() macro for existing constants when
-appropriate.
-
-No functional change.
+Just some minor style fixes. No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/serial/serial_s5p.c | 31 +++++++++++++++++++++----------
- 1 file changed, 21 insertions(+), 10 deletions(-)
+ drivers/serial/serial_s5p.c | 34 ++++++++++++++++++----------------
+ 1 file changed, 18 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
-index c57bdd059ea6..6d316ccaf31d 100644
+index 6d316ccaf31d..c24d9bca84c9 100644
 --- a/drivers/serial/serial_s5p.c
 +++ b/drivers/serial/serial_s5p.c
-@@ -25,19 +25,28 @@ enum {
- 	PORT_S5L
- };
- 
-+#define UFCON_FIFO_EN		BIT(0)
-+#define UFCON_RX_FIFO_RESET	BIT(1)
-+#define UMCON_RESET_VAL		0x0
-+#define ULCON_WORD_8_BIT	0x3
-+#define UCON_RX_IRQ_OR_POLLING	BIT(0)
-+#define UCON_TX_IRQ_OR_POLLING	BIT(2)
-+#define UCON_RX_ERR_IRQ_EN	BIT(6)
-+#define UCON_TX_IRQ_LEVEL	BIT(9)
-+
- #define S5L_RX_FIFO_COUNT_SHIFT	0
- #define S5L_RX_FIFO_COUNT_MASK	(0xf << S5L_RX_FIFO_COUNT_SHIFT)
--#define S5L_RX_FIFO_FULL	(1 << 8)
-+#define S5L_RX_FIFO_FULL	BIT(8)
- #define S5L_TX_FIFO_COUNT_SHIFT	4
- #define S5L_TX_FIFO_COUNT_MASK	(0xf << S5L_TX_FIFO_COUNT_SHIFT)
--#define S5L_TX_FIFO_FULL	(1 << 9)
-+#define S5L_TX_FIFO_FULL	BIT(9)
- 
- #define S5P_RX_FIFO_COUNT_SHIFT	0
- #define S5P_RX_FIFO_COUNT_MASK	(0xff << S5P_RX_FIFO_COUNT_SHIFT)
--#define S5P_RX_FIFO_FULL	(1 << 8)
-+#define S5P_RX_FIFO_FULL	BIT(8)
- #define S5P_TX_FIFO_COUNT_SHIFT	16
- #define S5P_TX_FIFO_COUNT_MASK	(0xff << S5P_TX_FIFO_COUNT_SHIFT)
--#define S5P_TX_FIFO_FULL	(1 << 24)
-+#define S5P_TX_FIFO_FULL	BIT(24)
+@@ -50,9 +50,9 @@ enum {
  
  /* Information about a serial port */
  struct s5p_serial_plat {
-@@ -80,13 +89,15 @@ static const int udivslot[] = {
- 
- static void __maybe_unused s5p_serial_init(struct s5p_uart *uart)
- {
--	/* enable FIFOs, auto clear Rx FIFO */
--	writel(0x3, &uart->ufcon);
--	writel(0, &uart->umcon);
--	/* 8N1 */
--	writel(0x3, &uart->ulcon);
-+	/* Enable FIFOs, auto clear Rx FIFO */
-+	writel(UFCON_FIFO_EN | UFCON_RX_FIFO_RESET, &uart->ufcon);
-+	/* No auto flow control, disable nRTS signal */
-+	writel(UMCON_RESET_VAL, &uart->umcon);
-+	/* 8N1, no parity bit */
-+	writel(ULCON_WORD_8_BIT, &uart->ulcon);
- 	/* No interrupts, no DMA, pure polling */
--	writel(0x245, &uart->ucon);
-+	writel(UCON_RX_IRQ_OR_POLLING | UCON_TX_IRQ_OR_POLLING |
-+	       UCON_RX_ERR_IRQ_EN | UCON_TX_IRQ_LEVEL, &uart->ucon);
+-	struct s5p_uart *reg;  /* address of registers in physical memory */
+-	u8 reg_width;	/* register width */
+-	u8 port_id;     /* uart port number */
++	struct s5p_uart *reg;	/* address of registers in physical memory */
++	u8 reg_width;		/* register width */
++	u8 port_id;		/* uart port number */
+ 	u8 rx_fifo_count_shift;
+ 	u8 tx_fifo_count_shift;
+ 	u32 rx_fifo_count_mask;
+@@ -65,7 +65,7 @@ struct s5p_serial_plat {
+  * The coefficient, used to calculate the baudrate on S5P UARTs is
+  * calculated as
+  * C = UBRDIV * 16 + number_of_set_bits_in_UDIVSLOT
+- * however, section 31.6.11 of the datasheet doesn't recomment using 1 for 1,
++ * however, section 31.6.11 of the datasheet doesn't recommend using 1 for 1,
+  * 3 for 2, ... (2^n - 1) for n, instead, they suggest using these constants:
+  */
+ static const int udivslot[] = {
+@@ -251,10 +251,10 @@ static int s5p_serial_of_to_plat(struct udevice *dev)
  }
  
- static void __maybe_unused s5p_serial_baud(struct s5p_uart *uart, u8 reg_width,
+ static const struct dm_serial_ops s5p_serial_ops = {
+-	.putc = s5p_serial_putc,
+-	.pending = s5p_serial_pending,
+-	.getc = s5p_serial_getc,
+-	.setbrg = s5p_serial_setbrg,
++	.putc		= s5p_serial_putc,
++	.pending	= s5p_serial_pending,
++	.getc		= s5p_serial_getc,
++	.setbrg		= s5p_serial_setbrg,
+ };
+ 
+ static const struct udevice_id s5p_serial_ids[] = {
+@@ -264,13 +264,13 @@ static const struct udevice_id s5p_serial_ids[] = {
+ };
+ 
+ U_BOOT_DRIVER(serial_s5p) = {
+-	.name	= "serial_s5p",
+-	.id	= UCLASS_SERIAL,
+-	.of_match = s5p_serial_ids,
+-	.of_to_plat = s5p_serial_of_to_plat,
++	.name		= "serial_s5p",
++	.id		= UCLASS_SERIAL,
++	.of_match	= s5p_serial_ids,
++	.of_to_plat	= s5p_serial_of_to_plat,
+ 	.plat_auto	= sizeof(struct s5p_serial_plat),
+-	.probe = s5p_serial_probe,
+-	.ops	= &s5p_serial_ops,
++	.probe		= s5p_serial_probe,
++	.ops		= &s5p_serial_ops,
+ };
+ #endif
+ 
+@@ -298,10 +298,12 @@ static inline void _debug_uart_putc(int ch)
+ 	struct s5p_uart *uart = (struct s5p_uart *)CONFIG_VAL(DEBUG_UART_BASE);
+ 
+ #if IS_ENABLED(CONFIG_ARCH_APPLE)
+-	while (readl(&uart->ufstat) & S5L_TX_FIFO_FULL);
++	while (readl(&uart->ufstat) & S5L_TX_FIFO_FULL)
++		;
+ 	writel(ch, &uart->utxh);
+ #else
+-	while (readl(&uart->ufstat) & S5P_TX_FIFO_FULL);
++	while (readl(&uart->ufstat) & S5P_TX_FIFO_FULL)
++		;
+ 	writeb(ch, &uart->utxh);
+ #endif
+ }
 -- 
 2.39.2
 
