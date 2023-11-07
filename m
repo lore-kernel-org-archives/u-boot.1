@@ -4,59 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C64C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 15:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF60C4167D
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 15:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C49CD87134;
-	Tue,  7 Nov 2023 16:12:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 239A586590;
+	Tue,  7 Nov 2023 16:31:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="JONnC6QU";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF1088715B; Tue,  7 Nov 2023 16:12:56 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D9E3787134
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 16:12:53 +0100 (CET)
+ id 0EE1D87464; Tue,  7 Nov 2023 16:31:33 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C45F686590
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 16:31:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C56713D5;
- Tue,  7 Nov 2023 07:13:37 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 034B33F703;
- Tue,  7 Nov 2023 07:12:50 -0800 (PST)
-Date: Tue, 7 Nov 2023 15:12:48 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>, Anup Patel
- <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>, Chanho Park
- <chanho61.park@samsung.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- u-boot@lists.denx.de, Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov
- <avromanov@salutedevices.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-Message-ID: <20231107151248.0c6247c4@donnerap.manchester.arm.com>
-In-Reply-To: <CAPnjgZ1eMxbJGhxSGF1NgCELz+MOoPK0k3hsB-hzEXTo0=3szQ@mail.gmail.com>
-References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
- <20231101170559.680ab493@donnerap.manchester.arm.com>
- <50ff2080-5831-4963-937d-331248b59973@canonical.com>
- <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
- <20231104171212.3d041a4f@slackpad.lan>
- <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
- <20231106172601.12c36750@donnerap.manchester.arm.com>
- <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
- <20231106215331.0d770df8@slackpad.lan>
- <CAPnjgZ2GY8o_UR-rqYOimYe1t_NV+6eAa8rZY3Eaak6vp7Vciw@mail.gmail.com>
- <20231107112708.4030f2e1@donnerap.manchester.arm.com>
- <CAPnjgZ1eMxbJGhxSGF1NgCELz+MOoPK0k3hsB-hzEXTo0=3szQ@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-991c786369cso874381666b.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 07:31:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1699371090; x=1699975890;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:autocrypt:subject:from:cc:to
+ :content-language:user-agent:mime-version:date:message-id:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WMqTT4O2jw+jf4UZiCoiG4MFeAeCuzFAbrzxH5OUSjQ=;
+ b=JONnC6QUANRWZQqtFbyHWdQ3/Vv0HWbOdwJmD7iSgezerVBQ6yUISKp4vrrSTVZlI3
+ Ou4tD+c4bSDOr1eRJGKQhdYFeuqHLvHJXc3Mcmr9nbYyRzjqJgjm5yZgj3HOceGAEcuB
+ Fc1FLnrZUIB6vyCTBQ/QwBOTTg88HS0Aszq/cRmkSSrl65h46AnuXdHn+UQdT1DDp13P
+ mG/BLW7gpc1Zpadk8ab4PTV1QGhFOGkBOB3/A6AeRof4O/WmWa1wg7vufO+HzwLT/cw5
+ 14JzkY2gkotRkIPgg2lf3rD+LgmFmQx2lSH/ttfWIy9aZCRPbWL8cyFDx9n0vNf+th5q
+ /sHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699371090; x=1699975890;
+ h=content-transfer-encoding:autocrypt:subject:from:cc:to
+ :content-language:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WMqTT4O2jw+jf4UZiCoiG4MFeAeCuzFAbrzxH5OUSjQ=;
+ b=a4ayQY7CC8QRb5+G4WMrk60UYhkvUDjLzgkCbkpFMjtH8WwtPNmiHjHZnvgPlFh8cv
+ uvinCFCaxKY8m7blxGD2+az51aGX5ZwUHRaGfCY0oh+KVRuQ1cjhBC35ykz6O4Sr6TF9
+ IOjtlCyhINMD9FdDeBCJSwCsF4rHhKWgpKB9Fmws7ELk9QjBr8mhsPPhKYI2PT2sQZGd
+ vKDta2jeZLrUVdwBKjkcsjvfloH4HV8+RqZ6ww0jeiTF9/d4hQUEarQDzhrefe96SC2B
+ 7WPVrOK8vPoauDyWbLwZhORNfTf2RfPyx8bSQXS2YuEJyMzg+/ffE41Ld5XrPXKMWB0R
+ AqRA==
+X-Gm-Message-State: AOJu0Yzy/YaXblrpXAL7rc36XyjJr6NyX7qaHhJvG9fQ+KXzMwa/2nLo
+ olcPFh/zhH7HEysLQNRmsUDGlrIG9eH2kZY6qVkPPg==
+X-Google-Smtp-Source: AGHT+IEcOXVlqDuhQwL1ARJJGUBiz0zRPDN21xnq5whs68Ohd4jB+CeY4dOewBCfQhS0qyjA5S1BXg==
+X-Received: by 2002:a17:906:db0d:b0:9d3:ccd1:a905 with SMTP id
+ xj13-20020a170906db0d00b009d3ccd1a905mr17594652ejb.51.1699371090155; 
+ Tue, 07 Nov 2023 07:31:30 -0800 (PST)
+Received: from [10.254.183.223] ([149.199.62.131])
+ by smtp.gmail.com with ESMTPSA id
+ ay1-20020a170906d28100b009b928eb8dd3sm1153928ejb.163.2023.11.07.07.31.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 07 Nov 2023 07:31:29 -0800 (PST)
+Message-ID: <c57462d6-33cd-4f16-87c8-a83de771fdf7@monstr.eu>
+Date: Tue, 7 Nov 2023 16:31:23 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] xilinx patches for v2024.01-rc3
+Autocrypt: addr=monstr@monstr.eu; keydata=
+ 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
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,460 +134,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 Nov 2023 05:22:58 -0700
-Simon Glass <sjg@chromium.org> wrote:
+Hi Tom,
 
-Hi Simon,
+please pull these patches to your tree. Most of them are dt related to aligned 
+our dts in u-boot with dt-schema and fix issues around it.
+There are small updates out in spi to fix 64bit support and allow disable flash 
+locking code to save some space for our mini configurations.
+And last change was related to reading baudrate from DT which was ack by Simon.
+There are some other things pending but not ready yet that's why I wanted to get 
+these patches merged to have more time for testing.
+Gitlab CI is not showing any issue too.
 
-> Hi Andre,
-> 
-> On Tue, 7 Nov 2023 at 04:27, Andre Przywara <andre.przywara@arm.com>
-> wrote:
-> >
-> > On Tue, 7 Nov 2023 01:08:15 +0000
-> > Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Simon,
-> >  
-> > > On Mon, 6 Nov 2023 at 21:55, Andre Przywara <andre.przywara@arm.com>
-> > > wrote:  
-> > > >
-> > > > On Mon, 6 Nov 2023 13:38:39 -0700
-> > > > Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >  
-> > > > > On Mon, 6 Nov 2023 at 10:26, Andre Przywara
-> > > > > <andre.przywara@arm.com> wrote:  
-> > > > > >
-> > > > > > On Sat, 4 Nov 2023 19:45:06 +0000
-> > > > > > Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > Hi,
-> > > > > >  
-> > > > > > > On Sat, 4 Nov 2023 at 17:13, Andre Przywara
-> > > > > > > <andre.przywara@arm.com> wrote:  
-> > > > > > > >
-> > > > > > > > On Fri, 3 Nov 2023 13:38:58 -0600
-> > > > > > > > Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Simon,
-> > > > > > > >  
-> > > > > > > > > Hi Heinrich,
-> > > > > > > > >
-> > > > > > > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
-> > > > > > > > > <heinrich.schuchardt@canonical.com> wrote:  
-> > > > > > > > > >
-> > > > > > > > > > On 11/1/23 19:05, Andre Przywara wrote:  
-> > > > > > > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
-> > > > > > > > > > > Heinrich Schuchardt
-> > > > > > > > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > Hi Heinrich,
-> > > > > > > > > > >  
-> > > > > > > > > > >> The Zkr ISA extension (ratified Nov 2021)
-> > > > > > > > > > >> introduced the seed CSR. It provides an interface
-> > > > > > > > > > >> to a physical entropy source.
-> > > > > > > > > > >>
-> > > > > > > > > > >> A RNG driver based on the seed CSR is provided. It
-> > > > > > > > > > >> depends on mseccfg.sseed being set in the SBI
-> > > > > > > > > > >> firmware.  
-> > > > > > > > > > >
-> > > > > > > > > > > As you might have seen, I added a similar driver for
-> > > > > > > > > > > the respective Arm functionality:
-> > > > > > > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
-> > > > > > > > > > >
-> > > > > > > > > > > And I see that you seem to use the same mechanism to
-> > > > > > > > > > > probe and init the driver: U_BOOT_DRVINFO and fail
-> > > > > > > > > > > in probe() if the feature is not implemented.
-> > > > > > > > > > > One downside of this approach is that the driver is
-> > > > > > > > > > > always loaded (and visible in the DM tree), even
-> > > > > > > > > > > with the feature not being available. That doesn't
-> > > > > > > > > > > seem too much of a problem on the first glance, but
-> > > > > > > > > > > it occupies a device number, and any subsequent
-> > > > > > > > > > > other DM_RNG devices (like virtio-rng) typically get
-> > > > > > > > > > > higher device numbers. So without the feature, but
-> > > > > > > > > > > with virtio-rng, I get: VExpress64# rng 0 No RNG
-> > > > > > > > > > > device  
-> > > > > > > > >
-> > > > > > > > > Why do we get this? If the device is not there, the
-> > > > > > > > > bind() function can return -ENODEV
-> > > > > > > > >
-> > > > > > > > > I see this in U-Boot:
-> > > > > > > > >
-> > > > > > > > > U_BOOT_DRVINFO(cpu_arm_rndr) = {
-> > > > > > > > >
-> > > > > > > > > We should not use this.  
-> > > > > > > >
-> > > > > > > > Agreed.
-> > > > > > > >  
-> > > > > > > > > Use the devicetree.  
-> > > > > > > >
-> > > > > > > > No, this is definitely not something for the DT, at least
-> > > > > > > > not on ARM. It's perfectly discoverable via the
-> > > > > > > > architected CPU ID registers. Similar to PCI and USB
-> > > > > > > > devices, which we don't probe via the DT as well.
-> > > > > > > >
-> > > > > > > > It's arguably not proper "driver" material per se, as I've
-> > > > > > > > argued before, but it's the simplest solution and fits in
-> > > > > > > > nicely otherwise.
-> > > > > > > >
-> > > > > > > > I was wondering if it might be something for UCLASS_CPU,
-> > > > > > > > something like a "CPU feature bus": to let devices
-> > > > > > > > register on one on the many CPU features (instead of
-> > > > > > > > compatible strings), then only bind() those drivers it the
-> > > > > > > > respective bit is set.
-> > > > > > > >
-> > > > > > > > Does that make sense? Would that be doable without boiling
-> > > > > > > > the ocean? As I don't know if we see many users apart from
-> > > > > > > > this.  
-> > > > > > >
-> > > > > > > I have seen this so many times, where people want to avoid
-> > > > > > > putting things in the DT and then are surprised that
-> > > > > > > everything is difficult, broken and confusing. Why not just
-> > > > > > > follow the rules? It is not just about whether we can avoid
-> > > > > > > it, etc. It is about how devices fit together cohesively in
-> > > > > > > the system, and how U-Boot operates.  
-> > > > > >
-> > > > > > A devicetree is only for peripherals *that cannot be located
-> > > > > > by probing*.  
-> > > > >
-> > > > > I have to stop you there. It absolutely is not limited to that.  
-> > > >
-> > > > I am very sorry, but I - (and seemingly everyone else in the
-> > > > kernel DT community?) - seem to disagree here.  
-> > >
-> > > Really? Where is that even coming from? Certainly not the DT spec.  
-> >
-> > It seems to be common agreement between devicetree folks, and I find
-> > it in one of Frank Roward's slidedeck about devicetree in the early
-> > days (2015ish). But indeed this should be added to official documents.
-> > I poked some people to get this sorted.  
-> 
-> Yes I recall those dark days but it is not actually correct. That sort
-> of restriction would be very destructive, in fact.
-> 
-> Even if you look at all the PCI stuff you can see that specifying
-> probe-able stuff in the DT is fine.
+Thanks,
+Michal
 
-In the recent PCI case this is exactly about non-probe-able stuff:
-"This is the groundwork for applying overlays to PCI devices containing
-non-discoverable downstream devices."
-And if I understand this correctly, this is for generating DT nodes in the
-live OF tree only, during kernel runtime?
+The following changes since commit 3af0e9556c968fc2c40e3778d8f1e668a90af92e:
 
-But yes, there are exceptions from that rule, be it for quirks, or
-if you need further integration information, like an interrupt, as used
-for the Arm Generic Timer (aka arch timer) or the Arm PMU.
-But in those cases there is always a good reason, and then a binding is
-accepted.
-But in general: no, if we can safely probe it, we don't want a DT node.
+   Prepare v2024.01-rc2 (2023-11-06 14:47:25 -0500)
 
-> > > > > > Which are traditionally most peripherals in non-server Arm
-> > > > > > SoCs. While I do love the DT, the best DT node is the one you
-> > > > > > don't need.  
-> > > > >
-> > > > > We need it in U-Boot, at least.
-> > > > >
-> > > > > I'll send a patch with a warning on U_BOOT_DRVINFO() as it seems
-> > > > > that some people did not see the header-file comment.  
-> > > >
-> > > > Fair enough.
-> > > >  
-> > > > > Let's just stop this discussion and instead talk about the
-> > > > > binding we need.  
-> > > >
-> > > > Alright, if that is your decision, I will send a patch to revert
-> > > > that "driver". There will never be a binding for a CPU instruction
-> > > > discoverable by the architected CPU ID register.  
-> > >
-> > > That statement just mystifies me. Why not just send a binding? Even
-> > > the people that complain that DT should only describe hardware will
-> > > be happy with it.
-> > >
-> > > The code you sent should have been a clue that you need to know
-> > > whether the feature is present:  
-> >
-> > Ah, sorry, I sense some misunderstanding: I was arguing about the ARM
-> > RNDR driver. The Arm architecture manual describes the FEAT_RNG
-> > feature as perfectly discoverable, in a clean way, without any risk or
-> > further knowledge about the platform.
-> >
-> > This thread here was originally about the RISC-V driver (written by
-> > Heinrich), where the situation is slightly different: while there seem
-> > to be CSRs to discover CPU features, this is apparently not the case
-> > for every instruction. So Heinrich did some probing, testing for an
-> > illegal instruction, which honestly still sounds better than a DT node
-> > to me. 
-> > > +       /* Check if reading seed leads to interrupt */
-> > > +       set_resume(&resume);
-> > > +       ret = setjmp(resume.jump);
-> > > +       if (ret)
-> > > +               log_debug("Exception %ld reading seed CSR\n",
-> > > resume.code);
-> > > +       else
-> > > +               val = read_seed();
-> > > +       set_resume(NULL);
-> > > +       if (ret)
-> > > +               return -ENODEV;
-> > >
-> > > I have never seen code like that in a driver. Please let's just have
-> > > the binding discussion with the Linux people and hopefully they will
-> > > see reason.  
-> >
-> > For the RISC-V case: maybe. But there is already a (newish) binding to
-> > list CPU features in the DT:
-> > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/riscv/extensions.yaml
-> > It's just not a normal device node binding, with a compatible string,
-> > instead a string list inside each CPU's node.  
-> 
-> Hmm so each CPU has its own random-number generator?
+are available in the Git repository at:
 
-Don't know what you mean? How those CPU instructions typically work is
-that there are generic *architected* instructions or system registers,
-described by the official ARMv8.5 FEAT_RNG, in this case, while the
-actual entropy source is provided by the integrator. So it's a common
-interface to whatever TRNG the SoC might already have anyway.
-And one reason for this feature was to exactly do away with the device
-specific interfaces and discovery, and allow easy access for any user.
+   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2024.01-rc3
 
-> > So one possibility would be some connector code that parses that list
-> > and looks for drivers having registered? Like a CPU bus, I think Sean
-> > proposed something like this earlier. Or we ditch the idea of this
-> > being a regular driver in the first place, instead go with a "CPU
-> > entropy instruction abstraction".
-> >
-> > But for Arm it's a different story.  
-> 
-> The key thing here is that U-Boot (mostly) needs to have a DT node for
-> each device it creates.
+for you to fetch changes up to 37f500d711ec1f6b25189c1f6022ffe5e70a38ab:
 
-That's a (current?) U-Boot design decision, unrelated to the hardware it
-describes. Hence nothing that really justifies a hardware DTB description.
+   dt-bindings: Remove VSC8531 specific RGMII delay definitions (2023-11-07 
+13:47:09 +0100)
 
-> In the case of a random-number generator, there can be several devices
-> in the system.
+----------------------------------------------------------------
+Xilinx changes for v2024.01-rc3
 
-Yes, and others (Linux, for instance) can apparently just cope fine with
-this.
+xilinx:
+- Disable lock in mini spi configurations
 
-> We want to control which one is used for a particular feature.
+zynq:
+- DTS syncups
+- Kconfig updates
 
-So that means it's a policy decision, which might even differ between
-different users with different needs. So again not hardware related.
+zynqmp:
+- DTS syncups
+- Kconfig fixups
 
-> This is normally done with aliases, or with a phandle from the feature
-> that uses it.
+versal:
+- Make 30MHz as default freq for spi
 
-Well, aliases and phandles are DT features, so naturally apply to devices
-in the DT. But that doesn't mean we need to shoehorn everything into some
-DT.
-And part of that is policy again, so doesn't really belong in the
-*hardware* DT.
+versal net:
+- Enable ADMA for mmc
 
-> > > > I had some gripes with that "driver" in the first place, but it
-> > > > was so temptingly simple and fit in so nicely, for instance into
-> > > > the UEFI entropy service without even touching that code, that I
-> > > > couldn't resist to just try it. And it actually solved a nasty
-> > > > problem for us, where the kernel boot was stuck for minutes
-> > > > waiting for enough entropy to ... let a script create a random
-> > > > filename ;-) But we also have virtio-rng, so are not limited to
-> > > > the instructions.
-> > > >
-> > > > But well, I guess I will just bite the bullet and go along the
-> > > > proper route and create some RNG instruction abstraction, as
-> > > > sketched in that other email.  
-> > >
-> > > I don't know what that is.  
-> >
-> > That's what Tom and I were talking about earlier:
-> > ... "a simple get_cpu_random() function, implemented per architecture,
-> > and with some kind of success flag, should be easy enough to do. Then
-> > either the users (UEFI?) explicitly call this before trying
-> > UCLASS_RNG, or we wrap this for every RNG user."  
-> 
-> That doesn't solve the problem, though. The TPM may provide random
-> numbers. There may be some other crypto thing, or even a remoteproc
-> interface.
+serial:
+- Read baudrate from DT
 
-Yes, or a PCI based entropy source, which would have a normal driver, but
-no DT as well. And anyway you might expose this via a driver, but I don't
-see why every device must be described in the DT.
+spi:
+- Put spi lock under one Kconfig
+- Support 64bit addresses in cadance_ospi
+- zynqmp_gqspi - change logging support
 
-> We already have a perfectly good way of selecting between multiple
-> devices. It is used all over U-Boot. We should not be inventing a
-> hard-coded hack just because we are confused about whether something
-> is a device. Just make it a device.
+firmware:
+- Handle errors in zynqmp_pm_feature()
 
-And this is exactly what my ARM RNDR driver was doing: using a
-UCLASS_RNG driver interface to expose entropy. I just don't understand why
-we desperately need a DT node for that? I understand that U_BOOT_DRVINFO
-should not be used, and this is fine.
-So if you don't like the Linux style approach of treating CPU instructions
-separately, that's fair enough, but I also don't see why a U-Boot DM
-driver must be DT only.
+include:
+- Sync vsc8531 dt binding with kernel
 
-> > > In the other email I proposed a binding for this, so I hope that can
-> > > make progress.  
-> >
-> > I don't think we need a new DT binding for RISC-V, instead lean on
-> > riscv,isa-extensions.  
-> 
-> IMO we do need a new DT binding for the reasons given above.
+----------------------------------------------------------------
+Algapally Santosh Sagar (2):
+       configs: Add support in Kconfig and convert for armada boards
+       serial: zynqmp: Fetch baudrate from dtb and update
 
-I don't agree, the current binding gives you perfect discoverability, just
-not via the usual compatible string search. But that's some discussion for
-the DT maintainers anyway ...
+Amit Kumar Mahapatra (1):
+       arm64: dts: zynqmp: make hw-ecc as the default ecc mode
 
-> > And I am pretty sure any attempt at a binding for ARM will be NAKed
-> > immediately.  
-> 
-> Well perhaps you can help resolve that, which seems to be the core
-> issue here. I hope you can understand my frustration at this sort of
-> tactic. It is quite destructive. U-Boot has suffered for years from an
-> inability to upstream bindings. It has been a significant drag on the
-> project and its contributors. We need to change the conversation here
-> and permit non-Linux projects to contribute to bindings for
-> firmware-specific reasons, even ones which Linux doesn't care about.
+Ibai Erkiaga (1):
+       zynqmp: migrate gqspi debug to logging
 
-The Linux kernel repo does accept bindings for devices that Linux doesn't
-have or need a driver for (DRAM controllers, for instance). If you look at
-DT binding patch submissions, maintainers routinely object the word
-"driver" or even the mentioning of "Linux" in there, because the binding
-is user agnostic and not bound to a Linux driver at all. And the DT
-maintainers are very clear that those are not the the "Linux DT bindings",
-but that the Linux kernel community is just the place that provides the
-review experience and the infrastructure to host the binding files.
+Michal Simek (17):
+       arm64: zynqmp: Remove fclk driver
+       arm64: zynqmp: Use mdio node by vp-x-a2785-00-revA and vpk120-revA
+       arm64: zynqmp: Remove xlnx,zynqmp-aes node
+       Revert "arm64: zynqmp: Add power domain description for PL"
+       arm64: zynqmp: Remove address/size-cells from ams node
+       arm: xilinx: Add missing dual parallel flash description
+       arm64: zynqmp: Fix Kconfig entry indentation
+       xilinx: versal: Setup 30MHz as default spi frequency
+       ARM: zynq: Add DTSes for mini qspi configurations
+       ARM: zynq: Add DTSes for mini qspi configurations
+       arm64: versal: Add DTSes for mini qspi/ospi configuration
+       arm64: versal-net: Add DTSes for mini qspi/ospi configuration
+       arm64: zynqmp: Comment all smmu entries
+       xilinx: Enable SPI_FLASH_MTD by default
+       ARM: zynq: Add partition description
+       arm64: zynqmp: Add description for nvmem efuse layout
+       dt-bindings: Remove VSC8531 specific RGMII delay definitions
 
-So in those cases I don't think it's about the DT maintainers being
-hostile or unreasonable, it's just a general problem of some requests being
-out of scope of a *hardware* DTB.
+Piyush Mehta (1):
+       arm64: zynqmp: remove snps, xhci-stream-quirk property for usb
 
-> A clear statement to that effect would put my mind at ease. It just
-> shouldn't be this hard.
+Tejas Bhumkar (1):
+       arm64: zynqmp: Disable Tri-state for MIO38 Pin
 
-I can't help to think that you like the FDT as a well understood and
-flexible general purpose data structure. And it can indeed be used as a
-configuration file, especially since you have the parser in your code
-already - the FIT image is a good example. But this is distinct from the
-Devicetree as a hardware description.
-Would it help to separate the two use cases: to go with one DTB that is
-strictly for hardware configuration, as described by the DT bindings in
-the Linux kernel tree, and a *separate* DT blob that carries configuration
-information, U-Boot specific data (like memory layout, SRAM usage, device
-priorities, packaging information)? TF-A chose this approach: there is
-hw-config, which is the hardware DTB, and there is fw-config, which is a
-FDT blob as well, but describes the firmware layout and other configuration
-information.
+Venkatesh Yadav Abbarapu (8):
+       mtd: spi-nor: Add spi flash lock config option
+       arm64: versal: Disable the lock option for mini ospi and qspi
+       arm64: versal_net: Disable the lock option for mini ospi and qspi
+       drivers: firmware: Handle error case in the zynqmp_pm_feature
+       spi: cadence_ospi_versal: Add support for 64-bit address
+       arm64: zynqmp: Disable the lock option for mini qspi
+       ARM: zynq: Disable the config CONFIG_SPI_FLASH_USE_4K_SECTORS
+       arm64: versal-net: enable CONFIG_MMC_SDHCI_ADMA
 
-Cheers,
-Andre
+  arch/arm/dts/Makefile                            |  27 +++++
+  arch/arm/dts/bitmain-antminer-s9.dts             |   2 +
+  arch/arm/dts/versal-mini-ospi-stacked.dts        |  22 ++++
+  arch/arm/dts/versal-mini-qspi-parallel.dts       |  22 ++++
+  arch/arm/dts/versal-mini-qspi-stacked.dts        |  22 ++++
+  arch/arm/dts/versal-mini-qspi-x1-single.dts      |  17 +++
+  arch/arm/dts/versal-mini-qspi-x1-stacked.dts     |  23 ++++
+  arch/arm/dts/versal-mini-qspi-x2-single.dts      |  17 +++
+  arch/arm/dts/versal-mini-qspi-x2-stacked.dts     |  23 ++++
+  arch/arm/dts/versal-net-mini-ospi-stacked.dts    |  22 ++++
+  arch/arm/dts/versal-net-mini-qspi-parallel.dts   |  22 ++++
+  arch/arm/dts/versal-net-mini-qspi-stacked.dts    |  22 ++++
+  arch/arm/dts/versal-net-mini-qspi-x1-single.dts  |  17 +++
+  arch/arm/dts/versal-net-mini-qspi-x1-stacked.dts |  23 ++++
+  arch/arm/dts/versal-net-mini-qspi-x2-single.dts  |  17 +++
+  arch/arm/dts/versal-net-mini-qspi-x2-stacked.dts |  23 ++++
+  arch/arm/dts/zynq-7000.dtsi                      |   4 -
+  arch/arm/dts/zynq-cse-qspi-parallel.dts          |  22 ++++
+  arch/arm/dts/zynq-cse-qspi-stacked.dts           |  22 ++++
+  arch/arm/dts/zynq-cse-qspi-x1-single.dts         |  16 +++
+  arch/arm/dts/zynq-cse-qspi-x1-stacked.dts        |  22 ++++
+  arch/arm/dts/zynq-cse-qspi-x2-single.dts         |  16 +++
+  arch/arm/dts/zynq-cse-qspi-x2-stacked.dts        |  22 ++++
+  arch/arm/dts/zynq-zc702.dts                      |  25 +++++
+  arch/arm/dts/zynq-zc706.dts                      |  30 ++++-
+  arch/arm/dts/zynq-zc770-xm010.dts                |  25 +++++
+  arch/arm/dts/zynq-zc770-xm011.dts                |  19 ++++
+  arch/arm/dts/zynq-zc770-xm012.dts                |  25 +++++
+  arch/arm/dts/zynq-zc770-xm013.dts                |  30 ++++-
+  arch/arm/dts/zynq-zed.dts                        |  29 ++++-
+  arch/arm/dts/zynqmp-clk-ccf.dtsi                 |   6 -
+  arch/arm/dts/zynqmp-m-a2197-01-revA.dts          |   4 +-
+  arch/arm/dts/zynqmp-m-a2197-02-revA.dts          |   4 +-
+  arch/arm/dts/zynqmp-m-a2197-03-revA.dts          |   4 +-
+  arch/arm/dts/zynqmp-mini-qspi-parallel.dts       |  21 ++++
+  arch/arm/dts/zynqmp-mini-qspi-single.dts         |  12 ++
+  arch/arm/dts/zynqmp-mini-qspi-stacked.dts        |  21 ++++
+  arch/arm/dts/zynqmp-mini-qspi-x1-single.dts      |  17 +++
+  arch/arm/dts/zynqmp-mini-qspi-x1-stacked.dts     |  23 ++++
+  arch/arm/dts/zynqmp-mini-qspi-x2-single.dts      |  17 +++
+  arch/arm/dts/zynqmp-mini-qspi-x2-stacked.dts     |  23 ++++
+  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso           |  25 +++++
+  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso           |  25 +++++
+  arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts       |  10 +-
+  arch/arm/dts/zynqmp-vpk120-revA.dts              |  10 +-
+  arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts         |   6 +-
+  arch/arm/dts/zynqmp.dtsi                         | 117 +++++++++++++-------
+  arch/arm/mach-zynqmp/Kconfig                     |  24 ++--
+  arch/sandbox/dts/test.dts                        |   1 +
+  cmd/sf.c                                         |   4 +-
+  configs/eDPU_defconfig                           |   1 +
+  configs/mvebu_db-88f3720_defconfig               |   1 +
+  configs/mvebu_espressobin-88f3720_defconfig      |   1 +
+  configs/uDPU_defconfig                           |   1 +
+  configs/xilinx_versal_mini_ospi_defconfig        |   1 +
+  configs/xilinx_versal_mini_qspi_defconfig        |   1 +
+  configs/xilinx_versal_net_mini_ospi_defconfig    |   1 +
+  configs/xilinx_versal_net_mini_qspi_defconfig    |   1 +
+  configs/xilinx_versal_net_virt_defconfig         |   1 +
+  configs/xilinx_versal_virt_defconfig             |   1 +
+  configs/xilinx_zynq_virt_defconfig               |   2 +
+  configs/xilinx_zynqmp_mini_qspi_defconfig        |   1 +
+  doc/README.serial_dt_baud                        |  41 +++++++
+  drivers/core/ofnode.c                            |  18 +++
+  drivers/firmware/firmware-zynqmp.c               |   2 +
+  drivers/mtd/spi/Kconfig                          |   7 ++
+  drivers/mtd/spi/spi-nor-core.c                   |   8 +-
+  drivers/serial/Kconfig                           |  15 +++
+  drivers/serial/serial-uclass.c                   |  49 ++++++++
+  drivers/spi/cadence_ospi_versal.c                |   4 +-
+  drivers/spi/zynqmp_gqspi.c                       |  82 ++++++--------
+  include/configs/mvebu_armada-37xx.h              |   1 -
+  include/dm/ofnode.h                              |  14 ++-
+  include/dt-bindings/net/mscc-phy-vsc8531.h       |   9 --
+  include/env_default.h                            |   8 +-
+  include/env_internal.h                           |   2 +-
+  include/serial.h                                 |   7 ++
+  test/dm/serial.c                                 |   1 +
+  78 files changed, 1138 insertions(+), 145 deletions(-)
+  create mode 100644 arch/arm/dts/versal-mini-ospi-stacked.dts
+  create mode 100644 arch/arm/dts/versal-mini-qspi-parallel.dts
+  create mode 100644 arch/arm/dts/versal-mini-qspi-stacked.dts
+  create mode 100644 arch/arm/dts/versal-mini-qspi-x1-single.dts
+  create mode 100644 arch/arm/dts/versal-mini-qspi-x1-stacked.dts
+  create mode 100644 arch/arm/dts/versal-mini-qspi-x2-single.dts
+  create mode 100644 arch/arm/dts/versal-mini-qspi-x2-stacked.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-ospi-stacked.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-qspi-parallel.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-qspi-stacked.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-qspi-x1-single.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-qspi-x1-stacked.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-qspi-x2-single.dts
+  create mode 100644 arch/arm/dts/versal-net-mini-qspi-x2-stacked.dts
+  create mode 100644 arch/arm/dts/zynq-cse-qspi-parallel.dts
+  create mode 100644 arch/arm/dts/zynq-cse-qspi-stacked.dts
+  create mode 100644 arch/arm/dts/zynq-cse-qspi-x1-single.dts
+  create mode 100644 arch/arm/dts/zynq-cse-qspi-x1-stacked.dts
+  create mode 100644 arch/arm/dts/zynq-cse-qspi-x2-single.dts
+  create mode 100644 arch/arm/dts/zynq-cse-qspi-x2-stacked.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-parallel.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-single.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-stacked.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x1-single.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x1-stacked.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x2-single.dts
+  create mode 100644 arch/arm/dts/zynqmp-mini-qspi-x2-stacked.dts
+  create mode 100644 doc/README.serial_dt_baud
 
-> > > > > > But as Heinrich also said: those instructions are not
-> > > > > > peripherals, they are part of an instruction set extensions,
-> > > > > > the same story as with x86's RDRAND instruction. We don't have
-> > > > > > those in ACPI or so as well, because CPUID has you covered.
-> > > > > > The same on ARM, ID_AA64ISAR0_EL1 is readable on every chip
-> > > > > > (outside of EL0), and tells you whether you have the RNDR
-> > > > > > register or not. IIUC RISC-V is slightly different here, since
-> > > > > > not all ISA extensions are covered by CSRs, hence some of them
-> > > > > > indeed listed in the DT.
-> > > > > >
-> > > > > > So a proper solution(TM) would be to split this up in
-> > > > > > architectural *instructions* and proper TRNG *devices*, maybe
-> > > > > > wrapping this up in some function that tests both. This is
-> > > > > > roughly what the kernel does, somewhat abstracted by the
-> > > > > > concept of "entropy sources", which could be TRNG devices, CPU
-> > > > > > instructions, interrupt jitter or even "instruction execution
-> > > > > > jitter"[1], with the latter two definitely not being devices
-> > > > > > really at all.
-> > > > > >
-> > > > > > But I don't know if U-Boot wants to go through the hassle of
-> > > > > > this whole framework, as we tend to implement things much
-> > > > > > easier. But a simple get_cpu_random() function, implemented
-> > > > > > per architecture, and with some kind of success flag, should
-> > > > > > be easy enough to do. Then either the users (UEFI?) explicitly
-> > > > > > call this before trying UCLASS_RNG, or we wrap this for every
-> > > > > > RNG user.
-> > > > > >
-> > > > > > Cheers,
-> > > > > > Andre
-> > > > > >  
-> > > > > > > > > > > VExpress64# rng 1
-> > > > > > > > > > > 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12
-> > > > > > > > > > > 07 b2  ....$.I.I..f_...  
-> > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > Essentially in any case were you have multiple drivers
-> > > > > > > > > > for the same device using uclass_get_device(, 0, ) and
-> > > > > > > > > > uclass_find_first_device() will only give you the
-> > > > > > > > > > first bound device and not the first successfully
-> > > > > > > > > > probed device. Furthermore neither of this functions
-> > > > > > > > > > causes probing. This is not restricted to the RNG
-> > > > > > > > > > drivers but could also happen with multiple TPM
-> > > > > > > > > > drivers or multiple watchdogs.
-> > > > > > > > > >
-> > > > > > > > > > This patch is related to the problem:
-> > > > > > > > > >
-> > > > > > > > > > [PATCH v1] rng: add dm_rng_read_default() helper
-> > > > > > > > > > https://lore.kernel.org/u-boot/4e28a388-f5b1-4cf7-b0e3-b12a876d0567@gmx.de/T/#me44263ec9141e3ea65ee232aa9a411fc6201bd95
-> > > > > > > > > >
-> > > > > > > > > > We have weak function platform_get_rng_device() which
-> > > > > > > > > > should be moved to drivers/rng/rng-uclass.c.
-> > > > > > > > > >
-> > > > > > > > > > We could add a function to drivers/core/uclass.c to
-> > > > > > > > > > retrieve the first successfully probed device. Another
-> > > > > > > > > > approach would be to implement
-> > > > > > > > > > uclass_driver.post_probe() in the RNG uclass to take
-> > > > > > > > > > note of the first successfully probed device.
-> > > > > > > > > >
-> > > > > > > > > > @Simon:
-> > > > > > > > > > What would make most sense from a DM design
-> > > > > > > > > > standpoint?  
-> > > > > > > > >
-> > > > > > > > > I am sure I provided feedback on this at the time, but I
-> > > > > > > > > don't remember. OK I just found it here [1]. So the
-> > > > > > > > > problem is entirely because my feedback was not
-> > > > > > > > > addressed. Please just address it and avoid this sort of
-> > > > > > > > > mess.  
-> > > > > > > >
-> > > > > > > > Yeah, Tom just merged it, but that's not Heinrich's fault
-> > > > > > > > ;-) 
-> > > > > > > > > So arm_rndr should have a devicetree compatible string
-> > > > > > > > > and be bound like anything else. If for some reason the
-> > > > > > > > > device doesn't exist in the hardware, it can return
-> > > > > > > > > -ENODEV from its bind() method.
-> > > > > > > > >
-> > > > > > > > > If you want to control which RNG device is used for
-> > > > > > > > > booting, you could add a property to /bootstd with a
-> > > > > > > > > phandle to the device. We are trying to provide a
-> > > > > > > > > standard approach to booting in U-Boot, used by all
-> > > > > > > > > methods. Doing one-off things for particular cases is
-> > > > > > > > > best avoided.  
-> > > > > > > >
-> > > > > > > > Picking the first usable device doesn't sound much like a
-> > > > > > > > one-off to me. After all the caller (be it UEFI or the rng
-> > > > > > > > command) later detect that this is not usable. So there
-> > > > > > > > might be some merit to cover this more automatically,
-> > > > > > > > either in the caller, or by providing a suitable wrapper
-> > > > > > > > function?  
-> > > > > > >
-> > > > > > > Or just follow the existing mechanisms which have been in
-> > > > > > > U-Boot for years. Please...!
-> > > > > > >
-> > > > > > > [..]
-> > > > > > >
-> > > > > > >
-> > > > > > > Regards,
-> > > > > > > Simon  
-> > > > > > >  >  
-> > > > > > > > > [1]
-> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20230830113230.3925868-1-andre.przywara@arm.com/
-> > > > > > > > >  
-> > > > > > > >  
-> > > >  
-> > >
-> > > Regards,
-> > > SImon  
-> >  
-
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
