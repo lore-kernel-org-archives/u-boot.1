@@ -4,64 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78CADC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:39:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E930C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 12:39:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF5FB867F6;
-	Tue,  7 Nov 2023 13:39:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CE9F783414;
+	Tue,  7 Nov 2023 13:39:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="V3C7a5ov";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zdHMmELv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C44C87185; Tue,  7 Nov 2023 13:39:11 +0100 (CET)
+ id EACA58711B; Tue,  7 Nov 2023 13:39:36 +0100 (CET)
 Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::601])
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eae::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 211F18715E
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:39:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1842D86828
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 13:39:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YzvP0T8CkkgijLOz1qEOIwk+kGNd7ZZnOJ/jPb4urqesx9Rz3jl2tEYiZLhOC9YZpou54XjNATceZQN1+GkcoBS7S9SnOq/hr8iyd3XFd8NuJEeXnghGGKyOhhCtEmnK1ZFXkwvRvYBsCBght/JApPSf2N5HoqAR4yiWvTbjiUrdua4A8P3TcAlVW49OvwT2Zr6R8LcjL8sfEBKTgYjpEhXwvkqlxbnFjs5x97jbBNKQ7HcyXtPbRYh5+BQY/OnOWbOWyKoa5o2VSNCXvjS/N0zaZU6V6iq19ZH9BQyO2Vngdrqi2CSrOJr4yNLBO/inqjalRFAMn3quqrNfPzTN4w==
+ b=O6bCXtpvDMN4WuzCrwIyj09eMgOKEOU+xVNa/AnMpM4zAwvDHW4L4/8QxTOwwXnrUQXKtSHVZL6w510AfbOQdf0us0RQgQla4cUV/yQm5WU4qmh4uKkla5YDNthKR/2JRUT+S8gACVzHnckzp7InD3/Sz/a/uEIgfWGC5Bj0MQ7FmKXzMtJdE66obRiaYthCD02HP/4z/PoBL/m8LMcJpd3l5EiVU4gSfWjVb6c7TM6x74QVuEuQG4p/3nSXyo4VaVtl38HVMDZ4mdQdjjATFgnntVKZDhWdeb5RusOTaq1AlslELBJkVdEVArEbhDBbD1nLopqOZmX+CxKVTprL0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G0HeNvwOGkbP4j8NIAuJNIUxx+NyYNQLTZpsxkjPpvM=;
- b=ltDX/Gwg1ZEADNzeO41VtlqZk8pv1NshGfnbdiVvZD+mk94ssi9YVz/HXD0rSD1C/9TLD3GNVQL1SFi1rVs/vNpWWJ3Sz+12HDnJo3e8JSNXVWkj9zkxDEeMFxIACXwGJR2B9No5DSD9oZPtlt69Pd92h+jwK3vw7PtQF3CyGO8T9IaU4j2ifs8iAfAzirdnK9PMjM6fmkZa6QtCesj1slyvIuszcIWkj+bqKrEf1uK6NppmuLrLgpxANWsYkVYTKBcal+LsjDesd3WLFhikrCgncNZ4fyxV9XtZpCrQP2cIetGEHeIB9MvwvS4m4XUvB2ejQdiCOs9ci7SYly0vBw==
+ bh=fLP7fV/2vUgx5R03T7IUEz7szqNqN7/tvELogRIpLHk=;
+ b=gAIpjyZ6mrqJYhMQM18ouExz2xPZPNgLVtoyaYbLZk66sgOzG8g/gBQuaKTcBL22x31jtyHhEiDxmYIaqDEwalET7Z//koh6PpW+hFkQhnXH2utfkSVl8E/ZuhrlsTXwJ1VVWF/nUGD6tXK2mJxYgeCqrcmU7rYpj7XRKjngXuRs7nD93nPcFmPFwOToEcx8VDKgdkoNMYbrnKxzYSe/2vSoVuIiR2N9aFVoTW8vaNy0VAkE8He0cj3nnljgx1KSxdUq+xdPca50Tg1B5SmZoc4Rz1CUdniddj5ivZd+uhoxnGbanX9y/t+lkhqu7wIMfjsMTLDPuGtX2AiHvI+R2A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G0HeNvwOGkbP4j8NIAuJNIUxx+NyYNQLTZpsxkjPpvM=;
- b=V3C7a5ovtMOO7fhfus3aDnBtprIGfGYDdwOiJCnsDMaiI2HfSi1dr2giIekhO+hzOWjpbRpV+HXEf+RGF97qLQD3Iu/6fGOnc9lIeRkDuCs7+qELG1qBk+mru6fTYz6BUDe7Ve+6Ju9Xob4yfsruoOncaMc0jDK0m5rVBR4pkbg=
+ bh=fLP7fV/2vUgx5R03T7IUEz7szqNqN7/tvELogRIpLHk=;
+ b=zdHMmELvAMEGLsnYKeqyN4PCF+xY+L4JFQMnfX+PB5I5KjB3umWyiah4zmZb1kyba9NpirUrjjIWc/cGcQMVN07qL+N4YDviY+jNdW+/szz/mi1UQtIotQeCpPS0IJwTTE2OUWqACtrWLDRMEiOtYCiq3/kER03bnnL93INhvus=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by DM6PR12MB4497.namprd12.prod.outlook.com (2603:10b6:5:2a5::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Tue, 7 Nov
- 2023 12:38:59 +0000
+ by LV3PR12MB9093.namprd12.prod.outlook.com (2603:10b6:408:19d::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28; Tue, 7 Nov
+ 2023 12:39:29 +0000
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::1d07:c316:b830:70c9]) by BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::1d07:c316:b830:70c9%4]) with mapi id 15.20.6954.027; Tue, 7 Nov 2023
- 12:38:58 +0000
-Message-ID: <f87da956-e0a2-4d14-886a-47a3bb0b88f1@amd.com>
-Date: Tue, 7 Nov 2023 13:38:55 +0100
+ 12:39:29 +0000
+Message-ID: <45a8b60e-26df-4b94-94f5-f1652be57561@amd.com>
+Date: Tue, 7 Nov 2023 13:39:23 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] ARM: zynq: Add partition description
+Subject: Re: [PATCH] arm64: zynqmp: Add description for nvmem efuse layout
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Simon Glass <sjg@chromium.org>
-References: <b3c4a3eddb71aab9535b034380d0dbae770828d4.1698837725.git.michal.simek@amd.com>
- <4c3348981bba32d3892194420d78fe8621c47534.1698837725.git.michal.simek@amd.com>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Piyush Mehta <piyush.mehta@amd.com>,
+ Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
+ Robert Hancock <robert.hancock@calian.com>, Simon Glass <sjg@chromium.org>,
+ Tanmay Shah <tanmay.shah@amd.com>
+References: <af81299cafc2bd13ed30dcd69bdf6efb5fbb7f68.1698840373.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -106,7 +109,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <4c3348981bba32d3892194420d78fe8621c47534.1698837725.git.michal.simek@amd.com>
+In-Reply-To: <af81299cafc2bd13ed30dcd69bdf6efb5fbb7f68.1698840373.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR0102CA0095.eurprd01.prod.exchangelabs.com
@@ -114,63 +117,63 @@ X-ClientProxiedBy: VI1PR0102CA0095.eurprd01.prod.exchangelabs.com
  (2603:10b6:a03:a5::28)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|DM6PR12MB4497:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d1b08c4-0b5f-4254-2d68-08dbdf8e8382
+X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|LV3PR12MB9093:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8c071a18-7e39-414f-0d6c-08dbdf8e95cf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 751oewPwIAzJiIAbMu9HuJ7mJV6G2xWzGVipon89EIby+4LzfT6ieAIJYfGDdTvm3maS4S5dL3EU6QXJizq9SjMnh8rR74EGqxEP0OlDPDmFeyV2vZfwSilEqMEbO1M926q51im/ahdINBkHrnka6pWlW6UJVMAzLQgDq6S+YhnQY0f6LLTxWKqMxBwSw6mguWyZA73KOxIyWfHhQMXycRuI85qxdOIyPgEm9kN3wkztOnrWHYDhFBYh7OVJZzaeTL9wxVUt0Wv9KNM/Elyts6VMuoRDnkEd6DMhKnGoCIR18J+Y+gSXWXQmb+RfhsAIKJwonyKpDDNgiZnbltpvUTUiKsL/x1kx4utusMN711Rlpoa8UvEuaN9n7RBxR7xPTNyS0R5pmDK+K7CV9w0N65yHF7lL2rg3iEk0peegOw6y6qHe2xBdtu6PbSffz5z2Iab4cVyiCB1ZazX2rZ5FWLJnewIMIDdWau6d8uhEUWIS7An/3E3+e8edYMqlw6A4W/GXVhw282dOmcjbTmB1bSyn+1ufhttv2DLT4YFjUkO8x2czIGCwD5YSxjZh7aoI00NDZDIVel3Zc13jhuI1iS/aKNmjZ0bUjtBOTWa1TLrP62DiQvhXdEn11t11lVSHbyEjGDsIkrMld1uixZilSA==
+X-Microsoft-Antispam-Message-Info: aWX3R6U+5h5iAmh2oYhCa9rIWkIiIjfyObI6tId7zca5R9qKGQ/0Ug5MV5+FzT/R09175EQf6qxIx09DwHX5N0uWY+uu3LW9WpWWuo7GpdJs47xQK7uWlwRS6sxtf72QxNicrPx3pWonZPIXfum/J9MjK9EUhEcs+8SbNrjZOKQiJFkpzGCx8RdSk0yfTXFHz4Pldlb/9L53R644Lqa+ZtovYJ1EXU2roTWxNg68mRSc1RrAmwHRIe70ueePZYoxxDrFqgxzQsuQtyRdpHo5VcwiOenHLlUCwsXpPhyHAjmzHD8P5oB+nriiroFplGi3dsFvjbp8/UaeFpBZmQ/3vYELRmGS63Ykb/uS/qpiEV5sRdEBGBjwc+UbBP+RI+UdHOqduO11q1Tyw7vmdRJ4OQivplwYN69tWUVfY/yjmxdZ0YnjgrdwVWmwChhvASj4dcmhKzxWqFtjUUJ5bKO23JAn/53bdBvGHJ4OP3st8smfPLvU7TY18sEYfC4qsjlhF8HklU7aF13KmjLZISA7kJ+hciFrfSRLaX6viZE/2yZ2fl3+IcfyXcd0eRcq0FjGCMp38UVwpU6KTnI978S/VU1dvtLDmv5jvb+n+bUyGtIxp7gJSe240gVNmhQLmBtc7Vh2h8KgzuhHCdfPSjZXMQ==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(39860400002)(366004)(136003)(396003)(376002)(230922051799003)(186009)(64100799003)(1800799009)(451199024)(2906002)(41300700001)(316002)(478600001)(66946007)(66476007)(38100700002)(8936002)(4326008)(8676002)(66556008)(36756003)(6486002)(31686004)(5660300002)(86362001)(31696002)(44832011)(83380400001)(2616005)(6666004)(6506007)(26005)(53546011)(6512007)(43740500002)(45980500001);
+ SFS:(13230031)(39860400002)(376002)(396003)(366004)(346002)(136003)(230922051799003)(186009)(64100799003)(1800799009)(451199024)(83380400001)(316002)(38100700002)(478600001)(6666004)(53546011)(6506007)(966005)(6486002)(26005)(66476007)(54906003)(66556008)(6512007)(66946007)(5660300002)(2616005)(2906002)(36756003)(31696002)(8676002)(4326008)(86362001)(8936002)(41300700001)(44832011)(31686004)(45980500001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cks0STFyQXF5MGNXeSszV2thNEJYdGt5NUhnUWY5cDFaQVo0SUk3OWE3U081?=
- =?utf-8?B?NTJ5VGpEK0s1dUhIVWRZN2xHOFFwQ0ZJWVBVQTNmU3RIWFJNYmE3c0VLOHV0?=
- =?utf-8?B?bEh2WHBGMGo2TENEY0pENUtHd2s2VmxHQXJ6NWt2Q0dqdmYxcCtBdmx0QTJo?=
- =?utf-8?B?RVVsUFY2dzdHWXppelF1alV2cFc5QkRaWkhCLzNmRnVEUVU4QWQ4Y2I4enVE?=
- =?utf-8?B?b2IzaXZNOE9wTTE4RjNlbnZoS25CdzVSTWNWK1pMVHFxdExkbWx4REw5N0Fn?=
- =?utf-8?B?MTJqcFQwOXVxMUNGZnRCVlRKNjN4MFFiMGNyME4ybjdHR29ENUphLzVOYjI4?=
- =?utf-8?B?dzZQT2s1Smh6NWYvM1A4QU9IOEJjdjltc2lJN2tDYkd5cGpMQ2k4OCtqS0Zn?=
- =?utf-8?B?aTZrUmoraExyQkFITFl6VVhGWGZVUDV4bDc3Qkg3cGtySFFMTjRyU0dFbWgv?=
- =?utf-8?B?c2U5bEVxNklWY2s3RjNQd2JpcWFPYWRpd3F4K1ZETzJvTWNUR2RPdGZDd056?=
- =?utf-8?B?ME9FbG9MdG92T2Fpck1YWGR4amVSdmpHRVZtbE9SeUNUOG5ObDQ3ZllndDBW?=
- =?utf-8?B?Z0lSM2NjaExsUFR5WGxpTThMQVRldDBlYjBhdUJJR2srbkV2YVB2andITHlD?=
- =?utf-8?B?MEFxMERSbXN5SndDRjh2TUlCMnBoUklXYit4Z0FhWkxkczhGWVpKbE9kNC9w?=
- =?utf-8?B?TmVhd0N3TjFoL3B6WDNwRm5oV2VlaHFKQXBlZHZJVEx3ZDlTMlFSMkRlcnhI?=
- =?utf-8?B?dzkwQ0w1R0ZTd1VnUVdrSjB5V09QdWhwV0JmNnczd3NHbU9pS3g0cjNnOUZL?=
- =?utf-8?B?Q3J4Mi9pU3hQSllJVG1UZVZBYjU2QVQrNE9PSDZ4d0NtaHlGckMvenJFcjRl?=
- =?utf-8?B?ZDN1Nm13Tm82R3ZJM2FyeW1oS1lsbjZDeElEVkxIS2ZmdXBuZ24xL2V1OVhG?=
- =?utf-8?B?WkJtTVhVQnhVODQ5WUFOQjdvQlExUERpTzQ3cEtGYngvZVlaZWd3WnlRTUpv?=
- =?utf-8?B?dlgrSGUzQTlWcm55THpWSXhwbUhEZ2JwVkowdHkxNUpkb3NzdXZGMGRPZENJ?=
- =?utf-8?B?VERZTTlKYWRUakhXTlBxQ3FjYzFTOC9Ob1dxejNvRS9OcDNIZTdJczVyenBq?=
- =?utf-8?B?ZHU0ZDUrRUt3VU5oc3Z4bGYrR0hPZ1BXZUtDWXlneEhoVUZmaWZZTmFpcmNi?=
- =?utf-8?B?R3hTR1oyN1c5cTJ2WG1sV0pKSVRScGFwckR1VkZMUnhRdTlUaUNVc2kvamR3?=
- =?utf-8?B?VUdPYlV4SHBRMU1GV09Rem9zaTJ1THdjWFdTM0VqSjF0aW1lbGdQODQvL2Mr?=
- =?utf-8?B?WFJHRW14b0JnOEpzOXA2RHhkMXhHRHhoQ2VqelpadHJUUitscElBRUpSelJX?=
- =?utf-8?B?QXZpak1FOWtvUlhXQmJha0R4bE5SV2J2SGJQckRMbW1SMThaaE9nTmk2VnNK?=
- =?utf-8?B?OXliNFF2YTMycG43ZHl0TWJLSTBKZm8yTVdscDJWbi94OFhtc29XeVVFMUVY?=
- =?utf-8?B?VUUyMUNRSGlOaVZOL2lleUp6VEZhZWZYRzhtWlYxaDZVR01QcHZDSzdiRERX?=
- =?utf-8?B?T3BKWS9wZEd1MlhkdHFJS0JoejNoUHBGV21mR3lsTE03SHgrakNmSml3Nitw?=
- =?utf-8?B?czV0dXRjVU9EUGg2SDFmWkRSYVVBbnNOR3ZyRVVoNGN1emlKUlZXMzFGL0hB?=
- =?utf-8?B?NU1pSUJzejBtRk93cHJRMGM1YnIyTU5jcVYrbk1WeU9HeXozbVR5eU5kbHZy?=
- =?utf-8?B?M015aFdxanA3azJ4bXYrak5rclB1SnIzUGFqZGZDdHFGWjA1alVxNkVZM3hQ?=
- =?utf-8?B?bmh5TFhCWCtYQUNwYTV2dUsyRmhyYjQwNFZxT0dNZVdHTzd5YUw2TGg0bmVm?=
- =?utf-8?B?bGNHRDA0L3lrbWRwbnpBSGN6M21CV0tzeG1ZcWk4NUxhay9zUU5DTHN5MUxM?=
- =?utf-8?B?VVMzbXp2aGFRdWZZeVNTaDA1ZU0yaitaNlk4b3RFd3V4QzVTbFplRjI2OWZB?=
- =?utf-8?B?dUlaNU4yMlYwREVtdG9tcllrWlpVRHFKdDRlOE9CWGcvcS9jKytTMXpwQ0xO?=
- =?utf-8?B?QUs1dWkxUjJHcVNGYklEdlRvTSt6WDNQak9Qb1hSL2d6dGNBUVJ3bTVEeklk?=
- =?utf-8?Q?BH6RgHnTAKbH8wi9DkFTPPS2l?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z1pvT0x4V2d4S2YzdVdkNmMrWGtyY3diMTlaQnVBRjNQQUMzMkZnUHdSMmY0?=
+ =?utf-8?B?WkRHK0dUa0pDUnFwOG1qVEpGaTdGOTV5TmN6VXFFdFJXMGpxSGtMUHRHdCtO?=
+ =?utf-8?B?MTRoZjBGT3pRaDdvMzNSN3NIejBUOVlsQnlNaXpQTDl4ZC9OV3JvbjFoUzRI?=
+ =?utf-8?B?Qkk4Z0FvUjFJVVNzcFdKZGNyWGRibXhlaGh1Sitscm9nbkRGUkQvZXZXUnBh?=
+ =?utf-8?B?NXdFUExpRnNodXNrOGExT3NEK2FKZFkyMTVmczdZclE1ci9pZVNHZWpENlN3?=
+ =?utf-8?B?ZTlMRTFjZVZwNWVUTWZSMG01aUlJSWRLS2JYV0c3dm5Sa3ZCZ1dEUUtEYnFa?=
+ =?utf-8?B?UFBJdVI5Mnd3bXU3R2xQM3hrM3pXQnNuWGZ0cXlWdUVUTThrMlhVeFNiVnJk?=
+ =?utf-8?B?K1IrSHZ0RGM5SlhVMEtMMG01ZUZvYzJEL2VNWFFtNTBDU2dSdGJmSVM0L2k0?=
+ =?utf-8?B?T1ZkSGU3cVZhN05CK3ZITXhCSVN1aWxCVk8xdFlzZ1VKZ1VHSDlTQkk3SWZx?=
+ =?utf-8?B?K3ZUNyt6aU1JWEswd21zWnBOZEJ5bk94cDJqZkFmNXQ0bXJ2SkxFZy94cnUr?=
+ =?utf-8?B?eGhYZjE0REFmeG5EMk0rTjM5SmZ0RGlKb1NydEdGWjFIdXNpeWdjRkRvaS9E?=
+ =?utf-8?B?bUpxbTFjS2Yzc3JLOHFoUnZTaDcwYzdXZ1l4SjY2elVLeFVUZGUxSmpDemFW?=
+ =?utf-8?B?RjNMc0lydVNweGI0bFNjK3U5cnV5Uit5YUZCOUZqZHVzcEFsbGM3NDgrUGRQ?=
+ =?utf-8?B?bWJvZ3hDWVRiNzluT054NythY09EMTI2QUZCalp4dkU1RElGdjZsYWh6djI3?=
+ =?utf-8?B?TERDS2xOWjBra2xNNk1YSUo5c1VMMnBPYmQrNHBWSENvUGxKNXF3UFBFdFp1?=
+ =?utf-8?B?aG1oaFNTMlFzaFRlMi83STAzRVVxSmZzRTUwM0xGYWpyY1c0a0ttdzlYQzAw?=
+ =?utf-8?B?ZXIranlNcUFZejZOVVdCVjVEY3VnME1yVGc0eTh5VTdrdFRrSDcySEJoNUNa?=
+ =?utf-8?B?Ym9qQlZSQ2tzQzZ2NXZKTzFJejRSMTI5M3ZxRjVJaWpDQ0VyZS9yNW5JRVpG?=
+ =?utf-8?B?OHVyT1NPeXMyajRERkdhSzlQU3Z2TjA4QTcwQ28xMmhKOEhFWTNzbHFBY1Fs?=
+ =?utf-8?B?R1RQbVp4TElYWE5XMWMySHMrKzVUTkpXVUhaN2dqdlE5SmRPZEwwL2ZHNXdx?=
+ =?utf-8?B?amNlWTlvbGdPN01wZ2dZa3NNSmg3MjM0SENCUjNTMkxCVmJiTlQxUjlxSkQ0?=
+ =?utf-8?B?T0hWUkg1Wk1IU3BrWFR5S04veVdmR2E2ZWk1U3JFd1B6K0VkakhTdUtzazBX?=
+ =?utf-8?B?VUpDTTc0cHFUeGJoZW5lN0ZXeitwMHRXWUtCN0szbnAxb0E1bFlHaFY0M3dp?=
+ =?utf-8?B?QXRXSnh5UGh3dDd1TDhwWnhQa3FNcUdFRzBsMzF3cHVMNFhTYTBKVFQrNWdL?=
+ =?utf-8?B?aUlibTZqdmUzbEdZUEp3MHBJK09Xb0FwT1gxb0RiWGVWcmhuUE82ZlYvby9x?=
+ =?utf-8?B?eXhQNTBFOXBGTFRMK0dieFA3a2RMN3Q5a1MzMjQ3MFg2UGRpd2hSUnhibGVj?=
+ =?utf-8?B?UU9iVHN3cDgvb3Q0OU9aWUgyVmtsL1ZoZUNweVVlb3dwUU5WdjY5dmh6YnZS?=
+ =?utf-8?B?RHhkRGxrVW5RV3RLVytqcTVaVy9YSG9zdnUwQzk2NkhCZU1nL0tKS3djOHVK?=
+ =?utf-8?B?cW9lOUZtaERURmFMVkQ0Wmh3UnkyTlMwckpDd09wdnZodmdVVEJVL3JoNUh5?=
+ =?utf-8?B?QlRIanR1OWRYTC92M2VWUU5oczhNT2VJWWljWm55dS9JaHRGZzJyclZjVWFj?=
+ =?utf-8?B?RUZLVHF2VDRkMWkyN0ltMlp1cWNxNm5iWE5SUjh2UDJtSnNUbVA5dTZ5c1Jp?=
+ =?utf-8?B?Q3dXTmx2RHFNSmdqQ0FXeDRGNXlzWE8wTHdVSHFEMmNxYWJvWjVCZUs4L2gr?=
+ =?utf-8?B?c2FLWnArL2lIRjVVeVI1T1R2d1lYMGNaV3VRL1YxSGFQeUtpdklVQnRYT0hi?=
+ =?utf-8?B?L1hqbTIwZUxocGpmNVhsSWE4ZUI2bk81RGlHWWthLzhZdFlDSFJ4OGRQOTBL?=
+ =?utf-8?B?U3htWk5YbVZZa0c2YkNuelowdWNqLzAyOFYrai9yaVViNWJ1LzJpVHVWeHU3?=
+ =?utf-8?Q?+498hezgjOcq0ZZK37ZAiRINe?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d1b08c4-0b5f-4254-2d68-08dbdf8e8382
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8c071a18-7e39-414f-0d6c-08dbdf8e95cf
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 12:38:58.8912 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 12:39:29.7422 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dR+65Xyum17+IYp7rssmFlVvm4GyMkv0tvxbB3CDN4YXqNTh1ICCgtBaIezGu07y
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4497
+X-MS-Exchange-CrossTenant-UserPrincipalName: UqzQ60FzX17gnpUaawQ3MdeAczpTskZn6eJ8/lYXtE42dVqfjbywv3ZCH4x5O9Jv
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9093
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,316 +192,78 @@ X-Virus-Status: Clean
 
 
 
-On 11/1/23 12:22, Michal Simek wrote:
-> Xilinx is using standard mtd partition layout for quite a long time. It is
-> used for testing purpose on evaluation boards.
-> Also #address/size-cells shouldn't be present without nodes which should
-> use them that's why move them from zynq-7000.dtsi to nand/nor nodes
-> directly.
+On 11/1/23 13:06, Michal Simek wrote:
+> Based on discussion with DT folks at link below there is not going to be
+> any name restrictions for child names. That's why add description for
+> current nvmem layout.
 > 
-> The patch was tested on zc706 and zedboard(with also increasing max
-> frequency and rx bus width).
-> 
+> Link: https://lore.kernel.org/lkml/20231013101450.573-3-praveen.teja.kundanala@amd.com/
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   arch/arm/dts/bitmain-antminer-s9.dts |  2 ++
->   arch/arm/dts/zynq-7000.dtsi          |  4 ----
->   arch/arm/dts/zynq-zc702.dts          | 25 ++++++++++++++++++++++++
->   arch/arm/dts/zynq-zc706.dts          | 25 ++++++++++++++++++++++++
->   arch/arm/dts/zynq-zc770-xm010.dts    | 25 ++++++++++++++++++++++++
->   arch/arm/dts/zynq-zc770-xm011.dts    | 19 ++++++++++++++++++
->   arch/arm/dts/zynq-zc770-xm012.dts    | 25 ++++++++++++++++++++++++
->   arch/arm/dts/zynq-zc770-xm013.dts    | 25 ++++++++++++++++++++++++
->   arch/arm/dts/zynq-zed.dts            | 29 +++++++++++++++++++++++++++-
->   9 files changed, 174 insertions(+), 5 deletions(-)
+>   arch/arm/dts/zynqmp.dtsi | 49 ++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 49 insertions(+)
 > 
-> diff --git a/arch/arm/dts/bitmain-antminer-s9.dts b/arch/arm/dts/bitmain-antminer-s9.dts
-> index 0228b4b30e5b..f5ad95a276b6 100644
-> --- a/arch/arm/dts/bitmain-antminer-s9.dts
-> +++ b/arch/arm/dts/bitmain-antminer-s9.dts
-> @@ -52,6 +52,8 @@
->   
->   &nfc0 {
->   	status = "okay";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
->   	nand@0 {
->   		reg = <0>;
->   	};
-> diff --git a/arch/arm/dts/zynq-7000.dtsi b/arch/arm/dts/zynq-7000.dtsi
-> index fb61fe98e3de..f8c786ab0b7b 100644
-> --- a/arch/arm/dts/zynq-7000.dtsi
-> +++ b/arch/arm/dts/zynq-7000.dtsi
-> @@ -306,15 +306,11 @@
->   				compatible = "arm,pl353-nand-r2p1";
->   				reg = <0 0 0x1000000>;
->   				status = "disabled";
-> -				#address-cells = <1>;
-> -				#size-cells = <0>;
+> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
+> index 2253e773d386..735543513f02 100644
+> --- a/arch/arm/dts/zynqmp.dtsi
+> +++ b/arch/arm/dts/zynqmp.dtsi
+> @@ -214,6 +214,55 @@
+>   				soc_revision: soc-revision@0 {
+>   					reg = <0x0 0x4>;
+>   				};
+> +				/* efuse access */
+> +				efuse_dna: efuse-dna@c {
+> +					reg = <0xc 0xc>;
+> +				};
+> +				efuse_usr0: efuse-usr0@20 {
+> +					reg = <0x20 0x4>;
+> +				};
+> +				efuse_usr1: efuse-usr1@24 {
+> +					reg = <0x24 0x4>;
+> +				};
+> +				efuse_usr2: efuse-usr2@28 {
+> +					reg = <0x28 0x4>;
+> +				};
+> +				efuse_usr3: efuse-usr3@2c {
+> +					reg = <0x2c 0x4>;
+> +				};
+> +				efuse_usr4: efuse-usr4@30 {
+> +					reg = <0x30 0x4>;
+> +				};
+> +				efuse_usr5: efuse-usr5@34 {
+> +					reg = <0x34 0x4>;
+> +				};
+> +				efuse_usr6: efuse-usr6@38 {
+> +					reg = <0x38 0x4>;
+> +				};
+> +				efuse_usr7: efuse-usr7@3c {
+> +					reg = <0x3c 0x4>;
+> +				};
+> +				efuse_miscusr: efuse-miscusr@40 {
+> +					reg = <0x40 0x4>;
+> +				};
+> +				efuse_chash: efuse-chash@50 {
+> +					reg = <0x50 0x4>;
+> +				};
+> +				efuse_pufmisc: efuse-pufmisc@54 {
+> +					reg = <0x54 0x4>;
+> +				};
+> +				efuse_sec: efuse-sec@58 {
+> +					reg = <0x58 0x4>;
+> +				};
+> +				efuse_spkid: efuse-spkid@5c {
+> +					reg = <0x5c 0x4>;
+> +				};
+> +				efuse_ppk0hash: efuse-ppk0hash@a0 {
+> +					reg = <0xa0 0x30>;
+> +				};
+> +				efuse_ppk1hash: efuse-ppk1hash@d0 {
+> +					reg = <0xd0 0x30>;
+> +				};
 >   			};
->   			nor0: flash@1,0 {
->   				status = "disabled";
->   				compatible = "cfi-flash";
->   				reg = <1 0 0x2000000>;
-> -				#address-cells = <1>;
-> -				#size-cells = <1>;
->   			};
->   		};
 >   
-> diff --git a/arch/arm/dts/zynq-zc702.dts b/arch/arm/dts/zynq-zc702.dts
-> index 8d47f24b757b..0106d7bb1778 100644
-> --- a/arch/arm/dts/zynq-zc702.dts
-> +++ b/arch/arm/dts/zynq-zc702.dts
-> @@ -406,6 +406,31 @@
->   		spi-tx-bus-width = <1>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <50000000>;
-> +		partitions {
-> +			compatible = "fixed-partitions";
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			partition@0 {
-> +				label = "qspi-fsbl-uboot";
-> +				reg = <0x0 0x100000>;
-> +			};
-> +			partition@100000 {
-> +				label = "qspi-linux";
-> +				reg = <0x100000 0x500000>;
-> +			};
-> +			partition@600000 {
-> +				label = "qspi-device-tree";
-> +				reg = <0x600000 0x20000>;
-> +			};
-> +			partition@620000 {
-> +				label = "qspi-rootfs";
-> +				reg = <0x620000 0x5e0000>;
-> +			};
-> +			partition@c00000 {
-> +				label = "qspi-bitstream";
-> +				reg = <0xc00000 0x400000>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynq-zc706.dts b/arch/arm/dts/zynq-zc706.dts
-> index 18963a395156..ceea982546e8 100644
-> --- a/arch/arm/dts/zynq-zc706.dts
-> +++ b/arch/arm/dts/zynq-zc706.dts
-> @@ -317,6 +317,31 @@
->   		spi-tx-bus-width = <1>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <50000000>;
-> +		partitions {
-> +			compatible = "fixed-partitions";
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			partition@0 {
-> +				label = "qspi-fsbl-uboot";
-> +				reg = <0x0 0x100000>;
-> +			};
-> +			partition@100000 {
-> +				label = "qspi-linux";
-> +				reg = <0x100000 0x500000>;
-> +			};
-> +			partition@600000 {
-> +				label = "qspi-device-tree";
-> +				reg = <0x600000 0x20000>;
-> +			};
-> +			partition@620000 {
-> +				label = "qspi-rootfs";
-> +				reg = <0x620000 0x5e0000>;
-> +			};
-> +			partition@c00000 {
-> +				label = "qspi-bitstream";
-> +				reg = <0xc00000 0x400000>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynq-zc770-xm010.dts b/arch/arm/dts/zynq-zc770-xm010.dts
-> index 17680d7f8ec8..199384bec967 100644
-> --- a/arch/arm/dts/zynq-zc770-xm010.dts
-> +++ b/arch/arm/dts/zynq-zc770-xm010.dts
-> @@ -69,6 +69,31 @@
->   		spi-tx-bus-width = <1>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <50000000>;
-> +		partitions {
-> +			compatible = "fixed-partitions";
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			partition@0 {
-> +				label = "qspi-fsbl-uboot";
-> +				reg = <0x0 0x100000>;
-> +			};
-> +			partition@100000 {
-> +				label = "qspi-linux";
-> +				reg = <0x100000 0x500000>;
-> +			};
-> +			partition@600000 {
-> +				label = "qspi-device-tree";
-> +				reg = <0x600000 0x20000>;
-> +			};
-> +			partition@620000 {
-> +				label = "qspi-rootfs";
-> +				reg = <0x620000 0x5e0000>;
-> +			};
-> +			partition@c00000 {
-> +				label = "qspi-bitstream";
-> +				reg = <0xc00000 0x400000>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynq-zc770-xm011.dts b/arch/arm/dts/zynq-zc770-xm011.dts
-> index d1e971254e51..f9a086fe66d3 100644
-> --- a/arch/arm/dts/zynq-zc770-xm011.dts
-> +++ b/arch/arm/dts/zynq-zc770-xm011.dts
-> @@ -49,8 +49,27 @@
->   
->   &nfc0 {
->   	status = "okay";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
->   	nand@0 {
->   		reg = <0>;
-> +		partitions {
-> +			compatible = "fixed-partitions";
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			partition@0 {
-> +				label = "nand-fsbl-uboot";
-> +				reg = <0x0 0x1000000>;
-> +			};
-> +			partition@1000000 {
-> +				label = "nand-linux";
-> +				reg = <0x1000000 0x2000000>;
-> +			};
-> +			partition@3000000 {
-> +				label = "nand-rootfs";
-> +				reg = <0x3000000 0x200000>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynq-zc770-xm012.dts b/arch/arm/dts/zynq-zc770-xm012.dts
-> index 6e36634e3d4e..24520e7d3965 100644
-> --- a/arch/arm/dts/zynq-zc770-xm012.dts
-> +++ b/arch/arm/dts/zynq-zc770-xm012.dts
-> @@ -56,6 +56,31 @@
->   &nor0 {
->   	status = "okay";
->   	bank-width = <1>;
-> +	partitions {
-> +		compatible = "fixed-partitions";
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
-> +		partition@0 {
-> +			label = "nor-fsbl-uboot";
-> +			reg = <0x0 0x100000>;
-> +		};
-> +		partition@100000 {
-> +			label = "nor-linux";
-> +			reg = <0x100000 0x500000>;
-> +		};
-> +		partition@600000 {
-> +			label = "nor-device-tree";
-> +			reg = <0x600000 0x20000>;
-> +		};
-> +		partition@620000 {
-> +			label = "nor-rootfs";
-> +			reg = <0x620000 0x5e0000>;
-> +		};
-> +		partition@c00000 {
-> +			label = "nor-bitstream";
-> +			reg = <0xc00000 0x400000>;
-> +		};
-> +	};
->   };
->   
->   &smcc {
-> diff --git a/arch/arm/dts/zynq-zc770-xm013.dts b/arch/arm/dts/zynq-zc770-xm013.dts
-> index 582aa1f1b873..add75999f47a 100644
-> --- a/arch/arm/dts/zynq-zc770-xm013.dts
-> +++ b/arch/arm/dts/zynq-zc770-xm013.dts
-> @@ -69,6 +69,31 @@
->   		spi-tx-bus-width = <1>;
->   		spi-rx-bus-width = <4>;
->   		spi-max-frequency = <50000000>;
-> +		partitions {
-> +			compatible = "fixed-partitions";
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			partition@0 {
-> +				label = "qspi-fsbl-uboot";
-> +				reg = <0x0 0x100000>;
-> +			};
-> +			partition@100000 {
-> +				label = "qspi-linux";
-> +				reg = <0x100000 0x500000>;
-> +			};
-> +			partition@600000 {
-> +				label = "qspi-device-tree";
-> +				reg = <0x600000 0x20000>;
-> +			};
-> +			partition@620000 {
-> +				label = "qspi-rootfs";
-> +				reg = <0x620000 0x5e0000>;
-> +			};
-> +			partition@c00000 {
-> +				label = "qspi-bitstream";
-> +				reg = <0xc00000 0x400000>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynq-zed.dts b/arch/arm/dts/zynq-zed.dts
-> index 5320b4b233ae..70bc41822e36 100644
-> --- a/arch/arm/dts/zynq-zed.dts
-> +++ b/arch/arm/dts/zynq-zed.dts
-> @@ -55,8 +55,35 @@
->   	flash@0 {
->   		compatible = "spansion,s25fl256s1", "jedec,spi-nor";
->   		reg = <0>;
-> -		spi-max-frequency = <30000000>;
-> +		spi-tx-bus-width = <1>;
-> +		spi-rx-bus-width = <4>;
-> +		spi-max-frequency = <50000000>;
->   		m25p,fast-read;
-> +		partitions {
-> +			compatible = "fixed-partitions";
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			partition@0 {
-> +				label = "qspi-fsbl-uboot";
-> +				reg = <0x0 0x100000>;
-> +			};
-> +			partition@100000 {
-> +				label = "qspi-linux";
-> +				reg = <0x100000 0x500000>;
-> +			};
-> +			partition@600000 {
-> +				label = "qspi-device-tree";
-> +				reg = <0x600000 0x20000>;
-> +			};
-> +			partition@620000 {
-> +				label = "qspi-rootfs";
-> +				reg = <0x620000 0x5e0000>;
-> +			};
-> +			partition@c00000 {
-> +				label = "qspi-bitstream";
-> +				reg = <0xc00000 0x400000>;
-> +			};
-> +		};
->   	};
->   };
->   
+>   			zynqmp_pcap: pcap {
 
 Applied.
 M
