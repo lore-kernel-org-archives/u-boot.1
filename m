@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F88CC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 13:19:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E27D1C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 13:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE90886A4C;
-	Tue,  7 Nov 2023 14:19:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 20EC0870D5;
+	Tue,  7 Nov 2023 14:26:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q4qF2Uyf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GHf0rDzz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F4F586863; Tue,  7 Nov 2023 14:19:50 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 2B5438719E; Tue,  7 Nov 2023 14:26:34 +0100 (CET)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61A7086F86
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 14:19:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6989D86DAF
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 14:26:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-579de633419so67985577b3.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 05:19:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-359398abeb5so21488125ab.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 05:26:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699363184; x=1699967984; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sOD6rTygXbHDO1jvb1eGvOWTxPDbzciJ6X/cwtHL35o=;
- b=q4qF2UyfukFqycPFIvjJG5dbxsPPe2vgVf4sfTz+NXrpcg3juWSQ2IS3zaV6T0Hm7s
- FS5uifrwQ0VfapCBL8ZVM75lAbzhVqPjoYediGa79seO50b+2b9HiNl5OWFpiRnwwo6c
- earmgAqhnwk/nsg0etDq9O6FAAlTsqHcrzNy4=
+ d=chromium.org; s=google; t=1699363590; x=1699968390; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9/mFjd0wgmEwKVxmYgWqnXsXQMR8jMmnZxMCOKykInw=;
+ b=GHf0rDzzrGxyn1FZ40dYVc6X6o3AFmqoLaq15LWClecCXivMkEhgmHePoW55nNOYj8
+ zmds972l7YHg22+/dKUYAvj9ugE3KgP6hl2x+YR4gXxDJz2FuVF3Qbi5Ro5703keDb9o
+ pQWAzOlxJzX3qu0a4GEK/q6DB1nDgv9eKPm6A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699363184; x=1699967984;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sOD6rTygXbHDO1jvb1eGvOWTxPDbzciJ6X/cwtHL35o=;
- b=P/iyDx+e3J3xcwxoeZytJtrF5tUDz2YRV4h7qzKae6INfgsFRfqP5QXVk8z5Ctrjkx
- 25TYN+VriwfpX+Gy6FDCV1tc1OHU19TIUNifzuiZSiP/Z448iuqu0mZL4SsUlXuW1lIK
- RvqnXysF7+ZnhF5Plo1WY6jrNucvzrec/MuBWIFnEbnF/KxM0tUPgrlIoTH7SmeTcbH+
- Z6wjFYcMaH9846DyifmyG7W26prWpeK7YCnj3zdKueStUG5MQGlkvdOQBoutoWSr6Fx+
- AwakOs0GddArp3vwy6JcWn93vNaOFeDYyPV6yY4W9D4H1vGzkZWjsc28CMoRF/EnJ/UZ
- x94w==
-X-Gm-Message-State: AOJu0Yzz1LVLkcnRE1A/zhyFVRs16La4kiBbfDMdsyiDgdVO2ZppqzgA
- BQYKH2OWPEi+DfpnKVosbRvEBtReE8V4dLuJJ8s/FA==
-X-Google-Smtp-Source: AGHT+IH3LP82NjMCsKe4x9gYJCbqO8EqGTvQidNSiH/AqOSxVII0xrBXfuNAhKZM0ruwDbbkcHDqCw==
-X-Received: by 2002:a0d:df4a:0:b0:5a8:1654:4b6f with SMTP id
- i71-20020a0ddf4a000000b005a816544b6fmr14096367ywe.17.1699363184660; 
- Tue, 07 Nov 2023 05:19:44 -0800 (PST)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-2fee-489d-8907-1a68.res6.spectrum.com.
- [2603:6081:7b00:6400:2fee:489d:8907:1a68])
+ d=1e100.net; s=20230601; t=1699363590; x=1699968390;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9/mFjd0wgmEwKVxmYgWqnXsXQMR8jMmnZxMCOKykInw=;
+ b=Yn458nBh7jPpbK5wFLTBGavhySLPCI+N8oE7AxVCPabsc8GFWhxp8OOdTZIH6MC5yu
+ Vba+ugAoVf3sAO3XMaeyE8wDs8gRasrAk7EiP+EC5Y/4nwb7UOCfQTo+dNSeXxPUEtwb
+ nP0W7e40WdBwghq6M7DBYfUcg+3DTFr8hfZ3dn0n/msMJcw3B9OpCEAhDDusiaTOaupv
+ vPgQbackwy/q0dnbGQKXeMxMrxY3NoJ4tVxhcSjLnnxSaXiyjiMcYSBESKhd2Hgm5CKr
+ vA3ILnpCJS6H4vjpVOSyQ0N551HRynBqe6ThiFEu42x0vnlyESrTxONyeOrqCI+Jws7R
+ txkA==
+X-Gm-Message-State: AOJu0YylP3eUyFoBEgHKb25hSw5RoUBkbuEvRPAR2qlJja7YW238bN92
+ Pptklc7wZw6efTW9IJ2K1646Cw==
+X-Google-Smtp-Source: AGHT+IEvK+ABpnW0xq6JBR04UWQ96UFjO7HkpTm4Tgs7DAO9KabFFzP3Z7DWsLQSuhCHCZEWm4Mydw==
+X-Received: by 2002:a92:c56c:0:b0:359:b467:e29e with SMTP id
+ b12-20020a92c56c000000b00359b467e29emr3139219ilj.30.1699363590166; 
+ Tue, 07 Nov 2023 05:26:30 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- kh6-20020a056214514600b006714f8b5512sm4339214qvb.6.2023.11.07.05.19.43
+ db8-20020a056e023d0800b003596056a051sm3141589ilb.71.2023.11.07.05.26.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 05:19:44 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH 0/2] MAINTAINERS: Add Mattijs to USB/fastboot maintainers
-Date: Tue,  7 Nov 2023 08:19:42 -0500
-Message-Id: <169936316552.191686.2143612459602061081.b4-ty@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
-References: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
+ Tue, 07 Nov 2023 05:26:29 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: linux-arm-kernel@lists.infradead.org
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Masahiro Yamada <masahiroy@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, Nick Terrell <terrelln@fb.com>,
+ Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
+ linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/2] arm64: Add a build target for Flat Image Tree
+Date: Tue,  7 Nov 2023 06:25:52 -0700
+Message-ID: <20231107132619.34062-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,21 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 05 Oct 2023 15:04:24 +0200, Mattijs Korpershoek wrote:
+Flat Image Tree (FIT) is a widely used file format for packaging a
+kernel and associated devicetree files[1]. It is not specific to any
+one bootloader, as it is supported by U-Boot, coreboot, Linuxboot,
+Tianocore and Barebox.
 
-> From discussions with Marek at Kernel Recipes, it seems that the USB
-> subsystem in U-boot need some help.
-> 
-> Since I've been asked and I'm willing to help, I've added myself to the
-> maintainers entry.
-> 
-> I have also added myself for fastboot since I'm interested in keeping
-> that functional as well.
-> 
-> [...]
+This series adds support for building a FIT as part of the kernel
+build. This makes it easy to try out the kernel - just load the FIT
+onto your tftp server and it will run automatically on any supported
+arm64 board.
 
-Applied to u-boot/master, thanks!
+The script is written in Python, since it is easy to build a FIT using
+the Python libfdt bindings. For now, no attempt is made to compress
+files in parallel, so building the 900-odd files takes a while, about
+6 seconds with my testing.
+
+The series also includes a few minor clean-up patches.
+
+[1] https://github.com/open-source-firmware/flat-image-tree
+
+Changes in v3:
+- Drop temporary file image.itk
+- Drop patch 'Use double quotes for image name'
+- Drop double quotes in use of UIMAGE_NAME
+- Drop unnecessary CONFIG_EFI_ZBOOT condition for help
+- Avoid hard-coding "arm64" for the DT architecture
+
+Changes in v2:
+- Drop patch previously applied
+- Add .gitignore file
+- Move fit rule to Makefile.lib using an intermediate file
+- Drop dependency on CONFIG_EFI_ZBOOT
+- Pick up .dtb files separately from the kernel
+- Correct pylint too-many-args warning for write_kernel()
+- Include the kernel image in the file count
+- Add a pointer to the FIT spec and mention of its wide industry usage
+- Mention the kernel version in the FIT description
+
+Simon Glass (2):
+  kbuild: arm64: Add BOOT_TARGETS variable
+  arm64: boot: Support Flat Image Tree
+
+ MAINTAINERS                |   7 +
+ arch/arm64/Makefile        |   7 +-
+ arch/arm64/boot/.gitignore |   1 +
+ arch/arm64/boot/Makefile   |   6 +-
+ scripts/Makefile.lib       |  16 ++
+ scripts/make_fit.py        | 289 +++++++++++++++++++++++++++++++++++++
+ 6 files changed, 324 insertions(+), 2 deletions(-)
+ create mode 100755 scripts/make_fit.py
 
 -- 
-Tom
+2.42.0.869.gea05f2083d-goog
 
