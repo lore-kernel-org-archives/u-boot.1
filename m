@@ -4,39 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B761C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 16:09:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9AF4C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 16:18:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AF9D86DAF;
-	Tue,  7 Nov 2023 17:09:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id BC66B87512;
+	Tue,  7 Nov 2023 17:18:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="a9OUhkGS";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C9686F44; Tue,  7 Nov 2023 17:09:12 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B180D86470
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 17:09:10 +0100 (CET)
+ id C04AD87514; Tue,  7 Nov 2023 17:18:45 +0100 (CET)
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1569F87508
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 17:18:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7B43D1476;
- Tue,  7 Nov 2023 08:09:54 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D00143F64C;
- Tue,  7 Nov 2023 08:09:08 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>
-Cc: u-boot@lists.denx.de,
-	Peter Hoyes <peter.hoyes@arm.com>
-Subject: [PATCH] virtio: rng: gracefully handle 0 byte returns
-Date: Tue,  7 Nov 2023 16:09:00 +0000
-Message-Id: <20231107160900.2652813-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=thomas.richard@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 311E01C000C;
+ Tue,  7 Nov 2023 16:18:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1699373922;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rsFnNznu/T7hSJaRcxCO3Axx+wsXUJim6mmjBEkzksg=;
+ b=a9OUhkGS7r/vb8mHQZL54J9nwKYPKnVZ86vwnXi2ixf/TEGADl74yO167DdZ3kgek6q5TX
+ mXU3uYQ3eAZq7Py46njzrMb9C3wwb3pMkMGw8/M7JWvZiMXI4MI6HVIQFQ6PvOjdvewL3r
+ 9ZaOzm3IPuWzrQ5bWzRn4C1HL7YkmI51EIhQEVdsP3UXV9AIAe1efyH6FO2MIVBEgR/3Hk
+ pHpXWPOR7GP68zgGiR7aOrzbBojK8ZO+Z+7y4eYWixHhdbF829H/8crz/eaeyXNzCfNBE6
+ Frhn4wj4+HpKRvO2SavHaCxaFIuXhpnbZrNhI8v0LkTggtum8nyqns0ZnunJdA==
+From: Thomas Richard <thomas.richard@bootlin.com>
+To: u-boot@lists.denx.de
+Cc: nm@ti.com, thomas.richard@bootlin.com, thomas.petazzoni@bootlin.com,
+ gregory.clement@bootlin.com, u-kumar1@ti.com, Bryan Brattlof <bb@ti.com>,
+ Gowtham Tammana <g-tammana@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/8] Suspend to RAM support for K3 J7200
+Date: Tue,  7 Nov 2023 17:17:54 +0100
+Message-Id: <20231107161802.855154-1-thomas.richard@bootlin.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-GND-Sasl: thomas.richard@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,55 +69,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to the virtio v1.x "entropy device" specification, a virtio-rng
-device is supposed to always return at least one byte of entropy.
-However the virtio v0.9 spec does not mention such a requirement.
+This series is the U-Boot part of the work to add the suspend to RAM
+support for the K3 J7200 EVM board.
 
-The Arm Fixed Virtual Platform (FVP) implementation of virtio-rng always
-returns 8 bytes less of entropy than requested. If 8 bytes or less are
-requested, it will return 0 bytes.
-This behaviour makes U-Boot's virtio_rng_read() implementation go into an
-endless loop, hanging the system.
+During the boot R5 SPL makes a copy of DM-Firmware in memory.
+Resume detection is done by reading a magic value in a pmic register
+(set by DM-Firmware).
 
-Work around this problem by always requesting 8 bytes more than needed,
-but only if a previous call to virtqueue_get_buf() returned 0 bytes.
+If a resume is detected, R5 SPL run the exit retention sequence of the
+DDR. Then it restores TF-A in SRAM (it saved itself to DDR), and load
+DM-Firmware using the copy done during the boot (fit image processing
+is skipped).
 
-This should never trigger on a v1.x spec compliant implementation, but
-fixes the hang on the Arm FVP.
+The copy of TF-A/DM-Firmware, the SPL stack and malloc are located in a
+reserved memory region (for the kernel point of view) to avoid any
+memory corruption.
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-Reported-by: Peter Hoyes <peter.hoyes@arm.com>
----
- drivers/virtio/virtio_rng.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+Changes in v2:
+- Set exit retention code for DDR behind CONFIG_K3_J721E_DDRSS
+- Check if TF-A is running in DRAM, if yes no need to restore it
+- Remove BL31_START macro, and get TF-A start address from the fit image
+- Remove the test_enter_suspend command
+- Link to v1: https://lore.kernel.org/u-boot/20231016141135.325698-1-thomas.richard@bootlin.com/
 
-diff --git a/drivers/virtio/virtio_rng.c b/drivers/virtio/virtio_rng.c
-index b85545c2ee5..786359a6e36 100644
---- a/drivers/virtio/virtio_rng.c
-+++ b/drivers/virtio/virtio_rng.c
-@@ -20,7 +20,7 @@ struct virtio_rng_priv {
- static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
- {
- 	int ret;
--	unsigned int rsize;
-+	unsigned int rsize = 1;
- 	unsigned char buf[BUFFER_SIZE] __aligned(4);
- 	unsigned char *ptr = data;
- 	struct virtio_sg sg;
-@@ -29,7 +29,12 @@ static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
- 
- 	while (len) {
- 		sg.addr = buf;
--		sg.length = min(len, sizeof(buf));
-+		/*
-+		 * Work around implementations which always return 8 bytes
-+		 * less than requested, down to 0 bytes, which would
-+		 * cause an endless loop otherwise.
-+		 */
-+		sg.length = min(rsize ? len : len + 8, sizeof(buf));
- 		sgs[0] = &sg;
- 
- 		ret = virtqueue_add(priv->rng_vq, sgs, 0, 1);
+Gowtham Tammana (1):
+  DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic node for esm
+
+Gregory CLEMENT (2):
+  configs: j7200_evm_r5: Used reserved memory in DDR for stack
+  configs: j7200_evm_r5: Move address used for allocation in the
+    reserved space
+
+Thomas Richard (5):
+  board: ti: j721e: Add resume detection for J7200
+  ram: k3-ddrss: Add exit retention support
+  board: ti: j721e: Add the missing part of exit retention for k3-ddrss
+    (J7200)
+  board: ti: j721e: During resume spl restores TF-A and DM-Firmware
+  arm: mach-k3: j7200: Skip fit processing when resuming
+
+ .../arm/dts/k3-j7200-r5-common-proc-board.dts |  17 +-
+ arch/arm/mach-k3/common.c                     |  48 ++-
+ arch/arm/mach-k3/include/mach/j721e_spl.h     |  28 ++
+ arch/arm/mach-k3/sysfw-loader.c               |  16 +-
+ board/ti/j721e/evm.c                          |  79 +++++
+ configs/j7200_evm_r5_defconfig                |   4 +-
+ drivers/ram/k3-ddrss/k3-ddrss.c               | 307 ++++++++++++++++++
+ 7 files changed, 489 insertions(+), 10 deletions(-)
+
 -- 
-2.25.1
+2.39.2
 
