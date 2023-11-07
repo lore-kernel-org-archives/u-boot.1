@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9044C4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 18:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 688D0C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 18:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E92087514;
-	Tue,  7 Nov 2023 19:16:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CBFF687514;
+	Tue,  7 Nov 2023 19:19:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h9iK425Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MPJhHJU/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D84C87528; Tue,  7 Nov 2023 19:16:08 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 2C992875A9; Tue,  7 Nov 2023 19:18:59 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EA1B86ED6
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 19:16:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2000B86ED6
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 19:18:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-778711ee748so418705385a.2
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 10:16:06 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7789aed0e46so396468685a.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 10:18:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699380965; x=1699985765; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699381136; x=1699985936; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V4goRw3ePEaS0Z/BMWU+ZxnNZpxEtVXJkQr8q181VV8=;
- b=h9iK425Y73/CU/UyDId0b/5LG+iAmT8QGtH1rqiwXRMVg486TbRafvMU7SxSkXvGF8
- E/CZvFjDkUqFmZTPWL8xLJQGRbrzLdI4sjihOV3xhkHUFnhGQczb3D5/dEGg2Syty+PD
- XariXbd6Z2cz2MqrJnjizPxzx9rpfkGl/OTrU=
+ bh=SXrOYHdkZ/0PpMlvuegmLJ7gEKBL36LJ41i29eyVB8M=;
+ b=MPJhHJU/oLfyOGqSSLLlf6eSwqAX+cJNA29fw26yqvWI5M/+JGN3VdLsGp8WlmChnL
+ A7jrZBsWC82oTjsEMhZgoI8SMoDj2u9Wqksm5MraPFrlMjNHY1AZQcbqz6MEIFnbkrXH
+ 5pI8MEpjvPYpjq7uf1nKIP+zz6g+qLLhzUhtA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699380965; x=1699985765;
+ d=1e100.net; s=20230601; t=1699381136; x=1699985936;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V4goRw3ePEaS0Z/BMWU+ZxnNZpxEtVXJkQr8q181VV8=;
- b=ucp6LKHLc2SgTsWyMoxSQBFn0LP4ncVoEt0+BrGfyeZyLNmxoeCvZv6HsEc4nzTIOE
- I116w4bb7H/O1OOkpfAbZZesrUhmBmSuLhahCWnWAQ4f4eAmSaQ105HdnVhB6yenYbZl
- taX4Q1RVdGB5pZfAA4KX566gjRSZZ2MsavVkcEthNuv+4ia2EVPILCnVpwOE6djKi5nx
- L+RVj4Hg8jXxutipDLFVHpfXm1rEPeWX21PwpcxJPBpdKXn1z/dIDKH7R9HySZ8r/McP
- TVEFqmHbxWAyZZnQIRgC/k/V2a2+cGGJWvMkPhZT0LnYGnY6dFZtq3bvg81+XxgsM+es
- fiUw==
-X-Gm-Message-State: AOJu0YyQPzQlPio/+7gcZLKozQ555RXgF6weWcZylPCiH2nGTvwGOtf0
- GShTl36xeeffcuy3PhJmvIjoxg==
-X-Google-Smtp-Source: AGHT+IGpx1aBn7BbYow5XPTvxOia7QxqRlp11NvVZPyKrM6RlOGBBIcid/jNI1DNncP0UHN8lRJUTA==
-X-Received: by 2002:a05:620a:290a:b0:775:96c8:f560 with SMTP id
- m10-20020a05620a290a00b0077596c8f560mr40842264qkp.31.1699380965242; 
- Tue, 07 Nov 2023 10:16:05 -0800 (PST)
+ bh=SXrOYHdkZ/0PpMlvuegmLJ7gEKBL36LJ41i29eyVB8M=;
+ b=mbIvn/fsQt4RX5inPFImCd9XKBB1HDOyxxFtqFzFA7NwmVFYRkep73v3UyPT2+UjJj
+ mcAauw9/x+6BEaqsEFt6N+KVARuK1WcrqbpQmL00v+Selc2ZdYvlfW9we92Iz8ERZRh9
+ ozCh7IB5rBSi83W/CTB0i2cdzrgdnnqD1XXqQ6nauVsFXlDbfPZvLuifPif6VDMKItDg
+ B0a6dt2svJIZilUDFKJq8geJkl4R4yPQ31/9O+jd7/X9YotPKt7V6dOlA7V2b80FZjgW
+ lX5d3aPAYL8Ghni4HStyqmYl32btfCyjemJGruzrCWjBykZP/jpFPSER5XEjtuA/ddH7
+ llBg==
+X-Gm-Message-State: AOJu0YzKa3rRnWxnnrgP1EfBZv3Tto+PkyUMYHQnRSb/Y6O1Ky2+6R4m
+ HA51e5QIKN6q3EBkDQqEgSmG4Q==
+X-Google-Smtp-Source: AGHT+IEEs5MfUG0g1KTIMzCdaLfxLXB5Dp38EUnDQjf28hMwE617cG8TEQ4BFWMiIDHKkDmyyxX4xA==
+X-Received: by 2002:a05:620a:22f2:b0:77a:59c:d849 with SMTP id
+ p18-20020a05620a22f200b0077a059cd849mr29888212qki.33.1699381135780; 
+ Tue, 07 Nov 2023 10:18:55 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2fee-489d-8907-1a68.res6.spectrum.com.
  [2603:6081:7b00:6400:2fee:489d:8907:1a68])
  by smtp.gmail.com with ESMTPSA id
- l13-20020a37f50d000000b0076f16e98851sm133878qkk.102.2023.11.07.10.16.04
+ y29-20020a05620a09dd00b0077a7d02cffbsm144383qky.24.2023.11.07.10.18.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 10:16:04 -0800 (PST)
-Date: Tue, 7 Nov 2023 13:16:02 -0500
+ Tue, 07 Nov 2023 10:18:55 -0800 (PST)
+Date: Tue, 7 Nov 2023 13:18:53 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Thomas Richard <thomas.richard@bootlin.com>
 Cc: u-boot@lists.denx.de, nm@ti.com, thomas.petazzoni@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 4/8] board: ti: j721e: Add resume detection for J7200
-Message-ID: <20231107181602.GJ6601@bill-the-cat>
+ gregory.clement@bootlin.com, u-kumar1@ti.com
+Subject: Re: [PATCH v2 6/8] board: ti: j721e: Add the missing part of exit
+ retention for k3-ddrss (J7200)
+Message-ID: <20231107181853.GK6601@bill-the-cat>
 References: <20231107161802.855154-1-thomas.richard@bootlin.com>
- <20231107161802.855154-5-thomas.richard@bootlin.com>
+ <20231107161802.855154-7-thomas.richard@bootlin.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IZumj9/5AT1MhCQq"
+ protocol="application/pgp-signature"; boundary="0W/56pRQfBGbzprX"
 Content-Disposition: inline
-In-Reply-To: <20231107161802.855154-5-thomas.richard@bootlin.com>
+In-Reply-To: <20231107161802.855154-7-thomas.richard@bootlin.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,85 +95,48 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---IZumj9/5AT1MhCQq
+--0W/56pRQfBGbzprX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 07, 2023 at 05:17:58PM +0100, Thomas Richard wrote:
+On Tue, Nov 07, 2023 at 05:18:00PM +0100, Thomas Richard wrote:
 
-> Add the capability to detect a resume.
-> To detect the resume, SPL searches a magic value (0xBA) in a register
-> of PMICA.
-> This value is set by DM-Firmware during the suspend sequence.
+> Add the board specific part of the exit retention sequence for k3-ddrss
 >=20
 > Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
 >=20
 > Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 > Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
-> ---
->=20
-> (no changes since v1)
->=20
->  board/ti/j721e/evm.c | 54 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 54 insertions(+)
->=20
-> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> index 38fe447d8f..b4b94c8c69 100644
-> --- a/board/ti/j721e/evm.c
-> +++ b/board/ti/j721e/evm.c
-> @@ -22,6 +22,9 @@
->  #include <spl.h>
->  #include <dm.h>
->  #include <dm/uclass-internal.h>
-> +#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_E=
-VM))
-> +#include <power/pmic.h>
-> +#endif
 
-We _really_ should not be guarding include files. If the code doesn't
-compile with the header included, we need to figure out what's wrong
-with the header or if, ugh, a more worst case of moving the #include to
-by the now-guarded functions.
-
-[snip]
-> +#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_E=
-VM))
-> +
-> +#define SCRATCH_PAD_REG_3 0xCB
-> +
-> +#define MAGIC_SUSPEND 0xBA
-> +
-> +static int resuming =3D -1;
-> +
-> +int board_is_resuming(void)
-
-I wonder if we should (a) have a file for just r5 related code and then
-(b) rely on this being discarded on link anyhow for non-SPL and we just
-comment that this is only used in resume in SPL. Guarding functions with
-#if (IS_ENABLED(CONFIG_A) && IS_ENABLED(CONFIG_B))
-isn't what the macros were intended for (and yes, I know checkpatch.pl
-complains otherwise, which is a point of contention).
+If this ends up being physical board design specific and so someone
+making a new design for this SoC with a custom board layout entirely
+needs something else, we should think harder about what's in
+board_is_resuming() vs what we document the function does. If however,
+this is generic to the SoC and will be needed, it should be folded in
+with the previous patch and the commit message expanded, and the
+documentation part of this series explain clearly what the functions are
+responsible for.
 
 --=20
 Tom
 
---IZumj9/5AT1MhCQq
+--0W/56pRQfBGbzprX
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVKfuIACgkQFHw5/5Y0
-tyw0fgv+LLV0dgFS0J8u46DxMaf6qXEYc8d9N0oJxYzv9RxS3vJ6ky31He4J+qUW
-zq8tCSa8aL7XLC25gv4QqP+cTJt2NhjU4cwhhtYDPp4S+sBHswKr9uqIYD7myL+b
-BuNQgFJ0YbtCC7/lrvlb/bZYMsCm2nmZOQ/H0ntasAq2rLJTI5hX23SXbPp0F13b
-VydLh3W+Q8iGxtu0KaoO6QYEj22cThPAAD270La/szCj+NET8mPb9VRN1vuzOqKZ
-BLvNRLqZcXMXdGh2CfokkduPL54GdbiI8RDos4cWG1fBiz9vsYnhoCgFUhKdrZ5X
-2w8b+OaaJepvE0ewXZfGJSpzE3N9TWdSqJC89N810Do6wrwOxjyFrrz2zKqeHhM3
-IUkuzR4AkuggMxDnicidbQSYYFJLI9mGdXlLWivXqTF8wEffvH0CAfryAtHP8mwN
-c6ph2fBpy5vpkk+emL8sriHC2TfV985X8U2TDeCdXrXNwZSToRsJukAAk9dcMadG
-KXvyCMQG
-=tGli
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVKf40ACgkQFHw5/5Y0
+tywomwv/RHcA4ya++CGElDNLjR/ONx3upWIswvTkhLOWqX+cNlMv4PEVKz7difVX
+2K0Hy5DDrX4mc4WfYhgJjPgb01PUzNsFK/zvka//lXKe0xviPK9GvJXmKvZo2tKJ
+jEB635RUgt+nFyqES0YmhLArq68lOlTqRZGhIRCad2YccMjX7gcD39gaEu2vI8XN
+o1tQx5+f+dlOk4IM9wckhXz3ZmoTQzZ9r/HVjD0iVCjwGw655ARwFwv+HpZ7xCz2
+B4DBvECMj/O7VztrBGFo9GPbfwz9jqdkv7OU40pLpzqsZlewAIY+EvqMh4ZfWK2E
+9sVRDBjMxQLiDMB665KN+QVHJSPFA6XyWkUIMDPmDyBNOn0rKb9M+4aZKP83j8QX
+5KfSNds/y+j4U0h7pi7K3qSxPGCAKMdJ5ScQW9nbkEZS08Ta/JrsPbkNeQ6Qo+gt
+M0hqY8UcIMV8Z+uvvU0ubEL/e4MSUC17Lvm+2bx/X+t5kjp2UmoJMI7ys5SIIHoN
+E1aZuGwC
+=KY7d
 -----END PGP SIGNATURE-----
 
---IZumj9/5AT1MhCQq--
+--0W/56pRQfBGbzprX--
