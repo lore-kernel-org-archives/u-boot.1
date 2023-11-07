@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9002DC4332F
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 07:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42301C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 07:09:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB1AD86BD6;
-	Tue,  7 Nov 2023 08:08:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6F1E86BA4;
+	Tue,  7 Nov 2023 08:09:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fXlh5l7a";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TFHYbCZz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63BC586D3F; Tue,  7 Nov 2023 08:08:53 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 1B3F386689; Tue,  7 Nov 2023 08:09:27 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B6C486BA4
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 08:08:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15568870F2
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 08:09:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A778kK0071684;
- Tue, 7 Nov 2023 01:08:46 -0600
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A779IqU095817;
+ Tue, 7 Nov 2023 01:09:18 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699340926;
- bh=PabdkOj6ECC4tFUYd90M5peAaKcHrWB8jstvMTBA/oE=;
+ s=ti-com-17Q1; t=1699340958;
+ bh=BhPBjarg99XigSuYr1kPQL6cvZvXPPdG4XBFxk76fB0=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=fXlh5l7ahdTMvCSrseCDJF10Ynb5zPcKgoBtS3L3FGpycHWfBk8YDvTFnCBFVolL+
- 6e4821vzfhT66B5z2gSS9e8g1aLE08h+JRq6t7Z6APxI6iDDUhd9coTpH04mKwce2E
- Y0lwLlEiPRXqWwZHLrm98imbo1Np1uA2MS+AZq8M=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A778kZH024797
+ b=TFHYbCZzAmJl6SdJAt59zHV5uDmAHc4Mpkp9OxTSEUgcL65GQsE66UOEPfENSUddd
+ +llFNT8EUP3xIbW1fsCXYZ4Nhx25MEz/y81qdBFq8AdGIX+JQSZt5x2tebVPBlBR7X
+ NkpF1ZmRJjVDZzvwNyVtYo22w2BUCKvPEuqW5W44=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A779IFG025095
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 7 Nov 2023 01:08:46 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 7 Nov 2023 01:09:18 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 7
- Nov 2023 01:08:45 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 01:09:18 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 7 Nov 2023 01:08:45 -0600
+ Frontend Transport; Tue, 7 Nov 2023 01:09:18 -0600
 Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A778gco066318;
- Tue, 7 Nov 2023 01:08:42 -0600
-Message-ID: <dbc9bc65-fb87-4c5d-9989-0901f0cec2c4@ti.com>
-Date: Tue, 7 Nov 2023 12:38:41 +0530
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A778gcp066318;
+ Tue, 7 Nov 2023 01:09:15 -0600
+Message-ID: <d0bee887-a5f7-4e36-a9ef-e5af0e16b396@ti.com>
+Date: Tue, 7 Nov 2023 12:39:14 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V2 03/12] board: ti: j721e: evm: Switch to using IS_ENABLED
+Subject: Re: [PATCH V2 04/12] board: ti: j721e: j721e.env: Add explicit
+ boot_targets
 Content-Language: en-US
 To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
 CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
@@ -61,9 +62,9 @@ CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>,
  Robert Nelson <robertcnelson@gmail.com>, Jason Kridner
  <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
-References: <20231104072150.3339-1-nm@ti.com> <20231104072150.3339-4-nm@ti.com>
+References: <20231104072150.3339-1-nm@ti.com> <20231104072150.3339-5-nm@ti.com>
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231104072150.3339-4-nm@ti.com>
+In-Reply-To: <20231104072150.3339-5-nm@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -86,113 +87,26 @@ X-Virus-Status: Clean
 Hi Nishanth,
 
 On 04/11/23 12:51, Nishanth Menon wrote:
-> Switch to using IS_ENABLED() for inline function usage.
+> Add explicit boot_targets to indicate the specific boot sequence to
+> follow.
 > 
 > Signed-off-by: Nishanth Menon <nm@ti.com>
 > ---
->   board/ti/j721e/evm.c | 83 ++++++++++++++++++++++----------------------
->   1 file changed, 42 insertions(+), 41 deletions(-)
+>   board/ti/j721e/j721e.env | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> index 8f0996c32ee6..17640ae79665 100644
-> --- a/board/ti/j721e/evm.c
-> +++ b/board/ti/j721e/evm.c
-> @@ -300,53 +300,54 @@ static int probe_daughtercards(void)
->   		printf("Detected: %s rev %s\n", ep.name, ep.version);
->   		daughter_card_detect_flags[i] = true;
+> diff --git a/board/ti/j721e/j721e.env b/board/ti/j721e/j721e.env
+> index 8cc8232fc131..cb27bf5e2b24 100644
+> --- a/board/ti/j721e/j721e.env
+> +++ b/board/ti/j721e/j721e.env
+> @@ -31,6 +31,7 @@ addr_mcur5f0_0load=0x89000000
+>   name_mcur5f0_0fw=/lib/firmware/j7200-mcu-r5f0_0-fw
+>   #endif
 >   
-> -#ifndef CONFIG_SPL_BUILD
-> -		int j;
-> -		/*
-> -		 * Populate any MAC addresses from daughtercard into the U-Boot
-> -		 * environment, starting with a card-specific offset so we can
-> -		 * have multiple ext_cards contribute to the MAC pool in a well-
-> -		 * defined manner.
-> -		 */
-> -		for (j = 0; j < mac_addr_cnt; j++) {
-> -			if (!is_valid_ethaddr((u8 *)mac_addr[j]))
-> -				continue;
-> -
-> -			eth_env_set_enetaddr_by_index("eth",
-> -						      ext_cards[i].eth_offset + j,
-> -						      (uchar *)mac_addr[j]);
-> +		if (!IS_ENABLED(CONFIG_SPL_BUILD)) {
-> +			int j;
-> +			/*
-> +			 * Populate any MAC addresses from daughtercard into the U-Boot
-> +			 * environment, starting with a card-specific offset so we can
-> +			 * have multiple ext_cards contribute to the MAC pool in a well-
-> +			 * defined manner.
-> +			 */
-> +			for (j = 0; j < mac_addr_cnt; j++) {
-> +				if (!is_valid_ethaddr((u8 *)mac_addr[j]))
-> +					continue;
-> +
-> +				eth_env_set_enetaddr_by_index("eth",
-> +							      ext_cards[i].eth_offset + j,
-> +							      (uchar *)mac_addr[j]);
-> +			}
->   		}
-> -#endif
->   	}
-> -#ifndef CONFIG_SPL_BUILD
-> -	char name_overlays[1024] = { 0 };
->   
-> -	for (i = 0; i < ARRAY_SIZE(ext_cards); i++) {
-> -		if (!daughter_card_detect_flags[i])
-> -			continue;
-> +	if (!IS_ENABLED(CONFIG_SPL_BUILD)) {
-> +		char name_overlays[1024] = { 0 };
->   
-> -		/* Skip if no overlays are to be added */
-> -		if (!strlen(ext_cards[i].dtbo_name))
-> -			continue;
-> +		for (i = 0; i < ARRAY_SIZE(ext_cards); i++) {
-> +			if (!daughter_card_detect_flags[i])
-> +				continue;
->   
-> -		/*
-> -		 * Make sure we are not running out of buffer space by checking
-> -		 * if we can fit the new overlay, a trailing space to be used
-> -		 * as a separator, plus the terminating zero.
-> -		 */
-> -		if (strlen(name_overlays) + strlen(ext_cards[i].dtbo_name) + 2 >
-> -		    sizeof(name_overlays))
-> -			return -ENOMEM;
-> -
-> -		/* Append to our list of overlays */
-> -		strcat(name_overlays, ext_cards[i].dtbo_name);
-> -		strcat(name_overlays, " ");
-> -	}
-> +			/* Skip if no overlays are to be added */
-> +			if (!strlen(ext_cards[i].dtbo_name))
-> +				continue;
->   
-> -	/* Apply device tree overlay(s) to the U-Boot environment, if any */
-> -	if (strlen(name_overlays))
-> -		return env_set("name_overlays", name_overlays);
-> -#endif
-> +			/*
-> +			 * Make sure we are not running out of buffer space by checking
-> +			 * if we can fit the new overlay, a trailing space to be used
-> +			 * as a separator, plus the terminating zero.
-> +			 */
-> +			if (strlen(name_overlays) + strlen(ext_cards[i].dtbo_name) + 2 >
-> +			    sizeof(name_overlays))
-> +				return -ENOMEM;
-> +
-> +			/* Append to our list of overlays */
-> +			strcat(name_overlays, ext_cards[i].dtbo_name);
-> +			strcat(name_overlays, " ");
-> +		}
-> +
-> +		/* Apply device tree overlay(s) to the U-Boot environment, if any */
-> +		if (strlen(name_overlays))
-> +			return env_set("name_overlays", name_overlays);
-> +	}
->   
->   	return 0;
->   }
+> +boot_targets=mmc1 mmc0 usb pxe dhcp
+>   boot=mmc
+>   mmcdev=1
+>   bootpart=1:2
 
 Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
