@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C07C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 14:50:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C64C4332F
+	for <u-boot@archiver.kernel.org>; Tue,  7 Nov 2023 15:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C4E186F44;
-	Tue,  7 Nov 2023 15:49:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C49CD87134;
+	Tue,  7 Nov 2023 16:12:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E/YBqZCg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBF3B8744B; Tue,  7 Nov 2023 15:49:30 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BAEE86F44
- for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 15:49:28 +0100 (CET)
+ id EF1088715B; Tue,  7 Nov 2023 16:12:56 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id D9E3787134
+ for <u-boot@lists.denx.de>; Tue,  7 Nov 2023 16:12:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7a693d8de75so178569939f.2
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 06:49:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699368567; x=1699973367; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5i38nyv6SBhQeBrakWzEFuUv8swe5ZS+pQR7Bz3bw4k=;
- b=E/YBqZCguzlWVtJZlmBhol5v9pcaHse/bI51Y97u//n7hwwIQ1zSixGCxNEU5BPKMW
- RsTacta/BxLu5Crb9K3GNC7OanUWcLr+UTflPbqmlemk0IA8EO/9eDrRxUwVslHTVhrg
- /BkxL9dfOu+A7cxvjXUXX/gnSIkNPNslunwI4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699368567; x=1699973367;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5i38nyv6SBhQeBrakWzEFuUv8swe5ZS+pQR7Bz3bw4k=;
- b=S51ZCEewgSEyq2XPMqlWXb5F/ACJXkAuksmkQGGV+hVyGRKAy/Bl8nLZ9nBL00yVs7
- Nf+wJCDiNrpa37pnO8QzQK0iaagEQ5SSFN8BTjcdllCOpWsKG2VgnDTTwtfEFOjgLPhv
- iuzxAbhilBSJTvRdFPap2LIaltavxe9/43Bc9G9dqoKC0d7Ppq5q0f9+qrMCgnifOjOG
- yx1QLlIu3XTYzKlSSPAZvLMVUKHB/JMwTKytEDb4Gfk8lM6IlwD4PBviZxHcW7qZPBDp
- UBOtdfro77Z42tOWhfrrlEAOsQuJm9MCyhZda6R0xuCnBj7sWG8sC3sNFnoYvEsuVkk7
- Jr2g==
-X-Gm-Message-State: AOJu0YzbNV6sBsrR5gzn2hT53TbG2YLPYB+MfUVj4JoFNlOWJ1zO2oEu
- 5xO7nxFm8T6uwiZQCYVJrmDNMg==
-X-Google-Smtp-Source: AGHT+IGuAPMPz4160Dp0jN3laC5jqlwt8h1V4sWlYUiTjeuHiuIH80AFLXkvdnWNBPdOipp4V9AIzQ==
-X-Received: by 2002:a05:6602:1504:b0:792:792e:6619 with SMTP id
- g4-20020a056602150400b00792792e6619mr41182823iow.2.1699368567000; 
- Tue, 07 Nov 2023 06:49:27 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- b16-20020a05663801b000b0045a66a26208sm2815200jaq.128.2023.11.07.06.49.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 06:49:26 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: linux-arm-kernel@lists.infradead.org
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
- Masahiro Yamada <masahiroy@kernel.org>, Simon Glass <sjg@chromium.org>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, Nick Terrell <terrelln@fb.com>,
- Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
- linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v4 3/3] arm64: boot: Support Flat Image Tree
-Date: Tue,  7 Nov 2023 07:48:51 -0700
-Message-ID: <20231107144917.48304-4-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
-In-Reply-To: <20231107144917.48304-1-sjg@chromium.org>
-References: <20231107144917.48304-1-sjg@chromium.org>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C56713D5;
+ Tue,  7 Nov 2023 07:13:37 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 034B33F703;
+ Tue,  7 Nov 2023 07:12:50 -0800 (PST)
+Date: Tue, 7 Nov 2023 15:12:48 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
+ <rick@andestech.com>, Leo <ycliang@andestech.com>, Anup Patel
+ <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>, Chanho Park
+ <chanho61.park@samsung.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ u-boot@lists.denx.de, Peter Hoyes <Peter.Hoyes@arm.com>, Alexey Romanov
+ <avromanov@salutedevices.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Sean Anderson <sean.anderson@seco.com>
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Message-ID: <20231107151248.0c6247c4@donnerap.manchester.arm.com>
+In-Reply-To: <CAPnjgZ1eMxbJGhxSGF1NgCELz+MOoPK0k3hsB-hzEXTo0=3szQ@mail.gmail.com>
+References: <20231031125552.26698-1-heinrich.schuchardt@canonical.com>
+ <20231101170559.680ab493@donnerap.manchester.arm.com>
+ <50ff2080-5831-4963-937d-331248b59973@canonical.com>
+ <CAPnjgZ1gPRQiEq8=tVCtC6wznOWXX2bLaimSwd73=74oEWAXYQ@mail.gmail.com>
+ <20231104171212.3d041a4f@slackpad.lan>
+ <CAPnjgZ1X8R4h24pP1zoqEADTbntm5Yo2YqfMTePVqbHoJMx_vA@mail.gmail.com>
+ <20231106172601.12c36750@donnerap.manchester.arm.com>
+ <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
+ <20231106215331.0d770df8@slackpad.lan>
+ <CAPnjgZ2GY8o_UR-rqYOimYe1t_NV+6eAa8rZY3Eaak6vp7Vciw@mail.gmail.com>
+ <20231107112708.4030f2e1@donnerap.manchester.arm.com>
+ <CAPnjgZ1eMxbJGhxSGF1NgCELz+MOoPK0k3hsB-hzEXTo0=3szQ@mail.gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,459 +74,460 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a script which produces a Flat Image Tree (FIT), a single file
-containing the built kernel and associated devicetree files.
-Compression defaults to gzip which gives a good balance of size and
-performance.
+On Tue, 7 Nov 2023 05:22:58 -0700
+Simon Glass <sjg@chromium.org> wrote:
 
-The files compress from about 86MB to 24MB using this approach.
+Hi Simon,
 
-The FIT can be used by bootloaders which support it, such as U-Boot
-and Linuxboot. It permits automatic selection of the correct
-devicetree, matching the compatible string of the running board with
-the closest compatible string in the FIT. There is no need for
-filenames or other workarounds.
+> Hi Andre,
+> 
+> On Tue, 7 Nov 2023 at 04:27, Andre Przywara <andre.przywara@arm.com>
+> wrote:
+> >
+> > On Tue, 7 Nov 2023 01:08:15 +0000
+> > Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Simon,
+> >  
+> > > On Mon, 6 Nov 2023 at 21:55, Andre Przywara <andre.przywara@arm.com>
+> > > wrote:  
+> > > >
+> > > > On Mon, 6 Nov 2023 13:38:39 -0700
+> > > > Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >  
+> > > > > On Mon, 6 Nov 2023 at 10:26, Andre Przywara
+> > > > > <andre.przywara@arm.com> wrote:  
+> > > > > >
+> > > > > > On Sat, 4 Nov 2023 19:45:06 +0000
+> > > > > > Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi,
+> > > > > >  
+> > > > > > > On Sat, 4 Nov 2023 at 17:13, Andre Przywara
+> > > > > > > <andre.przywara@arm.com> wrote:  
+> > > > > > > >
+> > > > > > > > On Fri, 3 Nov 2023 13:38:58 -0600
+> > > > > > > > Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Simon,
+> > > > > > > >  
+> > > > > > > > > Hi Heinrich,
+> > > > > > > > >
+> > > > > > > > > On Wed, 1 Nov 2023 at 14:20, Heinrich Schuchardt
+> > > > > > > > > <heinrich.schuchardt@canonical.com> wrote:  
+> > > > > > > > > >
+> > > > > > > > > > On 11/1/23 19:05, Andre Przywara wrote:  
+> > > > > > > > > > > On Tue, 31 Oct 2023 14:55:50 +0200
+> > > > > > > > > > > Heinrich Schuchardt
+> > > > > > > > > > > <heinrich.schuchardt@canonical.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > Hi Heinrich,
+> > > > > > > > > > >  
+> > > > > > > > > > >> The Zkr ISA extension (ratified Nov 2021)
+> > > > > > > > > > >> introduced the seed CSR. It provides an interface
+> > > > > > > > > > >> to a physical entropy source.
+> > > > > > > > > > >>
+> > > > > > > > > > >> A RNG driver based on the seed CSR is provided. It
+> > > > > > > > > > >> depends on mseccfg.sseed being set in the SBI
+> > > > > > > > > > >> firmware.  
+> > > > > > > > > > >
+> > > > > > > > > > > As you might have seen, I added a similar driver for
+> > > > > > > > > > > the respective Arm functionality:
+> > > > > > > > > > > https://lore.kernel.org/u-boot/20230830113230.3925868-1-andre.przywara@arm.com/
+> > > > > > > > > > >
+> > > > > > > > > > > And I see that you seem to use the same mechanism to
+> > > > > > > > > > > probe and init the driver: U_BOOT_DRVINFO and fail
+> > > > > > > > > > > in probe() if the feature is not implemented.
+> > > > > > > > > > > One downside of this approach is that the driver is
+> > > > > > > > > > > always loaded (and visible in the DM tree), even
+> > > > > > > > > > > with the feature not being available. That doesn't
+> > > > > > > > > > > seem too much of a problem on the first glance, but
+> > > > > > > > > > > it occupies a device number, and any subsequent
+> > > > > > > > > > > other DM_RNG devices (like virtio-rng) typically get
+> > > > > > > > > > > higher device numbers. So without the feature, but
+> > > > > > > > > > > with virtio-rng, I get: VExpress64# rng 0 No RNG
+> > > > > > > > > > > device  
+> > > > > > > > >
+> > > > > > > > > Why do we get this? If the device is not there, the
+> > > > > > > > > bind() function can return -ENODEV
+> > > > > > > > >
+> > > > > > > > > I see this in U-Boot:
+> > > > > > > > >
+> > > > > > > > > U_BOOT_DRVINFO(cpu_arm_rndr) = {
+> > > > > > > > >
+> > > > > > > > > We should not use this.  
+> > > > > > > >
+> > > > > > > > Agreed.
+> > > > > > > >  
+> > > > > > > > > Use the devicetree.  
+> > > > > > > >
+> > > > > > > > No, this is definitely not something for the DT, at least
+> > > > > > > > not on ARM. It's perfectly discoverable via the
+> > > > > > > > architected CPU ID registers. Similar to PCI and USB
+> > > > > > > > devices, which we don't probe via the DT as well.
+> > > > > > > >
+> > > > > > > > It's arguably not proper "driver" material per se, as I've
+> > > > > > > > argued before, but it's the simplest solution and fits in
+> > > > > > > > nicely otherwise.
+> > > > > > > >
+> > > > > > > > I was wondering if it might be something for UCLASS_CPU,
+> > > > > > > > something like a "CPU feature bus": to let devices
+> > > > > > > > register on one on the many CPU features (instead of
+> > > > > > > > compatible strings), then only bind() those drivers it the
+> > > > > > > > respective bit is set.
+> > > > > > > >
+> > > > > > > > Does that make sense? Would that be doable without boiling
+> > > > > > > > the ocean? As I don't know if we see many users apart from
+> > > > > > > > this.  
+> > > > > > >
+> > > > > > > I have seen this so many times, where people want to avoid
+> > > > > > > putting things in the DT and then are surprised that
+> > > > > > > everything is difficult, broken and confusing. Why not just
+> > > > > > > follow the rules? It is not just about whether we can avoid
+> > > > > > > it, etc. It is about how devices fit together cohesively in
+> > > > > > > the system, and how U-Boot operates.  
+> > > > > >
+> > > > > > A devicetree is only for peripherals *that cannot be located
+> > > > > > by probing*.  
+> > > > >
+> > > > > I have to stop you there. It absolutely is not limited to that.  
+> > > >
+> > > > I am very sorry, but I - (and seemingly everyone else in the
+> > > > kernel DT community?) - seem to disagree here.  
+> > >
+> > > Really? Where is that even coming from? Certainly not the DT spec.  
+> >
+> > It seems to be common agreement between devicetree folks, and I find
+> > it in one of Frank Roward's slidedeck about devicetree in the early
+> > days (2015ish). But indeed this should be added to official documents.
+> > I poked some people to get this sorted.  
+> 
+> Yes I recall those dark days but it is not actually correct. That sort
+> of restriction would be very destructive, in fact.
+> 
+> Even if you look at all the PCI stuff you can see that specifying
+> probe-able stuff in the DT is fine.
 
-Add a 'make image.fit' build target for arm64, as well.
+In the recent PCI case this is exactly about non-probe-able stuff:
+"This is the groundwork for applying overlays to PCI devices containing
+non-discoverable downstream devices."
+And if I understand this correctly, this is for generating DT nodes in the
+live OF tree only, during kernel runtime?
 
-The FIT can be examined using 'dumpimage -l'.
+But yes, there are exceptions from that rule, be it for quirks, or
+if you need further integration information, like an interrupt, as used
+for the Arm Generic Timer (aka arch timer) or the Arm PMU.
+But in those cases there is always a good reason, and then a binding is
+accepted.
+But in general: no, if we can safely probe it, we don't want a DT node.
 
-This features requires pylibfdt (use 'pip install libfdt'). It also
-requires compression utilities for the algorithm being used. Supported
-compression options are the same as the Image.xxx files. For now there
-is no way to change the compression other than by editing the rule for
-$(obj)/image.fit
+> > > > > > Which are traditionally most peripherals in non-server Arm
+> > > > > > SoCs. While I do love the DT, the best DT node is the one you
+> > > > > > don't need.  
+> > > > >
+> > > > > We need it in U-Boot, at least.
+> > > > >
+> > > > > I'll send a patch with a warning on U_BOOT_DRVINFO() as it seems
+> > > > > that some people did not see the header-file comment.  
+> > > >
+> > > > Fair enough.
+> > > >  
+> > > > > Let's just stop this discussion and instead talk about the
+> > > > > binding we need.  
+> > > >
+> > > > Alright, if that is your decision, I will send a patch to revert
+> > > > that "driver". There will never be a binding for a CPU instruction
+> > > > discoverable by the architected CPU ID register.  
+> > >
+> > > That statement just mystifies me. Why not just send a binding? Even
+> > > the people that complain that DT should only describe hardware will
+> > > be happy with it.
+> > >
+> > > The code you sent should have been a clue that you need to know
+> > > whether the feature is present:  
+> >
+> > Ah, sorry, I sense some misunderstanding: I was arguing about the ARM
+> > RNDR driver. The Arm architecture manual describes the FEAT_RNG
+> > feature as perfectly discoverable, in a clean way, without any risk or
+> > further knowledge about the platform.
+> >
+> > This thread here was originally about the RISC-V driver (written by
+> > Heinrich), where the situation is slightly different: while there seem
+> > to be CSRs to discover CPU features, this is apparently not the case
+> > for every instruction. So Heinrich did some probing, testing for an
+> > illegal instruction, which honestly still sounds better than a DT node
+> > to me. 
+> > > +       /* Check if reading seed leads to interrupt */
+> > > +       set_resume(&resume);
+> > > +       ret = setjmp(resume.jump);
+> > > +       if (ret)
+> > > +               log_debug("Exception %ld reading seed CSR\n",
+> > > resume.code);
+> > > +       else
+> > > +               val = read_seed();
+> > > +       set_resume(NULL);
+> > > +       if (ret)
+> > > +               return -ENODEV;
+> > >
+> > > I have never seen code like that in a driver. Please let's just have
+> > > the binding discussion with the Linux people and hopefully they will
+> > > see reason.  
+> >
+> > For the RISC-V case: maybe. But there is already a (newish) binding to
+> > list CPU features in the DT:
+> > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/riscv/extensions.yaml
+> > It's just not a normal device node binding, with a compatible string,
+> > instead a string list inside each CPU's node.  
+> 
+> Hmm so each CPU has its own random-number generator?
 
-While FIT supports a ramdisk / initrd, no attempt is made to support
-this here, since it must be built separately from the Linux build.
+Don't know what you mean? How those CPU instructions typically work is
+that there are generic *architected* instructions or system registers,
+described by the official ARMv8.5 FEAT_RNG, in this case, while the
+actual entropy source is provided by the integrator. So it's a common
+interface to whatever TRNG the SoC might already have anyway.
+And one reason for this feature was to exactly do away with the device
+specific interfaces and discovery, and allow easy access for any user.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> > So one possibility would be some connector code that parses that list
+> > and looks for drivers having registered? Like a CPU bus, I think Sean
+> > proposed something like this earlier. Or we ditch the idea of this
+> > being a regular driver in the first place, instead go with a "CPU
+> > entropy instruction abstraction".
+> >
+> > But for Arm it's a different story.  
+> 
+> The key thing here is that U-Boot (mostly) needs to have a DT node for
+> each device it creates.
 
-Changes in v4:
-- Use single quotes for UIMAGE_NAME
+That's a (current?) U-Boot design decision, unrelated to the hardware it
+describes. Hence nothing that really justifies a hardware DTB description.
 
-Changes in v3:
-- Drop temporary file image.itk
-- Drop patch 'Use double quotes for image name'
-- Drop double quotes in use of UIMAGE_NAME
-- Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-- Avoid hard-coding "arm64" for the DT architecture
+> In the case of a random-number generator, there can be several devices
+> in the system.
 
-Changes in v2:
-- Drop patch previously applied
-- Add .gitignore file
-- Move fit rule to Makefile.lib using an intermediate file
-- Drop dependency on CONFIG_EFI_ZBOOT
-- Pick up .dtb files separately from the kernel
-- Correct pylint too-many-args warning for write_kernel()
-- Include the kernel image in the file count
-- Add a pointer to the FIT spec and mention of its wide industry usage
-- Mention the kernel version in the FIT description
+Yes, and others (Linux, for instance) can apparently just cope fine with
+this.
 
- MAINTAINERS                |   7 +
- arch/arm64/Makefile        |   3 +-
- arch/arm64/boot/.gitignore |   1 +
- arch/arm64/boot/Makefile   |   6 +-
- scripts/Makefile.lib       |  16 ++
- scripts/make_fit.py        | 289 +++++++++++++++++++++++++++++++++++++
- 6 files changed, 320 insertions(+), 2 deletions(-)
- create mode 100755 scripts/make_fit.py
+> We want to control which one is used for a particular feature.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 466298fe9f65..d260ccb847e5 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1577,6 +1577,13 @@ F:	Documentation/process/maintainer-soc*.rst
- F:	arch/arm/boot/dts/Makefile
- F:	arch/arm64/boot/dts/Makefile
- 
-+ARM64 FIT SUPPORT
-+M:	Simon Glass <sjg@chromium.org>
-+L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
-+S:	Maintained
-+F:	arch/arm64/boot/Makefile
-+F:	scripts/make_fit.py
-+
- ARM ARCHITECTED TIMER DRIVER
- M:	Mark Rutland <mark.rutland@arm.com>
- M:	Marc Zyngier <maz@kernel.org>
-diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-index 7b77b63e978f..9ebd7612b181 100644
---- a/arch/arm64/Makefile
-+++ b/arch/arm64/Makefile
-@@ -150,7 +150,7 @@ libs-$(CONFIG_EFI_STUB) += $(objtree)/drivers/firmware/efi/libstub/lib.a
- # Default target when executing plain make
- boot		:= arch/arm64/boot
- 
--BOOT_TARGETS	:= Image.gz vmlinuz.efi
-+BOOT_TARGETS	:= Image.gz vmlinuz.efi image.fit
- 
- PHONY += $(BOOT_TARGETS)
- 
-@@ -215,6 +215,7 @@ virtconfig:
- define archhelp
-   echo  '* Image.gz      - Compressed kernel image (arch/$(ARCH)/boot/Image.gz)'
-   echo  '  Image         - Uncompressed kernel image (arch/$(ARCH)/boot/Image)'
-+  echo  '  image.fit     - Flat Image Tree (arch/$(ARCH)/boot/image.fit)'
-   echo  '  install       - Install uncompressed kernel'
-   echo  '  zinstall      - Install compressed kernel'
-   echo  '                  Install using (your) ~/bin/installkernel or'
-diff --git a/arch/arm64/boot/.gitignore b/arch/arm64/boot/.gitignore
-index af5dc61f8b43..abaae9de1bdd 100644
---- a/arch/arm64/boot/.gitignore
-+++ b/arch/arm64/boot/.gitignore
-@@ -2,3 +2,4 @@
- Image
- Image.gz
- vmlinuz*
-+image.fit
-diff --git a/arch/arm64/boot/Makefile b/arch/arm64/boot/Makefile
-index 1761f5972443..b835c0880d1c 100644
---- a/arch/arm64/boot/Makefile
-+++ b/arch/arm64/boot/Makefile
-@@ -16,7 +16,8 @@
- 
- OBJCOPYFLAGS_Image :=-O binary -R .note -R .note.gnu.build-id -R .comment -S
- 
--targets := Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo Image.zst
-+targets := Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo \
-+	Image.zst image.fit
- 
- $(obj)/Image: vmlinux FORCE
- 	$(call if_changed,objcopy)
-@@ -39,6 +40,9 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
- $(obj)/Image.zst: $(obj)/Image FORCE
- 	$(call if_changed,zstd)
- 
-+$(obj)/image.fit: $(obj)/Image FORCE
-+	$(call cmd,fit)
-+
- EFI_ZBOOT_PAYLOAD	:= Image
- EFI_ZBOOT_BFD_TARGET	:= elf64-littleaarch64
- EFI_ZBOOT_MACH_TYPE	:= ARM64
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 1a965fe68e01..2a354b597846 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -496,6 +496,22 @@ quiet_cmd_uimage = UIMAGE  $@
- 			-a $(UIMAGE_LOADADDR) -e $(UIMAGE_ENTRYADDR) \
- 			-n '$(UIMAGE_NAME)' -d $< $@
- 
-+# Flat Image Tree (FIT)
-+# This allows for packaging of a kernel and all devicetrees files, using
-+# compression.
-+# ---------------------------------------------------------------------------
-+
-+MAKE_FIT := $(srctree)/scripts/make_fit.py
-+
-+quiet_cmd_fit = FIT     $@
-+      cmd_fit = $(MAKE_FIT) -f $@ --arch $(UIMAGE_ARCH) --os linux \
-+			--name '$(UIMAGE_NAME)' \
-+			--compress $(UIMAGE_COMPRESSION) -k $< \
-+			$(dir $<)/dts
-+
-+$(obj)/%.fit: $(obj)/%.itk $(MAKE_FIT) FORCE
-+	$(call if_changed,fit,gzip)
-+
- # XZ
- # ---------------------------------------------------------------------------
- # Use xzkern to compress the kernel image and xzmisc to compress other things.
-diff --git a/scripts/make_fit.py b/scripts/make_fit.py
-new file mode 100755
-index 000000000000..e1059825de9c
---- /dev/null
-+++ b/scripts/make_fit.py
-@@ -0,0 +1,289 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright 2023 Google LLC
-+# Written by Simon Glass <sjg@chromium.org>
-+#
-+
-+"""Build a FIT containing a lot of devicetree files
-+
-+Usage:
-+    make_fit.py -A arm64 -n 'Linux-6.6' -O linux
-+        -f arch/arm64/boot/image.fit -k /tmp/kern/arch/arm64/boot/image.itk
-+        /tmp/kern/arch/arm64/boot/dts/ -E -c gzip
-+
-+Creates a FIT containing the supplied kernel and a directory containing the
-+devicetree files.
-+
-+Use -E to generate an external FIT (where the data is placed after the
-+FIT data structure). This allows parsing of the data without loading
-+the entire FIT.
-+
-+Use -c to compress the data, using bzip2, gzip, lz4, lzma, lzo and
-+zstd
-+
-+The resulting FIT can be booted by bootloaders which support FIT, such
-+as U-Boot, Linuxboot, Tianocore, etc.
-+
-+Note that this tool does not yet support adding a ramdisk / initrd.
-+"""
-+
-+import argparse
-+import collections
-+import os
-+import subprocess
-+import sys
-+import tempfile
-+import time
-+
-+import libfdt
-+
-+
-+# Tool extension and the name of the command-line tools
-+CompTool = collections.namedtuple('CompTool', 'ext,tools')
-+
-+COMP_TOOLS = {
-+    'bzip2': CompTool('.bz2', 'bzip2'),
-+    'gzip': CompTool('.gz', 'pigz,gzip'),
-+    'lz4': CompTool('.lz4', 'lz4'),
-+    'lzma': CompTool('.lzma', 'lzma'),
-+    'lzo': CompTool('.lzo', 'lzop'),
-+    'zstd': CompTool('.zstd', 'zstd'),
-+}
-+
-+def parse_args():
-+    """Parse the program ArgumentParser
-+
-+    Returns:
-+        Namespace object containing the arguments
-+    """
-+    epilog = 'Build a FIT from a directory tree containing .dtb files'
-+    parser = argparse.ArgumentParser(epilog=epilog)
-+    parser.add_argument('-A', '--arch', type=str, required=True,
-+          help='Specifies the architecture')
-+    parser.add_argument('-c', '--compress', type=str, default='none',
-+          help='Specifies the compression')
-+    parser.add_argument('-E', '--external', action='store_true',
-+          help='Convert the FIT to use external data')
-+    parser.add_argument('-n', '--name', type=str, required=True,
-+          help='Specifies the name')
-+    parser.add_argument('-O', '--os', type=str, required=True,
-+          help='Specifies the operating system')
-+    parser.add_argument('-f', '--fit', type=str, required=True,
-+          help='Specifies the output file (.fit)')
-+    parser.add_argument('-k', '--kernel', type=str, required=True,
-+          help='Specifies the (uncompressed) kernel input file (.itk)')
-+    parser.add_argument('srcdir', type=str, nargs='*',
-+          help='Specifies the directory tree that contains .dtb files')
-+
-+    return parser.parse_args()
-+
-+def setup_fit(fsw, name):
-+    """Make a start on writing the FIT
-+
-+    Outputs the root properties and the 'images' node
-+
-+    Args:
-+        fsw (libfdt.FdtSw): Object to use for writing
-+        name (str): Name of kernel image
-+    """
-+    fsw.INC_SIZE = 65536
-+    fsw.finish_reservemap()
-+    fsw.begin_node('')
-+    fsw.property_string('description', f'{name} with devicetree set')
-+    fsw.property_u32('#address-cells', 1)
-+
-+    fsw.property_u32('timestamp', int(time.time()))
-+    fsw.begin_node('images')
-+
-+
-+def write_kernel(fsw, data, args):
-+    """Write out the kernel image
-+
-+    Writes a kernel node along with the required properties
-+
-+    Args:
-+        fsw (libfdt.FdtSw): Object to use for writing
-+        data (bytes): Data to write (possibly compressed)
-+        args (Namespace): Contains necessary strings:
-+            arch: FIT architecture, e.g. 'arm64'
-+            fit_os: Operating Systems, e.g. 'linux'
-+            name: Name of OS, e.g. 'Linux-6.6.0-rc7'
-+            compress: Compression algorithm to use, e.g. 'gzip'
-+    """
-+    with fsw.add_node('kernel'):
-+        fsw.property_string('description', args.name)
-+        fsw.property_string('type', 'kernel_noload')
-+        fsw.property_string('arch', args.arch)
-+        fsw.property_string('os', args.os)
-+        fsw.property_string('compression', args.compress)
-+        fsw.property('data', data)
-+        fsw.property_u32('load', 0)
-+        fsw.property_u32('entry', 0)
-+
-+
-+def finish_fit(fsw, entries):
-+    """Finish the FIT ready for use
-+
-+    Writes the /configurations node and subnodes
-+
-+    Args:
-+        fsw (libfdt.FdtSw): Object to use for writing
-+        entries (list of tuple): List of configurations:
-+            str: Description of model
-+            str: Compatible stringlist
-+    """
-+    fsw.end_node()
-+    seq = 0
-+    with fsw.add_node('configurations'):
-+        for model, compat in entries:
-+            seq += 1
-+            with fsw.add_node(f'conf-{seq}'):
-+                fsw.property('compatible', bytes(compat))
-+                fsw.property_string('description', model)
-+                fsw.property_string('fdt', f'fdt-{seq}')
-+                fsw.property_string('kernel', 'kernel')
-+    fsw.end_node()
-+
-+
-+def compress_data(inf, compress):
-+    """Compress data using a selected algorithm
-+
-+    Args:
-+        inf (IOBase): Filename containing the data to compress
-+        compress (str): Compression algorithm, e.g. 'gzip'
-+
-+    Return:
-+        bytes: Compressed data
-+    """
-+    if compress == 'none':
-+        return inf.read()
-+
-+    comp = COMP_TOOLS.get(compress)
-+    if not comp:
-+        raise ValueError(f"Unknown compression algorithm '{compress}'")
-+
-+    with tempfile.NamedTemporaryFile() as comp_fname:
-+        with open(comp_fname.name, 'wb') as outf:
-+            done = False
-+            for tool in comp.tools.split(','):
-+                try:
-+                    subprocess.call([tool, '-c'], stdin=inf, stdout=outf)
-+                    done = True
-+                    break
-+                except FileNotFoundError:
-+                    pass
-+            if not done:
-+                raise ValueError(f'Missing tool(s): {comp.tools}\n')
-+            with open(comp_fname.name, 'rb') as compf:
-+                comp_data = compf.read()
-+    return comp_data
-+
-+
-+def output_dtb(fsw, seq, fname, arch, compress):
-+    """Write out a single devicetree to the FIT
-+
-+    Args:
-+        fsw (libfdt.FdtSw): Object to use for writing
-+        seq (int): Sequence number (1 for first)
-+        fmame (str): Filename containing the DTB
-+        arch: FIT architecture, e.g. 'arm64'
-+        compress (str): Compressed algorithm, e.g. 'gzip'
-+
-+    Returns:
-+        tuple:
-+            str: Model name
-+            bytes: Compatible stringlist
-+    """
-+    with fsw.add_node(f'fdt-{seq}'):
-+        # Get the compatible / model information
-+        with open(fname, 'rb') as inf:
-+            data = inf.read()
-+        fdt = libfdt.FdtRo(data)
-+        model = fdt.getprop(0, 'model').as_str()
-+        compat = fdt.getprop(0, 'compatible')
-+
-+        fsw.property_string('description', model)
-+        fsw.property_string('type', 'flat_dt')
-+        fsw.property_string('arch', arch)
-+        fsw.property_string('compression', compress)
-+        fsw.property('compatible', bytes(compat))
-+
-+        with open(fname, 'rb') as inf:
-+            compressed = compress_data(inf, compress)
-+        fsw.property('data', compressed)
-+    return model, compat
-+
-+
-+def build_fit(args):
-+    """Build the FIT from the provided files and arguments
-+
-+    Args:
-+        args (Namespace): Program arguments
-+
-+    Returns:
-+        tuple:
-+            bytes: FIT data
-+            int: Number of configurations generated
-+            size: Total uncompressed size of data
-+    """
-+    fsw = libfdt.FdtSw()
-+    setup_fit(fsw, args.name)
-+    seq = 0
-+    size = 0
-+    entries = []
-+
-+    # Handle the kernel
-+    with open(args.kernel, 'rb') as inf:
-+        comp_data = compress_data(inf, args.compress)
-+    size += os.path.getsize(args.kernel)
-+    write_kernel(fsw, comp_data, args)
-+
-+    for path in args.srcdir:
-+        # Handle devicetree files
-+        if os.path.isdir(path):
-+            for dirpath, _, fnames in os.walk(path):
-+                for fname in fnames:
-+                    if os.path.splitext(fname)[1] != '.dtb':
-+                        continue
-+                    pathname = os.path.join(dirpath, fname)
-+                    seq += 1
-+                    size += os.path.getsize(pathname)
-+                    model, compat = output_dtb(fsw, seq, pathname,
-+                                               args.arch, args.compress)
-+                    entries.append([model, compat])
-+
-+    finish_fit(fsw, entries)
-+
-+    # Include the kernel itself in the returned file count
-+    return fsw.as_fdt().as_bytearray(), seq + 1, size
-+
-+
-+def run_make_fit():
-+    """Run the tool's main logic"""
-+    args = parse_args()
-+
-+    out_data, count, size = build_fit(args)
-+    with open(args.fit, 'wb') as outf:
-+        outf.write(out_data)
-+
-+    ext_fit_size = None
-+    if args.external:
-+        mkimage = os.environ.get('MKIMAGE', 'mkimage')
-+        subprocess.check_call([mkimage, '-E', '-F', args.fit],
-+                              stdout=subprocess.DEVNULL)
-+
-+        with open(args.fit, 'rb') as inf:
-+            data = inf.read()
-+        ext_fit = libfdt.FdtRo(data)
-+        ext_fit_size = ext_fit.totalsize()
-+
-+    comp_size = len(out_data)
-+    print(f'FIT size {comp_size:#x}/{comp_size / 1024 / 1024:.1f} MB', end='')
-+    if ext_fit_size:
-+        print(f', header {ext_fit_size:#x}/{ext_fit_size / 1024:.1f} KB', end='')
-+    print(f', {count} files, uncompressed {size / 1024 / 1024:.1f} MB')
-+
-+
-+if __name__ == "__main__":
-+    sys.exit(run_make_fit())
--- 
-2.42.0.869.gea05f2083d-goog
+So that means it's a policy decision, which might even differ between
+different users with different needs. So again not hardware related.
+
+> This is normally done with aliases, or with a phandle from the feature
+> that uses it.
+
+Well, aliases and phandles are DT features, so naturally apply to devices
+in the DT. But that doesn't mean we need to shoehorn everything into some
+DT.
+And part of that is policy again, so doesn't really belong in the
+*hardware* DT.
+
+> > > > I had some gripes with that "driver" in the first place, but it
+> > > > was so temptingly simple and fit in so nicely, for instance into
+> > > > the UEFI entropy service without even touching that code, that I
+> > > > couldn't resist to just try it. And it actually solved a nasty
+> > > > problem for us, where the kernel boot was stuck for minutes
+> > > > waiting for enough entropy to ... let a script create a random
+> > > > filename ;-) But we also have virtio-rng, so are not limited to
+> > > > the instructions.
+> > > >
+> > > > But well, I guess I will just bite the bullet and go along the
+> > > > proper route and create some RNG instruction abstraction, as
+> > > > sketched in that other email.  
+> > >
+> > > I don't know what that is.  
+> >
+> > That's what Tom and I were talking about earlier:
+> > ... "a simple get_cpu_random() function, implemented per architecture,
+> > and with some kind of success flag, should be easy enough to do. Then
+> > either the users (UEFI?) explicitly call this before trying
+> > UCLASS_RNG, or we wrap this for every RNG user."  
+> 
+> That doesn't solve the problem, though. The TPM may provide random
+> numbers. There may be some other crypto thing, or even a remoteproc
+> interface.
+
+Yes, or a PCI based entropy source, which would have a normal driver, but
+no DT as well. And anyway you might expose this via a driver, but I don't
+see why every device must be described in the DT.
+
+> We already have a perfectly good way of selecting between multiple
+> devices. It is used all over U-Boot. We should not be inventing a
+> hard-coded hack just because we are confused about whether something
+> is a device. Just make it a device.
+
+And this is exactly what my ARM RNDR driver was doing: using a
+UCLASS_RNG driver interface to expose entropy. I just don't understand why
+we desperately need a DT node for that? I understand that U_BOOT_DRVINFO
+should not be used, and this is fine.
+So if you don't like the Linux style approach of treating CPU instructions
+separately, that's fair enough, but I also don't see why a U-Boot DM
+driver must be DT only.
+
+> > > In the other email I proposed a binding for this, so I hope that can
+> > > make progress.  
+> >
+> > I don't think we need a new DT binding for RISC-V, instead lean on
+> > riscv,isa-extensions.  
+> 
+> IMO we do need a new DT binding for the reasons given above.
+
+I don't agree, the current binding gives you perfect discoverability, just
+not via the usual compatible string search. But that's some discussion for
+the DT maintainers anyway ...
+
+> > And I am pretty sure any attempt at a binding for ARM will be NAKed
+> > immediately.  
+> 
+> Well perhaps you can help resolve that, which seems to be the core
+> issue here. I hope you can understand my frustration at this sort of
+> tactic. It is quite destructive. U-Boot has suffered for years from an
+> inability to upstream bindings. It has been a significant drag on the
+> project and its contributors. We need to change the conversation here
+> and permit non-Linux projects to contribute to bindings for
+> firmware-specific reasons, even ones which Linux doesn't care about.
+
+The Linux kernel repo does accept bindings for devices that Linux doesn't
+have or need a driver for (DRAM controllers, for instance). If you look at
+DT binding patch submissions, maintainers routinely object the word
+"driver" or even the mentioning of "Linux" in there, because the binding
+is user agnostic and not bound to a Linux driver at all. And the DT
+maintainers are very clear that those are not the the "Linux DT bindings",
+but that the Linux kernel community is just the place that provides the
+review experience and the infrastructure to host the binding files.
+
+So in those cases I don't think it's about the DT maintainers being
+hostile or unreasonable, it's just a general problem of some requests being
+out of scope of a *hardware* DTB.
+
+> A clear statement to that effect would put my mind at ease. It just
+> shouldn't be this hard.
+
+I can't help to think that you like the FDT as a well understood and
+flexible general purpose data structure. And it can indeed be used as a
+configuration file, especially since you have the parser in your code
+already - the FIT image is a good example. But this is distinct from the
+Devicetree as a hardware description.
+Would it help to separate the two use cases: to go with one DTB that is
+strictly for hardware configuration, as described by the DT bindings in
+the Linux kernel tree, and a *separate* DT blob that carries configuration
+information, U-Boot specific data (like memory layout, SRAM usage, device
+priorities, packaging information)? TF-A chose this approach: there is
+hw-config, which is the hardware DTB, and there is fw-config, which is a
+FDT blob as well, but describes the firmware layout and other configuration
+information.
+
+Cheers,
+Andre
+
+> > > > > > But as Heinrich also said: those instructions are not
+> > > > > > peripherals, they are part of an instruction set extensions,
+> > > > > > the same story as with x86's RDRAND instruction. We don't have
+> > > > > > those in ACPI or so as well, because CPUID has you covered.
+> > > > > > The same on ARM, ID_AA64ISAR0_EL1 is readable on every chip
+> > > > > > (outside of EL0), and tells you whether you have the RNDR
+> > > > > > register or not. IIUC RISC-V is slightly different here, since
+> > > > > > not all ISA extensions are covered by CSRs, hence some of them
+> > > > > > indeed listed in the DT.
+> > > > > >
+> > > > > > So a proper solution(TM) would be to split this up in
+> > > > > > architectural *instructions* and proper TRNG *devices*, maybe
+> > > > > > wrapping this up in some function that tests both. This is
+> > > > > > roughly what the kernel does, somewhat abstracted by the
+> > > > > > concept of "entropy sources", which could be TRNG devices, CPU
+> > > > > > instructions, interrupt jitter or even "instruction execution
+> > > > > > jitter"[1], with the latter two definitely not being devices
+> > > > > > really at all.
+> > > > > >
+> > > > > > But I don't know if U-Boot wants to go through the hassle of
+> > > > > > this whole framework, as we tend to implement things much
+> > > > > > easier. But a simple get_cpu_random() function, implemented
+> > > > > > per architecture, and with some kind of success flag, should
+> > > > > > be easy enough to do. Then either the users (UEFI?) explicitly
+> > > > > > call this before trying UCLASS_RNG, or we wrap this for every
+> > > > > > RNG user.
+> > > > > >
+> > > > > > Cheers,
+> > > > > > Andre
+> > > > > >  
+> > > > > > > > > > > VExpress64# rng 1
+> > > > > > > > > > > 00000000: f3 88 b6 d4 24 da 49 ca 49 f7 9e 66 5f 12
+> > > > > > > > > > > 07 b2  ....$.I.I..f_...  
+> > > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > Essentially in any case were you have multiple drivers
+> > > > > > > > > > for the same device using uclass_get_device(, 0, ) and
+> > > > > > > > > > uclass_find_first_device() will only give you the
+> > > > > > > > > > first bound device and not the first successfully
+> > > > > > > > > > probed device. Furthermore neither of this functions
+> > > > > > > > > > causes probing. This is not restricted to the RNG
+> > > > > > > > > > drivers but could also happen with multiple TPM
+> > > > > > > > > > drivers or multiple watchdogs.
+> > > > > > > > > >
+> > > > > > > > > > This patch is related to the problem:
+> > > > > > > > > >
+> > > > > > > > > > [PATCH v1] rng: add dm_rng_read_default() helper
+> > > > > > > > > > https://lore.kernel.org/u-boot/4e28a388-f5b1-4cf7-b0e3-b12a876d0567@gmx.de/T/#me44263ec9141e3ea65ee232aa9a411fc6201bd95
+> > > > > > > > > >
+> > > > > > > > > > We have weak function platform_get_rng_device() which
+> > > > > > > > > > should be moved to drivers/rng/rng-uclass.c.
+> > > > > > > > > >
+> > > > > > > > > > We could add a function to drivers/core/uclass.c to
+> > > > > > > > > > retrieve the first successfully probed device. Another
+> > > > > > > > > > approach would be to implement
+> > > > > > > > > > uclass_driver.post_probe() in the RNG uclass to take
+> > > > > > > > > > note of the first successfully probed device.
+> > > > > > > > > >
+> > > > > > > > > > @Simon:
+> > > > > > > > > > What would make most sense from a DM design
+> > > > > > > > > > standpoint?  
+> > > > > > > > >
+> > > > > > > > > I am sure I provided feedback on this at the time, but I
+> > > > > > > > > don't remember. OK I just found it here [1]. So the
+> > > > > > > > > problem is entirely because my feedback was not
+> > > > > > > > > addressed. Please just address it and avoid this sort of
+> > > > > > > > > mess.  
+> > > > > > > >
+> > > > > > > > Yeah, Tom just merged it, but that's not Heinrich's fault
+> > > > > > > > ;-) 
+> > > > > > > > > So arm_rndr should have a devicetree compatible string
+> > > > > > > > > and be bound like anything else. If for some reason the
+> > > > > > > > > device doesn't exist in the hardware, it can return
+> > > > > > > > > -ENODEV from its bind() method.
+> > > > > > > > >
+> > > > > > > > > If you want to control which RNG device is used for
+> > > > > > > > > booting, you could add a property to /bootstd with a
+> > > > > > > > > phandle to the device. We are trying to provide a
+> > > > > > > > > standard approach to booting in U-Boot, used by all
+> > > > > > > > > methods. Doing one-off things for particular cases is
+> > > > > > > > > best avoided.  
+> > > > > > > >
+> > > > > > > > Picking the first usable device doesn't sound much like a
+> > > > > > > > one-off to me. After all the caller (be it UEFI or the rng
+> > > > > > > > command) later detect that this is not usable. So there
+> > > > > > > > might be some merit to cover this more automatically,
+> > > > > > > > either in the caller, or by providing a suitable wrapper
+> > > > > > > > function?  
+> > > > > > >
+> > > > > > > Or just follow the existing mechanisms which have been in
+> > > > > > > U-Boot for years. Please...!
+> > > > > > >
+> > > > > > > [..]
+> > > > > > >
+> > > > > > >
+> > > > > > > Regards,
+> > > > > > > Simon  
+> > > > > > >  >  
+> > > > > > > > > [1]
+> > > > > > > > > https://patchwork.ozlabs.org/project/uboot/patch/20230830113230.3925868-1-andre.przywara@arm.com/
+> > > > > > > > >  
+> > > > > > > >  
+> > > >  
+> > >
+> > > Regards,
+> > > SImon  
+> >  
 
