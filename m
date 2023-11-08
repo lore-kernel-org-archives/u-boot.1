@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77982C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 22:22:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F99FC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 22:57:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99D5786F31;
-	Wed,  8 Nov 2023 23:22:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 53DF4870DD;
+	Wed,  8 Nov 2023 23:57:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="X50bJNOQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UnHEmVoX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1FE086F67; Wed,  8 Nov 2023 23:22:30 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id DE92487033; Wed,  8 Nov 2023 23:57:05 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 657F186F26
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 23:22:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B56AC8712D
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 23:57:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-50939d39d0fso258777e87.1
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 14:22:26 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a7b3d33663so3006257b3.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 14:57:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1699482145; x=1700086945;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=MyTtaDWc5S8F8vjKy0ZCLRk6MJmMr/i8Ia7nV/hyFG0=;
- b=X50bJNOQxunJQ/SN3o7qFviFdbUBoj67HdPQT+7fcQYOqMsvfs8KfXx8FUOkZnxcMw
- x8jP9UojHst9zZrFswTycPsgsJCcpXHmuUqFVX7jX9W+t49c80TWMl/PCLf62k47e0dO
- Z+6Bgw4Xcl7qIqQYud19jZiUgqp9PZhmfApsmvaACYEf/fm/Ny5J25Ljd9oEym/PGemj
- CIsIxosABs8Ki4lEOn1/SERC2fyZastqIydKtL1EdSPXKeMUmkHTtBL6UBAlW9IucQlF
- XpRxr32+HKPaAMyMAmgvhvGJzXyJt4mP2Sxkc4dE8mrfYQDMRB8nmHZymqw2ANbn4+Y9
- GqDg==
+ d=konsulko.com; s=google; t=1699484222; x=1700089022; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vTcs1RDOCNYeyDqbF5I2plwyy/2yxkIKBjR7yek86FE=;
+ b=UnHEmVoX7NnasbbV9VRPl28ULiEBWkz7fWlJyOiewf4+e/dv7KMzhgfVVecb/mumNq
+ 3lvL5ewIAVIAwL834iapQoRjEPdOztxGefcNGwESqOmT0tAaRL8wL+sQ8zR3AlNlrRsK
+ KeTuaU2FyCt2cV1vhUXCEI0RCl/1jjGodQz4Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699482145; x=1700086945;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MyTtaDWc5S8F8vjKy0ZCLRk6MJmMr/i8Ia7nV/hyFG0=;
- b=ArtT4lcIL9G2DvRAXfJc47AviryfTaWY6E+Rkr96SpJU7VHxILECiFos2yq/Q7HJCy
- Fk97Zd/3uX3atgoNvWfixYCc2QtDeHr3o797+3SP0l/UfzO0rTpmAyr0r962KftGKz15
- ovbUjTmjMZxOnp9lf/OvssJzjg6qAWftTJu3rC9fHInX8p4PH6j1+WkWDOjSvgl5D/Qy
- i/quldzjeM2Jr/9RUjLcPYlQuYUEABlvNnhUeVr4dL2NjzbK+Agt/zvmvfwTnlB0vngX
- DKFeX84f9r4Q5HEGNWanyb260ZRswTpDXNUjaacDgb/JKi2zU/+AHowjcCwCS6y6j/1z
- S+bQ==
-X-Gm-Message-State: AOJu0YxuZ2r01AbVfbgFJYS6+1cAr5L9r3ySpIcZc81jzH9GvyfadWJm
- HltQJwduErTlim9HsZoA5GPidiWeoFFeXq09rAvMG9A36dZPPiaUYRQ=
-X-Google-Smtp-Source: AGHT+IEDziEDaNjz1yk8Q5PrTMzd/+I675yljGwqncrwgB+KjhmyOm1JpcbeLbYpz19l9dppgWLy8GPMAOoFEAl+ICk=
-X-Received: by 2002:ac2:47f2:0:b0:503:7be:c85d with SMTP id
- b18-20020ac247f2000000b0050307bec85dmr2235581lfp.35.1699482144577; Wed, 08
- Nov 2023 14:22:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699484222; x=1700089022;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vTcs1RDOCNYeyDqbF5I2plwyy/2yxkIKBjR7yek86FE=;
+ b=l6DqkSyb6808Jzdjr6G95gqUYFMlLlBL0Wf7weFgIQ17JcMU+A+wiQ/M6xaFLbNryK
+ RfJLvDITfb/tAm2KXmY/Eb5wEIFVJaC55YadZ+R4Z7H0TFcYqcw6LfzTmUh/wQNDyalw
+ eYaxva/yyc5ShgPsRoplPEDf6uIMDRM+C3qyKPm7oCpH9CL2X93DI9ld7quowGUTvSsm
+ IAvZNJRUb822suBT81lL5cuqX5xk2CEEUWYRZ9JtKGBRdPjLBIzhaRhVgkjHJ4RL8+Al
+ F3O7Na/sHpsL3aTrLv4osqlEq2AmBInR0BF1+Dxmwg2ksfzWu5KRXOv0BqkpayrIO3hg
+ x5kA==
+X-Gm-Message-State: AOJu0YzLZGK14Vs7nURWen/+RKC1sDdOfponG9b+avPe+DrN3h9dhNLA
+ JUkk6sslSc4tItJHgfAtiOfrfg==
+X-Google-Smtp-Source: AGHT+IGPK9Pp/y7nEHnLWDPAlL9PEy8HxtF+lXFx43QEma21evhuk1ORxrgx1sHAxErwxTm5imYfew==
+X-Received: by 2002:a0d:e543:0:b0:5a7:bd2b:d4ec with SMTP id
+ o64-20020a0de543000000b005a7bd2bd4ecmr3118559ywe.3.1699484222383; 
+ Wed, 08 Nov 2023 14:57:02 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
+ [2603:6081:7b00:6400:5409:8f3c:5603:314])
+ by smtp.gmail.com with ESMTPSA id
+ nd10-20020a056214420a00b0066d0ab215b5sm1541591qvb.13.2023.11.08.14.57.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Nov 2023 14:57:01 -0800 (PST)
+Date: Wed, 8 Nov 2023 17:56:59 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: u-boot@lists.denx.de,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v11 24/24] DO NOT MERGE: ci: Build the world in any case.
+Message-ID: <20231108225659.GW6601@bill-the-cat>
+References: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
+ <20231107214121.132079-25-francis.laniel@amarulasolutions.com>
 MIME-Version: 1.0
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 8 Nov 2023 14:22:12 -0800
-Message-ID: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
-Subject: inconsistent wget behavior
-To: u-boot <u-boot@lists.denx.de>
-Cc: Duncan Hare <DuncanCHare@yahoo.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Michal Simek <michal.simek@xilinx.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QO0dwM6iPgE+eEP+"
+Content-Disposition: inline
+In-Reply-To: <20231107214121.132079-25-francis.laniel@amarulasolutions.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,306 +95,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Greetings,
 
-I've recently given wget/tcp a try and find the results inconsistent.
+--QO0dwM6iPgE+eEP+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Transferring the same file 15 times in a row will eventually give me
-an incomplete transfer with packet/byte count wrong but showing
-'Transfer Successful'.
+On Tue, Nov 07, 2023 at 11:41:21PM +0200, Francis Laniel wrote:
 
-Here is current master on an imx8mp-venice-gw74xx board using IMX8MP
-EQOS enet dev:
+> The CI can fails previously for reasons which are not tied to hush 2021.
+> Let's build the world in any case to check everything is OK there too.
+>=20
+> Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+> ---
+>  .azure-pipelines.yml | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index d6f3fa423c..4eaf0e9062 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -469,6 +469,7 @@ stages:
+>          retryCountOnTaskFailure: 2 # QEMU may be too slow, etc.
+> =20
+>  - stage: world_build
+> +  condition: always()
+>    jobs:
+>    - job: build_the_world
+>      timeoutInMinutes: 0 # Use the maximum allowed
 
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
+I _think_ this patch can just be dropped from your series as well at
+this point. Azure now has some automatic retry logic that catches most
+of the cases of when the job fails but it's not our codebase that caused
+the problem and it's something transient to the CI hosts/etc.
 
-time: 3.099 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
+--=20
+Tom
 
-time: 3.103 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
+--QO0dwM6iPgE+eEP+
+Content-Type: application/pgp-signature; name="signature.asc"
 
-time: 3.091 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
+-----BEGIN PGP SIGNATURE-----
 
-time: 3.083 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVMEjQACgkQFHw5/5Y0
+tyyamQv+Kn7DzZCrlg4unrNVrrrxBF9xV06rBhVryjEh3TxWqqIthRWv9Tavw6Rh
+W4DbxmVDegGatmkDfFq0fXd/aHJxo9glwgiL/yO8mLIeFvUDdWIICjkQH7stGQnb
+YM8m6kDQvoY5z/tZPrq8H7hc5tSKSlawBQmqbRoqei6Nxace5TuQv5M9Ev8ubl7s
+6b7fvNS4ZzzSQ4GMLQko905aLLwdOVGGChEERgI+HEkkWs1ts8Ki2Gy+YQL+vaDj
+755Z1NAG9OKq9+M/dmbC79eKCxxf6gv9qgAGEu9I78vVaS7hb7iuHfBayblqptUd
+/UJf8xJ89TtcjMsCr+nDBVcrxFPfuvSzIhYbtOhb5j/e+TK+Qq8NWn3HeQTJsMca
+12oA+umJnArwR+fPuiAtKJP5oApoGcjtR7hm9jIpIqowl+VrY9lb2hT6RGM/Iwik
+quPX2cvi4PKYkLZEp/kT2iq0wvfgIMgIjlfr2iaprAKQ7BqjZBNJnqOipNaaf8pz
+DZcMXU84
+=rwDo
+-----END PGP SIGNATURE-----
 
-time: 3.131 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
-
-time: 3.071 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
-
-time: 3.079 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
-
-time: 3.083 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
-
-time: 3.087 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 93198937 (58e1a59 hex)
-
-time: 3.074 seconds
-md5 for 48200000 ... 4dae1a58 ==> 69bedfe899148c43c09a98ac950dd0ed
-u-boot=> time wget $loadaddr
-/tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-$filesize
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | |
- | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | |
-Packets received 64368, Transfer Successful
-Bytes transferred = 26984682 (19bc0ea hex)
-
-time: 3.011 seconds
-md5 for 48200000 ... 49bbc0e9 ==> c9978ff116605a7729a1cb14ef51fc20
-
-Anyone else seeing this?
-
-Best Regards
-
-Tim
+--QO0dwM6iPgE+eEP+--
