@@ -4,85 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3423EC4167D
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:34:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3801C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:37:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE9818721A;
-	Wed,  8 Nov 2023 16:34:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 19B8E87197;
+	Wed,  8 Nov 2023 16:37:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tg/+sZ+/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78BE4870F5; Wed,  8 Nov 2023 16:34:46 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 884E9870F5; Wed,  8 Nov 2023 16:36:59 +0100 (CET)
+Received: from esa2.ltts.com (unknown [14.140.155.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36C9B87208
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:34:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0927C87208
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:36:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-66d060aa2a4so47508606d6.2
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:34:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699457683; x=1700062483; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mCICSufYAduNOICliI0uUddopQROzO/Ot8MiUKevbsA=;
- b=Tg/+sZ+/SngctLP89eWi07MwrFd0WewFn4WbDFREe7VIpDE1+amaN7g4R6mS6xEYme
- BNwyZhYu12GPRkx1pCE3L4jwVf2PDEzhMWyy6+oGAVlaz/sJeDuLAVrKjt6PsD61vxm+
- nB7iK8+wNwIoJVu36itPJB1mfi1jYVyImDowJuz3vx0YHj0tz1hKj32KUUUin6lLyM+E
- r9OIab613Q0QbTRCWFUkQ4TUVPCFZGVTeHfgCI7xcznne4N1cPZyKkuEF/ypZE68f88g
- 8MN53i0v9iVeXUc1R9l1xsO7aj37FcjRL0Za4wH98IF82gbtGej3lQxzVjKf4IoGec9j
- gBUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699457683; x=1700062483;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mCICSufYAduNOICliI0uUddopQROzO/Ot8MiUKevbsA=;
- b=F1uCmTRtiVLvOfXZyi0hd+k8azgxEX0GnVUY6PzbIIxRD709unzIDvrUQLP4uUJ+xd
- xBQbc6HmMRMrKS63NXKN4gwVTvnse/E7RG7DSaZabAdEGEtJdaVlIya7unHX/yuud76T
- tPxTQgUnxs1G81kXRrXTXxUfcZ2jLp7I8/qFzheNItFax1xzRUYP9+9kUDV5Y7J1MYpx
- NJ223RdnoZGsb63Q19m3QPBCQOajmhTWgkKzkeQXoRGIh5ItPP32zxDlD0cAdX7OHbWP
- AI6qrZKUnZoxmEJw4g/w2lQ7LAJ5vUQ+otSE3cQLNGqE93Ql+JCv69tkqqqJJAcqw+Dy
- T+hA==
-X-Gm-Message-State: AOJu0YxvPGl4q9leTVjr92x11QE39P9OTcEQHsdS6fmPvZur+VEH2M0e
- P+FTrBWwo0PaFODtPVrE9yo=
-X-Google-Smtp-Source: AGHT+IE+PXQBLPM+sfcTudiOe2TaSutRgnyQrK9Ap2jPPpBRlmNXCDpALabsKJkhpJkGCzfI+bt4Ww==
-X-Received: by 2002:a05:6214:2a89:b0:653:5bed:83d4 with SMTP id
- jr9-20020a0562142a8900b006535bed83d4mr2140134qvb.30.1699457683002; 
- Wed, 08 Nov 2023 07:34:43 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- da19-20020a05621408d300b00670e7ae4964sm1171568qvb.91.2023.11.08.07.34.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 07:34:42 -0800 (PST)
-Message-ID: <dbb62be0-6368-8069-3c04-3c5d01d9b077@gmail.com>
-Date: Wed, 8 Nov 2023 10:34:41 -0500
+ spf=pass smtp.mailfrom=bhargav.r@ltts.com
+IronPort-SDR: F3aBqP483xOtDJDZpWqDwhn8rpX4yjeeUnSZbDLwO74ADl7Roj86A2xzbo+zGx5wVB+W1468b5
+ 36xgeUkt+GZA==
+Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
+ by esa2.ltts.com with ESMTP; 08 Nov 2023 21:06:54 +0530
+From: Bhargav Raviprakash <bhargav.r@ltts.com>
+To: jh80.chung@samsung.com
+Cc: bhargav.r@ltts.com,
+	u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] driver: power: add support for TPS65224
+Date: Wed,  8 Nov 2023 21:06:47 +0530
+Message-Id: <20231108153647.144051-1-bhargav.r@ltts.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <053701da1145$9380ac30$ba820490$@samsung.com>
+References: <053701da1145$9380ac30$ba820490$@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v6 09/25] spl: Remove filename from spl_load_info
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, =?UTF-8?Q?Marek_Beh=c3=ban?=
- <marek.behun@nic.cz>, Marek Vasut <marex@denx.de>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>, Stefan Roese <sr@denx.de>
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-10-seanga2@gmail.com>
- <CAPnjgZ3BDP8-eT29EdkDz7tW4036WSHq=iR5PyHDPuKQ_bchhQ@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ3BDP8-eT29EdkDz7tW4036WSHq=iR5PyHDPuKQ_bchhQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,49 +54,286 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/23 23:23, Simon Glass wrote:
-> On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
->>
->> For filesystems, filename serves the same purpose as priv. However,
->> spl_load_fit_image also uses it to determine whether to use a DMA-aligned
->> buffer. This is beneficial for FAT, which uses a bounce-buffer if the
->> destination is not DMA-aligned. Remove this logic, and instead achieve it
->> by setting bl_len to ARCH_DMA_MINALIGN. With this done, we can remove
->> filename entirely.
->>
->> One wrinkle bears mentioning: because filesystems are not block-based, we
->> may read less than the size passed to spl_load_info.read. This can happen
->> if the file size is not DMA-aligned. This is fine as long as we read the
->> amount we originally wanted to. Modify the conditions for callers of
->> spl_load_info.read to check against the original, unaligned size to avoid
->> failing spuriously.
->>
->> Signed-off-by: Sean Anderson <seanga2@gmail.com>
->> ---
->>
->> Changes in v6:
->> - New
->>
->>   arch/arm/mach-sunxi/spl_spi_sunxi.c |  1 -
->>   common/spl/spl_blk_fs.c             | 10 ++++++----
->>   common/spl/spl_fat.c                |  6 +++---
->>   common/spl/spl_fit.c                | 23 +----------------------
->>   common/spl/spl_imx_container.c      |  8 +++++---
->>   common/spl/spl_mmc.c                |  2 --
->>   common/spl/spl_nand.c               |  3 ---
->>   common/spl/spl_semihosting.c        |  1 -
->>   common/spl/spl_spi.c                |  2 --
->>   common/spl/spl_ymodem.c             |  1 -
->>   include/spl.h                       |  2 --
->>   test/image/spl_load_os.c            |  1 -
->>   12 files changed, 15 insertions(+), 45 deletions(-)
+> Hi Bhargav,
 > 
-> Er, I think
+> > -----Original Message-----
+> > From: Bhargav Raviprakash <bhargav.r@ltts.com>
+> > Sent: Monday, November 6, 2023 11:07 PM
+> > To: u-boot@lists.denx.de
+> > Cc: jh80.chung@samsung.com; Bhargav Raviprakash <bhargav.r@ltts.com>
+> > Subject: [PATCH v2 1/2] driver: power: add support for TPS65224
+> > 
+> > Added support for PMIC TPS65224. Includes driver for pmic,
+> > and disabling Watchdog.
+> > 
+> > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
+> > ---
+> >  drivers/power/pmic/Kconfig    |   6 ++
+> >  drivers/power/pmic/Makefile   |   1 +
+> >  drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
+> >  include/power/tps65224.h      |  57 ++++++++++++++
+> >  4 files changed, 205 insertions(+)
+> >  create mode 100644 drivers/power/pmic/tps65224.c
+> >  create mode 100644 include/power/tps65224.h
+> > 
+> > diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+> > index 4a6f0ce093..b06bd31823 100644
+> > --- a/drivers/power/pmic/Kconfig
+> > +++ b/drivers/power/pmic/Kconfig
+> > @@ -378,6 +378,12 @@ config PMIC_TPS65941
+> >  	The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
+> >  	This driver binds the pmic children.
+> > 
+> > +config PMIC_TPS65224
+> > +	bool "Enable driver for Texas Instruments TPS65224 PMIC"
+> > +	help
+> > +	The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
+> > +	This driver binds the pmic children.
+> > +
+> >  config PMIC_TPS65219
+> >  	bool "Enable driver for Texas Instruments TPS65219 PMIC"
+> >  	depends on DM_PMIC
+> > diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+> > index 0b3b3d62d0..cec16e57d3 100644
+> > --- a/drivers/power/pmic/Makefile
+> > +++ b/drivers/power/pmic/Makefile
+> > @@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
+> >  obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
+> >  obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
+> >  obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
+> > +obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Ordering this. Maybe it can be located at tps65941.o.
 > 
-> but I wonder if this patch could be split?
 
-Into the filesystem bl_len stuff and the removal of filename? Yeah, probably.
+Sure, will do!
 
---Sean
+> >  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
+> > 
+> >  ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
+> > diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
+> > new file mode 100644
+> > index 0000000000..33395f6edf
+> > --- /dev/null
+> > +++ b/drivers/power/pmic/tps65224.c
+> > @@ -0,0 +1,141 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
+> > + */
+> > +#include <fdtdec.h>
+> > +#include <errno.h>
+> > +#include <dm.h>
+> > +#include <i2c.h>
+> > +#include <log.h>
+> > +#include <power/pmic.h>
+> > +#include <power/regulator.h>
+> > +#include <power/tps65224.h>
+> > +#include <dm/device.h>
+> > +
+> > +static const struct pmic_child_info pmic_children_info[] = {
+> > +	{ .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
+> > +	{ .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
+> > +	{ },
+> > +};
+> > +
+> > +static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
+> > +			  int len)
+> > +{
+> > +	if (dm_i2c_write(dev, reg, buff, len)) {
+> > +		pr_err("write error to device: %p register: %#x!\n", dev, reg);
+> > +		return -EIO;
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
+> > +{
+> > +	if (dm_i2c_read(dev, reg, buff, len)) {
+> > +		pr_err("read error from device: %p register: %#x!\n", dev, reg);
+> > +		return -EIO;
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +static int tps65224_bind(struct udevice *dev)
+> > +{
+> > +	ofnode regulators_node;
+> > +	int children;
+> > +
+> > +	if (dev->driver_data == TPS65224_WD)
+> > +		return 0;
+> > +
+> > +	regulators_node = dev_read_subnode(dev, "regulators");
+> > +	if (!ofnode_valid(regulators_node)) {
+> > +		debug("%s: %s regulators subnode not found!\n", __func__,
+> > +		      dev->name);
+> > +		return -ENXIO;
+> > +	}
+> > +
+> > +	debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
+> > +
+> > +	children = pmic_bind_children(dev, regulators_node, pmic_children_info);
+> > +	if (!children)
+> > +		printf("%s: %s - no child found\n", __func__, dev->name);
+> > +
+> > +	/* Probe all the child devices */
+> > +	return dm_scan_fdt_dev(dev);
+> > +}
+> > +
+> > +static int stop_watchdog(struct udevice *wd_i2c_dev)
+> > +{
+> > +	int ret;
+> > +
+> > +	/* Maintain WD long window */
+> > +	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
+> > +	if (ret < 0) {
+> > +		debug("failed to read i2c reg (%d)\n", ret);
+> > +		return ret;
+> > +	}
+> > +
+> > +	ret &= ~TPS65224_WD_PWRHOLD_MASK;
+> > +	ret |= TPS65224_WD_PWRHOLD_MASK;
+> 
+> Is it a right behavior? After cleared its bit, set again?
+> Any reason to do this?
+> 
+> How about using val and ret as variable to clarify?
+> 
+
+Using two variables val and ret will help in readability. Will work on it and repsin.
+Thanks for the suggestion!
+
+> 
+> > +	ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
+> > +	if (ret) {
+> > +		debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
+> > +		return ret;
+> > +	}
+> > +
+> > +	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
+> > +	if (ret < 0) {
+> > +		debug("failed to read back i2c reg (%d)\n", ret);
+> > +		return ret;
+> > +	}
+> > +
+> > +	/* Disable WD */
+> > +	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
+> > +	if (ret < 0) {
+> > +		debug("failed to read i2c reg (%d)\n", ret);
+> > +		return ret;
+> > +	}
+> > +
+> > +	ret &= ~TPS65224_WD_EN_MASK;
+> > +	ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
+> > +	if (ret) {
+> > +		debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
+> > +		return ret;
+> > +	}
+> > +
+> > +	ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
+> > +	if (ret < 0) {
+> > +		debug("failed to read back i2c reg (%d)\n", ret);
+> > +		return ret;
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +static int tps65224_probe(struct udevice *dev)
+> > +{
+> > +	if (dev->driver_data == TPS65224_WD)
+> > +		return stop_watchdog(dev);
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +static struct dm_pmic_ops tps65224_ops = {
+> > +	.read = tps65224_read,
+> > +	.write = tps65224_write,
+> > +};
+> > +
+> > +static const struct udevice_id tps65224_ids[] = {
+> > +	{ .compatible = "ti,tps65224", .data = TPS65224 },
+> > +	{ .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
+> > +	{ }
+> > +};
+> > +
+> > +U_BOOT_DRIVER(pmic_tps65224) = {
+> > +	.name = "tps65224_pmic",
+> > +	.id = UCLASS_PMIC,
+> > +	.of_match = tps65224_ids,
+> > +	.bind = tps65224_bind,
+> > +	.probe = tps65224_probe,
+> > +	.ops = &tps65224_ops,
+> > +};
+> > diff --git a/include/power/tps65224.h b/include/power/tps65224.h
+> > new file mode 100644
+> > index 0000000000..24e91b6a67
+> > --- /dev/null
+> > +++ b/include/power/tps65224.h
+> > @@ -0,0 +1,57 @@
+> > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > +/*
+> > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
+> > + *
+> > + */
+> > +#ifndef _POWER_TPS65224_H_
+> > +#define _POWER_TPS65224_H_
+> > +
+> > +#define TPS65224                          0x0
+> > +#define TPS65224_WD                       0x20
+> > +
+> > +/* I2C device address for pmic tps65224 */
+> > +#define TPS65224_I2C_ADDR                (0x12 >> 1)
+> > +#define TPS65224_LDO_NUM                  3
+> > +#define TPS65224_BUCK_NUM                 4
+> > +
+> > +/* Drivers name */
+> > +#define TPS65224_LDO_DRIVER              "tps65224_ldo"
+> > +#define TPS65224_BUCK_DRIVER             "tps65224_buck"
+> > +
+> > +#define TPS65224_BUCK_VOLT_MASK           0xFF
+> > +#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
+> > +#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
+> > +#define TPS65224_BUCK_VOLT_MAX            3300000
+> > +#define TPS65224_BUCK_MODE_MASK           0x1
+> > +
+> > +#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
+> > +#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
+> > +#define TPS65224_LDO_VOLT_MIN_HEX         0x4
+> > +#define TPS65224_LDO1_VOLT_MAX            3300000
+> > +#define TPS65224_LDO23_VOLT_MAX           3400000
+> > +#define TPS65224_LDO_MODE_MASK            0x1
+> > +#define TPS65224_LDO_BYPASS_EN            0x80
+> > +#define TP65224_BUCK_CONF_SLEW_MASK       0x3
+> > +
+> > +/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
+> > +#define TPS65224_LDO123_BYP_CONFIG        7
+> > +
+> > +#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
+> > +#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
+> > +#define TPS65224_LDO1_VOLT_MIN            1200000
+> > +#define TPS65224_LDO23_VOLT_MIN           600000
+> > +#define TPS65224_LDO4_VOLT_MIN            1200000
+> > +#define TPS65224_LDO1_VSET_MIN            0x0C
+> > +#define TPS65224_LDO23_VSET_MIN           0x00
+> > +#define TPS65224_LDO123_VSET_MIN          0x0
+> > +#define TPS65224_LDO1_VSET_MAX            0x36
+> > +#define TPS65224_LDO23_VSET_MAX           0x38
+> > +#define TPS65224_LDO123_STEP              50000
+> > +#define TPS65224_LDO4_STEP                25000
+> > +
+> > +#define TPS65224_WD_MODE_REG              0x406
+> > +#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
+> > +#define TPS65224_WD_THR_CFG               0x409
+> > +#define TPS65224_WD_EN_MASK               BIT(6)
+> > +
+> > +#endif // _POWER_TPS65224_H_
+> > --
+> > 2.25.1
+
+Regards,
+Bhargav
