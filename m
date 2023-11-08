@@ -4,41 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B7CC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:42:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CBA5C4167D
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:46:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEA9E870F5;
-	Wed,  8 Nov 2023 16:42:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ltts.com
+	by phobos.denx.de (Postfix) with ESMTP id 62D68871DF;
+	Wed,  8 Nov 2023 16:46:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AcAMbZNW";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01008871F0; Wed,  8 Nov 2023 16:42:24 +0100 (CET)
-Received: from esa1.ltts.com (unknown [118.185.121.105])
+ id 94286871CC; Wed,  8 Nov 2023 16:46:39 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6269286F93
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:42:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B29D86F93
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:46:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=ltts.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: yzAURb28lZiWQyzo+qoPa0y8ifQi15RZFo3ejvHtM4wf1wTMRIGzO0/xtrhINIaGycs6DH9sHq
- K04xTiGXh0/A==
-Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa1.ltts.com with ESMTP; 08 Nov 2023 21:12:14 +0530
-From: Bhargav Raviprakash <bhargav.r@ltts.com>
-To: sjg@chromium.org
-Cc: bhargav.r@ltts.com,
-	jh80.chung@samsung.com,
-	u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] driver: power: add support for TPS65224
-Date: Wed,  8 Nov 2023 21:12:10 +0530
-Message-Id: <20231108154210.144403-1-bhargav.r@ltts.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <CAPnjgZ3nWCoTNh9ZeuE=N7BsHP-XQOCdjJxHtzYP2RFfeiV6Hw@mail.gmail.com>
-References: <CAPnjgZ3nWCoTNh9ZeuE=N7BsHP-XQOCdjJxHtzYP2RFfeiV6Hw@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A8FkYrE100497;
+ Wed, 8 Nov 2023 09:46:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699458394;
+ bh=TIXCRei6JR9YA2JCsX5aErDn4ItBsyE+gxNkNXRbhAk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=AcAMbZNWDmYcNREGha12afSnr0xJ3fYdidcSykkA5IVZnWV7T0fC2cjWu10W1cfQk
+ UvUHPZjaLrP/r4MYXVTBEIHvAw+6XBEbMl9duIuvvvhuShgcLqeT6+/LGChBbtvoVy
+ T93oPrgOfbkIPC5Y3fPQcnTSN+QjyVEjyJ9H/X+8=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A8FkYQO025471
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 8 Nov 2023 09:46:34 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
+ Nov 2023 09:46:34 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 8 Nov 2023 09:46:34 -0600
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A8FkYrQ038530;
+ Wed, 8 Nov 2023 09:46:34 -0600
+Date: Wed, 8 Nov 2023 09:46:34 -0600
+From: Bryan Brattlof <bb@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>,
+ Andrew Davis <afd@ti.com>, UBoot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/3] board: ti: common: add rtc setup to common folder
+Message-ID: <20231108154634.jozi4cw5fm7v2lls@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20231107232139.2839534-5-bb@ti.com>
+ <20231107232139.2839534-6-bb@ti.com>
+ <20231107233052.GX6601@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20231107233052.GX6601@bill-the-cat>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,273 +82,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Hi Bhargav,
+On November  7, 2023 thus sayeth Tom Rini:
+> On Tue, Nov 07, 2023 at 05:21:41PM -0600, Bryan Brattlof wrote:
 > 
-> On Mon, 6 Nov 2023 at 10:11, Bhargav Raviprakash <bhargav.r@ltts.com> wrote:
-> >
-> > Added support for PMIC TPS65224. Includes driver for pmic,
-> > and disabling Watchdog.
-> >
-> > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
-> > ---
-> >  drivers/power/pmic/Kconfig    |   6 ++
-> >  drivers/power/pmic/Makefile   |   1 +
-> >  drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
-> >  include/power/tps65224.h      |  57 ++++++++++++++
-> >  4 files changed, 205 insertions(+)
-> >  create mode 100644 drivers/power/pmic/tps65224.c
-> >  create mode 100644 include/power/tps65224.h
-> >
-> > diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> > index 4a6f0ce093..b06bd31823 100644
-> > --- a/drivers/power/pmic/Kconfig
-> > +++ b/drivers/power/pmic/Kconfig
-> > @@ -378,6 +378,12 @@ config PMIC_TPS65941
-> >         The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
-> >         This driver binds the pmic children.
-> >
-> > +config PMIC_TPS65224
-> > +       bool "Enable driver for Texas Instruments TPS65224 PMIC"
-> > +       help
-> > +       The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
-> > +       This driver binds the pmic children.
-> > +
-> >  config PMIC_TPS65219
-> >         bool "Enable driver for Texas Instruments TPS65219 PMIC"
-> >         depends on DM_PMIC
-> > diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-> > index 0b3b3d62d0..cec16e57d3 100644
-> > --- a/drivers/power/pmic/Makefile
-> > +++ b/drivers/power/pmic/Makefile
-> > @@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
-> >  obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
-> >  obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
-> >  obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
-> > +obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
-> >  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
-> >
-> >  ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
-> > diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
-> > new file mode 100644
-> > index 0000000000..33395f6edf
-> > --- /dev/null
-> > +++ b/drivers/power/pmic/tps65224.c
-> > @@ -0,0 +1,141 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-> > + */
-> > +#include <fdtdec.h>
-> > +#include <errno.h>
-> > +#include <dm.h>
-> > +#include <i2c.h>
-> > +#include <log.h>
-> > +#include <power/pmic.h>
-> > +#include <power/regulator.h>
-> > +#include <power/tps65224.h>
-> > +#include <dm/device.h>
-> > +
-> > +static const struct pmic_child_info pmic_children_info[] = {
-> > +       { .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
-> > +       { .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
-> > +       { },
-> > +};
-> > +
-> > +static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
-> > +                         int len)
-> > +{
-> > +       if (dm_i2c_write(dev, reg, buff, len)) {
-> > +               pr_err("write error to device: %p register: %#x!\n", dev, reg);
-> > +               return -EIO;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-> > +{
-> > +       if (dm_i2c_read(dev, reg, buff, len)) {
-> > +               pr_err("read error from device: %p register: %#x!\n", dev, reg);
-> > +               return -EIO;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int tps65224_bind(struct udevice *dev)
-> > +{
-> > +       ofnode regulators_node;
-> > +       int children;
-> > +
-> > +       if (dev->driver_data == TPS65224_WD)
-> > +               return 0;
-> > +
-> > +       regulators_node = dev_read_subnode(dev, "regulators");
-> > +       if (!ofnode_valid(regulators_node)) {
-> > +               debug("%s: %s regulators subnode not found!\n", __func__,
-> > +                     dev->name);
-> > +               return -ENXIO;
-> > +       }
-> > +
-> > +       debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
-> > +
-> > +       children = pmic_bind_children(dev, regulators_node, pmic_children_info);
-> > +       if (!children)
-> > +               printf("%s: %s - no child found\n", __func__, dev->name);
-> > +
-> > +       /* Probe all the child devices */
+> > All of the starter kit boards for the am62xxx extended family utilize
+> > the same 32k crystal oscillator for a more accurate clock for the RTC
+> > instance. Add the setup the clock mux and debounce configuration to the
+> > common board directory so the entire am62xxx extended family can utilize
+> > it.
+> > 
+> > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> [snip]
+> > diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
+> > index 49edd98014ab7..56a65c0a402bb 100644
+> > --- a/board/ti/common/Kconfig
+> > +++ b/board/ti/common/Kconfig
+> > @@ -1,3 +1,11 @@
+> > +config BOARD_HAS_32K_RTC_CRYSTAL
+> > +	bool "Enable the 32k crystial for RTC"
+> > +	help
+> > +	   Some of Texas Instrument's Starter-Kit boards have
+> > +	   an onboard 32k crystal. Select this option if you wish Uboot
+> > +	   to enable this crystal for Linux
+> > +	default n
 > 
-> bind, not probe
+> No "default n" as that is the default. And we (a) need some depends on
+> for what families this is found on and then (b) how, if at all, does
+> this match up with the 32k crystal used on other TI reference platforms
+> over the years? If this is specific to the K3 families of reference
+> platforms, the help needs re-phrasing and the filename is too generic.
+> It's also not a "RTC" in terms of something we can talk to via
+> drivers/rtc/rtc-uclass.c and drivers/rtc/davinci.c, or in this case
+> porting the kernel's drivers/rtc/rtc-ti-k3.c over, yes?
 > 
-> > +       return dm_scan_fdt_dev(dev);
-> > +}
-> > +
-> > +static int stop_watchdog(struct udevice *wd_i2c_dev)
-> > +{
-> > +       int ret;
-> > +
-> > +       /* Maintain WD long window */
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret &= ~TPS65224_WD_PWRHOLD_MASK;
-> > +       ret |= TPS65224_WD_PWRHOLD_MASK;
-> > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
-> > +       if (ret) {
-> > +               debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read back i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       /* Disable WD */
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret &= ~TPS65224_WD_EN_MASK;
-> > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
-> > +       if (ret) {
-> > +               debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read back i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int tps65224_probe(struct udevice *dev)
-> > +{
-> > +       if (dev->driver_data == TPS65224_WD)
-> > +               return stop_watchdog(dev);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static struct dm_pmic_ops tps65224_ops = {
-> > +       .read = tps65224_read,
-> > +       .write = tps65224_write,
-> > +};
-> > +
-> > +static const struct udevice_id tps65224_ids[] = {
-> > +       { .compatible = "ti,tps65224", .data = TPS65224 },
-> > +       { .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
-> > +       { }
-> > +};
-> > +
-> > +U_BOOT_DRIVER(pmic_tps65224) = {
-> > +       .name = "tps65224_pmic",
-> > +       .id = UCLASS_PMIC,
-> > +       .of_match = tps65224_ids,
-> > +       .bind = tps65224_bind,
-> > +       .probe = tps65224_probe,
-> > +       .ops = &tps65224_ops,
-> > +};
-> > diff --git a/include/power/tps65224.h b/include/power/tps65224.h
-> > new file mode 100644
-> > index 0000000000..24e91b6a67
-> > --- /dev/null
-> > +++ b/include/power/tps65224.h
-> > @@ -0,0 +1,57 @@
-> > +/* SPDX-License-Identifier: GPL-2.0+ */
-> > +/*
-> > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-> > + *
-> > + */
-> > +#ifndef _POWER_TPS65224_H_
-> > +#define _POWER_TPS65224_H_
-> > +
-> > +#define TPS65224                          0x0
-> > +#define TPS65224_WD                       0x20
-> > +
-> > +/* I2C device address for pmic tps65224 */
-> > +#define TPS65224_I2C_ADDR                (0x12 >> 1)
-> > +#define TPS65224_LDO_NUM                  3
-> > +#define TPS65224_BUCK_NUM                 4
-> > +
-> > +/* Drivers name */
-> > +#define TPS65224_LDO_DRIVER              "tps65224_ldo"
-> > +#define TPS65224_BUCK_DRIVER             "tps65224_buck"
-> > +
-> > +#define TPS65224_BUCK_VOLT_MASK           0xFF
-> > +#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
-> > +#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
-> > +#define TPS65224_BUCK_VOLT_MAX            3300000
-> > +#define TPS65224_BUCK_MODE_MASK           0x1
-> > +
-> > +#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
-> > +#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
-> > +#define TPS65224_LDO_VOLT_MIN_HEX         0x4
-> > +#define TPS65224_LDO1_VOLT_MAX            3300000
-> > +#define TPS65224_LDO23_VOLT_MAX           3400000
-> > +#define TPS65224_LDO_MODE_MASK            0x1
-> > +#define TPS65224_LDO_BYPASS_EN            0x80
-> > +#define TP65224_BUCK_CONF_SLEW_MASK       0x3
-> > +
-> > +/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
-> > +#define TPS65224_LDO123_BYP_CONFIG        7
-> > +
-> > +#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
-> > +#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
-> > +#define TPS65224_LDO1_VOLT_MIN            1200000
-> > +#define TPS65224_LDO23_VOLT_MIN           600000
-> > +#define TPS65224_LDO4_VOLT_MIN            1200000
-> > +#define TPS65224_LDO1_VSET_MIN            0x0C
-> > +#define TPS65224_LDO23_VSET_MIN           0x00
-> > +#define TPS65224_LDO123_VSET_MIN          0x0
-> > +#define TPS65224_LDO1_VSET_MAX            0x36
-> > +#define TPS65224_LDO23_VSET_MAX           0x38
-> > +#define TPS65224_LDO123_STEP              50000
-> > +#define TPS65224_LDO4_STEP                25000
-> > +
-> > +#define TPS65224_WD_MODE_REG              0x406
-> > +#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
-> > +#define TPS65224_WD_THR_CFG               0x409
-> > +#define TPS65224_WD_EN_MASK               BIT(6)
-> > +
-> > +#endif // _POWER_TPS65224_H_
-> > --
-> > 2.25.1
-> >
-> 
-> Regards,
-> Simon
+> Oh, and "U-Boot" not "Uboot". Should see if the checkpatch typo list
+> can be easily expanded by us, one of these days.
 
-Thanks for pointing it out! We will correct it.
+Yeah I'll work on the wording.
 
-Regards,
-Bhargav
+We just need to toggle a few bits for Linux to get the crystal muxed 
+properly for the RTC driver in Linux.
+
+We also toggle a few bits for the debouce settings that apparently I 
+didn't separate out from this series.
+
+Thanks for the quick review though.
+~Bryan
+
