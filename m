@@ -4,85 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55715C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:50:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DF5C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:54:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC79587197;
-	Wed,  8 Nov 2023 16:50:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ACD298716E;
+	Wed,  8 Nov 2023 16:54:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="apoNOvtg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FB0C871DF; Wed,  8 Nov 2023 16:50:07 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 56D8387197; Wed,  8 Nov 2023 16:54:57 +0100 (CET)
+Received: from esa2.ltts.com (unknown [14.140.155.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE06787197
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:50:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F0A870F5
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:54:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-41cc44736f2so47566191cf.3
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:50:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699458599; x=1700063399; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MYuQqFI472mtHp8vWhO59MX/Yua5g1F9EpiulcRzkSM=;
- b=apoNOvtgpPT2U4IBAr0oLZowDiqb3yEPuoj0DdGlxXovWser149mZ0vQ7m/INZ+EPY
- mmoffJRy5gIwWl0C3Rjm3aDGhyFKsvlDBgF6lo7xjxD0NF7l/QOTFniCGPQ9UqVenr1B
- baO4QSsU1dlEHP1rPjpqOYl7wYTrGqwRqUA3GguQpJCfPsswZ1LXo7ROgLCC1whepXHF
- MGC5IR3/m69GPUOrprchkRh14LOToDTItDFTU/xpaoQwoiS3+bArcWdVEn7ryU6Cd97W
- kAnjA4UVN+dUCStew1toagh6c+LhS9We8VFuNCbb3oy6WFOWT4PwwAZkRYdOOKFFaDmf
- yITw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699458599; x=1700063399;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MYuQqFI472mtHp8vWhO59MX/Yua5g1F9EpiulcRzkSM=;
- b=H58eQc/LuyoRGgn5BfcN2oiW52ZKhEItGHHFxAUPs4Xu2IeS+FwaX7WZu98vE3BV88
- UnooCxPYvwSF4bjxeiwnt5Qu/dSphn9oruj+zOmLwylpxSVgh/e5zo8y8XAUi/6yh+/y
- 4TPZjSwcVN+S8ap11VeEGezdzF408Hz+QFYvWbUR70zr7J+SXfp9qvu8hvnzoc/oucZs
- TaDpuDoygp7WiQgKGawCyJFT5aTOo5ptodl4h7CcfW0DaqB71ZcOL1LpO/nRj1SsO4ko
- glzcAXIiGBSLJ4tt7skaZ8Gm7kf3ME/7DSxAnPA5XvQ3Nsep+7ytcfX1UHYcPec6ZT10
- fitg==
-X-Gm-Message-State: AOJu0YzCU2Q/wG9le/TEu1tiOGYqR1aXL+cOuCeptkeWksR3G67rmN1D
- dd7Hzjmw+gyt2tUUNrArZNo=
-X-Google-Smtp-Source: AGHT+IEWlEdRP9xmvNfZcXzjAubdAxW4xNwS1UFbXQZ8i6sPcnJ6qn6bWdEcEcqKaS8Dhg7d2ReNQA==
-X-Received: by 2002:a05:6214:d88:b0:66d:2090:d22 with SMTP id
- e8-20020a0562140d8800b0066d20900d22mr2238013qve.35.1699458599533; 
- Wed, 08 Nov 2023 07:49:59 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- dw18-20020a0562140a1200b0066d1bae2326sm1197847qvb.57.2023.11.08.07.49.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 07:49:59 -0800 (PST)
-Message-ID: <d7cd1df9-8de0-7810-c006-9b6737b8cf78@gmail.com>
-Date: Wed, 8 Nov 2023 10:49:58 -0500
+ spf=pass smtp.mailfrom=bhargav.r@ltts.com
+IronPort-SDR: 6Ai6X5D9pt5WhKUbgDTyBVXluy8m/KJJ7Q2L6PZuknjLRQBX+T4w2z5yoN1ZHlZBqT2dEr5/VL
+ g9Uc+sOV0NUA==
+Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
+ by esa2.ltts.com with ESMTP; 08 Nov 2023 21:24:51 +0530
+From: Bhargav Raviprakash <bhargav.r@ltts.com>
+To: bhargav.r@ltts.com
+Cc: jh80.chung@samsung.com,
+	u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/2] driver: power: add support for TPS65224
+Date: Wed,  8 Nov 2023 21:24:48 +0530
+Message-Id: <20231108155448.145243-1-bhargav.r@ltts.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231108152255.142901-1-bhargav.r@ltts.com>
+References: <20231108152255.142901-1-bhargav.r@ltts.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v6 16/25] spl: Convert fat to spl_load
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, =?UTF-8?Q?Marek_Beh=c3=ban?=
- <marek.behun@nic.cz>, Marek Vasut <marex@denx.de>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>, Stefan Roese <sr@denx.de>
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-17-seanga2@gmail.com>
- <CAPnjgZ1m7MW+LcpQNJEaUfXLZ8Xq5843+ZdPyrKDtS-q9ztj=g@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ1m7MW+LcpQNJEaUfXLZ8Xq5843+ZdPyrKDtS-q9ztj=g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,164 +54,280 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/23 23:24, Simon Glass wrote:
-> Hi Sean,
-> 
-> On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
->>
->> This converts the fat loader to use spl_load. Some platforms are very
->> tight on space, so we take care to only include the code we really need.
->>
->> Signed-off-by: Sean Anderson <seanga2@gmail.com>
->> ---
->>
->> (no changes since v5)
->>
->> Changes in v5:
->> - Rework to load header in spl_load
->>
->> Changes in v3:
->> - Fix failing on success
->>
->>   common/spl/spl_fat.c     | 56 +++++++++++++---------------------------
->>   include/spl_load.h       |  1 +
->>   test/image/spl_load_fs.c |  3 +--
->>   3 files changed, 20 insertions(+), 40 deletions(-)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> nits below
-> 
->>
->> diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
->> index a0c34eba48f..569f2b32928 100644
->> --- a/common/spl/spl_fat.c
->> +++ b/common/spl/spl_fat.c
->> @@ -11,8 +11,8 @@
->>   #include <common.h>
->>   #include <env.h>
->>   #include <log.h>
->> -#include <mapmem.h>
->>   #include <spl.h>
->> +#include <spl_load.h>
->>   #include <asm/u-boot.h>
->>   #include <fat.h>
->>   #include <errno.h>
->> @@ -66,58 +66,38 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
->>                         const char *filename)
->>   {
->>          int err;
->> -       struct legacy_img_hdr *header;
->> +       loff_t size;
->> +       struct spl_load_info load;
->>
->>          err = spl_register_fat_device(block_dev, partition);
->>          if (err)
->>                  goto end;
->>
->> -       header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
->> -
->> -       err = file_fat_read(filename, header, sizeof(struct legacy_img_hdr));
->> -       if (err <= 0)
->> -               goto end;
->> -
->> -       if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL) &&
->> -           image_get_magic(header) == FDT_MAGIC) {
->> -               err = file_fat_read(filename,
->> -                                   map_sysmem(CONFIG_SYS_LOAD_ADDR, 0), 0);
->> -               if (err <= 0)
->> -                       goto end;
->> -               err = spl_parse_image_header(spl_image, bootdev,
->> -                                            map_sysmem(CONFIG_SYS_LOAD_ADDR,
->> -                                                       err));
->> -               if (err == -EAGAIN)
->> -                       return err;
->> -               if (err == 0)
->> -                       err = 1;
->> -       } else if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
->> -           image_get_magic(header) == FDT_MAGIC) {
->> -               struct spl_load_info load;
->> -
->> -               debug("Found FIT\n");
->> -               load.read = spl_fit_read;
->> -               spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
->> -               load.priv = (void *)filename;
->> -
->> -               return spl_load_simple_fit(spl_image, &load, 0, header);
->> -       } else {
->> -               err = spl_parse_image_header(spl_image, bootdev, header);
->> +       /*
->> +        * Avoid pulling in this function for other image types since we are
->> +        * very short on space on some boards.
->> +        */
->> +       if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)) {
->> +               err = fat_size(filename, &size);
->>                  if (err)
->>                          goto end;
->> -
->> -               err = file_fat_read(filename, map_sysmem(spl_image->load_addr,
->> -                                                        spl_image->size), 0);
->> +       } else {
->> +               size = 0;
->>          }
->>
->> +       load.read = spl_fit_read;
->> +       spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
->> +       load.priv = (void *)filename;
->> +       err = spl_load(spl_image, bootdev, &load, size, 0);
->> +
->>   end:
->>   #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
->> -       if (err <= 0)
->> +       if (err < 0)
->>                  printf("%s: error reading image %s, err - %d\n",
->>                         __func__, filename, err);
-> 
-> Do we still need this sort of #ifdef? I thought printf() would melt
-> away without SPL_LIBCOMMON_SUPPORT? I haven't looked though. Also it
-> isn't related to your patch.
+Hello Jaehoon,
 
- From what I can tell, printf implementation is orthogonal to LIBCOMMON_SUPPORT.
-
---Sean
-
->>   #endif
->>
->> -       return (err <= 0);
->> +       return err;
->>   }
->>
->>   #if CONFIG_IS_ENABLED(OS_BOOT)
->> diff --git a/include/spl_load.h b/include/spl_load.h
->> index 65aa6bb4493..5e0460d956d 100644
->> --- a/include/spl_load.h
->> +++ b/include/spl_load.h
->> @@ -96,6 +96,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
->>    */
->>   #define SPL_LOAD_USERS \
->>          IS_ENABLED(CONFIG_SPL_FS_EXT4) + \
->> +       IS_ENABLED(CONFIG_SPL_FS_FAT) + \
->>          0
->>
->>   #if SPL_LOAD_USERS > 1
->> diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
->> index 01559e98c4f..333df2dfb53 100644
->> --- a/test/image/spl_load_fs.c
->> +++ b/test/image/spl_load_fs.c
->> @@ -425,8 +425,7 @@ static int spl_test_mmc(struct unit_test_state *uts, const char *test_name,
->>          if (spl_test_mmc_fs(uts, test_name, type, create_ext2, false))
->>                  return CMD_RET_FAILURE;
->>
->> -       if (type != IMX8 && type != LEGACY_LZMA &&
->> -           spl_test_mmc_fs(uts, test_name, type, create_fat, false))
->> +       if (spl_test_mmc_fs(uts, test_name, type, create_fat, false))
->>                  return CMD_RET_FAILURE;
->>
->>          if (type == LEGACY_LZMA)
->> --
->> 2.37.1
->>
+> > Hi Bhargav,
+> > 
+> > On Mon, 6 Nov 2023 at 10:11, Bhargav Raviprakash <bhargav.r@ltts.com> wrote:
+> > >
+> > > Added support for PMIC TPS65224. Includes driver for pmic,
+> > > and disabling Watchdog.
+> > >
+> > > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
+> > > ---
+> > >  drivers/power/pmic/Kconfig    |   6 ++
+> > >  drivers/power/pmic/Makefile   |   1 +
+> > >  drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
+> > >  include/power/tps65224.h      |  57 ++++++++++++++
+> > >  4 files changed, 205 insertions(+)
+> > >  create mode 100644 drivers/power/pmic/tps65224.c
+> > >  create mode 100644 include/power/tps65224.h
+> > >
+> > > diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
+> > > index 4a6f0ce093..b06bd31823 100644
+> > > --- a/drivers/power/pmic/Kconfig
+> > > +++ b/drivers/power/pmic/Kconfig
+> > > @@ -378,6 +378,12 @@ config PMIC_TPS65941
+> > >         The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
+> > >         This driver binds the pmic children.
+> > >
+> > > +config PMIC_TPS65224
+> > > +       bool "Enable driver for Texas Instruments TPS65224 PMIC"
+> > > +       help
+> > > +       The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
+> > > +       This driver binds the pmic children.
+> > > +
+> > >  config PMIC_TPS65219
+> > >         bool "Enable driver for Texas Instruments TPS65219 PMIC"
+> > >         depends on DM_PMIC
+> > > diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
+> > > index 0b3b3d62d0..cec16e57d3 100644
+> > > --- a/drivers/power/pmic/Makefile
+> > > +++ b/drivers/power/pmic/Makefile
+> > > @@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
+> > >  obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
+> > >  obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
+> > >  obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
+> > > +obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
+> > >  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
+> > >
+> > >  ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
+> > > diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
+> > > new file mode 100644
+> > > index 0000000000..33395f6edf
+> > > --- /dev/null
+> > > +++ b/drivers/power/pmic/tps65224.c
+> > > @@ -0,0 +1,141 @@
+> > > +// SPDX-License-Identifier: GPL-2.0+
+> > > +/*
+> > > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
+> > > + */
+> > > +#include <fdtdec.h>
+> > > +#include <errno.h>
+> > > +#include <dm.h>
+> > > +#include <i2c.h>
+> > > +#include <log.h>
+> > > +#include <power/pmic.h>
+> > > +#include <power/regulator.h>
+> > > +#include <power/tps65224.h>
+> > > +#include <dm/device.h>
+> > > +
+> > > +static const struct pmic_child_info pmic_children_info[] = {
+> > > +       { .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
+> > > +       { .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
+> > > +       { },
+> > > +};
+> > > +
+> > > +static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
+> > > +                         int len)
+> > > +{
+> > > +       if (dm_i2c_write(dev, reg, buff, len)) {
+> > > +               pr_err("write error to device: %p register: %#x!\n", dev, reg);
+> > > +               return -EIO;
+> > > +       }
+> > > +
+> > > +       return 0;
+> > > +}
+> > > +
+> > > +static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
+> > > +{
+> > > +       if (dm_i2c_read(dev, reg, buff, len)) {
+> > > +               pr_err("read error from device: %p register: %#x!\n", dev, reg);
+> > > +               return -EIO;
+> > > +       }
+> > > +
+> > > +       return 0;
+> > > +}
+> > > +
+> > > +static int tps65224_bind(struct udevice *dev)
+> > > +{
+> > > +       ofnode regulators_node;
+> > > +       int children;
+> > > +
+> > > +       if (dev->driver_data == TPS65224_WD)
+> > > +               return 0;
+> > > +
+> > > +       regulators_node = dev_read_subnode(dev, "regulators");
+> > > +       if (!ofnode_valid(regulators_node)) {
+> > > +               debug("%s: %s regulators subnode not found!\n", __func__,
+> > > +                     dev->name);
+> > > +               return -ENXIO;
+> > > +       }
+> > > +
+> > > +       debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
+> > > +
+> > > +       children = pmic_bind_children(dev, regulators_node, pmic_children_info);
+> > > +       if (!children)
+> > > +               printf("%s: %s - no child found\n", __func__, dev->name);
+> > > +
+> > > +       /* Probe all the child devices */
+> > 
+> > bind, not probe
+> > 
+> > > +       return dm_scan_fdt_dev(dev);
+> > > +}
+> > > +
+> > > +static int stop_watchdog(struct udevice *wd_i2c_dev)
+> > > +{
+> > > +       int ret;
+> > > +
+> > > +       /* Maintain WD long window */
+> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
+> > > +       if (ret < 0) {
+> > > +               debug("failed to read i2c reg (%d)\n", ret);
+> > > +               return ret;
+> > > +       }
+> > > +
+> > > +       ret &= ~TPS65224_WD_PWRHOLD_MASK;
+> > > +       ret |= TPS65224_WD_PWRHOLD_MASK;
+> > > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
+> > > +       if (ret) {
+> > > +               debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
+> > > +               return ret;
+> > > +       }
+> > > +
+> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
+> > > +       if (ret < 0) {
+> > > +               debug("failed to read back i2c reg (%d)\n", ret);
+> > > +               return ret;
+> > > +       }
+> > > +
+> > > +       /* Disable WD */
+> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
+> > > +       if (ret < 0) {
+> > > +               debug("failed to read i2c reg (%d)\n", ret);
+> > > +               return ret;
+> > > +       }
+> > > +
+> > > +       ret &= ~TPS65224_WD_EN_MASK;
+> > > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
+> > > +       if (ret) {
+> > > +               debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
+> > > +               return ret;
+> > > +       }
+> > > +
+> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
+> > > +       if (ret < 0) {
+> > > +               debug("failed to read back i2c reg (%d)\n", ret);
+> > > +               return ret;
+> > > +       }
+> > > +
+> > > +       return 0;
+> > > +}
+> > > +
+> > > +static int tps65224_probe(struct udevice *dev)
+> > > +{
+> > > +       if (dev->driver_data == TPS65224_WD)
+> > > +               return stop_watchdog(dev);
+> > > +
+> > > +       return 0;
+> > > +}
+> > > +
+> > > +static struct dm_pmic_ops tps65224_ops = {
+> > > +       .read = tps65224_read,
+> > > +       .write = tps65224_write,
+> > > +};
+> > > +
+> > > +static const struct udevice_id tps65224_ids[] = {
+> > > +       { .compatible = "ti,tps65224", .data = TPS65224 },
+> > > +       { .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
+> > > +       { }
+> > > +};
+> > > +
+> > > +U_BOOT_DRIVER(pmic_tps65224) = {
+> > > +       .name = "tps65224_pmic",
+> > > +       .id = UCLASS_PMIC,
+> > > +       .of_match = tps65224_ids,
+> > > +       .bind = tps65224_bind,
+> > > +       .probe = tps65224_probe,
+> > > +       .ops = &tps65224_ops,
+> > > +};
+> > > diff --git a/include/power/tps65224.h b/include/power/tps65224.h
+> > > new file mode 100644
+> > > index 0000000000..24e91b6a67
+> > > --- /dev/null
+> > > +++ b/include/power/tps65224.h
+> > > @@ -0,0 +1,57 @@
+> > > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > > +/*
+> > > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
+> > > + *
+> > > + */
+> > > +#ifndef _POWER_TPS65224_H_
+> > > +#define _POWER_TPS65224_H_
+> > > +
+> > > +#define TPS65224                          0x0
+> > > +#define TPS65224_WD                       0x20
+> > > +
+> > > +/* I2C device address for pmic tps65224 */
+> > > +#define TPS65224_I2C_ADDR                (0x12 >> 1)
+> > > +#define TPS65224_LDO_NUM                  3
+> > > +#define TPS65224_BUCK_NUM                 4
+> > > +
+> > > +/* Drivers name */
+> > > +#define TPS65224_LDO_DRIVER              "tps65224_ldo"
+> > > +#define TPS65224_BUCK_DRIVER             "tps65224_buck"
+> > > +
+> > > +#define TPS65224_BUCK_VOLT_MASK           0xFF
+> > > +#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
+> > > +#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
+> > > +#define TPS65224_BUCK_VOLT_MAX            3300000
+> > > +#define TPS65224_BUCK_MODE_MASK           0x1
+> > > +
+> > > +#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
+> > > +#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
+> > > +#define TPS65224_LDO_VOLT_MIN_HEX         0x4
+> > > +#define TPS65224_LDO1_VOLT_MAX            3300000
+> > > +#define TPS65224_LDO23_VOLT_MAX           3400000
+> > > +#define TPS65224_LDO_MODE_MASK            0x1
+> > > +#define TPS65224_LDO_BYPASS_EN            0x80
+> > > +#define TP65224_BUCK_CONF_SLEW_MASK       0x3
+> > > +
+> > > +/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
+> > > +#define TPS65224_LDO123_BYP_CONFIG        7
+> > > +
+> > > +#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
+> > > +#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
+> > > +#define TPS65224_LDO1_VOLT_MIN            1200000
+> > > +#define TPS65224_LDO23_VOLT_MIN           600000
+> > > +#define TPS65224_LDO4_VOLT_MIN            1200000
+> > > +#define TPS65224_LDO1_VSET_MIN            0x0C
+> > > +#define TPS65224_LDO23_VSET_MIN           0x00
+> > > +#define TPS65224_LDO123_VSET_MIN          0x0
+> > > +#define TPS65224_LDO1_VSET_MAX            0x36
+> > > +#define TPS65224_LDO23_VSET_MAX           0x38
+> > > +#define TPS65224_LDO123_STEP              50000
+> > > +#define TPS65224_LDO4_STEP                25000
+> > > +
+> > > +#define TPS65224_WD_MODE_REG              0x406
+> > > +#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
+> > > +#define TPS65224_WD_THR_CFG               0x409
+> > > +#define TPS65224_WD_EN_MASK               BIT(6)
+> > > +
+> > > +#endif // _POWER_TPS65224_H_
+> > > --
+> > > 2.25.1
+> > >
+> > 
+> > Regards,
+> > Simon
+> 
+> Thanks for pointing it out! We will correct it.
 > 
 > Regards,
-> Simon
+> Bhargav
 
+Posted this on the wrong thread. Please Ignore this message. 
+
+Regards,
+Bhargav
