@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90DFCC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:26:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55514C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:26:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 123D28763E;
-	Wed,  8 Nov 2023 05:26:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 20F1387700;
+	Wed,  8 Nov 2023 05:26:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QGawMT5J";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GctaW3VK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E47D687713; Wed,  8 Nov 2023 05:26:38 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 00E70874E9; Wed,  8 Nov 2023 05:26:38 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E692D874E9
+ by phobos.denx.de (Postfix) with ESMTPS id EA6F78763E
  for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:26:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5a877e0f0d8so3600917b3.1
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5a8ee23f043so76208067b3.3
  for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:26:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699417595; x=1700022395; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nd+CP6Y8NtLRsG03kF/YdRGWevobV6M2x2ArynB1gt8=;
- b=QGawMT5JbpRhLKEX41QaD411wQ+jPSpIfYNXlJD8HF2SXq2zUFIi6pb5SgS6fSEANc
- GhksRa9GymCMt4l5ei8xbTrQayu+uIxUHNI+x722Oy2ip9NPsu9QB93pYBpkvIZNBs4O
- zQMJX4lV9v+1um3R4Voga3r9OJTaV8/rzSG8M=
+ bh=MfAgvYcvYCJumlJvFFnp4q+qSXX5CP771xI/CzTf9Cc=;
+ b=GctaW3VK0VClvxda2vTcHO/4WYBqXkDXvyShRPKIbhIMjn0+FkPA7fBM9xz4KhZKbZ
+ jRsdnllR44JtOaKI5fiaIkpjXMavhXonUHBopS1qWxrPWRwi+FJgeAAsZIZc7gcqlicc
+ d7RQADINLZuKZBSJXQm3vxyDudqoQSifizoFA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699417595; x=1700022395;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nd+CP6Y8NtLRsG03kF/YdRGWevobV6M2x2ArynB1gt8=;
- b=W1DS4pSr6DoS8tZcqhe7g0DpPlvbbqioitP46Cfxr6lvNGV46OJPzMgMd7CxykSMsw
- Gs7bqftxASX1P4IFmnihvdzSE15wvwlyJojaykvPU6/HM3lSGEZfLWSA+iFeu2lm068G
- r8zwDLS+bO0By2g1Av/7AFIMbPwa+OKJ5WmmSj5EwOVcgN4wwJA0UzZn7OGfiRa4Feaq
- mVeqdNbF9WtymDaVWR1xsu8neF2iC66IfKl333EAfD9xJiP0ZnRB7eOjBSjDdp7G8P/3
- A6EkwvSJXpwXgihx7aht0PK2B6Ib3FPNPARLCAx5yAiz+TXfQv2VRadBk/XRY2RwtbOW
- sA2A==
-X-Gm-Message-State: AOJu0Yw2opVUA7euhQMtJWHDsZVAokDtUVkymFeN16HcOlN3g5HqdC+h
- Ge4FEd6fubm1ZgmvRwMxPV+hICbTGRMjh8opSH5z4A==
-X-Google-Smtp-Source: AGHT+IHP24l9cnmR9QiO9G0XIMhPmIRgRV8ikx1JK5yaYacPLRZLzI6Hzo4Lj1R7jC+rYaPOUg04zP6EQaVQ23oApAg=
-X-Received: by 2002:a81:4f07:0:b0:5b3:3109:3701 with SMTP id
- d7-20020a814f07000000b005b331093701mr3827396ywb.21.1699417595440; Tue, 07 Nov
- 2023 20:26:35 -0800 (PST)
+ bh=MfAgvYcvYCJumlJvFFnp4q+qSXX5CP771xI/CzTf9Cc=;
+ b=gsYPkW4DMegomaMzLAk7otyKujBQ2mh8Qk/dgP2ZZnOo6EVavZ6zhdpt3shsBcpmf9
+ ZSy5UAw1yOzwKl2ym/HDT2Ldil0l16d9tWIGOUk1A9PcsQR+pnh3BHKRMx6j5W7Z0oCI
+ Vo6A7w+29FoDGw9CIiejQjdT/5ksf8aAnYW4HsHVbW4zF0lvOzUaN/xCo9zd7GG71WO8
+ sE7+hjsuUB9+kHRbjX57iGt8B1WGtGw1TcAp/gVg50ElFY6h3BX6Vb5FcKjD4e1wdHlf
+ cnWqYA2dUqfoj1RS0+yx8UzV4efE54XahPJHYIyxUjrCdjBFDfJWMDebqHjfQPVBsAGR
+ xShA==
+X-Gm-Message-State: AOJu0YxofgelO1tT0xRTFfCBpcBqn0DisPojSsDg+pTF7fm8ZajTYBAK
+ t+3CYoDaO3D4wypm793Qs30MZbt+q8CgfxI753j5aRPRuNiTQV8b+mE=
+X-Google-Smtp-Source: AGHT+IFvIay7NBQu7uIXEf7BiIQApQXmQ7CkqhfnbhRV3/KoWMUmPGx0+EONqDaqCuOrd6LXa8FSHXI3d69USopr8YQ=
+X-Received: by 2002:a25:2187:0:b0:d9a:3992:192d with SMTP id
+ h129-20020a252187000000b00d9a3992192dmr646878ybh.16.1699417595506; Tue, 07
+ Nov 2023 20:26:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-22-seanga2@gmail.com>
-In-Reply-To: <20231106022603.3405551-22-seanga2@gmail.com>
+References: <20231107190601.17151-1-semen.protsenko@linaro.org>
+ <20231107190601.17151-3-semen.protsenko@linaro.org>
+In-Reply-To: <20231107190601.17151-3-semen.protsenko@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 21:24:09 -0700
-Message-ID: <CAPnjgZ2JM4gJcGKc=jmwEADZq+ruXv6mo1EJ80fcjt8GBcXkQQ@mail.gmail.com>
-Subject: Re: [PATCH v6 21/25] spl: Convert NVMe to spl_load
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>, 
- Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Stefan Roese <sr@denx.de>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>
+Date: Tue, 7 Nov 2023 21:23:48 -0700
+Message-ID: <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,25 +82,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
->
-> This converts the blk load method (used exclusively by NVMe) to use
-> spl_load. As a consequence, it also adds support for LOAD_FIT_FULL and
-> IMX images.
->
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> ---
->
-> Changes in v6:
-> - Fix invalid return from spl_blk_load_image
-> - Explicitly initialize load_info members
->
-> Changes in v5:
-> - New
->
->  common/spl/spl_blk_fs.c  | 66 +++++++---------------------------------
->  include/spl_load.h       |  1 +
->  test/image/spl_load_fs.c |  2 ++
->  3 files changed, 14 insertions(+), 55 deletions(-)
+Hi Sam,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 7 Nov 2023 at 12:06, Sam Protsenko <semen.protsenko@linaro.org> wrote:
+>
+> Use dev_read_u8_default() instead of fdtdec_get_int() to read the "id"
+> property from device tree, as suggested in [1]. dev_* API is already
+> used in this driver, so there is no reason to stick to fdtdec_* API.
+> This also fixes checkpatch warning:
+>
+>     WARNING: Use the livetree API (dev_read_...)
+>
+> [1] doc/develop/driver-model/livetree.rst
+>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> ---
+>  drivers/serial/serial_s5p.c | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>
+> diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
+> index 177215535676..c57bdd059ea6 100644
+> --- a/drivers/serial/serial_s5p.c
+> +++ b/drivers/serial/serial_s5p.c
+> @@ -20,8 +20,6 @@
+>  #include <serial.h>
+>  #include <clk.h>
+>
+> -DECLARE_GLOBAL_DATA_PTR;
+> -
+>  enum {
+>         PORT_S5P = 0,
+>         PORT_S5L
+> @@ -220,8 +218,7 @@ static int s5p_serial_of_to_plat(struct udevice *dev)
+>
+>         plat->reg = (struct s5p_uart *)addr;
+>         plat->reg_width = dev_read_u32_default(dev, "reg-io-width", 1);
+> -       plat->port_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
+> -                                       "id", dev_seq(dev));
+> +       plat->port_id = dev_read_u8_default(dev, "id", dev_seq(dev));
+>
+>         if (port_type == PORT_S5L) {
+>                 plat->rx_fifo_count_shift = S5L_RX_FIFO_COUNT_SHIFT;
+> --
+> 2.39.2
+>
+
+Really this property should not be needed anymore. Can you figure out
+how to drop it?
+
+Regards,
+Simon
