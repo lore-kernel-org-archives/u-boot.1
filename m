@@ -4,51 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45D97C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 00:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 895C8C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 00:23:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C1B887539;
-	Wed,  8 Nov 2023 01:06:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=superboring.dev
+	by phobos.denx.de (Postfix) with ESMTP id BA9FE876D3;
+	Wed,  8 Nov 2023 01:23:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=superboring.dev header.i=@superboring.dev header.b="nvxaGRzZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iEO+bsNu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CA1B8761A; Wed,  8 Nov 2023 01:06:24 +0100 (CET)
-Received: from mail.halogenos.org (mail.halogenos.org
- [IPv6:2a02:c207:2037:5246::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2B505876DB; Wed,  8 Nov 2023 01:23:49 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 773C3876D5
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 01:06:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=superboring.dev
+ by phobos.denx.de (Postfix) with ESMTPS id 5FD5887689
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 01:23:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=devel@superboring.dev
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPA id 74BAB151B37A; Wed,  8 Nov 2023 01:06:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=superboring.dev;
- s=dkim; t=1699401978;
- h=from:subject:date:message-id:to:cc:mime-version:content-type;
- bh=YqfGF8ZSPT7DOExd2nMYlWBCBb+wrLusXmUIeQPGA7E=;
- b=nvxaGRzZBozbDh6M8ADm+Iw0+OlpjKIVSO/oGgmen505imkIfCM+RFKBtl3esEiBkNjADz
- hl7l78j3qHuuyg+GxyVH3WU2zEiLjpbrLVAxGyV8j4CoAgxiOaKMcf/R0Ua3rDQ2kwoz/l
- mG3G5V8mg7TEQ4bPvoyraY9gf3gq662KU8+uu/LlZGl6G2exEzIdCiYAGbRQDHOa3+9qf3
- TgZAKp5ZywKHEtxfCe3L422gJxSSZASF5veSiSRNrSaynxxlbhPnf64aWv5bz3Bz0+ZhQb
- TC/HhC0E/0q0b0Phl8uPmcM1AhOE8awe4/1mw4lJW9dcghbAeO0T3rjEhm3r3g==
-From: =?utf-8?q?Sim=C3=A3o_Gomes_Viana?= <devel@superboring.dev>
-Date: Wed, 08 Nov 2023 01:06:16 +0100
-Cc: u-boot@lists.denx.de
-To: sjg@chromium.org, mkorpershoek@baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-d865854ef96so6507684276.2
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 16:23:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699403025; x=1700007825; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KOwFSHMBoyrjRBoPO8yyj6CNLsxvXZ1RE2+sHMv1FjE=;
+ b=iEO+bsNuI7IHLR229ucNtKd638q/caqAqP45cyUFnF5fxVV60Fo2WNNzzdq/ixYKZN
+ w9bW2nlihhLfIqqzExDKrzXDFYQs8DGecgM/dQxX6CKUPxTZxBRk6x9vvezf++nv4EXe
+ a4R+qQct8xYyP6g9OmEhdBJ1IoLZlrDcQpSOo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699403025; x=1700007825;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KOwFSHMBoyrjRBoPO8yyj6CNLsxvXZ1RE2+sHMv1FjE=;
+ b=V9P3EImQwipH85222LkewW4N0GiOFOra1x+1idM1Rn1iCF+D3QSAfyNQgZ7Hmv+40R
+ 5qiF8F6E2qzphnoSiF4NU8/jeN70uG/08/rHsrYR+R2C015uEdS5QQ89Js3JT9Dn8O0F
+ loDTwFJczpQxT0aSXrnMFfpG588Upf0TcdGr6YARkxn5QvA45xIJhW6rJtLT6RjL886I
+ mPIgoOC1DMs87ZrXOhuzBrlh8gHQKrVBVIUjA7csSeKiBtjFRV8xvHIdN9n38LeslPbJ
+ uOPznDVxxry0zeUQUCUzbJzxKKB2QLcnZvjZ5U1oigmsqaVIGSTWWrwBVdhi9//xlwrU
+ K1Rg==
+X-Gm-Message-State: AOJu0Yz7gnlRuzmr8fWfEOF/7rcJ13tymS3pdF20s/nX2y9BtmHo/1LG
+ eKBwzk/PwtqnTYKwVD/5pkzlpw==
+X-Google-Smtp-Source: AGHT+IHnpAI6dCbVy9x2Po7OIdvb21u9pQzTIdSHvocr1j+78zUrULhJVqr0RBVMu1VOvKx+Vd7uVw==
+X-Received: by 2002:a25:2b01:0:b0:da0:84b2:5e3e with SMTP id
+ r1-20020a252b01000000b00da084b25e3emr295772ybr.21.1699403025032; 
+ Tue, 07 Nov 2023 16:23:45 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
+ [2603:6081:7b00:6400:5409:8f3c:5603:314])
+ by smtp.gmail.com with ESMTPSA id
+ b141-20020a253493000000b00da02a2ef6afsm5844635yba.30.2023.11.07.16.23.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Nov 2023 16:23:44 -0800 (PST)
+Date: Tue, 7 Nov 2023 19:23:42 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sean Edmond <seanedmond@linux.microsoft.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, joe.hershberger@ni.com,
+ rfried.dev@gmail.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
+Message-ID: <20231108002342.GE6601@bill-the-cat>
+References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
+ <20231024002159.74477-2-seanedmond@linux.microsoft.com>
+ <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
+ <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
+ <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
+ <b058f5a6-52e2-4e0c-a193-30e884b2463a@linux.microsoft.com>
 MIME-Version: 1.0
-Message-ID: <39-654ad100-39-2ca944c0@142113415>
-Subject: =?utf-8?q?Re=3A?= Booting Android using U-Boot
-User-Agent: SOGoMail 5.9.0
-X-Last-TLS-Session-Version: None
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="iNvGcfA3Pz7yQcX6"
+Content-Disposition: inline
+In-Reply-To: <b058f5a6-52e2-4e0c-a193-30e884b2463a@linux.microsoft.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,288 +99,112 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Hi everyone,
+--iNvGcfA3Pz7yQcX6
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Good news! I disabled compression on kernel build and the resulting boo=
-t image starts booting Linux.
+On Tue, Nov 07, 2023 at 03:50:06PM -0800, Sean Edmond wrote:
+>=20
+> On 2023-11-04 12:53 a.m., Heinrich Schuchardt wrote:
+> > On 11/4/23 03:03, Sean Edmond wrote:
+> > >=20
+> > > On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
+> > > > On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
+> > > > > From: Sean Edmond <seanedmond@microsoft.com>
+> > > > >=20
+> > > > > Allow dhcp server pass pxe config file full path by using option =
+209
+> > > > >=20
+> > > > > Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> > > > > ---
+> > > > > =A0 cmd/Kconfig |=A0 4 ++++
+> > > > > =A0 cmd/pxe.c=A0=A0 | 10 ++++++++++
+> > > > > =A0 net/bootp.c | 21 +++++++++++++++++++++
+> > > > > =A0 3 files changed, 35 insertions(+)
+> > > > >=20
+> > > > > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > > > > index 5bc0a92d57..adbb1a6187 100644
+> > > > > --- a/cmd/Kconfig
+> > > > > +++ b/cmd/Kconfig
+> > > > > @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
+> > > > > =A0=A0=A0=A0=A0 default 0x15 if ARM
+> > > > > =A0=A0=A0=A0=A0 default 0x0 if X86
+> > > > >=20
+> > > > > +config BOOTP_PXE_DHCP_OPTION
+> > > > > +=A0=A0=A0 bool "Request & store 'pxe_configfile' from BOOTP/DHCP=
+ server"
+> > > > > +=A0=A0=A0 depends on BOOTP_PXE
+> > > >=20
+> > > > Why should this be disabled by default?
+> > > >=20
+> > > > Do we really want a separate config variable?
+> > > >=20
+> > > I expect most won't use this option to get the file path (they'll use
+> > > the default paths as per the PXE specification).=A0 It makes more sen=
+se
+> > > for me to keep it optional, like many of the other options?
+> >=20
+> > RFC 5701 seems to require this option. Hence we should make it default
+> > yes. Boards that have a build size issue can opt out.
+>=20
+> The PXELINUX specification
+> (https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX) doesn't state=
+ that
+> option 209 is required. In the abense of option 209, PXELINUX will try the
+> following default configuration files (this example is provided on the wi=
+ki
+> link):
+> =A0/mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
+> =A0/mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
+> =A0/mybootdir/pxelinux.cfg/C0A8025B
+> =A0/mybootdir/pxelinux.cfg/C0A8025
+> =A0/mybootdir/pxelinux.cfg/C0A802
+> =A0/mybootdir/pxelinux.cfg/C0A80
+> =A0/mybootdir/pxelinux.cfg/C0A8
+> =A0/mybootdir/pxelinux.cfg/C0A
+> =A0/mybootdir/pxelinux.cfg/C0
+> =A0/mybootdir/pxelinux.cfg/C
+> =A0/mybootdir/pxelinux.cfg/default
+>=20
+> If 209 is requested/provided it tries the provided "config file" before t=
+he
+> default paths.=A0 RFC 5071 should be seen as an extension for PXELINUX (n=
+ot a
+> requirement).=A0 RFC 5071 only states "The Config File Option MUST be sup=
+plied
+> by the DHCP server if it appears on the Parameter Request List".
 
-This is great but it does not solve the decompression issue.
-Thanks to Mattijs for pointing me in the compression direction which ma=
-de me further investigate compression options.
+We also want to be careful about overall size growth on common options,
+even if someone can opt-out. Those are usually last-ditch stop-gaps and
+it's better to make sure we really need functionality X/Y/Z by default,
+for everyone. Especially with all of the work going on to make HTTP(s)
+based network installs a viable option, how much more do we want to
+change the PXE case, for everyone. I'm personally somewhat looking for
+the use case to be well defined for a "this must be default". Network
+provisioning is a thing, yes, but for whom/what, and in turn how broadly
+do we need this to be in the vast majority of our boards (since it would
+come in via BOOT*DEFAULTS or DISTRO_DEFAULTS).
 
-So with compression disabled, let's move on to the next issue:
-I picked the Quartz64 DTS commits, built and booted it, however there s=
-eems to still be an issue:
-Starting kernel ...
+--=20
+Tom
 
-[=C2=A0=C2=A0=C2=A0 0.000000] Booting Linux on physical CPU 0x000000000=
-0 [0x412fd050]
-[=C2=A0=C2=A0=C2=A0 0.000000] Linux version 4.19.154-xos (nobody@androi=
-d-build) (Android (6877366 based on r383902b1) clang version 11.0.2 (ht=
-tps://android.googlesource.com/toolchain/llvm-project b397f81060ce6d701=
-042b782172ed13bee898b79), GNU ld (binutils-2.27-bd24d23f) 2.27.0.201703=
-15) #1 SMP PREEMPT Wed Nov 8 00:54:49 CET 2023
-[=C2=A0=C2=A0=C2=A0 0.000000] Machine model: Pine64 RK3566 Quartz64-A B=
-oard
-...omitted for brevity...
-[=C2=A0=C2=A0=C2=A0 0.000007] sched=5Fclock: 56 bits at 24MHz, resoluti=
-on 41ns, wraps every 4398046511097ns
-[=C2=A0=C2=A0=C2=A0 0.001828] Insufficient stack space to handle except=
-ion!
-[=C2=A0=C2=A0=C2=A0 0.001835] ESR: 0x81054040 -- IABT (lower EL)
-[=C2=A0=C2=A0=C2=A0 0.002766] FAR: 0xc08eea4d24faf096
-[=C2=A0=C2=A0=C2=A0 0.003098] Task stack:=C2=A0=C2=A0=C2=A0=C2=A0 [0xff=
-ffff8009cc1000..0xffffff8009cc5000]
-[=C2=A0=C2=A0=C2=A0 0.003697] IRQ stack:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 =
-[0xffffff8008000000..0xffffff8008004000]
-[=C2=A0=C2=A0=C2=A0 0.004299] Overflow stack: [0xffffffc1ff713080..0xff=
-ffffc1ff714080]
-[=C2=A0=C2=A0=C2=A0 0.004907] CPU: 0 PID: 0 Comm: swapper/0 Not tainted=
- 4.19.154-xos #1
-[=C2=A0=C2=A0=C2=A0 0.005516] Hardware name: Pine64 RK3566 Quartz64-A B=
-oard (DT)
-[=C2=A0=C2=A0=C2=A0 0.006073] pstate: 20400009 (nzCv daif +PAN -UAO)
-[=C2=A0=C2=A0=C2=A0 0.006544] pc : start=5Fkernel+0x26c/0x3d0
-[=C2=A0=C2=A0=C2=A0 0.006931] lr : start=5Fkernel+0x25c/0x3d0
-...omitted for brevity...
-[=C2=A0=C2=A0=C2=A0 0.098560] Kernel panic - not syncing: kernel stack =
-overflow
-[=C2=A0=C2=A0=C2=A0 0.099108] CPU: 0 PID: 0 Comm: swapper/0 Not tainted=
- 4.19.154-xos #1
-[=C2=A0=C2=A0=C2=A0 0.099717] Hardware name: Pine64 RK3566 Quartz64-A B=
-oard (DT)
-[=C2=A0=C2=A0=C2=A0 0.100270] Call trace:
-[=C2=A0=C2=A0=C2=A0 0.100515]=C2=A0 dump=5Fbacktrace+0x0/0x158
-[=C2=A0=C2=A0=C2=A0 0.100871]=C2=A0 show=5Fstack+0x14/0x1c
-[=C2=A0=C2=A0=C2=A0 0.101195]=C2=A0 dump=5Fstack+0xb8/0xf0
-[=C2=A0=C2=A0=C2=A0 0.101519]=C2=A0 panic+0x12c/0x2a4
-[=C2=A0=C2=A0=C2=A0 0.101815]=C2=A0 panic+0x0/0x2a4
-[=C2=A0=C2=A0=C2=A0 0.102095]=C2=A0 handle=5Fbad=5Fstack+0x118/0x12c
-[=C2=A0=C2=A0=C2=A0 0.102479]=C2=A0 =5F=5Fbad=5Fstack+0xc0/0xc4
-[=C2=A0=C2=A0=C2=A0 0.102809]=C2=A0 start=5Fkernel+0x26c/0x3d0
+--iNvGcfA3Pz7yQcX6
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-Full log: https://termbin.com/yzx6k
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVK1Q4ACgkQFHw5/5Y0
+tywTiwv/TB8UHqi/VS9Pdh582qM9vv/StJSfaTyRKv3aiVJXPHXkwg5LfTxV4TOk
+1zEHL0qksiEgT+Mnk/KhS8l04v4iumJI709l3C1eoWb78qsuH35R6zBjJ+zNi8Ml
+2xJHQKxhjaLyPE6IioCI7dcaZH8uxLP8bnzJeN7suSrYXAIGvFQmjc2T5CZ5XK10
+u+gMLLHFW+tAAA3L+vdfzKQnA1q/rKUvE3fF6lObhySq7DuiKowsJdi3QT/2TvN9
+jXmBg+5woNwL/7mxvC2dD30Ge3rEIwTwPI82t/I8x8Ixtdu55W7gDa5l+Ov7DQPe
+XyCUYTfUkkVOpj9GwqClDKLIyyQ9GPjbZc+1MODSPW+awrrt1m2VziiiG3YcvFbC
+/IYeD9uhmVylKlBNqmo+1ZYm173G8+h5CZD+n7WPRwtxic3FAdAoVc8wD+7NtdSg
+P0fZ4U89s2vut95UDY+4RrtyKTyLL19jJUuGMsuN37qW/5A7IdTISb4DoAqrovWY
+qFzrOM11
+=GIuI
+-----END PGP SIGNATURE-----
 
-Do I need to do anything to reserve stack space for the kernel?
-
-Thanks a lot!
-
-Cheers,
-Simao
-
-
-On Tuesday, November 07, 2023 21:42 CET, Sim=C3=A3o Gomes Viana <devel@=
-superboring.dev> wrote:
-=C2=A0Hi Simon,
-Hi everyone from the mailing list,
-
-I'm following up to the email you sent today about a particular problem=
- I'm facing trying to boot AOSP 11 (built from source) using U-Boot.
-I have extended my original email to include additional information and=
- added the mailing list to CC as requested.
-
-In essence, it boils down to this:
-## Booting Android Image at 0x00c00800 ...
-Kernel load addr 0x00c01000 size 15184 KiB
-Kernel command line: console=3DttyS2,1500000 earlycon=3Duart8250,mmio32=
-,0xfe660000 androidboot.selinux=3Dpermissive service=5Flocator.enable=3D=
-1 kpti=3D0 loop.max=5Fpart=3D7 firmware=5Fclass.path=3D/vendor/etc/firm=
-ware buildvariant=3Duser
-RAM disk load addr 0x01ad5000 size 751 KiB
-## Flattened Device Tree blob at 00600000
-=C2=A0=C2=A0 Booting using the fdt blob at 0x600000
-Working FDT set to 600000
-=C2=A0=C2=A0 Uncompressing Kernel Image
-lz4 compressed: uncompress error -71
-Must RESET board to recover
-
-
-I have asked the same question on SO with more details.
-
-The kernel is built in-line with the AOSP sources, just like LineageOS =
-does it.
-It builds the kernel using make as usual, then takes the Image.lz4 and =
-runs mkbootimg with that.
-
-I found this in scripts/Makefile.lib:
-quiet=5Fcmd=5Flz4 =3D LZ4=C2=A0=C2=A0=C2=A0=C2=A0 $@
-cmd=5Flz4 =3D (cat $(filter-out FORCE,$^) | \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 lz4 -l -12 --favor-decSpeed =
-stdin stdout && \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 $(call size=5Fappend, $(filt=
-er-out FORCE,$^))) > $@ || \
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (rm -f $@ ; false)
-
-It is using the -l parameter which is required for LZ4 compression of t=
-he kernel image.
-
-This is what is present in my BoardConfig:
-
-# Kernel
-BOARD=5FKERNEL=5FCMDLINE :=3D \
-=C2=A0=C2=A0 =C2=A0console=3DttyS2,1500000 \
-=C2=A0=C2=A0 =C2=A0earlycon=3Duart8250,mmio32,0xfe660000 \
-=C2=A0=C2=A0 =C2=A0androidboot.selinux=3Dpermissive \
-=C2=A0=C2=A0 =C2=A0service=5Flocator.enable=3D1 \
-=C2=A0=C2=A0 =C2=A0kpti=3D0 \
-=C2=A0=C2=A0 =C2=A0loop.max=5Fpart=3D7 \
-=C2=A0=C2=A0 =C2=A0firmware=5Fclass.path=3D/vendor/etc/firmware
-
-BOARD=5FKERNEL=5FBASE :=3D 0x10000000
-BOARD=5FKERNEL=5FPAGESIZE :=3D 2048
-BOARD=5FKERNEL=5FIMAGE=5FNAME :=3D Image.lz4
-TARGET=5FKERNEL=5FCLANG=5FCOMPILE :=3D true
-#TARGET=5FKERNEL=5FCLANG=5FVERSION :=3D latest
-TARGET=5FKERNEL=5FSOURCE :=3D kernel/rockchip/rk356x
-TARGET=5FKERNEL=5FCONFIG :=3D xos=5Frk356x=5Fdefconfig
-TARGET=5FPREBUILT=5FRESOURCE ?=3D $(TARGET=5FKERNEL=5FSOURCE)/resource.=
-img
-TARGET=5FBOOTLOADER=5FIS=5F2ND :=3D true
-
-This is what the file utility tells me:
-out/target/product/rk3566=5Frgo/boot.img: Android bootimg, kernel (0x10=
-008000), ramdisk (0x11000000), second stage (0x10f00000), page size: 20=
-48, cmdline (console=3DttyS2,1500000 earlycon=3Duart8250,mmio32,0xfe660=
-000 androidboot.selinux=3Dpermissive service=5Flocator.enable=3D1 kpti=3D=
-0 loop.m)
-
-
-unpack=5Fbootimg shows:
-boot magic: ANDROID!
-kernel=5Fsize: 15547433
-kernel load address: 0x10008000
-ramdisk size: 768194
-ramdisk load address: 0x11000000
-second bootloader size: 200192
-second bootloader load address: 0x10f00000
-kernel tags load address: 0x10000100
-page size: 2048
-os version: 11.0.0
-os patch level: 2021-09
-boot image header version: 2
-product name:
-command line args: console=3DttyS2,1500000 earlycon=3Duart8250,mmio32,0=
-xfe660000 androidboot.selinux=3Dpermissive service=5Flocator.enable=3D1=
- kpti=3D0 loop.max=5Fpart=3D7 firmware=5Fclass.path=3D/vendor/etc/firmw=
-are buildvariant=3Duser
-additional command line args:
-recovery dtbo size: 0
-recovery dtbo offset: 0x0000000000000000
-boot header size: 1660
-dtb size: 11792057
-dtb address: 0x0000000011f00000
-
-This is what the working boot.img built by the manufacturer yields:
-boot.img: Android bootimg, kernel (0x10008000), ramdisk (0x11000000), s=
-econd stage (0x10f00000), page size: 2048, cmdline (console=3DttyFIQ0 a=
-ndroidboot.baseband=3DN/A androidboot.wificountrycode=3DCN androidboot.=
-veritymode=3Denforcing androidboot.hardware=3Dr)
-
-unpack=5Fbootimg shows:
-boot magic: ANDROID!
-kernel=5Fsize: 31041552
-kernel load address: 0x10008000
-ramdisk size: 904155
-ramdisk load address: 0x11000000
-second bootloader size: 200192
-second bootloader load address: 0x10f00000
-kernel tags load address: 0x10000100
-page size: 2048
-os version: 11.0.0
-os patch level: 2021-04
-boot image header version: 2
-product name:
-command line args: console=3DttyFIQ0 androidboot.baseband=3DN/A android=
-boot.wificountrycode=3DCN androidboot.veritymode=3Denforcing androidboo=
-t.hardware=3Drk30board androidboot.console=3DttyFIQ0 androidboot.verifi=
-edbootstate=3Dorange firmware=5Fclass.path=3D/vendor/etc/firmware init=3D=
-/init rootwait ro loop.max=5Fpart=3D7 androidboot.selinux=3Dpermissive =
-buildvariant=3Duserdebug
-additional command line args:
-recovery dtbo size: 0
-recovery dtbo offset: 0x0000000000000000
-boot header size: 1660
-dtb size: 111487
-dtb address: 0x0000000011f00000
-
-Given that the kernel image is actually smaller than the manufacturer o=
-ne, there can't be an overlapping issue.
-The only real difference is the dtb size which is a lot bigger on the n=
-on-functional boot image (I don't know why).
-However, U-Boot is able to list all the DTBs.
-
-The kernel source I'm using is the one provided in the BSP here (the 79=
-G file): https://wiki.pine64.org/wiki/Quartz64=5FSoftware=5FReleases#An=
-droid=5FSDK
-
-If I build the kernel with CONFIG=5FCOMPRESS=5FGZ instead of CONFIG=5FC=
-OMPRESS=5FLZ4, I also get an error:
-## Booting Android Image at 0x00c00800 ...
-Kernel load addr 0x00c01000 size 13176 KiB
-Kernel command line: console=3DttyS2,1500000 earlycon=3Duart8250,mmio32=
-,0xfe660000 androidboot.selinux=3Dpermissive service=5Flocator.enable=3D=
-1 kpti=3D0 loop.max=5Fpart=3D7 firmware=5Fclass.path=3D/vendor/etc/firm=
-ware buildvariant=3Duserdebug
-RAM disk load addr 0x018df000 size 890 KiB
-## Flattened Device Tree blob at 00600000
-=C2=A0=C2=A0 Booting using the fdt blob at 0x600000
-Working FDT set to 600000
-=C2=A0=C2=A0 Uncompressing Kernel Image
-Error: inflate() returned -5
-gzip compressed: uncompress error -1
-Must RESET board to recover
-
-file utility says this about the kernel inside the boot image:
-kernel: gzip compressed data, max compression, from Unix, original size=
- modulo 2^32 30021648
-
-I am able to decompress it using gzip -d < kernel > kernel=5Fdecompress=
-ed
-Now file utility says:
-kernel=5Fdecompressed: Linux kernel ARM64 boot executable Image, little=
--endian, 4K pages
-
-The manufacturer kernel is not compressed, so it just tries to boot wit=
-hout decompressing:
-
-## Booting Android Image at 0x00c00800 ...
-Kernel load addr 0x00c01000 size 30315 KiB
-Kernel command line: console=3DttyFIQ0 androidboot.baseband=3DN/A andro=
-idboot.wificountrycode=3DCN androidboot.veritymode=3Denforcing androidb=
-oot.hardware=3Drk30board androidboot.console=3DttyFIQ0 androidboot.veri=
-fiedbootstate=3Dorange firmware=5Fclass.path=3D/vendor/etc/firmware ini=
-t=3D/init rootwait ro loop.max=5Fpart=3D7 androidboot.selinux=3Dpermiss=
-ive buildvariant=3Duserdebug
-RAM disk load addr 0x0299c000 size 883 KiB
-## Flattened Device Tree blob at 00600000
-=C2=A0=C2=A0 Booting using the fdt blob at 0x600000
-Working FDT set to 600000
-=C2=A0=C2=A0 XIP Kernel Image
-=C2=A0=C2=A0 Loading Ramdisk to ede39000, end edf15bdb ... OK
-ERROR: reserving fdt memory region failed (addr=3D0 size=3D0 flags=3D0)
-ERROR: reserving fdt memory region failed (addr=3D0 size=3D0 flags=3D0)
-=C2=A0=C2=A0 Loading Device Tree to 00000000edd36000, end 00000000ede38=
-fff ... OK
-Working FDT set to edd36000
-
-Starting kernel ...
-
-
-But the kernel does not start, the board just resets after a few second=
-s.
-
-I'm guessing there's something wrong with my bootcommand.
-
-I'd appreciate it if you could point me in the right direction.
-In case you need more information or want images of what I built, feel =
-free to ask for it.
-
-I have been trying to get this to work for weeks without any meaningful=
- success and am running out of ideas.
-
-Thanks a lot and best regards,
-Simao
-=C2=A0
-
-=C2=A0
+--iNvGcfA3Pz7yQcX6--
