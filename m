@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FA7C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B873EC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C276D871AB;
-	Wed,  8 Nov 2023 17:44:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 16D728755B;
+	Wed,  8 Nov 2023 17:49:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kkrZjp/e";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kyY10pzW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B266B871AD; Wed,  8 Nov 2023 17:44:34 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 621A5871AB; Wed,  8 Nov 2023 17:49:06 +0100 (CET)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0090B871A2
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:44:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C4A24871AB
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d84c24a810dso7367816276.2
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:44:31 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3b2b1af09c5so3429427b6e.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699461870; x=1700066670; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oBrLhJJWr3LhhjPDVKuDBKdPr1068b9WibTf5SXkLZ0=;
- b=kkrZjp/eWfjHVrPnznloYiCqmZ3SfPEhNaluXOFuHXEHwlHpXBGJjTU77GJKu6Aj9Y
- 80UfS//NY2VfPxGeLXgquDzBCxTsXXATL5GrHAv7I4XHDzeUTBBj3XkuGoOvqoSLjly/
- nsCcNlPnrBmmFrOsXXc+Vhy0KlTNIJ3ud6EIo=
+ d=gmail.com; s=20230601; t=1699462141; x=1700066941; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CzdXB1sthp1NUiYSFf7nB+rmZs553lE0YRG+xjqEi8U=;
+ b=kyY10pzWtJetFnBbHyA1rY0iMWM3923RSKAEmNv4LnPs1lHeFhmksFPL6rz/hYqP2V
+ dHGvlw+oyyxtfa5RwbXG5O8d27Yv3malsN2/K/GTqsV7rIKFNILaRz4Ztl8Zb67Nt2l/
+ h89KWrf7XCcVbEEF6yT+1uNjqKIqiS3YIyq9Fx+pwEpRVLkB1ObTXiZwAGJUiVZnLPfG
+ +4IrT0H+SqVmF3a9vBfJG3tqDE2eD1fx0rI+pEo2CS7L4F9yKWv+fxAMdHc0aZG8nyAu
+ hmytTtH3Gn9nzU+MtpBR0jdRVRXKgwFxw1eEQRO/fdTSTTrWOXaM9gLOXF8ivBVz4iB5
+ 933Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699461870; x=1700066670;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oBrLhJJWr3LhhjPDVKuDBKdPr1068b9WibTf5SXkLZ0=;
- b=ucu3hfrX68zEK6wAHlX5H/TJtIbuSDP/ZaHpYVDmLFvbpG9t/lXAabglHUpWf2zWIZ
- IfS1JjAUYMxo6sUfCzg72aPnKaNM5FJ2+QwZHzyeV+LpTH/L/eD8RkpXV66u7BXs+GNi
- 6FQDbsteNJ7lGDrOT2fg/G4jH0aOgv2UzNab4jshK/0AcO5dRLjNvxD4IbHoJQTT9ER0
- 6SDqYjphVgbaXQ3oUlEv0J7uAhhiD3Pe012giXYXS3WnBrKQ2YhUmR8qSFtX/zvyLE39
- QCenUn6NvnJVWsJCFwNcqrh4gVZ4/sW0we/fsw8N7up6Z/eKGAQVyjC2EHgopXjZe51a
- 9zOQ==
-X-Gm-Message-State: AOJu0YwS/5/y1v272v87l9QbN8E9DWt1LzTeErXgtUB8eLtBLn9c+eXR
- Xhaokx7uo37pF5jjrpt7kSqwzA==
-X-Google-Smtp-Source: AGHT+IF/Wi0G2WDYlgsCjHU1lhCVxCj10gAPvhFkEy2f4EYUVbRlfZ4MbcbEzbmbN4Ave1no4orFsw==
-X-Received: by 2002:a25:b18e:0:b0:d9b:76c3:4143 with SMTP id
- h14-20020a25b18e000000b00d9b76c34143mr2111456ybj.6.1699461870557; 
- Wed, 08 Nov 2023 08:44:30 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
- [2603:6081:7b00:6400:5409:8f3c:5603:314])
- by smtp.gmail.com with ESMTPSA id
- t7-20020a255f07000000b00d8679407796sm6350211ybb.48.2023.11.08.08.44.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Nov 2023 08:44:30 -0800 (PST)
-Date: Wed, 8 Nov 2023 11:44:27 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>,
- Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Peter Hoyes <Peter.Hoyes@arm.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, palmer@dabbelt.com
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-Message-ID: <20231108164427.GQ6601@bill-the-cat>
-References: <20231107221023.GS6601@bill-the-cat>
- <20231107-flyaway-arguable-0bccc778b256@spud>
- <20231107223837.GU6601@bill-the-cat>
- <20231107-audible-undoing-293506af3890@spud>
- <20231107232305.GW6601@bill-the-cat>
- <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
- <20231108003449.GF6601@bill-the-cat>
- <91ae75c2-a0d7-4835-8306-777c4d9afdd9@canonical.com>
- <20231108143735.GO6601@bill-the-cat>
- <d39c3c18-99e7-460b-97b8-9f84f523cf11@canonical.com>
+ d=1e100.net; s=20230601; t=1699462141; x=1700066941;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CzdXB1sthp1NUiYSFf7nB+rmZs553lE0YRG+xjqEi8U=;
+ b=fQ0VRQ1kSV693QjRzoa3DKiwBGdrimjn52BWoZDv8olIjtCJY7Fbitc7a5ZP4Z5fi/
+ ZJXgRd3lsvsiNAwF3iCnnaV/b4BsRRYReOlMHbcMCL1yOV3+0S2tUYfGNnAnj8otmhpG
+ 3wOi76MzPpIg1ykRS+7mGpsJf2izxs+E3f4uKFuBSMm+N2o3Ojc2ZAcIktzF8YOmKhC3
+ Q/h2ZMRJEVBTdz3m1udcq3OVQXG7nWcLL1RWMEplL6LU59vqaexxg8RrU0yji1xkbOyF
+ LeNEBmK5kJoVaZiCH7mnyp4XsgKo3d5+xlOYC3UVNTJ8ToHNG6brXIxgwjToNkaazXxS
+ QBQw==
+X-Gm-Message-State: AOJu0YwoaBWcalA+VVd0i8O4SLJcRYIAbpn6//FiwJMc4Hml9QNj9ZMi
+ kAQBKDcpDaBVlraJI1EPy3Q=
+X-Google-Smtp-Source: AGHT+IEtyGCFUTzjdQbEz4//pLPChqvICGcJRCoafSw3XYpqGfY+gb/IWDvTTg3DS2BZ/7W8KgGNog==
+X-Received: by 2002:a05:6808:8d9:b0:3b2:e233:1e7 with SMTP id
+ k25-20020a05680808d900b003b2e23301e7mr2321329oij.49.1699462141151; 
+ Wed, 08 Nov 2023 08:49:01 -0800 (PST)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ qb1-20020ad44701000000b0065d03eae7a0sm1244997qvb.82.2023.11.08.08.49.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Nov 2023 08:49:00 -0800 (PST)
+From: Sean Anderson <seanga2@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
+ Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Stefano Babic <sbabic@denx.de>, Vignesh R <vigneshr@ti.com>,
+ uboot-imx@nxp.com
+Subject: [PATCH v7 00/26] spl: Use common function for loading/parsing images
+Date: Wed,  8 Nov 2023 11:48:32 -0500
+Message-Id: <20231108164858.3497420-1-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+MUsmQZVYUPe+gPg"
-Content-Disposition: inline
-In-Reply-To: <d39c3c18-99e7-460b-97b8-9f84f523cf11@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,124 +104,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds support for loading all image types (Legacy (with and without
+LZMA), FIT (with and without LOAD_FIT_FULL), and i.MX) to the MMC, SPI, NOR,
+NET, FAT, EXT, NVMe, and semihosting load methods. It does this by introducing a
+helper function which handles the minutiae of invoking the proper parsing
+function, and reading the rest of the image.
 
---+MUsmQZVYUPe+gPg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hopefully, this will make it easier for load methods to support all image types
+that U-Boot supports, without having undocumented unsupported image types. I
+applied this to several loaders which were invoking spl_load_simple_fit and/or
+spl_parse_image_header, but I did not use it with others (e.g. DFU/RAM) which
+had complications in the mix.
 
-On Wed, Nov 08, 2023 at 07:25:22AM -0800, Heinrich Schuchardt wrote:
-> On 11/8/23 06:37, Tom Rini wrote:
-> > On Wed, Nov 08, 2023 at 06:23:37AM -0800, Heinrich Schuchardt wrote:
-> > > On 11/7/23 16:34, Tom Rini wrote:
-> > > > On Wed, Nov 08, 2023 at 12:29:03AM +0000, Conor Dooley wrote:
-> > > > > On Tue, Nov 07, 2023 at 06:23:05PM -0500, Tom Rini wrote:
-> > > > [snip]
-> > > > > > Thanks. Setting aside Simon's follow-up, this is what I was loo=
-king for.
-> > > > > > We might have to wait for Heinrich to return from the conferenc=
-e to have
-> > > > > > time to look at how to utilize the above and see what we can do=
- from
-> > > > > > there.
-> > > > >=20
-> > > > > I did read that, but I don't think most of it is relevant to the =
-binding
-> > > > > itself. His five things were:
-> > > > > | - U-Boot models hardware (and other things) as devices in drive=
-r model [1]
-> > > > >=20
-> > > > > This I think should be satisfied. The Zkr CSR is a property of th=
-e CPU,
-> > > > > and shouldn't have its own DT node IMO. Is it problematic for U-B=
-oot to
-> > > > > populate multiple devices for its driver model based on one DT no=
-de?
-> > >=20
-> > > Devices in U-Boot are bound on the basis of a compatible string. All =
-RISC-V
-> > > CPU nodes have a compatible string 'riscv' but that does not provide =
-any
-> > > information about the existence of the Zkr extension. That informatio=
-n is in
-> > > the 'riscv,isa-extensions' property of the cpu nodes (see
-> > > Documentation/devicetree/bindings/riscv/cpus.yaml).
-> > >=20
-> > > > > I know in Linux that I can create devices using something like
-> > > > > platform_device_register(), does U-Boot have a similar facility?
-> > >=20
-> > > This is what the U_BOOT_DRVINFO() macro in my driver does and which S=
-imon
-> > > discourages.
-> >=20
-> > My current thoughts are that in this case we could use U_BOOT_DRVINFO()
-> > like today and then have riscv_zkr_probe() be what checks the
-> > riscv,isa-extensions property for an appropriate match? This would mean
-> > we don't need any new nodes/compatibles/etc, and possibly not need any
-> > bootph- properties added either? I assume we don't need the RNG so early
-> > as for that to be an issue.
-> >=20
->=20
-> The presence of the Zkr extension in the device-tree 'riscv,isa-extension=
-s'
-> property does not indicate if the machine mode firmware has enabled access
-> in supervisor mode via the mseccfg.sseed flag. This is why my driver tries
-> to read the seed register and checks if an exception occurs.
+This series is organized roughly into two parts. Patches up to "spl: Add generic
+spl_load function" are all setup or size-reduction oriented. Later patches
+generally convert various load functions to spl_load.
 
-This I think is a question for Cody or someone else in the RISC-V
-community? If just checking the property isn't sufficient, what is? Or,
-what's the best / most reliable way? I don't know and I'll let the
-RISC-V community sort that out instead of making incorrect assumptions
-myself.
+bloat-o-meter results (for CONFIG_SPL only) at [1]. Size growth has been the
+bigegst challenge to preparing this series. I have used every trick I can think
+of to reduce bloat. Some SAMA boards no longer fit, but I have a plan to fix
+them [2].
 
-> Additionally checking the device-tree would increase code size. Is it rea=
-lly
-> needed?
+This is bar far the largest and most-difficult revision of this series to-date.
+There are probably still things which can reduce the size, but I have been
+working on this series for the better part of two months and I think it is a
+good idea to get some feedback. Because of the SAMA bloat, this series will not
+pass CI, so I expect to do a v7 before this is ready to apply. Feel free,
+however, to apply patches in the first half (especially the fixes).
 
-I mean, it depends? My biggest issue right now is that in-tree I don't
-see any RISC-V targets that select any of the RISCV_ISA options so I
-can't evaluate what platforms grow by how much where. We shouldn't be
-talking about kilobytes of change, so no, I don't think somehow checking
-the device tree for this is out of bounds. But it comes back to what I
-just asked above, first. We need the correct and expected way to check
-for this feature to be known, then we decide how to handle that.
+This version of the series is better-tested than ever before, thanks to some new
+unit tests. However, things like the i.MX ROMAPI are untested. NAND should also
+be tested more-widely, for reasons listed in the commit message. I encourage you
+try this series out on your favorite board.
 
-> We may have multiple RNG drivers enabled on the same device, e.g. TPM, Zk=
-r,
-> virtio-rng. In several code locations we try to use the first RNG device
-> (not the first successfully probed RNG device). This is why
->=20
-> [PATCH 1/1] rng: detect RISC-V Zkr RNG device in bind method
-> https://lore.kernel.org/u-boot/20231104065107.23623-1-heinrich.schuchardt=
-@canonical.com/
->=20
-> moves the detection from probe() to bind(). The patch further corrects the
-> return code if the RNG device is not available.
+This series depends on [3]. (Almost passing) CI at [4].
 
-Sounds like we have some other general issues to sort out too then.
-Filing an issue on
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/ would be
-good so it doesn't get forgotten.
+[1] https://gist.github.com/Forty-Bot/5bfe88676dd3c2aec6ebc23abb08e06f
+    This includes some changes to am335x_evm_spiboot and am65x_evm_r5_usbdfu
+    which have since been undone. This was ran for v6.
+[2] https://lore.kernel.org/u-boot/20231105022742.632175-1-seanga2@gmail.com/
+[3] https://lore.kernel.org/u-boot/20231104203753.1579217-1-seanga2@gmail.com/
+[4] https://source.denx.de/u-boot/custodians/u-boot-clk/-/pipelines/18447
+    For v6.
 
---=20
-Tom
+Changes in v7:
+- Disable FS_FAT for the zynq(mp) boards as well, as suggested by Michal
+- Reword documentation for spl_load_info
+- Split off setting bl_len to ARCH_DMA_MINALIGN from filename removal
+- Remove Pali from CC
 
---+MUsmQZVYUPe+gPg
-Content-Type: application/pgp-signature; name="signature.asc"
+Changes in v6:
+- Fix uninitialized return value when we can't get a blk_desc
+- Disable SPL_FS_FAT when it isn't used
+- Don't close fd before spl_load_simple_fit
+- Remove NULL assignments in spl_load_info
+- Remove dev from spl_load_info
+- Take advantage of bl_len's power-of-twoness
+- Refactor spl_load_info->read to use units of bytes
+- Remove filename from spl_load_info
+- Only support bl_len when we have to
+- Remove spl_nand_legacy_read
+- Split off LZMA decompression into its own function
+- Support testing LEGACY_LZMA filesystem images
+- Use pseudo-LTO for spl_load
+- Align reads to bl_len
+- Add SYS_MMCSD_RAW_MODE to help determine whether SPL_MMC loads
+  anything directly.
+- Convert nand to spl_load
+- Fix LZMA support
+- Fix load address
+- Fix invalid return from spl_blk_load_image
+- Fix soft reset after loading from SPI
+- Explicitly initialize load_info members to reduce text size
+- Rebase on u-boot/next
+- Add option to disable DMA alignment for FAT
 
------BEGIN PGP SIGNATURE-----
+Changes in v5:
+- Make SHOW_ERRORS depend on LIBCOMMON
+- Load the header in spl_load as well
+- Don't bother trying to DMA-align the buffer, since we can't really fix
+  it.
+- Convert NVMe to spl_load
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLuugACgkQFHw5/5Y0
-tyx6VQv/eAxr+fMXxi2xKJf4gcYMXXmbk/2TKTBrDAUBZFRspXNYZWaAwgE2Rx0W
-tJ6KMMPiDMjMG3Zm/9zjcxmMy3xldt7ZFAi/ON1TchkHAh3CVA4Rhs8pc4uZ0y3D
-f7oU2V+ZKpbRYoMxmdfhL9Sil1PEiiNnxf06cd93VEYJT1NLMPW0SqSq1GHVye+2
-ch7sA1riQN84/C7hJcSQczSfqZNsYYhguDOUbyIF1S3TVDh0yGa2GmWF3nIzQzwx
-1fE9y94XPhWnFK0R90u+rFM9f9PvFI1AcHnpulj3OK1wn5OQ8Z2W9KfjLPric/P9
-p5hYxzHGXFuKe0PsKOzbqWJ1c0a0KW8spbA07Z12CsYE0aaWGv9pAgXjdsQxDRE0
-RjkQcJNzohCOXVo2a/YEKSRPN+Mxe8T4uJG4/I83gNBt9NoM3G5iabGEoxmEVOoK
-59XXpLr1cXrD682og+4xPxCUaUPzvDA8L6RV2strsdTvBnBDOP/NI7E9HHGIFo6d
-XkA2Hm37
-=zhn/
------END PGP SIGNATURE-----
+Changes in v4:
+- Fix format specifiers in debug prints
+- Reword/fix some of the doc comments for spl_load
+- Rebase on u-boot/master
 
---+MUsmQZVYUPe+gPg--
+Changes in v3:
+- Fix using ffs instead of fls
+- Fix using not initializing bl_len when info->filename was NULL
+- Fix failing on success
+
+Changes in v2:
+- Use reverse-xmas-tree style for locals in spl_simple_read. This is not
+  complete, since overhead depends on bl_mask.
+- Convert semihosting as well
+- Consolidate spi_load_image_os into spl_spi_load_image
+
+Sean Anderson (26):
+  spl: blk_fs: Fix uninitialized return value when we can't get a
+    blk_desc
+  arm: Disable SPL_FS_FAT when it isn't used
+  spl: Make SHOW_ERRORS depend on LIBCOMMON
+  spl: semihosting: Don't close fd before spl_load_simple_fit
+  spl: Remove NULL assignments in spl_load_info
+  spl: Remove dev from spl_load_info
+  spl: Take advantage of bl_len's power-of-twoness
+  spl: Refactor spl_load_info->read to use units of bytes
+  spl: Set FAT bl_len to ARCH_DMA_MINALIGN
+  spl: Remove filename from spl_load_info
+  spl: Only support bl_len when we have to
+  spl: nand: Remove spl_nand_legacy_read
+  spl: legacy: Split off LZMA decompression into its own function
+  test: spl: Support testing LEGACY_LZMA filesystem images
+  spl: Add generic spl_load function
+  spl: Convert ext to use spl_load
+  spl: Convert fat to spl_load
+  spl: Convert mmc to spl_load
+  spl: Convert nand to spl_load
+  spl: Convert net to spl_load
+  spl: Convert nor to spl_load
+  spl: Convert NVMe to spl_load
+  spl: Convert semihosting to spl_load
+  spl: Convert spi to spl_load
+  spl: spi: Consolidate spi_load_image_os into spl_spi_load_image
+  spl: fat: Add option to disable DMA alignment
+
+ arch/arm/mach-imx/spl_imx_romapi.c        |  24 ++--
+ arch/arm/mach-sunxi/spl_spi_sunxi.c       |   5 +-
+ common/spl/Kconfig                        |  37 +++++-
+ common/spl/spl.c                          |  13 +-
+ common/spl/spl_blk_fs.c                   |  73 +++--------
+ common/spl/spl_ext.c                      |  36 +++---
+ common/spl/spl_fat.c                      |  62 ++++------
+ common/spl/spl_fit.c                      |  74 ++++-------
+ common/spl/spl_imx_container.c            |  55 ++++-----
+ common/spl/spl_legacy.c                   | 110 ++++-------------
+ common/spl/spl_mmc.c                      | 101 ++-------------
+ common/spl/spl_nand.c                     | 104 ++++------------
+ common/spl/spl_net.c                      |  29 +----
+ common/spl/spl_nor.c                      |  42 ++-----
+ common/spl/spl_ram.c                      |   2 +-
+ common/spl/spl_semihosting.c              |  65 ++--------
+ common/spl/spl_spi.c                      | 130 ++++---------------
+ common/spl/spl_ymodem.c                   |   4 +-
+ configs/am335x_evm_spiboot_defconfig      |   2 +-
+ configs/am65x_evm_r5_usbdfu_defconfig     |   1 -
+ configs/xilinx_zynqmp_mini_qspi_defconfig |   3 +-
+ configs/zynq_cse_nand_defconfig           |   2 +
+ configs/zynq_cse_nor_defconfig            |   2 +
+ configs/zynq_cse_qspi_defconfig           |   2 +
+ drivers/usb/gadget/f_sdp.c                |  10 +-
+ include/spl.h                             |  62 ++++++++--
+ include/spl_load.h                        | 144 ++++++++++++++++++++++
+ include/test/spl.h                        |   4 +
+ test/image/Kconfig                        |   1 +
+ test/image/spl_load.c                     |  13 +-
+ test/image/spl_load_fs.c                  |  32 +++--
+ test/image/spl_load_nand.c                |   2 +
+ test/image/spl_load_net.c                 |   2 +
+ test/image/spl_load_nor.c                 |   2 +
+ test/image/spl_load_os.c                  |  16 ++-
+ test/image/spl_load_spi.c                 |   1 +
+ 36 files changed, 534 insertions(+), 733 deletions(-)
+ create mode 100644 include/spl_load.h
+
+-- 
+2.37.1
+
