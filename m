@@ -4,68 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB007C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 17:30:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00277C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 17:38:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFFBC871C0;
-	Wed,  8 Nov 2023 18:30:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 56490871AF;
+	Wed,  8 Nov 2023 18:38:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dabbelt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oI28Qqh9";
+	dkim=pass (2048-bit key; unprotected) header.d=dabbelt-com.20230601.gappssmtp.com header.i=@dabbelt-com.20230601.gappssmtp.com header.b="0D6anMod";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14EBB871E7; Wed,  8 Nov 2023 18:30:39 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1D12687254; Wed,  8 Nov 2023 18:38:48 +0100 (CET)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66489871AD
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 18:30:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BAA0871A2
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 18:38:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A8HUR6G092393;
- Wed, 8 Nov 2023 11:30:27 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699464627;
- bh=QNHxvtCmmkwlXx3YL8SdsUt3IRUgdvHR2xsIYB9zyU8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=oI28Qqh9M4jJHvquKW/d/1vasiJklyiFxdaBxg4tFN63vSrtTvw6xWxeZS/8xIsQA
- E/cQvIrkp6qxAY8iAUHUgfA5DPGbv6p8RvXJ8aUd2mnIkf4m0kHw7n06qd5Jpgom2X
- XCq3kkKjQGRXeOHUIZGODRrQPhLFpfDktXszNDyM=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A8HURWm073180
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 8 Nov 2023 11:30:27 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 8
- Nov 2023 11:30:27 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 8 Nov 2023 11:30:27 -0600
-Received: from [10.250.34.172] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A8HURjl120335;
- Wed, 8 Nov 2023 11:30:27 -0600
-Message-ID: <a8ec9dbe-f3a9-4a4e-88b5-a297d576c075@ti.com>
-Date: Wed, 8 Nov 2023 11:30:27 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/8] board: ti: j721e: During resume spl restores TF-A
- and DM-Firmware
-Content-Language: en-US
-To: Thomas Richard <thomas.richard@bootlin.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <thomas.petazzoni@bootlin.com>, <gregory.clement@bootlin.com>,
- <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>
-References: <20231107161802.855154-1-thomas.richard@bootlin.com>
- <20231107161802.855154-8-thomas.richard@bootlin.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231107161802.855154-8-thomas.richard@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ dmarc=none (p=none dis=none) header.from=dabbelt.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=palmer@dabbelt.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3b2e73a17a0so4424229b6e.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 09:38:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20230601.gappssmtp.com; s=20230601; t=1699465123; x=1700069923;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:from:to:cc:subject:date:message-id
+ :reply-to; bh=H/8Wl3VTM+/pWShRUtnnlnKq3nN4vXkPGC8bNEaFnbI=;
+ b=0D6anMod2JdYecgHKU7SbxoqrNEF+mf3vzwDgamcfzA4IrXLDmsc4+G6mxELavTRaq
+ nzcy8QVbYmNueYvayIJhc3AduqNs85MupQ5txn/tkLbs3XHqqu2anhEJSZNZkt/J8+25
+ ARnd6SaSwt0zdtBLevvIOOzCs0AcYh+HClgH/iJ46jUPHxKC6ywgByJPQRomCcCjg++a
+ J8dINOKfLEBPaUZ1G7gNm8GYpOJqM5QRuOx7ReXw1h4ZhW1iRgLg781B3N9uK3/g8F5m
+ m/obemflO+iVwbL2HPcDtvWjVdbbPSQKaDZnTOp+g1Y0FPTFVnRnNNL5KqoDBVR3QcIo
+ D7/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699465123; x=1700069923;
+ h=content-transfer-encoding:mime-version:message-id:to:from:cc
+ :in-reply-to:subject:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=H/8Wl3VTM+/pWShRUtnnlnKq3nN4vXkPGC8bNEaFnbI=;
+ b=v1MA1T0OOSO8V9eGIU0/RBBqzOiX1mEo6ys09l4x8NhNn4ijiIBppUIdQgPEfXgwSM
+ uR1N/Ngo1MlJLfLdcbNM3huJyWdcJyRToq04XpaAK1838PO0aP0XmzNAQMm0JvNP288U
+ tOTKXWliJPVYGe/u33uFjVml3JXS7QPh94C0190aHuFWvYSPJ82mVbHJj5Wa2sgtVSoN
+ yvJCxT8aDiNvYbpTSTwziua9+6lnSi2muFgYlpB6wkzpacvSQEiTM2/yumTrzi4QomJQ
+ K2s8o8xGBC7TtvfBcOUpCOXRPK5PGBlp47qKdmiVWW+44g1DiuYAH/c794qf8bZ6vSDl
+ cAUQ==
+X-Gm-Message-State: AOJu0YxTKW6NFlKIrXlOfoapwSXp00bscw7TNgL7R8oRil48eSr5lQw7
+ ONsU1dXIS7fH1O9PCqdE1dvrpQ==
+X-Google-Smtp-Source: AGHT+IEgfON8dsrVtEIPKobBL6FUVTMY0WIm94uT1mw7jJXu5CCPe5PLdO0dY3gxuKq6UNFSpYvRTQ==
+X-Received: by 2002:a54:4004:0:b0:3ae:2024:837b with SMTP id
+ x4-20020a544004000000b003ae2024837bmr2682393oie.34.1699465122634; 
+ Wed, 08 Nov 2023 09:38:42 -0800 (PST)
+Received: from localhost ([192.184.165.199]) by smtp.gmail.com with ESMTPSA id
+ u5-20020a056808000500b003ae51628725sm1972215oic.13.2023.11.08.09.38.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Nov 2023 09:38:41 -0800 (PST)
+Date: Wed, 08 Nov 2023 09:38:41 -0800 (PST)
+X-Google-Original-Date: Wed, 08 Nov 2023 09:38:39 PST (-0800)
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+In-Reply-To: <20231107-audible-undoing-293506af3890@spud>
+CC: trini@konsulko.com, robh@kernel.org, sjg@chromium.org,
+ andre.przywara@arm.com, 
+ heinrich.schuchardt@canonical.com, rick@andestech.com, ycliang@andestech.com,
+ apatel@ventanamicro.com, 
+ merlew4n6@gmail.com, chanho61.park@samsung.com, sughosh.ganu@linaro.org,
+ u-boot@lists.denx.de, 
+ Peter.Hoyes@arm.com, avromanov@salutedevices.com, ilias.apalodimas@linaro.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: Conor Dooley <conor@kernel.org>
+Message-ID: <mhng-6682c062-a0e0-4811-8315-54a653c0e540@palmer-ri-x1c9>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,189 +97,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/23 10:18 AM, Thomas Richard wrote:
-> During the boot a copy of DM-Firmware is done in a reserved memory
-> area before it starts.
-> When resuming, R5 SPL uses this copy of DM-Firmware instead of the fit
-> image.
-> TF-A which saved itself in this same memory area, is restored in
-> SRAM by R5 SPL.
-> 
-> Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
-> 
-> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
-> Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
-> 
-> ---
-> 
-> Changes in v2:
-> - Check if TF-A is running in DRAM, if yes no need to restore it
-> - Remove BL31_START macro, and get TF-A start address from the fit image
-> 
->   arch/arm/mach-k3/common.c                 | 48 ++++++++++++++++++++++-
->   arch/arm/mach-k3/include/mach/j721e_spl.h | 28 +++++++++++++
->   arch/arm/mach-k3/sysfw-loader.c           |  9 +++--
->   3 files changed, 81 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index a35110429b..737a1a28c6 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -26,6 +26,7 @@
->   #include <env.h>
->   #include <elf.h>
->   #include <soc.h>
-> +#include <hang.h>
->   
->   #if IS_ENABLED(CONFIG_SYS_K3_SPL_ATF)
->   enum {
-> @@ -221,6 +222,11 @@ void release_resources_for_core_shutdown(void)
->   	}
->   }
->   
-> +__weak int board_is_resuming(void)
-> +{
-> +	return 0;
-> +}
-> +
->   void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->   {
->   	typedef void __noreturn (*image_entry_noargs_t)(void);
-> @@ -235,6 +241,32 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->   	if (ret)
->   		panic("rproc failed to be initialized (%d)\n", ret);
->   
-> +	if (board_is_resuming()) {
-> +#if IS_ENABLED(CONFIG_SOC_K3_J721E)
-> +		if (!valid_elf_image(LPM_DM_SAVE))
-> +			panic("%s: DM-Firmware image is not valid, it cannot be loaded\n",
-> +			      __func__);
-> +
-> +		loadaddr = load_elf_image_phdr(LPM_DM_SAVE);
-> +
-> +		/*
-> +		 * Check if the start address of TF-A is in DRAM.
-> +		 * If not it means TF-A was running in SRAM, so it shall be
-> +		 * restored.
-> +		 */
-> +		if (*(ulong *)(LPM_BL31_START_SAVE) < CFG_SYS_SDRAM_BASE)
-> +			memcpy((void *)*(uintptr_t *)(LPM_BL31_START_SAVE),
-> +			       (void *)LPM_BL31_SAVE, BL31_SIZE);
+On Tue, 07 Nov 2023 15:12:16 PST (-0800), Conor Dooley wrote:
+> +CC Palmer
+>
+> On Tue, Nov 07, 2023 at 05:38:37PM -0500, Tom Rini wrote:
+>> On Tue, Nov 07, 2023 at 10:27:50PM +0000, Conor Dooley wrote:
+>> > On Tue, Nov 07, 2023 at 05:10:23PM -0500, Tom Rini wrote:
+>> > 
+>> > 
+>> > > further clarify or not
+>> > > the RISC-V ISA thing that's elsewhere in this thread (and part of the
+>> > > kernel, not a U-Boot thing).
+>> > 
+>> > TBH, this a bit fragmented across threads, and as someone that hasn't
+>> > been following it it's a bit difficult to tell exactly what is being
 
-This will not work. The memory where TF-A is running will be firewalled and
-SPL absolutely cannot be securely trusted to load TF-A. Especially from an
-unencrypted location in DDR. TF-A must be loaded as it is today using signed
-certificate images. You should know this, I explained it all when you tried
-the same in TF-A:
+Also just kind of jumping in: I don't usually follow u-boot stuff, but a 
+few of us ended up talking abot this.
 
-https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/23992
+>> > asked for. Would someone be able to ask it as a direct question?
+>> 
+>> Sorry for being unclear, and thanks for asking. What I think the U-Boot
+>> community would like to know is, what is the device-tree based way to
+>> know if a RISC-V platform has the Zbb extensions
+>
+> For this one, it's pretty straightforward IMO - if riscv,isa-extensions
+> contains "zbb", then you are safe to use those instructions. My
+> understanding is that relying on getting illegal instruction traps is
+> not a sufficient test for usability of standard extensions, as a vendor
+> extension could be using the same opcodes as a standard extension.
 
-NAK
+Not just could, but we've got systems that actually overlay 
+vendor-specific behavior onto the standard encoding space.  There's a 
+lot of small offenders for things like errata, but there's also stuff 
+like T-Head where huge chunks of space reserved by the ISA for standard 
+stuff gets reused.
 
-Andrew
+>> so the RNG opcodes,
+>> similar (in concept at least?) to the ARMv8.5 RNG feature.
+>
+> The ordinary extensions that are instructions - like Zbkb that provides
+> bit manipulation instructions for cryptography you will be able to rely
+> on riscv,isa-extensions also. Zkr is actually a CSR acting as an entropy
+> source and is a bit more complicated. RISC-V Cryptography Extensions
+> Volume I, Chapter Four [0] is the relevant thing for use of the CSR
+> provided by Zkr, and it says "The seed CSR is also access controlled by
+> execution mode, and attempted read or write access will raise an illegal
+> instruction exception outside M mode unless access is explicitly granted."
+> My take is that either the SBI implementation needs to provide S-Mode
+> U-Boot with an accurate devicetree (including what extensions are valid
+> for use in S-mode) or if the devicetree is provided as part of the U-Boot
+> binary then it needs to match what is available at that privilege level
+> on the platform. In this case, you would also be able to rely on
+> riscv,isa-extensions for that detection. There is an existing dt-binding
+> patch
+> <https://lore.kernel.org/linux-riscv/20231107105556.517187-6-cleger@rivosinc.com/>
+> that adds Zkr, and my proposal would be to document that the presence of Zkr
+> explicitly in riscv,isa-extensions means that the bit in mseccfg.[s,u]seed
+> has been set so it can be used at the current privilege level.
 
-> +
-> +		ret = rproc_load(1, *(ulong *)(LPM_BL31_RESUME_SAVE), BL31_SIZE);
-> +		if (ret)
-> +			panic("%s: ATF failed to load on rproc (%d)\n", __func__, ret);
-> +
-> +		debug("%s: jumping to address %x\n", __func__, loadaddr);
-> +		goto start_arm64;
-> +#endif
-> +	}
-> +
->   	init_env();
->   
->   	if (!fit_image_info[IMAGE_ID_DM_FW].image_start) {
-> @@ -250,6 +282,10 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->   		fit_image_info[IMAGE_ID_ATF].image_start =
->   			spl_image->entry_point;
->   
-> +#if IS_ENABLED(CONFIG_SOC_K3_J721E)
-> +	*(uintptr_t *)(LPM_BL31_START_SAVE) = fit_image_info[IMAGE_ID_ATF].image_start;
-> +#endif
-> +
->   	ret = rproc_load(1, fit_image_info[IMAGE_ID_ATF].image_start, 0x200);
->   	if (ret)
->   		panic("%s: ATF failed to load on rproc (%d)\n", __func__, ret);
-> @@ -289,8 +325,18 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->   		loadaddr = load_elf_image_phdr(loadaddr);
->   	} else {
->   		loadaddr = fit_image_info[IMAGE_ID_DM_FW].image_start;
-> -		if (valid_elf_image(loadaddr))
-> +		if (valid_elf_image(loadaddr)) {
->   			loadaddr = load_elf_image_phdr(loadaddr);
-> +#if IS_ENABLED(CONFIG_SOC_K3_J721E)
-> +			if (fit_image_info[IMAGE_ID_DM_FW].image_len > (BUFFER_ADDR - LPM_DM_SAVE))
-> +				log_warning("%s\n: Not enough space to save DM-Firmware",
-> +					    __func__);
-> +			else
-> +				memcpy((void *)LPM_DM_SAVE,
-> +				       (void *)fit_image_info[IMAGE_ID_DM_FW].image_start,
-> +					   fit_image_info[IMAGE_ID_DM_FW].image_len);
-> +#endif
-> +		}
->   	}
->   
->   	debug("%s: jumping to address %x\n", __func__, loadaddr);
-> diff --git a/arch/arm/mach-k3/include/mach/j721e_spl.h b/arch/arm/mach-k3/include/mach/j721e_spl.h
-> index e8947917a6..8e0f141ed6 100644
-> --- a/arch/arm/mach-k3/include/mach/j721e_spl.h
-> +++ b/arch/arm/mach-k3/include/mach/j721e_spl.h
-> @@ -42,4 +42,32 @@
->   #define K3_PRIMARY_BOOTMODE		0x0
->   #define K3_BACKUP_BOOTMODE		0x1
->   
-> +/* Starting buffer address is 1MB before the stack address in DDR */
-> +#define BUFFER_ADDR (CONFIG_SPL_STACK_R_ADDR - SZ_1M)
-> +
-> +/* This is actually the whole size of the SRAM */
-> +#define BL31_SIZE    0x20000
-> +
-> +/* This address belongs to a reserved memory region for the point of view of
-> + * Linux, U-boot SPL must use the same address to restore TF-A and resume
-> + * entry point address
-> + */
-> +#define LPM_SAVE		0xA5000000
-> +#define LPM_BL31_SAVE		LPM_SAVE
-> +#define LPM_BL31_RESUME_SAVE	LPM_BL31_SAVE + BL31_SIZE
-> +#define LPM_BL31_START_SAVE	LPM_BL31_RESUME_SAVE + __SIZEOF_POINTER__
-> +#define LPM_DM_SAVE		LPM_BL31_START_SAVE  + __SIZEOF_POINTER__
-> +
-> +/* Check if the copy of TF-A and DM-Firmware in DRAM does not overlap an
-> + * over memory section.
-> + * The resume address of TF-A is also saved in DRAM.
-> + * At build time we don't know the DM-Firmware size, so we keep 512k to
-> + * save it.
-> + */
-> +#if defined(CONFIG_SPL_BUILD) && defined(CONFIG_TARGET_J7200_R5_EVM)
-> +#if ((LPM_DM_SAVE + SZ_512K) > BUFFER_ADDR)
-> +#error Not enough space to save DM-Firmware, TF-A and context for S2R
-> +#endif
-> +#endif
-> +
->   #endif
-> diff --git a/arch/arm/mach-k3/sysfw-loader.c b/arch/arm/mach-k3/sysfw-loader.c
-> index 9be2d9eaea..e6d452e590 100644
-> --- a/arch/arm/mach-k3/sysfw-loader.c
-> +++ b/arch/arm/mach-k3/sysfw-loader.c
-> @@ -84,13 +84,16 @@ static bool sysfw_loaded;
->   static void *sysfw_load_address;
->   
->   /*
-> - * Populate SPL hook to override the default load address used by the SPL
-> - * loader function with a custom address for SYSFW loading.
-> + * Populate SPL hook to override the default load address used by the
-> + * SPL loader function with a custom address for SYSFW loading. In
-> + * other case use also a custom address located in a reserved memory
-> + * region. It ensures that Linux memory won't be corrupted by SPL during
-> + * suspend to ram.
->    */
->   struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
->   {
->   	if (sysfw_loaded)
-> -		return (struct legacy_img_hdr *)(CONFIG_TEXT_BASE + offset);
-> +		return (struct legacy_img_hdr *)(BUFFER_ADDR + offset);
->   	else if (sysfw_load_address)
->   		return sysfw_load_address;
->   	else
+FWIW, that seems generally viable to me.
+
+> If that's not acceptable, and people think that having Zkr in the
+> devicetree means that the hardware has the extension, regardless of
+> usability at the present privilege level, then IMO we need an SBI ecall
+> defined to request entablement of the CSR & report as to whether or not
+> that was possible.
+
+I think we can start without the SBI interface, but I'm not 100% sure.  
+I was worried about writes to "seed" somehow resulting in an information 
+leak, but the spec says "The write value (in rs1 or uimm) must be 
+ignored by implementations." so I think we're safe.
+
+> I'm not sure how any of the above lines up with the ARMv8.5 RNG feature
+> unfortunately.
+
+All I know is what's in this patch set 
+<https://patchwork.kernel.org/project/linux-arm-kernel/patch/20191019022048.28065-2-richard.henderson@linaro.org/>.  
+It looks generalyl to me like the RNDR bits in 
+"cpu-features-registers.rst" would coorespond to "Zkr" being set in 
+"riscv,isa-extensions" -- we don't have ISA-defined feature registers, 
+hence why all this ends up shimed in via DT.
+
+>
+> Cheers,
+> Conor.
+>
+> 0 - https://github.com/riscv/riscv-crypto/releases/tag/v1.0.1-scalar
