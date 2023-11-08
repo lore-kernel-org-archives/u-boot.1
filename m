@@ -4,105 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E4EC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:25:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 642B0C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:30:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE60C871D4;
-	Wed,  8 Nov 2023 16:25:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id DFCDC871AD;
+	Wed,  8 Nov 2023 16:30:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="C0Fav5Dr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lLXJN4c2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E853871CD; Wed,  8 Nov 2023 16:25:30 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0292F86F7E; Wed,  8 Nov 2023 16:30:34 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC8A871D4
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:25:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FF03871AD
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:30:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4B27D40C50
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 15:25:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699457127;
- bh=kft3sf+nnK7VBnDZ+gJv9cjVk+9ntCpNUNzIWw1qMY8=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=C0Fav5DrCVlZd3DXK/8N5goDfSFjNR9W7LwTSMI0nKXfrAweR52SPpCYEQZUhhE+L
- qD/EHQI4ya2C5dCl/KJJDcOlPUeOXlOgjX0RI3BdioOyrWB6V9A8T1m16veVGpWYw8
- vjDd/H9HUc2JypuBHWjYnSCCxNEoKIGNVl97k9oX9+diGoHczYzhX+AcG/5mMHzPnL
- 9TskHpEhUVeC6COvo7qpduy0Af4XgCU5mMoO2J21zVNIS1BJzInldBRLLbXWoxjpxh
- 7VKfRS70WCKfX672ANbW1QLgOmK/WAXFo5nII3LrmDQ91Zorrrx4l33BbwLfmkB5QH
- Ltk35cmH76G3A==
-Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-1cc3ad55c75so48159715ad.0
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:25:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6754b4091b6so43317996d6.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:30:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699457429; x=1700062229; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=RoZpg4LSUB5IJM1KPjpSyxTlqY6GymYYfI1XdxI5kx4=;
+ b=lLXJN4c2PQGOAlATvV9I+9hnt0LP7FTK40DffJCgzlEIm2dvzYdCYiiXWPESjHhHti
+ UqDDSEmH9pAK4ZvKB/U1alfsgsHVTNZR96BEySIsboWOGxgWoFeZw4X8yCdXm/ImvyW8
+ uhnev+B7k7pFmZZTBBrcW6sa+beGIggNmhfhzcrcyQOXZxuIHpv0FsAVxMRBrZGoF3CQ
+ nEktvHdQLeQitt13wHOfN2Sb+4kVTy0yS1AWhG7AZtHjSVv68bAD42DToAV1OkkFi9Md
+ n86Mio0hL+xe6v1ssE93MrD3NZpFwixYbR7DtI6ht3hv5ZZjLfLeyXIW7IfDfFF42UKg
+ TX9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699457126; x=1700061926;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1699457429; x=1700062229;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kft3sf+nnK7VBnDZ+gJv9cjVk+9ntCpNUNzIWw1qMY8=;
- b=Xv8oXphzEK0B78pXBITvXzOP+iQxo7zO1eqycvPGCbTNuqFH0E7Ue0LMy4Pn6NDx5D
- dJXNzESEfUJT3VAzgqrdHcCORyymdzLlsZ11/WBbHE1d/jtLIw4jbmpACoNG1WuN3UDr
- T4P7DSIo3OeiZ0eXx2oGlDoCB92JylQ0cnCJBPRcwFyMmvmdlFAIujqqlOUNYskgl7s+
- BmgCwgpdW9A/d1BBO4OfKE9X1TpBeDephU5IBWP7wiZ4a8UxawLEWCt6QCBrJ/YmjWGz
- tkA4dfZeZ9ctkKLwYStNv/jeH6jfsYWL9r8O1kQ2hFSLgwaKXoU1s0WIym3QmoD/a/1C
- qjig==
-X-Gm-Message-State: AOJu0YzetR7KCydBQCsgzuDT1ZJc+MzyMSSKtTanvdIQmgoNNrSgOxjm
- r6oPwdGySGUdAx1ZoRZ8XoyDeFsjCxz33i8pttuWDQ6kD3af6cnQ2jOM7A7ROTMUGF9GpYQRs/B
- cGuePA6zSiKzmpiezAE01NBou07lWtfE=
-X-Received: by 2002:a17:902:e752:b0:1c6:2ae1:dc28 with SMTP id
- p18-20020a170902e75200b001c62ae1dc28mr2084286plf.36.1699457125802; 
- Wed, 08 Nov 2023 07:25:25 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHVxxvj2Vg1Hb46rAWaaeE9OLbxiG0Bdq2iGrGUbYXbRhli3+gQbxb3BYkDroEiHny1ZfIl2Q==
-X-Received: by 2002:a17:902:e752:b0:1c6:2ae1:dc28 with SMTP id
- p18-20020a170902e75200b001c62ae1dc28mr2084261plf.36.1699457125405; 
- Wed, 08 Nov 2023 07:25:25 -0800 (PST)
-Received: from [172.20.5.50] ([4.28.11.157]) by smtp.gmail.com with ESMTPSA id
- z19-20020a1709028f9300b001c9c47d6cb9sm1899535plo.99.2023.11.08.07.25.23
+ bh=RoZpg4LSUB5IJM1KPjpSyxTlqY6GymYYfI1XdxI5kx4=;
+ b=Du1QUXdKMQcA4MrMHBCJsh/BlLOe4ZNs3+ax8Vow9IbU9WDUbhgvwITuYUYCJ59TU0
+ bQPx450olOm5gjVCo4Co73cJsFjPmkk/kUWMMckAY8S/CTxEOJTpxRJomsgZ8Bd5IxLZ
+ OF+OhXmgkP1q0aS/cN+GgNiRPETBehuQ5NVETXXTAXRPH9IQ5FRzpBfN2Tzv0SO+BMsz
+ 8kVrA1RYIIpDb4jkZkc+g333t5nrg5rRxncE6tuX4lSs/hEtKPH5AYQAKXqzQ+BojPJb
+ ITMp1vHnyxJJszGOYzbY9oJEKQkIDaYFvsLWGf5Hana27L64YKBUv1z+U+xCB1YSxWLi
+ Filw==
+X-Gm-Message-State: AOJu0YwFDTISz3NrJyLTws78bR7bt9ArtB/dIjFRamK4FZx13Zl8RQZ8
+ jYte53W41MvA0PLooglb4Mg=
+X-Google-Smtp-Source: AGHT+IHcibKXC9SM5QDBDcIEtLzzVT5gS28Tip3qqTuv0cdK93STYc9Hvre3si9XTgQajQYzSk0dyw==
+X-Received: by 2002:a05:6214:1c86:b0:675:815b:4a01 with SMTP id
+ ib6-20020a0562141c8600b00675815b4a01mr1803165qvb.50.1699457429270; 
+ Wed, 08 Nov 2023 07:30:29 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ mk23-20020a056214581700b0066d20f29e5fsm1179965qvb.35.2023.11.08.07.30.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 07:25:24 -0800 (PST)
-Message-ID: <d39c3c18-99e7-460b-97b8-9f84f523cf11@canonical.com>
-Date: Wed, 8 Nov 2023 07:25:22 -0800
+ Wed, 08 Nov 2023 07:30:28 -0800 (PST)
+Message-ID: <ae5214e2-63c1-6c10-e8f3-a5cacc6930ac@gmail.com>
+Date: Wed, 8 Nov 2023 10:30:27 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
- extension
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>,
- Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
- Chanho Park <chanho61.park@samsung.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Peter Hoyes <Peter.Hoyes@arm.com>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, palmer@dabbelt.com
-References: <20231107193025.GN6601@bill-the-cat>
- <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
- <20231107221023.GS6601@bill-the-cat>
- <20231107-flyaway-arguable-0bccc778b256@spud>
- <20231107223837.GU6601@bill-the-cat>
- <20231107-audible-undoing-293506af3890@spud>
- <20231107232305.GW6601@bill-the-cat>
- <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
- <20231108003449.GF6601@bill-the-cat>
- <91ae75c2-a0d7-4835-8306-777c4d9afdd9@canonical.com>
- <20231108143735.GO6601@bill-the-cat>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v6 05/25] spl: Remove NULL assignments in spl_load_info
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231108143735.GO6601@bill-the-cat>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, =?UTF-8?Q?Marek_Beh=c3=ban?=
+ <marek.behun@nic.cz>, Marek Vasut <marex@denx.de>,
+ Xavier Drudis Ferran <xdrudis@tinet.cat>, Stefan Roese <sr@denx.de>,
+ =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>
+References: <20231106022603.3405551-1-seanga2@gmail.com>
+ <20231106022603.3405551-6-seanga2@gmail.com>
+ <CAPnjgZ1efoJtQCZPO1Nb0u_B5fS6nhH=8k8AcS0Ank3pQe+JpA@mail.gmail.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <CAPnjgZ1efoJtQCZPO1Nb0u_B5fS6nhH=8k8AcS0Ank3pQe+JpA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -121,65 +100,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/8/23 06:37, Tom Rini wrote:
-> On Wed, Nov 08, 2023 at 06:23:37AM -0800, Heinrich Schuchardt wrote:
->> On 11/7/23 16:34, Tom Rini wrote:
->>> On Wed, Nov 08, 2023 at 12:29:03AM +0000, Conor Dooley wrote:
->>>> On Tue, Nov 07, 2023 at 06:23:05PM -0500, Tom Rini wrote:
->>> [snip]
->>>>> Thanks. Setting aside Simon's follow-up, this is what I was looking for.
->>>>> We might have to wait for Heinrich to return from the conference to have
->>>>> time to look at how to utilize the above and see what we can do from
->>>>> there.
->>>>
->>>> I did read that, but I don't think most of it is relevant to the binding
->>>> itself. His five things were:
->>>> | - U-Boot models hardware (and other things) as devices in driver model [1]
->>>>
->>>> This I think should be satisfied. The Zkr CSR is a property of the CPU,
->>>> and shouldn't have its own DT node IMO. Is it problematic for U-Boot to
->>>> populate multiple devices for its driver model based on one DT node?
->>
->> Devices in U-Boot are bound on the basis of a compatible string. All RISC-V
->> CPU nodes have a compatible string 'riscv' but that does not provide any
->> information about the existence of the Zkr extension. That information is in
->> the 'riscv,isa-extensions' property of the cpu nodes (see
->> Documentation/devicetree/bindings/riscv/cpus.yaml).
->>
->>>> I know in Linux that I can create devices using something like
->>>> platform_device_register(), does U-Boot have a similar facility?
->>
->> This is what the U_BOOT_DRVINFO() macro in my driver does and which Simon
->> discourages.
+On 11/7/23 23:23, Simon Glass wrote:
+> Hi Sean,
 > 
-> My current thoughts are that in this case we could use U_BOOT_DRVINFO()
-> like today and then have riscv_zkr_probe() be what checks the
-> riscv,isa-extensions property for an appropriate match? This would mean
-> we don't need any new nodes/compatibles/etc, and possibly not need any
-> bootph- properties added either? I assume we don't need the RNG so early
-> as for that to be an issue.
+> On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
+>>
+>> Remove NULL assignments to fields in spl_load_info when .load doesn't
+>> reference these fields. This can result in more efficient code. filename
+>> must stay even if it is unused, since load_simple_fit uses it.
+>>
+>> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+>> ---
+>>
+>> Changes in v6:
+>> - New
+>>
+>>   arch/arm/mach-sunxi/spl_spi_sunxi.c | 2 --
+>>   common/spl/spl_fat.c                | 1 -
+>>   common/spl/spl_mmc.c                | 2 --
+>>   common/spl/spl_nand.c               | 4 ----
+>>   common/spl/spl_spi.c                | 2 --
+>>   common/spl/spl_ymodem.c             | 1 -
+>>   6 files changed, 12 deletions(-)
 > 
+> This makes me wonder if we should have a function to clear it out
+> (using memset() and perhaps a bl_len parameter)? Having said that, the
+> info-field use is pretty self-contained with these files.
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-The presence of the Zkr extension in the device-tree 
-'riscv,isa-extensions' property does not indicate if the machine mode 
-firmware has enabled access in supervisor mode via the mseccfg.sseed 
-flag. This is why my driver tries to read the seed register and checks 
-if an exception occurs.
+It would be simpler, but this series causes bloat in other areas and this
+is a very simple way to reduce text size.
 
-Additionally checking the device-tree would increase code size. Is it 
-really needed?
-
-We may have multiple RNG drivers enabled on the same device, e.g. TPM, 
-Zkr, virtio-rng. In several code locations we try to use the first RNG 
-device (not the first successfully probed RNG device). This is why
-
-[PATCH 1/1] rng: detect RISC-V Zkr RNG device in bind method
-https://lore.kernel.org/u-boot/20231104065107.23623-1-heinrich.schuchardt@canonical.com/
-
-moves the detection from probe() to bind(). The patch further corrects 
-the return code if the RNG device is not available.
-
-Best regards
-
-Heinrich
-
+--Sean
