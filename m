@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E774C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24F35C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:52:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70DA38774D;
-	Wed,  8 Nov 2023 17:49:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 25AEF8772D;
+	Wed,  8 Nov 2023 17:49:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QXKa7nJj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r2qSjW8S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 129C1874D5; Wed,  8 Nov 2023 17:49:38 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 9BBA5874D5; Wed,  8 Nov 2023 17:49:38 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF76D8772A
+ by phobos.denx.de (Postfix) with ESMTPS id C639887729
  for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6707401e1edso43471066d6.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5a7fb84f6ceso79438367b3.1
  for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699462163; x=1700066963; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=e1P4FVB5CvJVhW1BQiEyhoJmMznB3qckZWf8YgYQH0o=;
- b=QXKa7nJjsmHci7kmSiOvdlv60yTmi92m9z+dzhe1NcLfNTf9gzHgjiGi8Nx+XFlsg+
- yRLqiNf6F5vbsEg0TDTJr32goAO2bsDXnJ3Wb9iiKIjY3OwOBZ/Lv4Pg1a0atogVK9ag
- xMVw9sYkNU5gE3ixv+Vx5VH5+xd/IEa//SaaxG8X3gkNijSabHJndk2WD+d03y/9KiLC
- tIN5TnKeL7WmLR8nnnRBN8edIuTKlceuKc4nwAfwjkTXZ3aGmK1FeVAQnWMNqStvv647
- E1XxfXx9sRYxJhtjDZw1fWrolDwfECuT15X3iqqLLGiww+BrHHMWQJXPlWok8Rrzz7Zi
- 25sA==
+ d=konsulko.com; s=google; t=1699462163; x=1700066963; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RMxFbpwNm55dBI6n6vnV4je4qYBtqmhlPd0WkxCfKKA=;
+ b=r2qSjW8SYIWwVMC/2Oz11i7S3yZftefhGwyPQ/qdbE42AsFMLdSj+eEFmvJC+KChtj
+ +7UxvlIkqu/h/u9DCqIwbVF13hEiPy2BsiJOuwA8YaEQaZk8Rnj0G3cgfQvxb/e3Qjtj
+ BtpT7DDI+9P+QK/mINrGScF3svmFmH1fVFBp0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699462163; x=1700066963;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=e1P4FVB5CvJVhW1BQiEyhoJmMznB3qckZWf8YgYQH0o=;
- b=eS4ES8jR5tE3nOTw1ywj39hu+Mw2NOWpwd4EXhtIN+41tz8X9G3LlreOBevM16W3Y4
- Wecx76QRrokEJv7cQAxYWke1G9c9W+zeefUKkKM5Qcv0s5oODipaC0YFX+aKuJHhYlGI
- CzRyiBEHktXeeGe4XQ2zJXKMrYyx/t0BkSQQi7Ny7gCLKCVeAPUZjnCy9VO79J07+nN2
- I3+UMRiO4idET8cQ61F/jHpzkajJzsVV1dnh203OePUFMb5oe/nh5II/bU9HKEQx3gNS
- asILmNoathiYfWGDc6PkvghW8N3T+MMSuIeQrnxPVX366JDaPtrDJIBh2VuRYNLDfaoc
- E1xQ==
-X-Gm-Message-State: AOJu0YzgC/sHX/dzgz11wRVweE0d+KUTOYz5SoX8+qFKPj7D0OYWJcvi
- NeQZrPnJ7Q+WzJDJo1EWG1w=
-X-Google-Smtp-Source: AGHT+IFSvKAgZHQOfkSAOXnTZYD6Oa7DeBCp7dYwXXQpC0+Q7UrNRGK5ZEEH0KjHJcAtCriLqQT9Ew==
-X-Received: by 2002:ad4:4eee:0:b0:66d:14ca:4bcb with SMTP id
- dv14-20020ad44eee000000b0066d14ca4bcbmr3129734qvb.62.1699462163149; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RMxFbpwNm55dBI6n6vnV4je4qYBtqmhlPd0WkxCfKKA=;
+ b=Hv3M1YI5EhlYeJZY60F1YzJzbM1lamwAATxsjlY+rkzihy2UMVoEY2DFNAtEmr1EfL
+ Q1zvoxQ1ZBHnrL52s0DFldxzuRIdtfjgbwS/TQ1voGl4IvcNUAWChZLfGGYJTRo0OSFj
+ NHKmZWmScuvb7kO3x3s33v7m4JmmhGx7j9ijU+shshG2eiiy2UNBAnrRmNA4u7GKTm4y
+ ckwFctyD9Huv0k1sGaszDoqjDDUVpjM7zCd7WEvksBuSGvuJxC03g85XYBbwdAaCL2AT
+ Wmb5C0Xf0EH/f8bKDA8p2ZDH1vSDsFrYSmPb8oIsoohlg9H867hXTGKq5tiskY6HwK3+
+ i3Ng==
+X-Gm-Message-State: AOJu0YySIb2KX5dvku+/IdZ/h5e7yBdwRby45T0Piy1OA2ya/EYvECL9
+ lXbvJKQswvIFYbFbhyb2hRy9bQ==
+X-Google-Smtp-Source: AGHT+IHuvygvi8aMkWRk5R1ETK0pXrcP0JqYJYZX2l9/rnuw5esuYdLpwCC/y/obvOTrd/Nv4gWNzQ==
+X-Received: by 2002:a81:9c43:0:b0:5ae:f116:48c4 with SMTP id
+ n3-20020a819c43000000b005aef11648c4mr2506562ywa.37.1699462163254; 
  Wed, 08 Nov 2023 08:49:23 -0800 (PST)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- cv4-20020ad44d84000000b0066d15724feesm1244869qvb.68.2023.11.08.08.49.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
+ [2603:6081:7b00:6400:5409:8f3c:5603:314])
+ by smtp.gmail.com with ESMTPSA id
+ u82-20020a816055000000b0059c0629d59csm7128652ywb.115.2023.11.08.08.49.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 08 Nov 2023 08:49:22 -0800 (PST)
-From: Sean Anderson <seanga2@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v7 17/26] spl: Convert fat to spl_load
-Date: Wed,  8 Nov 2023 11:48:49 -0500
-Message-Id: <20231108164858.3497420-18-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231108164858.3497420-1-seanga2@gmail.com>
-References: <20231108164858.3497420-1-seanga2@gmail.com>
+Date: Wed, 8 Nov 2023 11:49:21 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Bryan Brattlof <bb@ti.com>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Andrew Davis <afd@ti.com>,
+ UBoot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/3] board: ti: common: add rtc setup to common folder
+Message-ID: <20231108164921.GR6601@bill-the-cat>
+References: <20231107232139.2839534-5-bb@ti.com>
+ <20231107232139.2839534-6-bb@ti.com>
+ <20231107233052.GX6601@bill-the-cat>
+ <20231108154634.jozi4cw5fm7v2lls@bryanbrattlof.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2EYMppAJKK23vzrK"
+Content-Disposition: inline
+In-Reply-To: <20231108154634.jozi4cw5fm7v2lls@bryanbrattlof.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,142 +96,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This converts the fat loader to use spl_load. Some platforms are very
-tight on space, so we take care to only include the code we really need.
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+--2EYMppAJKK23vzrK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(no changes since v5)
+On Wed, Nov 08, 2023 at 09:46:34AM -0600, Bryan Brattlof wrote:
+> On November  7, 2023 thus sayeth Tom Rini:
+> > On Tue, Nov 07, 2023 at 05:21:41PM -0600, Bryan Brattlof wrote:
+> >=20
+> > > All of the starter kit boards for the am62xxx extended family utilize
+> > > the same 32k crystal oscillator for a more accurate clock for the RTC
+> > > instance. Add the setup the clock mux and debounce configuration to t=
+he
+> > > common board directory so the entire am62xxx extended family can util=
+ize
+> > > it.
+> > >=20
+> > > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> > [snip]
+> > > diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
+> > > index 49edd98014ab7..56a65c0a402bb 100644
+> > > --- a/board/ti/common/Kconfig
+> > > +++ b/board/ti/common/Kconfig
+> > > @@ -1,3 +1,11 @@
+> > > +config BOARD_HAS_32K_RTC_CRYSTAL
+> > > +	bool "Enable the 32k crystial for RTC"
+> > > +	help
+> > > +	   Some of Texas Instrument's Starter-Kit boards have
+> > > +	   an onboard 32k crystal. Select this option if you wish Uboot
+> > > +	   to enable this crystal for Linux
+> > > +	default n
+> >=20
+> > No "default n" as that is the default. And we (a) need some depends on
+> > for what families this is found on and then (b) how, if at all, does
+> > this match up with the 32k crystal used on other TI reference platforms
+> > over the years? If this is specific to the K3 families of reference
+> > platforms, the help needs re-phrasing and the filename is too generic.
+> > It's also not a "RTC" in terms of something we can talk to via
+> > drivers/rtc/rtc-uclass.c and drivers/rtc/davinci.c, or in this case
+> > porting the kernel's drivers/rtc/rtc-ti-k3.c over, yes?
+> >=20
+> > Oh, and "U-Boot" not "Uboot". Should see if the checkpatch typo list
+> > can be easily expanded by us, one of these days.
+>=20
+> Yeah I'll work on the wording.
+>=20
+> We just need to toggle a few bits for Linux to get the crystal muxed=20
+> properly for the RTC driver in Linux.
 
-Changes in v5:
-- Rework to load header in spl_load
+This sounds a whole lot like what AM33XX_ENABLE_RTC32K_OSC symbol (which
+could be badly named, too!) is about, and hence some of my other
+questions. So please keep in mind the am33xx case here, and also how
+likely or not every custom K3 platform is also going to be doing this,
+or not. On am33xx, it does look like a few do disable it, but it's in
+common code since most custom platforms want it.
 
-Changes in v3:
-- Fix failing on success
+> We also toggle a few bits for the debouce settings that apparently I=20
+> didn't separate out from this series.
 
- common/spl/spl_fat.c     | 56 +++++++++++++---------------------------
- include/spl_load.h       |  1 +
- test/image/spl_load_fs.c |  3 +--
- 3 files changed, 20 insertions(+), 40 deletions(-)
+Please keep in mind if these too are essentially generic changes for the
+SoC family as well (or just how board specific they might be and how
+wrong they could be before a problem is seen, ie technical vs
+practical considerations).
 
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index a0c34eba48f..569f2b32928 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -11,8 +11,8 @@
- #include <common.h>
- #include <env.h>
- #include <log.h>
--#include <mapmem.h>
- #include <spl.h>
-+#include <spl_load.h>
- #include <asm/u-boot.h>
- #include <fat.h>
- #include <errno.h>
-@@ -66,58 +66,38 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
- 		       const char *filename)
- {
- 	int err;
--	struct legacy_img_hdr *header;
-+	loff_t size;
-+	struct spl_load_info load;
- 
- 	err = spl_register_fat_device(block_dev, partition);
- 	if (err)
- 		goto end;
- 
--	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
--
--	err = file_fat_read(filename, header, sizeof(struct legacy_img_hdr));
--	if (err <= 0)
--		goto end;
--
--	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL) &&
--	    image_get_magic(header) == FDT_MAGIC) {
--		err = file_fat_read(filename,
--				    map_sysmem(CONFIG_SYS_LOAD_ADDR, 0), 0);
--		if (err <= 0)
--			goto end;
--		err = spl_parse_image_header(spl_image, bootdev,
--					     map_sysmem(CONFIG_SYS_LOAD_ADDR,
--							err));
--		if (err == -EAGAIN)
--			return err;
--		if (err == 0)
--			err = 1;
--	} else if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
--	    image_get_magic(header) == FDT_MAGIC) {
--		struct spl_load_info load;
--
--		debug("Found FIT\n");
--		load.read = spl_fit_read;
--		spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
--		load.priv = (void *)filename;
--
--		return spl_load_simple_fit(spl_image, &load, 0, header);
--	} else {
--		err = spl_parse_image_header(spl_image, bootdev, header);
-+	/*
-+	 * Avoid pulling in this function for other image types since we are
-+	 * very short on space on some boards.
-+	 */
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL)) {
-+		err = fat_size(filename, &size);
- 		if (err)
- 			goto end;
--
--		err = file_fat_read(filename, map_sysmem(spl_image->load_addr,
--							 spl_image->size), 0);
-+	} else {
-+		size = 0;
- 	}
- 
-+	load.read = spl_fit_read;
-+	spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
-+	load.priv = (void *)filename;
-+	err = spl_load(spl_image, bootdev, &load, size, 0);
-+
- end:
- #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
--	if (err <= 0)
-+	if (err < 0)
- 		printf("%s: error reading image %s, err - %d\n",
- 		       __func__, filename, err);
- #endif
- 
--	return (err <= 0);
-+	return err;
- }
- 
- #if CONFIG_IS_ENABLED(OS_BOOT)
-diff --git a/include/spl_load.h b/include/spl_load.h
-index 65aa6bb4493..5e0460d956d 100644
---- a/include/spl_load.h
-+++ b/include/spl_load.h
-@@ -96,6 +96,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
-  */
- #define SPL_LOAD_USERS \
- 	IS_ENABLED(CONFIG_SPL_FS_EXT4) + \
-+	IS_ENABLED(CONFIG_SPL_FS_FAT) + \
- 	0
- 
- #if SPL_LOAD_USERS > 1
-diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
-index 01559e98c4f..333df2dfb53 100644
---- a/test/image/spl_load_fs.c
-+++ b/test/image/spl_load_fs.c
-@@ -425,8 +425,7 @@ static int spl_test_mmc(struct unit_test_state *uts, const char *test_name,
- 	if (spl_test_mmc_fs(uts, test_name, type, create_ext2, false))
- 		return CMD_RET_FAILURE;
- 
--	if (type != IMX8 && type != LEGACY_LZMA &&
--	    spl_test_mmc_fs(uts, test_name, type, create_fat, false))
-+	if (spl_test_mmc_fs(uts, test_name, type, create_fat, false))
- 		return CMD_RET_FAILURE;
- 
- 	if (type == LEGACY_LZMA)
--- 
-2.37.1
+--=20
+Tom
 
+--2EYMppAJKK23vzrK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLvBEACgkQFHw5/5Y0
+tyxCvwv+IdQ5bYvSIJRyZDjkAB7/BtLPNCqTA7W0hb7AVgecfo0LUnuvth5WXN0V
+fUiEhMfT5NrVkxOvegBwWWvh99YTn8e4uEbV2qZnsOoueEorY4UiEF4dmG+fTejq
+6mG0dqL4Uowt4AfuY7BWlVa8yUBMOh+OjhR9RVPsg+AYnet54CSQA67Z8fHKOfad
+H/lqO47xy0pmH2623oxmLGp2VZveaaM+MQChcpDrIy94dSTteqCkUspnMCCFgoSD
+UAYYzx/SnkjK47K6JvvRxqcJyoPATFrGZnSMZBaaW7MvgtkzF5MvQWfDZvTjlSsS
+X3bpzcAYEAlpm2EedmPAwcTMYiWzq7NqlySrQ+7B+Q4cVm5rtWrM9RcCIENIwSIR
+FLcsHHdyr4tfTOEav0alo9v3iyZmmryeU334G1X7Dhky+ucIoeBYvZ82Oh1Q1JYW
+lhqB5GKZsnTZY5c52/TxIwaF/dNm4B+QliKWdwTpJmaM0c6NrR0ISBMvqDVagD88
+TDJkDuCC
+=xq4t
+-----END PGP SIGNATURE-----
+
+--2EYMppAJKK23vzrK--
