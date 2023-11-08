@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0A53C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 273CAC4167B
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:50:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C479876C3;
+	by phobos.denx.de (Postfix) with ESMTP id 863B087702;
 	Wed,  8 Nov 2023 17:49:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NpIlPXl4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jJp1bTv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63FCB875F3; Wed,  8 Nov 2023 17:49:08 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id EDFA6875A7; Wed,  8 Nov 2023 17:49:09 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46826871A2
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A44C0874A3
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7788f513872so454952185a.1
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:06 -0800 (PST)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-778a47bc09aso468154485a.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699462145; x=1700066945; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699462146; x=1700066946; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1IZa+E6XnMsce4VW6tpuXKynbvhTxY0ngBp61aIS5Os=;
- b=NpIlPXl4I0Fz8ii7oWAC1N+Te409DbfQNDRnNVkBa7iL/HY+43GuajkvaEZ/C2BAQ/
- gM61hZxlgdg/21SvJWvWT5dHxtqvv2lYZYlNcIJgLy8W4Op7uP621LLlWDWvX1luQSco
- DqA78cAcWoMQZL19Y/XhVQ0MIXS2gKKNvEYURJY6bHUmufAqbBup2LfpF/ZNg2Qghl4r
- +jg5qxK3df+6Zn4IHtdvn3icyXiyAyNoUx1i6Hml8cbzEqu+mYbHkEeCLvrJolcUcU14
- U5Q8LwS8ij0h/8r7cuinJJIki/a/6aCRvmuyZ63EKGDzoQ/VIgtz8IT3BNQH7WodOXK3
- sxJg==
+ bh=KAiLrTR09Hyw6FI6W2h/8n3Ex89Q4lC2JliMV02w6uw=;
+ b=jJp1bTv/VUQy2Euy8o7UVtihkJk0Vx3Y5Iw1uIeMlFWTiziPYW9Q1PfXH8pL4mthtO
+ +Paf6OeiQOEDlHTIgaQzCRqSstOcY7nkIvfBcstDlXtgyqvfsnmObT8h7dL7ggaHe6wg
+ hOXgvcRvKlEO/WZF0vjrheCpAn8VBVAPhEcuOgyqMU42ZDY1CPUmlP5tgiXaINl8Tfl+
+ srlKRYU1TxS2ZyKaJVbM130CbYTWEBlezS6cD6VGuPS86N1jlKe9qzppkpyqDt/YkzK8
+ djlDP0EDtkgOcwFwEhz3k1AyNsaJ//WDTOlM7wGDNkDrpb4Gv6Ah199Wj+j0NtqA5OYr
+ aC7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699462145; x=1700066945;
+ d=1e100.net; s=20230601; t=1699462146; x=1700066946;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1IZa+E6XnMsce4VW6tpuXKynbvhTxY0ngBp61aIS5Os=;
- b=cJH/4sN+CRRiMvw+MjEWiVzUoF4W5ku/xyz8VBJhR+xBUfWCpD+h4Slfgpdeb+vYc6
- 0SpbQuP668G9w7l/dLm86ZDcHNS6m4QJrxNUlZcJhcwqxV8UbtUhKNVvF0Tu7FeYaGPq
- v5S7SGSvln6U2/KjBnBvlZWayDQHnpW0Fw7J3T+sq7HOkHGvjBt5DiNtLgexXkPOSutP
- MaTSXNWIb4N0IEZy2mkQAHYIZoXspfNHcz/Mx7Bro4HtDJKGqM/6S+CTBDdSPUvmPje+
- OLb2BcN1fRor3evzcokPXv6v/Wky0LjcBzUOgscBg8LmuuCe8y+sC9ktPxrNqh39/bHi
- zXfg==
-X-Gm-Message-State: AOJu0YyHMWdpld9to6Dsq72IE4aIOVhTjsuHdQTqZkJNU2Tjay6WybxW
- qFoPG6X4XSf56d62/rnxz04=
-X-Google-Smtp-Source: AGHT+IGfNjnKQLtj3s3109pgN0CZ08CshZaAVxJwz8n7WfvbkKfaITKrxdCC+XpCGsSYg4hT5QKk2w==
-X-Received: by 2002:a05:620a:2445:b0:773:b50f:c6f3 with SMTP id
- h5-20020a05620a244500b00773b50fc6f3mr2136507qkn.52.1699462145065; 
- Wed, 08 Nov 2023 08:49:05 -0800 (PST)
+ bh=KAiLrTR09Hyw6FI6W2h/8n3Ex89Q4lC2JliMV02w6uw=;
+ b=ASLYYJc9J0cRE/LqIGfmBAKdlmNkuy9UbmRSg2W5EmHojZk0BMdNTC5kd8FQFRzOSB
+ b7+oBs9/qQwUi7wyGpcCqFviwtoht75PaCT+CNJEkmBCl7qCfv5cmfVnDfVqmX0fS9Kn
+ SjO2Zxv1JV8zBGzMOR1Gkbzsm6u40HcrN283wvljXRAZgb/23twuQqDjzseAv9xo1U5C
+ XgP2i10MkrlZ4SM5OU/Rpx4qBZWKnw89PubTzVaF+xI35a4pH26pqRiyP9JiHOzxaPVN
+ CtriAMRCCvfKKNcPMjMQtER3w6cFEaZEJ1+a4REriAP7U8Y8aAGJdD9jORY2auETf+pt
+ iq1g==
+X-Gm-Message-State: AOJu0YxoQ6kVsl2q6/dX8tqr6bb5ppMcdCrcjU08SJ7b+ejFbRsCC1PF
+ 4Dw03sNzZAwYv78WW12PSS4=
+X-Google-Smtp-Source: AGHT+IFwcOuAu3p7SNeZRR0hgE+61E29VkMi9z/+cuSMdgHDKYlwPUGyMd5woFLKWfmXPh174tJ+Lg==
+X-Received: by 2002:a05:620a:248a:b0:775:c335:1ee8 with SMTP id
+ i10-20020a05620a248a00b00775c3351ee8mr2333900qkn.54.1699462146383; 
+ Wed, 08 Nov 2023 08:49:06 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- e26-20020a37ac1a000000b00767e98535b7sm1224609qkm.67.2023.11.08.08.49.04
+ vq25-20020a05620a559900b007756c0853a5sm1218342qkn.58.2023.11.08.08.49.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 08:49:04 -0800 (PST)
+ Wed, 08 Nov 2023 08:49:05 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
@@ -71,9 +71,10 @@ Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
  Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v7 03/26] spl: Make SHOW_ERRORS depend on LIBCOMMON
-Date: Wed,  8 Nov 2023 11:48:35 -0500
-Message-Id: <20231108164858.3497420-4-seanga2@gmail.com>
+Subject: [PATCH v7 04/26] spl: semihosting: Don't close fd before
+ spl_load_simple_fit
+Date: Wed,  8 Nov 2023 11:48:36 -0500
+Message-Id: <20231108164858.3497420-5-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231108164858.3497420-1-seanga2@gmail.com>
 References: <20231108164858.3497420-1-seanga2@gmail.com>
@@ -95,49 +96,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The purpose of SHOW_ERRORS is to print extra information. Make it depend
-on LIBCOMMON to avoid having to check for two configs.
+On real hardware, semihosting calls tend to have a large constant
+overhead (on the order of tens of milliseconds). Reduce the number of
+calls by one by reusing the existing fd in smh_fit_read, and closing it
+at the end of spl_smh_load_image.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v5)
+Changes in v7:
+- Fix typo in commit message
 
-Changes in v5:
+Changes in v6:
 - New
 
- common/spl/Kconfig | 1 +
- common/spl/spl.c   | 3 +--
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ common/spl/spl_semihosting.c | 20 ++++++++------------
+ 1 file changed, 8 insertions(+), 12 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 00332cf243a..e929f1bbae1 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -183,6 +183,7 @@ config SPL_SYS_REPORT_STACK_F_USAGE
+diff --git a/common/spl/spl_semihosting.c b/common/spl/spl_semihosting.c
+index f7dd289286d..8f11c29913f 100644
+--- a/common/spl/spl_semihosting.c
++++ b/common/spl/spl_semihosting.c
+@@ -24,18 +24,14 @@ static int smh_read_full(long fd, void *memp, size_t len)
+ static ulong smh_fit_read(struct spl_load_info *load, ulong file_offset,
+ 			  ulong size, void *buf)
+ {
+-	long fd;
++	long fd = *(long *)load->priv;
+ 	ulong ret;
  
- config SPL_SHOW_ERRORS
- 	bool "Show more information when something goes wrong"
-+	depends on SPL_LIBCOMMON_SUPPORT
- 	help
- 	  This enabled more verbose error messages and checking when something
- 	  goes wrong in SPL. For example, it shows the error code when U-Boot
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 732d90d39e6..7ce38ce46d4 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -718,8 +718,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	ret = boot_from_devices(&spl_image, spl_boot_list,
- 				ARRAY_SIZE(spl_boot_list));
- 	if (ret) {
--		if (CONFIG_IS_ENABLED(SHOW_ERRORS) &&
--		    CONFIG_IS_ENABLED(LIBCOMMON_SUPPORT))
-+		if (CONFIG_IS_ENABLED(SHOW_ERRORS))
- 			printf(SPL_TPL_PROMPT "failed to boot from all boot devices (err=%d)\n",
- 			       ret);
- 		else
+-	fd = smh_open(load->filename, MODE_READ | MODE_BINARY);
+-	if (fd < 0) {
+-		log_debug("could not open %s: %ld\n", load->filename, fd);
++	if (smh_seek(fd, file_offset))
+ 		return 0;
+-	}
++
+ 	ret = smh_read(fd, buf, size);
+-	smh_close(fd);
+-
+-	return ret;
++	return ret < 0 ? 0 : ret;
+ }
+ 
+ static int spl_smh_load_image(struct spl_image_info *spl_image,
+@@ -73,11 +69,11 @@ static int spl_smh_load_image(struct spl_image_info *spl_image,
+ 		debug("Found FIT\n");
+ 		load.read = smh_fit_read;
+ 		load.bl_len = 1;
+-		load.filename = filename;
+-		load.priv = NULL;
+-		smh_close(fd);
++		load.filename = NULL;
++		load.priv = &fd;
+ 
+-		return spl_load_simple_fit(spl_image, &load, 0, header);
++		ret = spl_load_simple_fit(spl_image, &load, 0, header);
++		goto out;
+ 	}
+ 
+ 	ret = spl_parse_image_header(spl_image, bootdev, header);
 -- 
 2.37.1
 
