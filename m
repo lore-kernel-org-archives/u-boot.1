@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7CABC4167D
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:59:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4BBC4167D
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:11:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 828D486F92;
-	Wed,  8 Nov 2023 16:59:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D7558716E;
+	Wed,  8 Nov 2023 17:11:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g139fhhq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VsoAAyjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D28887150; Wed,  8 Nov 2023 16:59:18 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 569098716E; Wed,  8 Nov 2023 17:11:43 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E851887520
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:59:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F60E86FC1
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:11:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-41cba6e8e65so43416381cf.2
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:59:15 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d9a6399cf78so959713276.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:11:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699459155; x=1700063955; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/JacxevHwWHzII1NwwB2UPCLhgQ/CXioz999RyT6OXo=;
- b=g139fhhqTNJ9I+bBnWjFKfim98/F6uRj+re4qEqmlJtsyeROGAWLsDW9uByWAatWSi
- x2C7EIbrGUQcjM4YOMkQibQAma8HTRoX0T+2q7sl6ukwnHDvFLNMEDt5BVYqUYQLX6hj
- 9Qhy1BPDNG6pmzTvFGMhiIM5+8B/TYqNtG8bkxu/szEXldJLt2/4BRYm1rAis/GPb04r
- GwxI/WLq+lb0FOZ/tBNn6WccpwrlCUkE+l2Qrbn/PTHtywKUzW0wIK1ihcHtfFF0jr4o
- 2RuIKgKvOrA10DDVXT9YQbi1BrgltsoVcTzBSMDj3XuxJ2jndMNfYvgDQ4md33MgY2bU
- YoPg==
+ d=konsulko.com; s=google; t=1699459900; x=1700064700; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Dvuvl16BCcm90M+nqcEsilV7GnXWYjgulFKYyt+KFHk=;
+ b=VsoAAyjEkj92QFsnT9RS73ja/ED7Rh0GPwUyevWCyis8mQU8dojcTnVyow1/iH2iL8
+ FhBz5/Ezxp3l2u16+zPzV1Ua29RPJifMRQg1iplydoS2OOay7W7A4+PdRYEFO9/yARxe
+ DLamozMX85dz/dZ1mD3m8Kfk9NKTQWMqpAqu4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699459155; x=1700063955;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/JacxevHwWHzII1NwwB2UPCLhgQ/CXioz999RyT6OXo=;
- b=G3hO/PO7Zn89LxgFsTB0T8OpLP/Y6+R80RhT05eF/gxxxxfHsunFmAkB/O8ba112BR
- pmOw6VPhe1Qxgop7QDRzrA+DBM/Kpcntev5FZ+eRAV1UbuNKnBPXOUiGA39Qj+uUlvV2
- h58ep+n+cr1uGzHZtACytQ/+T1+LNiwdO1n/LCoyy/EcUbrKu1YDl5WjV5DvuEI4NIZl
- SArhEzfcTpG+ooC0Vf0MkC5QNA56zzEQvucnioXZBndJ+D/6/AyUaMYwm90hZAxK8ZO1
- g48QQnsLxza+GtLl/wtBs7hUwrz+YxPSnZtG0uU45bW6x0nx3Ah7OFp8nvROfMfDx9Hi
- S51w==
-X-Gm-Message-State: AOJu0YwzzRuO7qoqM/RyjzPJ8USBm7/E92IRmNGRx9ZrgkFoYaLA3+6m
- 6Tx4cI/npCFAzdYmyZifvac=
-X-Google-Smtp-Source: AGHT+IHOGeawrGezGXtvhn7Emn9MJ93Bx1itR5k99RLvmElRpWDx0YF7WDwVFBWa1DaRIhqG6tJ6Xw==
-X-Received: by 2002:a05:622a:492:b0:41e:2227:6abb with SMTP id
- p18-20020a05622a049200b0041e22276abbmr2185889qtx.60.1699459154733; 
- Wed, 08 Nov 2023 07:59:14 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- i6-20020ac813c6000000b00400a99b8b38sm1005962qtj.78.2023.11.08.07.59.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 07:59:14 -0800 (PST)
-Message-ID: <0fa3a26b-9e28-357f-17bc-8a8cb60a05b0@gmail.com>
-Date: Wed, 8 Nov 2023 10:59:13 -0500
+ d=1e100.net; s=20230601; t=1699459900; x=1700064700;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Dvuvl16BCcm90M+nqcEsilV7GnXWYjgulFKYyt+KFHk=;
+ b=ronM9doYlgae7LHTJNaRBAi+wTjB7n0/XOfHtwH8I16PGizxz2xw2tIfU0y42rmXKf
+ vD4at1f3aF1u+ioYqeUk9eM5eg8ovTS8SJnAHG6w2qMkRrdqWSISgG1XeUnYbpi87GcA
+ VaPyB7T3pEbuCIOFMYkZvMEyAxvRCMVWTy4Fr5AAL/QnFcHi3zdNxcEda4QizDwqfnuw
+ JclLFoE7P4Lt24i4aFgfUGUcsOvohhOUZdHj14MaFDLUMdVU4eYSmI20XICoAc7yFxjq
+ zf+QbZLhNwMuGlxCLLXpoDap6iwGPt3Ssvsb+CWEl2PyARu5cNR6c/89vfeUoJPJojvU
+ sf5w==
+X-Gm-Message-State: AOJu0YzwgT/SWP0b0R9wR7VDq3Z0glyRvjQz1hUXM323u5hzWmjBNi0J
+ omYNhXthDLCRx1RjwJozPq/QKn3f21Vjnal2qcFg1g==
+X-Google-Smtp-Source: AGHT+IFG047Lg+7TCPTM3BwPAtiJlJf5u9LnIsXnGZhR0PGonWu4UzImfe46N0UA8Clr/M9jGSEwPg==
+X-Received: by 2002:a25:20c5:0:b0:da0:4076:49d with SMTP id
+ g188-20020a2520c5000000b00da04076049dmr1686225ybg.15.1699459899829; 
+ Wed, 08 Nov 2023 08:11:39 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
+ [2603:6081:7b00:6400:5409:8f3c:5603:314])
+ by smtp.gmail.com with ESMTPSA id
+ j8-20020a056902020800b00d9cc606c78csm6379553ybs.41.2023.11.08.08.11.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Nov 2023 08:11:39 -0800 (PST)
+Date: Wed, 8 Nov 2023 11:11:37 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Enrico Leto <enrico.leto@siemens.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 0/6] siemens,am335x: clean up the draco board family
+Message-ID: <20231108161137.GP6601@bill-the-cat>
+References: <20231108145322.302927-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use units
- of bytes
-Content-Language: en-US
-To: Xavier Drudis Ferran <xdrudis@tinet.cat>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- =?UTF-8?Q?Marek_Beh=c3=ban?= <marek.behun@nic.cz>,
- Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- uboot-imx@nxp.com
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-9-seanga2@gmail.com>
- <ZUjdhAccsYbJS6AL@xdrudis.tinet.cat>
- <f546ba08-10b9-0cb4-4fa7-f7541dab1288@gmail.com>
- <ZUn577z8xINpURlO@xdrudis.tinet.cat>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <ZUn577z8xINpURlO@xdrudis.tinet.cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rvUQSbcFRKNKB/G8"
+Content-Disposition: inline
+In-Reply-To: <20231108145322.302927-1-enrico.leto@siemens.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,67 +91,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/23 03:49, Xavier Drudis Ferran wrote:
-> El Mon, Nov 06, 2023 at 08:54:03AM -0500, Sean Anderson deia:
->> On 11/6/23 07:35, Xavier Drudis Ferran wrote:
->>> Thanks for your work. I'm still reading... but...
->>>
->>>
->>> El Sun, Nov 05, 2023 at 09:25:46PM -0500, Sean Anderson deia:
->>>> diff --git a/include/spl.h b/include/spl.h
->>>> index 951e136b9ea..ecfc50e0095 100644
->>>> --- a/include/spl.h
->>>> +++ b/include/spl.h
->>>> @@ -297,10 +297,10 @@ struct spl_load_info {
->>>>    	 * read() - Read from device
->>>>    	 *
->>>>    	 * @load: Information about the load state
->>>> -	 * @sector: Sector number to read from (each @load->bl_len bytes)
->>>> -	 * @count: Number of sectors to read
->>>> +	 * @offset: Offset to read from in bytes, in multiples of @load->bl_len
->>>> +	 * @count: Number of bytes to read, in multiples of @load->bl_len
->>>
->>> I'm no native English speaker, but would it be easier to understand? :
->>>
->>> +	 * @offset: Offset to read from in bytes, a multiple of @load->bl_len
->>> +	 * @count: Number of bytes to read, a multiple of @load->bl_len
->>>
->>>
->>>
->>
->> I think it would have to be worded
->>
->> @offset: Offset to read from in bytes, as a multiple of @load->bl_len
->>
->> but to me these both mean the same thing.
->>
->> --Sean
-> 
-> Ah, OK. I doubted on whether it should be a comma or "as". Apparently
-> it was both.
-> 
-> They may mean the same, but I got confused by having "in bytes", and
-> "in multiples" so close.
-> 
-> "in bytes" means the value should be the correct answer to the
-> question "how many bytes" (not a number of bits, not a number of
-> sectors)
-> 
-> but "in multiples of..." doesn't mean the value should be the correct
-> answer to "how many of multiples". Should the value be a number of
-> sectors (first multiple of bl_len) a number of dozens of sectors
-> (another multiple of bl_len) or ...?
-> 
-> In the first part "in" introduces a unit of measure, but in the second
-> the same word introduces a constraint on a value. That was confusing
-> to me.
-> 
-> Not saying it doesn't mean the same or even that you should change it,
-> just elaborating why I said it.
-> 
 
-OK, what about
+--rvUQSbcFRKNKB/G8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-@offset: Offset to read from in bytes. This must be a multiple of @load->bl_len.
+On Wed, Nov 08, 2023 at 03:53:16PM +0100, Enrico Leto wrote:
 
---Sean
+> The boards were not maintained upstream since the development phase.
+>=20
+> Restore SPL and remove unused settings. We need i2c to read the DDR
+> settings from EEPROM, get u-boot from NAND, the console output and the
+> watchdog.
+>=20
+> Restore u-boot up to the user prompt. The complete functionality will
+> be restored in future patches.
+>=20
+> Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
+
+I'm glad to see this series and in general it looks fine and is a good
+start. As some parts of the future cleanup work I'd love to see a file
+under doc/board/siemens for the family and moving to plain text
+environment, both of which iot2050 do so there's some in-house
+experience I am hopeful you can leverage as well if needed. It would
+also be good to reduce the include/configs/ files to as little as
+possible, I believe there's a number of dead-comments there, and other
+defines that are only needed in a local context and can move to a
+specific file or other header.  Thanks!
+
+--=20
+Tom
+
+--rvUQSbcFRKNKB/G8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLszYACgkQFHw5/5Y0
+tyyurgv8D/Pb7YG60ks8d/WH1OmElv9+2GqL1lE/JUyDLG0oD99vpEZg0AV19AUS
+mfbvwo4Zs/fbs6y6rFArhP9+u3vdE9XxU1lR19XtSNLrEzdRaySqNDMpishlPV1G
+HWXqnyW0sF89Fa8z2dw1fJnpFDiEXDUa3xdntnadW09kODJsX7dZKbknayvJ7GiZ
+Bn5/Q6Ff0zLW7m3i8lafvcq4cLKScF1ZFqx2ibiIQZaCE85YbensAxf0ttdWg/7J
+mTk7IkdZwMXzf+mJMow4mxCwuxMYayHmja2n9WrZPPSiR3hUE2Hkr4Im/lX/sx6h
+Cflxt9KC4buPwg5iWq5MB6ndmksYq3Cak+TvieWERGHV256YC0WUdZJt9RrB60Du
+b2+fouruGf7n4ezwIK4Cfn6/PZUJdndnAMKGzjwCGTTK6FtT+pOBjwg4MUcksALo
+lq5C6bFo/kCWULly8U3Iw+l4rDFIaT5DKFJ9A7FPjs9Zs6I4GDG0lNXYVsSJIGff
+5Wd3cry4
+=D0s0
+-----END PGP SIGNATURE-----
+
+--rvUQSbcFRKNKB/G8--
