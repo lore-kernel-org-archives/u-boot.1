@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8502AC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 412BFC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD36D871AB;
-	Wed,  8 Nov 2023 17:49:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF5BC86E2F;
+	Wed,  8 Nov 2023 17:49:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JDVPxG2U";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m1NBK3CF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE8448770B; Wed,  8 Nov 2023 17:49:12 +0100 (CET)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 52AB687546; Wed,  8 Nov 2023 17:49:14 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98C0E87527
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB5DC876F1
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-7781bc3783fso490104085a.1
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:10 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7781b176131so385278785a.1
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699462149; x=1700066949; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699462150; x=1700066950; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fbU5kwOhbE+bF4VXIJD0gQ+Ake6xIn9tyXeA08FSocg=;
- b=JDVPxG2UU00CsayfX80WqNQn77i5cqLJztSd2qoYT/jgUN7kBH4RoLXvivAE6pXopg
- bN9zh0ELhaPm7Wjbtkbau58/Pe5R+qp3ksaXfdE31RClxH+NdwU+Twh/jCIq6+Wh3+4G
- RU/FAO9Xax3w7yqgo1/SdBf0lqMQxOdKj/BX2fUb+Mc4f6yfavY1uOXOrVxJfw3fVUiA
- iqXg6fRq5Tw666r/656CRTXg3MfxSshxmNU+bdINJXqZYPpPbjq509RWcaqcLwX65Pfk
- fmrL/OLbBKuzDyFH1YHtBocUpoHeIt6J6wQat/U8jUKv6jVqwnfppFqcCGwMt3Jbka8c
- ++ZQ==
+ bh=x4/nJDtJzFruXZDy2Na7Ni+YAVb2R0HJrlj5vS/qcUM=;
+ b=m1NBK3CFLIAu6KnxweE7h/nxprCaHEvd8BnvQVKTBshAeBoZE8zjSj1u25k71ctROJ
+ gjTKBOFeTKyNe2KabRWIFrCy4g/H6lZ69bH6CptTVCSYS0iVtdkHqGfViDHTbJnPSYTI
+ RmtsJ9KZqn93Ye9S/isyc0xyaeJ7EhlTuYO2euigt+xpp0M1CVxu6yyaT2KhjNWMKI4F
+ BWOMB7VjYPbFyxtU853p0Hbpg3+LUVGoOOJdZKJ6Y3k7lcolAK9l6S/n8uq3QFMhnaYE
+ GjtWESGKuzZjQGtQ/tekPqgGoejEhnR0+NcmCSymxwixlhY9LJtB76GLTjxTvDjbhvE7
+ 4QEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699462149; x=1700066949;
+ d=1e100.net; s=20230601; t=1699462150; x=1700066950;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fbU5kwOhbE+bF4VXIJD0gQ+Ake6xIn9tyXeA08FSocg=;
- b=HusksMXwfd/D152oKTTh9vSirEIB83C6oZpE9cTa8/AMH9N8qGYWt4gCJcSuPPfWhu
- phPevn6CCTSK9LayGMEZBxwIxxXQiwXJX0C2dv7Kb3/Ici/011LYet8rGSDdWxLUboRI
- hxu49X+6bWn3d+uk6ByUVHOyDxSV6rV5WOVinz9Djv29WryYueTHMs1nPYLqt4Ob2jqB
- T45ABVy7Cx/jpic4jy6hAtjX+jcye3VWzPi+V3vr4BBItZ4NDk06Bvz5GoPFOQ3/YonJ
- gxkXVOppyGMlKKmZZGow7LXof+zMoFLHHeNQ1A5Ru26gh6sCJjvcHdxXwUCUcAbTTBgt
- +ieg==
-X-Gm-Message-State: AOJu0YwOy8QAbr1Wa7aGucQqXrh/C2Liv8YkBqzNMcoRpo5lzpvxp7n1
- XgZLcAJYPlHrDgcfFek64GM=
-X-Google-Smtp-Source: AGHT+IHSY5m9WLSuE33eM1M8y0rMCI7br6y3VcVw2KfDyt11h3M8XKkiNfjNpgimPf8moCWcT5Y4wg==
-X-Received: by 2002:a05:620a:25cb:b0:779:e02b:26e2 with SMTP id
- y11-20020a05620a25cb00b00779e02b26e2mr2316652qko.25.1699462149336; 
- Wed, 08 Nov 2023 08:49:09 -0800 (PST)
+ bh=x4/nJDtJzFruXZDy2Na7Ni+YAVb2R0HJrlj5vS/qcUM=;
+ b=FLh/MKA6k7lva35XWlmPlY5CqsX99y+S9gBqbyKWWR+z9WUih7S0OuJsEbKFReMeXP
+ +KneBxBN4WaSJQCqBw0Z8CiOxaHL89jj9iVsR3loaLizEDP2DsMxrxkedkvZWD67xjfb
+ 5w76yjskqC/T/E+RnaiudjTX0vZBjgsZ4+kyb3JPPJBhydGppkB7zq6V7wL3DQuH14f4
+ lm5Aw5US5IjzqrCSU4m9JmIxoLPcPUuY6OJVi1wqHMlktJ+JfD4GoFbwUYHH2QJby5dl
+ urGiIMQqlkALVfTkBKwm738muH8cUmai2WlBAjsByIXT3NP2/9L8yMj4KIFrCy9XTPmT
+ sjLg==
+X-Gm-Message-State: AOJu0Yy1YVvctZLiDfCZI0jIPEbdXr2Ftolq3JBNOOM1bMhQqD0VdJRz
+ 1g/9E0mpAivEqKGge2CqG0M=
+X-Google-Smtp-Source: AGHT+IEhGB3bEJhbasaW6TuAQKAslddJLn0yTELEQ8aDBMKqSTuRLcQ71IXwz4/cULV+Fb6sBjrGLw==
+X-Received: by 2002:ae9:e515:0:b0:777:fec:5741 with SMTP id
+ w21-20020ae9e515000000b007770fec5741mr2093387qkf.33.1699462150516; 
+ Wed, 08 Nov 2023 08:49:10 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- v3-20020a05620a0a8300b0075ca4cd03d4sm1221852qkg.64.2023.11.08.08.49.08
+ bj9-20020a05620a190900b0077772296f9dsm1216712qkb.126.2023.11.08.08.49.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 08:49:08 -0800 (PST)
+ Wed, 08 Nov 2023 08:49:10 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
 Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
  Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v7 06/26] spl: Remove dev from spl_load_info
-Date: Wed,  8 Nov 2023 11:48:38 -0500
-Message-Id: <20231108164858.3497420-7-seanga2@gmail.com>
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ uboot-imx@nxp.com
+Subject: [PATCH v7 07/26] spl: Take advantage of bl_len's power-of-twoness
+Date: Wed,  8 Nov 2023 11:48:39 -0500
+Message-Id: <20231108164858.3497420-8-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231108164858.3497420-1-seanga2@gmail.com>
 References: <20231108164858.3497420-1-seanga2@gmail.com>
@@ -95,148 +97,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-dev and priv serve the same purpose, and are never set at the same time.
-Remove dev and convert all users to priv. While we're at it, reorder bl_len
-to be last for better alignment.
+bl_len must be a power of two, so we can use ALIGN instead of roundup and
+similar tricks to avoid divisions.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v7:
-- Fix typo in commit message
+(no changes since v6)
 
 Changes in v6:
 - New
 
- common/spl/spl_mmc.c       | 6 +++---
- common/spl/spl_spi.c       | 6 +++---
- drivers/usb/gadget/f_sdp.c | 6 +++---
- include/spl.h              | 4 +---
- 4 files changed, 10 insertions(+), 12 deletions(-)
+ common/spl/spl_fit.c           | 2 +-
+ common/spl/spl_imx_container.c | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index 6d9137c32e0..3d7551a7dae 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -65,7 +65,7 @@ static int mmc_load_legacy(struct spl_image_info *spl_image,
- static ulong h_spl_load_read(struct spl_load_info *load, ulong sector,
- 			     ulong count, void *buf)
- {
--	struct mmc *mmc = load->dev;
-+	struct mmc *mmc = load->priv;
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 70d8d5942d9..6084ead0919 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -194,7 +194,7 @@ static int get_aligned_image_overhead(struct spl_load_info *info, int offset)
+ 	if (info->filename)
+ 		return offset & (ARCH_DMA_MINALIGN - 1);
  
- 	return blk_dread(mmc_get_blk_desc(mmc), sector, count, buf);
- }
-@@ -105,7 +105,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		debug("Found FIT\n");
--		load.dev = mmc;
-+		load.priv = mmc;
- 		load.filename = NULL;
- 		load.bl_len = mmc->read_bl_len;
- 		load.read = h_spl_load_read;
-@@ -114,7 +114,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
- 		   valid_container_hdr((void *)header)) {
- 		struct spl_load_info load;
- 
--		load.dev = mmc;
-+		load.priv = mmc;
- 		load.filename = NULL;
- 		load.bl_len = mmc->read_bl_len;
- 		load.read = h_spl_load_read;
-diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
-index d83d70f2f33..af7a28e7c25 100644
---- a/common/spl/spl_spi.c
-+++ b/common/spl/spl_spi.c
-@@ -59,7 +59,7 @@ static int spi_load_image_os(struct spl_image_info *spl_image,
- static ulong spl_spi_fit_read(struct spl_load_info *load, ulong sector,
- 			      ulong count, void *buf)
- {
--	struct spi_flash *flash = load->dev;
-+	struct spi_flash *flash = load->priv;
- 	ulong ret;
- 
- 	ret = spi_flash_read(flash, sector, count, buf);
-@@ -151,7 +151,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 			struct spl_load_info load;
- 
- 			debug("Found FIT\n");
--			load.dev = flash;
-+			load.priv = flash;
- 			load.filename = NULL;
- 			load.bl_len = 1;
- 			load.read = spl_spi_fit_read;
-@@ -162,7 +162,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 			   valid_container_hdr((void *)header)) {
- 			struct spl_load_info load;
- 
--			load.dev = flash;
-+			load.priv = flash;
- 			load.filename = NULL;
- 			load.bl_len = 1;
- 			load.read = spl_spi_fit_read;
-diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-index ee9384fb37e..1b16b7eb452 100644
---- a/drivers/usb/gadget/f_sdp.c
-+++ b/drivers/usb/gadget/f_sdp.c
-@@ -744,7 +744,7 @@ static ulong sdp_load_read(struct spl_load_info *load, ulong sector,
- {
- 	debug("%s: sector %lx, count %lx, buf %lx\n",
- 	      __func__, sector, count, (ulong)buf);
--	memcpy(buf, (void *)(load->dev + sector), count);
-+	memcpy(buf, (void *)(load->priv + sector), count);
- 	return count;
+-	return offset % info->bl_len;
++	return offset & (info->bl_len - 1);
  }
  
-@@ -844,7 +844,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 				struct spl_load_info load;
+ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
+diff --git a/common/spl/spl_imx_container.c b/common/spl/spl_imx_container.c
+index 127802f5cb7..1cc51782766 100644
+--- a/common/spl/spl_imx_container.c
++++ b/common/spl/spl_imx_container.c
+@@ -33,13 +33,13 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
+ 	images = (struct boot_img_t *)((u8 *)container +
+ 				       sizeof(struct container_hdr));
  
- 				debug("Found FIT\n");
--				load.dev = header;
-+				load.priv = header;
- 				load.bl_len = 1;
- 				load.read = sdp_load_read;
- 				spl_load_simple_fit(spl_image, &load, 0,
-@@ -857,7 +857,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 			    valid_container_hdr((void *)header)) {
- 				struct spl_load_info load;
+-	if (images[image_index].offset % info->bl_len) {
++	if (!IS_ALIGNED(images[image_index].offset, info->bl_len)) {
+ 		printf("%s: image%d offset not aligned to %u\n",
+ 		       __func__, image_index, info->bl_len);
+ 		return NULL;
+ 	}
  
--				load.dev = header;
-+				load.priv = header;
- 				load.bl_len = 1;
- 				load.read = sdp_load_read;
- 				spl_load_imx_container(spl_image, &load, 0);
-diff --git a/include/spl.h b/include/spl.h
-index 8ff20adc28e..951e136b9ea 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -285,16 +285,13 @@ static inline void *spl_image_fdt_addr(struct spl_image_info *info)
- /**
-  * Information required to load data from a device
-  *
-- * @dev: Pointer to the device, e.g. struct mmc *
-  * @priv: Private data for the device
-  * @bl_len: Block length for reading in bytes
-  * @filename: Name of the fit image file.
-  * @read: Function to call to read from the device
-  */
- struct spl_load_info {
--	void *dev;
- 	void *priv;
--	int bl_len;
- 	const char *filename;
- 	/**
- 	 * read() - Read from device
-@@ -307,6 +304,7 @@ struct spl_load_info {
- 	 */
- 	ulong (*read)(struct spl_load_info *load, ulong sector, ulong count,
- 		      void *buf);
-+	int bl_len;
- };
+-	sectors = roundup(images[image_index].size, info->bl_len) /
++	sectors = ALIGN(images[image_index].size, info->bl_len) /
+ 		info->bl_len;
+ 	sector = images[image_index].offset / info->bl_len +
+ 		container_sector;
+@@ -69,7 +69,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
+ 	u32 sectors;
+ 	int i, size, ret = 0;
  
- /*
+-	size = roundup(CONTAINER_HDR_ALIGNMENT, info->bl_len);
++	size = ALIGN(CONTAINER_HDR_ALIGNMENT, info->bl_len);
+ 	sectors = size / info->bl_len;
+ 
+ 	/*
+@@ -103,7 +103,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
+ 	debug("Container length %u\n", length);
+ 
+ 	if (length > CONTAINER_HDR_ALIGNMENT) {
+-		size = roundup(length, info->bl_len);
++		size = ALIGN(length, info->bl_len);
+ 		sectors = size / info->bl_len;
+ 
+ 		free(container);
 -- 
 2.37.1
 
