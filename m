@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28189C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:27:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3D8CC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:27:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 436048772B;
+	by phobos.denx.de (Postfix) with ESMTP id A794F8773F;
 	Wed,  8 Nov 2023 05:26:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g395yNcE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SqKYLSxW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B34A587723; Wed,  8 Nov 2023 05:26:53 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id B84C78773A; Wed,  8 Nov 2023 05:26:53 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AD5987722
+ by phobos.denx.de (Postfix) with ESMTPS id 9CEC087725
  for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:26:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5b383b4184fso78064857b3.1
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso79688877b3.0
  for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:26:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699417608; x=1700022408; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bJoR2HFzTxXWYDpoXYTI4EQWNTv/B4xnx/3VK0Xa5NY=;
- b=g395yNcE2pv2ivpNbAeklofy23k6joZxnuDc1tBfyMbwpM7t5to2IM1wfWdUVTt9Z5
- DDpdES/rT/SyLES6VSVhGuA8whfzyyxWvzaMqDeiGp7SilOR7FhFTLNBWVwYDkw9I6TG
- NcBRZRAz11BvZzRb7eXx8BsbH1xB1QtZY5Gfg=
+ bh=+McHZHc1F2/okqfEyJcafyb1to2TgbPaofm6aFmt5iw=;
+ b=SqKYLSxWsIouhMVV7RW5yKrcCYkoDKt14LBSTE/HCmxexGl8G5M55DdjhouA4Ust0O
+ tUfllBxs6Iw+2OVlWRVo7jhOS3EpNrnxdiZbMCZ6qrUZ5DU6+TW7Vv/YdxWeC3N7Oi4D
+ P1rTd7PDOx5yfPgVofm0VV7C+SqfBeThPAQOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699417608; x=1700022408;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bJoR2HFzTxXWYDpoXYTI4EQWNTv/B4xnx/3VK0Xa5NY=;
- b=cemyET0LmvWUgaRcHBVb1e07qTYzjSKSZ8ekCnPn6+SUs1F1dOHQGnWFMbgb0mLO7R
- FM4aLzvdauFUyNRf138INYLiftu6Jcm53CoD/eqSzypqZGqHsr0G2osVLWiX7bTj8R+m
- E60m0LwwPTs54ClHpPoUyzbcCnIgjBPpTngZAjFoOxZWE2gFUWVpwg04IA5Z9g/wwER3
- k/fbyxRCz+0Z6mzVp52FFPYKxS9c3heLza05hSnvkKCn6RbetB2K3s4QeBWkBhsmEviH
- FcOmemyk7Oaqg1TZ1uWVLm2yve0cfrFV01fWZlJTjDuN2ymyVONF95IKqq/mO2ODWGPO
- gH7w==
-X-Gm-Message-State: AOJu0Yzvyiy6cXuEhVMvtvDsGaeIyD8Nl2Nte5EG8DEwG0ppoSbT8Y1b
- sWsORHBJDHVkI9RjV8SUrwsVNSRXR4Mb6+FUzIuNMg==
-X-Google-Smtp-Source: AGHT+IHdtKvZBxdaB1ZbX7Ajdb7SOOIKqEMfmIFk1mlcLDDjnxmQSu27JzQn6XvJHHrL9BQ2R12xsZkC7R56SEUkbHg=
-X-Received: by 2002:a0d:dd88:0:b0:589:b3c6:95ff with SMTP id
- g130-20020a0ddd88000000b00589b3c695ffmr646643ywe.36.1699417608081; Tue, 07
- Nov 2023 20:26:48 -0800 (PST)
+ bh=+McHZHc1F2/okqfEyJcafyb1to2TgbPaofm6aFmt5iw=;
+ b=dy4HaMgFk632m6YvlJEOuE2aSx1DjzRR6PVGDc0IxaZYxDnF2gQkvFpXMWbggkfaVP
+ JjGwdulIl+ILLz7LFezj2eT7oo+f5rGDVIbvXaurfnjsipu4GxdFCRLaRaiaPhF92BNx
+ qECSdYXmGYyAcet8SlvzXRF26TBrM0NPsCAOFswzQAMxFGyik+y+rzVbb76shMGkD/k+
+ sgxw9YqQGhk7SK8WtThVn/yrbueUybyfR/7jU7AJod6DL30Dh13/HfTDkvL5uCslAwCc
+ s192MOhEdX752W0gaISfYNfHTuF1L9+u8FsBL6/bc+0r7Aza0zs3zzZUKydmDppPHn/q
+ zt8g==
+X-Gm-Message-State: AOJu0YwEu5RAO/f14YVk/F45iRbY906G8OSCQQLjTelgS5flbetFpain
+ bt12A9CpX9P1I5K0+573HCvBXxvSRjqr7eb8p4lL3A==
+X-Google-Smtp-Source: AGHT+IGNtQbJga+Zevjq5xeB0MzNmp7DcERJLNc5chfzDnVdvTf4Grqe8Tk9qvQWsKMdGDKMjthArKDaUAnR8FOwkdc=
+X-Received: by 2002:a0d:eb01:0:b0:59f:4f56:59bc with SMTP id
+ u1-20020a0deb01000000b0059f4f5659bcmr710587ywe.42.1699417608078; Tue, 07 Nov
+ 2023 20:26:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-21-seanga2@gmail.com>
-In-Reply-To: <20231106022603.3405551-21-seanga2@gmail.com>
+References: <20231107201349.5775-1-semen.protsenko@linaro.org>
+In-Reply-To: <20231107201349.5775-1-semen.protsenko@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 21:24:07 -0700
-Message-ID: <CAPnjgZ1_vLRpHRjS9B2W=FxLAG=9g373A++hYtjdtBuCqcyhgw@mail.gmail.com>
-Subject: Re: [PATCH v6 20/25] spl: Convert nor to spl_load
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>, 
- Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Stefan Roese <sr@denx.de>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
+Date: Tue, 7 Nov 2023 21:23:47 -0700
+Message-ID: <CAPnjgZ0HD41x+c4je61AkXr6c_QUu2-QJCdHrxLgDLrQL7B9Pw@mail.gmail.com>
+Subject: Re: [PATCH] serial: s5p: Use dev_read_addr_ptr() to get base address
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,32 +81,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
+On Tue, 7 Nov 2023 at 13:13, Sam Protsenko <semen.protsenko@linaro.org> wrote:
 >
-> This converts the nor load method to use spl_load. As a result it also
-> adds support for LOAD_FIT_FULL. Since this is the last caller of
-> spl_load_legacy_img, it has been removed.
+> As the address read from device tree is being cast to a pointer, it's
+> better to use dev_read_addr_ptr() API for getting that address. The more
+> detailed explanation can be found in commit a12a73b66476 ("drivers: use
+> dev_read_addr_ptr when cast to pointer").
 >
-> We can't load FITs with external data with SPL_LOAD_FIT_FULL, so disable the
-> test in that case. No boards enable SPL_NOR_SUPPORT and SPL_LOAD_FIT_FULL, so
-> this is not a regression.
->
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->
-> Changes in v6:
-> - Fix LZMA support
-> - Fix load address
-> - Explicitly initialize load_info members
->
-> Changes in v5:
-> - Rework to load header in spl_load
->
->  common/spl/spl_legacy.c   | 61 ---------------------------------------
->  common/spl/spl_nor.c      | 40 +++++--------------------
->  include/spl_load.h        |  1 +
->  test/image/spl_load_nor.c |  2 ++
->  4 files changed, 10 insertions(+), 94 deletions(-)
->
+>  drivers/serial/serial_s5p.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
