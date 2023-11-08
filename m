@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93751C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:29:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E344BC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:29:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DACE87764;
-	Wed,  8 Nov 2023 05:27:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A8BA98776A;
+	Wed,  8 Nov 2023 05:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OzhPva7F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d2roWTXI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C80A487760; Wed,  8 Nov 2023 05:27:09 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 676C98774F; Wed,  8 Nov 2023 05:27:29 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 153FF87767
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:27:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6596C8770B
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:27:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5a7b91faf40so76925317b3.1
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:27:02 -0800 (PST)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-da077db5145so6404626276.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:27:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699417621; x=1700022421; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699417646; x=1700022446; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i8xc8Y2evn5DfLwCRHnD8i0awGC1QEK7NtABWtUK+sY=;
- b=OzhPva7FkPJptJwlPNlliB4YXunLuEVaSRCbvlDyE25RUBQEIucr4SYfo9ea43BQ8D
- JZkybpO/a3A/2vXiyTY06z1CY6QqUtRADWdpif7qNKHhpRy585/qLZgRuAhK8ZlEPhjo
- dvbbm4jidk5sWVQR940UcgsHVJLOQDokNqWuA=
+ bh=f8KihiseLkyTZ7pcPMylsECHDnIkHSKpbvkpTAp+3cg=;
+ b=d2roWTXIqWrFLljbb1YmewrvOBhmgdWsyPHwQSu296kD8XDcfyD2iPcEqHK+EJLUY6
+ hZNxui8cI4l+vpDjx/buFejftbDiWEUfsbY+3NeScGwtAndbm6LufYncM1rybWTpJDLc
+ vRplaUHM+bwtdTtxCknHlGcJ5unUQeQGvhAkg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699417621; x=1700022421;
+ d=1e100.net; s=20230601; t=1699417646; x=1700022446;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=i8xc8Y2evn5DfLwCRHnD8i0awGC1QEK7NtABWtUK+sY=;
- b=cDaPWah0qB2nBFcmeXheIFoA/SAJqNiXz5t2CR8GORy96YjQkOz84iLLM0dtsBJt53
- FGkZfsIxeGNgqIQU4QYXBb+CFAbBxf68HU8+orYL1GmpqO54Xq806rBg8al8DnZRUr7N
- TEGmGpNuQ7r/WoWSPk9qeLXsAaF3nvr/cFQpHpPy+YEGV75avGTKQ4bXpty62QJS5Qu9
- JJBC7Ey9IB8qVOB/JC1jnoSjaDHXrqyGeNI0NZq7xchn/aFtniJAv8WkKEsE4ge4wsgi
- nRxgl+4lnQDEqfF1AN9Ym8ZN9DStfndaRo4MHNbKMNjL5Jwvvnh1bSCNDx9YWrvRxQf1
- s0dw==
-X-Gm-Message-State: AOJu0Yynr36oWoBLeg4kQxx2J9HXd3ZhSh+SHcCTOysCzsVWefW2OJGn
- mtNnuh1fI7MpGcPSRcZyZX4Q4NeWG5c/t0w7igh7cQ==
-X-Google-Smtp-Source: AGHT+IEM1ne6ok+HoJ4xW8+qMh3uDTa+uhx2kjUhTDZrUZLelHZrd904Hih7pNl4EQW2rDSTMPQ3eQPPgVxZhOChaWA=
-X-Received: by 2002:a0d:d9c9:0:b0:5a7:afcc:80fe with SMTP id
- b192-20020a0dd9c9000000b005a7afcc80femr736874ywe.3.1699417620660; Tue, 07 Nov
- 2023 20:27:00 -0800 (PST)
+ bh=f8KihiseLkyTZ7pcPMylsECHDnIkHSKpbvkpTAp+3cg=;
+ b=CgESRgMWgoz1LaedAB9sikdJjbYq59rzIhR8HfvxLbgETbX0AI9yViFTLk1k7xZf6U
+ oreR0Qf1A/OwEfnfS710YQQNdX8CJjd/PjYf58pzOqVYMtvXAnAxswt1IU/F1y/7WfE/
+ R3MLPkrijXSg03Jb2CC4Gmk2C1cOv5hatJxQYncQpKsk46p6C8lxqnUPDpvlit8kTRg5
+ U/xkow+OyVDXQ2CrJZ1C7eNYTaVbzEnSqEn2P5BXeRfSP2AjIj52LF6KWcbiw7niVHul
+ OibW9+NRrBH4/zJWpullmfpN6NjMemkuiDUbyTI3e9uTTXzljFvQEeUjyzyvSVGzWBOz
+ 3gsA==
+X-Gm-Message-State: AOJu0Yy2Vginli+RVYleTWv79YNKF48eHON4GYYvbCTxm1UG2Rg9tRRZ
+ bv+AfNmYdYIV9c6uZu3UtCALa4G3fgcIybcmwgZI5w==
+X-Google-Smtp-Source: AGHT+IHNaKyjBM6dX6lV0yh3uHL9+XKRaHxx75Y2Yt0xpboC4sdLna57FnpTuCO4oo5v1qa7nZpuZm8Zajdsv7UWHD8=
+X-Received: by 2002:a25:c78e:0:b0:da0:cf4b:c504 with SMTP id
+ w136-20020a25c78e000000b00da0cf4bc504mr790761ybe.8.1699417645992; Tue, 07 Nov
+ 2023 20:27:25 -0800 (PST)
 MIME-Version: 1.0
 References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-20-seanga2@gmail.com>
-In-Reply-To: <20231106022603.3405551-20-seanga2@gmail.com>
+ <20231106022603.3405551-6-seanga2@gmail.com>
+In-Reply-To: <20231106022603.3405551-6-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 21:24:05 -0700
-Message-ID: <CAPnjgZ1+OLOptkSS-2LgA5=v9BQFGx4KUu5VzZQKOhLRGiZy9g@mail.gmail.com>
-Subject: Re: [PATCH v6 19/25] spl: Convert net to spl_load
+Date: Tue, 7 Nov 2023 21:23:39 -0700
+Message-ID: <CAPnjgZ1efoJtQCZPO1Nb0u_B5fS6nhH=8k8AcS0Ank3pQe+JpA@mail.gmail.com>
+Subject: Re: [PATCH v6 05/25] spl: Remove NULL assignments in spl_load_info
 To: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>, 
  Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Stefan Roese <sr@denx.de>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+ Stefan Roese <sr@denx.de>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,24 +85,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sean,
+
 On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> This converts the net load method to use spl_load. As a result, it also
-> adds support for LOAD_FIT_FULL and IMX images.
+> Remove NULL assignments to fields in spl_load_info when .load doesn't
+> reference these fields. This can result in more efficient code. filename
+> must stay even if it is unused, since load_simple_fit uses it.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
 > Changes in v6:
-> - Explicitly initialize load_info members
+> - New
 >
-> Changes in v5:
-> - Rework to load header in spl_load
->
->  common/spl/spl_net.c      | 29 +++++------------------------
->  include/spl_load.h        |  1 +
->  test/image/spl_load_net.c |  2 ++
->  3 files changed, 8 insertions(+), 24 deletions(-)
->
+>  arch/arm/mach-sunxi/spl_spi_sunxi.c | 2 --
+>  common/spl/spl_fat.c                | 1 -
+>  common/spl/spl_mmc.c                | 2 --
+>  common/spl/spl_nand.c               | 4 ----
+>  common/spl/spl_spi.c                | 2 --
+>  common/spl/spl_ymodem.c             | 1 -
+>  6 files changed, 12 deletions(-)
+
+This makes me wonder if we should have a function to clear it out
+(using memset() and perhaps a bl_len parameter)? Having said that, the
+info-field use is pretty self-contained with these files.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
