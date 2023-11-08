@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17ABFC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:25:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90DFCC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:26:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FE818768F;
-	Wed,  8 Nov 2023 05:25:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 123D28763E;
+	Wed,  8 Nov 2023 05:26:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dMD2AW2q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QGawMT5J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EF10876E1; Wed,  8 Nov 2023 05:25:52 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id E47D687713; Wed,  8 Nov 2023 05:26:38 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73AED874E9
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:25:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E692D874E9
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:26:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-da2e786743aso6719082276.0
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:25:50 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5a877e0f0d8so3600917b3.1
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:26:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699417549; x=1700022349; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699417595; x=1700022395; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+UzCwLyHf1KNdS3YeIQrf6RAOa1/m+/N/eKjBfqpF8c=;
- b=dMD2AW2q5eEVp783yxiccr9NXwengIma8JB2xP/pV0p2r4QgOmIoZJc7HOtzUS7Vnw
- m1q4llF2esOAv+7Q9JEYtRigylfnnSCoVU47nu/t6vVWeYNYi+30kEUeW+7gYNu6qpsN
- sAmcn7pmiZlvmDqHH5r23fsQYtgjAdx96kzA0=
+ bh=nd+CP6Y8NtLRsG03kF/YdRGWevobV6M2x2ArynB1gt8=;
+ b=QGawMT5JbpRhLKEX41QaD411wQ+jPSpIfYNXlJD8HF2SXq2zUFIi6pb5SgS6fSEANc
+ GhksRa9GymCMt4l5ei8xbTrQayu+uIxUHNI+x722Oy2ip9NPsu9QB93pYBpkvIZNBs4O
+ zQMJX4lV9v+1um3R4Voga3r9OJTaV8/rzSG8M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699417549; x=1700022349;
+ d=1e100.net; s=20230601; t=1699417595; x=1700022395;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+UzCwLyHf1KNdS3YeIQrf6RAOa1/m+/N/eKjBfqpF8c=;
- b=sTuItC0AL/NXx/MgjsGVOI2EIWOPrTKgrhpcMgk/3e9Ru9smeN82/pw/dAYeqjWVX7
- 8WjLnNm7hXDTKJpIRxtQkwdMllFNi/vaxl5E2AAvAM90x89S02SNmyqfxAHcfyqZ+OeY
- QLoK72L3x+nikS04FtVZiEboSqDhZ9NskT3ruky62FcO+f7ES4NjVFggMmIkZICJV8QP
- OzjGM0VRyv6ZfwfQFCs112kbi9sTXt/EoXLS9ooVKlJtR7T2Xe1oPgG719+Gpe/5/YR+
- Z8tTpcpU+fK3Px1ZZo/nIx4EkXcLrqHzqbGywbqnEsVBJfrCSqUzT/C9ztWqutPtLt6A
- qpVQ==
-X-Gm-Message-State: AOJu0YxZQDvykWWAzPMp8tnRO3EZb97+mspdtxffkElo0CdkeX800/3H
- KwOcwKUWuwibJ8cIaooZ95tbKQIir4/psRA0LhYJkQ==
-X-Google-Smtp-Source: AGHT+IEw4vLel4f8EnljNqTW7tY+XVFO+U4E6VZjR+uDWXll3RuqY1HODfh4eNdL9B0ExqZ5f5VUA7Mi6iVLUiQu5K0=
-X-Received: by 2002:a25:acd5:0:b0:da0:4a6d:bac with SMTP id
- x21-20020a25acd5000000b00da04a6d0bacmr950308ybd.0.1699417548796; Tue, 07 Nov
- 2023 20:25:48 -0800 (PST)
+ bh=nd+CP6Y8NtLRsG03kF/YdRGWevobV6M2x2ArynB1gt8=;
+ b=W1DS4pSr6DoS8tZcqhe7g0DpPlvbbqioitP46Cfxr6lvNGV46OJPzMgMd7CxykSMsw
+ Gs7bqftxASX1P4IFmnihvdzSE15wvwlyJojaykvPU6/HM3lSGEZfLWSA+iFeu2lm068G
+ r8zwDLS+bO0By2g1Av/7AFIMbPwa+OKJ5WmmSj5EwOVcgN4wwJA0UzZn7OGfiRa4Feaq
+ mVeqdNbF9WtymDaVWR1xsu8neF2iC66IfKl333EAfD9xJiP0ZnRB7eOjBSjDdp7G8P/3
+ A6EkwvSJXpwXgihx7aht0PK2B6Ib3FPNPARLCAx5yAiz+TXfQv2VRadBk/XRY2RwtbOW
+ sA2A==
+X-Gm-Message-State: AOJu0Yw2opVUA7euhQMtJWHDsZVAokDtUVkymFeN16HcOlN3g5HqdC+h
+ Ge4FEd6fubm1ZgmvRwMxPV+hICbTGRMjh8opSH5z4A==
+X-Google-Smtp-Source: AGHT+IHP24l9cnmR9QiO9G0XIMhPmIRgRV8ikx1JK5yaYacPLRZLzI6Hzo4Lj1R7jC+rYaPOUg04zP6EQaVQ23oApAg=
+X-Received: by 2002:a81:4f07:0:b0:5b3:3109:3701 with SMTP id
+ d7-20020a814f07000000b005b331093701mr3827396ywb.21.1699417595440; Tue, 07 Nov
+ 2023 20:26:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20231107190601.17151-1-semen.protsenko@linaro.org>
- <20231107190601.17151-4-semen.protsenko@linaro.org>
-In-Reply-To: <20231107190601.17151-4-semen.protsenko@linaro.org>
+References: <20231106022603.3405551-1-seanga2@gmail.com>
+ <20231106022603.3405551-22-seanga2@gmail.com>
+In-Reply-To: <20231106022603.3405551-22-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 21:23:51 -0700
-Message-ID: <CAPnjgZ2Ga96rqaM-c4NPo=wTLUKtXFt31ORTz30LLjeb+z9Szw@mail.gmail.com>
-Subject: Re: [PATCH 3/4] serial: s5p: Use named constants for register values
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
+Date: Tue, 7 Nov 2023 21:24:09 -0700
+Message-ID: <CAPnjgZ2JM4gJcGKc=jmwEADZq+ruXv6mo1EJ80fcjt8GBcXkQQ@mail.gmail.com>
+Subject: Re: [PATCH v6 21/25] spl: Convert NVMe to spl_load
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>, 
+ Marek Vasut <marex@denx.de>, Xavier Drudis Ferran <xdrudis@tinet.cat>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,19 +86,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
-
-On Tue, 7 Nov 2023 at 12:06, Sam Protsenko <semen.protsenko@linaro.org> wrote:
+On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Get rid of magic numbers in s5p_serial_init() when writing to UART
-> registers. While at it, use BIT() macro for existing constants when
-> appropriate.
+> This converts the blk load method (used exclusively by NVMe) to use
+> spl_load. As a consequence, it also adds support for LOAD_FIT_FULL and
+> IMX images.
 >
-> No functional change.
->
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
->  drivers/serial/serial_s5p.c | 31 +++++++++++++++++++++----------
->  1 file changed, 21 insertions(+), 10 deletions(-)
+>
+> Changes in v6:
+> - Fix invalid return from spl_blk_load_image
+> - Explicitly initialize load_info members
+>
+> Changes in v5:
+> - New
+>
+>  common/spl/spl_blk_fs.c  | 66 +++++++---------------------------------
+>  include/spl_load.h       |  1 +
+>  test/image/spl_load_fs.c |  2 ++
+>  3 files changed, 14 insertions(+), 55 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
