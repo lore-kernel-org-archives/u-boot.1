@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC4BEC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 18:59:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C79C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 19:16:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 337358710F;
-	Wed,  8 Nov 2023 19:59:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3ECE6871A7;
+	Wed,  8 Nov 2023 20:16:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LzqMTunk";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="j+TJU+vX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B22BD871AB; Wed,  8 Nov 2023 19:59:49 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 9E94E871DF; Wed,  8 Nov 2023 20:16:28 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15EBF87108
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 19:59:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B0DF871A2
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 20:16:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-77ba6d5123fso97340985a.0
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 10:59:47 -0800 (PST)
+ spf=pass smtp.mailfrom=dimorinny@google.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-54357417e81so1945a12.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 11:16:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699469986; x=1700074786; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=foX2t6Sh9Ac0amS7ddR0aYlY6KNnRt5AbfSw9JW9p2s=;
- b=LzqMTunkpfg5pRoSF5uMy/pF1G0m/CiX5ca0dcGODrDOik7i9mAVMnRUOA1qEBdVtd
- /mO1A1EidHUkvQrtRvtIp1AJomVkGHq5dJNUr9K4s3VGsCjxT54AFQYVX8eVwba+OabU
- 6KIsMol1CU0uCiAJt7X9KAmd8gtWw2YqhbF167P1+Yw6t39+GP3OR1r3+i1/W9F/jVuJ
- TSjeQUb5kevx/eyPxMTgK96jAHlOalyiIZzBkdj6iha6SeSFLNws1tYg3oX7mZ6Did8R
- 9xV1z/+Pvtz7m0vC58Hx10ZKgH+D9YD7pCdu1TkIJA6zUhZbwCCPQxFYztZ/BtCqxBzF
- DW6Q==
+ d=google.com; s=20230601; t=1699470985; x=1700075785; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=n8rrYBoIVGNEKU0eX6gBX0jQrrw4l3ShYbvpxLhZvqE=;
+ b=j+TJU+vX9zC9QZn1C6tgZ7nQVs3JX/P0ga8mPcpDLd2l3va4JePlOt+0SfFVS8TKv6
+ wg0fz1dGK75QPmzxzNfeo5aqcQsvA8N2ird6UiOfSxZ9A/7gdW0qxHDmdxJRpJI8zBEp
+ 8RmLEcfTo2uLUtezh6gKS5hUlg7AbLwCUP1n3wxF2pEBWjxrxvgW/sqj1aC+Pjzb374e
+ 7pi8R6gS4hEPqxLzhpo1pkys48jFMBPFtThPnaIDBG3QiOiWRpZA/nNoXU5eTQCBPkwx
+ dCsIY/CRg9UVCzM8eR2AOY9PR6seREocKusm+EvbN7U0gdP/olN5LNiKU7/lXezwuLu/
+ qV/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699469986; x=1700074786;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=foX2t6Sh9Ac0amS7ddR0aYlY6KNnRt5AbfSw9JW9p2s=;
- b=idtPpDb4JZzDVQfTIIOnqHLUezzDykawJBi2bnJE8woAJRsk8OEx9XNy6j+fmvJ9v7
- MOC6yGetL03BYI6xqSqaqcwiZcD7jJQUxSc9nf3SoC2Wl4wU8fP4QrQkgI/91ldYzYxy
- 8gW0wM/pdedUCK9TirKLvHV4oz5MFtFlhGpuLLOQ4+y8Cyx6VFjSn+SqnseVy9EbTBj2
- MHTiCaKXLDv+ZFmaB4PsegMotS/Q33SbFYAc55+pXEc/MnAgpRZgrpb909JGRktoNzre
- 81Hb7qLrtov3Brojj1DoWPF5eKlueNjWI98VKonIP4vO49znBD4n7QNWZLKSj7QNBXCA
- KwoQ==
-X-Gm-Message-State: AOJu0YxCY4LwOhQ8Kr1nV5l92QAfViuwq9BbHw7u92DKKGoztYiPC4HS
- 7HqigYhb+V4ICEOJEByQcss=
-X-Google-Smtp-Source: AGHT+IHYxyoE2W9UlxlHoNfnm4zHYAHdgp/3a+XPUBImjRuDLEQyqlJorMtBx/O8/eZWRPfbSeiDkg==
-X-Received: by 2002:a05:620a:170a:b0:774:32f0:e2b5 with SMTP id
- az10-20020a05620a170a00b0077432f0e2b5mr3125202qkb.9.1699469985585; 
- Wed, 08 Nov 2023 10:59:45 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- m29-20020a05620a215d00b0077892023fc5sm1332083qkm.120.2023.11.08.10.59.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 10:59:45 -0800 (PST)
-Message-ID: <8d892c97-10b4-63f0-bd2d-407abeffefff@gmail.com>
-Date: Wed, 8 Nov 2023 13:59:44 -0500
+ d=1e100.net; s=20230601; t=1699470985; x=1700075785;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=n8rrYBoIVGNEKU0eX6gBX0jQrrw4l3ShYbvpxLhZvqE=;
+ b=XvwotmvsNh2uRAMMdfM0K9wFFXzVh+hE0xXUnm3EzSnBWge+kAoyFcWjxxAjg+ra4v
+ P7gWtAMQ2NlvttiDdczYsDakGARv+C4E7hhVs3vWTdwvkjyDami9jd5CzREluhw2CKRo
+ TV5XEQ45EC0yOlAS8Pe1jp5Q5npTNFt7zePMxGDjVPmPAmMbwGvqD4qy5hfjTPdhDnnS
+ zt2DW9xpQEswT2/D7SoLVAUsZwfQaNi/E12nwY7s4qwgJCf/K8uspbheq7b55sR/EzNK
+ e/UUWWS0BY4EUlpXH1ucllla047M+8CvcyfYel1sLEtFUz6tMFxg4F9JOXY/lDMCCbuJ
+ +yPQ==
+X-Gm-Message-State: AOJu0Yx0qVSuamcLKaAxUjQ2w+zUbx5cBp+dHiCT62IGSkZI4kvy9yNW
+ KoadRbcuWbVAYlv0HImMdeo7DuM0FMrNXY1RofrltA==
+X-Google-Smtp-Source: AGHT+IH1j5DEY/UyDDLeKiGTfv9O7Iny9MU+wVLkAhObcAMWvfgUPO5jqftJ+hVTsKwjcbyyIgPKTsrMz7+KalSBllM=
+X-Received: by 2002:a05:6402:497:b0:545:94d:7b with SMTP id
+ k23-20020a056402049700b00545094d007bmr5826edv.4.1699470985157; Wed, 08 Nov
+ 2023 11:16:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v1 2/2] fs: fat: calculate FAT type based on cluster count
-Content-Language: en-US
-From: Sean Anderson <seanga2@gmail.com>
-To: christian.taedcke-oss@weidmueller.com, u-boot@lists.denx.de
-Cc: Christian Taedcke <christian.taedcke@weidmueller.com>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-References: <20231108121239.26737-1-christian.taedcke-oss@weidmueller.com>
- <20231108121239.26737-3-christian.taedcke-oss@weidmueller.com>
- <a3781a24-2f1f-ca7b-9c7a-d2c4bd071a6a@gmail.com>
-In-Reply-To: <a3781a24-2f1f-ca7b-9c7a-d2c4bd071a6a@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+References: <20230725215658.2118831-1-dimorinny@google.com>
+ <20231108144549.GA1077075@bill-the-cat>
+In-Reply-To: <20231108144549.GA1077075@bill-the-cat>
+From: Dmitrii Merkurev <dimorinny@google.com>
+Date: Wed, 8 Nov 2023 11:16:13 -0800
+Message-ID: <CAOWkq4=swv0HtS8rUEWwPYZV50B88AAgLHjFt9ykJsOpUrQeoQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] net: split IP_TCP header into separate IP/IP6 and
+ TCP headers
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, rammuthiah@google.com, rfried.dev@gmail.com, 
+ Ying-Chun Liu <paul.liu@linaro.org>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,133 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMTEvOC8yMyAxMzo1NywgU2VhbiBBbmRlcnNvbiB3cm90ZToNCj4gT24gMTEvOC8yMyAw
-NzoxMiwgY2hyaXN0aWFuLnRhZWRja2Utb3NzQHdlaWRtdWVsbGVyLmNvbSB3cm90ZToNCj4+
-IEZyb206IENocmlzdGlhbiBUYWVkY2tlIDxjaHJpc3RpYW4udGFlZGNrZUB3ZWlkbXVlbGxl
-ci5jb20+DQo+Pg0KPj4gVGhpcyBmaXhlcyBhbiBpc3N1ZSB3aGVyZSB0aGUgRkFUIHR5cGUg
-KEZBVDEyLCBGQVQxNikgaXMgbm90DQo+PiBjb3JyZWN0bHkgZGV0ZWN0ZWQsIGUuZy4gd2hl
-biB0aGUgQlBCIGZpZWxkIEJTX0ZpbFN5c1R5cGUgY29udGFpbnMgdGhlDQo+PiB2YWxpZCB2
-YWx1ZSAiRkFUwqDCoMKgwqAgIi4NCj4+DQo+PiBBY2NvcmRpbmcgdG8gdGhlIEZBVCBzcGVj
-IHRoZSBmaWVsZCBCU19GaWxTeXNUeXBlIGhhcyBvbmx5DQo+PiBpbmZvcm1hdGlvbmFsIGNo
-YXJhY3RlciBhbmQgZG9lcyBub3QgZGV0ZXJtaW5lIHRoZSBGQVQgdHlwZS4NCj4+DQo+PiBU
-aGUgbG9naWMgb2YgdGhpcyBjb2RlIGlzIGJhc2VkIG9uIHRoZSBsaW51eCBrZXJuZWwgaW1w
-bGVtZW50YXRpb24NCj4+IGZyb20gdGhlIGZpbGUgZnMvZmF0L2lub2RlLmMgZnVuY3Rpb24g
-ZmF0X2ZpbGxfc3VwZXIoKS4NCj4+DQo+PiBGb3IgZGV0YWlscyBhYm91dCBGQVQgc2VlIGh0
-dHA6Ly9lbG0tY2hhbi5vcmcvZG9jcy9mYXRfZS5odG1sDQo+Pg0KPj4gU2lnbmVkLW9mZi1i
-eTogQ2hyaXN0aWFuIFRhZWRja2UgPGNocmlzdGlhbi50YWVkY2tlQHdlaWRtdWVsbGVyLmNv
-bT4NCj4gDQo+IEhhdmUgeW91IHJ1biBibG9hdC1vLW1ldGVyIG9uIHRoaXM/IEZBVCBpcyB1
-c2VkIGluIFNQTCBhIGxvdC4NCj4gDQo+IFdvdWxkIGl0IGJlIHBvc3NpYmxlIHRvIHdyaXRl
-IGEgdGVzdCBmb3IgdGhpcywgZXNwZWNpYWxseSBmb3IgYSBGQVQxMiBmaWxlc3lzdGVtIHdp
-dGgNCj4gNDA4NCBkYXRhIHNlY3RvcnMgYW5kIGEgRkFUMTYgZmlsZXN5c3RlbSB3aXRoIDQw
-ODU/DQo+IA0KPj4gLS0tDQo+Pg0KPj4gwqAgZnMvZmF0L2ZhdC5jwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIHwgNTggKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0t
-LQ0KPj4gwqAgaW5jbHVkZS9mYXQuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDYgLS0t
-LS0NCj4+IMKgIHRlc3QvaW1hZ2Uvc3BsX2xvYWRfZnMuYyB8wqAgMiArLQ0KPj4gwqAgMyBm
-aWxlcyBjaGFuZ2VkLCAzNSBpbnNlcnRpb25zKCspLCAzMSBkZWxldGlvbnMoLSkNCj4+DQo+
-PiBkaWZmIC0tZ2l0IGEvZnMvZmF0L2ZhdC5jIGIvZnMvZmF0L2ZhdC5jDQo+PiBpbmRleCA4
-YTBmNGU0ZTZjLi45MTc5MjU3ZmYyIDEwMDY0NA0KPj4gLS0tIGEvZnMvZmF0L2ZhdC5jDQo+
-PiArKysgYi9mcy9mYXQvZmF0LmMNCj4+IEBAIC0yNyw2ICsyNyw5IEBADQo+PiDCoCAjZGVm
-aW5lIEZBVFU4QVJSQVkyQ1BVMTYoeCkgKCgoeClbMV0gPDwgOCkgKyAoeClbMF0pDQo+PiAr
-LyogbWF4aW11bSBudW1iZXIgb2YgY2x1c3RlcnMgZm9yIEZBVDEyICovDQo+PiArI2RlZmlu
-ZSBNQVhfRkFUMTLCoMKgwqAgMHhGRjQNCj4+ICsNCj4+IMKgIC8qDQo+PiDCoMKgICogQ29u
-dmVydCBhIHN0cmluZyB0byBsb3dlcmNhc2UuwqAgQ29udmVydHMgYXQgbW9zdCAnbGVuJyBj
-aGFyYWN0ZXJzLA0KPj4gwqDCoCAqICdsZW4nIG1heSBiZSBsYXJnZXIgdGhhbiB0aGUgbGVu
-Z3RoIG9mICdzdHInIGlmICdzdHInIGlzIE5VTEwNCj4+IEBAIC00ODUsNiArNDg4LDMyIEBA
-IHN0YXRpYyBfX3U4IG1rY2tzdW0oc3RydWN0IG5hbWVleHQgKm5hbWVleHQpDQo+PiDCoMKg
-wqDCoMKgIHJldHVybiByZXQ7DQo+PiDCoCB9DQo+PiArLyoNCj4+ICsgKiBEZXRlcm1pbmUg
-dGhlIEZBVCB0eXBlDQo+PiArICoNCj4+ICsgKiBCYXNlZCBvbiBmYXRfZmlsbF9zdXBlcigp
-IGZyb20gdGhlIExpbnV4IGtlcm5lbCdzIGZzL2ZhdC9pbm9kZS5jDQo+PiArICovDQo+PiAr
-c3RhdGljIGludA0KPj4gK2RldGVybWluZV9mYXRfYml0cyhjb25zdCBib290X3NlY3RvciAq
-YnMpDQo+PiArew0KPj4gK8KgwqDCoCBpZiAoIWJzLT5mYXRfbGVuZ3RoICYmIGJzLT5mYXQz
-Ml9sZW5ndGgpIHsNCj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gMzI7DQo+PiArwqDCoMKg
-IH0gZWxzZSB7DQo+PiArwqDCoMKgwqDCoMKgwqAgdTE2IGZhdF9zdGFydCA9IGJzLT5yZXNl
-cnZlZDsNCj4+ICvCoMKgwqDCoMKgwqDCoCB1MzIgZGlyX3N0YXJ0ID0gZmF0X3N0YXJ0ICsg
-YnMtPmZhdHMgKiBicy0+ZmF0X2xlbmd0aDsNCj4+ICvCoMKgwqDCoMKgwqDCoCB1MzIgcm9v
-dGRpcl9zZWN0b3JzID0gRkFUVThBUlJBWTJDUFUxNihicy0+ZGlyX2VudHJpZXMpICoNCj4+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2l6ZW9mKGRp
-cl9lbnRyeSkgLw0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCBGQVRVOEFSUkFZMkNQVTE2KGJzLT5zZWN0b3Jfc2l6ZSk7DQo+IA0KPiBOb3RlIHRo
-YXQgdGVjaG5pY2FsbHkgd2UgYXJlIHN1cHBvc2VkIHRvIHJvdW5kIHVwLg0KPiANCj4+ICvC
-oMKgwqDCoMKgwqDCoCB1MzIgZGF0YV9zdGFydCA9IGRpcl9zdGFydCArIHJvb3RkaXJfc2Vj
-dG9yczsNCj4+ICvCoMKgwqDCoMKgwqDCoCB1MTYgc2VjdG9ycyA9IEZBVFU4QVJSQVkyQ1BV
-MTYoYnMtPnNlY3RvcnMpOw0KPj4gK8KgwqDCoMKgwqDCoMKgIHUzMiB0b3RhbF9zZWN0b3Jz
-ID0gc2VjdG9ycyA/IHNlY3RvcnMgOiBicy0+dG90YWxfc2VjdDsNCj4+ICvCoMKgwqDCoMKg
-wqDCoCB1MzIgdG90YWxfY2x1c3RlcnMgPSAodG90YWxfc2VjdG9ycyAtIGRhdGFfc3RhcnQp
-IC8NCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJzLT5j
-bHVzdGVyX3NpemU7DQo+PiArDQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuICh0b3RhbF9j
-bHVzdGVycyA+IE1BWF9GQVQxMikgPyAxNiA6IDEyOw0KPj4gK8KgwqDCoCB9DQo+PiArfQ0K
-Pj4gKw0KPiANCj4gVGhpcyBzaG91bGQgYmUgbWVyZ2VkIHdpdGguLi4NCj4gDQo+PiDCoCAv
-Kg0KPj4gwqDCoCAqIFJlYWQgYm9vdCBzZWN0b3IgYW5kIHZvbHVtZSBpbmZvIGZyb20gYSBG
-QVQgZmlsZXN5c3RlbQ0KPj4gwqDCoCAqLw0KPj4gQEAgLTQ5Myw3ICs1MjIsNiBAQCByZWFk
-X2Jvb3RzZWN0YW5kdmkoYm9vdF9zZWN0b3IgKmJzLCB2b2x1bWVfaW5mbyAqdm9saW5mbywg
-aW50ICpmYXRzaXplKQ0KPj4gwqAgew0KPj4gwqDCoMKgwqDCoCBfX3U4ICpibG9jazsNCj4+
-IMKgwqDCoMKgwqAgdm9sdW1lX2luZm8gKnZpc3RhcnQ7DQo+PiAtwqDCoMKgIGludCByZXQg
-PSAwOw0KPj4gwqDCoMKgwqDCoCBpZiAoY3VyX2RldiA9PSBOVUxMKSB7DQo+PiDCoMKgwqDC
-oMKgwqDCoMKgwqAgZGVidWcoIkVycm9yOiBubyBkZXZpY2Ugc2VsZWN0ZWRcbiIpOw0KPj4g
-QEAgLTUwOCw3ICs1MzYsOCBAQCByZWFkX2Jvb3RzZWN0YW5kdmkoYm9vdF9zZWN0b3IgKmJz
-LCB2b2x1bWVfaW5mbyAqdm9saW5mbywgaW50ICpmYXRzaXplKQ0KPj4gwqDCoMKgwqDCoCBp
-ZiAoZGlza19yZWFkKDAsIDEsIGJsb2NrKSA8IDApIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDC
-oCBkZWJ1ZygiRXJyb3I6IHJlYWRpbmcgYmxvY2tcbiIpOw0KPj4gLcKgwqDCoMKgwqDCoMKg
-IGdvdG8gZmFpbDsNCj4+ICvCoMKgwqDCoMKgwqDCoCBmcmVlKGJsb2NrKTsNCj4+ICvCoMKg
-wqDCoMKgwqDCoCByZXR1cm4gLTE7DQo+PiDCoMKgwqDCoMKgIH0NCj4+IMKgwqDCoMKgwqAg
-bWVtY3B5KGJzLCBibG9jaywgc2l6ZW9mKGJvb3Rfc2VjdG9yKSk7DQo+PiBAQCAtNTI3LDMz
-ICs1NTYsMTUgQEAgcmVhZF9ib290c2VjdGFuZHZpKGJvb3Rfc2VjdG9yICpicywgdm9sdW1l
-X2luZm8gKnZvbGluZm8sIGludCAqZmF0c2l6ZSkNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBi
-cy0+aW5mb19zZWN0b3IgPSBGQVQyQ1BVMTYoYnMtPmluZm9fc2VjdG9yKTsNCj4+IMKgwqDC
-oMKgwqDCoMKgwqDCoCBicy0+YmFja3VwX2Jvb3QgPSBGQVQyQ1BVMTYoYnMtPmJhY2t1cF9i
-b290KTsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCB2aXN0YXJ0ID0gKHZvbHVtZV9pbmZvICop
-KGJsb2NrICsgc2l6ZW9mKGJvb3Rfc2VjdG9yKSk7DQo+PiAtwqDCoMKgwqDCoMKgwqAgKmZh
-dHNpemUgPSAzMjsNCj4+IMKgwqDCoMKgwqAgfSBlbHNlIHsNCj4+IMKgwqDCoMKgwqDCoMKg
-wqDCoCB2aXN0YXJ0ID0gKHZvbHVtZV9pbmZvICopJihicy0+ZmF0MzJfbGVuZ3RoKTsNCj4+
-IC3CoMKgwqDCoMKgwqDCoCAqZmF0c2l6ZSA9IDA7DQo+PiDCoMKgwqDCoMKgIH0NCj4gDQo+
-IC4uLiB0aGVzZSBpZiBzdGF0ZW1lbnRzIChhYm92ZSkNCj4gDQo+PiDCoMKgwqDCoMKgIG1l
-bWNweSh2b2xpbmZvLCB2aXN0YXJ0LCBzaXplb2Yodm9sdW1lX2luZm8pKTsNCj4+IC3CoMKg
-wqAgaWYgKCpmYXRzaXplID09IDMyKSB7DQo+PiAtwqDCoMKgwqDCoMKgwqAgaWYgKHN0cm5j
-bXAoRkFUMzJfU0lHTiwgdmlzdGFydC0+ZnNfdHlwZSwgU0lHTkxFTikgPT0gMCkNCj4+IC3C
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXhpdDsNCj4+IC3CoMKgwqAgfSBlbHNlIHsN
-Cj4+IC3CoMKgwqDCoMKgwqDCoCBpZiAoc3RybmNtcChGQVQxMl9TSUdOLCB2aXN0YXJ0LT5m
-c190eXBlLCBTSUdOTEVOKSA9PSAwKSB7DQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAq
-ZmF0c2l6ZSA9IDEyOw0KPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBleGl0Ow0K
-Pj4gLcKgwqDCoMKgwqDCoMKgIH0NCj4+IC3CoMKgwqDCoMKgwqDCoCBpZiAoc3RybmNtcChG
-QVQxNl9TSUdOLCB2aXN0YXJ0LT5mc190eXBlLCBTSUdOTEVOKSA9PSAwKSB7DQo+PiAtwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCAqZmF0c2l6ZSA9IDE2Ow0KPj4gLcKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgZ290byBleGl0Ow0KPj4gLcKgwqDCoMKgwqDCoMKgIH0NCj4+IC3CoMKgwqAg
-fQ0KPiANCj4gSSB0aGluayB3ZSBzaG91bGQgc3RpbGwgdmVyaWZ5IHRoZXNlIGFzIGxvbmcg
-YXMgdmlzdGFydC0+ZXh0X2Jvb3Rfc2lnbiBpcyAweDI5Lg0KDQpUbyBhZGQgdG8gdGhpcywg
-aWYgd2UgZG9uJ3Qgd2FudCB0byB2ZXJpZnkgdGhlc2Ugd2Ugc2hvdWxkIGF0IGxlYXN0IGNo
-ZWNrIHRoZSBoZXVyaXN0aWNzIGZyb20gWzFdLg0KDQotLVNlYW4NCg0KWzFdIGh0dHBzOi8v
-d3d3Lndpbi50dWUubmwvfmFlYi9saW51eC9mcy9mYXQvZmF0LTIuaHRtbA0KDQo+PiArwqDC
-oMKgICpmYXRzaXplID0gZGV0ZXJtaW5lX2ZhdF9iaXRzKGJzKTsNCj4+IC3CoMKgwqAgZGVi
-dWcoIkVycm9yOiBicm9rZW4gZnNfdHlwZSBzaWduXG4iKTsNCj4+IC1mYWlsOg0KPj4gLcKg
-wqDCoCByZXQgPSAtMTsNCj4+IC1leGl0Og0KPj4gwqDCoMKgwqDCoCBmcmVlKGJsb2NrKTsN
-Cj4+IC3CoMKgwqAgcmV0dXJuIHJldDsNCj4+ICvCoMKgwqAgcmV0dXJuIDA7DQo+PiDCoCB9
-DQo+PiDCoCBzdGF0aWMgaW50IGdldF9mc19pbmZvKGZzZGF0YSAqbXlkYXRhKQ0KPj4gQEAg
-LTExNTgsOSArMTE2OSw4IEBAIGludCBmaWxlX2ZhdF9kZXRlY3Rmcyh2b2lkKQ0KPj4gwqDC
-oMKgwqDCoCBtZW1jcHkodm9sX2xhYmVsLCB2b2xpbmZvLnZvbHVtZV9sYWJlbCwgMTEpOw0K
-Pj4gwqDCoMKgwqDCoCB2b2xfbGFiZWxbMTFdID0gJ1wwJzsNCj4+IC3CoMKgwqAgdm9saW5m
-by5mc190eXBlWzVdID0gJ1wwJzsNCj4+IC3CoMKgwqAgcHJpbnRmKCJGaWxlc3lzdGVtOiAl
-cyBcIiVzXCJcbiIsIHZvbGluZm8uZnNfdHlwZSwgdm9sX2xhYmVsKTsNCj4+ICvCoMKgwqAg
-cHJpbnRmKCJGaWxlc3lzdGVtOiBGQVQlZCBcIiVzXCJcbiIsIGZhdHNpemUsIHZvbF9sYWJl
-bCk7DQo+PiDCoMKgwqDCoMKgIHJldHVybiAwOw0KPj4gwqAgfQ0KPj4gZGlmZiAtLWdpdCBh
-L2luY2x1ZGUvZmF0LmggYi9pbmNsdWRlL2ZhdC5oDQo+PiBpbmRleCBhOTc1NmZiNGNkLi4z
-ZGNlOTlhMjNjIDEwMDY0NA0KPj4gLS0tIGEvaW5jbHVkZS9mYXQuaA0KPj4gKysrIGIvaW5j
-bHVkZS9mYXQuaA0KPj4gQEAgLTM0LDEyICszNCw2IEBAIHN0cnVjdCBkaXNrX3BhcnRpdGlv
-bjsNCj4+IMKgIC8qIE1heGltdW0gbnVtYmVyIG9mIGVudHJ5IGZvciBsb25nIGZpbGUgbmFt
-ZSBhY2NvcmRpbmcgdG8gc3BlYyAqLw0KPj4gwqAgI2RlZmluZSBNQVhfTEZOX1NMT1TCoMKg
-wqAgMjANCj4+IC0vKiBGaWxlc3lzdGVtIGlkZW50aWZpZXJzICovDQo+PiAtI2RlZmluZSBG
-QVQxMl9TSUdOwqDCoMKgICJGQVQxMsKgwqAgIg0KPj4gLSNkZWZpbmUgRkFUMTZfU0lHTsKg
-wqDCoCAiRkFUMTbCoMKgICINCj4+IC0jZGVmaW5lIEZBVDMyX1NJR07CoMKgwqAgIkZBVDMy
-wqDCoCAiDQo+PiAtI2RlZmluZSBTSUdOTEVOwqDCoMKgwqDCoMKgwqAgOA0KPj4gLQ0KPj4g
-wqAgLyogRmlsZSBhdHRyaWJ1dGVzICovDQo+PiDCoCAjZGVmaW5lIEFUVFJfUk/CoMKgwqAg
-MQ0KPj4gwqAgI2RlZmluZSBBVFRSX0hJRERFTsKgwqDCoCAyDQo+PiBkaWZmIC0tZ2l0IGEv
-dGVzdC9pbWFnZS9zcGxfbG9hZF9mcy5jIGIvdGVzdC9pbWFnZS9zcGxfbG9hZF9mcy5jDQo+
-PiBpbmRleCAyOTdhYjA4YTgyLi45MGU2NDBiNWRlIDEwMDY0NA0KPj4gLS0tIGEvdGVzdC9p
-bWFnZS9zcGxfbG9hZF9mcy5jDQo+PiArKysgYi90ZXN0L2ltYWdlL3NwbF9sb2FkX2ZzLmMN
-Cj4+IEBAIC0yMjAsNyArMjIwLDcgQEAgc3RhdGljIHNpemVfdCBjcmVhdGVfZmF0KHZvaWQg
-KmRzdCwgc2l6ZV90IHNpemUsIGNvbnN0IGNoYXIgKmZpbGVuYW1lLA0KPj4gwqDCoMKgwqDC
-oCBicy0+cm9vdF9jbHVzdGVyID0gY3B1X3RvX2xlMzIocm9vdF9zZWN0b3IpOw0KPj4gwqDC
-oMKgwqDCoCB2aS0+ZXh0X2Jvb3Rfc2lnbiA9IDB4Mjk7DQo+PiAtwqDCoMKgIG1lbWNweSh2
-aS0+ZnNfdHlwZSwgRkFUMzJfU0lHTiwgc2l6ZW9mKHZpLT5mc190eXBlKSk7DQo+PiArwqDC
-oMKgIG1lbWNweSh2aS0+ZnNfdHlwZSwgIkZBVDMywqDCoCAiLCBzaXplb2YodmktPmZzX3R5
-cGUpKTsNCj4+IMKgwqDCoMKgwqAgbWVtY3B5KGRzdCArIDB4MWZlLCAiXHg1NVx4QUEiLCAy
-KTsNCj4gDQo+IC0tU2Vhbg0KDQo=
+Hey Tom, huge thanks for sharing that. I agree lwip is the proper way to
+handle this, will try out this patch set and eventually migrate fastboot
+apps into a new stack.
+
+On Wed, Nov 8, 2023 at 6:45=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote:
+
+> On Tue, Jul 25, 2023 at 10:56:52PM +0100, Dmitrii Merkurev wrote:
+>
+> > This allows us to reuse TCP logic between IP and IP6 stack.
+> >
+> > Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> > Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> > Cc: Simon Glass <sjg@chromium.org>
+> > =D0=A1=D1=81: Joe Hershberger <joe.hershberger@ni.com>
+> > =D0=A1=D1=81: Ramon Fried <rfried.dev@gmail.com>
+> > Reviewed-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >  include/net/tcp.h | 54 ++++++++++++++++--------------------
+> >  net/tcp.c         | 70 +++++++++++++++++++++++------------------------
+> >  test/cmd/wget.c   | 48 ++++++++++++++++++--------------
+> >  3 files changed, 85 insertions(+), 87 deletions(-)
+>
+> I do want to thank you for your contribution. However, the long term
+> goal with the project right now is to move to integrate lwip as the
+> networking stack (and in turn have more robust IPv6 and wget and
+> similar features). So, I don't want to pickup this series (unless you
+> think it's still important here-and-now, given the above). I would ask
+> you to please keep an eye on that effort and either try out v10:
+> https://patchwork.ozlabs.org/project/uboot/list/?series=3D374882&state=3D=
+*
+> or keep an eye out for v11. Thanks again!
+>
+> --
+> Tom
+>
