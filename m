@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 402D7C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C41C4167D
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94512871C0;
-	Wed,  8 Nov 2023 17:49:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 73160874BD;
+	Wed,  8 Nov 2023 17:49:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SBzTYVNr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gAD6EA+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 985718749D; Wed,  8 Nov 2023 17:49:07 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id B0B488749D; Wed,  8 Nov 2023 17:49:07 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1BFC874A3
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C75D87527
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-66d76904928so43392896d6.2
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:03 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso87480117b3.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699462142; x=1700066942; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699462144; x=1700066944; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TAPTkJa4tN6E8ZgahKgZs1nUvVGwc9xebnkrI6bMXfI=;
- b=SBzTYVNr7myGNDGe0rWxwjaT4IBrVIVTIlOLxZchHXGgZzS1beXC3lqGjtVSlBz1IY
- pXQfSmARQ8pRpnTDJQEX+KWxllbDJH0eTu3Q7Eg1soIldmYKLcZOZZ9ft6rer4gMSTuE
- 3PaetN0EttImpdulLSSEXL1tKUdA3AeljZFfA/zF6+84I/cUafuKI/q3DbNnitnmCcB6
- rlc6s1iZZIeOlh0YoBdglZiXu3PhnxN/YfwJ0QdwrOrO8Dgar8GUdYP/0QcOPvNv+jgT
- kKSGRB1LfrSw3ZvupVYAp/+vtlvOQU0toxgsHtjS8KlIi4jBQ5c2uPT6c/c3syDTdlYU
- J7Vw==
+ bh=VgRFOaK8aMR5yh9ksEtOoDSyTkzOJnCkG2arOa0oT+8=;
+ b=gAD6EA+VFtvM21tK/+ZoG38qGALD7dll1X51Rb/BLP6x98pg1aOgCLhxEfi4+BqtiL
+ G8/bQUSa/Z6hEYEDZmXqHbY0vB3w05WLbEoiaiQ7Aq09VmILF/ZiabRvHhxydmS5mKcq
+ PBc3tIaiPLj9ZsxqqkXaK1x84QlCoQciO3QHx+rjCQ3c1Et6BwHfntyCUVz/vUZbGQft
+ rgp5MEB6Ys24Pg44L8IZig27O/fWWU7IIPGbRoonQmSbcN451ptV0Aw1VLAbSNvSpVY+
+ GmSiCaxp3tr/rld1MhGTzPYL7OAYxRvjVZ9jdv9MW6dmhyj23Agv+ySKhC0qifQ0om8A
+ lbDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699462142; x=1700066942;
+ d=1e100.net; s=20230601; t=1699462144; x=1700066944;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TAPTkJa4tN6E8ZgahKgZs1nUvVGwc9xebnkrI6bMXfI=;
- b=hOufA7fO/ovgcijnaJWM2hmvhfnbHZRuSR51dewCnryB16eyfRj+KrXWQmNzPq40An
- SCLQz6D776Mz0kO3sbD+EZ2o4R14BZH2ks34nCJqXIh59XKXP1e/ZeovTxr7WKqLU14n
- cyBdu+ATnjOYkWz7RZJKiFwpeYKRldwzc/Sfv3UTGQNsz1kAxD2oJdQ8nm7YblFlkq2e
- s1vRGAlyVzzOhAJcIe04tdqsrff27w+GqGLt26d0dh11pTwhNMr2sUeUw81fGEfNnaaZ
- LsNQVz4PDgFxPJcyDKv3QRrI69K+PnMeEdzVj3ZH/IiozcK4/CkpeVjNegNtjEOJNVcn
- 3SNQ==
-X-Gm-Message-State: AOJu0Ywgkpc1aVWCYzzFs+6HTsIRj/NN/6UYClONWlyWXDIwqLR7Qjjj
- otHaVIOBw90N4s6xC4GwTG8=
-X-Google-Smtp-Source: AGHT+IEIdwHsHwHD2l7DwjxCO6N9qylmSPPk84tfsek2nU5PhY+OfkXz/w15UO3ZRLw9zIGC3/WpNQ==
-X-Received: by 2002:a05:6214:29e5:b0:66d:6266:40d3 with SMTP id
- jv5-20020a05621429e500b0066d626640d3mr2430828qvb.27.1699462142565; 
- Wed, 08 Nov 2023 08:49:02 -0800 (PST)
+ bh=VgRFOaK8aMR5yh9ksEtOoDSyTkzOJnCkG2arOa0oT+8=;
+ b=LrxiHTuJl1iYuARS2jrIjdChx1sHC+UdrJDqSRGYv0StoAOGtTsVWlzXok/iJ/kUI+
+ wMgp3Z+YmzqebkIGSi9dXNhkwWeYL3fxKyM5M5pLKLO5+oDfiTHgJbza3kjrXSdjwcf/
+ NiSbZLSS05+M6Pbrqjf6uDdfxlEoNkHWV6TJjBAaRkWIwVatmc+0sB7pHv3Hy0jadEaa
+ 7GOp9p2LYVfJGjh0z2OhziOQVlAsDBr9yYDgE6K6KS58wJaukQTpo5A7AK9TMrkrYMXV
+ zyjGgfceLtMI9VA8rN1AH3R7qjsOXg/4IZCIUWLS2jDuFHKpzOxIKcFaTfXHXCtPaGvY
+ Amkg==
+X-Gm-Message-State: AOJu0YxVeSsBN25VUM+pjmu2eR1fb5hk5U9Lmbxa6h6/H4riad+49RB2
+ TwkkDM7me1xpMALkUCNG+1E=
+X-Google-Smtp-Source: AGHT+IGxErf9iAcVRzjvBseB2t5dwMgWth2rFpk9nhbqcQ3OB6yl6M8uhjzIhWglQNgjJpxe94yyRQ==
+X-Received: by 2002:a81:5f87:0:b0:5a7:e6fb:39b with SMTP id
+ t129-20020a815f87000000b005a7e6fb039bmr2258009ywb.1.1699462143808; 
+ Wed, 08 Nov 2023 08:49:03 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- m21-20020ae9f215000000b00767177a5bebsm1207491qkg.56.2023.11.08.08.49.01
+ y5-20020a056214016500b0065b229ecb8dsm1250603qvs.3.2023.11.08.08.49.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 08:49:02 -0800 (PST)
+ Wed, 08 Nov 2023 08:49:03 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
@@ -71,11 +71,10 @@ Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
  Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: [PATCH v7 01/26] spl: blk_fs: Fix uninitialized return value when we
- can't get a blk_desc
-Date: Wed,  8 Nov 2023 11:48:33 -0500
-Message-Id: <20231108164858.3497420-2-seanga2@gmail.com>
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v7 02/26] arm: Disable SPL_FS_FAT when it isn't used
+Date: Wed,  8 Nov 2023 11:48:34 -0500
+Message-Id: <20231108164858.3497420-3-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231108164858.3497420-1-seanga2@gmail.com>
 References: <20231108164858.3497420-1-seanga2@gmail.com>
@@ -97,35 +96,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Initialize ret to avoid returning garbage if blk_get_devnum_by_uclass_id
-fails.
+Several boards enable SPL_FS_FAT and SPL_LIBDISK_SUPPORT when they can't be
+used (as there is no block device support enabled). Disable these configs.
+The list of boards was generated with the following command:
 
-Fixes: 8ce6a2e1757 ("spl: blk: Support loading images from fs")
+    $ tools/qconfig.py -f SPL SPL_FS_FAT ~SPL_MMC ~SPL_BLK_FS ~SPL_SATA \
+                          ~SPL_USB_STORAGE ~ENV_IS_IN_FAT ~EFI
+
+LIBDISK was left enabled for the am* boards, since it seems to result in
+actual size reduction, indicating that partitions are being used for
+something.
+
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v6)
+Changes in v7:
+- Disable FS_FAT for the zynq(mp) boards as well, as suggested by Michal
 
 Changes in v6:
 - New
 
- common/spl/spl_blk_fs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/am335x_evm_spiboot_defconfig      | 2 +-
+ configs/am65x_evm_r5_usbdfu_defconfig     | 1 -
+ configs/xilinx_zynqmp_mini_qspi_defconfig | 3 ++-
+ configs/zynq_cse_nand_defconfig           | 2 ++
+ configs/zynq_cse_nor_defconfig            | 2 ++
+ configs/zynq_cse_qspi_defconfig           | 2 ++
+ 6 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
-index 63825d620d1..144c8a65b5d 100644
---- a/common/spl/spl_blk_fs.c
-+++ b/common/spl/spl_blk_fs.c
-@@ -50,7 +50,7 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
- 	struct blk_desc *blk_desc;
- 	loff_t actlen, filesize;
- 	struct blk_dev dev;
--	int ret;
-+	int ret = -ENODEV;
- 
- 	blk_desc = blk_get_devnum_by_uclass_id(uclass_id, devnum);
- 	if (!blk_desc) {
+diff --git a/configs/am335x_evm_spiboot_defconfig b/configs/am335x_evm_spiboot_defconfig
+index b5b11fb62c8..fff5265e56a 100644
+--- a/configs/am335x_evm_spiboot_defconfig
++++ b/configs/am335x_evm_spiboot_defconfig
+@@ -13,6 +13,7 @@ CONFIG_CLOCK_SYNTHESIZER=y
+ # CONFIG_OF_LIBFDT_OVERLAY is not set
+ # CONFIG_SPL_MMC is not set
+ CONFIG_SPL=y
++# CONFIG_SPL_FS_FAT is not set
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
+ CONFIG_TIMESTAMP=y
+@@ -27,7 +28,6 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
+ CONFIG_SPL_FIT_IMAGE_TINY=y
+ # CONFIG_SPL_FS_EXT4 is not set
+-CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+ CONFIG_SPL_MTD=y
+ # CONFIG_SPL_NAND_SUPPORT is not set
+ CONFIG_SPL_DM_SPI_FLASH=y
+diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
+index f610b2dd94e..6b0bb120d10 100644
+--- a/configs/am65x_evm_r5_usbdfu_defconfig
++++ b/configs/am65x_evm_r5_usbdfu_defconfig
+@@ -21,7 +21,6 @@ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_STACK_R_ADDR=0x82000000
+ CONFIG_SPL_SIZE_LIMIT=0x7ec00
+ CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
+-CONFIG_SPL_FS_FAT=y
+ CONFIG_SPL_LIBDISK_SUPPORT=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_LOAD_FIT=y
+diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
+index a1adfb9e5d1..b044743474d 100644
+--- a/configs/xilinx_zynqmp_mini_qspi_defconfig
++++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
+@@ -11,6 +11,8 @@ CONFIG_ENV_SIZE=0x80
+ CONFIG_DEFAULT_DEVICE_TREE="zynqmp-mini-qspi"
+ CONFIG_SPL_STACK=0xfffffffc
+ CONFIG_SPL=y
++# CONFIG_SPL_FS_FAT is not set
++# CONFIG_SPL_LIBDISK_SUPPORT is not set
+ CONFIG_SYS_MEM_RSVD_FOR_MMU=y
+ CONFIG_ZYNQMP_NO_DDR=y
+ # CONFIG_PSCI_RESET is not set
+@@ -89,7 +91,6 @@ CONFIG_SPI_FLASH_WINBOND=y
+ CONFIG_ARM_DCC=y
+ CONFIG_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
+-# CONFIG_FAT_WRITE is not set
+ CONFIG_PANIC_HANG=y
+ # CONFIG_GZIP is not set
+ # CONFIG_LMB is not set
+diff --git a/configs/zynq_cse_nand_defconfig b/configs/zynq_cse_nand_defconfig
+index 19f653f40d0..2eb45e1242e 100644
+--- a/configs/zynq_cse_nand_defconfig
++++ b/configs/zynq_cse_nand_defconfig
+@@ -13,6 +13,8 @@ CONFIG_DEFAULT_DEVICE_TREE="zynq-cse-nand"
+ CONFIG_SPL_STACK_R_ADDR=0x200000
+ CONFIG_SPL_STACK=0xfffffe00
+ CONFIG_SPL=y
++# CONFIG_SPL_FS_FAT is not set
++# CONFIG_SPL_LIBDISK_SUPPORT is not set
+ CONFIG_SYS_LOAD_ADDR=0x0
+ CONFIG_REMAKE_ELF=y
+ CONFIG_SYS_CUSTOM_LDSCRIPT=y
+diff --git a/configs/zynq_cse_nor_defconfig b/configs/zynq_cse_nor_defconfig
+index 64df1f0b83e..c5a28f28b9d 100644
+--- a/configs/zynq_cse_nor_defconfig
++++ b/configs/zynq_cse_nor_defconfig
+@@ -13,6 +13,8 @@ CONFIG_DEFAULT_DEVICE_TREE="zynq-cse-nor"
+ CONFIG_SPL_STACK_R_ADDR=0x200000
+ CONFIG_SPL_STACK=0xfffffe00
+ CONFIG_SPL=y
++# CONFIG_SPL_FS_FAT is not set
++# CONFIG_SPL_LIBDISK_SUPPORT is not set
+ CONFIG_SYS_LOAD_ADDR=0x0
+ CONFIG_REMAKE_ELF=y
+ CONFIG_SYS_CUSTOM_LDSCRIPT=y
+diff --git a/configs/zynq_cse_qspi_defconfig b/configs/zynq_cse_qspi_defconfig
+index 9368fb4ffbc..9a2770af20e 100644
+--- a/configs/zynq_cse_qspi_defconfig
++++ b/configs/zynq_cse_qspi_defconfig
+@@ -16,6 +16,8 @@ CONFIG_SPL_STACK=0xfffffe00
+ CONFIG_SPL=y
+ CONFIG_DEBUG_UART_BASE=0x0
+ CONFIG_DEBUG_UART_CLOCK=0
++# CONFIG_SPL_FS_FAT is not set
++# CONFIG_SPL_LIBDISK_SUPPORT is not set
+ # CONFIG_ZYNQ_DDRC_INIT is not set
+ # CONFIG_CMD_ZYNQ is not set
+ CONFIG_SYS_LOAD_ADDR=0x0
 -- 
 2.37.1
 
