@@ -4,96 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A6A2C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 17:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F528C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 18:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C392987063;
-	Wed,  8 Nov 2023 18:54:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id 70BD787254;
+	Wed,  8 Nov 2023 19:07:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="L6pb2Juq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VllJjlan";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 626B1871A2; Wed,  8 Nov 2023 18:54:39 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id C23968714D; Wed,  8 Nov 2023 19:07:31 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D958C87033
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 18:54:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90C4787078
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 19:07:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=9elements.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sheng.tan@9elements.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9bf86b77a2aso2104466b.0
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 09:54:35 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-41cc56255e3so20191cf.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 10:07:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1699466075; x=1700070875; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Nqqqa5adV4234V9BZcAKeuou46i1inO9zoz8S9OE0AY=;
- b=L6pb2JuqUoCWx40AUe59DUooFXmQXsDAb6O4qrtMCYxUb44O60aq1mqMnxA0B5mtcu
- t96xnk6Jv8FJUkpadzrpotR1MhoP/rlN7AgZvVL1FbIpOTyEo+XSqBP7c1CwOuUM6Mdt
- q6H76wCafzfMEnUzIKUIxXXHlVKuZqeekJD7R0X3bBBovDAV5dpuACy4t7uhaBSJ9vJk
- cn7Of0TTeSon3cr1XseFCWOdJfXmyEjXZxvRI46pbpuDKPzF8U7o4zvVWdWDn6Q072OJ
- lbPk08xtMyii9SZrjQ9uW6il5PB2/D0w/YBiWJPrrbAJxt0kUYhGPMcnnYEwGnmAFlQg
- b4Mw==
+ d=gmail.com; s=20230601; t=1699466848; x=1700071648; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Kcrz3yVM3JvOxBktEust0+qRtREY3PSG+Km2AktLaUE=;
+ b=VllJjlanY1CHtami0afEw1KyGPaubp2YZLMAk5mwApIHttryyvazdolUu5yA9oC2gO
+ Bh3fUihW2aMbBbGazQe4ai31IZwSgzjQwCEqoqzUpJlCV0zvkkiBj/cDUpOMzLKlemsr
+ AluDU3UNro7VFbF/bSjDY6jMlNWaeqItdficUttpiUcqda1ee8v9P4lHbhNqnh1DfItI
+ csDmwKG7uqwF9XgQ4XN/+z8Kk0k8WpxUkX/8az7zbato9V/WRusp4Qv0gfuUFZA1/UhQ
+ 4LP10QNjD+ROLUsArx9L5Vry1FPPrgplEoNszo3TDT3YDZzjtmWbyna6ifBWn0Rz4lhD
+ fIow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699466075; x=1700070875;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Nqqqa5adV4234V9BZcAKeuou46i1inO9zoz8S9OE0AY=;
- b=NV89WrJ5Z6dFJDJZ7qdPU6rBaX6s4lys5byFRSi4LndnophoqB2DZnm2hIwS5V4YJ1
- r/DefD7EQAhlPcMf8m5ATAxRC/SgkPgq6Ug6DUIPAbZQuY/bGDqCz9I+qBd52RPP7UZ/
- nOAmJnj5M+wWLk/6Z2OEI4xpKz8wDYSCwV9Nu4GjHMDpKhZqUuO1SBUbOhKT504qQ/R8
- PLz3oN+EV23xGWEAb3kYxrN4kl8zZ0eKQphBicD4tuoUByXq1/YP+vB3ZYJVdxtqhQmI
- IUjAlY99+wPzbvDPZGf23vdAzApb1hIUYPWX1DPi476dPS4DMONzDNku2pgt1OVAdHdv
- mneA==
-X-Gm-Message-State: AOJu0YxfwoKYWTRR98gSD7TWxBXdWkXcJ0von+omxxhqfm5zTdkBOEVB
- sg2IMHfH8PfbAmK682YsVN/1Pb+lVGzC2/b4CE/tRQ==
-X-Google-Smtp-Source: AGHT+IGGUaXVEC8ODzR0pAowhKTdsBLJibQJYb8KC968W8vinDdA24VdJbhNzzXdZT00mpflFzotQaBxjMrBqxZ8f7g=
-X-Received: by 2002:a17:907:b60a:b0:9e4:4f8:c42c with SMTP id
- vl10-20020a170907b60a00b009e404f8c42cmr1617327ejc.21.1699466075034; Wed, 08
- Nov 2023 09:54:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699466848; x=1700071648;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Kcrz3yVM3JvOxBktEust0+qRtREY3PSG+Km2AktLaUE=;
+ b=MNpmidGJl0GaJfz4yE67G1x6przr+kr3Z167aqM64WA+qXfPNtYEwXFlh7yLjqhgst
+ T74VqMpVEmuE4Q3IxxBZjqVNkRwV26R7sMy33L3hIfRr3tNI0C1pxrs3k2+a0uobgLpi
+ U+fBSCnY1gmWuhL3A12RkewntgWtHKCWX4EaEEcDKW8O5nVc8kt/LV8URDjGxjfYPDTG
+ bin97wdexvDpEtV3PDMStGlrJ5guxyNb4BufWNl8KAwXAmulp+vmKCMYTnPr5IXRuZjq
+ osTDBJHZuLzvlrTyGv3wGrienQVZmi1Hzuhg4lVybkg94e13yhRSiSJhnwmOaPQy7kWe
+ VAdg==
+X-Gm-Message-State: AOJu0Yx5GR8VeDpEja/tXrVVKrS+za3DLUyGClAYzkF6r/FGcptmJeQm
+ 1ojk/hjdnU1cyxHw0tITS5E=
+X-Google-Smtp-Source: AGHT+IFoPeAwpv5hn+WFteO3aJmch3z+VmcCJAIShQ3H+CczPZfP/fUohtU8sL0FcmQeDUARKd5Dtg==
+X-Received: by 2002:a05:622a:210:b0:41c:baf5:b500 with SMTP id
+ b16-20020a05622a021000b0041cbaf5b500mr3199471qtx.47.1699466848115; 
+ Wed, 08 Nov 2023 10:07:28 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ b21-20020a05622a021500b00418189b689csm1139161qtx.10.2023.11.08.10.07.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Nov 2023 10:07:27 -0800 (PST)
+Message-ID: <8b3ac0c1-6f2a-92ec-120a-ae65faae1c0b@gmail.com>
+Date: Wed, 8 Nov 2023 13:07:26 -0500
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <CAPnjgZ0Xf3U1aj32LbU-xiU1AqwnM3JL1F8xX-wZ18oEmg+irw@mail.gmail.com>
- <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
- <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
- <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
- <CAPnjgZ0LrsJ2_ENTYoBrnyFaH3UKdHs3D2XWY=TzBuBpBoTXZA@mail.gmail.com>
- <CAL_Jsq+DQugkEDESW5wySFbLLN8HNqGDJCio8Wpi6fe0LeHKUA@mail.gmail.com>
- <CAPnjgZ0cmKP5hoGCyQ_Rp8ZQXUVwaPYJMWyidXuOOjMVkDoMDw@mail.gmail.com>
- <CAL_JsqJH=vJ40PNTg_i0LoKA-c0hhMJkL8zCC3_bB-tOkFWWsw@mail.gmail.com>
- <CAPnjgZ1FrdGKjGAxUbkQoL2vHwhC_2Oa2KT+0cm25dQAuAjxAQ@mail.gmail.com>
- <CAPnjgZ19-xR6QxS=fR53skz0VuAty2Z2w2vQTjP7g=tbTFpaqw@mail.gmail.com>
- <CAL_JsqL+X1DatsGk_Cn1HsbG2GV9AngFWXVysWTiNRu_d9tDqw@mail.gmail.com>
- <CAMj1kXHfh40wxerZGjOn2JJ5Skm5C--Rz2jy8p3XZ2UXKGjw+g@mail.gmail.com>
- <CAL_JsqLpea+FU4gXpaSUSeBP70szJ+mRjJtFei=QW2VoHCFOuA@mail.gmail.com>
- <CAMj1kXHPVXB2ojzhKbAO47+EDMDzODqjLZ+iOKw=u=Bc7=HPCQ@mail.gmail.com>
-In-Reply-To: <CAMj1kXHPVXB2ojzhKbAO47+EDMDzODqjLZ+iOKw=u=Bc7=HPCQ@mail.gmail.com>
-From: Lean Sheng Tan <sheng.tan@9elements.com>
-Date: Wed, 8 Nov 2023 18:53:59 +0100
-Message-ID: <CAMWxwJ0ev9=t8_e1SsnX0JYchtR0Ct0eWo1W3OmY4WO6GnvZfw@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
- devicetree@vger.kernel.org, 
- Mark Rutland <mark.rutland@arm.com>, lkml <linux-kernel@vger.kernel.org>, 
- Dhaval Sharma <dhaval@rivosinc.com>,
- Maximilian Brune <maximilian.brune@9elements.com>, 
- Yunhui Cui <cuiyunhui@bytedance.com>, Guo Dong <guo.dong@intel.com>, 
- Tom Rini <trini@konsulko.com>, ron minnich <rminnich@gmail.com>,
- Gua Guo <gua.guo@intel.com>, 
- Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2] clk: nuvoton: add read only feature for clk driver
+Content-Language: en-US
+To: Jim Liu <jim.t90615@gmail.com>, JJLIU0@nuvoton.com, YSCHU@nuvoton.com,
+ KWLIU@nuvoton.com
+Cc: u-boot@lists.denx.de
+References: <20231107090128.199267-1-JJLIU0@nuvoton.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20231107090128.199267-1-JJLIU0@nuvoton.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,161 +95,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
-Sure, I will ask if the edk2 developers who work together for UPL spec
-could help to respond here.
+On 11/7/23 04:01, Jim Liu wrote:
+> Add a flag to set ahb/apb/fiu clock divider as read-only
+> It just protects the clock source and can't modify it in uboot.
 
-Hi Ard,
-Regarding this part:
-*However, there is no scoping in DT schema as far as I am aware, which
-means that the OS may be forced/expected to interpret these regions beyond
-simply disregarding them and treating them as reserved memory, and *that*
-is something I strongly object to.*
+Thanks for adding this
 
-I think that is one of good perspective to look into this, however please
-also consider this situation: that everyone is just starting to develop
-their own DT schemas (e.g. RISC-V), and there is no way to stop OS to also
-pick up those DT nodes. in that case, if we do not maintain a more unified
-DT schema, then OS might end up with more conflicting and
-possibly contracting DT nodes/ properties (e.g. RISC-V with own DT schemas
-using U-Boot (another DT schema) + edk2 payload (another DT schema, like
-UPL) to boot to OS. So personally I still prefer a unified DT schema, even
-if the OS never uses them, but that would be very beneficial and in control
-in the long term if more people are using DT.
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> ---
+> Changes for v2:
+>     - add commit message
+> ---
+>   drivers/clk/nuvoton/clk_npcm.c    | 15 ++++++++++++---
+>   drivers/clk/nuvoton/clk_npcm.h    |  1 +
+>   drivers/clk/nuvoton/clk_npcm8xx.c | 12 ++++++------
+>   3 files changed, 19 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_npcm.c
+> index 8d71f2a24b..18cb9cddbf 100644
+> --- a/drivers/clk/nuvoton/clk_npcm.c
+> +++ b/drivers/clk/nuvoton/clk_npcm.c
+> @@ -135,7 +135,7 @@ static u32 npcm_clk_get_div(struct clk *clk)
+>   	return div;
+>   }
+>   
+> -static u32 npcm_clk_set_div(struct clk *clk, u32 div)
+> +static int npcm_clk_set_div(struct clk *clk, u32 div)
+>   {
+>   	struct npcm_clk_priv *priv = dev_get_priv(clk->dev);
+>   	struct npcm_clk_div *divider;
+> @@ -145,6 +145,9 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
+>   	if (!divider)
+>   		return -EINVAL;
+>   
+> +	if (divider->flags & DIV_RO)
+> +		return 0;
+> +
+>   	if (divider->flags & PRE_DIV2)
+>   		div = div >> 1;
+>   
+> @@ -153,6 +156,12 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
+>   	else
+>   		clkdiv = ilog2(div);
+>   
+> +	if (clkdiv > (divider->mask >> (ffs(divider->mask) - 1))) {
+> +		printf("clkdiv(%d) for clk(%ld) is over limit\n",
+> +		       clkdiv, clk->id);
+> +		return -EINVAL;
+> +	}
+> +
+>   	val = readl(priv->base + divider->reg);
+>   	val &= ~divider->mask;
+>   	val |= (clkdiv << (ffs(divider->mask) - 1)) & divider->mask;
+> @@ -253,8 +262,8 @@ static ulong npcm_clk_set_rate(struct clk *clk, ulong rate)
+>   	if (ret)
+>   		return ret;
+>   
+> -	debug("%s: rate %lu, new rate (%lu / %u)\n", __func__, rate, parent_rate, div);
+> -	return (parent_rate / div);
+> +	debug("%s: rate %lu, new rate %lu\n", __func__, rate, npcm_clk_get_rate(clk));
+> +	return npcm_clk_get_rate(clk);
+>   }
+>   
+>   static int npcm_clk_set_parent(struct clk *clk, struct clk *parent)
+> diff --git a/drivers/clk/nuvoton/clk_npcm.h b/drivers/clk/nuvoton/clk_npcm.h
+> index 06b60dc8b8..b4726d8381 100644
+> --- a/drivers/clk/nuvoton/clk_npcm.h
+> +++ b/drivers/clk/nuvoton/clk_npcm.h
+> @@ -50,6 +50,7 @@
+>   #define PRE_DIV2	BIT(2)	/* Pre divisor = 2 */
+>   #define POST_DIV2	BIT(3)	/* Post divisor = 2 */
+>   #define FIXED_PARENT	BIT(4)	/* clock source is fixed */
+> +#define DIV_RO		BIT(5)	/* divider is read-only */
+>   
+>   /* Parameters of PLL configuration */
+>   struct npcm_clk_pll {
+> diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/clk_npcm8xx.c
+> index 27e3cfcf55..d1b32e3237 100644
+> --- a/drivers/clk/nuvoton/clk_npcm8xx.c
+> +++ b/drivers/clk/nuvoton/clk_npcm8xx.c
+> @@ -45,12 +45,12 @@ static struct npcm_clk_select npcm8xx_clk_selectors[] = {
+>   };
+>   
+>   static struct npcm_clk_div npcm8xx_clk_dividers[] = {
+> -	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2},
+> -	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2},
+> -	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2},
+> -	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1},
+> -	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1},
+> -	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1},
+> +	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2 | DIV_RO},
+> +	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2 | DIV_RO},
+> +	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2 | DIV_RO},
 
-For now, the DT does serve as the purpose of communication vehicle in
-between platform init and payload, which is still within Firmware stack.
-However from edk2 stand point, there is more people want to roll out DT for
-more internal usage within edk2 itself, for example:
-https://uefi.org/sites/default/files/resources/Embracing%20Modularity%20and=
-%20Boot-Time%20Configuration%20Faster%20TTM%20with%20Tiano-based%20Solution=
-s_Warkentin.pdf
+And this makes sense for bus clocks
 
-For sure, it is much easier for us (and time saving as well) to just
-maintain DT schema/ format within our own UPL spec, but as mentioned, for
-better long term maintenance and community collaborations, we decided to
-upstream our implementation back to the main DT schema :)
+> +	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1 | DIV_RO},
+> +	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1 | DIV_RO},
+> +	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1 | DIV_RO},
 
-Thanks!
+But it's a little unclear to me why this is enabled for SPI. Are you e.g.
+doing XIP from SPI?
 
-Best Regards,
-*Lean Sheng Tan*
+--Sean
 
+>   	{NPCM8XX_CLK_SPIX, CLKDIV3, SPIXCKDIV, DIV_TYPE1},
+>   	{NPCM8XX_CLK_UART, CLKDIV1, UARTDIV1, DIV_TYPE1},
+>   	{NPCM8XX_CLK_UART2, CLKDIV3, UARTDIV2, DIV_TYPE1},
 
-
-9elements GmbH, Kortumstra=C3=9Fe 19-21, 44787 Bochum, Germany
-Email: sheng.tan@9elements.com
-Phone: *+49 234 68 94 188 <+492346894188>*
-Mobile: *+49 176 76 113842 <+4917676113842>*
-
-Registered office: Bochum
-Commercial register: Amtsgericht Bochum, HRB 17519
-Management: Sebastian German, Eray Bazaar
-
-Data protection information according to Art. 13 GDPR
-<https://9elements.com/privacy>
-
-
-On Wed, 8 Nov 2023 at 15:20, Ard Biesheuvel <ardb@kernel.org> wrote:
-
-> On Wed, 8 Nov 2023 at 14:57, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Wed, Nov 8, 2023 at 5:38=E2=80=AFAM Ard Biesheuvel <ardb@kernel.org>=
- wrote:
-> > >
-> > > On Tue, 7 Nov 2023 at 19:07, Rob Herring <robh@kernel.org> wrote:
-> > > >
-> > > >
-> > > > All of this:
-> > > >
-> > >
-> > > > > On Mon, 16 Oct 2023 at 15:54, Simon Glass <sjg@chromium.org>
-> wrote:
-> > > > > >
-> > > > > > It is not specific to EDK2. Imagine this boot sequence:
-> > > > > >
-> > > > > > - Platform Init (U-Boot) starts up
-> > > > > > - U-Boot uses its platform knowledge to sets some ACPI tables
-> and put
-> > > > > > various things in memory
-> > > > > > - U-Boot sets up some runtime code and data for the OS
-> > > > > > - U-Boot jumps to the Tianocore payload **
-> > > > > > - Payload (Tianocore) wants to know where the ACPI tables are,
-> for example
-> > > > > > - Tianocore needs to provide boot services to the OS, so needs
-> to know
-> > > > > > the memory map, etc.
-> > > > > >
-> > > > > > ** At this point we want to use DT to pass the required
-> information.
-> > > > > >
-> > > > > > Of course, Platform Init could be coreboot or Tianocore or some
-> > > > > > strange private binary. Payload could be U-Boot or something
-> else.
-> > > > > > That is the point of this effort, to build interoperability.
-> > > >
-> > > > [...]
-> > > >
-> > > > > > Perhaps the problem here is that Linux has tied itself up in
-> knots
-> > > > > > with its EFI stuff and DT fixups and what-not. But this is not
-> that.
-> > > > > > It is a simple handoff between two pieces of firmware, Platform
-> Init
-> > > > > > and Payload. It has nothing to do with the OS. With Tianocore
-> they are
-> > > > > > typically combined, but with this usage they are split, and we
-> can
-> > > > > > swap out one project for another on either side of the DT
-> interface.
-> > > >
-> > > > Is perhaps the clearest description of the problem you want to solv=
-e.
-> > > > It's clearly related to EFI though not the interface to the OS. IIR=
-C,
-> > > > "platform init" and "payload" are terms in the UEFI spec, right?
-> > >
-> > > No they are not. This is from the universal payload specification tha=
-t
-> > > is being drafted here
-> > >
-> > > https://universalpayload.github.io/spec/index.html
-> > >
-> > > but the UEFI specification does not use this terminology.
-> >
-> > Then I'm confused as to what this is:
-> >
-> > https://uefi.org/specs/PI/1.8/index.html
-> >
->
-> The PI and UEFI specifications are both maintained by the UEFI forum.
->
-> The UEFI specification covers external APIs for firmware
-> implementations, i.e., the OS visible interface and the public API for
-> UEFI device drivers that are not tightly integrated with system
-> firmware (for example, the GPU boot time driver in the ROM of an
-> add-in card)
->
-> The UEFI forum's PI spec describes system firmware internals, and
-> defines the SEC, PEI DXE and BDS boot phases, among other things.
->
-> It is possible to implement UEFI without PI (which is what uboot does,
-> for instance), but Tianocore/EDK2 is the reference implementation for
-> both PI and UEFI, and sadly, there is no discernible distinction
-> between the two (e.g., both PI and UEFI use identifiers with EFI_ type
-> and enum identifier prefixes)
->
-> 'platform init' in the context of this discussion is something
-> completely separate, and has zero bearing on the PI<->UEFI handover in
-> Tianocore (which is not really a handover to begin with).
->
-> There is code in Tianocore which allows it to run as a 'payload',
-> which means [presumably] that only the DXE and subsequent phases are
-> launched from a 'platform init' component that describes the platform
-> using some of the DT bindings that are under discussion here. In this
-> case, I can see how some of the ACPI descriptions provided by the
-> 'platform init' might be inherited by the 'payload'. However, I don't
-> see how such a Tianocore payload would make meaningful use of
-> boot/runtime code/data described in general terms using this proposed
-> binding, which is why I keep asking for an example scenario.
->
