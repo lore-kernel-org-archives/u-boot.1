@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F528C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 18:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40039C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 18:57:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70BD787254;
-	Wed,  8 Nov 2023 19:07:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25E618710F;
+	Wed,  8 Nov 2023 19:57:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VllJjlan";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Br91y/So";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C23968714D; Wed,  8 Nov 2023 19:07:31 +0100 (CET)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 43D4D87108; Wed,  8 Nov 2023 19:57:34 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90C4787078
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 19:07:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 992BB8714A
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 19:57:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-41cc56255e3so20191cf.3
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 10:07:29 -0800 (PST)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5a86b6391e9so594647b3.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 10:57:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699466848; x=1700071648; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699469850; x=1700074650; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Kcrz3yVM3JvOxBktEust0+qRtREY3PSG+Km2AktLaUE=;
- b=VllJjlanY1CHtami0afEw1KyGPaubp2YZLMAk5mwApIHttryyvazdolUu5yA9oC2gO
- Bh3fUihW2aMbBbGazQe4ai31IZwSgzjQwCEqoqzUpJlCV0zvkkiBj/cDUpOMzLKlemsr
- AluDU3UNro7VFbF/bSjDY6jMlNWaeqItdficUttpiUcqda1ee8v9P4lHbhNqnh1DfItI
- csDmwKG7uqwF9XgQ4XN/+z8Kk0k8WpxUkX/8az7zbato9V/WRusp4Qv0gfuUFZA1/UhQ
- 4LP10QNjD+ROLUsArx9L5Vry1FPPrgplEoNszo3TDT3YDZzjtmWbyna6ifBWn0Rz4lhD
- fIow==
+ bh=VnYU2zC3dEJin3gVw0RZAn11YpV90RCvxp+J8FJfxiM=;
+ b=Br91y/SoWwyr5vKQhy0pPjUuG+cbzvPnLzdXyQ4Da321fdp8ROALNu7fC1oWiGgOU7
+ MjVU1giIEUjcpNkfkMUMJSb5AOTcPta9htdyBzUJNmzdG6yy84Kc0GOEm+yrz9kNdjWk
+ DB2TpwjU9HavYn5BSg3JbXL+ZqclEXSNARa5vNHYJh7rAepl0p5zUdAci2tD9BrGu7uo
+ yeHbeFOxuIMxOeuLMGylDDY5kIUFSWW0xsu0UqsDU9qUIO7vjxA8DcmGfBFnGTcfLYOp
+ y/jxjCu9zxqYbEX8xclQAxc1A3QB/hH8B276Dia9RR1OAsN5BcXbSQZ+MCSZsDq34Jmd
+ 1XlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699466848; x=1700071648;
+ d=1e100.net; s=20230601; t=1699469850; x=1700074650;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Kcrz3yVM3JvOxBktEust0+qRtREY3PSG+Km2AktLaUE=;
- b=MNpmidGJl0GaJfz4yE67G1x6przr+kr3Z167aqM64WA+qXfPNtYEwXFlh7yLjqhgst
- T74VqMpVEmuE4Q3IxxBZjqVNkRwV26R7sMy33L3hIfRr3tNI0C1pxrs3k2+a0uobgLpi
- U+fBSCnY1gmWuhL3A12RkewntgWtHKCWX4EaEEcDKW8O5nVc8kt/LV8URDjGxjfYPDTG
- bin97wdexvDpEtV3PDMStGlrJ5guxyNb4BufWNl8KAwXAmulp+vmKCMYTnPr5IXRuZjq
- osTDBJHZuLzvlrTyGv3wGrienQVZmi1Hzuhg4lVybkg94e13yhRSiSJhnwmOaPQy7kWe
- VAdg==
-X-Gm-Message-State: AOJu0Yx5GR8VeDpEja/tXrVVKrS+za3DLUyGClAYzkF6r/FGcptmJeQm
- 1ojk/hjdnU1cyxHw0tITS5E=
-X-Google-Smtp-Source: AGHT+IFoPeAwpv5hn+WFteO3aJmch3z+VmcCJAIShQ3H+CczPZfP/fUohtU8sL0FcmQeDUARKd5Dtg==
-X-Received: by 2002:a05:622a:210:b0:41c:baf5:b500 with SMTP id
- b16-20020a05622a021000b0041cbaf5b500mr3199471qtx.47.1699466848115; 
- Wed, 08 Nov 2023 10:07:28 -0800 (PST)
+ bh=VnYU2zC3dEJin3gVw0RZAn11YpV90RCvxp+J8FJfxiM=;
+ b=iGWBhyUG/wM8vnf2KYNtQF0C+yYyrF1h/sTrLGe2j6DW+l8gqsWIUrvkOs2NwLwyKT
+ aXlZmjJA1Q3K8uEVX5zRJUVeeQ5EYj4FsU7GqWu/Sm0nQiPD7gbDi3ucyvanj7eqJ7d5
+ 2jbR5ODeRlGnlWfa0bwpjIB29ldNiMb7EG7pSdf1F6Gzyvqo1PXrSA20mdOdnoC+eguR
+ OMP6yKo3P+6x/Dea4/hg6Pm3d+fbaqyYxR1QOzTtEOQf7EtuUZjbvnz7WdkmhjDrCYmA
+ vjuaZp4/P1PKTKQwkBoOd+MVq1cG97Knn7ubeML+faW1omGPkwTyBPKrfPlx43+JSrXJ
+ Oc5g==
+X-Gm-Message-State: AOJu0YywHpyWbfxzKzXRk3bLIL7tlFT3vWAtHl67LNO9wWP+w5yQJfKj
+ NTtetmfDSX0ts2omFti3LuA=
+X-Google-Smtp-Source: AGHT+IGw0UnnduvNtNP7kQ59czkjTLhf50CLYUDXTtHe7xDfgHfhzCtC+5V84ONggVfg/Yd0zsQ/2w==
+X-Received: by 2002:a0d:f1c5:0:b0:583:741c:5fe6 with SMTP id
+ a188-20020a0df1c5000000b00583741c5fe6mr2081495ywf.52.1699469850149; 
+ Wed, 08 Nov 2023 10:57:30 -0800 (PST)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- b21-20020a05622a021500b00418189b689csm1139161qtx.10.2023.11.08.10.07.27
+ q3-20020a056214018300b0065b260eafd9sm1351721qvr.87.2023.11.08.10.57.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 10:07:27 -0800 (PST)
-Message-ID: <8b3ac0c1-6f2a-92ec-120a-ae65faae1c0b@gmail.com>
-Date: Wed, 8 Nov 2023 13:07:26 -0500
+ Wed, 08 Nov 2023 10:57:29 -0800 (PST)
+Message-ID: <a3781a24-2f1f-ca7b-9c7a-d2c4bd071a6a@gmail.com>
+Date: Wed, 8 Nov 2023 13:57:28 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH v2] clk: nuvoton: add read only feature for clk driver
+Subject: Re: [PATCH v1 2/2] fs: fat: calculate FAT type based on cluster count
 Content-Language: en-US
-To: Jim Liu <jim.t90615@gmail.com>, JJLIU0@nuvoton.com, YSCHU@nuvoton.com,
- KWLIU@nuvoton.com
-Cc: u-boot@lists.denx.de
-References: <20231107090128.199267-1-JJLIU0@nuvoton.com>
+To: christian.taedcke-oss@weidmueller.com, u-boot@lists.denx.de
+Cc: Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+References: <20231108121239.26737-1-christian.taedcke-oss@weidmueller.com>
+ <20231108121239.26737-3-christian.taedcke-oss@weidmueller.com>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231107090128.199267-1-JJLIU0@nuvoton.com>
+In-Reply-To: <20231108121239.26737-3-christian.taedcke-oss@weidmueller.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,111 +98,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/23 04:01, Jim Liu wrote:
-> Add a flag to set ahb/apb/fiu clock divider as read-only
-> It just protects the clock source and can't modify it in uboot.
-
-Thanks for adding this
-
-> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-> ---
-> Changes for v2:
->     - add commit message
-> ---
->   drivers/clk/nuvoton/clk_npcm.c    | 15 ++++++++++++---
->   drivers/clk/nuvoton/clk_npcm.h    |  1 +
->   drivers/clk/nuvoton/clk_npcm8xx.c | 12 ++++++------
->   3 files changed, 19 insertions(+), 9 deletions(-)
+On 11/8/23 07:12, christian.taedcke-oss@weidmueller.com wrote:
+> From: Christian Taedcke <christian.taedcke@weidmueller.com>
 > 
-> diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_npcm.c
-> index 8d71f2a24b..18cb9cddbf 100644
-> --- a/drivers/clk/nuvoton/clk_npcm.c
-> +++ b/drivers/clk/nuvoton/clk_npcm.c
-> @@ -135,7 +135,7 @@ static u32 npcm_clk_get_div(struct clk *clk)
->   	return div;
+> This fixes an issue where the FAT type (FAT12, FAT16) is not
+> correctly detected, e.g. when the BPB field BS_FilSysType contains the
+> valid value "FAT     ".
+> 
+> According to the FAT spec the field BS_FilSysType has only
+> informational character and does not determine the FAT type.
+> 
+> The logic of this code is based on the linux kernel implementation
+> from the file fs/fat/inode.c function fat_fill_super().
+> 
+> For details about FAT see http://elm-chan.org/docs/fat_e.html
+> 
+> Signed-off-by: Christian Taedcke <christian.taedcke@weidmueller.com>
+
+Have you run bloat-o-meter on this? FAT is used in SPL a lot.
+
+Would it be possible to write a test for this, especially for a FAT12 filesystem with
+4084 data sectors and a FAT16 filesystem with 4085?
+
+> ---
+> 
+>   fs/fat/fat.c             | 58 +++++++++++++++++++++++-----------------
+>   include/fat.h            |  6 -----
+>   test/image/spl_load_fs.c |  2 +-
+>   3 files changed, 35 insertions(+), 31 deletions(-)
+> 
+> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+> index 8a0f4e4e6c..9179257ff2 100644
+> --- a/fs/fat/fat.c
+> +++ b/fs/fat/fat.c
+> @@ -27,6 +27,9 @@
+>   
+>   #define FATU8ARRAY2CPU16(x) (((x)[1] << 8) + (x)[0])
+>   
+> +/* maximum number of clusters for FAT12 */
+> +#define MAX_FAT12	0xFF4
+> +
+>   /*
+>    * Convert a string to lowercase.  Converts at most 'len' characters,
+>    * 'len' may be larger than the length of 'str' if 'str' is NULL
+> @@ -485,6 +488,32 @@ static __u8 mkcksum(struct nameext *nameext)
+>   	return ret;
 >   }
 >   
-> -static u32 npcm_clk_set_div(struct clk *clk, u32 div)
-> +static int npcm_clk_set_div(struct clk *clk, u32 div)
->   {
->   	struct npcm_clk_priv *priv = dev_get_priv(clk->dev);
->   	struct npcm_clk_div *divider;
-> @@ -145,6 +145,9 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
->   	if (!divider)
->   		return -EINVAL;
->   
-> +	if (divider->flags & DIV_RO)
-> +		return 0;
+> +/*
+> + * Determine the FAT type
+> + *
+> + * Based on fat_fill_super() from the Linux kernel's fs/fat/inode.c
+> + */
+> +static int
+> +determine_fat_bits(const boot_sector *bs)
+> +{
+> +	if (!bs->fat_length && bs->fat32_length) {
+> +		return 32;
+> +	} else {
+> +		u16 fat_start = bs->reserved;
+> +		u32 dir_start = fat_start + bs->fats * bs->fat_length;
+> +		u32 rootdir_sectors = FATU8ARRAY2CPU16(bs->dir_entries) *
+> +				      sizeof(dir_entry) /
+> +				      FATU8ARRAY2CPU16(bs->sector_size);
+
+Note that technically we are supposed to round up.
+
+> +		u32 data_start = dir_start + rootdir_sectors;
+> +		u16 sectors = FATU8ARRAY2CPU16(bs->sectors);
+> +		u32 total_sectors = sectors ? sectors : bs->total_sect;
+> +		u32 total_clusters = (total_sectors - data_start) /
+> +				     bs->cluster_size;
 > +
->   	if (divider->flags & PRE_DIV2)
->   		div = div >> 1;
->   
-> @@ -153,6 +156,12 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
->   	else
->   		clkdiv = ilog2(div);
->   
-> +	if (clkdiv > (divider->mask >> (ffs(divider->mask) - 1))) {
-> +		printf("clkdiv(%d) for clk(%ld) is over limit\n",
-> +		       clkdiv, clk->id);
-> +		return -EINVAL;
+> +		return (total_clusters > MAX_FAT12) ? 16 : 12;
 > +	}
+> +}
 > +
->   	val = readl(priv->base + divider->reg);
->   	val &= ~divider->mask;
->   	val |= (clkdiv << (ffs(divider->mask) - 1)) & divider->mask;
-> @@ -253,8 +262,8 @@ static ulong npcm_clk_set_rate(struct clk *clk, ulong rate)
->   	if (ret)
->   		return ret;
->   
-> -	debug("%s: rate %lu, new rate (%lu / %u)\n", __func__, rate, parent_rate, div);
-> -	return (parent_rate / div);
-> +	debug("%s: rate %lu, new rate %lu\n", __func__, rate, npcm_clk_get_rate(clk));
-> +	return npcm_clk_get_rate(clk);
->   }
->   
->   static int npcm_clk_set_parent(struct clk *clk, struct clk *parent)
-> diff --git a/drivers/clk/nuvoton/clk_npcm.h b/drivers/clk/nuvoton/clk_npcm.h
-> index 06b60dc8b8..b4726d8381 100644
-> --- a/drivers/clk/nuvoton/clk_npcm.h
-> +++ b/drivers/clk/nuvoton/clk_npcm.h
-> @@ -50,6 +50,7 @@
->   #define PRE_DIV2	BIT(2)	/* Pre divisor = 2 */
->   #define POST_DIV2	BIT(3)	/* Post divisor = 2 */
->   #define FIXED_PARENT	BIT(4)	/* clock source is fixed */
-> +#define DIV_RO		BIT(5)	/* divider is read-only */
->   
->   /* Parameters of PLL configuration */
->   struct npcm_clk_pll {
-> diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/clk_npcm8xx.c
-> index 27e3cfcf55..d1b32e3237 100644
-> --- a/drivers/clk/nuvoton/clk_npcm8xx.c
-> +++ b/drivers/clk/nuvoton/clk_npcm8xx.c
-> @@ -45,12 +45,12 @@ static struct npcm_clk_select npcm8xx_clk_selectors[] = {
->   };
->   
->   static struct npcm_clk_div npcm8xx_clk_dividers[] = {
-> -	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2},
-> -	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2},
-> -	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2},
-> -	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1},
-> -	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1},
-> -	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1},
-> +	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2 | DIV_RO},
-> +	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2 | DIV_RO},
-> +	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2 | DIV_RO},
 
-And this makes sense for bus clocks
+This should be merged with...
 
-> +	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1 | DIV_RO},
-> +	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1 | DIV_RO},
-> +	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1 | DIV_RO},
+>   /*
+>    * Read boot sector and volume info from a FAT filesystem
+>    */
+> @@ -493,7 +522,6 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+>   {
+>   	__u8 *block;
+>   	volume_info *vistart;
+> -	int ret = 0;
+>   
+>   	if (cur_dev == NULL) {
+>   		debug("Error: no device selected\n");
+> @@ -508,7 +536,8 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+>   
+>   	if (disk_read(0, 1, block) < 0) {
+>   		debug("Error: reading block\n");
+> -		goto fail;
+> +		free(block);
+> +		return -1;
+>   	}
+>   
+>   	memcpy(bs, block, sizeof(boot_sector));
+> @@ -527,33 +556,15 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+>   		bs->info_sector = FAT2CPU16(bs->info_sector);
+>   		bs->backup_boot = FAT2CPU16(bs->backup_boot);
+>   		vistart = (volume_info *)(block + sizeof(boot_sector));
+> -		*fatsize = 32;
+>   	} else {
+>   		vistart = (volume_info *)&(bs->fat32_length);
+> -		*fatsize = 0;
+>   	}
 
-But it's a little unclear to me why this is enabled for SPI. Are you e.g.
-doing XIP from SPI?
+... these if statements (above)
+
+>   	memcpy(volinfo, vistart, sizeof(volume_info));
+>   
+> -	if (*fatsize == 32) {
+> -		if (strncmp(FAT32_SIGN, vistart->fs_type, SIGNLEN) == 0)
+> -			goto exit;
+> -	} else {
+> -		if (strncmp(FAT12_SIGN, vistart->fs_type, SIGNLEN) == 0) {
+> -			*fatsize = 12;
+> -			goto exit;
+> -		}
+> -		if (strncmp(FAT16_SIGN, vistart->fs_type, SIGNLEN) == 0) {
+> -			*fatsize = 16;
+> -			goto exit;
+> -		}
+> -	}
+
+I think we should still verify these as long as vistart->ext_boot_sign is 0x29.
 
 --Sean
 
->   	{NPCM8XX_CLK_SPIX, CLKDIV3, SPIXCKDIV, DIV_TYPE1},
->   	{NPCM8XX_CLK_UART, CLKDIV1, UARTDIV1, DIV_TYPE1},
->   	{NPCM8XX_CLK_UART2, CLKDIV3, UARTDIV2, DIV_TYPE1},
+> +	*fatsize = determine_fat_bits(bs);
+>   
+> -	debug("Error: broken fs_type sign\n");
+> -fail:
+> -	ret = -1;
+> -exit:
+>   	free(block);
+> -	return ret;
+> +	return 0;
+>   }
+>   
+>   static int get_fs_info(fsdata *mydata)
+> @@ -1158,9 +1169,8 @@ int file_fat_detectfs(void)
+>   
+>   	memcpy(vol_label, volinfo.volume_label, 11);
+>   	vol_label[11] = '\0';
+> -	volinfo.fs_type[5] = '\0';
+>   
+> -	printf("Filesystem: %s \"%s\"\n", volinfo.fs_type, vol_label);
+> +	printf("Filesystem: FAT%d \"%s\"\n", fatsize, vol_label);
+>   
+>   	return 0;
+>   }
+> diff --git a/include/fat.h b/include/fat.h
+> index a9756fb4cd..3dce99a23c 100644
+> --- a/include/fat.h
+> +++ b/include/fat.h
+> @@ -34,12 +34,6 @@ struct disk_partition;
+>   /* Maximum number of entry for long file name according to spec */
+>   #define MAX_LFN_SLOT	20
+>   
+> -/* Filesystem identifiers */
+> -#define FAT12_SIGN	"FAT12   "
+> -#define FAT16_SIGN	"FAT16   "
+> -#define FAT32_SIGN	"FAT32   "
+> -#define SIGNLEN		8
+> -
+>   /* File attributes */
+>   #define ATTR_RO	1
+>   #define ATTR_HIDDEN	2
+> diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
+> index 297ab08a82..90e640b5de 100644
+> --- a/test/image/spl_load_fs.c
+> +++ b/test/image/spl_load_fs.c
+> @@ -220,7 +220,7 @@ static size_t create_fat(void *dst, size_t size, const char *filename,
+>   	bs->root_cluster = cpu_to_le32(root_sector);
+>   
+>   	vi->ext_boot_sign = 0x29;
+> -	memcpy(vi->fs_type, FAT32_SIGN, sizeof(vi->fs_type));
+> +	memcpy(vi->fs_type, "FAT32   ", sizeof(vi->fs_type));
+>   
+>   	memcpy(dst + 0x1fe, "\x55\xAA", 2);
+>   
 
+--Sean
