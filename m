@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89446C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 14:45:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8271DC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 14:50:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAA1B87191;
-	Wed,  8 Nov 2023 15:45:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 00F6B8718E;
+	Wed,  8 Nov 2023 15:50:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MTPaLfZP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ba3tqH37";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D29C78717B; Wed,  8 Nov 2023 15:45:55 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 1E02787191; Wed,  8 Nov 2023 15:50:54 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 640B286F92
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 15:45:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4059387165
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 15:50:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5ac376d311aso81078327b3.1
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 06:45:53 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-9e2838bcb5eso307169066b.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 06:50:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699454752; x=1700059552; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7lLDUZg0rtbmueSdpnBQRBSZ59Fb5cBk7pWk/JVW0Zw=;
- b=MTPaLfZPkyrmnc+XUyXDfdz/wOpVzV1TcqSMN53S6HnHWKxaas/ob0CZla0HHl+Y2F
- PSt9Vc5xjk6JnPbJVjOP0fYJCT8oRdB5+/fbE3KGRjgDZga9yk8Ozl57wfsIuHiq8fl2
- XBqM9zhT+ty9BpDpu5gM1cMazoCJUY5B4R5s0=
+ d=gmail.com; s=20230601; t=1699455052; x=1700059852; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fGX0T/wuq4bSLgfaZWMSzoteS0HoEh0Q5H+UgoGVi44=;
+ b=ba3tqH373Yef9XXzCsTAOthsZFRuIhS6Ol59Fu5SBLxvd8eZ2JfvMvvwvbsIj9ZHPY
+ LgKFNibiox/LAtA/ssw74fkRUS1QzHpyS7ACodOOx8bHt4jM7t5SxcviKQ2qezTL983L
+ PqL7aVZqZR+mtLrmgWqJutdxdMmDyJnsv7GEWMO3V0yPxCKp3NYjl/xY3WI8vs2bI/hg
+ lucU+sEXYeVxfm1eft7npn3v1YdnhybUhDHoU15sT3c7m4lMXll5jgSwhB0aZgkdtLFE
+ QpLPU9F5ZsNy6NNGvuoJF4x7uksy+UxHTBt2mhEuFQUfruaHeHktGKCd8hn9p/10ibFe
+ JBYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699454752; x=1700059552;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7lLDUZg0rtbmueSdpnBQRBSZ59Fb5cBk7pWk/JVW0Zw=;
- b=kMtQKAVEpHIrPeURKsmTvaj0xdSPysquvv6hC99ejGGjI9kbEATv0UY/ciL5+cG03D
- MMjFA6qNjX+CD//aqKA6faE1Pss/E0n/hNrgQCvIpg29T/GwFZewuDajnwD9ECfJdb/R
- skTdPHjyCXtoT5CewZMzo5UoEo8k6lhLcIm+KNx/lXItzIh8RXTJw9aOM9tVDotC6oSi
- caL/hjGLoSSKX8/TcIh+c/XaOnkDUCaBoYFn6NsMHTwlINiyZ45qo8Aad3RkzAkanKDm
- eAkmucwuNttcFFOZrH5eWmobNxA0+MQDIyRNflPD/8w/QZAl68qOQM2yesbGCIOJTIG2
- 3pmg==
-X-Gm-Message-State: AOJu0YyZx8PRjMXzrvrZUN5YCVxr6nN4NJN0g/2oekNLmvOhSwwU7GbQ
- F74LB4fIXJGkn1TkLCahCg6SYF4s6CnqZDboB4f0sA==
-X-Google-Smtp-Source: AGHT+IEBOK9s5miea4oqTloSkfkCGiCzT+ntyPug7kRPYj8pEImxyN9iREmjfQRUrqVyrQbMEdiBSQ==
-X-Received: by 2002:a81:6046:0:b0:5ad:47ba:fa3a with SMTP id
- u67-20020a816046000000b005ad47bafa3amr1691728ywb.43.1699454752109; 
- Wed, 08 Nov 2023 06:45:52 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
- [2603:6081:7b00:6400:5409:8f3c:5603:314])
- by smtp.gmail.com with ESMTPSA id
- h138-20020a816c90000000b0059511008958sm6959108ywc.76.2023.11.08.06.45.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Nov 2023 06:45:51 -0800 (PST)
-Date: Wed, 8 Nov 2023 09:45:49 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Dmitrii Merkurev <dimorinny@google.com>
-Cc: u-boot@lists.denx.de, rammuthiah@google.com, rfried.dev@gmail.com,
- Ying-Chun Liu <paul.liu@linaro.org>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v3 1/6] net: split IP_TCP header into separate IP/IP6 and
- TCP headers
-Message-ID: <20231108144549.GA1077075@bill-the-cat>
-References: <20230725215658.2118831-1-dimorinny@google.com>
+ d=1e100.net; s=20230601; t=1699455052; x=1700059852;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fGX0T/wuq4bSLgfaZWMSzoteS0HoEh0Q5H+UgoGVi44=;
+ b=ddaoljfs+KpyAFWmdd11rxdnESy+wiWMzQUfzt6O6tuDr8aL40XP5Ij+oVN2/9KRu+
+ ubbZSzgmIdYNGJsOuyZqD2YVfD+bR0utqL09oXd9+e6uy2aUm0UPQw7Gf2x4LPSPc9c2
+ PViE5AUafJ5PlHr3Eem5bLheJ1DHHYhIoD1INJ56p4QRGcxbE1w0gj83eEXrxmedhNhy
+ Z+Ptc1fMNrEP3mJDN1o20wA58nNcF64qjntDopksxxeqVYO8+1rcb/8lhRhayIK9/VTV
+ xfJuK0VibriRW80aC2aMkmyJ6V5IzafblqvYg2iL+mc9m+yc3xiw9sILsO4BZSYn92GJ
+ 63Rw==
+X-Gm-Message-State: AOJu0YzQNIYCceAtXPvkkKUSDJ3O6iVFzjIIGXs9RQqgU0FH8lK8ORHm
+ V0xNZ+KA3hu/8mICoulVR3klTK3pXZUbPp/Fhg0YJMzg
+X-Google-Smtp-Source: AGHT+IErPOlZjfjsHn3fjmQwWJicxii2vZdVjODM0pHqQ01C1qKvrb8O8RzirUZMV75GTuMfoEmX9JHSjnJwgK4ihWQ=
+X-Received: by 2002:a17:907:60d6:b0:9b9:f980:8810 with SMTP id
+ hv22-20020a17090760d600b009b9f9808810mr1822567ejc.34.1699455051528; Wed, 08
+ Nov 2023 06:50:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mSLCr0r0dXFdUcWr"
-Content-Disposition: inline
-In-Reply-To: <20230725215658.2118831-1-dimorinny@google.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAHc5_t2RP2LB=4GAdKWdckzXwiWUpAGY4T1UCu=YuJQgFWo4Qg@mail.gmail.com>
+In-Reply-To: <CAHc5_t2RP2LB=4GAdKWdckzXwiWUpAGY4T1UCu=YuJQgFWo4Qg@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 8 Nov 2023 14:50:40 +0000
+Message-ID: <CALeDE9MaboQPWpDND5WD8ywhg5C-nhGPToXadK6CY0u-aDHGkQ@mail.gmail.com>
+Subject: Re: rockpro64 rk3399 dwc3 issue
+To: Shantur Rathore <shantur.rathore@gmail.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,57 +84,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---mSLCr0r0dXFdUcWr
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> I am trying to boot OS via USB3.0 ports on RK3399 base RockPro64.
+> U-boot is failing to detect the drive in the USB3.0 port.
+>
+> If I boot linux through other mediums the drive is detected and works fine.
+> Can anyone please help me figure out the issue?
 
-On Tue, Jul 25, 2023 at 10:56:52PM +0100, Dmitrii Merkurev wrote:
-
-> This allows us to reuse TCP logic between IP and IP6 stack.
->=20
-> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> =D0=A1=D1=81: Joe Hershberger <joe.hershberger@ni.com>
-> =D0=A1=D1=81: Ramon Fried <rfried.dev@gmail.com>
-> Reviewed-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  include/net/tcp.h | 54 ++++++++++++++++--------------------
->  net/tcp.c         | 70 +++++++++++++++++++++++------------------------
->  test/cmd/wget.c   | 48 ++++++++++++++++++--------------
->  3 files changed, 85 insertions(+), 87 deletions(-)
-
-I do want to thank you for your contribution. However, the long term
-goal with the project right now is to move to integrate lwip as the
-networking stack (and in turn have more robust IPv6 and wget and
-similar features). So, I don't want to pickup this series (unless you
-think it's still important here-and-now, given the above). I would ask
-you to please keep an eye on that effort and either try out v10:
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D374882&state=3D*
-or keep an eye out for v11. Thanks again!
-
---=20
-Tom
-
---mSLCr0r0dXFdUcWr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLnx0ACgkQFHw5/5Y0
-tyzwAgv+JZlZcZAcp+5Wz6f0/SAsH+Gyiqx5biXCs8pDQxd5ZANz/LSfdH14vDPl
-xgkfmkr65qj9XyyHcXHyHWB+WGPZ9yXkfWX84CoKDxPRz6+KdGqQ+DDr28Kiu2zP
-YQS/4Tc21MlGa5EVO4UzAh1pyviG5X4osBB5PLfkRw9EZry8ewx7/5cG+t/UAUJD
-58aNrTjlweinw+oL0XdSwMpRUc3u/YTrDC+ckR1vcEU2EeYVHRycTpJpcZr13isq
-moeJsoEUnp0vztLAYduUrxQHsLzkyOPAHFM0aPd0eFFt72Wus2LPNqZ2SfbZWtwN
-G0i/CERBwprCxN4hmu/eoK+0jvBNvmRTCG73pJt7U0pgSsbkWFYVuvMS3Oyn7aDS
-UN8v3Qp2OsJv3AUpXP/ZKjAyEw53txRpsJgOFIz1RKeGT9PZlWN0d5By+wkbQAlM
-HgbVt28SbRxgvqZ80oNNXOMc6W3XiemoY+rbqhgm3rHyeKTpR+cj9QFdWfMlYOIe
-bCvshU14
-=8Qff
------END PGP SIGNATURE-----
-
---mSLCr0r0dXFdUcWr--
+Can you share the version of U-Boot you're using?
