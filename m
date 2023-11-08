@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D499C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 12:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A944DC4167B
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 12:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5C1087677;
-	Wed,  8 Nov 2023 13:13:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43EFD8767F;
+	Wed,  8 Nov 2023 13:13:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="brCp16dk";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="2NJ0knJc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1965F876E7; Wed,  8 Nov 2023 13:13:05 +0100 (CET)
+ id E11A08767F; Wed,  8 Nov 2023 13:13:07 +0100 (CET)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::624])
+ (mail-db8eur05on20629.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::629])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7281A87677
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 13:13:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED955876D1
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 13:13:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Christian.Taedcke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gqxtiNw1OYLcR3dLgggizOnDw9Z9qxC5Vm1NIrwvkt0xV0r0uh+cYhMZWRUjWSGB/Y9S64p0kTGIgVZzLsrOlMa+nos770qgFLN4M8O2FDgRuis2ofTObvAnC8AIt5stdi/HLU+SCfw3qPzgg0Q1Z+kxc/okMsJhvgleRfFxAfN/j2ifthtfwaIH75ht6hGjL12zvnvAMSIyVhOvc/Z6K7rNwWvFXIx0SZuj1PacBaNoOtjfhsBZ4UNK9wCq9casDs/NBTN9C6RUOepfZgCxGvwbvKnq0BSSqIN0AUUXIDMFVhXUFT+ExECAKXSCehuHtz7hz13iOjAWttqcjNY9cA==
+ b=Oix32RX4wMhPA7bvcVrj/4hIW3FTW39q+6KUjLaIFILbL7P8dAhJFtRtguHkhht9XrtHqa+SksP1J0Yo9CjeME3gambU1Nisslj5rwcnEv975bWBS9u2krYAZm86MGPnsMNVOlB5ll2Dj7Fmypu8hLD3x02DaRotxBFPwXngs0h6EqHuLVqT/LlfxVR84iwy9cOF78d2QGcA0IYvJCKZhz4J91jT4Qn0LSxwQNnc6Yc/AR0yBGP7bVwf2zAz8tCdrm8tTOWYm5I0kzYIh03PR1pGphUlI7GlUfFzpRaNjBISDTsfiulFyPuu6fex2JjQQdAfV6R/UU0P3oDPmDClYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=48MkOw+7jLDOgrwFuexwqWnt2FDw0d5ovU3a18HGo6Q=;
- b=g+2PKqIRyyDSletr2nKse65MIC9X7LQTJvHNowGYHD95KB3UcVEvVE6pkYVuAxdtwjuQu/8YoDRnxOnrY+sP+rdwCX2G3LPjSKz20cXYHd7F7x0vcv1yYgrv0AFWZ8I5fgH62pvBFd0zzf6Hdrhy1hLc8o4SF5H3gda3ZPToooQyD9lDN/QTAhAF/pRtKdz7ojFmc5XVBppX21DcVhobgYCX8LBTkZiUOgssf4wR/AH3swZP9rJoWrqY66reHz/bH+eMBCK4gvcP45UjQ08P0+WbNWLYOq4erRtCbLrTXBM96HoWYppYM8JE3itvNWn4WH//Fn4NJEfiHfCHAYHv7A==
+ bh=OkBRhJ0hPYhI0BZlwk3gbAT89b5LRnJ7AlyzxFRzS9Y=;
+ b=b1UhVMKZEeYMSufYVzQiN3cNDzDwAVwdVWSM6/4aRL7aBG76KfpRisbKThjQUiXFbmiTZqjMXHPlU9G/fnSa9ZWcyD5EODHnRNNvWo4hSyCIJNiBpUZ4MAXidXqEWi1P3TlBthZE3lQrkNKHm3Ae3wVlEEW68D7/g2X+rLWV2OQPsKyNSPppGVq0Jbngl9Qvi0q7rwfXA+5N1tEw08cOdsYB/RmQeyfjnLiVdOoCHcAPJml9mYr6uBn8S5iVKT7wkTGkBUFk91xYdqwEjl1X/2gjhqhRA8/0KJsPRq4Wcj3i85ztaHbflA81gdnYBKMI/Vhu2GOXpy9DONizti3w6w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=48MkOw+7jLDOgrwFuexwqWnt2FDw0d5ovU3a18HGo6Q=;
- b=brCp16dkDPXvSkfqyj5tOtqc0zLhKnPNm9ygxaDQq8boPAWGW5rXQebKSLvfpF/m13ztNQaJq/ObE0ja8j3EB/XsTX1HDXLLERuyZIWyUi+UFmSshZ0PF5vdaCPDssRUX5wUqOEVDWq0g8X8Fr1rKTKU6YII5Z/OhfBoCxi51FI=
+ bh=OkBRhJ0hPYhI0BZlwk3gbAT89b5LRnJ7AlyzxFRzS9Y=;
+ b=2NJ0knJcTcrXy9C0ZIWXVXxIOcDRIsugD9opXNGy2aQ3z9FsCRgpYePaRiBS1lZt1VVEB6gH3Eba6wps0uT/YcaKUZ4d+dXrhV1f6ZVYl18zN2ObtMxwQaZzO7fUQ+45AH8FTIP3qsgrVwBXf9+SfKCgFrAe27473s/9l6GovZs=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AM0PR08MB4946.eurprd08.prod.outlook.com (2603:10a6:208:165::13)
  by DB8PR08MB5386.eurprd08.prod.outlook.com (2603:10a6:10:f9::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Wed, 8 Nov
- 2023 12:13:00 +0000
+ 2023 12:13:03 +0000
 Received: from AM0PR08MB4946.eurprd08.prod.outlook.com
  ([fe80::512e:4ffe:2678:395f]) by AM0PR08MB4946.eurprd08.prod.outlook.com
  ([fe80::512e:4ffe:2678:395f%4]) with mapi id 15.20.6933.029; Wed, 8 Nov 2023
- 12:13:00 +0000
+ 12:13:02 +0000
 From: christian.taedcke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Christian Taedcke <christian.taedcke@weidmueller.com>,
  Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v1 1/2] fs: fat: add macro to convert u8[2] to u16
-Date: Wed,  8 Nov 2023 13:12:38 +0100
-Message-Id: <20231108121239.26737-2-christian.taedcke-oss@weidmueller.com>
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v1 2/2] fs: fat: calculate FAT type based on cluster count
+Date: Wed,  8 Nov 2023 13:12:39 +0100
+Message-Id: <20231108121239.26737-3-christian.taedcke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231108121239.26737-1-christian.taedcke-oss@weidmueller.com>
 References: <20231108121239.26737-1-christian.taedcke-oss@weidmueller.com>
@@ -73,53 +73,53 @@ X-ClientProxiedBy: FR4P281CA0261.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM0PR08MB4946:EE_|DB8PR08MB5386:EE_
-X-MS-Office365-Filtering-Correlation-Id: 94598a5c-b9fd-4e82-2528-08dbe0540cff
+X-MS-Office365-Filtering-Correlation-Id: 112ce44e-26a3-4073-7658-08dbe0540e75
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: UV7yjyDkqH3GYDoHAa/lOt2Mu7d5uSmx3vYtx8klqKV1zyNBgkApGsp2ZOIEilePEQ8XWUR0V4tPTWQXuHvzmsLOPsL5IjHnzshXr4L60Pu6ReYxFnUYiK2uXUlzXDg5aOKEgypUOPAU/AjTr3ooSOo+If5xOB1w1lzGvj8mWO2qjUrIrD2ROAe7chq+B2D9g4fHG7CX3SyhSiM2CpFLo+dKiUcPTvACrrczNj1PyqqlmUJJ/Xe+jRoKHpQF+/YL4usk2egNMz9Wsrrm6O4kp/9SwkuJOhGjgJelGhjCWhrsd86InKYnUHAZ51gXIaHF061yyyKq/xzYaiPhuhmRdslImUoSOFDeHLNr0y/p8kzTDIpncep03pVDhiLsQaJa5hkLZHilZUxflOl0FDJjNd9pjz2t1ZW+E1b+Mvul+Whbc5XIRAtLuVLxRS39B5anUpt+sAzeOQk6FHgxHTid26FRw3x3AkxsOLX21EEBPD/CTE6Lh7ufHpTgSYsNaa6/+BC1CGZlf5ZU22fBeSxiYgicMWdhO15wsEfVKhN+ktQhU0Mtlg10FjvS5cJaqD+YCSi/ra6ppRCGGb2iz79dRHaX+Fq5/+hMx6d15LdX/LhyCCNugotiTdxarCOJ/Mm9
+X-Microsoft-Antispam-Message-Info: Wm8XiJVGLi+Z5p0KzfnK0pEXjNkH7nMX8fV3e7SUBZXenkMk4eMG9do6zzL5wUfmpfHD6LkCb+54XbPL18teeEGtrNn9jIkhlAxJcQ11aVfhzuKAT4mqV+/PY5fR3336B/hgZ8+7S77m0d9LW42gszp7TobckBqMrzTQH8oRMQGGvJc1rXrkQJEYWlR/dYdmcnGNNjSsy17XdDBxHy4E8gSMNCg4wmVmZ/tQnAG+yLFA64Ju6KQnwFOxKzfIftwNcCgJ/Smok2MSs59q8nGXZUuCZP2WpX+wl4fq6piUsTnuWtD6vDJNoSU7k2wLhbEEzHw94z5Kj1l8A8GWM4RpaQYj2jdUPWsLVvUSgnkiodUmFPm0VD0iv1T/2xDZhI/zcOff/TPLetioCut1xGh9RKgvQfF6wAdlis41SXfWCzhOgoyxk5zA8eIAS4y8U5xAwstOo6AD4+5lV/GLP8/NIYqtOrRMg9J4MCsq8SoGdyn+5cxvoRcbLDYBh1rGlzrcy4/IA2ZSx5WNd0E9KcXft/RT0D49yambxHBZhMHNtiTzCY/zxFhifgKCpejWdn5A6F7pzoR9IVJayfxzBZ8azISa0ooYYB4zF9IgKOzU8OY=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR08MB4946.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(366004)(136003)(376002)(396003)(39860400002)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(1076003)(2616005)(6486002)(478600001)(6666004)(66556008)(66476007)(54906003)(6916009)(6506007)(52116002)(66946007)(316002)(6512007)(9686003)(8676002)(4326008)(8936002)(41300700001)(26005)(2906002)(5660300002)(36756003)(83380400001)(86362001)(38350700005)(38100700002);
+ SFS:(13230031)(346002)(366004)(136003)(376002)(396003)(39860400002)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(1076003)(2616005)(6486002)(478600001)(966005)(6666004)(66556008)(66476007)(54906003)(6916009)(6506007)(52116002)(66946007)(316002)(6512007)(9686003)(8676002)(4326008)(8936002)(41300700001)(26005)(2906002)(5660300002)(36756003)(83380400001)(86362001)(38350700005)(38100700002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tP+cTf/0o+5YL1urCnQbAGV/VUtD0EQRFrDvW3PzXtVUq0WF8WyKyzd818Bo?=
- =?us-ascii?Q?xqueMdgzz8uDap6B8OML1CqEQ1EcIbt1Tnlqkfyqblr66Plp3gU9vsREo0u/?=
- =?us-ascii?Q?nQcXTW5AZ9eKztc4I4e2unkmHHa6qTmR5x1SmJFcIjLcjRexxFVwJqP/6xrg?=
- =?us-ascii?Q?wEPnpD8HgFJ11Iw0XtRyxBKSidNF71wxUqZ0XvCHEzRyJxU1IEhJCxD/3mzu?=
- =?us-ascii?Q?nZf1cJOQUz8JehRxwCB6SbovGi5VWirKOulNGktmEP9BnqQ2r8d/Pm3PBES1?=
- =?us-ascii?Q?FkUxFHAWLotAcej10D03GYvh1t0iH7zVsTRpNciGwrkWv6C7y2gJLViZmhXt?=
- =?us-ascii?Q?HMmmDszslicAlme3UMHuOoQhpUE4FleFohPq5Xcke8qLeOkPBLweFuYPkbty?=
- =?us-ascii?Q?Pvuzb461TtlUdT1oNPf8+Hsi9OLhGHc679mUXLGRDgwVIFzr4rkgfrMTfIkJ?=
- =?us-ascii?Q?m4Cjm/CkDaQMtlNuLecbwEiusrCOV5+nuTGL2oiDScmSrY+TTuPMbKGHIVMt?=
- =?us-ascii?Q?hK3steebML9DSDhznQMtC/F0fwf4Zv14CUpsNTHkcK9s0o7iPESW/hLxqJNV?=
- =?us-ascii?Q?O0obWb0M37esQKStSDautt9n0/xB3PRNSkA+tAjDlQZPk46EzZxt0MsS7I8Q?=
- =?us-ascii?Q?+8a9AOnShI7V+6Usuijljk3UIXhHVn4jPTc30jdWcxHo2YNcaj2sgvsvX+WD?=
- =?us-ascii?Q?putFzqfNHHNUntKrss7Mpc8p8gmdBVLtoyn3USvcj3SKfh4JvvYddYh5dHn0?=
- =?us-ascii?Q?eDr+zoM0rDiaHLa5fEtu+EAi7RLtBUPX7WK9vNVR/WGd6iDaAy0H0AvxAe/r?=
- =?us-ascii?Q?hkeMU+BqY8+xIV9+6Df7hq2f1cgg1sIPSWFjBavCCxUkouKZOdWnbfb7lSPO?=
- =?us-ascii?Q?c++tQWgoy2Kfon2g28H93K8d5z1n7l2zw9fdrLoNRS5gfPVVM1MtMaOJH0Ka?=
- =?us-ascii?Q?xbxyUulx/TXjMhddVmGLWm+6bUNB3pSAthmnr2beWEcHWVa0Zpg+u36v1CgW?=
- =?us-ascii?Q?8p0Y26+M+hH4rEQ64Jwz6TjVEPF+TYrbVBGlUsz5dZAMq3btqrSOXNq2uOuP?=
- =?us-ascii?Q?l/G6k4eyMGaqGjDemlhW5q3MVy8iF9uL97Syy+C7wA1sbHje/8GAIJXv49LB?=
- =?us-ascii?Q?TaXmm9cAoHxSPUStaqkEqeCULRO5poecGbvPfQtx35XjWhranxLo/J1ZUEIu?=
- =?us-ascii?Q?Z1k5f4pdQ2L6n9D3YqRnUCKskVHmiw3MSL2wpuUoIqHn3uh3C/LPaspocNIs?=
- =?us-ascii?Q?+D2zxEiYennFXJvTNCdnwY/pniVhfXqqm+tXv6rXt3fRZhdDMI+mSKuqj202?=
- =?us-ascii?Q?CZ+zNXl3vsE+3VqGfd2llkRbFaU+F5vwH3TnDUhp910OFmtjiIS8/+/wdyGY?=
- =?us-ascii?Q?/WOktXDMxSQslgyOeeo8U7fGRo+4Ysl8ZSv+8jw6fVEadzL2uFR3LssTcA5G?=
- =?us-ascii?Q?IVYOptgXT5OhSLK2joy0LCSR1BJkfDWQzBIWIrlADDQOygQOY2xSNgdB+QZt?=
- =?us-ascii?Q?8bpryvC0fSWKrS4vPy+XH8xvzp6Yw8lGW7L8VE03AlErSRcCcNQ+t6MYZiAT?=
- =?us-ascii?Q?1pxAEb5u3t5GuVK4iQdVqbRUELkhGPlBiJeGjy8LalqnlnqxxvbF+1ZFlrry?=
- =?us-ascii?Q?/b7WCiCZtPcqxJ3lkQYJcrSUoriHqAzdhry9xYLpiD6j?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Tk0Jrlch4/vRF9q8zUnhLUFwKbbzJpQX9t4uMWhNo1YG4T4AA9dN4KC+WVTi?=
+ =?us-ascii?Q?OPOboX6J5MCrWwGmbSJSw8kPgXEyypvds6wPubyYINSusEbUBA+5tFvmuQ6c?=
+ =?us-ascii?Q?tsdEfDZIJv/hU/NAUoT8MkXeZSnnCT92SI7DrQ3SmCWzgKCQaPks3DIjnlw8?=
+ =?us-ascii?Q?nvAzGl3kznHFRvbJ0HnQk7MUQMfsXXXkKcg6/fJuYoLVLFv1vdFluntHQ+V5?=
+ =?us-ascii?Q?ZUO1ytF51buNLAJgPeinra48JRWWkeVSoAMb9hErRE6lLmdS9SYM5AmMayWi?=
+ =?us-ascii?Q?F4WVEIxH1SJJooGc8AycgMogC6LhqyK+m99cnZNMunbdfa5EI5rcHSll9+v3?=
+ =?us-ascii?Q?E3KlOjIVEi2F1KNcV9o0tFabry/npNvcDH3QQRkdySkfLF6ep0mOp+brdueD?=
+ =?us-ascii?Q?1WU+BnGkdmgGVIfqxI0rznxNJzowCTFWSqdKfhqzBmrHV/+G4m9RSKcOYdz5?=
+ =?us-ascii?Q?OCr2dwenWbD7AeQEazgqXn8REcphrq5YKs0e2BRtK6D9uwfcXHPc4iZUFJCy?=
+ =?us-ascii?Q?Nc3fZ2X6GsSJlApMtAHS0kAP6Ji8zJt6M9B+tP//YALPYKf9kVJvU1JmqlCl?=
+ =?us-ascii?Q?KEIB3KQqmo1AwK9EKtr1MWXfG/TmaLiCLKXeTUMoCfbUNdizp9dRrrV2150G?=
+ =?us-ascii?Q?LCnl6TKvWBFmAWEMFAGFXpKG9lEDJcDiuchwmPofNu75hlOiZGlkjseI8+BJ?=
+ =?us-ascii?Q?i5wJn7FabF/LUt4jxFuP6uJ6X8zAneGqaibxIYskdcsH4yIsFiaQMKQIpLcQ?=
+ =?us-ascii?Q?zad1vFBTpKcrNRqO8F2ImVTfSvMVdTSx40MiuE7KbaDajmNSzdbmjEY27GG+?=
+ =?us-ascii?Q?jmetpvRiaKCZIjnsJSOATcvPB8aRujPsN4W/Jc4TonzSVLRj98QZdA+K/tK8?=
+ =?us-ascii?Q?y6m8FK55q+u4mc4XUMmXi+C40pjra7Ct+/72zXX2ffbm3C6/2f7yFLolkiTk?=
+ =?us-ascii?Q?ESr3BXbMguLOiKC0h2qtM0pPBEJeo+yaA+C2Y+YzbNme8x3ysW/fKI5AaH/q?=
+ =?us-ascii?Q?+CD7xS3vAVlYBMLQ8ArerHwJ9e3N6d8nEc/TWVdO387/jCNUqSpJC+W8BNeQ?=
+ =?us-ascii?Q?52t/8E6Nk4goNTcBwFUb2b2HVjCgrPGNQz8BLkrdTgwtqiEznnP/h88YRULL?=
+ =?us-ascii?Q?2ldli3Cy8zVzbz+aTUpvCBmq/+Aqz7QPY5qLN2PvD3d62rjA8uWAV+iJ2lS+?=
+ =?us-ascii?Q?OvxIl1VVyTekq2qWvOWzps8JubyM5ldvCBOjzLs3W5awf0GFlGh+59AWFesO?=
+ =?us-ascii?Q?XhO3YqRB/ShCDqGJCDZdg4UV0jrHS/XLhePCU4VmO+8NbcmU3A7X/XKOhEWT?=
+ =?us-ascii?Q?X0f8rISGJjYvvm4DHbtkyAjfkTmTFnNs5z93EglhE5jYxL+1bStiETVDSizC?=
+ =?us-ascii?Q?8pfwc30giGP7aMwO4Uw3CADRX4lBFrzDlF03BW27OlhlfFIBaRs099kGCFo4?=
+ =?us-ascii?Q?2aIwvWBthab8O0KZTiGoddvtrfqDIwwVln+f/hwBbcfHlEpEnfgeQSHWe9Cp?=
+ =?us-ascii?Q?NL5xGn+immrrmrPE1hVNhRXmGl6fcfFKPxi8VkGO7BvyocGIPZryeng95dS/?=
+ =?us-ascii?Q?zFZjHXEj4ZYKu86QWnSD1aHpD2ifVjhClK+BnyHcC/kr1sVxN6Vk62V0L6Ek?=
+ =?us-ascii?Q?whZGR6W7mWLc/nxtv1bXPjuAIUE2PFz1EtHq+5ynhevg?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 94598a5c-b9fd-4e82-2528-08dbe0540cff
+X-MS-Exchange-CrossTenant-Network-Message-Id: 112ce44e-26a3-4073-7658-08dbe0540e75
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR08MB4946.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2023 12:13:00.3894 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Nov 2023 12:13:02.9128 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RaqHxekBaOYde20OOi2dl+m007FW5VI1Zui9pctwM0I53uS31hvpb6galcF9wXAef0f9cdHXoSsa5VA7XinEKcV1wITul+AVFaWD93s8FpnIg42lf/49IOMpKzhim9DT
+X-MS-Exchange-CrossTenant-UserPrincipalName: /Xl2GwrupRdw8aJlqI0oMpd1eoOZtNYMboIDwredrhvVVJ9njIBPZKphH9ZvdxCp+zIsEi6t1J/Qp6TisS61pCn/J4GPBY4H4zaUpQF5V0YbC8ibg+nbk89JBXwQEnUf
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5386
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,55 +139,168 @@ X-Virus-Status: Clean
 
 From: Christian Taedcke <christian.taedcke@weidmueller.com>
 
-This reduces code duplications.
+This fixes an issue where the FAT type (FAT12, FAT16) is not
+correctly detected, e.g. when the BPB field BS_FilSysType contains the
+valid value "FAT     ".
+
+According to the FAT spec the field BS_FilSysType has only
+informational character and does not determine the FAT type.
+
+The logic of this code is based on the linux kernel implementation
+from the file fs/fat/inode.c function fat_fill_super().
+
+For details about FAT see http://elm-chan.org/docs/fat_e.html
 
 Signed-off-by: Christian Taedcke <christian.taedcke@weidmueller.com>
 ---
 
- fs/fat/fat.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ fs/fat/fat.c             | 58 +++++++++++++++++++++++-----------------
+ include/fat.h            |  6 -----
+ test/image/spl_load_fs.c |  2 +-
+ 3 files changed, 35 insertions(+), 31 deletions(-)
 
 diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 8ff1fd0ec8..8a0f4e4e6c 100644
+index 8a0f4e4e6c..9179257ff2 100644
 --- a/fs/fat/fat.c
 +++ b/fs/fat/fat.c
-@@ -25,6 +25,8 @@
- #include <linux/compiler.h>
- #include <linux/ctype.h>
+@@ -27,6 +27,9 @@
  
-+#define FATU8ARRAY2CPU16(x) (((x)[1] << 8) + (x)[0])
+ #define FATU8ARRAY2CPU16(x) (((x)[1] << 8) + (x)[0])
+ 
++/* maximum number of clusters for FAT12 */
++#define MAX_FAT12	0xFF4
 +
  /*
   * Convert a string to lowercase.  Converts at most 'len' characters,
   * 'len' may be larger than the length of 'str' if 'str' is NULL
-@@ -571,7 +573,7 @@ static int get_fs_info(fsdata *mydata)
- 		mydata->total_sect = bs.total_sect;
- 	} else {
- 		mydata->fatlength = bs.fat_length;
--		mydata->total_sect = (bs.sectors[1] << 8) + bs.sectors[0];
-+		mydata->total_sect = FATU8ARRAY2CPU16(bs.sectors);
- 		if (!mydata->total_sect)
- 			mydata->total_sect = bs.total_sect;
+@@ -485,6 +488,32 @@ static __u8 mkcksum(struct nameext *nameext)
+ 	return ret;
+ }
+ 
++/*
++ * Determine the FAT type
++ *
++ * Based on fat_fill_super() from the Linux kernel's fs/fat/inode.c
++ */
++static int
++determine_fat_bits(const boot_sector *bs)
++{
++	if (!bs->fat_length && bs->fat32_length) {
++		return 32;
++	} else {
++		u16 fat_start = bs->reserved;
++		u32 dir_start = fat_start + bs->fats * bs->fat_length;
++		u32 rootdir_sectors = FATU8ARRAY2CPU16(bs->dir_entries) *
++				      sizeof(dir_entry) /
++				      FATU8ARRAY2CPU16(bs->sector_size);
++		u32 data_start = dir_start + rootdir_sectors;
++		u16 sectors = FATU8ARRAY2CPU16(bs->sectors);
++		u32 total_sectors = sectors ? sectors : bs->total_sect;
++		u32 total_clusters = (total_sectors - data_start) /
++				     bs->cluster_size;
++
++		return (total_clusters > MAX_FAT12) ? 16 : 12;
++	}
++}
++
+ /*
+  * Read boot sector and volume info from a FAT filesystem
+  */
+@@ -493,7 +522,6 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+ {
+ 	__u8 *block;
+ 	volume_info *vistart;
+-	int ret = 0;
+ 
+ 	if (cur_dev == NULL) {
+ 		debug("Error: no device selected\n");
+@@ -508,7 +536,8 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+ 
+ 	if (disk_read(0, 1, block) < 0) {
+ 		debug("Error: reading block\n");
+-		goto fail;
++		free(block);
++		return -1;
  	}
-@@ -583,7 +585,7 @@ static int get_fs_info(fsdata *mydata)
  
- 	mydata->rootdir_sect = mydata->fat_sect + mydata->fatlength * bs.fats;
- 
--	mydata->sect_size = (bs.sector_size[1] << 8) + bs.sector_size[0];
-+	mydata->sect_size = FATU8ARRAY2CPU16(bs.sector_size);
- 	mydata->clust_size = bs.cluster_size;
- 	if (mydata->sect_size != cur_part_info.blksz) {
- 		log_err("FAT sector size mismatch (fs=%u, dev=%lu)\n",
-@@ -607,8 +609,7 @@ static int get_fs_info(fsdata *mydata)
- 					(mydata->clust_size * 2);
- 		mydata->root_cluster = bs.root_cluster;
+ 	memcpy(bs, block, sizeof(boot_sector));
+@@ -527,33 +556,15 @@ read_bootsectandvi(boot_sector *bs, volume_info *volinfo, int *fatsize)
+ 		bs->info_sector = FAT2CPU16(bs->info_sector);
+ 		bs->backup_boot = FAT2CPU16(bs->backup_boot);
+ 		vistart = (volume_info *)(block + sizeof(boot_sector));
+-		*fatsize = 32;
  	} else {
--		mydata->rootdir_size = ((bs.dir_entries[1]  * (int)256 +
--					 bs.dir_entries[0]) *
-+		mydata->rootdir_size = (FATU8ARRAY2CPU16(bs.dir_entries) *
- 					 sizeof(dir_entry)) /
- 					 mydata->sect_size;
- 		mydata->data_begin = mydata->rootdir_sect +
+ 		vistart = (volume_info *)&(bs->fat32_length);
+-		*fatsize = 0;
+ 	}
+ 	memcpy(volinfo, vistart, sizeof(volume_info));
+ 
+-	if (*fatsize == 32) {
+-		if (strncmp(FAT32_SIGN, vistart->fs_type, SIGNLEN) == 0)
+-			goto exit;
+-	} else {
+-		if (strncmp(FAT12_SIGN, vistart->fs_type, SIGNLEN) == 0) {
+-			*fatsize = 12;
+-			goto exit;
+-		}
+-		if (strncmp(FAT16_SIGN, vistart->fs_type, SIGNLEN) == 0) {
+-			*fatsize = 16;
+-			goto exit;
+-		}
+-	}
++	*fatsize = determine_fat_bits(bs);
+ 
+-	debug("Error: broken fs_type sign\n");
+-fail:
+-	ret = -1;
+-exit:
+ 	free(block);
+-	return ret;
++	return 0;
+ }
+ 
+ static int get_fs_info(fsdata *mydata)
+@@ -1158,9 +1169,8 @@ int file_fat_detectfs(void)
+ 
+ 	memcpy(vol_label, volinfo.volume_label, 11);
+ 	vol_label[11] = '\0';
+-	volinfo.fs_type[5] = '\0';
+ 
+-	printf("Filesystem: %s \"%s\"\n", volinfo.fs_type, vol_label);
++	printf("Filesystem: FAT%d \"%s\"\n", fatsize, vol_label);
+ 
+ 	return 0;
+ }
+diff --git a/include/fat.h b/include/fat.h
+index a9756fb4cd..3dce99a23c 100644
+--- a/include/fat.h
++++ b/include/fat.h
+@@ -34,12 +34,6 @@ struct disk_partition;
+ /* Maximum number of entry for long file name according to spec */
+ #define MAX_LFN_SLOT	20
+ 
+-/* Filesystem identifiers */
+-#define FAT12_SIGN	"FAT12   "
+-#define FAT16_SIGN	"FAT16   "
+-#define FAT32_SIGN	"FAT32   "
+-#define SIGNLEN		8
+-
+ /* File attributes */
+ #define ATTR_RO	1
+ #define ATTR_HIDDEN	2
+diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
+index 297ab08a82..90e640b5de 100644
+--- a/test/image/spl_load_fs.c
++++ b/test/image/spl_load_fs.c
+@@ -220,7 +220,7 @@ static size_t create_fat(void *dst, size_t size, const char *filename,
+ 	bs->root_cluster = cpu_to_le32(root_sector);
+ 
+ 	vi->ext_boot_sign = 0x29;
+-	memcpy(vi->fs_type, FAT32_SIGN, sizeof(vi->fs_type));
++	memcpy(vi->fs_type, "FAT32   ", sizeof(vi->fs_type));
+ 
+ 	memcpy(dst + 0x1fe, "\x55\xAA", 2);
+ 
 -- 
 2.34.1
 
