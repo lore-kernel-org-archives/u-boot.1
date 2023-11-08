@@ -4,80 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CF3DC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:05:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79472C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:10:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5365887009;
-	Wed,  8 Nov 2023 16:05:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id C2A9C8715F;
+	Wed,  8 Nov 2023 16:10:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="Mia5flVM";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="BrGSPw9u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F1F787073; Wed,  8 Nov 2023 16:05:39 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 420EA874C9; Wed,  8 Nov 2023 15:53:28 +0100 (CET)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4866286FAC
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:05:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3306E87165
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 15:53:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mripard@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1699455936;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=4HuI7rrewD1XmA3k+R00172FfqV7N2MAth0xd7TBgUQ=;
- b=Mia5flVM1Kg0yJP6SkzSxblEbLgnlamAX130++MgEkQYz2IzmIC2GI8g0OEa8GgI1ruUwO
- VXyMMfPC56pd9Cwnh9dSfhWNIsIzar4XyrPn0Wji0u2tZ90RDWzh6Y4rpTWYBnzZHl5WC1
- IhB9fdMrxJVy3C93TeO0FzyU6HubhP4=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-82-TTF_N_9fOrG8MdZAO7Q5HA-1; Wed, 08 Nov 2023 10:05:33 -0500
-X-MC-Unique: TTF_N_9fOrG8MdZAO7Q5HA-1
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-32f68d3b788so3502173f8f.3
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:05:33 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699455932; x=1700060732;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4HuI7rrewD1XmA3k+R00172FfqV7N2MAth0xd7TBgUQ=;
- b=L8Mh+LoY1/SI19oRJ9Y991dZ5Y9eO9CahnORrNr85palRQjlj2ZZbDergX3FoVOs03
- ogTvhYqFqP/+sz89ZE07zaoMJmNRzoOdxpqijOnzABH9o6vuTaX0MmSPWn43amPD/7GT
- gY8mULQlnE+n49MaesIPgxy0QKOPtgaWM+9/EFvEgrwpvtVD8s9b/Im19xS2zBj/V4FY
- wW3uWPO3AbamW7yr4yfDMVdoOZqz15JqOqmhp2Kf0aPxv6VFVHSxptAQlpm0RXRNzKQV
- /hDsxRa+MivS6zNUlCb0Yvz135yfWgLmHLMVzHETQK/y4uO1W9R04C4rMzL7vDomoZ1u
- nYYw==
-X-Gm-Message-State: AOJu0Yx/n8026763B04qDGwWMhE91Hj2u4hmwHXIGZsThaXUCPUZYJGO
- 89ytgcKYPi+cAhxLObxxr5gpsT/ldo45VkVG8X7r/Pi7qbomEJ0WoitLulAQ8T8w4ugcJ8sDk9z
- AxS/53CEogfJ1LA==
-X-Received: by 2002:adf:9c86:0:b0:321:6005:8979 with SMTP id
- d6-20020adf9c86000000b0032160058979mr1527472wre.17.1699455932570; 
- Wed, 08 Nov 2023 07:05:32 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGqKhdKHoM7ujp0lQkQinbwTbSYzyxwmfkLG32M2qiJMmVE0clFB3mvq1W5IPBpQa7nWtbtXg==
-X-Received: by 2002:adf:9c86:0:b0:321:6005:8979 with SMTP id
- d6-20020adf9c86000000b0032160058979mr1527459wre.17.1699455932182; 
- Wed, 08 Nov 2023 07:05:32 -0800 (PST)
-Received: from localhost ([2a01:e0a:b25:f902::ff])
- by smtp.gmail.com with ESMTPSA id
- n17-20020a5d4011000000b0032da87e32e2sm5189423wrp.4.2023.11.08.07.05.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Nov 2023 07:05:31 -0800 (PST)
-Date: Wed, 8 Nov 2023 16:05:31 +0100
-From: Maxime Ripard <mripard@redhat.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: eMMC broken on SK-AM62
-Message-ID: <hsk5wejuf5maoer3aodjyndmyft56gag4cepfjep7lfthmwrcy@r2yoebb7stk6>
+ spf=pass smtp.mailfrom=enrico.leto@siemens.com
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 20231108145325f6143506df265d549c for <u-boot@lists.denx.de>;
+ Wed, 08 Nov 2023 15:53:25 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=enrico.leto@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=+B8N/mp9JUz+JpmCVpdV2DA2zXrERrFg69sDTPpuI2E=;
+ b=BrGSPw9ubdbPHJD6EaaNbPRbDFDdM3Ug2WCNeSejJLST+C7JXP5gbffp0QGkzKrifeQY3S
+ NhQLZhjVvHTk6cNhcWaCB/NjR7VnBaSQxDuWIL9h8Zc0lmhvhiX2NDTCEZgaiHiBpq/EFkc6
+ d586f4Aq9Rz1Xzq+pZa7vJ/0k/EOU=;
+From: Enrico Leto <enrico.leto@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Enrico Leto <enrico.leto@siemens.com>
+Subject: [PATCH 0/6] siemens,am335x: clean up the draco board family
+Date: Wed,  8 Nov 2023 15:53:16 +0100
+Message-Id: <20231108145322.302927-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="piceaf3ozo7zu7fy"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1320603:519-21489:flowmailer
+X-Mailman-Approved-At: Wed, 08 Nov 2023 16:10:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,45 +63,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The boards were not maintained upstream since the development phase.
 
---piceaf3ozo7zu7fy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Restore SPL and remove unused settings. We need i2c to read the DDR
+settings from EEPROM, get u-boot from NAND, the console output and the
+watchdog.
 
-Hi Nishanth,
+Restore u-boot up to the user prompt. The complete functionality will
+be restored in future patches.
 
-I've been trying for the last few days to get an SK-AM62 to boot from
-the eMMC user data area.
+Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
+---
+Enrico Leto (6):
+  siemens,am335x: clean-up draco targets
+  configs: draco: remove spi flash support
+  configs: thuban, rastaban: remove emmc
+  configs: draco: remove unused resources from spl
+  configs: draco: disable misc init
+  configs: draco: restore clock driver
 
-I finally got the jumper configuration to make the CPU boot from there
-thanks to Mattijs, but it looks like the 2024.01-rc2 release doesn't
-support booting from there:
+ arch/arm/mach-omap2/am33xx/Kconfig            |   9 --
+ board/siemens/draco/Kconfig                   |  22 +--
+ board/siemens/draco/MAINTAINERS               |  15 +--
+ ...tamin_defconfig => draco-etamin_defconfig} |  13 +-
+ ...ban_defconfig => draco-rastaban_defconfig} |  19 +--
+ ...huban_defconfig => draco-thuban_defconfig} |  19 +--
+ configs/draco_defconfig                       | 127 ------------------
+ include/configs/{etamin.h => draco-etamin.h}  |   0
+ .../configs/{rastaban.h => draco-rastaban.h}  |   0
+ include/configs/{thuban.h => draco-thuban.h}  |   0
+ include/configs/draco.h                       |  41 ------
+ 11 files changed, 20 insertions(+), 245 deletions(-)
+ rename configs/{etamin_defconfig => draco-etamin_defconfig} (92%)
+ rename configs/{rastaban_defconfig => draco-rastaban_defconfig} (90%)
+ rename configs/{thuban_defconfig => draco-thuban_defconfig} (89%)
+ delete mode 100644 configs/draco_defconfig
+ rename include/configs/{etamin.h => draco-etamin.h} (100%)
+ rename include/configs/{rastaban.h => draco-rastaban.h} (100%)
+ rename include/configs/{thuban.h => draco-thuban.h} (100%)
+ delete mode 100644 include/configs/draco.h
 
-U-Boot SPL 2024.01-rc2 (Nov 08 2023 - 14:11:12 +0100)
-SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.5--v09.01.05 (Kool Koala)')
-SPL initial stack usage: 13368 bytes
-Trying to boot from MMC1
-MMC Device 0 not found
-spl: could not find mmc device 0. error: -19
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
-
-It looks like you tried to fix it with 0f1c1e8b368b ("arm: mach-k3:
-am625: Add support for UDA FS"), but it looks like it's not enough.
-
-Thanks!
-Maxime
-
---piceaf3ozo7zu7fy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZUujtAAKCRDj7w1vZxhR
-xXw4AP9A2pbugpgx0/gfxP+YuEfpGpBrGa7UXMoTP1gDQbwqqQEA/uEP6eC/cWlL
-xnZF73d+UJJwqq45WR6Jo66BDYe4sAE=
-=ccNp
------END PGP SIGNATURE-----
-
---piceaf3ozo7zu7fy--
+-- 
+2.30.2
 
