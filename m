@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37913C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:51:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFE0C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCCC08774B;
-	Wed,  8 Nov 2023 17:49:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D0FC8776E;
+	Wed,  8 Nov 2023 17:49:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UfEO5i15";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NHEm7AmA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39D8387708; Wed,  8 Nov 2023 17:49:24 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id E258A87747; Wed,  8 Nov 2023 17:49:28 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBEC3876F1
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 508FE87675
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-77a453eb01cso460926985a.0
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:16 -0800 (PST)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-778a6c440faso384407285a.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699462155; x=1700066955; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699462158; x=1700066958; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vb9TeMjgCJMXrSfCekq4VVOR5ZGrEzp0d15fy1rbYuk=;
- b=UfEO5i15FEGMzEX9ZAfsPG1qNIs6nUWwyxq65sjciBn5SMwhKjQfx+vanhRqGFSIGa
- g07tImclnqMIrSlZsQHOYLdZCLwYQ2WAEihBoSjbh7Xlryb86VlTXv6blon1JnWxP5ra
- rlgA+3HWowrObHzFOapXEVwsW4DmeEPN0Q++BWTEhrh838C6bMnc+TTo+Ai+Adsi4cI3
- Nu0hSGDg+rOz2Qmq42fmoNOlwn1erXuX1OvcHwVte2zE0og6HLsCZmuueFohO6KzigSB
- t+MIlVy2/1EgoDW+8jHZZQJrfUaEVTnbypwsVw/ubFW/ffRfA9kovirzKiidyDKORDR0
- MFvQ==
+ bh=A+mesTBxYW9aGZ4ycWCSC/Q22ZLWjxvplLaDHdLRBsQ=;
+ b=NHEm7AmAAHK+LvmDpbnwcgClrJ0Pc7bGSMp9+co91Zc6SdGMlTow1SwW9KYpJvvwAX
+ LMcnSkrWTU+4yl2tEUXJ/sftuF+tCNIGP/ms87rv5Re8Zuucj8U2KoLngEGqOQ9mtuNP
+ 1uVcZztDZ7CDIxO3Pw+yo58EXOwPKP59ndzXDyT8ygXIMvO+oc64mAYThw33gwfzL45S
+ bVBYZQkJWZHReNxSBS0XszVFAOlv7MkEMxECQ1RxB3ZcZrKMf9bfqYZIom+c8G/+Ic9P
+ NvkObReMdUaVzXAQEz+mMKOVao43iFmFfs5mw2luR5ACAP84liMq5GNw8SAOeDgGrkWy
+ imcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699462155; x=1700066955;
+ d=1e100.net; s=20230601; t=1699462158; x=1700066958;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vb9TeMjgCJMXrSfCekq4VVOR5ZGrEzp0d15fy1rbYuk=;
- b=UmTxoTcNFBNzqSI4r6DRp8bLjJ5j6D+6HgdzIBgaSx5i+iDq2GZVGIWc6xP/4mgFT7
- YjxWgDrNMs3TtFzFqAy4H+AbTZcPpGT+TZ7djGGxgfrgBOINHqyMe84raKAmnzCTzIqt
- WPijWJzlCLchhmgyH0nD3bG9aisU04qnbPQjzTfE5I0mduyTzUT25ceb7pgweGHRAALq
- SHek/eADb7GQUbhzpQm5UhlwP1IT7ae5mlhb0GZ74MjU8JVfB+Scb3OrzUV4GWRqa/aY
- Q145nEK0pyS32S3eTd+8umUjThtLKTb0AZTOIg1oZ673yPiHpq805D2hS6gedog5KTH1
- cjhQ==
-X-Gm-Message-State: AOJu0Yyy7OLXvTejECPmhuX2nnHRa4xG10WcYpIUE2SH1tW9yxpWGyq8
- cUzmQMyPaTfagzri2gOMQFVDK5tN1no=
-X-Google-Smtp-Source: AGHT+IFOqFnyGwszlrkUasKPLlQXpgaTqRDyx9J8METdVTnN5Ez9JkyQ4aTayqTynWoEBKSmoc2mLg==
-X-Received: by 2002:a05:620a:4002:b0:77a:2520:2793 with SMTP id
- h2-20020a05620a400200b0077a25202793mr2600758qko.2.1699462155443; 
- Wed, 08 Nov 2023 08:49:15 -0800 (PST)
+ bh=A+mesTBxYW9aGZ4ycWCSC/Q22ZLWjxvplLaDHdLRBsQ=;
+ b=pokBzCTqS21kKTPYo/04iWJumHalsSPSzAkL+pqacLzpLDp7r1x7HcCtTQAR09CdLV
+ sQID120jou184Et+FboNmSaqby5mhSD7jc1RDRRGg+Iea46wNQ7Tfu86ZAcJ2f/rj0YB
+ qK5XvFsH77EVwNfWwWZVsf/tgFpMnbQJVt2Xqt4P5gb8lp+EFdCC3LG3ifekz9KPNM9W
+ h9asHCLua9ZEq4xcB21ILULjA2MVfzHx/6rl2Ua2DZCseVPpls14iKD3Mgjs0IKqVNO9
+ Z4Fk6NM1AyefKMEkBkJyo1tkDDhjr536tGWAd/oyngVkb+w0t5NIQ7er8O5o6xTf5ynt
+ mn3Q==
+X-Gm-Message-State: AOJu0YxsgGKQqufsCeCviRzGTNtoAZ10vLQN9s/3VGmahe7wtpzTCB12
+ bRpkM0h6/Cyepi86i6nN24k=
+X-Google-Smtp-Source: AGHT+IFC9KkG34aDQXpmr98uo7gmN0jt26t/7KbF/qz/b2PN7RzF6aqHJLg3GRqKnADnaC3gLovn9g==
+X-Received: by 2002:a05:620a:2913:b0:76a:db80:121d with SMTP id
+ m19-20020a05620a291300b0076adb80121dmr2083690qkp.6.1699462158116; 
+ Wed, 08 Nov 2023 08:49:18 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- m18-20020ae9e012000000b007757f6558b3sm1217313qkk.95.2023.11.08.08.49.14
+ f16-20020ae9ea10000000b0076ee973b9a7sm1223066qkg.27.2023.11.08.08.49.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Nov 2023 08:49:15 -0800 (PST)
+ Wed, 08 Nov 2023 08:49:17 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
 To: Tom Rini <trini@konsulko.com>,
 	u-boot@lists.denx.de
@@ -71,9 +71,10 @@ Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
  Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v7 11/26] spl: Only support bl_len when we have to
-Date: Wed,  8 Nov 2023 11:48:43 -0500
-Message-Id: <20231108164858.3497420-12-seanga2@gmail.com>
+Subject: [PATCH v7 13/26] spl: legacy: Split off LZMA decompression into its
+ own function
+Date: Wed,  8 Nov 2023 11:48:45 -0500
+Message-Id: <20231108164858.3497420-14-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231108164858.3497420-1-seanga2@gmail.com>
 References: <20231108164858.3497420-1-seanga2@gmail.com>
@@ -95,22 +96,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Aligning addresses and sizes causes overhead which is unnecessary when we
-are not loading from block devices. Remove bl_len when it is not needed.
-
-For example, on iot2050 we save 144 bytes with this patch (once the rest of
-this series is applied):
-
-add/remove: 0/0 grow/shrink: 0/3 up/down: 0/-144 (-144)
-Function                                     old     new   delta
-spl_load_simple_fit                          920     904     -16
-load_simple_fit                              496     444     -52
-spl_spi_load_image                           384     308     -76
-Total: Before=87431, After=87287, chg -0.16%
-
-We use panic() instead of BUILD_BUG_ON in spl_set_bl_len because we still
-need to be able to compile it for things like mmc_load_image_raw_sector,
-even if that function will not be used.
+To allow for easier reuse of this functionality, split it off into its
+own function.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -121,536 +108,133 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 Changes in v6:
 - New
 
- arch/arm/mach-imx/spl_imx_romapi.c  |  8 ++++----
- arch/arm/mach-sunxi/spl_spi_sunxi.c |  2 +-
- common/spl/Kconfig                  | 14 +++++++++++++-
- common/spl/spl_blk_fs.c             |  2 +-
- common/spl/spl_fat.c                |  2 +-
- common/spl/spl_fit.c                |  6 +++---
- common/spl/spl_imx_container.c      | 10 +++++-----
- common/spl/spl_legacy.c             |  4 ++--
- common/spl/spl_mmc.c                |  4 ++--
- common/spl/spl_nand.c               |  6 +++---
- common/spl/spl_net.c                |  2 +-
- common/spl/spl_nor.c                |  8 ++++----
- common/spl/spl_ram.c                |  2 +-
- common/spl/spl_semihosting.c        |  2 +-
- common/spl/spl_spi.c                |  4 ++--
- common/spl/spl_ymodem.c             |  2 +-
- drivers/usb/gadget/f_sdp.c          |  4 ++--
- include/spl.h                       | 25 +++++++++++++++++++++++++
- test/image/Kconfig                  |  1 +
- test/image/spl_load.c               |  9 ++++-----
- test/image/spl_load_os.c            |  2 +-
- 21 files changed, 78 insertions(+), 41 deletions(-)
+ common/spl/spl_legacy.c | 73 ++++++++++++++++++++++-------------------
+ include/spl.h           | 13 ++++++++
+ 2 files changed, 52 insertions(+), 34 deletions(-)
 
-diff --git a/arch/arm/mach-imx/spl_imx_romapi.c b/arch/arm/mach-imx/spl_imx_romapi.c
-index d7f6cb4b5ba..9f0968cdf71 100644
---- a/arch/arm/mach-imx/spl_imx_romapi.c
-+++ b/arch/arm/mach-imx/spl_imx_romapi.c
-@@ -101,7 +101,7 @@ static int spl_romapi_load_image_seekable(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		memset(&load, 0, sizeof(load));
--		load.bl_len = pagesize;
-+		spl_set_bl_len(&load, pagesize);
- 		load.read = spl_romapi_read_seekable;
- 		return spl_load_simple_fit(spl_image, &load, offset, header);
- 	} else if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
-@@ -109,7 +109,7 @@ static int spl_romapi_load_image_seekable(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		memset(&load, 0, sizeof(load));
--		load.bl_len = pagesize;
-+		spl_set_bl_len(&load, pagesize);
- 		load.read = spl_romapi_read_seekable;
- 
- 		ret = spl_load_imx_container(spl_image, &load, offset);
-@@ -334,7 +334,7 @@ static int spl_romapi_load_image_stream(struct spl_image_info *spl_image,
- 		ss.pagesize = pagesize;
- 
- 		memset(&load, 0, sizeof(load));
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spl_romapi_read_stream;
- 		load.priv = &ss;
- 
-@@ -358,7 +358,7 @@ static int spl_romapi_load_image_stream(struct spl_image_info *spl_image,
- 		printf("ROM download failure %d\n", imagesize);
- 
- 	memset(&load, 0, sizeof(load));
--	load.bl_len = 1;
-+	spl_set_bl_len(&load, 1);
- 	load.read = spl_ram_load_read;
- 
- 	if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER))
-diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunxi/spl_spi_sunxi.c
-index 5e7fba0c8e4..267cb0b1aba 100644
---- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
-+++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
-@@ -354,7 +354,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		debug("Found FIT image\n");
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spi_load_read;
- 		ret = spl_load_simple_fit(spl_image, &load,
- 					  load_offset, header);
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index e929f1bbae1..0bc57d5fedb 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -280,8 +280,15 @@ config SPL_BOARD_INIT
- 	  spl_board_init() from board_init_r(). This function should be
- 	  provided by the board.
- 
-+config SPL_LOAD_BLOCK
-+	bool
-+	help
-+	  Support loading images from block devices. This adds a bl_len member
-+	  to struct spl_load_info.
-+
- config SPL_BOOTROM_SUPPORT
- 	bool "Support returning to the BOOTROM"
-+	select SPL_LOAD_BLOCK if MACH_IMX
- 	help
- 	  Some platforms (e.g. the Rockchip RK3368) provide support in their
- 	  ROM for loading the next boot-stage after performing basic setup
-@@ -482,6 +489,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
- 		     ARCH_AT91 || ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
- 		     OMAP44XX || OMAP54XX || AM33XX || AM43XX || \
- 		     TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
-+	select SPL_LOAD_BLOCK if SPL_MMC
- 	help
- 	  Use sector number for specifying U-Boot location on MMC/SD in
- 	  raw mode.
-@@ -518,6 +526,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
- 
- config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
- 	bool "MMC Raw mode: by partition"
-+	select SPL_LOAD_BLOCK if SPL_MMC
- 	help
- 	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
- 
-@@ -678,6 +687,7 @@ config SPL_FS_SQUASHFS
- config SPL_FS_FAT
- 	bool "Support FAT filesystems"
- 	select FS_FAT
-+	select SPL_LOAD_BLOCK
- 	help
- 	  Enable support for FAT and VFAT filesystems with SPL. This
- 	  permits U-Boot (or Linux in Falcon mode) to be loaded from a FAT
-@@ -877,6 +887,7 @@ config SPL_MUSB_NEW
- 
- config SPL_NAND_SUPPORT
- 	bool "Support NAND flash"
-+	select SPL_LOAD_BLOCK
- 	help
- 	  Enable support for NAND (Negative AND) flash in SPL. NAND flash
- 	  can be used to allow SPL to load U-Boot from supported devices.
-@@ -1102,6 +1113,7 @@ config SYS_OS_BASE
- config SPL_FALCON_BOOT_MMCSD
- 	bool "Enable Falcon boot from MMC or SD media"
- 	depends on SPL_OS_BOOT && SPL_MMC
-+	select SPL_LOAD_BLOCK
- 	help
- 	  Select this if the Falcon mode OS image mode is on MMC or SD media.
- 
-@@ -1260,9 +1272,9 @@ config SPL_SATA_RAW_U_BOOT_SECTOR
- config SPL_NVME
- 	bool "NVM Express device support"
- 	depends on BLK
--	select HAVE_BLOCK_DEVICE
- 	select FS_LOADER
- 	select SPL_BLK_FS
-+	select SPL_LOAD_BLOCK
- 	help
- 	  This option enables support for NVM Express devices.
- 	  It supports basic functions of NVMe (read/write).
-diff --git a/common/spl/spl_blk_fs.c b/common/spl/spl_blk_fs.c
-index 4975ce4d6ec..53b8e1b11b4 100644
---- a/common/spl/spl_blk_fs.c
-+++ b/common/spl/spl_blk_fs.c
-@@ -87,7 +87,7 @@ int spl_blk_load_image(struct spl_image_info *spl_image,
- 
- 		debug("Found FIT\n");
- 		load.read = spl_fit_read;
--		load.bl_len = ARCH_DMA_MINALIGN;
-+		spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
- 		load.priv = &dev;
- 		dev.filename = filename;
- 
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index 8a2c4e3af49..a0c34eba48f 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -97,7 +97,7 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
- 
- 		debug("Found FIT\n");
- 		load.read = spl_fit_read;
--		load.bl_len = ARCH_DMA_MINALIGN;
-+		spl_set_bl_len(&load, ARCH_DMA_MINALIGN);
- 		load.priv = (void *)filename;
- 
- 		return spl_load_simple_fit(spl_image, &load, 0, header);
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 0df4e6d1484..872df0c0fe8 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -171,12 +171,12 @@ static int spl_fit_get_image_node(const struct spl_fit_info *ctx,
- 
- static int get_aligned_image_offset(struct spl_load_info *info, int offset)
- {
--	return ALIGN_DOWN(offset, info->bl_len);
-+	return ALIGN_DOWN(offset, spl_get_bl_len(info));
- }
- 
- static int get_aligned_image_overhead(struct spl_load_info *info, int offset)
- {
--	return offset & (info->bl_len - 1);
-+	return offset & (spl_get_bl_len(info) - 1);
- }
- 
- static int get_aligned_image_size(struct spl_load_info *info, int data_size,
-@@ -184,7 +184,7 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
- {
- 	data_size = data_size + get_aligned_image_overhead(info, offset);
- 
--	return ALIGN(data_size, info->bl_len);
-+	return ALIGN(data_size, spl_get_bl_len(info));
- }
- 
- /**
-diff --git a/common/spl/spl_imx_container.c b/common/spl/spl_imx_container.c
-index 7cd674f835f..b4ea9241d68 100644
---- a/common/spl/spl_imx_container.c
-+++ b/common/spl/spl_imx_container.c
-@@ -32,13 +32,13 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
- 	images = (struct boot_img_t *)((u8 *)container +
- 				       sizeof(struct container_hdr));
- 
--	if (!IS_ALIGNED(images[image_index].offset, info->bl_len)) {
-+	if (!IS_ALIGNED(images[image_index].offset, spl_get_bl_len(info))) {
- 		printf("%s: image%d offset not aligned to %u\n",
--		       __func__, image_index, info->bl_len);
-+		       __func__, image_index, spl_get_bl_len(info));
- 		return NULL;
- 	}
- 
--	size = ALIGN(images[image_index].size, info->bl_len);
-+	size = ALIGN(images[image_index].size, spl_get_bl_len(info));
- 	offset = images[image_index].offset + container_offset;
- 
- 	debug("%s: container: %p offset: %lu size: %lu\n", __func__,
-@@ -66,7 +66,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
- 	u16 length;
- 	int i, size, ret = 0;
- 
--	size = ALIGN(CONTAINER_HDR_ALIGNMENT, info->bl_len);
-+	size = ALIGN(CONTAINER_HDR_ALIGNMENT, spl_get_bl_len(info));
- 
- 	/*
- 	 * It will not override the ATF code, so safe to use it here,
-@@ -100,7 +100,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
- 	debug("Container length %u\n", length);
- 
- 	if (length > CONTAINER_HDR_ALIGNMENT) {
--		size = ALIGN(length, info->bl_len);
-+		size = ALIGN(length, spl_get_bl_len(info));
- 
- 		free(container);
- 		container = malloc(size);
 diff --git a/common/spl/spl_legacy.c b/common/spl/spl_legacy.c
-index 9189576b774..75d9d822337 100644
+index 75d9d822337..a561939b4f0 100644
 --- a/common/spl/spl_legacy.c
 +++ b/common/spl/spl_legacy.c
-@@ -139,9 +139,9 @@ int spl_load_legacy_img(struct spl_image_info *spl_image,
- 		lzma_len = LZMA_LEN;
+@@ -82,6 +82,43 @@ int spl_parse_legacy_header(struct spl_image_info *spl_image,
+ 	return 0;
+ }
  
- 		/* dataptr points to compressed payload  */
--		dataptr = ALIGN_DOWN(sizeof(*hdr), load->bl_len);
-+		dataptr = ALIGN_DOWN(sizeof(*hdr), spl_get_bl_len(load));
- 		overhead = sizeof(*hdr) - dataptr;
--		size = ALIGN(spl_image->size + overhead, load->bl_len);
-+		size = ALIGN(spl_image->size + overhead, spl_get_bl_len(load));
- 		dataptr += offset;
- 
- 		debug("LZMA: Decompressing %08lx to %08lx\n",
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index 8c4ffe743d5..91272c03d3f 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -108,7 +108,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
- 
- 		debug("Found FIT\n");
- 		load.priv = bd;
--		load.bl_len = bd->blksz;
-+		spl_set_bl_len(&load, bd->blksz);
- 		load.read = h_spl_load_read;
- 		ret = spl_load_simple_fit(spl_image, &load,
- 					  sector << bd->log2blksz, header);
-@@ -117,7 +117,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		load.priv = bd;
--		load.bl_len = bd->blksz;
-+		spl_set_bl_len(&load, bd->blksz);
- 		load.read = h_spl_load_read;
- 
- 		ret = spl_load_imx_container(spl_image, &load,
-diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index 45d7c5f6cfb..281211b7f24 100644
---- a/common/spl/spl_nand.c
-+++ b/common/spl/spl_nand.c
-@@ -90,7 +90,7 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
- 
- 		debug("Found FIT\n");
- 		load.priv = &offset;
--		load.bl_len = bl_len;
-+		spl_set_bl_len(&load, bl_len);
- 		load.read = spl_nand_fit_read;
- 		return spl_load_simple_fit(spl_image, &load, offset, header);
- 	} else if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
-@@ -98,7 +98,7 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		load.priv = &offset;
--		load.bl_len = bl_len;
-+		spl_set_bl_len(&load, bl_len);
- 		load.read = spl_nand_fit_read;
- 		return spl_load_imx_container(spl_image, &load, offset);
- 	} else if (IS_ENABLED(CONFIG_SPL_LEGACY_IMAGE_FORMAT) &&
-@@ -106,7 +106,7 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		debug("Found legacy image\n");
--		load.bl_len = IS_ENABLED(CONFIG_SPL_LZMA) ? bl_len : 1;
-+		spl_set_bl_len(&load, IS_ENABLED(CONFIG_SPL_LZMA) ? bl_len : 1);
- 		load.read = spl_nand_legacy_read;
- 
- 		return spl_load_legacy_img(spl_image, bootdev, &load, offset, header);
-diff --git a/common/spl/spl_net.c b/common/spl/spl_net.c
-index f01d4df8bc6..47994e28165 100644
---- a/common/spl/spl_net.c
-+++ b/common/spl/spl_net.c
-@@ -54,7 +54,7 @@ static int spl_net_load_image(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		debug("Found FIT\n");
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spl_net_load_read;
- 		rv = spl_load_simple_fit(spl_image, &load, 0, header);
- 	} else {
-diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
-index 236b0718283..aad230db4d3 100644
---- a/common/spl/spl_nor.c
-+++ b/common/spl/spl_nor.c
-@@ -49,7 +49,7 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 			int ret;
- 
- 			debug("Found FIT\n");
--			load.bl_len = 1;
-+			spl_set_bl_len(&load, 1);
- 			load.read = spl_nor_load_read;
- 
- 			ret = spl_load_simple_fit(spl_image, &load,
-@@ -97,7 +97,7 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- #ifdef CONFIG_SPL_LOAD_FIT
- 	if (image_get_magic(header) == FDT_MAGIC) {
- 		debug("Found FIT format U-Boot\n");
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spl_nor_load_read;
- 		return spl_load_simple_fit(spl_image, &load,
- 					   spl_nor_get_uboot_base(),
-@@ -106,7 +106,7 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- #endif
- 	if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
- 	    valid_container_hdr((void *)header)) {
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spl_nor_load_read;
- 		return spl_load_imx_container(spl_image, &load,
- 					      spl_nor_get_uboot_base());
-@@ -114,7 +114,7 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 
- 	/* Legacy image handling */
- 	if (IS_ENABLED(CONFIG_SPL_LEGACY_IMAGE_FORMAT)) {
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spl_nor_load_read;
- 		return spl_load_legacy_img(spl_image, bootdev, &load,
- 					   spl_nor_get_uboot_base(),
-diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
-index 4158ed1c32d..8aeda237be1 100644
---- a/common/spl/spl_ram.c
-+++ b/common/spl/spl_ram.c
-@@ -70,7 +70,7 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
- 		struct spl_load_info load;
- 
- 		debug("Found FIT\n");
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.read = spl_ram_load_read;
- 		ret = spl_load_simple_fit(spl_image, &load, 0, header);
- 	} else {
-diff --git a/common/spl/spl_semihosting.c b/common/spl/spl_semihosting.c
-index 24a3d9fd1c9..9b0610b8fc8 100644
---- a/common/spl/spl_semihosting.c
-+++ b/common/spl/spl_semihosting.c
-@@ -68,7 +68,7 @@ static int spl_smh_load_image(struct spl_image_info *spl_image,
- 
- 		debug("Found FIT\n");
- 		load.read = smh_fit_read;
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		load.priv = &fd;
- 
- 		ret = spl_load_simple_fit(spl_image, &load, 0, header);
-diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
-index 373caea322a..3e08ac7c1a2 100644
---- a/common/spl/spl_spi.c
-+++ b/common/spl/spl_spi.c
-@@ -152,7 +152,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 
- 			debug("Found FIT\n");
- 			load.priv = flash;
--			load.bl_len = 1;
-+			spl_set_bl_len(&load, 1);
- 			load.read = spl_spi_fit_read;
- 			err = spl_load_simple_fit(spl_image, &load,
- 						  payload_offs,
-@@ -162,7 +162,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 			struct spl_load_info load;
- 
- 			load.priv = flash;
--			load.bl_len = 1;
-+			spl_set_bl_len(&load, 1);
- 			load.read = spl_spi_fit_read;
- 
- 			err = spl_load_imx_container(spl_image, &load,
-diff --git a/common/spl/spl_ymodem.c b/common/spl/spl_ymodem.c
-index 3f92b9b0036..1faaa2c938d 100644
---- a/common/spl/spl_ymodem.c
-+++ b/common/spl/spl_ymodem.c
-@@ -135,7 +135,7 @@ int spl_ymodem_load_image(struct spl_image_info *spl_image,
- 
- 		debug("Found FIT\n");
- 		load.priv = (void *)&info;
--		load.bl_len = 1;
-+		spl_set_bl_len(&load, 1);
- 		info.buf = buf;
- 		info.image_read = BUF_SIZE;
- 		load.read = ymodem_read_fit;
-diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
-index 1b16b7eb452..ca2760c00d0 100644
---- a/drivers/usb/gadget/f_sdp.c
-+++ b/drivers/usb/gadget/f_sdp.c
-@@ -845,7 +845,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 
- 				debug("Found FIT\n");
- 				load.priv = header;
--				load.bl_len = 1;
-+				spl_set_bl_len(&load, 1);
- 				load.read = sdp_load_read;
- 				spl_load_simple_fit(spl_image, &load, 0,
- 						    header);
-@@ -858,7 +858,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
- 				struct spl_load_info load;
- 
- 				load.priv = header;
--				load.bl_len = 1;
-+				spl_set_bl_len(&load, 1);
- 				load.read = sdp_load_read;
- 				spl_load_imx_container(spl_image, &load, 0);
- 				return SDP_EXIT;
-diff --git a/include/spl.h b/include/spl.h
-index fec656d3018..03c5c5c66b4 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -304,9 +304,34 @@ struct spl_load_info {
- 	 */
- 	ulong (*read)(struct spl_load_info *load, ulong sector, ulong count,
- 		      void *buf);
-+#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
- 	int bl_len;
- };
- 
-+static inline int spl_get_bl_len(struct spl_load_info *info)
++int spl_load_legacy_lzma(struct spl_image_info *spl_image,
++			 struct spl_load_info *load, ulong offset)
 +{
-+	return info->bl_len;
-+}
++	SizeT lzma_len = LZMA_LEN;
++	void *src;
++	ulong dataptr, overhead, size;
++	int ret;
 +
-+static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
-+{
-+	info->bl_len = bl_len;
-+}
-+#else
-+};
++	/* dataptr points to compressed payload  */
++	dataptr = ALIGN_DOWN(sizeof(struct legacy_img_hdr),
++			     spl_get_bl_len(load));
++	overhead = sizeof(struct legacy_img_hdr) - dataptr;
++	size = ALIGN(spl_image->size + overhead, spl_get_bl_len(load));
++	dataptr += offset;
 +
-+static inline int spl_get_bl_len(struct spl_load_info *info)
-+{
-+	return 1;
-+}
++	debug("LZMA: Decompressing %08lx to %08lx\n",
++	      dataptr, spl_image->load_addr);
++	src = malloc(size);
++	if (!src) {
++		printf("Unable to allocate %d bytes for LZMA\n",
++		       spl_image->size);
++		return -ENOMEM;
++	}
 +
-+static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
-+{
-+	if (bl_len != 1)
-+		panic("CONFIG_SPL_LOAD_BLOCK not enabled");
++	load->read(load, dataptr, size, src);
++	ret = lzmaBuffToBuffDecompress(map_sysmem(spl_image->load_addr,
++						  spl_image->size), &lzma_len,
++				       src + overhead, spl_image->size);
++	if (ret) {
++		printf("LZMA decompression error: %d\n", ret);
++		return ret;
++	}
++
++	spl_image->size = lzma_len;
++	return 0;
 +}
-+#endif
 +
  /*
-  * We need to know the position of U-Boot in memory so we can jump to it. We
-  * allow any U-Boot binary to be used (u-boot.bin, u-boot-nodtb.bin,
-diff --git a/test/image/Kconfig b/test/image/Kconfig
-index 6f0bb81f835..45b6e8c52e6 100644
---- a/test/image/Kconfig
-+++ b/test/image/Kconfig
-@@ -52,6 +52,7 @@ config SPL_UT_LOAD_SPI
- config SPL_UT_LOAD_OS
- 	bool "Test loading from the host OS"
- 	depends on SANDBOX && SPL_LOAD_FIT
-+	select SPL_LOAD_BLOCK
- 	default y
- 	help
- 	  Smoke test to ensure that loading U-boot works in sandbox.
-diff --git a/test/image/spl_load.c b/test/image/spl_load.c
-index ab4c14d6491..35ceed67756 100644
---- a/test/image/spl_load.c
-+++ b/test/image/spl_load.c
-@@ -342,12 +342,11 @@ static int spl_test_image(struct unit_test_state *uts, const char *test_name,
- 		if (check_image_info(uts, &info_write, &info_read))
- 			return CMD_RET_FAILURE;
- 	} else {
--		struct spl_load_info load = {
--			.bl_len = 1,
--			.priv = img,
--			.read = spl_test_read,
--		};
-+		struct spl_load_info load;
+  * This function is added explicitly to avoid code size increase, when
+  * no compression method is enabled. The compiler will optimize the
+@@ -101,8 +138,6 @@ int spl_load_legacy_img(struct spl_image_info *spl_image,
+ 			struct spl_load_info *load, ulong offset,
+ 			struct legacy_img_hdr *hdr)
+ {
+-	__maybe_unused SizeT lzma_len;
+-	__maybe_unused void *src;
+ 	ulong dataptr;
+ 	int ret;
  
-+		spl_set_bl_len(&load, 1);
-+		load.priv = img;
-+		load.read = spl_test_read;
- 		if (type == IMX8)
- 			ut_assertok(spl_load_imx_container(&info_read, &load,
- 							   0));
-diff --git a/test/image/spl_load_os.c b/test/image/spl_load_os.c
-index f46df907c63..26228a8a4a9 100644
---- a/test/image/spl_load_os.c
-+++ b/test/image/spl_load_os.c
-@@ -51,7 +51,7 @@ static int spl_test_load(struct unit_test_state *uts)
- 	int fd;
+@@ -133,39 +168,9 @@ int spl_load_legacy_img(struct spl_image_info *spl_image,
+ 			   map_sysmem(spl_image->load_addr, spl_image->size));
+ 		break;
  
- 	memset(&load, '\0', sizeof(load));
--	load.bl_len = 512;
-+	spl_set_bl_len(&load, 512);
- 	load.read = read_fit_image;
+-	case IH_COMP_LZMA: {
+-		ulong overhead, size;
++	case IH_COMP_LZMA:
++		return spl_load_legacy_lzma(spl_image, load, offset);
  
- 	ret = sandbox_find_next_phase(fname, sizeof(fname), true);
+-		lzma_len = LZMA_LEN;
+-
+-		/* dataptr points to compressed payload  */
+-		dataptr = ALIGN_DOWN(sizeof(*hdr), spl_get_bl_len(load));
+-		overhead = sizeof(*hdr) - dataptr;
+-		size = ALIGN(spl_image->size + overhead, spl_get_bl_len(load));
+-		dataptr += offset;
+-
+-		debug("LZMA: Decompressing %08lx to %08lx\n",
+-		      dataptr, spl_image->load_addr);
+-		src = malloc(size);
+-		if (!src) {
+-			printf("Unable to allocate %d bytes for LZMA\n",
+-			       spl_image->size);
+-			return -ENOMEM;
+-		}
+-
+-		load->read(load, dataptr, size, src);
+-		ret = lzmaBuffToBuffDecompress(map_sysmem(spl_image->load_addr,
+-							  spl_image->size),
+-					       &lzma_len, src + overhead,
+-					       spl_image->size);
+-		if (ret) {
+-			printf("LZMA decompression error: %d\n", ret);
+-			return ret;
+-		}
+-
+-		spl_image->size = lzma_len;
+-		break;
+-	}
+ 	default:
+ 		debug("Compression method %s is not supported\n",
+ 		      genimg_get_comp_short_name(image_get_comp(hdr)));
+diff --git a/include/spl.h b/include/spl.h
+index 03c5c5c66b4..09521889014 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -407,6 +407,19 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ #define SPL_COPY_PAYLOAD_ONLY	1
+ #define SPL_FIT_FOUND		2
+ 
++/**
++ * spl_load_legacy_lzma() - Load an LZMA-compressed legacy image
++ * @spl_image:	Image description (already set up)
++ * @load:	Structure containing the information required to load data.
++ * @offset:	Pointer to image
++ *
++ * Load/decompress an LZMA-compressed legacy image from the device.
++ *
++ * Return: 0 on success, or a negative error on failure
++ */
++int spl_load_legacy_lzma(struct spl_image_info *spl_image,
++			 struct spl_load_info *load, ulong offset);
++
+ /**
+  * spl_load_legacy_img() - Loads a legacy image from a device.
+  * @spl_image:	Image description to set up
 -- 
 2.37.1
 
