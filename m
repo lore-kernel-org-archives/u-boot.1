@@ -4,40 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FE4C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E4EC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EDBF86FE5;
-	Wed,  8 Nov 2023 16:23:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ltts.com
+	by phobos.denx.de (Postfix) with ESMTP id BE60C871D4;
+	Wed,  8 Nov 2023 16:25:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="C0Fav5Dr";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23CF6871C1; Wed,  8 Nov 2023 16:23:06 +0100 (CET)
-Received: from esa2.ltts.com (unknown [14.140.155.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2E853871CD; Wed,  8 Nov 2023 16:25:30 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 890D5871DA
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:23:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC8A871D4
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:25:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=ltts.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: h1B6Pd+mJjMSJy0Go1a5yV1kRhTXOJlkmI9eGPLrJbQoqmI6w2xmisWZVWBZzYRk8Ehi56hFwV
- wAu2S1UmKgxw==
-Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa2.ltts.com with ESMTP; 08 Nov 2023 20:52:58 +0530
-From: Bhargav Raviprakash <bhargav.r@ltts.com>
-To: jh80.chung@samsung.com
-Cc: bhargav.r@ltts.com,
-	u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] driver: power: add support for TPS65224
-Date: Wed,  8 Nov 2023 20:52:55 +0530
-Message-Id: <20231108152255.142901-1-bhargav.r@ltts.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <053701da1145$9380ac30$ba820490$@samsung.com>
-References: <053701da1145$9380ac30$ba820490$@samsung.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
+ [209.85.214.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4B27D40C50
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 15:25:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699457127;
+ bh=kft3sf+nnK7VBnDZ+gJv9cjVk+9ntCpNUNzIWw1qMY8=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=C0Fav5DrCVlZd3DXK/8N5goDfSFjNR9W7LwTSMI0nKXfrAweR52SPpCYEQZUhhE+L
+ qD/EHQI4ya2C5dCl/KJJDcOlPUeOXlOgjX0RI3BdioOyrWB6V9A8T1m16veVGpWYw8
+ vjDd/H9HUc2JypuBHWjYnSCCxNEoKIGNVl97k9oX9+diGoHczYzhX+AcG/5mMHzPnL
+ 9TskHpEhUVeC6COvo7qpduy0Af4XgCU5mMoO2J21zVNIS1BJzInldBRLLbXWoxjpxh
+ 7VKfRS70WCKfX672ANbW1QLgOmK/WAXFo5nII3LrmDQ91Zorrrx4l33BbwLfmkB5QH
+ Ltk35cmH76G3A==
+Received: by mail-pl1-f197.google.com with SMTP id
+ d9443c01a7336-1cc3ad55c75so48159715ad.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:25:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699457126; x=1700061926;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kft3sf+nnK7VBnDZ+gJv9cjVk+9ntCpNUNzIWw1qMY8=;
+ b=Xv8oXphzEK0B78pXBITvXzOP+iQxo7zO1eqycvPGCbTNuqFH0E7Ue0LMy4Pn6NDx5D
+ dJXNzESEfUJT3VAzgqrdHcCORyymdzLlsZ11/WBbHE1d/jtLIw4jbmpACoNG1WuN3UDr
+ T4P7DSIo3OeiZ0eXx2oGlDoCB92JylQ0cnCJBPRcwFyMmvmdlFAIujqqlOUNYskgl7s+
+ BmgCwgpdW9A/d1BBO4OfKE9X1TpBeDephU5IBWP7wiZ4a8UxawLEWCt6QCBrJ/YmjWGz
+ tkA4dfZeZ9ctkKLwYStNv/jeH6jfsYWL9r8O1kQ2hFSLgwaKXoU1s0WIym3QmoD/a/1C
+ qjig==
+X-Gm-Message-State: AOJu0YzetR7KCydBQCsgzuDT1ZJc+MzyMSSKtTanvdIQmgoNNrSgOxjm
+ r6oPwdGySGUdAx1ZoRZ8XoyDeFsjCxz33i8pttuWDQ6kD3af6cnQ2jOM7A7ROTMUGF9GpYQRs/B
+ cGuePA6zSiKzmpiezAE01NBou07lWtfE=
+X-Received: by 2002:a17:902:e752:b0:1c6:2ae1:dc28 with SMTP id
+ p18-20020a170902e75200b001c62ae1dc28mr2084286plf.36.1699457125802; 
+ Wed, 08 Nov 2023 07:25:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHVxxvj2Vg1Hb46rAWaaeE9OLbxiG0Bdq2iGrGUbYXbRhli3+gQbxb3BYkDroEiHny1ZfIl2Q==
+X-Received: by 2002:a17:902:e752:b0:1c6:2ae1:dc28 with SMTP id
+ p18-20020a170902e75200b001c62ae1dc28mr2084261plf.36.1699457125405; 
+ Wed, 08 Nov 2023 07:25:25 -0800 (PST)
+Received: from [172.20.5.50] ([4.28.11.157]) by smtp.gmail.com with ESMTPSA id
+ z19-20020a1709028f9300b001c9c47d6cb9sm1899535plo.99.2023.11.08.07.25.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Nov 2023 07:25:24 -0800 (PST)
+Message-ID: <d39c3c18-99e7-460b-97b8-9f84f523cf11@canonical.com>
+Date: Wed, 8 Nov 2023 07:25:22 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+To: Tom Rini <trini@konsulko.com>
+Cc: Conor Dooley <conor@kernel.org>, Rob Herring <robh@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, palmer@dabbelt.com
+References: <20231107193025.GN6601@bill-the-cat>
+ <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
+ <20231107221023.GS6601@bill-the-cat>
+ <20231107-flyaway-arguable-0bccc778b256@spud>
+ <20231107223837.GU6601@bill-the-cat>
+ <20231107-audible-undoing-293506af3890@spud>
+ <20231107232305.GW6601@bill-the-cat>
+ <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
+ <20231108003449.GF6601@bill-the-cat>
+ <91ae75c2-a0d7-4835-8306-777c4d9afdd9@canonical.com>
+ <20231108143735.GO6601@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231108143735.GO6601@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,273 +121,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Hi Bhargav,
+On 11/8/23 06:37, Tom Rini wrote:
+> On Wed, Nov 08, 2023 at 06:23:37AM -0800, Heinrich Schuchardt wrote:
+>> On 11/7/23 16:34, Tom Rini wrote:
+>>> On Wed, Nov 08, 2023 at 12:29:03AM +0000, Conor Dooley wrote:
+>>>> On Tue, Nov 07, 2023 at 06:23:05PM -0500, Tom Rini wrote:
+>>> [snip]
+>>>>> Thanks. Setting aside Simon's follow-up, this is what I was looking for.
+>>>>> We might have to wait for Heinrich to return from the conference to have
+>>>>> time to look at how to utilize the above and see what we can do from
+>>>>> there.
+>>>>
+>>>> I did read that, but I don't think most of it is relevant to the binding
+>>>> itself. His five things were:
+>>>> | - U-Boot models hardware (and other things) as devices in driver model [1]
+>>>>
+>>>> This I think should be satisfied. The Zkr CSR is a property of the CPU,
+>>>> and shouldn't have its own DT node IMO. Is it problematic for U-Boot to
+>>>> populate multiple devices for its driver model based on one DT node?
+>>
+>> Devices in U-Boot are bound on the basis of a compatible string. All RISC-V
+>> CPU nodes have a compatible string 'riscv' but that does not provide any
+>> information about the existence of the Zkr extension. That information is in
+>> the 'riscv,isa-extensions' property of the cpu nodes (see
+>> Documentation/devicetree/bindings/riscv/cpus.yaml).
+>>
+>>>> I know in Linux that I can create devices using something like
+>>>> platform_device_register(), does U-Boot have a similar facility?
+>>
+>> This is what the U_BOOT_DRVINFO() macro in my driver does and which Simon
+>> discourages.
 > 
-> On Mon, 6 Nov 2023 at 10:11, Bhargav Raviprakash <bhargav.r@ltts.com> wrote:
-> >
-> > Added support for PMIC TPS65224. Includes driver for pmic,
-> > and disabling Watchdog.
-> >
-> > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
-> > ---
-> >  drivers/power/pmic/Kconfig    |   6 ++
-> >  drivers/power/pmic/Makefile   |   1 +
-> >  drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
-> >  include/power/tps65224.h      |  57 ++++++++++++++
-> >  4 files changed, 205 insertions(+)
-> >  create mode 100644 drivers/power/pmic/tps65224.c
-> >  create mode 100644 include/power/tps65224.h
-> >
-> > diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> > index 4a6f0ce093..b06bd31823 100644
-> > --- a/drivers/power/pmic/Kconfig
-> > +++ b/drivers/power/pmic/Kconfig
-> > @@ -378,6 +378,12 @@ config PMIC_TPS65941
-> >         The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
-> >         This driver binds the pmic children.
-> >
-> > +config PMIC_TPS65224
-> > +       bool "Enable driver for Texas Instruments TPS65224 PMIC"
-> > +       help
-> > +       The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
-> > +       This driver binds the pmic children.
-> > +
-> >  config PMIC_TPS65219
-> >         bool "Enable driver for Texas Instruments TPS65219 PMIC"
-> >         depends on DM_PMIC
-> > diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-> > index 0b3b3d62d0..cec16e57d3 100644
-> > --- a/drivers/power/pmic/Makefile
-> > +++ b/drivers/power/pmic/Makefile
-> > @@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
-> >  obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
-> >  obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
-> >  obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
-> > +obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
-> >  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
-> >
-> >  ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
-> > diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
-> > new file mode 100644
-> > index 0000000000..33395f6edf
-> > --- /dev/null
-> > +++ b/drivers/power/pmic/tps65224.c
-> > @@ -0,0 +1,141 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-> > + */
-> > +#include <fdtdec.h>
-> > +#include <errno.h>
-> > +#include <dm.h>
-> > +#include <i2c.h>
-> > +#include <log.h>
-> > +#include <power/pmic.h>
-> > +#include <power/regulator.h>
-> > +#include <power/tps65224.h>
-> > +#include <dm/device.h>
-> > +
-> > +static const struct pmic_child_info pmic_children_info[] = {
-> > +       { .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
-> > +       { .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
-> > +       { },
-> > +};
-> > +
-> > +static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
-> > +                         int len)
-> > +{
-> > +       if (dm_i2c_write(dev, reg, buff, len)) {
-> > +               pr_err("write error to device: %p register: %#x!\n", dev, reg);
-> > +               return -EIO;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-> > +{
-> > +       if (dm_i2c_read(dev, reg, buff, len)) {
-> > +               pr_err("read error from device: %p register: %#x!\n", dev, reg);
-> > +               return -EIO;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int tps65224_bind(struct udevice *dev)
-> > +{
-> > +       ofnode regulators_node;
-> > +       int children;
-> > +
-> > +       if (dev->driver_data == TPS65224_WD)
-> > +               return 0;
-> > +
-> > +       regulators_node = dev_read_subnode(dev, "regulators");
-> > +       if (!ofnode_valid(regulators_node)) {
-> > +               debug("%s: %s regulators subnode not found!\n", __func__,
-> > +                     dev->name);
-> > +               return -ENXIO;
-> > +       }
-> > +
-> > +       debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
-> > +
-> > +       children = pmic_bind_children(dev, regulators_node, pmic_children_info);
-> > +       if (!children)
-> > +               printf("%s: %s - no child found\n", __func__, dev->name);
-> > +
-> > +       /* Probe all the child devices */
+> My current thoughts are that in this case we could use U_BOOT_DRVINFO()
+> like today and then have riscv_zkr_probe() be what checks the
+> riscv,isa-extensions property for an appropriate match? This would mean
+> we don't need any new nodes/compatibles/etc, and possibly not need any
+> bootph- properties added either? I assume we don't need the RNG so early
+> as for that to be an issue.
 > 
-> bind, not probe
-> 
-> > +       return dm_scan_fdt_dev(dev);
-> > +}
-> > +
-> > +static int stop_watchdog(struct udevice *wd_i2c_dev)
-> > +{
-> > +       int ret;
-> > +
-> > +       /* Maintain WD long window */
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret &= ~TPS65224_WD_PWRHOLD_MASK;
-> > +       ret |= TPS65224_WD_PWRHOLD_MASK;
-> > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
-> > +       if (ret) {
-> > +               debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read back i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       /* Disable WD */
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret &= ~TPS65224_WD_EN_MASK;
-> > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
-> > +       if (ret) {
-> > +               debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-> > +       if (ret < 0) {
-> > +               debug("failed to read back i2c reg (%d)\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int tps65224_probe(struct udevice *dev)
-> > +{
-> > +       if (dev->driver_data == TPS65224_WD)
-> > +               return stop_watchdog(dev);
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static struct dm_pmic_ops tps65224_ops = {
-> > +       .read = tps65224_read,
-> > +       .write = tps65224_write,
-> > +};
-> > +
-> > +static const struct udevice_id tps65224_ids[] = {
-> > +       { .compatible = "ti,tps65224", .data = TPS65224 },
-> > +       { .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
-> > +       { }
-> > +};
-> > +
-> > +U_BOOT_DRIVER(pmic_tps65224) = {
-> > +       .name = "tps65224_pmic",
-> > +       .id = UCLASS_PMIC,
-> > +       .of_match = tps65224_ids,
-> > +       .bind = tps65224_bind,
-> > +       .probe = tps65224_probe,
-> > +       .ops = &tps65224_ops,
-> > +};
-> > diff --git a/include/power/tps65224.h b/include/power/tps65224.h
-> > new file mode 100644
-> > index 0000000000..24e91b6a67
-> > --- /dev/null
-> > +++ b/include/power/tps65224.h
-> > @@ -0,0 +1,57 @@
-> > +/* SPDX-License-Identifier: GPL-2.0+ */
-> > +/*
-> > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-> > + *
-> > + */
-> > +#ifndef _POWER_TPS65224_H_
-> > +#define _POWER_TPS65224_H_
-> > +
-> > +#define TPS65224                          0x0
-> > +#define TPS65224_WD                       0x20
-> > +
-> > +/* I2C device address for pmic tps65224 */
-> > +#define TPS65224_I2C_ADDR                (0x12 >> 1)
-> > +#define TPS65224_LDO_NUM                  3
-> > +#define TPS65224_BUCK_NUM                 4
-> > +
-> > +/* Drivers name */
-> > +#define TPS65224_LDO_DRIVER              "tps65224_ldo"
-> > +#define TPS65224_BUCK_DRIVER             "tps65224_buck"
-> > +
-> > +#define TPS65224_BUCK_VOLT_MASK           0xFF
-> > +#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
-> > +#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
-> > +#define TPS65224_BUCK_VOLT_MAX            3300000
-> > +#define TPS65224_BUCK_MODE_MASK           0x1
-> > +
-> > +#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
-> > +#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
-> > +#define TPS65224_LDO_VOLT_MIN_HEX         0x4
-> > +#define TPS65224_LDO1_VOLT_MAX            3300000
-> > +#define TPS65224_LDO23_VOLT_MAX           3400000
-> > +#define TPS65224_LDO_MODE_MASK            0x1
-> > +#define TPS65224_LDO_BYPASS_EN            0x80
-> > +#define TP65224_BUCK_CONF_SLEW_MASK       0x3
-> > +
-> > +/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
-> > +#define TPS65224_LDO123_BYP_CONFIG        7
-> > +
-> > +#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
-> > +#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
-> > +#define TPS65224_LDO1_VOLT_MIN            1200000
-> > +#define TPS65224_LDO23_VOLT_MIN           600000
-> > +#define TPS65224_LDO4_VOLT_MIN            1200000
-> > +#define TPS65224_LDO1_VSET_MIN            0x0C
-> > +#define TPS65224_LDO23_VSET_MIN           0x00
-> > +#define TPS65224_LDO123_VSET_MIN          0x0
-> > +#define TPS65224_LDO1_VSET_MAX            0x36
-> > +#define TPS65224_LDO23_VSET_MAX           0x38
-> > +#define TPS65224_LDO123_STEP              50000
-> > +#define TPS65224_LDO4_STEP                25000
-> > +
-> > +#define TPS65224_WD_MODE_REG              0x406
-> > +#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
-> > +#define TPS65224_WD_THR_CFG               0x409
-> > +#define TPS65224_WD_EN_MASK               BIT(6)
-> > +
-> > +#endif // _POWER_TPS65224_H_
-> > --
-> > 2.25.1
-> >
-> 
-> Regards,
-> Simon
 
-Thanks for pointing it out! We will correct it.
+The presence of the Zkr extension in the device-tree 
+'riscv,isa-extensions' property does not indicate if the machine mode 
+firmware has enabled access in supervisor mode via the mseccfg.sseed 
+flag. This is why my driver tries to read the seed register and checks 
+if an exception occurs.
 
-Regards,
-Bhargav
+Additionally checking the device-tree would increase code size. Is it 
+really needed?
+
+We may have multiple RNG drivers enabled on the same device, e.g. TPM, 
+Zkr, virtio-rng. In several code locations we try to use the first RNG 
+device (not the first successfully probed RNG device). This is why
+
+[PATCH 1/1] rng: detect RISC-V Zkr RNG device in bind method
+https://lore.kernel.org/u-boot/20231104065107.23623-1-heinrich.schuchardt@canonical.com/
+
+moves the detection from probe() to bind(). The patch further corrects 
+the return code if the RNG device is not available.
+
+Best regards
+
+Heinrich
+
