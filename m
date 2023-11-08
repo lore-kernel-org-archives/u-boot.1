@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A05BC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:23:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74030C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E7AF8762A;
-	Wed,  8 Nov 2023 05:23:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1105874E9;
+	Wed,  8 Nov 2023 05:24:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="URvCcOwZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YxwNpleW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0660287535; Wed,  8 Nov 2023 05:23:51 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id ADE98874E9; Wed,  8 Nov 2023 05:24:27 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 130F08762A
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:23:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86C948749D
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:24:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-53d8320f0easo10672065a12.3
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:23:47 -0800 (PST)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso79671067b3.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:24:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699417426; x=1700022226; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699417464; x=1700022264; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8dY4t7KFZ7P0ZfVvvEfCNpLnv3a8Kf5rRmGki3o+uKY=;
- b=URvCcOwZ8l5eUnsPQToZwySguJC9zMVZxkW5Rt0Zb8l+6lvauIQSqnNaA7rYZSPM4a
- WZW8SK0i3XrBTCaeWAEWAsfG6qrxHfbBG2mOi9llX1HHCP6nQrCLx2ID09YKUno+CTi3
- UpHwQb/EXu9fetaeLAJvj1tGyHOn1fd9yvQeI=
+ bh=StGKYMJKqA6tE5H+ea2isZXsW0DTOern8E028su9Rvk=;
+ b=YxwNpleWivu+imL4nSXoda8vo3RLdpw+ZY4MifiUivpCkMgz2jaBbQ8ASD8zBRQfvp
+ s1BKP4hHt19tPMHVsx0OXcc4vyqzlDB0vAo+tppEd1791M9PK2l/1ShS56yl0I5jgiet
+ 0HhEiobzseyABWtm9GsimYtMioh4PF+f4wqJw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699417426; x=1700022226;
+ d=1e100.net; s=20230601; t=1699417464; x=1700022264;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8dY4t7KFZ7P0ZfVvvEfCNpLnv3a8Kf5rRmGki3o+uKY=;
- b=HuAtvwBpymDLtJxy29pHgMpKLSBqZbgsA1ZI2FaHk/fXhksIqqxFX7sZ/QT7VjpDnK
- fWq0ld9tvF1kQHQeA/UrUD1W/MGpPGjE3Ulp5/L63d1B06elUEJDlyeiY24z7OUkXyoP
- anTVsU02krWncltwMQDJgjnrVHln2r+SKop+nGY06b5OlLRfF8DU2mhZNwe2UC8ihz1L
- 0Q/lDrC4AUpY2emIDuAdl2SQhhxl3Cxo4F46xse/vLVqh/2rh0wowU+OiQvSNBZAm05L
- O0F9StxLUaXzgNLVXxibfUZBxEe48sIsRJNpq0O2i9yCpnqRIL+D23N989+wJgo3Sx6w
- Vk0w==
-X-Gm-Message-State: AOJu0Yx1iD3aUEfK0f/xd7wwl7EWOWhkjNzfOCbZ3ML75Orv7p/rWBMF
- YMOiqCPdGiUmZtr8TOvRuKHG0iMx34M+Bbv6b3LTwQ==
-X-Google-Smtp-Source: AGHT+IE5pjn95WoeejmJhXShxrc4s/f2GKcOpTmFjbJIUlAzvHVD31rjPOyD25Y1mbZVhLzDm+/W6eSXvR06Sb7rPpw=
-X-Received: by 2002:a50:d081:0:b0:544:b0f4:f13 with SMTP id
- v1-20020a50d081000000b00544b0f40f13mr500278edd.23.1699417426459; Tue, 07 Nov
- 2023 20:23:46 -0800 (PST)
+ bh=StGKYMJKqA6tE5H+ea2isZXsW0DTOern8E028su9Rvk=;
+ b=e3PbKjEw5QOSQjf9BMAMD/R+0pq+cp8NMkh9xgO+KV3lJUzLe8IWD/1ocuJ/Su+a6k
+ 4VUV9zVMmUNq99T82Aup7hMCUERxMNf3o7xSL8okV8C6tDlYGzspYdPgIUWbn9WHvJXc
+ kfVVjSHs6RJDj1Qit85+AAOsB65XT0B8DZ8YhWEmJYjmb9b+/IN8f12Wn4PLqGtoppRk
+ HQFME4R4ct9VAwhZmH8pRzqDsVpGvgHyQZqWUh8fnmV9ZgVmKlY8IVpUX963qe1zPFQf
+ MXfaiOzl7NCrXXC6puZCItDaZoUeFemckRKUIEPmkTdUZ6wdqSmIuVZjKGTJQiFf9XnT
+ u7uw==
+X-Gm-Message-State: AOJu0YyiJXV4II3jCNc42vknPdVV8qgoeXVnKP5ZddCHfsT+tyui0Wo8
+ 3lQgci/yApbu/BRN0Zy3S1z8Y34ES9sr1lzZzkJXjw==
+X-Google-Smtp-Source: AGHT+IFJvPSBcRYSPzqTkoHbNdfCVAUSHjnnCNw/MdR+swqP2WJFtIAhXw8GKrbsuyeheWHbCuzFe0W5egvGMkmdyGs=
+X-Received: by 2002:a0d:d904:0:b0:5a7:ba17:15ac with SMTP id
+ b4-20020a0dd904000000b005a7ba1715acmr719184ywe.41.1699417463879; Tue, 07 Nov
+ 2023 20:24:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-11-seanga2@gmail.com>
-In-Reply-To: <20231106022603.3405551-11-seanga2@gmail.com>
+ <20231106022603.3405551-7-seanga2@gmail.com>
+In-Reply-To: <20231106022603.3405551-7-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 21:23:33 -0700
-Message-ID: <CAPnjgZ2ym0Nniq1aCjop14ZAn=T7XatwkvD1itXHR2d85p_=1w@mail.gmail.com>
-Subject: Re: [PATCH v6 10/25] spl: Only support bl_len when we have to
+Date: Tue, 7 Nov 2023 21:23:38 -0700
+Message-ID: <CAPnjgZ3Zja4vqdy=DKwEv42bkhqP=O8OwWzVCBg=RSYb6hCgBQ@mail.gmail.com>
+Subject: Re: [PATCH v6 06/25] spl: Remove dev from spl_load_info
 To: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -85,24 +85,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sean,
+
 On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Aligning addresses and sizes causes overhead which is unnecessary when we
-> are not loading from block devices. Remove bl_len when it is not needed.
->
-> For example, on iot2050 we save 144 bytes with this patch (once the rest of
-> this series is applied):
->
-> add/remove: 0/0 grow/shrink: 0/3 up/down: 0/-144 (-144)
-> Function                                     old     new   delta
-> spl_load_simple_fit                          920     904     -16
-> load_simple_fit                              496     444     -52
-> spl_spi_load_image                           384     308     -76
-> Total: Before=87431, After=87287, chg -0.16%
->
-> We use panic() instead of BUILD_BUG_ON in spl_set_bl_len because we still
-> need to be able to compile it for things like mmc_load_image_raw_sector,
-> even if that function will not be used.
+> dev and priv server the same purpose, and are never set at the same time.
+
+serve
+
+> Remove dev and convert all users to priv. While we're at it, reorder bl_len
+> to be last for better alignment.
+
+It's a bit unfortunate to drop the device, isn't it? But then, as
+before, this is self-contained so Is suppose it doesn't matter what we
+store.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
+
+
+
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
@@ -110,28 +114,134 @@ On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
 > Changes in v6:
 > - New
 >
->  arch/arm/mach-imx/spl_imx_romapi.c  |  8 ++++----
->  arch/arm/mach-sunxi/spl_spi_sunxi.c |  2 +-
->  common/spl/Kconfig                  | 14 +++++++++++++-
->  common/spl/spl_blk_fs.c             |  2 +-
->  common/spl/spl_fat.c                |  2 +-
->  common/spl/spl_fit.c                |  6 +++---
->  common/spl/spl_imx_container.c      | 10 +++++-----
->  common/spl/spl_legacy.c             |  4 ++--
->  common/spl/spl_mmc.c                |  4 ++--
->  common/spl/spl_nand.c               |  6 +++---
->  common/spl/spl_net.c                |  2 +-
->  common/spl/spl_nor.c                |  8 ++++----
->  common/spl/spl_ram.c                |  2 +-
->  common/spl/spl_semihosting.c        |  2 +-
->  common/spl/spl_spi.c                |  4 ++--
->  common/spl/spl_ymodem.c             |  2 +-
->  drivers/usb/gadget/f_sdp.c          |  4 ++--
->  include/spl.h                       | 25 +++++++++++++++++++++++++
->  test/image/Kconfig                  |  1 +
->  test/image/spl_load.c               |  9 ++++-----
->  test/image/spl_load_os.c            |  2 +-
->  21 files changed, 78 insertions(+), 41 deletions(-)
+>  common/spl/spl_mmc.c       | 6 +++---
+>  common/spl/spl_spi.c       | 6 +++---
+>  drivers/usb/gadget/f_sdp.c | 6 +++---
+>  include/spl.h              | 4 +---
+>  4 files changed, 10 insertions(+), 12 deletions(-)
 >
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+> index 6d9137c32e0..3d7551a7dae 100644
+> --- a/common/spl/spl_mmc.c
+> +++ b/common/spl/spl_mmc.c
+> @@ -65,7 +65,7 @@ static int mmc_load_legacy(struct spl_image_info *spl_image,
+>  static ulong h_spl_load_read(struct spl_load_info *load, ulong sector,
+>                              ulong count, void *buf)
+>  {
+> -       struct mmc *mmc = load->dev;
+> +       struct mmc *mmc = load->priv;
+>
+>         return blk_dread(mmc_get_blk_desc(mmc), sector, count, buf);
+>  }
+> @@ -105,7 +105,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
+>                 struct spl_load_info load;
+>
+>                 debug("Found FIT\n");
+> -               load.dev = mmc;
+> +               load.priv = mmc;
+>                 load.filename = NULL;
+>                 load.bl_len = mmc->read_bl_len;
+>                 load.read = h_spl_load_read;
+> @@ -114,7 +114,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
+>                    valid_container_hdr((void *)header)) {
+>                 struct spl_load_info load;
+>
+> -               load.dev = mmc;
+> +               load.priv = mmc;
+>                 load.filename = NULL;
+>                 load.bl_len = mmc->read_bl_len;
+>                 load.read = h_spl_load_read;
+> diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+> index d83d70f2f33..af7a28e7c25 100644
+> --- a/common/spl/spl_spi.c
+> +++ b/common/spl/spl_spi.c
+> @@ -59,7 +59,7 @@ static int spi_load_image_os(struct spl_image_info *spl_image,
+>  static ulong spl_spi_fit_read(struct spl_load_info *load, ulong sector,
+>                               ulong count, void *buf)
+>  {
+> -       struct spi_flash *flash = load->dev;
+> +       struct spi_flash *flash = load->priv;
+>         ulong ret;
+>
+>         ret = spi_flash_read(flash, sector, count, buf);
+> @@ -151,7 +151,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
+>                         struct spl_load_info load;
+>
+>                         debug("Found FIT\n");
+> -                       load.dev = flash;
+> +                       load.priv = flash;
+>                         load.filename = NULL;
+>                         load.bl_len = 1;
+>                         load.read = spl_spi_fit_read;
+> @@ -162,7 +162,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
+>                            valid_container_hdr((void *)header)) {
+>                         struct spl_load_info load;
+>
+> -                       load.dev = flash;
+> +                       load.priv = flash;
+>                         load.filename = NULL;
+>                         load.bl_len = 1;
+>                         load.read = spl_spi_fit_read;
+> diff --git a/drivers/usb/gadget/f_sdp.c b/drivers/usb/gadget/f_sdp.c
+> index ee9384fb37e..1b16b7eb452 100644
+> --- a/drivers/usb/gadget/f_sdp.c
+> +++ b/drivers/usb/gadget/f_sdp.c
+> @@ -744,7 +744,7 @@ static ulong sdp_load_read(struct spl_load_info *load, ulong sector,
+>  {
+>         debug("%s: sector %lx, count %lx, buf %lx\n",
+>               __func__, sector, count, (ulong)buf);
+> -       memcpy(buf, (void *)(load->dev + sector), count);
+> +       memcpy(buf, (void *)(load->priv + sector), count);
+>         return count;
+>  }
+>
+> @@ -844,7 +844,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
+>                                 struct spl_load_info load;
+>
+>                                 debug("Found FIT\n");
+> -                               load.dev = header;
+> +                               load.priv = header;
+>                                 load.bl_len = 1;
+>                                 load.read = sdp_load_read;
+>                                 spl_load_simple_fit(spl_image, &load, 0,
+> @@ -857,7 +857,7 @@ static int sdp_handle_in_ep(struct spl_image_info *spl_image,
+>                             valid_container_hdr((void *)header)) {
+>                                 struct spl_load_info load;
+>
+> -                               load.dev = header;
+> +                               load.priv = header;
+>                                 load.bl_len = 1;
+>                                 load.read = sdp_load_read;
+>                                 spl_load_imx_container(spl_image, &load, 0);
+> diff --git a/include/spl.h b/include/spl.h
+> index 8ff20adc28e..951e136b9ea 100644
+> --- a/include/spl.h
+> +++ b/include/spl.h
+> @@ -285,16 +285,13 @@ static inline void *spl_image_fdt_addr(struct spl_image_info *info)
+>  /**
+>   * Information required to load data from a device
+>   *
+> - * @dev: Pointer to the device, e.g. struct mmc *
+>   * @priv: Private data for the device
+>   * @bl_len: Block length for reading in bytes
+>   * @filename: Name of the fit image file.
+>   * @read: Function to call to read from the device
+>   */
+>  struct spl_load_info {
+> -       void *dev;
+>         void *priv;
+> -       int bl_len;
+>         const char *filename;
+>         /**
+>          * read() - Read from device
+> @@ -307,6 +304,7 @@ struct spl_load_info {
+>          */
+>         ulong (*read)(struct spl_load_info *load, ulong sector, ulong count,
+>                       void *buf);
+> +       int bl_len;
+>  };
+>
+>  /*
+> --
+> 2.37.1
+>
