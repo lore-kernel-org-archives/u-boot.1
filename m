@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F13C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B654C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 04:25:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B22DF8768F;
-	Wed,  8 Nov 2023 05:25:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C2081876C4;
+	Wed,  8 Nov 2023 05:25:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gf/Qfr/Q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VqbOzddJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F1A2874E9; Wed,  8 Nov 2023 05:25:01 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 5025A874E9; Wed,  8 Nov 2023 05:25:22 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79DCD876F1
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:24:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1450876E1
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 05:25:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5a81ab75f21so77624067b3.2
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:24:54 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5b499b18b28so77938517b3.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 20:25:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699417493; x=1700022293; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699417515; x=1700022315; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5d8HGAcqOv+7OEPX0W8cunmzxXC5UVMG8tdQ43T4fIA=;
- b=gf/Qfr/QNXTF/peggjJaZ9RyBxcid3eomOEGhGEgehMK7SamKdJZb+0iTNSXIsGPau
- vtJFODYHdFa+72kSlf1sZi+OPNrFR7U6QRC+5FE1TNavEYiwnACdhSUBsQ1xm/eYL8b2
- Z6KnG9f2yM82IN3cBOy++cAhmnpuQk6gCxj2o=
+ bh=2K9UKzgtev9af21ReQZy8t7FrL6Qis6SgWGKdRXGrVI=;
+ b=VqbOzddJw+Kus7sYQoJqriQyMR869gkQcxXi3lye/6Zzvc8FzisUlC9b2BFbYd4gZ3
+ fofzfZ7BmoVfcNJ9Ktk/GSmPoa8NKq56Oqj1XuV3e3XZZ3JK+Km6rmDOpY0/LDGgQjtz
+ sE0ylzeIJOhWyygZyQ/Q/6idDl2LCcpO26ctI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699417493; x=1700022293;
+ d=1e100.net; s=20230601; t=1699417515; x=1700022315;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5d8HGAcqOv+7OEPX0W8cunmzxXC5UVMG8tdQ43T4fIA=;
- b=KzEwxwD9/gel2xe+52nLwVJewqMl/uBiMFKjSeYVptDYMG0ns2DEZ1pLNThsRSbCq7
- 0GVeE7GuyyHGlVK+rm8ix3aO3af/Ey1O+gl2HOutZzYZ7Md2oAgOE9C7yrShVLt/8IQQ
- QfE/2sw1RccuNTD0xE8RTnGpNAkR2trut8C9hCtKf19rzR3vby7iO/SG1N39yl0dHTAN
- mh9FBE5Nlf6eL7rKOeQQJ+3SaTCLanVmNeoDbJGPDvR8IAd+Om6Wjw7xOCITlz9rSN0A
- B5e77i/+c9zXQ4MSs7MiN89bRVMLibItSOSvcioE4C0Q6D03RagZSD9lURwmkQPtTOOi
- vR5Q==
-X-Gm-Message-State: AOJu0YyxHUyVItGj+jumuu/geuoHsp6Zovl0RJn4lWYL7WTU1L6P1ylp
- 3wRXo/QUjtKCalRiXS+vLWNfTPHJwZf9v5gvdbGgqA==
-X-Google-Smtp-Source: AGHT+IHNWkAlDVfK7NnsKQm0z8o5NAFMi8krL30hAwBPswAttLUKFNkfZSXP+q+lEm6KLnVxwFB5Ecj8/1Y5XveItI4=
-X-Received: by 2002:a0d:cd46:0:b0:5a1:d352:9fe1 with SMTP id
- p67-20020a0dcd46000000b005a1d3529fe1mr681080ywd.42.1699417493005; Tue, 07 Nov
- 2023 20:24:53 -0800 (PST)
+ bh=2K9UKzgtev9af21ReQZy8t7FrL6Qis6SgWGKdRXGrVI=;
+ b=ei+bo8F2x6MmZFjVwONLvr52gxGofs21HjH62OfV752kd/oUzTznLAEtFFMC+DHy9Z
+ o+LdTpdW97lIYKLhzN5cW6o+MBxt/yMcV7gAFcZZ6dQHgdIIODCxvTjW8kBH1JPyurIu
+ /kOZ0ytluayAVttI4SB31slezNkBqNUyY+uOYFgb/Te3eaed/kjGdaLoOxq7ovnLyyxK
+ nqcKlWfpMC7SQLOBUquZ+w3FRWgXml39oBqnts60D5vIIQLq9tN01oZGxMuuADSzuoVi
+ oA3hIQayGkQYHqTJQxUNDj0WvRFEUMrlHwrUtNyv6Lj/qE9KXqCxp3rXQ84JaGRTbx9t
+ Bcjw==
+X-Gm-Message-State: AOJu0YyHuzeSbMbi6SgiEVsXSy9iMcxaEFONe//V5Rgmbuqx10LYohim
+ wuNX3I7TIlWmJsbVMNTGsHRWyxtHTUKgeXSgjQoLUQ==
+X-Google-Smtp-Source: AGHT+IFHrHk8Y7e+lcTvHN2kbnJFW1eh+TLNzIDEc+5AaGzlA9fbrwD7S9Ehs5K+5WlJuMKD+Iz0/nKBHMDbfDxGvZE=
+X-Received: by 2002:a0d:c042:0:b0:5a7:ba51:9c1b with SMTP id
+ b63-20020a0dc042000000b005a7ba519c1bmr638323ywd.37.1699417514993; Tue, 07 Nov
+ 2023 20:25:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-10-seanga2@gmail.com>
-In-Reply-To: <20231106022603.3405551-10-seanga2@gmail.com>
+ <20231106022603.3405551-5-seanga2@gmail.com>
+In-Reply-To: <20231106022603.3405551-5-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 21:23:35 -0700
-Message-ID: <CAPnjgZ3BDP8-eT29EdkDz7tW4036WSHq=iR5PyHDPuKQ_bchhQ@mail.gmail.com>
-Subject: Re: [PATCH v6 09/25] spl: Remove filename from spl_load_info
+Date: Tue, 7 Nov 2023 21:23:41 -0700
+Message-ID: <CAPnjgZ0sHZfJ-C7peTncf6=CD_mmkaGogx0LRzQHQJ=OGptjDQ@mail.gmail.com>
+Subject: Re: [PATCH v6 04/25] spl: semihosting: Don't close fd before
+ spl_load_simple_fit
 To: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -87,19 +88,10 @@ X-Virus-Status: Clean
 
 On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> For filesystems, filename serves the same purpose as priv. However,
-> spl_load_fit_image also uses it to determine whether to use a DMA-aligned
-> buffer. This is beneficial for FAT, which uses a bounce-buffer if the
-> destination is not DMA-aligned. Remove this logic, and instead achieve it
-> by setting bl_len to ARCH_DMA_MINALIGN. With this done, we can remove
-> filename entirely.
->
-> One wrinkle bears mentioning: because filesystems are not block-based, we
-> may read less than the size passed to spl_load_info.read. This can happen
-> if the file size is not DMA-aligned. This is fine as long as we read the
-> amount we originally wanted to. Modify the conditions for callers of
-> spl_load_info.read to check against the original, unaligned size to avoid
-> failing spuriously.
+> On real hardware, semihosting calls tends to have a large constant
+> overhead (on the order of tens of milliseconds). Reduce the number of
+> calls by one by reusing the existing fd in smh_fit_read, and closing it
+> at the end of spl_smh_load_image.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
@@ -107,22 +99,7 @@ On Sun, 5 Nov 2023 at 19:26, Sean Anderson <seanga2@gmail.com> wrote:
 > Changes in v6:
 > - New
 >
->  arch/arm/mach-sunxi/spl_spi_sunxi.c |  1 -
->  common/spl/spl_blk_fs.c             | 10 ++++++----
->  common/spl/spl_fat.c                |  6 +++---
->  common/spl/spl_fit.c                | 23 +----------------------
->  common/spl/spl_imx_container.c      |  8 +++++---
->  common/spl/spl_mmc.c                |  2 --
->  common/spl/spl_nand.c               |  3 ---
->  common/spl/spl_semihosting.c        |  1 -
->  common/spl/spl_spi.c                |  2 --
->  common/spl/spl_ymodem.c             |  1 -
->  include/spl.h                       |  2 --
->  test/image/spl_load_os.c            |  1 -
->  12 files changed, 15 insertions(+), 45 deletions(-)
-
-Er, I think
+>  common/spl/spl_semihosting.c | 20 ++++++++------------
+>  1 file changed, 8 insertions(+), 12 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-but I wonder if this patch could be split?
