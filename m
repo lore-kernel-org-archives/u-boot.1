@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C79C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 19:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AC1C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 19:28:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ECE6871A7;
-	Wed,  8 Nov 2023 20:16:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 7207B871E7;
+	Wed,  8 Nov 2023 20:28:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="j+TJU+vX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S3vHVUPi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E94E871DF; Wed,  8 Nov 2023 20:16:28 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 145C2871FB; Wed,  8 Nov 2023 20:28:17 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B0DF871A2
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 20:16:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBF3C871D4
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 20:28:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dimorinny@google.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-54357417e81so1945a12.0
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 11:16:26 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-671357f0209so665416d6.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 11:28:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1699470985; x=1700075785; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=n8rrYBoIVGNEKU0eX6gBX0jQrrw4l3ShYbvpxLhZvqE=;
- b=j+TJU+vX9zC9QZn1C6tgZ7nQVs3JX/P0ga8mPcpDLd2l3va4JePlOt+0SfFVS8TKv6
- wg0fz1dGK75QPmzxzNfeo5aqcQsvA8N2ird6UiOfSxZ9A/7gdW0qxHDmdxJRpJI8zBEp
- 8RmLEcfTo2uLUtezh6gKS5hUlg7AbLwCUP1n3wxF2pEBWjxrxvgW/sqj1aC+Pjzb374e
- 7pi8R6gS4hEPqxLzhpo1pkys48jFMBPFtThPnaIDBG3QiOiWRpZA/nNoXU5eTQCBPkwx
- dCsIY/CRg9UVCzM8eR2AOY9PR6seREocKusm+EvbN7U0gdP/olN5LNiKU7/lXezwuLu/
- qV/Q==
+ d=konsulko.com; s=google; t=1699471693; x=1700076493; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qfjILPPltNT49PJwBqBksYB6AiCJ2Ovp6PqHUOwYXSA=;
+ b=S3vHVUPidBzG9RxVCb4jLck9uMol0/I/y6kdDRcLVLVMYsBppNlZqcIIp4+DeW4ERi
+ l5vprme1mkCD3CCvVMGa+ue5pxGyRlZrFODktHTOhZXcC9hbHEpcKRfsywLGHGNciQZV
+ +KkT98k+XYgvFH0npzTKBd4SgtMfeow3CL1E4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699470985; x=1700075785;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1699471693; x=1700076493;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=n8rrYBoIVGNEKU0eX6gBX0jQrrw4l3ShYbvpxLhZvqE=;
- b=XvwotmvsNh2uRAMMdfM0K9wFFXzVh+hE0xXUnm3EzSnBWge+kAoyFcWjxxAjg+ra4v
- P7gWtAMQ2NlvttiDdczYsDakGARv+C4E7hhVs3vWTdwvkjyDami9jd5CzREluhw2CKRo
- TV5XEQ45EC0yOlAS8Pe1jp5Q5npTNFt7zePMxGDjVPmPAmMbwGvqD4qy5hfjTPdhDnnS
- zt2DW9xpQEswT2/D7SoLVAUsZwfQaNi/E12nwY7s4qwgJCf/K8uspbheq7b55sR/EzNK
- e/UUWWS0BY4EUlpXH1ucllla047M+8CvcyfYel1sLEtFUz6tMFxg4F9JOXY/lDMCCbuJ
- +yPQ==
-X-Gm-Message-State: AOJu0Yx0qVSuamcLKaAxUjQ2w+zUbx5cBp+dHiCT62IGSkZI4kvy9yNW
- KoadRbcuWbVAYlv0HImMdeo7DuM0FMrNXY1RofrltA==
-X-Google-Smtp-Source: AGHT+IH1j5DEY/UyDDLeKiGTfv9O7Iny9MU+wVLkAhObcAMWvfgUPO5jqftJ+hVTsKwjcbyyIgPKTsrMz7+KalSBllM=
-X-Received: by 2002:a05:6402:497:b0:545:94d:7b with SMTP id
- k23-20020a056402049700b00545094d007bmr5826edv.4.1699470985157; Wed, 08 Nov
- 2023 11:16:25 -0800 (PST)
+ bh=qfjILPPltNT49PJwBqBksYB6AiCJ2Ovp6PqHUOwYXSA=;
+ b=ABt1s5lWXXTUAJB0XmiEMnfPWYwTaJNCdhIoudZ3yaDkl961JYAjD4QrQl26vAbirH
+ 48UrDF2CW88fBCjnfwYLrMzIPjRSdxTc3fzIsdtWaOnyj39pYDKkmEI6eq0rTO4rOpKY
+ z+DV3/1Mh1JjTvgea/yCHUl/Kibe63uqfQLu9LrK+ydLt9CJiZi+KeYiY6uVDcCqPYqb
+ /RWBH9Vpj9yQE/OcOls/AnnK7L3lRdldRjoXWiE02hnqY49+bGXO/nuCUBi6n/iC0E8F
+ r7eAm9DU+hKKXxKaYxMATx6D3rfuVd8Jw86zvErZJI87LZRshVK1afuQJxj612uGiYXB
+ gnOg==
+X-Gm-Message-State: AOJu0YzkMyw8v2Ymy9e/pArm07VEnzuYUu0MvgYj8a/VfeXvoWcOGDMU
+ juGpv0NILuGpBUQTaVCPYO0IGDr0wzVEsl3Dr2vS/w==
+X-Google-Smtp-Source: AGHT+IGvQo3JzypeNDpbEyhOYsRy2926BGdI4NZi3DQrGngRgqJbBT/+4UzUYqqMNBUcPBG8id0O/A==
+X-Received: by 2002:a05:6214:19c3:b0:65b:fa3:4a01 with SMTP id
+ j3-20020a05621419c300b0065b0fa34a01mr3388816qvc.62.1699471693299; 
+ Wed, 08 Nov 2023 11:28:13 -0800 (PST)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
+ [2603:6081:7b00:6400:5409:8f3c:5603:314])
+ by smtp.gmail.com with ESMTPSA id
+ l7-20020a0cd6c7000000b00656e2464719sm1380070qvi.92.2023.11.08.11.28.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Nov 2023 11:28:12 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH] scsi: Have scsi_init_dev_desc_priv() use memset
+Date: Wed,  8 Nov 2023 14:28:11 -0500
+Message-Id: <20231108192811.1844338-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230725215658.2118831-1-dimorinny@google.com>
- <20231108144549.GA1077075@bill-the-cat>
-In-Reply-To: <20231108144549.GA1077075@bill-the-cat>
-From: Dmitrii Merkurev <dimorinny@google.com>
-Date: Wed, 8 Nov 2023 11:16:13 -0800
-Message-ID: <CAOWkq4=swv0HtS8rUEWwPYZV50B88AAgLHjFt9ykJsOpUrQeoQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/6] net: split IP_TCP header into separate IP/IP6 and
- TCP headers
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, rammuthiah@google.com, rfried.dev@gmail.com, 
- Ying-Chun Liu <paul.liu@linaro.org>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,39 +87,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Tom, huge thanks for sharing that. I agree lwip is the proper way to
-handle this, will try out this patch set and eventually migrate fastboot
-apps into a new stack.
+When we do not have CONFIG_BOUNCE_BUFFER enabled, inside of
+scsi_init_dev_desc_priv we never set the 'bb' field to false, we only
+initialize it to true when CONFIG_BOUNCE_BUFFER is set. Given that we
+have a number of other fields here we had been explicitly setting to
+zero, change to first calling memset to clear the struct and then
+initialize only the fields that need non-zero default values.
 
-On Wed, Nov 8, 2023 at 6:45=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote:
+Addresses-Coverity-ID: 467407 ("Uninitialized variables (UNINIT)")
+Fixes: 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag to blk_desc")
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Johan Jonker <jbx6244@gmail.com>
+---
+ drivers/scsi/scsi.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-> On Tue, Jul 25, 2023 at 10:56:52PM +0100, Dmitrii Merkurev wrote:
->
-> > This allows us to reuse TCP logic between IP and IP6 stack.
-> >
-> > Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> > Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> > Cc: Simon Glass <sjg@chromium.org>
-> > =D0=A1=D1=81: Joe Hershberger <joe.hershberger@ni.com>
-> > =D0=A1=D1=81: Ramon Fried <rfried.dev@gmail.com>
-> > Reviewed-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >  include/net/tcp.h | 54 ++++++++++++++++--------------------
-> >  net/tcp.c         | 70 +++++++++++++++++++++++------------------------
-> >  test/cmd/wget.c   | 48 ++++++++++++++++++--------------
-> >  3 files changed, 85 insertions(+), 87 deletions(-)
->
-> I do want to thank you for your contribution. However, the long term
-> goal with the project right now is to move to integrate lwip as the
-> networking stack (and in turn have more robust IPv6 and wget and
-> similar features). So, I don't want to pickup this series (unless you
-> think it's still important here-and-now, given the above). I would ask
-> you to please keep an eye on that effort and either try out v10:
-> https://patchwork.ozlabs.org/project/uboot/list/?series=3D374882&state=3D=
-*
-> or keep an eye out for v11. Thanks again!
->
-> --
-> Tom
->
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index 363047d0f72c..7dfe0c5e0562 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -368,15 +368,12 @@ static void scsi_setup_test_unit_ready(struct scsi_cmd *pccb)
+  */
+ static void scsi_init_dev_desc_priv(struct blk_desc *dev_desc)
+ {
++	memset(dev_desc, 0, sizeof(struct blk_desc));
+ 	dev_desc->target = 0xff;
+ 	dev_desc->lun = 0xff;
+ 	dev_desc->log2blksz =
+ 		LOG2_INVALID(typeof(dev_desc->log2blksz));
+ 	dev_desc->type = DEV_TYPE_UNKNOWN;
+-	dev_desc->vendor[0] = 0;
+-	dev_desc->product[0] = 0;
+-	dev_desc->revision[0] = 0;
+-	dev_desc->removable = false;
+ #if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
+ 	dev_desc->bb = true;
+ #endif	/* CONFIG_BOUNCE_BUFFER */
+-- 
+2.34.1
+
