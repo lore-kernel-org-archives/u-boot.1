@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24F35C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 785F1C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 16:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25AEF8772D;
+	by phobos.denx.de (Postfix) with ESMTP id A021B8771C;
 	Wed,  8 Nov 2023 17:49:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r2qSjW8S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YnlCmv1F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BBA5874D5; Wed,  8 Nov 2023 17:49:38 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id EB3C58771B; Wed,  8 Nov 2023 17:49:39 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C639887729
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E55B87732
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 17:49:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5a7fb84f6ceso79438367b3.1
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:24 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-778940531dbso456276085a.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 08:49:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699462163; x=1700066963; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RMxFbpwNm55dBI6n6vnV4je4qYBtqmhlPd0WkxCfKKA=;
- b=r2qSjW8SYIWwVMC/2Oz11i7S3yZftefhGwyPQ/qdbE42AsFMLdSj+eEFmvJC+KChtj
- +7UxvlIkqu/h/u9DCqIwbVF13hEiPy2BsiJOuwA8YaEQaZk8Rnj0G3cgfQvxb/e3Qjtj
- BtpT7DDI+9P+QK/mINrGScF3svmFmH1fVFBp0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699462163; x=1700066963;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1699462164; x=1700066964; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RMxFbpwNm55dBI6n6vnV4je4qYBtqmhlPd0WkxCfKKA=;
- b=Hv3M1YI5EhlYeJZY60F1YzJzbM1lamwAATxsjlY+rkzihy2UMVoEY2DFNAtEmr1EfL
- Q1zvoxQ1ZBHnrL52s0DFldxzuRIdtfjgbwS/TQ1voGl4IvcNUAWChZLfGGYJTRo0OSFj
- NHKmZWmScuvb7kO3x3s33v7m4JmmhGx7j9ijU+shshG2eiiy2UNBAnrRmNA4u7GKTm4y
- ckwFctyD9Huv0k1sGaszDoqjDDUVpjM7zCd7WEvksBuSGvuJxC03g85XYBbwdAaCL2AT
- Wmb5C0Xf0EH/f8bKDA8p2ZDH1vSDsFrYSmPb8oIsoohlg9H867hXTGKq5tiskY6HwK3+
- i3Ng==
-X-Gm-Message-State: AOJu0YySIb2KX5dvku+/IdZ/h5e7yBdwRby45T0Piy1OA2ya/EYvECL9
- lXbvJKQswvIFYbFbhyb2hRy9bQ==
-X-Google-Smtp-Source: AGHT+IHuvygvi8aMkWRk5R1ETK0pXrcP0JqYJYZX2l9/rnuw5esuYdLpwCC/y/obvOTrd/Nv4gWNzQ==
-X-Received: by 2002:a81:9c43:0:b0:5ae:f116:48c4 with SMTP id
- n3-20020a819c43000000b005aef11648c4mr2506562ywa.37.1699462163254; 
- Wed, 08 Nov 2023 08:49:23 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
- [2603:6081:7b00:6400:5409:8f3c:5603:314])
- by smtp.gmail.com with ESMTPSA id
- u82-20020a816055000000b0059c0629d59csm7128652ywb.115.2023.11.08.08.49.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Nov 2023 08:49:22 -0800 (PST)
-Date: Wed, 8 Nov 2023 11:49:21 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Bryan Brattlof <bb@ti.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Andrew Davis <afd@ti.com>,
- UBoot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/3] board: ti: common: add rtc setup to common folder
-Message-ID: <20231108164921.GR6601@bill-the-cat>
-References: <20231107232139.2839534-5-bb@ti.com>
- <20231107232139.2839534-6-bb@ti.com>
- <20231107233052.GX6601@bill-the-cat>
- <20231108154634.jozi4cw5fm7v2lls@bryanbrattlof.com>
+ bh=UUUV9CS/j/m5CaOB+meeMRAiO4/JyZBcd+IHFG5dMuI=;
+ b=YnlCmv1Fwe4jyJeDdTC1tP+U2PNTb9FERSVoKgcm0qm7fPxEWIZiD1ydB6hCM0EXJa
+ GxQuNbSRVX/G4qSBA/U+mxMdXSBsBTr/huS2JEMZtp34vhBC2/VBcjgt6wFGgxQrBrWp
+ ckYE5kTtP/bVrk8QeuLUriFGma7LJwYgI6e9NJsnlX8bwBf4IZvh1U8+/Y5q3dQWQqqH
+ qeuZR+rVz117LAz4LgGH1Ut6ZRANvpBLvap59zhcqNd8jgqlLdZDRw8I9o9FMw1C64Vk
+ 02aU7VLtSb2nXDNu8yV1NiavKXH6Zv4Ggw/VbuNIeN+ZguzaUAdOVwP0cZpaT8vRi+ra
+ pCBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699462164; x=1700066964;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UUUV9CS/j/m5CaOB+meeMRAiO4/JyZBcd+IHFG5dMuI=;
+ b=vdEMy+2ddVqY4gO3EFSUVe1FXBqBOHhhEtQ9rtoRsp7snZvW7AN0+ZRxOnHcTXDlYv
+ u55pJR+DpUcI7iW5FJV82QDUwLEXFpE7bhEgv1ekqWn5KLxFzq6YSrqv6gptLAAFK+f6
+ kPAXU5NfLzHbmIGvrvwgTHFnKcmc4iihr+ysnONRUx6TfZNqHcWWBk/vkzcS1CiP9j2d
+ yK6gfexa/MHwlgFfUHZ9IcbGIA4mOotKqefLP3xwALIedQ2OOdqbdPsMjlu/EiUqe7aW
+ AskPaT9CZ/cS3b7iZtHanmkkYkGGvkVHw3QnA1IAOOXx5TTmS9xuB//xTPVr34hp6oXR
+ Vlnw==
+X-Gm-Message-State: AOJu0YwpLil/92537uRaMIRvuySdJvDGJfmUq8mlVmzFN5nsFVuornaB
+ 72tqSuG5UM9QKX8IQsKdShj3ZhE2OAQ=
+X-Google-Smtp-Source: AGHT+IFcOc9fBdmBoGLdsv9jp+PUKEKdPqUAOMx8Q3kYEkALauTPF3y2PkxOy/QYUksCtyW21x6SUg==
+X-Received: by 2002:a05:620a:25d4:b0:775:73f6:1b39 with SMTP id
+ y20-20020a05620a25d400b0077573f61b39mr2134286qko.25.1699462164295; 
+ Wed, 08 Nov 2023 08:49:24 -0800 (PST)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ m12-20020a05620a24cc00b007770673e757sm1217646qkn.94.2023.11.08.08.49.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Nov 2023 08:49:24 -0800 (PST)
+From: Sean Anderson <seanga2@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
+ Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH v7 18/26] spl: Convert mmc to spl_load
+Date: Wed,  8 Nov 2023 11:48:50 -0500
+Message-Id: <20231108164858.3497420-19-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20231108164858.3497420-1-seanga2@gmail.com>
+References: <20231108164858.3497420-1-seanga2@gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2EYMppAJKK23vzrK"
-Content-Disposition: inline
-In-Reply-To: <20231108154634.jozi4cw5fm7v2lls@bryanbrattlof.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,90 +96,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This converts the mmc loader to spl_load. Legacy images are handled by
+spl_load (via spl_parse_image_header), so mmc_load_legacy can be
+omitted. To accurately determine whether mmc_load_image_raw_sector is used
+(which might not be the case if SYS_MMCSD_FS_BOOT is enabled), we introduce
+a helper config SYS_MMCSD_RAW_MODE. This ensures we can inline spl_load
+correctly when a board only boots from filesystems. We still need to check
+for SPL_MMC, since some boards enable configure raw mode even without MMC
+support.
 
---2EYMppAJKK23vzrK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
 
-On Wed, Nov 08, 2023 at 09:46:34AM -0600, Bryan Brattlof wrote:
-> On November  7, 2023 thus sayeth Tom Rini:
-> > On Tue, Nov 07, 2023 at 05:21:41PM -0600, Bryan Brattlof wrote:
-> >=20
-> > > All of the starter kit boards for the am62xxx extended family utilize
-> > > the same 32k crystal oscillator for a more accurate clock for the RTC
-> > > instance. Add the setup the clock mux and debounce configuration to t=
-he
-> > > common board directory so the entire am62xxx extended family can util=
-ize
-> > > it.
-> > >=20
-> > > Signed-off-by: Bryan Brattlof <bb@ti.com>
-> > [snip]
-> > > diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
-> > > index 49edd98014ab7..56a65c0a402bb 100644
-> > > --- a/board/ti/common/Kconfig
-> > > +++ b/board/ti/common/Kconfig
-> > > @@ -1,3 +1,11 @@
-> > > +config BOARD_HAS_32K_RTC_CRYSTAL
-> > > +	bool "Enable the 32k crystial for RTC"
-> > > +	help
-> > > +	   Some of Texas Instrument's Starter-Kit boards have
-> > > +	   an onboard 32k crystal. Select this option if you wish Uboot
-> > > +	   to enable this crystal for Linux
-> > > +	default n
-> >=20
-> > No "default n" as that is the default. And we (a) need some depends on
-> > for what families this is found on and then (b) how, if at all, does
-> > this match up with the 32k crystal used on other TI reference platforms
-> > over the years? If this is specific to the K3 families of reference
-> > platforms, the help needs re-phrasing and the filename is too generic.
-> > It's also not a "RTC" in terms of something we can talk to via
-> > drivers/rtc/rtc-uclass.c and drivers/rtc/davinci.c, or in this case
-> > porting the kernel's drivers/rtc/rtc-ti-k3.c over, yes?
-> >=20
-> > Oh, and "U-Boot" not "Uboot". Should see if the checkpatch typo list
-> > can be easily expanded by us, one of these days.
->=20
-> Yeah I'll work on the wording.
->=20
-> We just need to toggle a few bits for Linux to get the crystal muxed=20
-> properly for the RTC driver in Linux.
+(no changes since v6)
 
-This sounds a whole lot like what AM33XX_ENABLE_RTC32K_OSC symbol (which
-could be badly named, too!) is about, and hence some of my other
-questions. So please keep in mind the am33xx case here, and also how
-likely or not every custom K3 platform is also going to be doing this,
-or not. On am33xx, it does look like a few do disable it, but it's in
-common code since most custom platforms want it.
+Changes in v6:
+- Add SYS_MMCSD_RAW_MODE to help determine whether SPL_MMC loads
+  anything directly.
+- Explicitly initialize load_info members
 
-> We also toggle a few bits for the debouce settings that apparently I=20
-> didn't separate out from this series.
+Changes in v5:
+- Rework to load header in spl_load
 
-Please keep in mind if these too are essentially generic changes for the
-SoC family as well (or just how board specific they might be and how
-wrong they could be before a problem is seen, ie technical vs
-practical considerations).
+ common/spl/Kconfig       |  8 ++++
+ common/spl/spl_mmc.c     | 89 ++++------------------------------------
+ include/spl_load.h       |  1 +
+ test/image/spl_load_fs.c |  3 --
+ 4 files changed, 16 insertions(+), 85 deletions(-)
 
---=20
-Tom
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 0bc57d5fedb..b93526904eb 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -481,6 +481,11 @@ config SPL_DISPLAY_PRINT
+ 	  banner ("U-Boot SPL ..."). This function should be provided by
+ 	  the board.
+ 
++config SPL_SYS_MMCSD_RAW_MODE
++	bool
++	help
++	  Support booting from an MMC without a filesystem.
++
+ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+ 	bool "MMC raw mode: by sector"
+ 	default y if ARCH_SUNXI || ARCH_DAVINCI || ARCH_UNIPHIER || \
+@@ -490,6 +495,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+ 		     OMAP44XX || OMAP54XX || AM33XX || AM43XX || \
+ 		     TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
+ 	select SPL_LOAD_BLOCK if SPL_MMC
++	select SPL_SYS_MMCSD_RAW_MODE if SPL_MMC
+ 	help
+ 	  Use sector number for specifying U-Boot location on MMC/SD in
+ 	  raw mode.
+@@ -527,6 +533,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET
+ config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+ 	bool "MMC Raw mode: by partition"
+ 	select SPL_LOAD_BLOCK if SPL_MMC
++	select SPL_SYS_MMCSD_RAW_MODE if SPL_MMC
+ 	help
+ 	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
+ 
+@@ -1114,6 +1121,7 @@ config SPL_FALCON_BOOT_MMCSD
+ 	bool "Enable Falcon boot from MMC or SD media"
+ 	depends on SPL_OS_BOOT && SPL_MMC
+ 	select SPL_LOAD_BLOCK
++	select SPL_SYS_MMCSD_RAW_MODE
+ 	help
+ 	  Select this if the Falcon mode OS image mode is on MMC or SD media.
+ 
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index 91272c03d3f..3d032bb27ce 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -8,9 +8,9 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <log.h>
+-#include <mapmem.h>
+ #include <part.h>
+ #include <spl.h>
++#include <spl_load.h>
+ #include <linux/compiler.h>
+ #include <errno.h>
+ #include <asm/u-boot.h>
+@@ -19,49 +19,6 @@
+ #include <image.h>
+ #include <imx_container.h>
+ 
+-static int mmc_load_legacy(struct spl_image_info *spl_image,
+-			   struct spl_boot_device *bootdev,
+-			   struct mmc *mmc,
+-			   ulong sector, struct legacy_img_hdr *header)
+-{
+-	u32 image_offset_sectors;
+-	u32 image_size_sectors;
+-	unsigned long count;
+-	u32 image_offset;
+-	int ret;
+-
+-	ret = spl_parse_image_header(spl_image, bootdev, header);
+-	if (ret)
+-		return ret;
+-
+-	/* convert offset to sectors - round down */
+-	image_offset_sectors = spl_image->offset / mmc->read_bl_len;
+-	/* calculate remaining offset */
+-	image_offset = spl_image->offset % mmc->read_bl_len;
+-
+-	/* convert size to sectors - round up */
+-	image_size_sectors = (spl_image->size + mmc->read_bl_len - 1) /
+-			     mmc->read_bl_len;
+-
+-	/* Read the header too to avoid extra memcpy */
+-	count = blk_dread(mmc_get_blk_desc(mmc),
+-			  sector + image_offset_sectors,
+-			  image_size_sectors,
+-			  map_sysmem(spl_image->load_addr,
+-				     image_size_sectors * mmc->read_bl_len));
+-	debug("read %x sectors to %lx\n", image_size_sectors,
+-	      spl_image->load_addr);
+-	if (count != image_size_sectors)
+-		return -EIO;
+-
+-	if (image_offset)
+-		memmove((void *)(ulong)spl_image->load_addr,
+-			(void *)(ulong)spl_image->load_addr + image_offset,
+-			spl_image->size);
+-
+-	return 0;
+-}
+-
+ static ulong h_spl_load_read(struct spl_load_info *load, ulong off,
+ 			     ulong size, void *buf)
+ {
+@@ -87,46 +44,14 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
+ 			      struct spl_boot_device *bootdev,
+ 			      struct mmc *mmc, unsigned long sector)
+ {
+-	unsigned long count;
+-	struct legacy_img_hdr *header;
++	int ret;
+ 	struct blk_desc *bd = mmc_get_blk_desc(mmc);
+-	int ret = 0;
++	struct spl_load_info load;
+ 
+-	header = spl_get_load_buffer(-sizeof(*header), bd->blksz);
+-
+-	/* read image header to find the image size & load address */
+-	count = blk_dread(bd, sector, 1, header);
+-	debug("hdr read sector %lx, count=%lu\n", sector, count);
+-	if (count == 0) {
+-		ret = -EIO;
+-		goto end;
+-	}
+-
+-	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
+-	    image_get_magic(header) == FDT_MAGIC) {
+-		struct spl_load_info load;
+-
+-		debug("Found FIT\n");
+-		load.priv = bd;
+-		spl_set_bl_len(&load, bd->blksz);
+-		load.read = h_spl_load_read;
+-		ret = spl_load_simple_fit(spl_image, &load,
+-					  sector << bd->log2blksz, header);
+-	} else if (IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER) &&
+-		   valid_container_hdr((void *)header)) {
+-		struct spl_load_info load;
+-
+-		load.priv = bd;
+-		spl_set_bl_len(&load, bd->blksz);
+-		load.read = h_spl_load_read;
+-
+-		ret = spl_load_imx_container(spl_image, &load,
+-					     sector << bd->log2blksz);
+-	} else {
+-		ret = mmc_load_legacy(spl_image, bootdev, mmc, sector, header);
+-	}
+-
+-end:
++	load.priv = bd;
++	spl_set_bl_len(&load, bd->blksz);
++	load.read = h_spl_load_read;
++	ret = spl_load(spl_image, bootdev, &load, 0, sector << bd->log2blksz);
+ 	if (ret) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		puts("mmc_load_image_raw_sector: mmc block read error\n");
+diff --git a/include/spl_load.h b/include/spl_load.h
+index 5e0460d956d..d55a47ae7d7 100644
+--- a/include/spl_load.h
++++ b/include/spl_load.h
+@@ -97,6 +97,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ #define SPL_LOAD_USERS \
+ 	IS_ENABLED(CONFIG_SPL_FS_EXT4) + \
+ 	IS_ENABLED(CONFIG_SPL_FS_FAT) + \
++	IS_ENABLED(CONFIG_SPL_SYS_MMCSD_RAW_MODE) + \
+ 	0
+ 
+ #if SPL_LOAD_USERS > 1
+diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
+index 333df2dfb53..67c19da95e7 100644
+--- a/test/image/spl_load_fs.c
++++ b/test/image/spl_load_fs.c
+@@ -428,9 +428,6 @@ static int spl_test_mmc(struct unit_test_state *uts, const char *test_name,
+ 	if (spl_test_mmc_fs(uts, test_name, type, create_fat, false))
+ 		return CMD_RET_FAILURE;
+ 
+-	if (type == LEGACY_LZMA)
+-		return 0;
+-
+ 	return do_spl_test_load(uts, test_name, type,
+ 				SPL_LOAD_IMAGE_GET(0, BOOT_DEVICE_MMC1,
+ 						   spl_mmc_load_image),
+-- 
+2.37.1
 
---2EYMppAJKK23vzrK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLvBEACgkQFHw5/5Y0
-tyxCvwv+IdQ5bYvSIJRyZDjkAB7/BtLPNCqTA7W0hb7AVgecfo0LUnuvth5WXN0V
-fUiEhMfT5NrVkxOvegBwWWvh99YTn8e4uEbV2qZnsOoueEorY4UiEF4dmG+fTejq
-6mG0dqL4Uowt4AfuY7BWlVa8yUBMOh+OjhR9RVPsg+AYnet54CSQA67Z8fHKOfad
-H/lqO47xy0pmH2623oxmLGp2VZveaaM+MQChcpDrIy94dSTteqCkUspnMCCFgoSD
-UAYYzx/SnkjK47K6JvvRxqcJyoPATFrGZnSMZBaaW7MvgtkzF5MvQWfDZvTjlSsS
-X3bpzcAYEAlpm2EedmPAwcTMYiWzq7NqlySrQ+7B+Q4cVm5rtWrM9RcCIENIwSIR
-FLcsHHdyr4tfTOEav0alo9v3iyZmmryeU334G1X7Dhky+ucIoeBYvZ82Oh1Q1JYW
-lhqB5GKZsnTZY5c52/TxIwaF/dNm4B+QliKWdwTpJmaM0c6NrR0ISBMvqDVagD88
-TDJkDuCC
-=xq4t
------END PGP SIGNATURE-----
-
---2EYMppAJKK23vzrK--
