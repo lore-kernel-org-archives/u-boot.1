@@ -4,44 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9007CC4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 00:29:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C45D3C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 00:34:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0241D87269;
-	Wed,  8 Nov 2023 01:29:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 360FB876D5;
+	Wed,  8 Nov 2023 01:34:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OUwS/CZI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UjBVvHVb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1217B871BB; Wed,  8 Nov 2023 01:29:17 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 61305876DA; Wed,  8 Nov 2023 01:34:56 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 173B98756F
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 01:29:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB80876C6
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 01:34:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E9B0B60FDE;
- Wed,  8 Nov 2023 00:29:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77CA7C433C8;
- Wed,  8 Nov 2023 00:29:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699403348;
- bh=qZ+AJBj1oEs+fowFGvgTSSfup07s9AnysI/7T+N8Xa4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OUwS/CZIVdYsipsZwAalveofhBrZ/blZzeqJq/y7m5ya5AEuvGvBmGwiifGO39dn2
- cIUeEZlkZHbjQsAauRvYYnWwCLggPIxNEHNNthyEq8em+EU0CTSlpavpUziba5+7R1
- 2PS/GhQIJ+/a0eQIkcqUPoem+npW/Gz1BAOKPSh3yYdqSFNc/x2fyJAkOayUcEVBKr
- xUkk+Y3Q5sZq1YYZ8rMrAQ3/OyAHgE0d5dybpj4dZWApNM6YrN2yrp6b2mVve4w1uL
- WWddyPldBVOj/+4enDYHq7nOM0vQJwx5Ltl3Xv5e2TftIcY/hU6wrIiXzvJaZH97BW
- tRdF5kaXAzoPg==
-Date: Wed, 8 Nov 2023 00:29:03 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Tom Rini <trini@konsulko.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5a7eef0b931so75070967b3.0
+ for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 16:34:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699403692; x=1700008492; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5tBpjM0Oiu2CMv6Pk2vtYnBn07qdswsLUeou0fP+ppM=;
+ b=UjBVvHVbcKLwTWHwGav0fgpr0BGoTZ//fVV/oYGFzj3SkbEd77Ktktu0LNxbe06sGn
+ queJMlmke+W1BUMA2YddWdfv0zp92XJV54/D9FmvWghDVv/3DHyCYEUcf6QpxshfQcSN
+ jJMdKrLHDpAbs7c+/NETfcD8Twm+jXwZnVSZg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699403692; x=1700008492;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5tBpjM0Oiu2CMv6Pk2vtYnBn07qdswsLUeou0fP+ppM=;
+ b=gNHom0PJCxT6ER9zNDrlMowBG6/KUK7zADUJPDnAYX5wMIzeqYPLbCRZI/kbeg6oW0
+ a9Qcun7IX89+HNcW6rixiA76jSAoCwi6xBbGO8rvbuMyGZ0gK/N8rRfmVfZ2aWQQkGYn
+ KO/K1wujWH03hvsDLs0hluPcIgxan7M/3yhhXwG+J4VgI+xDrO0mLTDgsw+TRdtYvt+/
+ OzDx8gsuDtfuHWzG2voHdnWXcKk+oWZQSap+CL6k8x5znXNO6VOmIOZWTwMuhX8/ujuS
+ CSuQukeJkiziwQwtHrrE2qu6AQ9OMqzvE04ge7iI1lepZO2v+9Z9ke/252q/OeqCppqE
+ iYrA==
+X-Gm-Message-State: AOJu0Ywc5STpSf+3g2vxA05AgAmL37RT4H8BM0CDE56F7bn9KNrtdlXs
+ yeUkKyt6LCCEc9hqrPdi30VrUg==
+X-Google-Smtp-Source: AGHT+IFTfNU3erQhVFtkFAiG/Vg2+0UmNQT9DcOvVpVLygBx+WXi3ESnltYEy1hvecaHOqsgBcqCrA==
+X-Received: by 2002:a81:92d2:0:b0:5a8:d92b:fbf3 with SMTP id
+ j201-20020a8192d2000000b005a8d92bfbf3mr312516ywg.38.1699403692516; 
+ Tue, 07 Nov 2023 16:34:52 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
+ [2603:6081:7b00:6400:5409:8f3c:5603:314])
+ by smtp.gmail.com with ESMTPSA id
+ j143-20020a819295000000b0059a34cfa2a8sm6242055ywg.62.2023.11.07.16.34.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Nov 2023 16:34:51 -0800 (PST)
+Date: Tue, 7 Nov 2023 19:34:49 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Conor Dooley <conor@kernel.org>
 Cc: Rob Herring <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
  Andre Przywara <andre.przywara@arm.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
@@ -54,9 +77,8 @@ Cc: Rob Herring <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, palmer@dabbelt.com
 Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
  extension
-Message-ID: <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
-References: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
- <20231106204608.GJ496310@bill-the-cat>
+Message-ID: <20231108003449.GF6601@bill-the-cat>
+References: <20231106204608.GJ496310@bill-the-cat>
  <CAPnjgZ28HskiFDBDa=s_k6=WNoPfWu88bAaYCY7ew8dcYXW=aQ@mail.gmail.com>
  <20231107193025.GN6601@bill-the-cat>
  <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
@@ -65,11 +87,13 @@ References: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
  <20231107223837.GU6601@bill-the-cat>
  <20231107-audible-undoing-293506af3890@spud>
  <20231107232305.GW6601@bill-the-cat>
+ <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="Ut9rGd+5ZSBbMXpa"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="A6fjwMd5qxUMQAjE"
 Content-Disposition: inline
-In-Reply-To: <20231107232305.GW6601@bill-the-cat>
+In-Reply-To: <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,125 +111,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ut9rGd+5ZSBbMXpa
+--A6fjwMd5qxUMQAjE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 07, 2023 at 06:23:05PM -0500, Tom Rini wrote:
-> On Tue, Nov 07, 2023 at 11:12:16PM +0000, Conor Dooley wrote:
-> > +CC Palmer
-> >=20
-> > On Tue, Nov 07, 2023 at 05:38:37PM -0500, Tom Rini wrote:
-> > > On Tue, Nov 07, 2023 at 10:27:50PM +0000, Conor Dooley wrote:
-> > > > On Tue, Nov 07, 2023 at 05:10:23PM -0500, Tom Rini wrote:
-> > > >=20
-> > > >=20
-> > > > > further clarify or not
-> > > > > the RISC-V ISA thing that's elsewhere in this thread (and part of=
- the
-> > > > > kernel, not a U-Boot thing).
-> > > >=20
-> > > > TBH, this a bit fragmented across threads, and as someone that hasn=
-'t
-> > > > been following it it's a bit difficult to tell exactly what is being
-> > > > asked for. Would someone be able to ask it as a direct question?
-> > >=20
-> > > Sorry for being unclear, and thanks for asking. What I think the U-Bo=
-ot
-> > > community would like to know is, what is the device-tree based way to
-> > > know if a RISC-V platform has the Zbb extensions
-> >=20
-> > For this one, it's pretty straightforward IMO - if riscv,isa-extensions
-> > contains "zbb", then you are safe to use those instructions. My
-> > understanding is that relying on getting illegal instruction traps is
-> > not a sufficient test for usability of standard extensions, as a vendor
-> > extension could be using the same opcodes as a standard extension.
-> >=20
-> > > so the RNG opcodes,
-> > > similar (in concept at least?) to the ARMv8.5 RNG feature.
-> >=20
-> > The ordinary extensions that are instructions - like Zbkb that provides
-> > bit manipulation instructions for cryptography you will be able to rely
-> > on riscv,isa-extensions also. Zkr is actually a CSR acting as an entropy
-> > source and is a bit more complicated. RISC-V Cryptography Extensions
-> > Volume I, Chapter Four [0] is the relevant thing for use of the CSR
-> > provided by Zkr, and it says "The seed CSR is also access controlled by
-> > execution mode, and attempted read or write access will raise an illegal
-> > instruction exception outside M mode unless access is explicitly grante=
-d."
-> > My take is that either the SBI implementation needs to provide S-Mode
-> > U-Boot with an accurate devicetree (including what extensions are valid
-> > for use in S-mode) or if the devicetree is provided as part of the U-Bo=
-ot
-> > binary then it needs to match what is available at that privilege level
-> > on the platform. In this case, you would also be able to rely on
-> > riscv,isa-extensions for that detection. There is an existing dt-binding
-> > patch
-> > <https://lore.kernel.org/linux-riscv/20231107105556.517187-6-cleger@riv=
-osinc.com/>
-> > that adds Zkr, and my proposal would be to document that the presence o=
-f Zkr
-> > explicitly in riscv,isa-extensions means that the bit in mseccfg.[s,u]s=
-eed
-> > has been set so it can be used at the current privilege level.
-> >=20
-> > If that's not acceptable, and people think that having Zkr in the
-> > devicetree means that the hardware has the extension, regardless of
-> > usability at the present privilege level, then IMO we need an SBI ecall
-> > defined to request entablement of the CSR & report as to whether or not
-> > that was possible.
-> >=20
-> > I'm not sure how any of the above lines up with the ARMv8.5 RNG feature
-> > unfortunately.
+On Wed, Nov 08, 2023 at 12:29:03AM +0000, Conor Dooley wrote:
+> On Tue, Nov 07, 2023 at 06:23:05PM -0500, Tom Rini wrote:
+[snip]
+> > Thanks. Setting aside Simon's follow-up, this is what I was looking for.
+> > We might have to wait for Heinrich to return from the conference to have
+> > time to look at how to utilize the above and see what we can do from
+> > there.
 >=20
-> Thanks. Setting aside Simon's follow-up, this is what I was looking for.
-> We might have to wait for Heinrich to return from the conference to have
-> time to look at how to utilize the above and see what we can do from
-> there.
+> I did read that, but I don't think most of it is relevant to the binding
+> itself. His five things were:
+> | - U-Boot models hardware (and other things) as devices in driver model =
+[1]
+>=20
+> This I think should be satisfied. The Zkr CSR is a property of the CPU,
+> and shouldn't have its own DT node IMO. Is it problematic for U-Boot to
+> populate multiple devices for its driver model based on one DT node?
+> I know in Linux that I can create devices using something like
+> platform_device_register(), does U-Boot have a similar facility?
+> https://elixir.bootlin.com/linux/latest/source/drivers/base/platform.c#L7=
+67
+>=20
+> | - U-Boot requires devices to be in the devicetree, with very limited
+> | exceptions [2]
+>=20
+> | - Where multiple devices exist in a uclass, it is desirable to be able
+> | to number them [3]
+>=20
+> I'm not sure really how this one ties in. Do you need a number for each
+> CPU that supports Zkr, since a system may be heterogeneous? I think that
+> how you treat things like that is beyond communicating support via DT
+> though, IMO the job of the DT is just to tell U-Boot on which CPUs it
+> can access the seed CSR.
+>=20
+> | - Similarly it is useful to be able select a particular device, e.g.
+> | with a phandle [4]
+>=20
+> I suppose a phandle to the CPU would work in this case.
+>=20
+> | - U-Boot uses devicetree for configuration as it has no userspace
 
-I did read that, but I don't think most of it is relevant to the binding
-itself. His five things were:
-| - U-Boot models hardware (and other things) as devices in driver model [1]
+I mean, the reason I was setting aside Simon's question is that in my
+mind, we (U-Boot) need to think about what we're declaring as a MUST
+because the constant feedback that we get is "No, why does that need to
+get added to DT? Can't you just use ... ?". So I do find your answers
+above enlightening in that regard.
 
-This I think should be satisfied. The Zkr CSR is a property of the CPU,
-and shouldn't have its own DT node IMO. Is it problematic for U-Boot to
-populate multiple devices for its driver model based on one DT node?
-I know in Linux that I can create devices using something like
-platform_device_register(), does U-Boot have a similar facility?
-https://elixir.bootlin.com/linux/latest/source/drivers/base/platform.c#L767
+--=20
+Tom
 
-| - U-Boot requires devices to be in the devicetree, with very limited
-| exceptions [2]
-
-| - Where multiple devices exist in a uclass, it is desirable to be able
-| to number them [3]
-
-I'm not sure really how this one ties in. Do you need a number for each
-CPU that supports Zkr, since a system may be heterogeneous? I think that
-how you treat things like that is beyond communicating support via DT
-though, IMO the job of the DT is just to tell U-Boot on which CPUs it
-can access the seed CSR.
-
-| - Similarly it is useful to be able select a particular device, e.g.
-| with a phandle [4]
-
-I suppose a phandle to the CPU would work in this case.
-
-| - U-Boot uses devicetree for configuration as it has no userspace
-
-Cheers,
-Conor.
-
---Ut9rGd+5ZSBbMXpa
+--A6fjwMd5qxUMQAjE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZUrWTgAKCRB4tDGHoIJi
-0pQJAQDn4uK1nVIRxuD+p7IqW4mjUriYKBxU/bs5S8YLclOEogEA+zIO0GHZv+vl
-t5GMxPKr54S0jOyqcdJaQXUJkI5RbQc=
-=GPiX
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVK16YACgkQFHw5/5Y0
+tyx3Awv/QtQcK1ji5/6uTWqwPNVS+ws2QiNFjgis30v+JZFRiCDJb5IaxjpHzFq8
+qYVy0ldt8aUbyKC1kGtOfaEx3PPDKoYRmyR81OPRZ1nK396ev/3ydcYXgEr1hfmY
+nxzY85BZAgL0BlZ70z61a8TP9xci3oSx4HEa7v9M0CasG7+7j1pffa4a0mz/OTxQ
+N5yoXc0YSexRvO3NWxa1hr3TdXtSOhfqVgcO+E2x9B9R/RyUeT8NSUUTjFuRXyF4
+Qm86AiObvzpVaIm8UmyON51T5CXNZoR7ENqBzzXix69p/34PralOtucpETe1a6Pp
+jMTZhxzVCfnhqTF3G79z0DSeAXygT8CivClYPVK0Z0QPXH0XH4BAsdni85FD3kag
+6y1NZYfsAsVikCZvLcKuFPlgRwelvsacqiUwlnrSzE3R9d+YxnJueMSPxl8zx7zC
+J7RkTEx2+zcEXYjeQ43QWBdWXGq5ycLcpN/L7e5OpNqyq/B4WoQnc1VxdXzzpew3
+MDzOEk26
+=u61x
 -----END PGP SIGNATURE-----
 
---Ut9rGd+5ZSBbMXpa--
+--A6fjwMd5qxUMQAjE--
