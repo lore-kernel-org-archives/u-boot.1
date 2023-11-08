@@ -4,40 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DF5C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:54:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7CABC4167D
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 15:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACD298716E;
-	Wed,  8 Nov 2023 16:54:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=ltts.com
+	by phobos.denx.de (Postfix) with ESMTP id 828D486F92;
+	Wed,  8 Nov 2023 16:59:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g139fhhq";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56D8387197; Wed,  8 Nov 2023 16:54:57 +0100 (CET)
-Received: from esa2.ltts.com (unknown [14.140.155.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3D28887150; Wed,  8 Nov 2023 16:59:18 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4F0A870F5
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:54:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E851887520
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 16:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=ltts.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhargav.r@ltts.com
-IronPort-SDR: 6Ai6X5D9pt5WhKUbgDTyBVXluy8m/KJJ7Q2L6PZuknjLRQBX+T4w2z5yoN1ZHlZBqT2dEr5/VL
- g9Uc+sOV0NUA==
-Received: from unknown (HELO localhost.localdomain) ([192.168.34.55])
- by esa2.ltts.com with ESMTP; 08 Nov 2023 21:24:51 +0530
-From: Bhargav Raviprakash <bhargav.r@ltts.com>
-To: bhargav.r@ltts.com
-Cc: jh80.chung@samsung.com,
-	u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] driver: power: add support for TPS65224
-Date: Wed,  8 Nov 2023 21:24:48 +0530
-Message-Id: <20231108155448.145243-1-bhargav.r@ltts.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231108152255.142901-1-bhargav.r@ltts.com>
-References: <20231108152255.142901-1-bhargav.r@ltts.com>
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-41cba6e8e65so43416381cf.2
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 07:59:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699459155; x=1700063955; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/JacxevHwWHzII1NwwB2UPCLhgQ/CXioz999RyT6OXo=;
+ b=g139fhhqTNJ9I+bBnWjFKfim98/F6uRj+re4qEqmlJtsyeROGAWLsDW9uByWAatWSi
+ x2C7EIbrGUQcjM4YOMkQibQAma8HTRoX0T+2q7sl6ukwnHDvFLNMEDt5BVYqUYQLX6hj
+ 9Qhy1BPDNG6pmzTvFGMhiIM5+8B/TYqNtG8bkxu/szEXldJLt2/4BRYm1rAis/GPb04r
+ GwxI/WLq+lb0FOZ/tBNn6WccpwrlCUkE+l2Qrbn/PTHtywKUzW0wIK1ihcHtfFF0jr4o
+ 2RuIKgKvOrA10DDVXT9YQbi1BrgltsoVcTzBSMDj3XuxJ2jndMNfYvgDQ4md33MgY2bU
+ YoPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699459155; x=1700063955;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/JacxevHwWHzII1NwwB2UPCLhgQ/CXioz999RyT6OXo=;
+ b=G3hO/PO7Zn89LxgFsTB0T8OpLP/Y6+R80RhT05eF/gxxxxfHsunFmAkB/O8ba112BR
+ pmOw6VPhe1Qxgop7QDRzrA+DBM/Kpcntev5FZ+eRAV1UbuNKnBPXOUiGA39Qj+uUlvV2
+ h58ep+n+cr1uGzHZtACytQ/+T1+LNiwdO1n/LCoyy/EcUbrKu1YDl5WjV5DvuEI4NIZl
+ SArhEzfcTpG+ooC0Vf0MkC5QNA56zzEQvucnioXZBndJ+D/6/AyUaMYwm90hZAxK8ZO1
+ g48QQnsLxza+GtLl/wtBs7hUwrz+YxPSnZtG0uU45bW6x0nx3Ah7OFp8nvROfMfDx9Hi
+ S51w==
+X-Gm-Message-State: AOJu0YwzzRuO7qoqM/RyjzPJ8USBm7/E92IRmNGRx9ZrgkFoYaLA3+6m
+ 6Tx4cI/npCFAzdYmyZifvac=
+X-Google-Smtp-Source: AGHT+IHOGeawrGezGXtvhn7Emn9MJ93Bx1itR5k99RLvmElRpWDx0YF7WDwVFBWa1DaRIhqG6tJ6Xw==
+X-Received: by 2002:a05:622a:492:b0:41e:2227:6abb with SMTP id
+ p18-20020a05622a049200b0041e22276abbmr2185889qtx.60.1699459154733; 
+ Wed, 08 Nov 2023 07:59:14 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ i6-20020ac813c6000000b00400a99b8b38sm1005962qtj.78.2023.11.08.07.59.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Nov 2023 07:59:14 -0800 (PST)
+Message-ID: <0fa3a26b-9e28-357f-17bc-8a8cb60a05b0@gmail.com>
+Date: Wed, 8 Nov 2023 10:59:13 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use units
+ of bytes
+Content-Language: en-US
+To: Xavier Drudis Ferran <xdrudis@tinet.cat>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ =?UTF-8?Q?Marek_Beh=c3=ban?= <marek.behun@nic.cz>,
+ Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ uboot-imx@nxp.com
+References: <20231106022603.3405551-1-seanga2@gmail.com>
+ <20231106022603.3405551-9-seanga2@gmail.com>
+ <ZUjdhAccsYbJS6AL@xdrudis.tinet.cat>
+ <f546ba08-10b9-0cb4-4fa7-f7541dab1288@gmail.com>
+ <ZUn577z8xINpURlO@xdrudis.tinet.cat>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <ZUn577z8xINpURlO@xdrudis.tinet.cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,280 +104,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jaehoon,
-
-> > Hi Bhargav,
-> > 
-> > On Mon, 6 Nov 2023 at 10:11, Bhargav Raviprakash <bhargav.r@ltts.com> wrote:
-> > >
-> > > Added support for PMIC TPS65224. Includes driver for pmic,
-> > > and disabling Watchdog.
-> > >
-> > > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
-> > > ---
-> > >  drivers/power/pmic/Kconfig    |   6 ++
-> > >  drivers/power/pmic/Makefile   |   1 +
-> > >  drivers/power/pmic/tps65224.c | 141 ++++++++++++++++++++++++++++++++++
-> > >  include/power/tps65224.h      |  57 ++++++++++++++
-> > >  4 files changed, 205 insertions(+)
-> > >  create mode 100644 drivers/power/pmic/tps65224.c
-> > >  create mode 100644 include/power/tps65224.h
-> > >
-> > > diff --git a/drivers/power/pmic/Kconfig b/drivers/power/pmic/Kconfig
-> > > index 4a6f0ce093..b06bd31823 100644
-> > > --- a/drivers/power/pmic/Kconfig
-> > > +++ b/drivers/power/pmic/Kconfig
-> > > @@ -378,6 +378,12 @@ config PMIC_TPS65941
-> > >         The TPS65941 is a PMIC containing a bunch of SMPS & LDOs.
-> > >         This driver binds the pmic children.
-> > >
-> > > +config PMIC_TPS65224
-> > > +       bool "Enable driver for Texas Instruments TPS65224 PMIC"
-> > > +       help
-> > > +       The TPS65224 is a PMIC containing a bunch of SMPS & LDOs.
-> > > +       This driver binds the pmic children.
-> > > +
-> > >  config PMIC_TPS65219
-> > >         bool "Enable driver for Texas Instruments TPS65219 PMIC"
-> > >         depends on DM_PMIC
-> > > diff --git a/drivers/power/pmic/Makefile b/drivers/power/pmic/Makefile
-> > > index 0b3b3d62d0..cec16e57d3 100644
-> > > --- a/drivers/power/pmic/Makefile
-> > > +++ b/drivers/power/pmic/Makefile
-> > > @@ -33,6 +33,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
-> > >  obj-$(CONFIG_PMIC_TPS65217) += pmic_tps65217.o
-> > >  obj-$(CONFIG_PMIC_TPS65219) += tps65219.o
-> > >  obj-$(CONFIG_PMIC_TPS65941) += tps65941.o
-> > > +obj-$(CONFIG_PMIC_TPS65224) += tps65224.o
-> > >  obj-$(CONFIG_POWER_TPS65218) += pmic_tps65218.o
-> > >
-> > >  ifeq ($(CONFIG_$(SPL_)POWER_LEGACY),y)
-> > > diff --git a/drivers/power/pmic/tps65224.c b/drivers/power/pmic/tps65224.c
-> > > new file mode 100644
-> > > index 0000000000..33395f6edf
-> > > --- /dev/null
-> > > +++ b/drivers/power/pmic/tps65224.c
-> > > @@ -0,0 +1,141 @@
-> > > +// SPDX-License-Identifier: GPL-2.0+
-> > > +/*
-> > > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-> > > + */
-> > > +#include <fdtdec.h>
-> > > +#include <errno.h>
-> > > +#include <dm.h>
-> > > +#include <i2c.h>
-> > > +#include <log.h>
-> > > +#include <power/pmic.h>
-> > > +#include <power/regulator.h>
-> > > +#include <power/tps65224.h>
-> > > +#include <dm/device.h>
-> > > +
-> > > +static const struct pmic_child_info pmic_children_info[] = {
-> > > +       { .prefix = "ldo", .driver = TPS65224_LDO_DRIVER },
-> > > +       { .prefix = "buck", .driver = TPS65224_BUCK_DRIVER },
-> > > +       { },
-> > > +};
-> > > +
-> > > +static int tps65224_write(struct udevice *dev, uint reg, const uint8_t *buff,
-> > > +                         int len)
-> > > +{
-> > > +       if (dm_i2c_write(dev, reg, buff, len)) {
-> > > +               pr_err("write error to device: %p register: %#x!\n", dev, reg);
-> > > +               return -EIO;
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static int tps65224_read(struct udevice *dev, uint reg, uint8_t *buff, int len)
-> > > +{
-> > > +       if (dm_i2c_read(dev, reg, buff, len)) {
-> > > +               pr_err("read error from device: %p register: %#x!\n", dev, reg);
-> > > +               return -EIO;
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static int tps65224_bind(struct udevice *dev)
-> > > +{
-> > > +       ofnode regulators_node;
-> > > +       int children;
-> > > +
-> > > +       if (dev->driver_data == TPS65224_WD)
-> > > +               return 0;
-> > > +
-> > > +       regulators_node = dev_read_subnode(dev, "regulators");
-> > > +       if (!ofnode_valid(regulators_node)) {
-> > > +               debug("%s: %s regulators subnode not found!\n", __func__,
-> > > +                     dev->name);
-> > > +               return -ENXIO;
-> > > +       }
-> > > +
-> > > +       debug("%s: '%s' - found regulators subnode\n", __func__, dev->name);
-> > > +
-> > > +       children = pmic_bind_children(dev, regulators_node, pmic_children_info);
-> > > +       if (!children)
-> > > +               printf("%s: %s - no child found\n", __func__, dev->name);
-> > > +
-> > > +       /* Probe all the child devices */
-> > 
-> > bind, not probe
-> > 
-> > > +       return dm_scan_fdt_dev(dev);
-> > > +}
-> > > +
-> > > +static int stop_watchdog(struct udevice *wd_i2c_dev)
-> > > +{
-> > > +       int ret;
-> > > +
-> > > +       /* Maintain WD long window */
-> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-> > > +       if (ret < 0) {
-> > > +               debug("failed to read i2c reg (%d)\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       ret &= ~TPS65224_WD_PWRHOLD_MASK;
-> > > +       ret |= TPS65224_WD_PWRHOLD_MASK;
-> > > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_MODE_REG, ret);
-> > > +       if (ret) {
-> > > +               debug("%s: %s write WD_PWRHOLD fail!\n", __func__, wd_i2c_dev->name);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_MODE_REG);
-> > > +       if (ret < 0) {
-> > > +               debug("failed to read back i2c reg (%d)\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       /* Disable WD */
-> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-> > > +       if (ret < 0) {
-> > > +               debug("failed to read i2c reg (%d)\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       ret &= ~TPS65224_WD_EN_MASK;
-> > > +       ret = dm_i2c_reg_write(wd_i2c_dev, TPS65224_WD_THR_CFG, ret);
-> > > +       if (ret) {
-> > > +               debug("%s: %s write WD_EN fail!\n", __func__, wd_i2c_dev->name);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       ret = dm_i2c_reg_read(wd_i2c_dev, TPS65224_WD_THR_CFG);
-> > > +       if (ret < 0) {
-> > > +               debug("failed to read back i2c reg (%d)\n", ret);
-> > > +               return ret;
-> > > +       }
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static int tps65224_probe(struct udevice *dev)
-> > > +{
-> > > +       if (dev->driver_data == TPS65224_WD)
-> > > +               return stop_watchdog(dev);
-> > > +
-> > > +       return 0;
-> > > +}
-> > > +
-> > > +static struct dm_pmic_ops tps65224_ops = {
-> > > +       .read = tps65224_read,
-> > > +       .write = tps65224_write,
-> > > +};
-> > > +
-> > > +static const struct udevice_id tps65224_ids[] = {
-> > > +       { .compatible = "ti,tps65224", .data = TPS65224 },
-> > > +       { .compatible = "ti,tps65224_watchdog",  .data =  TPS65224_WD },
-> > > +       { }
-> > > +};
-> > > +
-> > > +U_BOOT_DRIVER(pmic_tps65224) = {
-> > > +       .name = "tps65224_pmic",
-> > > +       .id = UCLASS_PMIC,
-> > > +       .of_match = tps65224_ids,
-> > > +       .bind = tps65224_bind,
-> > > +       .probe = tps65224_probe,
-> > > +       .ops = &tps65224_ops,
-> > > +};
-> > > diff --git a/include/power/tps65224.h b/include/power/tps65224.h
-> > > new file mode 100644
-> > > index 0000000000..24e91b6a67
-> > > --- /dev/null
-> > > +++ b/include/power/tps65224.h
-> > > @@ -0,0 +1,57 @@
-> > > +/* SPDX-License-Identifier: GPL-2.0+ */
-> > > +/*
-> > > + * (C) Copyright 2023 Texas Instruments Incorporated, <www.ti.com>
-> > > + *
-> > > + */
-> > > +#ifndef _POWER_TPS65224_H_
-> > > +#define _POWER_TPS65224_H_
-> > > +
-> > > +#define TPS65224                          0x0
-> > > +#define TPS65224_WD                       0x20
-> > > +
-> > > +/* I2C device address for pmic tps65224 */
-> > > +#define TPS65224_I2C_ADDR                (0x12 >> 1)
-> > > +#define TPS65224_LDO_NUM                  3
-> > > +#define TPS65224_BUCK_NUM                 4
-> > > +
-> > > +/* Drivers name */
-> > > +#define TPS65224_LDO_DRIVER              "tps65224_ldo"
-> > > +#define TPS65224_BUCK_DRIVER             "tps65224_buck"
-> > > +
-> > > +#define TPS65224_BUCK_VOLT_MASK           0xFF
-> > > +#define TPS65224_BUCK1_VOLT_MAX_HEX       0xFD
-> > > +#define TPS65224_BUCK234_VOLT_MAX_HEX     0x45
-> > > +#define TPS65224_BUCK_VOLT_MAX            3300000
-> > > +#define TPS65224_BUCK_MODE_MASK           0x1
-> > > +
-> > > +#define TPS65224_LDO_VOLT_MASK            (0x3F << 1)
-> > > +#define TPS65224_LDO_VOLT_MAX_HEX         0x3A
-> > > +#define TPS65224_LDO_VOLT_MIN_HEX         0x4
-> > > +#define TPS65224_LDO1_VOLT_MAX            3300000
-> > > +#define TPS65224_LDO23_VOLT_MAX           3400000
-> > > +#define TPS65224_LDO_MODE_MASK            0x1
-> > > +#define TPS65224_LDO_BYPASS_EN            0x80
-> > > +#define TP65224_BUCK_CONF_SLEW_MASK       0x3
-> > > +
-> > > +/* BYPASS is bit7 of VOUT TPS65224_LDO_BYP_MASK */
-> > > +#define TPS65224_LDO123_BYP_CONFIG        7
-> > > +
-> > > +#define TPS65224_LDO123_VOLT_BYP_MIN      2200000
-> > > +#define TPS65224_LDO123_VOLT_BYP_MAX      3600000
-> > > +#define TPS65224_LDO1_VOLT_MIN            1200000
-> > > +#define TPS65224_LDO23_VOLT_MIN           600000
-> > > +#define TPS65224_LDO4_VOLT_MIN            1200000
-> > > +#define TPS65224_LDO1_VSET_MIN            0x0C
-> > > +#define TPS65224_LDO23_VSET_MIN           0x00
-> > > +#define TPS65224_LDO123_VSET_MIN          0x0
-> > > +#define TPS65224_LDO1_VSET_MAX            0x36
-> > > +#define TPS65224_LDO23_VSET_MAX           0x38
-> > > +#define TPS65224_LDO123_STEP              50000
-> > > +#define TPS65224_LDO4_STEP                25000
-> > > +
-> > > +#define TPS65224_WD_MODE_REG              0x406
-> > > +#define TPS65224_WD_PWRHOLD_MASK          BIT(2)
-> > > +#define TPS65224_WD_THR_CFG               0x409
-> > > +#define TPS65224_WD_EN_MASK               BIT(6)
-> > > +
-> > > +#endif // _POWER_TPS65224_H_
-> > > --
-> > > 2.25.1
-> > >
-> > 
-> > Regards,
-> > Simon
+On 11/7/23 03:49, Xavier Drudis Ferran wrote:
+> El Mon, Nov 06, 2023 at 08:54:03AM -0500, Sean Anderson deia:
+>> On 11/6/23 07:35, Xavier Drudis Ferran wrote:
+>>> Thanks for your work. I'm still reading... but...
+>>>
+>>>
+>>> El Sun, Nov 05, 2023 at 09:25:46PM -0500, Sean Anderson deia:
+>>>> diff --git a/include/spl.h b/include/spl.h
+>>>> index 951e136b9ea..ecfc50e0095 100644
+>>>> --- a/include/spl.h
+>>>> +++ b/include/spl.h
+>>>> @@ -297,10 +297,10 @@ struct spl_load_info {
+>>>>    	 * read() - Read from device
+>>>>    	 *
+>>>>    	 * @load: Information about the load state
+>>>> -	 * @sector: Sector number to read from (each @load->bl_len bytes)
+>>>> -	 * @count: Number of sectors to read
+>>>> +	 * @offset: Offset to read from in bytes, in multiples of @load->bl_len
+>>>> +	 * @count: Number of bytes to read, in multiples of @load->bl_len
+>>>
+>>> I'm no native English speaker, but would it be easier to understand? :
+>>>
+>>> +	 * @offset: Offset to read from in bytes, a multiple of @load->bl_len
+>>> +	 * @count: Number of bytes to read, a multiple of @load->bl_len
+>>>
+>>>
+>>>
+>>
+>> I think it would have to be worded
+>>
+>> @offset: Offset to read from in bytes, as a multiple of @load->bl_len
+>>
+>> but to me these both mean the same thing.
+>>
+>> --Sean
 > 
-> Thanks for pointing it out! We will correct it.
+> Ah, OK. I doubted on whether it should be a comma or "as". Apparently
+> it was both.
 > 
-> Regards,
-> Bhargav
+> They may mean the same, but I got confused by having "in bytes", and
+> "in multiples" so close.
+> 
+> "in bytes" means the value should be the correct answer to the
+> question "how many bytes" (not a number of bits, not a number of
+> sectors)
+> 
+> but "in multiples of..." doesn't mean the value should be the correct
+> answer to "how many of multiples". Should the value be a number of
+> sectors (first multiple of bl_len) a number of dozens of sectors
+> (another multiple of bl_len) or ...?
+> 
+> In the first part "in" introduces a unit of measure, but in the second
+> the same word introduces a constraint on a value. That was confusing
+> to me.
+> 
+> Not saying it doesn't mean the same or even that you should change it,
+> just elaborating why I said it.
+> 
 
-Posted this on the wrong thread. Please Ignore this message. 
+OK, what about
 
-Regards,
-Bhargav
+@offset: Offset to read from in bytes. This must be a multiple of @load->bl_len.
+
+--Sean
