@@ -4,84 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 895C8C4332F
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 00:23:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9007CC4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 00:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA9FE876D3;
-	Wed,  8 Nov 2023 01:23:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0241D87269;
+	Wed,  8 Nov 2023 01:29:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iEO+bsNu";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OUwS/CZI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B505876DB; Wed,  8 Nov 2023 01:23:49 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1217B871BB; Wed,  8 Nov 2023 01:29:17 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FD5887689
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 01:23:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 173B98756F
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 01:29:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d865854ef96so6507684276.2
- for <u-boot@lists.denx.de>; Tue, 07 Nov 2023 16:23:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699403025; x=1700007825; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KOwFSHMBoyrjRBoPO8yyj6CNLsxvXZ1RE2+sHMv1FjE=;
- b=iEO+bsNuI7IHLR229ucNtKd638q/caqAqP45cyUFnF5fxVV60Fo2WNNzzdq/ixYKZN
- w9bW2nlihhLfIqqzExDKrzXDFYQs8DGecgM/dQxX6CKUPxTZxBRk6x9vvezf++nv4EXe
- a4R+qQct8xYyP6g9OmEhdBJ1IoLZlrDcQpSOo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699403025; x=1700007825;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KOwFSHMBoyrjRBoPO8yyj6CNLsxvXZ1RE2+sHMv1FjE=;
- b=V9P3EImQwipH85222LkewW4N0GiOFOra1x+1idM1Rn1iCF+D3QSAfyNQgZ7Hmv+40R
- 5qiF8F6E2qzphnoSiF4NU8/jeN70uG/08/rHsrYR+R2C015uEdS5QQ89Js3JT9Dn8O0F
- loDTwFJczpQxT0aSXrnMFfpG588Upf0TcdGr6YARkxn5QvA45xIJhW6rJtLT6RjL886I
- mPIgoOC1DMs87ZrXOhuzBrlh8gHQKrVBVIUjA7csSeKiBtjFRV8xvHIdN9n38LeslPbJ
- uOPznDVxxry0zeUQUCUzbJzxKKB2QLcnZvjZ5U1oigmsqaVIGSTWWrwBVdhi9//xlwrU
- K1Rg==
-X-Gm-Message-State: AOJu0Yz7gnlRuzmr8fWfEOF/7rcJ13tymS3pdF20s/nX2y9BtmHo/1LG
- eKBwzk/PwtqnTYKwVD/5pkzlpw==
-X-Google-Smtp-Source: AGHT+IHnpAI6dCbVy9x2Po7OIdvb21u9pQzTIdSHvocr1j+78zUrULhJVqr0RBVMu1VOvKx+Vd7uVw==
-X-Received: by 2002:a25:2b01:0:b0:da0:84b2:5e3e with SMTP id
- r1-20020a252b01000000b00da084b25e3emr295772ybr.21.1699403025032; 
- Tue, 07 Nov 2023 16:23:45 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
- [2603:6081:7b00:6400:5409:8f3c:5603:314])
- by smtp.gmail.com with ESMTPSA id
- b141-20020a253493000000b00da02a2ef6afsm5844635yba.30.2023.11.07.16.23.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Nov 2023 16:23:44 -0800 (PST)
-Date: Tue, 7 Nov 2023 19:23:42 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sean Edmond <seanedmond@linux.microsoft.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, joe.hershberger@ni.com,
- rfried.dev@gmail.com, sjg@chromium.org, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
-Message-ID: <20231108002342.GE6601@bill-the-cat>
-References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-2-seanedmond@linux.microsoft.com>
- <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
- <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
- <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
- <b058f5a6-52e2-4e0c-a193-30e884b2463a@linux.microsoft.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id E9B0B60FDE;
+ Wed,  8 Nov 2023 00:29:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 77CA7C433C8;
+ Wed,  8 Nov 2023 00:29:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699403348;
+ bh=qZ+AJBj1oEs+fowFGvgTSSfup07s9AnysI/7T+N8Xa4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=OUwS/CZIVdYsipsZwAalveofhBrZ/blZzeqJq/y7m5ya5AEuvGvBmGwiifGO39dn2
+ cIUeEZlkZHbjQsAauRvYYnWwCLggPIxNEHNNthyEq8em+EU0CTSlpavpUziba5+7R1
+ 2PS/GhQIJ+/a0eQIkcqUPoem+npW/Gz1BAOKPSh3yYdqSFNc/x2fyJAkOayUcEVBKr
+ xUkk+Y3Q5sZq1YYZ8rMrAQ3/OyAHgE0d5dybpj4dZWApNM6YrN2yrp6b2mVve4w1uL
+ WWddyPldBVOj/+4enDYHq7nOM0vQJwx5Ltl3Xv5e2TftIcY/hU6wrIiXzvJaZH97BW
+ tRdF5kaXAzoPg==
+Date: Wed, 8 Nov 2023 00:29:03 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Rob Herring <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Anup Patel <apatel@ventanamicro.com>, Xiang W <merlew4n6@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, palmer@dabbelt.com
+Subject: Re: [PATCH v3 0/2] rng: Provide a RNG based on the RISC-V Zkr ISA
+ extension
+Message-ID: <20231107-sprinkled-sixtieth-6456baa2c7a3@spud>
+References: <CAPnjgZ1v1UfADOFDFFFD9UBo5QcRPNLBk+XLBL4JNbGy9poVJw@mail.gmail.com>
+ <20231106204608.GJ496310@bill-the-cat>
+ <CAPnjgZ28HskiFDBDa=s_k6=WNoPfWu88bAaYCY7ew8dcYXW=aQ@mail.gmail.com>
+ <20231107193025.GN6601@bill-the-cat>
+ <CAL_JsqKkjPyVUxjANC3_rOkEAyNUBY_mXf27N6U++KTpujYYLQ@mail.gmail.com>
+ <20231107221023.GS6601@bill-the-cat>
+ <20231107-flyaway-arguable-0bccc778b256@spud>
+ <20231107223837.GU6601@bill-the-cat>
+ <20231107-audible-undoing-293506af3890@spud>
+ <20231107232305.GW6601@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iNvGcfA3Pz7yQcX6"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="Ut9rGd+5ZSBbMXpa"
 Content-Disposition: inline
-In-Reply-To: <b058f5a6-52e2-4e0c-a193-30e884b2463a@linux.microsoft.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20231107232305.GW6601@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,112 +87,125 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---iNvGcfA3Pz7yQcX6
-Content-Type: text/plain; charset=iso-8859-1
+--Ut9rGd+5ZSBbMXpa
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 07, 2023 at 03:50:06PM -0800, Sean Edmond wrote:
->=20
-> On 2023-11-04 12:53 a.m., Heinrich Schuchardt wrote:
-> > On 11/4/23 03:03, Sean Edmond wrote:
-> > >=20
-> > > On 2023-10-23 10:54 p.m., Heinrich Schuchardt wrote:
-> > > > On 10/24/23 02:21, seanedmond@linux.microsoft.com wrote:
-> > > > > From: Sean Edmond <seanedmond@microsoft.com>
-> > > > >=20
-> > > > > Allow dhcp server pass pxe config file full path by using option =
-209
-> > > > >=20
-> > > > > Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> > > > > ---
-> > > > > =A0 cmd/Kconfig |=A0 4 ++++
-> > > > > =A0 cmd/pxe.c=A0=A0 | 10 ++++++++++
-> > > > > =A0 net/bootp.c | 21 +++++++++++++++++++++
-> > > > > =A0 3 files changed, 35 insertions(+)
-> > > > >=20
-> > > > > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > > > > index 5bc0a92d57..adbb1a6187 100644
-> > > > > --- a/cmd/Kconfig
-> > > > > +++ b/cmd/Kconfig
-> > > > > @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
-> > > > > =A0=A0=A0=A0=A0 default 0x15 if ARM
-> > > > > =A0=A0=A0=A0=A0 default 0x0 if X86
-> > > > >=20
-> > > > > +config BOOTP_PXE_DHCP_OPTION
-> > > > > +=A0=A0=A0 bool "Request & store 'pxe_configfile' from BOOTP/DHCP=
- server"
-> > > > > +=A0=A0=A0 depends on BOOTP_PXE
-> > > >=20
-> > > > Why should this be disabled by default?
-> > > >=20
-> > > > Do we really want a separate config variable?
-> > > >=20
-> > > I expect most won't use this option to get the file path (they'll use
-> > > the default paths as per the PXE specification).=A0 It makes more sen=
-se
-> > > for me to keep it optional, like many of the other options?
+On Tue, Nov 07, 2023 at 06:23:05PM -0500, Tom Rini wrote:
+> On Tue, Nov 07, 2023 at 11:12:16PM +0000, Conor Dooley wrote:
+> > +CC Palmer
 > >=20
-> > RFC 5701 seems to require this option. Hence we should make it default
-> > yes. Boards that have a build size issue can opt out.
+> > On Tue, Nov 07, 2023 at 05:38:37PM -0500, Tom Rini wrote:
+> > > On Tue, Nov 07, 2023 at 10:27:50PM +0000, Conor Dooley wrote:
+> > > > On Tue, Nov 07, 2023 at 05:10:23PM -0500, Tom Rini wrote:
+> > > >=20
+> > > >=20
+> > > > > further clarify or not
+> > > > > the RISC-V ISA thing that's elsewhere in this thread (and part of=
+ the
+> > > > > kernel, not a U-Boot thing).
+> > > >=20
+> > > > TBH, this a bit fragmented across threads, and as someone that hasn=
+'t
+> > > > been following it it's a bit difficult to tell exactly what is being
+> > > > asked for. Would someone be able to ask it as a direct question?
+> > >=20
+> > > Sorry for being unclear, and thanks for asking. What I think the U-Bo=
+ot
+> > > community would like to know is, what is the device-tree based way to
+> > > know if a RISC-V platform has the Zbb extensions
+> >=20
+> > For this one, it's pretty straightforward IMO - if riscv,isa-extensions
+> > contains "zbb", then you are safe to use those instructions. My
+> > understanding is that relying on getting illegal instruction traps is
+> > not a sufficient test for usability of standard extensions, as a vendor
+> > extension could be using the same opcodes as a standard extension.
+> >=20
+> > > so the RNG opcodes,
+> > > similar (in concept at least?) to the ARMv8.5 RNG feature.
+> >=20
+> > The ordinary extensions that are instructions - like Zbkb that provides
+> > bit manipulation instructions for cryptography you will be able to rely
+> > on riscv,isa-extensions also. Zkr is actually a CSR acting as an entropy
+> > source and is a bit more complicated. RISC-V Cryptography Extensions
+> > Volume I, Chapter Four [0] is the relevant thing for use of the CSR
+> > provided by Zkr, and it says "The seed CSR is also access controlled by
+> > execution mode, and attempted read or write access will raise an illegal
+> > instruction exception outside M mode unless access is explicitly grante=
+d."
+> > My take is that either the SBI implementation needs to provide S-Mode
+> > U-Boot with an accurate devicetree (including what extensions are valid
+> > for use in S-mode) or if the devicetree is provided as part of the U-Bo=
+ot
+> > binary then it needs to match what is available at that privilege level
+> > on the platform. In this case, you would also be able to rely on
+> > riscv,isa-extensions for that detection. There is an existing dt-binding
+> > patch
+> > <https://lore.kernel.org/linux-riscv/20231107105556.517187-6-cleger@riv=
+osinc.com/>
+> > that adds Zkr, and my proposal would be to document that the presence o=
+f Zkr
+> > explicitly in riscv,isa-extensions means that the bit in mseccfg.[s,u]s=
+eed
+> > has been set so it can be used at the current privilege level.
+> >=20
+> > If that's not acceptable, and people think that having Zkr in the
+> > devicetree means that the hardware has the extension, regardless of
+> > usability at the present privilege level, then IMO we need an SBI ecall
+> > defined to request entablement of the CSR & report as to whether or not
+> > that was possible.
+> >=20
+> > I'm not sure how any of the above lines up with the ARMv8.5 RNG feature
+> > unfortunately.
 >=20
-> The PXELINUX specification
-> (https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX) doesn't state=
- that
-> option 209 is required. In the abense of option 209, PXELINUX will try the
-> following default configuration files (this example is provided on the wi=
-ki
-> link):
-> =A0/mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
-> =A0/mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
-> =A0/mybootdir/pxelinux.cfg/C0A8025B
-> =A0/mybootdir/pxelinux.cfg/C0A8025
-> =A0/mybootdir/pxelinux.cfg/C0A802
-> =A0/mybootdir/pxelinux.cfg/C0A80
-> =A0/mybootdir/pxelinux.cfg/C0A8
-> =A0/mybootdir/pxelinux.cfg/C0A
-> =A0/mybootdir/pxelinux.cfg/C0
-> =A0/mybootdir/pxelinux.cfg/C
-> =A0/mybootdir/pxelinux.cfg/default
->=20
-> If 209 is requested/provided it tries the provided "config file" before t=
-he
-> default paths.=A0 RFC 5071 should be seen as an extension for PXELINUX (n=
-ot a
-> requirement).=A0 RFC 5071 only states "The Config File Option MUST be sup=
-plied
-> by the DHCP server if it appears on the Parameter Request List".
+> Thanks. Setting aside Simon's follow-up, this is what I was looking for.
+> We might have to wait for Heinrich to return from the conference to have
+> time to look at how to utilize the above and see what we can do from
+> there.
 
-We also want to be careful about overall size growth on common options,
-even if someone can opt-out. Those are usually last-ditch stop-gaps and
-it's better to make sure we really need functionality X/Y/Z by default,
-for everyone. Especially with all of the work going on to make HTTP(s)
-based network installs a viable option, how much more do we want to
-change the PXE case, for everyone. I'm personally somewhat looking for
-the use case to be well defined for a "this must be default". Network
-provisioning is a thing, yes, but for whom/what, and in turn how broadly
-do we need this to be in the vast majority of our boards (since it would
-come in via BOOT*DEFAULTS or DISTRO_DEFAULTS).
+I did read that, but I don't think most of it is relevant to the binding
+itself. His five things were:
+| - U-Boot models hardware (and other things) as devices in driver model [1]
 
---=20
-Tom
+This I think should be satisfied. The Zkr CSR is a property of the CPU,
+and shouldn't have its own DT node IMO. Is it problematic for U-Boot to
+populate multiple devices for its driver model based on one DT node?
+I know in Linux that I can create devices using something like
+platform_device_register(), does U-Boot have a similar facility?
+https://elixir.bootlin.com/linux/latest/source/drivers/base/platform.c#L767
 
---iNvGcfA3Pz7yQcX6
+| - U-Boot requires devices to be in the devicetree, with very limited
+| exceptions [2]
+
+| - Where multiple devices exist in a uclass, it is desirable to be able
+| to number them [3]
+
+I'm not sure really how this one ties in. Do you need a number for each
+CPU that supports Zkr, since a system may be heterogeneous? I think that
+how you treat things like that is beyond communicating support via DT
+though, IMO the job of the DT is just to tell U-Boot on which CPUs it
+can access the seed CSR.
+
+| - Similarly it is useful to be able select a particular device, e.g.
+| with a phandle [4]
+
+I suppose a phandle to the CPU would work in this case.
+
+| - U-Boot uses devicetree for configuration as it has no userspace
+
+Cheers,
+Conor.
+
+--Ut9rGd+5ZSBbMXpa
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVK1Q4ACgkQFHw5/5Y0
-tywTiwv/TB8UHqi/VS9Pdh582qM9vv/StJSfaTyRKv3aiVJXPHXkwg5LfTxV4TOk
-1zEHL0qksiEgT+Mnk/KhS8l04v4iumJI709l3C1eoWb78qsuH35R6zBjJ+zNi8Ml
-2xJHQKxhjaLyPE6IioCI7dcaZH8uxLP8bnzJeN7suSrYXAIGvFQmjc2T5CZ5XK10
-u+gMLLHFW+tAAA3L+vdfzKQnA1q/rKUvE3fF6lObhySq7DuiKowsJdi3QT/2TvN9
-jXmBg+5woNwL/7mxvC2dD30Ge3rEIwTwPI82t/I8x8Ixtdu55W7gDa5l+Ov7DQPe
-XyCUYTfUkkVOpj9GwqClDKLIyyQ9GPjbZc+1MODSPW+awrrt1m2VziiiG3YcvFbC
-/IYeD9uhmVylKlBNqmo+1ZYm173G8+h5CZD+n7WPRwtxic3FAdAoVc8wD+7NtdSg
-P0fZ4U89s2vut95UDY+4RrtyKTyLL19jJUuGMsuN37qW/5A7IdTISb4DoAqrovWY
-qFzrOM11
-=GIuI
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZUrWTgAKCRB4tDGHoIJi
+0pQJAQDn4uK1nVIRxuD+p7IqW4mjUriYKBxU/bs5S8YLclOEogEA+zIO0GHZv+vl
+t5GMxPKr54S0jOyqcdJaQXUJkI5RbQc=
+=GPiX
 -----END PGP SIGNATURE-----
 
---iNvGcfA3Pz7yQcX6--
+--Ut9rGd+5ZSBbMXpa--
