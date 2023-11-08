@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38B9EC4167D
-	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 13:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96EE9C4332F
+	for <u-boot@archiver.kernel.org>; Wed,  8 Nov 2023 13:29:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3EEA86F85;
-	Wed,  8 Nov 2023 14:18:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9BC088718B;
+	Wed,  8 Nov 2023 14:29:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NGJHssL5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nL7uCXct";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6C7E86FCC; Wed,  8 Nov 2023 14:18:49 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 84C988718B; Wed,  8 Nov 2023 14:29:03 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98F9E86EEC
- for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 14:18:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B40E8716E
+ for <u-boot@lists.denx.de>; Wed,  8 Nov 2023 14:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5afabb23900so82648337b3.2
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 05:18:47 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5a7af52ee31so81791737b3.2
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 05:29:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699449526; x=1700054326; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699450140; x=1700054940; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6VtJMjyzRQTFY39ACQzjo/ILmVfKOQdMZMPq3YAyo6I=;
- b=NGJHssL5TyuQvbknzcx9OP5eJ42DGbDdhqLjPNi8iluocIG2FItZE+rNpBm3ffodic
- TxoERRQCPATGrSl4g+0CmXdtjFg0pmqo/J2V8+QxXJCPXCy1ieM+puDPr/TSMIVyCgNF
- 8aF387suC/WCcok1RT2KLklP2cxCpC3FDkk0E=
+ bh=hUPz4ITuXyYVSNR0Dm84bMPIsJD6ysFTQ293x0rzgKs=;
+ b=nL7uCXct3T8QaFFPmyacWzn3+CyEhcr3RKj1rQWD04ooQx7xiFxZfLFAdyvW9LeZ7H
+ uHqUL7SdPdqNtqCZzNj7ev5XD6lPvkSZThAsXF5nKemA6Pbp6pTT8lLN7ISg+lRreg1h
+ 3fD6+p2KYj4R4DSoFG39aSVzKytBibzqF3E84=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699449526; x=1700054326;
+ d=1e100.net; s=20230601; t=1699450140; x=1700054940;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6VtJMjyzRQTFY39ACQzjo/ILmVfKOQdMZMPq3YAyo6I=;
- b=pFq+0ffYwaGW5jlbJNuvacpvmPgXC4+/XQvQf8Qv0YefxMlzxyVUV4ZzTo7m+njs0g
- egCypxzYwO8xTCdxOSnyVpy8qaLgtSKoFrdFwV8j+1ZcpcARk70jES+QMh06EeRo0O+8
- F2xjGKAq1wT2OWgNjrWi5TrhQHM+Q5C2iP0oWbscL4iu9axV/o8BzXH1MYXYeqJYm7Ee
- KQI+FfwcG/tA9Hd7C8ERBvzeFUZOBHtt7egsYoYeZ6bbzvV5zXiC0Iib4BPjwDNcUw1+
- JCctirnGME8irEhFlpiNsDF4xzP/2mbDBpVRy1M+VVqO5v6ZW2Oh2Wj2cyUyQlz6Andl
- D9Zg==
-X-Gm-Message-State: AOJu0YwBfbnu39fIEQNabrl63Q0QGuqOZqaoBiDqyBkUk8OusfOC4XXx
- 5A8Rulqq1DklTLIP7N5Vut3KbVLvqd4nBW3ynXqLjA==
-X-Google-Smtp-Source: AGHT+IFHCW/vNDebsKfk3jHDvDJVtmBeemCYbbzlNhn+moyMPTsvmJNgoUzNm07e2DtzWmkLH7qhig==
-X-Received: by 2002:a0d:f204:0:b0:5a7:bc38:fff2 with SMTP id
- b4-20020a0df204000000b005a7bc38fff2mr1640355ywf.15.1699449526362; 
- Wed, 08 Nov 2023 05:18:46 -0800 (PST)
+ bh=hUPz4ITuXyYVSNR0Dm84bMPIsJD6ysFTQ293x0rzgKs=;
+ b=mwg6kP9H85W3zjgMOUcJBQCACZZ2I1OsehfwbZpqrZx/Lc/W5OtI2WHsuZ1f4hHDqV
+ Ajq2XsLCmxy5B7nYQla3I1WtGf9bns1ySZ+7celExJfbPieVZV2hHqs9fgP/ZIoFC+pg
+ RUZNFh4GBSkFS7Cp7yY9b0i7CtBXXIE9PY/tsrp9rOC+rvy7ZyC7KdlG7LVH4z/RYhGa
+ OkHx9hcbR+lIGzxFkSte/gxF4EQ56dn13EKHOu6ZQKXCPjDz2EQtrP4Dcd07zi8TFOXK
+ BtbcyAt0NzB9Ii6mqTopE37EqSCWcH/sx3JkBwPsZDIMeDHSgCMNl8kQC5HAPSDKcug1
+ 5ccg==
+X-Gm-Message-State: AOJu0YzDEXwy3/RoQtR2oMPbgAAHV0ENeAEWtNrGlPtI6vnc4VPu3Au+
+ gwaGJgf/XkOwTPhrmS8RwGsl4w==
+X-Google-Smtp-Source: AGHT+IFsdyI8V5/2TfDrU2uxrOr/Aad9MpWfLg66DUE8ERhJz2hAEGmIvdPCetGtlGRGX6oiF3b8RQ==
+X-Received: by 2002:a81:52ca:0:b0:5a7:fc20:7848 with SMTP id
+ g193-20020a8152ca000000b005a7fc207848mr1558135ywb.1.1699450139889; 
+ Wed, 08 Nov 2023 05:28:59 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5409-8f3c-5603-0314.res6.spectrum.com.
  [2603:6081:7b00:6400:5409:8f3c:5603:314])
  by smtp.gmail.com with ESMTPSA id
- p19-20020a819813000000b005a7a4e3816esm6888245ywg.89.2023.11.08.05.18.45
+ m13-20020a819e0d000000b00577269ba9e9sm6833973ywj.86.2023.11.08.05.28.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Nov 2023 05:18:45 -0800 (PST)
-Date: Wed, 8 Nov 2023 08:18:44 -0500
+ Wed, 08 Nov 2023 05:28:59 -0800 (PST)
+Date: Wed, 8 Nov 2023 08:28:57 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Nitin Yadav <n-yadav@ti.com>
-Cc: nm@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/6] board: ti: am62x: Avoid overwriting reserve mem for
- AM62 SIP
-Message-ID: <20231108131844.GH6601@bill-the-cat>
-References: <20231031132809.1524341-1-n-yadav@ti.com>
- <20231031132809.1524341-4-n-yadav@ti.com>
- <20231031135515.GK496310@bill-the-cat>
- <b10bac0f-ca2a-9a95-ed29-d48dd50d2fbb@ti.com>
+To: Jim Liu <jim.t90615@gmail.com>
+Cc: JJLIU0@nuvoton.com, YSCHU@nuvoton.com--compose, KWLIU@nuvoton.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v1 2/4] board: nuvoton: update console environment variable
+Message-ID: <20231108132857.GI6601@bill-the-cat>
+References: <20231108004027.281383-1-JJLIU0@nuvoton.com>
+ <20231108004027.281383-3-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ivQHCx0wzNY2hiDM"
+ protocol="application/pgp-signature"; boundary="Xp7ukjuOjkxuNM9L"
 Content-Disposition: inline
-In-Reply-To: <b10bac0f-ca2a-9a95-ed29-d48dd50d2fbb@ti.com>
+In-Reply-To: <20231108004027.281383-3-JJLIU0@nuvoton.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,84 +94,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ivQHCx0wzNY2hiDM
+--Xp7ukjuOjkxuNM9L
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 08, 2023 at 03:43:03PM +0530, Nitin Yadav wrote:
->=20
->=20
-> On 31/10/23 19:25, Tom Rini wrote:
-> > On Tue, Oct 31, 2023 at 06:58:06PM +0530, Nitin Yadav wrote:
-> >> AM62 SIP has 512MB RAM. But the top of the RAM is reserved for
-> >> TF-A and OPTEE. U-Boot relocating there would cause overwriting
-> >> of these reserved regions. Fix this by limit U-Boot to first
-> >> 64MB of RAM for all boards with 512MB.
-> >>
-> >> Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-> >> Signed-off-by: Nitin Yadav <n-yadav@ti.com>
-> >> ---
-> >>  board/ti/am62x/evm.c | 11 +++++++++++
-> >>  1 file changed, 11 insertions(+)
-> >>
-> >> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-> >> index ad93908840..ad3e415592 100644
-> >> --- a/board/ti/am62x/evm.c
-> >> +++ b/board/ti/am62x/evm.c
-> >> @@ -18,6 +18,7 @@
-> >>  #include <asm/io.h>
-> >>  #include <asm/arch/hardware.h>
-> >>  #include <dm/uclass.h>
-> >> +#include <linux/sizes.h>
-> >> =20
-> >>  DECLARE_GLOBAL_DATA_PTR;
-> >> =20
-> >> @@ -59,6 +60,16 @@ int dram_init_banksize(void)
-> >>  	return fdtdec_setup_memory_banksize();
-> >>  }
-> >> =20
-> >> +phys_size_t get_effective_memsize(void)
-> >> +{
-> >> +	/*
-> >> +	* Just below 512MB are TF-A and OPTEE reserve regions, thus
-> >> +	* SPL/U-Boot RAM has to start below that. Leave 64MB space for
-> >> +	* all reserved memories.
-> >> +	*/
-> >> +	return gd->ram_size =3D=3D SZ_512M ? SZ_512M - SZ_64M : gd->ram_size;
-> >> +}
-> >=20
-> > Where are TF-A and OPTEE in other cases? Are we not able to read the
-> > reserved memory nodes and handle this through that?
->
-> This is first Board where we have 512M of RAM, Others have 2GB of RAM.
-> That's why we are reserving this space.
+On Wed, Nov 08, 2023 at 08:40:25AM +0800, Jim Liu wrote:
 
-And how is this reservation being communicated / documented ? Why do we
-need something different here, when we don't on 2GB of memory? The
-normal case is U-Boot goes and plays around at the top of memory, so
-there should be something happening in that previous case, where is it /
-why isn't it something that works here?
+> If CONFIG_SYS_SKIP_UART_INIT is enabled, calculate the
+> current baud rate and update the "console" environment
+> variable.
+>=20
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> ---
+>  board/nuvoton/arbel_evb/Kconfig |  1 +
+>  board/nuvoton/common/Kconfig    |  9 +++++
+>  board/nuvoton/common/Makefile   |  1 +
+>  board/nuvoton/common/common.c   | 71 +++++++++++++++++++++++++++++++++
+>  board/nuvoton/common/common.h   | 11 +++++
+>  board/nuvoton/poleg_evb/Kconfig |  1 +
+>  6 files changed, 94 insertions(+)
+>  create mode 100644 board/nuvoton/common/Kconfig
+>  create mode 100644 board/nuvoton/common/Makefile
+>  create mode 100644 board/nuvoton/common/common.c
+>  create mode 100644 board/nuvoton/common/common.h
+
+Please:
+- Don't include <common.h> in code, and audit the rest of the includes
+  in your new file
+- Don't name the new file common.c (and common.h) but instead something
+  about UART, and then only build it with your new CONFIG option
+  enabled, so you don't need a build-time check in the function itself.
+
+Also:
+[snip]
+> +int board_set_console(void)
+
+This function only ever return 0, make it void?
 
 --=20
 Tom
 
---ivQHCx0wzNY2hiDM
+--Xp7ukjuOjkxuNM9L
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLirEACgkQFHw5/5Y0
-tywY6wv+JWlT88UpOCmsbZHckOvclkYzb0HgkumeVZKU+okJKagexa5xMiK8AyqX
-AAB62XeNvZVb7YWApEf/642HQe8Fc2tpjxjJUJ//yC2XWm7MUvW7EH7AspMWcZGu
-n7uLZx3Y3TatzIYvgOE4g7o/meuxJV1D3PAWPaEbvty0xoE7iwEyyoCVMa672t/B
-IPf4vofq3GKTq6PVApTVCsxHFQ9HrStJHf3HezW0VgGP9xwBPo5n88QLViPP1mTO
-ai4U78OIedBgZf1icYeEW/RcMQFAOr4fahSBoOBgsTYVvb5ZI9sWVDDem/75m1oE
-mmiDnxhpMof4nOfChoGNRBp8uhRCLNI5WiVMw6FuypPrNWxuzaE5RzcjqhO2421F
-/jtNsMYuW6VeagydX5oZNrfhW18+Fj5grEaYbvYv18hLK49stOosQNoNy2Nh4NRM
-ggeEYWueWtOtgsCMSnq8RDfs0lJN3S+BaZPRvLf4vodQZjfWKWzwRSDAUL11QIIM
-vh5s0Qtu
-=Gucm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVLjRYACgkQFHw5/5Y0
+tyxn0Av/dCsXpDboFA/Z/XaCKtiQzFf5wKuYLq6n6SdT3LeLqW/v4J4zlXcGKwKl
+0tCjzKi/7x3D5vSti6WCWxb7PFBZiSflSz+Q7Nl5e3W+xcD5cOMnsAAVEt4Tx3L4
+zBxHEToFPT28bfzGQNobl6EqUznHqyiI9CLSbYj21dn7VYqUKkHMul4L4eXaeIWx
+fp7Y/zlqqfC2q4Gm60CMCV6U0AJFAPLjy5rF9vHEMf5fPriu7WYwkDK2H3ZBIPb/
+kJyBgIHfpEzery2otPKyQtCBXHDV2qsF8IcpraGHZZT2Y/2x5xzbmZFomLRH/eB5
+w8HYiLdF/li+PRGguHcakKU9Gek+QKG003VSRPcf9v0NTQjPEop2NaGorrsgFJCi
+/sRKSwyHnKD0mnwK81nE+leX8Ko9Opdd7wegGvoJBRTzeNE80ktSDnzx0VfKkZIz
+q5KKgc49NdyCwGcBd894GOcAxZ8IOBeVHFU0nUHUTvx+8AFVaRx/4KLg9gZBZ9cp
+raq+vJnA
+=VAu7
 -----END PGP SIGNATURE-----
 
---ivQHCx0wzNY2hiDM--
+--Xp7ukjuOjkxuNM9L--
