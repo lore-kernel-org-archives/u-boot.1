@@ -4,98 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38342C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 10:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5187AC0018C
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 11:00:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4995C87489;
-	Thu,  9 Nov 2023 11:55:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
+	by phobos.denx.de (Postfix) with ESMTP id 200E287232;
+	Thu,  9 Nov 2023 12:00:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="Q8c7i4re";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="J1yJRHKH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F84487211; Thu,  9 Nov 2023 11:55:41 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 25126871DA; Thu,  9 Nov 2023 12:00:06 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CCD087483
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 11:55:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=sberdevices.ru
+ by phobos.denx.de (Postfix) with ESMTPS id 0929487232
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 12:00:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 226E612003E;
- Thu,  9 Nov 2023 13:55:39 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 226E612003E
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699527339;
- bh=pJ1HDr4UOKtiLvrnO17XjY4Kd9Yvxi0SkSRyuOcYCpw=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=Q8c7i4reLFonXl36eOVTQBx6Peq9bL6qJTvM75NYstHKinsp0utO6hwAUZEYYFbsi
- uAqDeCULtki9ODzMlwlCNpQD7+dbUzv0+tp1SnhEk4vbFoCJ30gF/fJD3IKWWpflf8
- 1Hz+vaLcJ2C8BSlHMXWZL/QObFeUTA0kAhT0zqaToEMG+k35THZHYwCy+sugcgDFPw
- O0jCWhY/nU9be/nOr6I7sRIXiYIYZaHaHfABdhMHuRlJT7XT0HiRcKa+9gKVX/dypA
- qEU5gxjK4aTwJ7jsaKFRRR1hXUMCOyy/7MmoeoKUYiVNqNbya7960xYMEYXh7cwG68
- WhrIV6nyg8JSg==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  9 Nov 2023 13:55:38 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Thu, 9 Nov 2023 13:55:38 +0300
-From: Igor Prusov <ivprusov@sberdevices.ru>
-To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
- Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
- <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
- Stanley <joel@jms.id.au>, <u-boot-amlogic@groups.io>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v7 8/8] cmd: clk: Make soc_clk_dump static
-Date: Thu, 9 Nov 2023 13:55:16 +0300
-Message-ID: <20231109105516.24892-9-ivprusov@sberdevices.ru>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231109105516.24892-1-ivprusov@sberdevices.ru>
-References: <20231109105516.24892-1-ivprusov@sberdevices.ru>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-507a29c7eefso849509e87.1
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 03:00:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1699527600; x=1700132400;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=BhsoIw/52DksR2uINZu6ebKioTHrSakoA5flskMmWxY=;
+ b=J1yJRHKHx8/sgC1l6M0JYl16m4tMyzp+cbsthTCk0rlc51wqLGpYjjIG2ln3cE415L
+ uat9hXj2eKOdZG1min9m9j9q1Al1AZgNff7laphQRUuWrpLQlLLMtHGubRRumn26m8Pe
+ wPn/3YVTBEeEWTY7HWpd/AkM1Rx5LGnuVlwWx3Weacfc7CSna35eKjoRppf0X9ZIhtqq
+ h+uGwG1zz7XRfkTpj2D6yTchycbC3oy9Hvn+K1hmJWW7w8WV5LMdMsXoKi1feM6H6ZdT
+ uGPj12WEpJ0et6cRzsa+e4iGx0oqA8SLeICvftDoctQogOqJG2odgeg9flhRYqtdkusZ
+ U7aA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699527600; x=1700132400;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BhsoIw/52DksR2uINZu6ebKioTHrSakoA5flskMmWxY=;
+ b=P+c9vrBHIu0uX5cd1czCZMrLuhNnBZBGf72UtIZy/eXPpSW6USjHDq3cxPTUNoG4kg
+ 9wRtj3SE+m/bfeVcR6tXPFf6WjS3kvspYoA4aC48BqDEaktGxQ0IXGPf5UVo5p4U2gs0
+ nnNokl98Omy1xgGB5sN06GjuyFDXTsvtmzJu1syCgMEc1Y2B691QoCeVK6qxs9LGhBD+
+ pEP2mb/20CPBYkwMX3LHu7SmnBoA+KFoEhk8/LHWc42FY5D3pdZkNZyDjQoK4pAVXO5T
+ o70Cr/xRfcpAbTh4/NVNohLwdp70SSt9uC4FrJL/LhLrzUpIYhXFR8RTbljeDhaoBpUX
+ oozQ==
+X-Gm-Message-State: AOJu0Yz3yopFGUQCbowM2HYrtWmvigQFPL9aNDHRiRpraDM0l1EJGt9Y
+ YOED0mnXXmA6LINSYEIrBqFOcA==
+X-Google-Smtp-Source: AGHT+IH9laUxXwePSndaJzm9y6RKSAjVGpxy5MM2N6DQzPzc4l1S4dFihvaszcXOU5OYnr5h3sha6Q==
+X-Received: by 2002:a19:f007:0:b0:509:8a7e:4d0d with SMTP id
+ p7-20020a19f007000000b005098a7e4d0dmr1133774lfc.0.1699527599804; 
+ Thu, 09 Nov 2023 02:59:59 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ i15-20020a05600c354f00b004067e905f44sm1755978wmq.9.2023.11.09.02.59.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Nov 2023 02:59:59 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Joe
+ Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>, Sean
+ Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>, Dmitrii
+ Merkurev <dimorinny@google.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/5] Implement fastboot multiresponce
+In-Reply-To: <94E7D060-9388-4888-B7FF-EE911A179B2C@gmail.com>
+References: <20231107124241.35432-1-clamor95@gmail.com>
+ <87cywj9v45.fsf@baylibre.com>
+ <94E7D060-9388-4888-B7FF-EE911A179B2C@gmail.com>
+Date: Thu, 09 Nov 2023 11:59:58 +0100
+Message-ID: <87y1f78a4x.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181238 [Nov 09 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- sberdevices.ru:5.0.1,7.1.1; 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
- {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/09 07:10:00 #22435383
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,53 +100,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After introducing dump to clk_ops there is no need to override or expose
-this symbol anymore.
+Hi Svyatoslav,
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
-Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
----
- cmd/clk.c     | 4 ++--
- include/clk.h | 2 --
- 2 files changed, 2 insertions(+), 4 deletions(-)
+On jeu., nov. 09, 2023 at 11:01, Svyatoslav Ryhel <clamor95@gmail.com> wrot=
+e:
 
-diff --git a/cmd/clk.c b/cmd/clk.c
-index 4b9709d3ff..7bbcbfeda3 100644
---- a/cmd/clk.c
-+++ b/cmd/clk.c
-@@ -59,7 +59,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
- 	}
- }
- 
--int __weak soc_clk_dump(void)
-+static int soc_clk_dump(void)
- {
- 	struct udevice *dev;
- 	const struct clk_ops *ops;
-@@ -81,7 +81,7 @@ int __weak soc_clk_dump(void)
- 	return 0;
- }
- #else
--int __weak soc_clk_dump(void)
-+static int soc_clk_dump(void)
- {
- 	puts("Not implemented\n");
- 	return 1;
-diff --git a/include/clk.h b/include/clk.h
-index 249c0e0ab4..3d6394477b 100644
---- a/include/clk.h
-+++ b/include/clk.h
-@@ -676,8 +676,6 @@ static inline bool clk_valid(struct clk *clk)
- 	return clk && !!clk->dev;
- }
- 
--int soc_clk_dump(void);
--
- #endif
- 
- #define clk_prepare_enable(clk) clk_enable(clk)
--- 
-2.34.1
+> 9 =D0=BB=D0=B8=D1=81=D1=82=D0=BE=D0=BF=D0=B0=D0=B4=D0=B0 2023 =D1=80. 10:=
+41:30 GMT+02:00, Mattijs Korpershoek <mkorpershoek@baylibre.com> =D0=BD=D0=
+=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>>Hi Svyatoslav, Ion,
+>>
+>>Thank you for these series.
+>>
+>>On mar., nov. 07, 2023 at 14:42, Svyatoslav Ryhel <clamor95@gmail.com> wr=
+ote:
+>>
+>>> Currently u-boot fastboot can only send one message back to host,
+>>> so if there is a need to print more than one line messages must be
+>>> kept sending until all the required data is obtained. This behavior
+>>> can be adjusted using multiresponce ability (getting multiple lines
+>>> of response) proposed in this patch set.
+>>>
+>>> Implementation of multiresponce leads to ability to dump content of
+>>> console buffer which, with use of "oem run", allows to entirely avoid
+>>> need in UART.
+>>
+>
+> Hello Mattijs!
+> Thank you for your suggestions and so rapid responce!
+>
+>>I'm happy to fastboot getvar all implemented since it's standardly
+>>supported on Android phones.
+>>
+>>fastboot oem console seems like a nice debug tool as well when no
+>>console is available.
+>>
+>>I do have some concerns with the series, mainly because the introduction
+>>of the "MORE" byte response.
+>>"MORE" is not part of the fastboot specification [1].
+>>
+>>However, that specification documents "TEXT", which, per my
+>>understanding, should allow to send multiple responses as well.
+>>
+>>Could we implement this using "TEXT" instead ?
+>
+> I see no issues with replacing MORE with TEXT whatsoever.
+>
+> These patches were mainly developed and used for our internal development=
+ needs but since they served extremely well, I have decided to push them up=
+stream so other developers could benefit as well.
 
+Thank you for taking the time to upstream.
+
+>
+> If you have no other suggestions then swap more > text, please send your =
+reviewed-by to patch and I will reload v2 with swap included.
+
+I will do a more thorough review in the coming days, I wanted to get
+feedback on MORE->TEXT first.
+
+>
+> Best regards,
+> Svyatoslav R.
+>
+>>[1] https://android.googlesource.com/platform/system/core/+/master/fastbo=
+ot/#transport-and-framing
+>>
+>>>
+>>> Ion Agorria (5):
+>>>   fastboot: multiresponse support
+>>>   fastboot: implement "getvar all"
+>>>   commonn: console: introduce overflow and isempty calls
+>>>   lib: membuff: fix readline not returning line in case of overflow
+>>>   fastboot: add oem console command support
+>>>
+>>>  boot/bootmeth_extlinux.c          |  2 +-
+>>>  common/console.c                  | 17 +++++--
+>>>  doc/android/fastboot-protocol.rst |  3 ++
+>>>  doc/android/fastboot.rst          |  1 +
+>>>  drivers/fastboot/Kconfig          |  7 +++
+>>>  drivers/fastboot/fb_command.c     | 52 +++++++++++++++++++++
+>>>  drivers/fastboot/fb_getvar.c      | 75 +++++++++++++++++++++++++------
+>>>  drivers/usb/gadget/f_fastboot.c   | 29 ++++++++++++
+>>>  include/console.h                 | 14 ++++++
+>>>  include/fastboot-internal.h       |  7 +++
+>>>  include/fastboot.h                |  9 ++++
+>>>  include/membuff.h                 |  5 ++-
+>>>  lib/membuff.c                     |  4 +-
+>>>  net/fastboot_udp.c                | 25 ++++++++---
+>>>  test/ut.c                         |  9 ++--
+>>>  15 files changed, 226 insertions(+), 33 deletions(-)
+>>>
+>>> --=20
+>>> 2.40.1
