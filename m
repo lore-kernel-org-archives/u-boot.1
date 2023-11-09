@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E1AC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 12:53:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A11BC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 12:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D082286FED;
-	Thu,  9 Nov 2023 13:53:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CAFBA87101;
+	Thu,  9 Nov 2023 13:56:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VY/+jFoh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Br52MNHb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE99087108; Thu,  9 Nov 2023 13:53:50 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 4870387168; Thu,  9 Nov 2023 13:56:05 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C138B86F7E
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 13:53:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42E4686FED
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 13:56:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7789aed0e46so53797585a.0
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 04:53:48 -0800 (PST)
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3b4145e887bso435974b6e.3
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 04:56:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699534427; x=1700139227; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CVq2vrqz/XVntNMNQ+NpAohUQUb0P+xsy1GjUTcOYMU=;
- b=VY/+jFoh5unTXezKArae0mczhH+tDmuXqt9pHyWJ3Y6To6UlmScpKim8j+XpoTgUol
- BAllFQamk7U0S8K2l+qhoHn9n6g9D/UjiAlj3Uf20Dp1IOFHGVUzx+VVH3RW+1AtB1TJ
- IVeSA2sHz1/N6Ck9O3E+8qQmkNL+5bprtnPbM=
+ d=gmail.com; s=20230601; t=1699534561; x=1700139361; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vMtVPjYemDrrvRqJb/5Zkca42TYRiTdPzQ3L0UVIdNo=;
+ b=Br52MNHbedf94K0dUCOHcQhInSqVGj4AkiW0Spsk17ATt0jQ4W4ztLVo+GO72gSK4r
+ XBkT23e2ZW/IMRED6vJOjIKYsVpg+1Uce0WXOcKaVkAVOGGaccUakMsP9LD4gLi2NjbL
+ J++Fel6lItN8ZEeyULLVy4pTMX6fscihWrrEglISCMVbmAo14JM1vFSyGColOyHat1QS
+ HBCn7bSpkOeicrancRpBf68ijJ2OONlMrte7VFv6l4JyQWGhBQ8DKkx4syXvP0I3+69B
+ WYRsT1cOkJ/9POBJ6i03cKV7kjsWrgCvLnivw+XWLBW9fmHS4+qtgjMNhn661nTmqwqm
+ 38DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699534427; x=1700139227;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CVq2vrqz/XVntNMNQ+NpAohUQUb0P+xsy1GjUTcOYMU=;
- b=ijLU/k7iGODLFUZVn17hmHhqZ4NXKLuBX6ZBHLbXtUlkFYrkywXSAgxLgbpGWDuix1
- owG1JBVOJdoxk85rxoK6qsLF3l8w8oklkkf/6W1YFGttiDNgJQKNQ9gBt1lBY1jal6J1
- z4puoD3c8pJIcxopP4B5FHxTv38q2UUUfqZL/Zxc9wqpmAZPrt/zuPg+kEWqfzqf3IVS
- JOgxubeK7KqCj5aMXZ6G5ighoZqR7dvoWY6HzvBe72UBauvljZ1tklvei8hX7XH6+LJd
- G8vVfq++aV5SLriAm0w01lKBeNQgHRike7EPecRun2or0gFEyoUeBdTerGIJDH/5e+Hy
- JLtg==
-X-Gm-Message-State: AOJu0YxGmQBIK1sPhXAXyKO8Bx7hmsino8eAs6UUf5lO9WhYswmKXGlu
- Wq3lcmq50Knv6mZ7D3bh4p/lIw==
-X-Google-Smtp-Source: AGHT+IH41i7Syedt5eYWScYqPe5qAm+gAxzPno87LmfFFKXIst2qtT52xR2yOwoT4l3FdISOQhB+Xw==
-X-Received: by 2002:a05:620a:46ac:b0:777:659d:7fcb with SMTP id
- bq44-20020a05620a46ac00b00777659d7fcbmr5082322qkb.36.1699534427441; 
- Thu, 09 Nov 2023 04:53:47 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
- [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
+ d=1e100.net; s=20230601; t=1699534561; x=1700139361;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vMtVPjYemDrrvRqJb/5Zkca42TYRiTdPzQ3L0UVIdNo=;
+ b=h2H7uSVtJJXNIRnVwf2eq4/qvNati0fWWvK66bzDbhvoKxjbhNY+UOzz4lsdNpP//K
+ Y1KpbYKHQfIBc8nyzNS8NRLaM32pegBguSMgNQgEA5nzLbkhiPHOklJ3uU79GAGd1LHB
+ 5FFAeg96uOrnm2NQHddaLhQH+o4F7vJI3hyJyLromZNUPx8m+LkcK4T2xeC8/aUTRa5Q
+ PAHpOlwP9RGBaRQOIuAdivnUNfW/liadEN7UJNpa2pe49KwG6SbEPFkr6fJjgV6ct7iZ
+ 6Bx+U9yKP9/oqob0MPHC/a4Oy535K/fnXIpyfITKUqcBea0Bg6Tly57g9uujaOaFBTyV
+ wOSQ==
+X-Gm-Message-State: AOJu0YzdPCbdQpM7/4QcR4pm0Ahz5hj/0Qkoj72AhZ+BQmCphi3M4gZV
+ 4dcIG4crXuxAuItcmxV5jNsHMvYEaYwdKBt4
+X-Google-Smtp-Source: AGHT+IFGNBt0V3UXivw3skRE3pvAT3zoncCVW8fivmR4aP8C1tGSgeDnz80P7DtZhJFgKEKBB0HJ7A==
+X-Received: by 2002:a05:6808:211c:b0:3ae:55e6:1e34 with SMTP id
+ r28-20020a056808211c00b003ae55e61e34mr1545166oiw.58.1699534560705; 
+ Thu, 09 Nov 2023 04:56:00 -0800 (PST)
+Received: from ownia.localdomain ([8.210.91.195])
  by smtp.gmail.com with ESMTPSA id
- m12-20020a05620a24cc00b007770673e757sm1978186qkn.94.2023.11.09.04.53.46
+ t190-20020a632dc7000000b005bd980cca56sm4624094pgt.29.2023.11.09.04.55.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Nov 2023 04:53:46 -0800 (PST)
-Date: Thu, 9 Nov 2023 07:53:45 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] board: samsung: Remove incorrect SYS_CONFIG_NAME in
- axy17lte Kconfig
-Message-ID: <20231109125345.GA6601@bill-the-cat>
-References: <20231020184253.21915-1-semen.protsenko@linaro.org>
+ Thu, 09 Nov 2023 04:56:00 -0800 (PST)
+From: Weizhao Ouyang <o451686892@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Weizhao Ouyang <o451686892@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH] efi_loader: Fix UEFI variable error handling
+Date: Thu,  9 Nov 2023 12:55:41 +0000
+Message-Id: <20231109125541.10845-1-o451686892@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hHTHoHoExPrFhX+M"
-Content-Disposition: inline
-In-Reply-To: <20231020184253.21915-1-semen.protsenko@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,75 +90,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Correct some UEFI variable error handing code paths.
 
---hHTHoHoExPrFhX+M
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+---
+ lib/efi_loader/efi_var_file.c | 1 +
+ lib/efi_loader/efi_variable.c | 8 ++++----
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-On Fri, Oct 20, 2023 at 01:42:53PM -0500, Sam Protsenko wrote:
+diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+index 62e071bd83..dbb9b1f3fc 100644
+--- a/lib/efi_loader/efi_var_file.c
++++ b/lib/efi_loader/efi_var_file.c
+@@ -236,6 +236,7 @@ efi_status_t efi_var_from_file(void)
+ 		log_err("Invalid EFI variables file\n");
+ error:
+ 	free(buf);
++	return ret;
+ #endif
+ 	return EFI_SUCCESS;
+ }
+diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+index be95ed44e6..13966297c6 100644
+--- a/lib/efi_loader/efi_variable.c
++++ b/lib/efi_loader/efi_variable.c
+@@ -350,17 +350,17 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 
+ 	if (var_type == EFI_AUTH_VAR_PK)
+ 		ret = efi_init_secure_state();
+-	else
+-		ret = EFI_SUCCESS;
++	if (ret != EFI_SUCCESS)
++		return ret;
+ 
+ 	/*
+ 	 * Write non-volatile EFI variables to file
+ 	 * TODO: check if a value change has occured to avoid superfluous writes
+ 	 */
+ 	if (attributes & EFI_VARIABLE_NON_VOLATILE)
+-		efi_var_to_file();
++		ret = efi_var_to_file();
+ 
+-	return EFI_SUCCESS;
++	return ret;
+ }
+ 
+ efi_status_t efi_query_variable_info_int(u32 attributes,
+-- 
+2.39.2
 
-> The global SYS_CONFIG_NAME in axy17lte Kconfig overrides SYS_CONFIG_NAME
-> for all boards specified after this line in
-> arch/arm/mach-exynos/Kconfig:
->=20
->     source "board/samsung/axy17lte/Kconfig"
->=20
-> Right now it's the last 'source' line there, so the issue is not
-> reproducible. But once some board is moved or added after this line the
-> next build error will happen:
-
-Good spotting on this one.
-
-[snip]
-> diff --git a/board/samsung/axy17lte/Kconfig b/board/samsung/axy17lte/Kcon=
-fig
-> index a018547ff5d4..209394a8a5a8 100644
-> --- a/board/samsung/axy17lte/Kconfig
-> +++ b/board/samsung/axy17lte/Kconfig
-> @@ -1,11 +1,3 @@
-> -config SYS_CONFIG_NAME
-> -	string "Board configuration name"
-> -	default "exynos78x0-common.h"
-> -	help
-> -	  This option contains information about board configuration name.
-> -	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
-> -	  will be used for board configuration.
-> -
->  if TARGET_A5Y17LTE
->  config SYS_BOARD
->  	default "axy17lte"
-
-But this isn't right as Minkyu points out because SYS_CONFIG_NAME isn't
-set for these platforms now. The fix is to do as
-board/freescale/lx2160a/Kconfig does for example and have
-SYS_CONFIG_NAME under each if TARGET_... stanza, even if we're repeating
-the value. It may or may not look cleaner to do:
-config SYS_CONFIG_NAME
-	default "exynos78x0-common.h" if TARGET_A5Y17LTE || \
-		TARGET_A7Y17LTE || TARGET_A3Y17LTE
-
-In the file directly, instead.
-
---=20
-Tom
-
---hHTHoHoExPrFhX+M
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVM1lAACgkQFHw5/5Y0
-tyw7qQv/VPZ+E5RHcnRGpAi2RIZkLoh6WnDdiG1phoEpc1WJUQPyqtrFH6uJ7Gq2
-+sEKlCo+lZzjP98OS0WX5KLMd4jG/1X4FhA3zSF8IEvqxuKjR0di5FmvfomERTwv
-EBhEkqomthXwysG0CSGoi1iuC/7UlXQo6st/n7X+mlXx9yhZsd9gm1NcZWPAOu1+
-Ddjd/jvd/PVa58/jnlQpWQYIm+1js9jZGRQ6tad2vSToljGLsSUtAU41frWkY/ph
-/EUTtHt9r19a3+HPfc1oRcRgmvXlyKEveZbqSClbeFYz6rDZq/StidTQzF3gCfr5
-EAQeIE52v8iYHanqCeQqrQipt4ZAEnvN+9p/tF+tYsOrpkh/qb5+0KrbNwmVy5IF
-to677ZEGcIboPoB+cKv7ukdvnLX/Pt1Kg6q7AEBV+ibd4jHmW3g3Iy8mqRYMEgPo
-9cmmZ/zrxJUumf+NxpPH1XXVYhdI3zPl/O/Hb2g90CiLOSPx9rLJF0rY2h+2azkF
-JGGOKx1x
-=RZ4k
------END PGP SIGNATURE-----
-
---hHTHoHoExPrFhX+M--
