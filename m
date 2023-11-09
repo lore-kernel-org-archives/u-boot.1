@@ -4,65 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E65C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 01:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86A99C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 01:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5CEA870A4;
-	Thu,  9 Nov 2023 02:15:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D715F87128;
+	Thu,  9 Nov 2023 02:15:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YjtFi4C3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LJXwR60G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 957B487033; Thu,  9 Nov 2023 02:15:29 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 77A3C870DD; Thu,  9 Nov 2023 02:15:40 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1112E870A8
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 02:15:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4550487033
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 02:15:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-53e2308198eso425997a12.1
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 17:15:24 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5437d60fb7aso392187a12.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 17:15:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699492523; x=1700097323; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699492534; x=1700097334; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/Y7VAakIhpjGFR4Vqp3myIw7VIPEq92qSFBMKBtqZ74=;
- b=YjtFi4C3mfSn+xWsDUiIcChMeo441ot+3yo42lLRFF1kiKSr9KUxUNDFTvskvDjXwP
- AN4kqPKeaoNB1e+KkHF8TDOWA0jDtj2EtjVz2zhDMor0+FkvZts8moLOfAVLtUxEcdUz
- 3bc5fyIeQ5EgPJ48w5P99x6g412bAzxXDZQwI=
+ bh=EqJqv9lzHcISmEBZwdmPPbbwoER9UKKyFb/pCXFnGtU=;
+ b=LJXwR60G0GO9NQ8wTVOSz1n5iy1afA4yWTRWaFrqBWlJ5O/SFB6Hkhz2glbjbNvURZ
+ mgCJGGs60+2B/Wv+Gb6h04l1FiFKIAotR86sa00FnJ48dDX2jkfsR8W5gRdolu0AxHhT
+ 3flKMig4bKpW97iRH8ugxfwKd1yt/uW3rvDOs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699492523; x=1700097323;
+ d=1e100.net; s=20230601; t=1699492534; x=1700097334;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/Y7VAakIhpjGFR4Vqp3myIw7VIPEq92qSFBMKBtqZ74=;
- b=h0d30y8dHZryk4VCJVjAeD2ATAlbepjyDU458wHtlwm+gc4+oZqbi7KBTHtYvnck1k
- WOVin4gmT5AZsdL87vF01653979c0xOvN78w4uHAlRF5BSiQ2AYjJpoYNG8RhsEdebDW
- /s7xkVM4/kaC5c7tgZ4WOH8QnrhMAoSVUhBl1pys1IUA13r7wtn2YP+/A49Juj57liMP
- RRVkhMYeHtlK42sELwbXhWVBNZi2sw2Z18PHdDn2ZsZ5W6q56/iyvjf32syAeJW1QNCw
- UcLUNnQncEdFna7PZt7KLh/m2LBwERqpTYQrEBPKmTouEUpqbCtNdbBp84N7fxYuEMbJ
- bWJw==
-X-Gm-Message-State: AOJu0Yzv8rQkHPgAEgxLndLXFJUmHmWNHnHFGd+hMysXQHk87S95JKu2
- +bFgfY/Ww/p1/tYmIKvWHO8tcKUWRcoCfryecMmWCeFSy1oRdSjFckRwdA==
-X-Google-Smtp-Source: AGHT+IEGIt/r3oU5lTZ6ai7lzjYMzWVo4jvilaEu3qB7pRhM21Uc0NLD8bAf8GkpCkvsVkv7hkMpUPOXyRvBXUtnjTI=
-X-Received: by 2002:a50:c351:0:b0:543:4ff0:4fd5 with SMTP id
- q17-20020a50c351000000b005434ff04fd5mr2576892edb.39.1699492523347; Wed, 08
- Nov 2023 17:15:23 -0800 (PST)
+ bh=EqJqv9lzHcISmEBZwdmPPbbwoER9UKKyFb/pCXFnGtU=;
+ b=k3iAD9bq/f0c6rQqCxcSWTnuRtjxW0MGVNU06wyLOriZdgFAU9KiEsRi/Le9ml2Rz3
+ 22hnnb1w2t/mxh+VM3kDlgh/3RtSszXu8sSeucY1mrJzJpMAI9YBgxqWP+QzvCNs9irI
+ YaapxL5krq3C4KyQvvwj5rwuqOPN7CtLvKlk8b6GA8S8sBIeEppf0hTw5VE6dftqwGSQ
+ v6RCgv5fG6xgTZ+rFyXz9Zk2fM2/9m94KbB/k9B4Er683UCFBx0y7ZpE4+AEsvTWrV/y
+ /O5K3iLDdK/zZn5hIUqQXLywAS2tTe5UgXvCTdzroXWUBEI6AFpkHzzQmvvtcO23BElh
+ icNQ==
+X-Gm-Message-State: AOJu0YzRiRTHI67gXpdedB9QmOFDmkakQrlwp++tK571IrY98b7JXJh1
+ Q7CuwjNzUWOFccfACBiwozOJR/S1GpeBwE049RAO3w==
+X-Google-Smtp-Source: AGHT+IGC8yfCdGJqtc0NvMuhTeU55wtKgGJcwHEQYhesuwJowc+wxmEDbJffQZfIA3tNLBXXOVVmIA8gcrFO+JOkXOk=
+X-Received: by 2002:a50:9550:0:b0:543:7478:64db with SMTP id
+ v16-20020a509550000000b00543747864dbmr3113239eda.15.1699492534203; Wed, 08
+ Nov 2023 17:15:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20231109001225.2357160-1-trini@konsulko.com>
-In-Reply-To: <20231109001225.2357160-1-trini@konsulko.com>
+References: <20231108110637.3691441-1-masahisa.kojima@linaro.org>
+ <20231108110637.3691441-3-masahisa.kojima@linaro.org>
+In-Reply-To: <20231108110637.3691441-3-masahisa.kojima@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Nov 2023 18:15:11 -0700
-Message-ID: <CAPnjgZ26m0H=+40Gcx21KgkZe-gKx42mS5QbJMd4oHT4Q_HUTg@mail.gmail.com>
-Subject: Re: [PATCH] net: Make NET imply NETDEVICES
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Wed, 8 Nov 2023 18:15:22 -0700
+Message-ID: <CAPnjgZ0dgv5vRsMP4FHffhY1Mhi7ZLqwU8HNzVnZ0nuDS2AZOw@mail.gmail.com>
+Subject: Re: [PATCH v11 2/9] net: wget: add wget with dns utility function
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,30 +85,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 8 Nov 2023 at 17:12, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 8 Nov 2023 at 04:07, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
 >
-> Normally, when NET is enabled, CMD_NET will then be enabled and in turn
-> NETDEVICES will (likely) be enabled via imply. However, if we disable
-> CMDLINE in a defconfig we now no longer get CMD_NET enabling NETDEVICES
-> for us. This suggestion (as an imply is) really isn't about the network
-> commands but network itself and is a legacy of how intertwined
-> NET/CMD_NET were historically. Move this over to the NET entry instead
-> where it is a more logical fit.
+> Current wget takes the target uri in this format:
+>  "<http server ip>:<file path>"  e.g.) 192.168.1.1:/bar
+> The http server ip address must be resolved before
+> calling wget.
 >
-> Reported-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> This commit adds the utility function runs wget with dhs.
+> User can call wget with the uri like "http://foo/bar".
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 > ---
-> This could also be dropping the imply from cmd/Kconfig and instead
-> making drivers/net/Kconfig::NETDEVICES be default y, which is what it
-> practically is today. This would require a more lengthy check however to
-> be sure there's no functional change and I'm not sure it's any better or
-> worse than this approach.
-> ---
->  cmd/Kconfig | 1 -
->  net/Kconfig | 1 +
->  2 files changed, 1 insertion(+), 1 deletion(-)
+>  include/net.h |  9 +++++++++
+>  net/wget.c    | 54 +++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 63 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Tested-by: Simon Glass <sjg@chromium.org>
-
-Thanks!
