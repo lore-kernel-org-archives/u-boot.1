@@ -4,60 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793C3C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 10:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16894C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 10:55:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 922EF87120;
-	Thu,  9 Nov 2023 11:43:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 590B88723E;
+	Thu,  9 Nov 2023 11:55:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="bVqyIIVx";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="VMM+6vH2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71124871FC; Thu,  9 Nov 2023 11:43:19 +0100 (CET)
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::228])
+ id BC5198721A; Thu,  9 Nov 2023 11:55:33 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE0C786A4C
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 11:43:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 988AB870D2
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 11:55:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 26F821BF20A;
- Thu,  9 Nov 2023 10:43:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1699526593;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8gkOmniIdrfCJhKjqNaOaqFzw2iosADP2Bv8nlCRuvU=;
- b=bVqyIIVx4rj4AD0ZA1iAckTG857Km+gPxSdxJdmEFRHfRET80SfYdnriny2scEc2YjDOJx
- pIz3OV340buFfskm7TVcS2MgdY2Ef5lqtHt7BVhaVkVvwYpYjlPtNfYq50gaHef2CUhSUH
- 0pmAS0EPYsecD44GmX/fSRNH+qCKGyAlULV7yFv8Sp3ZIjhIzZCFmUI25ONPm0vIsP/knz
- FgOzXYF7AGP3UZSmaysX6OggU9Gzr1kRnPrYcBDkSyyV7c0kdfBAixUz5Og77UV/3uIXM0
- 6bdSfLWk8BfaDPT3u8uU2LgVlOjrgCjCm8aRmZLZB/QMMLJJVr7GMdrF7JC91w==
-Message-ID: <a8ee2c00-4824-4e3f-804c-0472d152a53a@bootlin.com>
-Date: Thu, 9 Nov 2023 11:43:12 +0100
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 0BB3710003B;
+ Thu,  9 Nov 2023 13:55:31 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 0BB3710003B
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+ s=mail; t=1699527331;
+ bh=WZTE2yJHGTg4xPb/w/zuRZKGM4cTcUjatPZtIl0Bvv8=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=VMM+6vH2M1L6mFOFEz9EPEMEl+0m6AApmotFMrgjTdnvKt5eWrPgSNCz2EEOHe4BB
+ 3DksSMRWkviJ6QuoYlwxSb2NqXT1Z08onAwvOZ7gy5dWO4Vz8kf1nvG0be6HCa+V03
+ y0seB3vJJuBaDYuLIvh4fb6Sst8bOlDeNpmhqmafY9YFwirAWaK9aLUG2QzwCSiADF
+ ZX7usTsM3CJ7F2Ogxq0HBSHdo2uR8ez8WEYqypmOIA92HmM1n7w1Rda2/gWrWaH6tx
+ hULfGszthp0eWAX/hoSfQdLVi8HWI8vR8SMqLYPaeSb+PduSMWNrmVKWOgBzx0wSTE
+ U3toPNg7JQNpQ==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu,  9 Nov 2023 13:55:30 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Thu, 9 Nov 2023 13:55:29 +0300
+From: Igor Prusov <ivprusov@sberdevices.ru>
+To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
+ Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
+ <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
+ Stanley <joel@jms.id.au>, <u-boot-amlogic@groups.io>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH v7 0/8] clk: Switch from soc_clk_dump to clk_ops function
+Date: Thu, 9 Nov 2023 13:55:08 +0300
+Message-ID: <20231109105516.24892-1-ivprusov@sberdevices.ru>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/8] board: ti: j721e: Add the missing part of exit
- retention for k3-ddrss (J7200)
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, nm@ti.com, thomas.petazzoni@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com
-References: <20231107161802.855154-1-thomas.richard@bootlin.com>
- <20231107161802.855154-7-thomas.richard@bootlin.com>
- <20231107181853.GK6601@bill-the-cat>
-From: Thomas Richard <thomas.richard@bootlin.com>
-In-Reply-To: <20231107181853.GK6601@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-GND-Sasl: thomas.richard@bootlin.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 181239 [Nov 09 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 543 543
+ 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; sberdevices.ru:7.1.1,5.0.1;
+ salutedevices.com:7.1.1;
+ 127.0.0.199:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
+ {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/11/09 07:10:00 #22435383
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,45 +110,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/7/23 19:18, Tom Rini wrote:
-> On Tue, Nov 07, 2023 at 05:18:00PM +0100, Thomas Richard wrote:
-> 
->> Add the board specific part of the exit retention sequence for k3-ddrss
->>
->> Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
->>
->> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
->> Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
-> 
-> If this ends up being physical board design specific and so someone
-> making a new design for this SoC with a custom board layout entirely
-> needs something else, we should think harder about what's in
-> board_is_resuming() vs what we document the function does. If however,
-> this is generic to the SoC and will be needed, it should be folded in
-> with the previous patch and the commit message expanded, and the
-> documentation part of this series explain clearly what the functions are
-> responsible for.
-> 
+Currently clock providers may override default implementation of
+soc_clk_dump function to replace clk dump command output. This causes
+confusing behaviour when u-boot is built with one of such drivers
+enabled but still has clocks defined using CCF. For example, enabling
+CMD_CLK and using clk dump on sandbox target will not show CCF clocks
+because k210 driver overrides common soc_clk_dump.
 
-Hi Tom,
+Changelog:
+ v1 -> v2:
+ - Add missing static to dump functions
 
-Thanks for all these interesting feedback's.
+ v2 -> v3:
+ - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
 
-From my point of view, board_is_resuming will work with all j7* SoCs and
-all new designs for these SoCs.
-This function only read and erase a scratchpad register in the PMIC A.
-So it should be ok for all designs which have the PMIC@48.
+ v3 -> v4:
+ - Rebase and refactor dump for new Amlogic A1 clock controller driver
 
-For the function board_k3_ddrss_lpddr4_release_retention, it's a little
-bit more tricky. The sequence is specific to the SOC, but the GPIOs used
-are specific to the board.
+ v4 -> v5:
+ - Add docs for dump() function in clk_ops
+ - Print driver and device names before calling corresponding dump()
 
-Regards,
+ v5 -> v6:
+ - dump() return type changed to void
+ - meson_clk_dump() and helper functions moved under CONFIG_CMD_CLK to
+   fix unused-function diagnostic
 
-Thomas
+v6 -> v7:
+ - fix return type of k210_clk_dump()
+ - fix clk_ops dump() docs since it returns void now
+
+Igor Prusov (8):
+  clk: zynq: Move soc_clk_dump to Zynq clock driver
+  clk: ast2600: Move soc_clk_dump function
+  clk: k210: Move soc_clk_dump function
+  clk: amlogic: Move driver and ops structs
+  clk: Add dump operation to clk_ops
+  cmd: clk: Use dump function from clk_ops
+  clk: treewide: switch to clock dump from clk_ops
+  cmd: clk: Make soc_clk_dump static
+
+ arch/arm/mach-zynq/clk.c               |  57 --------------
+ arch/mips/mach-pic32/cpu.c             |  23 ------
+ cmd/clk.c                              |  13 +++-
+ drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
+ drivers/clk/clk_k210.c                 | 104 ++++++++++++-------------
+ drivers/clk/clk_pic32.c                |  37 +++++++++
+ drivers/clk/clk_versal.c               |   9 ++-
+ drivers/clk/clk_zynq.c                 |  52 +++++++++++++
+ drivers/clk/clk_zynqmp.c               |  22 +++---
+ drivers/clk/imx/clk-imx8.c             |  13 +---
+ drivers/clk/meson/a1.c                 |  58 ++++++--------
+ drivers/clk/mvebu/armada-37xx-periph.c |  20 +++--
+ drivers/clk/stm32/clk-stm32mp1.c       |  31 ++------
+ include/clk-uclass.h                   |  13 ++++
+ include/clk.h                          |   2 -
+ 15 files changed, 269 insertions(+), 268 deletions(-)
 
 -- 
-Thomas Richard, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+2.34.1
 
