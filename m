@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B227C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 03:34:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F6AC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 03:34:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E55288722B;
-	Thu,  9 Nov 2023 04:34:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C2B887045;
+	Thu,  9 Nov 2023 04:34:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KE5dr0aQ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gAfxRuqQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73779871E6; Thu,  9 Nov 2023 04:34:12 +0100 (CET)
-Received: from mail-m24125.xmail.ntesmail.com (mail-m24125.xmail.ntesmail.com
- [45.195.24.125])
+ id D70098724E; Thu,  9 Nov 2023 04:34:25 +0100 (CET)
+Received: from mail-m17241.xmail.ntesmail.com (mail-m17241.xmail.ntesmail.com
+ [45.195.17.241])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 835D687208
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 04:34:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF862871A2
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 04:34:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=KE5dr0aQrq/AuAMJsByKlqDiHnZsjaMxHapKDa6qPJSu/f9iA1q6mpLSB2gqueQLzivbTB2SKjS1u1DAHsEgMY45n1dHyz47t4qv+jSdKb7RCRnmCFZ7ef/OYpL0r2HLw53IOfg+/HlVDzZ6ZoLskr9+E1bxD/+fTHzMRKSS7hs=;
+ b=gAfxRuqQTtleUw4tTSmHRNSA/cjlkLwQ7jovhGEqvIqz6BysfAoEaYWB+/UqOEKd4edph21TJdkVDbLE5uf7D4l0WqpDxO2ykWvqT005Nbqvfk/j43ncnhvJw2vDc0H8JYCLyHbdbdl2VuImZu3mKytfQnhufox8HE+OvCgom+A=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=buYNRfDpOHiyieIJc15585gFDXPmkGH7C7c0EnVc1ps=;
+ bh=jwBX8qDAjzU6Yvm+4bpKiqrmDFIWCdvzw2J1WcbpIWs=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 81CD840033B;
- Thu,  9 Nov 2023 11:34:01 +0800 (CST)
-Message-ID: <21095380-8c2f-48a8-a895-689ab0f96c64@rock-chips.com>
-Date: Thu, 9 Nov 2023 11:34:01 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 05BBF400341;
+ Thu,  9 Nov 2023 11:34:09 +0800 (CST)
+Message-ID: <61fddeee-d9c6-45ce-9843-0c4020baef3d@rock-chips.com>
+Date: Thu, 9 Nov 2023 11:34:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/6] rockchip: puma-rk3399: fix modified boot_targets
+Subject: Re: [PATCH 6/6] rockchip: ringneck-px30: fix modified boot_targets
  detection
 Content-Language: en-US
 To: Quentin Schulz <foss+uboot@0leil.net>,
@@ -48,20 +48,20 @@ To: Quentin Schulz <foss+uboot@0leil.net>,
 Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>
 References: <20231108-env_default_theobroma-v1-0-cb493bfdeffd@theobroma-systems.com>
- <20231108-env_default_theobroma-v1-5-cb493bfdeffd@theobroma-systems.com>
+ <20231108-env_default_theobroma-v1-6-cb493bfdeffd@theobroma-systems.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231108-env_default_theobroma-v1-5-cb493bfdeffd@theobroma-systems.com>
+In-Reply-To: <20231108-env_default_theobroma-v1-6-cb493bfdeffd@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQktCTVYaTB4fH0lOTh9NQ0pVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUxPSlZPSB8ZQxlNHkpLTEhVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8bb224dbf52eb3kusn81cd840033b
+X-HM-Tid: 0a8bb224fc632eb3kusn05bbf400341
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NC46FQw4Gjw1SAgqD05CTB4M
- CjoaCx5VSlVKTUJCTktLQ09JTEhNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSkxNNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Oi46NDo5KzwwSAg4H0g6TC85
+ IlEaCx5VSlVKTUJCTktLQ05LQ09CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSUtLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,14 +107,14 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   board/theobroma-systems/puma_rk3399/puma-rk3399.c | 9 +++++++--
+>   board/theobroma-systems/ringneck_px30/ringneck-px30.c | 9 +++++++--
 >   1 file changed, 7 insertions(+), 2 deletions(-)
 >
-> diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-> index 1b7a39b0474..df667fae5fc 100644
-> --- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-> +++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
-> @@ -54,7 +54,9 @@ static int setup_boottargets(void)
+> diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> index dd711cd05de..2bce8147eeb 100644
+> --- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> +++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+> @@ -39,7 +39,9 @@ static int setup_boottargets(void)
 >   {
 >   	const char *boot_device =
 >   		ofnode_read_chosen_string("u-boot,spl-boot-device");
@@ -125,7 +125,7 @@ Thanks,
 >   
 >   	if (!boot_device) {
 >   		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
-> @@ -63,7 +65,10 @@ static int setup_boottargets(void)
+> @@ -48,7 +50,10 @@ static int setup_boottargets(void)
 >   	}
 >   	debug("%s: booted from %s\n", __func__, boot_device);
 >   
