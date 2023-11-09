@@ -4,73 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E5DC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 00:13:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93DFCC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 00:18:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E52EF870B5;
-	Thu,  9 Nov 2023 01:13:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B6DB86FBC;
+	Thu,  9 Nov 2023 01:17:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a9jDWYHG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MUwdkE/C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFD84870BE; Thu,  9 Nov 2023 01:12:30 +0100 (CET)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 676A986FBC; Thu,  9 Nov 2023 01:17:55 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 930D287040
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 01:12:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B0BE86B18
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 01:17:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-66d093265dfso1984156d6.3
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 16:12:28 -0800 (PST)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-42033328ad0so2085771cf.0
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 16:17:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699488747; x=1700093547; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YIEt2ZcrPz+azEdZOzueLFQz7XhgrIk69ny/em5XIhg=;
- b=a9jDWYHGx/C7A1u3bDwjCpDuJTcvjYFbwSqS1bsZhT8TBzug9DevrNts209ykytglz
- Wssttx9PyszyQfJb8x6ViCR0T8i4C7m1iPf9yRPtz/wEipOcDYX3NDGLX3vjH/DzFHBg
- hwOaHhNN/0Kx+wIDNu3GBOnVi7QRLOfk1GBqU=
+ d=konsulko.com; s=google; t=1699489070; x=1700093870; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZuVX2yWlxxRvNbMPkY8IlzJOq1a6ZEy+3+m1jhgUhfw=;
+ b=MUwdkE/C/gK9ms5aBUIN+Rci4K30WuWfCENg0umAznBDmJDgwyFFjReDU/5YMiXhb3
+ U2mcwQP+uYqkXmNpuYNTsLUm/0GU3O6pZ9BXysXFyM6e+e+GZAzzCC/yys9Ze+IeTUIZ
+ Fa0kqnRnF+76bh0nPSEd7+aFcr/6BF9OlOB70=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699488747; x=1700093547;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YIEt2ZcrPz+azEdZOzueLFQz7XhgrIk69ny/em5XIhg=;
- b=BQBrLNPmeetCUEjlQf5FtqGb6CnByLEb8oAbYg6NzMBOYIHvLvXGDdaN6gnp5KfIKL
- nGW4QgWnHHC4YI+dLLvzxVJW8UJw+UOnanLXF/QL3A0UUPZhhz53ZR0NNOViJjk/Th69
- imChrILhfNO2GYqUUIgSRrurDevUrlsz12nceXTcfTljwP1u0CSXqHSfbv8pNDGn+ydx
- 7SE9X6uxc0rqwmkzW5IQTWNUyX4oBodYuczxpz8Zgd7JQ0XKzfi3vX84oFcCUVviXaZ1
- hDSLXAIbtX+xc8G/ySCKvc22YRcrBMX5YrJ9QodbznjXySoiESb6HNGiR9pejLbrL8yv
- zTTg==
-X-Gm-Message-State: AOJu0YzAgt/jhX4L/rC3hIxEDWFRlgTmaHsGM7vH1Xx6qTI/n2naCpMg
- ANSoKG+ekH6ezw7oZzlZ+GZ2B6VnRiwtUVMYN1vskQ==
-X-Google-Smtp-Source: AGHT+IHhjyQDKE0BqG9DFLMU/6hRuVkT7ykYVRzVzSdm/rvlkgpiAlmacVLeAM89hc0jg+EbaUUO3w==
-X-Received: by 2002:a05:6214:e49:b0:66d:bc09:f6db with SMTP id
- o9-20020a0562140e4900b0066dbc09f6dbmr3328584qvc.34.1699488746798; 
- Wed, 08 Nov 2023 16:12:26 -0800 (PST)
-Received: from bill-the-cat.lan
+ d=1e100.net; s=20230601; t=1699489070; x=1700093870;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZuVX2yWlxxRvNbMPkY8IlzJOq1a6ZEy+3+m1jhgUhfw=;
+ b=IU9cGcOv36xbOucXRDHRYY/uFiGxfVZ3j8SLZszre7MuCucz2BFE+sh9DhAibdIhX3
+ lQx+ZX33ThjMmgFyJJdNrNiy01rBn3qyImHpMT3fK+rr7DQ8pLknfq8WCrO0NftHQCVu
+ Uu6qvbSpvpK5W0H9PNfoii0fJl3tyfGY0z+eXpU+ICR9YzUEYR+VTykdHtq48QdM0Jhw
+ o9BBcUQJEi43qz8aQ4GxWVGqfeetMBjaa5uG0L2QhN5f+F85viKOgtKVKg50+BAP244n
+ mtDlivSDOMEld5MC95G70S1oMhq8kPEhbTaRVbfBpYRhP0dCxpquzR4WKweVNbwWg/7T
+ m+5Q==
+X-Gm-Message-State: AOJu0YwYL8lnjygeQkkSvZ03wRWRu6zVKjdZd8cDVNx8qz5HYTG7dl9H
+ 6K7NH1bzRFRUJpe0SUgZyljrHg==
+X-Google-Smtp-Source: AGHT+IGTpcSuJsBuQ2U7Z1qqN+HnpcHW7GJ5uxo8OldSoG2xT5r4wAfpKy0eIj/O5RRbv4rJJNM77Q==
+X-Received: by 2002:a05:622a:606:b0:41c:c34a:84af with SMTP id
+ z6-20020a05622a060600b0041cc34a84afmr3870644qta.6.1699489069764; 
+ Wed, 08 Nov 2023 16:17:49 -0800 (PST)
+Received: from bill-the-cat
  (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
  [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
  by smtp.gmail.com with ESMTPSA id
- t17-20020a0ce591000000b0066d23395d27sm1577553qvm.123.2023.11.08.16.12.26
+ jr23-20020a05622a801700b0041aff9339a2sm1417561qtb.22.2023.11.08.16.17.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Nov 2023 16:12:26 -0800 (PST)
+ Wed, 08 Nov 2023 16:17:49 -0800 (PST)
+Date: Wed, 8 Nov 2023 19:17:46 -0500
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH] net: Make NET imply NETDEVICES
-Date: Wed,  8 Nov 2023 19:12:25 -0500
-Message-Id: <20231109001225.2357160-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
+ u-boot <u-boot@lists.denx.de>, Duncan Hare <DuncanCHare@yahoo.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: inconsistent wget behavior
+Message-ID: <20231109001746.GX6601@bill-the-cat>
+References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
+ <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="l6EQubW/kOZN/HL0"
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,51 +98,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Normally, when NET is enabled, CMD_NET will then be enabled and in turn
-NETDEVICES will (likely) be enabled via imply. However, if we disable
-CMDLINE in a defconfig we now no longer get CMD_NET enabling NETDEVICES
-for us. This suggestion (as an imply is) really isn't about the network
-commands but network itself and is a legacy of how intertwined
-NET/CMD_NET were historically. Move this over to the NET entry instead
-where it is a more logical fit.
 
-Reported-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-This could also be dropping the imply from cmd/Kconfig and instead
-making drivers/net/Kconfig::NETDEVICES be default y, which is what it
-practically is today. This would require a more lengthy check however to
-be sure there's no functional change and I'm not sure it's any better or
-worse than this approach.
----
- cmd/Kconfig | 1 -
- net/Kconfig | 1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+--l6EQubW/kOZN/HL0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 629a90afb7b5..1b4aad5c930b 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1682,7 +1682,6 @@ if NET
- menuconfig CMD_NET
- 	bool "Network commands"
- 	default y
--	imply NETDEVICES
- 
- if CMD_NET
- 
-diff --git a/net/Kconfig b/net/Kconfig
-index 4215889127c9..8c80b3a6c671 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -5,6 +5,7 @@
- menuconfig NET
- 	bool "Networking support"
- 	default y
-+	imply NETDEVICES
- 
- if NET
- 
--- 
-2.34.1
+On Wed, Nov 08, 2023 at 09:00:23PM -0300, Fabio Estevam wrote:
 
+> [Adding Tom and Marek]
+>=20
+> On Wed, Nov 8, 2023 at 7:22=E2=80=AFPM Tim Harvey <tharvey@gateworks.com>=
+ wrote:
+> >
+> > Greetings,
+> >
+> > I've recently given wget/tcp a try and find the results inconsistent.
+> >
+> > Transferring the same file 15 times in a row will eventually give me
+> > an incomplete transfer with packet/byte count wrong but showing
+> > 'Transfer Successful'.
+> >
+> > Here is current master on an imx8mp-venice-gw74xx board using IMX8MP
+> > EQOS enet dev:
+> >
+>=20
+> > u-boot=3D> time wget $loadaddr
+> > /tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
+> > $filesize
+> > HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | |
+> > Packets received 64368, Transfer Successful
+> > Bytes transferred =3D 93198937 (58e1a59 hex)
+> >
+> > time: 3.103 seconds
+> > md5 for 48200000 ... 4dae1a58 =3D=3D> 69bedfe899148c43c09a98ac950dd0ed
+>=20
+> ....
+> > u-boot=3D> time wget $loadaddr
+> > /tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
+> > $filesize
+> > HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | | | | | | | | | | | | | | | | | | | |
+> >  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+> > | | | | | |
+> > Packets received 64368, Transfer Successful
+> > Bytes transferred =3D 26984682 (19bc0ea hex)
+> >
+> > time: 3.011 seconds
+> > md5 for 48200000 ... 49bbc0e9 =3D=3D> c9978ff116605a7729a1cb14ef51fc20
+> >
+> > Anyone else seeing this?
+>=20
+> Yes, I am seeing the same behavior on an imx8mn board using the FEC drive=
+r.
+>=20
+> I am transferring a 412MB file. Doing the wget transfers several times
+> in a row, I also see the incorrect number of bytes transferred:
+
+Interesting.  What if you take wget out of the equation and use "tftp"
+to grab a large file with a known checksum, repeatedly (note that "rhash
+-C" will give a crc32 in Linux so you can confirm the correct value and
+loop a get, crc32, compare, repeat loop with a little work) ? I ask
+because I was reminded today that for me at least, the RPi ethernet
+isn't reliable in U-Boot for me if you stress it too hard. So I'd like
+to try see if this is "wget bug" or "network driver/related bug".
+
+--=20
+Tom
+
+--l6EQubW/kOZN/HL0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVMJScACgkQFHw5/5Y0
+tyyFpwv/X1Dp4AMxlXj31DI57RuobVg22MfhXm4qTVmRl3lxaklrhupnac4SGJJF
+Gx6QoCtJTxTPDn+TRbzVbRwbFkwyDMruv/yV9AgX/wGfDY1M21V7tDyfaQgdwdrh
+DUkw3PVT26zBtLhbUsp9ObmSgCzyB+/I1AAn5quxG28WVu1Z//ZW8oUNVvs+/2Wn
+PKJJTo2zYzMHG0A9ikqAfO5yspzQO9XqiwrfzE91/TLL2JnQV8/lKQaHdAUUrPY+
+9bze4drWGgKnWkAgzezCEVzfWU6YryINlFlNqEtUng3G/En9nyG3NLSb5IPApzxs
+RmSD06uB4/4J8rv65XpAlIQj3O8G/ogk/DB1/z/0EOEj//cO+rC5FkP3tRJoPbWE
+A2kM1TrSbilpS7+xk/UnRuVmNdwNrvJnmVvEiN9Vfm06/82tvsjEPx5FQf+1aXG1
+bLSiwIXMcyyVidPMxdHp+N8YH4CGelQEiQV0+V5eDlHbXRFT6Wud8bxJdWZC7tXG
+P7Dts7GZ
+=/xcv
+-----END PGP SIGNATURE-----
+
+--l6EQubW/kOZN/HL0--
