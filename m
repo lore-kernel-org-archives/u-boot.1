@@ -4,61 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF6AC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 03:13:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56678C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 03:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 523208713C;
-	Thu,  9 Nov 2023 04:13:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 722C387090;
+	Thu,  9 Nov 2023 04:15:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ftRc+TTn";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14099870DD; Thu,  9 Nov 2023 04:13:34 +0100 (CET)
-Received: from mail-m127204.xmail.ntesmail.com
- (mail-m127204.xmail.ntesmail.com [115.236.127.204])
+ id EAFDC8714F; Thu,  9 Nov 2023 04:15:16 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92DDA86FE5
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 04:13:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id B034E87045
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 04:15:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=ftRc+TTnUW8g3J41+oWYkPZ2yb5bux+63vTc6LGkHFM7vFHfrstv+EIy0xHsIpPL39YzxwoiFSiYVr38MoomcmoW0mLjjsPapzSxlKb/ADiDzb0RS92XqXOVRo94aXf5PizJv9sAkBT5BrbX03ioLVshqLs1eJN3aLeNHZZobnE=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=vc7/yByxKHYkfjTJsBaCVzxPXJMDg4mib8oGZp4jEbM=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 0C4114002F1;
- Thu,  9 Nov 2023 11:12:47 +0800 (CST)
-Message-ID: <65c003e4-f251-4593-9f1c-8dcebdcab690@rock-chips.com>
-Date: Thu, 9 Nov 2023 11:12:46 +0800
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3A93F09U065247;
+ Thu, 9 Nov 2023 11:15:00 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 9 Nov 2023
+ 11:14:56 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>
+Subject: [PATCH] riscv: binman: fix the load field format
+Date: Thu, 9 Nov 2023 11:14:48 +0800
+Message-ID: <20231109031448.138723-1-randolph@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3588-rock-5b: Enable CONFIG_PCI_INIT_R to
- support EFI networking
-Content-Language: en-US
-To: =?UTF-8?Q?Martin_Roukala_=28n=C3=A9_Peres=29?=
- <martin.roukala@mupuf.org>, u-boot@lists.denx.de
-Cc: Jonas Karlman <jonas@kwiboo.se>,
- Christopher Obbard <chris.obbard@collabora.com>
-References: <20231104130451.111020-1-martin.roukala@mupuf.org>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231104130451.111020-1-martin.roukala@mupuf.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxpDTFYaGUkZTEgeQkJJSx1VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8bb21168212eb3kusn0c4114002f1
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PC46GQw4KTw1DwgUGAkXL0Iy
- LSgwCTBVSlVKTUJCT0JCTk1MTkJPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUhJNwY+
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3A93F09U065247
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,43 +60,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Martin and jonas,
+The #address-cells is now equal to 2. The format of the load field for
+the Linux kernel doesn't match.
 
-On 2023/11/4 21:04, Martin Roukala (né Peres) wrote:
-> When u-boot chainloads an EFI bootloader such as iPXE, we want to have
-> already initialized the PCI subsystem so that network driver is loaded
-> and ready to use by the bootloader.
->
-> Fixes: 191ece249a96 ("rockchip: rk3588-rock-5b: Enable support for PCIe SATA cards")
-> Signed-off-by: Martin Roukala (né Peres) <martin.roukala@mupuf.org>
+Signed-off-by: Randolph <randolph@andestech.com>
+---
+ arch/riscv/dts/binman.dtsi | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Scan different storage media for boot firmware always cost some time, 
-the pci cost a little bit
+diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
+index 6b4eb8dc7b..5117d7c8c9 100644
+--- a/arch/riscv/dts/binman.dtsi
++++ b/arch/riscv/dts/binman.dtsi
+@@ -50,7 +50,8 @@
+ 					os = "Linux";
+ 					arch = "riscv";
+ 					compression = "none";
+-					load = <CONFIG_TEXT_BASE>;
++					load = <U64_TO_U32_H(CONFIG_TEXT_BASE)
++						U64_TO_U32_L(CONFIG_TEXT_BASE)>;
+ 
+ 					linux_blob: blob-ext {
+ 						filename = "Image";
+-- 
+2.34.1
 
-more time then SPI/eMMC, but since this board already support PCI 
-storage, it's reasonable to
-
-enable boot from PCI.
-
-
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-
-Thanks,
-- Kever
-
-> ---
->   configs/rock5b-rk3588_defconfig | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-> index 0595325e81..938137c851 100644
-> --- a/configs/rock5b-rk3588_defconfig
-> +++ b/configs/rock5b-rk3588_defconfig
-> @@ -36,6 +36,7 @@ CONFIG_OF_BOARD_SETUP=y
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5b.dtb"
->   # CONFIG_DISPLAY_CPUINFO is not set
->   CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_PCI_INIT_R=y
->   CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
