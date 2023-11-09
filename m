@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10308C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 17:10:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B66C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 17:10:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 311DB8719C;
-	Thu,  9 Nov 2023 18:10:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C26DB870B7;
+	Thu,  9 Nov 2023 18:10:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="KTiaL9R0";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="tJ/y1FKo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2A8E87254; Thu,  9 Nov 2023 18:10:24 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id 255A187168; Thu,  9 Nov 2023 18:10:25 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC47887168
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 18:10:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7B468719C
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 18:10:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 2F83610003B;
- Thu,  9 Nov 2023 20:10:21 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2F83610003B
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 3E8FB12004C;
+ Thu,  9 Nov 2023 20:10:22 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 3E8FB12004C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1699549821;
- bh=eKyW+GgwjEHDzpWGvyRdtGYuVnQTDLsNTFmqV60kXec=;
+ s=mail; t=1699549822;
+ bh=jymvqmq6LT2zhbWW70zvBC6Ze5BqpPxUEa9E8+sbmQY=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=KTiaL9R05byf8/6Nl0lxhxQSN3OivuHx0gB7cjyeyYIoEyCRWAdg3BhEX+OykVI3d
- u1R1kD7aW2lxOYm55MJkw+x1KzRa3dU946EiDpE2f38aghkFDWVvbHak5xdks9aXeU
- ASc4wC104a2MUnBngXsYDrl02yOXc7VZyXC19joIoSVtgZRNqxcgEYBTcPXASFN6+a
- DxI1MowKPizt/TJB/1dpSTSdxbboVjoF7GKA0xpQAC4I7Co07lgv4Ei7aVLagGtoqR
- yJAL+9ONA79G6AEFF3r6pm8E7YFXSXhMvH2S2fvmRRepzH41ITvcqKuJMwzx301dhd
- /smhJnus1r9qg==
+ b=tJ/y1FKoDWhmiGYkrin8P7dzRU+DoRofH2YHMKwMNZ4xqBPfTYJnU/zC7/4zLuzmI
+ peRBEclld28SvYv8u+F8u+cZMQli3rg9RZboGjMuvmHrsLI+iA7OGZNAxSbZRL1i5K
+ eusFQbchqrfZ3CVt1L7IHG1wenM8XoZ/1HuF/LYsjCdGDAm7Z6Dztm+XMDeA//XDTg
+ X7uOPDUzEv8Tpro5TstLvuersbO9HGaoHWU5u+oqal7sZu2hIqHXMXURZVJ+iaKmv2
+ jSzXnmP22uLyBZWpC6yvfCVc7rTplJ94HT7BKtBInT/Eo6gVM6g8tgBKl6zWD8O/lG
+ ALD/A8ScEsdeA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  9 Nov 2023 20:10:20 +0300 (MSK)
+ Thu,  9 Nov 2023 20:10:22 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Thu, 9 Nov 2023 20:10:20 +0300
+ 15.2.1118.37; Thu, 9 Nov 2023 20:10:21 +0300
 From: Igor Prusov <ivprusov@salutedevices.com>
 To: <u-boot@lists.denx.de>
 CC: <kernel@sberdevices.ru>, <prusovigor@gmail.com>, Igor Prusov
- <ivprusov@salutedevices.com>
-Subject: [PATCH 1/3] linux/time.h: Add Linux time conversion defines
-Date: Thu, 9 Nov 2023 20:10:02 +0300
-Message-ID: <20231109200943.1.I1c2b8677c33d4dd9e8a0963acccebeb5c56118d2@changeid>
+ <ivprusov@salutedevices.com>, Jagan Teki <jagan@amarulasolutions.com>, Neil
+ Armstrong <neil.armstrong@linaro.org>, <u-boot-amlogic@groups.io>
+Subject: [PATCH 2/3] spi: meson_spifc_a1: Use define for time interval
+Date: Thu, 9 Nov 2023 20:10:03 +0300
+Message-ID: <20231109200943.2.I02c5c81c1a5a06b51600672691f448909af473ea@changeid>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231109171004.193521-1-ivprusov@salutedevices.com>
 References: <20231109171004.193521-1-ivprusov@salutedevices.com>
@@ -76,10 +77,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 543 543
  1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to},
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
- 100.64.160.123:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -103,36 +104,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently there are no defines for time conversion in time.h, which
-leads to drivers declaring those locally or not using defines at all, so
-add them from Linux.
+Use USEC_PER_MSEC define for timeout to sync code with Linux version.
 
 Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
 ---
 
- include/linux/time.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/spi/meson_spifc_a1.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/time.h b/include/linux/time.h
-index 14ff5b6f48..14a144d9c9 100644
---- a/include/linux/time.h
-+++ b/include/linux/time.h
-@@ -11,6 +11,15 @@
+diff --git a/drivers/spi/meson_spifc_a1.c b/drivers/spi/meson_spifc_a1.c
+index 099c4c037d..418d4d5e10 100644
+--- a/drivers/spi/meson_spifc_a1.c
++++ b/drivers/spi/meson_spifc_a1.c
+@@ -16,6 +16,7 @@
+ #include <spi-mem.h>
+ #include <asm/io.h>
+ #include <linux/log2.h>
++#include <linux/time.h>
+ #include <linux/iopoll.h>
+ #include <linux/bitfield.h>
  
- #define _REENT_ONLY
+@@ -117,7 +118,7 @@ static int amlogic_spifc_a1_request(struct amlogic_spifc_a1 *spifc, bool read)
  
-+#define MSEC_PER_SEC	1000L
-+#define USEC_PER_MSEC	1000L
-+#define NSEC_PER_USEC	1000L
-+#define NSEC_PER_MSEC	1000000L
-+#define USEC_PER_SEC	1000000L
-+#define NSEC_PER_SEC	1000000000L
-+#define PSEC_PER_SEC	1000000000000LL
-+#define FSEC_PER_SEC	1000000000000000LL
-+
- #define SECSPERMIN	60L
- #define MINSPERHOUR	60L
- #define HOURSPERDAY	24L
+ 	return readl_poll_timeout(spifc->base + SPIFC_A1_USER_CTRL0_REG,
+ 				  val, (val & mask) == mask,
+-				  200 * 1000);
++				  200 * USEC_PER_MSEC);
+ }
+ 
+ static void amlogic_spifc_a1_drain_buffer(struct amlogic_spifc_a1 *spifc,
 -- 
 2.34.1
 
