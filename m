@@ -4,78 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACF98C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 19:24:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE6FC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 19:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93E1986E5A;
-	Thu,  9 Nov 2023 20:24:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 92F6E86EEC;
+	Thu,  9 Nov 2023 20:40:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="guUqqwGX";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QCwZZ9Lw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58E8786DCE; Thu,  9 Nov 2023 20:24:27 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D3B1186F7E; Thu,  9 Nov 2023 18:10:23 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E123786DCE
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 20:24:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0E96870B7
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 18:10:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6cd1918afb2so733493a34.0
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 11:24:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699557863; x=1700162663; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tCtARyKrRcIRmLxKxjRGuWZ6wIM910Q6BqV5QZ3N+zA=;
- b=guUqqwGXKvPS5RzBgSQL30/gusBgVcbgBmISrYtSCAobuFke+GgXFXDemQwXeWgMpr
- MHfuzH3KJGUxq2LHGmfe/qDo1IK2Wd1LPj98fIjWSv12N184zqpS37qncl5TpS2r1Y90
- 6U7I6xBbRYQe6IW5SFkWPQAcykqVxQnq14Bpw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699557863; x=1700162663;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tCtARyKrRcIRmLxKxjRGuWZ6wIM910Q6BqV5QZ3N+zA=;
- b=BsAxaRBigg362adaQH8s+84ch9z69fMn2CmxHzXwwkEct1BOBRC6yN2Vd+Tb80YQc8
- LMWwv5zTipRUbXWZeOo3QhfjGHkAt4PGuC9RjD8HClqPjtLpXOz8h7GNMsszkO78FrDi
- YCbLqZy0Nz37/gkRR2tetLDnxJJY1kRl7vYNZkwWjk/e9u8+49ZXdg7LrsXLYAj96WI6
- 77V1/SvO4venqnqbKRs/keRmziPWaVADBPVrA2VZs5qX0ieToVHaKDNrycLkmbiDVuya
- FLljmy4sjTSpVvIIx6YbkK0Xc6G2f71P+nscvtJ0o8tVK011DoMAW2hV+/2J+qHH108z
- AVMA==
-X-Gm-Message-State: AOJu0YxQzvvjGfiHNRidebpXCDi3zUrw+o+MDjFOWmNkEGTIAga6hSMF
- c5nH0fitfflQaZRunDYQUmBh+Q==
-X-Google-Smtp-Source: AGHT+IH7tSkj7PBV1aDkzY6Fwq9LaQmuW2ClTjFA4LaFgf5Ovm2Bqf8GxOraBUM30JTkiSmr1JnV5w==
-X-Received: by 2002:a05:6358:52c8:b0:16b:6ea4:d71d with SMTP id
- z8-20020a05635852c800b0016b6ea4d71dmr7201305rwz.26.1699557863122; 
- Thu, 09 Nov 2023 11:24:23 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
- [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
- by smtp.gmail.com with ESMTPSA id
- j3-20020a05620a288300b007756e75b91bsm118751qkp.78.2023.11.09.11.24.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Nov 2023 11:24:22 -0800 (PST)
-Date: Thu, 9 Nov 2023 14:24:19 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
-Message-ID: <20231109192419.GH6601@bill-the-cat>
-References: <20231109172302.54324-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 979A212004A;
+ Thu,  9 Nov 2023 20:10:19 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 979A212004A
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1699549819;
+ bh=0xHlqgHvskjCuT90liCKvxlVM0BSW5in6SvVJfh8d0k=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=QCwZZ9LweFGh6jRBAgCEIIQWmdMUirhDlDA59Y12ZCpJZ168txnrVPatm5LcvE7Xs
+ yuoUVZ+oPMRwstrTejGkUPfnNpng5DUezijeFdRiaOFv0+F1bxB8YwUm5Ll7w2txda
+ l+jH+dLmhyi/rVPNOimRi2TTcYSDjEIRwfMPh9MXRCVnotR9Nx6nUXE1LA2ijhQOPy
+ eBEWQ6suVpo2Kn9Ii1T7lE+OFgQNDBBYBbfTjK2C4CqSaHel4wrCt4VD0IfXRQSihI
+ iGTwT0mdmnz94YcRGWhErhpG8fUYv66qi2nHW2LPi9exuBArUsKrY2Z5jtmv04PYVR
+ pL+dxc7RHh0Fg==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu,  9 Nov 2023 20:10:19 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Thu, 9 Nov 2023 20:10:19 +0300
+From: Igor Prusov <ivprusov@salutedevices.com>
+To: <u-boot@lists.denx.de>
+CC: <kernel@sberdevices.ru>, <prusovigor@gmail.com>, Igor Prusov
+ <ivprusov@salutedevices.com>, Alexander Dahl <ada@thorsis.com>, Anatolij
+ Gustschin <agust@denx.de>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Balaji
+ Prakash J <bjagadee@codeaurora.org>, Balamanikandan Gunasundar
+ <balamanikandan.gunasundar@microchip.com>, Baruch Siach <baruch@tkos.co.il>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Chris Morgan <macromorgan@hotmail.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Heiko Schocher <hs@denx.de>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>, Joel
+ Stanley <joel@jms.id.au>, Kever Yang <kever.yang@rock-chips.com>, Lukasz
+ Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Michal Simek <michal.simek@amd.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Ryan Chen
+ <ryan_chen@aspeedtech.com>, Sean Anderson <seanga2@gmail.com>, Simon Glass
+ <sjg@chromium.org>, Stefan Bosch <stefan_b@posteo.net>, Stefan Roese
+ <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel
+ <clamor95@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ <u-boot-amlogic@groups.io>, <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH 0/3] Add time conversion defines from Linux.
+Date: Thu, 9 Nov 2023 20:10:01 +0300
+Message-ID: <20231109171004.193521-1-ivprusov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BaLi60NQB9Zm0WE+"
-Content-Disposition: inline
-In-Reply-To: <20231109172302.54324-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 181258 [Nov 09 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 543 543
+ 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ 100.64.160.123:7.1.2; p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
+ 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/11/09 11:05:00 #22436988
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Thu, 09 Nov 2023 20:40:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,52 +124,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series imports time conversion defines from Linux, that are
+currently located in include/vdso/time64.h file. Those defines are
+almost always used by including linux/time.h so it seems the proper
+place in U-Boot to place them.
 
---BaLi60NQB9Zm0WE+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Various places where same or similar defines were added on per-driver
+basis are replaced with time.h include.
 
-On Thu, Nov 09, 2023 at 09:23:02AM -0800, Heinrich Schuchardt wrote:
 
-> Function acpi_get_rsdp_addr() is needed on all architectures which
-> write ACPI tables. Move the definition from the x86 include to an
-> architecture independent one.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/x86/include/asm/acpi_table.h | 9 ---------
->  drivers/misc/qfw.c                | 1 +
->  include/acpi/acpi_table.h         | 9 +++++++++
->  3 files changed, 10 insertions(+), 9 deletions(-)
 
-My question here is, does this work right on non-x86? I know you can
-have ACPI without UEFI on x86, but elsewhere doesn't the location have
-to be provided in some manner by UEFI? I know I'm thinking that's the
-case with SMBIOS (with a few exception).
+Igor Prusov (3):
+  linux/time.h: Add Linux time conversion defines
+  spi: meson_spifc_a1: Use define for time interval
+  treewide: use linux/time.h for time conversion defines
 
-I'm assuming you're doing something here with qemu and its qfw interface
-and risc-v.
+ board/friendlyarm/nanopi2/onewire.c              |  5 +----
+ drivers/clk/at91/clk-main.c                      |  2 +-
+ drivers/i2c/stm32f7_i2c.c                        | 11 +++++------
+ drivers/memory/stm32-fmc2-ebi.c                  |  5 ++---
+ drivers/mmc/octeontx_hsmmc.h                     |  2 --
+ drivers/mtd/nand/raw/atmel/nand-controller.c     |  3 +--
+ drivers/mtd/nand/raw/mxs_nand.c                  |  3 +--
+ drivers/mtd/nand/raw/octeontx_nand.c             |  2 +-
+ drivers/mtd/nand/raw/stm32_fmc2_nand.c           |  5 ++---
+ drivers/phy/meson-axg-mipi-dphy.c                |  3 +--
+ drivers/phy/phy-core-mipi-dphy.c                 |  3 +--
+ drivers/phy/rockchip/phy-rockchip-inno-dsidphy.c |  3 +--
+ drivers/pwm/pwm-aspeed.c                         |  3 +--
+ drivers/pwm/pwm-at91.c                           |  2 +-
+ drivers/pwm/pwm-cadence-ttc.c                    |  3 +--
+ drivers/pwm/pwm-meson.c                          |  3 +--
+ drivers/pwm/pwm-mtk.c                            |  3 +--
+ drivers/pwm/pwm-ti-ehrpwm.c                      |  3 +--
+ drivers/serial/serial_msm_geni.c                 |  3 +--
+ drivers/spi/cadence_qspi.c                       |  3 +--
+ drivers/spi/fsl_dspi.c                           |  4 +---
+ drivers/spi/meson_spifc_a1.c                     |  3 ++-
+ drivers/ufs/cdns-platform.c                      |  3 +--
+ drivers/usb/dwc3/core.c                          |  3 +--
+ drivers/video/dw_mipi_dsi.c                      |  3 +--
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c    |  3 +--
+ drivers/video/tegra20/tegra-dsi.c                |  4 +---
+ drivers/watchdog/sunxi_wdt.c                     |  3 +--
+ fs/ubifs/ubifs.h                                 |  1 -
+ include/linux/time.h                             |  9 +++++++++
+ 30 files changed, 43 insertions(+), 63 deletions(-)
 
---=20
-Tom
+-- 
+2.34.1
 
---BaLi60NQB9Zm0WE+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVNMeAACgkQFHw5/5Y0
-tyw5AwwApYHfCBZgrf6eWtPJ0NoyJEl1vuik1Eh7BYsx6DwqTXUJn2IsDWa9gCQl
-7AYlSnKwzZCC2UWBZd3L6EubrzOSLiscsN0h15bjT7RBVms9h83uAr03osX9Xzek
-u4sttDSkDVr2PMHOSKwLHVWaEP7z77ZR0oz8sw1iybwkpi59kVOCYeZkcFOCUdAu
-THwFxQuYm3Nt3EOU2OZbqc5OYhz1jSS18YYkto2yyPoer9yDlOImK90lEJmHb8Ap
-t/KziwEQep35RqXPovFrswXtfRd1zLMKsRKat7h5rXvtTyXuVlyYYqpmbrs9nLzi
-fTYBn1isrGEo4ykSyH+17LSebSqujf4zWrqgru6m61nVKHu3Ie4sKiVEVcYn9iHe
-/vAdXBG9OEpLgHeyiD9TbfutccjmL1TZQZ+WNurm/N5Kc3txAKCGLQPXs13vUBsq
-jxvX2Exs6T6e7aF/QC9P1NN3OhqPNK5TabAfJ0nXMweBlhc/ZSrp/unzscX4Cq9d
-w1VnenO/
-=/j8K
------END PGP SIGNATURE-----
-
---BaLi60NQB9Zm0WE+--
