@@ -4,74 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 753D6C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 20:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66325C4167D
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 20:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4F2987525;
-	Thu,  9 Nov 2023 21:16:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 844D98724E;
+	Thu,  9 Nov 2023 21:28:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Zb5XwOAM";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BvwRDxS+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B83D8754A; Thu,  9 Nov 2023 21:16:32 +0100 (CET)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C249287516; Thu,  9 Nov 2023 21:28:33 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C27A787522
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 21:16:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 086D88714C
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 21:28:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5be24d41bb8so35989a12.0
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 12:16:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699560988; x=1700165788; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k7lZxSbvaOpmdpq8ycIwnkFNI4Iui5J3DbQ3+ITEJWI=;
- b=Zb5XwOAMUIEgYx+tnLOmQYakbfhFu4yycKHYT8Nrf9+61sAKC8W/OzT8+6ruvL3oVk
- go7QadDXnDGJLdIKUNfJAR91hiNExLkYTDZBwMu2fEb5zT+lDC6JPyJ9AOP70hLINJdE
- mcmfpcQ2t4bizX1QpfRNBshinZPtM96KR1OcF6kHx/UwVuMCEzIKOKojYVkiCxh+PXUN
- Zl/bshyQEdxwB1Vqbh0Vg0DJ8f0z24TY4qg8jiEYLfAhsW0sZ8UlvwLdWb9U3o47n90g
- PbxCME641beqqIVy8O0+Ve2s10sAR/2Jtgqsp13BAVBmbNaiMBBUPOw42RwSiimbjikN
- SVIw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-il1-f197.google.com (mail-il1-f197.google.com
+ [209.85.166.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6846240C4E
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 20:28:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699561709;
+ bh=Wb+T+48+PniqZ8iGmRQwE7RIDHHlHbu29eyJ1TYeLn8=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=BvwRDxS+1I2A5F5rDvf7h5FUC4zKW5RlrRjciFM8Xi2X4NViNwqmAj/0lQh5YNOtL
+ DrV/p5MNjk1zqd5L/Cf4UVEep6s1XGWkpi9nx2NwX/Ubpt+lvAxKA4DihgXBILRGZ6
+ Nuw3qW0XWYo6CWwC5YQwqSMijagoFd4HxLdP7W8G7LvQ6te5a+1xPn38PxzHRhXJJQ
+ sHg+MN3H0hVSLlehVf7kb4XDXLcig49ytx5oqhAAEbpgadST9mz3OfRr8Fsyl30GRq
+ u2roNphN9ttEde86UZ+nkk8+6UHFQA7MqCDD8dzlMJ4xh4SO5EF/F9m9jLOO3/JeSs
+ gDGbnoifVmYhA==
+Received: by mail-il1-f197.google.com with SMTP id
+ e9e14a558f8ab-35945043e33so17495685ab.1
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 12:28:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699560988; x=1700165788;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k7lZxSbvaOpmdpq8ycIwnkFNI4Iui5J3DbQ3+ITEJWI=;
- b=Oqe6X1pGWl2HxTY1nBPi1oYksou2ylqcVR96Kankb/PGapJrfziNEzDWQWqTlUevj3
- iEkG+c1VhvNzLWZvf4BPaVVV5oNMsDoegt3duBV89428eehh34x74NuA9WZ5SjLf2r1I
- HNreOWNcH/QoRxSrWHg+dT2pOyISUFl50MoSTTOUqxales24XWlfdI2MHKOMlOiB9RQG
- Z8PvxC3Mi9vArQ94aUGKsUyWEgF7kKTkJRYlcZkBgTvlinbe0bveQTMmd8U7eop6HQxy
- 6yPKl2Ww61CVUIsKcPE3dWFJ+ylQa5HpxuZrdHDNi2HSPXGQ4XI/1Z5rPV7h6b9HOInz
- 9bvA==
-X-Gm-Message-State: AOJu0YyZ401fqoC/EiVJQIRQQOMugkvN56SrBaCEvWHEpFaHVC7Tx99X
- mbUW39PDj2RzmayBYkgLpldwyE5lRpJzHIL3eg+efoGcC4SUJFx77AwW3A==
-X-Google-Smtp-Source: AGHT+IHC25WpBpiCHRKS7uBFKd3+O5UOQCHFQ6OKJmmPVW/mUnfNIGbuv9ZtpZ8HcvNSfER95DY7VMnYojePWeN6DlU=
-X-Received: by 2002:a17:90b:4b46:b0:281:cb6:a0fe with SMTP id
- mi6-20020a17090b4b4600b002810cb6a0femr426175pjb.13.1699560987860; Thu, 09 Nov
- 2023 12:16:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699561708; x=1700166508;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Wb+T+48+PniqZ8iGmRQwE7RIDHHlHbu29eyJ1TYeLn8=;
+ b=rDn3c+NAka/ZxfiRAH2XtBdjSxeJisWaLekRBb3EWya5cb4RC6ox6LRv1bqhOptxJ9
+ kEbXJ39PujlTVS2qs0w+eSSYH7nnulB9L1Lb/iV/iPUepVxS7md2s32vZEAWOmmAQgXr
+ MWKApEdofRFlA+wxMcCpazg0rVXJ723N5m3VAI+qVA4j8kNJR2yBrP+p3lgRevmXALG5
+ 8j0p5w48gs/iCey9BdrLGWgAyMn6EgtmrEpjfqbz/sZ5M94QcfjCNjHjLtXP/jRVJ7Dr
+ pUYSkcA4nRtgzWW7coziuSiYLYPdmT+eTsVrb7mfMv1bA76m1VtCQYaul1lolPQ4PnHp
+ 0StA==
+X-Gm-Message-State: AOJu0YzcWI3LYAonkKGjVR/9vgdIrKSeJ0Zauq80JLQPiQ8iT2JkJWU5
+ JXB50pu/uCfXpcypWTcd/2xCn/LSwjbRcX2xoPnju3kS1oR/rfnUvjUSMZ7JpPtW7Vw1b7Dr+/o
+ gXGAVfHR5/+PRXAz3CirGiyna7gGaBJM=
+X-Received: by 2002:a05:6e02:338b:b0:34f:dfb5:8e8 with SMTP id
+ bn11-20020a056e02338b00b0034fdfb508e8mr429663ilb.14.1699561708061; 
+ Thu, 09 Nov 2023 12:28:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFonNIE/mYZhGGsNt6/B2fJ6XdwaF476MlNVH62DgrO9Rbr0to5qTO98rkW4evmCZcs61JICA==
+X-Received: by 2002:a05:6e02:338b:b0:34f:dfb5:8e8 with SMTP id
+ bn11-20020a056e02338b00b0034fdfb508e8mr429639ilb.14.1699561707706; 
+ Thu, 09 Nov 2023 12:28:27 -0800 (PST)
+Received: from [10.21.210.240] ([65.132.165.41])
+ by smtp.gmail.com with ESMTPSA id
+ g2-20020a02cd02000000b004571b2f5940sm4157782jaq.82.2023.11.09.12.28.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Nov 2023 12:28:27 -0800 (PST)
+Message-ID: <9525398a-1326-470e-9894-afb160cde2e6@canonical.com>
+Date: Thu, 9 Nov 2023 12:28:26 -0800
 MIME-Version: 1.0
-References: <20231020184253.21915-1-semen.protsenko@linaro.org>
- <20231109125345.GA6601@bill-the-cat>
-In-Reply-To: <20231109125345.GA6601@bill-the-cat>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 9 Nov 2023 14:16:16 -0600
-Message-ID: <CAPLW+4m0wf8Jz7jtd5NWTiT=t+0_QcxKmJwth6n9TpXgE3irBg@mail.gmail.com>
-Subject: Re: [PATCH] board: samsung: Remove incorrect SYS_CONFIG_NAME in
- axy17lte Kconfig
-To: Tom Rini <trini@konsulko.com>, Minkyu Kang <promsoft@gmail.com>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
+References: <20231109172302.54324-1-heinrich.schuchardt@canonical.com>
+ <20231109192419.GH6601@bill-the-cat>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231109192419.GH6601@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,61 +105,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 9, 2023 at 6:53=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Oct 20, 2023 at 01:42:53PM -0500, Sam Protsenko wrote:
->
-> > The global SYS_CONFIG_NAME in axy17lte Kconfig overrides SYS_CONFIG_NAM=
-E
-> > for all boards specified after this line in
-> > arch/arm/mach-exynos/Kconfig:
-> >
-> >     source "board/samsung/axy17lte/Kconfig"
-> >
-> > Right now it's the last 'source' line there, so the issue is not
-> > reproducible. But once some board is moved or added after this line the
-> > next build error will happen:
->
-> Good spotting on this one.
->
-> [snip]
-> > diff --git a/board/samsung/axy17lte/Kconfig b/board/samsung/axy17lte/Kc=
-onfig
-> > index a018547ff5d4..209394a8a5a8 100644
-> > --- a/board/samsung/axy17lte/Kconfig
-> > +++ b/board/samsung/axy17lte/Kconfig
-> > @@ -1,11 +1,3 @@
-> > -config SYS_CONFIG_NAME
-> > -     string "Board configuration name"
-> > -     default "exynos78x0-common.h"
-> > -     help
-> > -       This option contains information about board configuration name=
-.
-> > -       Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h=
- header
-> > -       will be used for board configuration.
-> > -
-> >  if TARGET_A5Y17LTE
-> >  config SYS_BOARD
-> >       default "axy17lte"
->
-> But this isn't right as Minkyu points out because SYS_CONFIG_NAME isn't
-> set for these platforms now. The fix is to do as
-> board/freescale/lx2160a/Kconfig does for example and have
-> SYS_CONFIG_NAME under each if TARGET_... stanza, even if we're repeating
-> the value. It may or may not look cleaner to do:
-> config SYS_CONFIG_NAME
->         default "exynos78x0-common.h" if TARGET_A5Y17LTE || \
->                 TARGET_A7Y17LTE || TARGET_A3Y17LTE
->
-> In the file directly, instead.
->
+On 11/9/23 11:24, Tom Rini wrote:
+> On Thu, Nov 09, 2023 at 09:23:02AM -0800, Heinrich Schuchardt wrote:
+> 
+>> Function acpi_get_rsdp_addr() is needed on all architectures which
+>> write ACPI tables. Move the definition from the x86 include to an
+>> architecture independent one.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   arch/x86/include/asm/acpi_table.h | 9 ---------
+>>   drivers/misc/qfw.c                | 1 +
+>>   include/acpi/acpi_table.h         | 9 +++++++++
+>>   3 files changed, 10 insertions(+), 9 deletions(-)
+> 
+> My question here is, does this work right on non-x86? I know you can
+> have ACPI without UEFI on x86, but elsewhere doesn't the location have
+> to be provided in some manner by UEFI? I know I'm thinking that's the
+> case with SMBIOS (with a few exception).
+> 
+> I'm assuming you're doing something here with qemu and its qfw interface
+> and risc-v.
+> 
 
-Thanks for the review! I just sent v2 [1], hopefully addressing your
-and Minkyu's comments. And also threw in [PATCH v2 2/2] this time,
-reworking defconfigs accordingly.
+Hello Tom,
 
-[1] https://lists.denx.de/pipermail/u-boot/2023-November/536981.html
+yes, I want to enable ACPI passthrough on QEMU RISC-V. There will be 
+more patches needed. But the current change seemed obvious looking at 
+the code so I did not want to pile up more patches first.
 
-> --
-> Tom
+Do you know what the status of ACPI passthrough is on ARM?
+
+Best regards
+
+Heinrich
