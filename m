@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C616C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 13:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3943C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 14:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AFC7870DF;
-	Thu,  9 Nov 2023 14:57:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BEA7987168;
+	Thu,  9 Nov 2023 15:07:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="R+miJIlp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hwoan0IS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81C98870E1; Thu,  9 Nov 2023 14:57:36 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD1D48719B; Thu,  9 Nov 2023 15:07:47 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EF9087075
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 14:57:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A82F8715C
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 15:07:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699538253; x=1700143053; i=xypron.glpk@gmx.de;
- bh=lmmxTe/zGhW8Y3173NDUAymUECtvWWFS+HkG/4rokxU=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=R+miJIlpcSNTWgfD4qA3oMK76j+4/GPGt8bejigC8K+T54filBaJ4RVXhhuBBXtp
- 9Bpo5BdunL9zC8+jsjoDB6UDpfl7J98I7VIQk0BtpW3/TOg7EUqgm8P9G8RzGAE4S
- vcJ070QxiUMrhOWsoOFq2vbGRTqUMRgoiinyvxd5RqjfKYQsOHVTHEdj7snrnptXj
- 8D24cFSAnirzDpXTcMHC7cFJ91uD9iDwNLwe1c/o1sIu9QaG3mPfjj0jQMisnkQwd
- p7AO3RgWsGqPDMRNNEqfXBugFKjhT7/xzIPmZrW7YDElxgHquVMTmgzmhYptw8Yo2
- N3tXaU2kQVqDyX06AQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [172.20.5.50] ([4.28.11.157]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MfHEJ-1rdCVj3IIF-00glSs; Thu, 09
- Nov 2023 14:57:33 +0100
-Message-ID: <4d5b922a-b633-4892-9f36-78935c553bef@gmx.de>
-Date: Thu, 9 Nov 2023 05:57:18 -0800
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-41e58a33ec9so5620501cf.1
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 06:07:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699538860; x=1700143660; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=F9kuaaovQfheUbm/uhZmLqsNcOFK7+WSSFnDHbRJCC0=;
+ b=Hwoan0ISJiLl3UZGOH4bKERu8ibXPu+a8GJbw1YcQp8UDSUMBUpdhBu6vNbVSIYWau
+ wCn8WM29MKS/tdG5ABG8BS1da08XFz8z34UEKgVAz7AIAOU7EdMBk0onZYhkZ14/IptS
+ Btw7eQC9SM1G/cjldi+nNSMOBOhCBv/T13kEY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699538860; x=1700143660;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=F9kuaaovQfheUbm/uhZmLqsNcOFK7+WSSFnDHbRJCC0=;
+ b=CKdLv5+qHIhPm99OhZqlnVBqyPpJ6UgYrpwKq4IuWDT6mv0nzXcIIMA6JtK81GGOlI
+ WNn9qwm6nvYyKCi5RtFrse9yltuWf8/oUMd+jp+oTALokhl+zPreuJH94TLrYVvnH+pB
+ 08MMPyHxWB+jwU50BcHao2JjTPbcpS/WWW8XKb2P4r/xPGueD0ENMCkI3cmob2Te/cvz
+ xGIjKCnRSbcIWCrqDO6SoUZgZUxx+YPpWViVn78CKMy5ztw9Bst0U0Zkr8Tm4rOTXxhg
+ XnxMOqps0n4ej6AXEej4QxEd8DtC70uCx3UII63TqKdyZ4ucoQfcHtaeu9r4BZSQCLz8
+ bDBA==
+X-Gm-Message-State: AOJu0YyptfZ1QXvl61RMM8lzQ1VwFq4irSwfPWND0shXfpijXZl+x49/
+ pBOpIygKv6aLoSZdtNdV8G+fEQ==
+X-Google-Smtp-Source: AGHT+IF2DZujxz7mXGc3dIiE9bk3FU/MaWDBtJQi2t7KxY2dY91on3tniQrsI1tqcNBonx5TO8S8GQ==
+X-Received: by 2002:a05:622a:11c3:b0:412:191c:ffa with SMTP id
+ n3-20020a05622a11c300b00412191c0ffamr7038319qtk.26.1699538860251; 
+ Thu, 09 Nov 2023 06:07:40 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
+ [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
+ by smtp.gmail.com with ESMTPSA id
+ l6-20020ac84586000000b004198f67acbesm1939523qtn.63.2023.11.09.06.07.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Nov 2023 06:07:39 -0800 (PST)
+Date: Thu, 9 Nov 2023 09:07:38 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Thomas Richard <thomas.richard@bootlin.com>
+Cc: u-boot@lists.denx.de, nm@ti.com, thomas.petazzoni@bootlin.com,
+ gregory.clement@bootlin.com, u-kumar1@ti.com
+Subject: Re: [PATCH v2 6/8] board: ti: j721e: Add the missing part of exit
+ retention for k3-ddrss (J7200)
+Message-ID: <20231109140738.GF6601@bill-the-cat>
+References: <20231107161802.855154-1-thomas.richard@bootlin.com>
+ <20231107161802.855154-7-thomas.richard@bootlin.com>
+ <20231107181853.GK6601@bill-the-cat>
+ <a8ee2c00-4824-4e3f-804c-0472d152a53a@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Fix UEFI variable error handling
-To: Weizhao Ouyang <o451686892@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20231109125541.10845-1-o451686892@gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231109125541.10845-1-o451686892@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:uwEPF1ncYsbKQudZ/RG7BD2IMNAyqtVa1ahX+Df2suln5Utucu/
- XmE4PMwh/P6ERnY+iGS8ZcaaOezbbtEAb/cMmnddbUwDAUBeHpzMvU2ZnZ583RaEHoiWcKY
- M5KTDCSddRXYzF0QtIK1PQi0bGZO28bIcwnkTnfVCNiN7ysyEyBJ9EVuRSxTO47ANsL0XQ4
- Y+Ovd5mVEmphJlkqmZzKg==
-UI-OutboundReport: notjunk:1;M01:P0:XGfwrlkl/lY=;50xrxKd+hPfsBadSvHfLTltTR5V
- 7/8NexAmKJbZy1vTMN+d/GUe9aE7bra4Mh/9Knh+9bcz/x3E2SjokLiUD5s1+GH9w+mS4x3lC
- ueuk1ca1OQqrc7JUIhsqlU5Vrc8TGM1CyAGAG+QlaTBs/6c69lBcTePz1cqipeZhaN6Irb6xp
- 3uHjF1C4CJtvmDbITDNBJdADlmIgfGFkPOBZpnRKzeiYjfSKjGoZ2K9n0NnYFRHfjEq9HgklQ
- eFHOGK8p7HCOowtab8EYGgbPv2IYvDR2RL/kNNhmj8o3vzhNmdypOqueJkFzt4RhwyLgWVM03
- FnpD0aBtIXkrFY4+bSgffMezNauyN5nTZd0FUUNQGZXJazC2LJ0cWHkVa43/3p50uXL0LzAyB
- w+ydb/jNDcspGUmliooLeh9N6dyYkezpedlBe00EF/6/0mOHoFI57pxCcYKAHaeK4jRXHkcl2
- NY+XbawFMYflgwoMc+ZnFHE2mGMLzKFkgJ7pixU3zhIQh8Ht+t7T/QR1/MuB4WkziQLbEF8Hb
- XLSWqCKLWswg8XXfpMNcFm8008lfIc9A7mHv7BDPqzCdIaYexSW0B92pod7VsU1xZufScF9Oo
- 4H+T/xC8PcsxAlhILlsgcBAe/3UB3j1PAav5ySwpYAhx8gfr57dv2RmDmgoT091//7X1zMWFD
- jMZvPGDr9W3msXq1XUKDv5Tk23rPDX5Me+Eq/z3qre27V2SnqNiGBweGX0Sq0lTBkUM44K7JG
- V5YGh3B+5yvO3SDNX/ATWTdTuOdhI3k1853DmTKtnTBALvYA07bzflN+WzZ2AdRS8DSM9wut5
- OE33MWZg8etqkKTKHbBS9qMAK79nlvpJTgqDcNIrgap5yDvMwQqWAyqr2rND/7oZv2cb2X6QT
- TjuLsTSSOLKa0gBrsAJk/HOS8aSeP3Ay1yVok9pIuRHm0GO5MgiQ1mSfNivCNlpouSW3CpPn+
- 41tWlg==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="EHHSfqrJOmJMJ9Qe"
+Content-Disposition: inline
+In-Reply-To: <a8ee2c00-4824-4e3f-804c-0472d152a53a@bootlin.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,106 +96,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/9/23 04:55, Weizhao Ouyang wrote:
-> Correct some UEFI variable error handing code paths.
->
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> ---
->   lib/efi_loader/efi_var_file.c | 1 +
->   lib/efi_loader/efi_variable.c | 8 ++++----
->   2 files changed, 5 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file=
-.c
-> index 62e071bd83..dbb9b1f3fc 100644
-> --- a/lib/efi_loader/efi_var_file.c
-> +++ b/lib/efi_loader/efi_var_file.c
-> @@ -236,6 +236,7 @@ efi_status_t efi_var_from_file(void)
->   		log_err("Invalid EFI variables file\n");
->   error:
->   	free(buf);
-> +	return ret;
 
-Hello Weizhao,
+--EHHSfqrJOmJMJ9Qe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-thank you for looking into the error handling.
+On Thu, Nov 09, 2023 at 11:43:12AM +0100, Thomas Richard wrote:
+> On 11/7/23 19:18, Tom Rini wrote:
+> > On Tue, Nov 07, 2023 at 05:18:00PM +0100, Thomas Richard wrote:
+> >=20
+> >> Add the board specific part of the exit retention sequence for k3-ddrss
+> >>
+> >> Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
+> >>
+> >> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+> >> Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
+> >=20
+> > If this ends up being physical board design specific and so someone
+> > making a new design for this SoC with a custom board layout entirely
+> > needs something else, we should think harder about what's in
+> > board_is_resuming() vs what we document the function does. If however,
+> > this is generic to the SoC and will be needed, it should be folded in
+> > with the previous patch and the commit message expanded, and the
+> > documentation part of this series explain clearly what the functions are
+> > responsible for.
+> >=20
+>=20
+> Hi Tom,
+>=20
+> Thanks for all these interesting feedback's.
+>=20
+> From my point of view, board_is_resuming will work with all j7* SoCs and
+> all new designs for these SoCs.
+> This function only read and erase a scratchpad register in the PMIC A.
+> So it should be ok for all designs which have the PMIC@48.
+>=20
+> For the function board_k3_ddrss_lpddr4_release_retention, it's a little
+> bit more tricky. The sequence is specific to the SOC, but the GPIOs used
+> are specific to the board.
 
-U-Boot's UEFI variables can either be stored in file ubootefi.var in the
-ESP or in the RPMB (Replay Protected Memory Block) partition of the
-eMMC. The suggested changes are about handling of errors when reading or
-writing the file ubootefi.var. Security relevant variables (PK, KEK, db,
-dbx) are never read from file.
+I suspect this is going to be the case where a judgement call will have
+to be made on theory vs practical on if the GPIOs will be duplicated to
+custom designs (it's tricky! TI gave us a working solution, just use
+it!) or changed based on other needs. I'll hope that perhaps people know
+who to talk with in-private to get some unofficial feedback on such
+things.
 
-On first boot a file ubootefi.var will not exist. It has to be created
-by U-Boot. If efi_var_from_file() would return an error if the file does
-not exist or is corrupted, we would never be able to boot such a system.
-This is why deliberately we return EFI_SUCCESS here. What is missing in
-the code is a comment explaining the design decision.
+--=20
+Tom
 
->   #endif
->   	return EFI_SUCCESS;
->   }
-> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable=
-.c
-> index be95ed44e6..13966297c6 100644
-> --- a/lib/efi_loader/efi_variable.c
-> +++ b/lib/efi_loader/efi_variable.c
-> @@ -350,17 +350,17 @@ efi_status_t efi_set_variable_int(const u16 *varia=
-ble_name,
->
->   	if (var_type =3D=3D EFI_AUTH_VAR_PK)
->   		ret =3D efi_init_secure_state();
-> -	else
-> -		ret =3D EFI_SUCCESS;
+--EHHSfqrJOmJMJ9Qe
+Content-Type: application/pgp-signature; name="signature.asc"
 
-The two lines are unreachable code and should be removed.
+-----BEGIN PGP SIGNATURE-----
 
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return ret;
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVM56cACgkQFHw5/5Y0
+tyzzmwv/dxaHI4bse2CFiQHPDVgweDxb1NOvyjP9c3LKmAeD629O5rAZM+hxVeqR
+BjytZQigZ2LFrl0CAOb79xxPldh21k7X7qntXsU6pCdySjhyVTKSY+QrEy/NUwLo
++OUdjLPIXXKIg+uc3zTUWsXYpki5qzBiJMpgSC/ZJs3apOjo94r3NjJUUEM8OxEd
+8giB8XMZKmXMzwUC9Xy+Emh5aObRZs6APO7MGBAushFy8HxQihj2aHHWOMvbPDlz
+tSgZfBLDU/chKN22XwHldmufJ9lL09MxE22aDkFrub3Rpz+fCsYc+B6vXSrgAlmF
+6BLmtgBllUzATc3lUqRYlTtjHgcNDmcHnIBI666ot4YKJheuWXdGOED+ReNv8uu3
+VetDav1UyMC00C0/fVmk93ChuMUXNVTWxpVC9KA0u7N6fMGZzBICxrgTg4vl6L5x
+BVd0b55PnYKsVcb2e4CaDxn2raF4lcyzHxFA5XHU5SOijlpsMoUr0jN+pz5/0Akc
+57MSHbxa
+=GQDA
+-----END PGP SIGNATURE-----
 
-These new lines should only be reached if var_type =3D=3D EFI_AUTH_VAR_PK.
-
-I am not sure what Would be the right error handling if
-efi_init_secure_state() fails:
-
-* Do we have to set PK to the old value?
-* Should we still persist PK to ubootefi.var?
-
-However we decide we should describe our decisions in a code comment.
-
->
->   	/*
->   	 * Write non-volatile EFI variables to file
->   	 * TODO: check if a value change has occured to avoid superfluous wri=
-tes
->   	 */
->   	if (attributes & EFI_VARIABLE_NON_VOLATILE)
-> -		efi_var_to_file();
-> +		ret =3D efi_var_to_file();
-
-The discussion here should focus on the treatment of errors in the
-file-system.
-
-The following error cases come to my mind:
-
-* ESP partition is missing
-* ESP FAT file system is corrupted
-* There is no space on the ESP.
-* The medium (e.g. SD card) is in write only mode
-
-The current code gives priority to enable booting in all adverse
-situations. Do you think this is a bad choice?
-
-@Ilias: Please, chime in.
-
-Best regards
-
-Heinrich
-
->
-> -	return EFI_SUCCESS;
-> +	return ret;
->   }
->
->   efi_status_t efi_query_variable_info_int(u32 attributes,
-
+--EHHSfqrJOmJMJ9Qe--
