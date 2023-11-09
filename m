@@ -4,90 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B66C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 17:10:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CADAC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 17:23:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C26DB870B7;
-	Thu,  9 Nov 2023 18:10:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id ADD7A870B7;
+	Thu,  9 Nov 2023 18:23:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="tJ/y1FKo";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="d6RU0Ede";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 255A187168; Thu,  9 Nov 2023 18:10:25 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2402287108; Thu,  9 Nov 2023 18:23:14 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7B468719C
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 18:10:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2BD0986F85
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 18:23:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 3E8FB12004C;
- Thu,  9 Nov 2023 20:10:22 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 3E8FB12004C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1699549822;
- bh=jymvqmq6LT2zhbWW70zvBC6Ze5BqpPxUEa9E8+sbmQY=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=tJ/y1FKoDWhmiGYkrin8P7dzRU+DoRofH2YHMKwMNZ4xqBPfTYJnU/zC7/4zLuzmI
- peRBEclld28SvYv8u+F8u+cZMQli3rg9RZboGjMuvmHrsLI+iA7OGZNAxSbZRL1i5K
- eusFQbchqrfZ3CVt1L7IHG1wenM8XoZ/1HuF/LYsjCdGDAm7Z6Dztm+XMDeA//XDTg
- X7uOPDUzEv8Tpro5TstLvuersbO9HGaoHWU5u+oqal7sZu2hIqHXMXURZVJ+iaKmv2
- jSzXnmP22uLyBZWpC6yvfCVc7rTplJ94HT7BKtBInT/Eo6gVM6g8tgBKl6zWD8O/lG
- ALD/A8ScEsdeA==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (unknown [156.39.10.100])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  9 Nov 2023 20:10:22 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Thu, 9 Nov 2023 20:10:21 +0300
-From: Igor Prusov <ivprusov@salutedevices.com>
-To: <u-boot@lists.denx.de>
-CC: <kernel@sberdevices.ru>, <prusovigor@gmail.com>, Igor Prusov
- <ivprusov@salutedevices.com>, Jagan Teki <jagan@amarulasolutions.com>, Neil
- Armstrong <neil.armstrong@linaro.org>, <u-boot-amlogic@groups.io>
-Subject: [PATCH 2/3] spi: meson_spifc_a1: Use define for time interval
-Date: Thu, 9 Nov 2023 20:10:03 +0300
-Message-ID: <20231109200943.2.I02c5c81c1a5a06b51600672691f448909af473ea@changeid>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231109171004.193521-1-ivprusov@salutedevices.com>
-References: <20231109171004.193521-1-ivprusov@salutedevices.com>
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 736F3400E0; 
+ Thu,  9 Nov 2023 17:23:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699550590;
+ bh=pYS5GiAv7yr8ppt35E0VBMjafpsB9NkrGHQG6zkfUK0=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=d6RU0Edeqg1GmkrQ9A1T01ML2QeretMmAwdWArsPb7vEVnvzhVvPFyDEb56pOKCgZ
+ iZULe9+b/DwOB/v+0e+1NldoxT6AkF7/jYT+q1WzIcP+xbutsaFrb4XXyh5d6OTNim
+ 7ctrqG5j7j02rzjFDehRbcgl7PXEIgm366w/KoVX6yiZ4Ji8ha1pK6DC7ARGqwetMQ
+ k3afDNWzoykmaVyPTO1JbPXKgNYSJtC0MfeI6Y1lKsLX12YkzLIQj9LmzlZFdY2nby
+ ee5q32EueUFwB0O6ZelYJJneBUvBBcw3VccXHFL4+b2g9UKgxvaocGd2ve8oai7+iy
+ eL7gfRyXneIDQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
+Date: Thu,  9 Nov 2023 09:23:02 -0800
+Message-Id: <20231109172302.54324-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181258 [Nov 09 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/09 11:05:00 #22436988
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,35 +69,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use USEC_PER_MSEC define for timeout to sync code with Linux version.
+Function acpi_get_rsdp_addr() is needed on all architectures which
+write ACPI tables. Move the definition from the x86 include to an
+architecture independent one.
 
-Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
+ arch/x86/include/asm/acpi_table.h | 9 ---------
+ drivers/misc/qfw.c                | 1 +
+ include/acpi/acpi_table.h         | 9 +++++++++
+ 3 files changed, 10 insertions(+), 9 deletions(-)
 
- drivers/spi/meson_spifc_a1.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/spi/meson_spifc_a1.c b/drivers/spi/meson_spifc_a1.c
-index 099c4c037d..418d4d5e10 100644
---- a/drivers/spi/meson_spifc_a1.c
-+++ b/drivers/spi/meson_spifc_a1.c
-@@ -16,6 +16,7 @@
- #include <spi-mem.h>
- #include <asm/io.h>
- #include <linux/log2.h>
-+#include <linux/time.h>
- #include <linux/iopoll.h>
- #include <linux/bitfield.h>
+diff --git a/arch/x86/include/asm/acpi_table.h b/arch/x86/include/asm/acpi_table.h
+index 226753b65d..57e41654ce 100644
+--- a/arch/x86/include/asm/acpi_table.h
++++ b/arch/x86/include/asm/acpi_table.h
+@@ -64,15 +64,6 @@ int acpi_write_dbg2_pci_uart(struct acpi_ctx *ctx, struct udevice *dev,
+  */
+ int acpi_create_gnvs(struct acpi_global_nvs *gnvs);
  
-@@ -117,7 +118,7 @@ static int amlogic_spifc_a1_request(struct amlogic_spifc_a1 *spifc, bool read)
+-/**
+- * acpi_get_rsdp_addr() - get ACPI RSDP table address
+- *
+- * This routine returns the ACPI RSDP table address in the system memory.
+- *
+- * @return:	ACPI RSDP table address
+- */
+-ulong acpi_get_rsdp_addr(void);
+-
+ /**
+  * arch_read_sci_irq_select() - Read the system-control interrupt number
+  *
+diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
+index 7c01bf23d5..e3b6b4cd74 100644
+--- a/drivers/misc/qfw.c
++++ b/drivers/misc/qfw.c
+@@ -7,6 +7,7 @@
+ #define LOG_CATEGORY UCLASS_QFW
  
- 	return readl_poll_timeout(spifc->base + SPIFC_A1_USER_CTRL0_REG,
- 				  val, (val & mask) == mask,
--				  200 * 1000);
-+				  200 * USEC_PER_MSEC);
- }
+ #include <common.h>
++#include <acpi/acpi_table.h>
+ #include <bootdev.h>
+ #include <bootflow.h>
+ #include <bootmeth.h>
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index 1f85de091d..a3b67259e6 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -920,6 +920,15 @@ void acpi_fill_header(struct acpi_table_header *header, char *signature);
+  */
+ int acpi_fill_csrt(struct acpi_ctx *ctx);
  
- static void amlogic_spifc_a1_drain_buffer(struct amlogic_spifc_a1 *spifc,
++/**
++ * acpi_get_rsdp_addr() - get ACPI RSDP table address
++ *
++ * This routine returns the ACPI RSDP table address in the system memory.
++ *
++ * @return:	ACPI RSDP table address
++ */
++ulong acpi_get_rsdp_addr(void);
++
+ /**
+  * write_acpi_tables() - Write out the ACPI tables
+  *
 -- 
-2.34.1
+2.40.1
 
