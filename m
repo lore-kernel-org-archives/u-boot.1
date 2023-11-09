@@ -4,95 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DDBCC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 14:36:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2591C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 15:10:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45B3F8719B;
-	Thu,  9 Nov 2023 15:36:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerhold.net
+	by phobos.denx.de (Postfix) with ESMTP id E6C26871FB;
+	Thu,  9 Nov 2023 16:10:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gerhold.net header.i=@gerhold.net header.b="LRjU04PX";
-	dkim=permerror (0-bit key) header.d=gerhold.net header.i=@gerhold.net header.b="SXT4ZGjq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lPcrC/Of";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9305F87193; Thu,  9 Nov 2023 15:36:02 +0100 (CET)
-Received: from mo4-p01-ob.smtp.rzone.de (mo4-p01-ob.smtp.rzone.de
- [81.169.146.165])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8BA338719B; Thu,  9 Nov 2023 16:10:11 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8234D871DF
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 15:35:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0986C86F73
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 16:10:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gerhold.net
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=stephan@gerhold.net
-ARC-Seal: i=1; a=rsa-sha256; t=1699540558; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=tVXz27QQzg/2vAVrIacfrxunJlckZF5bVXKHtLtH0vbJCuA59FrYRkVLSddKZ6UpmA
- pZL6QAIakaOUI8hRF6TVaegd1PMrFNsNiI9m5zGXL3qtD/WeGuQs+WOz/Ckwao+6VLO5
- 50YfnSFa5foG8nHJj67isQhrdiVuoUYUPerZ0+z7LH2w1u46+SsAjluM2mc7VGsB5oLM
- gOgfllMwqZZ8491+EGPwtxBcwwRLocggQTAekfIHf3/Vzl0iK76Ay/atEIwSpR7p/qbO
- cwKmUC9I6t//dqrh8YeemrkQcgIiq42qfY2CZ92EK19/g+BRQYSDxLVdZzDza7bimUqK
- ja1g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1699540558;
- s=strato-dkim-0002; d=strato.com;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=PAOVJq+bMWqemhY7hHMJIbV97UuvrhTyL6qYBmRqLkE=;
- b=K/wyEAEGnwDcraN/Yc5TdIz8W/iB4FOjEEcq5JKAqYmddOBytDZo7Xq+T1284mGHDZ
- IqiqI1suis19CuHb2h0+86eJbVdu1LfNQ6Nd+aDcPuoBX8afRmr0N3TKlGRbgehvBuSF
- ILtN/g3kn9oAGnnTGc5ps37s1wAuyHtpzKwkdQI+hrhCOjN0Ub4nYK+iW5RipxCUcnsI
- tZkupPzLsJIjQCARf++vSzHH5ZXQhqStlSFPwScHUuYK6DOlxMm0VmDShwc2JWdUUFWd
- ZcmCiVOxctBgJN+a0Mxcu/NQoz6q00EyLF2v0JP3CL9OIr2++hHEZH5nB56poAJjmsVY
- unHw==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo01
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1699540558;
- s=strato-dkim-0002; d=gerhold.net;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=PAOVJq+bMWqemhY7hHMJIbV97UuvrhTyL6qYBmRqLkE=;
- b=LRjU04PXfRvEAD8Zp+ODzIRiOFn/iF1FTH0xnaomgEIbfqWqEUdlCW2S1iwWgNwkKy
- LzwCkh4yVqPdDOlVe7JiXLx/Th/LwKnNwY/hO3G6Um0gq9OfUCvWy5j90fesrEFzsXvJ
- lJYTimr2dFwTJgajoOM+6OjIfraZ2jYFPcYszufaFAEePTDafuAWhYwRzyALzBNxfJIS
- 03cbUjx6+9VElddBB4yB4ZZ0RFnk0kJJqmvbQBEDGD5QHZB66MWHbphF/oABcDJ6OitV
- je++UwgvMez+Qu5Hz/kKb69UADLFpz7kC/q+h3rlDWew0qUFSk1om6WuR/+ZoRQG37Cl
- jmzw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1699540558;
- s=strato-dkim-0003; d=gerhold.net;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
- From:Subject:Sender;
- bh=PAOVJq+bMWqemhY7hHMJIbV97UuvrhTyL6qYBmRqLkE=;
- b=SXT4ZGjqAxzJw6y9wY2AptIo5jkV94APLCnueRsQouCjl2dd5+UpAUQYh02eIeOqHy
- TK3ozq3mJ/NexPAaBZAw==
-X-RZG-AUTH: ":P3gBZUipdd93FF5ZZvYFPugejmSTVR2nRPhVOQ/OcYgojyw4j34+u261EJF5OxJD4paA8paF1A=="
-Received: from gerhold.net by smtp.strato.de (RZmta 49.9.1 SBL|AUTH)
- with ESMTPSA id Lbb8e2zA9EZwir7
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 9 Nov 2023 15:35:58 +0100 (CET)
-Date: Thu, 9 Nov 2023 15:35:56 +0100
-From: Stephan Gerhold <stephan@gerhold.net>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 3/5] gpio: qcom_pmic: fix support for upstream DT
-Message-ID: <ZUzuTFFiz2KdpODs@gerhold.net>
-References: <20231108-b4-qcom-dt-compat-v2-0-713233c72948@linaro.org>
- <20231108-b4-qcom-dt-compat-v2-3-713233c72948@linaro.org>
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-53e3b8f906fso1522471a12.2
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 07:10:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699542607; x=1700147407; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OlnL8rVjbBj/AetlG8zcnG5Ahw8w2/wayCfQ52RDve0=;
+ b=lPcrC/Of+RH9jvius8henltbJodvCf/Qjn7tL8y+1ngU4L4d3Q3hcqsWJw+Tv28NHu
+ VpkyUDUovKGdan+TxcLqUde72zIUYfL/9sD2dGOZzxO+9SeQW73n07fQk0VwV7R56il7
+ /+pPiw9dcDrgKk2B691+oewBmGLt5hHAAsTkBIkG7QQi3mtzlsQX74JKbKcQXHKDs2ly
+ Cy4csnbpP8x1Qj6rya9YhbRlYeD//OjyFsp0zTnPuYmMfFqtc4n1MSt1Ni9SnsnDv8y4
+ HePzE8SxAksrlLDX6T+KtVN4vmAdblq3m09bmmVgRcqcHi/KiSU7IQ3QHixR5WUpZszV
+ 7EFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699542607; x=1700147407;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OlnL8rVjbBj/AetlG8zcnG5Ahw8w2/wayCfQ52RDve0=;
+ b=TePJMP0nEroJecUftA35FYSDbIlBxBPUa3nywqvTxRcjgBpGq3TlNoyS+VgPst7Ah9
+ 1Eg2vYOI6uMjjTU10JrqO/JCEsHSLdfJ+qpvsTrJpHvCB7TsXmYhEkPyiH3OKyK1KO5F
+ QFRkX3yGlIbUyc6ie/bmgq1NiTwmRzJN0vGrGeb2Guy0mNe7Gkx3XaMihg4PyZUmeJC1
+ qamGY6AIuTrzllW1xtJiiYvNwrYFUgbXH9x8NLsmDGcPE1sS13FQJmsYYiMHjpNBfxvP
+ UsqheQIS0wL3LMdbbfZpBqbiSxtZx5nnZ61g8f+JTz4Yz/Ct3rhyFgsvfp4lo8vBkWVt
+ cRAQ==
+X-Gm-Message-State: AOJu0YzVGWgyyovsyS7F8gkuersTMWS+hdHOVJmdVZ3T3y3wBuoUvlD0
+ +s8WNt1uGosCv9U0KgIA7tCqhMNKFLAOXKSU+bY=
+X-Google-Smtp-Source: AGHT+IENwJafQp12ZKT7YxhI+1fdUi+pXYcQs3QeAle2tEysYgp6HbxCew9/o5O6Z7MTAywN+uFel1O6W6GrnJ2+QsU=
+X-Received: by 2002:a05:6402:348e:b0:545:554c:b0e6 with SMTP id
+ v14-20020a056402348e00b00545554cb0e6mr1688410edc.42.1699542607066; Thu, 09
+ Nov 2023 07:10:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231108-b4-qcom-dt-compat-v2-3-713233c72948@linaro.org>
-Content-Transfer-Encoding: 7bit
+References: <20231109125541.10845-1-o451686892@gmail.com>
+ <4d5b922a-b633-4892-9f36-78935c553bef@gmx.de>
+In-Reply-To: <4d5b922a-b633-4892-9f36-78935c553bef@gmx.de>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Thu, 9 Nov 2023 23:09:55 +0800
+Message-ID: <CAHk0HovVxdaPtd9ufFYZrfpvO=uwktfY+NaSsjMWnMbjBXbW6w@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: Fix UEFI variable error handling
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,68 +87,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 08, 2023 at 04:20:55PM +0000, Caleb Connolly wrote:
-> Linux devicetrees use the "gpio-ranges" property, add support for
-> parsing it instead of "gpio-count" so that upstream DTs can be used with
-> U-Boot.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/gpio/qcom_pmic_gpio.c | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
-> 
-> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-> index 7b83c67fa464..647d4143ce14 100644
-> --- a/drivers/gpio/qcom_pmic_gpio.c
-> +++ b/drivers/gpio/qcom_pmic_gpio.c
-> @@ -245,11 +245,37 @@ static int qcom_gpio_probe(struct udevice *dev)
->  	return 0;
->  }
->  
-> +/*
-> + * Parse basic GPIO count specified via the gpio-ranges property
-> + * as specified in Linux devicetrees
-> + * Returns < 0 on error, otherwise gpio count
-> + */
-> +static int qcom_gpio_of_parse_ranges(struct udevice *dev)
-> +{
-> +	int ret;
-> +	struct ofnode_phandle_args args;
-> +
-> +	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "gpio-ranges",
-> +					     NULL, 3, 0, &args);
-> +	if (ret)
-> +		return log_msg_ret("gpio-ranges", ret);
-> +
-> +	return args.args[2];
-> +}
-> +
->  static int qcom_gpio_of_to_plat(struct udevice *dev)
->  {
->  	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-> +	int ret;
->  
->  	uc_priv->gpio_count = dev_read_u32_default(dev, "gpio-count", 0);
-> +	if (!uc_priv->gpio_count) {
-> +		ret = qcom_gpio_of_parse_ranges(dev);
-> +		if (ret > 0)
-> +			uc_priv->gpio_count = ret;
-> +		else
-> +			printf("gpio-ranges error: %d\n", ret);
-> +	}
+On Thu, Nov 9, 2023 at 9:57=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gmx=
+.de> wrote:
+>
+> On 11/9/23 04:55, Weizhao Ouyang wrote:
+> > Correct some UEFI variable error handing code paths.
+> >
+> > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> > ---
+> >   lib/efi_loader/efi_var_file.c | 1 +
+> >   lib/efi_loader/efi_variable.c | 8 ++++----
+> >   2 files changed, 5 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_fil=
+e.c
+> > index 62e071bd83..dbb9b1f3fc 100644
+> > --- a/lib/efi_loader/efi_var_file.c
+> > +++ b/lib/efi_loader/efi_var_file.c
+> > @@ -236,6 +236,7 @@ efi_status_t efi_var_from_file(void)
+> >               log_err("Invalid EFI variables file\n");
+> >   error:
+> >       free(buf);
+> > +     return ret;
+>
+> Hello Weizhao,
+>
+> thank you for looking into the error handling.
+>
+> U-Boot's UEFI variables can either be stored in file ubootefi.var in the
+> ESP or in the RPMB (Replay Protected Memory Block) partition of the
+> eMMC. The suggested changes are about handling of errors when reading or
+> writing the file ubootefi.var. Security relevant variables (PK, KEK, db,
+> dbx) are never read from file.
+>
 
-I would drop support for the non-standard gpio-count and instead adjust
-the existing device trees to use gpio-ranges (copied from the upstream
-DTs).
+Hi Heinrich,
 
->  	uc_priv->bank_name = dev_read_string(dev, "gpio-bank-name");
->  	if (uc_priv->bank_name == NULL)
->  		uc_priv->bank_name = "qcom_pmic";
-> 
+Yes, my intention was to check for errors related to non-volatile
+variables.
 
-Maybe you can replace this property as well while you're at it. Perhaps
-the default fallback name is sufficient. Alternatively one could
-obtain the actual PMIC name from the compatible or similar.
+> On first boot a file ubootefi.var will not exist. It has to be created
+> by U-Boot. If efi_var_from_file() would return an error if the file does
+> not exist or is corrupted, we would never be able to boot such a system.
+> This is why deliberately we return EFI_SUCCESS here. What is missing in
+> the code is a comment explaining the design decision.
 
-Thanks,
-Stephan
+Sorry, I missed this scene. Maybe a comment is needed or we can split
+the scene.
+
+>
+> >   #endif
+> >       return EFI_SUCCESS;
+> >   }
+> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variabl=
+e.c
+> > index be95ed44e6..13966297c6 100644
+> > --- a/lib/efi_loader/efi_variable.c
+> > +++ b/lib/efi_loader/efi_variable.c
+> > @@ -350,17 +350,17 @@ efi_status_t efi_set_variable_int(const u16 *vari=
+able_name,
+> >
+> >       if (var_type =3D=3D EFI_AUTH_VAR_PK)
+> >               ret =3D efi_init_secure_state();
+> > -     else
+> > -             ret =3D EFI_SUCCESS;
+>
+> The two lines are unreachable code and should be removed.
+>
+> > +     if (ret !=3D EFI_SUCCESS)
+> > +             return ret;
+>
+> These new lines should only be reached if var_type =3D=3D EFI_AUTH_VAR_PK=
+.
+>
+> I am not sure what Would be the right error handling if
+> efi_init_secure_state() fails:
+>
+> * Do we have to set PK to the old value?
+> * Should we still persist PK to ubootefi.var?
+>
+> However we decide we should describe our decisions in a code comment.
+
+IMO, efi_init_secure_state() is not just dealing with PK but also
+includes Secure Boot mode transitions. So it may returns some
+appropriate error when dealing with variable authentication.
+
+>
+> >
+> >       /*
+> >        * Write non-volatile EFI variables to file
+> >        * TODO: check if a value change has occured to avoid superfluous=
+ writes
+> >        */
+> >       if (attributes & EFI_VARIABLE_NON_VOLATILE)
+> > -             efi_var_to_file();
+> > +             ret =3D efi_var_to_file();
+>
+> The discussion here should focus on the treatment of errors in the
+> file-system.
+>
+> The following error cases come to my mind:
+>
+> * ESP partition is missing
+> * ESP FAT file system is corrupted
+> * There is no space on the ESP.
+> * The medium (e.g. SD card) is in write only mode
+>
+> The current code gives priority to enable booting in all adverse
+> situations. Do you think this is a bad choice?
+
+I think the ESP status (including fs corruption) is the most likely
+situation to have an effect. But we should catch it earlier anyway.
+
+BR,
+Weizhao
+
+>
+> @Ilias: Please, chime in.
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > -     return EFI_SUCCESS;
+> > +     return ret;
+> >   }
+> >
+> >   efi_status_t efi_query_variable_info_int(u32 attributes,
+>
