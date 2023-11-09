@@ -4,57 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6639EC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 13:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BA8C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 13:50:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9811387138;
-	Thu,  9 Nov 2023 14:48:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 33A53870F8;
+	Thu,  9 Nov 2023 14:50:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=lexina.in
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699537738;
-	bh=uJZkHaaUanslXwlk5migqWMee5tP4Apt+Z5Dfn2WKC0=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=eY3YJq+yLmCLAMILXvC2aHPCFkoTycZ7n1Mcu6ocPPQd8j7e3fln7Bz36mpAq6zs+
-	 2Q/YCMVKkAgCVtijKrgiahNHcfrM0tz/xTA8trCKNmYYnAKjX+V29T4fdYXe47KtsH
-	 Idxq3NHoOn5T6iOifgjdhn30KIrGghg1/7ZecKWqQw3jfJcM0syaLEqdGY2jo7k48k
-	 1vAGBVObjxytccW4eYXsOCG0Y1uiLh8f6oQ044XsSu0rl71SSrzjci8ABCneT6u4dD
-	 eWDCKTJFFy+XtX1H4h5v/iRJ+IEAVNRQdWPDRlOXdVeWMmaV8OS+3E61Uyk98k8RK5
-	 T8VVgqyqXqE5Q==
-Received: from [192.168.1.107] (82-131-203-152.pool.digikabel.hu
- [82.131.203.152])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 88A75870DF;
- Thu,  9 Nov 2023 14:48:57 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699537738;
- bh=uJZkHaaUanslXwlk5migqWMee5tP4Apt+Z5Dfn2WKC0=;
- h=Subject:To:Cc:References:Reply-To:From:Date:In-Reply-To:From;
- b=mxdzSyQ+iKTa/7bWbmTTwUWUso3nMM1KMYE8jmdOyKOhldsIshX/uZk8SYW9iZB5x
- 6/B2sKXcsRE0/cJLj11IIERihO/wC3UHct+wTILGBAkrRYHuKXv1UhHtFLqBdEH6kW
- 06JBitarwfoWoEwXriXOfzhb5s1pHrwelWsVSekxguwcRgvzpvxWwln+OwQoXFiE4S
- +vGRQsqv6fif2Ggo2YgDentfsbXFh97R6d1vn1Kr+3e3500mACxNm+bEKh0zABSOD+
- y8PMNONDvY8kjd1ZyBZHzv2J72b5cAppWFO2CR3vpP3jVBHD1JbVIFxZjjN26QH16y
- StfTsIrDrZ6qw==
-Subject: Re: [PATCH 0/6] siemens,am335x: clean up the draco board family
-To: Tom Rini <trini@konsulko.com>, Enrico Leto <enrico.leto@siemens.com>
-Cc: u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>,
- Michael Trimarchi <michael@amarulasolutions.com>
-References: <20231108145322.302927-1-enrico.leto@siemens.com>
- <20231108161137.GP6601@bill-the-cat>
-From: Heiko Schocher <hs@denx.de>
-Message-ID: <7515c281-9e07-b836-9f19-0fce4f504ba1@denx.de>
-Date: Thu, 9 Nov 2023 14:48:46 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=lexina.in header.i=@lexina.in header.b="YFKn0Z9a";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 20AEB87138; Thu,  9 Nov 2023 14:50:08 +0100 (CET)
+Received: from mx.msync.work (mx.msync.work [62.182.159.68])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D280870F8
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 14:50:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=lexina.in
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adeep@lexina.in
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 05F55152533; Thu,  9 Nov 2023 13:49:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lexina.in; s=dkim;
+ t=1699537802; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=8Z3bKFTFI9DvnKZS+aizOzy3+ePZo/b1/2lImY/Gnd0=;
+ b=YFKn0Z9aifbhFmBsGUBeiSsDo+Ing2Aq/0Efk7f2GKI3Hf/wptGwnt58lyEiHrWv1QryPd
+ V/dR7MoA9d7u6lcnJ/SOHfxY+UfJRyYDpQFX0gsKzqYoLTl2ZJINNl31iHhoLI7+3f8LDS
+ +dCHSMfHUbaDjrDbhv9MSLVzD8MqBujVCai6e83Pqxgbx5AZgoS60Aw8f+JqkM07UotQnd
+ kNRXwUHVbxgWHYwdxy8OEZE2rT2Tu43218TBGrrA0LLBZqrrIoI+VwoJ7BwFlaw03nWjE3
+ dHOmGPAM/RwtgwJptfHwS62GiHH1cw784YRk7ho3PUPJt/H8JMo/hmQuzi6KjA==
+Message-ID: <c89408dd98f78aace3f04c3fdba5702b3045a743.camel@lexina.in>
+Subject: Re: [RFT PATCH 2/2] mmc: meson-gx: set 270 core phase during the
+ identification
+From: Viacheslav <adeep@lexina.in>
+To: Jerome Brunet <jbrunet@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Date: Thu, 09 Nov 2023 16:49:59 +0300
+In-Reply-To: <20230915160130.352099-3-jbrunet@baylibre.com>
+References: <20230915160130.352099-1-jbrunet@baylibre.com>
+ <20230915160130.352099-3-jbrunet@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
-In-Reply-To: <20231108161137.GP6601@bill-the-cat>
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,91 +63,56 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+After running some tests, I've noticed inconsistent behavior with the eMMC:
+ On a cold boot (following a shutdown), the eMMC operates as expected withi=
+n U-Boot.
+ On a hot reboot (via the kernel's reboot command), the eMMC sometimes (not=
+ always, but if
+fit in error, next need to do poweroff) does not work:
+    U-Boot is able to read the dtb file but won't boot kernel completely, o=
+r
+    U-Boot might fail to read from the eMMC altogether.
 
-On 08.11.23 17:11, Tom Rini wrote:
-> On Wed, Nov 08, 2023 at 03:53:16PM +0100, Enrico Leto wrote:
-> 
->> The boards were not maintained upstream since the development phase.
->>
->> Restore SPL and remove unused settings. We need i2c to read the DDR
->> settings from EEPROM, get u-boot from NAND, the console output and the
->> watchdog.
->>
->> Restore u-boot up to the user prompt. The complete functionality will
->> be restored in future patches.
->>
->> Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
-> 
-> I'm glad to see this series and in general it looks fine and is a good
-> start. As some parts of the future cleanup work I'd love to see a file
-> under doc/board/siemens for the family and moving to plain text
-> environment, both of which iot2050 do so there's some in-house
-> experience I am hopeful you can leverage as well if needed. It would
-> also be good to reduce the include/configs/ files to as little as
-> possible, I believe there's a number of dead-comments there, and other
-> defines that are only needed in a local context and can move to a
-> specific file or other header.  Thanks!
+This behavior had not occurred before (when the phase was set to 270 on axg=
+).
 
-Yep, good points!
+On Fri, 2023-09-15 at 18:01 +0200, Jerome Brunet wrote:
+> It has been reported that some devices have problems with a 180 degree
+> core phase. Setting 270 helped some of these devices. Other continue to
+> struggle (while it works fine with 180 in Linux ... :sigh:)
+>=20
+> Poking around the HW, it seems that setting a 270 core phase during the
+> identification, then using 180 for the rest of the operations, helps the
+> device operate correctly.
+>=20
+> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
+> ---
+>  drivers/mmc/meson_gx_mmc.c | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+> index c6168792cbae..284be2b9dca4 100644
+> --- a/drivers/mmc/meson_gx_mmc.c
+> +++ b/drivers/mmc/meson_gx_mmc.c
+> @@ -54,9 +54,14 @@ static void meson_mmc_config_clock(struct mmc *mmc)
+> =20
+>  	/* Clk always on */
+>  	meson_mmc_clk |=3D pdata->version->clk_always_on;
+> -	meson_mmc_clk |=3D CLK_CO_PHASE_180;
+>  	meson_mmc_clk |=3D CLK_TX_PHASE_000;
+> =20
+> +	/* Core phase according to mode */
+> +	if (mmc->selected_mode =3D=3D MMC_LEGACY)
+> +		meson_mmc_clk |=3D CLK_CO_PHASE_270;
+> +	else
+> +		meson_mmc_clk |=3D CLK_CO_PHASE_180;
+> +
+>  	/* 1GHz / CLK_MAX_DIV =3D 15,9 MHz */
+>  	if (mmc->clock > 16000000) {
+>  		clk =3D SD_EMMC_CLKSRC_DIV2;
 
-I tried this patchset on my dxr2 thuban board, and see a problem when
-booting from NAND.
-
-SPL fails to load u-boot.img (wrong ecc calculation)
-
-reverting commit:
-
-commit 04fcd2587321: ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
-
-from Roger Quadros <rogerq@kernel.org> (as for this reason added to cc)
-
-and SPL/U-Boot 2023.10 comes up fine with Enricos patchset!
-
-remark: for plain U-Boot 2023.10 even SPL does not boot, so Enricos
-  patchset is a big step in getting back a working board again, thanks!
-
-So first, I wonder, if there is any am335x based board booting from
-NAND with the above commit in?
-
-
-If the above commit is in U-Boot, the following patch helps also
-to get this board back booting:
-"""
-diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
-index 1a5ed0de31..d1c73b389c 100644
---- a/drivers/mtd/nand/raw/omap_gpmc.c
-+++ b/drivers/mtd/nand/raw/omap_gpmc.c
-@@ -644,7 +644,11 @@ static int omap_correct_data_bch(struct mtd_info *mtd, uint8_t *dat,
-
-        /* check calculated ecc */
-        for (i = 0; i < ecc->bytes && !ecc_flag; i++) {
-+#ifdef CONFIG_SPL_BUILD
-+               if (calc_ecc[i] != read_ecc[i])
-+#else
-                if (calc_ecc[i] != 0x00)
-+#endif
-                        goto not_ecc_match;
-        }
-        return 0;
-"""
-
-but of course, this is not the solution ...
-
-Any ideas are welcome, Thanks!
-
-bye,
-Heiko
-
-(Damn, that I have not longer automated testing up and running for
-this board)
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
