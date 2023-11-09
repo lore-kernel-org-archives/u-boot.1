@@ -4,64 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70827C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 12:23:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E1AC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 12:53:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE8D0870E1;
-	Thu,  9 Nov 2023 13:23:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D082286FED;
+	Thu,  9 Nov 2023 13:53:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TuwX+Tnq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VY/+jFoh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6554B87108; Thu,  9 Nov 2023 13:23:12 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CE99087108; Thu,  9 Nov 2023 13:53:50 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C004E870DF
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 13:23:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C138B86F7E
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 13:53:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A9CN3j2015393;
- Thu, 9 Nov 2023 06:23:03 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699532583;
- bh=memOQK0dHfn9ZPeMAHfCy/lKB5uw1N8/vCmnUrZCdGs=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=TuwX+Tnqzl2u/BPObFwr8U+9/rhH2VYfzn2EH6MlatzAjI1FhyTJwow5Z6aODPcHi
- /DxhvLWQL9Zt+GtkRtDM7miakuKaxg6mT8HysYSEZ8fO24yWJ86eeHU2CIDG555kvX
- EjvnA+VMuYeIlJ3YiEEmAO7JENexrnfyNZmMR2Tk=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A9CN3El013602
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 Nov 2023 06:23:03 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
- Nov 2023 06:23:03 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 Nov 2023 06:23:03 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A9CN3mN104693;
- Thu, 9 Nov 2023 06:23:03 -0600
-Date: Thu, 9 Nov 2023 06:23:03 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-CC: Maxime Ripard <mripard@redhat.com>, <u-boot@lists.denx.de>
-Subject: Re: eMMC broken on SK-AM62
-Message-ID: <20231109122303.fakyjjb7df7c7spk@handheld>
-References: <hsk5wejuf5maoer3aodjyndmyft56gag4cepfjep7lfthmwrcy@r2yoebb7stk6>
- <871qcz9q4i.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7789aed0e46so53797585a.0
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 04:53:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699534427; x=1700139227; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CVq2vrqz/XVntNMNQ+NpAohUQUb0P+xsy1GjUTcOYMU=;
+ b=VY/+jFoh5unTXezKArae0mczhH+tDmuXqt9pHyWJ3Y6To6UlmScpKim8j+XpoTgUol
+ BAllFQamk7U0S8K2l+qhoHn9n6g9D/UjiAlj3Uf20Dp1IOFHGVUzx+VVH3RW+1AtB1TJ
+ IVeSA2sHz1/N6Ck9O3E+8qQmkNL+5bprtnPbM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699534427; x=1700139227;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CVq2vrqz/XVntNMNQ+NpAohUQUb0P+xsy1GjUTcOYMU=;
+ b=ijLU/k7iGODLFUZVn17hmHhqZ4NXKLuBX6ZBHLbXtUlkFYrkywXSAgxLgbpGWDuix1
+ owG1JBVOJdoxk85rxoK6qsLF3l8w8oklkkf/6W1YFGttiDNgJQKNQ9gBt1lBY1jal6J1
+ z4puoD3c8pJIcxopP4B5FHxTv38q2UUUfqZL/Zxc9wqpmAZPrt/zuPg+kEWqfzqf3IVS
+ JOgxubeK7KqCj5aMXZ6G5ighoZqR7dvoWY6HzvBe72UBauvljZ1tklvei8hX7XH6+LJd
+ G8vVfq++aV5SLriAm0w01lKBeNQgHRike7EPecRun2or0gFEyoUeBdTerGIJDH/5e+Hy
+ JLtg==
+X-Gm-Message-State: AOJu0YxGmQBIK1sPhXAXyKO8Bx7hmsino8eAs6UUf5lO9WhYswmKXGlu
+ Wq3lcmq50Knv6mZ7D3bh4p/lIw==
+X-Google-Smtp-Source: AGHT+IH41i7Syedt5eYWScYqPe5qAm+gAxzPno87LmfFFKXIst2qtT52xR2yOwoT4l3FdISOQhB+Xw==
+X-Received: by 2002:a05:620a:46ac:b0:777:659d:7fcb with SMTP id
+ bq44-20020a05620a46ac00b00777659d7fcbmr5082322qkb.36.1699534427441; 
+ Thu, 09 Nov 2023 04:53:47 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
+ [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
+ by smtp.gmail.com with ESMTPSA id
+ m12-20020a05620a24cc00b007770673e757sm1978186qkn.94.2023.11.09.04.53.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Nov 2023 04:53:46 -0800 (PST)
+Date: Thu, 9 Nov 2023 07:53:45 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] board: samsung: Remove incorrect SYS_CONFIG_NAME in
+ axy17lte Kconfig
+Message-ID: <20231109125345.GA6601@bill-the-cat>
+References: <20231020184253.21915-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hHTHoHoExPrFhX+M"
 Content-Disposition: inline
-In-Reply-To: <871qcz9q4i.fsf@baylibre.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <20231020184253.21915-1-semen.protsenko@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,90 +92,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11:29-20231109, Mattijs Korpershoek wrote:
-> Hi Maxime, Nishanth,
-> 
-> On mer., nov. 08, 2023 at 16:05, Maxime Ripard <mripard@redhat.com> wrote:
-> 
-> > Hi Nishanth,
-> >
-> > I've been trying for the last few days to get an SK-AM62 to boot from
-> > the eMMC user data area.
-> >
-> > I finally got the jumper configuration to make the CPU boot from there
-> > thanks to Mattijs, but it looks like the 2024.01-rc2 release doesn't
-> > support booting from there:
-> >
-> > U-Boot SPL 2024.01-rc2 (Nov 08 2023 - 14:11:12 +0100)
-> > SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.5--v09.01.05 (Kool Koala)')
-> > SPL initial stack usage: 13368 bytes
-> > Trying to boot from MMC1
-> > MMC Device 0 not found
-> > spl: could not find mmc device 0. error: -19
-> > SPL: failed to boot from all boot devices
-> > ### ERROR ### Please RESET the board ###
-> >
-> > It looks like you tried to fix it with 0f1c1e8b368b ("arm: mach-k3:
-> > am625: Add support for UDA FS"), but it looks like it's not enough.
-> 
-> I confirm I reproduce the issue on AM62x SK EVM.
-> 
-> Beagle play seems to boot fine:
-> 
-> U-Boot SPL 2024.01-rc2 (Nov 09 2023 - 11:24:04 +0100)
-> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.1--v09.01.01 (Kool Koala)')
-> SPL initial stack usage: 13400 bytes
-> Trying to boot from MMC1
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> Starting ATF on ARM64 core...
-> 
-> NOTICE:  BL31: v2.8(release):08.06.00.007
-> NOTICE:  BL31: Built : 11:17:33, Nov  9 2023
-> 
-> U-Boot SPL 2024.01-rc2 (Nov 09 2023 - 11:24:30 +0100)
-> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.1--v09.01.01 (Kool Koala)')
-> SPL initial stack usage: 1888 bytes
-> Trying to boot from MMC1
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> 
-> 
-> U-Boot 2024.01-rc2 (Nov 09 2023 - 11:24:30 +0100)
-> 
-> SoC:   AM62X SR1.0 GP
-> Model: BeagleBoard.org BeaglePlay
-> DRAM:  2 GiB
-> Core:  98 devices, 27 uclasses, devicetree: separate
-> MMC:   mmc@fa10000: 0, mmc@fa00000: 1, mmc@fa20000: 2
-> Loading Environment from nowhere... OK
-> In:    serial@2800000
-> Out:   serial@2800000
-> Err:   serial@2800000
-> Net:   No ethernet found.
-> 
-> Press SPACE to abort autoboot in 2 seconds
-> =>
-> 
-> Note that Beagle Play does not boot tiboot3 from UDA (User Data Area)
-> but from mmc0boot0 so the boot flow is not exactly the same.
-> 
-> >
-> > Thanks!
-> > Maxime
 
-There is nothing complex here - sorry for the late response, Sync DT
-with v6.7-rc1 should take care of this:
+--hHTHoHoExPrFhX+M
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/arch/arm64/boot/dts/ti?id=c412c2f26eed08b1836ccf79f5547b67c1b55d5d
-Vs:
-https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/k3-am625-sk-u-boot.dtsi#L93
-(notice no sdhci0 with bootph properties)
+On Fri, Oct 20, 2023 at 01:42:53PM -0500, Sam Protsenko wrote:
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> The global SYS_CONFIG_NAME in axy17lte Kconfig overrides SYS_CONFIG_NAME
+> for all boards specified after this line in
+> arch/arm/mach-exynos/Kconfig:
+>=20
+>     source "board/samsung/axy17lte/Kconfig"
+>=20
+> Right now it's the last 'source' line there, so the issue is not
+> reproducible. But once some board is moved or added after this line the
+> next build error will happen:
+
+Good spotting on this one.
+
+[snip]
+> diff --git a/board/samsung/axy17lte/Kconfig b/board/samsung/axy17lte/Kcon=
+fig
+> index a018547ff5d4..209394a8a5a8 100644
+> --- a/board/samsung/axy17lte/Kconfig
+> +++ b/board/samsung/axy17lte/Kconfig
+> @@ -1,11 +1,3 @@
+> -config SYS_CONFIG_NAME
+> -	string "Board configuration name"
+> -	default "exynos78x0-common.h"
+> -	help
+> -	  This option contains information about board configuration name.
+> -	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+> -	  will be used for board configuration.
+> -
+>  if TARGET_A5Y17LTE
+>  config SYS_BOARD
+>  	default "axy17lte"
+
+But this isn't right as Minkyu points out because SYS_CONFIG_NAME isn't
+set for these platforms now. The fix is to do as
+board/freescale/lx2160a/Kconfig does for example and have
+SYS_CONFIG_NAME under each if TARGET_... stanza, even if we're repeating
+the value. It may or may not look cleaner to do:
+config SYS_CONFIG_NAME
+	default "exynos78x0-common.h" if TARGET_A5Y17LTE || \
+		TARGET_A7Y17LTE || TARGET_A3Y17LTE
+
+In the file directly, instead.
+
+--=20
+Tom
+
+--hHTHoHoExPrFhX+M
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVM1lAACgkQFHw5/5Y0
+tyw7qQv/VPZ+E5RHcnRGpAi2RIZkLoh6WnDdiG1phoEpc1WJUQPyqtrFH6uJ7Gq2
++sEKlCo+lZzjP98OS0WX5KLMd4jG/1X4FhA3zSF8IEvqxuKjR0di5FmvfomERTwv
+EBhEkqomthXwysG0CSGoi1iuC/7UlXQo6st/n7X+mlXx9yhZsd9gm1NcZWPAOu1+
+Ddjd/jvd/PVa58/jnlQpWQYIm+1js9jZGRQ6tad2vSToljGLsSUtAU41frWkY/ph
+/EUTtHt9r19a3+HPfc1oRcRgmvXlyKEveZbqSClbeFYz6rDZq/StidTQzF3gCfr5
+EAQeIE52v8iYHanqCeQqrQipt4ZAEnvN+9p/tF+tYsOrpkh/qb5+0KrbNwmVy5IF
+to677ZEGcIboPoB+cKv7ukdvnLX/Pt1Kg6q7AEBV+ibd4jHmW3g3Iy8mqRYMEgPo
+9cmmZ/zrxJUumf+NxpPH1XXVYhdI3zPl/O/Hb2g90CiLOSPx9rLJF0rY2h+2azkF
+JGGOKx1x
+=RZ4k
+-----END PGP SIGNATURE-----
+
+--hHTHoHoExPrFhX+M--
