@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0462C0018C
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 10:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F05BEC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 10:28:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB7F087120;
-	Thu,  9 Nov 2023 11:27:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B22487120;
+	Thu,  9 Nov 2023 11:28:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mHSq8ARV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vo5RuNWp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D28428719B; Thu,  9 Nov 2023 11:27:07 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 024668715A; Thu,  9 Nov 2023 11:28:30 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 055B4870BE
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 11:27:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1B22870BE
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 11:28:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-9d224dca585so114949066b.1
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 02:27:04 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-9d2d8343dc4so115533966b.0
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 02:28:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699525623; x=1700130423; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699525707; x=1700130507; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Lx5SIuo3GcmrBmqnPGemWe6NcoBilqt+qy3pkGQR0cs=;
- b=mHSq8ARVlbCEMNv9OkxuQj8bbP7hkZxGaJU4SKJuuRavqjMfq41ddoToz8yDO9XorM
- bSfOUAYoqeBQKpDI5MvDqnNO1P8xSP+Ndfqc5Qjs7CLg2w2U81B7F83EYyPfD/bOzXwk
- d4zfAlJ5AKUowPzCBmumxvMdau3Jh9wobTiJQmgNLgoGzKeMn33JYiM9XzCJRYvrnccE
- n3ITq9JnsE6rodYNbA1da8o2t2g5hcNZ4XL/dJ8U6C/pXJ+2GB3p5OflZWdOuqmfla68
- 2D2bqu7efwSc7+3e1vOitv2Nqf6DvPNuewIshS87tjd4phj9clNm6lVytz/4BHfev3tZ
- 6PQg==
+ bh=OTynrbvkTtFNfvPxA0/wo/+TeRekUnZBgSrlYlt9Qko=;
+ b=vo5RuNWpBuOZ5hI/t4Og3rvohke7t/ox6EMIIFIVWcrVth32MD2zhaRMNrufOwhQUI
+ LJFnFpV7qtlEl6wsarDF2af8dKetKc4CBm8TYmhnBLVzEo2PjGpf4hogqXkWUdMTE+sK
+ lutxB4I90W+sMCOuY0lrsL5YPclBjF6na+FfcjEAgt2qCNNx4q5qm5lwcOMcet5Xd4sA
+ oPRPHyhqTi5bvoU9XNgMKJfwDnmahyOqy1fCKVxOCtTSdZD3TCQ5vsjF5mY5j9Uz3hLe
+ sJH5jkDW5ODdVmtxCRNALIEqX+zekL43vj+AU5F3HvQ56tMZ++Kuqek7c/Fqvp91SMoE
+ 7gTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699525623; x=1700130423;
+ d=1e100.net; s=20230601; t=1699525707; x=1700130507;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Lx5SIuo3GcmrBmqnPGemWe6NcoBilqt+qy3pkGQR0cs=;
- b=XDL/SMqzLVxA5EXZ9leiMRAjXDMYQAcT3gTqi4pCKFMRyvqvABfbKEhU3UUCJmh1yK
- PonseXiyLYlni/KCUXNlFxvuZm5Gu+yol2GywnAPbUp64+E8MYaonyYcOhU9gTUuDV3M
- DvIhIR6v3brSneChkSTukCGICdEaj84vTkwCgCipPnZb4K2eo0wPl/T73pxauYWWS3Ar
- gwEg7LwSw/25LJTVTGZ3YjFzOevmVh8v4LOGkziA4oEnH1dltvqhKVtlxt8m043OBowm
- P6tu7Aa9TpkCIMlmXItFRpdaoOSID+trSXWQkORdPlV2qOsZSq+lZj/P65+tFilDqcY7
- OYeg==
-X-Gm-Message-State: AOJu0Yy7XP2EVk8jw0e+zqsLftYwBy290aQl83ZvxpCiN8Tg2sTX2q96
- fX9umHnz4Ii8O1QpjrbyWaTnBwKtRdwcGWZMoeYHpQ==
-X-Google-Smtp-Source: AGHT+IH7fCD4Iz1b5Dh5zeqWe1GlXfOzRGK9Z/qlfQ5hsSm7BxcObFzDxCKflciubsjZnXKTL1TtFvjwwqP7b9zwkPY=
-X-Received: by 2002:a17:907:2da5:b0:9bd:b8d0:c096 with SMTP id
- gt37-20020a1709072da500b009bdb8d0c096mr4191615ejc.21.1699525623485; Thu, 09
- Nov 2023 02:27:03 -0800 (PST)
+ bh=OTynrbvkTtFNfvPxA0/wo/+TeRekUnZBgSrlYlt9Qko=;
+ b=kOrdbMa6SUF3j1ZBtmfSc3lO5/iyLsv7+R1es12xgqP4xIw1yp3beQXxZPKU8CEF7A
+ m9uPvm90hSlC2yXHe5PxIwq1au2HImUnnyMQ2zRzIdzRZx1XXrrXiV+ZwlcqinnQNvK4
+ biS2Sso9ttZPxJHFArZCyErjHevAmqoOFUCRAzbMA0s+UA9SDLu2CYQylZHAwwOmxR4F
+ t8eVIQgue3d13X9dPvz5SZMAX37beHXLlR4IRw6/p8ox/TWil0lxwCoh5CFuYTcZSKb9
+ bjw1F4kKAt1y43Jg+weeBFuJFI4C4lhNG/sW9rmfNwVkQNrcCRPO6ls4fauRlkLSNT1z
+ Zd0g==
+X-Gm-Message-State: AOJu0YzxnouSgyCddVm6H0aYOd8Lva4hIbVBUrdKRuqo0nhC6yG0TVAw
+ tw5YFCLSiv0SJu1oElDlT5su+N5mn4e2YGXlIAwOjg==
+X-Google-Smtp-Source: AGHT+IFGzu6WrFuzDjYgM7m9NY7SObtK8WE8pPu0nXwvqSOvQTz9WuobO/MxDWztDGcN/FyEuMUsDZ7P7VB79bOaFiY=
+X-Received: by 2002:a17:907:7203:b0:9de:5eb0:ad81 with SMTP id
+ dr3-20020a170907720300b009de5eb0ad81mr3906686ejc.72.1699525707514; Thu, 09
+ Nov 2023 02:28:27 -0800 (PST)
 MIME-Version: 1.0
 References: <20231108110637.3691441-1-masahisa.kojima@linaro.org>
- <20231108110637.3691441-8-masahisa.kojima@linaro.org>
- <CAC_iWjKXOvOa5AmVB7doqvKvx8_iEFs8cMEz+3ZrEO6RYoc1eA@mail.gmail.com>
-In-Reply-To: <CAC_iWjKXOvOa5AmVB7doqvKvx8_iEFs8cMEz+3ZrEO6RYoc1eA@mail.gmail.com>
+ <20231108110637.3691441-9-masahisa.kojima@linaro.org>
+ <CAPnjgZ0OrgyUH7qWovzghjsNUKmsbC_=X=Cws6WrpuRKLsG=0A@mail.gmail.com>
+ <CAC_iWjK_Ti+uwJu29_LXqBsL==dFU1PT0cvqHX5gc0-3GeBwdw@mail.gmail.com>
+In-Reply-To: <CAC_iWjK_Ti+uwJu29_LXqBsL==dFU1PT0cvqHX5gc0-3GeBwdw@mail.gmail.com>
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Thu, 9 Nov 2023 19:26:52 +0900
-Message-ID: <CADQ0-X-vwKG4H9ugNKPrG8dYWExfH8JYWZre3F1v4tZv+pV3rQ@mail.gmail.com>
-Subject: Re: [PATCH v11 7/9] efi_loader: support boot from URI device path
+Date: Thu, 9 Nov 2023 19:28:16 +0900
+Message-ID: <CADQ0-X8sFWFAz_SNLscTmnZWoGc916c9_wbtvY8ULhaGhqadhg@mail.gmail.com>
+Subject: Re: [PATCH v11 8/9] cmd: efidebug: add uri device path
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Michal Simek <michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,130 +91,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 9 Nov 2023 at 17:04, Ilias Apalodimas
+Hi Simon, Ilias,
+
+On Thu, 9 Nov 2023 at 17:00, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
-> Kojima-san
+> Hi Simon,
 >
-> On Wed, 8 Nov 2023 at 13:08, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
+> On Thu, 9 Nov 2023 at 03:15, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > This supports to boot from the URI device path.
-> > When user selects the URI device path, bootmgr downloads
-> > the file using wget into the address specified by loadaddr
-> > env variable.
-> > If the file is .iso or .img file, mount the image with blkmap
-> > then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > Since boot option indicating the default file is automatically
-> > created when new disk is detected, system can boot by selecting
-> > the automatically created blkmap boot option.
-> > If the file is PE-COFF file, load and start the downloaded file.
+> > Hi Masahisa,
 > >
-> > The buffer used to download the ISO image file must be
-> > reserved to avoid the unintended access to the image and
-> > expose the ramdisk to the OS.
-> > For PE-COFF file case, this memory reservation is done
-> > in LoadImage Boot Service.
+> > On Wed, 8 Nov 2023 at 04:08, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
+> > >
+> > > This adds the URI device path option for 'boot add' subcommand.
+> > > User can add the URI load option for downloading ISO image file
+> > > or EFI application through network. Currently HTTP is only supported.
+> > >
+> > > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > > Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > ---
+> > >  cmd/efidebug.c | 51 ++++++++++++++++++++++++++++++++++++
+> > >  include/net.h  |  8 ++++++
+> > >  net/wget.c     | 71 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  3 files changed, 130 insertions(+)
 > >
-> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > ---
-> >  lib/efi_loader/Kconfig       |   9 +
-> >  lib/efi_loader/efi_bootmgr.c | 376 +++++++++++++++++++++++++++++++++++
-> >  2 files changed, 385 insertions(+)
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
 > >
-> > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > index d20aaab6db..5d99206dc3 100644
-> > --- a/lib/efi_loader/Kconfig
-> > +++ b/lib/efi_loader/Kconfig
-> > @@ -479,4 +479,13 @@ config EFI_RISCV_BOOT_PROTOCOL
-> >           replace the transfer via the device-tree. The latter is not
-> >           possible on systems using ACPI.
+> > >
+> > > diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> > > index 201531ac19..42b306e708 100644
+> > > --- a/cmd/efidebug.c
+> > > +++ b/cmd/efidebug.c
+> > > @@ -19,6 +19,7 @@
+> > >  #include <log.h>
+> > >  #include <malloc.h>
+> > >  #include <mapmem.h>
+> > > +#include <net.h>
+> > >  #include <part.h>
+> > >  #include <search.h>
+> > >  #include <linux/ctype.h>
+> > > @@ -829,6 +830,53 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+> > >                         argc -= 1;
+> > >                         argv += 1;
+> > >                         break;
+> > > +#if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
 > >
-> > +config EFI_HTTP_BOOT
-> > +       bool "EFI HTTP Boot support"
-> > +       depends on CMD_DNS
-> > +       depends on CMD_WGET
-> > +       depends on BLKMAP
-> > +       help
-> > +         Enabling this option adds EFI HTTP Boot support. It allows to
-> > +         directly boot from network.
-> > +
-> >  endif
+> > (my very late comment could be looked at after this is applied, since
+> > it is already at v11)
+> >
+> > Can this be move to 'if'? You can put it inside the case and really
+> > this code should be in a function, as do_efi_boot_add() is already
+> > long.
 >
-> Since we depend on all these, I think it would be easier to 'select'
-> instead of 'depends on', otherwise enabling EFI_HTTP_BOOT will be very
-> tricky.
+> I think it can.  Kojima-san will send a v12 since there's a small
+> issue in patch #7. I think he can fix that as well
 
-Yes, I agree.
-
->
->
->
->
-> > + */
-> > +static efi_status_t search_default_file(struct udevice *dev,
-> > +                                       struct efi_device_path **loaded_dp)
-> > +{
-> > +       efi_status_t ret;
-> > +       efi_handle_t handle;
-> > +       u16 *default_file_name = NULL;
-> > +       struct efi_file_handle *root, *f;
-> > +       struct efi_device_path *dp = NULL, *fp = NULL;
-> > +       struct efi_simple_file_system_protocol *file_system;
-> > +       struct efi_device_path *device_path, *full_path = NULL;
-> > +
-> > +       if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
-> > +               log_warning("DM_TAG_EFI not found\n");
-> > +               return EFI_INVALID_PARAMETER;
-> > +       }
-> > +
-> > +       ret = EFI_CALL(bs->open_protocol(handle, &efi_simple_file_system_protocol_guid,
-> > +                                        (void **)&file_system, efi_root, NULL,
-> > +                                        EFI_OPEN_PROTOCOL_GET_PROTOCOL));
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       ret = EFI_CALL(file_system->open_volume(file_system, &root));
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
-> > +                                        (void **)&device_path, efi_root, NULL,
-> > +                                        EFI_OPEN_PROTOCOL_GET_PROTOCOL));
-> > +       if (ret != EFI_SUCCESS)
-> > +               return ret;
-> > +
-> > +       full_path = expand_media_path(device_path);
-> > +       ret = efi_dp_split_file_path(full_path, &dp, &fp);
-> > +       if (ret != EFI_SUCCESS)
-> > +               goto err;
-> > +
-> > +       default_file_name = efi_dp_str(fp);
-> > +       efi_free_pool(dp);
-> > +       efi_free_pool(fp);
-> > +       if (!default_file_name) {
-> > +               ret = EFI_OUT_OF_RESOURCES;
-> > +               goto err;
-> > +       }
-> > +
-> > +       ret = EFI_CALL(root->open(root, &f, default_file_name,
-> > +                                 EFI_FILE_MODE_READ, 0));
-> > +       efi_free_pool(default_file_name);
-> > +       if (ret != EFI_SUCCESS)
-> > +               goto err;
-> > +
-> > +       EFI_CALL(f->close(f));\
->
-> This closes the file correctly, but the volume is still open. Don't we need
-> EFI_CALL(root->close(root) as well?
-
-Thank you for pointing it out.
-I will fix it.
-
->
-> [...]
->
-> With the above fixed
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Yes, I will fix this in next v12.
 
 Thanks,
 Masahisa Kojima
+
+>
+> Thanks
+> /Ilias
+> >
+> > > +               case 'u':
+> > > +               {
+> > > +                       char *pos;
+> > > +                       int uridp_len;
+> > > +                       struct efi_device_path_uri *uridp;
+> > > +
+> > > +                       if (argc <  3 || lo.label) {
+> > > +                               r = CMD_RET_USAGE;
+> > > +                               goto out;
+> > > +                       }
+> > > +
+> > > +                       id = (int)hextoul(argv[1], &endp);
+> > > +                       if (*endp != '\0' || id > 0xffff)
+> > > +                               return CMD_RET_USAGE;
+> > > +
+> > > +                       label = efi_convert_string(argv[2]);
+> > > +                       if (!label)
+> > > +                               return CMD_RET_FAILURE;
+> > > +
+> > > +                       if (!wget_validate_uri(argv[3])) {
+> > > +                               printf("ERROR: invalid URI\n");
+> > > +                               r = CMD_RET_FAILURE;
+> > > +                               goto out;
+> > > +                       }
+> > > +
+> > > +                       efi_create_indexed_name(var_name16, sizeof(var_name16),
+> > > +                                               "Boot", id);
+> > > +                       lo.label = label;
+> > > +
+> > > +                       uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
+> > > +                       fp_size += uridp_len + sizeof(END);
+> > > +                       fp_free = efi_alloc(fp_size);
+> > > +                       uridp = (struct efi_device_path_uri *)fp_free;
+> > > +                       uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> > > +                       uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
+> > > +                       uridp->dp.length = uridp_len;
+> > > +                       strcpy(uridp->uri, argv[3]);
+> > > +                       pos = (char *)uridp + uridp_len;
+> > > +                       memcpy(pos, &END, sizeof(END));
+> > > +                       file_path = (struct efi_device_path *)uridp;
+> > > +                       argc -= 3;
+> > > +                       argv += 3;
+> > > +                       break;
+> > > +               }
+> > > +#endif
+> > > +
+> > >                 default:
+> > >                         r = CMD_RET_USAGE;
+> > >                         goto out;
+> > > @@ -1491,6 +1539,9 @@ U_BOOT_LONGHELP(efidebug,
+> > >         "  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n"
+> > >         "  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
+> > >         "  (-b, -i for short form device path)\n"
+> > > +#if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
+> > > +       "  -u <bootid> <label> <uri>\n"
+> > > +#endif
+> > >         "  -s '<optional data>'\n"
+> > >         "efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]\n"
+> > >         "  - delete UEFI BootXXXX variables\n"
+> > > diff --git a/include/net.h b/include/net.h
+> > > index 57889d8b7a..c748974573 100644
+> > > --- a/include/net.h
+> > > +++ b/include/net.h
+> > > @@ -935,4 +935,12 @@ static inline void eth_set_enable_bootdevs(bool enable) {}
+> > >   */
+> > >  int wget_with_dns(ulong dst_addr, char *uri);
+> > >
+> > > +/**
+> > > + * wget_validate_uri() - varidate the uri
+> > > + *
+> > > + * @uri:       uri string of target file of wget
+> > > + * Return:     true if uri is valid, false if uri is invalid
+> > > + */
+> > > +bool wget_validate_uri(char *uri);
+> > > +
+> > >  #endif /* __NET_H__ */
+> > > diff --git a/net/wget.c b/net/wget.c
+> > > index 2087146b37..6ae2237a0a 100644
+> > > --- a/net/wget.c
+> > > +++ b/net/wget.c
+> > > @@ -566,3 +566,74 @@ out:
+> > >         return ret;
+> > >  }
+> > >  #endif
+> > > +
+> > > +/**
+> > > + * wget_validate_uri() - validate the uri for wget
+> > > + *
+> > > + * @uri:       uri string
+> > > + *
+> > > + * This function follows the current U-Boot wget implementation.
+> > > + * scheme: only "http:" is supported
+> > > + * authority:
+> > > + *   - user information: not supported
+> > > + *   - host: supported
+> > > + *   - port: not supported(always use the default port)
+> > > + *
+> > > + * Uri is expected to be correctly percent encoded.
+> > > + * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
+> > > + * and space character(0x20) are not allowed.
+> > > + *
+> > > + * TODO: stricter uri conformance check
+> > > + *
+> > > + * Return:     true on success, false on failure
+> > > + */
+> > > +bool wget_validate_uri(char *uri)
+> > > +{
+> > > +       char c;
+> > > +       bool ret = true;
+> > > +       char *str_copy, *s, *authority;
+> > > +
+> > > +       for (c = 0x1; c < 0x21; c++) {
+> > > +               if (strchr(uri, c)) {
+> > > +                       log_err("invalid character is used\n");
+> > > +                       return false;
+> > > +               }
+> > > +       }
+> > > +       if (strchr(uri, 0x7f)) {
+> > > +               log_err("invalid character is used\n");
+> > > +               return false;
+> > > +       }
+> > > +
+> > > +       if (strncmp(uri, "http://", 7)) {
+> > > +               log_err("only http:// is supported\n");
+> > > +               return false;
+> > > +       }
+> > > +       str_copy = strdup(uri);
+> > > +       if (!str_copy)
+> > > +               return false;
+> > > +
+> > > +       s = str_copy + strlen("http://");
+> > > +       authority = strsep(&s, "/");
+> > > +       if (!s) {
+> > > +               log_err("invalid uri, no file path\n");
+> > > +               ret = false;
+> > > +               goto out;
+> > > +       }
+> > > +       s = strchr(authority, '@');
+> > > +       if (s) {
+> > > +               log_err("user information is not supported\n");
+> > > +               ret = false;
+> > > +               goto out;
+> > > +       }
+> > > +       s = strchr(authority, ':');
+> > > +       if (s) {
+> > > +               log_err("user defined port is not supported\n");
+> > > +               ret = false;
+> > > +               goto out;
+> > > +       }
+> > > +
+> > > +out:
+> > > +       free(str_copy);
+> > > +
+> > > +       return ret;
+> > > +}
+> > > --
+> > > 2.34.1
+> > >
+> >
+> > Regards,
+> > Simon
