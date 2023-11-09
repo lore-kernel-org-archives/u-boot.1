@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD514C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 09:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 730CEC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 09:34:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17C5E8715A;
-	Thu,  9 Nov 2023 10:28:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E85E286053;
+	Thu,  9 Nov 2023 10:34:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hpVHxnvX";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IUXAj/UF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A4328715C; Thu,  9 Nov 2023 10:28:30 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id D578087190; Thu,  9 Nov 2023 10:34:20 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38C058713C
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 10:28:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 02A97842D0
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 10:34:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,30 +28,38 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1699522099;
- bh=o2bP+rrARKPVyWwhAGXotE/DEC1LFDh6MfILvRfqC9I=;
- b=hpVHxnvXt2Vo3R9cn55my43qinIgys/vKv3gSga/+DEEunMreBgZ3/UHj8hprxI/nwl9Eb6Pd
- w9KEO6Pkd01fdyaO9bs92iLhLjRlUCUQ/zvz3Qj1HidoUh23WB3Mo1WL27dbzWGigVjisCG2tpJ
- Y5eQNu6PUP+4Nknczn9BtUrtG3wb4CzZzFiFpbPB74YCsaS8ysJCgULO2BBF2LedZux/fCctoOG
- aSWgNsVGf/ye1VDU1aT/w57az7uL6gviZaS2npkw8IPhG/nPfd4Z+jFAmOHphSXI2Zjc1wE8Wic
- SrUU/Oquouqcm28hxs3hBiCk+8uuggiCiyfst6DrHpUQ==
-Message-ID: <6af7a40f-0357-4690-a37d-8e974325cac9@kwiboo.se>
-Date: Thu, 9 Nov 2023 10:28:14 +0100
+ s=fe-e1b5cab7be; t=1699522432;
+ bh=FOVHk2yAsF7xYZvBoPDiqVsQB9nIOKx1Y/Jp5dDnWkE=;
+ b=IUXAj/UFi3Y9b/nMn85Z6Sjkd8+rN9V1iCGJT1ZahS8s1bRo57NX9S1Pkstna6k8W1YJCBohm
+ fiR+5DHkSKX1huJAMuqUWX+oFeQytWUPqd/aE0FQ2ERAjKKwneheIO8c9y3ssMKCUhR7GQQwWno
+ EWzIzdZJwByVVAzgqUAKUGbzCCESIinr3IZWt1rwMYrEvWmaIwP1HjYrIMe2nrH59V8/DB9H5LF
+ 3tMc3LlQ6wVaii/z+9+ftd5ohjLjnAgicDgWi8S9kW8FWgMX5M00avS7RhdNmO2VMcMqoUY1Sw3
+ E83y2NVX2xkby9kiPpQbn5miwmBa0zUPq+O2tuumE6eA==
+Message-ID: <0caf81e2-5524-4f12-b837-a2070739c613@kwiboo.se>
+Date: Thu, 9 Nov 2023 10:33:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: rk3588-rock-5b: Enable CONFIG_PCI_INIT_R to
- support EFI networking
+Subject: Re: [PATCH 1/2] configs: rockchip: Use dwc3-generic driver on RK3328
+ and RK3399
 Content-Language: en-US
-To: Martin Roukala <martin.roukala@mupuf.org>, Kever Yang
- <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>
-Cc: Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
-References: <20231104130451.111020-1-martin.roukala@mupuf.org>
- <ef28a2eb-131c-4b43-b048-f8af3160ddbb@kwiboo.se>
- <f27831c4-3ba8-4f81-89fb-256c3f0f77fa@mupuf.org>
- <644799d9-0144-4856-9980-cd95d2c29f89@kwiboo.se>
- <079df03e-7442-433e-86dd-a24245af1d10@mupuf.org>
+To: Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Deepak Das <deepakdas.linux@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
+ Tianling Shen <cnsztl@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ "=?UTF-8?B?546L5piO5oiQ?=" <frank.wang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+References: <20231018223058.2081052-1-jonas@kwiboo.se>
+ <20231018223058.2081052-2-jonas@kwiboo.se>
+ <0799d3c2-7997-4e78-aefb-fe571ebc53a4@denx.de>
+ <a755aeb3-90e8-cabc-c941-6700805017ec@kwiboo.se>
+ <db121593-6678-4069-bf11-dc67308f66c6@denx.de>
+ <915c92ad-d6e0-4b75-b7c0-a5d3f9041ef7@rock-chips.com>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <079df03e-7442-433e-86dd-a24245af1d10@mupuf.org>
+In-Reply-To: <915c92ad-d6e0-4b75-b7c0-a5d3f9041ef7@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -59,8 +67,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 654ca6322bfb40004b81ac4a
+ 167.172.40.54
+X-ForwardEmail-ID: 654ca77fe702e43be5cb4fd6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,155 +85,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Martin,
-
-On 2023-11-07 12:43, Martin Roukala wrote:
-> Hi Jonas,
+On 2023-11-09 04:29, Kever Yang wrote:
+> Hi Jonas, Marek,
 > 
-> On 11/7/23 12:41, Jonas Karlman wrote:
->> Hi Martin,
->>
->> On 2023-11-07 10:45, Martin Roukala wrote:
->>> Hi Jonas,
->>>
->>> On 06/11/2023 20:15, Jonas Karlman wrote:
->>>> Hi Martin,
+> On 2023/10/20 12:23, Marek Vasut wrote:
+>> On 10/19/23 22:39, Jonas Karlman wrote:
+>>> On 2023-10-19 01:44, Marek Vasut wrote:
+>>>> On 10/19/23 00:30, Jonas Karlman wrote:
 >>>>
->>>> On 2023-11-04 14:04, Martin Roukala (né Peres) wrote:
->>>>> When u-boot chainloads an EFI bootloader such as iPXE, we want to have
->>>>> already initialized the PCI subsystem so that network driver is loaded
->>>>> and ready to use by the bootloader.
+>>>> [..]
 >>>>
->>>> This change slows down boot from emmc/sd-card where scanning for pci
->>>> devices typically is unnecessary.
->>>
->>> True.
->>>
+>>>>> +++ b/configs/rock960-rk3399_defconfig
+>>>>> @@ -50,6 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>>>>    CONFIG_SYS_MMC_ENV_DEV=1
+>>>>>    CONFIG_ROCKCHIP_GPIO=y
+>>>>>    CONFIG_SYS_I2C_ROCKCHIP=y
+>>>>> +CONFIG_MISC=y
+>>>>>    CONFIG_MMC_DW=y
+>>>>>    CONFIG_MMC_DW_ROCKCHIP=y
+>>>>>    CONFIG_MMC_SDHCI=y
+>>>>> @@ -70,12 +71,12 @@ CONFIG_SYS_NS16550_MEM32=y
+>>>>>    CONFIG_SYSRESET=y
+>>>>>    CONFIG_USB=y
+>>>>>    CONFIG_USB_XHCI_HCD=y
+>>>>> -CONFIG_USB_XHCI_DWC3=y
+>>>>>    CONFIG_USB_EHCI_HCD=y
+>>>>>    CONFIG_USB_EHCI_GENERIC=y
+>>>>>    CONFIG_USB_OHCI_HCD=y
+>>>>>    CONFIG_USB_OHCI_GENERIC=y
+>>>>>    CONFIG_USB_DWC3=y
+>>>>> +CONFIG_USB_DWC3_GENERIC=y
 >>>>
->>>> If pci must be initialized and scanned before an EFI app is started to
->>>> find pci network controllers, then pci should probably be initialized by
->>>> the efi bootmeth, not by enabling CONFIG_PCI_INIT_R for a single board.
+>>>> Why not add 'default y if ROCKCHIP' into the Kconfig instead ? This 
+>>>> will
+>>>> have the same effect, without requiring such massive modification of
+>>>> config files.
 >>>
->>> Unfortunately, it isn't that simple. I am chainloading iPXE immediately,
->>> so we never end up calling bootmeth... and so iPXE fails to find any NIC
->>> because u-boot did not initialize the PCI subsystem.
->>
->> How are you chainloading iPXE?, if it is not started using standard boot
->> procedure (the efi bootmeth). If you are running custom script to load
->> iPXE you can probably run "pci enum;net list;" before loading iPXE to
->> init pci network.
-> 
-> I am loading iPXE using the bootflow way... AKA, no script at all, just 
-> have the ipxe EFI binary in /EFI/BOOT/BOOTAA64.EFI in a GPT partition.
-> 
-> I thought this was the preferred way of doing things: moving away from 
-> these hacky and purpose-built scripts in favor of more generic boot 
-> flows that don't require recompiling u-boot or a script when wanting to 
-> change the boot target.
-> 
-> In other words, making u-boot having a sane user-facing interface, and 
-> thus being a good target to be flashed in an SPI memory on the device 
-> and thus allowing distros to ship generic EFI images for more than one 
-> board.
-
-It is, and thanks for confirming that this issue is related to using
-standard boot and the efi bootmeth/bootflow.
-
-> 
->>
+>>> Not fully sure what you mean by this and how that would reduce number of
+>>> affected defconfig-files. The USB_XHCI_DWC3 should still be removed from
+>>> these defconfig-files or wrong driver could be used by these boards.
 >>>
->>> IMO, the defconfig should work in all situations. If someone wants to
->>> speed up their use case, they are free to disable the features they
->>> don't need.
+>>> Touching the defconfig-files help notify board maintainers that changes
+>>> are happening to their boards.
+> 
+> This patch including remove old Kconfig option and add new option, just 
+> move to
+> 
+> enable generic driver option in Kconfig file instead of defconfig file.
+> 
+>>>
+>>> There will also be a separate patch that remove the rockchip,rk3399-dwc3
+>>> compatible from the dwc3-of-simple driver to finalize this transition to
+>>> use dwc3-generic driver for affected rockchip boards.
 >>
->> IMO, the defconfig should work for generic use case with standard boot,
->> and with the lazy loading principle of not probing devices/drivers until
->> they are needed/used.
-> 
-> Indeed, you are right that it shouldn't work in **ALL** situations. 
-> However, I believe chainloading is still a pretty standard boot 
-> situation, don't you think? If you don't think so, I hope I can make my 
-> case for it... or just look at the boot flow of your development machine ;)
-
-I fully agree that it should work, I just want to evaluate if we can solve
-the root issue instead of adding a workaround for a single board.
-
-This issue also affect other boards, such as NanoPi R5C that also only have
-pcie network controllers, and is why I am trying to see if we can solve
-this in a more generic way.
-
-> 
+>> It wasn't clear to me you're switching one driver to another, thanks 
+>> for clarification.
 >>
->> PCI_INIT_R will force probing of pci devices that may not be needed and
->> add a ~1 second timeout delay for each unoccupied M.2 slot on this board.
-> 
-> That's indeed annoying, but still less annoying than not seeing any NIC 
-> detected and having to wonder why they don't show up (missing driver? 
-> missing DT entries? Missing bus? ...).
-> 
-> In my view, sub-optimal is less important than less compatible, 
-> especially in the EFI/bootflow world where u-boot would not have to be 
-> recompiled all the time. Up to 2s boot time increase is a minor 
-> annoyance in CI, but I don't believe it has any impact on actual users.
-> 
-> I know I am new to the wild world of arm64 bootloaders, but in the x86 
-> world the default boot configuration is not "Fast boot". And even there, 
-> you can specify to which degree you want to limit device enumeration... 
-> AKA, the *_INIT_R config options :)
-> 
-> I'm all for speed, but let's keep defaults reasonable ;)
-
-I do not disagree that this is fixing an issue, I am just trying to
-evaluate if we can fix it at core instead of adding a workaround for a
-single board.
-
-The bootdev hunters for e.g. net and scsi both run pci_init() to ensure pci
-has init and devices on pci bus can be found. Something similar could
-possible be done for the efi bootmeth.
-
-Adding following before the bootefi command is run should probably solve
-this issue could there be a similar issue for pci storage devices unless
-pci is init before efi app starts?
-
-
-	if (IS_ENABLED(CONFIG_PCI)) {
-		ret = pci_init();
-		if (ret)
-			log_warning("Failed to init PCI (%dE)\n", ret);
-	}
-
-	/*
-	 * At some point we can add a real interface to bootefi so we can call
-	 * this directly. For now, go through the CLI, like distro boot.
-	 */
-	snprintf(cmd, sizeof(cmd), "bootefi %lx %lx", kernel, fdt);
-	if (run_command(cmd, 0))
-		return log_msg_ret("run", -EINVAL);
-
-
-https://source.denx.de/u-boot/u-boot/-/blob/master/boot/bootmeth_efi.c?ref_type=heads#L449
-https://source.denx.de/u-boot/u-boot/-/blob/master/net/eth_bootdev.c?ref_type=heads#L75-80
-
-> 
->>> A generic solution may be for u-boot to start probing the PCI bus when
->>> asked to enumerate the NICs through SNP by the EFI binary... but until
->>> this is done, the defaults should just work.
+>> "
+>> Also enable DM_USB_GADGET for any board that enable
+>> USB_DWC3_GADGET.
+>> "
 >>
->> Agree, this should be solved using a generic solution. Do not agree on
->> changing defaults for a specific use-case that affect other use-cases
->> and where other workarounds may be applied.
+>> This you can do in Kconfig file, something like:
+>> select DM_USB_GADGET if USB_DWC3_GADGET && <rockchip>
 > 
-> Agreed, but I would still want this patch to be merged before moving 
-> forward as I am sure I won't be the only one who has to bisect this 
-> regression. Speaking of, isn't there a non-regression rule in u-boot?
+> Not all the rockchip socs have usb dwc3 controller, so make this change 
+> in SoC level will be better.
+> 
 
-We are still ~8 weeks from release, so hopefully we can find a generic
-solution that covers more boards before then.
+I will try to send out a v2 of this later this weekend.
 
 Regards,
 Jonas
 
 > 
-> Cheers,
-> Martin
+> Thanks,
+> 
+> - Kever
+> 
 
