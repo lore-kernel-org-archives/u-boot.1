@@ -4,91 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3FCBC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 13:38:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6639EC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 13:49:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B60E871CD;
-	Thu,  9 Nov 2023 14:38:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9811387138;
+	Thu,  9 Nov 2023 14:48:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="myp5+/YX";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BE50870BE; Thu,  9 Nov 2023 14:38:12 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1699537738;
+	bh=uJZkHaaUanslXwlk5migqWMee5tP4Apt+Z5Dfn2WKC0=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=eY3YJq+yLmCLAMILXvC2aHPCFkoTycZ7n1Mcu6ocPPQd8j7e3fln7Bz36mpAq6zs+
+	 2Q/YCMVKkAgCVtijKrgiahNHcfrM0tz/xTA8trCKNmYYnAKjX+V29T4fdYXe47KtsH
+	 Idxq3NHoOn5T6iOifgjdhn30KIrGghg1/7ZecKWqQw3jfJcM0syaLEqdGY2jo7k48k
+	 1vAGBVObjxytccW4eYXsOCG0Y1uiLh8f6oQ044XsSu0rl71SSrzjci8ABCneT6u4dD
+	 eWDCKTJFFy+XtX1H4h5v/iRJ+IEAVNRQdWPDRlOXdVeWMmaV8OS+3E61Uyk98k8RK5
+	 T8VVgqyqXqE5Q==
+Received: from [192.168.1.107] (82-131-203-152.pool.digikabel.hu
+ [82.131.203.152])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAB52871E7
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 14:38:08 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-778999c5ecfso53916985a.2
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 05:38:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699537087; x=1700141887; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5hT8CnfUgW3KJXLLqfkba6mNjOBPHFV6/5HeC7630Ec=;
- b=myp5+/YXiCzgdxMxiVUcxRazopGtW8FojuTrOqgU6badaEikHsuAmB3m+OeQ/fvvi3
- /VC7L7jvgpawHztc+pO1fOvePLVrItYx1LF185i03soc2XZu2FVmJ9pM9aAbhsWvQXeu
- 0D5IMUYwBHi4meftlgEgH5bk28BfUPLa30TjM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699537087; x=1700141887;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5hT8CnfUgW3KJXLLqfkba6mNjOBPHFV6/5HeC7630Ec=;
- b=UvtqEX7SHGNf1XU0p4+g/7orWdliAVS9X7Ge9/OKns+5d5dvrDistvV6nYiWxFbIfU
- rjbZWALAJd6GyhLCIVk51fBf1CCjyLvkiaVZEyfmVtt9ac57Spw8X+2S7TaPVuozv1Au
- eEOOzPJOZ6df7rj6dD4bIddd+0QbJdcD3G0ezG0KGIFSGlrW5Phz7K1lBo3KaRgHDAl5
- MvfhvGtu1kLTvZi0/d945VmFZ/DpJDgSALi04MBiN2dL9EXLLbP1ulGbxJSS1UiCg8Md
- YpgPAE3ouy4IbEpxKuLlM8BKrN3rUk9JnOVKOzYzs4j6K+1PAUnf62Az7KKcn3HuSYsN
- ul8g==
-X-Gm-Message-State: AOJu0Yw5IxA8ZP2/FYmr41r7tTVHJK3mAl5oW9OY/gSYl0sVJOsAsCWY
- 7QzPqylt4jBYwaKYQaDGDid54A==
-X-Google-Smtp-Source: AGHT+IFt/78OaFG2Ey5deEiRHPHfEyZprokkOm1JzU4E6EY1lK6N3OqXvOk4Lds7uPcJkhOUNE0H7g==
-X-Received: by 2002:a05:620a:4116:b0:77a:1476:fb93 with SMTP id
- j22-20020a05620a411600b0077a1476fb93mr4808798qko.47.1699537087533; 
- Thu, 09 Nov 2023 05:38:07 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
- [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
- by smtp.gmail.com with ESMTPSA id
- y29-20020a05620a09dd00b0077a7d02cffbsm2012022qky.24.2023.11.09.05.38.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Nov 2023 05:38:07 -0800 (PST)
-Date: Thu, 9 Nov 2023 08:38:04 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Francis Laniel <francis.laniel@amarulasolutions.com>
-Cc: u-boot@lists.denx.de,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ramon Fried <rfried.dev@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- Stephen Carlson <stcarlso@linux.microsoft.com>,
- John Keeping <john@metanate.com>, Michael Walle <michael@walle.cc>,
- Nikhil M Jain <n-jain1@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH v11 09/24] cli: Add menu for hush parser
-Message-ID: <20231109133804.GE6601@bill-the-cat>
-References: <20231107214121.132079-1-francis.laniel@amarulasolutions.com>
- <20231107214121.132079-10-francis.laniel@amarulasolutions.com>
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 88A75870DF;
+ Thu,  9 Nov 2023 14:48:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1699537738;
+ bh=uJZkHaaUanslXwlk5migqWMee5tP4Apt+Z5Dfn2WKC0=;
+ h=Subject:To:Cc:References:Reply-To:From:Date:In-Reply-To:From;
+ b=mxdzSyQ+iKTa/7bWbmTTwUWUso3nMM1KMYE8jmdOyKOhldsIshX/uZk8SYW9iZB5x
+ 6/B2sKXcsRE0/cJLj11IIERihO/wC3UHct+wTILGBAkrRYHuKXv1UhHtFLqBdEH6kW
+ 06JBitarwfoWoEwXriXOfzhb5s1pHrwelWsVSekxguwcRgvzpvxWwln+OwQoXFiE4S
+ +vGRQsqv6fif2Ggo2YgDentfsbXFh97R6d1vn1Kr+3e3500mACxNm+bEKh0zABSOD+
+ y8PMNONDvY8kjd1ZyBZHzv2J72b5cAppWFO2CR3vpP3jVBHD1JbVIFxZjjN26QH16y
+ StfTsIrDrZ6qw==
+Subject: Re: [PATCH 0/6] siemens,am335x: clean up the draco board family
+To: Tom Rini <trini@konsulko.com>, Enrico Leto <enrico.leto@siemens.com>
+Cc: u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20231108145322.302927-1-enrico.leto@siemens.com>
+ <20231108161137.GP6601@bill-the-cat>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <7515c281-9e07-b836-9f19-0fce4f504ba1@denx.de>
+Date: Thu, 9 Nov 2023 14:48:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ie3kQ4ZmSst35LYA"
-Content-Disposition: inline
-In-Reply-To: <20231107214121.132079-10-francis.laniel@amarulasolutions.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20231108161137.GP6601@bill-the-cat>
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,74 +66,91 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Tom,
 
---ie3kQ4ZmSst35LYA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 08.11.23 17:11, Tom Rini wrote:
+> On Wed, Nov 08, 2023 at 03:53:16PM +0100, Enrico Leto wrote:
+> 
+>> The boards were not maintained upstream since the development phase.
+>>
+>> Restore SPL and remove unused settings. We need i2c to read the DDR
+>> settings from EEPROM, get u-boot from NAND, the console output and the
+>> watchdog.
+>>
+>> Restore u-boot up to the user prompt. The complete functionality will
+>> be restored in future patches.
+>>
+>> Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
+> 
+> I'm glad to see this series and in general it looks fine and is a good
+> start. As some parts of the future cleanup work I'd love to see a file
+> under doc/board/siemens for the family and moving to plain text
+> environment, both of which iot2050 do so there's some in-house
+> experience I am hopeful you can leverage as well if needed. It would
+> also be good to reduce the include/configs/ files to as little as
+> possible, I believe there's a number of dead-comments there, and other
+> defines that are only needed in a local context and can move to a
+> specific file or other header.  Thanks!
 
-On Tue, Nov 07, 2023 at 11:41:06PM +0200, Francis Laniel wrote:
+Yep, good points!
 
-> For the moment, the menu contains only entry: HUSH_OLD_PARSER which is the
-> default.
-> The goal is to prepare the field to add a new hush parser which guarantees
-> actual behavior is still correct.
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
-> ---
->  cmd/Kconfig     | 13 +++++++++++++
->  common/Makefile |  2 +-
->  2 files changed, 14 insertions(+), 1 deletion(-)
->=20
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index fd16c3a48e..f3a00ee59b 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -23,6 +23,19 @@ config HUSH_PARSER
->  	  If disabled, you get the old, much simpler behaviour with a somewhat
->  	  smaller memory footprint.
-> =20
-> +menu "Hush flavor to use"
-> +	depends on HUSH_PARSER
-> +
-> +	config HUSH_OLD_PARSER
-> +		bool "Use hush old parser"
-> +		default y
-> +		help
-> +		  This option enables the old flavor of hush based on hush Busybox from
-> +		  2005.
-> +
-> +		  It is actually the default U-Boot shell when decided to use hush as =
-shell.
-> +endmenu
+I tried this patchset on my dxr2 thuban board, and see a problem when
+booting from NAND.
 
-The indentation is very wrong here, please fix it.
+SPL fails to load u-boot.img (wrong ecc calculation)
 
---=20
-Tom
+reverting commit:
 
---ie3kQ4ZmSst35LYA
-Content-Type: application/pgp-signature; name="signature.asc"
+commit 04fcd2587321: ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
 
------BEGIN PGP SIGNATURE-----
+from Roger Quadros <rogerq@kernel.org> (as for this reason added to cc)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVM4LwACgkQFHw5/5Y0
-tyy1XgwAgbb257eNgZRgjAnfmPKL22xTiU1McghZ8Xcb+zW3P2nsO0rlNHZGA5Hr
-Av8PABLvBSwrcmUMqhnJCO0EZwj1t4m9eqFHV3vhrGve70SSFzgf4PeedJAiLuGN
-AQIYkHh4oidwHBp4B8r3G41Jnm6PxR0XI2pwH/1mm9JT8YkPlTrrUJxxfo6BI3fe
-1n/GTaZFpw1a+yv5i2a0HxDFB6emxlims8cZpnV90uezlXAqbag5iXqNeNi+O0FR
-p9dCmSsPgt9TYg/q3eJ3qXCcH1+/zMBJLIpHTLwZ0yKmsYQzfdf0Fj6W5eCVwPi1
-46JOt1TLZ5Ons7Cgbcdnw4DvgpKDBRgY4QEFWZLYLl2T4die3xMWpNiTkhAkon2j
-jbv7Nvv3HxeUl5j5y8XzBPOuqm1YxH8WMojOvEg2pXKOF510N1x8eYwuaKepQ72j
-rgb+KfMHbqxcrEhxXONgN5gAs+/tj/NjtjaNA1HrLp5X3NZhkQCsWqP3hXSHfwkN
-o/QCcdXL
-=EAac
------END PGP SIGNATURE-----
+and SPL/U-Boot 2023.10 comes up fine with Enricos patchset!
 
---ie3kQ4ZmSst35LYA--
+remark: for plain U-Boot 2023.10 even SPL does not boot, so Enricos
+  patchset is a big step in getting back a working board again, thanks!
+
+So first, I wonder, if there is any am335x based board booting from
+NAND with the above commit in?
+
+
+If the above commit is in U-Boot, the following patch helps also
+to get this board back booting:
+"""
+diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
+index 1a5ed0de31..d1c73b389c 100644
+--- a/drivers/mtd/nand/raw/omap_gpmc.c
++++ b/drivers/mtd/nand/raw/omap_gpmc.c
+@@ -644,7 +644,11 @@ static int omap_correct_data_bch(struct mtd_info *mtd, uint8_t *dat,
+
+        /* check calculated ecc */
+        for (i = 0; i < ecc->bytes && !ecc_flag; i++) {
++#ifdef CONFIG_SPL_BUILD
++               if (calc_ecc[i] != read_ecc[i])
++#else
+                if (calc_ecc[i] != 0x00)
++#endif
+                        goto not_ecc_match;
+        }
+        return 0;
+"""
+
+but of course, this is not the solution ...
+
+Any ideas are welcome, Thanks!
+
+bye,
+Heiko
+
+(Damn, that I have not longer automated testing up and running for
+this board)
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
