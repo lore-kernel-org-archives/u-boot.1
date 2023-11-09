@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4020C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 00:00:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E5DC4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 00:13:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA2A9870E1;
-	Thu,  9 Nov 2023 01:00:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E52EF870B5;
+	Thu,  9 Nov 2023 01:13:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GamOQN1O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a9jDWYHG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 053D487040; Thu,  9 Nov 2023 01:00:42 +0100 (CET)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id AFD84870BE; Thu,  9 Nov 2023 01:12:30 +0100 (CET)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBD1687030
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 01:00:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 930D287040
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 01:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6c48fad2f6dso49074b3a.0
- for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 16:00:37 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-66d093265dfso1984156d6.3
+ for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 16:12:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699488036; x=1700092836; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9Rbk4h9u3NDdHFnf669fQ6/xvgtPSqRYMUsjRcUlzF8=;
- b=GamOQN1O9XSzRBS99ThFQeRbH+mlz8OEkMv/4KOAztpfEuzlHSokLgiqKDI/rF5Pga
- 3F9j/byBpn3rTptsEIT4Z1YGyFP6XCw+mF8D7DBJBbgafcn8ndsTuvzNvl7tYwLAE2PZ
- G3OOSB5qvYsMOgL6XjGPpWBZsI+Bewi8HkFdN+m9QF+ERg9teX2+AD9YZa1Uv1kpT8su
- pky0IDf0iYSfWFt7yQG8kkcivyFxl0tGXjsqR9WZlhWmIpgUbx4GblIvVk9KgS92UfLz
- H3TrexOeH16SCHq6DXr31Gz2urV8wrHa7zXMmVCpHMR6k9IAg2T2DsCnR6HKeLjWJpR0
- O4Pg==
+ d=konsulko.com; s=google; t=1699488747; x=1700093547; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YIEt2ZcrPz+azEdZOzueLFQz7XhgrIk69ny/em5XIhg=;
+ b=a9jDWYHGx/C7A1u3bDwjCpDuJTcvjYFbwSqS1bsZhT8TBzug9DevrNts209ykytglz
+ Wssttx9PyszyQfJb8x6ViCR0T8i4C7m1iPf9yRPtz/wEipOcDYX3NDGLX3vjH/DzFHBg
+ hwOaHhNN/0Kx+wIDNu3GBOnVi7QRLOfk1GBqU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699488036; x=1700092836;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9Rbk4h9u3NDdHFnf669fQ6/xvgtPSqRYMUsjRcUlzF8=;
- b=opa1/Z7gVgWCHDf1V9UKxl12knrB7I+mWqn562gk+Prb9/EDHYFLIoIaihcubxYHLQ
- HL/S5aIMkdQas3gRr7ODqiwveGLXpMIR+HBLw+mr6JVVXtV41ibXb0ph+rMeMSq+Pofq
- 4/g/30JQHBQ8n9fqNWkgY/E2Lvv5B/jA5XQLLjDvKk0SFyt6cdSSojid7E51bBYD3KO3
- yupEw7kGJNEO4TYA/hPYMLh425OZye14c3faVUBht59uStlKEruR7Lcp5pxc9GOQiADj
- japHUZsNvZc1JU1SAD24gQMvvP5621Mo2/0zbb7zyC9hPtkEK1GktckdbAQ/pjuhFGT6
- Y9xQ==
-X-Gm-Message-State: AOJu0Yz1zS+47Ap2rS1HStwIqpDHcZ23ZgdQjexZVsS1Oz3nkxarYcGv
- K3fKJknmDNa0vZ4HnTjW3B4MCE+tdeCzKjThjU4=
-X-Google-Smtp-Source: AGHT+IGSspqp5QokNakBlwmlTYEm6+6yGmGMbBRjji62sFG54/DlEtXABXPP9TEcpNC/rvR8gSMfqPydG3fhOwwl9ig=
-X-Received: by 2002:a05:6a20:4290:b0:15d:6fd3:8e74 with SMTP id
- o16-20020a056a20429000b0015d6fd38e74mr3942305pzj.3.1699488036024; Wed, 08 Nov
- 2023 16:00:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699488747; x=1700093547;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YIEt2ZcrPz+azEdZOzueLFQz7XhgrIk69ny/em5XIhg=;
+ b=BQBrLNPmeetCUEjlQf5FtqGb6CnByLEb8oAbYg6NzMBOYIHvLvXGDdaN6gnp5KfIKL
+ nGW4QgWnHHC4YI+dLLvzxVJW8UJw+UOnanLXF/QL3A0UUPZhhz53ZR0NNOViJjk/Th69
+ imChrILhfNO2GYqUUIgSRrurDevUrlsz12nceXTcfTljwP1u0CSXqHSfbv8pNDGn+ydx
+ 7SE9X6uxc0rqwmkzW5IQTWNUyX4oBodYuczxpz8Zgd7JQ0XKzfi3vX84oFcCUVviXaZ1
+ hDSLXAIbtX+xc8G/ySCKvc22YRcrBMX5YrJ9QodbznjXySoiESb6HNGiR9pejLbrL8yv
+ zTTg==
+X-Gm-Message-State: AOJu0YzAgt/jhX4L/rC3hIxEDWFRlgTmaHsGM7vH1Xx6qTI/n2naCpMg
+ ANSoKG+ekH6ezw7oZzlZ+GZ2B6VnRiwtUVMYN1vskQ==
+X-Google-Smtp-Source: AGHT+IHhjyQDKE0BqG9DFLMU/6hRuVkT7ykYVRzVzSdm/rvlkgpiAlmacVLeAM89hc0jg+EbaUUO3w==
+X-Received: by 2002:a05:6214:e49:b0:66d:bc09:f6db with SMTP id
+ o9-20020a0562140e4900b0066dbc09f6dbmr3328584qvc.34.1699488746798; 
+ Wed, 08 Nov 2023 16:12:26 -0800 (PST)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
+ [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
+ by smtp.gmail.com with ESMTPSA id
+ t17-20020a0ce591000000b0066d23395d27sm1577553qvm.123.2023.11.08.16.12.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Nov 2023 16:12:26 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH] net: Make NET imply NETDEVICES
+Date: Wed,  8 Nov 2023 19:12:25 -0500
+Message-Id: <20231109001225.2357160-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
-In-Reply-To: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 8 Nov 2023 21:00:23 -0300
-Message-ID: <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
-Subject: Re: inconsistent wget behavior
-To: Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot <u-boot@lists.denx.de>, Duncan Hare <DuncanCHare@yahoo.com>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, Simon Glass <sjg@chromium.org>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,223 +87,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-[Adding Tom and Marek]
+Normally, when NET is enabled, CMD_NET will then be enabled and in turn
+NETDEVICES will (likely) be enabled via imply. However, if we disable
+CMDLINE in a defconfig we now no longer get CMD_NET enabling NETDEVICES
+for us. This suggestion (as an imply is) really isn't about the network
+commands but network itself and is a legacy of how intertwined
+NET/CMD_NET were historically. Move this over to the NET entry instead
+where it is a more logical fit.
 
-On Wed, Nov 8, 2023 at 7:22=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> w=
-rote:
->
-> Greetings,
->
-> I've recently given wget/tcp a try and find the results inconsistent.
->
-> Transferring the same file 15 times in a row will eventually give me
-> an incomplete transfer with packet/byte count wrong but showing
-> 'Transfer Successful'.
->
-> Here is current master on an imx8mp-venice-gw74xx board using IMX8MP
-> EQOS enet dev:
->
+Reported-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+This could also be dropping the imply from cmd/Kconfig and instead
+making drivers/net/Kconfig::NETDEVICES be default y, which is what it
+practically is today. This would require a more lengthy check however to
+be sure there's no functional change and I'm not sure it's any better or
+worse than this approach.
+---
+ cmd/Kconfig | 1 -
+ net/Kconfig | 1 +
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-> u-boot=3D> time wget $loadaddr
-> /tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-> $filesize
-> HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | |
-> Packets received 64368, Transfer Successful
-> Bytes transferred =3D 93198937 (58e1a59 hex)
->
-> time: 3.103 seconds
-> md5 for 48200000 ... 4dae1a58 =3D=3D> 69bedfe899148c43c09a98ac950dd0ed
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 629a90afb7b5..1b4aad5c930b 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1682,7 +1682,6 @@ if NET
+ menuconfig CMD_NET
+ 	bool "Network commands"
+ 	default y
+-	imply NETDEVICES
+ 
+ if CMD_NET
+ 
+diff --git a/net/Kconfig b/net/Kconfig
+index 4215889127c9..8c80b3a6c671 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -5,6 +5,7 @@
+ menuconfig NET
+ 	bool "Networking support"
+ 	default y
++	imply NETDEVICES
+ 
+ if NET
+ 
+-- 
+2.34.1
 
-....
-> u-boot=3D> time wget $loadaddr
-> /tftpboot/venice/core-image-minimal.ext4.gz && md5sum $loadaddr
-> $filesize
-> HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | | | | | | | | | | | | | | | | | | | |
->  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-> | | | | | |
-> Packets received 64368, Transfer Successful
-> Bytes transferred =3D 26984682 (19bc0ea hex)
->
-> time: 3.011 seconds
-> md5 for 48200000 ... 49bbc0e9 =3D=3D> c9978ff116605a7729a1cb14ef51fc20
->
-> Anyone else seeing this?
-
-Yes, I am seeing the same behavior on an imx8mn board using the FEC driver.
-
-I am transferring a 412MB file. Doing the wget transfers several times
-in a row, I also see the incorrect number of bytes transferred:
-
-u-boot=3D> wget test
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-Packets received 298387, Transfer Successful
-Bytes transferred =3D 432013312 (19c00000 hex)
-
-u-boot=3D> wget test
-HTTP/1.0 200 OK| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | | | | | | | | |
-Packets received 298375, Transfer Successful
-Bytes transferred =3D 58355848 (37a7088 hex)
