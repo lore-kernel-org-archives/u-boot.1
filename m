@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920F4C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 01:16:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DE5C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 01:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38B8D87150;
-	Thu,  9 Nov 2023 02:16:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C71788714F;
+	Thu,  9 Nov 2023 02:16:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kwXF4gcD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oE+giNoG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7D9C87230; Thu,  9 Nov 2023 02:16:00 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 71E53870A4; Thu,  9 Nov 2023 02:16:04 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20D3E870DD
+ by phobos.denx.de (Postfix) with ESMTPS id B0F9E871A0
  for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 02:15:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5401bab7525so409724a12.2
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-507bd644a96so438970e87.3
  for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 17:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699492548; x=1700097348; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7UItqxUMtjKajyJDP4DloV/6c5p/UTkdVyc/DeN1+mY=;
- b=kwXF4gcDAkjQtRf6n3YmUwX+nJDNK3ZAA/3pgW7H0smabp+Lh90PPOv5tlO9tQtCEC
- UzNOC5w0KfJqRYtN4PRxK4FpfGgfimWI1plx+cL5uq/++M70NHGYkSW+xBGCkZUJGZPR
- t4ccdJl2ClrFxnzNZDx8cXmHQtx3kH3AyGP1I=
+ bh=ANmvkQXfk5myZi8eWxyZzGh1w6L4TzUZviF0QYGmsHE=;
+ b=oE+giNoGNXJG16ivEKtk3ZRODQNy32HoOvJfbTBtmAa2EKUsx5iY6xzcjjnpqrX3Np
+ XBBDbQrMGjC/s4H5w26GSBLmUx6ORpo+snGeEhP/cVgw/gMYHfHs4fJuYIR4QuSFxc4W
+ wFH/VrJgBLt2OZO90CsTAkm/KDHipOLtmsUCg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699492548; x=1700097348;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7UItqxUMtjKajyJDP4DloV/6c5p/UTkdVyc/DeN1+mY=;
- b=ViUctVQkC8soAt75lmhfOUbKa2CXh5dDNHJz4uTz+WComA4dPduZn/W/2/r3efqMB7
- F8ZKp2o/F+Oq5xU7yu/0P6mheQw40H1gsmh/tuWxZHay0XrVjaYHyXnUiOgl8aGmLPGG
- iDB/Dujk1MieHuiMyfrmiPx9aU3YsANpFs8PZgwQ2KB/DccEvVqkAQ08M2CKRcPmB0JG
- vdFCTXFjxA9BmO4qTGEHRTDYpyJnkvItNt0nsAA1AvRF8UucwEhTxYMn7zY9LetCsOaC
- gz4+kBUVxSLZYnp1K4evBCF9eTWFrqv6/xvUwKXi0B2ef3lQRo6Pm7tdGvQB3GmZSGI7
- b44g==
-X-Gm-Message-State: AOJu0Yx2iRx7hucDem7znDJMzEbQze84+4I95GXoBo7WAU2yKrWQZKK8
- XVAQdLbMQgvHc662/qEOpINw+4X3I5dK2JMXi1Qm+w==
-X-Google-Smtp-Source: AGHT+IH8Aa9BecatefHvTpnTv5wizuL6u0HY7t738J/2zf5HlIiMT2RHpkkdmZhWsPpm6MFxiyVu+sCW2rOIOJ9tzPo=
-X-Received: by 2002:a05:6402:3896:b0:53f:c889:8f89 with SMTP id
- fd22-20020a056402389600b0053fc8898f89mr1413949edb.36.1699492547764; Wed, 08
- Nov 2023 17:15:47 -0800 (PST)
+ bh=ANmvkQXfk5myZi8eWxyZzGh1w6L4TzUZviF0QYGmsHE=;
+ b=mWacu+CqeZagHqrlpUxyPmSQFRonXadMghtqLXppdIdpA5+s4zd7vUucotSwKS5Nh5
+ HoHIm4uphK+VRWBZhLvrrSUE1oBOK5JsgUUknjQtgy4rgtIH8x6p+gWgJ+euwdm5HUbs
+ /NvgPCJDKbhoo80Jq64CP5qZMoN86i4A0GI/6UMXOe8ZMHv1ufvDiE3vJ25Ax+pjKmEM
+ C3BNIwumH2QzOFq/aLkzbuq7zYZ01D98P8rkfB/8rBmw9sLmJgmVgDYHaV8pQUvpYQ8R
+ 3i39OZw60GgDAj639TtBUqW/dj54ss5rt+rTnq7wS6ujOXnZEoxG/m0LrSfdSuNUrk/z
+ rV5g==
+X-Gm-Message-State: AOJu0YzjCzJrZs/8ec5ms6+ADmG3qU3eAlNjyHMcuq3HCWrsAiGO4w7d
+ BjH47CTEeAkuDN/kOug+BZi8pSgyn5MeD+dZ7D1oAA==
+X-Google-Smtp-Source: AGHT+IH31JLiIST6kSiFfMX82Ee88EvwSmCY2yhYlUPG/GBNBHDhjZ4Ms0TgOhbYrk9Hl6TNjS/g3ZHoOpca0X7K+WI=
+X-Received: by 2002:a19:5216:0:b0:509:4d95:e896 with SMTP id
+ m22-20020a195216000000b005094d95e896mr177323lfb.66.1699492547800; Wed, 08 Nov
+ 2023 17:15:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20231108164858.3497420-1-seanga2@gmail.com>
- <20231108164858.3497420-11-seanga2@gmail.com>
-In-Reply-To: <20231108164858.3497420-11-seanga2@gmail.com>
+ <20231108164858.3497420-3-seanga2@gmail.com>
+In-Reply-To: <20231108164858.3497420-3-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Nov 2023 18:15:31 -0700
-Message-ID: <CAPnjgZ1HgKOFT5TMeGmyAda4uwDf0v0Y2XgipQBcZc4Df9Aezg@mail.gmail.com>
-Subject: Re: [PATCH v7 10/26] spl: Remove filename from spl_load_info
+Date: Wed, 8 Nov 2023 18:15:27 -0700
+Message-ID: <CAPnjgZ2YpM1m1JOo3c+O-imaVQfNmCF4Twn1e+a4f7HP5UtD2Q@mail.gmail.com>
+Subject: Re: [PATCH v7 02/26] arm: Disable SPL_FS_FAT when it isn't used
 To: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>, 
  Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Stefan Roese <sr@denx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Stefan Roese <sr@denx.de>,
+ Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,32 +87,33 @@ X-Virus-Status: Clean
 
 On Wed, 8 Nov 2023 at 09:49, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> For filesystems, filename serves the same purpose as priv. However,
-> spl_load_fit_image also uses it to determine whether to use a DMA-aligned
-> buffer. This is beneficial for FAT, which uses a bounce-buffer if the
-> destination is not DMA-aligned. However, this is unnecessary now that
-> filesystems set bl_len to ARCH_DMA_MINALIGN instead. With this done, we can
-> remove filename entirely.
+> Several boards enable SPL_FS_FAT and SPL_LIBDISK_SUPPORT when they can't be
+> used (as there is no block device support enabled). Disable these configs.
+> The list of boards was generated with the following command:
+>
+>     $ tools/qconfig.py -f SPL SPL_FS_FAT ~SPL_MMC ~SPL_BLK_FS ~SPL_SATA \
+>                           ~SPL_USB_STORAGE ~ENV_IS_IN_FAT ~EFI
+>
+> LIBDISK was left enabled for the am* boards, since it seems to result in
+> actual size reduction, indicating that partitions are being used for
+> something.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
 > Changes in v7:
-> - Split off setting bl_len to ARCH_DMA_MINALIGN from filename removal
+> - Disable FS_FAT for the zynq(mp) boards as well, as suggested by Michal
 >
 > Changes in v6:
 > - New
 >
->  arch/arm/mach-sunxi/spl_spi_sunxi.c | 1 -
->  common/spl/spl_blk_fs.c             | 7 ++++---
->  common/spl/spl_fat.c                | 4 ++--
->  common/spl/spl_mmc.c                | 2 --
->  common/spl/spl_nand.c               | 3 ---
->  common/spl/spl_semihosting.c        | 1 -
->  common/spl/spl_spi.c                | 2 --
->  common/spl/spl_ymodem.c             | 1 -
->  include/spl.h                       | 2 --
->  test/image/spl_load_os.c            | 1 -
->  10 files changed, 6 insertions(+), 18 deletions(-)
+>  configs/am335x_evm_spiboot_defconfig      | 2 +-
+>  configs/am65x_evm_r5_usbdfu_defconfig     | 1 -
+>  configs/xilinx_zynqmp_mini_qspi_defconfig | 3 ++-
+>  configs/zynq_cse_nand_defconfig           | 2 ++
+>  configs/zynq_cse_nor_defconfig            | 2 ++
+>  configs/zynq_cse_qspi_defconfig           | 2 ++
+>  6 files changed, 9 insertions(+), 3 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
