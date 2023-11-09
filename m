@@ -4,73 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB86C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 06:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD26C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 07:18:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A39E870D2;
-	Thu,  9 Nov 2023 07:24:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinet.cat
+	by phobos.denx.de (Postfix) with ESMTP id A260186F6F;
+	Thu,  9 Nov 2023 08:18:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2AF286F85; Thu,  9 Nov 2023 07:24:43 +0100 (CET)
-Received: from mx1.tinet.cat (mx1.tinet.cat [195.77.216.146])
+ id 2089387090; Thu,  9 Nov 2023 08:18:51 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABC9C87075
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 07:24:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09F9086F6F
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 08:18:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=tinet.cat
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xdrudis@tinet.cat
-X-ASG-Debug-ID: 1699511077-163e7b5e16a9b600001-4l7tJC
-Received: from smtp01.tinet.cat (smtp.tinet.cat [195.77.216.131]) by
- mx1.tinet.cat with ESMTP id R2QqXJKqUOuyTOJv;
- Thu, 09 Nov 2023 07:24:37 +0100 (CET)
-X-Barracuda-Envelope-From: xdrudis@tinet.cat
-X-Barracuda-Effective-Source-IP: smtp.tinet.cat[195.77.216.131]
-X-Barracuda-Apparent-Source-IP: 195.77.216.131
-Received: from xdrudis.tinet.cat (191.red-79-152-186.dynamicip.rima-tde.net
- [79.152.186.191])
- by smtp01.tinet.cat (Postfix) with ESMTPSA id B5E5F605D080;
- Thu,  9 Nov 2023 07:24:37 +0100 (CET)
-Date: Thu, 9 Nov 2023 07:24:27 +0100
-From: Xavier Drudis Ferran <xdrudis@tinet.cat>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Xavier Drudis Ferran <xdrudis@tinet.cat>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek =?utf-8?B?QmVow7pu?= <marek.behun@nic.cz>,
- Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
- uboot-imx@nxp.com
-Subject: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use units
- of bytes
-Message-ID: <ZUx7DA9AAPiddLAs@xdrudis.tinet.cat>
-X-ASG-Orig-Subj: Re: [PATCH v6 08/25] spl: Refactor spl_load_info->read to use
- units of bytes
-References: <20231106022603.3405551-1-seanga2@gmail.com>
- <20231106022603.3405551-9-seanga2@gmail.com>
- <ZUjdhAccsYbJS6AL@xdrudis.tinet.cat>
- <f546ba08-10b9-0cb4-4fa7-f7541dab1288@gmail.com>
- <ZUn577z8xINpURlO@xdrudis.tinet.cat>
- <0fa3a26b-9e28-357f-17bc-8a8cb60a05b0@gmail.com>
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3A97Ibx9032043;
+ Thu, 9 Nov 2023 15:18:37 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 9 Nov 2023
+ 15:18:33 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>, CL Wang
+ <cl634@andestech.com>
+Subject: [PATCH 2/2] configs: andes: add watchdog support fot andes ae350
+Date: Thu, 9 Nov 2023 15:18:24 +0800
+Message-ID: <20231109071824.850865-2-randolph@andestech.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231109071824.850865-1-randolph@andestech.com>
+References: <20231109071824.850865-1-randolph@andestech.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <0fa3a26b-9e28-357f-17bc-8a8cb60a05b0@gmail.com>
-X-Barracuda-Connect: smtp.tinet.cat[195.77.216.131]
-X-Barracuda-Start-Time: 1699511077
-X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
-X-Barracuda-Scan-Msg-Size: 208
-X-Barracuda-BRTS-Status: 1
-X-Barracuda-Bayes: INNOCENT GLOBAL 0.4215 1.0000 0.0000
-X-Barracuda-Spam-Score: 0.00
-X-Barracuda-Spam-Status: No, SCORE=0.00 using global scores of TAG_LEVEL=1000.0
- QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.116503
- Rule breakdown below
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3A97Ibx9032043
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,12 +63,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-El Wed, Nov 08, 2023 at 10:59:13AM -0500, Sean Anderson deia:
-> 
-> OK, what about
-> 
-> @offset: Offset to read from in bytes. This must be a multiple of @load->bl_len.
-> 
-> --Sean
+It adds the ATCWDT200 support for Andes AE350 platform.
+It also enables wdt command support.
 
-Great. Thank you.
+Signed-off-by: CL Wang <cl634@andestech.com>
+Signed-off-by: Randolph <randolph@andestech.com>
+---
+ configs/ae350_rv32_defconfig         | 4 ++++
+ configs/ae350_rv32_spl_defconfig     | 4 ++++
+ configs/ae350_rv32_spl_xip_defconfig | 4 ++++
+ configs/ae350_rv32_xip_defconfig     | 4 ++++
+ configs/ae350_rv64_defconfig         | 4 ++++
+ configs/ae350_rv64_spl_defconfig     | 4 ++++
+ configs/ae350_rv64_spl_xip_defconfig | 4 ++++
+ configs/ae350_rv64_xip_defconfig     | 4 ++++
+ 8 files changed, 32 insertions(+)
+
+diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
+index 06cd972a0d..a32672f8ed 100644
+--- a/configs/ae350_rv32_defconfig
++++ b/configs/ae350_rv32_defconfig
+@@ -22,6 +22,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -48,3 +49,6 @@ CONFIG_BAUDRATE=38400
+ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+\ No newline at end of file
+diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
+index f469d5bb2b..e09f878329 100644
+--- a/configs/ae350_rv32_spl_defconfig
++++ b/configs/ae350_rv32_spl_defconfig
+@@ -32,6 +32,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -57,3 +58,6 @@ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
+ # CONFIG_BINMAN_FDT is not set
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
+index 9672a19c23..850e67a0d9 100644
+--- a/configs/ae350_rv32_spl_xip_defconfig
++++ b/configs/ae350_rv32_spl_xip_defconfig
+@@ -33,6 +33,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
+ # CONFIG_BINMAN_FDT is not set
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
+index b90200a97e..8745ac4c07 100644
+--- a/configs/ae350_rv32_xip_defconfig
++++ b/configs/ae350_rv32_xip_defconfig
+@@ -23,6 +23,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+\ No newline at end of file
+diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
+index a4b9ad6162..4aa0b1a29d 100644
+--- a/configs/ae350_rv64_defconfig
++++ b/configs/ae350_rv64_defconfig
+@@ -22,6 +22,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -48,3 +49,6 @@ CONFIG_BAUDRATE=38400
+ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+\ No newline at end of file
+diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
+index 834a0fbbdd..1a3c294b16 100644
+--- a/configs/ae350_rv64_spl_defconfig
++++ b/configs/ae350_rv64_spl_defconfig
+@@ -32,6 +32,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -57,3 +58,6 @@ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
+ # CONFIG_BINMAN_FDT is not set
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
+index b52b8d78d7..f8db0a1a85 100644
+--- a/configs/ae350_rv64_spl_xip_defconfig
++++ b/configs/ae350_rv64_spl_xip_defconfig
+@@ -33,6 +33,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
+ # CONFIG_BINMAN_FDT is not set
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
+index cc5e751c9b..70119f154a 100644
+--- a/configs/ae350_rv64_xip_defconfig
++++ b/configs/ae350_rv64_xip_defconfig
+@@ -23,6 +23,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF_TEST=y
++CONFIG_CMD_WDT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_PREFER_SERVERIP=y
+ CONFIG_CMD_CACHE=y
+@@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
+ CONFIG_SYS_NS16550=y
+ CONFIG_SPI=y
+ CONFIG_ATCSPI200_SPI=y
++# CONFIG_WATCHDOG_AUTOSTART is not set
++CONFIG_WDT=y
++CONFIG_WDT_ATCWDT200=y
+\ No newline at end of file
+-- 
+2.34.1
+
