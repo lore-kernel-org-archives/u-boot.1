@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E4E6C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 21:40:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460D9C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 22:34:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB72587507;
-	Thu,  9 Nov 2023 22:40:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 624BE876FB;
+	Thu,  9 Nov 2023 23:34:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=foundries.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FOlnlq7J";
+	dkim=pass (2048-bit key; secure) header.d=foundries.io header.i=@foundries.io header.b="X4HMwkgy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3175587507; Thu,  9 Nov 2023 22:40:54 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 994D987703; Thu,  9 Nov 2023 23:34:45 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94D9E8724E
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 22:40:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A696C87707
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 23:34:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=foundries.io
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-da41acaea52so1428567276.3
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 13:40:51 -0800 (PST)
+ spf=pass smtp.mailfrom=igor.opaniuk@foundries.io
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-507bd64814fso1924245e87.1
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 14:34:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699566050; x=1700170850; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4MtJTeeMrMR+7oovoaor2arbRrQD3QYcYqCIJKrYFMo=;
- b=FOlnlq7JD9Icc4PfehIiZaIDlHDzF7lwgIzJQGIVHGEGywveBcsklXuNir/B2L6WMb
- t6+ewvw4Q+JRZm2ycj6N9YUuo5wAqGmq91cTSoDTl/jeBjjVPRfYwKif8eNcqci2RECF
- i+n+oS5ZIf1PuZ+l+RfknkPK+WOI9T1EiADPk=
+ d=foundries.io; s=google; t=1699569280; x=1700174080; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lP99R7Re4+eyph4+QxsshskSoc/t3S+jM/AIZRcPfHU=;
+ b=X4HMwkgyRgZPYvSnobQMzUgbxwm6w8s/tReDlCJQdAcTK1hq0S11D1uEajJcpXoGf+
+ Es099DFIT1B++IJ59gCiCaIUlPNlPZSE3ZilmNBqVawaUCi+h4FBA0YTq/vM37Z4ViW9
+ CR7bKWifTr+BNLHuwBDdZVRL31tgx5Q+6NzIUwce0D9/Q7w5Lv7x4wrxmRSqBnCxggb3
+ 3oMSbkzHIfdlQavPCgKtghOJk9Ys/9yNWMjKW+KESsqXaLAXp5soXtYKqzLIFElIgL4Q
+ o2q2WNdVN4+9HiVL4X5IsxZgrTdbH737RErjtqhB3Ru3ILkRmbKHIBOVh2nglLUH5MBo
+ aNQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699566050; x=1700170850;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4MtJTeeMrMR+7oovoaor2arbRrQD3QYcYqCIJKrYFMo=;
- b=DzfFqaqFIX2xuhDgb1N0Qc6BmEmbX5r11jQIEhz4kArqA2plQKXXLEmFvJqowEeWIF
- r9tGry9VhHWk465ot6KwVLhq48YTLQyZJgCTF3gysrLqlqDYUdgpFHzlw5gGdRwUS2/z
- JQ4W7suHTXF1Pq3eV+PnRx3pN6c3rbPorOPSOg8V2t5ePRjqhIzKCABIVhcDKOOkZs+N
- 0zedb9IOI6gOUP7DQ4qsF+Su2fMGRoDEfrCmyZ4K+/48sQBBTdRA2yunJKvBJqFNdbxi
- Jife1Wr6//UvdzZW9e0lpHK78uGEKu1IHubFq3+QhY9h/Bpjj850TOlfvAvnJ1X6kHCP
- j0YA==
-X-Gm-Message-State: AOJu0YxhuwiFJZcLl3ggExAGEGUqIu0qIrrgByY0nc+75h15bbwkcwoj
- x0W+BgnpTbdBytIku5rHHg0XdA==
-X-Google-Smtp-Source: AGHT+IHLQ06nqFAiL8hffQLMLS23fbb8dOzZBVFGJovnwcBL35VSA/frqq+Did2ZQqchWl8tDnKkuA==
-X-Received: by 2002:a25:da95:0:b0:da0:514a:8f42 with SMTP id
- n143-20020a25da95000000b00da0514a8f42mr7221421ybf.32.1699566050110; 
- Thu, 09 Nov 2023 13:40:50 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
- [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
+ d=1e100.net; s=20230601; t=1699569280; x=1700174080;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lP99R7Re4+eyph4+QxsshskSoc/t3S+jM/AIZRcPfHU=;
+ b=UNRMFfawAjT3xrw4aDLYOt3sjB1hyxDlwt6AcKyW3eNYagHfNMFGI+KfaH8FJNE46Q
+ Dq89birfFlRgcxBY1wKO8CU0WveZk15vYSfz9+fWFUI3o2cMzKL7Ld2gilzjw+4wDAE/
+ dVhO3GX6/lTFFFG2sbRr2uMB24HBRxD1zLN/k4+MMy10/WktEyWNlHA5r7g3TYq4udDx
+ WQmuNDA8wQJ3ZFKiON59/8xS8bZCrcEdJ0B6H5yR6+sq1FRxItddIcNE87fiOIHrM6TR
+ IqvsCe4/k+Fpiiqkx2ePndXKjGtjFbuMrp0fxZht/aQ/jxfrqpK8XkeYwIw/uOPb1g5+
+ uE/g==
+X-Gm-Message-State: AOJu0YzIER0/RC7qmFHWpdfSVCX9F+Sn2pRDBJb3tEEQuv/ol9it+Zz2
+ RjLIaUKVR/RgRwtW3vzNKCzXymDjDGquq8r5fiA5PqVJ
+X-Google-Smtp-Source: AGHT+IFMU69DUa1UtHy8nU5uGHHMZZHitrsOLPo9s+Z+V5Ns1T+KB3l46r428um4W8n9RZqPBmMuaw==
+X-Received: by 2002:ac2:4116:0:b0:503:261d:eab8 with SMTP id
+ b22-20020ac24116000000b00503261deab8mr2162428lfi.28.1699569279821; 
+ Thu, 09 Nov 2023 14:34:39 -0800 (PST)
+Received: from igor-thinkpad.. ([37.30.10.18])
  by smtp.gmail.com with ESMTPSA id
- f10-20020ac8134a000000b004108d49f391sm2273656qtj.48.2023.11.09.13.40.49
+ k15-20020a0565123d8f00b0050944953095sm1182322lfv.43.2023.11.09.14.34.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Nov 2023 13:40:49 -0800 (PST)
-Date: Thu, 9 Nov 2023 16:40:47 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Sean Edmond <seanedmond@linux.microsoft.com>,
- joe.hershberger@ni.com, rfried.dev@gmail.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/3] net: Get pxe config file from dhcp option 209
-Message-ID: <20231109214047.GQ6601@bill-the-cat>
-References: <20231024002159.74477-1-seanedmond@linux.microsoft.com>
- <20231024002159.74477-2-seanedmond@linux.microsoft.com>
- <9a42da8f-2d82-4470-82bd-ef872e72810a@gmx.de>
- <2ed00b42-66f9-4cca-a1a0-ee594840f0d1@linux.microsoft.com>
- <30e83c4b-32be-4e85-aee8-e8b87224a487@gmx.de>
- <b058f5a6-52e2-4e0c-a193-30e884b2463a@linux.microsoft.com>
- <20231108002342.GE6601@bill-the-cat>
- <CALeDE9NBpwUXcuURx-JKsRNS4C+6OBTz8Nfi76kRY_3ZSays7g@mail.gmail.com>
- <20231109210440.GJ6601@bill-the-cat>
- <44F1509A-E73F-4DE5-8885-17025FCD5E18@gmx.de>
+ Thu, 09 Nov 2023 14:34:38 -0800 (PST)
+From: Igor Opaniuk <igor.opaniuk@foundries.io>
+To: u-boot@lists.denx.de
+Cc: Peter Griffin <peter.griffin@linaro.org>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Shawn Guo <shawn.guo@linaro.org>
+Subject: [PATCH v1 1/2] poplar: use random mac address
+Date: Thu,  9 Nov 2023 23:34:34 +0100
+Message-Id: <20231109223435.706053-1-igor.opaniuk@foundries.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IqleX0Cz7ErV0Exn"
-Content-Disposition: inline
-In-Reply-To: <44F1509A-E73F-4DE5-8885-17025FCD5E18@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,153 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Set CONFIG_NET_RANDOM_ETHADDR=y, which sets random eth address in
+case there is no configuration provided neither in CONFIG_ETHADDR
+nor in "ethaddr" env variable.
 
---IqleX0Cz7ErV0Exn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This fixes the problem:
+poplar# dhcp
+Error: ethernet@9841000 address not set.
 
-On Thu, Nov 09, 2023 at 02:35:40PM -0700, Heinrich Schuchardt wrote:
->=20
->=20
-> Am 9. November 2023 14:04:40 GMT-07:00 schrieb Tom Rini <trini@konsulko.c=
-om>:
-> >On Wed, Nov 08, 2023 at 12:24:24PM +0000, Peter Robinson wrote:
-> >> > > > > > > Allow dhcp server pass pxe config file full path by using =
-option 209
-> >> > > > > > >
-> >> > > > > > > Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> >> > > > > > > ---
-> >> > > > > > >   cmd/Kconfig |  4 ++++
-> >> > > > > > >   cmd/pxe.c   | 10 ++++++++++
-> >> > > > > > >   net/bootp.c | 21 +++++++++++++++++++++
-> >> > > > > > >   3 files changed, 35 insertions(+)
-> >> > > > > > >
-> >> > > > > > > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> >> > > > > > > index 5bc0a92d57..adbb1a6187 100644
-> >> > > > > > > --- a/cmd/Kconfig
-> >> > > > > > > +++ b/cmd/Kconfig
-> >> > > > > > > @@ -1826,6 +1826,10 @@ config BOOTP_PXE_CLIENTARCH
-> >> > > > > > >       default 0x15 if ARM
-> >> > > > > > >       default 0x0 if X86
-> >> > > > > > >
-> >> > > > > > > +config BOOTP_PXE_DHCP_OPTION
-> >> > > > > > > +    bool "Request & store 'pxe_configfile' from BOOTP/DHC=
-P server"
-> >> > > > > > > +    depends on BOOTP_PXE
-> >> > > > > >
-> >> > > > > > Why should this be disabled by default?
-> >> > > > > >
-> >> > > > > > Do we really want a separate config variable?
-> >> > > > > >
-> >> > > > > I expect most won't use this option to get the file path (they=
-'ll use
-> >> > > > > the default paths as per the PXE specification).  It makes mor=
-e sense
-> >> > > > > for me to keep it optional, like many of the other options?
-> >> > > >
-> >> > > > RFC 5701 seems to require this option. Hence we should make it d=
-efault
-> >> > > > yes. Boards that have a build size issue can opt out.
-> >> > >
-> >> > > The PXELINUX specification
-> >> > > (https://wiki.syslinux.org/wiki/index.php?title=3DPXELINUX) doesn'=
-t state that
-> >> > > option 209 is required. In the abense of option 209, PXELINUX will=
- try the
-> >> > > following default configuration files (this example is provided on=
- the wiki
-> >> > > link):
-> >> > >  /mybootdir/pxelinux.cfg/b8945908-d6a6-41a9-611d-74a6ab80b83d
-> >> > >  /mybootdir/pxelinux.cfg/01-88-99-aa-bb-cc-dd
-> >> > >  /mybootdir/pxelinux.cfg/C0A8025B
-> >> > >  /mybootdir/pxelinux.cfg/C0A8025
-> >> > >  /mybootdir/pxelinux.cfg/C0A802
-> >> > >  /mybootdir/pxelinux.cfg/C0A80
-> >> > >  /mybootdir/pxelinux.cfg/C0A8
-> >> > >  /mybootdir/pxelinux.cfg/C0A
-> >> > >  /mybootdir/pxelinux.cfg/C0
-> >> > >  /mybootdir/pxelinux.cfg/C
-> >> > >  /mybootdir/pxelinux.cfg/default
-> >> > >
-> >> > > If 209 is requested/provided it tries the provided "config file" b=
-efore the
-> >> > > default paths.  RFC 5071 should be seen as an extension for PXELIN=
-UX (not a
-> >> > > requirement).  RFC 5071 only states "The Config File Option MUST b=
-e supplied
-> >> > > by the DHCP server if it appears on the Parameter Request List".
-> >> >
-> >> > We also want to be careful about overall size growth on common optio=
-ns,
-> >> > even if someone can opt-out. Those are usually last-ditch stop-gaps =
-and
-> >> > it's better to make sure we really need functionality X/Y/Z by defau=
-lt,
-> >> > for everyone. Especially with all of the work going on to make HTTP(=
-s)
-> >> > based network installs a viable option, how much more do we want to
-> >> > change the PXE case, for everyone. I'm personally somewhat looking f=
-or
-> >> > the use case to be well defined for a "this must be default". Network
-> >> > provisioning is a thing, yes, but for whom/what, and in turn how bro=
-adly
-> >> > do we need this to be in the vast majority of our boards (since it w=
-ould
-> >> > come in via BOOT*DEFAULTS or DISTRO_DEFAULTS).
-> >>=20
-> >> If PXE is being enabled I think it's useful in that it means the PXE
-> >> client can be largely stateless because it can all be provided by
-> >> central netowork configs as opposed to either hard wiring it into
-> >> firmware or someone having to manually set them. This is likely also
-> >> useful from the PoV less reasons to have a shell if it can be dealt
-> >> with in code.
-> >>=20
-> >> From the PoV of defaults, with or without HTTP boot, I suspect it
-> >> probably makes sense to review whether PXE as a whole is enabled by
-> >> default. That said a number of silicon vendors are actually actively
-> >> removing PXE from their reference FW in favour of HTTP Boot due to
-> >> security and a number of other reasons (easier for firewalls,
-> >> caching/CDN, edge use cases outside of the data centre).
-> >
-> >I guess I don't understand how frequent a use case PXE boot is, on the
-> >types of platforms U-Boot is usually found on. Clearly, some people and
-> >usecases use it. But I also think part of why it's default enabled
-> >within the "distro" frameworks is because initially we didn't have
-> >"parse extlinux.conf" entirely split from "do pxeboot" as the conf file
-> >parsing started there. I guess just something to evaluate down the road,
-> >and perhaps make it a regular thing to evaluate defaults and provide
-> >some notice when we might disable features.
-> >
->=20
-> For security reason it is preferable to disable PXE boot if it is not rea=
-lly needed. So default no would make sense.
+Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+---
 
-We can evaluate things and make sure everyone knows when changes are
-coming, for the future. We've been enabling it by default for years and
-"for security" isn't a great reason. It's one of the last targets tried
-and I would argue if there's malicious actors on your network serving up
-bootable payloads to random devices, there's bigger problems afoot.
+ configs/poplar_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
---=20
-Tom
+diff --git a/configs/poplar_defconfig b/configs/poplar_defconfig
+index f0ab2319a4..b6e0c3166c 100644
+--- a/configs/poplar_defconfig
++++ b/configs/poplar_defconfig
+@@ -22,6 +22,7 @@ CONFIG_CMD_USB=y
+ # CONFIG_ISO_PARTITION is not set
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x20000000
+ CONFIG_FASTBOOT_BUF_SIZE=0x10000000
+-- 
+2.34.1
 
---IqleX0Cz7ErV0Exn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVNUd8ACgkQFHw5/5Y0
-tyyyXAv/V3Yb9Anp5b9/PaKUDguwPcAixIraoDnopvfFnE6xRlHFZKWhnGfzP29n
-NZ2gJR979CMRIADqxdBFv1D0iiRSHqlXCMiIgsOXIRgwce+tTePXOBE5QZbLGWDU
-P/CPkrvEkOoeaRZk2Fn+yWhP/kLKtRjbBzdrKpuRWgqMlKXbMGijbjjAA1r4D2+S
-s1BbDfi+c93C2Efp8hmCgpHM8Nl/QgnvHYUFse1lYHhxtPQapcZpTO5N8Jwc/JSn
-qZPDH1PBOnj0/NdIELDn9gLt8v9j2/3qeSFs8yfLsSSdD4gbr9VZScXngsfagztW
-8rejLDI3l7AJM3Q+xzPgObN3QR617qnRSvmNyubPUr21JTajPWPRatXWuXOoWOOw
-dcWpOcX3uR+hVSZtsE6EosOeWGmNUZTo33W/DkxE+9I0t9gw3tE5CYnI9oTkheQO
-ERsL0/yUKet/THq6GbhkcikXnG1dOL+GaK/q+Xavl84jgMorS+IPPBIVS3Wfr9bW
-ndnHCUlv
-=niaY
------END PGP SIGNATURE-----
-
---IqleX0Cz7ErV0Exn--
