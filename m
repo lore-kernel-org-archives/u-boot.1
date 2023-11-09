@@ -4,70 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299D4C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 16:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6027C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 16:25:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D809F870BE;
-	Thu,  9 Nov 2023 17:17:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E61D486F7E;
+	Thu,  9 Nov 2023 17:25:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SgtT/4N4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hS6xtOFT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A78E87232; Thu,  9 Nov 2023 17:17:48 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id CDA258723E; Thu,  9 Nov 2023 17:25:10 +0100 (CET)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D10286552
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 17:17:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5839686F73
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 17:25:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3A9GHe3G120793;
- Thu, 9 Nov 2023 10:17:40 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699546660;
- bh=XfkxQ0b+iJrGqxCDUFIW8sVbT7VTmjpMCdKXAxYlFqo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=SgtT/4N4zrw0iWOHifKGqTK5Ra7Fxq2uZfxtPu9xaxtntYXthJta4oAtgo8upnGyd
- zBL8Jdvwc9qEn9OzKKDQlfbUULvGh8onTa2YZAYKCQD5GhHFA6MbLqEfcR2INm5GCK
- M4dOiv0w4GY+gNzQ0Sf0mhKU71a3uLxXZ2OHw6QI=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3A9GHeV7070169
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 Nov 2023 10:17:40 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 9
- Nov 2023 10:17:39 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 9 Nov 2023 10:17:39 -0600
-Received: from [10.250.33.216] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3A9GHdXW026182;
- Thu, 9 Nov 2023 10:17:39 -0600
-Message-ID: <6f24d3f5-8624-4dc2-bea3-fa893c8b10da@ti.com>
-Date: Thu, 9 Nov 2023 10:17:39 -0600
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-6b87c1edfd5so958239b3a.1
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 08:25:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699547106; x=1700151906; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=i9IH4VkZ6p8R4U0ERpbqnj02uWVnOc5045zatZEv2qE=;
+ b=hS6xtOFTe16D2hk+6CpBrt6HC3OIvRdo+PdfQI2knyWksnyL3qQySQ9DLTOOMkM5v6
+ 2Wo4aDofbpg9aC59CiNSPDHe2mdw8uE5zOpPtAI5AnVp5+kJAGt+pxijwjpZaXxTw1tL
+ bDio7mDAYBiq3Win5VWCfd/mHmvM0V9BBNdRLMJQzVfN2dHYSVmoiLh1gifMrpaXxcbx
+ tCLqLjmHQ8H7oism794W6P2v3Np6hLfIK4WTH7j4qwtVBTlMEznB2HVqdytgmBZBYJ95
+ AAA7CB9BNw63+pYDFZ43tNXFY9HNCnzmU9bQdI9JSN7atcGQd9vl61N9+K+ljnief39X
+ OUBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699547106; x=1700151906;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=i9IH4VkZ6p8R4U0ERpbqnj02uWVnOc5045zatZEv2qE=;
+ b=tYcoTkDmRT5Tjfww8lneOi+d7THMDvj9LxiPWVEJryeZztSU6y2IYHbQQKfcdSqZgM
+ Rkr8tVHvguT5TKLLHYqrOQxhZKq9aWt8ecZ3y3B9/HeNWzsjA04wKNgsPtBwmY4Q1w8K
+ 5xnTp+gXFOFQTQ5CTZLvoFJyG5bXl2y+iTJ7dzHqEn92Hal3ZUkilm7Wfgthr7M6aniA
+ Ml+OGGfH/5OJ8oFkVZSUPEUX/VrDYdveb6Wu/OUl4L2vowyszV+ODuqbptGkeMXyQKnx
+ FZqNic3IMH37Dr9SqB1eZJnGeG9YDkFjxyxX/cvJMbwD0c/StS4aBbIJ6xQQHvjFF5ix
+ k8Jw==
+X-Gm-Message-State: AOJu0YyvZ63cz5mmnDAls2l/Qrox/1TM1Aq25VzmyhmrBwFUw4EV1fyI
+ o1MDLGZUYWtBD0gFH5Y0Ux4=
+X-Google-Smtp-Source: AGHT+IECIjK3dgYZIwtis4l3dPR7yjBrfn0mrzmOZFchL0XRczfAhIv7B1POWUVImw+NMlD5b0qmTA==
+X-Received: by 2002:a05:6a20:daa5:b0:181:b87a:b8ba with SMTP id
+ iy37-20020a056a20daa500b00181b87ab8bamr6451220pzb.53.1699547106281; 
+ Thu, 09 Nov 2023 08:25:06 -0800 (PST)
+Received: from debianfranco.corp.toradex.com ([67.159.246.222])
+ by smtp.gmail.com with ESMTPSA id
+ o14-20020a056a0015ce00b006c345e192cfsm10908304pfu.119.2023.11.09.08.25.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Nov 2023 08:25:05 -0800 (PST)
+From: Hiago De Franco <hiagofranco@gmail.com>
+X-Google-Original-From: Hiago De Franco <hiago.franco@toradex.com>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: u-boot@lists.denx.de,
+	Hiago De Franco <hiago.franco@toradex.com>
+Subject: [PATCH 0/2] apalis/colibri imx6/imx6ull/imx7: Add fastboot supp
+Date: Thu,  9 Nov 2023 13:23:59 -0300
+Message-ID: <20231109162401.38941-1-hiago.franco@toradex.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 7/8] board: ti: j721e: During resume spl restores TF-A
- and DM-Firmware
-Content-Language: en-US
-To: Thomas Richard <thomas.richard@bootlin.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <thomas.petazzoni@bootlin.com>, <gregory.clement@bootlin.com>,
- <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>
-References: <20231107161802.855154-1-thomas.richard@bootlin.com>
- <20231107161802.855154-8-thomas.richard@bootlin.com>
- <a8ec9dbe-f3a9-4a4e-88b5-a297d576c075@ti.com>
- <b2a9a9db-9f96-491c-882e-de4efa4ff472@bootlin.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <b2a9a9db-9f96-491c-882e-de4efa4ff472@bootlin.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,77 +90,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/9/23 5:29 AM, Thomas Richard wrote:
-> On 11/8/23 18:30, Andrew Davis wrote:
->>>    void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
->>>    {
->>>        typedef void __noreturn (*image_entry_noargs_t)(void);
->>> @@ -235,6 +241,32 @@ void __noreturn jump_to_image_no_args(struct
->>> spl_image_info *spl_image)
->>>        if (ret)
->>>            panic("rproc failed to be initialized (%d)\n", ret);
->>>    +    if (board_is_resuming()) {
->>> +#if IS_ENABLED(CONFIG_SOC_K3_J721E)
->>> +        if (!valid_elf_image(LPM_DM_SAVE))
->>> +            panic("%s: DM-Firmware image is not valid, it cannot be
->>> loaded\n",
->>> +                  __func__);
->>> +
->>> +        loadaddr = load_elf_image_phdr(LPM_DM_SAVE);
->>> +
->>> +        /*
->>> +         * Check if the start address of TF-A is in DRAM.
->>> +         * If not it means TF-A was running in SRAM, so it shall be
->>> +         * restored.
->>> +         */
->>> +        if (*(ulong *)(LPM_BL31_START_SAVE) < CFG_SYS_SDRAM_BASE)
->>> +            memcpy((void *)*(uintptr_t *)(LPM_BL31_START_SAVE),
->>> +                   (void *)LPM_BL31_SAVE, BL31_SIZE);
->>
->> This will not work. The memory where TF-A is running will be firewalled and
->> SPL absolutely cannot be securely trusted to load TF-A. Especially from an
->> unencrypted location in DDR. TF-A must be loaded as it is today using
->> signed
->> certificate images. You should know this, I explained it all when you tried
->> the same in TF-A:
->>
->> https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/23992
-> 
-> Hi Andrew,
-> 
-> We understood that GP devices are not impacted (we had this information
-> from TI, probably Manorit I don't remember), and Manorit confirmed it in
-> the TF-A review.
-> 
-> Maybe I could add a check of the device type to not impact HS devices.
-> 
+This patch series introduces Fastboot support on all Apalis iMX6,
+Colibri iMX6, Colibri iMX6ULL and Colibri iMX7 machines. It includes the
+necessary configurations in their respective defconfig files and
+implements logic in the boards files to determine whether SDP or Fastboot
+will be utilized.
 
-I'm not interested in GP devices, and neither are most our customers.
-Those are development devices, customers go to production with secured
-devices.
+Hiago De Franco (2):
+  apalis/colibri imx6/imx6ull/imx7: defconfig: Enable fastboot support
+  board: apalis/colibri imx6/imx6ull/imx7: Add fastboot bootcmd support
 
-Saying "let's make it work on GP only, then we will figure it out on HS
-later" was a mistake we made back in OMAP class device days. It made
-bringing support to production secured devices (HS) miserable as we had
-to unroll all the hacks that only worked on the development devices (GP).
+ board/toradex/apalis_imx6/apalis_imx6.c         | 13 ++++++++-----
+ board/toradex/colibri-imx6ull/colibri-imx6ull.c | 13 ++++++++-----
+ board/toradex/colibri_imx6/colibri_imx6.c       | 13 ++++++++-----
+ board/toradex/colibri_imx7/colibri_imx7.c       | 14 +++++++++-----
+ configs/apalis_imx6_defconfig                   |  3 +++
+ configs/colibri-imx6ull-emmc_defconfig          |  3 +++
+ configs/colibri-imx6ull_defconfig               |  3 +++
+ configs/colibri_imx6_defconfig                  |  3 +++
+ configs/colibri_imx7_defconfig                  |  3 +++
+ configs/colibri_imx7_emmc_defconfig             |  4 ++--
+ 10 files changed, 50 insertions(+), 22 deletions(-)
 
-Your method here is completely unusable on HS and will need a ground up
-rewrite for HS. Since the solution for HS will also work on GP, but
-not the other way around, you need to start with the HS solution.
+-- 
+2.42.0
 
-I'll make this same point over on the TF-A review then let's continue
-discussion over there only. If you cant get the TF-A part in then no
-need for this U-Boot part.
-
-Andrew
-
-> Regards,
-> 
-> Thomas
-> 
->>
->> NAK
->>
->> Andrew
->>
-> 
