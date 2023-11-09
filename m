@@ -4,77 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C93BC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 09:17:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD514C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 09:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1996871C4;
-	Thu,  9 Nov 2023 10:17:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 17C5E8715A;
+	Thu,  9 Nov 2023 10:28:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="B2zF8KQc";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hpVHxnvX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 665D5871DF; Thu,  9 Nov 2023 10:17:38 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2A4328715C; Thu,  9 Nov 2023 10:28:30 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 192FF8715C
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 10:17:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38C058713C
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 10:28:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=9677b570d6=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3A96eWi9015559; Thu, 9 Nov 2023 10:17:35 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=YDYJ/fAJK+QUQlUfsVNncnLD026s4Yxn9YGhz4lQI1I=; b=B2
- zF8KQc7KCcdomsEwpN9enC15ahcioI+tuHUrgcyG5spGqdpyjOj2pisYJ+62K9gz
- Ef31q2Mjdy4QCGiNjfKXPfqOaKK1NLIQ1RhlVyhCwj+Ypi98ra5xD9FG3AuXYro0
- Y3ClGxW7InHoPwD33A9SGjy+jiJ1hUVqikTn1Vw2DryN6hPAT/6xBah4TUzrelg/
- iPlMGpdPfauAILsXOIZg38RbOCnOtMR1yre4TEvVLBNVywHTm/DLtunPIEqhZ96x
- PbG9QfmnEx/rBuuB99GMp7A1gpWU1cCg3nORXu5hdIVAis4ZrgJGwLHDZk++iJoU
- SqIRhTw+x8/NNw/Md7CA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u7w22fkxk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Nov 2023 10:17:35 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AFA3E10005E;
- Thu,  9 Nov 2023 10:17:34 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9FD0B20800B;
- Thu,  9 Nov 2023 10:17:34 +0100 (CET)
-Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 9 Nov
- 2023 10:17:33 +0100
-Message-ID: <3f645d34-476e-49a1-9e3a-95e5142d6c32@foss.st.com>
-Date: Thu, 9 Nov 2023 10:17:33 +0100
+ smtp.mailfrom=SRS0=d4ad=GW=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1699522099;
+ bh=o2bP+rrARKPVyWwhAGXotE/DEC1LFDh6MfILvRfqC9I=;
+ b=hpVHxnvXt2Vo3R9cn55my43qinIgys/vKv3gSga/+DEEunMreBgZ3/UHj8hprxI/nwl9Eb6Pd
+ w9KEO6Pkd01fdyaO9bs92iLhLjRlUCUQ/zvz3Qj1HidoUh23WB3Mo1WL27dbzWGigVjisCG2tpJ
+ Y5eQNu6PUP+4Nknczn9BtUrtG3wb4CzZzFiFpbPB74YCsaS8ysJCgULO2BBF2LedZux/fCctoOG
+ aSWgNsVGf/ye1VDU1aT/w57az7uL6gviZaS2npkw8IPhG/nPfd4Z+jFAmOHphSXI2Zjc1wE8Wic
+ SrUU/Oquouqcm28hxs3hBiCk+8uuggiCiyfst6DrHpUQ==
+Message-ID: <6af7a40f-0357-4690-a37d-8e974325cac9@kwiboo.se>
+Date: Thu, 9 Nov 2023 10:28:14 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 8/9] ARM: dts: stm32: Add STM32MP257F Evaluation board
- support
+Subject: Re: [PATCH] rockchip: rk3588-rock-5b: Enable CONFIG_PCI_INIT_R to
+ support EFI networking
 Content-Language: en-US
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>
-References: <20231027144304.1002307-1-patrice.chotard@foss.st.com>
- <20231027144304.1002307-9-patrice.chotard@foss.st.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20231027144304.1002307-9-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.22.165]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-09_07,2023-11-08_01,2023-05-22_02
+To: Martin Roukala <martin.roukala@mupuf.org>, Kever Yang
+ <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>
+Cc: Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de
+References: <20231104130451.111020-1-martin.roukala@mupuf.org>
+ <ef28a2eb-131c-4b43-b048-f8af3160ddbb@kwiboo.se>
+ <f27831c4-3ba8-4f81-89fb-256c3f0f77fa@mupuf.org>
+ <644799d9-0144-4856-9980-cd95d2c29f89@kwiboo.se>
+ <079df03e-7442-433e-86dd-a24245af1d10@mupuf.org>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <079df03e-7442-433e-86dd-a24245af1d10@mupuf.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 654ca6322bfb40004b81ac4a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,51 +77,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Martin,
 
-On 10/27/23 16:43, Patrice Chotard wrote:
-> Add STM32MP257F Evaluation board support. It embeds a STM32MP257FAI SoC,
-> with 4GB of DDR4, TSN switch (2+1 ports), 2*USB typeA, 1*USB2 typeC,
-> SNOR OctoSPI, mini PCIe, STPMIC2 for power distribution ...
->
-> Sync device tree with kernel v6.6-rc1.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->   arch/arm/dts/Makefile                       |   3 +
->   arch/arm/dts/stm32mp25-pinctrl.dtsi         |  38 +++
->   arch/arm/dts/stm32mp25-u-boot.dtsi          | 102 +++++++
->   arch/arm/dts/stm32mp251.dtsi                | 285 ++++++++++++++++++++
->   arch/arm/dts/stm32mp253.dtsi                |  23 ++
->   arch/arm/dts/stm32mp255.dtsi                |   9 +
->   arch/arm/dts/stm32mp257.dtsi                |   9 +
->   arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi    |  20 ++
->   arch/arm/dts/stm32mp257f-ev1.dts            |  55 ++++
->   arch/arm/dts/stm32mp25xc.dtsi               |   8 +
->   arch/arm/dts/stm32mp25xf.dtsi               |   8 +
->   arch/arm/dts/stm32mp25xxai-pinctrl.dtsi     |  83 ++++++
->   arch/arm/dts/stm32mp25xxak-pinctrl.dtsi     |  71 +++++
->   arch/arm/dts/stm32mp25xxal-pinctrl.dtsi     |  71 +++++
->   include/dt-bindings/pinctrl/stm32-pinfunc.h |   3 +
->   15 files changed, 788 insertions(+)
->   create mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
->   create mode 100644 arch/arm/dts/stm32mp25-u-boot.dtsi
->   create mode 100644 arch/arm/dts/stm32mp251.dtsi
->   create mode 100644 arch/arm/dts/stm32mp253.dtsi
->   create mode 100644 arch/arm/dts/stm32mp255.dtsi
->   create mode 100644 arch/arm/dts/stm32mp257.dtsi
->   create mode 100644 arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
->   create mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
->   create mode 100644 arch/arm/dts/stm32mp25xc.dtsi
->   create mode 100644 arch/arm/dts/stm32mp25xf.dtsi
->   create mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
->   create mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
->   create mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
->
+On 2023-11-07 12:43, Martin Roukala wrote:
+> Hi Jonas,
+> 
+> On 11/7/23 12:41, Jonas Karlman wrote:
+>> Hi Martin,
+>>
+>> On 2023-11-07 10:45, Martin Roukala wrote:
+>>> Hi Jonas,
+>>>
+>>> On 06/11/2023 20:15, Jonas Karlman wrote:
+>>>> Hi Martin,
+>>>>
+>>>> On 2023-11-04 14:04, Martin Roukala (né Peres) wrote:
+>>>>> When u-boot chainloads an EFI bootloader such as iPXE, we want to have
+>>>>> already initialized the PCI subsystem so that network driver is loaded
+>>>>> and ready to use by the bootloader.
+>>>>
+>>>> This change slows down boot from emmc/sd-card where scanning for pci
+>>>> devices typically is unnecessary.
+>>>
+>>> True.
+>>>
+>>>>
+>>>> If pci must be initialized and scanned before an EFI app is started to
+>>>> find pci network controllers, then pci should probably be initialized by
+>>>> the efi bootmeth, not by enabling CONFIG_PCI_INIT_R for a single board.
+>>>
+>>> Unfortunately, it isn't that simple. I am chainloading iPXE immediately,
+>>> so we never end up calling bootmeth... and so iPXE fails to find any NIC
+>>> because u-boot did not initialize the PCI subsystem.
+>>
+>> How are you chainloading iPXE?, if it is not started using standard boot
+>> procedure (the efi bootmeth). If you are running custom script to load
+>> iPXE you can probably run "pci enum;net list;" before loading iPXE to
+>> init pci network.
+> 
+> I am loading iPXE using the bootflow way... AKA, no script at all, just 
+> have the ipxe EFI binary in /EFI/BOOT/BOOTAA64.EFI in a GPT partition.
+> 
+> I thought this was the preferred way of doing things: moving away from 
+> these hacky and purpose-built scripts in favor of more generic boot 
+> flows that don't require recompiling u-boot or a script when wanting to 
+> change the boot target.
+> 
+> In other words, making u-boot having a sane user-facing interface, and 
+> thus being a good target to be flashed in an SPI memory on the device 
+> and thus allowing distros to ship generic EFI images for more than one 
+> board.
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+It is, and thanks for confirming that this issue is related to using
+standard boot and the efi bootmeth/bootflow.
 
-Thanks
-Patrick
+> 
+>>
+>>>
+>>> IMO, the defconfig should work in all situations. If someone wants to
+>>> speed up their use case, they are free to disable the features they
+>>> don't need.
+>>
+>> IMO, the defconfig should work for generic use case with standard boot,
+>> and with the lazy loading principle of not probing devices/drivers until
+>> they are needed/used.
+> 
+> Indeed, you are right that it shouldn't work in **ALL** situations. 
+> However, I believe chainloading is still a pretty standard boot 
+> situation, don't you think? If you don't think so, I hope I can make my 
+> case for it... or just look at the boot flow of your development machine ;)
+
+I fully agree that it should work, I just want to evaluate if we can solve
+the root issue instead of adding a workaround for a single board.
+
+This issue also affect other boards, such as NanoPi R5C that also only have
+pcie network controllers, and is why I am trying to see if we can solve
+this in a more generic way.
+
+> 
+>>
+>> PCI_INIT_R will force probing of pci devices that may not be needed and
+>> add a ~1 second timeout delay for each unoccupied M.2 slot on this board.
+> 
+> That's indeed annoying, but still less annoying than not seeing any NIC 
+> detected and having to wonder why they don't show up (missing driver? 
+> missing DT entries? Missing bus? ...).
+> 
+> In my view, sub-optimal is less important than less compatible, 
+> especially in the EFI/bootflow world where u-boot would not have to be 
+> recompiled all the time. Up to 2s boot time increase is a minor 
+> annoyance in CI, but I don't believe it has any impact on actual users.
+> 
+> I know I am new to the wild world of arm64 bootloaders, but in the x86 
+> world the default boot configuration is not "Fast boot". And even there, 
+> you can specify to which degree you want to limit device enumeration... 
+> AKA, the *_INIT_R config options :)
+> 
+> I'm all for speed, but let's keep defaults reasonable ;)
+
+I do not disagree that this is fixing an issue, I am just trying to
+evaluate if we can fix it at core instead of adding a workaround for a
+single board.
+
+The bootdev hunters for e.g. net and scsi both run pci_init() to ensure pci
+has init and devices on pci bus can be found. Something similar could
+possible be done for the efi bootmeth.
+
+Adding following before the bootefi command is run should probably solve
+this issue could there be a similar issue for pci storage devices unless
+pci is init before efi app starts?
+
+
+	if (IS_ENABLED(CONFIG_PCI)) {
+		ret = pci_init();
+		if (ret)
+			log_warning("Failed to init PCI (%dE)\n", ret);
+	}
+
+	/*
+	 * At some point we can add a real interface to bootefi so we can call
+	 * this directly. For now, go through the CLI, like distro boot.
+	 */
+	snprintf(cmd, sizeof(cmd), "bootefi %lx %lx", kernel, fdt);
+	if (run_command(cmd, 0))
+		return log_msg_ret("run", -EINVAL);
+
+
+https://source.denx.de/u-boot/u-boot/-/blob/master/boot/bootmeth_efi.c?ref_type=heads#L449
+https://source.denx.de/u-boot/u-boot/-/blob/master/net/eth_bootdev.c?ref_type=heads#L75-80
+
+> 
+>>> A generic solution may be for u-boot to start probing the PCI bus when
+>>> asked to enumerate the NICs through SNP by the EFI binary... but until
+>>> this is done, the defaults should just work.
+>>
+>> Agree, this should be solved using a generic solution. Do not agree on
+>> changing defaults for a specific use-case that affect other use-cases
+>> and where other workarounds may be applied.
+> 
+> Agreed, but I would still want this patch to be merged before moving 
+> forward as I am sure I won't be the only one who has to bisect this 
+> regression. Speaking of, isn't there a non-regression rule in u-boot?
+
+We are still ~8 weeks from release, so hopefully we can find a generic
+solution that covers more boards before then.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Martin
 
