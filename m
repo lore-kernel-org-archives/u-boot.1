@@ -4,91 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66325C4167D
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 20:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B44E6C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 20:42:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 844D98724E;
-	Thu,  9 Nov 2023 21:28:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 01C138719D;
+	Thu,  9 Nov 2023 21:42:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BvwRDxS+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W6fdlm/1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C249287516; Thu,  9 Nov 2023 21:28:33 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5FD6A87516; Thu,  9 Nov 2023 21:42:03 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 086D88714C
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 21:28:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3958C870F4
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 21:42:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-il1-f197.google.com (mail-il1-f197.google.com
- [209.85.166.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6846240C4E
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 20:28:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699561709;
- bh=Wb+T+48+PniqZ8iGmRQwE7RIDHHlHbu29eyJ1TYeLn8=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=BvwRDxS+1I2A5F5rDvf7h5FUC4zKW5RlrRjciFM8Xi2X4NViNwqmAj/0lQh5YNOtL
- DrV/p5MNjk1zqd5L/Cf4UVEep6s1XGWkpi9nx2NwX/Ubpt+lvAxKA4DihgXBILRGZ6
- Nuw3qW0XWYo6CWwC5YQwqSMijagoFd4HxLdP7W8G7LvQ6te5a+1xPn38PxzHRhXJJQ
- sHg+MN3H0hVSLlehVf7kb4XDXLcig49ytx5oqhAAEbpgadST9mz3OfRr8Fsyl30GRq
- u2roNphN9ttEde86UZ+nkk8+6UHFQA7MqCDD8dzlMJ4xh4SO5EF/F9m9jLOO3/JeSs
- gDGbnoifVmYhA==
-Received: by mail-il1-f197.google.com with SMTP id
- e9e14a558f8ab-35945043e33so17495685ab.1
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 12:28:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-1ef36a04931so706320fac.2
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 12:42:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699562520; x=1700167320; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fsq8uPaIGhR6LnWRCoZKowrupeDJ8gvnmreMewafoO8=;
+ b=W6fdlm/11VL4HLpkOSp+XOBaDxPdGU/Gsv7tBwgpnKQ/jUbGdDOeK5sl3aSllNF2AR
+ YnSIgPiy7O3QOS+diMcsj7FMHzsMf89ZuYJ5dTsYIuMiX60PGBCFGZpOLKKFFJ20BBs5
+ kyu5GF34Pb5fA7uQHUcch7RJPovV9PJgXh25Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699561708; x=1700166508;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Wb+T+48+PniqZ8iGmRQwE7RIDHHlHbu29eyJ1TYeLn8=;
- b=rDn3c+NAka/ZxfiRAH2XtBdjSxeJisWaLekRBb3EWya5cb4RC6ox6LRv1bqhOptxJ9
- kEbXJ39PujlTVS2qs0w+eSSYH7nnulB9L1Lb/iV/iPUepVxS7md2s32vZEAWOmmAQgXr
- MWKApEdofRFlA+wxMcCpazg0rVXJ723N5m3VAI+qVA4j8kNJR2yBrP+p3lgRevmXALG5
- 8j0p5w48gs/iCey9BdrLGWgAyMn6EgtmrEpjfqbz/sZ5M94QcfjCNjHjLtXP/jRVJ7Dr
- pUYSkcA4nRtgzWW7coziuSiYLYPdmT+eTsVrb7mfMv1bA76m1VtCQYaul1lolPQ4PnHp
- 0StA==
-X-Gm-Message-State: AOJu0YzcWI3LYAonkKGjVR/9vgdIrKSeJ0Zauq80JLQPiQ8iT2JkJWU5
- JXB50pu/uCfXpcypWTcd/2xCn/LSwjbRcX2xoPnju3kS1oR/rfnUvjUSMZ7JpPtW7Vw1b7Dr+/o
- gXGAVfHR5/+PRXAz3CirGiyna7gGaBJM=
-X-Received: by 2002:a05:6e02:338b:b0:34f:dfb5:8e8 with SMTP id
- bn11-20020a056e02338b00b0034fdfb508e8mr429663ilb.14.1699561708061; 
- Thu, 09 Nov 2023 12:28:28 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFonNIE/mYZhGGsNt6/B2fJ6XdwaF476MlNVH62DgrO9Rbr0to5qTO98rkW4evmCZcs61JICA==
-X-Received: by 2002:a05:6e02:338b:b0:34f:dfb5:8e8 with SMTP id
- bn11-20020a056e02338b00b0034fdfb508e8mr429639ilb.14.1699561707706; 
- Thu, 09 Nov 2023 12:28:27 -0800 (PST)
-Received: from [10.21.210.240] ([65.132.165.41])
+ d=1e100.net; s=20230601; t=1699562520; x=1700167320;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fsq8uPaIGhR6LnWRCoZKowrupeDJ8gvnmreMewafoO8=;
+ b=uVCiLKnEzt+jvWWeo6Ej2wdqYwKVGXApElQVxKCXQ2VIfI52p/abPxi4cHhwakXJXj
+ 2IcvUrTbEnCqRlRRwvsnqyaA3WAPFHzvgXu4ku8biRIeAs9HB+/6ShUD7OznibN/+UZG
+ K8lUnstH6qiTEw5zD1q/Dgj4kNU+djDTkMotFBZXBaOwssmk9//lrdfg48kRjkVDmATp
+ 3IFjBLRmhAGCMcei+uvLpdg5XLGAJLvT+QzrIi8gszAurIG2eiMMY2uJB+N5uCRJoMSm
+ qwjsWiqxgJx/W4G8YKH6AewoKE0DeBnik7wQQRzksmfl2F/PDtonRioW/hP1dWpk4ddc
+ jvjA==
+X-Gm-Message-State: AOJu0YwVk9DgkVaRahtZlNwGnkInkkM7Ms8Z/XbMgy5icjXXkWZ9E8Ah
+ oAzCD5XOAAqTJgz9GIEqUNRYW0cx6BgJtNfUWX31Bw==
+X-Google-Smtp-Source: AGHT+IG/dzjS9w77XYr/FxNTMMaNw2B4qSQOLYhZf0UiEQdGwuvcZ8pOTBQPm+4bZnOovcnrDzPceg==
+X-Received: by 2002:a05:6870:9691:b0:1f4:a122:6b02 with SMTP id
+ o17-20020a056870969100b001f4a1226b02mr1057779oaq.45.1699562519778; 
+ Thu, 09 Nov 2023 12:41:59 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-58a3-ea36-c2a1-60cb.res6.spectrum.com.
+ [2603:6081:7b00:6400:58a3:ea36:c2a1:60cb])
  by smtp.gmail.com with ESMTPSA id
- g2-20020a02cd02000000b004571b2f5940sm4157782jaq.82.2023.11.09.12.28.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Nov 2023 12:28:27 -0800 (PST)
-Message-ID: <9525398a-1326-470e-9894-afb160cde2e6@canonical.com>
-Date: Thu, 9 Nov 2023 12:28:26 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
-To: Tom Rini <trini@konsulko.com>
+ eb4-20020a05620a480400b007757fefea79sm171141qkb.130.2023.11.09.12.41.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Nov 2023 12:41:59 -0800 (PST)
+Date: Thu, 9 Nov 2023 15:41:57 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
+Message-ID: <20231109204157.GI6601@bill-the-cat>
 References: <20231109172302.54324-1-heinrich.schuchardt@canonical.com>
  <20231109192419.GH6601@bill-the-cat>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231109192419.GH6601@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <9525398a-1326-470e-9894-afb160cde2e6@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tr3Apj/aSLtQJOWi"
+Content-Disposition: inline
+In-Reply-To: <9525398a-1326-470e-9894-afb160cde2e6@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,37 +94,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/9/23 11:24, Tom Rini wrote:
-> On Thu, Nov 09, 2023 at 09:23:02AM -0800, Heinrich Schuchardt wrote:
-> 
->> Function acpi_get_rsdp_addr() is needed on all architectures which
->> write ACPI tables. Move the definition from the x86 include to an
->> architecture independent one.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   arch/x86/include/asm/acpi_table.h | 9 ---------
->>   drivers/misc/qfw.c                | 1 +
->>   include/acpi/acpi_table.h         | 9 +++++++++
->>   3 files changed, 10 insertions(+), 9 deletions(-)
-> 
-> My question here is, does this work right on non-x86? I know you can
-> have ACPI without UEFI on x86, but elsewhere doesn't the location have
-> to be provided in some manner by UEFI? I know I'm thinking that's the
-> case with SMBIOS (with a few exception).
-> 
-> I'm assuming you're doing something here with qemu and its qfw interface
-> and risc-v.
-> 
 
-Hello Tom,
+--tr3Apj/aSLtQJOWi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-yes, I want to enable ACPI passthrough on QEMU RISC-V. There will be 
-more patches needed. But the current change seemed obvious looking at 
-the code so I did not want to pile up more patches first.
+On Thu, Nov 09, 2023 at 12:28:26PM -0800, Heinrich Schuchardt wrote:
+> On 11/9/23 11:24, Tom Rini wrote:
+> > On Thu, Nov 09, 2023 at 09:23:02AM -0800, Heinrich Schuchardt wrote:
+> >=20
+> > > Function acpi_get_rsdp_addr() is needed on all architectures which
+> > > write ACPI tables. Move the definition from the x86 include to an
+> > > architecture independent one.
+> > >=20
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >   arch/x86/include/asm/acpi_table.h | 9 ---------
+> > >   drivers/misc/qfw.c                | 1 +
+> > >   include/acpi/acpi_table.h         | 9 +++++++++
+> > >   3 files changed, 10 insertions(+), 9 deletions(-)
+> >=20
+> > My question here is, does this work right on non-x86? I know you can
+> > have ACPI without UEFI on x86, but elsewhere doesn't the location have
+> > to be provided in some manner by UEFI? I know I'm thinking that's the
+> > case with SMBIOS (with a few exception).
+> >=20
+> > I'm assuming you're doing something here with qemu and its qfw interface
+> > and risc-v.
+> >=20
+>=20
+> Hello Tom,
+>=20
+> yes, I want to enable ACPI passthrough on QEMU RISC-V. There will be more
+> patches needed. But the current change seemed obvious looking at the code=
+ so
+> I did not want to pile up more patches first.
+>=20
+> Do you know what the status of ACPI passthrough is on ARM?
 
-Do you know what the status of ACPI passthrough is on ARM?
+On U-Boot? No. I know a while back I asked Simon to, and he did some
+hacking such that on a Raspberry Pi you could do UEFI boot and pass
+through some ACPI tables and it was somewhat functional (which was I
+think an issue with the ACPI tables as much as anything else). And I
+mentioned to some Linaro/EBBR people that it was because in part I don't
+object to U-Boot being able to do SystemReady ES level support either
+(and to be clear, I don't mean instead of, or preferred over IR, just
+that ES mandates ACPI and if we can pass it through .... and yes,
+there's more to it than that, I know).
 
-Best regards
+And yeah, I see now I had mis-interpreted the "rsdp" portion of the
+function name.
 
-Heinrich
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--tr3Apj/aSLtQJOWi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVNRAsACgkQFHw5/5Y0
+tyz7rQv/QCaXaukuaxaqLp7sax8GDdj88rCuDHEMZ0/E2Vly4R8MCZQLaWtgS/R0
+x4lkkTFbIWKMJeCT0/0YXpHdhKYbwSZYytB+6+GZAFW/bnac5nXhb0MyW0xNbrJO
+sfDeLgSZCA9BYsHixqING9Ni5Ni8nJxB2HiU/OfaZbUbcmCkaJXzrCNwtLTPxboH
+wJFxYQur7J8LWm5IAlSE8EXKDaKvMNkK4xn9VzJesUrvwShBsloG7JTCsicmoVeE
+ENuheyQRDJWr2mcCHseRziXmnuUibEDhso2TnM53b/K7mwZVsk3lf5p2ppPDP3/D
+yoNwFxISgmmoNKJQ+vqIypTZrtnpKxgOSCtHjo2Gx/9FunAZ3joLLIVieEIRgcUo
+Egqifb67UB9MDljX/ULNPrcaVuW3mLtcavSfOmsjay60s4aejgDdvnDE34hv92sl
+A/ikal5Tbxo+K4+htlT9y29SvaCzzFMcT5tagwC4UNeqF849oN16otSopVN6a4U1
+p1oI1sHP
+=xKhk
+-----END PGP SIGNATURE-----
+
+--tr3Apj/aSLtQJOWi--
