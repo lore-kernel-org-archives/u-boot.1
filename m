@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 979AEC4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 03:34:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B227C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 03:34:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57871871C6;
-	Thu,  9 Nov 2023 04:34:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E55288722B;
+	Thu,  9 Nov 2023 04:34:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="dQZqowJm";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KE5dr0aQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AD2F871C6; Thu,  9 Nov 2023 04:34:03 +0100 (CET)
+ id 73779871E6; Thu,  9 Nov 2023 04:34:12 +0100 (CET)
 Received: from mail-m24125.xmail.ntesmail.com (mail-m24125.xmail.ntesmail.com
  [45.195.24.125])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A637B871C6
- for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 04:33:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 835D687208
+ for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 04:34:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=dQZqowJmV1+ikkCibhkALuH+e8+q6dXAyEIHUphnXBBa7JYzusLaaVVvGNSCH/YzwH+jcv9mb8GQKmWBjF/A2v372hx4QtNAMGTErwf/50b1RU0ctj684mBAC8x2bykSMvbQxSpGp34oV8LkgxgZEIm283qUtRgaFF7HiR9NalM=;
+ b=KE5dr0aQrq/AuAMJsByKlqDiHnZsjaMxHapKDa6qPJSu/f9iA1q6mpLSB2gqueQLzivbTB2SKjS1u1DAHsEgMY45n1dHyz47t4qv+jSdKb7RCRnmCFZ7ef/OYpL0r2HLw53IOfg+/HlVDzZ6ZoLskr9+E1bxD/+fTHzMRKSS7hs=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=CWDi2v3iR1arJs4icccufeZgrTvq4tDKmfyst+oXilY=;
+ bh=buYNRfDpOHiyieIJc15585gFDXPmkGH7C7c0EnVc1ps=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id C96B04002AD;
- Thu,  9 Nov 2023 11:33:53 +0800 (CST)
-Message-ID: <00ae8f97-dd6f-476e-9cdf-64d6c129827e@rock-chips.com>
-Date: Thu, 9 Nov 2023 11:33:53 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 81CD840033B;
+ Thu,  9 Nov 2023 11:34:01 +0800 (CST)
+Message-ID: <21095380-8c2f-48a8-a895-689ab0f96c64@rock-chips.com>
+Date: Thu, 9 Nov 2023 11:34:01 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/6] rockchip: ringneck-px30: only declare functions in
- U-Boot proper
+Subject: Re: [PATCH 5/6] rockchip: puma-rk3399: fix modified boot_targets
+ detection
 Content-Language: en-US
 To: Quentin Schulz <foss+uboot@0leil.net>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -48,20 +48,20 @@ To: Quentin Schulz <foss+uboot@0leil.net>,
 Cc: u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>
 References: <20231108-env_default_theobroma-v1-0-cb493bfdeffd@theobroma-systems.com>
- <20231108-env_default_theobroma-v1-4-cb493bfdeffd@theobroma-systems.com>
+ <20231108-env_default_theobroma-v1-5-cb493bfdeffd@theobroma-systems.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231108-env_default_theobroma-v1-4-cb493bfdeffd@theobroma-systems.com>
+In-Reply-To: <20231108-env_default_theobroma-v1-5-cb493bfdeffd@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxlLSlZCSBhOS0hPSE9CTExVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQktCTVYaTB4fH0lOTh9NQ0pVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8bb224bcea2eb3kusnc96b04002ad
+X-HM-Tid: 0a8bb224dbf52eb3kusn81cd840033b
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OAw6Ojo*HjwwTAg4NUhRTDwK
- TRUwCTlVSlVKTUJCTktLQ0hPTkJIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQktCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NC46FQw4Gjw1SAgqD05CTB4M
+ CjoaCx5VSlVKTUJCTktLQ09JTEhNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSkxNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,8 +82,23 @@ X-Virus-Status: Clean
 On 2023/11/8 22:20, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 >
-> Those functions are useless in anything but U-Boot proper for now, so
-> let's compile them out explicitly.
+> U-Boot proper automatically modifies boot_targets to swap the order in
+> which MMC storage media are used for standard boot based on which MMC
+> storage medium was used to load U-Boot proper. This is however only done
+> if the user has not changed it manually, therefore a check between the
+> default and current value is done.
+>
+> This used to work fine until the migration to standard boot where
+> boot_targets value size in the default environment went above the 32
+> characters that env_get_default function can return, thus resulting in a
+> truncated variable.
+>
+> Therefore the check between default and current value would always fail.
+>
+> By using the newly added env_get_default_into function, a buffer of
+> the appropriate size can be allocated on the stack to get the whole
+> value of boot_targets in the default environment and thus fixing the
+> check.
 >
 > Cc: Quentin Schulz <foss+uboot@0leil.net>
 > Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
@@ -92,24 +107,34 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   board/theobroma-systems/ringneck_px30/ringneck-px30.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   board/theobroma-systems/puma_rk3399/puma-rk3399.c | 9 +++++++--
+>   1 file changed, 7 insertions(+), 2 deletions(-)
 >
-> diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-> index bb1bb4acf5c..dd711cd05de 100644
-> --- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-> +++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-> @@ -25,6 +25,7 @@
->   #include <power/regulator.h>
->   #include <u-boot/sha256.h>
+> diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+> index 1b7a39b0474..df667fae5fc 100644
+> --- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+> +++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+> @@ -54,7 +54,9 @@ static int setup_boottargets(void)
+>   {
+>   	const char *boot_device =
+>   		ofnode_read_chosen_string("u-boot,spl-boot-device");
+> -	char *env_default, *env;
+> +	char env_default[sizeof(BOOT_TARGETS)];
+> +	char *env;
+> +	int ret;
 >   
-> +#ifndef CONFIG_SPL_BUILD
->   /*
->    * Swap mmc0 and mmc1 in boot_targets if booted from SD-Card.
->    *
-> @@ -169,3 +170,4 @@ int misc_init_r(void)
+>   	if (!boot_device) {
+>   		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
+> @@ -63,7 +65,10 @@ static int setup_boottargets(void)
+>   	}
+>   	debug("%s: booted from %s\n", __func__, boot_device);
 >   
->   	return 0;
->   }
-> +#endif
+> -	env_default = env_get_default("boot_targets");
+> +	ret = env_get_default_into("boot_targets", env_default,
+> +				   sizeof(env_default));
+> +	if (ret < 0)
+> +		env_default[0] = '\0';
+>   	env = env_get("boot_targets");
+>   	if (!env) {
+>   		debug("%s: boot_targets does not exist\n", __func__);
 >
