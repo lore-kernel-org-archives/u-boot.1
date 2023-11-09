@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DE5C4332F
-	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 01:16:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09864C4332F
+	for <u-boot@archiver.kernel.org>; Thu,  9 Nov 2023 01:16:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C71788714F;
-	Thu,  9 Nov 2023 02:16:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B380871FC;
+	Thu,  9 Nov 2023 02:16:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oE+giNoG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E53Ipkrd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71E53870A4; Thu,  9 Nov 2023 02:16:04 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 8805C87113; Thu,  9 Nov 2023 02:16:04 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0F9E871A0
+ by phobos.denx.de (Postfix) with ESMTPS id C3178871CD
  for <u-boot@lists.denx.de>; Thu,  9 Nov 2023 02:15:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-507bd644a96so438970e87.3
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5437269a661so2975898a12.0
  for <u-boot@lists.denx.de>; Wed, 08 Nov 2023 17:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699492548; x=1700097348; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ANmvkQXfk5myZi8eWxyZzGh1w6L4TzUZviF0QYGmsHE=;
- b=oE+giNoGNXJG16ivEKtk3ZRODQNy32HoOvJfbTBtmAa2EKUsx5iY6xzcjjnpqrX3Np
- XBBDbQrMGjC/s4H5w26GSBLmUx6ORpo+snGeEhP/cVgw/gMYHfHs4fJuYIR4QuSFxc4W
- wFH/VrJgBLt2OZO90CsTAkm/KDHipOLtmsUCg=
+ bh=SNEbMFH9ihmtFhXMhpxtgf/QZNCoh90dXVLQSV6GPX4=;
+ b=E53IpkrdlWtYnVYCaNzT2QpR6GutxSA0aerlTT/LWFW8tZP25ejN5kM+5IoPHY+NAY
+ 5f3/pEyK5m0vRy7o3tARjHC1pixUB/8NoqTpwNzZSrNAa+cdKzKC/RZNgmtOgPc5oV5s
+ ZEEr55DHTD7SOwNlJpGCU+D3wQiYl66Mq4Qks=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699492548; x=1700097348;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ANmvkQXfk5myZi8eWxyZzGh1w6L4TzUZviF0QYGmsHE=;
- b=mWacu+CqeZagHqrlpUxyPmSQFRonXadMghtqLXppdIdpA5+s4zd7vUucotSwKS5Nh5
- HoHIm4uphK+VRWBZhLvrrSUE1oBOK5JsgUUknjQtgy4rgtIH8x6p+gWgJ+euwdm5HUbs
- /NvgPCJDKbhoo80Jq64CP5qZMoN86i4A0GI/6UMXOe8ZMHv1ufvDiE3vJ25Ax+pjKmEM
- C3BNIwumH2QzOFq/aLkzbuq7zYZ01D98P8rkfB/8rBmw9sLmJgmVgDYHaV8pQUvpYQ8R
- 3i39OZw60GgDAj639TtBUqW/dj54ss5rt+rTnq7wS6ujOXnZEoxG/m0LrSfdSuNUrk/z
- rV5g==
-X-Gm-Message-State: AOJu0YzjCzJrZs/8ec5ms6+ADmG3qU3eAlNjyHMcuq3HCWrsAiGO4w7d
- BjH47CTEeAkuDN/kOug+BZi8pSgyn5MeD+dZ7D1oAA==
-X-Google-Smtp-Source: AGHT+IH31JLiIST6kSiFfMX82Ee88EvwSmCY2yhYlUPG/GBNBHDhjZ4Ms0TgOhbYrk9Hl6TNjS/g3ZHoOpca0X7K+WI=
-X-Received: by 2002:a19:5216:0:b0:509:4d95:e896 with SMTP id
- m22-20020a195216000000b005094d95e896mr177323lfb.66.1699492547800; Wed, 08 Nov
+ bh=SNEbMFH9ihmtFhXMhpxtgf/QZNCoh90dXVLQSV6GPX4=;
+ b=aGHf2QCtB7YIQgLFY/adiVgzQmiTBOzdsD7Hi7lw+oqZl2st9GgvlxoTjXNqclIX24
+ xqmEb+abGQd1zZbp8DMM4eWUEmpmb5yH0L5Zr9wuy9D19oENZIJvPYhNemUGWgejih8S
+ ntL86B3RbIyV9EPF8D0KKH0xA0AdCKa2A8SfN8e98u9fALxMBZC2bXblCThRTV8Bs0YT
+ 6SKZ8NJ2bs25+tT7rPv2/LWOLeC02bjcie4zgWUffArMZ1g9wjsiHvMVq0ihSI4ophji
+ 3wTSUsAq3FRd3LGtA86hsgdPWUsvihFQKgadPnYlMdP7WO1u50XjqsLItQK1z2S9nGvj
+ UbOA==
+X-Gm-Message-State: AOJu0YxYm8fjmM8KvoDY0FPVGnnywLuNaMxWcaPciwuQpYidISwyIMNj
+ Goslz3dcgEJ8svBi0SRyOGhyDnMqVYQJ3ZOYWONrSw==
+X-Google-Smtp-Source: AGHT+IEpFsH9jdvVwSa2GHVrbAoDjdukRvuMgPk8P2jK3B0sN/hctw+bBROVrZ6r6IKQ2X0pI74dwLA1eOHzq6rjDUI=
+X-Received: by 2002:a05:6402:502:b0:545:50e9:828 with SMTP id
+ m2-20020a056402050200b0054550e90828mr503243edv.13.1699492547772; Wed, 08 Nov
  2023 17:15:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20231108164858.3497420-1-seanga2@gmail.com>
- <20231108164858.3497420-3-seanga2@gmail.com>
-In-Reply-To: <20231108164858.3497420-3-seanga2@gmail.com>
+ <20231108164858.3497420-9-seanga2@gmail.com>
+In-Reply-To: <20231108164858.3497420-9-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Nov 2023 18:15:27 -0700
-Message-ID: <CAPnjgZ2YpM1m1JOo3c+O-imaVQfNmCF4Twn1e+a4f7HP5UtD2Q@mail.gmail.com>
-Subject: Re: [PATCH v7 02/26] arm: Disable SPL_FS_FAT when it isn't used
+Date: Wed, 8 Nov 2023 18:15:30 -0700
+Message-ID: <CAPnjgZ2D37cgM87H1qxa-0oV5zbK6aJ_vg1vGHGp_sdcg4Z+UQ@mail.gmail.com>
+Subject: Re: [PATCH v7 08/26] spl: Refactor spl_load_info->read to use units
+ of bytes
 To: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
  =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>, 
  Xavier Drudis Ferran <xdrudis@tinet.cat>, Marek Vasut <marex@denx.de>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Stefan Roese <sr@denx.de>,
- Michal Simek <michal.simek@amd.com>
+ Fabio Estevam <festevam@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,33 +89,29 @@ X-Virus-Status: Clean
 
 On Wed, 8 Nov 2023 at 09:49, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Several boards enable SPL_FS_FAT and SPL_LIBDISK_SUPPORT when they can't be
-> used (as there is no block device support enabled). Disable these configs.
-> The list of boards was generated with the following command:
->
->     $ tools/qconfig.py -f SPL SPL_FS_FAT ~SPL_MMC ~SPL_BLK_FS ~SPL_SATA \
->                           ~SPL_USB_STORAGE ~ENV_IS_IN_FAT ~EFI
->
-> LIBDISK was left enabled for the am* boards, since it seems to result in
-> actual size reduction, indicating that partitions are being used for
-> something.
+> Simplify things a bit for callers of spl_load_info->read by refactoring it
+> to use units of bytes instead of bl_len. This generally simplifies the
+> logic, as MMC is the only loader which actually works in sectors. It will
+> also allow further refactoring to remove the special-case handling of
+> filename.  spl_load_legacy_img already works in units of bytes (oops) so it
+> doesn't need to be changed.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
 > Changes in v7:
-> - Disable FS_FAT for the zynq(mp) boards as well, as suggested by Michal
+> - Reword documentation for spl_load_info
 >
 > Changes in v6:
 > - New
 >
->  configs/am335x_evm_spiboot_defconfig      | 2 +-
->  configs/am65x_evm_r5_usbdfu_defconfig     | 1 -
->  configs/xilinx_zynqmp_mini_qspi_defconfig | 3 ++-
->  configs/zynq_cse_nand_defconfig           | 2 ++
->  configs/zynq_cse_nor_defconfig            | 2 ++
->  configs/zynq_cse_qspi_defconfig           | 2 ++
->  6 files changed, 9 insertions(+), 3 deletions(-)
->
+>  arch/arm/mach-imx/spl_imx_romapi.c | 16 +++-------
+>  common/spl/spl_fit.c               | 51 +++++++++++++++---------------
+>  common/spl/spl_imx_container.c     | 45 +++++++++++---------------
+>  common/spl/spl_mmc.c               | 24 ++++++++------
+>  common/spl/spl_nand.c              |  8 ++---
+>  include/spl.h                      | 18 +++++++----
+>  test/image/spl_load_os.c           | 13 ++++----
+>  7 files changed, 82 insertions(+), 93 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
