@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDCE0C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 01:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23B39C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 01:57:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9012875F3;
-	Fri, 10 Nov 2023 02:55:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5DE35875F3;
+	Fri, 10 Nov 2023 02:56:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GawqppRb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ogrBJupR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54FAB87504; Fri, 10 Nov 2023 02:55:37 +0100 (CET)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 22EB38774A; Fri, 10 Nov 2023 02:56:57 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74CB0875F3
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 02:55:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B8CD87504
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 02:56:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-6c431ca7826so1517791b3a.0
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 17:55:34 -0800 (PST)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-27ff7fe7fbcso1365897a91.1
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 17:56:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699581333; x=1700186133; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699581413; x=1700186213; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VUfFTMtHPfh54Fh1pfr4rbS6wNBVDfaUw22gA3aImI0=;
- b=GawqppRbxWSUcLRuwKImwG9RJ166IpRGeGvPaRztRD8lQIKvNO36DHCtC0SyNQtgp2
- peR6kpdeZpdiHktyrtBfA6et1l5aNnqGwRvc92ox/nNYypsmfBUhHaDaeUQ4afI3W00t
- 1bVnfDz5EzvAT2pWSV8yEHAmNSBJZuPTA/8T6GdQf5nRS4ImhJlWPs7RmO/a4UAQjdPb
- +Lnp0kDQwdiNCek144PF4SH+GoNeNUJ5UjIkoRQpEMdBIpru5dtCt7wWBvknpcZi3q0f
- Rj48yiuRtDsalP3pLf0EN/gYTFDQELWZQ1gcetKscEQiGNUXda1wTJmdyZKJwqHGS8Pn
- 1a2Q==
+ bh=1j9b0gbCBqlHeqFyQY0SqNECSJ8ee2kKoWhoZGi//Bk=;
+ b=ogrBJupRXoMYxl1d6lZGAui1/OKg/h/prVssUSoJ5u3qbCrjXFOk5DglCM0Vlfl/0d
+ 1zlqAUbCX4g1ezyu6PDu8D/uAp+aLHu7yO0HA8kUKYAV9n2V067dGLJIJT/7E8UYmePI
+ X72LvXOZ20xIqEP60Rf8ur1QNdvBUhYkL7S/cqSvsb8XjWazn6OisZcOgNEG6pLuOQFG
+ OYZXNr8MaypWW48eDMaBuVikwE3hUobxATHXjecLTXNMY5fPSNarNnxHQ0veQkBv/+2U
+ mvGbmE6p9eGC4MDJvG0Qy6Pe/V26CsKN7Zh0SPy4J9mOVliIvEkP/UnPr7XlHneHhxf/
+ LBWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699581333; x=1700186133;
+ d=1e100.net; s=20230601; t=1699581413; x=1700186213;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VUfFTMtHPfh54Fh1pfr4rbS6wNBVDfaUw22gA3aImI0=;
- b=iUNxvBvACpI8YR+s9SgZhJzI7MEBEWIfkcUJ3jr0XGNIzXcsbJgb2MQJM1u2kHcAvt
- qdueDtokonCFJI82b+hCeAwXM/Edg3o6vEldLipUOJ1XVDPbO2sZX+8hYc0ul38iF6jO
- 9O8BQmPAHLGDRpXkE019zN2uV9AHmaBdLtsNlpaw2NQqK/m2nHmCn17d57isI4CTVRe8
- KCi8MBNu5t1zzUaPMpq1Cqw/bsT0bFa4aHQtDEnDdDEicVx5nuv5MXiVAdYIg52fmxFt
- K+jB0QozsUQ4aR4hC9dTaF0pGzjE6y67dntQtpenE3or0b2rSPCignzvmOcOUoolamgP
- mVEg==
-X-Gm-Message-State: AOJu0YzSmrQNnth74ParGzDxKj2p55Aywof6Wsuy8rn+XKbAUzli1STB
- iVbd67ntDXLwtEvtM6lbJ9AIzuZCieTv3l7buly/vw==
-X-Google-Smtp-Source: AGHT+IGOvJa4eHuaq/dpHMRBsTP2CimBhf4S1vcoTukQ2nKj2FBIYh79nQon94enxsFtqcrJQMyf6W0l+9ir6pud9Tc=
-X-Received: by 2002:a05:6a20:914b:b0:171:c88a:891e with SMTP id
- x11-20020a056a20914b00b00171c88a891emr7242177pzc.55.1699581332692; Thu, 09
- Nov 2023 17:55:32 -0800 (PST)
+ bh=1j9b0gbCBqlHeqFyQY0SqNECSJ8ee2kKoWhoZGi//Bk=;
+ b=i5EEc5gnitfuGKeVBK0ciF4UA7Lbhp8WAuKIUow43gsIOHuYGB9eDo3+r09fHL4Qql
+ waSXGS7icf42zwgEf4d2uhIITlgnuw3BaVSFon9/hanacZEYrFlfGIFV+WIaoD4DKv3p
+ UmnKFNyJo77MrGnORDe5QEGRsljRtMRxMxw8nd15r64xJwSbVpNY6f6hYJDpTeVOz5yU
+ h+xUkZBDTRFQZWPGFCagm75LjxnEun7HAKQ0RkDQbGEHoivD69YOZ9in+3sB3t+fQcG2
+ QLUFD6VBpXxjH6jV6LiFu6GxLy1HYAmxXEiQ60mBU7P2h1/Rom04uWqoecOGUT+PZJSg
+ rzyg==
+X-Gm-Message-State: AOJu0YyZxWRAuYQq415ZuQ7CdtSmCbC0WXQK8mMBX18QbHGf+OaKJHL3
+ V8Z4T5P4POlIB+zn02HBVIJo9sRrvGOu3Hzii/ZEbA==
+X-Google-Smtp-Source: AGHT+IHLv9x8pWhzgTW8t30WnBH+tlgTk5VdXOMyBbPYMps7qW0kIUYP9xn1kVRcHHMoFNRDd628vYzoG73D02SYhzw=
+X-Received: by 2002:a17:90b:1b45:b0:27d:9f6:47a3 with SMTP id
+ nv5-20020a17090b1b4500b0027d09f647a3mr3744010pjb.31.1699581413229; Thu, 09
+ Nov 2023 17:56:53 -0800 (PST)
 MIME-Version: 1.0
 References: <20231109223435.706053-1-igor.opaniuk@foundries.io>
-In-Reply-To: <20231109223435.706053-1-igor.opaniuk@foundries.io>
+ <20231109223435.706053-2-igor.opaniuk@foundries.io>
+In-Reply-To: <20231109223435.706053-2-igor.opaniuk@foundries.io>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 9 Nov 2023 19:55:21 -0600
-Message-ID: <CAPLW+4=RPq1mQVo081JUsMyn+Zo=0AgJSH7WXMfoxe8O_DXr5A@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] poplar: use random mac address
+Date: Thu, 9 Nov 2023 19:56:42 -0600
+Message-ID: <CAPLW+4kfwMdxxJgYoYNnGnMQsi-UoOUU0_QAdgAWPyJz_Kn4bg@mail.gmail.com>
+Subject: Re: [PATCH v1 2/2] poplar: provide more space for kernel image
 To: Igor Opaniuk <igor.opaniuk@foundries.io>
 Cc: u-boot@lists.denx.de, Peter Griffin <peter.griffin@linaro.org>, 
  Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, 
@@ -92,13 +93,10 @@ X-Virus-Status: Clean
 On Thu, Nov 9, 2023 at 4:34=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foundries=
 .io> wrote:
 >
-> Set CONFIG_NET_RANDOM_ETHADDR=3Dy, which sets random eth address in
-> case there is no configuration provided neither in CONFIG_ETHADDR
-> nor in "ethaddr" env variable.
+> Adjust mem layout, providing more space for linux kernel image.
 >
 > This fixes the problem:
-> poplar# dhcp
-> Error: ethernet@9841000 address not set.
+> ERROR: FDT image overlaps OS image (OS=3D0x30000000..0x32580000)
 >
 > Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
 > ---
@@ -106,21 +104,41 @@ On Thu, Nov 9, 2023 at 4:34=E2=80=AFPM Igor Opaniuk <igor.opaniuk@foundries=
 Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
 >
->  configs/poplar_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  include/configs/poplar.h | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/configs/poplar_defconfig b/configs/poplar_defconfig
-> index f0ab2319a4..b6e0c3166c 100644
-> --- a/configs/poplar_defconfig
-> +++ b/configs/poplar_defconfig
-> @@ -22,6 +22,7 @@ CONFIG_CMD_USB=3Dy
->  # CONFIG_ISO_PARTITION is not set
->  CONFIG_ENV_IS_IN_MMC=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> +CONFIG_NET_RANDOM_ETHADDR=3Dy
->  CONFIG_USB_FUNCTION_FASTBOOT=3Dy
->  CONFIG_FASTBOOT_BUF_ADDR=3D0x20000000
->  CONFIG_FASTBOOT_BUF_SIZE=3D0x10000000
+> diff --git a/include/configs/poplar.h b/include/configs/poplar.h
+> index 6e8adf9187..629b335f5d 100644
+> --- a/include/configs/poplar.h
+> +++ b/include/configs/poplar.h
+> @@ -37,11 +37,11 @@
+>                         "env_mmc_blknum=3D0xf80\0"                       =
+ \
+>                         "env_mmc_nblks=3D0x80\0"                         =
+ \
+>                         "kernel_addr_r=3D0x30000000\0"                   =
+ \
+> -                       "pxefile_addr_r=3D0x32000000\0"                  =
+ \
+> -                       "scriptaddr=3D0x32000000\0"                      =
+ \
+> -                       "fdt_addr_r=3D0x32200000\0"                      =
+ \
+> +                       "pxefile_addr_r=3D0x33000000\0"                  =
+ \
+> +                       "scriptaddr=3D0x33000000\0"                      =
+ \
+> +                       "fdt_addr_r=3D0x33200000\0"                      =
+ \
+>                         "fdtfile=3Dhisilicon/hi3798cv200-poplar.dtb\0"   =
+ \
+> -                       "ramdisk_addr_r=3D0x32400000\0"                  =
+ \
+> +                       "ramdisk_addr_r=3D0x33400000\0"                  =
+ \
+>                         BOOTENV
+>
+>  #endif /* _POPLAR_H_ */
 > --
 > 2.34.1
 >
