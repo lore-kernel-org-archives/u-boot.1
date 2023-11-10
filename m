@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3401C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 04:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D9BC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 05:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5671B877A5;
-	Fri, 10 Nov 2023 05:28:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EA6598777D;
+	Fri, 10 Nov 2023 06:38:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G/zHShEF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kg40F3c1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B8E887783; Fri, 10 Nov 2023 05:28:07 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 1BE2E8776A; Fri, 10 Nov 2023 06:38:57 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED1048779C
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 05:27:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E3741877BF
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 06:38:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-5b9a7357553so1340454a12.0
- for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 20:27:47 -0800 (PST)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-9e4675c7a5fso267573066b.0
+ for <u-boot@lists.denx.de>; Thu, 09 Nov 2023 21:38:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699590461; x=1700195261; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9yfAtkx/MLAaC2e3oTVCEdGrlnmIaFPaJzkqM3lqaYU=;
- b=G/zHShEFZgkGEY5i5m4OoSTt51cfmTFnHerz5VRmAJdrJrtdUSxGZ5cz+VfvIKzqrx
- v+4Y6VGGmQlifBQ7/rnciuI9aC+rqpWXk79v57fP0EDm0BHPaiekdoQ3z75bV4MtNltO
- 0aH3/g5lyWHFfekzqmuh0qgXUdl93ZIOY/PwwRkkZNGOUcOK3cfCwDDgvFODlQh9cBru
- 5rkoWb4TIPrWGVFBBNXm1rVhfuuJZh3ICbY8BAbZG6eRKXevCGMIuQTuKitFDldvV4nx
- bQqxkifTrqOqcvf+Hx+jzSmZPhJfNB3uuuqZQ8VCxSO2r9XMiaKZQEaz/UUT/RCKI8JP
- xk0g==
+ d=gmail.com; s=20230601; t=1699594734; x=1700199534; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TIUeTfHZJpdQGhXbzIaTd9LQJxWd7PXBR9BPs/mFQk8=;
+ b=kg40F3c1VJ2Dw2zASOoL+nK30hLE3tYnm+kpCaxDQN9bDjCpTlAC0jh4YqHpxfozMv
+ znMcZ0A3U2D+rzx6b6JtP6J+O44w5iY6CmrKMhUhRZFwA9sxq3DFT/1YKu6nLr1L001v
+ wrWJ46bo4KurIDUbBbdA5zaUGiYUUsP4bGaL/hJ93wbR494VbWuTAhim6AczSUUgJJl8
+ N0UMvERSEqbXmps1Ic7TiqsTDjgUrqPyk+sFnRRfJnwhP2zWrUDWbNaxBdl6htRouziQ
+ dQ4JkqKcQjCWzBKYr04gdzcQGpVq33TnPuuMELGzRREAcu4TqCn2RAcdSfnqiIM5WWMf
+ D5hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699590461; x=1700195261;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9yfAtkx/MLAaC2e3oTVCEdGrlnmIaFPaJzkqM3lqaYU=;
- b=m7765guAgVBqw5PfsqlOIbx/O0aOb/J8deQc6ol/jTyzvWRrCFZb7eu2fm/RacrrYV
- yZ7vrE3YE2BSOrZ5jABWhjK6rCnMNBzZwjGKKOFQCcSyXOa1JrHJwFADC5mFiUOpR36y
- 6o+/fa6n5p1xhPiIRHVbLGkB/+hPeO5eHEk4nQRfIwQGHyg5NpZtIpUkmOj1BDR83+UK
- p1ArzwR2y/0LP0Y5Pc6HnEn/zjXXoynSo6zMaPv9UN38RlzG1BCkblM3KzqPsQg4Fecd
- AuRgVJynTPDVeG7eyWjgbtMCR68AFImgS8qr/rCOvygK/0+j57hKVq6V9FczhbLRVj3z
- Ia+g==
-X-Gm-Message-State: AOJu0YyQ3k43BsVUWnwmTriOiZdasrUlVwURSl8kNBMejizMdFPTRPPE
- 9Z3/rMm3Im7K36o1oa8Y/V92E8y9LTDpmNRneys=
-X-Google-Smtp-Source: AGHT+IGVRMlOvtQdbMYZAWast4EbSAJwWqIkPxRHob639D77jWhE0+ZA6DHhs6/xBme1FLIvWabUiQ==
-X-Received: by 2002:a17:90b:38cb:b0:280:e85a:9dde with SMTP id
- nn11-20020a17090b38cb00b00280e85a9ddemr4145136pjb.33.1699590461222; 
- Thu, 09 Nov 2023 20:27:41 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- v18-20020a17090ac91200b00273744e6eccsm605226pjt.12.2023.11.09.20.27.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Nov 2023 20:27:40 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v12 9/9] doc: uefi: add HTTP Boot support
-Date: Fri, 10 Nov 2023 13:25:42 +0900
-Message-Id: <20231110042542.3797301-10-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231110042542.3797301-1-masahisa.kojima@linaro.org>
-References: <20231110042542.3797301-1-masahisa.kojima@linaro.org>
+ d=1e100.net; s=20230601; t=1699594734; x=1700199534;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TIUeTfHZJpdQGhXbzIaTd9LQJxWd7PXBR9BPs/mFQk8=;
+ b=BuhGcgT+7cyLKlqlowNR4NwKVE+G9G6ItyglsvPf7RebZURPTRMgU7zBvdToDEdeVG
+ 1QljPYFid4/uouOgrUt8fNGzVAZFizmddtE3EBcwp0IUOYvYgpAlor0IIOFYCK1pCwbN
+ zvgLTvtHL4ut6lqHrnjKXBfK5kjqbEpfgCKJzapNPuIaQvtGeDPsDo28g14f7p+COZZI
+ 3z1ul+chwXYQYfsO3qHcusrg24aW2iuwdt7ocNvM0FZtOoYfa+amSw1HdGgGg3NZXUUy
+ BEDRdhtRy6ojvE0v+3RNKHFVN90mZfFJf7vd726MmeFkor7Yg1gFZ3bO79Lze6MNgEAR
+ FuEA==
+X-Gm-Message-State: AOJu0YzWDkGCcRcFm28I289/WalFpi+lXv34RbCam0F1ONm3AL1ymjYO
+ JfPP26oDxH+4oAYYtaggXvXOUWPMZnGaDGq07T4=
+X-Google-Smtp-Source: AGHT+IFDP/7qSoPH7vrisElty2YunisV4TP3MW6Mpm535hIXZqHT1gFRveVGcVXCeSue47f6qP3Dg3ghOp2CME1cD0o=
+X-Received: by 2002:a17:906:eec1:b0:9e0:9d26:420a with SMTP id
+ wu1-20020a170906eec100b009e09d26420amr5988743ejb.65.1699594734079; Thu, 09
+ Nov 2023 21:38:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231027002409.430285-1-judge.packham@gmail.com>
+ <20231027094947.bhtwngq26e3loya5@google.com>
+ <20231027172237.GB496310@bill-the-cat>
+ <20231109213348.GP6601@bill-the-cat>
+In-Reply-To: <20231109213348.GP6601@bill-the-cat>
+From: Chris Packham <judge.packham@gmail.com>
+Date: Fri, 10 Nov 2023 18:38:40 +1300
+Message-ID: <CAFOYHZAbkKLuC9KiH0KNz7hj31QsYohmJRCgu-Pk_yr4yXtEDw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] Revert HAFDBS changes
+To: Tom Rini <trini@konsulko.com>
+Cc: =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ u-boot <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Marc Zyngier <maz@kernel.org>, 
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Will Deacon <willdeacon@google.com>, 
+ Ye Li <ye.li@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ meitao <meitaogao@asrmicro.com>, Alistair Delva <adelva@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,55 +95,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the description about HTTP Boot.
+On Fri, 10 Nov 2023, 10:33 am Tom Rini, <trini@konsulko.com> wrote:
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- doc/develop/uefi/uefi.rst | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+> On Fri, Oct 27, 2023 at 01:22:37PM -0400, Tom Rini wrote:
+> > On Fri, Oct 27, 2023 at 10:49:47AM +0100, Pierre-Cl=C3=A9ment Tosi wrot=
+e:
+> > > Hi Chris,
+> > >
+> > > On Fri, Oct 27, 2023 at 01:23:51PM +1300, Chris Packham wrote:
+> > > > As discussed this series reverts the HAFDBS changes that caused an
+> issue
+> > > > on AC5/AC5X. I think there are some improvements that can be made t=
+o
+> the
+> > > > initial memory map for the AC5/AC5X but so far nothing I've found
+> makes
+> > > > it compatible with the HAFDBS changes.
+> > >
+> > > Would you mind briefly explaining what those issues are and/or point
+> me to the
+> > > discussion where it was decided to revert these patches?
+> > >
+> > > The feature is quite useful for users of CONFIG_CMO_BY_VA_ONLY, to
+> speed up the
+> > > boot sequence: instead of reverting these patches altogether, would a
+> reasonable
+> > > alternative be to put them behind a build option?
+> > >
+> > > Also, could you confirm that the "initial memory map" you are
+> referring to above
+> > > only describes actual memory as, IIRC, some boards were using mapping=
+s
+> **much**
+> > > larger than their DRAM address space?
+> >
+> > The most details are in this thread:
+> >
+> https://lore.kernel.org/u-boot/CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=3DJ0oH=
+yvN75bTaCUw@mail.gmail.com/
+> > with some follow-up in:
+> >
+> https://lore.kernel.org/u-boot/CAFOYHZB7jJWwD24oWzx6u55w2whHYjK56f=3DQyN0=
+LWU4Z8dSP+Q@mail.gmail.com/
+>
+> Checking to see if you have any feedback for these platforms? I would
+> like to have them working again one way or another in v2024.01, thanks.
+>
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index fb16ac743a..ca9a573669 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -642,6 +642,36 @@ UEFI variables. Booting according to these variables is possible via::
- As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
- command 'efidebug' can be used to set the variables.
- 
-+UEFI HTTP Boot
-+~~~~~~~~~~~~~~
-+
-+HTTP Boot provides the capability for system deployment and configuration
-+over the network. HTTP Boot can be activated by specifying::
-+
-+    CONFIG_CMD_DNS
-+    CONFIG_CMD_WGET
-+    CONFIG_BLKMAP
-+
-+Set up the load option specifying the target URI::
-+
-+    efidebug boot add -u 1 netinst http://foo/bar
-+
-+When this load option is selected as boot selection, resolve the
-+host ip address by dns, then download the file with wget.
-+If the downloaded file extension is .iso or .img file, efibootmgr tries to
-+mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-+If the downloaded file is PE-COFF image, load the downloaded file and
-+start it.
-+
-+The current implementation tries to resolve the IP address as a host name.
-+If the uri is like "http://192.168.1.1/foobar",
-+the dns process tries to resolve the host "192.168.1.1" and it will
-+end up with "host not found".
-+
-+We need to preset the "httpserverip" environment variable to proceed the wget::
-+
-+    setenv httpserverip 192.168.1.1
-+
- Executing the built in hello world application
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--- 
-2.34.1
+Either this series or
+https://lore.kernel.org/u-boot/20231018205358.1557234-1-judge.packham@gmail=
+.com/
+will get the AC5X boards back working. I'm out of other ideas but happy to
+test patches.
 
+>
