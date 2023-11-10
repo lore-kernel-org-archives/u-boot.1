@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B0AC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 18:29:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC9DC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 19:20:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 124B3877D8;
-	Fri, 10 Nov 2023 19:29:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B77D187750;
+	Fri, 10 Nov 2023 20:20:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FGdLWzzz";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Rg1cmvJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73DB98783F; Fri, 10 Nov 2023 19:29:47 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8F59A87654; Fri, 10 Nov 2023 20:20:02 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E9808761C
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 19:29:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C544587754
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 20:19:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5a9bf4fbd3fso1861136a12.1
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 10:29:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699640981; x=1700245781; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zIQTIIJ9gi/F0OIMrrUllGjupqr83/virVpjzYOlJWE=;
- b=FGdLWzzzTd14F+QG7g1PQUJDJk5UJejTF7WyMOGqRlsbNfVVkTMHzo5GIy75ziidHr
- fMDFubN88GkXgKdxBYmwtfcwidoi6KJ3NPRQVk1tsqMWNF2LzJGzhCX3/Zmyrw6dxZlv
- EclNxLw4DQ5hDbqvHVdFlugiu8bPi+MyNvU2d80fCFpx69cPEUKzWtfXQAJwFq416zcV
- s6UMpmDwo+0Fgo49nsbRHuWJBMVMQwGyFGzwwMezZHmnxXoP85DytSSZkkiIm0M3mXoO
- 71bmbFbv2mgyyIAa3fJsp1ezR2FfE0VglU8vggRQctsrvtsBF4eOthcN3RDJswJF6In0
- XHNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699640981; x=1700245781;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zIQTIIJ9gi/F0OIMrrUllGjupqr83/virVpjzYOlJWE=;
- b=VE1VQ4mNbGFosFY8+JvJJz+QKRGmjMYM5s72kW7iio93rCpdJFSld0G0F7GwTBTf6r
- OG3BOp04v3UJECvdVff+cp3XzY795qnw1gvFGbPCj+kdxRQCk6qldrbeSxjjZTpNRVMK
- i1Tpi2znoQw+td5lAJrw0ZQ//BAWlhuiKJNUuptzsZzyTnVXbKAPt7qjtj20v9N0vjSL
- RYdho4sDb4c90LWIB+93ISWlAzpZiPVy4zmefYJzo/IeSviYehIJHGOhDWBk/KQPhdw3
- PEh9jt5E1yCTrWMfloRuqejFWZ6CZQ74wMAWrl5f+qMfNu5myBCWwBSHmAQ+Gup3y+vO
- T+cw==
-X-Gm-Message-State: AOJu0YwBgT/c8QgUHRV3a4odfd1jGwB+JY+Dst8n8iyfYKUoUk8bmQ1N
- JX0i/fi5QPlsBlnyN8TDFdUrYdaYhgVVxPxycAzxgUtGTbKD6VxKVIQ=
-X-Google-Smtp-Source: AGHT+IFta0SKPNn/X9AVfzdHYyv/Wpnx7nVuNz7LE6wjBSzGi3X2QJ10RFOiyYVmOZfv3z7XXT42TaHXMd6DRD05sek=
-X-Received: by 2002:a17:90a:3181:b0:280:18bd:ffe7 with SMTP id
- j1-20020a17090a318100b0028018bdffe7mr5019662pjb.48.1699640981554; Fri, 10 Nov
- 2023 10:29:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DF31C61AC6;
+ Fri, 10 Nov 2023 19:19:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id ABAA8C433C9;
+ Fri, 10 Nov 2023 19:19:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699643997;
+ bh=VPe+oV2DEeTiE+iWuNlng3t5tsNG+NcrczJS0uRiVpo=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=Rg1cmvJeBtSa0+/eUbCS/wnx/l0f0R5rse9ZgzKkhFjX2NS17WIhodXkfHc/rMnHT
+ RTg6vqWxVknsfZSFjBiVdwIJiKYwSA3omiXuwNcd+yh5Pm+ejA+n/jBPb2SLpMRM2k
+ GY6CHLRCf4bQDs+SyVTlbx5ymApT16SUvDg+Uo6ZRclEcxriZs0LN6REzBXtP/Grbq
+ BX0ts+a8ut6AW36kvaESNq+blGy6mCmgVPG4ecD8XRXRMNQCQbGLzu9wNe3NCups8u
+ aTXwTx1+ghh2hk+ShzVthzCB2lfNdQWOI+V3jptbh05SHE4Gg3+rJpBm7PClfJh68/
+ F81/AlfVjwKvQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF3BC4167D;
+ Fri, 10 Nov 2023 19:19:57 +0000 (UTC)
+From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
+Date: Sat, 11 Nov 2023 03:19:52 +0800
+Subject: [PATCH v2] clk: check parent_name in clk_register to avoid
+ confusing log_error() output
 MIME-Version: 1.0
-References: <20231107190601.17151-1-semen.protsenko@linaro.org>
- <20231107190601.17151-3-semen.protsenko@linaro.org>
- <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Fri, 10 Nov 2023 12:29:30 -0600
-Message-ID: <CAPLW+4mtbbEZmQtik_qEtmo0Ehr7R=-yZOO8xVL2Dp0rCCHZ4Q@mail.gmail.com>
-Subject: Re: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20230807-clk-fix-v2-1-0b688e21fb4e@outlook.com>
+X-B4-Tracking: v=1; b=H4sIAFeCTmUC/z2Nyw6CMBREf4Xctde0VdLiyv8wLEq5SMOjpK1EQ
+ /h3WxJdnpmTmQ0CeUsBbsUGnlYbrJsTiFMBptfzk9C2iUEwcWGKSTTjgJ19I5ekqrKTleISkt3
+ oQNh4PZs++5MOkXwuFk/JPy4edeLehuj853hceU5/49V/fOXIUDHVNprKK5V0d684OjecjZug3
+ vf9C4qsuOm5AAAA
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
+X-Mailer: b4 0.12.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1699643996; l=1981;
+ i=forbidden405@outlook.com; s=20230415; h=from:subject:message-id;
+ bh=EhPK7ucNW+E0Yp0KcbIofxN1hvfnmLx5BFY4JsVqXag=;
+ b=S31tMR/BIpt98MPWMGFJ0J2158bMKoiQnokSn5QZnWzECAor7fwieaaK7ukdTHbymTDHxmTYN
+ UCNEyQRJpi4BPW9YnuTRTPlSSxjn5XOs3GQrC/WH9v4JXHAEQvfS/ba
+X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
+ pk=hfdpPU3AXR+t7fdv58tXCD4UzRNq+fop2TMJezFlAhM=
+X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230415 with
+ auth_id=44
+X-Original-From: Yang Xiwen <forbidden405@outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,93 +80,71 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+From: Yang Xiwen <forbidden405@outlook.com>
 
-On Tue, Nov 7, 2023 at 10:26=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Sam,
->
-> On Tue, 7 Nov 2023 at 12:06, Sam Protsenko <semen.protsenko@linaro.org> w=
-rote:
-> >
-> > Use dev_read_u8_default() instead of fdtdec_get_int() to read the "id"
-> > property from device tree, as suggested in [1]. dev_* API is already
-> > used in this driver, so there is no reason to stick to fdtdec_* API.
-> > This also fixes checkpatch warning:
-> >
-> >     WARNING: Use the livetree API (dev_read_...)
-> >
-> > [1] doc/develop/driver-model/livetree.rst
-> >
-> > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > ---
-> >  drivers/serial/serial_s5p.c | 5 +----
-> >  1 file changed, 1 insertion(+), 4 deletions(-)
-> >
-> > diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
-> > index 177215535676..c57bdd059ea6 100644
-> > --- a/drivers/serial/serial_s5p.c
-> > +++ b/drivers/serial/serial_s5p.c
-> > @@ -20,8 +20,6 @@
-> >  #include <serial.h>
-> >  #include <clk.h>
-> >
-> > -DECLARE_GLOBAL_DATA_PTR;
-> > -
-> >  enum {
-> >         PORT_S5P =3D 0,
-> >         PORT_S5L
-> > @@ -220,8 +218,7 @@ static int s5p_serial_of_to_plat(struct udevice *de=
-v)
-> >
-> >         plat->reg =3D (struct s5p_uart *)addr;
-> >         plat->reg_width =3D dev_read_u32_default(dev, "reg-io-width", 1=
-);
-> > -       plat->port_id =3D fdtdec_get_int(gd->fdt_blob, dev_of_offset(de=
-v),
-> > -                                       "id", dev_seq(dev));
-> > +       plat->port_id =3D dev_read_u8_default(dev, "id", dev_seq(dev));
-> >
-> >         if (port_type =3D=3D PORT_S5L) {
-> >                 plat->rx_fifo_count_shift =3D S5L_RX_FIFO_COUNT_SHIFT;
-> > --
-> > 2.39.2
-> >
->
-> Really this property should not be needed anymore. Can you figure out
-> how to drop it?
->
+For some gate clocks and fixed clocks without a parent, calling
+clk_register will print an useless error message indicating that parent
+is missing. Fix that by gaurding log_xxx() with an if-statement.
 
-The 'port_id' seems to be needed for ARCH_EXYNOS4 boards. Because
-Exynos4 doesn't have proper DM clocks, it uses 'id' property to get
-corresponding UART clock frequency from its mach code.
+Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+Suggested-by: Sean Anderson <seanga2@gmail.com>
+---
+It's found during my development for HiSilicon clock driver.
+---
+Changes in v2:
+- drop the commit which exports clk_mux_register.
+- drop the commit which is already merged
+- drop ccf enable_count fix as it'll be in another patchset
+- use Anderson's patch for clk_register()
+- Link to v1: https://lore.kernel.org/r/20230809-clk-fix-v1-0-808dbae54e5e@outlook.com
+---
+ drivers/clk/clk.c | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
 
-Here is what's happening in the serial driver in case of Exynos4:
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index a5a3461b66..6ede1b4d4d 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -18,17 +18,19 @@
+ int clk_register(struct clk *clk, const char *drv_name,
+ 		 const char *name, const char *parent_name)
+ {
+-	struct udevice *parent;
++	struct udevice *parent = NULL;
+ 	struct driver *drv;
+ 	int ret;
+ 
+-	ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
+-	if (ret) {
+-		log_err("%s: failed to get %s device (parent of %s)\n",
+-			__func__, parent_name, name);
+-	} else {
+-		log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
+-			  parent->name, parent);
++	if (parent_name) {
++		ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
++		if (ret) {
++			log_err("%s: failed to get %s device (parent of %s)\n",
++				__func__, parent_name, name);
++		} else {
++			log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
++				  parent->name, parent);
++		}
+ 	}
+ 
+ 	drv = lists_driver_lookup_name(drv_name);
 
-  1. get_uart_clk(port_id) is called
-  2. which in turn calls exynos4_get_uart_clk(port_id)
-  3. which uses "port_id" value to read corresponding bits of of
-CLK_SRC_PERIL0 register
-  4. those bits are used to get corresponding PLL clock's frequency
-  5. which is in turn used to calculate UART clock rate
-  6. calculated rate is returned by get_uart_clk() to serial driver
+---
+base-commit: 580eb31199be8a822e62f20965854a242f895d03
+change-id: 20230807-clk-fix-17e895f79817
 
-So I don't see any *easy* way we can get rid of that id property.
+Best regards,
+-- 
+Yang Xiwen <forbidden405@outlook.com>
 
-The proper way of doing that would require converting Exynos4 clock
-code to CCF (enabling CONFIG_CLK_EXYNOS). Which of course also means
-implementing clocks in dts, akin to kernel's exynos4.dtsi. Then it'll
-be possible to get rid of 'id' property.
-
-Maybe I'm missing something, please let me know.
-
-Thanks!
-
-> Regards,
-> Simon
