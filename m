@@ -4,71 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13CE8C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 11:51:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE2FC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 11:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951688770F;
-	Fri, 10 Nov 2023 12:50:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2286187743;
+	Fri, 10 Nov 2023 12:50:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YeHelQ5F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Pa9oyB7c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A23AD874D3; Fri, 10 Nov 2023 12:50:46 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 6956187585; Fri, 10 Nov 2023 12:50:49 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C4A187585
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 12:50:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8B0287785
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 12:50:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9e4675c7a5fso312698166b.0
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 03:50:44 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5446c9f3a77so3351223a12.0
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 03:50:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699617043; x=1700221843; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lo2mXY4rRuzqobjjN2116GdAajCU/zn4UqBn3wCYtKc=;
- b=YeHelQ5F8N4uRoSIm9u/P1DM1dNrh4+uglJSJCkO+caIr+WYAyFdApCVybNJxhNzRt
- Bge5h8WyhkL38EZm/s+WiBt96IJN5/zGLHl/mlOdGLSoKwqGpbfz5Uf8qtzBe5Puz4k3
- zioPBi0zycDA0LfKG7ANoWhlByThRSLxHXdXc=
+ d=chromium.org; s=google; t=1699617047; x=1700221847; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=kJBsVqWalDGiOGBhd3fdkJrBEx/30rh7mVlmqH9WDUU=;
+ b=Pa9oyB7c+yDiQjKS3Vab6e/qIS0Y74WYI99mLp4pFWlUbSuuv1v2W8pB7Le2RoEM5A
+ v73BOlZDA9rvlqkh7y+kA1ukz2bnHD5x8ds+O0UkfC2UosWLSvNI28OVHWFIlWH2F2ot
+ 5izrvvi4MSgROpElb+9rB7e4f/WnT1KpxdukU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699617043; x=1700221843;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lo2mXY4rRuzqobjjN2116GdAajCU/zn4UqBn3wCYtKc=;
- b=WJmlIJWdTVKIFsRP34ZjlFZayi8UeCjvcYgK575K0W77EMY3ERDSNncIkciRyy8f3H
- 1+WXpCIViAAbG+YiKbkInEqlB/fbXQon6yC2dImnc6Ajc4TARuikfJ7keXALMK7rFJn5
- uXIuIt6tAx+LNJ95+5N3kb4uWTCGtg4+0pJgfp31eVbsGIAIS0PqJzHfRgdD0fh/yboJ
- 3nrs34eVAiQr9EhgLNZ8Q6DLzH00IfLpJh7AD2dCy7c8itqDsuMOM1E+bB1Q3t9sYJWN
- Y/BkfM7/vz+PUThH0JAfbshoNnR/kFE8lEls5as113IshnKYRn9JASqnDOwQIdrmqVYn
- yCPQ==
-X-Gm-Message-State: AOJu0YyGlSZybkQqHiq4vZYYNnwFmgqkjf3UstuSpW5Nc1UxPH7zr0lr
- jwBAyIrDLcUXWBVW8fQzSb86/bQH/sXGmMxa4TYmzQ==
-X-Google-Smtp-Source: AGHT+IFaxzv6KCbL9vAiHQNSsfjqa1bBAQDDD6lE62LNm2G39C23k/sAQ5WSMKRMc6ALrG6S1ukPSxrXqkjmQKCQrQQ=
-X-Received: by 2002:a17:907:72c2:b0:9b2:6d09:847c with SMTP id
- du2-20020a17090772c200b009b26d09847cmr6773587ejc.10.1699617043248; Fri, 10
- Nov 2023 03:50:43 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699617047; x=1700221847;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kJBsVqWalDGiOGBhd3fdkJrBEx/30rh7mVlmqH9WDUU=;
+ b=NCsYtwmzqDvnFixzaZyAqPIozDm1pue3K//T2l+Iwrrr930tbX4DFi0gpczyhQspQ/
+ UcWOTKty9pakNC+oWijTPJH5g9RCasxmiaSmn64W4ije0rffjyhGor3KFjwyUVAooSj5
+ sRu9K99wllCBRKzv0OBKB6NW4CSj2pdEXlOSfzSFG8bTSIW6kSHxS+p6DuUTV45tUi8b
+ NFkyh+xNEIZDiyAKOdPU2EfFjbpz9ZqlWBjz0l6OawBAG120JjUaSqgb2sQc2NsvTJ01
+ t+XHSEjmvQNi8Pj7jaIlhWld2KF/NKYAvop8M81erOhdIzZBaQ3r69qGCVtAETkP6Ogk
+ dKlA==
+X-Gm-Message-State: AOJu0YzauyJhidgMpHfc/4vHq9dnz9ERRMQOP+hQMUzPyTS3smXX7mjc
+ vxnZSxRLl/il8KqykMwwSDYEcr4W4Q6NOeyxF66QiG+iMxnFi5ebC4c=
+X-Google-Smtp-Source: AGHT+IEeSqSvGonx8hW9nbt24VW6uTE0zuQrSb4d0j/86Io3XkVRUty/8Of7zuWfwjaNsL+q0xRjhbdAOLb8cFkVR/4=
+X-Received: by 2002:a17:907:318e:b0:9e3:675f:e36b with SMTP id
+ xe14-20020a170907318e00b009e3675fe36bmr5391305ejb.59.1699617046975; Fri, 10
+ Nov 2023 03:50:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20230218122525.3815554-1-mchitale@ventanamicro.com>
- <20230503203441.GA824307@bill-the-cat>
- <CAN37VV5a2KV4R09SJC6TMcp=00wKQ9bmeTRi9rfKpjEqWcmmSg@mail.gmail.com>
- <20230508150808.GB2398826@bill-the-cat>
-In-Reply-To: <20230508150808.GB2398826@bill-the-cat>
+References: <20231109163507.24096-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231109163507.24096-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Nov 2023 04:50:31 -0700
-Message-ID: <CAPnjgZ3b5DCr8yeRG=sTU5_QytWuXMoXR7okMZ6ekJS8ip7rVg@mail.gmail.com>
-Subject: Re: [PATCH] pci: ecm generic: use dev_read_() interface
-To: Tom Rini <trini@konsulko.com>
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, u-boot@lists.denx.de
+Date: Fri, 10 Nov 2023 04:50:35 -0700
+Message-ID: <CAPnjgZ1+M0_B_rGie-CxFWoHiayZOr-EusfHAYm=e1VgNcEg5A@mail.gmail.com>
+Subject: Re: [PATCH] doc: typo 'form' in qfw.rst
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,50 +80,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Mon, 8 May 2023 at 09:08, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 9 Nov 2023 at 09:35, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Mon, May 08, 2023 at 08:30:15PM +0530, Mayuresh Chitale wrote:
-> > On Thu, May 4, 2023 at 2:04=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
-ote:
-> > >
-> > > On Sat, Feb 18, 2023 at 05:55:25PM +0530, Mayuresh Chitale wrote:
-> > >
-> > > > Use dev_read_() api instead of the fdtdec API to fetch the host
-> > > > controller's reg property value. This is similar to the other host
-> > > > controller drivers such as Sifive, Rockchip etc. Without this chang=
-e,
-> > > > enabling CONFIG_OF_LIVE breaks the PCIe enumeration on Qemu Risc-V =
-virt
-> > > > machine. The issue is described in the link below:
-> > > >
-> > > > Link: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/1
-> > > > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >  drivers/pci/pcie_ecam_generic.c | 21 ++++++++-------------
-> > > >  1 file changed, 8 insertions(+), 13 deletions(-)
-> > >
-> > > This breaks some platforms such as qemu_arm at a minimum.
-> >
-> > Ok. How do I reproduce the issue?
+> %s/form/from/
 >
-> Right, sorry.  So the failure log is:
-> https://source.denx.de/u-boot/u-boot/-/jobs/622397
-> And https://u-boot.readthedocs.io/en/latest/develop/py_testing.html
-> talks about running the pytest suite outside of CI and
-> https://u-boot.readthedocs.io/en/latest/develop/ci_testing.html about
-> how to trigger CI yourself.  One thing that's not documented well enough
-> is that you'll likely want
-> https://source.denx.de/u-boot/u-boot-test-hooks as well as you can just
-> use as-is the "travis-ci" directories (legacy name, used by both gitlab
-> and azure as-is) as the configuration hooks for your system as well and
-> then the network tests will run easily, locally.
+> Fixes: d46bee8c2d24 ("doc: qfw man-page")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  doc/usage/cmd/qfw.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Any update on this one? It is:
-
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/1
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
