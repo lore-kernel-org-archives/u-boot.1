@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5096BC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 13:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E207C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 13:21:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04418877B6;
-	Fri, 10 Nov 2023 14:20:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70614877E9;
+	Fri, 10 Nov 2023 14:20:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="lii127Mu";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tanALpOu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB667877D4; Fri, 10 Nov 2023 14:20:49 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 73FF3876E3; Fri, 10 Nov 2023 14:20:56 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA3A3876E3
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 14:20:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64191877E9
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 14:20:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=9678822151=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3AADAguh002479; Fri, 10 Nov 2023 14:20:41 +0100
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3AA9mEJt021404; Fri, 10 Nov 2023 14:20:52 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=h0tN4jaMzy51YpPv53zw1WyPFUCEhVuQdZX+TZMTqgk=; b=li
- i127MuXf5gWjKJvYTmzgdxpeyJXyvsT6wa8VuJ9cKKNYOJzkKH2PuOhilOdaNBRy
- cW1Z/U7q5fBupL/1AWV022fzkYXCuHnKFftXbr3pyK7h9L/7Zqj2XpppcdXvxzB9
- JMWvq/oq5HFyAeRSbDlnO8Re8pPQzV8N0uovQHClPxuwebRhdySuRU0aWzOfMcI0
- 9yu1eQHmFLpxGSfi0z8foFUpyF54z6paOBvAK9xUFlwbuxzA4hUI7SOHqg1tgXhB
- xHQRn6Qza/Cl15F9o8GhJya6anz7gSeOStRSuBQ7/kFwxF36LIiQ/z1rf8XEjPRx
- /nfLdENqEfU7aiqj8Wmg==
+ selector1; bh=SkpJ65dFskSeS6TTsFHaipi0F6nycEuCJl49ZqQMKvw=; b=ta
+ nALpOu4rxTrjyNElJQfsJIodNC4ojjNjC+Ftt2CQ54mxPzmQZVywUa7QSXcY9OcJ
+ y/FPMU5slE7+9xXHCRR8bxqEw/A4JxH/Za8GU90h6nISCvI4DGcj1sxvDSrKweXb
+ EM5sg6qHoLNnvAb0okSlZCeS9bXnXf8eePU++u1S3WccY6TfT+0BHQri3aV/KwqA
+ FosDWo5AagtgNIstvoKEMnjis+hENoCSxg9YrR1Fv2GfmqntNadv1+L9ZyTor5Xj
+ Ec8+fnqQZp9IkRtMuPvmSPPhSEMxVelrc7meyr80a8TR3Krgjc6D/DnZUCa0gx52
+ lEvRw6FmXtjIFIaC5ZjQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u7w26p8h4-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u84a5n1fk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Nov 2023 14:20:41 +0100 (CET)
+ Fri, 10 Nov 2023 14:20:52 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 12B9E100056;
- Fri, 10 Nov 2023 14:20:39 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A8880100056;
+ Fri, 10 Nov 2023 14:20:51 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DD3C625E535;
- Fri, 10 Nov 2023 14:20:39 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A193A25E53B;
+ Fri, 10 Nov 2023 14:20:51 +0100 (CET)
 Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 10 Nov
- 2023 14:20:39 +0100
-Message-ID: <ffbd0946-57a5-48bd-9ace-d1ff7b9feab3@foss.st.com>
-Date: Fri, 10 Nov 2023 14:20:38 +0100
+ 2023 14:20:51 +0100
+Message-ID: <533af786-67af-4918-9f8d-ca3055241cab@foss.st.com>
+Date: Fri, 10 Nov 2023 14:20:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/9] arm: caches: Make DCACHE_DEFAULT_OPTION accessible
- for ARM64 arch
+Subject: Re: [PATCH v1 2/9] stm32mp: dram_init: Get RAM size from DT if no RAM
+ driver found
 Content-Language: en-US
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Andre Przywara
- <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrice Chotard
+ <patrice.chotard@st.com>
 References: <20231027144304.1002307-1-patrice.chotard@foss.st.com>
- <20231027144304.1002307-2-patrice.chotard@foss.st.com>
- <ca42a456-594f-4b7c-b472-8031412055e7@foss.st.com>
+ <20231027144304.1002307-3-patrice.chotard@foss.st.com>
+ <8febd85e-b390-46c2-b75b-fc4e75122718@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <ca42a456-594f-4b7c-b472-8031412055e7@foss.st.com>
+In-Reply-To: <8febd85e-b390-46c2-b75b-fc4e75122718@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.201.20.54]
@@ -99,57 +98,40 @@ On 11/9/23 10:11, Patrick DELAUNAY wrote:
 > Hi,
 > 
 > On 10/27/23 16:42, Patrice Chotard wrote:
->> This fixes the following compilation error in ARM64:
->> arch/arm/mach-stm32mp/dram_init.c: In function ‘board_get_usable_ram_top’:
->> arch/arm/mach-stm32mp/dram_init.c:59:45: error: ‘DCACHE_DEFAULT_OPTION’ undeclared (first use in this function)
->>     59 |  mmu_set_region_dcache_behaviour(reg, size, DCACHE_DEFAULT_OPTION);
->>        |                                             ^~~~~~~~~~~~~~~~~~~~~
+>> From: Patrice Chotard <patrice.chotard@st.com>
 >>
+>> In case there is no RAM driver retrieve RAM size from DT as fallback.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   arch/arm/include/asm/system.h | 16 ++++++++--------
->>   1 file changed, 8 insertions(+), 8 deletions(-)
+>>   arch/arm/mach-stm32mp/dram_init.c | 7 +++++--
+>>   1 file changed, 5 insertions(+), 2 deletions(-)
 >>
->> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
->> index 0eae857e73a..43f7503571d 100644
->> --- a/arch/arm/include/asm/system.h
->> +++ b/arch/arm/include/asm/system.h
->> @@ -513,14 +513,6 @@ enum dcache_option {
->>   };
->>   #endif
->>   -#if defined(CONFIG_SYS_ARM_CACHE_WRITETHROUGH)
->> -#define DCACHE_DEFAULT_OPTION    DCACHE_WRITETHROUGH
->> -#elif defined(CONFIG_SYS_ARM_CACHE_WRITEALLOC)
->> -#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEALLOC
->> -#elif defined(CONFIG_SYS_ARM_CACHE_WRITEBACK)
->> -#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEBACK
->> -#endif
->> -
->>   /* Size of an MMU section */
->>   enum {
->>   #ifdef CONFIG_ARMV7_LPAE
->> @@ -578,6 +570,14 @@ void psci_system_reset(void);
->>     #endif /* CONFIG_ARM64 */
->>   +#if defined(CONFIG_SYS_ARM_CACHE_WRITETHROUGH)
->> +#define DCACHE_DEFAULT_OPTION    DCACHE_WRITETHROUGH
->> +#elif defined(CONFIG_SYS_ARM_CACHE_WRITEALLOC)
->> +#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEALLOC
->> +#elif defined(CONFIG_SYS_ARM_CACHE_WRITEBACK)
->> +#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEBACK
->> +#endif
->> +
->>   #ifndef __ASSEMBLY__
->>   /**
->>    * save_boot_params() - Save boot parameters before starting reset sequence
-> 
+>> diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
+>> index 7f37b0d2aa2..a1e77a42e4f 100644
+>> --- a/arch/arm/mach-stm32mp/dram_init.c
+>> +++ b/arch/arm/mach-stm32mp/dram_init.c
+>> @@ -24,8 +24,11 @@ int dram_init(void)
+>>       int ret;
+>>         ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>> -    if (ret) {
+>> -        log_debug("RAM init failed: %d\n", ret);
+>> +    /* in case there is no RAM driver, retrieve DDR size from DT */
+>> +    if (ret == -ENODEV) {
+>> +        return fdtdec_setup_mem_size_base();
+>> +    } else if (ret) {
+>> +        log_err("RAM init failed: %d\n", ret);
+>>           return ret;
+>>       }
+>>       ret = ram_get_info(dev, &ram);
 > 
 > 
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
 > Thanks
 > Patrick
-> 
 > 
 Applied to u-boot-stm32/next
 
