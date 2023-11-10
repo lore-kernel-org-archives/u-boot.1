@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E79FC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 11:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98722C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 12:13:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE42487632;
-	Fri, 10 Nov 2023 12:56:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 76E19876C3;
+	Fri, 10 Nov 2023 13:13:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jr9hA7sj";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dc8OYiW7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 941AB8777F; Fri, 10 Nov 2023 12:56:23 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 612F9876E3; Fri, 10 Nov 2023 13:13:09 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A059087585
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 12:56:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFEB987692
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 13:13:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5437d60fb7aso3106312a12.3
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 03:56:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699617380; x=1700222180; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fWWPjOxqHKeAKLWSSfLUJpl1PiswQnaEKXMq+YB1SgI=;
- b=Jr9hA7sjLCGxIxa5aeywkUmDhMGjfSiry1jy9XnRY8HTERNkMcXme8wQoD36vW8c2n
- 21oTHUcYnJj/XOm64bqqapA9IxGKZf7Pc6GZsPsxfoPZXkAAcl7Tcf0ZBIR3CmtPGTnT
- 6ydLqfawoVds+tnRsUxfldEq7sNsYlf6TxVqo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699617380; x=1700222180;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fWWPjOxqHKeAKLWSSfLUJpl1PiswQnaEKXMq+YB1SgI=;
- b=n6UNt5dA7rABxz5MEQ+meej/7VG1nR3UhiVbPgLp53SEar6vnV5b6s++KjXFmq/BH7
- Wp+dUSPrJ0Jz591wHe8F9akfMWn/Wv8VEYb2u0lcNCNFxPl4mEDX3u7dRcM3KoYjnIDh
- bGBJtAVblF3fxbxfVZwpLl632nL98OJ3psYTsXiVOsnj4PQJjeaFdcI/MmqWsfmQHXyc
- GlewS4Lw+dA1fHrs5JXAJJhILPL1MX0b8CjpI46p3ZPX7qZ3SBgVflwjePX/XXFBl6j4
- EdHNT9TluMh3+Ms+MsAVi/VR4ETT5HJoZZLqSlCv9Q+OMdzOqbBqfwAgJfaNMfeUb+Ht
- /ajA==
-X-Gm-Message-State: AOJu0YzEtm+9rfRxpPt/1P1ilRtS6NMarpxUTWBSSXiGAEJkGRdbQsdg
- pOve5i/uc+D9FdNtZ3FJfUr/zJ77qG9c7OnXQrfKlw==
-X-Google-Smtp-Source: AGHT+IF9DBJgi6YS6cU6Tr//GNSmCOtYAef66EXqOFVbHYkF5XNjyAwS38Wrhh84DkTw0xqD8Qix+tmbdhjuekzIGxo=
-X-Received: by 2002:a17:907:bc5:b0:9e4:121c:b9fd with SMTP id
- ez5-20020a1709070bc500b009e4121cb9fdmr4173579ejc.12.1699617380057; Fri, 10
- Nov 2023 03:56:20 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AACCvsF060447;
+ Fri, 10 Nov 2023 06:12:57 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699618377;
+ bh=jyQ6WFnRll/aDGAYZWFks3TXytTNCBNXZNfj/hFBv7A=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=dc8OYiW7/KIDx2dL3tHG8bSht2APy3DpTC+jjw2ivXKGDKPE+47e/Bt+25Y7dUUCZ
+ 6Ytfnl9+6Muo9ND3RtOAdgnG6duanTrd2d8VIBgjTlAvgzVAhfUVOR/4N16VHKR+wq
+ mVA7RletVM7ccUsgjEiqUdM1hizP+IYs3Ut2OgGs=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AACCvrf014669
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 10 Nov 2023 06:12:57 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 10
+ Nov 2023 06:12:57 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 10 Nov 2023 06:12:57 -0600
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AACCvSw027969;
+ Fri, 10 Nov 2023 06:12:57 -0600
+Date: Fri, 10 Nov 2023 06:12:57 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+CC: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>, Joao Paulo
+ Goncalves <jpaulo.silvagoncalves@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, Suman Anna <s-anna@ti.com>,
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>, <u-boot@lists.denx.de>
+Subject: Re: [RFC PATCH 1/1] arm: mach-k3: Enable icache on am625 to boot
+ faster
+Message-ID: <20231110121257.vfjjocgfqvvw4vuw@unmindful>
+References: <20231109140958.1093235-1-joao.goncalves@toradex.com>
+ <20231109173741.cuxbq4rtu4nhvath@pagan>
+ <e27d44a1-03c2-44cf-857f-947c5f4c4796@ti.com>
+ <20231109185119.GG6601@bill-the-cat>
+ <ZU3w+oW5dGI7rGkB@francesco-nb.int.toradex.com>
 MIME-Version: 1.0
-References: <20231109172302.54324-1-heinrich.schuchardt@canonical.com>
- <20231109192419.GH6601@bill-the-cat>
- <9525398a-1326-470e-9894-afb160cde2e6@canonical.com>
- <20231109204157.GI6601@bill-the-cat>
-In-Reply-To: <20231109204157.GI6601@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Nov 2023 04:56:08 -0700
-Message-ID: <CAPnjgZ0AQE3SdnpM-oQgwL7E9AeaqF8VFoAeqDyMF1dTof83tw@mail.gmail.com>
-Subject: Re: [PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Bin Meng <bmeng.cn@gmail.com>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <ZU3w+oW5dGI7rGkB@francesco-nb.int.toradex.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,69 +85,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Heinrich,
+On 09:59-20231110, Francesco Dolcini wrote:
+> On Thu, Nov 09, 2023 at 01:51:19PM -0500, Tom Rini wrote:
+> > On Thu, Nov 09, 2023 at 12:44:56PM -0600, Andrew Davis wrote:
+> > > On 11/9/23 11:37 AM, Nishanth Menon wrote:
+> > > > On 11:09-20231109, Joao Paulo Goncalves wrote:
+> > > > > Enable the am625 instruction cache on SPL and U-boot earlier for the A53
+> > > > > to execute code a bit faster. For normal boot flow, it was possible to
+> > > > > gain about 2 seconds on boot time.
+> > > > > 
+> > > > > Signed-off-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+> > > > > ---
+> > > > > Hello all,
+> > > > > 
+> > > > > We are trying to optimize boot time on our AM62 devices and on TI community
+> > > > > forum [1] someone advised to enable ICACHE for am625. We enabled it, tested and got
+> > > > > around 2 seconds faster boot on storage media and about 5 seconds with DFU
+> > > > > for downloading images from A53 SPL. However, we don't know if this is the correct
+> > > > > solution and want more comments on this or why the ICACHE was not enabled by TI in
+> > > > > the first place.
+> > > > > 
+> > > > > [1] https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1217839/am625-boot-time-between-a53-spl-and-a53-u-boot
+> > > > > 
+> > > > > Regards,
+> > > > > Joao Paulo Goncalves
+> > > > > 
+> > > > >   arch/arm/mach-k3/am625_init.c | 3 +++
+> > > > >   1 file changed, 3 insertions(+)
+> > > > > 
+> > > > > diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+> > > > > index 8fa36f7b91..d665d07b0b 100644
+> > > > > --- a/arch/arm/mach-k3/am625_init.c
+> > > > > +++ b/arch/arm/mach-k3/am625_init.c
+> > > > > @@ -210,6 +210,9 @@ void board_init_f(ulong dummy)
+> > > > >   			panic("DRAM init failed: %d\n", ret);
+> > > > >   	}
+> > > > >   	spl_enable_dcache();
+> > > > > +
+> > > > > +	if (!IS_ENABLED(CONFIG_CPU_V7R) && !IS_ENABLED(CONFIG_SYS_ICACHE_OFF))
+> > > > > +		icache_enable();
+> > > > >   }
+> > > > >   u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+> > > > > -- 
+> > > > > 2.34.1
+> > > > 
+> > > > Just noticed that icache_enable was missed for all of k3 as well - I
+> > > > suspect this is a miss rather than anything consciously done. btw
+> ...
+> > > We enable Icache in SPL for our CPU_V7R case inside setup_mpu_regions()(??)
+> > > We also enable Dcache in spl_enable_dcache(), maybe this should be
+> > > renamed spl_enable_cache() and it call enable_caches() which enables
+> > > both. Just be careful to invalidate the icache when enabling after
+> > > relocation.
+> > > 
+> > > This would be temporary, better solution would be to add it to the
+> > > SPL common board_init_r() to match the U-Boot one, that way all these
+> > > platforms wouldn't need to do it in their current inconsistent ways.
+> > 
+> > I will say that part of the reason we don't have a more high-level
+> > "enable all the caches in SPL on ARMv7" is that I never could figure out
+> > why on earth it locked up my am335x GP EVM, I believe. So yes, I'd be
+> > quite happy to see the mach-k3 case cleaned up and made generic to
+> > enable (and then disable/flush/enable in full). But we can't easily make
+> > it higher-level than that.
+> 
+> So the plan would be to enable the cache for SPL in mach-k3 and not just
+> for AM625, correct?
 
-On Thu, 9 Nov 2023 at 13:42, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Nov 09, 2023 at 12:28:26PM -0800, Heinrich Schuchardt wrote:
-> > On 11/9/23 11:24, Tom Rini wrote:
-> > > On Thu, Nov 09, 2023 at 09:23:02AM -0800, Heinrich Schuchardt wrote:
-> > >
-> > > > Function acpi_get_rsdp_addr() is needed on all architectures which
-> > > > write ACPI tables. Move the definition from the x86 include to an
-> > > > architecture independent one.
-> > > >
-> > > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > > > ---
-> > > >   arch/x86/include/asm/acpi_table.h | 9 ---------
-> > > >   drivers/misc/qfw.c                | 1 +
-> > > >   include/acpi/acpi_table.h         | 9 +++++++++
-> > > >   3 files changed, 10 insertions(+), 9 deletions(-)
-> > >
-> > > My question here is, does this work right on non-x86? I know you can
-> > > have ACPI without UEFI on x86, but elsewhere doesn't the location have
-> > > to be provided in some manner by UEFI? I know I'm thinking that's the
-> > > case with SMBIOS (with a few exception).
-> > >
-> > > I'm assuming you're doing something here with qemu and its qfw interface
-> > > and risc-v.
-> > >
-> >
-> > Hello Tom,
-> >
-> > yes, I want to enable ACPI passthrough on QEMU RISC-V. There will be more
-> > patches needed. But the current change seemed obvious looking at the code so
-> > I did not want to pile up more patches first.
-> >
-> > Do you know what the status of ACPI passthrough is on ARM?
->
-> On U-Boot? No. I know a while back I asked Simon to, and he did some
-> hacking such that on a Raspberry Pi you could do UEFI boot and pass
-> through some ACPI tables and it was somewhat functional (which was I
-> think an issue with the ACPI tables as much as anything else). And I
+Yes.
 
-Yes it worked OK, at least to a point. See [1]
+> 
+> Andrew: is this something you could do or should we send a patch
+> ourselves? We can test only TI AM62.
+> 
 
-> mentioned to some Linaro/EBBR people that it was because in part I don't
-> object to U-Boot being able to do SystemReady ES level support either
-> (and to be clear, I don't mean instead of, or preferred over IR, just
-> that ES mandates ACPI and if we can pass it through .... and yes,
-> there's more to it than that, I know).
+That would be much appreciated, we can help test the rest of TI K3
+platforms.
 
-This is what U-Boot does now when booted from coreboot. So it should
-be fairly easy to arrange.
-
-There is a blockage in Linux re booting with ACPI but without EFI,
-though. I suppose it doesn't affect U-Boot right now since it can boot
-with EFI, but it is causing problems with other projects.
-
->
-> And yeah, I see now I had mis-interpreted the "rsdp" portion of the
-> function name.
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> --
-> Tom
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=274675&state=*
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
