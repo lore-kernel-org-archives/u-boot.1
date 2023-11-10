@@ -4,110 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1943AC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 12:34:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F7D0C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 12:54:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60DFD871E6;
-	Fri, 10 Nov 2023 13:34:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 247CF8725C;
+	Fri, 10 Nov 2023 13:54:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Qg5XKMtc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OPqyj/bJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CB5787747; Fri, 10 Nov 2023 13:34:47 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2062a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::62a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 304868747E; Fri, 10 Nov 2023 13:54:19 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A7CB871A2
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 13:34:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01F8C871A2
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 13:54:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HWjvZ4C68yOC9p65iv0jpbAyjjk2S4oZ8/KeVDIwF9q8/xEX2zKqfaQHLcoPMc6QOGmEHkcoaOkFpnGRTHk9zeGTobrpc2TRf7ScueesSrWlRJFVlJpPm9u8hxN4zBZVcR4/Oi1uZ1FsAz1Fb9+swV1+p1h9mO+xo8kFrX02+WRbzoRG1xZ8eE2TrM8ojoLGjt5ShohXCEahYsM9cBxf9Vj7iWfwcpd4sZp4wqpfCMBWK55CLxvFMoXK33X9JqFY18BwHChp/6Fboi8ZdYHyy0LA8XzImsjiKYF9VUjwjTJ3291ZhyPcJMrIM+XERvchfC7ak2oMiKDdN9I/1VZv1Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EHongQsc1qadLrb43klV5VBU1ipABy0hlJUOIgY4bV4=;
- b=XXOhMIvj+LoPQdt+W64Bi3yywcA3csrlZZtKpr1E1QBu9i7Mgfk8cU6gUd7EcuoiT61km0d2uyQ3nxTcN05phwrkTANuvaZtKPqJyW5GS3LqHiRhMMe07jyRoypUBenk271FFDc6MrZ2I18RcZKOgjsGU+ckQFcOJ3TRgtxyFg6QxNCD/r2iIE0GF1r6JeFuoCb8lIflmakJTs2zDOlHVM5wYYzjBgp/lkXZ70zboeh++2eDssrk38MvpXfEPpzRf5txtHOW1Pfwdr3VV/+qUQfM4w6wC8AORD4hzpaaMECbdrSjWlJ2+iIbiJTkak3Ig2kTH22RWRVL3DIHva4OTg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EHongQsc1qadLrb43klV5VBU1ipABy0hlJUOIgY4bV4=;
- b=Qg5XKMtcnoAnNy05lv44FKoaizUnuavt5TQCZ+mDhYyxxHD3YF+nb06MkuvBhWkPD5LESnMZAc+Qe5neqov/xF6QmV+cTAFpuZ2McHR9VedDasBl9Uy02/Y1YhkTcGllX0jhrrmrOjr6eVjpPDW3SyitslAAzyJss3ME3LtEAhM=
-Received: from BL1PR13CA0283.namprd13.prod.outlook.com (2603:10b6:208:2bc::18)
- by CY5PR12MB6646.namprd12.prod.outlook.com (2603:10b6:930:41::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.19; Fri, 10 Nov
- 2023 12:34:40 +0000
-Received: from BL02EPF0001A0F9.namprd03.prod.outlook.com
- (2603:10b6:208:2bc:cafe::9d) by BL1PR13CA0283.outlook.office365.com
- (2603:10b6:208:2bc::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.19 via Frontend
- Transport; Fri, 10 Nov 2023 12:34:40 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A0F9.mail.protection.outlook.com (10.167.242.100) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6977.16 via Frontend Transport; Fri, 10 Nov 2023 12:34:39 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Fri, 10 Nov
- 2023 06:34:38 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH] arm64: zynqmp: Add multiboot support for SPL/SPI offset
- calculation
-Date: Fri, 10 Nov 2023 13:34:35 +0100
-Message-ID: <93903a53ad9358ae69991558b787f574797effbe.1699619666.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-9dd3f4a0f5aso333340366b.1
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 04:54:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1699620856; x=1700225656; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8N+fvzXXpk+7+mXF4R2BWrnLOaZvbG5wlFVepY1h9/U=;
+ b=OPqyj/bJuCHHT8E03vMSCtkPxavLhGvH4ndk4ZpZF39lSA0vlZPBXTcY83H0u5VXjX
+ y1VurVxkeJONkcms2O25VUPE7QGkQ2hosda40Nt0EiHBvc8duHvV9ZXATs+P9jJR37uy
+ uYD0u1tsub8XD3OM8DFbiSyAm0p6YH93Frpmg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699620856; x=1700225656;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8N+fvzXXpk+7+mXF4R2BWrnLOaZvbG5wlFVepY1h9/U=;
+ b=FVKmI+J7+5Hazur2S2edvGdM6/YVxWx9fne2QW/GrSr/kf95nhwebtSCoNH0gCeM5l
+ 4bPoAuyo13C6rV+VdQaNYZttyTwiqxRb6HoayhOvX3d/iSXK2F/T4q2m86aRN6aBo/4B
+ DmVnrSbNRKpc+sycTD/YXFmFjDoNNWLE20fHs0nj3UYLGC4fsUDNGKQnD9SoS7HxBLcX
+ ISI7iIclaiHxLQYOz+UE3F3CcZA/vw00ZEzHCC4uWtySH5bdGN1Ixz1GPf5mMV5Xypxm
+ 6lWlI9ye4gDvABgRAoiDX7Lbom+ghCLUMUB1e+TULn5l+F8NQMF5X/18H86X7auV0pP9
+ nWAA==
+X-Gm-Message-State: AOJu0YzYgXyLQ40+yy9UZ2SptCsJ7vgOQEpi+A/i/6Lr3o3WkIUWLo5E
+ 9VrYO1yahLomZ29BHaKuJQL/KYoTxhLdT/hHU892Tg==
+X-Google-Smtp-Source: AGHT+IF/HAYyT6K9DAZo5477U1DEin5mTCPEUoHuEFnEXGotH3A5ZIIfkHRIYomS5hdKpOosJDs+4nRACBhr6XMBy9c=
+X-Received: by 2002:a17:906:2cd3:b0:9e3:fe08:27b1 with SMTP id
+ r19-20020a1709062cd300b009e3fe0827b1mr4936069ejr.73.1699620856197; Fri, 10
+ Nov 2023 04:54:16 -0800 (PST)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2181; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=6Fe3OxKnXfVBmVkiw4i2i3BS7O4BciKwlp/KkIp4AXA=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlQ/5aCJSjNX2KS/i1ZWfvkzYIKg1Jn5jq/+rzApvyxR/
- OPK3OdFHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAih0UZ5lkcU938fcWmhKT9
- TT+el7gabE0x2M0wv2KKtvnNpxOipsd7ed/nNN52YVJNEgA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0F9:EE_|CY5PR12MB6646:EE_
-X-MS-Office365-Filtering-Correlation-Id: c4341cc2-b93c-4a90-8a22-08dbe1e96885
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ejvBJon0K6jh6Xp5ycwzYE7GLzFgTOHb4ZFxl4JwtgNgQTCE9G3u2bGBu4gOepnzaH/s+gG1FTJnA2KJ8NdXzL3P10dGOEZBk37JrJhKUqOXVr+5Fmyap49gYVfaCpogUENuIkGrncx/mbihDyk01GDI44JZeWSDLSqM2WhRh48u4YJ0so/bF2QDu/DZl+tfFseNSRCiuzO9TqmUAoTP7B+dRrxkM0f1tpRhdjfiW+0/97L9iqNKJ8oJePU2V1NBmrCACGIrvxBXo1fD/mUypeDeUSvYX7F4rooUvDbKljE1T/7dQHyGiiFJQ8piNdtCot41AO9q3eEE0Qg6WkKODk43czyMJ/GCGQv9fmTEpwpQ5DZRffJYeeOvyiYiLWFrhlmbUG/ZvZRsdBGE78/79emD4iGedrAZGfNu0gY4F+DgsP/wGnrrcPDAZGaxECvZ1kSSmX8Ki4EWpzPi7HZugvk319a1IsN5zYstEXrvA8NeixtHKpfOPDM2vjIwHnZEDS1+/hJzABpGehIPvqZgZdFTxdNtihaHrS85x9HdmMtN2RYWF47uH1xJbZilcPVhC+64HKcMIWiQ9IHTvmNqra77jpGjGFSA85eciNzXrphGtboq46qQ2RP4QgJ2l4727d9g9rZ8ita+cnh1l/BTBH8owoBIW0AoawTxT3df6QyDfJHjCQGcCeWpWkBXUMf3zGKdqgqfJJmQElHOtpC87YqBiQmBjXvukJoWc1NGz126NPAyzedBvRfAVbJYYcgQ6LwqfXbdypzqRzhHkgn0mQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(396003)(346002)(39860400002)(136003)(230922051799003)(64100799003)(1800799009)(451199024)(82310400011)(186009)(36840700001)(40470700004)(46966006)(16526019)(40460700003)(36756003)(44832011)(47076005)(478600001)(5660300002)(70206006)(83380400001)(8676002)(36860700001)(2906002)(2616005)(70586007)(26005)(316002)(336012)(110136005)(426003)(40480700001)(6666004)(86362001)(41300700001)(356005)(81166007)(8936002)(82740400003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2023 12:34:39.9956 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c4341cc2-b93c-4a90-8a22-08dbe1e96885
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0F9.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6646
+References: <20231107160900.2652813-1-andre.przywara@arm.com>
+In-Reply-To: <20231107160900.2652813-1-andre.przywara@arm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Nov 2023 05:53:59 -0700
+Message-ID: <CAPnjgZ1_KVcGvh869p3jvBh6umkwGv_VwFs73Yo3k9BBM54p0w@mail.gmail.com>
+Subject: Re: [PATCH] virtio: rng: gracefully handle 0 byte returns
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de, 
+ Peter Hoyes <peter.hoyes@arm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,64 +83,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case of A/B update systems there should be an option to load the same
-binary/binaries to different location and they should work.
-Before this patch boot.bin with U-Boot SPL can be added to whatever 32k
-offset in SPI and SPL finds u-boot.itb at CONFIG_SYS_SPI_U_BOOT_OFFS
-offset. In case of A/B update systems that means that SPL is at different
-locations but it still points to the same u-boot.itb which is not correct.
-That's why include multiboot value to offset calculation to be able to
-point to image from the same base.
-It doesn't affect any current system which starts from 0 offset.
+Hi Andre,
 
-This patch also change Kria defconfig which uses A/B setup. Partition
-A starts at multiboot 64, partition B at multiboot 496.
+On Tue, 7 Nov 2023 at 09:09, Andre Przywara <andre.przywara@arm.com> wrote:
+>
+> According to the virtio v1.x "entropy device" specification, a virtio-rng
+> device is supposed to always return at least one byte of entropy.
+> However the virtio v0.9 spec does not mention such a requirement.
+>
+> The Arm Fixed Virtual Platform (FVP) implementation of virtio-rng always
+> returns 8 bytes less of entropy than requested. If 8 bytes or less are
+> requested, it will return 0 bytes.
+> This behaviour makes U-Boot's virtio_rng_read() implementation go into an
+> endless loop, hanging the system.
+>
+> Work around this problem by always requesting 8 bytes more than needed,
+> but only if a previous call to virtqueue_get_buf() returned 0 bytes.
+>
+> This should never trigger on a v1.x spec compliant implementation, but
+> fixes the hang on the Arm FVP.
+>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Reported-by: Peter Hoyes <peter.hoyes@arm.com>
+> ---
+>  drivers/virtio/virtio_rng.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 
-And also print message about used SPI offset which is useful for all cases.
+Unrelated to this patch, but do you know the hardware architecture of
+the ARM RNG? Is there one RNG unit per CPU or one for the whole SoC?
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+>
+> diff --git a/drivers/virtio/virtio_rng.c b/drivers/virtio/virtio_rng.c
+> index b85545c2ee5..786359a6e36 100644
+> --- a/drivers/virtio/virtio_rng.c
+> +++ b/drivers/virtio/virtio_rng.c
+> @@ -20,7 +20,7 @@ struct virtio_rng_priv {
+>  static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
+>  {
+>         int ret;
+> -       unsigned int rsize;
+> +       unsigned int rsize = 1;
+>         unsigned char buf[BUFFER_SIZE] __aligned(4);
+>         unsigned char *ptr = data;
+>         struct virtio_sg sg;
+> @@ -29,7 +29,12 @@ static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
+>
+>         while (len) {
+>                 sg.addr = buf;
+> -               sg.length = min(len, sizeof(buf));
+> +               /*
+> +                * Work around implementations which always return 8 bytes
+> +                * less than requested, down to 0 bytes, which would
+> +                * cause an endless loop otherwise.
+> +                */
+> +               sg.length = min(rsize ? len : len + 8, sizeof(buf));
+>                 sgs[0] = &sg;
+>
+>                 ret = virtqueue_add(priv->rng_vq, sgs, 0, 1);
+> --
+> 2.25.1
+>
 
- board/xilinx/zynqmp/zynqmp.c         | 15 +++++++++++++++
- configs/xilinx_zynqmp_kria_defconfig |  2 +-
- 2 files changed, 16 insertions(+), 1 deletion(-)
-
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index f16280308483..59feaaf6f32f 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -681,3 +681,18 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 	puts("DFU alt info setting: done\n");
- }
- #endif
-+
-+#if defined(CONFIG_SPL_SPI_LOAD)
-+unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
-+{
-+	u32 offset;
-+	int multiboot = multi_boot();
-+
-+	offset = multiboot * SZ_32K;
-+	offset += CONFIG_SYS_SPI_U_BOOT_OFFS;
-+
-+	log_info("SPI offset:\t0x%x\n", offset);
-+
-+	return offset;
-+}
-+#endif
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index daedf1de01ea..a20df1a4072f 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -48,7 +48,7 @@ CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x8000000
- CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_SPI_LOAD=y
--CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
- CONFIG_SPL_ATF=y
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_SYS_MAXARGS=64
--- 
-2.36.1
-
+Regards,
+Simon
