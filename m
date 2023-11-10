@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC9DC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 19:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82E90C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 20:18:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B77D187750;
-	Fri, 10 Nov 2023 20:20:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0B9588780A;
+	Fri, 10 Nov 2023 21:18:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Rg1cmvJe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jnPj977B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F59A87654; Fri, 10 Nov 2023 20:20:02 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 78C7D87812; Fri, 10 Nov 2023 21:18:04 +0100 (CET)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C544587754
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 20:19:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 19EB787750
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 21:18:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id DF31C61AC6;
- Fri, 10 Nov 2023 19:19:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id ABAA8C433C9;
- Fri, 10 Nov 2023 19:19:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699643997;
- bh=VPe+oV2DEeTiE+iWuNlng3t5tsNG+NcrczJS0uRiVpo=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=Rg1cmvJeBtSa0+/eUbCS/wnx/l0f0R5rse9ZgzKkhFjX2NS17WIhodXkfHc/rMnHT
- RTg6vqWxVknsfZSFjBiVdwIJiKYwSA3omiXuwNcd+yh5Pm+ejA+n/jBPb2SLpMRM2k
- GY6CHLRCf4bQDs+SyVTlbx5ymApT16SUvDg+Uo6ZRclEcxriZs0LN6REzBXtP/Grbq
- BX0ts+a8ut6AW36kvaESNq+blGy6mCmgVPG4ecD8XRXRMNQCQbGLzu9wNe3NCups8u
- aTXwTx1+ghh2hk+ShzVthzCB2lfNdQWOI+V3jptbh05SHE4Gg3+rJpBm7PClfJh68/
- F81/AlfVjwKvQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF3BC4167D;
- Fri, 10 Nov 2023 19:19:57 +0000 (UTC)
-From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Sat, 11 Nov 2023 03:19:52 +0800
-Subject: [PATCH v2] clk: check parent_name in clk_register to avoid
- confusing log_error() output
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-41e1921da84so15750931cf.1
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 12:18:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699647480; x=1700252280; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EJ8JCqzh7BjWx/l8yFYvsK+J0gD1qVjDGW93htBTFWo=;
+ b=jnPj977BfLlVgv9NoDof99p2tvmFS+NXce6lpoEfe0l2WaZyRE5ouVbxC4Y5ImYSwh
+ t7TbpVlg/Z3vFvL//LUZL8MtJrSf34xfbJazlgD2oq7G/QipFb08gVz+SFEKeM9yOg1b
+ HCDsjheD9zbEDPjhTevBDMATGfAXx4XPFDenc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699647480; x=1700252280;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EJ8JCqzh7BjWx/l8yFYvsK+J0gD1qVjDGW93htBTFWo=;
+ b=pFM0XgpRUZmGbb09KR4WQkVYz/7UvWnaA1tQYYL5trILQsH8gIY+sqZJdvo26NSkla
+ t5gIjW7umajSgV9lL7VBrCuOFGn5yRab9iB4Wi4Oj6Je0oXDeuZoL9ZhlK1ydZAVJ8gM
+ 4HodkqKoNhjedxEv5bwV0l5b5cKfDXtdooT4xFhkOJY8CLuk5N7l7YuYWSUNery4XXLU
+ KORpHvy1HpNh8UPpR4VaVG5Lt13Q8cgnI+3CBvKfqNvPHd2EoocFdpaZcYJRMt6fUmkO
+ 40awyeik9rk2/FkAlq2+8z+c5rRhPlyIcCh/+gbG4F2mygHX5pHTZ2ND5di66IESJCio
+ pKmw==
+X-Gm-Message-State: AOJu0Yzo0TUYU4eT3iCXOGGVfgARzIbhC09CgS6WRB6tH8RMxuvU0vk/
+ mA3DKXKTatbTyPI2paNz/dfQC1wCJCYqmdqg/pOsBg==
+X-Google-Smtp-Source: AGHT+IEVD3hAZrHH9qDmZxpR62vL57kHGFUrS+0IvkBz1XIhpTkz+lDia/a+p/z4Q1c15L6yXRGvxA==
+X-Received: by 2002:a05:622a:20c:b0:420:5b48:4a54 with SMTP id
+ b12-20020a05622a020c00b004205b484a54mr90447qtx.23.1699647479939; 
+ Fri, 10 Nov 2023 12:17:59 -0800 (PST)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-046c-8850-3cc9-4453.res6.spectrum.com.
+ [2603:6081:7b00:6400:46c:8850:3cc9:4453])
+ by smtp.gmail.com with ESMTPSA id
+ t23-20020ac87617000000b00418189b689csm68279qtq.10.2023.11.10.12.17.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Nov 2023 12:17:59 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de,
+	Sean Anderson <sean.anderson@seco.com>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 0/3] arm: Semihosting fixes/improvements for ARMv6 and
+ older
+Date: Fri, 10 Nov 2023 15:17:58 -0500
+Message-Id: <169964745343.4002337.13631888279754508356.b4-ty@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231027204015.1547595-1-sean.anderson@seco.com>
+References: <20231027204015.1547595-1-sean.anderson@seco.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20230807-clk-fix-v2-1-0b688e21fb4e@outlook.com>
-X-B4-Tracking: v=1; b=H4sIAFeCTmUC/z2Nyw6CMBREf4Xctde0VdLiyv8wLEq5SMOjpK1EQ
- /h3WxJdnpmTmQ0CeUsBbsUGnlYbrJsTiFMBptfzk9C2iUEwcWGKSTTjgJ19I5ekqrKTleISkt3
- oQNh4PZs++5MOkXwuFk/JPy4edeLehuj853hceU5/49V/fOXIUDHVNprKK5V0d684OjecjZug3
- vf9C4qsuOm5AAAA
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
-X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1699643996; l=1981;
- i=forbidden405@outlook.com; s=20230415; h=from:subject:message-id;
- bh=EhPK7ucNW+E0Yp0KcbIofxN1hvfnmLx5BFY4JsVqXag=;
- b=S31tMR/BIpt98MPWMGFJ0J2158bMKoiQnokSn5QZnWzECAor7fwieaaK7ukdTHbymTDHxmTYN
- UCNEyQRJpi4BPW9YnuTRTPlSSxjn5XOs3GQrC/WH9v4JXHAEQvfS/ba
-X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
- pk=hfdpPU3AXR+t7fdv58tXCD4UzRNq+fop2TMJezFlAhM=
-X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230415 with
- auth_id=44
-X-Original-From: Yang Xiwen <forbidden405@outlook.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,71 +89,32 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: forbidden405@outlook.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
+On Fri, 27 Oct 2023 16:40:12 -0400, Sean Anderson wrote:
 
-For some gate clocks and fixed clocks without a parent, calling
-clk_register will print an useless error message indicating that parent
-is missing. Fix that by gaurding log_xxx() with an if-statement.
+> This series has a few fixes for semihosting on ARMv6 and older CPUs. The
+> first two patches address problems regarding the stack pointer and link
+> register. U-Boot runs in supervisor mode, so taking a software interrupt
+> will clobber sp/lr. I think we really should run in system mode, since
+> it has separate sp/lr registers. To quote ARM DDI 0100I:
+> 
+> > The remaining mode is System mode, which is not entered by any
+> > exception and has exactly the same registers available as User mode.
+> > However, it is a privileged mode and is therefore not subject to the
+> > User mode restrictions. It is intended for use by operating system
+> > tasks that need access to system resources, but wish to avoid using
+> > the additional registers associated with the exception modes. Avoiding
+> > such use ensures that the task state is not corrupted by the
+> > occurrence of any exception.
+> 
+> [...]
 
-Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-Suggested-by: Sean Anderson <seanga2@gmail.com>
----
-It's found during my development for HiSilicon clock driver.
----
-Changes in v2:
-- drop the commit which exports clk_mux_register.
-- drop the commit which is already merged
-- drop ccf enable_count fix as it'll be in another patchset
-- use Anderson's patch for clk_register()
-- Link to v1: https://lore.kernel.org/r/20230809-clk-fix-v1-0-808dbae54e5e@outlook.com
----
- drivers/clk/clk.c | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+Applied to u-boot/next, thanks!
 
-diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-index a5a3461b66..6ede1b4d4d 100644
---- a/drivers/clk/clk.c
-+++ b/drivers/clk/clk.c
-@@ -18,17 +18,19 @@
- int clk_register(struct clk *clk, const char *drv_name,
- 		 const char *name, const char *parent_name)
- {
--	struct udevice *parent;
-+	struct udevice *parent = NULL;
- 	struct driver *drv;
- 	int ret;
- 
--	ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
--	if (ret) {
--		log_err("%s: failed to get %s device (parent of %s)\n",
--			__func__, parent_name, name);
--	} else {
--		log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
--			  parent->name, parent);
-+	if (parent_name) {
-+		ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
-+		if (ret) {
-+			log_err("%s: failed to get %s device (parent of %s)\n",
-+				__func__, parent_name, name);
-+		} else {
-+			log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
-+				  parent->name, parent);
-+		}
- 	}
- 
- 	drv = lists_driver_lookup_name(drv_name);
-
----
-base-commit: 580eb31199be8a822e62f20965854a242f895d03
-change-id: 20230807-clk-fix-17e895f79817
-
-Best regards,
 -- 
-Yang Xiwen <forbidden405@outlook.com>
+Tom
 
