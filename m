@@ -4,78 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14CDDC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 13:24:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F61BC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 14:16:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1482E87822;
-	Fri, 10 Nov 2023 14:23:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 639688780A;
+	Fri, 10 Nov 2023 15:16:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="LERFJOkZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C5458781D; Fri, 10 Nov 2023 14:23:57 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82B7187815
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 14:23:55 +0100 (CET)
+ id B3D3F8780F; Fri, 10 Nov 2023 15:16:22 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 2F587871A2
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 15:16:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=9678822151=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3AABdBrC006188; Fri, 10 Nov 2023 14:23:54 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=5uhme6BvYSilLlKpwn+XNWeoPB4HLWE9/Q5kSbsbAzY=; b=LE
- RFJOkZl3bkG/q+K0EnK7aZ82S5a2NduXIwhcHc1SltTqJBNoG6U6e3NWYmIB+3FH
- HVi9ycfpvgxA+SAu9eiiswOLyGM1L/pgfISHSI6yysL31rESxYia0PNxVZBgL+7u
- LIwbh8wVEeriZ+m4L000g0maZjit1Uw9APA/BiMlb/s8il5jy+KpnodC8kaELNb7
- XACEY5tNZu3LNhadMyIvYN/fPFvZSu9Z5Pqm8LDAGrgOe8Plnl4dIkf3iY8TqO7j
- 2qZvZw7ZXET6ABfFzX5DU8ZYjE8c2dzILMAiArj6ZNJWAcJXAqTI1Qe7Ia1G+PHk
- xKq5YFyYYujsKHVtwegA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u9fmn9x8s-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Nov 2023 14:23:54 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 92D9210005E;
- Fri, 10 Nov 2023 14:23:46 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8B00824C443;
- Fri, 10 Nov 2023 14:23:46 +0100 (CET)
-Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 10 Nov
- 2023 14:23:46 +0100
-Message-ID: <43bd0525-5c04-4fb8-b02a-727f45d6f27e@foss.st.com>
-Date: Fri, 10 Nov 2023 14:23:46 +0100
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 258AC12FC;
+ Fri, 10 Nov 2023 06:17:03 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D5B53F7C5;
+ Fri, 10 Nov 2023 06:16:17 -0800 (PST)
+Date: Fri, 10 Nov 2023 14:16:14 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
+ Peter Hoyes <peter.hoyes@arm.com>
+Subject: Re: [PATCH] virtio: rng: gracefully handle 0 byte returns
+Message-ID: <20231110141614.72b6dffd@donnerap.manchester.arm.com>
+In-Reply-To: <CAPnjgZ1_KVcGvh869p3jvBh6umkwGv_VwFs73Yo3k9BBM54p0w@mail.gmail.com>
+References: <20231107160900.2652813-1-andre.przywara@arm.com>
+ <CAPnjgZ1_KVcGvh869p3jvBh6umkwGv_VwFs73Yo3k9BBM54p0w@mail.gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 8/9] ARM: dts: stm32: Add STM32MP257F Evaluation board
- support
-Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>
-References: <20231027144304.1002307-1-patrice.chotard@foss.st.com>
- <20231027144304.1002307-9-patrice.chotard@foss.st.com>
- <3f645d34-476e-49a1-9e3a-95e5142d6c32@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <3f645d34-476e-49a1-9e3a-95e5142d6c32@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.201.20.54]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-10_10,2023-11-09_01,2023-05-22_02
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +59,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 10 Nov 2023 05:53:59 -0700
+Simon Glass <sjg@chromium.org> wrote:
+
+Hi Simon,
+
+> On Tue, 7 Nov 2023 at 09:09, Andre Przywara <andre.przywara@arm.com> wrot=
+e:
+> >
+> > According to the virtio v1.x "entropy device" specification, a virtio-r=
+ng
+> > device is supposed to always return at least one byte of entropy.
+> > However the virtio v0.9 spec does not mention such a requirement.
+> >
+> > The Arm Fixed Virtual Platform (FVP) implementation of virtio-rng always
+> > returns 8 bytes less of entropy than requested. If 8 bytes or less are
+> > requested, it will return 0 bytes.
+> > This behaviour makes U-Boot's virtio_rng_read() implementation go into =
+an
+> > endless loop, hanging the system.
+> >
+> > Work around this problem by always requesting 8 bytes more than needed,
+> > but only if a previous call to virtqueue_get_buf() returned 0 bytes.
+> >
+> > This should never trigger on a v1.x spec compliant implementation, but
+> > fixes the hang on the Arm FVP.
+> >
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > Reported-by: Peter Hoyes <peter.hoyes@arm.com>
+> > ---
+> >  drivers/virtio/virtio_rng.c | 9 +++++++--
+> >  1 file changed, 7 insertions(+), 2 deletions(-) =20
+>=20
+> Unrelated to this patch, but do you know the hardware architecture of
+> the ARM RNG? Is there one RNG unit per CPU or one for the whole SoC?
+
+Architecturally and from a software perspective the ARMv8.5 FEAT_RNG
+feature is a system register, so per-core. Theoretically the availability
+could differ between cores, but the CPU ID feature registers are also
+per-core, so as long as we run on a single core, or always at least
+read from the same core, it's all good.
+
+Now the architecture only describes the CPU instruction aspect of the
+feature, and establishes rules for the quality and spec conformance, but
+leaves the actual source of the entropy open to the integrator.
+
+The manual in the Neoverse V1 core[1] (still not a SoC!) states that the
+actual entropy source is a memory mapped peripheral, its address being
+held in an internal, per-core register. So you can have one shared entropy
+source per SoC, or a private instance for each core, that's up to the
+actual integrator to design.
+
+=46rom the software perspective this shouldn't matter, though: the feature
+is "per-core", how this is backed is an implementation detail.
+
+Cheers,
+Andre
+
+[1]
+https://developer.arm.com/documentation/101427/0102/Functional-description/=
+Random-number-support/About-the-random-number-support
 
 
-On 11/9/23 10:17, Patrick DELAUNAY wrote:
-> Hi,
-> 
-> On 10/27/23 16:43, Patrice Chotard wrote:
->> Add STM32MP257F Evaluation board support. It embeds a STM32MP257FAI SoC,
->> with 4GB of DDR4, TSN switch (2+1 ports), 2*USB typeA, 1*USB2 typeC,
->> SNOR OctoSPI, mini PCIe, STPMIC2 for power distribution ...
->>
->> Sync device tree with kernel v6.6-rc1.
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->>   arch/arm/dts/Makefile                       |   3 +
->>   arch/arm/dts/stm32mp25-pinctrl.dtsi         |  38 +++
->>   arch/arm/dts/stm32mp25-u-boot.dtsi          | 102 +++++++
->>   arch/arm/dts/stm32mp251.dtsi                | 285 ++++++++++++++++++++
->>   arch/arm/dts/stm32mp253.dtsi                |  23 ++
->>   arch/arm/dts/stm32mp255.dtsi                |   9 +
->>   arch/arm/dts/stm32mp257.dtsi                |   9 +
->>   arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi    |  20 ++
->>   arch/arm/dts/stm32mp257f-ev1.dts            |  55 ++++
->>   arch/arm/dts/stm32mp25xc.dtsi               |   8 +
->>   arch/arm/dts/stm32mp25xf.dtsi               |   8 +
->>   arch/arm/dts/stm32mp25xxai-pinctrl.dtsi     |  83 ++++++
->>   arch/arm/dts/stm32mp25xxak-pinctrl.dtsi     |  71 +++++
->>   arch/arm/dts/stm32mp25xxal-pinctrl.dtsi     |  71 +++++
->>   include/dt-bindings/pinctrl/stm32-pinfunc.h |   3 +
->>   15 files changed, 788 insertions(+)
->>   create mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp25-u-boot.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp251.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp253.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp255.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp257.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
->>   create mode 100644 arch/arm/dts/stm32mp25xc.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp25xf.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
->>   create mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
->>
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> 
-> Thanks
-> Patrick
-> 
-Applied to u-boot-stm32/next
+> > diff --git a/drivers/virtio/virtio_rng.c b/drivers/virtio/virtio_rng.c
+> > index b85545c2ee5..786359a6e36 100644
+> > --- a/drivers/virtio/virtio_rng.c
+> > +++ b/drivers/virtio/virtio_rng.c
+> > @@ -20,7 +20,7 @@ struct virtio_rng_priv {
+> >  static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
+> >  {
+> >         int ret;
+> > -       unsigned int rsize;
+> > +       unsigned int rsize =3D 1;
+> >         unsigned char buf[BUFFER_SIZE] __aligned(4);
+> >         unsigned char *ptr =3D data;
+> >         struct virtio_sg sg;
+> > @@ -29,7 +29,12 @@ static int virtio_rng_read(struct udevice *dev, void=
+ *data, size_t len)
+> >
+> >         while (len) {
+> >                 sg.addr =3D buf;
+> > -               sg.length =3D min(len, sizeof(buf));
+> > +               /*
+> > +                * Work around implementations which always return 8 by=
+tes
+> > +                * less than requested, down to 0 bytes, which would
+> > +                * cause an endless loop otherwise.
+> > +                */
+> > +               sg.length =3D min(rsize ? len : len + 8, sizeof(buf));
+> >                 sgs[0] =3D &sg;
+> >
+> >                 ret =3D virtqueue_add(priv->rng_vq, sgs, 0, 1);
+> > --
+> > 2.25.1
+> > =20
+>=20
+> Regards,
+> Simon
 
-Thanks
-Patrice
