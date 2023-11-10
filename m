@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F39DEC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 16:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC0FC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 16:21:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89FBB87832;
-	Fri, 10 Nov 2023 17:21:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42B5E8783C;
+	Fri, 10 Nov 2023 17:21:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UEGBP7dn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qPcUbNvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5727186EDF; Fri, 10 Nov 2023 17:21:21 +0100 (CET)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id 0B5C787793; Fri, 10 Nov 2023 17:21:26 +0100 (CET)
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
+ [IPv6:2607:f8b0:4864:20::a2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1752B86EDF
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 17:21:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33EC687828
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 17:21:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-778ac9c898dso135179885a.0
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 08:21:19 -0800 (PST)
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-495d687b138so916285e0c.3
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 08:21:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699633278; x=1700238078; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699633282; x=1700238082; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lEo6c6Ka0YGXCKnn520qJBdbNDvAQxrqX9XcwcrmPJw=;
- b=UEGBP7dn9IfJwxLghqGe6IW6wmhLp+cnSpHA7lVjWPlYA6jA3NiZxs8zBWH0ArELgJ
- gW2PadzYtGglCOohVbHYyEbJUjldTeLMeJKseCVj6ii7DgQ1diKwiiwHSUfJzQslQlIf
- aAt/kXbiU+1zIC9BKPb/Nu3Gn9bsHmO7Axqbs=
+ bh=3mafvvqvBLEpv2GAkmSkTztTRuyHmj1TMWhVp6ccgZA=;
+ b=qPcUbNvEfFxwMgY1VTzZyK5wB0Wci3R+BffzDAR8s87bJ6rvIB2bcOhkao0QAuLSDq
+ 7/Yxhv3o5YJKigrr1auHhKJuqfO6Txmo/JFsP4y6ZjtazA7r1pdIgd/ICSJ7O1Knv8iV
+ 1mVzeLpAWkAV+lESHYht6cm//RlmcWi9zQt40=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699633278; x=1700238078;
+ d=1e100.net; s=20230601; t=1699633282; x=1700238082;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lEo6c6Ka0YGXCKnn520qJBdbNDvAQxrqX9XcwcrmPJw=;
- b=hQeu550QO3pc34ibkMU1rKW2h0HXvxTw0Z3/ykYhMOh1/9L1AXXlfy1PJoARUknFmS
- 99bQNQtolOhMN8RQ+0C+JkkbGsTuP5NXq3SvZVvRo6k8dXi9SL4uVVvuPSml+KdRDSvC
- 7gmbZpM8yk7Hx/6Obr/eWaEtrncZEpZ/AyCuwp+2LENMNf6DVb++kjMVK8c30ite5PGK
- X6Jchn0zYBiBoAP4k6OmZk+J+W3JcPI8aOt+brAxKlmYh12P0JHO2EmQfzkO5qkesioo
- S+jqNVVO1JpTR75YyhCL/kGbtxat8t9x9Li1aS/6zwF/1GMp9CYCWVlxEZOk8RgbJz+0
- CM9g==
-X-Gm-Message-State: AOJu0YyH5rENXjVBvtrrK64EV1nOv+a85Okz9cUDUnJ/FQIHTlcWXVuh
- Op3d8wr2Z7faBCwfOgsxXgWTq1RGSS/pxsutLZSk6A==
-X-Google-Smtp-Source: AGHT+IGBQiaBr+YGqzLDzQGMkwlahqP63kh9AluTXqiD9XspjnPVAFtqFLyiuQV+QR1xMwhe/xMa5g==
-X-Received: by 2002:ae9:e515:0:b0:777:fec:5741 with SMTP id
- w21-20020ae9e515000000b007770fec5741mr7852946qkf.33.1699633277749; 
- Fri, 10 Nov 2023 08:21:17 -0800 (PST)
+ bh=3mafvvqvBLEpv2GAkmSkTztTRuyHmj1TMWhVp6ccgZA=;
+ b=qAR0gMT4lICpxdISDQqeP6YY/LBIFo7L4VA+D1gNM/OxRZIsvjkpanNNAZIeqOu/U/
+ XHkSqdJ3TqtvaKQbacMUa7L7Lwhhvq5BHDPygjHNB5g6jlD++GXgBF0mGcueJVthpSF5
+ YNwJrIfTGQm42FSL38s51c70J13jndW504FG4p0O2YXMijIvYpWJ3bceLiMZk1jxU1zr
+ TCQD+gndJkpoXc4cA5pcA5xLAfW1GvtrHRtyvUpKTBlLMTtB4MIrKlo6PcxSoRWlqAQl
+ u//3/1VTnmm+rM4KIiJDFVkgaGq8cPAvm2+iZmeTkr9QrU1YOXppWvpGt/8wwVrxiEh9
+ 7NUg==
+X-Gm-Message-State: AOJu0YynbTy7I03LYLvOYL++3E+6RnBSOT4t/vrDSByA11zE2u1fNls6
+ 5BBMZC/+6MUw3LbVixDx11faLA==
+X-Google-Smtp-Source: AGHT+IFf0WMTIEL5b0y7s95OSAGVaFOlngxOTrtZizrKTbB5xPffUJhIMUWVU4V0+sm5pZbEU3pQNQ==
+X-Received: by 2002:a05:6122:2215:b0:4ac:bf09:4c1 with SMTP id
+ bb21-20020a056122221500b004acbf0904c1mr4694222vkb.10.1699633281722; 
+ Fri, 10 Nov 2023 08:21:21 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-046c-8850-3cc9-4453.res6.spectrum.com.
  [2603:6081:7b00:6400:46c:8850:3cc9:4453])
  by smtp.gmail.com with ESMTPSA id
- v17-20020a05620a091100b0077731466526sm784439qkv.70.2023.11.10.08.21.17
+ h14-20020a0cedae000000b0065af24495easm3021513qvr.51.2023.11.10.08.21.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Nov 2023 08:21:17 -0800 (PST)
-Date: Fri, 10 Nov 2023 11:21:15 -0500
+ Fri, 10 Nov 2023 08:21:21 -0800 (PST)
+Date: Fri, 10 Nov 2023 11:21:19 -0500
 From: Tom Rini <trini@konsulko.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] firmware: scmi: correct a validity check against power
- domain id
-Message-ID: <20231110162115.GT6601@bill-the-cat>
-References: <20231107000547.182072-1-takahiro.akashi@linaro.org>
+To: Alexander Gendin <agendin@matrox.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] test: cmd: mbr: Remove unreachable code
+Message-ID: <20231110162119.GU6601@bill-the-cat>
+References: <ZUr67-KKyaSDv_vk@alg-gentoo>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8Any4IMvyfdYo1k3"
+ protocol="application/pgp-signature"; boundary="/ZV+D8jbGCYzEB61"
 Content-Disposition: inline
-In-Reply-To: <20231107000547.182072-1-takahiro.akashi@linaro.org>
+In-Reply-To: <ZUr67-KKyaSDv_vk@alg-gentoo>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,41 +92,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8Any4IMvyfdYo1k3
+--/ZV+D8jbGCYzEB61
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 07, 2023 at 09:05:47AM +0900, AKASHI Takahiro wrote:
+On Wed, Nov 08, 2023 at 03:05:19AM +0000, Alexander Gendin wrote:
 
-> A power domain id on sandbox should be in the range from zero to
-> ARRAY_SIZE(scmi_pwdom) - 1. Correct the validity check logic.
+> Fix Coverity (CID 467404): Control flow issues (DEADCODE).
+> Fix code indentation.
 >=20
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> Fixes: CID 467401
-> Fixes: CID 467405
+> Reported-by: Coverity (CID 467404)
+> Signed-off-by: Alexander Gendin <agendin@matrox.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---8Any4IMvyfdYo1k3
+--/ZV+D8jbGCYzEB61
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVOWHsACgkQFHw5/5Y0
-tyxEnAv9H4hiWeGrfnThWATlJuae4nwismiNo3UBkxLZXdLXAAko8hqPoIRTN8LC
-NYlROqx4lL3P9j6SOHYjMZUph197QeT8WYk89RL7mcyczNlhTJsE2trmuoSl+mbB
-gYBHdeikqkq1vZK8byEcn+RPO4uCE6vvnrIySU0PMGevf7ThuxKtFJqPe+HvLBbX
-VreXdb1LokynNXVPPyJ2eNx4wmRMUxTYYTZ90QS1784yP69ILUqGugTnhcZ2E3NR
-gPun6o+0RuUAEd+7dkVNkqxeAb+0fmzSKlZeX5REpTPSMrb7gNLA3LihTM1Tjc4h
-WHNCMNBtvlfpJGzRM98nsqO1z+JCRuOA+01ICeO7uZGu5wINwX627UOWx5/p6Iop
-uOvclJ+Ze3phVVUD2S5BTWCvSiKjjefZMeen/RgcKgD5qzhB79vEc7WCAK7kgE09
-1J+T3STDp3vS0NZhunlDT7vSd/VEMDMmYfuGg6dOpVmklM1FnV36OmsZmKYamMX4
-aVnfvESW
-=Zi2M
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVOWH8ACgkQFHw5/5Y0
+tyzbvAwAtwgEN7/HWRVAbv048eXm0UQGyIrhUI7mDYReM4s7B9uy/fNjhMn/nITm
+eHOjnSx0AHTFOpTOCWMfCzkPljl98c6qGYlBPf1zZ74Va+CMEUOaF2usr7ylzR0j
+YZ7IDXvMjX1MY4KVnP/bAiA0JyPvuOJxaLcdt/e+7ugkDAUzy6PgAft7se1IV9Y9
+YNI7yfOe2k+PsN2oEGKMdhyHYmehBFRWvwNcjV6sRZXknbeQ+AatMPhJiFwmXi26
+x5QSld1vay63qJW1fsB0pocGIAWYuuobzYZFSnWYE8H2vAMS6hpTX3bf8ITTxe3g
+0KRAnrKGnGLPfCm7vlggrLDLfSdscmbc2ZeYkYnem5B1dQzW0rTPRHyTEILpjWET
+YhNEkLLaMxgbeZ+pHwYKxmME8iEcKEAODGwn+rfDit3HZBJb+fKIGkGshN5B/fFa
+KQB7XcdrwlPZJcobWBielA1NdQteTpX8W5V+voMnFUkQeSLs5N1W3FEHBhiuVL5W
+Vleg+z7a
+=QhNt
 -----END PGP SIGNATURE-----
 
---8Any4IMvyfdYo1k3--
+--/ZV+D8jbGCYzEB61--
