@@ -4,82 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 153D4C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 09:09:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A72C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 09:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0970C8718C;
-	Fri, 10 Nov 2023 10:09:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BAB1C877F2;
+	Fri, 10 Nov 2023 10:09:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JcmrDoE5";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EfbBDtyj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66FD58718C; Fri, 10 Nov 2023 10:09:06 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AB2AA877F2; Fri, 10 Nov 2023 10:09:24 +0100 (CET)
+Received: from mail-m25473.xmail.ntesmail.com (mail-m25473.xmail.ntesmail.com
+ [103.129.254.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 536D587197
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 10:09:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0048F877F6
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 10:09:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50930f126b1so2284126e87.3
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 01:09:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699607342; x=1700212142; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rhQAK8rY/BRG0m/kfuOfrClT6p0zTf7+wnwIrJLdRUo=;
- b=JcmrDoE5PfvFTubLbkrCr5S1Vbr/yFAOik+LUULsUZuihLLXjZjxxM9Ewkx2wXTjWc
- KwvVfmjUFmpufZ9ae2YRsVsD2hyPEmliaXMiVcd7P7GTBidJmz809cK7Bg7crvzvmzAG
- 1Awhifcm3SoFJ/jERZu4Mx7sGgVpdjUzsnF1+Pl7P6heddxIdlknNJXGbijpNlVw6mS4
- +hSfAKJmSYdKfuuhjR823STtHcUuEw+AF+lGX42Nfb0Nl8Ol3nF/5wIizFQqu4zrY36R
- 6coMTjdS/lPcg76pQZ07VdvBlmWlItXMszqVZEWMBA0gvPsGU7ZBprMlj/nDTuzRChUP
- HJmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699607342; x=1700212142;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rhQAK8rY/BRG0m/kfuOfrClT6p0zTf7+wnwIrJLdRUo=;
- b=VTppqMJyKK4dgNnsUOPIEk5blKq1vGA8MLn88ep9mJIXE41lweLCKxTW1usbSePfi1
- x8VOq3SpM5i6AVP7qq+sdWaTg7/w2TZDc3oadLxXKC/OykmRmZP4n+3CUeaCL9U3QWBp
- lsqw6B7Fx54DaOFfdQUndK83ThmoeBJmzqJavEf63YDVgPILG1dFWmbUFc/4JIut9bBk
- 14sbS5jIxEH35UgAzAybiHmt6+dUq3m3SLdA/bs68a6cTTv/pqQ6x5PispHMguGo5NUI
- nsuN++qEwjIXsKhMEKqL13OiivyjEtAIEpQZgVqXS+Ks/rpjb6eWaOus20EeVb3tYG5v
- fX4g==
-X-Gm-Message-State: AOJu0Yz4cgoOpJNvMQ562u4Sk0wlsXBdPnoyKnGyHPIxtAnpVhtN3xBL
- whG2mtIoYa4o9ZloFOO4/l2lyZEISDUOvzHSCY0=
-X-Google-Smtp-Source: AGHT+IHdIDKXrXZ4Pn+y/K1mz0XsI25Q45EF2kbRj1aPA3R5QkeZOpD1CH9F39WLl18Uc/LYhYN8YQqDN6R8qhrnJzo=
-X-Received: by 2002:ac2:5ed0:0:b0:503:3453:ea7a with SMTP id
- d16-20020ac25ed0000000b005033453ea7amr3353244lfq.66.1699607342253; Fri, 10
- Nov 2023 01:09:02 -0800 (PST)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=EfbBDtyjfdnNEI936YAWF6Aig+q4s8N+YRn+xJabBMTATCmg8EJwH/aAwnwfVIpBaIbQz7wOHRXVrG78wQqY+zG2nMsb2ENHmQhOVVk4itMrW7U05KVVlxT+IxvNC1V98PtOcM77JoznSrlyJujG67utDs3QDOABJ57IEA5Fx9g=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=QVIgaYrrawMby0phe4ngy+JsGUIGw3AYNzBCZvgtWOk=;
+ h=date:mime-version:subject:message-id:from;
+Received: from localhost.localdomain (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 67EC8400404;
+ Fri, 10 Nov 2023 17:09:14 +0800 (CST)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20231110
+Date: Fri, 10 Nov 2023 17:09:14 +0800
+Message-Id: <20231110090914.116712-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20231107124241.35432-1-clamor95@gmail.com>
- <87cywj9v45.fsf@baylibre.com>
- <94E7D060-9388-4888-B7FF-EE911A179B2C@gmail.com> <87y1f78a4x.fsf@baylibre.com>
-In-Reply-To: <87y1f78a4x.fsf@baylibre.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Fri, 10 Nov 2023 11:08:51 +0200
-Message-ID: <CAPVz0n2fOXeHQOOZ-obPWUCQ7LdFsKZFGxZw5bp-qF8SaxLSMA@mail.gmail.com>
-Subject: Re: [PATCH v1 0/5] Implement fastboot multiresponce
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, 
- Heiko Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0NLGlZKTh4ZQk9JSEIYTExVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8bb87e1c612eb3kusn67ec8400404
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MxQ6OCo5Nzw9NQwdTSk9CA4a
+ Ej4KCSNVSlVKTUJCTUtMSE5PQk1PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITU5NNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,107 +68,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 9 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 13:00=
- Mattijs Korpershoek
-<mkorpershoek@baylibre.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Hi Svyatoslav,
->
-> On jeu., nov. 09, 2023 at 11:01, Svyatoslav Ryhel <clamor95@gmail.com> wr=
-ote:
->
-> > 9 =D0=BB=D0=B8=D1=81=D1=82=D0=BE=D0=BF=D0=B0=D0=B4=D0=B0 2023 =D1=80. 1=
-0:41:30 GMT+02:00, Mattijs Korpershoek <mkorpershoek@baylibre.com> =D0=BD=
-=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
-> >>Hi Svyatoslav, Ion,
-> >>
-> >>Thank you for these series.
-> >>
-> >>On mar., nov. 07, 2023 at 14:42, Svyatoslav Ryhel <clamor95@gmail.com> =
-wrote:
-> >>
-> >>> Currently u-boot fastboot can only send one message back to host,
-> >>> so if there is a need to print more than one line messages must be
-> >>> kept sending until all the required data is obtained. This behavior
-> >>> can be adjusted using multiresponce ability (getting multiple lines
-> >>> of response) proposed in this patch set.
-> >>>
-> >>> Implementation of multiresponce leads to ability to dump content of
-> >>> console buffer which, with use of "oem run", allows to entirely avoid
-> >>> need in UART.
-> >>
-> >
-> > Hello Mattijs!
-> > Thank you for your suggestions and so rapid responce!
-> >
-> >>I'm happy to fastboot getvar all implemented since it's standardly
-> >>supported on Android phones.
-> >>
-> >>fastboot oem console seems like a nice debug tool as well when no
-> >>console is available.
-> >>
-> >>I do have some concerns with the series, mainly because the introductio=
-n
-> >>of the "MORE" byte response.
-> >>"MORE" is not part of the fastboot specification [1].
-> >>
-> >>However, that specification documents "TEXT", which, per my
-> >>understanding, should allow to send multiple responses as well.
-> >>
-> >>Could we implement this using "TEXT" instead ?
-> >
-> > I see no issues with replacing MORE with TEXT whatsoever.
-> >
-> > These patches were mainly developed and used for our internal developme=
-nt needs but since they served extremely well, I have decided to push them =
-upstream so other developers could benefit as well.
->
-> Thank you for taking the time to upstream.
->
-> >
-> > If you have no other suggestions then swap more > text, please send you=
-r reviewed-by to patch and I will reload v2 with swap included.
->
-> I will do a more thorough review in the coming days, I wanted to get
-> feedback on MORE->TEXT first.
->
+Hi Tom,
 
-I have just tested with TEXT and fastboot works exactly the same way
-it worked with MORE. I will upload v2 with swap alongside any other
-changes, if such would be needed.
+Please pull the fixex for rockchip platform:
+- Add Board: rk3588 Pine64 QuartzPro64;
+- fix rk3066 enter download mode;
+- fix for ringneck-px30 board;
 
-> >
-> > Best regards,
-> > Svyatoslav R.
-> >
-> >>[1] https://android.googlesource.com/platform/system/core/+/master/fast=
-boot/#transport-and-framing
-> >>
-> >>>
-> >>> Ion Agorria (5):
-> >>>   fastboot: multiresponse support
-> >>>   fastboot: implement "getvar all"
-> >>>   commonn: console: introduce overflow and isempty calls
-> >>>   lib: membuff: fix readline not returning line in case of overflow
-> >>>   fastboot: add oem console command support
-> >>>
-> >>>  boot/bootmeth_extlinux.c          |  2 +-
-> >>>  common/console.c                  | 17 +++++--
-> >>>  doc/android/fastboot-protocol.rst |  3 ++
-> >>>  doc/android/fastboot.rst          |  1 +
-> >>>  drivers/fastboot/Kconfig          |  7 +++
-> >>>  drivers/fastboot/fb_command.c     | 52 +++++++++++++++++++++
-> >>>  drivers/fastboot/fb_getvar.c      | 75 +++++++++++++++++++++++++----=
---
-> >>>  drivers/usb/gadget/f_fastboot.c   | 29 ++++++++++++
-> >>>  include/console.h                 | 14 ++++++
-> >>>  include/fastboot-internal.h       |  7 +++
-> >>>  include/fastboot.h                |  9 ++++
-> >>>  include/membuff.h                 |  5 ++-
-> >>>  lib/membuff.c                     |  4 +-
-> >>>  net/fastboot_udp.c                | 25 ++++++++---
-> >>>  test/ut.c                         |  9 ++--
-> >>>  15 files changed, 226 insertions(+), 33 deletions(-)
-> >>>
-> >>> --
-> >>> 2.40.1
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/18047
+
+Thanks,
+- Kever
+
+The following changes since commit e17d174773e9ba9447596708e702b7382e47a6cf:
+
+  Merge tag 'xilinx-for-v2024.01-rc3' of https://source.denx.de/u-boot/custodians/u-boot-microblaze (2023-11-07 10:36:23 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20231110
+
+for you to fetch changes up to 4df4aea88fb99f413a0e3a2a96e176c6108939e3:
+
+  rockchip: include: asm: fix entering download mode rk3066 (2023-11-09 18:07:21 +0800)
+
+----------------------------------------------------------------
+Johan Jonker (1):
+      rockchip: include: asm: fix entering download mode rk3066
+
+Quentin Schulz (3):
+      rockchip: ringneck-px30: enable i2c command
+      rockchip: ringneck-px30: always reset STM32 companion controller on boot
+      rockchip: ringneck-px30: enable SPL_BOARD_INIT
+
+Tim Lunn (3):
+      rockchip: dts: fix bootph tags for rv1126
+      rockchip: otp: Add support for RV1126
+      rockchip: rv1126: Read cpuid from otp and set ethaddr
+
+Tom Fitzhenry (1):
+      board: rockchip: add Pine64 QuartzPro64 RK3588 board
+
+ arch/arm/dts/Makefile                              |    1 +
+ arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi        |   12 +
+ arch/arm/dts/rk3588-quartzpro64.dts                | 1137 ++++++++++++++++++++
+ arch/arm/dts/rv1126-u-boot.dtsi                    |   18 +-
+ arch/arm/include/asm/arch-rk3066/boot0.h           |   77 +-
+ arch/arm/mach-rockchip/Kconfig                     |    4 +-
+ arch/arm/mach-rockchip/rk3066/Kconfig              |    8 +
+ arch/arm/mach-rockchip/rk3588/Kconfig              |    8 +
+ board/pine64/quartzpro64-rk3588/Kconfig            |   15 +
+ board/pine64/quartzpro64-rk3588/MAINTAINERS        |    8 +
+ board/pine64/quartzpro64-rk3588/Makefile           |    3 +
+ .../pine64/quartzpro64-rk3588/quartzpro64-rk3588.c |   39 +
+ .../ringneck_px30/ringneck-px30.c                  |   53 +
+ configs/quartzpro64-rk3588_defconfig               |   72 ++
+ configs/ringneck-px30_defconfig                    |    2 +
+ doc/board/rockchip/rockchip.rst                    |    1 +
+ drivers/misc/rockchip-otp.c                        |   76 ++
+ include/configs/quartzpro64-rk3588.h               |   14 +
+ 18 files changed, 1543 insertions(+), 5 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588-quartzpro64.dts
+ create mode 100644 board/pine64/quartzpro64-rk3588/Kconfig
+ create mode 100644 board/pine64/quartzpro64-rk3588/MAINTAINERS
+ create mode 100644 board/pine64/quartzpro64-rk3588/Makefile
+ create mode 100644 board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
+ create mode 100644 configs/quartzpro64-rk3588_defconfig
+ create mode 100644 include/configs/quartzpro64-rk3588.h
