@@ -4,79 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E83C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 18:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37D8C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 18:27:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 088E18782A;
-	Fri, 10 Nov 2023 19:21:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B22EF877D8;
+	Fri, 10 Nov 2023 19:27:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M+xFb/nG";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="DVQyZIQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D1BC8782E; Fri, 10 Nov 2023 19:21:44 +0100 (CET)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2C8C48782E; Fri, 10 Nov 2023 19:20:45 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E11874B7
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 19:21:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A65C7874B7
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 19:20:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-45e777af839so1044435137.3
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 10:21:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699640500; x=1700245300; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lHW2KoX0S9eoWozlpfWtfsSfbGpQ16VFenzdqwpB9KI=;
- b=M+xFb/nGPCl41zFT04yRRkckBOIXtBwp92N6uiKDv4UPisUzd50O6irxQBp5P33zw0
- LfRf6QPNjqWmpYkduSyw+LCBMXDgALXBainkVaD5pxBOxK1PvskBZR2i8RS1ioB2vQkI
- bKY0hbOPz1zl2BCbvzEK8Q+BonE1D2l7i7eFA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699640500; x=1700245300;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lHW2KoX0S9eoWozlpfWtfsSfbGpQ16VFenzdqwpB9KI=;
- b=iPoFUgPq4hKto3DGGkISYkyptUA0h/e37LyAm47Do0aUtlJy4BiRZYMkZ0wxWrQVYr
- FVgccP7x7v7oqbxoogaxX7iaWt5vkaI0W26yUqS9mShWbC9CZLc2mlVm23xWu34idsfP
- oaELLl7EpQuYBbwRJEeDkBndU/lDSXHjn1fVaGnxcB3HffKEVhqObBw8uybg9l7WB4W3
- aSorosNrgh+O4CFwXmSZVOBm3BQGGeUt3c+Ovk7/2lFa9ahL4V9rMRCMPdNXAxExOcGn
- dp8O9kV5Q+4GvUUAlURO5yRzvRF9xuguczRni4fI2yexhqnpH7wlAgffaIJZxZTnqbrj
- NZxg==
-X-Gm-Message-State: AOJu0YzGrgl5SzGUZba2iaq/EtqqFd+tyKIliUxng24GcPOd9EFarleF
- 6jqcgfoCVrK9fS+/RZ8bjs6mkw==
-X-Google-Smtp-Source: AGHT+IFYKYSlqX0LtwekkauGtAaBXKqad8rPkEqPjzjU4pJfvVnIe/6hHnqxvFlrarGqKPcR0wcerA==
-X-Received: by 2002:a05:6102:1009:b0:45f:77f5:a60a with SMTP id
- q9-20020a056102100900b0045f77f5a60amr147449vsp.33.1699640499974; 
- Fri, 10 Nov 2023 10:21:39 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-046c-8850-3cc9-4453.res6.spectrum.com.
- [2603:6081:7b00:6400:46c:8850:3cc9:4453])
- by smtp.gmail.com with ESMTPSA id
- j16-20020a0cc350000000b00670867d7bdfsm18368qvi.122.2023.11.10.10.21.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Nov 2023 10:21:39 -0800 (PST)
-Date: Fri, 10 Nov 2023 13:21:37 -0500
-From: Tom Rini <trini@konsulko.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: sjg@chromium.org, etienne.carriere@st.com, michal.simek@amd.com,
- u-boot@lists.denx.de, Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: Re: [PATCH 5/5] test: dm: add scmi command test
-Message-ID: <20231110182137.GA3824573@bill-the-cat>
-References: <20231025051427.509602-1-takahiro.akashi@linaro.org>
- <20231025051427.509602-6-takahiro.akashi@linaro.org>
+ spf=pass smtp.mailfrom=chasel.chiu@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1699640443; x=1731176443;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=qbQcOvG6du6rbdGEsMBcqhw/2eRXDmjj8fePltbf4gA=;
+ b=DVQyZIQuvcCfub2rWy+XxmmqVUTnaPXCjR5c5pQiTjGAxo9pccM++gaV
+ fbgFRykumkEyW8SALaw6nUAJnp143pi3u7MHNbUl3hijnRq6htNpMLHcj
+ ZgY0yGCl2sxIpyfzAOT0KMN20pyRCcqwzKjZuS2UAzi/UgeVkGvfORUUl
+ lyre2sFzvivLkaPeTsyoXbIVSQnWT+6YjIMOMSqj8Qra6XFscWD3T1h2N
+ jSqIml7OeD5WsS/zNzyjFSRkbzwnbuuUyrblp9/D5kAXHJithQyAz+khH
+ tj60wHfT7P4nGVfHWr+QoJd9naZeEBsYcHHS8SkyiEdoxc0suvUxCjfd2 w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10890"; a="8868030"
+X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; 
+   d="scan'208";a="8868030"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Nov 2023 10:20:41 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10890"; a="1095242974"
+X-IronPort-AV: E=Sophos;i="6.03,291,1694761200"; d="scan'208";a="1095242974"
+Received: from fmsmsx601.amr.corp.intel.com ([10.18.126.81])
+ by fmsmga005.fm.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 10 Nov 2023 10:20:39 -0800
+Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx601.amr.corp.intel.com (10.18.126.81) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Fri, 10 Nov 2023 10:20:38 -0800
+Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
+ fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34 via Frontend Transport; Fri, 10 Nov 2023 10:20:38 -0800
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com (104.47.51.41) by
+ edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.34; Fri, 10 Nov 2023 10:20:38 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZbfsivO1pIoXBMP4837SXdryIWdWbnlHagd1K5UFgDrNbWqt6yoeYNdksf+StJS0/ZF/tMABhdTyxV0P5Rw6VXQgZHNtWOgfmJMlDAynKkszTD0FGhH4s5/uUn4x4MvbLFCifkzrPWM5L6AFcjxlH2Rvmo9TM636Aok22Dpkqdw7PIyg2Y1H+aKj3usbSCEFP2vreF6WZcEuwLFy4O/BFxRNaqtc787JYs1qpfJSv+/Y9X6FC0dWTsT8U6igfiOmlBQJQPKulscG4wqXywJXJQa7Vxbi8UYg2miHMxGpZ+3GOEPeocT/8H45JdeDmkPfhHyYB3I8ZsTCGGRsCMUw+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MBf4+jhg5MiwE5dfgQbxja+JLMyW1PBMvsr2S97FG2o=;
+ b=bY100qVjrW7Wa+qlWPopfP3XtQDu0SqHAy37V6pj8nFv/yl273fqfAUU3pK393UjECaIYes9qfiTaFQt/r5nXoNzhY7Q6Z23/9dzLhC/wRW1iFj1MxuY3s9F4HDU8p+5ReV7FhzoQgTEixOjYadxnpe4d2rd3jcUiaS3SRcYclIkC/6RRuAow+B7eA/xhx0k/DV3q4Od0/HDt0EL+2577/yDeSnrQan8sGEz1wH5NflCrH3kteGcK1GXn7vmWRlUyUnV9JP+OWGKJt1XZIWVt3Z3Rupme2Es6HHi78EM9eW2l4AA6cf079wiQES7tZ9WqjA4RRxEIjOmJaYvnwVngg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from BN9PR11MB5483.namprd11.prod.outlook.com (2603:10b6:408:104::10)
+ by MN0PR11MB6135.namprd11.prod.outlook.com (2603:10b6:208:3c9::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.25; Fri, 10 Nov
+ 2023 18:20:35 +0000
+Received: from BN9PR11MB5483.namprd11.prod.outlook.com
+ ([fe80::6da1:a4b7:4771:14e1]) by BN9PR11MB5483.namprd11.prod.outlook.com
+ ([fe80::6da1:a4b7:4771:14e1%4]) with mapi id 15.20.6977.019; Fri, 10 Nov 2023
+ 18:20:35 +0000
+From: "Chiu, Chasel" <chasel.chiu@intel.com>
+To: Simon Glass <sjg@chromium.org>, "devicetree@vger.kernel.org"
+ <devicetree@vger.kernel.org>
+CC: Mark Rutland <mark.rutland@arm.com>, Rob Herring <robh@kernel.org>, "Tan, 
+ Lean Sheng" <sheng.tan@9elements.com>, lkml <linux-kernel@vger.kernel.org>,
+ Dhaval Sharma <dhaval@rivosinc.com>, "Brune, Maximilian"
+ <maximilian.brune@9elements.com>, Yunhui Cui <cuiyunhui@bytedance.com>,
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, ron minnich
+ <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>,
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>, "U-Boot Mailing
+ List" <u-boot@lists.denx.de>, Ard Biesheuvel <ardb@kernel.org>, "Chiu,
+ Chasel" <chasel.chiu@intel.com>
+Subject: RE: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+Thread-Topic: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+Thread-Index: AQHZ8LGvpttG6mvEz0WlU57NBrVnTbB0GT1w
+Date: Fri, 10 Nov 2023 18:20:34 +0000
+Message-ID: <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+In-Reply-To: <20230926194242.2732127-2-sjg@chromium.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BN9PR11MB5483:EE_|MN0PR11MB6135:EE_
+x-ms-office365-filtering-correlation-id: aa3f4fee-8ef4-4ab8-7db0-08dbe219bb1c
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 99WWrKQlkV+LGcBF+clpRsSpTf79OtvxNVlzC+Uxjt9wktGaLZT3154BgDrcjnTYjo7imoQbv6z6RqZXcqaCgqMWRn/wQVtBjqTLTi5oN5xDUv5Om7HsM5q8fNG2KmvL0THV4z2+3LehYVknZHA9i7++l8oWi5hnnA8+d4C2DC7agW6DNzlgixrea3nmdqd58WeuUkygF7qB08LDWLeQW1tOOKQ3lsHY/uQzREU6t1kUjgUCsWkqUwo1f5anYvDl4sYOjWx1AT4oni8cjZAT1V5xwELGF9r/y1GhB8OglHCoO7AZ+CjdVweqrIsIPsKwtbHQO0CRn4UwPVjbYs6dlDH9jKVGqHkWTTXdiP9tvAytS+hvbchkfTueHkjfMfaRscK/sJkZDv/tkSiDv2yx6Xc4KY/IdIZi4mfokyST50sWaQZK7/cHcF2jSsUxsxBKoVeyP6qHHJktX/goA5658JDhL7N4HXF9NL6/izJ3nwSAp8RUDhLaVJMK/45g09miOoRTFlP186zgMNFsa1NpyHaotWmK83Ndf4FCangiqptGRpWJdMBLFMTtc66SQfkS+kQ+PuWkhq2ygw1iobABm+tsigiEirjgTqchhnzbDC0=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BN9PR11MB5483.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(39860400002)(346002)(376002)(366004)(396003)(136003)(230922051799003)(451199024)(1800799009)(64100799003)(186009)(8676002)(2906002)(7416002)(4326008)(5660300002)(55016003)(966005)(9686003)(122000001)(76116006)(86362001)(66446008)(316002)(71200400001)(54906003)(66476007)(66556008)(26005)(64756008)(33656002)(66946007)(110136005)(82960400001)(478600001)(6506007)(38100700002)(107886003)(7696005)(53546011)(52536014)(41300700001)(38070700009)(83380400001)(8936002);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?b8Q641gmCJlMn7VweMmTWI0lTSjNOvb8MyY+PrGQ0ZUVVt6Mo+gGNFseubhA?=
+ =?us-ascii?Q?Yp0d0C7f6SlyXWxA5rTQfpiytjKFIiEppUY6HwILJRJ3l3a/0OxQRXqLCguT?=
+ =?us-ascii?Q?PP/cLrf1mQV7WAKKG92hZ6LKmoF44K9EIR56N1ZRjrgR9dCWfNBJnR9gCBGI?=
+ =?us-ascii?Q?afzY1EttrD/jZCYRT/yatSzWYkxc6nesKCxPyHCcIFJBazkGztdhkEi8xJRN?=
+ =?us-ascii?Q?+lUkAa2kh9TAU6eYwcmz5CPtJvGd/ZPZ4TvIm0eYcprWenIkUealPL9MOjxL?=
+ =?us-ascii?Q?rdliaU7diuTq4sqSu+7dzYIYnMESYHxpkqyOILJgfTu+Urblc+F1/ym8LV3y?=
+ =?us-ascii?Q?zHwJLN28undaONPLXEsrBwWFpEShSkygq410a4WQweJZeYsyevpm+q0iKDAm?=
+ =?us-ascii?Q?ks06KYhMqLZQXqlq4dWoCGrw8XmbV+s9+a5os2/UshEWKwOXhr6+hbP4H+YD?=
+ =?us-ascii?Q?Zx/+qochTVghl6B6qkZ9NZn4nfFiaQITDVx0NtgMz/6RXTAVOsF25xzK5tYc?=
+ =?us-ascii?Q?LJVAcEjWPvdYhWmkraqOHQWMEb/i6I/DS/BRtHerTxCJJYUKQnkvq2bEwFlZ?=
+ =?us-ascii?Q?9pzMrV5YCJOdz4jxMi2CPefzULueltBRsUMpxFsEzX1wyOuz0MjJDcKeF7i5?=
+ =?us-ascii?Q?h2+WUIWq5AULaVN5yWCJX7dxDrvEtHf6qghaSPzenHBeGZ81g9MweNTXO0L1?=
+ =?us-ascii?Q?WtyhSFgz0XIt10cV5LCnVbuvEnKuQsFAP/wRkiKUlYLdZMHD0DnFmpKrKicT?=
+ =?us-ascii?Q?TlArc1o4nUzTfvOKDolFieVfZQdd3CWrsBA/TFFuPkxOj8ABaavzHIjHtx0E?=
+ =?us-ascii?Q?n8HJjDZxjDlP4M3h2nvthIfM8yqwclqtv38TsyCWe6yinUYp3PPSm7dIQAaC?=
+ =?us-ascii?Q?eqX7rZ51PMFYpDVFi4biLnEFlrFe8rmKcmKLGxmx83wCwxrxg/qsTTVvGumO?=
+ =?us-ascii?Q?Xr88x/1XXihS2v18zArjCobnF/vxxS154ViUlN+PJdMFzkTLz7Ir83W03jMc?=
+ =?us-ascii?Q?jOTpoX1YSCJqBg9IesBo4rmnUB/qPUfTaBfBaVWdjfQXtcAzS+tBx0c3fgfX?=
+ =?us-ascii?Q?KdAZdLnxk5Je0kMjrJKzYv+t6E8JCav5gAeP3AL1iJpeOq69yww7bnfL7BOg?=
+ =?us-ascii?Q?MD+bTdRCKxbg6gHZ9aReXVakhXRzWLxBB1weZiD81O0SiL1UrNjIj+bvZXVB?=
+ =?us-ascii?Q?l0cMnwC/b1EIffJHsSunB5iPoUgZFmSshqp9L8Mp/K/muEfztj5+0NO9Ukib?=
+ =?us-ascii?Q?m/ZKUN19KY2qf8oRI0GuRRRY4XV3M3D6RtAkGkRDPeje9WdrtU6NfVsvaJOo?=
+ =?us-ascii?Q?11h21ZqZg42TTY1HRIU1Wbecv3dnJ0fc0ROHdO3j+dTiUyHsjVTTXAwBh3oW?=
+ =?us-ascii?Q?YeoPNpaa7z7cyuPc420YwwOV0d8j0oQngd4yjkD408royOR1vFcei3O2jJ7l?=
+ =?us-ascii?Q?ew0K0LcTiJDWvosOL4YxQ/+jjkQ+dgk+TVLQ4qNngoZxzHKrMKlMr6Kt8KYG?=
+ =?us-ascii?Q?lorwBkB6wsCQnIuzbb56jtm5lyKtQl/myd+roqg4az25bgtUE/me8pTCA6Zk?=
+ =?us-ascii?Q?FUna2Pextr8s8c4HIA6+I/aQLMv+1yWV29UlStCV?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="586n1biuiplz75jy"
-Content-Disposition: inline
-In-Reply-To: <20231025051427.509602-6-takahiro.akashi@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5483.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: aa3f4fee-8ef4-4ab8-7db0-08dbe219bb1c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Nov 2023 18:20:34.4034 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: dBKSPdh+ZadnY7Q341XcCYMg7xm9bNgUospFem9C1i85KfcVHfK0ffhKHlCRCY1mplBzp0MAG+ecc98LzLUiEA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR11MB6135
+X-OriginatorOrg: intel.com
+X-Mailman-Approved-At: Fri, 10 Nov 2023 19:27:46 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,92 +177,176 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---586n1biuiplz75jy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Just sharing some usage examples from UEFI/EDK2 scenario.
+To support ACPI S4/Hibernation, memory map must be consistent before enteri=
+ng and after resuming from S4, in this case payload may need to know previo=
+us memory map from bootloader (currently generic payload cannot access plat=
+form/bootloader specific non-volatile data, thus could not save/restore mem=
+ory map information)
+Another usage is to support binary model which generic payload is a prebuil=
+t binary compatible for all platforms/configurations, however the payload d=
+efault memory map might not always work for all the configurations and we w=
+ant to allow bootloader to override payload default memory map without reco=
+mpiling.
 
-On Wed, Oct 25, 2023 at 02:14:27PM +0900, AKASHI Takahiro wrote:
+Under below assumption:
+	FDT OS impact has been evaluated and taken care by relevant experts/stakeh=
+olders.
+Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
 
-> In this test, "scmi" command is tested against different sub-commands.
-> Please note that scmi command is for debug purpose and is not intended
-> in production system.
+Thanks,
+Chasel
+
+
+> -----Original Message-----
+> From: Simon Glass <sjg@chromium.org>
+> Sent: Tuesday, September 26, 2023 12:43 PM
+> To: devicetree@vger.kernel.org
+> Cc: Mark Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>;
+> Tan, Lean Sheng <sheng.tan@9elements.com>; lkml <linux-
+> kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>; Brune,
+> Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
+> <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
+> <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
+> <gua.guo@intel.com>; Chiu, Chasel <chasel.chiu@intel.com>; linux-
+> acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>; Ard
+> Biesheuvel <ardb@kernel.org>; Simon Glass <sjg@chromium.org>
+> Subject: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
 >=20
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
+> It is common to split firmware into 'Platform Init', which does the initi=
+al hardware
+> setup and a "Payload" which selects the OS to be booted.
+> Thus an handover interface is required between these two pieces.
+>=20
+> Where UEFI boot-time services are not available, but UEFI firmware is pre=
+sent on
+> either side of this interface, information about memory usage and attribu=
+tes must
+> be presented to the "Payload" in some form.
+>=20
+> This aims to provide an small schema addition for the memory mapping need=
+ed
+> to keep these two pieces working together well.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> Changes in v7:
+> - Rename acpi-reclaim to acpi
+> - Drop individual mention of when memory can be reclaimed
+> - Rewrite the item descriptions
+> - Add back the UEFI text (with trepidation)
+>=20
+> Changes in v6:
+> - Drop mention of UEFI
+> - Use compatible strings instead of node names
+>=20
+> Changes in v5:
+> - Drop the memory-map node (should have done that in v4)
+> - Tidy up schema a bit
+>=20
+> Changes in v4:
+> - Make use of the reserved-memory node instead of creating a new one
+>=20
+> Changes in v3:
+> - Reword commit message again
+> - cc a lot more people, from the FFI patch
+> - Split out the attributes into the /memory nodes
+>=20
+> Changes in v2:
+> - Reword commit message
+>=20
+>  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
+>  1 file changed, 71 insertions(+)
+>  create mode 100644 dtschema/schemas/reserved-memory/common-
+> reserved.yaml
+>=20
+> diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml
+> b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> new file mode 100644
+> index 0000000..f7fbdfd
+> --- /dev/null
+> +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> @@ -0,0 +1,71 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause %YAML 1.2
+> +---
+> +$id:
+> +http://devicetree.org/schemas/reserved-memory/common-reserved.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Common memory reservations
+> +
+> +description: |
+> +  Specifies that the reserved memory region can be used for the purpose
+> +  indicated by its compatible string.
+> +
+> +  Clients may reuse this reserved memory if they understand what it is
+> + for,  subject to the notes below.
+> +
+> +maintainers:
+> +  - Simon Glass <sjg@chromium.org>
+> +
+> +allOf:
+> +  - $ref: reserved-memory.yaml
+> +
+> +properties:
+> +  compatible:
+> +    description: |
+> +      This describes some common memory reservations, with the compatibl=
+e
+> +      string indicating what it is used for:
+> +
+> +         acpi: Advanced Configuration and Power Interface (ACPI) tables
+> +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This is rese=
+rved by
+> +           the firmware for its use and is required to be saved and rest=
+ored
+> +           across an NVS sleep
+> +         boot-code: Contains code used for booting which is not needed b=
+y the OS
+> +         boot-code: Contains data used for booting which is not needed b=
+y the OS
+> +         runtime-code: Contains code used for interacting with the syste=
+m when
+> +           running the OS
+> +         runtime-data: Contains data used for interacting with the syste=
+m when
+> +           running the OS
+> +
+> +    enum:
+> +      - acpi
+> +      - acpi-nvs
+> +      - boot-code
+> +      - boot-data
+> +      - runtime-code
+> +      - runtime-data
+> +
+> +  reg:
+> +    description: region of memory that is reserved for the purpose indic=
+ated
+> +      by the compatible string.
+> +
+> +required:
+> +  - reg
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    reserved-memory {
+> +        #address-cells =3D <1>;
+> +        #size-cells =3D <1>;
+> +
+> +        reserved@12340000 {
+> +            compatible =3D "boot-code";
+> +            reg =3D <0x12340000 0x00800000>;
+> +        };
+> +
+> +        reserved@43210000 {
+> +            compatible =3D "boot-data";
+> +            reg =3D <0x43210000 0x00800000>;
+> +        };
+> +    };
+> --
+> 2.42.0.515.g380fc7ccd1-goog
 
-The test part of this still fails:
-https://source.denx.de/u-boot/u-boot/-/jobs/732077
-
-I don't know why more output wasn't captured, when I run it locally
-instead I get:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-_______________________________ test_ut[ut_dm_dm_test_scmi_cmd] ___________=
-____________________
-test/py/u_boot_spawn.py:195: in expect
-    c =3D os.read(self.fd, 1024).decode(errors=3D'replace')
-E   OSError: [Errno 5] Input/output error
-
-During handling of the above exception, another exception occurred:
-test/py/tests/test_ut.py:502: in test_ut
-    output =3D u_boot_console.run_command('ut ' + ut_subtest)
-test/py/u_boot_console_base.py:266: in run_command
-    m =3D self.p.expect([self.prompt_compiled] + self.bad_patterns)
-test/py/u_boot_spawn.py:204: in expect
-    raise ValueError('U-Boot exited with %s' % info)
-E   ValueError: U-Boot exited with signal 11 (SIGSEGV)
------------------------------------- Captured stdout call -----------------=
---------------------
-=3D> ut dm dm_test_scmi_cmd
-Test: dm_test_scmi_cmd: scmi.c
-SCMI device: scmi
-  protocol version: 0x20000
-  # of agents: 2
-      0: platform
-    > 1: OSPM
-  # of protocols: 4
-      Power domain management
-      Clock management
-      Reset domain management
-      Voltage domain management
-  vendor: U-Boot
-  sub vendor: Sandbox
-  impl version: 0x1
-Denying access to device:0 failed (-13)
-Denying access to protocol:0x14 on device:0 failed (-13)
-Reset failed (-13)
-Test: dm_test_scmi_cmd: scmi.c (flat tree)
-SCMI device: Q
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-FAILED test/py/tests/test_ut.py::test_ut[ut_dm_dm_test_scmi_cmd] - ValueErr=
-or: U-Boot exited...
-
---=20
-Tom
-
---586n1biuiplz75jy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVOdKsACgkQFHw5/5Y0
-tyzk2AwAtKuOJBbLkbM41Nd8KAd08K2UtK/6eNmnguquDNGI/pNRlurGP/t5O5Ka
-LRQ/p+VwvwLFKZiLGjiMGwRyR72ITkBmMOhVkHeMimYKAk3MlNcexqo9Ro/clUgA
-5KbaKsbrptKUfOmJ1PKo4gzRHX9c3dA+i7mnFcGeR0/gXtGhjhFJ+XULk3Iky4hI
-u3Cr3iS1QC4sXt4LfuO1O/azKxKbLSbVHrZtOvmBEAdzQU8dlMemAljsGQ0gjuwo
-NyxADJ9X7gBauHM1OCPN2r/zZWG/dUMJTQVdU5yZNYm0Ld55JdBP78kSFdC9LNll
-q6F/pT5U8OZvZx3ZjlVI6hQkL/i9KfffM1zux4vYQGNMPwemZGeKEfjqIIcaKse8
-8GcIn1iz50N9h5a0KJzVWejm/Y5vLwfYB1pWqeIh8wmR0uDILZabiYjgxRL0k38u
-TYh0xROXlrev9u9Jbx3zc69+EmHa9qA+1IowF1/Gk8YmiIqdRECNlUdUAqFrsrqX
-PPGuXbCM
-=GlP4
------END PGP SIGNATURE-----
-
---586n1biuiplz75jy--
