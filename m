@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21705C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 13:13:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5096BC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 13:20:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DAE98761C;
-	Fri, 10 Nov 2023 14:12:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 04418877B6;
+	Fri, 10 Nov 2023 14:20:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="R6tekrI7";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="lii127Mu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 916968761C; Fri, 10 Nov 2023 14:12:53 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BB667877D4; Fri, 10 Nov 2023 14:20:49 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83DDC87632
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 14:12:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA3A3876E3
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 14:20:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699621969; x=1700226769; i=xypron.glpk@gmx.de;
- bh=V+/oAle2Qb5W89CAdzyAJpxl6n+9yxUpcZKNIvIRSs0=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=R6tekrI7V2FaCLY9dju8XH64kYrKmay5uH1BXGC20pvKxexhjklF6Dx9nuGSMGJ4
- FwARlUeCSKy98QBNCv4sgO0y7DdKSlC2gA47Uh4ew10bDPOxnr9rwrDD8tbT6t30X
- +RLc+NW95VxDxV7MHWgMdfpFfhgWdJdh/Zphb+KnI8cSf69VZ4r6w+l5H2cltrb0K
- tggKCw+rbf0cm+XB9LBloeRZ1AV4niXT+Tt6MqUFbDln9k1y2Gx9hbP9GgoQS0cAh
- qUKBAW0siZAICVIRdQNDW8OhGypA5lFd+AygZW5kHTA4jE/K4GZ+mxZwqFV7hpAr8
- WvNdg7wvVdyOPg50OQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mbir8-1rWumk3VsM-00dD6O; Fri, 10
- Nov 2023 14:12:48 +0100
-Date: Fri, 10 Nov 2023 14:12:47 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] efi_loader: Fix UEFI variable error handling
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAC_iWjJHRtuy3M2o61+tkZ+cMPHrizrQQrx9-r_3LCzJgQBjUg@mail.gmail.com>
-References: <20231109125541.10845-1-o451686892@gmail.com>
- <4d5b922a-b633-4892-9f36-78935c553bef@gmx.de>
- <CAC_iWjJHRtuy3M2o61+tkZ+cMPHrizrQQrx9-r_3LCzJgQBjUg@mail.gmail.com>
-Message-ID: <67A55014-91EE-4C04-A228-52C5790DC910@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=9678822151=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3AADAguh002479; Fri, 10 Nov 2023 14:20:41 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=h0tN4jaMzy51YpPv53zw1WyPFUCEhVuQdZX+TZMTqgk=; b=li
+ i127MuXf5gWjKJvYTmzgdxpeyJXyvsT6wa8VuJ9cKKNYOJzkKH2PuOhilOdaNBRy
+ cW1Z/U7q5fBupL/1AWV022fzkYXCuHnKFftXbr3pyK7h9L/7Zqj2XpppcdXvxzB9
+ JMWvq/oq5HFyAeRSbDlnO8Re8pPQzV8N0uovQHClPxuwebRhdySuRU0aWzOfMcI0
+ 9yu1eQHmFLpxGSfi0z8foFUpyF54z6paOBvAK9xUFlwbuxzA4hUI7SOHqg1tgXhB
+ xHQRn6Qza/Cl15F9o8GhJya6anz7gSeOStRSuBQ7/kFwxF36LIiQ/z1rf8XEjPRx
+ /nfLdENqEfU7aiqj8Wmg==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u7w26p8h4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Nov 2023 14:20:41 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 12B9E100056;
+ Fri, 10 Nov 2023 14:20:39 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DD3C625E535;
+ Fri, 10 Nov 2023 14:20:39 +0100 (CET)
+Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 10 Nov
+ 2023 14:20:39 +0100
+Message-ID: <ffbd0946-57a5-48bd-9ace-d1ff7b9feab3@foss.st.com>
+Date: Fri, 10 Nov 2023 14:20:38 +0100
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/IYWmazVzU4e+Z98E927QAYQx1mslh/j07up92wNzQn07tM+EED
- Olgt6CPl8/of45sYLVZG+44EWQWEZrQtamfS9FiUg2fhpkDyk7WUHMvK77puzzTZFls5r4C
- YuP4vvycfXHi7oS4aSnvihBo6dv6IKOUQVOjuS1x4BpmDhp+aAuCQoHQacyuwNujvZBGvoa
- Zha/lomSdp3sWoc36Ld4w==
-UI-OutboundReport: notjunk:1;M01:P0:DpqJEhW4JVY=;Fp4UbtMuqeneCG9kMUCHeZlz8jB
- SmV9WQj7cfb/RG8gIvO86ex3VpzcBH9xkNgCMfj21WGWSIQXwx2RcXxOmofVgzlAQRHqABLHL
- Jfqv/v4EJ7Vl9KGNa9fEqqbcQjbpnrqzzOdzYc+qSuZWuJeCzNAo+bfLra2iONbVVlgTnQkWo
- yfPMnEBpFTVThXjBDNccMkSa6XQxEBdNBDf+sWrUt3KeI25giSLCbZplX8j9bF5ZEg/1kyH6b
- VWzwnpnzbaiRawbsRq8Bi6aD99J/2ZDj9sVOP2lqCKpMLWpeMuvQ4i8wntOvVMylMW8vLR4Tw
- k2M9uCSnlzAz7N7d8929kD+cthEmuqg8uwZKOJiMP7Jwxq6YQyCMQPfxIMkvxVVW6RA3J+j4C
- FSPcZoHbodl3AwVk3lh1+KfkxOxjuP4m7C2onZUuyay9nVRcvGzJ/g7g4nmVipQA48EVa6p7X
- 6XD7E8k5YK00fBwbFCXcfYp6prP35EyllSj7JjZfasfArc9Cmf4vWe0l3c7F6iSsVV7kakpD2
- bGiRlQeZ92ujDvQ6dneF0S4GBYbiLDRQLyxVpPbMKW7GMYTsk5avODy8oLMPnOZvzxidAP1MD
- vyGO0ykR2PkN6zV5Itc3/MG0p56YQM0yhAks7okevv79lHT5t29LF1eeaIHe39ueQPAS6CLCI
- cdHMVxaPVmE7Tqy3hRwdJQ3blLWjZlQ1PxaUgzHmj0sKfFcLIZlA0rmFeVLybMbXLwt9JSEP8
- 18YjMXNXnLRnQWYyTcTEGB81vmYqMacWbLBX/fWfJZ60521Z/WjIBZ6rk088LBzrOy/UnY6Os
- ld3YlL3LGeynciSv10r48xauum42Ir+Wvo/aj+jf1z7g8Q0r2mKXKpD4OUu3yw2drBM+RTdkx
- 4kQv1AX6tioOOUX5fzbgHf9S9CAOAberQVyl+kalyKwGTWyrsHg4fGhKUOiBD6MzQVnL3siKE
- iMgDSCjxldFxYTZAuqSPHDi2qQc=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/9] arm: caches: Make DCACHE_DEFAULT_OPTION accessible
+ for ARM64 arch
+Content-Language: en-US
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Andre Przywara
+ <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20231027144304.1002307-1-patrice.chotard@foss.st.com>
+ <20231027144304.1002307-2-patrice.chotard@foss.st.com>
+ <ca42a456-594f-4b7c-b472-8031412055e7@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <ca42a456-594f-4b7c-b472-8031412055e7@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.201.20.54]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-10_10,2023-11-09_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,185 +95,63 @@ X-Virus-Status: Clean
 
 
 
-Am 10=2E November 2023 11:04:24 MEZ schrieb Ilias Apalodimas <ilias=2Eapal=
-odimas@linaro=2Eorg>:
->Hi Heinrich, Weizhao
->
->On Thu, 9 Nov 2023 at 15:57, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>=
- wrote:
+On 11/9/23 10:11, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> On 10/27/23 16:42, Patrice Chotard wrote:
+>> This fixes the following compilation error in ARM64:
+>> arch/arm/mach-stm32mp/dram_init.c: In function ‘board_get_usable_ram_top’:
+>> arch/arm/mach-stm32mp/dram_init.c:59:45: error: ‘DCACHE_DEFAULT_OPTION’ undeclared (first use in this function)
+>>     59 |  mmu_set_region_dcache_behaviour(reg, size, DCACHE_DEFAULT_OPTION);
+>>        |                                             ^~~~~~~~~~~~~~~~~~~~~
 >>
->> On 11/9/23 04:55, Weizhao Ouyang wrote:
->> > Correct some UEFI variable error handing code paths=2E
->> >
->> > Signed-off-by: Weizhao Ouyang <o451686892@gmail=2Ecom>
->> > ---
->> >   lib/efi_loader/efi_var_file=2Ec | 1 +
->> >   lib/efi_loader/efi_variable=2Ec | 8 ++++----
->> >   2 files changed, 5 insertions(+), 4 deletions(-)
->> >
->> > diff --git a/lib/efi_loader/efi_var_file=2Ec b/lib/efi_loader/efi_var=
-_file=2Ec
->> > index 62e071bd83=2E=2Edbb9b1f3fc 100644
->> > --- a/lib/efi_loader/efi_var_file=2Ec
->> > +++ b/lib/efi_loader/efi_var_file=2Ec
->> > @@ -236,6 +236,7 @@ efi_status_t efi_var_from_file(void)
->> >               log_err("Invalid EFI variables file\n");
->> >   error:
->> >       free(buf);
->> > +     return ret;
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
 >>
->> Hello Weizhao,
+>>   arch/arm/include/asm/system.h | 16 ++++++++--------
+>>   1 file changed, 8 insertions(+), 8 deletions(-)
 >>
->> thank you for looking into the error handling=2E
->>
->> U-Boot's UEFI variables can either be stored in file ubootefi=2Evar in =
-the
->> ESP or in the RPMB (Replay Protected Memory Block) partition of the
->> eMMC=2E The suggested changes are about handling of errors when reading=
- or
->> writing the file ubootefi=2Evar=2E Security relevant variables (PK, KEK=
-, db,
->> dbx) are never read from file=2E
->>
->> On first boot a file ubootefi=2Evar will not exist=2E It has to be crea=
-ted
->> by U-Boot=2E If efi_var_from_file() would return an error if the file d=
-oes
->> not exist or is corrupted, we would never be able to boot such a system=
-=2E
->> This is why deliberately we return EFI_SUCCESS here=2E What is missing =
-in
->> the code is a comment explaining the design decision=2E
->
->Yes, that's correct=2E The function description tries to explain that
->but is a bit vague=2E
->
->>
->> >   #endif
->> >       return EFI_SUCCESS;
->> >   }
->> > diff --git a/lib/efi_loader/efi_variable=2Ec b/lib/efi_loader/efi_var=
-iable=2Ec
->> > index be95ed44e6=2E=2E13966297c6 100644
->> > --- a/lib/efi_loader/efi_variable=2Ec
->> > +++ b/lib/efi_loader/efi_variable=2Ec
->> > @@ -350,17 +350,17 @@ efi_status_t efi_set_variable_int(const u16 *va=
-riable_name,
->> >
->> >       if (var_type =3D=3D EFI_AUTH_VAR_PK)
->> >               ret =3D efi_init_secure_state();
->> > -     else
->> > -             ret =3D EFI_SUCCESS;
->>
->> The two lines are unreachable code and should be removed=2E
->>
->> > +     if (ret !=3D EFI_SUCCESS)
->> > +             return ret;
->>
->> These new lines should only be reached if var_type =3D=3D EFI_AUTH_VAR_=
-PK=2E
->>
->
->Yea agree here
->
->> I am not sure what Would be the right error handling if
->> efi_init_secure_state() fails:
->>
->> * Do we have to set PK to the old value?
->
->What do you mean by old value?
+>> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+>> index 0eae857e73a..43f7503571d 100644
+>> --- a/arch/arm/include/asm/system.h
+>> +++ b/arch/arm/include/asm/system.h
+>> @@ -513,14 +513,6 @@ enum dcache_option {
+>>   };
+>>   #endif
+>>   -#if defined(CONFIG_SYS_ARM_CACHE_WRITETHROUGH)
+>> -#define DCACHE_DEFAULT_OPTION    DCACHE_WRITETHROUGH
+>> -#elif defined(CONFIG_SYS_ARM_CACHE_WRITEALLOC)
+>> -#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEALLOC
+>> -#elif defined(CONFIG_SYS_ARM_CACHE_WRITEBACK)
+>> -#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEBACK
+>> -#endif
+>> -
+>>   /* Size of an MMU section */
+>>   enum {
+>>   #ifdef CONFIG_ARMV7_LPAE
+>> @@ -578,6 +570,14 @@ void psci_system_reset(void);
+>>     #endif /* CONFIG_ARM64 */
+>>   +#if defined(CONFIG_SYS_ARM_CACHE_WRITETHROUGH)
+>> +#define DCACHE_DEFAULT_OPTION    DCACHE_WRITETHROUGH
+>> +#elif defined(CONFIG_SYS_ARM_CACHE_WRITEALLOC)
+>> +#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEALLOC
+>> +#elif defined(CONFIG_SYS_ARM_CACHE_WRITEBACK)
+>> +#define DCACHE_DEFAULT_OPTION    DCACHE_WRITEBACK
+>> +#endif
+>> +
+>>   #ifndef __ASSEMBLY__
+>>   /**
+>>    * save_boot_params() - Save boot parameters before starting reset sequence
+> 
+> 
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> Thanks
+> Patrick
+> 
+> 
+Applied to u-boot-stm32/next
 
-We are in SetVariable() and set, changed, or deleted PK in memory=2E But t=
-his has lead to some inconsistency=2E Should the prior state be restored?
-
-Regards
-
-Heinrich
-
->
->> * Should we still persist PK to ubootefi=2Evar?
->
->I would argue that we don't really care about what happens in this
->case=2E Writing authenticated variables on a file is only supported if
->preseeding is disabled and it *never* gets restored=2E We basically
->allow that code to test EFI secure boot by writing PK, KEK, DB on the
->fly, but once we reboot those variables are gone=2E
->If preseeding is enabled we don't write that at all=2E We return
->EFI_WRITE_PROTECTED=2E  We could do that regardless=2E  But since we have
->those tests, the memory backend should still be allowed to write
->those=2E
->
->>
->> However we decide we should describe our decisions in a code comment=2E
->
->I think the logic here should be
->1=2E If variables are preseeded and restoring any authenticated
->variables fails, the EFI subsystem should refuse to start (which it
->already does)
->2=2E If preseeding is not configured we can continue as best effort and
->try to recover the board and rewrite variables=2E We don't trust
->variables stored in a file and we should keep it that way
->
->>
->> >
->> >       /*
->> >        * Write non-volatile EFI variables to file
->> >        * TODO: check if a value change has occured to avoid superfluo=
-us writes
->> >        */
->> >       if (attributes & EFI_VARIABLE_NON_VOLATILE)
->> > -             efi_var_to_file();
->> > +             ret =3D efi_var_to_file();
->>
->> The discussion here should focus on the treatment of errors in the
->> file-system=2E
->>
->> The following error cases come to my mind:
->>
->> * ESP partition is missing
->> * ESP FAT file system is corrupted
->> * There is no space on the ESP=2E
->> * The medium (e=2Eg=2E SD card) is in write only mode
->>
->> The current code gives priority to enable booting in all adverse
->> situations=2E Do you think this is a bad choice?
->>
->> @Ilias: Please, chime in=2E
->
->I think we should continue doing that *unless* preseeding is enabled=2E
->If we preseed authenticated variables and the restoration of the
->switching of the secure boot mode fails we must stop the EFI
->subsystem=2E
->The first function that gets called is efi_init_variables()=2E
->commit 77bb14758dcb1 explains some of the logic in that file but in short
->- We load variables from a file first, excluding authenticated ones
->- We load preseeded variables=2E That step allows you to load PK, KEK,
->db etc that are stored as part of the u-boot binary=2E  We assume that
->in a sane design a chain of trust *will* authenticate u-boot prior to
->loading, so we 'trust' those variables=2E  If this fails which includes
->setting the secure state we correctly stop the EFI subsystem
->- efi_var_restore() is checking for duplicates=2E So a non-authenticated
->variable set by the file load won't be overwritten by built-in ones=2E
->This allows users to override built-in variables (apart from auth ones
->obviously)
->
->Cheers
->/Ilias
->
->
->
->
->
->
->>
->> Best regards
->>
->> Heinrich
->>
->> >
->> > -     return EFI_SUCCESS;
->> > +     return ret;
->> >   }
->> >
->> >   efi_status_t efi_query_variable_info_int(u32 attributes,
->>
+Thanks
+Patrice
