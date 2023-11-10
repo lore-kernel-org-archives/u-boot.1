@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23DF6C05021
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 17:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77AB8C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 18:16:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D970D87750;
-	Fri, 10 Nov 2023 18:48:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B327874B7;
+	Fri, 10 Nov 2023 19:16:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DLuqcGsz";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="2BI1LHOw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69AE68778F; Fri, 10 Nov 2023 18:48:55 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id C4C2A877BF; Fri, 10 Nov 2023 19:16:18 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA0468725C
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 18:48:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B6CEF8721A
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 19:16:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-da2b9234a9fso2422207276.3
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 09:48:52 -0800 (PST)
+ spf=pass smtp.mailfrom=jbrunet@baylibre.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40859c464daso17568485e9.1
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 10:16:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699638531; x=1700243331; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rMcVyvOtXOCKNMo3g02kW1LS8dXmR2jQVNBqEvljDnE=;
- b=DLuqcGsz18k252dY/HtADUZBgAsPhCeV5Dj2bUHdQ6pqWrxdIrJ0knCxIK+lnloqf/
- bJp2myGY/HQv8EKk9AjxWbPys74NRWiIZYNFUZgI0BHiUquZr56pk237qpkxFEj+7Mjk
- z0vKQ18BDcg9XEzt8ACByh6bmXXyRNwcb9uTs=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1699640176; x=1700244976;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:in-reply-to:date:subject:cc:to:from
+ :user-agent:references:from:to:cc:subject:date:message-id:reply-to;
+ bh=BvjXQlUY6/PP7bOwN11QvjkURrxXgeIa9hol/Db3KYM=;
+ b=2BI1LHOwTJXWfKXXFYEni0ULSrfpfNPaVaSaBrhOmFKn+bYpSO6pDQlDheKQDq9IHE
+ qhGAhIrKzT89fAVjM65ZKn1kWcDnk6mQ+yFnwTo4ymDkExJ+h+J3Vn0FP5LNuKZ59Uq5
+ Rnwj2xNcF4ZoxW0YH7j1RR9WVtQOaQm9OhsB2tuzvUjAybM4BU7tRt8N7Ptw8kKoOKLC
+ zXg1oHHreowEUhUOR5DmStmzkLMKVrblSx0nOcO79Qso3O8HFm/u3W57YAel+oKEV6hI
+ S3cs0rpgTeOrPZ9IBt6W9zVTSS32BlXeuQGO24hpc6wJXPtghpQKUamlekeNxF3tHmX3
+ cisg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699638531; x=1700243331;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1699640176; x=1700244976;
+ h=mime-version:message-id:in-reply-to:date:subject:cc:to:from
+ :user-agent:references:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rMcVyvOtXOCKNMo3g02kW1LS8dXmR2jQVNBqEvljDnE=;
- b=W6/Wt7uFBBNURG6XcyKUW1kcaxD4lqcNyUjPFc43zs9LSrCmbT3CVdWJtLrYr2yQbP
- mpkR7Y3MffK1VpzVTLYa0q7gwCkmDNDD2vNngyoiNugUeZOmP/KeYYZtakdbdwvGBB9c
- 2EMQMxz2fA7QF7pEfjyhnarWOtqz0mqQuMabP9FQpJZNOlEZxedJoLNRC9r8jehyhQUy
- XVkfd5q4Suru0UO40j1lJltV8POM7GKJ8P5Qa7MsDThCU2AOI3r2WehoHGCHafe27sWs
- taAVZCilQPRXzEmEJlWjO3O4mV8GBAIFVyBOKqkal24T3Zc6pR4Xy8lwaozaPQA3+WPM
- GqKg==
-X-Gm-Message-State: AOJu0YxkbatjwAgVmBLD/z4kHszpLgRch/pChdI+DVnBOh1u1fTaIzgX
- CY9rWnRi3GzpOYeeHFqZJDealw==
-X-Google-Smtp-Source: AGHT+IHXa5xs0ASkPTE1Vjd1FA4zgVUALNueOVQS54Oloa6umQh7h/RmoJB6hj30YLO1FyPdhUbYPA==
-X-Received: by 2002:a05:6902:1503:b0:da1:5a1a:e79c with SMTP id
- q3-20020a056902150300b00da15a1ae79cmr9631961ybu.50.1699638531581; 
- Fri, 10 Nov 2023 09:48:51 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-046c-8850-3cc9-4453.res6.spectrum.com.
- [2603:6081:7b00:6400:46c:8850:3cc9:4453])
+ bh=BvjXQlUY6/PP7bOwN11QvjkURrxXgeIa9hol/Db3KYM=;
+ b=sJFpiaR3PQAZd9egm2Ec26yzLbEWk+0GqbwKMCbOl/DEiDKR0gFRaOQSgyXkD/nHZL
+ Rb6xcqSLHld4EcsG5KEN3UxtyhIH6En6mC9QHXwg0fWHk0dmSjYsg+edAnJJfPygMy89
+ W7PInrhdF/UEfCjIfAdJ3n8dR2zY5vtIT7iTjx9qzHfNyxxkFc+jylYyM5VCJOBLOVE9
+ FQYgcjoPyv43D2W9QW8VkZYLQNqZTipjhEJUedeuo+A847jLd0IMKSmSS8gKqxRul25g
+ WNKcvBJ4xPgCyHMpzJ0+SkEJTXOVz3EzlUvDvGaH0BBAKE4I3xO4Vzl8WEENp600ofeT
+ Uhbg==
+X-Gm-Message-State: AOJu0Yzup0aO4P+Qp4XXVWdrMvO/j0rghO3IFTdOHhQ7fPtufJKUbvTb
+ 04wKSaDHQkN30Vh5ME9zMtYBuQ==
+X-Google-Smtp-Source: AGHT+IHpAM92a5dRWGtidgqRmsC55wVaaK0ocnwNfY87HD3xHLyjMxZNbgKlgxrhSiSwll1ne2s/ww==
+X-Received: by 2002:a05:600c:4fd2:b0:3fe:d71a:d84e with SMTP id
+ o18-20020a05600c4fd200b003fed71ad84emr127537wmq.1.1699640175973; 
+ Fri, 10 Nov 2023 10:16:15 -0800 (PST)
+Received: from localhost ([2a01:e0a:3c5:5fb1:2169:e902:f0d0:1845])
  by smtp.gmail.com with ESMTPSA id
- s5-20020ad44385000000b0066cf06339bcsm11854qvr.0.2023.11.10.09.48.50
+ g16-20020a05600c311000b0040a4751efaasm76526wmo.17.2023.11.10.10.16.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Nov 2023 09:48:51 -0800 (PST)
-Date: Fri, 10 Nov 2023 12:48:49 -0500
-From: Tom Rini <trini@konsulko.com>
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, sjg@chromium.org, dphadke@linux.microsoft.com,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v4 0/5] Populate kaslr seed with RNG
-Message-ID: <20231110174849.GA3794716@bill-the-cat>
-References: <20231103183844.2308934-1-seanedmond@linux.microsoft.com>
+ Fri, 10 Nov 2023 10:16:15 -0800 (PST)
+References: <20230915160130.352099-1-jbrunet@baylibre.com>
+ <20230915160130.352099-3-jbrunet@baylibre.com>
+ <c89408dd98f78aace3f04c3fdba5702b3045a743.camel@lexina.in>
+User-agent: mu4e 1.8.13; emacs 29.1
+From: Jerome Brunet <jbrunet@baylibre.com>
+To: Viacheslav <adeep@lexina.in>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Subject: Re: [RFT PATCH 2/2] mmc: meson-gx: set 270 core phase during the
+ identification
+Date: Fri, 10 Nov 2023 19:10:46 +0100
+In-reply-to: <c89408dd98f78aace3f04c3fdba5702b3045a743.camel@lexina.in>
+Message-ID: <1jy1f5bhjl.fsf@starbuckisacylon.baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fTg+aMe8L2hXY8k+"
-Content-Disposition: inline
-In-Reply-To: <20231103183844.2308934-1-seanedmond@linux.microsoft.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,83 +97,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fTg+aMe8L2hXY8k+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu 09 Nov 2023 at 16:49, Viacheslav <adeep@lexina.in> wrote:
 
-On Fri, Nov 03, 2023 at 11:38:39AM -0700, seanedmond@linux.microsoft.com wr=
-ote:
+> After running some tests, I've noticed inconsistent behavior with the eMMC:
+>  On a cold boot (following a shutdown), the eMMC operates as expected within U-Boot.
+>  On a hot reboot (via the kernel's reboot command), the eMMC sometimes (not always, but if
+> fit in error, next need to do poweroff) does not work:
 
-> From: Sean Edmond <seanedmond@microsoft.com>
->=20
-> This patch series creates a common API (fdt_fixup_kaslr_seed()) for=20
-> populating the kaslr seed in the DTB.  Existing users (kaslrseed,
-> and ARMv8 sec firmware) have been updated to use this common API.
->=20
-> New functionality has been introduced to populate the kaslr using
-> the RNG.  This can be enabled with CONFIG_RNG_TPM_SEED. =20
+No sure I understand.
+MMC appears to work (passes the ID phases - which was the problem
+before) but fitImage (or dtb) you get is not correct out of eMMC read,
+is not correct ?
 
-Please run this series through CI:
-https://docs.u-boot.org/en/latest/develop/ci_testing.html
-With the whole series applied I get:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-_______________________________ test_ut[ut_bootstd_cedit_base] ____________=
-____________________
-test/py/tests/test_ut.py:503: in test_ut
-    assert output.endswith('Failures: 0')
-E   assert False
-E    +  where False =3D <built-in method endswith of str object at 0x7f8536=
-092ef0>('Failures: 0')
-E    +    where <built-in method endswith of str object at 0x7f8536092ef0> =
-=3D 'Test: cedit_base: cedit.c\r\r\nCannot create oftree\r\r\ntest/boot/ced=
-it.c:27, cedit_base(): 0 =3D=3D run_command("cedit load hostfs - cedit.dtb"=
-, 0): Expected 0x0 (0), got 0x1 (1)\r\r\nTest cedit_base failed 1 times\r\r=
-\nFailures: 1'.endswith
------------------------------------- Captured stdout call -----------------=
---------------------
-=3D> ut bootstd cedit_base
-Test: cedit_base: cedit.c
-Cannot create oftree
-test/boot/cedit.c:27, cedit_base(): 0 =3D=3D run_command("cedit load hostfs=
- - cedit.dtb", 0): Expected 0x0 (0), got 0x1 (1)
-Test cedit_base failed 1 times
-Failures: 1
-=3D>
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-FAILED test/py/tests/test_ut.py::test_ut[ut_bootstd_cedit_base] - assert Fa=
-lse
+Have you checked the content ? some checksum maybe ?
 
-And the problem is in one of these two commits (one does not build by
-itself leading to this bisect outcome):
-dm: core: Modify default for OFNODE_MULTI_TREE
-fdt: Fix compile error for !OFNODE_MULTI_TREE
+What does 'mmc info' reports on boot and reboot (when it fails or not) ?
 
---=20
-Tom
+>     U-Boot is able to read the dtb file but won't boot kernel completely, or
+>     U-Boot might fail to read from the eMMC altogether.
+>
+> This behavior had not occurred before (when the phase was set to 270 on axg).
+>
+> On Fri, 2023-09-15 at 18:01 +0200, Jerome Brunet wrote:
+>> It has been reported that some devices have problems with a 180 degree
+>> core phase. Setting 270 helped some of these devices. Other continue to
+>> struggle (while it works fine with 180 in Linux ... :sigh:)
+>> 
+>> Poking around the HW, it seems that setting a 270 core phase during the
+>> identification, then using 180 for the rest of the operations, helps the
+>> device operate correctly.
+>> 
+>> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
+>> ---
+>>  drivers/mmc/meson_gx_mmc.c | 7 ++++++-
+>>  1 file changed, 6 insertions(+), 1 deletion(-)
+>> 
+>> diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+>> index c6168792cbae..284be2b9dca4 100644
+>> --- a/drivers/mmc/meson_gx_mmc.c
+>> +++ b/drivers/mmc/meson_gx_mmc.c
+>> @@ -54,9 +54,14 @@ static void meson_mmc_config_clock(struct mmc *mmc)
+>>  
+>>  	/* Clk always on */
+>>  	meson_mmc_clk |= pdata->version->clk_always_on;
+>> -	meson_mmc_clk |= CLK_CO_PHASE_180;
+>>  	meson_mmc_clk |= CLK_TX_PHASE_000;
+>>  
+>> +	/* Core phase according to mode */
+>> +	if (mmc->selected_mode == MMC_LEGACY)
+>> +		meson_mmc_clk |= CLK_CO_PHASE_270;
+>> +	else
+>> +		meson_mmc_clk |= CLK_CO_PHASE_180;
+>> +
+>>  	/* 1GHz / CLK_MAX_DIV = 15,9 MHz */
+>>  	if (mmc->clock > 16000000) {
+>>  		clk = SD_EMMC_CLKSRC_DIV2;
 
---fTg+aMe8L2hXY8k+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVObP4ACgkQFHw5/5Y0
-tywlhwv/cRRu5XWydWChx5+Sem0SfjqaK6RY/jXJOdZP3p93xbOE6NRpjD5NLZn6
-cGrvvk3UoEjZRbiU3X7vwWGgLcJgknzFPOubO27Ccj4s7dg5W5ezkkpPycSU8Oyg
-H0v1h81hBWiyUx8kAoHgunGaEAZqfwUPaow6qe2yXZuQscfG98pJoiSFosXwJOjB
-NmaxeQ/ZTC/LifjU26gF7BXAVcXJnoq7sHhnjMi8epA78B4S0P8BO8SI/aM+G8bm
-g5HL+qYQ1UClMmY5Pkd2g+B5oT3vDEv0c6DNICW4k63qO4WWvolL4YHKkdPsM54K
-J56Y4BOIyDBffLJzav37aP7wv6TEz0BmIQYeqt1Qgic7F8tBPmUCRzlNM404zfsv
-Dga1ifGWL4VrECXoe8jLxH+6AhXRA66/8PRFuTwrVg504/+TFbbKiho6s0oxps/x
-bRbCO5/RecLg2DQXfb9j3EbiUzBWQRcTKcivTBzNirhwxgndLyogVYbVaf1qBAEq
-5R//FGqq
-=uTX0
------END PGP SIGNATURE-----
-
---fTg+aMe8L2hXY8k+--
