@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8596C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 16:21:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F39DEC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 10 Nov 2023 16:21:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFB58877D7;
-	Fri, 10 Nov 2023 17:21:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 89FBB87832;
+	Fri, 10 Nov 2023 17:21:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kxTBznEd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UEGBP7dn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87D368777F; Fri, 10 Nov 2023 17:21:17 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 5727186EDF; Fri, 10 Nov 2023 17:21:21 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC17386EDF
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 17:21:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1752B86EDF
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 17:21:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-77bc5d8490dso68475785a.2
- for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 08:21:14 -0800 (PST)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-778ac9c898dso135179885a.0
+ for <u-boot@lists.denx.de>; Fri, 10 Nov 2023 08:21:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699633273; x=1700238073; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699633278; x=1700238078; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=C0XGCvtd6NkFoxt/kLmOTTQM573Z5idIv11psOLqqXY=;
- b=kxTBznEdK5klJCoGumdp8bvLs0jfE3uXr/3FJo+R5eOpMdV/JGRxo6rxbiJ3K1nAn8
- sDO/BGx+WFmTjx/5jVuhRWVih40kHbca/cqfQj0rFhKlaD3inhYJtPn+yVs3D5GHdFyG
- TOteURED9Kiejdr0iLhMkVTHYctdSPyHXr1ZU=
+ bh=lEo6c6Ka0YGXCKnn520qJBdbNDvAQxrqX9XcwcrmPJw=;
+ b=UEGBP7dn9IfJwxLghqGe6IW6wmhLp+cnSpHA7lVjWPlYA6jA3NiZxs8zBWH0ArELgJ
+ gW2PadzYtGglCOohVbHYyEbJUjldTeLMeJKseCVj6ii7DgQ1diKwiiwHSUfJzQslQlIf
+ aAt/kXbiU+1zIC9BKPb/Nu3Gn9bsHmO7Axqbs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699633273; x=1700238073;
+ d=1e100.net; s=20230601; t=1699633278; x=1700238078;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=C0XGCvtd6NkFoxt/kLmOTTQM573Z5idIv11psOLqqXY=;
- b=AMc1a2ay3ViCcO9o8+0r+d5+QGeHZALisMrPImeqUr0Lzf5PpdJC46pc/Ju262qkXH
- aUW/j/PYjjYOP2jZ+3FZmr1cNfkOoJeL/3GF2QDIpgM/tkLBWT8uB9iKgl4TFuVk0JqV
- XsoOOO1dLCTR2RHl3H7lMsIfQegJprG5PBauuv24EPIH4NfJuwQVe9W3Ldkp2qbRmxA9
- PUJdlL3+x6PfFttK2v5BQeSUV4+6pXPhJ5LcYbdhNw4Fqr0WhBpTziVD7x19dlL7bBMd
- 6CKFynq+wOgkwOp0YpnllFtzq+4Zf+ttEfj4H4gPrLi5+tnbtVxDOZtYVNTt+abePWCM
- xJpw==
-X-Gm-Message-State: AOJu0YzsJRawaAce9oTk24s7n+cVAtcMYXVFE67PsgYbTn02JDiNHRR3
- qu/+f2J8UYyissRgqGV8zzRh1d38ZIX2L++88ol6gQ==
-X-Google-Smtp-Source: AGHT+IGtQuFYH4oVPRCZ/ayMDuvajjqqDjz6s3XGZSAGNznnm88jApna6+vj71YaK4gq2Z807NThZg==
-X-Received: by 2002:a05:620a:1d81:b0:77a:a2c:679a with SMTP id
- pj1-20020a05620a1d8100b0077a0a2c679amr6862740qkn.42.1699633272971; 
- Fri, 10 Nov 2023 08:21:12 -0800 (PST)
+ bh=lEo6c6Ka0YGXCKnn520qJBdbNDvAQxrqX9XcwcrmPJw=;
+ b=hQeu550QO3pc34ibkMU1rKW2h0HXvxTw0Z3/ykYhMOh1/9L1AXXlfy1PJoARUknFmS
+ 99bQNQtolOhMN8RQ+0C+JkkbGsTuP5NXq3SvZVvRo6k8dXi9SL4uVVvuPSml+KdRDSvC
+ 7gmbZpM8yk7Hx/6Obr/eWaEtrncZEpZ/AyCuwp+2LENMNf6DVb++kjMVK8c30ite5PGK
+ X6Jchn0zYBiBoAP4k6OmZk+J+W3JcPI8aOt+brAxKlmYh12P0JHO2EmQfzkO5qkesioo
+ S+jqNVVO1JpTR75YyhCL/kGbtxat8t9x9Li1aS/6zwF/1GMp9CYCWVlxEZOk8RgbJz+0
+ CM9g==
+X-Gm-Message-State: AOJu0YyH5rENXjVBvtrrK64EV1nOv+a85Okz9cUDUnJ/FQIHTlcWXVuh
+ Op3d8wr2Z7faBCwfOgsxXgWTq1RGSS/pxsutLZSk6A==
+X-Google-Smtp-Source: AGHT+IGBQiaBr+YGqzLDzQGMkwlahqP63kh9AluTXqiD9XspjnPVAFtqFLyiuQV+QR1xMwhe/xMa5g==
+X-Received: by 2002:ae9:e515:0:b0:777:fec:5741 with SMTP id
+ w21-20020ae9e515000000b007770fec5741mr7852946qkf.33.1699633277749; 
+ Fri, 10 Nov 2023 08:21:17 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-046c-8850-3cc9-4453.res6.spectrum.com.
  [2603:6081:7b00:6400:46c:8850:3cc9:4453])
  by smtp.gmail.com with ESMTPSA id
- c9-20020a05620a134900b0077a029b7bf1sm791563qkl.28.2023.11.10.08.21.12
+ v17-20020a05620a091100b0077731466526sm784439qkv.70.2023.11.10.08.21.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Nov 2023 08:21:12 -0800 (PST)
-Date: Fri, 10 Nov 2023 11:21:10 -0500
+ Fri, 10 Nov 2023 08:21:17 -0800 (PST)
+Date: Fri, 10 Nov 2023 11:21:15 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Cc: u-boot@lists.denx.de
-Subject: Re: Pull request: u-boot-rockchip-20231110
-Message-ID: <20231110162110.GS6601@bill-the-cat>
-References: <20231110090914.116712-1-kever.yang@rock-chips.com>
+Subject: Re: [PATCH] firmware: scmi: correct a validity check against power
+ domain id
+Message-ID: <20231110162115.GT6601@bill-the-cat>
+References: <20231107000547.182072-1-takahiro.akashi@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wYaRHcHQ8Jx9azDV"
+ protocol="application/pgp-signature"; boundary="8Any4IMvyfdYo1k3"
 Content-Disposition: inline
-In-Reply-To: <20231110090914.116712-1-kever.yang@rock-chips.com>
+In-Reply-To: <20231107000547.182072-1-takahiro.akashi@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,64 +93,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---wYaRHcHQ8Jx9azDV
+--8Any4IMvyfdYo1k3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 10, 2023 at 05:09:14PM +0800, Kever Yang wrote:
+On Tue, Nov 07, 2023 at 09:05:47AM +0900, AKASHI Takahiro wrote:
 
-> Hi Tom,
+> A power domain id on sandbox should be in the range from zero to
+> ARRAY_SIZE(scmi_pwdom) - 1. Correct the validity check logic.
 >=20
-> Please pull the fixex for rockchip platform:
-> - Add Board: rk3588 Pine64 QuartzPro64;
-> - fix rk3066 enter download mode;
-> - fix for ringneck-px30 board;
->=20
-> CI:
-> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/18047
->=20
-> Thanks,
-> - Kever
->=20
-> The following changes since commit e17d174773e9ba9447596708e702b7382e47a6=
-cf:
->=20
->   Merge tag 'xilinx-for-v2024.01-rc3' of https://source.denx.de/u-boot/cu=
-stodians/u-boot-microblaze (2023-11-07 10:36:23 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
-t-rockchip-20231110
->=20
-> for you to fetch changes up to 4df4aea88fb99f413a0e3a2a96e176c6108939e3:
->=20
->   rockchip: include: asm: fix entering download mode rk3066 (2023-11-09 1=
-8:07:21 +0800)
->=20
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> Fixes: CID 467401
+> Fixes: CID 467405
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---wYaRHcHQ8Jx9azDV
+--8Any4IMvyfdYo1k3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVOWHMACgkQFHw5/5Y0
-tyxzTQv/b3S7sIGaGcI5+CaNI0U1vpj0ZgE1QG4oltMLIZCxr/kDH2caEK3XYAuk
-rlPW5s5kX7nGs1agq/qaQQB1OuZyjde03+w8AeVU2E9Y44qiSEXJxFEgZWYW1xFD
-i/WjjUE5cDzpnDlkoBOpI/yZyAWc/gWBWAok9M1RHHhNz8/mejnm4/4+2OdzerSx
-01xIZNs2gG5uaPtvC5LIFIt8/6PoiZEvfj3zlnPumfmmb8Mcr7/st9nBG/sjvC0G
-G+0aH1Q6EE6bVIg6DqSkJz9ybBeIxrjJqK4JYnnD8oJnoK+vzsvs9beWBXg9l6vb
-Qie3l3p57RgLZuW/N+x17AeEtuZr1+Wqh+Z1n8ACkrYP/MXu6UcpoJtDTnqZ9MYu
-w/RwAiTGlcxWzMzTK3v1wuog6I4kZriOHxqpriKufJkjII/5OTxGbnB53fjahoLg
-Jv2c51mjIqciXEpw7okamfunobeGcIZ+D9tAb/AUNHcvqeN0IMOPZhAslZMz9J10
-AgxMVA4U
-=lSTZ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVOWHsACgkQFHw5/5Y0
+tyxEnAv9H4hiWeGrfnThWATlJuae4nwismiNo3UBkxLZXdLXAAko8hqPoIRTN8LC
+NYlROqx4lL3P9j6SOHYjMZUph197QeT8WYk89RL7mcyczNlhTJsE2trmuoSl+mbB
+gYBHdeikqkq1vZK8byEcn+RPO4uCE6vvnrIySU0PMGevf7ThuxKtFJqPe+HvLBbX
+VreXdb1LokynNXVPPyJ2eNx4wmRMUxTYYTZ90QS1784yP69ILUqGugTnhcZ2E3NR
+gPun6o+0RuUAEd+7dkVNkqxeAb+0fmzSKlZeX5REpTPSMrb7gNLA3LihTM1Tjc4h
+WHNCMNBtvlfpJGzRM98nsqO1z+JCRuOA+01ICeO7uZGu5wINwX627UOWx5/p6Iop
+uOvclJ+Ze3phVVUD2S5BTWCvSiKjjefZMeen/RgcKgD5qzhB79vEc7WCAK7kgE09
+1J+T3STDp3vS0NZhunlDT7vSd/VEMDMmYfuGg6dOpVmklM1FnV36OmsZmKYamMX4
+aVnfvESW
+=Zi2M
 -----END PGP SIGNATURE-----
 
---wYaRHcHQ8Jx9azDV--
+--8Any4IMvyfdYo1k3--
