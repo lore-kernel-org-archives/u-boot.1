@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE97C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 11:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 048EAC4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 11:44:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1238B86F5E;
-	Sat, 11 Nov 2023 12:04:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 3370C86F5E;
+	Sat, 11 Nov 2023 12:44:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Sf58H/Ma";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="BCIl4RQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A7F486F7C; Sat, 11 Nov 2023 12:04:07 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2011D86F7E; Sat, 11 Nov 2023 12:44:37 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6837586F6C
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 12:04:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B81786F07
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 12:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 7B140CE1736
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 11:04:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3ADDC433C7
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 11:03:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1699700639;
- bh=/mCsRpoHNfIXUNMQCkSkO7WIeDaCJXswf/0MS4Qqxww=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Sf58H/MaoBZZ/xOFYMzMRrDPETrlRGADgg4vjWHg/ITAxvutAcyCvu+JGVVVkGyaS
- ti58qyVGv+BAsyknYmxe/7jI039fP1ZpI/suSu3zL6wVmkNVwes2jeUAEGrHWFx1ib
- rgjLH/72RIDg9yUuqjZI93NbJhYZi6c6iTCHHDirFY19X1+5tTYARa8LYttRNTrsk7
- 8dOhRd4KqOluueV3UKwtSMFAeQBKai+bfZXRwCZqlQY3QKUChI9QrK9DcweFKDbpOs
- cfSO7BOs3SZIHFrgYDZ3icrpZEkJiMS/lqyiFwCVaepza6GKFG1jmsYUfa20kSCEbC
- 0ieyYH2g6iKYA==
-Received: by mail-lj1-f170.google.com with SMTP id
- 38308e7fff4ca-2c54c8934abso38962381fa.0
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 03:03:59 -0800 (PST)
-X-Gm-Message-State: AOJu0YwZX5sLkqfUaVV/WdEYw50CF2hlvin249gomqTLuUyVcaGsmVIM
- FVlFz2D6eJKk5uNBR138vzEP0anDIwNkBpoasyo=
-X-Google-Smtp-Source: AGHT+IHwnbe1LHcOvdw6D1LpdnWzFdtyWX7I2RFO0IU/Kq2EYq5LOp7rs1R+FvsDd3/9FmKKqRkcUXf0D53RTQwLbzE=
-X-Received: by 2002:a2e:9898:0:b0:2c5:19f2:4fde with SMTP id
- b24-20020a2e9898000000b002c519f24fdemr1156839ljj.23.1699700637978; Sat, 11
- Nov 2023 03:03:57 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40842752c6eso22607635e9.1
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 03:44:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1699703074; x=1700307874;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=92ngT8tSBKi22kg6roS/LemoYD1szR4sTuLD1EI5+IY=;
+ b=BCIl4RQjEtWI5hTAKg9JfCV+/rlwSDKrp/ulRiydhTNn3IxxBVhyBjPBvaZnYnSOwz
+ iUCNB7svKwCqsmoZZTJvlju5AzRRTo7NCLmiY8Oq4e+itMdVM3+yb7Oqv+GPJnonFjlf
+ vURPUVlL71ROpssOAJqeA85oKVMgAMUoaY/0e9IlSLv4zk0fSnchHLcRHS7mr4Yc7oDJ
+ fiWW0daWLZXmEk84lqXnjPVGiFKoLr3tooxc5xTHPnW4tUmg/rtf+sG6AnwWIZqVyc91
+ XgVamBvzrG0o4+0Bf2p4e96CsKFk+fjm+1LvPlPHchC+Ld4p3ckaCc82g+gP8ed5GXw+
+ hEKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699703074; x=1700307874;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=92ngT8tSBKi22kg6roS/LemoYD1szR4sTuLD1EI5+IY=;
+ b=kiAHciJsaaxK8cwW1mMMVFbVIfmcqlWJzrpx1XrgSe2zxvRDlZl5Uf23HhLaJQpuB6
+ 1Sh0JBKGaumGzYBH81MtjD9qAFYrprrtsjc5sTRLU+wPg4fWRFbDsEJ4ugpKIqPCeLFz
+ BliJkaGmoiD9idBs7KN4qzHsUN2QhJiKc6qejLJzzeF9I0ZTd7YugLT0S4RhzrTaQfdS
+ 3TUc1+KyPU7LLbr1unQUaUwdMQVniFxovVpti5XtNv3YqbhnF1wDZLj5KqWTq1kPglC9
+ NzfiIGNewFaHFDl1yuNZdEEjRNPeQlEUcsGLMROfA9EYfLM7VsSKFqT4EaZzJqO2EYfa
+ MY7w==
+X-Gm-Message-State: AOJu0YzOh3Ck5mdh8PPI0Co7gvtC7mPJTbIBKiuF2jIiCAN7/TJT5kSM
+ xorHy9SiVa03yCNhOgW2iTuSq5IDrnONaOSSmjtW9LM5
+X-Google-Smtp-Source: AGHT+IGMlsxTz16UiMY/wSozmnmEwSIa3n2wpjgr9ii39BRMf2IpRcG+AQCWZyxqe42g85/A3VJd0A==
+X-Received: by 2002:a05:600c:2d8b:b0:406:4573:81d2 with SMTP id
+ i11-20020a05600c2d8b00b00406457381d2mr1547258wmg.39.1699703073933; 
+ Sat, 11 Nov 2023 03:44:33 -0800 (PST)
+Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
+ [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
+ j16-20020a05600c191000b004090798d29csm1957874wmq.15.2023.11.11.03.44.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 11 Nov 2023 03:44:33 -0800 (PST)
+From: Shantur Rathore <i@shantur.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ trini@konsulko.com, Shantur Rathore <i@shantur.com>
+Subject: [PATCH] arm: dts: rockpro64: Add RockPro64 smbios
+Date: Sat, 11 Nov 2023 11:43:21 +0000
+Message-Id: <20231111114321.543394-1-i@shantur.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231110235806.525529-1-i@shantur.com>
+References: <20231110235806.525529-1-i@shantur.com>
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
-In-Reply-To: <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Sat, 11 Nov 2023 21:03:46 +1000
-X-Gmail-Original-Message-ID: <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
-Message-ID: <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: "Chiu, Chasel" <chasel.chiu@intel.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- "Brune, Maximilian" <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
- "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,200 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 11 Nov 2023 at 04:20, Chiu, Chasel <chasel.chiu@intel.com> wrote:
->
->
-> Just sharing some usage examples from UEFI/EDK2 scenario.
-> To support ACPI S4/Hibernation, memory map must be consistent before ente=
-ring and after resuming from S4, in this case payload may need to know prev=
-ious memory map from bootloader (currently generic payload cannot access pl=
-atform/bootloader specific non-volatile data, thus could not save/restore m=
-emory map information)
+Signed-off-by: Shantur Rathore <i@shantur.com>
+---
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-So how would EDK2 reconstruct the entire EFI memory map from just
-these unannotated /reserved-memory nodes? The EFI memory map contains
-much more information than that, and all of it has to match the
-pre-hibernate situation, right? Can you given an example?
+diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+index 732727d9b0..a4453e76f6 100644
+--- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+@@ -9,6 +9,28 @@
+ 	chosen {
+ 		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
+ 	};
++
++        smbios {
++                compatible = "u-boot,sysinfo-smbios";
++                smbios {
++                        system {
++                                manufacturer = "PINE64";
++                                product = "RockPro64";
++                        };
++
++                        baseboard {
++                                manufacturer = "PINE64";
++                                product = "RockPro64";
++                        };
++
++                        chassis {
++                                manufacturer = "PINE64";
++                                product = "RockPro64";
++                        };
++                };
++        };
++
++
+ };
+ 
+ &sdhci {
+-- 
+2.40.1
 
-> Another usage is to support binary model which generic payload is a prebu=
-ilt binary compatible for all platforms/configurations, however the payload=
- default memory map might not always work for all the configurations and we=
- want to allow bootloader to override payload default memory map without re=
-compiling.
->
-
-Agreed. But can you explain how a EDK2 payload might make meaningful
-use of 'runtime-code' regions provided via DT  by the non-EDK2
-platform init? Can you give an example?
-
-> Under below assumption:
->         FDT OS impact has been evaluated and taken care by relevant exper=
-ts/stakeholders.
-> Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
->
-
-I am sorry but I don't know what 'FDT OS impact' means. We are talking
-about a firmware-to-firmware abstraction that has the potential to
-leak into the OS visible interface.
-
-I am a maintainer in the Tianocore project myself, so it would help if
-you could explain who these relevant experts and stakeholders are. Was
-this discussed on the edk2-devel mailing list? If so, apologies for
-missing it but I may not have been cc'ed perhaps?
-
-
->
-> > -----Original Message-----
-> > From: Simon Glass <sjg@chromium.org>
-> > Sent: Tuesday, September 26, 2023 12:43 PM
-> > To: devicetree@vger.kernel.org
-> > Cc: Mark Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>;
-> > Tan, Lean Sheng <sheng.tan@9elements.com>; lkml <linux-
-> > kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>; Brune,
-> > Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
-> > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
-> > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
-> > <gua.guo@intel.com>; Chiu, Chasel <chasel.chiu@intel.com>; linux-
-> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>; Ard
-> > Biesheuvel <ardb@kernel.org>; Simon Glass <sjg@chromium.org>
-> > Subject: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-> >
-> > It is common to split firmware into 'Platform Init', which does the ini=
-tial hardware
-> > setup and a "Payload" which selects the OS to be booted.
-> > Thus an handover interface is required between these two pieces.
-> >
-> > Where UEFI boot-time services are not available, but UEFI firmware is p=
-resent on
-> > either side of this interface, information about memory usage and attri=
-butes must
-> > be presented to the "Payload" in some form.
-> >
-> > This aims to provide an small schema addition for the memory mapping ne=
-eded
-> > to keep these two pieces working together well.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v7:
-> > - Rename acpi-reclaim to acpi
-> > - Drop individual mention of when memory can be reclaimed
-> > - Rewrite the item descriptions
-> > - Add back the UEFI text (with trepidation)
-> >
-> > Changes in v6:
-> > - Drop mention of UEFI
-> > - Use compatible strings instead of node names
-> >
-> > Changes in v5:
-> > - Drop the memory-map node (should have done that in v4)
-> > - Tidy up schema a bit
-> >
-> > Changes in v4:
-> > - Make use of the reserved-memory node instead of creating a new one
-> >
-> > Changes in v3:
-> > - Reword commit message again
-> > - cc a lot more people, from the FFI patch
-> > - Split out the attributes into the /memory nodes
-> >
-> > Changes in v2:
-> > - Reword commit message
-> >
-> >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
-> >  1 file changed, 71 insertions(+)
-> >  create mode 100644 dtschema/schemas/reserved-memory/common-
-> > reserved.yaml
-> >
-> > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > new file mode 100644
-> > index 0000000..f7fbdfd
-> > --- /dev/null
-> > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > @@ -0,0 +1,71 @@
-> > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause %YAML 1.2
-> > +---
-> > +$id:
-> > +http://devicetree.org/schemas/reserved-memory/common-reserved.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: Common memory reservations
-> > +
-> > +description: |
-> > +  Specifies that the reserved memory region can be used for the purpos=
-e
-> > +  indicated by its compatible string.
-> > +
-> > +  Clients may reuse this reserved memory if they understand what it is
-> > + for,  subject to the notes below.
-> > +
-> > +maintainers:
-> > +  - Simon Glass <sjg@chromium.org>
-> > +
-> > +allOf:
-> > +  - $ref: reserved-memory.yaml
-> > +
-> > +properties:
-> > +  compatible:
-> > +    description: |
-> > +      This describes some common memory reservations, with the compati=
-ble
-> > +      string indicating what it is used for:
-> > +
-> > +         acpi: Advanced Configuration and Power Interface (ACPI) table=
-s
-> > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This is re=
-served by
-> > +           the firmware for its use and is required to be saved and re=
-stored
-> > +           across an NVS sleep
-> > +         boot-code: Contains code used for booting which is not needed=
- by the OS
-> > +         boot-code: Contains data used for booting which is not needed=
- by the OS
-> > +         runtime-code: Contains code used for interacting with the sys=
-tem when
-> > +           running the OS
-> > +         runtime-data: Contains data used for interacting with the sys=
-tem when
-> > +           running the OS
-> > +
-> > +    enum:
-> > +      - acpi
-> > +      - acpi-nvs
-> > +      - boot-code
-> > +      - boot-data
-> > +      - runtime-code
-> > +      - runtime-data
-> > +
-> > +  reg:
-> > +    description: region of memory that is reserved for the purpose ind=
-icated
-> > +      by the compatible string.
-> > +
-> > +required:
-> > +  - reg
-> > +
-> > +unevaluatedProperties: false
-> > +
-> > +examples:
-> > +  - |
-> > +    reserved-memory {
-> > +        #address-cells =3D <1>;
-> > +        #size-cells =3D <1>;
-> > +
-> > +        reserved@12340000 {
-> > +            compatible =3D "boot-code";
-> > +            reg =3D <0x12340000 0x00800000>;
-> > +        };
-> > +
-> > +        reserved@43210000 {
-> > +            compatible =3D "boot-data";
-> > +            reg =3D <0x43210000 0x00800000>;
-> > +        };
-> > +    };
-> > --
-> > 2.42.0.515.g380fc7ccd1-goog
->
