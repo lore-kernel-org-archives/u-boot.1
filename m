@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC5C4C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 16:14:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47055C4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 17:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B6D486F83;
-	Sat, 11 Nov 2023 17:14:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EDC6686EDF;
+	Sat, 11 Nov 2023 18:33:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="w16JcUt2";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="q2uquo7C";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="fmlE8bPE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A15F886F83; Sat, 11 Nov 2023 17:14:32 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 846D186EDF; Sat, 11 Nov 2023 18:33:02 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0023E86F5C
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 17:14:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB15986ED6
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 18:32:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4SSLP13tqKz9sR1;
- Sat, 11 Nov 2023 17:14:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1699719269;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=20rcy1dc2/eBl20JbYR3ch9Mv6cninP06ZBq1coNkYo=;
- b=w16JcUt2OjtGjzW8Wb3E8lS9coh2LyYRupo1BJLffJb6uqfmlupq8YsFNfTvuuM9BMETtj
- Gkr5bxvSGvLL6ZG2naaGmxWY4Eewaw4HN7TXzJ6Zzj283qawXMnbcIkdzFG64Qs/2sUZDX
- WhCFHKfeuuG1v3pCiCOzHylTBYgk/a+m2cXmX5iT7h6t1EkCBjqqrEt00S4R5D2QCke2kt
- M4lItBSejriOywdgokUHJ97PNdRSsi2Pn3Em+10mx1eQZPdR8iAYeKMA4gx6hGijkGBJLg
- CDvUzcgevjX37rf3ree46GR6cTbThnTAtuuQlV2rvbc0EgV40hMlMsk4m34KjA==
-Message-ID: <c87e9fee-b895-4cbd-9bea-e64ba1eb805b@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1699719267;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=20rcy1dc2/eBl20JbYR3ch9Mv6cninP06ZBq1coNkYo=;
- b=q2uquo7CK9uQypH3JgG4BvNeRbPhOjiIjvSLxGLiOae757MSHbntMH40H/bBSQ9I+nlha/
- +YY5dZmyftbnPV7t++0AOcfd7CWSYbJrl4aJJv4S7JlgDVRB3NE25iFVFfQewH8sB2k40i
- JEQuXrrstejWkkADuLnTRqAwo0C0qNumv7xo8gzRMWcnLJ2t4WFZTaBu6MDWF4zGDXAp9e
- 4YD2ED4+V6tR7jQYOi2IPmt80R7XsS5vYFYWePQSSDsOSDcRGlXj0qlE61xHh+9zWhoUsr
- +rhW+kCfUsfv51B96sfzUjVOuM4brtqxYT+5LTGEcCN4GxzFMQQDyG6G3EtZ8g==
-Date: Sat, 11 Nov 2023 17:14:25 +0100
+ spf=pass smtp.mailfrom=mchitale@ventanamicro.com
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6c320a821c4so2728799b3a.2
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 09:32:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1699723978; x=1700328778; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=A4wKlojmSrfn4VLb7HgyMgUoqj9icJIfrU+vWX0ffMQ=;
+ b=fmlE8bPEFLFuqUTG/jvei6jmmv78IrQyZw2CEE6OUyBydDOIkDbhXTQ6i0oA9+5fl6
+ xgCRxtaCHyKj/fLpRzijyBKAxs5CPSYUBdaq84IHRt5Ir+W25QY0AJAKXQO3aWfgWe1K
+ obUn96gz7Tr+UKYR3EE2DCcnb5Z5/hK6bjcpjNcn5DgqttKei/CmE/fjBbJYn6TQmv/J
+ WFip0X9FiCd9dAVrLzbnE0xv0j0AxDlGitOIuqmsynJvAL4A2r8zZs4o4ZtKS/KJZtA3
+ S/gP1HrcoeRurPeKBo+2fouv/s9ahuqlBoRlkXfh8vbNMnZe4HNyIPJRR1uvBERfJj/+
+ 4TLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699723978; x=1700328778;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=A4wKlojmSrfn4VLb7HgyMgUoqj9icJIfrU+vWX0ffMQ=;
+ b=h2HQViqGAtfUCbDvcGRwvDosrwmuULibHhyUuE0cwPjAHmUJ0UxPn1Bvw6ScnG408D
+ yaGg9HVidCVPkSdo7O42q1Wk8+eqW07ZfXbE8cJUgJjUN0WniVXx+2ZWnbz5bjVSlV1n
+ cMGADLfqpd/DCRuMZbxsLtr8IDvnPqhMphlUoSX/bZP5IyasezRgSnesa3Ouwdh1NFm0
+ ngi102qwGFjbP+EyZweO+rx2X4PnB26ZjRdFbo9RlMS3sIWVR585i3YNAkp9pUU0d8T2
+ xsj+e+B+Z7ytPov1Vrue4eWfx3TGDSb2kGJwNUvNJLk0Og7PjGlEbq72pIR/2BWNCf+f
+ hLPw==
+X-Gm-Message-State: AOJu0YxfPlxq3SkHZETeWJJW8kh2T1lD15wDqo0Np7vhWTVv+ohX7ar2
+ w0x/arhfsEYbrMJowPAQGhJOFA==
+X-Google-Smtp-Source: AGHT+IGzOyvpTkO6p8rPvtbDaw4vom+XLxU/RC9NCTyt54T5oqejqPnTCgRDEs9shVYXdBmH7sgexQ==
+X-Received: by 2002:a05:6a20:7da1:b0:136:ea0e:d23 with SMTP id
+ v33-20020a056a207da100b00136ea0e0d23mr2009027pzj.11.1699723978035; 
+ Sat, 11 Nov 2023 09:32:58 -0800 (PST)
+Received: from ThinkPad-T490.dc1.ventanamicro.com ([223.233.86.194])
+ by smtp.googlemail.com with ESMTPSA id
+ c64-20020a17090a494600b0027cf8869ee7sm3772218pjh.0.2023.11.11.09.32.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 11 Nov 2023 09:32:56 -0800 (PST)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 0/3] Xilinx SPI driver enhancements
+Date: Sat, 11 Nov 2023 23:01:18 +0530
+Message-Id: <20231111173121.92889-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Subject: Re: [PATCH] mmc: renesas-sdhi: Disable clock after tuning reset when
- possible
-Content-Language: en-US
-To: Jaehoon Chung <jh80.chung@samsung.com>,
- 'Marek Vasut' <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: 'Nobuhiro Iwamatsu' <iwamatsu@nigauri.org>,
- 'Paul Barker' <paul.barker.ct@bp.renesas.com>, 'Peng Fan' <peng.fan@nxp.com>
-References: <CGME20231105224327epcas1p2d19ccbed6821310bf0f04dcd2a33da3c@epcas1p2.samsung.com>
- <20231105224304.103997-1-marek.vasut+renesas@mailbox.org>
- <02b201da109b$5fc2fb00$1f48f100$@samsung.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <02b201da109b$5fc2fb00$1f48f100$@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: w4xdy1peysy1raeq9ibsy4ppktschjnb
-X-MBO-RS-ID: 76f08709f5871fff491
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +90,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/23 11:24, Jaehoon Chung wrote:
-> 
-> 
->> -----Original Message-----
->> From: Marek Vasut <marek.vasut+renesas@mailbox.org>
->> Sent: Monday, November 6, 2023 7:43 AM
->> To: u-boot@lists.denx.de
->> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>; Jaehoon Chung <jh80.chung@samsung.com>; Nobuhiro
->> Iwamatsu <iwamatsu@nigauri.org>; Paul Barker <paul.barker.ct@bp.renesas.com>; Peng Fan
->> <peng.fan@nxp.com>
->> Subject: [PATCH] mmc: renesas-sdhi: Disable clock after tuning reset when possible
->>
->> Currently the renesas_sdhi_reset_tuning() unconditionally leaves SDHI
->> clock enabled after the tuning reset. This is not always necessary.
->>
->> After the driver performed tuning reset at the end of probe function,
->> or in the unlikely case that tuning failed during regular operation,
->> the SDHI clock can be disabled after the tuning reset. The following
->> set_ios call would reconfigure the clock as needed.
->>
->> In case of regular set_ios call which requires a tuning reset, keep
->> the clock enabled or disabled according to the mmc->clk_disable state.
->>
->> With this in place, the controllers which have not been accessed via
->> block subsystem after boot are left in quiescent state. However, if an
->> MMC device is used e.g. for environment storage, that controller would
->> be accessed during the environment load and left active, including its
->> clock which would still be generated. This is due to the design of the
->> MMC subsystem, which does not deinit a controller after it was started
->> once, the controller is only deinited in case of mmc rescan, or before
->> OS boot.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> 
-> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+This series makes the Xilinx XPS SPI driver compatible with the MMC_SPI
+driver and also includes an enhacement from the corresponding Linux driver.
 
-Thanks. Do you want to take this via mmc tree or shall I take it via sh 
-tree ? I wouldn't mind the later, since it is isolated to renesas platforms.
+Mayuresh Chitale (3):
+  drivers: xilinx_spi: Use udevice in start_tranfer
+  drivers: xilinx_spi: Add xfer callback
+  drivers: xilinx_spi: Probe fifo_depth at runtime
+
+ drivers/spi/xilinx_spi.c | 68 ++++++++++++++++++++++++++++++----------
+ 1 file changed, 52 insertions(+), 16 deletions(-)
+
+-- 
+2.34.1
+
