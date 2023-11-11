@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF9FC4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 13:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CCF9C4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 14:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1BEF8714F;
-	Sat, 11 Nov 2023 14:42:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ED8F186CF2;
+	Sat, 11 Nov 2023 15:28:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="rLtQLXPY";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="in2EFnm0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF5EF86FDE; Sat, 11 Nov 2023 14:42:42 +0100 (CET)
+ id A6B3886E0E; Sat, 11 Nov 2023 15:28:56 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C7B787006
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 14:42:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C155B86564
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 15:28:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,30 +31,26 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 0578B41719; 
- Sat, 11 Nov 2023 13:42:38 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id CFAF53FDC1; 
+ Sat, 11 Nov 2023 14:28:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699710159;
- bh=+qAJVnjEGfJPDFh42dtwin794MEFKoZ1OY5SRcKkNcQ=;
- h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
- MIME-Version;
- b=rLtQLXPYpRXNO215v3Sr9esXTIJTe5j3l/gmMWwwsH143EvnEgIeECmoADT2DqiQh
- 86k3jqpp2W+Pqwqf+dhUXQHXtJhvkXHZ30qMhbcgW/h5PN/1S9TwK2WUejX/rMlrDp
- 0An+LcWYzLl2SP48/5prKIT+8j7pRU4+GylsSbuc3RdOr+mtmOWSuTlddc5guClwEl
- 6ezgwrdy1zjjPHZjubykSSHb17vVOEnr9pCNa9Kfqpiu3MgICDcqhdWYxx4p+smDTI
- EP7J7mV7Xq4beHDOGVx0NMdJe8ylhroPblTWsHtNh5o3qZDxZ4CdKVpfJisGN3AdK0
- nEVd/sawehphg==
+ s=20210705; t=1699712933;
+ bh=/4zXh5IRSWbe3hU8TH4KUu5yhYo6Q4ebJ3pVZuX74zQ=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=in2EFnm0z2jpWBomMvuKOaIEak9LjaGYbdOhMfyiUNEXQUalmlB04PsAmJ6TKzTGc
+ 5maf1uTgDr9JunaEhgMAc/Qfdy6IMOzoWqMiYUG2iNKMPZSr/nrbOoxeExZat4bmWR
+ yDVH9TQuvye3F6qbQDVF2J/fMP8aZIstYSyu7YcKEAYKVBRteLICstjt/n4WYTIrrb
+ BMaNph5crIdcHrxjnOO9PaGQXqDrtIPotdr/qdh7vsPN3pYQFJ94DNPIMoqGWlGhIc
+ rYalLLNQ0nrFiskqZdrpyeLid3KR5+pzL58IYWH4aYoUY+rAlNXblwX8eItEiETaLE
+ QpEhhq65h3bKA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de,
+Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 3/3] test: dm: adjust ACPI test
-Date: Sat, 11 Nov 2023 14:41:12 +0100
-Message-Id: <20231111134112.165377-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] acpi: cannot have RSDT above 4 GiB
+Date: Sat, 11 Nov 2023 15:28:46 +0100
+Message-Id: <20231111142846.180442-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231111134112.165377-1-heinrich.schuchardt@canonical.com>
-References: <20231111134112.165377-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,62 +69,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the ACPI test to match the changed output format of the 'acpi list'
-command.
+The field RsdtAddress has only 32 bit. The RSDT table cannot be located
+beyond 4 GiB.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- test/dm/acpi.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ lib/acpi/base.c | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
-diff --git a/test/dm/acpi.c b/test/dm/acpi.c
-index 5997bda649..6752beb489 100644
---- a/test/dm/acpi.c
-+++ b/test/dm/acpi.c
-@@ -395,26 +395,26 @@ static int dm_test_acpi_cmd_list(struct unit_test_state *uts)
+diff --git a/lib/acpi/base.c b/lib/acpi/base.c
+index 2057bd2bef..128a76ad39 100644
+--- a/lib/acpi/base.c
++++ b/lib/acpi/base.c
+@@ -21,10 +21,17 @@ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct acpi_rsdt *rsdt,
+ 	memcpy(rsdp->signature, RSDP_SIG, 8);
+ 	memcpy(rsdp->oem_id, OEM_ID, 6);
  
- 	console_record_reset();
- 	run_command("acpi list", 0);
--	ut_assert_nextline("Name      Base   Size  Detail");
--	ut_assert_nextline("----  --------  -----  ------");
--	ut_assert_nextline("RSDP  %08lx  %5zx  v02 U-BOOT", addr,
-+	ut_assert_nextline("Name  Base               Size  Detail");
-+	ut_assert_nextline("----  ----------------  -----  ----------------------------");
-+	ut_assert_nextline("RSDP  %016lx  %5zx  v02 U-BOOT", addr,
- 			   sizeof(struct acpi_rsdp));
- 	addr = ALIGN(addr + sizeof(struct acpi_rsdp), 16);
--	ut_assert_nextline("RSDT  %08lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
-+	ut_assert_nextline("RSDT  %016lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
- 			   addr, sizeof(struct acpi_table_header) +
- 			   3 * sizeof(u32), OEM_REVISION);
- 	addr = ALIGN(addr + sizeof(struct acpi_rsdt), 16);
--	ut_assert_nextline("XSDT  %08lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
-+	ut_assert_nextline("XSDT  %016lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
- 			   addr, sizeof(struct acpi_table_header) +
- 			   3 * sizeof(u64), OEM_REVISION);
- 	addr = ALIGN(addr + sizeof(struct acpi_xsdt), 64);
--	ut_assert_nextline("DMAR  %08lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
-+	ut_assert_nextline("DMAR  %016lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
- 			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
- 	addr = ALIGN(addr + sizeof(struct acpi_dmar), 16);
--	ut_assert_nextline("DMAR  %08lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
-+	ut_assert_nextline("DMAR  %016lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
- 			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
- 	addr = ALIGN(addr + sizeof(struct acpi_dmar), 16);
--	ut_assert_nextline("DMAR  %08lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
-+	ut_assert_nextline("DMAR  %016lx  %5zx  v01 U-BOOT U-BOOTBL %x INTL 0",
- 			   addr, sizeof(struct acpi_dmar), OEM_REVISION);
- 	ut_assert_console_end();
+-	rsdp->length = sizeof(struct acpi_rsdp);
+-	rsdp->rsdt_address = map_to_sysmem(rsdt);
++	if (rsdt)
++		rsdp->rsdt_address = map_to_sysmem(rsdt);
++	else
++		rsdp->rsdt_address = 0;
++
++	if (xsdt)
++		rsdp->xsdt_address = map_to_sysmem(xsdt);
++	else
++		rsdp->xsdt_address = 0;
  
-@@ -446,7 +446,7 @@ static int dm_test_acpi_cmd_dump(struct unit_test_state *uts)
- 	console_record_reset();
- 	run_command("acpi dump dmar", 0);
- 	addr = ALIGN(map_to_sysmem(ctx.xsdt) + sizeof(struct acpi_xsdt), 64);
--	ut_assert_nextline("DMAR @ %08lx", addr);
-+	ut_assert_nextline("DMAR @ %016lx", addr);
- 	ut_assert_nextlines_are_dump(0x30);
- 	ut_assert_console_end();
+-	rsdp->xsdt_address = map_to_sysmem(xsdt);
++	rsdp->length = sizeof(struct acpi_rsdp);
+ 	rsdp->revision = ACPI_RSDP_REV_ACPI_2_0;
  
+ 	/* Calculate checksums */
+@@ -68,11 +75,15 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
+ static int acpi_write_base(struct acpi_ctx *ctx,
+ 			   const struct acpi_writer *entry)
+ {
+-	/* We need at least an RSDP and an RSDT Table */
++	/* We need at least an RSDP and an XSDT Table */
+ 	ctx->rsdp = ctx->current;
+ 	acpi_inc_align(ctx, sizeof(struct acpi_rsdp));
+-	ctx->rsdt = ctx->current;
+-	acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
++	if (map_to_sysmem(ctx->current) < UINT_MAX - 0x10000) {
++		ctx->rsdt = ctx->current;
++		acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
++	} else {
++		ctx->rsdt = 0;
++	}
+ 	ctx->xsdt = ctx->current;
+ 	acpi_inc_align(ctx, sizeof(struct acpi_xsdt));
+ 
+@@ -80,7 +91,8 @@ static int acpi_write_base(struct acpi_ctx *ctx,
+ 	memset(ctx->base, '\0', ctx->current - ctx->base);
+ 
+ 	acpi_write_rsdp(ctx->rsdp, ctx->rsdt, ctx->xsdt);
+-	acpi_write_rsdt(ctx->rsdt);
++	if (ctx->rsdt)
++		acpi_write_rsdt(ctx->rsdt);
+ 	acpi_write_xsdt(ctx->xsdt);
+ 
+ 	return 0;
 -- 
 2.40.1
 
