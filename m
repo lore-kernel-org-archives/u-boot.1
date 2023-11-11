@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F8DC4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 13:25:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ABECC4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 13:35:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE84086EF6;
-	Sat, 11 Nov 2023 14:25:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 17BC286F1C;
+	Sat, 11 Nov 2023 14:35:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="Ga1uyf9X";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h1z7ZGLu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B78986F5E; Sat, 11 Nov 2023 14:25:32 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id BCAE986F40; Sat, 11 Nov 2023 14:35:03 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F68886EF1
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 14:25:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id DA2C786EF6
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 14:35:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-7a9857c14c5so105471039f.3
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 05:25:30 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bigunclemax@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-507973f3b65so4146597e87.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 05:35:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1699709129; x=1700313929; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:user-agent:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=iCWyH8vkIgmZexCqJ9NVCU2vE6GoP+VlX5O7eHV3STQ=;
- b=Ga1uyf9Xcg+HmQKv8k6Qc8fUr/kSMKofPC7JtFB14xkNFj09NUoS3iXQvwHEWRL6a0
- hAvS6zU1WTymdDsmVh8EhhKmvJyFAcSY/i6x9EoiuK4wW/JP5csKnXeGIldeInhK2qxy
- 2oW0rUPjMKimMDZMk20k4zDwGsOJ3GyJ0u7SFkAQNVgAcS0XGgrX8Nyx/DEDe6aHKL8R
- MJcJgIA7FZ5HS1oFCWD3j95UbdfnXuFJY61IyATBwpICbn3WXY7hdeYjL/Gxx+DeNGoP
- /gn+hjzDEv+WIlbHmUfx62WIll0IxkujcLLBrJVhbDnUSHCz5E5+jUEkY3C8QO/ZgeRG
- +0dA==
+ d=gmail.com; s=20230601; t=1699709700; x=1700314500; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nJf6kIkbr+F5PCOidfJLrjL1YS3XUGsz96YErNYFtv8=;
+ b=h1z7ZGLuM8zdp74NEaBiZqrnpd+8co8Uy0+qgd2dBatQ5hrQuUqp1L92YZNlOf2I6s
+ SjAcjtvTIViFVOlcRwq+l5aJtkM2hdCfM2wNDzlJnvjSfEjyux4brKkeRr3dV8aoIXSc
+ KlzKjYTHVurHQ6NgixfH5Qtw/iPmSBGEKCxMeJ14zvrJuNbhUtkX7ItCrXZWxDVwOLqd
+ /WU7qmkBHFZ9Li9OP2tsWYUug2QVcfdg36ie6Tnn75UoF0x3KFDVDDdKWuODBGN16uy7
+ h1hc04/V5Srl4RzuQ4IlupVMYJtb4m63KMdbh2Wl52NUBe2AIEHt4r1ZlRpArpQJncL0
+ EpnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699709129; x=1700313929;
- h=content-transfer-encoding:mime-version:user-agent:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iCWyH8vkIgmZexCqJ9NVCU2vE6GoP+VlX5O7eHV3STQ=;
- b=byOQufoVQy8TqAq0gLzAY3MbUJIQImVK8ykLeG7esWgwQrIlzFiW4JyQes6xas64br
- zT7q/Qm4GVYg3mDpeDw8DSSM4gDX0ihEvYiD9G0K5l08fwx1ZUZ14hbowelXy37bYarj
- dgZkboLpQEwNlr8PHbX9iguUySfHuOYToxFid2gir2nQ1iDKIeiYHNfkyeO1u0yn5c5f
- tO5sKSNrjyScGeRK3SC8OicylDfcUNLul6ZtghqZ/A5bQMSTNBhr/uZsJdDFcDGP+9ZW
- /3+72o6WHqscmBRKdKnSlaudhXSMpT/zHTPEJA0d7JnMx42816fDAFEABgG4Nr4sTrWr
- yPLg==
-X-Gm-Message-State: AOJu0Yy9PdSlg08B5vlRI7bEei4k7nZ+iGxvB04QXv4wvYxnit/Iu3pz
- H5CCK/ydutSyHv2rJWlewpc5gg==
-X-Google-Smtp-Source: AGHT+IE34kN9xETTqVhWnz7QlWeNSwjrazkcjEA1iyHQeb14WkR9U4Bzmq2GtaoI/a6mAf+q+UTNKw==
-X-Received: by 2002:a6b:5f17:0:b0:7a6:b272:fd78 with SMTP id
- t23-20020a6b5f17000000b007a6b272fd78mr2425757iob.10.1699709128782; 
- Sat, 11 Nov 2023 05:25:28 -0800 (PST)
-Received: from ?IPv6:2401:4900:5306:7350:68e5:c904:2404:b568?
- ([2401:4900:5306:7350:68e5:c904:2404:b568])
- by smtp.gmail.com with ESMTPSA id
- x8-20020a023408000000b0043167542398sm455496jae.141.2023.11.11.05.25.23
+ d=1e100.net; s=20230601; t=1699709700; x=1700314500;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nJf6kIkbr+F5PCOidfJLrjL1YS3XUGsz96YErNYFtv8=;
+ b=pcVMUt2z/0ZqsTPjeVcLJQqyqjqSaHRAOwkQ2iHMx6c52JvcSQi+OOwLQgIZy/s70d
+ KaX+jEw5+DaGetUv/vpmpRZNQVyKUn/cyVShZFQgd6rdZm9wjozMN37DkoRkBBDPLptJ
+ DJgAv5ZQe+DgGU8PS1UOHBK2M5ZrIPvXaqGvs1lC03nJ4gfbN5fh5CtlNok7wsXPp6Os
+ bjaRsk3qQVS4fjqi14v9+MJFX75T9Kfhd6S1Rk9CjM5WpMNDomr/ZlmmCSJrQN9SD5A/
+ n8Hq25fHjM8HBZbRAIscnj8M7Cqb8lr58oyx2ZmfXGRN18r7XYFgB29gD4NbT9x5oBLv
+ lEMA==
+X-Gm-Message-State: AOJu0YwNErwnj+tg1szodOMttk+1qPUk/rkOuF8q5joa2aCSDzBV5q1e
+ W7K8Z8zKlKlphMivAC5/lhdOrEr/f9mTvw==
+X-Google-Smtp-Source: AGHT+IESnZ/KEibkRKq6fCcpqIcJ4HlsMjwufCj+rwsyND2PNmAMBDRwxRnT/CXVWpxxhdDjKpWsbQ==
+X-Received: by 2002:a05:6512:3e5:b0:503:36cb:5438 with SMTP id
+ n5-20020a05651203e500b0050336cb5438mr1121254lfq.21.1699709700057; 
+ Sat, 11 Nov 2023 05:35:00 -0800 (PST)
+Received: from user-PC.. ([178.134.170.122]) by smtp.gmail.com with ESMTPSA id
+ h6-20020a0565123c8600b00509469ffb01sm277432lfv.193.2023.11.11.05.34.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 05:25:27 -0800 (PST)
-Message-ID: <01b9c3f4c63cb26a05ef003738b33efca507140a.camel@ventanamicro.com>
-Subject: Re: [PATCH] drivers: pcie_xilinx: Fix "reg" not found error
-From: mchitale@ventanamicro.com
-To: Michal Simek <michal.simek@amd.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Puhan Zhou <puh4n.zhou@gmail.com>, Thierry
- Reding <treding@nvidia.com>, Alexander Dahl <ada@thorsis.com>, Jonas
- Karlman <jonas@kwiboo.se>,  Svyatoslav Ryhel <clamor95@gmail.com>, Valentin
- Caron <valentin.caron@foss.st.com>, Shengyu Qu <wiagn233@outlook.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-Date: Sat, 11 Nov 2023 18:55:19 +0530
-In-Reply-To: <17a0048c-bdaa-4c82-8b51-b193bf14abf5@amd.com>
-References: <20231102082303.354944-1-mchitale@ventanamicro.com>
- <17a0048c-bdaa-4c82-8b51-b193bf14abf5@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ Sat, 11 Nov 2023 05:34:59 -0800 (PST)
+From: Maksim Kiselev <bigunclemax@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Sam Edwards <CFSworks@gmail.com>, Maksim Kiselev <bigunclemax@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Subject: [PATCH v1 0/2] Allwinner R329/D1/R528/T113 SPI support
+Date: Sat, 11 Nov 2023 16:33:06 +0300
+Message-Id: <20231111133432.755363-1-bigunclemax@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,67 +89,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+This series adds support for SPI controller that pesent on
+GEN_NCAT2 Allwinner SOCs (R329/D1/R528/T113).
 
-On Thu, 2023-11-02 at 10:05 +0100, Michal Simek wrote:
-> 
-> On 11/2/23 09:23, Mayuresh Chitale wrote:
-> > Fix the driver to use the dev_read_addr_size API to fetch the reg
-> > property from the DT.
-> > 
-> > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > ---
-> >   drivers/pci/pcie_xilinx.c | 22 ++++++++--------------
-> >   1 file changed, 8 insertions(+), 14 deletions(-)
-> > 
-> > diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-> > index 53fd121e90..20b630027f 100644
-> > --- a/drivers/pci/pcie_xilinx.c
-> > +++ b/drivers/pci/pcie_xilinx.c
-> > @@ -140,20 +140,14 @@ static int pcie_xilinx_write_config(struct
-> > udevice *bus, pci_dev_t bdf,
-> >   static int pcie_xilinx_of_to_plat(struct udevice *dev)
-> >   {
-> >   	struct xilinx_pcie *pcie = dev_get_priv(dev);
-> > -	struct fdt_resource reg_res;
-> > -	DECLARE_GLOBAL_DATA_PTR;
-> > -	int err;
-> > -
-> > -	err = fdt_get_resource(gd->fdt_blob, dev_of_offset(dev), "reg",
-> 
-> I don't have HW to test this but here you are removing reference to
-> GD that's 
-> why I think you should also remove
-> 
-> #include <asm/global_data.h>
-Ok.
-> 
-> 
-> 
-> 
-> > -			       0, &reg_res);
-> > -	if (err < 0) {
-> > -		pr_err("\"reg\" resource not found\n");
-> > -		return err;
-> > -	}
-> > -
-> > -	pcie->cfg_base = map_physmem(reg_res.start,
-> > -				     fdt_resource_size(&reg_res),
-> > -				     MAP_NOCACHE);
-> > +	fdt_addr_t addr;
-> > +	fdt_size_t size;
-> > +
-> > +	addr = dev_read_addr_size(dev, &size);
-> > +	if (addr == FDT_ADDR_T_NONE)
-> > +		return -EINVAL;
-> > +
-> > +	pcie->cfg_base = map_physmem(addr, size, MAP_NOCACHE);
-> 
-> Definitely it is better then what was there before.
-> 
-> But can't use use devm_ioremap() instead?
-Ok.
-> 
-> Thanks,
-> Michal
+In addition to changes in spi-sunxi U-boot driver, the series
+also provides SPI controller support in SPL for R528/T113 SoCs.
+
+Maksim Kiselev (2):
+  sunxi: SPL SPI: Add SPI boot support for the Allwinner R528/T113 SoCs
+  spi: sunxi: Add support for R329/D1/R528/T113 SPI controller
+
+ arch/arm/mach-sunxi/Kconfig         |  2 +-
+ arch/arm/mach-sunxi/spl_spi_sunxi.c | 78 +++++++++++++++++++++--------
+ drivers/spi/spi-sunxi.c             | 34 ++++++++++++-
+ 3 files changed, 91 insertions(+), 23 deletions(-)
+
+-- 
+2.40.1
 
