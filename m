@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55185C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 13:24:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F8DC4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 13:25:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C2B986F5E;
-	Sat, 11 Nov 2023 14:24:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BE84086EF6;
+	Sat, 11 Nov 2023 14:25:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="Yo1p66FW";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="Ga1uyf9X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBD6586F5E; Sat, 11 Nov 2023 14:23:59 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 4B78986F5E; Sat, 11 Nov 2023 14:25:32 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1A0786903
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 14:23:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F68886EF1
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 14:25:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-7a956887c20so111601139f.1
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 05:23:57 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-7a9857c14c5so105471039f.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 05:25:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1699709036; x=1700313836; darn=lists.denx.de; 
+ d=ventanamicro.com; s=google; t=1699709129; x=1700313929; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:user-agent:references
  :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
  :date:message-id:reply-to;
- bh=kguLRuNubVJfD3zeqi0ipcdwuZwQTPjwGoeo76/3cn8=;
- b=Yo1p66FW+BCELEZXnKEeNOaJooJWclqnxEeIyARBEvJVV3mDeDjsLSh+dHof372Kt2
- CUCLc5MQVX0EIsPpxVOySVQT3SrID+aKkWJt/jOgBKRhukgLkkmyJDuCbh3/9pSvEbNF
- udhztPabj853PuSJuP55PGXnBl/wl/QUyEsSb7IxSfIqq68ieJTDE81cZdc7juSchlxv
- cMTETmdozN0GA57IuxTTJj/0rb27jQgtLwSvdGC69mdZBWO9DFzLHe0MUfoUOswkbL9G
- HppzXiK2rb3uC48mBuUoURnKomWmYZH/dudGefgjTl+lSo3hn1VsLBsMn2nw3eShX0eh
- Y7ag==
+ bh=iCWyH8vkIgmZexCqJ9NVCU2vE6GoP+VlX5O7eHV3STQ=;
+ b=Ga1uyf9Xcg+HmQKv8k6Qc8fUr/kSMKofPC7JtFB14xkNFj09NUoS3iXQvwHEWRL6a0
+ hAvS6zU1WTymdDsmVh8EhhKmvJyFAcSY/i6x9EoiuK4wW/JP5csKnXeGIldeInhK2qxy
+ 2oW0rUPjMKimMDZMk20k4zDwGsOJ3GyJ0u7SFkAQNVgAcS0XGgrX8Nyx/DEDe6aHKL8R
+ MJcJgIA7FZ5HS1oFCWD3j95UbdfnXuFJY61IyATBwpICbn3WXY7hdeYjL/Gxx+DeNGoP
+ /gn+hjzDEv+WIlbHmUfx62WIll0IxkujcLLBrJVhbDnUSHCz5E5+jUEkY3C8QO/ZgeRG
+ +0dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699709036; x=1700313836;
+ d=1e100.net; s=20230601; t=1699709129; x=1700313929;
  h=content-transfer-encoding:mime-version:user-agent:references
  :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kguLRuNubVJfD3zeqi0ipcdwuZwQTPjwGoeo76/3cn8=;
- b=hxMTAAMtb2Lw06JLrman59tcM7TV0a7t7XLMaMw+NRu375Mfm5gaeikWMm5yCcJ0jq
- Qejzwdpy3oi5PLHy85xB0yqYU6yzEHW5RDD8rXw6BNexrQbxK5OEDWgwOX7bdGf0cCCe
- co2NGf/0S6VL/mg3qrUMa4SIFcHAAKzvZrfItpJVTW0DY1NrpGokMs39sBWLwaOl0G0o
- l5WkD9JfjDsjOSvYGnmSnAF1i3pHtUY8AGrIZWDh4mBS5tFr0O+7f9icxw3D/Q66cFBH
- NPYryB0dxkR2+ePN5+rucKRoa9KfRKN+XEbhNd3jmfO/qUXyA/hSx1Zke4eUm9xgDmvE
- lCtw==
-X-Gm-Message-State: AOJu0YzyVSi51YatRgTad6a4XkiAFYJXHRANkls3Hbt3Fom1Mf7mNLEr
- VPXZvPA45u323Q67pUzHg0pIlA==
-X-Google-Smtp-Source: AGHT+IES8USpCdPfU8naAS0Co6DcMaD45lhLo95GjN1T2ttF5aM/1Kh9xlPCcmD39UzxyuFKvStlmA==
-X-Received: by 2002:a5d:928d:0:b0:7a9:77ac:5455 with SMTP id
- s13-20020a5d928d000000b007a977ac5455mr2407254iom.9.1699709036465; 
- Sat, 11 Nov 2023 05:23:56 -0800 (PST)
+ bh=iCWyH8vkIgmZexCqJ9NVCU2vE6GoP+VlX5O7eHV3STQ=;
+ b=byOQufoVQy8TqAq0gLzAY3MbUJIQImVK8ykLeG7esWgwQrIlzFiW4JyQes6xas64br
+ zT7q/Qm4GVYg3mDpeDw8DSSM4gDX0ihEvYiD9G0K5l08fwx1ZUZ14hbowelXy37bYarj
+ dgZkboLpQEwNlr8PHbX9iguUySfHuOYToxFid2gir2nQ1iDKIeiYHNfkyeO1u0yn5c5f
+ tO5sKSNrjyScGeRK3SC8OicylDfcUNLul6ZtghqZ/A5bQMSTNBhr/uZsJdDFcDGP+9ZW
+ /3+72o6WHqscmBRKdKnSlaudhXSMpT/zHTPEJA0d7JnMx42816fDAFEABgG4Nr4sTrWr
+ yPLg==
+X-Gm-Message-State: AOJu0Yy9PdSlg08B5vlRI7bEei4k7nZ+iGxvB04QXv4wvYxnit/Iu3pz
+ H5CCK/ydutSyHv2rJWlewpc5gg==
+X-Google-Smtp-Source: AGHT+IE34kN9xETTqVhWnz7QlWeNSwjrazkcjEA1iyHQeb14WkR9U4Bzmq2GtaoI/a6mAf+q+UTNKw==
+X-Received: by 2002:a6b:5f17:0:b0:7a6:b272:fd78 with SMTP id
+ t23-20020a6b5f17000000b007a6b272fd78mr2425757iob.10.1699709128782; 
+ Sat, 11 Nov 2023 05:25:28 -0800 (PST)
 Received: from ?IPv6:2401:4900:5306:7350:68e5:c904:2404:b568?
  ([2401:4900:5306:7350:68e5:c904:2404:b568])
  by smtp.gmail.com with ESMTPSA id
- t11-20020a056638348b00b0042b37dda71asm431917jal.136.2023.11.11.05.23.53
+ x8-20020a023408000000b0043167542398sm455496jae.141.2023.11.11.05.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 05:23:56 -0800 (PST)
-Message-ID: <2303998bd7d8293906afa297f0a60e829f27e67c.camel@ventanamicro.com>
-Subject: Re: [PATCH] net: axi_emac: Use reg property for DMA registers
+ Sat, 11 Nov 2023 05:25:27 -0800 (PST)
+Message-ID: <01b9c3f4c63cb26a05ef003738b33efca507140a.camel@ventanamicro.com>
+Subject: Re: [PATCH] drivers: pcie_xilinx: Fix "reg" not found error
 From: mchitale@ventanamicro.com
-To: Michal Simek <michal.simek@amd.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+To: Michal Simek <michal.simek@amd.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Puhan Zhou <puh4n.zhou@gmail.com>, Thierry
+ Reding <treding@nvidia.com>, Alexander Dahl <ada@thorsis.com>, Jonas
+ Karlman <jonas@kwiboo.se>,  Svyatoslav Ryhel <clamor95@gmail.com>, Valentin
+ Caron <valentin.caron@foss.st.com>, Shengyu Qu <wiagn233@outlook.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Tom Rini
  <trini@konsulko.com>
-Date: Sat, 11 Nov 2023 18:53:48 +0530
-In-Reply-To: <b13846bc-10ef-4d40-9444-7ab05a3c8645@amd.com>
+Date: Sat, 11 Nov 2023 18:55:19 +0530
+In-Reply-To: <17a0048c-bdaa-4c82-8b51-b193bf14abf5@amd.com>
 References: <20231102082303.354944-1-mchitale@ventanamicro.com>
- <20231102082303.354944-3-mchitale@ventanamicro.com>
- <b13846bc-10ef-4d40-9444-7ab05a3c8645@amd.com>
+ <17a0048c-bdaa-4c82-8b51-b193bf14abf5@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 User-Agent: Evolution 3.36.5-0ubuntu1 
 MIME-Version: 1.0
@@ -99,57 +101,64 @@ X-Virus-Status: Clean
 
 Hi Michal,
 
-On Thu, 2023-11-02 at 10:15 +0100, Michal Simek wrote:
+On Thu, 2023-11-02 at 10:05 +0100, Michal Simek wrote:
 > 
 > On 11/2/23 09:23, Mayuresh Chitale wrote:
-> > As per the xlnx,axi-ethernet-1.00.a DT documentation in linux, the
-> > AXI
-> > DMA registers can be obtained via the reg property or via a
-> > separate
-> > node for the axistream DMA controller. Currently only the latter is
-> > supported, so add support to fetch the DMA controller registers
-> > from the
-> > "reg" property.
+> > Fix the driver to use the dev_read_addr_size API to fetch the reg
+> > property from the DT.
 > > 
 > > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 > > ---
-> >   drivers/net/xilinx_axi_emac.c | 9 ++++-----
-> >   1 file changed, 4 insertions(+), 5 deletions(-)
+> >   drivers/pci/pcie_xilinx.c | 22 ++++++++--------------
+> >   1 file changed, 8 insertions(+), 14 deletions(-)
 > > 
-> > diff --git a/drivers/net/xilinx_axi_emac.c
-> > b/drivers/net/xilinx_axi_emac.c
-> > index 54f2232768..ef151ee51b 100644
-> > --- a/drivers/net/xilinx_axi_emac.c
-> > +++ b/drivers/net/xilinx_axi_emac.c
-> > @@ -903,12 +903,11 @@ static int axi_emac_of_to_plat(struct udevice
-> > *dev)
-> >   
-> >   	ret = dev_read_phandle_with_args(dev, "axistream-connected",
-> > NULL, 0, 0,
-> >   					 &axistream_node);
-> > -	if (ret) {
-> > -		printf("%s: axistream is not found\n", __func__);
-> > -		return -EINVAL;
+> > diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
+> > index 53fd121e90..20b630027f 100644
+> > --- a/drivers/pci/pcie_xilinx.c
+> > +++ b/drivers/pci/pcie_xilinx.c
+> > @@ -140,20 +140,14 @@ static int pcie_xilinx_write_config(struct
+> > udevice *bus, pci_dev_t bdf,
+> >   static int pcie_xilinx_of_to_plat(struct udevice *dev)
+> >   {
+> >   	struct xilinx_pcie *pcie = dev_get_priv(dev);
+> > -	struct fdt_resource reg_res;
+> > -	DECLARE_GLOBAL_DATA_PTR;
+> > -	int err;
+> > -
+> > -	err = fdt_get_resource(gd->fdt_blob, dev_of_offset(dev), "reg",
+> 
+> I don't have HW to test this but here you are removing reference to
+> GD that's 
+> why I think you should also remove
+> 
+> #include <asm/global_data.h>
+Ok.
+> 
+> 
+> 
+> 
+> > -			       0, &reg_res);
+> > -	if (err < 0) {
+> > -		pr_err("\"reg\" resource not found\n");
+> > -		return err;
 > > -	}
-> > +	if (!ret)
-> > +		plat->dmatx = (struct axidma_reg
-> > *)ofnode_get_addr(axistream_node.node);
-> > +	else
-> > +		plat->dmatx = (struct axidma_reg
-> > *)dev_read_addr_index(dev, 1);
-> >   
-> > -	plat->dmatx = (struct axidma_reg
-> > *)ofnode_get_addr(axistream_node.node);
-> >   	if (!plat->dmatx) {
-> >   		printf("%s: axi_dma register space not found\n",
-> > __func__);
-> >   		return -EINVAL;
+> > -
+> > -	pcie->cfg_base = map_physmem(reg_res.start,
+> > -				     fdt_resource_size(&reg_res),
+> > -				     MAP_NOCACHE);
+> > +	fdt_addr_t addr;
+> > +	fdt_size_t size;
+> > +
+> > +	addr = dev_read_addr_size(dev, &size);
+> > +	if (addr == FDT_ADDR_T_NONE)
+> > +		return -EINVAL;
+> > +
+> > +	pcie->cfg_base = map_physmem(addr, size, MAP_NOCACHE);
 > 
-> This looks good to me. Can you please send it separately?
-> It is really independent of change from other patches.
-Actually it is a separate patch.
+> Definitely it is better then what was there before.
 > 
-> Reviewed-by: Michal Simek <michal.simek@amd.com>
+> But can't use use devm_ioremap() instead?
+Ok.
 > 
 > Thanks,
 > Michal
