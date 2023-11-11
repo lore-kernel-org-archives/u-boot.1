@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ECB5C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 10:46:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE97C4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 11:04:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A5A786F7E;
-	Sat, 11 Nov 2023 11:46:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 1238B86F5E;
+	Sat, 11 Nov 2023 12:04:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ImY/hUbh";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Sf58H/Ma";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 546A486F45; Sat, 11 Nov 2023 11:46:34 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0A7F486F7C; Sat, 11 Nov 2023 12:04:07 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B02EB86F6D
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 11:46:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5437d60fb7aso4468519a12.3
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 02:46:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1699699590; x=1700304390;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ScYicUFHb+qoluDbgLSAgAArMfhmqdSv2yQ/g84t7ys=;
- b=ImY/hUbh4sw/O0VHOlOTMSv4SlNt4cemzhFeJBJWwpkVauQdm659ieDeSMNR3vHp2V
- Tsjx6937njwP0LVVLmWuE9cHl/vwmqPpIFvyDkrpDJZ1z73AkB/Ut8IhUHUac9FVR7dJ
- LPIj002VWC1prhbT+zXG30fVxiTSlVCtsYgH4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699699590; x=1700304390;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ScYicUFHb+qoluDbgLSAgAArMfhmqdSv2yQ/g84t7ys=;
- b=IYXbe0S9R7oTHjJyz4DLApUtG/Sr38RaFOM6W4YuvzM0znRZ+De+81FJgmw0THMxTb
- 1v78Ra5dVN1izclvBfOIS/W4/O9BTrcS2/xgpRZpyk2VRRQRd4g7D4MjRCKLfoDrQAtb
- zLIm+Z5wEmoLpswaupuJSJnmyZmIYZsjs97k1ExLfMHsg1Cj+H9fnfojyZ298YC+jvtA
- j3ovzdRVqdZfX5AMwMUyKHIDOnshD2EmFobjIe//RwtblvZqLJA1ZtY5akfUVFTS9mun
- yzgOCoWRe9nuAvYCxC9ome/UgdWjy1LtZNVpiPb9Vtdvv78hmz9neBHpi8nl4oOm3+NX
- oFQQ==
-X-Gm-Message-State: AOJu0YxYl3+/r7ueD1CvWRbVTZF6Hr70ztDIMFvLuAZOSZ8NqFJEwTQv
- m7tOtF2C3aIRVSJ91mQQ9BIklS2FFBXiQqxV/yMo5Q==
-X-Google-Smtp-Source: AGHT+IEPaTNngDVafeuHj8t4A+vhM0VmSP+1FdOomfw9kd+6vOdUpo7HnD5tHqn+eXIvU/I70aeoBQ==
-X-Received: by 2002:a05:6402:510:b0:543:7256:6370 with SMTP id
- m16-20020a056402051000b0054372566370mr1234240edv.23.1699699590143; 
- Sat, 11 Nov 2023 02:46:30 -0800 (PST)
-Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
- (host-79-20-97-182.retail.telecomitalia.it. [79.20.97.182])
- by smtp.gmail.com with ESMTPSA id
- c19-20020a50f613000000b00542d3e470f9sm827534edn.10.2023.11.11.02.46.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 02:46:29 -0800 (PST)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Lukasz Majewski <lukma@denx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 2/2] clk: stm32f: fix setting of LCD clock
-Date: Sat, 11 Nov 2023 11:46:19 +0100
-Message-ID: <20231111104625.137511-2-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231111104625.137511-1-dario.binacchi@amarulasolutions.com>
-References: <20231111104625.137511-1-dario.binacchi@amarulasolutions.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 6837586F6C
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 12:04:03 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 7B140CE1736
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 11:04:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3ADDC433C7
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 11:03:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1699700639;
+ bh=/mCsRpoHNfIXUNMQCkSkO7WIeDaCJXswf/0MS4Qqxww=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=Sf58H/MaoBZZ/xOFYMzMRrDPETrlRGADgg4vjWHg/ITAxvutAcyCvu+JGVVVkGyaS
+ ti58qyVGv+BAsyknYmxe/7jI039fP1ZpI/suSu3zL6wVmkNVwes2jeUAEGrHWFx1ib
+ rgjLH/72RIDg9yUuqjZI93NbJhYZi6c6iTCHHDirFY19X1+5tTYARa8LYttRNTrsk7
+ 8dOhRd4KqOluueV3UKwtSMFAeQBKai+bfZXRwCZqlQY3QKUChI9QrK9DcweFKDbpOs
+ cfSO7BOs3SZIHFrgYDZ3icrpZEkJiMS/lqyiFwCVaepza6GKFG1jmsYUfa20kSCEbC
+ 0ieyYH2g6iKYA==
+Received: by mail-lj1-f170.google.com with SMTP id
+ 38308e7fff4ca-2c54c8934abso38962381fa.0
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 03:03:59 -0800 (PST)
+X-Gm-Message-State: AOJu0YwZX5sLkqfUaVV/WdEYw50CF2hlvin249gomqTLuUyVcaGsmVIM
+ FVlFz2D6eJKk5uNBR138vzEP0anDIwNkBpoasyo=
+X-Google-Smtp-Source: AGHT+IHwnbe1LHcOvdw6D1LpdnWzFdtyWX7I2RFO0IU/Kq2EYq5LOp7rs1R+FvsDd3/9FmKKqRkcUXf0D53RTQwLbzE=
+X-Received: by 2002:a2e:9898:0:b0:2c5:19f2:4fde with SMTP id
+ b24-20020a2e9898000000b002c519f24fdemr1156839ljj.23.1699700637978; Sat, 11
+ Nov 2023 03:03:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+In-Reply-To: <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Sat, 11 Nov 2023 21:03:46 +1000
+X-Gmail-Original-Message-ID: <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+Message-ID: <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: "Chiu, Chasel" <chasel.chiu@intel.com>
+Cc: Simon Glass <sjg@chromium.org>, 
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ "Brune, Maximilian" <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,56 +89,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set pllsaidivr only if the PLLSAIR output frequency is an exact multiple
-of the pixel clock rate. Otherwise, we search through all combinations
-of pllsaidivr * pllsair and use the one which gives the rate closest to
-requested one.
+On Sat, 11 Nov 2023 at 04:20, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+>
+>
+> Just sharing some usage examples from UEFI/EDK2 scenario.
+> To support ACPI S4/Hibernation, memory map must be consistent before ente=
+ring and after resuming from S4, in this case payload may need to know prev=
+ious memory map from bootloader (currently generic payload cannot access pl=
+atform/bootloader specific non-volatile data, thus could not save/restore m=
+emory map information)
 
-Fixes: 5e993508cb25 ("clk: clk_stm32f: Add set_rate for LTDC clock")
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+So how would EDK2 reconstruct the entire EFI memory map from just
+these unannotated /reserved-memory nodes? The EFI memory map contains
+much more information than that, and all of it has to match the
+pre-hibernate situation, right? Can you given an example?
 
----
+> Another usage is to support binary model which generic payload is a prebu=
+ilt binary compatible for all platforms/configurations, however the payload=
+ default memory map might not always work for all the configurations and we=
+ want to allow bootloader to override payload default memory map without re=
+compiling.
+>
 
- drivers/clk/stm32/clk-stm32f.c | 26 ++++++++++++++------------
- 1 file changed, 14 insertions(+), 12 deletions(-)
+Agreed. But can you explain how a EDK2 payload might make meaningful
+use of 'runtime-code' regions provided via DT  by the non-EDK2
+platform init? Can you give an example?
 
-diff --git a/drivers/clk/stm32/clk-stm32f.c b/drivers/clk/stm32/clk-stm32f.c
-index 4c1864193357..d68c75ed2013 100644
---- a/drivers/clk/stm32/clk-stm32f.c
-+++ b/drivers/clk/stm32/clk-stm32f.c
-@@ -522,18 +522,20 @@ static ulong stm32_set_rate(struct clk *clk, ulong rate)
- 
- 	/* get the current PLLSAIR output freq */
- 	pllsair_rate = stm32_clk_get_pllsai_rate(priv, PLLSAIR);
--	best_div = pllsair_rate / rate;
--
--	/* look into pllsaidivr_table if this divider is available*/
--	for (i = 0 ; i < sizeof(pllsaidivr_table); i++)
--		if (best_div == pllsaidivr_table[i]) {
--			/* set pll_saidivr with found value */
--			clrsetbits_le32(&regs->dckcfgr,
--					RCC_DCKCFGR_PLLSAIDIVR_MASK,
--					pllsaidivr_table[i] <<
--					RCC_DCKCFGR_PLLSAIDIVR_SHIFT);
--			return rate;
--		}
-+	if ((pllsair_rate % rate) == 0) {
-+		best_div = pllsair_rate / rate;
-+
-+		/* look into pllsaidivr_table if this divider is available */
-+		for (i = 0 ; i < sizeof(pllsaidivr_table); i++)
-+			if (best_div == pllsaidivr_table[i]) {
-+				/* set pll_saidivr with found value */
-+				clrsetbits_le32(&regs->dckcfgr,
-+						RCC_DCKCFGR_PLLSAIDIVR_MASK,
-+						pllsaidivr_table[i] <<
-+						RCC_DCKCFGR_PLLSAIDIVR_SHIFT);
-+				return rate;
-+			}
-+	}
- 
- 	/*
- 	 * As no pllsaidivr value is suitable to obtain requested freq,
--- 
-2.42.0
+> Under below assumption:
+>         FDT OS impact has been evaluated and taken care by relevant exper=
+ts/stakeholders.
+> Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
+>
 
+I am sorry but I don't know what 'FDT OS impact' means. We are talking
+about a firmware-to-firmware abstraction that has the potential to
+leak into the OS visible interface.
+
+I am a maintainer in the Tianocore project myself, so it would help if
+you could explain who these relevant experts and stakeholders are. Was
+this discussed on the edk2-devel mailing list? If so, apologies for
+missing it but I may not have been cc'ed perhaps?
+
+
+>
+> > -----Original Message-----
+> > From: Simon Glass <sjg@chromium.org>
+> > Sent: Tuesday, September 26, 2023 12:43 PM
+> > To: devicetree@vger.kernel.org
+> > Cc: Mark Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>;
+> > Tan, Lean Sheng <sheng.tan@9elements.com>; lkml <linux-
+> > kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>; Brune,
+> > Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
+> > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
+> > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
+> > <gua.guo@intel.com>; Chiu, Chasel <chasel.chiu@intel.com>; linux-
+> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>; Ard
+> > Biesheuvel <ardb@kernel.org>; Simon Glass <sjg@chromium.org>
+> > Subject: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+> >
+> > It is common to split firmware into 'Platform Init', which does the ini=
+tial hardware
+> > setup and a "Payload" which selects the OS to be booted.
+> > Thus an handover interface is required between these two pieces.
+> >
+> > Where UEFI boot-time services are not available, but UEFI firmware is p=
+resent on
+> > either side of this interface, information about memory usage and attri=
+butes must
+> > be presented to the "Payload" in some form.
+> >
+> > This aims to provide an small schema addition for the memory mapping ne=
+eded
+> > to keep these two pieces working together well.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v7:
+> > - Rename acpi-reclaim to acpi
+> > - Drop individual mention of when memory can be reclaimed
+> > - Rewrite the item descriptions
+> > - Add back the UEFI text (with trepidation)
+> >
+> > Changes in v6:
+> > - Drop mention of UEFI
+> > - Use compatible strings instead of node names
+> >
+> > Changes in v5:
+> > - Drop the memory-map node (should have done that in v4)
+> > - Tidy up schema a bit
+> >
+> > Changes in v4:
+> > - Make use of the reserved-memory node instead of creating a new one
+> >
+> > Changes in v3:
+> > - Reword commit message again
+> > - cc a lot more people, from the FFI patch
+> > - Split out the attributes into the /memory nodes
+> >
+> > Changes in v2:
+> > - Reword commit message
+> >
+> >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
+> >  1 file changed, 71 insertions(+)
+> >  create mode 100644 dtschema/schemas/reserved-memory/common-
+> > reserved.yaml
+> >
+> > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > new file mode 100644
+> > index 0000000..f7fbdfd
+> > --- /dev/null
+> > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > @@ -0,0 +1,71 @@
+> > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause %YAML 1.2
+> > +---
+> > +$id:
+> > +http://devicetree.org/schemas/reserved-memory/common-reserved.yaml#
+> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > +
+> > +title: Common memory reservations
+> > +
+> > +description: |
+> > +  Specifies that the reserved memory region can be used for the purpos=
+e
+> > +  indicated by its compatible string.
+> > +
+> > +  Clients may reuse this reserved memory if they understand what it is
+> > + for,  subject to the notes below.
+> > +
+> > +maintainers:
+> > +  - Simon Glass <sjg@chromium.org>
+> > +
+> > +allOf:
+> > +  - $ref: reserved-memory.yaml
+> > +
+> > +properties:
+> > +  compatible:
+> > +    description: |
+> > +      This describes some common memory reservations, with the compati=
+ble
+> > +      string indicating what it is used for:
+> > +
+> > +         acpi: Advanced Configuration and Power Interface (ACPI) table=
+s
+> > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This is re=
+served by
+> > +           the firmware for its use and is required to be saved and re=
+stored
+> > +           across an NVS sleep
+> > +         boot-code: Contains code used for booting which is not needed=
+ by the OS
+> > +         boot-code: Contains data used for booting which is not needed=
+ by the OS
+> > +         runtime-code: Contains code used for interacting with the sys=
+tem when
+> > +           running the OS
+> > +         runtime-data: Contains data used for interacting with the sys=
+tem when
+> > +           running the OS
+> > +
+> > +    enum:
+> > +      - acpi
+> > +      - acpi-nvs
+> > +      - boot-code
+> > +      - boot-data
+> > +      - runtime-code
+> > +      - runtime-data
+> > +
+> > +  reg:
+> > +    description: region of memory that is reserved for the purpose ind=
+icated
+> > +      by the compatible string.
+> > +
+> > +required:
+> > +  - reg
+> > +
+> > +unevaluatedProperties: false
+> > +
+> > +examples:
+> > +  - |
+> > +    reserved-memory {
+> > +        #address-cells =3D <1>;
+> > +        #size-cells =3D <1>;
+> > +
+> > +        reserved@12340000 {
+> > +            compatible =3D "boot-code";
+> > +            reg =3D <0x12340000 0x00800000>;
+> > +        };
+> > +
+> > +        reserved@43210000 {
+> > +            compatible =3D "boot-data";
+> > +            reg =3D <0x43210000 0x00800000>;
+> > +        };
+> > +    };
+> > --
+> > 2.42.0.515.g380fc7ccd1-goog
+>
