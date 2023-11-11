@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48663C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 17:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1839AC4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 17:36:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42AD986EDA;
-	Sat, 11 Nov 2023 18:33:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AC5186EDA;
+	Sat, 11 Nov 2023 18:36:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="heWSu5ol";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="WJQbzRD7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B822186FDE; Sat, 11 Nov 2023 18:33:13 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 508DE86EE1; Sat, 11 Nov 2023 18:36:28 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62BE486F1C
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 18:33:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3447286EB9
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 18:36:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6bd0e1b1890so2543319b3a.3
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 09:33:11 -0800 (PST)
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-5aa7172bafdso2128214a12.1
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 09:36:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1699723990; x=1700328790; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U8oI6mwRII5aM1mkpWCfn7WrSa5uHdfQK1t57bxWA80=;
- b=heWSu5ol5wYWuCbAE6/TE+V4O8jpCbAIJjDhYlj4V3819kDn7Kx9Jy42K9AfKdqVER
- W+U8z0V+KEVhLJp+zW3agbRYKJ7Y4qAC/1Tnh4QGDvFSjRt212khcdSJwVxaWlLgM1NJ
- SoKcUpFypm24DPHK5+wtqVvEYm2VVZa8YxZ7xlFzTvrGX+Laus+l34grDxunebTpZTZ+
- Ej0R3tJ+AQPnp1EtCMIodD3HMIP8z6jw7C/C3Br3L9lK9isKMLSoAM+DctcA5yfIe/tb
- fWnWzisLF3RfUrk4yZpaJUFx/wc3qWo00bbxPo4sLJIdx+YYoWcQzSv3B4Z4U/Hj6PBA
- CH4Q==
+ d=ventanamicro.com; s=google; t=1699724184; x=1700328984; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VnfsphvXx+SeilBfaJRLO4IX/5mqgUJn5CDe2dtvVoQ=;
+ b=WJQbzRD7kXLVL1LhcMoH5wb02ekI2wG09cyEEI+N+vrNJD1ZB8BjGfDjXvEP8+KDG4
+ 7MBfZgxV5URjAmgk/8Bf8YWia2QamQgNE3NVzOy6x5vVwatu1qc4TK/aOMvO7bQWD1KS
+ 7+Nu3vF8WfYjrusDCURcKPja6NBPjSLolyOIPFoy4A2LAdidrRncdgfcdBsqoqMpNk5u
+ Os/2+9k2ZydXpueJNk6621W4UTAYjQtM9I0Lb8zsMmNljFh8DjtH5sttoIQ6MtiDaoJB
+ eCAqAs2JR6gNzHWZLOjYIDC6nvtG+ZbsdfmNeG+cr7VYIg4Pvrz7znfhsy6TsY/m0nYA
+ +BvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699723990; x=1700328790;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=U8oI6mwRII5aM1mkpWCfn7WrSa5uHdfQK1t57bxWA80=;
- b=vopPuc6hJNRPC+aPuzE1iqDe0o0OhjhUjG1HlCPCShcrXFlr0L2zsBTleBE2pjsXWX
- +GW4WZo2NUKMWitaJxMWscra27k9NmYM0u2I2YObB09iYOXQzDgzJjJM3awDsTAqwZJu
- BUZQye5wuhtDy6QQLBKXzX1npJglqgyLMOktJgvFs0n+szofZ8eGpB93a4Ir8cud9+4/
- fzQRB3Kk87QGyPvoibO6Mk/3/w4bxXHHgKfGQZM12yUKv+jxg2fu4mztAXyKOt7yIga4
- p6FKqK682ICkldRaVvbPx8pNAPDFZ7eUVCglQF+K8bB/RgW7X/rDZlSwNyi1ZYFIq1Wo
- K23w==
-X-Gm-Message-State: AOJu0YyltR4Nn3b7zq5F4tLEdePnGz2Ext4cgQ0Txk8SdTyOD89trQff
- WlIKNraBhGT1Tz38ruUiCLtgfg==
-X-Google-Smtp-Source: AGHT+IENlTA6N2lJuZ3FqQ1YhAGcruiGgckbHsDpgmimuuhwtWkAT63CgyLbW4x0DYF6t2J+H+Dikg==
-X-Received: by 2002:a05:6a20:1450:b0:157:e4c6:766a with SMTP id
- a16-20020a056a20145000b00157e4c6766amr1841631pzi.41.1699723989708; 
- Sat, 11 Nov 2023 09:33:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699724184; x=1700328984;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VnfsphvXx+SeilBfaJRLO4IX/5mqgUJn5CDe2dtvVoQ=;
+ b=C/OWNIya4OhvAkLVwN3gJvFkjkZQB3K3oUnE+1qO8B5lknDJjBgKZhhnATQD+jCKGT
+ f2nPGxejYpRQGHNovKPhtVc81ik2cxWHdMtXLarDx2VksMJHWQ1S8KRxukVTlG7lB+tA
+ rM4S4DIPullfuuATBsyb6aBJyqXWDAKz8nvB9dmNELLm8ZB5olj3HrxcG7wVLvH69+uU
+ D4JORK7JuQIZIdnatfolk2MH73EqDqpXXL5B/f6ayR1ERzj3hEjFFwiu7nzLb9ndDLoL
+ 0Q11KvQXKVL+CvUovMWbbQBh23lpIfT170LTkXvo8721d7I1MuLyYnZiuRR1GOWlvhIq
+ nX3A==
+X-Gm-Message-State: AOJu0YwL0Dxqfhb8wvcuG7glSZV8qj2MA6+ciJMg6mYPTYj1X1lz/M3k
+ QmIXBoA2Dyvb37wqZptA+D4Mzg==
+X-Google-Smtp-Source: AGHT+IGb/vO9HqdyrwSEOaCwuZUwjCiTnnPkzxoedkINmyvIB4P1FJtR1ZYLfBOPCiBQTcSqB6loWw==
+X-Received: by 2002:a17:90b:3e8c:b0:27d:492e:137a with SMTP id
+ rj12-20020a17090b3e8c00b0027d492e137amr1966316pjb.45.1699724184286; 
+ Sat, 11 Nov 2023 09:36:24 -0800 (PST)
 Received: from ThinkPad-T490.dc1.ventanamicro.com ([223.233.86.194])
  by smtp.googlemail.com with ESMTPSA id
- c64-20020a17090a494600b0027cf8869ee7sm3772218pjh.0.2023.11.11.09.33.06
+ 15-20020a17090a030f00b0027d0c3507fcsm3809877pje.9.2023.11.11.09.36.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 09:33:08 -0800 (PST)
+ Sat, 11 Nov 2023 09:36:21 -0800 (PST)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>
+To: Michal Simek <michal.simek@amd.com>, Bo Gan <ganboing@gmail.com>,
+ Puhan Zhou <puh4n.zhou@gmail.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Shengyu Qu <wiagn233@outlook.com>
 Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, u-boot@lists.denx.de,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 3/3] drivers: xilinx_spi: Probe fifo_depth at runtime
-Date: Sat, 11 Nov 2023 23:01:21 +0530
-Message-Id: <20231111173121.92889-4-mchitale@ventanamicro.com>
+Subject: [PATCH v2] drivers: pcie_xilinx: Fix "reg" not found error
+Date: Sat, 11 Nov 2023 23:06:02 +0530
+Message-Id: <20231111173604.93103-1-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231111173121.92889-1-mchitale@ventanamicro.com>
-References: <20231111173121.92889-1-mchitale@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,57 +94,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the fifo-size DT parameter is not provided then probe the
-controller's fifo depth at runtime. This is ported from a patch
-in the Linux Xilinx SPI driver.
+Fix the driver to use the dev_read_addr_size API to fetch the reg
+property from the DT.
 
 Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-Link: https://lore.kernel.org/r/1422029330-10971-5-git-send-email-ricardo.ribalda@gmail.com
 ---
- drivers/spi/xilinx_spi.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+Changes in v2:
+====
+- Remove global_data.h from include
+- Use devm_ioremap instead of map_phsymem
 
-diff --git a/drivers/spi/xilinx_spi.c b/drivers/spi/xilinx_spi.c
-index b63cda2091..99ae5be291 100644
---- a/drivers/spi/xilinx_spi.c
-+++ b/drivers/spi/xilinx_spi.c
-@@ -109,6 +109,27 @@ struct xilinx_spi_priv {
- 	u8 startup;
- };
+ drivers/pci/pcie_xilinx.c | 26 +++++++++-----------------
+ 1 file changed, 9 insertions(+), 17 deletions(-)
+
+diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
+index 53fd121e90..c1f5bbbb1b 100644
+--- a/drivers/pci/pcie_xilinx.c
++++ b/drivers/pci/pcie_xilinx.c
+@@ -8,11 +8,9 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <pci.h>
+-#include <asm/global_data.h>
+ #include <linux/bitops.h>
+ #include <linux/printk.h>
+-
+-#include <asm/io.h>
++#include <linux/io.h>
  
-+static int xilinx_spi_find_buffer_size(struct xilinx_spi_regs *regs)
-+{
-+	u8 sr;
-+	int n_words = 0;
-+
-+	/*
-+	 * Before the buffer_size detection we reset the core
-+	 * to make sure we start with a clean state.
-+	 */
-+	writel(SPISSR_RESET_VALUE, &regs->srr);
-+
-+	/* Fill the Tx FIFO with as many words as possible */
-+	do {
-+		writel(0, &regs->spidtr);
-+		sr = readl(&regs->spisr);
-+		n_words++;
-+	} while (!(sr & SPISR_TX_FULL));
-+
-+	return n_words;
-+}
-+
- static int xilinx_spi_probe(struct udevice *bus)
+ /**
+  * struct xilinx_pcie - Xilinx PCIe controller state
+@@ -140,20 +138,14 @@ static int pcie_xilinx_write_config(struct udevice *bus, pci_dev_t bdf,
+ static int pcie_xilinx_of_to_plat(struct udevice *dev)
  {
- 	struct xilinx_spi_priv *priv = dev_get_priv(bus);
-@@ -116,6 +137,8 @@ static int xilinx_spi_probe(struct udevice *bus)
+ 	struct xilinx_pcie *pcie = dev_get_priv(dev);
+-	struct fdt_resource reg_res;
+-	DECLARE_GLOBAL_DATA_PTR;
+-	int err;
+-
+-	err = fdt_get_resource(gd->fdt_blob, dev_of_offset(dev), "reg",
+-			       0, &reg_res);
+-	if (err < 0) {
+-		pr_err("\"reg\" resource not found\n");
+-		return err;
+-	}
+-
+-	pcie->cfg_base = map_physmem(reg_res.start,
+-				     fdt_resource_size(&reg_res),
+-				     MAP_NOCACHE);
++	fdt_addr_t addr;
++	fdt_size_t size;
++
++	addr = dev_read_addr_size(dev, &size);
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	pcie->cfg_base = devm_ioremap(dev, addr, size);
  
- 	regs = priv->regs = dev_read_addr_ptr(bus);
- 	priv->fifo_depth = dev_read_u32_default(bus, "fifo-size", 0);
-+	if (!priv->fifo_depth)
-+		priv->fifo_depth = xilinx_spi_find_buffer_size(regs);
- 
- 	writel(SPISSR_RESET_VALUE, &regs->srr);
- 
+ 	return 0;
+ }
 -- 
 2.34.1
 
