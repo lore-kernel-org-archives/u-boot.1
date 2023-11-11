@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41599C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 15:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 344E0C4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 15:26:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FABF86ECA;
-	Sat, 11 Nov 2023 16:19:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 188B286EEE;
+	Sat, 11 Nov 2023 16:26:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ew52qKmI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M/LjxF5X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4A5086ED6; Sat, 11 Nov 2023 16:19:42 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id DEF2086EF1; Sat, 11 Nov 2023 16:26:23 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6B2D86D10
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:19:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 128A286D2E
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:26:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6ce322b62aeso1538664a34.3
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 07:19:39 -0800 (PST)
+ spf=pass smtp.mailfrom=gilbsgilbert@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40a279663a2so4105095e9.1
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 07:26:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699715977; x=1700320777; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699716381; x=1700321181; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=H1IHmBGDE19eL56G4zksE8VbJ4hUcjng25FSdtJgaLs=;
- b=ew52qKmI7F38E4j9OhzzJej2YRjjFTHJKXk9zhD4f1JOMC5lapLb+Hb8Z4EC1KUx3d
- A579n1kUJt2JN4081PNLvKz2tXsnOuADCHhpIGeJtRNuRd9bMW0vy7b44TCMIm4yHar0
- 9Yu+tf+/iYR3EaglZlt2dTtwaE9ePt+01ZzzJ6iWeNO1TXkWDMHdl6jECrtQsnvdwxZ3
- zWxUKy7CDK830EUP2thvFp4gUEguGGkjKlGqLHTloP5JeigM1NFRUAUw0llPIJls603f
- sv4+yWeQDi+Ml/RD59I8La02Xw+4OsX38LSPMMR2b/wDxN3Y/XCEES2zGOepLUHVirCG
- Zm5g==
+ bh=kmw3pi47Z6l7Y/dJEcuVnfSvADwT894D+nPIVXC26GI=;
+ b=M/LjxF5XtKiHz7YAGH5tH6oImp7ttbHN1/YXkwP1qLAY9Kccaj4we/QqvUF21lLnRv
+ 7a7Jj/uheLmezQ6P1HZ6zBJijEqz0JnuLWpdtlxV64xXiwM1HXCa0WhioA/xyf4l0j7k
+ mlz7yB/iV5p3iIAJGBPzdC53uEMxxaGJesirY8K/TP29NqeDIDICX5UwpSt9B/uDx73R
+ 4pIGGU0v9dKonbPzmOHeqNsKWXgrz/HXXGbDB0K5MriyqpfeNwy/oe6/1psnsPPxfvR4
+ iFNrpFm7MrZafoeyau8q15bCqbL++nxrXwbvkBFLB3ORCka+fTSDJffTdKf7+W2OwRVN
+ Ip7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699715977; x=1700320777;
+ d=1e100.net; s=20230601; t=1699716381; x=1700321181;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=H1IHmBGDE19eL56G4zksE8VbJ4hUcjng25FSdtJgaLs=;
- b=eiiEVbVJOY4xQlLRP+sn9s3pPsHjyeT0y2y+vN88jBIFDhMLPvEw621rMbzX506IhD
- hs70lLLHCpS+5f1xQm6kfpFOkoN0aoAzCgU2Sagb+xbsp2ag1dFMIm6VNmYUwQ9AL1TN
- V8lkQXpboEKU+nofjZ3o2iItjFDMXF8w/3O65iZgdTs7Hp45PVf4pSf5O+4xP2XDyfQ2
- 7XV5j9j4qSVnd4hfDKBr0uyNGCmsnXfw1LjsbEGbKpQmddqLoOahHpnhNGiRZqkzZjlX
- QV48BF7iHMHAvsTyFH8wtD10tUd/tAKkSrQX4qqBWaefrLlKEKYzCvdcpfDjrWwts5js
- W7LA==
-X-Gm-Message-State: AOJu0YxNYgeSWz6iQeQg0LKF4jryc/ND2tsfvU9Uc598cXAEmQ6wfybY
- zlaeVLoouLsZUSMaNBnqFzJgdV9LeFs=
-X-Google-Smtp-Source: AGHT+IFS5zyHp+IUCNrTA6MHA1b71/razOviwYPBGw5A5PLIRqwKjmNkNQ9TGhEVZjVLvjzUTbOiXw==
-X-Received: by 2002:a9d:6c81:0:b0:6c4:d08c:6a2 with SMTP id
- c1-20020a9d6c81000000b006c4d08c06a2mr2435312otr.9.1699715977588; 
- Sat, 11 Nov 2023 07:19:37 -0800 (PST)
-Received: from celestia.nettie.lan ([2001:470:42c4:101:c815:2350:916f:4ef4])
+ bh=kmw3pi47Z6l7Y/dJEcuVnfSvADwT894D+nPIVXC26GI=;
+ b=pyBThxkDK3KeEIZBsZjpwnznMDOEpyr7XgpDlDaaf+a4PDaD/uUfnJXL6nBl2WoRU/
+ gSVPr8xlH6/FbVTLroyVC/6zT50417CI58NIxP05jlJpPsVq66H+K5XCHTNklf9He0RS
+ G3Z5ffAQX7W2IHCNy3UIMChY/sQqFHS5mTkyLfbMgxa/EtU/vrj5yS1BpoJ6m2SVGi8y
+ +yAQ5WD0drwYo4EN/oYbWCM/h9hoLt1bU2tOX+K38IBw8RCTeu8daUwyeQPbK2eA1kPh
+ 4yfoQTikufQZnmvKYKy4BcSZ0JgIIRZ45oJyDDuXZad9W/MJR11fbPeC0KudZeKJz5CQ
+ l69A==
+X-Gm-Message-State: AOJu0YwTq2Nw6E+L+1udrnT+0NtX9G5b/S8f5Se1yllpgGaFHxLtTLlW
+ RNQiaqOv9DRX9RW29xwkBfT+G6PNtkGLaRbC
+X-Google-Smtp-Source: AGHT+IHFM6LyVFRbQa4uvSMzn7q97Mkbzh0QCokUAZZDmOh24ev8oKvZw8ddSbDHszYeHA4U8WRAJQ==
+X-Received: by 2002:a05:600c:3b07:b0:405:3cc1:e115 with SMTP id
+ m7-20020a05600c3b0700b004053cc1e115mr1958952wms.3.1699716381130; 
+ Sat, 11 Nov 2023 07:26:21 -0800 (PST)
+Received: from localhost.localdomain ([2a01:e0a:233:d260:f729:1984:660f:8015])
  by smtp.gmail.com with ESMTPSA id
- ds20-20020a0568306c1400b006ce2f0818d3sm260596otb.22.2023.11.11.07.19.36
+ m16-20020a7bca50000000b0040841e79715sm2402139wml.27.2023.11.11.07.26.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 07:19:37 -0800 (PST)
-From: Sam Edwards <cfsworks@gmail.com>
-X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
-To: u-boot@lists.denx.de,
-	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Cc: Qu Wenruo <wqu@suse.com>,
-	Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH] fs: btrfs: fix reading when length specified
-Date: Sat, 11 Nov 2023 08:19:04 -0700
-Message-ID: <20231111151904.149009-1-CFSworks@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ Sat, 11 Nov 2023 07:26:20 -0800 (PST)
+From: Nils Le Roux <gilbsgilbert@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Nils Le Roux <gilbsgilbert@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH] net: designware: Support high memory nodes
+Date: Sat, 11 Nov 2023 16:26:14 +0100
+Message-ID: <20231111152619.95185-1-gilbsgilbert@gmail.com>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,61 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The btrfs read function limits the read length to ensure that it
-and the read offset do not together exceed the size of the file.
-However, this size was only being queried if the read length was
-passed a value of zero (meaning "whole file"), and the size is
-defaulted to 0 otherwise. This means the clamp will just zero out
-the length if one is specified, preventing reading of the file.
+Some platforms (such as the Lichee Pi 4A) have their dwmac device
+addressable only in high memory space. Storing the node's base address
+on 32 bits is not possible in such case.
 
-Fix this by checking the file size unconditionally, and unifying
-the default length and clamping logic as a single range check instead.
+Use platform's physical address type to store the base address.
 
-This bug was discovered when trying to boot Linux with initrd= via
-'bootefi' from a btrfs partition. The EFI stub entered an infinite
-loop of zero-length reads while trying to read the initrd, and the
-boot process stalled indefinitely.
-
-Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+Signed-off-by: Nils Le Roux <gilbsgilbert@gmail.com>
 ---
- fs/btrfs/btrfs.c | 15 ++++++---------
- 1 file changed, 6 insertions(+), 9 deletions(-)
 
-diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
-index 4cdbbbe3d0..1149a3b200 100644
---- a/fs/btrfs/btrfs.c
-+++ b/fs/btrfs/btrfs.c
-@@ -228,7 +228,7 @@ int btrfs_read(const char *file, void *buf, loff_t offset, loff_t len,
+ drivers/net/designware.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index a174344b3e..327732fbf7 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -678,8 +678,8 @@ int designware_eth_probe(struct udevice *dev)
  {
- 	struct btrfs_fs_info *fs_info = current_fs_info;
- 	struct btrfs_root *root;
--	loff_t real_size = 0;
-+	loff_t real_size;
- 	u64 ino;
- 	u8 type;
- 	int ret;
-@@ -246,16 +246,13 @@ int btrfs_read(const char *file, void *buf, loff_t offset, loff_t len,
- 		return -EINVAL;
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct dw_eth_dev *priv = dev_get_priv(dev);
+-	u32 iobase = pdata->iobase;
+-	ulong ioaddr;
++	phys_addr_t iobase = pdata->iobase;
++	phys_addr_t ioaddr;
+ 	int ret, err;
+ 	struct reset_ctl_bulk reset_bulk;
+ #ifdef CONFIG_CLK
+@@ -740,7 +740,7 @@ int designware_eth_probe(struct udevice *dev)
+ 	 * or via a PCI bridge, fill in plat before we probe the hardware.
+ 	 */
+ 	if (IS_ENABLED(CONFIG_PCI) && device_is_on_pci_bus(dev)) {
+-		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &iobase);
++		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, (u32 *)&iobase);
+ 		iobase &= PCI_BASE_ADDRESS_MEM_MASK;
+ 		iobase = dm_pci_mem_to_phys(dev, iobase);
+ 
+@@ -748,7 +748,7 @@ int designware_eth_probe(struct udevice *dev)
+ 		pdata->phy_interface = PHY_INTERFACE_MODE_RMII;
  	}
  
--	if (!len) {
--		ret = btrfs_size(file, &real_size);
--		if (ret < 0) {
--			error("Failed to get inode size: %s", file);
--			return ret;
--		}
--		len = real_size;
-+	ret = btrfs_size(file, &real_size);
-+	if (ret < 0) {
-+		error("Failed to get inode size: %s", file);
-+		return ret;
- 	}
- 
--	if (len > real_size - offset)
-+	if (!len || len > real_size - offset)
- 		len = real_size - offset;
- 
- 	ret = btrfs_file_read(root, ino, offset, len, buf);
+-	debug("%s, iobase=%x, priv=%p\n", __func__, iobase, priv);
++	debug("%s, iobase=%llx, priv=%p\n", __func__, (u64)iobase, priv);
+ 	ioaddr = iobase;
+ 	priv->mac_regs_p = (struct eth_mac_regs *)ioaddr;
+ 	priv->dma_regs_p = (struct eth_dma_regs *)(ioaddr + DW_DMA_BASE_OFFSET);
 -- 
-2.41.0
+2.42.1
 
