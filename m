@@ -4,53 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CCF9C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 14:28:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41599C4332F
+	for <u-boot@archiver.kernel.org>; Sat, 11 Nov 2023 15:19:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED8F186CF2;
-	Sat, 11 Nov 2023 15:28:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FABF86ECA;
+	Sat, 11 Nov 2023 16:19:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="in2EFnm0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ew52qKmI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6B3886E0E; Sat, 11 Nov 2023 15:28:56 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E4A5086ED6; Sat, 11 Nov 2023 16:19:42 +0100 (CET)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C155B86564
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 15:28:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6B2D86D10
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id CFAF53FDC1; 
- Sat, 11 Nov 2023 14:28:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699712933;
- bh=/4zXh5IRSWbe3hU8TH4KUu5yhYo6Q4ebJ3pVZuX74zQ=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=in2EFnm0z2jpWBomMvuKOaIEak9LjaGYbdOhMfyiUNEXQUalmlB04PsAmJ6TKzTGc
- 5maf1uTgDr9JunaEhgMAc/Qfdy6IMOzoWqMiYUG2iNKMPZSr/nrbOoxeExZat4bmWR
- yDVH9TQuvye3F6qbQDVF2J/fMP8aZIstYSyu7YcKEAYKVBRteLICstjt/n4WYTIrrb
- BMaNph5crIdcHrxjnOO9PaGQXqDrtIPotdr/qdh7vsPN3pYQFJ94DNPIMoqGWlGhIc
- rYalLLNQ0nrFiskqZdrpyeLid3KR5+pzL58IYWH4aYoUY+rAlNXblwX8eItEiETaLE
- QpEhhq65h3bKA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] acpi: cannot have RSDT above 4 GiB
-Date: Sat, 11 Nov 2023 15:28:46 +0100
-Message-Id: <20231111142846.180442-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6ce322b62aeso1538664a34.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 07:19:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699715977; x=1700320777; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=H1IHmBGDE19eL56G4zksE8VbJ4hUcjng25FSdtJgaLs=;
+ b=ew52qKmI7F38E4j9OhzzJej2YRjjFTHJKXk9zhD4f1JOMC5lapLb+Hb8Z4EC1KUx3d
+ A579n1kUJt2JN4081PNLvKz2tXsnOuADCHhpIGeJtRNuRd9bMW0vy7b44TCMIm4yHar0
+ 9Yu+tf+/iYR3EaglZlt2dTtwaE9ePt+01ZzzJ6iWeNO1TXkWDMHdl6jECrtQsnvdwxZ3
+ zWxUKy7CDK830EUP2thvFp4gUEguGGkjKlGqLHTloP5JeigM1NFRUAUw0llPIJls603f
+ sv4+yWeQDi+Ml/RD59I8La02Xw+4OsX38LSPMMR2b/wDxN3Y/XCEES2zGOepLUHVirCG
+ Zm5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699715977; x=1700320777;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=H1IHmBGDE19eL56G4zksE8VbJ4hUcjng25FSdtJgaLs=;
+ b=eiiEVbVJOY4xQlLRP+sn9s3pPsHjyeT0y2y+vN88jBIFDhMLPvEw621rMbzX506IhD
+ hs70lLLHCpS+5f1xQm6kfpFOkoN0aoAzCgU2Sagb+xbsp2ag1dFMIm6VNmYUwQ9AL1TN
+ V8lkQXpboEKU+nofjZ3o2iItjFDMXF8w/3O65iZgdTs7Hp45PVf4pSf5O+4xP2XDyfQ2
+ 7XV5j9j4qSVnd4hfDKBr0uyNGCmsnXfw1LjsbEGbKpQmddqLoOahHpnhNGiRZqkzZjlX
+ QV48BF7iHMHAvsTyFH8wtD10tUd/tAKkSrQX4qqBWaefrLlKEKYzCvdcpfDjrWwts5js
+ W7LA==
+X-Gm-Message-State: AOJu0YxNYgeSWz6iQeQg0LKF4jryc/ND2tsfvU9Uc598cXAEmQ6wfybY
+ zlaeVLoouLsZUSMaNBnqFzJgdV9LeFs=
+X-Google-Smtp-Source: AGHT+IFS5zyHp+IUCNrTA6MHA1b71/razOviwYPBGw5A5PLIRqwKjmNkNQ9TGhEVZjVLvjzUTbOiXw==
+X-Received: by 2002:a9d:6c81:0:b0:6c4:d08c:6a2 with SMTP id
+ c1-20020a9d6c81000000b006c4d08c06a2mr2435312otr.9.1699715977588; 
+ Sat, 11 Nov 2023 07:19:37 -0800 (PST)
+Received: from celestia.nettie.lan ([2001:470:42c4:101:c815:2350:916f:4ef4])
+ by smtp.gmail.com with ESMTPSA id
+ ds20-20020a0568306c1400b006ce2f0818d3sm260596otb.22.2023.11.11.07.19.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 11 Nov 2023 07:19:37 -0800 (PST)
+From: Sam Edwards <cfsworks@gmail.com>
+X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
+To: u-boot@lists.denx.de,
+	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+Cc: Qu Wenruo <wqu@suse.com>,
+	Sam Edwards <CFSworks@gmail.com>
+Subject: [PATCH] fs: btrfs: fix reading when length specified
+Date: Sat, 11 Nov 2023 08:19:04 -0700
+Message-ID: <20231111151904.149009-1-CFSworks@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,68 +91,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The field RsdtAddress has only 32 bit. The RSDT table cannot be located
-beyond 4 GiB.
+The btrfs read function limits the read length to ensure that it
+and the read offset do not together exceed the size of the file.
+However, this size was only being queried if the read length was
+passed a value of zero (meaning "whole file"), and the size is
+defaulted to 0 otherwise. This means the clamp will just zero out
+the length if one is specified, preventing reading of the file.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Fix this by checking the file size unconditionally, and unifying
+the default length and clamping logic as a single range check instead.
+
+This bug was discovered when trying to boot Linux with initrd= via
+'bootefi' from a btrfs partition. The EFI stub entered an infinite
+loop of zero-length reads while trying to read the initrd, and the
+boot process stalled indefinitely.
+
+Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 ---
- lib/acpi/base.c | 26 +++++++++++++++++++-------
- 1 file changed, 19 insertions(+), 7 deletions(-)
+ fs/btrfs/btrfs.c | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
 
-diff --git a/lib/acpi/base.c b/lib/acpi/base.c
-index 2057bd2bef..128a76ad39 100644
---- a/lib/acpi/base.c
-+++ b/lib/acpi/base.c
-@@ -21,10 +21,17 @@ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct acpi_rsdt *rsdt,
- 	memcpy(rsdp->signature, RSDP_SIG, 8);
- 	memcpy(rsdp->oem_id, OEM_ID, 6);
- 
--	rsdp->length = sizeof(struct acpi_rsdp);
--	rsdp->rsdt_address = map_to_sysmem(rsdt);
-+	if (rsdt)
-+		rsdp->rsdt_address = map_to_sysmem(rsdt);
-+	else
-+		rsdp->rsdt_address = 0;
-+
-+	if (xsdt)
-+		rsdp->xsdt_address = map_to_sysmem(xsdt);
-+	else
-+		rsdp->xsdt_address = 0;
- 
--	rsdp->xsdt_address = map_to_sysmem(xsdt);
-+	rsdp->length = sizeof(struct acpi_rsdp);
- 	rsdp->revision = ACPI_RSDP_REV_ACPI_2_0;
- 
- 	/* Calculate checksums */
-@@ -68,11 +75,15 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
- static int acpi_write_base(struct acpi_ctx *ctx,
- 			   const struct acpi_writer *entry)
+diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
+index 4cdbbbe3d0..1149a3b200 100644
+--- a/fs/btrfs/btrfs.c
++++ b/fs/btrfs/btrfs.c
+@@ -228,7 +228,7 @@ int btrfs_read(const char *file, void *buf, loff_t offset, loff_t len,
  {
--	/* We need at least an RSDP and an RSDT Table */
-+	/* We need at least an RSDP and an XSDT Table */
- 	ctx->rsdp = ctx->current;
- 	acpi_inc_align(ctx, sizeof(struct acpi_rsdp));
--	ctx->rsdt = ctx->current;
--	acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
-+	if (map_to_sysmem(ctx->current) < UINT_MAX - 0x10000) {
-+		ctx->rsdt = ctx->current;
-+		acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
-+	} else {
-+		ctx->rsdt = 0;
-+	}
- 	ctx->xsdt = ctx->current;
- 	acpi_inc_align(ctx, sizeof(struct acpi_xsdt));
+ 	struct btrfs_fs_info *fs_info = current_fs_info;
+ 	struct btrfs_root *root;
+-	loff_t real_size = 0;
++	loff_t real_size;
+ 	u64 ino;
+ 	u8 type;
+ 	int ret;
+@@ -246,16 +246,13 @@ int btrfs_read(const char *file, void *buf, loff_t offset, loff_t len,
+ 		return -EINVAL;
+ 	}
  
-@@ -80,7 +91,8 @@ static int acpi_write_base(struct acpi_ctx *ctx,
- 	memset(ctx->base, '\0', ctx->current - ctx->base);
+-	if (!len) {
+-		ret = btrfs_size(file, &real_size);
+-		if (ret < 0) {
+-			error("Failed to get inode size: %s", file);
+-			return ret;
+-		}
+-		len = real_size;
++	ret = btrfs_size(file, &real_size);
++	if (ret < 0) {
++		error("Failed to get inode size: %s", file);
++		return ret;
+ 	}
  
- 	acpi_write_rsdp(ctx->rsdp, ctx->rsdt, ctx->xsdt);
--	acpi_write_rsdt(ctx->rsdt);
-+	if (ctx->rsdt)
-+		acpi_write_rsdt(ctx->rsdt);
- 	acpi_write_xsdt(ctx->xsdt);
+-	if (len > real_size - offset)
++	if (!len || len > real_size - offset)
+ 		len = real_size - offset;
  
- 	return 0;
+ 	ret = btrfs_file_read(root, ino, offset, len, buf);
 -- 
-2.40.1
+2.41.0
 
