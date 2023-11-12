@@ -4,65 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C89DDC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE67BC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:07:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2D46874CA;
-	Sun, 12 Nov 2023 21:03:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F325C874D6;
+	Sun, 12 Nov 2023 21:03:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MSxAxnI5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IXCekVoU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 713018748C; Sun, 12 Nov 2023 21:03:39 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 6F75386BF7; Sun, 12 Nov 2023 21:03:41 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7190A870EE
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3A3C87456
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5a7d9d357faso41847347b3.0
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:34 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5bf812041a6so39752787b3.3
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819413; x=1700424213; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699819417; x=1700424217; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uq8ICsSbp/Qhjg2H40XVHrHCtvP3ejOutjHjXDWlhiw=;
- b=MSxAxnI5VaBiEwa2MZ20Qj5jnUxMi5ORGkmHiBJXtyiDpcWifWP+4qMk5f2DIjz4ox
- ixwJFiMuv+Zopa6rApMkj0Q5/vFnDbAB2BFeu/8C6GRq5lC2KG3xQ1JiTLwcXvViLPAA
- 51tyQplmw/QglGBPrGQcBTJts8uKXlFRofMug=
+ bh=pnxnboXgeOzkKHGHToBUoS+33AdyY93nNBSw62agh5o=;
+ b=IXCekVoUt1xXPxxQibZcGsHTtm6qI72Vb3XOekm+f8Y2IcZJw2KG0rCipeDqHFBxkI
+ bcE0FKbbc3vJ3SpSucbvdtWIbIHD80HJ8YqgZWKltJv48EENFwaam3F2KrtlvS6tNgHK
+ wDclqz8q+4buDXlnzwHmbqH0U1abDOmtlc8Sw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819413; x=1700424213;
+ d=1e100.net; s=20230601; t=1699819417; x=1700424217;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uq8ICsSbp/Qhjg2H40XVHrHCtvP3ejOutjHjXDWlhiw=;
- b=baqVF94eZT05OvsHdksGghHBXT0BKkcI3rwYGgzVV6dS5GZx0TYb1PIytpB8uA6JCv
- BoC41BlDoOXGLePdgpKX8xwR2phoEjo/Ed7Pd0EBRKu9RvFNnSavxPO03ua++/9t0B7E
- T45heDRsUrYRNAga1xSwv9Csq4JoHklDnRK53CvFd/F+Yrm6PW848KlVM0NaWu7xPq2w
- +1G18LyPHqaOxFaCpJvaVbWiu4BRZ8fT9QhFlu9/7QD+ITY8VbpjBs9GXqyTkfTRAYWd
- ydVHvu7+46hgx5zLfSC0mpcgI8aqLHRyXjWlECC48QUCFV0D7DBFpG+2npqGU4nnPRUy
- A06A==
-X-Gm-Message-State: AOJu0YwMYMy+3/JRfEKp8G0CKLDreIawZcqLBqHRWu9cRYgVYFyVRiue
- JvQa6s3dd5qdUDTc6xnS1TJBMhBS8FOsvRzk+XQ5azmksyhwcNbGXFA=
-X-Google-Smtp-Source: AGHT+IEKIm4vCLyPoZeUaKoNBL4VbnC8VjZqIQGTAz93Al+ac1Lvyle5HsZ2Q92ZJKYfkGRYOfP1349cimU2isQl7hU=
-X-Received: by 2002:a81:a1d7:0:b0:5b3:b17d:190f with SMTP id
- y206-20020a81a1d7000000b005b3b17d190fmr5395112ywg.29.1699819413060; Sun, 12
- Nov 2023 12:03:33 -0800 (PST)
+ bh=pnxnboXgeOzkKHGHToBUoS+33AdyY93nNBSw62agh5o=;
+ b=jRy8aa0ENoMItw6rVyUGQToNuKUeR0+1LWfn3TIG+GgZi5GJhBft74848BShgX9xJA
+ NkuoC61gVfRm7mI46if9rghPVICv2xmGZiMvco+Hd/Ugx6kXIJ+KPAhUGb5yZbPQ4D6E
+ Kj4VUcFIFocJp2D8xqcEkwy+vNRuU1S3U2LUaECIA91xpNAq2SViJt+rxwRDtbv9Tbr0
+ N5uHq4s658RG7hQAXiBXDPgARQB3F27eS2lauhsctltXolxpffDTra4W1yrWaJtjQ+H2
+ 7EANz72+LzeJYvyLWvM+HOwrQSzrtzpryW9qGKkQFRPIA0kh0qVQcUw/vNhdcdQIG7l7
+ p9zA==
+X-Gm-Message-State: AOJu0YwmAYvjHCNo3Wx9TFCd85xKovQfhvYXbTkOp8c0yjyvahnJuykb
+ i039NINNuDUiI1H9u1UhPLARpCXvq8Cv9kzbRXyiaQ==
+X-Google-Smtp-Source: AGHT+IFugJfqP0khflXdpXoxHhEnX1W9sEoxIbhdasBw5sqvD5vlueTH6GH1rY/O1Mav4VjlOeimdAiAmno4NAhPrNs=
+X-Received: by 2002:a81:84c9:0:b0:5a8:102:fe3e with SMTP id
+ u192-20020a8184c9000000b005a80102fe3emr4686907ywf.11.1699819417032; Sun, 12
+ Nov 2023 12:03:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20231111142846.180442-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231111142846.180442-1-heinrich.schuchardt@canonical.com>
+References: <20231112143811.3606-1-stefan_b@posteo.net>
+ <20231112143811.3606-2-stefan_b@posteo.net>
+In-Reply-To: <20231112143811.3606-2-stefan_b@posteo.net>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 13:01:32 -0700
-Message-ID: <CAPnjgZ0J+HDnEh+pHJCZNsqqhwP33Xi+8=rUOJPG1m1WBXU+9g@mail.gmail.com>
-Subject: Re: [PATCH 1/1] acpi: cannot have RSDT above 4 GiB
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+Date: Sun, 12 Nov 2023 13:01:15 -0700
+Message-ID: <CAPnjgZ2bp9+qn9hfqKdYQZS3p1PDWWcHm+io_YsUM541HSx8FQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] common: board_f: change calculation of gd->mon_len
+ to fix s5p4418 reloc
+To: Stefan Bosch <stefan_b@posteo.net>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,89 +82,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Sun, 12 Nov 2023 at 07:40, Stefan Bosch <stefan_b@posteo.net> wrote:
+>
+> ARM and MICROBLAZE: Change calculation of monitor length (gd->mon_len)
+> to fix relocation at boards with s5p4418-SoC. At s5p4418, _start is
+> after the header (NSIH) therefore the monitor length has to be
+> calculated using __image_copy_start instead of _start in order the hole
 
-On Sat, 11 Nov 2023 at 07:28, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+whole
+
+> monitor code is relocated.
 >
-> The field RsdtAddress has only 32 bit. The RSDT table cannot be located
-> beyond 4 GiB.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Stefan Bosch <stefan_b@posteo.net>Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->  lib/acpi/base.c | 26 +++++++++++++++++++-------
->  1 file changed, 19 insertions(+), 7 deletions(-)
+>
+>  common/board_f.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-nits / question below
 
 >
-> diff --git a/lib/acpi/base.c b/lib/acpi/base.c
-> index 2057bd2bef..128a76ad39 100644
-> --- a/lib/acpi/base.c
-> +++ b/lib/acpi/base.c
-> @@ -21,10 +21,17 @@ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct acpi_rsdt *rsdt,
->         memcpy(rsdp->signature, RSDP_SIG, 8);
->         memcpy(rsdp->oem_id, OEM_ID, 6);
->
-> -       rsdp->length = sizeof(struct acpi_rsdp);
-> -       rsdp->rsdt_address = map_to_sysmem(rsdt);
-> +       if (rsdt)
-> +               rsdp->rsdt_address = map_to_sysmem(rsdt);
-> +       else
-> +               rsdp->rsdt_address = 0;
-
-There is a memset() at the top so this line (and the one below) should
-not be needed.
-
-> +
-> +       if (xsdt)
-> +               rsdp->xsdt_address = map_to_sysmem(xsdt);
-> +       else
-> +               rsdp->xsdt_address = 0;
->
-> -       rsdp->xsdt_address = map_to_sysmem(xsdt);
-> +       rsdp->length = sizeof(struct acpi_rsdp);
->         rsdp->revision = ACPI_RSDP_REV_ACPI_2_0;
->
->         /* Calculate checksums */
-> @@ -68,11 +75,15 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
->  static int acpi_write_base(struct acpi_ctx *ctx,
->                            const struct acpi_writer *entry)
+> diff --git a/common/board_f.c b/common/board_f.c
+> index d4d7d01f8f..d2e4d9eae2 100644
+> --- a/common/board_f.c
+> +++ b/common/board_f.c
+> @@ -283,7 +283,7 @@ static int init_func_i2c(void)
+>  static int setup_mon_len(void)
 >  {
-> -       /* We need at least an RSDP and an RSDT Table */
-> +       /* We need at least an RSDP and an XSDT Table */
->         ctx->rsdp = ctx->current;
->         acpi_inc_align(ctx, sizeof(struct acpi_rsdp));
-> -       ctx->rsdt = ctx->current;
-> -       acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
-> +       if (map_to_sysmem(ctx->current) < UINT_MAX - 0x10000) {
-
-Won't that do something different on 64-bit machines? It seems that
-you want to check against SZ_4G ?
-
-> +               ctx->rsdt = ctx->current;
-> +               acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
-> +       } else {
-> +               ctx->rsdt = 0;
-> +       }
->         ctx->xsdt = ctx->current;
->         acpi_inc_align(ctx, sizeof(struct acpi_xsdt));
->
-> @@ -80,7 +91,8 @@ static int acpi_write_base(struct acpi_ctx *ctx,
->         memset(ctx->base, '\0', ctx->current - ctx->base);
->
->         acpi_write_rsdp(ctx->rsdp, ctx->rsdt, ctx->xsdt);
-> -       acpi_write_rsdt(ctx->rsdt);
-> +       if (ctx->rsdt)
-> +               acpi_write_rsdt(ctx->rsdt);
->         acpi_write_xsdt(ctx->xsdt);
->
->         return 0;
+>  #if defined(__ARM__) || defined(__MICROBLAZE__)
+> -       gd->mon_len = (ulong)__bss_end - (ulong)_start;
+> +       gd->mon_len = (ulong)__bss_end - (ulong)__image_copy_start;
+>  #elif defined(CONFIG_SANDBOX) && !defined(__riscv)
+>         gd->mon_len = (ulong)_end - (ulong)_init;
+>  #elif defined(CONFIG_SANDBOX)
 > --
-> 2.40.1
+> 2.17.1
 >
-
-Regards,
-Simon
