@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B28EC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 14:22:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A3B2C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 14:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B4E08710C;
-	Sun, 12 Nov 2023 15:22:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D4E386EC9;
+	Sun, 12 Nov 2023 15:22:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="SyDdfnzc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PukvziaS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C90A8706F; Sun, 12 Nov 2023 15:22:01 +0100 (CET)
-Received: from mail-vk1-xa33.google.com (mail-vk1-xa33.google.com
- [IPv6:2607:f8b0:4864:20::a33])
+ id A009787103; Sun, 12 Nov 2023 15:22:45 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D22A886F68
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 15:21:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 557BD86C39
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 15:22:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vk1-xa33.google.com with SMTP id
- 71dfb90a1353d-49e15724283so1469257e0c.1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 06:21:56 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-53e04b17132so5592031a12.0
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 06:22:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1699798915; x=1700403715;
- darn=lists.denx.de; 
+ d=chromium.org; s=google; t=1699798962; x=1700403762; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9c9SkltQ7QEI5GgQsgSuZMtu4/O53FdfiOcMyVThxWE=;
- b=SyDdfnzc3KBbWoE95ay2AViS6OQUQ1YvKgi5ZmK8jJZW0z7v5wJgCZkob7Ow7eYt6I
- xjJnuCEK/OmrR6SGBGZ7jyhI3rmjCDnkTUnXQ0NhwUfoji7hYFZ0UVFySumXaIcsxK5f
- aToDCI4ckuS1+Y/BBM//fKvJzdEuL0GEagLJP9c10kZIvMJLFfLAq5PnDYAffngTyHXn
- Qx3pAdDK+E6BIuNZBjec1mw6Q6WpYnn0dSPIyHE8HxBOI0Y+sKnXwCnoX6RO/j/j9eKc
- 75fOmj9rOfx4kBGXKbycausUu10B3xzC2pTFQgZTpUnzHrWUjHb+K9iEAmJc0BTpXLYv
- FCuw==
+ bh=qj95Ff3/pzhfDTO61PXckU3cEp7bBY4rizbF2yPnNCE=;
+ b=PukvziaShKc4XtpKc1YUQe2n/roxc1/KEMtlkizxY9DTz4cvdEqFz4nAc5u4X/UjYV
+ dXBm2oHbw48sXRajflny1k3Iks4vhRhQlKLEFsX829nL/AAbYmgpYshWg3X4m16BPwxI
+ 8cVUWvpq84ijaolmbLzMyqZL3i3n2k8mj3G1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699798915; x=1700403715;
+ d=1e100.net; s=20230601; t=1699798962; x=1700403762;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9c9SkltQ7QEI5GgQsgSuZMtu4/O53FdfiOcMyVThxWE=;
- b=LTl9tuOAoXhk76dhLsPJAMzH4wtaoxZpcRmyYo9iUwiXMFeHoKSl0Ssk1wycCJEN/f
- wB/EyFnPRH0fzKI/Nzw+l6xfBNNXliT9K7XLyGuzp2f+EVLP2+UTQLwJhE7TYKnqmTF6
- 6jJEcR8LOlB9puPTUL7dug03sdeZnTeeg+gtR0QDToyVDzXSNb9zF1LwDALroMxPFB07
- wl/3fF41kr1WDh2UQAn6oDhN71NcyjoFrT0NtJF7HjO587sY12jHN5ImNRu+jksvap6a
- STwP8AKBX+4xSlKZpVgm3jdLihNkdIl9+VEz+73jl4fJ8pc10XwWxTTtTqrKJumO19wZ
- dsNg==
-X-Gm-Message-State: AOJu0Yz3iD2Ry6R1uM6m/1+MCI9lzpvGg/3P2fSWH38UlKyoQ+IBsoJB
- 2AskQUFCZu2J60qH0Mo9/txaUH39pOhP/mtzLVw6Lg==
-X-Google-Smtp-Source: AGHT+IEEH2uir6ajwnhysWDVdDyPj5wWYitUNg2RIWwErxEUVxHACwlB647Gu5YfJMasMu2EhYqxvxcaXfP+YZo5//M=
-X-Received: by 2002:a05:6122:4594:b0:49a:6dc0:5a89 with SMTP id
- de20-20020a056122459400b0049a6dc05a89mr4566409vkb.5.1699798914921; Sun, 12
- Nov 2023 06:21:54 -0800 (PST)
+ bh=qj95Ff3/pzhfDTO61PXckU3cEp7bBY4rizbF2yPnNCE=;
+ b=IQesaXnODX6PznS+hCAxlKzLUbbXTZZKLwAxz5v6BDlTfOfL7VyGgWl8DNssiyTxCq
+ MIneOpKEd9K2rWlZ9RTArh4QpJpKb2z+96P9qLq8u6Gd0qpHhrzQMdlcYfdsO4JdGX18
+ lCPtIjeaf2h1Yfoegx99LK+5ANj0pByAL1dN0L+Z7WHuG71mwPHdiaza86Su5fFe6YFx
+ JKPNMMDQRK9xYO59220U6q/FdMMx7giBOBO69PjE/QFRwMkuIOT9zr4z7SNrNBPMdz3w
+ ZHb43oBnd3pmV8+lPsMUPDrjIKOF930VBc/uclyO7LazvjeWJqgFCksUgyvMTiMYxWvd
+ NuaQ==
+X-Gm-Message-State: AOJu0YwERveeRbwOUgKZJJrPelZ+XjlfLhpC2EcC0nPFuX2MAHDs5s9s
+ 3AkB27otqnd+hMex5VAne8Qht1BxkpMVb6KT+EP2R2yAqIppr1EyEh4WjQ==
+X-Google-Smtp-Source: AGHT+IE+/a8ZKSBRC7lMumxECw4tgW+qAr/6b33mZZ/Xexos4JfrN52W7jjmhJ9jNKt1wuUFwFLss29HpV62ezfgyb4=
+X-Received: by 2002:a17:906:4147:b0:9e6:59d5:71c4 with SMTP id
+ l7-20020a170906414700b009e659d571c4mr2938745ejk.16.1699798961558; Sun, 12 Nov
+ 2023 06:22:41 -0800 (PST)
 MIME-Version: 1.0
 References: <20231111001329.537704-1-i@shantur.com>
  <d1e624f3-d761-4822-bcb4-f81ab4d78663@kwiboo.se>
  <CABEcMwVD_Hs5aMJZaF_Ym785yrLsw6KBxnB_E4KCD=nJASR6YQ@mail.gmail.com>
  <e1fec775-6806-4fe2-af44-f930ebb62932@kwiboo.se>
 In-Reply-To: <e1fec775-6806-4fe2-af44-f930ebb62932@kwiboo.se>
-From: Shantur Rathore <i@shantur.com>
-Date: Sun, 12 Nov 2023 14:21:44 +0000
-Message-ID: <CABEcMwVgnRYd3bSRTY3sUsa=igTsQroEMxCtVjO8ApidigMHHQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 12 Nov 2023 07:22:24 -0700
+Message-ID: <CAPnjgZ18x+j11doAJtEg93ueL+ayC2HqtRm+BeG9XSNkWx-9Hw@mail.gmail.com>
 Subject: Re: [PATCH] configs: rockpro64: Enable SPI command and full BOOTSTD
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu, 
- u-boot@lists.denx.de
+Cc: Shantur Rathore <i@shantur.com>, kever.yang@rock-chips.com,
+ philipp.tomsich@vrull.eu, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,49 +86,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Jonas,
+Hi Jonas,
 
-> For normal generic use the full bootstd commands should not be needed,
-> do you have special scripting requirements that require access to full
-> bootstd commands?
->
-> All rockchip boards use standard boot, this only enables full commands
-> for one particular board, why is this board special? Or
-
-This board isn't special.
-
->is there merit
-> to imply enable of full commands for all rockchip boards?
-
-Maybe not only on rockchip boards but all boards.
-
-Do we need full commands in general ? - Maybe not
-
-Then why did you need to enable full commands ?
-Bootstd works when the distro used is supporting it. In my case when I
-installed the distro (Armbian), EFI was installed to
-/boot/efi/EFI/debian by default instead of /boot/efi/EFI/boot as
-expected by Bootstd.
-Bootstd couldn't find the EFI and failed to boot. In this scenario
-there is no way to figure out what's going on, what bootmethods /
-bootflows is bootstd able to find or try to manually boot some.
-To be able to support the smallest bit of debugging you end up
-building U-Boot from scratch to enable bootstd full for bootstd info
-commands.
-All other commands in U-boot by default come with options to display
-more information ( for ex. nvme info, nvme detail, usb tree, usb info,
-usb dev, fatinfo and many more ) then why is bootstd restricted?
-Thus, in my opinion we should enable BOOTSTD_FULL for users to be able
-to see more information.
-Restricting might be beneficial for end user devices but atleast
-development devices like RockPro64 should come with BOOTSTD_FULL by
-default.
-
-Kind regards,
-Shantur
-
-On Sun, Nov 12, 2023 at 12:50=E2=80=AFPM Jonas Karlman <jonas@kwiboo.se> wr=
-ote:
+On Sun, 12 Nov 2023 at 05:50, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
 > Hi Shantur,
 >
@@ -177,6 +133,17 @@ ng
 > All rockchip boards use standard boot, this only enables full commands
 > for one particular board, why is this board special? Or is there merit
 > to imply enable of full commands for all rockchip boards?
+
+I suppose we do this in a lot of cases, where we enable commands and
+other features on various boards. So I don't have any objection to
+this. Certainly it is a pain to use bootstd for development and
+debugging of booting if you cannot use the full command set.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
+
 >
 > Regards,
 > Jonas
