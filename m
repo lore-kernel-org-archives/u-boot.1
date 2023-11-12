@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E08EC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2324DC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:18:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D054A871A2;
-	Sun, 12 Nov 2023 01:11:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A0E8870DD;
+	Sun, 12 Nov 2023 01:10:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sy/EkJRG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YuUKS1f/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC0D987654; Sun, 12 Nov 2023 01:10:16 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id F04EB87620; Sun, 12 Nov 2023 01:10:09 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA44C8709A
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:09:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3D2387005
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:09:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-7affff20d38so82495339f.0
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:09:45 -0800 (PST)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3594c100735so8156495ab.1
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:09:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699747784; x=1700352584; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699747778; x=1700352578; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=grN2G0fdNjhLpAtoP6/FZTEQlFHobaV8AnyHULFPTM0=;
- b=Sy/EkJRGD7hric7reaiNwtpSXSps65N3OEs8ru4UFZYsaRbXPswPK9TMHKq8KVWEzV
- kriPz0rl+j+C1HP7L4OK1IpQkOJXj/Jz51OrBUnzjeF3vRI7ui5oUFM1IH2znWzG9wMN
- KgOB3RuLFPOD89ejHvGKsfP3LPIRAa8wt0Tbc=
+ bh=VfMgzZiHPOKlw1xC7VX/D/zPnAcxD1GfUciWuErTwIE=;
+ b=YuUKS1f/cdhpsP22tkRQiKQKewRUJyfbNqxhc3VUwCFFecJssQeyHSpwQUnxfRZfsM
+ P0/AGtIxq2CUPhiN62B48vAUuRy22PECyV3Y10rUdr8D51UojNxhhZvtieVjoPWszVSq
+ 2AjW8qTp8ePqs7LkonVgOi9vrP9tXgSl9k6oE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699747784; x=1700352584;
+ d=1e100.net; s=20230601; t=1699747778; x=1700352578;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=grN2G0fdNjhLpAtoP6/FZTEQlFHobaV8AnyHULFPTM0=;
- b=uDpXPIo4+G6ERUbB1Rn6FvgeljYF8gdS9iSy+62mMfYq6XJjmingiE/wPiG3gTt3A6
- 0etR4J46V8S4cLbM4ylYfIFp2QGDd3P7eEekTqIN4yU2GOpPmpXwj0TP3Gyfo0sFW7dD
- jap2YGYu6Mh3o0TTqr+tC2DUJmUkP4geZLQxDmpvB2+xypjha618LqSN01L6N3hBMpnB
- Y7L4LL7p5grKZ97mp/sjqTMM5lGNyfczrIOh/p1914fTEGzjcHdxxtSrWEAxIbwun9EY
- J+RBHPBWvbilxbrdOLHnDqpFLcW1LXRWsZI79+SWA9Cz3mE/zRylEQZE/CpDvT0KL8lI
- ehmw==
-X-Gm-Message-State: AOJu0Yy0pmYtXdz7vnqfq1vkZfLprwdHASvyaqDdpUP3cG/Zfu5Nnv9s
- Tn4/d4FEYZhHG9shloNq3tDlBOJKawy7R9i4liYAFQ==
-X-Google-Smtp-Source: AGHT+IGfrKrS1rsATcEw4zEfclWXKV8FcaGHl7XUn4tn6vWKkJ8XsY5LAWLu1TIsp1E8mo21KcFWeA==
-X-Received: by 2002:a05:6e02:194d:b0:35a:b2e7:5698 with SMTP id
- x13-20020a056e02194d00b0035ab2e75698mr2181104ilu.18.1699747784144; 
- Sat, 11 Nov 2023 16:09:44 -0800 (PST)
+ bh=VfMgzZiHPOKlw1xC7VX/D/zPnAcxD1GfUciWuErTwIE=;
+ b=ltbh1qL9F2WB/CRZCUdkbCsnnq7RjzdHa9irClj4ObZ5FTQMvB75I69gpsQBQSrOHa
+ eqmlOSHP5bmXawjuGbfAeXT32RKNcYgw3/MCo8lt37KDAGzXHybKlSe7z+WOANRDL10R
+ gc/dzX4RRHUPw260gt2rrhzRtzFqhSL3Ppt8cxmdHGmqrAMp4eOZ1IdxvJ7WyPKcdQOE
+ kVnCZLvhsQI+sNyvq+O1CKKdrTJDDM9mRbJr51Bu2K9POlwJWGCvJjVL9D4pAOWU9cUD
+ rgE7wovT1cXPjz7Vck/4GKYgTLnbx6Wr0TQmiTxNowr/zWmCVIQc23iA/FMbEBxVumy2
+ fzEA==
+X-Gm-Message-State: AOJu0YzyOdy8ciM/6FNWD76jQWKquDz/eWPe5mNR/fPORJ52mViLrmeL
+ T5xN5waDZaeogqB56JMY4hQPN+d0mEhDlI9wHjL/6w==
+X-Google-Smtp-Source: AGHT+IHiHQ/oB9/te0q3XvrEdgT18/+gTdrbKeWpMJzZPWnw9xCSZQaS1gAWlmbNRWisAMbqvG/r2A==
+X-Received: by 2002:a05:6e02:12eb:b0:35a:b373:9977 with SMTP id
+ l11-20020a056e0212eb00b0035ab3739977mr1058014iln.15.1699747778081; 
+ Sat, 11 Nov 2023 16:09:38 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.43
+ l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 16:09:43 -0800 (PST)
+ Sat, 11 Nov 2023 16:09:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -68,9 +68,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH 15/29] bootm: Move error printing out of boot_get_kernel()
-Date: Sat, 11 Nov 2023 17:09:00 -0700
-Message-ID: <20231112000923.73568-16-sjg@chromium.org>
+Subject: [PATCH 08/29] bootm: Move boot_get_kernel() higher in the file
+Date: Sat, 11 Nov 2023 17:08:53 -0700
+Message-ID: <20231112000923.73568-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112000923.73568-1-sjg@chromium.org>
 References: <20231112000923.73568-1-sjg@chromium.org>
@@ -92,80 +92,415 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The same error message is printed in two places. Move it out to the
-caller so we can avoid passing in the command name. Leave the bootstage
-handling where it is.
+Move this code and image_get_kernel() higher in the file to avoid the
+need for a forward declaration.
+
+No attempt is made to remove #ifdefs or adjust the code in any other
+way.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootm.c | 21 +++++++++------------
- 1 file changed, 9 insertions(+), 12 deletions(-)
+ boot/bootm.c | 376 +++++++++++++++++++++++++--------------------------
+ 1 file changed, 186 insertions(+), 190 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index a64c253069f9..ec43d4e7e8ba 100644
+index 1482a2cc783f..598f880d86dd 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -104,7 +104,6 @@ static struct legacy_img_hdr *image_get_kernel(ulong img_addr, int verify)
- /**
-  * boot_get_kernel() - find kernel image
-  *
-- * @cmd_name: Name of the command calling this function, e.g. "bootm"
-  * @addr_fit: first argument to bootm: address, fit configuration, etc.
-  * @os_data: pointer to a ulong variable, will hold os data start address
-  * @os_len: pointer to a ulong variable, will hold os data length
-@@ -115,13 +114,11 @@ static struct legacy_img_hdr *image_get_kernel(ulong img_addr, int verify)
-  * boot_get_kernel() tries to find a kernel image, verifies its integrity
-  * and locates kernel data.
-  *
+@@ -44,12 +44,195 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ struct bootm_headers images;		/* pointers to os/initrd/fdt images */
+ 
++__weak void board_quiesce_devices(void)
++{
++}
++
++#if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
++/**
++ * image_get_kernel - verify legacy format kernel image
++ * @img_addr: in RAM address of the legacy format image to be verified
++ * @verify: data CRC verification flag
++ *
++ * image_get_kernel() verifies legacy image integrity and returns pointer to
++ * legacy image header if image verification was completed successfully.
++ *
++ * returns:
++ *     pointer to a legacy image header if valid image was found
++ *     otherwise return NULL
++ */
++static struct legacy_img_hdr *image_get_kernel(ulong img_addr, int verify)
++{
++	struct legacy_img_hdr *hdr = (struct legacy_img_hdr *)img_addr;
++
++	if (!image_check_magic(hdr)) {
++		puts("Bad Magic Number\n");
++		bootstage_error(BOOTSTAGE_ID_CHECK_MAGIC);
++		return NULL;
++	}
++	bootstage_mark(BOOTSTAGE_ID_CHECK_HEADER);
++
++	if (!image_check_hcrc(hdr)) {
++		puts("Bad Header Checksum\n");
++		bootstage_error(BOOTSTAGE_ID_CHECK_HEADER);
++		return NULL;
++	}
++
++	bootstage_mark(BOOTSTAGE_ID_CHECK_CHECKSUM);
++	image_print_contents(hdr);
++
++	if (verify) {
++		puts("   Verifying Checksum ... ");
++		if (!image_check_dcrc(hdr)) {
++			printf("Bad Data CRC\n");
++			bootstage_error(BOOTSTAGE_ID_CHECK_CHECKSUM);
++			return NULL;
++		}
++		puts("OK\n");
++	}
++	bootstage_mark(BOOTSTAGE_ID_CHECK_ARCH);
++
++	if (!image_check_target_arch(hdr)) {
++		printf("Unsupported Architecture 0x%x\n", image_get_arch(hdr));
++		bootstage_error(BOOTSTAGE_ID_CHECK_ARCH);
++		return NULL;
++	}
++	return hdr;
++}
++#endif
++
++/**
++ * boot_get_kernel - find kernel image
++ * @os_data: pointer to a ulong variable, will hold os data start address
++ * @os_len: pointer to a ulong variable, will hold os data length
++ *
++ * boot_get_kernel() tries to find a kernel image, verifies its integrity
++ * and locates kernel data.
++ *
++ * returns:
++ *     pointer to image header if valid image was found, plus kernel start
++ *     address and length, otherwise NULL
++ */
+ static const void *boot_get_kernel(struct cmd_tbl *cmdtp, int flag, int argc,
+ 				   char *const argv[], struct bootm_headers *images,
+-				   ulong *os_data, ulong *os_len);
+-
+-__weak void board_quiesce_devices(void)
++				   ulong *os_data, ulong *os_len)
+ {
++#if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
++	struct legacy_img_hdr	*hdr;
++#endif
++	ulong		img_addr;
++	const void *buf;
++	const char	*fit_uname_config = NULL;
++	const char	*fit_uname_kernel = NULL;
++#if CONFIG_IS_ENABLED(FIT)
++	int		os_noffset;
++#endif
++
++#ifdef CONFIG_ANDROID_BOOT_IMAGE
++	const void *boot_img;
++	const void *vendor_boot_img;
++#endif
++	img_addr = genimg_get_kernel_addr_fit(argc < 1 ? NULL : argv[0],
++					      &fit_uname_config,
++					      &fit_uname_kernel);
++
++	if (IS_ENABLED(CONFIG_CMD_BOOTM_PRE_LOAD))
++		img_addr += image_load_offset;
++
++	bootstage_mark(BOOTSTAGE_ID_CHECK_MAGIC);
++
++	/* check image type, for FIT images get FIT kernel node */
++	*os_data = *os_len = 0;
++	buf = map_sysmem(img_addr, 0);
++	switch (genimg_get_format(buf)) {
++#if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
++	case IMAGE_FORMAT_LEGACY:
++		printf("## Booting kernel from Legacy Image at %08lx ...\n",
++		       img_addr);
++		hdr = image_get_kernel(img_addr, images->verify);
++		if (!hdr)
++			return NULL;
++		bootstage_mark(BOOTSTAGE_ID_CHECK_IMAGETYPE);
++
++		/* get os_data and os_len */
++		switch (image_get_type(hdr)) {
++		case IH_TYPE_KERNEL:
++		case IH_TYPE_KERNEL_NOLOAD:
++			*os_data = image_get_data(hdr);
++			*os_len = image_get_data_size(hdr);
++			break;
++		case IH_TYPE_MULTI:
++			image_multi_getimg(hdr, 0, os_data, os_len);
++			break;
++		case IH_TYPE_STANDALONE:
++			*os_data = image_get_data(hdr);
++			*os_len = image_get_data_size(hdr);
++			break;
++		default:
++			printf("Wrong Image Type for %s command\n",
++			       cmdtp->name);
++			bootstage_error(BOOTSTAGE_ID_CHECK_IMAGETYPE);
++			return NULL;
++		}
++
++		/*
++		 * copy image header to allow for image overwrites during
++		 * kernel decompression.
++		 */
++		memmove(&images->legacy_hdr_os_copy, hdr,
++			sizeof(struct legacy_img_hdr));
++
++		/* save pointer to image header */
++		images->legacy_hdr_os = hdr;
++
++		images->legacy_hdr_valid = 1;
++		bootstage_mark(BOOTSTAGE_ID_DECOMP_IMAGE);
++		break;
++#endif
++#if CONFIG_IS_ENABLED(FIT)
++	case IMAGE_FORMAT_FIT:
++		os_noffset = fit_image_load(images, img_addr,
++				&fit_uname_kernel, &fit_uname_config,
++				IH_ARCH_DEFAULT, IH_TYPE_KERNEL,
++				BOOTSTAGE_ID_FIT_KERNEL_START,
++				FIT_LOAD_IGNORED, os_data, os_len);
++		if (os_noffset < 0)
++			return NULL;
++
++		images->fit_hdr_os = map_sysmem(img_addr, 0);
++		images->fit_uname_os = fit_uname_kernel;
++		images->fit_uname_cfg = fit_uname_config;
++		images->fit_noffset_os = os_noffset;
++		break;
++#endif
++#ifdef CONFIG_ANDROID_BOOT_IMAGE
++	case IMAGE_FORMAT_ANDROID:
++		boot_img = buf;
++		vendor_boot_img = NULL;
++		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
++			boot_img = map_sysmem(get_abootimg_addr(), 0);
++			vendor_boot_img = map_sysmem(get_avendor_bootimg_addr(), 0);
++		}
++		printf("## Booting Android Image at 0x%08lx ...\n", img_addr);
++		if (android_image_get_kernel(boot_img, vendor_boot_img, images->verify,
++					     os_data, os_len))
++			return NULL;
++		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
++			unmap_sysmem(vendor_boot_img);
++			unmap_sysmem(boot_img);
++		}
++		break;
++#endif
++	default:
++		printf("Wrong Image Format for %s command\n", cmdtp->name);
++		bootstage_error(BOOTSTAGE_ID_FIT_KERNEL_INFO);
++		return NULL;
++	}
++
++	debug("   kernel data at 0x%08lx, len = 0x%08lx (%ld)\n",
++	      *os_data, *os_len, *os_len);
++
++	return buf;
+ }
+ 
+ #ifdef CONFIG_LMB
+@@ -942,193 +1125,6 @@ int bootm_boot_start(ulong addr, const char *cmdline)
+ 	return ret;
+ }
+ 
+-#if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
+-/**
+- * image_get_kernel - verify legacy format kernel image
+- * @img_addr: in RAM address of the legacy format image to be verified
+- * @verify: data CRC verification flag
+- *
+- * image_get_kernel() verifies legacy image integrity and returns pointer to
+- * legacy image header if image verification was completed successfully.
+- *
+- * returns:
+- *     pointer to a legacy image header if valid image was found
+- *     otherwise return NULL
+- */
+-static struct legacy_img_hdr *image_get_kernel(ulong img_addr, int verify)
+-{
+-	struct legacy_img_hdr *hdr = (struct legacy_img_hdr *)img_addr;
+-
+-	if (!image_check_magic(hdr)) {
+-		puts("Bad Magic Number\n");
+-		bootstage_error(BOOTSTAGE_ID_CHECK_MAGIC);
+-		return NULL;
+-	}
+-	bootstage_mark(BOOTSTAGE_ID_CHECK_HEADER);
+-
+-	if (!image_check_hcrc(hdr)) {
+-		puts("Bad Header Checksum\n");
+-		bootstage_error(BOOTSTAGE_ID_CHECK_HEADER);
+-		return NULL;
+-	}
+-
+-	bootstage_mark(BOOTSTAGE_ID_CHECK_CHECKSUM);
+-	image_print_contents(hdr);
+-
+-	if (verify) {
+-		puts("   Verifying Checksum ... ");
+-		if (!image_check_dcrc(hdr)) {
+-			printf("Bad Data CRC\n");
+-			bootstage_error(BOOTSTAGE_ID_CHECK_CHECKSUM);
+-			return NULL;
+-		}
+-		puts("OK\n");
+-	}
+-	bootstage_mark(BOOTSTAGE_ID_CHECK_ARCH);
+-
+-	if (!image_check_target_arch(hdr)) {
+-		printf("Unsupported Architecture 0x%x\n", image_get_arch(hdr));
+-		bootstage_error(BOOTSTAGE_ID_CHECK_ARCH);
+-		return NULL;
+-	}
+-	return hdr;
+-}
+-#endif
+-
+-/**
+- * boot_get_kernel - find kernel image
+- * @os_data: pointer to a ulong variable, will hold os data start address
+- * @os_len: pointer to a ulong variable, will hold os data length
+- *
+- * boot_get_kernel() tries to find a kernel image, verifies its integrity
+- * and locates kernel data.
+- *
 - * returns:
 - *     pointer to image header if valid image was found, plus kernel start
 - *     address and length, otherwise NULL
-+ * Return: 0 on success, -ve on error. -EPROTOTYPE means that the image is in
-+ * a wrong or unsupported format
-  */
--static int boot_get_kernel(const char *cmd_name, const char *addr_fit,
--			   struct bootm_headers *images, ulong *os_data,
--			   ulong *os_len, const void **kernp)
-+static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
-+			   ulong *os_data, ulong *os_len, const void **kernp)
- {
- #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
- 	struct legacy_img_hdr	*hdr;
-@@ -173,8 +170,6 @@ static int boot_get_kernel(const char *cmd_name, const char *addr_fit,
- 			*os_len = image_get_data_size(hdr);
- 			break;
- 		default:
+- */
+-static const void *boot_get_kernel(struct cmd_tbl *cmdtp, int flag, int argc,
+-				   char *const argv[], struct bootm_headers *images,
+-				   ulong *os_data, ulong *os_len)
+-{
+-#if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
+-	struct legacy_img_hdr	*hdr;
+-#endif
+-	ulong		img_addr;
+-	const void *buf;
+-	const char	*fit_uname_config = NULL;
+-	const char	*fit_uname_kernel = NULL;
+-#if CONFIG_IS_ENABLED(FIT)
+-	int		os_noffset;
+-#endif
+-
+-#ifdef CONFIG_ANDROID_BOOT_IMAGE
+-	const void *boot_img;
+-	const void *vendor_boot_img;
+-#endif
+-	img_addr = genimg_get_kernel_addr_fit(argc < 1 ? NULL : argv[0],
+-					      &fit_uname_config,
+-					      &fit_uname_kernel);
+-
+-	if (IS_ENABLED(CONFIG_CMD_BOOTM_PRE_LOAD))
+-		img_addr += image_load_offset;
+-
+-	bootstage_mark(BOOTSTAGE_ID_CHECK_MAGIC);
+-
+-	/* check image type, for FIT images get FIT kernel node */
+-	*os_data = *os_len = 0;
+-	buf = map_sysmem(img_addr, 0);
+-	switch (genimg_get_format(buf)) {
+-#if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
+-	case IMAGE_FORMAT_LEGACY:
+-		printf("## Booting kernel from Legacy Image at %08lx ...\n",
+-		       img_addr);
+-		hdr = image_get_kernel(img_addr, images->verify);
+-		if (!hdr)
+-			return NULL;
+-		bootstage_mark(BOOTSTAGE_ID_CHECK_IMAGETYPE);
+-
+-		/* get os_data and os_len */
+-		switch (image_get_type(hdr)) {
+-		case IH_TYPE_KERNEL:
+-		case IH_TYPE_KERNEL_NOLOAD:
+-			*os_data = image_get_data(hdr);
+-			*os_len = image_get_data_size(hdr);
+-			break;
+-		case IH_TYPE_MULTI:
+-			image_multi_getimg(hdr, 0, os_data, os_len);
+-			break;
+-		case IH_TYPE_STANDALONE:
+-			*os_data = image_get_data(hdr);
+-			*os_len = image_get_data_size(hdr);
+-			break;
+-		default:
 -			printf("Wrong Image Type for %s command\n",
--			       cmd_name);
- 			bootstage_error(BOOTSTAGE_ID_CHECK_IMAGETYPE);
- 			return -EPROTOTYPE;
- 		}
-@@ -232,9 +227,8 @@ static int boot_get_kernel(const char *cmd_name, const char *addr_fit,
- 	}
- #endif
- 	default:
--		printf("Wrong Image Format for %s command\n", cmd_name);
- 		bootstage_error(BOOTSTAGE_ID_CHECK_IMAGETYPE);
--		return -EBADF;
-+		return -EPROTOTYPE;
- 	}
- 
- 	debug("   kernel data at 0x%08lx, len = 0x%08lx (%ld)\n",
-@@ -322,9 +316,12 @@ static int bootm_find_os(struct cmd_tbl *cmdtp, int flag, int argc,
- 	int ret;
- 
- 	/* get kernel image header, start address and length */
--	ret = boot_get_kernel("bootm", argv[0], &images, &images.os.image_start,
-+	ret = boot_get_kernel(argv[0], &images, &images.os.image_start,
- 			      &images.os.image_len, &os_hdr);
- 	if (ret) {
-+		if (ret == -EPROTOTYPE)
-+			printf("Wrong Image Type for bootm command\n");
-+
- 		printf("ERROR %dE: can't get kernel image!\n", ret);
- 		return 1;
- 	}
+-			       cmdtp->name);
+-			bootstage_error(BOOTSTAGE_ID_CHECK_IMAGETYPE);
+-			return NULL;
+-		}
+-
+-		/*
+-		 * copy image header to allow for image overwrites during
+-		 * kernel decompression.
+-		 */
+-		memmove(&images->legacy_hdr_os_copy, hdr,
+-			sizeof(struct legacy_img_hdr));
+-
+-		/* save pointer to image header */
+-		images->legacy_hdr_os = hdr;
+-
+-		images->legacy_hdr_valid = 1;
+-		bootstage_mark(BOOTSTAGE_ID_DECOMP_IMAGE);
+-		break;
+-#endif
+-#if CONFIG_IS_ENABLED(FIT)
+-	case IMAGE_FORMAT_FIT:
+-		os_noffset = fit_image_load(images, img_addr,
+-				&fit_uname_kernel, &fit_uname_config,
+-				IH_ARCH_DEFAULT, IH_TYPE_KERNEL,
+-				BOOTSTAGE_ID_FIT_KERNEL_START,
+-				FIT_LOAD_IGNORED, os_data, os_len);
+-		if (os_noffset < 0)
+-			return NULL;
+-
+-		images->fit_hdr_os = map_sysmem(img_addr, 0);
+-		images->fit_uname_os = fit_uname_kernel;
+-		images->fit_uname_cfg = fit_uname_config;
+-		images->fit_noffset_os = os_noffset;
+-		break;
+-#endif
+-#ifdef CONFIG_ANDROID_BOOT_IMAGE
+-	case IMAGE_FORMAT_ANDROID:
+-		boot_img = buf;
+-		vendor_boot_img = NULL;
+-		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+-			boot_img = map_sysmem(get_abootimg_addr(), 0);
+-			vendor_boot_img = map_sysmem(get_avendor_bootimg_addr(), 0);
+-		}
+-		printf("## Booting Android Image at 0x%08lx ...\n", img_addr);
+-		if (android_image_get_kernel(boot_img, vendor_boot_img, images->verify,
+-					     os_data, os_len))
+-			return NULL;
+-		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+-			unmap_sysmem(vendor_boot_img);
+-			unmap_sysmem(boot_img);
+-		}
+-		break;
+-#endif
+-	default:
+-		printf("Wrong Image Format for %s command\n", cmdtp->name);
+-		bootstage_error(BOOTSTAGE_ID_FIT_KERNEL_INFO);
+-		return NULL;
+-	}
+-
+-	debug("   kernel data at 0x%08lx, len = 0x%08lx (%ld)\n",
+-	      *os_data, *os_len, *os_len);
+-
+-	return buf;
+-}
+-
+ /**
+  * switch_to_non_secure_mode() - switch to non-secure mode
+  *
 -- 
 2.42.0.869.gea05f2083d-goog
 
