@@ -4,67 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7019C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 17:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441BDC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 18:04:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92648870A2;
-	Sun, 12 Nov 2023 18:49:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7E60B86D3F;
+	Sun, 12 Nov 2023 19:04:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qsvsIGgV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UkcEpIp4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6057F86DB8; Sun, 12 Nov 2023 18:49:37 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 687E886DCE; Sun, 12 Nov 2023 19:04:03 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1E99870EE
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 18:49:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F3CF86D33
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 19:04:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=d4dd=G2=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1699811357; bh=8q9vTmmPGZhWK/u6TK1Wu2YgCjMm9XJfPgkFJg1qCqg=;
- b=qsvsIGgVlqjqWWXuXnqMrk5lRl7Y1gL8NFxdPp6det/T8+zuJjgl6VECVYdQ8/GJ0p2tYTsAl
- Zl/P4cntV/KcyLZszlhg+3ulUht7xenqI1SfzoH5wSkn533BdWv8dR1Ne5q5QIVDG2ojFjxvZK6
- 44d/R/YfJOAJXevV9zfob1b3IIt1mICutrZ5ILa98vUnWyT+ipPsm/MoUO1PfWASMcavFxSyNDv
- MCkXyJ/mZK1j93SSYvLMqPokEdcePAb/VUJhqHbM7BLEMYK1f3zA/rElp1REjdFhuuD1V6wggdV
- e/vYi6ephLRUqhEMEDKSBXkLteWHYc1yp0EfxLJlNJ6A==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Andy Yan <andy.yan@rock-chips.com>, Nick Xie
- <nick@khadas.com>, Jagan Teki <jagan@amarulasolutions.com>, Deepak Das
- <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>, Xiaobo
- Tian <peterwillcn@gmail.com>, Tianling Shen <cnsztl@gmail.com>, Peter
- Robinson <pbrobinson@gmail.com>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Levin Du <djw@t-chip.com.cn>, Suniel
- Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Christopher Obbard <chris.obbard@collabora.com>, Akash Gajjar
- <akash@openedev.com>, Manivannan Sadhasivam
- <manivannan.sadhasivam@linaro.org>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 1/2] configs: rockchip: Use dwc3-generic driver on RK3328
- and RK3399
-Date: Sun, 12 Nov 2023 17:48:57 +0000
-Message-ID: <20231112174904.1581187-2-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231112174904.1581187-1-jonas@kwiboo.se>
-References: <20231112174904.1581187-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3b4145e887bso2154807b6e.3
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 10:04:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1699812240; x=1700417040; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hiW+udNuiTcbK6W4FaL1Wng3K59antIuzHFLJrYGw2w=;
+ b=UkcEpIp43J4ILlfeMcr1LYQU8geB4buf4F8u8yzp0Y1DrLQ/XdFVR+0CwLDd0DkAX5
+ u1Uis7PPD9o3DzCBGEM5WYbXj3QFJHibPy5uxGILF99HaaW9nXAFAdNYIbEF4y8In3ZW
+ dhNjoMSU2yTVG0sDRoeZYTjxfZ0zdW45d0g9w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699812240; x=1700417040;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hiW+udNuiTcbK6W4FaL1Wng3K59antIuzHFLJrYGw2w=;
+ b=WwbCgmMdz6XvVQuvslbIGm6xf2NrTj7k7zppTBpIdkJg9CV0aLfndJfm4hfzc2eZUA
+ D9oWHoQnUQaKhulUYjR4grE38e2wI5JL+osM+CNAOkMwMdxcV07xyayoNz/4lbpOdoeQ
+ 5JRkZJQMZzh+OvLyFBpd7r/rhFgy5A3QqwMiJX9CFrij5QT1zmv+L/jIGQzggjZzRgTd
+ lb1grMWoNbj115JAUEoNi8PUOpAeh+rCcXPOtj1Zgf+XP9i9LQArqcbXbvQSZo7REmTb
+ frCQZGhKlS8oTaeZMPIA8JlNg5bFxvpNkOQtCkWNrwTL8a4ugsduOpDStSKVWOrt+0J1
+ 3yJw==
+X-Gm-Message-State: AOJu0YywRbUu0/lA/dZLkGz7vPw3ozSGciPnd8SCEU19CNyFckCQ61Z2
+ sWXSAz0wb7JrnvnMF8IOoHLLP+EV9spI8CqvNm+DXg==
+X-Google-Smtp-Source: AGHT+IFDy6yWlMJvmsFJhuzyqcu8DefH4Xhs+ahkuZCLmTF3d3zz/hsQHgkIW2m5XlLyPSvdIzEC/Q==
+X-Received: by 2002:a05:6808:1522:b0:3a9:cfb5:4641 with SMTP id
+ u34-20020a056808152200b003a9cfb54641mr7123547oiw.48.1699812239838; 
+ Sun, 12 Nov 2023 10:03:59 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-8be2-1560-728c-e0db.res6.spectrum.com.
+ [2603:6081:7b00:6400:8be2:1560:728c:e0db])
+ by smtp.gmail.com with ESMTPSA id
+ ov5-20020a05620a628500b00774133fb9a3sm1286910qkn.114.2023.11.12.10.03.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Nov 2023 10:03:59 -0800 (PST)
+Date: Sun, 12 Nov 2023 13:03:57 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 4/4] efi: Avoid using dm_scan_other()
+Message-ID: <20231112180357.GD6601@bill-the-cat>
+References: <20231112155808.135585-1-sjg@chromium.org>
+ <20231112155808.135585-5-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6551101d33f2b3120541d69f
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="M0MP/DQbEJ8mBEHL"
+Content-Disposition: inline
+In-Reply-To: <20231112155808.135585-5-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,627 +94,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Complete the transition away from xhci-dwc3 and dwc3-of-simple drivers
-and change to use the dwc3-generic driver on remaining RK3328 and RK3399
-boards.
 
-MISC, USB_DWC3 and USB_DWC3_GENERIC is enabled on boards that used to
-enable USB_XHCI_DWC3. USB_XHCI_DWC3 is dropped from updated boards along
-with the default y of USB_XHCI_DWC3_OF_SIMPLE.
+--M0MP/DQbEJ8mBEHL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-There is no intended change in functionality with this changes, USB 3.0
-is expected to continue same as before this change.
+On Sun, Nov 12, 2023 at 08:58:05AM -0700, Simon Glass wrote:
+> This function is defined by bootstd so using it precludes using that
+> feature. Use the board_early_init_r() feature instead.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  configs/efi-x86_app64_defconfig | 1 +
+>  lib/efi/efi_app.c               | 5 ++---
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_defc=
+onfig
+> index d6b6c3d82995..e6a62b30dd09 100644
+> --- a/configs/efi-x86_app64_defconfig
+> +++ b/configs/efi-x86_app64_defconfig
+> @@ -17,6 +17,7 @@ CONFIG_USE_BOOTCOMMAND=3Dy
+>  CONFIG_BOOTCOMMAND=3D"ext2load scsi 0:3 01000000 /boot/vmlinuz; zboot 01=
+000000"
+>  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> +CONFIG_BOARD_EARLY_INIT_R=3Dy
+>  CONFIG_HUSH_PARSER=3Dy
+>  CONFIG_SYS_PBSIZE=3D532
+>  CONFIG_CMD_BOOTZ=3Dy
+> diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
+> index c5eb816655ea..1bced775a4d0 100644
+> --- a/lib/efi/efi_app.c
+> +++ b/lib/efi/efi_app.c
+> @@ -302,15 +302,14 @@ static int setup_block(void)
+>  }
+> =20
+>  /**
+> - * dm_scan_other() - Scan for UEFI devices that should be available to U=
+-Boot
+> + * board_early_init_r() - Scan for UEFI devices that should be available
+>   *
+>   * This sets up block devices within U-Boot for those found in UEFI. Wit=
+h this,
+>   * U-Boot can access those devices
+>   *
+> - * @pre_reloc_only: true to only bind pre-relocation devices (ignored)
+>   * Returns: 0 on success, -ve on error
+>   */
+> -int dm_scan_other(bool pre_reloc_only)
+> +int board_early_init_r(void)
+>  {
+>  	if (gd->flags & GD_FLG_RELOC) {
+>  		int ret;
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v2:
-- Update commit message
-- Drop CONFIG_DM_USB_GADGET changes
+Should this file really be board/efi/efi-x86_app/something.c ? We don't
+define this function outside of the board directory today. Or should we
+just move the function as the rest of the code is used in other EFI
+applications we build (or no, the hello world one is too simple to need
+this) ? If all of that sounds too wrong-direction, can we use event
+lists or something?
 
- configs/chromebook_bob_defconfig              | 2 +-
- configs/chromebook_kevin_defconfig            | 2 +-
- configs/eaidk-610-rk3399_defconfig            | 4 +++-
- configs/evb-rk3399_defconfig                  | 1 -
- configs/firefly-rk3399_defconfig              | 1 -
- configs/khadas-edge-captain-rk3399_defconfig  | 4 +++-
- configs/khadas-edge-rk3399_defconfig          | 4 +++-
- configs/khadas-edge-v-rk3399_defconfig        | 4 +++-
- configs/leez-rk3399_defconfig                 | 4 +++-
- configs/nanopc-t4-rk3399_defconfig            | 3 ++-
- configs/nanopi-m4-2gb-rk3399_defconfig        | 4 +++-
- configs/nanopi-m4-rk3399_defconfig            | 4 +++-
- configs/nanopi-m4b-rk3399_defconfig           | 4 +++-
- configs/nanopi-neo4-rk3399_defconfig          | 4 +++-
- configs/nanopi-r4s-rk3399_defconfig           | 3 ++-
- configs/orangepi-r1-plus-lts-rk3328_defconfig | 3 ++-
- configs/orangepi-r1-plus-rk3328_defconfig     | 3 ++-
- configs/orangepi-rk3399_defconfig             | 4 +++-
- configs/pinebook-pro-rk3399_defconfig         | 1 -
- configs/pinephone-pro-rk3399_defconfig        | 1 -
- configs/puma-rk3399_defconfig                 | 1 -
- configs/roc-pc-mezzanine-rk3399_defconfig     | 1 -
- configs/roc-pc-rk3399_defconfig               | 1 -
- configs/rock-4c-plus-rk3399_defconfig         | 1 -
- configs/rock-4se-rk3399_defconfig             | 1 -
- configs/rock-pi-4-rk3399_defconfig            | 1 -
- configs/rock-pi-4c-rk3399_defconfig           | 1 -
- configs/rock-pi-n10-rk3399pro_defconfig       | 1 -
- configs/rock960-rk3399_defconfig              | 3 ++-
- configs/rockpro64-rk3399_defconfig            | 1 -
- drivers/usb/host/Kconfig                      | 1 -
- 31 files changed, 42 insertions(+), 31 deletions(-)
+--=20
+Tom
 
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 1807e838223a..b5a5ae737e52 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -98,12 +98,12 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index 638beee2c6d3..20913d2cf0fe 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -99,12 +99,12 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
-index 77edbdbf9597..22ad98b95ad3 100644
---- a/configs/eaidk-610-rk3399_defconfig
-+++ b/configs/eaidk-610-rk3399_defconfig
-@@ -40,6 +40,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,8 +57,9 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_SPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
-index 5740ffc38f6c..d6140527b752 100644
---- a/configs/evb-rk3399_defconfig
-+++ b/configs/evb-rk3399_defconfig
-@@ -66,7 +66,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index b4660a051dfd..b7c8e95b7b89 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -66,7 +66,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
-index ed06fe7846e6..8b6935d86730 100644
---- a/configs/khadas-edge-captain-rk3399_defconfig
-+++ b/configs/khadas-edge-captain-rk3399_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -61,11 +62,12 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
-index 9df945e6c0fe..070f0ea48c40 100644
---- a/configs/khadas-edge-rk3399_defconfig
-+++ b/configs/khadas-edge-rk3399_defconfig
-@@ -42,6 +42,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -60,11 +61,12 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
-index e216c0e86f7f..5344ecd1f20f 100644
---- a/configs/khadas-edge-v-rk3399_defconfig
-+++ b/configs/khadas-edge-v-rk3399_defconfig
-@@ -43,6 +43,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -61,11 +62,12 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
-index fa936609e9b1..76dd91911c7c 100644
---- a/configs/leez-rk3399_defconfig
-+++ b/configs/leez-rk3399_defconfig
-@@ -39,6 +39,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,9 +57,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
-index 82e86ca07026..c18e7b1bd169 100644
---- a/configs/nanopc-t4-rk3399_defconfig
-+++ b/configs/nanopc-t4-rk3399_defconfig
-@@ -43,6 +43,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -60,10 +61,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
-index dd715517d5a1..e3bdbccccbec 100644
---- a/configs/nanopi-m4-2gb-rk3399_defconfig
-+++ b/configs/nanopi-m4-2gb-rk3399_defconfig
-@@ -40,6 +40,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,9 +57,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
-index 3da93db06da3..e51e51c8cf5c 100644
---- a/configs/nanopi-m4-rk3399_defconfig
-+++ b/configs/nanopi-m4-rk3399_defconfig
-@@ -40,6 +40,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,9 +57,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
-index 701dde15f3e2..ca57c7f81a51 100644
---- a/configs/nanopi-m4b-rk3399_defconfig
-+++ b/configs/nanopi-m4b-rk3399_defconfig
-@@ -40,6 +40,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,9 +57,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
-index 3f9d0340c81e..02e7f4e2ecb7 100644
---- a/configs/nanopi-neo4-rk3399_defconfig
-+++ b/configs/nanopi-neo4-rk3399_defconfig
-@@ -40,6 +40,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,9 +57,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
-index 4f4363cb0f90..cacaab14d21f 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -63,9 +63,10 @@ CONFIG_SYSINFO_SMBIOS=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/orangepi-r1-plus-lts-rk3328_defconfig b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-index 0ea45df33338..d3d9417509e9 100644
---- a/configs/orangepi-r1-plus-lts-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-lts-rk3328_defconfig
-@@ -71,6 +71,7 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
-@@ -99,7 +100,6 @@ CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
-@@ -107,6 +107,7 @@ CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_SPL_TINY_MEMSET=y
-diff --git a/configs/orangepi-r1-plus-rk3328_defconfig b/configs/orangepi-r1-plus-rk3328_defconfig
-index e3d7f0b8aeb0..9356e87132e7 100644
---- a/configs/orangepi-r1-plus-rk3328_defconfig
-+++ b/configs/orangepi-r1-plus-rk3328_defconfig
-@@ -71,6 +71,7 @@ CONFIG_FASTBOOT_BUF_ADDR=0x800800
- CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
-@@ -99,7 +100,6 @@ CONFIG_SYSRESET=y
- # CONFIG_TPL_SYSRESET is not set
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
-@@ -107,6 +107,7 @@ CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC2=y
- CONFIG_USB_DWC3=y
- # CONFIG_USB_DWC3_GADGET is not set
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_SPL_TINY_MEMSET=y
-diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
-index ba6d91e877d6..27add8a29b92 100644
---- a/configs/orangepi-rk3399_defconfig
-+++ b/configs/orangepi-rk3399_defconfig
-@@ -40,6 +40,7 @@ CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -56,9 +57,10 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index ae3211bbe9c4..de357415fbe4 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -96,7 +96,6 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index 11243bc5c193..d08224fe536b 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -85,7 +85,6 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
-diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-index b632fa3dcf34..c2aa02ec74bd 100644
---- a/configs/puma-rk3399_defconfig
-+++ b/configs/puma-rk3399_defconfig
-@@ -97,7 +97,6 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
-index 06d97c3e1a2d..de6539bedf48 100644
---- a/configs/roc-pc-mezzanine-rk3399_defconfig
-+++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-@@ -81,7 +81,6 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index c53e8622431e..7123a7a07299 100644
---- a/configs/roc-pc-rk3399_defconfig
-+++ b/configs/roc-pc-rk3399_defconfig
-@@ -82,7 +82,6 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index 3028a86705ca..18525c8bf504 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -74,7 +74,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index 9abe8bf85354..171de23ec8f6 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -76,7 +76,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index 84e0dcf02827..83fc4ad7dabc 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -77,7 +77,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 5c9fb14787d8..089344097e0c 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -74,7 +74,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-index 1978fd525b8f..dc4b3b40380a 100644
---- a/configs/rock-pi-n10-rk3399pro_defconfig
-+++ b/configs/rock-pi-n10-rk3399pro_defconfig
-@@ -68,7 +68,6 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index fee10c471946..f74864b6eb90 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -50,6 +50,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_MISC=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
-@@ -70,12 +71,12 @@ CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
- CONFIG_USB_OHCI_GENERIC=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
- CONFIG_USB_KEYBOARD=y
- CONFIG_USB_HOST_ETHER=y
- CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 4cd6b76665bd..44171aac06a6 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -93,7 +93,6 @@ CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_OHCI_HCD=y
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index b501ea514bca..d92d87af52ef 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -39,7 +39,6 @@ config USB_XHCI_DWC3
- config USB_XHCI_DWC3_OF_SIMPLE
- 	bool "DesignWare USB3 DRD Generic OF Simple Glue Layer"
- 	depends on DM_USB
--	default y if ARCH_ROCKCHIP
- 	default y if DRA7XX
- 	help
- 	  Support USB2/3 functionality in simple SoC integrations with
--- 
-2.42.0
+--M0MP/DQbEJ8mBEHL
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVRE4kACgkQFHw5/5Y0
+tyxRAwv8DC8PBtsDv7+A0c2nHqtndrmVe4YV4CJk+XYmywYduoX9T4whh0JrZwn9
+HbzzXeNbgcro3P3K141OXDrw8HagvJSGDOzlJdsvlnbVTXA2F0RmaKT9wINozv48
+pQ5fiW6uEiQhiBNaL1yQPv+81/3uS+mup/OxNIAeTkyrDAMB+9gx5iFwypbRUma+
+kWcLP9ykknTU7HQDnsosVIWey6GP6k/Dhbu3oB+yuj1xNvB3ayehg8yhSs13ywMj
+bmnAiUzyQWmbfDTwOtpSyonRZxyFbO9y65fHXU2k1yTWBe0GM7jPmCDGIuMp5QIY
+nhl7bwQwHitdWQP6HY1LJAOZ7p8/pb5X9GgxDJ2Sk8ZNuCtwPYc9SVq3kr20eu8n
+XZgMox6EwacW8ZJ2lyclsp5fv3fhapBRs9PEDEtPYTh1H7V8fl71k7ia7kRZ4gcH
+C0r2WDAEA1ZQRpZqtakhjQmLNJoPXBUjFa9Imk4V7NsM8f7YBXxAqnJw5CHQ1XVL
+Gnt1XiYg
+=Fnwg
+-----END PGP SIGNATURE-----
+
+--M0MP/DQbEJ8mBEHL--
