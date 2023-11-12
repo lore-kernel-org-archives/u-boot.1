@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDA27C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 228BFC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:07:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83F2B87464;
+	by phobos.denx.de (Postfix) with ESMTP id F14A5874A8;
 	Sun, 12 Nov 2023 21:03:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AMGFOyWS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HW5lbuX6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 958F58744C; Sun, 12 Nov 2023 21:03:41 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 9556487475; Sun, 12 Nov 2023 21:03:41 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB68E8747B
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7198F870FF
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5bf58914bacso40629357b3.3
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:38 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso44519937b3.0
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819417; x=1700424217; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699819413; x=1700424213; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gXcVZ1DSQiNg4WEPHaLKUdq7LIFhMHxn2UZF4Xbhdoo=;
- b=AMGFOyWSyWZR1H0veWrJAVj6K6n76nYJo3Nb/hFRiI2dpatCJurMcRHsqJ1/+VB9gX
- AmmHgxZ0UhvuxYiFc2BWBiem7an55hv9Ql6lOlZFLKr2ZcbvU5a10ZtirrY3PuWWVrCB
- SZN+t+FxAVDExWFiUNkOlHKqB7C47cJ/YvCkI=
+ bh=A1vfi6slGslmQQQWohdozx89CbjYL9hx+molbkW8cfY=;
+ b=HW5lbuX6K9T5u6btxYWL0cUcjEEQS9VkNXXRi0e6ypXwkvTislngenoyoLCVgUWncr
+ LPeaGV418W2Ir9D/VzWEVxGyTYAO/UFtRPq5lJKkfXUt3W+R2BBbNeQWWu9S0M8D8PM6
+ HEmgNCjgYhmhhK8a+xl9KEQ6C/wGTYV6d7CGY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819417; x=1700424217;
+ d=1e100.net; s=20230601; t=1699819413; x=1700424213;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gXcVZ1DSQiNg4WEPHaLKUdq7LIFhMHxn2UZF4Xbhdoo=;
- b=aqthMslOapbnMKJGHZmF7aGQwZCeUaGN0Cg+BoZ65Hn4WC9cs3egKWovp/tsuVYibx
- dQr0oGMjIoAznkD/IY1zLa9/PDUvBDaBZhe/nN6EE8qjXXS2i5zihyumJOADrLaOPsj/
- xCHBllNIkcKbwINNQlPdV7jXTdwlg50NFFGGn1xxchjCIpmAEgdZEyyd/e/FLQjikKRH
- sruqDq5VQdyG6Jq37s7Oz466wQ0Aaf3VKZlXRF42VLOaoRpMe8zl08XzL3nCZJ+NeIxs
- SJn27fctlvbWflvObJuUkdYO4WCq4+rTvc3OOhGM6kL/BKPrjGQTAUFG7SOHaq/BE0+e
- 1ZDw==
-X-Gm-Message-State: AOJu0YxBnEKPLBIZNFwWkOGHs0DRPI87Wqxhi6rgRUW36shy3zqAxXfO
- aM4JdXKOiS2xibDQY01Izt0WAOmerRBipmyX5IPpZA==
-X-Google-Smtp-Source: AGHT+IGuORoo/b3qcChB9Em96i57rr5AIg9+UDmoAnrQgwP9AcZFbTRoUYlEnOfa9FInJRdUeYj2I7BDVddBjEuBsr4=
-X-Received: by 2002:a0d:d283:0:b0:5b3:1d71:6df7 with SMTP id
- u125-20020a0dd283000000b005b31d716df7mr4743443ywd.22.1699819416988; Sun, 12
- Nov 2023 12:03:36 -0800 (PST)
+ bh=A1vfi6slGslmQQQWohdozx89CbjYL9hx+molbkW8cfY=;
+ b=AmcxKar5VDZ4FTqay8kAFgOdpFnhrvEC4Pz5wlMAIRSrsmU9kKBDHf5rY3l/lmig+h
+ 7eGycR/+vp1o77Ssg8VFA7HqxkHSByxggues07SR/lWs5tP7s6gRN/Esc2Zjd8JHZkKg
+ Whtjb3D1SzmtI5iHNkMMNf4/IS2ZGrqN5bdprPVG4Pul2GDPwrgpS82GdSNusJsuwTo2
+ qQUfZ+YTPI5urBj1KMVk3WUAiNIx15hQMe4hAPy5f/OL1qDmgyqLBaFeNk0qZo5Pc2LW
+ jQBU+EOZxlTs5SIJMRuxt+iwq4+0R7HMMr0a9O767iVM5EUe7jaKrpsJjCBNRQ58soeR
+ ds/w==
+X-Gm-Message-State: AOJu0Yy4/CTrGDHrv7dKsZp9PsNwybpia+W2YFerEInoJMWjPbkhlXmI
+ dhwbhsZe+LGzBWEmi8OnLSqJmlOxGgG80zaWL8nR+g==
+X-Google-Smtp-Source: AGHT+IH1uOHe6rz1nYvQ9xSv7prig9Jx0nBAzjVSZBgNSmtSKUeFAQFpRKO2DXQMxfhr03W9denaJF1x/LDluKd1gfE=
+X-Received: by 2002:a81:72c5:0:b0:5a7:b8de:390d with SMTP id
+ n188-20020a8172c5000000b005a7b8de390dmr4889756ywc.13.1699819413056; Sun, 12
+ Nov 2023 12:03:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20231103183844.2308934-1-seanedmond@linux.microsoft.com>
- <20231103183844.2308934-2-seanedmond@linux.microsoft.com>
-In-Reply-To: <20231103183844.2308934-2-seanedmond@linux.microsoft.com>
+References: <20231112155808.135585-1-sjg@chromium.org>
+ <20231112155808.135585-4-sjg@chromium.org>
+ <44e30885-88c8-4a22-814e-77fcc9ee339d@gmx.de>
+In-Reply-To: <44e30885-88c8-4a22-814e-77fcc9ee339d@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 13:01:08 -0700
-Message-ID: <CAPnjgZ2xTSSbAPhB0Beu6cOOsSfFG7YJJCM+KqcFyCO9a2D29A@mail.gmail.com>
-Subject: Re: [PATCH v4 1/5] fdt: common API to populate kaslr seed
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, 
- ilias.apalodimas@linaro.org, trini@konsulko.com
+Date: Sun, 12 Nov 2023 13:01:30 -0700
+Message-ID: <CAPnjgZ3927B7sAqX4Vb6Z7jkiT3kd1149zEECH2ygHORBJqWnA@mail.gmail.com>
+Subject: Re: [PATCH 3/4] efi: Correct display of table GUIDs
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,210 +83,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Heinrich,
 
-On Fri, 3 Nov 2023 at 12:39, <seanedmond@linux.microsoft.com> wrote:
+On Sun, 12 Nov 2023 at 09:58, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
+> On 11/12/23 16:58, Simon Glass wrote:
+> > The printf() %pU option decodes GUIDs so it is not necessary to do this
+> > first. Drop the incorrect code.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   cmd/efi_common.c | 4 +---
+> >   1 file changed, 1 insertion(+), 3 deletions(-)
+> >
+> > diff --git a/cmd/efi_common.c b/cmd/efi_common.c
+> > index f4056096cd3f..1aa2351fcdfd 100644
+> > --- a/cmd/efi_common.c
+> > +++ b/cmd/efi_common.c
+> > @@ -17,10 +17,8 @@ void efi_show_tables(struct efi_system_table *systab)
+> >
+> >       for (i = 0; i < systab->nr_tables; i++) {
+> >               struct efi_configuration_table *tab = &systab->tables[i];
+> > -             char guid_str[37];
+> >
+> > -             uuid_bin_to_str(tab->guid.b, guid_str, 1);
+> > -             printf("%p  %pUl  %s\n", tab->table, guid_str,
+> > +             printf("%p  %pUl  %s\n", tab->table, tab->guid.b,
+> >                      uuid_guid_get_str(tab->guid.b) ?: "(unknown)");
 >
-> fdt_fixup_kaslr_seed() will update given ofnode with random seed value.
-> Source for random seed can be TPM or RNG driver in u-boot or sec
-> firmware (ARM).
->
-> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
-> Signed-off-by: Sean Edmond <senaedmond@microsoft.com>
-> ---
->  arch/arm/cpu/armv8/sec_firmware.c | 39 +++++++++++--------------------
->  boot/fdt_support.c                | 19 +++++++++++++++
->  drivers/core/ofnode.c             | 17 ++++++++++++++
->  include/dm/ofnode.h               | 12 ++++++++++
->  include/fdt_support.h             |  9 +++++++
->  5 files changed, 71 insertions(+), 25 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/sec_firmware.c b/arch/arm/cpu/armv8/sec_firmware.c
-> index c0e8726346f..5f04cd8aecd 100644
-> --- a/arch/arm/cpu/armv8/sec_firmware.c
-> +++ b/arch/arm/cpu/armv8/sec_firmware.c
-> @@ -411,46 +411,35 @@ int sec_firmware_init(const void *sec_firmware_img,
->  /*
->   * fdt_fix_kaslr - Add kalsr-seed node in Device tree
->   * @fdt:               Device tree
-> - * @eret:              0 in case of error, 1 for success
-> + * @eret:              0 for success
->   */
->  int fdt_fixup_kaslr(void *fdt)
->  {
-> -       int nodeoffset;
-> -       int err, ret = 0;
-> -       u8 rand[8];
-> +       int ret = 0;
->
->  #if defined(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT)
-> +       u8 rand[8];
-> +       ofnode root;
-> +
->         /* Check if random seed generation is  supported */
->         if (sec_firmware_support_hwrng() == false) {
->                 printf("WARNING: SEC firmware not running, no kaslr-seed\n");
-> -               return 0;
-> +               return -EOPNOTSUPP;
->         }
->
-> -       err = sec_firmware_get_random(rand, 8);
-> -       if (err < 0) {
-> +       ret = sec_firmware_get_random(rand, 8);
-> +       if (ret < 0) {
->                 printf("WARNING: No random number to set kaslr-seed\n");
-> -               return 0;
-> +               return ret;
->         }
->
-> -       err = fdt_check_header(fdt);
-> -       if (err < 0) {
-> -               printf("fdt_chosen: %s\n", fdt_strerror(err));
-> -               return 0;
-> +       ret = root_ofnode_from_fdt(fdt, &root);
-> +       if (ret < 0) {
-> +               printf("WARNING: Unable to get root ofnode\n");
-> +               return ret;
->         }
->
-> -       /* find or create "/chosen" node. */
-> -       nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
-> -       if (nodeoffset < 0)
-> -               return 0;
-> -
-> -       err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", rand,
-> -                                 sizeof(rand));
-> -       if (err < 0) {
-> -               printf("WARNING: can't set kaslr-seed %s.\n",
-> -                      fdt_strerror(err));
-> -               return 0;
-> -       }
-> -       ret = 1;
-> +       ret = fdt_fixup_kaslr_seed(root, rand, sizeof(rand));
->  #endif
->
->         return ret;
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 5e49078f8c3..52be4375b46 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -631,6 +631,25 @@ void fdt_fixup_ethernet(void *fdt)
->         }
->  }
->
-> +int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
-> +{
-> +       ofnode chosen;
-> +       int ret;
-> +
-> +       /* find or create "/chosen" node. */
-> +       ret = ofnode_add_subnode(node, "chosen", &chosen);
-> +       if (ret && ret != -EEXIST)
-> +               return -ENOENT;
-> +
-> +       ret = ofnode_write_prop(chosen, "kaslr-seed", seed, len, true);
-> +       if (ret) {
-> +               printf("WARNING: can't set kaslr-seed\n");
-> +               return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  int fdt_record_loadable(void *blob, u32 index, const char *name,
->                         uintptr_t load_addr, u32 size, uintptr_t entry_point,
->                         const char *type, const char *os, const char *arch)
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index 29a42945102..55291f0202b 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -966,6 +966,23 @@ ofnode oftree_path(oftree tree, const char *path)
->         }
->  }
->
-> +int root_ofnode_from_fdt(void *fdt, ofnode *root_node)
-> +{
-> +       oftree tree;
-> +       /* If OFNODE_MULTI_TREE is not set, and if fdt is not the control FDT,
-> +        *  oftree_from_fdt() will return NULL
-> +        */
-> +       tree = oftree_from_fdt(fdt);
-> +
-> +       if (!oftree_valid(tree)) {
-> +               printf("Cannot create oftree\n");
-> +               return -EINVAL;
-> +       }
-> +       *root_node = oftree_root(tree);
-> +
-> +       return 0;
-> +}
-> +
->  const void *ofnode_read_chosen_prop(const char *propname, int *sizep)
->  {
->         ofnode chosen_node;
-> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-> index 19e97a90327..5759cac5b30 100644
-> --- a/include/dm/ofnode.h
-> +++ b/include/dm/ofnode.h
-> @@ -936,6 +936,18 @@ ofnode oftree_path(oftree tree, const char *path);
->   */
->  ofnode oftree_root(oftree tree);
->
-> +/**
-> + * root_ofnode_from_fdt() - Gets the root ofnode given an FDT blob.
-> + *                          Note, this will fail if OFNODE_MULTI_TREE
-> + *                          is not set.
-> + *
-> + * @fdt: Device tree to use
-> + * @root_node : Root ofnode
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int root_ofnode_from_fdt(void *fdt, ofnode *root_node);
-> +
->  /**
->   * ofnode_read_chosen_prop() - get the value of a chosen property
->   *
-> diff --git a/include/fdt_support.h b/include/fdt_support.h
-> index 2cd83668982..d967118bedf 100644
-> --- a/include/fdt_support.h
-> +++ b/include/fdt_support.h
-> @@ -11,6 +11,7 @@
->         !defined(USE_HOSTCC)
->
->  #include <asm/u-boot.h>
-> +#include <dm/ofnode.h>
+> Please, observe, that we have printf("%pUs", &guid) for printing the
+> text representation of a GUID. If the text representation is unknown, it
+> will print the numeric representation.
 
-I believe you only need dm/ofnode-decl.h here. That avoids pulling in
-ofnode.h which ends up with of.h which includes asm/global_data.h
-which causes a warning for qemu_arm64 for me.
+Yes, I understand but this is the output I want:
 
-Perhaps that last include could be dropped? But in any case, we should
-use ofnode-decl.h in preference to ofnode.h if possible
+=> efi tables
+bfbd7690  ee4e5898-3914-4259-9d6e-dc7bd79403cf  EFI_LZMA_COMPRESSED
+bff27c40  05ad34ba-6f02-4214-952e-4da0398e2bb9  EFI_DXE_SERVICES
+bfbd4010  7739f24c-93d7-11d4-9a3a-0090273fc14d  EFI_HOB_LIST
+bff283c0  4c19049f-4137-4dd3-9c10-8b97a83ffdfa  EFI_MEMORY_TYPE
+bff2892c  49152e77-1ada-4764-b7a2-7afefed95e8b  (unknown)
+bfcb6210  060cc026-4c0d-4dda-8f41-595fef00a502  EFI_MEM_STATUS_CODE_REC
+bfc80000  eb9d2d31-2d88-11d3-9a16-0090273fc14d  SMBIOS table
+bfe67000  eb9d2d30-2d88-11d3-9a16-0090273fc14d  EFI_GUID_EFI_ACPI1
+bfe67014  8868e871-e4f1-11d3-bc22-0080c73c8881  ACPI table
+be9b9010  dcfa911d-26eb-469f-a220-38b7dc461220  (unknown)
 
->  #include <linux/libfdt.h>
->  #include <abuf.h>
->
-> @@ -121,6 +122,14 @@ static inline int fdt_fixup_memory_banks(void *blob, u64 start[], u64 size[],
->  #endif
->
->  void fdt_fixup_ethernet(void *fdt);
-> +
-> +/*
-> + * fdt_fixup_kaslr_seed - Add kaslr-seed node in Device tree
-> + * @node:              ofnode
-> + * @eret:              0 for success
-> + */
-> +int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
-> +
->  int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
->                          const void *val, int len, int create);
->  void fdt_fixup_qe_firmware(void *fdt);
-> --
-> 2.42.0
->
+(so I want to show the GUID in all cases, but also indicate which ones
+are unknown)
 
 Regards,
 Simon
