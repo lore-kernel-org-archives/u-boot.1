@@ -4,46 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A019C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 11:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DEA0C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 12:34:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A0286D4C;
-	Sun, 12 Nov 2023 12:59:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id AEDFA87097;
+	Sun, 12 Nov 2023 13:34:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="1KpZyz99";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBC4487097; Sun, 12 Nov 2023 12:59:46 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7181B86D3C
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:59:44 +0100 (CET)
+ id 1EB13870A5; Sun, 12 Nov 2023 13:34:15 +0100 (CET)
+Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
+ [IPv6:2607:f8b0:4864:20::a2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F20548708C
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 13:34:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 74597C15;
- Sun, 12 Nov 2023 04:00:28 -0800 (PST)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 94AC13F64C;
- Sun, 12 Nov 2023 03:59:42 -0800 (PST)
-Date: Sun, 12 Nov 2023 11:58:26 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de, Peter Hoyes <peter.hoyes@arm.com>, Simon Glass
- <sjg@chromium.org>
-Subject: Re: [PATCH] virtio: rng: gracefully handle 0 byte returns
-Message-ID: <20231112115751.71e200a6@slackpad.lan>
-In-Reply-To: <85309d7e-6792-48d2-b3a5-95ccafd89c0c@gmx.de>
-References: <20231107160900.2652813-1-andre.przywara@arm.com>
- <CAPnjgZ1_KVcGvh869p3jvBh6umkwGv_VwFs73Yo3k9BBM54p0w@mail.gmail.com>
- <20231110141614.72b6dffd@donnerap.manchester.arm.com>
- <85309d7e-6792-48d2-b3a5-95ccafd89c0c@gmx.de>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4ac05ca3935so1635330e0c.1
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 04:34:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1699792451; x=1700397251;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gTVfTnRdKitM40nycnLCkrC/b4ut+6fsSBt1pKAdutQ=;
+ b=1KpZyz99kyH/dSQA913K76qRyrv4Wcn0Bw91yY+JZV7SILclYQOJXII1ZcTyREPyN4
+ V7zNzb4bVpK4s/T3ZN/HwZtFdLhASAUWd+rtK0q8xWJDVR0F6SOocjE2TCe6xRZyTH28
+ la+moVnjW1TD4nxTMwP64FQXf5HsxvkQc3K9/9F6Yh+eLpIdah1HqKRXD+TUyYocy00V
+ qf/wjIHskT09ODKnH65Oe2R8GQih+masVVFyVPBK0mUV61TRGMLEpvlHfubvmuKcRlBO
+ yEZF8bLclCVlsnxUeqvCytTaUXUWCCYgh9+GmBtNaoNAlbF/33FKgtCb6TDMeZO263XN
+ fVYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699792451; x=1700397251;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gTVfTnRdKitM40nycnLCkrC/b4ut+6fsSBt1pKAdutQ=;
+ b=SQ5AB0d3m8LE1fsTMTPK2R+Ix8z7v9ipx7lJfxsnKLIKE34YNpCCZmtcn7DkLlyBcR
+ ZdqfVY5cwFzUp3oOIKUHZdkiGK4o0x3vkpIUrjo9Ei2URCXXsSEl+Zs2j0se5pvQ/RZc
+ ofD1mRrQc6ivVq+EE3wE1juHNfNh8Hg6FuR1oZlMX3l/xe7Be5xpAvbI06/nJBdzYzDG
+ jlk07tz8cKi63v9aQSFatMK9wpjpZCNrK08/TVltBWlMq0VNX9st7Yb97B4EgKEyN6pl
+ 4EiW85ChDX3M7YToI28R/EsT1oxKmV5Q6W03pji/VTqfAQuI+fk30Dxa8/VtUyw32oLo
+ d5lw==
+X-Gm-Message-State: AOJu0YzTWpc+D7Cp+ZvlQX5+otfQWgLXJGV/BT/av2PeusPMOvNiJgf6
+ 3pwLwC/MuipDOZIuQvmh3o5hyiMO14klLdtdKh2N3A==
+X-Google-Smtp-Source: AGHT+IHiY50sjbVpm4+JpTuMtIbzlZhNY31rqLzkLUity5L6+yVIgyXfOhTrsYHWtxSj8ZvY/Ml/i824igaFx8hsAgo=
+X-Received: by 2002:a05:6122:5b6:b0:4ab:e352:19d8 with SMTP id
+ w22-20020a05612205b600b004abe35219d8mr3284287vko.3.1699792451536; Sun, 12 Nov
+ 2023 04:34:11 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20231111001329.537704-1-i@shantur.com>
+ <d1e624f3-d761-4822-bcb4-f81ab4d78663@kwiboo.se>
+In-Reply-To: <d1e624f3-d761-4822-bcb4-f81ab4d78663@kwiboo.se>
+From: Shantur Rathore <i@shantur.com>
+Date: Sun, 12 Nov 2023 12:34:00 +0000
+Message-ID: <CABEcMwVD_Hs5aMJZaF_Ym785yrLsw6KBxnB_E4KCD=nJASR6YQ@mail.gmail.com>
+Subject: Re: [PATCH] configs: rockpro64: Enable SPI command and full BOOTSTD
+To: jonas@kwiboo.se
+Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,134 +88,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 11 Nov 2023 10:39:40 +0100
-Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+Hi Jonas,
 
-Hi Heinrich,
+> The CMD_SPI is not used to interact with the SPI flash.
+>
+> CMD_SF is already enabled and you can use "sf probe" and any other sf
+> related action to interact with the SPI flash on this board.
+>
 
-thanks for having a look!
+You are right, this is not needed, thanks for correcting me.
+I will update my patch.
 
-> On 11/10/23 15:16, Andre Przywara wrote:
-> > On Fri, 10 Nov 2023 05:53:59 -0700
-> > Simon Glass <sjg@chromium.org> wrote:
+> What is the reasoning behind enabling full bootstd commands? Especially
+> why just this board need it enabled by default.
+>
+> Standard boot is already fully functional, it just does not have full
+> features commands enabled by default.
+
+By default standard boot only allows you to boot from the first
+available boot device.
+This board supports SDCard, NVME (via PCIe port), USB and network boot
+and with BOOTSTD_FULL we can choose what to exactly boot.
+The boot_targets environment variable only allows you to choose which
+device to boot, not which boot method / flow to use.
+We have ample space in SPI Flash, so why not let it have the full
+potential of U-Boot by default.
+
+Kind regards,
+Shantur
+
+On Sun, Nov 12, 2023 at 10:39=E2=80=AFAM Jonas Karlman <jonas@kwiboo.se> wr=
+ote:
+>
+> On 2023-11-11 01:13, Shantur Rathore wrote:
+> > RockPro64 has a 16MB onboard SPI chip and current u-boot takes
+> > around 2MB, we can enable more features.
+> > Updating config to enable SPI commands and full BootSTD support.
+> > ---
+> >  configs/rockpro64-rk3399_defconfig | 2 ++
+> >  1 file changed, 2 insertions(+)
 > >
-> > Hi Simon,
-> >  
-> >> On Tue, 7 Nov 2023 at 09:09, Andre Przywara <andre.przywara@arm.com> wrote:  
-> >>>
-> >>> According to the virtio v1.x "entropy device" specification, a virtio-rng
-> >>> device is supposed to always return at least one byte of entropy.
-> >>> However the virtio v0.9 spec does not mention such a requirement.  
-> 
-> v0.9 was a draft. So nothing we have to care about.
-> 
-> >>>
-> >>> The Arm Fixed Virtual Platform (FVP) implementation of virtio-rng always
-> >>> returns 8 bytes less of entropy than requested. If 8 bytes or less are
-> >>> requested, it will return 0 bytes.
-> >>> This behaviour makes U-Boot's virtio_rng_read() implementation go into an
-> >>> endless loop, hanging the system.
-> >>>
-> >>> Work around this problem by always requesting 8 bytes more than needed,
-> >>> but only if a previous call to virtqueue_get_buf() returned 0 bytes.
-> >>>
-> >>> This should never trigger on a v1.x spec compliant implementation, but
-> >>> fixes the hang on the Arm FVP.
-> >>>
-> >>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> >>> Reported-by: Peter Hoyes <peter.hoyes@arm.com>  
-> 
-> The bug should be fixed in the Arm Fixed Virtual Platform instead of
-> working around it in U-Boot.
-
-... and it is already fixed in the internal releases, but external users
-have to wait for the next public release in a few weeks, and then
-everyone would need to update as well. So I was hoping that we could
-just have this simple software fix?
-After all non-spec compliant hardware is quite common, and we have tons
-of quirks and workarounds for every kind of erratum or hardware problem.
-I don't think this one here is particularly intrusive. If you want, I
-can hide it behind a Kconfig option?
-
-> Our driver should return -EIO if the virtio host is not compliant.
-
-That sounds a bit over the top to detect this and deliberately deny
-service, when we could just be robust and carry on anyways?
-
-Cheers,
-Andre
-
-> 
-> Best regards
-> 
-> Heinrich
-> 
-> >>> ---
-> >>>   drivers/virtio/virtio_rng.c | 9 +++++++--
-> >>>   1 file changed, 7 insertions(+), 2 deletions(-)  
-> >>
-> >> Unrelated to this patch, but do you know the hardware architecture of
-> >> the ARM RNG? Is there one RNG unit per CPU or one for the whole SoC?  
-> >
-> > Architecturally and from a software perspective the ARMv8.5 FEAT_RNG
-> > feature is a system register, so per-core. Theoretically the availability
-> > could differ between cores, but the CPU ID feature registers are also
-> > per-core, so as long as we run on a single core, or always at least
-> > read from the same core, it's all good.
-> >
-> > Now the architecture only describes the CPU instruction aspect of the
-> > feature, and establishes rules for the quality and spec conformance, but
-> > leaves the actual source of the entropy open to the integrator.
-> >
-> > The manual in the Neoverse V1 core[1] (still not a SoC!) states that the
-> > actual entropy source is a memory mapped peripheral, its address being
-> > held in an internal, per-core register. So you can have one shared entropy
-> > source per SoC, or a private instance for each core, that's up to the
-> > actual integrator to design.
-> >
-> >  From the software perspective this shouldn't matter, though: the feature
-> > is "per-core", how this is backed is an implementation detail.
-> >
-> > Cheers,
-> > Andre
-> >
-> > [1]
-> > https://developer.arm.com/documentation/101427/0102/Functional-description/Random-number-support/About-the-random-number-support
-> >
-> >  
-> >>> diff --git a/drivers/virtio/virtio_rng.c b/drivers/virtio/virtio_rng.c
-> >>> index b85545c2ee5..786359a6e36 100644
-> >>> --- a/drivers/virtio/virtio_rng.c
-> >>> +++ b/drivers/virtio/virtio_rng.c
-> >>> @@ -20,7 +20,7 @@ struct virtio_rng_priv {
-> >>>   static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
-> >>>   {
-> >>>          int ret;
-> >>> -       unsigned int rsize;
-> >>> +       unsigned int rsize = 1;
-> >>>          unsigned char buf[BUFFER_SIZE] __aligned(4);
-> >>>          unsigned char *ptr = data;
-> >>>          struct virtio_sg sg;
-> >>> @@ -29,7 +29,12 @@ static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
-> >>>
-> >>>          while (len) {
-> >>>                  sg.addr = buf;
-> >>> -               sg.length = min(len, sizeof(buf));
-> >>> +               /*
-> >>> +                * Work around implementations which always return 8 bytes
-> >>> +                * less than requested, down to 0 bytes, which would
-> >>> +                * cause an endless loop otherwise.
-> >>> +                */
-> >>> +               sg.length = min(rsize ? len : len + 8, sizeof(buf));
-> >>>                  sgs[0] = &sg;
-> >>>
-> >>>                  ret = virtqueue_add(priv->rng_vq, sgs, 0, 1);
-> >>> --
-> >>> 2.25.1
-> >>>  
-> >>
-> >> Regards,
-> >> Simon  
-> >  
-> 
-
+> > diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3=
+399_defconfig
+> > index 4cd6b76665..cad0b8a5d7 100644
+> > --- a/configs/rockpro64-rk3399_defconfig
+> > +++ b/configs/rockpro64-rk3399_defconfig
+> > @@ -46,10 +46,12 @@ CONFIG_CMD_BOOTZ=3Dy
+> >  CONFIG_CMD_GPT=3Dy
+> >  CONFIG_CMD_MMC=3Dy
+> >  CONFIG_CMD_PCI=3Dy
+> > +CONFIG_CMD_SPI=3Dy
+>
+> The CMD_SPI is not used to interact with the SPI flash.
+>
+> CMD_SF is already enabled and you can use "sf probe" and any other sf
+> related action to interact with the SPI flash on this board.
+>
+> >  CONFIG_CMD_USB=3Dy
+> >  # CONFIG_CMD_SETEXPR is not set
+> >  CONFIG_CMD_TIME=3Dy
+> >  CONFIG_CMD_BOOTSTAGE=3Dy
+> > +CONFIG_BOOTSTD_FULL=3Dy
+>
+> What is the reasoning behind enabling full bootstd commands? Especially
+> why just this board need it enabled by default.
+>
+> Standard boot is already fully functional, it just does not have full
+> features commands enabled by default.
+>
+> Regards,
+> Jonas
+>
+> >  CONFIG_SPL_OF_CONTROL=3Dy
+> >  CONFIG_OF_SPL_REMOVE_PROPS=3D"pinctrl-0 pinctrl-names clock-names inte=
+rrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> >  CONFIG_ENV_IS_IN_SPI_FLASH=3Dy
+>
