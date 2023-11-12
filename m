@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3459C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:28:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3458EC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD23A8744D;
-	Sun, 12 Nov 2023 16:28:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 50E8B871A1;
+	Sun, 12 Nov 2023 16:28:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jHM/sK5b";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RzhGYlFq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0915B87164; Sun, 12 Nov 2023 16:28:03 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 1599387203; Sun, 12 Nov 2023 16:28:04 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6C0786E24
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 16:28:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F305287185
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 16:28:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-7a93b7fedb8so127795139f.3
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 07:28:00 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7b006f7c473so78955039f.2
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 07:28:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699802879; x=1700407679; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699802880; x=1700407680; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=suXcQPoTvuSyYgLcc/Fmm4ZeVbVH9OJBua/76XG1yGQ=;
- b=jHM/sK5bWYURzvSg1oiwXU46yRn0WoAClUKaTewBQTbd7T90HmiM1EKC14pYDcsHfj
- +gd5Bob9JI2SJbebIif1rcOv7F02AV46PVFwgjoosFR6wzBMvrxKVwA7cHFLG+xJECx/
- dozukfjnM1a+7vCakMGonSTs0wtj44Nb+D3/c=
+ bh=l1AyIuy5pB+FvvmVhFPd9ZvAuxNbhgat38ELE/YhOOI=;
+ b=RzhGYlFqaD5+AxPWQi52vt/yOnCabEk/KSjxxdvA3H2Y1Ukv4IUD2f0G35FzpOwNkz
+ y4se9FBZI9QPKwv1Jxo7fmbgd5epVyw9pueqL6/uQYYOmucU701IENdA69toWvZLBxV4
+ 7u4GEO0AtfLpkg/2Ulj03oslLbrWjxU6+A6Ek=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699802879; x=1700407679;
+ d=1e100.net; s=20230601; t=1699802880; x=1700407680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=suXcQPoTvuSyYgLcc/Fmm4ZeVbVH9OJBua/76XG1yGQ=;
- b=hnQlCixfRakdsf8DjZNZaVeC/V59dk6Hvas0nKFqOE736j1bmGpmoQ1wOaNcC5c+V7
- OkJL+wUDyWzehNtgo0xTXnr5lrSDl/YND4YmK8yHsu3ql25xXMtXBoly3pxVioQYz9Yt
- FF3LxxQjG0pwXwRZAN/hTH6FVYzHeSbTo3u3z8VItidazT/SxpraDj9CmWspM3ZObPUb
- DdHXBqaww6swurNDppbIq9Rsi6GebHg2lYm0fRZvKnejkWw7o43qPVEJ9WnFyd2jHMKD
- ldzU1XrnXXoRMYc2agbDy+Thc++LoEQBM34zMop6546isaE4dZmgIFL3jd7HcHgjIGxe
- LGtA==
-X-Gm-Message-State: AOJu0YyZOOIJDixT3pTVNXXGiDPueSOYfw1zU2RNscXdNB+xo1i9wdpb
- dpdb7An4ISsq9m5k0bsCzSwoQeqfI4KLTxUAvY5fxA==
-X-Google-Smtp-Source: AGHT+IHR46RGgi1eTSSOg0jK4sOiSP6u+fNG8mORh6M27cdhljRlj3uVzN8fpZLCACK8nB35NMi4GA==
-X-Received: by 2002:a5e:8809:0:b0:7a2:dee5:84b6 with SMTP id
- l9-20020a5e8809000000b007a2dee584b6mr5038987ioj.21.1699802879355; 
- Sun, 12 Nov 2023 07:27:59 -0800 (PST)
+ bh=l1AyIuy5pB+FvvmVhFPd9ZvAuxNbhgat38ELE/YhOOI=;
+ b=dbw4MmQ/HBr6A2siDieUOPJF/kpL3gNmnjdXPMfpQvD13RZ1tOkXpGrECTrBt0dZlH
+ 2qcrTPNoaxXTGXL77/ey3TjmWeZlSQnEW4BtWG1L21aNvroKieynWwAbpPTJIUGAWjsZ
+ Fqxn1doABLnmPpWbqCl3fRP76/SCwsgpZhGvN6Wrf6L9IDrIHDyhQQYE47pOjIdhPU2F
+ InLJyeKpAIurszWHgUbgjo0iNjiASvAzFAx/BdH7f0LnZo1aypLyqq7mf814n4ONGecS
+ c8yVN1QmMNuhx4EzVffx+Lb+Lv2HxgGdDaynDhOA3jfbWj4DzM/5XM6Cm8YD5Rg0UGU2
+ am+A==
+X-Gm-Message-State: AOJu0YxeuOKqydU5Z/Avbj3yVqsSTJHqFM/g72hB+ws6R48WXRcILeFz
+ 8nD3oad1BNjTZlRgG1W+VxReAXTviWnSGvG7l7J0sA==
+X-Google-Smtp-Source: AGHT+IFyoVYry/Xj3he+pKJKT6nNioArcOOmM6VkiQLThIaSomuJ3tCBv5mXzAKELtu5aIvlwAQqCg==
+X-Received: by 2002:a05:6602:2e12:b0:79f:e9ac:f60a with SMTP id
+ o18-20020a0566022e1200b0079fe9acf60amr6815821iow.20.1699802880500; 
+ Sun, 12 Nov 2023 07:28:00 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- 76-20020a6b144f000000b0079fdbe2be51sm1226241iou.2.2023.11.12.07.27.58
+ 76-20020a6b144f000000b0079fdbe2be51sm1226241iou.2.2023.11.12.07.27.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 07:27:59 -0800 (PST)
+ Sun, 12 Nov 2023 07:28:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Edmond <seanedmond@microsoft.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Jerry Van Baren <vanbaren@cideas.com>
-Subject: [PATCH 2/7] fdt: Check for a valid fdt in oftree_ensure()
-Date: Sun, 12 Nov 2023 08:27:45 -0700
-Message-ID: <20231112152754.130399-3-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Dhananjay Phadke <dphadke@linux.microsoft.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [PATCH 3/7] fdt: Improve the comment for fdt_shrink_to_minimum()
+Date: Sun, 12 Nov 2023 08:27:46 -0700
+Message-ID: <20231112152754.130399-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112152754.130399-1-sjg@chromium.org>
 References: <20231112152754.130399-1-sjg@chromium.org>
@@ -88,31 +93,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Check the header before starting to use it, since this could provide
-very confusing later, when ofnode calls start to fail.
+Add a bit more detail about what this function does.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/core/ofnode.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ boot/fdt_support.c    |  1 -
+ include/fdt_support.h | 12 +++++++++++-
+ 2 files changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index c3d326831fc6..3956e1999c36 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -83,6 +83,11 @@ static oftree oftree_ensure(void *fdt)
- 			if (check_tree_count())
- 				return oftree_null();
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 09ce5828659e..510ad24a999d 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -722,7 +722,6 @@ int fdt_record_loadable(void *blob, u32 index, const char *name,
+ 	return node;
+ }
  
-+			if (fdt_check_header(fdt)) {
-+				log_err("Invalid device tree blob header\n");
-+				return oftree_null();
-+			}
+-/* Resize the fdt to its actual size + a bit of padding */
+ int fdt_shrink_to_minimum(void *blob, uint extrasize)
+ {
+ 	int i;
+diff --git a/include/fdt_support.h b/include/fdt_support.h
+index d967118bedf0..791258ec7eff 100644
+--- a/include/fdt_support.h
++++ b/include/fdt_support.h
+@@ -242,13 +242,23 @@ int ft_system_setup(void *blob, struct bd_info *bd);
+ void set_working_fdt_addr(ulong addr);
+ 
+ /**
+- * shrink down the given blob to minimum size + some extrasize if required
++ * fdt_shrink_to_minimum() - shrink FDT while allowing for some margin
++ *
++ * Shrink down the given blob to 'minimum' size + some extrasize.
++ *
++ * The new size is enough to hold the existing contents plus @extrasize bytes,
++ * plus 5 memory reservations. Also, the end of the FDT is aligned to a 4KB
++ * boundary, so it might end up up to 4KB larger than needed.
++ *
++ * If there is an existing memory reservation for @blob in the FDT, it is
++ * updated for the new size.
+  *
+  * @param blob		FDT blob to update
+  * @param extrasize	additional bytes needed
+  * Return: 0 if ok, or -FDT_ERR_... on error
+  */
+ int fdt_shrink_to_minimum(void *blob, uint extrasize);
 +
- 			/* register the new tree */
- 			i = oftree_count++;
- 			oftree_list[i] = fdt;
+ int fdt_increase_size(void *fdt, int add_len);
+ 
+ int fdt_delete_disabled_nodes(void *blob);
 -- 
 2.42.0.869.gea05f2083d-goog
 
