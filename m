@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F569C4167D
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:45:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B33A4C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:46:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 131FE86FE8;
-	Sun, 12 Nov 2023 01:45:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1EA4987017;
+	Sun, 12 Nov 2023 01:45:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AW2j4Qfv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XNKdkWA/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FCE886FF2; Sun, 12 Nov 2023 01:45:47 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 8285D86EB8; Sun, 12 Nov 2023 01:45:51 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03FC386E9E
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:45:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BB3787017
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:45:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-7a94c5538aeso124549139f.3
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:45:43 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-7a92727934eso129850739f.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:45:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699749942; x=1700354742; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CBYqVkFg+1moEaJVm2gKAQAD6nwqAwa0lx6V+LjrFr8=;
- b=AW2j4QfvRnYrFhzxwtWa0QHlQHvwB0G2bWnRBK6ZNcQlbcX0mbLHdwQlY21m4GdEUz
- EHkftNQOZb8K8frztcrhU3Mjb8G6Kbvhi9bEdmvfWA26WJ46l6quQCfNb84ONmPIiB9E
- tvi/qyZ1+VnmH9l6qR31dwfLMH6VTnF755McU=
+ d=chromium.org; s=google; t=1699749944; x=1700354744; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Jv84KWzJhviuVWbf7I+ULytGtKeZKgJMfQ8Nzm2r6Yg=;
+ b=XNKdkWA/7Qj9nfeSBOLcqsIqmo0cVK3HKX+gO4R1EoORjnV7/PSJXjUSUMAsRAKLd1
+ vIpQCGXdt6jfU8pEIQnTUNsAKnUI6dHMpk54+ijhMA0x8pdT0OPF7E0AZ8MnX8YUyGXm
+ ertLwzOW67BRnURo8PlcDPP9o/pjzdEjAbEx4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699749942; x=1700354742;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CBYqVkFg+1moEaJVm2gKAQAD6nwqAwa0lx6V+LjrFr8=;
- b=OD/u0lygW3TuIE7iOk/zxFf7h/GxIkfo5yK4MQrHbMYK1X2p4b59hNqORMwYmo4itG
- sYp+QGa7EUi7ZFVMxD+2JcvXWPheXMtX/4RIMJTy009oCTiiV2oGeZmbd/1ckYOuAgAM
- +8NjHJznBjj736ZvOgYXgGWPKLxeiDF7P7ojvCvRLwJxoaPF6kdGyn0YPEBXp6Y9Q0an
- olRn4xTkEGlEHen43kgFVOZbvKek2CytjEcjiCTp5Wd9zgEGQNpX+2lYFlEkCb85fnEM
- /e3KFDSTvsn7UISfzg9PRSbfWeM3jBGWuGRDmlRCAtTzC7kDTJoK0o6NnRgkvTVxQKPQ
- G0tw==
-X-Gm-Message-State: AOJu0YzKXOuHVAFiIKhISkbPF06dPrt4zIZ7C+2TC12gtYY2MA9hPsJe
- DvaYg86Xs7pScD3dyt2HMSZUDsdot5KojtEzPinRuA==
-X-Google-Smtp-Source: AGHT+IGCZAEb285d8Y765qaXk56TXfqW/ji0Td+dNzXajsCr+Cz7hfDa0H7jRWJlWf/yAUFn/f4JRA==
-X-Received: by 2002:a5d:8ac2:0:b0:795:13ea:477a with SMTP id
- e2-20020a5d8ac2000000b0079513ea477amr4073831iot.8.1699749942536; 
- Sat, 11 Nov 2023 16:45:42 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699749944; x=1700354744;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Jv84KWzJhviuVWbf7I+ULytGtKeZKgJMfQ8Nzm2r6Yg=;
+ b=IE83yPJ4Og7QrLZHI9vIWVEVCpYVrI+dDJg+ly9dFXzrGP681jd/YxsaxvWH939O4g
+ AConnzXQ+G/Gp7ny6a6nEACVqOcCu7qfgpLsfbwP9N5zWRjwB+SfFO6ORWWQSfJdxDnT
+ y2cELyteeIKyg55w19hwjvOVUVJmIOUXyPYxxbHQ+uVPjLebvzLJ+fivu6zU2f03OztK
+ iVRB2mbF//reUJkDHhQ8wYuLxKybhTbO5T0KFnRtIjNLalsFWv8gZoU1hlMOgpYeVuGz
+ Z7rKmZkTwtJAuW8KpQZa8ioS6vQIao4z69rr1hyE0ZK3wx+AFwAEtbuztJVNQWPdzkYS
+ 2KEQ==
+X-Gm-Message-State: AOJu0Yz3IPyerTazedyjYSf+nGt6wXf1C54unUhl7y3qpP7sYd4RugyO
+ TWnrqi5zEFWzIQ7zkCYVDyRjdQIMp+4/e84s2JlWGg==
+X-Google-Smtp-Source: AGHT+IG1LFZm2DsrYi1uw4WXM5KcJiZVls+shxRUQNgSodByLMEXDAh9co0PduOIT0dcf0QawBOozw==
+X-Received: by 2002:a05:6602:164a:b0:795:bea:ae13 with SMTP id
+ y10-20020a056602164a00b007950beaae13mr4132810iow.20.1699749944654; 
+ Sat, 11 Nov 2023 16:45:44 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- v17-20020a5ec111000000b00785cfdd968bsm765277iol.5.2023.11.11.16.45.41
+ v17-20020a5ec111000000b00785cfdd968bsm765277iol.5.2023.11.11.16.45.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 16:45:42 -0800 (PST)
+ Sat, 11 Nov 2023 16:45:44 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marc Kleine-Budde <mkl@pengutronix.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Safae Ouajih <souajih@baylibre.com>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v2 0/4] bootm: Handle compressed arm64 images with bootm
-Date: Sat, 11 Nov 2023 17:45:31 -0700
-Message-ID: <20231112004539.80982-1-sjg@chromium.org>
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v2 2/4] bootm: Move arm64-image processing later
+Date: Sat, 11 Nov 2023 17:45:33 -0700
+Message-ID: <20231111174533.v2.2.Ie34b75c75347a1c04bffa780220afe9011b0e2bb@changeid>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
+In-Reply-To: <20231112004539.80982-1-sjg@chromium.org>
+References: <20231112004539.80982-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,99 +92,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series corrects a problem I noticed with arm64 images,
-where the kernel is not recognised:
+If the image is compressed, then the existing check fails, since the
+header is wrong.
 
-   U-Boot> tftp image.fit
-   Using ethernet@7d580000 device
-   TFTP from server 192.168.4.7; our IP address is 192.168.4.147
-   Filename 'image.fit'.
-   Load address: 0x1000000
-   Loading: ##################################################  23 MiB
-   	 20.5 MiB/s
-   done
-   Bytes transferred = 24118272 (1700400 hex)
-   U-Boot> bootm
-   ## Loading kernel from FIT Image at 01000000 ...
-      Using 'conf-768' configuration
-      Trying 'kernel' kernel subimage
-        Description:  Linux
-        Type:         Kernel Image (no loading done)
-        Compression:  gzip compressed
-        Data Start:   0x01000120
-        Data Size:    13662338 Bytes = 13 MiB
-      Verifying Hash Integrity ... OK
-   Bad Linux ARM64 Image magic!
+Move the check later in the boot process, after the kernel is
+decompressed. This allows use of bootm with compressed kernels, while
+still permitting an uncompressed kernel to be used.
 
-With this series:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-   U-Boot> tftp 20000000 image.fit
-   Using ethernet@7d580000 device
-   TFTP from server 192.168.4.7; our IP address is 192.168.4.147
-   Filename 'image.fit'.
-   Load address: 0x20000000
-   Loading: ##################################################  23.5 MiB
-   	 20.8 MiB/s
-   done
-   Bytes transferred = 24642560 (1780400 hex)
-   U-Boot> bootm 0x20000000
-   ## Loading kernel from FIT Image at 20000000 ...
-      Using 'conf-768' configuration
-      Trying 'kernel' kernel subimage
-        Description:  Linux
-        Type:         Kernel Image (no loading done)
-        Compression:  zstd compressed
-        Data Start:   0x20000120
-        Data Size:    14333475 Bytes = 13.7 MiB
-      Verifying Hash Integrity ... OK
-   Using kernel load address 80000
-   ## Loading fdt from FIT Image at 20000000 ...
-      Using 'conf-768' configuration
-      Trying 'fdt-768' fdt subimage
-        Description:  Raspberry Pi 4 Model B
-        Type:         Flat Device Tree
-        Compression:  zstd compressed
-        Data Start:   0x215f820c
-        Data Size:    9137 Bytes = 8.9 KiB
-        Architecture: AArch64
-      Verifying Hash Integrity ... OK
-      Uncompressing Flat Device Tree to 3aff3010
-      Booting using the fdt blob at 0x3aff3010
-   Working FDT set to 3aff3010
-      Uncompressing Kernel Image (no loading done) to 80000
-   Moving Image from 0x80000 to 0x200000, end=2b00000
-      Using Device Tree in place at 000000003aff3010, end 000000003afff4c4
-   Working FDT set to 3aff3010
+(no changes since v1)
 
-   Starting kernel ...
+ boot/bootm.c | 51 ++++++++++++++++++++++++++++++---------------------
+ 1 file changed, 30 insertions(+), 21 deletions(-)
 
-   [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd083]
-
-The problem is that the arm64 magic is checked before the image is
-decompressed.
-
-Another issue is that the load address is read from the 'load' property
-even with a kernel_noload image. This means that the kernel is loaded
-to address 0, which may not be valid on the board. We can use the
-kernel_addr_r environment variable instead.
-
-A patch is included to show the kernel load-address, so it is easy to
-see what is going on.
-
-Changes in v2:
-- Add a 'success' case to the cover letter
-
-Simon Glass (4):
-  bootm: Allow ignoring the load address with kernel_noload
-  bootm: Move arm64-image processing later
-  image: Show the load address when decompressing
-  image: Correct load_bug typo
-
- boot/bootm.c    | 61 ++++++++++++++++++++++++++++++-------------------
- boot/image.c    | 13 +++++++----
- include/image.h |  2 +-
- 3 files changed, 48 insertions(+), 28 deletions(-)
-
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 7583be5a4515..8c35afb09937 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -245,27 +245,6 @@ static int bootm_find_os(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return 1;
+ 	}
+ 
+-	if (images.os.type == IH_TYPE_KERNEL_NOLOAD) {
+-		if (IS_ENABLED(CONFIG_CMD_BOOTI) &&
+-		    images.os.arch == IH_ARCH_ARM64 &&
+-		    images.os.os == IH_OS_LINUX) {
+-			ulong image_addr;
+-			ulong image_size;
+-
+-			ret = booti_setup(images.os.image_start, &image_addr,
+-					  &image_size, true);
+-			if (ret != 0)
+-				return 1;
+-
+-			images.os.type = IH_TYPE_KERNEL;
+-			images.os.load = image_addr;
+-			images.ep = image_addr;
+-		} else {
+-			images.os.load = images.os.image_start;
+-			images.ep += images.os.image_start;
+-		}
+-	}
+-
+ 	images.os.start = map_to_sysmem(os_hdr);
+ 
+ 	return 0;
+@@ -472,6 +451,36 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 		}
+ 	}
+ 
++	if (IS_ENABLED(CONFIG_CMD_BOOTI) &&
++	    images->os.type == IH_TYPE_KERNEL_NOLOAD &&
++	    images->os.arch == IH_ARCH_ARM64 &&
++	    images->os.os == IH_OS_LINUX) {
++		ulong relocated_addr;
++		ulong image_size;
++		int ret;
++
++		ret = booti_setup(load, &relocated_addr, &image_size,
++				  false);
++		if (ret) {
++			printf("Failed to prep arm64 kernel (err=%d)\n",
++			       ret);
++			return BOOTM_ERR_RESET;
++		}
++
++		/* Handle BOOTM_STATE_LOADOS */
++		if (relocated_addr != load) {
++			printf("Moving Image from 0x%lx to 0x%lx, end=%lx\n",
++			       load,
++				relocated_addr, relocated_addr + image_size);
++			memmove((void *)relocated_addr,
++				load_buf, image_size);
++		}
++
++		images->ep = relocated_addr;
++		images->os.start = relocated_addr;
++		images->os.end = relocated_addr + image_size;
++	}
++
+ 	lmb_reserve(&images->lmb, images->os.load, (load_end -
+ 						    images->os.load));
+ 	return 0;
 -- 
 2.42.0.869.gea05f2083d-goog
 
