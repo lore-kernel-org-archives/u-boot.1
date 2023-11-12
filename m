@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299B2C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:05:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC88EC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:05:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68FCE87469;
-	Sun, 12 Nov 2023 21:03:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC91986D62;
+	Sun, 12 Nov 2023 21:03:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AEJduyH2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hTkuy6UE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A5738710C; Sun, 12 Nov 2023 21:03:14 +0100 (CET)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 7885686BF7; Sun, 12 Nov 2023 21:03:15 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAC7487036
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00A41870F2
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-359343e399fso14454945ab.0
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:07 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7a66aa8ebb7so157692539f.3
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819386; x=1700424186; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699819385; x=1700424185; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e8MF8Lzydt+ohQrqFqr9JSjLZfgfvALPh8aBlhOYX08=;
- b=AEJduyH2sXHYOkZ0KPF/lzc+cFZYpK1Sv35FaaS429g+g/6xbGf+79a9r0nUp08RZN
- 3H0gTTXTmNuFuluL1ofGC6MscDQlr2APg3yOgNEwl2AdDf17azn8dgF2OWXEGz6Sv4tE
- NfgVsHIEUsFebtuKlu8O+EecBc7ZCkzlhrwTI=
+ bh=HFd6hA7beDzZv3TGDVaa4RewIUGPs/x0L+Qlk9OkJ1o=;
+ b=hTkuy6UE36AC09zelIFEvn75i0TMnQhQRB4fl1DJ2jDzgkGMcrPRV8BzPZEneufola
+ O17dZGRK233tZU1Sk8zkimaDUT80avpCSh+Rp0AF4H2rHiMnHzDD8bw5oT3czsq0V1mR
+ aj0CSfkTwGX/I/BJVFcqZWd7FoXMjy1sMwsCg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819386; x=1700424186;
+ d=1e100.net; s=20230601; t=1699819385; x=1700424185;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e8MF8Lzydt+ohQrqFqr9JSjLZfgfvALPh8aBlhOYX08=;
- b=USX5YVQigpeudgilqCz6BcF7EIcZbRY8TeP+Ci1nkuPvSySaproIMwmMvgCWxvQFCF
- /lc31ALWtsU3doqKT3b60NRl/kz7Yp3l3bX9bzhe5uhuvuR0cy9nWc1DgsNFX4YqUz6N
- T9HPSDwbHH/TL4hgUgDvDoyeP/hCzHUOycbwZaPLaD0uAWLJbEIUcITeH6EpHbKHH7WU
- wfuuddlpvbAgCQkFf4n00Nc+wp4x7t0fqEDWVCB6zRPsCZzMZ1fsJVDFAj4dMJLhkIuX
- 1nAoV0LHFIRRJbtL+PpeZUTdOwlq80hlDWR1tQSLvfWsrU4cSf07KTJtvIiSfSbRDR5E
- Gbpg==
-X-Gm-Message-State: AOJu0YyoZv1p2bsGaZKvce1vO1rBro44I+jOHJzY3L3DQmISXrx1ql24
- vu1+uA3RR2ZwFokeY75TOjW2WFmEJWIBrP2MU/TMVg==
-X-Google-Smtp-Source: AGHT+IGTIMRVLujxpNGQJhwMg6z7tuexvWPcCI2NX8rNmmPLew0YJ86RwmRDhlKaX87+xFbGauAnLQ==
-X-Received: by 2002:a05:6e02:164d:b0:351:ab2:2621 with SMTP id
- v13-20020a056e02164d00b003510ab22621mr9472202ilu.15.1699819386500; 
- Sun, 12 Nov 2023 12:03:06 -0800 (PST)
+ bh=HFd6hA7beDzZv3TGDVaa4RewIUGPs/x0L+Qlk9OkJ1o=;
+ b=ZkkVlihPbUEQnAUfRUHsL83n/zPP2mPz90M2eURpeqpTf6YLy9IkCxOEXZJdVXHYo+
+ ifKM4+OdOFUXRbKVN20/g0yxKtK+jgdBhvRQbwXB8IAbbor3rFreaWfV24zbLFjMfkQO
+ HYEQ4v5wM3ua4CaXsIeAJXL6w4emstIYeyEgrvSiCuNXMTKEdDJAUv4O91MTbZ8GnfLl
+ T38TJzkp1QrIrkMWqUvi4TAVOA7+xYdc5RwUeoSL0fsuyBktLQzB3BowTI15dr4r7flb
+ zIWLA8CxXeCieXE6cLh13ngUTNiUkMjGtFS+/b1DCmqBl3+6d5bIKc/8S6y59BjLsxpE
+ psVg==
+X-Gm-Message-State: AOJu0YzoxPB1toGo3W25fGNYJ3fH/Kvux9dbtma4ChrK7P2UO2F3l/xd
+ O/2vCxa3MzgdQ8avYJR6BHhOxG58TyJ9xmwCrTlOYQ==
+X-Google-Smtp-Source: AGHT+IG60AzhVD8p3p3edVSUszl24btemdoSF8v67ecHhK5mTtW0RKb3dmfK545MTJMZ6PV5jrTlRA==
+X-Received: by 2002:a05:6e02:1b0b:b0:359:4fde:628f with SMTP id
+ i11-20020a056e021b0b00b003594fde628fmr6701926ilv.24.1699819385522; 
+ Sun, 12 Nov 2023 12:03:05 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  z4-20020a923204000000b0035761b749casm1208256ile.46.2023.11.12.12.03.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 12:03:06 -0800 (PST)
+ Sun, 12 Nov 2023 12:03:05 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v4 08/12] video: Drop unnecessary truetype operations from SPL
-Date: Sun, 12 Nov 2023 13:02:45 -0700
-Message-ID: <20231112200255.172351-4-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v4 07/12] video: Correct setting of cursor position
+Date: Sun, 12 Nov 2023 13:02:44 -0700
+Message-ID: <20231112200255.172351-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112200255.172351-1-sjg@chromium.org>
 References: <20231112200255.172351-1-sjg@chromium.org>
@@ -88,63 +88,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Saving and restoring entries is used for expo and for the command line,
-which we don't use in SPL. Drop these methods.
+The ANSI codes are not correctly handled at present, in that the
+requested X position is added to the current one.
+
+Correct this and also call vidconsole_entry_start() to start a new text
+line.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Add new patch to drop unnecessary truetype operations from SPL
+ drivers/video/vidconsole-uclass.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
- drivers/video/console_truetype.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
-index 14fb81e9563c..602133575f8c 100644
---- a/drivers/video/console_truetype.c
-+++ b/drivers/video/console_truetype.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <log.h>
- #include <malloc.h>
-+#include <spl.h>
- #include <video.h>
- #include <video_console.h>
+diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
+index 22d55df71f63..a312a1985242 100644
+--- a/drivers/video/vidconsole-uclass.c
++++ b/drivers/video/vidconsole-uclass.c
+@@ -125,6 +125,7 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
+ 	priv->xcur_frac = VID_TO_POS(x);
+ 	priv->xstart_frac = priv->xcur_frac;
+ 	priv->ycur = y;
++	vidconsole_entry_start(dev);
+ }
  
-@@ -799,6 +800,9 @@ static int truetype_entry_save(struct udevice *dev, struct abuf *buf)
- 	struct console_tt_store store;
- 	const uint size = sizeof(store);
- 
-+	if (spl_phase() <= PHASE_SPL)
-+		return -ENOSYS;
+ /**
+@@ -134,8 +135,10 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
+  * @row:	new row
+  * @col:	new column
+  */
+-static void set_cursor_position(struct vidconsole_priv *priv, int row, int col)
++static void set_cursor_position(struct udevice *dev, int row, int col)
+ {
++	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
 +
  	/*
- 	 * store the whole priv structure as it is simpler that picking out
- 	 * what we need
-@@ -820,6 +824,9 @@ static int truetype_entry_restore(struct udevice *dev, struct abuf *buf)
- 	struct console_tt_priv *priv = dev_get_priv(dev);
- 	struct console_tt_store store;
+ 	 * Ensure we stay in the bounds of the screen.
+ 	 */
+@@ -144,9 +147,7 @@ static void set_cursor_position(struct vidconsole_priv *priv, int row, int col)
+ 	if (col >= priv->cols)
+ 		col = priv->cols - 1;
  
-+	if (spl_phase() <= PHASE_SPL)
-+		return -ENOSYS;
-+
- 	memcpy(&store, abuf_data(buf), sizeof(store));
+-	priv->ycur = row * priv->y_charsize;
+-	priv->xcur_frac = priv->xstart_frac +
+-			  VID_TO_POS(col * priv->x_charsize);
++	vidconsole_position_cursor(dev, col, row);
+ }
  
- 	vc_priv->xcur_frac = store.cur.xpos_frac;
-@@ -844,6 +851,9 @@ static int truetype_set_cursor_visible(struct udevice *dev, bool visible,
- 	uint out, val;
- 	int ret;
+ /**
+@@ -193,7 +194,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
+ 			int row = priv->row_saved;
+ 			int col = priv->col_saved;
  
-+	if (spl_phase() <= PHASE_SPL)
-+		return -ENOSYS;
-+
- 	if (!visible)
- 		return 0;
+-			set_cursor_position(priv, row, col);
++			set_cursor_position(dev, row, col);
+ 			priv->escape = 0;
+ 			return;
+ 		}
+@@ -255,7 +256,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
+ 		if (row < 0)
+ 			row = 0;
+ 		/* Right and bottom overflows are handled in the callee. */
+-		set_cursor_position(priv, row, col);
++		set_cursor_position(dev, row, col);
+ 		break;
+ 	}
+ 	case 'H':
+@@ -279,7 +280,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
+ 		if (col)
+ 			--col;
  
+-		set_cursor_position(priv, row, col);
++		set_cursor_position(dev, row, col);
+ 
+ 		break;
+ 	}
 -- 
 2.42.0.869.gea05f2083d-goog
 
