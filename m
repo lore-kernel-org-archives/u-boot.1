@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0783C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF7AC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:29:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23854875B6;
+	by phobos.denx.de (Postfix) with ESMTP id 9095B87654;
 	Sun, 12 Nov 2023 16:28:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F98lJkUv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MIi36tE1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D022C871AB; Sun, 12 Nov 2023 16:28:05 +0100 (CET)
+ id 272C286E24; Sun, 12 Nov 2023 16:28:06 +0100 (CET)
 Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
  [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23A1286E24
+ by phobos.denx.de (Postfix) with ESMTPS id EB1E787136
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 16:28:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7a6acc8e222so149434639f.0
+ ca18e2360f4ac-7a66aa8ebb7so151431139f.3
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 07:28:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699802881; x=1700407681; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699802882; x=1700407682; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CY7JvnhtrBCF1VR/1FE6QL52U3Wt2EQzOfBysoQ5ap4=;
- b=F98lJkUvaMGAcT6KgkO52lgPiGMdAAbHz3LdK8dRaJRlkXQsV2kUu0lpLP3XP+YIQs
- vQlskcQyZfA0CjNux06x8AzLSsDMhdZMNHbOvcGo5Ub4XvkP4n0FWW6xxVMQcUmEy+0X
- byZ8L5eLs2RnbgL89J0G4mTXTpUm8XcP5rNdw=
+ bh=rfbJRhEk6IbzobZjckV//lTNo98AUu5vKu0B4gPjAI4=;
+ b=MIi36tE19Rb7MMiQkUCJkQN4GLLOpmiTp7rbW2r4NzZeVAQkrr9u+X912eBQjxKxGQ
+ aAzQuecot0W016P5bKB+lpWV8BKmHl6mdOtiFbQlIIWti3q+v51I9zp1RXkLj+hH30S4
+ LCy+38AiLI3VYuEJbzobyTg09dsWZL2PLpGF0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699802881; x=1700407681;
+ d=1e100.net; s=20230601; t=1699802882; x=1700407682;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CY7JvnhtrBCF1VR/1FE6QL52U3Wt2EQzOfBysoQ5ap4=;
- b=inbfRNY5/8jVH3Nafp+7zAGbxCIPbvaqoefE96U1LuuHwX8qedBw1OdgTbRCiyQ05P
- yKMIUp8WkN0JiM3FPTZCGz6lbmSQqAWwDpCeFTbAtuSpcrbpfWggfk5G15favRyQIlCC
- Q9cakn8S3YMQcpWzafo2j3VAvMyKisXPzZ/9Usqyx9dbfOlVaAlKSPSpVLTmXFNCL2uz
- voD5Ut0xW0fv6lBiLvktOskFryAUhFUFpkMrpj3isfz1+LWEYqWIrfCYAYunHT7hhBzI
- FIPsE/AoZ5g5xOMyATLBGtBqJj85RE75CNVMI6JucO6Z8gOpMzUWj3r7BsJk/mm06ktP
- 3aOw==
-X-Gm-Message-State: AOJu0YwWkm5W9U4mBlFccrQBuTm8ZYrUsWfRRbDBcu0l8wRWj1plmuEh
- 8fq0znYt3BvzbwUjQLSLyFFB3DKC/Ij2b/fKjn4FQw==
-X-Google-Smtp-Source: AGHT+IEk70jo69jj9eoanKGZ9ZR2u27aZtIvyYBWvjVAbcZclCzL2CQGLtFPQ+DLJRsoQpmvyaRoIQ==
-X-Received: by 2002:a5d:9282:0:b0:798:3cb5:ad30 with SMTP id
- s2-20020a5d9282000000b007983cb5ad30mr5766112iom.7.1699802881714; 
- Sun, 12 Nov 2023 07:28:01 -0800 (PST)
+ bh=rfbJRhEk6IbzobZjckV//lTNo98AUu5vKu0B4gPjAI4=;
+ b=RRw7tX5oYfXgkyfJBxx2e6Gsb6jF4PXFjdEeBswX7KxGtqOXxXDXXvUYC+QI6vkr2G
+ M8OJy22qJ+GvsENye6caOqMyZ7Yl3lzV39nWj0fDuI14D3BrQpuE25gmg120jF5dQ+hf
+ MiuKCHsklEPkSN6KfloK0CAd96IvqXvTrFNSCLCr657Ig9CNswJnqEpgxJr2wInftAX5
+ F//mUTHq3fflvxm/RldKpIJKtWS6/AGAYhPO+M/E93NNPMtu2OK9oAe8T+8JAD7G7U8j
+ 9YOtNQ97UebDtQv4qnsgaRU6FFXVSMErT3/bfLFYfHo0/eBx0KxDviuIvWUr8Qs3BrJm
+ Skpg==
+X-Gm-Message-State: AOJu0Yzucxz/kbh0HHg5oQpbV8RoRKmNY6FGCUqK77lNDPqrM9cFOj2o
+ TLgj0urGBvHVm+5jW9NmrJn+XyK2pnRLk1P79TJLUQ==
+X-Google-Smtp-Source: AGHT+IGn81gn5AjhpVRuvyzVk89uMXfhJboFAxGCimArDn9xSqoUp0Tz1uk4P8YWvpWYo9CDxhvhuw==
+X-Received: by 2002:a05:6602:107:b0:7a9:96aa:e01b with SMTP id
+ s7-20020a056602010700b007a996aae01bmr4806907iot.20.1699802882545; 
+ Sun, 12 Nov 2023 07:28:02 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- 76-20020a6b144f000000b0079fdbe2be51sm1226241iou.2.2023.11.12.07.28.00
+ 76-20020a6b144f000000b0079fdbe2be51sm1226241iou.2.2023.11.12.07.28.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 07:28:01 -0800 (PST)
+ Sun, 12 Nov 2023 07:28:02 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Edmond <seanedmond@microsoft.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Andy Fleming <afleming@gmail.com>,
- Jerry Van Baren <vanbaren@cideas.com>, Mario Six <mario.six@gdsys.cc>,
+ Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Safae Ouajih <souajih@baylibre.com>,
- Stefan Roese <sr@denx.de>, Wolfgang Denk <wd@denx.de>
-Subject: [PATCH 4/7] fdt: ppc: Drop extra size for ramdisk
-Date: Sun, 12 Nov 2023 08:27:47 -0700
-Message-ID: <20231112152754.130399-5-sjg@chromium.org>
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH 5/7] boot: Move adding initrd earlier in image_setup_libfdt()
+Date: Sun, 12 Nov 2023 08:27:48 -0700
+Message-ID: <20231112152754.130399-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112152754.130399-1-sjg@chromium.org>
 References: <20231112152754.130399-1-sjg@chromium.org>
@@ -92,48 +90,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This code dates from around 2008:
-
-   56844a22b76 powerpc: Fix bootm to boot up again with a Ramdisk
-
-Since then we have added FDT relocation which provides enough space
-for expansion. We have also added all sorts of fixups earlier in
-image_setup_libfdt() which require more space, with ramdisk being the
-least of them.
-
-Therefore this extra hack for ramdisk seems unnecessary. Drop it.
+This may as well happen before the general event is emitted, so move it.
+This will allow us to use the livetree for the event part, but the
+flattree for the earlier part.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/image-fdt.c | 7 -------
- 1 file changed, 7 deletions(-)
+ boot/image-fdt.c      |  5 ++++-
+ include/fdt_support.h | 12 +++++++++++-
+ 2 files changed, 15 insertions(+), 2 deletions(-)
 
 diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 54d219da7da1..408369d489ca 100644
+index 408369d489ca..ac7dc055cc9c 100644
 --- a/boot/image-fdt.c
 +++ b/boot/image-fdt.c
-@@ -24,9 +24,6 @@
- #include <dm/ofnode.h>
- #include <tee/optee.h>
+@@ -664,6 +664,10 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
+ 			goto err;
+ 		}
+ 	}
++
++	if (fdt_initrd(blob, *initrd_start, *initrd_end))
++		goto err;
++
+ 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
+ 		struct event_ft_fixup fixup;
  
--/* adding a ramdisk needs 0x44 bytes in version 2008.10 */
--#define FDT_RAMDISK_OVERHEAD	0x80
--
- DECLARE_GLOBAL_DATA_PTR;
- 
- static void fdt_error(const char *msg)
-@@ -692,10 +689,6 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
- 		goto err;
- 	of_size = ret;
- 
--	if (*initrd_start && *initrd_end) {
--		of_size += FDT_RAMDISK_OVERHEAD;
--		fdt_set_totalsize(blob, of_size);
--	}
- 	/* Create a new LMB reservation */
+@@ -693,7 +697,6 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob,
  	if (lmb)
  		lmb_reserve(lmb, (ulong)blob, of_size);
+ 
+-	fdt_initrd(blob, *initrd_start, *initrd_end);
+ 	if (!ft_verify_fdt(blob))
+ 		goto err;
+ 
+diff --git a/include/fdt_support.h b/include/fdt_support.h
+index 791258ec7eff..bc249b045302 100644
+--- a/include/fdt_support.h
++++ b/include/fdt_support.h
+@@ -57,7 +57,17 @@ int fdt_chosen(void *fdt);
+ /**
+  * Add initrd information to the FDT before booting the OS.
+  *
+- * @param fdt		FDT address in memory
++ * Adds linux,initrd-start and linux,initrd-end properties to the /chosen node,
++ * creating it if necessary.
++ *
++ * A memory reservation for the ramdisk is added to the FDT, or an existing one
++ * (with matching @initrd_start) updated.
++ *
++ * If @initrd_start == @initrd_end this function does nothing and returns 0.
++ *
++ * @fdt: Pointer to FDT in memory
++ * @initrd_start: Start of ramdisk
++ * @initrd_end: End of ramdisk
+  * Return: 0 if ok, or -FDT_ERR_... on error
+  */
+ int fdt_initrd(void *fdt, ulong initrd_start, ulong initrd_end);
 -- 
 2.42.0.869.gea05f2083d-goog
 
