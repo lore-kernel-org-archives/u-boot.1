@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B28B2C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 14:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55B6C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9A4B87129;
-	Sun, 12 Nov 2023 15:53:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C3A287049;
+	Sun, 12 Nov 2023 16:02:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="U1TXj37N";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UtvPwefJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E88578716C; Sun, 12 Nov 2023 15:53:12 +0100 (CET)
+ id 10A82870E1; Sun, 12 Nov 2023 16:01:59 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80C9C86F68
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 15:53:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4819786F68
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 16:01:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,29 +28,29 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1699800781;
- bh=kf7cwuEhW1j30XFYNLnUC2h9JO5tc6kbffEl0zTKi9Q=;
- b=U1TXj37Np+gwMGptnCQFv1dgpZNj5ASYLJO7inaEuKhmhuuQfRiom4IQc1xokgeKWuLfWIqJF
- CHHIsk9GX9WvwPLgvdutCLHTv6qwdIYtMhhlevxNtmLRbHVDZJCe0tWxL4fDqo+sKVj1CvhixDk
- xuaWDKUWn6FjUqQIq6OiZ+9QuLk1mys506c46TfGuAE3sRJVGRsM9T/4zyFJhdVtvK4rkZ9dTmy
- UXla4tjmEWqbueSOnsc3C/XzO1pJV3WwpMIN7bBT5p07epOacpv0xaRqgjy5XqEPnDsHRFD0K21
- k/7sNouId1VFtSbHx60hMsZXT4OtquJoWFJTfYC/Katw==
-Message-ID: <8f25cd25-e090-46b4-8088-0103cf79862b@kwiboo.se>
-Date: Sun, 12 Nov 2023 15:52:55 +0100
+ s=fe-e1b5cab7be; t=1699801310;
+ bh=XfsNmGVEVWv/WncOVoMaXd7CE55stGUsDnX9Wxhadck=;
+ b=UtvPwefJ+rCDwaEzzCvweV527qvHM5Rk7Eo7otmMyjAnxzdnEf2tO9G/yGo+qLsaQmVCjkrVt
+ 0ClrhhDNnNqS74QPBsBEp55itQjGhS1v28J0149bkU1MSUbfaRu+NjoKXmbnkflOGWHs5ZgZngC
+ RdNa1EnrCwVOM+MR6dJsPDUOzPsQ0t2nQD6ptuI/CkRptVa8JcdICwJN7P9fPGdxxgwmjg3EPZO
+ vtsT5AXQQvKrD4BnCx3WY7TePFe8K+iWc5zFCkORPHt/N87YIU09uxf2+4Mv3ERPQ6LFHOEUBK5
+ bkS3iRRuGfAryAFvVRXgVCiUvgqt6V7BHRHRxsNnRliA==
+Message-ID: <ebcb92c8-f710-490a-a3a3-a97a52118608@kwiboo.se>
+Date: Sun, 12 Nov 2023 16:01:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] configs: rockpro64: Enable SPI command and full BOOTSTD
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Shantur Rathore <i@shantur.com>, kever.yang@rock-chips.com,
- philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+To: Shantur Rathore <i@shantur.com>
+Cc: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ u-boot@lists.denx.de
 References: <20231111001329.537704-1-i@shantur.com>
  <d1e624f3-d761-4822-bcb4-f81ab4d78663@kwiboo.se>
  <CABEcMwVD_Hs5aMJZaF_Ym785yrLsw6KBxnB_E4KCD=nJASR6YQ@mail.gmail.com>
  <e1fec775-6806-4fe2-af44-f930ebb62932@kwiboo.se>
- <CAPnjgZ18x+j11doAJtEg93ueL+ayC2HqtRm+BeG9XSNkWx-9Hw@mail.gmail.com>
+ <CABEcMwVgnRYd3bSRTY3sUsa=igTsQroEMxCtVjO8ApidigMHHQ@mail.gmail.com>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAPnjgZ18x+j11doAJtEg93ueL+ayC2HqtRm+BeG9XSNkWx-9Hw@mail.gmail.com>
+In-Reply-To: <CABEcMwVgnRYd3bSRTY3sUsa=igTsQroEMxCtVjO8ApidigMHHQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
@@ -59,7 +59,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6550e6ccea828730b5a5f6e2
+X-ForwardEmail-ID: 6550e8dd8469ac5b6adf71ef
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,12 +76,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Shantur,
 
-On 2023-11-12 15:22, Simon Glass wrote:
-> Hi Jonas,
+On 2023-11-12 15:21, Shantur Rathore wrote:
+> Hey Jonas,
 > 
-> On Sun, 12 Nov 2023 at 05:50, Jonas Karlman <jonas@kwiboo.se> wrote:
+>> For normal generic use the full bootstd commands should not be needed,
+>> do you have special scripting requirements that require access to full
+>> bootstd commands?
+>>
+>> All rockchip boards use standard boot, this only enables full commands
+>> for one particular board, why is this board special? Or
+> 
+> This board isn't special.
+> 
+>> is there merit
+>> to imply enable of full commands for all rockchip boards?
+> 
+> Maybe not only on rockchip boards but all boards.
+> 
+> Do we need full commands in general ? - Maybe not
+> 
+> Then why did you need to enable full commands ?
+> Bootstd works when the distro used is supporting it. In my case when I
+> installed the distro (Armbian), EFI was installed to
+> /boot/efi/EFI/debian by default instead of /boot/efi/EFI/boot as
+> expected by Bootstd.
+> Bootstd couldn't find the EFI and failed to boot. In this scenario
+> there is no way to figure out what's going on, what bootmethods /
+> bootflows is bootstd able to find or try to manually boot some.
+> To be able to support the smallest bit of debugging you end up
+> building U-Boot from scratch to enable bootstd full for bootstd info
+> commands.
+> All other commands in U-boot by default come with options to display
+> more information ( for ex. nvme info, nvme detail, usb tree, usb info,
+> usb dev, fatinfo and many more ) then why is bootstd restricted?
+> Thus, in my opinion we should enable BOOTSTD_FULL for users to be able
+> to see more information.
+> Restricting might be beneficial for end user devices but atleast
+> development devices like RockPro64 should come with BOOTSTD_FULL by
+> default.
+
+Thanks for clarifying the need! And I also see the benefit of having
+full feature commands enabled.
+
+For RK35xx family of devices I have tried to ensure all boards have same
+features and sounds like something like below could benefit all rk
+boards, or at least for ROCKCHIP_RK3568 and ROCKCHIP_RK3588 boards.
+
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index c39ae40335a0..07e93a9c7ad5 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1987,6 +1987,7 @@ config ARCH_ROCKCHIP
+        imply CMD_DM
+        imply DEBUG_UART_BOARD_INIT
+        imply BOOTSTD_DEFAULTS
++       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
+        imply FAT_WRITE
+        imply SARADC_ROCKCHIP
+        imply SPL_SYSRESET
+
+
+Regards,
+Jonas
+
+> 
+> Kind regards,
+> Shantur
+> 
+> On Sun, Nov 12, 2023 at 12:50 PM Jonas Karlman <jonas@kwiboo.se> wrote:
 >>
 >> Hi Shantur,
 >>
@@ -124,33 +189,6 @@ On 2023-11-12 15:22, Simon Glass wrote:
 >> All rockchip boards use standard boot, this only enables full commands
 >> for one particular board, why is this board special? Or is there merit
 >> to imply enable of full commands for all rockchip boards?
-> 
-> I suppose we do this in a lot of cases, where we enable commands and
-> other features on various boards. So I don't have any objection to
-> this. Certainly it is a pain to use bootstd for development and
-> debugging of booting if you cannot use the full command set.
-
-I have no particular objection either, I just want to understand the
-need, and if this is something we should apply to more boards.
-
-For RK35xx family of devices I have tried to ensure all boards have
-similar commands and features enabled, at least for the features the
-board support. So my thought now is if we should imply this Kconfig
-option for ROCKCHIP_RK3568 and ROCKCHIP_RK3588.
-
-Use of different features is also rather annoying for a distro that
-wants to support a broad range of devices of a soc family, and U-Boot
-for boards of the same soc family behave differently.
-
-Regards,
-Jonas
-
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Regards,
-> Simon
-> 
 >>
 >> Regards,
 >> Jonas
