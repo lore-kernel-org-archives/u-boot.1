@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E888C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31436C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:04:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 090A487457;
+	by phobos.denx.de (Postfix) with ESMTP id 78B0C87465;
 	Sun, 12 Nov 2023 21:03:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H9i9VuVT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dO6eYd7N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 890CA87125; Sun, 12 Nov 2023 21:03:12 +0100 (CET)
+ id A369F870EE; Sun, 12 Nov 2023 21:03:12 +0100 (CET)
 Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
  [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4C62871BE
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC7C186D62
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3594149e3a1so14406765ab.1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:05 -0800 (PST)
+ e9e14a558f8ab-3574297c79eso15398565ab.1
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819384; x=1700424184; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699819380; x=1700424180; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LXEvcVjHJyF3Yf96QZ3xfTiUxYbjWWgg/ZpoybYwGjs=;
- b=H9i9VuVT4M38B2wzE4b6A3vkBDm+Zq4o7umqz7Xd+tsjN/sTsG/OC6Fodc3McSY1kp
- KxjAAS0eogaBtej7gHssIPYtvks9xtcAq1i+RNamNCjkk4av7KvaeW7Zb0dZb0AIzy0x
- jwdtF0VVYWqOGjwQQULPDZkKaK27IkSloc3W4=
+ bh=+Vv+oHXhVqrnffyxE7LqM15H6Rx8JP62jtp9TEOnXqk=;
+ b=dO6eYd7NgOYI/kIHcBvO6W/BqYTt85fJeJWrb127nKKdw2p8tt0avABQ7pUoRm5pPv
+ 87M7fbDTIgSCUXKWONeki31EHlF2Y+rOf8SwP4R7X8Ba0hLhMHJCmcHL4RuESuclInAM
+ +3AlQafe/IWu2rMZs2k1ifAX6iJbQUUG7UVFY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819384; x=1700424184;
+ d=1e100.net; s=20230601; t=1699819380; x=1700424180;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LXEvcVjHJyF3Yf96QZ3xfTiUxYbjWWgg/ZpoybYwGjs=;
- b=mXa6yafPSLU8CTRq+Aa8BRXRzIVKPgA/bpAKvZMACHcoJBznPILr4M4egqLB2/TAeq
- kd32JPGvib8YVAABmU3xLq3un5B4m7LfgcaH5tK+fm/be18d1BASpanWN7IZVA1e6hKA
- +wVD+sTzDAspvG/iM3xtZ90wqj1yhYWaEAUcEG/dJGh3xHiM9ONECuePNbxywnCUbVDs
- YcS63ccSmd+49LH5CAylPu/VyHKMul6qg3rsB/UaxS5GnhN5SEhHkZlB95ADcb8JJc7Z
- uakIYtGcM21lVq5Wned8uibmNAXoMqjYRvaLnAkySuNhExYlPijd0RRIrM2cw+zq4OrL
- Uxlg==
-X-Gm-Message-State: AOJu0Yyd4uJT3AxApHgbgdo9OTXnC7jJuJU+/vHLwrwvEqQ8nSD+wsNM
- Z70kabTQ7CJlCA/OvWVV3nTqE6Rs9OuWdY8EgJZoTA==
-X-Google-Smtp-Source: AGHT+IH248UlIqysJKPZFsxUXEjeSW5OuTsm40coHkUi9pMnHTRzKd1IZ1oLml7PSarDJiWUHZe0cg==
-X-Received: by 2002:a92:ca4e:0:b0:359:506f:c0e4 with SMTP id
- q14-20020a92ca4e000000b00359506fc0e4mr9659003ilo.17.1699819384030; 
- Sun, 12 Nov 2023 12:03:04 -0800 (PST)
+ bh=+Vv+oHXhVqrnffyxE7LqM15H6Rx8JP62jtp9TEOnXqk=;
+ b=xDxSYSQLOxIYwne6TglNwDC1hpdSiucS4GzzvWTaIpHrk5xdkOdqt4X2GYM8MXlug+
+ tlWm03ffLysCuD9okRoQqOKpZc0xE19G/u7uo1fCdVjvABaPhG5wCJJNZYjFM4pR+v8g
+ 2vCvmGuU3e0/1k0g20p0Ajmdx4Ggl4fdxvuUxLDIlfx2QPAqsyQ50MyzIfjSNC68O/eQ
+ nijH2w0IBiTpC1jmybrJtQPaQNgc5wD2+3CqlIHthUmxfeOIAmm44oca/4u8axmGYQIM
+ KCE5FmYibzvS/kACXW6GP0Ht1L2g9i9nybCSoBgB1K/CtgRehdTJaZ3k3cF8jh1OrYVQ
+ coZg==
+X-Gm-Message-State: AOJu0YwsF3eUEuMPAzSR+l4XCLLj8xqjJEQwqKQDoCS1OR6o4TWtkXYX
+ etM9BsiG/pKl0cr4F6nZu4bKKD/xjrwPc68v9XKVFQ==
+X-Google-Smtp-Source: AGHT+IGT5sJY5kYo3r9gxCEnc4Ukan0dwTZVlF59DHrSbVgRIk2p3PGzttsIU9ypmmZ5KHmdxeRAwQ==
+X-Received: by 2002:a05:6e02:1d1e:b0:351:5acb:281 with SMTP id
+ i30-20020a056e021d1e00b003515acb0281mr6941514ila.31.1699819380418; 
+ Sun, 12 Nov 2023 12:03:00 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- z4-20020a923204000000b0035761b749casm1208256ile.46.2023.11.12.12.03.03
+ z4-20020a923204000000b0035761b749casm1208256ile.46.2023.11.12.12.02.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 12:03:03 -0800 (PST)
+ Sun, 12 Nov 2023 12:03:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Alexander Graf <agraf@csgraf.de>, Anatolij Gustschin <agust@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH v4 05/12] usb: Avoid unbinding devices in use by bootflows
-Date: Sun, 12 Nov 2023 13:02:42 -0700
-Message-ID: <20231112130245.v4.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH v4 01/12] efi: Correct handling of frame buffer
+Date: Sun, 12 Nov 2023 13:02:38 -0700
+Message-ID: <20231112130245.v4.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112200255.172351-1-sjg@chromium.org>
 References: <20231112200255.172351-1-sjg@chromium.org>
@@ -95,139 +90,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a USB device is unbound, it causes any bootflows attached to it to
-be removed, via a call to bootdev_clear_bootflows() from
-bootdev_pre_unbind(). This obviously makes it impossible to boot the
-bootflow.
+The efi_gop driver uses private fields from the video uclass to obtain a
+pointer to the frame buffer. Use the platform data instead.
 
-However, when booting a bootflow that relies on USB, usb_stop() is
-called, which unbinds the device. For EFI, this happens in
-efi_exit_boot_services() which means that the bootflow disappears
-before it is finished with.
+Check the VIDEO_COPY setting to determine which frame buffer to use. Once
+the next stage is running (and making use of U-Boot's EFI boot services)
+U-Boot does not handle copying from priv->fb to the hardware framebuffer,
+so we must allow EFI to write directly to the hardware framebuffer.
 
-There is no need to unbind all the USB devices just to quiesce them.
-Add a new usb_pause() call which removes them but leaves them bound.
-
-This resolves a hang on x86 when booting a distro from USB. This was
-found using a device with 4 bootflows, the last of which was USB.
-
+We could provide a function to read this, but it seems better to just
+document how it works. The original change ignored an explicit comment
+in the video.h file ("Things that are private to the uclass: don't use
+these in the driver") which is why this was missed when the VIDEO_COPY
+feature was added.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-Changes in v4:
-- Don't rename the legacy-USB functions
-- Add a bit more detail to the comment
+(no changes since v2)
 
 Changes in v2:
-- Add new patch to avoid unbinding devices in use by bootflows
+- Rebase to -next
+- Add some more comments to the header file
+- Add fixes tag
 
- boot/bootm.c                  |  2 +-
- common/usb.c                  |  5 +++++
- drivers/usb/host/usb-uclass.c | 14 ++++++++++++--
- include/usb.h                 | 21 ++++++++++++++++++++-
- 4 files changed, 38 insertions(+), 4 deletions(-)
+ include/video.h          |  9 ++++++---
+ lib/efi_loader/efi_gop.c | 12 +++++++-----
+ 2 files changed, 13 insertions(+), 8 deletions(-)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index cb61485c226c..d9c3fa8dad99 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -502,7 +502,7 @@ ulong bootm_disable_interrupts(void)
- 	 * updated every 1 ms within the HCCA structure in SDRAM! For more
- 	 * details see the OpenHCI specification.
- 	 */
--	usb_stop();
-+	usb_pause();
- #endif
- 	return iflag;
- }
-diff --git a/common/usb.c b/common/usb.c
-index 836506dcd9e9..a486d1c87d4d 100644
---- a/common/usb.c
-+++ b/common/usb.c
-@@ -144,6 +144,11 @@ int usb_stop(void)
- 	return 0;
- }
- 
-+int usb_pause(void)
-+{
-+	return usb_stop();
-+}
-+
- /******************************************************************************
-  * Detect if a USB device has been plugged or unplugged.
+diff --git a/include/video.h b/include/video.h
+index 5048116a3d57..4d8df9baaada 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -21,9 +21,12 @@ struct udevice;
+  * @align: Frame-buffer alignment, indicating the memory boundary the frame
+  *	buffer should start on. If 0, 1MB is assumed
+  * @size: Frame-buffer size, in bytes
+- * @base: Base address of frame buffer, 0 if not yet known
+- * @copy_base: Base address of a hardware copy of the frame buffer. See
+- *	CONFIG_VIDEO_COPY.
++ * @base: Base address of frame buffer, 0 if not yet known. If CONFIG_VIDEO_COPY
++ *	is enabled, this is the software copy, so writes to this will not be
++ *	visible until vidconsole_sync_copy() is called. If CONFIG_VIDEO_COPY is
++ *	disabled, this is the hardware framebuffer.
++ * @copy_base: Base address of a hardware copy of the frame buffer. If
++ *	CONFIG_VIDEO_COPY is disabled, this is not used.
+  * @copy_size: Size of copy framebuffer, used if @size is 0
+  * @hide_logo: Hide the logo (used for testing)
   */
-diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-index a1cd0ad2d669..c26c65d7986b 100644
---- a/drivers/usb/host/usb-uclass.c
-+++ b/drivers/usb/host/usb-uclass.c
-@@ -173,7 +173,7 @@ int usb_get_max_xfer_size(struct usb_device *udev, size_t *size)
- 	return ops->get_max_xfer_size(bus, size);
+diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
+index 778b693f983a..a09db31eb465 100644
+--- a/lib/efi_loader/efi_gop.c
++++ b/lib/efi_loader/efi_gop.c
+@@ -10,6 +10,7 @@
+ #include <efi_loader.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <mapmem.h>
+ #include <video.h>
+ #include <asm/global_data.h>
+ 
+@@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
+ 	struct efi_gop_obj *gopobj;
+ 	u32 bpix, format, col, row;
+ 	u64 fb_base, fb_size;
+-	void *fb;
+ 	efi_status_t ret;
+ 	struct udevice *vdev;
+ 	struct video_priv *priv;
++	struct video_uc_plat *plat;
+ 
+ 	/* We only support a single video output device for now */
+ 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
+@@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
+ 	format = priv->format;
+ 	col = video_get_xsize(vdev);
+ 	row = video_get_ysize(vdev);
+-	fb_base = (uintptr_t)priv->fb;
+-	fb_size = priv->fb_size;
+-	fb = priv->fb;
++
++	plat = dev_get_uclass_plat(vdev);
++	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
++	fb_size = plat->size;
+ 
+ 	switch (bpix) {
+ 	case VIDEO_BPP16:
+@@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
+ 	}
+ 	gopobj->info.pixels_per_scanline = col;
+ 	gopobj->bpix = bpix;
+-	gopobj->fb = fb;
++	gopobj->fb = map_sysmem(fb_base, fb_size);
+ 
+ 	return EFI_SUCCESS;
  }
- 
--int usb_stop(void)
-+static int usb_finish(bool unbind_all)
- {
- 	struct udevice *bus;
- 	struct udevice *rh;
-@@ -195,7 +195,7 @@ int usb_stop(void)
- 
- 		/* Locate root hub device */
- 		device_find_first_child(bus, &rh);
--		if (rh) {
-+		if (rh && unbind_all) {
- 			/*
- 			 * All USB devices are children of root hub.
- 			 * Unbinding root hub will unbind all of its children.
-@@ -222,6 +222,16 @@ int usb_stop(void)
- 	return err;
- }
- 
-+int usb_stop(void)
-+{
-+	return usb_finish(true);
-+}
-+
-+int usb_pause(void)
-+{
-+	return usb_finish(false);
-+}
-+
- static void usb_scan_bus(struct udevice *bus, bool recurse)
- {
- 	struct usb_bus_priv *priv;
-diff --git a/include/usb.h b/include/usb.h
-index 09e3f0cb309c..b964e2e1f6b2 100644
---- a/include/usb.h
-+++ b/include/usb.h
-@@ -265,7 +265,26 @@ int usb_kbd_deregister(int force);
-  */
- int usb_init(void);
- 
--int usb_stop(void); /* stop the USB Controller */
-+/**
-+ * usb_stop() - stop the USB Controller and unbind all USB controllers/devices
-+ *
-+ * This unbinds all devices on the USB buses.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int usb_stop(void);
-+
-+/**
-+ * usb_pause() - stop the USB Controller DMA, etc.
-+ *
-+ * Note that this does not unbind bus devices, so using usb_init() after this
-+ * call is not permitted. This function is only useful just before booting, to
-+ * ensure that devices are dormant.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int usb_pause(void);
-+
- int usb_detect_change(void); /* detect if a USB device has been (un)plugged */
- 
- 
 -- 
 2.42.0.869.gea05f2083d-goog
 
