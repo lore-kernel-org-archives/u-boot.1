@@ -4,68 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 955B2C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 21:23:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3B3C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 21:26:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC471871D7;
-	Sun, 12 Nov 2023 22:23:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 247B587136;
+	Sun, 12 Nov 2023 22:26:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MhNW9zLK";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71B75871DE; Sun, 12 Nov 2023 22:23:36 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95D75871CF
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 22:23:34 +0100 (CET)
+ id 54CFE86E24; Sun, 12 Nov 2023 22:26:17 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4AC8687282
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 22:26:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9de7a43bd1aso545046266b.3
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 13:23:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699824214; x=1700429014; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5GXwIF4XRYw+xUTiClQ+eEnVJwG/sKT4tclD15nPtS0=;
- b=MhNW9zLKZ6FyD+P5tqM6QkBnEBlFeip6SlpfZF+rnk2q9VuqZ05RQQNoepqK57TfXd
- DNsIyMpzen4k2DdGDwS+xuKoyLDrrsCImLtTxz+QcTHG4aBpWRFvoTT+jyWjSNkj+3t6
- Zxt2y5Msv4+TH7d1ZMo/uG2TfngbyZaG+b/Yc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699824214; x=1700429014;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5GXwIF4XRYw+xUTiClQ+eEnVJwG/sKT4tclD15nPtS0=;
- b=BVIWp/P7G3ZsspqJxQ7bytOUA+jGEeOT+wzwdwzFPg/whW1qPevmY2BiEWDWTl2MOO
- kZHNkwZsiyPPU6qvaxANGVn1R4rphTdj3aILE8zrIyngr1DngtUgZ6ma+ZsdGFdKWwRQ
- Tl1ik0wRsQAneeArz15W1yEyui9KxMBl5RRzFAx1oswTyqJbN9FwO8PdUWxyDvp5CIYq
- kC3N75VwRMzoyAuY2mIJ0Zu2qqGr7rGCOKBLiQAXi49ccX0W/v9osV0kYN1DxhmUQ8X/
- NoxCHbAqZcdieeQstrhD1788ArnfNGJAaFdQNmIxseF2VtyD9GPxQmCD2FW23j4RHzqh
- PL8A==
-X-Gm-Message-State: AOJu0YzaHi5BgTZZUquCmYHqrtni5Vxwyeou3WIbz6fPTCXRxXou70Fr
- Pvmvr/Bta9nSlJ53lYRKnSe2EXZDd4i8OxHvS8k9My449L3m7KXo6LQ=
-X-Google-Smtp-Source: AGHT+IGuREFY9WPfaFzA4ISRlrWacv8REpnCtAn0VSgl0x3LO1cgAKERT0e3oY71leHroHd81rs1+R/GOvrIRmwA3M4=
-X-Received: by 2002:a17:906:2587:b0:9dd:7133:881 with SMTP id
- m7-20020a170906258700b009dd71330881mr3865582ejb.40.1699824213925; Sun, 12 Nov
- 2023 13:23:33 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5A27CDA7;
+ Sun, 12 Nov 2023 13:26:57 -0800 (PST)
+Received: from localhost.localdomain (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 144EF3F641;
+ Sun, 12 Nov 2023 13:26:10 -0800 (PST)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Ludwig Kormann <ludwig.kormann@ict42.de>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Pull request: u-boot-sunxi/master for 2024.01
+Date: Sun, 12 Nov 2023 21:24:50 +0000
+Message-Id: <20231112212450.882-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.35.8
 MIME-Version: 1.0
-References: <20231111142846.180442-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ0J+HDnEh+pHJCZNsqqhwP33Xi+8=rUOJPG1m1WBXU+9g@mail.gmail.com>
- <CAM=mAOmhuBM-uN=ioZXP5TmAhMnO4Y80koxKYm0CF9nxfbWBhA@mail.gmail.com>
-In-Reply-To: <CAM=mAOmhuBM-uN=ioZXP5TmAhMnO4Y80koxKYm0CF9nxfbWBhA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 14:23:22 -0700
-Message-ID: <CAPnjgZ1MTt=SkPshR22HW9HFAk4xmtE7tg=p08yNg+WFU=A7UQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] acpi: cannot have RSDT above 4 GiB
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,113 +55,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sun, 12 Nov 2023 at 13:16, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
->
->
-> Simon Glass <sjg@chromium.org> schrieb am So., 12. Nov. 2023, 21:03:
->>
->> Hi Heinrich,
->>
->> On Sat, 11 Nov 2023 at 07:28, Heinrich Schuchardt
->> <heinrich.schuchardt@canonical.com> wrote:
->> >
->> > The field RsdtAddress has only 32 bit. The RSDT table cannot be located
->> > beyond 4 GiB.
->> >
->> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> > ---
->> >  lib/acpi/base.c | 26 +++++++++++++++++++-------
->> >  1 file changed, 19 insertions(+), 7 deletions(-)
->>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->> nits / question below
->>
->> >
->> > diff --git a/lib/acpi/base.c b/lib/acpi/base.c
->> > index 2057bd2bef..128a76ad39 100644
->> > --- a/lib/acpi/base.c
->> > +++ b/lib/acpi/base.c
->> > @@ -21,10 +21,17 @@ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct acpi_rsdt *rsdt,
->> >         memcpy(rsdp->signature, RSDP_SIG, 8);
->> >         memcpy(rsdp->oem_id, OEM_ID, 6);
->> >
->> > -       rsdp->length = sizeof(struct acpi_rsdp);
->> > -       rsdp->rsdt_address = map_to_sysmem(rsdt);
->> > +       if (rsdt)
->> > +               rsdp->rsdt_address = map_to_sysmem(rsdt);
->> > +       else
->> > +               rsdp->rsdt_address = 0;
->>
->> There is a memset() at the top so this line (and the one below) should
->> not be needed.
->>
->> > +
->> > +       if (xsdt)
->> > +               rsdp->xsdt_address = map_to_sysmem(xsdt);
->> > +       else
->> > +               rsdp->xsdt_address = 0;
->> >
->> > -       rsdp->xsdt_address = map_to_sysmem(xsdt);
->> > +       rsdp->length = sizeof(struct acpi_rsdp);
->> >         rsdp->revision = ACPI_RSDP_REV_ACPI_2_0;
->> >
->> >         /* Calculate checksums */
->> > @@ -68,11 +75,15 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
->> >  static int acpi_write_base(struct acpi_ctx *ctx,
->> >                            const struct acpi_writer *entry)
->> >  {
->> > -       /* We need at least an RSDP and an RSDT Table */
->> > +       /* We need at least an RSDP and an XSDT Table */
->> >         ctx->rsdp = ctx->current;
->> >         acpi_inc_align(ctx, sizeof(struct acpi_rsdp));
->> > -       ctx->rsdt = ctx->current;
->> > -       acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
->> > +       if (map_to_sysmem(ctx->current) < UINT_MAX - 0x10000) {
->>
->> Won't that do something different on 64-bit machines? It seems that
->> you want to check against SZ_4G ?
->
->
-> For gcc int is 32bit on 64bit systems, so is UINT_MAX. Using SZ_4G could make this code clearer.
+please pull some more sunxi changes for this cycle:
 
-Oh I didn't know that...I just assumed that uint would be 64-bit on a
-64-machine machine, since it is the natural reg size! Yes, that is
-very very confusing. I vaguely recall some compiler setting for that
-and that Linux did it a particular way.
+the first few patches are some easy refactorings and fixes, most of them
+actually don't change the generated binaries at all. Then there is a
+defconfig for a new board, for which we just gained the .dts file from
+the last kernel DT sync.
+On top there is support for a new PMIC (AXP313), and LPDDR4 support for
+the Allwinner H616 SoC, both of which are needed to support new devices
+that appeared lately, especially cheap TV boxes.
 
->
-> Best regards
->
-> Heinrich
->
->
->>
->> > +               ctx->rsdt = ctx->current;
->> > +               acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
->> > +       } else {
->> > +               ctx->rsdt = 0;
->> > +       }
->> >         ctx->xsdt = ctx->current;
->> >         acpi_inc_align(ctx, sizeof(struct acpi_xsdt));
->> >
->> > @@ -80,7 +91,8 @@ static int acpi_write_base(struct acpi_ctx *ctx,
->> >         memset(ctx->base, '\0', ctx->current - ctx->base);
->> >
->> >         acpi_write_rsdp(ctx->rsdp, ctx->rsdt, ctx->xsdt);
->> > -       acpi_write_rsdt(ctx->rsdt);
->> > +       if (ctx->rsdt)
->> > +               acpi_write_rsdt(ctx->rsdt);
->> >         acpi_write_xsdt(ctx->xsdt);
->> >
->> >         return 0;
->> > --
->> > 2.40.1
->> >
->>
->> Regards,
->> Simon
+While those are technically new features, they don't affect existing boards,
+for instance the LPDDR4 support code is guarded by a new DRAM type Kconfig
+variable. So the risk for regressions is very slim.
+
+Gitlab CI passed, and I booted that briefly on some boards, including an
+H616 and an H618 one (with LPDDR4).
+
+Thanks,
+Andre
+
+=========================================================
+The following changes since commit da2e3196e4dc28298b58a018ace07f85eecd1652:
+
+  Merge patch series "arm: dts: k3-am6: Fix Ethernet/DMA" (2023-11-10 15:25:47 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+
+for you to fetch changes up to 4b02f0120a4bb2a5d7081aef8cef6a4ca57e9db2:
+
+  sunxi: H616: add LPDDR4 DRAM support (2023-11-12 18:04:32 +0000)
+
+----------------------------------------------------------------
+Andre Przywara (4):
+      sunxi: board: simplify early PMIC setup conditions
+      power: pmic: sunxi: add AXP313 SPL driver
+      power: regulator: add AXP313 support
+      sunxi: H616: DRAM: refactor mctl_phy_configure_odt()
+
+Ludwig Kormann (1):
+      arm: dts: icnova-a20-adb4006: Add board support
+
+Mikhail Kalashnikov (1):
+      sunxi: H616: add LPDDR4 DRAM support
+
+Samuel Holland (5):
+      net: sun8i_emac: Drop DM_GPIO checks
+      sunxi: mmc: Move header to the driver directory
+      clk: sunxi: Use the right symbol in the Makefile
+      sunxi: mmc: Sort compatible strings numerically
+      pinctrl: sunxi: Avoid using .bss for SPL
+
+Tom Rini (1):
+      arm: sunxi: Correct warning in board_fit_config_name_match
+
+ arch/arm/dts/Makefile                              |   1 +
+ arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h |   2 +
+ arch/arm/include/asm/arch-sunxi/mmc.h              | 139 +---------
+ arch/arm/mach-sunxi/Kconfig                        |  17 ++
+ arch/arm/mach-sunxi/dram_sun50i_h616.c             | 294 +++++++++++++++------
+ arch/arm/mach-sunxi/dram_timings/Makefile          |   1 +
+ .../arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c |  95 +++++++
+ arch/arm/mach-sunxi/pmic_bus.c                     |   3 +
+ board/sunxi/MAINTAINERS                            |   5 +
+ board/sunxi/board.c                                |  38 ++-
+ configs/icnova-a20-adb4006_defconfig               |  21 ++
+ drivers/clk/Makefile                               |   2 +-
+ drivers/mmc/sunxi_mmc.c                            |   6 +-
+ drivers/mmc/sunxi_mmc.h                            | 138 ++++++++++
+ drivers/net/sun8i_emac.c                           |  10 -
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c              |   2 +-
+ drivers/power/Kconfig                              |  19 +-
+ drivers/power/Makefile                             |   1 +
+ drivers/power/axp313.c                             | 134 ++++++++++
+ drivers/power/pmic/axp.c                           |   1 +
+ drivers/power/regulator/axp_regulator.c            |  17 ++
+ include/axp_pmic.h                                 |   1 +
+ 22 files changed, 688 insertions(+), 259 deletions(-)
+ create mode 100644 arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
+ create mode 100644 configs/icnova-a20-adb4006_defconfig
+ create mode 100644 drivers/mmc/sunxi_mmc.h
+ create mode 100644 drivers/power/axp313.c
