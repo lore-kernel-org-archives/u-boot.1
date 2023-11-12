@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FD33C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:26:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E80B5C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:44:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E273C877F9;
-	Sun, 12 Nov 2023 01:11:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A7D6086F84;
+	Sun, 12 Nov 2023 01:44:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YIR+8Ssd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UK5UYb67";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A61C0803AE; Sun, 12 Nov 2023 01:10:55 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id C6FB086EB8; Sun, 12 Nov 2023 01:44:02 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C60086FE9
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:09:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 241CE86FB0
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:43:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3576e74ae9dso13203245ab.3
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:09:57 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7ad501764f4so138461139f.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:43:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699747796; x=1700352596; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699749830; x=1700354630; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2F6Y7rf6MLudML0UnF2PECTiI0lJfYuEFpDW5LucHdM=;
- b=YIR+8SsdX6Sl4HYzGgNcuiz719MhR/EUPKRgshDDPXGSthhbSk6E70xdyIibCQrENM
- 1r8hvdaINMWfl9xM7/T55vse4UHfUMGe2HFh8KK2xN7sQo3boZn+vCcOsyKknrzynaOs
- a8VEOlsBWzKw39pkB7vkRhDjU+maOeeJ0lhXE=
+ bh=NU0bxQ474wiaRkKIDrXkg9hmNYjnxrhx+rYSicKAlpk=;
+ b=UK5UYb670JxzPlEagqJ2ZyAIJIwSmXH9M0HbhMqfpvmsvEq2pI6DnWG+o8+jxYwxyP
+ fj3puLp0W+pYUjUPyn6cIZglMlhMn1MBLVD3rsZBOkm3OtoXI+rIDlEEbXyAIMontrcF
+ ArdOSwQS16DT9EnbZ/fa6sg41BoNNjVO6ljmY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699747796; x=1700352596;
+ d=1e100.net; s=20230601; t=1699749830; x=1700354630;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2F6Y7rf6MLudML0UnF2PECTiI0lJfYuEFpDW5LucHdM=;
- b=IjPoPB49eZ3U+B1XYGfPAVSm4qVQB1NSfmO9pYH/Uxh8iX84GSjIgm/bfsqFpoCYtR
- V8miD9BqwuzApkwuN74nFZLog2XsDanaxjGcuFtIibj2Fs5qB5IsGftc+bVGC4LqvD4f
- CCVh9KPoiNMx1WzC8NFuzVbb/xcD09EgZ3pbht5PMe/sl7Yok1u+ZFJ+W5gBhg3TO2ag
- h6KheAuiZPQDUkyvX/2dmp81MGDfmaEaU9c/p+0q1H3B84XA3O+y0DqbgyCowXQflKzN
- Vk3e805+SKjcXueB8yJDaEf0ZVasbVfS1eJYdUiXeaB9041VAXbwIPTNnTayXsIsjASQ
- Puvg==
-X-Gm-Message-State: AOJu0Yy2NmtbjKPC/5Q/EV/P8da1uro8zl4PbLe6iFu5eMByq2t3jkAU
- Mv2JjaPJUDkbca7ke1oQ36wD2DUpDwFs+oB5Zx62GQ==
-X-Google-Smtp-Source: AGHT+IHc252LAa4TKPhQYUzxiieIaw/XeBvS6V8tE542nLF+3XVVpA5D26jusDIW5mCl2HT9jJAuFQ==
-X-Received: by 2002:a05:6e02:152c:b0:357:ca98:3db2 with SMTP id
- i12-20020a056e02152c00b00357ca983db2mr4665922ilu.21.1699747796136; 
- Sat, 11 Nov 2023 16:09:56 -0800 (PST)
+ bh=NU0bxQ474wiaRkKIDrXkg9hmNYjnxrhx+rYSicKAlpk=;
+ b=PE5V8fOg2PTT4AZpSsr8rlyikyQKvo9sYcagt0scQxdDfc3rx1CRQBicpA31l2W6xE
+ AOnxWTGeRi+UB1m2cURLw+X3/YSqCQt2DGvQPk0bXIvRpWZpCToWS54pfdmBqEBgrX8Z
+ +LW6NfwcTPteivi2qSHVhHdenajguIG8Sl6t8jC5of7bx3tJ5Ver2Qrge7mXXZRh8i40
+ DxDCdzpSl6Snw80EUEP912JZX9VDQlQtwaxYvObPlBkikv0OZOOMyKOYkrj+PiHzzmiv
+ czANHeLlkWP8Np+PqGFy4poWuV5vQ7TkaF4WRWVTFkecSzgdnkLHLK/dmJnqQcHmGzJA
+ WneA==
+X-Gm-Message-State: AOJu0YwlkHuVW35iryr0kSJkbfpgRhOUjr35sn6wzc6y6Y/WLPYcJmk7
+ rAAksS09OEIlp8JBaaViBM4UAiJQLAjdmE4Po7VB0g==
+X-Google-Smtp-Source: AGHT+IGmNwLNVSlSUbYgnSpeFBSHXowZP6kRPuKE1bR3uWNMPRkIANbDOoCv7cgI4iuL7kFmUW+saA==
+X-Received: by 2002:a05:6602:371a:b0:79a:b526:2f1c with SMTP id
+ bh26-20020a056602371a00b0079ab5262f1cmr4146910iob.21.1699749830638; 
+ Sat, 11 Nov 2023 16:43:50 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.55
+ k39-20020a056638372700b00457a6f281ddsm711388jav.59.2023.11.11.16.43.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 16:09:55 -0800 (PST)
+ Sat, 11 Nov 2023 16:43:50 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH 28/29] bootm: Add a function to check overlap
-Date: Sat, 11 Nov 2023 17:09:13 -0700
-Message-ID: <20231112000923.73568-29-sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v2 2/3] tpm: Convert sandbox-focussed tests to C
+Date: Sat, 11 Nov 2023 17:43:37 -0700
+Message-ID: <20231111174337.v2.2.I8ff77e0c1288f6a4da564e9454eb223f72809839@changeid>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
-In-Reply-To: <20231112000923.73568-1-sjg@chromium.org>
-References: <20231112000923.73568-1-sjg@chromium.org>
+In-Reply-To: <20231112004345.80145-1-sjg@chromium.org>
+References: <20231112004345.80145-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,95 +89,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this code into a function to reduce code size and make it easier
-to understand. Drop the unnecessary 0x to help a little with code size.
+Some of the Python tests are a pain because they don't reset the TPM
+state before each test. Driver model tests do this, so convert the
+tests to C.
 
-Use this in bootm_find_images()
+This means that these tests won't run on real hardware, but we have
+tests which do TPM init, so there is still enough coverage.
+
+Rename and update the Python tpm_init test to use 'tpm autostart',
+since this deals with starting up ready for the tests below.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootm.c | 51 ++++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 34 insertions(+), 17 deletions(-)
+Changes in v2:
+- Keep test_tpm2_continue_self_test()
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 54e4b48e907c..a803b0749be0 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -467,6 +467,37 @@ static int bootm_find_os(const char *addr_fit)
+ test/dm/tpm.c              | 77 +++++++++++++++++++++++++++++++++++++-
+ test/py/tests/test_tpm2.py | 38 +------------------
+ 2 files changed, 76 insertions(+), 39 deletions(-)
+
+diff --git a/test/dm/tpm.c b/test/dm/tpm.c
+index cde933ab2848..f8264af13789 100644
+--- a/test/dm/tpm.c
++++ b/test/dm/tpm.c
+@@ -50,14 +50,87 @@ static int test_tpm_init(struct unit_test_state *uts, enum tpm_version version)
  	return 0;
  }
  
-+/**
-+ * check_overlap() - Check if an image overlaps the OS
-+ *
-+ * @name: Name of image to check (used to print error)
-+ * @base: Base address of image
-+ * @end: End address of image (+1)
-+ * @os_start: Start of OS
-+ * @os_size: Size of OS in bytes
-+ * Return: 0 if OK, -EXDEV if the image overlaps the OS
-+ */
-+static int check_overlap(const char *name, ulong base, ulong end,
-+			 ulong os_start, ulong os_size)
+-static int dm_test_tpm(struct unit_test_state *uts)
++static int dm_test_tpm_init(struct unit_test_state *uts)
+ {
+ 	ut_assertok(test_tpm_init(uts, TPM_V1));
+ 	ut_assertok(test_tpm_init(uts, TPM_V2));
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_tpm, UT_TESTF_SCAN_FDT);
++DM_TEST(dm_test_tpm_init, UT_TESTF_SCAN_FDT);
++
++/* Test TPM startup */
++static int test_tpm_startup(struct unit_test_state *uts,
++			    enum tpm_version version)
 +{
-+	ulong os_end;
++	struct udevice *dev;
 +
-+	if (!base)
-+		return 0;
-+	os_end = os_start + os_size;
++	/* check probe success */
++	ut_assertok(get_tpm_version(version, &dev));
 +
-+	if ((base >= os_start && base < os_end) ||
-+	    (end > os_start && end <= os_end) ||
-+	    (base < os_start && end >= os_end)) {
-+		printf("ERROR: %s image overlaps OS image (OS=%lx..%lx)\n",
-+		       name, os_start, os_end);
-+
-+		return -EXDEV;
-+	}
++	ut_assertok(tpm_init(dev));
++	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
 +
 +	return 0;
 +}
 +
- int bootm_find_images(ulong img_addr, const char *conf_ramdisk,
- 		      const char *conf_fdt, ulong start, ulong size)
- {
-@@ -496,16 +527,8 @@ int bootm_find_images(ulong img_addr, const char *conf_ramdisk,
- 	}
++static int dm_test_tpm_startup(struct unit_test_state *uts)
++{
++	ut_assertok(test_tpm_startup(uts, TPM_V1));
++	ut_assertok(test_tpm_startup(uts, TPM_V2));
++
++	return 0;
++}
++DM_TEST(dm_test_tpm_startup, UT_TESTF_SCAN_FDT);
++
++/* Test TPM self-test full */
++static int test_tpm_self_test_full(struct unit_test_state *uts,
++				   enum tpm_version version)
++{
++	struct udevice *dev;
++
++	/* check probe success */
++	ut_assertok(get_tpm_version(version, &dev));
++
++	ut_assertok(tpm_init(dev));
++	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
++
++	return 0;
++}
++
++static int dm_test_tpm_self_test_full(struct unit_test_state *uts)
++{
++	ut_assertok(test_tpm_self_test_full(uts, TPM_V1));
++	ut_assertok(test_tpm_self_test_full(uts, TPM_V2));
++
++	return 0;
++}
++DM_TEST(dm_test_tpm_self_test_full, UT_TESTF_SCAN_FDT);
++
++/* Test TPM self-test continue */
++static int test_tpm_self_test_cont(struct unit_test_state *uts,
++				   enum tpm_version version)
++{
++	struct udevice *dev;
++
++	/* check probe success */
++	ut_assertok(get_tpm_version(version, &dev));
++
++	ut_assertok(tpm_init(dev));
++	ut_assertok(tpm_startup(dev, TPM_ST_CLEAR));
++	ut_assertok(tpm_continue_self_test(dev));
++
++	return 0;
++}
++
++static int dm_test_tpm_self_test_cont(struct unit_test_state *uts)
++{
++	ut_assertok(test_tpm_self_test_cont(uts, TPM_V1));
++	ut_assertok(test_tpm_self_test_cont(uts, TPM_V2));
++
++	return 0;
++}
++DM_TEST(dm_test_tpm_self_test_cont, UT_TESTF_SCAN_FDT);
  
- 	/* check if ramdisk overlaps OS image */
--	if (images.rd_start && (((ulong)images.rd_start >= start &&
--				 (ulong)images.rd_start < start + size) ||
--				((ulong)images.rd_end > start &&
--				 (ulong)images.rd_end <= start + size) ||
--				((ulong)images.rd_start < start &&
--				 (ulong)images.rd_end >= start + size))) {
--		printf("ERROR: RD image overlaps OS image (OS=0x%lx..0x%lx)\n",
--		       start, start + size);
-+	if (check_overlap("RD", images.rd_start, images.rd_end, start, size))
- 		return 1;
--	}
+ /* Test report_state */
+ static int dm_test_tpm_report_state(struct unit_test_state *uts)
+diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+index 1d654cd4a23b..8ed337eddc10 100644
+--- a/test/py/tests/test_tpm2.py
++++ b/test/py/tests/test_tpm2.py
+@@ -56,7 +56,7 @@ def is_sandbox(cons):
+     return sys_arch == 'sandbox'
  
- 	if (CONFIG_IS_ENABLED(OF_LIBFDT)) {
- 		buf = map_sysmem(img_addr, 0);
-@@ -519,15 +542,9 @@ int bootm_find_images(ulong img_addr, const char *conf_ramdisk,
- 		}
+ @pytest.mark.buildconfigspec('cmd_tpm_v2')
+-def test_tpm2_init(u_boot_console):
++def test_tpm2_autostart(u_boot_console):
+     """Init the software stack to use TPMv2 commands."""
+     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+     if skip_test:
+@@ -65,19 +65,6 @@ def test_tpm2_init(u_boot_console):
+     output = u_boot_console.run_command('echo $?')
+     assert output.endswith('0')
  
- 		/* check if FDT overlaps OS image */
--		if (images.ft_addr &&
--		    (((ulong)images.ft_addr >= start &&
--		      (ulong)images.ft_addr < start + size) ||
--		     ((ulong)images.ft_addr + images.ft_len >= start &&
--		      (ulong)images.ft_addr + images.ft_len < start + size))) {
--			printf("ERROR: FDT image overlaps OS image (OS=0x%lx..0x%lx)\n",
--			       start, start + size);
-+		if (check_overlap("FDT", map_to_sysmem(images.ft_addr),
-+				  images.ft_len, start, size))
- 			return 1;
--		}
+-@pytest.mark.buildconfigspec('cmd_tpm_v2')
+-def test_tpm2_startup(u_boot_console):
+-    """Execute a TPM2_Startup command.
+-
+-    Initiate the TPM internal state machine.
+-    """
+-    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+-    if skip_test:
+-        pytest.skip('skip TPM device test')
+-    u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
+-    output = u_boot_console.run_command('echo $?')
+-    assert output.endswith('0')
+-
+ def tpm2_sandbox_init(u_boot_console):
+     """Put sandbox back into a known state so we can run a test
  
- 		if (IS_ENABLED(CONFIG_CMD_FDT))
- 			set_working_fdt_addr(map_to_sysmem(images.ft_addr));
+@@ -92,29 +79,6 @@ def tpm2_sandbox_init(u_boot_console):
+     if skip_test:
+         pytest.skip('skip TPM device test')
+ 
+-@pytest.mark.buildconfigspec('cmd_tpm_v2')
+-def test_tpm2_sandbox_self_test_full(u_boot_console):
+-    """Execute a TPM2_SelfTest (full) command.
+-
+-    Ask the TPM to perform all self tests to also enable full capabilities.
+-    """
+-    if is_sandbox(u_boot_console):
+-        u_boot_console.restart_uboot()
+-        u_boot_console.run_command('tpm2 autostart')
+-        output = u_boot_console.run_command('echo $?')
+-        assert output.endswith('0')
+-
+-        u_boot_console.run_command('tpm2 startup TPM2_SU_CLEAR')
+-        output = u_boot_console.run_command('echo $?')
+-        assert output.endswith('0')
+-
+-    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+-    if skip_test:
+-        pytest.skip('skip TPM device test')
+-    u_boot_console.run_command('tpm2 self_test full')
+-    output = u_boot_console.run_command('echo $?')
+-    assert output.endswith('0')
+-
+ @pytest.mark.buildconfigspec('cmd_tpm_v2')
+ def test_tpm2_continue_self_test(u_boot_console):
+     """Execute a TPM2_SelfTest (continued) command.
 -- 
 2.42.0.869.gea05f2083d-goog
 
