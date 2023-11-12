@@ -4,67 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B6BC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE618C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D496687263;
-	Sun, 12 Nov 2023 21:03:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BA6BE874B9;
+	Sun, 12 Nov 2023 21:03:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Akafpvln";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PZZAwMKt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 327D4874DE; Sun, 12 Nov 2023 21:03:46 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 0668A874B6; Sun, 12 Nov 2023 21:03:48 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28CA187479
+ by phobos.denx.de (Postfix) with ESMTPS id 37F3D8747B
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d9caf5cc948so3847591276.0
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso44520887b3.0
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699819423; x=1700424223; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I5PztMVhUIHkTXGsv9eQuQeLqOmsxAKX53Zn5Kc8CY4=;
- b=Akafpvln2UG/PWeqhU6Z7Ksfr8DzG5sein6YhSUd/kD0zjzfsvSX5uVxoKtNEhdAcb
- 80lZREz6yMeSRooaMLsljzU9FGbSsq0hy1XnIAuRMhBHJ0mzQltJZAHMmMQKxrFgDhWI
- 1VR2KtG8zyfp4weBG5m3iWD8rO7XfapPkffuM=
+ bh=YBTH7KiZdfuvypRzTEjLfqoi1JBU71nNeG9gm/1Hy1c=;
+ b=PZZAwMKttvvvxLYOZCP6JNoUFeuaagLyCLonOLY0p5ggyTfHZ+E+6N6khmWay09zHc
+ MISl9yc8g+jo0myVtgCK+JVcM5VRUWvXcKkxnZgl3hZKIF1+/3F6bw7AbhPBgLPkXtag
+ 7ErBOQGhCYKLdHMJxLVVLrjSbMPj1urhMLIGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699819423; x=1700424223;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I5PztMVhUIHkTXGsv9eQuQeLqOmsxAKX53Zn5Kc8CY4=;
- b=jQ/KHYfePbHviIh+p8tnxdDSTJ8S5z1dEeeyoSIdUar5OCBwsvzaic60GSN0CQfzgc
- YquVPTqoghdEZ3lKjKxivh/M3g2dRIaRqrmPj/ofcAJFkBrt+XlgDUdoGnwd42Muctsl
- tv8X01GHbE5miclQU0pX/JBx6eqDMF69DxwX1ZkKf5tLW2G8+GGcUEFPW63pdZOZkklD
- MqCEBLr3oKX7g0z7fVnYHGoY7TRvBPlaUFw3WK1h8KibTgW0atBm5DsH2EoNinriq8nn
- tlCAxFvOIkQA1lo2rokpF6GetCtrh3HTay1zzqaDAlTENmgwdqIfdILTZhjidolv+WLQ
- IJkw==
-X-Gm-Message-State: AOJu0YwIcHJkVhrfbs4swwOOoWOqsHqe0RhBkrYV4MoRHq5+Ozw3CbvC
- sDgIUKryARisqGXXvBpgEpVTqWFZ8Cvm0Usw4y6HWw==
-X-Google-Smtp-Source: AGHT+IEuetCwVdSAfFiqTNKyn4IJ+hkxfcFNKGhp69ZsOey14Fu+dkdRHOtIMfq05ffG21PA55S/hysE9M3h33QsQC0=
-X-Received: by 2002:a05:690c:306:b0:569:e7cb:cd4e with SMTP id
- bg6-20020a05690c030600b00569e7cbcd4emr2036662ywb.48.1699819422729; Sun, 12
+ bh=YBTH7KiZdfuvypRzTEjLfqoi1JBU71nNeG9gm/1Hy1c=;
+ b=PJHwmF0lE7whn+SFacuN4mMReXvmMNzUOVBwouW1wzMckIK33UCdhQYt5VK7m/rU4w
+ 1W5Fz+6cvqPC1ZRG1wkv4ZUcnE/jMP72LjPCpCXvfofb7zJeit1JjFSeEyF7PpyNf5Nv
+ W/sHjB6+wqhLYcFGNeZFMMmd+ZcvKmDXcg5Z4N++Xuqhk/cR1yiAmRsY4ZrN51sJhEv/
+ wHVidDsu2FUsvfOYdKo0C6W0d/e7+d91eTIiUh2Dz84LCf5oc1GDgMi1zXnV3zoLPFNI
+ NB07JUn+36vMRshEsrtnAEur03fH3OK7wYQw+u8UBRNQmggwWHEf5vdJVzT2BP3vNBdJ
+ qfeg==
+X-Gm-Message-State: AOJu0YyAOruz2PAuXrs4bXW8wYwi8MX7/PQgTv7inoc7aN8GvLTKG372
+ ZBSZzBiGuceA+zRwiKUpxz9oQkyVQ1Y9skpzZkr62QDGrQJ1iUc6ZS8=
+X-Google-Smtp-Source: AGHT+IGqa+HwIY7YNA6AKK+uA9/lTJ3RDe895P7DINupb7HK398m2zeqG+j0zK94ItpSi9Hfx2L4Hl2ntNKA9JvJgPk=
+X-Received: by 2002:a0d:ca13:0:b0:5a7:d73d:42cd with SMTP id
+ m19-20020a0dca13000000b005a7d73d42cdmr5538785ywd.20.1699819422723; Sun, 12
  Nov 2023 12:03:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20231103183844.2308934-1-seanedmond@linux.microsoft.com>
- <20231103183844.2308934-4-seanedmond@linux.microsoft.com>
-In-Reply-To: <20231103183844.2308934-4-seanedmond@linux.microsoft.com>
+References: <20231110152944.647535-1-devarsht@ti.com>
+ <20231110152944.647535-7-devarsht@ti.com>
+In-Reply-To: <20231110152944.647535-7-devarsht@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 13:01:09 -0700
-Message-ID: <CAPnjgZ3KPq3ihrQAnb-Bpg5FxPq3cG3e-jBXv9Bw-gb8KcfRZA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/5] cmd: kaslrseed: Use common API to fixup FDT
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, 
- ilias.apalodimas@linaro.org, trini@konsulko.com
+Date: Sun, 12 Nov 2023 13:01:23 -0700
+Message-ID: <CAPnjgZ1rwogk1Q9xJ5X=_bZN-rX7V1pnZXiybdnG9EhX8FcMbg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] doc: spl: Add info regarding memory reservation
+ and missing Kconfigs
+To: Devarsh Thakkar <devarsht@ti.com>
+Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
+ bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
+ yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
+ a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,67 +85,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Devarsh,
 
-On Fri, 3 Nov 2023 at 12:38, <seanedmond@linux.microsoft.com> wrote:
+On Fri, 10 Nov 2023 at 08:29, Devarsh Thakkar <devarsht@ti.com> wrote:
 >
-> From: Sean Edmond <seanedmond@microsoft.com>
+> Add information regarding memory reservation scheme in SPL
+> and details regarding scheme which need to be followed while reserving
+> those areas which need to be preserved across bootstages.
 >
-> Use the newly introduced common API fdt_fixup_kaslr_seed() in the
-> kaslrseed command.
+> Also add missing CONFIG_SPL Kconfigs and new ones which were added
+> recently.
 >
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
 > ---
->  cmd/kaslrseed.c | 22 ++++++++--------------
->  1 file changed, 8 insertions(+), 14 deletions(-)
+> V1->V3 : No change
+> ---
+>  doc/develop/spl.rst | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
 >
-> diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-> index 9acb8e16386..6f423702e7c 100644
-> --- a/cmd/kaslrseed.c
-> +++ b/cmd/kaslrseed.c
-> @@ -19,7 +19,7 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
->         size_t n = 0x8;
->         struct udevice *dev;
->         u64 *buf;
-> -       int nodeoffset;
-> +       ofnode root;
->         int ret = CMD_RET_SUCCESS;
->
->         if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> @@ -45,21 +45,15 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
->                 return CMD_RET_FAILURE;
->         }
->
-> -       ret = fdt_check_header(working_fdt);
-> -       if (ret < 0) {
-> -               printf("fdt_chosen: %s\n", fdt_strerror(ret));
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
-> -       if (nodeoffset < 0) {
-> -               printf("Reading chosen node failed\n");
-> -               return CMD_RET_FAILURE;
-> +       ret = root_ofnode_from_fdt(working_fdt, &root);
-> +       if (ret) {
-> +               printf("ERROR: Unable to get root ofnode\n");
-> +               goto CMD_RET_FAILURE;
->         }
->
-> -       ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
+> diff --git a/doc/develop/spl.rst b/doc/develop/spl.rst
+> index 76e87f07c7..fc570589eb 100644
+> --- a/doc/develop/spl.rst
+> +++ b/doc/develop/spl.rst
+> @@ -65,6 +65,15 @@ CONFIG_SPL_NAND_LOAD (drivers/mtd/nand/raw/nand_spl_load.o)
+>  CONFIG_SPL_SPI_LOAD (drivers/mtd/spi/spi_spl_load.o)
+>  CONFIG_SPL_RAM_DEVICE (common/spl/spl.c)
+>  CONFIG_SPL_WATCHDOG (drivers/watchdog/libwatchdog.o)
+> +CONFIG_SPL_SYSCON (drivers/core/syscon-uclass.o)
+> +CONFIG_SPL_GZIP (lib/gzip.o)
+> +CONFIG_SPL_VIDEO (drivers/video/video-uclass.o drivers/video/vidconsole-uclass.o)
+> +CONFIG_SPL_SPLASH_SCREEN (common/splash.o)
+> +CONFIG_SPL_SPLASH_SOURCE (common/splash_source.o)
+> +CONFIG_SPL_GPIO (drivers/gpio)
+> +CONFIG_SPL_DM_GPIO (drivers/gpio/gpio-uclass.o)
+> +CONFIG_SPL_BMP (drivers/video/bmp.o)
+> +CONFIG_SPL_BLOBLIST (common/bloblist.o)
 
-It looks like this buf needs a cast to u8 *
+Did you intend to add the above? If so, please put it in its own patch.
 
-> -       if (ret < 0) {
-> -               printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
-> +       ret = fdt_fixup_kaslr_seed(root, buf, sizeof(buf));
-> +       if (ret) {
-> +               printf("ERROR: failed to add kaslr-seed to fdt\n");
->                 return CMD_RET_FAILURE;
->         }
 >
+>  Adding SPL-specific code
+>  ------------------------
+> @@ -164,3 +173,16 @@ cflow will spit out a number of warnings as it does not parse
+>  the config files and picks functions based on #ifdef.  Parsing the '.i'
+>  files instead introduces another set of headaches.  These warnings are
+>  not usually important to understanding the flow, however.
+> +
+> +
+> +Reserving memory in SPL
+> +-----------------------
+> +
+> +If memory need to be reserved in RAM during SPL stage so that area won't get touched
+> +by SPL and/or u-boot, it need to be reserved starting from end of RAM.
+
+U-Boot (please avoid using any other spelling in docs and comments;
+please fix globally)
+
+> +
+> +Also the regions which are to be preserved across further stages of boot need to be reserved first starting from
+> +framebuffer memory which must be reserved from end of RAM for which helper function spl_reserve_video_from_ram_top is provided.
+
+Worth mentioning that framebuffer being reserved first means it is at
+the top of the reservation area with everything else reserved below
+it?
+
+> +
+> +The corresponding information of reservation for those regions can be passed to further stages of boot using a bloblist.
+> +For e.g. the information for framebuffer area reserved by SPL can be passed onto u-boot using BLOBLISTT_U_BOOT_VIDEO.
+
+Can you please wrap to 80 cols?
+
 > --
-> 2.42.0
+> 2.34.1
 >
 
 Regards,
