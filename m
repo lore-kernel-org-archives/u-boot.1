@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19DC3C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE0F3C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:14:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 217998755B;
-	Sun, 12 Nov 2023 01:10:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C71D86B54;
+	Sun, 12 Nov 2023 01:10:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZDrcmneB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SD6R+Qod";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27C3386F8A; Sun, 12 Nov 2023 01:09:44 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id D197F86F6C; Sun, 12 Nov 2023 01:09:50 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEDD286FB0
+ by phobos.denx.de (Postfix) with ESMTPS id DCCC686FB8
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:09:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-359472f74c5so13727345ab.0
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-7a956887c20so126344739f.1
  for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:09:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699747774; x=1700352574; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699747775; x=1700352575; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=znVNNm0EC71WZA70HbeaJsSneiRZb/CUZanApopr4xI=;
- b=ZDrcmneBPwoBOYO/VrG/Gv6VnrxD+jzzKYSvfkbbT29BMz9tUDXQSWJpQ20axo7XoS
- o2Y6x814aZwv+mV7qtnDVzu2moZdnSUvYIljHjJHv8Vwha5fbHKXJ8ITRb2x0LabZaei
- mngs4Fb6Qg5IUUgjhFuoMRcdE2lS7bdL9CI1o=
+ bh=/d0SoO30+b+hYFgo8EtEBKMy0cMBS3+Rk9+GZ/AUP0g=;
+ b=SD6R+Qod9RiqztOxKZm7BDJiOAL+KC+XJtgV1EoO3NiT6rt/FCtAZWoPfDUmdwj1Dj
+ WHlkn0RAMiDGBfu0Hdr1yFqlag9eXL/Gz7leQFT737wrG0SPzAApxEfu5TAmnT7zVJwY
+ wOLQIJ8src6kxCk0RZ4osywo2RMz2/3033nyA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699747774; x=1700352574;
+ d=1e100.net; s=20230601; t=1699747775; x=1700352575;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=znVNNm0EC71WZA70HbeaJsSneiRZb/CUZanApopr4xI=;
- b=YOfwCxebnpjUrRPo1k/ZgdMqZmqbp+kx1foJUFSmsm1Kg65klOE4+CCE/ybgSRKYxX
- JnwGqcjhAXAaDFVakoQZ+o+rykWSg97LBGeNa9rLAy++ENCMyGmU78kvAWn0B8gE5sFA
- S1TtInIAr4B+iGF+sO3GNdzcQGipQaOr/vODu5ov0SC/9BB09/p52GtgK0F493PJAh2Q
- VDY3I9ZX7/MhZbg/Wm/lKB3R7FJgBYbJg0WUgFCCfGlIFfgT5XwohGsdBUTzevDzs1oY
- hSCgKV/aob2nVSda7JRltGlzH9L2rBfg9DJjPYaAKVnrCp1FQgYPXcdNG/khqQQyonrB
- QTww==
-X-Gm-Message-State: AOJu0YzgIF54tGvoK2DeWDqiPeDIn1Wfw4KoEEegsf3odMn5y5+Mnprm
- BNzT2E+eeYdUASzYYHXlu6qHjTuwR1jn+aJXochwQQ==
-X-Google-Smtp-Source: AGHT+IF7TRV8TDmbLdfW/EEOV1dV0KNRGQQSmBHwTUOTrENJ3eH11xUHbH06A6pgeJYBOtvJBekhaw==
-X-Received: by 2002:a05:6e02:1bad:b0:35a:b399:555a with SMTP id
- n13-20020a056e021bad00b0035ab399555amr1369406ili.10.1699747774338; 
- Sat, 11 Nov 2023 16:09:34 -0800 (PST)
+ bh=/d0SoO30+b+hYFgo8EtEBKMy0cMBS3+Rk9+GZ/AUP0g=;
+ b=auWkKqLJ0EHHQ3CXVJDpzyyxd93Dja5VbEDU7we2vLQ2jmj9fVMjIM3KS8K4q3RlOT
+ Ecn9byenj2aUUVCOKIXZQdfnZClBPo/CB/ke5GPIiKtaRsBrMjnWfFFOLP2F2r/TZn3W
+ Jg0XjchtPUu//ReuZL+AnJaQ/M4F4u5FPUdDeb2FJkdTAzYYIHistlil9sRK2i6o16b3
+ dyIeGWv3ZQfEiS6HynlAEk0i4eFQaBFRWrTD80pyng8lxOJW6HDVs7VyN0uIMycdyVoF
+ 0W6dkU3jbaurrZuXp9FM6spR7We+WbpOn4pL5cdSHxCbTWGvxHC0udQslsiPxhIonPW5
+ ux+Q==
+X-Gm-Message-State: AOJu0Ywko/DZ/uFndYZ4R9Kns2i7jQNaKu8vlAoHPCv2hhZGrDfdt1Zg
+ CnHQaOCx5+p4/xVihyzPjysSS+Vlck0Me33zjgW0gg==
+X-Google-Smtp-Source: AGHT+IFqzU4LVitD6WX5soifKLJdOE/i3qeDCHs/Ytjvl6VMiFbu4NAiCgFazAme/3VBb6hqe2BiTw==
+X-Received: by 2002:a92:c546:0:b0:35a:b1da:1fba with SMTP id
+ a6-20020a92c546000000b0035ab1da1fbamr2288720ilj.23.1699747775188; 
+ Sat, 11 Nov 2023 16:09:35 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.33
+ l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sat, 11 Nov 2023 16:09:34 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 04/29] bootstd: Add missing header file from bootdev.h
-Date: Sat, 11 Nov 2023 17:08:49 -0700
-Message-ID: <20231112000923.73568-5-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>
+Subject: [PATCH 05/29] bootstd: Introduce programmable boot
+Date: Sat, 11 Nov 2023 17:08:50 -0700
+Message-ID: <20231112000923.73568-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112000923.73568-1-sjg@chromium.org>
 References: <20231112000923.73568-1-sjg@chromium.org>
@@ -89,27 +91,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a dm/uclass-id.h to the bootdev header file, since it uses
-enum uclass_id
+At present bootstd requires CONFIG_CMDLINE to operate. Add a new
+'programmable' boot which can be used when no command line is available.
+For now it does almost nothing, since most bootmeths require the
+command line.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/bootdev.h | 1 +
- 1 file changed, 1 insertion(+)
+ boot/Kconfig      | 11 ++++++++++
+ boot/Makefile     |  2 ++
+ boot/prog_boot.c  | 51 +++++++++++++++++++++++++++++++++++++++++++++++
+ common/main.c     |  9 +++++++++
+ include/bootstd.h |  9 +++++++++
+ 5 files changed, 82 insertions(+)
+ create mode 100644 boot/prog_boot.c
 
-diff --git a/include/bootdev.h b/include/bootdev.h
-index b079a91b5b7f..c1362673d418 100644
---- a/include/bootdev.h
-+++ b/include/bootdev.h
-@@ -7,6 +7,7 @@
- #ifndef __bootdev_h
- #define __bootdev_h
+diff --git a/boot/Kconfig b/boot/Kconfig
+index ef71883a5026..586d7a69fab3 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -459,6 +459,17 @@ config BOOTSTD_BOOTCOMMAND
+ 	  standard boot does not support all of the features of distro boot
+ 	  yet.
  
-+#include <dm/uclass-id.h>
- #include <linux/list.h>
++config BOOTSTD_PROG
++	bool "Use programmatic boot"
++	depends on !CMDLINE
++	default y
++	help
++	  Enable this to provide a board_run_command() function which can boot
++	  a systen without using commands.
++
++	  Note: This currently has many limitations and is not a useful booting
++	  solution. Future work will eventually make this a viable option.
++
+ config BOOTMETH_GLOBAL
+ 	bool
+ 	help
+diff --git a/boot/Makefile b/boot/Makefile
+index 3fd048bb41ab..de0eafed14b1 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -25,6 +25,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootmeth-uclass.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootstd-uclass.o
  
- struct bootflow;
++obj-$(CONFIG_$(SPL_TPL_)BOOTSTD_PROG) += prog_boot.o
++
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+diff --git a/boot/prog_boot.c b/boot/prog_boot.c
+new file mode 100644
+index 000000000000..045554b93db0
+--- /dev/null
++++ b/boot/prog_boot.c
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2021 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#define LOG_CATEGORY UCLASS_BOOTSTD
++
++#include <bootflow.h>
++#include <bootstd.h>
++#include <command.h>
++#include <dm.h>
++
++/*
++ * show_bootmeths() - List available bootmeths
++ *
++ * We could refactor this to use do_bootmeth_list() if more detail (or ordering)
++ * are needed
++ */
++static void show_bootmeths(void)
++{
++	struct udevice *dev;
++	struct uclass *uc;
++
++	printf("Bootmeths: ");
++	uclass_id_foreach_dev(UCLASS_BOOTMETH, dev, uc)
++		printf(" %s", dev->name);
++	printf("\n");
++}
++
++int bootstd_prog_boot(void)
++{
++	struct bootflow_iter iter;
++	struct bootflow bflow;
++	int ret, flags, i;
++
++	printf("Programmatic boot starting\n");
++	show_bootmeths();
++	flags = BOOTFLOWIF_HUNT | BOOTFLOWIF_SHOW | BOOTFLOWIF_SKIP_GLOBAL;
++
++	bootstd_clear_glob();
++	for (i = 0, ret = bootflow_scan_first(NULL, NULL, &iter, flags, &bflow);
++	     i < 1000 && ret != -ENODEV;
++	     i++, ret = bootflow_scan_next(&iter, &bflow)) {
++		if (!bflow.err)
++			bootflow_run_boot(&iter, &bflow);
++		bootflow_free(&bflow);
++	}
++
++	return -EFAULT;
++}
+diff --git a/common/main.c b/common/main.c
+index 7c70de2e59a8..2668f3bb1637 100644
+--- a/common/main.c
++++ b/common/main.c
+@@ -9,6 +9,7 @@
+ #include <common.h>
+ #include <autoboot.h>
+ #include <bootstage.h>
++#include <bootstd.h>
+ #include <cli.h>
+ #include <command.h>
+ #include <console.h>
+@@ -67,6 +68,14 @@ void main_loop(void)
+ 
+ 	autoboot_command(s);
+ 
++	if (IS_ENABLED(CONFIG_BOOTSTD_PROG)) {
++		int ret;
++
++		ret = bootstd_prog_boot();
++		printf("Standard boot failed (err=%dE)\n", ret);
++	}
++
+ 	cli_loop();
++
+ 	panic("No CLI available");
+ }
+diff --git a/include/bootstd.h b/include/bootstd.h
+index 7802564bcc63..99ce7b64e7c5 100644
+--- a/include/bootstd.h
++++ b/include/bootstd.h
+@@ -94,4 +94,13 @@ int bootstd_get_priv(struct bootstd_priv **stdp);
+  */
+ void bootstd_clear_glob(void);
+ 
++/**
++ * bootstd_prog_boot() - Run standard boot in a fully programmatic mode
++ *
++ * Attempts to boot without making any use of U-Boot commands
++ *
++ * Returns: -ve error value (does not return except on failure to boot)
++ */
++int bootstd_prog_boot(void);
++
+ #endif
 -- 
 2.42.0.869.gea05f2083d-goog
 
