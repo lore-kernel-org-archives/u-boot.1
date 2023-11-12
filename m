@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93CF8C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 04:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49909C4167D
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 06:16:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0DD986C89;
-	Sun, 12 Nov 2023 05:02:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1679186F40;
+	Sun, 12 Nov 2023 07:16:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kUKJ08ke";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Ri715YSs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 143CA86F88; Sun, 12 Nov 2023 04:40:08 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7EF5786F8D; Sun, 12 Nov 2023 07:16:40 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACE2986F1A
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 04:40:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 943CB86F26
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 07:16:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macpaul@gmail.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-da0359751dbso2743486276.1
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 19:40:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699760404; x=1700365204; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VC0PBNq9PihDxsNcegP2V44g9YKqjLa9VXxaCvVAuDE=;
- b=kUKJ08kedJ6AYfBqkWpvn7GkscCYmYKEL87z/e84QxvhDDLOwIWXBQs5ppu3njVedv
- kfau2mcvHaJ5Bna20Ujf/6cOaqUnPrgFFEDtPll9ajMxrc6C4i/ofIJs2zsTe/NQ5lxx
- JzwRBZxFUVvrkQGKtegK/HPFasdeSl1TVLzwda6QYt07T0itmJBenbf0oeScJLtxKCNA
- SOq/MAdXhGYE/n2qD6YeN12/d7Tzn8F4Hk8uNWfrt0l8fBAwo7L1pAyVSR7q21iqBPtx
- KzSIbc1K2aCerP+qT5VxIPnHxk3acMGloErH2RJjBUE/gAfzUtFud32mBwA0DW6PCGoU
- licA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0C9713FD49
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 06:16:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699769793;
+ bh=9SSQ5UJsSJ4kTvK3fl/WmPl1WhQSrvNosKyQ1IMu/Vs=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Ri715YSs/xKm9nr8uiixN7wNKOOWziyVyA9V+6LXejAHL+LIO642FygzfwLSVlrU3
+ 1yxrBGtmNzvUdS+OZiQPH1HVS34llXBe0LBljeSgE/PcQiBweZEV+IJtD7KFbnNYAq
+ 9py6i9IaTJNNp0wrmELV3xAiow+gZfybL4DwbsUkjZCuCdObImTXG9wF3xPd2EH9PJ
+ LzLqtObDowNtcOkgRfyaA3kAQK0E0pSKEQu6I0fDlA/483C0TsZqGCdBlloadiHDKD
+ 9ioyhYfnd0vGlKu7dB2+ai3O8TJRFStF8BdeFuycJBHRkIMG0usehepfw+aNE4vXVY
+ HqyO3DWSUtf7w==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-408f9e9e9b0so23989105e9.2
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 22:16:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699760404; x=1700365204;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VC0PBNq9PihDxsNcegP2V44g9YKqjLa9VXxaCvVAuDE=;
- b=K2AhmhWiQbPAU2WEERmE1XOZ0eSVBsQiEYerjTGysQWD5wsfkKGiAczzI9x5agCadR
- 07bVaUUjirSv80gCdZt3Nhu00X0+ag/+vzn3itPwakm+VYhp8qcchuP7Y3g1hDrKWRj1
- 1nQ3/e4CltftD2y+rCS4kacz+orBhH+1qBmThUtBFG6GSzDIhF2SWJNts2vn4QBazD9w
- fWKNXR/aV9uKDp6G4QXv4lDHmFUF8Q+Vmu/Pidk1ELhQToHuJ453OFcLLcGhFXWDERWi
- 7D8IDuL9ZBq/rm+Ftjf3/ZM+svnjSuXO6xHNI59m3JX3HOE5/gwh/WcOitYogJ5oZBdC
- t0GQ==
-X-Gm-Message-State: AOJu0Yy/4DqW7PzQMJiM7390G0PujB250A6SXuT3yT/ok7iSkuWDhf9X
- jj0t0T7l/iZN6WPzypESf2WhU+Us5qU0gQ8t0Vs=
-X-Google-Smtp-Source: AGHT+IFuHnHoZFVmd1tKZ7RYZMU4IKSzed5Lqhd5GExRbb+yMPslmg6jQYVmfoP3VqdhRZNe8l6js1PzklHqC5tzoLA=
-X-Received: by 2002:a25:248a:0:b0:d9d:1048:b90 with SMTP id
- k132-20020a25248a000000b00d9d10480b90mr4133424ybk.30.1699760404170; Sat, 11
- Nov 2023 19:40:04 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699769792; x=1700374592;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9SSQ5UJsSJ4kTvK3fl/WmPl1WhQSrvNosKyQ1IMu/Vs=;
+ b=Tzt+y04uLrtnaJJpKjpw53Pw0x+D571GNBuVhtiPd3hB9HyQkEmUTmVEv94EfHwxfO
+ wgB2UVz2AK/ZBjeLaOkx4wgd7k0nWBV7W/b5XmADlpn3tooeFH2sSu6/TVaZpcJYEw7l
+ UnVXDnCO/nTejKKOv9QypwmbDuaPkDXDuF6mpilVC+Ia1AKK8PHP6XvWxbHi67xBE16S
+ ceNuhRz35aecwAcqtQJKUYdHfHsxV7fv0Ewi7P7KQkVhZMO7ImnaxYhNNnI5RjxKjEB+
+ Ez8CQNbJKfV+nsBMQPtUta4Tl0Nh3K9P7IN2qKdfsJ0KhvSolKVeMb/+4CdgNxbB1C+A
+ 6DRA==
+X-Gm-Message-State: AOJu0Yw757XFpcqlGfK/QRk9KAJwK2UK4v7atQ/pU12PWPbAVrcBcVkF
+ cX810VCY1PIgPothXOvUGVOnYwYhqv6niLigigD29lyC0thugMnBlVyNEH/eQTE4tvQDX8AIlCi
+ g5SYWSORO55HBSg08OKBtwAbFdpxdMmE=
+X-Received: by 2002:a05:600c:1c1a:b0:405:4776:735a with SMTP id
+ j26-20020a05600c1c1a00b004054776735amr2844271wms.2.1699769792509; 
+ Sat, 11 Nov 2023 22:16:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHUsKrRQ7yvxpJyx9X/EQCkclbpSWp74fxowsiXdk3ueV395x58BYGusNyr2PMTgo+EGGCYqg==
+X-Received: by 2002:a05:600c:1c1a:b0:405:4776:735a with SMTP id
+ j26-20020a05600c1c1a00b004054776735amr2844255wms.2.1699769791959; 
+ Sat, 11 Nov 2023 22:16:31 -0800 (PST)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ i20-20020a05600c2d9400b004063cd8105csm9709607wmg.22.2023.11.11.22.16.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 11 Nov 2023 22:16:31 -0800 (PST)
+Message-ID: <4727b460-2e9c-4b5b-a9f6-5b7a9ada6987@canonical.com>
+Date: Sun, 12 Nov 2023 07:16:30 +0100
 MIME-Version: 1.0
-References: <20230804110448.24589-1-macpaul.lin@mediatek.com>
- <78245d2791000a64ca123db0ca4c063f2e1928d7.camel@toradex.com>
-In-Reply-To: <78245d2791000a64ca123db0ca4c063f2e1928d7.camel@toradex.com>
-From: Macpaul Lin <macpaul@gmail.com>
-Date: Sun, 12 Nov 2023 11:39:56 +0800
-Message-ID: <CACCg+XOX9fNb4wbtsFMOH12Lu7COqoY56mSqVx7k_dPohBPUJA@mail.gmail.com>
-Subject: Re: [PATCH v5 1/2] arm: mediatek: add mt8195 SOC support
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Cc: "sjg@chromium.org" <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- "macpaul.lin@mediatek.com" <macpaul.lin@mediatek.com>,
- "marex@denx.de" <marex@denx.de>, 
- "fparent@baylibre.com" <fparent@baylibre.com>, 
- "aouledameur@baylibre.com" <aouledameur@baylibre.com>,
- "trini@konsulko.com" <trini@konsulko.com>, 
- "bear.wang@mediatek.com" <bear.wang@mediatek.com>,
- "sam.shih@mediatek.com" <sam.shih@mediatek.com>, 
- "chunfeng.yun@mediatek.com" <chunfeng.yun@mediatek.com>, 
- "Ryder.Lee@mediatek.com" <Ryder.Lee@mediatek.com>, 
- "weijie.gao@mediatek.com" <weijie.gao@mediatek.com>,
- "pablo.sun@mediatek.com" <pablo.sun@mediatek.com>, 
- "GSS_MTK_Uboot_upstream@mediatek.com" <GSS_MTK_Uboot_upstream@mediatek.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sun, 12 Nov 2023 05:02:50 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] cmd: acpi: fix acpi list command
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
+References: <20231111134112.165377-1-heinrich.schuchardt@canonical.com>
+ <20231111134112.165377-3-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ2jca7az3rgNmDoX0Zi5zSDFFKvaKkVvT-cTVEy3ktv7A@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ2jca7az3rgNmDoX0Zi5zSDFFKvaKkVvT-cTVEy3ktv7A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,63 +106,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Marcel Ziswiler <marcel.ziswiler@toradex.com> =E6=96=BC 2023=E5=B9=B411=E6=
-=9C=8811=E6=97=A5 =E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=884:24=E5=AF=AB=E9=81=
-=93=EF=BC=9A
->
-[snip]
-> > Changes for v5:
-> >  - Fix Copyright year to 2023.
-> >  - Fix memory map in dram_init() to support 8GB onboard memory.
-> >  - Add '#if !IS_ENABLED(CONFIG_SYSRESET)' with reset_cpu().
-> >  - Correct reset_cpu() function prototype.
-> >  - rebase patchset to v2023-10.rc1
-> >  - Add missing arch/arm/mach-mediatek/mt8195/Kconfig.
->
-> [snip]
->
-> I finally got my hands on an EVK and gave this a try. However, I did not =
-get that far. This is with latest
-> downstream TF-A as I still struggle with upstream there as well. Any idea=
-s?
->
-> U-Boot 2024.01-rc1-00056-g5237f2b48bb (Nov 10 2023 - 15:33:34 +0100)
->
-> CPU:   MediaTek MT8195
-> DRAM:  8 GiB
-> mtu3 usb@11200000: clks of sts1 are not stable!
-> mtu3-peripheral ssusb@11200000: device enable failed -110
-> mtu3-peripheral ssusb@11200000: mtu3 hw init failed:-110
-> board_init: Cannot find USB device
-> initcall failed at call 00000000ffe46a50 (err=3D-110)
-> ### ERROR ### Please RESET the board ###
->
-> Cheers
->
-> Marcel
+On 11/12/23 04:08, Simon Glass wrote:
+> Hi Heinrich,
+> 
+> On Sat, 11 Nov 2023 at 06:42, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> ACPI tables may comprise either RSDT, XSDT, or both. The current code fails
+>> to check the presence of the RSDT table before accessing it. This leads to
+>> an exception if the RSDT table is not provided.
+>>
+>> The XSDT table takes precedence over the RSDT table.
+>>
+>> Addresses in the XSDT table are 64-bit. Adjust the output accordingly.
+>>
+>> The ACPI specification does not require that the sequence of tables are the
+>> same in XSDT and RSDT. Comparing entries with the same index makes no
+>> sense.
+> 
+> Does it make any sense to have different sequences? Have you seen that
+> in the wild?
 
-I'm glad you've get a board and tested our patches.
-Currently we're busy on other tasks so the improvement to the patch v5
-has been postponed. :~(
+The ACPI specification requires to ignore the RSDT table if both RSDT 
+and XSDT are present. In this case its content is irrelevant. 'acpi 
+list' is a display command. We should restrict consistency tests to the 
+ACPI unit test.
 
-These error is because the power supplement settings are in the later patch=
-es.
-Hence the clock might not stable for the cold boot up.
-You can just press the key on the board and warm reset it, the clock
-issue should be disappear.
+> 
+>>
+>> The FACS table header does not provide revision information. Correct the
+>> description of dump_hdr().
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   cmd/acpi.c | 48 +++++++++++++++++++++++++++++-------------------
+>>   1 file changed, 29 insertions(+), 19 deletions(-)
+>>
+>> diff --git a/cmd/acpi.c b/cmd/acpi.c
+>> index 7e397d1a74..d02108d821 100644
+>> --- a/cmd/acpi.c
+>> +++ b/cmd/acpi.c
+>> @@ -17,7 +17,8 @@ DECLARE_GLOBAL_DATA_PTR;
+>>   /**
+>>    * dump_hdr() - Dump an ACPI header
+>>    *
+>> - * If the header is for FACS then it shows the revision information as well
+>> + * Except for the Firmware ACPI Control Structure (FACS)
+>> + * additionally show the revision information.
+>>    *
+>>    * @hdr: ACPI header to dump
+>>    */
+>> @@ -25,7 +26,7 @@ static void dump_hdr(struct acpi_table_header *hdr)
+>>   {
+>>          bool has_hdr = memcmp(hdr->signature, "FACS", ACPI_NAME_LEN);
+>>
+>> -       printf("%.*s  %08lx  %5x", ACPI_NAME_LEN, hdr->signature,
+>> +       printf("%.*s  %016lx  %5x", ACPI_NAME_LEN, hdr->signature,
+>>                 (ulong)map_to_sysmem(hdr), hdr->length);
+>>          if (has_hdr) {
+>>                  printf("  v%02d %.6s %.8s %x %.4s %x\n", hdr->revision,
+>> @@ -43,7 +44,7 @@ static int dump_table_name(const char *sig)
+>>          hdr = acpi_find_table(sig);
+>>          if (!hdr)
+>>                  return -ENOENT;
+>> -       printf("%.*s @ %08lx\n", ACPI_NAME_LEN, hdr->signature,
+>> +       printf("%.*s @ %016lx\n", ACPI_NAME_LEN, hdr->signature,
+> 
+> We really don't want 16 hex digits of output. It just isn't readable.
+> 
+> Should we add a way of writing a hex number with an underscore between
+> digits 8 and 9?
+> 
+> 12345678_3846263d
 
-> mtu3-peripheral ssusb@11200000: device enable failed -110
-> mtu3-peripheral ssusb@11200000: mtu3 hw init failed:-110
+I want to be able to copy the number and reuse it without editing in 
+other commands.
 
-You can refer to the user guide and public domain code.
-https://mediatek.gitlab.io/aiot/doc/aiot-dev-guide/master/sw/yocto/get-star=
-ted.html
-https://mediatek.gitlab.io/aiot/doc/aiot-dev-guide/master/sw/yocto/get-star=
-ted/build-code/build-steps.html
+We should simply get rid of the leading zeros as they confer no meaning.
 
-The latest u-boot code is here.
-https://gitlab.com/mediatek/aiot/bsp/u-boot/-/tree/mtk-v2022.10?ref_type=3D=
-heads
---=20
-Best regards,
-Macpaul Lin
+Best regards
+
+Heinrich
+
+> 
+> Better I think (at least for now) would be to use %10lx and live with
+> the column misalignment in the unlikely event that very large
+> addresses are used.
+> 
+>>                 (ulong)map_to_sysmem(hdr));
+>>          print_buffer(0, hdr, 1, hdr->length, 0);
+>>
+>> @@ -62,26 +63,34 @@ static int list_rsdt(struct acpi_rsdt *rsdt, struct acpi_xsdt *xsdt)
+>>   {
+>>          int len, i, count;
+>>
+>> -       dump_hdr(&rsdt->header);
+>> -       if (xsdt)
+>> +       if (rsdt)
+>> +               dump_hdr(&rsdt->header);
+>> +       if (xsdt) {
+>>                  dump_hdr(&xsdt->header);
+>> -       len = rsdt->header.length - sizeof(rsdt->header);
+>> -       count = len / sizeof(u32);
+>> +               len = xsdt->header.length - sizeof(xsdt->header);
+>> +               count = len / sizeof(u64);
+>> +       } else if (rsdt) {
+>> +               len = rsdt->header.length - sizeof(rsdt->header);
+>> +               count = len / sizeof(u32);
+>> +       } else {
+>> +               return 0;
+>> +       }
+>> +
+>>          for (i = 0; i < count; i++) {
+>>                  struct acpi_table_header *hdr;
+>>
+>> -               if (!rsdt->entry[i])
+>> -                       break;
+>> -               hdr = map_sysmem(rsdt->entry[i], 0);
+>> +               if (xsdt) {
+>> +                       if (!xsdt->entry[i])
+>> +                               break;
+>> +                       hdr = map_sysmem(xsdt->entry[i], 0);
+>> +               } else {
+>> +                       if (!rsdt->entry[i])
+>> +                               break;
+>> +                       hdr = map_sysmem(rsdt->entry[i], 0);
+>> +               }
+>>                  dump_hdr(hdr);
+>>                  if (!memcmp(hdr->signature, "FACP", ACPI_NAME_LEN))
+>>                          list_fadt((struct acpi_fadt *)hdr);
+>> -               if (xsdt) {
+>> -                       if (xsdt->entry[i] != rsdt->entry[i]) {
+>> -                               printf("   (xsdt mismatch %llx)\n",
+>> -                                      xsdt->entry[i]);
+>> -                       }
+>> -               }
+>>          }
+>>
+>>          return 0;
+>> @@ -92,10 +101,11 @@ static int list_rsdp(struct acpi_rsdp *rsdp)
+>>          struct acpi_rsdt *rsdt;
+>>          struct acpi_xsdt *xsdt;
+>>
+>> -       printf("RSDP  %08lx  %5x  v%02d %.6s\n", (ulong)map_to_sysmem(rsdp),
+>> +       printf("RSDP  %016lx  %5x  v%02d %.6s\n", (ulong)map_to_sysmem(rsdp),
+>>                 rsdp->length, rsdp->revision, rsdp->oem_id);
+>>          rsdt = map_sysmem(rsdp->rsdt_address, 0);
+>>          xsdt = map_sysmem(rsdp->xsdt_address, 0);
+>> +
+>>          list_rsdt(rsdt, xsdt);
+>>
+>>          return 0;
+>> @@ -111,8 +121,8 @@ static int do_acpi_list(struct cmd_tbl *cmdtp, int flag, int argc,
+>>                  printf("No ACPI tables present\n");
+>>                  return 0;
+>>          }
+>> -       printf("Name      Base   Size  Detail\n");
+>> -       printf("----  --------  -----  ------\n");
+>> +       printf("Name  Base               Size  Detail\n"
+>> +              "----  ----------------  -----  ----------------------------\n");
+>>          list_rsdp(rsdp);
+>>
+>>          return 0;
+>> --
+>> 2.40.1
+>>
+> 
+> Regards,
+> Simon
+
