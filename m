@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FC0C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:44:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C350CC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:45:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F1E386FF2;
-	Sun, 12 Nov 2023 01:44:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A6F038701C;
+	Sun, 12 Nov 2023 01:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="htKR+qH1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WI6ml7MZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF2B786FE9; Sun, 12 Nov 2023 01:44:01 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id E6D4E86FB0; Sun, 12 Nov 2023 01:44:11 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DC6886EB8
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:43:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2420086FB6
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:43:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-7a689bd4928so105143239f.0
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:43:50 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-7a94c5538aeso124505839f.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:43:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699749829; x=1700354629; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=SnuS5l3oGEdFpU5ykzWNYECzGaZLVg4303T/jA8v/Ic=;
- b=htKR+qH1C3UQR5As538VUY6UzkkSe8Om/HBVLM+GsWlNihd0eKow1aeXm0R9kZXhm/
- uJjLyBT7zhs4bU7xG5/qce1iWWtpZ3H5tWFS+gMI2Gc1p8RMCpdiVPMzbBUjHmb8Avsj
- 035sPAQzfGXU6mte+YpPL+Uyr2UqFtvV4Nf68=
+ d=chromium.org; s=google; t=1699749831; x=1700354631; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5Dh2t4v1OVeoDdqq+gDuaFoU7q8T3eNgWxabnLR74NA=;
+ b=WI6ml7MZcjIT1a6ODvXt6/rMtTMhD85SeULKGqXOSNQxypG2IHejEsVoxZKVwoZw1O
+ YcLawa5cu9errki1yOiO2gGaZv0mfaVjVvXTSMI4TH7tZVdlvKI6NtDkwjj2/9LJgkub
+ XTTn+RMegpzYfchuM8TIvyw35oMvzNZl+phUo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699749829; x=1700354629;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SnuS5l3oGEdFpU5ykzWNYECzGaZLVg4303T/jA8v/Ic=;
- b=YB0VsnG8lqvAdJ0Pj6B87Um+Qn1HgtNLDY2w1x2Q3Wuv0MvgjpPU+4GhPsQpOcqIEt
- xXDRPoDzHSDJhUvVPzvbAKGh+u2ueUNH53KYV+KEz62DABZDl9npdlL1RSnxc8iSU0YH
- 5Ned2C0haPhPJtnY4wo5Rps3Ctn02YbIZKpVI/TV/hosn0JBaTZD7dNoXsqRytSzBeb8
- n/w48zCaUzqPeY3lScth5JdmUti3v/jWzdMWgm4RMTL+ctdWXH+K7SjI/+M08cal5ZzR
- 43674SUwvLfQA9EK/5GaY99wwNAiKyfy80aHCUKVisPXzM8ugRG5vQwUFs3uFt/M+K49
- KvZA==
-X-Gm-Message-State: AOJu0YxU9Lt1iqYOoZt17u7XNpWnFa/S8FBdEGAxWk8lDTFYNlJx7JWS
- SmXYyxTnZsvpegy3Y9JFbLaqe7zAQdpHYRAO3u9NLw==
-X-Google-Smtp-Source: AGHT+IGM/HBSuB1yoOu496xn6/0D8U9Hkx7SvA+sPp/M5/75N8GRHUTbJgWRQ3P9xWWdALD6Pr1Iyg==
-X-Received: by 2002:a6b:5115:0:b0:7ac:ccd9:da93 with SMTP id
- f21-20020a6b5115000000b007acccd9da93mr5850488iob.0.1699749829004; 
- Sat, 11 Nov 2023 16:43:49 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699749831; x=1700354631;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5Dh2t4v1OVeoDdqq+gDuaFoU7q8T3eNgWxabnLR74NA=;
+ b=XruTS4o26WeX/UJ+oq0yVymmtRfFdOLnmYLCoZTdKOrY4OWoY2oOmwtJSTtMRF3Lr6
+ iBYGxTP20Y7DTsmgeMCwuWevPph20LWBUMKPFNKArk9MGwrW6xGJRh6rr7/YiVtlY3zY
+ eyMn3fDLlu1su+xpzIDzA7sx7+Y0pbdX6oPFRREFsxAtGeL+nMhyFt0IkI4etm4EWkrX
+ l+wzwoYsU62Drg26slVeJLjv/STRTR/8i4Vn/PtlqINxT0oOBaHDqnkefWIaxumVu3OE
+ RRa0k1S+2igxoem/BW+TYc2AZetm6+/XdnlzRQ9UOcTMZA7vpwHD1jhzv7rygCbPUO4L
+ vipg==
+X-Gm-Message-State: AOJu0YwhS6qm0x5el4r7Udm9hRPHIjpImdt0ZvxhuFLmCTcOrEqXKsDh
+ gx7DpMaGNgOp7PYlbkOJ9cRU7ciaGhgpKnAqkWMYjw==
+X-Google-Smtp-Source: AGHT+IHwaXKG077DPa6bgPHzeDNmBytGqaH1RiVVp4vWTNNHikHYHS31/il6HDkBdzzb84QkSx9hew==
+X-Received: by 2002:a5d:8b44:0:b0:792:6963:df3b with SMTP id
+ c4-20020a5d8b44000000b007926963df3bmr3607113iot.14.1699749831369; 
+ Sat, 11 Nov 2023 16:43:51 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- k39-20020a056638372700b00457a6f281ddsm711388jav.59.2023.11.11.16.43.48
+ k39-20020a056638372700b00457a6f281ddsm711388jav.59.2023.11.11.16.43.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 16:43:48 -0800 (PST)
+ Sat, 11 Nov 2023 16:43:51 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v2 0/3] tpm: Start to tidy up TPM tests
-Date: Sat, 11 Nov 2023 17:43:35 -0700
-Message-ID: <20231112004345.80145-1-sjg@chromium.org>
+Subject: [PATCH v2 3/3] tpm: Drop unwanted special cases for sandbox
+Date: Sat, 11 Nov 2023 17:43:38 -0700
+Message-ID: <20231111174337.v2.3.I3c84965a4b5e3019562b86a47b34ae4b12469070@changeid>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
+In-Reply-To: <20231112004345.80145-1-sjg@chromium.org>
+References: <20231112004345.80145-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,34 +89,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series is a starting point only. It tries to provide some direction
-for how the TPM tests should be run on real hardware and on sandbox.
+These don't seem to be needed.
 
-For sandbox, things are relatively easy since the TPM is reset before
-each test. Tests should start up the TPM before doing anything. Tests
-can be run in parallel, which is fine because tests are independent.
+Add a few notes about what to do next. Also mention parallel tests in
+at the top of thefile.
 
-For real hardware, tests cannot be made independent, other than by
-resetting the board, which if the hardware is correct, resets the TPM.
-So there may be more work to do to figure that out. The approach taken
-in this series for real hardware is to have a few tests which do init,
-then have the rest of the tests assume that the init is done. Tests
-that depend on the TPM already being inited can use 'tpm autostart'
-which works OK on sandbox and real hardware.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
-Changes in v2:
-- Keep test_tpm2_continue_self_test()
+(no changes since v1)
 
-Simon Glass (3):
-  tpm: sandbox: Support self-test continue in emulator
-  tpm: Convert sandbox-focussed tests to C
-  tpm: Drop unwanted special cases for sandbox
+ test/py/tests/test_tpm2.py | 46 +++++++++-----------------------------
+ 1 file changed, 10 insertions(+), 36 deletions(-)
 
- drivers/tpm/tpm_tis_sandbox.c |  1 +
- test/dm/tpm.c                 | 77 +++++++++++++++++++++++++++++++-
- test/py/tests/test_tpm2.py    | 84 +++++------------------------------
- 3 files changed, 87 insertions(+), 75 deletions(-)
-
+diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+index 8ed337eddc10..47370dad9f60 100644
+--- a/test/py/tests/test_tpm2.py
++++ b/test/py/tests/test_tpm2.py
+@@ -27,6 +27,16 @@ behavior.
+ * Setup env__tpm_device_test_skip to True if tests with TPM devices should be
+ skipped.
+ 
++Parallel tests
++--------------
++
++These tests can be run in parallel on sandbox. In that case any action taken
++by one test may be independent of another. For sandbox, care should be taken to
++ensure that tests are independent.
++
++Unfortunately, tests cannot be made independent on real hardware, since there is
++no way to reset the TPM other than restarting the board. Perhaps that would be
++the best approach?
+ """
+ 
+ updates = 0
+@@ -50,11 +60,6 @@ def force_init(u_boot_console, force=False):
+             u_boot_console.run_command('tpm2 clear TPM2_RH_PLATFORM')
+         u_boot_console.run_command('echo --- end of init ---')
+ 
+-def is_sandbox(cons):
+-    # Array slice removes leading/trailing quotes.
+-    sys_arch = cons.config.buildconfig.get('config_sys_arch', '"sandbox"')[1:-1]
+-    return sys_arch == 'sandbox'
+-
+ @pytest.mark.buildconfigspec('cmd_tpm_v2')
+ def test_tpm2_autostart(u_boot_console):
+     """Init the software stack to use TPMv2 commands."""
+@@ -65,20 +70,6 @@ def test_tpm2_autostart(u_boot_console):
+     output = u_boot_console.run_command('echo $?')
+     assert output.endswith('0')
+ 
+-def tpm2_sandbox_init(u_boot_console):
+-    """Put sandbox back into a known state so we can run a test
+-
+-    This allows all tests to run in parallel, since no test depends on another.
+-    """
+-    u_boot_console.restart_uboot()
+-    u_boot_console.run_command('tpm2 autostart')
+-    output = u_boot_console.run_command('echo $?')
+-    assert output.endswith('0')
+-
+-    skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+-    if skip_test:
+-        pytest.skip('skip TPM device test')
+-
+ @pytest.mark.buildconfigspec('cmd_tpm_v2')
+ def test_tpm2_continue_self_test(u_boot_console):
+     """Execute a TPM2_SelfTest (continued) command.
+@@ -90,8 +81,6 @@ def test_tpm2_continue_self_test(u_boot_console):
+     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+     if skip_test:
+         pytest.skip('skip TPM device test')
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     u_boot_console.run_command('tpm2 self_test continue')
+     output = u_boot_console.run_command('echo $?')
+     assert output.endswith('0')
+@@ -108,9 +97,6 @@ def test_tpm2_clear(u_boot_console):
+     not have a password set, otherwise this test will fail. ENDORSEMENT and
+     PLATFORM hierarchies are also available.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+-
+     skip_test = u_boot_console.config.env.get('env__tpm_device_test_skip', False)
+     if skip_test:
+         pytest.skip('skip TPM device test')
+@@ -131,8 +117,6 @@ def test_tpm2_change_auth(u_boot_console):
+     Use the LOCKOUT hierarchy for this. ENDORSEMENT and PLATFORM hierarchies are
+     also available.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     force_init(u_boot_console)
+ 
+     u_boot_console.run_command('tpm2 change_auth TPM2_RH_LOCKOUT unicorn')
+@@ -157,9 +141,6 @@ def test_tpm2_get_capability(u_boot_console):
+     There is no expected default values because it would depend on the chip
+     used. We can still save them in order to check they have changed later.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+-
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
+@@ -181,8 +162,6 @@ def test_tpm2_dam_parameters(u_boot_console):
+     the authentication, otherwise the lockout will be engaged after the first
+     failed authentication attempt.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
+@@ -205,9 +184,6 @@ def test_tpm2_pcr_read(u_boot_console):
+ 
+     Perform a PCR read of the 10th PCR. Must be zero.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+-
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
+@@ -234,8 +210,6 @@ def test_tpm2_pcr_extend(u_boot_console):
+     No authentication mechanism is used here, not protecting against packet
+     replay, yet.
+     """
+-    if is_sandbox(u_boot_console):
+-        tpm2_sandbox_init(u_boot_console)
+     force_init(u_boot_console)
+     ram = u_boot_utils.find_ram_base(u_boot_console)
+ 
 -- 
 2.42.0.869.gea05f2083d-goog
 
