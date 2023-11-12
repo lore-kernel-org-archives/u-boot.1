@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C077C4167B
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C431C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:02:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 363A686CF2;
-	Sun, 12 Nov 2023 21:02:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC6F586E40;
+	Sun, 12 Nov 2023 21:02:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a89A2oGL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gDgSKtmE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5854186D1D; Sun, 12 Nov 2023 21:02:08 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 3D85786BF7; Sun, 12 Nov 2023 21:02:32 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C8EA86BF7
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:02:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB45B86BF7
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:02:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5ac376d311aso41655577b3.1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:02:06 -0800 (PST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-dae7cc31151so3661645276.3
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:02:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819325; x=1700424125; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aJ9afwsZJdjgyBea+KorE9ivUuef/PIoFTlL6tfGqpE=;
- b=a89A2oGLQAF7clM//nqLUAlPlTrbHv7YmXQSSmIhxIe+CxIg6cRIwtpsTC7MclcXN7
- opAt8+AaJZJjARwXgtmHucewyWHJ+hh0/+Hh7GiZWemb5O5tFtFycDEWo4A2/Qr+wODU
- eMP2xWroc6PMkvp2nDANxaHvQBmUac7LLAYO0=
+ d=chromium.org; s=google; t=1699819348; x=1700424148; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wNTTUcY7Q+6ebMHRtG4IjxEfB4FdOYfAPwej6e6AOG0=;
+ b=gDgSKtmEjQpUwR3xw4AHkTvqvkPFdzGKngTOJ9Bo40diHz7paK2MId2f7LiUgimrK2
+ Zkvfocz5jZyfssVpSdDJ0n8FZp5tcs3BTmeX8wSwqn6SPGGZUYCoXnjN9Wlv1V5Nf89H
+ tGcINq+s9FscpCeY4ki0iGheiJkId6unbTpoM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819325; x=1700424125;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aJ9afwsZJdjgyBea+KorE9ivUuef/PIoFTlL6tfGqpE=;
- b=ejIZU+D5Wc4T4OAPkz29HjDL4OqQQ8hr3BaH3nfiEqpwCSRDsi3f3gFnGjHFyhARA1
- L0RJQxlB2PZg6nT2lBM0BOW+180ae5OIrJ4+WzCtl2QjhlID452lDhFUcsXAJ+R/hxn0
- HQygR2zlk4oKmD6mLBrNZRw7TuKCTRv35ModpxR7R1Gow0ehJj6eZMIDLNx6xzqdmU91
- 8ZpGSwRMZ1JD86a8pIgP8p1NZ8paH1SOKMk9eCpW22o4j4NWxAsl7v2u3y03eQLtwbai
- 4IKq5Y7KbMqgaLx2zqRx894VcP9BnMCSpSsKz7DK3NiGmsChbqld0sCRQdDrELG0LVEA
- 4Ssg==
-X-Gm-Message-State: AOJu0Yxz9ZGmuKjCxiWhZQBpvShsxKDs/pxcQTSrOgD1k+G6MUaw4v3t
- sz9I0x3xAi/2m96uaqjejrk5dbLXEVrMcaU0Dmxfng==
-X-Google-Smtp-Source: AGHT+IHAWVURCynmf8sVFpTT5beSPfNoF+wTl+1mJst/syfT4QWn8JqLT8Q2ffI4LPkAuk+DTXaP22DCMwqDZLB7T5k=
-X-Received: by 2002:a25:abc3:0:b0:d9c:a7fa:dbcb with SMTP id
- v61-20020a25abc3000000b00d9ca7fadbcbmr4652020ybi.22.1699819324741; Sun, 12
- Nov 2023 12:02:04 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699819348; x=1700424148;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wNTTUcY7Q+6ebMHRtG4IjxEfB4FdOYfAPwej6e6AOG0=;
+ b=vbtWQTwVtaA/M4zhzjSnKS+kywYGYQZ2krMLJTRCbeqJfuvhytIYopEHOcWKURz9xr
+ O32NzrOj4a4SQmlAyLCajuGitRbdqbgUjjrqNkvt0K2ouoO/8EDIXJmB04/fGSD0VxrS
+ g8vC2iyrjGoIh5bqXM2W+RmbWZNp/IIoKIaYuim0APSokc9xaAbc/wdysqEsfttziDsq
+ VVD787s12U8vKxRwIJyX0Recs1Ujs1OXRk8ouAp3gojprkIi3L/JMxuPhsTyWkrpV2Qx
+ mYcA6UhwClPTGTZu4tSZJ9+it2s3lB5agDUBx1XgZL0ujYOoC/4A9cxrJMlcTY6KcTLo
+ jZYg==
+X-Gm-Message-State: AOJu0Yy4AJf0+G+yzuF/tkJSihpi+9646L+C5mC9GCrgTw0VyBumcZOv
+ oiVQGP62PNeVXvEt3owbBXRiDYND+Is05m8UMeD3GQ==
+X-Google-Smtp-Source: AGHT+IHu4OBZITP2fR0gSdJdemlIxfB+CLLSZLJoE6YoU+rD+JzjM8lEKAG7UWTNvz2wjOM9pA7K+vAMA0qPYNRhZ9g=
+X-Received: by 2002:a25:728b:0:b0:da0:cbff:4e20 with SMTP id
+ n133-20020a25728b000000b00da0cbff4e20mr3986075ybc.56.1699819348383; Sun, 12
+ Nov 2023 12:02:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20231112155808.135585-1-sjg@chromium.org>
- <20231112155808.135585-3-sjg@chromium.org>
- <141b3e06-2383-4fd4-929b-520a6c7c4af9@gmx.de>
-In-Reply-To: <141b3e06-2383-4fd4-929b-520a6c7c4af9@gmx.de>
+References: <20231002011450.462468-1-sjg@chromium.org>
+ <20231002011450.462468-5-sjg@chromium.org>
+ <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
+ <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
+ <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
+ <20231106153631.GI496310@bill-the-cat>
+In-Reply-To: <20231106153631.GI496310@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 13:01:14 -0700
-Message-ID: <CAPnjgZ0H2Lkr2CgvmDit0b7NbeGR0abVj8DNW7W8Hc2JLm7P5g@mail.gmail.com>
-Subject: Re: [PATCH 2/4] efi: Collect the ACPI tables in the app
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 12 Nov 2023 13:01:10 -0700
+Message-ID: <CAPnjgZ1Zp0kjW4zUunopGrUEhbWAtkZ3xwuHYxgo50K9GdFtSA@mail.gmail.com>
+Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
+To: Tom Rini <trini@konsulko.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,81 +87,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Bin,
 
-On Sun, 12 Nov 2023 at 09:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Mon, 6 Nov 2023 at 08:36, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 11/12/23 16:58, Simon Glass wrote:
-> > Locate these so that they can be displayed using the 'acpi' command.
+> On Mon, Nov 06, 2023 at 06:26:15PM +0800, Bin Meng wrote:
+> > + Tom,
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
+> > Hi Simon,
 > >
-> >   lib/efi/efi_app.c | 24 +++++++++++++++++++++---
-> >   1 file changed, 21 insertions(+), 3 deletions(-)
+> > On Mon, Nov 6, 2023 at 12:29=E2=80=AFAM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi Bin,
+> > >
+> > > On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.or=
+g> wrote:
+> > > > >
+> > > > > This is needed to support Truetype fonts. In any case, the compil=
+er
+> > > > > expects SSE to be available in 64-bit mode. Enable it.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  arch/x86/config.mk        |  1 -
+> > > > >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
+> > > > >  2 files changed, 11 insertions(+), 1 deletion(-)
+> > > > >
+> > > >
+> > > > I didn't suggest we enable SSE for x86. This is the wrong approach.
+> > > >
+> > > > We should rewrite the Truetype support codes to avoid using float/d=
+ouble types.
+> > > >
+> > > > This way the Truetype codes can be used on any other architectures
+> > > > without the need for the compiler to emit explicit floating
+> > > > instructions.
+> > >
+> > > I am not aware of any such library. At present, enabling truetype on
+> > > coreboot64 causes a hang.
+> > >
 > >
-> > diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
-> > index 2209410f35b5..c5eb816655ea 100644
-> > --- a/lib/efi/efi_app.c
-> > +++ b/lib/efi/efi_app.c
-> > @@ -12,18 +12,21 @@
-> >   #include <cpu_func.h>
-> >   #include <debug_uart.h>
-> >   #include <dm.h>
-> > +#include <efi.h>
-> > +#include <efi_api.h>
-> >   #include <errno.h>
-> >   #include <init.h>
-> >   #include <malloc.h>
-> > +#include <sysreset.h>
-> > +#include <uuid.h>
-> >   #include <asm/global_data.h>
-> >   #include <linux/err.h>
-> >   #include <linux/types.h>
-> > -#include <efi.h>
-> > -#include <efi_api.h>
-> > -#include <sysreset.h>
-> > +#include <asm/global_data.h>
-> >   #include <dm/device-internal.h>
-> >   #include <dm/lists.h>
-> >   #include <dm/root.h>
-> > +#include <mapmem.h>
+> > If that's the case, we will have to either:
 > >
-> >   DECLARE_GLOBAL_DATA_PTR;
-> >
-> > @@ -320,6 +323,19 @@ int dm_scan_other(bool pre_reloc_only)
-> >       return 0;
-> >   }
-> >
-> > +static void scan_tables(struct efi_system_table *sys_table)
-> > +{
-> > +     efi_guid_t acpi = EFI_ACPI_TABLE_GUID;
-> > +     uint i;
-> > +
-> > +     for (i = 0; i < sys_table->nr_tables; i++) {
-> > +             struct efi_configuration_table *tab = &sys_table->tables[i];
-> > +
-> > +             if (!memcmp(&tab->guid, &acpi, sizeof(efi_guid_t)))
-> > +                     gd_set_acpi_start(map_to_sysmem(tab->table));
-> > +     }
+> > - Switch all U-Boot builds' to use software float (e.g. -msoft-float)
+> > which unfortunately depends on the compiler runtime intrinsics.
+> > - Introduce a Kconfig option for hard float enabling and let each
+> > architecture to decide whether it implements it or not, and update
+> > Truetype to depend on the hard float.
 >
-> Should we have a function efi_get_configuration_table(efi_guid_t *guid)
-> that we can use to retrieve different configuration tables?
->
-> This would allow us to read the device-tree on non-x86 tables.
->
-> We may at some point also be interested in reading the
-> EFI_RT_PROPERTIES_TABLE to find out which runtime services we are
-> allowed to call.
->
-> Or would you prefer to all of this into scan_tables()?
+> We generally do -msoft-float already, so introducing that for x86, and
+> some Kconfig logic to ensure that no one else steps on this particular
+> bug sounds reasonable.
 
-I'm not sure...but perhaps the best approach is to use this function
-to find all the tables we are interested in?
+Yes soft float seems to be not-much-used on x86. For 64-bit chips the
+compiler seems to assume that hardfp is available.
 
-BTW I started this series with a view to figuring out what is needed
-to make the app boot Linux, etc. It is a bit strange since the boot
-services need to be 'passed through' U-Boot to the underlying UEFI.
+So perhaps the best thing is to introduce a HARDFP option to x86 only.
 
 Regards,
 Simon
