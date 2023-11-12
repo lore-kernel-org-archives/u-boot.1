@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FDA6C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B62C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0254F874F0;
-	Sun, 12 Nov 2023 21:04:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 09978870F2;
+	Sun, 12 Nov 2023 21:16:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OZiV2+6x";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GKEdVYDf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06BB1874ED; Sun, 12 Nov 2023 21:04:02 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F1C3F87103; Sun, 12 Nov 2023 21:16:43 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6852987026
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBB8D87006
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:16:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5a81ab75f21so43467257b3.2
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819434; x=1700424234; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hxWdUXpnUthLbmKexLhkzpZBQMKB8Dt5q5IkEUxMbIA=;
- b=OZiV2+6xYOzPsdf3CkkE4D6O8Wc+5Z3ZlFj6404De2FMw8FgcNmyLNQioUlz4s+0pp
- AQitXu8DBla4211dFSIykdC4xE8V9Hkx6YE9U/At4Kh5hWFmyX904eGG0td8M8qQm+TZ
- RDEk0Gg3vKSDDtSxMRl6hiDfTsi5Q1xFhZmO8=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com
+ [209.85.222.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 568383FADA
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 20:16:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699820201;
+ bh=Iu27ZMzWfGHgC55JKxtcLcEZtLtbi55MOvAb99Vs88A=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=GKEdVYDfCrbl7ujo3PBuwGKEmUbYQU6GzFJ5OtMiEdpxhjhVO2SThX750GfW3Td4J
+ nAn9/XZsAtN9usxaGrrov8YXq+ZkmglxFVqmSW5DL9fprCTH38iIMdLDYnPFAtin/m
+ NGi2JHnEOv0B2HMJ8moGreEL2dY2xKruVNj94Sx1FTUfMdDIYeqa3K2Yhs5NHCPUUz
+ y/mejj9lwfThiROGNVimGjGG27z8hPFf3cwteIvGShQoMV94Mpm4Rfy5t8Dy2vSTe6
+ VlR3L4KVo4oRJwviWCHxdJ5F52DfCPMoqPakEgfNWSr1KI2WBXxGspQr+DamHyvunZ
+ hypOvu2UY7RmA==
+Received: by mail-ua1-f71.google.com with SMTP id
+ a1e0cc1a2514c-7baaa38761bso1132281241.3
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:16:41 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819434; x=1700424234;
+ d=1e100.net; s=20230601; t=1699820200; x=1700425000;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hxWdUXpnUthLbmKexLhkzpZBQMKB8Dt5q5IkEUxMbIA=;
- b=rDL2hLzmm7wz8h90BCKnYo7z4tzC6C0jgMK2lR4jOyTIKXGiwAAI9DrSvWFS/lHiPH
- mMRICsklnhd2h7ZZvlu+JRVkIrYs4zkZvKg5sVPF1sBxDUjKJO/QUjrDIjcOYg4ZVINz
- d+FI2LasF9aLCl82NgS/YhT9GVvA419fZQK9a5KBIYXpzEpwPGdfQ9Tta8rq76rpVZIc
- a26CC3XiK36Rt2Nhx4YSd/AIeXCujaG9483g2Pj1+v0IYNLX6aIO3Zd82KHrrys7kFzO
- 0giFZsEckonp+90/Yn4ObpXp6vRzxO8OIyJlV3vIboDWLs8T4ZKws1ZzPnYirmFnn7gs
- dCig==
-X-Gm-Message-State: AOJu0YyMzA6MfIrLQ5NlVWrKJAsFUYm8er3nUWCJgwQGDwO9tfNTIHqV
- WfZzHdiJXZ5S2Y9dEGBL6TG3rpYzrVyVLUtJOAIwQBaBQ9ktoEE9Geo=
-X-Google-Smtp-Source: AGHT+IGyOf9MUtcp6/nTzhhtz3DdNvBQWAATM424hgulqzRKpRjNCAYSbO9dzsHbnIRtmfYq2jmZ0JLSYLfRZN+VC5U=
-X-Received: by 2002:a05:690c:4683:b0:5c1:47f2:6e05 with SMTP id
- gx3-20020a05690c468300b005c147f26e05mr3250068ywb.9.1699819434105; Sun, 12 Nov
- 2023 12:03:54 -0800 (PST)
+ bh=Iu27ZMzWfGHgC55JKxtcLcEZtLtbi55MOvAb99Vs88A=;
+ b=W3y6ZDNTej5I+7tufMHE6uINEHuenrvyDsCtbcN+tegCpOLKllQtMLXnCpsEHrJzOK
+ fbK9lXuufg0mq2A1gdoX13K52qAaHTDsztvQZwh1ST9fuT3KRIxFaqQJ9CyBdCAJq+1P
+ 5HSV9LduP1WX0WsalxEEb/Hayh6un/XFRKZnB1UUZkwTUnwBfv+xVmiD6LBPxYSI30DW
+ AOIt5dgTha5TnImFQyJBZHc1WCSNuQMVwG64rgW9ninjkun8ZJbU3cLzy8kKqInYahtj
+ pg/IIg0SiNJkjudDFJpnn/sjMBSKV9IQx6GxtjRDeW0G1tI/zBDIhpuEKo4cKtmyGKW5
+ wKeQ==
+X-Gm-Message-State: AOJu0YxVPygO6f3ReOg3gv7moWsfy3AcjConOpqlZtZDhtBdBvIAmCpE
+ 9z5bwwXaqgaQ8QaWpJ8YwouakzmpQGLuvZ3RbeXPkSeOjN2Tkzyi2oh1q7oSL4L5xVVccOPe3ae
+ TF86lBXk2LuEfX1tvV6/Abm/zhOkNkTiDEc/TV8stONHpSSQ=
+X-Received: by 2002:a05:6102:298a:b0:45f:a41:b405 with SMTP id
+ dl10-20020a056102298a00b0045f0a41b405mr4040242vsb.21.1699820200112; 
+ Sun, 12 Nov 2023 12:16:40 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGzcXL5/gcE2g74QXm9QvM5uIFfFU8rPjqnaAE5dM06lrTrqLcRKLE9pWeuly+EQemsgarRum4jIeBd90hi4N0=
+X-Received: by 2002:a05:6102:298a:b0:45f:a41:b405 with SMTP id
+ dl10-20020a056102298a00b0045f0a41b405mr4040238vsb.21.1699820199837; Sun, 12
+ Nov 2023 12:16:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-3-sjg@chromium.org>
-In-Reply-To: <20231002011450.462468-3-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 13:01:11 -0700
-Message-ID: <CAPnjgZ0r2j7iRY5FpcKVUx2AHjaKDwtdL1Lars=MJbBAEMAOkQ@mail.gmail.com>
-Subject: Re: [PATCH v3 07/12] video: Correct setting of cursor position
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Anatolij Gustschin <agust@denx.de>
+References: <20231111142846.180442-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ0J+HDnEh+pHJCZNsqqhwP33Xi+8=rUOJPG1m1WBXU+9g@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0J+HDnEh+pHJCZNsqqhwP33Xi+8=rUOJPG1m1WBXU+9g@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Sun, 12 Nov 2023 21:16:28 +0100
+Message-ID: <CAM=mAOmhuBM-uN=ioZXP5TmAhMnO4Y80koxKYm0CF9nxfbWBhA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] acpi: cannot have RSDT above 4 GiB
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,91 +97,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anatolij,
+Simon Glass <sjg@chromium.org> schrieb am So., 12. Nov. 2023, 21:03:
 
-On Sun, 1 Oct 2023 at 19:15, Simon Glass <sjg@chromium.org> wrote:
+> Hi Heinrich,
 >
-> The ANSI codes are not correctly handled at present, in that the
-> requested X position is added to the current one.
+> On Sat, 11 Nov 2023 at 07:28, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > The field RsdtAddress has only 32 bit. The RSDT table cannot be located
+> > beyond 4 GiB.
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  lib/acpi/base.c | 26 +++++++++++++++++++-------
+> >  1 file changed, 19 insertions(+), 7 deletions(-)
 >
-> Correct this and also call vidconsole_entry_start() to start a new text
-> line.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> nits / question below
 >
-> (no changes since v1)
+> >
+> > diff --git a/lib/acpi/base.c b/lib/acpi/base.c
+> > index 2057bd2bef..128a76ad39 100644
+> > --- a/lib/acpi/base.c
+> > +++ b/lib/acpi/base.c
+> > @@ -21,10 +21,17 @@ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct
+> acpi_rsdt *rsdt,
+> >         memcpy(rsdp->signature, RSDP_SIG, 8);
+> >         memcpy(rsdp->oem_id, OEM_ID, 6);
+> >
+> > -       rsdp->length = sizeof(struct acpi_rsdp);
+> > -       rsdp->rsdt_address = map_to_sysmem(rsdt);
+> > +       if (rsdt)
+> > +               rsdp->rsdt_address = map_to_sysmem(rsdt);
+> > +       else
+> > +               rsdp->rsdt_address = 0;
 >
->  drivers/video/vidconsole-uclass.c | 15 ++++++++-------
->  1 file changed, 8 insertions(+), 7 deletions(-)
+> There is a memset() at the top so this line (and the one below) should
+> not be needed.
 >
-> diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-> index 22d55df71f63..a312a1985242 100644
-> --- a/drivers/video/vidconsole-uclass.c
-> +++ b/drivers/video/vidconsole-uclass.c
-> @@ -125,6 +125,7 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
->         priv->xcur_frac = VID_TO_POS(x);
->         priv->xstart_frac = priv->xcur_frac;
->         priv->ycur = y;
-> +       vidconsole_entry_start(dev);
->  }
+> > +
+> > +       if (xsdt)
+> > +               rsdp->xsdt_address = map_to_sysmem(xsdt);
+> > +       else
+> > +               rsdp->xsdt_address = 0;
+> >
+> > -       rsdp->xsdt_address = map_to_sysmem(xsdt);
+> > +       rsdp->length = sizeof(struct acpi_rsdp);
+> >         rsdp->revision = ACPI_RSDP_REV_ACPI_2_0;
+> >
+> >         /* Calculate checksums */
+> > @@ -68,11 +75,15 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
+> >  static int acpi_write_base(struct acpi_ctx *ctx,
+> >                            const struct acpi_writer *entry)
+> >  {
+> > -       /* We need at least an RSDP and an RSDT Table */
+> > +       /* We need at least an RSDP and an XSDT Table */
+> >         ctx->rsdp = ctx->current;
+> >         acpi_inc_align(ctx, sizeof(struct acpi_rsdp));
+> > -       ctx->rsdt = ctx->current;
+> > -       acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
+> > +       if (map_to_sysmem(ctx->current) < UINT_MAX - 0x10000) {
 >
->  /**
-> @@ -134,8 +135,10 @@ void vidconsole_set_cursor_pos(struct udevice *dev, int x, int y)
->   * @row:       new row
->   * @col:       new column
->   */
-> -static void set_cursor_position(struct vidconsole_priv *priv, int row, int col)
-> +static void set_cursor_position(struct udevice *dev, int row, int col)
->  {
-> +       struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
-> +
->         /*
->          * Ensure we stay in the bounds of the screen.
->          */
-> @@ -144,9 +147,7 @@ static void set_cursor_position(struct vidconsole_priv *priv, int row, int col)
->         if (col >= priv->cols)
->                 col = priv->cols - 1;
->
-> -       priv->ycur = row * priv->y_charsize;
-> -       priv->xcur_frac = priv->xstart_frac +
-> -                         VID_TO_POS(col * priv->x_charsize);
-> +       vidconsole_position_cursor(dev, col, row);
->  }
->
->  /**
-> @@ -193,7 +194,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
->                         int row = priv->row_saved;
->                         int col = priv->col_saved;
->
-> -                       set_cursor_position(priv, row, col);
-> +                       set_cursor_position(dev, row, col);
->                         priv->escape = 0;
->                         return;
->                 }
-> @@ -255,7 +256,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
->                 if (row < 0)
->                         row = 0;
->                 /* Right and bottom overflows are handled in the callee. */
-> -               set_cursor_position(priv, row, col);
-> +               set_cursor_position(dev, row, col);
->                 break;
->         }
->         case 'H':
-> @@ -279,7 +280,7 @@ static void vidconsole_escape_char(struct udevice *dev, char ch)
->                 if (col)
->                         --col;
->
-> -               set_cursor_position(priv, row, col);
-> +               set_cursor_position(dev, row, col);
->
->                 break;
->         }
-> --
-> 2.42.0.582.g8ccd20d70d-goog
+> Won't that do something different on 64-bit machines? It seems that
+> you want to check against SZ_4G ?
 >
 
-Any thoughts on this patch, please?
+For gcc int is 32bit on 64bit systems, so is UINT_MAX. Using SZ_4G could
+make this code clearer.
 
-Regards,
-Simon
+Best regards
+
+Heinrich
+
+
+
+> > +               ctx->rsdt = ctx->current;
+> > +               acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
+> > +       } else {
+> > +               ctx->rsdt = 0;
+> > +       }
+> >         ctx->xsdt = ctx->current;
+> >         acpi_inc_align(ctx, sizeof(struct acpi_xsdt));
+> >
+> > @@ -80,7 +91,8 @@ static int acpi_write_base(struct acpi_ctx *ctx,
+> >         memset(ctx->base, '\0', ctx->current - ctx->base);
+> >
+> >         acpi_write_rsdp(ctx->rsdp, ctx->rsdt, ctx->xsdt);
+> > -       acpi_write_rsdt(ctx->rsdt);
+> > +       if (ctx->rsdt)
+> > +               acpi_write_rsdt(ctx->rsdt);
+> >         acpi_write_xsdt(ctx->xsdt);
+> >
+> >         return 0;
+> > --
+> > 2.40.1
+> >
+>
+> Regards,
+> Simon
+>
