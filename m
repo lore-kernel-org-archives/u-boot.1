@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96CD1C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:27:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD027C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:31:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CB1287215;
-	Sun, 12 Nov 2023 21:27:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39A168710C;
+	Sun, 12 Nov 2023 21:31:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699820865;
-	bh=H/C4ED0Fehfty1JznnN6n716HrwNdSZzgaJlfNT23pM=;
+	s=phobos-20191101; t=1699821116;
+	bh=2Wlsv7Qaua7yCCUNzheX5Xy/xRQYmeevFj2Z+y8DuUk=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Y22c3NUg1dWYTkJAnwklLJYh9qkRJ6CmVoMHwvlA4LPC/kKkMtcZ2W4H25sK/cP7H
-	 YYiwLPafFaXyRoFc2zJtwAtWGpl4BN0N3/8SwT70TJpFroO96KdEC7sHMYU77KzO/5
-	 wiLjaV9qjfHcZlIw9Ih5ZLCkCR6cyqNLhumWkccCXSgk9m/fiY4FHAGgi1f0Zr2J84
-	 Ltwim6IntttDcyCBmACLMco84aQUmIoCuIsxP/zilECnINg/1kMAadfsSCkAD3AMwb
-	 C3s5XZFxGg3dM8fCKBmAhibdQ+WIiCdmteQM9wTtEM5o7XJjX7MbVU7yuCFVJhzyke
-	 /YtUZKDY6h8xg==
+	b=XTnb28tCoJU5K0NPKK+D7UCoHUV/CTnQ9eVigKDLQq6MjKQmLxwZVHz7PM8sGi7Nz
+	 zxATnbzxFUOwbmAVjaM4Khp9Kdl9Jy1bu0CMjecIYyxPGXxC9kosGqW6beuQec9aFC
+	 KHiQTcyP6av9sEHb3Q9Wxg4bBCWlV+ncTaqCBHzg8oA6AhD5qpy1KPK0wzDXssrn8G
+	 ngdAKp/CvKyHj0G2EkVirBpY0Hxk41MZHtR/8XxscArBAKrpPFZatCsUqLAYz7txkg
+	 Ipa1AEH97RyFS2NI6DQoxZ9bVdkBJplDbbiqNJV5h9hhuWbWhzXbfVGFskL0gOOF3I
+	 91sUKFurbYhJw==
 Received: from crub (p508b605d.dip0.t-ipconnect.de [80.139.96.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B8281871CF;
- Sun, 12 Nov 2023 21:27:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8DE0187103;
+ Sun, 12 Nov 2023 21:31:54 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699820863;
- bh=H/C4ED0Fehfty1JznnN6n716HrwNdSZzgaJlfNT23pM=;
+ s=phobos-20191101; t=1699821114;
+ bh=2Wlsv7Qaua7yCCUNzheX5Xy/xRQYmeevFj2Z+y8DuUk=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=eaOYeG1fTkg5rWLqX4B7ZMdne6YZ1+LmXtiYAG3H5dWH6AnnqflYr9U5poyqRDANW
- Kkffzy8YBoMmyCKTw70xDPiIGRX9DR+156JoCl7lUcxYUuccpaRuaj5Ps2VR4cDv/y
- m07RtyI95H8rQRmgkD55H4s50e3QoxuNrlPOtb2JToR7bYmOIHEnnJhWphd2Pd29h5
- ZpXwbEByYMzyExNNROBnDeCCGabmPBJznw/K15Wu7lRIiZULMrKNCpTGqY7vi8xjWQ
- BFjjZ9JPuQviak8ZxPleQjyoYGVt//Ige98IsUaGC3geBrDwuQEfl2CWluHSkkgCxV
- Q+GV7jJ+EzXbQ==
-Date: Sun, 12 Nov 2023 21:27:43 +0100
+ b=QU1dNb8d21Xiepp/pZrcx1LfAooComDMFdcjUX/ZMZz23NL6JQl7BsntCO/fXBvZW
+ A4Cw1UpBlbm9PCggef26NkjU6InBW08gpwaRo3jTLhd+9mZhWZf+Upezy1exEQ02Ox
+ HG5hYxoLjBlyJ4xmOk++gJxIDvrT9OcfTbYfxUGOEYbGDRegp5p/pFEeHqVarvOooi
+ I7Ow6w07SyMs/HtpzfgrbKkaZlDHCNqJ0mYklJRX3qCS+52vqCVzl2nOKa30vA7/LQ
+ WoVM/V6fAzcwOseS62O8D5WbcaRXDJQQktsI4i2iK5ANnpm4+diBdvbRuTM8fRiYE6
+ 0SS+zBXAUBxWg==
+Date: Sun, 12 Nov 2023 21:31:53 +0100
 From: Anatolij Gustschin <agust@denx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 07/12] video: Correct setting of cursor position
-Message-ID: <20231112212743.4ee65db5@crub>
-In-Reply-To: <CAPnjgZ0r2j7iRY5FpcKVUx2AHjaKDwtdL1Lars=MJbBAEMAOkQ@mail.gmail.com>
-References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-3-sjg@chromium.org>
- <CAPnjgZ0r2j7iRY5FpcKVUx2AHjaKDwtdL1Lars=MJbBAEMAOkQ@mail.gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v4 07/12] video: Correct setting of cursor position
+Message-ID: <20231112213153.6158af16@crub>
+In-Reply-To: <20231112200255.172351-3-sjg@chromium.org>
+References: <20231112200255.172351-1-sjg@chromium.org>
+ <20231112200255.172351-3-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -68,15 +67,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Sun, 12 Nov 2023 13:01:11 -0700
+On Sun, 12 Nov 2023 13:02:44 -0700
 Simon Glass sjg@chromium.org wrote:
-...  
+
+> The ANSI codes are not correctly handled at present, in that the
+> requested X position is added to the current one.
 > 
-> Any thoughts on this patch, please?
-
-looks good to me, thanks.
-
---
-Anatolij
+> Correct this and also call vidconsole_entry_start() to start a new text
+> line.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v1)
+> 
+>  drivers/video/vidconsole-uclass.c | 15 ++++++++-------
+>  1 file changed, 8 insertions(+), 7 deletions(-)
+ 
+Reviewed-by: Anatolij Gustschin <agust@denx.de>
