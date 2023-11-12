@@ -4,81 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DE7C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 19:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C077C4167B
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 349B086D62;
-	Sun, 12 Nov 2023 20:46:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 363A686CF2;
+	Sun, 12 Nov 2023 21:02:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MVUT2nTt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a89A2oGL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C99A186D11; Sun, 12 Nov 2023 20:46:48 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 5854186D1D; Sun, 12 Nov 2023 21:02:08 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DE2A86D3C
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 20:46:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C8EA86BF7
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:02:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-778a47bc09aso255483985a.3
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 11:46:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5ac376d311aso41655577b3.1
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:02:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699818405; x=1700423205; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K7R8u2Q6CtmikrP0hWA3hQM//U0+pjJLqydndEGkhv0=;
- b=MVUT2nTtcYxuKx+ffFMGPluov7D+iYYVyvDwKiGfnHxt9PgkRD0tfXpRQajDx7NIHd
- 7eo7MYYnKUFLA7Pj35NxBvZbLRbor0byj+Z+8COiJa0M5ahEY060O0/rIHEjddg1lkzw
- e7lk7GFx5aEXCUrdQTK4GXY14QkpYR2gDWYnw=
+ d=chromium.org; s=google; t=1699819325; x=1700424125; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aJ9afwsZJdjgyBea+KorE9ivUuef/PIoFTlL6tfGqpE=;
+ b=a89A2oGLQAF7clM//nqLUAlPlTrbHv7YmXQSSmIhxIe+CxIg6cRIwtpsTC7MclcXN7
+ opAt8+AaJZJjARwXgtmHucewyWHJ+hh0/+Hh7GiZWemb5O5tFtFycDEWo4A2/Qr+wODU
+ eMP2xWroc6PMkvp2nDANxaHvQBmUac7LLAYO0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699818405; x=1700423205;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=K7R8u2Q6CtmikrP0hWA3hQM//U0+pjJLqydndEGkhv0=;
- b=QSEziide+p3FK4D6n6Tm3gKn2RsHdkuEgJ3e81iMB93Uy8en1NjVqZSx2ge5zEGIhb
- yHhEOpnYm7ZjDbJSGsMnIOqDQMB2TKOb3RCTkSrX1LeaPsd4aBlpIIkApYnw5HPaapB+
- mWnsD9htRdq+U2wCcOKb2SzAiRaQ6MFKSvLb7IkeuMQ8XbO9aFpV763OA2++M5E579wY
- IEaGcCTVijvxc53jBNFXGd8/5s3f8iYPyfDaNiI5ArqiZU83qHg7FpPBKS8UAYGIwWLE
- Sw58eVJJ8T7Yk13OnFqnQt+VxeFQjTI6BJsTRPBpJXFNl/bSy7k2l+pjbran1KV7YOte
- J9Yg==
-X-Gm-Message-State: AOJu0Yy2IGVe9QFqkzcJ/DuNQyY6Jt1bv8MuP/A7CNNm3Sgt4IAAdS1f
- L9kFunv/m7se3o9/QonDGP+NGw==
-X-Google-Smtp-Source: AGHT+IEhphqZohQY6HIsO/l0T5j5qRB3GyiOefMbFirEAnLItwKG0QMbWyur5mm6x0I9+Ch1AGS2tA==
-X-Received: by 2002:a05:620a:171e:b0:777:659d:7fcb with SMTP id
- az30-20020a05620a171e00b00777659d7fcbmr6965971qkb.36.1699818404985; 
- Sun, 12 Nov 2023 11:46:44 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-8be2-1560-728c-e0db.res6.spectrum.com.
- [2603:6081:7b00:6400:8be2:1560:728c:e0db])
- by smtp.gmail.com with ESMTPSA id
- g24-20020a05620a109800b007757f6558b3sm1334827qkk.95.2023.11.12.11.46.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 11:46:44 -0800 (PST)
-Date: Sun, 12 Nov 2023 14:46:42 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 4/4] efi: Avoid using dm_scan_other()
-Message-ID: <20231112194642.GH6601@bill-the-cat>
-References: <20231112155808.135585-1-sjg@chromium.org>
- <20231112155808.135585-5-sjg@chromium.org>
- <20231112180357.GD6601@bill-the-cat>
- <C8077CF5-6258-4699-9204-BB9B23F391A8@gmx.de>
+ d=1e100.net; s=20230601; t=1699819325; x=1700424125;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aJ9afwsZJdjgyBea+KorE9ivUuef/PIoFTlL6tfGqpE=;
+ b=ejIZU+D5Wc4T4OAPkz29HjDL4OqQQ8hr3BaH3nfiEqpwCSRDsi3f3gFnGjHFyhARA1
+ L0RJQxlB2PZg6nT2lBM0BOW+180ae5OIrJ4+WzCtl2QjhlID452lDhFUcsXAJ+R/hxn0
+ HQygR2zlk4oKmD6mLBrNZRw7TuKCTRv35ModpxR7R1Gow0ehJj6eZMIDLNx6xzqdmU91
+ 8ZpGSwRMZ1JD86a8pIgP8p1NZ8paH1SOKMk9eCpW22o4j4NWxAsl7v2u3y03eQLtwbai
+ 4IKq5Y7KbMqgaLx2zqRx894VcP9BnMCSpSsKz7DK3NiGmsChbqld0sCRQdDrELG0LVEA
+ 4Ssg==
+X-Gm-Message-State: AOJu0Yxz9ZGmuKjCxiWhZQBpvShsxKDs/pxcQTSrOgD1k+G6MUaw4v3t
+ sz9I0x3xAi/2m96uaqjejrk5dbLXEVrMcaU0Dmxfng==
+X-Google-Smtp-Source: AGHT+IHAWVURCynmf8sVFpTT5beSPfNoF+wTl+1mJst/syfT4QWn8JqLT8Q2ffI4LPkAuk+DTXaP22DCMwqDZLB7T5k=
+X-Received: by 2002:a25:abc3:0:b0:d9c:a7fa:dbcb with SMTP id
+ v61-20020a25abc3000000b00d9ca7fadbcbmr4652020ybi.22.1699819324741; Sun, 12
+ Nov 2023 12:02:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eANfbVYrroTw8lsI"
-Content-Disposition: inline
-In-Reply-To: <C8077CF5-6258-4699-9204-BB9B23F391A8@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231112155808.135585-1-sjg@chromium.org>
+ <20231112155808.135585-3-sjg@chromium.org>
+ <141b3e06-2383-4fd4-929b-520a6c7c4af9@gmx.de>
+In-Reply-To: <141b3e06-2383-4fd4-929b-520a6c7c4af9@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 12 Nov 2023 13:01:14 -0700
+Message-ID: <CAPnjgZ0H2Lkr2CgvmDit0b7NbeGR0abVj8DNW7W8Hc2JLm7P5g@mail.gmail.com>
+Subject: Re: [PATCH 2/4] efi: Collect the ACPI tables in the app
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,93 +83,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---eANfbVYrroTw8lsI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sun, Nov 12, 2023 at 08:19:57PM +0100, Heinrich Schuchardt wrote:
->=20
->=20
-> Am 12. November 2023 19:03:57 MEZ schrieb Tom Rini <trini@konsulko.com>:
-> >On Sun, Nov 12, 2023 at 08:58:05AM -0700, Simon Glass wrote:
-> >> This function is defined by bootstd so using it precludes using that
-> >> feature. Use the board_early_init_r() feature instead.
-> >>=20
-> >> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>=20
-> >>  configs/efi-x86_app64_defconfig | 1 +
-> >>  lib/efi/efi_app.c               | 5 ++---
-> >>  2 files changed, 3 insertions(+), 3 deletions(-)
-> >>=20
-> >> diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_d=
-efconfig
-> >> index d6b6c3d82995..e6a62b30dd09 100644
-> >> --- a/configs/efi-x86_app64_defconfig
-> >> +++ b/configs/efi-x86_app64_defconfig
-> >> @@ -17,6 +17,7 @@ CONFIG_USE_BOOTCOMMAND=3Dy
-> >>  CONFIG_BOOTCOMMAND=3D"ext2load scsi 0:3 01000000 /boot/vmlinuz; zboot=
- 01000000"
-> >>  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
-> >>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> >> +CONFIG_BOARD_EARLY_INIT_R=3Dy
-> >>  CONFIG_HUSH_PARSER=3Dy
-> >>  CONFIG_SYS_PBSIZE=3D532
-> >>  CONFIG_CMD_BOOTZ=3Dy
-> >> diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
-> >> index c5eb816655ea..1bced775a4d0 100644
-> >> --- a/lib/efi/efi_app.c
-> >> +++ b/lib/efi/efi_app.c
-> >> @@ -302,15 +302,14 @@ static int setup_block(void)
-> >>  }
-> >> =20
-> >>  /**
-> >> - * dm_scan_other() - Scan for UEFI devices that should be available t=
-o U-Boot
-> >> + * board_early_init_r() - Scan for UEFI devices that should be availa=
-ble
-> >>   *
-> >>   * This sets up block devices within U-Boot for those found in UEFI. =
-With this,
-> >>   * U-Boot can access those devices
-> >>   *
-> >> - * @pre_reloc_only: true to only bind pre-relocation devices (ignored)
-> >>   * Returns: 0 on success, -ve on error
-> >>   */
-> >> -int dm_scan_other(bool pre_reloc_only)
-> >> +int board_early_init_r(void)
-> >>  {
-> >>  	if (gd->flags & GD_FLG_RELOC) {
-> >>  		int ret;
+On Sun, 12 Nov 2023 at 09:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11/12/23 16:58, Simon Glass wrote:
+> > Locate these so that they can be displayed using the 'acpi' command.
 > >
-> >Should this file really be board/efi/efi-x86_app/something.c ? We don't
->=20
-> The EFI app should not be x86 specific.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   lib/efi/efi_app.c | 24 +++++++++++++++++++++---
+> >   1 file changed, 21 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
+> > index 2209410f35b5..c5eb816655ea 100644
+> > --- a/lib/efi/efi_app.c
+> > +++ b/lib/efi/efi_app.c
+> > @@ -12,18 +12,21 @@
+> >   #include <cpu_func.h>
+> >   #include <debug_uart.h>
+> >   #include <dm.h>
+> > +#include <efi.h>
+> > +#include <efi_api.h>
+> >   #include <errno.h>
+> >   #include <init.h>
+> >   #include <malloc.h>
+> > +#include <sysreset.h>
+> > +#include <uuid.h>
+> >   #include <asm/global_data.h>
+> >   #include <linux/err.h>
+> >   #include <linux/types.h>
+> > -#include <efi.h>
+> > -#include <efi_api.h>
+> > -#include <sysreset.h>
+> > +#include <asm/global_data.h>
+> >   #include <dm/device-internal.h>
+> >   #include <dm/lists.h>
+> >   #include <dm/root.h>
+> > +#include <mapmem.h>
+> >
+> >   DECLARE_GLOBAL_DATA_PTR;
+> >
+> > @@ -320,6 +323,19 @@ int dm_scan_other(bool pre_reloc_only)
+> >       return 0;
+> >   }
+> >
+> > +static void scan_tables(struct efi_system_table *sys_table)
+> > +{
+> > +     efi_guid_t acpi = EFI_ACPI_TABLE_GUID;
+> > +     uint i;
+> > +
+> > +     for (i = 0; i < sys_table->nr_tables; i++) {
+> > +             struct efi_configuration_table *tab = &sys_table->tables[i];
+> > +
+> > +             if (!memcmp(&tab->guid, &acpi, sizeof(efi_guid_t)))
+> > +                     gd_set_acpi_start(map_to_sysmem(tab->table));
+> > +     }
+>
+> Should we have a function efi_get_configuration_table(efi_guid_t *guid)
+> that we can use to retrieve different configuration tables?
+>
+> This would allow us to read the device-tree on non-x86 tables.
+>
+> We may at some point also be interested in reading the
+> EFI_RT_PROPERTIES_TABLE to find out which runtime services we are
+> allowed to call.
+>
+> Or would you prefer to all of this into scan_tables()?
 
-Yes, I suspect a follow-up would be to do whatever is needed to target a
-given architecture with the U-Boot as EFI application board.
+I'm not sure...but perhaps the best approach is to use this function
+to find all the tables we are interested in?
 
---=20
-Tom
+BTW I started this series with a view to figuring out what is needed
+to make the app boot Linux, etc. It is a bit strange since the boot
+services need to be 'passed through' U-Boot to the underlying UEFI.
 
---eANfbVYrroTw8lsI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVRK58ACgkQFHw5/5Y0
-tyzQbwv+LvDhKyjzF1oxNKuDmLsDjPBTEbPcQeSOWjwfQzsRpooF+jrYsyX6stP3
-dDsvP4RKthaKx6MdbV5PgUKbqpj9TYV2JPzjHOIA17jqDrcPJ8P15tCiTwCyAsmw
-nAZ8fjJx4CEnlJblxmm/KLOjSjp8TAH5XSm/FO9NO54/5/ee50/ROFndRcM89LjM
-39WZcMrS9n3Ag63dcz/dTpMRKMq2sIjabtKdiDFADrSMLXmQSSXZSnwmsui9Donm
-biltXoU5LLqBcmLsj/RAuiihGSB41xBH9Z7lIMm/mMu+9GQhnfwBdk0lVAYJcImM
-6EMovhsFXDAQhPAm4sy9xKqLTuhU/qx3995cI3XU7qHXWEPvL5hXQxxWsYV7JXEW
-J4fZalICUbWo+egsEpE3ZJpeDsy3ViWYbDcVacPogmeCe4J5iog15fSwyTWMwLNK
-m2+bHhpKgA8XVzei4Ff7mSJcMNzVjY7qvNsWJBcThbnhxnPYyx0e+l6nkwTHclgz
-W4y6ynKq
-=ZHhh
------END PGP SIGNATURE-----
-
---eANfbVYrroTw8lsI--
+Regards,
+Simon
