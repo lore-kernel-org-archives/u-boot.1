@@ -4,79 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022C1C05021
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 11:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DF7C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 12:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A56E8708B;
-	Mon, 13 Nov 2023 12:24:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 31A0086F64;
+	Mon, 13 Nov 2023 13:26:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="2SxOUXq9";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2653287091; Mon, 13 Nov 2023 12:24:21 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5FE3B86EB5; Sun, 12 Nov 2023 20:17:09 +0100 (CET)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04olkn0825.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0d::825])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3660F86DCE
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 12:24:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4040B86D3C
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 20:17:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4079ed65582so33752485e9.1
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 03:24:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1699874657; x=1700479457;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v/+J7dDoC5WXMA4VaUKrjq5q9AOGW8vgNNvmsM998PY=;
- b=2SxOUXq94CmjLlWU8gTpPgYv/kezNit4CxDNLhq+TAPc4zzIa6Ppf5eq5OYFzIf5UJ
- JAx8Mr2EiRKHwX/IKrYNDGT8xLJVfyxU2JbDWsqPn5iL+O0YNebAHeGDiLeH3PpHhl5A
- MFHBoNCzemdVkfIQRO7e2NuAMHJvLanyTAZuu2AR34wtMe0cxsCF/OCrGN9JN8XV99a3
- yHgAQDkppqQfatULED5kBaoagPzUWJ88cJui79FB5oaRlk/3V1J2t6V2fRCIzrZnVtUl
- UREB1Q3drJ5gkIOo9yuJG7slfYzQhDKgmEab4nYsNh7WvlpwyraAA17FOXImVwM5RX/f
- X2lA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699874657; x=1700479457;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=v/+J7dDoC5WXMA4VaUKrjq5q9AOGW8vgNNvmsM998PY=;
- b=bfL3U4343H9rh5p+BdXUMhfXcvgU1h6GenK+s3WOokHt9+51YT3kXSX12kgri4CFVZ
- LcirMFFYc9YtQPPW2SluxfE/HVG5xzt7HR2TvjqCKcyQjG6r94rfXAUJLuhQM3pOWzaH
- J64DYVgEZMhsI+S+hFN8cb2rWeSMIAWuDh59ybNnvMVIc+AK1m908j06u2TWlnISUoEk
- HsBY/BNDFJxWrTLga8CLdOT9BJYA5c2KSOFoN279O4IP3lLIaKT07MbobHohWd3qnyG8
- Afa+6/VFfNCNyfbmqboikWG2KDTbYaIQJFEsakdsbzQBVrKEaBmT9t58R17sVk0kIgEP
- 1+QQ==
-X-Gm-Message-State: AOJu0Yx3/rfUGw7P6xe45Url3PwThtYoBPvGWgk6++8M/MvfNfG8iJPc
- 3Yl98BlNVd1tP+3HyXIs2EKR8/HRMYDJm5x40HEfghay
-X-Google-Smtp-Source: AGHT+IGUsgRkSS40txUVAGoihjyjDpDBMe3Tz0EvpFIW+Qz75Jp598bR8/+YNV1kubANhmEENCY7WA==
-X-Received: by 2002:a05:600c:458a:b0:40a:4607:5f68 with SMTP id
- r10-20020a05600c458a00b0040a46075f68mr4915744wmo.22.1699874657390; 
- Mon, 13 Nov 2023 03:24:17 -0800 (PST)
-Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
- [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- d14-20020a05600c34ce00b00406443c8b4fsm13532581wmq.19.2023.11.13.03.24.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 03:24:17 -0800 (PST)
-From: Shantur Rathore <i@shantur.com>
+ dmarc=fail (p=none dis=none) header.from=outlook.fr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fberder@outlook.fr
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MRaXJGJK2+Zh7zQgBSena3q9bs2MZY8qCvc/H9JkVL7j+HHqyq7STFIo3hpfWKX+jp7M77VaodTzS0Lug/j2FrC3VnuA2qS6WYmfAO2cM50KhYjWjVBzT9pSI42NwOkFhdGS9wtyVxDdyin7xSLF8LyaJ8EgrglBuVQfDdvbZ3xcnG9/1SojS58LLHKjtMwdLVTmvFt8ADyysKUB4zSZ25caEG5c/X6xZkHAEQjiCClOFX54UO4Wm0PJPR4CkrvYrkElZFn3xBfabvWpgqqWAIjObYyzkjunqu6g86Aim1erRlxyfYR2t3bjT2ODCKOOMV3SSQ8Ur/b57TYKS5P51g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T+Mn/K5wqAx25a713Bfb/VkziXfn0xrUvuQBwkM0Nhk=;
+ b=DPPCWyPrQtx+RIM8umTEunSgW1wVgBzPhcUDcjG4zhOiUiw4aD60tM7I0TQou38q21In9CEOz74cfBgHuCLFvZhzZwath/U2dU+bDBzpkZxTpzNzbxotPaDEIHOj5Px0mZFNGcuTk1CA7klsIGQnTZNEM4N3cym4qh1ILSBPbCUVL238lqaK7iqXGpnfCdqeAYryQMkR/KRVJ5B/JhAYYdfTCI0V48D9/SsREkdtJdoscCKsUModCWmIUqI1npKtQ3KTJ+Y+vDh4nowBZO4QFdUz8YcXVpiPN6zY6BCqZZsWakxJLUZJaOAPni4jtXoLW/aze1PhwpnfltcuNuQxkg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+Received: from PAWP194MB2055.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:337::6)
+ by PR3P194MB0540.EURP194.PROD.OUTLOOK.COM (2603:10a6:102:35::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.28; Sun, 12 Nov
+ 2023 19:17:04 +0000
+Received: from PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
+ ([fe80::b354:71fd:200:420d]) by PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
+ ([fe80::b354:71fd:200:420d%4]) with mapi id 15.20.6977.028; Sun, 12 Nov 2023
+ 19:17:04 +0000
+From: Francois Berder <fberder@outlook.fr>
 To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- trini@konsulko.com, jagan@amarulasolutions.com, akash@openedev.com,
- Shantur Rathore <i@shantur.com>
-Subject: [PATCH v4] arm: dts: rockpro64: Add RockPro64 smbios
-Date: Mon, 13 Nov 2023 11:23:09 +0000
-Message-Id: <20231113112309.730323-1-i@shantur.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
-References: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
-MIME-Version: 1.0
+Cc: Francois Berder <fberder@outlook.fr>
+Subject: [PATCH] lib/slre: Fix memory leak if regex compilation fails
+Date: Sun, 12 Nov 2023 20:16:50 +0100
+Message-ID: <PAWP194MB205547087E126BAE0D2EB0DDDAACA@PAWP194MB2055.EURP194.PROD.OUTLOOK.COM>
+X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-TMN: [/kmu4jS6XswB1eOpnvYNeUt8tRuUbe2Tv/fsvmHaVkw=]
+X-ClientProxiedBy: DU6P191CA0041.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:10:53f::21) To PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:102:337::6)
+X-Microsoft-Original-Message-ID: <20231112191650.44414-1-fberder@outlook.fr>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAWP194MB2055:EE_|PR3P194MB0540:EE_
+X-MS-Office365-Filtering-Correlation-Id: befe5f40-792a-4911-09fa-08dbe3b3f458
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: M1HS1GF3IkEcbzYZHitZhDgkKln/DOmVSPutr1BbuvYLFjzAvyXDDNqcFrPRe2lAWRLVT4uMrIaD1GVHOeCo54BTpK8j0LrPcLLniITlYXWygGjC6EorG2QPgYDMUQXLXrtDD14k6pghUCwQfjeSB3Dgpf+Oke/mvLvRAcp26hOH4GQ+fJesTXQ/xqB2rssSYBTSdRJ8YLWNK31xuGgFphbya/5NMtw7iuA+7qBsRbkqXSAOes6RnYV0SZ0ijl1UgLXVoy92y64t5qHBzTGqMQk+XPKz4gR+FVlGddu8Chax9q1AhByhyyM+tgzIHc9aldiNPqabTlhlqPuYQ6tkqzAQX3zOFiGEn+1OqTS/NGOn5NZ/qVT8uWsaDlg0F8XwcPh8zvEq0h68My2HsT5I+xvv2Tf9kVxE5w/FRQJPa1Iw9WF6wxEqA+/k0/2q3AA5I2ZFo3meGNejfID5rGCTSaTGfF6tuMr9eMO05WeHtK9CeB1Ig0jmdgs3PfQOs57+wuZCS93KgIVhzmlmFI8vblxBhxY4zzb9qKPtzZXJBF4GfdZfbzuLoUFSNi97n28h1MsImvGOc39xYiQot0v3n+Gmo3YrOKmrlwCpHleMVNUf7qs3e1JyfHmayeBuCK0Y
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EBA+Fj9HK52LzpK0wrXoAegiH9RtFOelNh9yUSVdBDz2UKSNyQv4QILVsEvc?=
+ =?us-ascii?Q?xHFnC8fHSxgyx67fSvSrIXrkNOQmTEMGooE7LkR0ny85hDF2HEBRd8L7PGnO?=
+ =?us-ascii?Q?hDAXO7WO8+fHsc/kK5+0LEY6D9dzDe86UVuJBoeq8c1cN7Cib1T4zIji84P5?=
+ =?us-ascii?Q?R5IAwKThgM8FTwcpX2ZkWraXti7IZpyZNStsuce8FP+7rDf1OJLuWp8kSDbX?=
+ =?us-ascii?Q?Wj3r/r/OiC0arujTZT40fdv1telJ9qKaqrLp84CRzcO5F6D7OAnWOmO3shFE?=
+ =?us-ascii?Q?MXm7QBIy+8InRzUMKsOZY5KhVwHaRMkS7StZZ3omxIoDMTELIefyI6rh9vpX?=
+ =?us-ascii?Q?6J9HYPALlIYRzQwBdXFe+4NWkASE6P2oAGEvKnleAyw12L6+hnvIbLcZfJWU?=
+ =?us-ascii?Q?rOsUBWSqG172CvuPLaD9G/O78NGa5AFh1ITGUt8nSOGndqExaTIrUu8zahdU?=
+ =?us-ascii?Q?Xs9BiOeGaF6m16Mn1mGTRTviZMG68maX3S48aJlGoiLBvl3MqZKTeE/wXVok?=
+ =?us-ascii?Q?+M3ZcL1DLMHET6T/QirE9M4aJewvlPvLct1JeLhW4jC9B/PFtqB5V/cMFZTu?=
+ =?us-ascii?Q?QAEJbofks116QUyTvMNtoq7KKehoaHLRoxfAHXgLL2MdXAwX8ep+oRg4p5Nm?=
+ =?us-ascii?Q?h6/LW5JBBNEtN1KE/8GSfH+MNICsU39TtPGANBRqHs6sfTwVA9n9PtOPJc+B?=
+ =?us-ascii?Q?knBgU+Bnj13Mqj8IIw8c1UgMGaTFIQw8J8GALoNlNynt8INztQ3VBzQ4W+0Z?=
+ =?us-ascii?Q?qsxmljU1HllA/8jpQH+hKlbA+B4RMio6E495wkOKYyjOmAZLgOALHx7imHPN?=
+ =?us-ascii?Q?NQK4jlaZoOckqylDw8xiTcuZUcMNT5OHFkFr7NW5h9HkJ9o2nR88ScCbN5Xh?=
+ =?us-ascii?Q?JlwbWTc2WwbWU4Ktbml1ZIJfH9SR0JaOsE/kUXHqJqRB/2mmzWcAkshHl7KL?=
+ =?us-ascii?Q?H+F08uOcx20Hqu1ZzHbYcGY5DOCs6gFlTQYNv6Agk5DTGl9U2bVydC9bZ+3N?=
+ =?us-ascii?Q?9frCdd4A8B4pqo3mCZl507QMsaogVkyhTxUClhFxAqFtoQc1ixA25LSE70FW?=
+ =?us-ascii?Q?jHFS/adGQyb8iymu5tm6z/zE1wNUjnsRlil80XO3XD2fx+2yNcP2Qn6VQIqh?=
+ =?us-ascii?Q?ztKCLKYs5yhIe2x6WFMEpuKKISN7bZ7zusSkObNWxzWopKGMHBFptATPV8FZ?=
+ =?us-ascii?Q?ivqu6Gw1hqujbA9hgEBq6S8lAqGm97cR6GC7hw=3D=3D?=
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-84264.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: befe5f40-792a-4911-09fa-08dbe3b3f458
+X-MS-Exchange-CrossTenant-AuthSource: PAWP194MB2055.EURP194.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Nov 2023 19:17:04.7360 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P194MB0540
+X-Mailman-Approved-At: Mon, 13 Nov 2023 13:26:24 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,65 +111,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add smbios information for Pine64 RockPro64 board and enable in
-config
-
-Signed-off-by: Shantur Rathore <i@shantur.com>
+Signed-off-by: Francois Berder <fberder@outlook.fr>
 ---
- Changes 
- v4: Change PINE64 to Pine64
- v3: Enable SYSINFO and SYSINFO_SMBIOS in defconfig
+ lib/slre.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 ++++++++++++++++++++++
- configs/rockpro64-rk3399_defconfig        |  2 ++
- 2 files changed, 24 insertions(+)
-
-diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-index 732727d9b0..089732524a 100644
---- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-@@ -9,6 +9,28 @@
- 	chosen {
- 		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
- 	};
-+
-+        smbios {
-+                compatible = "u-boot,sysinfo-smbios";
-+                smbios {
-+                        system {
-+                                manufacturer = "Pine64";
-+                                product = "RockPro64";
-+                        };
-+
-+                        baseboard {
-+                                manufacturer = "Pine64";
-+                                product = "RockPro64";
-+                        };
-+
-+                        chassis {
-+                                manufacturer = "Pine64";
-+                                product = "RockPro64";
-+                        };
-+                };
-+        };
-+
-+
- };
+diff --git a/lib/slre.c b/lib/slre.c
+index e82a9e7635..e1a50443e0 100644
+--- a/lib/slre.c
++++ b/lib/slre.c
+@@ -686,6 +686,7 @@ int main(int argc, char *argv[])
+ 	}
  
- &sdhci {
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 4cd6b76665..affb6137e0 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -90,6 +90,8 @@ CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_ROCKCHIP_SPI=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
+ 	if (!slre_compile(&slre, argv[1])) {
++		(void) fclose(fp);
+ 		fprintf(stderr, "Error compiling slre: %s\n", slre.err_str);
+ 		return 1;
+ 	}
 -- 
-2.40.1
+2.34.1
 
