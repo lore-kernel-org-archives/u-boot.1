@@ -4,78 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0897FC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 03:51:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93CF8C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 04:02:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AFC78714F;
-	Sun, 12 Nov 2023 04:51:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D0DD986C89;
+	Sun, 12 Nov 2023 05:02:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HUOri4nZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kUKJ08ke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EA5F86FA7; Sun, 12 Nov 2023 04:50:46 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 143CA86F88; Sun, 12 Nov 2023 04:40:08 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CC7E870E6
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 04:50:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACE2986F1A
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 04:40:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7a98fdeaac7so143683339f.1
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 19:50:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=macpaul@gmail.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-da0359751dbso2743486276.1
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 19:40:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699761028; x=1700365828; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1699760404; x=1700365204; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A/fPiF+JC+ZJVm5/lhiP/RBykvKfpXBl1TxmRCYr/8U=;
- b=HUOri4nZ5FmEqA7jylM+avFkxApV45HfKlDcl7KlSYTP7jPH3Rgq1ZkjYp503dYW0J
- c5juo7GWXwDGFc16YyNxqBwNAd+TuMcNVyj+hKxdp6qy8hC5yMOB5pNP87RNR6FcIMda
- eL9l4IRmcNL6HTX3UpAKkLCOEtHkJWdPRafQI=
+ bh=VC0PBNq9PihDxsNcegP2V44g9YKqjLa9VXxaCvVAuDE=;
+ b=kUKJ08kedJ6AYfBqkWpvn7GkscCYmYKEL87z/e84QxvhDDLOwIWXBQs5ppu3njVedv
+ kfau2mcvHaJ5Bna20Ujf/6cOaqUnPrgFFEDtPll9ajMxrc6C4i/ofIJs2zsTe/NQ5lxx
+ JzwRBZxFUVvrkQGKtegK/HPFasdeSl1TVLzwda6QYt07T0itmJBenbf0oeScJLtxKCNA
+ SOq/MAdXhGYE/n2qD6YeN12/d7Tzn8F4Hk8uNWfrt0l8fBAwo7L1pAyVSR7q21iqBPtx
+ KzSIbc1K2aCerP+qT5VxIPnHxk3acMGloErH2RJjBUE/gAfzUtFud32mBwA0DW6PCGoU
+ licA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699761028; x=1700365828;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1699760404; x=1700365204;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A/fPiF+JC+ZJVm5/lhiP/RBykvKfpXBl1TxmRCYr/8U=;
- b=g6+4DiyrZHR2mDuaM8IBnj96rPtIjwZEWyLzCAulSN+myyBzXbG8Wv2dse5FYAUITL
- QzbZZ5T6WOiacDki6PM+LZMwIRzezjCunigtPHC9c4Ub21hMW04iAhkcSsKHnZjluNRa
- vbfkt1Zd2ffelvM4SAe4sacRNwbVzLKhWfdOIdApENyxVFLsebP4X+K0JIAVHg7/gDqo
- aBJoHpS0s9Ghk+yCh77QRd77Tx5NkoFh55KDv4d+07rytp/EdKs4u9iXY5LdsM8rTANh
- 0qk6JDpYq/OXzEdOHEK/NOaw+zcsZPwMsim6hXrSpB4nvpRH8/nh6LYOtm/POh3NjBk9
- eQVA==
-X-Gm-Message-State: AOJu0YxALHC8RHViIU6xShmMY2XpXqbzqhKa48ILhY2we9l6QOCtQcqp
- 3FNeNwdNI5nIXOCJBogan/UCk8iEnyMaEy1xxNDMRw==
-X-Google-Smtp-Source: AGHT+IGuYkZALT6+dY7nSBzza8ckd4Ph4AI92lfgiZaEoA7+fiHFqcwJ+KXvK8B0fzF/TSlj0ASzuA==
-X-Received: by 2002:a05:6602:371a:b0:79a:b526:2f1c with SMTP id
- bh26-20020a056602371a00b0079ab5262f1cmr4526547iob.21.1699761027858; 
- Sat, 11 Nov 2023 19:50:27 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- p16-20020a056602305000b007791e286fdbsm817864ioy.21.2023.11.11.19.50.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 19:50:27 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH v2 4/5] bootm: Move arm64-image processing later
-Date: Sat, 11 Nov 2023 20:49:56 -0700
-Message-ID: <20231111204954.v2.4.Ie34b75c75347a1c04bffa780220afe9011b0e2bb@changeid>
-X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
-In-Reply-To: <20231112035001.103897-1-sjg@chromium.org>
-References: <20231112035001.103897-1-sjg@chromium.org>
+ bh=VC0PBNq9PihDxsNcegP2V44g9YKqjLa9VXxaCvVAuDE=;
+ b=K2AhmhWiQbPAU2WEERmE1XOZ0eSVBsQiEYerjTGysQWD5wsfkKGiAczzI9x5agCadR
+ 07bVaUUjirSv80gCdZt3Nhu00X0+ag/+vzn3itPwakm+VYhp8qcchuP7Y3g1hDrKWRj1
+ 1nQ3/e4CltftD2y+rCS4kacz+orBhH+1qBmThUtBFG6GSzDIhF2SWJNts2vn4QBazD9w
+ fWKNXR/aV9uKDp6G4QXv4lDHmFUF8Q+Vmu/Pidk1ELhQToHuJ453OFcLLcGhFXWDERWi
+ 7D8IDuL9ZBq/rm+Ftjf3/ZM+svnjSuXO6xHNI59m3JX3HOE5/gwh/WcOitYogJ5oZBdC
+ t0GQ==
+X-Gm-Message-State: AOJu0Yy/4DqW7PzQMJiM7390G0PujB250A6SXuT3yT/ok7iSkuWDhf9X
+ jj0t0T7l/iZN6WPzypESf2WhU+Us5qU0gQ8t0Vs=
+X-Google-Smtp-Source: AGHT+IFuHnHoZFVmd1tKZ7RYZMU4IKSzed5Lqhd5GExRbb+yMPslmg6jQYVmfoP3VqdhRZNe8l6js1PzklHqC5tzoLA=
+X-Received: by 2002:a25:248a:0:b0:d9d:1048:b90 with SMTP id
+ k132-20020a25248a000000b00d9d10480b90mr4133424ybk.30.1699760404170; Sat, 11
+ Nov 2023 19:40:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230804110448.24589-1-macpaul.lin@mediatek.com>
+ <78245d2791000a64ca123db0ca4c063f2e1928d7.camel@toradex.com>
+In-Reply-To: <78245d2791000a64ca123db0ca4c063f2e1928d7.camel@toradex.com>
+From: Macpaul Lin <macpaul@gmail.com>
+Date: Sun, 12 Nov 2023 11:39:56 +0800
+Message-ID: <CACCg+XOX9fNb4wbtsFMOH12Lu7COqoY56mSqVx7k_dPohBPUJA@mail.gmail.com>
+Subject: Re: [PATCH v5 1/2] arm: mediatek: add mt8195 SOC support
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: "sjg@chromium.org" <sjg@chromium.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "macpaul.lin@mediatek.com" <macpaul.lin@mediatek.com>,
+ "marex@denx.de" <marex@denx.de>, 
+ "fparent@baylibre.com" <fparent@baylibre.com>, 
+ "aouledameur@baylibre.com" <aouledameur@baylibre.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "bear.wang@mediatek.com" <bear.wang@mediatek.com>,
+ "sam.shih@mediatek.com" <sam.shih@mediatek.com>, 
+ "chunfeng.yun@mediatek.com" <chunfeng.yun@mediatek.com>, 
+ "Ryder.Lee@mediatek.com" <Ryder.Lee@mediatek.com>, 
+ "weijie.gao@mediatek.com" <weijie.gao@mediatek.com>,
+ "pablo.sun@mediatek.com" <pablo.sun@mediatek.com>, 
+ "GSS_MTK_Uboot_upstream@mediatek.com" <GSS_MTK_Uboot_upstream@mediatek.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 12 Nov 2023 05:02:50 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,85 +101,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the image is compressed, then the existing check fails, since the
-header is wrong.
+Marcel Ziswiler <marcel.ziswiler@toradex.com> =E6=96=BC 2023=E5=B9=B411=E6=
+=9C=8811=E6=97=A5 =E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=884:24=E5=AF=AB=E9=81=
+=93=EF=BC=9A
+>
+[snip]
+> > Changes for v5:
+> >  - Fix Copyright year to 2023.
+> >  - Fix memory map in dram_init() to support 8GB onboard memory.
+> >  - Add '#if !IS_ENABLED(CONFIG_SYSRESET)' with reset_cpu().
+> >  - Correct reset_cpu() function prototype.
+> >  - rebase patchset to v2023-10.rc1
+> >  - Add missing arch/arm/mach-mediatek/mt8195/Kconfig.
+>
+> [snip]
+>
+> I finally got my hands on an EVK and gave this a try. However, I did not =
+get that far. This is with latest
+> downstream TF-A as I still struggle with upstream there as well. Any idea=
+s?
+>
+> U-Boot 2024.01-rc1-00056-g5237f2b48bb (Nov 10 2023 - 15:33:34 +0100)
+>
+> CPU:   MediaTek MT8195
+> DRAM:  8 GiB
+> mtu3 usb@11200000: clks of sts1 are not stable!
+> mtu3-peripheral ssusb@11200000: device enable failed -110
+> mtu3-peripheral ssusb@11200000: mtu3 hw init failed:-110
+> board_init: Cannot find USB device
+> initcall failed at call 00000000ffe46a50 (err=3D-110)
+> ### ERROR ### Please RESET the board ###
+>
+> Cheers
+>
+> Marcel
 
-Move the check later in the boot process, after the kernel is
-decompressed. This allows use of bootm with compressed kernels, while
-still permitting an uncompressed kernel to be used.
+I'm glad you've get a board and tested our patches.
+Currently we're busy on other tasks so the improvement to the patch v5
+has been postponed. :~(
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+These error is because the power supplement settings are in the later patch=
+es.
+Hence the clock might not stable for the cold boot up.
+You can just press the key on the board and warm reset it, the clock
+issue should be disappear.
 
-Changes in v2:
-- Rework the patch based on a better understanding of events
+> mtu3-peripheral ssusb@11200000: device enable failed -110
+> mtu3-peripheral ssusb@11200000: mtu3 hw init failed:-110
 
- boot/bootm.c | 45 +++++++++++++++++++++++++++------------------
- 1 file changed, 27 insertions(+), 18 deletions(-)
+You can refer to the user guide and public domain code.
+https://mediatek.gitlab.io/aiot/doc/aiot-dev-guide/master/sw/yocto/get-star=
+ted.html
+https://mediatek.gitlab.io/aiot/doc/aiot-dev-guide/master/sw/yocto/get-star=
+ted/build-code/build-steps.html
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index aef9fad8ca13..4c150e895f2f 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -248,24 +248,8 @@ static int bootm_find_os(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	if (images.os.type == IH_TYPE_KERNEL_NOLOAD) {
--		if (IS_ENABLED(CONFIG_CMD_BOOTI) &&
--		    images.os.arch == IH_ARCH_ARM64 &&
--		    images.os.os == IH_OS_LINUX) {
--			ulong image_addr;
--			ulong image_size;
--
--			ret = booti_setup(images.os.image_start, &image_addr,
--					  &image_size, true);
--			if (ret != 0)
--				return 1;
--
--			images.os.type = IH_TYPE_KERNEL;
--			images.os.load = image_addr;
--			images.ep = image_addr;
--		} else {
--			images.os.load = images.os.image_start;
--			images.ep += images.os.image_start;
--		}
-+		images.os.load = images.os.image_start;
-+		images.ep += images.os.image_start;
- 	}
- 
- 	images.os.start = map_to_sysmem(os_hdr);
-@@ -474,6 +458,31 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 		}
- 	}
- 
-+	if (IS_ENABLED(CONFIG_CMD_BOOTI) && images->os.arch == IH_ARCH_ARM64 &&
-+	    images->os.os == IH_OS_LINUX) {
-+		ulong relocated_addr;
-+		ulong image_size;
-+		int ret;
-+
-+		ret = booti_setup(load, &relocated_addr, &image_size, false);
-+		if (ret) {
-+			printf("Failed to prep arm64 kernel (err=%d)\n", ret);
-+			return BOOTM_ERR_RESET;
-+		}
-+
-+		/* Handle BOOTM_STATE_LOADOS */
-+		if (relocated_addr != load) {
-+			printf("Moving Image from 0x%lx to 0x%lx, end=%lx\n",
-+			       load, relocated_addr,
-+			       relocated_addr + image_size);
-+			memmove((void *)relocated_addr, load_buf, image_size);
-+		}
-+
-+		images->ep = relocated_addr;
-+		images->os.start = relocated_addr;
-+		images->os.end = relocated_addr + image_size;
-+	}
-+
- 	lmb_reserve(&images->lmb, images->os.load, (load_end -
- 						    images->os.load));
- 	return 0;
--- 
-2.42.0.869.gea05f2083d-goog
-
+The latest u-boot code is here.
+https://gitlab.com/mediatek/aiot/bsp/u-boot/-/tree/mtk-v2022.10?ref_type=3D=
+heads
+--=20
+Best regards,
+Macpaul Lin
