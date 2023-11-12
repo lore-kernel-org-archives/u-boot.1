@@ -4,76 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B8FC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 16:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6715AC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 17:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E73686D4C;
-	Sun, 12 Nov 2023 17:53:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8B94686FBF;
+	Sun, 12 Nov 2023 18:49:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fOpv/5cp";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kmjf/c+R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 848FC8708B; Sun, 12 Nov 2023 17:53:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 776D186DCE; Sun, 12 Nov 2023 18:49:20 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2FAC86D4C
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 17:53:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4C0C86F26
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 18:49:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699808000; x=1700412800; i=xypron.glpk@gmx.de;
- bh=eM5n38TYBWDObcplL0bRYLv67Ht+sP1SEMncJF2jYLc=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=fOpv/5cpMCgjGT2/z9o1w2yVGjQ7y3WpvfO17FEuo3ubduuo3+m9+BNqRXypC4EM
- zJKyhoZ+pf74Yeji8aFJa8vYQW6IRcmbTtxg7TQnOXgeV9MoSaosnXx6YSrI9CES7
- 93A5mdZ2mhPPSah3XFpOWFmJZ/wlU6oWRf26SAA7Ms9itDl+g0UuElfHD0P+aNSLl
- qi9LvG+EW0om9Y/cKaM2T2Hj6kS+2SvF8FGwHpdkFtybq7XTzqAIGZExyJ9ndyn5Y
- hSLLtwSDhRrCjsjKpeJRrZzwJCa3mLTSY+qkQdaPsOajm02WZeKLBbFQ7Xe65pjQM
- O/1aXgAlCUIffUgo5g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M4JqV-1r1wj83VJ3-000H4T; Sun, 12
- Nov 2023 17:53:19 +0100
-Message-ID: <44e30885-88c8-4a22-814e-77fcc9ee339d@gmx.de>
-Date: Sun, 12 Nov 2023 17:53:19 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d4dd=G2=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1699811349;
+ bh=4LjvOV2bZT7eLCUAp5HoKih04rL1pkEqcEOd8OCKiZA=;
+ b=kmjf/c+RIXG6zOET4Ki3H1kGVjJr4YB8y0dkatwUKwG5gfeOEk2s1mRZxO9vdOrz3hu7znGZd
+ Uo0TnE0umGRhpjM7QrhrQz077rp8ifPuIw+FKwtrhVMWgsNE1WpOYhvbU9WAfBXOJ0/PQQGpH7f
+ HFEBdb1MSCsHf+jjNGxSUao2que4keEchytHctNOvhpBavJOaDhQoIE1tp7H3gQ3SnW4A7XkUnG
+ qKOu2tmrQKz2DYcqfa/PCoRhMRMs+93dCgTLZ/31BhB4oLBs/IEQpgtCUidYTp13kjHRUFskB1X
+ xsoEXoQ/8Y0/42lCl9/aV6KPBmQdej4iZ63em+6yzitw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 0/2] rockchip: Use dwc3-generic driver on RK3328 and RK3399
+Date: Sun, 12 Nov 2023 17:48:56 +0000
+Message-ID: <20231112174904.1581187-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] efi: Correct display of table GUIDs
-Content-Language: en-US, de-DE
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20231112155808.135585-1-sjg@chromium.org>
- <20231112155808.135585-4-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231112155808.135585-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:mQbVQEuWw10eI+LsLMHSXBH0esnq1jClOoaGVxw5DmVLMKZ5PQM
- 3bUyHvzNGFr9fNKDEZkoO1VmW0rnmxjhL25sieNmY4LxadkBZmaITNXBOXOfoD3HYG9qPUL
- 1Y3ifqDhf1dT77Ra0YR8x+t95bok/LJ12RW4iDqIoI3cNyQUOw8X+nlvzrGFEaL2vmiwmXs
- usZYJbG0TD0xNv8dhd41g==
-UI-OutboundReport: notjunk:1;M01:P0:xC1XyAaZrmU=;eQegjk4ovxxgNsJ9+jso56XGQM9
- xK1O8xSQNs/D7jyxRElLEvWkgOwVEGypsI6faCrxzEEjXiS91gK+iNzZ9LDrgh6/maqMvu6Ry
- Dvuda3IESMwZmoKZK0sym7o/G1zXrqKOA0OcbnhUVnI4AjnSbHLIuIu9R/IMOlVFxwlHitAAv
- Iyz6L8KHZVHHhIHrlMdc7X/NBw3bksQLVUqiMmJdiAzTDanYUKmLsepqi3d+5HB1UK8wk/Zjh
- 3TWx1XPeMx9yaRU30JuDBJq7OYecjf/HI+i0ioOBqxaZqdOakQ4oO6BWs8d/RRCWEU7fN3wNi
- r5owHw5mh8wHQ4J+mQ5MGXo3od04tf/gWZo+2phqw8BzEWGmz5anLEhtlyxThxhZITarE2es2
- P8cIaA8iC9K85SJ23KNZ8IqHR9IP+OEYnleZ1elnru+1Oh3gYfDhIdKBbzkSVjxJA36pMCdCr
- 19tagiQxXYqMKUxIBeT5soLqedg6xLTCcK/DElDHMbPjmOwS3PoaUrGL06MIEKUkak33Q64cv
- CV0T4875q+pjdx0d8pYnnPZVYmVB5A9eqbUeqvsvQ2/LZRwuM2Rg8S8gJKXcgTL/2v68jgAP5
- aQdpesaNfUVzp5dSpBOacnB/fbtnxAOMhj6tXMowM7uQsPmF2Ex8QeGk/ksLCkTIYekp3SZpf
- t6A9C0N97W7vZkH2FlgbQNFd+sCquRh4dpI0ggfzQaaASlx4tlaYg4VQIw/jML8NwR3DHn++x
- 1PgPxY8/7m+Q0+SKXT9ao1LbtnLHCwZaD+0BYtWqdooxgot3gLg7mVfOd4Kk+8n9VQ1DS3jAl
- NxDBCfyQlFTfLBaPrtyJUPDlhSCYMi1TkTJB8TSdbId3auxV8y5MOaZdBAQAqLRdG3Addem5X
- vWzTPZNTL7LwMH1my1NqKwJo2qWqTkhaQK5e91yzd9T2gOp8zS/YHQPYHmKiOjFeTxI9zZZoN
- Euvzk/RE7St10q+60VdesJDwSDE=
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6551101533f2b3120541d691
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +67,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/12/23 16:58, Simon Glass wrote:
-> The printf() %pU option decodes GUIDs so it is not necessary to do this
-> first. Drop the incorrect code.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->   cmd/efi_common.c | 4 +---
->   1 file changed, 1 insertion(+), 3 deletions(-)
->
-> diff --git a/cmd/efi_common.c b/cmd/efi_common.c
-> index f4056096cd3f..1aa2351fcdfd 100644
-> --- a/cmd/efi_common.c
-> +++ b/cmd/efi_common.c
-> @@ -17,10 +17,8 @@ void efi_show_tables(struct efi_system_table *systab)
->
->   	for (i =3D 0; i < systab->nr_tables; i++) {
->   		struct efi_configuration_table *tab =3D &systab->tables[i];
-> -		char guid_str[37];
->
-> -		uuid_bin_to_str(tab->guid.b, guid_str, 1);
-> -		printf("%p  %pUl  %s\n", tab->table, guid_str,
-> +		printf("%p  %pUl  %s\n", tab->table, tab->guid.b,
->   		       uuid_guid_get_str(tab->guid.b) ?: "(unknown)");
+This series change to use the dwc3-generic driver on all RK3328 and
+RK3399 boards. Also switch to use DM_USB_GADGET and remove then obsolete
+board_usb_init() and dm_usb_gadget_handle_interrupts() functions.
 
-Please, observe, that we have printf("%pUs", &guid) for printing the
-text representation of a GUID. If the text representation is unknown, it
-will print the numeric representation.
+First patch change all RK33xx boards to use dwc3-generic driver.
+Second patch remove obsolete rk3399 usb gadget functions.
 
-Best regards
+This has been tested and validated on rockpro64 and rock-pi-4 boards.
 
-Heinrich
+Changes in v2:
+- Drop DM_USB_GADGET related changes from first patch
+- Add DM_USB_GADGET condition to arch Kconfig
 
->   	}
->   }
+Jonas Karlman (2):
+  configs: rockchip: Use dwc3-generic driver on RK3328 and RK3399
+  rockchip: board: Remove dwc3 usb init and gadget handler functions
+
+ arch/arm/Kconfig                              |  1 +
+ arch/arm/mach-rockchip/board.c                | 30 +------------------
+ configs/chromebook_bob_defconfig              |  2 +-
+ configs/chromebook_kevin_defconfig            |  2 +-
+ configs/eaidk-610-rk3399_defconfig            |  4 ++-
+ configs/evb-rk3399_defconfig                  |  1 -
+ configs/firefly-rk3399_defconfig              |  1 -
+ configs/khadas-edge-captain-rk3399_defconfig  |  4 ++-
+ configs/khadas-edge-rk3399_defconfig          |  4 ++-
+ configs/khadas-edge-v-rk3399_defconfig        |  4 ++-
+ configs/leez-rk3399_defconfig                 |  4 ++-
+ configs/nanopc-t4-rk3399_defconfig            |  3 +-
+ configs/nanopc-t6-rk3588_defconfig            |  1 -
+ configs/nanopi-m4-2gb-rk3399_defconfig        |  4 ++-
+ configs/nanopi-m4-rk3399_defconfig            |  4 ++-
+ configs/nanopi-m4b-rk3399_defconfig           |  4 ++-
+ configs/nanopi-neo4-rk3399_defconfig          |  4 ++-
+ configs/nanopi-r4s-rk3399_defconfig           |  3 +-
+ configs/orangepi-5-plus-rk3588_defconfig      |  1 -
+ configs/orangepi-5-rk3588s_defconfig          |  1 -
+ configs/orangepi-r1-plus-lts-rk3328_defconfig |  3 +-
+ configs/orangepi-r1-plus-rk3328_defconfig     |  3 +-
+ configs/orangepi-rk3399_defconfig             |  4 ++-
+ configs/pinebook-pro-rk3399_defconfig         |  1 -
+ configs/pinephone-pro-rk3399_defconfig        |  1 -
+ configs/puma-rk3399_defconfig                 |  1 -
+ configs/roc-pc-mezzanine-rk3399_defconfig     |  1 -
+ configs/roc-pc-rk3399_defconfig               |  1 -
+ configs/rock-4c-plus-rk3399_defconfig         |  1 -
+ configs/rock-4se-rk3399_defconfig             |  1 -
+ configs/rock-pi-4-rk3399_defconfig            |  1 -
+ configs/rock-pi-4c-rk3399_defconfig           |  1 -
+ configs/rock-pi-n10-rk3399pro_defconfig       |  1 -
+ configs/rock5a-rk3588s_defconfig              |  1 -
+ configs/rock5b-rk3588_defconfig               |  1 -
+ configs/rock960-rk3399_defconfig              |  3 +-
+ configs/rockpro64-rk3399_defconfig            |  1 -
+ drivers/usb/host/Kconfig                      |  1 -
+ 38 files changed, 44 insertions(+), 65 deletions(-)
+
+-- 
+2.42.0
 
