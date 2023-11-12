@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3458EC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:28:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9189C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 15:28:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50E8B871A1;
+	by phobos.denx.de (Postfix) with ESMTP id B6F41871FC;
 	Sun, 12 Nov 2023 16:28:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RzhGYlFq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BbNvIEPR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1599387203; Sun, 12 Nov 2023 16:28:04 +0100 (CET)
+ id 348EF8720A; Sun, 12 Nov 2023 16:28:05 +0100 (CET)
 Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
  [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F305287185
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 16:28:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7226871A1
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 16:27:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-7b006f7c473so78955039f.2
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 07:28:01 -0800 (PST)
+ ca18e2360f4ac-7a67f447bf0so151393039f.2
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 07:27:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699802880; x=1700407680; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l1AyIuy5pB+FvvmVhFPd9ZvAuxNbhgat38ELE/YhOOI=;
- b=RzhGYlFqaD5+AxPWQi52vt/yOnCabEk/KSjxxdvA3H2Y1Ukv4IUD2f0G35FzpOwNkz
- y4se9FBZI9QPKwv1Jxo7fmbgd5epVyw9pueqL6/uQYYOmucU701IENdA69toWvZLBxV4
- 7u4GEO0AtfLpkg/2Ulj03oslLbrWjxU6+A6Ek=
+ d=chromium.org; s=google; t=1699802877; x=1700407677; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6fMcAhae8hJ8I3K24IM3z3VHA3ZHz95j+23lRMfRewI=;
+ b=BbNvIEPRtjwTzb4XAdIVs1PkPfUtV2q8hY/v0e+Owfd4aPSMSeHwKVu1nU2xmEvnee
+ qP2VSRnXW+NxFWE8Gdt4Y/oSWhmcMF+Z1h2XDgb70u9djsnPyyDCQG8svSrLOyXoCe0n
+ 6UYY8vwblHoJfk0XKfGXdI3/PxRUTqfGGGwD4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699802880; x=1700407680;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=l1AyIuy5pB+FvvmVhFPd9ZvAuxNbhgat38ELE/YhOOI=;
- b=dbw4MmQ/HBr6A2siDieUOPJF/kpL3gNmnjdXPMfpQvD13RZ1tOkXpGrECTrBt0dZlH
- 2qcrTPNoaxXTGXL77/ey3TjmWeZlSQnEW4BtWG1L21aNvroKieynWwAbpPTJIUGAWjsZ
- Fqxn1doABLnmPpWbqCl3fRP76/SCwsgpZhGvN6Wrf6L9IDrIHDyhQQYE47pOjIdhPU2F
- InLJyeKpAIurszWHgUbgjo0iNjiASvAzFAx/BdH7f0LnZo1aypLyqq7mf814n4ONGecS
- c8yVN1QmMNuhx4EzVffx+Lb+Lv2HxgGdDaynDhOA3jfbWj4DzM/5XM6Cm8YD5Rg0UGU2
- am+A==
-X-Gm-Message-State: AOJu0YxeuOKqydU5Z/Avbj3yVqsSTJHqFM/g72hB+ws6R48WXRcILeFz
- 8nD3oad1BNjTZlRgG1W+VxReAXTviWnSGvG7l7J0sA==
-X-Google-Smtp-Source: AGHT+IFyoVYry/Xj3he+pKJKT6nNioArcOOmM6VkiQLThIaSomuJ3tCBv5mXzAKELtu5aIvlwAQqCg==
-X-Received: by 2002:a05:6602:2e12:b0:79f:e9ac:f60a with SMTP id
- o18-20020a0566022e1200b0079fe9acf60amr6815821iow.20.1699802880500; 
- Sun, 12 Nov 2023 07:28:00 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699802877; x=1700407677;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6fMcAhae8hJ8I3K24IM3z3VHA3ZHz95j+23lRMfRewI=;
+ b=eINf64amZmJmEVYIktciN28h0QTvDsRcpw0uqt1cqTncisndsKx/0voHgZocFGLjDV
+ ZBqCS6D7lObcPeKJ3cz5a9xYCjWG8rJ5uqwfUy1UWrbGj6q8SXP7WltzUJi15uk9P6jc
+ 1uQuU6p+LNxonjCBCy9OASef/v7FAzy4J+5hxpLzP4V1CNtgCjKVJWN+gGUpCIfdZxPN
+ t1914arLIX586L+UqZvw/JmO2RbpnSlHcTGeguZK9KuFWaj74jH7HOSNtPRctpkYub/q
+ oPjMc39aGf047w1w9aM1EACJtr1jFp70SmVwzjOkUQ2aWY60GC/KMW9dDkSXHgoYVNZ7
+ k0FA==
+X-Gm-Message-State: AOJu0Yzwn5Q4uxZeMWIAqy+WyQCI+U0G9+bOvwtoRE5D4wqzv9wD4YOP
+ 3z+NOaRLMqFIxrt8mGRk/yOsZU4MIfjcAkv3Pj6Khg==
+X-Google-Smtp-Source: AGHT+IHLXHTxH0bJml2UmTNNVawzQwl7Bct56XYROVrD9ORfSWHF3yBibK/gfD3lnLefIj2H2SCx6A==
+X-Received: by 2002:a6b:d013:0:b0:79f:9574:b93c with SMTP id
+ x19-20020a6bd013000000b0079f9574b93cmr4492022ioa.0.1699802877318; 
+ Sun, 12 Nov 2023 07:27:57 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- 76-20020a6b144f000000b0079fdbe2be51sm1226241iou.2.2023.11.12.07.27.59
+ 76-20020a6b144f000000b0079fdbe2be51sm1226241iou.2.2023.11.12.07.27.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 07:28:00 -0800 (PST)
+ Sun, 12 Nov 2023 07:27:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Edmond <seanedmond@microsoft.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
+ Simon Glass <sjg@chromium.org>, Andy Fleming <afleming@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Dhananjay Phadke <dphadke@linux.microsoft.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerry Van Baren <vanbaren@cideas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [PATCH 3/7] fdt: Improve the comment for fdt_shrink_to_minimum()
-Date: Sun, 12 Nov 2023 08:27:46 -0700
-Message-ID: <20231112152754.130399-4-sjg@chromium.org>
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Safae Ouajih <souajih@baylibre.com>,
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Wolfgang Denk <wd@denx.de>
+Subject: [PATCH 0/7] fdt: Move towards using ofnode for devicetree fixups
+Date: Sun, 12 Nov 2023 08:27:43 -0700
+Message-ID: <20231112152754.130399-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
-In-Reply-To: <20231112152754.130399-1-sjg@chromium.org>
-References: <20231112152754.130399-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,56 +100,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a bit more detail about what this function does.
+When large quantities of fixups are needed, using the livetree is more
+efficient. In any case, the ofnode API is easier to use and read than
+the lower-level libfdt functions.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This series tweaks the DT-fixup implementation a little, so that all of
+the non-ofnode fixups happen before the ofnode fixups. This should make
+it possible to whittle away at the former.
 
- boot/fdt_support.c    |  1 -
- include/fdt_support.h | 12 +++++++++++-
- 2 files changed, 11 insertions(+), 2 deletions(-)
+This series is based on Sean's one here:
 
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 09ce5828659e..510ad24a999d 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -722,7 +722,6 @@ int fdt_record_loadable(void *blob, u32 index, const char *name,
- 	return node;
- }
- 
--/* Resize the fdt to its actual size + a bit of padding */
- int fdt_shrink_to_minimum(void *blob, uint extrasize)
- {
- 	int i;
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index d967118bedf0..791258ec7eff 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -242,13 +242,23 @@ int ft_system_setup(void *blob, struct bd_info *bd);
- void set_working_fdt_addr(ulong addr);
- 
- /**
-- * shrink down the given blob to minimum size + some extrasize if required
-+ * fdt_shrink_to_minimum() - shrink FDT while allowing for some margin
-+ *
-+ * Shrink down the given blob to 'minimum' size + some extrasize.
-+ *
-+ * The new size is enough to hold the existing contents plus @extrasize bytes,
-+ * plus 5 memory reservations. Also, the end of the FDT is aligned to a 4KB
-+ * boundary, so it might end up up to 4KB larger than needed.
-+ *
-+ * If there is an existing memory reservation for @blob in the FDT, it is
-+ * updated for the new size.
-  *
-  * @param blob		FDT blob to update
-  * @param extrasize	additional bytes needed
-  * Return: 0 if ok, or -FDT_ERR_... on error
-  */
- int fdt_shrink_to_minimum(void *blob, uint extrasize);
-+
- int fdt_increase_size(void *fdt, int add_len);
- 
- int fdt_delete_disabled_nodes(void *blob);
+ https://patchwork.ozlabs.org/project/uboot/list/?series=380576&state=*
+
+
+
+Simon Glass (7):
+  boot: Drop size parameter from image_setup_libfdt()
+  fdt: Check for a valid fdt in oftree_ensure()
+  fdt: Improve the comment for fdt_shrink_to_minimum()
+  fdt: ppc: Drop extra size for ramdisk
+  boot: Move adding initrd earlier in image_setup_libfdt()
+  fdt: Drop the confusing casts in lmb_free()
+  fdt: Move ft_verify_fdt() before the final fixups
+
+ arch/mips/lib/bootm.c         |  4 ++--
+ boot/fdt_support.c            |  1 -
+ boot/image-board.c            |  2 +-
+ boot/image-fdt.c              | 27 ++++++++++++---------------
+ cmd/bootefi.c                 |  2 +-
+ drivers/core/ofnode.c         |  5 +++++
+ include/fdt_support.h         | 24 ++++++++++++++++++++++--
+ include/image.h               |  3 +--
+ lib/efi_loader/efi_dt_fixup.c |  2 +-
+ 9 files changed, 45 insertions(+), 25 deletions(-)
+
 -- 
 2.42.0.869.gea05f2083d-goog
 
