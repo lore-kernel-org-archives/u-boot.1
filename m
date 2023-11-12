@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F8AC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD1DC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 00:19:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2772A87790;
-	Sun, 12 Nov 2023 01:11:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8BD17876E5;
+	Sun, 12 Nov 2023 01:11:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D9zEDJSQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YHaPWaaW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73E5986F83; Sun, 12 Nov 2023 01:10:26 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id DDC1986FA6; Sun, 12 Nov 2023 01:10:18 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CFAA870E1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:09:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 368C08701D
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 01:09:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-7ac7b2b1e99so129093239f.2
- for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:09:47 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-357cf6725acso12970875ab.3
+ for <u-boot@lists.denx.de>; Sat, 11 Nov 2023 16:09:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699747786; x=1700352586; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699747781; x=1700352581; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=puL5Z00FbpcLZJRf0AT2N8HiJl5QyNf8Qgjiabse69Y=;
- b=D9zEDJSQTmNUKypq5KP0hyAfn7GDrvKhCUPNGnhAUqVxSW7YhPSmnP0Vi+5k4+dwiY
- M6gY707fHs7k42YIpOcUh3ifVP3yk4AuU/P/6SW/4TIhpBMhl4Dm9/G17mR2Fzocb1ra
- +uEA86mnHUKKcfVSHYJguFNu1VMAldx34ATag=
+ bh=xm2oP5vBKH83PgGyAXghAh0pjF+6GgIN8dVun7VVU6Q=;
+ b=YHaPWaaWhvWwW/dqBo/67AcoWJxXhksEXhdqsWcBGgo6yFf/lih+YLwKK2zqfmQvlv
+ qB3x6o4hlDaAsEbHtRx5r6pLJGhyVMMCdgcfSUnD7SOb1K4/TBAXJ/Nmc2ZaRF+QJgSh
+ odPT4EuKoFyAFmDhVIBVdoQyAkV3UtEdIg8B0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699747786; x=1700352586;
+ d=1e100.net; s=20230601; t=1699747781; x=1700352581;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=puL5Z00FbpcLZJRf0AT2N8HiJl5QyNf8Qgjiabse69Y=;
- b=WD4+L4jPAxuXrQKF+ROSFJabeUWjRriI1hcAWH5zxnpdCgOT6KK1ntNkm76Qe5lJ3a
- gG1+u3o2u3EuSkpNyF/0pBbjvCnD80tGGQM5nqNS+hi5/p13ElekfPsvlbUuk5HcU3AB
- 7BNO/gxqoL1d9u0/deLX9VxQJ7yR+IRWPCpiE/tBFdv4C8V/CdbmABli5QTfEdFsY5a/
- y2RFo5NOsddLV9yYCb7IJvB0rbrLZOkHmaOT9Ky4VG3fMCKzPKOeclbYsPdIMzQj+vFg
- PNEeQyqebaiJVdLNiupPXzgg0Vt3/UiDoPUSxenliz43AEKTTqeVcz8aqc82faNCIj0L
- SzVg==
-X-Gm-Message-State: AOJu0Yw/o7r8KQfx0Q3u7eftCDLszY9mIUg+6cwrPdJy9zCWch1nhT1x
- oBEJcQcU35hujf/Lx0nbKzfGbzBZFUfmtrxoDwV0Yg==
-X-Google-Smtp-Source: AGHT+IHR3kbfVLuUoojXc1lPe2ZbhtkyzV0PirF0yDcEWg7SLDd2qMJKoex7zj0mDAMUAREOWkbInw==
-X-Received: by 2002:a05:6e02:20e5:b0:359:311b:490e with SMTP id
- q5-20020a056e0220e500b00359311b490emr4495379ilv.2.1699747785930; 
- Sat, 11 Nov 2023 16:09:45 -0800 (PST)
+ bh=xm2oP5vBKH83PgGyAXghAh0pjF+6GgIN8dVun7VVU6Q=;
+ b=t+X+kYoHRtLMr5Qeoss3On++jQ765CwADcH96+qrXXHIuXV6hV/NdZFRk6HfUkWaHp
+ FCcOZ3TCx6hoPZXpbK2sD61/lbh9+3Iy0IVsl5x/22B5C1BT6U7ffr9ZgljHMIBHIGBZ
+ lrN6+NyNFurs3fAh6JiICEZIdWqhe1dHXd62u/sCK3fWYuheAciT/qh0k9Dj5fJUK0jy
+ o9ZS9vpar6oxcUP8V8PwSSHoW70dkC3b5F4EmgFgaZY13ood/uuskpBvm0/ZYToL6tlv
+ FMe58jVBvbUj9R/1eASSmKzcpnh1pN2Gd4oXMhldvPsheicV1MIDMR8fs/Sl3et+0Gsw
+ Uxgg==
+X-Gm-Message-State: AOJu0YxI50CYvk/xs4HD5V+cKUo0Wy9lJjpocpBoxzqMuxoWdoyHJmys
+ HxCw2fCfo7tCg+WxJFDHrM+ANna6zZvP+CuMxpbz6Q==
+X-Google-Smtp-Source: AGHT+IE2Kc9zqUvPYZS7eI9QPxhdFu6kEECpqNR3ie0dAUTCnpbT9F3pjJeg3ON1bFoa9hzZJMtdxQ==
+X-Received: by 2002:a05:6e02:2148:b0:35a:b337:6f58 with SMTP id
+ d8-20020a056e02214800b0035ab3376f58mr1860910ilv.16.1699747781629; 
+ Sat, 11 Nov 2023 16:09:41 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.45
+ l14-20020a92280e000000b003576ff2d8b1sm706804ilf.26.2023.11.11.16.09.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Nov 2023 16:09:45 -0800 (PST)
+ Sat, 11 Nov 2023 16:09:41 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Eddie James <eajames@linux.ibm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH 17/29] bootm: Reduce arguments to boot_get_ramdisk()
-Date: Sat, 11 Nov 2023 17:09:02 -0700
-Message-ID: <20231112000923.73568-18-sjg@chromium.org>
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH 12/29] bootm: Adjust boot_get_kernel() to return an error
+Date: Sat, 11 Nov 2023 17:08:57 -0700
+Message-ID: <20231112000923.73568-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231112000923.73568-1-sjg@chromium.org>
 References: <20231112000923.73568-1-sjg@chromium.org>
@@ -95,145 +92,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function normally only uses one argument so pass it in directly.
-Move comments to the header file so could one day include these
-functions in API docs. Fix up the u8 argument while here, since it
-avoids the compiler having to mask the value on some machines.
-
-The Android case here is bit strange, since it can use argv[0], so deal
-with that in the caller.
+This function obtains lots of error codes and then throws them away.
+Update it to return the error, moving the image pointer to an
+argument.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/bootm.c       | 15 ++++++++++++++-
- boot/image-board.c | 39 ++-------------------------------------
- include/image.h    | 27 +++++++++++++++++++++++++--
- 3 files changed, 41 insertions(+), 40 deletions(-)
+ boot/bootm.c | 34 ++++++++++++++++++++--------------
+ 1 file changed, 20 insertions(+), 14 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index 2358d68c2861..5782a1e2a57b 100644
+index 2b986ca71b92..57eaa1ff10df 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -488,10 +488,23 @@ static int bootm_find_os(const char *addr_fit)
- int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
- 		      ulong size)
+@@ -110,6 +110,7 @@ static struct legacy_img_hdr *image_get_kernel(ulong img_addr, int verify)
+  * @os_len: pointer to a ulong variable, will hold os data length
+  *     address and length, otherwise NULL
+  *     pointer to image header if valid image was found, plus kernel start
++ * @kernp: image header if valid image was found, otherwise NULL
+  *
+  * boot_get_kernel() tries to find a kernel image, verifies its integrity
+  * and locates kernel data.
+@@ -118,9 +119,9 @@ static struct legacy_img_hdr *image_get_kernel(ulong img_addr, int verify)
+  *     pointer to image header if valid image was found, plus kernel start
+  *     address and length, otherwise NULL
+  */
+-static const void *boot_get_kernel(const char *cmd_name, const char *addr_fit,
+-				   struct bootm_headers *images,
+-				   ulong *os_data, ulong *os_len)
++static int boot_get_kernel(const char *cmd_name, const char *addr_fit,
++			   struct bootm_headers *images, ulong *os_data,
++			   ulong *os_len, const void **kernp)
  {
-+	const char *select = NULL;
- 	int ret;
+ #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
+ 	struct legacy_img_hdr	*hdr;
+@@ -154,7 +155,7 @@ static const void *boot_get_kernel(const char *cmd_name, const char *addr_fit,
+ 		       img_addr);
+ 		hdr = image_get_kernel(img_addr, images->verify);
+ 		if (!hdr)
+-			return NULL;
++			return -EINVAL;
+ 		bootstage_mark(BOOTSTAGE_ID_CHECK_IMAGETYPE);
  
-+	if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
-+		char *buf;
+ 		/* get os_data and os_len */
+@@ -175,7 +176,7 @@ static const void *boot_get_kernel(const char *cmd_name, const char *addr_fit,
+ 			printf("Wrong Image Type for %s command\n",
+ 			       cmd_name);
+ 			bootstage_error(BOOTSTAGE_ID_CHECK_IMAGETYPE);
+-			return NULL;
++			return -EPROTOTYPE;
+ 		}
+ 
+ 		/*
+@@ -200,7 +201,7 @@ static const void *boot_get_kernel(const char *cmd_name, const char *addr_fit,
+ 				BOOTSTAGE_ID_FIT_KERNEL_START,
+ 				FIT_LOAD_IGNORED, os_data, os_len);
+ 		if (os_noffset < 0)
+-			return NULL;
++			return -ENOENT;
+ 
+ 		images->fit_hdr_os = map_sysmem(img_addr, 0);
+ 		images->fit_uname_os = fit_uname_kernel;
+@@ -209,7 +210,9 @@ static const void *boot_get_kernel(const char *cmd_name, const char *addr_fit,
+ 		break;
+ #endif
+ #ifdef CONFIG_ANDROID_BOOT_IMAGE
+-	case IMAGE_FORMAT_ANDROID:
++	case IMAGE_FORMAT_ANDROID: {
++		int ret;
 +
-+		/* Look for an Android boot image */
-+		buf = map_sysmem(images.os.start, 0);
-+		if (buf && genimg_get_format(buf) == IMAGE_FORMAT_ANDROID)
-+			select = argc ? argv[0] : env_get("loadaddr");
+ 		boot_img = buf;
+ 		vendor_boot_img = NULL;
+ 		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+@@ -217,25 +220,28 @@ static const void *boot_get_kernel(const char *cmd_name, const char *addr_fit,
+ 			vendor_boot_img = map_sysmem(get_avendor_bootimg_addr(), 0);
+ 		}
+ 		printf("## Booting Android Image at 0x%08lx ...\n", img_addr);
+-		if (android_image_get_kernel(boot_img, vendor_boot_img, images->verify,
+-					     os_data, os_len))
+-			return NULL;
++		ret = android_image_get_kernel(boot_img, vendor_boot_img,
++					       images->verify, os_data, os_len);
++		if (ret)
++			return ret;
+ 		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+ 			unmap_sysmem(vendor_boot_img);
+ 			unmap_sysmem(boot_img);
+ 		}
+ 		break;
 +	}
-+
-+	if (argc >= 2)
-+		select = argv[1];
-+
- 	/* find ramdisk */
--	ret = boot_get_ramdisk(argc, argv, &images, IH_INITRD_ARCH,
-+	ret = boot_get_ramdisk(select, &images, IH_INITRD_ARCH,
- 			       &images.rd_start, &images.rd_end);
- 	if (ret) {
- 		puts("Ramdisk image is corrupt or invalid\n");
-diff --git a/boot/image-board.c b/boot/image-board.c
-index 062c76badecc..60e514fc150e 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -456,49 +456,14 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
- 	return 0;
+ #endif
+ 	default:
+ 		printf("Wrong Image Format for %s command\n", cmd_name);
+ 		bootstage_error(BOOTSTAGE_ID_FIT_KERNEL_INFO);
+-		return NULL;
++		return -EBADF;
+ 	}
+ 
+ 	debug("   kernel data at 0x%08lx, len = 0x%08lx (%ld)\n",
+ 	      *os_data, *os_len, *os_len);
++	*kernp = buf;
+ 
+-	return buf;
++	return 0;
  }
  
--/**
-- * boot_get_ramdisk - main ramdisk handling routine
-- * @argc: command argument count
-- * @argv: command argument list
-- * @images: pointer to the bootm images structure
-- * @arch: expected ramdisk architecture
-- * @rd_start: pointer to a ulong variable, will hold ramdisk start address
-- * @rd_end: pointer to a ulong variable, will hold ramdisk end
-- *
-- * boot_get_ramdisk() is responsible for finding a valid ramdisk image.
-- * Currently supported are the following ramdisk sources:
-- *      - multicomponent kernel/ramdisk image,
-- *      - commandline provided address of decicated ramdisk image.
-- *
-- * returns:
-- *     0, if ramdisk image was found and valid, or skiped
-- *     rd_start and rd_end are set to ramdisk start/end addresses if
-- *     ramdisk image is found and valid
-- *
-- *     1, if ramdisk image is found but corrupted, or invalid
-- *     rd_start and rd_end are set to 0 if no ramdisk exists
-- */
--int boot_get_ramdisk(int argc, char *const argv[], struct bootm_headers *images,
--		     u8 arch, ulong *rd_start, ulong *rd_end)
-+int boot_get_ramdisk(char const *select, struct bootm_headers *images,
-+		     uint arch, ulong *rd_start, ulong *rd_end)
- {
- 	ulong rd_data, rd_len;
--	const char *select = NULL;
+ #ifdef CONFIG_LMB
+@@ -316,8 +322,8 @@ static int bootm_find_os(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	int ret;
  
- 	*rd_start = 0;
- 	*rd_end = 0;
- 
--	if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
--		char *buf;
--
--		/* Look for an Android boot image */
--		buf = map_sysmem(images->os.start, 0);
--		if (buf && genimg_get_format(buf) == IMAGE_FORMAT_ANDROID)
--			select = (argc == 0) ? env_get("loadaddr") : argv[0];
--	}
--
--	if (argc >= 2)
--		select = argv[1];
--
- 	/*
- 	 * Look for a '-' which indicates to ignore the
- 	 * ramdisk argument
-diff --git a/include/image.h b/include/image.h
-index d37e44721672..3e48ad5b303e 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -644,8 +644,31 @@ int genimg_has_config(struct bootm_headers *images);
- 
- int boot_get_fpga(int argc, char *const argv[], struct bootm_headers *images,
- 		  uint8_t arch, const ulong *ld_start, ulong * const ld_len);
--int boot_get_ramdisk(int argc, char *const argv[], struct bootm_headers *images,
--		     uint8_t arch, ulong *rd_start, ulong *rd_end);
-+
-+/**
-+ * boot_get_ramdisk() - Locate the ramdisk
-+ *
-+ * @select: address or name of ramdisk to use, or NULL for default
-+ * @images: pointer to the bootm images structure
-+ * @arch: expected ramdisk architecture
-+ * @rd_start: pointer to a ulong variable, will hold ramdisk start address
-+ * @rd_end: pointer to a ulong variable, will hold ramdisk end
-+ *
-+ * boot_get_ramdisk() is responsible for finding a valid ramdisk image.
-+ * Currently supported are the following ramdisk sources:
-+ *      - multicomponent kernel/ramdisk image,
-+ *      - commandline provided address of decicated ramdisk image.
-+ *
-+ * returns:
-+ *     0, if ramdisk image was found and valid, or skiped
-+ *     rd_start and rd_end are set to ramdisk start/end addresses if
-+ *     ramdisk image is found and valid
-+ *
-+ *     1, if ramdisk image is found but corrupted, or invalid
-+ *     rd_start and rd_end are set to 0 if no ramdisk exists
-+ */
-+int boot_get_ramdisk(char const *select, struct bootm_headers *images,
-+		     uint arch, ulong *rd_start, ulong *rd_end);
- 
- /**
-  * boot_get_loadable - routine to load a list of binaries to memory
+ 	/* get kernel image header, start address and length */
+-	os_hdr = boot_get_kernel("bootm", argv[0], &images,
+-				 &images.os.image_start, &images.os.image_len);
++	ret = boot_get_kernel("bootm", argv[0], &images, &images.os.image_start,
++			      &images.os.image_len, &os_hdr);
+ 	if (images.os.image_len == 0) {
+ 		puts("ERROR: can't get kernel image!\n");
+ 		return 1;
 -- 
 2.42.0.869.gea05f2083d-goog
 
