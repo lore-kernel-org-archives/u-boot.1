@@ -4,74 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 518D8C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 23:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27520C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 23:54:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EE9C86D33;
-	Mon, 13 Nov 2023 00:40:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3B1A186C8E;
+	Mon, 13 Nov 2023 00:54:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VfNB4tdX";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RaY9LBo6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FF3786D33; Mon, 13 Nov 2023 00:40:48 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 7516086C89; Mon, 13 Nov 2023 00:54:13 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7772B86D62
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 00:40:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB1FE86D12
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 00:54:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699832444; x=1700437244; i=xypron.glpk@gmx.de;
- bh=p99Te8Mqmcj51p1dX44XTfy7R1w3zmP0sD5Lu0Ta0dA=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=VfNB4tdXd9SJ21r3r60DU+6f0oI7EiJDgwWfxY+Cux7vEUF1se5KRHmGQr2TADth
- agdFkyhuYGtkQTB0s8En8PFwhnIGFKp885N6l8UjZxRInd+3EzjjOXOCWpHVg9FBX
- g+aJrdWyGZ9YBAAu8kROXglSu/9rtQ5f1ccLx5ciGdwOu6WPHWxgJh5mzTVrwnfN7
- SUA/NwfefKfePXkYCoAPVt2g5iREH6GWD7C+9itQnouByKJc+8atCA8dgPdyBpDnV
- I7m3dDxJFGZPAm2tlz1yPCkgL5gI96aIOsG4vi8uv3ocT+sxZCAXk1zlT1BSgLtwj
- IcKY/khxYdq0/TsBpA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNbkp-1qikqG3VnP-00P9eT; Mon, 13
- Nov 2023 00:40:44 +0100
-Message-ID: <4e525027-5a4f-47be-ad77-8bcb255fc630@gmx.de>
-Date: Mon, 13 Nov 2023 00:40:40 +0100
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 4DA1F3FDC1; 
+ Sun, 12 Nov 2023 23:54:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1699833244;
+ bh=bSV8q1D7gsPGIVGkcAH5g4N9/b62RceR6eEn0sxDhWU=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=RaY9LBo6IawLb/geVpx9ZFYzLa7lpebyXlVWlIP2Frlzk9AdzEYlQAssetIQalpPW
+ BaV8uiRBVIa9KMXwTOzevYu+5hCUULs++ngOLoq7AOH1y73nmzzYBPwBTPXJfL2Ef+
+ 7NZveXNHJyasA5CouPxT3sxgxe8KF4D64xDPlPAyqCk+xRlT22LGmvhOLdcKZdbwzR
+ M6KJWngC84xhkuDGwkXKFEL8UW1B9Jnx0p6ELeRte2k4KSzPzsLib5xSy/mSwC5OtI
+ Y7WFXJWg8YmDvtZmBBAlwcBusxdw01kMBiBGS9oK5cUb3TlQeTHuqzuOM57MEdNLTY
+ woOyf6Wg1t9hA==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] acpi: cannot have RSDT above 4 GiB
+Date: Mon, 13 Nov 2023 00:53:56 +0100
+Message-Id: <20231112235356.12260-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Increase default variable store size to 128K
-Content-Language: en-US, de-DE
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: alpernebiyasak@gmail.com, u-boot@lists.denx.de
-References: <20231106154754.59374-1-ilias.apalodimas@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231106154754.59374-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:eRh4GSjISThf6HLnbQ31hOnTtxhtZ3TLn064EY6+7PBm4py8AY8
- opz24NkUw/HcTypNE6422FmWh5mj0Pvac5OBrjllc3tkrsy/VEclXry/94217MRr8e7jE/A
- ZaLjjzkwrdIlkF3oX5pZdGKg5qttE92xCKDkvLxr26Y4I8SeQzt3Z1orzlrqIcbc6ktXiE4
- +kCAkoO/m/znmFPJBosAA==
-UI-OutboundReport: notjunk:1;M01:P0:pw0KblglQ/o=;ulaTKiiEA01hO/QCbPDO6caIsg6
- NB4kpCPmltMuAxoqEjp9U+cfSmnZO0ag7BKjaCD3TETdJY84dYbjTh7g8r4U7ZnXX8XWAozt4
- OhapQfWtESDTBe30qOPODz9N6nxvCCfn5I/1HrkWaKQsYJ0Bx0s18ukuDf0XFNUsurwyYx0fi
- 6E0pMhHfSaHUlbL0idFhHfr2Di68T/+YVh22RDJsRLC4fETfd3quLB8iagtMPQFpV22lS3VlK
- sSBIEAkzkoq19zKZ2cvFy8RbYLiFmSQVXag1/kRNzoDhSQIlJwBIN6txjYPUIRH07g321RSVY
- G5D+Mdx1mokj4Ehzuh+KNQgeRZsGMpbvZGfuItjgz5/Zxw6n3MEKDDGCEzXbNIl4gFhklJOWG
- VoFd/WvAghrLhQ2kOd7snyMOWYnwssWwsY7GVFbrIy/sHJQvZ2MdwiILDdAJamb5yNJcn7wq1
- OmdXeJF3Dnh+UD3M6YLGbSenmq9Wio4YwognvpWPx2hXJoZkv7yM5ujbrOl+/JhaHuNbFmhcE
- eI4BIxiatt9TR6Xx5qq7rHwKqyjnmki3BLlmvuabnSO8ipbl3soms5zNS04gyDuveAOTUpMPm
- +0PM9kt+jeu0ZUjqmILHcJHPdJD6VpMRsWllLaDgy3Yf9dzE9FPibiKpVydRlw89dQ44X2Tm3
- RltN+9tKaZ8EbxehgR6kz9jN7IdmfHn5O/iTtxVRItu0gwmQUXr0Xr0BeXiHRbBldaI7d9ClU
- zZBMOVLew4aZeTLlvfMgnskx2XK+dMOYcF1ulZL2ouin2ZHWLetwexFN7cEPSqbP8pcJnl7w/
- eX7+FV7zgLh2e7go+x/5rEP6aiCUgaxjP+tc/J3MLNyjyReyJWO/Ch/cpZs97XGxcq4BEAfMI
- tQ47Xrnp6+V357mipIJ0LWRWsFGRDrRe7Q1rav0xoKbtUKXkTTh/clyG/YwoUNOpHBBElgCzV
- 71NM73aeO14nrD0b5+vj/UNldJY=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,64 +69,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/23 16:47, Ilias Apalodimas wrote:
-> In commit 9fd3f881c6ed ("efi_loader: Increase default variable store siz=
-e to 64KiB")
-> Alper has a detailed explanation of why the size needs to be bumped to a=
-t
-> least 64K.  However enabling Secure boot, writing db, KEK, PK etc keys
-> will further increase the size so bump it to 128K.
->
-> It's worth noting that when U-Boot stores the EFI variables in an RPMB t=
-he
-> available storage is defined statically in StandAloneMM at build time.
-> The U-Boot code is detecting the available true size on the fly during
-> writes. When StandAloneMM is present this size defines the reserved
-> memory U-Boot can use to copy any runtime variables, before booting an
-> OS.
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+The field RsdtAddress has only 32 bit. The RSDT table cannot be located
+beyond 4 GiB.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Avoid superfluous 0 assignment. RSDP is already zeroed out.
+	Use constants form linux/sizes.h
+---
+ lib/acpi/base.c | 23 ++++++++++++++++-------
+ 1 file changed, 16 insertions(+), 7 deletions(-)
 
-> ---
->   lib/efi_loader/Kconfig | 14 ++++++++------
->   1 file changed, 8 insertions(+), 6 deletions(-)
->
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 4ccd26f94a93..0d024911b42e 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -133,18 +133,20 @@ endif
->
->   config EFI_VAR_BUF_SIZE
->   	int "Memory size of the UEFI variable store"
-> -	default 16384 if EFI_MM_COMM_TEE
-> -	default 65536
-> +	default 131072
->   	range 4096 2147483647
->   	help
->   	  This defines the size in bytes of the memory area reserved for keep=
-ing
->   	  UEFI variables.
->
-> -	  When using StandAloneMM (CONFIG_EFI_MM_COMM_TEE=3Dy) this value shou=
-ld
-> -	  match the value of PcdFlashNvStorageVariableSize used to compile the
-> -	  StandAloneMM module.
-> +	  When using StandAloneMM (CONFIG_EFI_MM_COMM_TEE=3Dy) is used the
-> +	  available size for storing variables is defined in
-> +	  PcdFlashNvStorageVariableSize.
-> +	  That value is probed at runtime from U-Boot. In that case,
-> +	  EFI_VAR_BUF_SIZE represents the memory U-Boot reserves to present
-> +	  runtime variables to the OS.
->
-> -	  Minimum 4096, default 65536, or 16384 when using StandAloneMM.
-> +	  Minimum 4096, default 131072
->
->   config EFI_GET_TIME
->   	bool "GetTime() runtime service"
-> --
-> 2.40.1
->
+diff --git a/lib/acpi/base.c b/lib/acpi/base.c
+index 2057bd2bef..26bf0cb8d3 100644
+--- a/lib/acpi/base.c
++++ b/lib/acpi/base.c
+@@ -12,6 +12,7 @@
+ #include <dm/acpi.h>
+ #include <mapmem.h>
+ #include <tables_csum.h>
++#include <linux/sizes.h>
+ 
+ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct acpi_rsdt *rsdt,
+ 		     struct acpi_xsdt *xsdt)
+@@ -21,10 +22,13 @@ void acpi_write_rsdp(struct acpi_rsdp *rsdp, struct acpi_rsdt *rsdt,
+ 	memcpy(rsdp->signature, RSDP_SIG, 8);
+ 	memcpy(rsdp->oem_id, OEM_ID, 6);
+ 
+-	rsdp->length = sizeof(struct acpi_rsdp);
+-	rsdp->rsdt_address = map_to_sysmem(rsdt);
++	if (rsdt)
++		rsdp->rsdt_address = map_to_sysmem(rsdt);
++
++	if (xsdt)
++		rsdp->xsdt_address = map_to_sysmem(xsdt);
+ 
+-	rsdp->xsdt_address = map_to_sysmem(xsdt);
++	rsdp->length = sizeof(struct acpi_rsdp);
+ 	rsdp->revision = ACPI_RSDP_REV_ACPI_2_0;
+ 
+ 	/* Calculate checksums */
+@@ -68,11 +72,15 @@ static void acpi_write_xsdt(struct acpi_xsdt *xsdt)
+ static int acpi_write_base(struct acpi_ctx *ctx,
+ 			   const struct acpi_writer *entry)
+ {
+-	/* We need at least an RSDP and an RSDT Table */
++	/* We need at least an RSDP and an XSDT Table */
+ 	ctx->rsdp = ctx->current;
+ 	acpi_inc_align(ctx, sizeof(struct acpi_rsdp));
+-	ctx->rsdt = ctx->current;
+-	acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
++	if (map_to_sysmem(ctx->current) < SZ_4G - SZ_64K) {
++		ctx->rsdt = ctx->current;
++		acpi_inc_align(ctx, sizeof(struct acpi_rsdt));
++	} else {
++		ctx->rsdt = 0;
++	}
+ 	ctx->xsdt = ctx->current;
+ 	acpi_inc_align(ctx, sizeof(struct acpi_xsdt));
+ 
+@@ -80,7 +88,8 @@ static int acpi_write_base(struct acpi_ctx *ctx,
+ 	memset(ctx->base, '\0', ctx->current - ctx->base);
+ 
+ 	acpi_write_rsdp(ctx->rsdp, ctx->rsdt, ctx->xsdt);
+-	acpi_write_rsdt(ctx->rsdt);
++	if (ctx->rsdt)
++		acpi_write_rsdt(ctx->rsdt);
+ 	acpi_write_xsdt(ctx->xsdt);
+ 
+ 	return 0;
+-- 
+2.40.1
 
