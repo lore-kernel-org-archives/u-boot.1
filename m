@@ -4,57 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4C11C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 10:39:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAC4BC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 11:55:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79A2987083;
-	Sun, 12 Nov 2023 11:39:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 6A2B586D3C;
+	Sun, 12 Nov 2023 12:55:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="TCWnchYU";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1033187083; Sun, 12 Nov 2023 11:39:51 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4D2A87049
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 11:39:48 +0100 (CET)
+ id 1C59286D4C; Sun, 12 Nov 2023 12:55:03 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 659A786D1D
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:54:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=face=GZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1699785583;
- bh=5r3XKYbaXIyrBQee06N4xxBka8qu/Gr2JBQjfg/lTn0=;
- b=TCWnchYU1yRJRDeliGmqw0ivMs40pfa9/3hfYZv5TLEWlQdrcnOfEfGY1oAa6ol4WGWi4UHmU
- wKLtLH4rHapfxTo/itBUuBo5W85MJb0lLbZUlGhGGO8KqIVEZgcX4V4qIcGq71MNbbK36Xth36k
- qLaFJZdIu8eCy0BfYH5Y5Ri7D3gAQl6hZd5tEVWv9whgXQwSLoEaRku7fydcDziWk2mB8rhS0nQ
- mlX721+R+jJI+0gh/Oy6G36kpMIswXKZcD7wA0+azTVCDGlnZXXywKjlyOFEIKuHbmbpNoVgY52
- 2mPuHj0wPaemX2BLLdd0Tblx2d8PD4N8XU/Gf1QeIy+A==
-Message-ID: <d1e624f3-d761-4822-bcb4-f81ab4d78663@kwiboo.se>
-Date: Sun, 12 Nov 2023 11:39:39 +0100
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 87C91C15;
+ Sun, 12 Nov 2023 03:55:43 -0800 (PST)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AC0D43F64C;
+ Sun, 12 Nov 2023 03:54:57 -0800 (PST)
+Date: Sun, 12 Nov 2023 11:53:37 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
+ Peter Hoyes <peter.hoyes@arm.com>
+Subject: Re: ARMv8.5 RNG driver (was :Re: [PATCH] virtio: rng: gracefully
+ handle 0 byte returns)
+Message-ID: <20231112115337.2bbe5ce7@slackpad.lan>
+In-Reply-To: <CAPnjgZ3PKoi2z6iBCr1f0DJMbS_usp1fedwaCzwCjqd02O_87Q@mail.gmail.com>
+References: <20231107160900.2652813-1-andre.przywara@arm.com>
+ <CAPnjgZ1_KVcGvh869p3jvBh6umkwGv_VwFs73Yo3k9BBM54p0w@mail.gmail.com>
+ <20231110141614.72b6dffd@donnerap.manchester.arm.com>
+ <CAPnjgZ3PKoi2z6iBCr1f0DJMbS_usp1fedwaCzwCjqd02O_87Q@mail.gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: rockpro64: Enable SPI command and full BOOTSTD
-To: Shantur Rathore <i@shantur.com>, kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
-References: <20231111001329.537704-1-i@shantur.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20231111001329.537704-1-i@shantur.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6550ab6f0ab7c055f71230c7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,45 +61,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-11-11 01:13, Shantur Rathore wrote:
-> RockPro64 has a 16MB onboard SPI chip and current u-boot takes
-> around 2MB, we can enable more features.
-> Updating config to enable SPI commands and full BootSTD support.
-> ---
->  configs/rockpro64-rk3399_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
+On Sat, 11 Nov 2023 20:08:36 -0700
+Simon Glass <sjg@chromium.org> wrote:
+
+Hi,
+
+> On Fri, 10 Nov 2023 at 07:16, Andre Przywara <andre.przywara@arm.com> wrote:
+> >
+> > On Fri, 10 Nov 2023 05:53:59 -0700
+> > Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Simon,
+> >  
+> > > On Tue, 7 Nov 2023 at 09:09, Andre Przywara <andre.przywara@arm.com> wrote:  
+> > > >
+> > > > According to the virtio v1.x "entropy device" specification, a virtio-rng
+> > > > device is supposed to always return at least one byte of entropy.
+> > > > However the virtio v0.9 spec does not mention such a requirement.
+> > > >
+> > > > The Arm Fixed Virtual Platform (FVP) implementation of virtio-rng always
+> > > > returns 8 bytes less of entropy than requested. If 8 bytes or less are
+> > > > requested, it will return 0 bytes.
+> > > > This behaviour makes U-Boot's virtio_rng_read() implementation go into an
+> > > > endless loop, hanging the system.
+> > > >
+> > > > Work around this problem by always requesting 8 bytes more than needed,
+> > > > but only if a previous call to virtqueue_get_buf() returned 0 bytes.
+> > > >
+> > > > This should never trigger on a v1.x spec compliant implementation, but
+> > > > fixes the hang on the Arm FVP.
+> > > >
+> > > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > > > Reported-by: Peter Hoyes <peter.hoyes@arm.com>
+> > > > ---
+> > > >  drivers/virtio/virtio_rng.c | 9 +++++++--
+> > > >  1 file changed, 7 insertions(+), 2 deletions(-)  
+> > >
+> > > Unrelated to this patch, but do you know the hardware architecture of
+> > > the ARM RNG? Is there one RNG unit per CPU or one for the whole SoC?  
+> >
+> > Architecturally and from a software perspective the ARMv8.5 FEAT_RNG
+> > feature is a system register, so per-core. Theoretically the availability
+> > could differ between cores, but the CPU ID feature registers are also
+> > per-core, so as long as we run on a single core, or always at least
+> > read from the same core, it's all good.
+> >
+> > Now the architecture only describes the CPU instruction aspect of the
+> > feature, and establishes rules for the quality and spec conformance, but
+> > leaves the actual source of the entropy open to the integrator.
+> >
+> > The manual in the Neoverse V1 core[1] (still not a SoC!) states that the
+> > actual entropy source is a memory mapped peripheral, its address being
+> > held in an internal, per-core register. So you can have one shared entropy
+> > source per SoC, or a private instance for each core, that's up to the
+> > actual integrator to design.
+> >
+> > From the software perspective this shouldn't matter, though: the feature
+> > is "per-core", how this is backed is an implementation detail.  
 > 
-> diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-> index 4cd6b76665..cad0b8a5d7 100644
-> --- a/configs/rockpro64-rk3399_defconfig
-> +++ b/configs/rockpro64-rk3399_defconfig
-> @@ -46,10 +46,12 @@ CONFIG_CMD_BOOTZ=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
->  CONFIG_CMD_PCI=y
-> +CONFIG_CMD_SPI=y
+> Would it make sense to model this as a memory-mapped peripheral under
+> /soc (perhaps one without an address?)
 
-The CMD_SPI is not used to interact with the SPI flash.
+No, absolutely not. What I mentioned above is a somewhat hidden
+implementation detail of that *particular core*. One big reason for
+having those architected *system registers* is to do away with all
+those implementation specific ways to access an entropy source, and
+make this dead easy for software (including userland!) to use it:
+Check the CPU ID register, read the sysreg. No prior knowledge required.
 
-CMD_SF is already enabled and you can use "sf probe" and any other sf
-related action to interact with the SPI flash on this board.
+I now deeply regret sending this Armv8.5 RNG driver. I have an
+alternative solution, just got distracted later this week to finish
+this up.
+Let's have a discussion there, or we find a way to probe UCLASS_RNG
+drivers other than through devicetree nodes. If U-Boot really insists on
+matching drivers to DT nodes 1:1, that's a really limiting design
+decision, and we should not proliferate this by shoehorning everyone
+and their dog into devicetree.
 
->  CONFIG_CMD_USB=y
->  # CONFIG_CMD_SETEXPR is not set
->  CONFIG_CMD_TIME=y
->  CONFIG_CMD_BOOTSTAGE=y
-> +CONFIG_BOOTSTD_FULL=y
+Cheers,
+Andre
 
-What is the reasoning behind enabling full bootstd commands? Especially
-why just this board need it enabled by default.
-
-Standard boot is already fully functional, it just does not have full
-features commands enabled by default.
-
-Regards,
-Jonas
-
->  CONFIG_SPL_OF_CONTROL=y
->  CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->  CONFIG_ENV_IS_IN_SPI_FLASH=y
+> > [1]
+> > https://developer.arm.com/documentation/101427/0102/Functional-description/Random-number-support/About-the-random-number-support
+> >
+> >  
+> > > > diff --git a/drivers/virtio/virtio_rng.c b/drivers/virtio/virtio_rng.c
+> > > > index b85545c2ee5..786359a6e36 100644
+> > > > --- a/drivers/virtio/virtio_rng.c
+> > > > +++ b/drivers/virtio/virtio_rng.c
+> > > > @@ -20,7 +20,7 @@ struct virtio_rng_priv {
+> > > >  static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
+> > > >  {
+> > > >         int ret;
+> > > > -       unsigned int rsize;
+> > > > +       unsigned int rsize = 1;
+> > > >         unsigned char buf[BUFFER_SIZE] __aligned(4);
+> > > >         unsigned char *ptr = data;
+> > > >         struct virtio_sg sg;
+> > > > @@ -29,7 +29,12 @@ static int virtio_rng_read(struct udevice *dev, void *data, size_t len)
+> > > >
+> > > >         while (len) {
+> > > >                 sg.addr = buf;
+> > > > -               sg.length = min(len, sizeof(buf));
+> > > > +               /*
+> > > > +                * Work around implementations which always return 8 bytes
+> > > > +                * less than requested, down to 0 bytes, which would
+> > > > +                * cause an endless loop otherwise.
+> > > > +                */
+> > > > +               sg.length = min(rsize ? len : len + 8, sizeof(buf));
+> > > >                 sgs[0] = &sg;
+> > > >
+> > > >                 ret = virtqueue_add(priv->rng_vq, sgs, 0, 1);
+> > > > --
+> > > > 2.25.1  
+> 
+> Regards,
+> Simon
 
