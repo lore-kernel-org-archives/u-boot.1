@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3D3C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B6BC4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:07:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64E21874AD;
-	Sun, 12 Nov 2023 21:03:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D496687263;
+	Sun, 12 Nov 2023 21:03:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y9gHkIhM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Akafpvln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B94DB87026; Sun, 12 Nov 2023 21:03:41 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 327D4874DE; Sun, 12 Nov 2023 21:03:46 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA94C87479
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28CA187479
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:03:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5a7b91faf40so43729247b3.1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:38 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d9caf5cc948so3847591276.0
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:03:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699819417; x=1700424217; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1699819423; x=1700424223; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NOoP7fGkP5ZfOyT4AvSCMxlLH3j+9ETPdBUeZ1eTtlw=;
- b=Y9gHkIhMcC/9PGUyFgJ4r/nJCNQucU+2QOXluNpFAtcUwKbihPx/VNxDJdhBl4rbyT
- BgeQ39bKVb8KdDhyGmH1K8qgu1hBnTTsgvBc8tvwvTXQPeyfUCdAvhKQsWrHIiA0hthY
- XS1RCE53JL/0XN/u402ZcwXPgUBS+nAeata5k=
+ bh=I5PztMVhUIHkTXGsv9eQuQeLqOmsxAKX53Zn5Kc8CY4=;
+ b=Akafpvln2UG/PWeqhU6Z7Ksfr8DzG5sein6YhSUd/kD0zjzfsvSX5uVxoKtNEhdAcb
+ 80lZREz6yMeSRooaMLsljzU9FGbSsq0hy1XnIAuRMhBHJ0mzQltJZAHMmMQKxrFgDhWI
+ 1VR2KtG8zyfp4weBG5m3iWD8rO7XfapPkffuM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699819417; x=1700424217;
+ d=1e100.net; s=20230601; t=1699819423; x=1700424223;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NOoP7fGkP5ZfOyT4AvSCMxlLH3j+9ETPdBUeZ1eTtlw=;
- b=nBGb52jt58DqLfp6WrIXI5eCpf3rFZlv30HmmZ30Pce51hYzu+PUf8EJRL87ZVg086
- 460dN+fInCkOr+RPbGn0yrh5Tm5fdGf0T3eXft3nPUQHLGXkXBnem30tmM4tFbzbiQ11
- kVru2pr8TXal0Bh2MlqmY1XIGG89Hb1mgyc93Kjo20c06YUUvRm4/G3PfxOXXOxo4OxO
- DzZ09QzsceNREx11l+uQFzktzuhFaYimsHGMCWzJXiw70QKxMyFxtbktjiSI0vya7Hn2
- iVYNGYlAYDMZUm+CQp5TLGsw72KUok6pt0tIuanxxyDejO/Euc5XJDcPuSiqh+OyTJUB
- R/BQ==
-X-Gm-Message-State: AOJu0YyBrxlo5ki3TD2XKYJNN9OPy/7SRW/Gdmvln5wenH3KEdlxJXXD
- e8WD6JnHx2EnH3sXtxS3Rkm835X6mInMdz7h3x5MLA==
-X-Google-Smtp-Source: AGHT+IH/UxO8QImUZPmxvQ5Upqv37cSpVUD9kHXHD42UTXUr3uIBETxnKjxz79cdeP47ArCZDfgzn33f+HbffISAgJ4=
-X-Received: by 2002:a0d:c8c7:0:b0:5a7:bbca:8c9e with SMTP id
- k190-20020a0dc8c7000000b005a7bbca8c9emr4116198ywd.7.1699819417038; Sun, 12
- Nov 2023 12:03:37 -0800 (PST)
+ bh=I5PztMVhUIHkTXGsv9eQuQeLqOmsxAKX53Zn5Kc8CY4=;
+ b=jQ/KHYfePbHviIh+p8tnxdDSTJ8S5z1dEeeyoSIdUar5OCBwsvzaic60GSN0CQfzgc
+ YquVPTqoghdEZ3lKjKxivh/M3g2dRIaRqrmPj/ofcAJFkBrt+XlgDUdoGnwd42Muctsl
+ tv8X01GHbE5miclQU0pX/JBx6eqDMF69DxwX1ZkKf5tLW2G8+GGcUEFPW63pdZOZkklD
+ MqCEBLr3oKX7g0z7fVnYHGoY7TRvBPlaUFw3WK1h8KibTgW0atBm5DsH2EoNinriq8nn
+ tlCAxFvOIkQA1lo2rokpF6GetCtrh3HTay1zzqaDAlTENmgwdqIfdILTZhjidolv+WLQ
+ IJkw==
+X-Gm-Message-State: AOJu0YwIcHJkVhrfbs4swwOOoWOqsHqe0RhBkrYV4MoRHq5+Ozw3CbvC
+ sDgIUKryARisqGXXvBpgEpVTqWFZ8Cvm0Usw4y6HWw==
+X-Google-Smtp-Source: AGHT+IEuetCwVdSAfFiqTNKyn4IJ+hkxfcFNKGhp69ZsOey14Fu+dkdRHOtIMfq05ffG21PA55S/hysE9M3h33QsQC0=
+X-Received: by 2002:a05:690c:306:b0:569:e7cb:cd4e with SMTP id
+ bg6-20020a05690c030600b00569e7cbcd4emr2036662ywb.48.1699819422729; Sun, 12
+ Nov 2023 12:03:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20231112155808.135585-1-sjg@chromium.org>
- <20231112155808.135585-2-sjg@chromium.org>
- <781b39ed-9440-47c7-a457-22aff53ae494@canonical.com>
-In-Reply-To: <781b39ed-9440-47c7-a457-22aff53ae494@canonical.com>
+References: <20231103183844.2308934-1-seanedmond@linux.microsoft.com>
+ <20231103183844.2308934-4-seanedmond@linux.microsoft.com>
+In-Reply-To: <20231103183844.2308934-4-seanedmond@linux.microsoft.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 12 Nov 2023 13:01:24 -0700
-Message-ID: <CAPnjgZ0=xAoG6aiM00DGQOUUmT_3GWO_w_RXkdihOwfTsR86cQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] acpi: Use __packed with struct acpi_xsdt
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 12 Nov 2023 13:01:09 -0700
+Message-ID: <CAPnjgZ3KPq3ihrQAnb-Bpg5FxPq3cG3e-jBXv9Bw-gb8KcfRZA@mail.gmail.com>
+Subject: Re: [PATCH v4 3/5] cmd: kaslrseed: Use common API to fixup FDT
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, 
+ ilias.apalodimas@linaro.org, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,52 +82,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Sean,
 
-On Sun, 12 Nov 2023 at 09:46, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Fri, 3 Nov 2023 at 12:38, <seanedmond@linux.microsoft.com> wrote:
 >
-> On 11/12/23 16:58, Simon Glass wrote:
-> > Since struct acpi_table_header is not a multiple of 64 bits, use the
-> > __packed option for struct acpi_xsdt
-> >
-> > This ensures that the entry[] array starts on the correct boundary.
-> >
+> From: Sean Edmond <seanedmond@microsoft.com>
 >
-> Typically we keep the original signed-off-by when reposting patches.
+> Use the newly introduced common API fdt_fixup_kaslr_seed() in the
+> kaslrseed command.
 >
-> Thanks for picking this change up.
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> ---
+>  cmd/kaslrseed.c | 22 ++++++++--------------
+>  1 file changed, 8 insertions(+), 14 deletions(-)
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
+> index 9acb8e16386..6f423702e7c 100644
+> --- a/cmd/kaslrseed.c
+> +++ b/cmd/kaslrseed.c
+> @@ -19,7 +19,7 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+>         size_t n = 0x8;
+>         struct udevice *dev;
+>         u64 *buf;
+> -       int nodeoffset;
+> +       ofnode root;
+>         int ret = CMD_RET_SUCCESS;
 >
-> As in your review you suggested to add a unit test I have done so in my v2:
+>         if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+> @@ -45,21 +45,15 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
+>                 return CMD_RET_FAILURE;
+>         }
 >
-> [PATCH v2 1/2] acpi: fix struct acpi_xsdt
-> https://patchwork.ozlabs.org/project/uboot/patch/20231112070316.17982-2-heinrich.schuchardt@canonical.com/
+> -       ret = fdt_check_header(working_fdt);
+> -       if (ret < 0) {
+> -               printf("fdt_chosen: %s\n", fdt_strerror(ret));
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
+> -       if (nodeoffset < 0) {
+> -               printf("Reading chosen node failed\n");
+> -               return CMD_RET_FAILURE;
+> +       ret = root_ofnode_from_fdt(working_fdt, &root);
+> +       if (ret) {
+> +               printf("ERROR: Unable to get root ofnode\n");
+> +               goto CMD_RET_FAILURE;
+>         }
+>
+> -       ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
 
-Oh yes, this is a duplicate patch to yours...I had it hanging around
-for a while. So we can drop it.
+It looks like this buf needs a cast to u8 *
 
+> -       if (ret < 0) {
+> -               printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
+> +       ret = fdt_fixup_kaslr_seed(root, buf, sizeof(buf));
+> +       if (ret) {
+> +               printf("ERROR: failed to add kaslr-seed to fdt\n");
+>                 return CMD_RET_FAILURE;
+>         }
 >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   include/acpi/acpi_table.h | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-> > index 1f85de091d39..59ab79ed17c2 100644
-> > --- a/include/acpi/acpi_table.h
-> > +++ b/include/acpi/acpi_table.h
-> > @@ -80,7 +80,7 @@ struct acpi_rsdt {
-> >   };
-> >
-> >   /* XSDT (Extended System Description Table) */
-> > -struct acpi_xsdt {
-> > +struct __packed acpi_xsdt {
-> >       struct acpi_table_header header;
-> >       u64 entry[MAX_ACPI_TABLES];
-> >   };
+> --
+> 2.42.0
 >
 
 Regards,
