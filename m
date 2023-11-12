@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1A0C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D77C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5765086940;
-	Sun, 12 Nov 2023 21:55:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D71B87134;
+	Sun, 12 Nov 2023 21:55:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hv1LxhXk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NZqZ8n9F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 260E887103; Sun, 12 Nov 2023 21:55:25 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id DC0FF86903; Sun, 12 Nov 2023 21:55:25 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C96386903
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:55:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18E80869DA
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:55:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-7a66ff282baso94905539f.0
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7a94c550cc8so103968939f.0
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:55:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699822520; x=1700427320; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mU7nk+W3X9qQdY7/brpjYW/DSHoXXZ/e7rf07wzhgas=;
- b=Hv1LxhXk1sBhogfd0SSrmXlHeq301s9pxVCYOuyVwaGqPLLaBRFgUXYYecmrMUrhVq
- 2cmzC2e1Z0wCfDQWKK3ivKNpb5heFyvSk6pEhYHIcqwOXr6KQSwkOeOrLAs6y4Unpkwt
- mN3QvgiwiXuqZ9pYHCpigin+GxLwinISyJUYg=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EcgHRVtfebO8yXyveNSLZCNqy1mGOaAUhmg39ZJEqho=;
+ b=NZqZ8n9F+wKGBm6+HyGzG+AHuIVkDdmlBSUN4394SeItvSbnbG/1bqLvkk6xRMFMJL
+ A4Q++kEltM++q6X0G3ZusOkqjxRWmUfC0LdQ5Yx0/rAAy1BJd0lSQ3QfDeak2qbrZNaL
+ Y4SX8yQ/P9BBuDbVVlZwbgmxvXnMd5hCSux38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699822520; x=1700427320;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mU7nk+W3X9qQdY7/brpjYW/DSHoXXZ/e7rf07wzhgas=;
- b=JelOQgIgmTitUsIl+ugT8Yhi1RnOuUVKDvXOkutTgpQmznUyMsG5D5JS6IyjVSLk7q
- s2C3IdvLNGJDuM42sPZgzG3urXRh/zczOFLf9Us2Qm0A4zZvAMX2fxUuShekS4yTSbk2
- JjlZ8ViBfc7mwDFR3p/GWsYncWbERUQk7/IfTpJWLx9MSG5I9YJ9NRds+8jnpsslXQZa
- DafahyUUj9awWXL31muWRIr4riL3VtvdnSZkGHtD5ty5e8X5rLWNPvGTdpYy9UncLSbw
- CMnPsvMCiGrJwut6QptQHJFd8HkJSYf0nLVAdtodXxQdr0QwgOKn1uVL2N+q22HdPP2Q
- CCcg==
-X-Gm-Message-State: AOJu0YwWAX69WDMot2BjuCA6zcYPCBMI1/jjGC2l4oPb64lcwkRQ/cVG
- BTtTniTfb2rzW+tzVOCkXgARwiY/C/PA91P7eHBaIw==
-X-Google-Smtp-Source: AGHT+IE3mAu9nVW1zkki10ItPLpuf4ixmClNcaLGsyDy5Tuq9Fsezmuqc+lkvItkNG77CC41GiYIJg==
-X-Received: by 2002:a5e:aa1a:0:b0:79f:88af:500c with SMTP id
- s26-20020a5eaa1a000000b0079f88af500cmr4550697ioe.4.1699822519803; 
- Sun, 12 Nov 2023 12:55:19 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EcgHRVtfebO8yXyveNSLZCNqy1mGOaAUhmg39ZJEqho=;
+ b=VmyegpaKiNByHWRLrqUeThI3fpyePREWZzt+nuGlGLGb8BfVC+WnsjYzmb71Rbonl9
+ tfwGcu8qq60oDuD7HNVr9hLxemtyjH5Lyg+sQTYDxBV+TxyeC4LH+5c/RHa+2Cq3o8/h
+ DJsTpzKivCflcmBZ5xrlvGsCxz+tozTfHqe/MPLcG1/rCRRVi8NgvywFB2iMzw9WAIfp
+ qCKll5rBT9No1N1ePO8qkFZUKGEcV66U2ACNGtIMyvWekaM7S2KwVEn8z69kENveJp6z
+ 1vt56PHjAS2cdQ76O65bgsBzg3Xae5uXBUW9r03Fd3i9umrRa9A9WzpmySkDaT08UjZd
+ 4pOQ==
+X-Gm-Message-State: AOJu0YyW2bxH7vP9XoaZs/KPh9bUraHNW4Jy/KaFQWwN8AZzW7K350Bo
+ C+Crt/Vdvqas8iYbUkAUt5WuF2u78XQZdtXxE0Eu5Q==
+X-Google-Smtp-Source: AGHT+IH8gYOuGgyF13naVIWoGrOtyAe5EFKu6zVoLStR+TWQiC9xAPZRm8icd0lLb55l61WPIYw9DA==
+X-Received: by 2002:a05:6602:360d:b0:7b0:2664:ba1f with SMTP id
+ bc13-20020a056602360d00b007b02664ba1fmr3706325iob.2.1699822520533; 
+ Sun, 12 Nov 2023 12:55:20 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- x12-20020a056602210c00b007b01c6a57d5sm1079641iox.15.2023.11.12.12.55.19
+ x12-20020a056602210c00b007b01c6a57d5sm1079641iox.15.2023.11.12.12.55.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 12:55:19 -0800 (PST)
+ Sun, 12 Nov 2023 12:55:20 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 0/3] efi: Minor improvements for the EFI app
-Date: Sun, 12 Nov 2023 13:55:08 -0700
-Message-ID: <20231112205516.183410-1-sjg@chromium.org>
+Subject: [PATCH v2 1/3] efi: Collect the ACPI tables in the app
+Date: Sun, 12 Nov 2023 13:55:09 -0700
+Message-ID: <20231112205516.183410-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
+In-Reply-To: <20231112205516.183410-1-sjg@chromium.org>
+References: <20231112205516.183410-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,27 +89,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series collects a few fixes and improvements useful when booting
-U-Boot as an EFI app.
+Locate these so that they can be displayed using the 'acpi' command.
 
-Changes in v2:
-- Drop duplicate acpi_xsdt patch
-- Put the board_early_init_r code into board/
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (3):
-  efi: Collect the ACPI tables in the app
-  efi: Correct display of table GUIDs
-  efi: Avoid using dm_scan_other()
+(no changes since v1)
 
- board/efi/efi-x86_app/Makefile  |   5 +
- board/efi/efi-x86_app/efi_app.c | 205 ++++++++++++++++++++++++++++++++
- cmd/efi_common.c                |   4 +-
- configs/efi-x86_app64_defconfig |   1 +
- lib/efi/efi_app.c               | 199 +++----------------------------
- 5 files changed, 227 insertions(+), 187 deletions(-)
- create mode 100644 board/efi/efi-x86_app/Makefile
- create mode 100644 board/efi/efi-x86_app/efi_app.c
+ lib/efi/efi_app.c | 24 +++++++++++++++++++++---
+ 1 file changed, 21 insertions(+), 3 deletions(-)
 
+diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
+index 2209410f35b5..c5eb816655ea 100644
+--- a/lib/efi/efi_app.c
++++ b/lib/efi/efi_app.c
+@@ -12,18 +12,21 @@
+ #include <cpu_func.h>
+ #include <debug_uart.h>
+ #include <dm.h>
++#include <efi.h>
++#include <efi_api.h>
+ #include <errno.h>
+ #include <init.h>
+ #include <malloc.h>
++#include <sysreset.h>
++#include <uuid.h>
+ #include <asm/global_data.h>
+ #include <linux/err.h>
+ #include <linux/types.h>
+-#include <efi.h>
+-#include <efi_api.h>
+-#include <sysreset.h>
++#include <asm/global_data.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <dm/root.h>
++#include <mapmem.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -320,6 +323,19 @@ int dm_scan_other(bool pre_reloc_only)
+ 	return 0;
+ }
+ 
++static void scan_tables(struct efi_system_table *sys_table)
++{
++	efi_guid_t acpi = EFI_ACPI_TABLE_GUID;
++	uint i;
++
++	for (i = 0; i < sys_table->nr_tables; i++) {
++		struct efi_configuration_table *tab = &sys_table->tables[i];
++
++		if (!memcmp(&tab->guid, &acpi, sizeof(efi_guid_t)))
++			gd_set_acpi_start(map_to_sysmem(tab->table));
++	}
++}
++
+ /**
+  * efi_main() - Start an EFI image
+  *
+@@ -354,6 +370,8 @@ efi_status_t EFIAPI efi_main(efi_handle_t image,
+ 		return ret;
+ 	}
+ 
++	scan_tables(priv->sys_table);
++
+ 	/*
+ 	 * We could store the EFI memory map here, but it changes all the time,
+ 	 * so this is only useful for debugging.
 -- 
 2.42.0.869.gea05f2083d-goog
 
