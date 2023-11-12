@@ -4,54 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85EAC4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1A0C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 20:55:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 590998745A;
-	Sun, 12 Nov 2023 21:34:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5765086940;
+	Sun, 12 Nov 2023 21:55:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699821271;
-	bh=wsnK8QtWObMx2pVbF0elVLu1pkkCGMM/SmjGU+jDYG4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=TPY9bvakCT9BEVO3bewSFGnWQoTA9llK5wPWlNippvftkXdHotkU5Ycuu13seuqGw
-	 PFzny6JXjuJlva2PRLJsVXnr22OjUsqJlm8+uASgz54Vd0nk4kR3vgpnU5ijwjdXS2
-	 aNK7F/87w9k1WyBQkr2raNDyJo8hefQ8ZaCTpVAuQ9RPFtOLjBRYiNE75TnXi//V06
-	 5uTHDWzdJiYOr35XlZMg5+COmjB6okHu9C9hiYqtoOU+M4wKer4CINw27m7pi4urdL
-	 oPon5BEJTYKuXgqBRjsCozoaCPvWxJA5LxrepVgnLSxtdNPExazNyvZBY4jsKw7uhn
-	 6Ui9QEIecaWQA==
-Received: from crub (p508b605d.dip0.t-ipconnect.de [80.139.96.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hv1LxhXk";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 260E887103; Sun, 12 Nov 2023 21:55:25 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 69FA587103;
- Sun, 12 Nov 2023 21:34:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699821253;
- bh=wsnK8QtWObMx2pVbF0elVLu1pkkCGMM/SmjGU+jDYG4=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=WNdpKWblgSBpLKuD2VMG2uDGAi8w/qaf1KJnXa/3Tp1C9L5+a2NbqE6YjWK34SILX
- Ws+LsleDHuCyEk4OXar5/Y0RfPuSkRsUVryuNf8NSQGFd8MGdHNZJJTpaWk30ZS3ET
- KCpIBZkNw3AvfQC0CkI9hWmf+igPhapHCeCxuur4I5a00UaZjSxDJFU4VrF46Ox624
- xyK7fTbHyC23GB7BOpoAhrYhvf8n0Rdw1pF9vx0fZETN2OAL1lTnzjuuUBJRNb9XSS
- NHq4JJ26YeyLqFEJK5nK3Fqn0e9CNsZvKQFiE/lXqB3Pk4u7X15WLg67eVlds2WmZs
- 2JXiWZhnGsQpA==
-Date: Sun, 12 Nov 2023 21:34:10 +0100
-From: Anatolij Gustschin <agust@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 5C96386903
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:55:21 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-7a66ff282baso94905539f.0
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 12:55:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1699822520; x=1700427320; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mU7nk+W3X9qQdY7/brpjYW/DSHoXXZ/e7rf07wzhgas=;
+ b=Hv1LxhXk1sBhogfd0SSrmXlHeq301s9pxVCYOuyVwaGqPLLaBRFgUXYYecmrMUrhVq
+ 2cmzC2e1Z0wCfDQWKK3ivKNpb5heFyvSk6pEhYHIcqwOXr6KQSwkOeOrLAs6y4Unpkwt
+ mN3QvgiwiXuqZ9pYHCpigin+GxLwinISyJUYg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699822520; x=1700427320;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mU7nk+W3X9qQdY7/brpjYW/DSHoXXZ/e7rf07wzhgas=;
+ b=JelOQgIgmTitUsIl+ugT8Yhi1RnOuUVKDvXOkutTgpQmznUyMsG5D5JS6IyjVSLk7q
+ s2C3IdvLNGJDuM42sPZgzG3urXRh/zczOFLf9Us2Qm0A4zZvAMX2fxUuShekS4yTSbk2
+ JjlZ8ViBfc7mwDFR3p/GWsYncWbERUQk7/IfTpJWLx9MSG5I9YJ9NRds+8jnpsslXQZa
+ DafahyUUj9awWXL31muWRIr4riL3VtvdnSZkGHtD5ty5e8X5rLWNPvGTdpYy9UncLSbw
+ CMnPsvMCiGrJwut6QptQHJFd8HkJSYf0nLVAdtodXxQdr0QwgOKn1uVL2N+q22HdPP2Q
+ CCcg==
+X-Gm-Message-State: AOJu0YwWAX69WDMot2BjuCA6zcYPCBMI1/jjGC2l4oPb64lcwkRQ/cVG
+ BTtTniTfb2rzW+tzVOCkXgARwiY/C/PA91P7eHBaIw==
+X-Google-Smtp-Source: AGHT+IE3mAu9nVW1zkki10ItPLpuf4ixmClNcaLGsyDy5Tuq9Fsezmuqc+lkvItkNG77CC41GiYIJg==
+X-Received: by 2002:a5e:aa1a:0:b0:79f:88af:500c with SMTP id
+ s26-20020a5eaa1a000000b0079f88af500cmr4550697ioe.4.1699822519803; 
+ Sun, 12 Nov 2023 12:55:19 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ x12-20020a056602210c00b007b01c6a57d5sm1079641iox.15.2023.11.12.12.55.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Nov 2023 12:55:19 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH v4 08/12] video: Drop unnecessary truetype operations
- from SPL
-Message-ID: <20231112213410.62150bf5@crub>
-In-Reply-To: <20231112200255.172351-4-sjg@chromium.org>
-References: <20231112200255.172351-1-sjg@chromium.org>
- <20231112200255.172351-4-sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH v2 0/3] efi: Minor improvements for the EFI app
+Date: Sun, 12 Nov 2023 13:55:08 -0700
+Message-ID: <20231112205516.183410-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,22 +86,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 12 Nov 2023 13:02:45 -0700
-Simon Glass sjg@chromium.org wrote:
+This series collects a few fixes and improvements useful when booting
+U-Boot as an EFI app.
 
-> Saving and restoring entries is used for expo and for the command line,
-> which we don't use in SPL. Drop these methods.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> ---
-> 
-> (no changes since v3)
-> 
-> Changes in v3:
-> - Add new patch to drop unnecessary truetype operations from SPL
-> 
->  drivers/video/console_truetype.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
+Changes in v2:
+- Drop duplicate acpi_xsdt patch
+- Put the board_early_init_r code into board/
 
-Reviewed-by: Anatolij Gustschin <agust@denx.de>
+Simon Glass (3):
+  efi: Collect the ACPI tables in the app
+  efi: Correct display of table GUIDs
+  efi: Avoid using dm_scan_other()
+
+ board/efi/efi-x86_app/Makefile  |   5 +
+ board/efi/efi-x86_app/efi_app.c | 205 ++++++++++++++++++++++++++++++++
+ cmd/efi_common.c                |   4 +-
+ configs/efi-x86_app64_defconfig |   1 +
+ lib/efi/efi_app.c               | 199 +++----------------------------
+ 5 files changed, 227 insertions(+), 187 deletions(-)
+ create mode 100644 board/efi/efi-x86_app/Makefile
+ create mode 100644 board/efi/efi-x86_app/efi_app.c
+
+-- 
+2.42.0.869.gea05f2083d-goog
+
