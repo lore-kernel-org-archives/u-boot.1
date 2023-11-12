@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99589C4332F
-	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 07:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68182C4332F
+	for <u-boot@archiver.kernel.org>; Sun, 12 Nov 2023 07:03:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C95186EC9;
+	by phobos.denx.de (Postfix) with ESMTP id DD00686FE8;
 	Sun, 12 Nov 2023 08:03:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="co0UvJMg";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ZglXFNyR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 296B486F8D; Sun, 12 Nov 2023 08:03:26 +0100 (CET)
+ id 4637E86DB8; Sun, 12 Nov 2023 08:03:26 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 377A686DB8
+ by phobos.denx.de (Postfix) with ESMTPS id 7FACB86EF1
  for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 08:03:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,27 +31,30 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 3BDE83FB6C; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id CF5C4423EA; 
  Sun, 12 Nov 2023 07:03:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699772603;
- bh=7abcsKePtkiUiPS02zm/pp67fNYwRjcFrfLsFFceo9c=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=co0UvJMgXYTv9n7bWOxIQbruXlShgMlJeyxBXZ9X6FcFnoYyGfQqdYftDnhsE4Zxj
- OV8A9xygm/wUhrHHV1fjEoaU9Jyv3QhONeOalL1lpwMqf5QNyXZNFyCA5QwNixdSax
- pmdTUbK406lmiEd/EFUH5NfH1VN7eMDTgorHjJvlg7h2+PACJZ1u7WkROLEctNHpfQ
- 6hFOIpbHU+OeelwsGttyVCCKhDa6j0nMyDz8FKmc0wlmY5hjx2duopv/xYeDPKMrcq
- 5RYBrSdVrRvJTe78LSNzsQ+nFE4lWnWYinmqiYIiCpkQkECb2hFShDF3HwM7itNhPQ
- DUcoEbinS8LKA==
+ s=20210705; t=1699772604;
+ bh=rtCXA8ytCHw+a6jJo6911cDbzCzeBsj1l4rcIvGVA5U=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ MIME-Version;
+ b=ZglXFNyRj791ncFCAntmABpj5Hlgev86I5c5+kKKy3D4Tz5jHlabMkZKBqmiuGWWh
+ ywPNoOe3Ra2pzXyGoGHft7X4MrDOqEaK+PzPyNPxuM5/TokZgTBLORbEWSNB+wUphx
+ 6o74bu/ZS5cG+P5PnWwGbqqL+Z38ZMBybm6YkbmIVMbxokAOSGjEBBGTU/nVutbX7p
+ 097hzRMNPkHSFHxwAdXQxoamZIbzpZfpLdoog4hJ5HK7N6DBdYt4hzT4n2DP7qMJrf
+ wSbJc9cWpblIKfcrjN3JBa5SI9UWK1otpMt7p1RRNQxK2uBth7iubmTv9XMlwqPRbe
+ gL3BvuBRtICSA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/2] cmd: acpi: fix acpi list command
-Date: Sun, 12 Nov 2023 08:03:14 +0100
-Message-Id: <20231112070316.17982-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/2] acpi: fix struct acpi_xsdt
+Date: Sun, 12 Nov 2023 08:03:15 +0100
+Message-Id: <20231112070316.17982-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231112070316.17982-1-heinrich.schuchardt@canonical.com>
+References: <20231112070316.17982-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,38 +78,46 @@ struct acpi_xsdt as packed to correctly access field Entry.
 
 Add a unit test for the offsets of field Entry in the RSDT and XSDT tables.
 
-ACPI tables may comprise either RSDT, XSDT, or both. The current code fails
-to check the presence of the RSDT table before accessing it. This leads to
-an exception if the RSDT table is not provided.
-
-The XSDT table takes precedence over the RSDT table.
-
-Addresses in the XSDT table are 64-bit. Adjust the output accordingly.
-
-As the RSDT table has to be ignored if the XSDT command is present there is
-no need to compare the tables in a display command. Anyway the
-specification does not require that the sequence of addresses in the RSDT
-and XSDT table are the same.
-
-The FACS table header does not provide revision information. Correct the
-description of dump_hdr().
-
-Adjust the ACPI test to match the changed output format of the 'acpi list'
-command.
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	merge patch 2 and 3
-	remove leading zeros from address output
-
-Heinrich Schuchardt (2):
-  acpi: fix struct acpi_xsdt
-  cmd: acpi: fix acpi list command
-
- cmd/acpi.c                | 48 +++++++++++++++++++++++----------------
+	add unit test
+---
  include/acpi/acpi_table.h |  2 +-
- test/dm/acpi.c            | 28 +++++++++++++++--------
- 3 files changed, 49 insertions(+), 29 deletions(-)
+ test/dm/acpi.c            | 10 ++++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
 
+diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
+index a3b67259e6..20ac3b51ba 100644
+--- a/include/acpi/acpi_table.h
++++ b/include/acpi/acpi_table.h
+@@ -80,7 +80,7 @@ struct acpi_rsdt {
+ };
+ 
+ /* XSDT (Extended System Description Table) */
+-struct acpi_xsdt {
++struct __packed acpi_xsdt {
+ 	struct acpi_table_header header;
+ 	u64 entry[MAX_ACPI_TABLES];
+ };
+diff --git a/test/dm/acpi.c b/test/dm/acpi.c
+index 5997bda649..559cf1693b 100644
+--- a/test/dm/acpi.c
++++ b/test/dm/acpi.c
+@@ -651,3 +651,13 @@ static int dm_test_acpi_cmd_set(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_acpi_cmd_set, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
++
++/* Test offsets in RSDT, XSDT */
++static int dm_test_acpi_offsets(struct unit_test_state *uts)
++{
++	ut_asserteq(36, offsetof(struct acpi_rsdt, entry));
++	ut_asserteq(36, offsetof(struct acpi_xsdt, entry));
++
++	return 0;
++}
++DM_TEST(dm_test_acpi_offsets, 0);
 -- 
 2.40.1
 
