@@ -4,55 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FB23C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:50:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8110AC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5488686689;
-	Mon, 13 Nov 2023 15:50:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C51587135;
+	Mon, 13 Nov 2023 15:52:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FrgHOSL9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yBAsMexR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 852C58654D; Mon, 13 Nov 2023 15:50:23 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D94CA87135; Mon, 13 Nov 2023 15:51:59 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8BE870F2
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 15:50:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6431586689
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 15:51:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.lan (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id DF53541719; 
- Mon, 13 Nov 2023 14:50:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1699887019;
- bh=giyIZR+CS3/bcZn88WuvnB4jISURESOJO9ImgIAW3PE=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=FrgHOSL9UWAqCcfN0K5nIjWn5HvYGPzj5ze6RRnRlrJKmRUBCwF+biD9bzX1m6iqC
- 6EXWTM2G/uqMpfnDCZ1zDpBXeCLbphixOXf1YzNMhJke/SBF+FBWAe14L7XVB5/feq
- ID+zBxriSVaCgk5oiBGQpoPPadCYos9l7Rydv60WtELTGehuquF9VWymbqg4Uwm3XX
- 91lsy3f4G1UKkxc/GSOkfCIvhzzJOfreaoCEAXIoFPxV4lmdlztuBZ3bEup2Ttt8x6
- iOZbTFqGM1nmYItbJDW/+YnMQJeqSZMePOfqdH1P/gTdQGTGWfszzpjXtc0szsGt6D
- si3Jsb6Nux2FQ==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: improve efi_var_from_file() description
-Date: Mon, 13 Nov 2023 15:50:16 +0100
-Message-Id: <20231113145016.7673-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADEppqW018984;
+ Mon, 13 Nov 2023 08:51:51 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699887111;
+ bh=UXQFMZYCJDvVLRCmC/cutSFt8QVCGoHAzPQgybJzZrU=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=yBAsMexRqyeo84MqUMpTuFbGefsTnc31/RihTqiwvyjwo+KfLWGP6IuDgkeLvbxZw
+ hU6rN4QAF8JQOtA1ntPbm/OvzZiEQR2G0r5Hsu+SM4qZ6xaVpuT7bYeAtoAW5LG2r4
+ oHD45WrnQ+lI+40o10rddkCOsbciwspNnmdpnd1A=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADEppsf025888
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 13 Nov 2023 08:51:51 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 13
+ Nov 2023 08:51:50 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 13 Nov 2023 08:51:50 -0600
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADEpoUX053369;
+ Mon, 13 Nov 2023 08:51:50 -0600
+From: Nishanth Menon <nm@ti.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Andrew Davis <afd@ti.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Roger Quadros <rogerq@kernel.org>, Bryan
+ Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra
+ <j-luthra@ti.com>, <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
+Subject: [PATCH 1/8] arm: mach-k3: am62a: Add main_timer0 id to the dev list
+Date: Mon, 13 Nov 2023 08:51:42 -0600
+Message-ID: <20231113145149.1926732-2-nm@ti.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20231113145149.1926732-1-nm@ti.com>
+References: <20231113145149.1926732-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,33 +81,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is unclear to developers why efi_var_from_file() returns EFI_SUCCESS if
-file ubootefi.var is missing or corrupted. Improve the description.
+main_timer0 is used by u-boot as the tick-timer. Add it to the soc
+devices list so it an be enabled via the k3 power controller.
 
-Reported-by: Weizhao Ouyang <o451686892@gmail.com>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- lib/efi_loader/efi_var_file.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ arch/arm/mach-k3/am62ax/dev-data.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-index 62e071bd83..dbf76f93de 100644
---- a/lib/efi_loader/efi_var_file.c
-+++ b/lib/efi_loader/efi_var_file.c
-@@ -204,8 +204,11 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
-  * File ubootefi.var is read from the EFI system partitions and the variables
-  * stored in the file are created.
-  *
-- * In case the file does not exist yet or a variable cannot be set EFI_SUCCESS
-- * is returned.
-+ * On first boot the file ubootefi.var does not exist yet. This is if why we
-+ * must return EFI_SUCCESS in this case.
-+ *
-+ * If the variable file is corrupted, e.g. incorrect CRC32, we do not want to
-+ * stop the boot process. We deliberately return EFI_SUCCESS in this case, too.
-  *
-  * Return:	status code
-  */
+diff --git a/arch/arm/mach-k3/am62ax/dev-data.c b/arch/arm/mach-k3/am62ax/dev-data.c
+index abf5d8e91aa2..6cced9efd08a 100644
+--- a/arch/arm/mach-k3/am62ax/dev-data.c
++++ b/arch/arm/mach-k3/am62ax/dev-data.c
+@@ -52,6 +52,7 @@ static struct ti_dev soc_dev_list[] = {
+ 	PSC_DEV(161, &soc_lpsc_list[5]),
+ 	PSC_DEV(162, &soc_lpsc_list[6]),
+ 	PSC_DEV(75, &soc_lpsc_list[7]),
++	PSC_DEV(36, &soc_lpsc_list[8]),
+ 	PSC_DEV(102, &soc_lpsc_list[8]),
+ 	PSC_DEV(146, &soc_lpsc_list[8]),
+ 	PSC_DEV(166, &soc_lpsc_list[9]),
 -- 
-2.40.1
+2.40.0
 
