@@ -4,57 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61F78C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 12:27:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780ECC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 12:36:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EF5E870C4;
-	Mon, 13 Nov 2023 13:26:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE1DA86DCE;
+	Mon, 13 Nov 2023 13:36:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="Qptlyon3";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="TRAkvyYU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E72C86F80; Mon, 13 Nov 2023 11:16:53 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 68A9D86F64; Mon, 13 Nov 2023 13:36:31 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0FD086B2E
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 11:16:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 9A5C486D12
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 13:36:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=9681a1e6ac=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3AD9Uj7i007581; Mon, 13 Nov 2023 13:36:25 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:cc:from:subject:to:content-type
+ :content-transfer-encoding; s=selector1; bh=7pfCcW9A7FlL00pdiKof
+ sZUeJxXHNZJxNRaNuuU7Ps8=; b=TRAkvyYU+8Ba8VKJ7ZwYnf56VJRKRwYeOBOV
+ njaiET+L1gayMneWB//Yr1F14ZSa96U+1UBLaO+qKG4TT9m/JcYuo7iWUIMZGRM6
+ weOVRooVexapnA9+Btn/MRjmgCTqHQxwVMgPXK+nShgclPd3KS1apzkwNunpmGDq
+ UZQYUxjOK/ALOVIuuSZfGADlvCRA+YX9dhdJ8GnuGXWfIckZfu8yMCbUhICSTpgF
+ 6ep2bToXID9iWk0BI+aMvK9sVkM5XJxbdC1lWiTfc6dsZe5xy0U1duY3U+t32Tq/
+ UNuDBmbKgAOvWiUKMNMt1XR4LVBxHxcoJjyIIZJcZCY+MDhgAQ==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u9ywky9bn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 13 Nov 2023 13:36:25 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B1A4B10005B;
+ Mon, 13 Nov 2023 13:36:23 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A8328215BD8;
+ Mon, 13 Nov 2023 13:36:23 +0100 (CET)
+Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 13 Nov
+ 2023 13:36:23 +0100
+Message-ID: <b3779eaa-b063-446b-94a9-a5f458182f75@foss.st.com>
+Date: Mon, 13 Nov 2023 13:36:22 +0100
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1699870610;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jq7UYih02uSba10wG/55DMvW8AMjQC48mww/MIR6Ftc=;
- b=Qptlyon3YFA5RvNDoQBOlOYK4J1hfva814XcPkZ0oiC/KPDFVMazFq9EnAUKZ/BcXepY3R
- G5nhYvAEGgTnnUJinDXNb4yUKRrVt7BHgCYTW2DRqSJfPzgqr11Xsde5sw/k+zDS7vZ0lq
- Zw41FRygheB4cDkiYHiXikpGYliYfbsy6a4X7yl9zHKAQueMWAI7mD+i90hykfeda3qPvo
- BPEuYNs5CzjWIdW3xIKctFhUssQPHFYuEGN5rObYx/mJl4Ltp0gtXoOAf+s3xp253Shb8K
- 0K7D9R2pd81VwiPe5vs49kozIhbQpgarFcCrZy14ptIUEFtK+Kfr9dXGN080lw==
-Date: Mon, 13 Nov 2023 11:16:50 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, trini@konsulko.com, agan@amarulasolutions.com
-Subject: Re: [PATCH v3] arm: dts: rockpro64: Add RockPro64 smbios
-In-Reply-To: <20231113100128.710860-1-i@shantur.com>
-References: <20231110235806.525529-1-i@shantur.com>
- <20231113100128.710860-1-i@shantur.com>
-Message-ID: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, <patrice.chotard@foss.st.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot next / v2024.04 = u-boot-stm32-20231113
+To: Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
-X-Mailman-Approved-At: Mon, 13 Nov 2023 13:26:24 +0100
+X-Originating-IP: [10.201.20.54]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-13_03,2023-11-09_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,69 +86,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-11-13 11:01, Shantur Rathore wrote:
-> Add smbios information for Pine64 RockPro64 board and enable in
-> config
-> 
-> Signed-off-by: Shantur Rathore <i@shantur.com>
-> ---
->  Changes v3: Enable SYSINFO and SYSINFO_SMBIOS in defconfig
-> 
->  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 ++++++++++++++++++++++
->  configs/rockpro64-rk3399_defconfig        |  2 ++
->  2 files changed, 24 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> index 732727d9b0..a4453e76f6 100644
-> --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> @@ -9,6 +9,28 @@
->  	chosen {
->  		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
->  	};
-> +
-> +        smbios {
-> +                compatible = "u-boot,sysinfo-smbios";
-> +                smbios {
-> +                        system {
-> +                                manufacturer = "PINE64";
-> +                                product = "RockPro64";
-> +                        };
-> +
-> +                        baseboard {
-> +                                manufacturer = "PINE64";
-> +                                product = "RockPro64";
-> +                        };
-> +
-> +                        chassis {
-> +                                manufacturer = "PINE64";
-> +                                product = "RockPro64";
-> +                        };
-> +                };
-> +        };
-> +
-> +
->  };
+Hi Tom
 
-Perhaps it would be better to use "Pine64" instead of "PINE64", because 
-"Pine64" is already used in multiple places. Also, it might be better to 
-use "ROCKPro64" instead of "RockPro64", because that's actually the 
-official name of the board, but I'm also perfectly fine with 
-"RockPro64".
+Please pull the STM32 related patches for u-boot/next, v2024.04: u-boot-stm32-20231113
 
->  &sdhci {
-> diff --git a/configs/rockpro64-rk3399_defconfig
-> b/configs/rockpro64-rk3399_defconfig
-> index 4cd6b76665..affb6137e0 100644
-> --- a/configs/rockpro64-rk3399_defconfig
-> +++ b/configs/rockpro64-rk3399_defconfig
-> @@ -90,6 +90,8 @@ CONFIG_BAUDRATE=1500000
->  CONFIG_DEBUG_UART_SHIFT=2
->  CONFIG_SYS_NS16550_MEM32=y
->  CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSINFO=y
-> +CONFIG_SYSINFO_SMBIOS=y
->  CONFIG_SYSRESET=y
->  CONFIG_USB=y
->  CONFIG_USB_XHCI_HCD=y
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/18567
+
+The following changes since commit 3b6db6901ff5babbb9d21f0fca750996e29d85e0:
+
+  Merge branch '2023-11-10-improve-semihosting-armv6' into next (2023-11-10 12:52:33 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20231113
+
+for you to fetch changes up to 01a701994b0590b6452516a7c67353359d053c94:
+
+  stm32mp2: initial support (2023-11-13 10:55:38 +0100)
+
+----------------------------------------------------------------
+Introduce STM32MP2 SoCs family support
+Add STM32MP257F-EV1 board
+
+----------------------------------------------------------------
+Patrice Chotard (8):
+      arm: caches: Make DCACHE_DEFAULT_OPTION accessible for ARM64 arch
+      stm32mp: dram_init: Get RAM size from DT if no RAM driver found
+      stm32mp: dram_init: Limit DDR usage under 4GB boundary for STM32MP
+      stm32mp: bsec: Fix AARCH64 compilation warnings
+      serial: stm32: Fix AARCH64 compilation warnings
+      pinctrl: pinctrl_stm32: Add stm32mp2 support
+      ARM: dts: stm32: Add STM32MP257F Evaluation board support
+      stm32mp2: initial support
+
+Patrick Delaunay (1):
+      stm32mp: dram_init: Fix AARCH64 compilation warnings
+
+ arch/arm/Kconfig                                     |   2 +-
+ arch/arm/dts/Makefile                                |   3 +++
+ arch/arm/dts/stm32mp25-pinctrl.dtsi                  |  38 +++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp25-u-boot.dtsi                   | 102 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp251.dtsi                         | 285 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp253.dtsi                         |  23 ++++++++++++++++++++++
+ arch/arm/dts/stm32mp255.dtsi                         |   9 +++++++++
+ arch/arm/dts/stm32mp257.dtsi                         |   9 +++++++++
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi             |  20 +++++++++++++++++++
+ arch/arm/dts/stm32mp257f-ev1.dts                     |  55 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp25xc.dtsi                        |   8 ++++++++
+ arch/arm/dts/stm32mp25xf.dtsi                        |   8 ++++++++
+ arch/arm/dts/stm32mp25xxai-pinctrl.dtsi              |  83 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp25xxak-pinctrl.dtsi              |  71 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp25xxal-pinctrl.dtsi              |  71 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/include/asm/system.h                        |  16 +++++++--------
+ arch/arm/mach-stm32mp/Kconfig                        |  26 +++++++++++++++++++++++-
+ arch/arm/mach-stm32mp/Kconfig.25x                    |  43 ++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/Makefile                       |  15 ++++----------
+ arch/arm/mach-stm32mp/bsec.c                         |  29 ++++++++++++++-------------
+ arch/arm/mach-stm32mp/dram_init.c                    |  17 ++++++++++++----
+ arch/arm/mach-stm32mp/include/mach/stm32.h           | 141 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------------------------------
+ arch/arm/mach-stm32mp/include/mach/sys_proto.h       |  26 ++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp1/Makefile              |  20 +++++++++++++++++++
+ arch/arm/mach-stm32mp/{ => stm32mp1}/cpu.c           |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/fdt.c           |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/psci.c          |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/pwr_regulator.c |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/spl.c           |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp13x.c    |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp15x.c    |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/tzc400.c        |   0
+ arch/arm/mach-stm32mp/stm32mp2/Makefile              |   9 +++++++++
+ arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c           |  68 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c                 | 108 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp2/fdt.c                 |  16 +++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c          | 194 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/mach-stm32mp/syscon.c                       |   4 ++--
+ board/st/stm32mp2/Kconfig                            |  13 ++++++++++++
+ board/st/stm32mp2/MAINTAINERS                        |   9 +++++++++
+ board/st/stm32mp2/Makefile                           |   6 ++++++
+ board/st/stm32mp2/stm32mp2.c                         |  52 ++++++++++++++++++++++++++++++++++++++++++++++++
+ configs/stm32mp25_defconfig                          |  52 ++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/pinctrl/pinctrl_stm32.c                      |   2 ++
+ drivers/serial/serial_stm32.c                        |  23 ++++++++++++----------
+ drivers/serial/serial_stm32.h                        |   2 +-
+ include/configs/stm32mp25_common.h                   |  24 +++++++++++++++++++++++
+ include/dt-bindings/pinctrl/stm32-pinfunc.h          |   3 +++
+ 48 files changed, 1597 insertions(+), 108 deletions(-)
+ create mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp251.dtsi
+ create mode 100644 arch/arm/dts/stm32mp253.dtsi
+ create mode 100644 arch/arm/dts/stm32mp255.dtsi
+ create mode 100644 arch/arm/dts/stm32mp257.dtsi
+ create mode 100644 arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
+ create mode 100644 arch/arm/dts/stm32mp25xc.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xf.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
+ create mode 100644 arch/arm/mach-stm32mp/Kconfig.25x
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp1/Makefile
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/cpu.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/fdt.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/psci.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/pwr_regulator.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/spl.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp13x.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp15x.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/tzc400.c (100%)
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/Makefile
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/cpu.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/fdt.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
+ create mode 100644 board/st/stm32mp2/Kconfig
+ create mode 100644 board/st/stm32mp2/MAINTAINERS
+ create mode 100644 board/st/stm32mp2/Makefile
+ create mode 100644 board/st/stm32mp2/stm32mp2.c
+ create mode 100644 configs/stm32mp25_defconfig
+ create mode 100644 include/configs/stm32mp25_common.h
