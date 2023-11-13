@@ -4,55 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C82DC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 03:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E7EC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 04:30:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7B8D86B54;
-	Mon, 13 Nov 2023 04:11:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2864986BA4;
+	Mon, 13 Nov 2023 05:30:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1699845114;
-	bh=5scaLMJCTC/j6hnZ2UsEA/A0HWS8Rcc8Sl+3LivNHsw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=eU1Gm4jqj5yMaUrT+DTe2NQnlcZdWyT8F0DmUjlgzCpDYKnzl3I8ciNiMVB7NIQku
-	 M4zIeZz5yiL88vO6pqyGHFunKcRjhnn8wK1HwxlTi3CPlBjypTJro2ahXHErRjAo7N
-	 WqRrMZiz5LdpyKJcJj0sqWk+feZAXJT6qV93A8R/QsQEdM4ejCA80Qd10rXZslX5JP
-	 g5pnwQmitaJZiEhTkYkzjaqL78Q0jfXONU3gkrwpDTihZ/RxfISG2lVFtuEzlAorPN
-	 +x9j9L9HMyYSb0JNQaiM4UFWyTfsaPe0K0JKvQoPb0HnsI8med8nZcNL8vDN81unH2
-	 asyAtQGEJEjTQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RKNhPRXv";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 80B8586BD6; Mon, 13 Nov 2023 05:30:34 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A913686B54;
- Mon, 13 Nov 2023 04:11:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1699845105;
- bh=5scaLMJCTC/j6hnZ2UsEA/A0HWS8Rcc8Sl+3LivNHsw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YkhdS/oekHy1GgLzuUuXYcdy74QSN/Pb16DTRlqo5VcOv4oc1vAu5Qcfk2FJ4PmQh
- TW5ks779boh1G9532CWe0KjFY9mjwx+kQbII3XTVMmSRkFpXIdA09quK71rGfCOQsa
- hSCMWKzzNty6LqpZW00xCYDJcVkZgqGqgx++uxIkhQtp8w2/W7DWBpu+Lk0g1Ke7Ek
- 56/1uee0lycbCNaAKd38eT5qv/lD4ziQJS8MrAeKcSDd8x0oaIvFhpBxt+u98aFhQ1
- yP7nuFrtDMkLCr1VXKaoiturLeDm3nK06MfRSSht2j1eUsFhaa9JSoB1pA6Zv4gwCQ
- R/CXRYIQSWTtQ==
-Message-ID: <141ed34c-93e7-4ded-8697-3fa5501d4ee7@denx.de>
-Date: Mon, 13 Nov 2023 04:11:44 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id DBF0986516
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 05:30:30 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AD4URP1101474;
+ Sun, 12 Nov 2023 22:30:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699849827;
+ bh=Dc1WR+Fyw8RoMMQGZgoJUEbgA987EMySEKrnjDE20MU=;
+ h=From:To:CC:Subject:Date;
+ b=RKNhPRXvaSYn3e4+PR0DzY1ESM49u3VcHoXk6vePK1wM8PuTpyjUfyubBPZ4I7D4g
+ zB1CTYzSS5IUp1RflLjjZXPNoKSvH8Fsz0rbdwBculGBFgS4UZq5W4oWjdP/jgIY1h
+ Xzx3auNryAnNf+oG0tnbV7pJESI7JW9HSDDV4uE4=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AD4URCX020513
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sun, 12 Nov 2023 22:30:27 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 12
+ Nov 2023 22:30:27 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 12 Nov 2023 22:30:27 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AD4UOX5119664;
+ Sun, 12 Nov 2023 22:30:24 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>
+Subject: [PATCH 0/2] J721E DTS Sync with Kernel v6.7-rc1
+Date: Mon, 13 Nov 2023 10:00:21 +0530
+Message-ID: <20231113043023.2126690-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: dwc3-generic: Use combined glue and ctrl node for
- RK3588
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-References: <20231112152527.1306793-1-jonas@kwiboo.se>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231112152527.1306793-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,16 +78,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/12/23 16:25, Jonas Karlman wrote:
-> Like Rockchip RK3328 and RK3568, the RK3588 also have a single node to
-> represent the glue and ctrl for USB 3.0.
-> 
-> Use rk_ops as driver data to select correct ctrl node for RK3588 DWC3.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+This series aims to sync kernel.org v6.7-rc1 DTS with that of U-Boot. It
+also includes inclusion of an updated devicetree documentation for
+ti,j721e-esm.
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+Boot logs:
+https://gist.github.com/nehamalcom/0eef30308f1910eea5eafefe2c4b7bcf
 
-Do you still want this in 2024.01 ? The MW closed just a few days ago, 
-but this seems OKish to put in still .
+Neha Malcom Francis (2):
+  dt-bindings: misc: Move esm-k3.txt to ti,j721e-esm.yaml
+  arm: dts: k3-j721e-*: Sync with kernel v6.7-rc1
+
+ arch/arm/dts/k3-j721e-main.dtsi               |  2 +-
+ arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  9 +++-
+ doc/device-tree-bindings/misc/esm-k3.txt      | 25 ---------
+ .../misc/ti,j721e-esm.yaml                    | 53 +++++++++++++++++++
+ 4 files changed, 62 insertions(+), 27 deletions(-)
+ delete mode 100644 doc/device-tree-bindings/misc/esm-k3.txt
+ create mode 100644 doc/device-tree-bindings/misc/ti,j721e-esm.yaml
+
+-- 
+2.34.1
+
