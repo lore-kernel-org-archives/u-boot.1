@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8110AC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:52:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F336C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:52:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C51587135;
-	Mon, 13 Nov 2023 15:52:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4CDE78718D;
+	Mon, 13 Nov 2023 15:52:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yBAsMexR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G7A4n25D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D94CA87135; Mon, 13 Nov 2023 15:51:59 +0100 (CET)
+ id EDC3287154; Mon, 13 Nov 2023 15:52:00 +0100 (CET)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6431586689
+ by phobos.denx.de (Postfix) with ESMTPS id 679988707C
  for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 15:51:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADEppqW018984;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADEppZe018982;
  Mon, 13 Nov 2023 08:51:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1699887111;
- bh=UXQFMZYCJDvVLRCmC/cutSFt8QVCGoHAzPQgybJzZrU=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=yBAsMexRqyeo84MqUMpTuFbGefsTnc31/RihTqiwvyjwo+KfLWGP6IuDgkeLvbxZw
- hU6rN4QAF8JQOtA1ntPbm/OvzZiEQR2G0r5Hsu+SM4qZ6xaVpuT7bYeAtoAW5LG2r4
- oHD45WrnQ+lI+40o10rddkCOsbciwspNnmdpnd1A=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADEppsf025888
+ bh=4pmhdxLjY3C8VUKUEEFvaP6zA4QqwAXJS9/QKmQi0u0=;
+ h=From:To:CC:Subject:Date;
+ b=G7A4n25DdEnVVezuTUhsDivEUcf8XXJFtzfonQ00HQH+bkLAAvHrWyK6AvjVRQVwS
+ EpKECIW1AoMMAJA549advl8wuvQqIrJ8F231pklOh5UAetDMkPw/f6XF/A5Rz8lL7h
+ UCbwfYHwmshkMi6wST5vGOl8OWGIrbqJhrUBgMLc=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADEpprI013526
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 13 Nov 2023 08:51:51 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 13
  Nov 2023 08:51:50 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 13 Nov 2023 08:51:50 -0600
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADEpoUX053369;
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADEpopA034730;
  Mon, 13 Nov 2023 08:51:50 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
@@ -55,12 +55,10 @@ CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Andrew Davis <afd@ti.com>, Neha
  Malcom Francis <n-francis@ti.com>, Roger Quadros <rogerq@kernel.org>, Bryan
  Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra
  <j-luthra@ti.com>, <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 1/8] arm: mach-k3: am62a: Add main_timer0 id to the dev list
-Date: Mon, 13 Nov 2023 08:51:42 -0600
-Message-ID: <20231113145149.1926732-2-nm@ti.com>
+Subject: [PATCH 0/8] arm: dts: am62a: Update to kernel v6.7-rc1
+Date: Mon, 13 Nov 2023 08:51:41 -0600
+Message-ID: <20231113145149.1926732-1-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20231113145149.1926732-1-nm@ti.com>
-References: <20231113145149.1926732-1-nm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,26 +79,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-main_timer0 is used by u-boot as the tick-timer. Add it to the soc
-devices list so it an be enabled via the k3 power controller.
+Hi,
 
-Signed-off-by: Nishanth Menon <nm@ti.com>
----
- arch/arm/mach-k3/am62ax/dev-data.c | 1 +
- 1 file changed, 1 insertion(+)
+Please find the series to do the following:
+a) Update kernel dts to v6.7-rc1
+b) Enable networking
+c) switch to stdboot.
+d) Add documentation for the AM62A platform.
 
-diff --git a/arch/arm/mach-k3/am62ax/dev-data.c b/arch/arm/mach-k3/am62ax/dev-data.c
-index abf5d8e91aa2..6cced9efd08a 100644
---- a/arch/arm/mach-k3/am62ax/dev-data.c
-+++ b/arch/arm/mach-k3/am62ax/dev-data.c
-@@ -52,6 +52,7 @@ static struct ti_dev soc_dev_list[] = {
- 	PSC_DEV(161, &soc_lpsc_list[5]),
- 	PSC_DEV(162, &soc_lpsc_list[6]),
- 	PSC_DEV(75, &soc_lpsc_list[7]),
-+	PSC_DEV(36, &soc_lpsc_list[8]),
- 	PSC_DEV(102, &soc_lpsc_list[8]),
- 	PSC_DEV(146, &soc_lpsc_list[8]),
- 	PSC_DEV(166, &soc_lpsc_list[9]),
+Bootlog: https://gist.github.com/nmenon/f1d8d9bf79aefc0938a745d3bf5b2d9f
+
+Baseline: master da2e3196e4dc Merge patch series "arm: dts: k3-am6: Fix Ethernet/DMA"
+
+Jai Luthra (1):
+  doc: board: ti: Add AM62A documentation
+
+Nishanth Menon (6):
+  arm: mach-k3: am62a: Add main_timer0 id to the dev list
+  arm: dts: k3-am62a*: Sync with kernel v6.7-rc1
+  configs: am62ax_evm_a53_defconfig: Enable networking
+  board: ti: am62ax: env: Use default findfdt
+  board: ti: am62ax: env: Set the boot_targets
+  configs: am62ax_evm_a53_defconfig: switch to stdboot
+
+Vignesh Raghavendra (1):
+  dma: ti: k3-udma: Introduce DMA support for the am62ax
+
+ arch/arm/dts/k3-am62a-main.dtsi       | 585 +++++++++++++++++++++++++-
+ arch/arm/dts/k3-am62a-mcu.dtsi        | 131 ++++++
+ arch/arm/dts/k3-am62a-thermal.dtsi    |  47 +++
+ arch/arm/dts/k3-am62a-wakeup.dtsi     |  21 +-
+ arch/arm/dts/k3-am62a.dtsi            |   5 +-
+ arch/arm/dts/k3-am62a7-r5-sk.dts      |  74 +---
+ arch/arm/dts/k3-am62a7-sk-u-boot.dtsi | 139 ++++--
+ arch/arm/dts/k3-am62a7-sk.dts         | 347 ++++++++++++++-
+ arch/arm/dts/k3-am62a7.dtsi           |   3 +-
+ arch/arm/mach-k3/am62ax/dev-data.c    |   1 +
+ board/ti/am62ax/am62ax.env            |   6 +-
+ configs/am62ax_evm_a53_defconfig      |  12 +-
+ doc/board/ti/am62ax_sk.rst            | 213 ++++++++++
+ doc/board/ti/k3.rst                   |   1 +
+ drivers/dma/ti/Makefile               |   1 +
+ drivers/dma/ti/k3-psil-am62a.c        | 196 +++++++++
+ drivers/dma/ti/k3-psil-priv.h         |   1 +
+ drivers/dma/ti/k3-psil.c              |   2 +
+ 18 files changed, 1650 insertions(+), 135 deletions(-)
+ create mode 100644 arch/arm/dts/k3-am62a-thermal.dtsi
+ create mode 100644 doc/board/ti/am62ax_sk.rst
+ create mode 100644 drivers/dma/ti/k3-psil-am62a.c
+
 -- 
 2.40.0
 
