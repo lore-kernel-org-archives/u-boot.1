@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD8FC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 01:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FF8DC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 02:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73F7A87076;
-	Mon, 13 Nov 2023 02:49:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F29086B0A;
+	Mon, 13 Nov 2023 03:42:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U2YzNoZz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PCuSVAI+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82F99870BC; Mon, 13 Nov 2023 02:49:45 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 3B1E686B4E; Mon, 13 Nov 2023 03:42:51 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4183D87098
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 02:49:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3076586958
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 03:42:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6bcbfecf314so812299b3a.1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 17:49:42 -0800 (PST)
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-507bd64814fso5781902e87.1
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 18:42:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699840180; x=1700444980; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1699843368; x=1700448168; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VVcsVYY843GHoeAsm03ODTeqNlct1/wIMe3XRv6dB1Y=;
- b=U2YzNoZzzBGx/Y18oCDmjpqX1LE0L0JMy9dpKu26cMSwISjv7Nj1CtI4evc3D58aaY
- pbl7DWunSZp3vJCFo9W0AXcfQ/+4DSiav5fo5Ad81dfS4dsWxZkexiA6C4HBwAWW0PCm
- g2q3/souapRERM8J6O06gYnNE6Z1LR6CHppZjVmhkkZfd2gE6ufW/pXhtP0icODP+z0D
- 7rnXNvozmPuWCT0EyNhWUinmYx943lDfnpmGONG2u8Qngnuy3x9pKB0gI/EZ8Ww+w049
- Fm/76I82fFX7NIwt8giKdPOpO9VrPm64q6pW2OAvHGVcjSbRB+xj4lr53V3nxdYZyixW
- TYRA==
+ bh=Dx7olLyu0C1wYk1t00SxH6Eq4zksZJil98GI/ckykG4=;
+ b=PCuSVAI+Jh8g0huSyH908RNPKwNgrXBdN0g+Hheu6usqB1aXjefkzTevk1Ue8jgyrt
+ 81BA4F10Eh2UrfDZHtOrIGxmKZoFwHpKoWEKR2iRGvYdOgbWltDssznQdaHEUqmGcti4
+ mZN91MRvxXlbV7Zdgju9U+c0sEe3kOYJWAtNmO2t9wxJQVRP2NDekqBis0SZTXwwT5si
+ F2Ldzy/aLy6+6oJA+Qr117SidQjg/kfccI4xMMtYuq2ep5Vr30WlCSGR4PeMhIJKAeSI
+ q7kxSbc1TZM1BVLyoNibXQtgTsLByVSmmOa9b5iWqMnvlge6YzzGkIgHbuiXNz5Fn8bE
+ XH2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699840180; x=1700444980;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1699843368; x=1700448168;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VVcsVYY843GHoeAsm03ODTeqNlct1/wIMe3XRv6dB1Y=;
- b=Ret7+pKo4iZeAv3wIsLouPgZgp9kEMy7HPW//FUx1SRjiqyQOX1uvHxJYotZqlaNRi
- 2tc16IX2iEg9Ng3VO+eBXtc2WgZzN1UgLBk+ZmdTwLv/GYpQn095LTPbqo0fP5CLjnWb
- rS4BjDDeBk28FRxeRjL842q3UsJEGg8wXaIG2DuoWUruK4G91sxuEpTzXBMdQIX7yRmF
- ogNYg/IxFRQUIuqr8jmEwGjEp41J3d96i6fWF5A++smNqciZUzkpM6HkHKq+qRRE/jcV
- KlPJXsUIRGntpy+FZWXocYK4vgFyWByycQg0u71DNmvgXzG1p7f0VYCkOvNU4bYLj/BI
- 1RYw==
-X-Gm-Message-State: AOJu0YxpqjuAO9y1+x+NBNLjvBhqSoYQuG0atCJzNbt2I+9RWP4oRbsc
- U0Mjn+PquEyMBLk58JLrYaQLKA==
-X-Google-Smtp-Source: AGHT+IF63e6kz6Fg8pSzs4vC7PIOivQ6h/JOElE4dEf6PvK5yVTXA+AxpRMFTdch90c2t3e2ewTPyg==
-X-Received: by 2002:a05:6a00:2d0f:b0:68a:6cbe:35a7 with SMTP id
- fa15-20020a056a002d0f00b0068a6cbe35a7mr6501971pfb.2.1699840180559; 
- Sun, 12 Nov 2023 17:49:40 -0800 (PST)
-Received: from octopus.. ([2400:4050:c3e1:100:ba59:509b:48bc:9f1])
- by smtp.gmail.com with ESMTPSA id
- s14-20020a65644e000000b005b92e60cf57sm2635549pgv.56.2023.11.12.17.49.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 17:49:40 -0800 (PST)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com,
-	sjg@chromium.org
-Cc: etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v2 5/5] test: dm: add scmi command test
-Date: Mon, 13 Nov 2023 10:49:11 +0900
-Message-Id: <20231113014911.3308990-6-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231113014911.3308990-1-takahiro.akashi@linaro.org>
-References: <20231113014911.3308990-1-takahiro.akashi@linaro.org>
+ bh=Dx7olLyu0C1wYk1t00SxH6Eq4zksZJil98GI/ckykG4=;
+ b=X4ZkikJEFeRkQIsEDinL3863WlWJi0fnVgaxidbvmx1JQEIdcIWL2cawNfiqKw9b/X
+ F4oDH5111mKRPb3FnZ0bTixrwMsvj3M/mK5YF1+ILhWAT1f8+5787OFh4EzxEcbZSJDe
+ SQQ0TtIlNj/ucmJdK8ny4JOt07udBDzFXuPH4GcVBEIb5UaR0cqnvHw7619pLYNzirtv
+ KVG+I0jW9VaeN6ufAIe/P/EwcYCxvhv7/378+GESHwMv2aON/T/BmDj5Xug3c4Vp9n7c
+ 2KT+EbWtvz0GrG5f/hyGQgax5GF7uQ6ayhXdqvBiTGFTxnqDWzUQP5MnTjkKG2TqvBNT
+ 7VWw==
+X-Gm-Message-State: AOJu0YyXLPOuz4vvqTmeoTGteFm50OEt5Pc+Gss87BLwXoSIFAXk2F/o
+ d99wYy0fr8g2D/yiJ25soWYSmw6Jy9ZjBEMMQOY=
+X-Google-Smtp-Source: AGHT+IF3h76K6E7uGbn5V2ytx9lNaJGOHuxUZoCeyLxQVH46UCLkL0ClgyBFTOYjbHNX7r6YtQcfsjSlFygfScGlTOQ=
+X-Received: by 2002:ac2:5dd6:0:b0:507:9d70:b297 with SMTP id
+ x22-20020ac25dd6000000b005079d70b297mr3048390lfq.60.1699843367929; Sun, 12
+ Nov 2023 18:42:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231107090128.199267-1-JJLIU0@nuvoton.com>
+ <8b3ac0c1-6f2a-92ec-120a-ae65faae1c0b@gmail.com>
+In-Reply-To: <8b3ac0c1-6f2a-92ec-120a-ae65faae1c0b@gmail.com>
+From: Jim Liu <jim.t90615@gmail.com>
+Date: Mon, 13 Nov 2023 10:42:36 +0800
+Message-ID: <CAKUZ0+GwDB+f669CJ+hy7n9NpVkZR1y_ZwRRMJVyC2Be7RAcFw@mail.gmail.com>
+Subject: Re: [PATCH v2] clk: nuvoton: add read only feature for clk driver
+To: Sean Anderson <seanga2@gmail.com>
+Cc: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,140 +88,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this test, "scmi" command is tested against different sub-commands.
-Please note that scmi command is for debug purpose and is not intended
-in production system.
+Hi Sean
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
----
-v7
-* make test assertions more flexible depending on the number of provided
-  protocols
-v4
-* move 'base'-related changes to the prior commit
-* add CONFIG_CMD_SCMI to sandbox_defconfig
-v3
-* change char to u8 in vendor/agent names
-v2
-* use helper functions, removing direct uses of ops
----
- configs/sandbox_defconfig |  1 +
- test/dm/scmi.c            | 81 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 82 insertions(+)
+Thanks for your review.
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index bc5bcb2a6237..c550af93b0ca 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -121,6 +121,7 @@ CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_AES=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_TPM_TEST=y
-+CONFIG_CMD_SCMI=y
- CONFIG_CMD_BTRFS=y
- CONFIG_CMD_CBFS=y
- CONFIG_CMD_CRAMFS=y
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index 2f63f2da16fb..2bcf7ac6fcc3 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -19,6 +19,7 @@
- #include <scmi_agent.h>
- #include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
-+#include <vsprintf.h>
- #include <asm/scmi_test.h>
- #include <dm/device-internal.h>
- #include <dm/test.h>
-@@ -206,6 +207,86 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
- 
- DM_TEST(dm_test_scmi_base, UT_TESTF_SCAN_FDT);
- 
-+static int dm_test_scmi_cmd(struct unit_test_state *uts)
-+{
-+	struct udevice *agent_dev;
-+	int num_proto = 0;
-+	char cmd_out[30];
-+
-+	if (!IS_ENABLED(CONFIG_CMD_SCMI))
-+		return 0;
-+
-+	/* preparation */
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-+					      &agent_dev));
-+	ut_assertnonnull(agent_dev);
-+
-+	/*
-+	 * Estimate the number of provided protocols.
-+	 * This estimation is correct as far as a corresponding
-+	 * protocol support is added to sandbox fake serer.
-+	 */
-+	if (IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN))
-+		num_proto++;
-+	if (IS_ENABLED(CONFIG_CLK_SCMI))
-+		num_proto++;
-+	if (IS_ENABLED(CONFIG_RESET_SCMI))
-+		num_proto++;
-+	if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI))
-+		num_proto++;
-+
-+	/* scmi info */
-+	ut_assertok(run_command("scmi info", 0));
-+
-+	ut_assert_nextline("SCMI device: scmi");
-+	snprintf(cmd_out, 30, "  protocol version: 0x%x",
-+		 SCMI_BASE_PROTOCOL_VERSION);
-+	ut_assert_nextline(cmd_out);
-+	ut_assert_nextline("  # of agents: 2");
-+	ut_assert_nextline("      0: platform");
-+	ut_assert_nextline("    > 1: OSPM");
-+	snprintf(cmd_out, 30, "  # of protocols: %d", num_proto);
-+	ut_assert_nextline(cmd_out);
-+	if (IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN))
-+		ut_assert_nextline("      Power domain management");
-+	if (IS_ENABLED(CONFIG_CLK_SCMI))
-+		ut_assert_nextline("      Clock management");
-+	if (IS_ENABLED(CONFIG_RESET_SCMI))
-+		ut_assert_nextline("      Reset domain management");
-+	if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI))
-+		ut_assert_nextline("      Voltage domain management");
-+	ut_assert_nextline("  vendor: U-Boot");
-+	ut_assert_nextline("  sub vendor: Sandbox");
-+	ut_assert_nextline("  impl version: 0x1");
-+
-+	ut_assert_console_end();
-+
-+	/* scmi perm_dev */
-+	ut_assertok(run_command("scmi perm_dev 1 0 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assert(run_command("scmi perm_dev 1 0 0", 0));
-+	ut_assert_nextline("Denying access to device:0 failed (-13)");
-+	ut_assert_console_end();
-+
-+	/* scmi perm_proto */
-+	ut_assertok(run_command("scmi perm_proto 1 0 14 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assert(run_command("scmi perm_proto 1 0 14 0", 0));
-+	ut_assert_nextline("Denying access to protocol:0x14 on device:0 failed (-13)");
-+	ut_assert_console_end();
-+
-+	/* scmi reset */
-+	ut_assert(run_command("scmi reset 1 1", 0));
-+	ut_assert_nextline("Reset failed (-13)");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_scmi_cmd, UT_TESTF_SCAN_FDT);
-+
- static int dm_test_scmi_power_domains(struct unit_test_state *uts)
- {
- 	struct sandbox_scmi_agent *agent;
--- 
-2.34.1
+The spi clock setting is related to booting flash, it is setup by
+early bootloader and we don't want u-boot to change it
 
+
+Best regards,
+Jim
+
+
+On Thu, Nov 9, 2023 at 2:07=E2=80=AFAM Sean Anderson <seanga2@gmail.com> wr=
+ote:
+>
+> On 11/7/23 04:01, Jim Liu wrote:
+> > Add a flag to set ahb/apb/fiu clock divider as read-only
+> > It just protects the clock source and can't modify it in uboot.
+>
+> Thanks for adding this
+>
+> > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> > ---
+> > Changes for v2:
+> >     - add commit message
+> > ---
+> >   drivers/clk/nuvoton/clk_npcm.c    | 15 ++++++++++++---
+> >   drivers/clk/nuvoton/clk_npcm.h    |  1 +
+> >   drivers/clk/nuvoton/clk_npcm8xx.c | 12 ++++++------
+> >   3 files changed, 19 insertions(+), 9 deletions(-)
+> >
+> > diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_n=
+pcm.c
+> > index 8d71f2a24b..18cb9cddbf 100644
+> > --- a/drivers/clk/nuvoton/clk_npcm.c
+> > +++ b/drivers/clk/nuvoton/clk_npcm.c
+> > @@ -135,7 +135,7 @@ static u32 npcm_clk_get_div(struct clk *clk)
+> >       return div;
+> >   }
+> >
+> > -static u32 npcm_clk_set_div(struct clk *clk, u32 div)
+> > +static int npcm_clk_set_div(struct clk *clk, u32 div)
+> >   {
+> >       struct npcm_clk_priv *priv =3D dev_get_priv(clk->dev);
+> >       struct npcm_clk_div *divider;
+> > @@ -145,6 +145,9 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 di=
+v)
+> >       if (!divider)
+> >               return -EINVAL;
+> >
+> > +     if (divider->flags & DIV_RO)
+> > +             return 0;
+> > +
+> >       if (divider->flags & PRE_DIV2)
+> >               div =3D div >> 1;
+> >
+> > @@ -153,6 +156,12 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 d=
+iv)
+> >       else
+> >               clkdiv =3D ilog2(div);
+> >
+> > +     if (clkdiv > (divider->mask >> (ffs(divider->mask) - 1))) {
+> > +             printf("clkdiv(%d) for clk(%ld) is over limit\n",
+> > +                    clkdiv, clk->id);
+> > +             return -EINVAL;
+> > +     }
+> > +
+> >       val =3D readl(priv->base + divider->reg);
+> >       val &=3D ~divider->mask;
+> >       val |=3D (clkdiv << (ffs(divider->mask) - 1)) & divider->mask;
+> > @@ -253,8 +262,8 @@ static ulong npcm_clk_set_rate(struct clk *clk, ulo=
+ng rate)
+> >       if (ret)
+> >               return ret;
+> >
+> > -     debug("%s: rate %lu, new rate (%lu / %u)\n", __func__, rate, pare=
+nt_rate, div);
+> > -     return (parent_rate / div);
+> > +     debug("%s: rate %lu, new rate %lu\n", __func__, rate, npcm_clk_ge=
+t_rate(clk));
+> > +     return npcm_clk_get_rate(clk);
+> >   }
+> >
+> >   static int npcm_clk_set_parent(struct clk *clk, struct clk *parent)
+> > diff --git a/drivers/clk/nuvoton/clk_npcm.h b/drivers/clk/nuvoton/clk_n=
+pcm.h
+> > index 06b60dc8b8..b4726d8381 100644
+> > --- a/drivers/clk/nuvoton/clk_npcm.h
+> > +++ b/drivers/clk/nuvoton/clk_npcm.h
+> > @@ -50,6 +50,7 @@
+> >   #define PRE_DIV2    BIT(2)  /* Pre divisor =3D 2 */
+> >   #define POST_DIV2   BIT(3)  /* Post divisor =3D 2 */
+> >   #define FIXED_PARENT        BIT(4)  /* clock source is fixed */
+> > +#define DIV_RO               BIT(5)  /* divider is read-only */
+> >
+> >   /* Parameters of PLL configuration */
+> >   struct npcm_clk_pll {
+> > diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/cl=
+k_npcm8xx.c
+> > index 27e3cfcf55..d1b32e3237 100644
+> > --- a/drivers/clk/nuvoton/clk_npcm8xx.c
+> > +++ b/drivers/clk/nuvoton/clk_npcm8xx.c
+> > @@ -45,12 +45,12 @@ static struct npcm_clk_select npcm8xx_clk_selectors=
+[] =3D {
+> >   };
+> >
+> >   static struct npcm_clk_div npcm8xx_clk_dividers[] =3D {
+> > -     {NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2},
+> > -     {NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2},
+> > -     {NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2},
+> > -     {NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1},
+> > -     {NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1},
+> > -     {NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1},
+> > +     {NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2 | DIV_RO=
+},
+> > +     {NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2 | DIV_RO},
+> > +     {NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2 | DIV_RO},
+>
+> And this makes sense for bus clocks
+>
+> > +     {NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1 | DIV_RO},
+> > +     {NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1 | DIV_RO},
+> > +     {NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1 | DIV_RO},
+>
+> But it's a little unclear to me why this is enabled for SPI. Are you e.g.
+> doing XIP from SPI?
+>
+> --Sean
+>
+> >       {NPCM8XX_CLK_SPIX, CLKDIV3, SPIXCKDIV, DIV_TYPE1},
+> >       {NPCM8XX_CLK_UART, CLKDIV1, UARTDIV1, DIV_TYPE1},
+> >       {NPCM8XX_CLK_UART2, CLKDIV3, UARTDIV2, DIV_TYPE1},
+>
