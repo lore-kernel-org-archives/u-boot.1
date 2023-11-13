@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A1CAC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CF56C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 15:00:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F4E3871A5;
+	by phobos.denx.de (Postfix) with ESMTP id 8CB7F871D7;
 	Mon, 13 Nov 2023 15:59:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Gss1G9Xy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w+WP4uqo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DADD871E9; Mon, 13 Nov 2023 15:59:39 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 46E0487154; Mon, 13 Nov 2023 15:59:39 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 439FE87154
+ by phobos.denx.de (Postfix) with ESMTPS id 263FF8714E
  for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 15:59:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADExRS7030684;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADExRhr022836;
  Mon, 13 Nov 2023 08:59:27 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1699887567;
- bh=qSNjBZSUSTL14HQryuuL292C9BVI5OMk/BfOTgVFKpE=;
+ bh=sqmvULq0ayZzRbW0c8s01tKi62jwNGcVFWUxwp+tRtg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Gss1G9XyFqFKWMzSNOsR6nv7nkDpVW1q48EgmsfhwdTpKMHgcMA5zCChSSN/FJd4T
- /vURH5/0+Mu9dQtdDWH664DBwjSZ9Tm3WC0dljc9yZ3YoAnMABSPUlUrCAo8MQRGrD
- tsSaKruumQVz/tcDZuE9bH1/eEzVV9MOau5wwgvo=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADExRN9017310
+ b=w+WP4uqoEB8BOHNFYP7HAOm2jtuv8FEuJE9pZubARhjwvhyToAwr2ftiLjeKjgwMf
+ 62iTOfXuhKpF1ssmNW3WHiBC+X9w0vBxeWyujrkzQ1KTnfwHM+S6T1pOLdRI/dD1p7
+ dRSpp1r9pQeHIJoyECWZl1Wb8Rt5lBblT/AYsalw=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADExRV3103479
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 13 Nov 2023 08:59:27 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 13
- Nov 2023 08:59:27 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 08:59:26 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 13 Nov 2023 08:59:27 -0600
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADExQBb041120;
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADExQXn059855;
  Mon, 13 Nov 2023 08:59:26 -0600
 From: Nishanth Menon <nm@ti.com>
 To: Marcel Ziswiler <marcel.ziswiler@toradex.com>, Tom Rini
@@ -58,10 +58,10 @@ CC: Neha Malcom Francis <n-francis@ti.com>, Roger Quadros <rogerq@kernel.org>,
  <mkorpershoek@baylibre.com>, Sjoerd Simons <sjoerd@collabora.com>, Robert
  Nelson <robertcnelson@gmail.com>, Francesco Dolcini
  <francesco.dolcini@toradex.com>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 3/4] arm: dts: k3-am625-beagleplay-u-boot: drop duplicate
- bootph-nodes
-Date: Mon, 13 Nov 2023 08:59:18 -0600
-Message-ID: <20231113145919.1928812-4-nm@ti.com>
+Subject: [PATCH 2/4] arm: dts: k3-am625: Drop SoC provided bootph params from
+ board u-boot/r5 dtsi
+Date: Mon, 13 Nov 2023 08:59:17 -0600
+Message-ID: <20231113145919.1928812-3-nm@ti.com>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20231113145919.1928812-1-nm@ti.com>
 References: <20231113145919.1928812-1-nm@ti.com>
@@ -85,116 +85,364 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Kernel dts import now provides bootph-all and bootph-pre-ram properties
-for the properties we have been overriding so far. Drop the same.
+k3-am62* SoC dtsi files now provide the following:
+
+bootph-all: dmss secure_proxy_main dmsc k3_pds k3_clks k3_reset
+   main_pmx0 main_timer0 mcu_pmx0 wkup_conf chipid
+
+bootph-pre-ram: secure_proxy_sa3 main_esm mcu_esm
+
+Drop these from board r5 and u-boot.dtsi files as these are duplicate in
+them now.
 
 Signed-off-by: Nishanth Menon <nm@ti.com>
 ---
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 56 --------------------
- 1 file changed, 56 deletions(-)
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 54 ------------------
+ arch/arm/dts/k3-am625-r5-beagleplay.dts       |  9 ---
+ arch/arm/dts/k3-am625-r5-sk.dts               |  9 ---
+ arch/arm/dts/k3-am625-sk-u-boot.dtsi          | 53 ------------------
+ arch/arm/dts/k3-am625-verdin-r5.dts           |  9 ---
+ .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  | 55 +------------------
+ 6 files changed, 2 insertions(+), 187 deletions(-)
 
 diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index 6f3a31558b20..7f8468f298f0 100644
+index d6c6baa5518b..6f3a31558b20 100644
 --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
 +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -13,36 +13,26 @@
- 		tick-timer = &main_timer0;
+@@ -47,59 +47,17 @@
  	};
+ };
  
--	memory@80000000 {
+-&cbass_main {
+-	bootph-all;
+-};
+-
+ &main_timer0 {
+ 	clock-frequency = <25000000>;
+-	bootph-all;
+-};
+-
+-&dmss {
+-	bootph-all;
+-};
+-
+-&secure_proxy_main {
+-	bootph-all;
+-};
+-
+-&dmsc {
+-	bootph-all;
+-};
+-
+-&k3_pds {
+-	bootph-all;
+-};
+-
+-&k3_clks {
+-	bootph-all;
+-};
+-
+-&k3_reset {
+-	bootph-all;
+ };
+ 
+ &dmsc {
+-	bootph-all;
+ 	k3_sysreset: sysreset-controller {
+ 		compatible = "ti,sci-sysreset";
+ 		bootph-all;
+ 	};
+ };
+ 
+-&wkup_conf {
+-	bootph-all;
+-};
+-
+-&chipid {
+-	bootph-all;
+-};
+-
+-&main_pmx0 {
+-	bootph-all;
+-};
+-
+ &main_uart0 {
+ 	bootph-all;
+ };
+@@ -108,18 +66,6 @@
+ 	bootph-all;
+ };
+ 
+-&cbass_mcu {
+-	bootph-all;
+-};
+-
+-&cbass_wakeup {
+-	bootph-all;
+-};
+-
+-&mcu_pmx0 {
+-	bootph-all;
+-};
+-
+ &main_i2c0 {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
+index 9c9d0570592a..1f450f55c1d2 100644
+--- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
++++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
+@@ -54,12 +54,7 @@
+ 	ti,secure-host;
+ };
+ 
+-&mcu_esm {
+-	bootph-pre-ram;
+-};
+-
+ &secure_proxy_sa3 {
+-	bootph-pre-ram;
+ 	/* We require this for boot handshake */
+ 	status = "okay";
+ };
+@@ -73,10 +68,6 @@
+ 	};
+ };
+ 
+-&main_esm {
+-	bootph-pre-ram;
+-};
+-
+ &main_pktdma {
+ 	ti,sci = <&dm_tifs>;
+ };
+diff --git a/arch/arm/dts/k3-am625-r5-sk.dts b/arch/arm/dts/k3-am625-r5-sk.dts
+index bf219226b974..55420b2f2c15 100644
+--- a/arch/arm/dts/k3-am625-r5-sk.dts
++++ b/arch/arm/dts/k3-am625-r5-sk.dts
+@@ -55,20 +55,11 @@
+ 	ti,secure-host;
+ };
+ 
+-&mcu_esm {
+-	bootph-pre-ram;
+-};
+-
+ &secure_proxy_sa3 {
+-	bootph-pre-ram;
+ 	/* We require this for boot handshake */
+ 	status = "okay";
+ };
+ 
+-&main_esm {
+-	bootph-pre-ram;
+-};
+-
+ &cbass_main {
+ 	sysctrler: sysctrler {
+ 		compatible = "ti,am654-system-controller";
+diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+index 7ae5e01f7c7f..dcf7c7652d31 100644
+--- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+@@ -25,49 +25,8 @@
+ 	bootph-all;
+ };
+ 
+-&cbass_main {
+-	bootph-all;
+-};
+-
+ &main_timer0 {
+ 	clock-frequency = <25000000>;
+-	bootph-all;
+-};
+-
+-&dmss {
+-	bootph-all;
+-};
+-
+-&secure_proxy_main {
+-	bootph-all;
+-};
+-
+-&dmsc {
+-	bootph-all;
+-};
+-
+-&k3_pds {
+-	bootph-all;
+-};
+-
+-&k3_clks {
+-	bootph-all;
+-};
+-
+-&k3_reset {
+-	bootph-all;
+-};
+-
+-&wkup_conf {
+-	bootph-all;
+-};
+-
+-&chipid {
+-	bootph-all;
+-};
+-
+-&main_pmx0 {
+-	bootph-all;
+ };
+ 
+ &main_uart0 {
+@@ -78,18 +37,6 @@
+ 	bootph-all;
+ };
+ 
+-&cbass_mcu {
+-	bootph-all;
+-};
+-
+-&cbass_wakeup {
+-	bootph-all;
+-};
+-
+-&mcu_pmx0 {
+-	bootph-all;
+-};
+-
+ &sdhci1 {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/k3-am625-verdin-r5.dts b/arch/arm/dts/k3-am625-verdin-r5.dts
+index 0cae9c577732..305d199678b3 100644
+--- a/arch/arm/dts/k3-am625-verdin-r5.dts
++++ b/arch/arm/dts/k3-am625-verdin-r5.dts
+@@ -69,16 +69,7 @@
+ 	ti,secure-host;
+ };
+ 
+-&main_esm {
+-	bootph-pre-ram;
+-};
+-
+-&mcu_esm {
+-	bootph-pre-ram;
+-};
+-
+ &secure_proxy_sa3 {
+-	bootph-pre-ram;
+ 	/* We require this for boot handshake */
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+index 75cb60b57d79..86e2d111f541 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
+@@ -21,25 +21,8 @@
+ 	};
+ };
+ 
+-&cbass_main {
+-	bootph-all;
+-
+-	timer@2400000 {
+-		clock-frequency = <25000000>;
 -		bootph-all;
 -	};
+-};
 -
- 	/* Keep the LEDs on by default to indicate life */
- 	leds {
--		bootph-all;
- 		led-0 {
- 			default-state = "on";
--			bootph-all;
- 		};
- 
- 		led-1 {
- 			default-state = "on";
--			bootph-all;
- 		};
- 
- 		led-2 {
- 			default-state = "on";
--			bootph-all;
- 		};
- 
- 		led-3 {
- 			default-state = "on";
--			bootph-all;
- 		};
- 
- 		led-4 {
- 			default-state = "on";
--			bootph-all;
- 		};
- 	};
+-&cbass_mcu {
+-	bootph-all;
+-};
+-
+-&cbass_wakeup {
+-	bootph-all;
+-};
+-
+-&chipid {
+-	bootph-all;
++&main_timer0 {
++	clock-frequency = <25000000>;
  };
-@@ -58,45 +48,7 @@
+ 
+ &main_bcdma {
+@@ -98,34 +81,16 @@
+ };
+ 
+ &dmsc {
+-	bootph-all;
+-
+ 	k3_sysreset: sysreset-controller {
+ 		compatible = "ti,sci-sysreset";
+ 		bootph-all;
  	};
  };
  
--&main_uart0 {
+-&dmss {
 -	bootph-all;
 -};
 -
--&console_pins_default {
--	bootph-all;
--};
--
--&main_i2c0 {
--	bootph-all;
--};
--
--&local_i2c_pins_default {
--	bootph-all;
--};
--
--&gpio0_pins_default {
--	bootph-all;
--};
--
--&main_gpio0 {
--	bootph-all;
--};
--
--&main_gpio1 {
--	bootph-all;
--};
--
--&sdhci0 {
--	/* EMMC */
--	bootph-all;
--};
--
--&emmc_pins_default {
--	bootph-all;
--};
--
- &sd_pins_default {
--	bootph-all;
- 	/* Force to use SDCD card detect pin */
- 	pinctrl-single,pins = <
- 		AM62X_IOPAD(0x023c, PIN_INPUT, 0) /* (A21) MMC1_CMD */
-@@ -109,14 +61,6 @@
- 	>;
+ &fss {
+ 	bootph-all;
  };
  
--&tps65219 {
+-&k3_clks {
 -	bootph-all;
 -};
 -
--&sdhci1 {
+-&k3_pds {
 -	bootph-all;
 -};
 -
- #ifdef CONFIG_TARGET_AM625_A53_EVM
+-&k3_reset {
+-	bootph-all;
+-};
+-
+ &main_gpio0 {
+ 	bootph-all;
+ };
+@@ -156,10 +121,6 @@
+ 	};
+ };
  
- #define SPL_AM625_BEAGLEPLAY_DTB "spl/dts/k3-am625-beagleplay.dtb"
+-&main_pmx0 {
+-	bootph-all;
+-};
+-
+ /* Verdin UART_3, used as the Linux console */
+ &main_uart0 {
+ 	bootph-all;
+@@ -170,10 +131,6 @@
+ 	bootph-all;
+ };
+ 
+-&mcu_pmx0 {
+-	bootph-all;
+-};
+-
+ &pinctrl_ctrl_sleep_moci {
+ 	bootph-all;
+ };
+@@ -210,18 +167,10 @@
+ 	status = "disabled";
+ };
+ 
+-&secure_proxy_main {
+-	bootph-all;
+-};
+-
+ &verdin_ctrl_sleep_moci {
+ 	bootph-all;
+ };
+ 
+-&wkup_conf {
+-	bootph-all;
+-};
+-
+ /* Verdin UART_2 */
+ &wkup_uart0 {
+ 	bootph-all;
 -- 
 2.40.0
 
