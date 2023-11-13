@@ -4,111 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F2CDC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 09:06:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57112C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 09:06:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5A94870A7;
-	Mon, 13 Nov 2023 10:05:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DAA2186B4E;
+	Mon, 13 Nov 2023 10:06:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="L22xWEmg";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pR7MfdvG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D860186B0A; Mon, 13 Nov 2023 10:05:47 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5a::62c])
+ id 35A7386F87; Mon, 13 Nov 2023 10:06:52 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8a::626])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08A3086F87
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 10:05:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3AD486B0A
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 10:06:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YWDJX2PAiMH974tvq5wdQjip1ShEIQruMO5WMRTPNy7mw0QsKufY2/Whoot9GYb4eT4cSOtyC0dcyEHnuGDQcsDI0jv2GfGYP3PQzAwggoRqj+QO25A4SdMGA3pbbU63uU3gdaYlbn7FoKRoXSKbRJEyUewiGBq8p4fVNI+7dxnDYgFoIUVdDjn9qVRG0XGDt6lB455X+x+8j5hS/r28EtAUlq3iyD6lOgKizZ38vmSKotxDYyJvQTbWiXIIzk1gX+shUe1KjDxrPfPQdwLNc7Ox1tl1+KHzkoQsWtNyiqpKqZ2t8a83gD7YPfUGVcxNFnv++fmfNdaeHken6TQr4Q==
+ b=bowufYF0TsMUKCawFUMDwBGn026/83qtmKjR8teA7di8gLWAR1IbkIMSZpoh54CsE1yQw4DTW1cZQetEbUN5banzm2zdAYY6pKj42a5ykNihrIIIzQAwdgQ58uepl8zU6MFTpb5X3/BxTeg0idfNO5yX4nVKk/OOGf6dA3JCHN+VTOP0QaituIOgYqyIFhf/2ZOPVMLhLREFmbu+Em0gwet0dPM0CklFXGcp+QUXVq8aYLM1Tfv11Hh9vfM3KPIsFUNwIW8fIyWKaU1wk2NgH++R1NxAzmqAGV1KNYXO5zV3ddA+vJLYnJ+sdR+knmzHhf2BCtcthJNbYfxOkqYwEw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NnP2iRglZVOF/9FYinpmJ91x3RcQO8OlQt26l2unFWM=;
- b=M6BRXv8eBW89Ia3cHnWfodkKYrtn+gBfdJnaXJ3XglX8MX6CZBEsuTKlRhG3Tm6Ra1Gbwkk+jQipirojuzlyRgV/e59Q4FSpItwqcjSG5FNDTSgki8U6G2o9hD+PrK8af2CcblK5gGNvplKSXXXBlgAGl0xiKTLG3n8Yj4bRAEFedU5k9r11AB4Kklof5+gFJuQBDr0xc19yvobhD4uRcOZJLz9taRUuv88YW3e8QISfm3MycVSd6RWYtKZSeS7xrnTtHnM0809fyqPc/Jz2zPkkF9m9T+mPMENFvRnZR8TxCrdJg2XS/6VDMDWY1J/MiwcwfoZv7X/FbYCMfvnt+Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=CjZJ8Dft7OE0I8YObcv06Zu9ilqAW4SVjJ1MZjJLRpU=;
+ b=hxgF9FHSjTIOYONJs8idzc/dv2CC6Qa0T4dczsMrD4tuQKu3lOU0KvIeuZAjcG6gPOcsRJ996l/vYnoJ2J+eufJHrv4VEgt8e9wAGjdMvqV4Ka+yABQT/j81BbIQsVATEhtGiAX+hFXLe+WNcWwE76JZSA/mTTxZgI8fdjPjrYn6F8a6zTzWKYddEYOz8f7OpDlkxxYAsZRTWZpxIqeFXsVGPc8XJQ8xUJhKPwBz3/AtYZNot2/gCypcGHF/dXlc3Zj1fFVkZStZHGsBUujgBc2ZHGJmRHL2KkD158GvqcriTBnBotOJhvchgFCukkjG5erGCeJjBEDnekt/upZ4nA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NnP2iRglZVOF/9FYinpmJ91x3RcQO8OlQt26l2unFWM=;
- b=L22xWEmgmXcTJBJIQmApC+CDDI0gkyFX78TekyXxoHMErIPoz/8Q2u0jqAxWfUudy7Q04MvgxvB/L3Pk6w+tw+DjvQjln9haE1njJOhOM7yXc3dJiOBLqAjik+Ge7Z8zOicVXWH936D8WpPVoXejeyyVRwywPWKwuw1fymdtvRY=
-Received: from CY5PR19CA0017.namprd19.prod.outlook.com (2603:10b6:930:15::10)
- by PH8PR12MB6748.namprd12.prod.outlook.com (2603:10b6:510:1c4::5)
+ bh=CjZJ8Dft7OE0I8YObcv06Zu9ilqAW4SVjJ1MZjJLRpU=;
+ b=pR7MfdvGy2TsNPpam1GDTElNRv0WuHtrebnCu8E3MGE6zjnsitqkW1FuDmgJSkUkuNVnFTPEI6xv194ikzMlAYeGj5XXirfNx3xew81K4stG0vjYW9vaNot/2ahZgSayEtn3QTorH9ke3md9H69xxCiTvp79W8nHqacQwImvMuU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
+ by SJ2PR12MB8955.namprd12.prod.outlook.com (2603:10b6:a03:542::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29; Mon, 13 Nov
- 2023 09:05:39 +0000
-Received: from CY4PEPF0000EE39.namprd03.prod.outlook.com
- (2603:10b6:930:15:cafe::9) by CY5PR19CA0017.outlook.office365.com
- (2603:10b6:930:15::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29 via Frontend
- Transport; Mon, 13 Nov 2023 09:05:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EE39.mail.protection.outlook.com (10.167.242.13) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7002.13 via Frontend Transport; Mon, 13 Nov 2023 09:05:38 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.32; Mon, 13 Nov
- 2023 03:05:34 -0600
+ 2023 09:06:45 +0000
+Received: from BYAPR12MB4758.namprd12.prod.outlook.com
+ ([fe80::39a2:42da:ea20:3349]) by BYAPR12MB4758.namprd12.prod.outlook.com
+ ([fe80::39a2:42da:ea20:3349%4]) with mapi id 15.20.6977.029; Mon, 13 Nov 2023
+ 09:06:45 +0000
+Message-ID: <4594325a-f240-4a6f-927f-6aec53cfa830@amd.com>
+Date: Mon, 13 Nov 2023 10:06:34 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/3] drivers: xilinx_spi: Probe fifo_depth at runtime
+Content-Language: en-US
+To: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20231111173121.92889-1-mchitale@ventanamicro.com>
+ <20231111173121.92889-4-mchitale@ventanamicro.com>
 From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH 2/2] xilinx: zynq: Enable capsule update for Antminer S9
-Date: Mon, 13 Nov 2023 10:05:28 +0100
-Message-ID: <8f8deb5f46c0f2d4b687b626f4de221873133856.1699866313.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <3ea0572dbda8f21270c00a77528eb6ec954c7c40.1699866313.git.michal.simek@amd.com>
-References: <3ea0572dbda8f21270c00a77528eb6ec954c7c40.1699866313.git.michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20231111173121.92889-4-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR04CA0067.eurprd04.prod.outlook.com
+ (2603:10a6:802:2::38) To BYAPR12MB4758.namprd12.prod.outlook.com
+ (2603:10b6:a03:a5::28)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1915; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=bGeYsrWhuAM7GyWLMvV6ylEgroMPb9ONj/QxLKSljfQ=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtTAZ1d/WPT21f3a1fxtC+f5bbX+s592KPY9ndKf02A+u
- do4z0irI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAEwkhpdhvuf8JqVes0/zzKTU
- XttWm/SrFZsfY1jQuO/b7sxzL6J+/HjXzrI4s9/jvy0HAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE39:EE_|PH8PR12MB6748:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7b5b08ce-8303-4185-edec-08dbe427b46b
+X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|SJ2PR12MB8955:EE_
+X-MS-Office365-Filtering-Correlation-Id: 082f139c-b723-4fb7-a233-08dbe427dc66
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 63u5jmaZcOjh2sWPm3wFnGeu22cQzgVXWKLyde0XqakIYJgMn1f83pn7EC1p/aeodkm9gkE2NBEEAjdp0XTXWx3gJ0oeQU+iC5d/8nGqdmjopl1apymzLPW9JK04UKZwrRrbFHe3Exvu6rkaDasEuTUhmlj7emz5cSMxOwKrqyQHOW6JVJXyWRryg7fJDkdkEA4MdxSxgJrALqiydfmFrk/VsFwhM1bqipIYMImd+mUhx/nONDnYrzkizTvRoNC7WatOLAAdn/bDP8W4U95XxZYQd0HHJP+36U1EKUG47E8GvSjHBiu475oWxA3vvw3HM6k8HwRhWWZqPCOS/sP9FhtlCgSDDRVfzONfdNTACiyhabur4CnYyvgTzlQpJG5nA9jVU9D4k+jMHpAYe+oV4nuUGrrSXEqvfhJHjYg1qWW+nKQJy7YRlLl04hSIHkAlpuSABMya4Csw3EF651y84/Rw8w6CFLQp7CsOSzFLPdq1hn9h2kySh9C2CIWjBsAbMpkNttSh3FAQQ9k33ZDhTvGMflM9SNLGVvKfIKGz+tVPzRLVzEofQmli9qtfsZlPIOtPxy1P5YRAhcKM0FaUElFf9iU4CZ44wNTsP8iuqWuZBhnrItQqAhpFUmllnVN9bFPZ76DHqRT/S68jL3S2QCi0bUxZ2jNJlyOcDAs9PxEWF6dXBRoFg3ZbXNIhbJfVCfxYsOVvwlASatdyv9SVEQorjQKZBjRePrSdkL2Msxgp22OKlQY1uv3G9VVss5UaRl7S28CWZahRjaHhqvFchg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(376002)(396003)(136003)(346002)(230922051799003)(451199024)(1800799009)(186009)(64100799003)(82310400011)(46966006)(40470700004)(36840700001)(40460700003)(36860700001)(8936002)(8676002)(47076005)(356005)(81166007)(44832011)(82740400003)(70586007)(70206006)(6666004)(110136005)(478600001)(426003)(336012)(26005)(16526019)(83380400001)(316002)(2616005)(36756003)(41300700001)(5660300002)(86362001)(2906002)(15650500001)(40480700001)(36900700001);
+X-Microsoft-Antispam-Message-Info: wt4n/zCvkKnHCIbUHMv3/rCo6Lagdr20l16902pjnsboAnpE744x/I0Z1Ilmqgay6iNmPxeN7YIrI07jR4oAhGiKwZcJdki7z46oHLWZy7xLw46njrf5/9loJ6s7TYLfcAMHapriyj6TqzFuxhkhlyuZ0qZiWlZZj/NN13Afco1oqlc8toygutYrey/G8fl8qoURP+Ok9UM2BeiLf2rU91ks02WBtv7xXitLOD2aoTWPVt/Pi2lB5mYJ9rthGQZQj/2xexT9f8sVZ3Cf9YchXrTz1IfwQezyaNOVqc8ETXtcp7sA5QjPagDexRXXdjWIou3lHuFFv8g9StCM8o9eWYdn2P4eLAVVRLMq7aO4D1wkHonIp/943oTTJ3pwYaNjq+EN3L+CzUwuQxufqV2yTdbLDhAYEm5w0tPCgkzce3HP9S3c8Pty2JKjO0yY3QyFgXcYjR8GU90JApgBHbgrL8yVmGHBgCvY4c9hoOzSl6sWRqfpbEPbaVG/809wo7wW7QuM9BFLDox93RU9N36SD5DytA+g7i2bDHv1vO4ct/yPcrArp9JPB/GlKVbciUkp2I0aPoo6cPBSAGkG6x7DBCMrHcDhEl3OrYPRjbekfR6OaAR9VjbU1o6WJj+iA1ba
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(39860400002)(136003)(396003)(346002)(376002)(230922051799003)(451199024)(186009)(1800799009)(64100799003)(2906002)(44832011)(2616005)(5660300002)(86362001)(31696002)(41300700001)(26005)(110136005)(54906003)(66556008)(66946007)(66476007)(6512007)(316002)(83380400001)(38100700002)(966005)(31686004)(478600001)(6486002)(36756003)(53546011)(6506007)(6666004)(8676002)(4326008)(8936002)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZzdkaWorS2xuKzlENkMvUDAzUHdrYnV1OTFveGNwYUZqWk5CK1ZucHFCTjB0?=
+ =?utf-8?B?UU41QXoyYmVOMTh4R1ZEOGNWSzlrN2xLZUxYS1ZRQ3JmMWhySlhwRUdFaHZY?=
+ =?utf-8?B?VkU5b0ducFdYN3oySlF4anpRMXZRQXhiV0hQTThZM0tHQ016YXFpWkU5QUVz?=
+ =?utf-8?B?UjdzMXN6Y0hvMXRLVnpvc3ozc0xsRnVYYVQzY2JIWXU5bk1rUDF1OTlGVHd4?=
+ =?utf-8?B?TS9ZbWJRMWJWSHlQM2RNWDJ4RzkydjVNd0M2WUp2Y2pIWHFzOXB0NlB0emYr?=
+ =?utf-8?B?NWNwTURISFlKaVZXZnVnM3JtVmpQZnF0QisxV0tYTnpvZFN3cHRiNC9tVnR4?=
+ =?utf-8?B?MzkrNDRmK2dFVlpjbE15TGR1Q1BqSERjOGljVEJJalNGVUx2eU1oNHAvcDBv?=
+ =?utf-8?B?YjBGRWFVZW8rbkxTVG1XcCtpQWZPNjhSVTNoSlV6ZGNkR2pxbGZOTnFSZXJy?=
+ =?utf-8?B?eU5pQjRPamkzMVJSSGliMHg4L1o2MUNuV0pHdXVJZ2xkaE0vWE1BVVJZL1NL?=
+ =?utf-8?B?Ny95YmQ0VU5tR0tnczJLODU5VHBkTmhQc1hkZjU2RjlDTFpNSmhlRTlvTkJ4?=
+ =?utf-8?B?b1lIdGgvV2FnMzJYN2QyMXFFQ2tiNEg3U1NJUk9DVnlJSExvNjRHenNJK0oy?=
+ =?utf-8?B?MXliRjhaSjdidjJNc0ttaW1GVG05RVI1bkJRQXhmWnRneEpLOHdTb3dwdHhs?=
+ =?utf-8?B?Rzd0YVZCNnJlcmRhNXVNVEZTQmZkb2txRGxkWk1wVTgrdXc0K0hlLzZTZnFk?=
+ =?utf-8?B?c09wZFdpUHVTMndIbFJlZ3NpWEFEU3VWYzV2MG4yZUVvNDNEOW1sY3BySVFU?=
+ =?utf-8?B?QktlSEFFSjdjR1ZZUkRQZVdXTFI4RnlubXRicUxQWHRQWGRhcUwrS1F1U3dH?=
+ =?utf-8?B?WFRuMTJuSzZZdGl2U2NqbC9kQkFXTERqY2kwL2RzT25FZlZkOHRqaVlBOWlD?=
+ =?utf-8?B?L0dmSVNSbGVULzc4ZXFWdDQ2QUpoWVkyeFRkQ3BzdVFsSFRCMjJvTGh5Y1Nv?=
+ =?utf-8?B?d0Fxc2p5L1lBRWM3aytzWjdYSXJKVllKZG9QemxOUWd1N0ZKQzJ5Q3J6c013?=
+ =?utf-8?B?MXVMVjNCd0FNeVlidzBaTGFRN1VhYWJZNmppM3VPeTBEYWk3UlE3aWVJZ09S?=
+ =?utf-8?B?RExyVUZxTzdEOCtFVEdtTnUyc3JnVWU2NGVaekVMdnhDRW1uaEgyM3pydkVG?=
+ =?utf-8?B?UHRCeDVSUmpWT3lBQk5rWU9wa2Vjd1VueFdjd09lYXo3SWlybWRkRU55WU1S?=
+ =?utf-8?B?UTFEbUJvMTdsNGZLcDN6QVlEaGl6TXh4TEtpR09SMEhNZGtPZU4wSEZaQ1Zr?=
+ =?utf-8?B?RHpIc3VaeVovWG04cXd1aGUveGozbE00WnM0UEpKRlhmUHZwQmVqRVRpcnM4?=
+ =?utf-8?B?UXBrWUxieTVuV08yWjFVYStnWEtMbGRXZDMrQkx4RUVjNFV2MWpGdDhvM3Ft?=
+ =?utf-8?B?VGc5SWt2MWdTR2d0S09KQ0tvb3p3WnpzOXBxNlFmd2VvdG5GOWExclRENmVI?=
+ =?utf-8?B?TklyT0d4S1VBbWxJYzlSQkpYRldyTzJrRmRFZVJ0aTJmeXVidDJEVkQyVTJ4?=
+ =?utf-8?B?cTBVQzNnelVtUkdLSFpTQUlFcnJEY2dBRW9ZTWh4S29VZ1lyUCs3T2NsRU1j?=
+ =?utf-8?B?L2VuMDNSNkdWZUgxNmNXbDkySWJKeGZ0OU1kZ2x6VTZQTGxPdDRNSFJnQUVT?=
+ =?utf-8?B?djl6OSs5UEtVQSt2aEtXWGY0RVJ5emNobXd5OXY1Y2JSMmo1bENoNTlzM2NW?=
+ =?utf-8?B?b2J3S1FnalF0ZmI4d1VqZEZ4Rm0zOVNzMEFxUFYrTll4Q09NMjRRQi9ob0w2?=
+ =?utf-8?B?RDVka2FKZlJUNEx4cDdOMmpkSVplTUJWNFdkaXFteVBsSUhIN0MweGI5ZnhJ?=
+ =?utf-8?B?ZU9mTkFFalA1S1pkdXd5Q3A2VjJYVFR4SDVqbzNqTGFhYVhzWHFwcW5GenVl?=
+ =?utf-8?B?b0l4eVZ5dWpEMXpsK1lheWVBdWdrdnNyZ3RYMXIxbEdmV0RBUldtNHNOOHQx?=
+ =?utf-8?B?R01qbVZHOWFaZ01RRUtCTkJqSWs2MVpTMzlybkZvNnAzVjNQN0hWTkFMdlpm?=
+ =?utf-8?B?UjV2RTBQbUttQUpZaWl3YXVsQlZrM3JpOGQxWUI4dVhaYzVtVERlTkhoR3pn?=
+ =?utf-8?Q?GyiNcTiKyTfEyhhSHw6z7hC4k?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2023 09:05:38.3793 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b5b08ce-8303-4185-edec-08dbe427b46b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 082f139c-b723-4fb7-a233-08dbe427dc66
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2023 09:06:45.6616 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE39.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6748
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mRltz6v9T+YPnvlireNMULuDPChOE0SBAnzJGTgEIJnbrVmOAjTwrQt1wRlUOPFG
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8955
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,69 +189,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Capsule update helps with easier firmware development that's why enable it
-by default to be able to update system without replugging SD card again and
-again.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
 
- configs/bitmain_antminer_s9_defconfig | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+On 11/11/23 18:31, Mayuresh Chitale wrote:
+> If the fifo-size DT parameter is not provided then probe the
+> controller's fifo depth at runtime. This is ported from a patch
+> in the Linux Xilinx SPI driver.
+> 
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Link: https://lore.kernel.org/r/1422029330-10971-5-git-send-email-ricardo.ribalda@gmail.com
+> ---
+>   drivers/spi/xilinx_spi.c | 23 +++++++++++++++++++++++
+>   1 file changed, 23 insertions(+)
+> 
+> diff --git a/drivers/spi/xilinx_spi.c b/drivers/spi/xilinx_spi.c
+> index b63cda2091..99ae5be291 100644
+> --- a/drivers/spi/xilinx_spi.c
+> +++ b/drivers/spi/xilinx_spi.c
+> @@ -109,6 +109,27 @@ struct xilinx_spi_priv {
+>   	u8 startup;
+>   };
+>   
+> +static int xilinx_spi_find_buffer_size(struct xilinx_spi_regs *regs)
+> +{
+> +	u8 sr;
+> +	int n_words = 0;
+> +
+> +	/*
+> +	 * Before the buffer_size detection we reset the core
+> +	 * to make sure we start with a clean state.
 
-diff --git a/configs/bitmain_antminer_s9_defconfig b/configs/bitmain_antminer_s9_defconfig
-index b8c9afd9cfcd..5c9b97819b14 100644
---- a/configs/bitmain_antminer_s9_defconfig
-+++ b/configs/bitmain_antminer_s9_defconfig
-@@ -42,7 +42,6 @@ CONFIG_SYS_PBSIZE=2075
- CONFIG_CMD_BOOTZ=y
- CONFIG_SYS_BOOTM_LEN=0x3c00000
- # CONFIG_CMD_ELF is not set
--# CONFIG_CMD_DM is not set
- # CONFIG_CMD_FLASH is not set
- CONFIG_CMD_FPGA_LOADBP=y
- CONFIG_CMD_FPGA_LOADFS=y
-@@ -50,6 +49,7 @@ CONFIG_CMD_FPGA_LOADMK=y
- CONFIG_CMD_FPGA_LOADP=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
- CONFIG_CMD_NAND_LOCK_UNLOCK=y
- CONFIG_CMD_PART=y
- # CONFIG_CMD_SETEXPR is not set
-@@ -60,11 +60,15 @@ CONFIG_CMD_MII=y
- CONFIG_CMD_PING=y
- CONFIG_CMD_PXE=y
- CONFIG_CMD_CACHE=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_EXT2=y
- CONFIG_CMD_EXT4=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_MTDPARTS_SPREAD=y
-+CONFIG_CMD_MTDPARTS_SHOW_NET_SIZES=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_FAT=y
- CONFIG_ENV_IS_IN_NAND=y
-@@ -74,6 +78,8 @@ CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
- CONFIG_BOOTP_SERVERIP=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_BOOTCOUNT_LIMIT=y
-+CONFIG_DFU_TIMEOUT=y
-+CONFIG_DFU_MMC=y
- CONFIG_FPGA_XILINX=y
- CONFIG_FPGA_ZYNQPL=y
- CONFIG_MMC_SDHCI=y
-@@ -93,4 +99,6 @@ CONFIG_ZYNQ_SERIAL=y
- CONFIG_WDT=y
- CONFIG_WDT_CDNS=y
- CONFIG_SYS_TIMER_COUNTS_DOWN=y
--# CONFIG_EFI_LOADER is not set
-+CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-+CONFIG_TOOLS_MKEFICAPSULE=y
--- 
-2.36.1
 
+nit: can you please remove "we" above? It should be written in imperative mood.
+
+
+> +	 */
+> +	writel(SPISSR_RESET_VALUE, &regs->srr);
+> +
+> +	/* Fill the Tx FIFO with as many words as possible */
+> +	do {
+> +		writel(0, &regs->spidtr);
+> +		sr = readl(&regs->spisr);
+> +		n_words++;
+> +	} while (!(sr & SPISR_TX_FULL));
+> +
+> +	return n_words;
+> +}
+> +
+>   static int xilinx_spi_probe(struct udevice *bus)
+>   {
+>   	struct xilinx_spi_priv *priv = dev_get_priv(bus);
+> @@ -116,6 +137,8 @@ static int xilinx_spi_probe(struct udevice *bus)
+>   
+>   	regs = priv->regs = dev_read_addr_ptr(bus);
+>   	priv->fifo_depth = dev_read_u32_default(bus, "fifo-size", 0);
+> +	if (!priv->fifo_depth)
+> +		priv->fifo_depth = xilinx_spi_find_buffer_size(regs);
+>   
+>   	writel(SPISSR_RESET_VALUE, &regs->srr);
+>   
+
+When above fixed feel free to add
+Reviewed-by: Michal Simek <michal.simek@amd.com>
+
+Thanks,
+Michal
