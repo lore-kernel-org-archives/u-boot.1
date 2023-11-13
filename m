@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5139DC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 08:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84119C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 08:46:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16DE486CB1;
-	Mon, 13 Nov 2023 09:45:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 01FE186F40;
+	Mon, 13 Nov 2023 09:46:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="RCjtiuV4";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Khcugj3E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71F8D86D82; Mon, 13 Nov 2023 09:45:13 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id AE66D86CB1; Mon, 13 Nov 2023 09:46:48 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E4D886B0A
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 09:45:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D13F386CB1
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 09:46:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-9c3aec5f326so1067640066b.1
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 00:45:11 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50797cf5b69so5609298e87.2
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 00:46:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1699865111; x=1700469911;
+ d=amarulasolutions.com; s=google; t=1699865206; x=1700470006;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mzlia/kCJ1VqwGA8Dz6pMCzYjxBHmZJlLOE6OUyo/Eo=;
- b=RCjtiuV4LMFvOnK2YsGQUXsF+P/ByT0allJuiocwqKJ2zD5pE25Gipr6yOAHCoCs81
- QxIO89Xi45iXlpjoli5dgYq8WoBqmZTGtxzWbAGQ3R+wrdCNsqrmRpL4aqN263rwCPyN
- cb5q/XEEsnRSbUf7tiM6N8wXA+pFBUGTDVmDU=
+ bh=jaP3rblFii2U0bB797BxvH9K0l3Q6CfgOFFzslWuyYE=;
+ b=Khcugj3E97yW/XEJ2oSW3MQN8ErpHvladHDx+4Er6P/7hn3EGg7oRLkF4wsLedxSsO
+ dZEsKATJk5mYMbKw+jlwnyzbv8SMBFWc8pVCh28ya7t3ks2h60DlV/evoaXKgfbhCHuV
+ uEgQDlnpwJrZaXjUu8YzT+ELqYC61fFb/uDjM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699865111; x=1700469911;
+ d=1e100.net; s=20230601; t=1699865206; x=1700470006;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Mzlia/kCJ1VqwGA8Dz6pMCzYjxBHmZJlLOE6OUyo/Eo=;
- b=kX/FYNUKz2I6raxGy62QRm617VJdD7ashYjOMo+Os3ApeH6HT+snvA31acqag7ihmX
- DwIk0pedXZperZbzkWRl16cqmg8Qsdfawy5MgGZbjQwP/09r3ZnTE3dvefBDL0iWps4j
- Vq4n7ggSTEK+swN8IresfJDT4yRKAY+lIdsCuevxatUrdv/RnlcOfxnK3KuKut0Yw7UO
- Im7Bjb14gKGmtXKLybXPg8F07bmKmVct8nP7Iitt62khZb/3sRd+x4tNofhl3engr9xy
- 37Mb9o31vv3KUBPmBiWhaLZetLiInJ02w8tCdlNi9DnfFmHrTt12Dc3ewHqYmC3gk8W/
- XKUw==
-X-Gm-Message-State: AOJu0YwcnEErMvLLjfh5DF9Zm4FoJKRjDLoR3WWD2h+COs5NpLNpAY08
- TD1dhGFfMt0P1/6XE6R8WnYUM9s548RXNWQchc06sQ==
-X-Google-Smtp-Source: AGHT+IF1Zbde/smZo6ATFqBbgYi6gkfVi4udXE4TzZJ/QLn3lbuJnA6KQPF399iF3x6Sq6ht+Q+KAKqwLXqXd+oA89Y=
-X-Received: by 2002:a17:906:f8cc:b0:9ad:e62c:4517 with SMTP id
- lh12-20020a170906f8cc00b009ade62c4517mr8754879ejb.34.1699865110803; Mon, 13
- Nov 2023 00:45:10 -0800 (PST)
+ bh=jaP3rblFii2U0bB797BxvH9K0l3Q6CfgOFFzslWuyYE=;
+ b=RR7uV4gtq0p8/n5hTR/mcafZ5YPgJ5sf+9EReJbvIyw3Ro2t0f2TewtGC4nMHeTncs
+ cOSJ6TeNxAT/OkN1JoDUwwtNTQN3WrW5NLTvcK9CKGmWkPGg9lCOvaZAxNdTnTCS7VzW
+ qNw6liWiQXxdAxgV8GdTBQSNfbtExgyod4Sv0Ze7noPfHaWZr5vTZ/2/v/buwQ3hzwNa
+ 9xL/19YvISULxAc0vSqPhNRBPPzi6c9XhJkw7B6eZ0EodwAmqko6J9mKZ8MCUK1KHOUn
+ OwfeO+VjpVa+Uy/AGIeMsIRpL/8sPO4B26dSoCOaQ/sWLgxhDkDt5aZKy0r4mxeubBhe
+ RHRA==
+X-Gm-Message-State: AOJu0Yw5ltkw3Jntn725ERA9jpDyQtQmysFH4F3kWfmOgh20uF1xGeRg
+ DQ0kvv/vSqeTW0TLgyZeP2J87njH/vz5zYzns2jWFw==
+X-Google-Smtp-Source: AGHT+IFi1uv627wdeu4vWGwyfEoNOPxJOFCf/B6g4oltYObmwk9sv2CtJSSw3hw9sYGgjzpyebtMMlw8P4n+DKBxWoY=
+X-Received: by 2002:a19:8c5c:0:b0:507:9693:12aa with SMTP id
+ i28-20020a198c5c000000b00507969312aamr3856008lfj.15.1699865205837; Mon, 13
+ Nov 2023 00:46:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20231102112743.57420-1-dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20231102112743.57420-1-dario.binacchi@amarulasolutions.com>
+References: <20231102113829.58852-1-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20231102113829.58852-1-dario.binacchi@amarulasolutions.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 13 Nov 2023 09:45:00 +0100
-Message-ID: <CAOf5uw=S4=XgjCj3rihQ8zt+Sh-XWj-miT5pcKG56x6cMz+1ug@mail.gmail.com>
-Subject: Re: [PATCH] mtd: nand: complete nand_register() arguments check
+Date: Mon, 13 Nov 2023 09:46:35 +0100
+Message-ID: <CAOf5uwniHKWrnVTNsc2yX5tDodqYOu9rFak7mfEVrGK5k75n8A@mail.gmail.com>
+Subject: Re: [PATCH] mtd: nand: check nand_mtd_to_devnum() argument
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com
 Content-Type: text/plain; charset="UTF-8"
@@ -84,39 +84,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 2, 2023 at 12:27=E2=80=AFPM Dario Binacchi
+On Thu, Nov 2, 2023 at 12:38=E2=80=AFPM Dario Binacchi
 <dario.binacchi@amarulasolutions.com> wrote:
 >
-> The patch checks that the "mtd" parameter is accessible before
-> proceeding.
+> If the "mtd" parameter is NULL, the search will definitely yield a
+> negative result. In that case, it's better to exit immediately.
 >
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 >
 > ---
 >
->  drivers/mtd/nand/raw/nand.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/mtd/nand/raw/nand.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
 > diff --git a/drivers/mtd/nand/raw/nand.c b/drivers/mtd/nand/raw/nand.c
-> index eacd99c4e275..d31bb580c46a 100644
+> index eacd99c4e275..55c00ac815dd 100644
 > --- a/drivers/mtd/nand/raw/nand.c
 > +++ b/drivers/mtd/nand/raw/nand.c
-> @@ -52,7 +52,7 @@ int nand_mtd_to_devnum(struct mtd_info *mtd)
->  /* Register an initialized NAND mtd device with the U-Boot NAND command.=
- */
->  int nand_register(int devnum, struct mtd_info *mtd)
+> @@ -41,8 +41,11 @@ int nand_mtd_to_devnum(struct mtd_info *mtd)
 >  {
-> -       if (devnum >=3D CONFIG_SYS_MAX_NAND_DEVICE)
-> +       if (!mtd || devnum >=3D CONFIG_SYS_MAX_NAND_DEVICE)
->                 return -EINVAL;
+>         int i;
 >
->         nand_info[devnum] =3D mtd;
+> +       if (!mtd)
+> +               return -ENODEV;
+> +
+>         for (i =3D 0; i < CONFIG_SYS_MAX_NAND_DEVICE; i++) {
+> -               if (mtd && get_nand_dev_by_index(i) =3D=3D mtd)
+> +               if (get_nand_dev_by_index(i) =3D=3D mtd)
+>                         return i;
+>         }
+>
 > --
 > 2.42.0
 >
 
 Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-
 
 --=20
 Michael Nazzareno Trimarchi
