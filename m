@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC33C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 09:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F980C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 09:12:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62B8B86FB6;
-	Mon, 13 Nov 2023 10:11:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2588B86B4E;
+	Mon, 13 Nov 2023 10:12:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="G3GO/Wr7";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ztYeB24B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 921628701B; Mon, 13 Nov 2023 10:11:03 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20610.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::610])
+ id 0236D86FB6; Mon, 13 Nov 2023 10:12:17 +0100 (CET)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8c::631])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5937A86FB6
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 10:11:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F76686B2E
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 10:12:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lkbv8AZvPx5RhkQqpFkBS1j2fmIwldQ/Osxi2+E9XkNdYqZmszqOAQG9kQBR1Xp4CESrQrsE1/Rsm/zEpYRMmeC5dSCKYQfur/ae1bYUlrIiGZXhKF0vkR6JScqhZAoaN4iTaMKBNlJMrDH84bLs2akBXOBANIEzAtem8Vx469Q4zqJr0RFzVnBoq7pjTp9Xw32Zw/GEdTQTUPgJxOdnhMrxCGaHuuPvQzJ1A/8dIRmoEIebwOyLkTw5WJR1S3tRpw/s2+N7LzhQz6oK1JbUgEgyCStF/h5qsn2CYfuZnkm+Z1mBIQoZwQPrFcSC2SBDQpJu59zGk3TYSxYtOS+REw==
+ b=YhHV44eJUi3wyTskzSAMTTaQbGoj0qt5W6L7IlnoFT5CD1kGU2OxE4CMphCp13mA3K4aDP0fSDo9tpn744udo/YvHDudGCDM8Lwq1wXht2zVKnqWxSaE5mb4NyJjzY1DlEAWrYoH76d5k6+MkyVQ8mfrI+XU2hrlBdZJMNmXLSzoU2+ckb5Qsmgs1k0RMAv+MRCoPXzhldla9toz9dMn0VR1MnItRSV9gxn9v/vnIIcbjeA/I9An4nTBN4gpTVbbDmbHdFUm9F0ioHySTksuyngC3AzBNT7111WKb6MbB8ACMrtfBKMu8EJYJsf695svomoplWfAwZT2D8luaBuD2w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WZ5m0NM3v6UKEjYe7thHv/6wGNt5XY1AaQDmVU5w5nM=;
- b=Gj1IdwJIEDDA+r37Bm2hDZlS6oF0aejgggUIji7ANO0yvjFDAyVp+ssC2lowP9LyxjUpPkTdsdZsyQPoSZuBRVSgzEqpJHCbAgZvdnmh6IYWPY5XO61hxHUD3gwyXqWtd0ynq3mHrxmpXUGttKa/czqpcQfgtB/O462Oy8z01cdrGiBrKoSs1cEYakS6BHFYQEtjMKfPGK3dbuYmfXAWUjT8iquDqnqVGj/hUCVAqDbVqkUdG3rpSo6EGNpoux5atvkQbrGBZ5QJhd28jlCsdNUsYFnc8TvMyYB09gG99QChK/xc+LBeQaQ5e5Hz1DxWgW5pJNZ6esgRBvU/9pHOvQ==
+ bh=508A5cfIi4beBrzuLe1ojVNyL5fWM2Vb54Xyedbcgng=;
+ b=WYqiXzhPJoC59MHpaPC2cPzkYeldMDI1jjkRtlEBsAmkimNEunEv04W/c3wseaxKamEWJde584AUtUraqcdLo2Jv6qXROLsEJKnd6UKF+1B96CCXuTbzpvVVNOlf15yWJaMXl05JrNQIfJ8eTGCxccvm3ECmWp5HWsTWCN334suE5TxLU6IT4z3ydTjGuA2gRXs6zXZaGVhIuyEZm9x1sz5L8LTjcorhldaEEIZD1Ik86Qp/eEyK4khSE0h1VDaoFNSuhx8NNHBjkoK5OFylRbeNNJwlFI+eF25OycVFoexyHn6GRCws0b8TVBnQZhMIyHyrLNYCxU7KER6tP/rtFA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=WZ5m0NM3v6UKEjYe7thHv/6wGNt5XY1AaQDmVU5w5nM=;
- b=G3GO/Wr7mtgmObp7xigFZOofaGnzLBe77751W94mD+WES/QVsyhq9/lT5YO2DAQQMfQPdth6zkO3UKKBXtq2aIZYQ7I2mEVS9MvtkQvXSholfhByBIoWe5B8w8krvZUlkWgwHRUFWk3X8HV18B7h0IeQXhNer2kpk0LpU9W0tm0=
+ bh=508A5cfIi4beBrzuLe1ojVNyL5fWM2Vb54Xyedbcgng=;
+ b=ztYeB24B5pK4PS62YhgLaZ9i8wfZdM73naUbs0J1vS4bRMt7p3mKUOqr0qdN5uMAtnRdr+vrrgIXzJXPaAZHAtX39gbewpdHT1VS88ztFIMduORtCs9c2vFhURvUKFcqyCSpIB94IMGD1wPUfcsmXRWUMETdYcS3jzvPtVIFrpk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by SJ2PR12MB8955.namprd12.prod.outlook.com (2603:10b6:a03:542::10)
+ by MW5PR12MB5650.namprd12.prod.outlook.com (2603:10b6:303:19e::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29; Mon, 13 Nov
- 2023 09:10:57 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.28; Mon, 13 Nov
+ 2023 09:12:10 +0000
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::39a2:42da:ea20:3349]) by BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::39a2:42da:ea20:3349%4]) with mapi id 15.20.6977.029; Mon, 13 Nov 2023
- 09:10:57 +0000
-Message-ID: <44fc3e3d-a2b6-4e71-8c95-d50ca7c45bcc@amd.com>
-Date: Mon, 13 Nov 2023 10:10:45 +0100
+ 09:12:10 +0000
+Message-ID: <d3933e18-9c33-474c-a69d-a15cfa36bdd8@amd.com>
+Date: Mon, 13 Nov 2023 10:12:03 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] net: axi_emac: Use reg property for DMA registers
+Subject: Re: [PATCH v2] drivers: pcie_xilinx: Fix "reg" not found error
 Content-Language: en-US
-To: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+To: Mayuresh Chitale <mchitale@ventanamicro.com>, Bo Gan
+ <ganboing@gmail.com>, Puhan Zhou <puh4n.zhou@gmail.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Shengyu Qu <wiagn233@outlook.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
 References: <20231111173604.93103-1-mchitale@ventanamicro.com>
- <20231111173604.93103-2-mchitale@ventanamicro.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -108,7 +111,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20231111173604.93103-2-mchitale@ventanamicro.com>
+In-Reply-To: <20231111173604.93103-1-mchitale@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR04CA0059.eurprd04.prod.outlook.com
@@ -116,63 +119,63 @@ X-ClientProxiedBy: VI1PR04CA0059.eurprd04.prod.outlook.com
  (2603:10b6:a03:a5::28)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|SJ2PR12MB8955:EE_
-X-MS-Office365-Filtering-Correlation-Id: abf0e5ee-39e3-4516-a861-08dbe4287231
+X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|MW5PR12MB5650:EE_
+X-MS-Office365-Filtering-Correlation-Id: e60355cf-ce55-43b9-f9d1-08dbe4289daa
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: RqaU+Wp60lD/PMf0NOFPpnvfRqfoMn6s0UcJg9UxednZ6eTxeXkt9Sl++5fjrNph0jp25pNhRc8ghK8cKhJyR+QXlZZFfr/PPAKTE4WA52cyzeQstT+qPPHdcGMWFuRntUi9J1fZ8q51lWWwwlfbn/og/XIKfxbOHgqH6POVT6LnPfNnRXWquC/x4tEEo/hSQL6uMpqwS4D0HY6RKvYf4h1DfziIV+e1IP86f538UC08BmP7ZyN5rPVI3pK++TyfO06znkatDWbTdRU9ASZnpDyWxJ6+b5BxY55w7vqBlkvvOOI0BjSR1xBsfPiGNFsnGojEuWhVNd9kMMKoC7Lvqq7cbDzCOJqvUbjdHfOgQxRlZ6JdabbqvA898YEJG4WQeDvihrQssqnCUmA4Fnfg07+Qpfiayin2EnHnU2LCdrrsOpATAsC2QoO7Z6Sce8R1Hacr6FfE4X2k2PbAMpjtw35vh7RW//4lXFrzFZknVfVYrMk91XgifK420wHiwpzS1r8EJqJuIrmjKUAXghnSjSDv74jC4foteHBJysHO3g/H8r9xyqWPrjUjOt2zKWe7H1+utUO0jP0NHEyElqTAGLXEbPfrL1r+mYl5RrWYL/5y8UYSUavXhsz0loOH4pKi5ETOPX3UbSN8c6SsCyummQ==
+X-Microsoft-Antispam-Message-Info: XqjXe7szwWuvL24orFIhqqy3V/y8XJk3VpfPIrCzc/MSBvIhPc41ZpZUNjPx09Mq4DClM8xejA21pWsDIY7ECQpJshM2vuIiS5WpNm12frM4iSfXkHrYMw5llly+9cOtlBwDVJtu3eB8Mlzj9LLLppUYc+H8pMlVlyhJLVicuKTSNRhusPHIs8wrfBXIKvLLchFwccJHEdVUl8ICrucCE8qVBdVBJMkgfvWoK0INKcqsQn+Ukx0zL8oMQ+j+6XZQXLRqp6VqTBm7vYvnxEcbOt4C2TYSLnNnDDRIZKA6D8WoYsVO0q6eVEBidKSllcThUo8o4EayvrZepjHxTSaiJXA+8laGceuvco0e0lET1DFoObv1/1P//IotwQEugY4SzIKtbrVgfHVwlL3nR+MLyPZ21S0YbIN7aLKB1ywztVVJCSxrY/zeRrnbHMnEAp9MYHTbZfbUT9h8HYcAs9/O7lKZBwFVMYp9qE8DSbY2Qz0RgxmAYRjBHKgz9JFHWohHqFF4ELx22hELYhPJNrKpyFfNyJaiTmTMJPa6i2Umprqx1HYw2Kshkb5gBSO8biNQFiEd/mVfxW2VpFldLQIqHqJBea+ApU5S7A9px6N3Hsql1wI2E6oL9jEUZiLUO428hGiWGLeGYi8UO0tAz9LbKA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(39860400002)(136003)(396003)(346002)(376002)(230922051799003)(451199024)(186009)(1800799009)(64100799003)(2906002)(44832011)(2616005)(5660300002)(86362001)(31696002)(41300700001)(26005)(110136005)(54906003)(66556008)(66946007)(66476007)(6512007)(316002)(83380400001)(38100700002)(31686004)(478600001)(6486002)(36756003)(53546011)(6506007)(6666004)(8676002)(4326008)(8936002)(43740500002)(45980500001);
+ SFS:(13230031)(376002)(366004)(39860400002)(136003)(396003)(346002)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(2906002)(5660300002)(7416002)(41300700001)(38100700002)(110136005)(558084003)(36756003)(31696002)(86362001)(2616005)(478600001)(26005)(6666004)(6506007)(6512007)(6486002)(4326008)(8676002)(8936002)(44832011)(54906003)(316002)(66946007)(66476007)(66556008)(31686004)(45980500001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MzFmajh2eW5tNWEvQ0lLRkR3QmI4ZEQxUnJTdTlhTHdJNG9RMFRtRGF2cDVw?=
- =?utf-8?B?aGpJWHYxNGRTNUlWZHVEUE4wdHBNdVBMWnRJK0pmZVpxb2tVa0xGUWpzUC9u?=
- =?utf-8?B?ZXNRbU03WjFhd0E1TnZmT29VeVBYK0ZSVGp4cDBhbmZUVkQrQmtGU2M0SENO?=
- =?utf-8?B?a0ZRTUJkcU5zWk1nK3AvS1o4bnpSMk5ubU0zS3hYblhOMXpMRVZpellDbFlX?=
- =?utf-8?B?Y1FjNnFObjVsakNKODI4YkVPTHlRWXJDVis1UzQyM3Q5QzNqYkdWUWJ2KzRr?=
- =?utf-8?B?ajN6YzZ1WmVaS0tjMEs2akVyUDhZenVQRng4RHJOZmNQVEc2ZVpsN05ZY0lm?=
- =?utf-8?B?WkMxMGEwNUZSUVhyZWM4ZmNtNFpBQjVLRkI5R1JURGhLUWFxa2VPU2JaeEw1?=
- =?utf-8?B?anZKN2N6QUVCTUVSV3hkZmJrWnJIdkdGRGxuVEQycG5ZaS9tb3l1NE15UEh5?=
- =?utf-8?B?aEkxclB3Y3RnNE95dG0xK29VWXUydDRndUdjd3I5RmJwbFM0R2tiMW1taDIr?=
- =?utf-8?B?aW9QeWJ5RzBCY2JhMzVKbjdXU0lNM2ZqT0N6N0FaZHkxZzdiajBBNDhva05M?=
- =?utf-8?B?alQ5SkUxNmZ4SC8xTk8rV1JUTXlLT1RoQVdNd3lIdWNmRnVqN0tzMjEvRG9i?=
- =?utf-8?B?b050blVDK0FJY3o4THBsWDJwZlVSdU1xajdhQngwVHJ5K29XL3ZDVmJmSk03?=
- =?utf-8?B?bkdEMXp3L0VaRTlYSkR1VkJ2dEVNem9BUDdpR3pNcHVmOXo3YXQxbk1sbEhW?=
- =?utf-8?B?ajc2VDVpY0VSZzdrWVR6YmZPdnk5Mm9KNHFVL3BWZC82VlFmYU5aZkZyekE0?=
- =?utf-8?B?aEpEM0l2MDNWTDZmSDlTRk9LYTFNbXNabWNWdy9rdXI5ZXlXd1VmaFpiWnVq?=
- =?utf-8?B?RzNMbVpXRW45dFF3RXhMbU9zbkhWT3p0REVlUk1sQWh3UmRmMm1GSEd4N2Y1?=
- =?utf-8?B?SUt0ekQ1Y2sybGwyZ1MzWC81NG56a0dxMGdSMVI1RU8wM0dSSHFReDJDUXd0?=
- =?utf-8?B?OFRCbnVrdHpsd2NCTk1jdVdJeklUVXFSTloxdHdKTjgvREJ6N2Q4Q04zREs4?=
- =?utf-8?B?YWszTlh2YnBJMGJMcXFPcFVXNlZXWDV4ZFRtQmNpWlJUSks0RVBMY1RPWWlO?=
- =?utf-8?B?QXl5VDNUMThxUlVyaWttcDlQTUs5bEdFV1VjMllYa1d5V2wvMis0a2FMSWxU?=
- =?utf-8?B?c3RGOVQ4emN4bytWVHVLK0VSek92VTFjUXA5ZXEycnFtUCtxTFlyWTV5Tndz?=
- =?utf-8?B?QmpyaFB2OXQ3bWo0eVNITE1EWE0rM09WcGZHd0ZOSTdkek96cy9rLzBoOWts?=
- =?utf-8?B?OUF0amRUY21zT1Vhb0IyMERkTUVrOHN5cldna3FRbkpLWUlLT0wxMDF0eWJC?=
- =?utf-8?B?TytDNlRMbHJNZ3BYaStBYzFLbFRzSFJQVWxEazlMZ2lwM09XSkFZazB6azgw?=
- =?utf-8?B?eDdtN1Zld1Aza1FnbkhrQVl2Z080N3NjKzZmajdZQkJNelF2UWVxZHduZ1hw?=
- =?utf-8?B?a1dtUEdJRDR3cGdyeWdoVDh5cnRvam9TVWxQK21YSFNpQTVYQUU1SXhoM2Zn?=
- =?utf-8?B?VUFGaHFSbXJKTHdSUXdSYWthYlVuMGVBanRwanhGYzdLVk9NWGJiQnR3NmtY?=
- =?utf-8?B?SUlWNndyWU4xNEdLTTN4dGZoa3Bjd2pTUlVUVEdiMlR4RVFHS2U1TURHcWpv?=
- =?utf-8?B?YTQrVWJXczI5MERpc2kwRmFYWWs4b3R4Ukg4cS83TDdBamU4SE1na3llalIr?=
- =?utf-8?B?bVBmb0NBY3FHY3hZTFdjK01XbC9idFgzclZyamJaaXRvbFBZOEFoTEVxajZQ?=
- =?utf-8?B?VE1BalozQzUxL1hVMVVRK0RzcXhFL3VHRnY4cnEzREtxYmo4NGladlVDaCtC?=
- =?utf-8?B?Zm9LUEdWV1B4cjF5ZHhxS3gzZ3Z3TUJUTFhMdGV3S0s1WlFZU0ZjRXlacm9j?=
- =?utf-8?B?ck9TOHhXb1hZTkd2dngwaGQxUGgzbDVxQ3dpNE1JKzJDTnJZb0VQTkxMOTZK?=
- =?utf-8?B?QmNOTlFFV3lPSEdpb1Z5anFSSG93MzRGN1lkVkE2TEoxMUh4cXluN0F6cTJJ?=
- =?utf-8?B?R0NiQyt6TVRQU05BZWJRZEF2bjdvQ3hsamtxdCtIbzRFRTNHeGlWR2tQQmhC?=
- =?utf-8?Q?wfx9HRO9i9YFTDU9ha475C7wG?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bEpLdUdZaVNxNnVyWGFKUkI0TkkrZzdEVnJ3bmFTUm1ORHRHS3JpVitaUUtl?=
+ =?utf-8?B?S21aTW1sRmRLcHpKZ3BiM1FoaUxhcnhtaXRiRTNqRlRZK2J6NDBLTzhLRFZG?=
+ =?utf-8?B?NTN0elNUcE5POW5IOWY1VFdBYnFTWEdObk5FYzREdk5zd1UyR1JoNVdGaVhY?=
+ =?utf-8?B?MkpFVkxpK3FHTmFNUVdNVElWMTIxcHpQUmhTelBmdkhFeWxOZXRrdzR6N2xW?=
+ =?utf-8?B?dm5EOUJaZzBKdDFweU9aR3h2TU1IbGd2czdIbTN1dmlVNGRvSFcvN3NPVkEr?=
+ =?utf-8?B?L04wSVBSV1pMYUdkWlB4eG4rN1RJK0tudFQ0bDJlY09OYkd5MHdUUS9EbmZQ?=
+ =?utf-8?B?N3hsSStHclNQTm1uQ1FnNUNKVFZva0YvS0diSE8rTFJqMlRPcW1ScXoxOWlM?=
+ =?utf-8?B?NHpNbW8zaVRJcHRsMmFyMWxjUXY4SnF4eDl0VWxCYXppMFVGVDU5WGpoSHNF?=
+ =?utf-8?B?bldXZ21admpSbVViZkZXTUVXa3lGbXZKV2UwZ1JtQ1NzZ1pZb2U0YlBtWVhr?=
+ =?utf-8?B?NnlvTHNZb2hwNmZLZjIzblJZZ1dVQ0d5SDNqaWJERExOZXdaeUJwbnhlL1lC?=
+ =?utf-8?B?bGs0cGlTL2hzUERndlBVb1JyV1ZYeDMyMXJpWDdHUEc1clNLTFlQTkVXckRI?=
+ =?utf-8?B?WXJvV25iVDVDRkZUT1J5MGhGdzFmMXVad1ZDR0dOU3UveEFTZlBoVGljSGsz?=
+ =?utf-8?B?V2RkWnJsOWZFQkhyejFkUXJOdElzM0xRejFjN0hkMnJ1ZGsxU0VFd25FV1RD?=
+ =?utf-8?B?VjhpMDZ3eU9JdGlZcjVVcmJMWHBtNFlCTXdhd0Y3NkhieGxvZTR2NEoySWJk?=
+ =?utf-8?B?dGhIcjEyOG5MVyswVkRSNEh4NkkzZVVkcGw5d1gzbUlCM2syMXJCU0VLbDhV?=
+ =?utf-8?B?S3RselJqN0k1ZEt1VkNmelorbEtLSkJaelprSDdKdUdaZWxvV1FacU0xcVBH?=
+ =?utf-8?B?WmhsZWFXVHArUnpsQndyeVU5RjhYSmFmRUFRRkVPd1pWaGVMOWJNUmNXL3Bk?=
+ =?utf-8?B?T0p2M2VrOHU1RVdNQVdNcmZ0MDRaS2dEYzZHMmFUV1ZjdDU2eGVPdXlGTjB4?=
+ =?utf-8?B?N2Y4RjlUN0dFaTE5V25lSk14WEkxYkh3UVAzbTdBODRWeE5VNkNNd0QzYnBu?=
+ =?utf-8?B?bFhWeHVNZWozWkRkY1c5OHVYaGZ3VWsrK2haRTF6aXYxT3RORldoLzVZbStU?=
+ =?utf-8?B?bWRsMXF2Mk9jWFNBMVByMEFVNGVpWnZRV28wSkkrQWMveEQrRUo0eS9jamo0?=
+ =?utf-8?B?RHRrc1dMNnpjQ1AyWlpFZDQ0NWt6MUVHdzlPcVFlS0xwZmcrWlk0NWkzSHl2?=
+ =?utf-8?B?N2xObGswL2hGeWpXV1JLdFBHZTZ3bFFyWjdEZDlFK0QzbXZ1dG10R1BVMFRB?=
+ =?utf-8?B?QkErV2J6SnFtL09xNm9MclZqM1FFTjM5WjBhU3hwZGlQODZ5V3ZiQlFrS3RC?=
+ =?utf-8?B?Mmt4TWsyK0tyeGdEWXR1M2hsTHVDdjJNdkkrLzczdVBudm1nZlZKSmZKVXhk?=
+ =?utf-8?B?NmNWSHpja2lXMHIwNXhXcTRnSVhjL2ZzaUNJREhXcGducE9QZmJ2cGRaSVBi?=
+ =?utf-8?B?NVRrQ016K0M0cmVZNXZpQlhJcSs0SitycjVocEcySGxzMkhKNVkvMGhpUCtH?=
+ =?utf-8?B?ZTVQRG5uUThmZzkrQWsxekM0M3VHZW9oNmJQR2lOak1pcThEeFlwdkVrZHUx?=
+ =?utf-8?B?YzVRY1JmOHVDMVVxN2dGb2xxUEtFZWxzVmxVSm9UenZidUpaZGpPOWlKY2ts?=
+ =?utf-8?B?NFJjSEM5Z00vY29Nb0ZtUHFhR1lyM1AxNE9mekVMRWZlL1lSVXZQTXowMnNv?=
+ =?utf-8?B?Tmx1eTdHZFEwRit4OFlldmhNbzhkZVlybUdEVFlYaXlDRjhXVVhYUlBKMjRE?=
+ =?utf-8?B?RmxuQWQzaDZCM0xUSE1DM1BPMStGeHRkRUJ6ejFDYm5CRVlNTi9UQ2pha3Bu?=
+ =?utf-8?B?MjN2OUkrblNsSnIzajhGampwclJQOHBtbDJYVFJtVzRSVVRSQ0ZtMzVKOUY3?=
+ =?utf-8?B?Wm5OUm01VktxNExKbDhvb3RGOHE2UTYyQmpiemQ2T1N0cjNxSXlpbEtVdDlw?=
+ =?utf-8?B?ZVcvc0FBUWFHaytKMDR3RmMweURHdEFtWlZoTTNTamN0UXVUdSsrbDVzT2o0?=
+ =?utf-8?Q?e4NE3s8SIBiLv78rgSK8vC5sv?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: abf0e5ee-39e3-4516-a861-08dbe4287231
+X-MS-Exchange-CrossTenant-Network-Message-Id: e60355cf-ce55-43b9-f9d1-08dbe4289daa
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2023 09:10:57.1416 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Nov 2023 09:12:10.0529 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vG8tEgIbF5j4cBxJ0Bq2p9mY6Gcw3Ntonet/+q2sID9nNV1tvzfj+xl45389XEel
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8955
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9WxxFbmOzkAEBDkTv1fQ8sdBYkYP8AbKDEe4s3fgIpg6Tl6LHUrmoJGzEZKi0122
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR12MB5650
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,49 +192,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+one more thing here.
+
+Subject of your next patch is
+[PATCH v2] pci: xilinx: Enable MMIO region
+and here you are using drivers: pcie_xilinx:
+
+Please use one if you target the same code.
+I prefer "pci: xilinx:" style.
+
+Thanks,
+Michal
 
 
-On 11/11/23 18:36, Mayuresh Chitale wrote:
-> As per the xlnx,axi-ethernet-1.00.a DT documentation in linux, the AXI
-> DMA registers can be obtained via the reg property or via a separate
-> node for the axistream DMA controller. Currently only the latter is
-> supported, so add support to fetch the DMA controller registers from the
-> "reg" property.
-> 
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> Reviewed-by: Michal Simek <michal.simek@amd.com>
-> ---
-> Changes in v2:
-> ====
-> Add Reviewed-by Tag.
-> 
->   drivers/net/xilinx_axi_emac.c | 9 ++++-----
->   1 file changed, 4 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/net/xilinx_axi_emac.c b/drivers/net/xilinx_axi_emac.c
-> index 54f2232768..ef151ee51b 100644
-> --- a/drivers/net/xilinx_axi_emac.c
-> +++ b/drivers/net/xilinx_axi_emac.c
-> @@ -903,12 +903,11 @@ static int axi_emac_of_to_plat(struct udevice *dev)
->   
->   	ret = dev_read_phandle_with_args(dev, "axistream-connected", NULL, 0, 0,
->   					 &axistream_node);
-> -	if (ret) {
-> -		printf("%s: axistream is not found\n", __func__);
-> -		return -EINVAL;
-> -	}
-> +	if (!ret)
-> +		plat->dmatx = (struct axidma_reg *)ofnode_get_addr(axistream_node.node);
-> +	else
-> +		plat->dmatx = (struct axidma_reg *)dev_read_addr_index(dev, 1);
->   
-> -	plat->dmatx = (struct axidma_reg *)ofnode_get_addr(axistream_node.node);
->   	if (!plat->dmatx) {
->   		printf("%s: axi_dma register space not found\n", __func__);
->   		return -EINVAL;
-
-
-This is the part of pcie series but it has nothing to do with it. Can you please 
-send it separately?
-
-M
