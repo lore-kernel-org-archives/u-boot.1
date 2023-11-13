@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F14B4C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 03:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25198C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 03:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2754870DE;
-	Mon, 13 Nov 2023 04:00:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 63B4E86D33;
+	Mon, 13 Nov 2023 04:10:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XrbQC95v";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CA8E8869CA; Mon, 13 Nov 2023 04:00:17 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1699845047;
+	bh=Z0/PowHjfANCEP1LQ9WK2CGIhPE9JEEbEaqdk3dhjVw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Y46tZVfPHKKipTLkK72Ykr4/11a94WVbDP9c2dZ6OCcJuDGVve+HRddFo1i3TaNOs
+	 G9HjEXC3AkSW1YUWv/Ghi7SsyHYccbPk3Wr2NGmBMtew7Ko6LbsjmWnMdF4njX3c+c
+	 CgXgPoGebZMEJHpPOt+c9dVP3hPEDbdA9zumRmhLPP7knfmfBFpcD5g7xYpc76g25x
+	 gJiaFeTnedWfZ8e0lRyLlSHYbhMIRrooNtn3aUJpzhCNHb5ZxGRr1VPK2icKNrobvs
+	 R4BOGPZ1BuyUTDvI3Cd+0LIAsli3x1xxCdf++cJGWEBI0omutiHnYUdDhbMaXr4U9k
+	 psRUhQz3zOomw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28A3A86DCE
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 04:00:14 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-35749078a59so15133185ab.3
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 19:00:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699844412; x=1700449212; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IkAWaWVFcSL9sMY8FKfQOiVQhU82ds4toI3Pqe1Fds8=;
- b=XrbQC95v0xjqnU4iyWgbIVnyqahGy95liE5pcuL38pDUGrc7MxbNmHPxQzkFbQm1J3
- LUQP+WBVyBMVi8+LG+15N9GtiTzVADZ/JSZi/arn1tAtSBxe91lsIrlnSo68fqi1hCI5
- 8OgJ/tbo1jwyAuMl7dqrE7ezl5zPF1WbTZLxQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699844412; x=1700449212;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IkAWaWVFcSL9sMY8FKfQOiVQhU82ds4toI3Pqe1Fds8=;
- b=e6BhawtJwK9FIGOvUmBSoijqrYBh63/XQbxN1DZC2cS/JcFpU1aQ3ibDlDE0VpGHx7
- yvrFLZwWG6wdRSh6gvcZvn0vDsseNlwQQagCl7CgV8NJQ17Yl7n0Lo9j9JKk3Dqax5mG
- /JdD2NlbqDH8b94nZYI/7kh6SVK8YxSEJvVYqNpcEnDxn7zB4gKYYwQSaXBfnaidcw16
- BhSN0yEaZGKKK5WN8GtBnAtjT/roT1/yovj/ZQtG0hKIEecglUZ/mffzzY8BUigHO/uq
- bfqGTxJhDNhh24kdqvuiUfXz91srgxtYhtHObrXMb0yZDLzNe4ShHl4SltuB4QlGpVw/
- 6N4A==
-X-Gm-Message-State: AOJu0YwWN73Z4929APOi+ItwAQmENCMOeKUn62AiMs8jGXeMdyvl+xj0
- XJQp/aQuBz9MlN0MqE9wedyYiW1gArz0LQmQH7NtUg==
-X-Google-Smtp-Source: AGHT+IGGs3lCP+jlxeRvkRYqUQfxn7zniRUCcVvR63mcqMxe+zXRqMDFkW/Kw6gPJnrhqaaaH93PtQ==
-X-Received: by 2002:a05:6e02:17cd:b0:35a:b184:74fb with SMTP id
- z13-20020a056e0217cd00b0035ab18474fbmr6927365ilu.9.1699844412615; 
- Sun, 12 Nov 2023 19:00:12 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- c16-20020a92cf50000000b0035134215863sm1350914ilr.55.2023.11.12.19.00.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 19:00:12 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH 8/9] sysinfo: Allow displaying more info on startup
-Date: Sun, 12 Nov 2023 19:58:28 -0700
-Message-ID: <20231113030001.240020-9-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
-In-Reply-To: <20231113030001.240020-1-sjg@chromium.org>
-References: <20231113030001.240020-1-sjg@chromium.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 95897869DA;
+ Mon, 13 Nov 2023 04:10:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1699845045;
+ bh=Z0/PowHjfANCEP1LQ9WK2CGIhPE9JEEbEaqdk3dhjVw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=nlkYsHm+zbY+Bl6ve0kPUYbUJsGE3jDIh0f0YcGc+MW6RrLDMABDksZshOooQcSWr
+ /ZLkT1LqCNnlWMY17grw/lp8Ngla8YNuImVW+HwVpg6S776Xv3N+etj8WiYmshN0QK
+ Y9ce0Y5BvkeuJaTdW5dbRVk1mK7rOt5hDdZdzRYHh1RD1EruTPdc6ht1ioNdnB7HYU
+ jkcX59YWoVsLJUdCQ1pvMX3wBKdfpI6R7wELt8z7q/k4QzJ0IV9L3Remot2r9ZB0rG
+ OlPYNGLIYMsFD+ZnY0u+bVS8WB0wM3H8PE/Z6ihbsaRwrNeZQC4KvrYFnchbAuDoFW
+ H/p9nY5uEX2eg==
+Message-ID: <60b7ef44-0074-4e0b-9abd-62781d9052da@denx.de>
+Date: Mon, 13 Nov 2023 04:10:44 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] configs: rockchip: Use dwc3-generic driver on
+ RK3328 and RK3399
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andy Yan <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Deepak Das <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>,
+ Xiaobo Tian <peterwillcn@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>, Levin Du
+ <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ FUKAUMI Naoki <naoki@radxa.com>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20231112174904.1581187-1-jonas@kwiboo.se>
+ <20231112174904.1581187-2-jonas@kwiboo.se>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20231112174904.1581187-2-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,145 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present only the model name is shown on start. Some boards want to
-display more information. Add some more options to allow display of the
-manufacturer as well as the version and date of any prior-stage
-firmware.
+On 11/12/23 18:48, Jonas Karlman wrote:
 
-This is useful for coreboot, at least. If other boards have more
-information to display, it is easy to add it, now.
+> diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
+> index b501ea514bca..d92d87af52ef 100644
+> --- a/drivers/usb/host/Kconfig
+> +++ b/drivers/usb/host/Kconfig
+> @@ -39,7 +39,6 @@ config USB_XHCI_DWC3
+>   config USB_XHCI_DWC3_OF_SIMPLE
+>   	bool "DesignWare USB3 DRD Generic OF Simple Glue Layer"
+>   	depends on DM_USB
+> -	default y if ARCH_ROCKCHIP
+>   	default y if DRA7XX
+>   	help
+>   	  Support USB2/3 functionality in simple SoC integrations with
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+For this part:
 
- common/board_info.c     | 72 +++++++++++++++++++++++++++++------------
- drivers/sysinfo/Kconfig |  7 ++++
- include/sysinfo.h       |  3 ++
- 3 files changed, 61 insertions(+), 21 deletions(-)
-
-diff --git a/common/board_info.c b/common/board_info.c
-index a62c04794b90..f4c385add90c 100644
---- a/common/board_info.c
-+++ b/common/board_info.c
-@@ -15,35 +15,65 @@ int __weak checkboard(void)
- 	return 0;
- }
- 
-+static const struct to_show {
-+	const char *name;
-+	enum sysinfo_id id;
-+} to_show[] = {
-+	{ "Manufacturer", SYSINFO_ID_BOARD_MANUFACTURER},
-+	{ "Prior-stage version", SYSINFO_ID_PRIOR_STAGE_VERSION },
-+	{ "Prior-stage date", SYSINFO_ID_PRIOR_STAGE_DATE },
-+	{ /* sentinel */ }
-+};
-+
-+static int try_sysinfo(void)
-+{
-+	struct udevice *dev;
-+	char str[80];
-+	int ret;
-+
-+	/* This might provide more detail */
-+	ret = sysinfo_get(&dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = sysinfo_detect(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = sysinfo_get_str(dev, SYSINFO_ID_BOARD_MODEL, sizeof(str), str);
-+	if (ret)
-+		return ret;
-+	printf("Model: %s\n", str);
-+
-+	if (IS_ENABLED(CONFIG_SYSINFO_EXTRA)) {
-+		const struct to_show *item;
-+
-+		for (item = to_show; item->id; item++) {
-+			ret = sysinfo_get_str(dev, item->id, sizeof(str), str);
-+			if (!ret)
-+				printf("%s: %s\n", item->name, str);
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- int show_board_info(void)
- {
- 	if (IS_ENABLED(CONFIG_OF_CONTROL)) {
--		struct udevice *dev;
--		const char *model;
--		char str[80];
- 		int ret = -ENOSYS;
- 
--		if (IS_ENABLED(CONFIG_SYSINFO)) {
--			/* This might provide more detail */
--			ret = sysinfo_get(&dev);
--			if (!ret) {
--				ret = sysinfo_detect(dev);
--				if (!ret) {
--					ret = sysinfo_get_str(dev,
--						      SYSINFO_ID_BOARD_MODEL,
--						      sizeof(str), str);
--				}
--			}
--		}
-+		if (IS_ENABLED(CONFIG_SYSINFO))
-+			ret = try_sysinfo();
- 
- 		/* Fail back to the main 'model' if available */
--		if (ret)
--			model = fdt_getprop(gd->fdt_blob, 0, "model", NULL);
--		else
--			model = str;
-+		if (ret) {
-+			const char *model;
- 
--		if (model)
--			printf("Model: %s\n", model);
-+			model = fdt_getprop(gd->fdt_blob, 0, "model", NULL);
-+			if (model)
-+				printf("Model: %s\n", model);
-+		}
- 	}
- 
- 	return checkboard();
-diff --git a/drivers/sysinfo/Kconfig b/drivers/sysinfo/Kconfig
-index e35f7cb17914..2030e4babc9f 100644
---- a/drivers/sysinfo/Kconfig
-+++ b/drivers/sysinfo/Kconfig
-@@ -8,6 +8,13 @@ menuconfig SYSINFO
- 
- if SYSINFO
- 
-+config SYSINFO_EXTRA
-+	bool "Show extra information on startup"
-+	help
-+	  Enable this to see extra information on startup. Normally only the
-+	  model is shown, but with this option the vendor and any prior-stage
-+	  firmware's version and date are shown as well.
-+
- config SPL_SYSINFO
- 	depends on SPL_DM
- 	bool "Enable board driver support in SPL"
-diff --git a/include/sysinfo.h b/include/sysinfo.h
-index b140d742e93d..f2c1aa29d18e 100644
---- a/include/sysinfo.h
-+++ b/include/sysinfo.h
-@@ -46,6 +46,9 @@ enum sysinfo_id {
- 
- 	/* For show_board_info() */
- 	SYSINFO_ID_BOARD_MODEL,
-+	SYSINFO_ID_BOARD_MANUFACTURER,
-+	SYSINFO_ID_PRIOR_STAGE_VERSION,
-+	SYSINFO_ID_PRIOR_STAGE_DATE,
- 
- 	/* First value available for downstream/board used */
- 	SYSINFO_ID_USER = 0x1000,
--- 
-2.42.0.869.gea05f2083d-goog
-
+Reviewed-by: Marek Vasut <marex@denx.de>
