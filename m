@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97919C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 03:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C72C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 03:01:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3F528706F;
-	Mon, 13 Nov 2023 04:00:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D120870BC;
+	Mon, 13 Nov 2023 04:00:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cqcv21DK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F/8zFpxc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 633F287090; Mon, 13 Nov 2023 04:00:15 +0100 (CET)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id A33518709A; Mon, 13 Nov 2023 04:00:15 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 426E186EE0
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 04:00:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 12DA686FD6
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 04:00:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-359045af665so16741055ab.2
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 19:00:12 -0800 (PST)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-7a6774da682so172646139f.3
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 19:00:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1699844411; x=1700449211; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OJaCYkVGDjM8jWIBwFbwiu+l7T6dhL+ooFjzXN1MkiA=;
- b=cqcv21DKT+9KLBMGwPmMdhzpZ/xDnbq2XvpWcv0Lm6sNGtLcIK1AvOvgUiz1YAiPpg
- ugZHCfysQFGbN7Kv88Zbbr49E+T7WGZMbIPwj79LSaImJo1Z4jdi2/8MHu3otT6ooBmQ
- Z7ANzlZzrCUeEM/bSE1IXDZIfa3DX/CZxz1RA=
+ bh=2MUJ5sOhMjDJhwSyiYI2rs6d9XvPHzutZX7j3bt1UMc=;
+ b=F/8zFpxcK//CthChP9mRObFAQ3hQF6kPRX8LMTe2vyu39LQprfRPUuQXA/Ot2IyifQ
+ M5A6CNkb4xBr1jRI34oaLAJ2/WUfzPiuMSgMja8Q3KFKLzaP+C9KrpeBXfRDanPy/14w
+ GTz74nSQkG4sXDCDqYHDxVM93qImlU8k2DHR8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1699844411; x=1700449211;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OJaCYkVGDjM8jWIBwFbwiu+l7T6dhL+ooFjzXN1MkiA=;
- b=GBc1fqNdMdUnnw7z1kR0mkKF+M+W4gQlOEVhs6A2tAwHfkYJxIYv53zdeA7EsOKp58
- gdhpnUlVRAu0yOOXlLm+5JQZXnBxmDfchugc1cx8pO47qajqgOWWORizxFb2t7EJQNkf
- UUG5/f5CnBUYId+qTWHCxfVA6pAmL1IYTNNGz4d1O0Okq2XIAMHSEdMyxwn0xeCCFDZm
- LVxyXCFCdhSmYtR63PjiJ9KHmgYhYQnNgetqTZdNm/Y6s9jdeBJniXLxYbIY6+byba6p
- SEQ2RvcQ+/QcMhhUN7R1+zh/nLUjYXiYs6T3LCU1QuaoZMestHIcvTSGA/pJE4sBy+EW
- 4y1g==
-X-Gm-Message-State: AOJu0YyRqfFXvyfFhI4WlZzFDuUkgWyYJ767vTkJndXBSyClATUWm7cd
- chhBiaFZXImPXv2GdAsCpnS0WrufmBDJhlX04rIkYA==
-X-Google-Smtp-Source: AGHT+IEY6+JejvjfWVmsk8pXHPUuXJLocgg8DcvxpYbzc65atQsDQDU+b+bhywnDepo/aSuDf1QGYw==
-X-Received: by 2002:a05:6e02:2143:b0:34a:a4a5:3f93 with SMTP id
- d3-20020a056e02214300b0034aa4a53f93mr8810256ilv.5.1699844410852; 
- Sun, 12 Nov 2023 19:00:10 -0800 (PST)
+ bh=2MUJ5sOhMjDJhwSyiYI2rs6d9XvPHzutZX7j3bt1UMc=;
+ b=SXusjs/KWGKfeWJJSb/XEeaXBehfcKZ1Oo+pZIuqKRIq//bZnQf8LBEyKvLkGebKaN
+ pQN84K9pnD/CJKMuC2vjpVVTksIFOW44V7wICOPHjMuxkAB++x8ttDnlepJuuJG0Zfjy
+ +IGxns/xdSC6uSLX170RSy7tll3WCfLQTC4wktA4GidzKlHiWX4YLKbvcLo5xQUj1BQk
+ 3Eqo/+4nnePFYc/jxXWJK9d0g38tOq/pSW9vCMKutow+OcZ4bq3fnPP2RPE1Qv0mn95o
+ RxT4L2nnUEnuLoOSp6gPfDCPt8Ruro+Ln96y+5v+w30gjFbvKfcYOGXhfXiq0+mPsfQk
+ dZdg==
+X-Gm-Message-State: AOJu0YyGxrdoOEivWSjX3wfNGBjckt83TEdtTtwAtv5HFbESlzjSWqbE
+ 2Akz2JIX9atG37LRzkVtVqaeX9b4AfCuZBCxXNuyXA==
+X-Google-Smtp-Source: AGHT+IHTpx3vp6RzBnjttptpq92SvL768auBUzxzrqfdqpnOvKoXcAO10hd1ieLe93rg9o+DbfkUTQ==
+X-Received: by 2002:a05:6e02:1545:b0:359:6a34:904a with SMTP id
+ j5-20020a056e02154500b003596a34904amr8163326ilu.28.1699844411646; 
+ Sun, 12 Nov 2023 19:00:11 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- c16-20020a92cf50000000b0035134215863sm1350914ilr.55.2023.11.12.19.00.10
+ c16-20020a92cf50000000b0035134215863sm1350914ilr.55.2023.11.12.19.00.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 19:00:10 -0800 (PST)
+ Sun, 12 Nov 2023 19:00:11 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Breno Lima <breno.lima@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Francesco Montefoschi <francesco.montefoschi@udoo.org>
-Subject: [PATCH 6/9] udoo: Use checkboard() instead of show_board_info()
-Date: Sun, 12 Nov 2023 19:58:26 -0700
-Message-ID: <20231113030001.240020-7-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH 7/9] Revert "generic-board: make show_board_info a weak
+ function"
+Date: Sun, 12 Nov 2023 19:58:27 -0700
+Message-ID: <20231113030001.240020-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.869.gea05f2083d-goog
 In-Reply-To: <20231113030001.240020-1-sjg@chromium.org>
 References: <20231113030001.240020-1-sjg@chromium.org>
@@ -89,29 +88,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boards can use a sysinfo driver if a particular model name is needed.
-Update this board to use checkboard() directly, rather than having a
-weak function laid on top of a weak function.
+We already have:
+
+- a sysinfo driver-interface which can obtain the model
+- a weak function called checkboard() for showing board info
+
+The current implementation has a weak function on top of a weak
+function. Now that all boards have been updated to use checkboard()
+instead, drop the __weak on show_board_info()
+
+This reverts commit f7637cc01414b9c87b6b0f861f34d83c19bfaaaf.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- board/udoo/neo/neo.c | 2 +-
+ common/board_info.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/udoo/neo/neo.c b/board/udoo/neo/neo.c
-index 730e266469b2..d99d93b44ae5 100644
---- a/board/udoo/neo/neo.c
-+++ b/board/udoo/neo/neo.c
-@@ -212,7 +212,7 @@ static char *board_string(int type)
+diff --git a/common/board_info.c b/common/board_info.c
+index 3185793da4a7..a62c04794b90 100644
+--- a/common/board_info.c
++++ b/common/board_info.c
+@@ -15,7 +15,7 @@ int __weak checkboard(void)
+ 	return 0;
  }
  
- /* Override the default implementation, DT model is not accurate */
--int show_board_info(void)
-+int checkboard(void)
+-int __weak show_board_info(void)
++int show_board_info(void)
  {
- 	int *board_type = (int *)OCRAM_START;
- 
+ 	if (IS_ENABLED(CONFIG_OF_CONTROL)) {
+ 		struct udevice *dev;
 -- 
 2.42.0.869.gea05f2083d-goog
 
