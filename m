@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C3F0C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:06:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075ADC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 14:07:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E25586958;
-	Mon, 13 Nov 2023 15:06:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C69168710C;
+	Mon, 13 Nov 2023 15:07:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ezE0RhIe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f2icQI7o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78B6186590; Mon, 13 Nov 2023 15:06:54 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 845E6870FF; Mon, 13 Nov 2023 15:07:01 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A022D86A4B
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 15:06:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31C928710C
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 15:06:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-778a47bc09aso299022585a.3
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 06:06:51 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7788ebea620so305312785a.3
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 06:06:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699884409; x=1700489209; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699884418; x=1700489218; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a5in4A/s6yxnI87lJy377mzfOC8XPKXDkXN5kob8x/s=;
- b=ezE0RhIeT76ycnLMQL2PAH2S9WoJAw804hg1jBkAi2rBhDQp9xSwo0YQXFH0HBNYJ0
- E6rR7FADLqhhrho43eb+8mrWPppDae3uPntp9IWUBYod0SIuyR1yQEpz5Lue1KPvfvyB
- e0Qah5kF60fBOrpqP5sqXyHckd0SizWc8fJiY=
+ bh=GEih7DUrgL5ECyYJiE1VIj0Ky0Q8x/ttOHhXz+Oycxg=;
+ b=f2icQI7ourSODho1UzkXMx4MgvRC1QxON3jM9UwnuZlILeT94dr2l5VilJ9aI8tjdb
+ gn1dvdThxy9RlOoiHhIRZcnT4uzgMhvD3kcZnm0qEGKB0ThD/xJV18zE3hG6jUyv1WmU
+ kQd4hZoScG48zRfmMSKGwOv5Hm51zQTvuUIZY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699884409; x=1700489209;
+ d=1e100.net; s=20230601; t=1699884418; x=1700489218;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a5in4A/s6yxnI87lJy377mzfOC8XPKXDkXN5kob8x/s=;
- b=d9YIgYPV4hqkDZMcEbXge5MyQ/sdIkEYD4qbqQSQrOJPlbOTAKfSGsI8R8L3Oxxglj
- PtDCC4AwXt516wy7L2bTVcM6r6hqDx1yRmACRBis+u0wk31I29/svbIYFYAusZvOqFwx
- sjaPUiuHCb4tjIRZnUbOVrgu/U0f7sXicbxoSUYEdumufVbh+hD3rGoxtq9vgFqAV8pb
- 67jMI/cB4rNlDiilWdSDFegDSmJEx2NWZ8INxM1KbMduZq3RPzbixr19iNnMhg6CrE/n
- tHo9/IPkdEJ8j+ibMZWztCQQZgB9UlDdbVTUcUXTbbxnTNesy26OSMgnp9NHcFOXvnaA
- YjIQ==
-X-Gm-Message-State: AOJu0YyCImO6m635a4iOtqdht3kD0qnb1KKwUEzXRWw4PTjUK+jRglww
- qcqX0sdLp5rSl1d6yslP01DxrA==
-X-Google-Smtp-Source: AGHT+IGB42yuMKwMHZPDls1yv234FnEa4FGz3BufwhEzDtSHyeKs60KeE/ZCTMJj6YtrFToZR+pM0g==
-X-Received: by 2002:a05:620a:19a1:b0:774:26bf:efa2 with SMTP id
- bm33-20020a05620a19a100b0077426bfefa2mr9333524qkb.58.1699884409570; 
- Mon, 13 Nov 2023 06:06:49 -0800 (PST)
+ bh=GEih7DUrgL5ECyYJiE1VIj0Ky0Q8x/ttOHhXz+Oycxg=;
+ b=ApXn3IWMo8BXYcchSLbyF1cmUt0ln2YNxRVqtcLho1egSDbfkTK+gjbPL2xW2rab9o
+ cmXQ/xMM9OoDUkBA4HnKwB5hYy6sudg51+dmwow+UFHwzRI9fbWwiPASe6gC1x0GO8uz
+ ogjGVLCr1dZx4Mpys9CXArI882qjqL8DMj7zPp/B6aRpKSdJ0GNoBDOmhwszzlLNMRm1
+ NlhnQCr2diFngTjwnTbsWdL6g4G4j081Lm0ugdUQZCmkHNyIIfh5T4EKmQ2jShZZQ04C
+ trzZteLiOinwmkDMGMd6tTJf/m6jaXwFq+yV/49P8UO55sirByA2GvvxaTv7GfqkSc2X
+ FUPA==
+X-Gm-Message-State: AOJu0Yx7PjzIQ1cGd+Zu6vMm/hO+rjx6kDShOBLXOTeVc/IlBg3dMvBQ
+ HIw8MwbZ/IpNN5Vpdv9DhQm4CIy6nBYqxNypZIB1Kg==
+X-Google-Smtp-Source: AGHT+IHaPrarUGmGZa8q9bd0JJ6ylnB7XzWxpscpJcZ3Kbrwnof/IQaxgJ1gGsFzsQVKvKIn2GUmDg==
+X-Received: by 2002:a05:620a:1a24:b0:773:a028:71b6 with SMTP id
+ bk36-20020a05620a1a2400b00773a02871b6mr8270801qkb.65.1699884417959; 
+ Mon, 13 Nov 2023 06:06:57 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-631c-486f-62f0-4c29.res6.spectrum.com.
  [2603:6081:7b00:6400:631c:486f:62f0:4c29])
  by smtp.gmail.com with ESMTPSA id
- f14-20020a05620a20ce00b0076dae4753efsm1891742qka.14.2023.11.13.06.06.48
+ bl6-20020a05620a1a8600b00774376e6475sm1895740qkb.6.2023.11.13.06.06.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 06:06:49 -0800 (PST)
-Date: Mon, 13 Nov 2023 09:06:47 -0500
+ Mon, 13 Nov 2023 06:06:57 -0800 (PST)
+Date: Mon, 13 Nov 2023 09:06:55 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
-Message-ID: <20231113140647.GI6601@bill-the-cat>
-References: <20231002011450.462468-1-sjg@chromium.org>
- <20231002011450.462468-5-sjg@chromium.org>
- <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
- <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
- <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
- <20231106153631.GI496310@bill-the-cat>
- <CAPnjgZ1Zp0kjW4zUunopGrUEhbWAtkZ3xwuHYxgo50K9GdFtSA@mail.gmail.com>
- <CAEUhbmUvfD5AOouDXivzrzMQFgirgicsJwBJKW_zMOPL+k7PMw@mail.gmail.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Ludwig Kormann <ludwig.kormann@ict42.de>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: Pull request: u-boot-sunxi/master for 2024.01
+Message-ID: <20231113140655.GJ6601@bill-the-cat>
+References: <20231112212450.882-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ru2bB2keHnqXOutm"
+ protocol="application/pgp-signature"; boundary="WCYBjybAzZpwtrNj"
 Content-Disposition: inline
-In-Reply-To: <CAEUhbmUvfD5AOouDXivzrzMQFgirgicsJwBJKW_zMOPL+k7PMw@mail.gmail.com>
+In-Reply-To: <20231112212450.882-1-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,117 +96,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Ru2bB2keHnqXOutm
-Content-Type: text/plain; charset=utf-8
+--WCYBjybAzZpwtrNj
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 13, 2023 at 09:01:02PM +0800, Bin Meng wrote:
-> Hi Simon,
->=20
-> On Mon, Nov 13, 2023 at 4:02=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Bin,
-> >
-> > On Mon, 6 Nov 2023 at 08:36, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Nov 06, 2023 at 06:26:15PM +0800, Bin Meng wrote:
-> > > > + Tom,
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > On Mon, Nov 6, 2023 at 12:29=E2=80=AFAM Simon Glass <sjg@chromium.o=
-rg> wrote:
-> > > > >
-> > > > > Hi Bin,
-> > > > >
-> > > > > On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
-> > > > > >
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromiu=
-m.org> wrote:
-> > > > > > >
-> > > > > > > This is needed to support Truetype fonts. In any case, the co=
-mpiler
-> > > > > > > expects SSE to be available in 64-bit mode. Enable it.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v1)
-> > > > > > >
-> > > > > > >  arch/x86/config.mk        |  1 -
-> > > > > > >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
-> > > > > > >  2 files changed, 11 insertions(+), 1 deletion(-)
-> > > > > > >
-> > > > > >
-> > > > > > I didn't suggest we enable SSE for x86. This is the wrong appro=
-ach.
-> > > > > >
-> > > > > > We should rewrite the Truetype support codes to avoid using flo=
-at/double types.
-> > > > > >
-> > > > > > This way the Truetype codes can be used on any other architectu=
-res
-> > > > > > without the need for the compiler to emit explicit floating
-> > > > > > instructions.
-> > > > >
-> > > > > I am not aware of any such library. At present, enabling truetype=
- on
-> > > > > coreboot64 causes a hang.
-> > > > >
-> > > >
-> > > > If that's the case, we will have to either:
-> > > >
-> > > > - Switch all U-Boot builds' to use software float (e.g. -msoft-floa=
-t)
-> > > > which unfortunately depends on the compiler runtime intrinsics.
-> > > > - Introduce a Kconfig option for hard float enabling and let each
-> > > > architecture to decide whether it implements it or not, and update
-> > > > Truetype to depend on the hard float.
-> > >
-> > > We generally do -msoft-float already, so introducing that for x86, and
-> > > some Kconfig logic to ensure that no one else steps on this particular
-> > > bug sounds reasonable.
-> >
-> > Yes soft float seems to be not-much-used on x86. For 64-bit chips the
-> > compiler seems to assume that hardfp is available.
->=20
-> We have compiler flags to ensure the compiler does not generate SSE
-> instructions. Yes, I know SSE is in almost every x86 processor we see
-> nowadays.
->=20
-> >
-> > So perhaps the best thing is to introduce a HARDFP option to x86 only.
->=20
-> This option should be global as some other arches also don't have
-> hardware fp, like RISC-V whose fp extension is optional.
+On Sun, Nov 12, 2023 at 09:24:50PM +0000, Andre Przywara wrote:
 
-RISC-V should take the ARM approach (and what I was suggesting for x86)
-and enforce soft-float for everyone.
+> Hi Tom,
+>=20
+> please pull some more sunxi changes for this cycle:
+>=20
+> the first few patches are some easy refactorings and fixes, most of them
+> actually don't change the generated binaries at all. Then there is a
+> defconfig for a new board, for which we just gained the .dts file from
+> the last kernel DT sync.
+> On top there is support for a new PMIC (AXP313), and LPDDR4 support for
+> the Allwinner H616 SoC, both of which are needed to support new devices
+> that appeared lately, especially cheap TV boxes.
+>=20
+> While those are technically new features, they don't affect existing boar=
+ds,
+> for instance the LPDDR4 support code is guarded by a new DRAM type Kconfig
+> variable. So the risk for regressions is very slim.
+>=20
+> Gitlab CI passed, and I booted that briefly on some boards, including an
+> H616 and an H618 one (with LPDDR4).
+>=20
+> Thanks,
+> Andre
+>=20
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> The following changes since commit da2e3196e4dc28298b58a018ace07f85eecd16=
+52:
+>=20
+>   Merge patch series "arm: dts: k3-am6: Fix Ethernet/DMA" (2023-11-10 15:=
+25:47 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
+>=20
+> for you to fetch changes up to 4b02f0120a4bb2a5d7081aef8cef6a4ca57e9db2:
+>=20
+>   sunxi: H616: add LPDDR4 DRAM support (2023-11-12 18:04:32 +0000)
+>=20
+
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---Ru2bB2keHnqXOutm
+--WCYBjybAzZpwtrNj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVSLXMACgkQFHw5/5Y0
-tywMfgv+KUMC9/9edlvw1ilC9xiavmrlqR/7wyUBFE06QrH+WR/bT62IZUKxCkAY
-uPaSMeMyF/PrdUqbpbrumiJ7nmWXD8AVEoEowmAEt/1BPTW4YLQSuSFqdhl/70b6
-YJeezhudzY3QfHX5wIpZZHacJuurosS/tSzoMhUixlR1ggk5ZdcNO0zhqTZyc57d
-UEifFZZMJ86RJrSmcRZ/NCU1KbHsuSLN7SPJBIPyZdzBE6YE8A+W8+6aF026k+zS
-umSocn5Q/M/N6kf7Ilb32FvUrasHpCoU714rIP3YkF/U9eSjrQVRZmIJL1ZTeDVX
-bXNYMxeEkwUOgCRfqNU+SZuBZ91A3i2Ni0/qqiIHEisYJCB7B0T1QlHdU13ofSu7
-dBm7QoP2TJesAE8jgnF4AS8Fsr8wmkNvxI9sBHT1iZuArvyVQ5wavgYo19QpMyoc
-lsYckGyw47vHDXeaGePbnUpGxRK6TpoYhz7F5+Zx6E4IW6MKJUljWLvvdayT+7Gj
-JrpnjFs6
-=I//i
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVSLX8ACgkQFHw5/5Y0
+tyx65gwAh1ZUYaWdH3EG1ca35rn7Fq81B3hVPCxp+Os71HIw1W63h0Ryn/dv9KtA
+/zQODb5PWud/133mjoL1w9VO6Bh7rbpdTdc3QaDym8zCNXlQIS2lUj5VH7aGa/CD
+WMhYVOYDFz8H1pz6+g31OGu77vEoxz1MwNeAor4Z92AYgR2ky0kOfuEbW0B26bcj
+kDtiJJn6ikGC4NHH+OF79ANuOgByLqme6m/hbWzcjOACt6l7f2P5hrLFqqL8JRBt
+LYECl6jXUpK9CGXL7oJv0b8FzSKKCcpXpUacVngzoNwofsh1HHAKMIXU5gat3nDu
+hjQ5kHg5JSNMkKlcmLTAUZb90X56CgY8YmgZqEMiiH/X8gDxZscsoBOuEESQPaLi
+dTzpqaEUnEMbDDVeYs3ZHQ1hbGs+4Eg1FUgLEttzArujmanhiB+g1pABVYNr84r2
+NqC7D7PkS9xH4geacGpDQRQ15db9ZQP3cvgt+x0SJ4FB8gXmXmuaSBJd3xsc13q7
+aAFsZWT3
+=bSEJ
 -----END PGP SIGNATURE-----
 
---Ru2bB2keHnqXOutm--
+--WCYBjybAzZpwtrNj--
