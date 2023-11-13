@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64480C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 20:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32DCFC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 20:43:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCF6D8716E;
-	Mon, 13 Nov 2023 21:33:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 679C987084;
+	Mon, 13 Nov 2023 21:43:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="frwbLqaK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gHV/0vkr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2304A87185; Mon, 13 Nov 2023 21:33:54 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 5A15786FB2; Mon, 13 Nov 2023 21:43:23 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A77A286940
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 21:33:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A84F870B4
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 21:43:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADKXlH5120358;
- Mon, 13 Nov 2023 14:33:47 -0600
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ADKhJoJ106022;
+ Mon, 13 Nov 2023 14:43:19 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699907627;
- bh=FEBs3NARKNkMlzkm++Mi7nNJR2BCOyCOZDs161Ll9KE=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=frwbLqaKvZ0rAZx86uGydPA6/m2Ur4BUPiNj059Mrk5zZpFzHJadw+GrT38VfKjYU
- VcIWeADPy0z49EIjCIfHhWwg1xAJsxodEJu5dweJ0IjAOd1rqQAxwVMnN3RmugrPRs
- Mbon8C2PnOiAJ6e4xDsOy1IsQ7h6rOXK3aGYaaQg=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADKXlAB016741
+ s=ti-com-17Q1; t=1699908199;
+ bh=n1ZO4opICG+T5lYkCLzUx6+01PjsV/xjlIcLf0WhOSs=;
+ h=From:To:CC:Subject:Date;
+ b=gHV/0vkr/hl/qb9O90aV4qWeIKpYMT33dGCT8OHNrH7mIrBGYun+cWJ2ba6zEIR4p
+ DKjCtsSLC0QGnoV0UnJ1Rt2pjzJvOJ2ERgqGOHwqqfDyOU+IGua0wJwPYZqSfrW+Yp
+ p8Grq0T8zz/J7tIVTFPWhsg5OFgl2i1USiGwsWzg=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ADKhI9X090548
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 13 Nov 2023 14:33:47 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 13 Nov 2023 14:43:19 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 13
- Nov 2023 14:33:47 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 14:43:18 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 13 Nov 2023 14:33:47 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADKXlSR014525;
- Mon, 13 Nov 2023 14:33:47 -0600
-Date: Mon, 13 Nov 2023 14:33:47 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>
-CC: Andrew Davis <afd@ti.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>, Joao Paulo Goncalves <joao.goncalves@toradex.com>
-Subject: Re: [PATCH 1/1] arm: k3: Enable instruction cache for main domain SPL
-Message-ID: <20231113203347.kxrerzedrpnyqyvt@buckle>
-References: <20231113190721.1841748-1-jpaulo.silvagoncalves@gmail.com>
+ Frontend Transport; Mon, 13 Nov 2023 14:43:18 -0600
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ADKhIo6126840;
+ Mon, 13 Nov 2023 14:43:18 -0600
+From: Reid Tonking <reidt@ti.com>
+To: <trini@konsulko.com>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <vigneshr@ti.com>, <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>
+Subject: [PATCH] arm: dts: k3-j7200: Sync with Linux 6.7-rc1
+Date: Mon, 13 Nov 2023 14:43:09 -0600
+Message-ID: <20231113204309.3246434-1-reidt@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231113190721.1841748-1-jpaulo.silvagoncalves@gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,21 +77,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:07-20231113, Joao Paulo Goncalves wrote:
-> From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
-> 
-> Change spl_enable_dcache so it also enable icache on SPL
-> initialization for the main domain part of the boot flow. This
-> improves bootloader booting time.
-> 
-> Link: https://lore.kernel.org/all/20231109140958.1093235-1-joao.goncalves@toradex.com/
-> Signed-off-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
-> ---
+Sync u-boot device tree with Linux kernel 6.7-rc1
 
-Tested-by: Nishanth Menon <nm@ti.com>
-https://gist.github.com/nmenon/ee47a34d6b581916d6fba164617ea93b
+Signed-off-by: Reid Tonking <reidt@ti.com>
+---
+Boot-log: https://gist.github.com/reidt1/db5426f2a778369db8c3699cf293b94f
 
+ arch/arm/dts/k3-j7200-main.dtsi       | 2 +-
+ arch/arm/dts/k3-j7200-mcu-wakeup.dtsi | 9 ++++++++-
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/k3-j7200-main.dtsi b/arch/arm/dts/k3-j7200-main.dtsi
+index cdb1d6b2a9..264913f832 100644
+--- a/arch/arm/dts/k3-j7200-main.dtsi
++++ b/arch/arm/dts/k3-j7200-main.dtsi
+@@ -91,7 +91,7 @@
+ 	};
+ 
+ 	main_navss: bus@30000000 {
+-		compatible = "simple-mfd";
++		compatible = "simple-bus";
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges = <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+diff --git a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
+index 6ffaf85fa6..3fc588b848 100644
+--- a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
++++ b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
+@@ -318,7 +318,7 @@
+ 	};
+ 
+ 	mcu_navss: bus@28380000 {
+-		compatible = "simple-mfd";
++		compatible = "simple-bus";
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges = <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>;
+@@ -637,4 +637,11 @@
+ 		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
+ 		#thermal-sensor-cells = <1>;
+ 	};
++
++	mcu_esm: esm@40800000 {
++		compatible = "ti,j721e-esm";
++		reg = <0x00 0x40800000 0x00 0x1000>;
++		ti,esm-pins = <95>;
++		bootph-pre-ram;
++	};
+ };
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.34.1
+
