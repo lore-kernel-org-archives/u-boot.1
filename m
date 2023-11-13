@@ -4,72 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43EEEC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 15:18:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393C8C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 15:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DE1186D1D;
-	Mon, 13 Nov 2023 16:18:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1E3858711D;
+	Mon, 13 Nov 2023 16:59:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mqyPrkee";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4D86870EB; Mon, 13 Nov 2023 16:18:52 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C789C870FC; Mon, 13 Nov 2023 16:59:40 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E04986D1D
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 16:18:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 09869870B3
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 16:59:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5440f25dcc7so6991729a12.0
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 07:18:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699888730; x=1700493530; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ng6parsoTqc5wXM/ItQfaqRwlT5lWkniJnUup+yHCes=;
- b=mqyPrkeercP1qcI5UmWxcv4blr99dkEKtgYPWuHO1S2gMxD1SHAFK6ZU8PjMLtwURB
- HDL2v7BpYVVlj50LYMQwG5r9HzaNxlXdTD3KT/rVuSOkK6SmoG0apeElF1wHnc+cL/JB
- qlhsa12FPhUBkx1CNDwt3XAcKYeDGIEyEB05sZqJmeG3PQzxL4lp6y8xxA2j1yk6vYhh
- hdRICvm/UXzCXZV5uTwle6CH7upuKco5YFspDamL79t4wGfp0KsyX4y5oC/k62O1LmeU
- 4IkN7qiWAGzgpdplhO5lLV5vTsxgAX9ikYMqj9m9kw2o4hh9MokmUQXJjQLAK2kwa/vh
- Kb6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699888730; x=1700493530;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ng6parsoTqc5wXM/ItQfaqRwlT5lWkniJnUup+yHCes=;
- b=pha2cYrgMS0BFN1atB0kIlG5pPBYhU9h/8FK7KfaIGe683Wfcc/+ekT7DnMD+Wf1Pd
- BJnU5coJgcdyuMHTvtvJzSyxX33RYY3p4q0dPzzfetBprgsn7Iyl4ZY6wfssJ21ixSFf
- 4Nr8QT1sAVWE7aPAGwrKV7v7eIM5bybbRZ2plIpX3nWBEICEmE7nkF7ZfxXeNDxBwKGh
- UFIyjrxUBB3Ko59t+rjmPnyPRJ4WoHLATTDHA28edFNgdczxT8+pDv4nn8kwPwkfoQz9
- CG949gOWnnGSOKtzNBKLaeTudJk3lIYgoSqHa8aPU8d77oISlT474bEQ4BUtjspSEDoe
- zUsw==
-X-Gm-Message-State: AOJu0Yzsf7w4I+enLwFSmdGPnUobjE2Cw3/qun36dsYx+TJ1g16LJrKH
- nhz8zcsxD0HZIgLcqjpFqdfXc/tA70RAjTGddVE=
-X-Google-Smtp-Source: AGHT+IHOSgVYvFVZWTwAp4o9bWyzi+kO6502g+YvZSn5I0CcgzALwZQ60JcMTZK1dvlufIM/AlLZOnCseoZHwn7FldA=
-X-Received: by 2002:a05:6402:1042:b0:540:c989:fcdd with SMTP id
- e2-20020a056402104200b00540c989fcddmr5208559edu.11.1699888730136; Mon, 13 Nov
- 2023 07:18:50 -0800 (PST)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.int.toradex.com (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 0261B1F8C9;
+ Mon, 13 Nov 2023 16:59:37 +0100 (CET)
+Date: Mon, 13 Nov 2023 16:59:33 +0100
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Nishanth Menon <nm@ti.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tom Rini <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>,
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sjoerd Simons <sjoerd@collabora.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [PATCH 2/4] arm: dts: k3-am625: Drop SoC provided bootph params
+ from board u-boot/r5 dtsi
+Message-ID: <ZVJH5QFfCb4G23Yc@francesco-nb.int.toradex.com>
+References: <20231113145919.1928812-1-nm@ti.com>
+ <20231113145919.1928812-3-nm@ti.com>
 MIME-Version: 1.0
-References: <20231113145016.7673-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231113145016.7673-1-heinrich.schuchardt@canonical.com>
-From: Weizhao Ouyang <o451686892@gmail.com>
-Date: Mon, 13 Nov 2023 23:18:38 +0800
-Message-ID: <CAHk0HouMgvMS5t+TM_zxOxhEMqM94aHxu6yWKOuZdPanPY8qEw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: improve efi_var_from_file() description
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231113145919.1928812-3-nm@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,47 +62,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 13, 2023 at 10:50=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> It is unclear to developers why efi_var_from_file() returns EFI_SUCCESS i=
-f
-> file ubootefi.var is missing or corrupted. Improve the description.
->
-> Reported-by: Weizhao Ouyang <o451686892@gmail.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_var_file.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.=
-c
-> index 62e071bd83..dbf76f93de 100644
-> --- a/lib/efi_loader/efi_var_file.c
-> +++ b/lib/efi_loader/efi_var_file.c
-> @@ -204,8 +204,11 @@ efi_status_t efi_var_restore(struct efi_var_file *bu=
-f, bool safe)
->   * File ubootefi.var is read from the EFI system partitions and the vari=
-ables
->   * stored in the file are created.
->   *
-> - * In case the file does not exist yet or a variable cannot be set EFI_S=
-UCCESS
-> - * is returned.
-> + * On first boot the file ubootefi.var does not exist yet. This is if wh=
-y we
-> + * must return EFI_SUCCESS in this case.
-> + *
-> + * If the variable file is corrupted, e.g. incorrect CRC32, we do not wa=
-nt to
-> + * stop the boot process. We deliberately return EFI_SUCCESS in this cas=
-e, too.
+On Mon, Nov 13, 2023 at 08:59:17AM -0600, Nishanth Menon wrote:
+> k3-am62* SoC dtsi files now provide the following:
+> 
+> bootph-all: dmss secure_proxy_main dmsc k3_pds k3_clks k3_reset
+>    main_pmx0 main_timer0 mcu_pmx0 wkup_conf chipid
+> 
+> bootph-pre-ram: secure_proxy_sa3 main_esm mcu_esm
+> 
+> Drop these from board r5 and u-boot.dtsi files as these are duplicate in
+> them now.
+> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-Reviewed-by: Weizhao Ouyang <o451686892@gmail.com>
+I had just a quick look and I have not tested the change, with that said
 
->   *
->   * Return:     status code
->   */
-> --
-> 2.40.1
->
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+
