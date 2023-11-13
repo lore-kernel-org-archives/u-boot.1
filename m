@@ -4,77 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6FBFC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 05:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E19C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 08:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E562886BAC;
-	Mon, 13 Nov 2023 06:51:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cogentembedded.com
+	by phobos.denx.de (Postfix) with ESMTP id B97AC86D12;
+	Mon, 13 Nov 2023 09:01:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=cogentembedded-com.20230601.gappssmtp.com header.i=@cogentembedded-com.20230601.gappssmtp.com header.b="YGrKmcfu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rJftusbt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CECE686516; Mon, 13 Nov 2023 06:51:14 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id F1AD186D4C; Mon, 13 Nov 2023 09:01:32 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC6CB86C8E
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 06:51:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=cogentembedded.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0500186D3F
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 09:01:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nikita.yoush@cogentembedded.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-50a6ff9881fso4224962e87.1
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:51:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5079f6efd64so5371306e87.2
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 00:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cogentembedded-com.20230601.gappssmtp.com; s=20230601; t=1699854672;
- x=1700459472; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=khwC9WqWAupDcLyIIyEGRdS6GkTd5q+Ih5OZfcjj66U=;
- b=YGrKmcfuYWCtfyWxmFJ8qQctYw8NGRRUvYVJ+KUFL9xxGxWbYnNQL8jTx4np9Dd6US
- 1ud+2jl3vQCJaf92PX6HhSo9zn7W1NbRrjC69t8U8XPaZcV9bWGHxlbbKTF5lSZePFDn
- aHaGHI4KWsz2x5nxuzarA+KtYbOLOhFnjuUG3ylrpi7kP9JoQXbHqzLZx9njietGo+Pe
- n+5CvkwqI6oiVjPyoVPpbL/B4n+SuLZq833xr7jJR5IO63g6sONN23Nl9ile+5TgiCUk
- OnEn/U+H21oDz1M4S85LoHaMA++NBc71Tam6sqb/+wzOCUDJ8QhNW1HijjtBjedJfWAV
- FCqQ==
+ d=linaro.org; s=google; t=1699862490; x=1700467290; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=FGwVVIf4OlriBWwNKMokuzSiY5LMsuYLfmWJyxfC844=;
+ b=rJftusbtZCseCvC7GSBTo9naWNxJxP43DbBbnmkyzvwT62glZDzXnZ4JxSe03O1C/j
+ 6gjoXf1ftkhOqJZnDBMaA7a7dWKFahubQXXo8aXbfYsPUNO4VEb7A2kXr1kP7YjTGqYf
+ hj4DVkjKf5r6RAZYpWPDLQYKrSb3KhQ8E/6KzQ2KABN9EHb+oI9ugy61XyO7rmGGHqo2
+ lZmXVIOlY9MWECGF2QVb1eycVNyxKS68JR/iGx5z3FthwlVAjoX1h1vcdTFU+cEg8Wc8
+ 8vjciYsM72dneWBJUlf83OJh/xjRk0w7flV5LRyMHaJu3pe68lD9t33trUQ4iOQV5oQT
+ vGew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699854672; x=1700459472;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=khwC9WqWAupDcLyIIyEGRdS6GkTd5q+Ih5OZfcjj66U=;
- b=oO0YD4uXvVbF14gZ6x0f23J/ZztxMuFaCmdh44XhnfGECImjan8XDfRSXt1U3YRfLz
- 8hNasQ7drdjyV+BXwJfZzXCWU1Y+SOiUgjo503NKA1K/OYYgjtaV/JxXDSi08Ee37tlg
- QSUbwpK3/z9ft1Z0XtPQYCQha77FupJEuVqrMjPcBZoezPrYRV2t4JfiY376c1I82+de
- NyIvBYMRLs0OveCshWigi/ISYw1YivjXYoeVSzrzS/FbDnu9g0mllXJpC5GEZobSMIYP
- 5t6TF9vtct9Uz4hchC7AH8xKIOLouMQlIVGiVWeaXnxd+KaXiP2SiUWXxfaajJBEnaGd
- +41Q==
-X-Gm-Message-State: AOJu0YzNTFEscwij8TcKf7vLQt6fAci0jRK4P99jlkegMJ6+rrkZ714H
- fLlnwtg2VqVYgCSaRxbKq4GQdXNggpqTbB2Hx5g=
-X-Google-Smtp-Source: AGHT+IHJxQrNjehgKG3LqFigFvRwGrxOMuXT861KTEVKrNnmgJSNtqLpbVaxy0Fw2eshXglke1FX2w==
-X-Received: by 2002:a05:6512:1044:b0:50a:760f:dd20 with SMTP id
- c4-20020a056512104400b0050a760fdd20mr4520195lfb.30.1699854671970; 
- Sun, 12 Nov 2023 21:51:11 -0800 (PST)
-Received: from cobook.home ([91.147.103.9]) by smtp.gmail.com with ESMTPSA id
- x9-20020ac24889000000b004f85d80ca64sm833114lfc.221.2023.11.12.21.51.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Nov 2023 21:51:11 -0800 (PST)
-From: Nikita Yushchenko <nikita.yoush@cogentembedded.com>
-To: Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>
-Cc: u-boot@lists.denx.de, Nikita Yushchenko <nikita.yoush@cogentembedded.com>
-Subject: [PATCH] scsi: set dma direction to NONE for TEST UNIT READY
-Date: Mon, 13 Nov 2023 11:51:02 +0600
-Message-Id: <20231113055102.4041946-1-nikita.yoush@cogentembedded.com>
-X-Mailer: git-send-email 2.39.2
+ d=1e100.net; s=20230601; t=1699862490; x=1700467290;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=FGwVVIf4OlriBWwNKMokuzSiY5LMsuYLfmWJyxfC844=;
+ b=fW/ROE+cXYMDzg/2gF2aU6sn1cdTIWHxAOektPEPp+STEP8KtIn+8ET9UJkBm54A+m
+ e1buEDF0wV9uc1jR4f8B/ScP8MjNrUU7ODaoFPs4ezxcsnCbguiHnhToXQwtPjTdSaEM
+ Ipc2kz+5eA244ygoZuStwvYERht86FYsTxMuCNBcWgT2+yeVLRZLmziFUAZ6W9vIjozs
+ pT6O5vchUhkxEuAyMjFfhL/oOOJVglq/beSanqiQIqQ+HcMKHzx3W6HCcRjVh2bakkM1
+ EWbzviH+osQSrgr0vE11ABKLNLKu8pswTSJr7MosJSBbx7tmURUc69Il03ZJ7XTV0G+O
+ oetQ==
+X-Gm-Message-State: AOJu0YydZsT3ZV3X9bPsWQT+ZxozqPE7ykdwIwXxVSGszTkNka4phd/Z
+ UTtaqW5yV2nsUNEL4UoVgK8H5Q==
+X-Google-Smtp-Source: AGHT+IHUFCX3JJIk/J9rRF+IfczEfnQAOfIgGfV9pGlesIPqLOOuvWVPiEgOumdShY4lDqGWH6ZC8A==
+X-Received: by 2002:a05:6512:31c8:b0:4fe:279b:8a02 with SMTP id
+ j8-20020a05651231c800b004fe279b8a02mr4217575lfe.67.1699862489839; 
+ Mon, 13 Nov 2023 00:01:29 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:1bb7:80e:7bf2:f66c?
+ ([2a01:e0a:982:cbb0:1bb7:80e:7bf2:f66c])
+ by smtp.gmail.com with ESMTPSA id
+ h9-20020a05600c350900b004094d4292aesm7123754wmq.18.2023.11.13.00.01.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Nov 2023 00:01:29 -0800 (PST)
+Message-ID: <7ef8c47d-d0d2-4655-95dd-8ddf4bb7c63b@linaro.org>
+Date: Mon, 13 Nov 2023 09:01:28 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 2/9] meson: Use checkboard() instead of show_board_info()
+Content-Language: en-US, fr
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: u-boot-amlogic@groups.io
+References: <20231113030001.240020-1-sjg@chromium.org>
+ <20231113030001.240020-3-sjg@chromium.org>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231113030001.240020-3-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,48 +116,35 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SCSI device scan code was executing TEST UNIT READY command without
-explicitly setting dma direction in struct scsi_cmd to NONE, so command
-was passed to driver with dma direction set to DMA_FROM_DEVICE,
-inherited from older usage.
+On 13/11/2023 03:58, Simon Glass wrote:
+> Boards can use a sysinfo driver if a particular model name is needed.
+> Update this board to use checkboard() directly, rather than having a
+> weak function laid on top of a weak function.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>   arch/arm/mach-meson/board-info.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-meson/board-info.c b/arch/arm/mach-meson/board-info.c
+> index 2421acd817e4..95a29da07229 100644
+> --- a/arch/arm/mach-meson/board-info.c
+> +++ b/arch/arm/mach-meson/board-info.c
+> @@ -168,7 +168,7 @@ static unsigned int get_socinfo(void)
+>   	return socinfo;
+>   }
+>   
+> -int show_board_info(void)
+> +int checkboard(void)
+>   {
+>   	unsigned int socinfo;
+>   
 
-With WDC SDINDDH6-64G ufs device, that caused TEST UNIT READY to
-return error.
-
-Fix that, by explicitly setting dma direction to NONE for
-TEST UNIT READY, and restoring it back DMA_FROM_DEVICE for the
-following READ CAPACITY.
-
-Signed-off-by: Nikita Yushchenko <nikita.yoush@cogentembedded.com>
----
- drivers/scsi/scsi.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index b76aadb0653..1330482c167 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -374,6 +374,7 @@ static int scsi_read_capacity(struct udevice *dev, struct scsi_cmd *pccb,
- 	pccb->cmd[0] = SCSI_RD_CAPAC10;
- 	pccb->cmd[1] = pccb->lun << 5;
- 	pccb->cmdlen = 10;
-+	pccb->dma_dir = DMA_FROM_DEVICE;
- 	pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
- 
- 	pccb->datalen = 8;
-@@ -538,6 +539,7 @@ static int scsi_detect_dev(struct udevice *dev, int target, int lun,
- 
- 	for (count = 0; count < 3; count++) {
- 		pccb->datalen = 0;
-+		pccb->dma_dir = DMA_NONE;
- 		scsi_setup_test_unit_ready(pccb);
- 		err = scsi_exec(dev, pccb);
- 		if (!err)
--- 
-2.39.2
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
