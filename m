@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780ECC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 12:36:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 870F8C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 13:01:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE1DA86DCE;
-	Mon, 13 Nov 2023 13:36:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 23BF387091;
+	Mon, 13 Nov 2023 14:01:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="TRAkvyYU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bl6HBiNh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A9D86F64; Mon, 13 Nov 2023 13:36:31 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7F7F78708B; Mon, 13 Nov 2023 14:01:13 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A5C486D12
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 13:36:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A187F8709A
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 14:01:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=9681a1e6ac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3AD9Uj7i007581; Mon, 13 Nov 2023 13:36:25 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:cc:from:subject:to:content-type
- :content-transfer-encoding; s=selector1; bh=7pfCcW9A7FlL00pdiKof
- sZUeJxXHNZJxNRaNuuU7Ps8=; b=TRAkvyYU+8Ba8VKJ7ZwYnf56VJRKRwYeOBOV
- njaiET+L1gayMneWB//Yr1F14ZSa96U+1UBLaO+qKG4TT9m/JcYuo7iWUIMZGRM6
- weOVRooVexapnA9+Btn/MRjmgCTqHQxwVMgPXK+nShgclPd3KS1apzkwNunpmGDq
- UZQYUxjOK/ALOVIuuSZfGADlvCRA+YX9dhdJ8GnuGXWfIckZfu8yMCbUhICSTpgF
- 6ep2bToXID9iWk0BI+aMvK9sVkM5XJxbdC1lWiTfc6dsZe5xy0U1duY3U+t32Tq/
- UNuDBmbKgAOvWiUKMNMt1XR4LVBxHxcoJjyIIZJcZCY+MDhgAQ==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u9ywky9bn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 13 Nov 2023 13:36:25 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B1A4B10005B;
- Mon, 13 Nov 2023 13:36:23 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A8328215BD8;
- Mon, 13 Nov 2023 13:36:23 +0100 (CET)
-Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 13 Nov
- 2023 13:36:23 +0100
-Message-ID: <b3779eaa-b063-446b-94a9-a5f458182f75@foss.st.com>
-Date: Mon, 13 Nov 2023 13:36:22 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-9be02fcf268so664829066b.3
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 05:01:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699880470; x=1700485270; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uaYqtWMUgwYjEvQp7rhc0fj7ws2OmpxDbB8REDZ+Hdw=;
+ b=Bl6HBiNhrdctUtXab3MYhzoIcirtFOkD+ZzUqScVUXqkpzyRbX0WGqmpQfoYrf6EWm
+ TmYc3CsvZcd7z1TvC8P0sDaoi2/cC/uyxl0W4FGu9GPzPo+UeHPyfCGcl/Raekl2Unjb
+ P/kwGEA244DkVYigsJiP3/UTfODvdglbUZxx7sNVueN7mSxScow+BNdogBsepYpcl2gC
+ Ds50XN+PTlfscKmI3FDQB2T4uOu6jKweIGQoPBxFvY4S/CR2Xd3b7xpcYNFzDsx2HBcB
+ bj/2DucaXN02XQq7afNvxxfbzBjOiHwDrry18VPYC12LIlclS7OK8uFjtvi607gafv4i
+ fMPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699880470; x=1700485270;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uaYqtWMUgwYjEvQp7rhc0fj7ws2OmpxDbB8REDZ+Hdw=;
+ b=WU5qThyyw3VmtoIplAtFso46i0AwS68dtblnBQvVzcg9mr4gPX6q3Qmowj8Uhx2iYi
+ TrkZrLTneobNAgfs6NFk+Ti228Fv+p2V7ryXV1UjXwojUu55p7HlYB+dQXwofiMUgXsc
+ by502NjesG1MFQ3qukExL9BFHP8j8Bg9hwZuMR6R94ke6SS592nmLVjC3XpTsv3Ig+y8
+ SK/r3sf+JG54LPbZeoqS1Zt27M+sKb6x7iVAV+K/v9rHNOmterTfvSu+H5pJkFJ+Xpj+
+ laVCGw3K8GrtE8croSQHZhKNNsoyzhizSM18GHl+qjr6OssS2xS5i/qtWj5JpSf4KGPF
+ dkjg==
+X-Gm-Message-State: AOJu0Yz1JSBhQpJwZRdLA1V4GUENlKlEM1ILIbzEV0HGtQmulyWcUvnN
+ INf1mIe63fq/oCF/f+Y0ohfHepPiOjLsmlnzi2g=
+X-Google-Smtp-Source: AGHT+IG7T39z5lFn12ZntpVnBQ42yU5AZqFnwHYS1dfiqHVIJhRrMwobgrzUY2tX/ci1iQxGtjS12ZO3tNGHOCP/eQw=
+X-Received: by 2002:a17:906:26cb:b0:9d4:2042:775b with SMTP id
+ u11-20020a17090626cb00b009d42042775bmr5025237ejc.30.1699880469800; Mon, 13
+ Nov 2023 05:01:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, <patrice.chotard@foss.st.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [PULL] Pull request for u-boot next / v2024.04 = u-boot-stm32-20231113
-To: Tom Rini <trini@konsulko.com>
+References: <20231002011450.462468-1-sjg@chromium.org>
+ <20231002011450.462468-5-sjg@chromium.org>
+ <CAEUhbmWi9phnvS1U=z1O+8t7kK5mV=JLw8=YJ4A_u3tcrPSXGw@mail.gmail.com>
+ <CAPnjgZ1CsWJa2Ta8fgbGmXZsvpg_BMFDRJmjqPqu6d+7z-TXxg@mail.gmail.com>
+ <CAEUhbmUD9E+DkA4jq1tLMSi2ZmBLmOnB8x7jU74fL=J3YYNk-A@mail.gmail.com>
+ <20231106153631.GI496310@bill-the-cat>
+ <CAPnjgZ1Zp0kjW4zUunopGrUEhbWAtkZ3xwuHYxgo50K9GdFtSA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1Zp0kjW4zUunopGrUEhbWAtkZ3xwuHYxgo50K9GdFtSA@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 13 Nov 2023 21:01:02 +0800
+Message-ID: <CAEUhbmUvfD5AOouDXivzrzMQFgirgicsJwBJKW_zMOPL+k7PMw@mail.gmail.com>
+Subject: Re: [PATCH v3 09/12] x86: Enable SSE in 64-bit mode
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.54]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-13_03,2023-11-09_01,2023-05-22_02
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,122 +92,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Simon,
 
-Please pull the STM32 related patches for u-boot/next, v2024.04: u-boot-stm32-20231113
+On Mon, Nov 13, 2023 at 4:02=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Bin,
+>
+> On Mon, 6 Nov 2023 at 08:36, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Nov 06, 2023 at 06:26:15PM +0800, Bin Meng wrote:
+> > > + Tom,
+> > >
+> > > Hi Simon,
+> > >
+> > > On Mon, Nov 6, 2023 at 12:29=E2=80=AFAM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Bin,
+> > > >
+> > > > On Sun, 5 Nov 2023 at 14:05, Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Mon, Oct 2, 2023 at 9:15=E2=80=AFAM Simon Glass <sjg@chromium.=
+org> wrote:
+> > > > > >
+> > > > > > This is needed to support Truetype fonts. In any case, the comp=
+iler
+> > > > > > expects SSE to be available in 64-bit mode. Enable it.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+> > > > > > ---
+> > > > > >
+> > > > > > (no changes since v1)
+> > > > > >
+> > > > > >  arch/x86/config.mk        |  1 -
+> > > > > >  arch/x86/cpu/x86_64/cpu.c | 11 +++++++++++
+> > > > > >  2 files changed, 11 insertions(+), 1 deletion(-)
+> > > > > >
+> > > > >
+> > > > > I didn't suggest we enable SSE for x86. This is the wrong approac=
+h.
+> > > > >
+> > > > > We should rewrite the Truetype support codes to avoid using float=
+/double types.
+> > > > >
+> > > > > This way the Truetype codes can be used on any other architecture=
+s
+> > > > > without the need for the compiler to emit explicit floating
+> > > > > instructions.
+> > > >
+> > > > I am not aware of any such library. At present, enabling truetype o=
+n
+> > > > coreboot64 causes a hang.
+> > > >
+> > >
+> > > If that's the case, we will have to either:
+> > >
+> > > - Switch all U-Boot builds' to use software float (e.g. -msoft-float)
+> > > which unfortunately depends on the compiler runtime intrinsics.
+> > > - Introduce a Kconfig option for hard float enabling and let each
+> > > architecture to decide whether it implements it or not, and update
+> > > Truetype to depend on the hard float.
+> >
+> > We generally do -msoft-float already, so introducing that for x86, and
+> > some Kconfig logic to ensure that no one else steps on this particular
+> > bug sounds reasonable.
+>
+> Yes soft float seems to be not-much-used on x86. For 64-bit chips the
+> compiler seems to assume that hardfp is available.
 
-CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/18567
+We have compiler flags to ensure the compiler does not generate SSE
+instructions. Yes, I know SSE is in almost every x86 processor we see
+nowadays.
 
-The following changes since commit 3b6db6901ff5babbb9d21f0fca750996e29d85e0:
+>
+> So perhaps the best thing is to introduce a HARDFP option to x86 only.
 
-  Merge branch '2023-11-10-improve-semihosting-armv6' into next (2023-11-10 12:52:33 -0500)
+This option should be global as some other arches also don't have
+hardware fp, like RISC-V whose fp extension is optional.
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20231113
-
-for you to fetch changes up to 01a701994b0590b6452516a7c67353359d053c94:
-
-  stm32mp2: initial support (2023-11-13 10:55:38 +0100)
-
-----------------------------------------------------------------
-Introduce STM32MP2 SoCs family support
-Add STM32MP257F-EV1 board
-
-----------------------------------------------------------------
-Patrice Chotard (8):
-      arm: caches: Make DCACHE_DEFAULT_OPTION accessible for ARM64 arch
-      stm32mp: dram_init: Get RAM size from DT if no RAM driver found
-      stm32mp: dram_init: Limit DDR usage under 4GB boundary for STM32MP
-      stm32mp: bsec: Fix AARCH64 compilation warnings
-      serial: stm32: Fix AARCH64 compilation warnings
-      pinctrl: pinctrl_stm32: Add stm32mp2 support
-      ARM: dts: stm32: Add STM32MP257F Evaluation board support
-      stm32mp2: initial support
-
-Patrick Delaunay (1):
-      stm32mp: dram_init: Fix AARCH64 compilation warnings
-
- arch/arm/Kconfig                                     |   2 +-
- arch/arm/dts/Makefile                                |   3 +++
- arch/arm/dts/stm32mp25-pinctrl.dtsi                  |  38 +++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp25-u-boot.dtsi                   | 102 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp251.dtsi                         | 285 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp253.dtsi                         |  23 ++++++++++++++++++++++
- arch/arm/dts/stm32mp255.dtsi                         |   9 +++++++++
- arch/arm/dts/stm32mp257.dtsi                         |   9 +++++++++
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi             |  20 +++++++++++++++++++
- arch/arm/dts/stm32mp257f-ev1.dts                     |  55 +++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp25xc.dtsi                        |   8 ++++++++
- arch/arm/dts/stm32mp25xf.dtsi                        |   8 ++++++++
- arch/arm/dts/stm32mp25xxai-pinctrl.dtsi              |  83 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp25xxak-pinctrl.dtsi              |  71 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp25xxal-pinctrl.dtsi              |  71 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/include/asm/system.h                        |  16 +++++++--------
- arch/arm/mach-stm32mp/Kconfig                        |  26 +++++++++++++++++++++++-
- arch/arm/mach-stm32mp/Kconfig.25x                    |  43 ++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-stm32mp/Makefile                       |  15 ++++----------
- arch/arm/mach-stm32mp/bsec.c                         |  29 ++++++++++++++-------------
- arch/arm/mach-stm32mp/dram_init.c                    |  17 ++++++++++++----
- arch/arm/mach-stm32mp/include/mach/stm32.h           | 141 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------------------------------
- arch/arm/mach-stm32mp/include/mach/sys_proto.h       |  26 ++++++++++++++++++++++++
- arch/arm/mach-stm32mp/stm32mp1/Makefile              |  20 +++++++++++++++++++
- arch/arm/mach-stm32mp/{ => stm32mp1}/cpu.c           |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/fdt.c           |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/psci.c          |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/pwr_regulator.c |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/spl.c           |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp13x.c    |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp15x.c    |   0
- arch/arm/mach-stm32mp/{ => stm32mp1}/tzc400.c        |   0
- arch/arm/mach-stm32mp/stm32mp2/Makefile              |   9 +++++++++
- arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c           |  68 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-stm32mp/stm32mp2/cpu.c                 | 108 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-stm32mp/stm32mp2/fdt.c                 |  16 +++++++++++++++
- arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c          | 194 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/mach-stm32mp/syscon.c                       |   4 ++--
- board/st/stm32mp2/Kconfig                            |  13 ++++++++++++
- board/st/stm32mp2/MAINTAINERS                        |   9 +++++++++
- board/st/stm32mp2/Makefile                           |   6 ++++++
- board/st/stm32mp2/stm32mp2.c                         |  52 ++++++++++++++++++++++++++++++++++++++++++++++++
- configs/stm32mp25_defconfig                          |  52 ++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/pinctrl/pinctrl_stm32.c                      |   2 ++
- drivers/serial/serial_stm32.c                        |  23 ++++++++++++----------
- drivers/serial/serial_stm32.h                        |   2 +-
- include/configs/stm32mp25_common.h                   |  24 +++++++++++++++++++++++
- include/dt-bindings/pinctrl/stm32-pinfunc.h          |   3 +++
- 48 files changed, 1597 insertions(+), 108 deletions(-)
- create mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
- create mode 100644 arch/arm/dts/stm32mp25-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp251.dtsi
- create mode 100644 arch/arm/dts/stm32mp253.dtsi
- create mode 100644 arch/arm/dts/stm32mp255.dtsi
- create mode 100644 arch/arm/dts/stm32mp257.dtsi
- create mode 100644 arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
- create mode 100644 arch/arm/dts/stm32mp25xc.dtsi
- create mode 100644 arch/arm/dts/stm32mp25xf.dtsi
- create mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
- create mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
- create mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
- create mode 100644 arch/arm/mach-stm32mp/Kconfig.25x
- create mode 100644 arch/arm/mach-stm32mp/stm32mp1/Makefile
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/cpu.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/fdt.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/psci.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/pwr_regulator.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/spl.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp13x.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp15x.c (100%)
- rename arch/arm/mach-stm32mp/{ => stm32mp1}/tzc400.c (100%)
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/Makefile
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/cpu.c
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/fdt.c
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
- create mode 100644 board/st/stm32mp2/Kconfig
- create mode 100644 board/st/stm32mp2/MAINTAINERS
- create mode 100644 board/st/stm32mp2/Makefile
- create mode 100644 board/st/stm32mp2/stm32mp2.c
- create mode 100644 configs/stm32mp25_defconfig
- create mode 100644 include/configs/stm32mp25_common.h
+Regards,
+Bin
