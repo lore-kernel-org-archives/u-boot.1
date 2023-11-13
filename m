@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E77FC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 05:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6FBFC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 13 Nov 2023 05:51:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AB2B86B54;
-	Mon, 13 Nov 2023 06:47:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E562886BAC;
+	Mon, 13 Nov 2023 06:51:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cogentembedded.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X2KYn3Uw";
+	dkim=pass (2048-bit key; unprotected) header.d=cogentembedded-com.20230601.gappssmtp.com header.i=@cogentembedded-com.20230601.gappssmtp.com header.b="YGrKmcfu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCC0C86BAC; Mon, 13 Nov 2023 06:47:48 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id CECE686516; Mon, 13 Nov 2023 06:51:14 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3BC786B2E
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 06:47:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC6CB86C8E
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 06:51:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=cogentembedded.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=o451686892@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-53ed4688b9fso5991749a12.0
- for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:47:46 -0800 (PST)
+ spf=pass smtp.mailfrom=nikita.yoush@cogentembedded.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50a6ff9881fso4224962e87.1
+ for <u-boot@lists.denx.de>; Sun, 12 Nov 2023 21:51:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699854466; x=1700459266; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RYeN/97DQxFphPBuyx3dQhZ2nbfkMv5eHMUj7xPBOks=;
- b=X2KYn3UwbE+TOmFyTiCOtAvS1ePNPW5XrjiWnzvDhvMqlGKjrpNjoRWFyUouYFeYZK
- BlsUdgn+I4rB/CLRM6CynIr5JWGAyr7tQziv7F/a5UHhefpCwNmq7bE/LBB58y6HV+Vk
- W8AJlhJYN9szuOcBHwr6I1uiiIqfMo93s0a2S6DZkVPGESHIAlmitAlVb5UczyVFgLg4
- rZYaJEv6F288zPx9TGIXS9vqCwFvCdJRqnASAy9mFcdfiOR1SlcTfxHvniV9u46G7SS3
- PaH5v3VVmxCDfQe4XIKBiQZjtRqQrKzthlQBaSA60hRdO/YLMaBykbVrUWNCyuPTn0Cy
- MP2A==
+ d=cogentembedded-com.20230601.gappssmtp.com; s=20230601; t=1699854672;
+ x=1700459472; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=khwC9WqWAupDcLyIIyEGRdS6GkTd5q+Ih5OZfcjj66U=;
+ b=YGrKmcfuYWCtfyWxmFJ8qQctYw8NGRRUvYVJ+KUFL9xxGxWbYnNQL8jTx4np9Dd6US
+ 1ud+2jl3vQCJaf92PX6HhSo9zn7W1NbRrjC69t8U8XPaZcV9bWGHxlbbKTF5lSZePFDn
+ aHaGHI4KWsz2x5nxuzarA+KtYbOLOhFnjuUG3ylrpi7kP9JoQXbHqzLZx9njietGo+Pe
+ n+5CvkwqI6oiVjPyoVPpbL/B4n+SuLZq833xr7jJR5IO63g6sONN23Nl9ile+5TgiCUk
+ OnEn/U+H21oDz1M4S85LoHaMA++NBc71Tam6sqb/+wzOCUDJ8QhNW1HijjtBjedJfWAV
+ FCqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699854466; x=1700459266;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RYeN/97DQxFphPBuyx3dQhZ2nbfkMv5eHMUj7xPBOks=;
- b=FcErjlIfx7a+moGEnRE5LTklP23J3P6p8uT9GIy1BYjTfI5bKXOlLU2nqvxTol04Yr
- IvQwUiVyhlSlod/mdjLeXe5qa3fAZ5Gxr4K+i/oZfEeUd0uAF/9R9z9fCLhKuMDJ+KA+
- 54VbA4eBE9D3U2kZZJL7OU9oH/GEXwnXho+cor48pfvGVsZJ4xicK8kZjhJMa+wMb/xO
- 4e3PI624zcFhW9oK9op8GaSOxIqRVBccZH1GMcE08pJWMJub649UEdVaOTx66z/MCtj3
- kv6cIgmw55qygDFUOIDsGiMeC/kPxShG9eq7TVj+2/7bnXy/GYYEBBqIaeu7QZXiSgrp
- qTwg==
-X-Gm-Message-State: AOJu0YzWpq5wWGfYW4UwxX9ceYTU9ZAC+bQEkIo/AmghFpYoj4Rq4pQO
- PS+Xq0yUjMC4e1bdQDrrRm92z5Stg4VYtXSdLOU=
-X-Google-Smtp-Source: AGHT+IFi0O0hMAz4z/vLRg2zBnsOF9+l26CdHwccWyrK/801hbyZiOHuX3l4ThO81RH+KcrgNwBrXeKmKHMpD1DN9yw=
-X-Received: by 2002:aa7:d60b:0:b0:53e:6239:a04a with SMTP id
- c11-20020aa7d60b000000b0053e6239a04amr3780389edr.24.1699854465808; Sun, 12
- Nov 2023 21:47:45 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699854672; x=1700459472;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=khwC9WqWAupDcLyIIyEGRdS6GkTd5q+Ih5OZfcjj66U=;
+ b=oO0YD4uXvVbF14gZ6x0f23J/ZztxMuFaCmdh44XhnfGECImjan8XDfRSXt1U3YRfLz
+ 8hNasQ7drdjyV+BXwJfZzXCWU1Y+SOiUgjo503NKA1K/OYYgjtaV/JxXDSi08Ee37tlg
+ QSUbwpK3/z9ft1Z0XtPQYCQha77FupJEuVqrMjPcBZoezPrYRV2t4JfiY376c1I82+de
+ NyIvBYMRLs0OveCshWigi/ISYw1YivjXYoeVSzrzS/FbDnu9g0mllXJpC5GEZobSMIYP
+ 5t6TF9vtct9Uz4hchC7AH8xKIOLouMQlIVGiVWeaXnxd+KaXiP2SiUWXxfaajJBEnaGd
+ +41Q==
+X-Gm-Message-State: AOJu0YzNTFEscwij8TcKf7vLQt6fAci0jRK4P99jlkegMJ6+rrkZ714H
+ fLlnwtg2VqVYgCSaRxbKq4GQdXNggpqTbB2Hx5g=
+X-Google-Smtp-Source: AGHT+IHJxQrNjehgKG3LqFigFvRwGrxOMuXT861KTEVKrNnmgJSNtqLpbVaxy0Fw2eshXglke1FX2w==
+X-Received: by 2002:a05:6512:1044:b0:50a:760f:dd20 with SMTP id
+ c4-20020a056512104400b0050a760fdd20mr4520195lfb.30.1699854671970; 
+ Sun, 12 Nov 2023 21:51:11 -0800 (PST)
+Received: from cobook.home ([91.147.103.9]) by smtp.gmail.com with ESMTPSA id
+ x9-20020ac24889000000b004f85d80ca64sm833114lfc.221.2023.11.12.21.51.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Nov 2023 21:51:11 -0800 (PST)
+From: Nikita Yushchenko <nikita.yoush@cogentembedded.com>
+To: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>
+Cc: u-boot@lists.denx.de, Nikita Yushchenko <nikita.yoush@cogentembedded.com>
+Subject: [PATCH] scsi: set dma direction to NONE for TEST UNIT READY
+Date: Mon, 13 Nov 2023 11:51:02 +0600
+Message-Id: <20231113055102.4041946-1-nikita.yoush@cogentembedded.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20231109125541.10845-1-o451686892@gmail.com>
- <4d5b922a-b633-4892-9f36-78935c553bef@gmx.de>
- <CAC_iWjJHRtuy3M2o61+tkZ+cMPHrizrQQrx9-r_3LCzJgQBjUg@mail.gmail.com>
- <67A55014-91EE-4C04-A228-52C5790DC910@gmx.de>
-In-Reply-To: <67A55014-91EE-4C04-A228-52C5790DC910@gmx.de>
-From: Weizhao Ouyang <o451686892@gmail.com>
-Date: Mon, 13 Nov 2023 13:47:34 +0800
-Message-ID: <CAHk0HosMaYVTfSwf42Lpzr1d0uKJw+odMJqQ9PyXFhTLyO1E_A@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: Fix UEFI variable error handling
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,200 +91,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Nov 10, 2023 at 9:12=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
->
->
->
-> Am 10. November 2023 11:04:24 MEZ schrieb Ilias Apalodimas <ilias.apalodi=
-mas@linaro.org>:
-> >Hi Heinrich, Weizhao
-> >
-> >On Thu, 9 Nov 2023 at 15:57, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >>
-> >> On 11/9/23 04:55, Weizhao Ouyang wrote:
-> >> > Correct some UEFI variable error handing code paths.
-> >> >
-> >> > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> >> > ---
-> >> >   lib/efi_loader/efi_var_file.c | 1 +
-> >> >   lib/efi_loader/efi_variable.c | 8 ++++----
-> >> >   2 files changed, 5 insertions(+), 4 deletions(-)
-> >> >
-> >> > diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_=
-file.c
-> >> > index 62e071bd83..dbb9b1f3fc 100644
-> >> > --- a/lib/efi_loader/efi_var_file.c
-> >> > +++ b/lib/efi_loader/efi_var_file.c
-> >> > @@ -236,6 +236,7 @@ efi_status_t efi_var_from_file(void)
-> >> >               log_err("Invalid EFI variables file\n");
-> >> >   error:
-> >> >       free(buf);
-> >> > +     return ret;
-> >>
-> >> Hello Weizhao,
-> >>
-> >> thank you for looking into the error handling.
-> >>
-> >> U-Boot's UEFI variables can either be stored in file ubootefi.var in t=
-he
-> >> ESP or in the RPMB (Replay Protected Memory Block) partition of the
-> >> eMMC. The suggested changes are about handling of errors when reading =
-or
-> >> writing the file ubootefi.var. Security relevant variables (PK, KEK, d=
-b,
-> >> dbx) are never read from file.
-> >>
-> >> On first boot a file ubootefi.var will not exist. It has to be created
-> >> by U-Boot. If efi_var_from_file() would return an error if the file do=
-es
-> >> not exist or is corrupted, we would never be able to boot such a syste=
-m.
-> >> This is why deliberately we return EFI_SUCCESS here. What is missing i=
-n
-> >> the code is a comment explaining the design decision.
-> >
-> >Yes, that's correct. The function description tries to explain that
-> >but is a bit vague.
-> >
-> >>
-> >> >   #endif
-> >> >       return EFI_SUCCESS;
-> >> >   }
-> >> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_vari=
-able.c
-> >> > index be95ed44e6..13966297c6 100644
-> >> > --- a/lib/efi_loader/efi_variable.c
-> >> > +++ b/lib/efi_loader/efi_variable.c
-> >> > @@ -350,17 +350,17 @@ efi_status_t efi_set_variable_int(const u16 *v=
-ariable_name,
-> >> >
-> >> >       if (var_type =3D=3D EFI_AUTH_VAR_PK)
-> >> >               ret =3D efi_init_secure_state();
-> >> > -     else
-> >> > -             ret =3D EFI_SUCCESS;
-> >>
-> >> The two lines are unreachable code and should be removed.
-> >>
-> >> > +     if (ret !=3D EFI_SUCCESS)
-> >> > +             return ret;
-> >>
-> >> These new lines should only be reached if var_type =3D=3D EFI_AUTH_VAR=
-_PK.
-> >>
-> >
-> >Yea agree here
-> >
-> >> I am not sure what Would be the right error handling if
-> >> efi_init_secure_state() fails:
-> >>
-> >> * Do we have to set PK to the old value?
-> >
-> >What do you mean by old value?
->
-> We are in SetVariable() and set, changed, or deleted PK in memory. But th=
-is has lead to some inconsistency. Should the prior state be restored?
+SCSI device scan code was executing TEST UNIT READY command without
+explicitly setting dma direction in struct scsi_cmd to NONE, so command
+was passed to driver with dma direction set to DMA_FROM_DEVICE,
+inherited from older usage.
 
-Shall we restore the variable "SecureBoot"?
+With WDC SDINDDH6-64G ufs device, that caused TEST UNIT READY to
+return error.
 
->
-> Regards
->
-> Heinrich
->
-> >
-> >> * Should we still persist PK to ubootefi.var?
-> >
-> >I would argue that we don't really care about what happens in this
-> >case. Writing authenticated variables on a file is only supported if
-> >preseeding is disabled and it *never* gets restored. We basically
-> >allow that code to test EFI secure boot by writing PK, KEK, DB on the
-> >fly, but once we reboot those variables are gone.
-> >If preseeding is enabled we don't write that at all. We return
-> >EFI_WRITE_PROTECTED.  We could do that regardless.  But since we have
-> >those tests, the memory backend should still be allowed to write
-> >those.
-> >
-> >>
-> >> However we decide we should describe our decisions in a code comment.
-> >
-> >I think the logic here should be
-> >1. If variables are preseeded and restoring any authenticated
-> >variables fails, the EFI subsystem should refuse to start (which it
-> >already does)
-> >2. If preseeding is not configured we can continue as best effort and
-> >try to recover the board and rewrite variables. We don't trust
-> >variables stored in a file and we should keep it that way
-> >
-> >>
-> >> >
-> >> >       /*
-> >> >        * Write non-volatile EFI variables to file
-> >> >        * TODO: check if a value change has occured to avoid superflu=
-ous writes
-> >> >        */
-> >> >       if (attributes & EFI_VARIABLE_NON_VOLATILE)
-> >> > -             efi_var_to_file();
-> >> > +             ret =3D efi_var_to_file();
-> >>
-> >> The discussion here should focus on the treatment of errors in the
-> >> file-system.
-> >>
-> >> The following error cases come to my mind:
-> >>
-> >> * ESP partition is missing
-> >> * ESP FAT file system is corrupted
-> >> * There is no space on the ESP.
-> >> * The medium (e.g. SD card) is in write only mode
-> >>
-> >> The current code gives priority to enable booting in all adverse
-> >> situations. Do you think this is a bad choice?
-> >>
-> >> @Ilias: Please, chime in.
-> >
-> >I think we should continue doing that *unless* preseeding is enabled.
-> >If we preseed authenticated variables and the restoration of the
-> >switching of the secure boot mode fails we must stop the EFI
-> >subsystem.
-> >The first function that gets called is efi_init_variables().
-> >commit 77bb14758dcb1 explains some of the logic in that file but in shor=
-t
-> >- We load variables from a file first, excluding authenticated ones
-> >- We load preseeded variables. That step allows you to load PK, KEK,
-> >db etc that are stored as part of the u-boot binary.  We assume that
-> >in a sane design a chain of trust *will* authenticate u-boot prior to
-> >loading, so we 'trust' those variables.  If this fails which includes
-> >setting the secure state we correctly stop the EFI subsystem
-> >- efi_var_restore() is checking for duplicates. So a non-authenticated
-> >variable set by the file load won't be overwritten by built-in ones.
-> >This allows users to override built-in variables (apart from auth ones
-> >obviously)
+Fix that, by explicitly setting dma direction to NONE for
+TEST UNIT READY, and restoring it back DMA_FROM_DEVICE for the
+following READ CAPACITY.
 
-nit: currently if efi_var_restore() fails to set the EFI variable, it
-will still return EFI_SUCCESS.
+Signed-off-by: Nikita Yushchenko <nikita.yoush@cogentembedded.com>
+---
+ drivers/scsi/scsi.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-BR,
-Weizhao
+diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
+index b76aadb0653..1330482c167 100644
+--- a/drivers/scsi/scsi.c
++++ b/drivers/scsi/scsi.c
+@@ -374,6 +374,7 @@ static int scsi_read_capacity(struct udevice *dev, struct scsi_cmd *pccb,
+ 	pccb->cmd[0] = SCSI_RD_CAPAC10;
+ 	pccb->cmd[1] = pccb->lun << 5;
+ 	pccb->cmdlen = 10;
++	pccb->dma_dir = DMA_FROM_DEVICE;
+ 	pccb->msgout[0] = SCSI_IDENTIFY; /* NOT USED */
+ 
+ 	pccb->datalen = 8;
+@@ -538,6 +539,7 @@ static int scsi_detect_dev(struct udevice *dev, int target, int lun,
+ 
+ 	for (count = 0; count < 3; count++) {
+ 		pccb->datalen = 0;
++		pccb->dma_dir = DMA_NONE;
+ 		scsi_setup_test_unit_ready(pccb);
+ 		err = scsi_exec(dev, pccb);
+ 		if (!err)
+-- 
+2.39.2
 
-> >
-> >Cheers
-> >/Ilias
-> >
-> >
-> >
-> >
-> >
-> >
-> >>
-> >> Best regards
-> >>
-> >> Heinrich
-> >>
-> >> >
-> >> > -     return EFI_SUCCESS;
-> >> > +     return ret;
-> >> >   }
-> >> >
-> >> >   efi_status_t efi_query_variable_info_int(u32 attributes,
-> >>
