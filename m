@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C30E7C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 08:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC54C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 08:52:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AFF887215;
-	Tue, 14 Nov 2023 09:52:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86A1587243;
+	Tue, 14 Nov 2023 09:52:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iERhDew2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LSfak8kn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE475871A0; Tue, 14 Nov 2023 09:52:25 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 19F1C8726A; Tue, 14 Nov 2023 09:52:30 +0100 (CET)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2C9987215
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 09:52:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8877687266
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 09:52:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6b77ab73c6fso4146205b3a.1
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 00:52:23 -0800 (PST)
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-517ab9a4a13so4261642a12.1
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 00:52:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699951942; x=1700556742; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699951946; x=1700556746; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WCLKamNhgMjk+Ag4SBVHZ9xSqec54un1/uZywLFnitg=;
- b=iERhDew2xOcsG79U1jnOw8uC4IynsXZMq16dLtqulVSyrYRoAkQjE4cDGNv6sBKEY0
- ULNr9CAfxZ6ZR3mKJFBUSaOp99iUiRakTfo86rTB+jjx08p7byxnY6HCnP9/+c6mRgPE
- PUQqbuoC+nhaRMHV7fImCgzDMlPsH3lsQidaqCstAkJs0o1M6QFjm+tU+t2LS8u0rRkA
- aK8tPwU7kRpYEwXF8ym9cO+4SxZETJTfkCVrGvP1P08X4C5/nhKE690r9ervotaR0P97
- QH4fbSEfYQAIaXrDZt2U7qgTO0Z/kKXOa2Y4lD3R7yDQow5kS9oiBVHoNgs2gY0yasKe
- GUiA==
+ bh=t+W0ciOA2vOXq/CX4WHhQamLFPXxNRJat+RDJES8J0A=;
+ b=LSfak8knjCCnc3OXnvpxRdlGq0dgdtVNamFcx26jajAQhA4RHE9i4spnvvPTOqrDzm
+ kNhAMc+u9c7s5uK1Vx1ynOtz/oZxNweoTqw1fxuUPO0DQ3cbPVu5HQqYXHNV56R0NIhn
+ /ZQV8q0mro7eBLnA9lJV1q7G8LKFgX9i1fqkhoyzxkMgPMhPkpYrUr7BkaP0JRh3MhqY
+ /h4QrmPm1cwLp/HCXlnWiU70ziJvmY/ktsMM2b43cMnYQ1uqU1Cx2RCFbuRelr/sySWz
+ m1WFxMOvRAGAQwoQnUImPz6yFZRPyJUG8dANHO9kchXFastKDvY66OrSJZ45ywv09+Ph
+ WN8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699951942; x=1700556742;
+ d=1e100.net; s=20230601; t=1699951946; x=1700556746;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WCLKamNhgMjk+Ag4SBVHZ9xSqec54un1/uZywLFnitg=;
- b=WHg84JyJLXc+YdKNyMgCauzwRx1Zn/2jwUb8oNdFLVHG+TM1LNFu8bPXTx6e3P3zqb
- cC3i0WE0ZNkn06TE4XUhl/To8nsCI4GYctvG7kodUZvErYue1G2PGQqXH2K2y7VoSHn7
- DKFFZx0fH5NCvJkNwJyGbljEpI2a39WFYadlPxjhsWrV7dhO+vjH391ggsLsJS2iJkHd
- eEN51sWKnfVmzk2+7Eai8TrlgpRfD/PlboHFwwxcE+JWU9wKumMMC4zYaQF2DmiROZrt
- gypgcoL4YmuyYKqZJBjTChcRBF/vC09wEuhH3BVimFg+NpJBYn9DuMz2fG04pxGd0RgU
- euEw==
-X-Gm-Message-State: AOJu0YyVZKRxCOlXIK3ObdgqQhcbktftViHyXUQLLN6VgyVefrHZzHfR
- e6blBu5Dpqk1v5uZBXHPX2XjgFuaNh5hww==
-X-Google-Smtp-Source: AGHT+IHH3+6KhcjoNyNMYs4J0mQLEUe+4dGG4+Tow0lFo9BmATVoPbH4pd8hb8sc8sNfPCmCOwhYUw==
-X-Received: by 2002:a05:6a20:9191:b0:17b:1f76:86ee with SMTP id
- v17-20020a056a20919100b0017b1f7686eemr2720809pzd.16.1699951942157; 
- Tue, 14 Nov 2023 00:52:22 -0800 (PST)
+ bh=t+W0ciOA2vOXq/CX4WHhQamLFPXxNRJat+RDJES8J0A=;
+ b=OUESkDQ9Qk/0pAHLzmKrXiNuptR0/vfxj6N3iZeC/zRSzauQh15aET8LmoT7TvdE78
+ TPDnoXIjqR8CkWRyZvSQm0lugFOfqL0MrO/OGT+faIpTK01PLolupayMn2TEDiYYQCZg
+ SKRYpjl6i6V5csRE+4uUtGONOn4ttbYe7GQYMnfKWr2l1bhSbdeQwuFu4YQTiRvQORGl
+ JLuHMnBDCn5TpUS+Vxjn6TtanxSkKodmRaSArv0RrKRscMmfAf/qZyuklwu30oaFh2or
+ Bv7zCxwihvsisqBiKRzcVpQHCBVdTdGTcebtU9+gTQBHoE7nqpANs4F56ktVSwlvsUGB
+ bWYA==
+X-Gm-Message-State: AOJu0YxC0Zrdtey1BINACGAp5WAg7tMW9UJs6LppvG13w8XAfKlMtWnZ
+ 9QVylKoz0qAdlom+LH07oOA=
+X-Google-Smtp-Source: AGHT+IHnGYxtinNbm+z4SwK9biYf2QQbtxqRHZeEECq9DwgVRNNPAHlWrqFzW1JdBxjreDA7CR6Vcg==
+X-Received: by 2002:a05:6a20:2593:b0:140:f6c4:aa71 with SMTP id
+ k19-20020a056a20259300b00140f6c4aa71mr10468993pzd.8.1699951945759; 
+ Tue, 14 Nov 2023 00:52:25 -0800 (PST)
 Received: from cs20-buildserver.lan ([180.217.145.22])
  by smtp.gmail.com with ESMTPSA id
- fh23-20020a056a00391700b006be0bd6a4d8sm778696pfb.36.2023.11.14.00.52.20
+ fh23-20020a056a00391700b006be0bd6a4d8sm778696pfb.36.2023.11.14.00.52.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 00:52:21 -0800 (PST)
+ Tue, 14 Nov 2023 00:52:25 -0800 (PST)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, jim.t90615@gmail.com,
  trini@konsulko.com, YSCHU@nuvoton.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 3/4] serial: npcm: support skip uart clock setting
-Date: Tue, 14 Nov 2023 16:51:58 +0800
-Message-Id: <20231114085159.3739887-4-JJLIU0@nuvoton.com>
+Subject: [PATCH v2 4/4] board: nuvoton: update console environment variable
+Date: Tue, 14 Nov 2023 16:51:59 +0800
+Message-Id: <20231114085159.3739887-5-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
 References: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
@@ -93,84 +93,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Skip the uart clock setting if CONFIG_SYS_SKIP_UART_INIT is enabled.
-Fix divisor error.
+If CONFIG_SYS_SKIP_UART_INIT is enabled, calculate the
+current baud rate and update the "console" environment
+variable.
 
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
 Changes for v2:
-   - no change
+   --- rename file
+   --- modify board_set_console to void function
 ---
- drivers/serial/serial_npcm.c | 39 ++++++++++++++++++++++--------------
- 1 file changed, 24 insertions(+), 15 deletions(-)
+ board/nuvoton/arbel_evb/Kconfig     |  1 +
+ board/nuvoton/arbel_evb/arbel_evb.c |  7 +++
+ board/nuvoton/common/Kconfig        |  9 ++++
+ board/nuvoton/common/Makefile       |  1 +
+ board/nuvoton/common/uart.c         | 71 +++++++++++++++++++++++++++++
+ board/nuvoton/common/uart.h         | 11 +++++
+ board/nuvoton/poleg_evb/Kconfig     |  1 +
+ board/nuvoton/poleg_evb/poleg_evb.c |  8 ++++
+ 8 files changed, 109 insertions(+)
+ create mode 100644 board/nuvoton/common/Kconfig
+ create mode 100644 board/nuvoton/common/Makefile
+ create mode 100644 board/nuvoton/common/uart.c
+ create mode 100644 board/nuvoton/common/uart.h
 
-diff --git a/drivers/serial/serial_npcm.c b/drivers/serial/serial_npcm.c
-index 76ac7cb80d..6bf3a943a2 100644
---- a/drivers/serial/serial_npcm.c
-+++ b/drivers/serial/serial_npcm.c
-@@ -83,8 +83,11 @@ static int npcm_serial_setbrg(struct udevice *dev, int baudrate)
- 	struct npcm_uart *uart = plat->reg;
- 	u16 divisor;
+diff --git a/board/nuvoton/arbel_evb/Kconfig b/board/nuvoton/arbel_evb/Kconfig
+index 33c589f1fb..ed1c1ad8ee 100644
+--- a/board/nuvoton/arbel_evb/Kconfig
++++ b/board/nuvoton/arbel_evb/Kconfig
+@@ -15,4 +15,5 @@ config SYS_MEM_TOP_HIDE
+ 	help
+ 	  Reserve memory for ECC/GFX/OPTEE/TIP/CP.
  
-+	if (IS_ENABLED(CONFIG_SYS_SKIP_UART_INIT))
-+		return 0;
++source "board/nuvoton/common/Kconfig"
+ endif
+diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
+index 59e1a42564..8fc56c1839 100644
+--- a/board/nuvoton/arbel_evb/arbel_evb.c
++++ b/board/nuvoton/arbel_evb/arbel_evb.c
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <asm/io.h>
+ #include <asm/arch/gcr.h>
++#include "../common/uart.h"
+ 
+ #define SR_MII_CTRL_SWR_BIT15	15
+ 
+@@ -90,3 +91,9 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
++int last_stage_init(void)
++{
++	board_set_console();
 +
- 	/* BaudOut = UART Clock / (16 * [Divisor + 2]) */
--	divisor = DIV_ROUND_CLOSEST(plat->uart_clk, 16 * baudrate + 2) - 2;
-+	divisor = DIV_ROUND_CLOSEST(plat->uart_clk, 16 * baudrate) - 2;
- 
- 	setbits_8(&uart->lcr, LCR_DLAB);
- 	writeb(divisor & 0xff, &uart->dll);
-@@ -97,29 +100,35 @@ static int npcm_serial_setbrg(struct udevice *dev, int baudrate)
- static int npcm_serial_probe(struct udevice *dev)
- {
- 	struct npcm_serial_plat *plat = dev_get_plat(dev);
--	struct npcm_uart *uart = plat->reg;
-+	struct npcm_uart *uart;
- 	struct clk clk, parent;
- 	u32 freq;
- 	int ret;
- 
- 	plat->reg = dev_read_addr_ptr(dev);
--	freq = dev_read_u32_default(dev, "clock-frequency", 0);
-+	uart = plat->reg;
- 
--	ret = clk_get_by_index(dev, 0, &clk);
--	if (ret < 0)
--		return ret;
-+	if (!IS_ENABLED(CONFIG_SYS_SKIP_UART_INIT)) {
-+		freq = dev_read_u32_default(dev, "clock-frequency", 24000000);
- 
--	ret = clk_get_by_index(dev, 1, &parent);
--	if (!ret) {
--		ret = clk_set_parent(&clk, &parent);
--		if (ret)
-+		ret = clk_get_by_index(dev, 0, &clk);
-+		if (ret < 0)
- 			return ret;
--	}
- 
--	ret = clk_set_rate(&clk, freq);
--	if (ret < 0)
--		return ret;
--	plat->uart_clk = ret;
-+		ret = clk_get_by_index(dev, 1, &parent);
-+		if (!ret) {
-+			ret = clk_set_parent(&clk, &parent);
-+			if (ret)
-+				return ret;
-+		}
++	return 0;
++}
+diff --git a/board/nuvoton/common/Kconfig b/board/nuvoton/common/Kconfig
+new file mode 100644
+index 0000000000..61de7bc5f8
+--- /dev/null
++++ b/board/nuvoton/common/Kconfig
+@@ -0,0 +1,9 @@
++if ARCH_NPCM
 +
-+		if (freq) {
-+			ret = clk_set_rate(&clk, freq);
-+			if (ret < 0)
-+				return ret;
++config SYS_SKIP_UART_INIT
++	bool "Skip UART initialization"
++	depends on NPCM_SERIAL
++	help
++	  Select this if the UART you want to use is already
++	  initialized by the time U-Boot starts its execution.
++endif
+diff --git a/board/nuvoton/common/Makefile b/board/nuvoton/common/Makefile
+new file mode 100644
+index 0000000000..8fd83b229b
+--- /dev/null
++++ b/board/nuvoton/common/Makefile
+@@ -0,0 +1 @@
++obj-$(CONFIG_SYS_SKIP_UART_INIT)	+= uart.o
+diff --git a/board/nuvoton/common/uart.c b/board/nuvoton/common/uart.c
+new file mode 100644
+index 0000000000..3b8badd67a
+--- /dev/null
++++ b/board/nuvoton/common/uart.c
+@@ -0,0 +1,71 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2023 Nuvoton Technology Corp.
++ */
++
++#include <common.h>
++#include <clk.h>
++#include <dm.h>
++#include <env.h>
++#include <serial.h>
++#include <linux/delay.h>
++
++#define UART_DLL	0x0
++#define UART_DLM	0x4
++#define UART_LCR	0xc
++#define LCR_DLAB	BIT(7)
++
++void board_set_console(void)
++{
++	const unsigned long baudrate_table[] = CFG_SYS_BAUDRATE_TABLE;
++	struct udevice *dev = gd->cur_serial_dev;
++	unsigned int baudrate, max_delta;
++	void __iomem *uart_reg;
++	struct clk clk;
++	char string[32];
++	u32 uart_clk;
++	u8 dll, dlm;
++	u16 divisor;
++	int ret, i;
++
++	if (!dev)
++		return;
++
++	uart_reg = dev_read_addr_ptr(dev);
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (ret)
++		return;
++
++	uart_clk = clk_get_rate(&clk);
++	setbits_8(uart_reg + UART_LCR, LCR_DLAB);
++	dll = readb(uart_reg + UART_DLL);
++	dlm = readb(uart_reg + UART_DLM);
++	clrbits_8(uart_reg + UART_LCR, LCR_DLAB);
++	divisor = dll | (dlm << 8);
++	baudrate =  uart_clk / ((16 * (divisor + 2)));
++	for (i = 0; i < ARRAY_SIZE(baudrate_table); ++i) {
++		max_delta = baudrate_table[i] / 20;
++		if (abs(baudrate - baudrate_table[i]) < max_delta) {
++			/* The baudrate is supported */
++			gd->baudrate = baudrate_table[i];
++			break;
 +		}
-+		plat->uart_clk = clk_get_rate(&clk);
 +	}
++
++	if (i == ARRAY_SIZE(baudrate_table)) {
++		/* current baudrate is not suitable, set to default */
++		divisor = DIV_ROUND_CLOSEST(uart_clk, 16 * gd->baudrate) - 2;
++		setbits_8(uart_reg + UART_LCR, LCR_DLAB);
++		writeb(divisor & 0xff, uart_reg + UART_DLL);
++		writeb(divisor >> 8, uart_reg + UART_DLM);
++		clrbits_8(uart_reg + UART_LCR, LCR_DLAB);
++		udelay(100);
++		printf("\r\nUART(source %u): change baudrate from %u to %u\n",
++		       uart_clk, baudrate, uart_clk / ((16 * (divisor + 2))));
++	}
++
++	debug("Set env baudrate=%u\n", gd->baudrate);
++	snprintf(string, sizeof(string), "ttyS0,%un8", gd->baudrate);
++	env_set("console", string);
++
++}
+diff --git a/board/nuvoton/common/uart.h b/board/nuvoton/common/uart.h
+new file mode 100644
+index 0000000000..9cc895251b
+--- /dev/null
++++ b/board/nuvoton/common/uart.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2023 Nuvoton Technology Corp.
++ */
++
++#ifndef _NUVOTON_UART_H
++#define _NUVOTON_UART_H
++
++void board_set_console(void);
++
++#endif /* _NUVOTON_COMMON_H */
+diff --git a/board/nuvoton/poleg_evb/Kconfig b/board/nuvoton/poleg_evb/Kconfig
+index d3f4c1dd81..6f7f1ef157 100644
+--- a/board/nuvoton/poleg_evb/Kconfig
++++ b/board/nuvoton/poleg_evb/Kconfig
+@@ -22,4 +22,5 @@ config TARGET_POLEG_EVB
  
- 	/* Disable all interrupt */
- 	writeb(0, &uart->ier);
+ endchoice
+ 
++source "board/nuvoton/common/Kconfig"
+ endif
+diff --git a/board/nuvoton/poleg_evb/poleg_evb.c b/board/nuvoton/poleg_evb/poleg_evb.c
+index 2052af6649..7421911a41 100644
+--- a/board/nuvoton/poleg_evb/poleg_evb.c
++++ b/board/nuvoton/poleg_evb/poleg_evb.c
+@@ -10,6 +10,7 @@
+ #include <asm/io.h>
+ #include <asm/arch/gcr.h>
+ #include <asm/mach-types.h>
++#include "../common/uart.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -53,3 +54,10 @@ int dram_init(void)
+ 
+ 	return 0;
+ }
++
++int last_stage_init(void)
++{
++	board_set_console();
++
++	return 0;
++}
 -- 
 2.25.1
 
