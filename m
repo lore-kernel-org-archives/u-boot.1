@@ -4,60 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B4A3C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 11:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44119C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 11:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 976588746E;
-	Tue, 14 Nov 2023 12:03:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 11A7D87499;
+	Tue, 14 Nov 2023 12:03:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QaeJ5tsb";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="CqPx/+Gr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 660B387478; Tue, 14 Nov 2023 12:03:35 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 238B28744F; Tue, 14 Nov 2023 12:03:36 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85BE18727A
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 12:03:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BE74871AD
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 12:03:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 08F3212000D;
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C97F3100026;
  Tue, 14 Nov 2023 14:03:32 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 08F3212000D
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C97F3100026
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1699959812;
- bh=NsmekJvSNog7lfTBW+bu062IEARi7O/TwWj5MdrT/tY=;
+ bh=yZ/9FVY+9NdqcfvqkLHVI1EsDpSNi5RMzUWEAo/yHiI=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=QaeJ5tsbbk7TVsAeVaV/sx2N4ff7Sggsm2V55eOsbFKimc3JOYI5hDCEUw/VrNijH
- rkyP1p9dJ1rSyKJy5GG8XBs3vXItCR4y08OjlYEAH6M5gjebJd97eXGDy1BpHjtPLP
- fJClYJePjzOCUGKZnOhmUoYSt9DBwvzQSWkJ+0DqQcQb9qJKXAdAhi2KOz/eQC5Eqk
- As1jvkU8VaSRpHv2wq76saQKXLPpEV4g7kp1WYFQz8Eh9MKOXy6J7jpB/4b/caUPsr
- utyJj+7RGIhG1FMeiTZsXbA/RdZLiDS3dLNcZlD+MRKl/6fMaM7GJDCZGP/ZvgeG2m
- iWKese2xvaNxg==
+ b=CqPx/+GrxO7Bil8VNUnVn53RuZLp9xYnwyUoJj4e/8O9kJLWI4eYwPJTUWNjjvehN
+ NPHc6qmO4ugAuxVwH8r42anAKkcUBR+Khxt+int/QyBd/L+rqX1caRI6l7x505waj/
+ jdnqT3C8wqY6RhUiKIvbdXlf55OJWzX+8iZsHoVFeziPZIU9bmlWCitrrQARQqlpQm
+ ExH0DFvWCYe5n7NzK/XJgDpWbyVfnCM+tEy1cG7XDRpzjTsip30PkYPSQI5kAVYqjb
+ Zy2ikR2aX1QGaUL+pWg5GNNtRzbGx3drlBRjXhKcQf4T5mNpc4eTn57E5VO/ZUfe9Q
+ eNJmWHr0QdEpQ==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 14 Nov 2023 14:03:31 +0300 (MSK)
+ Tue, 14 Nov 2023 14:03:32 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Tue, 14 Nov 2023 14:03:31 +0300
+ 15.2.1118.37; Tue, 14 Nov 2023 14:03:32 +0300
 From: Igor Prusov <ivprusov@salutedevices.com>
 To: <u-boot@lists.denx.de>
 CC: <prusovigor@gmail.com>, Simon Glass <sjg@chromium.org>,
- <kernel@sberdevices.ru>, Igor Prusov <ivprusov@salutedevices.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ <kernel@sberdevices.ru>, Igor Prusov <ivprusov@salutedevices.com>, Alexey
+ Romanov <avromanov@salutedevices.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Marek Vasut <marex@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
  <u-boot-amlogic@groups.io>
-Subject: [PATCH 11/13] spi: meson_spifc_a1: Switch to io{read,write}32_rep()
-Date: Tue, 14 Nov 2023 14:02:55 +0300
-Message-ID: <20231114110257.2488-12-ivprusov@salutedevices.com>
+Subject: [PATCH 12/13] treewide: Include linux/io.h instead of asm-generic/io.h
+Date: Tue, 14 Nov 2023 14:02:56 +0300
+Message-ID: <20231114110257.2488-13-ivprusov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231114110257.2488-1-ivprusov@salutedevices.com>
 References: <20231114110257.2488-1-ivprusov@salutedevices.com>
@@ -78,11 +81,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 543 543
  1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; 100.64.160.123:7.1.2;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
+ 127.0.0.199:7.1.2; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -106,36 +108,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use io{read,write}32_rep() functions to sync code with Linux version.
+Directly including asm-generic/io.h may break build because it will
+cause redefenition of generic io macros if linux/io.h gets included
+later, hence replace it with direct include of linux/io.h
 
 Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
 ---
 
- drivers/spi/meson_spifc_a1.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/spi/cadence_qspi.c         | 2 +-
+ drivers/usb/cdns3/cdns3-ti.c       | 1 -
+ drivers/usb/dwc3/dwc3-meson-g12a.c | 2 +-
+ drivers/usb/dwc3/dwc3-meson-gxl.c  | 2 +-
+ 4 files changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/spi/meson_spifc_a1.c b/drivers/spi/meson_spifc_a1.c
-index 099c4c037d..a33b1a3879 100644
---- a/drivers/spi/meson_spifc_a1.c
-+++ b/drivers/spi/meson_spifc_a1.c
-@@ -129,7 +129,7 @@ static void amlogic_spifc_a1_drain_buffer(struct amlogic_spifc_a1 *spifc,
+diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
+index cc3a54f295..23240c1302 100644
+--- a/drivers/spi/cadence_qspi.c
++++ b/drivers/spi/cadence_qspi.c
+@@ -7,7 +7,6 @@
+ #include <common.h>
+ #include <clk.h>
+ #include <log.h>
+-#include <asm-generic/io.h>
+ #include <dm.h>
+ #include <fdtdec.h>
+ #include <malloc.h>
+@@ -17,6 +16,7 @@
+ #include <dm/device_compat.h>
+ #include <linux/err.h>
+ #include <linux/errno.h>
++#include <linux/io.h>
+ #include <linux/sizes.h>
+ #include <zynqmp_firmware.h>
+ #include "cadence_qspi.h"
+diff --git a/drivers/usb/cdns3/cdns3-ti.c b/drivers/usb/cdns3/cdns3-ti.c
+index 92a7941ed1..2e44aadea4 100644
+--- a/drivers/usb/cdns3/cdns3-ti.c
++++ b/drivers/usb/cdns3/cdns3-ti.c
+@@ -6,7 +6,6 @@
+  */
  
- 	writel(SPIFC_A1_DBUF_AUTO_UPDATE_ADDR,
- 	       spifc->base + SPIFC_A1_DBUF_CTRL_REG);
--	readsl(spifc->base + SPIFC_A1_DBUF_DATA_REG, buf, count);
-+	ioread32_rep(spifc->base + SPIFC_A1_DBUF_DATA_REG, buf, count);
+ #include <common.h>
+-#include <asm-generic/io.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
+index e0356e653f..196035215a 100644
+--- a/drivers/usb/dwc3/dwc3-meson-g12a.c
++++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
+@@ -8,13 +8,13 @@
  
- 	if (pad) {
- 		data = readl(spifc->base + SPIFC_A1_DBUF_DATA_REG);
-@@ -146,7 +146,7 @@ static void amlogic_spifc_a1_fill_buffer(struct amlogic_spifc_a1 *spifc,
+ #include <common.h>
+ #include <log.h>
+-#include <asm-generic/io.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <dwc3-uboot.h>
+ #include <generic-phy.h>
+ #include <linux/delay.h>
++#include <linux/io.h>
+ #include <linux/printk.h>
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+diff --git a/drivers/usb/dwc3/dwc3-meson-gxl.c b/drivers/usb/dwc3/dwc3-meson-gxl.c
+index d56f2747b6..cbe8aaa005 100644
+--- a/drivers/usb/dwc3/dwc3-meson-gxl.c
++++ b/drivers/usb/dwc3/dwc3-meson-gxl.c
+@@ -8,12 +8,12 @@
  
- 	writel(SPIFC_A1_DBUF_DIR | SPIFC_A1_DBUF_AUTO_UPDATE_ADDR,
- 	       spifc->base + SPIFC_A1_DBUF_CTRL_REG);
--	writesl(spifc->base + SPIFC_A1_DBUF_DATA_REG, buf, count);
-+	iowrite32_rep(spifc->base + SPIFC_A1_DBUF_DATA_REG, buf, count);
- 
- 	if (pad) {
- 		memcpy(&data, buf + len - pad, pad);
+ #define DEBUG
+ #include <common.h>
+-#include <asm-generic/io.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <dwc3-uboot.h>
+ #include <generic-phy.h>
++#include <linux/io.h>
+ #include <linux/usb/ch9.h>
+ #include <linux/usb/gadget.h>
+ #include <malloc.h>
 -- 
 2.34.1
 
