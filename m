@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4ED0C54E7C
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 20:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4D6C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 20:50:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 055318719F;
-	Tue, 14 Nov 2023 21:34:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E573186FC6;
+	Tue, 14 Nov 2023 21:50:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="lxGMucmv";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="LbAj3ifT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A21E08718E; Tue, 14 Nov 2023 21:34:29 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 57D3586EFA; Tue, 14 Nov 2023 21:50:11 +0100 (CET)
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60A7D8719F
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 21:34:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B14D686FBC
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 21:50:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4083f61312eso50148165e9.3
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 12:34:24 -0800 (PST)
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-4ac45927974so2688207e0c.3
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 12:50:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1699994064; x=1700598864;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1699995001; x=1700599801;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YRiLHlIuXNO8mkqDbjccT03gMX7eZqrZUL7Ew+/MiCc=;
- b=lxGMucmvGUenuuKVmnOIS1y5gr5c/VYWLM5mrYnSp9VWnFFqdUbsAJ9uHoX6KGjppJ
- l/gCuahGYZM63xuvZbwCiP7s8Hj4gdTJ9jxhqqUPvgPSyXQ2XrjZ/5qesLEl/9seV4qm
- CCO9ndWaibm774/WBruZK/ELKEVr/ch4Thxl9H7GQlE9P4yg38FIL2DM0yv2ahLk3C35
- HvApk0QQG1Awh83Y0sbiojNkAuzuA3qhS5xIjp6WFpLj3hm5h4JwJCV98wmHg1GFF0r3
- HGbwl56P+PnFNF4PkL7R5VqZjdKGrIKa6JJgZ74bHzzT00+LWlHvTzWo//XmdiuyQXm/
- phjg==
+ bh=wvIHkkz+M+dEIkQ6sYiiQMZE1OxYCD1I4zs4yNpVJRI=;
+ b=LbAj3ifT6UbbqHXJ/cRqaIBBI4c34cIEA7O+b7VkZYeEmx2zAf4HqP0/Cv6Lp5uu4C
+ zohVbO6aflx/GUfAMvBrApr/DzvZNxSBSynm1JA19kCKn9d0pwKdmjJEtE1jr7E/BoYn
+ YRk0VgRP3i3fIJ9tOhnAASf7+8AKjm6DvHFloT6+Tsfckf7Bjnk8D2t79BINTvE0meCw
+ qTtuowj5ijVBwBi/+E6OxMxWL1BVPDxkKH1YIhKJ236OLjO3NjOE2/BP1/PWTjfpVLdt
+ VVUv5BYSKZodyBfj77HyN/g5QLZdW/FRL78ydt/QG3OOb8C5SCwb/d1wRRvNxO6ZO0Ns
+ SfMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699994064; x=1700598864;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1699995001; x=1700599801;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YRiLHlIuXNO8mkqDbjccT03gMX7eZqrZUL7Ew+/MiCc=;
- b=qf0sowJb6GcesQr7ocQ8hDFd7jSeBFXqi/zbvyj4pW5uviuewyzA9bywrg5G+aBh06
- vnQ+nYnUWKLviepvJ3xk1gsGk3VWeRKOuK331HY+y2iMW6HavLJ+dmf0oRVKUSzQOTsr
- +StrL7TZcKwU/Ojm+Jup+6nntaKA1S8HULXUM0jgLXy3DMeZNU+fceXLK08KGWIn5foP
- hbTZ/aN4RYtVOC0EakfRvIaIq1+3T+F4mJxvN4VywkrEfwbG9MJ1P+jP4AmgCiJx7GIz
- EzEPFGNexDDJnjAHyyRjiDN/A1QImtvxfimretx5q7dZ5hqsAO9q22zZlVGeFn5H7ZD8
- hKfg==
-X-Gm-Message-State: AOJu0Yy+789G/skfTTSIEQi20dHOEimiFwiMv1qvOn9QcaabnasZftVm
- cDzMtUIV+o5j+eCbOZZ6UY87dw==
-X-Google-Smtp-Source: AGHT+IHw5VIo5EvHw5Mv5jWKefA+Ji3FLC9rkmfI8Q3ea2yaMH3gfWAGq36FQJnyvthbx/3R4N7bZg==
-X-Received: by 2002:a05:6000:bc2:b0:31f:a0ab:26b5 with SMTP id
- dm2-20020a0560000bc200b0031fa0ab26b5mr7495833wrb.8.1699994063549; 
- Tue, 14 Nov 2023 12:34:23 -0800 (PST)
-Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
- [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- q12-20020a05600000cc00b0032db4e660d9sm8659691wrx.56.2023.11.14.12.34.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 12:34:23 -0800 (PST)
-From: Shantur Rathore <i@shantur.com>
-To: jonas@kwiboo.se
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, Shantur Rathore <i@shantur.com>
-Subject: [PATCH v2] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip SoCs
-Date: Tue, 14 Nov 2023 20:33:09 +0000
-Message-Id: <20231114203309.852289-1-i@shantur.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <CABEcMwWNxzvkkC6-OwUx7AedhctfT00fM-ubXVf9ec1RoMmgOQ@mail.gmail.com>
-References: <CABEcMwWNxzvkkC6-OwUx7AedhctfT00fM-ubXVf9ec1RoMmgOQ@mail.gmail.com>
+ bh=wvIHkkz+M+dEIkQ6sYiiQMZE1OxYCD1I4zs4yNpVJRI=;
+ b=cimQ85nN4ORF1IHb27bP2iaeEONr06izeaf16SYNPQgt3rftWH5kV+r5/gMR5bctBI
+ warRpyf550sOqchETV5fsy+UWIrzASAp2ihzF/j+larv2KHW289fRlHpDu5u3TT1uczo
+ z0mtYLyYN88QTcM2UMZtif+Lw9Tk56+iHIYXWfaEweOBIKlV3UTjM/Qv5fhsgwvSrGeX
+ DSwEc9S/2gR7+fxKo6eJhPy8nIC3Zgmn2Ev/EVsn6epUeiqBrpKwnlFS/10tr0lEwvp3
+ YkIuJQhn3Ar+HhDMKyDOKN3nXAKa0wtT6g5C1CIcVnE7s7jlPOH1qRA+zD7keVrMj4yP
+ aWzQ==
+X-Gm-Message-State: AOJu0YwVk12vFby/W7MB2Sot4LRkaQqBN1HF9H6yh3+ZJ1TzKY3CzCl5
+ y4uwH5XeQuTo7N5/SPEL6HZJnzJ06TqqRWd00csVObPNl5CGkXMu6uQ=
+X-Google-Smtp-Source: AGHT+IE/Wr22pV109lWI7RdOdEYoJRNu8QBbW5/zDF6EuG/6hpwHObK1QXfqGz5ZSn5IqE7FYUiresjBveLbAtPPAek=
+X-Received: by 2002:a1f:b204:0:b0:495:c464:a2fe with SMTP id
+ b4-20020a1fb204000000b00495c464a2femr9396775vkf.2.1699995001110; Tue, 14 Nov
+ 2023 12:50:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231110141311.512334-1-i@shantur.com>
+ <CABEcMwUxM9hPh1c=Q8THxkJUqzw7fT-bWsdeuJoyZ8vN6BaCkQ@mail.gmail.com>
+In-Reply-To: <CABEcMwUxM9hPh1c=Q8THxkJUqzw7fT-bWsdeuJoyZ8vN6BaCkQ@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Tue, 14 Nov 2023 20:49:50 +0000
+Message-ID: <CABEcMwWjHxNTE5wVkgaQXRBwt2WP-uE3qgRpNrqiXFCjHD2iZA@mail.gmail.com>
+Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
+To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, trini@konsulko.com, 
+ patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com
+Cc: marex@denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,23 +88,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Shantur Rathore <i@shantur.com>
----
- arch/arm/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
++Patrice +Patrick from get_maintainer script
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index d812685c98..fca6ef6d7e 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
- 	imply CMD_DM
- 	imply DEBUG_UART_BOARD_INIT
- 	imply BOOTSTD_DEFAULTS
-+	imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
- 	imply FAT_WRITE
- 	imply SARADC_ROCKCHIP
- 	imply SPL_SYSRESET
--- 
-2.40.1
-
+On Mon, Nov 13, 2023 at 1:28=E2=80=AFPM Shantur Rathore <i@shantur.com> wro=
+te:
+>
+> +Simon +Trini
+>
+> On Fri, Nov 10, 2023 at 2:13=E2=80=AFPM Shantur Rathore <i@shantur.com> w=
+rote:
+> >
+> > Currently when a hub is turned on, all the ports are powered on.
+> > This works well for hubs which have individual power control.
+> >
+> > For the hubs without individual power control this has no effect.
+> > Mostly in these scenarios the hub port is powered before the USB
+> > controller is enabled, this can lead to some devices in unexpected
+> > state.
+> >
+> > With this patch, we explicitly reset the port while powering up hub
+> > This resets the port for hubs without port power control and has
+> > no effect on hubs with port power control as the port is still off.
+> >
+> > Before this patch AMicro AM8180 based NVME to USB adapter won't be
+> > detected as a USB3.0 Mass Storage device but with this it works as
+> > expected.
+> >
+> > Tested working after this patch:
+> > 1. AMicro AM8180 based NVME to USB Adapter
+> > 2. Kingston DataTraveler 3.0
+> > 3. GenesysLogic USB3.0 Hub
+> >
+> > The drives were tested while connected directly and via the hub.
+> > ---
+> >  common/usb_hub.c | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/common/usb_hub.c b/common/usb_hub.c
+> > index 85c0822d8b..06fe436add 100644
+> > --- a/common/usb_hub.c
+> > +++ b/common/usb_hub.c
+> > @@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device=
+ *hub)
+> >
+> >         debug("enabling power on all ports\n");
+> >         for (i =3D 0; i < dev->maxchild; i++) {
+> > +               usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
+> > +               debug("Reset : port %d returns %lX\n", i + 1, dev->stat=
+us);
+> >                 usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
+> > -               debug("port %d returns %lX\n", i + 1, dev->status);
+> > +               debug("PowerOn : port %d returns %lX\n", i + 1, dev->st=
+atus);
+> >         }
+> >
+> >  #ifdef CONFIG_SANDBOX
+> > --
+> > 2.40.1
+> >
