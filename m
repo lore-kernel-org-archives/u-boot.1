@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E355C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 14:54:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD87C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 14:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34539870BC;
-	Tue, 14 Nov 2023 15:54:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E027870BC;
+	Tue, 14 Nov 2023 15:56:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fN3wP3q4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jAZBoayE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D525C868AE; Tue, 14 Nov 2023 15:53:58 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AFD76868AE; Tue, 14 Nov 2023 15:56:48 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E35AE871FC
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 15:53:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5609870D2
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 15:56:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AEErfN0107642;
- Tue, 14 Nov 2023 08:53:41 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699973621;
- bh=sseGPd8O2fTnYklywowD4KqhJNGvfKPT4tznwylktTo=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=fN3wP3q4ZQaT4tq+TJatRiDrE90eNB/SqN0xfO3WNsnxpiImI9HOP3eNlqv/oCu9g
- HlpvnALGQeSxSin1mJrNgmzD8D3THLZhRlL6k8L0BKxge+NUlB2wk6qMkItl2gzgHy
- xhNOeWmSUoEPiWErTfDMl5gjRqOGpvSTl4GN/EwY=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AEErfFw086839
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 14 Nov 2023 08:53:41 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
- Nov 2023 08:53:41 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 14 Nov 2023 08:53:40 -0600
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AEEreZj097131;
- Tue, 14 Nov 2023 08:53:40 -0600
-Date: Tue, 14 Nov 2023 08:53:40 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Dhruva Gole <d-gole@ti.com>
-CC: Marcel Ziswiler <marcel.ziswiler@toradex.com>, Tom Rini
- <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>, Roger Quadros
- <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>, <u-boot@lists.denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Sjoerd Simons
- <sjoerd@collabora.com>, Robert Nelson <robertcnelson@gmail.com>, Francesco
- Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [PATCH 3/4] arm: dts: k3-am625-beagleplay-u-boot: drop duplicate
- bootph-nodes
-Message-ID: <20231114145340.6f74stumstihmpnu@snowiness>
-References: <20231113145919.1928812-1-nm@ti.com>
- <20231113145919.1928812-4-nm@ti.com>
- <20231114033326.l5zmqdyzogm5mozw@dhruva>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40839652b97so44919425e9.3
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 06:56:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1699973806; x=1700578606; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zUiSphwKkftrhJ8dfGFL1rPc/SgpwTn53A3Uzr3MVX0=;
+ b=jAZBoayENG/w9wcy6qGp7G/M11/xuZisxOaJieqgczCRoOc6qK2TCOQORnW178Ndyr
+ 6tJzksjkNg7cGGOslYefd3w2VqSqWb8Azfrj+0SH6VNEjCvCa9zIgepsFi213G/R9iH2
+ e9xdd8B4igOYz9jwAH/058BK+Gxk2bxOKUZC1f3AwbVlKJj1ojgssZL1AWN9EPVloMYX
+ GBPM5lg8GkcEfLZCkNiQudCEFEA2w/Fo4PwDDQACczdz4IlLtO0fih9RrL7H8YUa78NG
+ BJt5tlSM3qyLFB0tKnfxYyE+poqR/k/JZcE0RRIC1ZD2gqx4DML4L91PgK2jx2AxpKv8
+ p50A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699973806; x=1700578606;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zUiSphwKkftrhJ8dfGFL1rPc/SgpwTn53A3Uzr3MVX0=;
+ b=BIMHPD0y2HZmsDGg2RlvZvUqEtzz03sTF3B9wPb4xGkInas2FYntVUZnQknwX5/FmW
+ z1pkkYUZcnD0SMfXw2xIdMJt298PMdRovscEVMhZ8HIf3SYFT6Cn79+S6sPB9RvEDkmo
+ h9QK3ym1Mnakwa+YEA0ngintd/hqzy0MZ6SgDLeoVUIVO8KuuMe3tteHXWvXvrOgEOtG
+ gaC8m7PyjaVEqd9KHoLzVbJ3mTczyQoLWg85d5+ApHizrV2Pj4Sc5r3gqV612g49jIPb
+ 0pPSea4Ppx2YK4ZXQpyxv62ZUZ2fBxUHxVI54NQXAwymrJFzCeiZCbosCTMtJP8KL8AV
+ NAXQ==
+X-Gm-Message-State: AOJu0Ywl8Tak28lnt+gFAjZkr+yrEp7/FZV286Qz2N3XB/O82IzsLwjl
+ an71vfJqHBYiIlVx6x5qT6/oqQ==
+X-Google-Smtp-Source: AGHT+IFlHYJM+kM/JZL3f7mfJF4oQHATKyYb13B4HrxlmcysaoH6eLKD43EQgLE9MRHFfhfwGG+8ig==
+X-Received: by 2002:a05:600c:a0a:b0:404:72fe:ed5c with SMTP id
+ z10-20020a05600c0a0a00b0040472feed5cmr8389519wmp.29.1699973806260; 
+ Tue, 14 Nov 2023 06:56:46 -0800 (PST)
+Received: from [192.168.1.7] ([79.79.179.141])
+ by smtp.gmail.com with ESMTPSA id
+ n15-20020a1c720f000000b0040a44179a88sm14375754wmc.42.2023.11.14.06.56.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Nov 2023 06:56:45 -0800 (PST)
+Message-ID: <16d76254-8883-41c0-85cf-81bc9977ac59@linaro.org>
+Date: Tue, 14 Nov 2023 14:56:45 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231114033326.l5zmqdyzogm5mozw@dhruva>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] serial: msm-geni: don't rely on parent misc device
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Cc: u-boot@lists.denx.de
+References: <20231114-b4-geni-uart-v1-0-48c8ba9dda36@linaro.org>
+ <20231114-b4-geni-uart-v1-1-48c8ba9dda36@linaro.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20231114-b4-geni-uart-v1-1-48c8ba9dda36@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,19 +96,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09:03-20231114, Dhruva Gole wrote:
+
+
+> diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+> index 78fd9389c036..3e2e15b6cefe 100644
+> --- a/drivers/serial/serial_msm_geni.c
+> +++ b/drivers/serial/serial_msm_geni.c
 [...]
+> @@ -499,16 +499,22 @@ static void geni_set_oversampling(struct udevice *dev)
+>  	 * It could happen that GENI SE IP is missing in the board's device
+>  	 * tree or GENI UART node is a direct child of SoC device tree node.
+>  	 */
+> -	if (device_get_uclass_id(parent_dev) != UCLASS_MISC)
+> -		return;
+> +	if (!ofnode_device_is_compatible(parent_node, "qcom,geni-se-qup")) {
+> +		pr_err("%s: UART node must be a child of geniqup node\n",
+> +		       __func__);
+> +		return -ENODEV;
+> +	}
+>  
+> -	ret = misc_read(parent_dev, QUP_HW_VER_REG,
+> -			&geni_se_version, sizeof(geni_se_version));
+> -	if (ret != sizeof(geni_se_version))
+> -		return;
+> +	/* Read the HW_VER register relative to the parents address space */
+> +	addr = ofnode_get_addr(parent_node);
+> +	geni_se_version = readl(addr + QUP_HW_VER_REG);
+> +
+> +	printf("geni_se_version: %x\n", geni_se_version);
 
-> >  #ifdef CONFIG_TARGET_AM625_A53_EVM
-> >  
-> >  #define SPL_AM625_BEAGLEPLAY_DTB "spl/dts/k3-am625-beagleplay.dtb"
+Drop this debugging printf
+>  
+>  	if (geni_se_version >= QUP_SE_VERSION_2_5)
+>  		priv->oversampling /= 2;
+> +
+> +	return 0;
+>  }
+>  
+>  static inline void geni_serial_init(struct udevice *dev)
+> @@ -553,8 +559,11 @@ static inline void geni_serial_init(struct udevice *dev)
+>  static int msm_serial_probe(struct udevice *dev)
+>  {
+>  	struct msm_serial_data *priv = dev_get_priv(dev);
+> +	int ret;
+>  
+> -	geni_set_oversampling(dev);
+> +	ret = geni_set_oversampling(dev);
+> +	if (ret < 0)
+> +		return ret;
+>  
+>  	/* No need to reinitialize the UART after relocation */
+>  	if (gd->flags & GD_FLG_RELOC)
 > 
-> You didn't talk about this in the commit message?
-
-There is nothing changing in this patch here.
-
 
 -- 
-Regards,
-Nishanth Menonh
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+// Caleb (they/them)
