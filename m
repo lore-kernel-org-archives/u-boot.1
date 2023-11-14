@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE30AC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 02:15:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE0AC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 02:15:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 264C9871AB;
-	Tue, 14 Nov 2023 03:14:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEED8871B1;
+	Tue, 14 Nov 2023 03:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wx/B11Xo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fvcf02QB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA6B5870F6; Tue, 14 Nov 2023 03:14:51 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 4570E87183; Tue, 14 Nov 2023 03:14:54 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B13E87183
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 03:14:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB6AA86484
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 03:14:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1cc4d306fe9so8109475ad.0
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 18:14:49 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1cc4d306fe9so8109505ad.0
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 18:14:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699928088; x=1700532888; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699928090; x=1700532890; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qzrl0Keos0SLcEaLtLMYI7oJd1R9TXvnv53DOnHM4r0=;
- b=Wx/B11Xo7R+FbrJwF5anVBIkpMSsuFR58d/7ymoXd+X7O4d1mNiqsssJUb/m6EkBQn
- HU2rTR8iPCq7tfaaa19RbJd4We65oZTC56xfZQbmU6qeowqcSICX67VKGPZNLQe5ZuQt
- XMXA+VHMEAmrzG7CqHOav3L7WJKahHJkJ49h4HLtv8T8WUtIkZJc73u1LO84YcF3Pt4B
- mQH89imrC/vlRP797WOM5LsXvgbCjpckeK+9GButv0/TXVFO/mNmBsooQ6b9jgv2tZ6p
- ex0RLJ8kIUj0yVo3ZANYl9Kxc2wCnvLNc0S8Zd5TJ0opwk1mJxFwCNQq3ZNuqwvJdzZj
- rIhw==
+ bh=oONLZU+k1c7pjdGca1S1UQvtxT+y3sBxYGld3kTp6Js=;
+ b=Fvcf02QBXfKcO21WH17ESk3HKBpcEDIq3BgL5rmmlxSu6kNEpfj9+0Wc0DZl4Y/KLz
+ pOEf4G0H2Vl5OgBk5iL+cRbhAQqz1kckWi/BwD6f/HFf4rDSEeQ+VeK0i6LW2RGzFf7c
+ S48b1GYyiwWE9TZwf24npTFUH0YBdDUVUH5mgsfRp3p2dRXkKokvarrBfQs2O0I4aT0S
+ 80SGM4TH5MkAcCzYubVF2DFPgJGAtY4BSAvjh7lV9UEhJBRcLQPz0DpZ9Ht17c29Rv89
+ uZQYUMZXtoWylTI2K/jdqfJhI3aYZjw9fBhw8vWA+OjPNerkaBBkI+ZN0CBuQwcq9G/Y
+ z/Jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699928088; x=1700532888;
+ d=1e100.net; s=20230601; t=1699928090; x=1700532890;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qzrl0Keos0SLcEaLtLMYI7oJd1R9TXvnv53DOnHM4r0=;
- b=vssCtr105P6hpBDOMemiv4b9kxlTRdPPE0Mk1t8DyZJAIxvR3/bD0uGKnbcmFieZqq
- NRBxfyQa4G4bhPqTuTHkiQVqK9mwsS5jZnfyzeO52gBDLPavApJL7UiWENWQPNyDY5Vp
- HdIuGkx5EqEP9ogIvsIYpnn1AxcHXWTYBYSt6j+R36skvPctIiyZz50SAFucCfU9kj8M
- 3oPHKryvHGKpwSfq891PBvQaETWOE3DRJ2obQuLQ5IpxG3emgUl2Mi3FJBpQwe/Dmum3
- XW/uX8oaoJirTfDY8J53jBTBmE5EqUTRZ9AcEjQ8l5smLIqB8uxjNXq8yO0zkrfhzuiD
- JofQ==
-X-Gm-Message-State: AOJu0YwX3vIPRmLkNU79Kx4ayNcKhitpODBdJumSH/WCXfQey5ISczwK
- u9QnSVqiN0Dfr5bzL371WhNTEqcHBJRmuvm04lOK1w==
-X-Google-Smtp-Source: AGHT+IEkex8scI9hPtHtzAY7023ZqXTbmadG+HFgi2tKsfyARrAwiJjHcDjUQ5Qg5iK09qY/jN+GKw==
-X-Received: by 2002:a17:902:ce92:b0:1cc:2ba2:55f4 with SMTP id
- f18-20020a170902ce9200b001cc2ba255f4mr1204312plg.0.1699928087682; 
- Mon, 13 Nov 2023 18:14:47 -0800 (PST)
+ bh=oONLZU+k1c7pjdGca1S1UQvtxT+y3sBxYGld3kTp6Js=;
+ b=mNJXecycDQQ8TAA97rQTupFgtERK4jVpfdRb8NU+xm/u0C5qCU0fEhUZiRa+NgkZ6/
+ c7/gjXszdE+ahjMHIgCnG1tjIKb94zgclOxvX54ZUiQLQJeUohJO16BIl9urA83QEGtG
+ gLcHogmwQ7+SV0PEtuBHUT9c8dlf76cx2PbgsrHIdnJgl3ACdJxwSVhon0gVNZawA2Pv
+ m9DYDjJDBvfICflSv36VGTNzPpKhJUA4BfWCqA5w58Fp55FaBJvnpI8gk7vaGJTBtmVj
+ icp18IKY+DGjK1bvsTehP2AL+1MKKH3LIJcG1B7Iv5YjKJRAUxKstL8b1iLg2xNB+Dib
+ IQdw==
+X-Gm-Message-State: AOJu0YwotEb6iJzssPYoMZWQkUwoQlwOtwmEPPcxdP+2YBz+RMly2bws
+ rQcr+jsynVLf6XDjSaTr4a2JAg==
+X-Google-Smtp-Source: AGHT+IF3DAzmS+b7Sugf16DlprGr7FoAwrXsmapYo0Ty3XKsOmlY3on3iIO+8DCdULye4BpvDRmtnw==
+X-Received: by 2002:a17:902:d2ca:b0:1bb:83ec:832 with SMTP id
+ n10-20020a170902d2ca00b001bb83ec0832mr1131611plc.2.1699928089849; 
+ Mon, 13 Nov 2023 18:14:49 -0800 (PST)
 Received: from octopus.. ([2400:4050:c3e1:100:66f2:cd5c:3d82:6e6f])
  by smtp.gmail.com with ESMTPSA id
- i4-20020a170902c94400b001c61afa7009sm4680475pla.114.2023.11.13.18.14.45
+ i4-20020a170902c94400b001c61afa7009sm4680475pla.114.2023.11.13.18.14.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 18:14:47 -0800 (PST)
+ Mon, 13 Nov 2023 18:14:49 -0800 (PST)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v3 2/5] firmware: scmi: support protocols on sandbox only if
- enabled
-Date: Tue, 14 Nov 2023 11:14:25 +0900
-Message-Id: <20231114021428.531887-3-takahiro.akashi@linaro.org>
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Etienne Carriere <etienne.carriere@foss.st.com>
+Subject: [PATCH v3 3/5] cmd: add scmi command for SCMI firmware
+Date: Tue, 14 Nov 2023 11:14:26 +0900
+Message-Id: <20231114021428.531887-4-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231114021428.531887-1-takahiro.akashi@linaro.org>
 References: <20231114021428.531887-1-takahiro.akashi@linaro.org>
@@ -94,215 +94,450 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This change will be useful when we manually test SCMI on sandbox
-by enabling/disabling a specific SCMI protocol.
+This command, "scmi", may provide a command line interface to various SCMI
+protocols. It supports at least initially SCMI base protocol and is
+intended mainly for debug purpose.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
-v9
-* use CONFIG_IS_ENABLED() rather than IS_ENABLED()
-* remove goto by introducing a not_supported() function
+v8 (actually v2 as SCMI cmd)
+* localize global variables to avoid pytest errors
+v3
+* describe that arguments are in hex at a help message
+* modify the code for dynamically allocated agent names
+v2
+* remove sub command category, 'scmi base', for simplicity
 ---
- drivers/firmware/scmi/sandbox-scmi_agent.c   | 30 ++++++--
- drivers/firmware/scmi/sandbox-scmi_devices.c | 78 ++++++++++++--------
- 2 files changed, 71 insertions(+), 37 deletions(-)
+ cmd/Kconfig  |   9 ++
+ cmd/Makefile |   1 +
+ cmd/scmi.c   | 384 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 394 insertions(+)
+ create mode 100644 cmd/scmi.c
 
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index d13180962662..cc9011c7312f 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -66,10 +66,10 @@ struct scmi_channel {
- };
- 
- static u8 protocols[] = {
--	SCMI_PROTOCOL_ID_POWER_DOMAIN,
--	SCMI_PROTOCOL_ID_CLOCK,
--	SCMI_PROTOCOL_ID_RESET_DOMAIN,
--	SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN,
-+	CONFIG_IS_ENABLED(SCMI_POWER_DOMAIN, (SCMI_PROTOCOL_ID_POWER_DOMAIN,))
-+	CONFIG_IS_ENABLED(CLK_SCMI, (SCMI_PROTOCOL_ID_CLOCK,))
-+	CONFIG_IS_ENABLED(RESET_SCMI, (SCMI_PROTOCOL_ID_RESET_DOMAIN,))
-+	CONFIG_IS_ENABLED(DM_REGULATOR_SCMI, (SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN,))
- };
- 
- #define NUM_PROTOCOLS ARRAY_SIZE(protocols)
-@@ -1124,6 +1124,13 @@ unsigned int sandbox_scmi_channel_id(struct udevice *dev)
- 	return chan->channel_id;
- }
- 
-+static int sandbox_proto_not_supported(struct scmi_msg *msg)
-+{
-+	*(u32 *)msg->out_msg = SCMI_NOT_SUPPORTED;
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index df6d71c103f9..ca9f742dcf78 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2559,6 +2559,15 @@ config CMD_CROS_EC
+ 	  a number of sub-commands for performing EC tasks such as
+ 	  updating its flash, accessing a small saved context area
+ 	  and talking to the I2C bus behind the EC (if there is one).
 +
-+	return 0;
++config CMD_SCMI
++	bool "Enable scmi command"
++	depends on SCMI_FIRMWARE
++	default n
++	help
++	  This command provides user interfaces to several SCMI (System
++	  Control and Management Interface) protocols available on Arm
++	  platforms to manage system resources.
+ endmenu
+ 
+ menu "Filesystem commands"
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 9a6790cc1708..320f0b5266eb 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -159,6 +159,7 @@ obj-$(CONFIG_CMD_SATA) += sata.o
+ obj-$(CONFIG_CMD_NVME) += nvme.o
+ obj-$(CONFIG_SANDBOX) += sb.o
+ obj-$(CONFIG_CMD_SF) += sf.o
++obj-$(CONFIG_CMD_SCMI) += scmi.o
+ obj-$(CONFIG_CMD_SCSI) += scsi.o disk.o
+ obj-$(CONFIG_CMD_SHA1SUM) += sha1sum.o
+ obj-$(CONFIG_CMD_SEAMA) += seama.o
+diff --git a/cmd/scmi.c b/cmd/scmi.c
+new file mode 100644
+index 000000000000..664062c4eff5
+--- /dev/null
++++ b/cmd/scmi.c
+@@ -0,0 +1,384 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ *  SCMI (System Control and Management Interface) utility command
++ *
++ *  Copyright (c) 2023 Linaro Limited
++ *		Author: AKASHI Takahiro
++ */
++
++#include <command.h>
++#include <exports.h>
++#include <scmi_agent.h>
++#include <scmi_agent-uclass.h>
++#include <stdlib.h>
++#include <asm/types.h>
++#include <dm/device.h>
++#include <dm/uclass.h> /* uclass_get_device */
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++
++struct {
++	enum scmi_std_protocol id;
++	const char *name;
++} protocol_name[] = {
++	{SCMI_PROTOCOL_ID_BASE, "Base"},
++	{SCMI_PROTOCOL_ID_POWER_DOMAIN, "Power domain management"},
++	{SCMI_PROTOCOL_ID_SYSTEM, "System power management"},
++	{SCMI_PROTOCOL_ID_PERF, "Performance domain management"},
++	{SCMI_PROTOCOL_ID_CLOCK, "Clock management"},
++	{SCMI_PROTOCOL_ID_SENSOR, "Sensor management"},
++	{SCMI_PROTOCOL_ID_RESET_DOMAIN, "Reset domain management"},
++	{SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN, "Voltage domain management"},
++};
++
++/**
++ * get_agent() - get SCMI agent device
++ *
++ * Return:	Pointer to SCMI agent device on success, NULL on failure
++ */
++static struct udevice *get_agent(void)
++{
++	struct udevice *agent;
++
++	if (uclass_get_device(UCLASS_SCMI_AGENT, 0, &agent)) {
++		printf("Cannot find any SCMI agent\n");
++		return NULL;
++	}
++
++	return agent;
 +}
 +
- static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 					 struct scmi_channel *channel,
- 					 struct scmi_msg *msg)
-@@ -1160,6 +1167,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 		}
- 		break;
- 	case SCMI_PROTOCOL_ID_POWER_DOMAIN:
-+		if (!CONFIG_IS_ENABLED(SCMI_POWER_DOMAIN))
-+			return sandbox_proto_not_supported(msg);
++/**
++ * get_base_proto() - get SCMI base protocol device
++ * @agent:	SCMI agent device
++ *
++ * Return:	Pointer to SCMI base protocol device on success,
++ *		NULL on failure
++ */
++static struct udevice *get_base_proto(struct udevice *agent)
++{
++	struct udevice *base_proto;
 +
- 		switch (msg->message_id) {
- 		case SCMI_PROTOCOL_VERSION:
- 			return sandbox_scmi_pwd_protocol_version(dev, msg);
-@@ -1180,6 +1190,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 		}
- 		break;
- 	case SCMI_PROTOCOL_ID_CLOCK:
-+		if (!CONFIG_IS_ENABLED(CLK_SCMI))
-+			return sandbox_proto_not_supported(msg);
-+
- 		switch (msg->message_id) {
- 		case SCMI_PROTOCOL_ATTRIBUTES:
- 			return sandbox_scmi_clock_protocol_attribs(dev, msg);
-@@ -1196,6 +1209,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 		}
- 		break;
- 	case SCMI_PROTOCOL_ID_RESET_DOMAIN:
-+		if (!CONFIG_IS_ENABLED(RESET_SCMI))
-+			return sandbox_proto_not_supported(msg);
-+
- 		switch (msg->message_id) {
- 		case SCMI_RESET_DOMAIN_ATTRIBUTES:
- 			return sandbox_scmi_rd_attribs(dev, msg);
-@@ -1206,6 +1222,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 		}
- 		break;
- 	case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
-+		if (!CONFIG_IS_ENABLED(DM_REGULATOR_SCMI))
-+			return sandbox_proto_not_supported(msg);
-+
- 		switch (msg->message_id) {
- 		case SCMI_VOLTAGE_DOMAIN_ATTRIBUTES:
- 			return sandbox_scmi_voltd_attribs(dev, msg);
-@@ -1224,8 +1243,7 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 	case SCMI_PROTOCOL_ID_SYSTEM:
- 	case SCMI_PROTOCOL_ID_PERF:
- 	case SCMI_PROTOCOL_ID_SENSOR:
--		*(u32 *)msg->out_msg = SCMI_NOT_SUPPORTED;
--		return 0;
-+		return sandbox_proto_not_supported(msg);
- 	default:
- 		break;
- 	}
-diff --git a/drivers/firmware/scmi/sandbox-scmi_devices.c b/drivers/firmware/scmi/sandbox-scmi_devices.c
-index facb5b06ffb5..603e2bb40aff 100644
---- a/drivers/firmware/scmi/sandbox-scmi_devices.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_devices.c
-@@ -62,12 +62,13 @@ static int sandbox_scmi_devices_remove(struct udevice *dev)
- 	if (!devices)
- 		return 0;
- 
--	for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
--		int ret2 = reset_free(devices->reset + n);
-+	if (CONFIG_IS_ENABLED(RESET_SCMI))
-+		for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
-+			int ret2 = reset_free(devices->reset + n);
- 
--		if (ret2 && !ret)
--			ret = ret2;
--	}
-+			if (ret2 && !ret)
-+				ret = ret2;
-+		}
- 
- 	return ret;
- }
-@@ -89,39 +90,53 @@ static int sandbox_scmi_devices_probe(struct udevice *dev)
- 		.regul_count = SCMI_TEST_DEVICES_VOLTD_COUNT,
- 	};
- 
--	ret = power_domain_get_by_index(dev, priv->devices.pwdom, 0);
--	if (ret) {
--		dev_err(dev, "%s: Failed on power domain\n", __func__);
--		return ret;
--	}
--
--	for (n = 0; n < SCMI_TEST_DEVICES_CLK_COUNT; n++) {
--		ret = clk_get_by_index(dev, n, priv->devices.clk + n);
-+	if (CONFIG_IS_ENABLED(SCMI_POWER_DOMAIN)) {
-+		ret = power_domain_get_by_index(dev, priv->devices.pwdom, 0);
- 		if (ret) {
--			dev_err(dev, "%s: Failed on clk %zu\n", __func__, n);
-+			dev_err(dev, "%s: Failed on power domain\n", __func__);
- 			return ret;
- 		}
- 	}
- 
--	for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
--		ret = reset_get_by_index(dev, n, priv->devices.reset + n);
--		if (ret) {
--			dev_err(dev, "%s: Failed on reset %zu\n", __func__, n);
--			goto err_reset;
-+	if (CONFIG_IS_ENABLED(CLK_SCMI)) {
-+		for (n = 0; n < SCMI_TEST_DEVICES_CLK_COUNT; n++) {
-+			ret = clk_get_by_index(dev, n, priv->devices.clk + n);
-+			if (ret) {
-+				dev_err(dev, "%s: Failed on clk %zu\n",
-+					__func__, n);
-+				return ret;
-+			}
- 		}
- 	}
- 
--	for (n = 0; n < SCMI_TEST_DEVICES_VOLTD_COUNT; n++) {
--		char name[32];
--
--		ret = snprintf(name, sizeof(name), "regul%zu-supply", n);
--		assert(ret >= 0 && ret < sizeof(name));
-+	if (CONFIG_IS_ENABLED(RESET_SCMI)) {
-+		for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
-+			ret = reset_get_by_index(dev, n,
-+						 priv->devices.reset + n);
-+			if (ret) {
-+				dev_err(dev, "%s: Failed on reset %zu\n",
-+					__func__, n);
-+				goto err_reset;
-+			}
-+		}
++	if (!agent) {
++		agent = get_agent();
++		if (!agent)
++			return NULL;
 +	}
- 
--		ret = device_get_supply_regulator(dev, name,
--						  priv->devices.regul + n);
--		if (ret) {
--			dev_err(dev, "%s: Failed on voltd %zu\n", __func__, n);
--			goto err_regul;
-+	if (CONFIG_IS_ENABLED(DM_REGULATOR_SCMI)) {
-+		for (n = 0; n < SCMI_TEST_DEVICES_VOLTD_COUNT; n++) {
-+			char name[32];
 +
-+			ret = snprintf(name, sizeof(name), "regul%zu-supply",
-+				       n);
-+			assert(ret >= 0 && ret < sizeof(name));
++	base_proto = scmi_get_protocol(agent, SCMI_PROTOCOL_ID_BASE);
++	if (!base_proto) {
++		printf("SCMI base protocol not found\n");
++		return NULL;
++	}
 +
-+			ret = device_get_supply_regulator(dev, name,
-+							  priv->devices.regul
-+								+ n);
-+			if (ret) {
-+				dev_err(dev, "%s: Failed on voltd %zu\n",
-+					__func__, n);
-+				goto err_regul;
-+			}
- 		}
- 	}
- 
-@@ -130,8 +145,9 @@ static int sandbox_scmi_devices_probe(struct udevice *dev)
- err_regul:
- 	n = SCMI_TEST_DEVICES_RD_COUNT;
- err_reset:
--	for (; n > 0; n--)
--		reset_free(priv->devices.reset + n - 1);
-+	if (CONFIG_IS_ENABLED(RESET_SCMI))
-+		for (; n > 0; n--)
-+			reset_free(priv->devices.reset + n - 1);
- 
- 	return ret;
- }
++	return base_proto;
++}
++
++/**
++ * get_proto_name() - get the name of SCMI protocol
++ *
++ * @id:		SCMI Protocol ID
++ *
++ * Get the printable name of the protocol, @id
++ *
++ * Return:	Name string on success, NULL on failure
++ */
++static const char *get_proto_name(enum scmi_std_protocol id)
++{
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(protocol_name); i++)
++		if (id == protocol_name[i].id)
++			return protocol_name[i].name;
++
++	return NULL;
++}
++
++/**
++ * do_scmi_info() - get the information of SCMI services
++ *
++ * @cmdtp:	Command table
++ * @flag:	Command flag
++ * @argc:	Number of arguments
++ * @argv:	Argument array
++ *
++ * Get the information of SCMI services using various interfaces
++ * provided by the Base protocol.
++ *
++ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
++ */
++static int do_scmi_info(struct cmd_tbl *cmdtp, int flag, int argc,
++			char * const argv[])
++{
++	struct udevice *agent, *base_proto;
++	u32 agent_id, num_protocols;
++	u8 *agent_name, *protocols;
++	int i, ret;
++
++	if (argc != 1)
++		return CMD_RET_USAGE;
++
++	agent = get_agent();
++	if (!agent)
++		return CMD_RET_FAILURE;
++	base_proto = get_base_proto(agent);
++	if (!base_proto)
++		return CMD_RET_FAILURE;
++
++	printf("SCMI device: %s\n", agent->name);
++	printf("  protocol version: 0x%x\n", scmi_version(agent));
++	printf("  # of agents: %d\n", scmi_num_agents(agent));
++	for (i = 0; i < scmi_num_agents(agent); i++) {
++		ret = scmi_base_discover_agent(base_proto, i, &agent_id,
++					       &agent_name);
++		if (ret) {
++			if (ret != -EOPNOTSUPP)
++				printf("base_discover_agent() failed for id: %d (%d)\n",
++				       i, ret);
++			break;
++		}
++		printf("    %c%2d: %s\n", i == scmi_agent_id(agent) ? '>' : ' ',
++		       i, agent_name);
++		free(agent_name);
++	}
++	printf("  # of protocols: %d\n", scmi_num_protocols(agent));
++	num_protocols = scmi_num_protocols(agent);
++	protocols = scmi_protocols(agent);
++	if (protocols)
++		for (i = 0; i < num_protocols; i++)
++			printf("      %s\n", get_proto_name(protocols[i]));
++	printf("  vendor: %s\n", scmi_vendor(agent));
++	printf("  sub vendor: %s\n", scmi_sub_vendor(agent));
++	printf("  impl version: 0x%x\n", scmi_impl_version(agent));
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * do_scmi_set_dev() - set access permission to device
++ *
++ * @cmdtp:	Command table
++ * @flag:	Command flag
++ * @argc:	Number of arguments
++ * @argv:	Argument array
++ *
++ * Set access permission to device with SCMI_BASE_SET_DEVICE_PERMISSIONS
++ *
++ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
++ */
++static int do_scmi_set_dev(struct cmd_tbl *cmdtp, int flag, int argc,
++			   char * const argv[])
++{
++	u32 agent_id, device_id, flags, attributes;
++	char *end;
++	struct udevice *base_proto;
++	int ret;
++
++	if (argc != 4)
++		return CMD_RET_USAGE;
++
++	agent_id = simple_strtoul(argv[1], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	device_id = simple_strtoul(argv[2], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	flags = simple_strtoul(argv[3], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	base_proto = get_base_proto(NULL);
++	if (!base_proto)
++		return CMD_RET_FAILURE;
++
++	ret = scmi_base_protocol_message_attrs(base_proto,
++					       SCMI_BASE_SET_DEVICE_PERMISSIONS,
++					       &attributes);
++	if (ret) {
++		printf("This operation is not supported\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ret = scmi_base_set_device_permissions(base_proto, agent_id,
++					       device_id, flags);
++	if (ret) {
++		printf("%s access to device:%u failed (%d)\n",
++		       flags ? "Allowing" : "Denying", device_id, ret);
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * do_scmi_set_proto() - set protocol permission to device
++ *
++ * @cmdtp:	Command table
++ * @flag:	Command flag
++ * @argc:	Number of arguments
++ * @argv:	Argument array
++ *
++ * Set protocol permission to device with SCMI_BASE_SET_PROTOCOL_PERMISSIONS
++ *
++ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
++ */
++static int do_scmi_set_proto(struct cmd_tbl *cmdtp, int flag, int argc,
++			     char * const argv[])
++{
++	u32 agent_id, device_id, protocol_id, flags, attributes;
++	char *end;
++	struct udevice *base_proto;
++	int ret;
++
++	if (argc != 5)
++		return CMD_RET_USAGE;
++
++	agent_id = simple_strtoul(argv[1], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	device_id = simple_strtoul(argv[2], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	protocol_id = simple_strtoul(argv[3], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	flags = simple_strtoul(argv[4], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	base_proto = get_base_proto(NULL);
++	if (!base_proto)
++		return CMD_RET_FAILURE;
++
++	ret = scmi_base_protocol_message_attrs(base_proto,
++					       SCMI_BASE_SET_PROTOCOL_PERMISSIONS,
++					       &attributes);
++	if (ret) {
++		printf("This operation is not supported\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ret = scmi_base_set_protocol_permissions(base_proto, agent_id,
++						 device_id, protocol_id,
++						 flags);
++	if (ret) {
++		printf("%s access to protocol:0x%x on device:%u failed (%d)\n",
++		       flags ? "Allowing" : "Denying", protocol_id, device_id,
++		       ret);
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * do_scmi_reset() - reset platform resource settings
++ *
++ * @cmdtp:	Command table
++ * @flag:	Command flag
++ * @argc:	Number of arguments
++ * @argv:	Argument array
++ *
++ * Reset platform resource settings with BASE_RESET_AGENT_CONFIGURATION
++ *
++ * Return:	CMD_RET_SUCCESS on success, CMD_RET_RET_FAILURE on failure
++ */
++static int do_scmi_reset(struct cmd_tbl *cmdtp, int flag, int argc,
++			 char * const argv[])
++{
++	u32 agent_id, flags, attributes;
++	char *end;
++	struct udevice *base_proto;
++	int ret;
++
++	if (argc != 3)
++		return CMD_RET_USAGE;
++
++	agent_id = simple_strtoul(argv[1], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	flags = simple_strtoul(argv[2], &end, 16);
++	if (*end != '\0')
++		return CMD_RET_USAGE;
++
++	base_proto = get_base_proto(NULL);
++	if (!base_proto)
++		return CMD_RET_FAILURE;
++
++	ret = scmi_base_protocol_message_attrs(base_proto,
++					       SCMI_BASE_RESET_AGENT_CONFIGURATION,
++					       &attributes);
++	if (ret) {
++		printf("Reset is not supported\n");
++		return CMD_RET_FAILURE;
++	}
++
++	ret = scmi_base_reset_agent_configuration(base_proto, agent_id, flags);
++	if (ret) {
++		printf("Reset failed (%d)\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
++static struct cmd_tbl cmd_scmi_sub[] = {
++	U_BOOT_CMD_MKENT(info, CONFIG_SYS_MAXARGS, 1,
++			 do_scmi_info, "", ""),
++	U_BOOT_CMD_MKENT(perm_dev, CONFIG_SYS_MAXARGS, 1,
++			 do_scmi_set_dev, "", ""),
++	U_BOOT_CMD_MKENT(perm_proto, CONFIG_SYS_MAXARGS, 1,
++			 do_scmi_set_proto, "", ""),
++	U_BOOT_CMD_MKENT(reset, CONFIG_SYS_MAXARGS, 1,
++			 do_scmi_reset, "", ""),
++};
++
++/**
++ * do_scmi() - SCMI utility
++ *
++ * @cmdtp:	Command table
++ * @flag:	Command flag
++ * @argc:	Number of arguments
++ * @argv:	Argument array
++ *
++ * Provide user interfaces to SCMI protocols.
++ *
++ * Return:	CMD_RET_SUCCESS on success,
++ *		CMD_RET_USAGE or CMD_RET_RET_FAILURE on failure
++ */
++static int do_scmi(struct cmd_tbl *cmdtp, int flag,
++		   int argc, char *const argv[])
++{
++	struct cmd_tbl *cp;
++
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	argc--; argv++;
++
++	cp = find_cmd_tbl(argv[0], cmd_scmi_sub, ARRAY_SIZE(cmd_scmi_sub));
++	if (!cp)
++		return CMD_RET_USAGE;
++
++	return cp->cmd(cmdtp, flag, argc, argv);
++}
++
++static char scmi_help_text[] =
++	" - SCMI utility\n"
++	" info - get the info of SCMI services\n"
++	" perm_dev <agent-id in hex> <device-id in hex> <flags in hex>\n"
++	"   - set access permission to device\n"
++	" perm_proto <agent-id in hex> <device-id in hex> <protocol-id in hex> <flags in hex>\n"
++	"   - set protocol permission to device\n"
++	" reset <agent-id in hex> <flags in hex>\n"
++	"   - reset platform resource settings\n"
++	"";
++
++U_BOOT_CMD(scmi, CONFIG_SYS_MAXARGS, 0, do_scmi, "SCMI utility",
++	   scmi_help_text);
 -- 
 2.34.1
 
