@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC54C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 08:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1430C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 09:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86A1587243;
-	Tue, 14 Nov 2023 09:52:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 361F6871A0;
+	Tue, 14 Nov 2023 10:00:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LSfak8kn";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cLjgb1lI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19F1C8726A; Tue, 14 Nov 2023 09:52:30 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 63428871A2; Tue, 14 Nov 2023 10:00:19 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8877687266
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 09:52:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 448898714C
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 10:00:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-517ab9a4a13so4261642a12.1
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 00:52:27 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1cc5916d578so47963845ad.2
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 01:00:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699951946; x=1700556746; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t+W0ciOA2vOXq/CX4WHhQamLFPXxNRJat+RDJES8J0A=;
- b=LSfak8knjCCnc3OXnvpxRdlGq0dgdtVNamFcx26jajAQhA4RHE9i4spnvvPTOqrDzm
- kNhAMc+u9c7s5uK1Vx1ynOtz/oZxNweoTqw1fxuUPO0DQ3cbPVu5HQqYXHNV56R0NIhn
- /ZQV8q0mro7eBLnA9lJV1q7G8LKFgX9i1fqkhoyzxkMgPMhPkpYrUr7BkaP0JRh3MhqY
- /h4QrmPm1cwLp/HCXlnWiU70ziJvmY/ktsMM2b43cMnYQ1uqU1Cx2RCFbuRelr/sySWz
- m1WFxMOvRAGAQwoQnUImPz6yFZRPyJUG8dANHO9kchXFastKDvY66OrSJZ45ywv09+Ph
- WN8A==
+ d=gmail.com; s=20230601; t=1699952415; x=1700557215; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HpA2qx8FNV2mKzY6eZQ5YTvDcpEdFI8GBvRMj+GUgXU=;
+ b=cLjgb1lIibzKNbiS57PoTEy0nR3raDuwXlMQmLdN9KmJa8+aOeh0na5wtv1GW5gxVJ
+ 5R5QNhau2He2ZJ5IQND3+wxuUwbS5e2rq4E6dLkX0fiI0+1/cHlRPHQR6jg9KYxqtZ5A
+ ZJNuwj+t7TpAM+SnJRK6eI1/ccjnJf+2UcyL2dzmHlv1uTnKfIIOx+xhpdgS6GwTjhaa
+ 2c9IOethRZBiNkMOtoDRj5znUbwTGIlhdRQcdAGTH7TAOFeND7oXcHbhanSah4hXWLLF
+ iaF2M+DSWL/3OWa3ifrKSYCLu7Y8wn9PCt058ZR7trk1McHfJaD/kq1ory+Ou+G7of5V
+ +1zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699951946; x=1700556746;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t+W0ciOA2vOXq/CX4WHhQamLFPXxNRJat+RDJES8J0A=;
- b=OUESkDQ9Qk/0pAHLzmKrXiNuptR0/vfxj6N3iZeC/zRSzauQh15aET8LmoT7TvdE78
- TPDnoXIjqR8CkWRyZvSQm0lugFOfqL0MrO/OGT+faIpTK01PLolupayMn2TEDiYYQCZg
- SKRYpjl6i6V5csRE+4uUtGONOn4ttbYe7GQYMnfKWr2l1bhSbdeQwuFu4YQTiRvQORGl
- JLuHMnBDCn5TpUS+Vxjn6TtanxSkKodmRaSArv0RrKRscMmfAf/qZyuklwu30oaFh2or
- Bv7zCxwihvsisqBiKRzcVpQHCBVdTdGTcebtU9+gTQBHoE7nqpANs4F56ktVSwlvsUGB
- bWYA==
-X-Gm-Message-State: AOJu0YxC0Zrdtey1BINACGAp5WAg7tMW9UJs6LppvG13w8XAfKlMtWnZ
- 9QVylKoz0qAdlom+LH07oOA=
-X-Google-Smtp-Source: AGHT+IHnGYxtinNbm+z4SwK9biYf2QQbtxqRHZeEECq9DwgVRNNPAHlWrqFzW1JdBxjreDA7CR6Vcg==
-X-Received: by 2002:a05:6a20:2593:b0:140:f6c4:aa71 with SMTP id
- k19-20020a056a20259300b00140f6c4aa71mr10468993pzd.8.1699951945759; 
- Tue, 14 Nov 2023 00:52:25 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699952415; x=1700557215;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HpA2qx8FNV2mKzY6eZQ5YTvDcpEdFI8GBvRMj+GUgXU=;
+ b=Qv+geNqtNtxLj88XYUbQDDqmGRYGvCa/yrr/B0mEp6toxqEu1sFGOijsG/Rf42Ibr5
+ h8m0OJx9kEwA20VGYFm9VUA5WfHsXxU3s/kbweWOlrGTtcoYU6NuGvCw3wj43nxVMBg8
+ 2FVt9Ab/xVSxz7qBijYINuOysZdDpxgW8f3E8j0YFfVb37WxdJPHu8LEOz+Aq0hqPrOc
+ OXizsVzDNljTsY3hl3JxeWt+rSUl9r5T6eJbcT86bUnVnDKxWuveDPy8YvVQ4QjTBM3H
+ RZ433Up+NXXSichdDDJDPblpX7KgUgELjDSoCP66l0UkED/XueSva6ny49soP4qT1b0p
+ GiCA==
+X-Gm-Message-State: AOJu0YzDEvPcQ7ZcTA/0fyV8hRnq/fLXfifieoh1MV0gB1D9H849mOGH
+ fTCzWFf1E8WnFwPzHQQbzXY=
+X-Google-Smtp-Source: AGHT+IEZKmQicwBoU2/nbmtBm37dEitrCFTE2kRa/1wa6Fa7MFhk8IHVxqzfsRv378zc4fWUvGw87A==
+X-Received: by 2002:a17:902:e750:b0:1c9:ff46:163d with SMTP id
+ p16-20020a170902e75000b001c9ff46163dmr2227195plf.38.1699952414578; 
+ Tue, 14 Nov 2023 01:00:14 -0800 (PST)
 Received: from cs20-buildserver.lan ([180.217.145.22])
  by smtp.gmail.com with ESMTPSA id
- fh23-20020a056a00391700b006be0bd6a4d8sm778696pfb.36.2023.11.14.00.52.23
+ g9-20020a170902740900b001cc67103a15sm5224371pll.16.2023.11.14.01.00.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 00:52:25 -0800 (PST)
+ Tue, 14 Nov 2023 01:00:14 -0800 (PST)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
-To: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, jim.t90615@gmail.com,
- trini@konsulko.com, YSCHU@nuvoton.com
+To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
+ seanga2@gmail.com, jim.t90615@gmail.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 4/4] board: nuvoton: update console environment variable
-Date: Tue, 14 Nov 2023 16:51:59 +0800
-Message-Id: <20231114085159.3739887-5-JJLIU0@nuvoton.com>
+Subject: [PATCH v3] clk: nuvoton: add read only feature for clk driver
+Date: Tue, 14 Nov 2023 17:00:04 +0800
+Message-Id: <20231114090004.3746024-1-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
-References: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,211 +90,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG_SYS_SKIP_UART_INIT is enabled, calculate the
-current baud rate and update the "console" environment
-variable.
+Add a flag to set ahb/apb/fiu/spi clock divider as read-only
+The spi clock setting is related to booting flash, it is setup by early
+bootloader.
+It just protects the clock source and can't modify it in uboot.
 
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
+Changes for v3:
+   - add commit message
 Changes for v2:
-   --- rename file
-   --- modify board_set_console to void function
+   - add commit message
 ---
- board/nuvoton/arbel_evb/Kconfig     |  1 +
- board/nuvoton/arbel_evb/arbel_evb.c |  7 +++
- board/nuvoton/common/Kconfig        |  9 ++++
- board/nuvoton/common/Makefile       |  1 +
- board/nuvoton/common/uart.c         | 71 +++++++++++++++++++++++++++++
- board/nuvoton/common/uart.h         | 11 +++++
- board/nuvoton/poleg_evb/Kconfig     |  1 +
- board/nuvoton/poleg_evb/poleg_evb.c |  8 ++++
- 8 files changed, 109 insertions(+)
- create mode 100644 board/nuvoton/common/Kconfig
- create mode 100644 board/nuvoton/common/Makefile
- create mode 100644 board/nuvoton/common/uart.c
- create mode 100644 board/nuvoton/common/uart.h
+ drivers/clk/nuvoton/clk_npcm.c    | 15 ++++++++++++---
+ drivers/clk/nuvoton/clk_npcm.h    |  1 +
+ drivers/clk/nuvoton/clk_npcm8xx.c | 12 ++++++------
+ 3 files changed, 19 insertions(+), 9 deletions(-)
 
-diff --git a/board/nuvoton/arbel_evb/Kconfig b/board/nuvoton/arbel_evb/Kconfig
-index 33c589f1fb..ed1c1ad8ee 100644
---- a/board/nuvoton/arbel_evb/Kconfig
-+++ b/board/nuvoton/arbel_evb/Kconfig
-@@ -15,4 +15,5 @@ config SYS_MEM_TOP_HIDE
- 	help
- 	  Reserve memory for ECC/GFX/OPTEE/TIP/CP.
- 
-+source "board/nuvoton/common/Kconfig"
- endif
-diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
-index 59e1a42564..8fc56c1839 100644
---- a/board/nuvoton/arbel_evb/arbel_evb.c
-+++ b/board/nuvoton/arbel_evb/arbel_evb.c
-@@ -7,6 +7,7 @@
- #include <dm.h>
- #include <asm/io.h>
- #include <asm/arch/gcr.h>
-+#include "../common/uart.h"
- 
- #define SR_MII_CTRL_SWR_BIT15	15
- 
-@@ -90,3 +91,9 @@ int dram_init_banksize(void)
- 	return 0;
+diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_npcm.c
+index 8d71f2a24b..18cb9cddbf 100644
+--- a/drivers/clk/nuvoton/clk_npcm.c
++++ b/drivers/clk/nuvoton/clk_npcm.c
+@@ -135,7 +135,7 @@ static u32 npcm_clk_get_div(struct clk *clk)
+ 	return div;
  }
  
-+int last_stage_init(void)
-+{
-+	board_set_console();
+-static u32 npcm_clk_set_div(struct clk *clk, u32 div)
++static int npcm_clk_set_div(struct clk *clk, u32 div)
+ {
+ 	struct npcm_clk_priv *priv = dev_get_priv(clk->dev);
+ 	struct npcm_clk_div *divider;
+@@ -145,6 +145,9 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
+ 	if (!divider)
+ 		return -EINVAL;
+ 
++	if (divider->flags & DIV_RO)
++		return 0;
 +
-+	return 0;
-+}
-diff --git a/board/nuvoton/common/Kconfig b/board/nuvoton/common/Kconfig
-new file mode 100644
-index 0000000000..61de7bc5f8
---- /dev/null
-+++ b/board/nuvoton/common/Kconfig
-@@ -0,0 +1,9 @@
-+if ARCH_NPCM
-+
-+config SYS_SKIP_UART_INIT
-+	bool "Skip UART initialization"
-+	depends on NPCM_SERIAL
-+	help
-+	  Select this if the UART you want to use is already
-+	  initialized by the time U-Boot starts its execution.
-+endif
-diff --git a/board/nuvoton/common/Makefile b/board/nuvoton/common/Makefile
-new file mode 100644
-index 0000000000..8fd83b229b
---- /dev/null
-+++ b/board/nuvoton/common/Makefile
-@@ -0,0 +1 @@
-+obj-$(CONFIG_SYS_SKIP_UART_INIT)	+= uart.o
-diff --git a/board/nuvoton/common/uart.c b/board/nuvoton/common/uart.c
-new file mode 100644
-index 0000000000..3b8badd67a
---- /dev/null
-+++ b/board/nuvoton/common/uart.c
-@@ -0,0 +1,71 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023 Nuvoton Technology Corp.
-+ */
-+
-+#include <common.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <env.h>
-+#include <serial.h>
-+#include <linux/delay.h>
-+
-+#define UART_DLL	0x0
-+#define UART_DLM	0x4
-+#define UART_LCR	0xc
-+#define LCR_DLAB	BIT(7)
-+
-+void board_set_console(void)
-+{
-+	const unsigned long baudrate_table[] = CFG_SYS_BAUDRATE_TABLE;
-+	struct udevice *dev = gd->cur_serial_dev;
-+	unsigned int baudrate, max_delta;
-+	void __iomem *uart_reg;
-+	struct clk clk;
-+	char string[32];
-+	u32 uart_clk;
-+	u8 dll, dlm;
-+	u16 divisor;
-+	int ret, i;
-+
-+	if (!dev)
-+		return;
-+
-+	uart_reg = dev_read_addr_ptr(dev);
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return;
-+
-+	uart_clk = clk_get_rate(&clk);
-+	setbits_8(uart_reg + UART_LCR, LCR_DLAB);
-+	dll = readb(uart_reg + UART_DLL);
-+	dlm = readb(uart_reg + UART_DLM);
-+	clrbits_8(uart_reg + UART_LCR, LCR_DLAB);
-+	divisor = dll | (dlm << 8);
-+	baudrate =  uart_clk / ((16 * (divisor + 2)));
-+	for (i = 0; i < ARRAY_SIZE(baudrate_table); ++i) {
-+		max_delta = baudrate_table[i] / 20;
-+		if (abs(baudrate - baudrate_table[i]) < max_delta) {
-+			/* The baudrate is supported */
-+			gd->baudrate = baudrate_table[i];
-+			break;
-+		}
+ 	if (divider->flags & PRE_DIV2)
+ 		div = div >> 1;
+ 
+@@ -153,6 +156,12 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
+ 	else
+ 		clkdiv = ilog2(div);
+ 
++	if (clkdiv > (divider->mask >> (ffs(divider->mask) - 1))) {
++		printf("clkdiv(%d) for clk(%ld) is over limit\n",
++		       clkdiv, clk->id);
++		return -EINVAL;
 +	}
 +
-+	if (i == ARRAY_SIZE(baudrate_table)) {
-+		/* current baudrate is not suitable, set to default */
-+		divisor = DIV_ROUND_CLOSEST(uart_clk, 16 * gd->baudrate) - 2;
-+		setbits_8(uart_reg + UART_LCR, LCR_DLAB);
-+		writeb(divisor & 0xff, uart_reg + UART_DLL);
-+		writeb(divisor >> 8, uart_reg + UART_DLM);
-+		clrbits_8(uart_reg + UART_LCR, LCR_DLAB);
-+		udelay(100);
-+		printf("\r\nUART(source %u): change baudrate from %u to %u\n",
-+		       uart_clk, baudrate, uart_clk / ((16 * (divisor + 2))));
-+	}
-+
-+	debug("Set env baudrate=%u\n", gd->baudrate);
-+	snprintf(string, sizeof(string), "ttyS0,%un8", gd->baudrate);
-+	env_set("console", string);
-+
-+}
-diff --git a/board/nuvoton/common/uart.h b/board/nuvoton/common/uart.h
-new file mode 100644
-index 0000000000..9cc895251b
---- /dev/null
-+++ b/board/nuvoton/common/uart.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2023 Nuvoton Technology Corp.
-+ */
-+
-+#ifndef _NUVOTON_UART_H
-+#define _NUVOTON_UART_H
-+
-+void board_set_console(void);
-+
-+#endif /* _NUVOTON_COMMON_H */
-diff --git a/board/nuvoton/poleg_evb/Kconfig b/board/nuvoton/poleg_evb/Kconfig
-index d3f4c1dd81..6f7f1ef157 100644
---- a/board/nuvoton/poleg_evb/Kconfig
-+++ b/board/nuvoton/poleg_evb/Kconfig
-@@ -22,4 +22,5 @@ config TARGET_POLEG_EVB
+ 	val = readl(priv->base + divider->reg);
+ 	val &= ~divider->mask;
+ 	val |= (clkdiv << (ffs(divider->mask) - 1)) & divider->mask;
+@@ -253,8 +262,8 @@ static ulong npcm_clk_set_rate(struct clk *clk, ulong rate)
+ 	if (ret)
+ 		return ret;
  
- endchoice
- 
-+source "board/nuvoton/common/Kconfig"
- endif
-diff --git a/board/nuvoton/poleg_evb/poleg_evb.c b/board/nuvoton/poleg_evb/poleg_evb.c
-index 2052af6649..7421911a41 100644
---- a/board/nuvoton/poleg_evb/poleg_evb.c
-+++ b/board/nuvoton/poleg_evb/poleg_evb.c
-@@ -10,6 +10,7 @@
- #include <asm/io.h>
- #include <asm/arch/gcr.h>
- #include <asm/mach-types.h>
-+#include "../common/uart.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -53,3 +54,10 @@ int dram_init(void)
- 
- 	return 0;
+-	debug("%s: rate %lu, new rate (%lu / %u)\n", __func__, rate, parent_rate, div);
+-	return (parent_rate / div);
++	debug("%s: rate %lu, new rate %lu\n", __func__, rate, npcm_clk_get_rate(clk));
++	return npcm_clk_get_rate(clk);
  }
-+
-+int last_stage_init(void)
-+{
-+	board_set_console();
-+
-+	return 0;
-+}
+ 
+ static int npcm_clk_set_parent(struct clk *clk, struct clk *parent)
+diff --git a/drivers/clk/nuvoton/clk_npcm.h b/drivers/clk/nuvoton/clk_npcm.h
+index 06b60dc8b8..b4726d8381 100644
+--- a/drivers/clk/nuvoton/clk_npcm.h
++++ b/drivers/clk/nuvoton/clk_npcm.h
+@@ -50,6 +50,7 @@
+ #define PRE_DIV2	BIT(2)	/* Pre divisor = 2 */
+ #define POST_DIV2	BIT(3)	/* Post divisor = 2 */
+ #define FIXED_PARENT	BIT(4)	/* clock source is fixed */
++#define DIV_RO		BIT(5)	/* divider is read-only */
+ 
+ /* Parameters of PLL configuration */
+ struct npcm_clk_pll {
+diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/clk_npcm8xx.c
+index 27e3cfcf55..d1b32e3237 100644
+--- a/drivers/clk/nuvoton/clk_npcm8xx.c
++++ b/drivers/clk/nuvoton/clk_npcm8xx.c
+@@ -45,12 +45,12 @@ static struct npcm_clk_select npcm8xx_clk_selectors[] = {
+ };
+ 
+ static struct npcm_clk_div npcm8xx_clk_dividers[] = {
+-	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2},
+-	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2},
+-	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2},
+-	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1},
+-	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1},
+-	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1},
++	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2 | DIV_RO},
++	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2 | DIV_RO},
++	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2 | DIV_RO},
++	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1 | DIV_RO},
++	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1 | DIV_RO},
++	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1 | DIV_RO},
+ 	{NPCM8XX_CLK_SPIX, CLKDIV3, SPIXCKDIV, DIV_TYPE1},
+ 	{NPCM8XX_CLK_UART, CLKDIV1, UARTDIV1, DIV_TYPE1},
+ 	{NPCM8XX_CLK_UART2, CLKDIV3, UARTDIV2, DIV_TYPE1},
 -- 
 2.25.1
 
