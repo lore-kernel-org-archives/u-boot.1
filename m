@@ -4,49 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE842C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 06:26:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89DE0C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 07:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE2E0870E1;
-	Tue, 14 Nov 2023 07:26:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 291708714C;
+	Tue, 14 Nov 2023 08:48:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 866E5870B5; Tue, 14 Nov 2023 07:26:47 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1699948127;
+	bh=YCWZ8dKC1uE8Td/3yttjTBYAiPT7eJJXCAnRhguhsUo=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=OqddelR/KGTR5Goa/MH477tubqXr0XslNknA4G8KRtLMgGHUNnotsTHXk9rDNbzx7
+	 TjFnRq6ZGehA1ABxfKM/t3Fhx4sVcTA3qfjOw4CnDibehsdL6xNcBGwu9ln+ADysk7
+	 KN8qTVXzLHfVGmz2mAgK8v6UTRLvpDktcpsjfGwAvFMETQFy2ZsCuEWezZ5BVlXK++
+	 kTVCcQX6JYpF/h4E8PSPwOdgsT7harAT/C7zihskWILBf8BWft4LJ1yJtjoIBRqvG+
+	 hNKiynXl32Owq+brvIAPQMcF2FEJfSBwZ8WsxkbvkMnOusWVZWQBXsl/J+J9/tTdYL
+	 UO5EgI9seLs9g==
+Received: from mail-internal.denx.de (p578adb1c.dip0.t-ipconnect.de
+ [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DC0D867F6
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 07:26:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3AE6QZM8089172;
- Tue, 14 Nov 2023 14:26:35 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from atctrx (10.0.15.173) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0; Tue, 14 Nov 2023 14:26:35 +0800
-Date: Tue, 14 Nov 2023 14:26:20 +0800
-From: Randolph Lin <randolph@andestech.com>
-To: Simon Glass <sjg@chromium.org>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>,
- <dylan@andestech.com>, <tim609@andestech.com>, Yu Chien Peter Lin
- <peterlin@andestech.com>
-Subject: Re: [PATCH] riscv: binman: fix the load field format
-Message-ID: <ZVMTDF9vGNm_cRGk@atctrx>
-References: <20231109031448.138723-1-randolph@andestech.com>
- <CAPnjgZ2_JUdLXvUM7DdhjyqEOA4o+pSPKnSnYMQ6m3Ca=N35YA@mail.gmail.com>
+ (No client certificate requested) (Authenticated sender: noc@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0D50287129;
+ Tue, 14 Nov 2023 08:48:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1699948126;
+ bh=YCWZ8dKC1uE8Td/3yttjTBYAiPT7eJJXCAnRhguhsUo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=pSEVZD8AoAlAg/3XDm1jbZSQsJeVQ3/mEl3mqGe9aega0c3INqF6ukptGnzyuhrnZ
+ RYa2ebzh78EsYH4P/RhVNGxyJg0lpoHqD7nyM8dkYVaHJJPVMy2AwU8wjrAK2LbxGd
+ UB+Im78HY6gfyJNq6+q/lnfgw/pSvVpNfSgF/VDmtI0wJIM8DqxJ0IEybCqYjoK/Ia
+ KeiDEw0UVxByN3J7uaI/ZLyyWTKbtaCpv/SFJnMUoTh45BZSMF3H3KndroWLgKvWts
+ g7blyM3CuIIAPOubVvbn18iusZBmoV+M5pXSUMMpq+cZUUhl+//Z6nAapUxHSlsdKo
+ yrpr3fcBwdadw==
+Received: from pollux.denx.de (pollux [192.168.1.1])
+ by mail-internal.denx.de (Postfix) with ESMTPS id 7FA86180A2D;
+ Tue, 14 Nov 2023 08:48:44 +0100 (CET)
+Received: by pollux.denx.de (Postfix, from userid 515)
+ id 526A61A0093; Tue, 14 Nov 2023 08:48:44 +0100 (CET)
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Schocher <hs@denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH] mtd: rawnand: omap_gpmc: remove unneeded variable
+Date: Tue, 14 Nov 2023 08:48:38 +0100
+Message-Id: <20231114074838.3534552-1-hs@denx.de>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2_JUdLXvUM7DdhjyqEOA4o+pSPKnSnYMQ6m3Ca=N35YA@mail.gmail.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Originating-IP: [10.0.15.173]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3AE6QZM8089172
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,52 +70,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-Thanks a lot.
-On Fri, Nov 10, 2023 at 04:50:24AM -0700, Simon Glass wrote:
-> Hi Randolph,
-> 
-> On Wed, Nov 8, 2023, 20:15 Randolph <randolph@andestech.com> wrote:
-> >
-> > The #address-cells is now equal to 2. The format of the load field for
-> > the Linux kernel doesn't match.
-> >
-> > Signed-off-by: Randolph <randolph@andestech.com>
-> > ---
-> >  arch/riscv/dts/binman.dtsi | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
-> > index 6b4eb8dc7b..5117d7c8c9 100644
-> > --- a/arch/riscv/dts/binman.dtsi
-> > +++ b/arch/riscv/dts/binman.dtsi
-> > @@ -50,7 +50,8 @@
-> >                                         os = "Linux";
-> >                                         arch = "riscv";
-> >                                         compression = "none";
-> > -                                       load = <CONFIG_TEXT_BASE>;
-> > +                                       load = <U64_TO_U32_H(CONFIG_TEXT_BASE)
-> > +                                               U64_TO_U32_L(CONFIG_TEXT_BASE)>;
-> 
-I just see the #address-cells changed from 1 to 2 in commit id: 5a348ccf0257.
-In my last commit for binman.dtsi (commit id: d311df8b3169), it is based on
-the value of #address-cells being 1. That's the reason for my patch submission.
-> Does this work?
-> 
-> load = /bits 64/ <CONFIG_TEXT_BASE>
->
-Yes, it works. We use this way for the DDR memory start address above 4G 
-platform. We find the example for 64bit address in the document 
-tools/binman/binman.rst and use it.
-What is the method that we should continue to use in the binman.dtsi?
-1. #address-cells = 2
-2. append /bits/64 
-> >
-> >                                         linux_blob: blob-ext {
-> >                                                 filename = "Image";
-> > --
-> > 2.34.1
-> >
-> 
-> Regards,
-> Simon
+remove unneeded variable ecc_flag in omap_correct_data_bch
+
+Signed-off-by: Heiko Schocher <hs@denx.de>
+---
+azure build is fine with this patch:
+
+https://dev.azure.com/hs0298/hs/_build/results?buildId=110&view=results
+
+ drivers/mtd/nand/raw/omap_gpmc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
+index 1a5ed0de31..1fe8b1671e 100644
+--- a/drivers/mtd/nand/raw/omap_gpmc.c
++++ b/drivers/mtd/nand/raw/omap_gpmc.c
+@@ -637,13 +637,13 @@ static int omap_correct_data_bch(struct mtd_info *mtd, uint8_t *dat,
+ 	uint32_t error_count = 0, error_max;
+ 	uint32_t error_loc[ELM_MAX_ERROR_COUNT];
+ 	enum bch_level bch_type;
+-	uint32_t i, ecc_flag = 0;
++	uint32_t i;
+ 	uint8_t count;
+ 	uint32_t byte_pos, bit_pos;
+ 	int err = 0;
+ 
+ 	/* check calculated ecc */
+-	for (i = 0; i < ecc->bytes && !ecc_flag; i++) {
++	for (i = 0; i < ecc->bytes; i++) {
+ 		if (calc_ecc[i] != 0x00)
+ 			goto not_ecc_match;
+ 	}
+-- 
+2.37.3
+
