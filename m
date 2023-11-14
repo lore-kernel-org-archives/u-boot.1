@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F40DEC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 09:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB79C4167D
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 09:26:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA53B870BC;
-	Tue, 14 Nov 2023 10:26:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F86687440;
+	Tue, 14 Nov 2023 10:26:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MCGF3JnK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zEnpK2sm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85543871ED; Tue, 14 Nov 2023 10:26:36 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 5534F86FB2; Tue, 14 Nov 2023 10:26:41 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3855586FB2
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 10:26:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A2C487269
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 10:26:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1cc7077d34aso40546265ad.2
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 01:26:34 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2800bdf888dso4082425a91.1
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 01:26:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699953992; x=1700558792; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=U+ZH3F+k+xghG6wIoUX7OP2z4eyS8oScizml+z/15XU=;
- b=MCGF3JnKGYp1W1hdt2TPEmRJRVMi7GEBsZRzU+fDmaeCI0IQ8hC7ooj4YR2RENUQzp
- 9yPw1CPhYKPcut7b/OFkXORXLJ76x79o6DCIR7wc078lb41aa5um7Bzm2EjvzMTgw9Pp
- E8p2zjE27M8rWNtWU/SzDvHf+hnfz1NdfshtS0wSY/nn2eC8tc5iUbVCcZkFbmw4cHdS
- kVmPQdVzIiJbeED1HambNoVTMcJnqqly4EGFcrjkP6nvn5vk7t2fR+8CoT6SV6MXbztb
- TpP5dDjXw5gEoaPzLYZ4lXuzvRMvKRYRWBrMzalnVu+i214afDEtIwCmDwOSY8ixDazy
- QibA==
+ d=linaro.org; s=google; t=1699953997; x=1700558797; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g3Vyj8zH1wilO2p+N0KC7xECw+I4drVeJwtAwojUGV0=;
+ b=zEnpK2smXYUWLBFswzipt3JUpoJdlgYWNGInL4SYUhEo10Ni7HTJj3ult51r9BIpIC
+ JZYbHy53jqM1Cv+PVyQuSl5Wy0p+wez+TwcaLNz+R9AeOYLd/l12IsxtFwHDB7gPp6fJ
+ bGzns/pjvn4vQ1pvWwqDz4LYI/o6B9kHd7pr9hYnJdb+E3G6ewqUZE73QStwymEAX6cI
+ O7kKePA9M3CcXd2dkG/bJRuQU4k0LzcMPcncPR0DcX8V9TkoRCQk7k57AJas7uDXdgZZ
+ 56zSKpi8PYa2+aw+mAnYAHpkOZImIbGD+vpB2pHKanr3g0riVtAhZBwZHZPVxtmXNc6h
+ GFgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699953992; x=1700558792;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U+ZH3F+k+xghG6wIoUX7OP2z4eyS8oScizml+z/15XU=;
- b=pCYwwZrUy9wJNmzhd/Q4FAFFcm4Ansie8SkjFpVepF0uB3tTQi24MAIQjkD+CAS/M1
- KnyM3xkE78bFbvLrhOGUFCKzavveAYen0ETWljlT7g5tfM1SCcH2dGNNkwrdazoblQhj
- jqhNsDzi1B3LxhabsV5+0ERMuf7FBtNrOo/nwKhPe/HYsoMXOfJTf0fKmIg06EaM+U9k
- EcTfFWgaVNU8mF55zV//TKI/p890OECqaGQTIB4ck7X4T7P1N80B/rY0IaqmKh/itbo2
- Qy8DgEEEZZOm9vmEba8EsX9+WqtMp7fyES9FTyBf9Q+EtcrY8IzlqiJ0mqBh3Vkj7UIz
- ycaw==
-X-Gm-Message-State: AOJu0YyGypmbG15LERRXpaFAFXD/PlwT+aftNcqLdYjCHcC1GAPPdY//
- NnnALkrb/hAuRUhTwggE5M7xVUAVeXdnPW1bCQs=
-X-Google-Smtp-Source: AGHT+IGlI3I1wgrVCQq1UQT6D2Jo5MfuIem+qnyo+81t051nWsUEaoqOn6Y7gvM70lgMXnafsp/Iag==
-X-Received: by 2002:a17:902:d4c6:b0:1cc:339e:c228 with SMTP id
- o6-20020a170902d4c600b001cc339ec228mr2102140plg.58.1699953991708; 
- Tue, 14 Nov 2023 01:26:31 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699953997; x=1700558797;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g3Vyj8zH1wilO2p+N0KC7xECw+I4drVeJwtAwojUGV0=;
+ b=h2PeQsvs9OeiqcpLS7Gv2mnJ5d9zdJAY+r1bDWifkZuvHYGfWniX0g7T+GT2yz2VF/
+ ata96VpTUUBRJpec04tJAAOqNWmk7AZTAzOz+lkpLTKda5JkSQQ3G3gUSxDhcwgKsAmQ
+ zEY0IjTvH4QsJlhhh7hBwZfsIvuHw3Ukbzn5lNST5AyFQW3jdv99xzdp/vH4mv5QRpml
+ Vnov9gjStPriTD4VtFugRGp2gDEAu25MlHzs7tP4+QqMkUpXuI06L3Mh+zXklMiuE8zv
+ 811jJ73AGCMwe8s7oXKQvGdrnnC6i2PCUeY+0YmdMO++JQ9SQZc1SUKIMaspBmuuXNg4
+ abOg==
+X-Gm-Message-State: AOJu0YzzFqHVH3wSB/axpQrtt7O5EwGNyZwUIJ7W4vd6KCY4mHoGN2k/
+ RBuu7+1HQYS1lpsjx0wpsw22FNll5j3dbxCXbmg=
+X-Google-Smtp-Source: AGHT+IFQQJV5ThDZl+Bm+TSPLStZeYXzZQRuaRRCUAWn7XcnBb7HtPo1wq+cui4PqPyD5WUjTlbeWg==
+X-Received: by 2002:a17:90a:d348:b0:280:6cde:ecc2 with SMTP id
+ i8-20020a17090ad34800b002806cdeecc2mr2936766pjx.11.1699953997049; 
+ Tue, 14 Nov 2023 01:26:37 -0800 (PST)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- j18-20020a170902759200b001c0ce518e98sm5261199pll.224.2023.11.14.01.26.30
+ 22-20020a17090a001600b0027ceac90684sm5526577pja.18.2023.11.14.01.26.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 01:26:31 -0800 (PST)
+ Tue, 14 Nov 2023 01:26:36 -0800 (PST)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -69,10 +70,12 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Jassi Brar <jaswinder.singh@linaro.org>,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 0/2] fix FMP versioning for FWU multi bank update
-Date: Tue, 14 Nov 2023 18:25:06 +0900
-Message-Id: <20231114092508.3955838-1-masahisa.kojima@linaro.org>
+Subject: [PATCH 1/2] efi_loader: use original image_index for FMP versioning
+Date: Tue, 14 Nov 2023 18:25:07 +0900
+Message-Id: <20231114092508.3955838-2-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231114092508.3955838-1-masahisa.kojima@linaro.org>
+References: <20231114092508.3955838-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,18 +94,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current FMP versioning does not work when CONFIG_FWU_MULTI_BANK_UPDATE
-is enabled. This series aims to support FMP versioning
-for FWU multi bank update.
+FMP versioning uses the image_index argument of
+EFI_FIRMWARE_MANAGEMENT_PROTOCOL.SetImage() service.
+When CONFIG_FWU_MULTI_BANK_UPDATE is enabled, image_index
+is updated by fwu_get_image_index() function. This commit
+saves the original image_index argument and use it for
+FMP versioning.
 
-Masahisa Kojima (2):
-  efi_loader: use original image_index for FMP versioning
-  efi_loader: support FMP versioning for FWU multi bank update
+Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+---
+ lib/efi_loader/efi_firmware.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
- lib/efi_loader/efi_firmware.c | 65 ++++++++++++++++++++++++++---------
- lib/fwu_updates/Kconfig       |  1 +
- 2 files changed, 50 insertions(+), 16 deletions(-)
-
+diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+index 9abb29f1df..9c1a273926 100644
+--- a/lib/efi_loader/efi_firmware.c
++++ b/lib/efi_loader/efi_firmware.c
+@@ -612,6 +612,8 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ {
+ 	int ret;
+ 	efi_status_t status;
++	u8 original_image_index = image_index;
++
+ 	struct fmp_state state = { 0 };
+ 
+ 	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+@@ -641,7 +643,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 			     NULL, NULL))
+ 		return EFI_EXIT(EFI_DEVICE_ERROR);
+ 
+-	efi_firmware_set_fmp_state_var(&state, image_index);
++	efi_firmware_set_fmp_state_var(&state, original_image_index);
+ 
+ 	return EFI_EXIT(EFI_SUCCESS);
+ }
 -- 
 2.34.1
 
