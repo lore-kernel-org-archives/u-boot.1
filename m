@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72A3C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 16:23:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68F5C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 16:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2775A86A4B;
-	Tue, 14 Nov 2023 17:23:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 224FA86F6E;
+	Tue, 14 Nov 2023 17:31:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r2otqKHD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lDYMgU+e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67660871D0; Tue, 14 Nov 2023 17:23:35 +0100 (CET)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 785078714D; Tue, 14 Nov 2023 17:31:57 +0100 (CET)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 468D486940
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:23:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5826986470
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:31:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-1dd71c0a41fso3400187fac.2
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 08:23:33 -0800 (PST)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-66fa16092c0so34648816d6.0
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 08:31:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1699979012; x=1700583812; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1699979514; x=1700584314; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S0d7b9PvrHA+To22+/b7fGinFIWPIBLkF8f8rMIkbWE=;
- b=r2otqKHDfSqAWYvzTLYZXxEbMEr9IrKxdwwd8noH0FiAlx+j7LREIPlCBTkBGh+qjp
- 6ykRtXFIOLy5QvihuzuGNVBr68QjZ6JIkJkv2U448agEWb0FpBjVggjtUNJHdJqqsedS
- fiAcCb/j0K439KA1aTyR4lzYhZCFJEbDjV44o=
+ bh=JZMgla21+SsO7et1ev++NmopIGpxTZbIYVP9gVQRyvA=;
+ b=lDYMgU+eaQHRMMi+ThlcTK6O1rT7wqu+5bC+RNtU3w+TFe+/GtE2NJVSl4PLH643we
+ KIfNbFfTj2jEAcmFx1kDduowHQXHMATYNSxPIo8ziWw66cclt5uhZqvgv4/HPmGTNU8z
+ 0yg/C3kB8ylPMOSgknFpj/s0m4JEdROAytmBo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699979012; x=1700583812;
+ d=1e100.net; s=20230601; t=1699979514; x=1700584314;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S0d7b9PvrHA+To22+/b7fGinFIWPIBLkF8f8rMIkbWE=;
- b=HWeg7jmsEkJo4MLfTUKH6G/rcYjFgLer9CvSgbBtyj0/SrGJeeoUSraXMcWXPb5AuF
- SqRrD5y97oL6rAN+DN924DKNtngsIW5yYrRYySH6INGQwxFU70YlPLev5+74DEFT5wy5
- GjYylS3pnj5AwbuIfM4mC5gj3TnwscYTWDRKjAVsRdIE3TpcxRAo0ft3BWofDEAdjR9V
- wgEjSRBsXzO1bOV38iEuTwvgKzbGMK4XpUY0x2qTD8pBond5nAI9a+YlNeisJo0F+iUE
- /rOuI7GxZlADtV8e5HMcTPTCj2/3PjOwvlhfPya7tgfBpz/OJK1iJVqpyKagtmsKxwnO
- XoCw==
-X-Gm-Message-State: AOJu0Yxyn2s8FATbB+Itdj0sgu8bBwXhygrG1l9FqemX6M3/N9mrTPGc
- 64G6Cw2gm3J4CIN7LtQE8yg09g==
-X-Google-Smtp-Source: AGHT+IE8ufhmdmKPfz77rK5ZPozR7Jl5SdM1U3tv/cJv4wdyt4sNXrumNcrheSN7ds8VIQtMOi2M2w==
-X-Received: by 2002:a05:6871:5289:b0:1d6:cbcd:80f8 with SMTP id
- hu9-20020a056871528900b001d6cbcd80f8mr14457008oac.54.1699979011893; 
- Tue, 14 Nov 2023 08:23:31 -0800 (PST)
+ bh=JZMgla21+SsO7et1ev++NmopIGpxTZbIYVP9gVQRyvA=;
+ b=ef9LB2+bJKAIPb8eiKgoz8xlWNaT6A9vKy4OU+/8LEU9J6O0a7dySrxV4SG5yHHcUK
+ nuMmfdR3JINEtoyRTC9b65paHnof3cZNnTuShhvNLngCOpAIxXrotk7kkzCfYd09zF1R
+ 5VUNt8tzmOeSe9T7Y1363IOnlthRqzBWDTXQerJpktqcmKDRgqb4lJDnNWFBoVV27TrG
+ oyxrhEqUn4Ih6hwAApO3haWvzmFYnIbFiHmC8ECz8DXqn5aUIT/7lTqyl8SywZvxZxpL
+ 3czZIqwjE6ahIdxFwFdWBnB9I3jYb4/20fmthM3n1ReihoPWI4GgNq8/0/4IUdHsHu1c
+ XH6Q==
+X-Gm-Message-State: AOJu0YwTKgQX4SPRFYMh2BiWkoT8RpDuA8rZT4xc3/VkVtUUY/dz525O
+ GaRUUbjGjzzdvvTkOP9H2JmUoQ==
+X-Google-Smtp-Source: AGHT+IEa7R2ertnvzbQhGVwugFf0Ts83WjIEMp0Dw6IYEI9GgX3jUIhCgLa60VelSOHQX3SYXmk5RQ==
+X-Received: by 2002:a05:6214:2488:b0:66d:1244:cea5 with SMTP id
+ gi8-20020a056214248800b0066d1244cea5mr4497096qvb.46.1699979514038; 
+ Tue, 14 Nov 2023 08:31:54 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2a5c-a31a-8ead-8e73.res6.spectrum.com.
  [2603:6081:7b00:6400:2a5c:a31a:8ead:8e73])
  by smtp.gmail.com with ESMTPSA id
- h21-20020ac85055000000b00419b67d2823sm2821500qtm.34.2023.11.14.08.23.31
+ cw1-20020ad44dc1000000b006648514e276sm3005358qvb.78.2023.11.14.08.31.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 08:23:31 -0800 (PST)
-Date: Tue, 14 Nov 2023 11:23:29 -0500
+ Tue, 14 Nov 2023 08:31:53 -0800 (PST)
+Date: Tue, 14 Nov 2023 11:31:51 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Jim Liu <jim.t90615@gmail.com>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, YSCHU@nuvoton.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/4] fix/add npcm845 serial and board error
-Message-ID: <20231114162329.GV6601@bill-the-cat>
-References: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH v2 5/5] boot: Don't allow kernel_noload with compression
+Message-ID: <20231114163151.GW6601@bill-the-cat>
+References: <20231112035001.103897-1-sjg@chromium.org>
+ <20231112035001.103897-2-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iLmwLCEniABAwMBb"
+ protocol="application/pgp-signature"; boundary="1TCzWTb52Fi1LjK9"
 Content-Disposition: inline
-In-Reply-To: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
+In-Reply-To: <20231112035001.103897-2-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,66 +98,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---iLmwLCEniABAwMBb
+--1TCzWTb52Fi1LjK9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 14, 2023 at 04:51:55PM +0800, Jim Liu wrote:
+On Sat, Nov 11, 2023 at 08:49:57PM -0700, Simon Glass wrote:
 
-> 1. Fix serial error and add bypass serial setting.
-> 2. Fix/Add dts node node.
-> 3. Add full function defconfig
+> It is not possible to execute the kernel in-place without loading it.
+> Detect this and show an error, to avoid a crash.
 >=20
-> Jim Liu (4):
->   arm: dts: npcm845-evb: fix/add node and aliases
->   configs: arbel: Enable full functions
->   serial: npcm: support skip uart clock setting
->   board: nuvoton: update console environment variable
->=20
->  arch/arm/dts/nuvoton-common-npcm8xx.dtsi      | 11 ++-
->  arch/arm/dts/nuvoton-npcm845-evb.dts          | 29 ++++++--
->  arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi      |  2 +-
->  board/nuvoton/arbel_evb/Kconfig               |  1 +
->  board/nuvoton/arbel_evb/arbel_evb.c           |  7 ++
->  board/nuvoton/common/Kconfig                  |  9 +++
->  board/nuvoton/common/Makefile                 |  1 +
->  board/nuvoton/common/uart.c                   | 71 +++++++++++++++++++
->  board/nuvoton/common/uart.h                   | 11 +++
->  board/nuvoton/poleg_evb/Kconfig               |  1 +
->  board/nuvoton/poleg_evb/poleg_evb.c           |  8 +++
->  configs/arbel_evb_defconfig                   | 16 ++++-
->  drivers/serial/serial_npcm.c                  | 39 ++++++----
->  include/dt-bindings/phy/nuvoton,npcm-usbphy.h | 14 ++++
->  14 files changed, 194 insertions(+), 26 deletions(-)
->  create mode 100644 board/nuvoton/common/Kconfig
->  create mode 100644 board/nuvoton/common/Makefile
->  create mode 100644 board/nuvoton/common/uart.c
->  create mode 100644 board/nuvoton/common/uart.h
->  create mode 100644 include/dt-bindings/phy/nuvoton,npcm-usbphy.h
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-I just want to make sure now that you've given this series a compile and
-boot test on some platform, yes? Thanks.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---iLmwLCEniABAwMBb
+--1TCzWTb52Fi1LjK9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVTnwEACgkQFHw5/5Y0
-tywK4gv+Isniy8dTUG/DjS2hV8RLiwZv89MmIZr6E8TJp2/hl/bThu5mb+4LbKfj
-kVwHht6zj0bl8GntI1ZDjVFOygX/VatxKcGJ6ZETqo0RXVCw6qDw0eeWtBkg/vcq
-FQLxpqnswGhC1XrFPpKYWjSjSslf2oHXHJ1aRN9CXKdH3FF7tFNBrdNDtZ0sVhD8
-oiGz/rXWRTfLvVZHY5vUKiUffKuvbiOAU9SD/nXK05b3u2MQ3roHDX3tumN9gDCc
-lqsAD6L4VM1qVwNja3VjkSGZYd7feumEwaFdyCIrBMht+Ai2XUV7dIXS5qyTwnzZ
-qh3h6Q72OIfzmarYeFABJZ01c9Jl6NJkuelHvGD+Wp3N2U+OZRNIXT8u+0rRGWNC
-97kfQaDLOKKZfo6PgjEPNQnLQ2dzMdrb7/+pt1BRHcOjcqHtPTNQOBLi+L1eh0WF
-Xbg8WjSP7bbLg3biqgAG/0BS2Typax7cqUDZ5YoR5QHr1xSv3FE5KYgRDIkavkFd
-AtSnO3yq
-=rgvV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVToPcACgkQFHw5/5Y0
+tywmuQv8CuDOyxNM4PjGEfWyasmIOe0FN95JXOAQW6iJMhAR6k2BjEexx9LFMRWr
+qMRPyptjmP4erUKrtseY+DkFRGRIhaIH4Z/B6f8ZtI4S7zkfm1bTbj9IT6Q0K9Ra
+VxzDfqJfy2j6xnbWwKzzjN9Ki/RVmJyA2buY7rpllP/nsKaYci19D6lePHg8B5Sh
+nT6akqe4/52WXo2WVm62HzKfoqfVZqc0VPZGwTkigFlhDnj+fGsPkRbidAnQAZxq
+3MFEMZVT1t3A7jgfydO04cadKlprLekpPQ1OVhYsF2YFdsn7PCVvQEiJPQ2kxkLe
+dAVrg4vM+PinSNDKZxwA79+brse8Fo1OIvM+rCLfxR9k6wbBYB9PZCZwK2IcTWFf
+NZ5XbPnTfuTrujYeVFU+IcB88UGFuf/p6fLo7PjCGdZhr85LLRYNBM7bAqCzI5L+
+SibJRCiu1Eip71AYMlzAGFWQj4GTajZxgAGsipsvP6DOV7KXwKCINhcRR/CU7XYI
+ZqseZc7D
+=k06K
 -----END PGP SIGNATURE-----
 
---iLmwLCEniABAwMBb--
+--1TCzWTb52Fi1LjK9--
