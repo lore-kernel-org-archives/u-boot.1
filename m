@@ -4,66 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D7A7C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 05:37:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE842C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 06:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F351287129;
-	Tue, 14 Nov 2023 06:37:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EE2E0870E1;
+	Tue, 14 Nov 2023 07:26:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CgeYuFDe";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 942998711A; Tue, 14 Nov 2023 06:37:12 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 866E5870B5; Tue, 14 Nov 2023 07:26:47 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2DE58713E
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 06:37:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DC0D867F6
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 07:26:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AE5b5dl024430;
- Mon, 13 Nov 2023 23:37:05 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1699940225;
- bh=WdWHVgYJw1NT6sJ6vYx6UlsngNnZYgyvYewlWY056vA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=CgeYuFDeGQGNnIM+i2GjwR75TyLtx8QKDVraXlLyog5e+YiK9sjJo0HUcutMrqks4
- PsPVC5YyvIuDspL5JEGxO+R6k464N1tKoLZKwlJvkOJLr85OPPjReb5pbw1q0lz6xc
- Rft1bMJHJXIGmmwIMMNq5egsoHdEUDijYe74RuA8=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AE5b5Ua097668
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 13 Nov 2023 23:37:05 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 13
- Nov 2023 23:37:05 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 13 Nov 2023 23:37:05 -0600
-Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AE5b1Sm013161;
- Mon, 13 Nov 2023 23:37:02 -0600
-Message-ID: <dad98c6c-0951-4f21-a28c-7d8499147098@ti.com>
-Date: Tue, 14 Nov 2023 11:07:01 +0530
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3AE6QZM8089172;
+ Tue, 14 Nov 2023 14:26:35 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx (10.0.15.173) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0; Tue, 14 Nov 2023 14:26:35 +0800
+Date: Tue, 14 Nov 2023 14:26:20 +0800
+From: Randolph Lin <randolph@andestech.com>
+To: Simon Glass <sjg@chromium.org>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>,
+ <dylan@andestech.com>, <tim609@andestech.com>, Yu Chien Peter Lin
+ <peterlin@andestech.com>
+Subject: Re: [PATCH] riscv: binman: fix the load field format
+Message-ID: <ZVMTDF9vGNm_cRGk@atctrx>
+References: <20231109031448.138723-1-randolph@andestech.com>
+ <CAPnjgZ2_JUdLXvUM7DdhjyqEOA4o+pSPKnSnYMQ6m3Ca=N35YA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: k3-j7200: Sync with Linux 6.7-rc1
-To: Reid Tonking <reidt@ti.com>, <trini@konsulko.com>, <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <vigneshr@ti.com>,
- <m-chawdhry@ti.com>
-References: <20231113204309.3246434-1-reidt@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20231113204309.3246434-1-reidt@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ2_JUdLXvUM7DdhjyqEOA4o+pSPKnSnYMQ6m3Ca=N35YA@mail.gmail.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3AE6QZM8089172
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,64 +63,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Reid for sync.
-
-On 11/14/2023 2:13 AM, Reid Tonking wrote:
-> Sync u-boot device tree with Linux kernel 6.7-rc1
+Hi Simon,
+Thanks a lot.
+On Fri, Nov 10, 2023 at 04:50:24AM -0700, Simon Glass wrote:
+> Hi Randolph,
+> 
+> On Wed, Nov 8, 2023, 20:15 Randolph <randolph@andestech.com> wrote:
+> >
+> > The #address-cells is now equal to 2. The format of the load field for
+> > the Linux kernel doesn't match.
+> >
+> > Signed-off-by: Randolph <randolph@andestech.com>
+> > ---
+> >  arch/riscv/dts/binman.dtsi | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
+> > index 6b4eb8dc7b..5117d7c8c9 100644
+> > --- a/arch/riscv/dts/binman.dtsi
+> > +++ b/arch/riscv/dts/binman.dtsi
+> > @@ -50,7 +50,8 @@
+> >                                         os = "Linux";
+> >                                         arch = "riscv";
+> >                                         compression = "none";
+> > -                                       load = <CONFIG_TEXT_BASE>;
+> > +                                       load = <U64_TO_U32_H(CONFIG_TEXT_BASE)
+> > +                                               U64_TO_U32_L(CONFIG_TEXT_BASE)>;
+> 
+I just see the #address-cells changed from 1 to 2 in commit id: 5a348ccf0257.
+In my last commit for binman.dtsi (commit id: d311df8b3169), it is based on
+the value of #address-cells being 1. That's the reason for my patch submission.
+> Does this work?
+> 
+> load = /bits 64/ <CONFIG_TEXT_BASE>
 >
-> Signed-off-by: Reid Tonking <reidt@ti.com>
-> ---
-> Boot-log: https://gist.github.com/reidt1/db5426f2a778369db8c3699cf293b94f
->
->   arch/arm/dts/k3-j7200-main.dtsi       | 2 +-
->   arch/arm/dts/k3-j7200-mcu-wakeup.dtsi | 9 ++++++++-
->   2 files changed, 9 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/dts/k3-j7200-main.dtsi b/arch/arm/dts/k3-j7200-main.dtsi
-> index cdb1d6b2a9..264913f832 100644
-> --- a/arch/arm/dts/k3-j7200-main.dtsi
-> +++ b/arch/arm/dts/k3-j7200-main.dtsi
-> @@ -91,7 +91,7 @@
->   	};
->   
->   	main_navss: bus@30000000 {
-> -		compatible = "simple-mfd";
-> +		compatible = "simple-bus";
->   		#address-cells = <2>;
->   		#size-cells = <2>;
->   		ranges = <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
-> diff --git a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
-> index 6ffaf85fa6..3fc588b848 100644
-> --- a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
-> +++ b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
-> @@ -318,7 +318,7 @@
->   	};
->   
->   	mcu_navss: bus@28380000 {
-> -		compatible = "simple-mfd";
-> +		compatible = "simple-bus";
->   		#address-cells = <2>;
->   		#size-cells = <2>;
->   		ranges = <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>;
-> @@ -637,4 +637,11 @@
->   		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
->   		#thermal-sensor-cells = <1>;
->   	};
-> +
-> +	mcu_esm: esm@40800000 {
-> +		compatible = "ti,j721e-esm";
-> +		reg = <0x00 0x40800000 0x00 0x1000>;
-> +		ti,esm-pins = <95>;
-> +		bootph-pre-ram;
-> +	};
->   };
-
-Please take care of actual usage of this node
-
-https://lore.kernel.org/all/20231003081038.24299-10-j-keerthy@ti.com/
-
-https://lore.kernel.org/all/20231003081038.24299-11-j-keerthy@ti.com/
-
-https://lore.kernel.org/all/838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com/
-
-
+Yes, it works. We use this way for the DDR memory start address above 4G 
+platform. We find the example for 64bit address in the document 
+tools/binman/binman.rst and use it.
+What is the method that we should continue to use in the binman.dtsi?
+1. #address-cells = 2
+2. append /bits/64 
+> >
+> >                                         linux_blob: blob-ext {
+> >                                                 filename = "Image";
+> > --
+> > 2.34.1
+> >
+> 
+> Regards,
+> Simon
