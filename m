@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89621C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 02:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8F27C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 02:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 524E5863C9;
-	Tue, 14 Nov 2023 03:14:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D056E8716C;
+	Tue, 14 Nov 2023 03:14:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cro02O9h";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gm8wQwZF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B14AE871FC; Tue, 14 Nov 2023 03:14:56 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id AB0BB86FB2; Tue, 14 Nov 2023 03:14:58 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04C5D8716C
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 03:14:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 196FB871C0
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 03:14:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1cc703d2633so5563705ad.0
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 18:14:53 -0800 (PST)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1cc41afd376so3351555ad.1
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 18:14:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699928092; x=1700532892; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1699928094; x=1700532894; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t9EWYzhzvRnohj45QdHocxpuPdq+TXjcOYtY+RMWKqw=;
- b=Cro02O9hJgHPGcxPvRRbXBWghYQPZ4/rAGqK0BHWgKYmEeWGTUbGMFdc8tUK5EYIAk
- xEG7m/8fIXyL/pZvE2fD27PqCFc2JV4KvEnS1JfatcGnUPLk+TwnXztQj+mj0sN/Xxl5
- lgeqqNxd/Gd/ieI1LBzFa5C8VVRmhBRsYwedda5QS2bEgo4CS1aamFkJ5acC+OeIBtc5
- 7YEi0TI1sVQqRcNLI0djMvPnwPPTAIdq4do+6NftVN1vWyVFZiZbIaZmBM71PUXhx4b3
- EtSCMv2CqiFPd3F+5YfK5NAnbLxjdYecebWn1xHsr0p0HaYR4RVA6zmkMxi3k54upSCY
- /1fg==
+ bh=Cjaloo8fP4ejF1QQKCfPDBSHT99TfpromhN5WcQJSUk=;
+ b=Gm8wQwZFlSVpTfBvBLE6a5FIOtUNoyjFN73ITe0/cNEmy2suw463oeO6lohrHZ/bfr
+ HDq+d2pLE7mO9SpFUc/l/3wdl3fVGSaCakyBajWiJMi7IEpC+8pbYWkbr+4oVVkidtHp
+ H5TA5UaD2uoSnCTcEATCLMfcdaFEmO3igO07F5BNv8mGHJ/PMzr771CBsD89j0zLxxSW
+ JK29EHQ84WUiFFTA712LfwNdAH+k+B3p7IXZSWu8+wjEeWyJxWuJYXG2bcY8gTaolhvT
+ pafzfcvdeGEEov/ESs8VTG6NQtqZUhiE6jKmTd/CjSHCM6bMuB4j2pHePll0q21h8NIp
+ EFsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699928092; x=1700532892;
+ d=1e100.net; s=20230601; t=1699928094; x=1700532894;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t9EWYzhzvRnohj45QdHocxpuPdq+TXjcOYtY+RMWKqw=;
- b=vHCLnz5t+qN3JVRbf5egEpNLXIvj8K6oFWtt7z6AhgR3qz8Qf4NRthynCUoANt30cY
- am5DEAFtrtBrvJpN5rWHBETyfwdeCgTxI5MnNfB7RArw1pDc6AoJWYObUgXYLJEOfOug
- 2B+XpAru4Zd7lbz9E6mXi4zmSgA6ODUMNjc6dT9aEcYwQnvoDnJIjJrareYzXY5vwCVs
- 4z5zC9mCX23sHcmpwhrUbLcJSfwN9GTS0iKByR73X0vg5WLNR2ve/z1YGaGCNi16fm+E
- fPHXMK/29uGVfdhkK7+ErRbhaQdmSbquGginr+Qb0FLT3R2LvD85oHtu6bxDOkTnz28V
- WmOA==
-X-Gm-Message-State: AOJu0Yx7nUAMKPlmi7kiMTbbXpb2+KdZVJkD5AZ9JwVzOglFZvqSG63r
- mVsZcWaFjPTKN6bTsG13gaDPkw==
-X-Google-Smtp-Source: AGHT+IEieIMrfVwSQpDYh0aZNUlAcpsfNaAZ8QO4f/SG5YGAuVWoMe83lTZHHegTQLmkJS2F6ovfkA==
-X-Received: by 2002:a17:903:234a:b0:1c9:e121:ccc1 with SMTP id
- c10-20020a170903234a00b001c9e121ccc1mr1099286plh.5.1699928092192; 
- Mon, 13 Nov 2023 18:14:52 -0800 (PST)
+ bh=Cjaloo8fP4ejF1QQKCfPDBSHT99TfpromhN5WcQJSUk=;
+ b=Degdhn3TXWSqjQyURMjrkddVxwp7Tk9jC9c9AgHuMGYge6J2ZxyPaAwwuGt39dlqxU
+ cXzSmO8qGU6V5aMmScTfz3Pc3kvbgfhM+SHo8Yi8YYTkudz4dxNVHEkbScyapMXUHu7J
+ iyHKfj1bhkJK1VgvMnOgC1cbdEv49fKijF+UjHz4cLa0JmJXztmKyipqLlJ9yeFE5dfe
+ 9KbTA/LHGHjQd9asp43hujUv7onJ9akvkfLxrw7W7LdwzJLaIVyR6bc0drmCEcBfUdIF
+ zTUCn/DzxfUwxcutPmnXOSun9qsmk23Ap1wQMj2FLbPp2eQp2qlHM0ZRCq51350aJVUd
+ ojqw==
+X-Gm-Message-State: AOJu0Ywz4YReKfNkvg8JvdaUut1tPyUpxi//SH5OM4FbOY2Q6YnzwhSK
+ 7YjWOVw+sUaVZYZFs8Gfr32MwQ==
+X-Google-Smtp-Source: AGHT+IHyz4soaLwxUsDwhqXmPfg0ay3XwUf/DDwx/w8eZtKfory34FPtUXIKIB5K66x7ay4dUJ21tw==
+X-Received: by 2002:a17:902:ce8c:b0:1cc:e66:f994 with SMTP id
+ f12-20020a170902ce8c00b001cc0e66f994mr1134570plg.1.1699928094262; 
+ Mon, 13 Nov 2023 18:14:54 -0800 (PST)
 Received: from octopus.. ([2400:4050:c3e1:100:66f2:cd5c:3d82:6e6f])
  by smtp.gmail.com with ESMTPSA id
- i4-20020a170902c94400b001c61afa7009sm4680475pla.114.2023.11.13.18.14.50
+ i4-20020a170902c94400b001c61afa7009sm4680475pla.114.2023.11.13.18.14.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 18:14:51 -0800 (PST)
+ Mon, 13 Nov 2023 18:14:54 -0800 (PST)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v3 4/5] doc: cmd: add documentation for scmi
-Date: Tue, 14 Nov 2023 11:14:27 +0900
-Message-Id: <20231114021428.531887-5-takahiro.akashi@linaro.org>
+Subject: [PATCH v3 5/5] test: dm: add scmi command test
+Date: Tue, 14 Nov 2023 11:14:28 +0900
+Message-Id: <20231114021428.531887-6-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231114021428.531887-1-takahiro.akashi@linaro.org>
 References: <20231114021428.531887-1-takahiro.akashi@linaro.org>
@@ -94,168 +94,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a help text for scmi command.
+In this test, "scmi" command is tested against different sub-commands.
+Please note that scmi command is for debug purpose and is not intended
+in production system.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
-v6
-* add the manual to doc/usage/index.rst
+v9
+* return -EAGAIN if we want to skip a test
+* use CONFIG_IS_ENABLED() rather than IS_ENABLED()
+v7
+* make test assertions more flexible depending on the number of provided
+  protocols
 v4
-* s/tranport/transport/
+* move 'base'-related changes to the prior commit
+* add CONFIG_CMD_SCMI to sandbox_defconfig
+v3
+* change char to u8 in vendor/agent names
 v2
-* add more descriptions about SCMI
+* use helper functions, removing direct uses of ops
 ---
- doc/usage/cmd/scmi.rst | 126 +++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst    |   1 +
- 2 files changed, 127 insertions(+)
- create mode 100644 doc/usage/cmd/scmi.rst
+ configs/sandbox_defconfig |  1 +
+ test/dm/scmi.c            | 81 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 82 insertions(+)
 
-diff --git a/doc/usage/cmd/scmi.rst b/doc/usage/cmd/scmi.rst
-new file mode 100644
-index 000000000000..9ea7e0e41dad
---- /dev/null
-+++ b/doc/usage/cmd/scmi.rst
-@@ -0,0 +1,126 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index bc5bcb2a6237..c550af93b0ca 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -121,6 +121,7 @@ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_AES=y
+ CONFIG_CMD_TPM=y
+ CONFIG_CMD_TPM_TEST=y
++CONFIG_CMD_SCMI=y
+ CONFIG_CMD_BTRFS=y
+ CONFIG_CMD_CBFS=y
+ CONFIG_CMD_CRAMFS=y
+diff --git a/test/dm/scmi.c b/test/dm/scmi.c
+index 582485471fff..e80667ef72a3 100644
+--- a/test/dm/scmi.c
++++ b/test/dm/scmi.c
+@@ -19,6 +19,7 @@
+ #include <scmi_agent.h>
+ #include <scmi_agent-uclass.h>
+ #include <scmi_protocols.h>
++#include <vsprintf.h>
+ #include <asm/scmi_test.h>
+ #include <dm/device-internal.h>
+ #include <dm/test.h>
+@@ -206,6 +207,86 @@ static int dm_test_scmi_base(struct unit_test_state *uts)
+ 
+ DM_TEST(dm_test_scmi_base, UT_TESTF_SCAN_FDT);
+ 
++static int dm_test_scmi_cmd(struct unit_test_state *uts)
++{
++	struct udevice *agent_dev;
++	int num_proto = 0;
++	char cmd_out[30];
 +
-+scmi command
-+============
++	if (!CONFIG_IS_ENABLED(CMD_SCMI))
++		return -EAGAIN;
 +
-+Synopsis
-+--------
++	/* preparation */
++	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
++					      &agent_dev));
++	ut_assertnonnull(agent_dev);
 +
-+::
++	/*
++	 * Estimate the number of provided protocols.
++	 * This estimation is correct as far as a corresponding
++	 * protocol support is added to sandbox fake serer.
++	 */
++	if (CONFIG_IS_ENABLED(POWER_DOMAIN))
++		num_proto++;
++	if (CONFIG_IS_ENABLED(CLK_SCMI))
++		num_proto++;
++	if (CONFIG_IS_ENABLED(RESET_SCMI))
++		num_proto++;
++	if (CONFIG_IS_ENABLED(DM_REGULATOR_SCMI))
++		num_proto++;
 +
-+    scmi info
-+    scmi perm_dev <agent id> <device id> <flags>
-+    scmi perm_proto <agent id> <device id> <protocol id> <flags>
-+    scmi reset <agent id> <flags>
++	/* scmi info */
++	ut_assertok(run_command("scmi info", 0));
 +
-+Description
-+-----------
++	ut_assert_nextline("SCMI device: scmi");
++	snprintf(cmd_out, 30, "  protocol version: 0x%x",
++		 SCMI_BASE_PROTOCOL_VERSION);
++	ut_assert_nextline(cmd_out);
++	ut_assert_nextline("  # of agents: 2");
++	ut_assert_nextline("      0: platform");
++	ut_assert_nextline("    > 1: OSPM");
++	snprintf(cmd_out, 30, "  # of protocols: %d", num_proto);
++	ut_assert_nextline(cmd_out);
++	if (CONFIG_IS_ENABLED(SCMI_POWER_DOMAIN))
++		ut_assert_nextline("      Power domain management");
++	if (CONFIG_IS_ENABLED(CLK_SCMI))
++		ut_assert_nextline("      Clock management");
++	if (CONFIG_IS_ENABLED(RESET_SCMI))
++		ut_assert_nextline("      Reset domain management");
++	if (CONFIG_IS_ENABLED(DM_REGULATOR_SCMI))
++		ut_assert_nextline("      Voltage domain management");
++	ut_assert_nextline("  vendor: U-Boot");
++	ut_assert_nextline("  sub vendor: Sandbox");
++	ut_assert_nextline("  impl version: 0x1");
 +
-+Arm System Control and Management Interface (SCMI hereafter) is a set of
-+standardised interfaces to manage system resources, like clocks, power
-+domains, pin controls, reset and so on, in a system-wide manner.
++	ut_assert_console_end();
 +
-+An entity which provides those services is called a SCMI firmware (or
-+SCMI server if you like) may be placed/implemented by EL3 software or
-+by a dedicated system control processor (SCP) or else.
++	/* scmi perm_dev */
++	ut_assertok(run_command("scmi perm_dev 1 0 1", 0));
++	ut_assert_console_end();
 +
-+A user of SCMI interfaces, including U-Boot, is called a SCMI agent and
-+may issues commands, which are defined in each protocol for specific system
-+resources, to SCMI server via a communication channel, called a transport.
-+Those interfaces are independent from the server's implementation thanks to
-+a transport layer.
++	ut_assert(run_command("scmi perm_dev 1 0 0", 0));
++	ut_assert_nextline("Denying access to device:0 failed (-13)");
++	ut_assert_console_end();
 +
-+For more details, see the `SCMI specification`_.
++	/* scmi perm_proto */
++	ut_assertok(run_command("scmi perm_proto 1 0 14 1", 0));
++	ut_assert_console_end();
 +
-+While most of system resources managed under SCMI protocols are implemented
-+and handled as standard U-Boot devices, for example clk_scmi, scmi command
-+provides additional management functionality against SCMI server.
++	ut_assert(run_command("scmi perm_proto 1 0 14 0", 0));
++	ut_assert_nextline("Denying access to protocol:0x14 on device:0 failed (-13)");
++	ut_assert_console_end();
 +
-+scmi info
-+~~~~~~~~~
-+    Show base information about SCMI server and supported protocols
++	/* scmi reset */
++	ut_assert(run_command("scmi reset 1 1", 0));
++	ut_assert_nextline("Reset failed (-13)");
++	ut_assert_console_end();
 +
-+scmi perm_dev
-+~~~~~~~~~~~~~
-+    Allow or deny access permission to the device
++	return 0;
++}
 +
-+scmi perm_proto
-+~~~~~~~~~~~~~~~
-+    Allow or deny access to the protocol on the device
++DM_TEST(dm_test_scmi_cmd, UT_TESTF_SCAN_FDT);
 +
-+scmi reset
-+~~~~~~~~~~
-+    Reset the already-configured permissions against the device
-+
-+Parameters are used as follows:
-+
-+<agent id>
-+    SCMI Agent ID, hex value
-+
-+<device id>
-+    SCMI Device ID, hex value
-+
-+    Please note that what a device means is not defined
-+    in the specification.
-+
-+<protocol id>
-+    SCMI Protocol ID, hex value
-+
-+    It must not be 0x10 (base protocol)
-+
-+<flags>
-+    Flags to control the action, hex value
-+
-+    0 to deny, 1 to allow. The other values are reserved and allowed
-+    values may depend on the implemented version of SCMI server in
-+    the future. See SCMI specification for more details.
-+
-+Example
-+-------
-+
-+Obtain basic information about SCMI server:
-+
-+::
-+
-+    => scmi info
-+    SCMI device: scmi
-+      protocol version: 0x20000
-+      # of agents: 3
-+          0: platform
-+        > 1: OSPM
-+          2: PSCI
-+      # of protocols: 4
-+          Power domain management
-+          Performance domain management
-+          Clock management
-+          Sensor management
-+      vendor: Linaro
-+      sub vendor: PMWG
-+      impl version: 0x20b0000
-+
-+Ask for access permission to device#0:
-+
-+::
-+
-+    => scmi perm_dev 1 0 1
-+
-+Reset configurations with all access permission settings retained:
-+
-+::
-+
-+    => scmi reset 1 0
-+
-+Configuration
-+-------------
-+
-+The scmi command is only available if CONFIG_CMD_SCMI=y.
-+Default n because this command is mainly for debug purpose.
-+
-+Return value
-+------------
-+
-+The return value ($?) is set to 0 if the operation succeeded,
-+1 if the operation failed or -1 if the operation failed due to
-+a syntax error.
-+
-+.. _`SCMI specification`: https://developer.arm.com/documentation/den0056/e/?lang=en
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index d8e23fcacffb..1a626c03c237 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -94,6 +94,7 @@ Shell commands
-    cmd/rng
-    cmd/saves
-    cmd/sbi
-+   cmd/scmi
-    cmd/scp03
-    cmd/seama
-    cmd/setexpr
+ static int dm_test_scmi_power_domains(struct unit_test_state *uts)
+ {
+ 	struct sandbox_scmi_agent *agent;
 -- 
 2.34.1
 
