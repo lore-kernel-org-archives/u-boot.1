@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDA8DC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 13:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06735C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 13:24:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97D4087215;
-	Tue, 14 Nov 2023 14:14:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B64A587215;
+	Tue, 14 Nov 2023 14:24:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HajipH/a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f9KYRrjy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0517D87446; Tue, 14 Nov 2023 14:14:59 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 379EF8721D; Tue, 14 Nov 2023 14:24:52 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E28E7871E4
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 14:14:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5EE0871E9
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 14:24:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7789923612dso348384185a.0
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 05:14:56 -0800 (PST)
+ spf=pass smtp.mailfrom=jh80.chung@gmail.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6711dd6595fso28736576d6.3
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 05:24:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699967695; x=1700572495; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699968288; x=1700573088; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=KYNgrmVJC9w7IXoyL6mbBBtVvXJHUVFxiN5h1vukYzA=;
- b=HajipH/alcXZOFJyDSSvHkm0B/uxWzyCIcZL/5g/knhEjyt+6BAfc8Xr3cqJoCquYS
- wjga7wbAeAa9iVoKoM3SIFRZ0tt3+N3gluCuHpy8v0/CZPEeRzLWPtwnt/IxRIroup4h
- HRRP1GhXPg5m3aiTHHDyEcNi9fUIFSOmRnDpcfLQh6bWHsW7GzvtK70QgJV/VfmZBIuG
- uwBTja2aXp+SUfUbevVOYIsJaxmVWVCpBVdozNL863LKnkM1L07oPA1cOBx+sFgxufJ6
- J6Y2mPvvGzzsUq08T5g/w4qK8LqvMl+KfIhuoq+7ewTHDt+1XXiHSkr51gy2ppHJADYU
- ZYCQ==
+ bh=DXlobsUXWVZnCCx4FHbx2dgLdz+a6A+PeoEHES5fC5k=;
+ b=f9KYRrjyatmdNyrhgN5f8PJ/nyiIqkUuRv4rakxwoNEy0eOydyYMKbf2NDrPjv2LeK
+ nabaQjzipI1HXMQkyDycBkj8nv7Sgh+nkr3g/B7xlN2xR9C0CG0uKWsW5yfjVhR/5cGJ
+ woPkU3Ev+1AA3nhjRRgqAVPV8h5OxxIWLvcgPQ6aI0NUfEgri6Hb2zaxfSdCrpQpMHFl
+ Mp7mQqal4C6Luog6mmQRMdr4vGEjGYxMOauleZlTqVPOSonDUvIkV+Mzknjh4cm65LZ9
+ dw3y1HxEod/1syWK+TUep2chS9UIJIrKgO2/0152kpRJUmBlKZrf14+bOOxAKAqFwf9T
+ Vipg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699967695; x=1700572495;
+ d=1e100.net; s=20230601; t=1699968288; x=1700573088;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KYNgrmVJC9w7IXoyL6mbBBtVvXJHUVFxiN5h1vukYzA=;
- b=upFwm4I4STefgDaKdDvRWf/nOSdtY8mIWHD20/bGRTgQ3XBOvG1bDfZ26N6jOBcX+B
- 1YnjKYpwWc/B7i/wRabmoqgTcxO/du7W994pD75A6km7Q8O37uVRDyT09UV+k3KZftE2
- O7hOX1B1t3NbvxHyXK9zyaAn7uWasmpLAv3iNK1k+uBL7WD3Vv5vgOJKxoUrA/WM3W8N
- F7/dlSACRdWiyimLPNRwqZPaO54qEh08ra6PMTQLvtwPut2Tubm7wFJoHwX9lZsLKE6x
- 4F8EcBkMuE1pDGTsV3XsScBJcTgpu+pBBD7wu48w+Sd9fwBnnXCZ+eXAKB1FtALrDgp5
- Hv8g==
-X-Gm-Message-State: AOJu0YwU/3BVxwPfiXOw6SCPFA2fjBMOBOEfL1egRTRQBYp8oJAYN7n1
- 2dOSE6i7g15XEu/brRG4hYo=
-X-Google-Smtp-Source: AGHT+IE0eGcsV+5LG1jHpBVzkmZoJzRyod1klriFG3hDsTWTxKGJr66DWfKaDht7EoUBBYN6/3Kduw==
-X-Received: by 2002:a05:620a:2a08:b0:77a:1476:fb93 with SMTP id
- o8-20020a05620a2a0800b0077a1476fb93mr2298158qkp.47.1699967695580; 
- Tue, 14 Nov 2023 05:14:55 -0800 (PST)
-Received: from [192.168.1.63] (c-71-62-146-134.hsd1.va.comcast.net.
- [71.62.146.134]) by smtp.gmail.com with ESMTPSA id
- w2-20020a05620a094200b0077891d2d12dsm2640853qkw.43.2023.11.14.05.14.54
+ bh=DXlobsUXWVZnCCx4FHbx2dgLdz+a6A+PeoEHES5fC5k=;
+ b=ugtaodgucXBp/h4Nk2yWd1+OmD4P5+HGdoEYP9TuFMSoksJCUqmEzvRYz77c4f8akT
+ BQgJ6AZOK9wa9UPeUUekd3PmEDmz66JTQeOhAo3VvAVoAQrkS1VTSf+4DAAB50GLngxC
+ ZS6NVBTODPdVf6iH8qaF95SlLjyEl93wS/gGi8ASV9jnEPwgz2a5gsedZAtaU06HBapv
+ cGvDzf9IwnrYv+3CO0VEKrVHgEijmOVP/DLP5CXRE/Vhvphw9BFd8BNlE1FitxPHb+fG
+ 4CofO2Iv+8CkDD2s1Tmo1mVbBo/t7hlNZwP7Tsqw3+V1AvBLlTuf3x0wJqnFJVd06jFO
+ hvVg==
+X-Gm-Message-State: AOJu0YzJeZLpbBn0cfzGJ2+49zM0hpB4CP0m19BK4tCdn2w80/MJEia9
+ tQHVGcd0UjxIexWhUjQjjFI=
+X-Google-Smtp-Source: AGHT+IGgmUF/XJsntUbaGCg0CCDaLKsNA6AqR/Ad7EQl2bbNRD6hrvVQE8KG4x0OM/k/Fnzrb35tCA==
+X-Received: by 2002:ad4:4ea5:0:b0:66c:ffe1:e244 with SMTP id
+ ed5-20020ad44ea5000000b0066cffe1e244mr3095105qvb.62.1699968288514; 
+ Tue, 14 Nov 2023 05:24:48 -0800 (PST)
+Received: from [172.20.3.47] ([12.191.197.195])
+ by smtp.gmail.com with ESMTPSA id
+ dl15-20020ad44e0f000000b006709b9f0a72sm2882825qvb.22.2023.11.14.05.24.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Nov 2023 05:14:55 -0800 (PST)
-Message-ID: <b4e935c8-f1b8-53ad-476e-280279abc0f3@gmail.com>
-Date: Tue, 14 Nov 2023 08:14:54 -0500
+ Tue, 14 Nov 2023 05:24:48 -0800 (PST)
+Message-ID: <41c7aa9d-9c7f-4a4a-a9d3-ec5c6909337d@gmail.com>
+Date: Tue, 14 Nov 2023 22:24:37 +0900
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Subject: Re: [PATCH v3] clk: nuvoton: add read only feature for clk driver
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] sunxi: H616: remove default AXP305 selection
 Content-Language: en-US
-To: Jim Liu <jim.t90615@gmail.com>, JJLIU0@nuvoton.com, YSCHU@nuvoton.com,
- KWLIU@nuvoton.com
-Cc: u-boot@lists.denx.de
-References: <20231114090004.3746024-1-JJLIU0@nuvoton.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231114090004.3746024-1-JJLIU0@nuvoton.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Cc: Vignesh R <vigneshr@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+References: <20231114013106.31336-1-andre.przywara@arm.com>
+ <20231114013106.31336-3-andre.przywara@arm.com>
+From: Jaehoon Chung <jh80.chung@gmail.com>
+In-Reply-To: <20231114013106.31336-3-andre.przywara@arm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,106 +101,60 @@ X-Virus-Status: Clean
 
 
 
-On 11/14/23 04:00, Jim Liu wrote:
-> Add a flag to set ahb/apb/fiu/spi clock divider as read-only
-> The spi clock setting is related to booting flash, it is setup by early
-> bootloader.
-> It just protects the clock source and can't modify it in uboot.
+On 11/14/23 10:31, Andre Przywara wrote:
+> The original H616 devices released about three years ago were typically
+> paired with an X-Powers AXP305 PMIC. Newer devices uses the smaller
+> AXP313, and there seem to be far more systems with this PMIC around now.
 > 
-> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-> ---
-> Changes for v3:
->     - add commit message
-> Changes for v2:
->     - add commit message
-> ---
->   drivers/clk/nuvoton/clk_npcm.c    | 15 ++++++++++++---
->   drivers/clk/nuvoton/clk_npcm.h    |  1 +
->   drivers/clk/nuvoton/clk_npcm8xx.c | 12 ++++++------
->   3 files changed, 19 insertions(+), 9 deletions(-)
+> Remove the default AXP305 selection for the H616 SoC from the Kconfig,
+> and move the PMIC selection into the board defconfig files instead.
 > 
-> diff --git a/drivers/clk/nuvoton/clk_npcm.c b/drivers/clk/nuvoton/clk_npcm.c
-> index 8d71f2a24b..18cb9cddbf 100644
-> --- a/drivers/clk/nuvoton/clk_npcm.c
-> +++ b/drivers/clk/nuvoton/clk_npcm.c
-> @@ -135,7 +135,7 @@ static u32 npcm_clk_get_div(struct clk *clk)
->   	return div;
->   }
->   
-> -static u32 npcm_clk_set_div(struct clk *clk, u32 div)
-> +static int npcm_clk_set_div(struct clk *clk, u32 div)
->   {
->   	struct npcm_clk_priv *priv = dev_get_priv(clk->dev);
->   	struct npcm_clk_div *divider;
-> @@ -145,6 +145,9 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
->   	if (!divider)
->   		return -EINVAL;
->   
-> +	if (divider->flags & DIV_RO)
-> +		return 0;
-> +
->   	if (divider->flags & PRE_DIV2)
->   		div = div >> 1;
->   
-> @@ -153,6 +156,12 @@ static u32 npcm_clk_set_div(struct clk *clk, u32 div)
->   	else
->   		clkdiv = ilog2(div);
->   
-> +	if (clkdiv > (divider->mask >> (ffs(divider->mask) - 1))) {
-> +		printf("clkdiv(%d) for clk(%ld) is over limit\n",
-> +		       clkdiv, clk->id);
-> +		return -EINVAL;
-> +	}
-> +
->   	val = readl(priv->base + divider->reg);
->   	val &= ~divider->mask;
->   	val |= (clkdiv << (ffs(divider->mask) - 1)) & divider->mask;
-> @@ -253,8 +262,8 @@ static ulong npcm_clk_set_rate(struct clk *clk, ulong rate)
->   	if (ret)
->   		return ret;
->   
-> -	debug("%s: rate %lu, new rate (%lu / %u)\n", __func__, rate, parent_rate, div);
-> -	return (parent_rate / div);
-> +	debug("%s: rate %lu, new rate %lu\n", __func__, rate, npcm_clk_get_rate(clk));
-> +	return npcm_clk_get_rate(clk);
->   }
->   
->   static int npcm_clk_set_parent(struct clk *clk, struct clk *parent)
-> diff --git a/drivers/clk/nuvoton/clk_npcm.h b/drivers/clk/nuvoton/clk_npcm.h
-> index 06b60dc8b8..b4726d8381 100644
-> --- a/drivers/clk/nuvoton/clk_npcm.h
-> +++ b/drivers/clk/nuvoton/clk_npcm.h
-> @@ -50,6 +50,7 @@
->   #define PRE_DIV2	BIT(2)	/* Pre divisor = 2 */
->   #define POST_DIV2	BIT(3)	/* Post divisor = 2 */
->   #define FIXED_PARENT	BIT(4)	/* clock source is fixed */
-> +#define DIV_RO		BIT(5)	/* divider is read-only */
->   
->   /* Parameters of PLL configuration */
->   struct npcm_clk_pll {
-> diff --git a/drivers/clk/nuvoton/clk_npcm8xx.c b/drivers/clk/nuvoton/clk_npcm8xx.c
-> index 27e3cfcf55..d1b32e3237 100644
-> --- a/drivers/clk/nuvoton/clk_npcm8xx.c
-> +++ b/drivers/clk/nuvoton/clk_npcm8xx.c
-> @@ -45,12 +45,12 @@ static struct npcm_clk_select npcm8xx_clk_selectors[] = {
->   };
->   
->   static struct npcm_clk_div npcm8xx_clk_dividers[] = {
-> -	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2},
-> -	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2},
-> -	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2},
-> -	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1},
-> -	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1},
-> -	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1},
-> +	{NPCM8XX_CLK_AHB, CLKDIV1, CLK4DIV, DIV_TYPE1 | PRE_DIV2 | DIV_RO},
-> +	{NPCM8XX_CLK_APB2, CLKDIV2, APB2CKDIV, DIV_TYPE2 | DIV_RO},
-> +	{NPCM8XX_CLK_APB5, CLKDIV2, APB5CKDIV, DIV_TYPE2 | DIV_RO},
-> +	{NPCM8XX_CLK_SPI0, CLKDIV3, SPI0CKDIV, DIV_TYPE1 | DIV_RO},
-> +	{NPCM8XX_CLK_SPI1, CLKDIV3, SPI1CKDIV, DIV_TYPE1 | DIV_RO},
-> +	{NPCM8XX_CLK_SPI3, CLKDIV1, SPI3CKDIV, DIV_TYPE1 | DIV_RO},
->   	{NPCM8XX_CLK_SPIX, CLKDIV3, SPIXCKDIV, DIV_TYPE1},
->   	{NPCM8XX_CLK_UART, CLKDIV1, UARTDIV1, DIV_TYPE1},
->   	{NPCM8XX_CLK_UART2, CLKDIV3, UARTDIV2, DIV_TYPE1},
-> 
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+Best Regards,
+Jaehoon Chung
+
+> ---
+>  configs/orangepi_zero2_defconfig | 1 +
+>  configs/x96_mate_defconfig       | 1 +
+>  drivers/power/Kconfig            | 1 -
+>  3 files changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/configs/orangepi_zero2_defconfig b/configs/orangepi_zero2_defconfig
+> index f13735e91c7..127cf9e365a 100644
+> --- a/configs/orangepi_zero2_defconfig
+> +++ b/configs/orangepi_zero2_defconfig
+> @@ -19,6 +19,7 @@ CONFIG_SYS_I2C_SPEED=400000
+>  CONFIG_SPI_FLASH_MACRONIX=y
+>  CONFIG_PHY_REALTEK=y
+>  CONFIG_SUN8I_EMAC=y
+> +CONFIG_AXP305_POWER=y
+>  CONFIG_SPI=y
+>  CONFIG_USB_EHCI_HCD=y
+>  CONFIG_USB_OHCI_HCD=y
+> diff --git a/configs/x96_mate_defconfig b/configs/x96_mate_defconfig
+> index 318951e19c2..e805e0952b3 100644
+> --- a/configs/x96_mate_defconfig
+> +++ b/configs/x96_mate_defconfig
+> @@ -18,6 +18,7 @@ CONFIG_SPL_SYS_I2C_LEGACY=y
+>  CONFIG_SYS_I2C_MVTWSI=y
+>  CONFIG_SYS_I2C_SLAVE=0x7f
+>  CONFIG_SYS_I2C_SPEED=400000
+> +CONFIG_AXP305_POWER=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_USB_EHCI_HCD=y
+>  CONFIG_USB_OHCI_HCD=y
+> diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
+> index 2395720c99c..33b8bc1214d 100644
+> --- a/drivers/power/Kconfig
+> +++ b/drivers/power/Kconfig
+> @@ -56,7 +56,6 @@ choice
+>  	depends on ARCH_SUNXI
+>  	default AXP209_POWER if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I
+>  	default AXP221_POWER if MACH_SUN6I || MACH_SUN8I_A23 || MACH_SUN8I_A33 || MACH_SUN8I_R40
+> -	default AXP305_POWER if MACH_SUN50I_H616
+>  	default AXP818_POWER if MACH_SUN8I_A83T
+>  	default SUNXI_NO_PMIC if MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_V3S
+>  
