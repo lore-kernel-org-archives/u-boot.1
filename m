@@ -4,76 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B605C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 15:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34C4C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 16:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43908870BC;
-	Tue, 14 Nov 2023 16:59:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1490F871D0;
+	Tue, 14 Nov 2023 17:00:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hwmVrUG3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pUevQw+X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C71F6871A4; Tue, 14 Nov 2023 16:59:02 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6820C86940; Tue, 14 Nov 2023 17:00:05 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92C6786EFA
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 16:59:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0004586940
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:00:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1699977539; x=1700582339; i=xypron.glpk@gmx.de;
- bh=Oi+d0aBI2lm+CElSugE0Xx9YvXxaimccGMR5NEkQyMA=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=hwmVrUG3iSXfxeE6KsVz0YNIRsDJSzgihoonlEHBmWQZ71vUh8TwOAHlpMLmO2Fi
- 1GZu8V2C8Fgdwi6htrm82rbfoVOAACqsN2OvqZ7jEopnsTiveCtGf/u7W3qqum4NI
- HaOdoP+T0NYVlOfeRcilcdMWgZufLWicnAu/h8RHDaAn2QNc41/pDGJrD3dPITpK7
- B2QSm3kdXIT2XnshMULSqX3/K0CPAW2p+pmt5B6OYWtj2o2iRktcSgRGdbbTgDIE7
- DDemqak7S92fotA7XNCRNJD8jWD9FQJA94lGmitpTuh0WNf9b9Hg24Bi5ncQTIt6r
- fpTiIOh+Jd5nKQye/w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mr9G2-1rgxwS49iA-00oEZc; Tue, 14
- Nov 2023 16:58:59 +0100
-Message-ID: <43bd03c9-9485-4446-9a67-6c6bd8fb324a@gmx.de>
-Date: Tue, 14 Nov 2023 16:58:51 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AEFxwei129320;
+ Tue, 14 Nov 2023 09:59:58 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1699977598;
+ bh=e9bi79Pxg6ZC8A+1QO2lmLzJXZab7t8u/HEY3+wBH6g=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=pUevQw+XKjG9kBOGMp3IvXi+o3+lRDR0Rdmsc0N+f/dd6HXWwQppyDArN4zxNAKTD
+ a7tlYgcrQNR1QC29v+G9602ZkHJYHwTBKSt3fYTyrFa46B0r9LDTqZM9HpizO5s7fg
+ 0RAiVISvLUoBcYtinZQgxb5FsDdFPSeQRJbKYuLQ=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AEFxwLk067469
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 14 Nov 2023 09:59:58 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
+ Nov 2023 09:59:58 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 14 Nov 2023 09:59:58 -0600
+Received: from fllv0039.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AEFxvpU021295;
+ Tue, 14 Nov 2023 09:59:57 -0600
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Nishanth Menon <nm@ti.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH 2/3] arm: mach-k3: Remove incorrect checks for SPL build
+Date: Tue, 14 Nov 2023 09:59:49 -0600
+Message-ID: <20231114155950.296644-2-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231114155950.296644-1-afd@ti.com>
+References: <20231114155950.296644-1-afd@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: avoid using deprecated sphinx function
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-References: <20231114-b4-sphinx-deprecation-v1-1-41687254ad8e@linaro.org>
- <20231114154612.GR6601@bill-the-cat>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231114154612.GR6601@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:REEmN/RxNc8EsOuJgBlKTE8BzBPFHbHoo7GgsOajyfJNVkHntHw
- fhNr/Fg+WiQ7gUlUH/0trF/nP6IcIRzHjRlxFY7Fvoq7zXH4iN2ZAUJ+qeWP4oA0yxS67g1
- a63e88xB47uSoc1OLhc3a4huTOml3LYm5Fy6B+a2vr+L4txJpioqRN1zTMX+mA4pDhBQeWY
- VZviU1vgVPcbJKUdmAo9g==
-UI-OutboundReport: notjunk:1;M01:P0:Epq9/Dqu/SE=;fTiMvq0vb2IrUN0xRrvGoeAY5o9
- bhz7oSHdUOV7E6Zl3YstvW0q2vT03n0j6KtoyVfMp6HKE0NKL2IRaHf7b5/5crHUuLlhhB+tM
- 36fNxAM6+ngi0Qj822ZuH41qvvTgiZtaxCfcAtzc95JmQKQOK7eAtmBsohkHO09zDCq14pDz8
- N4tDumB4cTi5S7lSenXg/6nxedq4eW5QCD0jOmk1BWhIprpw2OLKM2Ydxsxk6KWV2sqI519YA
- 88HUaZ96/6Txwl16GokYMcOPvBeAqPQqcqAGe+FMOveTul23P2CjIZoZ1a9T+I822UmF5GPtJ
- SqofQT4NHS4rvqUXlI7msj40gN0kXyx3u7AcrYgWrcRWFV3R7xHsL027RN5SnVv7W7LnVLKUg
- FG1hZ4BEDADA1U/6Jl+B57eIg6rxW7/QEHax1FiSfhUcu1rUTcFmdQe5emO4+FaD+Mhwnn/6M
- qTjUcfR/sU/kIO3p8BRQFvwBAccjEG41MwUJj2urwBETSxvtY/E3wdxvp2c2JVwZ+vFWbzqFY
- 5JE0PY3SbTGi7Y32Up2BfHup2T8lbo+Yk3mwW4ws9vUckma/mODerKTgDfnyPJ2QbHMu8hezH
- VEhxHvzzVNqPH2j+o0uhANhJxE34POpX5KLD3lqbHS5A5j/ONHEBRLxknXDhbDEgKFuuQ/DOW
- xVmUgSPgzWDnDQRxxwNJt8FlMPiEYrpsF0SH9EgcwpB0Qjgh1JMzYqptaBYOuMeT1TMOxd71J
- J10Ceg98hOxrkqhyFdMHHsLTk+Kf3Ze0bV6HHvpQVZBQVVFj6Q0Su4Fej0wNUmtlcnGMS7ztM
- nkguBlTMbs5j+7aedCUdQNrXX6daJpARrm+sYs/U42V/meLYhnapk1eKotAwF14jFB8eXjdDy
- 0fMFiFF6l0/j01hK5quoiGRWDz+jgNvFNDxUQKBBA6HuMPaQwOTDYw7nTeJ0GuTrnKgJzE5gN
- oqMDx1t0YAOElRniv8/UinVPMF4=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,46 +80,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/14/23 16:46, Tom Rini wrote:
-> On Tue, Nov 14, 2023 at 03:18:02PM +0000, Caleb Connolly wrote:
->
->> The execfile_() function in sphinx has been removed after being
->> deprecated for some time. Follow what sphinx upstream does in [1] to
->> avoid using this function. This fixes "make htmldocs" on at least Arch
->> Linux but likely other distros too.
+The kconfig option SPL means this build supports SPL but not that
+this build is SPL, nor that this build is the SPL running on R5.
+For options that are for R5 SPL use CPU_V7R.
 
-Hello Caleb,
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ arch/arm/mach-k3/Kconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Did you set up an environment as described in
-https://docs.u-boot.org/en/latest/build/documentation.html?
-
-Or did you try to build with other versions of packages than those
-described in doc/sphinx/requirements.txt?
-
-It would well make sense to rework our requirements as the Sphinx 3.4.3
-we are using is getting dated.
-
-Best regards
-
-Heinrich
-
->>
->> [1]: https://github.com/sphinx-doc/sphinx/commit/9ced1e355ad6baecd4e755=
-a598a54877dc0aad44
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->> base-commit: 92b27528d777ce85362af45e7d2974a6c856219b
->
-> I think we should cherry-pick:
-> commit 0283189e8f3d0917e2ac399688df85211f48447b
-> Author: Jonathan Corbet <corbet@lwn.net>
-> Date:   Wed Jan 4 10:47:39 2023 -0700
->
->      docs: Fix the docs build with Sphinx 6.0
->
-> from the kernel, to keep the file in-sync. That's the only commit to
-> load_config.py since I believe we synced last, but there might be other
-> changes in Documentation/sphinx/ to grab as well.
->
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 9168bf842dc..4d19cf3e353 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -111,7 +111,7 @@ config K3_EARLY_CONS_IDX
+ 
+ config K3_LOAD_SYSFW
+ 	bool
+-	depends on SPL
++	depends on CPU_V7R
+ 
+ config K3_SYSFW_IMAGE_NAME
+ 	string "File name of SYSFW firmware and configuration blob"
+@@ -158,7 +158,7 @@ config K3_SYSFW_IMAGE_SPI_OFFS
+ 
+ config SYS_K3_SPL_ATF
+ 	bool "Start Cortex-A from SPL"
+-	depends on SPL && CPU_V7R
++	depends on CPU_V7R
+ 	help
+ 	  Enabling this will try to start Cortex-A (typically with ATF)
+ 	  after SPL from R5.
+@@ -172,7 +172,7 @@ config K3_ATF_LOAD_ADDR
+ 
+ config K3_DM_FW
+ 	bool "Separate DM firmware image"
+-	depends on SPL && CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
++	depends on CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
+ 	default y
+ 	help
+ 	  Enabling this will indicate that the system has separate DM
+-- 
+2.39.2
 
