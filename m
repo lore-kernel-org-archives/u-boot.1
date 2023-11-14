@@ -4,84 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06735C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 13:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC5FAC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 13:30:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B64A587215;
-	Tue, 14 Nov 2023 14:24:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EF73D87225;
+	Tue, 14 Nov 2023 14:30:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f9KYRrjy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BRDJuzEf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 379EF8721D; Tue, 14 Nov 2023 14:24:52 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 96388871D0; Tue, 14 Nov 2023 14:30:37 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5EE0871E9
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 14:24:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64C1687282
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 14:30:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@gmail.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6711dd6595fso28736576d6.3
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 05:24:49 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-778925998cbso374267185a.0
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 05:30:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699968288; x=1700573088; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1699968634; x=1700573434; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=DXlobsUXWVZnCCx4FHbx2dgLdz+a6A+PeoEHES5fC5k=;
- b=f9KYRrjyatmdNyrhgN5f8PJ/nyiIqkUuRv4rakxwoNEy0eOydyYMKbf2NDrPjv2LeK
- nabaQjzipI1HXMQkyDycBkj8nv7Sgh+nkr3g/B7xlN2xR9C0CG0uKWsW5yfjVhR/5cGJ
- woPkU3Ev+1AA3nhjRRgqAVPV8h5OxxIWLvcgPQ6aI0NUfEgri6Hb2zaxfSdCrpQpMHFl
- Mp7mQqal4C6Luog6mmQRMdr4vGEjGYxMOauleZlTqVPOSonDUvIkV+Mzknjh4cm65LZ9
- dw3y1HxEod/1syWK+TUep2chS9UIJIrKgO2/0152kpRJUmBlKZrf14+bOOxAKAqFwf9T
- Vipg==
+ bh=nLupilAb9rNNHrtCKPuOTn5Wg1KWpOzY/WpkScq3tCA=;
+ b=BRDJuzEfL6SyT8/beZiFJgX42msKEFNCs7AX/nFqkTIuYmwoDRhEGlpAoSim4y95CA
+ d+13AiwL/oyCNXYFekB6i5HvcwnPVMZpXovcztPKv4qJ6mjdFkKgCGbIgcQU/WhNqb/X
+ 6MT2TuMyYzCypDv0WaO3kqgXbtWDBE7PlJ2BdFkQ587xttOq79gUbbDi8Zm+nVCqSrPC
+ Ykk/gC2zu2bARQ/2MO55ITLr1Lgl24eh7ec/cAAZLES53J1wxilnah0JHIdeUrWLiZP3
+ pjmpPifenR2uTVmFxTy8JVPlRrP2jDtleZGB1UMj2WayRr3G4hFjKQr2llv5+x3YnPkY
+ 9hkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699968288; x=1700573088;
+ d=1e100.net; s=20230601; t=1699968634; x=1700573434;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DXlobsUXWVZnCCx4FHbx2dgLdz+a6A+PeoEHES5fC5k=;
- b=ugtaodgucXBp/h4Nk2yWd1+OmD4P5+HGdoEYP9TuFMSoksJCUqmEzvRYz77c4f8akT
- BQgJ6AZOK9wa9UPeUUekd3PmEDmz66JTQeOhAo3VvAVoAQrkS1VTSf+4DAAB50GLngxC
- ZS6NVBTODPdVf6iH8qaF95SlLjyEl93wS/gGi8ASV9jnEPwgz2a5gsedZAtaU06HBapv
- cGvDzf9IwnrYv+3CO0VEKrVHgEijmOVP/DLP5CXRE/Vhvphw9BFd8BNlE1FitxPHb+fG
- 4CofO2Iv+8CkDD2s1Tmo1mVbBo/t7hlNZwP7Tsqw3+V1AvBLlTuf3x0wJqnFJVd06jFO
- hvVg==
-X-Gm-Message-State: AOJu0YzJeZLpbBn0cfzGJ2+49zM0hpB4CP0m19BK4tCdn2w80/MJEia9
- tQHVGcd0UjxIexWhUjQjjFI=
-X-Google-Smtp-Source: AGHT+IGgmUF/XJsntUbaGCg0CCDaLKsNA6AqR/Ad7EQl2bbNRD6hrvVQE8KG4x0OM/k/Fnzrb35tCA==
-X-Received: by 2002:ad4:4ea5:0:b0:66c:ffe1:e244 with SMTP id
- ed5-20020ad44ea5000000b0066cffe1e244mr3095105qvb.62.1699968288514; 
- Tue, 14 Nov 2023 05:24:48 -0800 (PST)
-Received: from [172.20.3.47] ([12.191.197.195])
- by smtp.gmail.com with ESMTPSA id
- dl15-20020ad44e0f000000b006709b9f0a72sm2882825qvb.22.2023.11.14.05.24.47
+ bh=nLupilAb9rNNHrtCKPuOTn5Wg1KWpOzY/WpkScq3tCA=;
+ b=XCll4TEhRNcRhU8N4G3Ns0cEC08lqr11JY+W0jciHbkMRoVickBAv9r2tplQDKBc6l
+ W2IxlXWxppnS+5+kVYfBwx7qY/lq36l9YWEaX4CkMjXX2hko/bukIcM2aSNK2Hp5tPV9
+ ZH4orv9GAO8fKSo5uzlJe2Kxmc31eRzokwHtv2+QLakUfcweHXb/z59foNayxkFJ5krS
+ xOGH6OlbP849oCf0iHd1TYDhDVLRuUkAnweFFLOzYZcbGhGbe2QC4kVhSqnWa19cTFga
+ MZ9YxqCZbshWpjHdkpU9aTcS4LFx4XxUbQXcpkOycVaeqzAtFNwjs1VrQoUtSNJS+uMM
+ uTYg==
+X-Gm-Message-State: AOJu0Yyq+ZiscEqSTQ0rtJOZgdJME3vp8TRkBf9yM67sfnYuBc9TlVf0
+ B1YBgzUyhuHDA5dJv671EjlNJD3L6DI=
+X-Google-Smtp-Source: AGHT+IG+hvSSRtNFJdHVrMiUiX+QajHeWFzd9A0uog0GCmp+pQlF+ozd1M6LdB4WAbUouFrfsn+Lpg==
+X-Received: by 2002:a05:620a:f06:b0:77b:d6ab:7107 with SMTP id
+ v6-20020a05620a0f0600b0077bd6ab7107mr2529699qkl.70.1699968634186; 
+ Tue, 14 Nov 2023 05:30:34 -0800 (PST)
+Received: from [192.168.1.63] (c-71-62-146-134.hsd1.va.comcast.net.
+ [71.62.146.134]) by smtp.gmail.com with ESMTPSA id
+ u8-20020a05620a022800b00767da9b6ae9sm2148828qkm.11.2023.11.14.05.30.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Nov 2023 05:24:48 -0800 (PST)
-Message-ID: <41c7aa9d-9c7f-4a4a-a9d3-ec5c6909337d@gmail.com>
-Date: Tue, 14 Nov 2023 22:24:37 +0900
+ Tue, 14 Nov 2023 05:30:33 -0800 (PST)
+Message-ID: <b99a114b-2715-2cba-cb0f-0dfafd32c29d@gmail.com>
+Date: Tue, 14 Nov 2023 08:30:32 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] sunxi: H616: remove default AXP305 selection
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.1
+Subject: Re: U-Booters at LPC
 Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: Vignesh R <vigneshr@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-References: <20231114013106.31336-1-andre.przywara@arm.com>
- <20231114013106.31336-3-andre.przywara@arm.com>
-From: Jaehoon Chung <jh80.chung@gmail.com>
-In-Reply-To: <20231114013106.31336-3-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <ca3435b5-25de-727d-ca46-a88a234f9fc5@gmail.com>
+ <CAPnjgZ1eCwAg=i27Kkd0mk7PeR8Eu_955utAjBfkNrMvKZyUgw@mail.gmail.com>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <CAPnjgZ1eCwAg=i27Kkd0mk7PeR8Eu_955utAjBfkNrMvKZyUgw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,62 +95,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
-
-On 11/14/23 10:31, Andre Przywara wrote:
-> The original H616 devices released about three years ago were typically
-> paired with an X-Powers AXP305 PMIC. Newer devices uses the smaller
-> AXP313, and there seem to be far more systems with this PMIC around now.
+On 11/13/23 15:26, Simon Glass wrote:
+> Hi Sean,
 > 
-> Remove the default AXP305 selection for the H616 SoC from the Kconfig,
-> and move the PMIC selection into the board defconfig files instead.
+> On Mon, 13 Nov 2023 at 11:15, Sean Anderson <seanga2@gmail.com> wrote:
+>>
+>> Hi All,
+>>
+>> I'm at LPC this week, and I'd love to chat with anyone else who's there
+>> in person.
 > 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> That would be good, but sadly I am not :-(
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+Ah, well, there's always more conferences. Maybe EOSS next year?
 
-Best Regards,
-Jaehoon Chung
-
-> ---
->  configs/orangepi_zero2_defconfig | 1 +
->  configs/x96_mate_defconfig       | 1 +
->  drivers/power/Kconfig            | 1 -
->  3 files changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/configs/orangepi_zero2_defconfig b/configs/orangepi_zero2_defconfig
-> index f13735e91c7..127cf9e365a 100644
-> --- a/configs/orangepi_zero2_defconfig
-> +++ b/configs/orangepi_zero2_defconfig
-> @@ -19,6 +19,7 @@ CONFIG_SYS_I2C_SPEED=400000
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_PHY_REALTEK=y
->  CONFIG_SUN8I_EMAC=y
-> +CONFIG_AXP305_POWER=y
->  CONFIG_SPI=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_OHCI_HCD=y
-> diff --git a/configs/x96_mate_defconfig b/configs/x96_mate_defconfig
-> index 318951e19c2..e805e0952b3 100644
-> --- a/configs/x96_mate_defconfig
-> +++ b/configs/x96_mate_defconfig
-> @@ -18,6 +18,7 @@ CONFIG_SPL_SYS_I2C_LEGACY=y
->  CONFIG_SYS_I2C_MVTWSI=y
->  CONFIG_SYS_I2C_SLAVE=0x7f
->  CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_AXP305_POWER=y
->  CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_OHCI_HCD=y
-> diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
-> index 2395720c99c..33b8bc1214d 100644
-> --- a/drivers/power/Kconfig
-> +++ b/drivers/power/Kconfig
-> @@ -56,7 +56,6 @@ choice
->  	depends on ARCH_SUNXI
->  	default AXP209_POWER if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I
->  	default AXP221_POWER if MACH_SUN6I || MACH_SUN8I_A23 || MACH_SUN8I_A33 || MACH_SUN8I_R40
-> -	default AXP305_POWER if MACH_SUN50I_H616
->  	default AXP818_POWER if MACH_SUN8I_A83T
->  	default SUNXI_NO_PMIC if MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_V3S
->  
+--Sean
