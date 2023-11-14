@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08B69C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 12:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5627C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 12:15:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42E9786EFA;
-	Tue, 14 Nov 2023 13:11:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DC27686EFA;
+	Tue, 14 Nov 2023 13:14:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EwO3H6iM";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rSo6yoG8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3269887266; Tue, 14 Nov 2023 13:11:18 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id E2E7986758; Tue, 14 Nov 2023 13:14:57 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C190A86758
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 13:11:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 865A98727E
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 13:14:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-1efad296d42so3286457fac.2
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 04:11:15 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-32deb2809daso3277383f8f.3
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 04:14:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699963874; x=1700568674; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OPksgcp2BjltBnVuZVV3+VWvRMsFnGz6V21E3ljhTDM=;
- b=EwO3H6iMMnsjh13+Crx2HVsgnGHiC7gTSEohtL26aOviCLrp5NqRcsasbpLKTeSJ/j
- HlV4e0svpddPR/Uydw1DyL9ysHw87xIYFSncYFfEu+psC4Tk940RaSDG+0aTc4Vot4X0
- 0mPK0CbuvgwcfcaiWRv39/OSngONlvyeqU8HGkgz1SUL8tnLYYe2yh9eqQS7LZtK5FVe
- UmoBQA9dY2WLigksEzBjDFZpcvrzPbAI4Fe0eLaP6maR+X2hGdK+q26im6jHsrgFswPV
- DOWZB/C/y5eTf1RIG39Z3S5OjeJm/9mgLmijypbdcDc23cCSH0ZW5BNfLYRAe+VPveM4
- jOTw==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1699964093; x=1700568893;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=TUE36/FmFxqRQOQC4lidzRkRr+UBRCZXTe91HrevsOM=;
+ b=rSo6yoG8E7uh1kj+6ryDoOPVRH7yPIHxYr1GFqvP1BPTGwfJb1gBQU0/7AZ8YK9SYe
+ P+VIclqI6wWhFNVZd8os+SvNOuIt5+7pbJGrpeBKjjIaJMoA0vso7Omlswvim+0UXmgk
+ o543uRZO7skgjY52RbGnyY/N+8YfsAihOgZXLBvH4k+cbauADWJPrf7hLfa6+9LX8ct0
+ ia4t+/FlGkgeCQ3dxEeS2wvPghp+kDvtkjUKnnBZnvjw0e3OdIcdC+FPIKSq9FaObdCN
+ Xdwqk54eEpXQxSwQhCvFxqJZWC3/6KRoOuCYcmMgTSRMPtnk3ZTm0XaUiG5jCM9pi0/w
+ zwVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699963874; x=1700568674;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OPksgcp2BjltBnVuZVV3+VWvRMsFnGz6V21E3ljhTDM=;
- b=CZUmtFYFv0Xkz28IeLJFeJ+sAAEIvLjHtGgbYI4VbaGOhSaArjBt/1N7B+VYRguQts
- 2wSW5oIL9RpTG+2yM1WTkRcwVVXdyQGJSjPXpcS+qApAtnY9ptq2e2kITGwZYGUpE5O4
- GYCaALnmV8ORwoRM2JfSdZ3Ndmq4ptseEjK6DF7BmVRd5CCP0ryzuEKzzQ568/wTeoMp
- BzA40QJ0vhFfMKOdjWkYubvzxb8rcuQUUG4YDnAz/YyeHNvdJUUOa3dr8Tku9v1ok8//
- gVCqWTHNu4Y/HbvAdhTK+Bj+y+v7ukg31rW/Cy/RNqso69JuL36vIRDIhIzS/I+0Uzz6
- ulcg==
-X-Gm-Message-State: AOJu0Yz99T9ciJldk+NavdDhnXv5Sk8ubPuSMXAVqpnvXNcbw2cZ2g/n
- /d7Zay6ZLiphECRMAvN7v1fRk8h6fSj2zwjU4i8=
-X-Google-Smtp-Source: AGHT+IGfJWWng412HuoBGJZJ5QYDkts5eZz0u/N+3xyCFFH8SXv6hnvD724NqpFJMmqLaSiveFiS7pJDmnqSPEkLkG8=
-X-Received: by 2002:a05:6870:a54d:b0:1ea:b1c:b859 with SMTP id
- p13-20020a056870a54d00b001ea0b1cb859mr11909815oal.35.1699963874360; Tue, 14
- Nov 2023 04:11:14 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699964093; x=1700568893;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TUE36/FmFxqRQOQC4lidzRkRr+UBRCZXTe91HrevsOM=;
+ b=HWYcv1C4N2/je3orJyTHjW7oM6YfvQpVzlttcQHOjiifAgMKV1mEvG2zcpkqTz1QQn
+ gwpJNAcpxg+5ESBZnRF5tPK4PxUwflK0waVgoFEU2uu5yoTeNthNJ5S5qB9ISQJTVHOV
+ PAUnEMGd27itTUQiGzl136WcrVNeylMjUtCND0PfQeDJ79akQbPqvww3QhJK1YBDkCPP
+ BDHxESK3t+7ufcE1OQPTkeHmtbotF6yrHPCOBVjGIOakqrD8Cp9GJZ64y2zOrRULbUdC
+ ytQ+BNHVe0knb/lvGSmbgbu1WLBANIjlJF0hSrGa69QiYGf27rz+0X0m87BJh4q8kN2u
+ PazQ==
+X-Gm-Message-State: AOJu0YwXzoanrXPAq6zrLMXyz9k2I2ALcuTzqpqn0djN3Tdm2Ibo4Crz
+ VBv4JAYz2fbG27DwOv/zqRNpMw==
+X-Google-Smtp-Source: AGHT+IFEtIkO8Zpqbn45eMm09Vl6AIp4kN0egZaShCkx6CCSI6rscjQRabcn5q1U6FKNtQnuHHR9HA==
+X-Received: by 2002:a5d:4842:0:b0:32d:9e4f:718f with SMTP id
+ n2-20020a5d4842000000b0032d9e4f718fmr7009413wrs.44.1699964092695; 
+ Tue, 14 Nov 2023 04:14:52 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ o16-20020adfe810000000b0032326908972sm7709579wrm.17.2023.11.14.04.14.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Nov 2023 04:14:52 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Joe
+ Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>, Sean
+ Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>, Dmitrii
+ Merkurev <dimorinny@google.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1 5/5] fastboot: add oem console command support
+In-Reply-To: <179F78E6-C7C7-4A0F-908A-64CFDDCB57B0@gmail.com>
+References: <20231107124241.35432-1-clamor95@gmail.com>
+ <20231107124241.35432-6-clamor95@gmail.com> <87leb0my2z.fsf@baylibre.com>
+ <179F78E6-C7C7-4A0F-908A-64CFDDCB57B0@gmail.com>
+Date: Tue, 14 Nov 2023 13:14:51 +0100
+Message-ID: <87il64mszo.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-3-rasmus.villemoes@prevas.dk>
- <d4389465-e5bd-492b-8f86-7b4a93ff6016@denx.de>
- <7d38b732-e5f4-4e6a-9a5d-7837e285ba55@prevas.dk>
- <ebe2784d-23c6-470d-a25f-8261fcf820ca@denx.de>
-In-Reply-To: <ebe2784d-23c6-470d-a25f-8261fcf820ca@denx.de>
-From: Christian Gmeiner <christian.gmeiner@gmail.com>
-Date: Tue, 14 Nov 2023 13:11:03 +0100
-Message-ID: <CAH9NwWfEPeXhmxM6MMmVfS3XJoTT3Qod8-Z3rsuUzyOGwO5-eg@mail.gmail.com>
-Subject: Re: [PATCH 2/6] led-uclass: honour ->label field populated by
- driver's own .bind
-To: Marek Vasut <marex@denx.de>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Doug Zobel <douglas.zobel@climate.com>, 
- Tom Rini <trini@konsulko.com>, pavel Machek <pavel@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,75 +100,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ping
+Hi Svyatoslav,
 
-Am Mo., 23. Okt. 2023 um 12:45 Uhr schrieb Marek Vasut <marex@denx.de>:
+On mar., nov. 14, 2023 at 12:30, Svyatoslav Ryhel <clamor95@gmail.com> wrot=
+e:
+
+> 14 =D0=BB=D0=B8=D1=81=D1=82=D0=BE=D0=BF=D0=B0=D0=B4=D0=B0 2023 =D1=80. 12=
+:24:52 GMT+02:00, Mattijs Korpershoek <mkorpershoek@baylibre.com> =D0=BD=D0=
+=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>>Hi Svyatoslav,
+>>
+>>Thank you for your patch.
+>>
+>>On mar., nov. 07, 2023 at 14:42, Svyatoslav Ryhel <clamor95@gmail.com> wr=
+ote:
+>>
+>>> From: Ion Agorria <ion@agorria.com>
+>>>
+>>> "oem console" serves to read console record buffer.
+>>>
+>>> Signed-off-by: Ion Agorria <ion@agorria.com>
+>>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>>> ---
+>>>  doc/android/fastboot.rst      |  1 +
+>>>  drivers/fastboot/Kconfig      |  7 +++++++
+>>>  drivers/fastboot/fb_command.c | 39 +++++++++++++++++++++++++++++++++++
+>>>  include/fastboot.h            |  1 +
+>>>  4 files changed, 48 insertions(+)
+>>>
+>>> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
+>>> index 1ad8a897c8..05d8f77759 100644
+>>> --- a/doc/android/fastboot.rst
+>>> +++ b/doc/android/fastboot.rst
+>>> @@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
+>>>    with <arg> =3D boot_ack boot_partition
+>>>  - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure =
+eMMC
+>>>  - ``oem run`` - this executes an arbitrary U-Boot command
+>>> +- ``oem console`` - this dumps U-Boot console record buffer
+>>>=20=20
+>>>  Support for both eMMC and NAND devices is included.
+>>>=20=20
+>>> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+>>> index 837c6f1180..58b08120a4 100644
+>>> --- a/drivers/fastboot/Kconfig
+>>> +++ b/drivers/fastboot/Kconfig
+>>> @@ -241,6 +241,13 @@ config FASTBOOT_OEM_RUN
+>>>  	  this feature if you are using verified boot, as it will allow an
+>>>  	  attacker to bypass any restrictions you have in place.
+>>>=20=20
+>>> +config FASTBOOT_CMD_OEM_CONSOLE
+>>> +	bool "Enable the 'oem console' command"
+>>> +	depends on CONSOLE_RECORD
+>>> +	help
+>>> +	  Add support for the "oem console" command to input and read console
+>>> +	  record buffer.
+>>> +
+>>>  endif # FASTBOOT
+>>>=20=20
+>>>  endmenu
+>>> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_comman=
+d.c
+>>> index 6f621df074..acf5971108 100644
+>>> --- a/drivers/fastboot/fb_command.c
+>>> +++ b/drivers/fastboot/fb_command.c
+>>> @@ -41,6 +41,7 @@ static void reboot_recovery(char *, char *);
+>>>  static void oem_format(char *, char *);
+>>>  static void oem_partconf(char *, char *);
+>>>  static void oem_bootbus(char *, char *);
+>>> +static void oem_console(char *, char *);
+>>>  static void run_ucmd(char *, char *);
+>>>  static void run_acmd(char *, char *);
+>>>=20=20
+>>> @@ -108,6 +109,10 @@ static const struct {
+>>>  		.command =3D "oem run",
+>>>  		.dispatch =3D CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
+>>>  	},
+>>> +	[FASTBOOT_COMMAND_OEM_CONSOLE] =3D {
+>>> +		.command =3D "oem console",
+>>> +		.dispatch =3D CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE, (oem_conso=
+le), (NULL))
+>>> +	},
+>>>  	[FASTBOOT_COMMAND_UCMD] =3D {
+>>>  		.command =3D "UCmd",
+>>>  		.dispatch =3D CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (N=
+ULL))
+>>> @@ -159,6 +164,23 @@ void fastboot_multiresponse(int cmd, char *respons=
+e)
+>>>  	case FASTBOOT_COMMAND_GETVAR:
+>>>  		fastboot_getvar_all(response);
+>>>  		break;
+>>> +#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE)
+>>
+>>Checkpatch also complains about this.
+>>
+>>Can we rewrite this using if (IS_ENABLED(CONFIG...)) please ?
+>>
 >
-> On 10/23/23 10:51, Rasmus Villemoes wrote:
-> > On 19/10/2023 15.54, Marek Vasut wrote:
-> >> On 10/19/23 11:58, Rasmus Villemoes wrote:
-> >>> If the driver's own .bind method has populated uc_plat->label, don't
-> >>> override that. This is necessary for an upcoming driver for ti,lp5562,
-> >>> where the DT binding unfortunately says to use "chan-name" and not
-> >>> "label".
-> >>>
-> >>> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> >>> ---
-> >>>    drivers/led/led-uclass.c | 4 +++-
-> >>>    1 file changed, 3 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-> >>> index 5a5d07b9a7..0232fa84de 100644
-> >>> --- a/drivers/led/led-uclass.c
-> >>> +++ b/drivers/led/led-uclass.c
-> >>> @@ -71,7 +71,9 @@ static int led_post_bind(struct udevice *dev)
-> >>>        struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> >>>        const char *default_state;
-> >>>    -    uc_plat->label = dev_read_string(dev, "label");
-> >>> +    if (!uc_plat->label)
-> >>> +        uc_plat->label = dev_read_string(dev, "label");
-> >>> +
-> >>
-> >> One thing I have to wonder about is, why does this controller have label
-> >> property in the top-level node , what is that used for ?
-> >>
-> >> (see Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml)
-> >>
-> >> Reviewed-by: Marek Vasut <marex@denx.de>
-> >
-> > Reading the linux driver, it seems that the top-level label, if any, is
-> > used as part of the naming for individual channels if they don't have
-> > individual chan-name properties:
-> >
-> >
-> >          if (pdata->led_config[chan].name) {
-> >                  led->cdev.name = pdata->led_config[chan].name;
-> >          } else {
-> >                  snprintf(name, sizeof(name), "%s:channel%d",
-> >                          pdata->label ? : chip->cl->name, chan);
-> >                  led->cdev.name = name;
-> >          }
-> >
-> > but I think the rationale in d1188adb2dabc is a bit weak, since the only
-> > example also does have individual chan-name properties.
-> >
-> > [Complete aside: At first I thought it was related to the multi-color
-> > LED work that has been ongoing for many many years (I think there was an
-> > LWN article at some point), where this could be exposed as a single
-> > multi-color LED, as opposed to the "traditional" three/four individual
-> > LEDs. In the former case, there would only be one sysfs entry, but with
-> > attributes exposing the multicolor functionality. I must admit I don't
-> > know the status of that work, when something reaches v31,
-> > http://archive.lwn.net:8080/linux-kernel/20200722071055.GA8984@amd/t/ ,
-> > it's hard to know if it ever lands, or if pieces of it has landed.]
+> Please, do not relay on checkpatch that much. In this case #ifdef is bett=
+er since in this case all under ifdef will be cut off while using if(...) r=
+equires all code under the if to be able to be run even if config is not en=
+abled. Thanks.
+
+I understand that sometimes, checkpatch generates false positives or bad
+suggestions.
+I also understand the differences between #ifdef and if (IS_ENABLED()).
+
+I did not measure whether the binary size is bigger when switching from
+#ifdef to "if IS_ENABLED()" but I suspect that the compiler can
+optimize this out as it's known at compile-time.
+
+This file (and the fastboot code in general) mostly uses
+"if (IS_ENABLED())" and to keep the code consistent I recommend using it.
+
+Therefore, can we please use if (IS_ENABLED()) here ?
+
+Thank you
+
+Mattijs
+
 >
-> +CC Pavel
-
-
-
--- 
-greets
---
-Christian Gmeiner, MSc
-
-https://christian-gmeiner.info/privacypolicy
+>>> +	case FASTBOOT_COMMAND_OEM_CONSOLE:
+>>> +		char buf[FASTBOOT_RESPONSE_LEN] =3D { 0 };
+>>> +
+>>> +		if (console_record_isempty()) {
+>>> +			console_record_reset();
+>>> +			fastboot_okay(NULL, response);
+>>> +		} else {
+>>> +			int ret =3D console_record_readline(buf, sizeof(buf) - 5);
+>>> +
+>>> +			if (ret < 0)
+>>> +				fastboot_fail("Error reading console", response);
+>>> +			else
+>>> +				fastboot_response("INFO", response, "%s", buf);
+>>> +		}
+>>> +		break;
+>>> +#endif
+>>>  	default:
+>>>  		fastboot_fail("Unknown multiresponse command", response);
+>>>  		break;
+>>> @@ -503,3 +525,20 @@ static void __maybe_unused oem_bootbus(char *cmd_p=
+arameter, char *response)
+>>>  	else
+>>>  		fastboot_okay(NULL, response);
+>>>  }
+>>> +
+>>> +/**
+>>> + * oem_console() - Execute the OEM console command
+>>> + *
+>>> + * @cmd_parameter: Pointer to command parameter
+>>> + * @response: Pointer to fastboot response buffer
+>>> + */
+>>> +static void __maybe_unused oem_console(char *cmd_parameter, char *resp=
+onse)
+>>> +{
+>>> +	if (cmd_parameter)
+>>> +		console_in_puts(cmd_parameter);
+>>> +
+>>> +	if (console_record_isempty())
+>>> +		fastboot_fail("Empty console", response);
+>>> +	else
+>>> +		fastboot_response("MORE", response, NULL);
+>>
+>>MORE -> TEXT
+>>
+>>> +}
+>>> diff --git a/include/fastboot.h b/include/fastboot.h
+>>> index d1a2b74b2f..23d26fb4be 100644
+>>> --- a/include/fastboot.h
+>>> +++ b/include/fastboot.h
+>>> @@ -37,6 +37,7 @@ enum {
+>>>  	FASTBOOT_COMMAND_OEM_PARTCONF,
+>>>  	FASTBOOT_COMMAND_OEM_BOOTBUS,
+>>>  	FASTBOOT_COMMAND_OEM_RUN,
+>>> +	FASTBOOT_COMMAND_OEM_CONSOLE,
+>>>  	FASTBOOT_COMMAND_ACMD,
+>>>  	FASTBOOT_COMMAND_UCMD,
+>>>  	FASTBOOT_COMMAND_COUNT
+>>> --=20
+>>> 2.40.1
