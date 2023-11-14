@@ -4,91 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B287DC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 11:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78B2FC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 12:11:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B43D874A8;
-	Tue, 14 Nov 2023 12:03:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id AE2D787206;
+	Tue, 14 Nov 2023 13:11:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="PwUpBH/6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TNEEOKDW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEEC08727A; Tue, 14 Nov 2023 12:03:37 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id ADCC987215; Tue, 14 Nov 2023 13:11:07 +0100 (CET)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01C5587468
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 12:03:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 57BA886758
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 13:11:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 82CD212001B;
- Tue, 14 Nov 2023 14:03:33 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 82CD212001B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1699959813;
- bh=pPYwaJMiDN+dzMmwJCLHo5gQfujLd4HHWxv+F68wlco=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=PwUpBH/6QRViCOWEv/4mCRFe3dDpoFpzDlTxJspyL0kp3lh/O5jL54Kl5XxN+Yapp
- gQfvDbEwuXSC5JX3DxTIozI6MiTwHj56PlUSHtr7qc1yxOGv22XCx28FtlOCpOkAfX
- wbEj+BYom+tTaH7+iYxqWdWnr9lCKOSidRJdN5fCXhUSwCkNLSufMH2LDfjvao5Quy
- QYJU6G5aOJWk5fZGgqRtOgnoy4SfEhxW0WX/apegVevpzjp31S/i3pjISZh36ghWNG
- rBDbul+IrgkQDyPsieqvo/I2uHbax9voFnSbXqSSokdURbZWEwE3zv6wRBx1ZuQnwb
- VZF5miXl6mx8g==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 14 Nov 2023 14:03:33 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Tue, 14 Nov 2023 14:03:33 +0300
-From: Igor Prusov <ivprusov@salutedevices.com>
-To: <u-boot@lists.denx.de>
-CC: <prusovigor@gmail.com>, Simon Glass <sjg@chromium.org>,
- <kernel@sberdevices.ru>, Igor Prusov <ivprusov@salutedevices.com>, Marek
- Vasut <marex@denx.de>
-Subject: [PATCH 13/13] musb-new: Remove implementation of io.h functions
-Date: Tue, 14 Nov 2023 14:02:57 +0300
-Message-ID: <20231114110257.2488-14-ivprusov@salutedevices.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231114110257.2488-1-ivprusov@salutedevices.com>
-References: <20231114110257.2488-1-ivprusov@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-1f0f94a08a0so3491024fac.2
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 04:11:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1699963864; x=1700568664; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bZYc/hUx3kQB62GTpMhjEFyJnf9SnwwAA0pTqbu5GD0=;
+ b=TNEEOKDWCLnb9u4BLq+QBbkZbJgVRqcBW2c2oTRQD30JPkfVMPTqZn9egIblSootig
+ z+QARpriGQEcV0pjqD4fqDGjyqVLCRokZjON6TEtPR7YBprjwGoxufgA74si+U5RrMbX
+ ZBQkL7RX2wnurl3FTbUKVm/Vi97NOyLzRlmv1hgC93KA/xQozw5Z7tEBKlhAjwcFZ7B6
+ POR1MKKbrvlE03L9azMXJtZ+8M8SrCSICBML2lUC1AZS21unhK5ycUNCaqjkmDhTuGwh
+ eEwUuqxTPs0vHZWRtxwHQFlA5BKKG3kxeD2z57CnjffHStmE7UDM8YLFsJe4CZUFdbO8
+ hzJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1699963864; x=1700568664;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bZYc/hUx3kQB62GTpMhjEFyJnf9SnwwAA0pTqbu5GD0=;
+ b=A1YCv4lCjeYBZn+Ur+D/Qe9yaUAhMBPKRKdFq86+J00NUlk814XweZwdqoCS6dS0NP
+ 1INJ25nhwHT6SbyvcJvWlI6Y5oHckvIBPY0yU1ikF8QF9Bcl9DF1ZvrygaVEji24+wzQ
+ uUC2rdnvRoxcKm3uwb76V5sQykEHIo4slofB9FlupvellvD/HuTIxpcjpgFab5CwRJAk
+ tSHSEI19mw1JvydjGB542sy+ukO3Xdljva5o0N1CznDUl7PnSSroY7gIj9FbMALPNEaZ
+ R+PMU3ddK1WjYSVAKsprbrQ8lD+CROVWVeZwVrU6NjFA5gTvrIQeI1KCR7/y7IHuwABH
+ TYJg==
+X-Gm-Message-State: AOJu0YwwT4pYyqcBgh8bAM1nnGK5gr2IN3CDb+l7vho+ZNeUeziKKP+/
+ IxmFvFxryt337hqFl9+n0IaiyH0Oo/diMFWJP5E=
+X-Google-Smtp-Source: AGHT+IF0VVLVt7IglUTVjeQ2rIq4Fr2sPNGXTIai794D7lktAhMfmCTicr1mLvH2If8PzqWFElg6Tx84iqA51xTLzUQ=
+X-Received: by 2002:a05:6871:750e:b0:1f0:b5f:8898 with SMTP id
+ ny14-20020a056871750e00b001f00b5f8898mr12725992oac.55.1699963863787; Tue, 14
+ Nov 2023 04:11:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181340 [Nov 14 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 543 543
- 1e3516af5cdd92079dfeb0e292c8747a62cb1ee4,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; 100.64.160.123:7.1.2;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/14 07:58:00 #22462416
-X-KSMG-AntiVirus-Status: Clean, skipped
+References: <20231023082117.39290-1-christian.gmeiner@gmail.com>
+ <464e8700-c75e-4456-bb33-71873673b83a@denx.de>
+In-Reply-To: <464e8700-c75e-4456-bb33-71873673b83a@denx.de>
+From: Christian Gmeiner <christian.gmeiner@gmail.com>
+Date: Tue, 14 Nov 2023 13:10:52 +0100
+Message-ID: <CAH9NwWeSGa23qa6HLVBG_jaTPLjmxKVAZH188vhF8WAo0E_FdA@mail.gmail.com>
+Subject: Re: [PATCH] led: Do not overwrite label
+To: Marek Vasut <marex@denx.de>
+Cc: open list <u-boot@lists.denx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,51 +86,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since {read,write}s{l, w, b}() functions are now supported in linux/io.h
-there is no need to add custom implementation to driver.
+ping
 
-Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
----
+Am Mo., 23. Okt. 2023 um 10:26 Uhr schrieb Marek Vasut <marex@denx.de>:
+>
+> On 10/23/23 10:21, Christian Gmeiner wrote:
+> > label might have been set by a non device-tree based U-Boot driver already.
+> >
+> > In my concrete case there is a PCI driver that uses device_bind_driver(..)
+> > for different class types. The UCLASS_LED specific driver sets label
+> > in its bind function.
+> >
+> > Without this change the LEDs exposed by the PCI device are not available.
+> >
+> > Fixes: 83c63f0d11 ("led: Move OF "label" property parsing to core")
+> > Signed-off-by: Christian Gmeiner <christian.gmeiner@gmail.com>
+> > ---
+> >   drivers/led/led-uclass.c | 5 +++--
+> >   1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+> > index 68ca3c2970..aebdfdeb95 100644
+> > --- a/drivers/led/led-uclass.c
+> > +++ b/drivers/led/led-uclass.c
+> > @@ -71,9 +71,10 @@ static int led_post_bind(struct udevice *dev)
+> >       struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> >       const char *default_state;
+> >
+> > -     uc_plat->label = dev_read_string(dev, "label");
+> >       if (!uc_plat->label)
+> > -             uc_plat->label = ofnode_get_name(dev_ofnode(dev));
+> > +             uc_plat->label = dev_read_string(dev, "label");
+> > +             if (!uc_plat->label)
+> > +                     uc_plat->label = ofnode_get_name(dev_ofnode(dev));
+> >
+> >       uc_plat->default_state = LEDST_COUNT;
+>
+> +CC Rasmus, you really do want to review this one.
+>
+> There is existing and more extensive series from Rasmus addressing the
+> same issue.
 
- drivers/usb/musb-new/musb_io.h | 24 ------------------------
- 1 file changed, 24 deletions(-)
 
-diff --git a/drivers/usb/musb-new/musb_io.h b/drivers/usb/musb-new/musb_io.h
-index 72a5365632..19b12f36a5 100644
---- a/drivers/usb/musb-new/musb_io.h
-+++ b/drivers/usb/musb-new/musb_io.h
-@@ -14,31 +14,7 @@
- #ifndef __MUSB_LINUX_PLATFORM_ARCH_H__
- #define __MUSB_LINUX_PLATFORM_ARCH_H__
- 
--#ifndef __UBOOT__
- #include <linux/io.h>
--#else
--#include <asm/io.h>
--#endif
--
--#if !defined(CONFIG_ARM) && !defined(CONFIG_SUPERH) \
--	&& !defined(CONFIG_PPC32) \
--	&& !defined(CONFIG_PPC64) && !defined(CONFIG_MIPS) \
--	&& !defined(CONFIG_M68K)
--static inline void readsl(const void __iomem *addr, void *buf, int len)
--	{ insl((unsigned long)addr, buf, len); }
--static inline void readsw(const void __iomem *addr, void *buf, int len)
--	{ insw((unsigned long)addr, buf, len); }
--static inline void readsb(const void __iomem *addr, void *buf, int len)
--	{ insb((unsigned long)addr, buf, len); }
--
--static inline void writesl(const void __iomem *addr, const void *buf, int len)
--	{ outsl((unsigned long)addr, buf, len); }
--static inline void writesw(const void __iomem *addr, const void *buf, int len)
--	{ outsw((unsigned long)addr, buf, len); }
--static inline void writesb(const void __iomem *addr, const void *buf, int len)
--	{ outsb((unsigned long)addr, buf, len); }
--
--#endif
- 
- /* NOTE:  these offsets are all in bytes */
- 
+
 -- 
-2.34.1
+greets
+--
+Christian Gmeiner, MSc
 
+https://christian-gmeiner.info/privacypolicy
