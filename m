@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F34C4C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 16:00:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC71C4167D
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 16:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1490F871D0;
-	Tue, 14 Nov 2023 17:00:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FB228722B;
+	Tue, 14 Nov 2023 17:00:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pUevQw+X";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hmhmUYoJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6820C86940; Tue, 14 Nov 2023 17:00:05 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 15B6586940; Tue, 14 Nov 2023 17:00:07 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0004586940
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:00:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72723871D0
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:00:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AEFxwei129320;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AEFxwFv034345;
  Tue, 14 Nov 2023 09:59:58 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1699977598;
- bh=e9bi79Pxg6ZC8A+1QO2lmLzJXZab7t8u/HEY3+wBH6g=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pUevQw+XKjG9kBOGMp3IvXi+o3+lRDR0Rdmsc0N+f/dd6HXWwQppyDArN4zxNAKTD
- a7tlYgcrQNR1QC29v+G9602ZkHJYHwTBKSt3fYTyrFa46B0r9LDTqZM9HpizO5s7fg
- 0RAiVISvLUoBcYtinZQgxb5FsDdFPSeQRJbKYuLQ=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AEFxwLk067469
+ bh=EFqrWhPI4ghJEXVGCrZ4z8/XfPL8KluYzvYzdEMMK7k=;
+ h=From:To:CC:Subject:Date;
+ b=hmhmUYoJpzNsO+pSWANMl5Y7lBIsVbG4TjKKJ7TUdp21QGcjC54eNlQTw4VqEiBAx
+ 3uL6Ia93nwCkQEMLH31HGfBKBlZkbEYZqjDtyo/awNQnU6g8H8X2vUn9z5FQipHCFh
+ 5ooza2IhqmmqF2agu61nrkmQfY84fOj5iV06iz5o=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AEFxvvn004344
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 14 Nov 2023 09:59:58 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 14 Nov 2023 09:59:57 -0600
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
- Nov 2023 09:59:58 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 09:59:57 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 14 Nov 2023 09:59:58 -0600
+ Frontend Transport; Tue, 14 Nov 2023 09:59:57 -0600
 Received: from fllv0039.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AEFxvpU021295;
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AEFxvpT021295;
  Tue, 14 Nov 2023 09:59:57 -0600
 From: Andrew Davis <afd@ti.com>
 To: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  Nishanth Menon <nm@ti.com>
 CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
-Subject: [PATCH 2/3] arm: mach-k3: Remove incorrect checks for SPL build
-Date: Tue, 14 Nov 2023 09:59:49 -0600
-Message-ID: <20231114155950.296644-2-afd@ti.com>
+Subject: [PATCH 1/3] arm: mach-k3: Move R5 specific code into new r5/ directory
+Date: Tue, 14 Nov 2023 09:59:48 -0600
+Message-ID: <20231114155950.296644-1-afd@ti.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231114155950.296644-1-afd@ti.com>
-References: <20231114155950.296644-1-afd@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,46 +78,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The kconfig option SPL means this build supports SPL but not that
-this build is SPL, nor that this build is the SPL running on R5.
-For options that are for R5 SPL use CPU_V7R.
+This makes it clear these are only to be used by the R5 builds of SPL.
+And this will be used to later more cleanly split the two builds.
 
 Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- arch/arm/mach-k3/Kconfig | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/arm/mach-k3/Makefile                         |  6 +-----
+ arch/arm/mach-k3/r5/Makefile                      | 13 +++++++++++++
+ arch/arm/mach-k3/{ => r5}/am62ax/Makefile         |  0
+ arch/arm/mach-k3/{ => r5}/am62ax/am62a_qos_data.c |  0
+ arch/arm/mach-k3/{ => r5}/am62ax/clk-data.c       |  0
+ arch/arm/mach-k3/{ => r5}/am62ax/dev-data.c       |  0
+ arch/arm/mach-k3/{ => r5}/am62x/Makefile          |  0
+ arch/arm/mach-k3/{ => r5}/am62x/clk-data.c        |  0
+ arch/arm/mach-k3/{ => r5}/am62x/dev-data.c        |  0
+ arch/arm/mach-k3/{ => r5}/j7200/Makefile          |  0
+ arch/arm/mach-k3/{ => r5}/j7200/clk-data.c        |  0
+ arch/arm/mach-k3/{ => r5}/j7200/dev-data.c        |  0
+ arch/arm/mach-k3/{ => r5}/j721e/Makefile          |  0
+ arch/arm/mach-k3/{ => r5}/j721e/clk-data.c        |  0
+ arch/arm/mach-k3/{ => r5}/j721e/dev-data.c        |  0
+ arch/arm/mach-k3/{ => r5}/j721s2/Makefile         |  0
+ arch/arm/mach-k3/{ => r5}/j721s2/clk-data.c       |  0
+ arch/arm/mach-k3/{ => r5}/j721s2/dev-data.c       |  0
+ arch/arm/mach-k3/{ => r5}/lowlevel_init.S         |  0
+ arch/arm/mach-k3/{ => r5}/r5_mpu.c                |  2 +-
+ 20 files changed, 15 insertions(+), 6 deletions(-)
+ create mode 100644 arch/arm/mach-k3/r5/Makefile
+ rename arch/arm/mach-k3/{ => r5}/am62ax/Makefile (100%)
+ rename arch/arm/mach-k3/{ => r5}/am62ax/am62a_qos_data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/am62ax/clk-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/am62ax/dev-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/am62x/Makefile (100%)
+ rename arch/arm/mach-k3/{ => r5}/am62x/clk-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/am62x/dev-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/j7200/Makefile (100%)
+ rename arch/arm/mach-k3/{ => r5}/j7200/clk-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/j7200/dev-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/j721e/Makefile (100%)
+ rename arch/arm/mach-k3/{ => r5}/j721e/clk-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/j721e/dev-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/j721s2/Makefile (100%)
+ rename arch/arm/mach-k3/{ => r5}/j721s2/clk-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/j721s2/dev-data.c (100%)
+ rename arch/arm/mach-k3/{ => r5}/lowlevel_init.S (100%)
+ rename arch/arm/mach-k3/{ => r5}/r5_mpu.c (98%)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 9168bf842dc..4d19cf3e353 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -111,7 +111,7 @@ config K3_EARLY_CONS_IDX
+diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+index c7ca0fdce56..215c755c5dc 100644
+--- a/arch/arm/mach-k3/Makefile
++++ b/arch/arm/mach-k3/Makefile
+@@ -3,12 +3,8 @@
+ # Copyright (C) 2017-2018 Texas Instruments Incorporated - https://www.ti.com/
+ #	Lokesh Vutla <lokeshvutla@ti.com>
  
- config K3_LOAD_SYSFW
- 	bool
--	depends on SPL
-+	depends on CPU_V7R
+-obj-$(CONFIG_SOC_K3_J721E) += j721e/ j7200/
+-obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
+-obj-$(CONFIG_SOC_K3_AM625) += am62x/
+-obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
++obj-$(CONFIG_CPU_V7R) += r5/
+ obj-$(CONFIG_ARM64) += arm64-mmu.o
+-obj-$(CONFIG_CPU_V7R) += r5_mpu.o lowlevel_init.o
+ obj-$(CONFIG_ARM64) += cache.o
+ obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
+ ifeq ($(CONFIG_OF_LIBFDT)$(CONFIG_OF_SYSTEM_SETUP),yy)
+diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
+new file mode 100644
+index 00000000000..8a6af73a44e
+--- /dev/null
++++ b/arch/arm/mach-k3/r5/Makefile
+@@ -0,0 +1,13 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++#	Andrew Davis <afd@ti.com>
++
++obj-$(CONFIG_SOC_K3_J721E) += j721e/
++obj-$(CONFIG_SOC_K3_J721E) += j7200/
++obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
++obj-$(CONFIG_SOC_K3_AM625) += am62x/
++obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
++
++obj-y += lowlevel_init.o
++obj-y += r5_mpu.o
+diff --git a/arch/arm/mach-k3/am62ax/Makefile b/arch/arm/mach-k3/r5/am62ax/Makefile
+similarity index 100%
+rename from arch/arm/mach-k3/am62ax/Makefile
+rename to arch/arm/mach-k3/r5/am62ax/Makefile
+diff --git a/arch/arm/mach-k3/am62ax/am62a_qos_data.c b/arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
+similarity index 100%
+rename from arch/arm/mach-k3/am62ax/am62a_qos_data.c
+rename to arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
+diff --git a/arch/arm/mach-k3/am62ax/clk-data.c b/arch/arm/mach-k3/r5/am62ax/clk-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/am62ax/clk-data.c
+rename to arch/arm/mach-k3/r5/am62ax/clk-data.c
+diff --git a/arch/arm/mach-k3/am62ax/dev-data.c b/arch/arm/mach-k3/r5/am62ax/dev-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/am62ax/dev-data.c
+rename to arch/arm/mach-k3/r5/am62ax/dev-data.c
+diff --git a/arch/arm/mach-k3/am62x/Makefile b/arch/arm/mach-k3/r5/am62x/Makefile
+similarity index 100%
+rename from arch/arm/mach-k3/am62x/Makefile
+rename to arch/arm/mach-k3/r5/am62x/Makefile
+diff --git a/arch/arm/mach-k3/am62x/clk-data.c b/arch/arm/mach-k3/r5/am62x/clk-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/am62x/clk-data.c
+rename to arch/arm/mach-k3/r5/am62x/clk-data.c
+diff --git a/arch/arm/mach-k3/am62x/dev-data.c b/arch/arm/mach-k3/r5/am62x/dev-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/am62x/dev-data.c
+rename to arch/arm/mach-k3/r5/am62x/dev-data.c
+diff --git a/arch/arm/mach-k3/j7200/Makefile b/arch/arm/mach-k3/r5/j7200/Makefile
+similarity index 100%
+rename from arch/arm/mach-k3/j7200/Makefile
+rename to arch/arm/mach-k3/r5/j7200/Makefile
+diff --git a/arch/arm/mach-k3/j7200/clk-data.c b/arch/arm/mach-k3/r5/j7200/clk-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/j7200/clk-data.c
+rename to arch/arm/mach-k3/r5/j7200/clk-data.c
+diff --git a/arch/arm/mach-k3/j7200/dev-data.c b/arch/arm/mach-k3/r5/j7200/dev-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/j7200/dev-data.c
+rename to arch/arm/mach-k3/r5/j7200/dev-data.c
+diff --git a/arch/arm/mach-k3/j721e/Makefile b/arch/arm/mach-k3/r5/j721e/Makefile
+similarity index 100%
+rename from arch/arm/mach-k3/j721e/Makefile
+rename to arch/arm/mach-k3/r5/j721e/Makefile
+diff --git a/arch/arm/mach-k3/j721e/clk-data.c b/arch/arm/mach-k3/r5/j721e/clk-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/j721e/clk-data.c
+rename to arch/arm/mach-k3/r5/j721e/clk-data.c
+diff --git a/arch/arm/mach-k3/j721e/dev-data.c b/arch/arm/mach-k3/r5/j721e/dev-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/j721e/dev-data.c
+rename to arch/arm/mach-k3/r5/j721e/dev-data.c
+diff --git a/arch/arm/mach-k3/j721s2/Makefile b/arch/arm/mach-k3/r5/j721s2/Makefile
+similarity index 100%
+rename from arch/arm/mach-k3/j721s2/Makefile
+rename to arch/arm/mach-k3/r5/j721s2/Makefile
+diff --git a/arch/arm/mach-k3/j721s2/clk-data.c b/arch/arm/mach-k3/r5/j721s2/clk-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/j721s2/clk-data.c
+rename to arch/arm/mach-k3/r5/j721s2/clk-data.c
+diff --git a/arch/arm/mach-k3/j721s2/dev-data.c b/arch/arm/mach-k3/r5/j721s2/dev-data.c
+similarity index 100%
+rename from arch/arm/mach-k3/j721s2/dev-data.c
+rename to arch/arm/mach-k3/r5/j721s2/dev-data.c
+diff --git a/arch/arm/mach-k3/lowlevel_init.S b/arch/arm/mach-k3/r5/lowlevel_init.S
+similarity index 100%
+rename from arch/arm/mach-k3/lowlevel_init.S
+rename to arch/arm/mach-k3/r5/lowlevel_init.S
+diff --git a/arch/arm/mach-k3/r5_mpu.c b/arch/arm/mach-k3/r5/r5_mpu.c
+similarity index 98%
+rename from arch/arm/mach-k3/r5_mpu.c
+rename to arch/arm/mach-k3/r5/r5_mpu.c
+index 605f7931518..e409fdcfea8 100644
+--- a/arch/arm/mach-k3/r5_mpu.c
++++ b/arch/arm/mach-k3/r5/r5_mpu.c
+@@ -9,7 +9,7 @@
+ #include <common.h>
+ #include <asm/io.h>
+ #include <linux/kernel.h>
+-#include "common.h"
++#include <asm/armv7_mpu.h>
  
- config K3_SYSFW_IMAGE_NAME
- 	string "File name of SYSFW firmware and configuration blob"
-@@ -158,7 +158,7 @@ config K3_SYSFW_IMAGE_SPI_OFFS
- 
- config SYS_K3_SPL_ATF
- 	bool "Start Cortex-A from SPL"
--	depends on SPL && CPU_V7R
-+	depends on CPU_V7R
- 	help
- 	  Enabling this will try to start Cortex-A (typically with ATF)
- 	  after SPL from R5.
-@@ -172,7 +172,7 @@ config K3_ATF_LOAD_ADDR
- 
- config K3_DM_FW
- 	bool "Separate DM firmware image"
--	depends on SPL && CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
-+	depends on CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
- 	default y
- 	help
- 	  Enabling this will indicate that the system has separate DM
+ struct mpu_region_config k3_mpu_regions[16] = {
+ 	/*
 -- 
 2.39.2
 
