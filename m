@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C109C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 01:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FBC1C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 14 Nov 2023 02:14:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABE688715B;
-	Tue, 14 Nov 2023 02:53:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 24D408715B;
+	Tue, 14 Nov 2023 03:14:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h0ArTV0q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P42f9wqC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00974871A2; Tue, 14 Nov 2023 02:53:32 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 2A5158715B; Tue, 14 Nov 2023 03:14:45 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A16668710C
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 02:53:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FE128719E
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 03:14:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-51f64817809so477976a12.1
- for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 17:53:29 -0800 (PST)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6bbfb8f7ac4so1141031b3a.0
+ for <u-boot@lists.denx.de>; Mon, 13 Nov 2023 18:14:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1699926808; x=1700531608; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0huZ9jlnu5/GTlbtrNBPi7iYMqi1aaI3J/eabtxSwQk=;
- b=h0ArTV0qIm/aGrnbkLeVYsttw6x1nb7I2dXD/CRuDfqoCjGPdsJ5qd5CVSXAmu5LbF
- ttq+uCEU9wqwV7BhxUF0Kyl85vXhw+zeqBYuyEUU4++Z1zmlDhT7GIfgacozgiL9WQV5
- uCVfkCZR93lRGdnTHsaOGQYprNfvv6sjAqkfn+VRY0VD4w2wic/k9L3Jre85HZdAKN/4
- mdRYsFvikoXTjNuO4oJDkIKpc9D9EcTfbrjrhtypfoOsthixDMotGMrf7mwePhXb0aH7
- 5Ubdc75HRQzuNEdyZ0MpCZoLphU5jBGOumNOKt/NKeZ3o7ylaHhjLPP1XVBu1UsHdzBC
- BlBA==
+ d=linaro.org; s=google; t=1699928080; x=1700532880; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PrB+iqYTBaZ95KSYK/XlTia4h60tiNlLhCJwoKvy7u8=;
+ b=P42f9wqCaLIeZojUxIA+ZaOJFjSW+Pz7F3S9ZMQwl+O2RmM7/+NN5LIWq6pYemYyX2
+ 3TKQAD6Y98A/Uy4Ckn2g2iK6+9/7H7WecWxvzsdpxV78gM5RNqZw1zCliOJKdQ76G26n
+ F0/3s83QKcC/99Ewm6ZhfNzDGHkwNh9RNRaHtQypdYJumQ5RTEOilqGxvs4fRa02QEMp
+ 3OafOymC0UYJRuqzJAPso5+u/evZ76j92/oL96nsgWU4TDVBBYe4+VpJqUauDHnE0WXz
+ zLoTBOvYbjYbRXPQBgSf+W7YoSKkQq9GP+vX7RLEaKWdZpBKa2O6P+k0veI++8QNbGT8
+ FlXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699926808; x=1700531608;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0huZ9jlnu5/GTlbtrNBPi7iYMqi1aaI3J/eabtxSwQk=;
- b=SDdeuh5/7KFeuAgZViQw6GOZsDq3XgwvbbhIymsdnWOh98kAhZ+HPA7SJcjt4ehLSK
- mO4zG1xJ1/DbhUU4EHTIT1m1nYC9dAYakOJA3OXD1qyb7ESUgxkqwEeh50YxwPrNi0TO
- HCwOzM1qFqrW3RK4OOpqSMrzpKr2keKXAAwvkrTu5Zww/2u5xdT+vrnTmyowbofxlpo1
- hNEiXgashdyAlfB5E/QWq6wJKoXMUxZHuzZk9YykH3/WGRU0YclTc3iLbOdIRGdwOOEu
- 2ciTKavN6kHLoG0uikW/OaZh13R0kUOVl6AfGFEBExQueca0ohzKZCqzIGFgL6jY/998
- qWbg==
-X-Gm-Message-State: AOJu0YzgKGXpMGviH3Fd/lPW2dZLoJODu2WCaYwMtrUJwmIQHaqB1A/f
- nqja6gjNZiZza9YO37AWkK8K9g==
-X-Google-Smtp-Source: AGHT+IECdCwodFyGv6TwYov7W/vVwtBuJlNyok8Y6ffcFdmJEzTmP1/31VOZcEzXdp+4eYZ/PA+gpw==
-X-Received: by 2002:a05:6a20:da9b:b0:181:7d6d:c0ee with SMTP id
- iy27-20020a056a20da9b00b001817d6dc0eemr1357352pzb.0.1699926807665; 
- Mon, 13 Nov 2023 17:53:27 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:66f2:cd5c:3d82:6e6f])
+ d=1e100.net; s=20230601; t=1699928080; x=1700532880;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PrB+iqYTBaZ95KSYK/XlTia4h60tiNlLhCJwoKvy7u8=;
+ b=gjKUx+ja42Grzc8D9KRTKo+E/qVwmBznletgCuof9r8XFtFB8Wdb9fgRZ3FnYhKPkC
+ ClFTWAy5BpVgCdW7OM7QVQA3Fxdkf5rtGei2Qy7R1CZZTkgqN/3jbNyUVWj6Dp12Z5ar
+ XHPbi8CBlkl2kC42sNhmYoI6s+ZchwoDmBvb7Gcdpm4miLmaBcVMqmFHXVdEt9j23BSw
+ Z7P4CiHlHf6XbW7xbdz2KSmG2I58DoPKMB5ZsyG2wwCe2imUglS3pYm8SV8tYjxYSGBz
+ ohzz+FIMBowq9oGaYauIGDqdsPsXmKt+azlAelic3jrxUini2W02P4z2nfwrsUsRoZYa
+ 5eBw==
+X-Gm-Message-State: AOJu0Yx+fTeJ5b/+U0vjNY9JFaekaA5WWQyzM1N7X6oKWFpZBHFkMhY4
+ kOWQ5uEJBclUMh2sdndsb6Fp8w==
+X-Google-Smtp-Source: AGHT+IH52ufyB0MjRLDd8+Y+yqIcSwBQ+X34Wd5t5BXDanj/9c5rKjaeSxKLg9WPVpy+Vdoj27WAWw==
+X-Received: by 2002:a05:6a20:3d0c:b0:15a:2c0b:6c81 with SMTP id
+ y12-20020a056a203d0c00b0015a2c0b6c81mr1462181pzi.3.1699928079589; 
+ Mon, 13 Nov 2023 18:14:39 -0800 (PST)
+Received: from octopus.. ([2400:4050:c3e1:100:66f2:cd5c:3d82:6e6f])
  by smtp.gmail.com with ESMTPSA id
- fe14-20020a056a002f0e00b0068fcb70ccafsm224372pfb.129.2023.11.13.17.53.25
+ i4-20020a170902c94400b001c61afa7009sm4680475pla.114.2023.11.13.18.14.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Nov 2023 17:53:27 -0800 (PST)
-Date: Tue, 14 Nov 2023 10:53:24 +0900
+ Mon, 13 Nov 2023 18:14:39 -0800 (PST)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, etienne.carriere@st.com, michal.simek@amd.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/5] firmware: scmi: support protocols on sandbox only
- if enabled
-Message-ID: <ZVLTFCZJ8mUvv5UJ@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, trini@konsulko.com,
- etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de
-References: <20231113014911.3308990-1-takahiro.akashi@linaro.org>
- <20231113014911.3308990-3-takahiro.akashi@linaro.org>
- <CAPnjgZ0dnRJxorwAyp1M=aHtaxWOEcwErrWex8ur38iK5+GYNg@mail.gmail.com>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: etienne.carriere@st.com, michal.simek@amd.com, u-boot@lists.denx.de,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v3 0/5] cmd: add scmi command
+Date: Tue, 14 Nov 2023 11:14:23 +0900
+Message-Id: <20231114021428.531887-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0dnRJxorwAyp1M=aHtaxWOEcwErrWex8ur38iK5+GYNg@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,236 +90,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 13, 2023 at 11:01:20AM -0700, Simon Glass wrote:
-> Hi AKASHI,
-> 
-> On Sun, 12 Nov 2023 at 18:49, AKASHI Takahiro
-> <takahiro.akashi@linaro.org> wrote:
-> >
-> > This change will be useful when we manually test SCMI on sandbox
-> > by enabling/disabling a specific SCMI protocol.
-> >
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > ---
-> >  drivers/firmware/scmi/sandbox-scmi_agent.c   | 27 ++++++-
-> >  drivers/firmware/scmi/sandbox-scmi_devices.c | 78 ++++++++++++--------
-> >  2 files changed, 72 insertions(+), 33 deletions(-)
-> >
-> > diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-> > index d13180962662..1fc9a0f4ea7e 100644
-> > --- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-> > +++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-> > @@ -66,10 +66,18 @@ struct scmi_channel {
-> >  };
-> >
-> >  static u8 protocols[] = {
-> > +#if IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN)
-> >         SCMI_PROTOCOL_ID_POWER_DOMAIN,
-> 
-> Is this better? Perhaps not!
-> 
-> CONFIG_IS_ENABLED(SCMI_POWER_DOMAIN, (SCMI_PROTOCOL_ID_POWER_DOMAIN,))
+"Scmi" command will be re-introduced per Michal's request.
+The functionality is the same as I put it in my patch set of adding
+SCMI base protocol support, but made some tweak to make UT, "ut dm
+scmi_cmd," more flexible and tolerable when enabling/disabling a specific
+SCMI protocol for test purpose.
 
-Ah, good notation.
+Each commit may have some change history inherited from the preceding
+patch series.
 
-> > +#endif
-> > +#if IS_ENABLED(CONFIG_CLK_SCMI)
-> >         SCMI_PROTOCOL_ID_CLOCK,
-> > +#endif
-> > +#if IS_ENABLED(CONFIG_RESET_SCMI)
-> >         SCMI_PROTOCOL_ID_RESET_DOMAIN,
-> > +#endif
-> > +#if IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)
-> >         SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN,
-> > +#endif
-> >  };
-> >
-> >  #define NUM_PROTOCOLS ARRAY_SIZE(protocols)
-> > @@ -1160,6 +1168,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
-> >                 }
-> >                 break;
-> >         case SCMI_PROTOCOL_ID_POWER_DOMAIN:
-> > +               if (!IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN))
-> > +                       goto not_supported;
-> > +
-> >                 switch (msg->message_id) {
-> >                 case SCMI_PROTOCOL_VERSION:
-> >                         return sandbox_scmi_pwd_protocol_version(dev, msg);
-> > @@ -1180,6 +1191,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
-> >                 }
-> >                 break;
-> >         case SCMI_PROTOCOL_ID_CLOCK:
-> > +               if (!IS_ENABLED(CONFIG_CLK_SCMI))
-> > +                       goto not_supported;
-> 
-> How about putting this all in a function and avoiding the goto?
+Test
+====
+The patch series was tested on the following platforms:
+* sandbox
 
-Okay, will do.
+Prerequisite:
+=============
+* This patch series is based on the latest master.
 
-Thanks,
--Takahiro Akashi
+Changes:
+========
+v3(Nov 14, 2023)
+* return -EAGAIN if we want to skip a test.
+* use CONFIG_IS_ENABLED() rather than IS_ENABLED().
+* remove goto by introducing a function in sandbox implementation.
+v2(Nov 13, 2023)
+* localize global variables to avoid pytest errors.
 
-> > +
-> >                 switch (msg->message_id) {
-> >                 case SCMI_PROTOCOL_ATTRIBUTES:
-> >                         return sandbox_scmi_clock_protocol_attribs(dev, msg);
-> > @@ -1196,6 +1210,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
-> >                 }
-> >                 break;
-> >         case SCMI_PROTOCOL_ID_RESET_DOMAIN:
-> > +               if (!IS_ENABLED(CONFIG_RESET_SCMI))
-> > +                       goto not_supported;
-> > +
-> >                 switch (msg->message_id) {
-> >                 case SCMI_RESET_DOMAIN_ATTRIBUTES:
-> >                         return sandbox_scmi_rd_attribs(dev, msg);
-> > @@ -1206,6 +1223,9 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
-> >                 }
-> >                 break;
-> >         case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
-> > +               if (!IS_ENABLED(CONFIG_DM_REGULATOR_SCMI))
-> > +                       goto not_supported;
-> > +
-> >                 switch (msg->message_id) {
-> >                 case SCMI_VOLTAGE_DOMAIN_ATTRIBUTES:
-> >                         return sandbox_scmi_voltd_attribs(dev, msg);
-> > @@ -1224,8 +1244,7 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
-> >         case SCMI_PROTOCOL_ID_SYSTEM:
-> >         case SCMI_PROTOCOL_ID_PERF:
-> >         case SCMI_PROTOCOL_ID_SENSOR:
-> > -               *(u32 *)msg->out_msg = SCMI_NOT_SUPPORTED;
-> > -               return 0;
-> > +               goto not_supported;
-> >         default:
-> >                 break;
-> >         }
-> > @@ -1239,6 +1258,10 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
-> >         /* Intentionnaly report unhandled IDs through the SCMI return code */
-> >         *(u32 *)msg->out_msg = SCMI_PROTOCOL_ERROR;
-> >         return 0;
-> > +
-> > +not_supported:
-> > +       *(u32 *)msg->out_msg = SCMI_NOT_SUPPORTED;
-> > +       return 0;
-> >  }
-> >
-> >  static int sandbox_scmi_test_remove(struct udevice *dev)
-> > diff --git a/drivers/firmware/scmi/sandbox-scmi_devices.c b/drivers/firmware/scmi/sandbox-scmi_devices.c
-> > index facb5b06ffb5..0519cf889aa9 100644
-> > --- a/drivers/firmware/scmi/sandbox-scmi_devices.c
-> > +++ b/drivers/firmware/scmi/sandbox-scmi_devices.c
-> > @@ -62,12 +62,13 @@ static int sandbox_scmi_devices_remove(struct udevice *dev)
-> >         if (!devices)
-> >                 return 0;
-> >
-> > -       for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
-> > -               int ret2 = reset_free(devices->reset + n);
-> > +       if (IS_ENABLED(CONFIG_RESET_SCMI))
-> > +               for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
-> > +                       int ret2 = reset_free(devices->reset + n);
-> >
-> > -               if (ret2 && !ret)
-> > -                       ret = ret2;
-> > -       }
-> > +                       if (ret2 && !ret)
-> > +                               ret = ret2;
-> > +               }
-> >
-> >         return ret;
-> >  }
-> > @@ -89,39 +90,53 @@ static int sandbox_scmi_devices_probe(struct udevice *dev)
-> >                 .regul_count = SCMI_TEST_DEVICES_VOLTD_COUNT,
-> >         };
-> >
-> > -       ret = power_domain_get_by_index(dev, priv->devices.pwdom, 0);
-> > -       if (ret) {
-> > -               dev_err(dev, "%s: Failed on power domain\n", __func__);
-> > -               return ret;
-> > -       }
-> > -
-> > -       for (n = 0; n < SCMI_TEST_DEVICES_CLK_COUNT; n++) {
-> > -               ret = clk_get_by_index(dev, n, priv->devices.clk + n);
-> > +       if (IS_ENABLED(CONFIG_SCMI_POWER_DOMAIN)) {
-> > +               ret = power_domain_get_by_index(dev, priv->devices.pwdom, 0);
-> >                 if (ret) {
-> > -                       dev_err(dev, "%s: Failed on clk %zu\n", __func__, n);
-> > +                       dev_err(dev, "%s: Failed on power domain\n", __func__);
-> >                         return ret;
-> >                 }
-> >         }
-> >
-> > -       for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
-> > -               ret = reset_get_by_index(dev, n, priv->devices.reset + n);
-> > -               if (ret) {
-> > -                       dev_err(dev, "%s: Failed on reset %zu\n", __func__, n);
-> > -                       goto err_reset;
-> > +       if (IS_ENABLED(CONFIG_CLK_SCMI)) {
-> > +               for (n = 0; n < SCMI_TEST_DEVICES_CLK_COUNT; n++) {
-> > +                       ret = clk_get_by_index(dev, n, priv->devices.clk + n);
-> > +                       if (ret) {
-> > +                               dev_err(dev, "%s: Failed on clk %zu\n",
-> > +                                       __func__, n);
-> > +                               return ret;
-> > +                       }
-> >                 }
-> >         }
-> >
-> > -       for (n = 0; n < SCMI_TEST_DEVICES_VOLTD_COUNT; n++) {
-> > -               char name[32];
-> > -
-> > -               ret = snprintf(name, sizeof(name), "regul%zu-supply", n);
-> > -               assert(ret >= 0 && ret < sizeof(name));
-> > +       if (IS_ENABLED(CONFIG_RESET_SCMI)) {
-> > +               for (n = 0; n < SCMI_TEST_DEVICES_RD_COUNT; n++) {
-> > +                       ret = reset_get_by_index(dev, n,
-> > +                                                priv->devices.reset + n);
-> > +                       if (ret) {
-> > +                               dev_err(dev, "%s: Failed on reset %zu\n",
-> > +                                       __func__, n);
-> > +                               goto err_reset;
-> > +                       }
-> > +               }
-> > +       }
-> >
-> > -               ret = device_get_supply_regulator(dev, name,
-> > -                                                 priv->devices.regul + n);
-> > -               if (ret) {
-> > -                       dev_err(dev, "%s: Failed on voltd %zu\n", __func__, n);
-> > -                       goto err_regul;
-> > +       if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
-> > +               for (n = 0; n < SCMI_TEST_DEVICES_VOLTD_COUNT; n++) {
-> > +                       char name[32];
-> > +
-> > +                       ret = snprintf(name, sizeof(name), "regul%zu-supply",
-> > +                                      n);
-> > +                       assert(ret >= 0 && ret < sizeof(name));
-> > +
-> > +                       ret = device_get_supply_regulator(dev, name,
-> > +                                                         priv->devices.regul
-> > +                                                               + n);
-> > +                       if (ret) {
-> > +                               dev_err(dev, "%s: Failed on voltd %zu\n",
-> > +                                       __func__, n);
-> > +                               goto err_regul;
-> > +                       }
-> >                 }
-> >         }
-> >
-> > @@ -130,8 +145,9 @@ static int sandbox_scmi_devices_probe(struct udevice *dev)
-> >  err_regul:
-> >         n = SCMI_TEST_DEVICES_RD_COUNT;
-> >  err_reset:
-> > -       for (; n > 0; n--)
-> > -               reset_free(priv->devices.reset + n - 1);
-> > +       if (IS_ENABLED(CONFIG_RESET_SCMI))
-> > +               for (; n > 0; n--)
-> > +                       reset_free(priv->devices.reset + n - 1);
-> >
-> >         return ret;
-> >  }
-> > --
-> > 2.34.1
-> >
-> 
-> Regards,
-> Simon
+AKASHI Takahiro (5):
+  test: dm: skip scmi tests against disabled protocols
+  firmware: scmi: support protocols on sandbox only if enabled
+  cmd: add scmi command for SCMI firmware
+  doc: cmd: add documentation for scmi
+  test: dm: add scmi command test
+
+ cmd/Kconfig                                  |   9 +
+ cmd/Makefile                                 |   1 +
+ cmd/scmi.c                                   | 384 +++++++++++++++++++
+ configs/sandbox_defconfig                    |   1 +
+ doc/usage/cmd/scmi.rst                       | 126 ++++++
+ doc/usage/index.rst                          |   1 +
+ drivers/firmware/scmi/sandbox-scmi_agent.c   |  30 +-
+ drivers/firmware/scmi/sandbox-scmi_devices.c |  78 ++--
+ test/dm/scmi.c                               |  93 +++++
+ 9 files changed, 686 insertions(+), 37 deletions(-)
+ create mode 100644 cmd/scmi.c
+ create mode 100644 doc/usage/cmd/scmi.rst
+
+-- 
+2.34.1
+
