@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C4BC2BB3F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49632C2BB3F
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FB2987447;
-	Wed, 15 Nov 2023 23:36:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E9CC88727A;
+	Wed, 15 Nov 2023 23:36:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hFaWGcNK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BP69B28r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C7FD87444; Wed, 15 Nov 2023 23:36:52 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id D8A1387282; Wed, 15 Nov 2023 23:36:57 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C5518727A
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:36:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2835869F7
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:36:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-77bcbc14899so7164685a.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:36:50 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3b6d88dbaa3so108189b6e.1
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:36:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700087809; x=1700692609; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700087814; x=1700692614; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qBkdSuzffjXCcVZAajmEkA18izQ+NWb/K5Hncg46PSU=;
- b=hFaWGcNKqTBDaV2l28bqe2NC287CD6xrpEtDgE59FsDWk0a8IlLdSdD92RfdSj5cKV
- fB4uBn1pQfAwwt6ICpLo4YicYEiy6nagTmIuod4KNKF0CXwxZHERiUMkTHcEMlLZ33Qa
- Ou7K16/PFUL8G9hCdHG6d8DFX7cgYCXUTV5VY=
+ bh=0Kkk/nYM2tsSr6l46A4zry0+NGsuolqk5uiGolOyxyg=;
+ b=BP69B28rvjRZupr5CHAogNkoQ01Fp1zdMjKTgGCRjExIiGqufefrGBSVMCBa7WKuUf
+ JtMKWSP86leMBcjF8d8TZjURTI06zcn0luhBFGf5L7o+8NzdmXHAoH94cKU/ldN5lcG2
+ fikJSstOQKi64lRLdk+C/5bJ0jSwCJOly0Wuk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700087809; x=1700692609;
+ d=1e100.net; s=20230601; t=1700087814; x=1700692614;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qBkdSuzffjXCcVZAajmEkA18izQ+NWb/K5Hncg46PSU=;
- b=fh8US3xGhD3xM8ULLd+AsUPqdh4k7qfZXm3TfYJHGbKaVerNF7mhpK+mfqZJapKsf7
- O6dwLOAkFpAjTCtQyaOKqKKQ9Y6yqWm92UXD/xt93D2CtcNDN6uDtDyDhTgqYzHAlr/j
- Tdo6UoqT5bTTjOi+IaUT2p1tXQa/oCZ9TR4Mg1fIpCEanNmUbg6QnCSzrOq6RgNo8T6+
- v6s19+BsSNwBwdQ/tEGTnIn8/amLl/YPKfHsAMWX7lH+1qajvPxxzL5BS9WILQfjDarr
- 6bPapTpYeYF901n/7GN1Udueq91bc0umvh+2PLSOSvOcr7sf7l0QYJWdtM+SCge8sgLg
- jhBA==
-X-Gm-Message-State: AOJu0YyumKgmKGGl1uFGErwEt+DPefj4fRYUhbG+b8AgAKl6f/Xj96zo
- CYA3SZ4/81dPwaAJBsMBwoT3uw==
-X-Google-Smtp-Source: AGHT+IHn9kIHydcBFA69DYSHxj0jDEyo4HeqTp6JwMCD0wC3GgPFEQR3TgvieO4uGhdY5grB+hPyYQ==
-X-Received: by 2002:a05:620a:2902:b0:77a:4a87:e9b7 with SMTP id
- m2-20020a05620a290200b0077a4a87e9b7mr7619236qkp.42.1700087808941; 
- Wed, 15 Nov 2023 14:36:48 -0800 (PST)
+ bh=0Kkk/nYM2tsSr6l46A4zry0+NGsuolqk5uiGolOyxyg=;
+ b=blkzj9w1a05DOi4XmHcKfsp6uOJutypzu9RDZl2i1QAQcm77vWwKlZ0EFKD1odtaXG
+ wSzU9MMdGnF/BTrYcCF02BCCVmhcdT2U55jzD13+JW1WCNkOYsTHevDNNbeoUq1av2bz
+ dPYRMpzEVHGtCls2yA5lNyV8n1sdMWebW1zJnayECc/uN0++VwLmzYarc1ZTkY6LkmiO
+ ytBPjQiqMPn7T+pQyv+sri4IpXwMeaeTxDDq3ZNCvoSSJSW9dVklND9HmsqusYggPsTN
+ 7VWZk0GB7ZrwpVelbepURpdpiMHRpXeB4u/CJehfqIL3N4B0mzdiWHarEHLD2QCboAQA
+ aKCA==
+X-Gm-Message-State: AOJu0YxA76kaPKRHcSWnGTyY8remBUkF9PDdGOCAOw/xBeoFpZwSNbYM
+ LSZwd2yPy1l0vyC2IjkHn82x/g==
+X-Google-Smtp-Source: AGHT+IEloVYYGF5Dws/qCVbvNw3oyqm+x8YF9mFhA7fGuJLFKaUqxxXVtiJCSEEkmkTDKQh1NYBZyw==
+X-Received: by 2002:a05:6358:2928:b0:16b:d07a:beed with SMTP id
+ y40-20020a056358292800b0016bd07abeedmr8048553rwb.31.1700087814370; 
+ Wed, 15 Nov 2023 14:36:54 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
  [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
  by smtp.gmail.com with ESMTPSA id
- e14-20020a05620a12ce00b007740c0e52edsm3802626qkl.89.2023.11.15.14.36.47
+ fp3-20020a05622a508300b00417dd1dd0adsm3888684qtb.87.2023.11.15.14.36.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 14:36:48 -0800 (PST)
-Date: Wed, 15 Nov 2023 17:36:46 -0500
+ Wed, 15 Nov 2023 14:36:53 -0800 (PST)
+Date: Wed, 15 Nov 2023 17:36:51 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
+ Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH 11/29] image: Document error codes from fit_image_load()
-Message-ID: <20231115223646.GS6601@bill-the-cat>
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH 12/29] bootm: Adjust boot_get_kernel() to return an error
+Message-ID: <20231115223651.GT6601@bill-the-cat>
 References: <20231112000923.73568-1-sjg@chromium.org>
- <20231112000923.73568-12-sjg@chromium.org>
+ <20231112000923.73568-13-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VVExIwdOcYTwjSrE"
+ protocol="application/pgp-signature"; boundary="awpXRymYdbqnTRHE"
 Content-Disposition: inline
-In-Reply-To: <20231112000923.73568-12-sjg@chromium.org>
+In-Reply-To: <20231112000923.73568-13-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,39 +98,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VVExIwdOcYTwjSrE
+--awpXRymYdbqnTRHE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 11, 2023 at 05:08:56PM -0700, Simon Glass wrote:
+On Sat, Nov 11, 2023 at 05:08:57PM -0700, Simon Glass wrote:
 
-> Put a list of these in the function documentation so it is easier to
-> decode what went wrong.
+> This function obtains lots of error codes and then throws them away.
+> Update it to return the error, moving the image pointer to an
+> argument.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> @@ -217,25 +220,28 @@ static const void *boot_get_kernel(const char *cmd_=
+name, const char *addr_fit,
+>  			vendor_boot_img =3D map_sysmem(get_avendor_bootimg_addr(), 0);
+>  		}
+>  		printf("## Booting Android Image at 0x%08lx ...\n", img_addr);
+> -		if (android_image_get_kernel(boot_img, vendor_boot_img, images->verify,
+> -					     os_data, os_len))
+> -			return NULL;
+> +		ret =3D android_image_get_kernel(boot_img, vendor_boot_img,
+> +					       images->verify, os_data, os_len);
+> +		if (ret)
+> +			return ret;
+>  		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+>  			unmap_sysmem(vendor_boot_img);
+>  			unmap_sysmem(boot_img);
+>  		}
+
+This highlights a pre-existing leak, yes? If so, can you please do a
+follow-up to move if (ret) return ret; to after the unmaps? Or am I
+missing something? For the patch itself:
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---VVExIwdOcYTwjSrE
+--awpXRymYdbqnTRHE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVR/4ACgkQFHw5/5Y0
-tyw8zgv/TUp4GpuWvVRsh1ho/8jdq1uJuIcXvfLXjOg2Kbppe83MFFF7mtrDL53A
-GFMcGer4rbH1Xc8Le8DGMTzjnh5laldwu2jTvHczcsABXetj6zQY2oij4+vexLxy
-8R+LglNsB/CvqTqkzzJNdQXCEKR21fWwWLSuzUF7oaCKvIZEUlLlAoV8OMrzMJ6x
-pukJ+A7VWnfpce3TD+1hs0BOJZ0aygq0Aeo0566L55Eo2ymaYFBI7CXRpBcb9nME
-eJu7rI3mC08RSvQDnFup//APpj24f5IfCVBZvSycFMPNEDJUrw/cTBhqSaFIqlCJ
-WULkSLcVtUYBpFjK99KghCBspSnP+BVsqTpQ7TS5rbHvtpUKlpwY6oYmjXegQlyt
-39u0NBbpGfJOptgwcI3TMWE8x5ylgHdwCPKnHuX+31C4q7vN5JW3s2djTBPJi8ba
-/nt7Qqhz9IjuZXDxDjzgX11sLaJLwtznJbPxbIEBbUVMNE+sLEjTDiPIM/gI4Lkx
-pm3y24z+
-=Zcof
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVSAMACgkQFHw5/5Y0
+tyx7bgv+OxHAIy7wLoRMoK5sZMZJKapODmr43F/oTBL5EEi/OGxJTJT1vsPaBAJa
+xalVGIeKKFWFJNTRVFunBeW0WbqD+VQH/xGmw89OCk3Z5/M9nb2vN0eXDX3svwoB
+dLURaCnLVZRkD5RWtOPvZUOqsjB6UUzhZFIr9tIinDg4vAMWnJVXBFXoVZUYeYZ3
+AwzstRnSbvzgZ1tr0AhJBxfjRJhuof17pIJGMOJATMCPhHtI/JGjwUs8lF0pazLi
+/ncp2Hsc3LGwVLKuctnD0OX/h7i4t4ylYQBxhPuf796NOlqm+sug0AVUju7C5Ote
+r0NNrRnskcHpLGGEHYePQDkUiU2cRckM77+YTkG2btEbD/ExmjkOgGu/L4hLWzZ1
+cpJfO8qXdD4Y5dDypxq783n0lJQqExcwiyf5UKz2rshZhg/n35cHFIp39b5UHv+n
+UPih99pALTLuXIINvZW6CnxRV9794HUppSLWyk+mdnnSDOX+k82VQLcyh6wDhgv6
+QFoux45T
+=y0tj
 -----END PGP SIGNATURE-----
 
---VVExIwdOcYTwjSrE--
+--awpXRymYdbqnTRHE--
