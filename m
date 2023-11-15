@@ -4,75 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C5FC2BB3F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28085C072A2
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 747928622B;
-	Wed, 15 Nov 2023 23:16:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 78A228704F;
+	Wed, 15 Nov 2023 23:36:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oMbS3jl+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zs2m/v+F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43AD886564; Wed, 15 Nov 2023 23:16:10 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 25AFA871B4; Wed, 15 Nov 2023 23:36:20 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 318E884956
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:16:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22B97869F7
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:36:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5a84204e7aeso1470907b3.0
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:16:07 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-778a47bc09aso6234685a.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:36:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700086566; x=1700691366; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wU37ynQl/50ndI1EVYiUyDhClRlTG8e+hp7DAHTaDb0=;
- b=oMbS3jl+cuM3lBUpPG49V5L17N/Z8NdQyaw+miyVodGUwsxkx8jN8Lp4cDDgei9VLQ
- +uNIopzWKbU+fiW1uGKJ/oXDO0QQ7kvRsDkKIF+CTJvPg+YOqLZFOsvgl2SHtujDM7D7
- ymn7rP/trq2/H3avdgYQEpPakDd/B8UKLEeWQ=
+ d=konsulko.com; s=google; t=1700087777; x=1700692577; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=3DP7dRah7KbuRNMYY9W2wvlgez+5siIY52XIbpxVSXE=;
+ b=Zs2m/v+FqCUrkwdhN9CBiL8KLnnZYjtKNxyqG9v1r1VM/P7W20xDA9v6epfg7ePSs2
+ RzBJoa/AY0x9S/5DpOW7JMlDmnb3XdjclWGvQchgCQvAzlbQ3YYVIfoYiBgDZDZDAXYv
+ 7D/lYtCHACglHVtLpSsgYEEIS5+2qSk5jCTX0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700086566; x=1700691366;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wU37ynQl/50ndI1EVYiUyDhClRlTG8e+hp7DAHTaDb0=;
- b=dP38hRTGQRSaq3vZPhIoc5hMqZp5LLnOyb1+QzTi01u/Lrke9B2yzTw22VhVx6nHtE
- 20eZ3eyHVGOIqE1tkW5e5OxNyYjcYAMNqCjcZYv73HGBplf6NGqmUZG/RJJKmjMZlxfV
- S+94VXXwAgbZuJTbVbHXcITUvtHI8PlAhkLGLs0acgrNjgzKTEZjepwq0vzt9dw6QJis
- o+IeZowoqZrUrjfj3psxe7oGuLp+1Zh91ECo8OYKTYtSKfiwm2W8qqFlVhgnFPHJT3mZ
- DsdRMBDMsEWl/8zGq/zdi3xYA7HLW9z+na8rf2OvATMve4lONRHcRoIF/S6T2011fEQa
- iRlw==
-X-Gm-Message-State: AOJu0YwrJWWPDPN4NalmmTpKGwq5nfT2nlT13+Lbh/Ul40/2Xl7uwnIC
- iywy50AhZRKgzJZh83EHEhOhD21Ay4/B4v02SEmnbw==
-X-Google-Smtp-Source: AGHT+IHH7zI+bDWfgx7EvOt8/s0p/MKUm3xdntdsn2F65gPKOJTT4gaBWnKbbf4Sxkzm8eyQH0D8UHXt3xlV7Nv0V9k=
-X-Received: by 2002:a81:6d0b:0:b0:577:51cd:1b4a with SMTP id
- i11-20020a816d0b000000b0057751cd1b4amr16367397ywc.41.1700086565664; Wed, 15
- Nov 2023 14:16:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700087777; x=1700692577;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3DP7dRah7KbuRNMYY9W2wvlgez+5siIY52XIbpxVSXE=;
+ b=O0vsjCZqKQaxU7XvW6RjS7EyXTPw1y1LnhCBNVL/VVU9SeYdOolsbS0Fjn0i7LjPOu
+ 4BlqdMR2b00QqO7eJqXDOLIrfMseaFcWvRJ92C/+jm2ID0x+IFiv/DOtFhg8EOUt+QjE
+ AgqjJhJehWJmy5qI85SGqUQ75OWiebPH7pE0lOi0XrL+udzOFprqNb5d0etAsjc9JQM0
+ bkWFanrzhHYFOCT05YytU3DXm4tpoeaf4ImWsVO3CalBpjbaZQ6vYHsFrwDzjj+UmUZ6
+ Tw5Q4bZVh/YVzVuu1mJSGDS+Zyb7V88ETiy0qnnIPTpdJe8TC591D01jCuk7lg5q+2n1
+ GUnQ==
+X-Gm-Message-State: AOJu0Yxs5YHfSWmbJv5AF8hivYC1x0FPGAyhcR/m8XChpiBKBkrewogG
+ n8wSicVw+PnLW4vr6fWZIXDLPQ==
+X-Google-Smtp-Source: AGHT+IG7887FGyq29Km1kyfornQbX6yJSm+1jyKzUYUHbYi43PzDXIZZgi3MIbG/Vqs3QHTDLsoQEw==
+X-Received: by 2002:ad4:504e:0:b0:66d:a1f8:38da with SMTP id
+ m14-20020ad4504e000000b0066da1f838damr6926845qvq.33.1700087776849; 
+ Wed, 15 Nov 2023 14:36:16 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
+ [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
+ by smtp.gmail.com with ESMTPSA id
+ q2-20020a05620a0c8200b007743671a41fsm3781006qki.72.2023.11.15.14.36.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Nov 2023 14:36:16 -0800 (PST)
+Date: Wed, 15 Nov 2023 17:36:14 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH 07/29] bootm: Simplify arguments for bootm_pre_load()
+Message-ID: <20231115223614.GN6601@bill-the-cat>
+References: <20231112000923.73568-1-sjg@chromium.org>
+ <20231112000923.73568-8-sjg@chromium.org>
 MIME-Version: 1.0
-References: <CAHc5_t2hrverfcsEEahUcRkcjrnF3jr0oyds2yo0RBVMB7E01g@mail.gmail.com>
- <CAPnjgZ1-_ohZaVwMGtTDt4-W--2q0AM2KPtX9RLgAbMEhMRugw@mail.gmail.com>
- <CAHc5_t1icj6d82GH+FK8qGg3MvDkpwEicH964ULcN971_=aSKg@mail.gmail.com>
- <CAHc5_t2vLU9gHufMS_Fjv6j5+E8ksgCCLzKQ7NxTHzJsdcmsNQ@mail.gmail.com>
- <CAPnjgZ3VY_M+zd2na+N9WCxj-L2F+KKhLgykQ21FTA7GPVrKNQ@mail.gmail.com>
- <CAHc5_t1fBzzpJaQed9kcKF92ProStsutmOBW-1jmi5vWFvLM8g@mail.gmail.com>
- <CAPnjgZ3WNmnNv7DjMFDM9Med3yRng32N6tku4NGxbwA5DRhQgA@mail.gmail.com>
- <CAHc5_t1H39YV=HSSa7TCEdzRctAX+zibkx1vsuwEW-raOL9TcA@mail.gmail.com>
-In-Reply-To: <CAHc5_t1H39YV=HSSa7TCEdzRctAX+zibkx1vsuwEW-raOL9TcA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Nov 2023 15:15:46 -0700
-Message-ID: <CAPnjgZ3V65sCuRV_NzJFZHL7-ZHq9SQUTxvvbj5GszFAhJ4WzA@mail.gmail.com>
-Subject: Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RaCtDiy2+0Dx+jm0"
+Content-Disposition: inline
+In-Reply-To: <20231112000923.73568-8-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,76 +97,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur,
 
-On Wed, 15 Nov 2023 at 15:13, Shantur Rathore <i@shantur.com> wrote:
->
-> Hi Simon,
->
-> I have figured out the cause of the crash.
-> It happens here -
-> https://github.com/u-boot/u-boot/blob/master/boot/bootflow.c#L470
-> while doing - free(bflow->buf)
->
-> As I understand it,
-> - Just before starting kernel EFI binary calls usb-uclass->usb_stop()
-> - This starts removing all devices in my case ( 6x usb_hub, 2x
-> partition, 1x blk, 2x bootdev, 1x usb_maas_storage)
-> - While removing bootdev, it ends up calling bootdev-uclass ->
-> bootdev_pre_unbind -> bootdev_clear_bootflows which calls
-> bootflow->bootflow_remove and bootflow_free
->
-> I don't know why this buf cannot be freed, is it because the EFI
-> binary in the buffer is still being used ( efi/boot/bootaa64.efi ) ?
-> But commenting this line out fixes the crash and linux boots happily.
->
-> Fixing this properly is above my pay grade as of now.
+--RaCtDiy2+0Dx+jm0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Great, thank you! I will send a patch.
+On Sat, Nov 11, 2023 at 05:08:52PM -0700, Simon Glass wrote:
 
-Regards,
-Simon
+> Move the argument decoding to the caller, to avoid needing to pass the
+> command-line arguments.
+>=20
+> Add a function comment while we are here.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
->
-> Kind regards,
-> Shantur
->
-> On Wed, Nov 15, 2023 at 3:58=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Shantur,
-> >
-> > On Wed, 15 Nov 2023 at 08:23, Shantur Rathore <i@shantur.com> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > >
-> > > > Is this the blue port on top of the USB-C connector?
-> > > >
-> > > Yes, that's correct.
-> > > For my drive I needed -
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20231110141311.51233=
-4-1-i@shantur.com/
-> > >
-> > > >
-> > > > Which version of Armbian / download link?
-> > > >
-> > > https://redirect.armbian.com/rockpro64/Bookworm_current
-> > >
-> > > > Yes it is scanning first, before reading the efi app, etc.
-> > > >
-> > > > I have the same hardware so may be able to dig into this.
-> > >
-> > > Sorry, I meant to ask if anything specific to USB.
-> > > I see it loads efi from the network or disk and calls bootefi with th=
-e
-> > > loaded address.
-> > > I don't know deep boot / efi stuff, just trying to compare how it's
-> > > loading efi differently than fatload in this case.
-> >
-> > There is nothing special about USB in boootstd, so far as I know.
-> >
-> > But until we figure out this bug, it is hard to be sure.
-> >
-> > Regards,
-> > Simon
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--RaCtDiy2+0Dx+jm0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVR9MACgkQFHw5/5Y0
+tyxOnAv/RGk0HgLyOBRdr8xfz166fL9fTklsuOGUHf/wmetJFzSS6F9SarWJCLQM
+fj6aSp3mPOmdlhP+keL1V5dujtUzuD9+dxv9SqbKkr/UfsrGxR72zA8xCSlQlDI1
+j8rkK27Jfmgo6Ngr5OLygsGAWA66xcn6mRuxr1cSSwJgbSNK73odOZZXLUCWvcTX
+UTp0yeVUZeRR7a4/aSGD+g8eyfrftZ2tdFnZiS9JExVUrRCB+ryXf1JoIU/ijH2y
+Gdr270ClgJCsa2uEk/aLQZix1O0KZoNCAg5iIJNd8TA8ONpK+op1xpfEqAkFn16X
+gtkkcg3n44CxTGsRDijSJBb5ax9PAWhkCsQ3GMfR61zsMnCifX/G4Dfz2ipV73XE
+5RLw5EmX5UPTNTBwADxJRvPUfY9G882qYOuSLfIzTBs/kAJmuefhJh3ugUvK56vg
++/BqGQFsAkipneYs+gQlIXXwcDECx4l5QcR1xFtr7/R23BLmqsX5z7sIBYZKnVh8
+8HjJ+BpZ
+=mVZX
+-----END PGP SIGNATURE-----
+
+--RaCtDiy2+0Dx+jm0--
