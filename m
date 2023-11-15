@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CDDC07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 12:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066DFC47072
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 12:46:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C48AF871CD;
-	Wed, 15 Nov 2023 13:44:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 364FB8721D;
+	Wed, 15 Nov 2023 13:44:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="1icQnK3A";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="RLGSGhyw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6423186FB2; Wed, 15 Nov 2023 13:44:41 +0100 (CET)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0d::62e])
+ id C7CA687197; Wed, 15 Nov 2023 13:44:41 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7d00::628])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54435871CD
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 13:44:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65188871FB
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 13:44:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Christian.Taedcke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HiECj/uFtLjnJaIp3N+rByO5E5G0/Tf3x7gWm0VFgPLDwHHOSUBEt47ZbP5/y4dGdTdiJgCrI5IxIScTYa504tr7oDqIFEojOwv5griDCZPtUtolzW6O+rNvOHntzeXiB6fz13ppXFdvH3bFzL2b60teYiEYgBDhP82zf+D1EGg1G96s7d7jX2hSdnXNsBPTel5gyCVcGaNBWWDSLozlWEj8/EsGT0lCcz1fOtiIt072aF4TrO0+4Y8pJHbL5MEtIrCfeU46F8RT/wu3kqk4A6C/2cRS2rWLKgeOH+DKOksag/pl/fx3aFmXxmw+1rpTA18eurz84Sv2syYix4EXJA==
+ b=WxgYW83/5ODXsbXiwcKuWNnh7UI8PVEv5mDRPGOeeeV/cSZ0HOyKXPqM0SLEyNit5D0EFSJd6QHSu3/EfTc+fUXBgZnNSThnbMaHfwLCTE24xT9bwOyGEejlc/Dgjzr3G3y+Q3i+5Qqo1+2gddbTmpGQahIArWrh+wTMBVrduottjoRrVaPRU1EvBcU62Bg8p4lSzVew/Yg2i1eH+RuupRBJrQGV9hSmVfbWIVmbc1D0zJQNeL8RwjvJ4RiAO7HKAaw7LT42ESdu4SyoPa1hs+gRncMrVkeyU2ag7HTb/skOEfkb8TuGgF0620M8Kr25dCKovlXhta5Oh8YYWRE7Rw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AH8ouZQsrKdFzaz9ClbGTsB4WLEGZctl0duvIlaNyMk=;
- b=KKEIrMgWiIo1hQ96eC/VLmoP/VvZBEGJ8LEmwFk33Vi9dz3CkfIIYlpLO27RIAwvcNfmeWji1PAnIEo88d0xMyhkpOHtKZwUaeyWgBxlhSNfhgn3DLWbG+bnZBqcsYy3MISYxhhAZsY4qRTvIOMT5pXUqr1F0gi9dL8Zo7M8chfoRAnpxvDCjxL4YQsTLvDw4SevwebAp/PYg4jDwour37b3SgpOgsevLxcwlxKjlaZjfSVnxeqbdLlyX4ZN9+V0Tqbp0+FgGmplDPx18WvA9iNkYDeUq2UDKsO0lx+b04bn1Y8ZAt/JS4cqRWXXAM1BZJf5mzudppiJoQgpYYlPvg==
+ bh=/SqmBDvRsCVAX/TUj+re1ySFIkrriHJDcaLFI3PrOvA=;
+ b=mTjFm87H+RVJwxu4DwqkxyZP3PURv8EuRHkd6prXPCCC/SEUgemoKJ81V8Xqz0AUK4/rfnHOag8sKBNfrmQLQDw1RaMkpTyO790ax5u5PSedzi1K/ZPLkc4waU2bcpAg7MozywFM3Q9Kde7PpwmzvvFhqEARch6H7cAXo394/o1RJe5ZzybunFjL7TwT2pZR+BGcH5hnzt/88Rz6/bl+jXl0nW7wuCyXxSthb4qU70LgIstTMxssCX5GMkjdyGUMeEKDX+S+1RMaGJDoAZXzVesHnoVfi4X2ZR5DLl7ZN1USahxr/2aXJ7enhEMMZ9b3Gw0X0Qt9oZhYnRKnMq/H5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AH8ouZQsrKdFzaz9ClbGTsB4WLEGZctl0duvIlaNyMk=;
- b=1icQnK3AcNLR8gpzTYiJQkiS9XDQnyv1JWdsPToCGZkluyqQhU/7M2R/gDaynWiswqBhqHBbj9F/uxNpq84hURhLZeNJp56GKqu6sYkUu6ypclO6AOeg1q/2XMjnzZ2V8PvyGHFG/SGbkJ9Aq50R3mU1cR/2oWQtEwmsIx1kp2M=
+ bh=/SqmBDvRsCVAX/TUj+re1ySFIkrriHJDcaLFI3PrOvA=;
+ b=RLGSGhywzi+ZK9mBzSa8jJqi7Yu4nwtuDApORSZxFa8fQ8Anu6TRVnUqKq0AvAFql9YN/nbSfPqrjX/PkWAQGN2uZfUpy4p5rn0Jd30yPevQYAEn5r5f0CUy+uuxC54qjLMOBPNTSbiAOOlTJIKGZFdaBcmM5gsK91erozTYgis=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AM0PR08MB4946.eurprd08.prod.outlook.com (2603:10a6:208:165::13)
- by AS8PR08MB5911.eurprd08.prod.outlook.com (2603:10a6:20b:292::17)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DU0PR08MB8614.eurprd08.prod.outlook.com (2603:10a6:10:402::8) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.29; Wed, 15 Nov
- 2023 12:44:36 +0000
+ 2023 12:44:37 +0000
 Received: from AM0PR08MB4946.eurprd08.prod.outlook.com
  ([fe80::a732:6327:19b0:b4d5]) by AM0PR08MB4946.eurprd08.prod.outlook.com
  ([fe80::a732:6327:19b0:b4d5%3]) with mapi id 15.20.6977.029; Wed, 15 Nov 2023
@@ -56,10 +56,12 @@ Received: from AM0PR08MB4946.eurprd08.prod.outlook.com
 From: christian.taedcke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Christian Taedcke <christian.taedcke@weidmueller.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 6/9] test: Add support to create a fat12 fs
-Date: Wed, 15 Nov 2023 13:44:21 +0100
-Message-Id: <20231115124424.125823-7-christian.taedcke-oss@weidmueller.com>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>
+Subject: [PATCH v3 7/9] test: fs: Add fat12 to supported fs of some tests
+Date: Wed, 15 Nov 2023 13:44:22 +0100
+Message-Id: <20231115124424.125823-8-christian.taedcke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231115124424.125823-1-christian.taedcke-oss@weidmueller.com>
 References: <20231115124424.125823-1-christian.taedcke-oss@weidmueller.com>
@@ -70,55 +72,55 @@ X-ClientProxiedBy: FR3P281CA0021.DEUP281.PROD.OUTLOOK.COM
  (2603:10a6:208:165::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR08MB4946:EE_|AS8PR08MB5911:EE_
-X-MS-Office365-Filtering-Correlation-Id: d71a3430-8121-4782-2b6a-08dbe5d89fff
+X-MS-TrafficTypeDiagnostic: AM0PR08MB4946:EE_|DU0PR08MB8614:EE_
+X-MS-Office365-Filtering-Correlation-Id: 221c6632-95cd-4be2-8adf-08dbe5d8a03f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: TX7PBD1adhsdSma1XjQtg+dBNy1GthqRiEUx+HWXzxtkPFaCbdwI0JUiTY8yQZlxUEJuoqJbz0jZvu4Al4uZrpDCW6Z8dMvRj7F+mHHfdjGe5ehEzMl+g4UCqDuTzGPMLZVTkCQBhJHLPIEYhvQyN6kd4k1qrgLeqKT4VFeuDgF+Q0R9wk++WRE4w4o0/scxjWxkMCS1qbdbTFVS2qlR2v2wkzImo3BuvRWjrh2PhzvfFW1x2SpJ8p7TXVQmS+rsn8RqPr6s4T8PIqMjSUYQQx9LOmMNpR+NZ/p/fULCAujJAKIqtsLGhjq2efJPYU7eTCPBHnDlbjjziWqPgjOEMDfhAc5PFqUQXUP3zHFODmv9msouAHbLh3OSh3tFLweru6ZAMu6WZrI3S5bS6eA6HueVFeV5W5JyoM4BjChveRoydiobYf0mQv8i0SA6vxmn8EIGEUbdQhngwW9T3w1R+Fa5zD691liZifUitCbFboj+x4h7gccMg7p75CtYYTsZgNn2VcT7Dg2bQX1E/uE61+giepVfOcFawstXsymXj1gwaM+97q8ZkcGU7hrghiiX0DYw2t/jtonrOhqf6e2tXtNpE+5TVLLGUOuQn71sClpyRxQUd6b47ik0ywDz7h9F
+X-Microsoft-Antispam-Message-Info: Z01/yvp47N3XYx8sBPPYnNOlw0pei6BBJ97RPsxJ1MbAnigHKCMc8wt4dRS48+WrHVDMpt0xrHml+MJigSTtSffs9jz2OlvCqogWiUe+t5LYRTX6CwWfv1VAGdQ2dLJUEduM29RMInhZJLYp42E+06TI40R2tlaCaT37Rpv4ylENZs0F+c7IRQ6pUqqzFCTAsVoysHPnk2e4otLQ3JZG2pcfwUHZ6fvjFpo5O+WpvwvPTcII8/BbRCI6ELiYfBdlZMFCFM/zGWkYiYO2PKXhNaeJLoUTuU0OfrGpmID3tP0y8t9Tgj9bcroeRtiq2mjP3AF+/qEDhfuSbVD0bnpM8ADxvVSF/CL/6jGD+MHeQxua/ZOKlzwX/Mrb5GllExVul58lL0uLMi5R2Dv+bZj87OD7QWCAVobLAUB9cY3scX+mj1Dv29c6KX4Fslq1CvGYE4osL14DlNKpOP6e+kgCQ7NyRjN9jIPRXYSpUfzhLDBC39jpv9VAUDhSklTKALXulyAIpeq/pJ0GhUDj+l1wCr0hYyBgImuxXZN54+pmmT8BC0fUBZVVZ9kYGpMDB6d3eD/KXgyYlrS2r++/Pr1SeV7ekhHF2p8mNyAK/HuN9LPvFBAH1G6P1amx+UNncHEs
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR08MB4946.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(39860400002)(136003)(346002)(376002)(396003)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(38350700005)(66476007)(54906003)(66556008)(6916009)(38100700002)(316002)(66946007)(36756003)(86362001)(6512007)(83380400001)(9686003)(26005)(6666004)(6506007)(2616005)(52116002)(4744005)(478600001)(2906002)(6486002)(5660300002)(41300700001)(8676002)(1076003)(4326008)(8936002);
+ SFS:(13230031)(346002)(376002)(366004)(136003)(396003)(39860400002)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(38350700005)(2616005)(66556008)(54906003)(6916009)(38100700002)(26005)(36756003)(316002)(66946007)(66476007)(86362001)(83380400001)(6512007)(52116002)(1076003)(6666004)(6506007)(9686003)(6486002)(2906002)(478600001)(8936002)(8676002)(5660300002)(4326008)(41300700001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lR3546tQvUghNA9mk+rwSq7+PMOZ1UqSA7+r6zMMQmHQSY/wj0ZikZJGZeXb?=
- =?us-ascii?Q?sXNTj6gVIeQrcX7KbeHoT6NRrLweTfALsHVaHUCRsQe57HDr6ZN/juaW55WN?=
- =?us-ascii?Q?pxgSPur+LTFJiidK7bAt/C90NQf/bkg3pkDIZWYgQ2GzLPryKGVTVeDHktww?=
- =?us-ascii?Q?QbekNx1i3uTY4DLUd00ri4wj3rY5nNDJcdnG/QmFLWEdJhEOttr4NRkEWyU4?=
- =?us-ascii?Q?Dl135HQgVw/tcfkce4shEVZxbndIFILDjdOr8ZjXDnXdrQy2gRXCGfUn9YFn?=
- =?us-ascii?Q?firENiULPWSliXa5IMfuzUprocTqPVO4Z4iiBSAtEgB/xxJrzf3zvSPC6Qu5?=
- =?us-ascii?Q?kGLM4owyY7fFndzTdXX3dqOs4Vg3pdhw581lKMT8rdkbp4poHrw3HkYdvBSV?=
- =?us-ascii?Q?qzUPJOJtFvuha0az1yTdKMjFp2QnSV4IQWYajgVB+7oKmzDniMDFSczzzPEH?=
- =?us-ascii?Q?22VDG3kEKKasPAJqu5OkLclSYY1L543P5OpZWeZXnLEPX3mtcwXZ2B8+MKHN?=
- =?us-ascii?Q?BmYjLD0TgFUlt03zI/G+5hzcvTerEdndcWlbtBr7+UuaXE1mLb+UmGR3O+M9?=
- =?us-ascii?Q?bfSL3zDaPKNDMabkL49iN5PUU6hKGlDdG2q2i3paI8gCytv2+6qUK63hzZx9?=
- =?us-ascii?Q?7lttMXSGZme41Hp6I83ZBO+HIYEuNeZ4fb1g24zfhcNVrpQMtoXPFbD595zx?=
- =?us-ascii?Q?znul5k+RhjABJ02DcEZM6c8oZvAae229P+FxF14GivWx8uVrvaazRkoocX3i?=
- =?us-ascii?Q?ToA72F4wcM5ZQPrNwKU0+IUkROmFjq/8jx0gfU00+c1iT/PqzPxPM3LMYfP9?=
- =?us-ascii?Q?cfsCHJz2NwiDrL7grcW4qzSPKbwWDmoIwwspX0/JnX+SCYY914bTAnxEthk1?=
- =?us-ascii?Q?jQJAwJch+8TAbYN9pAdmtDUb4sLBJyKfJlcM8zjsnAvfswQqjA+laQajeK2J?=
- =?us-ascii?Q?2xwW6IQb+XceZ0wQst9PXzf6AGQACtK8QBgTwiW2Sv9300ZMIf6P8fgkUcaL?=
- =?us-ascii?Q?8FdwoZawpOBxsN9oEZfi0d70MxAFwlqeqM1xPLULwdVnheQNiluwNIslolqr?=
- =?us-ascii?Q?vS4gq95Y/moSjVSuJrnJOeY9xx9AWabLdyyV5wMJwmKaapo4G2ADcyQXfGty?=
- =?us-ascii?Q?MgnF3ylBn1/oBZql0lrOoDE8vQ4OGpyVveGj4fQBi1NoN3KDRFAnuTK36v6h?=
- =?us-ascii?Q?WLc3+I1YDgT9/f31TiO3US3kwTg7DFq1j9OIvXOR3iDQhphzXDqSzSwgreTY?=
- =?us-ascii?Q?ArllAqA/o1/1shksxScvMQJ/Ps3gFWOxZpXG0tuXMIuw7JfpIZ17BtMB/4Db?=
- =?us-ascii?Q?56TkrLLZRKb8m9KV/9pgx3gx6bb7XQEn4QGPcMNHloZw87jVQ6zLhIpHkw9D?=
- =?us-ascii?Q?0oQXhx5yNXkehCbnLP1SJolf4h4yMOorYc1yYheH68xVlhPJa43FDYOY9d1z?=
- =?us-ascii?Q?YMUg/VeRcr7foN/YH3ITmZD0ZYRt1X2ycxAoaTeb+zEBIiER0ScMRLxfx73+?=
- =?us-ascii?Q?aPVLOqmbBoB6OiB33malGKYhuJbt527e8s9aMPVky/5FetE5ysRAAgc9su/7?=
- =?us-ascii?Q?vWKmgX599WP2Sx1nk9Lb9ZAGdwz/ubSSettcxUkxKAxwGqG7JGdi2GMsSVYZ?=
- =?us-ascii?Q?iJTeoPf7DsQZMGgWxaH0C/En3pQr0CzFqohTEO+ls5PC?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ziqt3upJmi5R4k6X1/XWKG5T+Rrjr4LL2gLfwaYLUDRwVQkCyS78EiRH/UGe?=
+ =?us-ascii?Q?0GWvdNrivYBlz/kpKs2LqcBrV4fYdr1WFz4jx8+kONW4VDyb+Jk86MuykZen?=
+ =?us-ascii?Q?uJtzpmk5Hlcku94BpQRpZdQ8f9rnzjMMygKhKtwF/vAIGZzasGP8KmtvScR9?=
+ =?us-ascii?Q?f8P9U5CCO61Hc5MQOoN7Pls+Pb7JAc9QeJh/0UWKBwmV6mML1GkQ7J2GGhXZ?=
+ =?us-ascii?Q?ZD2dPhAmNbIlVC0c5MSxK0IMqzpF5e1SAIzAW4O5AO+wwd7biQkIIqvOWvVO?=
+ =?us-ascii?Q?z9w0I3JMOMK5utxrjij8+2s1lHivI6rVd0qS9RBMYEu1Z9qcTNKc24op/UMZ?=
+ =?us-ascii?Q?1rD0iTxOjfQ0JT7YTWw1JTvs1Layauuj4XGvG7mf2nxU8SVt4FHAsx0OCdOn?=
+ =?us-ascii?Q?Xo/eoPYO5xjA8UYUXXrGlWnMcyAlwu1hWtAoAxI8udsKOqmf+RSCVCi3lIYe?=
+ =?us-ascii?Q?cnzkOOY33uZasOAuJsGGLa5avbnZObRsdFo8IRuX2UNJ8Sf0F4LSLxjL74fy?=
+ =?us-ascii?Q?F93hcaGscLTVNZXZAQjf+Hb3YtHcaDAPjtG/g+FkvAlSBpiOecTYpomS558U?=
+ =?us-ascii?Q?duH+TSbmuBodjyybR3bQaTqNTQI0zVp5DmsJjEEUq5LVdgTM9NlLRt8i4bvd?=
+ =?us-ascii?Q?dGlyFuo+8rtocEBuXbImTbBl2swsw3Amr4S4x0ERvQjQAiqfmTGP30LdSWdE?=
+ =?us-ascii?Q?FAvogUZqP4+SWTLFa+clI3mxqTsq6WDk6uWTrWlzX9bj3xxz/+9itiZU1YSz?=
+ =?us-ascii?Q?2B5A4xu5VSBsxdYHEnatLqw0V57Oo0q0yMGe8TxXlMftPk36xpK1voILDEQu?=
+ =?us-ascii?Q?34ZEzThhoozt2mLR0XrLfiZCAeAy1ht5/LK+2+6gn7m/3fhEw2rrNB0Wb/Kt?=
+ =?us-ascii?Q?iTQBsX1lc+XHB2HvG2n50e6ft2sdeB9LS4KrhewcBJGnk7K2X464oczZ9YuM?=
+ =?us-ascii?Q?4CNyy79Yf2vUtC/Xj5BvjQ8Em8y5AqO6bPy0NPvFSnilnoyofeMBI5zb5gqQ?=
+ =?us-ascii?Q?fzZzI4s3Ce304eCgB1LW6GqJsZYKkYCs2zad21qAoCVPl5Qiati3kARaLINw?=
+ =?us-ascii?Q?vCl2RTeGysa9GvJolh3YOUp+1+VGuhRzcDCzC1et07E9GKidqIq5W+RyyK0f?=
+ =?us-ascii?Q?NmUMHEX+w0JtAS7FPmtYfwITOZYlqG5I2toZLC5RDghOxJGxfn6uyXYb2nxD?=
+ =?us-ascii?Q?ZLP4eGeFkqGG9vm4NNVmeCX3mN0b+QqRy9JtTw5JQaQ5qCxDzDmbxAz7oF10?=
+ =?us-ascii?Q?z8jdsJNRUyaavKmMdNKiLKXpKCHpDyJRqfv4i1diiWRPjIewn3hb4GvYIfie?=
+ =?us-ascii?Q?wik2cJ8vrI8dysApESjdX5F/4spp4Wn4NAHrjSV640o9vgx8z3X9teWhWsh4?=
+ =?us-ascii?Q?q0eqfITTpI4HjATpsSewUJOCLfW1u9uMgoRowNawisYSTys+DuDjnP7wXOEi?=
+ =?us-ascii?Q?pbHvJ2USkL0Y4AWFYfzyVAdXSlNllyzmMQjGj4WC4GhrLBbMeG77huRmRY29?=
+ =?us-ascii?Q?zbbRDABC+8arLdMxRfuABHQ7YRH6qmerFaI6vc0sdYdvPPYTN2NjQM1VlaH2?=
+ =?us-ascii?Q?61nV3XXJjuTbUVbWF/NLqfyoHpTO9zlvXKZIraXJQ/FNoDxAxh1zEFiCX3Ji?=
+ =?us-ascii?Q?fcEpjMqdq8q8hFFK8yJZ0N/WQTgm2pgzqKCIFkpo1JVX?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d71a3430-8121-4782-2b6a-08dbe5d89fff
+X-MS-Exchange-CrossTenant-Network-Message-Id: 221c6632-95cd-4be2-8adf-08dbe5d8a03f
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR08MB4946.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2023 12:44:36.4085 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2023 12:44:36.8495 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Gto/xgwqN3nXC7+blS/hhFEfNAIU4ViL9TFpWhqqOYYQp7A+9c7r1zTHPFYFe3GT8xtXJKm3Tl2CSgy4T7p90+wB0CQ1TOrWK0q+Y4puucab8nEW52dshql7gLqhKUQT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB5911
+X-MS-Exchange-CrossTenant-UserPrincipalName: oMiISKpFHOlZPbXoAcGwL+kjbKQ2z/TQ3zOWK+oYGuquYQBWaub9o6pQyfGEcqJDH6zCBh+hkF0v+SDGb2dnJR8510wPPJakWFLY37kAxKG9bHHLH+ybtkGFtxIh4xCp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB8614
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,31 +139,37 @@ X-Virus-Status: Clean
 
 From: Christian Taedcke <christian.taedcke@weidmueller.com>
 
-This enables to implement tests for fat12 filesystem.
+The tests fs_ext, fs_mkdir and fs_unlink support fat12 without
+modifications.
+The fs_basic test uses a partition that is too large for fat12, so it
+is omitted here.
 
 Signed-off-by: Christian Taedcke <christian.taedcke@weidmueller.com>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Enable some fs tests for FAT12
 
- test/py/tests/fs_helper.py | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ test/py/tests/test_fs/conftest.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
-index 9882ddb1da..0ae7a4c4d7 100644
---- a/test/py/tests/fs_helper.py
-+++ b/test/py/tests/fs_helper.py
-@@ -24,7 +24,9 @@ def mk_fs(config, fs_type, size, prefix):
-     fs_img = f'{prefix}.{fs_type}.img'
-     fs_img = os.path.join(config.persistent_data_dir, fs_img)
+diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
+index 0d87d180c7..fa637a22a0 100644
+--- a/test/py/tests/test_fs/conftest.py
++++ b/test/py/tests/test_fs/conftest.py
+@@ -12,9 +12,9 @@ import u_boot_utils as util
+ from tests import fs_helper
  
--    if fs_type == 'fat16':
-+    if fs_type == 'fat12':
-+        mkfs_opt = '-F 12'
-+    elif fs_type == 'fat16':
-         mkfs_opt = '-F 16'
-     elif fs_type == 'fat32':
-         mkfs_opt = '-F 32'
+ supported_fs_basic = ['fat16', 'fat32', 'ext4']
+-supported_fs_ext = ['fat16', 'fat32']
+-supported_fs_mkdir = ['fat16', 'fat32']
+-supported_fs_unlink = ['fat16', 'fat32']
++supported_fs_ext = ['fat12', 'fat16', 'fat32']
++supported_fs_mkdir = ['fat12', 'fat16', 'fat32']
++supported_fs_unlink = ['fat12', 'fat16', 'fat32']
+ supported_fs_symlink = ['ext4']
+ 
+ #
 -- 
 2.34.1
 
