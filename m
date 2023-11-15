@@ -4,97 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6247FC2BB3F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 17:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B796C072A2
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 17:40:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C171486996;
-	Wed, 15 Nov 2023 18:37:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id CFA7887446;
+	Wed, 15 Nov 2023 18:40:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Vv2JAs7x";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 642EE86611; Wed, 15 Nov 2023 18:37:07 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91AA187203
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:37:03 +0100 (CET)
+ id 78CEA87444; Wed, 15 Nov 2023 18:40:43 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 41D1F8718B
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:40:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id EC68840262
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:37:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700069823;
- bh=Teuq2f0CcuPenohQ69fak370nihPLLbfaikwWnuFkPs=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Vv2JAs7xPV/GrSvlTIVYIE3c3JA4v5+feVTGKDD/Sx2w1vyTReGGZprXieZfuyluo
- F6rsbZFRdBKnXEZw83EILdtlvxHH36LzK045AVUvKAUGcurg5mSuVo+r4cTw8qX5Pf
- T2O/OvolLnIxc9DdY76a95WDSvjihnrNd9lqc1BlApwzaF5O4gJbbMvQR/jOnEhWG3
- Uw+dHh7DfzHOzMGoMenfZs2zdPy1I5ed0EzZ81uRR+PoF0zh+wvoGYP04RJXhtA/ND
- Ac5s2+AtJY18F6Db4AEOWnXF9ShVMFc3qXfTZyVvyULK5FuwsDrQxBdfj0URu3gDQS
- KaGYUNhrKHWjQ==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4092164ed09so45913685e9.2
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 09:37:02 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700069822; x=1700674622;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Teuq2f0CcuPenohQ69fak370nihPLLbfaikwWnuFkPs=;
- b=Kwx4bZzo13d2bOyuxhS4c0kzUEI9A/AOj1ss893bQuCsNoHOevC+QngSpxdkflLZld
- xSsTY4gBFQqHQB6ToTKsyqiId2MEAxAL30G/LEKymORGKlhGwqLJ2Ti9owKLTSOgOOlP
- tTkgTv52+/oa/2D5xHIhlLM6/y+mS5HMVQ0IXeGrGbuK4Hh0Yy0qSrXWKLo2pIk0LrpX
- UAVd93piFSWU/1o658r3Ivdo7yvvpNQPjty7yTKDVJGzbLHO6kKjhs3bN8l2sTUWSo89
- q3KSYkM7wyVLRa14eNWQncbcpHT7kyC7JoouSfXrinEL1jiMZtWdV5fjK8m/7t9TIBxO
- 5uDg==
-X-Gm-Message-State: AOJu0YxRAYlXGU7c4PzalQamD3aOGqi/obP3zr21z2bjeoVDReslvZi/
- atT8lSQRsfMH56b22i5Ag1nn0tviDUdO3jTQ0v3x4RQfLUqJPbs2KbcN0TIT++XdnEGx7gq/GBY
- H1Y5bS9lO8gLTRBKJxSfeZOSQThWHvY2DbucCLDE=
-X-Received: by 2002:a05:600c:230f:b0:408:3d91:8263 with SMTP id
- 15-20020a05600c230f00b004083d918263mr10519977wmo.13.1700069822593; 
- Wed, 15 Nov 2023 09:37:02 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG1sX1wA/YiCUTUK+SIu5KLbrzapTeZChq6S2j/5xS/jk8LmctcK3BPFrGhcyGFI0AFaEy3EA==
-X-Received: by 2002:a05:600c:230f:b0:408:3d91:8263 with SMTP id
- 15-20020a05600c230f00b004083d918263mr10519961wmo.13.1700069822202; 
- Wed, 15 Nov 2023 09:37:02 -0800 (PST)
-Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- az23-20020a05600c601700b004054dcbf92asm373730wmb.20.2023.11.15.09.37.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Nov 2023 09:37:01 -0800 (PST)
-Message-ID: <1f7ee4eb-0e2a-4b0c-b1a4-2c9d03daf02f@canonical.com>
-Date: Wed, 15 Nov 2023 18:37:00 +0100
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,305,1694703600"; d="scan'208";a="183039312"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 16 Nov 2023 02:40:37 +0900
+Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.122])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id D047540342C9;
+ Thu, 16 Nov 2023 02:40:35 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 0/5] Add i2c and reset support for Renesas RZ/G2L
+Date: Wed, 15 Nov 2023 17:40:20 +0000
+Message-Id: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] risc-v: add ACPI support on QEMU
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Alexander Gendin <agendin@matrox.com>, Zong Li <zong.li@sifive.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Brandon Maier <brandon.maier@collins.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,39 +53,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15.11.23 15:23, Heinrich Schuchardt wrote:
-> QEMU 8.1.2 can create ACPI tables for the RISC-V architecture.
-> Allow passing them through to the operating system.
-> Provide a new defconfig that enables this.
+This patch series extends the support for the Renesas RZ/G2L SMARC EVK
+board (based on the R9A07G044L2 SoC) to include the following new
+features:
 
-This patch is prerequisite:
+  * I2C bus support, including automatic deblocking if SDA is stuck low
+    due to another device on the board.
 
-[PATCH] move acpi_get_rsdp_addr() to acpi/acpi_table.h
-https://patchwork.ozlabs.org/project/uboot/patch/20231109172302.54324-1-heinrich.schuchardt@canonical.com/
+  * Basic PMIC support, with the ability to read, write & dump PMIC
+    registers.
 
-Best regards
+  * Support for requesting system reset (SYSRESET_COLD or
+    SYSRESET_POWER) via the PMIC.
 
-Heinrich
+Along the way we fix the CPG driver to confirm all clock & reset changes
+before returning, and update the device tree to align with Linux 6.6.
 
-> 
-> Heinrich Schuchardt (6):
->    acpi: do not write ACPI tables on TARGET_QEMU_VIRT
->    risc-v: add ACPI fields to global data
->    risc-v: add support for QEMU provided ACPI tables
->    riscv: qemu: copy ACPI tables from QEMU
->    riscv: allow usage of ACPI
->    configs: defconfig for QEMU RISC-V with ACPI
-> 
->   arch/Kconfig                              |  1 +
->   arch/riscv/include/asm/global_data.h      |  4 ++++
->   board/emulation/qemu-riscv/Kconfig        |  2 ++
->   board/emulation/qemu-riscv/MAINTAINERS    |  1 +
->   board/emulation/qemu-riscv/qemu-riscv.c   | 17 ++++++++++++++
->   configs/qemu-riscv64_acpi_smode_defconfig | 27 +++++++++++++++++++++++
->   lib/Kconfig                               |  2 +-
->   lib/acpi/Makefile                         |  2 +-
->   lib/acpi/acpi_writer.c                    |  2 +-
->   9 files changed, 55 insertions(+), 3 deletions(-)
->   create mode 100644 configs/qemu-riscv64_acpi_smode_defconfig
-> 
+This series has been tested on RZ/G2L hardware, and the full u-boot
+GitLab CI pipeline has been executed in our internal GitLab instance.
+
+Paul Barker (5):
+  clk: renesas: Confirm all clock & reset changes on RZ/G2L
+  arm: dts: rzg2l: Sync with Linux v6.6
+  i2c: rzg2l: Add I2C driver for RZ/G2L family
+  pmic: Add Renesas RAA215300 PMIC driver
+  sysreset: Support reset via Renesas RAA215300 PMIC
+
+ arch/arm/dts/r9a07g044.dtsi               |  16 +-
+ arch/arm/dts/r9a07g044l2-smarc.dts        |  21 +
+ arch/arm/dts/rz-smarc-common.dtsi         |   4 +-
+ arch/arm/dts/rzg2l-smarc-pinfunction.dtsi |  20 +
+ arch/arm/dts/rzg2l-smarc-som.dtsi         |  22 +-
+ arch/arm/dts/rzg2l-smarc.dtsi             |  23 +-
+ arch/arm/mach-rmobile/Kconfig             |   1 +
+ board/renesas/rzg2l/rzg2l.c               |   8 -
+ configs/renesas_rzg2l_smarc_defconfig     |   7 +
+ drivers/clk/renesas/rzg2l-cpg.c           |  17 +-
+ drivers/i2c/Kconfig                       |   7 +
+ drivers/i2c/Makefile                      |   1 +
+ drivers/i2c/rz_riic.c                     | 626 ++++++++++++++++++++++
+ drivers/power/pmic/Kconfig                |   9 +
+ drivers/power/pmic/Makefile               |   1 +
+ drivers/power/pmic/raa215300.c            |  52 ++
+ drivers/sysreset/Kconfig                  |   6 +
+ drivers/sysreset/Makefile                 |   1 +
+ drivers/sysreset/sysreset_raa215300.c     |  58 ++
+ 19 files changed, 873 insertions(+), 27 deletions(-)
+ create mode 100644 drivers/i2c/rz_riic.c
+ create mode 100644 drivers/power/pmic/raa215300.c
+ create mode 100644 drivers/sysreset/sysreset_raa215300.c
+
+
+base-commit: 92b27528d777ce85362af45e7d2974a6c856219b
+-- 
+2.39.2
 
