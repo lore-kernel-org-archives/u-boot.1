@@ -4,70 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23199C48BF9
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:41:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C922C48BD7
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 967A2870D2;
-	Wed, 15 Nov 2023 14:41:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A4FC871F3;
+	Wed, 15 Nov 2023 14:41:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XifvvK/L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RvaK61sh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DC8A871DF; Wed, 15 Nov 2023 14:41:17 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id E3DAB86FBB; Wed, 15 Nov 2023 14:41:17 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A051686FBB
+ by phobos.denx.de (Postfix) with ESMTPS id BED4F871AF
  for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:41:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9d216597f64so1025764466b.3
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9c3aec5f326so172724066b.1
  for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:41:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700055675; x=1700660475; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OKznDgL85ESQEQd1SNRQVpGfPibWaLlTDg7PfcnO63Q=;
- b=XifvvK/LlusXpJVvGXaaTnzoU2fxShAvgWeXiGE1oH0qil4ZVR00XwV33r+56e6spg
- GBa2OGlF7YQNZ5fTCYSMrSRcsBDyh7F1bhXqLURtvxDyfv0mAdYbbVINeq74QxJ1r35C
- NWfIQtetYGNnyCGrpE0AGCgcmSNs2yIoTPPD0=
+ bh=I72UdGUwj6rdGboI2TElQnohV9dD9X/Gy0KJuq+fmY0=;
+ b=RvaK61shz0zumDtHHwlMugcCE24ZoONqK/1Md8jy81YIz3UqyS3kSVvIWb2v/vMnd/
+ IW1MvUq595fijSvPqnhMHhbCycHwhN9h/kF/yxkbyBDpwyGFNkEaRHXxRZxfgt6tLFjA
+ eeAWyG14XEXgv5KljGlMKzldxq8PC9OHDtm0Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700055675; x=1700660475;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OKznDgL85ESQEQd1SNRQVpGfPibWaLlTDg7PfcnO63Q=;
- b=ZZHvNbCqo2fqjwGKb5rBRdtHtzBYcA76Em05ZuJyF2h2cmVXx/kmkrllHDX5Qtviio
- kdyfOCUMCkLwaRhDEBZ6tuiqfK4XPCTB58fbl31vJkNdL3NU2UXsrXchLUfPomjWF/JG
- VHnbC/52TxYYN3wB9ra+QCIOGz7fSCg2K5VKI9nrfjMHP9uxVaAJo0uxNTeBci0/ggw6
- 4tSNPgmHMZyyjbK9MaFri4qem2n8M1aCJ1304oC/U2H021OJO3JFa50MrrOONllvhWN9
- RV8rsbuBR/wzGBKAj5gtf+ntAv8eKDRyRj4ziOY7G094L5odQrJQ/q7WUAPgWLW7oKGN
- 0cWA==
-X-Gm-Message-State: AOJu0Yx4R1pLiEMohCbT47eUQzBD/oDCGpmm43H7DlXAAnnTN0ZaoI3T
- w1ZHOLUv12nB9elZscMb+Vaf9mbZt/J7AqBz513Tcw==
-X-Google-Smtp-Source: AGHT+IEeT9YGQj/kR+0UXI0YpHvBUd1mjimOswPqX/JBasTyyKFupU/kbRk3dxPWEg3HzGwWgxpIjbH+yp9gCCVL02w=
-X-Received: by 2002:a17:906:cb95:b0:9c7:5186:de1a with SMTP id
- mf21-20020a170906cb9500b009c75186de1amr10440024ejb.8.1700055674978; Wed, 15
+ bh=I72UdGUwj6rdGboI2TElQnohV9dD9X/Gy0KJuq+fmY0=;
+ b=Td5Npg75nJRbX6z4kWR8I4gS2kqu+w1/7Xj8Pv5cuoTjab55jf1L3S1JRfyLx1ikhQ
+ cU4WPuWV4lMVBlN9hFNhjhVXlVR4pf+vGlrutpb5GF6TmngSqERL4gkngDWRcvjQqHYT
+ Sd0Yz3nQMIO3P/I0yhIJnL+6hVPynR03rUktyjrgnaHTJoaZ1VDaxVvIOdBeECN0oCEk
+ rNxy9Amf5M22RRiQ2x9fJ4qpzE3HP7uJPtVrxAMjYx385DBnmec5n+9tjYwMvY66xj2C
+ PLNcNz925mNeFeRd26LJSVNWkhopJxedinoNmsvHDI7CIss8zPll0a5IPLUSy/+tmrDb
+ 85hA==
+X-Gm-Message-State: AOJu0YyegwOlW9gvwoQjwfk60Rz8zIfY84DiTpzr1xXaFyp85kK65Elk
+ K9LatC78rVx5pRtFlng4XLTVZhoPpY1lOUi+ZESKSLVQi7WxHr/Sors=
+X-Google-Smtp-Source: AGHT+IGMBQO67Dup1q7QqlBs04l4b/gfVEPVrF1hZryLuOwZvsV6GBka6Ou9glZensSlHQU3VqZ2bi5j1guDZntwshE=
+X-Received: by 2002:a17:906:d0c6:b0:9ad:8a9e:23ee with SMTP id
+ bq6-20020a170906d0c600b009ad8a9e23eemr4961032ejb.13.1700055674979; Wed, 15
  Nov 2023 05:41:14 -0800 (PST)
 MIME-Version: 1.0
-References: <20230920030027.1385833-1-sjg@chromium.org>
- <20230920030027.1385833-12-sjg@chromium.org>
- <d643e467-cd35-4b15-907d-a8e79a2e4bda@gmx.de>
-In-Reply-To: <d643e467-cd35-4b15-907d-a8e79a2e4bda@gmx.de>
+References: <126302ea0fc8f986421dd65c73d4f138642354d0.camel@physik.fu-berlin.de>
+In-Reply-To: <126302ea0fc8f986421dd65c73d4f138642354d0.camel@physik.fu-berlin.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Nov 2023 06:41:00 -0700
-Message-ID: <CAPnjgZ2yoa-Ddtpaxhnj9rWvTewVjzxD4G33qk4pehdPooAyvg@mail.gmail.com>
-Subject: Re: [PATCH v5 11/20] efi: x86: Correct the condition for installing
- ACPI tables
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 15 Nov 2023 06:40:57 -0700
+Message-ID: <CAPnjgZ2pMHjOqEEqQy3+p_YzWXsYsr=DRz=vGRuTfZWMEnwd9A@mail.gmail.com>
+Subject: Re: u-boot fails to build on sparc64 due redefinition of 'struct
+ termio'
+To: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Cc: u-boot <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,99 +81,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Adrian,
 
-On Wed, 15 Nov 2023 at 04:09, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Wed, 15 Nov 2023 at 00:27, John Paul Adrian Glaubitz
+<glaubitz@physik.fu-berlin.de> wrote:
 >
-> On 9/20/23 05:00, Simon Glass wrote:
-> > It is not always the case that U-Boot builds the ACPI tables itself. For
-> > example, when booting from coreboot, the ACPI tables are built by
-> > coreboot.
-> >
-> > Correct the Makefile condition so that U-Boot can pass on tables built
-> > by a previous firmware stage.
-> >
-> > Tidy up the installation-condition code while we are here.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > ---
-> >
-> > (no changes since v2)
-> >
-> > Changes in v2:
-> > - Add new patch
-> >
-> >   lib/efi_loader/Makefile    |  2 +-
-> >   lib/efi_loader/efi_setup.c | 10 +++++-----
-> >   2 files changed, 6 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> > index 1a8c8d7cab5c..0eb748ff1a59 100644
-> > --- a/lib/efi_loader/Makefile
-> > +++ b/lib/efi_loader/Makefile
-> > @@ -78,7 +78,7 @@ obj-$(CONFIG_EFI_ESRT) += efi_esrt.o
-> >   obj-$(CONFIG_VIDEO) += efi_gop.o
-> >   obj-$(CONFIG_BLK) += efi_disk.o
-> >   obj-$(CONFIG_NETDEVICES) += efi_net.o
-> > -obj-$(CONFIG_GENERATE_ACPI_TABLE) += efi_acpi.o
-> > +obj-$(CONFIG_ACPI) += efi_acpi.o
+> Hello!
 >
-> This change merged as
-> 53e8e6f98679 ("efi: x86: Correct the condition for installing ACPI tables")
-> looks wrong:
+> On Linux sparc64, building u-boot fails with [1]:
 >
-> For QEMU with CONFIG_ACPI=y and CONFIG_GENERATE_ACPI=n I get
+> cc   -o tools/mkenvimage tools/mkenvimage.o tools/os_support.o tools/lib/crc32.o
+> In file included from /<<PKGBUILDDIR>>/tools/termios_linux.h:33,
+>                  from /<<PKGBUILDDIR>>/tools/kwboot.c:153:
+> /usr/include/sparc64-linux-gnu/asm/termbits.h:14:8: error: redefinition of 'struct termio'
+>    14 | struct termio {
+>       |        ^~~~~~
+> In file included from /usr/include/sparc64-linux-gnu/sys/ioctl.h:29,
+>                  from /<<PKGBUILDDIR>>/tools/termios_linux.h:30:
+> /usr/include/sparc64-linux-gnu/bits/ioctl-types.h:36:8: note: originally defined here
+>    36 | struct termio
+>       |        ^~~~~~
 >
->      EFI using ACPI tables at 0
->      Error: Cannot initialize UEFI sub-system, r = 14
->
-> Device-trees are only suppressed in the bootefi command if
-> CONFIG_GENERATE_ACPI=y.
->
-> Currently CONFIG_ACPI=y only indicates that ACPI libraries are built. It
-> does not indicate that ACPI tables exist on the platform.
+> Reading through tools/termios_linux.h, it seems like the problem is that <asm/ioctl.h>
+> and <asm/termbits.h> are included at the same time. Not sure whether this is allowed
+> according to the glibc documentation.
 
-Similarly, neither does GENERATE_ACPI
+Can you send a patch to fix it?
 
-Perhaps we should also check for tables being present?
-
- if (IS_ENABLED(CONFIG_ACPI) && gd_acpi_start()) {
-
-?
-
->
-> Best regards
->
-> Heinrich
->
->
-> >   obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += efi_smbios.o
-> >   obj-$(CONFIG_EFI_RNG_PROTOCOL) += efi_rng.o
-> >   obj-$(CONFIG_EFI_TCG2_PROTOCOL) += efi_tcg2.o
-> > diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> > index 58d4e1340233..ad719afd6328 100644
-> > --- a/lib/efi_loader/efi_setup.c
-> > +++ b/lib/efi_loader/efi_setup.c
-> > @@ -321,11 +321,11 @@ efi_status_t efi_init_obj_list(void)
-> >       if (ret != EFI_SUCCESS)
-> >               goto out;
-> >   #endif
-> > -#ifdef CONFIG_GENERATE_ACPI_TABLE
-> > -     ret = efi_acpi_register();
-> > -     if (ret != EFI_SUCCESS)
-> > -             goto out;
-> > -#endif
-> > +     if (IS_ENABLED(CONFIG_ACPI)) {
-> > +             ret = efi_acpi_register();
-> > +             if (ret != EFI_SUCCESS)
-> > +                     goto out;
-> > +     }
-> >   #ifdef CONFIG_GENERATE_SMBIOS_TABLE
-> >       ret = efi_smbios_register();
-> >       if (ret != EFI_SUCCESS)
->
+(BTW gmail tells me you are John when I start the email, but I noticed
+it this time and changed it)
 
 Regards,
 Simon
+
+
+>
+> Full build log available in [1].
+>
+> Adrian
+>
+> > [1] https://buildd.debian.org/status/fetch.php?pkg=u-boot&arch=sparc64&ver=2023.07%2 Bdfsg-1&stamp=1699723544&raw=0
+>
+> --
+>  .''`.  John Paul Adrian Glaubitz
+> : :' :  Debian Developer
+> `. `'   Physicist
+>   `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
