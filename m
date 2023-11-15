@@ -4,65 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C3B2C47072
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3258C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:16:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 725A786F53;
-	Wed, 15 Nov 2023 14:12:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 34D63870F2;
+	Wed, 15 Nov 2023 14:16:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="msRzyExM";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LHQbgWaF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 725C687120; Wed, 15 Nov 2023 14:12:13 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 05F3B87120; Wed, 15 Nov 2023 14:16:57 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44D36804CE
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:12:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9F838615A
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:16:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-9d10f94f70bso983085866b.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:12:11 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9c41e95efcbso991803666b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:16:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700053931; x=1700658731; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1700054214; x=1700659014; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+bpy2m+K1I+wZYX1fBGxORs9SQwuuekfS2Eunla8R4U=;
- b=msRzyExMw5DNZ0lvQFYzsJvatqW0vyRhQyejsvHZzx9JF9KbGvrfZ97pPVf9owmMak
- A6M96RMEjk17QzPlP0OIV1Q+0ACMDpqwD/AV41t6H9jJT0VdqHPpXtzV3TWK+FYftgq1
- r56FcbB5gAsIAGZ7q96mKiP8MvdXCc7byeBBM=
+ bh=YsLYr/fVOqs6jHIehgO8ZHyKWxJyuJCTDOz7rGFKbtw=;
+ b=LHQbgWaFb8HwdT/7WbQ3F6Bo3oWgbKf1sd81Tb4Gn2RdOy8W5gTHlCfrjSu1Ck+HUt
+ hBsWh+3ONfKS6XHPqKKV73fA9rdmHpqupFH019+1/drzsID6cRPgzEwP3oZ6Hp1lgyfY
+ N4MyvmcABOsRM11EjqHCDmZpuVUIMDoDL5TwI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700053931; x=1700658731;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1700054214; x=1700659014;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+bpy2m+K1I+wZYX1fBGxORs9SQwuuekfS2Eunla8R4U=;
- b=c2qT/fSOOeyv6/W6A5MdJd2k+INEI7fu9ZLYkRq02CZmPbsqJlAh1JnjQKSkZ0bUT9
- qO80/KJ5OBgtD7Vxcbrov3hnGXNlR6i/33EzgmTjC4HJdsMqjVv05zF1Q0vopcQtGOKJ
- vIMclyu7Kw5g9ia6zwSxlpAkZ3i6/GvCEGShAMqrT2XhmVRe17Jyn5eZeaeX4n1slOpE
- 33POVP8m8kFyBGJ7UzYglCJslT01wf+myAkuqk+/CDvdXTwBARhV8zgvwlwCptXrrUZu
- CpkwsASnma3oLRHp6Y/oXv9idOxz5aulmw7AqxKVjtvG5mH/3ietayiMAcKyg4BC9Ff2
- W4Ew==
-X-Gm-Message-State: AOJu0YwoyRIUi89AfYWYDZ70fecfUKNtUSLIfaEg0n1uZU+whYFAJagH
- tM9YJ9li5PzqEL9XqSkLMypxyJ+u+iNZ35SOhj7mSQ==
-X-Google-Smtp-Source: AGHT+IGnZMF67nwpzu3ROYptLDyrRvezwlzlzMrAjiMRopyejVg0WJbj8hFYAsEowH8qSUI9gZz7Ze1kC9T70QplS88=
-X-Received: by 2002:a17:906:cd1f:b0:9e6:9abb:d3cc with SMTP id
- oz31-20020a170906cd1f00b009e69abbd3ccmr8535595ejb.1.1700053930459; Wed, 15
- Nov 2023 05:12:10 -0800 (PST)
+ bh=YsLYr/fVOqs6jHIehgO8ZHyKWxJyuJCTDOz7rGFKbtw=;
+ b=Yrmaa5GdZOjvW/ORphCLTDRNgKlpaXw6GB4HWusMEDUIU7FR483hI5C/8mV3hFQ2Un
+ VDXqvWi5bF2pDrkBKChLHJerld8C//MF1q372kUtDzZeelzuZW0rsPtb2CLgmbptSf62
+ yqwS35w1NEdr+OUg9INOzd6+KkNpmbGZPU8QtVALXSDpqg6HRUgZqdkL7fj/701zSLJB
+ ihGXeXhr1oMBGKNLLMXVvRf7GeI1/Cf44cD0BO/2EhbOdzN5hFqmQBMqm2TxI26ZZzve
+ ny85u3ePcImQd6yWQKTRFYVrFFKvJ5bt7waKv1orlvU2RXnFiFocouj70PhfHhLdcJOS
+ 9AKw==
+X-Gm-Message-State: AOJu0YxxCbk3jvCl5IAiTdRTjD39uHqUJj0X46JsR22DAa8Uuvo7silS
+ FKLD2c7a8Lia2oxoCct13HOCe0J8Ne8BUWH9ptICh3Xo9fxl0OuAJNU=
+X-Google-Smtp-Source: AGHT+IH0ocVZYM22lTu/xzZPITy3v6oP5qbOplUxz9Rm/xSV0xnYmmHdzSRVn+tQup2jUSS8waf18NngBWy9C8aZjlM=
+X-Received: by 2002:a17:906:d217:b0:9be:3c7e:7f38 with SMTP id
+ w23-20020a170906d21700b009be3c7e7f38mr8997934ejz.10.1700054214156; Wed, 15
+ Nov 2023 05:16:54 -0800 (PST)
+Received: from 480794996271 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 15 Nov 2023 05:16:53 -0800
 MIME-Version: 1.0
-References: <CAHc5_t2hrverfcsEEahUcRkcjrnF3jr0oyds2yo0RBVMB7E01g@mail.gmail.com>
-In-Reply-To: <CAHc5_t2hrverfcsEEahUcRkcjrnF3jr0oyds2yo0RBVMB7E01g@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Nov 2023 06:11:52 -0700
-Message-ID: <CAPnjgZ1-_ohZaVwMGtTDt4-W--2q0AM2KPtX9RLgAbMEhMRugw@mail.gmail.com>
-Subject: Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAPnjgZ2YgwAzsG2kHZZWgy8p126hBH_r0r55nParwOt5wjuW+g@mail.gmail.com>
+References: <CAPnjgZ2YgwAzsG2kHZZWgy8p126hBH_r0r55nParwOt5wjuW+g@mail.gmail.com>
+ <20231107101729.1.I843fdbc83d3f8522e4c43d47c72825b388643ac6@changeid>
+Date: Wed, 15 Nov 2023 05:16:53 -0800
+X-Google-Sender-Auth: iPCdaeRqQPVrPSaGNTkf31LHMOk
+Message-ID: <CAPnjgZ3EQGbHMWuKM1d8+Whs6FWZ4SGoOO-9=N51EPXsswqWwQ@mail.gmail.com>
+Subject: Re: [PATCH] bootstage: Correct exhasuted typo
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, deffo@gmx.de, Tom Rini <trini@konsulko.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,92 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Heinrich Schuchardt
+On Tue, 7 Nov 2023 at 02:18, Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> Correct this typo in the warning message shown when no more bootstage
+> records can be added.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> I just cherry-pick the Simon's patch in the branch fix-bs-working
+> of the dm custodian git but it is not yet present in patchwork.
+>
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/8810b8dd3d233978c15203b23420fa819ab1e791
 
-Hi Shantur,
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-On Wed, 15 Nov 2023 at 05:59, Shantur Rathore <i@shantur.com> wrote:
->
-> Hi all,
->
-> I am facing an issue with bootflow where grub efi crashes only when
-> bootflow is selected manually.
->
-> Board - RockPro64
-> OS - Armbian Bookworm CLI
-> U-boot : 2024.01-rc2
-> Built and installed in SPI
-> Boot Device = USB drive connected to USB 2.0 port
->
-> Success scenario :
->
-> => setenv boot_targets usb
-> => setenv bootmeths efi
-> => bootflow scan -lb
->
-> Grub loads and Linux boots
-> Full Log - https://pastebin.com/KUFtUcha
->
-> Failure scenario
-> Full Log : https://pastebin.com/GHyG2NDz
->
-> > setenv boot_targets usb
-> => setenv bootmeths efi
-> => bootflow scan
-> => bootflow list
-> Showing all bootflows
-> Seq Method State Uclass Part Name Filename
-> --- ----------- ------ -------- ---- ------------------------ ----------------
-> 0 efi ready usb_mass_ 1 usb_mass_storage.lun0.boo efi/boot/bootaa64.efi
-> --- ----------- ------ -------- ---- ------------------------ ----------------
-> (1 bootflow, 1 valid)
-> => bootflow select 0
-> => bootflow boot
-> ** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi
->
-> Loading Linux 6.1.50-current-rockchip64 ...
-> Loading initial ramdisk ...
-> EFI stub: Booting Linux Kernel...
-> EFI stub: Using DTB from configuration table
-> EFI stub: Exiting boot services...
-> "Synchronous Abort" handler, esr 0x96000044, far 0x300905a65
-> elr: 000000000022d634 lr : 0000000000208e14 (reloc)
-> elr: 00000000f3f47634 lr : 00000000f3f22e14
-> x0 : 0000000300905a4d x1 : 0000000000000000
-> x2 : 0000000000000000 x3 : 000000000207fff0
-> x4 : 00000000f3fd6470 x5 : 000000000207fff0
-> x6 : 0000ffff00000004 x7 : 00000000f1f9fad0
-> x8 : 7f7f7f7f7f7f7f7f x9 : 000000000000d02c
-> x10: 00000000f1efee8c x11: 000000000000d020
-> x12: 00000000f1efef88 x13: 00000000ad400000
-> x14: 00000000f1efef2c x15: 00000000f1eff057
-> x16: 00000000f3f21fc0 x17: 00000000d017a1d0
-> x18: 00000000f1f11d70 x19: 00000000f1f21eb0
-> x20: 0000000000000000 x21: 00000000f1f27b80
-> x22: 0000000000000000 x23: 0000000000000000
-> x24: 0000000000000000 x25: 00000000f3fc9ed7
-> x26: 00000000b0c36000 x27: 00000000f02cd000
-> x28: 00000000f03a210c x29: 00000000f1efee20
->
-> Code: f9400860 eb06001f 540004e0 f9400c66 (f9000c06)
-> UEFI image [0x00000000f0da4000:0x00000000f0dbbfff] '/efi\boot\fbaa64.efi'
-> UEFI image [0x00000000f0386000:0x00000000f07adfff] '/\EFI\debian\grubaa64.efi'
-> UEFI image [0x00000000af4e0000:0x00000000b11dffff]
-> Resetting CPU ...
->
-> resetting ...
->
-> I am unable to figure out what is the difference between the 2 ways of booting.
->
-> Thanks for your help.
+Thank you
 
-Thank you for the detailed report. Can you try series [1] in
-particular patch [2]
 
-It has been sitting around for quite a while, unfortunately.
-
-Regards,
-Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=381851
-[2] https://patchwork.ozlabs.org/project/uboot/patch/20231112130245.v4.5.If206027372f73ce32480223e5626f4b944e281b7@changeid/
+>
+> Regards
+>
+> Patrick
+>
+>  common/bootstage.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+Applied to u-boot-dm, thanks!
