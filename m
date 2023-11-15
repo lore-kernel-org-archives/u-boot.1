@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A7D9C47074
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D6EBC4167D
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:18:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BF828744D;
+	by phobos.denx.de (Postfix) with ESMTP id 9CF6E8745A;
 	Wed, 15 Nov 2023 14:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WEqaVl7W";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XVs5upbg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A621D87441; Wed, 15 Nov 2023 14:17:07 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 04DC087227; Wed, 15 Nov 2023 14:17:09 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCA1F8615A
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:17:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 32ADF87285
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:17:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-54394328f65so10343557a12.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:17:05 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-543c3756521so10171199a12.2
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:17:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700054225; x=1700659025; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HOuk9FGiRWw/0XAoPaUxCPMEelTbQyR8RwH7pMdrjMM=;
- b=WEqaVl7WxWQhJXgHXC4ha2XJwQE0yeCYroOWNjfiFeJgP7TsGd9kw1b7s2B2nyDXbC
- R7k3Y67iipIDO7Oi2FHq1sU/sApikJi3pjp6BKCRuB3B0juQDi9McbAqCaGCjpOlJROb
- +7wGqGAQHzSJjyRM0QRAfr/vudJIcFCI621Uo=
+ d=chromium.org; s=google; t=1700054226; x=1700659026; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0XrXqNngxVMEMWGVDHLA3DMG3wrV3DPJ5th5DxTleQc=;
+ b=XVs5upbgGOeDVX5zoZVVbt+Bjrvo7TV4HkajMs1QKl/MZzdG+1SZnw9W0N6SsR71Pj
+ GFDCPsokpg9zEG6iyBc6fAUjygjUdI1moRXZoJqBRl40GRTsRJXgwTQyCy0i3k3gCkQb
+ hSLLZs78/eHgqc/k5wog4yAsNBk8RBK9O1bIE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700054225; x=1700659025;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HOuk9FGiRWw/0XAoPaUxCPMEelTbQyR8RwH7pMdrjMM=;
- b=j+Y/nU44ath3hGLmhdgJdKuNCoWIwgmKov72DxnPCbTfC33Ne4P3uaEqifKD4AYuoO
- D224NEmmxJhQC/9UNXfQ9j3kfhL6RY5K+FHknIHH8tw/cse26Eus6RRo96IKSv6stFNi
- jT6sLzrcvL3Cj11qpYqAdJOcgEqXFiYN41OX6OW4XNE5gPhKExOG/vT8hNzx8LUmuvZ1
- JRDHhPkQoDaVwhAkM6GhHFywgSiMJmG9Qvl7pIzEiT5vG8b+AIMEjbbwqjMOGBzlerdi
- G7YCZOcQI2c/gIFDuykR/o6rqyg8TpATrOJRomA7cBluOVeZV/OltsJTvdYlONGFcZXi
- wfwA==
-X-Gm-Message-State: AOJu0YwXe9NlEC9Lgi6ZMKFNBWgQbOMCs5T2FIbr9/1615zNZQxLqEtf
- 7AINJPBWwd2RR+0s+SnPftQZsI9doGGKoDoAY/EWvg==
-X-Google-Smtp-Source: AGHT+IFmzL+EcN7DZzEDoSeco7fC4RRVaPorSf57P9SeM3SvWkQ1MkjVBI2gqSg0LuFdU1sxhrQ0FQIUXIuWBfp438E=
-X-Received: by 2002:a17:906:7d4:b0:9e4:7b7:267d with SMTP id
- m20-20020a17090607d400b009e407b7267dmr9423545ejc.52.1700054225285; Wed, 15
- Nov 2023 05:17:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700054226; x=1700659026;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0XrXqNngxVMEMWGVDHLA3DMG3wrV3DPJ5th5DxTleQc=;
+ b=tuLosqiHmijIxOisOpIm32VTxbjMsI8hF66e+j8vX9vEvaxDcb+60/fiwn6AbkQdbd
+ owgpCfPdSg4W43/qPsFbzTw/yLClKb1HVGhNPVZNVSU2QVucVqjDXrZpLTB6otUcqUM4
+ HDG0oOcYDNbx6lsKCDiuWW4YlKy8wKz3V/P8t+IwAEZIXbJTS2zETy8FABv3PH40hYym
+ 5E4TOOfEzbWExAJkKdaZfuNtub+LX3DEebMW9+mEJLCnt7cmd8dln9UTGNYkMDVOe9bc
+ ZfBNEnXZucjCg/o3JdF8rU7v8Ux4bXJxLuqhaGNZrqM53/dqqcLu6x+wTV9Vzo2ZiVE+
+ cA8g==
+X-Gm-Message-State: AOJu0YwtVz9C1CyrbkzlRu0o5X4quGIdHpXXPGtDXpDs2W471UbW/wZe
+ 7VAeeBwnRHhKEzKeQp1XIOgo9MUfhzHJW4u9CR1P2g==
+X-Google-Smtp-Source: AGHT+IHDlboxKT48g7Kl7LO8UzTMeb7Fz4ErgSazNm1JAV6BEF9TK26KlvAz2JqggVks9/xyvIvVGFZ13VNeA9s6Xqw=
+X-Received: by 2002:a17:906:1147:b0:9da:f372:4f6c with SMTP id
+ i7-20020a170906114700b009daf3724f6cmr8014892eja.32.1700054226551; Wed, 15 Nov
+ 2023 05:17:06 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Nov 2023 05:17:04 -0800
+ HTTPREST; Wed, 15 Nov 2023 05:17:05 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAEUhbmVv69eLfbpre6YuM4otZHmTBpYGeMahtkKqzQ-DdQ1c_w@mail.gmail.com>
-References: <CAEUhbmVv69eLfbpre6YuM4otZHmTBpYGeMahtkKqzQ-DdQ1c_w@mail.gmail.com>
+In-Reply-To: <20231001191444.v3.3.Iaa9b5bbab0f25012cfc68a803a9da83e71b19aaf@changeid>
+References: <20231001191444.v3.3.Iaa9b5bbab0f25012cfc68a803a9da83e71b19aaf@changeid>
  <20231002011450.462468-1-sjg@chromium.org>
- <20231001191444.v3.6.I0229a119165879ecce6bafc8568708326bf5ba78@changeid>
-Date: Wed, 15 Nov 2023 05:17:04 -0800
-X-Google-Sender-Auth: 9CcQsytyBTVrv4-0-cSTYkmkKhU
-Message-ID: <CAPnjgZ2QPE7Er39dQj5D04bNcuP3mjQQRA8QKvs0RKvSE4xS3w@mail.gmail.com>
-Subject: Re: [PATCH v3 06/12] expo: Correct background colour
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Nov 2023 05:17:05 -0800
+X-Google-Sender-Auth: 4GyIxx4dkS3eGPhRGGEtaxvz94M
+Message-ID: <CAPnjgZ03LgGX4B50eTzgExu7wXRtKN=mi5ZpbwozwEz78S9uPQ@mail.gmail.com>
+Subject: Re: [PATCH v3 03/12] bootstd: Add a return code to bootflow menu
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,20 +84,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 2, 2023 at 9:30=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Use the correct background colour when using white-on-black.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> (no changes since v1)
->
->  boot/expo.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
+Return an error when the user does not select an OS, so we know whether
+to boot or not.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Move calling of bootflow_menu_run() into a separate function so we can
+call it from other places.
+
+Expand the test to cover these cases.
+
+Add some documentation also, while we are here.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+Changes in v3:
+- Add missing word 'function' in the commit message
+
+Changes in v2:
+- Add new patch to add a return code to bootflow menu
+
+ cmd/bootflow.c             | 53 +++++++++++++++++++++++-------
+ doc/usage/cmd/bootflow.rst | 67 ++++++++++++++++++++++++++++++++++++++
+ test/boot/bootflow.c       | 15 +++++++++
+ 3 files changed, 123 insertions(+), 12 deletions(-)
 
 Applied to u-boot-dm, thanks!
