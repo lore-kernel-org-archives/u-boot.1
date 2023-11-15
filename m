@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B2DFC072A2
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03F69C072A2
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:39:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A808745B;
-	Wed, 15 Nov 2023 23:38:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 376A087485;
+	Wed, 15 Nov 2023 23:38:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TsvXfLh+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cYK09TQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A6038727A; Wed, 15 Nov 2023 23:37:59 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id A054C87485; Wed, 15 Nov 2023 23:38:06 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05A958745B
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:37:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B952874A5
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:38:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-77896da2118so7239585a.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:37:56 -0800 (PST)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5a7b3d33663so1450687b3.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:38:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700087876; x=1700692676; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700087883; x=1700692683; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XkugyreAspy1D39pAYqsZTPua8iMpkYsjJ8ONy0hZng=;
- b=TsvXfLh+UQkIm+jSwqteBpA2jV8SirEpD2XxHqOwC2hWYgQqRmjNdjs2zfFxv4T5J9
- eQGQVKGrYdM62V/1h2LSXlXPMEXW2VtpXRddokeNPjlf1gvjwLZrwZqOUTatueIsu4SM
- lV+w4EO9iCXs1ZmmgHmEw/74YDMKR1zqfdzKw=
+ bh=KdK60XL8SnKV/5t+QNC4F1jwQvMc/oCvgYVgTbNbhPE=;
+ b=cYK09TQukOXQLKoAEfSz15Qgz7LUuojq3ZvmK16oTmRMbVsj6ZKMkKaHGfI9cer6yE
+ Lb75VzS49Y1K3bcO3XU1OXr6Vy0N35MhYLvbZRrlEApX3PnvZ97sWKU3Xp9br8yZYQNC
+ iJ5u4gcgOi3keksbGJQM6EcqCcSLQAikIwVY8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700087876; x=1700692676;
+ d=1e100.net; s=20230601; t=1700087883; x=1700692683;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XkugyreAspy1D39pAYqsZTPua8iMpkYsjJ8ONy0hZng=;
- b=Ji138q+VhjWdGtyLV/SCgv4yKyz17Ei5d+yMRtMiLjLF45SwWV9VZuKhQRrKJsJHQC
- /33nIQ0nf9rX7xr/Q7NWprwQ4nZ0PExMCkEZ1YaR6FNmo2UzRPtqoxXCZI5iT3IWD39z
- JivrRD4vtMlryIBdZ9FaXIILAvGLpC0g2oS+OQ4gk+smXeCP8wy3shR9Go9PrxwWenmh
- vF7y5/NmjDl8lsHCgisn4ldmcX6zCwiLzQdSDE5ji2Q9NwMQVjXiZqdwy4rIMM470qxr
- YlgXvR3uBOI2WawDiFF7B3mowBFWRwM6inY2OJq2wiDBeV/OXQoE/Kbukr5kJQiVH9+T
- mpAw==
-X-Gm-Message-State: AOJu0YzyVRU/F1Pz4GbgDZzkIXBKdSXrU+PE5k82rlXo8HEAgZASqflK
- putsK9G7cEuDa0N+i6aM5qTuJA==
-X-Google-Smtp-Source: AGHT+IHfhNGfe/YtI0cUPirDqcPetAvRF1e+t+CQ1kSHBQOEahCIDP3gU5a1RngWgmCm88Mn6J464g==
-X-Received: by 2002:a05:620a:288f:b0:76c:8998:1866 with SMTP id
- j15-20020a05620a288f00b0076c89981866mr8907352qkp.40.1700087875802; 
- Wed, 15 Nov 2023 14:37:55 -0800 (PST)
+ bh=KdK60XL8SnKV/5t+QNC4F1jwQvMc/oCvgYVgTbNbhPE=;
+ b=YKufJ6MNPiUgDPhhxdbcZqqOQ3+T2Nqnn5k5k/UiwP5sVmS57PI7EL0iEzAPLlILra
+ KinlP5Bt/olXMi1Mw6VgqHV5l6Zyu5kHvUu6hCGLlF5p2VoxUzxqAR5SFCkqjZDk9+gs
+ DljztSGA+LrnEt9RoNRB58j47WFnkZ21W+c4cBkxx7mUJcNGwN5TF1yrQMtQP5cAriT7
+ hqwldRZnnZHid4Z6xn3R/dWkyxjg25Ow+St6DrfezmPNqfX9OnP6DmJrOeFlWdBrwgac
+ /nVtyvFprPukuidfXFXHq/1Q2VZfL3+jBHGaOrp8DAWLng+kq3K5JtfggyhwBl/KKvrj
+ NvWA==
+X-Gm-Message-State: AOJu0YxOoFk5PILWmX3Pu+/KwkB035sCEKUsR3FYYEXjtMpdHiYZmgTa
+ iK8gnV2RWbdTB5I4gTdDYmyZhQ==
+X-Google-Smtp-Source: AGHT+IGJDYEorprG/7wrqXeyVvSBuP1QJ/aVt2EUyb8fFGxEVlBxsmY3C6Q37BaDsq5jkTJcA4bg0Q==
+X-Received: by 2002:a81:9a08:0:b0:5c1:1a71:4706 with SMTP id
+ r8-20020a819a08000000b005c11a714706mr14245204ywg.42.1700087882992; 
+ Wed, 15 Nov 2023 14:38:02 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
  [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
  by smtp.gmail.com with ESMTPSA id
- f3-20020a05620a12e300b0076e1e2d6496sm3788957qkl.104.2023.11.15.14.37.54
+ m14-20020a0ce8ce000000b00655d711180dsm894258qvo.17.2023.11.15.14.38.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 14:37:55 -0800 (PST)
-Date: Wed, 15 Nov 2023 17:37:53 -0500
+ Wed, 15 Nov 2023 14:38:02 -0800 (PST)
+Date: Wed, 15 Nov 2023 17:38:00 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
@@ -71,16 +71,15 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Safae Ouajih <souajih@baylibre.com>
-Subject: Re: [PATCH 24/29] bootm: Simplify Android ramdisk addr in
- bootm_find_images()
-Message-ID: <20231115223753.GD6601@bill-the-cat>
+Subject: Re: [PATCH 27/29] bootm: Adjust the parameters of bootm_find_images()
+Message-ID: <20231115223800.GE6601@bill-the-cat>
 References: <20231112000923.73568-1-sjg@chromium.org>
- <20231112000923.73568-25-sjg@chromium.org>
+ <20231112000923.73568-28-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9ecpVrXJR5pvZ07d"
+ protocol="application/pgp-signature"; boundary="ieQZlVHkLfPWW6jh"
 Content-Disposition: inline
-In-Reply-To: <20231112000923.73568-25-sjg@chromium.org>
+In-Reply-To: <20231112000923.73568-28-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,44 +98,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9ecpVrXJR5pvZ07d
+--ieQZlVHkLfPWW6jh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 11, 2023 at 05:09:09PM -0700, Simon Glass wrote:
+On Sat, Nov 11, 2023 at 05:09:12PM -0700, Simon Glass wrote:
 
-> The Android mechanism uses the loadaddr envrionment-variable to get the
-> load address, if none is provided. This is equivalent to
-> image_load_addr so use that instead, converting it to a string as
-> needed.
+> Rather than passing it all the command-line args, pass in the pieces
+> that it needs. These are the image address, the ramdisk address/name
+> and the FDT address/name.
 >=20
-> This change will permit passing img_addr to this function, in a future
-> change.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Ultimately this will allow usage of this function without being called
+> from the command line.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+OK, so this goal is good.
+
+[snip]
+> +		return bootm_find_images(img_addr, argc > 1 ? argv[1] : NULL,
+> +					 argc > 2 ? argv[2] : NULL, 0, 0);
+
+That we repeat this much harder to read test/if/else three times now is
+less good.  Can we find some way to hide the complexity here in the case
+where it's coming from a command and so we have argc/argv[] ?
 
 --=20
 Tom
 
---9ecpVrXJR5pvZ07d
+--ieQZlVHkLfPWW6jh
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVSEEACgkQFHw5/5Y0
-tywL6Qv+Lmp32/bRMtreOJOe3xiTo+2uwrpRBL4BCGRfHLwGKheZ1Frws/72qf3r
-u/9q81BebQeyiBdalwgyWL2ViVURb0/XedY2n690gkFzIPLlECYwu6m6fgldlQSU
-0HeYVz12AUGPkdhcEJubDslL8ccd4/aqkT7qo4S+ESPGUt6luNezRlUuiHzE4ent
-nPm23dDJXwDE3S8s/T2TD/lnjDvbXMV9Hs1r6fHiWp5f8WO3GoBjTs8LRGyQ+jaB
-qcae9Hqf7dVpb7DuwX3kw+741Z4AejjX5K8u+FJNadnJy30Y8KW31dortWmJzMxa
-BoUx31IMK0/XeBz7yPhJ7Wix49fDvPdSef/1zNQCfGdbbUjqR+bEthwN0a8sWPFS
-A2ylyZSEaNYrqXin+VhCvzO59miVDfsxnw/spreyhO15SFr0d2UBBO4tmfOgwaFE
-wNxG0h79B975P0oq5wH3NqDXEKyL8ntM/sadleM6Gh83oxkzU1g7lOWmvk3BHg/w
-SIXGc6c9
-=Vo6c
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVSEgACgkQFHw5/5Y0
+tyzusQv+Ltu6sMJOigCww9fUiYlgZ9t4dqWqnG0iE+VUsm+tjSytunB9qfojYykk
+ol946UPMlO7yIF9WmeszmrbVSUCTJKyGGrwp/H3+8gR2fbnueyn7Z9jsTtUfKwKU
+86gZT09ZLFPZDhPs3SqZt2fZI73+4JN0HXUYTha/Df1KCeVhuoPHzGtyOflz2meQ
+3IZ6UNJBPSHqZAx2/zFQn9ndAaklBxxGPYuF+6xOqaKjiktJ5+uRjxNVFhtv48+C
++zV/ZcwLtdbmyPu7iwjNJkyHbHJmEOpgobHKTGzcYL6FTHmaCjKepZI59BL1JLr+
+pKESGm0harVH2N93PyX8sKBEzH4ZDOb3FG8dn0FNo/ntN1iBjjxJI/steIkxssWt
+tTWNeiUQd0DvB7/xvnY8oAFxtgZVREzyIYvhW/9XHzJyOYw6Q6pa57sfJZkMHOK3
+fjbM6DEa+LVwgmlvvpBM1CZsd+HV4I8J8F2pbmWS8KyfIPgwbmMyvu3bqb3bSh02
+Fvn9KMde
+=eMFN
 -----END PGP SIGNATURE-----
 
---9ecpVrXJR5pvZ07d--
+--ieQZlVHkLfPWW6jh--
