@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C4A0C07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B936AC07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:57:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A162886C3B;
-	Wed, 15 Nov 2023 06:50:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B932886F85;
+	Wed, 15 Nov 2023 06:57:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TXq1mpxJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iFamDfyN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0663586C3B; Wed, 15 Nov 2023 06:50:07 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D516487040; Wed, 15 Nov 2023 06:57:22 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2BD186F93
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 06:50:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92B5C86F18
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 06:57:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AF5nt1w030176;
- Tue, 14 Nov 2023 23:49:55 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700027395;
- bh=myuDF4GKD4RPAIt3G+cuVG6HJR5DIMigXC4epBIZudE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=TXq1mpxJnbtYt0TX0586xdmLlnZarAlFOJGlQNXfWX+EbznvdRXntXYGI0g2xf2e9
- ZauVyYbPUzpu9pfzJk/59YJzQzaWj99kXksOQFKPCQg8d3fPBi/WQRDcYnsWj959gY
- VnOad2wEx9KZqZ46el5fxnX1X7L7TJnOywe7IzHY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AF5nttR089025
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 14 Nov 2023 23:49:55 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
- Nov 2023 23:49:55 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 14 Nov 2023 23:49:54 -0600
-Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AF5npRQ125450;
- Tue, 14 Nov 2023 23:49:51 -0600
-Message-ID: <6378b86f-e9aa-443d-9180-b37b9a718bf4@ti.com>
-Date: Wed, 15 Nov 2023 11:19:50 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-509c61e0cf4so7798229e87.2
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 21:57:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700027840; x=1700632640; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4H9pUOx4DDkWgvP0nap9moKZbKnaoTiXu4ypwVx0aMw=;
+ b=iFamDfyNfgyvxV8wR2xAZPaAuxS2lHCCcEv9LMGxhYmMDzVtjYbXMhvCLCE4CY8Ok3
+ TavxoMwQiWgjDHgS2G1vkk02NZj84zn7uGBrt6H6cao5rROiQWw1pTN7lkMmE0CK74Lm
+ Nvcg8VI2nEuFlrBCs0UA3oDf6kdpOQOXXXCfyCTZiuDuBu5rJbcztx914Y/TQa6fp54t
+ oWpCt1tW0aVYUfjsZBA103v/iRmcUfZUWxt9dmpAJsys9XEVTkctLnbfkjV3VCOflsX0
+ xiUdCVYoBeweEtAIak8UGYsI5MMeXICTk2gb49oubIxRZz0OC01vuGlT9a9wGg9Biz6n
+ owlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700027840; x=1700632640;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4H9pUOx4DDkWgvP0nap9moKZbKnaoTiXu4ypwVx0aMw=;
+ b=XroLm2znR3l+72T7fmmQCMKNoOChiy8CAWtcJbWX7aPghc7IGE4BQghiEfPYN9hPvq
+ TQvcEoe1V67aKRLQQtaxpc3uw53LtuDdtHQRGu3BQb2lCbTjX1I0NN6NlBgFyxnDi//y
+ iFo2oUoW0HoC0/H7BHVDhEcGy0pGp4fgpydY8dE1LDp7AVvrx7MtimyZrXnH+x0GgWYI
+ 4ooZdwzJtAuFHApvC3d+Tx1cPNNQp4rnoNmJWc035sIf6BUSgZlfEkP5l2i2EfgI8Vr0
+ A9W8sPhjHp3FD9DR7rYj51T86bShu4AObAGEVBhvT7mYNlwDFOrvZnqvgIMHWHNpiLE7
+ Q1hw==
+X-Gm-Message-State: AOJu0YwDNrH/B8wPfpNZ6JrZOqA/vgD7czKJoGBLNRbTeL2pHcFE0ZBV
+ DqdSCYT6Tp9szK8W1UduVpW1BqCaYFsdIKTQvGo=
+X-Google-Smtp-Source: AGHT+IH/Xva4GVu6i9w/OOWeRTlNLDpyxLoP0ZrK15utySWp2tG4W8+1XURVBs4fO6mtIfd8uJEbbmWU4Iu6nbxL4Z8=
+X-Received: by 2002:ac2:434d:0:b0:508:26b2:7803 with SMTP id
+ o13-20020ac2434d000000b0050826b27803mr7460176lfl.69.1700027839302; Tue, 14
+ Nov 2023 21:57:19 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/8] arm: mach-k3: am62a: Add main_timer0 id to the dev
- list
-To: Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom
- Rini <trini@konsulko.com>
-CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Andrew Davis <afd@ti.com>, Roger
- Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>,
- <u-boot@lists.denx.de>
-References: <20231113145149.1926732-1-nm@ti.com>
- <20231113145149.1926732-2-nm@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231113145149.1926732-2-nm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
+ <20231114162329.GV6601@bill-the-cat>
+In-Reply-To: <20231114162329.GV6601@bill-the-cat>
+From: Jim Liu <jim.t90615@gmail.com>
+Date: Wed, 15 Nov 2023 13:57:08 +0800
+Message-ID: <CAKUZ0+H3xU6WX3SjqUiSe0bBBA1=Kp=6h+bFrGEHK9_v+Z6sVQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] fix/add npcm845 serial and board error
+To: Tom Rini <trini@konsulko.com>
+Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, YSCHU@nuvoton.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,33 +88,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
+Hi Tom
 
-On 13/11/23 20:21, Nishanth Menon wrote:
-> main_timer0 is used by u-boot as the tick-timer. Add it to the soc
-> devices list so it an be enabled via the k3 power controller.
-> 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
->   arch/arm/mach-k3/am62ax/dev-data.c | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/arm/mach-k3/am62ax/dev-data.c b/arch/arm/mach-k3/am62ax/dev-data.c
-> index abf5d8e91aa2..6cced9efd08a 100644
-> --- a/arch/arm/mach-k3/am62ax/dev-data.c
-> +++ b/arch/arm/mach-k3/am62ax/dev-data.c
-> @@ -52,6 +52,7 @@ static struct ti_dev soc_dev_list[] = {
->   	PSC_DEV(161, &soc_lpsc_list[5]),
->   	PSC_DEV(162, &soc_lpsc_list[6]),
->   	PSC_DEV(75, &soc_lpsc_list[7]),
-> +	PSC_DEV(36, &soc_lpsc_list[8]),
->   	PSC_DEV(102, &soc_lpsc_list[8]),
->   	PSC_DEV(146, &soc_lpsc_list[8]),
->   	PSC_DEV(166, &soc_lpsc_list[9]),
+Thanks for your check.
+These patches I have checked and tested on npcm845 evb.
+The compile log and boot log is as blow:
+
+https://drive.google.com/file/d/1v3PFArKiqpFc0l9i0fy1xj0AauKlKS0k/view?usp=
+=3Dsharing
 
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+If you have any confusion or you can't see the log please let me know.
 
--- 
-Thanking You
-Neha Malcom Francis
+Best regards,
+Jim
+
+On Wed, Nov 15, 2023 at 12:23=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+> On Tue, Nov 14, 2023 at 04:51:55PM +0800, Jim Liu wrote:
+>
+> > 1. Fix serial error and add bypass serial setting.
+> > 2. Fix/Add dts node node.
+> > 3. Add full function defconfig
+> >
+> > Jim Liu (4):
+> >   arm: dts: npcm845-evb: fix/add node and aliases
+> >   configs: arbel: Enable full functions
+> >   serial: npcm: support skip uart clock setting
+> >   board: nuvoton: update console environment variable
+> >
+> >  arch/arm/dts/nuvoton-common-npcm8xx.dtsi      | 11 ++-
+> >  arch/arm/dts/nuvoton-npcm845-evb.dts          | 29 ++++++--
+> >  arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi      |  2 +-
+> >  board/nuvoton/arbel_evb/Kconfig               |  1 +
+> >  board/nuvoton/arbel_evb/arbel_evb.c           |  7 ++
+> >  board/nuvoton/common/Kconfig                  |  9 +++
+> >  board/nuvoton/common/Makefile                 |  1 +
+> >  board/nuvoton/common/uart.c                   | 71 +++++++++++++++++++
+> >  board/nuvoton/common/uart.h                   | 11 +++
+> >  board/nuvoton/poleg_evb/Kconfig               |  1 +
+> >  board/nuvoton/poleg_evb/poleg_evb.c           |  8 +++
+> >  configs/arbel_evb_defconfig                   | 16 ++++-
+> >  drivers/serial/serial_npcm.c                  | 39 ++++++----
+> >  include/dt-bindings/phy/nuvoton,npcm-usbphy.h | 14 ++++
+> >  14 files changed, 194 insertions(+), 26 deletions(-)
+> >  create mode 100644 board/nuvoton/common/Kconfig
+> >  create mode 100644 board/nuvoton/common/Makefile
+> >  create mode 100644 board/nuvoton/common/uart.c
+> >  create mode 100644 board/nuvoton/common/uart.h
+> >  create mode 100644 include/dt-bindings/phy/nuvoton,npcm-usbphy.h
+>
+> I just want to make sure now that you've given this series a compile and
+> boot test on some platform, yes? Thanks.
+>
+> --
+> Tom
