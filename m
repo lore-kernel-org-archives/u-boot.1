@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B936AC07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:57:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5DC1C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 06:01:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B932886F85;
-	Wed, 15 Nov 2023 06:57:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DFC5286FDD;
+	Wed, 15 Nov 2023 07:01:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iFamDfyN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sSxoontm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D516487040; Wed, 15 Nov 2023 06:57:22 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C13538703A; Wed, 15 Nov 2023 07:01:26 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B5C86F18
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 06:57:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B9DD86FC6
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 07:01:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-509c61e0cf4so7798229e87.2
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 21:57:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700027840; x=1700632640; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4H9pUOx4DDkWgvP0nap9moKZbKnaoTiXu4ypwVx0aMw=;
- b=iFamDfyNfgyvxV8wR2xAZPaAuxS2lHCCcEv9LMGxhYmMDzVtjYbXMhvCLCE4CY8Ok3
- TavxoMwQiWgjDHgS2G1vkk02NZj84zn7uGBrt6H6cao5rROiQWw1pTN7lkMmE0CK74Lm
- Nvcg8VI2nEuFlrBCs0UA3oDf6kdpOQOXXXCfyCTZiuDuBu5rJbcztx914Y/TQa6fp54t
- oWpCt1tW0aVYUfjsZBA103v/iRmcUfZUWxt9dmpAJsys9XEVTkctLnbfkjV3VCOflsX0
- xiUdCVYoBeweEtAIak8UGYsI5MMeXICTk2gb49oubIxRZz0OC01vuGlT9a9wGg9Biz6n
- owlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700027840; x=1700632640;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4H9pUOx4DDkWgvP0nap9moKZbKnaoTiXu4ypwVx0aMw=;
- b=XroLm2znR3l+72T7fmmQCMKNoOChiy8CAWtcJbWX7aPghc7IGE4BQghiEfPYN9hPvq
- TQvcEoe1V67aKRLQQtaxpc3uw53LtuDdtHQRGu3BQb2lCbTjX1I0NN6NlBgFyxnDi//y
- iFo2oUoW0HoC0/H7BHVDhEcGy0pGp4fgpydY8dE1LDp7AVvrx7MtimyZrXnH+x0GgWYI
- 4ooZdwzJtAuFHApvC3d+Tx1cPNNQp4rnoNmJWc035sIf6BUSgZlfEkP5l2i2EfgI8Vr0
- A9W8sPhjHp3FD9DR7rYj51T86bShu4AObAGEVBhvT7mYNlwDFOrvZnqvgIMHWHNpiLE7
- Q1hw==
-X-Gm-Message-State: AOJu0YwDNrH/B8wPfpNZ6JrZOqA/vgD7czKJoGBLNRbTeL2pHcFE0ZBV
- DqdSCYT6Tp9szK8W1UduVpW1BqCaYFsdIKTQvGo=
-X-Google-Smtp-Source: AGHT+IH/Xva4GVu6i9w/OOWeRTlNLDpyxLoP0ZrK15utySWp2tG4W8+1XURVBs4fO6mtIfd8uJEbbmWU4Iu6nbxL4Z8=
-X-Received: by 2002:ac2:434d:0:b0:508:26b2:7803 with SMTP id
- o13-20020ac2434d000000b0050826b27803mr7460176lfl.69.1700027839302; Tue, 14
- Nov 2023 21:57:19 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AF61LMn031330;
+ Wed, 15 Nov 2023 00:01:21 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700028081;
+ bh=xZ9L94S/gjy4yJXYojzKFjFKwboWnHHQRvt3KDHY+Wk=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=sSxoontmtBQJ9hcaZHOgyUf8iAR0Yc2WrV3ZyzAZNVabUwNfjIDVXX9d5VLj7jH+3
+ c+XXQvwnACr9an2jHlBq/L2QUUvrPvJRZ8MBWsLDtj0jyDE9YtZuOucSHO78sHN0WU
+ lVCAXtrdQbvBDgktvOdzcRhyj8mGdnq9YwRvGRbM=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AF61LGl010731
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 15 Nov 2023 00:01:21 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 15
+ Nov 2023 00:01:20 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 15 Nov 2023 00:01:20 -0600
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AF61Ime007128;
+ Wed, 15 Nov 2023 00:01:19 -0600
+Message-ID: <0e2c30f7-715c-4de5-b2b8-6c331a634c83@ti.com>
+Date: Wed, 15 Nov 2023 11:31:18 +0530
 MIME-Version: 1.0
-References: <20231114085159.3739887-1-JJLIU0@nuvoton.com>
- <20231114162329.GV6601@bill-the-cat>
-In-Reply-To: <20231114162329.GV6601@bill-the-cat>
-From: Jim Liu <jim.t90615@gmail.com>
-Date: Wed, 15 Nov 2023 13:57:08 +0800
-Message-ID: <CAKUZ0+H3xU6WX3SjqUiSe0bBBA1=Kp=6h+bFrGEHK9_v+Z6sVQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] fix/add npcm845 serial and board error
-To: Tom Rini <trini@konsulko.com>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, YSCHU@nuvoton.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] arm: mach-k3: Move R5 specific code into new r5/
+ directory
+Content-Language: en-US
+To: Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon
+ <nm@ti.com>
+CC: <u-boot@lists.denx.de>
+References: <20231114155950.296644-1-afd@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231114155950.296644-1-afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,59 +82,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Andrew
 
-Thanks for your check.
-These patches I have checked and tested on npcm845 evb.
-The compile log and boot log is as blow:
+On 14/11/23 21:29, Andrew Davis wrote:
+> This makes it clear these are only to be used by the R5 builds of SPL.
+> And this will be used to later more cleanly split the two builds.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>   arch/arm/mach-k3/Makefile                         |  6 +-----
+>   arch/arm/mach-k3/r5/Makefile                      | 13 +++++++++++++
+>   arch/arm/mach-k3/{ => r5}/am62ax/Makefile         |  0
+>   arch/arm/mach-k3/{ => r5}/am62ax/am62a_qos_data.c |  0
+>   arch/arm/mach-k3/{ => r5}/am62ax/clk-data.c       |  0
+>   arch/arm/mach-k3/{ => r5}/am62ax/dev-data.c       |  0
+>   arch/arm/mach-k3/{ => r5}/am62x/Makefile          |  0
+>   arch/arm/mach-k3/{ => r5}/am62x/clk-data.c        |  0
+>   arch/arm/mach-k3/{ => r5}/am62x/dev-data.c        |  0
+>   arch/arm/mach-k3/{ => r5}/j7200/Makefile          |  0
+>   arch/arm/mach-k3/{ => r5}/j7200/clk-data.c        |  0
+>   arch/arm/mach-k3/{ => r5}/j7200/dev-data.c        |  0
+>   arch/arm/mach-k3/{ => r5}/j721e/Makefile          |  0
+>   arch/arm/mach-k3/{ => r5}/j721e/clk-data.c        |  0
+>   arch/arm/mach-k3/{ => r5}/j721e/dev-data.c        |  0
+>   arch/arm/mach-k3/{ => r5}/j721s2/Makefile         |  0
+>   arch/arm/mach-k3/{ => r5}/j721s2/clk-data.c       |  0
+>   arch/arm/mach-k3/{ => r5}/j721s2/dev-data.c       |  0
+>   arch/arm/mach-k3/{ => r5}/lowlevel_init.S         |  0
+>   arch/arm/mach-k3/{ => r5}/r5_mpu.c                |  2 +-
+>   20 files changed, 15 insertions(+), 6 deletions(-)
+>   create mode 100644 arch/arm/mach-k3/r5/Makefile
+>   rename arch/arm/mach-k3/{ => r5}/am62ax/Makefile (100%)
+>   rename arch/arm/mach-k3/{ => r5}/am62ax/am62a_qos_data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/am62ax/clk-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/am62ax/dev-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/am62x/Makefile (100%)
+>   rename arch/arm/mach-k3/{ => r5}/am62x/clk-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/am62x/dev-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j7200/Makefile (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j7200/clk-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j7200/dev-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j721e/Makefile (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j721e/clk-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j721e/dev-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j721s2/Makefile (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j721s2/clk-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/j721s2/dev-data.c (100%)
+>   rename arch/arm/mach-k3/{ => r5}/lowlevel_init.S (100%)
+>   rename arch/arm/mach-k3/{ => r5}/r5_mpu.c (98%)
+> 
+> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+> index c7ca0fdce56..215c755c5dc 100644
+> --- a/arch/arm/mach-k3/Makefile
+> +++ b/arch/arm/mach-k3/Makefile
+> @@ -3,12 +3,8 @@
+>   # Copyright (C) 2017-2018 Texas Instruments Incorporated - https://www.ti.com/
+>   #	Lokesh Vutla <lokeshvutla@ti.com>
+>   
+> -obj-$(CONFIG_SOC_K3_J721E) += j721e/ j7200/
+> -obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
+> -obj-$(CONFIG_SOC_K3_AM625) += am62x/
+> -obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
+> +obj-$(CONFIG_CPU_V7R) += r5/
+>   obj-$(CONFIG_ARM64) += arm64-mmu.o
+> -obj-$(CONFIG_CPU_V7R) += r5_mpu.o lowlevel_init.o
+>   obj-$(CONFIG_ARM64) += cache.o
+>   obj-$(CONFIG_OF_LIBFDT) += common_fdt.o
+>   ifeq ($(CONFIG_OF_LIBFDT)$(CONFIG_OF_SYSTEM_SETUP),yy)
+> diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
+> new file mode 100644
+> index 00000000000..8a6af73a44e
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/r5/Makefile
+> @@ -0,0 +1,13 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
+> +#	Andrew Davis <afd@ti.com>
+> +
+> +obj-$(CONFIG_SOC_K3_J721E) += j721e/
+> +obj-$(CONFIG_SOC_K3_J721E) += j7200/
+> +obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
+> +obj-$(CONFIG_SOC_K3_AM625) += am62x/
+> +obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
+> +
+> +obj-y += lowlevel_init.o
+> +obj-y += r5_mpu.o
+> diff --git a/arch/arm/mach-k3/am62ax/Makefile b/arch/arm/mach-k3/r5/am62ax/Makefile
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62ax/Makefile
+> rename to arch/arm/mach-k3/r5/am62ax/Makefile
+> diff --git a/arch/arm/mach-k3/am62ax/am62a_qos_data.c b/arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62ax/am62a_qos_data.c
+> rename to arch/arm/mach-k3/r5/am62ax/am62a_qos_data.c
+> diff --git a/arch/arm/mach-k3/am62ax/clk-data.c b/arch/arm/mach-k3/r5/am62ax/clk-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62ax/clk-data.c
+> rename to arch/arm/mach-k3/r5/am62ax/clk-data.c
+> diff --git a/arch/arm/mach-k3/am62ax/dev-data.c b/arch/arm/mach-k3/r5/am62ax/dev-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62ax/dev-data.c
+> rename to arch/arm/mach-k3/r5/am62ax/dev-data.c
+> diff --git a/arch/arm/mach-k3/am62x/Makefile b/arch/arm/mach-k3/r5/am62x/Makefile
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62x/Makefile
+> rename to arch/arm/mach-k3/r5/am62x/Makefile
+> diff --git a/arch/arm/mach-k3/am62x/clk-data.c b/arch/arm/mach-k3/r5/am62x/clk-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62x/clk-data.c
+> rename to arch/arm/mach-k3/r5/am62x/clk-data.c
+> diff --git a/arch/arm/mach-k3/am62x/dev-data.c b/arch/arm/mach-k3/r5/am62x/dev-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/am62x/dev-data.c
+> rename to arch/arm/mach-k3/r5/am62x/dev-data.c
+> diff --git a/arch/arm/mach-k3/j7200/Makefile b/arch/arm/mach-k3/r5/j7200/Makefile
+> similarity index 100%
+> rename from arch/arm/mach-k3/j7200/Makefile
+> rename to arch/arm/mach-k3/r5/j7200/Makefile
+> diff --git a/arch/arm/mach-k3/j7200/clk-data.c b/arch/arm/mach-k3/r5/j7200/clk-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/j7200/clk-data.c
+> rename to arch/arm/mach-k3/r5/j7200/clk-data.c
+> diff --git a/arch/arm/mach-k3/j7200/dev-data.c b/arch/arm/mach-k3/r5/j7200/dev-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/j7200/dev-data.c
+> rename to arch/arm/mach-k3/r5/j7200/dev-data.c
+> diff --git a/arch/arm/mach-k3/j721e/Makefile b/arch/arm/mach-k3/r5/j721e/Makefile
+> similarity index 100%
+> rename from arch/arm/mach-k3/j721e/Makefile
+> rename to arch/arm/mach-k3/r5/j721e/Makefile
+> diff --git a/arch/arm/mach-k3/j721e/clk-data.c b/arch/arm/mach-k3/r5/j721e/clk-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/j721e/clk-data.c
+> rename to arch/arm/mach-k3/r5/j721e/clk-data.c
+> diff --git a/arch/arm/mach-k3/j721e/dev-data.c b/arch/arm/mach-k3/r5/j721e/dev-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/j721e/dev-data.c
+> rename to arch/arm/mach-k3/r5/j721e/dev-data.c
+> diff --git a/arch/arm/mach-k3/j721s2/Makefile b/arch/arm/mach-k3/r5/j721s2/Makefile
+> similarity index 100%
+> rename from arch/arm/mach-k3/j721s2/Makefile
+> rename to arch/arm/mach-k3/r5/j721s2/Makefile
+> diff --git a/arch/arm/mach-k3/j721s2/clk-data.c b/arch/arm/mach-k3/r5/j721s2/clk-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/j721s2/clk-data.c
+> rename to arch/arm/mach-k3/r5/j721s2/clk-data.c
+> diff --git a/arch/arm/mach-k3/j721s2/dev-data.c b/arch/arm/mach-k3/r5/j721s2/dev-data.c
+> similarity index 100%
+> rename from arch/arm/mach-k3/j721s2/dev-data.c
+> rename to arch/arm/mach-k3/r5/j721s2/dev-data.c
+> diff --git a/arch/arm/mach-k3/lowlevel_init.S b/arch/arm/mach-k3/r5/lowlevel_init.S
+> similarity index 100%
+> rename from arch/arm/mach-k3/lowlevel_init.S
+> rename to arch/arm/mach-k3/r5/lowlevel_init.S
+> diff --git a/arch/arm/mach-k3/r5_mpu.c b/arch/arm/mach-k3/r5/r5_mpu.c
+> similarity index 98%
+> rename from arch/arm/mach-k3/r5_mpu.c
+> rename to arch/arm/mach-k3/r5/r5_mpu.c
+> index 605f7931518..e409fdcfea8 100644
+> --- a/arch/arm/mach-k3/r5_mpu.c
+> +++ b/arch/arm/mach-k3/r5/r5_mpu.c
+> @@ -9,7 +9,7 @@
+>   #include <common.h>
+>   #include <asm/io.h>
+>   #include <linux/kernel.h>
+> -#include "common.h"
+> +#include <asm/armv7_mpu.h>
+>   
+>   struct mpu_region_config k3_mpu_regions[16] = {
+>   	/*
 
-https://drive.google.com/file/d/1v3PFArKiqpFc0l9i0fy1xj0AauKlKS0k/view?usp=
-=3Dsharing
+I think a cover-letter with the motivation behind the series could have helped 
+me understand quicker (plus if in case there were any discussion links earlier 
+about doing this)
 
-
-If you have any confusion or you can't see the log please let me know.
-
-Best regards,
-Jim
-
-On Wed, Nov 15, 2023 at 12:23=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Tue, Nov 14, 2023 at 04:51:55PM +0800, Jim Liu wrote:
->
-> > 1. Fix serial error and add bypass serial setting.
-> > 2. Fix/Add dts node node.
-> > 3. Add full function defconfig
-> >
-> > Jim Liu (4):
-> >   arm: dts: npcm845-evb: fix/add node and aliases
-> >   configs: arbel: Enable full functions
-> >   serial: npcm: support skip uart clock setting
-> >   board: nuvoton: update console environment variable
-> >
-> >  arch/arm/dts/nuvoton-common-npcm8xx.dtsi      | 11 ++-
-> >  arch/arm/dts/nuvoton-npcm845-evb.dts          | 29 ++++++--
-> >  arch/arm/dts/nuvoton-npcm8xx-u-boot.dtsi      |  2 +-
-> >  board/nuvoton/arbel_evb/Kconfig               |  1 +
-> >  board/nuvoton/arbel_evb/arbel_evb.c           |  7 ++
-> >  board/nuvoton/common/Kconfig                  |  9 +++
-> >  board/nuvoton/common/Makefile                 |  1 +
-> >  board/nuvoton/common/uart.c                   | 71 +++++++++++++++++++
-> >  board/nuvoton/common/uart.h                   | 11 +++
-> >  board/nuvoton/poleg_evb/Kconfig               |  1 +
-> >  board/nuvoton/poleg_evb/poleg_evb.c           |  8 +++
-> >  configs/arbel_evb_defconfig                   | 16 ++++-
-> >  drivers/serial/serial_npcm.c                  | 39 ++++++----
-> >  include/dt-bindings/phy/nuvoton,npcm-usbphy.h | 14 ++++
-> >  14 files changed, 194 insertions(+), 26 deletions(-)
-> >  create mode 100644 board/nuvoton/common/Kconfig
-> >  create mode 100644 board/nuvoton/common/Makefile
-> >  create mode 100644 board/nuvoton/common/uart.c
-> >  create mode 100644 board/nuvoton/common/uart.h
-> >  create mode 100644 include/dt-bindings/phy/nuvoton,npcm-usbphy.h
->
-> I just want to make sure now that you've given this series a compile and
-> boot test on some platform, yes? Thanks.
->
-> --
-> Tom
+-- 
+Thanking You
+Neha Malcom Francis
