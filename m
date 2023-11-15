@@ -4,87 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F23C5C47074
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 08:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDB38C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 10:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE4D48615A;
-	Wed, 15 Nov 2023 09:26:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id A9D9E86F18;
+	Wed, 15 Nov 2023 11:02:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="zMrWInyB";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="dAMY5TCl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4B1485E44; Wed, 15 Nov 2023 09:26:57 +0100 (CET)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 77F5786F31; Wed, 15 Nov 2023 11:02:44 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2DE98615A
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 09:26:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 266F786DB8
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 11:02:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-509c61e0cf4so7940982e87.2
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 00:26:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700036813; x=1700641613;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BJyJnjuJF104phv8i6FvNGZukoXK37gheXw9j1ci4W4=;
- b=zMrWInyBLyfW2Olga4ooRtnIai8Y4EoUQ4IXDq5bgRT9FxTLWtdHiopY/Foq2InB6L
- 7OWx5bdTclQDKlrIBUQAwZUMeoe3AqzdVHIY2cjN0MxNDlnHk4QQjR+bayNkjM8ND8m3
- cQFJnoNXYTh3n5poPCIeYQAMpvk6J6JSsCg4AeuU048+pDMSCcMFBZTqJYOARDpkcR1y
- C6MTUPQeK+b+1jO0rLoKaAVmzilZpA4LHmkOOWeIdqFq+IOjqyUcLkgrfzZ10bLpYm0W
- rG0IotJwd37sH6WIPpyHM5HP4IvrtZWoOMfWU7oHoQQP2MJnlokKKura/5KB+je73J6j
- ukPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700036813; x=1700641613;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BJyJnjuJF104phv8i6FvNGZukoXK37gheXw9j1ci4W4=;
- b=lkd6CXV3eavC9lJpyNKWCZg9QFGCkPyo7ZreCAjobgzVDhCN7IsWnkP0odr9hQQ66a
- tzA306kO4dm01fsQU/h/kXEGjZULEfsScC284Qxf9iy48PL5r6kt6iZc8rSlbndX2440
- Gwfrkb/uPw1B1Vn8jJltkYFn8HyjeFbVMOjTAcuPathC8Sgpam/Kh/+Tp/2WQ7zxMKui
- smweZFLIA96P+pVWlfLgggqIVW7QzEdIZ/1AlfdQjmeBV/CR25iA9192oTTrAOLpCgiO
- K6CiqG7NscGfjSr1DD5QTBxDt5IbzycrqBX7LEqU7GE+lC3fVG0SQ5K1thoXIFtpms9n
- MGXQ==
-X-Gm-Message-State: AOJu0YyvIafLLCCXBfWMfmlaSI/6HF5RJLV4Ak2R6L5T/baoSr6COj1/
- AR0qXSfWJRumR4fVwrUN6VZq7D+JnvH6c54vjdtVww==
-X-Google-Smtp-Source: AGHT+IGn0ReKxcEoUeTJWktKwoYzNTknyqHekxdXXAWq1xDA7q1WbK8JvfLhPwnj/4wYadfnvu7Apw==
-X-Received: by 2002:a19:f811:0:b0:507:c7ae:32cc with SMTP id
- a17-20020a19f811000000b00507c7ae32ccmr8203955lff.41.1700036813559; 
- Wed, 15 Nov 2023 00:26:53 -0800 (PST)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com.
- [209.85.167.51]) by smtp.gmail.com with ESMTPSA id
- m13-20020a0565120a8d00b005030c533843sm1557787lfu.154.2023.11.15.00.26.52
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Nov 2023 00:26:52 -0800 (PST)
-Received: by mail-lf1-f51.google.com with SMTP id
- 2adb3069b0e04-509c61e0cf4so7940945e87.2
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 00:26:52 -0800 (PST)
-X-Received: by 2002:a05:6512:b9a:b0:509:8da4:93da with SMTP id
- b26-20020a0565120b9a00b005098da493damr11341926lfv.18.1700036812366; Wed, 15
- Nov 2023 00:26:52 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700042550; x=1700647350; i=xypron.glpk@gmx.de;
+ bh=STQKLHVI/OrwtyiE4OwoXBPRc7wf+uJDbZSt3X84ur4=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=dAMY5TClk8nnJq0mzeHjLghTNiP8ntTMoLVHpFzAWtRlizUKd4lX4+okxKVV/HQ8
+ MdoohM4+bE5xvfANxik4SGY0ntysNCJIBPJcXsz4nojEHo9cfOYDAsIGJHC5wQhQG
+ T/FmZbi/APday/zELklFgp/IU6XrPGgiRxQQziOS4YNxRbDgbfvPurPOKDAiKv2iO
+ K5uRCXY47sxCtyzzTE4bn7GLkebbpRdfig7RH1K10/StfE5/8owUvE+UNsM3vr6FV
+ iH19WcRYGER06N6FhE2sPirW/HnD1QdLiGhkw3imqmVWDaEgnYuY70IxS23sTblJl
+ M8IUXB3WWgpnouMdkw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MrhQC-1rfZru0ejk-00ng15; Wed, 15
+ Nov 2023 11:02:30 +0100
+Message-ID: <f5201167-c4a3-4867-ae9f-6110f685652d@gmx.de>
+Date: Wed, 15 Nov 2023 11:02:23 +0100
 MIME-Version: 1.0
-References: <20231110141311.512334-1-i@shantur.com>
- <CABEcMwUxM9hPh1c=Q8THxkJUqzw7fT-bWsdeuJoyZ8vN6BaCkQ@mail.gmail.com>
- <CABEcMwWjHxNTE5wVkgaQXRBwt2WP-uE3qgRpNrqiXFCjHD2iZA@mail.gmail.com>
- <77937c9c-4f00-4721-adb1-5bc8b570c6eb@denx.de>
-In-Reply-To: <77937c9c-4f00-4721-adb1-5bc8b570c6eb@denx.de>
-From: Shantur Rathore <i@shantur.com>
-Date: Wed, 15 Nov 2023 08:26:41 +0000
-X-Gmail-Original-Message-ID: <CAHc5_t1cOgJQU=LtSc_zx0UY_Z40VzOSWNgXYfS_PAFuxKhpsQ@mail.gmail.com>
-Message-ID: <CAHc5_t1cOgJQU=LtSc_zx0UY_Z40VzOSWNgXYfS_PAFuxKhpsQ@mail.gmail.com>
-Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, trini@konsulko.com, 
- patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/29] mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231112000923.73568-1-sjg@chromium.org>
+ <20231112000923.73568-3-sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231112000923.73568-3-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:fu3mrBrgj9pDYotbM/CY4N7hyGNVn9T/0Hhdz1EFQwFqbFLhPJx
+ MBOP3BAFCMukDTZRNMd/iVNow/V4eSV5SdwpnTgxb5hcEB/kbkXdqFGVWEHoEzB9wFzI+wB
+ 6BCQkuDGMiOqAjAQL6PO/+h22M8P+5SUvP5DDywN13A9Hi/ZIoCdzQTMl+7o3zP9SBO5vnX
+ EOxlxiTxYPocuL1T/6Rvg==
+UI-OutboundReport: notjunk:1;M01:P0:gPPMdkNhlOM=;vgOVUWzLV0XNoKgtd5DgyXu7PlQ
+ TPiO/LIG6fgyXPb5kC09bx5Ftr7oDkPgB7fPmIA0s2udgafG68nP3DsdAbcXPpbVtt4qrcEeq
+ Pk6AOvsndHkhVhtgtFUSKFQU++chvH8pyt1h7YTSiuyK7X7N09LrBuis+n2Mciz7BR30LMY2r
+ SkEpKzpq31EKcTfMsF4yEaMAVcZs+oX3EIG4YdQcabRUCO0TKTMPCxlalFAfJjEA2O9i5kJtS
+ +VD6MhD39Dl2BMil/Uk91IK8d8a28XU+l4fzwXb5D9dXcz7iZPYrD535WG8zsq6GVRbkStA2l
+ 3HMipguS9zeJBpar8dpfUNNgMPQmy7ouyCILEx+YMFFQUgovewJ8bXoZg7DVaMAnHZt+bWorM
+ DJytLx67jSN5xvouoqbVYelTth+49aABsrz1NaZwfzkvJONTs3larOxEwV5VzDQkPim1mTyqC
+ npCpWjXTuqjqJtzmN9mkVtdfkZOiVg5YubSJPNgDCJuPxokaNzd6IikwkQ/BG9t/rlmxYuHnD
+ LtrYlyecQPhNSRo5KUzv/O1YQ7no8682jUdy9iwKqOng2VCcyuqU9MgF0PDKUUihI4WtnH+06
+ zXkIoW5RF99roJinkyheTUy0+TuXql2ZpY9WA+zdx4eenrOdVox/niZw6W+fLJ4q+5zOBRMqO
+ 41sxn356lNDC0rc7QqH/gmYamEitMy27S72QlBvTdpyHYyRdQz8EJ5avvuwVlgTv+0lU37V/3
+ Gs4bF/uYXig/aXo4zpN/Yic/8BgXEx+5ixyrhRDY9aSPwHd5sEdwhlWxURowmHtaZ7biOlvQR
+ +a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,15 +91,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On 11/12/23 01:08, Simon Glass wrote:
+> The declaration of U_BOOT_ENV_LOCATION() uses a different #ifdef
+> condition from the code it calls. Use the same condition to avoid a
+> build warning if CONFIG_CMD_SAVEENV is disabled.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>   env/mmc.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/env/mmc.c b/env/mmc.c
+> index cb14bbb58f13..da84cddd74f0 100644
+> --- a/env/mmc.c
+> +++ b/env/mmc.c
+> @@ -495,7 +495,7 @@ U_BOOT_ENV_LOCATION(mmc) =3D {
+>   	.location	=3D ENVL_MMC,
+>   	ENV_NAME("MMC")
+>   	.load		=3D env_mmc_load,
+> -#ifndef CONFIG_SPL_BUILD
+> +#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_SPL_BUILD)
 
-> What is the point of this growing CC list ?
+According to README CONFIG_SPL_BUILD is not defined for TPL builds.
 
-Apologies, this is my first time with email based patch management.
-I was reading articles on best practices and first one mentioned to cc
-people with recent commits,
-second one mentioned to use get_maintainer script to cc people and
-hence multiple emails.
+I assume that we don't want to have below fields in TPL either. Please, us=
+e
 
-Regards,
-Shantur
+#if CONFIG_IS_ENABLED(CMD_SAVEENV)
+
+Best regards
+
+Heinrich
+
+>   	.save		=3D env_save_ptr(env_mmc_save),
+>   	.erase		=3D ENV_ERASE_PTR(env_mmc_erase)
+>   #endif
+
