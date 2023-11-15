@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3258C07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:16:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75515C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:17:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34D63870F2;
-	Wed, 15 Nov 2023 14:16:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 97D5787258;
+	Wed, 15 Nov 2023 14:17:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LHQbgWaF";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kCYu2CD4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05F3B87120; Wed, 15 Nov 2023 14:16:57 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 223F9871AF; Wed, 15 Nov 2023 14:16:58 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9F838615A
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:16:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5799186F53
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:16:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9c41e95efcbso991803666b.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:16:54 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5401bab7525so10904077a12.2
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:16:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700054214; x=1700659014; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700054216; x=1700659016; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YsLYr/fVOqs6jHIehgO8ZHyKWxJyuJCTDOz7rGFKbtw=;
- b=LHQbgWaFb8HwdT/7WbQ3F6Bo3oWgbKf1sd81Tb4Gn2RdOy8W5gTHlCfrjSu1Ck+HUt
- hBsWh+3ONfKS6XHPqKKV73fA9rdmHpqupFH019+1/drzsID6cRPgzEwP3oZ6Hp1lgyfY
- N4MyvmcABOsRM11EjqHCDmZpuVUIMDoDL5TwI=
+ bh=+RHIGYXLC+q5TK4U+SMfExFJfPeC59cjURwBnAGqEws=;
+ b=kCYu2CD4m2UUMnlwz0ECUH+dns4ApKEV8FPI4+2rQrNI6/qOKPg22ARcroJBt0B9g5
+ GJkWd2YWo6HJncbuPOzVRpbAAKvVGTITAvye9erpyX51hqcQNsyWGfuLbcKy4Vnq4WVy
+ xghyX4zkCLKPjaw0eyTop/3vqdDgOKw+jhW30=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700054214; x=1700659014;
+ d=1e100.net; s=20230601; t=1700054216; x=1700659016;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YsLYr/fVOqs6jHIehgO8ZHyKWxJyuJCTDOz7rGFKbtw=;
- b=Yrmaa5GdZOjvW/ORphCLTDRNgKlpaXw6GB4HWusMEDUIU7FR483hI5C/8mV3hFQ2Un
- VDXqvWi5bF2pDrkBKChLHJerld8C//MF1q372kUtDzZeelzuZW0rsPtb2CLgmbptSf62
- yqwS35w1NEdr+OUg9INOzd6+KkNpmbGZPU8QtVALXSDpqg6HRUgZqdkL7fj/701zSLJB
- ihGXeXhr1oMBGKNLLMXVvRf7GeI1/Cf44cD0BO/2EhbOdzN5hFqmQBMqm2TxI26ZZzve
- ny85u3ePcImQd6yWQKTRFYVrFFKvJ5bt7waKv1orlvU2RXnFiFocouj70PhfHhLdcJOS
- 9AKw==
-X-Gm-Message-State: AOJu0YxxCbk3jvCl5IAiTdRTjD39uHqUJj0X46JsR22DAa8Uuvo7silS
- FKLD2c7a8Lia2oxoCct13HOCe0J8Ne8BUWH9ptICh3Xo9fxl0OuAJNU=
-X-Google-Smtp-Source: AGHT+IH0ocVZYM22lTu/xzZPITy3v6oP5qbOplUxz9Rm/xSV0xnYmmHdzSRVn+tQup2jUSS8waf18NngBWy9C8aZjlM=
-X-Received: by 2002:a17:906:d217:b0:9be:3c7e:7f38 with SMTP id
- w23-20020a170906d21700b009be3c7e7f38mr8997934ejz.10.1700054214156; Wed, 15
- Nov 2023 05:16:54 -0800 (PST)
+ bh=+RHIGYXLC+q5TK4U+SMfExFJfPeC59cjURwBnAGqEws=;
+ b=YJujHo/V11PqXq/Ajwp2TRl25RN7Jtc5ze1LCQmr3mfWYf3oi14gvhGHsOi0mE0mXR
+ +l1kF6y2sTv7IWyfFLe/mWb08dAahC/e/57qZKxj5GjebdliKkMisoVjs64iDXXVmEAu
+ mdLzKwrvsf750Sw/2ZzKn7hbbBvnImSime+gGZBds76e9RX4LYBcATmLBJNyUHgK5Bls
+ 5BCut4fcEYJdE+Fn8mTNeYWhxkfFmtDqrnmH70XoiGblpI4imr2qX2pZpNJQNh+Ouygx
+ zJwIOMB1jlbDdSHhvb1REwieq2CIPJ43wNRtnYK7ytfbt6hkdzGuzy8njCNXuAcqxPAG
+ JsTw==
+X-Gm-Message-State: AOJu0Yw2to6dpKxI1NYehRClXPZOD7wpI4mefW4XBtAqVH93sNSX9LCt
+ rK/wl3v8FilJTAkmhS9Y6IndZur8NxOwnS2Z8fFhbErS1muvPvPPfog=
+X-Google-Smtp-Source: AGHT+IHNJR8MO96wqvP0GsPhl38Dl6UK3ThzMbcTBSl65hqAIQFs/0pJ0Cf3pWWbO4PP561wbWyCKXP4biI8nWgF38M=
+X-Received: by 2002:a17:906:c314:b0:9ba:33ef:fe4c with SMTP id
+ s20-20020a170906c31400b009ba33effe4cmr9324793ejz.64.1700054215567; Wed, 15
+ Nov 2023 05:16:55 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Nov 2023 05:16:53 -0800
+ HTTPREST; Wed, 15 Nov 2023 05:16:54 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ2YgwAzsG2kHZZWgy8p126hBH_r0r55nParwOt5wjuW+g@mail.gmail.com>
-References: <CAPnjgZ2YgwAzsG2kHZZWgy8p126hBH_r0r55nParwOt5wjuW+g@mail.gmail.com>
- <20231107101729.1.I843fdbc83d3f8522e4c43d47c72825b388643ac6@changeid>
-Date: Wed, 15 Nov 2023 05:16:53 -0800
-X-Google-Sender-Auth: iPCdaeRqQPVrPSaGNTkf31LHMOk
-Message-ID: <CAPnjgZ3EQGbHMWuKM1d8+Whs6FWZ4SGoOO-9=N51EPXsswqWwQ@mail.gmail.com>
-Subject: Re: [PATCH] bootstage: Correct exhasuted typo
+In-Reply-To: <CAPnjgZ0iuuaVEmZNGNUFwxSE5xqvbVix+kVnm=68j9mO16inFQ@mail.gmail.com>
+References: <CAPnjgZ0iuuaVEmZNGNUFwxSE5xqvbVix+kVnm=68j9mO16inFQ@mail.gmail.com>
+ <20231104195733.1576679-1-seanga2@gmail.com>
+Date: Wed, 15 Nov 2023 05:16:54 -0800
+X-Google-Sender-Auth: DgMMwWv1EzgILwVH99ZoDO_U7zs
+Message-ID: <CAPnjgZ3MO9Mhw0tddm7pgpas5HXq5=o4ue4GBUq5oS8OnQwGEg@mail.gmail.com>
+Subject: Re: [PATCH] sandbox: Close file after mmaping it
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, deffo@gmx.de, Tom Rini <trini@konsulko.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,33 +84,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 Nov 2023 at 02:18, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
+On Sat, 4 Nov 2023 at 19:57, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> From: Simon Glass <sjg@chromium.org>
+> After opening pathname, we must close ifd once we are done with it.
 >
-> Correct this typo in the warning message shown when no more bootstage
-> records can be added.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Fixes: b9274095c2c ("sandbox: Add a way to map a file into memory")
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
-> I just cherry-pick the Simon's patch in the branch fix-bs-working
-> of the dm custodian git but it is not yet present in patchwork.
 >
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/8810b8dd3d233978c15203b23420fa819ab1e791
+>  arch/sandbox/cpu/os.c | 15 ++++++++++-----
+>  1 file changed, 10 insertions(+), 5 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Thank you
-
-
->
-> Regards
->
-> Patrick
->
->  common/bootstage.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
 Applied to u-boot-dm, thanks!
