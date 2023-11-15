@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4DB0C07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 11:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E95C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 11:15:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11AB286BDF;
-	Wed, 15 Nov 2023 12:10:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 111C986A0A;
+	Wed, 15 Nov 2023 12:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="oXwe6rLu";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RBlfxieV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED20987197; Wed, 15 Nov 2023 12:09:58 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 050BD86BDF; Wed, 15 Nov 2023 12:15:17 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A107186996
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 12:09:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E1BE8652B
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 12:15:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A9A226148B;
- Wed, 15 Nov 2023 11:09:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D801C433C8;
- Wed, 15 Nov 2023 11:09:51 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id B7F62B818BC;
+ Wed, 15 Nov 2023 11:15:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8448C433C7;
+ Wed, 15 Nov 2023 11:15:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700046593;
- bh=Z+AzaLfodJzSdecDlHJ4EV9izy2Q34bfoPr+1MCk/64=;
+ s=k20201202; t=1700046914;
+ bh=c0clK69P3jrYv6aqgLZ9sKvrogCoAfZE4fhzERJxUW8=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oXwe6rLu7wkOBQzLe+YrbvH1gjdgx1XDPzymbPRvsUbm5ZIC5RL7leUpjCN2rKqTE
- vndA32m830+8YznBtyWr3HY4A1XuVuLja2iyMRxaamr29JrkxcgV0IxvVgnooQq6Ie
- RjE83VghIyLulbIWd/ZK/OqisQah4yaPwURo/pFZGU/rpZhtwXTM+yn3uWv7Y+j++x
- CSoehDSuAzDxeboMcB19coxylqZ3/RxQNmkYtcaUrTVp4LR5xZ9KLsYNF+enieZdBE
- SkwX+XbxgE82+gAyi3/Z9cJo/gUBM21Ru3mcYSVNutMbXOHaWkL+PpRNSBfw5eIbnD
- saJrdujhy+OXg==
-Message-ID: <f21f052e-1b6d-45bc-8987-3b33eee7e09a@kernel.org>
-Date: Wed, 15 Nov 2023 13:09:48 +0200
+ b=RBlfxieVJcHgLwFCSunaJiy4Nyev7EJd0WtAiqRu4OV3oVnR2+Y/Unkj1na7zKGGT
+ 2Mg44BFtjz46I2KWnAS7tN5UeXHOG5ZHvwt1hutN5aWB3BKp2Sy+vPB/xt687fjW5O
+ S+vMShn7eNo9cVaBJW2JPrQjcNu9Mvl8ocAUoVdfBUW7/lo8pmxjaUgzM20D+k4Jvp
+ mmWxB6ND3m/wBIDvMmX9zr63qbznEVoOJjP35JvWwSmfB8s3a6+kUyBH4arYL2aPyN
+ jXHVUMx+6bDxgFZSbPJDeFx0SDbwhTwXDbFrJIkW44fe4NV9ZBWHdX6Mj9LOq401ip
+ 9qKN9y6uRvoEA==
+Message-ID: <2df85ff2-ada8-44ba-91b9-3ba3d299eeef@kernel.org>
+Date: Wed, 15 Nov 2023 13:15:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: rawnand: omap_gpmc: fix BCH8 HW based correction
+Subject: Re: [PATCH 4/8] configs: am62ax_evm_a53_defconfig: Enable networking
 Content-Language: en-US
-To: Heiko Schocher <hs@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Enrico Leto <enrico.leto@siemens.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
- "Bajjuri, Praneeth" <praneeth@ti.com>
-References: <20231115054044.3937543-1-hs@denx.de>
+To: Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>
+Cc: Siddharth Vadapalli <s-vadapalli@ti.com>, Andrew Davis <afd@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>,
+ u-boot@lists.denx.de
+References: <20231113145149.1926732-1-nm@ti.com>
+ <20231113145149.1926732-5-nm@ti.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20231115054044.3937543-1-hs@denx.de>
+In-Reply-To: <20231113145149.1926732-5-nm@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,68 +76,61 @@ X-Virus-Status: Clean
 
 
 
-On 15/11/2023 07:40, Heiko Schocher wrote:
-> commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+On 13/11/2023 16:51, Nishanth Menon wrote:
+> Enable networking
 > 
-> broke AM335x based boards booting from NAND with ECC BCH8 code.
-> 
-> Use omap_enable_hwecc() instead of omap_enable_hwecc_bch()
-> in SPL restores correct SPL nand_read_page functionality.
-> 
-> Tested on draco thuban board.
-> 
-> Signed-off-by: Heiko Schocher <hs@denx.de>
-> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
 > ---
-> fix NAND boot for BCH8 based TI AM335x boards
+>  configs/am62ax_evm_a53_defconfig | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
 > 
-> Fix is based on series from Enrico:
-> 
-> https://lists.denx.de/pipermail/u-boot/2023-November/536793.html
-> 
-> and fixes NAND boot for the draco thuban board. But this patch
-> apply also without the patches from above patchseries, see
-> azure build:
-> 
-> https://dev.azure.com/hs0298/hs/_build/results?buildId=111&view=results
-> 
-> which is clean.
-> 
-> Above commit seems to change only U-Boot code and did not
-> adapt am335x_spl_bch.c, which breaks nand_read_page in SPL
-> code for AM335x based boards. So use in SPL "old" hw setup
-> and reading page from NAND in SPL works again.
-> 
-> 
->  drivers/mtd/nand/raw/omap_gpmc.c | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
-> index 1a5ed0de31..c9b66dadbd 100644
-> --- a/drivers/mtd/nand/raw/omap_gpmc.c
-> +++ b/drivers/mtd/nand/raw/omap_gpmc.c
-> @@ -983,7 +983,11 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
->  		nand->ecc.strength	= 8;
->  		nand->ecc.size		= SECTOR_BYTES;
->  		nand->ecc.bytes		= 14;
-> +#if defined(CONFIG_SPL_BUILD)
-> +		nand->ecc.hwctl		= omap_enable_hwecc;
+> diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+> index d0a34c75505d..c94708a7bf85 100644
+> --- a/configs/am62ax_evm_a53_defconfig
+> +++ b/configs/am62ax_evm_a53_defconfig
+> @@ -42,7 +42,6 @@ CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_MULTI_DTB_FIT=y
+>  CONFIG_SPL_MULTI_DTB_FIT=y
+>  CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+> -# CONFIG_NET is not set
+>  CONFIG_SPL_DM=y
+>  CONFIG_SPL_DM_SEQ_ALIAS=y
+>  CONFIG_REGMAP=y
+> @@ -51,6 +50,8 @@ CONFIG_SPL_OF_TRANSLATE=y
+>  CONFIG_CLK=y
+>  CONFIG_SPL_CLK=y
+>  CONFIG_CLK_TI_SCI=y
+> +CONFIG_DMA_CHANNELS=y
+> +CONFIG_TI_K3_NAVSS_UDMA=y
+>  CONFIG_TI_SCI_PROTOCOL=y
+>  # CONFIG_GPIO is not set
+>  # CONFIG_I2C is not set
+> @@ -60,6 +61,10 @@ CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_ADMA=y
+>  CONFIG_SPL_MMC_SDHCI_ADMA=y
+>  CONFIG_MMC_SDHCI_AM654=y
+> +CONFIG_PHY_TI_DP83867=y
+> +CONFIG_PHY_FIXED=y
 
-I don't think this is correct. omap_enable_hwecc does not setup
-the BCH settings and should be used only for 1-bit ECC i.e. OMAP_ECC_HAM1_CODE_*
+Why do we need PHY_FIXED?
 
-I'm sure it will break the boards not using
-CONFIG_SPL_NAND_AM33XX_BCH which is
-pretty much most TI boards that are not AM335x.
+"
+config PHY_FIXED
+        bool "Fixed-Link PHY"
+        help
+          Fixed PHY is used for having a 'fixed-link' to another MAC with a direct
+          connection (MII, RGMII, ...).
+          There is nothing like autoneogation and so
+          on, the link is always up with fixed speed and fixed duplex-setting.
+          More information: doc/device-tree-bindings/net/fixed-link.txt
+"
 
-Now, I need to identify why AM335x NAND is broken.
 
-> +#else
->  		nand->ecc.hwctl		= omap_enable_hwecc_bch;
-> +#endif
->  		nand->ecc.correct	= omap_correct_data_bch;
->  		nand->ecc.calculate	= omap_calculate_ecc_bch;
->  		nand->ecc.read_page	= omap_read_page_bch;
+> +CONFIG_TI_AM65_CPSW_NUSS=y
+> +CONFIG_PHY=y
+>  CONFIG_PINCTRL=y
+>  CONFIG_SPL_PINCTRL=y
+>  CONFIG_PINCTRL_SINGLE=y
 
 -- 
 cheers,
