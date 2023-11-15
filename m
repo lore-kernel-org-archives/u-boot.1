@@ -4,63 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4134BC07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 864A4C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AAA086EE5;
-	Wed, 15 Nov 2023 06:37:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CC9FF86C3B;
+	Wed, 15 Nov 2023 06:40:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700026649;
-	bh=7ph56KhiiNFoA3GehhV+zRMJCGOilbtCySg1lno3lAE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=MU9TvoQgfxQAFOllhQTzoLBkiS7DeKT7z+mkp2lqO8ovMSFgV3w/mS5FQE0iRC7/l
-	 zVwXQS/N9lppOwBNHqKUW/DYHYatVZvpJgDrvzYYyAEFXRrr4vn6BHBDs73Dq6lN1I
-	 FTB/fQXARNg3p81us4zQMCfKnBYWxRcKp2tPMke9JlVBFNFAYM9HwuYM+iOypqP3f/
-	 qPgKr1nqzOlvunN01RQJ3oyKLcguA9F0CXfy8vFRqaCqiM5WulHilh18LFFaFUs6+Y
-	 8CGC9r0ggTeI6pC74dzKIC8vNfNtPPifoX701YQBptTOp0HiILWvAZ04Bpyu7n/J+g
-	 rpKKorj6Z1dMA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 13C1286C3B;
- Wed, 15 Nov 2023 06:37:27 +0100 (CET)
+	s=phobos-20191101; t=1700026849;
+	bh=cm2XPSMeyos3KtlQikhghlsSFPHFJX7SAJ9j8Bc+n1A=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=M6tc3ciN5Irg49wIE7z0pTz18FRBbsbAOY7WEgiD2yA2+/qJFSgSwXV8cssWF6kgY
+	 qGZY+OirlRfozQaKrvnt+26HLVkVJa2WFY03WAGoYzEYSnalrfjCinepv7W4qhsLfR
+	 d/MwybbamN6qyqNufRSj469w+N1x/GkBBI/Z+amK5Hh2JFyJODcikQo55SKr7ZiSLI
+	 J1M1IOT8Wx+AMANc/9IC8NaFry8Vqr69oB/7+DztgP9xrilqiFH0UxzeOPuAuWz0OK
+	 NZkkhpBRx+iVPNLaedMqd9BiKkLZG6kN8KbU2FfZY97kjIj2mSudrFH2xvlmHtVEJZ
+	 cvepEzrvJ+n+g==
+Received: from mail-internal.denx.de (p578adb1c.dip0.t-ipconnect.de
+ [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: noc@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 07A5C86308;
+ Wed, 15 Nov 2023 06:40:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700026647;
- bh=7ph56KhiiNFoA3GehhV+zRMJCGOilbtCySg1lno3lAE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=i4kasT+I4mt4y0v9jywBY7Rdha/1be1O4drd4f5ly8qf+m41fuz4ehpvdd4IjuH3n
- Z2zY4DDTaUbEIupdpE1XX8PgSOGauxaA7jf4b1PY42txrUI5jFF5hzf9OSggp5Xf95
- 4J9UVbqEpNXjiFx07PZbvxnOZXnarAPLtncccimCVgYMvptAEBVARUMFr4uKiFAP89
- II9Nut3lNR3VnaGy3YBXurb/x46CpTBCEWV5unDJy1EkJgMLLUTbCUwyD9hOq814tC
- xlaHxojchctAhfEE6INLFuav3iRcBV+RtqOXwEifSLM3DPHF60yTlzYTMFbUxWBo0/
- EbR/v2U3jbNPg==
-Message-ID: <9a11d59b-0e41-4e26-b474-ad743725bfa5@denx.de>
-Date: Wed, 15 Nov 2023 06:37:26 +0100
+ s=phobos-20191101; t=1700026848;
+ bh=cm2XPSMeyos3KtlQikhghlsSFPHFJX7SAJ9j8Bc+n1A=;
+ h=From:To:Cc:Subject:Date:From;
+ b=JsOkGaw6Is26J6mwER3t8bqk+Ja/i8ZK4c4lFSF4U9q6/3LWwYoekTCh5KbhPOA5c
+ k48K+ot3x8OSHx275OkrUFNNIjLFDs21lFncoB56qxcH+QY4zIg79asJWOPQ5JKngC
+ ebwBnCrM8Lxbj3E05sUzJmZY3JdLgbMaynsl86Mkaf5IFj5gauCHBEz58te5ARS1ii
+ 9OYhPg0IMA4mKzwHsS6mwj0Ql2plJwuYY9oGPNQ/SyxdSfStt4Ia2hNQCFs/pCZr/J
+ LNUM/Uy1g1Ae0VEb6HL7SUj0P0u/JJSsldX0dyEKTy4o+b7F3gG0SMIOamm3SQwMe3
+ 2OEgesqaHo6gQ==
+Received: from pollux.denx.de (pollux [192.168.1.1])
+ by mail-internal.denx.de (Postfix) with ESMTPS id 70459180973;
+ Wed, 15 Nov 2023 06:40:46 +0100 (CET)
+Received: by pollux.denx.de (Postfix, from userid 515)
+ id 1B9921A0083; Wed, 15 Nov 2023 06:40:46 +0100 (CET)
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Enrico Leto <enrico.leto@siemens.com>
+Cc: Heiko Schocher <hs@denx.de>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH] mtd: rawnand: omap_gpmc: fix BCH8 HW based correction
+Date: Wed, 15 Nov 2023 06:40:44 +0100
+Message-Id: <20231115054044.3937543-1-hs@denx.de>
+X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] led-uclass: honour ->label field populated by
- driver's own .bind
-Content-Language: en-US
-To: Christian Gmeiner <christian.gmeiner@gmail.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>,
- pavel Machek <pavel@denx.de>
-References: <20231019095837.2084458-1-rasmus.villemoes@prevas.dk>
- <20231019095837.2084458-3-rasmus.villemoes@prevas.dk>
- <d4389465-e5bd-492b-8f86-7b4a93ff6016@denx.de>
- <7d38b732-e5f4-4e6a-9a5d-7837e285ba55@prevas.dk>
- <ebe2784d-23c6-470d-a25f-8261fcf820ca@denx.de>
- <CAH9NwWfEPeXhmxM6MMmVfS3XJoTT3Qod8-Z3rsuUzyOGwO5-eg@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAH9NwWfEPeXhmxM6MMmVfS3XJoTT3Qod8-Z3rsuUzyOGwO5-eg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,69 +71,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/14/23 13:11, Christian Gmeiner wrote:
-> ping
-> 
-> Am Mo., 23. Okt. 2023 um 12:45 Uhr schrieb Marek Vasut <marex@denx.de>:
->>
->> On 10/23/23 10:51, Rasmus Villemoes wrote:
->>> On 19/10/2023 15.54, Marek Vasut wrote:
->>>> On 10/19/23 11:58, Rasmus Villemoes wrote:
->>>>> If the driver's own .bind method has populated uc_plat->label, don't
->>>>> override that. This is necessary for an upcoming driver for ti,lp5562,
->>>>> where the DT binding unfortunately says to use "chan-name" and not
->>>>> "label".
->>>>>
->>>>> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
->>>>> ---
->>>>>     drivers/led/led-uclass.c | 4 +++-
->>>>>     1 file changed, 3 insertions(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
->>>>> index 5a5d07b9a7..0232fa84de 100644
->>>>> --- a/drivers/led/led-uclass.c
->>>>> +++ b/drivers/led/led-uclass.c
->>>>> @@ -71,7 +71,9 @@ static int led_post_bind(struct udevice *dev)
->>>>>         struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
->>>>>         const char *default_state;
->>>>>     -    uc_plat->label = dev_read_string(dev, "label");
->>>>> +    if (!uc_plat->label)
->>>>> +        uc_plat->label = dev_read_string(dev, "label");
->>>>> +
->>>>
->>>> One thing I have to wonder about is, why does this controller have label
->>>> property in the top-level node , what is that used for ?
->>>>
->>>> (see Linux Documentation/devicetree/bindings/leds/leds-lp55xx.yaml)
->>>>
->>>> Reviewed-by: Marek Vasut <marex@denx.de>
->>>
->>> Reading the linux driver, it seems that the top-level label, if any, is
->>> used as part of the naming for individual channels if they don't have
->>> individual chan-name properties:
->>>
->>>
->>>           if (pdata->led_config[chan].name) {
->>>                   led->cdev.name = pdata->led_config[chan].name;
->>>           } else {
->>>                   snprintf(name, sizeof(name), "%s:channel%d",
->>>                           pdata->label ? : chip->cl->name, chan);
->>>                   led->cdev.name = name;
->>>           }
->>>
->>> but I think the rationale in d1188adb2dabc is a bit weak, since the only
->>> example also does have individual chan-name properties.
->>>
->>> [Complete aside: At first I thought it was related to the multi-color
->>> LED work that has been ongoing for many many years (I think there was an
->>> LWN article at some point), where this could be exposed as a single
->>> multi-color LED, as opposed to the "traditional" three/four individual
->>> LEDs. In the former case, there would only be one sysfs entry, but with
->>> attributes exposing the multicolor functionality. I must admit I don't
->>> know the status of that work, when something reaches v31,
->>> http://archive.lwn.net:8080/linux-kernel/20200722071055.GA8984@amd/t/ ,
->>> it's hard to know if it ever lands, or if pieces of it has landed.]
->>
->> +CC Pavel
+commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
 
-I think you want to coordinate the effort with Rasmus here .
+broke AM335x based boards booting from NAND with ECC BCH8 code.
+
+Use omap_enable_hwecc() instead of omap_enable_hwecc_bch()
+in SPL restores correct SPL nand_read_page functionality.
+
+Tested on draco thuban board.
+
+Signed-off-by: Heiko Schocher <hs@denx.de>
+
+---
+fix NAND boot for BCH8 based TI AM335x boards
+
+Fix is based on series from Enrico:
+
+https://lists.denx.de/pipermail/u-boot/2023-November/536793.html
+
+and fixes NAND boot for the draco thuban board. But this patch
+apply also without the patches from above patchseries, see
+azure build:
+
+https://dev.azure.com/hs0298/hs/_build/results?buildId=111&view=results
+
+which is clean.
+
+Above commit seems to change only U-Boot code and did not
+adapt am335x_spl_bch.c, which breaks nand_read_page in SPL
+code for AM335x based boards. So use in SPL "old" hw setup
+and reading page from NAND in SPL works again.
+
+
+ drivers/mtd/nand/raw/omap_gpmc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
+index 1a5ed0de31..c9b66dadbd 100644
+--- a/drivers/mtd/nand/raw/omap_gpmc.c
++++ b/drivers/mtd/nand/raw/omap_gpmc.c
+@@ -983,7 +983,11 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
+ 		nand->ecc.strength	= 8;
+ 		nand->ecc.size		= SECTOR_BYTES;
+ 		nand->ecc.bytes		= 14;
++#if defined(CONFIG_SPL_BUILD)
++		nand->ecc.hwctl		= omap_enable_hwecc;
++#else
+ 		nand->ecc.hwctl		= omap_enable_hwecc_bch;
++#endif
+ 		nand->ecc.correct	= omap_correct_data_bch;
+ 		nand->ecc.calculate	= omap_calculate_ecc_bch;
+ 		nand->ecc.read_page	= omap_read_page_bch;
+-- 
+2.37.3
+
