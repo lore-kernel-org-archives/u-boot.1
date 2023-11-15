@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E3BC2BB3F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:38:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C07C072A2
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:39:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79CCE8748D;
-	Wed, 15 Nov 2023 23:37:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E19858748B;
+	Wed, 15 Nov 2023 23:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a6t6Mrez";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KgcQv/Fz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BF9587485; Wed, 15 Nov 2023 23:37:46 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 2CD3087489; Wed, 15 Nov 2023 23:37:53 +0100 (CET)
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
+ [IPv6:2607:f8b0:4864:20::82b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90EEC8748C
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:37:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B2748748B
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:37:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7788f513872so7117985a.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:37:43 -0800 (PST)
+Received: by mail-qt1-x82b.google.com with SMTP id
+ d75a77b69052e-41cc44736f2so1191001cf.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:37:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700087862; x=1700692662; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700087870; x=1700692670; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TSpMTBsTQtyT4XFPCQxdQEX8s51+bhsO2Ey9ZPn5caw=;
- b=a6t6MrezjkLRXGxpKSQik0oyc0RoV+dizqcTeuaq/v+j6HTiKjVYm40UVGrjJ42Jpz
- FJBFgteI+yMbGX854+qwAS5P2fFBn36InzoRpJWLyKmPZVrwkMjPye1n6gi1SR7ewIOH
- /4CmhR9d9bJUWRZyKlqndx/YXLmzQChoY3GF0=
+ bh=3eHo9VmVIsrM2PemohLVK7YP35N9N3mjQvWWm9HDg0c=;
+ b=KgcQv/FzkzTjyh6m5Hlc5z8VvWezb8ItpEaUM2jD5TnA0OeRgH/KSk2fWwJXUWhHcn
+ is73yvJ54oftX9LvUHsVa+mwo3heWUFOvV2TLknLCvs9zWRuMsqwyh9IXi8ISZ7cK7yo
+ 4xA6rfFlVQ17e+mOsBwCAT4CTGbx/P41rDu+0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700087862; x=1700692662;
+ d=1e100.net; s=20230601; t=1700087870; x=1700692670;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TSpMTBsTQtyT4XFPCQxdQEX8s51+bhsO2Ey9ZPn5caw=;
- b=v7LRgytNZslxV4BGfugZ9G0OlMdwwGxenFwrPctomcUlahkQ9Q9YFyc70C9czUEniC
- ipfYejqcdJ+xuQimo1OnnksQoWy2J+++eXz/APVQNXAdvsNuqAMva1NEj9ggw1iXUuVg
- b42vssvQ00Piscm8RZPaSSua6GSDHMfAjhLz9hlB+IWrVoNi7dTNkaRyvTGZ600+kxKa
- qGKE02ezGXmfr7vjJRMbUB1vnuz1dXbkFnFP8ta0zgQRow67AUiNgn+OK44OMFTEIyqq
- 5xETBVS1fTBetYcVYTsAZwVsetE6313jrz4tK9HI0LydV/JnXb3+JAH40DYs3olHi3fi
- t97Q==
-X-Gm-Message-State: AOJu0YyasBT6NXDIt1pcIvWCbHqPlV+pMKit7dnLIoLmsMk8Rh0pTvx4
- 4Q5HCL049ySR70GX/IDtovoqCJQnIH0Okm45i/I6uQ==
-X-Google-Smtp-Source: AGHT+IHVkcp3bsa4GRb2rRpK6xufCBkJXuhFl8oqXX+hkLN+9nDf1E+JZxe8ptad6qsJWVROuMvyZA==
-X-Received: by 2002:a05:620a:347:b0:775:9040:cc69 with SMTP id
- t7-20020a05620a034700b007759040cc69mr7217473qkm.60.1700087862471; 
- Wed, 15 Nov 2023 14:37:42 -0800 (PST)
+ bh=3eHo9VmVIsrM2PemohLVK7YP35N9N3mjQvWWm9HDg0c=;
+ b=Omo5dEGIMYzSPMD8AyaKwOB8LL94ZI+nc2QYljKQO1OPe+gElhYxOmP9ZeR7CaSijG
+ Muv90LMS98dRtNemHMdKiPKI2XcgObjUhCzjit7gQCtgMZDxQlhDSDW75XMDyvT4IlJJ
+ l0Fa2QY3PebaM9JhGaQQ0wU5zJqBzn/c8VOs2sa51QkD6WYTny2GzojtHvG0imB/vFPB
+ 7RUguAOmFgn512oTX65eQZNSgzOOleX0pdYPUBqjvHbumm+o+sFtHUN1H2NjYsIISaaS
+ FfRjCK2mVi5QOjL+HObhI0IBtHY1tpbn1wr5Ne97i9kbPZKAdXoEeEXE96a7WIOzFheR
+ +inQ==
+X-Gm-Message-State: AOJu0YxDrUgk8YtL2B+VgmboETxEzhD7E3CgeYED382hdrPA4JvelDLk
+ EInwgw8VZxnutyu5TXYzmcJNCw==
+X-Google-Smtp-Source: AGHT+IEseAWzxlJ+9W7O+N9TK38WGh8GHO4Mx0fmoIgjWPut8CIEqo6KRjdsQua1DqSqfh145lx6eA==
+X-Received: by 2002:ac8:5ccc:0:b0:41c:e02a:eba0 with SMTP id
+ s12-20020ac85ccc000000b0041ce02aeba0mr8947791qta.17.1700087870070; 
+ Wed, 15 Nov 2023 14:37:50 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
  [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
  by smtp.gmail.com with ESMTPSA id
- bl16-20020a05620a1a9000b007757868e75csm3809847qkb.117.2023.11.15.14.37.41
+ r5-20020ac85205000000b0041519614354sm3877127qtn.7.2023.11.15.14.37.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 14:37:41 -0800 (PST)
-Date: Wed, 15 Nov 2023 17:37:39 -0500
+ Wed, 15 Nov 2023 14:37:49 -0800 (PST)
+Date: Wed, 15 Nov 2023 17:37:47 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
@@ -74,15 +74,15 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Safae Ouajih <souajih@baylibre.com>,
  Sean Anderson <sean.anderson@seco.com>,
  Tobias Waldekranz <tobias@waldekranz.com>
-Subject: Re: [PATCH 22/29] bootm: Reduce arguments to boot_get_fpga()
-Message-ID: <20231115223739.GB6601@bill-the-cat>
+Subject: Re: [PATCH 23/29] bootm: Reduce arguments to boot_get_loadables()
+Message-ID: <20231115223747.GC6601@bill-the-cat>
 References: <20231112000923.73568-1-sjg@chromium.org>
- <20231112000923.73568-23-sjg@chromium.org>
+ <20231112000923.73568-24-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qdqPPnteonMcwNjc"
+ protocol="application/pgp-signature"; boundary="XddEE6wMaTV6NgZ3"
 Content-Disposition: inline
-In-Reply-To: <20231112000923.73568-23-sjg@chromium.org>
+In-Reply-To: <20231112000923.73568-24-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,15 +101,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qdqPPnteonMcwNjc
+--XddEE6wMaTV6NgZ3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 11, 2023 at 05:09:07PM -0700, Simon Glass wrote:
+On Sat, Nov 11, 2023 at 05:09:08PM -0700, Simon Glass wrote:
 
 > This function only uses two arguments. The 'arch' always has a constant
 > value, so drop it. This simplifies the function call.
+>=20
+> Tidy up the function comment while we are here.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 
@@ -118,22 +120,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---qdqPPnteonMcwNjc
+--XddEE6wMaTV6NgZ3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVSDMACgkQFHw5/5Y0
-tyytpQv9HPwU1noTMJqRbVgEWZ+miVOeiaBYErFf6/KijEYsYOHEcEAy63PBFnlx
-n7q5AZ0r2zdrFqVAuUmnuJiBAD6kngW5/ovFQPsQUon3bb2IawWHB01ucQJ88z36
-B95rfJy3bjjgc7qO17sYygjMgvtZeNCmW9EfOYix0af35X9jGW1r/y2JU6WwiBnG
-Kh9rs93BbdfhQOez1dZmT7kX7qtJG5jhJp60ZOCKsDTTiZb0PzQIlcq6AHgK8UJ0
-efXjnmMSuXMZqcCXR+L91b/fdQpX9UkJYyz2y0ntfPK+ssS22BBXeDjjYJFjwVMl
-rZ69cq0+QrHng9GLgycHBNM+qSJjEyKIYZ3otHDT+MzdkjgMi3YVhT/h/GcFVIdE
-gdn5OwkmrK3JdGT641OBlGQJU/xZ4FJKkZLHfB7gQ0VKEy6cTGjO5q3Qv8QhYeUi
-ms4/jfwod2heEhgYgLFtOWKuggPnAGBpH9PvjbGFV5gjQfTdz3MEOaW5dR5cLp0/
-SyPMmVrB
-=uUdi
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVSDsACgkQFHw5/5Y0
+tyxeHgv/QtxyFWaf2MX8LkmNwY7tKDjKEBoPRk5L1frk6euuJ6wY8XyD1LZtw87K
+hjFu1nOsKc/gs5/JPFWrNXhclkbyRo0uJusWqzRadUQ7Ieii7St8iy3+Sp7OnOKb
+W5iOPNHeP0g1qwyZnXU9N+2DooTLnIsid+4jdY5J5ocCwdHR8mj/YNeGkwcGJ614
+6XZkpDxLvRPtswn6oG4Ps1XdBagleHS/W3pvpPgzq6zoKDr+KgDNA3WXPFrDHWUj
+Zp6MxOoOkdGBx/T8RxJ9PTWmEd+nAsGm6GFrGXsx2aoQyI+SZPFjeiRsxjT6o6Kt
+nnqPvUfd/TbiiHpxsQbXNq8IXgIjAkXE9lRj9WMqoxho+liZ2GJzAsObazSchagW
+6kV0dcYuTR6BeHLmqRbOEx/ngkfoDZv9Y1CbI+0EaRbagudiBHWn6P3MgJdQzcNm
+ueyj8WaI5zOo6xaRQ5V08GiJmr/5cZ7tLK8DRoXtkSmEo8kSHTBrmMX1u0YhP3bS
+vfxSF2Pe
+=eZTQ
 -----END PGP SIGNATURE-----
 
---qdqPPnteonMcwNjc--
+--XddEE6wMaTV6NgZ3--
