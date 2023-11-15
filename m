@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3058C47074
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 12:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17107C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 12:44:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E155A871D0;
-	Wed, 15 Nov 2023 13:44:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69C7387160;
+	Wed, 15 Nov 2023 13:44:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="fWlOHDJp";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="tnlfsUoN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7C58871D0; Wed, 15 Nov 2023 13:44:37 +0100 (CET)
+ id A500287203; Wed, 15 Nov 2023 13:44:39 +0100 (CET)
 Received: from EUR04-HE1-obe.outbound.protection.outlook.com
  (mail-he1eur04on0605.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:fe0d::605])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E86F986FB2
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 13:44:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C7AE87197
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 13:44:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=Christian.Taedcke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=R3wYcm6FU3GFA1rSOfmBUAoR6EwNJX+o6UH+jOffaa4ZVf9z5GjFG8EAT0nkys+HdeyMqAisG2AgnCSDX9qyP1xwP9r3pb0W0uARQ2PNbuw0Q2CWD1nPQpok21J3ro6+jccKGaAgaMLqp7+QlGIwkxLx+urV/xbua7PP7601cihqXIn5eEmoKqfJyu8UvdKbKY9qGo2M5F7Y2HsdUW0O6sJnSXJPB874rGyIe1uJ6Opud364I+/iFvfWjeLVXy5lQyvZrTdmVa8cO9F1p3Fnr55mHjBzXg/QgwZgTkuRLaazDpbw5uBIx6DV3ZOTWRiKRw86+YZeCG4zFHez24CIKA==
+ b=CD2Qd+bHvG3QqtX4DmPV3MdR7I2vH1aWsxCr+sOj2jnXHxIJjBMF7To6qFdPhYiuxT9ipfb+l/boFm4VipBMvw3246fMGgj6xyB5VZ0xJqcdf5HVOXa/EnTvSFewVlDFI+16kbxSPM0JQEVKLT/OdCaPF/fkOX4VHyQ7qzZ0/SWES1s6HfJf2rt/d+ftWeLLOT3AsmPQieJo0HltHJFtiYWqi337OSC3WfFvS0TUX5j6+3rTHiNbDZ5kkkK/3RRSyIS2fdW0cODbEy99y+QRx5IpKnZXdxWiQikCfxmfXXwsb9GsAmiBNt2PGkNOnXsqIFtMkbEzTGnjSYuSa4Zi0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MRX8i8FtgzzH84rGOHYXqam9Kuh47u0YWv6Fl+zBniU=;
- b=CxqS5RvbNJocBqgiaHl4jkkYgzuLAEFzByb2skNLZq70QvXhvly+Hi5NL5SpGFKEyeEqnk4MFfOd16Vanpx+F61mIgsQ9JjQFLMWBa1w/oE9Mi/tCvVTR+oCkTkHFvmyI7iNDHMHbWORcp4960TgBstIgSLxCX8CcjiHsQxWY5eJpjfVIrLadv7mIMK5q65ZjimfV/kcZ0dgdZpmTzRyEQd8LTphLUTKxjlkfBmw/uc0sUlqAYb1FC27eTqUSmwDheNZmu0jBzohVX2wGDtGLp5lxz7KpquER6fTJLaEpPduqCfA81roiV120JAvZFIdtf3XargFCF5jNqvEPQTuPg==
+ bh=bajOy97ohS/9FiAb2NXA5PlGBl2TXpLlxSJyQZkvc9k=;
+ b=HogFouxrUNiCEmOEeDi8LXT7gNq3O+TxluDsHwYxf+iyF/mrnvLCsSRQu273ULSQNaoSaWqIJMEXbMWjI9m96wWa745hKWHBzOhLIp3e/OxtRRhow6f+iMQ/rLS11BAudHMQHAUIMUlHm7RNo8ZvYfWWG7jHgW1cu8AFewK7PMsYgDrA8o+8IdLHK14/ekM0HMiUEUKueRmr9ESPyh1b7nfOuUknjrFIbM0EFPpK+EC1RHGOkTqiNGewo3TNadCXuQJsOAFqX8mVSMobuelPWpSSkz6v3IZChLOsBcgO2gPRBDpv8Q4Qo7Ov1FQhZ81TGu03kLO2NwqudsefacmcVg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MRX8i8FtgzzH84rGOHYXqam9Kuh47u0YWv6Fl+zBniU=;
- b=fWlOHDJpNwU2yihFZLUxFE9POWl2/2mcMJoBaty+1tccMbV1RTIYPBFMC0nsKk0Kqa0IgZDueboz1HmhXQ3SL1G5YYH2AtauJ4miC6NnSzN/qCtuTIDk3ovBQOyMvG6JpvWATkdyxEcLFg1JgFnXq6ygx3BcpkRU0EjiaO3l348=
+ bh=bajOy97ohS/9FiAb2NXA5PlGBl2TXpLlxSJyQZkvc9k=;
+ b=tnlfsUoN2j/mIgRx2MDZWis0zpGwp7x307W5IFwj4RFMQCtdcOsXiTP5NBz4VRjAxh0xT12ZeEcJk3X5Ke0Hglnt1HyRzKUEQqWyvJgDlSpUkxujFDHAw3U4tKlZvg2Rmbj9oy91JUcBNUUacmZ8Xx58/ChgF+ymLRzIsoF3Cq8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AM0PR08MB4946.eurprd08.prod.outlook.com (2603:10a6:208:165::13)
@@ -56,12 +56,10 @@ Received: from AM0PR08MB4946.eurprd08.prod.outlook.com
 From: christian.taedcke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Christian Taedcke <christian.taedcke@weidmueller.com>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 1/9] fs: fat: use get_unaligned_le16 to convert u8[2] to u16
-Date: Wed, 15 Nov 2023 13:44:16 +0100
-Message-Id: <20231115124424.125823-2-christian.taedcke-oss@weidmueller.com>
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 2/9] test: spl: Remove usage of FAT32_SIGN
+Date: Wed, 15 Nov 2023 13:44:17 +0100
+Message-Id: <20231115124424.125823-3-christian.taedcke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231115124424.125823-1-christian.taedcke-oss@weidmueller.com>
 References: <20231115124424.125823-1-christian.taedcke-oss@weidmueller.com>
@@ -73,53 +71,53 @@ X-ClientProxiedBy: FR3P281CA0021.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM0PR08MB4946:EE_|AS8PR08MB5911:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93943735-5ad1-4758-ff08-08dbe5d89ecd
+X-MS-Office365-Filtering-Correlation-Id: 883d3d2f-75b0-4687-fc09-08dbe5d89f0b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: F5HwgRQSp7doP7ZEXuzdRflKrp0MKBqx9DQIDm9PotU+ACYv42KaYIMV+iNt0UH5upF+wC/pbbkYgCGQEqGJNkhxmRw0ckgHQUxvl5ZyOoxKxkRiP0sha8gFakBR2I3NNnmjk3NaFs/Y2C9zZROQqCQ6hVfh1j+5M49LQVrzFvlAotjk1VTT2OgqtkqPpc3VTTwI2ojwm+v5/LywZJQAShbKfzUXKePbOjdbW/7L/f50PWxYjfIkZiDdkP4qgj2DwNTshsv1ZK23Dlr3HbydsgEnzQYui8fJqjMJVkoRWmlzU96m15MNI9SblJCB4iLEmrwQyC9d71c1BUx/PQNuDSXkUSrPs9U15tP92W+i3LAUwCjbg4+DeESWTfQwWtKBeFLsupVcn7ZcR6p4ydLHAWHMC22uHrxGIYq4v02NljpYA779uvzJx+c2yH4Mh9VXhXKijwWCyw8vFrYJVXfO9DX4g392crVwog4Doure0e5BNjd15Qk1+m6M+H1gPXGnqdohMOpwe+zfLQUhQUWspY+tB8cT5R0BfdaOHKU0H7BwEp32h3XfVIvcJv9gCLVH139Gaah5FD3IOnHJf8whNGCQJFJwe3kqqjeFKRu8AqYRXS80c0HqbCXM0RjUgKQi
+X-Microsoft-Antispam-Message-Info: k9nn/i87nMHKfLuNB1GLTMmMQ3sIfcRbaDI5Fo4Po6y2KzkRzE1av2SdkGwDuSZT4lkODQ+B1NOnSke+5SMTTncCEbp6cT/Mj35oODabX7xcYE61uuZB/725YlIpYhw4ZEiJLU2W/hkTVpcm8p7OUxrjdra289R4Oa3NLhcUQ6eqZtQKGS0UrYANdNrmHUKO2p/hfRvaInl3++8MnJMH4lOwN1ihlaBT3OKFy/2t6LU/0Ekg8c1pJQ225/X17Mvo755ATZXRb0i+ZfFow37fzPvPeAEL7HysDAjKYszipxMIusK9aU7awJMvtcDrj9FozCBnJC2tTdbvJcVpzZi+8kmWHhS3sgTP/nCzBv0/hwHNzGXU7yA4gJAP6KxOShkpUSZFrxIxrUVPZvWvZjgnNvmgkygkLYmkEdOj/5NL5wh4ssyLrcpDd00/pK+pNi9ucEolwqBl98X2fWFZbfk7Kqo+xxokSMoqQx1VWrW04Y2NUjTe4hEYadcOb62wbe/MlVG8gKNYLgMIQp0h8xS2+S1TK3qBaQJ4dccr6+/S3aNF3z4l/0nDfAlqoHbZOhhbp9mht/iL7uOD14CfOqHK/YFNaUJ7cHUbRaVSnBX+jSc=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR08MB4946.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(39860400002)(136003)(346002)(376002)(396003)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(38350700005)(66476007)(54906003)(66556008)(6916009)(38100700002)(316002)(66946007)(36756003)(86362001)(6512007)(83380400001)(9686003)(26005)(6666004)(6506007)(2616005)(52116002)(478600001)(2906002)(6486002)(5660300002)(41300700001)(8676002)(1076003)(4326008)(8936002);
+ SFS:(13230031)(366004)(39860400002)(136003)(346002)(376002)(396003)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(38350700005)(66476007)(54906003)(66556008)(6916009)(38100700002)(316002)(66946007)(36756003)(86362001)(6512007)(83380400001)(9686003)(26005)(6666004)(6506007)(2616005)(52116002)(4744005)(478600001)(2906002)(6486002)(5660300002)(41300700001)(8676002)(1076003)(4326008)(8936002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?aZTewlhS39bloxehAz+ED+JWJVQYR8/JVJvjkj1xPoafKbCpTrE8DWPc1foB?=
- =?us-ascii?Q?0x1ARZdAm5vcXX1qNXLFgLxzNpltzEpb6G5JV3s6HOiaZ/MCZbXwbMV24VeO?=
- =?us-ascii?Q?02Ae6xaXDy6gwiTt3tCWEWaZ5Kg7gDpW4zTENBMfRTQsd7n9ubyHFiF/E0I2?=
- =?us-ascii?Q?UpLzafeSKlRepnINp+IG3hexzZXEYzjoNp/cumsAK9wXr4GJmGuavLlXkvhK?=
- =?us-ascii?Q?p++r5UoNhPq57W9CL9IkDcdowVFHMxo3ozD1udjk8F/NDKlGaFUeUQld0pVL?=
- =?us-ascii?Q?472ouMr2bVPMP3FYicIy70CCkt7jT1Oy4/+ifNz2ytCUSW7aMg2QqdhZXa3U?=
- =?us-ascii?Q?JfwvwgONLCqejVnZ7czlbpc+ikL1cE05t1T2hMqznrPVeix41zeCeUK8VuzF?=
- =?us-ascii?Q?n1oMXhoACEe/Ky03FQiWRmewhEfy3Yhi5CXHDPhqBYxZ46vQCdetISOcqqml?=
- =?us-ascii?Q?T6cR6PnSFN90M45xZ9riYSu/1KfT9t4tmFsqocgZj/EzRj3HGWDB6LumThgN?=
- =?us-ascii?Q?yQh3s2k2y6U3ILO1nMOq7qq/ELUO/Wli2ZxxdtNifK7+z07WCPelaAWlbtPq?=
- =?us-ascii?Q?siRU+8b7ICLHPd7l3ewy72x4d39jio4WWAB2emikOQUmVdib1I4IVe9DMels?=
- =?us-ascii?Q?27tgE6NqyadGmABbeFivziGBkppoYyndR4TAOrEYNezruhonSOr1mRQzIZU3?=
- =?us-ascii?Q?Y/fHflbwirWQyGtOXv980em0XCMs1mlmmF3PZPkjWqm7o79iCkUSOLzVT6v8?=
- =?us-ascii?Q?BDn7YKw9hzPBfs/uyKCqwF5q1GWrC6Rm5phvf6DP0JvjySEcrRq7GE7o2RwE?=
- =?us-ascii?Q?Ubf9JEK/glatklRyvkv9ru/J74hNw0QqrApUEUYQImxWZPPklj2WHuKhfYRG?=
- =?us-ascii?Q?jzhcCrg5PjNRLxAOTnswA4xdcgoL4teNTWNmRPHw7jUGRK0aR6AR6S3BAI0p?=
- =?us-ascii?Q?/RA/ue4yLrgvvRp3vue1ojKMjQxVIwq+FzfcKI7Fniu17E3dDrCQJFuFnkc6?=
- =?us-ascii?Q?vuD2XVZcshxhKZa//Eli5JKVoHMYXmrY0i+wsm7cPTmKtaNCjI0hbf2oJ3Fq?=
- =?us-ascii?Q?azbmenhTgy8BnBs9CvG1X6eZ5lH7RDpkQWMLjIz1uOnY6U3+eAbRSfoB9bC8?=
- =?us-ascii?Q?V50NI67o5nannGxkypff7WFF9869Zl/br//Vd8S3NXgqjbFDfe4qhwVqLegr?=
- =?us-ascii?Q?C+Ft1uR0ZNkDnxDbmH+u0hbxr7a4jzhPYzgZTUPsOYb1u2LOcuzzcNakltTT?=
- =?us-ascii?Q?sMKtS+wyuz7mpUYGbXET7Qtf5pHymyW9h6Nd7FhrZsd4CJ7a5/QOE7TZFx3e?=
- =?us-ascii?Q?oZrrEWQkCgc42Z3KAQaOYDiPqqRfCOwCvgVpJuoc0rycMEKgtDegZ72UYrbl?=
- =?us-ascii?Q?cU36ZtuzHRzTjXmuuCGRz5MZRTamvsKO5UmitxSqDAkxiqQrjpgAHJuBj9Ia?=
- =?us-ascii?Q?rOj2vmTmqf/1q2SR+lvcuukM+fOFU2gBrZ8CfkvCQ9amIqHajCmsTiz/ZY9u?=
- =?us-ascii?Q?sT+xsilvcEQMTSdeuvLkGd3CyZIjL/0jgcQ5AtJt1duh/jU4oMeXK2r4kJ7s?=
- =?us-ascii?Q?v2I1UZnWJJePqVGtwWwzI7n5yGuCuP7MAfJKJXKFCerJQ5MzcS2l1FGXejjz?=
- =?us-ascii?Q?Qe3rjRykkCPVpe6GUT7QL/iyfx5WWXzKGwvaPSu88OV7?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0vncYr1X7kHBtjtcPUWsYZQXg6TqKuuHBff/zNc4SfzOFSsz42fdsvh/NzP8?=
+ =?us-ascii?Q?5b6jk9hXjyiSjhfimqUVgNjJdObWV2K4jGNj569+VnMYmowZzaYrhMvwthqg?=
+ =?us-ascii?Q?QXeKbMr/HRR+MfCyHvrnVDsG84O5P4JZse/H5A/Puhe4by6+2xURYCb3lypf?=
+ =?us-ascii?Q?wr7wNxhT+TTz6f3uTMPY/fMZENpNSb3F8lDkxFLILkhwbS4/WToJou2hXffq?=
+ =?us-ascii?Q?L80VsPtMjFWHsj78qXaBqdCODXJ5Bltjs6/bbQwlmslR+ArKVWo6gBZ2tewx?=
+ =?us-ascii?Q?ujqOJ/nFdS4MZhvkL39IZX0j0l/A98Lf6ttmx6UP/Jd23GhyfxnQnpY1nrLx?=
+ =?us-ascii?Q?ijvWUx62W77p3p+iSGgEeaWWzDoeOA2c/tewHSTElNEHC3vaIGlmTGFSiF/M?=
+ =?us-ascii?Q?EhrqHgp/m1MVzyG6qSm2MV7F25e2zm9qGhvETB9TdDBiPtf4iAs2oSfFpTQY?=
+ =?us-ascii?Q?UxKn9BonSYnltcb2m1I7AyYreJDm1S56tRTGWn7mL9eV/70A2kFUW4H+yITW?=
+ =?us-ascii?Q?hjbZNtkUPe65oE3QxIHQ1RbZJuLeAt6vDqBAMeJGaLxReup+04di8/JKq7Wy?=
+ =?us-ascii?Q?tP9GtQX5LQj/W2FnKBZgRwCTMeLy/cVMYZD3UPiIfyJM4o44AmFkqnZZCFRk?=
+ =?us-ascii?Q?RWXDbU/pYOgJebS7XWlDA9gZnOZI/geljPkvw3NlflvId97r4mLgCvsYFVlP?=
+ =?us-ascii?Q?UjAI3mjNn+F5NOK+epGFdfgnY6CLbKYZcNiu4foTj7laIkXjXZVF4WvFDjxj?=
+ =?us-ascii?Q?zuO6e0Vbq0zGK1ZXrTz9zPTP1ymtMGQ3FC9OITDSRA2cXxq9NvKUQWqUs1Gx?=
+ =?us-ascii?Q?ned1vOARPYmHYt1ynYcb3/L2n4WSK7kNaibeT3Biqys3FmV/pjGjnR6Q+P6W?=
+ =?us-ascii?Q?avs0OBmTnuv3v5rfF3QBGYqwOwdchO9lgqvZ8xwru663VcW4ewF2lUZXhieL?=
+ =?us-ascii?Q?idnGPdGHvO51cww1HnklFqJCxZddV+ndqixsgjILsR275PQBU9kN8TZ4oDfg?=
+ =?us-ascii?Q?XOlMP5IQVm7/mzDOCTUK+9htk0O3ozc0im7dN+D2z068EpcS2c3w0ApNcaqH?=
+ =?us-ascii?Q?TNBEO39WFUnhvfmFJG+e+OpQxLMpgZPjzk396vMr9m8Y73936vTpFBoKs/DN?=
+ =?us-ascii?Q?TySizvU89EDUfK4yph9xg3gYbEdotWIXLSlJcIzONQ3ZVES5DfqS+fwDEcS5?=
+ =?us-ascii?Q?bnbUvdBoVzETnSlKynK1ZjhawgLa/my3A9zG7nGjLeaFMb+KiJJ4jolCUw9Z?=
+ =?us-ascii?Q?vk2zqWZ87w6/8fSn4+qtMQEk3AJx2YKnTb6WOpGq0gXLWntLy5z+4yFmOjV6?=
+ =?us-ascii?Q?4Nkx+6bg8zzbKjMZnAYWGGg6AWQCelS7TueBFLAvJ7ZzhjAKvWj4o2TPOE+A?=
+ =?us-ascii?Q?Gxibr4ZGRwmRatuvvku50QBjLbgPUrvZVlv8XYuVoMQE07H22l61sPS8wj5G?=
+ =?us-ascii?Q?Ldz/fAm0OEipZ01CdxplAxHD7M2C65+Lz9PHGayAV5c7nkNEFbcpd53JghSX?=
+ =?us-ascii?Q?Wg0Tj1MTepyheexHISPBcOv0lTT34IeS8+6h2pUPYXQoWyP82Tm1exCpICQ9?=
+ =?us-ascii?Q?Jesc1SjeNGNIKLavT5/1GjvV+Hd7t+P/rDN6J0Gu2HJlMJV/pZ0HJGFRuitL?=
+ =?us-ascii?Q?PLVRyZ1aUkKx+A5+zes+7tSwirVoIi3oSQ19Qf3Bv9ra?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93943735-5ad1-4758-ff08-08dbe5d89ecd
+X-MS-Exchange-CrossTenant-Network-Message-Id: 883d3d2f-75b0-4687-fc09-08dbe5d89f0b
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR08MB4946.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2023 12:44:34.4548 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2023 12:44:34.8249 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: f5os2p6mIoM/Nn9OHPvNlE5YstCAXEkmQBq+Br/GSNVhwTHnEliUkZsSNwMTvoYV2MtWRH0WXEfoQ02yYFPp3YUiXM4vov2WCr64Y6IO8YmTnaESTgS/arcluxWByDnk
+X-MS-Exchange-CrossTenant-UserPrincipalName: vDijgg9/qU8cItSn8uvecg+luQdNM5BKoHurj/KlEYCp5v4p8HydL2aTrDmLs2GAB2CXvdjFRDs7DslVO8H8/mf6HO5Pgho0ZF/0jezVOvqlNcu7F7azjBZITGgC3yA1
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB5911
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -139,7 +137,7 @@ X-Virus-Status: Clean
 
 From: Christian Taedcke <christian.taedcke@weidmueller.com>
 
-This reduces code duplications.
+FAT32_SIGN is removed in the following commits.
 
 Signed-off-by: Christian Taedcke <christian.taedcke@weidmueller.com>
 ---
@@ -147,51 +145,24 @@ Signed-off-by: Christian Taedcke <christian.taedcke@weidmueller.com>
 (no changes since v2)
 
 Changes in v2:
-- Use get_unaligned_le16 instead of custom macro
+- Move code change in test/image/spl_load_fs.c into separate commit
 
- fs/fat/fat.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ test/image/spl_load_fs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 8ff1fd0ec8..a3522340ef 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -18,6 +18,7 @@
- #include <fs.h>
- #include <log.h>
- #include <asm/byteorder.h>
-+#include <asm/unaligned.h>
- #include <part.h>
- #include <malloc.h>
- #include <memalign.h>
-@@ -571,7 +572,7 @@ static int get_fs_info(fsdata *mydata)
- 		mydata->total_sect = bs.total_sect;
- 	} else {
- 		mydata->fatlength = bs.fat_length;
--		mydata->total_sect = (bs.sectors[1] << 8) + bs.sectors[0];
-+		mydata->total_sect = get_unaligned_le16(bs.sectors);
- 		if (!mydata->total_sect)
- 			mydata->total_sect = bs.total_sect;
- 	}
-@@ -583,7 +584,7 @@ static int get_fs_info(fsdata *mydata)
+diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
+index 297ab08a82..90e640b5de 100644
+--- a/test/image/spl_load_fs.c
++++ b/test/image/spl_load_fs.c
+@@ -220,7 +220,7 @@ static size_t create_fat(void *dst, size_t size, const char *filename,
+ 	bs->root_cluster = cpu_to_le32(root_sector);
  
- 	mydata->rootdir_sect = mydata->fat_sect + mydata->fatlength * bs.fats;
+ 	vi->ext_boot_sign = 0x29;
+-	memcpy(vi->fs_type, FAT32_SIGN, sizeof(vi->fs_type));
++	memcpy(vi->fs_type, "FAT32   ", sizeof(vi->fs_type));
  
--	mydata->sect_size = (bs.sector_size[1] << 8) + bs.sector_size[0];
-+	mydata->sect_size = get_unaligned_le16(bs.sector_size);
- 	mydata->clust_size = bs.cluster_size;
- 	if (mydata->sect_size != cur_part_info.blksz) {
- 		log_err("FAT sector size mismatch (fs=%u, dev=%lu)\n",
-@@ -607,8 +608,7 @@ static int get_fs_info(fsdata *mydata)
- 					(mydata->clust_size * 2);
- 		mydata->root_cluster = bs.root_cluster;
- 	} else {
--		mydata->rootdir_size = ((bs.dir_entries[1]  * (int)256 +
--					 bs.dir_entries[0]) *
-+		mydata->rootdir_size = (get_unaligned_le16(bs.dir_entries) *
- 					 sizeof(dir_entry)) /
- 					 mydata->sect_size;
- 		mydata->data_begin = mydata->rootdir_sect +
+ 	memcpy(dst + 0x1fe, "\x55\xAA", 2);
+ 
 -- 
 2.34.1
 
