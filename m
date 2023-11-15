@@ -4,76 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75732C47063
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:19:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBF6C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:19:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70B528746E;
-	Wed, 15 Nov 2023 14:17:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 10564871F0;
+	Wed, 15 Nov 2023 14:19:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dj5VAr9x";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I5x+bGyE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FC7387227; Wed, 15 Nov 2023 14:17:11 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 14D658721C; Wed, 15 Nov 2023 14:19:42 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5629B86366
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:17:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E0AE386366
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5441ba3e53cso10169363a12.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:17:09 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9c603e235d1so1001612966b.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:19:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700054229; x=1700659029; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=R0xJlnnCbhxUFsvMAwVQKb8gHtrOrQ+YqvZMRXvxxyM=;
- b=Dj5VAr9xQLXoOfZ22nWMNz+jKrLEdFkDUGxmIo8Y9ehQfPznoRSH0sYYfpDpfmXQPV
- Bt6DQgBTd6do/qX0awAPNV1IPn4p4QKw1Y1EwvZdmC+p0qc558tS3ZZS50wO7Tw8jId2
- /e4C3r4DRcnIHUSEFonG6cH3Knqu3zpLq7zoQ=
+ d=chromium.org; s=google; t=1700054378; x=1700659178; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=L9MW6AcSpjg+QEj7eXD476aNqEAdwEj0xnxIaVFVN7k=;
+ b=I5x+bGyE9Ww/F7ZMa6vfR2WzTEFV/e/dGZKv61HrjURQW+qWY57wsrRKcpUDDOv3t+
+ TAA69LGpzBsPS9uC1MJeEGzseHd8+IrS27A90jTYjF8n9mdqgsPMXcyupdEueolSStVG
+ TvbNCAcOyhTqUZZleXd7c5LkuwWTZ9WPx+Drw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700054229; x=1700659029;
- h=content-transfer-encoding:cc:to:subject:message-id:date:references
- :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=R0xJlnnCbhxUFsvMAwVQKb8gHtrOrQ+YqvZMRXvxxyM=;
- b=TIIopJyOttwlDvLRcmW3btu5qTm5EeXprn7IvnOWwkIKfPS3BbEZJDwvcLcLLTyOta
- t00cqzlv4vbd4HJooe+FfZNdEQVoao42B6x1k4tz+xzqwh2p+rUpaO1Rz7demuaezIGS
- zUrR6mrpaIY+sfoWPGhaA4fqpS/EG/mlcZPvEEdVd58Nu8SQuKn7qGVeVeTGGacbKPwS
- 6AEyboc7h/MzhjqGBf98ovO5+iPDbYU5K0tvFsdkhSSGi2saDy8zsrmSB3gZ/psv4nWW
- zLjxZ0cnoBFztDXxFQai+pgJr/5w7K5bREtRXDlWcnfzcLwxpFcvc1YDnNCc0uyUkco+
- eAjg==
-X-Gm-Message-State: AOJu0YxXV7XtzPApo1NKsH6/0eJmDQIpV3r6jdDu+RmYr7TowUtZddnJ
- q4iRvEzHDCjbNPhcp65oDWAkEt+I8hZMBVfKU4XjGA==
-X-Google-Smtp-Source: AGHT+IGpCdguhv+Rd+WtBDERPZp44kUUTowGHber/qwcCjv/x7clQEHZWdXzESrZGfcREvcdBjbhQ8iFJhcxBE23+KQ=
-X-Received: by 2002:a17:906:7943:b0:9a5:874a:9745 with SMTP id
- l3-20020a170906794300b009a5874a9745mr11622400ejo.26.1700054228720; Wed, 15
- Nov 2023 05:17:08 -0800 (PST)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Nov 2023 05:17:07 -0800
+ d=1e100.net; s=20230601; t=1700054378; x=1700659178;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=L9MW6AcSpjg+QEj7eXD476aNqEAdwEj0xnxIaVFVN7k=;
+ b=R6SlQjC/qMVJlfcWfyH/C9QWLUqtaRFetHOseOIlglHv/p/bMbB/EAhJrWohVHkJ0f
+ eSzB3sClzawagTKcDCTvq2BY4DjmakQlAat9AQVdd0dskU+c1PYmdd5JPQewJxFaFm1F
+ SbYkjfDV5p15nOFbf9rfEQGcYRDW4SShcwDUXyWMz0plLfboaxJYq/Z93vvhEYSvY8Ul
+ HKs9udMKXnsVZAMMrZOSVyv0WOOm/jAqTNuY5emcHOgcJ72/si4QmJ+kcQkLtBIoYizB
+ Kej/oprS0PrlT8hyGx4FVoHsq7LiL9doZ1z/Ogg+VMxNCOajGF3AthTxAC6t3kN6IihD
+ O0Gw==
+X-Gm-Message-State: AOJu0YwYGxXo9cFkmb1jhOjFP3MiDwUDgBKDPh+D+nhqYroGnj/W21iP
+ VjvbBslAAfGO8Dd/dhL+WXnv2j+YqnkwbewxfJUVpCN0A9oQokc4PRACwQ==
+X-Google-Smtp-Source: AGHT+IFVgCr2I0OdrR2ENouBzFMobLQS/9RDX/Lnmkjpeu7G2t29yrYCEoih68qV6x4nLXqXzQucneYioY0txdMCVO0=
+X-Received: by 2002:a17:906:370f:b0:9e5:d313:fee7 with SMTP id
+ d15-20020a170906370f00b009e5d313fee7mr9083970ejc.50.1700054377919; Wed, 15
+ Nov 2023 05:19:37 -0800 (PST)
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAEUhbmXs+r6Rngsv91ku4FWpq59w8Wq=PjX_sGdHjkaY4md8wA@mail.gmail.com>
-References: <CAEUhbmXs+r6Rngsv91ku4FWpq59w8Wq=PjX_sGdHjkaY4md8wA@mail.gmail.com>
- <20231002011450.462468-1-sjg@chromium.org>
- <20231001191444.v3.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
-Date: Wed, 15 Nov 2023 05:17:07 -0800
-X-Google-Sender-Auth: Tz_0DmDDOzK7A65aCyd-0ZV0auc
-Message-ID: <CAPnjgZ3-rRTiLs40ub7sRA52-r1bBoXMDdMAt_21pm5HU-RU-A@mail.gmail.com>
-Subject: Re: [PATCH v3 01/12] efi: Correct handling of frame buffer
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, 
- Anatolij Gustschin <agust@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Nov 2023 06:19:26 -0700
+Message-ID: <CAPnjgZ3V6qnjrKS+XL95LS-iLJv2VU3g5Us=DHJmpHT7xRC+cA@mail.gmail.com>
+Subject: Please pull u-boot-dm
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +77,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 2, 2023 at 10:23=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> The efi_gop driver uses private fields from the video uclass to obtain a
-> pointer to the frame buffer. Use the platform data instead.
->
-> Check the VIDEO_COPY setting to determine which frame buffer to use. Once
-> the next stage is running (and making use of U-Boot's EFI boot services)
-> U-Boot does not handle copying from priv->fb to the hardware framebuffer,
-> so we must allow EFI to write directly to the hardware framebuffer.
->
-> We could provide a function to read this, but it seems better to just
-> document how it works. The original change ignored an explicit comment
-> in the video.h file ("Things that are private to the uclass: don't use
-> these in the driver") which is why this was missed when the VIDEO_COPY
-> feature was added.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
-> ---
->
-> (no changes since v2)
->
-> Changes in v2:
-> - Rebase to -next
-> - Add some more comments to the header file
-> - Add fixes tag
->
->  include/video.h          |  9 ++++++---
->  lib/efi_loader/efi_gop.c | 12 +++++++-----
->  2 files changed, 13 insertions(+), 8 deletions(-)
->
+Hi Tom,
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/18586
 
-Applied to u-boot-dm, thanks!
+https://dev.azure.com/simon0972/u-boot/_build/results?buildId=55&view=results
+
+
+The following changes since commit 92b27528d777ce85362af45e7d2974a6c856219b:
+
+  Merge branch 'master' of
+https://source.denx.de/u-boot/custodians/u-boot-sunxi (2023-11-12
+16:36:52 -0500)
+
+are available in the Git repository at:
+
+  git://git.denx.de/u-boot-dm.git tags/dm-pull-15nov23
+
+for you to fetch changes up to 0d4d9f94c555577f78cddc372c307465fc92413e:
+
+  bootstage: Correct exhasuted typo (2023-11-14 20:04:01 -0700)
+
+----------------------------------------------------------------
+patman correct import of u_boot_pylib
+correct long-standing EFI framebuffer bug
+minor test refactor
+
+----------------------------------------------------------------
+Heinrich Schuchardt (1):
+      dm: Do not enable debug messages by default
+
+Sean Anderson (1):
+      sandbox: Close file after mmaping it
+
+Simon Glass (10):
+      efi: Correct handling of frame buffer
+      bootstd: Refactor mmc prep to allow a different scan
+      bootstd: Add a return code to bootflow menu
+      expo: Correct background colour
+      patman: Split out arg parsing into its own file
+      patman: Move the main program into a function
+      patman: Correct easy pylint warnings in __main__
+      patman: Avoid using func_test at top level
+      patman: Correct Python 3.6 behaviour
+      bootstage: Correct exhasuted typo
+
+ arch/sandbox/cpu/os.c      |  15 ++--
+ boot/expo.c                |   4 +-
+ cmd/bootflow.c             |  53 ++++++++---
+ common/bootstage.c         |   2 +-
+ doc/usage/cmd/bootflow.rst |  67 ++++++++++++++
+ drivers/core/Kconfig       |   1 -
+ include/dm/util.h          |   4 +-
+ include/video.h            |   9 +-
+ lib/efi_loader/efi_gop.c   |  12 +--
+ test/boot/bootflow.c       |  64 +++++++++++--
+ tools/patman/__main__.py   | 254
+++++++++++++++++------------------------------------
+ tools/patman/cmdline.py    | 147 ++++++++++++++++++++++++++++++
+ 12 files changed, 413 insertions(+), 219 deletions(-)
+ create mode 100644 tools/patman/cmdline.py
+
+Regards,
+Simon
