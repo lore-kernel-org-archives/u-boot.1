@@ -4,37 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B796C072A2
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 17:40:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9012CC072A2
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 17:40:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFA7887446;
-	Wed, 15 Nov 2023 18:40:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4F1498745B;
+	Wed, 15 Nov 2023 18:40:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78CEA87444; Wed, 15 Nov 2023 18:40:43 +0100 (CET)
+ id BE1DE8718B; Wed, 15 Nov 2023 18:40:43 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 41D1F8718B
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:40:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 7D0F787278
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:40:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,305,1694703600"; d="scan'208";a="183039312"
+X-IronPort-AV: E=Sophos;i="6.03,305,1694703600"; d="scan'208";a="183039315"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 16 Nov 2023 02:40:37 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 16 Nov 2023 02:40:40 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.122])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id D047540342C9;
- Thu, 16 Nov 2023 02:40:35 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 1628540342AD;
+ Thu, 16 Nov 2023 02:40:37 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PATCH 0/5] Add i2c and reset support for Renesas RZ/G2L
-Date: Wed, 15 Nov 2023 17:40:20 +0000
-Message-Id: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 1/5] clk: renesas: Confirm all clock & reset changes on RZ/G2L
+Date: Wed, 15 Nov 2023 17:40:21 +0000
+Message-Id: <20231115174025.12974-2-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -53,58 +56,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series extends the support for the Renesas RZ/G2L SMARC EVK
-board (based on the R9A07G044L2 SoC) to include the following new
-features:
+When enabling/disabling a clock or reset signal, confirm that the change
+has completed before returning from the function. A somewhat arbitrary
+100ms timeout is defined to ensure that the system doesn't lock up in
+the case of an error.
 
-  * I2C bus support, including automatic deblocking if SDA is stuck low
-    due to another device on the board.
+Since we need to dynamically determine if we're waiting for a 0 bit or a
+1 bit, it's easier to use wait_for_bit_32() than readl_poll_timeout().
 
-  * Basic PMIC support, with the ability to read, write & dump PMIC
-    registers.
+This change is needed for reliable initialization of the I2C driver
+which is added in a following patch.
 
-  * Support for requesting system reset (SYSRESET_COLD or
-    SYSRESET_POWER) via the PMIC.
+Fixes: 1918ff5c95be ("clk: renesas: Add RZ/G2L & RZ/G2LC CPG driver")
+Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+---
+ drivers/clk/renesas/rzg2l-cpg.c | 17 +++++++++++++----
+ 1 file changed, 13 insertions(+), 4 deletions(-)
 
-Along the way we fix the CPG driver to confirm all clock & reset changes
-before returning, and update the device tree to align with Linux 6.6.
-
-This series has been tested on RZ/G2L hardware, and the full u-boot
-GitLab CI pipeline has been executed in our internal GitLab instance.
-
-Paul Barker (5):
-  clk: renesas: Confirm all clock & reset changes on RZ/G2L
-  arm: dts: rzg2l: Sync with Linux v6.6
-  i2c: rzg2l: Add I2C driver for RZ/G2L family
-  pmic: Add Renesas RAA215300 PMIC driver
-  sysreset: Support reset via Renesas RAA215300 PMIC
-
- arch/arm/dts/r9a07g044.dtsi               |  16 +-
- arch/arm/dts/r9a07g044l2-smarc.dts        |  21 +
- arch/arm/dts/rz-smarc-common.dtsi         |   4 +-
- arch/arm/dts/rzg2l-smarc-pinfunction.dtsi |  20 +
- arch/arm/dts/rzg2l-smarc-som.dtsi         |  22 +-
- arch/arm/dts/rzg2l-smarc.dtsi             |  23 +-
- arch/arm/mach-rmobile/Kconfig             |   1 +
- board/renesas/rzg2l/rzg2l.c               |   8 -
- configs/renesas_rzg2l_smarc_defconfig     |   7 +
- drivers/clk/renesas/rzg2l-cpg.c           |  17 +-
- drivers/i2c/Kconfig                       |   7 +
- drivers/i2c/Makefile                      |   1 +
- drivers/i2c/rz_riic.c                     | 626 ++++++++++++++++++++++
- drivers/power/pmic/Kconfig                |   9 +
- drivers/power/pmic/Makefile               |   1 +
- drivers/power/pmic/raa215300.c            |  52 ++
- drivers/sysreset/Kconfig                  |   6 +
- drivers/sysreset/Makefile                 |   1 +
- drivers/sysreset/sysreset_raa215300.c     |  58 ++
- 19 files changed, 873 insertions(+), 27 deletions(-)
- create mode 100644 drivers/i2c/rz_riic.c
- create mode 100644 drivers/power/pmic/raa215300.c
- create mode 100644 drivers/sysreset/sysreset_raa215300.c
-
-
-base-commit: 92b27528d777ce85362af45e7d2974a6c856219b
+diff --git a/drivers/clk/renesas/rzg2l-cpg.c b/drivers/clk/renesas/rzg2l-cpg.c
+index e54508c35ce2..dba009997a81 100644
+--- a/drivers/clk/renesas/rzg2l-cpg.c
++++ b/drivers/clk/renesas/rzg2l-cpg.c
+@@ -23,10 +23,18 @@
+ #include <linux/iopoll.h>
+ #include <reset-uclass.h>
+ #include <reset.h>
++#include <wait_bit.h>
+ 
+ #include "rzg2l-cpg.h"
+ 
++/*
++ * Monitor registers for both clock and reset signals are offset by 0x180 from
++ * the corresponding control registers.
++ */
+ #define CLK_MON_R(reg)		(0x180 + (reg))
++#define RST_MON_R(reg)		(0x180 + (reg))
++
++#define CPG_TIMEOUT_MSEC	100
+ 
+ static ulong rzg2l_cpg_clk_get_rate_by_id(struct udevice *dev, unsigned int id);
+ static ulong rzg2l_cpg_clk_get_rate_by_name(struct udevice *dev, const char *name);
+@@ -83,9 +91,9 @@ static int rzg2l_cpg_clk_set(struct clk *clk, bool enable)
+ 		value |= BIT(mod_clk->bit);
+ 	writel(value, data->base + mod_clk->off);
+ 
+-	if (enable && readl_poll_timeout(data->base + CLK_MON_R(mod_clk->off),
+-					 value, (value & BIT(mod_clk->bit)),
+-					 10)) {
++	if (enable && wait_for_bit_32(data->base + CLK_MON_R(mod_clk->off),
++				      BIT(mod_clk->bit), enable,
++				      CPG_TIMEOUT_MSEC, false)) {
+ 		dev_err(clk->dev, "Timeout\n");
+ 		return -ETIMEDOUT;
+ 	}
+@@ -420,7 +428,8 @@ static int rzg2l_cpg_rst_set(struct reset_ctl *reset_ctl, bool asserted)
+ 		value |= BIT(rst->bit);
+ 	writel(value, data->base + rst->off);
+ 
+-	return 0;
++	return wait_for_bit_32(data->base + RST_MON_R(rst->off), BIT(rst->bit),
++			       asserted, CPG_TIMEOUT_MSEC, false);
+ }
+ 
+ static int rzg2l_cpg_rst_assert(struct reset_ctl *reset_ctl)
 -- 
 2.39.2
 
