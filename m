@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01353C2BB3F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB7E6C5ACB2
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 22:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C4BE8749D;
-	Wed, 15 Nov 2023 23:38:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C404B871E7;
+	Wed, 15 Nov 2023 23:47:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oOAvvPU4";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="SVwp/sus";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE6F6874AB; Wed, 15 Nov 2023 23:38:24 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 04A1D87206; Wed, 15 Nov 2023 23:47:02 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 833398749D
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:38:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CADAE871E4
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 23:46:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-db057de2b77so129740276.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:38:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700087901; x=1700692701; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D3tFbSadrpf3iPTBBN3s8UpYmCCoUh5BOExZdL4JnZw=;
- b=oOAvvPU4VlPbIacP8yNOIqZXpsM0lhWb1laK0KsCQbK7hb/Id7d80FbAKvKdNaa7ZU
- /SQv8/jJ653GCMks1Zf2R6vmvv5KAQOW6vitDrUj39O/Nt4RUFQImxBkXFbxYZWRJ2yb
- seyax7FPa2LDi3ctonkPirIUOlZvN3+Ne7I94=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700087901; x=1700692701;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D3tFbSadrpf3iPTBBN3s8UpYmCCoUh5BOExZdL4JnZw=;
- b=ToOnU7ExPo/G1wl1cFVgzRN4skUBsKmfqsri3LDIOa+zZRPIGQzQwLs7gmaJIdNsJr
- UZK0roAhN+jIkiNDZRvINw5mcvO6VJgqjGHRwza8ezN54sPibuNRtXRI3xtAQp47aFBR
- mjuLNhMvo5DE+OomIqhXS9ZisTxf8vldcTAAWuonniG5y+QLfA4rW2TlnYTmZHy2kF8S
- tUKc785iQAtSe4NcYhUlBovzDPEODkTcPPJykf89Zx78NSJAuhnSNFplFBuCZEuBvOtb
- TSW0IHepFAuHhbtcy/9d8DQelC+BLUiuPHmEVhtV/G/dCWlEE1E/G06u87TeMi4ukmld
- Z70A==
-X-Gm-Message-State: AOJu0YwBZVrk/xt8BGrDU9OwjPPHc19zRrBD0j/c+Tcyy9MTvEfUijfR
- +S17gEBEjWJR4JVcElM4TToUT7rgJwf4TtZZ1iXWiw==
-X-Google-Smtp-Source: AGHT+IGvajGkPTDAdWlooHLk5Mx5kXqmt+mafbSao9KNhskT7KECzZy9PDJhMQT/2Da6ivNsjp20wQ==
-X-Received: by 2002:a25:58c1:0:b0:da0:ce05:ca2c with SMTP id
- m184-20020a2558c1000000b00da0ce05ca2cmr11736189ybb.7.1700087901104; 
- Wed, 15 Nov 2023 14:38:21 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
- [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
- by smtp.gmail.com with ESMTPSA id
- jh3-20020a0562141fc300b006779f7e68c9sm880739qvb.134.2023.11.15.14.38.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 14:38:20 -0800 (PST)
-Date: Wed, 15 Nov 2023 17:38:18 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-dm
-Message-ID: <20231115223818.GH6601@bill-the-cat>
-References: <CAPnjgZ3V6qnjrKS+XL95LS-iLJv2VU3g5Us=DHJmpHT7xRC+cA@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700088418; x=1700693218; i=xypron.glpk@gmx.de;
+ bh=DsbWnnJAfqQpPZCyV/Wy/HAVqYTzSvBhe98X/THzd7k=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=SVwp/susaSOBNRImrspeTEk12NitZSBuVGdzucAYyTsLEapWD9e26Hnv75gZ7uER
+ Nngy+40SYCGGgweZME6d8WW+2H35mzCrpPPZ9le9IyWHY4TSIzrzcrGZBht0vFFQj
+ Fiy5SeaMl7PPecqq7xzCmZI9X9N2dW2bL2vLevfrHknaVDe3F72IOfDKW3/QlJp0C
+ 41GtZOXs+yA+iwi9kpFDtMMvaC6a8ltV0TGKEnYunkQ33SQMnjt+7sucGw37EoU5p
+ XSA7M+R5qj0LBWrR5XilzoVdmW0auLug/hmamUKb3QQX7WFKvwiALCcmNt3Iac/Qk
+ 2o2qH7a6GyWpLzAtig==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2f5T-1r4lZd0pPr-0049O9; Wed, 15
+ Nov 2023 23:46:58 +0100
+Date: Wed, 15 Nov 2023 23:46:56 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>
+CC: u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_bug_-_bootflow=3A_grub_efi_crashe?=
+ =?US-ASCII?Q?s_when_bootflow_selected_explicitly?=
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAPnjgZ3V65sCuRV_NzJFZHL7-ZHq9SQUTxvvbj5GszFAhJ4WzA@mail.gmail.com>
+References: <CAHc5_t2hrverfcsEEahUcRkcjrnF3jr0oyds2yo0RBVMB7E01g@mail.gmail.com>
+ <CAPnjgZ1-_ohZaVwMGtTDt4-W--2q0AM2KPtX9RLgAbMEhMRugw@mail.gmail.com>
+ <CAHc5_t1icj6d82GH+FK8qGg3MvDkpwEicH964ULcN971_=aSKg@mail.gmail.com>
+ <CAHc5_t2vLU9gHufMS_Fjv6j5+E8ksgCCLzKQ7NxTHzJsdcmsNQ@mail.gmail.com>
+ <CAPnjgZ3VY_M+zd2na+N9WCxj-L2F+KKhLgykQ21FTA7GPVrKNQ@mail.gmail.com>
+ <CAHc5_t1fBzzpJaQed9kcKF92ProStsutmOBW-1jmi5vWFvLM8g@mail.gmail.com>
+ <CAPnjgZ3WNmnNv7DjMFDM9Med3yRng32N6tku4NGxbwA5DRhQgA@mail.gmail.com>
+ <CAHc5_t1H39YV=HSSa7TCEdzRctAX+zibkx1vsuwEW-raOL9TcA@mail.gmail.com>
+ <CAPnjgZ3V65sCuRV_NzJFZHL7-ZHq9SQUTxvvbj5GszFAhJ4WzA@mail.gmail.com>
+Message-ID: <CAC53B67-9BC2-4EB4-9846-F78166140BD0@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="L7CO0Vo331Q+8GM4"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3V6qnjrKS+XL95LS-iLJv2VU3g5Us=DHJmpHT7xRC+cA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:2GdLG9s2ogQFk5qwy4RLk6qBsTVilenw4soAOyEP5x8lkekLPqB
+ lyhWsaUhBv9EU6FLbPU4ZWBE8gnoVOMqHv7rX6BdWx4no0pq9Ut9JKv/pFsNW9wR2dkkbr0
+ bwKop5XAttuN3sUCOBrxCPLkTqJlimUXwN7piAmi2qwMFS3ZwDh0lbJDCyCjlNB79LHRpyE
+ jjJ3WA2wrTsRzifHCvNpg==
+UI-OutboundReport: notjunk:1;M01:P0:tgFEdbqj4tQ=;e2bR6sB1PqeiL9qF32IZRevEjVk
+ PUAeqTYbZcQHsSMwMaodTcH7qa/LfPzz9prX+IYrM6djuDimoR0imCB88OwFVrcCFlZuT5ik6
+ XIo4HvpC6lKBPC8/PlDdJlfQbzAYsf+B55gN8lsMZjCwZLVnNw8BRxFVyimjqfP/I6jLurDNx
+ LTbMe3ZhO6cXw6V64q6NIEx41EjSXH4qNw5Z9pWShK7WINSM6FQoB8Qf5Xf8HeowfelN1Z+zR
+ G7jFDZ8YRpxV28pDmgSetDTpAOj4iez+gIPg/ED5VUeq7lPCsp7ju/3ll18DtClfH4d7HW2aZ
+ L0ZCO8wWmRq+z7xZuL/EHTiMT+I1SwJLs0HHm934YiR9sKX+5zVNO9esGTUB4MlDNc7kK5JOC
+ kJmqvdA338pLF/y7vQyMUOhS1A7GTtkGnq9n1IjjBtviAEgUyvyUQZsrRTxIR6dRneLq9LBso
+ pE5mziIOfuzGPASeEnRqwkdRipXnw/8/9Qkprs1OCk9WqGPhytOxOmWH+E9z0kewWaV4xjCUy
+ 4IrXZ0Yl6wMOee22Og/LVcKSCm2ktzFq6C5idfwLfuNTUuEOPGjRVdHyneGa8yedeDT8zEkBB
+ WPbsB44UY5PerC9owLn80hFNYA2PPoqbzcigcrgSIsqbEclEckVGvktolJsjaCmoJV7lkgp53
+ aqkTC7iVJ0jLAssYPqmOG9slZ+rTjMF5mf29hwn+zXp0/p4UqpFE9tEZ8ijwt7vzNRNIlNjLG
+ bXQ4g+1ZkY9LO16S13qK9h1Vw5l2XUZ6gG6KgB2YcCmeMZaqPEWmEe/vSklUtJjDbw9ENTJqh
+ WWQzHiyFMqKer2P82JD0dxz6nfwFS40UapTXUxk+zSZsgJQZbHtHXNJTv8Lu8SvnUK5wj4yqY
+ J9KNrRJMdcbe4KtSnidAbLe6nvMFY8jGYp1dEZurllZ1TsJPzQ9z51mwpaxw1If+GkxiTEi43
+ Ud53ISqdriWYi9XrP+dKB6Af7SY=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +98,94 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---L7CO0Vo331Q+8GM4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 15, 2023 at 06:19:26AM -0700, Simon Glass wrote:
+Am 15=2E November 2023 23:15:46 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
+g>:
+>Hi Shantur,
+>
+>On Wed, 15 Nov 2023 at 15:13, Shantur Rathore <i@shantur=2Ecom> wrote:
+>>
+>> Hi Simon,
+>>
+>> I have figured out the cause of the crash=2E
+>> It happens here -
+>> https://github=2Ecom/u-boot/u-boot/blob/master/boot/bootflow=2Ec#L470
+>> while doing - free(bflow->buf)
+>>
+>> As I understand it,
+>> - Just before starting kernel EFI binary calls usb-uclass->usb_stop()
+>> - This starts removing all devices in my case ( 6x usb_hub, 2x
+>> partition, 1x blk, 2x bootdev, 1x usb_maas_storage)
+>> - While removing bootdev, it ends up calling bootdev-uclass ->
+>> bootdev_pre_unbind -> bootdev_clear_bootflows which calls
+>> bootflow->bootflow_remove and bootflow_free
+>>
+>> I don't know why this buf cannot be freed, is it because the EFI
+>> binary in the buffer is still being used ( efi/boot/bootaa64=2Eefi ) ?
 
-> Hi Tom,
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/18586
->=20
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D55&view=
-=3Dresults
->=20
->=20
-> The following changes since commit 92b27528d777ce85362af45e7d2974a6c85621=
-9b:
->=20
->   Merge branch 'master' of
-> https://source.denx.de/u-boot/custodians/u-boot-sunxi (2023-11-12
-> 16:36:52 -0500)
->=20
-> are available in the Git repository at:
->=20
->   git://git.denx.de/u-boot-dm.git tags/dm-pull-15nov23
->=20
-> for you to fetch changes up to 0d4d9f94c555577f78cddc372c307465fc92413e:
->=20
->   bootstage: Correct exhasuted typo (2023-11-14 20:04:01 -0700)
->=20
+EFI binaries should never be started from memory allocated with malloc=2E =
+efi_load_image() should be invoked which allocates EFI memory via efi_alloc=
+ate_pages()=2E The handle created has to be passed to efi_start_image()=2E
 
-Applied to u-boot/master, thanks!
+>> But commenting this line out fixes the crash and linux boots happily=2E
+>>
+>> Fixing this properly is above my pay grade as of now=2E
+>
+>Great, thank you! I will send a patch=2E
 
---=20
-Tom
+Free() typically crashes in U-Boot when freeing the same memory twice=2E
 
---L7CO0Vo331Q+8GM4
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards
 
------BEGIN PGP SIGNATURE-----
+Heinrich
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVSFoACgkQFHw5/5Y0
-tyzUsQv8DXv8eCZ6GCFDgeiOXMFpptXRvV5SbaTZQW/jaud7DVi6VZtx3q5qo7zt
-Zoqi++kP7cbcpa5OTvgCHSa/ZhrwIp61y1HW11D9fJAiE03zLZX0DxMxhhTNez+q
-nfcG/LthGt9BHf++SHqQkgA1mxBK10XHFggxnMmHoOnLbgtgU2JeWwKAUiiJB+Dj
-MXTo+4tZ+xiSkOUyKEbJvcZBBU6yQLaBkOy+6IGkkbR3k5H3XtZfy4oByFG2mEEj
-nbGpFUoKLMKcbT98ZQNOtaNCxmD8rnulX4RjpPAGUnCbISe9yOlpjBjxvr1o02fp
-MPBbWdPDfwErL2/5RaIj/VXEBO2eZxbRrVDPk/1q6ufDTpJmbYjIlpreSiPieM4z
-irMYRnrqDSkqBIkMYMK9PtXGf2NhtB7S1pZQuOOJYV6MdJtc8nEuNoN2LyEz8iDI
-b6oWeAm9g0s2vu9u2K4rwEH2qAhXqEYjiTPLsKQwz+WWWOZyHUfAAnWTjDVKifc3
-cWG1NwRJ
-=E/Eu
------END PGP SIGNATURE-----
 
---L7CO0Vo331Q+8GM4--
+
+>
+>Regards,
+>Simon
+>
+>>
+>> Kind regards,
+>> Shantur
+>>
+>> On Wed, Nov 15, 2023 at 3:58=E2=80=AFPM Simon Glass <sjg@chromium=2Eorg=
+> wrote:
+>> >
+>> > Hi Shantur,
+>> >
+>> > On Wed, 15 Nov 2023 at 08:23, Shantur Rathore <i@shantur=2Ecom> wrote=
+:
+>> > >
+>> > > Hi Simon,
+>> > >
+>> > > >
+>> > > > Is this the blue port on top of the USB-C connector?
+>> > > >
+>> > > Yes, that's correct=2E
+>> > > For my drive I needed -
+>> > > https://patchwork=2Eozlabs=2Eorg/project/uboot/patch/20231110141311=
+=2E512334-1-i@shantur=2Ecom/
+>> > >
+>> > > >
+>> > > > Which version of Armbian / download link?
+>> > > >
+>> > > https://redirect=2Earmbian=2Ecom/rockpro64/Bookworm_current
+>> > >
+>> > > > Yes it is scanning first, before reading the efi app, etc=2E
+>> > > >
+>> > > > I have the same hardware so may be able to dig into this=2E
+>> > >
+>> > > Sorry, I meant to ask if anything specific to USB=2E
+>> > > I see it loads efi from the network or disk and calls bootefi with =
+the
+>> > > loaded address=2E
+>> > > I don't know deep boot / efi stuff, just trying to compare how it's
+>> > > loading efi differently than fatload in this case=2E
+>> >
+>> > There is nothing special about USB in boootstd, so far as I know=2E
+>> >
+>> > But until we figure out this bug, it is hard to be sure=2E
+>> >
+>> > Regards,
+>> > Simon
