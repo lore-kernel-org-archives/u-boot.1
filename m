@@ -4,55 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3699C07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 07:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F23C5C47074
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 08:27:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BC7F86F18;
-	Wed, 15 Nov 2023 08:26:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=physik.fu-berlin.de
+	by phobos.denx.de (Postfix) with ESMTP id AE4D48615A;
+	Wed, 15 Nov 2023 09:26:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E48428704F; Wed, 15 Nov 2023 08:26:55 +0100 (CET)
-Received: from outpost1.zedat.fu-berlin.de (outpost1.zedat.fu-berlin.de
- [130.133.4.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7AB186A0A
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 08:26:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=physik.fu-berlin.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaubitz@zedat.fu-berlin.de
-Received: from inpost2.zedat.fu-berlin.de ([130.133.4.69])
- by outpost.zedat.fu-berlin.de (Exim 4.95)
- for u-boot@lists.denx.de with esmtps (TLS1.3)
- tls TLS_AES_256_GCM_SHA384
- (envelope-from <glaubitz@zedat.fu-berlin.de>)
- id 1r3AIW-002aQF-CD; Wed, 15 Nov 2023 08:26:52 +0100
-Received: from p5dc55299.dip0.t-ipconnect.de ([93.197.82.153]
- helo=suse-laptop.fritz.box) by inpost2.zedat.fu-berlin.de (Exim 4.95)
- for u-boot@lists.denx.de with esmtpsa (TLS1.3)
- tls TLS_AES_256_GCM_SHA384
- (envelope-from <glaubitz@physik.fu-berlin.de>)
- id 1r3AIW-002VOK-53; Wed, 15 Nov 2023 08:26:52 +0100
-Message-ID: <126302ea0fc8f986421dd65c73d4f138642354d0.camel@physik.fu-berlin.de>
-Subject: u-boot fails to build on sparc64 due redefinition of 'struct termio'
-From: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
-To: u-boot <u-boot@lists.denx.de>
-Date: Wed, 15 Nov 2023 08:26:51 +0100
-Autocrypt: addr=glaubitz@physik.fu-berlin.de; prefer-encrypt=mutual;
- keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.1 
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="zMrWInyB";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D4B1485E44; Wed, 15 Nov 2023 09:26:57 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B2DE98615A
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 09:26:54 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-509c61e0cf4so7940982e87.2
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 00:26:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700036813; x=1700641613;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BJyJnjuJF104phv8i6FvNGZukoXK37gheXw9j1ci4W4=;
+ b=zMrWInyBLyfW2Olga4ooRtnIai8Y4EoUQ4IXDq5bgRT9FxTLWtdHiopY/Foq2InB6L
+ 7OWx5bdTclQDKlrIBUQAwZUMeoe3AqzdVHIY2cjN0MxNDlnHk4QQjR+bayNkjM8ND8m3
+ cQFJnoNXYTh3n5poPCIeYQAMpvk6J6JSsCg4AeuU048+pDMSCcMFBZTqJYOARDpkcR1y
+ C6MTUPQeK+b+1jO0rLoKaAVmzilZpA4LHmkOOWeIdqFq+IOjqyUcLkgrfzZ10bLpYm0W
+ rG0IotJwd37sH6WIPpyHM5HP4IvrtZWoOMfWU7oHoQQP2MJnlokKKura/5KB+je73J6j
+ ukPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700036813; x=1700641613;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BJyJnjuJF104phv8i6FvNGZukoXK37gheXw9j1ci4W4=;
+ b=lkd6CXV3eavC9lJpyNKWCZg9QFGCkPyo7ZreCAjobgzVDhCN7IsWnkP0odr9hQQ66a
+ tzA306kO4dm01fsQU/h/kXEGjZULEfsScC284Qxf9iy48PL5r6kt6iZc8rSlbndX2440
+ Gwfrkb/uPw1B1Vn8jJltkYFn8HyjeFbVMOjTAcuPathC8Sgpam/Kh/+Tp/2WQ7zxMKui
+ smweZFLIA96P+pVWlfLgggqIVW7QzEdIZ/1AlfdQjmeBV/CR25iA9192oTTrAOLpCgiO
+ K6CiqG7NscGfjSr1DD5QTBxDt5IbzycrqBX7LEqU7GE+lC3fVG0SQ5K1thoXIFtpms9n
+ MGXQ==
+X-Gm-Message-State: AOJu0YyvIafLLCCXBfWMfmlaSI/6HF5RJLV4Ak2R6L5T/baoSr6COj1/
+ AR0qXSfWJRumR4fVwrUN6VZq7D+JnvH6c54vjdtVww==
+X-Google-Smtp-Source: AGHT+IGn0ReKxcEoUeTJWktKwoYzNTknyqHekxdXXAWq1xDA7q1WbK8JvfLhPwnj/4wYadfnvu7Apw==
+X-Received: by 2002:a19:f811:0:b0:507:c7ae:32cc with SMTP id
+ a17-20020a19f811000000b00507c7ae32ccmr8203955lff.41.1700036813559; 
+ Wed, 15 Nov 2023 00:26:53 -0800 (PST)
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com.
+ [209.85.167.51]) by smtp.gmail.com with ESMTPSA id
+ m13-20020a0565120a8d00b005030c533843sm1557787lfu.154.2023.11.15.00.26.52
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 15 Nov 2023 00:26:52 -0800 (PST)
+Received: by mail-lf1-f51.google.com with SMTP id
+ 2adb3069b0e04-509c61e0cf4so7940945e87.2
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 00:26:52 -0800 (PST)
+X-Received: by 2002:a05:6512:b9a:b0:509:8da4:93da with SMTP id
+ b26-20020a0565120b9a00b005098da493damr11341926lfv.18.1700036812366; Wed, 15
+ Nov 2023 00:26:52 -0800 (PST)
 MIME-Version: 1.0
-X-Original-Sender: glaubitz@physik.fu-berlin.de
-X-Originating-IP: 93.197.82.153
-X-ZEDAT-Hint: PO
+References: <20231110141311.512334-1-i@shantur.com>
+ <CABEcMwUxM9hPh1c=Q8THxkJUqzw7fT-bWsdeuJoyZ8vN6BaCkQ@mail.gmail.com>
+ <CABEcMwWjHxNTE5wVkgaQXRBwt2WP-uE3qgRpNrqiXFCjHD2iZA@mail.gmail.com>
+ <77937c9c-4f00-4721-adb1-5bc8b570c6eb@denx.de>
+In-Reply-To: <77937c9c-4f00-4721-adb1-5bc8b570c6eb@denx.de>
+From: Shantur Rathore <i@shantur.com>
+Date: Wed, 15 Nov 2023 08:26:41 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t1cOgJQU=LtSc_zx0UY_Z40VzOSWNgXYfS_PAFuxKhpsQ@mail.gmail.com>
+Message-ID: <CAHc5_t1cOgJQU=LtSc_zx0UY_Z40VzOSWNgXYfS_PAFuxKhpsQ@mail.gmail.com>
+Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, trini@konsulko.com, 
+ patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,40 +101,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello!
+Hi Marek,
 
-On Linux sparc64, building u-boot fails with [1]:
+> What is the point of this growing CC list ?
 
-cc   -o tools/mkenvimage tools/mkenvimage.o tools/os_support.o tools/lib/cr=
-c32.o  =20
-In file included from /<<PKGBUILDDIR>>/tools/termios_linux.h:33,
-                 from /<<PKGBUILDDIR>>/tools/kwboot.c:153:
-/usr/include/sparc64-linux-gnu/asm/termbits.h:14:8: error: redefinition of =
-'struct termio'
-   14 | struct termio {
-      |        ^~~~~~
-In file included from /usr/include/sparc64-linux-gnu/sys/ioctl.h:29,
-                 from /<<PKGBUILDDIR>>/tools/termios_linux.h:30:
-/usr/include/sparc64-linux-gnu/bits/ioctl-types.h:36:8: note: originally de=
-fined here
-   36 | struct termio
-      |        ^~~~~~
+Apologies, this is my first time with email based patch management.
+I was reading articles on best practices and first one mentioned to cc
+people with recent commits,
+second one mentioned to use get_maintainer script to cc people and
+hence multiple emails.
 
-Reading through tools/termios_linux.h, it seems like the problem is that <a=
-sm/ioctl.h>
-and <asm/termbits.h> are included at the same time. Not sure whether this i=
-s allowed
-according to the glibc documentation.
-
-Full build log available in [1].
-
-Adrian
-
-> [1] https://buildd.debian.org/status/fetch.php?pkg=3Du-boot&arch=3Dsparc6=
-4&ver=3D2023.07%2 Bdfsg-1&stamp=3D1699723544&raw=3D0
-
---=20
- .''`.  John Paul Adrian Glaubitz
-: :' :  Debian Developer
-`. `'   Physicist
-  `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
+Regards,
+Shantur
