@@ -4,57 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 864A4C07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C4A0C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 05:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC9FF86C3B;
-	Wed, 15 Nov 2023 06:40:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A162886C3B;
+	Wed, 15 Nov 2023 06:50:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700026849;
-	bh=cm2XPSMeyos3KtlQikhghlsSFPHFJX7SAJ9j8Bc+n1A=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=M6tc3ciN5Irg49wIE7z0pTz18FRBbsbAOY7WEgiD2yA2+/qJFSgSwXV8cssWF6kgY
-	 qGZY+OirlRfozQaKrvnt+26HLVkVJa2WFY03WAGoYzEYSnalrfjCinepv7W4qhsLfR
-	 d/MwybbamN6qyqNufRSj469w+N1x/GkBBI/Z+amK5Hh2JFyJODcikQo55SKr7ZiSLI
-	 J1M1IOT8Wx+AMANc/9IC8NaFry8Vqr69oB/7+DztgP9xrilqiFH0UxzeOPuAuWz0OK
-	 NZkkhpBRx+iVPNLaedMqd9BiKkLZG6kN8KbU2FfZY97kjIj2mSudrFH2xvlmHtVEJZ
-	 cvepEzrvJ+n+g==
-Received: from mail-internal.denx.de (p578adb1c.dip0.t-ipconnect.de
- [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: noc@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 07A5C86308;
- Wed, 15 Nov 2023 06:40:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700026848;
- bh=cm2XPSMeyos3KtlQikhghlsSFPHFJX7SAJ9j8Bc+n1A=;
- h=From:To:Cc:Subject:Date:From;
- b=JsOkGaw6Is26J6mwER3t8bqk+Ja/i8ZK4c4lFSF4U9q6/3LWwYoekTCh5KbhPOA5c
- k48K+ot3x8OSHx275OkrUFNNIjLFDs21lFncoB56qxcH+QY4zIg79asJWOPQ5JKngC
- ebwBnCrM8Lxbj3E05sUzJmZY3JdLgbMaynsl86Mkaf5IFj5gauCHBEz58te5ARS1ii
- 9OYhPg0IMA4mKzwHsS6mwj0Ql2plJwuYY9oGPNQ/SyxdSfStt4Ia2hNQCFs/pCZr/J
- LNUM/Uy1g1Ae0VEb6HL7SUj0P0u/JJSsldX0dyEKTy4o+b7F3gG0SMIOamm3SQwMe3
- 2OEgesqaHo6gQ==
-Received: from pollux.denx.de (pollux [192.168.1.1])
- by mail-internal.denx.de (Postfix) with ESMTPS id 70459180973;
- Wed, 15 Nov 2023 06:40:46 +0100 (CET)
-Received: by pollux.denx.de (Postfix, from userid 515)
- id 1B9921A0083; Wed, 15 Nov 2023 06:40:46 +0100 (CET)
-From: Heiko Schocher <hs@denx.de>
-To: U-Boot Mailing List <u-boot@lists.denx.de>,
- Enrico Leto <enrico.leto@siemens.com>
-Cc: Heiko Schocher <hs@denx.de>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH] mtd: rawnand: omap_gpmc: fix BCH8 HW based correction
-Date: Wed, 15 Nov 2023 06:40:44 +0100
-Message-Id: <20231115054044.3937543-1-hs@denx.de>
-X-Mailer: git-send-email 2.37.3
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TXq1mpxJ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0663586C3B; Wed, 15 Nov 2023 06:50:07 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D2BD186F93
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 06:50:04 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AF5nt1w030176;
+ Tue, 14 Nov 2023 23:49:55 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700027395;
+ bh=myuDF4GKD4RPAIt3G+cuVG6HJR5DIMigXC4epBIZudE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=TXq1mpxJnbtYt0TX0586xdmLlnZarAlFOJGlQNXfWX+EbznvdRXntXYGI0g2xf2e9
+ ZauVyYbPUzpu9pfzJk/59YJzQzaWj99kXksOQFKPCQg8d3fPBi/WQRDcYnsWj959gY
+ VnOad2wEx9KZqZ46el5fxnX1X7L7TJnOywe7IzHY=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AF5nttR089025
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 14 Nov 2023 23:49:55 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 14
+ Nov 2023 23:49:55 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 14 Nov 2023 23:49:54 -0600
+Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AF5npRQ125450;
+ Tue, 14 Nov 2023 23:49:51 -0600
+Message-ID: <6378b86f-e9aa-443d-9180-b37b9a718bf4@ti.com>
+Date: Wed, 15 Nov 2023 11:19:50 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/8] arm: mach-k3: am62a: Add main_timer0 id to the dev
+ list
+To: Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom
+ Rini <trini@konsulko.com>
+CC: Siddharth Vadapalli <s-vadapalli@ti.com>, Andrew Davis <afd@ti.com>, Roger
+ Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20231113145149.1926732-1-nm@ti.com>
+ <20231113145149.1926732-2-nm@ti.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231113145149.1926732-2-nm@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,57 +85,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+Hi Nishanth
 
-broke AM335x based boards booting from NAND with ECC BCH8 code.
-
-Use omap_enable_hwecc() instead of omap_enable_hwecc_bch()
-in SPL restores correct SPL nand_read_page functionality.
-
-Tested on draco thuban board.
-
-Signed-off-by: Heiko Schocher <hs@denx.de>
-
----
-fix NAND boot for BCH8 based TI AM335x boards
-
-Fix is based on series from Enrico:
-
-https://lists.denx.de/pipermail/u-boot/2023-November/536793.html
-
-and fixes NAND boot for the draco thuban board. But this patch
-apply also without the patches from above patchseries, see
-azure build:
-
-https://dev.azure.com/hs0298/hs/_build/results?buildId=111&view=results
-
-which is clean.
-
-Above commit seems to change only U-Boot code and did not
-adapt am335x_spl_bch.c, which breaks nand_read_page in SPL
-code for AM335x based boards. So use in SPL "old" hw setup
-and reading page from NAND in SPL works again.
+On 13/11/23 20:21, Nishanth Menon wrote:
+> main_timer0 is used by u-boot as the tick-timer. Add it to the soc
+> devices list so it an be enabled via the k3 power controller.
+> 
+> Signed-off-by: Nishanth Menon <nm@ti.com>
+> ---
+>   arch/arm/mach-k3/am62ax/dev-data.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/arch/arm/mach-k3/am62ax/dev-data.c b/arch/arm/mach-k3/am62ax/dev-data.c
+> index abf5d8e91aa2..6cced9efd08a 100644
+> --- a/arch/arm/mach-k3/am62ax/dev-data.c
+> +++ b/arch/arm/mach-k3/am62ax/dev-data.c
+> @@ -52,6 +52,7 @@ static struct ti_dev soc_dev_list[] = {
+>   	PSC_DEV(161, &soc_lpsc_list[5]),
+>   	PSC_DEV(162, &soc_lpsc_list[6]),
+>   	PSC_DEV(75, &soc_lpsc_list[7]),
+> +	PSC_DEV(36, &soc_lpsc_list[8]),
+>   	PSC_DEV(102, &soc_lpsc_list[8]),
+>   	PSC_DEV(146, &soc_lpsc_list[8]),
+>   	PSC_DEV(166, &soc_lpsc_list[9]),
 
 
- drivers/mtd/nand/raw/omap_gpmc.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 
-diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
-index 1a5ed0de31..c9b66dadbd 100644
---- a/drivers/mtd/nand/raw/omap_gpmc.c
-+++ b/drivers/mtd/nand/raw/omap_gpmc.c
-@@ -983,7 +983,11 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
- 		nand->ecc.strength	= 8;
- 		nand->ecc.size		= SECTOR_BYTES;
- 		nand->ecc.bytes		= 14;
-+#if defined(CONFIG_SPL_BUILD)
-+		nand->ecc.hwctl		= omap_enable_hwecc;
-+#else
- 		nand->ecc.hwctl		= omap_enable_hwecc_bch;
-+#endif
- 		nand->ecc.correct	= omap_correct_data_bch;
- 		nand->ecc.calculate	= omap_calculate_ecc_bch;
- 		nand->ecc.read_page	= omap_read_page_bch;
 -- 
-2.37.3
-
+Thanking You
+Neha Malcom Francis
