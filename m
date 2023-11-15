@@ -4,58 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B226C48BD7
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:45:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B34D4C48BD7
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 13:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24EAC8720A;
-	Wed, 15 Nov 2023 14:44:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=physik.fu-berlin.de
+	by phobos.denx.de (Postfix) with ESMTP id DEFEA870D2;
+	Wed, 15 Nov 2023 14:53:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="eVjVNEzm";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D0EA8721D; Wed, 15 Nov 2023 14:44:53 +0100 (CET)
-Received: from outpost1.zedat.fu-berlin.de (outpost1.zedat.fu-berlin.de
- [130.133.4.66])
+ id 14A5086FEF; Wed, 15 Nov 2023 14:53:49 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5B46871E9
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:44:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=physik.fu-berlin.de
+ by phobos.denx.de (Postfix) with ESMTPS id AEB23871DF
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 14:53:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaubitz@zedat.fu-berlin.de
-Received: from inpost2.zedat.fu-berlin.de ([130.133.4.69])
- by outpost.zedat.fu-berlin.de (Exim 4.95) with esmtps (TLS1.3)
- tls TLS_AES_256_GCM_SHA384
- (envelope-from <glaubitz@zedat.fu-berlin.de>)
- id 1r3GCF-001VIj-Bn; Wed, 15 Nov 2023 14:44:47 +0100
-Received: from p5dc55299.dip0.t-ipconnect.de ([93.197.82.153]
- helo=[192.168.178.81]) by inpost2.zedat.fu-berlin.de (Exim 4.95)
- with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (envelope-from <glaubitz@physik.fu-berlin.de>)
- id 1r3GCF-003iv7-4i; Wed, 15 Nov 2023 14:44:47 +0100
-Message-ID: <ed7beafa3630b15db7fb697a5c4c5d14d8c33b7c.camel@physik.fu-berlin.de>
-Subject: Re: u-boot fails to build on sparc64 due redefinition of 'struct
- termio'
-From: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot <u-boot@lists.denx.de>
-Date: Wed, 15 Nov 2023 14:44:46 +0100
-In-Reply-To: <CAPnjgZ2pMHjOqEEqQy3+p_YzWXsYsr=DRz=vGRuTfZWMEnwd9A@mail.gmail.com>
-References: <126302ea0fc8f986421dd65c73d4f138642354d0.camel@physik.fu-berlin.de>
- <CAPnjgZ2pMHjOqEEqQy3+p_YzWXsYsr=DRz=vGRuTfZWMEnwd9A@mail.gmail.com>
-Autocrypt: addr=glaubitz@physik.fu-berlin.de; prefer-encrypt=mutual;
- keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.1 
+ dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mripard@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1700056424;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=jmfg+0VzYKId+m/afZYEDgvFmO0ojHezjGTVP1tL9r8=;
+ b=eVjVNEzmz1WF+S3ccxYgW3pwcMpcrbLSMzN5SK0c38OyfwOAGdCjuddMbPhmf+jM7SmZ9H
+ I9nghgjJWZYygSrkt60Tqgt9Q5BM8kP6UZX2y942YlKvdPnQzZiGj3u74PcC+SNhcX2IlM
+ oYp07UPle+m3GFTJJhHB+VTsDGXrxAs=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-210-RGuambn7PhapT6KbnXwvmQ-1; Wed, 15 Nov 2023 08:53:42 -0500
+X-MC-Unique: RGuambn7PhapT6KbnXwvmQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-40a4c765d3bso4881985e9.0
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 05:53:42 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700056421; x=1700661221;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jmfg+0VzYKId+m/afZYEDgvFmO0ojHezjGTVP1tL9r8=;
+ b=QbQrVYAZ7GviWVZL8zb3N+aLl/QCoV+X+nxdvnjoxjRk0/7pz4q0U9EqHha36JMKRi
+ BS2Sn5psqbBGd+vIB9MjvspbynpvWs+QtqAkMFdlyzIHeH2BAN8XNj14HekifOmHPgRD
+ VI+t1EvOqhAPxTrw3HntJgbC7vqoRHIjQsuita0aiOordC8z9WIghWh3jxnUdYKft7bS
+ ajp2kGztECNQcbLlOmj2BZdRBs5eO5SBHVMvtsPnAIrdRzIOV5rRh3HuHCue7ArmktbO
+ Rnv/lI8q924iLLG0J1wsvaxvRZ60cLzDEnvFoUZ6tI5beKMkqr2kHh7ge2k5K5B+vqMH
+ TGzA==
+X-Gm-Message-State: AOJu0YwFej/PXhvlecdxwKYMsLLfxftNUiO+05epPZ9fQ/PpmDJnW1W1
+ qGkAYORcgKPiI4FXwWWB6uJWqTWjn4kv/gMhtqI/ML+7llNEeuvqrmBXsVoZ8onTsUAraMUbYav
+ jDzdxxV5V39pFzA==
+X-Received: by 2002:a05:600c:1c1e:b0:405:3f06:d2ef with SMTP id
+ j30-20020a05600c1c1e00b004053f06d2efmr4994873wms.4.1700056421439; 
+ Wed, 15 Nov 2023 05:53:41 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHCtpakZEwzztaOxmGirbqyrM+GNz2pI9zKDn+dng6WNhbFAb8TYGTFXnnlxOUgSbckwEVCng==
+X-Received: by 2002:a05:600c:1c1e:b0:405:3f06:d2ef with SMTP id
+ j30-20020a05600c1c1e00b004053f06d2efmr4994844wms.4.1700056421005; 
+ Wed, 15 Nov 2023 05:53:41 -0800 (PST)
+Received: from localhost ([2a01:e0a:b25:f902::ff])
+ by smtp.gmail.com with ESMTPSA id
+ fl23-20020a05600c0b9700b0040a45fffd27sm17622317wmb.10.2023.11.15.05.53.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Nov 2023 05:53:40 -0800 (PST)
+Date: Wed, 15 Nov 2023 14:53:40 +0100
+From: Maxime Ripard <mripard@redhat.com>
+To: Apurva Nandan <a-nandan@ti.com>
+Cc: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, 
+ Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
+ Bryan Brattlof <bb@ti.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon <nm@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, 
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ u-boot@lists.denx.de, Sinthu Raja M <sinthu.raja@mistralsolutions.com>, 
+ Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 00/16] Introduce initial TI's J784S4 and AM69 support
+Message-ID: <lusvfc2to2akeccammsslooai53i4tflvcv4k2iofz3yqco3u6@uvn5flsjhxv3>
+References: <20231001165545.494212-1-a-nandan@ti.com>
 MIME-Version: 1.0
-X-Original-Sender: glaubitz@physik.fu-berlin.de
-X-Originating-IP: 93.197.82.153
-X-ZEDAT-Hint: PO
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qctwhvs7v33wqbic"
+Content-Disposition: inline
+In-Reply-To: <20231001165545.494212-1-a-nandan@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,62 +114,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On Wed, 2023-11-15 at 06:40 -0700, Simon Glass wrote:
-> Hi Adrian,
+--qctwhvs7v33wqbic
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Sun, Oct 01, 2023 at 10:25:29PM +0530, Apurva Nandan wrote:
+> This series will introduce basic support (SD and UART) support for Texas
+> Instruments J784S4 EVM.
 >=20
-> On Wed, 15 Nov 2023 at 00:27, John Paul Adrian Glaubitz
-> <glaubitz@physik.fu-berlin.de> wrote:
-> >=20
-> > Hello!
-> >=20
-> > On Linux sparc64, building u-boot fails with [1]:
-> >=20
-> > cc   -o tools/mkenvimage tools/mkenvimage.o tools/os_support.o tools/li=
-b/crc32.o
-> > In file included from /<<PKGBUILDDIR>>/tools/termios_linux.h:33,
-> >                  from /<<PKGBUILDDIR>>/tools/kwboot.c:153:
-> > /usr/include/sparc64-linux-gnu/asm/termbits.h:14:8: error: redefinition=
- of 'struct termio'
-> >    14 | struct termio {
-> >       |        ^~~~~~
-> > In file included from /usr/include/sparc64-linux-gnu/sys/ioctl.h:29,
-> >                  from /<<PKGBUILDDIR>>/tools/termios_linux.h:30:
-> > /usr/include/sparc64-linux-gnu/bits/ioctl-types.h:36:8: note: originall=
-y defined here
-> >    36 | struct termio
-> >       |        ^~~~~~
-> >=20
-> > Reading through tools/termios_linux.h, it seems like the problem is tha=
-t <asm/ioctl.h>
-> > and <asm/termbits.h> are included at the same time. Not sure whether th=
-is is allowed
-> > according to the glibc documentation.
+> The J784S4 SoC device tree patches are taken from kernel patch submissions
+> and will be updated as they are accepted and merged to the kernel tree.
+> All other patches are specific to SPL and u-boot and do not have
+> dependency on other trees. Appreciate a review for acceptance to u-boot
+> tree.
 >=20
-> Can you send a patch to fix it?
+> Here are some of the salient features of the J784S4 automotive grade=20
+> application processor:
+>=20
+> The J784S4 SoC belongs to the K3 Multicore SoC architecture
+> platform, providing advanced system integration in automotive,
+> ADAS and industrial applications requiring AI at the network edge.
+> This SoC extends the K3 Jacinto 7 family of SoCs with focus on
+> raising performance and integration while providing interfaces,
+> memory architecture and compute performance for multi-sensor, high
+> concurrency applications.
+>=20
+> Some highlights of this SoC are:
+> * Up to 8 Cortex-A72s, four clusters of lockstep capable dual Cortex-R5F =
+MCUs,
+>   4 C7x floating point vector DSPs with Matrix Multiply Accelerator(MMA) =
+for
+>   deep learning and CNN.
+> * 3D GPU: Automotive grade IMG BXS-4-64 MC1                =20
+> * Vision Processing Accelerator (VPAC) with image signal processor and De=
+pth
+>   and Motion Processing Accelerator (DMPAC)
+> * Three CSI2.0 4L RX plus two CSI2.0 4L TX, two DSI Tx, one eDP/DP and one
+>   DPI interface.
+> * Integrated gigabit ethernet switch, up to 8 ports (TDA4VH), two ports
+>   support 10Gb USXGMII; Two 4 lane PCIe-GEN3 controllers, USB3.0 Dual-role
+>   device subsystems, Up to 20 MCANs, among other peripherals.
+>=20
+> See J784S4 Technical Reference Manual (SPRUJ52 - JUNE 2022)
+> for further details: http://www.ti.com/lit/zip/spruj52
+>=20
+> In addtion, the J784S4 EVM board is designed for TI J784S4 SoC. It=20
+> supports the following interfaces:
+> * 32 GB DDR4 RAM
+> * x2 Gigabit Ethernet interfaces capable of working in Switch and MAC mode
+> * x1 Input Audio Jack, x1 Output Audio Jack
+> * x1 USB2.0 Hub with two Type A host and x1 USB 3.1 Type-C Port
+> * x2 4L PCIe connector
+> * x1 UHS-1 capable micro-SD card slot
+> * 512 Mbit OSPI flash, 1 Gbit Octal NAND flash, 512 Mbit QSPI flash,
+>   UFS flash.
+> * x6 UART through UART-USB bridge
+> * XDS110 for onboard JTAG debug using USB
+> * Temperature sensors, user push buttons and LEDs
+> * 40-pin User Expansion Connector
+> * x2 ENET Expansion Connector, x1 GESI expander, x2 Display connector
+> * x1 15-pin CSI header
+> * x6 MCAN instances
 
-I have not yet fully understood whether the headers are being used incorrec=
-tly or not but
-I assume yes since glibc usually does not have such fundamental bugs. I wil=
-l consult glibc
-upstream first, in any case. They should know.
+I've tested this series on top of 2024.01-rc2, and while it worked fine
+before, the (external) MMC is now broken:
 
-I have just posted it here first because I hoped someone might have caught =
-an obvious issue.
+U-Boot SPL 2024.01-rc2-00021-g8e3ced8fbad8 (Nov 15 2023 - 12:07:18 +0100)
+SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.2--v09.01.02 (Kool Koala)')
+SPL initial stack usage: 13416 bytes
+Trying to boot from MMC2
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+Loading Environment from nowhere... OK
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+Starting ATF on ARM64 core...
 
-> (BTW gmail tells me you are John when I start the email, but I noticed
-> it this time and changed it)
+NOTICE:  BL31: v2.9(release):v2.9.0
+NOTICE:  BL31: Built : 12:07:09, Nov 15 2023
+I/TC:
+I/TC: OP-TEE version: 4.0.0 (gcc version 13.2.1 20230728 (Red Hat Cross 13.=
+2.1-1) (GCC)) #1 Wed Nov 15 11:07:14 UTC 2023 aarch64
+I/TC: WARNING: This OP-TEE configuration might be insecure!
+I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/architec=
+ture/porting_guidelines.html
+I/TC: Primary CPU initializing
+I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.2--v09.01.02 (Kool Koala)')
+I/TC: HUK Initialized
+I/TC: Activated SA2UL device
+I/TC: Enabled firewalls for SA2UL TRNG device
+I/TC: SA2UL TRNG initialized
+I/TC: SA2UL Drivers initialized
+I/TC: Primary CPU switching to normal world boot
 
-My name is "John Paul Adrian", but I am officially called "Adrian" because =
-my mother thought
-that would be good idea. Don't ask ;-).
+U-Boot SPL 2024.01-rc2-00021-g8e3ced8fbad8 (Nov 15 2023 - 12:07:30 +0100)
+SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.2--v09.01.02 (Kool Koala)')
+Trying to boot from MMC2
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
+Warning: Did not detect image signing certificate. Skipping authentication =
+to prevent boot failure. This will fail on Security Enforcing(HS-SE) devices
 
-Thanks,
-Adrian
 
---=20
- .''`.  John Paul Adrian Glaubitz
-: :' :  Debian Developer
-`. `'   Physicist
-  `-    GPG: 62FF 8A75 84E0 2956 9546  0006 7426 3B37 F5B5 F913
+U-Boot 2024.01-rc2-00021-g8e3ced8fbad8 (Nov 15 2023 - 12:07:30 +0100)
+
+SoC:   J784S4 SR1.0 HS-FS
+Model: Texas Instruments J784S4 EVM
+DRAM:  32 GiB
+Core:  90 devices, 31 uclasses, devicetree: separate
+Flash: 0 Bytes
+MMC:   mmc@4f80000: 0, mmc@4fb0000: 1
+Loading Environment from nowhere... OK
+In:    serial@2880000
+Out:   serial@2880000
+Err:   serial@2880000
+am65_cpsw_nuss ethernet@46000000: K3 CPSW: nuss_ver: 0x6BA02102 cpsw_ver: 0=
+x6BA82102 ale_ver: 0x00293904 Ports:1 mdio_freq:1000000
+Net:   eth0: ethernet@46000000port@1
+Hit any key to stop autoboot:  0
+=3D> boot
+i2c_write: error waiting for data ACK (status=3D0x116)
+pca953x gpio@22: Error reading output register
+Card did not respond to voltage select! : -110
+mmc_init: -95, time 114
+
+Maxime
+
+--qctwhvs7v33wqbic
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZVTNZAAKCRDj7w1vZxhR
+xabOAQDvOP7C5t048kx+PX8bD4v0QfFlDejdsEHS7IEIbK+iLQD9HAuHhlmcKRmF
+zH/vzZGv2rzem4+Mt/PDNwgeCZ9Obwo=
+=0cAP
+-----END PGP SIGNATURE-----
+
+--qctwhvs7v33wqbic--
+
