@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBE3AC48BF9
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 14:24:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACCF9C48BF9
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 14:25:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20B6E87197;
+	by phobos.denx.de (Postfix) with ESMTP id 9419E8744E;
 	Wed, 15 Nov 2023 15:24:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hWyIgSyv";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="exmqk04t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCCEC87197; Wed, 15 Nov 2023 15:24:11 +0100 (CET)
+ id DFA1787197; Wed, 15 Nov 2023 15:24:11 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E4FF87266
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 15:24:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5D8B87203
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 15:24:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5205B419D7; 
- Wed, 15 Nov 2023 14:24:07 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id D218640DB4; 
+ Wed, 15 Nov 2023 14:24:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700058247;
- bh=hNRg/4YKxEYhOwvqIgNkc4wV+lgzm5O+U5mvVSPo39A=;
+ s=20210705; t=1700058246;
+ bh=8+tz2IVY5WagXA61jaz8UrRDY3b2tuNsFgJ/34megCk=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=hWyIgSyvQifIMb5068/YdVTsRxB+bjAZ8EFIbjWPmlUuV981T3eL14eC/xnjsq6Xs
- S/3qjzAtwKlz5bsq9icGw6CqkjPobE1DA8xpmB9WiF8IwaUCw6FMQEB98RWnOLId5K
- jaQH1kMNNYrnzdWlLjc5KESSRGpDQ0sK52n/8SEg/O4HhPtVtnl7UHuNOkg9gQYVxn
- 7YjfXgZIj1/U0Ojwcq22E6FvwpCtb/HI4HsaHzDOXR62PqeqlYq0QqlK4K5VIJKIvn
- ifrkOTQ0w4fDAevNFcOpGubtqp2fJCJvnSSDqHxV+aB+KZ5nMOSUp1CZGSpVjSLWSO
- SrZMXLunkJ4Nw==
+ b=exmqk04tMSSth+xbVd7o3sFPLG/klwld3nAsnqYojTkX29Sw5IghiO94rin1u7Zoa
+ XI0GjhKyQV/8q/5OR6rZwzuLGvbfdwOlgep4YX0KAUNmz3Mio65bYHbW3vcYGkvuit
+ GdierkBNbOlN2S3YkomaJPHDbEX4xwhhPP2c7GRLCKPAqn2gxvihSQA/oRr9Wz6+It
+ al5JAQVsuRh4qjLVB+c2LKJ73V+APVuCx5SrnS5thhFOxE55sFpRs4LRm8YljOU1/U
+ ei/23z9qE3OFSchDAKOiUvaVEwqrufRKqaXTqyVHZc3SBA/XUfJDnE1YCoIecwL9Ya
+ +XOzhkfQbw4FQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>
@@ -57,9 +57,9 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 5/6] riscv: allow usage of ACPI
-Date: Wed, 15 Nov 2023 15:23:54 +0100
-Message-Id: <20231115142355.123038-6-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 3/6] risc-v: add support for QEMU provided ACPI tables
+Date: Wed, 15 Nov 2023 15:23:52 +0100
+Message-Id: <20231115142355.123038-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
 References: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
@@ -81,25 +81,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select CONFIG_SUPPORT_ACPI to allow usage of ACPI tables with RISC-V.
+If U-Boot provides ACPI tables on RISC-V QEMU, we need to copy what QEMU
+provides.
+
+Provide the qfw command to retrieve information from the QEMU firmware.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ board/emulation/qemu-riscv/Kconfig | 2 ++
+ lib/Kconfig                        | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 4f5b75129f..d79b744bd6 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -108,6 +108,7 @@ config PPC
- config RISCV
- 	bool "RISC-V architecture"
- 	select CREATE_ARCH_SYMLINK
-+	select SUPPORT_ACPI
- 	select SUPPORT_OF_CONTROL
- 	select OF_CONTROL
- 	select DM
+diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
+index d56b4b5bc1..933b035991 100644
+--- a/board/emulation/qemu-riscv/Kconfig
++++ b/board/emulation/qemu-riscv/Kconfig
+@@ -33,6 +33,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+ 	select GENERIC_RISCV
+ 	select SUPPORT_SPL
++	select CMD_QFW if GENERATE_ACPI_TABLE
++	select QFW_MMIO if GENERATE_ACPI_TABLE
+ 	imply AHCI
+ 	imply SMP
+ 	imply BOARD_LATE_INIT
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 19649517a3..a94adc388f 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -300,7 +300,7 @@ config SPL_ACPI
+ config GENERATE_ACPI_TABLE
+ 	bool "Generate an ACPI (Advanced Configuration and Power Interface) table"
+ 	depends on ACPI
+-	select QFW if QEMU
++	select QFW if QEMU || TARGET_QEMU_VIRT
+ 	help
+ 	  The Advanced Configuration and Power Interface (ACPI) specification
+ 	  provides an open standard for device configuration and management
 -- 
 2.40.1
 
