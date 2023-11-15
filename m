@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CFA9C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 01:38:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E80C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 01:40:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34774868AE;
-	Wed, 15 Nov 2023 02:38:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C191587063;
+	Wed, 15 Nov 2023 02:40:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hwf+8xCF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MF1y8ZX8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 615EA86758; Wed, 15 Nov 2023 02:38:35 +0100 (CET)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
+ id D308487203; Wed, 15 Nov 2023 02:40:22 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9ED5868AE
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 02:38:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AD7E87063
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 02:40:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4ac10aacd27so2683274e0c.0
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:38:31 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5c08c47c055so50945667b3.1
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:40:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700012309; x=1700617109; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700012419; x=1700617219; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uqU0zxMAYMNPJtbJAWcS3W2WpvaKa6U0dP1h3yZORk4=;
- b=hwf+8xCFHruYHLhpeTnlKMLv+/DAid7kDCrpGFR0wHa+Uocdu6aH8zfgx3K564Hhos
- QQBuN8AtnSnqUXOYDdeaXxe90sarrW3USOFgdKZ/EdP3/z8HI16hXYsL/LYc23KhUKvm
- VCHfX5/ZHEa1LTRjaR4N8gtYcxFvkXW/ZfYSQ=
+ bh=sspLc0aXZ0kVYhK99YVjDxCo5b2VZUNI39bFji0nOOQ=;
+ b=MF1y8ZX8JQl/VD4Dh4mAgDIAPqoAZjRL2WBUtOnF4/TSdwKQpc/RjgvWjQPptFtJUS
+ kuaeFz7R1oor9ebabTtmMfmlxr0wDQAWP7sdDBPdobP/1m4xcLT/UcV97Ku9IIVOuw7w
+ hZ1NYHOnZTAiwgwg3sWUqHyvdurWWVaNQRdBw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700012309; x=1700617109;
+ d=1e100.net; s=20230601; t=1700012419; x=1700617219;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uqU0zxMAYMNPJtbJAWcS3W2WpvaKa6U0dP1h3yZORk4=;
- b=OQz6aCntMoL1GJwRbrqwe8p3OMD4+0eATp51ZlPw+UpQKB56f67a44vKdoUozb2v8H
- 01dDUFZrv7RD67POOyD2P4MkT+ihrRy//1zb8kyIc1IbsFXeyWtsB7R5zxr6EIqUeEHN
- jk7Y0G1MiRVOjgze40X7ipgtr/h6yUFvvSM7raBV2HpEDOTVVkDJLWAIPO3fqMzLUGbq
- ZMR7rS9ey0MOavWzv8TN+x/qwbdv+JyEjWmmNM/2gTcy/PgrGc32BSzIxZNnmcVrZ6jf
- q87z0PkM1NIaV8Y47NMEV4zaTnpOUfICxCfgbEbQgC4xOJ2IRi4JT2lswWMK9dAkiPyu
- mi+g==
-X-Gm-Message-State: AOJu0YzS/l7aKcLoru6nZiQrK2XUP18Fb1gzfa0W3NGlqAEjeDmUPfZ/
- A6J1MIcXuLuobuVG8bdBz7zDWw==
-X-Google-Smtp-Source: AGHT+IFl7ClVQozheQokQIW0scGOqqzbhCnNcSrki9popnna7MplVC/aMfLyQpPEgUdHOozaTVzLBw==
-X-Received: by 2002:a1f:2b8e:0:b0:49a:466c:199e with SMTP id
- r136-20020a1f2b8e000000b0049a466c199emr9480337vkr.2.1700012309411; 
- Tue, 14 Nov 2023 17:38:29 -0800 (PST)
+ bh=sspLc0aXZ0kVYhK99YVjDxCo5b2VZUNI39bFji0nOOQ=;
+ b=kKM2mWwW4ste6NHRyamhmORvMNWK9z3RSNPCM2bbPo5Q8jEfyvnku0uHR2QbqaGCCP
+ LoYETCndr1xGYtQVhYSJl9dPFjzQA2FEh427BxX6MCMLsOeV3cM4JBNruaKmiIOV3mpq
+ GdTM24HVk1dJ1LaI4Ig/8B2Ik00CdHD++KjSbs7t2+alt1T6zRMcFSGo7x8QOgpz6v8U
+ 0xFVsK3cckwMLnbORKydVNcJ9RTAL0uzfQU8pzC3msmy9c4ppMQaPet+A9da4rjwlbdh
+ lXWmDvFeUJ5iR64wiU+JzrHlIVmjNR/W0G+7NTSk2t7SlB9OmQX/ASlLcrQJuSihH7cN
+ 8odg==
+X-Gm-Message-State: AOJu0YxUbZdG86UGHyOX2tjnbkDi9KnsLJO3PIDn9C+NladdQxpTgXxY
+ yAGpK0ut7uAMJOk5z6Es8To0tw==
+X-Google-Smtp-Source: AGHT+IGv1GeDd43mwidmF8xDNDG6F4clf+R7rBvQbcQW2WqCBKWqZbhzkW6g1x4B3o+ZezcRDqFUgg==
+X-Received: by 2002:a81:8357:0:b0:5ad:cd52:d6f0 with SMTP id
+ t84-20020a818357000000b005adcd52d6f0mr12856849ywf.45.1700012419074; 
+ Tue, 14 Nov 2023 17:40:19 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-03f5-0f73-ac9e-a6c1.res6.spectrum.com.
  [2603:6081:7b00:6400:3f5:f73:ac9e:a6c1])
  by smtp.gmail.com with ESMTPSA id
- v17-20020ac873d1000000b0041950c7f6d8sm3149897qtp.60.2023.11.14.17.38.28
+ mm2-20020a0562145e8200b0066d1e20455bsm125108qvb.96.2023.11.14.17.40.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Nov 2023 17:38:28 -0800 (PST)
-Date: Tue, 14 Nov 2023 20:38:26 -0500
+ Tue, 14 Nov 2023 17:40:18 -0800 (PST)
+Date: Tue, 14 Nov 2023 20:40:16 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
 Subject: Re: [PATCH v4 09/12] x86: Enable SSE in 64-bit mode
-Message-ID: <20231115013826.GF6601@bill-the-cat>
+Message-ID: <20231115014016.GA2922344@bill-the-cat>
 References: <20231112200255.172351-1-sjg@chromium.org>
  <20231112200255.172351-5-sjg@chromium.org>
- <CAEUhbmVg0m6BJQ_k82Hiqc8AJW1ricfd8WhdKCzAVdj1OOm=Vg@mail.gmail.com>
- <CAPnjgZ1PDQ2Da-0ooZSayPQ=vRRuPgFpPaEAgHXdvAZnaTBKiQ@mail.gmail.com>
- <20231113225915.GL6601@bill-the-cat>
- <CAEUhbmV5hf=vbTzbhgs8i95X=0vpgvrd5z0Src7gML0Rw1HX8w@mail.gmail.com>
- <20231113235210.GM6601@bill-the-cat>
- <CAEUhbmWQwPzSSJb5Z5E3vTcx44SbqxeAt_bTsEKa0ETmi2Lk8A@mail.gmail.com>
- <20231114162228.GU6601@bill-the-cat>
- <CAEUhbmUOEB1UB-s_fu_WSWt2FCDfTEcSswWu6yAacUrG-fhB_g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="N3tDePZvWxv64ZDS"
+ protocol="application/pgp-signature"; boundary="rEKpo8PNOfO2HIrk"
 Content-Disposition: inline
-In-Reply-To: <CAEUhbmUOEB1UB-s_fu_WSWt2FCDfTEcSswWu6yAacUrG-fhB_g@mail.gmail.com>
+In-Reply-To: <20231112200255.172351-5-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,258 +94,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---N3tDePZvWxv64ZDS
-Content-Type: text/plain; charset=utf-8
+--rEKpo8PNOfO2HIrk
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 15, 2023 at 08:44:22AM +0800, Bin Meng wrote:
-> Hi Tom,
->=20
-> On Wed, Nov 15, 2023 at 12:22=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Tue, Nov 14, 2023 at 09:49:08AM +0800, Bin Meng wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, Nov 14, 2023 at 7:52=E2=80=AFAM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > On Tue, Nov 14, 2023 at 07:46:36AM +0800, Bin Meng wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, Nov 14, 2023 at 6:59=E2=80=AFAM Tom Rini <trini@konsulko.=
-com> wrote:
-> > > > > >
-> > > > > > On Mon, Nov 13, 2023 at 03:28:13PM -0700, Simon Glass wrote:
-> > > > > > > Hi Bin,
-> > > > > > >
-> > > > > > > On Mon, 13 Nov 2023 at 15:08, Bin Meng <bmeng.cn@gmail.com> w=
-rote:
-> > > > > > > >
-> > > > > > > > Hi Simon,
-> > > > > > > >
-> > > > > > > > On Mon, Nov 13, 2023 at 4:03=E2=80=AFAM Simon Glass <sjg@ch=
-romium.org> wrote:
-> > > > > > > > >
-> > > > > > > > > This is needed to support Truetype fonts. In any case, th=
-e compiler
-> > > > > > > > > expects SSE to be available in 64-bit mode. Provide an op=
-tion to enable
-> > > > > > > > > SSE so that hardware floating-point arithmetic works.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > Suggested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > Changes in v4:
-> > > > > > > > > - Use a Kconfig option
-> > > > > > > > >
-> > > > > > > > >  arch/x86/Kconfig          |  8 ++++++++
-> > > > > > > > >  arch/x86/config.mk        |  4 ++++
-> > > > > > > > >  arch/x86/cpu/x86_64/cpu.c | 12 ++++++++++++
-> > > > > > > > >  drivers/video/Kconfig     |  1 +
-> > > > > > > > >  4 files changed, 25 insertions(+)
-> > > > > > > > >
-> > > > > > > > > diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-> > > > > > > > > index 99e59d94c606..6b532d712ee8 100644
-> > > > > > > > > --- a/arch/x86/Kconfig
-> > > > > > > > > +++ b/arch/x86/Kconfig
-> > > > > > > > > @@ -723,6 +723,14 @@ config ROM_TABLE_SIZE
-> > > > > > > > >         hex
-> > > > > > > > >         default 0x10000
-> > > > > > > > >
-> > > > > > > > > +config X86_HARDFP
-> > > > > > > > > +       bool "Support hardware floating point"
-> > > > > > > > > +       help
-> > > > > > > > > +         U-Boot generally does not make use of floating =
-point. Where this is
-> > > > > > > > > +         needed, it can be enabled using this option. Th=
-is adjusts the
-> > > > > > > > > +         start-up code for 64-bit mode and changes the c=
-ompiler options for
-> > > > > > > > > +         64-bit to enable SSE.
-> > > > > > > >
-> > > > > > > > As discussed in another thread, this option should be made =
-global to
-> > > > > > > > all architectures and by default no.
-> > > > > > > >
-> > > > > > > > > +
-> > > > > > > > >  config HAVE_ITSS
-> > > > > > > > >         bool "Enable ITSS"
-> > > > > > > > >         help
-> > > > > > > > > diff --git a/arch/x86/config.mk b/arch/x86/config.mk
-> > > > > > > > > index 26ec1af2f0b0..2e3a7119e798 100644
-> > > > > > > > > --- a/arch/x86/config.mk
-> > > > > > > > > +++ b/arch/x86/config.mk
-> > > > > > > > > @@ -27,9 +27,13 @@ ifeq ($(IS_32BIT),y)
-> > > > > > > > >  PLATFORM_CPPFLAGS +=3D -march=3Di386 -m32
-> > > > > > > > >  else
-> > > > > > > > >  PLATFORM_CPPFLAGS +=3D $(if $(CONFIG_SPL_BUILD),,-fpic) =
--fno-common -march=3Dcore2 -m64
-> > > > > > > > > +
-> > > > > > > > > +ifndef CONFIG_X86_HARDFP
-> > > > > > > > >  PLATFORM_CPPFLAGS +=3D -mno-mmx -mno-sse
-> > > > > > > > >  endif
-> > > > > > > > >
-> > > > > > > > > +endif # IS_32BIT
-> > > > > > > > > +
-> > > > > > > > >  PLATFORM_RELFLAGS +=3D -fdata-sections -ffunction-sectio=
-ns -fvisibility=3Dhidden
-> > > > > > > > >
-> > > > > > > > >  KBUILD_LDFLAGS +=3D -Bsymbolic -Bsymbolic-functions
-> > > > > > > > > diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86=
-_64/cpu.c
-> > > > > > > > > index 2647bff891f8..5ea746ecce4d 100644
-> > > > > > > > > --- a/arch/x86/cpu/x86_64/cpu.c
-> > > > > > > > > +++ b/arch/x86/cpu/x86_64/cpu.c
-> > > > > > > > > @@ -10,6 +10,7 @@
-> > > > > > > > >  #include <init.h>
-> > > > > > > > >  #include <asm/cpu.h>
-> > > > > > > > >  #include <asm/global_data.h>
-> > > > > > > > > +#include <asm/processor-flags.h>
-> > > > > > > > >
-> > > > > > > > >  DECLARE_GLOBAL_DATA_PTR;
-> > > > > > > > >
-> > > > > > > > > @@ -39,11 +40,22 @@ int x86_mp_init(void)
-> > > > > > > > >         return 0;
-> > > > > > > > >  }
-> > > > > > > > >
-> > > > > > > > > +/* enable SSE features for hardware floating point */
-> > > > > > > > > +static void setup_sse_features(void)
-> > > > > > > > > +{
-> > > > > > > > > +       asm ("mov %%cr4, %%rax\n" \
-> > > > > > > > > +       "or  %0, %%rax\n" \
-> > > > > > > > > +       "mov %%rax, %%cr4\n" \
-> > > > > > > > > +       : : "i" (X86_CR4_OSFXSR | X86_CR4_OSXMMEXCPT) : "=
-eax");
-> > > > > > > > > +}
-> > > > > > > > > +
-> > > > > > > > >  int x86_cpu_reinit_f(void)
-> > > > > > > > >  {
-> > > > > > > > >         /* set the vendor to Intel so that native_calibra=
-te_tsc() works */
-> > > > > > > > >         gd->arch.x86_vendor =3D X86_VENDOR_INTEL;
-> > > > > > > > >         gd->arch.has_mtrr =3D true;
-> > > > > > > > > +       if (IS_ENABLED(CONFIG_X86_HARDFP))
-> > > > > > > > > +               setup_sse_features();
-> > > > > > > > >
-> > > > > > > > >         return 0;
-> > > > > > > > >  }
-> > > > > > > > > diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-> > > > > > > > > index 6f319ba0d544..39c82521be16 100644
-> > > > > > > > > --- a/drivers/video/Kconfig
-> > > > > > > > > +++ b/drivers/video/Kconfig
-> > > > > > > > > @@ -180,6 +180,7 @@ config CONSOLE_ROTATION
-> > > > > > > > >
-> > > > > > > > >  config CONSOLE_TRUETYPE
-> > > > > > > > >         bool "Support a console that uses TrueType fonts"
-> > > > > > > > > +       select X86_HARDFP if X86
-> > > > > > > >
-> > > > > > > > This should be "depends on HARDFP", indicating that the Tru=
-eType
-> > > > > > > > library is using hardware fp itself, and user has to explic=
-itly turn
-> > > > > > > > the hardware fp Kconfig option on.
-> > > > > > >
-> > > > > > > So you mean 'depends on HARDFP if X86'  ? After all, this is =
-only for
-> > > > > > > X86 - other archs can use softfp which is already enabled, as=
- I
-> > > > > > > understand it.
-> > > > > > >
-> > > > > > > >
-> > > > > > > > "Select" does not work for architectures that does not have=
- the
-> > > > > > > > "enabling hardware fp" logic in place.
-> > > > > > > >
-> > > > > > > > >         help
-> > > > > > > > >           TrueTrype fonts can provide outline-drawing cap=
-ability rather than
-> > > > > > > > >           needing to provide a bitmap for each font and s=
-ize that is needed.
-> > > > > > > > > --
-> > > > > > >
-> > > > > > > I still don't think we are on the same page here. I would pre=
-fer to
-> > > > > > > just enable the options without any option. I really don't wa=
-nt to get
-> > > > > > > into RISC-V stuff - that is a separate concern.
-> > > > > > >
-> > > > > > > From my POV it seems that x86 is special in that:
-> > > > > > > - it uses hardfp
-> > > > > > > - hardfp is always available in any CPU with 64-bit support (=
-I think?)
-> > > > > >
-> > > > > > Maybe the issue even is that on x86 we're being too imprecise i=
-n our
-> > > > > > build rules (and also on RISC-V, another issue). Today on x86 t=
-his fails
-> > > > > > because we say -mno-mmx -mno-sse and not also -msoft-float. I c=
-an just
-> > > > > > turn that on, on all x86 targets today and things build. Would =
-that not
-> > > > > > also fix the truetype issue?
-> > > > >
-> > > > > One can easily turn on compiler flags for x86 (and for RISC-V too=
-) to
-> > > > > tell the compiler to generate floating point instructions if it s=
-ees
-> > > > > fit.
-> > > > >
-> > > > > However on x86 and RISC-V there are configurations needed to prog=
-ram
-> > > > > the CPU registers to turn on the hardware FP, otherwise an except=
-ion
-> > > > > will be generated.
-> > > >
-> > > > Right, which is why I'm saying why don't we just use -msoft-float
-> > > > instead, so that we don't have to worry about enabling features (and
-> > > > also additional registers on the stack yes?) ?
-> > >
-> > > Yes, we should be using -msoft-float for all architectures by default
-> > > if the compiler supports that on each arch. IIRC, the RISC-V back-end
-> > > didn't support that years ago but things may change recently.
-> >
-> > OK, so for this series, lets please just simplify the logic in
-> > arch/x86/config.mk (and do some boot testing too of course) to
-> > -msoft-float everyone, and then the fonts should also be working and we
-> > don't have to deal with some other details as well, yes? And having said
-> > that, just for sanity sake keep a stopwatch nearby and do some normal
-> > functional tests too, to make sure we don't suddenly speed-regress?
->=20
-> To make fonts work with -msoft-float for everyone, we need U-Boot to
-> link with the compiler intrinsics library (e.g.: libgcc, or
-> compler-rt). As of today some architectures choose a private libgcc
-> implementation within U-Boot.
+On Sun, Nov 12, 2023 at 01:02:46PM -0700, Simon Glass wrote:
 
-OK, so playing around further, I thought there was already a config that
-hit this as a run-time problem, which isn't the case. So, yes, I was
-wrong and for x86_64 I guess you just need to do what needs doing for
-SSE to be available and build those files with the right flags. Everyone
-else can safely turn off floating point and use a software library (or
-at least, RISC-V is the only outstanding question, we can deal with it
-later). Sorry for the confusion.
+> This is needed to support Truetype fonts. In any case, the compiler
+> expects SSE to be available in 64-bit mode. Provide an option to enable
+> SSE so that hardware floating-point arithmetic works.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Suggested-by: Bin Meng <bmeng.cn@gmail.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---N3tDePZvWxv64ZDS
+--rEKpo8PNOfO2HIrk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVUIQsACgkQFHw5/5Y0
-tyzvDAv/dN9z4onfM4Nlb4LTFsxc76Iu9fTezOzxa4sTz7clCM/oYSOYkKUf6EDe
-ze4UkvT64gPey1DH+8OCqaKY090u/fw7ueDcC5xjYwGsoBDpuRaC5bsUrlwxRlQb
-1K1y770VWZ3ZbgcWPafLyctrndGZtE2f/H2kcw8xOwGbknHNNNuRrbR3GD4p7B6r
-gNFv/pvaUXru1qwLfB8+FXqpY82fk8LDJkJKe5kutZ/l799BnzP5RyBcPoGaGCYD
-tyUDGgXWTG/N0W0K2asGTwhLxEUhiR5Luwu+ar42zS64G33H5zqNFVjqewvev5jC
-0VW7Jc69Csriye6Bv70uIRSSqMtMi0/O3uF9ZEV0/j0Bb1A5dNgoVuDfTt2toj+5
-tI6jpMGW3LnS8eNCkS+3Nppcj5m/rGaFxjRHtot7LqU5aD+c4Sr9u8Uhm8SFL7OW
-ujJK+xTHw5Ox2z3DUng/KgIgUzaSCSQfzmj0fCcr1N58qEm4Irlrlu5WCSABxBad
-6AMN6xi3
-=PGbk
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVUIYAACgkQFHw5/5Y0
+tyzbcAv+Jt0RFvhZvNg9f5JtXmiXjVAUZ3uGRxa3AiIVTxiGmME4JU8SPB9nTFB2
+N89o94/bszkglkb7OxGKJSvjomzAa4OCgDhS+7AlAkzSV1/82n8E6J9COgqOPTUO
+fasGKUnCkkbxieTRXU5ov1BHsejwv4ZmY+pktWrMf8DFdHyRF3IiLev4cDjZBF7y
+VvpEbg5EB8BKxWBWxzsRVE+A3rDfIJHrJECgQM/mGigYSTFjiBdpEgSmARiyLX8x
+1DsdNlxSyfpDrnYZuZ444F4XD7XcqzYINbUR8W20IPxzc2pNVfnevKFxGmfRHUQk
+74870gJcryHT7KY9cE74+D6oWFiKLqzgcbVKYsluLVCUTZb4e4GFn4wwZ0zeo+r5
+rNesVa9LqlNr8y9HEFXThUCEgIeJdwJGSp3SxMUHDNQcmKAcaSanTC3v+WScL8aE
+oP3ggNO3qt+apxPtXhqiSZLkXBY1/a9VQraRwxf+VHEdRviZCd34h8a/jZeZhg8h
+i1+u+HjS
+=fVQa
 -----END PGP SIGNATURE-----
 
---N3tDePZvWxv64ZDS--
+--rEKpo8PNOfO2HIrk--
