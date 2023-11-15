@@ -4,58 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483CDC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 00:48:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CFA9C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 01:38:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39CC3871FC;
-	Wed, 15 Nov 2023 01:48:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 34774868AE;
+	Wed, 15 Nov 2023 02:38:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fHVLpxSD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hwf+8xCF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A00A687211; Wed, 15 Nov 2023 01:48:45 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 615EA86758; Wed, 15 Nov 2023 02:38:35 +0100 (CET)
+Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
+ [IPv6:2607:f8b0:4864:20::a31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F4C6871FC
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 01:48:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9ED5868AE
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 02:38:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2c501bd6ff1so84792671fa.3
- for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 16:48:37 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-4ac10aacd27so2683274e0c.0
+ for <u-boot@lists.denx.de>; Tue, 14 Nov 2023 17:38:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700009317; x=1700614117; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gGLyBVW1mH71DRIm88uFGb32m722G9eW/Y6za0b6+f4=;
- b=fHVLpxSDq+oumWchDX9T4M+RwjJ8HaTRnT9uQD1ugox+0fm/tCodxfaaI2J8GrHLoM
- /XpinDSzrkyaESDsC96ZqxTcaLBYTKldS1wMTJdCLad31956G8+rVG+rX+JOhNGhJN0V
- H/lIjcggos3yIqwwefKOBvQo3rRjfLCfGdnOA=
+ d=konsulko.com; s=google; t=1700012309; x=1700617109; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uqU0zxMAYMNPJtbJAWcS3W2WpvaKa6U0dP1h3yZORk4=;
+ b=hwf+8xCFHruYHLhpeTnlKMLv+/DAid7kDCrpGFR0wHa+Uocdu6aH8zfgx3K564Hhos
+ QQBuN8AtnSnqUXOYDdeaXxe90sarrW3USOFgdKZ/EdP3/z8HI16hXYsL/LYc23KhUKvm
+ VCHfX5/ZHEa1LTRjaR4N8gtYcxFvkXW/ZfYSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700009317; x=1700614117;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gGLyBVW1mH71DRIm88uFGb32m722G9eW/Y6za0b6+f4=;
- b=h8SDNTvQ5MHDAIeah9ha0elePOljkBinngaoFRgcDDk9mYkQPac0VpkRHpvexL72ih
- uWkWw6dHLPyg6Vi8/DzEZnXFspKQF0vcj0j8NdZFi9iu/e17nwlU7AYYzmAKtgqmeJxm
- mDAeZmK7inH4VehPXkQpRO11OyQO36znyGVGcbjZ1tHPhOjLDRvp8NAHCqhlANJgAyZv
- dP5C5aNjytaFyEt0irhFMWv/KQQynky6rS9cHCRMx7fycL+sb0B0F8HCcDxPsZNBXPpG
- XS16CAFYIozGvL1rP07JC+YG6C7FylV2+AQqNqsrFp6A9UNIxgdE+hvR08VHtlqomZJd
- qDGw==
-X-Gm-Message-State: AOJu0Yyw5/ZLofOYTtJBgds6CBShy9kHV1dgVUByGcV9VIzt4dxOjty9
- MAv1grr6VdkBRd5EhDggUgBAgX8Cb+dhiTPd+Spsmg==
-X-Google-Smtp-Source: AGHT+IG0kOvprl6lx07rqcNOcJ0GVnpzgVbPqk0ilBwNpjOc91ZezZTW9WA8bY5cNMU6IquzWGvaE5tf7PhxvWP8g14=
-X-Received: by 2002:a2e:97c6:0:b0:2c5:3a9:7467 with SMTP id
- m6-20020a2e97c6000000b002c503a97467mr2967908ljj.8.1700009316560; Tue, 14 Nov
- 2023 16:48:36 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1700012309; x=1700617109;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uqU0zxMAYMNPJtbJAWcS3W2WpvaKa6U0dP1h3yZORk4=;
+ b=OQz6aCntMoL1GJwRbrqwe8p3OMD4+0eATp51ZlPw+UpQKB56f67a44vKdoUozb2v8H
+ 01dDUFZrv7RD67POOyD2P4MkT+ihrRy//1zb8kyIc1IbsFXeyWtsB7R5zxr6EIqUeEHN
+ jk7Y0G1MiRVOjgze40X7ipgtr/h6yUFvvSM7raBV2HpEDOTVVkDJLWAIPO3fqMzLUGbq
+ ZMR7rS9ey0MOavWzv8TN+x/qwbdv+JyEjWmmNM/2gTcy/PgrGc32BSzIxZNnmcVrZ6jf
+ q87z0PkM1NIaV8Y47NMEV4zaTnpOUfICxCfgbEbQgC4xOJ2IRi4JT2lswWMK9dAkiPyu
+ mi+g==
+X-Gm-Message-State: AOJu0YzS/l7aKcLoru6nZiQrK2XUP18Fb1gzfa0W3NGlqAEjeDmUPfZ/
+ A6J1MIcXuLuobuVG8bdBz7zDWw==
+X-Google-Smtp-Source: AGHT+IFl7ClVQozheQokQIW0scGOqqzbhCnNcSrki9popnna7MplVC/aMfLyQpPEgUdHOozaTVzLBw==
+X-Received: by 2002:a1f:2b8e:0:b0:49a:466c:199e with SMTP id
+ r136-20020a1f2b8e000000b0049a466c199emr9480337vkr.2.1700012309411; 
+ Tue, 14 Nov 2023 17:38:29 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-03f5-0f73-ac9e-a6c1.res6.spectrum.com.
+ [2603:6081:7b00:6400:3f5:f73:ac9e:a6c1])
+ by smtp.gmail.com with ESMTPSA id
+ v17-20020ac873d1000000b0041950c7f6d8sm3149897qtp.60.2023.11.14.17.38.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Nov 2023 17:38:28 -0800 (PST)
+Date: Tue, 14 Nov 2023 20:38:26 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: Re: [PATCH v4 09/12] x86: Enable SSE in 64-bit mode
+Message-ID: <20231115013826.GF6601@bill-the-cat>
 References: <20231112200255.172351-1-sjg@chromium.org>
  <20231112200255.172351-5-sjg@chromium.org>
  <CAEUhbmVg0m6BJQ_k82Hiqc8AJW1ricfd8WhdKCzAVdj1OOm=Vg@mail.gmail.com>
@@ -66,16 +79,12 @@ References: <20231112200255.172351-1-sjg@chromium.org>
  <CAEUhbmWQwPzSSJb5Z5E3vTcx44SbqxeAt_bTsEKa0ETmi2Lk8A@mail.gmail.com>
  <20231114162228.GU6601@bill-the-cat>
  <CAEUhbmUOEB1UB-s_fu_WSWt2FCDfTEcSswWu6yAacUrG-fhB_g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="N3tDePZvWxv64ZDS"
+Content-Disposition: inline
 In-Reply-To: <CAEUhbmUOEB1UB-s_fu_WSWt2FCDfTEcSswWu6yAacUrG-fhB_g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 14 Nov 2023 17:48:25 -0700
-Message-ID: <CAPnjgZ1FdLPG086Vnu4dxmdS2sXjUZfq6UETnT8ARdQ7tVFBJg@mail.gmail.com>
-Subject: Re: [PATCH v4 09/12] x86: Enable SSE in 64-bit mode
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Anatolij Gustschin <agust@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,12 +101,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Tue, 14 Nov 2023 at 17:44, Bin Meng <bmeng.cn@gmail.com> wrote:
->
+--N3tDePZvWxv64ZDS
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Nov 15, 2023 at 08:44:22AM +0800, Bin Meng wrote:
 > Hi Tom,
->
+>=20
 > On Wed, Nov 15, 2023 at 12:22=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
 ote:
 > >
@@ -228,8 +240,7 @@ te_tsc() works */
 > > > > > > > > >
 > > > > > > > > >         return 0;
 > > > > > > > > >  }
-> > > > > > > > > diff --git a/drivers/video/Kconfig b/drivers/video/Kconfi=
-g
+> > > > > > > > > diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
 > > > > > > > > > index 6f319ba0d544..39c82521be16 100644
 > > > > > > > > > --- a/drivers/video/Kconfig
 > > > > > > > > > +++ b/drivers/video/Kconfig
@@ -297,8 +308,7 @@ ion
 > > > > > will be generated.
 > > > >
 > > > > Right, which is why I'm saying why don't we just use -msoft-float
-> > > > instead, so that we don't have to worry about enabling features (an=
-d
+> > > > instead, so that we don't have to worry about enabling features (and
 > > > > also additional registers on the stack yes?) ?
 > > >
 > > > Yes, we should be using -msoft-float for all architectures by default
@@ -308,21 +318,42 @@ d
 > > OK, so for this series, lets please just simplify the logic in
 > > arch/x86/config.mk (and do some boot testing too of course) to
 > > -msoft-float everyone, and then the fonts should also be working and we
-> > don't have to deal with some other details as well, yes? And having sai=
-d
+> > don't have to deal with some other details as well, yes? And having said
 > > that, just for sanity sake keep a stopwatch nearby and do some normal
 > > functional tests too, to make sure we don't suddenly speed-regress?
->
+>=20
 > To make fonts work with -msoft-float for everyone, we need U-Boot to
 > link with the compiler intrinsics library (e.g.: libgcc, or
 > compler-rt). As of today some architectures choose a private libgcc
 > implementation within U-Boot.
 
-I thought I mentioned this but softfp did not work for me on x86 and
-my limited research suggests it is experimental / not used.
+OK, so playing around further, I thought there was already a config that
+hit this as a run-time problem, which isn't the case. So, yes, I was
+wrong and for x86_64 I guess you just need to do what needs doing for
+SSE to be available and build those files with the right flags. Everyone
+else can safely turn off floating point and use a software library (or
+at least, RISC-V is the only outstanding question, we can deal with it
+later). Sorry for the confusion.
 
-So look, I have a fairly trivial patch here. Perhaps we should just
-apply it and worry about RISC-V when needed?
+--=20
+Tom
 
-Regards,
-Simon
+--N3tDePZvWxv64ZDS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVUIQsACgkQFHw5/5Y0
+tyzvDAv/dN9z4onfM4Nlb4LTFsxc76Iu9fTezOzxa4sTz7clCM/oYSOYkKUf6EDe
+ze4UkvT64gPey1DH+8OCqaKY090u/fw7ueDcC5xjYwGsoBDpuRaC5bsUrlwxRlQb
+1K1y770VWZ3ZbgcWPafLyctrndGZtE2f/H2kcw8xOwGbknHNNNuRrbR3GD4p7B6r
+gNFv/pvaUXru1qwLfB8+FXqpY82fk8LDJkJKe5kutZ/l799BnzP5RyBcPoGaGCYD
+tyUDGgXWTG/N0W0K2asGTwhLxEUhiR5Luwu+ar42zS64G33H5zqNFVjqewvev5jC
+0VW7Jc69Csriye6Bv70uIRSSqMtMi0/O3uF9ZEV0/j0Bb1A5dNgoVuDfTt2toj+5
+tI6jpMGW3LnS8eNCkS+3Nppcj5m/rGaFxjRHtot7LqU5aD+c4Sr9u8Uhm8SFL7OW
+ujJK+xTHw5Ox2z3DUng/KgIgUzaSCSQfzmj0fCcr1N58qEm4Irlrlu5WCSABxBad
+6AMN6xi3
+=PGbk
+-----END PGP SIGNATURE-----
+
+--N3tDePZvWxv64ZDS--
