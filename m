@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E95C07548
-	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 11:15:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 954D9C07548
+	for <u-boot@archiver.kernel.org>; Wed, 15 Nov 2023 11:20:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 111C986A0A;
-	Wed, 15 Nov 2023 12:15:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FB7C86611;
+	Wed, 15 Nov 2023 12:20:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="RBlfxieV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VqZn+kI7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 050BD86BDF; Wed, 15 Nov 2023 12:15:17 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ id 390D186A0A; Wed, 15 Nov 2023 12:20:19 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E1BE8652B
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 12:15:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B56F8654D
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 12:20:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id B7F62B818BC;
- Wed, 15 Nov 2023 11:15:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8448C433C7;
- Wed, 15 Nov 2023 11:15:11 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id C4ED96148B;
+ Wed, 15 Nov 2023 11:20:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5AC27C433C8;
+ Wed, 15 Nov 2023 11:20:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700046914;
- bh=c0clK69P3jrYv6aqgLZ9sKvrogCoAfZE4fhzERJxUW8=;
+ s=k20201202; t=1700047215;
+ bh=Vm4WXrBPTp9oIdtIPkk16DSPAGsX6E1b2lEgK1h73YM=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=RBlfxieVJcHgLwFCSunaJiy4Nyev7EJd0WtAiqRu4OV3oVnR2+Y/Unkj1na7zKGGT
- 2Mg44BFtjz46I2KWnAS7tN5UeXHOG5ZHvwt1hutN5aWB3BKp2Sy+vPB/xt687fjW5O
- S+vMShn7eNo9cVaBJW2JPrQjcNu9Mvl8ocAUoVdfBUW7/lo8pmxjaUgzM20D+k4Jvp
- mmWxB6ND3m/wBIDvMmX9zr63qbznEVoOJjP35JvWwSmfB8s3a6+kUyBH4arYL2aPyN
- jXHVUMx+6bDxgFZSbPJDeFx0SDbwhTwXDbFrJIkW44fe4NV9ZBWHdX6Mj9LOq401ip
- 9qKN9y6uRvoEA==
-Message-ID: <2df85ff2-ada8-44ba-91b9-3ba3d299eeef@kernel.org>
-Date: Wed, 15 Nov 2023 13:15:08 +0200
+ b=VqZn+kI7m9HafusBxITUmECiMVkCZaGvuDAcHrpnGF6+cVDNrDWU3lRL6CddZfJWM
+ 6ln9IjkWFfgfNSmNqu4tIQaKm7gjaaejj9u8sadzNUjnGFiIHmY91UtVHraqcdI26z
+ ZC6KAcaefWmIS7vIvlI9MoEUYhtFqEWD7peN4Ihak7Z0eV15rj58Cc1WeTeWWGVhkY
+ 1LNlRuV3hg4m8EKF+cZXSbFJXPv9JXW4ESsIEj2Cam0RaI4xipWpvmyKzhBn/6kCfB
+ 5pIjwLWsksB05UkTBg0UZzH7iv7qRF4F9Gx+NkT1PR+XQ08eyu0sQkpoPc4E/mmjHU
+ h2gquqdonMRKw==
+Message-ID: <93ddadf9-3c3b-4324-8e6d-bbd9eee78329@kernel.org>
+Date: Wed, 15 Nov 2023 13:20:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] configs: am62ax_evm_a53_defconfig: Enable networking
+Subject: Re: [PATCH V2 0/4] arm: dts: k3-am625*: Upgrade kernel dts to v6.7-rc1
 Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Tom Rini <trini@konsulko.com>
-Cc: Siddharth Vadapalli <s-vadapalli@ti.com>, Andrew Davis <afd@ti.com>,
+To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Neha Malcom Francis <n-francis@ti.com>, Bryan Brattlof <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>,
- u-boot@lists.denx.de
-References: <20231113145149.1926732-1-nm@ti.com>
- <20231113145149.1926732-5-nm@ti.com>
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sjoerd Simons <sjoerd@collabora.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, Dhruva Gole <d-gole@ti.com>
+References: <20231115032857.3071474-1-nm@ti.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20231113145149.1926732-5-nm@ti.com>
+In-Reply-To: <20231115032857.3071474-1-nm@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,62 +77,33 @@ X-Virus-Status: Clean
 
 
 
-On 13/11/2023 16:51, Nishanth Menon wrote:
-> Enable networking
+On 15/11/2023 05:28, Nishanth Menon wrote:
+> Hi,
+> rev 2 of the series to sync am62 with v6.7-rc1.
 > 
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-> ---
->  configs/am62ax_evm_a53_defconfig | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+> Changes:
+> - picked up reviews, tested tags.
+> - minor commit message correction in patch #4.
 > 
-> diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
-> index d0a34c75505d..c94708a7bf85 100644
-> --- a/configs/am62ax_evm_a53_defconfig
-> +++ b/configs/am62ax_evm_a53_defconfig
-> @@ -42,7 +42,6 @@ CONFIG_SPL_OF_CONTROL=y
->  CONFIG_MULTI_DTB_FIT=y
->  CONFIG_SPL_MULTI_DTB_FIT=y
->  CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
-> -# CONFIG_NET is not set
->  CONFIG_SPL_DM=y
->  CONFIG_SPL_DM_SEQ_ALIAS=y
->  CONFIG_REGMAP=y
-> @@ -51,6 +50,8 @@ CONFIG_SPL_OF_TRANSLATE=y
->  CONFIG_CLK=y
->  CONFIG_SPL_CLK=y
->  CONFIG_CLK_TI_SCI=y
-> +CONFIG_DMA_CHANNELS=y
-> +CONFIG_TI_K3_NAVSS_UDMA=y
->  CONFIG_TI_SCI_PROTOCOL=y
->  # CONFIG_GPIO is not set
->  # CONFIG_I2C is not set
-> @@ -60,6 +61,10 @@ CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_ADMA=y
->  CONFIG_SPL_MMC_SDHCI_ADMA=y
->  CONFIG_MMC_SDHCI_AM654=y
-> +CONFIG_PHY_TI_DP83867=y
-> +CONFIG_PHY_FIXED=y
+> Boot logs:
+> https://gist.github.com/nmenon/d62c4795c6d3d40c83ba36d1cd047c42
+> 
+> WARNING: This will have  a minor conflict (binman) with:
+> https://lore.kernel.org/u-boot/20231104080137.9628-1-nm@ti.com/
+> 
+> 
+> I haven't had a chance to test this out on verdin (only build tested)
+> - going to depend on any checks folks can provide.
+> 
+> V1: https://lore.kernel.org/all/20231113145919.1928812-1-nm@ti.com/
+> 
+> Nishanth Menon (4):
+>   arm: dts: k3-am625*: Sync with kernel v6.7-rc1
+>   arm: dts: k3-am625: Drop SoC provided bootph params from board
+>     u-boot/r5 dtsi
+>   arm: dts: k3-am625-beagleplay-u-boot: drop duplicate bootph-nodes
+>   arm: dts: k3-am625-sk-r5/u-boot: Drop duplicate bootph-nodes
 
-Why do we need PHY_FIXED?
+for this series:
 
-"
-config PHY_FIXED
-        bool "Fixed-Link PHY"
-        help
-          Fixed PHY is used for having a 'fixed-link' to another MAC with a direct
-          connection (MII, RGMII, ...).
-          There is nothing like autoneogation and so
-          on, the link is always up with fixed speed and fixed duplex-setting.
-          More information: doc/device-tree-bindings/net/fixed-link.txt
-"
-
-
-> +CONFIG_TI_AM65_CPSW_NUSS=y
-> +CONFIG_PHY=y
->  CONFIG_PINCTRL=y
->  CONFIG_SPL_PINCTRL=y
->  CONFIG_PINCTRL_SINGLE=y
-
--- 
-cheers,
--roger
+Reviewed-by: Roger Quadros <rogerq@kernel.org>
