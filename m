@@ -4,68 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3308C2BB3F
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 02:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5453C072A2
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 02:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DEBC87467;
-	Thu, 16 Nov 2023 03:35:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 26CD38704F;
+	Thu, 16 Nov 2023 03:36:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Let+C9GK";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="PNs9TUOI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 854698745A; Thu, 16 Nov 2023 03:35:50 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4FAF686F85; Thu, 16 Nov 2023 03:36:34 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1376087479
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 03:35:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17AE18745A
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 03:36:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9e2838bcb5eso48576966b.0
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:35:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700102146; x=1700706946; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qcseZ9PzQJoe3O3NcwCrgCCs2bzvnB7kx6+JjunOXNU=;
- b=Let+C9GKSYLDhX3qM5hJBYx2p30ZzKXlFTRs62ZXsU1ISlTmRqWhL7B6IEXuWogUtB
- iV5QhqeCD1SrUSXxdzX1QOZexJHG3E7BH+yprIwDv4X05jon+Y1h/9oTrWh5le2HGuGq
- 27VrbT94e93kKabUs/85oD9Wm7I2G/urvvVvM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700102146; x=1700706946;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qcseZ9PzQJoe3O3NcwCrgCCs2bzvnB7kx6+JjunOXNU=;
- b=dxUmOL9jYkYbmajZldOvuETbJnRP7u8/XiyhS8zm6oAkqNvP43UYxY6d56ERGsYH74
- 8pPW43dyCG6MAQGJHKHCNGctBNt7nHF4hyvt8MHwOqew6eA9ahnjKeWSAiufcvtzCnp2
- rF21X6m+lPAotcX3pgxAFiK8bEFOjV5X18hTxPbu08EO8jpf5pDN3tTQfW8JNeEL8IyN
- 1WlLpm/0fvIAa6mWszBIZE/LpavHBX3EgwBf6AnPfgC91EOzaBiOi9n8UMM7VlyPEysL
- E21D7MpAkgObgW5SnGGDvTFMeStOge3LTM3E6fIbCxYkWJ5S3b5OmKRuvjraWYtEX2rR
- Utjg==
-X-Gm-Message-State: AOJu0YwFzzsz0I2jBoFkSjwA2V31BbqsRcG5BYA0MgjuJTSa4LQT/BeV
- htxBeS3USyJZNI+/dOG8fStnaZ3PHY3lEI3jTURSrBs5+yaSruJbrMA=
-X-Google-Smtp-Source: AGHT+IGX0UX4gMvhP+Q2r1HCnt7eYl0GJ1Dli0j7irwYde3+1g9yfidW0RfHZAy4RFT0zOalQRI7giaVHBJrZemKicg=
-X-Received: by 2002:a17:906:ca5b:b0:9be:30c2:b8ff with SMTP id
- jx27-20020a170906ca5b00b009be30c2b8ffmr10653116ejb.61.1700102146505; Wed, 15
- Nov 2023 18:35:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700102190; x=1700706990; i=xypron.glpk@gmx.de;
+ bh=ezgiZWc8OzkVQv1ngUoxF7UwWq7tkeCWFQuETlztO6s=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=PNs9TUOI3QDlOc2P9qNqszXs7RM6M1RfyHMmaWW1n0HiCH0eDdHOf6OpFFbrqvUy
+ IaLYk2t2G71PcA1rP2/wrsfnOn5198BOdtS5aLolnBIWC56gETCHM8F1RDUb2Tcl9
+ ngXPol0TzwQjKNZeox4M/NxmODnOOquP2ZCerYFAOaUciDqFvmj9qmzInQFv7X3DG
+ Y1dtIFMEEMDOqYHOzfyStAVRrwBhbqfQCvH9fGQGxwhOiOMjd9s+IjB3lcTl7wD4x
+ f+6IQ5ZQ+Oxax0xzm0YiK7i1hnQuzJSubzXbCcAdllpmlP++DdrBwVmpxUjyJRETK
+ 9vlTXb8EqhP2uHJVfg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MWzfl-1qsJJ131Mv-00XNMK; Thu, 16
+ Nov 2023 03:36:30 +0100
+Message-ID: <eb73b6b9-118e-48dd-bf12-e26ff7600cbc@gmx.de>
+Date: Thu, 16 Nov 2023 03:36:30 +0100
 MIME-Version: 1.0
-References: <20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid>
- <ee2def9d-c931-466a-bf78-507887de41c9@gmx.de>
-In-Reply-To: <ee2def9d-c931-466a-bf78-507887de41c9@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Nov 2023 19:35:34 -0700
-Message-ID: <CAPnjgZ1-tQxSa1sY_f3BsJpPu+9tLkyrvt2vG0nqu=xegyi4mQ@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: Avoid freeing a non-allocated buffer
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Shantur Rathore <i@shantur.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
+Cc: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+References: <CAHc5_t2hrverfcsEEahUcRkcjrnF3jr0oyds2yo0RBVMB7E01g@mail.gmail.com>
+ <CAPnjgZ1-_ohZaVwMGtTDt4-W--2q0AM2KPtX9RLgAbMEhMRugw@mail.gmail.com>
+ <CAHc5_t1icj6d82GH+FK8qGg3MvDkpwEicH964ULcN971_=aSKg@mail.gmail.com>
+ <CAHc5_t2vLU9gHufMS_Fjv6j5+E8ksgCCLzKQ7NxTHzJsdcmsNQ@mail.gmail.com>
+ <CAPnjgZ3VY_M+zd2na+N9WCxj-L2F+KKhLgykQ21FTA7GPVrKNQ@mail.gmail.com>
+ <CAHc5_t1fBzzpJaQed9kcKF92ProStsutmOBW-1jmi5vWFvLM8g@mail.gmail.com>
+ <CAPnjgZ3WNmnNv7DjMFDM9Med3yRng32N6tku4NGxbwA5DRhQgA@mail.gmail.com>
+ <CAHc5_t1H39YV=HSSa7TCEdzRctAX+zibkx1vsuwEW-raOL9TcA@mail.gmail.com>
+ <CAPnjgZ3V65sCuRV_NzJFZHL7-ZHq9SQUTxvvbj5GszFAhJ4WzA@mail.gmail.com>
+ <CAC53B67-9BC2-4EB4-9846-F78166140BD0@gmx.de>
+ <CAPnjgZ2P=85dys80aXA4Hss9f=wq9YR+KrNSw5bk+n=W7RFj8w@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAPnjgZ2P=85dys80aXA4Hss9f=wq9YR+KrNSw5bk+n=W7RFj8w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:VbrLULMWdnudu8Zem2A1YC+is24AHFMViZICDSwO+fTpoBGUxbI
+ ONCFbrlxTY/t+P6VRn/dnSRCmbIXA+0Ucs08SWsVMcpIV8MTEMUcAGxn5XgvgEeYxHbPboO
+ eB43uz394iruR3+Tf5wGqSaLXMuBbo3/LpxVi9gLrpq3jbk8phjkrotzxQ8FZvZVtijAYdJ
+ ugAAlZAYUneqHORMxlHPg==
+UI-OutboundReport: notjunk:1;M01:P0:0c/jqSGjEbM=;79xbf5fyJZvpPQ4QJj3MYVPVq3y
+ tIYXpSJ1rmzG5M2A9igxIZMI5AcM1xVOowOazFADbLBm2E4WFOKK+Ovu5coQ8Q3WUuv30P4td
+ Iy+XMF8TVyo0QcchEW3/Y6o7IJw++Gvuc3mg3xXOW8/9Ikl4m4n38TlMhAUs9DtDGuBIV2PhP
+ KxDHLGTxaszJF0K7CA+ltgql1kcER1AVy3p8C6xfW8Zg48jeciTNtb+0a+vERSvlxoX71a8Eo
+ hTJTXv/j7BCEwG0uIdqQpmUwdS/d0FBvTFUeAuCEFcyg6Or+MXedkdPQIsKBFTE5b0xtOL3rA
+ I2vZDxlitUeEmt0FFw20dsfubIq0jUhzBoNIikFyUIacZ4dsSSEaOY8oCpurfNycc0oRudtiL
+ 540HC2H3+zAYs+FullctZx8IqoJTF6Zbo/+xOlVjs9MP49i88Cqc6COlpX1146F2CcNGTrA00
+ zx90lZuDPOfuGgXdLBsz2vtFYGhVo1rcbonuCXsIVhTgWh9ssSWHTIeSlEqgN+YNeDUsrwrad
+ rD1GBWo2n5BoTuxooKgf3i9vCabzeKBVmkCJJ0cvD+LwCLwqdBbRd+X+jc1UEeHU3HY/3kNXt
+ 09PI5v2qiFUBomIzbWQSWIl8jRHdXtOzNcOpdlT4frFPBXABSPHk2adJqciT3rmWC9KMGtFyb
+ pCALbP+OEcWoGBCHQ3mY/t5DUknTng3hmRZPKmLKssr4HwW75s5ivCtcleZ8Iqqj0N85Qpx8y
+ Ho1IOdBH8OUDRIP1ymd28/PhVLRUWWBAxY7sddBeVQw8VJqRo8zj643cUs/p9WCtFYqIBF0wz
+ 3bdOignjK3maLJRMC+gs4tZI50XJdWbWLXJa/2Dzlgio7xlx3m8+NaGRS5lxT2q3fAvGLICce
+ Z6Qs2mdhMLBUgTy+jGxZ0K7CjFwyMiDDkkgF20uFYATl9dQ7GHsnyq+Q9rKgQ6IMTaxq/NvbP
+ t9puzCbZCHSzO/rZWwYcNjwx/Co=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,67 +99,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On 11/16/23 02:39, Simon Glass wrote:
+> Hi Heinrich,
+>
+> On Wed, 15 Nov 2023 at 15:47, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+>>
+>>
+>>
+>> Am 15. November 2023 23:15:46 MEZ schrieb Simon Glass <sjg@chromium.org=
+>:
+>>> Hi Shantur,
+>>>
+>>> On Wed, 15 Nov 2023 at 15:13, Shantur Rathore <i@shantur.com> wrote:
+>>>>
+>>>> Hi Simon,
+>>>>
+>>>> I have figured out the cause of the crash.
+>>>> It happens here -
+>>>> https://github.com/u-boot/u-boot/blob/master/boot/bootflow.c#L470
+>>>> while doing - free(bflow->buf)
+>>>>
+>>>> As I understand it,
+>>>> - Just before starting kernel EFI binary calls usb-uclass->usb_stop()
+>>>> - This starts removing all devices in my case ( 6x usb_hub, 2x
+>>>> partition, 1x blk, 2x bootdev, 1x usb_maas_storage)
+>>>> - While removing bootdev, it ends up calling bootdev-uclass ->
+>>>> bootdev_pre_unbind -> bootdev_clear_bootflows which calls
+>>>> bootflow->bootflow_remove and bootflow_free
+>>>>
+>>>> I don't know why this buf cannot be freed, is it because the EFI
+>>>> binary in the buffer is still being used ( efi/boot/bootaa64.efi ) ?
+>>
+>> EFI binaries should never be started from memory allocated with malloc.=
+ efi_load_image() should be invoked which allocates EFI memory via efi_all=
+ocate_pages(). The handle created has to be passed to efi_start_image().
+>
+> This is a mess at present, as you are probably aware. EFI has hack to
+> look at loaded images and try to patch up its tables.
 
-On Wed, 15 Nov 2023 at 19:18, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 11/16/23 02:35, Simon Glass wrote:
-> > EFI applications can be very large and thus used to cause boot failures
-> > when malloc() space was exhausted.
-> >
-> > A recent changed fixed this by using the kernel_addr_r environment var
-> > as the address of the buffer. However, it still frees the buffer when
-> > the bootflow is discarded.
-> >
-> > Fix this by introducing a flag to indicate whether the buffer was
-> > allocated, or not.
-> >
-> > Note that kernel_addr_r is not the last word here. It might be better
-> > to use lmb to place images. But there is a lot of refactoring to do
->
-> We need a discussion about memory management. We currently have:
->
-> * malloc
-> * EFI - AllocatePages(), AllocatePool()
-> * lmb
-> * preassigned addresses like $kernel_addr_r, $fdt_addr_r
-
-Yes indeed. There have been discussions already, but we need to do
-this on the ML.
-
->
-> EFI manages memory on page level. It needs to provide a complete memory
-> map to the OS with flags for different types of memory. Currently it is
-> not aware of where files are loaded and might allocate those regions for
-> its own usage.
->
-> lmb does not track any allocations but tries to recreate a memory map on
-> the fly whenever a file is loaded.
->
-> It would be preferable to allocate memory for files and require to
-> explicitly unload a file before reusing the same memory area.
->
-> We should start a separate thread on this topic.
-
-Indeed. If you start it, I will reply with some thoughts.
-
-The nice thing is that with bootstd we can start to tidy all this up
-and make sure it has tests.
+The UEFI implementation has to follow the specification.
 
 >
-> > before we can remove the environment variables. The distro scripts rely
-> > on them so it is safe for bootstd to do so too.
-> >
-> > Fixes: 6a8c2f9781c bootstd: Avoid allocating memory for the EFI file
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Reported by: Simon Glass <sjg@chromium.org>
-> > Reported by: Shantur Rathore <i@shantur.com>
+> With bootstd we will be able to do this properly.
 >
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> But note that memory allocation in U-Boot is done via malloc() and
+> lmb. We don't call efi_allocate_pages() except in the EFI code.
+
+lmb as used today does not keep track of allocations. It creates a
+memory map on the fly which is discarded after usage.
+
+It would be great to unify lmb and the EFI page based allocation. Next
+we need to properly allocate memory for loading files and require
+freeing the memory before loading a second file into the same location.
+
+The memory available in malloc() is much too small (default 4 MiB) to
+handle large files like kernels. malloc() does not keep track of
+different memory types that we need in the EFI case.
+
+Best regards
+
+Heinrich
+
 >
+>>
+>>>> But commenting this line out fixes the crash and linux boots happily.
+>>>>
+>>>> Fixing this properly is above my pay grade as of now.
+>>>
+>>> Great, thank you! I will send a patch.
+>>
+>> Free() typically crashes in U-Boot when freeing the same memory twice.
+>
+> Indeed. In this case it was not even allocated.
+>
+> Regards,
+> Simon
 
-[..]
-
-Regards,
-Simon
