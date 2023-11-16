@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62140C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:05:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A343C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:05:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97DD1874B1;
-	Thu, 16 Nov 2023 17:04:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CB56874CF;
+	Thu, 16 Nov 2023 17:04:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gW1Z00Dv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lNWIcYD+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3CCF86F73; Thu, 16 Nov 2023 17:04:45 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 7A60286F73; Thu, 16 Nov 2023 17:04:47 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B309C874C3
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:04:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 05CB1874CC
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:04:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9d0b4dfd60dso133362466b.1
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:04:38 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-9c41e95efcbso144267766b.3
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:04:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700150678; x=1700755478; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700150681; x=1700755481; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jUeL105+MHsjoejKJdHuvm5J57ZJfbLorWjW0i3NhN4=;
- b=gW1Z00Dvy+WqCn5ASdlq5W+knJOotUqR4nCRKCS640wcIhbt2v2+VHjjmGwOgD7bby
- aJqC5JYShTdpG3CgaG1VFcxnhy7fHdAR+zd9K4t0eQ+5bNtiXuntMpPg8YuXM1vzzDQe
- dNf2X5nM7jj8NFhSdQvJvp/Fx/eaHOGMroU1g=
+ bh=MKqkGSI4NaXEIB9NWSGm8KcYW0xjwGs2rndqWtA1INk=;
+ b=lNWIcYD+clYbbPMspfqc4edKrWMOOD4KgAFHwWw4A4EbMgyZm8C6s7j5e/L/KdltAi
+ vkwO2uJ5dlHId2BAVrm6m+Orp8WvgVzuPVOKteQCHzP7Jlt7XonHAd2XNuq2VEfmu9uE
+ lgs1iC39hDzmust25ToWDXe5bjpw4/duvWvWM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700150678; x=1700755478;
+ d=1e100.net; s=20230601; t=1700150681; x=1700755481;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jUeL105+MHsjoejKJdHuvm5J57ZJfbLorWjW0i3NhN4=;
- b=vuXoCfB4Gdc5F8i0AFAi9265JcuAlOxCJ1Y5NO3NHNRFpUQsyfHyFw7QYOidV75eFl
- OiIliCjuV0BAin9z3/dS0Y+7r83JK76HSbGp2Ube856MHK/peNhcr2lFE5jy2SwLCqZ9
- o1KvlUrOSiXyKRmt19GHFuF61aB+U+mymFlIUekATpt9n+BYcpmQHNRB0Dxgzqbqz5h+
- QQISEZs7l7KJ9vdW0FIIH7KyZx/hNpFTAX7xgHbLo3sdgYrGswICiZWKaBBOn+maylwD
- UFLoQDZohivaCeAXNkpzmj8Zk+udo8k1eLpH1IGfjP1u58zgHyNuB92R3qgnvDyPo83T
- dOWw==
-X-Gm-Message-State: AOJu0YyUJ83bBUgx0Sjza7MjWXwU+Rwcw1AL2uXYc6vPkRiWhl0cM8s5
- +NqAy3VFll4habdOz0pRGG3AGXmwLTjQzJ1rgy7WX0pwIPO+jA3UOOs=
-X-Google-Smtp-Source: AGHT+IHaFEGI1cK85Siyk230IhTY+jFre4BYqJwFGiF4ykkhEO2zX0BOfugX3Zj4B2sPHtB+jJzfhTWaX2Re7HrAX98=
-X-Received: by 2002:a17:906:d9b:b0:9e5:d268:d750 with SMTP id
- m27-20020a1709060d9b00b009e5d268d750mr11957484eji.60.1700150678083; Thu, 16
- Nov 2023 08:04:38 -0800 (PST)
+ bh=MKqkGSI4NaXEIB9NWSGm8KcYW0xjwGs2rndqWtA1INk=;
+ b=TXEHkcyu9Dc1+/w+wMlgfJWF9WGzA6XzwW20XqlirKDS8IgTzcOt4TCmFPiLlmRkwk
+ Rg+pUxr9hvZxZDwm/Y4EhGT65bAjYbHzRB1X+fQUKiES/gNSsbGKc4eTHQQQKJ4OBSsj
+ BJN8HDP+33yLQ+4DKdIttaCzN+u3KHL4JUcswzKfrAH9gi6xukQL9Ky7Kfl6E/LsSltJ
+ +FBNgMcVS4PqcXXft05vF+J28aPPmGIPlwtegKjK6LZmxpOzNt2jcsZU0I+7YfxpA4Td
+ knC/a99FE+LslYkS8CjL39Kr9Era5O4GSHXO0wTA1X+wfJ38vFtARv5qjOair0ffBTzp
+ AmGg==
+X-Gm-Message-State: AOJu0YzTa6guKVES3Gj++KVHXPRs1p3Lxhtzle2O3QveqtpN0yCfnqhB
+ +sAh0e+lL9qnMlPwsUhhAkYJOZBGxqTj8labQl2VHQ==
+X-Google-Smtp-Source: AGHT+IFixOdHrL9ShJmTh9vOsEjMJxd3E0DLbiVDyEw4cLN+Er2SbSIIsXhjRqs5St065HJGe17ux5EWFO6JOQx2vbI=
+X-Received: by 2002:a17:906:d217:b0:9be:3c7e:7f38 with SMTP id
+ w23-20020a170906d21700b009be3c7e7f38mr11690356ejz.10.1700150681449; Thu, 16
+ Nov 2023 08:04:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20231116091033.20770-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231116091033.20770-1-heinrich.schuchardt@canonical.com>
+References: <20231115101024.3441093-1-n-francis@ti.com>
+ <20231115101024.3441093-3-n-francis@ti.com>
+In-Reply-To: <20231115101024.3441093-3-n-francis@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 16 Nov 2023 09:04:26 -0700
-Message-ID: <CAPnjgZ14z_d0Z3LSS4FMfu9a6rzZ_ERZ5aFtfu-OKf4KbjQQFA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] doc: typo fdtaddr_addr_r
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+Date: Thu, 16 Nov 2023 09:04:29 -0700
+Message-ID: <CAPnjgZ2R0O-VZdRpUt2p45y2_kzY2yL5apciP+vz4hHDwfZR3g@mail.gmail.com>
+Subject: Re: [PATCH 2/2] arm: dts: k3-*-binman: Move to using templated FITs
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: marcel.ziswiler@toradex.com, u-boot@lists.denx.de, vigneshr@ti.com, 
+ nm@ti.com, u-kumar1@ti.com, kamlesh@ti.com, m-chawdhry@ti.com, afd@ti.com, 
+ mkorpershoek@baylibre.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,14 +83,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Nov 2023 at 02:10, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Hi Neha,
+
+On Wed, 15 Nov 2023 at 03:10, Neha Malcom Francis <n-francis@ti.com> wrote:
 >
-> %s/fdtaddr_addr_r/fdt_addr_r/
+> Reduce redundancy in code by using templates to generate the A72 boot
+> binaries (tispl.bin and u-boot.img) as well as R5 boot binary sysfw.itb
+> (for legacy boot following devices J721E and AM65x).
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  doc/develop/bootstd.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  arch/arm/dts/k3-am625-sk-binman.dtsi          | 157 +--------
+>  .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 155 +-------
+>  arch/arm/dts/k3-am62a-sk-binman.dtsi          | 158 +--------
+>  arch/arm/dts/k3-am64x-binman.dtsi             | 151 +-------
+>  arch/arm/dts/k3-am65x-binman.dtsi             | 273 +-------------
+>  arch/arm/dts/k3-j7200-binman.dtsi             | 159 +--------
+>  arch/arm/dts/k3-j721e-binman.dtsi             | 332 +-----------------
+>  arch/arm/dts/k3-j721s2-binman.dtsi            | 157 +--------
+>  8 files changed, 54 insertions(+), 1488 deletions(-)
+>
+
+Gosh that's a huge improvement!
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
