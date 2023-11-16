@@ -4,48 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C31C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 13:03:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14517C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 13:17:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE9DD874BA;
-	Thu, 16 Nov 2023 14:02:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 8861387499;
+	Thu, 16 Nov 2023 14:17:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 10599874BB; Thu, 16 Nov 2023 14:02:31 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44DB4874B7
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 14:02:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3AGD237h001825;
- Thu, 16 Nov 2023 21:02:03 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 16 Nov 2023
- 21:01:58 +0800
-From: Randolph <randolph@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH V3 2/3] spl: riscv: falcon: move fdt blob to specified address
-Date: Thu, 16 Nov 2023 21:01:35 +0800
-Message-ID: <20231116130136.2796918-3-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231116130136.2796918-1-randolph@andestech.com>
-References: <20231116130136.2796918-1-randolph@andestech.com>
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="S4DbGRKl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 186A586F73; Thu, 16 Nov 2023 14:17:07 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CFA6486F73
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 14:17:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=conclusive.pl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=artur@conclusive.pl
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9e28724ac88so111500566b.2
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:17:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=conclusive.pl; s=google; t=1700140622; x=1700745422; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GOooz7EfklbaJLalJkDLmrhthjjmOc06tz4zjJxjiKU=;
+ b=S4DbGRKlEy/1ffYnus3QowGnUqARuHwORly85MZ8Ifr63V9VdtCBOx3tYdJn7jisLX
+ T2Z0RlHVasdmqevHOmM4zVkC2cwAxlynVrBzUvZlPhegudAAc/cq13bHPbRTGkVu8IeK
+ FnRsCcs98chvC++feGwG6R4SF/zgH0496SEmZfXAbDRpnhTVMjvfCdchgYoKmtRDpVxr
+ NfK4YUv5c3+l07+WyCzhZmJGKULLJE+R4CavUKQFXayE3lTE2PBKCNRDO58jmgzYh77q
+ 4pguV4mBl0Uf19O9C4156jbHVcS8sRe7hdL+QWRBfgxOSTGu/HGnK7s4L3Kps249RJQy
+ uidw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700140622; x=1700745422;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GOooz7EfklbaJLalJkDLmrhthjjmOc06tz4zjJxjiKU=;
+ b=a/nKkdIsPsO+7i4Xopz0L/SExWfVaSybmxnsApKlv/+DRy3dMt6JNe/RsupWio3omk
+ aG5JiiIYhvvzRn5OJs3eMjBSveKXdtH7eAr31rApX1nUkQVJHJtFl1bcv6qug1X8eYK/
+ FDf9kElOlYNgmXXvfAHge5Mh9JtvP7QkSzF5g+zKaycqjFCNI7eTU2tDquJkjyCQe9Rm
+ wa35fxsEqqKFtTLaJgmazxb6YdxiJ8DKZoIUUJ7+c4qWa8MUd4W46LoFDn+gMcSwZ38b
+ 62/c0jTJxQLS9Thuy34yiA/l9Q4rnhQUB0hgP5YDYBfIB3l5F7zXuwqqEzCnSYd9weLv
+ kZjw==
+X-Gm-Message-State: AOJu0YwBWBP94CS9WYqX5ELv7Dr8W2ohaaB6AQxcrLazRUPVMRfCuvu9
+ 7MpQG2oD3SrVfP0C8KGZVowO8g==
+X-Google-Smtp-Source: AGHT+IEnopz/hoB1vbAyDpGfhbFi23INTmV4A88mYNL1KmgjVMHfSMsgJ8Z33m2MtPCJ+C0DKDDZdQ==
+X-Received: by 2002:a17:906:6d4e:b0:9ba:1d08:ad43 with SMTP id
+ a14-20020a1709066d4e00b009ba1d08ad43mr11818349ejt.70.1700140622320; 
+ Thu, 16 Nov 2023 05:17:02 -0800 (PST)
+Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
+ [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
+ h17-20020a1709063b5100b009e6e82939f9sm8347885ejf.26.2023.11.16.05.17.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Nov 2023 05:17:01 -0800 (PST)
+From: Artur Rojek <artur@conclusive.pl>
+To: Peng Fan <peng.fan@nxp.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>
+Cc: Wojciech Kloska <wojciech@conclusive.pl>,
+ =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
+ u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
+Subject: [PATCH 1/2] armv8: layerscape: Enable ext4 environment storage
+Date: Thu, 16 Nov 2023 14:16:29 +0100
+Message-ID: <20231116131630.407502-2-artur@conclusive.pl>
+X-Mailer: git-send-email 2.42.1
+In-Reply-To: <20231116131630.407502-1-artur@conclusive.pl>
+References: <20231116131630.407502-1-artur@conclusive.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.173]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3AGD237h001825
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,107 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In Falcon Boot mode, the fdt blob should be move to the RAM from
-kernel BSS section. To avoid being cleared by BSS initialisation.
-SPL_PAYLOAD_ARGS_ADDR is the address where SPL copies.
+From: Jakub Klama <jakub@conclusive.pl>
 
-Signed-off-by: Randolph <randolph@andestech.com>
+Some boards keep their environment on MMC storage within an ext4
+partition.
+
+Signed-off-by: Jakub Klama <jakub@conclusive.pl>
+Signed-off-by: Artur Rojek <artur@conclusive.pl>
 ---
- board/AndesTech/ae350/ae350.c | 25 -------------------------
- common/spl/Kconfig            |  2 +-
- common/spl/spl_opensbi.c      | 16 ++++++++++++++++
- 3 files changed, 17 insertions(+), 26 deletions(-)
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/board/AndesTech/ae350/ae350.c b/board/AndesTech/ae350/ae350.c
-index 772c6bf1ee..36375d9def 100644
---- a/board/AndesTech/ae350/ae350.c
-+++ b/board/AndesTech/ae350/ae350.c
-@@ -19,8 +19,6 @@
- #include <fdtdec.h>
- #include <dm.h>
- #include <spl.h>
--#include <mapmem.h>
--#include <hang.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -28,29 +26,6 @@ DECLARE_GLOBAL_DATA_PTR;
-  * Miscellaneous platform dependent initializations
-  */
- 
--#if CONFIG_IS_ENABLED(LOAD_FIT) || CONFIG_IS_ENABLED(LOAD_FIT_FULL)
--#define ANDES_SPL_FDT_ADDR	(CONFIG_TEXT_BASE - 0x100000)
--void spl_perform_fixups(struct spl_image_info *spl_image)
--{
--	/*
--	 * Originally, u-boot-spl will place DTB directly after the kernel,
--	 * but the size of the kernel did not include the BSS section, which
--	 * means u-boot-spl will place the DTB in the kernel BSS section
--	 * causing the DTB to be cleared by kernel BSS initializtion.
--	 * Moving DTB in front of the kernel can avoid the error.
--	 */
--	if (ANDES_SPL_FDT_ADDR < 0) {
--		printf("%s: CONFIG_TEXT_BASE needs to be larger than 0x100000\n",
--		       __func__);
--		hang();
--	}
--
--	memcpy((void *)ANDES_SPL_FDT_ADDR, spl_image->fdt_addr,
--	       fdt_totalsize(spl_image->fdt_addr));
--	spl_image->fdt_addr = map_sysmem(ANDES_SPL_FDT_ADDR, 0);
--}
--#endif
--
- int board_init(void)
- {
- 	gd->bd->bi_boot_params = PHYS_SDRAM_0 + 0x400;
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 25cd18afda..db279a588a 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1081,7 +1081,7 @@ config SPL_OS_BOOT
- 
- config SPL_PAYLOAD_ARGS_ADDR
- 	hex "Address in memory to load 'args' file for Falcon Mode to"
--	depends on SPL_OS_BOOT
-+	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
- 	default 0x88000000 if ARCH_OMAP2PLUS
- 	help
- 	  Address in memory where the 'args' file, typically a device tree
-diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
-index 9801d38c0b..0a8ee9a7fc 100644
---- a/common/spl/spl_opensbi.c
-+++ b/common/spl/spl_opensbi.c
-@@ -16,6 +16,7 @@
- #include <opensbi.h>
- #include <linux/libfdt.h>
- #include <linux/printk.h>
-+#include <mapmem.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -57,6 +58,21 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
- 		hang();
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+index 12d31184ad91..3775cb493732 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+@@ -857,6 +857,11 @@ enum env_location arch_env_get_location(enum env_operation op, int prio)
+ 		break;
  	}
  
-+	/*
-+	 * Originally, u-boot-spl will place DTB directly after the kernel,
-+	 * but the size of the kernel did not include the BSS section, which
-+	 * means u-boot-spl will place the DTB in the kernel BSS section
-+	 * causing the DTB to be cleared by kernel BSS initializtion.
-+	 * Moving DTB in front of the kernel can avoid the error.
-+	 */
-+	if (CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOOT)) {
-+		memcpy((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
-+		       spl_image->fdt_addr,
-+		       fdt_totalsize(spl_image->fdt_addr));
-+		spl_image->fdt_addr =
-+			map_sysmem(CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
-+	}
++#ifdef CONFIG_ENV_IS_IN_EXT4
++	if (env_loc == ENVL_MMC)
++		return ENVL_EXT4;
++#endif
 +
- 	/*
- 	 * Find next os image in /fit-images
- 	 * The next os image default is u-boot proper, once enable
+ 	return env_loc;
+ }
+ #endif	/* CONFIG_TFABOOT */
 -- 
-2.34.1
+2.42.1
 
