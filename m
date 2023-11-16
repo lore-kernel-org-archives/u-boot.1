@@ -4,94 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49965C47071
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 618D1C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C05987045;
-	Thu, 16 Nov 2023 05:32:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 643CC870D2;
+	Thu, 16 Nov 2023 05:43:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IAG9FXJ/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="Ss9YdPed";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 558CD8744D; Thu, 16 Nov 2023 05:11:22 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D5AA487258; Thu, 16 Nov 2023 05:43:52 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA2B187438
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EEA0086F53
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:43:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7afff3ea94dso12444639f.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 20:11:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700107877; x=1700712677; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=asXP4V5YoZAPdMymETvSzKr3a+LSYs95xd4SQKfHIKs=;
- b=IAG9FXJ/OmKqBQxsFQdkKVNOZYtjY1waRhC2P1XdQgnIkSgyI4VQlXjhsSWFaNFMo3
- 7hE1d53fHOiuKg/u9clhnN8oH1SMd7cF5OYHpDKi3jGdNOBCNeG2Jqnwd9JJtcWIlv74
- cXFVcMhB1P/z4/yF91wbGqxAECNt55wK172Ek=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700107877; x=1700712677;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=asXP4V5YoZAPdMymETvSzKr3a+LSYs95xd4SQKfHIKs=;
- b=wuTtxHigC0E5NuFGsfmSzqPLXJgMkPvPE5zpvKmfyH2+ktGNhMZ8xzjVsqM9qn3PMD
- i380o60fpwwF4vRTCEEuMMVmNQM8j3z1lH9ElREwRraKSZibORAS5Jd39axguKUW6JUD
- UfCdAX+oRyKOzBrnXc2KXoDNsCNNurnLZc8Ocqi5eZovtZm5rQJdIDe+GpFN32uMKN+F
- 7C3PV3pFvUGh65EhppCsswGBEOzDgUQOSmZAclXqwwL64SHwwO5njGPavwrAls6aCaO2
- 9psQ19bBxLWqB2YP0fOU7D3B9TRnDSncgGd9z8lzTBoWZj8OQfwsOo9CF/PloY24kxTS
- Bivg==
-X-Gm-Message-State: AOJu0YzQQtdnolPYhdDcnUCIw31kWfZm/QatsYCzCJzjDlLS8MUKKr6Y
- plhW8aVXu1luXO8BxboI8g3Zdnb5UckFq/1chTfkUw==
-X-Google-Smtp-Source: AGHT+IGJTuE4H/HvKTph7N+MKnM1YPUdSmrUCx6suqiyN0o4IkQqZE1p5BYOFIuCHlSFgwfxwV71Lg==
-X-Received: by 2002:a05:6602:164a:b0:7a6:a3b1:b45c with SMTP id
- y10-20020a056602164a00b007a6a3b1b45cmr21658253iow.14.1700107877472; 
- Wed, 15 Nov 2023 20:11:17 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 20:11:17 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Alexander Gendin <agendin@matrox.com>, Baruch Siach <baruch@tkos.co.il>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>,
- Fabio Estevam <festevam@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Qu Wenruo <wqu@suse.com>, Safae Ouajih <souajih@baylibre.com>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Stefano Babic <sbabic@denx.de>,
- Stephen Carlson <stcarlso@linux.microsoft.com>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tim Harvey <tharvey@gateworks.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, linux-btrfs@vger.kernel.org
-Subject: [PATCH v2 00/32] bootm: Refactoring to reduce reliance on CMDLINE
- (part A)
-Date: Wed, 15 Nov 2023 21:10:00 -0700
-Message-ID: <20231116041043.362055-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.com;
+ s=s31663417; t=1700109829; x=1700714629; i=quwenruo.btrfs@gmx.com;
+ bh=kcY/9DWz3HeV/6asvyZrJ9/esOmJFvIKpghpoQUVzVI=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=Ss9YdPedqMxCgF6UnUIiXbsJ1Zr+vkwyU2fAtYF8swww6h98vMF+n8B1Zd3m9y6p
+ yunHswOxHRHE2Q60c9OhbeQGSMVGW+KSdSVda5NDUYpyCiHig8K1IA9X6OywwDRGn
+ uk+p5AwpdRyltpK/uAkGnz6nQbTorDQarXj1M3AxCFtEyHurJiEMqaTCXi9pSkcb+
+ 9jkBMOoZCANXF7grcZdOarGF3bm0Daamjyt5px9FQhYQwBekEjrU3xDEnUCgydx4S
+ BviF+BveDUph61UQLST/zDxItvn5A539GOAdmP4LaxqVfSKLlqti4RCv9k0kB/5ZE
+ PIfclShgIg5HEoSboQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.16.0.117] ([122.151.37.21]) by mail.gmx.net (mrgmx004
+ [212.227.17.184]) with ESMTPSA (Nemesis) id 1N79uI-1rQWPA2gYe-017QwL; Thu, 16
+ Nov 2023 05:43:49 +0100
+Message-ID: <fff8b725-1c64-4407-acb8-c47c258e6571@gmx.com>
+Date: Thu, 16 Nov 2023 15:13:44 +1030
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 16 Nov 2023 05:32:30 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs: btrfs: fix reading when length specified
+Content-Language: en-US
+To: Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de,
+ =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
+Cc: Qu Wenruo <wqu@suse.com>
+References: <20231111151904.149009-1-CFSworks@gmail.com>
+From: Qu Wenruo <quwenruo.btrfs@gmx.com>
+Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
+ xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
+ 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
+ 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
+ 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
+ gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
+ AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
+ BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
+ pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
+ BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
+ XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
+ jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
+ LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
+ mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
+ CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
+ /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
+ GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
+ q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
+ ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
+ CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
+ tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
+ INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
+ DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
+ iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
+In-Reply-To: <20231111151904.149009-1-CFSworks@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:oMgDiQycwge92N07URLDVUuyVih3rM8QuvtldTwLxDZr20pxKK8
+ xE5h8/Rr/7m9wV3YXkgeTebbVJiBqOMzj/xNFdpktj+SLJGx8+CuwZzkyAt9wbMWG6Z91nv
+ rqtIF/WaHt69omSLCCEfrqe04//0DDWKt3Lvf4Tdzffc2+nvGq6A/OXZMblORP2vNFhtXGx
+ JyXxsSmnoBiIjLaJosKGg==
+UI-OutboundReport: notjunk:1;M01:P0:Kt6EdSdAHPY=;XEyaNhVGLkI3Ln43+s2ZTezIUwK
+ Rxx7pf8/ucB3IOr+HjOOTDcZEMIjNFfkkYSv6DeKEOqcHBKVBAe+FTnT1lUu9Gkg31MRducug
+ KrjSXGs+ot4lJBwd8OuB6yFSzhdLcBX4dpBaz/n8vsfdZgniSF0lOpYtWTdYQfEudQZiM8tbt
+ nkBiURIdPIqqyi5IPHeC88y6D5THV8qHWxlRGkUwEx0KOAN+Tuoj8ckGeqYdsPiFY4njExl26
+ vny4C52iDaMlFC7lfn6cbxADGZ538iobL4w0qiNDGZPJxaRbq24/QK7zKjS1VoE7TrvwxCFy7
+ 5cgMqd7Z3b0EhfLm5SmY65iRWgxXcV+IIt29awQXEOcJ+4plRv91iMdx6EZnfyLFRdhN+HKj9
+ Ldkp3yqchKV2BxmumjjXUboBov8jNrBpl93qrewaY8o3IAkp5mSZH+lfZE/p4B1Cih2GQ88RZ
+ NbLgcwYfaVfoJIlK7K7Ec+C0BI4jdYfffQ9hLKvC2SySRJAWTokAF+iFqfefzv/yEYX8G1c3c
+ 2yfU+lIXrLveSBItpjVARE6x6g07fFtF8drwiad+YfdAoihIAG03sUFe2ixNsWflsHlBZXvIn
+ uA9QzG3Bs98fpsabo+znqqZu7Uz7LAnLZFvYdAlnSYOVSOXfJM7dejPQT2R30Ksib/+TDLi/N
+ +wFHXHIQ5xAZi3LxiF2mnOgCAcH0upWSKUlBvenD70EsverRXXq385mynhtNuJX0wNSbfJPa5
+ a516OAMLkqbwjjH3E9NRF+qRhQhG4G+PL/lvIpiIsc7byULX+ldekIic84UKhNyRoJPsDu3to
+ sfNDq21Mv4LO6Xdo2Y9xZzaCyDCFPT+ULe0cFND+et/wEb4n7V1jybf7x1BWL6QuL5LIvyEfu
+ FSyiWAzDZwtLva8D3oqHeSXKPI2NoeKypy4HrJRgj+bWTc8NfRSw/ULEYnI/g7KRomNbZjUXm
+ 01LovQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,127 +113,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It would be useful to be able to boot an OS when CONFIG_CMDLINE is
-disabled. This could allow reduced code size.
 
-Standard boot provides a way to handle programmatic boot, without
-scripts, so such a feature is possible. The main impediment is the
-inability to use the booting features of U-Boot without a command line.
-So the solution is to avoid passing command arguments and the like to
-code in boot/
 
-A similar process has taken place with filesystems, for example, where
-we have (somewhat) separate Kconfig options for the filesystem commands
-and the filesystems themselves.
+On 2023/11/12 01:49, Sam Edwards wrote:
+> The btrfs read function limits the read length to ensure that it
+> and the read offset do not together exceed the size of the file.
+> However, this size was only being queried if the read length was
+> passed a value of zero (meaning "whole file"), and the size is
+> defaulted to 0 otherwise. This means the clamp will just zero out
+> the length if one is specified, preventing reading of the file.
+>
+> Fix this by checking the file size unconditionally, and unifying
+> the default length and clamping logic as a single range check instead.
+>
+> This bug was discovered when trying to boot Linux with initrd=3D via
+> 'bootefi' from a btrfs partition. The EFI stub entered an infinite
+> loop of zero-length reads while trying to read the initrd, and the
+> boot process stalled indefinitely.
 
-This series starts the process of refactoring the bootm logic so that
-it can be called from standard boot without using the command line.
-Mostly it removes the use of argc, argv and cmdtbl from the internal
-logic.
+I'm not sure why this happend for the EFI environment.
 
-Some limited tidy-up is included, but this is kept to smaller patches,
-rather than trying to remove all #ifdefs etc. Some function comments
-are added, however.
+Doesn't the EFI runtime should also try to read the whole file? Or that
+EFI environment has specified the length to read instead?
 
-A simple programmatic boot is provided as a starting point.
+>
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 
-This work will likely take many series, so this is just the start.
+Anyway, the fix looks good to me.
 
-Size growth with this series for firefly-rk3288 (Thumb2) is:
+Reviewed-by: Qu Wenruo <wqu@suse.com>
 
-       arm: (for 1/1 boards) all +23.0 rodata -49.0 text +72.0
-
-This should be removed by:
-
-   https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/11
-
-but it is not included in this series as it is already large enough.
-
-No functional change is intended in this series.
-
-Changes in v2:
-- Add new patch to adjust position of unmap_sysmem() in boot_get_kernel()
-- Add new patch to obtain command arguments
-- Fix 'boot_find_os' typo
-- Pass in the command name
-- Use the command table to provide the command name, instead of "bootm"
-
-Simon Glass (32):
-  arm: x86: Drop discarding of command linker-lists
-  README: Correct docs for CONFIG_SPL_BUILD
-  mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
-  treewide: Tidy up semicolon after command macros
-  bootstd: Add missing header file from bootdev.h
-  bootstd: Introduce programmable boot
-  bootm: Drop arguments from bootm_start()
-  bootm: Simplify arguments for bootm_pre_load()
-  bootm: Move boot_get_kernel() higher in the file
-  image: Tidy up genimg_get_kernel_addr_fit()
-  bootm: Reduce arguments to boot_get_kernel()
-  image: Document error codes from fit_image_load()
-  bootm: Adjust boot_get_kernel() to return an error
-  bootm: Adjust position of unmap_sysmem() in boot_get_kernel()
-  bootm: Use the error return from boot_get_kernel()
-  bootstage: Drop BOOTSTAGE_ID_FIT_KERNEL_INFO
-  bootm: Move error printing out of boot_get_kernel()
-  bootm: Reduce arguments to bootm_find_os()
-  bootm: Reduce arguments to boot_get_ramdisk()
-  fdt: Allow use of fdt_support inside if() statements
-  bootm: Drop #ifdef in bootm_find_images()
-  bootm: Pass image buffer to boot_get_fdt()
-  bootm: Reduce arguments to boot_get_fdt()
-  bootm: Reduce arguments to boot_get_fpga()
-  bootm: Reduce arguments to boot_get_loadables()
-  bootm: Simplify Android ramdisk addr in bootm_find_images()
-  bootm: efi: Drop special call to bootm_find_other()
-  bootm: optee: Drop special call to bootm_find_other()
-  bootm: Adjust the parameters of bootm_find_images()
-  bootm: Add a function to check overlap
-  bootm: Reduce arguments to bootm_find_other()
-  RFC: command: Introduce functions to obtain command arguments
-
- README                       |  26 +-
- arch/arm/cpu/u-boot.lds      |   3 -
- arch/x86/cpu/u-boot-64.lds   |   4 -
- arch/x86/cpu/u-boot-spl.lds  |   4 -
- arch/x86/cpu/u-boot.lds      |   4 -
- board/freescale/common/vid.c |   2 +-
- board/xilinx/common/fru.c    |   2 +-
- board/xilinx/versal/cmds.c   |   2 +-
- board/xilinx/zynqmp/cmds.c   |   2 +-
- boot/Kconfig                 |  11 +
- boot/Makefile                |   2 +
- boot/bootm.c                 | 577 +++++++++++++++++++----------------
- boot/bootm_os.c              |  16 -
- boot/image-board.c           |  67 +---
- boot/image-fdt.c             |  39 +--
- boot/prog_boot.c             |  51 ++++
- cmd/booti.c                  |   4 +-
- cmd/bootz.c                  |   4 +-
- cmd/btrfs.c                  |   2 +-
- cmd/disk.c                   |   4 +-
- cmd/eeprom.c                 |   2 +-
- cmd/ext2.c                   |   4 +-
- cmd/fs.c                     |   8 +-
- cmd/fuse.c                   |   2 +-
- cmd/mmc.c                    |   2 +-
- cmd/pinmux.c                 |   2 +-
- cmd/qfw.c                    |   2 +-
- common/main.c                |   9 +
- drivers/misc/gsc.c           |   6 +-
- env/mmc.c                    |   2 +-
- fs/fs.c                      |   4 +-
- include/bootdev.h            |   1 +
- include/bootm.h              |  26 +-
- include/bootstage.h          |   1 -
- include/bootstd.h            |   9 +
- include/command.h            |  35 ++-
- include/fdt_support.h        |   5 +-
- include/image.h              | 127 ++++++--
- test/cmd_ut.c                |   2 +-
- 39 files changed, 612 insertions(+), 463 deletions(-)
- create mode 100644 boot/prog_boot.c
-
--- 
-2.43.0.rc0.421.g78406f8d94-goog
-
+Thanks,
+Qu
+> ---
+>   fs/btrfs/btrfs.c | 15 ++++++---------
+>   1 file changed, 6 insertions(+), 9 deletions(-)
+>
+> diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
+> index 4cdbbbe3d0..1149a3b200 100644
+> --- a/fs/btrfs/btrfs.c
+> +++ b/fs/btrfs/btrfs.c
+> @@ -228,7 +228,7 @@ int btrfs_read(const char *file, void *buf, loff_t o=
+ffset, loff_t len,
+>   {
+>   	struct btrfs_fs_info *fs_info =3D current_fs_info;
+>   	struct btrfs_root *root;
+> -	loff_t real_size =3D 0;
+> +	loff_t real_size;
+>   	u64 ino;
+>   	u8 type;
+>   	int ret;
+> @@ -246,16 +246,13 @@ int btrfs_read(const char *file, void *buf, loff_t=
+ offset, loff_t len,
+>   		return -EINVAL;
+>   	}
+>
+> -	if (!len) {
+> -		ret =3D btrfs_size(file, &real_size);
+> -		if (ret < 0) {
+> -			error("Failed to get inode size: %s", file);
+> -			return ret;
+> -		}
+> -		len =3D real_size;
+> +	ret =3D btrfs_size(file, &real_size);
+> +	if (ret < 0) {
+> +		error("Failed to get inode size: %s", file);
+> +		return ret;
+>   	}
+>
+> -	if (len > real_size - offset)
+> +	if (!len || len > real_size - offset)
+>   		len =3D real_size - offset;
+>
+>   	ret =3D btrfs_file_read(root, ino, offset, len, buf);
