@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05691C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 18:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9534CC197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 18:42:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72BF5870D2;
-	Thu, 16 Nov 2023 19:41:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D010874F3;
+	Thu, 16 Nov 2023 19:42:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="igWee6rC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FnN3UtD7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59ED48744E; Thu, 16 Nov 2023 19:41:05 +0100 (CET)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 64A5F8269F; Thu, 16 Nov 2023 19:42:35 +0100 (CET)
+Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
+ [IPv6:2607:f8b0:4864:20::e2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18C758269F
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:40:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB13C874ED
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:42:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-421ae930545so6592301cf.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:40:56 -0800 (PST)
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-45d94e7759eso425669137.1
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:42:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700160055; x=1700764855; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700160149; x=1700764949; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=x1Af8PencbuvYvTf+0b34wHzkHPwEOv9VaQgqxgyJbM=;
- b=igWee6rCgo5Mca+Oh1UQ0tK0ZhrpnRm+gISvMwU+Xeg/Q/URZM7zar0s8B7Ex2Gta+
- saGDfEMrnS2W5tfuaqhRa4H16qx/ZEPZEivnmuDu3zMpAZ9gWbFVHhV/qXZGbU35Wdjt
- G5UKJXxY4kxT1N369hXMIIr1qkRhAjTbR4xpk=
+ bh=ckO4ZddomYlkx0paK6BNcO/SP03t9BOTf1PGkaeQ7oY=;
+ b=FnN3UtD7fVyFDl1k2F19xgU/YCG6EyvTcwhbIGaiL8I30absQMSt9shHdog8f7Jx9F
+ B0GnpwjlGz2EW2UgIiOEaBdkI5DFobTZGfwD6TRBtKklgNQnzBdmyCpFu/uP3UOIRbFy
+ bcixE3wSodT17BNQAu2QLkTY2eg3b8nsVsikw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700160055; x=1700764855;
+ d=1e100.net; s=20230601; t=1700160149; x=1700764949;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x1Af8PencbuvYvTf+0b34wHzkHPwEOv9VaQgqxgyJbM=;
- b=WikJ4bZta/wxyJQH1sHJYgpFCNjAMY82DwlmHhkKpkz1qXSvagX16w4kDC2QbKa4Td
- IIi4tYzvaKcx8yqi8tQN+1tW1KhSaR6zvxmSA8eijbLNwhtsw31Og5hvtraZvXQVaakI
- XvwzqfrIXJfcybBRr+qoukrJRI6XVZjCXOCHtzpUgysUDf9iPQaK4zFStAo6mgh5uiHp
- bmsvpE8mN+yPyvQ0J8KnzfaH2hAO0y1OjvbFPH7cEXV6c7ZesOuJdqsxV5E/44uMyekh
- JTU9Az2V6zbcXn0uwGqOFX4BQcWT+Plg8MsIMqkxXWX2VgEyYjjHgQucI2KyXTMyzcvm
- pL2w==
-X-Gm-Message-State: AOJu0Yyp7NnS/VH5qfVljc/N/bsjFT7SrcKjB0yNVBKHCs02mCAuWBNM
- 05tKesrkC//bDwrqPNwVtkdJTQ==
-X-Google-Smtp-Source: AGHT+IGNSGM3Tu6OJi4fhE26uEcKctclfiJy8/HyFGCkj6J11ArSZkjhWwTVcEigPQErmIx5q8X0DQ==
-X-Received: by 2002:a05:622a:11c9:b0:421:c2ea:fbd4 with SMTP id
- n9-20020a05622a11c900b00421c2eafbd4mr11590336qtk.32.1700160054866; 
- Thu, 16 Nov 2023 10:40:54 -0800 (PST)
+ bh=ckO4ZddomYlkx0paK6BNcO/SP03t9BOTf1PGkaeQ7oY=;
+ b=aVBLPBrnGt3cyV4MKyre7V9sUZiF6YNZv5JdWCr7q8iTcOQUa+SjNtnqLFzr1cN46C
+ WUF/UKUCBI0KhbhkJcn5ZHtrZk6RDlQhhIJ4bPhRU2uah3KgO2MP5FDaZi0MkOGMOjD1
+ 1WpRQdUdEp3O+NgXUmQG0U49Ti6Aaljh9wjL5epX2PJsXLSXkg06K+QshUEHzP229cD5
+ yHESzvDbdw4hF3ggMMuHUsXUykzp/iUql00W0rfm10cn8zIdQjnRRcRHi07O9HWAkDFM
+ ulDKRAKwt17WRe83/Z1cJQ8C+0hkccg0iuBMMVj5htIwztC8O9WMg6LULV9VkhsrPTwZ
+ zezA==
+X-Gm-Message-State: AOJu0Yxi8eIFwwG2D1YRLM8O88g5GWcsDozXl+CKd6ECIx1I6szfZUpv
+ wWXsSihaGhCbYuTKTJbaW2qjXg==
+X-Google-Smtp-Source: AGHT+IEyLNAPsUypzBzN76Hn+ILCDqDuznoh7Yiv6sMrSJC5QniQ71XV2fx24iPxJfS4/Sb9K1Xq7g==
+X-Received: by 2002:a67:ac07:0:b0:462:7164:cad with SMTP id
+ v7-20020a67ac07000000b0046271640cadmr2312199vse.32.1700160148895; 
+ Thu, 16 Nov 2023 10:42:28 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-31e8-20a7-2ee8-ec91.res6.spectrum.com.
  [2603:6081:7b00:6400:31e8:20a7:2ee8:ec91])
  by smtp.gmail.com with ESMTPSA id
- y26-20020ac8709a000000b004197079f2f8sm4485749qto.64.2023.11.16.10.40.53
+ k9-20020ad44509000000b0066d132b1c8bsm1549237qvu.102.2023.11.16.10.42.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 10:40:54 -0800 (PST)
-Date: Thu, 16 Nov 2023 13:40:52 -0500
+ Thu, 16 Nov 2023 10:42:28 -0800 (PST)
+Date: Thu, 16 Nov 2023 13:42:26 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Neha Malcom Francis <n-francis@ti.com>, nm@ti.com
-Cc: "Kumar, Udit" <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>,
- u-boot@lists.denx.de, vigneshr@ti.com
-Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization
- for J7200
-Message-ID: <20231116184052.GE170968@bill-the-cat>
-References: <20231003081038.24299-1-j-keerthy@ti.com>
- <20231003081038.24299-11-j-keerthy@ti.com>
- <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
- <20231003151033.GD8465@bill-the-cat>
- <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: "festevam@gmail.com" <festevam@gmail.com>,
+ "peng.fan@nxp.com" <peng.fan@nxp.com>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH v1 2/2] imx: spl_imx_romapi: fix emmc fast boot mode case
+Message-ID: <20231116184226.GF170968@bill-the-cat>
+References: <20231026073220.244387-1-marcel@ziswiler.com>
+ <20231026073220.244387-3-marcel@ziswiler.com>
+ <f9ce2b20-1fa1-408c-9ae6-4dd382c9c999@prevas.dk>
+ <6ab14ae1-7044-4663-98e4-919b9d1757b9@denx.de>
+ <899b50aa96b802275035f9ee40f46b461f8bfb46.camel@toradex.com>
+ <86ddb623945da5a507fb4632375f7cb70361ac58.camel@toradex.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5vsyn1SxdbsETFon"
+ protocol="application/pgp-signature"; boundary="AdHGEf4wmgHLAlq/"
 Content-Disposition: inline
-In-Reply-To: <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
+In-Reply-To: <86ddb623945da5a507fb4632375f7cb70361ac58.camel@toradex.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,84 +101,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---5vsyn1SxdbsETFon
-Content-Type: text/plain; charset=iso-8859-1
+--AdHGEf4wmgHLAlq/
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 16, 2023 at 11:43:50AM +0530, Neha Malcom Francis wrote:
-> Hi Tom,
+On Thu, Nov 16, 2023 at 10:57:27AM +0000, Marcel Ziswiler wrote:
+> Hi Tom
 >=20
-> Trying to bring back this series here.
->=20
-> On 03/10/23 20:40, Tom Rini wrote:
-> > On Tue, Oct 03, 2023 at 07:57:04PM +0530, Kumar, Udit wrote:
-> > >=20
-> > > On 10/3/2023 1:40 PM, Keerthy wrote:
-> > > > Enable ESM initialization for J7200
-> > > >=20
-> > > > Signed-off-by: Keerthy <j-keerthy@ti.com>
-> > > > ---
-> > > >    board/ti/j721e/evm.c | 6 ++++--
-> > > >    1 file changed, 4 insertions(+), 2 deletions(-)
-> > > >=20
-> > > > diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-> > > > index 42fa94b7a5..070b28326f 100644
-> > > > --- a/board/ti/j721e/evm.c
-> > > > +++ b/board/ti/j721e/evm.c
-> > > > @@ -543,7 +543,8 @@ void spl_board_init(void)
-> > > >    	}
-> > > >    #ifdef CONFIG_ESM_K3
-> > > > -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
-> > > > +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
-> > > > +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
-> > >=20
-> > >=20
-> > > Could we align on one kind of check,=A0 For J721E check is done again=
-st
-> > > board-id, whereas for J7200 checking
+> On Thu, 2023-11-02 at 08:09 +0100, Marcel Ziswiler wrote:
+> > Hi Stefano
 > >=20
-> > We should look at figuring out how to split this file in two.  One for
-> > "generic J721E systems" and one for "TI EVMs", as I've mentioned in
-> > other threads, so that it's easier for custom platforms to drop code
-> > they don' require.
+> > On Thu, 2023-10-26 at 10:36 +0200, Stefano Babic wrote:
+> > > On 26.10.23 10:29, Rasmus Villemoes wrote:
+> > > > On 26/10/2023 09.32, Marcel Ziswiler wrote:
+> > > > > From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> > > > >=20
+> > > > > This fixes a regression in the eMMC fast boot mode case where the=
+ buffer
+> > > > > was missing 464 bytes.
+> > > > >=20
+> > > > > The code figures out how many bytes must at least be fetched to h=
+onor
+> > > > > the current read, rounds that up to the ss->pagesize [which is a =
+no-op
+> > > > > in the USB download case because that has ->pagesize=3D=3D1], fet=
+ches that
+> > > > > many bytes, but then recorded the original upper bound as the new=
+ end of
+> > > > > the valid data. However, this did not take into account the round=
+ing up
+> > > > > to the ss->pagesize. Fix this by recording the actual bytes downl=
+oaded.
+> > > > >=20
+> > > > > Fixes: 4b4472438f5a ("imx: spl_imx_romapi: avoid tricky use of sp=
+l_load_simple_fit() to get full FIT
+> > > > > size")
+> > > > > Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> > > > >=20
+> > > >=20
+> > > > Thanks for reporting and fixing this, and sorry for the trouble.
+> > > >=20
+> > > > Acked-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> > > >=20
+> > >=20
+> > > And thanks for all your work - I will apply this fix soon.
 > >=20
+> > Any news on applying this fix? Note that master still stays broken as o=
+f today.
 >=20
-> Yes that does make sense. Would it be okay if we solve that problem
-> separately in a different patch series? We can move along with this curre=
-nt
-> series for now (after making the required change in CONFIG/board-id for v=
-2)
-> since ESM support is important for these platforms.
+> And two weeks later still broken!
 
-Well, I think part of the answer to your question is (and this is a more
-general TI one too), what outstanding changes need to come in now to
-make existing platforms functional for v2024.01 ? My first thought is
-that this series would be taken to -next, if I took it now, which means
-there's time before it would be in master, and so if it really makes the
-re-org later easier, we could take it, but if not, can we re-org then do
-this? But if we need this to deal with regressions, OK, yes, we can take
-it like this now.
+I've put this in my not to forget queue for the next -rc.
+
+> Anyway, I feel i.MX maintainership seems rather stalled at times most of =
+the time. I don't want to criticise
+> anybody knowing how busy our trade can get. However, if it helps the caus=
+e Toradex would be ready to step up.
+> Let me know what you think. Thanks!
+
+I would be happy to see an additional custodian for the imx tree, if
+that's agreeable with Stefano.
 
 --=20
 Tom
 
---5vsyn1SxdbsETFon
+--AdHGEf4wmgHLAlq/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWYjQACgkQFHw5/5Y0
-tyysBgv/VLwu66XPRi7pQsZNwWgVt2KcpHqRms+QMQajogy7IoXPw5YHs/LtIwfP
-07NtpTn1f0Ht4wiyfYrZZkNDTXNX+EeEnjyJhyYpFAmjlEjEEK17Hc5DICFrmypq
-og9eJJtCVDpFVpKgfjliU5XIz9hOgQ6TCqSWDNRzsGNNj7ukQpGEZfCvZ0bEjNl5
-Wcee60MlOjZhitLgWk6z4IzD0xE9SrYpG2tLhdxCXbFqYRm9b04NhTxsJAcX6Tqe
-WYlif1cN+FRHyvM7ItXbtqkuODt/6e6l+fZNS0sbjTT4SygkA/DMJYbgM7hOHCAI
-cuRMIJhPJ0TyjfemtZvhs0imHSY0Cj0Y3z4HmvqssYm1Nm/rsLzmEXQv/WUDDwnQ
-ZbqQhKqndUleGwQ/D2fh7k/M4oJYuBdMTWNbysLmzGGRzCzTyoCVVWE5t9AsSaFV
-ivxyuYBDc1ZrCzpZvtpELyoZvckvwGLtmKw6Kuy8PLYeGYHduMZ0lI2BWN6MVuoc
-Arvv4utl
-=S6ME
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWYpIACgkQFHw5/5Y0
+tyy2GgwAhRd511zqMBiPOpmCOZ/ygbmurEknPLCBqL57RpbDLcQuUJZRQDAo5lXH
+94zH2GMs635qNxi7sSWzopphIVDjNxgmcYtodjhFaO4sn4o744eNsa5CTB9t/ynE
+elv0so7BYGD4qPMPXB+8yCrLmw04STOrdE84NnQFSyMyoRO8Eg+7+jtENUeJC85t
+woQZsIAXuSADp2cbrB4mhUtePXt4Pm/rk7551EXq099bmDo4Uwsofc2HuRkLZ0wm
+4yR4vkpS5N/DujLVknpc8FKvsvHzvzugYbJ1qMy/LXHkF0phNxIvs+zjV1P3YzbZ
+YGBM1EXUDKPeLvQuQ6yNGEnDE2A6A70ROKKchpSCiEmH1fivda1uT101qGklcQyG
+uwqHIuFbF0RgjncnkdJVdH8aW4DQNNrjqvVppAEeJbNIniF0Cj42IbEjAmLpWlRC
+tydEEm6zXN5S7jc5EZjTqkB7OTYj/LHHPixQoHxQEfkqDpAL/1ZvRcTM0ZXMW4Hm
+7acC2oV6
+=kGL3
 -----END PGP SIGNATURE-----
 
---5vsyn1SxdbsETFon--
+--AdHGEf4wmgHLAlq/--
