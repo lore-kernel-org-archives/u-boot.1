@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED52CC197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:52:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E118DC47071
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:52:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B31C587443;
-	Thu, 16 Nov 2023 17:51:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 65B4F874FF;
+	Thu, 16 Nov 2023 17:52:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="bXtVCRbd";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="haLBr+DJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88AD2874CF; Thu, 16 Nov 2023 17:51:28 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id EC2AF874FD; Thu, 16 Nov 2023 17:52:38 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C03E87443
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:51:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8FD7C874D8
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:52:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1cc1e1e74beso9231265ad.1
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:51:21 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-50a93c5647cso1423221e87.3
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:52:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700153479; x=1700758279; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=i8++qtWWaifqhQSDNBcP6a1XgePEzeOqoZ++JpjjVhI=;
- b=bXtVCRbd0Ay0FUakJxAA6ShrPR6DB5iqERJY2nSqSaB/C1KBaG7tdAb5f0UMKRa8kI
- PU6K29EE9lb36bxuPoAgmvPCYvH2gzokvyFIifmRuYl2aSIz1ywzIxN0EP2bGBFGimuC
- Bh88SlRwRDUq8ifQL97ySysmcdfo0G9KYmEkMoCYUZ1TuBjhLIMmiP0/eA6CTV4YnhT3
- nhxfnyK9bYT/HOGPyMcoJ/O5vG/1XO7iODqwzJrIah4+TFro2MYqSaAHXbOQFmKtsOXg
- ILr7GIiW9BZbZtuuOXE27km0x6BU2AGqV3dhWo6Xp9GAurns7unN0BpqhJLXUxTq/MNA
- lzzg==
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700153553; x=1700758353;
+ darn=lists.denx.de; 
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=b/zs7f/YNnoTTjTjV0fng3FYNcaW5Y3OZ+EnDYmL1Q0=;
+ b=haLBr+DJyavHSo8a3eGmQgxoSorhjhLdxk6G2281g8qYXjF+jbw8ukMICjIBeALASK
+ j4e4QnuAWwkBw1PY3HxaDvA2w8t3gU4mrk+BDl98+XFT4/OBQDlD2ZPoL6a/wsnXVH6f
+ wSlE+oOAY9e8ophmr7u+Q5fXO0upUTm76bc5ORCBdKZqCakhaBEaQYh3lJmA5/lj/5M5
+ FulJB0v4S2mK0YoizCs8dSP+n935TjyEPQchc2uTHGgfCyV8M6JWV9g0mxrDLlsg1vWd
+ sBY5VPAGpyk9dRlLkMmESmlO0FjwkgMZihRgdzcUsI3W2PDUHjCp9c2Sox7Fa2tl3rCW
+ hKZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700153479; x=1700758279;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=i8++qtWWaifqhQSDNBcP6a1XgePEzeOqoZ++JpjjVhI=;
- b=wUYhtM0icv9M7p1hYjCl7VDrQ00lqaTxUVOvoStFljX2mTz6pcB3Dhhe04fSnVoSVl
- Q8niqhYxq6HT9XBYGcf0mf+MovCUFZexrJNyLasi/2V4zJXU4+LTPrL04+TUbED8+92q
- B9LBmdpU81yjcSBa16H3aejmyHtVXewT4ZCEAiKsnkBqC3fMAVpp9xLEsghJrzYiWrWO
- g39SsM6BLsvtyjiZAwiped5Ux8G8X0UpPYCLODwl7ys4dMWOEhzNhRzoxcqjC2pTcnLn
- KKAJbgKHAYve1Vn0afvUn2aZaaLtFCkHQ++aRhodXsW475FxVZarpwPLxthQJSCZnEcA
- x88w==
-X-Gm-Message-State: AOJu0Yy1oCpGH3a/nnIUZ/DpNZGF1TyzHLC0rvZxShiqYcV+nOuT4UxX
- oazJbWRP1j9bWeeIYVivKOGjrw==
-X-Google-Smtp-Source: AGHT+IEeAP8OYJz8/zg86I8UNZkow+ocLTdMesA9XpQlctn1Hg4r/V2yIg/N12Bjv/tqV7ZfcB5JgQ==
-X-Received: by 2002:a17:902:748c:b0:1cc:4677:2f0e with SMTP id
- h12-20020a170902748c00b001cc46772f0emr8750927pll.45.1700153479555; 
- Thu, 16 Nov 2023 08:51:19 -0800 (PST)
-Received: from ThinkPad-T490.dc1.ventanamicro.com
- ([2401:4900:57e3:f37f:e352:7f6c:bf18:83f0])
- by smtp.googlemail.com with ESMTPSA id
- j13-20020a170902da8d00b001cc32261bdfsm9438696plx.38.2023.11.16.08.51.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 08:51:19 -0800 (PST)
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: Michal Simek <michal.simek@amd.com>, Bo Gan <ganboing@gmail.com>,
- Puhan Zhou <puh4n.zhou@gmail.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Valentin Caron <valentin.caron@foss.st.com>,
- Shengyu Qu <wiagn233@outlook.com>
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 1/2] pci: xilinx: Fix "reg" not found error
-Date: Thu, 16 Nov 2023 22:21:02 +0530
-Message-Id: <20231116165103.140968-2-mchitale@ventanamicro.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231116165103.140968-1-mchitale@ventanamicro.com>
-References: <20231116165103.140968-1-mchitale@ventanamicro.com>
+ d=1e100.net; s=20230601; t=1700153553; x=1700758353;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=b/zs7f/YNnoTTjTjV0fng3FYNcaW5Y3OZ+EnDYmL1Q0=;
+ b=L2sa0InOkb7+didnzNOnpdgn1IapnMwCxN33lADNB0K6jpwQueO7lBihB4g3lZBHrM
+ KKSthg4ZNkZEHspvBw8Oi/Kukqw1tIx+dtaLN6AKgsf5RAs6yLCxb89qRZ9ivNFym/YZ
+ Qr4FLezm8duTQWGoaDixhXo317IiOHiBL+gg70dhSVsHzEu8flBuWOws1HtUDCI+KYyF
+ ToL+hj6Yl/fFBqi0gy0VtHOi/RkAL6hMRrY/Qf6zqXUMpUyc9gUhd3pTtFRj8nGwOGqp
+ henCLnrVZb6iBf0FRYoDlRGpD4qUaZhhWltnuC8WvDAbSD1UzXQm8dVhoeeYXF4izqol
+ GRGg==
+X-Gm-Message-State: AOJu0YwSzWP23GRA+lm2uTN2KNrZvvGlTtpvzbtLLIbJqykzBjOkOSKd
+ XdDev0wlg1xFbhtrGuoDYmDk54avckrkHG2fEYrTyg==
+X-Google-Smtp-Source: AGHT+IGyxKL1H5VTWVYISZF+XDUyzKXeQIlxICu95QSd3dVvgwbhYmoxuRrj0uwwHzvO8lNyCBq1jg==
+X-Received: by 2002:ac2:5e24:0:b0:503:3707:66ed with SMTP id
+ o4-20020ac25e24000000b00503370766edmr10504704lfg.34.1700153553652; 
+ Thu, 16 Nov 2023 08:52:33 -0800 (PST)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com.
+ [209.85.208.48]) by smtp.gmail.com with ESMTPSA id
+ i9-20020aa7c709000000b00540e934bf8dsm7939388edq.43.2023.11.16.08.52.33
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Nov 2023 08:52:33 -0800 (PST)
+Received: by mail-ed1-f48.google.com with SMTP id
+ 4fb4d7f45d1cf-53dfc28a2afso1562014a12.1
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:52:33 -0800 (PST)
+X-Received: by 2002:a05:6402:1859:b0:53e:1f7d:10f2 with SMTP id
+ v25-20020a056402185900b0053e1f7d10f2mr13755454edy.10.1700153552987; Thu, 16
+ Nov 2023 08:52:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Shantur Rathore <i@shantur.com>
+Date: Thu, 16 Nov 2023 16:52:22 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
+Message-ID: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
+Subject: bootstd: Support for distro specific EFI folders
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,63 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the driver to use the dev_read_addr_size API to fetch the reg
-property from the DT.
+Hi Simon,
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
----
- drivers/pci/pcie_xilinx.c | 29 ++++++++++++-----------------
- 1 file changed, 12 insertions(+), 17 deletions(-)
+Currently bootstd - bootmethod_efi only looks for the default
+bootxx64.efi in /EFI/boot folder only.
+Generally many distros end up putting their bootloaders in
+EFI/<distro> folders like EFI/ubuntu and EFI/debian etc.
 
-diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-index 53fd121e90..fdc9b08c10 100644
---- a/drivers/pci/pcie_xilinx.c
-+++ b/drivers/pci/pcie_xilinx.c
-@@ -8,11 +8,10 @@
- #include <common.h>
- #include <dm.h>
- #include <pci.h>
--#include <asm/global_data.h>
- #include <linux/bitops.h>
- #include <linux/printk.h>
--
--#include <asm/io.h>
-+#include <linux/io.h>
-+#include <linux/err.h>
- 
- /**
-  * struct xilinx_pcie - Xilinx PCIe controller state
-@@ -140,20 +139,16 @@ static int pcie_xilinx_write_config(struct udevice *bus, pci_dev_t bdf,
- static int pcie_xilinx_of_to_plat(struct udevice *dev)
- {
- 	struct xilinx_pcie *pcie = dev_get_priv(dev);
--	struct fdt_resource reg_res;
--	DECLARE_GLOBAL_DATA_PTR;
--	int err;
--
--	err = fdt_get_resource(gd->fdt_blob, dev_of_offset(dev), "reg",
--			       0, &reg_res);
--	if (err < 0) {
--		pr_err("\"reg\" resource not found\n");
--		return err;
--	}
--
--	pcie->cfg_base = map_physmem(reg_res.start,
--				     fdt_resource_size(&reg_res),
--				     MAP_NOCACHE);
-+	fdt_addr_t addr;
-+	fdt_size_t size;
-+
-+	addr = dev_read_addr_size(dev, &size);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	pcie->cfg_base = devm_ioremap(dev, addr, size);
-+	if (IS_ERR(pcie->cfg_base))
-+		return PTR_ERR(pcie->cfg_base);
- 
- 	return 0;
- }
--- 
-2.34.1
+In x86 worlds, the NVRAM is modified and new boot entries are added to
+support these but in the U-boot world the NVRAM variables are
+read-only.
 
+What would be the best way to implement this?
+
+I was thinking of having a "efi_prefixes" environment variable which
+can be set to "ubuntu debian centos" etc and bootmethod_efi can try
+all of them. Will bootmethod_efi be able to support multiple entries (
+thinking of multiboot ) ?
+
+Regards,
+Shantur
