@@ -4,87 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB3DC2BB3F
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:29:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26714C2BB3F
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 945CF87045;
-	Thu, 16 Nov 2023 02:29:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8538386EE5;
+	Thu, 16 Nov 2023 02:35:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jrSdfTOo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eyazTMVI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C4E08729D; Thu, 16 Nov 2023 02:29:41 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A349586EE5; Thu, 16 Nov 2023 02:35:33 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D65D8864E7
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:29:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 246338724E
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:35:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700098173; x=1700702973; i=xypron.glpk@gmx.de;
- bh=LXBF6pFcN93gOaqxFSGvmQnRuZPeaQ8x2YgcPxEzkWg=;
- h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:
- In-Reply-To;
- b=jrSdfTOo+tuSMvgAXyBe0zzAQ1E2f86jBMO+MkojuMpFr4saJuLHWlESn2Bzow5W
- buzxCNyAnh0uQfiD5hLcHAe3MC4k2DVwWwil2lyRzqgx9A9M6go0JUY+NZ8ZE3ZLU
- T6TwogR2l43eshQRuJPjmxPWJDWc+p0yrF2WjxCfp2BBS2rgfDiBxuJFjH5J2ujYH
- ADJ8iHSzEN3s5vfhk5QTuC05s6eNozSXcd7KGaeCZyeXRL1Mipxt823d5hkR+Bn9W
- 0n9t/fZJbEoepwYkQo9so9mj3uKrynZwz4HeS/dfKOtzxntZVm3/j6ianpGAZ235L
- rYkgo9jaQ7xFCPVbrg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MgvrB-1rZCAj3XLR-00hJjB; Thu, 16
- Nov 2023 02:29:32 +0100
-Message-ID: <487c3e73-ce21-4e45-9cf3-44314e78fd1f@gmx.de>
-Date: Thu, 16 Nov 2023 02:29:31 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-35950f04d98so1219395ab.2
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:35:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1700098529; x=1700703329; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=01ALPTyV2poyhlsonWxr8PMeWQ/giCZrZPyPrWBbeWI=;
+ b=eyazTMVIMfgRRx4qXQ69XMTqGzhuKXMiLl8RykqR7fY0uzKyRfKh6Pg+5NdGfxNWsY
+ TlNFwS/1DnMUPz1XkdIEo9jRU/8y3Crgnlhta9HX2NNZG/sg858pCYf6XHehNoEdNhDx
+ UniM0iNbOdWVt/HKX5VAd4Xtjm7fXrh23ZQL4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700098529; x=1700703329;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=01ALPTyV2poyhlsonWxr8PMeWQ/giCZrZPyPrWBbeWI=;
+ b=RuH4ahXNP6qt8S9xblRFBaIQtMiWIVcDWQe0WtvGOQmULtNPwERD90Ai22d4DoaJYZ
+ yqz1DMwlYeqhN9DPEeD+DNcb525QpD6RUXFDUCnU2T653c3Gfrw4DqbFJYMc1VEL8ya7
+ VjJfkwMYJWHIBZFL2vFBCWLRWSepJG/gKMQhun0rSLWZRnqgeRXjN2uNVto4aWCc2rsD
+ sfcIwhboj28wk42hPsJKVbMteVD2Pe3WHJkcdq2KTQ7C7+JqpO8TKAw7MLnu/BshGf9L
+ y6adkWlc5W22RKRDQ/QoWS+kxRFt5NQpyPUC2/PCostamslcIt9Uhf0UvUb7MpL3hec1
+ M6YA==
+X-Gm-Message-State: AOJu0YzVOa+WXN8IUrvwx2ClZfMI4eUs36kxTrJi1OdwIgXZplXVkyCi
+ mKV2+kNmVwa8dTdbBMbcHsIfYAg/1j5m2HSXX37mFA==
+X-Google-Smtp-Source: AGHT+IELMoPPI5eWlMP6vym7aRKzsz+JT+aPbV0cVtWelgHgry9zDhyG4gJR2DzGVrPAmyOuZALqKg==
+X-Received: by 2002:a05:6e02:15c5:b0:357:a01f:35f0 with SMTP id
+ q5-20020a056e0215c500b00357a01f35f0mr20091740ilu.19.1700098529658; 
+ Wed, 15 Nov 2023 17:35:29 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ z35-20020a0293a6000000b0042b530d29c3sm1332798jah.164.2023.11.15.17.35.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Nov 2023 17:35:29 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Shantur Rathore <i@shantur.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] bootstd: Avoid freeing a non-allocated buffer
+Date: Wed, 15 Nov 2023 18:35:23 -0700
+Message-ID: <20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid>
+X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 05/12] usb: Avoid unbinding devices in use by bootflows
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Eddie James <eajames@linux.ibm.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Safae Ouajih <souajih@baylibre.com>, Shantur Rathore <i@shantur.com>
-References: <20231112200255.172351-1-sjg@chromium.org>
- <20231112130245.v4.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
- <3F7DFCBC-D5A1-43C4-AF00-11C27BFF7508@gmx.de>
- <CAPnjgZ3wEzHNqzpsF1zU6U4WBAm=oMYEzRRR-UuqDEwXB24rLw@mail.gmail.com>
- <43EF5E14-0AE3-456A-B9D4-67B8F4405555@gmx.de>
- <CAPnjgZ2t-wF=nGWtdEgWRtUrzFyERnoGwqF8urJjNgEP2b4Qrw@mail.gmail.com>
- <58076384-d164-4d7a-bc1f-c78574b481b5@gmx.de>
-In-Reply-To: <58076384-d164-4d7a-bc1f-c78574b481b5@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:fvw9VRS+4SUa2SFaO540/8ZfQ/Qvrm0ferfGTKwqsrMUrX31vDJ
- 6QD+gqPj83tHNMZrneXOIyJR5+tH+I55u3oOJO7dYs6skNGGLDjY9XhdmlGPhbuJBAesvRX
- jGryDYu50d0SMrf5Z3MHLcWOtkYF3483ggRiGn6/DHuUv56qNLlW7tmtO6kRIhw2FnwF7tm
- b7m/156WDv0KnF2tsJg1w==
-UI-OutboundReport: notjunk:1;M01:P0:wAUQyTvWZtI=;vFRpQhM/QQBLygj8gKlSAEIRd6N
- GzWu/iJu6lxsTksaCNhmpbOua27NYvK6TJ6SWidY92Z/G7BF2z2ZWRzZQo9Ssd33bNGIJYw7l
- tT15CN7i5F6AaIu4uUNHAIbrOekbFFaIo/CbdG5n/OA55xvPikMkoAfya3pNDDjh3CNN2Ulyp
- mmIymvAL7r2IATbZgrAlzPqdlr9cvRDVc0CnINZu8HqveHKsODMBOtxCr7Y+PXBaVXLnd6JEU
- vi4ZufZUWpZybMktiwccMgTdEeky5AgFdLgd+9BGRety4HKK5SA/+spTWFipfcfEKj6ShtiFY
- ScLMtmZZR1XX5zIlUHKgzRXox0rSe0d5UmMjR1hVYfjKipBBUwdueD61kESwVZYjWulF6XoSA
- 1doJGKhMQoRnpHGPZGTIDF0D/2veY2Wq9ALjdKwyQ+VT0sUFFQ5KjZwEygAdVCadt45J0KvLR
- MuNlobykF1CNO0iYViLDKuwShG+eQUawv+dqN2nH+zk2EI8i1BNA49I/Wforw2mSv/bE7fLVQ
- nEBLQRxii4EWJEW/gkymu9CZbwECJdDR90UnipWi6Ivbimc2MEZD1iEgkHOlxaNC516/p/KWq
- dvXw7NcHa9CMlatcmfxgHoHdGRPTZzB1GM8byJFcStvWG6yMpcKtQRuyKMvj1daq6O6QwYPlq
- XOLdio6LNG81p3sbsKjMdEfbgoQCnW21znMwJcrjLWzdhvAjecBaQ27kM5vdiUoUr648hopHW
- C5RZZboOi/qQUGg+1Clz7KJ2v+GS2SCM5pRedoykRDYZhtQced+ct9anyxexkk1RFSzYrOmjS
- tVu+j+NOXv0VIOu4Q5ZMGI2+uExGVTO+zhMwCbahdu1ap/KhP9aaCsfFr/FBxr00xMKa7RYnp
- 2OAZfzbrLnO3bTAH4Yn/3serFrRRV0Sei+AYB4tykIYqGC2SRQbGuJ9sYfhaXZdKDDPpPaDtg
- mqzmRet2bh+InozUYcnzjyHdFOg=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,158 +85,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/15/23 17:23, Heinrich Schuchardt wrote:
-> On 11/15/23 16:50, Simon Glass wrote:
->> Hi Heinrich,
->>
->> On Sun, 12 Nov 2023 at 16:35, Heinrich Schuchardt <xypron.glpk@gmx.de>
->> wrote:
->>>
->>>
->>>
->>> Am 12. November 2023 22:20:50 MEZ schrieb Simon Glass
->>> <sjg@chromium.org>:
->>>> Hi Heinrich,
->>>>
->>>> On Sun, 12 Nov 2023 at 13:32, Heinrich Schuchardt
->>>> <xypron.glpk@gmx.de> wrote:
->>>>>
->>>>>
->>>>>
->>>>> Am 12. November 2023 21:02:42 MEZ schrieb Simon Glass
->>>>> <sjg@chromium.org>:
->>>>>> When a USB device is unbound, it causes any bootflows attached to
->>>>>> it to
->>>>>> be removed, via a call to bootdev_clear_bootflows() from
->>>>>> bootdev_pre_unbind(). This obviously makes it impossible to boot th=
-e
->>>>>> bootflow.
->>>>>>
->>>>>> However, when booting a bootflow that relies on USB, usb_stop() is
->>>>>> called, which unbinds the device. For EFI, this happens in
->>>>>> efi_exit_boot_services() which means that the bootflow disappears
->>>>>> before it is finished with.
->>>>>
->>>>> After ExitBootServices() no driver of U-Boot can be used as the
->>>>> operating system is in charge.
->>>>>
->>>>> Any bootflow inside U-Boot is terminated by definition when
->>>>> reaching ExitBootServices.
->>>>>
->>>>>>
->>>>>> There is no need to unbind all the USB devices just to quiesce them=
-.
->>>>>> Add a new usb_pause() call which removes them but leaves them bound=
-.
->>>>>
->>>>> As U-Boot must not access any device after ExitBootServices() it is
->>>>> unclear to me what you want to achieve.
->>>>
->>>> I can't remember exactly what is needed from the bootflow, but
->>>> something is. Perhaps the kernel, or the cmdline, or fdt? It would
->>>> have been better if I had mentioned this explicitly,=C2=A0 But then t=
-his
->>>> patch has been sitting around for ages...
->>>>
->>>> In any case, the intent of exit-boot-services is not to free all the
->>>> memory used, since some of it may have been used to hold data that th=
-e
->>>> app continues to use.
->>>
->>> The EFI application reads the memory map and receives an ID which it
->>> passes to ExitBootServiced() after this point any memory not marked
->>> as EFI runtime can be used by the EFI app. This includes the memory
->>> that harbors the U-Boot USB drivers. Therefore no drivers can be used
->>> here.
->>>
->>> Starting the EFI app via StartImage() must=C2=A0 terminate any running
->>> U-Boot "boot flow".
->>>
->>> After ExitBootServices() the EFI application cannot return to U-Boot
->>> except for SetVirtualAdressMspsetting which relocates the EFI runtime.
->>>
->>> Bootflows and U-Boot drivers have no meaning after ExitBootServices().
->>>
->>>
->>>
->>>>
->>>> Also there is U-Boot code between when the devices are unbound and
->>>> when U-Boot actually exits back to the app.
->>>>
->>>> This hang was 100% repeatable on brya (an x86 Chromebook) and it took
->>>> quite a while to find.
->>>
->>> We need a better understanding of the problem that you experience to
->>> find an adequate solution. Why does removing all devices lead to
->>> hanging the system?
->>
->> Are you able to test this? With your better knowledge of EFI you might
->> be able to figure out something else that is going on. But in my case
->> it causes some memory to be freed (perhaps the memory holding the EFI
->> app?), which is then overwritten by something else being malloc()'d,
->
-> The memory for the EFI app is not assigned via malloc(). It is allocated
-> by AllocatedPages().
->
-> Reading "some memory freed" does not give me confidence that the problem
-> is sufficiently analyzed.
->
->> so the boot hangs. It is hard to see what is going on after the app
->> starts.
->>
->> This patch was sent almost two months ago and fixes a real bug. The
->> first few versions attracted no comment now it is being blocked
->> because you don't understand how it fixes anything.
->
-> Do you understand why unbinding the devices causes the problem?
->
->>
->> I can get the hardware up again and try this but it will take a while.
->
-> Digging a bit deeper seems to be the right approach.
+EFI applications can be very large and thus used to cause boot failures
+when malloc() space was exhausted.
 
-Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
-https://lore.kernel.org/u-boot/CAHc5_t1H39YV=3DHSSa7TCEdzRctAX+zibkx1vsuwE=
-W-raOL9TcA@mail.gmail.com/
+A recent changed fixed this by using the kernel_addr_r environment var
+as the address of the buffer. However, it still frees the buffer when
+the bootflow is discarded.
 
-points to a probable root cause:
+Fix this by introducing a flag to indicate whether the buffer was
+allocated, or not.
 
-https://github.com/u-boot/u-boot/blob/master/boot/bootflow.c#L470
-free(bflow->buf)
+Note that kernel_addr_r is not the last word here. It might be better
+to use lmb to place images. But there is a lot of refactoring to do
+before we can remove the environment variables. The distro scripts rely
+on them so it is safe for bootstd to do so too.
 
-In the EFI boot bflow->buf points to $kernel_addr_r which never was
-allocated and therefore must not be freed.
+Fixes: 6a8c2f9781c bootstd: Avoid allocating memory for the EFI file
 
-Best regards
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reported by: Simon Glass <sjg@chromium.org>
+Reported by: Shantur Rathore <i@shantur.com>
+---
 
-Heinrich
+ boot/bootflow.c     | 3 ++-
+ boot/bootmeth_efi.c | 1 +
+ include/bootflow.h  | 5 ++++-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
 
->
->>
->> Even without the hang, this still fixes a bug. We should be using
->> device_remove() to quiesce devices. There is no need to unbind them.
->
-> Is this what the patch does?
->
->>
->> BTW another patch that suffered a similar fate was [1]. I just applied
->> it based on a review from Bin.
->
-> Please, ping Ilias and me if you don't get the feedback that you deserve=
-.
->
-> Best regards
->
-> Heinrich
->
->>
->> [..]
->>
->> Regards,
->> Simon
->>
->> [1]
->> https://patchwork.ozlabs.org/project/uboot/patch/20231001191444.v3.1.I9=
-f7f373d00947c704aeae0088dfedd8df07fab60@changeid/
->
+diff --git a/boot/bootflow.c b/boot/bootflow.c
+index 6922e7e0c4e7..1ea2966ae9a5 100644
+--- a/boot/bootflow.c
++++ b/boot/bootflow.c
+@@ -467,7 +467,8 @@ void bootflow_free(struct bootflow *bflow)
+ 	free(bflow->name);
+ 	free(bflow->subdir);
+ 	free(bflow->fname);
+-	free(bflow->buf);
++	if (!(bflow->flags & BOOTFLOWF_STATIC_BUF))
++		free(bflow->buf);
+ 	free(bflow->os_name);
+ 	free(bflow->fdt_fname);
+ 	free(bflow->bootmeth_priv);
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index ae936c8daa18..9ba7734911e1 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -160,6 +160,7 @@ static int efiload_read_file(struct bootflow *bflow, ulong addr)
+ 	if (ret)
+ 		return log_msg_ret("read", ret);
+ 	bflow->buf = map_sysmem(addr, bflow->size);
++	bflow->flags |= BOOTFLOWF_STATIC_BUF;
+ 
+ 	set_efi_bootdev(desc, bflow);
+ 
+diff --git a/include/bootflow.h b/include/bootflow.h
+index 44d3741eacae..fede8f22a2b8 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -43,9 +43,12 @@ enum bootflow_state_t {
+  *	and it is using the prior-stage FDT, which is the U-Boot control FDT.
+  *	This is only possible with the EFI bootmeth (distro-efi) and only when
+  *	CONFIG_OF_HAS_PRIOR_STAGE is enabled
++ * @BOOTFLOWF_STATIC_BUF: Indicates that @bflow->buf is statically set, rather
++ *	than being allocated by malloc().
+  */
+ enum bootflow_flags_t {
+ 	BOOTFLOWF_USE_PRIOR_FDT	= 1 << 0,
++	BOOTFLOWF_STATIC_BUF	= 1 << 1,
+ };
+ 
+ /**
+@@ -72,7 +75,7 @@ enum bootflow_flags_t {
+  * @fname: Filename of bootflow file (allocated)
+  * @logo: Logo to display for this bootflow (BMP format)
+  * @logo_size: Size of the logo in bytes
+- * @buf: Bootflow file contents (allocated)
++ * @buf: Bootflow file contents (allocated unless @flags & BOOTFLOWF_STATIC_BUF)
+  * @size: Size of bootflow file in bytes
+  * @err: Error number received (0 if OK)
+  * @os_name: Name of the OS / distro being booted, or NULL if not known
+-- 
+2.43.0.rc0.421.g78406f8d94-goog
 
