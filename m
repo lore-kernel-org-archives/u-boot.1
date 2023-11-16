@@ -4,66 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 215EFC197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 06:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51178C47071
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 08:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8C4687438;
-	Thu, 16 Nov 2023 07:14:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C07287479;
+	Thu, 16 Nov 2023 09:11:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UrB7T+RA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PoZNJXwz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 429088718E; Thu, 16 Nov 2023 07:13:59 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 3D69187479; Thu, 16 Nov 2023 09:11:04 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EEE687445
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 07:13:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C0008747E
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 09:10:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AG6DrVC050873;
- Thu, 16 Nov 2023 00:13:53 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AG8ApDO043493;
+ Thu, 16 Nov 2023 02:10:51 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700115233;
- bh=ad3/tYjp/JOVvcAoLMcFP5Bx6woRjE4PFqcq4RqvqpA=;
+ s=ti-com-17Q1; t=1700122251;
+ bh=seu7I7TGTEktdgtnsk8j38lW3C4WjH+oqyQ8qwe5lLY=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=UrB7T+RAF6b1k5DwusQQBgVQ+uV3OzAF7njlo5akCuhOniM0je5eyHihA8gpqwVem
- OomEcBTEijsR8kdeqMiA7KnNYC7sUBO/MziUdiQqVU11sqDk25n7Iyc8JftZ9R2uph
- j3MMptJX63vwalJTExy6Ix7yw3aiI5FBFytkAabU=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AG6DrEs004264
+ b=PoZNJXwzqAp3ppQB+U8xAtE1/KY2I2svASyBGYeN6O+IHFLiND7/nG1rUeSrqDqSq
+ UiHikv0/lLTg+ueAn9hXP7nwqnAR+Sl30u973/5J/R8EtFUy9YwYa1vupF3RHuGpu5
+ WRTU3yo7I1mXir818NiVq6Z9Jnoh3+2qGvr9IDBo=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AG8ApT5080846
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 16 Nov 2023 00:13:53 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 16 Nov 2023 02:10:51 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 16
- Nov 2023 00:13:53 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 02:10:50 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 16 Nov 2023 00:13:53 -0600
+ Frontend Transport; Thu, 16 Nov 2023 02:10:50 -0600
 Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AG6Dono099442;
- Thu, 16 Nov 2023 00:13:51 -0600
-Message-ID: <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
-Date: Thu, 16 Nov 2023 11:43:50 +0530
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AG8Ala7130820;
+ Thu, 16 Nov 2023 02:10:48 -0600
+Message-ID: <d4292b20-b3df-4315-8804-2dfb46dcaab9@ti.com>
+Date: Thu, 16 Nov 2023 13:40:47 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
- J7200
-To: Tom Rini <trini@konsulko.com>, "Kumar, Udit" <u-kumar1@ti.com>
-CC: Keerthy <j-keerthy@ti.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>
-References: <20231003081038.24299-1-j-keerthy@ti.com>
- <20231003081038.24299-11-j-keerthy@ti.com>
- <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
- <20231003151033.GD8465@bill-the-cat>
+Subject: Re: [PATCH] arm: dts: k3-j7200: Sync with Linux 6.7-rc1
 Content-Language: en-US
+To: "Kumar, Udit" <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>,
+ <trini@konsulko.com>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <m-chawdhry@ti.com>
+References: <20231113204309.3246434-1-reidt@ti.com>
+ <dad98c6c-0951-4f21-a28c-7d8499147098@ti.com>
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231003151033.GD8465@bill-the-cat>
+In-Reply-To: <dad98c6c-0951-4f21-a28c-7d8499147098@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -83,46 +81,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Udit
 
-Trying to bring back this series here.
-
-On 03/10/23 20:40, Tom Rini wrote:
-> On Tue, Oct 03, 2023 at 07:57:04PM +0530, Kumar, Udit wrote:
->>
->> On 10/3/2023 1:40 PM, Keerthy wrote:
->>> Enable ESM initialization for J7200
->>>
->>> Signed-off-by: Keerthy <j-keerthy@ti.com>
->>> ---
->>>    board/ti/j721e/evm.c | 6 ++++--
->>>    1 file changed, 4 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
->>> index 42fa94b7a5..070b28326f 100644
->>> --- a/board/ti/j721e/evm.c
->>> +++ b/board/ti/j721e/evm.c
->>> @@ -543,7 +543,8 @@ void spl_board_init(void)
->>>    	}
->>>    #ifdef CONFIG_ESM_K3
->>> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
->>> +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
->>> +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
->>
->>
->> Could we align on one kind of check,  For J721E check is done against
->> board-id, whereas for J7200 checking
+On 14/11/23 11:07, Kumar, Udit wrote:
+> Thanks Reid for sync.
 > 
-> We should look at figuring out how to split this file in two.  One for
-> "generic J721E systems" and one for "TI EVMs", as I've mentioned in
-> other threads, so that it's easier for custom platforms to drop code
-> they don' require.
+> On 11/14/2023 2:13 AM, Reid Tonking wrote:
+>> Sync u-boot device tree with Linux kernel 6.7-rc1
+>>
+>> Signed-off-by: Reid Tonking <reidt@ti.com>
+>> ---
+>> Boot-log: https://gist.github.com/reidt1/db5426f2a778369db8c3699cf293b94f
+>>
+>>   arch/arm/dts/k3-j7200-main.dtsi       | 2 +-
+>>   arch/arm/dts/k3-j7200-mcu-wakeup.dtsi | 9 ++++++++-
+>>   2 files changed, 9 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-j7200-main.dtsi b/arch/arm/dts/k3-j7200-main.dtsi
+>> index cdb1d6b2a9..264913f832 100644
+>> --- a/arch/arm/dts/k3-j7200-main.dtsi
+>> +++ b/arch/arm/dts/k3-j7200-main.dtsi
+>> @@ -91,7 +91,7 @@
+>>       };
+>>       main_navss: bus@30000000 {
+>> -        compatible = "simple-mfd";
+>> +        compatible = "simple-bus";
+>>           #address-cells = <2>;
+>>           #size-cells = <2>;
+>>           ranges = <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+>> diff --git a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi 
+>> b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
+>> index 6ffaf85fa6..3fc588b848 100644
+>> --- a/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
+>> +++ b/arch/arm/dts/k3-j7200-mcu-wakeup.dtsi
+>> @@ -318,7 +318,7 @@
+>>       };
+>>       mcu_navss: bus@28380000 {
+>> -        compatible = "simple-mfd";
+>> +        compatible = "simple-bus";
+>>           #address-cells = <2>;
+>>           #size-cells = <2>;
+>>           ranges = <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>;
+>> @@ -637,4 +637,11 @@
+>>           power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
+>>           #thermal-sensor-cells = <1>;
+>>       };
+>> +
+>> +    mcu_esm: esm@40800000 {
+>> +        compatible = "ti,j721e-esm";
+>> +        reg = <0x00 0x40800000 0x00 0x1000>;
+>> +        ti,esm-pins = <95>;
+>> +        bootph-pre-ram;
+>> +    };
+>>   };
+> 
+> Please take care of actual usage of this node
 > 
 
-Yes that does make sense. Would it be okay if we solve that problem separately 
-in a different patch series? We can move along with this current series for now 
-(after making the required change in CONFIG/board-id for v2) since ESM support 
-is important for these platforms.
+This need not be taken up within the sync itself right? I am planning on 
+reviving Keerthy's patches once the J7 syncs are in.
+
+> https://lore.kernel.org/all/20231003081038.24299-10-j-keerthy@ti.com/
+> 
+> https://lore.kernel.org/all/20231003081038.24299-11-j-keerthy@ti.com/
+> 
+> https://lore.kernel.org/all/838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com/
+> 
+> 
 
 -- 
 Thanking You
