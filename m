@@ -4,69 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB91C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 11:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6059BC54FB9
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 12:49:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D41F386F53;
-	Thu, 16 Nov 2023 12:19:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 47E4087465;
+	Thu, 16 Nov 2023 13:49:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pIX94orK";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4719874B6; Thu, 16 Nov 2023 12:19:52 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id 971648748D; Thu, 16 Nov 2023 13:49:32 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC6D487161
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 12:19:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3706087479
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 13:49:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 57758B81CD6
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 11:19:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74B83C433A9
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 11:19:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700133587;
- bh=sVE1ZhzgF+azIDjaftC09+KcqFN6b/NyebhVcP3716U=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=pIX94orK0kXxh1o6FUN7miEOMvbCikG2L6fD47MqChba1soczCS4jplycsG0sIWn5
- wlxUJLoYG/LkBnX7yrwdGJIlbten+wPkUWGmKkVCxj6fyIaQBGyUNLRlIqEfiNENU9
- s/tkAHNDhhboJWuPPJa/rl9mjLnwCQ9InX1WA8udM6LQPeBC15vdECGAuGVMh1SVs6
- jR5B0xv2P9dP+So1iJUBCKZf8V/FlvWvS8v9zMnIZWENLOk96Df29YUGkNKIadYX5H
- +e58XhFLNinm99TLcZpnUMyw3tHYUFydHafmDHbqlqTTEYKFeuTvOpDs7VOg9sVEG1
- ISzA0zgGhWELw==
-Received: by mail-ot1-f43.google.com with SMTP id
- 46e09a7af769-6cf65093780so342374a34.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 03:19:47 -0800 (PST)
-X-Gm-Message-State: AOJu0YyMT/6VDa9z1U0jQV4ksdP6tpYbbp6PNY8jkCCepOxNbNBWzmty
- r3vvpAsIjV5ZtFSG+xUPc5P5uK880pQMKTvwEQY=
-X-Google-Smtp-Source: AGHT+IG5EHn9aQcDgToPoaTjqqvcP1a1M4t+aOZpOsigb6MoTuHcsgwxABvfoX/iZim1ptpeZmWNZZ2Q2xY3URFCfWs=
-X-Received: by 2002:a05:6871:a508:b0:1e9:9989:33a5 with SMTP id
- wc8-20020a056871a50800b001e9998933a5mr18170787oab.5.1700133586781; Thu, 16
- Nov 2023 03:19:46 -0800 (PST)
+ spf=pass smtp.mailfrom=peterlin@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3AGCnCiU098650
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 20:49:12 +0800 (+08)
+ (envelope-from peterlin@andestech.com)
+Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
+ Thu, 16 Nov 2023 20:49:11 +0800
+From: Yu Chien Peter Lin <peterlin@andestech.com>
+To: <rick@andestech.com>, <ycliang@andestech.com>, <peterlin@andestech.com>,
+ <randolph@andestech.com>, <u-boot@lists.denx.de>
+Subject: [PATCH] riscv: andes: Fix enable register settings of PLICSW
+Date: Thu, 16 Nov 2023 20:46:12 +0800
+Message-ID: <20231116124612.117927-1-peterlin@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231111002851.1293891-1-sjg@chromium.org>
- <20231111002851.1293891-3-sjg@chromium.org>
-In-Reply-To: <20231111002851.1293891-3-sjg@chromium.org>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Thu, 16 Nov 2023 20:19:10 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAQN_qGYztWGDmQyfg+eZ5P7RkM47mpgp0dQn_iuhvTSWg@mail.gmail.com>
-Message-ID: <CAK7LNAQN_qGYztWGDmQyfg+eZ5P7RkM47mpgp0dQn_iuhvTSWg@mail.gmail.com>
-Subject: Re: [PATCH v5 2/3] arm: boot: Move the single quotes for image name
-To: Simon Glass <sjg@chromium.org>
-Cc: linux-arm-kernel@lists.infradead.org, lkml <linux-kernel@vger.kernel.org>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>, 
- Nicolas Schier <nicolas@fjasle.eu>, linux-kbuild@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3AGCnCiU098650
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,63 +59,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Nov 11, 2023 at 9:29=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Add quotes where UIMAGE_NAME is used, rather than where it is defined.
-> This allows the UIMAGE_NAME variable to be set by the user.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+On 32-core platform, hart31 gets stuck at secondary_hart_loop
+as the corresponding enable bit is not set in enable_ipi().
+We should program the next word (0x2f84) which is assigned
+as the enable register of hart31. It should be done in the same
+way when we invoke riscv_send_ipi() to trigger software interrupt
+on hart31.
 
+The following diagram shows the enable bits of the fixed PLICSW
+scheme.
 
-I applied this to linux-kbuild/fixes.
+   Pending regs: 0x1000  x---0---0---0---0------0---0
+Pending hart ID:             0   1   2   3 ... 30  31
+   Interrupt ID:         0   1   2   3   4 ... 31  32
+                         |   |   |   |   |      |   |
+    Enable regs: 0x2000  x---1---0---0---0-...--0---0---> hart0
+                         |   |   |   |   |      |   |
+                 0x2080  x---0---1---0---0-...--0---0---> hart1
+                         |   |   |   |   |      |   |
+                 0x2100  x---0---0---1---0-...--0---0---> hart2
+                         |   |   |   |   |      |   |
+                 0x2180  x---0---0---0---1-...--0---0---> hart3
+                         .   .   .   .   .      .   .
+                         .   .   .   .   .      .   .
+                         .   .   .   .   .      .   .
+                 0x2f00  x---0---0---0---0-...--1---0---> hart30
+                         |   |   |   |   |      |   |
+                 0x2f80  x---0---0---0---0-...--0---1---> hart31
+                         <-------- word 0 -------><--- word 1 --->
 
-I changed the subject to
-"kbuild: Move the single quotes for image name"
-because it is unrelated to arm.
+This patch includes some cleanups to macros/functions.
 
+Fixes: ebf11273220a ("riscv: andes: Rearrange Andes PLICSW to single-bit-per-hart strategy")
+Signed-off-by: Yu Chien Peter Lin <peterlin@andestech.com>
+Reviewed-by: Randolph <randolph@andestech.com>
+---
+ arch/riscv/lib/andes_plicsw.c | 33 +++++++++++++++------------------
+ 1 file changed, 15 insertions(+), 18 deletions(-)
 
-Thanks.
+diff --git a/arch/riscv/lib/andes_plicsw.c b/arch/riscv/lib/andes_plicsw.c
+index db3b61abd9..113be71731 100644
+--- a/arch/riscv/lib/andes_plicsw.c
++++ b/arch/riscv/lib/andes_plicsw.c
+@@ -22,41 +22,36 @@
+ #include <linux/err.h>
+ 
+ /* pending register */
+-#define PENDING_REG(base)	((ulong)(base) + 0x1000)
++#define PENDING_REG(base, hart)	((ulong)(base) + 0x1000 + 4 * (((hart) + 1) / 32))
+ /* enable register */
+-#define ENABLE_REG(base, hart)	((ulong)(base) + 0x2000 + (hart) * 0x80)
++#define ENABLE_REG(base, hart)	((ulong)(base) + 0x2000 + (hart) * 0x80 + 4 * (((hart) + 1) / 32))
+ /* claim register */
+ #define CLAIM_REG(base, hart)	((ulong)(base) + 0x200004 + (hart) * 0x1000)
+ /* priority register */
+ #define PRIORITY_REG(base)	((ulong)(base) + PLICSW_PRIORITY_BASE)
+ 
+ /* Bit 0 of PLIC-SW pending array is hardwired to zero, so we start from bit 1 */
+-#define FIRST_AVAILABLE_BIT	0x2
+-#define SEND_IPI_TO_HART(hart)	(FIRST_AVAILABLE_BIT << (hart))
+ #define PLICSW_PRIORITY_BASE        0x4
+-#define PLICSW_INTERRUPT_PER_HART   0x1
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ static int enable_ipi(int hart)
+ {
+-	unsigned int en;
++	u32 enable_bit = (hart + 1) % 32;
+ 
+-	en = FIRST_AVAILABLE_BIT << hart;
+-	writel(en, (void __iomem *)ENABLE_REG(gd->arch.plicsw, hart));
++	writel(BIT(enable_bit), (void __iomem *)ENABLE_REG(gd->arch.plicsw, hart));
+ 
+ 	return 0;
+ }
+ 
+ static void init_priority_ipi(int hart_num)
+ {
+-    uint32_t *priority = (void *)PRIORITY_REG(gd->arch.plicsw);
++	u32 *priority = (void *)PRIORITY_REG(gd->arch.plicsw);
+ 
+-    for (int i = 0; i < hart_num * PLICSW_INTERRUPT_PER_HART; i++) {
+-        writel(1, &priority[i]);
+-    }
++	for (int i = 0; i < hart_num; i++)
++		writel(1, &priority[i]);
+ 
+-    return;
++	return;
+ }
+ 
+ int riscv_init_ipi(void)
+@@ -105,9 +100,10 @@ int riscv_init_ipi(void)
+ 
+ int riscv_send_ipi(int hart)
+ {
+-	unsigned int ipi = SEND_IPI_TO_HART(hart);
++	u32 interrupt_id = hart + 1;
++	u32 pending_bit  = interrupt_id % 32;
+ 
+-	writel(ipi, (void __iomem *)PENDING_REG(gd->arch.plicsw));
++	writel(BIT(pending_bit), (void __iomem *)PENDING_REG(gd->arch.plicsw, hart));
+ 
+ 	return 0;
+ }
+@@ -124,10 +120,11 @@ int riscv_clear_ipi(int hart)
+ 
+ int riscv_get_ipi(int hart, int *pending)
+ {
+-	unsigned int ipi = SEND_IPI_TO_HART(hart);
++	u32 interrupt_id = hart + 1;
++	u32 pending_bit  = interrupt_id % 32;
+ 
+-	*pending = readl((void __iomem *)PENDING_REG(gd->arch.plicsw));
+-	*pending = !!(*pending & ipi);
++	*pending = readl((void __iomem *)PENDING_REG(gd->arch.plicsw, hart));
++	*pending = !!(*pending & BIT(pending_bit));
+ 
+ 	return 0;
+ }
+-- 
+2.34.1
 
-
-
-> (no changes since v4)
->
-> Changes in v4:
-> - Add a patch to move the single quotes for image name
->
->  scripts/Makefile.lib | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 68d0134bdbf9..1a965fe68e01 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -487,14 +487,14 @@ UIMAGE_OPTS-y ?=3D
->  UIMAGE_TYPE ?=3D kernel
->  UIMAGE_LOADADDR ?=3D arch_must_set_this
->  UIMAGE_ENTRYADDR ?=3D $(UIMAGE_LOADADDR)
-> -UIMAGE_NAME ?=3D 'Linux-$(KERNELRELEASE)'
-> +UIMAGE_NAME ?=3D Linux-$(KERNELRELEASE)
->
->  quiet_cmd_uimage =3D UIMAGE  $@
->        cmd_uimage =3D $(BASH) $(MKIMAGE) -A $(UIMAGE_ARCH) -O linux \
->                         -C $(UIMAGE_COMPRESSION) $(UIMAGE_OPTS-y) \
->                         -T $(UIMAGE_TYPE) \
->                         -a $(UIMAGE_LOADADDR) -e $(UIMAGE_ENTRYADDR) \
-> -                       -n $(UIMAGE_NAME) -d $< $@
-> +                       -n '$(UIMAGE_NAME)' -d $< $@
->
->  # XZ
->  # ----------------------------------------------------------------------=
------
-> --
-> 2.42.0.869.gea05f2083d-goog
->
-
-
---
-Best Regards
-
-Masahiro Yamada
