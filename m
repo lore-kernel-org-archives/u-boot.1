@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10C60C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 17:29:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67508C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 18:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F5B6874EA;
-	Thu, 16 Nov 2023 18:29:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CF5886FA5;
+	Thu, 16 Nov 2023 19:15:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cZaITHqF";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bzM7MgA8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA374874F6; Thu, 16 Nov 2023 18:29:18 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 591B2870D2; Thu, 16 Nov 2023 19:15:37 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DED64874DB
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 18:29:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15790863FD
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:15:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-35932aa21a3so4004125ab.2
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 09:29:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700155745; x=1700760545; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5SiGKNWTogg5s8I4hI4hsWN1in2XeMZfNUWjSe8vt1c=;
- b=cZaITHqFX0dnatxvzR0yoEc/b6XHvSK54cXJoThFrGG7CregBQNa7zbfSsyqr2GXO6
- 4yxkt7H83kMPz4rQJOj3A4lFieAnPDl2udOXFWHltNBt2HMgwAQwn/oKgUJUD1vuEK+G
- x330AXmm81VxZd3K11lYKHstKbQi//3srRGv4=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6D7453F87C
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 18:15:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1700158534;
+ bh=wBvHwhnaqGLFywHnNN8GfG3LmS5y0Urf8tIC+y5lCME=;
+ h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
+ In-Reply-To:Content-Type;
+ b=bzM7MgA8rPt+dmatYdkE7QsanM935IjU/YQeO62sldcty+ZRlJdN8eiSD3wu9BG4H
+ JRIKDmJ3AYbOoHnNXJUJcymRKY1q+/fnZbirkd8DJMOFuTn8Ch6Cb1uk8AUtpY59Od
+ wqpeLkd0BL0KzVhGGu5lgtgEEcSnVu4fhBu991nzVGt81urC9BV6bOpLHsCjeWOsxg
+ Ha6HJpkVzjTv/c9J7fscRd9V70q8jWMEs+sSJ85LRsss4duban0wnyy3E1uLCZzzbj
+ P3T51Ew0soY+PhlGdUMxOR5BqWB89S0mMfR2RIZd9X5olDp1R/vHtNmK4sjnrercaD
+ VB+Pcvq2WmA/g==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-32f8c4b74f7so550266f8f.0
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:15:34 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700155745; x=1700760545;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5SiGKNWTogg5s8I4hI4hsWN1in2XeMZfNUWjSe8vt1c=;
- b=kTXJlXo4IzANIi2ceTIBcKwLEadd+3h2bgYsOvtUWRLyfOJWhugPqFiaC34SKRMGUN
- orYwXX6vehB+xe0CgVXzUQDggHHC2u0MJVOKHlJFy40U7aTaZkp/qiGRIBO7nkwwnvH/
- Kt9/vVjmonRQSK7dbthvD2JyVl2rAo2g7dU9L/3DKuKXrdbNCO3CH4dOeyDPAT3MNv0D
- fANnpbkfcbjC0bZOXJ2Fl+Mi6o+R6unOX5Ti5aZ7US13gFtLPYiR9E/EyIgcCRFfgHVy
- v3FtzAdxhWoFnbUQj3V2s883c+BkI9d6zlrVpiRMwg9QuKlCtS1092czgQemzREKcm8c
- lz3A==
-X-Gm-Message-State: AOJu0YwMI1lCCjZE6ZCQwnKbM0CweeQY53qiGAp9gp7nf20sT6665Kb+
- 8QfqdhygXaY9Vlf5KIdm5F6D8nN/E/d70gnc4mnsbw==
-X-Google-Smtp-Source: AGHT+IGaQokizqpcI2eRtxwCmzms3L1z6RJ8KYtnH3CEjTb902LoLcNtEnVdFaWX+2iO6b6M/mjAaA==
-X-Received: by 2002:a05:6e02:1c07:b0:359:5b5c:9ce4 with SMTP id
- l7-20020a056e021c0700b003595b5c9ce4mr22860439ilh.19.1700155745274; 
- Thu, 16 Nov 2023 09:29:05 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- o8-20020a056e02092800b0035ab8cc4a4bsm1914348ilt.17.2023.11.16.09.29.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 09:29:05 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: devicetree@vger.kernel.org
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>, linux-mtd@lists.infradead.org,
- Tom Rini <trini@konsulko.com>, Rob Herring <robh@kernel.org>,
- Michael Walle <mwalle@kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
-Subject: [PATCH v6 2/3] dt-bindings: mtd: binman-partition: Add binman
- compatibles
-Date: Thu, 16 Nov 2023 10:28:51 -0700
-Message-ID: <20231116172859.393744-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
-In-Reply-To: <20231116172859.393744-1-sjg@chromium.org>
-References: <20231116172859.393744-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1700158534; x=1700763334;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wBvHwhnaqGLFywHnNN8GfG3LmS5y0Urf8tIC+y5lCME=;
+ b=b8BvyLXBqgSZDucnOoxgcbViPN2VmbyqVUhROEILd2eoRIJ7XAt+xlRniz7+INHBh3
+ T4ljKqe+gqYVEHqO9O4xGbId0pzBRD/SKVvUrVm52LaisHltpbXIFiqh9NpPcHZeB6Ym
+ zEdyKvzd9RBweBzXodfFYhw3tGhoofdUN36kior9WXVQVGL8NzglWObajMhJed22JrBG
+ 4WF1N9B690Y+wsSgMq9PddzauJb6TbjmyGNgtsF5noMSsd2Tt0dM2YoyMbQKfyakb0nP
+ fQouvQ/ma72T8stA5iahcgTCq8qWBR1lOyYKpD8ejfonmMIVdsHGdTa6FODqghtmYZCt
+ 8QAg==
+X-Gm-Message-State: AOJu0Yzp4ZhKntURtxd/fhwdpJyaXvfwJBWRCB8wDiryK5fWo4rwocKV
+ eDc6eC11s1e7B3FLnrXBdf1BBdgMZHNiGGQgC9Af7N71o1i+cgqH39y3LeFn1hoKTti0872ZlSP
+ htQpQYo4CoBaT0TaEF9tNBGtvn5L2HBY=
+X-Received: by 2002:a5d:59a2:0:b0:323:2563:be13 with SMTP id
+ p2-20020a5d59a2000000b003232563be13mr2552262wrr.52.1700158533957; 
+ Thu, 16 Nov 2023 10:15:33 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHM+BOimhqrylgRcNSfPjgzPZsnpIfRxFh4evb4evNzWTzxhpOaQx73eg7UqODuVuNYW83QmA==
+X-Received: by 2002:a5d:59a2:0:b0:323:2563:be13 with SMTP id
+ p2-20020a5d59a2000000b003232563be13mr2552247wrr.52.1700158533560; 
+ Thu, 16 Nov 2023 10:15:33 -0800 (PST)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ b15-20020a056000054f00b0031980294e9fsm47053wrf.116.2023.11.16.10.15.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Nov 2023 10:15:32 -0800 (PST)
+Message-ID: <25cd1fbe-5ed2-4444-8dc6-8378273d9897@canonical.com>
+Date: Thu, 16 Nov 2023 19:15:31 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: bootstd: Support for distro specific EFI folders
+To: Shantur Rathore <i@shantur.com>
+References: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
+Content-Language: en-US, de-DE
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass
+ <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,99 +105,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add two compatible for binman entries, as a starting point for the
-schema.
+On 11/16/23 17:52, Shantur Rathore wrote:
+> Hi Simon,
+> 
+> Currently bootstd - bootmethod_efi only looks for the default
+> bootxx64.efi in /EFI/boot folder only.
+> Generally many distros end up putting their bootloaders in
+> EFI/<distro> folders like EFI/ubuntu and EFI/debian etc.
+> 
+> In x86 worlds, the NVRAM is modified and new boot entries are added to
+> support these but in the U-boot world the NVRAM variables are
+> read-only.
 
-Note that, after discussion on v2, we decided to keep the existing
-meaning of label so as not to require changes to existing userspace
-software when moving to use binman nodes to specify the firmware
-layout.
+I guess you are referring to UEFI boot options. These typically are not 
+stored in non-volatile RAM but on a SPI flash device.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> 
+> What would be the best way to implement this?
+> 
+> I was thinking of having a "efi_prefixes" environment variable which
+> can be set to "ubuntu debian centos" etc and bootmethod_efi can try
+> all of them. Will bootmethod_efi be able to support multiple entries (
+> thinking of multiboot ) ?
 
-(no changes since v5)
+On my laptop I have:
 
-Changes in v5:
-- Add mention of why 'binman' is the vendor
-- Drop  'select: false'
-- Tidy up the compatible setings
-- Use 'tfa-bl31' instead of 'atf-bl31'
+EFI/Microsoft/Boot/bootmgr.efi
+EFI/Microsoft/Boot/memtest.efi
+EFI/Boot/bootx64.efi
+EFI/Boot/fbx64.efi
+EFI/Boot/mmx64.efi
+EFI/debian/shimx64.efi
+EFI/debian/grubx64.efi
+EFI/debian/mmx64.efi
+EFI/debian/fbx64.efi
+EFI/ubuntu/grubx64.efi
+EFI/ubuntu/shimx64.efi
+EFI/ubuntu/mmx64.efi
 
-Changes in v4:
-- Correct selection of multiple compatible strings
+Obviously each installed operating system provides multiple EFI binaries 
+and non uses the fallback file name BOOT<ARCH>.EFI. A value "ubuntu 
+debian centos" would not be able to describe which file you are looking 
+for.
 
-Changes in v3:
-- Drop fixed-partitions from the example
-- Use compatible instead of label
+We already have the U-Boot command line eficonfig and efidebug commands 
+to set up UEFI boot options which can describe which EFI binary to load 
+and which command line to pass to it. These are considered by the 
+existing boot flows.
 
-Changes in v2:
-- Use plain partition@xxx for the node name
+If you are installing the shim-signed package on Ubuntu, the EFI boot 
+option for Ubuntu is set up by EFI/BOOT/BOOT<ARCH>.EFI using the content 
+of EFI/ubuntu/BOOT<ARCH>.CSV. This is done before ExitBootServices() and 
+therefore should work with current U-Boot.
 
- .../mtd/partitions/binman-partition.yaml      | 54 +++++++++++++++++++
- 1 file changed, 54 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
+Patches are pending upstream to make EFI variables writable from Linux 
+if they are stored in the RPMB partition in the eMMC. See this series:
 
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-new file mode 100644
-index 000000000000..83222ac9aa78
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-@@ -0,0 +1,54 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+# Copyright 2023 Google LLC
-+
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/partitions/binman-partition.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Binman partition
-+
-+maintainers:
-+  - Simon Glass <sjg@chromium.org>
-+
-+description: |
-+  This corresponds to a binman 'entry'. It is a single partition which holds
-+  data of a defined type.
-+
-+  The vendor is specified as binman since there are quite a number
-+  of binman-specific entry types, such as section, fill and files,
-+  to be added later.
-+
-+allOf:
-+  - $ref: /schemas/mtd/partitions/partition.yaml#
-+
-+properties:
-+  compatible:
-+    enum:
-+      - binman,entry # generic binman entry
-+      - u-boot       # u-boot.bin from U-Boot project
-+      - tfa-bl31     # bl31.bin or bl31.elf from TF-A project
-+
-+  reg:
-+    minItems: 1
-+    maxItems: 2
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    partitions {
-+        compatible = "binman";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@100000 {
-+            compatible = "u-boot";
-+            reg = <0x100000 0xf00000>;
-+        };
-+
-+        partition@200000 {
-+            compatible = "tfa-bl31";
-+            reg = <0x200000 0x100000>;
-+        };
-+    };
--- 
-2.43.0.rc0.421.g78406f8d94-goog
+https://lore.kernel.org/linux-efi/20231107054057.1893-2-masahisa.kojima@linaro.org/
 
+Best regards
+
+Heinrich
