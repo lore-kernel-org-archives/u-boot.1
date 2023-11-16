@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67508C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 18:15:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B8CC54E76
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 18:34:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CF5886FA5;
-	Thu, 16 Nov 2023 19:15:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B31E38718B;
+	Thu, 16 Nov 2023 19:34:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bzM7MgA8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="polcQysV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 591B2870D2; Thu, 16 Nov 2023 19:15:37 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B2CC686D85; Thu, 16 Nov 2023 19:33:59 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15790863FD
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:15:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C895E86D85
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:33:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6D7453F87C
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 18:15:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700158534;
- bh=wBvHwhnaqGLFywHnNN8GfG3LmS5y0Urf8tIC+y5lCME=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
- In-Reply-To:Content-Type;
- b=bzM7MgA8rPt+dmatYdkE7QsanM935IjU/YQeO62sldcty+ZRlJdN8eiSD3wu9BG4H
- JRIKDmJ3AYbOoHnNXJUJcymRKY1q+/fnZbirkd8DJMOFuTn8Ch6Cb1uk8AUtpY59Od
- wqpeLkd0BL0KzVhGGu5lgtgEEcSnVu4fhBu991nzVGt81urC9BV6bOpLHsCjeWOsxg
- Ha6HJpkVzjTv/c9J7fscRd9V70q8jWMEs+sSJ85LRsss4duban0wnyy3E1uLCZzzbj
- P3T51Ew0soY+PhlGdUMxOR5BqWB89S0mMfR2RIZd9X5olDp1R/vHtNmK4sjnrercaD
- VB+Pcvq2WmA/g==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-32f8c4b74f7so550266f8f.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:15:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-677a4d9ba82so5798706d6.3
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:33:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700159628; x=1700764428; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IbLdM2bxY7vN5BFhHpeRrU7LwIRa5u5ky4ZkXyGNovM=;
+ b=polcQysVMW5R3FHjjxOGZYPwHmaAJBYioyrKIzwpV7VLP0OeyBOKXMhc8PNC9JPPUe
+ 8lQhK3rnfwxQUeAyF2ep1lL3m7lVa4702g86mqII1Jie9jDmt33Z+piUlYzaJIAmClY+
+ lSkIvRqAvoszQKPX/Xpjhc6waIi4Eue/Qm9D4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700158534; x=1700763334;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wBvHwhnaqGLFywHnNN8GfG3LmS5y0Urf8tIC+y5lCME=;
- b=b8BvyLXBqgSZDucnOoxgcbViPN2VmbyqVUhROEILd2eoRIJ7XAt+xlRniz7+INHBh3
- T4ljKqe+gqYVEHqO9O4xGbId0pzBRD/SKVvUrVm52LaisHltpbXIFiqh9NpPcHZeB6Ym
- zEdyKvzd9RBweBzXodfFYhw3tGhoofdUN36kior9WXVQVGL8NzglWObajMhJed22JrBG
- 4WF1N9B690Y+wsSgMq9PddzauJb6TbjmyGNgtsF5noMSsd2Tt0dM2YoyMbQKfyakb0nP
- fQouvQ/ma72T8stA5iahcgTCq8qWBR1lOyYKpD8ejfonmMIVdsHGdTa6FODqghtmYZCt
- 8QAg==
-X-Gm-Message-State: AOJu0Yzp4ZhKntURtxd/fhwdpJyaXvfwJBWRCB8wDiryK5fWo4rwocKV
- eDc6eC11s1e7B3FLnrXBdf1BBdgMZHNiGGQgC9Af7N71o1i+cgqH39y3LeFn1hoKTti0872ZlSP
- htQpQYo4CoBaT0TaEF9tNBGtvn5L2HBY=
-X-Received: by 2002:a5d:59a2:0:b0:323:2563:be13 with SMTP id
- p2-20020a5d59a2000000b003232563be13mr2552262wrr.52.1700158533957; 
- Thu, 16 Nov 2023 10:15:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHM+BOimhqrylgRcNSfPjgzPZsnpIfRxFh4evb4evNzWTzxhpOaQx73eg7UqODuVuNYW83QmA==
-X-Received: by 2002:a5d:59a2:0:b0:323:2563:be13 with SMTP id
- p2-20020a5d59a2000000b003232563be13mr2552247wrr.52.1700158533560; 
- Thu, 16 Nov 2023 10:15:33 -0800 (PST)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- b15-20020a056000054f00b0031980294e9fsm47053wrf.116.2023.11.16.10.15.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 10:15:32 -0800 (PST)
-Message-ID: <25cd1fbe-5ed2-4444-8dc6-8378273d9897@canonical.com>
-Date: Thu, 16 Nov 2023 19:15:31 +0100
+ d=1e100.net; s=20230601; t=1700159628; x=1700764428;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IbLdM2bxY7vN5BFhHpeRrU7LwIRa5u5ky4ZkXyGNovM=;
+ b=eAUb2Lw1+gXX8LFCyWe1++/4W/A3zfNgPou9FPHvQ2SW7mSKAM8A8Piwj8GqvcEeYw
+ LtYtxQcnuWIiysYjM4dpAITI499l9frlXCP9o0K0sTlCk+txuG9/JA8VF8+2PZFxOUHR
+ u8EtVTnPiv/v6DBqzuPkkVoPHVhq6djNHPgwgydQ0cE/BVASpJhqxenV8pA5uwYfRMZZ
+ aO9E5Yt68CBMbqPmY8+ChzUCAbo1FGWWKzL6ZeNtJEI9+qQLnPHI/tARyN4ohgH2tEMf
+ 6UNdvzM01LOH10hynCo/vcaIG5YR+DOS44VCKWYhelzz2GrJ/TYT3yIwOd/LJsoD7q/+
+ fpBQ==
+X-Gm-Message-State: AOJu0YwAzTc0Lxh+DnKK+3OvJAP9T/4iLXsXapXblYHlmdSJ3rHm5GqN
+ x8bJO8lKWGxVZjJ/Q56gaw4pzg==
+X-Google-Smtp-Source: AGHT+IHJVczHRemMuGhk0to3Qekp7T0Dsgo5SjIuok/loqTliBHfGexljm10kKbr0pOEWvawzV0zbA==
+X-Received: by 2002:a05:6214:1c8d:b0:671:e02a:8bfc with SMTP id
+ ib13-20020a0562141c8d00b00671e02a8bfcmr11959577qvb.16.1700159628493; 
+ Thu, 16 Nov 2023 10:33:48 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-31e8-20a7-2ee8-ec91.res6.spectrum.com.
+ [2603:6081:7b00:6400:31e8:20a7:2ee8:ec91])
+ by smtp.gmail.com with ESMTPSA id
+ j17-20020a0cc351000000b006516780a0a5sm1561479qvi.117.2023.11.16.10.33.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Nov 2023 10:33:48 -0800 (PST)
+Date: Thu, 16 Nov 2023 13:33:45 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Alexander Gendin <agendin@matrox.com>, Zong Li <zong.li@sifive.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/6] acpi: do not write ACPI tables on TARGET_QEMU_VIRT
+Message-ID: <20231116183345.GA170968@bill-the-cat>
+References: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
+ <20231115142355.123038-2-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: bootstd: Support for distro specific EFI folders
-To: Shantur Rathore <i@shantur.com>
-References: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
-Content-Language: en-US, de-DE
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass
- <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+YACovo/1j3GUP2W"
+Content-Disposition: inline
+In-Reply-To: <20231115142355.123038-2-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,64 +102,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/16/23 17:52, Shantur Rathore wrote:
-> Hi Simon,
-> 
-> Currently bootstd - bootmethod_efi only looks for the default
-> bootxx64.efi in /EFI/boot folder only.
-> Generally many distros end up putting their bootloaders in
-> EFI/<distro> folders like EFI/ubuntu and EFI/debian etc.
-> 
-> In x86 worlds, the NVRAM is modified and new boot entries are added to
-> support these but in the U-boot world the NVRAM variables are
-> read-only.
 
-I guess you are referring to UEFI boot options. These typically are not 
-stored in non-volatile RAM but on a SPI flash device.
+--+YACovo/1j3GUP2W
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> 
-> What would be the best way to implement this?
-> 
-> I was thinking of having a "efi_prefixes" environment variable which
-> can be set to "ubuntu debian centos" etc and bootmethod_efi can try
-> all of them. Will bootmethod_efi be able to support multiple entries (
-> thinking of multiboot ) ?
+On Wed, Nov 15, 2023 at 03:23:50PM +0100, Heinrich Schuchardt wrote:
 
-On my laptop I have:
+> RISC-V QEMU provides the ACPI tables. We do not need to generate them
+> ourselves.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/acpi/Makefile      | 2 +-
+>  lib/acpi/acpi_writer.c | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
+> index c1c9675b5d..19fa6ac869 100644
+> --- a/lib/acpi/Makefile
+> +++ b/lib/acpi/Makefile
+> @@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) +=3D acpi_table.o
+>  obj-y +=3D acpi_writer.o
+> =20
+>  # With QEMU the ACPI tables come from there, not from U-Boot
+> -ifndef CONFIG_QEMU
+> +ifeq ($(CONFIG_QEMU)$(CONFIG_TARGET_QEMU_VIRT),)
 
-EFI/Microsoft/Boot/bootmgr.efi
-EFI/Microsoft/Boot/memtest.efi
-EFI/Boot/bootx64.efi
-EFI/Boot/fbx64.efi
-EFI/Boot/mmx64.efi
-EFI/debian/shimx64.efi
-EFI/debian/grubx64.efi
-EFI/debian/mmx64.efi
-EFI/debian/fbx64.efi
-EFI/ubuntu/grubx64.efi
-EFI/ubuntu/shimx64.efi
-EFI/ubuntu/mmx64.efi
+The goal here is to say that we have been passed ACPI tables, and not to
+generate them, yes? Lets just introduce a symbol which says that and
+enable it as needed in both QEMU targets and others as needed please.
 
-Obviously each installed operating system provides multiple EFI binaries 
-and non uses the fallback file name BOOT<ARCH>.EFI. A value "ubuntu 
-debian centos" would not be able to describe which file you are looking 
-for.
+--=20
+Tom
 
-We already have the U-Boot command line eficonfig and efidebug commands 
-to set up UEFI boot options which can describe which EFI binary to load 
-and which command line to pass to it. These are considered by the 
-existing boot flows.
+--+YACovo/1j3GUP2W
+Content-Type: application/pgp-signature; name="signature.asc"
 
-If you are installing the shim-signed package on Ubuntu, the EFI boot 
-option for Ubuntu is set up by EFI/BOOT/BOOT<ARCH>.EFI using the content 
-of EFI/ubuntu/BOOT<ARCH>.CSV. This is done before ExitBootServices() and 
-therefore should work with current U-Boot.
+-----BEGIN PGP SIGNATURE-----
 
-Patches are pending upstream to make EFI variables writable from Linux 
-if they are stored in the RPMB partition in the eMMC. See this series:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWYIYACgkQFHw5/5Y0
+tyxsyQv9Gz00BKUXU8hJcuW/jzS4Nn8aAT5Xot+KerFC05UZJ8A35tWywLKsUCex
+nY9T8B4mYF5kVGaDshVfz17urb4SOwHsIgzOJidqJXW7P2IuNTWYP5HXKZNYAHoR
+H6QWuf2WTsJmyMES3MjLAZfdgr+dOAb7C8RiKnpYWS+I+7H55sQR6lUn/dopRDTC
+mq26m0oVYMOBC38CCcB4ZHXcFZNGzWUICQmH51+3us/4vLV3TD7CZoWj1W3fkIy0
+pU62DiL16Q9oV/JX5XmrQJP4AlzkkEOhKysNenVgoMzpWGaQhWZ8nTjxraEF3npL
+V9C8B5dVWjhZm1SiJzTYW57OwbFMc5gFR9M4ctgRcg8J48x3QgzEL6+wyzUnkXlL
+7TR1IyEzz7u1RYRcI0BC+HgYAE5kRF40lffksj9S9CUqjPYfsJBSHorx57kSLjtW
+9RTKuQkSP85e3PDuDbEKMi8hRnVcJG14RhuXKSDpOHww+OmzdMFl19LxzwSEs10s
+RcnRHJdb
+=oXsN
+-----END PGP SIGNATURE-----
 
-https://lore.kernel.org/linux-efi/20231107054057.1893-2-masahisa.kojima@linaro.org/
-
-Best regards
-
-Heinrich
+--+YACovo/1j3GUP2W--
