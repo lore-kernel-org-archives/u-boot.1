@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E18C54FB9
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C442C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:15:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3050587500;
+	by phobos.denx.de (Postfix) with ESMTP id 9F6E1874E4;
 	Thu, 16 Nov 2023 05:11:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HlQ/SDRm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ex+zspvt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CF5487478; Thu, 16 Nov 2023 05:11:45 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id D4369874C5; Thu, 16 Nov 2023 05:11:45 +0100 (CET)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D745F87478
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FF36874D6
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7ad501764f4so13898539f.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 20:11:42 -0800 (PST)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7a68b87b265so12519839f.2
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 20:11:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700107901; x=1700712701; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700107902; x=1700712702; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k0Z7mlm4vcEPfvpi0dGWMzI0ktVwlVx/+GXWMHFVrs0=;
- b=HlQ/SDRm4uQR7TyU2ZRwrjpV2WrBosWP/w+0hLNVx8EcEWxNS2ju52KcVZxFTX9Myq
- Tu37Phn638q6l9/MtgXdfe1YtAxWSo8ee2R2vYxEkyt0T2fRQDDWSiLWOeiwmHnRjKlh
- TeP6vQV0Y74bE9N5db7M2WSzc6meB2IkU0nzw=
+ bh=TxPGYQBGECC7Y/ZXsWgO1vbN7ibNUVjCT6MaJMvpeLY=;
+ b=ex+zspvtNEqL4pTtWuMlMrMH23OdeDDJ3MhMQmiZWKN+H3U+rP7y88aR/L7sO2fkZG
+ irwOucoJ6bR/8NdWy1K4VyJDIXBG1NRDNW9BjA6dyor4ypLsCf+k2vqI/8wsxxyvOlft
+ FDzCwz4aoePY1JTWu4IoQOWzzKzRAhqLPIgE8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700107901; x=1700712701;
+ d=1e100.net; s=20230601; t=1700107902; x=1700712702;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=k0Z7mlm4vcEPfvpi0dGWMzI0ktVwlVx/+GXWMHFVrs0=;
- b=moDKVAHzoS8VWZiAg3QWrjKMvXzItQxnB9kYeV+fulYaYlHL2Ooq4GCicpLQuvl2Pt
- 2sh7fOJ44y5lKiAriyIbVUoRZGbYQcZwgINeFfhZU4TsKw7/qKG7ST+omvMvt8hDDa2w
- gcan2mAcaDPEqaKWu5kw7ZsvAjjR78tJ+K8v5eLdesZnJ5eYD66ZBFRC/1L/0S3u39n+
- 2xNgoPVoMGLpbvB9qhV5yhTKsvljXQK0E7VnKD8uMmvLSmOF0qVYwMEWR/gUj0YPxoPF
- PdzNx+YPxOUtXd2zgHBbGFpRZSoo5H+VvG6/DtADRUJyHAFY3y1wRHG7eRv0Jvz9juOB
- uT8w==
-X-Gm-Message-State: AOJu0YzZM9XwOSYVOdYIArSj86nXdVIIxNBG2+H95IVGGKNmqG+ZolmB
- vGZRE9Q3tNOwS+8idBofoKWKhbIUjOR62BuxZg6MNQ==
-X-Google-Smtp-Source: AGHT+IExmqVK5RKjbYENfSeTuWpJjm18SS/V/THoC5o9Y/31TJohnLwmQNuk0MRW1QSurtCVFkluyQ==
-X-Received: by 2002:a05:6602:150e:b0:787:8cf:fd08 with SMTP id
- g14-20020a056602150e00b0078708cffd08mr23356784iow.17.1700107901419; 
- Wed, 15 Nov 2023 20:11:41 -0800 (PST)
+ bh=TxPGYQBGECC7Y/ZXsWgO1vbN7ibNUVjCT6MaJMvpeLY=;
+ b=tiosSw6rES3CMZGllYFMQOIQJRhAb4dstfp7FfYgpMUNhGYew0cGAR3OGvst0lMgJv
+ 8SPuts8MRC7g1HFrik8dM4oIeVEuue3nuQorrC+7B2Ldl93nfGFanFFDQ/nnJj2mtyGf
+ I7bR7Xn9ewiSwAhyhYdSFJdF0cy2wgIdV9ztcEPOpNMuKWyC95P8NwE6yl2lRPM9jD1s
+ +Kk1PdqCUnzbOd2O/tzA/U54awLxtx+InaF7WwvKAdO5+7opd1G8tCfC4+aN4M2oJvst
+ IFV8SENrFa2bddJ/KKcgejvYXCGQUkUAMKxBBgXE8/e2BdSbyoRzvEyYSbTFH5FZrwuw
+ vupg==
+X-Gm-Message-State: AOJu0YxF4uZffu2JM4BZ+wr24E+nz3XLZEF9BfB5yXpWjde5VthuFM3s
+ lov98QNgYQr249YI/rQNGZG5HMA4R2ldbyftLDPnzg==
+X-Google-Smtp-Source: AGHT+IGC3p3wKB/1hYrIZw/Kubv4piTkY8woNHUxa2HRSXZArPWPLlGJVGRUqrfvmz0zbOORkDUcgg==
+X-Received: by 2002:a6b:e20b:0:b0:795:c6f:59ff with SMTP id
+ z11-20020a6be20b000000b007950c6f59ffmr17285479ioc.17.1700107902228; 
+ Wed, 15 Nov 2023 20:11:42 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.40
+ f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 20:11:41 -0800 (PST)
+ Wed, 15 Nov 2023 20:11:42 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH v2 25/32] bootm: Reduce arguments to boot_get_loadables()
-Date: Wed, 15 Nov 2023 21:10:25 -0700
-Message-ID: <20231116041043.362055-26-sjg@chromium.org>
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v2 26/32] bootm: Simplify Android ramdisk addr in
+ bootm_find_images()
+Date: Wed, 15 Nov 2023 21:10:26 -0700
+Message-ID: <20231116041043.362055-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231116041043.362055-1-sjg@chromium.org>
 References: <20231116041043.362055-1-sjg@chromium.org>
@@ -94,10 +92,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function only uses two arguments. The 'arch' always has a constant
-value, so drop it. This simplifies the function call.
+The Android mechanism uses the loadaddr envrionment-variable to get the
+load address, if none is provided. This is equivalent to
+image_load_addr so use that instead, converting it to a string as
+needed.
 
-Tidy up the function comment while we are here.
+This change will permit passing img_addr to this function, in a future
+change.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
@@ -105,91 +106,44 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 
 (no changes since v1)
 
- boot/bootm.c       |  3 +--
- boot/image-board.c |  6 +++---
- include/image.h    | 24 +++++++++---------------
- 3 files changed, 13 insertions(+), 20 deletions(-)
+ boot/bootm.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index ae3fceb392da..aae097df0c7f 100644
+index aae097df0c7f..db1466cecf2d 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -563,8 +563,7 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+@@ -490,15 +490,20 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+ 		      ulong size)
+ {
+ 	const char *select = NULL;
++	char addr_str[17];
+ 	ulong img_addr;
+ 	void *buf;
+ 	int ret;
+ 
++	img_addr = argc ? hextoul(argv[0], NULL) : image_load_addr;
++
+ 	if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
+ 		/* Look for an Android boot image */
+ 		buf = map_sysmem(images.os.start, 0);
+-		if (buf && genimg_get_format(buf) == IMAGE_FORMAT_ANDROID)
+-			select = argc ? argv[0] : env_get("loadaddr");
++		if (buf && genimg_get_format(buf) == IMAGE_FORMAT_ANDROID) {
++			strcpy(addr_str, simple_xtoa(img_addr));
++			select = addr_str;
++		}
  	}
  
- 	/* find all of the loadables */
--	ret = boot_get_loadable(argc, argv, &images, IH_ARCH_DEFAULT,
--			       NULL, NULL);
-+	ret = boot_get_loadable(&images);
- 	if (ret) {
- 		printf("Loadable(s) is corrupt or invalid\n");
- 		return 1;
-diff --git a/boot/image-board.c b/boot/image-board.c
-index b926275ec917..bb0ca9d7f22f 100644
---- a/boot/image-board.c
-+++ b/boot/image-board.c
-@@ -718,8 +718,7 @@ static void fit_loadable_process(u8 img_type,
- 			fit_loadable_handler->handler(img_data, img_len);
- }
+ 	if (argc >= 2)
+@@ -525,7 +530,6 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+ 	}
  
--int boot_get_loadable(int argc, char *const argv[], struct bootm_headers *images,
--		      u8 arch, const ulong *ld_start, ulong * const ld_len)
-+int boot_get_loadable(struct bootm_headers *images)
- {
- 	/*
- 	 * These variables are used to hold the current image location
-@@ -765,7 +764,8 @@ int boot_get_loadable(int argc, char *const argv[], struct bootm_headers *images
- 			fit_img_result = fit_image_load(images, tmp_img_addr,
- 							&uname,
- 							&images->fit_uname_cfg,
--							arch, IH_TYPE_LOADABLE,
-+							IH_ARCH_DEFAULT,
-+							IH_TYPE_LOADABLE,
- 							BOOTSTAGE_ID_FIT_LOADABLE_START,
- 							FIT_LOAD_OPTIONAL_NON_ZERO,
- 							&img_data, &img_len);
-diff --git a/include/image.h b/include/image.h
-index 63f2bd3b3713..b89912a50f98 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -676,28 +676,22 @@ int boot_get_ramdisk(char const *select, struct bootm_headers *images,
- 		     uint arch, ulong *rd_start, ulong *rd_end);
+ 	if (CONFIG_IS_ENABLED(OF_LIBFDT)) {
+-		img_addr = argc ? hextoul(argv[0], NULL) : image_load_addr;
+ 		buf = map_sysmem(img_addr, 0);
  
- /**
-- * boot_get_loadable - routine to load a list of binaries to memory
-- * @argc: Ignored Argument
-- * @argv: Ignored Argument
-+ * boot_get_loadable() - load a list of binaries to memory
-+ *
-  * @images: pointer to the bootm images structure
-- * @arch: expected architecture for the image
-- * @ld_start: Ignored Argument
-- * @ld_len: Ignored Argument
-  *
-- * boot_get_loadable() will take the given FIT configuration, and look
-- * for a field named "loadables".  Loadables, is a list of elements in
-- * the FIT given as strings.  exe:
-+ * Takes the given FIT configuration, then looks for a field named
-+ * "loadables", a list of elements in the FIT given as strings, e.g.:
-  *   loadables = "linux_kernel", "fdt-2";
-- * this function will attempt to parse each string, and load the
-- * corresponding element from the FIT into memory.  Once placed,
-- * no aditional actions are taken.
-  *
-- * @return:
-+ * Each string is parsed, loading the corresponding element from the FIT into
-+ * memory.  Once placed, no additional actions are taken.
-+ *
-+ * Return:
-  *     0, if only valid images or no images are found
-  *     error code, if an error occurs during fit_image_load
-  */
--int boot_get_loadable(int argc, char *const argv[], struct bootm_headers *images,
--		      uint8_t arch, const ulong *ld_start, ulong *const ld_len);
-+int boot_get_loadable(struct bootm_headers *images);
- 
- int boot_get_setup_fit(struct bootm_headers *images, uint8_t arch,
- 		       ulong *setup_start, ulong *setup_len);
+ 		/* find flattened device tree */
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
