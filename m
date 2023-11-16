@@ -4,81 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E8CC072A2
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 02:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3308C2BB3F
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 02:36:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2396C87285;
-	Thu, 16 Nov 2023 03:35:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9DEBC87467;
+	Thu, 16 Nov 2023 03:35:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T9a/qL3U";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Let+C9GK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2451786F85; Thu, 16 Nov 2023 03:35:49 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 854698745A; Thu, 16 Nov 2023 03:35:50 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45EFC87447
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 03:35:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1376087479
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 03:35:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9d0b4dfd60dso42226566b.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:35:45 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9e2838bcb5eso48576966b.0
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 18:35:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700102145; x=1700706945; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700102146; x=1700706946; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jpg9h8NTFDwFIe/LDwiXqsLXfzVcYwzpFkQ9HjPTx/8=;
- b=T9a/qL3UfYjOTTMSZAzWOZRu4Ybx0aanPOWJIIhUeaOufMx38l0zzo0tRZOau+TXsH
- HI31pT4zjZ/jUDQH8RNX5++lHoejpj+vs+J+csH8OhXU8+L5mNf7pPYzO4JijjVzw4Us
- mVrrY6Q3dmwTzMlcXFxIVp09uPb6hwJWrdXKE=
+ bh=qcseZ9PzQJoe3O3NcwCrgCCs2bzvnB7kx6+JjunOXNU=;
+ b=Let+C9GKSYLDhX3qM5hJBYx2p30ZzKXlFTRs62ZXsU1ISlTmRqWhL7B6IEXuWogUtB
+ iV5QhqeCD1SrUSXxdzX1QOZexJHG3E7BH+yprIwDv4X05jon+Y1h/9oTrWh5le2HGuGq
+ 27VrbT94e93kKabUs/85oD9Wm7I2G/urvvVvM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700102145; x=1700706945;
+ d=1e100.net; s=20230601; t=1700102146; x=1700706946;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jpg9h8NTFDwFIe/LDwiXqsLXfzVcYwzpFkQ9HjPTx/8=;
- b=klhB43eLFjfJe4M/EcdJ4nTx7nN4bncePSCszfNt731boj2RD0ACp4ck5C1wSGlw1/
- hoct9M/BVAcs5g17mJ9TzuVxTZJvYaNdht77YCm4pHIBa0FdErUVUJJPU/hzZjpQFZQg
- ICOd4jrq4iDQh9vnKhL2oNnGjpaxG7TNmx9jQpBKzocpQ/7vRVmKswf8swFNgqsNuIUA
- Z/UapCpWoGsUtNx1aeJwXt0nMFMLOJ1ww7b7F6CWq5sEfqnmlIr6nA5vMW/t8GVtAOTJ
- AolEZ/HF2B72OvZv7iEb52qWdS1PaSVB539iV9KSBNKgbOLaI/ZvfO4WKRI+NQFkIQx6
- 6eNw==
-X-Gm-Message-State: AOJu0Yw2zsa5myQpz0BWj02fhFnqjwEcC5CNSRHI/qaxkkektaePkPip
- kcvBfm8PXgvJVtx2cMRJ11ljd4HnD8V6qlKIyfIG1g==
-X-Google-Smtp-Source: AGHT+IGllDTWS1bwVAFIjG6qTlWlhGGk96l5UkdJz6v/ujxAz5BDrRbutcTgfBU358qEhsco5VnpKOShJn4STnWHqr4=
-X-Received: by 2002:a17:907:6d07:b0:9e8:de5e:911a with SMTP id
- sa7-20020a1709076d0700b009e8de5e911amr11669548ejc.73.1700102144609; Wed, 15
- Nov 2023 18:35:44 -0800 (PST)
+ bh=qcseZ9PzQJoe3O3NcwCrgCCs2bzvnB7kx6+JjunOXNU=;
+ b=dxUmOL9jYkYbmajZldOvuETbJnRP7u8/XiyhS8zm6oAkqNvP43UYxY6d56ERGsYH74
+ 8pPW43dyCG6MAQGJHKHCNGctBNt7nHF4hyvt8MHwOqew6eA9ahnjKeWSAiufcvtzCnp2
+ rF21X6m+lPAotcX3pgxAFiK8bEFOjV5X18hTxPbu08EO8jpf5pDN3tTQfW8JNeEL8IyN
+ 1WlLpm/0fvIAa6mWszBIZE/LpavHBX3EgwBf6AnPfgC91EOzaBiOi9n8UMM7VlyPEysL
+ E21D7MpAkgObgW5SnGGDvTFMeStOge3LTM3E6fIbCxYkWJ5S3b5OmKRuvjraWYtEX2rR
+ Utjg==
+X-Gm-Message-State: AOJu0YwFzzsz0I2jBoFkSjwA2V31BbqsRcG5BYA0MgjuJTSa4LQT/BeV
+ htxBeS3USyJZNI+/dOG8fStnaZ3PHY3lEI3jTURSrBs5+yaSruJbrMA=
+X-Google-Smtp-Source: AGHT+IGX0UX4gMvhP+Q2r1HCnt7eYl0GJ1Dli0j7irwYde3+1g9yfidW0RfHZAy4RFT0zOalQRI7giaVHBJrZemKicg=
+X-Received: by 2002:a17:906:ca5b:b0:9be:30c2:b8ff with SMTP id
+ jx27-20020a170906ca5b00b009be30c2b8ffmr10653116ejb.61.1700102146505; Wed, 15
+ Nov 2023 18:35:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20231112200255.172351-1-sjg@chromium.org>
- <20231112130245.v4.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
- <3F7DFCBC-D5A1-43C4-AF00-11C27BFF7508@gmx.de>
- <CAPnjgZ3wEzHNqzpsF1zU6U4WBAm=oMYEzRRR-UuqDEwXB24rLw@mail.gmail.com>
- <43EF5E14-0AE3-456A-B9D4-67B8F4405555@gmx.de>
- <CAPnjgZ2t-wF=nGWtdEgWRtUrzFyERnoGwqF8urJjNgEP2b4Qrw@mail.gmail.com>
- <58076384-d164-4d7a-bc1f-c78574b481b5@gmx.de>
- <487c3e73-ce21-4e45-9cf3-44314e78fd1f@gmx.de>
- <CAPnjgZ1-DBbt7caZRwvEWO+OcCZtJ821ZkVr--NPZGg1wE1R=Q@mail.gmail.com>
- <f3b89670-8e6b-428a-b391-a1d70b2af30f@gmx.de>
-In-Reply-To: <f3b89670-8e6b-428a-b391-a1d70b2af30f@gmx.de>
+References: <20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid>
+ <ee2def9d-c931-466a-bf78-507887de41c9@gmx.de>
+In-Reply-To: <ee2def9d-c931-466a-bf78-507887de41c9@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Nov 2023 19:35:33 -0700
-Message-ID: <CAPnjgZ3z=CUoCqWw-7QSAJ9UoFso+ZngdXSTP7w4sOkPTba2CQ@mail.gmail.com>
-Subject: Re: [PATCH v4 05/12] usb: Avoid unbinding devices in use by bootflows
+Date: Wed, 15 Nov 2023 19:35:34 -0700
+Message-ID: <CAPnjgZ1-tQxSa1sY_f3BsJpPu+9tLkyrvt2vG0nqu=xegyi4mQ@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Avoid freeing a non-allocated buffer
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Eddie James <eajames@linux.ibm.com>, 
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Safae Ouajih <souajih@baylibre.com>, Shantur Rathore <i@shantur.com>
+Cc: Shantur Rathore <i@shantur.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,156 +84,63 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Wed, 15 Nov 2023 at 19:06, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Wed, 15 Nov 2023 at 19:18, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> On 11/16/23 02:42, Simon Glass wrote:
-> > Hi Heinrich,
+> On 11/16/23 02:35, Simon Glass wrote:
+> > EFI applications can be very large and thus used to cause boot failures
+> > when malloc() space was exhausted.
 > >
-> > On Wed, 15 Nov 2023 at 18:34, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 11/15/23 17:23, Heinrich Schuchardt wrote:
-> >>> On 11/15/23 16:50, Simon Glass wrote:
-> >>>> Hi Heinrich,
-> >>>>
-> >>>> On Sun, 12 Nov 2023 at 16:35, Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >>>> wrote:
-> >>>>>
-> >>>>>
-> >>>>>
-> >>>>> Am 12. November 2023 22:20:50 MEZ schrieb Simon Glass
-> >>>>> <sjg@chromium.org>:
-> >>>>>> Hi Heinrich,
-> >>>>>>
-> >>>>>> On Sun, 12 Nov 2023 at 13:32, Heinrich Schuchardt
-> >>>>>> <xypron.glpk@gmx.de> wrote:
-> >>>>>>>
-> >>>>>>>
-> >>>>>>>
-> >>>>>>> Am 12. November 2023 21:02:42 MEZ schrieb Simon Glass
-> >>>>>>> <sjg@chromium.org>:
-> >>>>>>>> When a USB device is unbound, it causes any bootflows attached to
-> >>>>>>>> it to
-> >>>>>>>> be removed, via a call to bootdev_clear_bootflows() from
-> >>>>>>>> bootdev_pre_unbind(). This obviously makes it impossible to boot the
-> >>>>>>>> bootflow.
-> >>>>>>>>
-> >>>>>>>> However, when booting a bootflow that relies on USB, usb_stop() is
-> >>>>>>>> called, which unbinds the device. For EFI, this happens in
-> >>>>>>>> efi_exit_boot_services() which means that the bootflow disappears
-> >>>>>>>> before it is finished with.
-> >>>>>>>
-> >>>>>>> After ExitBootServices() no driver of U-Boot can be used as the
-> >>>>>>> operating system is in charge.
-> >>>>>>>
-> >>>>>>> Any bootflow inside U-Boot is terminated by definition when
-> >>>>>>> reaching ExitBootServices.
-> >>>>>>>
-> >>>>>>>>
-> >>>>>>>> There is no need to unbind all the USB devices just to quiesce them.
-> >>>>>>>> Add a new usb_pause() call which removes them but leaves them bound.
-> >>>>>>>
-> >>>>>>> As U-Boot must not access any device after ExitBootServices() it is
-> >>>>>>> unclear to me what you want to achieve.
-> >>>>>>
-> >>>>>> I can't remember exactly what is needed from the bootflow, but
-> >>>>>> something is. Perhaps the kernel, or the cmdline, or fdt? It would
-> >>>>>> have been better if I had mentioned this explicitly,  But then this
-> >>>>>> patch has been sitting around for ages...
-> >>>>>>
-> >>>>>> In any case, the intent of exit-boot-services is not to free all the
-> >>>>>> memory used, since some of it may have been used to hold data that the
-> >>>>>> app continues to use.
-> >>>>>
-> >>>>> The EFI application reads the memory map and receives an ID which it
-> >>>>> passes to ExitBootServiced() after this point any memory not marked
-> >>>>> as EFI runtime can be used by the EFI app. This includes the memory
-> >>>>> that harbors the U-Boot USB drivers. Therefore no drivers can be used
-> >>>>> here.
-> >>>>>
-> >>>>> Starting the EFI app via StartImage() must  terminate any running
-> >>>>> U-Boot "boot flow".
-> >>>>>
-> >>>>> After ExitBootServices() the EFI application cannot return to U-Boot
-> >>>>> except for SetVirtualAdressMspsetting which relocates the EFI runtime.
-> >>>>>
-> >>>>> Bootflows and U-Boot drivers have no meaning after ExitBootServices().
-> >>>>>
-> >>>>>
-> >>>>>
-> >>>>>>
-> >>>>>> Also there is U-Boot code between when the devices are unbound and
-> >>>>>> when U-Boot actually exits back to the app.
-> >>>>>>
-> >>>>>> This hang was 100% repeatable on brya (an x86 Chromebook) and it took
-> >>>>>> quite a while to find.
-> >>>>>
-> >>>>> We need a better understanding of the problem that you experience to
-> >>>>> find an adequate solution. Why does removing all devices lead to
-> >>>>> hanging the system?
-> >>>>
-> >>>> Are you able to test this? With your better knowledge of EFI you might
-> >>>> be able to figure out something else that is going on. But in my case
-> >>>> it causes some memory to be freed (perhaps the memory holding the EFI
-> >>>> app?), which is then overwritten by something else being malloc()'d,
-> >>>
-> >>> The memory for the EFI app is not assigned via malloc(). It is allocated
-> >>> by AllocatedPages().
-> >>>
-> >>> Reading "some memory freed" does not give me confidence that the problem
-> >>> is sufficiently analyzed.
-> >>>
-> >>>> so the boot hangs. It is hard to see what is going on after the app
-> >>>> starts.
-> >>>>
-> >>>> This patch was sent almost two months ago and fixes a real bug. The
-> >>>> first few versions attracted no comment now it is being blocked
-> >>>> because you don't understand how it fixes anything.
-> >>>
-> >>> Do you understand why unbinding the devices causes the problem?
-> >>>
-> >>>>
-> >>>> I can get the hardware up again and try this but it will take a while.
-> >>>
-> >>> Digging a bit deeper seems to be the right approach.
-> >>
-> >> Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
-> >> https://lore.kernel.org/u-boot/CAHc5_t1H39YV=HSSa7TCEdzRctAX+zibkx1vsuwEW-raOL9TcA@mail.gmail.com/
-> >>
-> >> points to a probable root cause:
-> >>
-> >> https://github.com/u-boot/u-boot/blob/master/boot/bootflow.c#L470
-> >> free(bflow->buf)
-> >>
-> >> In the EFI boot bflow->buf points to $kernel_addr_r which never was
-> >> allocated and therefore must not be freed.
+> > A recent changed fixed this by using the kernel_addr_r environment var
+> > as the address of the buffer. However, it still frees the buffer when
+> > the bootflow is discarded.
 > >
-> > Yes, this is the root cause of the crash.
+> > Fix this by introducing a flag to indicate whether the buffer was
+> > allocated, or not.
 > >
-> > However, this patch should still be applied. I can update the commit
-> > message if you like.
-> >
-> > Freeing the FDT and kernel before booting them is just not safe,
-> > whether EFI or anything else. Freed memory is not guaranteed to hang
-> > around for any length of time. For example, with truetype fonts,
-> > malloc() is called during any console output and will likely corrupt
-> > the images just as they are being booted.
+> > Note that kernel_addr_r is not the last word here. It might be better
+> > to use lmb to place images. But there is a lot of refactoring to do
 >
-> Please, observe that malloc() and efi_allocate_pages() use completely
-> separate parts of the memory.
+> We need a discussion about memory management. We currently have:
 >
-> When reaching ExitBootServices() the memory used by the EFI binary
-> (relocated in efi_load_pe()) and for the configuration table with the
-> device-tree have been allocated by efi_allocate_pages(). These addresses
-> cannot neither allocated by malloc() nor freed with free().
+> * malloc
+> * EFI - AllocatePages(), AllocatePool()
+> * lmb
+> * preassigned addresses like $kernel_addr_r, $fdt_addr_r
 
-OK...
+Yes indeed. There have been discussions already, but we need to do
+this on the ML.
 
-To my reading, efi_load_pe() pulls the image apart into memory
-allocated with efi_allocate_pages(). So that is separate memory? In
-any case, it would end up in a 'struct bootflow'.
+>
+> EFI manages memory on page level. It needs to provide a complete memory
+> map to the OS with flags for different types of memory. Currently it is
+> not aware of where files are loaded and might allocate those regions for
+> its own usage.
+>
+> lmb does not track any allocations but tries to recreate a memory map on
+> the fly whenever a file is loaded.
+>
+> It would be preferable to allocate memory for files and require to
+> explicitly unload a file before reusing the same memory area.
+>
+> We should start a separate thread on this topic.
 
-IMO the EFI memory-allocation functions should be called only when
-booting, not before. I do worry about leakage...
+Indeed. If you start it, I will reply with some thoughts.
+
+The nice thing is that with bootstd we can start to tidy all this up
+and make sure it has tests.
+
+>
+> > before we can remove the environment variables. The distro scripts rely
+> > on them so it is safe for bootstd to do so too.
+> >
+> > Fixes: 6a8c2f9781c bootstd: Avoid allocating memory for the EFI file
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reported by: Simon Glass <sjg@chromium.org>
+> > Reported by: Shantur Rathore <i@shantur.com>
+>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>
 
 [..]
 
