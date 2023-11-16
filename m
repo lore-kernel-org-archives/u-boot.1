@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B6AC47071
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:44:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D09C47071
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19166874D8;
-	Thu, 16 Nov 2023 17:44:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C522874DB;
+	Thu, 16 Nov 2023 17:44:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="LmiH2jGM";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="KN5pM7dv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89577874DC; Thu, 16 Nov 2023 17:44:09 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id A2AE4874E4; Thu, 16 Nov 2023 17:44:11 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B841874C7
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:44:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C01BA874DA
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1ce28faa92dso9124175ad.2
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:44:04 -0800 (PST)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1cc4f777ab9so9251195ad.0
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700153043; x=1700757843; darn=lists.denx.de; 
+ d=ventanamicro.com; s=google; t=1700153046; x=1700757846; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q363r2CEsBjJTIswiVWdPbubUGcjirgslNecMVbemWs=;
- b=LmiH2jGMZYMrGQDlbv4etRxo/nbi+gicO2A/X7KAGwjp5oiUPJGuHARJbrufj6QfCU
- s0XCVm+iYpTa3VpV6N4ptrqS02e6jQfAQRmb95QW/rTggnFlYxjhs+S6JTFjTF0ZCnJu
- 4lAFFh5mEWaZFu4r0tVnfV3ueNCTP685ENKIhLMBLhCLNsNpWKUCDXFf+k2DW4wnt8Oc
- VgykIHlY5iBE19iouRlhmuuTv1Bkz1vmv+f64zIQA4ltN9trb4TmfBv08AyaL/xovm15
- GlRS0YI3M+ajaeZlPqntTa0KObTeWbZVsHYQLRySZEAtp4oclDSja4jVMRpkHnwDPq9n
- jOvQ==
+ bh=bbR08Ini5VbqKP+nKWF8nUioGkUSl2FeHUGXdTZ6Bxo=;
+ b=KN5pM7dvqR2CockDu/43n4OD6THMik48QVRohC0jyMI5/iZwiYoTJC6USs4o4pPP4G
+ pxKUMYAHO8+vPQorx1B+XocRfb+PlUue097akZ70kbbERfOfJDTmJULUhOhL2N8mdbcs
+ 7OjzPoFPWg6Ibos9j+wAwecK8ZSwmmmFhO7Nhi81kWkwsm5edrZcDVTfZnMjXi2HxEIj
+ rlZk+aRJZDjHuzPbmHRF2mkggXYnC5+A7QbX0cUhj5x4E0yGY04io2nNCvS6a/FT7N7R
+ Ub7irrWXUXDXWnlxx8dpHSEZiZo/q4BB5wy30NgBdxBTnYfXILV1BlmevSqF5p73Zqgf
+ DFWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700153043; x=1700757843;
+ d=1e100.net; s=20230601; t=1700153046; x=1700757846;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q363r2CEsBjJTIswiVWdPbubUGcjirgslNecMVbemWs=;
- b=MpyziFQmwbKlQrjcYx/2OSCu9NIt+z4w9GBdBIfQNrAQlCenmG29CiwJuKwwkGAN9o
- zXqq5KBSA5ziT1rDREMGvr216axKc0yVY+2ywIF+XWhylJCaQuWvmeTIWgB2o3jNUvfG
- 2v/tVXWIegTg7UN8XQxBO9njOgOgc57yFaCUrV9F40BSQVaLgATDmtDqbXJfKoym7K8h
- sJx/Ctf2/01HHvgm/oLJM05jeKTzWQBBcZRCcagbSVafLdIpYR1ipraIC5AzlDvNCHo9
- hMHhNXIiD0XNvVmfxIS7KJjbuHXDKqzvU2km7k0l4CbigeD12BAmuFki0muhvqEvy6o6
- +MFQ==
-X-Gm-Message-State: AOJu0Yyx2YsBupYZliwuvVCUwgvTXcx/gj63wNooKGn6YkF9Kp31KEVn
- RSmeD+99W5SZscNwzvhFui2SsQ==
-X-Google-Smtp-Source: AGHT+IEBlEt0vLOsh9/U92dVIwIGpRXCsRUg6LhgaXWKijOPlg5jdwYZnTj6dQRZvV1cI4sGgpa1Bw==
-X-Received: by 2002:a17:902:e5cd:b0:1cc:51b8:8100 with SMTP id
- u13-20020a170902e5cd00b001cc51b88100mr10378913plf.7.1700153042837; 
- Thu, 16 Nov 2023 08:44:02 -0800 (PST)
+ bh=bbR08Ini5VbqKP+nKWF8nUioGkUSl2FeHUGXdTZ6Bxo=;
+ b=IIvrhvNlja3zHeCnYPjfGtLyFLM/X0u3UtXJCmsI9t+y2x+meAogqkSjAwI/Tq02Uf
+ yILBkqeNfcz27sAgpRa9tCeZGBtdbIE7jT129X7bVgYtK2OC+eBx9gke+6dvLgfJqg/6
+ /N79dY7WzavBuxJNNPLCcqw9jgn51naj7pq//qvuRvA58LSodPMMQ2ncPhGmauDuY465
+ YQowqWPZJi1RDru3TiPLuNXsSD4ZiXFnqJdbqulldBCoMuGGIA41ZBMpIyOofFUQPKCu
+ z7ey4W5hxzIjZtrrdHaQKCa05wPWcCNFhZP3duGKZXu6Xa2nSCdZqjuWSQP+CPoJff/c
+ Dr8A==
+X-Gm-Message-State: AOJu0YxSm0wyfNxcYZjDh/9Oc4NAxLI7hSFT/VQU5pIS6BShE8mlz1po
+ qhHJnS1JZcH515/t7WBLTHYqKA==
+X-Google-Smtp-Source: AGHT+IEijHYEbsJHmiy/NpaErIQHyJLgyi/WDe2vHuUeHNSUFYtp6GH6MS7l/OeQJhkJHDmn42Hg+A==
+X-Received: by 2002:a17:902:ec84:b0:1c8:9d32:339e with SMTP id
+ x4-20020a170902ec8400b001c89d32339emr10801289plg.50.1700153046019; 
+ Thu, 16 Nov 2023 08:44:06 -0800 (PST)
 Received: from ThinkPad-T490.dc1.ventanamicro.com
  ([2401:4900:57e3:f37f:e352:7f6c:bf18:83f0])
  by smtp.googlemail.com with ESMTPSA id
- l2-20020a170902f68200b001c5eb37e92csm9439839plg.305.2023.11.16.08.44.00
+ l2-20020a170902f68200b001c5eb37e92csm9439839plg.305.2023.11.16.08.44.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 08:44:02 -0800 (PST)
+ Thu, 16 Nov 2023 08:44:05 -0800 (PST)
 From: Mayuresh Chitale <mchitale@ventanamicro.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Michal Simek <michal.simek@amd.com>
 Cc: Mayuresh Chitale <mchitale@ventanamicro.com>, u-boot@lists.denx.de,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/3] drivers: xilinx_spi: Use udevice in start_tranfer
-Date: Thu, 16 Nov 2023 22:13:34 +0530
-Message-Id: <20231116164336.140171-2-mchitale@ventanamicro.com>
+Subject: [PATCH v2 2/3] drivers: xilinx_spi: Add xfer callback
+Date: Thu, 16 Nov 2023 22:13:35 +0530
+Message-Id: <20231116164336.140171-3-mchitale@ventanamicro.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231116164336.140171-1-mchitale@ventanamicro.com>
 References: <20231116164336.140171-1-mchitale@ventanamicro.com>
@@ -94,118 +94,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modify start_transfer and related functions to take a udevice parameter
-as input instead of spi_slave. This is needed so that start_transfer can
-be used directly via the xfer callback. Also fix a compiler warning.
+Add the xfer callback which is used by the MMC_SPI driver and generally by
+the dm_spi_xfer callback.
 
 Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
 ---
- drivers/spi/xilinx_spi.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ drivers/spi/xilinx_spi.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/drivers/spi/xilinx_spi.c b/drivers/spi/xilinx_spi.c
-index b58a3f632a..d9faceec18 100644
+index d9faceec18..b63cda2091 100644
 --- a/drivers/spi/xilinx_spi.c
 +++ b/drivers/spi/xilinx_spi.c
-@@ -67,7 +67,7 @@
- /* SPI Slave Select Register (spissr), [1] p13, [2] p13 */
- #define SPISSR_MASK(cs)		(1 << (cs))
- #define SPISSR_ACT(cs)		~SPISSR_MASK(cs)
--#define SPISSR_OFF		~0UL
-+#define SPISSR_OFF		(~0U)
- 
- /* SPI Software Reset Register (ssr) */
- #define SPISSR_RESET_VALUE	0x0a
-@@ -217,9 +217,9 @@ static u32 xilinx_spi_read_rxfifo(struct udevice *bus, u8 *rxp, u32 rxbytes)
- 	return i;
+@@ -278,6 +278,18 @@ static void xilinx_spi_startup_block(struct udevice *dev)
+ 	spi_cs_deactivate(dev);
  }
  
--static int start_transfer(struct spi_slave *spi, const void *dout, void *din, u32 len)
-+static int start_transfer(struct udevice *dev, const void *dout, void *din, u32 len)
- {
--	struct udevice *bus = spi->dev->parent;
-+	struct udevice *bus = dev->parent;
- 	struct xilinx_spi_priv *priv = dev_get_priv(bus);
- 	struct xilinx_spi_regs *regs = priv->regs;
- 	u32 count, txbytes, rxbytes;
-@@ -259,10 +259,9 @@ static int start_transfer(struct spi_slave *spi, const void *dout, void *din, u3
- 	return 0;
- }
- 
--static void xilinx_spi_startup_block(struct spi_slave *spi)
-+static void xilinx_spi_startup_block(struct udevice *dev)
- {
--	struct dm_spi_slave_plat *slave_plat =
--				dev_get_parent_plat(spi->dev);
++static int xilinx_spi_xfer(struct udevice *dev, unsigned int bitlen,
++			   const void *dout, void *din, unsigned long flags)
++{
 +	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
- 	unsigned char txp;
- 	unsigned char rxp[8];
- 
-@@ -270,13 +269,13 @@ static void xilinx_spi_startup_block(struct spi_slave *spi)
- 	 * Perform a dummy read as a work around for
- 	 * the startup block issue.
- 	 */
--	spi_cs_activate(spi->dev, slave_plat->cs);
++	int ret;
++
 +	spi_cs_activate(dev, slave_plat->cs);
- 	txp = 0x9f;
--	start_transfer(spi, (void *)&txp, NULL, 1);
-+	start_transfer(dev, (void *)&txp, NULL, 1);
- 
--	start_transfer(spi, NULL, (void *)rxp, 6);
-+	start_transfer(dev, NULL, (void *)rxp, 6);
- 
--	spi_cs_deactivate(spi->dev);
++	ret = start_transfer(dev, dout, din, bitlen / 8);
 +	spi_cs_deactivate(dev);
- }
- 
++	return ret;
++}
++
  static int xilinx_spi_mem_exec_op(struct spi_slave *spi,
-@@ -294,14 +293,15 @@ static int xilinx_spi_mem_exec_op(struct spi_slave *spi,
- 	 * as QSPI provides command. So first command fails.
- 	 */
- 	if (!startup) {
--		xilinx_spi_startup_block(spi);
-+		xilinx_spi_startup_block(spi->dev);
- 		startup++;
- 	}
- 
- 	spi_cs_activate(spi->dev, slave_plat->cs);
- 
- 	if (op->cmd.opcode) {
--		ret = start_transfer(spi, (void *)&op->cmd.opcode, NULL, 1);
-+		ret = start_transfer(spi->dev, (void *)&op->cmd.opcode,
-+				     NULL, 1);
- 		if (ret)
- 			goto done;
- 	}
-@@ -313,7 +313,7 @@ static int xilinx_spi_mem_exec_op(struct spi_slave *spi,
- 			addr_buf[i] = op->addr.val >>
- 			(8 * (op->addr.nbytes - i - 1));
- 
--		ret = start_transfer(spi, (void *)addr_buf, NULL,
-+		ret = start_transfer(spi->dev, (void *)addr_buf, NULL,
- 				     op->addr.nbytes);
- 		if (ret)
- 			goto done;
-@@ -322,16 +322,16 @@ static int xilinx_spi_mem_exec_op(struct spi_slave *spi,
- 		dummy_len = (op->dummy.nbytes * op->data.buswidth) /
- 			     op->dummy.buswidth;
- 
--		ret = start_transfer(spi, NULL, NULL, dummy_len);
-+		ret = start_transfer(spi->dev, NULL, NULL, dummy_len);
- 		if (ret)
- 			goto done;
- 	}
- 	if (op->data.nbytes) {
- 		if (op->data.dir == SPI_MEM_DATA_IN) {
--			ret = start_transfer(spi, NULL,
-+			ret = start_transfer(spi->dev, NULL,
- 					     op->data.buf.in, op->data.nbytes);
- 		} else {
--			ret = start_transfer(spi, op->data.buf.out,
-+			ret = start_transfer(spi->dev, op->data.buf.out,
- 					     NULL, op->data.nbytes);
- 		}
- 		if (ret)
+ 				  const struct spi_mem_op *op)
+ {
+@@ -427,6 +439,7 @@ static const struct spi_controller_mem_ops xilinx_spi_mem_ops = {
+ static const struct dm_spi_ops xilinx_spi_ops = {
+ 	.claim_bus	= xilinx_spi_claim_bus,
+ 	.release_bus	= xilinx_spi_release_bus,
++	.xfer           = xilinx_spi_xfer,
+ 	.set_speed	= xilinx_spi_set_speed,
+ 	.set_mode	= xilinx_spi_set_mode,
+ 	.mem_ops	= &xilinx_spi_mem_ops,
 -- 
 2.34.1
 
