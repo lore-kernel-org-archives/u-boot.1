@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DAFC197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 05:08:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97E0CC197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 05:08:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4622187440;
-	Thu, 16 Nov 2023 06:08:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC2F287440;
+	Thu, 16 Nov 2023 06:08:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wg/mz/8J";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zFYk7f+O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51EB387440; Thu, 16 Nov 2023 06:08:12 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id ABFE58746E; Thu, 16 Nov 2023 06:08:50 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9B378724E
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 06:08:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A0298724E
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 06:08:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AG5853H022500;
- Wed, 15 Nov 2023 23:08:05 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AG58j76071846;
+ Wed, 15 Nov 2023 23:08:45 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700111285;
- bh=7e745DqT5x2zz9/7Jrn4m4XCTfih0YlObJQf2+X/Yr8=;
+ s=ti-com-17Q1; t=1700111325;
+ bh=U6dP5Df2zwbjGNJiiYMfQ/b28vIIbv9TYOMD2IY95Vs=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=wg/mz/8JGmoNvXAEJhn+Z7hZ6SVD2vIdYNJ47GTMoIeSRj8DkOK7kC9xcG+eN3d/r
- 3O9NYoNcqDFflYga2BNaIzMzFBpR4eeNfjaECHuO5nzP13HvAEyb01Seh2lpuPvz8M
- K4/MoGz8Fko5Vd29V+4ul85Vpp41L3Kr1SokJwvs=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AG585kd019024
+ b=zFYk7f+O0oh4AucYM4pFIpmrp7u4LWwmsCSNCVvrBoAPSvqliQT3ogG3RqpBqKzrH
+ jhfu0Cke7t82W/GR0tz9XAPBDE4BdQEE9y9IE4gFCtS43SEA6aR7TW30dp0zbmwZVa
+ OZrF9zjRHLxVM8J7HDe8zuPXfVXqiJ5BtS9sGuvM=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AG58jI1096911
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 15 Nov 2023 23:08:05 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 15 Nov 2023 23:08:45 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 15
- Nov 2023 23:08:05 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 23:08:45 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 15 Nov 2023 23:08:05 -0600
+ Frontend Transport; Wed, 15 Nov 2023 23:08:45 -0600
 Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AG581M1019275;
- Wed, 15 Nov 2023 23:08:02 -0600
-Message-ID: <202d11af-b2f2-412a-b9be-0e25174185d5@ti.com>
-Date: Thu, 16 Nov 2023 10:38:00 +0530
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AG581M2019275;
+ Wed, 15 Nov 2023 23:08:42 -0600
+Message-ID: <4454dcb0-f97a-4f10-9a87-d043b48d9f31@ti.com>
+Date: Thu, 16 Nov 2023 10:38:41 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm: dts: k3-*-binman: Move to using templated FITs
-To: Andrew Davis <afd@ti.com>, <sjg@chromium.org>,
- <marcel.ziswiler@toradex.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
- <kamlesh@ti.com>, <m-chawdhry@ti.com>, <mkorpershoek@baylibre.com>
-References: <20231115101024.3441093-1-n-francis@ti.com>
- <20231115101024.3441093-3-n-francis@ti.com>
- <1beed541-c7bd-4ed0-943f-c3695ee1db93@ti.com>
+Subject: Re: [PATCH 0/2] Cleanup K3 binman FIT images
 Content-Language: en-US
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>, "sjg@chromium.org"
+ <sjg@chromium.org>
+CC: "kamlesh@ti.com" <kamlesh@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "m-chawdhry@ti.com" <m-chawdhry@ti.com>, "afd@ti.com" <afd@ti.com>,
+ "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>, "nm@ti.com"
+ <nm@ti.com>, "vigneshr@ti.com" <vigneshr@ti.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+References: <20231115101024.3441093-1-n-francis@ti.com>
+ <8aee10aca8ef6f5acb5687a114d25453fd27b3d0.camel@toradex.com>
 From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <1beed541-c7bd-4ed0-943f-c3695ee1db93@ti.com>
+In-Reply-To: <8aee10aca8ef6f5acb5687a114d25453fd27b3d0.camel@toradex.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -83,40 +85,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Hi Marcel,
 
-On 15/11/23 21:22, Andrew Davis wrote:
-> On 11/15/23 4:10 AM, Neha Malcom Francis wrote:
->> Reduce redundancy in code by using templates to generate the A72 boot
->> binaries (tispl.bin and u-boot.img) as well as R5 boot binary sysfw.itb
->> (for legacy boot following devices J721E and AM65x).
+On 15/11/23 23:03, Marcel Ziswiler wrote:
+> Hi Neha
+> 
+> On Wed, 2023-11-15 at 15:40 +0530, Neha Malcom Francis wrote:
+>> Instead of duplicating the same FIT formats over and over again for
+>> different K3 devices, make use of the templating support to have FIT
+>> templates for the same.
 >>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 157 +--------
->>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 155 +-------
->>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 158 +--------
->>   arch/arm/dts/k3-am64x-binman.dtsi             | 151 +-------
->>   arch/arm/dts/k3-am65x-binman.dtsi             | 273 +-------------
->>   arch/arm/dts/k3-j7200-binman.dtsi             | 159 +--------
->>   arch/arm/dts/k3-j721e-binman.dtsi             | 332 +-----------------
->>   arch/arm/dts/k3-j721s2-binman.dtsi            | 157 +--------
->>   8 files changed, 54 insertions(+), 1488 deletions(-)
+>> Note: I purposely did not add the trial to template out the non-FIT
+>> bootloader image (tiboot3.bin) as it reduces the readibility and
+>> understandability of how the image is packaged because of the various
+>> different boot flows.
+>>
+>> Boot logs:
+>> https://gist.github.com/nehamalcom/9abe7955ebb4a251923e76412834c886
 > 
-> 1488 deletions, nice!
+> For the whole series:
 > 
-> Minor question, why was `ti-secure` not factored out of `dm` nodes like
-> it was for `atf`/`tee` nodes? Guessing it has to do with not all SoCs
-> needing this blob and signing nothing results in something, which
-> messes up the 0 size check when loading it, but it wasn't clear to me.
+> Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 > 
 
-Yes that's right! It ends up being non-zero for devices that don't have DM and 
-DM load fails.
+Thanks for testing!
 
-> Anyway,
+>> Neha Malcom Francis (2):
+>>    arm: dts: k3-binman: Add support for FIT templates
+>>    arm: dts: k3-*-binman: Move to using templated FITs
+>>
+>>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 157 +--------
+>>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 155 +-------
+>>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 158 +--------
+>>   arch/arm/dts/k3-am64x-binman.dtsi             | 151 +-------
+>>   arch/arm/dts/k3-am65x-binman.dtsi             | 273 +-------------
+>>   arch/arm/dts/k3-binman.dtsi                   | 327 +++++++++++++++++
+>>   arch/arm/dts/k3-j7200-binman.dtsi             | 159 +--------
+>>   arch/arm/dts/k3-j721e-binman.dtsi             | 332 +-----------------
+>>   arch/arm/dts/k3-j721s2-binman.dtsi            | 157 +--------
+>>   9 files changed, 381 insertions(+), 1488 deletions(-)
 > 
-> Acked-by: Andrew Davis <afd@ti.com>
+> Thanks!
+> 
+> Cheers
+> 
+> Marcel
 
 -- 
 Thanking You
