@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21C4EC47071
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:14:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52124C47071
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:15:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ACE7874E9;
+	by phobos.denx.de (Postfix) with ESMTP id 7D98E874F2;
 	Thu, 16 Nov 2023 05:11:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WqPVSpkv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P1l+uZY3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6708D87463; Thu, 16 Nov 2023 05:11:40 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 2D86D8747E; Thu, 16 Nov 2023 05:11:41 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4ABF887478
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0ABF1874A9
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-7a6774da682so13864739f.3
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-7a6acc8e222so13602839f.0
  for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 20:11:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700107897; x=1700712697; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gnT3zu3659M8ZdHPDHgPo9FZtGhyMsCFfvLUC0/oi4Y=;
- b=WqPVSpkvTvvKDqyjS2weL19gwvkFiX0tN8932bzd5kMFrELP1D+aRLVMU3anFxiU7K
- 3QxtG5bpqo+KMpfpujoxILtxECKS3hyLwkyyMyxkBP9YB/4xA1Aymy23+FlQ+OntyRQx
- dhVfR9eubefbdDM1BuSTVO491J9OKad0TqZnE=
+ bh=WE/98gwI4OaLTOodzrTHSjqOhmfNtsEPAtYO5kXdNfI=;
+ b=P1l+uZY3JT6UyIcehPJcbEYm52e8eDP88yR9cAmOwZDK0zh7bMgNuekCiXqEuLtUbw
+ pFhpYkRhIx8fAZFZGs1XFJurK/tnpGWD00TasQKOYI0CNMf2KC4Bv9iKAq7PoIIfpW/m
+ 9t6ITjssEcXbUi0VZyMPE+B6IBVyxn9ttfE3A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700107897; x=1700712697;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gnT3zu3659M8ZdHPDHgPo9FZtGhyMsCFfvLUC0/oi4Y=;
- b=YESCjl7WkiKLUIduKMw5nxgivnE4fZ/4hoFoM8RZgwnwxiQDipsFs5OriTYm7e59a5
- aeenEaErrIPFNf1ZANT6yyt0RrcYlHcpb/uOkBLDTj+PhRH5XkErfhnJT9nTbtE8nzds
- vYKg9SqTTQRvosdHzwoFobIY6D/Be1b1x8Cd3lusVHUBgpqEEgLAoOW55zoJ8q0wds2S
- 4j6Ew0KLQLITSeXb+rhhhyk4BgPzK4Aq8zAXlogw/lPW0yeVFPsw9UA3Lxyxt6fd69Cq
- lrg6Bwjd//C3CHBYfR0IXdC4I00+OwrnHyGgHQZ24jeVMgcfo9VAc4bXltuYJkXzFylu
- 0dTw==
-X-Gm-Message-State: AOJu0YyAbjQ0prkrnilP2u6X8TCKGmuuQUYsC6e0RNuUuXdLU03yKN+f
- SwVVV5CblwVTLTgzwN+U71crwOzIP3T//dkFZ1xnCw==
-X-Google-Smtp-Source: AGHT+IFKfc7nPHncG4uCDKC4QCm9Y3G9x898Wb1ju5+PkI4L1C8lBqq0qxW/U9napg3a5nZ3u89M4w==
-X-Received: by 2002:a5d:9506:0:b0:798:d82b:7b02 with SMTP id
- d6-20020a5d9506000000b00798d82b7b02mr16184709iom.4.1700107896890; 
- Wed, 15 Nov 2023 20:11:36 -0800 (PST)
+ bh=WE/98gwI4OaLTOodzrTHSjqOhmfNtsEPAtYO5kXdNfI=;
+ b=WPqAN5QlEHHOj6raB7bWgtPoKeZq4nyg4RW03vy125bcyeXHchO7+JRthdTo2AgcfP
+ c6rzVrpI/k12Yyo0FA4Ls8fP901I52qb2E7W/NSGWE0bqVn9JlUDEXI9zQp/6rwd21Dc
+ JRWyklfFtdHKoGviUEs4IydcyHIMW1YPjX7WyKnSdFi9GGzQ6Gq6evcTydUbyig4cs4M
+ 5i+tTayjMjX8l+TUJaUKJOUFn2drrEcEusbKASmMUn314hmxXrWoHAwaaxtR9FQoYsmo
+ Dnz/5Wjm3xUVN+FBAT7/5Du0PHI/w1Pg8f49Kw50aB604GYsu95AEPB7k8KjmRMSmCCK
+ B7jQ==
+X-Gm-Message-State: AOJu0YwWjK6RrkVGccQ/Jw43OGEnNki2e0cfUfWubPGyjqyU9CH59Jny
+ 8Jc5ZWY2cD3XhjY+5Em2IHG2whPl2prrk974L0z2tA==
+X-Google-Smtp-Source: AGHT+IHAuIOHB0gWGa8u9QmvJ28oesDm0TSmTY6OGDfZ1nis8iKVGS3jYwJu39K/LPnh+cLz47Kn2Q==
+X-Received: by 2002:a05:6e02:1542:b0:35a:b283:d14c with SMTP id
+ j2-20020a056e02154200b0035ab283d14cmr16591465ilu.3.1700107897655; 
+ Wed, 15 Nov 2023 20:11:37 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.36
+ f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 20:11:36 -0800 (PST)
+ Wed, 15 Nov 2023 20:11:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Jerry Van Baren <vanbaren@cideas.com>
-Subject: [PATCH v2 20/32] fdt: Allow use of fdt_support inside if() statements
-Date: Wed, 15 Nov 2023 21:10:20 -0700
-Message-ID: <20231116041043.362055-21-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v2 21/32] bootm: Drop #ifdef in bootm_find_images()
+Date: Wed, 15 Nov 2023 21:10:21 -0700
+Message-ID: <20231116041043.362055-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231116041043.362055-1-sjg@chromium.org>
 References: <20231116041043.362055-1-sjg@chromium.org>
@@ -89,44 +91,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Most of the fdt_support.h header file is included only if OF_LIBFDT or
-OF_CONTROL are enabled. This means that calling functions defined in
-that file must happen inside an #ifdef
-
-This is unnecessary, so reduce the condition to just !USE_HOSTCC
+The OF_LIBFDT #ifdef makes it harder to use a local variable for that
+code block. Convert it to if() instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
 (no changes since v1)
 
- include/fdt_support.h | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ boot/bootm.c | 42 +++++++++++++++++++++---------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
-diff --git a/include/fdt_support.h b/include/fdt_support.h
-index 2cd836689821..feda0d997409 100644
---- a/include/fdt_support.h
-+++ b/include/fdt_support.h
-@@ -7,8 +7,7 @@
- #ifndef __FDT_SUPPORT_H
- #define __FDT_SUPPORT_H
+diff --git a/boot/bootm.c b/boot/bootm.c
+index d5893e82d128..d9c62d730f7f 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -524,29 +524,29 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+ 		return 1;
+ 	}
  
--#if (defined(CONFIG_OF_LIBFDT) || defined(CONFIG_OF_CONTROL)) && \
--	!defined(USE_HOSTCC)
-+#if !defined(USE_HOSTCC)
+-#if CONFIG_IS_ENABLED(OF_LIBFDT)
+-	/* find flattened device tree */
+-	ret = boot_get_fdt(flag, argc, argv, IH_ARCH_DEFAULT, &images,
+-			   &images.ft_addr, &images.ft_len);
+-	if (ret) {
+-		puts("Could not find a valid device tree\n");
+-		return 1;
+-	}
++	if (CONFIG_IS_ENABLED(OF_LIBFDT)) {
++		/* find flattened device tree */
++		ret = boot_get_fdt(flag, argc, argv, IH_ARCH_DEFAULT, &images,
++				   &images.ft_addr, &images.ft_len);
++		if (ret) {
++			puts("Could not find a valid device tree\n");
++			return 1;
++		}
  
- #include <asm/u-boot.h>
- #include <linux/libfdt.h>
-@@ -418,7 +417,7 @@ int fdt_valid(struct fdt_header **blobp);
-  */
- int fdt_get_cells_len(const void *blob, char *nr_cells_name);
+-	/* check if FDT overlaps OS image */
+-	if (images.ft_addr &&
+-	    (((ulong)images.ft_addr >= start &&
+-	      (ulong)images.ft_addr < start + size) ||
+-	     ((ulong)images.ft_addr + images.ft_len >= start &&
+-	      (ulong)images.ft_addr + images.ft_len < start + size))) {
+-		printf("ERROR: FDT image overlaps OS image (OS=0x%lx..0x%lx)\n",
+-		       start, start + size);
+-		return 1;
+-	}
++		/* check if FDT overlaps OS image */
++		if (images.ft_addr &&
++		    (((ulong)images.ft_addr >= start &&
++		      (ulong)images.ft_addr < start + size) ||
++		     ((ulong)images.ft_addr + images.ft_len >= start &&
++		      (ulong)images.ft_addr + images.ft_len < start + size))) {
++			printf("ERROR: FDT image overlaps OS image (OS=0x%lx..0x%lx)\n",
++			       start, start + size);
++			return 1;
++		}
  
--#endif /* ifdef CONFIG_OF_LIBFDT */
-+#endif /* !USE_HOSTCC */
+-	if (IS_ENABLED(CONFIG_CMD_FDT))
+-		set_working_fdt_addr(map_to_sysmem(images.ft_addr));
+-#endif
++		if (IS_ENABLED(CONFIG_CMD_FDT))
++			set_working_fdt_addr(map_to_sysmem(images.ft_addr));
++	}
  
- #ifdef USE_HOSTCC
- int fdtdec_get_int(const void *blob, int node, const char *prop_name,
+ #if CONFIG_IS_ENABLED(FIT)
+ 	if (IS_ENABLED(CONFIG_FPGA)) {
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
