@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CFFC197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 09:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD059C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 09:29:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 150F587499;
-	Thu, 16 Nov 2023 10:27:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 285778749D;
+	Thu, 16 Nov 2023 10:29:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700126867;
-	bh=N+2Mny8q1Q4urnN7DpkAEBqH3BjdYTBwT19ALMp0zdQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=n/ZyBaKY5Tp5kFXKtGxDIaN+cRVN9y6HzuIMwqrJxguvbd41vdn8TJBdiS1Km/Ehq
-	 83zR2qcdRNuVXHpSYZ4ojCbzQMvBZpOQENLN18N3LYWiDv7jC4hFLMTruE7ib81pt1
-	 /0y8O+ObKHJ5MR98GVDeNfGnZVvrosdfsmoWn78qs+FMFzldV141V2HqFfq7kFSwHb
-	 zajRj5NEgV9TK0rDNwDSSkLFrBgsn6vaCtcP4fA6+fXfeJxSBgKAmA1CnzOKHuOfN9
-	 WEKWx96agqKG7sXSCncISIcPvhy73dzPidf6kiTuEIH5wjAbGtwmz9cjW7+CppvXKi
-	 tsiKdDMiyKDiA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kToM6z7s";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B4028749D; Thu, 16 Nov 2023 10:27:37 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 29ED0874A1; Thu, 16 Nov 2023 10:29:43 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C7AD87497
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:27:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7530E8749D
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 10:29:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SWF714zwSz9sZZ;
- Thu, 16 Nov 2023 10:27:25 +0100 (CET)
-Message-ID: <8b59a6eb-a593-4a68-ab92-280919ef5dc3@denx.de>
-Date: Thu, 16 Nov 2023 10:27:24 +0100
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6A2423F2A8; 
+ Thu, 16 Nov 2023 09:29:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1700126975;
+ bh=/U0K7gXAemHirbAs0Q+yr2RwCnFo6Kc+4Eip2lvXVVU=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=kToM6z7sdKzjzIyZbVT6S1m+3Mg+CVDhl6M0n3Gx2XdGBdpciY5gDnx/gzaYL60Ex
+ 531HfR6talKmfxyV65GFuKk6GdsYGl1gcd3H0l8xsEmglx4CwI328yvKvdedh5WDyC
+ RH4LqzgCgEmm32EmdaqqVidOTmsiooPOcdufUgPsW4sHRQ0R5a9p1Z/iJa6zlABKxu
+ Y/O/UA8Ww52URYpUGl8LtGLWSmH6FQBsW5pnXZVXjbSGnq7APz6c9/cLDMJ3W02Y3+
+ kJsrd/lFKEkmcXtNy6BU6vXESRvZdKZdHKV59Zao80Tug28zTT9sYcpT1AU6G4IyrC
+ fzyyi/EiuvSOw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: create memory reservations in ACPI case
+Date: Thu, 16 Nov 2023 10:29:28 +0100
+Message-Id: <20231116092928.21633-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Subject: Re: Error building PX30 Ringneck with WDT support
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: u-boot@lists.denx.de
-References: <1ca36fad-6c54-4453-acf2-64758187c682@theobroma-systems.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <1ca36fad-6c54-4453-acf2-64758187c682@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,58 +69,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+ACPI tables cannot convey memory reservations for least ARM and RISC-V.
+x86 uses the BIOS E820 table for this purpose. We cannot simply ignore the
+device-tree when booting via ACPI. We have to assign EfiReservedMemory
+according to the prior stage device-tree ($fdtaddr) or as fallback the
+control device-tree ($fdtcontroladdr).
 
-On 11/15/23 19:00, Quentin Schulz wrote:
-> Hi all,
-> 
-> I'm trying to add watchdog support to the PX30 Ringneck board but it 
-> fails to compile:
-> 
-> """
-> diff --git a/configs/ringneck-px30_defconfig 
-> b/configs/ringneck-px30_defconfig
-> index b314636b4d9..3dab0dab5d4 100644
-> --- a/configs/ringneck-px30_defconfig
-> +++ b/configs/ringneck-px30_defconfig
-> @@ -122,6 +122,10 @@ CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
-> +# CONFIG_WATCHDOG is not set
-> +# CONFIG_WATCHDOG_AUTOSTART is not set
-> +CONFIG_DESIGNWARE_WATCHDOG=y
-> +CONFIG_WDT=y
->   CONFIG_SPL_TINY_MEMSET=y
->   CONFIG_TPL_TINY_MEMSET=y
->   CONFIG_LZO=y
-> """
-> 
-> $ make CROSS_COMPILE="aarch64-linux-gnu-" ringneck-px30_defconfig
-> $ make CROSS_COMPILE="aarch64-linux-gnu-"
-> [...]
-> /usr/bin/aarch64-linux-gnu-ld.bfd: lib/time.o: in function `udelay':
-> /home/qschulz/work/upstream/u-boot/lib/time.c:199: undefined reference 
-> to `schedule'
-> /home/qschulz/work/upstream/u-boot/lib/time.c:199:(.text.udelay+0x1c): 
-> relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol 
-> `schedule'
-> make[1]: *** [scripts/Makefile.spl:527: tpl/u-boot-tpl] Error 1
-> make: *** [Makefile:2073: tpl/u-boot-tpl] Error 2
-> 
-> FWIW, I had this kept on a downstream U-Boot (v2022.10, on top of: 
-> https://git.theobroma-systems.com/ringneck-u-boot.git/log/?h=v2022.10-ringneck) and it both compiled and worked. I assume this may be related to the "new" cyclic support?
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/bootefi.c           | 25 ++++++++++---------------
+ lib/efi_loader/Makefile |  2 --
+ 2 files changed, 10 insertions(+), 17 deletions(-)
 
-This seems very likely.
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index 20e5c94a33..395b0629de 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -162,8 +162,6 @@ static efi_status_t efi_env_set_load_options(efi_handle_t handle,
+ 	return ret;
+ }
+ 
+-#if !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
+-
+ /**
+  * copy_fdt() - Copy the device tree to a new location available to EFI
+  *
+@@ -237,8 +235,6 @@ static void *get_config_table(const efi_guid_t *guid)
+ 	return NULL;
+ }
+ 
+-#endif /* !CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) */
+-
+ /**
+  * efi_install_fdt() - install device tree
+  *
+@@ -258,18 +254,15 @@ static void *get_config_table(const efi_guid_t *guid)
+  */
+ efi_status_t efi_install_fdt(void *fdt)
+ {
++	struct bootm_headers img = { 0 };
++	efi_status_t ret;
++
+ 	/*
+ 	 * The EBBR spec requires that we have either an FDT or an ACPI table
+ 	 * but not both.
+ 	 */
+-#if CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)
+-	if (fdt) {
++	if (CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE) && fdt)
+ 		log_warning("WARNING: Can't have ACPI table and device tree - ignoring DT.\n");
+-		return EFI_SUCCESS;
+-	}
+-#else
+-	struct bootm_headers img = { 0 };
+-	efi_status_t ret;
+ 
+ 	if (fdt == EFI_FDT_USE_INTERNAL) {
+ 		const char *fdt_opt;
+@@ -302,6 +295,12 @@ efi_status_t efi_install_fdt(void *fdt)
+ 		return EFI_LOAD_ERROR;
+ 	}
+ 
++	/* Create memory reservations as indicated by the device tree */
++	efi_carve_out_dt_rsv(fdt);
++
++	if (CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE))
++		return EFI_SUCCESS;
++
+ 	/* Prepare device tree for payload */
+ 	ret = copy_fdt(&fdt);
+ 	if (ret) {
+@@ -314,9 +313,6 @@ efi_status_t efi_install_fdt(void *fdt)
+ 		return EFI_LOAD_ERROR;
+ 	}
+ 
+-	/* Create memory reservations as indicated by the device tree */
+-	efi_carve_out_dt_rsv(fdt);
+-
+ 	efi_try_purge_kaslr_seed(fdt);
+ 
+ 	if (CONFIG_IS_ENABLED(EFI_TCG2_PROTOCOL_MEASURE_DTB)) {
+@@ -333,7 +329,6 @@ efi_status_t efi_install_fdt(void *fdt)
+ 		log_err("ERROR: failed to install device tree\n");
+ 		return ret;
+ 	}
+-#endif /* GENERATE_ACPI_TABLE */
+ 
+ 	return EFI_SUCCESS;
+ }
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 8d31fc61c6..d476df112b 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -51,9 +51,7 @@ obj-y += efi_console.o
+ obj-y += efi_device_path.o
+ obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
+ obj-$(CONFIG_EFI_DEVICE_PATH_UTIL) += efi_device_path_utilities.o
+-ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+ obj-y += efi_dt_fixup.o
+-endif
+ obj-y += efi_file.o
+ obj-$(CONFIG_EFI_LOADER_HII) += efi_hii.o
+ obj-y += efi_image_loader.o
+-- 
+2.40.1
 
-> Looking for pointers as somehow I don't really understand the error. 
-> schedule() definition seems to be existing in headers included in 
-> lib/time.c so a bit clueless at the moment. Probably related to TPL also 
-> as it doesn't fail in neither proper nor SPL build stages it seems.
-
-Correct. I assume that this cyclic / WDT support was never used /
-implemented with TPL. Could you please take a deeper look at this
-to see, where exactly the problem originates.
-
-Thanks,
-Stefan
