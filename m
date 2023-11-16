@@ -4,99 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 618D1C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:43:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DAFC197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 05:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 643CC870D2;
-	Thu, 16 Nov 2023 05:43:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+	by phobos.denx.de (Postfix) with ESMTP id 4622187440;
+	Thu, 16 Nov 2023 06:08:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="Ss9YdPed";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wg/mz/8J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5AA487258; Thu, 16 Nov 2023 05:43:52 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 51EB387440; Thu, 16 Nov 2023 06:08:12 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEA0086F53
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:43:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9B378724E
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 06:08:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.com;
- s=s31663417; t=1700109829; x=1700714629; i=quwenruo.btrfs@gmx.com;
- bh=kcY/9DWz3HeV/6asvyZrJ9/esOmJFvIKpghpoQUVzVI=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=Ss9YdPedqMxCgF6UnUIiXbsJ1Zr+vkwyU2fAtYF8swww6h98vMF+n8B1Zd3m9y6p
- yunHswOxHRHE2Q60c9OhbeQGSMVGW+KSdSVda5NDUYpyCiHig8K1IA9X6OywwDRGn
- uk+p5AwpdRyltpK/uAkGnz6nQbTorDQarXj1M3AxCFtEyHurJiEMqaTCXi9pSkcb+
- 9jkBMOoZCANXF7grcZdOarGF3bm0Daamjyt5px9FQhYQwBekEjrU3xDEnUCgydx4S
- BviF+BveDUph61UQLST/zDxItvn5A539GOAdmP4LaxqVfSKLlqti4RCv9k0kB/5ZE
- PIfclShgIg5HEoSboQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [172.16.0.117] ([122.151.37.21]) by mail.gmx.net (mrgmx004
- [212.227.17.184]) with ESMTPSA (Nemesis) id 1N79uI-1rQWPA2gYe-017QwL; Thu, 16
- Nov 2023 05:43:49 +0100
-Message-ID: <fff8b725-1c64-4407-acb8-c47c258e6571@gmx.com>
-Date: Thu, 16 Nov 2023 15:13:44 +1030
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AG5853H022500;
+ Wed, 15 Nov 2023 23:08:05 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700111285;
+ bh=7e745DqT5x2zz9/7Jrn4m4XCTfih0YlObJQf2+X/Yr8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wg/mz/8JGmoNvXAEJhn+Z7hZ6SVD2vIdYNJ47GTMoIeSRj8DkOK7kC9xcG+eN3d/r
+ 3O9NYoNcqDFflYga2BNaIzMzFBpR4eeNfjaECHuO5nzP13HvAEyb01Seh2lpuPvz8M
+ K4/MoGz8Fko5Vd29V+4ul85Vpp41L3Kr1SokJwvs=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AG585kd019024
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 15 Nov 2023 23:08:05 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 15
+ Nov 2023 23:08:05 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 15 Nov 2023 23:08:05 -0600
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AG581M1019275;
+ Wed, 15 Nov 2023 23:08:02 -0600
+Message-ID: <202d11af-b2f2-412a-b9be-0e25174185d5@ti.com>
+Date: Thu, 16 Nov 2023 10:38:00 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] fs: btrfs: fix reading when length specified
+Subject: Re: [PATCH 2/2] arm: dts: k3-*-binman: Move to using templated FITs
+To: Andrew Davis <afd@ti.com>, <sjg@chromium.org>,
+ <marcel.ziswiler@toradex.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, 
+ <kamlesh@ti.com>, <m-chawdhry@ti.com>, <mkorpershoek@baylibre.com>
+References: <20231115101024.3441093-1-n-francis@ti.com>
+ <20231115101024.3441093-3-n-francis@ti.com>
+ <1beed541-c7bd-4ed0-943f-c3695ee1db93@ti.com>
 Content-Language: en-US
-To: Sam Edwards <cfsworks@gmail.com>, u-boot@lists.denx.de,
- =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
-Cc: Qu Wenruo <wqu@suse.com>
-References: <20231111151904.149009-1-CFSworks@gmail.com>
-From: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
- BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
- pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
- BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
- XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
- jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
- LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
- mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
- CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
- /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
- GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
- q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
- ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
- CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
- tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
- INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
- DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
- iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
-In-Reply-To: <20231111151904.149009-1-CFSworks@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:oMgDiQycwge92N07URLDVUuyVih3rM8QuvtldTwLxDZr20pxKK8
- xE5h8/Rr/7m9wV3YXkgeTebbVJiBqOMzj/xNFdpktj+SLJGx8+CuwZzkyAt9wbMWG6Z91nv
- rqtIF/WaHt69omSLCCEfrqe04//0DDWKt3Lvf4Tdzffc2+nvGq6A/OXZMblORP2vNFhtXGx
- JyXxsSmnoBiIjLaJosKGg==
-UI-OutboundReport: notjunk:1;M01:P0:Kt6EdSdAHPY=;XEyaNhVGLkI3Ln43+s2ZTezIUwK
- Rxx7pf8/ucB3IOr+HjOOTDcZEMIjNFfkkYSv6DeKEOqcHBKVBAe+FTnT1lUu9Gkg31MRducug
- KrjSXGs+ot4lJBwd8OuB6yFSzhdLcBX4dpBaz/n8vsfdZgniSF0lOpYtWTdYQfEudQZiM8tbt
- nkBiURIdPIqqyi5IPHeC88y6D5THV8qHWxlRGkUwEx0KOAN+Tuoj8ckGeqYdsPiFY4njExl26
- vny4C52iDaMlFC7lfn6cbxADGZ538iobL4w0qiNDGZPJxaRbq24/QK7zKjS1VoE7TrvwxCFy7
- 5cgMqd7Z3b0EhfLm5SmY65iRWgxXcV+IIt29awQXEOcJ+4plRv91iMdx6EZnfyLFRdhN+HKj9
- Ldkp3yqchKV2BxmumjjXUboBov8jNrBpl93qrewaY8o3IAkp5mSZH+lfZE/p4B1Cih2GQ88RZ
- NbLgcwYfaVfoJIlK7K7Ec+C0BI4jdYfffQ9hLKvC2SySRJAWTokAF+iFqfefzv/yEYX8G1c3c
- 2yfU+lIXrLveSBItpjVARE6x6g07fFtF8drwiad+YfdAoihIAG03sUFe2ixNsWflsHlBZXvIn
- uA9QzG3Bs98fpsabo+znqqZu7Uz7LAnLZFvYdAlnSYOVSOXfJM7dejPQT2R30Ksib/+TDLi/N
- +wFHXHIQ5xAZi3LxiF2mnOgCAcH0upWSKUlBvenD70EsverRXXq385mynhtNuJX0wNSbfJPa5
- a516OAMLkqbwjjH3E9NRF+qRhQhG4G+PL/lvIpiIsc7byULX+ldekIic84UKhNyRoJPsDu3to
- sfNDq21Mv4LO6Xdo2Y9xZzaCyDCFPT+ULe0cFND+et/wEb4n7V1jybf7x1BWL6QuL5LIvyEfu
- FSyiWAzDZwtLva8D3oqHeSXKPI2NoeKypy4HrJRgj+bWTc8NfRSw/ULEYnI/g7KRomNbZjUXm
- 01LovQ==
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <1beed541-c7bd-4ed0-943f-c3695ee1db93@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,76 +83,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andrew,
 
+On 15/11/23 21:22, Andrew Davis wrote:
+> On 11/15/23 4:10 AM, Neha Malcom Francis wrote:
+>> Reduce redundancy in code by using templates to generate the A72 boot
+>> binaries (tispl.bin and u-boot.img) as well as R5 boot binary sysfw.itb
+>> (for legacy boot following devices J721E and AM65x).
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 157 +--------
+>>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 155 +-------
+>>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 158 +--------
+>>   arch/arm/dts/k3-am64x-binman.dtsi             | 151 +-------
+>>   arch/arm/dts/k3-am65x-binman.dtsi             | 273 +-------------
+>>   arch/arm/dts/k3-j7200-binman.dtsi             | 159 +--------
+>>   arch/arm/dts/k3-j721e-binman.dtsi             | 332 +-----------------
+>>   arch/arm/dts/k3-j721s2-binman.dtsi            | 157 +--------
+>>   8 files changed, 54 insertions(+), 1488 deletions(-)
+> 
+> 1488 deletions, nice!
+> 
+> Minor question, why was `ti-secure` not factored out of `dm` nodes like
+> it was for `atf`/`tee` nodes? Guessing it has to do with not all SoCs
+> needing this blob and signing nothing results in something, which
+> messes up the 0 size check when loading it, but it wasn't clear to me.
+> 
 
-On 2023/11/12 01:49, Sam Edwards wrote:
-> The btrfs read function limits the read length to ensure that it
-> and the read offset do not together exceed the size of the file.
-> However, this size was only being queried if the read length was
-> passed a value of zero (meaning "whole file"), and the size is
-> defaulted to 0 otherwise. This means the clamp will just zero out
-> the length if one is specified, preventing reading of the file.
->
-> Fix this by checking the file size unconditionally, and unifying
-> the default length and clamping logic as a single range check instead.
->
-> This bug was discovered when trying to boot Linux with initrd=3D via
-> 'bootefi' from a btrfs partition. The EFI stub entered an infinite
-> loop of zero-length reads while trying to read the initrd, and the
-> boot process stalled indefinitely.
+Yes that's right! It ends up being non-zero for devices that don't have DM and 
+DM load fails.
 
-I'm not sure why this happend for the EFI environment.
+> Anyway,
+> 
+> Acked-by: Andrew Davis <afd@ti.com>
 
-Doesn't the EFI runtime should also try to read the whole file? Or that
-EFI environment has specified the length to read instead?
-
->
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-
-Anyway, the fix looks good to me.
-
-Reviewed-by: Qu Wenruo <wqu@suse.com>
-
-Thanks,
-Qu
-> ---
->   fs/btrfs/btrfs.c | 15 ++++++---------
->   1 file changed, 6 insertions(+), 9 deletions(-)
->
-> diff --git a/fs/btrfs/btrfs.c b/fs/btrfs/btrfs.c
-> index 4cdbbbe3d0..1149a3b200 100644
-> --- a/fs/btrfs/btrfs.c
-> +++ b/fs/btrfs/btrfs.c
-> @@ -228,7 +228,7 @@ int btrfs_read(const char *file, void *buf, loff_t o=
-ffset, loff_t len,
->   {
->   	struct btrfs_fs_info *fs_info =3D current_fs_info;
->   	struct btrfs_root *root;
-> -	loff_t real_size =3D 0;
-> +	loff_t real_size;
->   	u64 ino;
->   	u8 type;
->   	int ret;
-> @@ -246,16 +246,13 @@ int btrfs_read(const char *file, void *buf, loff_t=
- offset, loff_t len,
->   		return -EINVAL;
->   	}
->
-> -	if (!len) {
-> -		ret =3D btrfs_size(file, &real_size);
-> -		if (ret < 0) {
-> -			error("Failed to get inode size: %s", file);
-> -			return ret;
-> -		}
-> -		len =3D real_size;
-> +	ret =3D btrfs_size(file, &real_size);
-> +	if (ret < 0) {
-> +		error("Failed to get inode size: %s", file);
-> +		return ret;
->   	}
->
-> -	if (len > real_size - offset)
-> +	if (!len || len > real_size - offset)
->   		len =3D real_size - offset;
->
->   	ret =3D btrfs_file_read(root, ino, offset, len, buf);
+-- 
+Thanking You
+Neha Malcom Francis
