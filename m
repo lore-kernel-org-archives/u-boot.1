@@ -4,74 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C6EC072A2
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:56:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1C4C072A2
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 02:01:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B36428724E;
-	Thu, 16 Nov 2023 02:56:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E8B488724E;
+	Thu, 16 Nov 2023 03:01:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fg6BKSBD";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fhXhzPzW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C43D87251; Thu, 16 Nov 2023 02:56:53 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2075C87447; Thu, 16 Nov 2023 03:01:46 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A0D586EE5
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:56:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BBE1D87128
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 03:01:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-50a938dd873so422107e87.3
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:56:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700099811; x=1700704611; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UYPEGd8Tbn49T/sf2x6G9ncU0L7nA7Gm1cxdgzY2IFM=;
- b=fg6BKSBDos29wRagFCGYwMinaJwxTJvtq+EhrpJEEfdIRNXXHjH5r3lhRt+n+A765Z
- H0RgR8fuFzipDlSDZB6hBaW1TKOYHTyr73Vs/2jTGBDbuq1llpBkXsBEY+VfhsoBEoTZ
- U90AU3MPIslNcKlnyLItorC+8hLzYHswxBoPI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700099811; x=1700704611;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UYPEGd8Tbn49T/sf2x6G9ncU0L7nA7Gm1cxdgzY2IFM=;
- b=lKk/mtbTR/RJdK7lhBMmLLvROqAnnmHWzv8k4kilWxW/YCogW4iWtBd75HCBMG3sSW
- 8/sPjcLHbB07hYFZsg5RRKcxAaW/TPVdIUL/eKxJn6OgtsaR9S7EwHO0is/enGTH1Vg4
- YQwAsjJJyzv9TaBsbdybaCJpmHlSc/e523XoaR2/EeZ09OPGWCaBR40Uo+XBoCR3pJmL
- 58IeQeBbHXz1X7Ap+/YY6WR/f9ufTfd4Lwmtq4rFpc5onNN1NUtetIKvtgGCAx1Q+SI9
- J/VxtDjxBlIPe0PwuGDy1w+efAhk19KoFF2ZHZMUgH4hiZfhPWie3mwE7EG71zy1Rm7K
- UKfQ==
-X-Gm-Message-State: AOJu0Yz5sIDfpNTjUTr7e/RwcUoOPLYaEsrRk9EV68RoFqC0StKEACyj
- XjR3U+o7q+p5/F9QPgEwRxSx2qQjiYgUrPdDYUECydLZXPEa4Rjckls=
-X-Google-Smtp-Source: AGHT+IHzz/Ut2ZlBkeILmTq61k/lTiRd+h82g9B0JfceTSr2XuxdZ+BdfKcRjooN2eyHDVpIsD9YQ26QfppH6Fac6qI=
-X-Received: by 2002:a05:6512:3ca5:b0:509:8a47:3672 with SMTP id
- h37-20020a0565123ca500b005098a473672mr9864379lfv.34.1700099810367; Wed, 15
- Nov 2023 17:56:50 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700100083; x=1700704883; i=xypron.glpk@gmx.de;
+ bh=5qdKyHgYEDkYJr6WOSYuC+M1qqR1VA8mLZqLZK+MDyQ=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=fhXhzPzWrhNJ5So/LAdzNE4vnBpQQEdTHgHyC2EYQq9XVWNFJ6d4czB4mPccodJO
+ LyqNH87dt8OrRnCAxyaRiEKtuzCFOzz81inqOlehXs9EpABUQ39lJ2I+5eyuMEPdy
+ AGuyRJtBMN0DbY7ES/iUQRXptjmi57a/JCL3UVviD7o3elYDIS9cUBjlokqMqG28L
+ EkMSTXbif2XJIOO46hil1M8LqRo+m0paTMb/eNj/gxEZWBWbhgY/hTnPQnijFo+qh
+ bICqn36n5bm7lOt/g4gxeP1UPpOXnwVERyagqzGPPAoKgzq6CwwEp5CgZ4fwg1tcd
+ 5smaz710pCepQIZZRw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNbkp-1qjqCu36xH-00P66d; Thu, 16
+ Nov 2023 03:01:23 +0100
+Message-ID: <f3b89670-8e6b-428a-b391-a1d70b2af30f@gmx.de>
+Date: Thu, 16 Nov 2023 03:01:22 +0100
 MIME-Version: 1.0
-References: <20231112000923.73568-1-sjg@chromium.org>
- <20231112000923.73568-28-sjg@chromium.org>
- <20231115223800.GE6601@bill-the-cat>
- <CAPnjgZ379WFHcrVUYPTGZqhUvA95aaDKdfiqNGBOXt4hBrWrKQ@mail.gmail.com>
- <20231116014707.GI6601@bill-the-cat>
-In-Reply-To: <20231116014707.GI6601@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 15 Nov 2023 18:56:33 -0700
-Message-ID: <CAPnjgZ1v+ciAZGKgkgF3M1tzTdpFEMLJfj-xVQMLWpdmgYPzAw@mail.gmail.com>
-Subject: Re: [PATCH 27/29] bootm: Adjust the parameters of bootm_find_images()
-To: Tom Rini <trini@konsulko.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 05/12] usb: Avoid unbinding devices in use by bootflows
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Eddie James <eajames@linux.ibm.com>, 
+ Eddie James <eajames@linux.ibm.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Safae Ouajih <souajih@baylibre.com>, Shantur Rathore <i@shantur.com>
+References: <20231112200255.172351-1-sjg@chromium.org>
+ <20231112130245.v4.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
+ <3F7DFCBC-D5A1-43C4-AF00-11C27BFF7508@gmx.de>
+ <CAPnjgZ3wEzHNqzpsF1zU6U4WBAm=oMYEzRRR-UuqDEwXB24rLw@mail.gmail.com>
+ <43EF5E14-0AE3-456A-B9D4-67B8F4405555@gmx.de>
+ <CAPnjgZ2t-wF=nGWtdEgWRtUrzFyERnoGwqF8urJjNgEP2b4Qrw@mail.gmail.com>
+ <58076384-d164-4d7a-bc1f-c78574b481b5@gmx.de>
+ <487c3e73-ce21-4e45-9cf3-44314e78fd1f@gmx.de>
+ <CAPnjgZ1-DBbt7caZRwvEWO+OcCZtJ821ZkVr--NPZGg1wE1R=Q@mail.gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAPnjgZ1-DBbt7caZRwvEWO+OcCZtJ821ZkVr--NPZGg1wE1R=Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Unv36x/4BFCETXXvzHhmOsXSAPfdBC1TUkedgk2QiwJ+Y1VHXpN
+ 4oEq0Z4s2sKJDHjjbrw5DmbHBtkD1QiXpRTehkHq4eej4/KHSLyCMfIMAIUEsgFPHCs3c+/
+ DrhkBUfD2cUrTTCUjXf6qTze9WitGlqdxbr3UksAYnB2wvyO2vT352oY2rVfbzBSQxPzMrC
+ nB+iJx8UBavU47l4+HE4w==
+UI-OutboundReport: notjunk:1;M01:P0:u6JqCnQsiHM=;hAiJDGt5Bk2faLTpa+1lwRa2Yc6
+ SAjz2h9fbWBkBzQQYuhbnzXgEHIY9OnngMeDxuduADobC7DlsxKsMyGLHb5JTvyMUAj8N2AEy
+ geqVRGz2XMFhMNhaY+aFVrPIoCuqdkn64cP0xCBDezd2kNSSqZy66KTIpbiN7r2guR/CxFRk0
+ yAhMktbkqNOC0CSE3/7IMHnn7p4WWUh/inr4Byn+VGKFk8bDXVFN5+zFzmeAPR/yrYum20FtP
+ B53enSc2AWg4Snm1ZH0oRIBmeIPqKupjCv22rSZa0Q2V3zx/nZ8YpdbCHmzVczys+mS3frvJE
+ k2iTH0CeTe8387JU1gM/IjN3aOZgJuZOaBxDL+5wcbfiC5YsNMBaRWzKEpEjVJmwkmc6uDXMU
+ f9JEGsK964gY+9PGsDBdbUzWMkPKmH7j/vQ89/vwLXs6U9rKkR1JJtTQL+TvJm9AXDQ7ztn65
+ rcls8wI+SP1kaVRlAReSzvH0wSlkjK0kR1OAfq0CuDPnSiLoQki4yknMEDeR0N879TNrPGT0E
+ EW26ItepBNMZuNV5l+awBQ3TZrymJ1V0n8o5NNKzs8qznDWZfyBIV3p3M8rOcjrfr0X40w+Q9
+ 0buEQ8RGzJVSTMadpHq5e9iD7iaIIiROXaluvyOJEPFnLxLNpzFGkWItUxVU1t5qM7kMOvv22
+ udO7fIhfGDUpFU0WecguN1gcF2UzAJNwQuuCuD6dCUph/C7V5RdaaBd74PIXi9zNuHkoJZF1W
+ PebnkqKWy5bVud7JGg95rfPhZS+qF9aSxOchxBAwX+K5eqkXB5AQ1v63qJ7+NzjfjXABO/9J7
+ kaOGkLLv2BDguTBYx39kvBF2teDf+crdqYcfg8IG27KlKC6cav32CLT3ao8qymPjYUezErpY2
+ Ny+CMEFW6QKf9z0UnQ7b7i9DDQv0kHGfMc8meScYQUcLWJ4L6ahex3GzNqt2NA3ECj300ue1R
+ N9tF/foa8uAhk0cbrmXHSTgy5nM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,66 +103,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Wed, 15 Nov 2023 at 18:47, Tom Rini <trini@konsulko.com> wrote:
+On 11/16/23 02:42, Simon Glass wrote:
+> Hi Heinrich,
 >
-> On Wed, Nov 15, 2023 at 06:42:19PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 15 Nov 2023 at 15:38, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Nov 11, 2023 at 05:09:12PM -0700, Simon Glass wrote:
-> > >
-> > > > Rather than passing it all the command-line args, pass in the pieces
-> > > > that it needs. These are the image address, the ramdisk address/name
-> > > > and the FDT address/name.
-> > > >
-> > > > Ultimately this will allow usage of this function without being called
-> > > > from the command line.
-> > >
-> > > OK, so this goal is good.
-> > >
-> > > [snip]
-> > > > +             return bootm_find_images(img_addr, argc > 1 ? argv[1] : NULL,
-> > > > +                                      argc > 2 ? argv[2] : NULL, 0, 0);
-> > >
-> > > That we repeat this much harder to read test/if/else three times now is
-> > > less good.  Can we find some way to hide the complexity here in the case
-> > > where it's coming from a command and so we have argc/argv[] ?
-> >
-> > I can't really think of one. Ultimately this is coming from the fact
-> > that the booti and bootz commands directly call bootm_find_images(). I
-> > haven't got far enough to know whether that will still be true in the
-> > end, but I hope not.
-> >
-> > IMO the correct place for the logic above is in the command-processing
-> > code, where it decides which arg means what.
-> >
-> > I could imagine something like:
-> >
-> > static const char *cmd_get_arg(int argc, char *const argv[], int argnum)
-> > {
-> >    return argc > argnum ? argv[argnum] : NULL;
-> > }
-> >
-> > but I'm not sure that is an improvement.
+> On Wed, 15 Nov 2023 at 18:34, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
+>>
+>> On 11/15/23 17:23, Heinrich Schuchardt wrote:
+>>> On 11/15/23 16:50, Simon Glass wrote:
+>>>> Hi Heinrich,
+>>>>
+>>>> On Sun, 12 Nov 2023 at 16:35, Heinrich Schuchardt <xypron.glpk@gmx.de=
 >
-> I was thinking about this more after I sent this. And I think we might
-> indeed want an inline / macro to handle this case more generally as I
-> suspect we'll have similar cases where we need argN-or-NULL as we
-> refactor other areas of code to split "here is the command" from "here
-> is the library functionality" of it. Then we'll have:
-> ulong foo = cmd_arg_one(argc, argv);
-> ulong bar = cmd_arg_two(argc, argv);
+>>>> wrote:
+>>>>>
+>>>>>
+>>>>>
+>>>>> Am 12. November 2023 22:20:50 MEZ schrieb Simon Glass
+>>>>> <sjg@chromium.org>:
+>>>>>> Hi Heinrich,
+>>>>>>
+>>>>>> On Sun, 12 Nov 2023 at 13:32, Heinrich Schuchardt
+>>>>>> <xypron.glpk@gmx.de> wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> Am 12. November 2023 21:02:42 MEZ schrieb Simon Glass
+>>>>>>> <sjg@chromium.org>:
+>>>>>>>> When a USB device is unbound, it causes any bootflows attached to
+>>>>>>>> it to
+>>>>>>>> be removed, via a call to bootdev_clear_bootflows() from
+>>>>>>>> bootdev_pre_unbind(). This obviously makes it impossible to boot =
+the
+>>>>>>>> bootflow.
+>>>>>>>>
+>>>>>>>> However, when booting a bootflow that relies on USB, usb_stop() i=
+s
+>>>>>>>> called, which unbinds the device. For EFI, this happens in
+>>>>>>>> efi_exit_boot_services() which means that the bootflow disappears
+>>>>>>>> before it is finished with.
+>>>>>>>
+>>>>>>> After ExitBootServices() no driver of U-Boot can be used as the
+>>>>>>> operating system is in charge.
+>>>>>>>
+>>>>>>> Any bootflow inside U-Boot is terminated by definition when
+>>>>>>> reaching ExitBootServices.
+>>>>>>>
+>>>>>>>>
+>>>>>>>> There is no need to unbind all the USB devices just to quiesce th=
+em.
+>>>>>>>> Add a new usb_pause() call which removes them but leaves them bou=
+nd.
+>>>>>>>
+>>>>>>> As U-Boot must not access any device after ExitBootServices() it i=
+s
+>>>>>>> unclear to me what you want to achieve.
+>>>>>>
+>>>>>> I can't remember exactly what is needed from the bootflow, but
+>>>>>> something is. Perhaps the kernel, or the cmdline, or fdt? It would
+>>>>>> have been better if I had mentioned this explicitly,  But then this
+>>>>>> patch has been sitting around for ages...
+>>>>>>
+>>>>>> In any case, the intent of exit-boot-services is not to free all th=
+e
+>>>>>> memory used, since some of it may have been used to hold data that =
+the
+>>>>>> app continues to use.
+>>>>>
+>>>>> The EFI application reads the memory map and receives an ID which it
+>>>>> passes to ExitBootServiced() after this point any memory not marked
+>>>>> as EFI runtime can be used by the EFI app. This includes the memory
+>>>>> that harbors the U-Boot USB drivers. Therefore no drivers can be use=
+d
+>>>>> here.
+>>>>>
+>>>>> Starting the EFI app via StartImage() must  terminate any running
+>>>>> U-Boot "boot flow".
+>>>>>
+>>>>> After ExitBootServices() the EFI application cannot return to U-Boot
+>>>>> except for SetVirtualAdressMspsetting which relocates the EFI runtim=
+e.
+>>>>>
+>>>>> Bootflows and U-Boot drivers have no meaning after ExitBootServices(=
+).
+>>>>>
+>>>>>
+>>>>>
+>>>>>>
+>>>>>> Also there is U-Boot code between when the devices are unbound and
+>>>>>> when U-Boot actually exits back to the app.
+>>>>>>
+>>>>>> This hang was 100% repeatable on brya (an x86 Chromebook) and it to=
+ok
+>>>>>> quite a while to find.
+>>>>>
+>>>>> We need a better understanding of the problem that you experience to
+>>>>> find an adequate solution. Why does removing all devices lead to
+>>>>> hanging the system?
+>>>>
+>>>> Are you able to test this? With your better knowledge of EFI you migh=
+t
+>>>> be able to figure out something else that is going on. But in my case
+>>>> it causes some memory to be freed (perhaps the memory holding the EFI
+>>>> app?), which is then overwritten by something else being malloc()'d,
+>>>
+>>> The memory for the EFI app is not assigned via malloc(). It is allocat=
+ed
+>>> by AllocatedPages().
+>>>
+>>> Reading "some memory freed" does not give me confidence that the probl=
+em
+>>> is sufficiently analyzed.
+>>>
+>>>> so the boot hangs. It is hard to see what is going on after the app
+>>>> starts.
+>>>>
+>>>> This patch was sent almost two months ago and fixes a real bug. The
+>>>> first few versions attracted no comment now it is being blocked
+>>>> because you don't understand how it fixes anything.
+>>>
+>>> Do you understand why unbinding the devices causes the problem?
+>>>
+>>>>
+>>>> I can get the hardware up again and try this but it will take a while=
+.
+>>>
+>>> Digging a bit deeper seems to be the right approach.
+>>
+>> Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
+>> https://lore.kernel.org/u-boot/CAHc5_t1H39YV=3DHSSa7TCEdzRctAX+zibkx1vs=
+uwEW-raOL9TcA@mail.gmail.com/
+>>
+>> points to a probable root cause:
+>>
+>> https://github.com/u-boot/u-boot/blob/master/boot/bootflow.c#L470
+>> free(bflow->buf)
+>>
+>> In the EFI boot bflow->buf points to $kernel_addr_r which never was
+>> allocated and therefore must not be freed.
 >
-> librarycall(foo, bar, ...);
+> Yes, this is the root cause of the crash.
+>
+> However, this patch should still be applied. I can update the commit
+> message if you like.
+>
+> Freeing the FDT and kernel before booting them is just not safe,
+> whether EFI or anything else. Freed memory is not guaranteed to hang
+> around for any length of time. For example, with truetype fonts,
+> malloc() is called during any console output and will likely corrupt
+> the images just as they are being booted.
 
-OK I can try something. But note that the one, two terminology becomes
-confusing. Is the first argument zero or one? Also we often drop an
-argument in a subcommand to allow things to start from 0 again.
+Please, observe that malloc() and efi_allocate_pages() use completely
+separate parts of the memory.
 
-It might be better to use first and second, instead?
+When reaching ExitBootServices() the memory used by the EFI binary
+(relocated in efi_load_pe()) and for the configuration table with the
+device-tree have been allocated by efi_allocate_pages(). These addresses
+cannot neither allocated by malloc() nor freed with free().
 
-Regards,
-Simon
+Best regards
+
+Heinrich
+
+>
+> We should leave the devices bound when booting.
+>
+> Regards,
+> Simon
+
