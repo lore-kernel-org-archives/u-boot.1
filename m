@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC06C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 059C9C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 04:11:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2892387440;
+	by phobos.denx.de (Postfix) with ESMTP id AB68787454;
 	Thu, 16 Nov 2023 05:11:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gV3Ky+mT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nX2O91oR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ECCF8725C; Thu, 16 Nov 2023 05:11:22 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id B9D728743F; Thu, 16 Nov 2023 05:11:23 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 493E586F73
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E7CF87258
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 05:11:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-7a67b9cd230so12334639f.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 20:11:20 -0800 (PST)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-7b05e647c09so11937439f.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 20:11:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700107879; x=1700712679; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700107880; x=1700712680; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0ZDjmWK5zrBzxEXrSsc2eQ4DlmPhgdHnBaoFW6cyZck=;
- b=gV3Ky+mTudxefEcQfoqYwC8fYmKPNG1ifUL269yvc0uqf8zxd8vWknMFnDIcBoWnOE
- odHXq5RjTXKJ3OliD5IpwtKjxpGokBBt56mnKqY08qUcVbXiRLvanFnqluxl1PLUSuvX
- 6QhRsyxgeYbGrMH/22OLqpkpNR//iLE3e3Irk=
+ bh=IfzgIIISeDqr0mlYCJwzLxB3tqTZ0UYYykHi/0bnSYw=;
+ b=nX2O91oR8FxtNMMZ/PX+rYb4PtkK+mDgL0g9pt9RKicU/G4XMaS97eJcTaQRjsMjm8
+ Opcrp0R6gjP+Uw8SyH6Yohek1glyQhHOOD+lmrrIsHXvk4m1mZwSyQYLl9P+ZPwm9T5r
+ NVWUyj1EHQsUaFah59yHbm5d5InGTtwpWHppU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700107879; x=1700712679;
+ d=1e100.net; s=20230601; t=1700107880; x=1700712680;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0ZDjmWK5zrBzxEXrSsc2eQ4DlmPhgdHnBaoFW6cyZck=;
- b=Qbpjz66jqoetdaYglWODoo0FmeFKR4+4Wbp2JGYv0sw5ybtS3+74Am33z2fuNSy6IR
- 2LbyC4fS6bgEY2gUoBdD92cXzzV0rBFpsQs2ToavWcCdt6hepHDaXfyreSiSj6bxVCD1
- 9ry6jeH6Gmi/vZNLSAH91tg+PTOx3lEpeq/7y1+guXpmjafx3elSZEldEt4/KduNwKzN
- 76/yTFmq7O5np28FZw8TupE118B6+VDccGylyQpS/zu54EnPRSzKD0k+ZSBMa+w1iCu8
- uU3RoSAHy9Jp+Om6ZL4uB7ZKaPucaYnOLM49cyWvZb83sHODH0ciwIyeMG5IMXYYyAYW
- 0xZQ==
-X-Gm-Message-State: AOJu0YzP6xIBxPgl1mpsmZoJIIhL3ksmkP+bM2eJUt9hQWa6ECXcJiY+
- eMMC12vD1hUUMxWrW9YU2DkAcidxqBBkGojoCABZ5Q==
-X-Google-Smtp-Source: AGHT+IFyNpgg12qvArM1Kvo+3Q9ToLyJqmuScqohititC403zU2BFU00sSUklpOXDh6EogIq6Go/kg==
-X-Received: by 2002:a6b:91a:0:b0:7a6:7bbe:5aa0 with SMTP id
- t26-20020a6b091a000000b007a67bbe5aa0mr14937270ioi.0.1700107878842; 
- Wed, 15 Nov 2023 20:11:18 -0800 (PST)
+ bh=IfzgIIISeDqr0mlYCJwzLxB3tqTZ0UYYykHi/0bnSYw=;
+ b=qi8dfLrCOYuc8fNb/DKA/BGh3OGAaX8anSdPBXcPrej96eEsJwiT66sWj+Z7J+W3CY
+ s4JTx4Z6am/q7kDifTiCgH4HgDppOurUW5tzP8UwNpS5FXrQBCD9bZ8odeBZJhWY+ZLD
+ ca2U176qIg+Pek9BXNCBs0H4JVfKFeDj86YNEwy3uyYTLk2NF2ZRuLSRlAujPjbEHNfe
+ z4RugHgdTxJMSKhSRWxUGWingSY5yR0NNsqHsycu6vvSzBerTKnvlz36iqnlbWa2qqZP
+ OVgk4XupqOE0/Kbk8N/GgHyndLBl91J4Uh0WQrygjYUMiDKjTmdytiCLRgo2DV0ZAEZD
+ dXlA==
+X-Gm-Message-State: AOJu0YweH47mSOEoFWV6gCbOqHzDaQ1RZYcZLf3xfZ71yiKbQIXX6K/o
+ Y5bGwNW+wjio+cv48Uqkzlu69YUm4G7JUtMpDERx4A==
+X-Google-Smtp-Source: AGHT+IE/f51Msz3TtLOp63zezfXOgrQ/wvaLdLsY1XnCCSmaZmfZ7NSgFAk8KVtK79jywje/mSyfGA==
+X-Received: by 2002:a5d:9b0d:0:b0:794:d7e8:d239 with SMTP id
+ y13-20020a5d9b0d000000b00794d7e8d239mr15471549ion.17.1700107880079; 
+ Wed, 15 Nov 2023 20:11:20 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.18
+ f3-20020a02a803000000b0045a1063713asm1307527jaj.130.2023.11.15.20.11.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 20:11:18 -0800 (PST)
+ Wed, 15 Nov 2023 20:11:19 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v2 01/32] arm: x86: Drop discarding of command linker-lists
-Date: Wed, 15 Nov 2023 21:10:01 -0700
-Message-ID: <20231116041043.362055-2-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 02/32] README: Correct docs for CONFIG_SPL_BUILD
+Date: Wed, 15 Nov 2023 21:10:02 -0700
+Message-ID: <20231116041043.362055-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231116041043.362055-1-sjg@chromium.org>
 References: <20231116041043.362055-1-sjg@chromium.org>
@@ -90,81 +89,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since we can now cleanly disable CMDLINE when needed, drop the rules
-which discard the command code.  It will not be built in the first
-place.
+This option is defined in both SPL and TPL builds, so correct the docs
+related to this. Also point to spl_phase() which is normally a better
+option. Mention VPL as well.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reported-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
 (no changes since v1)
 
- arch/arm/cpu/u-boot.lds     | 3 ---
- arch/x86/cpu/u-boot-64.lds  | 4 ----
- arch/x86/cpu/u-boot-spl.lds | 4 ----
- arch/x86/cpu/u-boot.lds     | 4 ----
- 4 files changed, 15 deletions(-)
+ README | 26 ++++++++++++++++++--------
+ 1 file changed, 18 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index fc4f63d83489..7724c9332c3b 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -14,9 +14,6 @@ OUTPUT_ARCH(arm)
- ENTRY(_start)
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
- #if defined(CONFIG_ARMV7_SECURE_BASE) && defined(CONFIG_ARMV7_NONSEC)
- 	/*
- 	 * If CONFIG_ARMV7_SECURE_BASE is true, secure code will not
-diff --git a/arch/x86/cpu/u-boot-64.lds b/arch/x86/cpu/u-boot-64.lds
-index d0398ff00d71..00a6d8691211 100644
---- a/arch/x86/cpu/u-boot-64.lds
-+++ b/arch/x86/cpu/u-boot-64.lds
-@@ -11,10 +11,6 @@ ENTRY(_start)
+diff --git a/README b/README
+index 60c6b8a19db1..f26c34a5e200 100644
+--- a/README
++++ b/README
+@@ -1545,16 +1545,26 @@ Low Level (hardware related) configuration options:
+ 		globally (CONFIG_CMD_MEMORY).
  
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
--
- #ifdef CONFIG_TEXT_BASE
- 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
- #endif
-diff --git a/arch/x86/cpu/u-boot-spl.lds b/arch/x86/cpu/u-boot-spl.lds
-index a0a2a06a18cd..50b4b1608552 100644
---- a/arch/x86/cpu/u-boot-spl.lds
-+++ b/arch/x86/cpu/u-boot-spl.lds
-@@ -11,10 +11,6 @@ ENTRY(_start)
+ - CONFIG_SPL_BUILD
+-		Set when the currently-running compilation is for an artifact
+-		that will end up in the SPL (as opposed to the TPL or U-Boot
+-		proper). Code that needs stage-specific behavior should check
+-		this.
++		Set when the currently running compilation is for an artifact
++		that will end up in one of the 'xPL' builds, i.e. SPL, TPL or
++		VPL. Code that needs phase-specific behaviour can check this,
++		or (where possible) use spl_phase() instead.
++
++		Note that CONFIG_SPL_BUILD *is* always defined when either
++		of CONFIG_TPL_BUILD / CONFIG_VPL_BUILD is defined. This can be
++		counter-intuitive and should perhaps be changed.
  
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
--
- 	. = IMAGE_TEXT_BASE;	/* Location of bootcode in flash */
- 	__text_start = .;
- 	.text  : {
-diff --git a/arch/x86/cpu/u-boot.lds b/arch/x86/cpu/u-boot.lds
-index a31f4220a000..c418ff44aa08 100644
---- a/arch/x86/cpu/u-boot.lds
-+++ b/arch/x86/cpu/u-boot.lds
-@@ -11,10 +11,6 @@ ENTRY(_start)
+ - CONFIG_TPL_BUILD
+-		Set when the currently-running compilation is for an artifact
+-		that will end up in the TPL (as opposed to the SPL or U-Boot
+-		proper). Code that needs stage-specific behavior should check
+-		this.
++		Set when the currently running compilation is for an artifact
++		that will end up in the TPL build (as opposed to SPL, VPL or
++		U-Boot proper). Code that needs phase-specific behaviour can
++		check this, or (where possible) use spl_phase() instead.
++
++- CONFIG_VPL_BUILD
++		Set when the currently running compilation is for an artifact
++		that will end up in the VPL build (as opposed to the SPL, TPL
++		or U-Boot proper). Code that needs phase-specific behaviour can
++		check this, or (where possible) use spl_phase() instead.
  
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
--
- 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
- 	__text_start = .;
- 
+ - CONFIG_ARCH_MAP_SYSMEM
+ 		Generally U-Boot (and in particular the md command) uses
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
