@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C9BFC47071
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 19:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E490C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 19:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44C8287441;
-	Thu, 16 Nov 2023 20:43:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8B3CC87483;
+	Thu, 16 Nov 2023 20:54:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hVa3G0PG";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="PUjpKaJU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B41B887443; Thu, 16 Nov 2023 20:43:35 +0100 (CET)
+ id 1520687454; Thu, 16 Nov 2023 20:54:54 +0100 (CET)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D56587206
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 20:43:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9389F8615A
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 20:54:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 64F153F6EF
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:43:24 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 02E9C3F6EF
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 19:54:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700163804;
- bh=C9yW9BSEA+NUeG8oCpSoW52Z/jHSvZ0u5WgT0nCySoE=;
+ s=20210705; t=1700164489;
+ bh=UKkThPq8yU7Jzaq+GUBKGuEw4f63Mi4AKgPnYbemwIM=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=hVa3G0PGWDmtY4QQtPW3NxH0DC5zo0kEUZsgHyzgFSUXDz+fKKnPfdONLNf5pffXq
- xSks/+btWqEb9ZmTlJ9DqnqE7G8C1ohd4V9Jf3AZvSGP77KD8H+Szr8Ku0uDL7NEnS
- fzeGK0GN1f34fanckrs4tfq07Hao/YKMv1gvURwny+MQQm72XMnOa+yVwQLX4+wcyE
- 9gE6ulXcypBUAKtuZzH79VwpMxmuB5dk+SvKzeBsQvgHAvK473nl/V+eklhNxMDfr+
- CbrfNfCCdEAVbqyMt3pIz09ShtVt8Kpoc/Cxnc+NuSIiu3YOJmfo3cRu8vE7NzrmVo
- dLKQB1zXyO/hg==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-32fa41d0564so587051f8f.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 11:43:24 -0800 (PST)
+ b=PUjpKaJUJyO3q+jVYb/Fpi3tceWFgc/ZmS/Hib0hw4cx2jWj8/8vbptvYQni9xDoo
+ ZVNj1IVOM2iaHiFQ46lTB1QXyBg0f7jzAOYQF28MnZtmKIvTJdBdp5elUS/bTGwWfG
+ lowt0Osv64XorqU8xQkSYFuHvd/9b7XEtKJGW9nVGSHi+/ue5KYyiv0EIPzPV8jDeB
+ yGc2uTTbaOtz4Z4Hgz0WbWU8wRFwk7HTIGBKzuPIGsH1BOd4OYo95IPos36kuGmBFo
+ stmzYKlY6q92h1ubMPuIoarLj2QFUflC8dl9lrdNquoxBW3aMjcKGFN1qKMHjmtCKu
+ 5Y3RfOcfReAuw==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4083a670d25so7939755e9.0
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 11:54:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700163802; x=1700768602;
+ d=1e100.net; s=20230601; t=1700164487; x=1700769287;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=C9yW9BSEA+NUeG8oCpSoW52Z/jHSvZ0u5WgT0nCySoE=;
- b=qbG9drP46jngd87hhEx+Bp3X4JH8LlSz+vxOq+536wcIajDATO3/CrNwWuUemJlycO
- 6riqArwp/I2QLX+3k/DXsK1XoTEbLSyqYe3BYU9OUy2tBt0m2liZdDnKGYcGEJ6IJisC
- y44QyTeOw3dJ+13QtvnCgkiE2t0aUjNQ7K10y+R7XcMkaXT+HXdtwVUs1WXvpsZauBRJ
- 7TVm5sEzze8YZOtFTwdRC83ODcLFQdnYauN9aw29pcX0OzA/YF/drVwShGHlH9Bpk0Gj
- AgrMQ4x18fqV8yMCHo0JCInYLja4mhQpuYEodfA9VQbrGFFy9iZEnFfKQrSVWts118Sv
- rlhg==
-X-Gm-Message-State: AOJu0YwAu/aF7nLxZG0mnfGb9BIwruwj+CBpGMl2kj9J/3Us+JVuIlYH
- DTNOg7trJw33lwoIJGtsweG489iQusvM9ld22hZ4gJLkF/8JGMQgMVrmy+ZSJwbGKlJ3WAJ5CCt
- tRhpbyD7eaaOVR8WO4Vcq5Rsk9xU0a20=
-X-Received: by 2002:a5d:6c61:0:b0:32d:8819:4620 with SMTP id
- r1-20020a5d6c61000000b0032d88194620mr13701202wrz.14.1700163802383; 
- Thu, 16 Nov 2023 11:43:22 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IESVynN+Amg+vyEhC1AwIw+z7gjDhC2oEQ/aFJXE5FsmSH86gYIluCH9KNi77AlZx4xroHpmQ==
-X-Received: by 2002:a5d:6c61:0:b0:32d:8819:4620 with SMTP id
- r1-20020a5d6c61000000b0032d88194620mr13701174wrz.14.1700163801908; 
- Thu, 16 Nov 2023 11:43:21 -0800 (PST)
+ bh=UKkThPq8yU7Jzaq+GUBKGuEw4f63Mi4AKgPnYbemwIM=;
+ b=OEp1OLqFO5i2zqNOPbmS5o9hs9LPplRTEHagoyxVmGXuP9tjGfFgyZnSljXqVIdJmQ
+ piOd9Cd+fwYQ5K64lBuMLaa7e2dMPyaMRMJYlOnodp5MPrTFqD/D1np5UKW8wA947ZvJ
+ t76sCTehofF7oGE9/bjPgx/FPxLTfTOCgEKmXjV2d07XME7w34M94GPWX4Od3WdOsC1+
+ E2YBFXXEeZ5+S4YnmIo9CyabNdyOXclWup0FVoGgYbAusJ+rXZxojvvDHxSPvDeZJ0dF
+ prfIf5tl6bJfPQ58dbA2/3sV+VYlpOY+emJmvRl98dz4pfosnerrEJyib3D0LysOEqzd
+ 1E1g==
+X-Gm-Message-State: AOJu0YxKlOQgyHz9TASfp13kwUGmrku4qJdq3VU0+u7gRiF1rtweYQdT
+ inZgWpOsf7bD2C/UmrZmYXWTWM1C5c81Ys/+BUW2VgOdo+ztW6JFftcCH0y3OvOljpAmErMXkBl
+ /BRnWEHJYnkEjw7dbD8sXmXzNOEUjOwk=
+X-Received: by 2002:a05:600c:21c2:b0:40a:463c:1d8c with SMTP id
+ x2-20020a05600c21c200b0040a463c1d8cmr13396495wmj.21.1700164487148; 
+ Thu, 16 Nov 2023 11:54:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF8lMvEKYv+IqQaskhq8m3zEOKj+FehRWaczYMwvUjFt9psbXLIFS3IfVrp45kRs1AqXblyHQ==
+X-Received: by 2002:a05:600c:21c2:b0:40a:463c:1d8c with SMTP id
+ x2-20020a05600c21c200b0040a463c1d8cmr13396482wmj.21.1700164486714; 
+ Thu, 16 Nov 2023 11:54:46 -0800 (PST)
 Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
  [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- s13-20020a5d6a8d000000b0032fbe5b1e45sm232827wru.61.2023.11.16.11.43.20
+ x16-20020a05600c21d000b004063cd8105csm4605940wmj.22.2023.11.16.11.54.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 11:43:21 -0800 (PST)
-Message-ID: <86182fad-ba42-46ba-a504-9f3f4deb34a4@canonical.com>
-Date: Thu, 16 Nov 2023 20:43:19 +0100
+ Thu, 16 Nov 2023 11:54:46 -0800 (PST)
+Message-ID: <a9f15562-d6fe-40d7-9fed-098061a5e523@canonical.com>
+Date: Thu, 16 Nov 2023 20:54:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/6] acpi: do not write ACPI tables on TARGET_QEMU_VIRT
+Subject: Re: [PATCH 3/6] risc-v: add support for QEMU provided ACPI tables
 Content-Language: en-US, de-DE
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Bin Meng <bmeng.cn@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Alexander Gendin <agendin@matrox.com>, Zong Li <zong.li@sifive.com>,
  Yu Chien Peter Lin <peterlin@andestech.com>,
@@ -93,10 +93,10 @@ Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
 References: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
- <20231115142355.123038-2-heinrich.schuchardt@canonical.com>
- <20231116183345.GA170968@bill-the-cat>
+ <20231115142355.123038-4-heinrich.schuchardt@canonical.com>
+ <20231116183549.GC170968@bill-the-cat>
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231116183345.GA170968@bill-the-cat>
+In-Reply-To: <20231116183549.GC170968@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -115,52 +115,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/16/23 19:33, Tom Rini wrote:
-> On Wed, Nov 15, 2023 at 03:23:50PM +0100, Heinrich Schuchardt wrote:
-> 
->> RISC-V QEMU provides the ACPI tables. We do not need to generate them
->> ourselves.
+On 11/16/23 19:35, Tom Rini wrote:
+> On Wed, Nov 15, 2023 at 03:23:52PM +0100, Heinrich Schuchardt wrote:
+>> If U-Boot provides ACPI tables on RISC-V QEMU, we need to copy what QEMU
+>> provides.
+>>
+>> Provide the qfw command to retrieve information from the QEMU firmware.
 >>
 >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >> ---
->>   lib/acpi/Makefile      | 2 +-
->>   lib/acpi/acpi_writer.c | 2 +-
->>   2 files changed, 2 insertions(+), 2 deletions(-)
+>>   board/emulation/qemu-riscv/Kconfig | 2 ++
+>>   lib/Kconfig                        | 2 +-
+>>   2 files changed, 3 insertions(+), 1 deletion(-)
 >>
->> diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
->> index c1c9675b5d..19fa6ac869 100644
->> --- a/lib/acpi/Makefile
->> +++ b/lib/acpi/Makefile
->> @@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) += acpi_table.o
->>   obj-y += acpi_writer.o
->>   
->>   # With QEMU the ACPI tables come from there, not from U-Boot
->> -ifndef CONFIG_QEMU
->> +ifeq ($(CONFIG_QEMU)$(CONFIG_TARGET_QEMU_VIRT),)
+>> diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
+>> index d56b4b5bc1..933b035991 100644
+>> --- a/board/emulation/qemu-riscv/Kconfig
+>> +++ b/board/emulation/qemu-riscv/Kconfig
+>> @@ -33,6 +33,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+>>   	def_bool y
+>>   	select GENERIC_RISCV
+>>   	select SUPPORT_SPL
+>> +	select CMD_QFW if GENERATE_ACPI_TABLE
+>> +	select QFW_MMIO if GENERATE_ACPI_TABLE
+>>   	imply AHCI
+>>   	imply SMP
+>>   	imply BOARD_LATE_INIT
+>> diff --git a/lib/Kconfig b/lib/Kconfig
+>> index 19649517a3..a94adc388f 100644
+>> --- a/lib/Kconfig
+>> +++ b/lib/Kconfig
+>> @@ -300,7 +300,7 @@ config SPL_ACPI
+>>   config GENERATE_ACPI_TABLE
+>>   	bool "Generate an ACPI (Advanced Configuration and Power Interface) table"
+>>   	depends on ACPI
+>> -	select QFW if QEMU
+>> +	select QFW if QEMU || TARGET_QEMU_VIRT
+>>   	help
+>>   	  The Advanced Configuration and Power Interface (ACPI) specification
+>>   	  provides an open standard for device configuration and management
 > 
-> The goal here is to say that we have been passed ACPI tables, and not to
-> generate them, yes? Lets just introduce a symbol which says that and
-> enable it as needed in both QEMU targets and others as needed please.
+> In this case we aren't "generating" the table, we're using the table
+> we've been passed, yes? I think that further shows the need to add a
+> symbol which means that, and use it where appropriate. Or am I
+> misunderstanding the GENERATE_ACPI_TABLE symbol?
+> 
 
-These are the conflicting function implementations:
+If you look at drivers/misc/qfw.c you will find, that we only read ACPI 
+tables created in QEMU if CONFIG_GNERATE_ACPI_TABLE=y. This contradicts 
+the long text of the configuration symbol.
 
-drivers/misc/qfw.c:158:ulong write_acpi_tables(ulong addr)
-lib/acpi/acpi_writer.c:72:ulong write_acpi_tables(ulong start_addr)
+CONFIG_GNERATE_ACPI_TABLE is used to decide if we publish a device-tree 
+in the EFI sub-system.
 
-drivers/misc/Makefile has:
+Simon tried to clean up EFI a bit in 53e8e6f98679 ("efi: x86: Correct 
+the condition for installing ACPI tables") but did not change cmd/bootefi.c.
 
-ifdef CONFIG_QFW
-obj-y += qfw.o
-
-but inside the driver we find another constraint:
-
-#if defined(CONFIG_GENERATE_ACPI_TABLE) && !defined(CONFIG_SANDBOX)
-
-So probably we should probably have a symbol which is set for
-
-CONFIG_QFW && CONFIG_GENERATE_ACPI_TABLE && !CONFIG_SANDBOX
-
-Maybe call it CONFIG_QFW_ACPI, "Read ACPI tables from QEMU".
+I would agree to calling the current usage of the symbol incoherent.
 
 Best regards
 
