@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2B08C072A2
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 00:34:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A269C072A2
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 00:54:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3128C842D0;
-	Thu, 16 Nov 2023 01:34:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EBBD87206;
+	Thu, 16 Nov 2023 01:54:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JSYgDNg/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="I3WalHMq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAD1E87206; Thu, 16 Nov 2023 01:34:54 +0100 (CET)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1222E8729D; Thu, 16 Nov 2023 01:54:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE7F586F18
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 01:34:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C048787278
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 01:54:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-5a0dc313058so37874a12.0
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 16:34:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700094875; x=1700699675; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NLCmNby7Pd+5AY143a4TrWOPYTkVsgfByZl/M8f1Cp0=;
- b=JSYgDNg/FRcwKezFaUMqP1XZWX3WOJ5hV1Ask2XiKRsdBCM/GKSJ5gsyqEr1TqPJcA
- 68dO5bdsKwxKpy5QiUizjgayFg1SLW3/G6T3sKR5ePN3W9kD7oy7yrOIqtqhs61olLkk
- EWiTYquXvIJjzJn+9LmvORwpSwYLp7IeQbO/llQWZIAyIq6c6m16spDGVMV+UH8ASwic
- xhF3md5/e3OuICFPmC7C8NPJA+ktIEc3XH65ita5DsuZjFCgPUReeJQgA/aAU5geuvpM
- cyxPg2UOh5J4BdlfMh/jpMrTBujYRvJy3DusfFzehhlq+KEhPOaGKNEb+ZG95HC1W+Ck
- SYzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700094875; x=1700699675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NLCmNby7Pd+5AY143a4TrWOPYTkVsgfByZl/M8f1Cp0=;
- b=qn6Up2ERJa406f66zn1sl1reF7TUOFonVh+iuRvuFsw5X5iqCX/9U7EoXFawoFs7lM
- olp/1p0/WgUPO3uZWrzJl4VsTdH02qknaytj7ml2RuL/YzfSRvQJMDvDplLqPl8H4a0W
- xqO2Ll5aoX+Y11Tr16YBLpNyOK55wBmpwjpou2w0Zl9AmzLhaYFCG2dAFXSSxvV1gpWL
- 3IhtVd58ZwO7R141JuuF9tt/4darly9yehONS2BhUe2kwoATUTk8Aj63OVyAX6MruCov
- JIALcJt7AI3bkffrtu0jpRHxUIoeY+DjCYl9Sb+1X4uOqsrIwqJNC2pnxrsoY2VbJr+o
- 1YNA==
-X-Gm-Message-State: AOJu0YwT1adgcYhERLFc3VtgHNWHRjegNHtav5Qs9e67jHsphSWVqXWL
- JefrIS9gy7esaXYmly3+TQl1vRFQIsiuuEiHwto=
-X-Google-Smtp-Source: AGHT+IFAVK4vX1HGXy0RXYmbzdHXRq9+EEhPShRdB8IBgEZIL7B2S43WoQyTjYwm6YOB2+s8HvTNdfNpv1UkZB9NA68=
-X-Received: by 2002:a05:6a20:4290:b0:187:9486:901e with SMTP id
- o16-20020a056a20429000b001879486901emr1992757pzj.0.1700094874896; Wed, 15 Nov
- 2023 16:34:34 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700096074; x=1700700874; i=xypron.glpk@gmx.de;
+ bh=Fmq1N3aKOSQ2wyfekk2ZTViNeL5Abn+wm0bCpZJvYMU=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=I3WalHMqeczSR0lJeX6ndwNzlDaD1c4Cr2M1TpgTnOobb4/zmSQX7x3+PF/mxD1F
+ /tEvKGq97xPzrs1H+WRHYqPLxDZ+mpqsX5oPkbfqwxFS03IaWIpcU9sga0tNjJroP
+ 1MSRFX4bCY6lPXNB6T9YPK17iydHEx99oBX/OvxXroraeuwchJc2MoGZFNxf3yyzV
+ BSpisVzDwxJwBG8XfJ25XEyazRM4Qg1qv3qBa2PQ2mFokWSHPSNbBgG/y2STwY42f
+ 1FSAV+/ZiN/IiPkNE5YTBBUCiHYHIjau75kvImm8A0hx+RUBRJbZv083KbPQShQ0e
+ F+P1/Sz5WZlY6hM9qg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2wKq-1r4WZy1loy-003K8u; Thu, 16
+ Nov 2023 01:54:34 +0100
+Message-ID: <8b4de31e-4f4e-4e21-ab33-2ca64b745b54@gmx.de>
+Date: Thu, 16 Nov 2023 01:54:26 +0100
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <CAOMZO5C+Pvv429sHPyKuznyvdPv217q=a8uTeNNTSyVmn1EoXw@mail.gmail.com>
- <20231109001746.GX6601@bill-the-cat>
- <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5DtKc72Zv+Q6J3P6JY8jWVbu7KDbr-AViw1hPcm0N92QQ@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 15 Nov 2023 21:34:22 -0300
-Message-ID: <CAOMZO5C0ZR=DgXkGHyG-Fgt9HEr3Z_x4qhgkfmObBpTTXUmpAQ@mail.gmail.com>
-Subject: Re: inconsistent wget behavior
-To: Tom Rini <trini@konsulko.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: Tim Harvey <tharvey@gateworks.com>, Marek Vasut <marex@denx.de>,
- u-boot <u-boot@lists.denx.de>, 
- Duncan Hare <DuncanCHare@yahoo.com>, Simon Glass <sjg@chromium.org>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Michal Simek <michal.simek@xilinx.com>, Ramon Fried <rfried.dev@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Bug in distro_efi_boot()
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:kXUK9NcZgTbJtoXO/JNOhssGTFVZxsfeKqmBc2Yuo7RFrDfAXxK
+ CIPcP0lhgNfJxI8ge5rwbpRHP3TkD0XkPTTs2EequAjzzL1ZSFuI45MDO6Z08WwrrrcWV/l
+ 2oMLLUlSVYgeqc2tqF2kw1tnHVtrBUumin+DG3DpmgV1DoyJZ5t76ZDNJ7g1V5wkH+WF37z
+ onljHYXr0TmzafwvoHFSg==
+UI-OutboundReport: notjunk:1;M01:P0:m04FDUTIL3Q=;UF8q1GJsV3H5BwGIO6x2CrMRh54
+ bWo/L+zfPoSbMQQIwa8YDnSrKWkzsEA30SFBGfxS6bn/OVS/wQW/luXQ2lk/0+3EA4f7Mb8yK
+ zkGkPPARQvq+2g0J/sYC5C5dJ8rcGFju0wLM/PPjgqMokEUWyw1nWQWTsGTns/OGuR/veoIoY
+ JQML6P9VemjUcPf/Gj/Opp7i8n5BosF3G+K06zrqg23bpS/P1sg2PnD3kwtzBTZT+8MXgOKdv
+ ogBR1gfF7arNDsvMKSe5+RV4WrM0ihjEXS5vwMCgmAOVBdLcaDoom+H63FZjsfv/IY5XwKbeJ
+ 1S2MXMXxrD4bVfdEpTU+aD3n1mXcByYSnAMu2nKeO//Xsc0+XZ9K5Dg3ExVqmLxrPxJYwdJl3
+ b2TnAlrrQm7/lqwatSYwJU+pMT8RKfajawBzX0PSvBVuypIhwHJBYd9R9+wSzLmvfZ7zXumJf
+ jO8ougQ4I+rdN6OJjQoDyHgCZMikzymcCcZtO3hEI//DxIjfLi/HWN9AKfB3e1tSSEnkoyhLA
+ 5O46yRpzsq9L9JZ8/KepiBhAySlrp5NXwi1icMB3mmtf7U0VTyca1sQULLrr4ZEjlTEMUX4pd
+ 88aFWw0B+FIlpGh5P70U8fpn8UnK4Qjxc7gBFuJYUlIEekG4eg+jn8TJr/UAXN3cki9XIc+i6
+ S8IIt/iJh+L5nwcvbGSrb+Q2SztjwN8PAOTL1lCUlG+3SCHxjmWbp2iP36uigkg2WUlfKury5
+ kqsCd8gYoX7n4uFDz7OdQxpHXZyNYRMormj4dgBIvTkSybqKRXUyf3GYZsl9DwBA/RSn2B3+j
+ WvqojF/upeOPviXw7fxElpZyeBjg5zmndcTjdjNYRZA1F02206khswU1QkHYqNBG4U1lvmgF1
+ /wYDUn6DGKyZaGC/H/jpvklZSbt2GfyLX4RK/R1wRI0HN62oBi19MoK4cCauydtlh1moW1P/c
+ 0jF1RQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,24 +86,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Paul,
+Hello Simon,
 
-On Wed, Nov 8, 2023 at 10:24=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
+In function distro_efi_boot() the bootefi command is called. The second
+argument should only be passed if a device-tree has actually been
+loaded. But this is not what the code does:
 
-> I was not able to see a failure when using "tftp" to transfer the same
-> 420MB file.
->
-> The number of bytes transferred and md5sum always match, so this is a wge=
-t bug.
+For network boot methods the value of $fdt_addr_r is passed as second
+parameter though possibly no file has been loaded there. We should not
+pass a second parameter to bootefi in this case if no device-tree was
+loaded. The bootefi command will fall back to the U-Boot device-tree in
+this case.
 
-There was another user who confirmed the same issue:
+For other boot methods gd->fdt_blob is passed as second parameter. We
+should not pass a second parameter in this case either.
 
-https://lore.kernel.org/u-boot/CADQ0-X_cj1ECn67U3sefcZ-Jm4OBSYmZkA+JaZRCa3e=
-kq84RaA@mail.gmail.com/
+Best regards
 
-Could you please take a look at this bug?
-
-wget is not reliable at the moment.
-
-Thanks
+Heinrich
