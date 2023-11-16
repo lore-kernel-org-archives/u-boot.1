@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5284C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 09:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818AAC197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 09:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 142CD87495;
-	Thu, 16 Nov 2023 10:00:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CEDF58748B;
+	Thu, 16 Nov 2023 10:00:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lhR5xk6x";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GkAewv0h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CF8F87490; Thu, 16 Nov 2023 10:00:01 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 39FE787465; Thu, 16 Nov 2023 10:00:05 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95BA887465
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 09:59:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7D3987478
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 09:59:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9c3aec5f326so347225866b.1
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 00:59:50 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-53e751aeb3cso762181a12.2
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 00:59:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700125190; x=1700729990; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1700125191; x=1700729991; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2jtv3SgvGRynGh7XD5GlCL/vSnLQmLYqUr+h60onF4I=;
- b=lhR5xk6xaljpQ5fbsDdBxdYe6XsU1yqLGMQuztQdegO58BqLHoz8ZCki5rN7yjxsnq
- 4e8z5aZpTVvCJLg/SKEAL14rQag8d6pxTCfezF2YvHHQe6SMDvvHDEuFbIczaCsYH2zy
- DNO2c/YngJYTcoM8VpBu05lfu+Hh7xwUvgZLaCO6mqYH4EkyCiRiMGV9HJyLPQ03gOs2
- 1AijQO/lZ6EOeecHnrh8kWlGJJHLmfUPEJco4D0Q1QXjSppBhiZf3WlpDvSmnLzMO1cj
- Xa9wWCr3CrDdk0pcKnMCucBZ8/M728C7KzwuhGazN0+hKjjbITYgz7Lyt6aXRlr3RZWY
- Igzg==
+ bh=KE2nH/+TRn1RT60G9cDSadRAcNlO/tgTcDfwFVLQiy4=;
+ b=GkAewv0hY6FvvtAp78TOsjuk2jtiHiCpH1dJrz3kgnXnlALjQN9yae3cCrNkhOtLk+
+ gPx60yrMCab0wfMUjNLG//0e3T6ph54oTkfqZ+Hqnv/jyQjKIELGeMow9g64aEIL2Wa1
+ sH/Kgp/B1bvnlHlgbCiW99O5GOfpcto8Yoa/qaN4+gmMXFjTtdfOXTXBYYwFmYtolTdN
+ Lb65Cyk+aaOwzEuNkhJysWdDyPWQbv1YNX8xPztFL5sBW6Uh5MRob3j4KApRgF4sC0BM
+ WiG6dD0VYqkZmcBJ+W+REzkiistcgN7t5prTfqCf1BAh57uamJBOBy9W/siuz1KiQypp
+ 0Sbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700125190; x=1700729990;
+ d=1e100.net; s=20230601; t=1700125191; x=1700729991;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2jtv3SgvGRynGh7XD5GlCL/vSnLQmLYqUr+h60onF4I=;
- b=ddePGLii6C2GjAFk7VDKfIoYzQd0mt1UFnta2rufhMwdJOwkoo2whTzfuPgtf1NVpV
- quMrX7lFGIG2uS/NPqOEBoVfLYHDdiSYS0QYv8j0TTgLs4ro6bw4pbbaoZW9gfDSUpHT
- PlGDcLax1Rm3Xh4ikye7+2Msvi/I2Ge49IRaEuC6ae5HVoKJWp3bjFnKVOHa535UGPY/
- ViqpJg26ZNS9EiG4xDfNB0+HXEN46A7Q4Fd1cFeAn9GHEdB09cAK7THOusFyRHaGu9qJ
- Uxx5pFnVL1mTWYtsynBCuHoiGSoWCs3phb33VuYm/jriWrZvJov9nCPttzg/rZYjTOPB
- qcgQ==
-X-Gm-Message-State: AOJu0Yy22G7UH4jnzExy5OV2wsA/Oi2Fkn8ZjBAlj3fhAKsqrXpSf1D9
- hQ1nvN9car2I9R1MCG+GBNw=
-X-Google-Smtp-Source: AGHT+IGP0yQeTkkrqSjwSjbswUAKWrywtwWrjnR20YJwGKrmM9DE5i7ZgyTButeEX2/I/DNbBnTk+w==
-X-Received: by 2002:a17:906:7157:b0:9e3:b158:6fb8 with SMTP id
- z23-20020a170906715700b009e3b1586fb8mr965422ejj.32.1700125190109; 
- Thu, 16 Nov 2023 00:59:50 -0800 (PST)
+ bh=KE2nH/+TRn1RT60G9cDSadRAcNlO/tgTcDfwFVLQiy4=;
+ b=UsPyaJgzL4san9siFQcGs7QuVQ6AwPjYeH3gPIdsa1GtBTPe9qAZpCVrrDbNC7GY+i
+ iCVv/XyXSGzGfz5BRlcaqUvA3t0X2BQ7TIExJjSkU34RLyqgGS6g2Z0uLjy3lep0NFKT
+ lBkrtq13q+CbNOK/1zuTYWJejZfHlE5PdywjZ/0SkBrp1/yDs6IXlix+MATUKaZlLkhL
+ jJNBuWBnJjMXyHGtOHpul9Q7CGjjicwLqNxMC47YSOjVrNgHPnVputTAiI1jlIr+OECP
+ ygJ3J6sbimNjIJFvjfcxqrZDSdoePo4Qgl1OjPB96zH1mmTbWKtZ1DA9iPq/prhrZgc0
+ YZyw==
+X-Gm-Message-State: AOJu0YyFwf4gHkjff8RZiVuLQlN9DrDB2YDcSXWoTWdgc3jYx+MoD5j+
+ hsI51zUC6WwESZWsMLT4hZvmtGdQOTo=
+X-Google-Smtp-Source: AGHT+IG6OvaftiQ9RHQ3QWJMiH3UHNR1F8/E4j3SaXBj/Z1JuUzGPuFS5C4owRMT9jrpzF+pXAUN8Q==
+X-Received: by 2002:a17:906:b182:b0:9c0:2897:1588 with SMTP id
+ w2-20020a170906b18200b009c028971588mr11055777ejy.17.1700125191269; 
+ Thu, 16 Nov 2023 00:59:51 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- o21-20020a170906601500b009e655c77a53sm8093259ejj.132.2023.11.16.00.59.48
+ o21-20020a170906601500b009e655c77a53sm8093259ejj.132.2023.11.16.00.59.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 00:59:49 -0800 (PST)
+ Thu, 16 Nov 2023 00:59:50 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/3] ARM: tegra: clock: support get and set rate for simple
- PLL
-Date: Thu, 16 Nov 2023 10:59:29 +0200
-Message-Id: <20231116085931.411707-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/3] ARM: tegra30: clock: implement PLLD2 support
+Date: Thu, 16 Nov 2023 10:59:30 +0200
+Message-Id: <20231116085931.411707-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231116085931.411707-1-clamor95@gmail.com>
 References: <20231116085931.411707-1-clamor95@gmail.com>
@@ -92,280 +91,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simple PLL clocks like PLLD2 were omitted since they do not share common
-4 register structure with main clocks. Such clocks are contained in simple
-PLL group. Only clock_start_pll function supported them. This patch expands
-this support on clock_set_rate and clock_get_rate which should make
-simple PLL clocks equal to main PLL clocks.
+PLLD2 is a simple clock (controlled by 2 registers) and appears starting
+from T30. Primary use of PLLD2 is as main HDMI clock parent.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/mach-tegra/clock.c          | 75 +++++++++++++++++++++-------
- arch/arm/mach-tegra/tegra114/clock.c | 15 ++++++
- arch/arm/mach-tegra/tegra124/clock.c | 12 +++--
- arch/arm/mach-tegra/tegra20/clock.c  | 15 ++++++
- arch/arm/mach-tegra/tegra210/clock.c | 15 ++++++
- arch/arm/mach-tegra/tegra30/clock.c  | 15 ++++++
- 6 files changed, 126 insertions(+), 21 deletions(-)
+ arch/arm/include/asm/arch-tegra/clk_rst.h        | 3 +--
+ arch/arm/include/asm/arch-tegra30/clock-tables.h | 2 +-
+ arch/arm/mach-tegra/clock.c                      | 3 +++
+ arch/arm/mach-tegra/tegra30/clock.c              | 7 +++++++
+ 4 files changed, 12 insertions(+), 3 deletions(-)
 
+diff --git a/arch/arm/include/asm/arch-tegra/clk_rst.h b/arch/arm/include/asm/arch-tegra/clk_rst.h
+index 2359e142fb..04910d594e 100644
+--- a/arch/arm/include/asm/arch-tegra/clk_rst.h
++++ b/arch/arm/include/asm/arch-tegra/clk_rst.h
+@@ -174,8 +174,7 @@ struct clk_rst_ctlr {
+ 	uint crc_audio_sync_clk_i2s4;	/* _AUDIO_SYNC_CLK_I2S4_0, 0x4B0 */
+ 	uint crc_audio_sync_clk_spdif;	/* _AUDIO_SYNC_CLK_SPDIF_0, 0x4B4 */
+ 
+-	uint crc_plld2_base;		/* _PLLD2_BASE_0, 0x4B8 */
+-	uint crc_plld2_misc;		/* _PLLD2_MISC_0, 0x4BC */
++	struct clk_pll_simple plld2;	/* _PLLD2_BASE_0, 0x4B8 */
+ 	uint crc_utmip_pll_cfg3;	/* _UTMIP_PLL_CFG3_0, 0x4C0 */
+ 	uint crc_pllrefe_base;		/* _PLLREFE_BASE_0, 0x4C4 */
+ 	uint crc_pllrefe_misc;		/* _PLLREFE_MISC_0, 0x4C8 */
+diff --git a/arch/arm/include/asm/arch-tegra30/clock-tables.h b/arch/arm/include/asm/arch-tegra30/clock-tables.h
+index 6c899ff64c..5ebcbc2c9a 100644
+--- a/arch/arm/include/asm/arch-tegra30/clock-tables.h
++++ b/arch/arm/include/asm/arch-tegra30/clock-tables.h
+@@ -23,6 +23,7 @@ enum clock_id {
+ 	CLOCK_ID_XCPU = CLOCK_ID_FIRST_SIMPLE,
+ 	CLOCK_ID_EPCI,
+ 	CLOCK_ID_SFROM32KHZ,
++	CLOCK_ID_DISPLAY2,
+ 
+ 	/* These are the base clocks (inputs to the Tegra SOC) */
+ 	CLOCK_ID_32KHZ,
+@@ -30,7 +31,6 @@ enum clock_id {
+ 	CLOCK_ID_CLK_M,
+ 
+ 	CLOCK_ID_COUNT,	/* number of PLLs */
+-	CLOCK_ID_DISPLAY2,	/* Tegra3, placeholder */
+ 	CLOCK_ID_NONE = -1,
+ };
+ 
 diff --git a/arch/arm/mach-tegra/clock.c b/arch/arm/mach-tegra/clock.c
-index 966009f375..7f31630a23 100644
+index 7f31630a23..575da2bdb5 100644
 --- a/arch/arm/mach-tegra/clock.c
 +++ b/arch/arm/mach-tegra/clock.c
-@@ -128,14 +128,14 @@ unsigned long clock_start_pll(enum clock_id clkid, u32 divm, u32 divn,
- 	struct clk_pll_simple *simple_pll = NULL;
- 	u32 misc_data, data;
+@@ -768,6 +768,9 @@ void clock_init(void)
+ 	pll_rate[CLOCK_ID_SFROM32KHZ] = 32768;
+ 	pll_rate[CLOCK_ID_OSC] = clock_get_rate(CLOCK_ID_OSC);
+ 	pll_rate[CLOCK_ID_CLK_M] = clock_get_rate(CLOCK_ID_CLK_M);
++#ifndef CONFIG_TEGRA20
++	pll_rate[CLOCK_ID_DISPLAY2] = clock_get_rate(CLOCK_ID_DISPLAY2);
++#endif
  
--	if (clkid < (enum clock_id)TEGRA_CLK_PLLS) {
-+	if (clkid < (enum clock_id)TEGRA_CLK_PLLS)
- 		pll = get_pll(clkid);
--	} else {
-+	else
- 		simple_pll = clock_get_simple_pll(clkid);
--		if (!simple_pll) {
--			debug("%s: Uknown simple PLL %d\n", __func__, clkid);
--			return 0;
--		}
-+
-+	if (!simple_pll && !pll) {
-+		log_err("Unknown PLL id %d\n", clkid);
-+		return 0;
- 	}
- 
- 	/*
-@@ -542,7 +542,8 @@ unsigned int __weak clk_m_get_rate(unsigned int parent_rate)
- 
- unsigned clock_get_rate(enum clock_id clkid)
- {
--	struct clk_pll *pll;
-+	struct clk_pll *pll = NULL;
-+	struct clk_pll_simple *simple_pll = NULL;
- 	u32 base, divm;
- 	u64 parent_rate, rate;
- 	struct clk_pll_info *pllinfo = &tegra_pll_info_table[clkid];
-@@ -554,10 +555,20 @@ unsigned clock_get_rate(enum clock_id clkid)
- 	if (clkid == CLOCK_ID_CLK_M)
- 		return clk_m_get_rate(parent_rate);
- 
--	pll = get_pll(clkid);
--	if (!pll)
-+	if (clkid < (enum clock_id)TEGRA_CLK_PLLS)
-+		pll = get_pll(clkid);
-+	else
-+		simple_pll = clock_get_simple_pll(clkid);
-+
-+	if (!simple_pll && !pll) {
-+		log_err("Unknown PLL id %d\n", clkid);
- 		return 0;
--	base = readl(&pll->pll_base);
-+	}
-+
-+	if (pll)
-+		base = readl(&pll->pll_base);
-+	else
-+		base = readl(&simple_pll->pll_base);
- 
- 	rate = parent_rate * ((base >> pllinfo->n_shift) & pllinfo->n_mask);
- 	divm = (base >> pllinfo->m_shift) & pllinfo->m_mask;
-@@ -599,12 +610,24 @@ unsigned clock_get_rate(enum clock_id clkid)
- int clock_set_rate(enum clock_id clkid, u32 n, u32 m, u32 p, u32 cpcon)
- {
- 	u32 base_reg, misc_reg;
--	struct clk_pll *pll;
-+	struct clk_pll *pll = NULL;
-+	struct clk_pll_simple *simple_pll = NULL;
- 	struct clk_pll_info *pllinfo = &tegra_pll_info_table[clkid];
- 
--	pll = get_pll(clkid);
-+	if (clkid < (enum clock_id)TEGRA_CLK_PLLS)
-+		pll = get_pll(clkid);
-+	else
-+		simple_pll = clock_get_simple_pll(clkid);
-+
-+	if (!simple_pll && !pll) {
-+		log_err("Unknown PLL id %d\n", clkid);
-+		return 0;
-+	}
- 
--	base_reg = readl(&pll->pll_base);
-+	if (pll)
-+		base_reg = readl(&pll->pll_base);
-+	else
-+		base_reg = readl(&simple_pll->pll_base);
- 
- 	/* Set BYPASS, m, n and p to PLL_BASE */
- 	base_reg &= ~(pllinfo->m_mask << pllinfo->m_shift);
-@@ -631,21 +654,37 @@ int clock_set_rate(enum clock_id clkid, u32 n, u32 m, u32 p, u32 cpcon)
- 	}
- 
- 	base_reg |= PLL_BYPASS_MASK;
--	writel(base_reg, &pll->pll_base);
-+	if (pll)
-+		writel(base_reg, &pll->pll_base);
-+	else
-+		writel(base_reg, &simple_pll->pll_base);
- 
- 	/* Set cpcon (KCP) to PLL_MISC */
--	misc_reg = readl(&pll->pll_misc);
-+	if (pll)
-+		misc_reg = readl(&pll->pll_misc);
-+	else
-+		misc_reg = readl(&simple_pll->pll_misc);
-+
- 	misc_reg &= ~(pllinfo->kcp_mask << pllinfo->kcp_shift);
- 	misc_reg |= cpcon << pllinfo->kcp_shift;
--	writel(misc_reg, &pll->pll_misc);
-+	if (pll)
-+		writel(misc_reg, &pll->pll_misc);
-+	else
-+		writel(misc_reg, &simple_pll->pll_misc);
- 
- 	/* Enable PLL */
- 	base_reg |= PLL_ENABLE_MASK;
--	writel(base_reg, &pll->pll_base);
-+	if (pll)
-+		writel(base_reg, &pll->pll_base);
-+	else
-+		writel(base_reg, &simple_pll->pll_base);
- 
- 	/* Disable BYPASS */
- 	base_reg &= ~PLL_BYPASS_MASK;
--	writel(base_reg, &pll->pll_base);
-+	if (pll)
-+		writel(base_reg, &pll->pll_base);
-+	else
-+		writel(base_reg, &simple_pll->pll_base);
- 
- 	return 0;
- }
-diff --git a/arch/arm/mach-tegra/tegra114/clock.c b/arch/arm/mach-tegra/tegra114/clock.c
-index 8ad71f590f..9a8c10e3d6 100644
---- a/arch/arm/mach-tegra/tegra114/clock.c
-+++ b/arch/arm/mach-tegra/tegra114/clock.c
-@@ -768,6 +768,21 @@ void arch_timer_init(void)
- 	debug("%s: TSC CNTCR = 0x%08X\n", __func__, val);
- }
- 
-+struct clk_pll_simple *clock_get_simple_pll(enum clock_id clkid)
-+{
-+	struct clk_rst_ctlr *clkrst =
-+			(struct clk_rst_ctlr *)NV_PA_CLK_RST_BASE;
-+
-+	switch (clkid) {
-+	case CLOCK_ID_XCPU:
-+	case CLOCK_ID_EPCI:
-+	case CLOCK_ID_SFROM32KHZ:
-+		return &clkrst->crc_pll_simple[clkid - CLOCK_ID_FIRST_SIMPLE];
-+	default:
-+		return NULL;
-+	}
-+}
-+
- struct periph_clk_init periph_clk_init_table[] = {
- 	{ PERIPH_ID_SBC1, CLOCK_ID_PERIPH },
- 	{ PERIPH_ID_SBC2, CLOCK_ID_PERIPH },
-diff --git a/arch/arm/mach-tegra/tegra124/clock.c b/arch/arm/mach-tegra/tegra124/clock.c
-index ca9549a318..ed8b6d9638 100644
---- a/arch/arm/mach-tegra/tegra124/clock.c
-+++ b/arch/arm/mach-tegra/tegra124/clock.c
-@@ -1189,10 +1189,16 @@ struct clk_pll_simple *clock_get_simple_pll(enum clock_id clkid)
- 	struct clk_rst_ctlr *clkrst =
- 			(struct clk_rst_ctlr *)NV_PA_CLK_RST_BASE;
- 
--	if (clkid == CLOCK_ID_DP)
-+	switch (clkid) {
-+	case CLOCK_ID_XCPU:
-+	case CLOCK_ID_EPCI:
-+	case CLOCK_ID_SFROM32KHZ:
-+		return &clkrst->crc_pll_simple[clkid - CLOCK_ID_FIRST_SIMPLE];
-+	case CLOCK_ID_DP:
- 		return &clkrst->plldp;
--
--	return NULL;
-+	default:
-+		return NULL;
-+	}
- }
- 
- struct periph_clk_init periph_clk_init_table[] = {
-diff --git a/arch/arm/mach-tegra/tegra20/clock.c b/arch/arm/mach-tegra/tegra20/clock.c
-index abd6e3917a..109b73bfbe 100644
---- a/arch/arm/mach-tegra/tegra20/clock.c
-+++ b/arch/arm/mach-tegra/tegra20/clock.c
-@@ -792,6 +792,21 @@ int tegra_plle_enable(void)
- 	return 0;
- }
- 
-+struct clk_pll_simple *clock_get_simple_pll(enum clock_id clkid)
-+{
-+	struct clk_rst_ctlr *clkrst =
-+			(struct clk_rst_ctlr *)NV_PA_CLK_RST_BASE;
-+
-+	switch (clkid) {
-+	case CLOCK_ID_XCPU:
-+	case CLOCK_ID_EPCI:
-+	case CLOCK_ID_SFROM32KHZ:
-+		return &clkrst->crc_pll_simple[clkid - CLOCK_ID_FIRST_SIMPLE];
-+	default:
-+		return NULL;
-+	}
-+}
-+
- struct periph_clk_init periph_clk_init_table[] = {
- 	{ PERIPH_ID_SPI1, CLOCK_ID_PERIPH },
- 	{ PERIPH_ID_SBC1, CLOCK_ID_PERIPH },
-diff --git a/arch/arm/mach-tegra/tegra210/clock.c b/arch/arm/mach-tegra/tegra210/clock.c
-index 900537afbe..74817e0440 100644
---- a/arch/arm/mach-tegra/tegra210/clock.c
-+++ b/arch/arm/mach-tegra/tegra210/clock.c
-@@ -1266,6 +1266,21 @@ int tegra_plle_enable(void)
- 	return 0;
- }
- 
-+struct clk_pll_simple *clock_get_simple_pll(enum clock_id clkid)
-+{
-+	struct clk_rst_ctlr *clkrst =
-+			(struct clk_rst_ctlr *)NV_PA_CLK_RST_BASE;
-+
-+	switch (clkid) {
-+	case CLOCK_ID_XCPU:
-+	case CLOCK_ID_EPCI:
-+	case CLOCK_ID_SFROM32KHZ:
-+		return &clkrst->crc_pll_simple[clkid - CLOCK_ID_FIRST_SIMPLE];
-+	default:
-+		return NULL;
-+	}
-+}
-+
- struct periph_clk_init periph_clk_init_table[] = {
- 	{ PERIPH_ID_SBC1, CLOCK_ID_PERIPH },
- 	{ PERIPH_ID_SBC2, CLOCK_ID_PERIPH },
+ 	debug("Osc = %d\n", pll_rate[CLOCK_ID_OSC]);
+ 	debug("CLKM = %d\n", pll_rate[CLOCK_ID_CLK_M]);
 diff --git a/arch/arm/mach-tegra/tegra30/clock.c b/arch/arm/mach-tegra/tegra30/clock.c
-index 698c7ab956..7bbe70921f 100644
+index 7bbe70921f..0af8cde8c6 100644
 --- a/arch/arm/mach-tegra/tegra30/clock.c
 +++ b/arch/arm/mach-tegra/tegra30/clock.c
-@@ -871,6 +871,21 @@ int tegra_plle_enable(void)
- 	return 0;
- }
+@@ -438,6 +438,8 @@ struct clk_pll_info tegra_pll_info_table[CLOCK_ID_PLL_COUNT] = {
+ 	  .lock_ena = 9,  .lock_det = 11, .kcp_shift = 6, .kcp_mask = 3, .kvco_shift = 0, .kvco_mask = 1 },	/* PLLE */
+ 	{ .m_shift = 0, .m_mask = 0x0F, .n_shift = 8, .n_mask = 0x3FF, .p_shift = 20, .p_mask = 0x07,
+ 	  .lock_ena = 18, .lock_det = 27, .kcp_shift = 8, .kcp_mask = 0xF, .kvco_shift = 4, .kvco_mask = 0xF },	/* PLLS (RESERVED) */
++	{ .m_shift = 0, .m_mask = 0x1F, .n_shift = 8, .n_mask = 0x3FF, .p_shift = 20, .p_mask = 0x07,
++	  .lock_ena = 22, .lock_det = 27, .kcp_shift = 8, .kcp_mask = 0xF, .kvco_shift = 4, .kvco_mask = 0xF },	/* PLLD2 */
+ };
  
-+struct clk_pll_simple *clock_get_simple_pll(enum clock_id clkid)
-+{
-+	struct clk_rst_ctlr *clkrst =
-+			(struct clk_rst_ctlr *)NV_PA_CLK_RST_BASE;
-+
-+	switch (clkid) {
-+	case CLOCK_ID_XCPU:
-+	case CLOCK_ID_EPCI:
-+	case CLOCK_ID_SFROM32KHZ:
-+		return &clkrst->crc_pll_simple[clkid - CLOCK_ID_FIRST_SIMPLE];
-+	default:
-+		return NULL;
-+	}
-+}
-+
- struct periph_clk_init periph_clk_init_table[] = {
- 	{ PERIPH_ID_SBC1, CLOCK_ID_PERIPH },
- 	{ PERIPH_ID_SBC2, CLOCK_ID_PERIPH },
+ /*
+@@ -654,6 +656,9 @@ enum clock_id clk_id_to_pll_id(int clk_id)
+ 	case TEGRA30_CLK_PLL_D:
+ 	case TEGRA30_CLK_PLL_D_OUT0:
+ 		return CLOCK_ID_DISPLAY;
++	case TEGRA30_CLK_PLL_D2:
++	case TEGRA30_CLK_PLL_D2_OUT0:
++		return CLOCK_ID_DISPLAY2;
+ 	case TEGRA30_CLK_PLL_X:
+ 		return CLOCK_ID_XCPU;
+ 	case TEGRA30_CLK_PLL_E:
+@@ -881,6 +886,8 @@ struct clk_pll_simple *clock_get_simple_pll(enum clock_id clkid)
+ 	case CLOCK_ID_EPCI:
+ 	case CLOCK_ID_SFROM32KHZ:
+ 		return &clkrst->crc_pll_simple[clkid - CLOCK_ID_FIRST_SIMPLE];
++	case CLOCK_ID_DISPLAY2:
++		return &clkrst->plld2;
+ 	default:
+ 		return NULL;
+ 	}
 -- 
 2.40.1
 
