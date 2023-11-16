@@ -4,46 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F406C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 10:18:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B46C197A0
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 10:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0856287477;
-	Thu, 16 Nov 2023 11:18:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 5325987465;
+	Thu, 16 Nov 2023 11:23:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="D91w49ex";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19E3A871D0; Thu, 16 Nov 2023 11:18:25 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id F32D487477; Thu, 16 Nov 2023 11:23:00 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 491B487438
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 11:18:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id F112F87438
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 11:22:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3AGAI1D4033286;
- Thu, 16 Nov 2023 18:18:01 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 16 Nov 2023
- 18:17:58 +0800
-From: Randolph <randolph@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- Randolph <randolph@andestech.com>
-Subject: [PATCH V2] riscv: binman: fix the load field format
-Date: Thu, 16 Nov 2023 18:17:50 +0800
-Message-ID: <20231116101750.2624046-1-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4ACDF3FBFC; 
+ Thu, 16 Nov 2023 10:22:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1700130178;
+ bh=h5Cfm08sxNlKylmtmRgJhP02r6Hlr714xLthBk7rmZs=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=D91w49exVn2fqH5WEDU3PKem82aukDlUurw51sgloWDGrOlfXzPJixPjOO0x1cezI
+ DuLqq5LH5GHEM4MOHu+eGaqp6DmSE9pVZgdOGMY9gMnCeELw/p4dxIqewr5kIpUO45
+ 1uL3DKwsHL4rrbeUGDUNpGJyFgdCUj7t84H+iqbNBLmvR8bqrXq6+s/XiJ2AzzWIM7
+ 4ye+telmmjhPPAMBlY2GaFfpiiVSTxlbMDqUQ4w6LRc4DoLnHySvXqC3kfeE13TDi3
+ dtY8ow6pjQr/HaztMm7QHOsToexZ/5Ezz8DmRLWuyjeK2rNPTl3rdTYDeXukRWQ9HS
+ xVpJRLNk2x0HQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Lukas Auer <lukas.auer@aisec.fraunhofer.de>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] risc-v: qemu: imply NVME_PCI
+Date: Thu, 16 Nov 2023 11:22:51 +0100
+Message-Id: <20231116102251.53365-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.173]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3AGAI1D4033286
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,59 +69,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Using /bits/64 prefix for 64bits address
+CONFIG_NVME=y without CONFIG_NVME_PCI=y does not provide working NVMe
+support. Instead of implying CONFIG_NVME we must imply CONFIG_NVME_PCI
+which will select CONFIG_NVME.
 
-Signed-off-by: Randolph <randolph@andestech.com>
+Fixes: e64db0d92e32 ("riscv: qemu: Enable e1000 and nvme support")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/riscv/dts/binman.dtsi | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
+ board/emulation/qemu-riscv/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
-index 6b4eb8dc7b..777b1309d0 100644
---- a/arch/riscv/dts/binman.dtsi
-+++ b/arch/riscv/dts/binman.dtsi
-@@ -5,9 +5,6 @@
- 
- #include <config.h>
- 
--#define U64_TO_U32_H(addr)		(((addr) >> 32) & 0xffffffff)
--#define U64_TO_U32_L(addr)		((addr) & 0xffffffff)
--
- / {
- 	binman: binman {
- 		multiple-images;
-@@ -36,8 +33,7 @@
- 					os = "U-Boot";
- 					arch = "riscv";
- 					compression = "none";
--					load = <U64_TO_U32_H(CONFIG_TEXT_BASE)
--						U64_TO_U32_L(CONFIG_TEXT_BASE)>;
-+					load = /bits/64 <CONFIG_TEXT_BASE>;
- 
- 					uboot_blob: blob-ext {
- 						filename = "u-boot-nodtb.bin";
-@@ -50,7 +46,7 @@
- 					os = "Linux";
- 					arch = "riscv";
- 					compression = "none";
--					load = <CONFIG_TEXT_BASE>;
-+					load = /bits/64 <CONFIG_TEXT_BASE>;
- 
- 					linux_blob: blob-ext {
- 						filename = "Image";
-@@ -64,10 +60,8 @@
- 					os = "opensbi";
- 					arch = "riscv";
- 					compression = "none";
--					load = <U64_TO_U32_H(CONFIG_SPL_OPENSBI_LOAD_ADDR)
--						U64_TO_U32_L(CONFIG_SPL_OPENSBI_LOAD_ADDR)>;
--					entry = <U64_TO_U32_H(CONFIG_SPL_OPENSBI_LOAD_ADDR)
--						U64_TO_U32_L(CONFIG_SPL_OPENSBI_LOAD_ADDR)>;
-+					load = /bits/64 <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
-+					entry = /bits/64 <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
- 
- 					opensbi_blob: opensbi {
- 						filename = "fw_dynamic.bin";
+diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
+index 933b035991..32511b4e4e 100644
+--- a/board/emulation/qemu-riscv/Kconfig
++++ b/board/emulation/qemu-riscv/Kconfig
+@@ -56,8 +56,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	imply SCSI_AHCI
+ 	imply AHCI_PCI
+ 	imply E1000
+-	imply NVME
+ 	imply PCI
++	imply NVME_PCI
+ 	imply PCIE_ECAM_GENERIC
+ 	imply DM_RNG
+ 	imply SCSI
 -- 
-2.34.1
+2.40.1
 
