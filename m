@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A6BC197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 17:16:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31DFBC54E76
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 17:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 244EE8744B;
-	Thu, 16 Nov 2023 18:16:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 21C7E874EB;
+	Thu, 16 Nov 2023 18:29:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="Cifbswcl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X6v8V8vB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED8DD87443; Thu, 16 Nov 2023 18:16:41 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 44F3B874B1; Thu, 16 Nov 2023 18:29:13 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5C628744B
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 18:16:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 99C5F86F53
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 18:29:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1cc29f39e7aso8581785ad.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 09:16:36 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-35743e88193so3952765ab.3
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 09:29:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1700154990; x=1700759790; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mpZ9e1aVXX4q4NnFwjC++Lw9ISR5yZZ1RuzRes+CN7Q=;
- b=CifbswcleVDW86/Vq7Yhd6191NjoZ3ABGvhYDmSO/SZf8NJjD1RDI7OIcnOqH8YvL9
- dKTBJ7OGvsm3gz4tQPumF8ETpgj0ATuU+GGCtRVrTj3d5A/ZZ6e0HhRBxZMEvV133VWc
- v+vraweZJSQ4aThhxzqwDBjz2xDMMq1ydEjekDmkHKh13oOYfb24aE7U3Cj03avjLvfm
- ct6mDOs6GwvOtmCbCWJnidozCX0swNLy/cQ5yvdI2roPxpGS3IunLijfXMdjASy9rUZ5
- CwuyA7Ul/N6Tw/lUb3b13JdH1TE5N4aohcA5/mFbIyxR7WqgrjMdRqKR7e1jItrN2ZUQ
- Avaw==
+ d=chromium.org; s=google; t=1700155746; x=1700760546; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Sbuu/h0AoaC0z3nDtNhgNQ0tUOdrcyZNu90tL3+QkP8=;
+ b=X6v8V8vBUSEAo0JDt4fuWYoQ5xbRvRnWjhacMlwNLUJ+D/bHvOBFB9VNUFQkIcR35w
+ pVte2uy1hvPt42RnO/6zt7phG5vqD9bmgtWhuLOrwCs/jrggRu7w2cLe8jle2TFLT3sq
+ NRWS48Vh5kh0QYMZJHjsngN9jIJm5abUePL0Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700154990; x=1700759790;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mpZ9e1aVXX4q4NnFwjC++Lw9ISR5yZZ1RuzRes+CN7Q=;
- b=c/TxHahiXhR5FBFASL+4gm+YVPcrwmaa0BsR7FLbkY6XnAuvuNynpAEiWrf2kivhTA
- dU/iOGwfvWO/KEibHrzMtaItIghNNYY1qd3RrL5bInSuMG+ijj/BnLQ7NZf4VQGwn5EF
- I8xx3DYt0vQzSEv4zRw+yppAw1NjEI2eMAn8uB3Gxx6rc1zSE38rupBF4fba6bcfC/mK
- O/GEMcQp+iHOJDqqCF7tYbcV2deYDr130k784JfGZRmIJTnreT9XICrRpL4Ia/t6oWg9
- ulSY5E1KB191sZcBtF1zaRppbDB1d686FlMllcZUemyPfMnycGSoS3heM5s15+h1MJ9o
- tRvA==
-X-Gm-Message-State: AOJu0YzAH7CaEoz87BAnaxdJH9J7itqV8ijjDD50vMDiMCmohwesafvZ
- eZC7Rr/A5P51ql4C9Q7dqqbuNA==
-X-Google-Smtp-Source: AGHT+IESxRDzVW9h0JiMZbS65UwWw133C+IgZ2lKBVUoQd35cgStlqMVxUIX0cJIqd8pZoVLrLrvNA==
-X-Received: by 2002:a17:903:2346:b0:1cc:5920:1d1c with SMTP id
- c6-20020a170903234600b001cc59201d1cmr3629119plh.48.1700154990143; 
- Thu, 16 Nov 2023 09:16:30 -0800 (PST)
-Received: from ThinkPad-T490.dc1.ventanamicro.com
- ([2401:4900:57e3:f37f:5040:ffd6:fb0a:3850])
- by smtp.googlemail.com with ESMTPSA id
- a2-20020a170902ee8200b001c737950e4dsm9541337pld.2.2023.11.16.09.16.27
+ d=1e100.net; s=20230601; t=1700155746; x=1700760546;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Sbuu/h0AoaC0z3nDtNhgNQ0tUOdrcyZNu90tL3+QkP8=;
+ b=FNKpQbRvKxZIXGJKf5jFySiM9N/D03boSR+P+ycTyE+CNbIg1PwFLgdXVqF0OWqFqn
+ ZOFGhWk3DyMc0abZBZ1ystyE75WWOKU/yIuIHzYxHCnWOoAoRC/3dmDxpkWNZDEV6ev9
+ 00+hpgKHgieLR0FVRupvqVwFXuxQ7ALEhcipsDzPRDm+5/7/R5IOAfPzXCoulhfpTe+B
+ iivvR15QWkP57yv51uLnbTHIpmXXRC46BoE3oT4v8kx1yisVssp0zkKHwIvpdzJpdO1k
+ M1eDOfH0tlr5JSU1lgkSjgCUg3Fa/Y05UlaIbfi0oPbCz5LpFZV7pJTOkBENRrTdQnaz
+ eeKA==
+X-Gm-Message-State: AOJu0Yyj7QHmr/HTy9ZpGQHUhU0gEWggZMY7bpNQr6yE7Hkj1oa8jwV+
+ qer6/kYS55G/KzI6J8XJbW7qoQ==
+X-Google-Smtp-Source: AGHT+IE9Yfv/30lHqDUpMHSfiZOMWk3dnHo8Xmo7XHjmfFGyS0UQeo20uO84tddH2390/4yYVU+Aig==
+X-Received: by 2002:a05:6e02:216a:b0:357:a049:91c4 with SMTP id
+ s10-20020a056e02216a00b00357a04991c4mr17861655ilv.22.1700155746310; 
+ Thu, 16 Nov 2023 09:29:06 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ o8-20020a056e02092800b0035ab8cc4a4bsm1914348ilt.17.2023.11.16.09.29.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 09:16:29 -0800 (PST)
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shengyu Qu <wiagn233@outlook.com>, Sean Anderson <seanga2@gmail.com>
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] fs: Fix SPL build if FS_LOADER is enabled
-Date: Thu, 16 Nov 2023 22:46:12 +0530
-Message-Id: <20231116171612.143910-1-mchitale@ventanamicro.com>
-X-Mailer: git-send-email 2.25.1
+ Thu, 16 Nov 2023 09:29:06 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, linux-mtd@lists.infradead.org,
+ Tom Rini <trini@konsulko.com>, Rob Herring <robh@kernel.org>,
+ Michael Walle <mwalle@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+Subject: [PATCH v6 3/3] dt-bindings: mtd: binman-partitions: Add alignment
+ properties
+Date: Thu, 16 Nov 2023 10:28:52 -0700
+Message-ID: <20231116172859.393744-3-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
+In-Reply-To: <20231116172859.393744-1-sjg@chromium.org>
+References: <20231116172859.393744-1-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,41 +96,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If FS_LOADER is enabled for the SPL then the build fails with the error:
+Add three properties for controlling alignment of partitions, aka
+'entries' in binman.
 
-fs/fs.o:(.data.rel.fstypes+0x128):
-undefined reference to `smh_fs_set_blk_dev'
-fs/fs.o:(.data.rel.fstypes+0x140):
-undefined reference to `smh_fs_size'
-fs/fs.o:(.data.rel.fstypes+0x148):
-undefined reference to `smh_fs_read'
-fs/fs.o:(.data.rel.fstypes+0x150):
-undefined reference to `smh_fs_write'
+For now there is no explicit mention of hierarchy, so a 'section' is
+just the 'binman' node.
 
-Fix the error by populating the semihosting entry in the fs_types array
-only for non-SPL builds.
+These new properties are inputs to the packaging process, but are also
+needed if the firmware is repacked, to ensure that alignment
+constraints are not violated. Therefore they are provided as part of
+the schema.
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
+
+Changes in v6:
+- Correct schema-validation errors missed due to older dt-schema
+  (enum fix and reg addition)
+
+Changes in v5:
+- Add value ranges
+- Consistently mention alignment must be power-of-2
+- Mention that alignment refers to bytes
+
 Changes in v2:
-- Use CONFIG_IS_ENABLED instead of CONFIG_SPL_BUILD
+- Fix 'a' typo in commit message
 
- fs/fs.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../mtd/partitions/binman-partition.yaml      | 54 +++++++++++++++++++
+ 1 file changed, 54 insertions(+)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index 4cb4310c9c..5c27ae2fe1 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -256,7 +256,7 @@ static struct fstype_info fstypes[] = {
- 		.ln = fs_ln_unsupported,
- 	},
- #endif
--#ifdef CONFIG_SEMIHOSTING
-+#if CONFIG_IS_ENABLED(SEMIHOSTING)
- 	{
- 		.fstype = FS_TYPE_SEMIHOSTING,
- 		.name = "semihosting",
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
+index 83222ac9aa78..2bc80c24bb9b 100644
+--- a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
+@@ -33,6 +33,57 @@ properties:
+     minItems: 1
+     maxItems: 2
+ 
++  align:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 1
++    maximum: 0x80000000
++    multipleOf: 2
++    description:
++      This sets the alignment of the entry in bytes.
++
++      The entry offset is adjusted so that the entry starts on an aligned
++      boundary within the containing section or image. For example ‘align =
++      <16>’ means that the entry will start on a 16-byte boundary. This may
++      mean that padding is added before the entry. The padding is part of
++      the containing section but is not included in the entry, meaning that
++      an empty space may be created before the entry starts. Alignment
++      must be a power of 2. If ‘align’ is not provided, no alignment is
++      performed.
++
++  align-size:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 1
++    maximum: 0x80000000
++    multipleOf: 2
++    description:
++      This sets the alignment of the entry size in bytes. It must be a power
++      of 2.
++
++      For example, to ensure that the size of an entry is a multiple of 64
++      bytes, set this to 64. While this does not affect the contents of the
++      entry within binman itself (the padding is performed only when its
++      parent section is assembled), the end result is that the entry ends
++      with the padding bytes, so may grow. If ‘align-size’ is not provided,
++      no alignment is performed.
++
++  align-end:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    minimum: 1
++    maximum: 0x80000000
++    multipleOf: 2
++    description:
++      This sets the alignment (in bytes) of the end of an entry with respect
++      to the containing section. It must be a power of 2.
++
++      Some entries require that they end on an alignment boundary,
++      regardless of where they start. This does not move the start of the
++      entry, so the contents of the entry will still start at the beginning.
++      But there may be padding at the end. While this does not affect the
++      contents of the entry within binman itself (the padding is performed
++      only when its parent section is assembled), the end result is that the
++      entry ends with the padding bytes, so may grow. If ‘align-end’ is not
++      provided, no alignment is performed.
++
+ additionalProperties: false
+ 
+ examples:
+@@ -45,10 +96,13 @@ examples:
+         partition@100000 {
+             compatible = "u-boot";
+             reg = <0x100000 0xf00000>;
++            align-size = <0x1000>;
++            align-end = <0x10000>;
+         };
+ 
+         partition@200000 {
+             compatible = "tfa-bl31";
+             reg = <0x200000 0x100000>;
++            align = <0x4000>;
+         };
+     };
 -- 
-2.34.1
+2.43.0.rc0.421.g78406f8d94-goog
 
