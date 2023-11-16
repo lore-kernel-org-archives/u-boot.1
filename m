@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7252EC54FB9
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 15:43:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A08C54FB9
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 15:43:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3528B87465;
-	Thu, 16 Nov 2023 16:43:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9ED5F87489;
+	Thu, 16 Nov 2023 16:43:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tBf79zCG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cw1+VV7t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE7587465; Thu, 16 Nov 2023 16:43:38 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 92BCC87483; Thu, 16 Nov 2023 16:43:56 +0100 (CET)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C4978744B
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:43:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C73887489
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:43:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-1ef36a04931so459983fac.2
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 07:43:34 -0800 (PST)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-77897c4ac1fso55049585a.3
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 07:43:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700149413; x=1700754213; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700149429; x=1700754229; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TArAeu+BV0n9Z9VsOMHAohdAkGIn3HcyPINBuVDNhlU=;
- b=tBf79zCGUrW6Vi3aKKOxbdF3BHp1rMipAS0eaHCuz8L1yW8v4qdSg/+sR/A3YEAjYB
- CbW7HpyX/IBdGARNMNgcYRP17z9MUwWUC7WLwfauzSGBrsPo2OfyxTgMT2KL8JyJ346t
- h3pDYDOp4AAKx5H0IwwksMTUNUXoWwGaq28yw=
+ bh=dDuU1wNJTn5CHnS7NBgmVvyL0Vf/RP2tF2/HpAPgGDg=;
+ b=cw1+VV7trNUJAXk2UXvmxoiGP2ECWV6zChhL9gorZ+TqtGoCk13uJizZoCC4BFJ64D
+ 2xKe8fB2lrwW3uauIpOaIdia68PFs9fe2XaIO7dB3BAVlvYQUrWwsce0wjFGeR9JgVrl
+ q1BaMsfyKFzsT4Ltyw+VDjMPSt/jYGcQz6xos=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700149413; x=1700754213;
+ d=1e100.net; s=20230601; t=1700149429; x=1700754229;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TArAeu+BV0n9Z9VsOMHAohdAkGIn3HcyPINBuVDNhlU=;
- b=GF6XefkmgIlEEle3cr9ZceQBKsAMWfkTkZfu17B/VPFrUxM/XkKGkEmE4zz/E/yDvx
- LyvRnXgLmg3k97U6j6JVr9oohHfA6AAfwjJxCsZhaobJE0tkSMapHxbBC1wi2TcNrXMa
- m2vEYvY5+G0iMoNu5rJqTAVRDJ40Wrs5rikHNVM9QGFFSZfUwcH6+cXaBJObrYlkJPnj
- NYNUbI0AUthTHUoEMCQbeU56yLTC1lmt+mxxoBiGa1p/dRnxq/ePwQbsbRCSCPb/7UMx
- 8ktj41peprE2Ht25l9uPu23sVdpyZp+KzZDuw+p69PbNKxX+rrFwyDQZDuGjAJdqsxl/
- Y7yA==
-X-Gm-Message-State: AOJu0Yyi3w4ZeHRiMlEJ6UZAS+Y9+H8Y6WEVR4ec39/KXonBpGqN1IsO
- 93jOLQRFRyscKUGU82NFbzr1ug==
-X-Google-Smtp-Source: AGHT+IECFnefImFGvQMGmMAfLaDRf4lie1Bh8Ypcq4eZHlrG0m8zrv6gFEoghWyohADhzs07scmsFQ==
-X-Received: by 2002:a05:6871:a302:b0:1f4:a122:6b02 with SMTP id
- vx2-20020a056871a30200b001f4a1226b02mr17587742oab.45.1700149412687; 
- Thu, 16 Nov 2023 07:43:32 -0800 (PST)
+ bh=dDuU1wNJTn5CHnS7NBgmVvyL0Vf/RP2tF2/HpAPgGDg=;
+ b=jkOUxbbnHdRydLDkRSUiQdKuLC9EkFYDwnnq/h4CG6+EMRScbBjcwgIPk9R3MGHN1O
+ G5z36ulvl+2Koul3VenSPWyoS0ur6YlAJZ/0YTKL6u1w9VmJp2UBhLroEFCy0SLuaPgr
+ zBR66LGvoc2P5rkzTzHcDQXfzATsqWyukT16/txWpM0Z3XfOQForoyiXTFpMiRHlgMTI
+ pJcVHg++8dRqO4e5OBaxpL1tot98lU1O7dFd8Xyvy0n7fvxtKPuGJu2RoAa0Pry3rzkC
+ 23GaAa0o8R/koGjaaSaKt9BvamtXgNLdkORk8AtZevg9WW8uC11DvQXQd/dToCTQQCsM
+ PMRA==
+X-Gm-Message-State: AOJu0YwFQp/Sw72YFtsZorrblzFrtSeHS0jXL2w+y0oIlujHuDy1JwUn
+ KIosyvdITTUusTudE3c+mBOMpA==
+X-Google-Smtp-Source: AGHT+IHKM4k7KUHKj6CB9uoxdtHhIHpNIN/ipULS+WD+XeN7FrRxZuo+UvXiHuX30ZT9CrRoodapUw==
+X-Received: by 2002:a05:620a:1791:b0:779:eb01:8390 with SMTP id
+ ay17-20020a05620a179100b00779eb018390mr11075442qkb.49.1700149429202; 
+ Thu, 16 Nov 2023 07:43:49 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
  [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
  by smtp.gmail.com with ESMTPSA id
- f19-20020ac840d3000000b0041cb8732d57sm4420780qtm.38.2023.11.16.07.43.31
+ f17-20020a05620a15b100b007756d233fbdsm4372594qkk.37.2023.11.16.07.43.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 07:43:32 -0800 (PST)
-Date: Thu, 16 Nov 2023 10:43:28 -0500
+ Thu, 16 Nov 2023 07:43:48 -0800 (PST)
+Date: Thu, 16 Nov 2023 10:43:46 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Artur Rojek <artur@conclusive.pl>
 Cc: Peng Fan <peng.fan@nxp.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
@@ -70,15 +70,15 @@ Cc: Peng Fan <peng.fan@nxp.com>, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Wojciech Kloska <wojciech@conclusive.pl>,
  =?utf-8?B?UmFkb3PFgmF3?= Adamczyk <radoslaw.adamczyk@conclusive.pl>,
  u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] board: Add support for Conclusive WHLE-LS1046A
-Message-ID: <20231116154328.GK6601@bill-the-cat>
+Subject: Re: [PATCH 1/2] armv8: layerscape: Enable ext4 environment storage
+Message-ID: <20231116154346.GL6601@bill-the-cat>
 References: <20231116131630.407502-1-artur@conclusive.pl>
- <20231116131630.407502-3-artur@conclusive.pl>
+ <20231116131630.407502-2-artur@conclusive.pl>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w3Gc4rWX4n2RFqOA"
+ protocol="application/pgp-signature"; boundary="PhBxY1TLonp2wiZb"
 Content-Disposition: inline
-In-Reply-To: <20231116131630.407502-3-artur@conclusive.pl>
+In-Reply-To: <20231116131630.407502-2-artur@conclusive.pl>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,86 +97,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---w3Gc4rWX4n2RFqOA
+--PhBxY1TLonp2wiZb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 16, 2023 at 02:16:30PM +0100, Artur Rojek wrote:
+On Thu, Nov 16, 2023 at 02:16:29PM +0100, Artur Rojek wrote:
 
-> Introduce support for Conclusive WHLE-LS1046A Single Board Computer.
+> From: Jakub Klama <jakub@conclusive.pl>
 >=20
-> Co-developed-by: Jakub Klama <jakub@conclusive.pl>
+> Some boards keep their environment on MMC storage within an ext4
+> partition.
+>=20
 > Signed-off-by: Jakub Klama <jakub@conclusive.pl>
 > Signed-off-by: Artur Rojek <artur@conclusive.pl>
-[snip]
-> +	fdt_fixup_memory_banks(blob, base, size, 2);
-> +	ft_cpu_setup(blob, bd);
-> +
-> +#ifdef CONFIG_SYS_DPAA_FMAN
-> +#ifndef CONFIG_DM_ETH
-> +	fdt_fixup_fman_ethernet(blob);
-> +#endif
-> +#endif
 
-DM_ETH is a must-have at this point so you can just drop the non-DM_ETH
-case.
-
-[snip]
-> diff --git a/include/configs/whle_ls1046a.h b/include/configs/whle_ls1046=
-a.h
-> new file mode 100644
-> index 000000000000..982bf71be515
-> --- /dev/null
-> +++ b/include/configs/whle_ls1046a.h
-
-In here, please see if there's any defines that are either not required,
-or could be in another header (for example only needed in your board
-code, so a header in the board directory).
-
-> +#define QSPI_NOR_BOOTCOMMAND	CONFIG_BOOTCOMMAND
-> +#define QSPI_NAND_BOOTCOMMAND	CONFIG_BOOTCOMMAND
-> +#define SD_BOOTCOMMAND		CONFIG_BOOTCOMMAND
-> +
-> +#undef CFG_EXTRA_ENV_SETTINGS
-> +#define CFG_EXTRA_ENV_SETTINGS		\
-> +	"hwconfig=3Dfsl_ddr:bank_intlv=3Dauto\0"	\
-> +	"kernel_addr_r=3D0x81000000\0"		\
-> +	"kernel_size=3D0x07000000\0"		\
-> +	"kernel_comp_addr_r=3D0x88000000\0"	\
-> +	"kernel_comp_size=3D0x04000000\0"		\
-> +	"ramdisk_addr_r=3D0x90000000\0"		\
-> +	"ramdisk_size=3D0x08000000\0"		\
-> +	"fdt_addr_r=3D0x98000000\0"		\
-> +	"pxefile_addr_r=3D0x99000000\0"		\
-> +	"scriptaddr=3D0x9a000000\0"		\
-> +	"fdtfile=3Dfsl-ls1046a-whle.dtb\0"	\
-> +	"console=3DttyS0,115200\0"                \
-> +	CONFIG_MTDPARTS_DEFAULT "\0"		\
-> +	BOOTENV
-
-Please move this to a plain text environment (see board/*/*/*.env) and
-move from the distro_bootcmd macros to BOOTSTD. Thanks.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---w3Gc4rWX4n2RFqOA
+--PhBxY1TLonp2wiZb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWOJoACgkQFHw5/5Y0
-tyw3Sgv/dHb6dxntLOUrNj6Rf/XjRZ13fOGyhea/L8POLdrMLHTpFw55kvUXnEv2
-L+MYABI7CVbgxRjT8K8PqfsFGc1oIMPZeAUHPhayWg73UBjvngYNTFIDywXFGsZP
-KcJUX/Ux9BYu8sjaGvsopc410oKJx/vGgGVHVV3vDM8araw6mPKhRhjggPv4ZeOR
-mY7B1fftEjp75h14jqNMq8hZgwaQyWCu4KhGh8/YcHqq2RyJ6ef5P9azgeG9AGXo
-wlTyhkCUoq1j+6uXnctYrhFyR5Cvy22ARWGcM8wqnb6ykdaK3b10K26mDbeCFUqJ
-aZ+a89eX8j0z9TeERuO3cx5b331vP2suxPUvUkybPhwFhRfReXYTIf8KX5rj2Oh4
-Ke4LnAu4oLDpvkaHz/IuQHEVaPgJWXzYaMVBgcAEpAgp8vsiBLDq0h0NEPX8H5SW
-KBkBFp4IRJYQC39lxlgwe3OGNErr+y5Jn+d2SWVh9GCmCo6jZ/sbvTgg1NWcdbJ3
-JInUt0R/
-=XD8U
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWOLIACgkQFHw5/5Y0
+tyx5dwwArgPtMzFnsZkKJPo43MZCTfO5jXN3oFCPTkYAImpg9SJr5tukWoHq7vPb
+z/H7TYmIoAE92lKa/ZWw6y56Ni6jdsfqCiQM1bqZ++Q2whU9iAtsHtNX/Wth7auW
+5oELiaoRxIBqiePF49PGboALvsXQAR2sfan9wlqVfGbskspJT2Md58AAZDMjvwBk
+d22CLAuQ5AuSd7eGaLvF0O0B9HdAB8IpP+gTzhDq8rWbb5sgdCXs6m4EO8KTuBmh
+c7lk/0bdb8yhCXun4nDxSLzsZk1624T+8xjcSrv9UazX3RtY/XKa03QyBsOyj90J
+WClkXeO8VEzmAL+fYaF39OKiNtzADYljlIyCo2f//6MYxhr0ap+8S08oCoG2G6oD
+q4VUIMpDC05HDX/tekBVUK8wXlZQHPdnZ+curiRBb2XrnittUy/Ti5dHkmNkdRcG
+bNco6PmPazTdqMOdgCJD2KGfw9sjzij3lEUJCB83HVqRf7wv2psN0OWRMndRQAyW
+8Yww6btZ
+=gW+U
 -----END PGP SIGNATURE-----
 
---w3Gc4rWX4n2RFqOA--
+--PhBxY1TLonp2wiZb--
