@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A35C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 15:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A281C54FB9
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 16:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B61B887483;
-	Thu, 16 Nov 2023 16:53:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A51D87478;
+	Thu, 16 Nov 2023 17:03:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qSq/2EJQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ptwm+LPk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3CFB8749D; Thu, 16 Nov 2023 16:53:47 +0100 (CET)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id 2C0CD87478; Thu, 16 Nov 2023 17:03:36 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 896EB8747E
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:53:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D155F86F73
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 17:03:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7b9bd9f8bfaso373744241.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 07:53:41 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9df8d0c2505so192791266b.0
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 08:03:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700150015; x=1700754815; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nXsrYJIb6b6+wWvnHw0JL1OrtOX/LbsmZv+imjlwrCM=;
- b=qSq/2EJQZ0wlDpQ5Xsz63HMEvxM7HiQoyye1ZFTo1TzFp8eBVP4Pbl1ScKv6WVqXF4
- zkyeVOaWhYjuhiKIFWCn6iQaXiLJl7GJF3xL0YCtN3WBOUYP6euz7D9w0ZhGzWdq8nos
- D6pJ6PVCMmDua6IklAlUCWwqyWNGkLYty0PVw=
+ d=chromium.org; s=google; t=1700150610; x=1700755410; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bNDVS5v9O8FPRNBWyOIHVPQV9nLfvWfvZU+5+Gb7guw=;
+ b=Ptwm+LPkpDglGpwKG6uFcZB5zHZ8lMV1izWf8WckiNzK01jG7sWdRS+abkMnpdQcAH
+ wl5nXCvTiu//Pjf1gao+hCyy5/EjyHSlu4mV7cj5XBc0XGeDD44RzEkl4huC3IO7JiBm
+ nPWwPWG+5vgFsn0z42+LsjTC+/nIH/POOnwFI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700150015; x=1700754815;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nXsrYJIb6b6+wWvnHw0JL1OrtOX/LbsmZv+imjlwrCM=;
- b=ZQYG008afodc85OI7DZr7xPUXL8cSP9OOPwvzRfdUcmCwaDaKNqpTEQJf29BnKNhCJ
- Jh8LaNVHcVER/0uewGkr2A9Z9R3unVtAGgcg0TQU+VE+YJovk77ZhKUJG4/9dqREl8O6
- shJqLfjZUE6oBaSheYy540d2BkFA7gN1FvJCb+/Z8zz9OhJJ21rAkU4BGcHCVQCowEXp
- SJdrZDb5qObNC9OSAD4Oswj7+MoBk3I39tR/BqS3X/5gPxFwldpofwEcMPOnCT+KozAh
- 1TwubT/aY1WNCJbWB3+7Z42JkAJ5SVKHV3QMUQGNVi4JLFayd9HEyb5HF35+2WLytjma
- jy1Q==
-X-Gm-Message-State: AOJu0YzH5CP6isAcS2hVdV6r3MCo8JHMamY1tLdJasVHslwfiDQf6Qjw
- Fkgvnnf5x1I85N7uV8FnPK0aKw==
-X-Google-Smtp-Source: AGHT+IFTsOtRnFYRficXDcthASBwNNGdTm7qTKdEoEQ508WPn1ci6u8BQ+TEeNO4bK9pkPi/BAb19A==
-X-Received: by 2002:a05:6102:100c:b0:45f:4acb:d50c with SMTP id
- q12-20020a056102100c00b0045f4acbd50cmr17148833vsp.0.1700150015251; 
- Thu, 16 Nov 2023 07:53:35 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
- [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
- by smtp.gmail.com with ESMTPSA id
- j8-20020a0ceb08000000b0065af24495easm1463509qvp.51.2023.11.16.07.53.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 07:53:34 -0800 (PST)
-Date: Thu, 16 Nov 2023 10:53:33 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 7/9] Revert "generic-board: make show_board_info a weak
- function"
-Message-ID: <20231116155333.GT6601@bill-the-cat>
-References: <20231113030001.240020-1-sjg@chromium.org>
- <20231113030001.240020-8-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1700150610; x=1700755410;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bNDVS5v9O8FPRNBWyOIHVPQV9nLfvWfvZU+5+Gb7guw=;
+ b=gtipHtC1MVqyu/8W7zT7m+udLnUUQOK2Hb+n0gcs6JUMklJFBIwaBrm6VhQAYpG7Au
+ t7+Gx/KoaV9mDrD02YKvmA0IODKCx/5NlAwoE6DHrRmFUcDA9YGrvrllspaq73L2Zi4p
+ nR+DvkY2qep4aTmSPqQZtiZ2Rq1e5J+7/EnVW6pmQe8iDDD6v4Z/2P8Ru/+WyOXdip8M
+ o+zT6R95EUrJeYOiIx8M9en+CCsrVlUOoE5JLdD9kz0N/1jUFVr9cld9Az1hyrIzCsm5
+ S/+cXUmYw+daIUHxAfpu2n5UsCk1FkGLDYcGS7Jtnd1Gz+yohCb564/KUx5+DFLM8bQ4
+ htlg==
+X-Gm-Message-State: AOJu0Ywj6Jldo3M7gndgl0NMFuKgm3So1EEdtVJUG6I5B5P5V8xMqDcf
+ mTNS1Lphbpmc2YAsm4rWw1v+OxMlEZVQ0JS80EOvGg==
+X-Google-Smtp-Source: AGHT+IGqxwXcDNtOmbdxwria2yFZt13PhebhkFdn4YP3Yd74Bv3Ky4YXPbYqR+/dXoA0Rrtdlgdn+iVSFrgGHfybKGA=
+X-Received: by 2002:a17:906:29d6:b0:9dd:f238:a74f with SMTP id
+ y22-20020a17090629d600b009ddf238a74fmr1845752eje.23.1700150609883; Thu, 16
+ Nov 2023 08:03:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wGYfXlaipHneCGth"
-Content-Disposition: inline
-In-Reply-To: <20231113030001.240020-8-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231115101024.3441093-1-n-francis@ti.com>
+ <20231115101024.3441093-2-n-francis@ti.com>
+In-Reply-To: <20231115101024.3441093-2-n-francis@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 16 Nov 2023 09:03:09 -0700
+Message-ID: <CAPnjgZ22W3EpWdw-t=B9CjGJkQcNm1hARi1efe91JCxhzoZUpA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] arm: dts: k3-binman: Add support for FIT templates
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: marcel.ziswiler@toradex.com, u-boot@lists.denx.de, vigneshr@ti.com, 
+ nm@ti.com, u-kumar1@ti.com, kamlesh@ti.com, m-chawdhry@ti.com, afd@ti.com, 
+ mkorpershoek@baylibre.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,48 +83,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Neha,
 
---wGYfXlaipHneCGth
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 15 Nov 2023 at 03:10, Neha Malcom Francis <n-francis@ti.com> wrote:
+>
+> Add templates for FIT images used extensively across K3 boards with most
+> of the code common. This includes the FIT portions of:
+>         - tispl.bin
+>         - u-boot.img
+>         - sysfw.itb (in case of legacy boot flow)
+>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>  arch/arm/dts/k3-binman.dtsi | 327 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 327 insertions(+)
+>
 
-On Sun, Nov 12, 2023 at 07:58:27PM -0700, Simon Glass wrote:
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> We already have:
->=20
-> - a sysinfo driver-interface which can obtain the model
-> - a weak function called checkboard() for showing board info
->=20
-> The current implementation has a weak function on top of a weak
-> function. Now that all boards have been updated to use checkboard()
-> instead, drop the __weak on show_board_info()
->=20
-> This reverts commit f7637cc01414b9c87b6b0f861f34d83c19bfaaaf.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+What is the DM binary?
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---wGYfXlaipHneCGth
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWOv0ACgkQFHw5/5Y0
-tyyp2AwAmoeJ9HUxGm+Rt+g35gY55ZieJcKiFWEhiu/gjLNAW3g01ZlnNIugBTRd
-KQyPcaGx7QmaBi7VmipoJnHz5O+l4bmcKHI2B3rm5k07JgtxFZpGH+g+YBX5hFIR
-RC6Yh57HWryd1QPXqWhopT1Z6xOPK79tx2oLbVIsSEnZTnWo6Ptpe8EBIzBw3JUl
-egEsVyvkGKrxtfjX1keEJFervdoV9oEJn7hSlqWd+6g65oz1dvzmYOvaKGQ+CnOs
-fQseCx0nhcA9MN49nEtb9PObZb/u6fPE326qUxwMKmxtptZX7eoFVl1lVrQPaLVb
-17fvg3PJlqLBEq+OGX9hTk8PLmkCEBjE6clcRSO0oyv9DR8gRBjkSZZGEwVLCeQ0
-gWaJ45xXQwl/Swt822BbM4szd7Tno4G1SqEyeAjN1dwxo2yXxuWNWFoXE0puNvxn
-Da0MF9VpwpxR7v4slMrKmrSyXUYtiyjiPizDHt9dPCFnqRNrM7Atzqe3YvT0QAJp
-QJZCbr0V
-=LmNg
------END PGP SIGNATURE-----
-
---wGYfXlaipHneCGth--
+Regards,
+Simon
