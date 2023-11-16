@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26714C2BB3F
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:35:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38253C072A2
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:40:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8538386EE5;
-	Thu, 16 Nov 2023 02:35:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48ECC87465;
+	Thu, 16 Nov 2023 02:39:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eyazTMVI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iNyt4UTX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A349586EE5; Thu, 16 Nov 2023 02:35:33 +0100 (CET)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 7357E8745B; Thu, 16 Nov 2023 02:39:52 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 246338724E
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:35:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C2D287444
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:39:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-35950f04d98so1219395ab.2
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:35:31 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-d9b9adaf291so264453276.1
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:39:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700098529; x=1700703329; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=01ALPTyV2poyhlsonWxr8PMeWQ/giCZrZPyPrWBbeWI=;
- b=eyazTMVIMfgRRx4qXQ69XMTqGzhuKXMiLl8RykqR7fY0uzKyRfKh6Pg+5NdGfxNWsY
- TlNFwS/1DnMUPz1XkdIEo9jRU/8y3Crgnlhta9HX2NNZG/sg858pCYf6XHehNoEdNhDx
- UniM0iNbOdWVt/HKX5VAd4Xtjm7fXrh23ZQL4=
+ d=chromium.org; s=google; t=1700098763; x=1700703563; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=SNmo5Wc4ISR+m+oywsJF/dnKluLALifVaWT4EvI/O0Q=;
+ b=iNyt4UTXMbJ85G7nfRsuxvjV0x0IWIZRV/ZDDSt8Fyqi9IroSl+Jm3ll7CZLUQueWc
+ X9VCc6lboSCNkGInPT8wfMAxSImLDxwJH53TjoUJ+Ig2isixAAl4x8p4LrRFi43EonG4
+ AhdDM7UDiDQBMDTq4f3APERB5yi/sDqaXbrNE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700098529; x=1700703329;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1700098763; x=1700703563;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=01ALPTyV2poyhlsonWxr8PMeWQ/giCZrZPyPrWBbeWI=;
- b=RuH4ahXNP6qt8S9xblRFBaIQtMiWIVcDWQe0WtvGOQmULtNPwERD90Ai22d4DoaJYZ
- yqz1DMwlYeqhN9DPEeD+DNcb525QpD6RUXFDUCnU2T653c3Gfrw4DqbFJYMc1VEL8ya7
- VjJfkwMYJWHIBZFL2vFBCWLRWSepJG/gKMQhun0rSLWZRnqgeRXjN2uNVto4aWCc2rsD
- sfcIwhboj28wk42hPsJKVbMteVD2Pe3WHJkcdq2KTQ7C7+JqpO8TKAw7MLnu/BshGf9L
- y6adkWlc5W22RKRDQ/QoWS+kxRFt5NQpyPUC2/PCostamslcIt9Uhf0UvUb7MpL3hec1
- M6YA==
-X-Gm-Message-State: AOJu0YzVOa+WXN8IUrvwx2ClZfMI4eUs36kxTrJi1OdwIgXZplXVkyCi
- mKV2+kNmVwa8dTdbBMbcHsIfYAg/1j5m2HSXX37mFA==
-X-Google-Smtp-Source: AGHT+IELMoPPI5eWlMP6vym7aRKzsz+JT+aPbV0cVtWelgHgry9zDhyG4gJR2DzGVrPAmyOuZALqKg==
-X-Received: by 2002:a05:6e02:15c5:b0:357:a01f:35f0 with SMTP id
- q5-20020a056e0215c500b00357a01f35f0mr20091740ilu.19.1700098529658; 
- Wed, 15 Nov 2023 17:35:29 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- z35-20020a0293a6000000b0042b530d29c3sm1332798jah.164.2023.11.15.17.35.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 17:35:29 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Shantur Rathore <i@shantur.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] bootstd: Avoid freeing a non-allocated buffer
-Date: Wed, 15 Nov 2023 18:35:23 -0700
-Message-ID: <20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid>
-X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
+ bh=SNmo5Wc4ISR+m+oywsJF/dnKluLALifVaWT4EvI/O0Q=;
+ b=MWnSIb6/ey4hb724gOD57hhAkLm7xyN6M1mzKdhciKV9oGXJSDa1DpjRRH6Msu7d/P
+ kfYt+1mKxno3ZFugUhbbtp36HoenkqV8HWYJOJmoeB6ik+KwRzxt0n1ztgaRBQ54w9+C
+ Af2MPvNQWcYpx3814OcaIpLrVHzTcevaJgMARqHeOcI5ib01ArEoB19DsQIXSKLE6EiE
+ 39mr90atE77mTVJDvPXJMl89WbopGExcD3ai2hJJN0ZtJiLBjA9PsvkYsd4k+r0b6QPx
+ oHlF9fCX3Aj9KR6dY+yza95Z8YVj6BZkSa1tCyuyboNyk14WV4+IM2nEvTDkxoAPLnaN
+ Pq9A==
+X-Gm-Message-State: AOJu0Yw8D1Begiftnu7YZHd+fxqq/aNwbXO+odQfdWqvArRcU4Ce1HSB
+ /NHGncE5fbRR3wRn7Gv6tSg8DckEcWKu+btK5OmqBA==
+X-Google-Smtp-Source: AGHT+IE47UjdLEzJX318q6aOHWv8wRMK+l9IQb8zeRoGj1hrHhGoCUMTQIWmXiemPewshmmrkHCcngNvUgwU7lOT05Y=
+X-Received: by 2002:a25:d784:0:b0:da3:b603:8314 with SMTP id
+ o126-20020a25d784000000b00da3b6038314mr14337385ybg.0.1700098762915; Wed, 15
+ Nov 2023 17:39:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAHc5_t2hrverfcsEEahUcRkcjrnF3jr0oyds2yo0RBVMB7E01g@mail.gmail.com>
+ <CAPnjgZ1-_ohZaVwMGtTDt4-W--2q0AM2KPtX9RLgAbMEhMRugw@mail.gmail.com>
+ <CAHc5_t1icj6d82GH+FK8qGg3MvDkpwEicH964ULcN971_=aSKg@mail.gmail.com>
+ <CAHc5_t2vLU9gHufMS_Fjv6j5+E8ksgCCLzKQ7NxTHzJsdcmsNQ@mail.gmail.com>
+ <CAPnjgZ3VY_M+zd2na+N9WCxj-L2F+KKhLgykQ21FTA7GPVrKNQ@mail.gmail.com>
+ <CAHc5_t1fBzzpJaQed9kcKF92ProStsutmOBW-1jmi5vWFvLM8g@mail.gmail.com>
+ <CAPnjgZ3WNmnNv7DjMFDM9Med3yRng32N6tku4NGxbwA5DRhQgA@mail.gmail.com>
+ <CAHc5_t1H39YV=HSSa7TCEdzRctAX+zibkx1vsuwEW-raOL9TcA@mail.gmail.com>
+ <CAPnjgZ3V65sCuRV_NzJFZHL7-ZHq9SQUTxvvbj5GszFAhJ4WzA@mail.gmail.com>
+ <CAC53B67-9BC2-4EB4-9846-F78166140BD0@gmx.de>
+In-Reply-To: <CAC53B67-9BC2-4EB4-9846-F78166140BD0@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Nov 2023 18:39:05 -0700
+Message-ID: <CAPnjgZ2P=85dys80aXA4Hss9f=wq9YR+KrNSw5bk+n=W7RFj8w@mail.gmail.com>
+Subject: Re: bug - bootflow: grub efi crashes when bootflow selected explicitly
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,85 +89,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI applications can be very large and thus used to cause boot failures
-when malloc() space was exhausted.
+Hi Heinrich,
 
-A recent changed fixed this by using the kernel_addr_r environment var
-as the address of the buffer. However, it still frees the buffer when
-the bootflow is discarded.
+On Wed, 15 Nov 2023 at 15:47, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+>
+>
+> Am 15. November 2023 23:15:46 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Shantur,
+> >
+> >On Wed, 15 Nov 2023 at 15:13, Shantur Rathore <i@shantur.com> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >> I have figured out the cause of the crash.
+> >> It happens here -
+> >> https://github.com/u-boot/u-boot/blob/master/boot/bootflow.c#L470
+> >> while doing - free(bflow->buf)
+> >>
+> >> As I understand it,
+> >> - Just before starting kernel EFI binary calls usb-uclass->usb_stop()
+> >> - This starts removing all devices in my case ( 6x usb_hub, 2x
+> >> partition, 1x blk, 2x bootdev, 1x usb_maas_storage)
+> >> - While removing bootdev, it ends up calling bootdev-uclass ->
+> >> bootdev_pre_unbind -> bootdev_clear_bootflows which calls
+> >> bootflow->bootflow_remove and bootflow_free
+> >>
+> >> I don't know why this buf cannot be freed, is it because the EFI
+> >> binary in the buffer is still being used ( efi/boot/bootaa64.efi ) ?
+>
+> EFI binaries should never be started from memory allocated with malloc. efi_load_image() should be invoked which allocates EFI memory via efi_allocate_pages(). The handle created has to be passed to efi_start_image().
 
-Fix this by introducing a flag to indicate whether the buffer was
-allocated, or not.
+This is a mess at present, as you are probably aware. EFI has hack to
+look at loaded images and try to patch up its tables.
 
-Note that kernel_addr_r is not the last word here. It might be better
-to use lmb to place images. But there is a lot of refactoring to do
-before we can remove the environment variables. The distro scripts rely
-on them so it is safe for bootstd to do so too.
+With bootstd we will be able to do this properly.
 
-Fixes: 6a8c2f9781c bootstd: Avoid allocating memory for the EFI file
+But note that memory allocation in U-Boot is done via malloc() and
+lmb. We don't call efi_allocate_pages() except in the EFI code.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reported by: Simon Glass <sjg@chromium.org>
-Reported by: Shantur Rathore <i@shantur.com>
----
+>
+> >> But commenting this line out fixes the crash and linux boots happily.
+> >>
+> >> Fixing this properly is above my pay grade as of now.
+> >
+> >Great, thank you! I will send a patch.
+>
+> Free() typically crashes in U-Boot when freeing the same memory twice.
 
- boot/bootflow.c     | 3 ++-
- boot/bootmeth_efi.c | 1 +
- include/bootflow.h  | 5 ++++-
- 3 files changed, 7 insertions(+), 2 deletions(-)
+Indeed. In this case it was not even allocated.
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 6922e7e0c4e7..1ea2966ae9a5 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -467,7 +467,8 @@ void bootflow_free(struct bootflow *bflow)
- 	free(bflow->name);
- 	free(bflow->subdir);
- 	free(bflow->fname);
--	free(bflow->buf);
-+	if (!(bflow->flags & BOOTFLOWF_STATIC_BUF))
-+		free(bflow->buf);
- 	free(bflow->os_name);
- 	free(bflow->fdt_fname);
- 	free(bflow->bootmeth_priv);
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index ae936c8daa18..9ba7734911e1 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -160,6 +160,7 @@ static int efiload_read_file(struct bootflow *bflow, ulong addr)
- 	if (ret)
- 		return log_msg_ret("read", ret);
- 	bflow->buf = map_sysmem(addr, bflow->size);
-+	bflow->flags |= BOOTFLOWF_STATIC_BUF;
- 
- 	set_efi_bootdev(desc, bflow);
- 
-diff --git a/include/bootflow.h b/include/bootflow.h
-index 44d3741eacae..fede8f22a2b8 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -43,9 +43,12 @@ enum bootflow_state_t {
-  *	and it is using the prior-stage FDT, which is the U-Boot control FDT.
-  *	This is only possible with the EFI bootmeth (distro-efi) and only when
-  *	CONFIG_OF_HAS_PRIOR_STAGE is enabled
-+ * @BOOTFLOWF_STATIC_BUF: Indicates that @bflow->buf is statically set, rather
-+ *	than being allocated by malloc().
-  */
- enum bootflow_flags_t {
- 	BOOTFLOWF_USE_PRIOR_FDT	= 1 << 0,
-+	BOOTFLOWF_STATIC_BUF	= 1 << 1,
- };
- 
- /**
-@@ -72,7 +75,7 @@ enum bootflow_flags_t {
-  * @fname: Filename of bootflow file (allocated)
-  * @logo: Logo to display for this bootflow (BMP format)
-  * @logo_size: Size of the logo in bytes
-- * @buf: Bootflow file contents (allocated)
-+ * @buf: Bootflow file contents (allocated unless @flags & BOOTFLOWF_STATIC_BUF)
-  * @size: Size of bootflow file in bytes
-  * @err: Error number received (0 if OK)
-  * @os_name: Name of the OS / distro being booted, or NULL if not known
--- 
-2.43.0.rc0.421.g78406f8d94-goog
-
+Regards,
+Simon
