@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA243C072A2
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:47:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C6EC072A2
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F4DD86EE5;
-	Thu, 16 Nov 2023 02:47:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B36428724E;
+	Thu, 16 Nov 2023 02:56:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ooDaI8xd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fg6BKSBD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 898CC87045; Thu, 16 Nov 2023 02:47:13 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 6C43D87251; Thu, 16 Nov 2023 02:56:53 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AB028652B
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:47:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A0D586EE5
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:56:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-77bcbc14899so15238885a.1
- for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:47:11 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-50a938dd873so422107e87.3
+ for <u-boot@lists.denx.de>; Wed, 15 Nov 2023 17:56:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700099230; x=1700704030; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Rfyxy6pFsz81PHN87zjpT07wTkxFGzWjFLZFMxF0Mzg=;
- b=ooDaI8xdBbdFb7iPU0uum98klH7FpoQkYkZeiFjgRGO7GdaBaUQ/PcuBoGqfeHiqlE
- aHwQXoYuWJ8iniG7+yyHm0EUWNZgIAMfEKa+73fCzxpxEnMQNsZxC3irAzw/Vbn1RHqw
- 5vfwI5y1ROsB7uTJJGZdw4Q5B+i4xDIw3OiIk=
+ d=chromium.org; s=google; t=1700099811; x=1700704611; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UYPEGd8Tbn49T/sf2x6G9ncU0L7nA7Gm1cxdgzY2IFM=;
+ b=fg6BKSBDos29wRagFCGYwMinaJwxTJvtq+EhrpJEEfdIRNXXHjH5r3lhRt+n+A765Z
+ H0RgR8fuFzipDlSDZB6hBaW1TKOYHTyr73Vs/2jTGBDbuq1llpBkXsBEY+VfhsoBEoTZ
+ U90AU3MPIslNcKlnyLItorC+8hLzYHswxBoPI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700099230; x=1700704030;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Rfyxy6pFsz81PHN87zjpT07wTkxFGzWjFLZFMxF0Mzg=;
- b=F71BET56mgvSMWm9yBbUevr5hDHsPa/TjNZtyOPbwFYxEcw1DupF9fRgbnbLRpuc+G
- nVGDfYr/XymjEdzjdahtnt6xG3Nuj9CiEPsghEWDUy8p+wVmuphJfa95SqBnFmA8q0+E
- hgrFf0sP1k4GR5tNmMEvPyY0vrsf9EXViIXRPIpppbnzFnL8U5QSkGiJIWPAjkceyMnC
- zTOFvob5TpZlWer8W337w10L3q1PaiiljDDxS53qmbHP8vxCQpVqvZbYAOnhgwzwK7vb
- 0Ndeoz4p2MI/iryZs1A5M47wdobL9SPxyFYqSUSqTanAHOkXYwnIIMjUQnDqf/AyAgou
- u7eQ==
-X-Gm-Message-State: AOJu0Yz9Z4iQi8xehTa+FmG0mIyJ4Eaw+DZApso7jf7eAxUJ1zcODyxo
- GlhE46uak6OQAav1QOqdMde//A==
-X-Google-Smtp-Source: AGHT+IGUA8xTcEMyj/lFOcP74Nq0bmube/qXIocyDU1Q8tcwgRCpa5mPUcHAPTewtm+pH42uLWR6oQ==
-X-Received: by 2002:a05:620a:1645:b0:778:9a8e:57c with SMTP id
- c5-20020a05620a164500b007789a8e057cmr6738983qko.78.1700099229842; 
- Wed, 15 Nov 2023 17:47:09 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6602-bbee-fb68-4a56.res6.spectrum.com.
- [2603:6081:7b00:6400:6602:bbee:fb68:4a56])
- by smtp.gmail.com with ESMTPSA id
- eb11-20020a05620a480b00b007742218dc42sm3931608qkb.119.2023.11.15.17.47.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Nov 2023 17:47:09 -0800 (PST)
-Date: Wed, 15 Nov 2023 20:47:07 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: Re: [PATCH 27/29] bootm: Adjust the parameters of bootm_find_images()
-Message-ID: <20231116014707.GI6601@bill-the-cat>
+ d=1e100.net; s=20230601; t=1700099811; x=1700704611;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UYPEGd8Tbn49T/sf2x6G9ncU0L7nA7Gm1cxdgzY2IFM=;
+ b=lKk/mtbTR/RJdK7lhBMmLLvROqAnnmHWzv8k4kilWxW/YCogW4iWtBd75HCBMG3sSW
+ 8/sPjcLHbB07hYFZsg5RRKcxAaW/TPVdIUL/eKxJn6OgtsaR9S7EwHO0is/enGTH1Vg4
+ YQwAsjJJyzv9TaBsbdybaCJpmHlSc/e523XoaR2/EeZ09OPGWCaBR40Uo+XBoCR3pJmL
+ 58IeQeBbHXz1X7Ap+/YY6WR/f9ufTfd4Lwmtq4rFpc5onNN1NUtetIKvtgGCAx1Q+SI9
+ J/VxtDjxBlIPe0PwuGDy1w+efAhk19KoFF2ZHZMUgH4hiZfhPWie3mwE7EG71zy1Rm7K
+ UKfQ==
+X-Gm-Message-State: AOJu0Yz5sIDfpNTjUTr7e/RwcUoOPLYaEsrRk9EV68RoFqC0StKEACyj
+ XjR3U+o7q+p5/F9QPgEwRxSx2qQjiYgUrPdDYUECydLZXPEa4Rjckls=
+X-Google-Smtp-Source: AGHT+IHzz/Ut2ZlBkeILmTq61k/lTiRd+h82g9B0JfceTSr2XuxdZ+BdfKcRjooN2eyHDVpIsD9YQ26QfppH6Fac6qI=
+X-Received: by 2002:a05:6512:3ca5:b0:509:8a47:3672 with SMTP id
+ h37-20020a0565123ca500b005098a473672mr9864379lfv.34.1700099810367; Wed, 15
+ Nov 2023 17:56:50 -0800 (PST)
+MIME-Version: 1.0
 References: <20231112000923.73568-1-sjg@chromium.org>
  <20231112000923.73568-28-sjg@chromium.org>
  <20231115223800.GE6601@bill-the-cat>
  <CAPnjgZ379WFHcrVUYPTGZqhUvA95aaDKdfiqNGBOXt4hBrWrKQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RmUIpxu1FL69nkNl"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ379WFHcrVUYPTGZqhUvA95aaDKdfiqNGBOXt4hBrWrKQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20231116014707.GI6601@bill-the-cat>
+In-Reply-To: <20231116014707.GI6601@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 15 Nov 2023 18:56:33 -0700
+Message-ID: <CAPnjgZ1v+ciAZGKgkgF3M1tzTdpFEMLJfj-xVQMLWpdmgYPzAw@mail.gmail.com>
+Subject: Re: [PATCH 27/29] bootm: Adjust the parameters of bootm_find_images()
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Eddie James <eajames@linux.ibm.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,84 +88,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---RmUIpxu1FL69nkNl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Nov 15, 2023 at 06:42:19PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 15 Nov 2023 at 15:38, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 15 Nov 2023 at 18:47, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Nov 15, 2023 at 06:42:19PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Sat, Nov 11, 2023 at 05:09:12PM -0700, Simon Glass wrote:
-> >
-> > > Rather than passing it all the command-line args, pass in the pieces
-> > > that it needs. These are the image address, the ramdisk address/name
-> > > and the FDT address/name.
+> > On Wed, 15 Nov 2023 at 15:38, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > Ultimately this will allow usage of this function without being called
-> > > from the command line.
+> > > On Sat, Nov 11, 2023 at 05:09:12PM -0700, Simon Glass wrote:
+> > >
+> > > > Rather than passing it all the command-line args, pass in the pieces
+> > > > that it needs. These are the image address, the ramdisk address/name
+> > > > and the FDT address/name.
+> > > >
+> > > > Ultimately this will allow usage of this function without being called
+> > > > from the command line.
+> > >
+> > > OK, so this goal is good.
+> > >
+> > > [snip]
+> > > > +             return bootm_find_images(img_addr, argc > 1 ? argv[1] : NULL,
+> > > > +                                      argc > 2 ? argv[2] : NULL, 0, 0);
+> > >
+> > > That we repeat this much harder to read test/if/else three times now is
+> > > less good.  Can we find some way to hide the complexity here in the case
+> > > where it's coming from a command and so we have argc/argv[] ?
 > >
-> > OK, so this goal is good.
+> > I can't really think of one. Ultimately this is coming from the fact
+> > that the booti and bootz commands directly call bootm_find_images(). I
+> > haven't got far enough to know whether that will still be true in the
+> > end, but I hope not.
 > >
-> > [snip]
-> > > +             return bootm_find_images(img_addr, argc > 1 ? argv[1] :=
- NULL,
-> > > +                                      argc > 2 ? argv[2] : NULL, 0, =
-0);
+> > IMO the correct place for the logic above is in the command-processing
+> > code, where it decides which arg means what.
 > >
-> > That we repeat this much harder to read test/if/else three times now is
-> > less good.  Can we find some way to hide the complexity here in the case
-> > where it's coming from a command and so we have argc/argv[] ?
->=20
-> I can't really think of one. Ultimately this is coming from the fact
-> that the booti and bootz commands directly call bootm_find_images(). I
-> haven't got far enough to know whether that will still be true in the
-> end, but I hope not.
->=20
-> IMO the correct place for the logic above is in the command-processing
-> code, where it decides which arg means what.
->=20
-> I could imagine something like:
->=20
-> static const char *cmd_get_arg(int argc, char *const argv[], int argnum)
-> {
->    return argc > argnum ? argv[argnum] : NULL;
-> }
->=20
-> but I'm not sure that is an improvement.
+> > I could imagine something like:
+> >
+> > static const char *cmd_get_arg(int argc, char *const argv[], int argnum)
+> > {
+> >    return argc > argnum ? argv[argnum] : NULL;
+> > }
+> >
+> > but I'm not sure that is an improvement.
+>
+> I was thinking about this more after I sent this. And I think we might
+> indeed want an inline / macro to handle this case more generally as I
+> suspect we'll have similar cases where we need argN-or-NULL as we
+> refactor other areas of code to split "here is the command" from "here
+> is the library functionality" of it. Then we'll have:
+> ulong foo = cmd_arg_one(argc, argv);
+> ulong bar = cmd_arg_two(argc, argv);
+>
+> librarycall(foo, bar, ...);
 
-I was thinking about this more after I sent this. And I think we might
-indeed want an inline / macro to handle this case more generally as I
-suspect we'll have similar cases where we need argN-or-NULL as we
-refactor other areas of code to split "here is the command" from "here
-is the library functionality" of it. Then we'll have:
-ulong foo =3D cmd_arg_one(argc, argv);
-ulong bar =3D cmd_arg_two(argc, argv);
+OK I can try something. But note that the one, two terminology becomes
+confusing. Is the first argument zero or one? Also we often drop an
+argument in a subcommand to allow things to start from 0 again.
 
-librarycall(foo, bar, ...);
+It might be better to use first and second, instead?
 
---=20
-Tom
-
---RmUIpxu1FL69nkNl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVVdJgACgkQFHw5/5Y0
-tyzezgv/acHnWnkQkO5yHGRc7qNfBxVEbh9Gr4KnQLuzaFL/r4XKP0jLvcWzzUPI
-H9Ee+hKhGaoi0BrBksFGXGmEzfEpwc/QTqZ6C7R4kvArE8fo7Y+br7k16iZEyFGg
-Vb0E3dXfsEGqUMDbaY1jERC00P6kIJbGusrrhH7zsAHQxRZPM6K/7Nlm2jIuJk6Z
-e65hpZYTtqrWZEjgYElzy7aP2URyVMIoN9zUmz5WqADVMswv5tfrMjp9hzQ1722T
-CBTI51O8NtArifV1V+RVAl/Ky85OPzpbddRkvAPUIsj7QOToTz5L7vNz1cog6qre
-5oteshUfJdS4TghdjTT2HIhGZDK7FQqlDwP8EWP6ZS1L3m2UJIStTsbEaPGo71sr
-zy9WQETTVIWBz0SP/6oWXYG+DYW3vseNPMFqsyLL0KoL+GkOhTT5PfQO7RNeDIq9
-tMWoDYos+D+AQ57oIb6Ph2Mj0W6vXso9s8kwgYTUonVioEJgTFSTyWbqsBWHZdcI
-9Tymc9zq
-=bMt1
------END PGP SIGNATURE-----
-
---RmUIpxu1FL69nkNl--
+Regards,
+Simon
