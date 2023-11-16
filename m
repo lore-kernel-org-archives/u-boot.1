@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A269C072A2
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 00:54:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FA9C072A2
+	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 01:07:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EBBD87206;
-	Thu, 16 Nov 2023 01:54:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7575D86F31;
+	Thu, 16 Nov 2023 02:07:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="I3WalHMq";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JY1CCRtp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1222E8729D; Thu, 16 Nov 2023 01:54:45 +0100 (CET)
+ id C1A9C87045; Thu, 16 Nov 2023 02:07:21 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C048787278
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 01:54:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE5FB8269F
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 02:07:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700096074; x=1700700874; i=xypron.glpk@gmx.de;
- bh=Fmq1N3aKOSQ2wyfekk2ZTViNeL5Abn+wm0bCpZJvYMU=;
+ t=1700096839; x=1700701639; i=xypron.glpk@gmx.de;
+ bh=pe6PrPa2FzQ+GtXwJ/1iq1+Oim7TMNI3lHSJ5Yp3l+w=;
  h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=I3WalHMqeczSR0lJeX6ndwNzlDaD1c4Cr2M1TpgTnOobb4/zmSQX7x3+PF/mxD1F
- /tEvKGq97xPzrs1H+WRHYqPLxDZ+mpqsX5oPkbfqwxFS03IaWIpcU9sga0tNjJroP
- 1MSRFX4bCY6lPXNB6T9YPK17iydHEx99oBX/OvxXroraeuwchJc2MoGZFNxf3yyzV
- BSpisVzDwxJwBG8XfJ25XEyazRM4Qg1qv3qBa2PQ2mFokWSHPSNbBgG/y2STwY42f
- 1FSAV+/ZiN/IiPkNE5YTBBUCiHYHIjau75kvImm8A0hx+RUBRJbZv083KbPQShQ0e
- F+P1/Sz5WZlY6hM9qg==
+ b=JY1CCRtp4KfsyYfUYEHXNthSB9/7PhUCFqxiVRe3dqc5F2JuqDyTEhtFCQlXl31t
+ VDiv3zmtiFZgTUM8Sc/l4Jtak3LIyf3xUpejL8u9hOpVZGYY6/Q5c+j4TgDU9UMoA
+ dqDurXTGguztM6fznGKPgzs43zqe7rBlIwLHWKBNkwh6G6S/TBt8x7OQtZ85e++SE
+ eDYaivCDpxQ4MdmVTZPLQLc7GjraNU2KALP9MjJQ24NyaNf+d+BBDhGXLmC/U/A5b
+ 8zql9RiwiKJetiw/YFiuVG8BSIAlpm+LGIDMrykUB/7XwjJrVoLyn7fpPmpUHLxlQ
+ nQdIfHORHoVS+oXbeQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2wKq-1r4WZy1loy-003K8u; Thu, 16
- Nov 2023 01:54:34 +0100
-Message-ID: <8b4de31e-4f4e-4e21-ab33-2ca64b745b54@gmx.de>
-Date: Thu, 16 Nov 2023 01:54:26 +0100
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MIMbU-1r6ieI479A-00EJvE; Thu, 16
+ Nov 2023 02:07:19 +0100
+Message-ID: <e1683a7a-45b5-4a0d-9871-bcb25b0fd601@gmx.de>
+Date: Thu, 16 Nov 2023 02:07:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US, de-DE
@@ -48,28 +48,28 @@ To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Bug in distro_efi_boot()
+Subject: [BUG] usage of $kernel_addr_r in distro_efi_boot()
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:kXUK9NcZgTbJtoXO/JNOhssGTFVZxsfeKqmBc2Yuo7RFrDfAXxK
- CIPcP0lhgNfJxI8ge5rwbpRHP3TkD0XkPTTs2EequAjzzL1ZSFuI45MDO6Z08WwrrrcWV/l
- 2oMLLUlSVYgeqc2tqF2kw1tnHVtrBUumin+DG3DpmgV1DoyJZ5t76ZDNJ7g1V5wkH+WF37z
- onljHYXr0TmzafwvoHFSg==
-UI-OutboundReport: notjunk:1;M01:P0:m04FDUTIL3Q=;UF8q1GJsV3H5BwGIO6x2CrMRh54
- bWo/L+zfPoSbMQQIwa8YDnSrKWkzsEA30SFBGfxS6bn/OVS/wQW/luXQ2lk/0+3EA4f7Mb8yK
- zkGkPPARQvq+2g0J/sYC5C5dJ8rcGFju0wLM/PPjgqMokEUWyw1nWQWTsGTns/OGuR/veoIoY
- JQML6P9VemjUcPf/Gj/Opp7i8n5BosF3G+K06zrqg23bpS/P1sg2PnD3kwtzBTZT+8MXgOKdv
- ogBR1gfF7arNDsvMKSe5+RV4WrM0ihjEXS5vwMCgmAOVBdLcaDoom+H63FZjsfv/IY5XwKbeJ
- 1S2MXMXxrD4bVfdEpTU+aD3n1mXcByYSnAMu2nKeO//Xsc0+XZ9K5Dg3ExVqmLxrPxJYwdJl3
- b2TnAlrrQm7/lqwatSYwJU+pMT8RKfajawBzX0PSvBVuypIhwHJBYd9R9+wSzLmvfZ7zXumJf
- jO8ougQ4I+rdN6OJjQoDyHgCZMikzymcCcZtO3hEI//DxIjfLi/HWN9AKfB3e1tSSEnkoyhLA
- 5O46yRpzsq9L9JZ8/KepiBhAySlrp5NXwi1icMB3mmtf7U0VTyca1sQULLrr4ZEjlTEMUX4pd
- 88aFWw0B+FIlpGh5P70U8fpn8UnK4Qjxc7gBFuJYUlIEekG4eg+jn8TJr/UAXN3cki9XIc+i6
- S8IIt/iJh+L5nwcvbGSrb+Q2SztjwN8PAOTL1lCUlG+3SCHxjmWbp2iP36uigkg2WUlfKury5
- kqsCd8gYoX7n4uFDz7OdQxpHXZyNYRMormj4dgBIvTkSybqKRXUyf3GYZsl9DwBA/RSn2B3+j
- WvqojF/upeOPviXw7fxElpZyeBjg5zmndcTjdjNYRZA1F02206khswU1QkHYqNBG4U1lvmgF1
- /wYDUn6DGKyZaGC/H/jpvklZSbt2GfyLX4RK/R1wRI0HN62oBi19MoK4cCauydtlh1moW1P/c
- 0jF1RQ==
+X-Provags-ID: V03:K1:2tZrG+tESFIT2gAhd9Lg21gh5mOzXiupgvCaDD2odGuoHV8Np4d
+ F6AKoqM5sF5JtMIaSZbMNHlPtcry7Fb5K726O6rTtloGK/N9eTSdHuLmXYSE/t1KOBgHa8h
+ co6SYweR60lw/cRxtS7em/1t08nNr4RgrgPmdKNePKS2ZsmJoysM1QUHffyIjfxWapPkbKL
+ IcClqaVEcVqgYCpHvdj6Q==
+UI-OutboundReport: notjunk:1;M01:P0:rH6AeMwdh9Y=;Ox0WTPMV3oBP24aLvQmHkFiVHgB
+ 6A3kLaSN2rjg3ge6NGeMWPFmmPmcExFr1LvSEPZSm+sJWwFewrKUs5UBwztU77SmyRYGYV5Jj
+ TFty1miFE61XvKT09bqzlSomOYqoDktkykyVpkgvyDRV8fjQnzckec9BVswd5c91zZza0Fiic
+ 4sPlXWOnNclw1SC7tSO/Pq7yWDT/JQWrnMiofkORAXVXol0kfcEbU+I0Pzg4TWra9sATT/KPc
+ FZUfwqVH4ODPJLCAvB+IUAhp/SkpXQ980dCsUJKphEB5BOqmmm84PJDl0m4bMI2xXMNyDEjdH
+ RwfehO/HIyMvlveoEib5hah0OhlXJQld2EBDC9tGkQe91cqfT2Du2KIprrsuTinWY4+gXJBUG
+ HCjPziRsdLa/CeflI+NivVUzFNe2FPhHjKhPkt+VteJesQAglG7L9+GQlynD0/BBHh3vX9RZz
+ xuBu2vG2NgCR+ed/12beZd0oNMu/SPDvI9gMDC6apLi1c97TVNzcNYBaP+/Flk6R/38S3a82q
+ mGVJ784CNBIWNG5O3vqnblhm+t2SsMUcOfpjYrsweoYdZ61lqR2oR++cudNuvSpqoH87JSVbM
+ tZ+10f8K0uflNhj35AdJy08Tj38yyAc13GqrJvso/iiAidMtfm0MBRl0hEHLOYrmaIfWHzwb5
+ 5exqfuupZL9gfRXB2zDpWuXEUb1vBcz5Bx+EeMATB+BVuSrLuOgwRE8T9EbwxNkQpZejYvpd5
+ DuQoRbHDovWHNGJC98F4hwrj7exX84TFJZBGrSqN1UyeblluNRCHXTRyILc7ZAJWBra1cCXDO
+ MDw/vv58leeQ6J/I9eK57zJRPRC/MrU2V3LWAa9kcYrp2/DL5y6B8oNw20yVNQUBDok4b9fEF
+ XaxGhOHH+Z1AWFy3MJFhow/OV7qD4FThf2Z8y6Rhhe0JrIoWoknqH59HtfxC2+mrIAuFjMAls
+ XVcNTxXSc1lYTqZJ7RQWRCyotwE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,20 +86,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+If $kernel_addr_r cannot be read, distro_efi_boot() falls back to
+address 0. This will lead to a segmentation fault on many systems.
 
-In function distro_efi_boot() the bootefi command is called. The second
-argument should only be passed if a device-tree has actually been
-loaded. But this is not what the code does:
+distro_efi_read_bootflow_net() has a fallback to CONFIG_SYS_LOAD_ADDR
+and may have loaded to that address.
 
-For network boot methods the value of $fdt_addr_r is passed as second
-parameter though possibly no file has been loaded there. We should not
-pass a second parameter to bootefi in this case if no device-tree was
-loaded. The bootefi command will fall back to the U-Boot device-tree in
-this case.
+Shouldn't we be consistent in what we program?
 
-For other boot methods gd->fdt_blob is passed as second parameter. We
-should not pass a second parameter in this case either.
+Please, use a field in the bflow variable to indicate if and where an
+EFI binary has been loaded.
 
 Best regards
 
