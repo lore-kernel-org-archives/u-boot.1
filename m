@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B69A2C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4534DC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:41:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27D1887483;
-	Fri, 17 Nov 2023 23:38:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A52A086F56;
+	Fri, 17 Nov 2023 23:40:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aZVizEcD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ESGsRz7q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDC0486F56; Fri, 17 Nov 2023 23:38:43 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DE9E486F7C; Fri, 17 Nov 2023 23:40:57 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BB858701C
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:38:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C3E086D3C
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:40:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AHMcWXM024222;
- Fri, 17 Nov 2023 16:38:32 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700260712;
- bh=dUDIjnGMRLkAVN8ZmaU+CbF4u8wqbQ+3xnlaICnLYs4=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=aZVizEcD3OBTT9TQOfmwkZe/R7nBzILQtc/+9oQgEoSODUibYZfk70Hxhg2Dquk7F
- zD7K4Ry0f5iGMBzEFogUekZLqf18vm2MKfKLfU7tGlojnlrdhEYBqDdc6SU9p0g9gp
- p2MFhchn3pk03UnWcEBtveAMUhZ8opvSn/0py1W8=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AHMcW2D006445
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Nov 2023 16:38:32 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
- Nov 2023 16:38:31 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 17 Nov 2023 16:38:31 -0600
-Received: from lelv0327.itg.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AHMcUtx021675; 
- Fri, 17 Nov 2023 16:38:31 -0600
-From: Andrew Davis <afd@ti.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-CC: Andrew Davis <afd@ti.com>
-Subject: [PATCH 3/3] ARM: keystone2: Remove unneeded inclusions of common.h
-Date: Fri, 17 Nov 2023 16:38:29 -0600
-Message-ID: <20231117223829.346652-3-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231117223829.346652-1-afd@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-1f084cb8b54so1386130fac.1
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:40:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700260847; x=1700865647; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=eBLKunytHZZ+6cn5Vn4qMoTjxIoaR7Fo27l0d3cKqPI=;
+ b=ESGsRz7qvJF4cpf3hpBeED/44uauUwdBX82Ao8ZWhKWxNy2kXJJfaSiCgq2cqK1fjV
+ /VimIQgCidVbrDOgpWu1NLu7sxggoJUDmQbvOGF+rYfgE0q2kURZ22lZARH0iADn3iUr
+ uBHD56/8izVvBq55ZdoW3u7teHTb9BUvuW0pw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700260847; x=1700865647;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eBLKunytHZZ+6cn5Vn4qMoTjxIoaR7Fo27l0d3cKqPI=;
+ b=FvTPf9/skYFbDDEIL5CoaCdBgezxCtDHHUDN0KjQZfW7DbJ/rl3YmCfs5Ve4xrWRea
+ +w/+fBdnEPbMgZzIEN3hgVsoGbKH9UhDFEU6PQKZ2fGqaBTnkWjvkiIDfAILQxpc2XHF
+ kRNiJ1kkRhuz1LdSCv+5sMMhQG7I0cvplWdH5LfISqLUtOmFA1jUL8kIDrjlMWJqw47A
+ 3ajmQ0Mkp/HhrE448w/m/mLbnfAVv1LNd37CB0BoAKYC++oV+/SlzlOqSIGaQU1n2kpj
+ Qdg8HLNbVpDww1E1X2vIzu3EoZb3D058M0eZM6uT3cJlI39oRv3TF2r8p45yMvqtIby3
+ Kv8w==
+X-Gm-Message-State: AOJu0YxNw6IelaMlioifrCMR0UHdbSHrmYODMRVD7db46Ln0JCnVuHBB
+ iyyATOjw7yaWrbH6F5ZFlu2GYQ==
+X-Google-Smtp-Source: AGHT+IFwROqakHliKr5NIyumfi6ZyF+LfiK20dTRr5FMlE0gieafXIRg8JLTDT83S2VC+jBtwbjxOw==
+X-Received: by 2002:a05:6870:cc8c:b0:1f5:56b2:e502 with SMTP id
+ ot12-20020a056870cc8c00b001f556b2e502mr766062oab.0.1700260846955; 
+ Fri, 17 Nov 2023 14:40:46 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-dbd8-aafa-ccfe-bf84.res6.spectrum.com.
+ [2603:6081:7b00:6400:dbd8:aafa:ccfe:bf84])
+ by smtp.gmail.com with ESMTPSA id
+ bq31-20020a05620a469f00b007789a3499casm912617qkb.115.2023.11.17.14.40.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Nov 2023 14:40:46 -0800 (PST)
+Date: Fri, 17 Nov 2023 17:40:44 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Davis <afd@ti.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] configs: keystone2: Do not include hardware.h
+Message-ID: <20231117224044.GD170968@bill-the-cat>
 References: <20231117223829.346652-1-afd@ti.com>
+ <20231117223829.346652-2-afd@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pnXlLM8X2bsLPp8C"
+Content-Disposition: inline
+In-Reply-To: <20231117223829.346652-2-afd@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,170 +92,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- arch/arm/mach-keystone/clock.c                | 1 -
- arch/arm/mach-keystone/cmd_clock.c            | 2 +-
- arch/arm/mach-keystone/cmd_mon.c              | 1 -
- arch/arm/mach-keystone/cmd_poweroff.c         | 1 -
- arch/arm/mach-keystone/ddr3.c                 | 2 +-
- arch/arm/mach-keystone/ddr3_spd.c             | 2 +-
- arch/arm/mach-keystone/include/mach/mux-k2g.h | 1 -
- arch/arm/mach-keystone/init.c                 | 1 -
- arch/arm/mach-keystone/keystone.c             | 1 -
- arch/arm/mach-keystone/mon.c                  | 1 -
- arch/arm/mach-keystone/msmc.c                 | 1 -
- arch/arm/mach-keystone/psc.c                  | 1 -
- 12 files changed, 3 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm/mach-keystone/clock.c b/arch/arm/mach-keystone/clock.c
-index 0c59515d2eb..4f193794efb 100644
---- a/arch/arm/mach-keystone/clock.c
-+++ b/arch/arm/mach-keystone/clock.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/clock_defs.h>
- #include <linux/bitops.h>
-diff --git a/arch/arm/mach-keystone/cmd_clock.c b/arch/arm/mach-keystone/cmd_clock.c
-index 72dc394df5f..e9ecc05953a 100644
---- a/arch/arm/mach-keystone/cmd_clock.c
-+++ b/arch/arm/mach-keystone/cmd_clock.c
-@@ -6,7 +6,7 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
-+#include <vsprintf.h>
- #include <command.h>
- #include <asm/arch/hardware.h>
- #include <asm/arch/clock.h>
-diff --git a/arch/arm/mach-keystone/cmd_mon.c b/arch/arm/mach-keystone/cmd_mon.c
-index dc97bac8550..c6e7e2c3097 100644
---- a/arch/arm/mach-keystone/cmd_mon.c
-+++ b/arch/arm/mach-keystone/cmd_mon.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <image.h>
- #include <mach/mon.h>
-diff --git a/arch/arm/mach-keystone/cmd_poweroff.c b/arch/arm/mach-keystone/cmd_poweroff.c
-index f0ad9173b96..0ad31ef4e28 100644
---- a/arch/arm/mach-keystone/cmd_poweroff.c
-+++ b/arch/arm/mach-keystone/cmd_poweroff.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <asm/arch/mon.h>
- #include <asm/arch/psc_defs.h>
-diff --git a/arch/arm/mach-keystone/ddr3.c b/arch/arm/mach-keystone/ddr3.c
-index ea7d0b903cf..ca0fb702d54 100644
---- a/arch/arm/mach-keystone/ddr3.c
-+++ b/arch/arm/mach-keystone/ddr3.c
-@@ -9,7 +9,7 @@
- #include <cpu_func.h>
- #include <env.h>
- #include <asm/io.h>
--#include <common.h>
-+#include <vsprintf.h>
- #include <asm/arch/msmc.h>
- #include <asm/arch/ddr3.h>
- #include <asm/arch/psc_defs.h>
-diff --git a/arch/arm/mach-keystone/ddr3_spd.c b/arch/arm/mach-keystone/ddr3_spd.c
-index 6f7f8ab7b40..d4ff442175b 100644
---- a/arch/arm/mach-keystone/ddr3_spd.c
-+++ b/arch/arm/mach-keystone/ddr3_spd.c
-@@ -5,8 +5,8 @@
-  * (C) Copyright 2015-2016 Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <log.h>
-+#include <string.h>
- 
- #include <i2c.h>
- #include <ddr_spd.h>
-diff --git a/arch/arm/mach-keystone/include/mach/mux-k2g.h b/arch/arm/mach-keystone/include/mach/mux-k2g.h
-index 67d47f81721..dfb5ad43506 100644
---- a/arch/arm/mach-keystone/include/mach/mux-k2g.h
-+++ b/arch/arm/mach-keystone/include/mach/mux-k2g.h
-@@ -9,7 +9,6 @@
- #ifndef __ASM_ARCH_MUX_K2G_H
- #define __ASM_ARCH_MUX_K2G_H
- 
--#include <common.h>
- #include <asm/io.h>
- 
- #define K2G_PADCFG_REG	(KS2_DEVICE_STATE_CTRL_BASE + 0x1000)
-diff --git a/arch/arm/mach-keystone/init.c b/arch/arm/mach-keystone/init.c
-index 1954e69e9f0..39afaaa63d6 100644
---- a/arch/arm/mach-keystone/init.c
-+++ b/arch/arm/mach-keystone/init.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <init.h>
- #include <ns16550.h>
-diff --git a/arch/arm/mach-keystone/keystone.c b/arch/arm/mach-keystone/keystone.c
-index efaabca5a7e..8846df3af48 100644
---- a/arch/arm/mach-keystone/keystone.c
-+++ b/arch/arm/mach-keystone/keystone.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <env.h>
- #include <init.h>
- #include <asm/io.h>
-diff --git a/arch/arm/mach-keystone/mon.c b/arch/arm/mach-keystone/mon.c
-index e91b0d68f4d..b945e19ec77 100644
---- a/arch/arm/mach-keystone/mon.c
-+++ b/arch/arm/mach-keystone/mon.c
-@@ -8,7 +8,6 @@
- #include <hang.h>
- #include <image.h>
- #include <asm/unaligned.h>
--#include <common.h>
- #include <command.h>
- #include <mach/mon.h>
- #include <spl.h>
-diff --git a/arch/arm/mach-keystone/msmc.c b/arch/arm/mach-keystone/msmc.c
-index f5cadfbf669..a20e0c98865 100644
---- a/arch/arm/mach-keystone/msmc.c
-+++ b/arch/arm/mach-keystone/msmc.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <asm/arch/msmc.h>
- 
- struct mpax {
-diff --git a/arch/arm/mach-keystone/psc.c b/arch/arm/mach-keystone/psc.c
-index 145aff8ac66..84d64f3bc40 100644
---- a/arch/arm/mach-keystone/psc.c
-+++ b/arch/arm/mach-keystone/psc.c
-@@ -6,7 +6,6 @@
-  *     Texas Instruments Incorporated, <www.ti.com>
-  */
- 
--#include <common.h>
- #include <linux/delay.h>
- #include <linux/errno.h>
- #include <asm/io.h>
--- 
-2.39.2
+--pnXlLM8X2bsLPp8C
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Nov 17, 2023 at 04:38:28PM -0600, Andrew Davis wrote:
+
+> This is a hacky way to have this file included in all source files that
+> include common.h, instead just include from the files that need it.
+>=20
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  drivers/memory/ti-aemif.c            | 1 +
+>  drivers/soc/ti/keystone_serdes.c     | 1 +
+>  include/configs/ti_armv7_keystone2.h | 1 -
+>  3 files changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/drivers/memory/ti-aemif.c b/drivers/memory/ti-aemif.c
+> index c4bc88c1510..41325eb0f94 100644
+> --- a/drivers/memory/ti-aemif.c
+> +++ b/drivers/memory/ti-aemif.c
+> @@ -7,6 +7,7 @@
+>   */
+> =20
+>  #include <common.h>
+> +#include <asm/arch/hardware.h>
+>  #include <asm/ti-common/ti-aemif.h>
+> =20
+>  #define AEMIF_WAITCYCLE_CONFIG		(KS2_AEMIF_CNTRL_BASE + 0x4)
+> diff --git a/drivers/soc/ti/keystone_serdes.c b/drivers/soc/ti/keystone_s=
+erdes.c
+> index 2ece1a8f647..0e1bf8ff39d 100644
+> --- a/drivers/soc/ti/keystone_serdes.c
+> +++ b/drivers/soc/ti/keystone_serdes.c
+> @@ -8,6 +8,7 @@
+> =20
+>  #include <errno.h>
+>  #include <common.h>
+> +#include <asm/io.h>
+>  #include <asm/ti-common/keystone_serdes.h>
+>  #include <linux/bitops.h>
+> =20
+
+Is there going to be a follow-up to remove common.h from these files
+then? Thanks.
+
+--=20
+Tom
+
+--pnXlLM8X2bsLPp8C
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVX6+kACgkQFHw5/5Y0
+tyztbgv/eVFPgM8IN8howQIjqJq3zt4SUsD4BGADl/KUYqT308FfNJdDHctufnAE
+5o7dBKv8z1521GsC81AZAZ/RqUtIwecC92I/BmpHRu5prCCHXhr57KGgbDjq7EK7
+Z0UIXVQEBOivCFMLpucY9Y68WbuGSTv9Ndo8MnIJy+cAJQDegYIGCdgHCwMdQo17
+zocFJI3kTDTdPkWCrrM88QwmUtGcg++82mE0vEsuvjANPKq/b+QsTE9ggbYSuUqg
+LBxcwvAgQUfBphb8GbqclHnE3JBCAWSzXgm+d6hiVNcUhwPRKF7gleou7jgnL0i/
+ulbp+GgfEB63sjDJn/e2ykw7qP86sfNrzBSs8aRtTzdKwbDHNSq3hGLqrMGCP4ls
+MnCABu+04N9sO7ESjppt0Eochcf4Fiz5ZTNaljqJyxVCQs9YVsfvGLvG5sB/bFVE
+zO+qXOTEprGqsWqyxD9jcMkpEnOJ0XDYxoLmO0sVPzPWFqi/1wy7fWekvOEr71Bh
+fwnqK8sP
+=fpV6
+-----END PGP SIGNATURE-----
+
+--pnXlLM8X2bsLPp8C--
