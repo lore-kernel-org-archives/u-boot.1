@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 219A6C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 05:52:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6954BC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 07:53:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F2C686F67;
-	Fri, 17 Nov 2023 06:52:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 55D0486FCE;
+	Fri, 17 Nov 2023 08:53:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T4aUzXGx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NgL0VvxI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FA9386F73; Fri, 17 Nov 2023 06:52:27 +0100 (CET)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
+ id 698C486FCE; Fri, 17 Nov 2023 08:53:11 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E188686E37
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:52:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 918FF86FB7
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 08:53:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4af5ea40b7bso623868e0c.2
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 21:52:24 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9becde9ea7bso564996366b.0
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 23:53:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700200343; x=1700805143; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UK0D/zMfr3lQXfUgNjlzo1Mm3N9ujP8ye5kdH2Q2NqU=;
- b=T4aUzXGxwTVhnG0DZ9i5EFMqFI5+OUURM+511gusXopxxBSP++l/0wMeuTAIxQlTkb
- PX2b6IO3zWaIxKP40IiHCuAx3cjfUPcFK9KjND1cNr0x90i5/b4HV2IgcnZbDJfhY9RZ
- GumHDjl8m1ozcq7s1as6a5zhxVElGcvRYW51OEwKunVa9CFq9qEl0qUBw7kP6PPpJXc7
- PKdO9kN6/Sh3cVEFBnm8op2BEsUM3tUuzDXKQBGn/dlHigRuWE8dO7auxO9jsDCZaEUr
- 6/6k80d15EZEdygRGNF0xyTi/LH8mQplHhFXvzrtToAG8o9835mDfDpWcQ+rK6pwQYxK
- 51SQ==
+ d=gmail.com; s=20230601; t=1700207585; x=1700812385; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t6gneQ2sXEeyyzBU4kdxtSWkxO3t6IRX/CX3EbT4uNk=;
+ b=NgL0VvxIgVAvCWS9Xjnp16xdgIcL6uR448bnntu5QmIlWgsiBVe0UsnZpdnuzga3Al
+ fLz/9+eDqQMIuoK5cdlNRT0YrtrioHKSFczRfnNXWkT/HoxHVOiW4EFsFb1UT9RsLWP3
+ u2QggKEgJKAudYI29eylA0v8mi+Ryvx9NmIrlMYbhA/9I5cJHhAVgfxPj/Bt4f9n1Fo0
+ Sj+LY3V79XNK0Hj3pAKg8z47tm5DOhrkJqqkh3ruNx4AzfwMbNzsv5rUhSPbCFvPxzn0
+ bZQbwZ5ZLtpJ/rsekIRaX2xlVOMliprGlqT31tPXaeU7k3TvvKwHJRxOo72stIARFqLC
+ pPuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700200343; x=1700805143;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UK0D/zMfr3lQXfUgNjlzo1Mm3N9ujP8ye5kdH2Q2NqU=;
- b=IwhFQuRHdRMfeUOl0sMreoWR+7AA+2u9UkUJ99BxCBiRXysob20IiuNhsld94ywK1G
- Mlvh5AY2MplPp5vUeeWn4+R9jmaomoBeBDItuU7fBXpN3eIFGvdor0gOewADrdgZJNtn
- 8DasvhI4pcDSW94UpnIM5zhq5P5i/LXj2RYZw4wXYAEU1T4npFa/L9BmRAAKN5q6IhDk
- Io5GqIrLNtg1G1wfTqIn/8Kok8xQq0GetFXFtsD14fiTXdcgCoTIPJtU2MdppUizoSHZ
- WX6Fl+mI4PfNixuhD9omPFPUjhvi7OrHdmURYwYbnDiR/aoEHoMgTEdK5bQ71GHIniqN
- KTLA==
-X-Gm-Message-State: AOJu0YxgGhJrXDkn+oF8g2pW2qyNlk5heKa8bH7LYLOScqgArHc13XEr
- U6UuYAqdHVeBYjXY4gNZmy7f4nrZ12kK1uxIaXNxDg==
-X-Google-Smtp-Source: AGHT+IGMB7eJ2kVY2BQ47kzMydbPXHSFRYZ6/pXhsonk/45H/sHh9CZYZDXjJm0GSCO7RnkklNsqJi//WaxGUEl2eyo=
-X-Received: by 2002:a05:6122:922:b0:4ac:462b:7417 with SMTP id
- j34-20020a056122092200b004ac462b7417mr20523689vka.8.1700200343622; Thu, 16
- Nov 2023 21:52:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700207585; x=1700812385;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t6gneQ2sXEeyyzBU4kdxtSWkxO3t6IRX/CX3EbT4uNk=;
+ b=L4FLO2nBNA5oTfTl3fFefHcNDryBd713ytg/IcL7PhnrEpq4dgMC9vrXOJbjN9hF5l
+ uRZ3e+R5iQ6N+0p1crWUqfqmCSUCM9nQgAZrsTxDdwHxdijQYcJDRKrV2BQbLND3xC6b
+ AFg0DBllT3qy9sCh4yo+U5GMnS2CumZV+QsyR4K3Tgn7lZ/HU9N7LA2Gi2OpbrWThIiu
+ xp9COY9RmcAn2O7XV1lPRFSaBPPR/gtS5QPbZ/wLWn4Wf+9vhvx2Z6jrtXuEnEDjooBq
+ 1obn11usZR5VJRflzICnwvO8koQg6jxsP8/BHk/l5JgfU4Ouj7qu6vxBCBIETKAnHK0k
+ 8M7g==
+X-Gm-Message-State: AOJu0YwBvmDoBgHh2K0mZqgaAf7LsV6iW7bKsc4L7qcLfqel3FmaQ11p
+ CveD47LZLVQ3iq1C627RnfLDWug8rOE=
+X-Google-Smtp-Source: AGHT+IFeOdxt+kjHuXBu9aJUNkqRzo9fgrsLsz/tjCQwsx377t2t+bx6m7kXfUBfo/o4AH+reNfuig==
+X-Received: by 2002:a17:906:c111:b0:9ee:9d98:7d8c with SMTP id
+ do17-20020a170906c11100b009ee9d987d8cmr4585232ejc.6.1700207585391; 
+ Thu, 16 Nov 2023 23:53:05 -0800 (PST)
+Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
+ lo7-20020a170906fa0700b00988e953a586sm503967ejb.61.2023.11.16.23.53.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Nov 2023 23:53:05 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 1/1] clk: clk-gpio: add actual gated clock
+Date: Fri, 17 Nov 2023 09:52:40 +0200
+Message-Id: <20231117075240.15741-2-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231117075240.15741-1-clamor95@gmail.com>
+References: <20231117075240.15741-1-clamor95@gmail.com>
 MIME-Version: 1.0
-References: <20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org>
- <20231114-b4-qcom-dt-compat-v3-4-88a92f8f00ba@linaro.org>
-In-Reply-To: <20231114-b4-qcom-dt-compat-v3-4-88a92f8f00ba@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 17 Nov 2023 11:22:12 +0530
-Message-ID: <CAFA6WYP=y+u6si8zo-atTcrFA4SrPXeYBYL3N8RaQW=Dn7AN5Q@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] spmi: msm: fix register range names
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,148 +91,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 14 Nov 2023 at 19:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> The core and chnl register ranges were swapped on SDM845. Fix it, and
-> fetch the register ranges by name instead of by index.
->
+Existing gpio-gate-clock driver acts like a simple GPIO switch without any
+effect on gated clock. Add actual clock actions into enable/disable ops and
+implement get_rate op by passing gated clock if it is enabled.
 
-You haven't updated qcs404-evb.dts to provide register names, so this
-change alone will break that platform.
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ drivers/clk/clk-gpio.c | 47 +++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 40 insertions(+), 7 deletions(-)
 
-> Drop the cosmetic "version" variable and clean up the debug logging.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  arch/arm/dts/sdm845.dtsi |  2 +-
->  drivers/spmi/spmi-msm.c  | 46 ++++++++++++++++++----------------------------
->  2 files changed, 19 insertions(+), 29 deletions(-)
->
-> diff --git a/arch/arm/dts/sdm845.dtsi b/arch/arm/dts/sdm845.dtsi
-> index a26e9f411ee0..96c9749a52c0 100644
-> --- a/arch/arm/dts/sdm845.dtsi
-> +++ b/arch/arm/dts/sdm845.dtsi
-> @@ -63,7 +63,7 @@
->                         reg = <0xc440000 0x1100>,
->                               <0xc600000 0x2000000>,
->                               <0xe600000 0x100000>;
-> -                       reg-names = "cnfg", "core", "obsrvr";
-> +                       reg-names = "core", "chnls", "obsrvr";
->                         #address-cells = <0x1>;
->                         #size-cells = <0x1>;
+diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+index 26d795b978..a55470cfbf 100644
+--- a/drivers/clk/clk-gpio.c
++++ b/drivers/clk/clk-gpio.c
+@@ -3,19 +3,23 @@
+  * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
+  */
+ 
+-#include <asm/gpio.h>
+-#include <common.h>
+-#include <clk-uclass.h>
++#include <clk.h>
+ #include <dm.h>
++#include <clk-uclass.h>
++#include <linux/clk-provider.h>
++
++#include <asm/gpio.h>
+ 
+ struct clk_gpio_priv {
+ 	struct gpio_desc	enable;
++	struct clk		*clk;
+ };
+ 
+ static int clk_gpio_enable(struct clk *clk)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
++	clk_prepare_enable(priv->clk);
+ 	dm_gpio_set_value(&priv->enable, 1);
+ 
+ 	return 0;
+@@ -26,21 +30,50 @@ static int clk_gpio_disable(struct clk *clk)
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
+ 	dm_gpio_set_value(&priv->enable, 0);
++	clk_disable_unprepare(priv->clk);
+ 
+ 	return 0;
+ }
+ 
++static ulong clk_gpio_get_rate(struct clk *clk)
++{
++	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
++	int ret;
++
++	ret = dm_gpio_get_value(&priv->enable);
++	if (ret)
++		return clk_get_rate(priv->clk);
++	else
++		return -EINVAL;
++}
++
+ const struct clk_ops clk_gpio_ops = {
+ 	.enable		= clk_gpio_enable,
+ 	.disable	= clk_gpio_disable,
++	.get_rate	= clk_gpio_get_rate,
+ };
+ 
+-static int clk_gpio_probe(struct udevice *dev)
++static int clk_gpio_of_to_plat(struct udevice *dev)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(dev);
++	int ret;
+ 
+-	return gpio_request_by_name(dev, "enable-gpios", 0,
+-				    &priv->enable, GPIOD_IS_OUT);
++	priv->clk = devm_clk_get(dev, NULL);
++	if (IS_ERR(priv->clk)) {
++		log_err("%s: Could not get gated clock: %ld\n",
++			__func__, PTR_ERR(priv->clk));
++		return PTR_ERR(priv->clk);
++	}
++
++	ret = gpio_request_by_name(dev, "enable-gpios", 0,
++				   &priv->enable, GPIOD_IS_OUT);
++	if (ret) {
++		log_err("%s: Could not decode enable-gpios (%d)\n",
++			__func__, ret);
++		return ret;
++	}
++
++	return 0;
+ }
+ 
+ /*
+@@ -59,7 +92,7 @@ U_BOOT_DRIVER(gpio_gate_clock) = {
+ 	.name		= "gpio_clock",
+ 	.id		= UCLASS_CLK,
+ 	.of_match	= clk_gpio_match,
+-	.probe		= clk_gpio_probe,
++	.of_to_plat	= clk_gpio_of_to_plat,
+ 	.priv_auto	= sizeof(struct clk_gpio_priv),
+ 	.ops		= &clk_gpio_ops,
+ 	.flags		= DM_FLAG_PRE_RELOC,
+-- 
+2.40.1
 
-You should again drop custom u-boot bindings now:
-doc/device-tree-bindings/spmi/spmi-msm.txt
-
->
-> diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-> index 27a035c0a595..f8834e60c266 100644
-> --- a/drivers/spmi/spmi-msm.c
-> +++ b/drivers/spmi/spmi-msm.c
-> @@ -70,7 +70,7 @@ enum pmic_arb_channel {
->
->  struct msm_spmi_priv {
->         phys_addr_t arb_chnl;  /* ARB channel mapping base */
-> -       phys_addr_t spmi_core; /* SPMI core */
-> +       phys_addr_t spmi_chnls; /* SPMI core */
-
-s/SPMI core/SPMI channels/
-
--Sumit
-
->         phys_addr_t spmi_obs;  /* SPMI observer */
->         /* SPMI channel map */
->         uint8_t channel_map[SPMI_MAX_SLAVES][SPMI_MAX_PERIPH];
-> @@ -95,10 +95,10 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
->
->         /* Disable IRQ mode for the current channel*/
->         writel(0x0,
-> -              priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
-> +              priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
->
->         /* Write single byte */
-> -       writel(val, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
-> +       writel(val, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
->
->         /* Prepare write command */
->         reg |= SPMI_CMD_EXT_REG_WRITE_LONG << SPMI_CMD_OPCODE_SHIFT;
-> @@ -113,12 +113,12 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
->                 ch_offset = SPMI_CH_OFFSET(channel);
->
->         /* Send write command */
-> -       writel(reg, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
-> +       writel(reg, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
->
->         /* Wait till CMD DONE status */
->         reg = 0;
->         while (!reg) {
-> -               reg = readl(priv->spmi_core + SPMI_CH_OFFSET(channel) +
-> +               reg = readl(priv->spmi_chnls + SPMI_CH_OFFSET(channel) +
->                             SPMI_REG_STATUS);
->         }
->
-> @@ -186,47 +186,37 @@ static struct dm_spmi_ops msm_spmi_ops = {
->  static int msm_spmi_probe(struct udevice *dev)
->  {
->         struct msm_spmi_priv *priv = dev_get_priv(dev);
-> -       phys_addr_t config_addr;
-> +       phys_addr_t core_addr;
->         u32 hw_ver;
-> -       u32 version;
->         int i;
-> -       int err;
->
-> -       config_addr = dev_read_addr_index(dev, 0);
-> -       priv->spmi_core = dev_read_addr_index(dev, 1);
-> -       priv->spmi_obs = dev_read_addr_index(dev, 2);
-> +       core_addr = dev_read_addr_name(dev, "core");
-> +       priv->spmi_chnls = dev_read_addr_name(dev, "chnls");
-> +       priv->spmi_obs = dev_read_addr_name(dev, "obsrvr");
->
-> -       hw_ver = readl(config_addr + PMIC_ARB_VERSION);
-> +       hw_ver = readl(core_addr + PMIC_ARB_VERSION);
->
->         if (hw_ver < PMIC_ARB_VERSION_V3_MIN) {
->                 priv->arb_ver = V2;
-> -               version = 2;
-> -               priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
-> +               priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
->         } else if (hw_ver < PMIC_ARB_VERSION_V5_MIN) {
->                 priv->arb_ver = V3;
-> -               version = 3;
-> -               priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
-> +               priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
->         } else {
->                 priv->arb_ver = V5;
-> -               version = 5;
-> -               priv->arb_chnl = config_addr + APID_MAP_OFFSET_V5;
-> -
-> -               if (err) {
-> -                       dev_err(dev, "could not read APID->PPID mapping table, rc= %d\n", err);
-> -                       return -1;
-> -               }
-> +               priv->arb_chnl = core_addr + APID_MAP_OFFSET_V5;
->         }
->
-> -       dev_dbg(dev, "PMIC Arb Version-%d (0x%x)\n", version, hw_ver);
-> +       dev_dbg(dev, "PMIC Arb Version-%d (%#x)\n", hw_ver >> 28, hw_ver);
->
->         if (priv->arb_chnl == FDT_ADDR_T_NONE ||
-> -           priv->spmi_core == FDT_ADDR_T_NONE ||
-> +           priv->spmi_chnls == FDT_ADDR_T_NONE ||
->             priv->spmi_obs == FDT_ADDR_T_NONE)
->                 return -EINVAL;
->
-> -       dev_dbg(dev, "priv->arb_chnl address (%llu)\n", priv->arb_chnl);
-> -       dev_dbg(dev, "priv->spmi_core address (%llu)\n", priv->spmi_core);
-> -       dev_dbg(dev, "priv->spmi_obs address (%llu)\n", priv->spmi_obs);
-> +       dev_dbg(dev, "priv->arb_chnl address (%#08llx)\n", priv->arb_chnl);
-> +       dev_dbg(dev, "priv->spmi_chnls address (%#08llx)\n", priv->spmi_chnls);
-> +       dev_dbg(dev, "priv->spmi_obs address (%#08llx)\n", priv->spmi_obs);
->         /* Scan peripherals connected to each SPMI channel */
->         for (i = 0; i < SPMI_MAX_PERIPH; i++) {
->                 uint32_t periph = readl(priv->arb_chnl + ARB_CHANNEL_OFFSET(i));
->
-> --
-> 2.42.1
->
